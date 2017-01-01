@@ -6,6 +6,7 @@ import {JobQCard} from "../../search/model/job-q-card";
 import IndustryModel = require("../model/industry.model");
 import CandidateRepository = require("./candidate.repository");
 import CandidateModel = require("../model/candidate.model");
+import {ConstVariables} from "../../shared/sharedconstants";
 
 class RecruiterRepository extends RepositoryBase<IRecruiter> {
   constructor() {
@@ -83,16 +84,16 @@ class RecruiterRepository extends RepositoryBase<IRecruiter> {
               job_qcard.industry = job.industry.name;
               job_qcard.jobTitle= job.jobTitle;
               job_qcard.joiningPeriod = job.joiningPeriod;
-              jobs_cards.push(job_qcard);
+              if(job_qcard.matching >= ConstVariables.LOWER_LIMIT_FOR_SEARCH_RESULT) {
+                jobs_cards.push(job_qcard);
+              }
               //todo add condition for exit
-
           }
-
       }
     }
     setTimeout(()=> {
       callback(null, jobs_cards);
-    }, 2000);
+    }, 4000);
   }
 
 
