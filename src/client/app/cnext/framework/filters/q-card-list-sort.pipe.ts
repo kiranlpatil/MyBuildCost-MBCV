@@ -1,7 +1,7 @@
 import {Pipe, PipeTransform} from '@angular/core';
 import {CandidateQCard} from "../model/candidateQcard";
 
-@Pipe({name: 'dashboardsort', pure: false})
+@Pipe({name: 'qcardlistsort', pure: false})
 
 export class QCardListSortPipe implements PipeTransform {
 

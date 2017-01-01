@@ -1,5 +1,5 @@
-import {Component, Input, OnChanges, OnInit} from '@angular/core';
-import {FormGroup, FormBuilder} from '@angular/forms';
+import {Component, Input} from "@angular/core";
+import {FormBuilder, FormGroup} from "@angular/forms";
 import {JobPosterModel} from "../../model/jobPoster";
 import {ShowQcardviewService} from "../../showQCard.service";
 import {Candidate} from "../../model/candidate";
@@ -49,16 +49,8 @@ export class FilterComponent {
     })
 
     this.userForm = this.formBuilder.group({
-      eduction: '',
-      experienceMin: '',
-      experienceMax: '',
-      salaryMin: '',
-      salaryMax: '',
-      location: '',
-      proficiencies: '',
-      timetojoin: '',
-      industry: '',
-      companysize: ''
+      eduction: '', experienceMin: '', experienceMax: '', salaryMin: '', salaryMax: '', location: '',
+      proficiencies: '', timetojoin: '', industry: '', companysize: ''
     });
   }
 
@@ -185,7 +177,6 @@ export class FilterComponent {
     }
   }
 
-
   selectSalaryMinModel(value: any) {
     this.qCardFilter.salaryMinValue = value;
     this.salaryFilterBy();
@@ -283,6 +274,10 @@ export class FilterComponent {
     this.qCardFilter = new QCardFilter();
     this.queryList = new Array(0);
     this.qCardFilter.query = query;
+    if (this.role) {
+      (<HTMLInputElement>document.getElementById('radio-button-1')).checked = false;
+      (<HTMLInputElement>document.getElementById('radio-button-2')).checked = false;
+    }
     this.qCardFilterService.filterby(this.qCardFilter);
   }
 

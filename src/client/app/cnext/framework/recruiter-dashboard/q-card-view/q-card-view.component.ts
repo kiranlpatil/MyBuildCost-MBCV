@@ -54,6 +54,10 @@ export class QCardviewComponent {
     );
   }
 
+  ngOnInlit() {
+      this.matchFormat = 'aboveMatch';
+  }
+
   ngOnChanges(changes: any) {
     if (changes.candidateQlist && changes.candidateQlist.currentValue) {
       if (changes.candidateQlist.currentValue.shortListedCandidates) {
@@ -144,7 +148,7 @@ export class QCardviewComponent {
     this.qCardFilterService.clearFilter();
   }
 
-  matching(value: any) {
+  matching(value: any) { debugger
     this.matchFormat = value;
   }
   viewProfile(candidateid: string) {

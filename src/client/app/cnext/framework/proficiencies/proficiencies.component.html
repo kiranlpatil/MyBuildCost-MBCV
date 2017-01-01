@@ -7,7 +7,7 @@
         capability. <span class="messages">You can edit this list anytime.</span></p>
       <div class="proficiency-container col-sm-12">
 
-        <cn-multi-select  [data]="proficiencies" [selectedData]="choosedproficiencies" [maxLength]="" (onComplete)="onProficiencyComplete($event)"  ></cn-multi-select>
+        <cn-multi-select  [data]="proficiencies" [selectedData]="choosedproficiencies" [maxLength]="maxProficiencies" (onComplete)="onProficiencyComplete($event)"  ></cn-multi-select>
         <div class="button-group clearfix">
           <button class="btn btn-default" [disabled]="choosedproficiencies.length<=0"
                   (click)="highlightedSection.name='none'; highlightedSection.isDisable=false"  [hidden]="showButton">Cancel</button>

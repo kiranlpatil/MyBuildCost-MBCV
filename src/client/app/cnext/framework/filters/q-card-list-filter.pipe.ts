@@ -2,7 +2,7 @@ import {Pipe, PipeTransform} from '@angular/core';
 import {CandidateQCard} from "../model/candidateQcard";
 import {QCardFilter} from "../model/q-card-filter";
 
-@Pipe({name: 'dashboardfilter', pure: false})
+@Pipe({name: 'qcardlistfilter', pure: false})
 
 export class QCardListFilterPipe implements PipeTransform {
 
@@ -18,6 +18,7 @@ export class QCardListFilterPipe implements PipeTransform {
       qCardCount.count = result.length;
       return result;
     }
+    qCardCount.count = array.length;
     return array;
   }
 }
