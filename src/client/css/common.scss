@@ -203,6 +203,7 @@ form {
 //Buttons
 .btn {
   border-radius: 25px;
+  padding: 6px 25px;
 
   &:focus {
     box-shadow: none;
@@ -287,7 +288,7 @@ h5 {
 
 // Other Links
 .other-links {
-  margin: 15px 0;
+  margin: 15px 0 0;
 }
 
 // Toaster Messages
@@ -430,7 +431,7 @@ h5 {
     }
   }
 
-  .btn-group {
+  .button-group {
     text-align: center;
     width: 100%;
 
@@ -484,7 +485,7 @@ control-messages {
     font-size: 10px;
     font-style: italic;
     margin: 35px 0 6px;
-    padding-right: 20px;
+    padding-right: 0;
     position: absolute;
     right: 0;
   }
@@ -494,6 +495,14 @@ control-messages {
   control-messages {
     div {
       margin: 35px 0 0;
+    }
+  }
+}
+
+.registration {
+  control-messages {
+    div {
+      padding: 0 15px 0 0;
     }
   }
 }
@@ -522,6 +531,14 @@ control-messages {
   textarea {
     font-size: 14px;
   }
+
+  .main-form-wrapper {
+    .content {
+      h5 {
+        padding-left: 15px;
+      }
+    }
+  }
 }
 
 @media (max-width: 768px) and (orientation: landscape) {
@@ -539,38 +556,41 @@ control-messages {
   }
 
   .main-form-wrapper {
+    .content {
+      left: 50%;
+      margin: 50px 0;
+      top: 0;
+      transform: translate(-50%, 0);
 
-    form {
-      padding: 15px;
-    }
+      form {
+        padding: 15px;
+      }
 
-    .radio-group {
-      padding: 15px 0;
-    }
+      .radio-group {
+        padding: 15px 0;
+      }
 
-    .lable-name {
-      width: 100%;
-    }
+      .radio-inline {
+        display: inline-block;
+        margin: 0 20px 0 0;
+      }
 
-    .radio-inline {
-      display: inline-block;
-      margin: 0;
-    }
+      form > .form-group,
+      .lable-name {
+        width: 100%;
+        padding: 0;
+      }
 
-    form > .form-group {
-      width: 100%;
-      padding: 0;
-    }
-
-    .form-group > label {
-      left: 0;
+      .form-group > label {
+        left: 0;
+      }
     }
 
     control-messages {
       div {
         left: 0;
         margin-top: 35px;
-        padding: 0 0 0 15px;
+        padding: 0;
         text-align: left;
       }
     }

@@ -1,9 +1,11 @@
 @import '../../../css/common';
 
-.wrapper {
-
+.main-form-wrapper {
   .content {
 
+    form {
+      padding: 15px 30px;
+    }
     .btn-facebook > span,
     .btn-google-plus > span {
       font-family: 'gothamrnd-book';
@@ -13,21 +15,17 @@
     }
 
     .other-links {
-      float: right;
-      margin: 0 0 15px;
+      font-size: 12px;
+      text-align: center;
     }
   }
-
 }
 
 @media (max-width: 768px) {
-  .wrapper {
-
+  .main-form-wrapper {
     .content {
-
-      .sign-in-with > p {
-        margin: 10px 0;
-        text-align: center;
+      form {
+        padding: 15px;
       }
     }
   }

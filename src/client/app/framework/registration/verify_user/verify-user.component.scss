@@ -1,8 +1,9 @@
 @import '../../../../css/common';
 
 .main-form-wrapper {
+
   form {
-    padding: 0 30px;
+    padding: 15px 30px;
   }
 
   .radio-inline {
@@ -17,6 +18,10 @@
 
 @media only screen and (max-width: 768px) {
   .main-form-wrapper {
+    form {
+      padding: 15px;
+    }
+
     .radio-inline {
       margin-left: 0;
       width: 100%;

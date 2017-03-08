@@ -3,7 +3,7 @@
   <!--<tpl-loader *ngSwitchCase="true"></tpl-loader>-->
   <app-loader></app-loader>
 
-  <div class="col-lg-4 col-sm-8 col-xs-10 content">
+  <div class="col-lg-4 col-sm-6 col-xs-10 content">
 
     <h5>Verify your account</h5>
 
@@ -34,9 +34,9 @@
         <input [(ngModel)]="model.email" formControlName="email" id="email" placeholder="Email" class="form-control" readonly/>
       </div>
 
-      <div class="clearfix">&nbsp;</div>
-      <button type="submit" class="btn btn-default">Verify user
-      </button>
+      <div class="button-group">
+        <button type="submit" class="btn btn-default">Verify user</button>
+      </div>
     </form>
 
   </div>

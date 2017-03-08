@@ -1,6 +1,8 @@
 // Dark Theme Variables /
 $dark-theme-color: #3695d1;
 $dark-theme-hover: #a44537;
+$dark-theme-btn-primary: #ff5024;
+$dark-theme-btn-primary-hover: #d44b24;
 $dark-theme-background: #6f3025;
 $dark-theme-gradient-light: #ec7350;
 $dark-theme-gradient-dark: #a83f63;
@@ -39,6 +41,26 @@ $white: #fff;
     &:disabled  {
       background: $dark-theme-color;
       border: $dark-theme-color 1px solid;
+    }
+  }
+
+  // Buttons
+  .btn-primary {
+    background: $dark-theme-btn-primary;
+    border: $dark-theme-btn-primary 1px solid;
+    color: $white;
+
+    &:hover,
+    &:active,
+    &:focus {
+      background: $dark-theme-btn-primary-hover;
+      border: $dark-theme-btn-primary-hover 1px solid;
+      color: $white;
+    }
+
+    &:disabled  {
+      background: $dark-theme-btn-primary;
+      border: $dark-theme-btn-primary 1px solid;
     }
   }
 
