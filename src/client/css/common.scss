@@ -525,7 +525,7 @@ control-messages {
 }
 
 @media (max-width: 768px) and (orientation: landscape) {
-  .wrapper {
+  .main-form-wrapper {
     height: 100%;
   }
 }
@@ -538,19 +538,32 @@ control-messages {
     width: 80%;
   }
 
-  .wrapper {
+  .main-form-wrapper {
 
     form {
-      padding: 0  0 15px;
+      padding: 15px;
+    }
+
+    .radio-group {
+      padding: 15px 0;
+    }
+
+    .lable-name {
+      width: 100%;
     }
 
     .radio-inline {
-      display: block;
+      display: inline-block;
       margin: 0;
     }
 
     form > .form-group {
       width: 100%;
+      padding: 0;
+    }
+
+    .form-group > label {
+      left: 0;
     }
 
     control-messages {
@@ -601,7 +614,7 @@ control-messages {
   }
 
   .alert {
-    margin: 15px 15px 0;
+    margin: 0;
   }
 }
 
