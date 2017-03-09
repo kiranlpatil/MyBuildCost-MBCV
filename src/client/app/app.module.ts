@@ -51,6 +51,10 @@ import { DashboardComponent } from './framework/dashboard/dashboard.component';
  import { ChangeMobileComponent } from './framework/dashboard/settings/change-mobile/change-mobile.component';
  import { ChangeMobileService } from './framework/dashboard/settings/change-mobile/change-mobile.service';
 import {LandingPageComponent} from './framework/landing-page/landing-page.component';
+import {EmployeeComponent} from "./framework/registration/employee/employee.component";
+import {EmployerComponent} from "./framework/registration/employer/employer.component";
+import {EmployeeService} from "./framework/registration/employee/employee.service";
+import {EmployerService} from "./framework/registration/employer/employer.service";
 
 @NgModule({
   imports: [
@@ -67,6 +71,8 @@ import {LandingPageComponent} from './framework/landing-page/landing-page.compon
     LandingPageComponent,
     LoginComponent,
     RegistrationComponent,
+    EmployeeComponent,
+    EmployerComponent,
     ActivateUserComponent,
     ActivateEmailComponent,
     VerifyUserComponent,
@@ -112,6 +118,8 @@ import {LandingPageComponent} from './framework/landing-page/landing-page.compon
     ForgotPasswordService,
     ThemeChangeService,
     RegistrationService,
+    EmployeeService,
+    EmployerService,
     DashboardService,
     ProfileService,
     ContactService,

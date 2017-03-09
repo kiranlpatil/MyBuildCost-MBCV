@@ -16,12 +16,16 @@ import { ChangeEmailRoutes } from './framework/dashboard/settings/change-email/c
 import { ActivateEmailRoutes } from './framework/dashboard/settings/activate-email/activate-email.routes';
 import { ChangeMobileRoutes } from './framework/dashboard/settings/change-mobile/change-mobile.routes';
 import {LandingPageRoutes} from './framework/landing-page/landing-page.routes';
+import {EmployeeRoutes} from "./framework/registration/employee/employee.routes";
+import {EmployerRoutes} from "./framework/registration/employer/employer.routes";
 
 
 export const routes: Routes = [
   ...LandingPageRoutes,
   ...LoginRoutes,
   ...RegistrationRoutes,
+  ...EmployeeRoutes,
+  ...EmployerRoutes,
   ...ActivateUserRoutes,
   ...ActivateEmailRoutes,
   ...VerifyUserRoutes,

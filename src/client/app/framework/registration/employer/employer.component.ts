@@ -1,49 +1,55 @@
+/**
+ * Created by techprimelab on 3/9/2017.
+ */
 import {  Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { RegistrationService } from './registration.service';
-import { Registration } from './registration';
+import { EmployerService } from './employer.service';
+import { Employer } from './employer';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ValidationService } from '../shared/customvalidations/validation.service';
+import { ValidationService } from '../../shared/customvalidations/validation.service';
 import {
   Message,
   MessageService,
   CommonService,
   NavigationRoutes,
   AppSettings
- } from '../shared/index';
-import { ImagePath, LocalStorage, ProjectAsset } from '../shared/constants';
-import { LocalStorageService } from '../shared/localstorage.service';
-import {LoaderService} from "../shared/loader/loader.service";
+} from '../../shared/index';
+import { ImagePath, LocalStorage, ProjectAsset } from '../../shared/constants';
+import { LocalStorageService } from '../../shared/localstorage.service';
+import {LoaderService} from "../../shared/loader/loader.service";
 
 
 @Component({
   moduleId: module.id,
-  selector: 'tpl-registration',
-  templateUrl: 'registration.component.html',
-  styleUrls: ['registration.component.css'],
+  selector: 'cn-EmployerRegistration',
+  templateUrl: 'employer.component.html',
+  //styleUrls: ['registration.component.css'],
 })
 
-export class RegistrationComponent {
-  model = new Registration();
+export class EmployerComponent {
+  model = new Employer();
   isPasswordConfirm: boolean;
   isFormSubmitted = false;
   userForm: FormGroup;
   error_msg: string;
-  isEmployee:boolean =true;
   isShowErrorMessage: boolean = true;
   BODY_BACKGROUND:string;
 
   constructor(private commanService: CommonService, private _router: Router,
-              private registrationService: RegistrationService, private messageService: MessageService, private formBuilder: FormBuilder,private loaderService:LoaderService) {
+              private EmployerService: EmployerService, private messageService: MessageService, private formBuilder: FormBuilder,private loaderService:LoaderService) {
 
-    /*this.userForm = this.formBuilder.group({
-      'first_name': ['', Validators.required],
-      'last_name': ['', Validators.required],
+    this.userForm = this.formBuilder.group({
+      'company_name': ['', Validators.required],
+      'company_size': ['', Validators.required],
       'mobile_number': ['', [Validators.required, ValidationService.mobileNumberValidator]],
       'email': ['', [Validators.required, ValidationService.emailValidator]],
       'password': ['', [Validators.required, Validators.minLength(8)]],
-      'conform_password': ['', [Validators.required, Validators.minLength(8)]]
-    });*/
+      'conform_password': ['', [Validators.required, Validators.minLength(8)]],
+      'country':['', Validators.required],
+      'state':['', Validators.required],
+      'city':['', Validators.required],
+      'pin':['', Validators.required]
+    });
 
     this.BODY_BACKGROUND = ImagePath.BODY_BACKGROUND;
   }
@@ -53,8 +59,8 @@ export class RegistrationComponent {
     this.model.current_theme = AppSettings.LIGHT_THEM;
     if (!this.makePasswordConfirm()) {
       this.isFormSubmitted = true;
-     // this.loaderService.start();
-      this.registrationService.addRegistration(this.model)
+      // this.loaderService.start();
+      this.EmployerService.addEmployer(this.model)
         .subscribe(
           user => this.onRegistrationSuccess(user),
           error => this.onRegistrationError(error));
@@ -72,7 +78,7 @@ export class RegistrationComponent {
   }
 
   onRegistrationError(error: any) {
-   // this.loaderService.stop();
+    // this.loaderService.stop();
     if (error.err_code === 404 || error.err_code === 0) {
       var message = new Message();
       message.error_msg = error.err_msg;
@@ -97,11 +103,6 @@ export class RegistrationComponent {
       this.isPasswordConfirm = false;
       return false;
     }
-  }
-
-  showHideEmployee() {
-    this.isEmployee = true;
-    this.isEmployer = false;
   }
 
   closeErrorMessage() {
