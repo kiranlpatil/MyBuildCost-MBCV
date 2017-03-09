@@ -22,15 +22,27 @@
   }
 }
 
+@media only screen and (min-width: 1367px) {
+  .registration {
+    .content {
+      width: 40%;
+    }
+  }
+}
+
+@media only screen and (min-width: 1279px) {
+  .registration {
+    .content {
+      width: 60%;
+    }
+  }
+}
+
 @media only screen and (max-width: 768px) {
   .registration {
     .form-group {
       padding: 0;
       width: 100%;
-    }
-
-    .radio-group {
-      padding: 15px 0;
     }
 
     .alert {
@@ -43,7 +55,11 @@
   .registration {
 
     .error-message-registration > p {
-     text-align: left;
+      text-align: left;
+    }
+
+    .radio-group {
+      padding: 15px 0;
     }
   }
 }

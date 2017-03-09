@@ -1,13 +1,11 @@
-#employee_form {
-  padding: 0;
-
+.employee-form {
   .alert {
-   margin: 0 15px;
+    margin: 0 15px;
   }
 
   .form-group {
-    width: 50%;
     padding: 0 15px;
+    width: 50%;
   }
 
   label {
@@ -15,9 +13,8 @@
   }
 }
 
-
 @media only screen and (max-width: 767px) {
-  #employee_form {
+  .employee-form {
     padding: 0;
 
     .alert {

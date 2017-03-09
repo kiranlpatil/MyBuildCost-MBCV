@@ -1,4 +1,4 @@
-<form [formGroup]="userForm" (submit)="onSubmit()" id="employer_form">
+<form [formGroup]="userForm" (submit)="onSubmit()" class="employer-form">
 
   <div class="alert alert-danger clearfix" [hidden]="isShowErrorMessage">
     <div class="col-sm-1 hidden-xs"><span class="glyphicon glyphicon-warning-sign"></span></div>
@@ -12,7 +12,7 @@
   <div class="radio-group text-left clearfix">
     <label class="lable-name">Recruiting For</label>
     <label for="self" class="radio-inline">
-      <input type="radio" id="self" name="recruiting_for" value="self" required/>
+      <input type="radio" id="self" name="recruiting_for" value="self" checked/>
       Self
     </label>
 
@@ -129,6 +129,6 @@
 
   <div class="button-group">
     <!--<button type="submit" class="btn btn-primary" [disabled]="!userForm.valid">Send OTP</button>-->
-      <button type="submit" class="btn btn-default" [disabled]="!userForm.valid">Create an account</button>
+      <button type="submit" class="btn btn-primary" [disabled]="!userForm.valid">Create an account</button>
   </div>
 </form>

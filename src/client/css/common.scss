@@ -154,8 +154,6 @@ a {
 
 //Forms
 form {
-  margin-top: 20px;
-
   .form-group {
 
     label {
@@ -289,8 +287,9 @@ h5 {
 // Other Links
 .other-links {
   font-size: 12px;
-  margin: 15px 0 0;
-  text-align: center;
+  margin: 10px 0 0;
+  text-align: right;
+  float: right;
 }
 
 // Toaster Messages
@@ -424,19 +423,27 @@ h5 {
     }
   }
 
+  .employee-form {
+    padding: 0;
+  }
+
+  .employer-form {
+    padding: 0 15px;
+  }
+
   .radio-group {
     padding: 15px 0;
     width: 100%;
 
-    label, .lable-name {
-      width: 120px;
+    .lable-name {
       margin-right: 15px;
+      width: 100px;
     }
   }
 
   .button-group {
     clear: both;
-    text-align: center;
+    text-align: left;
     width: 100%;
 
     .btn {
@@ -458,7 +465,6 @@ h5 {
       font-size: 14px;
       font-weight: normal;
       left: 0;
-      pointer-events: none;
       position: absolute;
       top: 10px;
       //transition: .2s ease all;
@@ -570,20 +576,25 @@ control-messages {
         padding: 15px;
       }
 
+      .employee-form,
+      .employer-form {
+        padding: 0;
+      }
+
       .radio-group {
         padding: 15px 0;
       }
 
       .radio-inline {
-        width: auto;
         display: inline-block;
         margin: 0 20px 0 0;
+        width: auto;
       }
 
       form > .form-group,
       .lable-name {
-        width: 100%;
         padding: 0;
+        width: 100%;
       }
 
       .form-group > label {

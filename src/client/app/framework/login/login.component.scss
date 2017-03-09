@@ -2,16 +2,20 @@
 
 .main-form-wrapper {
   .content {
-
     form {
       padding: 15px 30px;
     }
+
     .btn-facebook > span,
     .btn-google-plus > span {
       font-family: 'gothamrnd-book';
       font-size: 18px;
       font-weight: bold;
       padding-right: 15px;
+    }
+
+    .lable-name {
+      width:  auto;
     }
   }
 }
