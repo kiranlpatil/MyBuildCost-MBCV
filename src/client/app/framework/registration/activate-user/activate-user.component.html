@@ -1,6 +1,5 @@
 <section class="main-form-wrapper activate-user" [ngStyle]="{'background-image': 'url(' + BODY_BACKGROUND + ')'}">
 
-  <!--<tpl-loader *ngSwitchCase="true"></tpl-loader>-->
   <app-loader></app-loader>
 
   <div class="col-lg-3 col-md-4 col-sm-6 col-xs-10 content">
@@ -9,11 +8,14 @@
 
     <div class="clearfix">&nbsp;</div>
 
-    <p>{{emailBody}} </p>
+    <p>{{emailBody}}</p>
 
     <div class="clearfix">&nbsp;</div>
 
-    <a class="btn btn-default"(click)="navigateTo();">LOGIN</a>
+
+    <div class="btn-group">
+      <a class="btn btn-default"(click)="navigateTo();">LOGIN</a>
+    </div>
 
     <div class="clearfix">&nbsp;</div>
 

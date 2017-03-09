@@ -23,7 +23,7 @@ import {LoaderService} from "../../shared/loader/loader.service";
   moduleId: module.id,
   selector: 'cn-EmployeeRegistration',
   templateUrl: 'employee.component.html',
-  //styleUrls: ['registration.component.css'],
+  styleUrls: ['employee.component.css'],
 })
 
 export class EmployeeComponent {
@@ -45,10 +45,11 @@ export class EmployeeComponent {
       'email': ['', [Validators.required, ValidationService.emailValidator]],
       'password': ['', [Validators.required, Validators.minLength(8)]],
       'conform_password': ['', [Validators.required, Validators.minLength(8)]],
-      'company_name':['', Validators.required],
+      'birth_year':['', Validators.required],
       'country':['', Validators.required],
       'state':['', Validators.required],
-      'city':['', Validators.required]
+      'city':['', Validators.required],
+      'pin':['', Validators.required]
     });
 
     this.BODY_BACKGROUND = ImagePath.BODY_BACKGROUND;

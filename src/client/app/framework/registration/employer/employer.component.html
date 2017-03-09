@@ -1,29 +1,35 @@
+<form [formGroup]="userForm" (submit)="onSubmit()" id="employer_form">
 
-    <form [formGroup]="userForm" (submit)="onSubmit()">
+  <div class="col-sm-12">
 
-      <div class="alert alert-danger clearfix" [hidden]="isShowErrorMessage">
-        <div class="col-sm-1 hidden-xs"><span class="glyphicon glyphicon-warning-sign"></span></div>
-        <div class="col-sm-10 col-xs-11 error-msg"><b>{{ error_msg }}</b></div>
-        <div class="col-sm-1 col-xs-1 close-msg">
-          <button (click)="closeErrorMessage()" class="btn-close"><span class="glyphicon glyphicon-remove"></span>
-          </button>
-        </div>
+    <div class="alert alert-danger clearfix" [hidden]="isShowErrorMessage">
+      <div class="col-sm-1 hidden-xs"><span class="glyphicon glyphicon-warning-sign"></span></div>
+      <div class="col-sm-10 col-xs-11 error-msg"><b>{{ error_msg }}</b></div>
+      <div class="col-sm-1 col-xs-1 close-msg">
+        <button (click)="closeErrorMessage()" class="btn-close"><span class="glyphicon glyphicon-remove"></span>
+        </button>
       </div>
+    </div>
 
-      <div class="Employer_form">
+    <div class="radio-group text-left clearfix">
+      <label class="lable-name">Recruiting For</label>
+      <label for="Self" class="radio-inline">
+        <input type="radio" id="Self" name="recruiting_for" value="Self" checked/>
+        Self
+      </label>
 
+      <label for="others" class="radio-inline">
+        <input type="radio" id="others" name="recruiting_for" value="others" />
+        Others
+      </label>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-6 clearfix">
         <div class="form-group">
           <control-messages [control]="userForm.controls.company_name"></control-messages>
           <input type="text" formControlName="company_name" id="company_name" class="form-control" required/>
           <label>Company Name</label>
-        </div>
-
-        <div class="form-group">
-          <label for="file-upload" class="custom-file-upload">
-            Add logo
-          </label>
-          <!--<input id="file-upload" type="file"/>-->
-          <input id="file-upload" type="file" (change)="fileChangeEvent($event)" placeholder="Add Logo"/>
         </div>
 
         <div class="form-group" >
@@ -37,11 +43,85 @@
           <label for="city">City</label>
         </div>
 
+        <div class="form-group">
+          <control-messages [control]="userForm.controls.email"></control-messages>
+          <input type="email" formControlName="email" id="email" class="form-control" required/>
+          <label>Email</label>
+        </div>
+
+        <div class="form-group">
+          <control-messages [control]="userForm.controls.password"></control-messages>
+          <input type="password" formControlName="password" id="password" class="form-control" required/>
+          <label>Password</label>
+        </div>
+
+        <div class="form-group">
+          <control-messages [control]="userForm.controls.conform_password"></control-messages>
+          <input type="password" formControlName="conform_password" id="conform_password"
+                 (blur)="makePasswordConfirm()" class="form-control" required/>
+          <label>Confirm Password</label>
+          <div class="error-message-registration" *ngIf="isPasswordConfirm == true">
+            <p>Passwords does not match.</p>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <select class="form-control" id="country" required>
+            <option selected>Country1</option>
+            <option>Country2</option>
+            <option>Country3</option>
+            <option>Country4</option>
+          </select>
+          <label for="country">Country</label>
+        </div>
+
+        <div class="form-group" >
+          <select class="form-control" id="city" required>
+            <option selected>City1</option>
+            <option>City2</option>
+            <option>City3</option>
+            <option>City4</option>
+          </select>
+          <label for="city">City</label>
+        </div>
       </div>
 
+      <div class="col-sm-6 clearfix">
+        <div class="form-group">
+          <label for="file-upload" class="custom-file-upload">
+            Add logo
+          </label>
+          <!--<input id="file-upload" type="file"/>-->
+          <input id="file-upload" type="file" (change)="fileChangeEvent($event)" placeholder="Add Logo"/>
+        </div>
 
-      <div class="button-group">
-        <!--<button type="submit" class="btn btn-primary" [disabled]="!userForm.valid">Send OTP</button>-->
-          <button type="submit" class="btn btn-default" [disabled]="!userForm.valid">Create an account</button>
+        <div class="form-group">
+          <control-messages [control]="userForm.controls.mobile_number"></control-messages>
+          <input type="number" formControlName="mobile_number" id="mobile_number" class="form-control" required/>
+          <label>Mobile</label>
+        </div>
+
+        <div class="form-group">
+          <select class="form-control" id="state" required>
+            <option selected>State1</option>
+            <option>State2</option>
+            <option>State3</option>
+            <option>State4</option>
+          </select>
+          <label for="state">State</label>
+        </div>
+
+        <div class="form-group" >
+          <control-messages [control]="userForm.controls.pin"></control-messages>
+          <input type="number" formControlName="pin" id="pin" class="form-control" required/>
+          <label>PIN</label>
+        </div>
       </div>
-    </form>
+    </div>
+  </div>
+
+  <div class="button-group">
+    <button type="submit" class="btn btn-primary" [disabled]="!userForm.valid">Create an account</button>
+  </div>
+
+</form>

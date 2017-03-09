@@ -23,7 +23,7 @@ import {LoaderService} from "../../shared/loader/loader.service";
   moduleId: module.id,
   selector: 'cn-EmployerRegistration',
   templateUrl: 'employer.component.html',
-  //styleUrls: ['registration.component.css'],
+  styleUrls: ['employer.component.css'],
 })
 
 export class EmployerComponent {

@@ -4,6 +4,6 @@ export const StartRoutes:Route[] = [
   {
     path: '',
     pathMatch: 'prefix',
-    redirectTo: '/login'
+    redirectTo: '/landing' // 'login'
   }
 ];

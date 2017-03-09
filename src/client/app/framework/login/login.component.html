@@ -1,5 +1,7 @@
 <section class="main-form-wrapper login" [ngStyle]="{'background-image': 'url(' + BODY_BACKGROUND + ')'}">
 
+  <app-loader></app-loader>
+
   <div class="col-lg-3 col-md-4 col-sm-6 col-xs-10 content">
 
     <h5>Login</h5>
@@ -15,14 +17,29 @@
         </div>
       </div>
 
+      <div class="radio-group text-left clearfix">
+        <label class="lable-name">Login as</label>
+        <label for="employee" class="radio-inline">
+          <input type="radio" id="employee" name="register_as" value="employee" />
+          Employee
+        </label>
+
+        <label for="employer" class="radio-inline">
+          <input type="radio" id="employer" name="register_as" value="employer" />
+          Employer
+        </label>
+      </div>
+
       <div class="form-group">
         <control-messages [control]="userForm.controls.email"></control-messages>
-        <input type="text" formControlName="email" id="email" placeholder="Email" class="form-control" required/>
+        <input type="text" formControlName="email" id="email" class="form-control" required/>
+        <label>Username</label>
       </div>
 
       <div class="form-group">
         <control-messages [control]="userForm.controls.password"></control-messages>
-        <input type="password" formControlName="password" id="password" placeholder="Password" class="form-control" required/>
+        <input type="password" formControlName="password" id="password" class="form-control" required/>
+        <label>Password</label>
       </div>
 
       <div class="button-group">

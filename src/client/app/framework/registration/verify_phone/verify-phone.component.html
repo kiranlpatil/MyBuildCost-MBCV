@@ -1,9 +1,8 @@
 <section class="main-form-wrapper verify-user" [ngStyle]="{'background-image': 'url(' + BODY_BACKGROUND + ')'}">
 
-  <!--<tpl-loader *ngSwitchCase="true"></tpl-loader>-->
   <app-loader></app-loader>
 
-  <div class="col-lg-4 col-sm-8 col-xs-10 content">
+  <div class="col-lg-3 col-md-4 col-sm-6 col-xs-10 content">
 
     <h5>Verify your phone</h5>
 
@@ -13,14 +12,14 @@
 
       <div class="form-group">
         <control-messages [control]="userForm.controls.otp"></control-messages>
-        <input type="number" formControlName="otp" id="otp" placeholder="One Time Password(OTP)"
-               class="form-control"/>
+        <input type="number" formControlName="otp" id="otp" class="form-control" required/>
+        <label>One Time Password(OTP)</label>
       </div>
 
       <div class="button-group">
-        <button type="submit" class="btn btn-default" [disabled]="!userForm.valid">Verify Phone
+        <button type="submit" class="btn btn-primary" [disabled]="!userForm.valid">Verify Phone
         </button>
-        <button class="btn btn-primary" [disabled]="!userForm.valid" (click)="resendVerificationCode()">Resend OTP
+        <button class="btn btn-default" [disabled]="!userForm.valid" (click)="resendVerificationCode()">Resend OTP
         </button>
       </div>
     </form>

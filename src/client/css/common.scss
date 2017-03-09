@@ -425,7 +425,7 @@ h5 {
   }
 
   .radio-group {
-    padding: 15px;
+    padding: 15px 0;
     width: 100%;
 
     label {
@@ -434,6 +434,7 @@ h5 {
   }
 
   .button-group {
+    clear: both;
     text-align: center;
     width: 100%;
 
@@ -455,7 +456,7 @@ h5 {
       color: $wrapper-border;
       font-size: 14px;
       font-weight: normal;
-      left: 15px;
+      left: 0;
       pointer-events: none;
       position: absolute;
       top: 10px;
