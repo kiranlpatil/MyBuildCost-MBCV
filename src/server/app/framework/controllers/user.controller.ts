@@ -781,7 +781,36 @@ console.log("Changemailverification hit");
     res.status(403).send({message: e.message});
   }
 }
-
+export function getIndustry (req:express.Request, res:express.Response) {
+  __dirname = './';
+  var filepath="industry.json";
+  try {
+    res.sendFile(filepath,{root: __dirname});
+  }
+  catch (e) {
+    res.status(403).send({message: e.message});
+  }
+}
+export function getFunction (req:express.Request, res:express.Response) {
+  __dirname = './';
+  var filepath="function.json";
+  try {
+    res.sendFile(filepath,{root: __dirname});
+  }
+  catch (e) {
+    res.status(403).send({message: e.message});
+  }
+}
+export function getRole (req:express.Request, res:express.Response) {
+  __dirname = './';
+  var filepath="roles.json";
+  try {
+    res.sendFile(filepath,{root: __dirname});
+  }
+  catch (e) {
+    res.status(403).send({message: e.message});
+  }
+}
 
 export function fblogin(req: express.Request, res: express.Response, next: any) {
   try {

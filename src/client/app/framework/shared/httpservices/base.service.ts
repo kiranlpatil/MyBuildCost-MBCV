@@ -3,7 +3,7 @@ import { Observable } from 'rxjs/Observable';
 import { LocalStorageService, LocalStorage } from '../../shared/index';
 
 
-export class BaseService {
+export class BaseService  {
 
   extractData(res:Response) {
 

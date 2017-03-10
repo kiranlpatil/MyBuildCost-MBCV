@@ -25,8 +25,11 @@ export function init(app: express.Application) {
     app.get("/api/notification/:id", this.authInterceptor.requiresAuth, userController.notifications);
     app.put("/api/notification/:id", this.authInterceptor.requiresAuth, userController.pushNotifications);
     //app.put("/api/updatenotification/:id", this.authInterceptor.requiresAuth, userController.updateNotifications);
-    app.get("/api/fblogin", this.authInterceptor.facebookAuth, userController.fblogin);
-    app.post("/api/googlelogin", this.authInterceptor.googleAuth, userController.googlelogin);
+  app.get("/api/fblogin", this.authInterceptor.facebookAuth, userController.fblogin);
+  app.get("/api/industry",  userController.getIndustry);
+  app.get("/api/function",  userController.getFunction);
+  app.get("/api/role",  userController.getRole);
+  app.post("/api/googlelogin", this.authInterceptor.googleAuth, userController.googlelogin);
     //app.get("/auth/google/callback", this.authInterceptor.googleAuthCallback, userController.googlelogin);
     //app.get("/auth/google/success", userController.googlelogin);
     //app.post("/api/googletoken", userController.getGoogleToken);

@@ -1,0 +1,47 @@
+
+
+
+<div><p>Industry</p></div>
+
+
+<h5 class="second">Select Industry</h5>
+<input type="radio" name="roles" id="industry" (change)="toggleRoll($event)">
+
+<div ng2-auto-complete
+     [source]="industries"
+     (ngModelChange)="selectIndustryModel($event)"
+     placeholder="Enter industry" >
+  <input [ngModel]="industryModel" [disabled]="!industries||!isIndustrySelected"/>
+</div>
+<input type="radio" name="roles" id="function" (change)="toggleRoll($event)">
+<h5 class="second">Select function</h5>
+<div   ng2-auto-complete
+     [source]="functions"
+     (ngModelChange)="selectFunctionModel($event)"
+     placeholder="Enter function">
+  <input [ngModel]="functionModel" [disabled]="!functions||!isFunctionSelected"/>
+</div>
+
+
+<h5 class="second">Select roles</h5>
+<div *ngFor="let item of temproles;let i= index">
+  <div id="{item}+i" ng2-auto-complete
+       [source]="roles"
+       (ngModelChange)="selectRolesModel($event)"
+       placeholder="enter text">
+    <input   [ngModel]="roleModel" />
+  </div>
+</div>
+<input type="button" id="more_fields" (click)="addNewRole()" value="Add More" />
+
+
+<script type="text/javascript" >
+  function add_fields()
+
+  {
+    console.log("asdfghjkl;");
+  }
+
+</script>
+
+

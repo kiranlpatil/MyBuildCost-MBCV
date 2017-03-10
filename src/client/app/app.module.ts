@@ -50,11 +50,14 @@ import { DashboardComponent } from './framework/dashboard/dashboard.component';
  import { ActiveEmailService } from './framework/dashboard/settings/activate-email/activate-email.service';
  import { ChangeMobileComponent } from './framework/dashboard/settings/change-mobile/change-mobile.component';
  import { ChangeMobileService } from './framework/dashboard/settings/change-mobile/change-mobile.service';
-import {LandingPageComponent} from './framework/landing-page/landing-page.component';
-import {EmployeeComponent} from "./framework/registration/employee/employee.component";
-import {EmployerComponent} from "./framework/registration/employer/employer.component";
-import {EmployeeService} from "./framework/registration/employee/employee.service";
-import {EmployerService} from "./framework/registration/employer/employer.service";
+ import {LandingPageComponent} from './framework/landing-page/landing-page.component';
+ import {IndustryService} from "./framework/industryList/industryList.service";
+ import {IndustryComponent} from "./framework/industryList/industryList.component";
+ import {Ng2AutoCompleteModule} from "ng2-auto-complete/dist/ng2-auto-complete.module";
+ import {EmployeeComponent} from "./framework/registration/employee/employee.component";
+ import {EmployerComponent} from "./framework/registration/employer/employer.component";
+ import {EmployeeService} from "./framework/registration/employee/employee.service";
+ import {EmployerService} from "./framework/registration/employer/employer.service";
 
 //C-NEXT IMPORTS
 import {ProfilePictureComponent} from "./cnext/framework/profile-picture/profile-picture.component";
@@ -66,7 +69,8 @@ import {ProfileCreatorComponent} from "./cnext/framework/profile-creator/profile
     FormsModule,
     RouterModule.forRoot(routes),
     HttpModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    Ng2AutoCompleteModule
   ],
   declarations: [
     AppComponent,
@@ -96,11 +100,12 @@ import {ProfileCreatorComponent} from "./cnext/framework/profile-creator/profile
     FooterComponent,
     NotificationComponent,
     SocialIconComponent,
-    
+
     //C-NEXT COMPONENT
 
     ProfilePictureComponent,
-    ProfileCreatorComponent
+    ProfileCreatorComponent,
+    IndustryComponent
   ],
   providers: [
     {
@@ -136,7 +141,8 @@ import {ProfileCreatorComponent} from "./cnext/framework/profile-creator/profile
     ActiveUserService,
     ActiveEmailService,
     VerifyUserService,
-    VerifyPhoneService
+    VerifyPhoneService,
+    IndustryService
 
   ],
   bootstrap: [AppComponent]
