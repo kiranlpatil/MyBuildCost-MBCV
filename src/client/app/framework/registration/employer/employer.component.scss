@@ -68,6 +68,10 @@
     }
   }
 
+  .registartion-btn-radio {
+    margin-top: -40px;
+  }
+
 }
 
 @media only screen and (max-width: 767px) {
@@ -80,6 +84,11 @@
       .form-group {
         width: 100%;
       }
+    }
+
+    .registartion-btn-radio {
+      margin-top: 0;
+      padding: 0;
     }
   }
 }

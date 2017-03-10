@@ -22,10 +22,19 @@
   }
 }
 
-@media only screen and (min-width: 1367px) {
+@media only screen and (min-width: 769px) {
   .registration {
     .content {
-      width: 40%;
+      width: 80%;
+    }
+  }
+}
+
+
+@media only screen and (min-width: 1024px) {
+  .registration {
+    .content {
+      width: 70%;
     }
   }
 }
@@ -38,8 +47,29 @@
   }
 }
 
+@media only screen and (min-width: 1366px) {
+  .registration {
+    .content {
+      width: 50%;
+    }
+  }
+}
+
+@media only screen and (min-width: 1920px) {
+  .registration {
+    .content {
+      width: 40%;
+    }
+  }
+}
+
 @media only screen and (max-width: 768px) {
   .registration {
+
+    .content {
+      width: 84%;
+    }
+
     .form-group {
       padding: 0;
       width: 100%;
