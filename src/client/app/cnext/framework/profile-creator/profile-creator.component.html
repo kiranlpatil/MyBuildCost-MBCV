@@ -1,6 +1,29 @@
-<section>
-  <div>
-    <p>profile craetor component</p>
-    <cn-profile-picture></cn-profile-picture>
+<section class="create-profile clearfix">
+  <div class="bar-container profile-header">
+    <ul class="bar" id="bar">
+      <li class="active"><p>Enter Roles</p></li>
+      <li><p>Describe Roles</p></li>
+      <li><p>Proefficiency Level</p></li>
+      <li><p>My Skills</p></li>
+      <li><p>Professional Details</p></li>
+      <li><p>Academic Details</p></li>
+      <li><p>Awards</p></li>
+    </ul>
+  </div>
+
+  <div class="profile-wrapper">
+    <div class="col-sm-3">
+      <cn-profile-picture></cn-profile-picture>
+    </div>
+
+    <div class="col-sm-9">
+      <div class="roles section-container">
+        <h4 class="heading">Enter Your Roles</h4>
+
+        <div class="main-content">
+          <cn-industry></cn-industry>
+        </div>
+      </div>
+    </div>
   </div>
 </section>

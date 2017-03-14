@@ -49,7 +49,7 @@ export class ProfilePictureComponent  {
   }
 
 
-  fileChangeEvent(fileInput: any) {debugger
+  fileChangeEvent(fileInput: any) {
     this.filesToUpload = <Array<File>> fileInput.target.files;
     if (this.filesToUpload[0].type === 'image/jpeg' || this.filesToUpload[0].type === 'image/png'
       || this.filesToUpload[0].type === 'image/jpg' || this.filesToUpload[0].type === 'image/gif') {
@@ -75,7 +75,7 @@ export class ProfilePictureComponent  {
     }
   }
 
-  fileChangeSucess(result: any) {debugger
+  fileChangeSucess(result: any) {
     this.model = result.data;
     var socialLogin:string = LocalStorageService.getLocalValue(LocalStorage.IS_SOCIAL_LOGIN);
     if (!this.model.picture || this.model.picture === undefined) {
@@ -92,7 +92,7 @@ export class ProfilePictureComponent  {
     this.profileService.onProfileUpdate(result);
   }
 
-  fileChangeFail(error: any) {debugger
+  fileChangeFail(error: any) {
     var message = new Message();
     message.isError = true;
     if (error.err_code === 404 || error.err_code === 0) {
