@@ -1,6 +1,10 @@
-<section>
-
-  <div>
-
-    </div>
-</section>
+<div class="text-left">
+  <div ><p *ngIf="showAlert">U can select max 10 capability</p></div>
+  <div class="select-option"  *ngFor="let item of capabilities;let i = index">
+    <label>
+      <span class="glyphicon glyphicon-ok"></span>
+      <input type="checkbox" name="checkbox" (click)="selectOption($event)" id="{{item}}" value="{{item}}" >
+      <span>{{item}}</span>
+    </label>
+  </div>
+</div>

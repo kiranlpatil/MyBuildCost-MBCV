@@ -1,5 +1,5 @@
 export class AppSettings {
-  public static IP = 'http://localhost:8080';
+  public static IP = 'http://localhost:8086';
 // public static IP = 'http://ee802b7f.ngrok.io';
 
     public static get API_ENDPOINT():string {
@@ -83,6 +83,11 @@ export class LocalStorage {
     public static CHANGE_MAIL_VALUE = 'change_mail_value';
     public static VERIFY_CHANGE_PHONE_VALUE = 'verify_change_phone_value';
 }
+
+export class VALUE_CONSTANT{
+  public static MAX_CAPABILITIES :number=2;
+}
+
 
 export class API {
   public static NOTIFICATION = 'notification';

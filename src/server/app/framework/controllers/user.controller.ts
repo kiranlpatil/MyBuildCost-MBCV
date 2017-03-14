@@ -812,6 +812,17 @@ export function getRole (req:express.Request, res:express.Response) {
   }
 }
 
+export function getCapability (req:express.Request, res:express.Response) {
+  __dirname = './';
+  var filepath="capability.json";
+  try {
+    res.sendFile(filepath,{root: __dirname});
+  }
+  catch (e) {
+    res.status(403).send({message: e.message});
+  }
+}
+
 export function fblogin(req: express.Request, res: express.Response, next: any) {
   try {
     var userService = new UserService();

@@ -29,6 +29,7 @@ export function init(app: express.Application) {
   app.get("/api/industry",  userController.getIndustry);
   app.get("/api/function",  userController.getFunction);
   app.get("/api/role",  userController.getRole);
+  app.get("/api/capability",  userController.getCapability);
   app.post("/api/googlelogin", this.authInterceptor.googleAuth, userController.googlelogin);
     //app.get("/auth/google/callback", this.authInterceptor.googleAuthCallback, userController.googlelogin);
     //app.get("/auth/google/success", userController.googlelogin);
