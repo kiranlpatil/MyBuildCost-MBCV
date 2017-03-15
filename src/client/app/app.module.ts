@@ -63,6 +63,7 @@ import { DashboardComponent } from './framework/dashboard/dashboard.component';
 import {ProfilePictureComponent} from "./cnext/framework/profile-picture/profile-picture.component";
 import {ProfileCreatorComponent} from "./cnext/framework/profile-creator/profile-creator.component";
 import {CapabilityListComponent} from "./cnext/framework/capability-list/capability-list.component";
+import {ComplexityListComponent} from "./cnext/framework/complexity-list/complexity-list.component";
 
 @NgModule({
   imports: [
@@ -107,6 +108,7 @@ import {CapabilityListComponent} from "./cnext/framework/capability-list/capabil
     ProfilePictureComponent,
     ProfileCreatorComponent,
     CapabilityListComponent,
+    ComplexityListComponent,
     IndustryComponent
   ],
   providers: [

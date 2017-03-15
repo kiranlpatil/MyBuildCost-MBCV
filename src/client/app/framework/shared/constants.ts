@@ -1,5 +1,5 @@
 export class AppSettings {
-  public static IP = 'http://localhost:8081';
+  public static IP = 'http://localhost:8080';
 // public static IP = 'http://ee802b7f.ngrok.io';
 
     public static get API_ENDPOINT():string {
@@ -87,7 +87,7 @@ export class LocalStorage {
 }
 
 export class VALUE_CONSTANT{
-  public static MAX_CAPABILITIES :number=2;
+  public static MAX_CAPABILITIES :number=10;
 }
 
 

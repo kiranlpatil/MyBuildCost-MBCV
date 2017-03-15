@@ -20,7 +20,8 @@ export class CapabilityListComponent {
   private showAlert: boolean=false;
   constructor(private _router:Router, private http:Http, private activatedRoute:ActivatedRoute) {
 
-    this.http.get("capability").map((res: Response) => res.json())
+    this.http.get("capability")
+      .map((res: Response) => res.json())
       .subscribe(
         data => {
           this.capabilities = data.capability;

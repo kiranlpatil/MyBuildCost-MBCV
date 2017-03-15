@@ -1,0 +1,16 @@
+{
+  "complexity":[
+    {
+      "name":"team management",
+      "scenario":["10-50","50-100","100-500","500-1000","1000+","none"]
+    },
+    {
+      "name":"recruitment",
+      "scenario":["1-5","5-10","10-50","50-100","100+","none"]
+    },
+    {
+      "name":"Budgeting (In Lacs)",
+      "scenario":["1-5","5-10","10-50","50-100","100+","none"]
+    }
+  ]
+}

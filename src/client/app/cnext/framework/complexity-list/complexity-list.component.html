@@ -1,0 +1,12 @@
+<div class="text-left">
+  <div *ngFor="let item of complexities;let i = index" (click)="selectOption($event)">
+    <p id ="complexity">{{item.name}}</p>
+    <div class="select-option"  *ngFor="let subitem of item.scenario">
+      <label>
+        <span class="glyphicon glyphicon-ok"></span>
+        <input type="radio" name="{{item.name}}"  id="{{i}}" value="{{subitem}}" >
+        <span>{{subitem}}</span>
+      </label>
+    </div>
+  </div>
+</div>
