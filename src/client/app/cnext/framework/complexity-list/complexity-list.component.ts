@@ -15,7 +15,7 @@ export class ComplexityListComponent {
   private complexities: Complexity[];
   private selectedComplexity=new Array();
 
-  constructor( private http:Http) {debugger
+  constructor( private http:Http) {
     this.http.get("complexity")
       .map((res: Response) => res.json())
       .subscribe(

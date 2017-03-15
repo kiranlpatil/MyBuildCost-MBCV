@@ -1,12 +1,14 @@
-<div class="text-left">
-  <div *ngFor="let item of complexities;let i = index" (click)="selectOption($event)">
+<div class="select-complexity clearfix" *ngFor="let item of complexities;let i = index" (click)="selectOption($event)">
+  <div class="col-sm-3 complexity-name">
     <p id ="complexity">{{item.name}}</p>
+  </div>
+  <div class="col-sm-9 scenarios">
     <div class="select-option"  *ngFor="let subitem of item.scenario">
       <label>
-        <span class="glyphicon glyphicon-ok"></span>
         <input type="radio" name="{{item.name}}"  id="{{i}}" value="{{subitem}}" >
-        <span>{{subitem}}</span>
+        <div><span>{{subitem}}</span></div>
       </label>
     </div>
   </div>
 </div>
+
