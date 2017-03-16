@@ -6,6 +6,10 @@
 
     <h5>Login</h5>
 
+      <button type="button" (click)="navigateTo('/landing')">
+        <span class="glyphicon glyphicon-remove" ></span>
+      </button>
+
     <form [formGroup]="userForm" (submit)="onSubmit()">
 
       <div class="alert alert-danger clearfix" [hidden]="isShowErrorMessage">

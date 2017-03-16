@@ -12,12 +12,11 @@
 
 
   <div *ngFor="let item of storedProficiency; let i = index">
-    <p (click)="deleteItem($event)"> {{item}}<button type="button" >
+    <p (click)="deleteItem($event)"> {{item}}
+      <button type="button" >
       <span class="glyphicon glyphicon-remove" ></span>
-    </button>
-      </p>
-
-
+      </button>
+    </p>
   </div>
 </div>
 

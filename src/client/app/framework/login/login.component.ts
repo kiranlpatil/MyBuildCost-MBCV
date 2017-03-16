@@ -119,6 +119,13 @@ export class LoginComponent implements OnInit {
     this.successRedirect();
   }
 
+  navigateTo(navigateTo: string) {
+    if (navigateTo !== undefined ) {
+      this._router.navigate([navigateTo]);
+    }
+  }
+
+
   successRedirect() {
     LocalStorageService.setLocalValue(LocalStorage.IS_LOGED_IN, 1);
     this._router.navigate([NavigationRoutes.APP_CREATEPROFILE]);

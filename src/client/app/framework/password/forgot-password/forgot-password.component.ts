@@ -71,7 +71,12 @@ export class ForgotPasswordComponent {
       this.error_msg = error.err_msg;
     }
   }
-
+  navigateTo(navigateTo: string) {
+    if (navigateTo !== undefined ) {
+      this._router.navigate([navigateTo]);
+    }
+  }
+  
   goBack() {
     this.commanService.goBack();
     this._router.navigate(['/']);

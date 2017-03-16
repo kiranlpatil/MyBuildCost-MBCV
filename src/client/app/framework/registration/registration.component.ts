@@ -89,6 +89,11 @@ export class RegistrationComponent {
     this._router.navigate(['/']);
   }
 
+  navigateTo(navigateTo: string) {
+    if (navigateTo !== undefined ) {
+      this._router.navigate([navigateTo]);
+    }
+  }
   makePasswordConfirm(): boolean {
     if (this.model.conform_password !== this.model.password) {
       this.isPasswordConfirm = true;
