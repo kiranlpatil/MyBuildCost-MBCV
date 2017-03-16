@@ -1,17 +1,33 @@
 {
  "proficiency":
    [
-     "P1",
-     "P2",
-     "P3",
-     "P4",
-     "P5",
-     "P6",
-     "P7",
-     "P8",
-     "P9",
-     "P10",
-     "P11",
-     "P12"
+     "A# .NET",
+     "A# (Axiom)",
+     "A-0 System",
+     "A+",
+     "A++",
+     "ABAP",
+     "ABC",
+     "ABC ALGOL",
+     "ABSET",
+     "ABSYS",
+     "Bertrand",
+     "BETA",
+     "Bistro",
+     "BitC",
+     "BLISS",
+     "Blockly",
+     "C",
+     "C--",
+     "C++",
+     "C#",
+     "C/AL",
+     "Caché ObjectScript",
+     "C Shell",
+     "Caml",
+     "Cayenne",
+     "CDuce",
+     "Cecil"
+
    ]
 }

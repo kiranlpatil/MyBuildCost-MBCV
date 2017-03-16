@@ -11,6 +11,64 @@
     {
       "name":"Budgeting (In Lacs)",
       "scenario":["1-5","5-10","10-50","50-100","100+","none"]
+    },
+    {
+      "name":"programme management",
+      "scenario":["10-50","50-100","100-500","500-1000","1000+","none"]
+    },
+    {
+      "name":"Billing & quotes",
+      "scenario":["10-50","50-100","100-500","500-1000","1000+","none"]
+    },
+    {
+      "name":"Reporting",
+      "scenario":["10-50","50-100","100-500","500-1000","1000+","none"]
+    },
+    {
+      "name":"Time tracking",
+      "scenario":["10-50","50-100","100-500","500-1000","1000+","none"]
+    },
+    {
+      "name":"People management",
+      "scenario":["10-50","50-100","100-500","500-1000","1000+","none"]
+    },
+    {
+      "name":"Managing communication",
+      "scenario":["10-50","50-100","100-500","500-1000","1000+","none"]
+    },
+    {
+      "name":"Risk Management",
+      "scenario":["10-50","50-100","100-500","500-1000","1000+","none"]
+    },
+    {
+      "name":"Portfolio management",
+      "scenario":["10-50","50-100","100-500","500-1000","1000+","none"]
+    },
+    {
+      "name":"Virtual project management",
+      "scenario":["10-50","50-100","100-500","500-1000","1000+","none"]
+    },
+    {
+      "name":"Budgeting",
+      "scenario":["10-50","50-100","100-500","500-1000","1000+","none"]
+    },
+    {
+      "name":"Reporting",
+      "scenario":["10-50","50-100","100-500","500-1000","1000+","none"]
+    },
+    {
+      "name":"Project planning",
+      "scenario":["10-50","50-100","100-500","500-1000","1000+","none"]
+    },
+    {
+      "name":"Estimate",
+      "scenario":["10-50","50-100","100-500","500-1000","1000+","none"]
+    },
+    {
+      "name":"Project Migration",
+      "scenario":["10-50","50-100","100-500","500-1000","1000+","none"]
     }
+
   ]
+
 }

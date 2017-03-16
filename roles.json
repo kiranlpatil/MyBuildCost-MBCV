@@ -1,3 +1,20 @@
 {
-  "roles":[ "role1", "role2", "role3","role4" ]
+  "roles":[
+    "Project Engineer",
+    "Software Engineer",
+    "Systems Analyst",
+    "Business Analyst",
+    "Technical Support",
+    "Network Engineer",
+    "Technical Consultant",
+    "Managing and leading ",
+    "Recruiting project staff ",
+    "Managing project scope",
+    " Providing status reports",
+    " Managing project scope",
+    " project training ",
+    "  management of the User Acceptance",
+    " Monitoring project progress "
+
+  ]
 }
