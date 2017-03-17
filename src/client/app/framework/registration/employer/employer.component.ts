@@ -17,6 +17,7 @@ import {
 import { ImagePath, LocalStorage, ProjectAsset } from '../../shared/constants';
 import { LocalStorageService } from '../../shared/localstorage.service';
 import {LoaderService} from "../../shared/loader/loader.service";
+import {Http,Response} from "@angular/http";
 
 
 @Component({
@@ -28,6 +29,17 @@ import {LoaderService} from "../../shared/loader/loader.service";
 
 export class EmployerComponent {
   model = new Employer();
+  storedcountry:string;
+  storedstate:string;
+  storedcity:string;
+  locationDetails : any;
+
+  countries:string[]=new Array(0);
+  states:string[]=new Array(0);
+  cities:string[]=new Array(0);
+  countryModel:string;
+  stateModel:string;
+  cityModel:string;
   isPasswordConfirm: boolean;
   isFormSubmitted = false;
   userForm: FormGroup;
@@ -37,7 +49,8 @@ export class EmployerComponent {
   image_path: any;
   isRecruitingForself:boolean = true;
 
-  constructor(private commanService: CommonService, private _router: Router,
+
+  constructor(private commanService: CommonService, private _router: Router,private http: Http,
               private EmployerService: EmployerService, private messageService: MessageService, private formBuilder: FormBuilder,private loaderService:LoaderService) {
 
     this.userForm = this.formBuilder.group({
@@ -57,6 +70,64 @@ export class EmployerComponent {
     this.BODY_BACKGROUND = ImagePath.BODY_BACKGROUND;
     this.image_path = ImagePath.PROFILE_IMG_ICON;
   }
+  ngOnInit()
+  {
+
+    this.http.get("address")
+      .map((res: Response) => res.json())
+      .subscribe(
+        data => {
+          this.locationDetails=data.address;
+          for(var  i = 0; i <data.address.length; i++){
+            this.countries.push(data.address[i].country);
+            console.log(data.address[0].country);
+
+          }
+        },
+        err => console.error(err),
+        () => console.log()
+      );
+
+
+
+  }
+
+  selectCountryModel(newval:any) {
+    for(let item of this.locationDetails){
+      if(item.country===newval){
+        let tempStates: string[]= new Array(0);
+        for(let state of item.states){
+          tempStates.push(state.name);
+        }
+        this.states=tempStates;
+      }
+    }
+    this.storedcountry=newval;
+  }
+  selectStateModel(newval:any) {
+    for(let item of this.locationDetails){
+      if(item.country===this.storedcountry){
+        for(let state of item.states){
+          if(state.name===newval){
+            let tempCities: string[]= new Array(0);
+            for(let city of state.cities) {
+              tempCities.push(city);
+            }
+            this.cities=tempCities;
+          }
+        }
+      }
+    }
+    this.storedstate=newval;
+  }
+
+
+
+  selectCityModel(newval : string){
+    this.storedcity=newval;
+
+  }
+
 
   onSubmit() {
     this.model = this.userForm.value;
