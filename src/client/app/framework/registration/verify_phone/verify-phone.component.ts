@@ -29,7 +29,7 @@ export class VerifyPhoneComponent {
               private verifyPhoneService: VerifyPhoneService, private messageService: MessageService) {
 
     this.userForm = this.formBuilder.group({
-      'otp': ['', [Validators.required, ValidationService.mobileNumberValidator]],
+      'otp': ['', Validators.required]
     });
 
     this.MY_LOGO_PATH = ImagePath.MY_WHITE_LOGO;

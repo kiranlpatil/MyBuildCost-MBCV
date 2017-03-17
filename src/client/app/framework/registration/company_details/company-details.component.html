@@ -1,0 +1,416 @@
+<form [formGroup]="userForm" (submit)="onSubmit()" class="employee-form">
+
+  <div class="alert alert-danger clearfix" [hidden]="isShowErrorMessage">
+    <div class="col-sm-1 hidden-xs"><span class="glyphicon glyphicon-warning-sign"></span></div>
+    <div class="col-sm-10 col-xs-11 error-msg"><b>{{ error_msg }}</b></div>
+    <div class="col-sm-1 col-xs-1 close-msg">
+      <button (click)="closeErrorMessage()" class="btn-close"><span class="glyphicon glyphicon-remove"></span>
+      </button>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <control-messages [control]="userForm.controls.company_name"></control-messages>
+    <input type="text" formControlName="first_name" id="first_name" class="form-control" required/>
+    <label>First Name</label>
+  </div>
+
+  <div class="form-group">
+    <control-messages [control]="userForm.controls.last_name"></control-messages>
+    <input type="text" formControlName="last_name" id="last_name" class="form-control" required/>
+    <label>Last Name</label>
+  </div>
+
+  <div class="form-group">
+    <control-messages [control]="userForm.controls.email"></control-messages>
+    <input type="email" formControlName="email" id="email" class="form-control" required/>
+    <label>Email</label>
+  </div>
+
+  <div class="form-group">
+    <control-messages [control]="userForm.controls.mobile_number"></control-messages>
+    <input type="number" formControlName="mobile_number" id="mobile_number" class="form-control" required/>
+    <label>Mobile</label>
+  </div>
+
+  <div class="form-group">
+    <control-messages [control]="userForm.controls.password"></control-messages>
+    <input type="password" formControlName="password" id="password" class="form-control" required/>
+    <label>Password</label>
+  </div>
+
+  <div class="form-group">
+    <control-messages [control]="userForm.controls.conform_password"></control-messages>
+    <input type="password" formControlName="conform_password" id="conform_password"
+           (blur)="makePasswordConfirm()" class="form-control" required/>
+    <label>Confirm Password</label>
+    <div class="error-message-registration" *ngIf="isPasswordConfirm == true">
+      <p>Passwords does not match.</p>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <control-messages [control]="userForm.controls.birth_year"></control-messages>
+    <input type="number" formControlName="birth_year" id="birth_year" class="form-control" required/>
+    <label>Birth Year</label>
+  </div>
+
+  <div class="form-group">
+    <div ng2-auto-complete
+         [source]="countries"
+         (ngModelChange)="selectCountryModel($event)"
+    >
+      <input class="form-control" [ngModel]="countryModel" [ngModelOptions]="{standalone: true}" placeholder="Select Country"/>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div ng2-auto-complete
+         [source]="states"
+         (ngModelChange)="selectStateModel($event)"
+    >
+      <input class="form-control" [ngModel]="stateModel" [ngModelOptions]="{standalone: true}" placeholder="Select State"/>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div ng2-auto-complete
+         [source]="cities"
+         (ngModelChange)="selectCityModel($event)"
+    >
+      <input class="form-control" [ngModel]="cityModel" [ngModelOptions]="{standalone: true}" placeholder="Select City"/>
+    </div>
+  </div>
+  <!--<div class="form-group">-->
+  <!--<select class="form-control" id="country" required>-->
+  <!--<option selected>Country1</option>-->
+  <!--<option>Country2</option>-->
+  <!--<option>Country3</option>-->
+  <!--<option>Country4</option>-->
+  <!--</select>-->
+  <!--<label for="country">Country</label>-->
+  <!--</div>-->
+
+  <!--<div class="form-group">-->
+  <!--<select class="form-control" id="state" required>-->
+  <!--<option selected>State1</option>-->
+  <!--<option>State2</option>-->
+  <!--<option>State3</option>-->
+  <!--<option>State4</option>-->
+  <!--</select>-->
+  <!--<label for="state">State</label>-->
+  <!--</div>-->
+
+  <!--<div class="form-group" >-->
+  <!--<select class="form-control" id="city" required>-->
+  <!--<option selected>City1</option>-->
+  <!--<option>City2</option>-->
+  <!--<option>City3</option>-->
+  <!--<option>City4</option>-->
+  <!--</select>-->
+  <!--<label for="city">City</label>-->
+  <!--</div>-->
+
+  <div class="form-group" >
+    <control-messages [control]="userForm.controls.pin"></control-messages>
+    <input type="number" formControlName="pin" id="pin" class="form-control" required/>
+    <label>PIN</label>
+  </div>
+
+
+  <div class="button-group">
+    <!--<button type="submit" class="btn btn-primary" [disabled]="!userForm.valid">Send OTP</button>-->
+    <button type="submit" class="btn btn-primary" [disabled]="!userForm.valid">Create an account</button>
+  </div>
+</form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
+<section class="dashboard-profile col-sm-10 col-sm-offset-1">
+  <div>
+
+    &lt;!&ndash;<tpl-loader *ngSwitchCase="true"></tpl-loader>&ndash;&gt;
+    <app-loader></app-loader>
+    <div class="col-sm-12">
+      <h4><span class="glyphicon glyphicon-user"></span>Company Details</h4>
+    </div>
+
+    <div class="col-sm-3 profile">
+      <h5>{{model.company_name}}</h5>
+
+      <div class="avtar" [ngStyle]="{'background-image': 'url(' + image_path + ')'}">
+        &lt;!&ndash;<img src={{image_path}} alt="Profile Picture">&ndash;&gt;
+      </div>
+      <br>
+
+      <form [class.hide-list]="isSocialLogin">
+        <label for="file-upload" class="custom-file-upload">
+          Change Picture
+        </label>
+        &lt;!&ndash;<input id="file-upload" type="file"/>&ndash;&gt;
+        <input id="file-upload" type="file" (change)="fileChangeEvent($event)" placeholder="Upload file"/>
+      </form>
+    </div>
+
+    <div class="col-sm-7  col-sm-offset-2">
+      <div class="clearfix">&nbsp;</div>
+
+      <div class="alert alert-danger clearfix" [hidden]="isShowErrorMessage">
+        <div class="col-sm-1 hidden-xs"><span class="glyphicon glyphicon-warning-sign"></span></div>
+        <div class="col-sm-10 col-xs-11 error-msg"><b>{{ error_msg }}</b></div>
+        <div class="col-sm-1 col-xs-1 close-msg">
+          <button (click)="closeErrorMessage()" class="btn-close"><span
+            class="glyphicon glyphicon-remove"></span></button>
+        </div>
+      </div>
+
+      <form [formGroup]="userForm" (submit)="onSubmit()" class="profile-form">
+
+        <div class="form-group" [class.fb-email-input]="isSocialLogin">
+          <label><img src="{{FIRST_NAME_ICON}}" /> First Name </label>
+          <control-messages [control]="userForm.controls.company_name"></control-messages>
+          <input type="text" [(ngModel)]="model.company_name" formControlName="company_name" id="company_name "
+                 placeholder="Company Name" class="form-control"/>
+        </div>
+
+
+        <div class="form-group" [class.fb-email-input]="isSocialLogin">
+          <label><img src="{{LAST_NAME_ICON}}" /> Last Name </label>
+          <control-messages [control]="userForm.controls.last_name"></control-messages>
+          <input type="text" [(ngModel)]="model.last_name" formControlName="last_name" id="last_name "
+                 placeholder="Last Name" class="form-control"/>
+        </div>
+
+
+        <div class="form-group" [class.fb-email-input]="isSocialLogin">
+          <label><img src="{{EMAIL_ICON}}" /> Email
+            <span class="glyphicon glyphicon-pencil" [class.hide-list]="isSocialLogin" (click)="showHideEmailModal()"></span>
+          </label>
+          <control-messages [control]="userForm.controls.email"></control-messages>
+          <input [(ngModel)]="model.email" formControlName="email" id="email" placeholder="Email"
+                 class="form-control clear" readonly/>
+
+        </div>
+
+        <div class="form-group" [class.hide-list]="isSocialLogin">
+          <label><img src="{{MOBILE_ICON}}" /> Contact
+            <span class="glyphicon glyphicon-pencil" (click)="showHideMobileModal()" ></span>
+          </label>
+          <control-messages [control]="userForm.controls.mobile_number"></control-messages>
+          <input type="number" [(ngModel)]="model.mobile_number" formControlName="mobile_number"
+                 id="mobile_number "
+                 placeholder="Mobile Number" class="form-control clear" readonly/>
+        </div>
+        <div class="clearfix">&nbsp;</div>
+        &lt;!&ndash;<button type="submit" class="btn btn-default">Edit Profile</button>&ndash;&gt;
+        <button type="submit" class="btn btn-default" [disabled]="!userForm.valid">Save Profile</button>
+      </form>
+    </div>
+
+  </div>
+</section>
+
+
+<div class="modal modal-email" [style.display]="getStyleEmail()">
+  <div class="modal-bg">
+    <div class="modal-dialog modal-md">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" aria-label="Close" (click)="showHideEmailModal()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h5><span class="glyphicon glyphicon-envelope"></span> Change your Email</h5>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-sm-12">
+              <p>Enter your new account email address and we will send you a link to reset your email
+                address.</p>
+              <tpl-changeemail></tpl-changeemail>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal modal-mobile" [style.display]="getStyleMobile()">
+  <div class="modal-bg">
+    <div class="modal-dialog modal-md">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" aria-label="Close" (click)="showHideMobileModal()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h5><span class="glyphicon glyphicon-phone"></span> Change your Mobile</h5>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-sm-12">
+              <p>Enter your new mobile number and we will send you a verification code on mobile
+                number you have entered.</p>
+              <tpl-changemobile></tpl-changemobile>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+-->

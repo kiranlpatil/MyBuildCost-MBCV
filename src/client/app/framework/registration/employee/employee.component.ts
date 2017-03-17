@@ -18,7 +18,7 @@ import { ImagePath, LocalStorage, ProjectAsset } from '../../shared/constants';
 import { LocalStorageService } from '../../shared/localstorage.service';
 import {LoaderService} from "../../shared/loader/loader.service";
 import {Http,Response} from "@angular/http";
-
+import {Location} from "../location";
 
 @Component({
   moduleId: module.id,
@@ -58,11 +58,11 @@ export class EmployeeComponent {
       'email': ['', [Validators.required, ValidationService.emailValidator]],
       'password': ['', [Validators.required, Validators.minLength(8)]],
       'conform_password': ['', [Validators.required, Validators.minLength(8)]],
-      'birth_year':['', Validators.required],
+      'birth_year':['', [Validators.required,ValidationService.birthYearValidator]],
       'country':[''],
       'state':[''],
       'city':[''],
-      'pin':['', Validators.required]
+      'pin':['',  [Validators.required,ValidationService.pinValidator]]
     });
 
     this.BODY_BACKGROUND = ImagePath.BODY_BACKGROUND;
