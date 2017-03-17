@@ -14,6 +14,10 @@ export class proficiencyDomainComponent implements OnInit {
   storedProficiency = new Array();
   proficiencyModel: string = "";
   private showAlert: boolean=false;
+  private proficiencyType: boolean=false;
+  private domainType: boolean=false;
+  private placeHolderName:string;
+
   constructor(private http: Http) {
 
 
@@ -21,6 +25,8 @@ export class proficiencyDomainComponent implements OnInit {
 
   ngOnInit() {
     if(this.type==="profeciency"){
+      this.proficiencyType=true;
+      this.placeHolderName="proficiency"
     if (this.proficiencies === undefined) {
       this.http.get("proficiency")
         .map((res: Response) => res.json())
@@ -34,6 +40,9 @@ export class proficiencyDomainComponent implements OnInit {
     }
   }
     if(this.type==="domain"){
+      this.domainType=true;
+      this.placeHolderName="domain"
+      this.http.get("proficiency")
       this.http.get("domain")
         .map((res: Response) => res.json())
         .subscribe(

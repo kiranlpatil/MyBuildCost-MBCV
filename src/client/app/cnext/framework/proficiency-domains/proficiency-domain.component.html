@@ -1,12 +1,13 @@
-<p class="instructions" *ngIf="showAlert">You can select maximum 10 capability</p>
+<p>Add your <span  *ngIf="proficiencyType">proficiencies/tools/technologies</span><span *ngIf="domainType">domains you work</span></p>
+<p class="instructions" *ngIf="showAlert">You can select maximum 20 <span  *ngIf="proficiencyType">proficiencies</span><span>domains</span></p>
 
 <div class="list">
-  <div class="list" >
+  <div class="form-group">
     <div ng2-auto-complete
          [source]="proficiencies"
          (ngModelChange)="selectproficiencyModel($event)"
-         placeholder="eg. java,oracle,angular">
-      <input  [(ngModel)]="proficiencyModel" id={{type}} />
+         >
+      <input  class="form-control" [(ngModel)]="proficiencyModel" id={{type}} placeholder="{{placeHolderName}}" />
     </div>
   </div>
 

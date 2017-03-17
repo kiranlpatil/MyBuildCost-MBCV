@@ -1,6 +1,8 @@
 // Light Theme Variables
 $light-theme-color: #83ce85;
 $light-theme-hover: #23a2ad;
+$dark-theme-btn-primary: #ff5024;
+$dark-theme-btn-primary-hover: #d44b24;
 $light-theme-background: #1c6872;
 $light-theme-gradient-light: #96ce8e;
 $light-theme-gradient-dark: #64c6d8;
@@ -84,6 +86,19 @@ $white: #fff;
           background: $light-theme-hover;
         }
       }
+    }
+  }
+
+  //create profile
+  .profile-header { @extend %light-theme-gradient; }
+
+  .profile-wrapper {
+    .heading {
+      @extend %light-theme-gradient;
+    }
+
+    .btn-default {
+      border: 1px solid $light-theme-color;
     }
   }
 

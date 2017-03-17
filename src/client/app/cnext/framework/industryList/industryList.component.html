@@ -36,7 +36,28 @@
   </div>
 
   <div class="clearfix">
-    <button class="btn btn-default">Cofirm &amp; Save</button>
+    <button class="btn btn-default" (click)="showHideModal()">Cofirm &amp; Save</button>
   </div>
   <p class="instructions">Once you confirm and save your roles. You can not change them for 3 months.</p>
+</div>
+
+<div class="modal modal-email" [style.display]="getStyleModal()">
+  <div class="modal-bg">
+    <div class="modal-dialog modal-md">
+      <div class="modal-content">
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-sm-12">
+              <p>Are you sure you want to save your Role(s)?</p>
+              <p>Once you save your Role(s), You can't change it for 3 months.</p>
+              <div class="button-group">
+                <button class="btn" (click)="showHideModal()">No</button>
+                <button class="btn btn-default">Yes</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

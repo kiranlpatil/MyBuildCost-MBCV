@@ -26,6 +26,7 @@ export class IndustryComponent {
   maxRoles : number =3;
   roles : string[];
   key:number;
+  showModalStyle: boolean = false;
 
 
   constructor(private industryService: IndustryService,private http: Http) {
@@ -113,12 +114,6 @@ export class IndustryComponent {
     }
   }
 
-
-
-
-
-
-
   createAndSave()
   {
     this.industryService.addIndustryProfile(this.model).subscribe(
@@ -131,10 +126,17 @@ export class IndustryComponent {
   };
 
 
+    showHideModal() {
+        this.showModalStyle = !this.showModalStyle;
+    }
 
-
-
-
+    getStyleModal() {
+        if (this.showModalStyle) {
+            return 'block';
+        } else {
+            return 'none';
+        }
+    }
 }
 
 

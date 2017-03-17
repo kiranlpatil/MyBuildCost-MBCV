@@ -126,7 +126,7 @@ $white: #fff;
       @extend %dark-theme-gradient;
     }
 
-    .btn {
+    .btn-default {
       border: 1px solid $dark-theme-color;
     }
   }

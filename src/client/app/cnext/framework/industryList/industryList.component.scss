@@ -1,5 +1,6 @@
 $text-color: #666;
 $white: #fff;
+$modal-bg: #f2f2f2;
 $instruction: #f15a29;
 $btn-instruction: #ccc;
 
@@ -58,6 +59,40 @@ $btn-instruction: #ccc;
   .btn-instructions {
     color: $btn-instruction;
     padding: 5px 0 0;
+  }
+}
+
+.modal-dialog {
+  text-align: center;
+  border-radius: 25px;
+
+  .modal-body {
+    padding: 30px;
+  }
+
+  .modal-content {
+    background: $modal-bg;
+    border-radius: 25px;
+  }
+
+  p {
+    color: $text-color;
+    font-size: 18px;
+    text-align: center;
+  }
+
+  .button-group {
+    margin-top: 30px;
+  }
+
+  .btn {
+    float: none;
+    margin-top: 0;
+
+    &:focus,
+    &:active {
+      outline: none;
+    }
   }
 }
 
