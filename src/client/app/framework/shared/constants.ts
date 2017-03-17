@@ -59,7 +59,7 @@ export class NavigationRoutes {
   public static APP_REGISTRATION: string = '/registration';
   public static APP_FORGOTPASSWORD: string = '/forgotpassword';
   public static APP_DASHBOARD: string = '/dashboard';
-  public static APP_LOGIN: string = '/reset_password';
+  public static APP_LOGIN: string = '/login';
   public static APP_START: string = '/';
   public static APP_LANDING: string = '/landing';
   public static VERIFY_USER: string = '/verify_user';

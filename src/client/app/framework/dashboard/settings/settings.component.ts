@@ -34,7 +34,8 @@ export class SettingsComponent implements OnInit,OnDestroy {
   constructor(private commonService:CommonService, private themeChangeService:ThemeChangeService, private changeThemeServie:SettingsService,
               private messageService:MessageService, private formBuilder:FormBuilder, private loaderService:LoaderService) {
 
-    this.themeIs = LocalStorageService.getLocalValue(LocalStorage.MY_THEME);
+    //this.themeIs = LocalStorageService.getLocalValue(LocalStorage.MY_THEME);
+    this.themeIs = AppSettings.INITIAL_THEM;
 
     this.userForm = this.formBuilder.group({
       'current_theme': ['', [Validators.required]]
@@ -67,8 +68,8 @@ export class SettingsComponent implements OnInit,OnDestroy {
   }
 
   lightTheme() {
-    this.themeChangeService.change(this.LIGHT_THEME);
-    this.changeThemeServie.chageTheme(this.LIGHT_THEME)
+    this.themeChangeService.change(this.INITIAL_THEME);
+    this.changeThemeServie.chageTheme(this.INITIAL_THEME)
         .subscribe(
             body => this.changeThemeSuccess(body),
             error => this.changeThemeFail(error));

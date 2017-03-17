@@ -17,7 +17,7 @@ export class EmployeeService extends BaseService {
     let headers = new Headers({ 'Content-Type': 'application/json'});
     let options = new RequestOptions({ headers: headers });
     let body = JSON.stringify(employee);
-    return this.http.post(API.USER_PROFILE, body,options)
+    return this.http.post(API.CANDIDATE_PROFILE, body,options)
       .map(this.extractData)
       .catch(this.handleError);
   }
