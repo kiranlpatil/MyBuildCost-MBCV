@@ -1,7 +1,7 @@
 <div class="clearfix">
   <p>I can</p>
   <p class="instructions" *ngIf="showAlert">You can select maximum 10 capability</p>
-  <div class="capability-type">
+  <div class="capability-type" *ngIf="isShowCapability">
     <div class="select-option"  *ngFor="let item of capabilities;let i = index">
       <label>
         <input type="checkbox" name="checkbox" (click)="selectOption($event)" id="{{item}}" value="{{item}}" >

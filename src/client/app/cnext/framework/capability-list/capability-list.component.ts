@@ -4,6 +4,8 @@ import {Component} from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
 import {Subscription} from 'rxjs/Rx';
 import {VALUE_CONSTANT} from "../../../framework/shared/constants";
+import {TestService} from "../test.service";
+import {ComplexityService} from "../complexity.service";
 
 
 
@@ -18,8 +20,16 @@ export class CapabilityListComponent {
   private capabilities: string[];
   private selectedCapabilities =new Array();
   private showAlert: boolean=false;
-  constructor(private _router:Router, private http:Http, private activatedRoute:ActivatedRoute) {
-
+  private isShowCapability :boolean=false;
+  constructor(private _router:Router, private http:Http,
+              private activatedRoute:ActivatedRoute,
+              private testService : TestService,
+              private complexityService : ComplexityService) {
+    testService.showTest$.subscribe(
+      data=>{
+        this.isShowCapability=true;
+      }
+    );
     this.http.get("capability")
       .map((res: Response) => res.json())
       .subscribe(
@@ -70,6 +80,9 @@ if(this.selectedCapabilities.length < VALUE_CONSTANT.MAX_CAPABILITIES) {
   this.showAlert=true;
   newVal.target.checked=false;
 }
+    if(this.selectedCapabilities.length>1){
+        this.complexityService.change(true);
+    }
 
     console.log(this.selectedCapabilities);
 

@@ -5,6 +5,7 @@ import {IndustryService} from "./industryList.service";
 import { industryProfile} from "./industry";
 import {Router} from "@angular/router";
 import {LoaderService} from "../../../framework/shared/loader/loader.service";
+import {TestService} from "../test.service";
 @Component({
   moduleId: module.id,
   selector: 'cn-industry',
@@ -27,9 +28,10 @@ export class IndustryComponent {
   roles : string[];
   key:number;
   showModalStyle: boolean = false;
+  disbleRole: boolean = false;
 
 
-  constructor(private industryService: IndustryService,private http: Http) {
+  constructor(private industryService: IndustryService,private http: Http , private testService : TestService) {
 
   }
 
@@ -88,25 +90,7 @@ export class IndustryComponent {
     }
   }
 
-    /*toggleRoll(event: any) {
-    var roleType: string;
-    roleType = event.target.id;
-    if (roleType === "industry") {
-      this.isIndustrySelected=true;
-      if (this.industries === undefined) {
-        this.http.get(roleType)
-          .map((res: Response) => res.json())
-          .subscribe(
-            data => {
-              this.industries = data.industry;
-            },
-            err => console.error(err),
-            () => console.log()
-          );
-      }
-      //this.industries =this.industryService.getIndustries(roleType);
-    }
-  }*/
+
 
   addNewRole(){
     if(this.temproles.length<this.maxRoles){
@@ -129,6 +113,13 @@ export class IndustryComponent {
     showHideModal() {
         this.showModalStyle = !this.showModalStyle;
     }
+
+
+  disableRole(){debugger
+    this.testService.change(true);
+    this.showModalStyle = !this.showModalStyle;
+    this.disbleRole=true;
+  }
 
     getStyleModal() {
         if (this.showModalStyle) {

@@ -66,6 +66,8 @@ import {CapabilityListComponent} from "./cnext/framework/capability-list/capabil
 import {proficiencyDomainComponent} from "./cnext/framework/proficiency-domains/proficiency-domain.component";
 import {ComplexityListComponent} from "./cnext/framework/complexity-list/complexity-list.component";
 import {MainHeaderComponent} from "./framework/main-header/main-header.component";
+import {TestService} from "./cnext/framework/test.service";
+import {ComplexityService} from "./cnext/framework/complexity.service";
 
 @NgModule({
   imports: [
@@ -128,11 +130,13 @@ import {MainHeaderComponent} from "./framework/main-header/main-header.component
       useValue: '<%= APP_BASE %>'
     },
     MessageService,
+    TestService,
     FacebookService,
     LoginService,
     LoaderService,
     CommonService,
     ValidationService,
+    ComplexityService,
     ChangePasswordService,
     ChangeEmailService,
     ChangeMobileService,

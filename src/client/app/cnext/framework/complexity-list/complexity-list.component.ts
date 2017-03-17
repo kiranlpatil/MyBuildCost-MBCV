@@ -1,6 +1,7 @@
 import {Response, Http} from '@angular/http';
 import {Component} from '@angular/core';
 import {Complexity} from "../model/complexity";
+import {ComplexityService} from "../complexity.service";
 
 
 
@@ -14,8 +15,15 @@ import {Complexity} from "../model/complexity";
 export class ComplexityListComponent {
   private complexities: Complexity[];
   private selectedComplexity=new Array();
+  private isComplexityShow : boolean =false;
 
-  constructor( private http:Http) {
+  constructor( private http:Http,
+                private complexityService: ComplexityService) {
+    complexityService.showTest$.subscribe(
+      data=>{
+          this.isComplexityShow=data;
+      }
+    );
     this.http.get("complexity")
       .map((res: Response) => res.json())
       .subscribe(

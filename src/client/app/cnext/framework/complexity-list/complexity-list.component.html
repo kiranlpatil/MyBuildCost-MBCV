@@ -1,4 +1,5 @@
-<div class="select-complexity clearfix" *ngFor="let item of complexities;let i = index" (click)="selectOption($event)">
+<div *ngIf="isComplexityShow">
+<div class="select-complexity clearfix" *ngFor="let item of complexities;let i = index" (click)="selectOption($event)" >
   <div class="col-sm-3 complexity-name">
     <p id ="complexity">{{item.name}}</p>
   </div>
@@ -11,4 +12,4 @@
     </div>
   </div>
 </div>
-
+</div>

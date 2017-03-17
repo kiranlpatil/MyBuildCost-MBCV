@@ -6,7 +6,7 @@
         <div ng2-auto-complete
            [source]="industries"
            (ngModelChange)="selectIndustryModel($event)">
-          <input class="form-control" [ngModel]="industryModel"  placeholder="Select Industry"/>
+          <input class="form-control" [ngModel]="industryModel"  placeholder="Select Industry" disabled="{{disbleRole}}"/>
         </div>
       </div>
     </label>
@@ -23,11 +23,11 @@
               (ngModelChange)="selectRolesModel($event)"
               placeholder="enter text">
           <!--<span *ngIf="i>0" class="pull-left">&amp;</span>-->
-          <input class="form-control" [ngModel]="roleModel" />
+          <input class="form-control" [ngModel]="roleModel" [disabled]="disbleRole" />
         </div>
       </div>
       <div class="clear">
-        <button type="button" id="more_fields" (click)="addNewRole()" class="btn btn-create-profile">
+        <button type="button" id="more_fields" (click)="addNewRole()" class="btn btn-create-profile" [disabled]="disbleRole" >
           Add Another Role <span>+</span>
         </button>
         <p class="btn-instructions">You can add upto 3 roles</p>
@@ -36,7 +36,7 @@
   </div>
 
   <div class="clearfix">
-    <button class="btn btn-default" (click)="showHideModal()">Cofirm &amp; Save</button>
+    <button class="btn btn-default" (click)="showHideModal()" [disabled]="disbleRole">Cofirm &amp; Save</button>
   </div>
   <p class="instructions">Once you confirm and save your roles. You can not change them for 3 months.</p>
 </div>
@@ -52,7 +52,7 @@
               <p>Once you save your Role(s), You can't change it for 3 months.</p>
               <div class="button-group">
                 <button class="btn" (click)="showHideModal()">No</button>
-                <button class="btn btn-default">Yes</button>
+                <button class="btn btn-default" (click)="disableRole()">Yes</button>
               </div>
             </div>
           </div>
