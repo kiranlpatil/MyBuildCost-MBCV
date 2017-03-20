@@ -115,7 +115,7 @@ export class IndustryComponent {
     }
 
 
-  disableRole(){debugger
+  disableRole(){
     this.testService.change(true);
     this.showModalStyle = !this.showModalStyle;
     this.disbleRole=true;

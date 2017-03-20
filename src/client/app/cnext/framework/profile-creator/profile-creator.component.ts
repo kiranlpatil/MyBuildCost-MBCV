@@ -14,13 +14,13 @@ import {DashboardService} from "../../../framework/dashboard/dashboard.service";
 })
 
 export class ProfileCreatorComponent {
-  private fullName: string;
+  private fullName: string;private firstName: string;private lastName: string;
   private   newUser:number;
 
   constructor(private _router:Router, private dashboardService:DashboardService) {
   }
-  
-  
+
+
   ngOnInit(){
     this.newUser = parseInt(LocalStorageService.getLocalValue(LocalStorage.IS_LOGED_IN));
     if (this.newUser === 0) {
@@ -44,6 +44,8 @@ export class ProfileCreatorComponent {
     LocalStorageService.setLocalValue(LocalStorage.FIRST_NAME, result.data.first_name);
     LocalStorageService.setLocalValue(LocalStorage.LAST_NAME, result.data.last_name);
     this.fullName=result.data.first_name + result.data.last_name;
+    this.firstName=result.data.first_name;
+    this.lastName=result.data.last_name;
   }
 
   onUserProfileError(error:any) {
