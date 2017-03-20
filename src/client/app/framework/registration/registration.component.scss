@@ -1,6 +1,7 @@
 @import '../../../css/common';
 
 .registration {
+
   .error-message-registration {
     text-align: left;
 
@@ -18,7 +19,11 @@
   }
 
   .alert {
-    margin: 0 15px;
+    margin: 15px;
+  }
+
+  form {
+    padding: 0;
   }
 }
 
@@ -43,6 +48,10 @@
   .registration {
     .content {
       width: 60%;
+    }
+
+    form {
+      padding: 15px;
     }
   }
 }
@@ -73,10 +82,6 @@
     .form-group {
       padding: 0;
       width: 100%;
-    }
-
-    .alert {
-      margin: 0;
     }
   }
 }

@@ -5,17 +5,6 @@
     padding: 0 0 15px;
   }
 
-  .sub-info {
-    .form-group {
-      padding: 0 15px;
-      width: 50%;
-
-      label {
-        left: 15px;
-      }
-    }
-  }
-
   .main-info {
     .form-group {
       padding: 0 15px;
@@ -46,11 +35,6 @@
       margin: 0 auto;
       width: 150px;
 
-    }
-
-    form {
-      margin: 0;
-      padding: 0;
     }
 
     [type='file'] {
@@ -84,7 +68,7 @@
       float: none;
     }
 
-    .sub-info {
+    .main-info {
       .form-group {
         width: 100%;
       }

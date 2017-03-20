@@ -1,10 +1,12 @@
 <section class="main-form-wrapper verify-user" [ngStyle]="{'background-image': 'url(' + BODY_BACKGROUND + ')'}">
 
+  <main-header></main-header>
+
   <app-loader></app-loader>
 
   <div class="col-lg-3 col-md-4 col-sm-6 col-xs-10 content">
 
-    <h5>Verify your phone</h5>
+    <h5>Verify your phone <span class="glyphicon glyphicon-remove" (click)="navigateTo('/landing')"></span></h5>
 
     <form [formGroup]="userForm" (submit)="onSubmit()">
 

@@ -32,7 +32,7 @@
 
       <div class="form-group" id="inputEmail" [hidden]="chkEmail">
         <control-messages [control]="userForm.controls.email"></control-messages>
-        <input [(ngModel)]="model.email" formControlName="email" id="email" class="form-control" readonly/>
+        <input [(ngModel)]="model.email" formControlName="email" id="email" class="form-control" readonly required/>
         <label>Email</label>
       </div>
 

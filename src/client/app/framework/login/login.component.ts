@@ -89,7 +89,7 @@ export class LoginComponent implements OnInit {
     //this.onSignIn;
     this._facebookService.loadAndInitFBSDK();
     if (parseInt(LocalStorageService.getLocalValue(LocalStorage.IS_LOGED_IN)) === 1) {
-      this._router.navigate(['/createprofile']);
+      this._router.navigate(['/dashboard']);
     }
   }
 
@@ -128,7 +128,7 @@ export class LoginComponent implements OnInit {
 
   successRedirect() {
     LocalStorageService.setLocalValue(LocalStorage.IS_LOGED_IN, 1);
-    this._router.navigate([NavigationRoutes.APP_CREATEPROFILE]);
+    this._router.navigate([NavigationRoutes.APP_DASHBOARD]);
     var socialLogin:string = LocalStorageService.getLocalValue(LocalStorage.IS_SOCIAL_LOGIN);
 
     if(socialLogin === AppSettings.IS_SOCIAL_LOGIN_YES) {

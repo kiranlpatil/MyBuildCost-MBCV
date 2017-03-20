@@ -6,8 +6,12 @@
     padding: 15px 30px;
   }
 
+  .form-group {
+    margin-top: 15px;
+  }
+
   .radio-inline {
-    color: $wrapper-text;
+    color: $text-color;
     width: 40%;
 
     input {
@@ -16,12 +20,16 @@
   }
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 1280px) {
   .main-form-wrapper {
     form {
       padding: 15px;
     }
+  }
+}
 
+@media only screen and (max-width: 768px) {
+  .main-form-wrapper {
     .radio-inline {
       margin-left: 0;
       width: 100%;
