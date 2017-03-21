@@ -92,6 +92,8 @@ export class VALUE_CONSTANT{
   public static MAX_CAPABILITIES :number=10;
   public static MAX_PROFECIENCES :number=10;
   public static MAX_DOMAINS :number=10;
+  public static MAX_YEAR_LIST :number=30;
+
 }
 
 
@@ -101,6 +103,8 @@ export class API {
   public static USER_PROFILE = 'users';
   public static CANDIDATE_PROFILE = 'candidate';
   public static EMPLOYER_PROFILE = 'recruiter';
+  public static PROFESSIONAL_DATA = 'professionaldata';
+  public static EMPLOYMENTHISTORY='employmentdata';
   public static LOGIN = 'login';
   public static FB_LOGIN = 'fbLogin';
   public static CHANGE_PASSWORD = 'changepassword';
@@ -119,6 +123,7 @@ export class API {
   public static RESET_PASSWORD = 'resetpassword';
   public static GOOGLE_LOGIN = 'googlelogin';
   public static INDUSTRY_PROFILE = 'industryprofile';
+  public static REALOCATION = 'realoaction';
 
 }
 

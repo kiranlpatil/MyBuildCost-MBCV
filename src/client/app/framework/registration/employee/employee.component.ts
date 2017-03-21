@@ -33,7 +33,6 @@ export class EmployeeComponent {
   storedstate:string;
   storedcity:string;
   locationDetails : any;
-
   countries:string[]=new Array(0);
   states:string[]=new Array(0);
   cities:string[]=new Array(0);
@@ -90,6 +89,7 @@ export class EmployeeComponent {
 
   }
   selectCountryModel(newval:any) {
+
     for(let item of this.locationDetails){
       if(item.country===newval){
           let tempStates: string[]= new Array(0);
@@ -129,7 +129,7 @@ export class EmployeeComponent {
 
 
 
-  onSubmit() {
+  onSubmit() {debugger
     this.model = this.userForm.value;
     this.model.current_theme = AppSettings.LIGHT_THEM;
     this.model.isCandidate =true;

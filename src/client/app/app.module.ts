@@ -68,6 +68,14 @@ import {ComplexityListComponent} from "./cnext/framework/complexity-list/complex
 import {MainHeaderComponent} from "./framework/main-header/main-header.component";
 import {TestService} from "./cnext/framework/test.service";
 import {ComplexityService} from "./cnext/framework/complexity.service";
+import {ProfessionalDataComponent} from "./cnext/framework/professional-data/professional-data.component";
+import {ProfessionalDataService} from "./cnext/framework/professional-data/professional-data.service";
+import {EmploymentHistoryComponent} from "./cnext/framework/employment-history/employment-history.component";
+import {EmploymentHistoryService} from "./cnext/framework/employment-history/employment-history.service";
+import {AcademicDetailComponent} from "./cnext/framework/academic-details/academic-details.component";
+import {CertificationAccreditationComponent} from "./cnext/framework/certification-accreditation/certification-accreditation.component";
+import {AwardsComponent} from "./cnext/framework/awards/awards.component";
+import {MoreAboutMyselfComponent} from "./cnext/framework/more-about-myself/more-about-myself.component";
 import {ProficiencyService} from "./cnext/framework/proficience.service";
 
 @NgModule({
@@ -116,7 +124,13 @@ import {ProficiencyService} from "./cnext/framework/proficience.service";
     CapabilityListComponent,
     proficiencyDomainComponent,
     ComplexityListComponent,
-    IndustryComponent
+    IndustryComponent,
+    ProfessionalDataComponent,
+    EmploymentHistoryComponent,
+    AcademicDetailComponent,
+    CertificationAccreditationComponent,
+    AwardsComponent,
+    MoreAboutMyselfComponent
   ],
   providers: [
     {
@@ -156,7 +170,9 @@ import {ProficiencyService} from "./cnext/framework/proficience.service";
     ActiveEmailService,
     VerifyUserService,
     VerifyPhoneService,
-    IndustryService
+    IndustryService,
+    ProfessionalDataService,
+    EmploymentHistoryService
 
   ],
   bootstrap: [AppComponent]

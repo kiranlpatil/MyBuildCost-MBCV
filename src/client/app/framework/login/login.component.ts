@@ -93,7 +93,7 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  onSubmit() {
+  onSubmit() {debugger
   //  this.loaderService.start();
 
     this.model = this.userForm.value;
@@ -104,7 +104,7 @@ export class LoginComponent implements OnInit {
         error => (this.loginFail(error)));
   }
 
-  loginSuccess(res:any) {
+  loginSuccess(res:any) {debugger
   // this.loaderService.stop();
     this.userForm.reset();
     if (res.data.current_theme) {

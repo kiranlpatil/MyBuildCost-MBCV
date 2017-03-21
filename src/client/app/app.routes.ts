@@ -23,6 +23,7 @@ import {ProfileCreator} from "./cnext/framework/profile-creator/profile-creator.
 import {proficiencydomainRoutes} from "./cnext/framework/proficiency-domains/proficiency-domain.routes";
 
 
+
 export const routes: Routes = [
   ...IndustryRoutes,
   ...LandingPageRoutes,
@@ -45,6 +46,6 @@ export const routes: Routes = [
   ...SettingsRoutes,
   ...ProfileCreator,
   ...proficiencydomainRoutes,
-   ...StartRoutes,
+   ...StartRoutes
 
 ];

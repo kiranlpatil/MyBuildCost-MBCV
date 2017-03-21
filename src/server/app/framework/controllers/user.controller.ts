@@ -828,6 +828,65 @@ export function getAddress (req:express.Request, res:express.Response) {
     res.status(403).send({message: e.message});
   }
 }
+export function getRealocation(req:express.Request, res:express.Response) {
+ console.log("hii there");
+  __dirname = './';
+  var filepath="realocation.json";
+  try {
+    res.sendFile(filepath,{root: __dirname});
+  }
+  catch (e) {
+    res.status(403).send({message: e.message});
+  }
+}
+export function getEducation(req:express.Request, res:express.Response) {
+  __dirname = './';
+  var filepath="education.json";
+  try {
+    res.sendFile(filepath,{root: __dirname});
+  }
+  catch (e) {
+    res.status(403).send({message: e.message});
+  }
+}
+
+export function getExperience(req:express.Request, res:express.Response) {
+  __dirname = './';
+  var filepath="experienceList.json";
+  try {
+    res.sendFile(filepath,{root: __dirname});
+  }
+  catch (e) {
+    res.status(403).send({message: e.message});
+  }
+}
+export function getCurrentSalary(req:express.Request, res:express.Response) {
+  __dirname = './';
+  var filepath="currentsalaryList.json";
+  try {
+    res.sendFile(filepath,{root: __dirname});
+  }
+  catch (e) {
+    res.status(403).send({message: e.message});
+  }
+}
+
+export function getNoticePeriod(req:express.Request, res:express.Response) {
+  __dirname = './';
+  var filepath="noticeperiodList.json";
+  try {
+    res.sendFile(filepath,{root: __dirname});
+  }
+  catch (e) {
+    res.status(403).send({message: e.message});
+  }
+}
+
+
+
+
+
+
 
 
 export function getCountries (req:express.Request, res:express.Response) {
@@ -1073,11 +1132,38 @@ export  function profilecreate(req:express.Request, res:express.Response)
   catch (e) {
     res.status(403).send({message: e.message});
   }
+}
 
 
+export  function professionaldata(req:express.Request, res:express.Response)
+{
+  try {
 
+    var newUser=req.body;
+   console.log("newUser",JSON.stringify(newUser));
+
+  }
+  catch (e) {
+    res.status(403).send({"status": Messages.STATUS_ERROR, "error_message": e.message});
+  }
 
 }
+
+export  function employmentdata(req:express.Request, res:express.Response)
+{
+  try {
+
+    var newUser=req.body;
+    console.log("newUser",JSON.stringify(newUser));
+
+  }
+  catch (e) {
+    res.status(403).send({"status": Messages.STATUS_ERROR, "error_message": e.message});
+  }
+
+}
+
+
 
 
 export function changeTheme(req: express.Request, res: express.Response, next: any): void {

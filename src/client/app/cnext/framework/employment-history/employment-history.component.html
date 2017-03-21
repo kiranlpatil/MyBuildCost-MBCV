@@ -1,0 +1,67 @@
+<div class="form-group" *ngFor="let item of tempfield;let i= index">
+
+<div>
+
+  <div>
+    <input type="text" [ngModel]="lky" #titleInput (dblclick)="addme(titleInput.value)" >
+  </div>
+
+  <div>
+    <input type="text" name="designation" value="designation">
+  </div>
+
+  <div>
+    <label>
+      worked from
+    </label>
+    <div  id="monthf" ng2-auto-complete
+          [source]="monthList"
+          (ngModelChange)="selectworkfromMonthModel($event)"
+         >
+      <!--<span *ngIf="i>0" class="pull-left">&amp;</span>-->
+      <input class="form-control" [ngModel]="fromMonthModel" [disabled]="disbleRole"  placeholder="MONTH" />
+    </div>
+    <div  id="yearf" ng2-auto-complete
+          [source]="yearList"
+          (ngModelChange)="selectworkfromYearModel($event)"
+    >
+      <!--<span *ngIf="i>0" class="pull-left">&amp;</span>-->
+      <input class="form-control" [ngModel]="fromYearModel" [disabled]="disbleRole"  placeholder="YYYY" />
+    </div>
+
+  </div>
+
+  <div>
+    <label>
+      worked from
+    </label>
+    <div  id="montht" ng2-auto-complete
+          [source]="monthList"
+          (ngModelChange)="selectworktoMonthModel($event)"
+    >
+      <!--<span *ngIf="i>0" class="pull-left">&amp;</span>-->
+      <input class="form-control" [ngModel]="toMonthModel" [disabled]="disbleRole"  placeholder="MONTH" />
+    </div>
+    <div  id="yeart" ng2-auto-complete
+          [source]="yearList"
+          (ngModelChange)="selectworktoYearModel($event)"
+    >
+      <!--<span *ngIf="i>0" class="pull-left">&amp;</span>-->
+      <input class="form-control" [ngModel]="toYearModel" [disabled]="disbleRole"  placeholder="YYYY" />
+    </div>
+  </div>
+  <div>
+    <textarea rows="4" cols="50"  ></textarea>
+
+
+  </div>
+
+</div></div>
+  <div class="clear">
+    <button type="button" id="more_fields" (click)="addAnother()" class="btn btn-create-profile" [disabled]="disbleRole" >
+      Add Another <span>+</span>
+    </button>
+  </div>
+
+
+

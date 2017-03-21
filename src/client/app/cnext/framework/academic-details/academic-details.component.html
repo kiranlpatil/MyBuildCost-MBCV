@@ -1,0 +1,32 @@
+<div class="form-group" *ngFor="let item of tempfield;let i= index">
+
+  <div>
+
+    <div>
+
+      <input type="text" placeholder="School/College Name"  >
+    </div>
+
+    <div>
+      <input type="text" placeholder="Board/university Name">
+    </div>
+
+    <div>
+      <input type="text" placeholder="Year of Passing">
+    </div>
+
+    <div>
+      <textarea rows="4" cols="50"  ></textarea>
+
+
+    </div>
+
+  </div></div>
+<div class="clear">
+  <button type="button" id="more_fields" (click)="addAnother()" class="btn btn-create-profile" [disabled]="disbleRole" >
+    Add Another <span>+</span>
+  </button>
+</div>
+
+
+

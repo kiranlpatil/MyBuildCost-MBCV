@@ -2,71 +2,71 @@
   "complexity":[
     {
       "name":"team management",
-      "scenario":["10-50","50-100","100-500","500-1000","1000+","none"]
+      "scenario":["10-50","50-100","100-500","500-1000","1000+","Not Applicable"]
     },
     {
       "name":"recruitment",
-      "scenario":["1-5","5-10","10-50","50-100","100+","none"]
+      "scenario":["1-5","5-10","10-50","50-100","100+","Not Applicable"]
     },
     {
       "name":"Budgeting (In Lacs)",
-      "scenario":["1-5","5-10","10-50","50-100","100+","none"]
+      "scenario":["1-5","5-10","10-50","50-100","100+","Not Applicable"]
     },
     {
       "name":"programme management",
-      "scenario":["10-50","50-100","100-500","500-1000","1000+","none"]
+      "scenario":["10-50","50-100","100-500","500-1000","1000+","Not Applicable"]
     },
     {
       "name":"Billing & quotes",
-      "scenario":["10-50","50-100","100-500","500-1000","1000+","none"]
+      "scenario":["10-50","50-100","100-500","500-1000","1000+","Not Applicable"]
     },
     {
       "name":"Reporting",
-      "scenario":["10-50","50-100","100-500","500-1000","1000+","none"]
+      "scenario":["10-50","50-100","100-500","500-1000","1000+","Not Applicable"]
     },
     {
       "name":"Time tracking",
-      "scenario":["10-50","50-100","100-500","500-1000","1000+","none"]
+      "scenario":["10-50","50-100","100-500","500-1000","1000+","Not Applicable"]
     },
     {
       "name":"People management",
-      "scenario":["10-50","50-100","100-500","500-1000","1000+","none"]
+      "scenario":["10-50","50-100","100-500","500-1000","1000+","Not Applicable"]
     },
     {
       "name":"Managing communication",
-      "scenario":["10-50","50-100","100-500","500-1000","1000+","none"]
+      "scenario":["10-50","50-100","100-500","500-1000","1000+","Not Applicable"]
     },
     {
       "name":"Risk Management",
-      "scenario":["10-50","50-100","100-500","500-1000","1000+","none"]
+      "scenario":["10-50","50-100","100-500","500-1000","1000+","Not Applicable"]
     },
     {
       "name":"Portfolio management",
-      "scenario":["10-50","50-100","100-500","500-1000","1000+","none"]
+      "scenario":["10-50","50-100","100-500","500-1000","1000+","Not Applicable"]
     },
     {
       "name":"Virtual project management",
-      "scenario":["10-50","50-100","100-500","500-1000","1000+","none"]
+      "scenario":["10-50","50-100","100-500","500-1000","1000+","Not Applicable"]
     },
     {
       "name":"Budgeting",
-      "scenario":["10-50","50-100","100-500","500-1000","1000+","none"]
+      "scenario":["10-50","50-100","100-500","500-1000","1000+","Not Applicable"]
     },
     {
       "name":"Reporting",
-      "scenario":["10-50","50-100","100-500","500-1000","1000+","none"]
+      "scenario":["10-50","50-100","100-500","500-1000","1000+","Not Applicable"]
     },
     {
       "name":"Project planning",
-      "scenario":["10-50","50-100","100-500","500-1000","1000+","none"]
+      "scenario":["10-50","50-100","100-500","500-1000","1000+","Not Applicable"]
     },
     {
       "name":"Estimate",
-      "scenario":["10-50","50-100","100-500","500-1000","1000+","none"]
+      "scenario":["10-50","50-100","100-500","500-1000","1000+","Not Applicable"]
     },
     {
       "name":"Project Migration",
-      "scenario":["10-50","50-100","100-500","500-1000","1000+","none"]
+      "scenario":["10-50","50-100","100-500","500-1000","1000+","Not Applicable"]
     }
 
   ]
