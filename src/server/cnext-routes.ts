@@ -1,6 +1,6 @@
 import * as express from 'express';
 import * as userController from './app/framework/controllers/user.controller';
-//import * as roleController from './app/framework/controllers/role.controller';
+import * as roleController from './app/framework/controllers/role.controller';
 import * as industryController from './app/framework/controllers/industry.controller';
 import * as sharedService from './app/framework/shared/shared.service';
 import * as userInterceptor from './app/framework/interceptor/user.interceptor';

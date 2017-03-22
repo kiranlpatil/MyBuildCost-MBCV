@@ -8,5 +8,6 @@ export class EmployementHistory {
   workedFromYear:string;
   workedToMonth:string;
   workedToYear:string;
+  remarks:string;
 
 }

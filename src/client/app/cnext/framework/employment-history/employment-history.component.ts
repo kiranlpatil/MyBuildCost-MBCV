@@ -18,13 +18,15 @@ import {VALUE_CONSTANT} from "../../../framework/shared/constants";
 
 export class EmploymentHistoryComponent {
   userForm: FormGroup;
+  company:string;
+  design:string;
   toMonthModel:string;
   toYearModel:string;
   fromMonthModel:string;
   fromYearModel:string;
-lky:string;
   error_msg: string;
   tempfield: string[];
+  remark:string;
   private selectedEmploymentHistory = new EmployementHistory();
 
   private year: any;
@@ -47,15 +49,30 @@ lky:string;
     for (let i = 0; i < VALUE_CONSTANT.MAX_YEAR_LIST; i++) {
       this.yearList.push(year--);
     }
-    console.log("list of year", this.yearList);
-    console.log("list of year", this.monthList);
+    // console.log("list of year", this.yearList);
+    // console.log("list of year", this.monthList);
+  }
+  comPanyName(newval:string) {debugger
+    console.log(newval);
+    this.selectedEmploymentHistory.companyname=newval;
+    console.log(this.selectedEmploymentHistory.companyname,"123456789");
+
+
+  }
+  deSignation(newval:string) {
+
+    console.log(newval);
+    this.selectedEmploymentHistory.designation=newval;
+
+  }
+  reMark(newval:string){
+    console.log(newval);
+    this.selectedEmploymentHistory.remarks=newval;
+
+
+
   }
 
-  addme(vky:string){
-
-console.log(vky);
-
-  }
 
   selectworkfromMonthModel(newval: any){
     this.fromMonthModel=newval;
@@ -75,7 +92,7 @@ this.selectedEmploymentHistory.workedToMonth=newval;
 
   selectworktoYearModel(newval: any) {
 this.toYearModel=newval;
-this.selectedEmploymentHistory.workedFromYear=newval;
+this.selectedEmploymentHistory.workedToYear=newval;
   }
 
 

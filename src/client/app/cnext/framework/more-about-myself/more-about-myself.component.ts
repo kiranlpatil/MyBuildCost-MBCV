@@ -19,8 +19,12 @@ export class MoreAboutMyselfComponent {
   error_msg: string;
   tempfield: string[];
   status:string;
-  newstring:string[];
-k:number;
+  newstringOne:string[];
+  newstringTwo:string[];
+  newstringThree:string[];
+  length:number;
+  condition:number;
+  maxword:number;
 
   private year: any;
 
@@ -34,13 +38,23 @@ k:number;
   }
 
 
-  // worcount(event:any){
-  //
-  //   console.log(this.status,event);
-  // this.newstring=  this.status.split(" ");
-  // this.k=this.newstring.length;
-  //
-  // }
+  wordcount(event:any){
+
+    console.log(this.status,event);
+  this.newstringOne= this.status.split(" ");
+    this.newstringTwo= this.status.split(".");
+    this.newstringThree= this.status.split(",");
+
+  this.condition=this.newstringOne.length;
+  this.condition+=this.newstringTwo.length;
+  this.condition+=this.newstringThree.length;
+  console.log(this.condition);
+  if (this.condition-3>=250)
+  {this. maxword=this.status.length;
+    this.length=this. maxword;
+
+  }
+  }
 
 
 

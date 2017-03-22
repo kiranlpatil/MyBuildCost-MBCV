@@ -3,11 +3,11 @@
 <div>
 
   <div>
-    <input type="text" [ngModel]="lky" #titleInput (dblclick)="addme(titleInput.value)" >
+    <input type="text" [ngModel]="company" (ngModelChange)="comPanyName($event)" placeholder="Company Name">
   </div>
 
   <div>
-    <input type="text" name="designation" value="designation">
+    <input type="text" name="designation" [ngModel]="design" (ngModelChange)="deSignation($event)" placeholder="Designation">
   </div>
 
   <div>
@@ -51,7 +51,7 @@
     </div>
   </div>
   <div>
-    <textarea rows="4" cols="50"  ></textarea>
+    <textarea rows="4" cols="50" [ngModel]="remark" (ngModelChange)="reMark($event)"></textarea>
 
 
   </div>
