@@ -124,6 +124,17 @@ $border-color: #e8e8e8;
     overflow: auto;
   }
 
+  .profeiciency-domain {
+
+    .heading > .col-sm-6,
+    .main-content > .col-sm-6 {
+      padding: 15px;
+
+      &:first-child {
+        border-right: 1px solid $border-color;
+      }
+    }
+  }
 
   .profile-name-first, .profile-name-last {
     color: #00aed5;

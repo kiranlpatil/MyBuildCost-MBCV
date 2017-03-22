@@ -1,67 +1,65 @@
-<div class="form-group" *ngFor="let item of tempfield;let i= index">
+<div class="form col-sm-12 no-padding" *ngFor="let item of tempfield;let i= index">
 
-<div>
-
-  <div>
-    <input type="text" [ngModel]="company" (ngModelChange)="comPanyName($event)" placeholder="Company Name">
-  </div>
-
-  <div>
-    <input type="text" name="designation" [ngModel]="design" (ngModelChange)="deSignation($event)" placeholder="Designation">
-  </div>
-
-  <div>
-    <label>
-      worked from
-    </label>
-    <div  id="monthf" ng2-auto-complete
-          [source]="monthList"
-          (ngModelChange)="selectworkfromMonthModel($event)"
-         >
-      <!--<span *ngIf="i>0" class="pull-left">&amp;</span>-->
-      <input class="form-control" [ngModel]="fromMonthModel" [disabled]="disbleRole"  placeholder="MONTH" />
-    </div>
-    <div  id="yearf" ng2-auto-complete
-          [source]="yearList"
-          (ngModelChange)="selectworkfromYearModel($event)"
-    >
-      <!--<span *ngIf="i>0" class="pull-left">&amp;</span>-->
-      <input class="form-control" [ngModel]="fromYearModel" [disabled]="disbleRole"  placeholder="YYYY" />
+  <div class="left-content">
+    <div class="col-sm-6 no-padding">
+      <div class="form-group">
+        <input type="text" class="form-control" [ngModel]="company" (ngModelChange)="comPanyName($event)" required />
+        <label>Company Name</label>
+      </div>
     </div>
 
-  </div>
-
-  <div>
-    <label>
-      worked from
-    </label>
-    <div  id="montht" ng2-auto-complete
-          [source]="monthList"
-          (ngModelChange)="selectworktoMonthModel($event)"
-    >
-      <!--<span *ngIf="i>0" class="pull-left">&amp;</span>-->
-      <input class="form-control" [ngModel]="toMonthModel" [disabled]="disbleRole"  placeholder="MONTH" />
+    <div class="col-sm-6 no-padding">
+      <div class="form-group">
+        <input type="text" class="form-control" name="designation" [ngModel]="design" (ngModelChange)="deSignation($event)" required />
+        <label>Designation</label>
+      </div>
     </div>
-    <div  id="yeart" ng2-auto-complete
-          [source]="yearList"
-          (ngModelChange)="selectworktoYearModel($event)"
-    >
-      <!--<span *ngIf="i>0" class="pull-left">&amp;</span>-->
-      <input class="form-control" [ngModel]="toYearModel" [disabled]="disbleRole"  placeholder="YYYY" />
+
+    <div class="worked-from col-sm-12 no-padding">
+      <label>worked from</label>
+      <div class="col-sm-6 no-padding">
+        <div id="monthf" ng2-auto-complete
+             [source]="monthList"
+             (ngModelChange)="selectworkfromMonthModel($event)">
+          <input class="form-control" [ngModel]="fromMonthModel" [disabled]="disbleRole"  placeholder="MONTH" />
+        </div>
+      </div>
+      <div class="col-sm-6 no-padding">
+        <div id="yearf" ng2-auto-complete
+             [source]="yearList"
+             (ngModelChange)="selectworkfromYearModel($event)">
+
+          <input class="form-control" [ngModel]="fromYearModel" [disabled]="disbleRole"  placeholder="YYYY" />
+        </div>
+      </div>
+    </div>
+
+    <div class="worked-to col-sm-12 no-padding">
+      <label>worked To</label>
+      <div class="col-sm-6 no-padding" id="montht" ng2-auto-complete
+            [source]="monthList"
+            (ngModelChange)="selectworktoMonthModel($event)">
+
+        <input class="form-control" [ngModel]="toMonthModel" [disabled]="disbleRole"  placeholder="MONTH" />
+      </div>
+      <div class="col-sm-6 no-padding" id="yeart" ng2-auto-complete
+            [source]="yearList"
+            (ngModelChange)="selectworktoYearModel($event)">
+
+        <input class="form-control" [ngModel]="toYearModel" [disabled]="disbleRole"  placeholder="YYYY" />
+      </div>
     </div>
   </div>
-  <div>
-    <textarea rows="4" cols="50" [ngModel]="remark" (ngModelChange)="reMark($event)"></textarea>
 
-
+  <div class="right-content">
+      <textarea class="form-control" [ngModel]="remark" (ngModelChange)="reMark($event)" Placeholder="Remark"></textarea>
   </div>
-
-</div></div>
-  <div class="clear">
-    <button type="button" id="more_fields" (click)="addAnother()" class="btn btn-create-profile" [disabled]="disbleRole" >
-      Add Another <span>+</span>
-    </button>
-  </div>
+</div>
+<div class="clear">
+  <button type="button" id="more_fields" (click)="addAnother()" class="btn btn-create-profile" [disabled]="disbleRole" >
+    Add Another <span>+</span>
+  </button>
+</div>
 
 
 

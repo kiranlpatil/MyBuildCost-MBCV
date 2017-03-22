@@ -1,62 +1,52 @@
-<h5>Professional Data</h5>
-
-
-<label >Ready To Realocate:&nbsp;
-  <!--<input type="radio" name="roles" id="industry" (change)="toggleRoll($event)">-->
-  <div class="list" >
-    <div ng2-auto-complete
-         [source]="realocationlist"
-         (ngModelChange)="selectrealocationModel($event)">
-      <input class="form-control" [ngModel]="realocationModel"  placeholder="ready to realocation" />
-    </div>
+<div class="professional-data clearfix">
+  <div class="col-sm-4 no-padding">
+    <label >Ready To Realocate?
+      <div ng2-auto-complete
+           [source]="realocationlist"
+           (ngModelChange)="selectrealocationModel($event)">
+        <input class="form-control" [ngModel]="realocationModel"  placeholder="ready to realocation" />
+      </div>
+    </label>
   </div>
-</label>
 
-
-
-<label >Education:&nbsp;
-  <!--<input type="radio" name="roles" id="industry" (change)="toggleRoll($event)">-->
-  <div class="list" >
-    <div ng2-auto-complete
-         [source]="educationlist"
-         (ngModelChange)="selecteducationModel($event)">
-      <input class="form-control" [ngModel]="educationModel"  placeholder="Select Education" />
-    </div>
+  <div class="col-sm-4 no-padding">
+    <label >Education:&nbsp;
+      <div ng2-auto-complete
+           [source]="educationlist"
+           (ngModelChange)="selecteducationModel($event)">
+        <input class="form-control" [ngModel]="educationModel"  placeholder="Select Education" />
+      </div>
+    </label>
   </div>
-</label>
 
-
-<label >Experience:&nbsp;
-  <!--<input type="radio" name="roles" id="industry" (change)="toggleRoll($event)">-->
-  <div class="list" >
-    <div ng2-auto-complete
-         [source]="experiencelist"
-         (ngModelChange)="selectexperienceModel($event)">
-      <input class="form-control" [ngModel]="experienceModel"  placeholder="Select Education" />
-    </div>
+  <div class="col-sm-4 no-padding">
+    <label >Experience:&nbsp;
+      <div ng2-auto-complete
+           [source]="experiencelist"
+           (ngModelChange)="selectexperienceModel($event)">
+        <input class="form-control" [ngModel]="experienceModel"  placeholder="Select Education" />
+      </div>
+    </label>
   </div>
-</label>
 
-
-<label >Current Salary:&nbsp;
-  <!--<input type="radio" name="roles" id="industry" (change)="toggleRoll($event)">-->
-  <div class="list" >
-    <div ng2-auto-complete
-         [source]="salarylist"
-         (ngModelChange)="selectsalaryModel($event)">
-      <input class="form-control" [ngModel]="salaryModel"  placeholder="Select Education" />
-    </div>
+  <div class="col-sm-4 no-padding">
+    <label >Current Salary:&nbsp;
+      <div ng2-auto-complete
+           [source]="salarylist"
+           (ngModelChange)="selectsalaryModel($event)">
+        <input class="form-control" [ngModel]="salaryModel"  placeholder="Select Education" />
+      </div>
+    </label>
   </div>
-</label>
 
-
-<label >Notice Period:&nbsp;
-  <!--<input type="radio" name="roles" id="industry" (change)="toggleRoll($event)">-->
-  <div class="list" >
-    <div ng2-auto-complete
-         [source]="noticeperiodlist"
-         (ngModelChange)="selectenoticeperiodModel($event)">
-      <input class="form-control" [ngModel]="noticeperiodModel"  placeholder="Select Education" />
-    </div>
+  <div class="col-sm-4 no-padding">
+    <label >Notice Period:&nbsp;
+      <div ng2-auto-complete
+           [source]="noticeperiodlist"
+           (ngModelChange)="selectenoticeperiodModel($event)">
+        <input class="form-control" [ngModel]="noticeperiodModel"  placeholder="Select Education" />
+      </div>
+    </label>
   </div>
-</label>
+
+</div>

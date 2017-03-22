@@ -1,0 +1,48 @@
+.professional-data {
+  width: 83%;
+
+  label {
+    font-weight: 400;
+    margin-bottom: 30px;
+  }
+
+  .form-control {
+    background: url('assets/framework/images/form/drop-down.png') no-repeat;
+    background-position: 95% 50%;
+    border-radius: 0;
+    font-weight: 400;
+    margin-top: 10px;
+    padding: 6px;
+  }
+}
+
+@media only screen and (max-width: 1366px) {
+  .professional-data {
+    width: 90%;
+  }
+}
+
+@media only screen and (max-width: 1280px) {
+  .professional-data {
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 980px) {
+  .professional-data {
+    .col-sm-4 {
+      width: 50%;
+      float: left;
+    }
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .professional-data {
+    .col-sm-4 {
+      width: 100%;
+      float: none;
+    }
+  }
+}
+

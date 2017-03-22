@@ -12,7 +12,7 @@ import {ProfessionalDataService } from "./professional-data.service"
   moduleId: module.id,
   selector: 'cn-professional-data',
   templateUrl: 'professional-data.component.html',
-
+  styleUrls: ['professional-data.component.css']
 })
 
 export class ProfessionalDataComponent extends BaseService {
@@ -114,7 +114,7 @@ export class ProfessionalDataComponent extends BaseService {
     this.selectedProfessionalData.Csalary=this.salaryModel;
   }
 
-  selectenoticeperiodModel(newVal: any) {debugger
+  selectenoticeperiodModel(newVal: any) {
     this.noticeperiodModel = newVal;
     this.selectedProfessionalData.notice=this.noticeperiodModel;
 

@@ -1,26 +1,26 @@
 <div *ngIf="isProficiencyShow">
-<div class="proefficiency-container">
-  <p>Add your <span  *ngIf="proficiencyType">proficiencies/tools/technologies</span><span *ngIf="domainType">domains you work</span></p>
-  <p class="instructions" *ngIf="showAlert">You can select maximum 20 <span  *ngIf="proficiencyType">proficiencies</span><span>domains</span></p>
+  <div class="proefficiency-container">
+    <p>Add your <span  *ngIf="proficiencyType">proficiencies/tools/technologies</span><span *ngIf="domainType">domains you work</span></p>
+    <p class="instructions" *ngIf="showAlert">You can select maximum 20 <span  *ngIf="proficiencyType">proficiencies</span><span>domains</span></p>
 
-  <div class="list">
-    <div class="form-group">
-      <div ng2-auto-complete
-           [source]="proficiencies"
-           (ngModelChange)="selectproficiencyModel($event)">
-        <input  class="form-control" [(ngModel)]="proficiencyModel" id={{type}} placeholder="{{placeHolderName}}" />
+    <div class="list">
+      <div class="form-group">
+        <div ng2-auto-complete
+             [source]="proficiencies"
+             (ngModelChange)="selectproficiencyModel($event)">
+          <input  class="form-control" [(ngModel)]="proficiencyModel" id={{type}} placeholder="{{placeHolderName}}" />
+        </div>
       </div>
-    </div>
 
-    <div class="btn-container">
-      <div *ngFor="let item of storedProficiency; let i = index">
-        <button type="button" class="btn btn-create-profile" (click)="deleteItem($event)">
-          {{item}} <span class="glyphicon glyphicon-remove" ></span>
-        </button>
+      <div class="btn-container">
+        <div *ngFor="let item of storedProficiency; let i = index">
+          <button type="button" class="btn btn-create-profile" (click)="deleteItem($event)">
+            {{item}} <span class="glyphicon glyphicon-remove" ></span>
+          </button>
+        </div>
       </div>
     </div>
   </div>
-</div>
 </div>
 
 

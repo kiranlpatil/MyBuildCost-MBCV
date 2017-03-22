@@ -11,7 +11,8 @@ import {split} from "ts-node/dist";
 @Component({
   moduleId: module.id,
   selector: 'cn-more-about-myself',
-  templateUrl: 'more-about-myself.component.html'
+  templateUrl: 'more-about-myself.component.html',
+  styleUrls: ['more-about-myself.component.css']
 })
 
 export class MoreAboutMyselfComponent {

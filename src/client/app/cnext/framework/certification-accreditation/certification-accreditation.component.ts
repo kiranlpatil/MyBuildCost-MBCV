@@ -10,7 +10,8 @@ import {LoaderService} from "../../../framework/shared/loader/loader.service";
 @Component({
   moduleId: module.id,
   selector: 'cn-certification-accreditation',
-  templateUrl: 'certification-accreditation.component.html'
+  templateUrl: 'certification-accreditation.component.html',
+  styleUrls: ['certification-accreditation.component.css']
 })
 
 export class CertificationAccreditationComponent {

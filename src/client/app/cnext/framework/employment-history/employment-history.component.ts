@@ -13,7 +13,8 @@ import {VALUE_CONSTANT} from "../../../framework/shared/constants";
 @Component({
   moduleId: module.id,
   selector: 'cn-EmploymentHistory',
-  templateUrl: 'employment-history.component.html'
+  templateUrl: 'employment-history.component.html',
+  styleUrls: ['employment-history.component.css']
 })
 
 export class EmploymentHistoryComponent {
@@ -52,7 +53,7 @@ export class EmploymentHistoryComponent {
     // console.log("list of year", this.yearList);
     // console.log("list of year", this.monthList);
   }
-  comPanyName(newval:string) {debugger
+  comPanyName(newval:string) {
     console.log(newval);
     this.selectedEmploymentHistory.companyname=newval;
     console.log(this.selectedEmploymentHistory.companyname,"123456789");

@@ -10,7 +10,8 @@ import {LoaderService} from "../../../framework/shared/loader/loader.service";
 @Component({
   moduleId: module.id,
   selector: 'cn-awards',
-  templateUrl: 'awards.component.html'
+  templateUrl: 'awards.component.html',
+  styleUrls: ['awards.component.css']
 })
 
 export class AwardsComponent {
