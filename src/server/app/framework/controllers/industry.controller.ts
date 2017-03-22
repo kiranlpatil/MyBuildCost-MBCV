@@ -21,33 +21,26 @@ import RoleService = require("../services/role.service");
 
 export function retrieve(req:express.Request, res:express.Response, next:any) {
   try {
-    console.log("In retrive");
     var industryService = new IndustryService();
     var params = {};
     industryService.retrieve(params, (error, result) => {
-      console.log("In retrive of industry");
       if (error) {
         next({
           reason: 'Error In Retriving',//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
           message: Messages.MSG_ERROR_WRONG_TOKEN,
           code: 401
         });
-
       }
       else {
         console.log("Data " + JSON.stringify(result));
         //  var token = auth.issueTokenWithUid(user);
         res.send({
           "status": "success",
-          "data": {
-            "Success": "Amit"//user.first_name,
-          }//,
-          //access_token: token
+          "data": result
         });
 
       }
     });
-
   }
   catch (e) {
     res.status(403).send({message: e.message});

@@ -24,7 +24,7 @@ class RepositoryBase<T extends mongoose.Document> implements IRead<T>, IWrite<T>
     }
 
     retrieveAll (_id: string, callback: (error: any, result: T) => void) {
-       this._model.find(callback);
+       this._model.find({}, {  _id: 0 ,roles :0 }, callback);
     }
 
     delete (_id: string, callback:(error: any, result: any) => void) {

@@ -7,8 +7,8 @@ var AuthInterceptor = require("./app/framework/interceptor/auth.interceptor");
 this.authInterceptor = new AuthInterceptor();
 
 
-export function cnextInit(app: express.Application) {
-  app.get("/api/industry", industryController.retrieve);
+export function cnextInit(app: express.Application) {//todo add interceptor to authenticate
+  app.get("/api/industry",industryController.retrieve);
   app.post("/api/industry",industryController.create);
  // app.get("/api/industry",  userController.getIndustry);
   app.get("/api/function",  userController.getFunction);
