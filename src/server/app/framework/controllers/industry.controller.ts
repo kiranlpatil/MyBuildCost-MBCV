@@ -23,7 +23,7 @@ export function retrieve(req:express.Request, res:express.Response, next:any) {
   try {
     var industryService = new IndustryService();
     var params = {};
-    industryService.retrieve(params, (error, result) => {
+    industryService.retrieveAll(params, (error, result) => {
       if (error) {
         next({
           reason: 'Error In Retriving',//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,

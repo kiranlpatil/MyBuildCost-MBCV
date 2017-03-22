@@ -13,7 +13,7 @@ class RoleService {
   }
 
   retrieve(field:any, callback:(error:any, result:any) => void) {
-    this.roleRepository.retrieveAll(field, callback);
+    this.roleRepository.retrieveAll(field,{}, callback);
   }
 
   create(item:any, callback:(error:any, result:any) => void) {
@@ -27,6 +27,9 @@ class RoleService {
     });
   }
 
+  retrieveByMultiIds(item:any, callback:(error:any, result:any) => void) {
+     this.roleRepository.retrieveByMultiIds(item,{  _id: 0 ,capabilities :0 }, callback);
+  }
 
 }
 

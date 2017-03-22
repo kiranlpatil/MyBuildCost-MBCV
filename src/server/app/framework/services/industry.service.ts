@@ -13,8 +13,16 @@ class IndustryService {
     this.APP_NAME = ProjectAsset.APP_NAME;
   }
 
+  retrieveAll(field:any, callback:(error:any, result:any) => void) {
+    this.industryRepository.retrieveAll(field,{  _id: 0 ,roles :0 }, callback);
+  }
+
   retrieve(field:any, callback:(error:any, result:any) => void) {
-    this.industryRepository.retrieveAll(field, callback);
+    this.industryRepository.retrieve(field,callback);
+  }
+
+  findByName(field:any, callback:(error:any, result:any) => void) {
+    this.industryRepository.findByName(field,callback);
   }
 
   create(item:any, callback:(error:any, result:any) => void) {
@@ -27,7 +35,6 @@ class IndustryService {
       }
     });
   }
-
 
 }
 

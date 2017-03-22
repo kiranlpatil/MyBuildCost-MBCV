@@ -23,8 +23,12 @@ class RepositoryBase<T extends mongoose.Document> implements IRead<T>, IWrite<T>
 
     }
 
-    retrieveAll (_id: string, callback: (error: any, result: T) => void) {
-       this._model.find({}, {  _id: 0 ,roles :0 }, callback);
+    retrieveAll (_id: string,excluded:any, callback: (error: any, result: T) => void) {
+       this._model.find({}, excluded, callback);
+    }
+
+    retrieveByMultiIds (ids: string[],excluded:any, callback: (error: any, result: T) => void) {
+      this._model.find({_id: {$in: ids}}, excluded, callback);
     }
 
     delete (_id: string, callback:(error: any, result: any) => void) {
@@ -33,6 +37,10 @@ class RepositoryBase<T extends mongoose.Document> implements IRead<T>, IWrite<T>
 
     findById (_id: string, callback: (error: any, result: T) => void) {
         this._model.findById( _id, callback);
+    }
+
+    findByName (name: string, callback: (error: any, result: T) => void) {
+      this._model.find( {"name":name}, callback);
     }
 
     toObjectId (_id: string) : mongoose.Types.ObjectId {
