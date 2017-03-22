@@ -10,7 +10,7 @@ $btn-instruction: #ccc;
   }
 
   .radio > .radio-inline {
-    padding-right: 10px;
+    padding: 0 10px 0 0;
 
     [type='radio'] {
       float: left;
@@ -43,11 +43,19 @@ $btn-instruction: #ccc;
       float: left;
       margin-right: 0;
     }
+
+    .form-control {
+      width: 160px;
+    }
   }
 
   .add-role {
-    float: left;
-    padding: 7px 5px 5px;
+    width: 180px;
+
+    span {
+      float: left;
+      padding: 7px 5px 5px;
+    }
   }
 
   .btn-create-profile {
@@ -127,10 +135,6 @@ $btn-instruction: #ccc;
       .form-group {
         float: none;
         margin-left: 0;
-      }
-
-      .form-control:first-child {
-        margin-left: 10px;
       }
 
       span {

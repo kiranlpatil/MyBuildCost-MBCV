@@ -1,8 +1,8 @@
 $text-color: #666;
 $white: #fff;
 $option-border-color: #f8f8f8;
-$option-theme-color: #00aed5;
-$option-theme-color2: #FFFF00;
+$primary-option: #1c75bd;
+$secondary-option: #00aed5;
 
 p {
   margin: 0;
@@ -38,22 +38,15 @@ p {
     display: none;
 
     & + span {
-      border: 1px solid $option-theme-color;
       border-radius: 25px;
       color: $text-color;
       cursor: pointer;
       font-weight: 100;
       padding: 6px 10px;
-
-      &:hover {
-        border: 1px solid $option-theme-color;
-      }
     }
 
     &:checked {
       & + span {
-        background-color: $option-theme-color;
-        border: 1px solid $option-theme-color;
         color: $white;
       }
     }
@@ -62,14 +55,11 @@ p {
   &:hover {
     & > input {
       & + span {
-        border: 1px solid $option-theme-color;
         cursor: pointer;
       }
 
       &:checked {
         & + span {
-          background-color: $option-theme-color;
-          border: 1px solid $option-theme-color;
           color: $white;
         }
       }
@@ -77,12 +67,83 @@ p {
   }
 }
 
+.primary > label {
+  & > input {
+
+    & + span {
+      border: 1px solid $primary-option;
+
+      &:hover {
+        border: 1px solid $primary-option;
+      }
+    }
+
+    &:checked {
+      & + span {
+        background-color: $primary-option;
+        border: 1px solid $primary-option;
+      }
+    }
+  }
+
+  &:hover {
+    & > input {
+      & + span {
+        border: 1px solid $primary-option;
+      }
+
+      &:checked {
+        & + span {
+          background-color: $primary-option;
+          border: 1px solid $primary-option;
+        }
+      }
+    }
+  }
+}
+
+.secondary > label {
+  & > input {
+    display: none;
+
+    & + span {
+      border: 1px solid $secondary-option;
+
+      &:hover {
+        border: 1px solid $secondary-option;
+      }
+    }
+
+    &:checked {
+      & + span {
+        background-color: $secondary-option;
+        border: 1px solid $secondary-option;
+      }
+    }
+  }
+
+  &:hover {
+    & > input {
+      & + span {
+        border: 1px solid $secondary-option;
+      }
+
+      &:checked {
+        & + span {
+          background-color: $secondary-option;
+          border: 1px solid $secondary-option;
+        }
+      }
+    }
+  }
+}
+
 @media screen and (max-width: 1099px) {
-  .select-option > label {
+  .primary > label {
     & > input {
       & + span {
         &:hover {
-          border: 1px solid $option-theme-color;
+          border: 1px solid $primary-option;
         }
       }
     }
@@ -90,11 +151,31 @@ p {
     &:hover {
       & > input {
         & + span {
-          border: 1px solid $option-theme-color;
+          border: 1px solid $primary-option;
         }
       }
     }
   }
+
+  .secondary > label {
+    & > input {
+      & + span {
+        &:hover {
+          border: 1px solid $secondary-option;
+        }
+      }
+    }
+
+    &:hover {
+      & > input {
+        & + span {
+          border: 1px solid $secondary-option;
+        }
+      }
+    }
+  }
+
+
 }
 
 @media screen and (max-width: 980px) {
