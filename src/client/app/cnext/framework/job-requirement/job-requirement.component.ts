@@ -66,14 +66,6 @@ export class JobRequirementComponent {
           () => console.log()
         );
     }
-
-    /*this.newUser = parseInt(LocalStorageService.getLocalValue(LocalStorage.IS_LOGED_IN));
-    if (this.newUser === 0) {
-      this._router.navigate([NavigationRoutes.APP_START]);
-    } else {
-      this.getUserProfile();
-    }*/
-
   }
 
 

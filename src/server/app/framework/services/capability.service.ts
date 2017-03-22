@@ -27,6 +27,9 @@ class CapabilityService {
     });
   }
 
+  retrieveByMultiIds(item:any, callback:(error:any, result:any) => void) {
+    this.capabilityRepository.retrieveByMultiIds(item,{  _id: 0,'complexities':0  }, callback);
+  }
 
 }
 

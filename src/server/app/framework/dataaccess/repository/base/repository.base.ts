@@ -31,6 +31,12 @@ class RepositoryBase<T extends mongoose.Document> implements IRead<T>, IWrite<T>
       this._model.find({_id: {$in: ids}}, excluded, callback);
     }
 
+    retrieveByMultiIdsAndNames (field: string[],names: string[],excluded:any, callback: (error: any, result: T) => void) {
+      //this._model.find({$and: [ { _id: {$in: ids}}, {name: {$in: JSON.parse(names)} }], excluded, callback);
+      //this._model.find({ name: {$in: ["Project/ Program/ Contracts/ Client Management","Programming"]} }, excluded, callback);
+      this._model.find({ $and: [ { _id: {$in: field}}, {name: {$in: JSON.parse(names)}} ] }, excluded, callback);
+    }
+
     delete (_id: string, callback:(error: any, result: any) => void) {
         this._model.remove({_id: this.toObjectId(_id)}, (err) => callback(err, null));
     }

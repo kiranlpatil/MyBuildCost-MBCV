@@ -31,6 +31,10 @@ class RoleService {
      this.roleRepository.retrieveByMultiIds(item,{  _id: 0 ,capabilities :0 }, callback);
   }
 
+  retrieveByMultiIdsWithCapability(item:any,names:any, callback:(error:any, result:any) => void) {
+    this.roleRepository.retrieveByMultiIdsAndNames(item,names,{  _id: 0  }, callback);
+  }
+
 }
 
 Object.seal(RoleService);

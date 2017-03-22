@@ -1,0 +1,30 @@
+
+  <div ng2-auto-complete
+       [source]="countries"
+       (ngModelChange)="selectCountryModel($event)">
+    <input  [ngModel]="countryModel"   />
+    <label >Select Country</label>
+  </div>
+
+
+
+  <div ng2-auto-complete
+       [source]="states"
+       (ngModelChange)="selectStateModel($event)">
+    <input [ngModel]="stateModel" />
+    <label class="select-label">Select State</label>
+  </div>
+
+
+
+  <div ng2-auto-complete
+       [source]="cities"
+       (ngModelChange)="selectCityModel($event)">
+    <input  [ngModel]="cityModel"  />
+    <label class="select-label">Select City</label>
+  </div>
+
+
+  <input type="number"  id="pin"  />
+  <label>PIN</label>
+
