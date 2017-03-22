@@ -80,6 +80,7 @@ import {ProficiencyService} from "./cnext/framework/proficience.service";
 import {JobPosterComponent} from "./cnext/framework/job-poster/job-poster.component";
 import {JobInformationComponent} from "./cnext/framework/job-information/job-information.component";
 import {JobRequirementComponent} from "./cnext/framework/job-requirement/job-requirement.component";
+import {JobLocationComponent} from "./cnext/framework/job-location/job-location.component";
 
 @NgModule({
   imports: [
@@ -130,8 +131,8 @@ import {JobRequirementComponent} from "./cnext/framework/job-requirement/job-req
     IndustryComponent,
     JobPosterComponent,
     JobInformationComponent,
-    JobRequirementComponent
-    IndustryComponent,
+    JobRequirementComponent,
+    JobLocationComponent,
     ProfessionalDataComponent,
     EmploymentHistoryComponent,
     AcademicDetailComponent,
