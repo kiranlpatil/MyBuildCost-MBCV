@@ -10,6 +10,7 @@ import {MyIndustryService} from "../industry-service";
 import {MyRoleService} from "../role-service";
 import {Message} from "../../../framework/shared/message";
 import {MessageService} from "../../../framework/shared/message.service";
+import {IndustryList} from "../model/industryList";
 @Component({
   moduleId: module.id,
   selector: 'cn-industry',
@@ -24,6 +25,8 @@ export class IndustryComponent {
   industries=new Array();
   storedRoles=new Array();
   industryModel = "";
+  industryData:any;
+  rolesData:any;
   roleModel = "";
   isIndustrySelected : boolean= false;
   isRoleSelected : boolean= false;
@@ -33,6 +36,7 @@ export class IndustryComponent {
   key:number;
   showModalStyle: boolean = false;
   disbleRole: boolean = false;
+  private industryRoles=new IndustryList();
 
 
   constructor(private industryService: IndustryService, private myindustryService : MyIndustryService,
@@ -50,6 +54,7 @@ export class IndustryComponent {
   }
 
   onIndustryListSuccess(data:any){
+    this.industryData=data;
     for(let industry of data){
       this.industries.push(industry.name);
     }
@@ -64,17 +69,35 @@ export class IndustryComponent {
   selectIndustryModel(newVal: any) {
     this.storedIndustry=newVal;
     this.industryModel = newVal;
-
+    this.searchIndustryId(newVal);
     this.temproles= new Array(1);
     this.industryService.getRoles(newVal)
       .subscribe(
         rolelist => this.onRoleListSuccess(rolelist.data),
         error => this.onError(error));
-    
+
     this.myindustryService.change(this.storedIndustry);
   }
 
+  searchIndustryId(industryName:any){
+    for(let industry of this.industryData){
+      if(industry.name===industryName){
+        this.industryRoles.industry=industry._id;
+        console.log(this.industryRoles.industry);
+      }
+    }
+  }
+
+  searchRolesId(roleName:any){debugger
+    for(let role of this.rolesData){
+      if(role.name===roleName){
+        this.industryRoles.roles.push(role._id);
+        console.log(this.industryRoles.roles);
+      }
+    }
+  }
   onRoleListSuccess(data:any){
+    this.rolesData=data;
     for(let role of data){
       this.roles.push(role.name);
     }
@@ -82,6 +105,7 @@ export class IndustryComponent {
   selectRolesModel(newVal: any) {
     this.storedRoles.push(newVal);
     this.deleteSelectedRole(newVal);
+    this.searchRolesId(newVal);
     this.isRoleSelected=true;
     if(this.isRoleSelected===true)
       this.roleModel="";
@@ -111,12 +135,12 @@ export class IndustryComponent {
   }
 
   createAndSave() {
-    this.industryService.addIndustryProfile(this.model).subscribe(
+    this.industryService.addIndustryProfile(this.industryRoles).subscribe(
       user => {
-
+console.log(user);
       },
       error => {
-
+console.log(error);
       });
   };
 
@@ -130,6 +154,7 @@ export class IndustryComponent {
     this.testService.change(true);
     this.showModalStyle = !this.showModalStyle;
     this.disbleRole=true;
+    this.createAndSave();
     this.roleService.change(this.storedRoles);
   }
 
