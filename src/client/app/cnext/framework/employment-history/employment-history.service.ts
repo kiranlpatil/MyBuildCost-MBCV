@@ -11,7 +11,7 @@ export class EmploymentHistoryService extends BaseService {
     super();
   }
 
-  addEmploymentHistroy(employmenthistory:EmployementHistory ):Observable<EmployementHistory > {
+  addEmploymentHistroy(employmenthistory:EmployementHistory[] ):Observable<EmployementHistory > {
     let headers = new Headers({ 'Content-Type': 'application/json'});
     let options = new RequestOptions({ headers: headers });
     let body = JSON.stringify(employmenthistory);

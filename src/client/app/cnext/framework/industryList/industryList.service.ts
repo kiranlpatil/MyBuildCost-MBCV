@@ -4,6 +4,7 @@ import {industryProfile} from './industry';
 import { Observable } from 'rxjs/Observable';
 import {BaseService} from "../../../framework/shared/httpservices/base.service";
 import {API} from "../../../framework/shared/constants";
+import {Industry} from "../model/industry";
 
 
 
@@ -15,11 +16,6 @@ export class IndustryService extends BaseService {
     super()
   }
 
-  //  public getIndustries(roleName : string) {
-  //    return this.http.get(roleName)
-  //      .map(this.extractData)
-  //      .catch(this.handleError);
-  // }
 
   addIndustryProfile(industryprofile:industryProfile):Observable<industryProfile>{
 
@@ -30,4 +26,20 @@ export class IndustryService extends BaseService {
       .map(this.extractData)
       .catch(this.handleError);
   }
+
+  getIndustries():Observable<Industry> {
+    var url = API.INDUSTRY_LIST;
+    return this.http.get(url)
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
+
+
+  getRoles(industry:string):Observable<any> {
+    var url = 'industry/'+industry+'/role';
+    return this.http.get(url)
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
+
 }

@@ -5,6 +5,10 @@ import {LocalStorage, NavigationRoutes} from "../../../framework/shared/constant
 import {Router} from "@angular/router";
 import {DashboardService} from "../../../framework/dashboard/dashboard.service";
 import {Http} from "@angular/http";
+import {FormGroup} from "@angular/forms";
+import {MessageService} from "../../../framework/shared/message.service";
+import {IndustryService} from "../industryList/industryList.service";
+import {Message} from "../../../framework/shared/message";
 
 
 @Component({
@@ -19,10 +23,12 @@ export class JobRequirementComponent {
   private firstName: string;
   private lastName: string;
   private   newUser:number;
-  private  industries: string[];
+
 
   storedIndustry:string;
   userForm: FormGroup;
+  industries=new Array();
+  roles =new Array();
   storedRoles=new Array();
   industryModel = "";
   roleModel = "";
@@ -30,7 +36,6 @@ export class JobRequirementComponent {
   isRoleSelected : boolean= false;
   temproles : string[];
   maxRoles : number =3;
-  roles : string[];
   key:number;
   showModalStyle: boolean = false;
   disbleRole: boolean = false;
@@ -49,67 +54,123 @@ export class JobRequirementComponent {
 
 
 
-  constructor(private _router:Router,private http: Http, private dashboardService:DashboardService) {
+  constructor(private industryService: IndustryService,private _router:Router,private http: Http,private messageService:MessageService, private dashboardService:DashboardService) {
   }
 
 
   ngOnInit(){
+    this.industryService.getIndustries()
+      .subscribe(
+        industrylist => this.onIndustryListSuccess(industrylist.data),
+        error => this.onError(error));
+    }
+    /*
 
-    if (this.industries === undefined) {
-      this.http.get("industry")
+      this.http.get("education")
         .map((res: Response) => res.json())
         .subscribe(
           data => {
-            this.industries = data.industry;
+            this.educationlist = data.educated;
           },
           err => console.error(err),
           () => console.log()
         );
+
+
+      this.http.get("experience")
+        .map((res: Response) => res.json())
+        .subscribe(
+          data => {
+            this.experiencelist= data.experiencelist;
+          },
+          err => console.error(err),
+          () => console.log()
+        );
+
+      this.http.get("currentsalary")
+        .map((res: Response) => res.json())
+        .subscribe(
+          data => {
+            this.salarylist = data.salary;
+          },
+          err => console.error(err),
+          () => console.log()
+        );
+
+      this.http.get("noticeperiod")
+        .map((res: Response) => res.json())
+        .subscribe(
+          data => {
+            this.noticeperiodlist = data.noticeperiod;
+          },
+          err => console.error(err),
+          () => console.log()
+        );
+    */
+
+    /*this.newUser = parseInt(LocalStorageService.getLocalValue(LocalStorage.IS_LOGED_IN));
+    if (this.newUser === 0) {
+      this._router.navigate([NavigationRoutes.APP_START]);
+    } else {
+      this.getUserProfile();
+    }*/
+  onIndustryListSuccess(data:any){debugger
+    for(let industry of data){
+      this.industries.push(industry.name);
     }
   }
+  onError(error:any){debugger
+    var message = new Message();
+    message.error_msg = error.err_msg;
+    message.isError = true;
+    this.messageService.message(message);
+  }
+
+
 
 
   selectIndustryModel(newVal: any) {
     this.storedIndustry=newVal;
     this.industryModel = newVal;
-    this.http.get("role")
-      .map((res: Response) => res.json())
+    this.industryService.getRoles(newVal)
       .subscribe(
-        data => {
-          this.roles = data.roles;
-        },
-        err => console.error(err),
-        () => console.log()
-      );
+        rolelist => this.onRoleListSuccess(rolelist.data),
+        error => this.onError(error));
+
   }
 
+  onRoleListSuccess(data:any){
+    for(let role of data){
+      this.roles.push(role.name);
+    }
+  }
   selectRolesModel(newVal: any) {
     this.storedRoles.push(newVal);
 
-    this.http.get("education")
-      .map((res: Response) => res.json())
-      .subscribe(
-        data => {
-          this.educationlist = data.educated;
-        },
-        err => console.error(err),
-        () => console.log()
-      );
+    // this.http.get("education")
+    //   .map((res: Response) => res.json())
+    //   .subscribe(
+    //     data => {
+    //       this.educationlist = data.educated;
+    //     },
+    //     err => console.error(err),
+    //     () => console.log()
+    //   );
   }
 
   selecteducationModel(newVal: any) {
     /*this.educationModel = newVal;
     this.selectedProfessionalData. educationlevel=this.educationModel;*/
 
-    this.http.get("experience")
-      .map((res: Response) => res.json())
-      .subscribe(
-        data => {
-          this.experiencelist= data.experiencelist;
-        },
-        err => console.error(err),
-        () => console.log()
-      );
+    // this.http.get("experience")
+    //   .map((res: Response) => res.json())
+    //   .subscribe(
+    //     data => {
+    //       this.experiencelist= data.experiencelist;
+    //     },
+    //     err => console.error(err),
+    //     () => console.log()
+    //   );
 
   }
 
@@ -117,15 +178,15 @@ export class JobRequirementComponent {
     /*this.experienceModel = newVal;
     this.selectedProfessionalData.experiencelevel=this.experienceModel;*/
 
-    this.http.get("currentsalary")
-      .map((res: Response) => res.json())
-      .subscribe(
-        data => {
-          this.salarylist = data.salary;
-        },
-        err => console.error(err),
-        () => console.log()
-      );
+    // this.http.get("currentsalary")
+    //   .map((res: Response) => res.json())
+    //   .subscribe(
+    //     data => {
+    //       this.salarylist = data.salary;
+    //     },
+    //     err => console.error(err),
+    //     () => console.log()
+    //   );
 
   }
 
@@ -134,15 +195,15 @@ export class JobRequirementComponent {
 
     this.selectedProfessionalData.Csalary=this.salaryModel;*/
 
-    this.http.get("noticeperiod")
-      .map((res: Response) => res.json())
-      .subscribe(
-        data => {
-          this.noticeperiodlist = data.noticeperiod;
-        },
-        err => console.error(err),
-        () => console.log()
-      );
+    // this.http.get("noticeperiod")
+    //   .map((res: Response) => res.json())
+    //   .subscribe(
+    //     data => {
+    //       this.noticeperiodlist = data.noticeperiod;
+    //     },
+    //     err => console.error(err),
+    //     () => console.log()
+    //   );
   }
 
   selectenoticeperiodModel(newVal: any) {

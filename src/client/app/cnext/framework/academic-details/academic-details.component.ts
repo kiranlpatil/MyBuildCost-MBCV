@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {Http,Response} from "@angular/http";
 import {LoaderService} from "../../../framework/shared/loader/loader.service";
+import {academicdetails} from "./academic-details";
 
 @Component({
   moduleId: module.id,
@@ -18,6 +19,10 @@ export class AcademicDetailComponent {
 
   error_msg: string;
   tempfield: string[];
+  schoolName:string;
+  universityName:string;
+  passingyear:string;
+  specialization:string;
 
   private year: any;
 
@@ -29,9 +34,22 @@ export class AcademicDetailComponent {
 
 
   }
+  SChoolName(event:string){
+    console.log(event);
 
+  }
 
+  UniversityName(event:string){
+    console.log(event);
 
+  };
+  PassingYear(event:string){
+    console.log(event);
+  };
+
+  Specializationfunc(event:string){
+    console.log(event);
+  };
 
 
 

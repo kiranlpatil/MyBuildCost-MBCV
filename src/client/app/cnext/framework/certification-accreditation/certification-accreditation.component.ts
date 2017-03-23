@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {Http,Response} from "@angular/http";
 import {LoaderService} from "../../../framework/shared/loader/loader.service";
+import {certifications} from "../model/certification-accreditation";
 
 @Component({
   moduleId: module.id,
@@ -19,8 +20,10 @@ export class CertificationAccreditationComponent {
 
   error_msg: string;
   tempfield: string[];
+  certificate:string;
+  selectedcertificate=new certifications();
+  selectedcertificates:certifications[]=new Array();
 
-  private year: any;
 
 
   constructor(private _router: Router, private http: Http,
@@ -30,15 +33,25 @@ export class CertificationAccreditationComponent {
 
 
   }
+  deletecomponent(event:any){
 
 
+
+  }
+
+  certifications(event:any){
+    console.log(event);
+    this.selectedcertificate.certificationdetails=event;
+
+  }
 
 
 
 
 
   addAnother() {
-
+this.selectedcertificates.push(  this.selectedcertificate);
+    console.log(this.selectedcertificates);
     this.tempfield.push("null");
 
   }

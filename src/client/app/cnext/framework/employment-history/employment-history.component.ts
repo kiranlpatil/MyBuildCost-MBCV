@@ -29,7 +29,7 @@ export class EmploymentHistoryComponent {
   tempfield: string[];
   remark:string;
   private selectedEmploymentHistory = new EmployementHistory();
-
+  private selectedEmploysHistory :EmployementHistory[]=new Array();
   private year: any;
   private currentDate: any;
   private yearList = new Array();
@@ -68,6 +68,7 @@ export class EmploymentHistoryComponent {
   }
   reMark(newval:string){
     console.log(newval);
+
     this.selectedEmploymentHistory.remarks=newval;
 
 
@@ -94,11 +95,15 @@ this.selectedEmploymentHistory.workedToMonth=newval;
   selectworktoYearModel(newval: any) {
 this.toYearModel=newval;
 this.selectedEmploymentHistory.workedToYear=newval;
+
   }
 
 
-  addAnother() {
 
+  addAnother() {
+    /*adding objects to array */
+    this.selectedEmploysHistory.push(this.selectedEmploymentHistory);
+    console.log(this.selectedEmploysHistory);
     this.tempfield.push("null");
 
   }

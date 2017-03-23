@@ -4,19 +4,19 @@
 
     <div>
 
-      <input type="text" placeholder="School/College Name"  >
+      <input type="text" [ngModel]="schoolName" (ngModelChange)="SChoolName($event)" placeholder="School/College Name"  >
     </div>
 
     <div>
-      <input type="text" placeholder="Board/university Name">
+      <input type="text" [ngModel]="universityName" (ngModelChange)="UniversityName($event)" placeholder="Board/university Name">
     </div>
 
     <div>
-      <input type="text" placeholder="Year of Passing">
+      <input type="text" [ngModel]="passingyear" (ngModelChange)="PassingYear($event)" placeholder="Year of Passing">
     </div>
 
     <div>
-      <textarea rows="4" cols="50"  ></textarea>
+      <textarea rows="4" cols="50" [ngModel]="specialization" (ngModelChange)="Specializationfunc($event)" placeholder="specialization/Remarks"></textarea>
 
 
     </div>
