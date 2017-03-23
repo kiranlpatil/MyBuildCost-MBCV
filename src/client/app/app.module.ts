@@ -82,6 +82,7 @@ import {JobInformationComponent} from "./cnext/framework/job-information/job-inf
 import {JobRequirementComponent} from "./cnext/framework/job-requirement/job-requirement.component";
 import {JobLocationComponent} from "./cnext/framework/job-location/job-location.component";
 import {DescriptionFieldComponent} from "./cnext/framework/description-field/description-field.component";
+import {proficiencyDomainService} from "./cnext/framework/proficiency-domains/proficiency-domain.service";
 import {MyRoleService} from "./cnext/framework/role-service";
 import {MyIndustryService} from "./cnext/framework/industry-service";
 import {CapabilityListService} from "./cnext/framework/capability-list/capability-list.service";
@@ -197,6 +198,9 @@ import {RecruiterDashboardComponent} from "./cnext/framework/recruiter-dashboard
     MyRoleService,
     MyIndustryService,
     ProfessionalDataService,
+    EmploymentHistoryService,
+    proficiencyDomainService
+
     CompanyDetailsService,
     EmploymentHistoryService
 

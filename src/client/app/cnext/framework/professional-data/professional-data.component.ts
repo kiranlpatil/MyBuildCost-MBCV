@@ -8,6 +8,8 @@ import {Observable} from "rxjs";
 import {BaseService} from "../../../framework/shared/httpservices/base.service";
 import {ProfessionalData} from "../model/professional-data";
 import {ProfessionalDataService } from "./professional-data.service"
+import {Message} from "../../../framework/shared/message";
+import {MessageService} from "../../../framework/shared/message.service";
 @Component({
   moduleId: module.id,
   selector: 'cn-professional-data',
@@ -18,11 +20,11 @@ import {ProfessionalDataService } from "./professional-data.service"
 export class ProfessionalDataComponent extends BaseService {
   userForm: FormGroup;
   private selectedProfessionalData=new ProfessionalData();
-  private  realocationlist: string[];
-  private educationlist: string[];
-  private experiencelist:string[];
-  private salarylist:string[];
-  private  noticeperiodlist:string[];
+  private  realocationlist=new Array();
+  private educationlist=new Array();
+  private experiencelist=new Array();
+  private salarylist=new Array();
+  private  noticeperiodlist=new Array();
   private realocationModel:string;
   private  educationModel:string;
   private experienceModel:string;
@@ -31,64 +33,80 @@ export class ProfessionalDataComponent extends BaseService {
 
 
 
-  constructor(private http: Http, private testService: TestService,private professionaldataservice:ProfessionalDataService) {
+  constructor(private http: Http, private testService: TestService,private professionaldataservice:ProfessionalDataService, private messageService:MessageService) {
     super();
   }
 
   ngOnInit() {
 
-    if (this.realocationlist === undefined) {
-      this.http.get("realocation")
-        .map((res: Response) => res.json())
+      this.professionaldataservice.getRealocationList()
         .subscribe(
-          data => {
-            this.realocationlist = data.realocate;
-          },
-          err => console.error(err),
-          () => console.log()
-        );
+          data=> { this.onRealocationListSuccess(data)},
+          error =>{ this.onError(error);});
 
-    }
-    this.http.get("education")
-      .map((res: Response) => res.json())
+    this.professionaldataservice.getEducationList()
       .subscribe(
-        data => {
-          this.educationlist = data.educated;
-        },
-        err => console.error(err),
-        () => console.log()
-      );
+        data=> { this.onEducationListSuccess(data);},
+        error =>{ this.onError(error);});
 
-    this.http.get("experience")
-      .map((res: Response) => res.json())
-      .subscribe(
-        data => {
-          this.experiencelist= data.experiencelist;
-        },
-        err => console.error(err),
-        () => console.log()
-      );
 
-    this.http.get("currentsalary")
-      .map((res: Response) => res.json())
+    this.professionaldataservice.getExperienceList()
       .subscribe(
-        data => {
-          this.salarylist = data.salary;
-        },
-        err => console.error(err),
-        () => console.log()
-      );
-    this.http.get("noticeperiod")
-      .map((res: Response) => res.json())
+        data=> { this.onExperienceListSuccess(data);},
+        error =>{ this.onError(error);});
+
+    this.professionaldataservice.getCurrentSalaryList()
       .subscribe(
-        data => {
-          this.noticeperiodlist = data.noticeperiod;
-        },
-        err => console.error(err),
-        () => console.log()
-      );
+        data=> { this.onCurrentSalaryListSuccess(data);},
+        error =>{ this.onError(error);});
+
+
+    this.professionaldataservice.getNoticePeriodList()
+      .subscribe(
+        data=> { this.onGetNoticePeriodListSuccess(data);},
+        error =>{ this.onError(error);});
+
 
   }
+  onGetNoticePeriodListSuccess(data:any){
+    for(let k of data.noticeperiod){debugger
+      this.noticeperiodlist.push(k);
+    }
+
+  }
+
+  onCurrentSalaryListSuccess(data:any){
+    for(let k of data.salary ){debugger
+      this.salarylist.push(k);
+    }
+
+  }
+
+  onExperienceListSuccess(data:any){
+    for(let k of data.experience){debugger
+      this.experiencelist.push(k);
+    }
+
+  }
+
+  onEducationListSuccess(data:any){
+    for(let k of data.educated){debugger
+      this.educationlist.push(k);
+    }
+
+  }
+  onRealocationListSuccess(data:any){debugger
+    for(let k of data.realocate ){debugger
+      this.realocationlist.push(k);
+    }
+  }
+  onError(error:any){debugger
+    var message = new Message();
+    message.error_msg = error.err_msg;
+    message.isError = true;
+    this.messageService.message(message);
+  }
+
 
   selectrealocationModel(newVal: any) {
     this.realocationModel = newVal;

@@ -14,19 +14,20 @@ export class proficiencyDomainService extends BaseService {
     super()
   }
 
-  // public getproficiency() {
-  //   return this.http.get()
-  //     .map(this.extractData)
-  //     .catch(this.handleError);
-  // }
+  getProficiency():Observable<any> {
+    var url = API.PROFICIENCYLIST;
+    return this.http.get(url)
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
+  getDomain():Observable<any> {
+    var url = API.DOMAINLIST;
+    return this.http.get(url)
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
 
-  // addIndustryProfile(industryprofile:industryProfile):Observable<industryProfile>{
-  //
-  //   let headers = new Headers({ 'Content-Type': 'application/json'});
-  //   let options = new RequestOptions({ headers: headers });
-  //   let body = JSON.stringify(industryprofile);
-  //   return this.http.post(API.INDUSTRY_PROFILE, body,options)
-  //     .map(this.extractData)
-  //     .catch(this.handleError);
-  // }
+
+
+
 }

@@ -2,6 +2,10 @@ import {Component, OnInit, Input} from '@angular/core';
 import {Http,Response} from "@angular/http";
 import {VALUE_CONSTANT} from "../../../framework/shared/constants";
 import {ProficiencyService} from "../proficience.service";
+import {MessageService} from "../../../framework/shared/message.service";
+import {Message} from "../../../framework/shared/message";
+import {proficiencyDomainService} from "./proficiency-domain.service";
+
 @Component({
   moduleId: module.id,
   selector: 'cn-proficiencydoamin',
@@ -11,7 +15,7 @@ import {ProficiencyService} from "../proficience.service";
 
 export class proficiencyDomainComponent implements OnInit {
   @Input('type') type : string;
-  proficiencies: string[];
+  selectedproficiencies=new Array();
   storedProficiency = new Array();
   proficiencyModel: string = "";
   private showAlert: boolean=false;
@@ -20,7 +24,9 @@ export class proficiencyDomainComponent implements OnInit {
   private placeHolderName:string;
   private isProficiencyShow:boolean =false;
 
-  constructor(private http: Http,private proficiencyService: ProficiencyService) {
+  constructor(private http: Http,private proficiencyService: ProficiencyService,
+              private proficiencydoaminService: proficiencyDomainService,
+              private messageService:MessageService) {
 
     proficiencyService.showTest$.subscribe(
       data=>{
@@ -33,37 +39,46 @@ export class proficiencyDomainComponent implements OnInit {
     if(this.type==="profeciency"){
       this.proficiencyType=true;
       this.placeHolderName="proficiency"
-    if (this.proficiencies === undefined) {
-      this.http.get("proficiency")
-        .map((res: Response) => res.json())
+
+      this.proficiencydoaminService.getProficiency()
         .subscribe(
-          data => {
-            this.proficiencies = data.proficiency;
-          },
-          err => console.error(err),
-          () => console.log()
-        );
-    }
+          data => this.onProficiencySuccess(data),
+          error => this.onError(error));
+
+
   }
     if(this.type==="domain"){
       this.domainType=true;
       this.placeHolderName="domain"
-      this.http.get("proficiency")
-      this.http.get("domain")
-        .map((res: Response) => res.json())
+    //  this.http.get("proficiency")
+
+      this.proficiencydoaminService.getDomain()
         .subscribe(
-          data => {
-            this.proficiencies = data.domain;
-          },
-          err => console.error(err),
-          () => console.log()
-        );
+          data => this.onGetDomainSuccess(data),
+          error => this.onError(error));
     }
 
   }
 
+  onProficiencySuccess(data:any){
+    for(let proficiency of data.proficiency){
+      this.selectedproficiencies.push(proficiency);
+    }
 
+  }
+  onGetDomainSuccess(data:any){
+    for(let domain of data.domains){
+      this.selectedproficiencies.push(domain);
+    }
 
+  }
+
+  onError(error:any){
+    var message = new Message();
+    message.error_msg = error.err_msg;
+    message.isError = true;
+    this.messageService.message(message);
+  }
   selectproficiencyModel(newVal: any) {
     if(this.storedProficiency.length < VALUE_CONSTANT.MAX_PROFECIENCES) {
       this.showAlert=false;
@@ -86,14 +101,14 @@ export class proficiencyDomainComponent implements OnInit {
         }
       }
     }
-    this.proficiencies.push(newVal.currentTarget.innerText);
+    this.selectedproficiencies.push(newVal.currentTarget.innerText);
   }
 
   deleteSelectedProfeciency(newVal: any) {
-    for (let i = 0; i < this.proficiencies.length; i++) {
-      if (this.proficiencies[i] === newVal) {
+    for (let i = 0; i < this.selectedproficiencies.length; i++) {
+      if (this.selectedproficiencies[i] === newVal) {
         if (i > -1) {
-          this.proficiencies.splice(i, 1);
+          this.selectedproficiencies.splice(i, 1);
         }
       }
     }

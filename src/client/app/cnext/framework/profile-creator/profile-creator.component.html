@@ -1,4 +1,3 @@
-<!--
 <div class="create-profile clearfix">
   <div class="bar-container profile-header">
     <ul class="bar" id="bar">
@@ -117,10 +116,10 @@
           <div class="radio">
             <label>Profile Visibility:</label>
             <label class="radio-inline">
-              <input type="radio" name="profile-visibility" id="optionsRadios2" value="option2"> show
+              <input type="radio" name="profile-visibility" id="optionsRadios2"  (click)="showProfile()" value="option2"> show
             </label>
             <label class="radio-inline">
-              <input type="radio" name="profile-visibility" id="optionsRadios3" value="option3" > hide
+              <input type="radio" name="profile-visibility" id="optionsRadios3"  (click)="hideProfile()" value="option3" > hide
             </label>
           </div>
           <div class="info"><p>In case you 'Hide' your profile visibility, Recruiters can not see your profile.<br />You can change it later.</p></div>
@@ -143,6 +142,5 @@
 
 
 
-<cn-job-poster></cn-job-poster>
--->
-<cn-recruiter-dashboard></cn-recruiter-dashboard>
+<!--<cn-job-poster></cn-job-poster>
+<cn-recruiter-dashboard></cn-recruiter-dashboard>-->

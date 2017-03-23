@@ -6,7 +6,7 @@
     <div class="list">
       <div class="form-group">
         <div ng2-auto-complete
-             [source]="proficiencies"
+             [source]="selectedproficiencies"
              (ngModelChange)="selectproficiencyModel($event)">
           <input  class="form-control" [(ngModel)]="proficiencyModel" id={{type}} placeholder="{{placeHolderName}}" />
         </div>

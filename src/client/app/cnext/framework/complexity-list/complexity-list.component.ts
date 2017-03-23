@@ -11,6 +11,7 @@ import {MessageService} from "../../../framework/shared/message.service";
 
 
 
+
 @Component({
   moduleId: module.id,
   selector: 'cn-complexity-list',
@@ -61,13 +62,13 @@ export class ComplexityListComponent {
          error => this.onError(error));
       }
     );
-    
+
   }
 
   onComplexityListSuccess(data:any){
     setTimeout(()=>{
       this.complexities=data.data;
-    },1000);  
+    },1000);
 
 
   }
