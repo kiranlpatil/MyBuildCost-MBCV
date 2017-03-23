@@ -14,7 +14,7 @@ class IndustryService {
   }
 
   retrieveAll(field:any, callback:(error:any, result:any) => void) {
-    this.industryRepository.retrieveAll(field,{  _id: 0 ,roles :0 }, callback);
+    this.industryRepository.retrieveAll(field,{  roles :0 }, callback);
   }
 
   retrieve(field:any, callback:(error:any, result:any) => void) {
