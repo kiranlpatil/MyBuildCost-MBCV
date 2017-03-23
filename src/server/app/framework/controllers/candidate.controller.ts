@@ -61,21 +61,6 @@ export function create(req:express.Request, res:express.Response, next:any) {
   }
 }
 
-export function professionaldata(req:express.Request, res:express.Response, next:any) {
-  try {
-    var bodyParam = req.body;
-    console.log(JSON.stringify(bodyParam));
-    res.status(200).send({
-      "status": Messages.STATUS_SUCCESS,
-      "data": {
-        "reason": "from professional data",
-      }
-    });
-  }
-  catch (e) {
-    res.status(403).send({"status": Messages.STATUS_ERROR, "error_message": e.message});
-  }
-}
 
 export function updateDetails(req:express.Request, res:express.Response, next:any) {
   try {

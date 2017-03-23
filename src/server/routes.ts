@@ -1,6 +1,7 @@
 import * as express from 'express';
 import * as userController from './app/framework/controllers/user.controller';
 import * as candidateController from './app/framework/controllers/candidate.controller';
+import * as recruiterController from './app/framework/controllers/recruiter.controller';
 import * as sharedService from './app/framework/shared/shared.service';
 import * as userInterceptor from './app/framework/interceptor/user.interceptor';
 var AuthInterceptor = require("./app/framework/interceptor/auth.interceptor");
@@ -13,10 +14,10 @@ export function init(app: express.Application) {
     app.post("/api/forgotpassword", userInterceptor.forgotPassword, userController.forgotPassword);
     app.put("/api/resetpassword/:id", this.authInterceptor.requiresAuth, userController.resetPassword);
     app.post("/api/candidate", userInterceptor.create, candidateController.create);
-    app.post("/api/recruiter", userInterceptor.createRecruiter, candidateController.create);
+    app.post("/api/recruiter",  recruiterController.create);
     //app.post("/api/candidate", userInterceptor.create, candidateController.create);
    // app.post("/api/recruiter", userInterceptor.create, candidateController.create);
-    app.post("/api/professionaldata",  candidateController.professionaldata);
+    //app.post("/api/professionaldata",  candidateController.professionaldata);
     app.put("/api/users/:id", this.authInterceptor.requiresAuth, userController.updateDetails);
     app.get("/api/users/:id", userInterceptor.retrieve, this.authInterceptor.requiresAuth, userController.retrieve);
     app.post("/api/sendverificationmail/:id", this.authInterceptor.requiresAuth,userController.verificationMail);

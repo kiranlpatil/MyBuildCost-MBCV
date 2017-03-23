@@ -10,11 +10,20 @@ class RecruiterSchema {
         var schema = mongoose.Schema({
           userId : {
             type : mongoose.Schema.Types.ObjectId, ref :'User'
+          },
+          "comapny_name":{
+            type:String
+          },
+          "company_size":{
+            type:String
+          },
+          "company_logo":{
+            type:String
           }
         },{ versionKey: false });
 
         return schema;
     }
 }
-var schema = mongooseConnection.model<IRecruiter>("Role", RecruiterSchema.schema);
+var schema = mongooseConnection.model<IRecruiter>("Recruiter", RecruiterSchema.schema);
 export = schema;
