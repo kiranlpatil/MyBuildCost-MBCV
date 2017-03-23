@@ -13,7 +13,7 @@ export function init(app: express.Application) {
     app.post("/api/forgotpassword", userInterceptor.forgotPassword, userController.forgotPassword);
     app.put("/api/resetpassword/:id", this.authInterceptor.requiresAuth, userController.resetPassword);
     app.post("/api/candidate", userInterceptor.create, candidateController.create);
-    app.post("/api/recruiter", userInterceptor.create, candidateController.create);
+    app.post("/api/recruiter", userInterceptor.createRecruiter, candidateController.create);
     app.post("/api/professionaldata",  candidateController.professionaldata);
     app.put("/api/users/:id", this.authInterceptor.requiresAuth, userController.updateDetails);
     app.get("/api/users/:id", userInterceptor.retrieve, this.authInterceptor.requiresAuth, userController.retrieve);
@@ -48,7 +48,7 @@ export function init(app: express.Application) {
      app.put("/api/changetheme/:id", this.authInterceptor.requiresAuth, userController.changeTheme);
      app.all("/updatepicture/:id", this.authInterceptor.requiresAuth, userController.updatePicture);
      app.post("/api/sendrecruitermail/:id", this.authInterceptor.requiresAuth,userController.recruiterVerificationMail);
-
+     app.put("/api/uploaddocuments/:id", this.authInterceptor.requiresAuth, userController.uploaddocuments);
 
      app.use(sharedService.logHandler);
      app.use(sharedService.errorHandler);

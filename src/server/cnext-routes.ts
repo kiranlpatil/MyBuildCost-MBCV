@@ -17,6 +17,8 @@ export function cnextInit(app: express.Application) {//todo add interceptor to a
   app.get("/api/industry/:id/role", roleController.retrieve );
   app.get("/api/industry/:id/roles/capability", capabilityController.retrieve );
   app.get("/api/industry/:id/roles/capability/complexity", complexityController.retrieve );
+ // app.get("/api/industry/:id/role", roleController.retrieve );
+  app.get("/api/companysize",  userController.getCompanySize);
   app.get("/api/function",  userController.getFunction);
   app.get("/api/proficiency",  userController.getProficiency);
   app.get("/api/domain",  userController.getDomain);

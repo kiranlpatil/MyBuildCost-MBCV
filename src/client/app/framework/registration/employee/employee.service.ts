@@ -13,7 +13,7 @@ export class EmployeeService extends BaseService {
     super();
   }
 
-  addEmployee(employee:Employee):Observable<Employee> {
+  addEmployee(employee:Employee):Observable<Employee> {debugger
     let headers = new Headers({ 'Content-Type': 'application/json'});
     let options = new RequestOptions({ headers: headers });
     let body = JSON.stringify(employee);

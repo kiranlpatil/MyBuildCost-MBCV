@@ -13,11 +13,11 @@ export class EmployerService extends BaseService {
     super();
   }
 
-  addEmployer(employer:Employer):Observable<Employer> {
+  addRecruiter(employer:Employer):Observable<Employer> {
     let headers = new Headers({ 'Content-Type': 'application/json'});
     let options = new RequestOptions({ headers: headers });
     let body = JSON.stringify(employer);
-    return this.http.post(API.EMPLOYER_PROFILE, body,options)
+    return this.http.post(API.RECRUITER_PROFILE, body,options)
       .map(this.extractData)
       .catch(this.handleError);
   }

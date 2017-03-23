@@ -807,9 +807,21 @@ console.log("Changemailverification hit");
     res.status(403).send({message: e.message});
   }
 }
+
 export function getIndustry (req:express.Request, res:express.Response) {
   __dirname = './';
   var filepath="industry.json";
+  try {
+    res.sendFile(filepath,{root: __dirname});
+  }
+  catch (e) {
+    res.status(403).send({message: e.message});
+  }
+}
+
+export function getCompanySize (req:express.Request, res:express.Response) {
+  __dirname = './';
+  var filepath="company-size.json";
   try {
     res.sendFile(filepath,{root: __dirname});
   }
@@ -1123,11 +1135,76 @@ export function updatePicture(req:express.Request, res:express.Response, next:an
 
   });
 }
+
+export function uploaddocuments(req:express.Request, res:express.Response, next:any):void {
+    __dirname = 'src/server/app/framework/public/uploaded-document';
+
+    var form = new multiparty.Form({uploadDir: __dirname});
+    console.log("updatedocuments user Controller is been hit req ", req);
+    form.parse(req, (err: Error, fields: any, files: any) => {
+      if (err) {
+        next({
+          reason: Messages.MSG_ERROR_RSN_DIRECTORY_NOT_FOUND,
+          message: Messages.MSG_ERROR_DIRECTORY_NOT_FOUND,
+          code: 401
+        });
+      } else {
+        console.log("fields of doc upload:" + fields);
+        console.log("files of doc upload:" + files);
+
+        var path = JSON.stringify(files.file[0].path);
+        console.log("Path url of doc upload:" + path);
+        var document_path = files.file[0].path;
+        console.log("Document path of doc upload:" + document_path);
+        var originalFilename = JSON.stringify(document_path.substr(files.file[0].path.lastIndexOf('/') + 1));
+        console.log("Original FileName of doc upload:" + originalFilename);
+
+        res.status(200).send({
+          "status": Messages.STATUS_SUCCESS,
+          "data": {
+            "document":document_path
+          }
+        });
+
+        /*   var userService = new UserService();
+            userService.UploadDocuments(path, originalFilename, function (err:any, tempath:any) {
+         if (err) {
+         console.log("Err message of uploaddocument is:",err);
+         next(err);
+         }
+         else {
+         var mypath = tempath;
+         try {
+         var user = req.user;
+         var query = {"_id": user._id};
+         userService.findOneAndUpdate(query, {document1: mypath}, {new: true}, (error, result) => {
+         if (error) {
+         res.status(403).send({message: error});
+         }
+         else{
+         var auth:AuthInterceptor = new AuthInterceptor();
+         var token = auth.issueTokenWithUid(result);
+         res.status(200).send({access_token: token, data: result});
+         }
+         });
+         }
+         catch (e) {
+         res.status(403).send({message: e.message});
+         }
+         }
+         });*/
+      }
+
+    });
+
+
+}
+
 export  function profilecreate(req:express.Request, res:express.Response)
 {
   try {
 
-    console.log("123344555667789987654398765432765455687858787687");
+    console.log("In profile create");
   }
   catch (e) {
     res.status(403).send({message: e.message});
@@ -1181,6 +1258,7 @@ export function changeTheme(req: express.Request, res: express.Response, next: a
       }
       else {
         var token = auth.issueTokenWithUid(user);
+
         res.send({
           access_token: token, data: result
         });

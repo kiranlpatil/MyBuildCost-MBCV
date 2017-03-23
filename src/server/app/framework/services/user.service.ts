@@ -297,6 +297,13 @@ class UserService {
     });
   }
 
+  UploadDocuments(tempPath: any, fileName: any, cb: any) {
+    var targetpath = fileName;
+    fs.rename(tempPath, targetpath, function (err:any) {
+      cb(null, tempPath);
+    });
+  }
+
   findAndUpdateNotification(query: any, newData: any, options: any, callback: (error: any, result: any) => void) {
     this.userRepository.findOneAndUpdate(query, newData, options, callback);
   }

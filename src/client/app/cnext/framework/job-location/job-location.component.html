@@ -25,6 +25,6 @@
   </div>
 
 
-  <input type="number"  id="pin"  />
+  <input type="number"  id="pin" [(ngModel)]="pin" (ngModelChange)="isPinSelected($event)" />
   <label>PIN</label>
 

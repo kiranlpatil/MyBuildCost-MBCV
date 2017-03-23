@@ -58,10 +58,15 @@ export class EmployeeComponent {
       'password': ['', [Validators.required, Validators.minLength(8)]],
       'conform_password': ['', [Validators.required, Validators.minLength(8)]],
       'birth_year':['', [Validators.required,ValidationService.birthYearValidator]],
-      'country':[''],
-      'state':[''],
-      'city':[''],
-      'pin':['',  [Validators.required,ValidationService.pinValidator]]
+      'location':[
+        {
+          'country':['', Validators.required],
+          'state':['', Validators.required],
+          'city':['', Validators.required],
+          'pin':['']
+        }
+      ,Validators.required],
+      'pin':['',[Validators.required,ValidationService.pinValidator]]
     });
 
     this.BODY_BACKGROUND = ImagePath.BODY_BACKGROUND;
@@ -88,8 +93,7 @@ export class EmployeeComponent {
 
 
   }
-  selectCountryModel(newval:any) {
-
+  selectCountryModel(newval:any) {debugger
     for(let item of this.locationDetails){
       if(item.country===newval){
           let tempStates: string[]= new Array(0);
@@ -118,21 +122,21 @@ export class EmployeeComponent {
     this.storedstate=newval;
   }
 
-
-
   selectCityModel(newval : string){
     this.storedcity=newval;
 
   }
 
-
-
-
-
-  onSubmit() {
+  onSubmit() {debugger
     this.model = this.userForm.value;
+    this.model.location.country
     this.model.current_theme = AppSettings.LIGHT_THEM;
     this.model.isCandidate =true;
+    this.model.location.country =this.storedcountry;
+    this.model.location.state = this.storedstate;
+    this.model.location.city = this.storedcity;
+    this.model.location.pin = this.model.pin;
+
     if (!this.makePasswordConfirm()) {
       this.isFormSubmitted = true;
       // this.loaderService.start();
@@ -153,7 +157,7 @@ export class EmployeeComponent {
     this._router.navigate([NavigationRoutes.VERIFY_USER]);
   }
 
-  onRegistrationError(error: any) {
+  onRegistrationError(error: any) {debugger
     // this.loaderService.stop();
     if (error.err_code === 404 || error.err_code === 0) {
       var message = new Message();

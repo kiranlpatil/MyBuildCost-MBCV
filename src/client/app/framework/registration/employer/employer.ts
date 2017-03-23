@@ -1,6 +1,8 @@
 /**
  * Created by techprimelab on 3/9/2017.
  */
+import {Location} from "../location";
+
 export class Employer {
   id : any;
   isCandidate :boolean;
@@ -11,9 +13,7 @@ export class Employer {
   mobile_number : string;
   password : string;
   conform_password : string;
-  country:string;
-  state:string;
-  city:string;
+  location:Location;
   pin:number;
   captcha:string;
   current_theme : string;

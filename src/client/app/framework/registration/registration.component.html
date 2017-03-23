@@ -21,17 +21,17 @@
       <div class="radio-group text-left clearfix">
         <label class="lable-name">Register as</label>
         <label for="employee" class="radio-inline">
-          <input type="radio" id="employee" name="register_as" value="employee" (click)="showHideEmployee()" checked />
+          <input type="radio" id="employee" name="register_as" value="employee" (click)="showHideCandidate()" checked />
           Candidate
         </label>
 
         <label for="employer" class="radio-inline">
-          <input type="radio" id="employer" name="register_as" value="employer" (click)="showHideEmployee()"/>
+          <input type="radio" id="employer" name="register_as" value="employer" (click)="showHideRecruiter()"/>
           Recruiter
         </label>
       </div>
 
-      <div class="col-sm-6 col-sm-offset-6 registartion-btn-radio text-left clearfix">
+      <div class="col-sm-6 col-sm-offset-6 registartion-btn-radio text-left clearfix" [hidden]="!isCandidate">
         <label class="lable-name">Recruiting For</label>
         <label for="self" class="radio-inline">
           <input type="radio" id="self" name="recruiting_for" value="self" (change)="recruitmentFor($event)" checked/>
@@ -49,7 +49,7 @@
 
       </div>
 
-      <div class="Employer_form" [hidden]="!isCandidate">
+      <div class="Employer_form" [hidden]="isRecruiter">
         <cn-EmployerRegistration></cn-EmployerRegistration>
       </div>
 

@@ -26,6 +26,7 @@ export class Messages {
   public static MSG_SUCCESS_FORGOT_PASSWORD: string = 'Email has been sent successfully on your registered email to reset password';
   public static MSG_SUCCESS_DASHBOARD_PROFILE: string = 'Your Profile Updated Successfully';
   public static MSG_SUCCESS_DASHBOARD_PROFILE_PIC: string = 'Your profile picture updated successfully.';
+  public static MSG_SUCCESS_UPLOAD_DOCUMENT: string = 'Your document updated successfully.';
   public static MSG_SUCCESS_CONTACT: string = 'Email sent successfully.';
   public static MSG_SUCCESS_CHANGE_THEME: string = 'Theme changed successfully.';
   public static MSG_SUCCESS_MAIL_VERIFICATION_RESULT_STATUS: string ='Congratulations';
@@ -67,6 +68,8 @@ export class NavigationRoutes {
   public static VERIFY_PHONE: string = '/verify_phone';
   public static APP_CHANGEEMAIL:string = '/change_email';
   public static APP_CREATEPROFILE:string = '/createprofile';
+  public static APP_COMPANYDETAILS:string = '/companydetails';
+
 
 }
 
@@ -77,6 +80,8 @@ export class LocalStorage {
     public static IS_LOGED_IN = 'is_user_loged_in';
     public static USER_ID = 'user_id';
     public static MOBILE_NUMBER = 'mobile_number';
+    public static COMPANY_NAME = 'company_name';
+    public static COMPANY_SIZE = 'company_size';
     public static FIRST_NAME = 'first_name';
     public static LAST_NAME = 'last_name';
     public static TEMP_MOBILE = 'temp_mobile';
@@ -102,7 +107,7 @@ export class API {
   public static SEND_MAIL = 'sendmail';
   public static USER_PROFILE = 'users';
   public static CANDIDATE_PROFILE = 'candidate';
-  public static EMPLOYER_PROFILE = 'recruiter';
+  public static RECRUITER_PROFILE = 'recruiter';
   public static PROFESSIONAL_DATA = 'professionaldata';
   public static EMPLOYMENTHISTORY='employmentdata';
   public static LOGIN = 'login';
@@ -119,12 +124,14 @@ export class API {
   public static SEND_VERIFICATION_MAIL = 'sendverificationmail';
   public static FORGOT_PASSWORD = 'forgotpassword';
   public static UPDATE_PICTURE = 'updatepicture';
+  public static UPLOAD_DOCUMENTS = 'uploaddocuments';
   public static CHANGE_THEME = 'changetheme';
   public static RESET_PASSWORD = 'resetpassword';
   public static GOOGLE_LOGIN = 'googlelogin';
   public static INDUSTRY_PROFILE = 'industryprofile';
   public static INDUSTRY_LIST = 'industry';
   public static REALOCATION = 'realoaction';
+  public static COMPANY_DETAILS:string = 'companydetails';
 
 }
 

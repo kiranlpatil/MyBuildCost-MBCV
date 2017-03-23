@@ -50,6 +50,20 @@ class UserSchema {
                 type: String,
                 required: false
             },
+            document1: {
+                type:Array,
+                "default" : [],
+                required: false
+
+            },
+            document2: {
+                type: String,
+                required: false
+            },
+            document3: {
+                type: String,
+                required: false
+            },
             social_profile_picture: {
                 type: String,
                 required: false

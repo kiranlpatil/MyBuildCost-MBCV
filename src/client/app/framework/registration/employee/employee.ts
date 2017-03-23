@@ -12,7 +12,7 @@ export class Employee {
   //country:string;
   //state:string;
   //city:string;
-  //pin:number;
+  pin:number;
   location :Location;
 
   current_theme : string;

@@ -36,6 +36,8 @@ export function errorHandler(err:any, req:any, res:any, next:any) {
     var responseObject = JSON.stringify(errObject);
     logger.info(responseObject);
     res.status(500).send(responseObject);
+
+    console.log("responseObject in errorHandler:",responseObject);
   }
 };
 

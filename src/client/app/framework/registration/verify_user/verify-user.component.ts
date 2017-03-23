@@ -20,7 +20,7 @@ export class VerifyUserComponent implements OnInit {
     userForm:FormGroup;
     error_msg:string;
     isShowErrorMessage:boolean = true;
-    chkMobile:boolean = true;
+    chkMobile:boolean = false;
     chkEmail:boolean = true;
     MY_LOGO_PATH:string;
     MY_TAG_LINE:string;

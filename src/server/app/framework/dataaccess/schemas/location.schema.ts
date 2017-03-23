@@ -15,6 +15,9 @@ class LocationSchema {
           },
           country : {
             type : String
+          } ,
+          pin : {
+            type : String
           }
 
         },{ versionKey: false });

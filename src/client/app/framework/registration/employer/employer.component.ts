@@ -32,7 +32,9 @@ export class EmployerComponent {
   storedcountry:string;
   storedstate:string;
   storedcity:string;
+  storedcompanySize:any;
   locationDetails : any;
+  companySize :any;
 
   countries:string[]=new Array(0);
   states:string[]=new Array(0);
@@ -60,9 +62,14 @@ export class EmployerComponent {
       'email': ['', [Validators.required, ValidationService.emailValidator]],
       'password': ['', [Validators.required, Validators.minLength(8)]],
       'conform_password': ['', [Validators.required, Validators.minLength(8)]],
-      'country':[''],
-      'state':[''],
-      'city':[''],
+      'location':[
+        {
+          'country':['',Validators.required],
+          'state':['',Validators.required],
+          'city':['',Validators.required],
+          'pin':[''],
+        },
+        Validators.required],
       'pin':['',  [Validators.required,ValidationService.pinValidator]]
 
     });
@@ -88,8 +95,22 @@ export class EmployerComponent {
         () => console.log()
       );
 
+    this.http.get("companysize")
+      .map((res: Response) => res.json())
+      .subscribe(
+        data => {
 
+          this.companySize=data.companysize;
+        },
+        err => console.error(err),
+        () => console.log()
+      );
 
+  }
+
+  selectCompanySizeModel(newval:any) {
+
+    this.storedcompanySize=newval;
   }
 
   selectCountryModel(newval:any) {
@@ -104,6 +125,7 @@ export class EmployerComponent {
     }
     this.storedcountry=newval;
   }
+
   selectStateModel(newval:any) {
     for(let item of this.locationDetails){
       if(item.country===this.storedcountry){
@@ -121,23 +143,25 @@ export class EmployerComponent {
     this.storedstate=newval;
   }
 
-
-
   selectCityModel(newval : string){
     this.storedcity=newval;
 
   }
 
-
-  onSubmit() {
+  onSubmit() {debugger
     this.model = this.userForm.value;
     this.model.current_theme = AppSettings.LIGHT_THEM;
+    this.model.company_size =this.storedcompanySize;
+    this.model.location.country =this.storedcountry;
+    this.model.location.state = this.storedstate;
+    this.model.location.city = this.storedcity;
+    this.model.location.pin = this.model.pin;
     this.model.isCandidate =false;
     this.model.isRecruitingForself =this.isRecruitingForself;
     if (!this.makePasswordConfirm()) {
       this.isFormSubmitted = true;
       // this.loaderService.start();
-      this.EmployerService.addEmployer(this.model)
+      this.EmployerService.addRecruiter(this.model)
         .subscribe(
           user => this.onRegistrationSuccess(user),
           error => this.onRegistrationError(error));

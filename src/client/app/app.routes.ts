@@ -21,7 +21,7 @@ import {EmployerRoutes} from "./framework/registration/employer/employer.routes"
 import {IndustryRoutes} from "./cnext/framework/industryList/industryList.routes";
 import {ProfileCreator} from "./cnext/framework/profile-creator/profile-creator.routes";
 import {proficiencydomainRoutes} from "./cnext/framework/proficiency-domains/proficiency-domain.routes";
-
+import {CompanyDetailsRoutes} from "./framework/registration/company_details/company-details.routes";
 
 
 export const routes: Routes = [
@@ -46,6 +46,7 @@ export const routes: Routes = [
   ...SettingsRoutes,
   ...ProfileCreator,
   ...proficiencydomainRoutes,
-   ...StartRoutes
+   ...StartRoutes,
+  ...CompanyDetailsRoutes
 
 ];

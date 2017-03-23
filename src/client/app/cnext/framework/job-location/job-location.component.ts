@@ -3,7 +3,7 @@ import {Component} from '@angular/core';
 import {Router} from "@angular/router";
 import {DashboardService} from "../../../framework/dashboard/dashboard.service";
 import {Http} from "@angular/http";
-
+import {JobLocation} from "../model/job-location";
 
 @Component({
   moduleId: module.id,
@@ -13,10 +13,11 @@ import {Http} from "@angular/http";
 })
 
 export class JobLocationComponent {
-
+  private jobLocationtion = new JobLocation();
   storedcountry:string;
   storedstate:string;
   storedcity:string;
+  private pin:number;
   locationDetails : any;
   countries:string[]=new Array(0);
   states:string[]=new Array(0);
@@ -24,7 +25,6 @@ export class JobLocationComponent {
   countryModel:string;
   stateModel:string;
   cityModel:string;
- 
 
 
   constructor(private _router:Router,private http: Http, private dashboardService:DashboardService) {
@@ -61,6 +61,7 @@ export class JobLocationComponent {
       }
     }
     this.storedcountry=newval;
+    this.jobLocationtion.country=this.storedcountry;
   }
   selectStateModel(newval:any) {
     for(let item of this.locationDetails){
@@ -77,15 +78,20 @@ export class JobLocationComponent {
       }
     }
     this.storedstate=newval;
+    this.jobLocationtion.state=this.storedstate;
   }
 
 
 
   selectCityModel(newval : string){
     this.storedcity=newval;
-
+    this.jobLocationtion.city=this.storedcity;
   }
 
 
+  isPinSelected(value:any){
+    this.jobLocationtion.pin=this.pin;
+
+  }
 
 }

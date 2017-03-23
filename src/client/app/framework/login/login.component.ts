@@ -129,6 +129,7 @@ export class LoginComponent implements OnInit {
   successRedirect() {
     LocalStorageService.setLocalValue(LocalStorage.IS_LOGED_IN, 1);
     this._router.navigate([NavigationRoutes.APP_CREATEPROFILE]);
+   // this._router.navigate(['/companydetails']);
     var socialLogin:string = LocalStorageService.getLocalValue(LocalStorage.IS_SOCIAL_LOGIN);
 
     if(socialLogin === AppSettings.IS_SOCIAL_LOGIN_YES) {

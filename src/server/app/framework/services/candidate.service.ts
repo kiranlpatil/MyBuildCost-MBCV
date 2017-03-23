@@ -49,7 +49,7 @@ class CandidateService {
                   userId:userId1,
                   location: locationId
                 };
-                this.candidateRepository.create(newItem, (err, res) => {
+                this.candidateRepository.create(newItem, (err:any, res:any) => {
                   if (err) {
                     callback(err, null);
                   }else{

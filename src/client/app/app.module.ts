@@ -82,6 +82,8 @@ import {JobInformationComponent} from "./cnext/framework/job-information/job-inf
 import {JobRequirementComponent} from "./cnext/framework/job-requirement/job-requirement.component";
 import {JobLocationComponent} from "./cnext/framework/job-location/job-location.component";
 import {DescriptionFieldComponent} from "./cnext/framework/description-field/description-field.component";
+import {CompanyDetailsComponent} from "./framework/registration/company_details/company-details.component";
+import {CompanyDetailsService} from "./framework/registration/company_details/company-details.service";
 
 @NgModule({
   imports: [
@@ -139,8 +141,9 @@ import {DescriptionFieldComponent} from "./cnext/framework/description-field/des
     AcademicDetailComponent,
     CertificationAccreditationComponent,
     AwardsComponent,
-    MoreAboutMyselfComponent,
-    DescriptionFieldComponent
+    DescriptionFieldComponent,
+    CompanyDetailsComponent,
+    MoreAboutMyselfComponent
   ],
   providers: [
     {
@@ -182,6 +185,7 @@ import {DescriptionFieldComponent} from "./cnext/framework/description-field/des
     VerifyPhoneService,
     IndustryService,
     ProfessionalDataService,
+    CompanyDetailsService,
     EmploymentHistoryService
 
   ],

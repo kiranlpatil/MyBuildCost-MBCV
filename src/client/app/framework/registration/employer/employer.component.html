@@ -9,6 +9,19 @@
 
 <form [formGroup]="userForm" (submit)="onSubmit()" class="employer-form">
 
+ <!-- <div class="col-sm-6 col-sm-offset-6 registartion-btn-radio text-left clearfix">
+    <label class="lable-name">Recruiting For</label>
+    <label for="self" class="radio-inline">
+      <input type="radio" id="self" name="recruiting_for" value="self" (change)="recruitmentFor($event)" checked/>
+      Self
+    </label>
+
+    <label for="others" class="radio-inline">
+      <input type="radio" id="others" name="recruiting_for" value="others" (change)="recruitmentFor($event)" />
+      Others
+    </label>
+  </div>-->
+
   <div class="row clearfix">
     <div class="form-group">
       <control-messages [control]="userForm.controls.company_name"></control-messages>
@@ -16,16 +29,14 @@
       <label>Company Name</label>
     </div>
 
-    <div class="form-group" >
-      <select class="form-control" id="company_size" required>
-        <option selected>Company Size</option>
-        <option>below 50</option>
-        <option>50 - 100</option>
-        <option>100 - 500</option>
-        <option>above 500</option>
-      </select>
-      <label for="company_size">Company Size</label>
-    </div>
+      <div class="form-group">
+        <div ng2-auto-complete
+             [source]="companySize"
+             (ngModelChange)="selectCompanySizeModel($event)">
+          <input class="form-control" [ngModel]="storedcompanySize" [ngModelOptions]="{standalone: true}" />
+          <label class="select-label">Company Size</label>
+        </div>
+      </div>
 
     <div class="form-group">
       <control-messages [control]="userForm.controls.email"></control-messages>
@@ -33,27 +44,28 @@
       <label>Email</label>
     </div>
 
-    <div class="form-group">
-      <control-messages [control]="userForm.controls.password"></control-messages>
-      <input type="password" formControlName="password" id="password" class="form-control" required/>
-      <label>Password</label>
-    </div>
-
-    <div class="form-group">
-      <control-messages [control]="userForm.controls.conform_password"></control-messages>
-      <input type="password" formControlName="conform_password" id="conform_password"
-             (blur)="makePasswordConfirm()" class="form-control" required/>
-      <label>Confirm Password</label>
-      <div class="error-message-registration" *ngIf="isPasswordConfirm == true">
-        <p>Passwords does not match.</p>
+      <div class="form-group">
+        <control-messages [control]="userForm.controls.mobile_number"></control-messages>
+        <input type="number" formControlName="mobile_number" id="mobile_number" class="form-control" required/>
+        <label>Mobile</label>
       </div>
-    </div>
 
-    <div class="form-group">
-      <control-messages [control]="userForm.controls.mobile_number"></control-messages>
-      <input type="number" formControlName="mobile_number" id="mobile_number" class="form-control" required/>
-      <label>Mobile</label>
-    </div>
+      <div class="form-group">
+        <control-messages [control]="userForm.controls.password"></control-messages>
+        <input type="password" formControlName="password" id="password" class="form-control" required/>
+        <label>Password</label>
+      </div>
+
+      <div class="form-group">
+        <control-messages [control]="userForm.controls.conform_password"></control-messages>
+        <input type="password" formControlName="conform_password" id="conform_password"
+               (blur)="makePasswordConfirm()" class="form-control" required/>
+        <label>Confirm Password</label>
+        <div class="error-message-registration" *ngIf="isPasswordConfirm == true">
+          <p>Passwords does not match.</p>
+        </div>
+      </div>
+
 
     <div class="form-group">
       <div ng2-auto-complete

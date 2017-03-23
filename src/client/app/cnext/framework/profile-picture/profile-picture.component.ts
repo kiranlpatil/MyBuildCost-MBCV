@@ -17,8 +17,6 @@ import {
 } from '../../../framework/shared/index';
 
 
-
-
 @Component({
     moduleId: module.id,
     selector: 'cn-profile-picture',
@@ -58,7 +56,7 @@ export class ProfilePictureComponent  {
           if (result !== null) {
             this.fileChangeSucess(result);
           }
-        }, (error) => {
+        }, (error:any) => {
           this.fileChangeFail(error);
         });
       } else {

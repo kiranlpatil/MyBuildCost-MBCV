@@ -1,4 +1,5 @@
-export class Location {
+
+export class JobLocation {
   city : string;
   state: string;
   country : string;
