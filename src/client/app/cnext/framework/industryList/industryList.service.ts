@@ -18,7 +18,7 @@ export class IndustryService extends BaseService {
   }
 
 
-  addIndustryProfile(industryprofile:industryProfile):Observable<industryProfile>{debugger
+  addIndustryProfile(industryprofile:industryProfile):Observable<industryProfile>{
 
     let headers = new Headers({ 'Content-Type': 'application/json'});
     let options = new RequestOptions({ headers: headers });

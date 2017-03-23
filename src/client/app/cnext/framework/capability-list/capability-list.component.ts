@@ -28,6 +28,8 @@ export class CapabilityListComponent {
   private isPrimary: boolean[] =new Array() ;
   private isSecondary: boolean[] =new Array() ;
   private industry: string;
+  private capabilityData:any;
+  private capabilityIds=new Array();
   private roles:any;
   constructor(private _router:Router, private http:Http,
               private activatedRoute:ActivatedRoute,
@@ -63,6 +65,7 @@ export class CapabilityListComponent {
 
 
   onCapabilityListSuccess(data:any){
+    this.capabilityData=data;
     if(data != undefined){
       this.isPrimary=new Array(data.length);
       this.isSecondary=new Array(data.length);
@@ -80,6 +83,7 @@ export class CapabilityListComponent {
 
   selectOption(newVal:any){
     if (newVal.target.checked) {
+      this.searchCapabilityId(newVal.target.value);
       if(this.primaryCapabilities.length < VALUE_CONSTANT.MAX_CAPABILITIES) {
         this.primaryCapabilities.push(newVal.target.value);
         this.isPrimary[this.capabilities.indexOf(newVal.target.value)]=true;
@@ -91,6 +95,7 @@ export class CapabilityListComponent {
       }
     }
     else{
+      this.deleteCapabilityById(newVal.target.value);
       for(let capability of this.primaryCapabilities){
         if(capability===newVal.target.value){
           this.isPrimary[this.capabilities.indexOf(newVal.target.value)]=false;
@@ -113,4 +118,33 @@ export class CapabilityListComponent {
 
   }
 
+  
+  
+  
+  searchCapabilityId(capabilityName:any){
+    for(let capability of this.capabilityData){
+      if(capability.name===capabilityName){
+        this.capabilityIds.push(capability._id);
+        console.log("add",this.capabilityIds);
+      }
+    }
+  }
+  deleteCapabilityById(capabilityName:any){
+    for(let capability of this.capabilityData){
+      if(capability.name===capabilityName){
+        this.capabilityIds.splice(this.capabilityIds.indexOf(capability._id), 1);
+        
+      }
+    }
+  }
+
+  createAndSave() {
+    this.capabilityListServive.addCapability(this.capabilityIds).subscribe(
+      user => {
+        console.log(user);
+      },
+      error => {
+        console.log(error);
+      });
+  };
 }

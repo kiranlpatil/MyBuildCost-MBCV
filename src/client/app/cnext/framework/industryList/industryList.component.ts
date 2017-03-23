@@ -88,7 +88,7 @@ export class IndustryComponent {
     }
   }
 
-  searchRolesId(roleName:any){debugger
+  searchRolesId(roleName:any){
     for(let role of this.rolesData){
       if(role.name===roleName){
         this.industryRoles.roles.push(role._id);
