@@ -4,10 +4,6 @@ $option-border-color: #999;
 $primary-option: #1c75bd;
 $secondary-option: #00aed5;
 
-p {
-  margin: 0;
-}
-
 .btn-primary {
   float: right;
 
@@ -179,8 +175,6 @@ p {
       }
     }
   }
-
-
 }
 
 @media screen and (max-width: 980px) {

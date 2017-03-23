@@ -18,9 +18,9 @@ $white: #fff;
 
   // Loader
   .loader-container {
-
     .inner-loader { border-top: 5px solid $cn-theme-color; }
   }
+
   // Heading
   h3 { color: $cn-theme-color; }
 
@@ -66,13 +66,11 @@ $white: #fff;
 
   // Other Links
   .other-links {
-
     a { color: $cn-theme-color; }
   }
 
   // Forms
   form {
-
     .form-control {
 
       &:focus,
@@ -81,20 +79,9 @@ $white: #fff;
       }
     }
   }
+
   // Header
   header {  @extend %cn-theme-gradient; }
-
-  //splash screen header
-  .page-header {
-    background: $cn-theme-color;
-  }
-
-  //wrapper heading
-  .main-form-wrapper {
-    h5 {
-      background: $cn-theme-color;
-    }
-  }
 
   // Side Menu Bar
   .dashboard {
@@ -115,24 +102,10 @@ $white: #fff;
     }
   }
 
-  //create profile
-  .profile-header { @extend %cn-theme-gradient; }
-
-  .profile-wrapper {
-    .heading {
-      @extend %cn-theme-gradient;
-    }
-
-    .btn-create-profile {
-      border: 1px solid $cn-theme-color;
-    }
-  }
-
   // Settings, About , Notification
   .settings,
   .about,
   .notification {
-
     ul > li {
 
       h5 {
@@ -152,13 +125,37 @@ $white: #fff;
       }
     }
   }
+
+  //cn-splash screen header
+  .page-header {
+    background: $cn-theme-color;
+  }
+
+  //cn-wrapper heading
+  .main-form-wrapper {
+    h5 {
+      background: $cn-theme-color;
+    }
+  }
+
+  //cn-create profile
+  .profile-header { @extend %cn-theme-gradient; }
+
+  .profile-wrapper {
+    .heading {
+      @extend %cn-theme-gradient;
+    }
+
+    .btn-create-profile {
+      border: 1px solid $cn-theme-color;
+    }
+  }
 }
 
 @media only screen and (max-width: 1024px) {
   .cn-theme {
     // Buttons
     .btn-default {
-
       &:disabled  {
         opacity: .3;
       }
