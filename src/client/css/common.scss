@@ -198,10 +198,13 @@ a {
 
 //Buttons
 .btn {
-  background: #c1bfba;
   border-radius: 25px;
-  color: $white;
   padding: 6px 25px;
+}
+
+.btn-default {
+  background: #c1bfba;
+  color: $white;
 }
 
 .btn,
@@ -397,7 +400,7 @@ h4 {
       color: $white;
       font-size: 14px;
       position: absolute;
-      right: 30px;
+      right: 15px;
       top: 12px;
     }
 

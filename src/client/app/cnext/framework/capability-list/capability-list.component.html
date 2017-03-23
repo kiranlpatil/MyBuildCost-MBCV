@@ -2,7 +2,7 @@
   <div class="col-md-1 col-sm-12 no-padding"><p>I can</p></div>
   <div class="col-sm-11 col-sm-12 no-padding">
     <div class="capability-type" *ngIf="isShowCapability">
-      <div class="select-option primary" *ngFor="let item of capabilities;let i = index">
+      <div class="select-option" [class.primary]="isPrimary[i]" [class.secondary]="isSecondary[i]" *ngFor="let item of capabilities;let i = index">
         <label>
           <input type="checkbox" name="checkbox" (click)="selectOption($event)" id="{{item}}" value="{{item}}" >
           <span>{{item}}</span>

@@ -5,4 +5,5 @@ export class ProfessionalData{
   experiencelevel:string="";
   Csalary:string="";
   notice:string="";
+
 }

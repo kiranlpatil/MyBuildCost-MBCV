@@ -6,6 +6,8 @@ import { industryProfile} from "./industry";
 import {Router} from "@angular/router";
 import {LoaderService} from "../../../framework/shared/loader/loader.service";
 import {TestService} from "../test.service";
+import {MyIndustryService} from "../industry-service";
+import {MyRoleService} from "../role-service";
 import {Message} from "../../../framework/shared/message";
 import {MessageService} from "../../../framework/shared/message.service";
 @Component({
@@ -33,12 +35,12 @@ export class IndustryComponent {
   disbleRole: boolean = false;
 
 
-  constructor(private industryService: IndustryService,private http: Http , private testService : TestService, private messageService:MessageService,) {
+  constructor(private industryService: IndustryService, private myindustryService : MyIndustryService,
+              private roleService : MyRoleService, private messageService:MessageService,private http: Http , private testService : TestService) {
 
   }
 
   ngOnInit(){
-
     this.temproles= new Array(1);
     this.industryService.getIndustries()
       .subscribe(
@@ -48,9 +50,9 @@ export class IndustryComponent {
   }
 
   onIndustryListSuccess(data:any){
-  for(let industry of data){
-    this.industries.push(industry.name);
-  }
+    for(let industry of data){
+      this.industries.push(industry.name);
+    }
   }
   onError(error:any){
     var message = new Message();
@@ -68,17 +70,8 @@ export class IndustryComponent {
       .subscribe(
         rolelist => this.onRoleListSuccess(rolelist.data),
         error => this.onError(error));
-
-
-   /* this.http.get("role")
-      .map((res: Response) => res.json())
-      .subscribe(
-        data => {
-          this.roles = data.roles;
-        },
-        err => console.error(err),
-        () => console.log()
-      );*/
+    
+    this.myindustryService.change(this.storedIndustry);
   }
 
   onRoleListSuccess(data:any){
@@ -93,9 +86,7 @@ export class IndustryComponent {
     if(this.isRoleSelected===true)
       this.roleModel="";
     else
-  this.roleModel=newVal;
-
-
+    this.roleModel=newVal;
   }
 
   deleteSelectedRole(newVal: any){
@@ -119,8 +110,7 @@ export class IndustryComponent {
     }
   }
 
-  createAndSave()
-  {
+  createAndSave() {
     this.industryService.addIndustryProfile(this.model).subscribe(
       user => {
 
@@ -140,6 +130,7 @@ export class IndustryComponent {
     this.testService.change(true);
     this.showModalStyle = !this.showModalStyle;
     this.disbleRole=true;
+    this.roleService.change(this.storedRoles);
   }
 
     getStyleModal() {

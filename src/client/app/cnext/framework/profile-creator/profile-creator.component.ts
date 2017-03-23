@@ -17,6 +17,7 @@ export class ProfileCreatorComponent {
   private fullName: string;private firstName: string;private lastName: string;
   private   newUser:number;
   private  chkEmployeeHistory:boolean=false;
+  private  showMyprofile:boolean=true;
   private  chkCertification:boolean=false;
   private  chkAboutMyself:boolean=false;
   private  chkAwards:boolean=false;
@@ -53,6 +54,15 @@ export class ProfileCreatorComponent {
 
   onUserProfileError(error:any) {
     console.log(error);
+  }
+  showProfile(){debugger
+    this.showMyprofile=true;
+
+  }
+  hideProfile(){debugger
+
+    this.showMyprofile=false;
+
   }
 
   hideEmployeeHistory(){

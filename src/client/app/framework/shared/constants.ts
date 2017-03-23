@@ -94,7 +94,7 @@ export class LocalStorage {
 }
 
 export class VALUE_CONSTANT{
-  public static MAX_CAPABILITIES :number=10;
+  public static MAX_CAPABILITIES :number=2;
   public static MAX_PROFECIENCES :number=10;
   public static MAX_DOMAINS :number=10;
   public static MAX_YEAR_LIST :number=30;
@@ -130,7 +130,17 @@ export class API {
   public static GOOGLE_LOGIN = 'googlelogin';
   public static INDUSTRY_PROFILE = 'industryprofile';
   public static INDUSTRY_LIST = 'industry';
-  public static REALOCATION = 'realoaction';
+  public static REALOCATION = 'realocation';
+  public static EDUCATION = 'education';
+  public static EXPERIENCE = 'experience';
+  public static CURRENTSALARY ='currentsalary';
+  public static NOTICEPERIOD='noticeperiod';
+  public static PROFICIENCYLIST='proficiency';
+  public static DOMAINLIST='domain';
+
+
+  public static CAPABILITY_LIST = 'capability';
+  public static ROLE_LIST = 'roles';
   public static COMPANY_DETAILS:string = 'companydetails';
 
 }

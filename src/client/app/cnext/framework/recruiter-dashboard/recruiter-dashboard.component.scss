@@ -182,14 +182,6 @@ $label: #888;
   }
 }
 
-@media only screen and (max-width: 1366px) {
-  .profile-configurations {
-    .col-sm-8, .col-sm-4 {
-      width: 50%;
-    }
-  }
-}
-
 @media only screen and (max-width: 1280px) {
   .profile-wrapper {
     display: inline-block;

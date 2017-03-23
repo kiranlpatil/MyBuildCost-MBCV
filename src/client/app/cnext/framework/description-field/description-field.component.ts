@@ -13,7 +13,7 @@ import {LoaderService} from "../../../framework/shared/loader/loader.service";
 
 export class DescriptionFieldComponent {
   @Input('type') type : string;
-  @Input('maxLength') maxLength : string;
+  @Input('maxLength') maxLength :number;
 
   status:string;
   newstringOne:string[];
@@ -21,11 +21,11 @@ export class DescriptionFieldComponent {
   newstringThree:string[];
   condition:number;
   maxword:number;
-  remaining:string;
+  remaining:number;
 
   constructor(private _router: Router, private http: Http,
               private formBuilder: FormBuilder, private loaderService: LoaderService) {
-    
+
   }
 
   ngOnInit(){

@@ -6,8 +6,8 @@
     <div class="scenarios">
       <div class="select-option"  *ngFor="let subitem of item.scenario">
         <label>
-          <input type="radio" name="{{item.name}}"  id="{{i}}" value="{{subitem}}" >
-          <span>{{subitem}}</span>
+          <input type="radio" name="{{item.name}}"  id="{{i}}" value="{{subitem.name}}" >
+          <span>{{subitem.name}}</span>
         </label>
       </div>
     </div>

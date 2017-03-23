@@ -18,12 +18,14 @@ import {academicdetails} from "./academic-details";
 export class AcademicDetailComponent {
   userForm: FormGroup;
 
-  error_msg: string;
-  tempfield: string[];
-  schoolName:string;
-  universityName:string;
-  passingyear:string;
-  specialization:string;
+ private  error_msg: string;
+ private  tempfield: string[];
+ private schoolName:string;
+ private universityName:string;
+ private passingyear:string;
+ private specialization:string;
+ private selectedacademic= new academicdetails();
+ private selectedacademicsdeatils:academicdetails[]=new Array();
 
   private year: any;
 
@@ -37,25 +39,30 @@ export class AcademicDetailComponent {
   }
   SChoolName(event:string){
     console.log(event);
+this.selectedacademic.schoolName=event;
 
   }
 
   UniversityName(event:string){
     console.log(event);
+    this.selectedacademic.universityName=event;
 
   };
   PassingYear(event:string){
     console.log(event);
+    this.selectedacademic.passingyear=event;
   };
 
   Specializationfunc(event:string){
     console.log(event);
+    this.selectedacademic.specialization=event;
   };
 
 
 
 
   addAnother() {
+    this. selectedacademicsdeatils.push(this.selectedacademic);
 
     this.tempfield.push("null");
 
