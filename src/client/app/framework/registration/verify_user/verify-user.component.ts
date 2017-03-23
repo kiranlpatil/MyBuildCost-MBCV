@@ -46,11 +46,11 @@ export class VerifyUserComponent implements OnInit {
     }
 
 
-  navigateTo(navigateTo: string) {
+  /*navigateTo(navigateTo: string) {
     if (navigateTo !== undefined ) {
       this._router.navigate([navigateTo]);
     }
-  }
+  }*/
     navigateTo() {
         this._router.navigate([NavigationRoutes.APP_LOGIN]);
     }

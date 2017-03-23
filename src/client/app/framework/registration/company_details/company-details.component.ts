@@ -130,7 +130,8 @@ export class CompanyDetailsComponent {
     console.log("path of files to upload:", this.filesToUpload);
     this.companyDetailsService.makeDocumentUplaod(this.filesToUpload, []).then((result: any) => {
       if (result !== null) {
-        this.setOfDocuments.push(result.data.document) ;
+       // this.setOfDocuments.push(result.data.document) ;
+        this.setOfDocuments[2] = result.data.document ;
         console.log("setOfDocuments is:",this.setOfDocuments);
         this.fileChangeSucess(result);
       }

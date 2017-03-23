@@ -45,7 +45,7 @@ export class EmployerComponent {
   cityModel:string;
   isPasswordConfirm: boolean;
   isFormSubmitted = false;
-  userForm: FormGroup;
+  recruiterForm: FormGroup;
   error_msg: string;
   isShowErrorMessage: boolean = true;
   BODY_BACKGROUND:string;
@@ -56,7 +56,7 @@ export class EmployerComponent {
   constructor(private commanService: CommonService, private _router: Router,private http: Http,
               private EmployerService: EmployerService, private messageService: MessageService, private formBuilder: FormBuilder,private loaderService:LoaderService) {
 
-    this.userForm = this.formBuilder.group({
+    this.recruiterForm = this.formBuilder.group({
       'company_name': ['', Validators.required],
       'company_size': [''],
       'mobile_number': ['', [Validators.required, ValidationService.mobileNumberValidator]],
@@ -171,7 +171,7 @@ export class EmployerComponent {
 
 
   onSubmit() {debugger
-    this.model = this.userForm.value;
+    this.model = this.recruiterForm.value;
     this.model.current_theme = AppSettings.LIGHT_THEM;
     this.model.company_size =this.storedcompanySize;
     this.model.location.country =this.storedcountry;
@@ -193,10 +193,10 @@ export class EmployerComponent {
   onRegistrationSuccess(user: any) {
     //this.loaderService.stop();
     LocalStorageService.setLocalValue(LocalStorage.USER_ID, user.data._id);
-    LocalStorageService.setLocalValue(LocalStorage.EMAIL_ID,this.userForm.value.email);
-    LocalStorageService.setLocalValue(LocalStorage.MOBILE_NUMBER, this.userForm.value.mobile_number);
+    LocalStorageService.setLocalValue(LocalStorage.EMAIL_ID,this.recruiterForm.value.email);
+    LocalStorageService.setLocalValue(LocalStorage.MOBILE_NUMBER, this.recruiterForm.value.mobile_number);
     LocalStorageService.setLocalValue(LocalStorage.CHANGE_MAIL_VALUE, 'from_registration');
-    this.userForm.reset();
+    this.recruiterForm.reset();
     this._router.navigate([NavigationRoutes.VERIFY_USER]);
   }
 
@@ -204,12 +204,12 @@ export class EmployerComponent {
     // this.loaderService.stop();
     if (error.err_code === 404 || error.err_code === 0) {
       var message = new Message();
-      message.error_msg = error.err_msg;
+      message.error_msg = error.message;
       message.isError = true;
       this.messageService.message(message);
     } else {
       this.isShowErrorMessage = false;
-      this.error_msg = error.err_msg;
+      this.error_msg = error.message;
     }
   }
 
