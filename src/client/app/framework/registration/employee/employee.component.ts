@@ -93,7 +93,7 @@ export class EmployeeComponent {
 
 
   }
-  selectCountryModel(newval:any) {debugger
+  selectCountryModel(newval:any) {
     for(let item of this.locationDetails){
       if(item.country===newval){
           let tempStates: string[]= new Array(0);
@@ -127,7 +127,7 @@ export class EmployeeComponent {
 
   }
 
-  onSubmit() {debugger
+  onSubmit() {
     this.model = this.userForm.value;
     this.model.location.country
     this.model.current_theme = AppSettings.LIGHT_THEM;
@@ -157,7 +157,7 @@ export class EmployeeComponent {
     this._router.navigate([NavigationRoutes.VERIFY_USER]);
   }
 
-  onRegistrationError(error: any) {debugger
+  onRegistrationError(error: any) {
     // this.loaderService.stop();
     if (error.err_code === 404 || error.err_code === 0) {
       var message = new Message();

@@ -17,7 +17,7 @@ export class CompanyDetailsService extends BaseService {
     super();
   }
 
-  companyDetails(companyDetails:CompanyDetails):Observable<CompanyDetails> {debugger
+  companyDetails(companyDetails:CompanyDetails):Observable<CompanyDetails> {
     let headers = new Headers({ 'Content-Type': 'application/json'});
     let options = new RequestOptions({ headers: headers });
     let body = JSON.stringify(companyDetails);
@@ -26,7 +26,7 @@ export class CompanyDetailsService extends BaseService {
       .catch(this.handleError);
   }
 
-  makeDocumentUplaod(files:Array<File>, params:Array<string>) {debugger
+  makeDocumentUplaod(files:Array<File>, params:Array<string>) {
     var url = AppSettings.API_ENDPOINT + API.UPLOAD_DOCUMENTS + '/' + LocalStorageService.getLocalValue(LocalStorage.USER_ID);
    // var url = AppSettings.API_ENDPOINT + API.UPLOAD_DOCUMENTS + '/' +'58cb03749ac9d60819a0a581';
     return new Promise((resolve, reject) => {
@@ -34,7 +34,7 @@ export class CompanyDetailsService extends BaseService {
       var xhr = new XMLHttpRequest();
       formData.append('file', files[0], files[0].name);
 
-      xhr.onreadystatechange = function () {debugger
+      xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
           if (xhr.status === 200) {
             resolve(JSON.parse(xhr.response));

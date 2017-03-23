@@ -158,7 +158,7 @@ export class JobRequirementComponent {
 
 
   onIndustryListSuccess(data: any) {
-    debugger
+
     for (let industry of data) {
       this.industries.push(industry.name);
     }

@@ -54,7 +54,7 @@ export class CompanyDetailsComponent {
 
     //this.filesToUpload = [];
     if (this.image_path === undefined) {
-      debugger
+
       this.image_path = ImagePath.PROFILE_IMG_ICON;
     }
 
@@ -69,7 +69,7 @@ export class CompanyDetailsComponent {
 
 
   onSubmit() {
-    debugger
+
     this.submitted = true;
     this.model = this.companyDetailsForm.value;
     this.model.setOfDocuments = this.setOfDocuments;
@@ -88,7 +88,7 @@ export class CompanyDetailsComponent {
   }
 
   fileChangeEvent(fileInput: any) {
-    debugger
+
       this.filesToUpload = <Array<File>> fileInput.target.files;
 
     console.log("path of files to upload:", this.filesToUpload);
@@ -104,7 +104,7 @@ export class CompanyDetailsComponent {
 
   }
   fileChangeEvent2(fileInput: any) {
-    debugger
+
       this.filesToUpload = <Array<File>> fileInput.target.files;
 
     console.log("path of files to upload:", this.filesToUpload);
@@ -120,7 +120,7 @@ export class CompanyDetailsComponent {
 
   }
   fileChangeEvent3(fileInput: any) {
-    debugger
+
       this.filesToUpload = <Array<File>> fileInput.target.files;
 
     console.log("path of files to upload:", this.filesToUpload);

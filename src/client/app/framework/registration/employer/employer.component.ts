@@ -148,7 +148,7 @@ export class EmployerComponent {
 
   }
 
-  onSubmit() {debugger
+  onSubmit() {
     this.model = this.userForm.value;
     this.model.current_theme = AppSettings.LIGHT_THEM;
     this.model.company_size =this.storedcompanySize;
