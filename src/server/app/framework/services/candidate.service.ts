@@ -63,7 +63,25 @@ class CandidateService {
 
       }
     });
-  };
+  }
+
+  retrieve(field: any, callback: (error: any, result: any) => void) {
+    this.userRepository.retrieve(field, callback);
+  }
+
+  update(_id: string, item: any, callback: (error: any, result: any) => void) { //Todo change with candidate_id now it is a user_id operation
+
+    this.candidateRepository.retrieve({"userId":_id}, (err, res) => {
+
+      if (err) {
+        callback(err, res);
+      }
+      else {
+        this.candidateRepository.findOneAndUpdate(res._id, item, {new: true}, callback);
+      }
+    });
+  }
+
 }
 
 Object.seal(CandidateService);

@@ -28,7 +28,7 @@ class ScenarioService {
   }
 
   retrieveByMultiIds(item:any, callback:(error:any, result:any) => void) {
-    this.scenarioRepository.retrieveByMultiIds(item,{  _id: 0 }, callback);
+    this.scenarioRepository.retrieveByMultiIds(item,{ }, callback);
   }
 
 }

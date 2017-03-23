@@ -203,7 +203,7 @@ class UserService {
           subject: Messages.EMAIL_SUBJECT_REGISTRATION,
           html: header1 +mid_content+footer1
           , attachments: MailAttachments.AttachmentArray
-        }
+        };
         var sendMailService = new SendMailService();
         sendMailService.sendMail(mailOptions, callback);
 
@@ -275,7 +275,6 @@ class UserService {
         callback(err, res);
       }
       else {
-
         this.userRepository.update(res._id, item, callback);
       }
     });

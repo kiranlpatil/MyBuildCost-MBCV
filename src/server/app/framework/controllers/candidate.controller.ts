@@ -9,14 +9,14 @@ import CandidateModel = require("../dataaccess/model/candidate.model");
 import CandidateService = require("../services/candidate.service");
 
 
-export function create(req: express.Request, res: express.Response, next: any) {
+export function create(req:express.Request, res:express.Response, next:any) {
   try {
 
-    var newUser: CandidateModel = <CandidateModel>req.body;
+    var newUser:CandidateModel = <CandidateModel>req.body;
     var candidateService = new CandidateService();
     candidateService.createUser(newUser, (error, result) => {
       if (error) {
-        console.log("crt user error",error);
+        console.log("crt user error", error);
         if (error == Messages.MSG_ERROR_CHECK_EMAIL_PRESENT) {
           next({
             reason: Messages.MSG_ERROR_RSN_EXISTING_USER,
@@ -31,7 +31,7 @@ export function create(req: express.Request, res: express.Response, next: any) {
             code: 403
           });
         }
-        else{
+        else {
           next({
             reason: Messages.MSG_ERROR_RSN_EXISTING_USER,
             message: Messages.MSG_ERROR_USER_WITH_EMAIL_PRESENT,
@@ -40,7 +40,7 @@ export function create(req: express.Request, res: express.Response, next: any) {
         }
       }
       else {
-        var auth: AuthInterceptor = new AuthInterceptor();
+        var auth:AuthInterceptor = new AuthInterceptor();
         var token = auth.issueTokenWithUid(newUser);
         res.status(200).send({
           "status": Messages.STATUS_SUCCESS,
@@ -58,9 +58,9 @@ export function create(req: express.Request, res: express.Response, next: any) {
   }
 }
 
-export function professionaldata(req: express.Request, res: express.Response, next: any) {
+export function professionaldata(req:express.Request, res:express.Response, next:any) {
   try {
-    var bodyParam=req.body;
+    var bodyParam = req.body;
     console.log(JSON.stringify(bodyParam));
     res.status(200).send({
       "status": Messages.STATUS_SUCCESS,
@@ -71,5 +71,46 @@ export function professionaldata(req: express.Request, res: express.Response, ne
   }
   catch (e) {
     res.status(403).send({"status": Messages.STATUS_ERROR, "error_message": e.message});
+  }
+}
+
+export function updateDetails(req:express.Request, res:express.Response, next:any) {
+  try {
+    var updatedCandidate :CandidateModel = <CandidateModel>req.body;
+    var params = req.query;
+    delete params.access_token;
+    //var user = req.params.id;
+    var _id:string = req.params.id;//user._id;
+    console.log("candidate" +updatedCandidate);
+    var auth:AuthInterceptor = new AuthInterceptor();
+    var candidateService = new CandidateService();
+    candidateService.update(_id, updatedCandidate, (error, result) => {
+      if (error) {
+        next(error);
+      }
+      else {
+        candidateService.retrieve(result._id, (error, result) => {
+          if (error) {
+            next({
+              reason: Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
+              message: Messages.MSG_ERROR_WRONG_TOKEN,
+              code: 401
+            });
+          }
+          else {
+            var token = auth.issueTokenWithUid(updatedCandidate);
+            res.send({
+              "status": "success",
+              "data": {
+              },
+              access_token: token
+            });
+          }
+        });
+      }
+    });
+  }
+  catch (e) {
+    res.status(403).send({message: e.message});
   }
 }

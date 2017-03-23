@@ -28,7 +28,7 @@ class RoleService {
   }
 
   retrieveByMultiIds(item:any, callback:(error:any, result:any) => void) {
-     this.roleRepository.retrieveByMultiIds(item,{  _id: 0 ,capabilities :0 }, callback);
+     this.roleRepository.retrieveByMultiIds(item,{ capabilities :0 }, callback);
   }
 
   retrieveByMultiIdsWithCapability(item:any,names:any, callback:(error:any, result:any) => void) {
