@@ -123,6 +123,7 @@ export class API {
   public static RESET_PASSWORD = 'resetpassword';
   public static GOOGLE_LOGIN = 'googlelogin';
   public static INDUSTRY_PROFILE = 'industryprofile';
+  public static INDUSTRY_LIST = 'industry';
   public static REALOCATION = 'realoaction';
 
 }

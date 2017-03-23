@@ -16,7 +16,10 @@ import {DashboardService} from "../../../framework/dashboard/dashboard.service";
 export class ProfileCreatorComponent {
   private fullName: string;private firstName: string;private lastName: string;
   private   newUser:number;
-
+  private  chkEmployeeHistory:boolean=false;
+  private  chkCertification:boolean=false;
+  private  chkAboutMyself:boolean=false;
+  private  chkAwards:boolean=false;
   constructor(private _router:Router, private dashboardService:DashboardService) {
   }
 
@@ -50,5 +53,21 @@ export class ProfileCreatorComponent {
 
   onUserProfileError(error:any) {
     console.log(error);
+  }
+
+  hideEmployeeHistory(){
+    this.chkEmployeeHistory =!this.chkEmployeeHistory ;
+  }
+
+  hideCertification(){
+    this.chkCertification =!this.chkCertification ;
+  }
+
+  hideAboutMyself(){
+    this.chkAboutMyself =!this.chkAboutMyself ;
+  }
+
+  hideAwards(){
+    this.chkAwards =!this.chkAwards ;
   }
 }

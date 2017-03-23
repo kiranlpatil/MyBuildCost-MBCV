@@ -6,6 +6,8 @@ import { industryProfile} from "./industry";
 import {Router} from "@angular/router";
 import {LoaderService} from "../../../framework/shared/loader/loader.service";
 import {TestService} from "../test.service";
+import {Message} from "../../../framework/shared/message";
+import {MessageService} from "../../../framework/shared/message.service";
 @Component({
   moduleId: module.id,
   selector: 'cn-industry',
@@ -17,7 +19,7 @@ export class IndustryComponent {
   storedIndustry:string;
   userForm: FormGroup;
   model=new industryProfile();
-  industries: string[];
+  industries=new Array();
   storedRoles=new Array();
   industryModel = "";
   roleModel = "";
@@ -25,35 +27,50 @@ export class IndustryComponent {
   isRoleSelected : boolean= false;
   temproles : string[];
   maxRoles : number =3;
-  roles : string[];
+  roles =new Array();
   key:number;
   showModalStyle: boolean = false;
   disbleRole: boolean = false;
 
 
-  constructor(private industryService: IndustryService,private http: Http , private testService : TestService) {
+  constructor(private industryService: IndustryService,private http: Http , private testService : TestService, private messageService:MessageService,) {
 
   }
 
-  ngOnInit(){
+  ngOnInit(){debugger
+
     this.temproles= new Array(1);
-    if (this.industries === undefined) {
-      this.http.get("industry")
-        .map((res: Response) => res.json())
-        .subscribe(
-          data => {
-            this.industries = data.industry;
-          },
-          err => console.error(err),
-          () => console.log()
-        );
-    }
+    this.industryService.getIndustries()
+      .subscribe(
+        industrylist => this.onIndustryListSuccess(industrylist.data),
+        error => this.onError(error));
+
+  }
+
+  onIndustryListSuccess(data:any){debugger
+  for(let industry of data){
+    this.industries.push(industry.name);
+  }
+  }
+  onError(error:any){debugger
+    var message = new Message();
+    message.error_msg = error.err_msg;
+    message.isError = true;
+    this.messageService.message(message);
   }
 
   selectIndustryModel(newVal: any) {
     this.storedIndustry=newVal;
     this.industryModel = newVal;
-    this.http.get("role")
+
+    this.temproles= new Array(1);
+    this.industryService.getRoles(newVal)
+      .subscribe(
+        rolelist => this.onRoleListSuccess(rolelist.data),
+        error => this.onError(error));
+
+
+   /* this.http.get("role")
       .map((res: Response) => res.json())
       .subscribe(
         data => {
@@ -61,10 +78,14 @@ export class IndustryComponent {
         },
         err => console.error(err),
         () => console.log()
-      );
+      );*/
   }
 
-
+  onRoleListSuccess(data:any){
+    for(let role of data){
+      this.roles.push(role.name);
+    }
+  }
   selectRolesModel(newVal: any) {
     this.storedRoles.push(newVal);
     this.deleteSelectedRole(newVal);

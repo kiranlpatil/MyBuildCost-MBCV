@@ -1,12 +1,10 @@
-/**
- * Created by techprimelab on 3/9/2017.
- */
+
 import {  Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import {Http,Response} from "@angular/http";
+import { FormBuilder} from '@angular/forms';
+import {Http} from "@angular/http";
 import {LoaderService} from "../../../framework/shared/loader/loader.service";
-import {split} from "ts-node/dist";
+import {MoreAboutMyself} from "./more-about-myself";
 
 @Component({
   moduleId: module.id,
@@ -16,18 +14,17 @@ import {split} from "ts-node/dist";
 })
 
 export class MoreAboutMyselfComponent {
-  userForm: FormGroup;
-  error_msg: string;
   tempfield: string[];
-  status:string;
+  aboutMyself:string;
   newstringOne:string[];
   newstringTwo:string[];
   newstringThree:string[];
   length:number;
   condition:number;
+  remaining:number=250;
   maxword:number;
-
-  private year: any;
+  model=new MoreAboutMyself();
+  selectedMoreaboutMyself:MoreAboutMyself[]=new Array();
 
 
   constructor(private _router: Router, private http: Http,
@@ -41,17 +38,18 @@ export class MoreAboutMyselfComponent {
 
   wordcount(event:any){
 
-    console.log(this.status,event);
-  this.newstringOne= this.status.split(" ");
-    this.newstringTwo= this.status.split(".");
-    this.newstringThree= this.status.split(",");
+    console.log(this. aboutMyself,event);
+  this.newstringOne= this. aboutMyself.split(" ");
+    this.newstringTwo= this. aboutMyself.split(".");
+    this.newstringThree= this. aboutMyself.split(",");
 
   this.condition=this.newstringOne.length;
   this.condition+=this.newstringTwo.length;
   this.condition+=this.newstringThree.length;
+  this.remaining=250-this.condition;
   console.log(this.condition);
   if (this.condition-3>=250)
-  {this. maxword=this.status.length;
+  {this. maxword=this. aboutMyself.length;
     this.length=this. maxword;
 
   }

@@ -81,6 +81,7 @@ import {JobPosterComponent} from "./cnext/framework/job-poster/job-poster.compon
 import {JobInformationComponent} from "./cnext/framework/job-information/job-information.component";
 import {JobRequirementComponent} from "./cnext/framework/job-requirement/job-requirement.component";
 import {JobLocationComponent} from "./cnext/framework/job-location/job-location.component";
+import {DescriptionFieldComponent} from "./cnext/framework/description-field/description-field.component";
 
 @NgModule({
   imports: [
@@ -138,7 +139,8 @@ import {JobLocationComponent} from "./cnext/framework/job-location/job-location.
     AcademicDetailComponent,
     CertificationAccreditationComponent,
     AwardsComponent,
-    MoreAboutMyselfComponent
+    MoreAboutMyselfComponent,
+    DescriptionFieldComponent
   ],
   providers: [
     {

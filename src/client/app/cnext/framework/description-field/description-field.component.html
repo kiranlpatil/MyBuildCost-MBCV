@@ -1,0 +1,9 @@
+<div>
+    <div>
+      <textarea rows="4" cols="50" [(ngModel)]="status"  maxlength={{maxword}} (ngModelChange)="wordcount($event)" placeholder="Describe your {{type}}"></textarea>
+      <p>{{remaining}} words are remaining</p>
+    </div>
+</div>
+
+
+

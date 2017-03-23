@@ -1,14 +1,14 @@
 <div>
   <div>
     <label>Job Title :</label>
-    <input type="text" name="JobTitle" value="JobTitle">
+    <input type="text" name="JobTitle" value="JobTitle" [(ngModel)]="jobTitle" (ngModelChange)="isJobTitleSelected($event)" >
   </div>
   <div>
     <label>Hiring Manager :</label>
-    <input type="text" name="HiringManager" value="HiringManager">
+    <input type="text" name="HiringManager" value="HiringManager" [(ngModel)]="hiringManager" (ngModelChange)="ishiringMangerSelected($event)">
   </div>
   <div>
     <label>Department :</label>
-    <input type="text" name="Department" value="Department">
+    <input type="text" name="Department" value="Department" >
   </div>
 </div>
