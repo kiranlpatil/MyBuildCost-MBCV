@@ -1,0 +1,94 @@
+$btn-color: #1c75bd;
+$text-color: #666;
+
+.company-details {
+
+    .content {
+        width: 40%;
+    }
+
+    form {
+        padding: 15px 30px;
+        h4 {
+            margin: 0 0 15px;
+            font-size: 15px;
+            font-weight: 600;
+        }
+    }
+
+    .col-sm-10 {
+        display: inline-block;
+        padding: 15px 0;
+
+        clear: both;
+
+        textarea {
+            width: 100%;
+            resize: vertical;
+            border-radius: 0;
+        }
+    }
+
+    label {
+        font-weight: 100;
+        color: $text-color;
+    }
+
+    [type='file'] {
+        display: none;
+    }
+
+    .custom-file-upload {
+        border: 1px solid $btn-color;
+        border-radius: 25px;
+        cursor: pointer;
+        display: inline-block;
+        padding: 6px 15px;
+    }
+}
+
+@media only screen and (max-width: 1366px) {
+    .company-details {
+        .content {
+            width: 50%;
+        }
+    }
+}
+
+@media only screen and (max-width: 1024px) {
+    .company-details {
+        .content {
+            width: 70%;
+        }
+
+        .col-sm-10 {
+            width: 100%;
+        }
+
+        .col-sm-2 {
+            width: 20%;
+            padding: 0;
+        }
+
+        .col-sm-7 {
+            width: 80%;
+            padding: 0 0 15px;
+        }
+        .col-sm-3 {
+            width: 80%;
+            padding-left: 20%;
+        }
+
+        form {
+            padding: 15px;
+        }
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .company-details {
+        .content {
+            width: 80%;
+        }
+    }
+}

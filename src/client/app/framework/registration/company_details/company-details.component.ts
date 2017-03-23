@@ -24,7 +24,7 @@ import {Http} from "@angular/http";
   moduleId: module.id,
   selector: 'cn-CompanyDetails',
   templateUrl: 'company-details.component.html',
-  styleUrls: ['company-details.component.css'],
+  styleUrls: ['company-details.component.scss'],
 })
 
 export class CompanyDetailsComponent {

@@ -1,4 +1,5 @@
-<section class="main-form-wrapper registration" [ngStyle]="{'background-image': 'url(' + BODY_BACKGROUND + ')'}">
+<section class="main-form-wrapper company-details" [ngStyle]="{'background-image': 'url(' + BODY_BACKGROUND + ')'}"
+         xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
   <main-header></main-header>
 
   <app-loader></app-loader>
@@ -6,77 +7,69 @@
   <div class="content">
 
     <h5>Upload Documents <span class="glyphicon glyphicon-remove" (click)="navigateTo('/landing')"></span></h5>
-    <h4>{{company_name}}</h4>
-    <h4>Techprimelab</h4>
-
 
     <form [formGroup]="companyDetailsForm" (submit)="onSubmit()">
-    <!-- <div class="alert alert-danger clearfix" [hidden]="isShowErrorMessage">
-        <div class="col-sm-1 hidden-xs"><span class="glyphicon glyphicon-warning-sign"></span></div>
-        <div class="col-sm-10 col-xs-11 error-msg"><b>{{ error_msg }}</b></div>
-        <div class="col-sm-1 col-xs-1 close-msg">
-          <button (click)="closeErrorMessage()" class="btn-close"><span class="glyphicon glyphicon-remove"></span>
-          </button>
+
+      <!--<h4>{{company_name}}</h4>-->
+      <h4>Techprimelab</h4>
+      <div class="col-sm-12 no-padding">
+        <div class="col-sm-2 no-padding">
+          <label>Logo:</label>
+        </div>
+        <div class="col-sm-7">
+          <cn-profile-picture></cn-profile-picture>
         </div>
       </div>
--->
-      <div >
-        <h2>company logo</h2>
-        <cn-profile-picture></cn-profile-picture>
-      </div>
 
-      <div class="col-sm-3 profile">
-
-        <div class="avtar" [ngStyle]="{'background-image': 'url(' + image_path + ')'}">
-
+      <div class="col-sm-10 no-padding">
+        <div [class.hide-list]="isSocialLogin">
+          <div class="col-sm-2 no-padding">
+            <label for="file-upload">Document1:</label>
+          </div>
+          <div class="col-sm-7">
+            <textarea type="text" formControlName="description1" id="description1" class="form-control"></textarea>
+          </div>
+          <div class="col-sm-3 no-padding">
+            <label for="file-upload" class="custom-file-upload">Upload File</label>
+            <input id="file-upload" type="file" (change)="fileChangeEvent($event)" placeholder="Upload file" />
+          </div>
         </div>
-        <br>
-
-        <form [class.hide-list]="isSocialLogin">
-          <label for="file-upload" class="custom-file-upload">
-            Document1:
-          </label>
-          <input type="text" [ngModel]="description1" (ngModelChange)="selectDescriptionModel($event)" />
-          <input id="file-upload" type="file" (change)="fileChangeEvent($event)" placeholder="Upload file"/>
-        </form>
       </div>
 
 
-      <div class="col-sm-3 profile">
-
-        <div class="avtar" [ngStyle]="{'background-image': 'url(' + image_path + ')'}">
-
+      <div class="col-sm-10 no-padding">
+        <div [class.hide-list]="isSocialLogin">
+          <div class="col-sm-2 no-padding">
+            <label for="file-upload">Document2:</label>
+          </div>
+          <div class="col-sm-7">
+            <textarea type="text" formControlName="description2" id="description2" class="form-control"></textarea>
+          </div>
+          <div class="col-sm-3 no-padding">
+            <label for="file-upload" class="custom-file-upload">Upload File</label>
+            <input id="file-upload2" type="file" (change)="fileChangeEvent2($event)" placeholder="Upload file"/>
+          </div>
         </div>
-        <br>
-
-        <form [class.hide-list]="isSocialLogin">
-          <label for="file-upload" class="custom-file-upload">
-            Document2:
-          </label>
-          <input type="text" formControlName="description2" id="description2" class="form-control" />
-          <input id="file-upload2" type="file" (change)="fileChangeEvent2($event)" placeholder="Upload file"/>
-        </form>
       </div>
 
 
-      <div class="col-sm-3 profile">
-
-        <div class="avtar" [ngStyle]="{'background-image': 'url(' + image_path + ')'}">
-
+      <div class="col-sm-10 no-padding">
+        <div [class.hide-list]="isSocialLogin">
+          <div class="col-sm-2 no-padding">
+            <label for="file-upload">Document3:</label>
+          </div>
+          <div class="col-sm-7">
+            <textarea type="text" formControlName="description3" id="description3" class="form-control"></textarea>
+          </div>
+          <div class="col-sm-3 no-padding">
+            <label for="file-upload" class="custom-file-upload">Upload File</label>
+            <input id="file-upload3" type="file" (change)="fileChangeEvent3($event)" placeholder="Upload file"/>
+          </div>
         </div>
-        <br>
-
-        <form [class.hide-list]="isSocialLogin">
-          <label for="file-upload" class="custom-file-upload">
-            Document3:
-          </label>
-          <input type="text" formControlName="description3" id="description3" class="form-control" />
-          <input id="file-upload3" type="file" (change)="fileChangeEvent3($event)" placeholder="Upload file"/>
-        </form>
       </div>
 
       <div class="button-group">
-        <button type="submit" class="btn btn-danger" [disabled]="!userForm.valid">Submit Documents</button>
+        <button type="submit" class="btn btn-primary" [disabled]="!userForm.valid">Submit Documents</button>
       </div>
 
     </form>

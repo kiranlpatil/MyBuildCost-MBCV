@@ -1,28 +1,118 @@
-<div class="create-profile clearfix">
+<div class="job-poster clearfix">
+  <div class="bar-container profile-header">
+    <div class="container">
 
+    </div>
+  </div>
 
-  <div class="profile-wrapper">
+  <div class="poster-wrapper container">
 
-    <div class="section-container">
-      <!--<h4 class="heading">Choose Job Information</h4>-->
-      <div class="main-content">
-        <cn-job-information></cn-job-information>
+    <div class="col-sm-3 padding-right5 filter-container">
+      <p>Adjust these filters to get more numbers of candidates</p>
+      <div class="inner col-sm-12">
+        <label>Proficiency:
+          <div ng2-auto-complete
+                [source]="roles"
+                (ngModelChange)="selectRolesModel($event)">
+            <input class="form-control" [ngModel]="roleModel" placeholder="Select"/>
+          </div>
+        </label>
+
+        <label>Domain:
+          <div ng2-auto-complete
+                [source]="roles"
+                (ngModelChange)="selectRolesModel($event)">
+            <input class="form-control" [ngModel]="roleModel" placeholder="Select"/>
+          </div>
+        </label>
+
+        <label>Experience:
+          <div ng2-auto-complete
+                [source]="roles"
+                (ngModelChange)="selectRolesModel($event)">
+            <input class="form-control" [ngModel]="roleModel" placeholder="Select"/>
+          </div>
+        </label>
+
+        <label>Complexity:
+          <div ng2-auto-complete
+               [source]="roles"
+               (ngModelChange)="selectRolesModel($event)">
+            <input class="form-control" [ngModel]="roleModel" placeholder="Select"/>
+          </div>
+        </label>
+
+        <label>Lead Time to Join:
+          <div ng2-auto-complete
+               [source]="roles"
+               (ngModelChange)="selectRolesModel($event)">
+            <input class="form-control" [ngModel]="roleModel" placeholder="Select"/>
+          </div>
+        </label>
+
+        <p>Salary Range:</p>
+        <div class="row">
+          <div class="col-sm-6">
+            <label>
+              <div ng2-auto-complete
+                   [source]="roles"
+                   (ngModelChange)="selectRolesModel($event)">
+                <input class="form-control" [ngModel]="roleModel" placeholder="Min"/>
+              </div>
+            </label>
+          </div>
+          <div class="col-sm-6">
+            <label>
+              <div ng2-auto-complete
+                   [source]="roles"
+                   (ngModelChange)="selectRolesModel($event)">
+                <input class="form-control" [ngModel]="roleModel" placeholder="Max"/>
+              </div>
+            </label>
+          </div>
+        </div>
       </div>
     </div>
 
-   <div class="section-container">
-     <h4 class="heading">Choose Job Requirement</h4>
-      <div class="main-content">
-        <cn-job-requirement></cn-job-requirement>
-      </div>
-    </div>
+    <div class="col-sm-9 padding-left5">
 
-    <div class="section-container">
-     <h4 class="heading">Choose Job Location</h4>
-      <div class="main-content">
-        <cn-job-location></cn-job-location>
+      <ul class="nav nav-tabs">
+        <li class="active">
+          <a data-toggle="tab" href="#home">My post Job</a>
+        </li>
+        <li>
+          <a data-toggle="tab" href="#menu1">Post New Job</a>
+        </li>
+      </ul>
+
+      <div class="tab-content">
+        <div id="home" class="tab-pane fade in active">
+
+        </div>
+        <div id="menu1" class="tab-pane fade">
+
+        </div>
       </div>
-    </div>
+
+      <!--<div class="section-container">
+        <div class="main-content">
+          <cn-job-information></cn-job-information>
+        </div>
+      </div>
+
+      <div class="section-container">
+        <h4 class="heading">Choose Job Requirement</h4>
+          <div class="main-content">
+            <cn-job-requirement></cn-job-requirement>
+          </div>
+      </div>
+
+      <div class="section-container">
+       <h4 class="heading">Choose Job Location</h4>
+        <div class="main-content">
+          <cn-job-location></cn-job-location>
+        </div>
+      </div>
 
       <div class="section-container">
         <h4 class="heading">Choose Your Capabilities (Max. 10)</h4>
@@ -53,20 +143,21 @@
         </div>
       </div>
 
-        <div class="section-container">
-          <h4 class="heading">description</h4>
-          <div class="main-content max-height">
-            <cn-description-field [type]="'competensies'" [maxLength]=" '500'" ></cn-description-field>
-          </div>
+      <div class="section-container">
+        <h4 class="heading">description</h4>
+        <div class="main-content max-height">
+          <cn-description-field [type]="'competensies'" [maxLength]=" '500'" ></cn-description-field>
         </div>
-        <div class="section-container">
-          <h4 class="heading">description</h4>
-          <div class="main-content max-height">
-            <cn-description-field [type]="'responsibilities'" [maxLength]=" '500'" ></cn-description-field>
-          </div>
-        </div>
+      </div>
 
+      <div class="section-container">
+        <h4 class="heading">description</h4>
+        <div class="main-content max-height">
+          <cn-description-field [type]="'responsibilities'" [maxLength]=" '500'" ></cn-description-field>
+        </div>
+      </div>-->
     </div>
+  </div>
 </div>
 
 
