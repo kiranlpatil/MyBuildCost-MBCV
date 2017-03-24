@@ -1,5 +1,5 @@
 
-import {  Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder} from '@angular/forms';
 import {Http} from "@angular/http";
@@ -14,6 +14,8 @@ import {MoreAboutMyself} from "./more-about-myself";
 })
 
 export class MoreAboutMyselfComponent {
+
+   maxLength :number=250;
   tempfield: string[];
   aboutMyself:string;
   newstringOne:string[];
@@ -21,7 +23,7 @@ export class MoreAboutMyselfComponent {
   newstringThree:string[];
   length:number;
   condition:number;
-  remaining:number=250;
+  remaining:number;
   maxword:number;
   model=new MoreAboutMyself();
   selectedMoreaboutMyself:MoreAboutMyself[]=new Array();
@@ -34,6 +36,10 @@ export class MoreAboutMyselfComponent {
 
 
   }
+  ngOnInit(){
+    this.remaining=this.maxLength;
+  }
+
 
 
   wordcount(event:any){
@@ -42,17 +48,11 @@ export class MoreAboutMyselfComponent {
   this.newstringOne= this. aboutMyself.split(" ");
     this.newstringTwo= this. aboutMyself.split(".");
     this.newstringThree= this. aboutMyself.split(",");
-
-  this.condition=this.newstringOne.length;
-  this.condition+=this.newstringTwo.length;
-  this.condition+=this.newstringThree.length;
-  this.remaining=250-this.condition;
-  console.log(this.condition);
-  if (this.condition-3>=250)
-  {this. maxword=this. aboutMyself.length;
-    this.length=this. maxword;
-
-  }
+    this.condition=this.newstringOne.length+this.newstringTwo.length+this.newstringThree.length;
+    this.remaining=this.maxLength-(this.condition-3);
+    if (this.condition-3>=this.maxLength) {
+      this. maxword=this.aboutMyself.length;
+    }
   }
 
 

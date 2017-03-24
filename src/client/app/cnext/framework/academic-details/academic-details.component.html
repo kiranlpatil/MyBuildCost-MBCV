@@ -16,7 +16,10 @@
 
   <div class="col-sm-4 no-padding">
     <div class="form-group">
-      <input class="form-control" type="text" required [ngModel]="passingyear" (ngModelChange)="PassingYear($event)"/>
+      <div id="yearf" ng2-auto-complete
+           [source]="yearList"
+           (ngModelChange)="selectYearModel($event)">
+      <input class="form-control" type="text" required [ngModel]="passingyear" />
       <label>Year of Passing</label>
     </div>
   </div>
