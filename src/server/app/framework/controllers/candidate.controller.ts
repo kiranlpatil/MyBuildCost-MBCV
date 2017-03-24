@@ -118,7 +118,7 @@ export function updateDetails(req:express.Request, res:express.Response, next:an
         academicsids.push(item._id);
       }
       updatedCandidate.employmentHistory = employementids;
-      updatedCandidate.professionalDetails = employementids;
+      updatedCandidate.professionalDetails = professionalids;
       updatedCandidate.academics = academicsids;
       candidateService.update(_id, updatedCandidate, (error, result) => {
         if (error) {

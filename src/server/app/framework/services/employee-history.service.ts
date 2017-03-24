@@ -17,7 +17,6 @@ class EmployeeHistoryService {
   }
 
   create(item:any, callback:(error:any, result:any) => void) {
-    console.log("In Inner Employment"+JSON.stringify(item));
     this.employeeHistoryRepository.create(item, (err, res) => {
       if (err) {
         callback(err, null);
