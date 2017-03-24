@@ -2,6 +2,7 @@
  * Created by techprimelab on 3/9/2017.
  */
 import {Location} from "../location";
+import {CompanyDetails} from "../company_details/company-details";
 
 export class Employer {
   id : any;
@@ -14,6 +15,7 @@ export class Employer {
   password : string;
   conform_password : string;
   location:Location;
+  companyDetails:CompanyDetails;
   pin:number;
   captcha:string;
   current_theme : string;

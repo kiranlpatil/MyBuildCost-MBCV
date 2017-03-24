@@ -195,7 +195,8 @@ export class EmployerComponent {
     LocalStorageService.setLocalValue(LocalStorage.MOBILE_NUMBER, this.recruiterForm.value.mobile_number);
     LocalStorageService.setLocalValue(LocalStorage.CHANGE_MAIL_VALUE, 'from_registration');
     this.recruiterForm.reset();
-    this._router.navigate([NavigationRoutes.VERIFY_USER]);
+    this._router.navigate([NavigationRoutes.APP_COMPANYDETAILS]);
+   // this._router.navigate([NavigationRoutes.VERIFY_USER]);
   }
 
   onRegistrationError(error: any) {
@@ -236,11 +237,11 @@ export class EmployerComponent {
     var roleType: string;
     roleType = event.target.id;
     if (roleType === "self") {
-       this.isRecruitingForself =true;
+       this.isRecruitingForself = true;
 
     }
-    else if(roleType === "others"){
-       this.isRecruitingForself =false;
+    else {
+       this.isRecruitingForself = false;
     }
   }
 }

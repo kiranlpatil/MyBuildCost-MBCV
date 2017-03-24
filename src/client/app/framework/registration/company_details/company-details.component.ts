@@ -39,7 +39,10 @@ export class CompanyDetailsComponent {
   isShowErrorMessage: boolean = true;
   BODY_BACKGROUND: string;
   submitted = false;
-  fileName:any;
+  fileName1:string;
+  fileName2:string;
+  fileName3:string;
+  buttonId:any;
 
 
   constructor(private commanService: CommonService, private _router: Router, private http: Http,
@@ -91,15 +94,18 @@ export class CompanyDetailsComponent {
 
   fileChangeEvent1(fileInput: any) {
 
-      this.filesToUpload = <Array<File>> fileInput.target.files;
-
+    this.filesToUpload = <Array<File>> fileInput.target.files;
+    this.buttonId=event.target.id;
+    console.log("buttonid is:",this.buttonId);
     console.log("path of files to upload:", this.filesToUpload);
-    this.fileName=this.filesToUpload[0].name;
-    console.log(this.fileName);
+    this.fileName1=this.filesToUpload[0].name;
+    console.log(this.fileName1);
     this.companyDetailsService.makeDocumentUplaod(this.filesToUpload, []).then((result: any) => {
       if (result !== null) {
         //this.model.document1 = result.data.document;
-        this.setOfDocuments.push(result.data.document) ;
+       this.setOfDocuments[0]=result.data.document;
+        console.log("setOfDocuments is:",this.setOfDocuments);
+
         this.fileChangeSucess(result);
       }
     }, (error:any) => {
@@ -112,10 +118,15 @@ export class CompanyDetailsComponent {
       this.filesToUpload = <Array<File>> fileInput.target.files;
 
     console.log("path of files to upload:", this.filesToUpload);
+    this.fileName2=this.filesToUpload[0].name;
+    console.log(this.fileName2);
     this.companyDetailsService.makeDocumentUplaod(this.filesToUpload, []).then((result: any) => {
       if (result !== null) {
         //this.model.document1 = result.data.document;
-        this.setOfDocuments.push(result.data.document) ;
+        this.setOfDocuments[1]=result.data.document;
+
+        console.log("setOfDocuments is:",this.setOfDocuments);
+
         this.fileChangeSucess(result);
       }
     }, (error) => {
@@ -128,10 +139,13 @@ export class CompanyDetailsComponent {
       this.filesToUpload = <Array<File>> fileInput.target.files;
 
     console.log("path of files to upload:", this.filesToUpload);
+    this.fileName2=this.filesToUpload[0].name;
+    console.log(this.fileName2);
     this.companyDetailsService.makeDocumentUplaod(this.filesToUpload, []).then((result: any) => {
       if (result !== null) {
-       // this.setOfDocuments.push(result.data.document) ;
-        this.setOfDocuments[2] = result.data.document ;
+
+        this.setOfDocuments[2]=result.data.document;
+
         console.log("setOfDocuments is:",this.setOfDocuments);
         this.fileChangeSucess(result);
       }
@@ -153,7 +167,7 @@ export class CompanyDetailsComponent {
     }
     var message = new Message();
     message.isError = false;
-    message.custom_message = Messages.MSG_SUCCESS_DASHBOARD_PROFILE_PIC;
+    message.custom_message = Messages.MSG_SUCCESS_UPLOAD_DOCUMENT;
     this.messageService.message(message);
     this.profileService.onProfileUpdate(result);
   }
@@ -165,7 +179,7 @@ export class CompanyDetailsComponent {
       message.error_msg = error.err_msg;
       this.messageService.message(message);
     } else {
-      message.error_msg = Messages.MSG_ERROR_DASHBOARD_PROFILE_PIC;
+      message.error_msg = Messages.MSG_ERROR_UPLOAD_DOCUMENT;
       this.messageService.message(message);
     }
 

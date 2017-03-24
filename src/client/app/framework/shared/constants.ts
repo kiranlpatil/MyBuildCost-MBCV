@@ -43,6 +43,7 @@ export class Messages {
     public static MSG_ERROR_DASHBOARD_PROFILE:string = 'Failed to Update Profile ';
     public static MSG_ERROR_CONTACT:string = 'Failed to send mail';
     public static MSG_ERROR_DASHBOARD_PROFILE_PIC:string = 'Failed to Change Profile Picture';
+    public static MSG_ERROR_UPLOAD_DOCUMENT:string = 'Failed to Upload Document';
     public static MSG_ERROR_CHANGE_THEME:string = 'Failed to Change Theme';
 
     public static MSG_ERROR_TOKEN_SESSION:string = 'Session has been Expired';

@@ -13,7 +13,7 @@ export function init(app: express.Application) {
     app.post("/api/login", userInterceptor.login,userController.login);
     app.post("/api/forgotpassword", userInterceptor.forgotPassword, userController.forgotPassword);
     app.put("/api/resetpassword/:id", this.authInterceptor.requiresAuth, userController.resetPassword);
-    app.post("/api/candidate", userInterceptor.create, candidateController.create);
+    app.post("/api/candidate",  candidateController.create);
     app.post("/api/recruiter",  recruiterController.create);
     //app.post("/api/candidate", userInterceptor.create, candidateController.create);
    // app.post("/api/recruiter", userInterceptor.create, candidateController.create);

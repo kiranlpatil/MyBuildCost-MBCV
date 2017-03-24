@@ -21,6 +21,7 @@ class RecruiterService {
   }
 
   createUser(item:any, callback:(error:any, result:any) => void) {
+    console.log("in recruiter service"+JSON.stringify(item));
     this.userRepository.retrieve({"email": item.email}, (err, res) => {
       if(err) {
         callback(new Error(err), null);

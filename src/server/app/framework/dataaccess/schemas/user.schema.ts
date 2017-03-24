@@ -9,12 +9,10 @@ class UserSchema {
         var schema = mongoose.Schema({
 
             first_name: {
-                type: String,
-                required: true
+                type: String
             },
             last_name: {
-                type: String,
-                required: true
+                type: String
             },
             email: {
                 type: String,
@@ -30,12 +28,10 @@ class UserSchema {
             default: 0
           },
           temp_email: {
-            type: String,
-            required: false
+            type: String
           },
             password: {
-                type: String,
-                required: true
+                type: String
             },
             isActivated: {
                 type: Boolean,
