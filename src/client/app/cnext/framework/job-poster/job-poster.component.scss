@@ -8,143 +8,32 @@ $white: #fff;
 $border-color: #ddd;
 $text-color: #333;
 
-.job-poster {
-  background: $profile-background;
-  clear: both;
-  padding-bottom: 50px;
-}
 
-.bar-container {
-  background: #3694d1;
-  height: 90px;
-  left: 0;
-  margin: 0 auto;
-  padding-top: 20px;
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 99;
-}
-
-.poster-wrapper {
-  margin: 120px auto 0;
-  width: 85%;
-
-  .col-sm-3 {
-    width: 25%;
-  }
-
-  .col-sm-9 {
-    width: 75%;
-  }
-
-  .max-height {
-    max-height: 400px;
-    overflow: auto;
-  }
-
-  .min-height {
-    min-height: 350px;
-    overflow: auto;
-  }
-
-  .profeiciency-domain {
-    .heading,
-    .main-content {
-      padding: 0;
-    }
-
-    .heading > .col-sm-6,
-    .main-content > .col-sm-6 {
-      padding: 15px;
-
-      &:first-child {
-        border-right: 1px solid $border-color;
-      }
-    }
-  }
-}
-
-.filter-container {
+.section-container {
+  padding: 0 15px 30px;
   text-align: left;
-
-  p {
-    color: $text-color;
-  }
-
-  .inner {
-    border: 1px solid $border-color;
-    padding: 30px;
-
-    p {
-      margin: 0;
-    }
-
-    label {
-      color: $text-color;
-      font-weight: 100;
-      font-size: 14px;
-      margin: 0 0 20px 0;
-      width: 100%;
-
-      &:last-child {
-        margin: 0;
-      }
-    }
-  }
-
-  .form-control {
-    background: url('assets/framework/images/form/drop-down.png') no-repeat;
-    background-color: $white;
-    background-position: 95% 50%;
-    border-radius: 0;
-    box-shadow: none;
-    margin-top: 10px;
-    padding: 6px;
-    width: 100%;
-
-    &:focus,
-    &:active {
-      outline: none;
-    }
-  }
 }
 
-.nav-tabs {
-
+.heading {
+  text-align: left;
+  margin: 0 0 15px 0;
+  font-size: 14px;
 }
-.tab-content {
-  border-bottom: 1px solid $border-color;
-  border-left: 1px solid $border-color;
-  border-right: 1px solid $border-color;
+
+.main-content {
+  background: $white;
+  border: 1px solid $border-color;
+  padding: 15px;
+  text-align: left;
 }
 
 
-@media only screen and (max-width: 1280px) {
-  .poster-wrapper {
-    display: inline-block;
-    width: 100%;
-  }
+.max-height {
+  max-height: 400px;
+  overflow: auto;
 }
 
-@media only screen and (max-width: 768px) {
-  .poster-wrapper {
-    margin: 100px auto 0;
-
-    .col-sm-3 {
-      float: left;
-      width: 30%;
-    }
-
-    .col-sm-9 {
-      float: left;
-      width: 70%;
-    }
-  }
-
-  .filter-container {
-    .inner {
-      padding: 10px;
-    }
-  }
+.min-height {
+  height: 400px;
+  overflow: auto;
 }

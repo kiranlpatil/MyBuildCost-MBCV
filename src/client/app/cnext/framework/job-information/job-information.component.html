@@ -1,14 +1,14 @@
-<div>
-  <div>
+<div class="wrapper clearfix">
+  <div class="col-sm-6">
     <label>Job Title :</label>
-    <input type="text" name="JobTitle" value="JobTitle" [(ngModel)]="jobTitle" (ngModelChange)="isJobTitleSelected($event)" >
+    <input class="form-control" type="text" name="JobTitle" placeholder="Enter Job Title" [(ngModel)]="jobTitle" (ngModelChange)="isJobTitleSelected($event)" >
   </div>
-  <div>
+  <div class="col-sm-6">
     <label>Hiring Manager :</label>
-    <input type="text" name="HiringManager" value="HiringManager" [(ngModel)]="hiringManager" (ngModelChange)="ishiringMangerSelected($event)">
+    <input class="form-control" type="text" name="HiringManager" placeholder="Name of the Manager" [(ngModel)]="hiringManager" (ngModelChange)="ishiringMangerSelected($event)">
   </div>
-  <div>
+  <div class="col-sm-6">
     <label>Department :</label>
-    <input type="text" name="Department" value="Department" >
+    <input class="form-control" type="text" name="Department" placeholder="Enter Department" >
   </div>
 </div>

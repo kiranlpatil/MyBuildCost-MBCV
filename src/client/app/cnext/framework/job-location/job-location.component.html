@@ -1,30 +1,33 @@
-
-  <div ng2-auto-complete
-       [source]="countries"
-       (ngModelChange)="selectCountryModel($event)">
-    <input  [ngModel]="countryModel"   />
+<div class="wrapper clearfix">
+  <div class="col-sm-6">
     <label >Select Country</label>
+    <div ng2-auto-complete
+         [source]="countries"
+         (ngModelChange)="selectCountryModel($event)">
+      <input  [ngModel]="countryModel" class="form-control" />
+    </div>
   </div>
 
-
-
-  <div ng2-auto-complete
-       [source]="states"
-       (ngModelChange)="selectStateModel($event)">
-    <input [ngModel]="stateModel" />
+  <div class="col-sm-6">
     <label class="select-label">Select State</label>
+    <div ng2-auto-complete
+         [source]="states"
+         (ngModelChange)="selectStateModel($event)">
+      <input [ngModel]="stateModel" class="form-control" />
+    </div>
   </div>
 
-
-
-  <div ng2-auto-complete
-       [source]="cities"
-       (ngModelChange)="selectCityModel($event)">
-    <input  [ngModel]="cityModel"  />
+  <div class="col-sm-6">
     <label class="select-label">Select City</label>
+    <div ng2-auto-complete
+         [source]="cities"
+         (ngModelChange)="selectCityModel($event)">
+      <input  [ngModel]="cityModel" class="form-control" />
+    </div>
   </div>
 
-
-  <input type="number"  id="pin" [(ngModel)]="pin" (ngModelChange)="isPinSelected($event)" />
-  <label>PIN</label>
-
+  <div class="col-sm-6">
+    <label>PIN</label>
+    <input type="number" class="form-control" id="pin" [(ngModel)]="pin" (ngModelChange)="isPinSelected($event)" />
+  </div>
+</div>
