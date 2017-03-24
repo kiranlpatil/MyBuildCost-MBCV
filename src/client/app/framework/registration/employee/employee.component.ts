@@ -156,7 +156,7 @@ export class EmployeeComponent {
     this.model.location.city = this.storedcity;
     this.model.location.pin = this.model.pin;
 
-    if (!this.makePasswordConfirm()) {debugger
+    if (!this.makePasswordConfirm()) {
 
       this.isFormSubmitted = true;
       // this.loaderService.start();

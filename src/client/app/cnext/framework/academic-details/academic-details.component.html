@@ -1,4 +1,4 @@
-<div class="academic-details" *ngFor="let item of tempfield;let i= index">
+<div class="academic-details clearfix" *ngFor="let item of tempfield;let i= index">
 
   <div class="col-sm-4 no-padding">
     <div class="form-group">
@@ -28,6 +28,7 @@
   <div class="col-sm-10 no-padding">
     <textarea placeholder="Specialization/Remarks" [ngModel]="specialization" (ngModelChange)="Specializationfunc($event)" class="form-control"></textarea>
   </div>
+</div>
 
 <div class="clear">
   <button type="button" id="more_fields" (click)="addAnother()" class="btn btn-create-profile" [disabled]="disbleRole" >

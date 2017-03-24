@@ -1,3 +1,10 @@
+.btn {
+  &:focus,
+  &:active {
+    outline: none;
+  }
+}
+
 .form-control {
   border-radius: 0;
   height: 100px;

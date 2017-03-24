@@ -1,5 +1,19 @@
+$border-color: #ccc;
+
+.btn {
+  &:focus,
+  &:active {
+    outline: none;
+  }
+}
+
 .form {
-  margin-bottom: 30px;
+  margin: 10px 0 20px;
+  border-top: 1px solid $border-color;
+
+  &:first-child {
+    border: 0;
+  }
 }
 
 .left-content {

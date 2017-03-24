@@ -327,6 +327,12 @@ h4 {
   }
 }
 
+//dropdown
+ng2-auto-complete {
+  max-height: 100px;
+  overflow: auto;
+}
+
 //popup or modals
 .modal {
   animation: fadein .5s;
