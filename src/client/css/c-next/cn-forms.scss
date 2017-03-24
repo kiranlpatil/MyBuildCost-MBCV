@@ -170,6 +170,10 @@ $text-color: #666;
     .custom-file-upload > img {
       display: none !important;
     }
+
+    .custom-file-upload > span {
+      display: block !important;
+    }
   }
 }
 

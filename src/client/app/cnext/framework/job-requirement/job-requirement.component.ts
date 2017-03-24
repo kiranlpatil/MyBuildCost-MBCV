@@ -98,7 +98,7 @@ export class JobRequirementComponent {
     message.isError = true;
     this.messageService.message(message);
   }
-  
+
   onRoleListSuccess(data:any){
     //this.rolesData=data;
     for(let role of data){
@@ -123,7 +123,7 @@ export class JobRequirementComponent {
       );
   }
 
-  selecteducationModel(newVal: any) {
+  selecteducationModel(newVal: any) {debugger
     this.educationModel = newVal;
 
     this.jobRequirement.educationModel = this.educationModel;
@@ -132,7 +132,7 @@ export class JobRequirementComponent {
       .map((res: Response) => res.json())
       .subscribe(
         data => {
-          this.experiencelist = data.experiencelist;
+          this.experiencelist = data.experience;
         },
         err => console.error(err),
         () => console.log()
@@ -140,7 +140,7 @@ export class JobRequirementComponent {
 
   }
 
-  selectexperienceModel(newVal: any) {
+  selectexperienceModel(newVal: any) {debugger
     this.experienceModel = newVal;
 
     this.jobRequirement.experienceModel = this.experienceModel;
