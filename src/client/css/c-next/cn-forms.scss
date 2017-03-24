@@ -85,6 +85,10 @@ $text-color: #666;
 
     .btn {
       float: none;
+
+      &:focus, &:active {
+
+      }
     }
   }
 
@@ -126,6 +130,47 @@ $text-color: #666;
       }
     }
   }
+
+  .profile {
+    width: 120px !important;
+    padding: 0 !important;
+
+    .avtar {
+      width: 100% !important;
+    }
+
+    .avtar > img {
+      border-radius: 0 !important;
+      border: 1px solid $border-color;
+    }
+
+    form {
+      position: relative !important;
+      bottom: 0 !important;
+      right: 0 !important;
+      text-align: center !important;
+      padding: 0 !important;
+      margin-top: 10px;
+    }
+
+    form > label {
+      border: 1px solid #1c75bd;
+      border-radius: 25px !important;
+      cursor: pointer;
+      display: inline-block;
+      padding: 6px 15px;
+      color: #666 !important;
+      font-weight: 100;
+    }
+
+    .custom-file-upload{
+      width: auto !important;
+    }
+
+    .custom-file-upload > img {
+      display: none !important;
+    }
+  }
 }
 
 // Media Queries
@@ -153,6 +198,10 @@ $text-color: #666;
       .employer-form {
         padding: 15px;
       }
+    }
+
+    .profile {
+      margin: 0 !important;
     }
   }
 }

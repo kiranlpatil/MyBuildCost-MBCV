@@ -29,9 +29,17 @@
     padding: 15px;
   }
 
-  .registration-btn-radio {
-    margin-top: -40px;
-    margin-bottom: 15px;
+  label {
+    width: 130px;
+    margin: 0;
+  }
+
+  input {
+
+    &:focus,
+    &:active {
+      outline: none;
+    }
   }
 }
 
@@ -80,11 +88,6 @@
 
     .error-message-registration > p {
       text-align: left;
-    }
-
-    .registration-btn-radio {
-      margin-top: 0;
-      padding: 0;
     }
   }
 

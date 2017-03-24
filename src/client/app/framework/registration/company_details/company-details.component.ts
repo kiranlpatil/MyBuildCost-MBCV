@@ -44,7 +44,7 @@ export class CompanyDetailsComponent {
 
   constructor(private commanService: CommonService, private _router: Router, private http: Http,
               private companyDetailsService: CompanyDetailsService,private profileService: ProfileService,
-              private messageService: MessageService, private formBuilder: FormBuilder, private loaderService: LoaderService) {debugger
+              private messageService: MessageService, private formBuilder: FormBuilder, private loaderService: LoaderService) {
     this.companyDetailsForm = this.formBuilder.group({
       'description1': [''],
       'description2': [''],
@@ -62,7 +62,7 @@ export class CompanyDetailsComponent {
     this.company_name = LocalStorageService.getLocalValue(LocalStorage.EMAIL_ID);
   }
 
-  ngOnInit() {debugger
+  ngOnInit() {
     //this.model1.company_name = LocalStorageService.getLocalValue(LocalStorage.COMPANY_NAME);
     this.model1.company_size = LocalStorageService.getLocalValue(LocalStorage.COMPANY_SIZE);
    // this.company_name = LocalStorageService.getLocalValue(LocalStorage.EMAIL_ID);
@@ -70,7 +70,7 @@ export class CompanyDetailsComponent {
   }
 
 
-  onSubmit() {debugger
+  onSubmit() {
 
     this.submitted = true;
     this.model = this.companyDetailsForm.value;
@@ -89,7 +89,7 @@ export class CompanyDetailsComponent {
     this._router.navigate(['/']);
   }
 
-  fileChangeEvent1(fileInput: any) {debugger
+  fileChangeEvent1(fileInput: any) {
 
       this.filesToUpload = <Array<File>> fileInput.target.files;
 

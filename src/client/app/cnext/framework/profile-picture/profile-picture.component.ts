@@ -47,7 +47,7 @@ export class ProfilePictureComponent  {
   }
 
 
-  fileChangeEvent(fileInput: any) {debugger
+  fileChangeEvent(fileInput: any) {
     this.filesToUpload = <Array<File>> fileInput.target.files;
     if (this.filesToUpload[0].type === 'image/jpeg' || this.filesToUpload[0].type === 'image/png'
       || this.filesToUpload[0].type === 'image/jpg' || this.filesToUpload[0].type === 'image/gif') {

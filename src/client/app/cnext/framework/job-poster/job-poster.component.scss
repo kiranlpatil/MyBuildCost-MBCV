@@ -37,3 +37,13 @@ $text-color: #333;
   height: 400px;
   overflow: auto;
 }
+
+.button-group {
+  margin-bottom: 20px;
+  .btn {
+    &:focus,
+    &:active {
+      outline: none;
+    }
+  }
+}

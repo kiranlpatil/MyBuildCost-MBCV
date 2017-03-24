@@ -1,4 +1,4 @@
-<section class="main-form-wrapper registration" [ngStyle]="{'background-image': 'url(' + BODY_BACKGROUND + ')'}">
+<!--<section class="main-form-wrapper registration" [ngStyle]="{'background-image': 'url(' + BODY_BACKGROUND + ')'}">
   <main-header></main-header>
 
   <app-loader></app-loader>
@@ -8,39 +8,42 @@
     <h5>Register <span class="glyphicon glyphicon-remove" (click)="navigateTo('/landing')"></span></h5>
 
     <form>
-      <!--<div class="alert alert-danger clearfix" [hidden]="isShowErrorMessage">
+      &lt;!&ndash;<div class="alert alert-danger clearfix" [hidden]="isShowErrorMessage">
         <div class="col-sm-1 hidden-xs"><span class="glyphicon glyphicon-warning-sign"></span></div>
         <div class="col-sm-10 col-xs-11 error-msg"><b>{{ error_msg }}</b></div>
         <div class="col-sm-1 col-xs-1 close-msg">
           <button (click)="closeErrorMessage()" class="btn-close"><span class="glyphicon glyphicon-remove"></span>
           </button>
         </div>
-      </div>-->
+      </div>&ndash;&gt;
 
       <div class="radio-group text-left clearfix">
-        <label class="lable-name">Register as</label>
-        <label for="employee" class="radio-inline">
-          <input type="radio" id="employee" name="register_as" value="employee" (click)="showHideCandidate()" checked />
-          Candidate
-        </label>
+        <div>
+          <label class="lable-name">Register as</label>
+          <label for="employee" class="radio-inline">
+            <input type="radio" id="employee" name="register_as" value="employee" (click)="showHideCandidate()" checked />
+            Candidate
+          </label>
 
-        <label for="employer" class="radio-inline">
-          <input type="radio" id="employer" name="register_as" value="employer" (click)="showHideRecruiter()"/>
-          Recruiter
-        </label>
-      </div>
+          <label for="employer" class="radio-inline">
+            <input type="radio" id="employer" name="register_as" value="employer" (click)="showHideRecruiter()"/>
+            Recruiter
+          </label>
 
-      <div class="col-sm-6 col-sm-offset-6 registration-btn-radio text-left clearfix" [hidden]="!isCandidate">
-        <label class="lable-name">Recruiting For</label>
-        <label for="self" class="radio-inline">
-          <input type="radio" id="self" name="recruiting_for" value="self" (change)="recruitmentFor($event)" checked/>
-          Own Company
-        </label>
+        </div>
 
-        <label for="others" class="radio-inline">
-          <input type="radio" id="others" name="recruiting_for" value="others" (change)="recruitmentFor($event)" />
-          Other Company
-        </label>
+        <div class="registration-btn-radio text-left clearfix" [hidden]="!isCandidate">
+          <label class="lable-name">Recruiting For</label>
+          <label for="self" class="radio-inline">
+            <input type="radio" id="self" name="recruiting_for" value="self" (change)="recruitmentFor($event)" checked/>
+            Own Company
+          </label>
+
+          <label for="others" class="radio-inline">
+            <input type="radio" id="others" name="recruiting_for" value="others" (change)="recruitmentFor($event)" />
+            Other Company
+          </label>
+        </div>
       </div>
 
       <div class="Employee_form" [hidden]="isCandidate">
@@ -52,7 +55,7 @@
       </div>
     </form>
   </div>
-</section>
+</section>-->
 
-<!--<cn-CompanyDetails></cn-CompanyDetails>-->
+<cn-CompanyDetails></cn-CompanyDetails>
 

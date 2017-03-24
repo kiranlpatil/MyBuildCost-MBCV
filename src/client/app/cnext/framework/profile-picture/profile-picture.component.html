@@ -3,6 +3,7 @@
         <img src={{image_path}} alt="Profile Picture">
         <form [class.hide-list]="isSocialLogin">
             <label for="file-upload" class="custom-file-upload">
+                <span>Upload file</span>
                 <img src="assets/framework/images/dashboard/edit.png" />
             </label>
             <input id="file-upload" type="file" (change)="fileChangeEvent($event)" placeholder="Upload file"/>
