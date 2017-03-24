@@ -14,7 +14,7 @@ import {
   NavigationRoutes,
   AppSettings
 } from '../../shared/index';
-import { ImagePath, LocalStorage, ProjectAsset } from '../../shared/constants';
+import {ImagePath, LocalStorage, ProjectAsset, VALUE_CONSTANT} from '../../shared/constants';
 import { LocalStorageService } from '../../shared/localstorage.service';
 import {LoaderService} from "../../shared/loader/loader.service";
 import {Http,Response} from "@angular/http";
@@ -45,7 +45,10 @@ export class EmployeeComponent {
   error_msg: string;
   isShowErrorMessage: boolean = true;
   BODY_BACKGROUND:string;
-
+  private year: any;
+  private currentDate: any;
+  private yearList = new Array();
+  passingyear:string;
 
   constructor(private commanService: CommonService, private _router: Router,private http: Http,
               private employeeService: EmployeeService, private messageService: MessageService, private formBuilder: FormBuilder,private loaderService:LoaderService) {
@@ -68,6 +71,12 @@ export class EmployeeComponent {
       ,Validators.required],
       'pin':['',[Validators.required,ValidationService.pinValidator]]
     });
+
+    this.currentDate = new Date();
+    this.year = this.currentDate.getUTCFullYear();
+    this.createYearList(this.year);
+
+
 
     this.BODY_BACKGROUND = ImagePath.BODY_BACKGROUND;
   }
@@ -92,6 +101,16 @@ export class EmployeeComponent {
 
 
 
+  }
+  selectYearModel(newval: any){
+    this.passingyear=newval;
+    this.model.birth_year=newval;
+  }
+
+  createYearList(year: any) {
+    for (let i = 0; i < VALUE_CONSTANT.MAX_ACADEMIC_YEAR_LIST; i++) {
+      this.yearList.push(year--);
+    }
   }
   selectCountryModel(newval:any) {
     for(let item of this.locationDetails){
@@ -122,8 +141,8 @@ export class EmployeeComponent {
     this.storedstate=newval;
   }
 
-  selectCityModel(newval : string){
-    this.storedcity=newval;
+  selectCityModel(newval : number){
+    this.model.birth_year=newval;
 
   }
 
@@ -137,7 +156,8 @@ export class EmployeeComponent {
     this.model.location.city = this.storedcity;
     this.model.location.pin = this.model.pin;
 
-    if (!this.makePasswordConfirm()) {
+    if (!this.makePasswordConfirm()) {debugger
+
       this.isFormSubmitted = true;
       // this.loaderService.start();
       this.employeeService.addEmployee(this.model)
