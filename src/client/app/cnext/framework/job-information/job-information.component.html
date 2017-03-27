@@ -5,10 +5,10 @@
   </div>
   <div class="col-sm-6">
     <label>Hiring Manager :</label>
-    <input class="form-control" type="text" name="HiringManager" placeholder="Name of the Manager" [(ngModel)]="hiringManager" (ngModelChange)="ishiringMangerSelected($event)">
+    <input class="form-control" type="text" name="HiringManager" placeholder="Name of the Manager" [(ngModel)]="hiringManager" (ngModelChange)="isHiringMangerSelected($event)">
   </div>
   <div class="col-sm-6">
     <label>Department :</label>
-    <input class="form-control" type="text" name="Department" placeholder="Enter Department" >
+    <input class="form-control" type="text" name="Department" placeholder="Enter Department" [(ngModel)]="department" (ngModelChange)="isDepartmentSelected($event)">
   </div>
 </div>

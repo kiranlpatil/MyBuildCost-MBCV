@@ -14,7 +14,7 @@ export class ProfessionalDataService extends BaseService {
     super();
   }
 
-  addProfessionalData(professionaldata:ProfessionalData):Observable<ProfessionalData> {
+  addProfessionalData(professionaldata:any):Observable<any> {
     let headers = new Headers({ 'Content-Type': 'application/json'});
     let options = new RequestOptions({ headers: headers });
     let body = JSON.stringify(professionaldata);

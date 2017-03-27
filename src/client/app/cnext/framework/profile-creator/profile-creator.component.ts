@@ -19,13 +19,14 @@ export class ProfileCreatorComponent {
   private fullName: string;private firstName: string;private lastName: string;
   private   newUser:number;
   private  chkEmployeeHistory:boolean=false;
-  selectedvalue1:string;
-  selectedvalue2:string;
-  valueOFshowOrHide:string;
+  protected  selectedvalue1:string;
+  protected selectedvalue2:string;
+  private valueOFshowOrHide:string;
   private  chkCertification:boolean=false;
   private  chkAboutMyself:boolean=false;
   private  chkAwards:boolean=false;
   private  whichStepsVisible : boolean[]=new Array(7);
+
   constructor(private _router:Router, private dashboardService:DashboardService,
               private testService : TestService,
               private proficiencyService : ProficiencyService,

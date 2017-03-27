@@ -30,7 +30,7 @@ export class EmploymentHistoryComponent {
  private monthList = new Array("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
  error_msg: string;
 
-  constructor(private _router: Router, private http: Http, private employmenthistoryService: EmploymentHistoryService,
+  constructor( private employmenthistoryService: EmploymentHistoryService,
               private formBuilder: FormBuilder, private loaderService: LoaderService) {
     this.tempfield = new Array(1);
 

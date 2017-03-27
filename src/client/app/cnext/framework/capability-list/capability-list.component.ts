@@ -48,7 +48,7 @@ export class CapabilityListComponent {
 
     testService.showTest$.subscribe(
       data=>{
-        this.isShowCapability=true;
+        this.isShowCapability=data;
       }
     );
     myIndustryService.showTest$.subscribe(

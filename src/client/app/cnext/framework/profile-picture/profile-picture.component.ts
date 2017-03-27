@@ -1,18 +1,15 @@
-import { Component, OnInit, NgZone, OnDestroy } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component } from '@angular/core';
 import {UserProfile} from "../../../framework/dashboard/user";
 import {DashboardService} from "../../../framework/dashboard/dashboard.service";
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import {
     Message,
     MessageService,
-    CommonService,
     Messages,
     ProfileService,
     AppSettings,
     ImagePath,
     LocalStorage,
-    ThemeChangeService,
     LocalStorageService
 } from '../../../framework/shared/index';
 
@@ -26,15 +23,14 @@ import {
 
 export class ProfilePictureComponent  {
 
-  model = new UserProfile();
-  submitted = false;
-  isSocialLogin: boolean;
-  userForm: FormGroup;
-  filesToUpload: Array<File>;
-  image_path: any;
-  error_msg: string;
-  isShowErrorMessage: boolean = true;
-  newUser: number;
+  protected model = new UserProfile();
+  protected submitted = false;
+  protected isSocialLogin: boolean;
+  protected filesToUpload: Array<File>;
+  private   image_path: any;
+  protected error_msg: string;
+  protected isShowErrorMessage: boolean = true;
+  protected newUser: number;
 
 
   constructor(private dashboardService: DashboardService,

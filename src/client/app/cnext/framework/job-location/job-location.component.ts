@@ -14,17 +14,15 @@ import {JobLocation} from "../model/job-location";
 
 export class JobLocationComponent {
   private jobLocationtion = new JobLocation();
-  storedcountry:string;
-  storedstate:string;
-  storedcity:string;
+  private storedcountry:string;
+  private storedstate:string;
+  private storedcity:string;
   private pin:number;
-  locationDetails : any;
-  countries:string[]=new Array(0);
-  states:string[]=new Array(0);
-  cities:string[]=new Array(0);
-  countryModel:string;
-  stateModel:string;
-  cityModel:string;
+  private locationDetails : any;
+  private countries:string[]=new Array(0);
+  private  states:string[]=new Array(0);
+  private cities:string[]=new Array(0);
+
 
 
   constructor(private _router:Router,private http: Http, private dashboardService:DashboardService) {

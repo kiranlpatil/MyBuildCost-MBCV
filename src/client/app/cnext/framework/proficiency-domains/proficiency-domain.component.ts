@@ -16,7 +16,6 @@ export class proficiencyDomainComponent implements OnInit {
   @Input('type') type : string;
   private selectedproficiencies=new Array();
   private storedProficiency = new Array();
-  private proficiencyModel: string = "";
   private showAlert: boolean=false;
   private proficiencyType: boolean=false;
   private domainType: boolean=false;
@@ -78,7 +77,7 @@ export class proficiencyDomainComponent implements OnInit {
     this.messageService.message(message);
   }
 
-  selectedproficiencyModel(newVal: any) {
+  selectedProficiencyModel(newVal: any) {
     if(this.storedProficiency.length < VALUE_CONSTANT.MAX_PROFECIENCES) {
       this.showAlert=false;
       this.storedProficiency.push(newVal);

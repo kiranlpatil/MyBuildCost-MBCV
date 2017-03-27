@@ -16,9 +16,9 @@ import {JobInformation} from "../model/job-information";
 
 export class JobInformationComponent {
   private jobInformation=new JobInformation();
-  private jobTitle:string;
-  private hiringManger:string;
-  private department:string;
+  protected jobTitle:string;
+  protected hiringManger:string;
+  protected department:string;
 
   constructor(private _router:Router) {
   }
@@ -29,16 +29,16 @@ export class JobInformationComponent {
 
   }
 
-  isJobTitleSelected(value:any){
-    this.jobInformation.jobTitle=this.jobTitle;
+  isJobTitleSelected(job:any){
+    this.jobInformation.jobTitle=job;
   }
 
-  ishiringMangerSelected(value:any){
-    this.jobInformation.hiringManager=this.hiringManger;
+  isHiringMangerSelected(manager:any){
+    this.jobInformation.hiringManager=manager;
   }
 
-  ishiringMangerSelected(value:any){
-    this.jobInformation.department=this.department;
+  isDepartmentSelected(department:any){
+    this.jobInformation.department=department;
   }
 
 

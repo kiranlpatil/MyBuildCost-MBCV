@@ -17,14 +17,14 @@ import {IndustryList} from "../model/industryList";
 export class IndustryListComponent {
   private industryNames :string[]=new Array();
   private storedRoles :string[] =new Array();
-  private industryModel = "";
+  private industryModel:string = "";
   private industryData:any;
   private rolesData:any;
-  private roleModel = "";
+  private roleModel:string= "";
   private isRoleSelected : boolean= false;
   private temproles : string[];
   private maxRoles : number =3;
-  private roleNames:string[] =new Array();
+  private  roleNames:string[] =new Array();
   private showModalStyle: boolean = false;
   private disbleRole: boolean = false;
   private industryRoles=new IndustryList();

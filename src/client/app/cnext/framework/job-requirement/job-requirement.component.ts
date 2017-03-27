@@ -6,6 +6,7 @@ import {MessageService} from "../../../framework/shared/message.service";
 import {IndustryListService} from "../industry-list/industry-list.service";
 import {Message} from "../../../framework/shared/message";
 import {MyJobRequirementService} from "../jobrequirement-service";
+import {ProfessionalDataService} from "../professional-data/professional-data.service";
 
 
 @Component({
@@ -17,21 +18,13 @@ import {MyJobRequirementService} from "../jobrequirement-service";
 
 export class JobRequirementComponent {
   private jobRequirement = new JobRequirement();
-  storedIndustry: string;
-  userForm: FormGroup;
-  industries = new Array();
-  roles = new Array();
-  storedRoles = new Array();
-  industryModel = "";
-  roleModel = "";
-  isIndustrySelected: boolean = false;
-  isRoleSelected: boolean = false;
-  temproles: string[];
-  maxRoles: number = 3;
-  key: number;
-  showModalStyle: boolean = false;
-  disbleRole: boolean = false;
-  
+  private storedIndustry: string;
+  protected industries = new Array();
+  protected roles = new Array();
+  private storedRoles = new Array();
+  private industryModel = "";
+  private roleModel = "";
+
   private educationlist: string[];
   private experiencelist: string[];
   private salarylist: string[];
@@ -43,6 +36,7 @@ export class JobRequirementComponent {
 
 
   constructor(private industryService: IndustryListService,
+              private professionaldataservice:ProfessionalDataService,
               private http: Http,
               private messageService: MessageService,
               private myJobrequirementService :MyJobRequirementService) {
@@ -65,17 +59,12 @@ export class JobRequirementComponent {
 
     this.industryService.getRoles(newVal)
       .subscribe(
-        rolelist => this.onRoleListSuccess(rolelist.data),
-        error => this.onError(error));
-    
+        (rolelist:any) => this.onRoleListSuccess(rolelist.data),
+        (error:any) => this.onError(error));
+
   }
 
-  onError(error:any){
-    var message = new Message();
-    message.error_msg = error.err_msg;
-    message.isError = true;
-    this.messageService.message(message);
-  }
+
 
   onRoleListSuccess(data:any){
     //this.rolesData=data;
@@ -90,15 +79,18 @@ export class JobRequirementComponent {
 
     this.myJobrequirementService.change(this.jobRequirement);
 
-    this.http.get("education")
-      .map((res: Response) => res.json())
+
+
+    this.professionaldataservice.getEducationList()
       .subscribe(
-        data => {
-          this.educationlist = data.educated;
-        },
-        err => console.error(err),
-        () => console.log()
-      );
+        data=> { this.onEducationListSuccess(data);},
+        error =>{ this.onError(error);});
+  }
+  onEducationListSuccess(data:any){
+    for(let k of data.educated){
+      this.educationlist.push(k);
+    }
+
   }
 
   selecteducationModel(newVal: any) {debugger
@@ -106,15 +98,18 @@ export class JobRequirementComponent {
 
     this.jobRequirement.educationModel = this.educationModel;
 
-    this.http.get("experience")
-      .map((res: Response) => res.json())
+
+
+    this.professionaldataservice.getExperienceList()
       .subscribe(
-        data => {
-          this.experiencelist = data.experience;
-        },
-        err => console.error(err),
-        () => console.log()
-      );
+        data=> { this.onExperienceListSuccess(data);},
+        error =>{ this.onError(error);});
+
+  }
+  onExperienceListSuccess(data:any){
+    for(let k of data.experience){
+      this.experiencelist.push(k);
+    }
 
   }
 
@@ -123,30 +118,39 @@ export class JobRequirementComponent {
 
     this.jobRequirement.experienceModel = this.experienceModel;
 
-    this.http.get("currentsalary")
-      .map((res: Response) => res.json())
+
+
+    this.professionaldataservice.getCurrentSalaryList()
       .subscribe(
-        data => {
-          this.salarylist = data.salary;
-        },
-        err => console.error(err),
-        () => console.log()
-      );
+        data=> { this.onCurrentSalaryListSuccess(data);},
+        error =>{ this.onError(error);});
 
   }
 
+
+  onCurrentSalaryListSuccess(data:any){
+    for(let k of data.salary ){
+      this.salarylist.push(k);
+    }
+
+  }
   selectsalaryModel(newVal: any) {
     this.salaryModel = newVal;
     this.jobRequirement.salaryModel = this.salaryModel;
-    this.http.get("noticeperiod")
-      .map((res: Response) => res.json())
+    this.professionaldataservice.getNoticePeriodList()
       .subscribe(
-        data => {
-          this.noticeperiodlist = data.noticeperiod;
-        },
-        err => console.error(err),
-        () => console.log()
-      );
+        data=> { this.onGetNoticePeriodListSuccess(data);},
+        error =>{ this.onError(error);});
+
+
+  }
+
+
+  onGetNoticePeriodListSuccess(data:any){
+    for(let k of data.noticeperiod){
+      this.noticeperiodlist.push(k);
+    }
+
   }
 
   selectenoticeperiodModel(newVal: any) {
@@ -154,11 +158,7 @@ export class JobRequirementComponent {
     this.jobRequirement.noticeperiodModel = this.noticeperiodModel;
   }
 
-  onRoleListSuccess(data: any) {
-    for (let role of data) {
-      this.roles.push(role.name);
-    }
-  }
+
 
 
   onIndustryListSuccess(data: any) {
@@ -168,11 +168,11 @@ export class JobRequirementComponent {
     }
   }
 
-  onError(error: any) {
+  onError(error:any){
     var message = new Message();
     message.error_msg = error.err_msg;
     message.isError = true;
     this.messageService.message(message);
   }
-  
+
 }

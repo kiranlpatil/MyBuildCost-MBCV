@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import {Http,Headers, RequestOptions} from '@angular/http';
-import {industryProfile} from './industry';
 import { Observable } from 'rxjs/Observable';
 import {BaseService} from "../../../framework/shared/httpservices/base.service";
 import {API, LocalStorage} from "../../../framework/shared/constants";
