@@ -33,9 +33,12 @@ export class AppComponent implements OnInit {
                 private messageService:MessageService,
                 private commonService:CommonService,
                 protected loaderService:LoaderService) {
-        this.appTheme = AppSettings.INITIAL_THEM;
+        this.appTheme = AppSettings.INITIAL_THEM;debugger
         if (parseInt(LocalStorageService.getLocalValue(LocalStorage.IS_LOGED_IN)) === 1) {
+          if(LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE)==="true")
            this._router.navigate(['/createprofile']);
+          else 
+            this._router.navigate(['/recruiterdashboard']);
            // this._router.navigate(['/dashboard']);
           //this._router.navigate([NavigationRoutes.APP_COMPANYDETAILS]);
 

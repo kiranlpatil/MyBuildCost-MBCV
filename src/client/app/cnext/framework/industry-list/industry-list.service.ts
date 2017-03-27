@@ -4,21 +4,20 @@ import {industryProfile} from './industry';
 import { Observable } from 'rxjs/Observable';
 import {BaseService} from "../../../framework/shared/httpservices/base.service";
 import {API, LocalStorage} from "../../../framework/shared/constants";
-import {Industry} from "../model/industry";
 import {LocalStorageService} from "../../../framework/shared/localstorage.service";
 
 
 
 
 @Injectable()
-export class IndustryService extends BaseService {
+export class IndustryListService extends BaseService {
 
   constructor(private http: Http) {
     super()
   }
 
 
-  addIndustryProfile(industryprofile:industryProfile):Observable<industryProfile>{
+  addIndustryProfile(industryprofile:any):Observable<any>{
 
     let headers = new Headers({ 'Content-Type': 'application/json'});
     let options = new RequestOptions({ headers: headers });
@@ -29,7 +28,7 @@ export class IndustryService extends BaseService {
       .catch(this.handleError);
   }
 
-  getIndustries():Observable<Industry> {
+  getIndustries():Observable<any> {
     var url = API.INDUSTRY_LIST;
     return this.http.get(url)
       .map(this.extractData)

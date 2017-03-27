@@ -1,11 +1,9 @@
 import {Component} from "@angular/core";
-import {Router} from "@angular/router";
-import {DashboardService} from "../../../framework/dashboard/dashboard.service";
 import {Http} from "@angular/http";
 import {JobRequirement} from "../model/job-requirement";
 import {FormGroup} from "@angular/forms";
 import {MessageService} from "../../../framework/shared/message.service";
-import {IndustryService} from "../industryList/industryList.service";
+import {IndustryListService} from "../industry-list/industry-list.service";
 import {Message} from "../../../framework/shared/message";
 import {MyJobRequirementService} from "../jobrequirement-service";
 
@@ -19,12 +17,6 @@ import {MyJobRequirementService} from "../jobrequirement-service";
 
 export class JobRequirementComponent {
   private jobRequirement = new JobRequirement();
-  private fullName: string;
-  private firstName: string;
-  private lastName: string;
-  private newUser: number;
-
-
   storedIndustry: string;
   userForm: FormGroup;
   industries = new Array();
@@ -39,25 +31,20 @@ export class JobRequirementComponent {
   key: number;
   showModalStyle: boolean = false;
   disbleRole: boolean = false;
-
-
-  private realocationlist: string[];
+  
   private educationlist: string[];
   private experiencelist: string[];
   private salarylist: string[];
   private noticeperiodlist: string[];
-  private realocationModel: string;
   private educationModel: string;
   private experienceModel: string;
   private salaryModel: string;
   private noticeperiodModel: string;
 
 
-  constructor(private industryService: IndustryService,
-              private _router: Router,
+  constructor(private industryService: IndustryListService,
               private http: Http,
               private messageService: MessageService,
-              private dashboardService: DashboardService,
               private myJobrequirementService :MyJobRequirementService) {
   }
 
@@ -80,16 +67,7 @@ export class JobRequirementComponent {
       .subscribe(
         rolelist => this.onRoleListSuccess(rolelist.data),
         error => this.onError(error));
-
-    /*this.http.get("role")
-      .map((res: Response) => res.json())
-      .subscribe(
-        data => {
-          this.roles = data.roles;
-        },
-        err => console.error(err),
-        () => console.log()
-      );*/
+    
   }
 
   onError(error:any){
@@ -196,27 +174,5 @@ export class JobRequirementComponent {
     message.isError = true;
     this.messageService.message(message);
   }
-
-
-  /*getUserProfile(){
-   this.dashboardService.getUserProfile()
-   .subscribe(
-   userprofile => this.onUserProfileSuccess(userprofile),
-   error => this.onUserProfileError(error));
-   }
-
-
-   onUserProfileSuccess(result:any) {
-   LocalStorageService.setLocalValue(LocalStorage.EMAIL_ID, result.data.email);
-   LocalStorageService.setLocalValue(LocalStorage.MOBILE_NUMBER, result.data.mobile_number);
-   LocalStorageService.setLocalValue(LocalStorage.FIRST_NAME, result.data.first_name);
-   LocalStorageService.setLocalValue(LocalStorage.LAST_NAME, result.data.last_name);
-   this.fullName=result.data.first_name + result.data.last_name;
-   this.firstName=result.data.first_name;
-   this.lastName=result.data.last_name;
-   }
-
-   onUserProfileError(error:any) {
-   console.log(error);
-   }*/
+  
 }

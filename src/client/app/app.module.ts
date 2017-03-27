@@ -51,8 +51,6 @@ import { DashboardComponent } from './framework/dashboard/dashboard.component';
  import { ChangeMobileComponent } from './framework/dashboard/settings/change-mobile/change-mobile.component';
  import { ChangeMobileService } from './framework/dashboard/settings/change-mobile/change-mobile.service';
  import {LandingPageComponent} from './framework/landing-page/landing-page.component';
- import {IndustryService} from "./cnext/framework/industryList/industryList.service";
- import {IndustryComponent} from "./cnext/framework/industryList/industryList.component";
  import {Ng2AutoCompleteModule} from "ng2-auto-complete/dist/ng2-auto-complete.module";
  import {EmployeeComponent} from "./framework/registration/employee/employee.component";
  import {EmployerComponent} from "./framework/registration/employer/employer.component";
@@ -93,6 +91,8 @@ import {CompanyDetailsService} from "./framework/registration/company_details/co
 import {RecruiterDashboardComponent} from "./cnext/framework/recruiter-dashboard/recruiter-dashboard.component";
 import {JobFilterComponent} from "./cnext/framework/job-filter/job-filter.component";
 import {MyJobRequirementService} from "./cnext/framework/jobrequirement-service";
+import {IndustryListComponent} from "./cnext/framework/industry-list/industry-list.component";
+import {IndustryListService} from "./cnext/framework/industry-list/industry-list.service";
 
 @NgModule({
   imports: [
@@ -139,8 +139,8 @@ import {MyJobRequirementService} from "./cnext/framework/jobrequirement-service"
     ProfileCreatorComponent,
     CapabilityListComponent,
     proficiencyDomainComponent,
+    IndustryListComponent,
     ComplexityListComponent,
-    IndustryComponent,
     JobPosterComponent,
     JobInformationComponent,
     JobRequirementComponent,
@@ -194,7 +194,7 @@ import {MyJobRequirementService} from "./cnext/framework/jobrequirement-service"
     ActiveEmailService,
     VerifyUserService,
     VerifyPhoneService,
-    IndustryService,
+    IndustryListService,
     CapabilityListService,
     ComplexityListService,
     MyCapabilityService,
@@ -204,7 +204,6 @@ import {MyJobRequirementService} from "./cnext/framework/jobrequirement-service"
     ProfessionalDataService,
     EmploymentHistoryService,
     proficiencyDomainService,
-
     CompanyDetailsService,
     EmploymentHistoryService
 

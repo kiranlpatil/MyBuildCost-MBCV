@@ -50,7 +50,6 @@ export class proficiencyDomainComponent implements OnInit {
     if(this.type==="domain"){
       this.domainType=true;
       this.placeHolderName="domain"
-    //  this.http.get("proficiency")
 
       this.proficiencydoaminService.getDomain()
         .subscribe(
@@ -79,6 +78,7 @@ export class proficiencyDomainComponent implements OnInit {
     message.isError = true;
     this.messageService.message(message);
   }
+
   selectproficiencyModel(newVal: any) {
     if(this.storedProficiency.length < VALUE_CONSTANT.MAX_PROFECIENCES) {
       this.showAlert=false;

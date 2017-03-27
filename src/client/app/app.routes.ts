@@ -18,7 +18,6 @@ import { ChangeMobileRoutes } from './framework/dashboard/settings/change-mobile
 import {LandingPageRoutes} from './framework/landing-page/landing-page.routes';
 import {EmployeeRoutes} from "./framework/registration/employee/employee.routes";
 import {EmployerRoutes} from "./framework/registration/employer/employer.routes";
-import {IndustryRoutes} from "./cnext/framework/industryList/industryList.routes";
 import {ProfileCreator} from "./cnext/framework/profile-creator/profile-creator.routes";
 import {proficiencydomainRoutes} from "./cnext/framework/proficiency-domains/proficiency-domain.routes";
 import {CompanyDetailsRoutes} from "./framework/registration/company_details/company-details.routes";
@@ -26,7 +25,6 @@ import {RecruiterDashboard} from "./cnext/framework/recruiter-dashboard/recruite
 
 
 export const routes: Routes = [
-  ...IndustryRoutes,
   ...LandingPageRoutes,
   ...LoginRoutes,
   ...RegistrationRoutes,
