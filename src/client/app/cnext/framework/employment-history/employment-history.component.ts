@@ -1,11 +1,6 @@
 
 import {  Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import {Http,Response} from "@angular/http";
-import {LoaderService} from "../../../framework/shared/loader/loader.service";
 import {EmployementHistory} from "../model/employment-history";
-import {EmploymentHistoryService} from "./employment-history.service";
 import {VALUE_CONSTANT} from "../../../framework/shared/constants";
 
 @Component({
@@ -30,8 +25,7 @@ export class EmploymentHistoryComponent {
  private monthList = new Array("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
  error_msg: string;
 
-  constructor( private employmenthistoryService: EmploymentHistoryService,
-              private formBuilder: FormBuilder, private loaderService: LoaderService) {
+  constructor() {
     this.tempfield = new Array(1);
 
     this.currentDate = new Date();

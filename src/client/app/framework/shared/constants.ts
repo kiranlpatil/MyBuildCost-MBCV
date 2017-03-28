@@ -145,6 +145,7 @@ export class API {
   public static CAPABILITY_LIST = 'capability';
   public static ROLE_LIST = 'roles';
   public static COMPANY_DETAILS:string = 'companydetails';
+  public static ADDRESS = 'address';
 
 }
 

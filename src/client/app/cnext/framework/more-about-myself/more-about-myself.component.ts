@@ -24,12 +24,10 @@ export class MoreAboutMyselfComponent {
   private wordsTillNow:number;
   private remainingWords:number;
   private maxword:number;
-  model=new MoreAboutMyself();
-  selectedMoreaboutMyself:MoreAboutMyself[]=new Array();
 
 
-  constructor(private _router: Router, private http: Http,
-              private formBuilder: FormBuilder, private loaderService: LoaderService) {
+
+  constructor() {
     this.reSize = new Array(1);
 
 

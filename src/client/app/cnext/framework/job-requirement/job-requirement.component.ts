@@ -19,8 +19,8 @@ import {ProfessionalDataService} from "../professional-data/professional-data.se
 export class JobRequirementComponent {
   private jobRequirement = new JobRequirement();
   private storedIndustry: string;
-  protected industries = new Array();
-  protected roles = new Array();
+  private industries = new Array();
+  private roles = new Array();
   private storedRoles = new Array();
   private industryModel = "";
   private roleModel = "";

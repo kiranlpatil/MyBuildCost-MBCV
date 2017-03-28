@@ -1,7 +1,5 @@
 
-import {Http} from '@angular/http';
 import {Component} from '@angular/core';
-import {Router, ActivatedRoute} from '@angular/router';
 import {VALUE_CONSTANT, LocalStorage} from "../../../framework/shared/constants";
 import {TestService} from "../test.service";
 import {ComplexityService} from "../complexity.service";
@@ -35,8 +33,7 @@ export class CapabilityListComponent {
   private capabilityIds=new Array();
   private roles:any;
   private iscandidate:boolean=false;
-  constructor(private _router:Router, private http:Http,
-              private activatedRoute:ActivatedRoute,
+  constructor(
               private testService : TestService,
               private complexityService : ComplexityService,
               private myIndustryService :MyIndustryService,

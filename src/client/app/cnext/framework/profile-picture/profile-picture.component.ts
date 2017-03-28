@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import {UserProfile} from "../../../framework/dashboard/user";
 import {DashboardService} from "../../../framework/dashboard/dashboard.service";
-import { FormGroup } from '@angular/forms';
 import {
     Message,
     MessageService,
@@ -23,14 +22,10 @@ import {
 
 export class ProfilePictureComponent  {
 
-  protected model = new UserProfile();
-  protected submitted = false;
-  protected isSocialLogin: boolean;
-  protected filesToUpload: Array<File>;
+  private model = new UserProfile();
+  private filesToUpload: Array<File>;
   private   image_path: any;
-  protected error_msg: string;
-  protected isShowErrorMessage: boolean = true;
-  protected newUser: number;
+  private isShowErrorMessage: boolean = true;
 
 
   constructor(private dashboardService: DashboardService,

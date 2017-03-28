@@ -1,9 +1,9 @@
 
 import {Component} from '@angular/core';
-import {Router} from "@angular/router";
-import {DashboardService} from "../../../framework/dashboard/dashboard.service";
-import {Http} from "@angular/http";
 import {JobLocation} from "../model/job-location";
+import {JobLocationService} from "./job-location.service";
+import {Message} from "../../../framework/shared/message";
+import {MessageService} from "../../../framework/shared/message.service";
 
 @Component({
   moduleId: module.id,
@@ -25,26 +25,29 @@ export class JobLocationComponent {
 
 
 
-  constructor(private _router:Router,private http: Http, private dashboardService:DashboardService) {
+  constructor(
+              private joblocationService:JobLocationService,
+              private messageService: MessageService    ) {
   }
 
 
   ngOnInit(){
 
-    this.http.get("address")
-      .map((res: Response) => res.json())
+    this.joblocationService.getAddress()
       .subscribe(
-        data => {
-          this.locationDetails=data.address;
-          for(var  i = 0; i <data.address.length; i++){
-            this.countries.push(data.address[i].country);
-            console.log(data.address[0].country);
+        data=> { this.onAddressSuccess(data);},
+        error =>{ this.onError(error);});
 
-          }
-        },
-        err => console.error(err),
-        () => console.log()
-      );
+  }
+  onAddressSuccess(data:any){
+
+    this.locationDetails=data.address;
+    for(var  i = 0; i <data.address.length; i++){
+      this.countries.push(data.address[i].country);
+      console.log(data.address[0].country);
+
+    }
+
   }
 
   selectCountryModel(newval:any) {
@@ -91,5 +94,12 @@ export class JobLocationComponent {
     this.jobLocationtion.pin=this.pin;
 
   }
+  onError(error:any){
+    var message = new Message();
+    message.error_msg = error.err_msg;
+    message.isError = true;
+    this.messageService.message(message);
+  }
+
 
 }

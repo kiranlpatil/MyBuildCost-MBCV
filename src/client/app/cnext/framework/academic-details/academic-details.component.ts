@@ -1,8 +1,5 @@
 import {  Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import {Http,Response} from "@angular/http";
-import {LoaderService} from "../../../framework/shared/loader/loader.service";
+import { FormGroup} from '@angular/forms';
 import {academicdetails} from "./academic-details";
 import {VALUE_CONSTANT} from "../../../framework/shared/constants";
 
@@ -14,7 +11,6 @@ import {VALUE_CONSTANT} from "../../../framework/shared/constants";
 })
 
 export class AcademicDetailComponent {
-  userForm: FormGroup;
 
  private  tempfield: string[];
  private year: any;
@@ -24,8 +20,7 @@ export class AcademicDetailComponent {
  private selectedacademicsdeatils:academicdetails[]=new Array();
 
 
-  constructor(private _router: Router, private http: Http,
-              private formBuilder: FormBuilder, private loaderService: LoaderService) {
+  constructor() {
 
     this.tempfield = new Array(1);
     this.currentDate = new Date();

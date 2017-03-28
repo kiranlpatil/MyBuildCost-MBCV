@@ -1,4 +1,3 @@
-import {Response, Http} from '@angular/http';
 import {Component} from '@angular/core';
 import {Complexity} from "../model/complexity";
 import {ComplexityService} from "../complexity.service";
@@ -29,7 +28,7 @@ export class ComplexityListComponent {
   private roles=new Array();
   private industry:any;
 
-  constructor( private http:Http,
+  constructor(
                private complexityService: ComplexityService,
                private proficiencyService: ProficiencyService,
                private complexityListServive:ComplexityListService,
