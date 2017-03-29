@@ -87,7 +87,9 @@ export class proficiencyDomainComponent implements OnInit {
     else{
       this.showAlert=true;
     }
-    document.getElementById(this.type).value = "";
+    document.getElementById(this.type).value="";
+
+
   }
 
   deleteItem(newVal: any) {

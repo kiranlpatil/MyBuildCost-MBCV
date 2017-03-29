@@ -28,6 +28,10 @@ export class IndustryListComponent {
   private showModalStyle: boolean = false;
   private disbleRole: boolean = false;
   private industryRoles=new IndustryList();
+  private reAdds:string[]=new Array();
+  private reAdd:string;
+  private notAdd=true;
+
 
 
   constructor(private industryService: IndustryListService, private myindustryService : MyIndustryService,
@@ -54,7 +58,7 @@ export class IndustryListComponent {
   onError(error:any){
     var message = new Message();
     message.error_msg = error.err_msg;
-    message.isError = true;
+    message.isError = true;this.reAdd
     this.messageService.message(message);
   }
 
@@ -68,7 +72,7 @@ export class IndustryListComponent {
     this.myindustryService.change(this.industryModel);
   }
 
-  searchIndustryId(industryName:any){
+  searchIndustryId(industryName:string){
     for(let industry of this.industryData){
       if(industry.name===industryName){
         this.industryRoles.industry=industry._id;
@@ -80,6 +84,7 @@ export class IndustryListComponent {
     for(let role of this.rolesData){
       if(role.name===roleName){
         this.industryRoles.roles.push(role._id);
+
       }
     }
   }
@@ -91,6 +96,7 @@ export class IndustryListComponent {
   }
 
   selectRolesModel(roleName: any) {
+    this.roleModel=roleName;
     this.storedRoles.push(roleName);
     this.deleteSelectedRole(roleName);
     this.searchRolesId(roleName);
@@ -100,8 +106,26 @@ export class IndustryListComponent {
     else
       this.roleModel=roleName;
   }
+  updatelist() {
+
+if(this.roleModel===""){
+
+  for (let  i = 0; i < this.roleNames.length; i++) {
+    if (this.roleNames[i] === this.reAdd) {
+      this.notAdd = false;
+    }
+  }
+  if(this.notAdd===true){
+  this.roleNames.push(this.reAdd);
+
+  }
+  this.notAdd=true;
+  }}
 
   deleteSelectedRole(roleName: any){
+    this.reAdd=roleName;
+
+
     for (let  i = 0; i < this.roleNames.length; i++)
     {
       if (this.roleNames[i]===roleName)

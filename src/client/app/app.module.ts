@@ -95,7 +95,7 @@ import {JobFilterComponent} from "./cnext/framework/job-filter/job-filter.compon
 import {MyJobRequirementService} from "./cnext/framework/jobrequirement-service";
 import {IndustryListComponent} from "./cnext/framework/industry-list/industry-list.component";
 import {IndustryListService} from "./cnext/framework/industry-list/industry-list.service";
-import {PasswordValidationService} from "./framework/shared/passwordValidation.service";
+import {DateService} from "./cnext/framework/date.service";
 
 @NgModule({
   imports: [
@@ -177,7 +177,6 @@ import {PasswordValidationService} from "./framework/shared/passwordValidation.s
     FacebookService,
     LoginService,
     LoaderService,
-    PasswordValidationService,
     CommonService,
     ValidationService,
     ComplexityService,
@@ -210,7 +209,8 @@ import {PasswordValidationService} from "./framework/shared/passwordValidation.s
     EmploymentHistoryService,
     proficiencyDomainService,
     CompanyDetailsService,
-    EmploymentHistoryService
+    EmploymentHistoryService,
+    DateService
 
   ],
   bootstrap: [AppComponent]

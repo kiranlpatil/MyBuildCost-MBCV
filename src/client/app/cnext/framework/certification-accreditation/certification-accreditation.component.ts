@@ -1,6 +1,7 @@
 
 import {  Component } from '@angular/core';
 import {certifications} from "../model/certification-accreditation";
+import {DateService} from "../date.service";
 
 @Component({
   moduleId: module.id,
@@ -14,11 +15,39 @@ export class CertificationAccreditationComponent {
   private tempfield: string[];
   private selectedcertificate=new certifications();
   private selectedcertificates:certifications[]=new Array();
-  constructor() {
+  private monthList:string[]=this.dateservice.monthList;
+  private yearList:string[]=this.dateservice.yearList;
+
+  constructor(private dateservice:DateService) {
 
     this.tempfield = new Array(1);
-  }
 
+  }
+  selectedCertificate(certificatename:string)
+  {
+this.selectedcertificate.certificateName=certificatename;
+  }
+  selectedCompanyName(companyname:string)
+  {
+this.selectedcertificate.compaName=companyname;
+  }
+  selectedworkfromMonthModel(frommonth:string)
+{
+this.selectedcertificate.fromMonth=frommonth;
+}
+
+  selectedworkfromYearModel(fromyear:string)
+  {
+this.selectedcertificate.fromYear=fromyear;
+  }
+  selectedworktoMonthModel(toyear:string)
+  {
+    this.selectedcertificate.toMonth=toyear;
+  }
+  selectedworktoYearModel(toyear:string)
+  {
+    this.selectedcertificate.toYear=toyear;
+  }
 
   addedCertification(certificate:any){
     this.selectedcertificate.certificationdetails=certificate;

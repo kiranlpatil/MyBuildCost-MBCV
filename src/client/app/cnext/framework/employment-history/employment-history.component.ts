@@ -56,24 +56,22 @@ export class EmploymentHistoryComponent {
   }
 
   selectedworkfromMonthModel(newval: any){
-    this.fromMonthModel=newval;
     this.selectedEmploymentHistory.workedFromMonth=newval;
 
   }
 
   selectedworkfromYearModel(newval: any){
-    this.fromYearModel=newval;
+
     this.selectedEmploymentHistory.workedFromYear=newval;
 }
 
   selectedworktoMonthModel(newval: any) {
-    this.toMonthModel=newval;
     this.selectedEmploymentHistory.workedToMonth=newval;
 
   }
 
   selectedworktoYearModel(newval: any) {
-    this.toYearModel=newval;
+
     this.selectedEmploymentHistory.workedToYear=newval;
 
   }

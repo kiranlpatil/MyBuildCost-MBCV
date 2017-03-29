@@ -1,5 +1,5 @@
 import {  Route } from '@angular/router';
-import { ProfileCreatorComponent } from './index';
+import {ProfileCreatorComponent} from "../profile-creator/profile-creator.component";
 
 export const ProfileCreator: Route[] = [
   {

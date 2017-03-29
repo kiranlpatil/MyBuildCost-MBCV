@@ -140,7 +140,7 @@ export class CapabilityListComponent {
 
 
 
-  searchCapabilityId(capabilityName:any){
+  searchCapabilityId(capabilityName:string){
     for(let capability of this.capabilityData){
       if(capability.name===capabilityName){
         this.capabilityIds.push(capability._id);
@@ -148,7 +148,7 @@ export class CapabilityListComponent {
       }
     }
   }
-  deleteCapabilityById(capabilityName:any){
+  deleteCapabilityById(capabilityName:string){
     for(let capability of this.capabilityData){
       if(capability.name===capabilityName){
         this.capabilityIds.splice(this.capabilityIds.indexOf(capability._id), 1);

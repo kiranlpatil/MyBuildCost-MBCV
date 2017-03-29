@@ -4,8 +4,9 @@
       <div class="list">
         <div ng2-auto-complete
            [source]="industryNames"
-           (ngModelChange)="selectIndustryModel($event)">
-          <input class="form-control" [ngModel]="industryModel"  placeholder="Select Industry" disabled="{{disbleRole}}"/>
+           (ngModelChange)="selectIndustryModel($event)" >
+          <input class="form-control" [ngModel]="industryModel"  placeholder="Select Industry" disabled="{{disbleRole}}" required />
+          <!--<small style="color: red">*</small>-->
         </div>
       </div>
     </label>
@@ -21,7 +22,7 @@
               [source]="roleNames"
               (ngModelChange)="selectRolesModel($event)">
           <span *ngIf="i>0" >&amp;</span>
-          <input class="form-control" [ngModel]="roleModel" [disabled]="disbleRole" />
+          <input class="form-control" [ngModel]="roleModel" [disabled]="disbleRole" (keyup)="updatelist()"  required/>
         </div>
       </div>
 

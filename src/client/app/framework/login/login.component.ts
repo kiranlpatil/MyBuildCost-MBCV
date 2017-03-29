@@ -93,7 +93,7 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  onSubmit() {
+  onSubmit() {debugger
   //  this.loaderService.start();
 
     this.model = this.userForm.value;

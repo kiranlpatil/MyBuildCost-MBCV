@@ -30,7 +30,7 @@ export class AcademicDetailComponent {
 
   }
 
-  createYearList(year: any) {
+  createYearList(year: number) {
     for (let i = 0; i < VALUE_CONSTANT.MAX_ACADEMIC_YEAR_LIST; i++) {
       this.yearList.push(year--);
     }
