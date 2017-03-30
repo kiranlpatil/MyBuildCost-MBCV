@@ -81,7 +81,8 @@ export class RecruiterComponent {
         },
         Validators.required],
       'pin':['',  [Validators.required,ValidationService.pinValidator]],
-      'company_headquarter_country':['']
+      'company_headquarter_country':[''],
+      'captcha':['',Validators.required]
 
     });
     this.BODY_BACKGROUND = ImagePath.BODY_BACKGROUND;

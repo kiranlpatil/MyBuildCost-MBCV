@@ -45,9 +45,7 @@ export class JobLocationComponent {
     for(var  i = 0; i <data.address.length; i++){
       this.countries.push(data.address[i].country);
       console.log(data.address[0].country);
-
     }
-
   }
 
   selectCountryModel(newval:any) {

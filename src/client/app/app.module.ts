@@ -3,6 +3,7 @@ import { AppComponent } from './app.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { APP_BASE_HREF } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { RecaptchaModule } from 'ng2-recaptcha';
 import { routes } from './app.routes';
 import { HttpModule, Http, XHRBackend, RequestOptions } from '@angular/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -99,6 +100,7 @@ import {DateService} from "./cnext/framework/date.service";
 import {ProfessionalService} from "./cnext/framework/professional-service";
 import {EducationalService} from "./cnext/framework/educational-service";
 import {AwardService} from "./cnext/framework/award-service";
+import {JobLocationService} from "./cnext/framework/job-location/job-location.service";
 
 @NgModule({
   imports: [
@@ -107,6 +109,7 @@ import {AwardService} from "./cnext/framework/award-service";
     RouterModule.forRoot(routes),
     HttpModule,
     ReactiveFormsModule,
+    RecaptchaModule.forRoot(), // Keep in mind the "forRoot"-magic nuances!
     Ng2AutoCompleteModule
   ],
   declarations: [
@@ -216,7 +219,8 @@ import {AwardService} from "./cnext/framework/award-service";
     proficiencyDomainService,
     CompanyDetailsService,
     EmploymentHistoryService,
-    DateService
+    DateService,
+    JobLocationService
 
   ],
   bootstrap: [AppComponent]

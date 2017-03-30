@@ -20,6 +20,7 @@ import {LoaderService} from "../../shared/loader/loader.service";
 import {Http,Response} from "@angular/http";
 import {Location} from "../location";
 import {DateService} from "../../../cnext/framework/date.service";
+//import { RecaptchaModule } from 'ng2-recaptcha';
 
 @Component({
   moduleId: module.id,
@@ -68,7 +69,8 @@ export class CandidateComponent {
           'pin':['']
         }
       ,Validators.required],
-      'pin':['',[Validators.required,ValidationService.pinValidator]]
+      'pin':['',[Validators.required,ValidationService.pinValidator]],
+      'captcha':['', Validators.required]
     });
 
 

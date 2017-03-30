@@ -9,9 +9,6 @@ export class Candidate {
   mobile_number : string;
   password : string;
   conform_password : string;
-  //country:string;
-  //state:string;
-  //city:string;
   pin:number;
   location :Location;
 

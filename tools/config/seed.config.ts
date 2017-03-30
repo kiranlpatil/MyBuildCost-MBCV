@@ -392,6 +392,7 @@ export class SeedConfig {
       '@angular/platform-browser-dynamic/testing':
         'node_modules/@angular/platform-browser-dynamic/bundles/platform-browser-dynamic-testing.umd.js',
       '@angular/router/testing': 'node_modules/@angular/router/bundles/router-testing.umd.js',
+      'ng2-recaptcha': 'node_modules/ng2-recaptcha/ng2-recaptcha.js',
 
       'app/*': '/app/*',
       // For test config
@@ -450,6 +451,11 @@ export class SeedConfig {
         main: 'index.js',
         defaultExtension: 'js'
       },
+      'ng2-recaptcha': {
+        main: 'ng2-recaptcha.js',
+        defaultExtension: 'js'
+      },
+
       '@angular/http': {
         main: 'index.js',
         defaultExtension: 'js'
