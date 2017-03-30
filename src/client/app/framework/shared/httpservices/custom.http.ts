@@ -43,7 +43,13 @@ export class CustomHttp extends Http {
         var message = new Message();
         message.isError = true;
         var errorInstance = new ErrorInstance();
-        if (err.status) {
+         if(err.err_msg && err.err_code){debugger
+           errorInstance.err_msg = err.err_msg;
+           errorInstance.err_code = err.err_code;
+          return Observable.throw(errorInstance);
+           console.log("Errorr instance is",errorInstance);
+        }
+         else if (err.status) {
           if (err.status === 401 || err.status === 403) {
             // var errObj = err.json();
             //var errObj = JSON.parse(err._body);

@@ -37,7 +37,7 @@ export class AppComponent implements OnInit {
         if (parseInt(LocalStorageService.getLocalValue(LocalStorage.IS_LOGED_IN)) === 1) {
           if(LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE)==="true")
            this._router.navigate(['/createprofile']);
-          else 
+          else
             this._router.navigate(['/recruiterdashboard']);
            // this._router.navigate(['/dashboard']);
           //this._router.navigate([NavigationRoutes.APP_COMPANYDETAILS]);
@@ -52,7 +52,7 @@ export class AppComponent implements OnInit {
 
         this.subscription = messageService.messageObservable$.subscribe(
             (message:Message) => {
-                if (message.isError) {
+                if (message.isError == true) {
                     this.showError(message);
                 } else {
                     this.showSuccess(message);
@@ -80,17 +80,27 @@ export class AppComponent implements OnInit {
     }
 
     showError(message:Message) {
+      if(message.error_msg.error == "Could not attach click handler to the element. Reason: element not found."){
+        this.isShowErrorMessage =true
+        this.errorMessage = message.error_msg.error;
+        this.customMessage = message.custom_message;
+      }
+      else{
         this.isShowErrorMessage = false;
         this.errorMessage = message.error_msg;
         this.customMessage = message.custom_message;
+
+      }
+
     };
 
     showSuccess(message:Message) {
         this.isShowSuccessMessage = false;
+        console.log("Success message",message);
         this.customMessage = message.custom_message;
-        setTimeout(function () {
+        /*setTimeout(function () {
             this.isShowSuccessMessage = true;
-        }.bind(this), 4000);
+        }.bind(this), 4000);*/
     };
 
     closeErrorMessage() {

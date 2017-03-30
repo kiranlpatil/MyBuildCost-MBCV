@@ -50,10 +50,10 @@ export class CompanyDetailsComponent {
               private companyDetailsService: CompanyDetailsService,private profileService: ProfileService,
               private messageService: MessageService, private formBuilder: FormBuilder, private loaderService: LoaderService) {
     this.companyDetailsForm = this.formBuilder.group({
-      'description1': [''],
-      'description2': [''],
-      'description3': [''],
-      'setOfDocuments':['']
+      'about_company':['',Validators.required],
+      'description1': ['',Validators.required],
+      'description2': ['',Validators.required],
+      'description3': ['',Validators.required],
     });
 
     //this.filesToUpload = [];
@@ -179,7 +179,7 @@ export class CompanyDetailsComponent {
     // this.loaderService.stop();
     if (error.err_code === 404 || error.err_code === 0) {
       var message = new Message();
-      message.error_msg = error.message;
+      message.error_msg = error.err_msg;
       message.isError = true;
       this.messageService.message(message);
     } else {

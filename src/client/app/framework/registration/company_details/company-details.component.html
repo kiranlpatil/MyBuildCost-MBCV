@@ -7,6 +7,15 @@
 
     <h5>Upload Documents <span class="glyphicon glyphicon-remove" (click)="goToLanding()"></span></h5>
 
+    <div class="alert alert-danger clearfix" [hidden]="isShowErrorMessage">
+      <div class="col-sm-1 hidden-xs"><span class="glyphicon glyphicon-warning-sign"></span></div>
+      <div class="col-sm-10 col-xs-11 error-msg"><b>{{ error_msg }}</b></div>
+      <div class="col-sm-1 col-xs-1 close-msg">
+        <button (click)="closeErrorMessage()" class="btn-close"><span class="glyphicon glyphicon-remove"></span>
+        </button>
+      </div>
+    </div>
+
     <form [formGroup]="companyDetailsForm" (submit)="onSubmit()">
 
       <h4>{{company_name}}</h4>
@@ -18,6 +27,13 @@
         <div class="col-sm-7 no-padding">
           <cn-profile-picture></cn-profile-picture>
         </div>
+      </div>
+
+      <div class="form-group">
+        <control-messages [control]="companyDetailsForm.controls.about_company"></control-messages>
+        <!--<label>About Company</label>-->
+        <textarea type="text" formControlName="about_company" id="about_company"  placeholder="About Company" class="form-control" required></textarea>
+
       </div>
 
       <div class="col-sm-10 no-padding">
@@ -69,7 +85,7 @@
       </div>
 
       <div class="button-group">
-        <button type="submit" class="btn btn-primary" >Submit Documents</button>
+        <button type="submit" class="btn btn-primary" [disabled]="!companyDetailsForm.valid" >Submit Documents</button>
       </div>
     </form>
   </div>
