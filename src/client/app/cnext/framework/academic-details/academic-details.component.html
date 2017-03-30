@@ -1,5 +1,4 @@
 <div class="academic-details clearfix" *ngFor="let item of tempfield;let i= index">
-
   <div class="col-sm-4 no-padding">
     <div class="form-group">
       <input type="text"  required class="form-control" [ngModel]="schoolName" (ngModelChange)="selectedSchoolName($event)" (focus)="changeValue()" />
