@@ -15,43 +15,20 @@
       </div>
     </div>
 
-    <div class="worked-from col-sm-12 no-padding">
-      <label> From</label>
-      <div class="col-sm-6 no-padding">
-        <div id="monthf" ng2-auto-complete
-             [source]="monthList"
-             (ngModelChange)="selectedworkfromMonthModel($event)">
-          <input class="form-control" [ngModel]="fromMonthModel" [disabled]="disbleRole"  placeholder="MONTH" />
-        </div>
-      </div>
-      <div class="col-sm-6 no-padding">
-        <div id="yearf" ng2-auto-complete
-             [source]="yearList"
-             (ngModelChange)="selectedworkfromYearModel($event)">
 
-          <input class="form-control" [ngModel]="fromYearModel" [disabled]="disbleRole"  placeholder="YYYY" />
-        </div>
-      </div>
-    </div>
+      <div class="col-sm-4 no-padding">
+        <div class="form-group">
+          <div id="yearf" ng2-auto-complete
+               [source]="yearList"
+               (ngModelChange)="selectedYearModel($event)">
+            <input class="form-control" type="text" required [ngModel]="fromYearModel"  />
+            <label>Year of Certification</label>
+          </div>
+        </div></div>
 
-    <div class="worked-to col-sm-12 no-padding">
-      <label>To</label>
-      <div class="col-sm-6 no-padding" id="montht" ng2-auto-complete
-           [source]="monthList"
-           (ngModelChange)="selectedworktoMonthModel($event)">
-
-        <input class="form-control" [ngModel]="toMonthModel" [disabled]="disbleRole"  placeholder="MONTH" />
-      </div>
-      <div class="col-sm-6 no-padding" id="yeart" ng2-auto-complete
-           [source]="yearList"
-           (ngModelChange)="selectedworktoYearModel($event)">
-
-        <input class="form-control" [ngModel]="toYearModel" [disabled]="disbleRole"  placeholder="YYYY" />
-      </div>
-    </div>
   </div>
 
-  <div class="right-content">
+  <div class="col-sm-10 no-padding">
     <div>
       <textarea class="form-control" [ngModel]="certificate" (ngModelChange)="addedCertification($event)" Placeholder="Certification/Accreditation"></textarea>
     </div>

@@ -15,7 +15,6 @@ export class CertificationAccreditationComponent {
   private tempfield: string[];
   private selectedcertificate=new certifications();
   private selectedcertificates:certifications[]=new Array();
-  private monthList:string[]=this.dateservice.monthList;
   private yearList:string[]=this.dateservice.yearList;
   private disbleButton:boolean=false;
 
@@ -33,22 +32,11 @@ this.selectedcertificate.certificateName=certificatename;
   {
 this.selectedcertificate.compaName=companyname;
   }
-  selectedworkfromMonthModel(frommonth:string)
-{
-this.selectedcertificate.fromMonth=frommonth;
-}
 
-  selectedworkfromYearModel(fromyear:string)
+
+  selectedYearModel(year:string)
   {
-this.selectedcertificate.fromYear=fromyear;
-  }
-  selectedworktoMonthModel(toyear:string)
-  {
-    this.selectedcertificate.toMonth=toyear;
-  }
-  selectedworktoYearModel(toyear:string)
-  {
-    this.selectedcertificate.toYear=toyear;
+    this.selectedcertificate.yearOfCertification=year;
   }
 
   addedCertification(certificate:any){
@@ -63,9 +51,7 @@ this.selectedcertificate.fromYear=fromyear;
   addAnother() {
 
     if(this.selectedcertificate.certificateName==="" || this.selectedcertificate.compaName==="" ||
-      this.selectedcertificate.fromYear==="" || this.selectedcertificate.fromMonth==="" ||
-      this.selectedcertificate.toMonth==="" ||this.selectedcertificate.toYear===""||
-      this.selectedcertificate.certificationdetails==="")
+      this.selectedcertificate.yearOfCertification===""|| this.selectedcertificate.certificationdetails==="")
     {
 
       this.disbleButton=true;
