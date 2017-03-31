@@ -1,7 +1,7 @@
 export class academicdetails
 {
-  schoolName:string;
-  universityName:string;
-  passingyear:string;
-  specialization:string;
+  schoolName:string="";
+  universityName:string="";
+  passingyear:string="";
+  specialization:string="";
 }

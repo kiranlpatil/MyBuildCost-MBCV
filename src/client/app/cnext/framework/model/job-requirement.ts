@@ -3,10 +3,10 @@
  */
 
 export class JobRequirement {
-  industryModel : string;
-  roleModel: string;
-  educationModel : string;
-  experienceModel : string;
-  salaryModel : string;
-  noticeperiodModel : string;
+  industry : string;
+  role: string;
+  education : string;
+  experience : string;
+  salary : string;
+  noticeperiod : string;
 }

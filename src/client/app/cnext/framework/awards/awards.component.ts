@@ -18,6 +18,7 @@ export class AwardsComponent {
   private selectedawards: awards[]=new Array();
   private monthList:string[]=this.dateservice.monthList;
   private yearList:string[]=this.dateservice.yearList;
+  private disbleButton:boolean=false;
 
 
 
@@ -57,9 +58,17 @@ this.selectedaward.year=year;
 
 
   addAnother() {
-    this.selectedawards.push(this.selectedaward);
+    if(this.selectedaward.title==="" || this.selectedaward.month==="" ||
+      this.selectedaward.year==="" || this.selectedaward.awardsdetails==="" )
+    {
+
+      this.disbleButton=true;
+    }
+    else {
+      this.disbleButton = false;
+      this.selectedawards.push(this.selectedaward);
     console.log(this.selectedawards);
-    this.tempfield.push("null");
+    this.tempfield.push("null");}
 
   }
 }

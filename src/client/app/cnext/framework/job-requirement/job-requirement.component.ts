@@ -7,6 +7,7 @@ import {IndustryListService} from "../industry-list/industry-list.service";
 import {Message} from "../../../framework/shared/message";
 import {MyJobRequirementService} from "../jobrequirement-service";
 import {ProfessionalDataService} from "../professional-data/professional-data.service";
+import {JobRequirementService} from "./job-requirement.service";
 
 
 @Component({
@@ -25,10 +26,10 @@ export class JobRequirementComponent {
   private industryModel = "";
   private roleModel = "";
 
-  private educationlist: string[];
-  private experiencelist: string[];
-  private salarylist: string[];
-  private noticeperiodlist: string[];
+  private educationlist=new Array();
+  private experiencelist=new Array();
+  private salarylist=new Array()
+  private noticeperiodlist=new Array();
   private educationModel: string;
   private experienceModel: string;
   private salaryModel: string;
@@ -39,25 +40,28 @@ export class JobRequirementComponent {
               private professionaldataservice:ProfessionalDataService,
               private http: Http,
               private messageService: MessageService,
-              private myJobrequirementService :MyJobRequirementService) {
+              private myJobrequirementService :MyJobRequirementService,
+              private jobrequirement:JobRequirementService ) {
   }
 
 
   ngOnInit() {
-    this.industryService.getIndustries()
+    this.professionaldataservice.getEducationList()
       .subscribe(
-        industrylist => this.onIndustryListSuccess(industrylist.data),
-        error => this.onError(error));
+        data=> { this.onEducationListSuccess(data);},
+        error =>{ this.onError(error);});
+
+
   }
 
 
-  selectIndustryModel(newVal: any) {
-    this.storedIndustry = newVal;
-    this.industryModel = newVal;
-    this.jobRequirement.industryModel = this.industryModel;
+  selectIndustryModel(industry: any) {
+    this.storedIndustry = industry;
+    this.industryModel = industry;
+    this.jobRequirement.industry = this.industryModel;
 
 
-    this.industryService.getRoles(newVal)
+    this.industryService.getRoles(industry)
       .subscribe(
         (rolelist:any) => this.onRoleListSuccess(rolelist.data),
         (error:any) => this.onError(error));
@@ -72,19 +76,16 @@ export class JobRequirementComponent {
       this.roles.push(role.name);
     }
   }
-  selectRolesModel(newVal: any) {
-    this.roleModel =newVal;
-    this.storedRoles.push(newVal);
-    this.jobRequirement.roleModel = this.roleModel;
+  selectRolesModel(role: any) {debugger
+    this.roleModel =role;
+    this.storedRoles.push(role);
+    this.jobRequirement.role = this.roleModel;
 
     this.myJobrequirementService.change(this.jobRequirement);
 
 
 
-    this.professionaldataservice.getEducationList()
-      .subscribe(
-        data=> { this.onEducationListSuccess(data);},
-        error =>{ this.onError(error);});
+
   }
   onEducationListSuccess(data:any){
     for(let k of data.educated){
@@ -93,10 +94,10 @@ export class JobRequirementComponent {
 
   }
 
-  selecteducationModel(newVal: any) {
-    this.educationModel = newVal;
+  selecteducationModel(education: any) {
+    this.educationModel = education;
 
-    this.jobRequirement.educationModel = this.educationModel;
+    this.jobRequirement.education = this.educationModel;
 
 
 
@@ -113,10 +114,10 @@ export class JobRequirementComponent {
 
   }
 
-  selectexperienceModel(newVal: any) {
-    this.experienceModel = newVal;
+  selectexperienceModel(experience: any) {
+    this.experienceModel = experience;
 
-    this.jobRequirement.experienceModel = this.experienceModel;
+    this.jobRequirement.experience = this.experienceModel;
 
 
 
@@ -134,9 +135,9 @@ export class JobRequirementComponent {
     }
 
   }
-  selectsalaryModel(newVal: any) {
-    this.salaryModel = newVal;
-    this.jobRequirement.salaryModel = this.salaryModel;
+  selectsalaryModel(salary: any) {
+    this.salaryModel = salary;
+    this.jobRequirement.salary = this.salaryModel;
     this.professionaldataservice.getNoticePeriodList()
       .subscribe(
         data=> { this.onGetNoticePeriodListSuccess(data);},
@@ -153,9 +154,15 @@ export class JobRequirementComponent {
 
   }
 
-  selectenoticeperiodModel(newVal: any) {
-     this.noticeperiodModel = newVal;
-    this.jobRequirement.noticeperiodModel = this.noticeperiodModel;
+  selectenoticeperiodModel(noticeperiod: any) {
+     this.noticeperiodModel = noticeperiod;
+    this.jobRequirement.noticeperiod= this.noticeperiodModel;
+    this.jobrequirement.change(this.jobRequirement);
+
+    this.industryService.getIndustries()
+      .subscribe(
+        industrylist => this.onIndustryListSuccess(industrylist.data),
+        error => this.onError(error));
   }
 
 

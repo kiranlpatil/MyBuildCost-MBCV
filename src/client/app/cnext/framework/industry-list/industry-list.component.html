@@ -21,7 +21,7 @@
               [source]="roleNames"
               (ngModelChange)="selectRolesModel($event)">
           <span *ngIf="i>0" >&amp;</span>
-          <input class="form-control" [ngModel]="roleModel" [disabled]="disbleRole" (keyup)="updatelist()"  />
+          <input class="form-control" [ngModel]="roleModel" [disabled]="disbleRole" (keyup)="updatelist($event.target.value)"  required/>
         </div>
       </div>
 

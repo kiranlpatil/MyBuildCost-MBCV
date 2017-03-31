@@ -4,14 +4,15 @@
   </div>
 
   <div class="section-container">
+    <cn-job-location></cn-job-location>
+  </div>
+
+  <div class="section-container">
     <h4 class="heading">Choose Job Requirement</h4>
     <cn-job-requirement></cn-job-requirement>
   </div>
 
-  <div class="section-container">
-    <h4 class="heading">Choose Job Location</h4>
-    <cn-job-location></cn-job-location>
-  </div>
+
 
   <div class="section-container">
     <h4 class="heading">Choose Your Capabilities (Max. 10)</h4>
@@ -57,7 +58,7 @@
 
   <div class="button-group">
     <button type="submit" class="btn btn-primary">Apply</button>
-    <button type="submit" class="btn btn-danger">Post Job</button>
+    <button type="submit" class="btn btn-danger" (click)="postjob()">Post Job</button>
     <button type="submit" class="btn btn-default" (click)="logOut()">Logout</button>
   </div>
 </div>

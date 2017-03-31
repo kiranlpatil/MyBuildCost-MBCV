@@ -101,6 +101,12 @@ import {ProfessionalService} from "./cnext/framework/professional-service";
 import {EducationalService} from "./cnext/framework/educational-service";
 import {AwardService} from "./cnext/framework/award-service";
 import {JobLocationService} from "./cnext/framework/job-location/job-location.service";
+import {MyJobInformationService} from "./cnext/framework/job-information/job-information.service";
+import {JobRequirementService} from "./cnext/framework/job-requirement/job-requirement.service";
+import {myJobLocationService} from "./cnext/framework/myjob-location.service";
+import {myJobPostcapabilityService} from "./cnext/framework/jobpost-capabilities.service";
+import {JonPostDescriptionService} from "./cnext/framework/job-post-description.service";
+
 
 @NgModule({
   imports: [
@@ -191,7 +197,6 @@ import {JobLocationService} from "./cnext/framework/job-location/job-location.se
     ChangeEmailService,
     ChangeMobileService,
     NotificationService,
-      JobLocationService,
     ForgotPasswordService,
     ThemeChangeService,
     RegistrationService,
@@ -204,6 +209,7 @@ import {JobLocationService} from "./cnext/framework/job-location/job-location.se
     ActiveUserService,
     ActiveEmailService,
     VerifyUserService,
+    JobLocationService,
     VerifyPhoneService,
     IndustryListService,
     CapabilityListService,
@@ -221,7 +227,14 @@ import {JobLocationService} from "./cnext/framework/job-location/job-location.se
     CompanyDetailsService,
     EmploymentHistoryService,
     DateService,
-    JobLocationService
+    MyJobRequirementService,
+    MyJobInformationService,
+    JobRequirementService,
+    myJobLocationService,
+    myJobPostcapabilityService,
+    JonPostDescriptionService
+
+
 
   ],
   bootstrap: [AppComponent]

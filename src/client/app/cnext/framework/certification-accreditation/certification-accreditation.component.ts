@@ -17,6 +17,8 @@ export class CertificationAccreditationComponent {
   private selectedcertificates:certifications[]=new Array();
   private monthList:string[]=this.dateservice.monthList;
   private yearList:string[]=this.dateservice.yearList;
+  private disbleButton:boolean=false;
+
 
   constructor(private dateservice:DateService) {
 
@@ -59,9 +61,20 @@ this.selectedcertificate.fromYear=fromyear;
 
 
   addAnother() {
-this.selectedcertificates.push(  this.selectedcertificate);
-    console.log(this.selectedcertificates);
-    this.tempfield.push("null");
 
+    if(this.selectedcertificate.certificateName==="" || this.selectedcertificate.compaName==="" ||
+      this.selectedcertificate.fromYear==="" || this.selectedcertificate.fromMonth==="" ||
+      this.selectedcertificate.toMonth==="" ||this.selectedcertificate.toYear===""||
+      this.selectedcertificate.certificationdetails==="")
+    {
+
+      this.disbleButton=true;
+    }
+    else {
+      this.disbleButton = false;
+      this.selectedcertificates.push(this.selectedcertificate);
+      console.log(this.selectedcertificates);
+      this.tempfield.push("null");
+    }
   }
 }

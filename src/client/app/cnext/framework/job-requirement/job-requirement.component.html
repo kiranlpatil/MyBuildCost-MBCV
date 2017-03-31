@@ -1,25 +1,5 @@
 <div class="wrapper clearfix">
-  <div class="col-sm-6">
-    <label>Industry:</label>
-    <div class="list">
-      <div ng2-auto-complete
-           [source]="industries"
-           (ngModelChange)="selectIndustryModel($event)">
-        <input class="form-control" [ngModel]="industryModel"  placeholder="Select Industry" />
-      </div>
-    </div>
-  </div>
 
-  <div class="col-sm-6">
-    <label>Role:</label>
-    <div class="list">
-      <div id="role" ng2-auto-complete
-            [source]="roles"
-            (ngModelChange)="selectRolesModel($event)">
-        <input class="form-control" [ngModel]="roleModel"  placeholder="Select Role"/>
-      </div>
-    </div>
-  </div>
 
   <div class="col-sm-6">
     <label>Education:</label>
@@ -61,6 +41,28 @@
            [source]="noticeperiodlist"
            (ngModelChange)="selectenoticeperiodModel($event)">
         <input class="form-control" [ngModel]="noticeperiodModel"  placeholder="Select Period" />
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-6">
+    <label>Industry:</label>
+    <div class="list">
+      <div ng2-auto-complete
+           [source]="industries"
+           (ngModelChange)="selectIndustryModel($event)">
+        <input class="form-control" [ngModel]="industryModel"  placeholder="Select Industry" />
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-6">
+    <label>Role:</label>
+    <div class="list">
+      <div id="role" ng2-auto-complete
+           [source]="roles"
+           (ngModelChange)="selectRolesModel($event)">
+        <input class="form-control" [ngModel]="roleModel"  placeholder="Select Role"/>
       </div>
     </div>
   </div>

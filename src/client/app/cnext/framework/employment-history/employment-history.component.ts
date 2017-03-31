@@ -15,8 +15,10 @@ export class EmploymentHistoryComponent {
 
  private toMonthModel:string;
  private toYearModel:string;
+ private isShowYearMessage:boolean=false;
  private fromMonthModel:string;
  private fromYearModel:string;
+ private disbleButton:boolean=false;
  private tempfield: string[];
  private selectedEmploymentHistory = new EmployementHistory();
  private selectedEmploysHistory :EmployementHistory[]=new Array();
@@ -52,10 +54,12 @@ export class EmploymentHistoryComponent {
 
   }
 
-  
-  
+
+
   reMark(remark:string){
     this.selectedEmploymentHistory.remarks=remark;
+
+
   }
 
   selectedworkfromMonthModel(newval: any){
@@ -75,16 +79,42 @@ export class EmploymentHistoryComponent {
 
   selectedworktoYearModel(newval: any) {
 
-    this.selectedEmploymentHistory.workedToYear=newval;
+    if(newval<this.selectedEmploymentHistory.workedFromYear||
+      (this.selectedEmploymentHistory.workedFromMonth===this.selectedEmploymentHistory.workedToMonth &&
+      newval===this.selectedEmploymentHistory.workedFromYear))
+    {
+      this.isShowYearMessage=true;
+      this.toYearModel="";
+    }
+    else {
+      this.isShowYearMessage=false;
+      this.selectedEmploymentHistory.workedToYear = newval;
+    }
 
   }
 
 
 
-  addAnother() {
-    this.selectedEmploysHistory.push(this.selectedEmploymentHistory);
-    console.log(this.selectedEmploysHistory);
-    this.tempfield.push("null");
+
+  addAnother() {debugger
+
+    if(this.selectedEmploymentHistory.companyName==="" || this.selectedEmploymentHistory.designation==="" ||
+      this.selectedEmploymentHistory.workedToMonth==="" || this.selectedEmploymentHistory.workedToYear==="" ||
+      this.selectedEmploymentHistory.workedFromMonth==="" || this.selectedEmploymentHistory.workedFromYear==="" ||
+      this.selectedEmploymentHistory.remarks==="" )
+    {
+
+      this.disbleButton=true;
+    }
+    else {
+      this.disbleButton = false;
+
+
+
+
+      this.selectedEmploysHistory.push(this.selectedEmploymentHistory);
+      console.log(this.selectedEmploysHistory);
+      this.tempfield.push("null");}
 
   }
 }

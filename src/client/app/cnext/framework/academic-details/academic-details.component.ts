@@ -19,6 +19,7 @@ export class AcademicDetailComponent {
  private yearList = new Array();
  private selectedacademic= new academicdetails();
  private selectedacademicsdeatils:academicdetails[]=new Array();
+  private disbleButton:boolean=false;
 
 
   constructor(private educationalService : EducationalService) {
@@ -60,9 +61,17 @@ this.selectedacademic.schoolName=schoolname;
 
 
   addAnother() {
-    this. selectedacademicsdeatils.push(this.selectedacademic);
 
-    this.tempfield.push("null");
+      if(this.selectedacademic.schoolName==="" || this.selectedacademic.universityName==="" ||
+        this.selectedacademic.passingyear==="" || this.selectedacademic.specialization==="" )
+      {
 
+        this.disbleButton=true;
+      }
+      else {
+        this.disbleButton = false;
+        this.selectedacademicsdeatils.push(this.selectedacademic);
+        this.tempfield.push("null");
+      }
   }
 }

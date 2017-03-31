@@ -11,6 +11,7 @@ import {MyCapabilityService} from "../capability-service";
 import {LocalStorageService} from "../../../framework/shared/localstorage.service";
 import {MyJobRequirementService} from "../jobrequirement-service";
 import {Message} from "../../../framework/shared/message";
+import {myJobPostcapabilityService} from "../jobpost-capabilities.service";
 
 
 
@@ -33,7 +34,7 @@ export class CapabilityListComponent {
   private capabilityIds :string[]=new Array();
   private roles:any;
   private iscandidate:boolean=false;
-  
+
   constructor(private testService : TestService,
               private complexityService : ComplexityService,
               private myIndustryService :MyIndustryService,
@@ -41,13 +42,17 @@ export class CapabilityListComponent {
               private messageService:MessageService,
               private capabilityListServive:CapabilityListService,
               private myCapabilityListService:MyCapabilityService,
-              private myJobrequirementService :MyJobRequirementService) {
+              private myJobrequirementService :MyJobRequirementService,
+              private jobpostcapability:myJobPostcapabilityService
+                  ) {
 
     testService.showTest$.subscribe(
       data=>{
         this.isShowCapability=data;
       }
     );
+
+
     myIndustryService.showTest$.subscribe(
       data=>{
         this.industry=data;
@@ -64,10 +69,10 @@ export class CapabilityListComponent {
       }
     );
     myJobrequirementService.showTest$.subscribe(
-      data=>{
+      data=>{debugger
         this.isShowCapability=true;
-        this.roles=data.roleModel;
-        this.industry=data.industryModel;
+        this.roles=data.role;
+        this.industry=data.industry;
         this.capabilityListServive.getCapability(this.industry,this.roles)
           .subscribe(
             capabilitylist => this.onCapabilityListSuccess(capabilitylist.data),
@@ -164,5 +169,8 @@ export class CapabilityListComponent {
       error => {
         console.log(error);
       });
-  };
+    this.jobpostcapability.change(this.capabilityIds);
+  }
+
+
 }

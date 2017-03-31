@@ -4,6 +4,7 @@ import {JobLocation} from "../model/job-location";
 import {JobLocationService} from "./job-location.service";
 import {Message} from "../../../framework/shared/message";
 import {MessageService} from "../../../framework/shared/message.service";
+import {myJobLocationService} from "../myjob-location.service";
 
 @Component({
   moduleId: module.id,
@@ -19,15 +20,17 @@ export class JobLocationComponent {
   private storedcity:string;
   private pin:number;
   private locationDetails : any;
-  private countries:string[]=new Array(0);
-  private  states:string[]=new Array(0);
-  private cities:string[]=new Array(0);
+  private countries:string[]=new Array();
+  private  states:string[]=new Array();
+  private cities:string[]=new Array();
 
 
 
   constructor(
               private joblocationService:JobLocationService,
-              private messageService: MessageService    ) {
+              private myjoblocationService:myJobLocationService,
+              private messageService: MessageService
+               ) {
   }
 
 
@@ -48,10 +51,10 @@ export class JobLocationComponent {
     }
   }
 
-  selectCountryModel(newval:any) {
+  selectCountryModel(country:any) {
 
     for(let item of this.locationDetails){
-      if(item.country===newval){
+      if(item.country===country){
         let tempStates: string[]= new Array(0);
         for(let state of item.states){
           tempStates.push(state.name);
@@ -59,15 +62,15 @@ export class JobLocationComponent {
         this.states=tempStates;
       }
     }
-    this.storedcountry=newval;
+    this.storedcountry=country;
     this.jobLocationtion.country=this.storedcountry;
   }
-  selectStateModel(newval:any) {
+  selectStateModel(selectedstate:any) {
     for(let item of this.locationDetails){
       if(item.country===this.storedcountry){
         for(let state of item.states){
-          if(state.name===newval){
-            let tempCities: string[]= new Array(0);
+          if(state.name===selectedstate){
+            let tempCities: string[]= new Array();
             for(let city of state.cities) {
               tempCities.push(city);
             }
@@ -76,20 +79,21 @@ export class JobLocationComponent {
         }
       }
     }
-    this.storedstate=newval;
+    this.storedstate=selectedstate;
     this.jobLocationtion.state=this.storedstate;
   }
 
 
 
-  selectCityModel(newval : string){
-    this.storedcity=newval;
-    this.jobLocationtion.city=this.storedcity;
+  selectCityModel(city : string){
+    this.storedcity=city;
+    this.jobLocationtion.city=city;
   }
 
 
-  isPinSelected(value:any){
-    this.jobLocationtion.pin=this.pin;
+  isPinSelected(pin:any){
+    this.jobLocationtion.pin=pin;
+    this.myjoblocationService.change(this.jobLocationtion);
 
   }
   onError(error:any){

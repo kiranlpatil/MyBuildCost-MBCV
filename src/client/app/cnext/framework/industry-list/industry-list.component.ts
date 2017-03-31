@@ -6,6 +6,7 @@ import {MyRoleService} from "../role-service";
 import {Message} from "../../../framework/shared/message";
 import {MessageService} from "../../../framework/shared/message.service";
 import {IndustryList} from "../model/industryList";
+import {constants} from "fs";
 
 @Component({
   moduleId: module.id,
@@ -33,6 +34,7 @@ export class IndustryListComponent {
   private reAdds:string[]=new Array();
   private reAdd:string;
   private notAdd=true;
+
 
 
 
@@ -111,13 +113,27 @@ export class IndustryListComponent {
     else
       this.roleModel=roleName;
   }
-  updatelist() {
+  updatelist(newval:any) {debugger
 
-if(this.roleModel===""){
+      // console.log("uodate", this.roleModel);
+      // console.log("newval", newval);
+      // console.log(newval.indexOf("Test"));
+      for (let item of this.storedRoles) {
+        if (item.indexOf(newval)) {
+
+          this.roleNames.push(item);
+
+        }
+      }
+
+/*if(this.roleModel==="
 
   for (let  i = 0; i < this.roleNames.length; i++) {
     if (this.roleNames[i] === this.reAdd) {
-      this.notAdd = false;
+      for (let  j= 0; j < 3; j++){
+        if(this.storedRoles[j]===this.reAdd){
+        this.notAdd = false;}
+      }
     }
   }
   if(this.notAdd===true){
@@ -125,7 +141,8 @@ if(this.roleModel===""){
 
   }
   this.notAdd=true;
-  }}
+  }*/
+  }
 
   deleteSelectedRole(roleName: any){
     this.reAdd=roleName;

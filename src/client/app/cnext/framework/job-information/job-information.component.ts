@@ -1,6 +1,7 @@
 
 import {Component} from '@angular/core';
 import {JobInformation} from "../model/job-information";
+import {MyJobInformationService} from "./job-information.service";
 
 
 @Component({
@@ -13,7 +14,7 @@ import {JobInformation} from "../model/job-information";
 export class JobInformationComponent {
   private jobInformation=new JobInformation();
 
-  constructor() {
+  constructor(private joninformationservice:MyJobInformationService) {
   }
 
 
@@ -32,6 +33,7 @@ export class JobInformationComponent {
 
   isDepartmentSelected(department:any){
     this.jobInformation.department=department;
+    this.joninformationservice.change(this.jobInformation);
   }
 
 

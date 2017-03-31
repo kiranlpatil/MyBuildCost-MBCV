@@ -13,5 +13,6 @@ export class MyJobRequirementService {
   // Service message commands
   change(value: any) {
     this._showCapabilitySource.next(value);
+
   }
 }

@@ -54,7 +54,7 @@ export class ComplexityListComponent {
     );
 
     myCapabilityListService.showTest$.subscribe(
-      data=>{
+      data=>{debugger
         this.capabilities=data;
         console.log("from complex capab",this.capabilities);
 
@@ -66,11 +66,11 @@ export class ComplexityListComponent {
     );
 
     myJobrequirementService.showTest$.subscribe(
-      data=>{
+      data=>{debugger
         this.isComplexityShow=true;
-        this.roles=data.roleModel;
-        this.industry=data.industryModel;
-        console.log("role list in capab",this.roles,this.industry);
+        this.roles=data.role;
+        this.industry=data.industry;
+        //console.log("role list in capab",this.roles,this.industry);
 
       }
     );
