@@ -37,7 +37,7 @@
     <control-messages [control]="userForm.controls.password"></control-messages>
     <input type="password" formControlName="password" id="password" class="form-control" (focus)="showMessage()" [(ngModel)]="myPassword" (ngModelChange)="selectPassword($event)" required/>
     <label>Password</label>
-    <span *ngIf="isShowMessage"><h6><font color="red">Password must be of minimum 8digit with minimum 1 uppercase,lowercase,number.</font></h6></span>
+    <span *ngIf="isShowMessage"><h6><font color="red">Password must be of minimum 8digit with minimum 1 uppercase,lowercase,number and one special character($@$!%*?&).</font></h6></span>
   </div>
 
   <div class="form-group">
@@ -46,7 +46,7 @@
            (blur)="makePasswordConfirm()" class="form-control" required/>
     <label>Confirm Password</label>
     <div class="error-message-registration" *ngIf="isPasswordConfirm == true">
-      <p>Passwords does not match.</p>
+      <p><font color="red">Passwords does not match.</font></p>
     </div>
   </div>
 

@@ -1,4 +1,4 @@
 class ProjectAsset {
-    public static APP_NAME : string = "Tpl-Seed";
+    public static APP_NAME : string = "C-Next";
 }
 export=ProjectAsset;

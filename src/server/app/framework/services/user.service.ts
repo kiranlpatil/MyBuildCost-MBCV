@@ -193,9 +193,9 @@ class UserService {
         var auth = new AuthInterceptor();
         var token = auth.issueTokenWithUid(field);
         var host = config.get('TplSeed.mail.host');
-        var link = host + "activate_user?access_token=" + token + "&_id=" + res[0]._id;
+        var link = host + "company_details?access_token=" + token + "&_id=" + res[0]._id;
         var header1 = fs.readFileSync("./src/server/app/framework/public/header1.html").toString();
-        var content = fs.readFileSync("./src/server/app/framework/public/verification.mail.html").toString();
+        var content = fs.readFileSync("./src/server/app/framework/public/recruiter.mail.html").toString();
         var footer1 = fs.readFileSync("./src/server/app/framework/public/footer1.html").toString();
         var mid_content = content.replace('$link$',link);
         var mailOptions = {

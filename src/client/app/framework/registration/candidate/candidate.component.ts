@@ -18,9 +18,7 @@ import {ImagePath, LocalStorage, ProjectAsset, VALUE_CONSTANT} from '../../share
 import { LocalStorageService } from '../../shared/localstorage.service';
 import {LoaderService} from "../../shared/loader/loader.service";
 import {Http,Response} from "@angular/http";
-import {Location} from "../location";
 import {DateService} from "../../../cnext/framework/date.service";
-//import { RecaptchaModule } from 'ng2-recaptcha';
 
 @Component({
   moduleId: module.id,
@@ -136,7 +134,7 @@ export class CandidateComponent {
 
   }
 
-  onSubmit() {
+  onSubmit() {debugger
 
     this.model = this.userForm.value;
     this.model.current_theme = AppSettings.LIGHT_THEM;
@@ -158,11 +156,11 @@ export class CandidateComponent {
   }
 
   onRegistrationSuccess(candidate: any) {
-    //this.loaderService.stop();
     LocalStorageService.setLocalValue(LocalStorage.USER_ID, candidate.data._id);
     LocalStorageService.setLocalValue(LocalStorage.EMAIL_ID, this.userForm.value.email);
     LocalStorageService.setLocalValue(LocalStorage.MOBILE_NUMBER, this.userForm.value.mobile_number);
     LocalStorageService.setLocalValue(LocalStorage.CHANGE_MAIL_VALUE, 'from_registration');
+    LocalStorageService.setLocalValue(LocalStorage.FROM_CANDIDATE_REGISTRATION, 'true');
 
    // this.userForm.reset();
     this._router.navigate([NavigationRoutes.VERIFY_USER]);
@@ -205,8 +203,7 @@ export class CandidateComponent {
 
 
   selectPassword(newval:any) {
-     if (this.myPassword.match(/(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/)) {
-
+     if (this.myPassword.match(/(?=.*\d)(?=.*[a-z])(?=.*[$@$!%*?&])(?=.*[A-Z]).{8,}/)) {
         this.isShowMessage=false;
      }
   }

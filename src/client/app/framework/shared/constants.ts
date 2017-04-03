@@ -26,7 +26,7 @@ export class Messages {
   public static MSG_SUCCESS_FORGOT_PASSWORD: string = 'Email has been sent successfully on your registered email to reset password';
   public static MSG_SUCCESS_DASHBOARD_PROFILE: string = 'Your Profile Updated Successfully';
   public static MSG_SUCCESS_DASHBOARD_PROFILE_PIC: string = 'Your profile picture updated successfully.';
-  public static MSG_SUCCESS_UPLOAD_DOCUMENT: string = 'Your document updated successfully.';
+  public static MSG_SUCCESS_UPLOAD_DOCUMENT: string = 'Your document uploaded successfully.';
   public static MSG_SUCCESS_CONTACT: string = 'Email sent successfully.';
   public static MSG_SUCCESS_CHANGE_THEME: string = 'Theme changed successfully.';
   public static MSG_SUCCESS_MAIL_VERIFICATION_RESULT_STATUS: string ='Congratulations';
@@ -70,7 +70,7 @@ export class NavigationRoutes {
   public static VERIFY_PHONE: string = '/verify_phone';
   public static APP_CHANGEEMAIL:string = '/change_email';
   public static APP_CREATEPROFILE:string = '/createprofile';
-  public static APP_COMPANYDETAILS:string = '/companydetails';
+  public static APP_COMPANYDETAILS:string = '/company_details';
 
 
 }
@@ -94,6 +94,7 @@ export class LocalStorage {
     public static MY_THEME = 'my_theme';
     public static VERIFY_PHONE_VALUE = 'verify_phone_value';
     public static CHANGE_MAIL_VALUE = 'change_mail_value';
+    public static FROM_CANDIDATE_REGISTRATION = 'from_candidate_registration';
     public static VERIFY_CHANGE_PHONE_VALUE = 'verify_change_phone_value';
 }
 
@@ -186,7 +187,7 @@ export class ImagePath {
 }
 
 export class ProjectAsset {
-    public static APP_NAME = 'Tpl-Seed';
+    public static APP_NAME = 'C-NEXT';
     public static TAG_LINE = 'The Awesome Web Experience';
     public static UNDER_LICENECE = '© 2016 Techprimelab Software Pvt. Ltd.';
 }

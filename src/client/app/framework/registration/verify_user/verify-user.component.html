@@ -12,33 +12,26 @@
 
       <p>You are almost done! We just need to verify your account before you can start using it.</p>
 
-      <div class="radio text-left">
-        <label for="chkMobile" class="radio-inline">
-          <input type="radio" id="chkMobile" name="chkOption" (click)="showHideMobile()" value="chkMobile" checked/>
-          Phone Verification
-        </label>
-
-        <label for="chkEmail" class="radio-inline">
-          <input type="radio" id="chkEmail" name="chkOption" (click)="showHideEmail()" value="chkEmail" />
-          Email Verification
-        </label>
-      </div>
-
-      <div class="form-group" id="inputMobile" [hidden]="chkMobile" >
+      <div class="form-group" id="inputMobile" [hidden]="chkMobile"  >
         <control-messages [control]="userForm.controls.mobile_number"></control-messages>
+        <p>One Time Password(OTP) will be sent on the following mobile Number.</p>
         <input type="number" [(ngModel)]="model.mobile_number" formControlName="mobile_number" id="mobile_number" class="form-control" required/>
-        <label>Mobile Number</label>
+
       </div>
 
       <div class="form-group" id="inputEmail" [hidden]="chkEmail">
         <control-messages [control]="userForm.controls.email"></control-messages>
-        <!--<label>Email</label>-->
-        <input type="email" [(ngModel)]="model.email" formControlName="email" id="email" class="form-control" readonly required/>
+       <p>Verification link will be emailed on the following mailId.</p>
+        <input type="email" [(ngModel)]="model.email" formControlName="email" id="email" class="form-control" readonly />
 
       </div>
 
-      <div class="button-group">
+      <div class="button-group" [hidden]="isMailSent">
         <button type="submit" class="btn btn-primary">Verify user</button>
+      </div>
+
+      <div class="button-group" [hidden]="chkEmail" *ngIf="isMailSent ==true">
+        <button type="submit" class="btn btn-primary">Resend Verification Email</button>
       </div>
     </form>
 

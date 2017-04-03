@@ -3,7 +3,7 @@ import { CompanyDetailsComponent }  from './index';
 
 export const CompanyDetailsRoutes:Route[] = [
   {
-    path: 'companydetails',
+    path: 'company_details',
     component: CompanyDetailsComponent
   }
 ];

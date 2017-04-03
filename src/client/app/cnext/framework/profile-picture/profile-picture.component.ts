@@ -31,8 +31,8 @@ export class ProfilePictureComponent  {
   constructor(private dashboardService: DashboardService,
               private messageService: MessageService, private profileService: ProfileService) {debugger
     this.filesToUpload = [];
-    this.image_path = JSON.parse(LocalStorageService.getLocalValue(LocalStorage.PROFILE_PICTURE)); //TODO:Get it from get user call.
-    console.log("Profile Picture",this.image_path);
+    /*this.image_path = JSON.parse(LocalStorageService.getLocalValue(LocalStorage.PROFILE_PICTURE)); //TODO:Get it from get user call.
+    console.log("Profile Picture",this.image_path);*/
 
     if (this.image_path === undefined) {
       this.image_path = ImagePath.PROFILE_IMG_ICON;

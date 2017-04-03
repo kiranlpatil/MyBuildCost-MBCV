@@ -191,14 +191,15 @@ export class RecruiterComponent {
     }
   }
 
-  onRegistrationSuccess(user: any) {
+  onRegistrationSuccess(user: any) {debugger
     LocalStorageService.setLocalValue(LocalStorage.USER_ID, user.data._id);
-    LocalStorageService.setLocalValue(LocalStorage.EMAIL_ID,this.recruiterForm.value.email);
     LocalStorageService.setLocalValue(LocalStorage.EMAIL_ID,this.recruiterForm.value.email);
     LocalStorageService.setLocalValue(LocalStorage.COMPANY_NAME, this.recruiterForm.value.company_name);
     LocalStorageService.setLocalValue(LocalStorage.CHANGE_MAIL_VALUE, 'from_registration');
+    LocalStorageService.setLocalValue(LocalStorage.FROM_CANDIDATE_REGISTRATION, 'false');
    // this.recruiterForm.reset();
-    this._router.navigate([NavigationRoutes.APP_COMPANYDETAILS]);
+    //this._router.navigate([NavigationRoutes.APP_COMPANYDETAILS]);
+    this._router.navigate([NavigationRoutes.VERIFY_USER]);
   }
 
   onRegistrationError(error: any) {
@@ -238,7 +239,7 @@ export class RecruiterComponent {
   }
 
   selectPassword(newval:any) {
-    if (this.myPassword.match(/(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/)) {
+    if (this.myPassword.match(/(?=.*\d)(?=.*[a-z])(?=.*[$@$!%*?&])(?=.*[A-Z]).{8,}/)) {
 
       this.isShowMessage=false;
     }

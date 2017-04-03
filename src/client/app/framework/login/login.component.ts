@@ -86,7 +86,6 @@ export class LoginComponent implements OnInit {
         }
       );
     });
-    //this.onSignIn;
     this._facebookService.loadAndInitFBSDK();
     if (parseInt(LocalStorageService.getLocalValue(LocalStorage.IS_LOGED_IN)) === 1) {
       this._router.navigate(['/createprofile']);
@@ -94,7 +93,6 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-  //  this.loaderService.start();
 
     this.model = this.userForm.value;
     this.model.email = this.model.email.toLowerCase();
@@ -106,7 +104,6 @@ export class LoginComponent implements OnInit {
 
   loginSuccess(res:any) {
     LocalStorageService.setLocalValue(LocalStorage.IS_CANDIDATE, res.data.isCandidate);
-    // this.loaderService.stop();
     this.userForm.reset();
     if (res.data.current_theme) {
       LocalStorageService.setLocalValue(LocalStorage.MY_THEME, res.data.current_theme);
@@ -135,8 +132,8 @@ export class LoginComponent implements OnInit {
       this._router.navigate([NavigationRoutes.APP_CREATEPROFILE]);
     }
     else{
-    //  this._router.navigate([NavigationRoutes.APP_RECRUITER_DASHBOARD]);
-      this._router.navigate([NavigationRoutes.APP_COMPANYDETAILS]);
+      this._router.navigate([NavigationRoutes.APP_RECRUITER_DASHBOARD]);
+    //  this._router.navigate([NavigationRoutes.APP_COMPANYDETAILS]);
     }
     var socialLogin:string = LocalStorageService.getLocalValue(LocalStorage.IS_SOCIAL_LOGIN);
 

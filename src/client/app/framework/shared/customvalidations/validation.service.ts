@@ -5,14 +5,13 @@ export class ValidationService {
     let config:any = {
       'required': 'Required',
       'requiredname': 'Name is required',
-      'invalidEmailAddress': 'Email is invalid ',
-      'invalidPassword': 'Password must contain at least one digit/lowercase/uppercase letter and be at least eight characters long.',
+      'invalidEmailAddress': 'Email is invalid.',
+      'invalidPassword': 'Password is invalid.',
       'maxlength': `Maximum ${validatorValue.requiredLength} charcters`,
       'minlength': `Minimum ${validatorValue.requiredLength} charcters`,
       'invalidMobile': 'Mobile number should be of 10 digit ',
       'invalidBirthYear': 'Birth year should be of 4 digit ',
       'invalidPin': 'Pin should be of 6 digit ',
-
 
     };
     return config[validatorName];
@@ -32,14 +31,14 @@ export class ValidationService {
 
 
   static passwordValidator(control:any) {
-    if (control.value.match(/(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/)) {
+    if (control.value.match(/(?=.*\d)(?=.*[a-z])(?=.*[$@$!%*?&])(?=.*[A-Z]).{8,}/)) {
 
       return null;
 
-    } /*else {
+    } else {
 
       return {'invalidPassword': true};
-    }*/
+    }
   }
 
 

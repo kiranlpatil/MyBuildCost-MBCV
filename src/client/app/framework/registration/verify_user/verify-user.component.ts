@@ -20,7 +20,9 @@ export class VerifyUserComponent implements OnInit {
     userForm:FormGroup;
     error_msg:string;
     isShowErrorMessage:boolean = true;
+    isCandidate:boolean = false;
     chkMobile:boolean = false;
+    isMailSent:boolean = false;
     chkEmail:boolean = true;
     MY_LOGO_PATH:string;
     MY_TAG_LINE:string;
@@ -40,17 +42,23 @@ export class VerifyUserComponent implements OnInit {
         this.UNDER_LICENCE = ProjectAsset.UNDER_LICENECE;
         this.BODY_BACKGROUND = ImagePath.BODY_BACKGROUND;
     }
-    ngOnInit() {
+    ngOnInit() {debugger
         this.model.mobile_number=LocalStorageService.getLocalValue(LocalStorage.MOBILE_NUMBER);
         this.model.email=LocalStorageService.getLocalValue(LocalStorage.EMAIL_ID);
+        let val=LocalStorageService.getLocalValue(LocalStorage.FROM_CANDIDATE_REGISTRATION);
+        console.log("isCandidate value is true:",this.isCandidate);
+      if(val === "true"){
+        this.isCandidate =true;
+        this.chkMobile = false;
+        this.chkEmail = true;
+      }
+      else {
+        this.isCandidate =false;
+        this.chkMobile = true;
+        this.chkEmail = false;
+      }
     }
 
-
-  /*navigateTo(navigateTo: string) {
-    if (navigateTo !== undefined ) {
-      this._router.navigate([navigateTo]);
-    }
-  }*/
     navigateTo() {
         this._router.navigate([NavigationRoutes.APP_LOGIN]);
     }
@@ -66,6 +74,7 @@ export class VerifyUserComponent implements OnInit {
                     error => (this.verifyFail(error)));
         } else {
             this.model.email=LocalStorageService.getLocalValue(LocalStorage.EMAIL_ID);
+            this.isMailSent=true;
             this.verifyUserService.verifyUserByMail(this.model)
                 .subscribe(
                     res => (this.verifySuccess(res)),
@@ -103,12 +112,5 @@ export class VerifyUserComponent implements OnInit {
         }
     }
 
-    showHideMobile() {
-        this.chkMobile = false;
-        this.chkEmail = true;
-    }
-    showHideEmail() {
-        this.chkEmail = false;
-        this.chkMobile = true;
-    }
+
 }
