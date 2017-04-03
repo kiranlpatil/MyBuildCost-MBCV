@@ -73,8 +73,7 @@ export class AppComponent implements OnInit {
           this._router.navigate([NavigationRoutes.APP_CREATEPROFILE]);
         } else {
            // this._router.navigate([NavigationRoutes.APP_DASHBOARD]);
-            this._router.navigate([NavigationRoutes.APP_CREATEPROFILE]);
-         // this._router.navigate([NavigationRoutes.APP_COMPANYDETAILS]);
+          // this._router.navigate([NavigationRoutes.APP_COMPANYDETAILS]);
 
         }
     }
