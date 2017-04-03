@@ -70,10 +70,10 @@ this.tempCompanyName=companyname;
       console.log(this.selectedcertificates);
       this.tempfield.push("null");
 
-      this.tempCertificateName=="";
-      this.tempCompanyName=="" ;
-      this.tempYear=="";
-      this.tempdetails=="";
+      this.tempCertificateName="";
+      this.tempCompanyName="" ;
+      this.tempYear="";
+      this.tempdetails="";
 
 
     }
