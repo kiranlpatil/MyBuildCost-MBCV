@@ -1,5 +1,5 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import {LoaderService} from '../../shared/loader/loader.service';
+import {  Component, OnInit, OnDestroy  } from '@angular/core';
+import {  LoaderService  } from '../../shared/loader/loader.service';
 
 @Component({
     moduleId: module.id,

@@ -1,12 +1,12 @@
-import { Component } from '@angular/core';
-import { Http } from '@angular/http';
-import { JobRequirement } from '../model/job-requirement';
-import { MessageService } from '../../../framework/shared/message.service';
-import { IndustryListService } from '../industry-list/industry-list.service';
-import { Message } from '../../../framework/shared/message';
-import { MyJobRequirementService } from '../jobrequirement-service';
-import { ProfessionalDataService } from '../professional-data/professional-data.service';
-import { JobRequirementService } from './job-requirement.service';
+import {  Component  } from '@angular/core';
+import {  Http  } from '@angular/http';
+import {  JobRequirement  } from '../model/job-requirement';
+import {  MessageService  } from '../../../framework/shared/message.service';
+import {  IndustryListService  } from '../industry-list/industry-list.service';
+import {  Message  } from '../../../framework/shared/message';
+import {  MyJobRequirementService  } from '../jobrequirement-service';
+import {  ProfessionalDataService  } from '../professional-data/professional-data.service';
+import {  JobRequirementService  } from './job-requirement.service';
 
 
 @Component({
@@ -70,7 +70,7 @@ export class JobRequirementComponent {
 
 
   onRoleListSuccess(data:any) {
-    for(let role of data){
+    for(let role of data) {
       this.roles.push(role.name);
     }
     this.showRole=true;
@@ -87,7 +87,7 @@ export class JobRequirementComponent {
 
   }
   onEducationListSuccess(data:any) {
-    for(let k of data.educated){
+    for(let k of data.educated) {
       this.educationlist.push(k);
     }
 
@@ -107,7 +107,7 @@ export class JobRequirementComponent {
 
   }
   onExperienceListSuccess(data:any) {
-    for(let k of data.experience){
+    for(let k of data.experience) {
       this.experiencelist.push(k);
     }
 
@@ -129,7 +129,7 @@ export class JobRequirementComponent {
 
 
   onCurrentSalaryListSuccess(data:any) {
-    for(let k of data.salary ){
+    for(let k of data.salary ) {
       this.salarylist.push(k);
     }
 
@@ -147,7 +147,7 @@ export class JobRequirementComponent {
 
 
   onGetNoticePeriodListSuccess(data:any) {
-    for(let k of data.noticeperiod){
+    for(let k of data.noticeperiod) {
       this.noticeperiodlist.push(k);
     }
 

@@ -1,12 +1,12 @@
-import {Component} from '@angular/core';
-import {myRoleListTestService} from "../myRolelist.service";
-import {MyIndustryService} from "../industry-service";
-import {IndustryListService} from "../industry-list/industry-list.service";
-import {Message} from "../../../framework/shared/message";
-import {MessageService} from "../../../framework/shared/message.service";
-import {IndustryList} from "../model/industryList";
-import {MyRoleService} from "../role-service";
-import {myRoTypeTestService} from "../myRole-Type.service";
+import { Component } from '@angular/core';
+import { myRoleListTestService } from "../myRolelist.service";
+import { MyIndustryService } from "../industry-service";
+import { IndustryListService } from "../industry-list/industry-list.service";
+import { Message } from "../../../framework/shared/message";
+import { MessageService } from "../../../framework/shared/message.service";
+import { IndustryList } from "../model/industryList";
+import { MyRoleService } from "../role-service";
+import { myRoTypeTestService } from "../myRole-Type.service";
 
 @Component({
   moduleId: module.id,
@@ -45,21 +45,21 @@ export class RoleListComponent {
 
 
   }
-  onError(error:any){
+  onError(error:any) {
     var message = new Message();
     message.error_msg = error.err_msg;
     message.isError = true;
     this.messageService.message(message);
   }
 
-  onRoleListSuccess(data:any){
+  onRoleListSuccess(data:any) {
     this.rolesData=data;
-    for(let role of data){
+    for(let role of data) {
       this.roleNames.push(role.name);
     }
   }
   selectRolesModel(roleName: string) {
-    if(roleName === "u can select max "){
+    if(roleName === "u can select max ") {
       console.log("u can select max ");
     }
     else {
@@ -68,9 +68,9 @@ export class RoleListComponent {
       this.searchRolesId(roleName);
     }
   }
-  searchRolesId(roleName:any){
-    for(let role of this.rolesData){
-      if(role.name===roleName){
+  searchRolesId(roleName:any) {
+    for(let role of this.rolesData) {
+      if(role.name===roleName) {
         this.industryRoles.roles.push(role._id);
       }
     }
@@ -78,7 +78,7 @@ export class RoleListComponent {
   showHideModal() {
     this.showModalStyle = !this.showModalStyle;
   }
-  disableRolelist(){
+  disableRolelist() {
     //this.myRolelist.change(true);
     // this.testService.change(true);
     this.myRoleType.change(true);

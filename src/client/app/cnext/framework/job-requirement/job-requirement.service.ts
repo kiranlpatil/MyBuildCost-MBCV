@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs/Subject';
-import {JobRequirement} from '../model/job-requirement';
+import {  Injectable  } from '@angular/core';
+import {  Subject  } from 'rxjs/Subject';
+import { JobRequirement } from '../model/job-requirement';
 
 @Injectable()
 export class JobRequirementService {

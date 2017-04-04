@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-//import {Observable} from 'rxjs/Observable';
+import {  Injectable  } from '@angular/core';
+//import { Observable  } from 'rxjs/Observable';
 /// <reference path='../../../../../typings/globals/fbsdk/index.d.ts' />
 
 @Injectable()

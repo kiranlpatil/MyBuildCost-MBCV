@@ -1,6 +1,6 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {SingleSelectList} from '../model/single-select-list';
-import {DisableTestService} from "../disable-service";
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { SingleSelectList } from '../model/single-select-list';
+import { DisableTestService } from "../disable-service";
 
 @Component({
   moduleId: module.id,
@@ -22,7 +22,7 @@ export class SingleSelectListComponent {
       }
     );*/
   }
-  selectOption(option:string){
+  selectOption(option:string) {
     if(option !== undefined)
       this.selectedData.emit(option);
   }

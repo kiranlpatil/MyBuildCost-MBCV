@@ -1,11 +1,11 @@
 
-import {Component} from '@angular/core';
-import {BaseService} from '../../../framework/shared/httpservices/base.service';
-import {ProfessionalData} from '../model/professional-data';
-import {ProfessionalDataService } from './professional-data.service'
-import {Message} from '../../../framework/shared/message';
-import {MessageService} from '../../../framework/shared/message.service';
-import {ProfessionalService} from '../professional-service';
+import { Component } from '@angular/core';
+import { BaseService } from '../../../framework/shared/httpservices/base.service';
+import { ProfessionalData } from '../model/professional-data';
+import { ProfessionalDataService  } from './professional-data.service'
+import { Message } from '../../../framework/shared/message';
+import { MessageService } from '../../../framework/shared/message.service';
+import { ProfessionalService } from '../professional-service';
 @Component({
   moduleId: module.id,
   selector: 'cn-professional-data',
@@ -28,7 +28,7 @@ export class ProfessionalDataComponent extends BaseService {
 
 
 
-  constructor(private professionaldataservice:ProfessionalDataService, 
+  constructor(private professionaldataservice:ProfessionalDataService,
               private messageService:MessageService,
               private professionalService : ProfessionalService) {
     super();
@@ -65,48 +65,48 @@ export class ProfessionalDataComponent extends BaseService {
 
 
   }
-  onGetNoticePeriodListSuccess(data:any){
-    for(let k of data.noticeperiod){
+  onGetNoticePeriodListSuccess(data:any) {
+    for(let k of data.noticeperiod) {
       this.noticeperiodlist.push(k);
     }
 
   }
 
-  onCurrentSalaryListSuccess(data:any){
-    for(let k of data.salary ){
+  onCurrentSalaryListSuccess(data:any) {
+    for(let k of data.salary ) {
       this.salarylist.push(k);
     }
 
   }
 
-  onExperienceListSuccess(data:any){
-    for(let k of data.experience){
+  onExperienceListSuccess(data:any) {
+    for(let k of data.experience) {
       this.experiencelist.push(k);
     }
 
   }
 
-  onEducationListSuccess(data:any){
-    for(let k of data.educated){
+  onEducationListSuccess(data:any) {
+    for(let k of data.educated) {
       this.educationlist.push(k);
     }
 
   }
-  onRealocationListSuccess(data:any){
-    for(let k of data.realocate ){
+  onRealocationListSuccess(data:any) {
+    for(let k of data.realocate ) {
       this.realocationlist.push(k);
     }
   }
-  onError(error:any){
+  onError(error:any) {
     var message = new Message();
     message.error_msg = error.err_msg;
     message.isError = true;
     this.messageService.message(message);
   }
 
-  changeValue(){
+  changeValue() {
     this.professionalService.change(true);
-    
+
   }
   selectedRealocationModel(newVal: any) {
     this.realocationModel = newVal;

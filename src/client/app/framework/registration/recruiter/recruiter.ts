@@ -1,8 +1,8 @@
 /**
  * Created by techprimelab on 3/9/2017.
  */
-import {Location} from '../location';
-import {CompanyDetails} from '../company_details/company-details';
+import { Location } from '../location';
+import { CompanyDetails } from '../company_details/company-details';
 
 export class Recruiter {
   id : any;

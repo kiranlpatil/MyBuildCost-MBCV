@@ -1,3 +1,3 @@
 export class Data {
-  data:string[]=['abc','avg']
+  data:string[]=['abc','avg'];
 }

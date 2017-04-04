@@ -1,10 +1,10 @@
-import {Component, OnInit, Input} from '@angular/core';
-import {VALUE_CONSTANT} from '../../../framework/shared/constants';
-import {ProficiencyService} from '../proficience.service';
-import {MessageService} from '../../../framework/shared/message.service';
-import {Message} from '../../../framework/shared/message';
-import {proficiencyDomainService} from './proficiency-domain.service';
-import {JobPostProficiencyService} from '../jobPostProficiency.service';
+import { Component, OnInit, Input } from '@angular/core';
+import { VALUE_CONSTANT } from '../../../framework/shared/constants';
+import { ProficiencyService } from '../proficience.service';
+import { MessageService } from '../../../framework/shared/message.service';
+import { Message } from '../../../framework/shared/message';
+import { proficiencyDomainService } from './proficiency-domain.service';
+import { JobPostProficiencyService } from '../jobPostProficiency.service';
 
 @Component({
   moduleId: module.id,
@@ -36,7 +36,7 @@ export class proficiencyDomainComponent implements OnInit {
   }
 
   ngOnInit() {
-    if(this.type==='profeciency'){
+    if(this.type==='profeciency') {
       this.proficiencyType=true;
       this.placeHolderName='proficiency'
 
@@ -47,7 +47,7 @@ export class proficiencyDomainComponent implements OnInit {
 
 
   }
-    if(this.type==='domain'){
+    if(this.type==='domain') {
       this.domainType=true;
       this.placeHolderName='domain'
 
@@ -59,20 +59,20 @@ export class proficiencyDomainComponent implements OnInit {
 
   }
 
-  onProficiencySuccess(data:any){
-    for(let proficiency of data.proficiency){
+  onProficiencySuccess(data:any) {
+    for(let proficiency of data.proficiency) {
       this.selectedproficiencies.push(proficiency);
     }
 
   }
-  onGetDomainSuccess(data:any){
-    for(let domain of data.domains){
+  onGetDomainSuccess(data:any) {
+    for(let domain of data.domains) {
       this.selectedproficiencies.push(domain);
     }
 
   }
 
-  onError(error:any){
+  onError(error:any) {
     var message = new Message();
     message.error_msg = error.err_msg;
     message.isError = true;

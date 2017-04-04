@@ -5,7 +5,7 @@
       "name": "c-next-backend"
     },
     "mail": {
-      "host": "http://localhost:5555/",
+      "host": "http://localhost:8080/",
       //"host":"http://7a4647ae.ngrok.io/"
       "MAIL_SENDER": "redminestatus@techprimelab.com",
       "MAIL_SENDER_PASSWORD": "Contactu$@tpl",

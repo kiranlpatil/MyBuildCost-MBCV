@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { Subscription } from 'rxjs/Subscription';
-import { ThemeChangeService } from './framework/shared/themechange.service';
+import {  Component, OnInit  } from '@angular/core';
+import {  Router  } from '@angular/router';
+import {  Subscription  } from 'rxjs/Subscription';
+import {  ThemeChangeService  } from './framework/shared/themechange.service';
 import {
     AppSettings,
     Message,
@@ -11,7 +11,7 @@ import {
     CommonService,
     LocalStorage,
     LoaderService
-} from './framework/shared/index';
+ } from './framework/shared/index';
 
 
 @Component({
@@ -54,7 +54,7 @@ export class AppComponent implements OnInit {
             (message:Message) => {
                 if (message.isError == true) {
                 let err = message.error_msg.error;
-                  if(err == "Could not attach click handler to the element. Reason: element not found."){
+                  if(err == "Could not attach click handler to the element. Reason: element not found.") {
                     message.isError = false;
 
                   }

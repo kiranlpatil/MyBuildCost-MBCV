@@ -1,8 +1,8 @@
 
-import {  Component } from '@angular/core';
-import {EmployementHistory} from '../model/employment-history';
-import {VALUE_CONSTANT} from '../../../framework/shared/constants';
-import {EducationalService} from '../educational-service';
+import {   Component  } from '@angular/core';
+import { EmployementHistory } from '../model/employment-history';
+import { VALUE_CONSTANT } from '../../../framework/shared/constants';
+import { EducationalService } from '../educational-service';
 
 @Component({
   moduleId: module.id,
@@ -62,20 +62,20 @@ export class EmploymentHistoryComponent {
 
 
 
-  reMark(remark:string){
+  reMark(remark:string) {
     this.tempRemarks=remark;
     this.selectedEmploymentHistory.remarks=this.tempRemarks;
 
 
   }
 
-  selectedworkfromMonthModel(newval: any){
+  selectedworkfromMonthModel(newval: any) {
     this.tempWorkedFromMonth=newval;
     this.selectedEmploymentHistory.workedFromMonth=this.tempWorkedFromMonth;
 
   }
 
-  selectedworkfromYearModel(newval: any){
+  selectedworkfromYearModel(newval: any) {
     this.tempWorkedFromYear=newval;
     this.selectedEmploymentHistory.workedFromYear=this.tempWorkedFromYear;
 }

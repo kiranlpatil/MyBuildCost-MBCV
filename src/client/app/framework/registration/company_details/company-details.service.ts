@@ -1,13 +1,13 @@
 /**
  * Created by techprimelab on 3/9/2017.
  */
-import {  Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import { BaseService, API } from '../../shared/index';
-import { Http,Headers, RequestOptions } from '@angular/http';
-import {CompanyDetails} from './company-details';
-import {AppSettings, LocalStorage} from '../../shared/constants';
-import {LocalStorageService} from '../../shared/localstorage.service';
+import {    Injectable  } from '@angular/core';
+import {  Observable  } from 'rxjs/Observable';
+import {  BaseService, API  } from '../../shared/index';
+import {  Http,Headers, RequestOptions  } from '@angular/http';
+import { CompanyDetails } from './company-details';
+import { AppSettings, LocalStorage } from '../../shared/constants';
+import { LocalStorageService } from '../../shared/localstorage.service';
 
 @Injectable()
 export class CompanyDetailsService extends BaseService {

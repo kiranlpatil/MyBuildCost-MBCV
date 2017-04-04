@@ -1,8 +1,8 @@
-import {Component} from '@angular/core';
-import {Message} from "../../../framework/shared/message";
-import {MessageService} from "../../../framework/shared/message.service";
-import {RoleTypeService} from "./role-type.service";
-import {TestService} from "../test.service";
+import { Component } from '@angular/core';
+import { Message } from "../../../framework/shared/message";
+import { MessageService } from "../../../framework/shared/message.service";
+import { RoleTypeService } from "./role-type.service";
+import { TestService } from "../test.service";
 
 @Component({
   moduleId: module.id,
@@ -25,19 +25,19 @@ export class RoleTypetListComponent {
   constructor(private roleTypeService: RoleTypeService, private messageService:MessageService , private testService : TestService) {
   }
 
-  ngOnInit(){debugger
+  ngOnInit() {debugger
     this.roleTypeService.getRoleTypes()
       .subscribe(
         data=> this.onRoleTypesSuccess(data),
         error => this.onError(error));
 
   }
-  onRoleTypesSuccess(data:any){debugger
-    for(let proficiency of data.roletypes){
+  onRoleTypesSuccess(data:any) {debugger
+    for(let proficiency of data.roletypes) {
       this.roleTypes.push(proficiency);
   }}
 
-  onError(error:any){
+  onError(error:any) {
     var message = new Message();
     message.error_msg = error.err_msg;
     message.isError = true;
@@ -46,7 +46,7 @@ export class RoleTypetListComponent {
   showHideModal() {
     this.showModalStyle = !this.showModalStyle;
   }
-  disableRoleltype(){
+  disableRoleltype() {
     this.testService.change(true);
     this.showModalStyle = !this.showModalStyle;
     this.disbleRole = true;

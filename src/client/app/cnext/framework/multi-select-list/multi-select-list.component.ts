@@ -1,5 +1,5 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {SingleSelectList} from '../model/single-select-list';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { SingleSelectList } from '../model/single-select-list';
 
 @Component({
   moduleId: module.id,
@@ -28,7 +28,7 @@ export class MultiSelectListComponent {
         this.selectedData.emit(option);
       }
       else {
-        if(option !== undefined){
+        if(option !== undefined) {
           this.selectedData.emit('u can select max ');
           newVal.target.checked=false;
         }
@@ -37,10 +37,10 @@ export class MultiSelectListComponent {
       }
     }
     else{debugger
-      if(option !== undefined){
+      if(option !== undefined) {
        // this.selectedData.emit(option);
-        for(let data of this.selectedOptions){
-          if(data===option){
+        for(let data of this.selectedOptions) {
+          if(data===option) {
             this.selectedOptions.splice(this.selectedOptions.indexOf(data), 1);
           }
         }

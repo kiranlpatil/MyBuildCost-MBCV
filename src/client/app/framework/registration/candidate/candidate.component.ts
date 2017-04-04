@@ -1,24 +1,24 @@
 /**
  * Created by techprimelab on 3/9/2017.
  */
-import {  Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { CandidateService } from './candidate.service';
-import { Candidate } from './candidate';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ValidationService } from '../../shared/customvalidations/validation.service';
+import {  Component  } from '@angular/core';
+import {  Router  } from '@angular/router';
+import {  CandidateService  } from './candidate.service';
+import {  Candidate  } from './candidate';
+import {  FormBuilder, FormGroup, Validators  } from '@angular/forms';
+import {  ValidationService  } from '../../shared/customvalidations/validation.service';
 import {
   Message,
   MessageService,
   CommonService,
   NavigationRoutes,
   AppSettings
-} from '../../shared/index';
-import {ImagePath, LocalStorage, ProjectAsset, VALUE_CONSTANT} from '../../shared/constants';
-import { LocalStorageService } from '../../shared/localstorage.service';
-import {LoaderService} from "../../shared/loader/loader.service";
-import {Http,Response} from "@angular/http";
-import {DateService} from "../../../cnext/framework/date.service";
+ } from '../../shared/index';
+import { ImagePath, LocalStorage  } from '../../shared/constants';
+import {  LocalStorageService  } from '../../shared/localstorage.service';
+import { LoaderService  } from '../../shared/loader/loader.service';
+import { Http,Response  } from '@angular/http';
+import { DateService  } from '../../../cnext/framework/date.service';
 
 @Component({
   moduleId: module.id,
@@ -39,13 +39,12 @@ export class CandidateComponent {
   private isPasswordConfirm: boolean;
   private isFormSubmitted = false;
   private userForm: FormGroup;
-  private formValue: FormGroup;
   private error_msg: string;
   private isShowErrorMessage: boolean = true;
   private BODY_BACKGROUND:string;
   private yearList:string[]=this.dateservice.yearList;
   private passingyear:string;
-  private myPassword:string="";
+  private myPassword:string='';
   private isShowMessage:boolean=false;
 
   constructor(private commanService: CommonService, private _router: Router, private http: Http,private dateservice:DateService,
@@ -78,13 +77,13 @@ export class CandidateComponent {
 
   ngOnInit() {
 
-      this.http.get("address")
+      this.http.get('address')
         .map((res: Response) => res.json())
         .subscribe(
           data => {
             this.locationDetails=data.address;
-            for(var  i = 0; i <data.address.length; i++){
-              this.countries.push(data.address[i].country);
+            for(var  i = 0; i <data.address.length; i++) {
+              this.countries.push( data.address[i].country );
              console.log(data.address[0].country);
 
             }
@@ -94,16 +93,16 @@ export class CandidateComponent {
         );
   }
 
-  selectYearModel(newval: any){
+  selectYearModel(newval: any) {
     this.passingyear=newval;
     this.model.birth_year=newval;
   }
 
   selectCountryModel(newval:string) {
-    for(let item of this.locationDetails){
-      if(item.country===newval){
+    for(let item of this.locationDetails) {
+      if(item.country===newval) {
           let tempStates: string[]= new Array(0);
-          for(let state of item.states){
+          for(let state of item.states) {
             tempStates.push(state.name);
           }
         this.states=tempStates;
@@ -113,10 +112,10 @@ export class CandidateComponent {
   }
 
   selectStateModel(newval:string) {
-    for(let item of this.locationDetails){
-      if(item.country===this.storedcountry){
-        for(let state of item.states){
-          if(state.name===newval){
+    for(let item of this.locationDetails) {
+      if(item.country===this.storedcountry) {
+        for(let state of item.states) {
+          if(state.name===newval) {
             let tempCities: string[]= new Array(0);
             for(let city of state.cities) {
               tempCities.push(city);
@@ -129,7 +128,7 @@ export class CandidateComponent {
     this.storedstate=newval;
   }
 
-  selectCityModel(newval : string){
+  selectCityModel(newval : string) {
     this.storedcity=newval;
 
   }
@@ -180,7 +179,7 @@ export class CandidateComponent {
   }
 
   showMessage() {
-  this.isShowMessage =true
+  this.isShowMessage =true;
 }
   goBack() {
     this.commanService.goBack();

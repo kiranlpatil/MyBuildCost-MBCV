@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import {  Component, OnInit, OnDestroy  } from '@angular/core';
 import {
     ThemeChangeService,
     CommonService,
@@ -8,12 +8,12 @@ import {
     Message,
     Messages,
     MessageService
-} from '../../shared/index';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { SettingsService } from './settings.service';
-import { UserProfile } from './../user';
-import { ProjectAsset } from '../../shared/constants';
-import {LoaderService} from '../../shared/loader/loader.service';
+ } from '../../shared/index';
+import {  FormGroup, FormBuilder, Validators  } from '@angular/forms';
+import {  SettingsService  } from './settings.service';
+import {  UserProfile  } from './../user';
+import {  ProjectAsset  } from '../../shared/constants';
+import { LoaderService } from '../../shared/loader/loader.service';
 
 @Component({
   moduleId: module.id,

@@ -1,7 +1,7 @@
-import { Component, OnInit, NgZone, OnDestroy } from '@angular/core';
-import { Router } from '@angular/router';
-import { DashboardService } from './dashboard.service';
-import { UserProfile } from './user';
+import {   Component, OnInit, NgZone, OnDestroy  } from '@angular/core';
+import {  Router  } from '@angular/router';
+import {  DashboardService  } from './dashboard.service';
+import {  UserProfile  } from './user';
 import {
   Message,
   MessageService,
@@ -9,8 +9,8 @@ import {
   LocalStorageService,
   LocalStorage,
   ProfileService
-} from '../shared/index';
-import {LoaderService} from '../shared/loader/loader.service';
+ } from '../shared/index';
+import {  LoaderService  } from '../shared/loader/loader.service';
 
 
 @Component({

@@ -1,6 +1,6 @@
-import { Component, Input } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { ValidationService } from './validation.service';
+import {  Component, Input  } from '@angular/core';
+import {  FormControl  } from '@angular/forms';
+import {  ValidationService  } from './validation.service';
 
 @Component({
     selector: 'control-messages',

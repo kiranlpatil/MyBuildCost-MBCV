@@ -1,9 +1,9 @@
-import { Component, OnInit, NgZone, OnDestroy } from '@angular/core';
-import { Router } from '@angular/router';
-import { DashboardService } from '../dashboard.service';
-import { UserProfile } from '../user';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { ValidationService } from '../../shared/customvalidations/validation.service';
+import {   Component, OnInit, NgZone, OnDestroy  } from '@angular/core';
+import {  Router  } from '@angular/router';
+import {  DashboardService  } from '../dashboard.service';
+import {  UserProfile  } from '../user';
+import {  FormGroup, FormBuilder, Validators  } from '@angular/forms';
+import {  ValidationService  } from '../../shared/customvalidations/validation.service';
 import {
     Message,
     MessageService,
@@ -15,9 +15,9 @@ import {
     LocalStorage,
     ThemeChangeService,
     LocalStorageService
-} from '../../shared/index';
-import { NavigationRoutes } from '../../shared/constants';
-import {LoaderService} from '../../shared/loader/loader.service';
+ } from '../../shared/index';
+import {  NavigationRoutes  } from '../../shared/constants';
+import {  LoaderService  } from '../../shared/loader/loader.service';
 
 
 @Component({

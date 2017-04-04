@@ -1,10 +1,10 @@
 
-import {Component} from '@angular/core';
-import {JobLocation} from '../model/job-location';
-import {JobLocationService} from './job-location.service';
-import {Message} from '../../../framework/shared/message';
-import {MessageService} from '../../../framework/shared/message.service';
-import {myJobLocationService} from '../myjob-location.service';
+import { Component } from '@angular/core';
+import { JobLocation } from '../model/job-location';
+import { JobLocationService } from './job-location.service';
+import { Message } from '../../../framework/shared/message';
+import { MessageService } from '../../../framework/shared/message.service';
+import { myJobLocationService } from '../myjob-location.service';
 
 @Component({
   moduleId: module.id,
@@ -34,7 +34,7 @@ export class JobLocationComponent {
   }
 
 
-  ngOnInit(){
+  ngOnInit() {
 
     this.joblocationService.getAddress()
       .subscribe(
@@ -42,10 +42,10 @@ export class JobLocationComponent {
         error =>{ this.onError(error);});
 
   }
-  onAddressSuccess(data:any){
+  onAddressSuccess(data:any) {
 
     this.locationDetails=data.address;
-    for(var  i = 0; i <data.address.length; i++){
+    for(var  i = 0; i <data.address.length; i++) {
       this.countries.push(data.address[i].country);
       console.log(data.address[0].country);
     }
@@ -53,10 +53,10 @@ export class JobLocationComponent {
 
   selectCountryModel(country:any) {
 
-    for(let item of this.locationDetails){
-      if(item.country===country){
+    for(let item of this.locationDetails) {
+      if(item.country===country) {
         let tempStates: string[]= new Array(0);
-        for(let state of item.states){
+        for(let state of item.states) {
           tempStates.push(state.name);
         }
         this.states=tempStates;
@@ -66,10 +66,10 @@ export class JobLocationComponent {
     this.jobLocationtion.country=this.storedcountry;
   }
   selectStateModel(selectedstate:any) {
-    for(let item of this.locationDetails){
-      if(item.country===this.storedcountry){
-        for(let state of item.states){
-          if(state.name===selectedstate){
+    for(let item of this.locationDetails) {
+      if(item.country===this.storedcountry) {
+        for(let state of item.states) {
+          if(state.name===selectedstate) {
             let tempCities: string[]= new Array();
             for(let city of state.cities) {
               tempCities.push(city);
@@ -85,18 +85,18 @@ export class JobLocationComponent {
 
 
 
-  selectCityModel(city : string){
+  selectCityModel(city : string) {
     this.storedcity=city;
     this.jobLocationtion.city=city;
   }
 
 
-  isPinSelected(pin:any){
+  isPinSelected(pin:any) {
     this.jobLocationtion.pin=pin;
     this.myjoblocationService.change(this.jobLocationtion);
 
   }
-  onError(error:any){
+  onError(error:any) {
     var message = new Message();
     message.error_msg = error.err_msg;
     message.isError = true;

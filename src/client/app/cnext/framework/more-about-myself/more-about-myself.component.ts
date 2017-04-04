@@ -1,10 +1,10 @@
 
-import {Component, Input} from '@angular/core';
-import { Router } from '@angular/router';
-import { FormBuilder} from '@angular/forms';
-import {Http} from '@angular/http';
-import {LoaderService} from '../../../framework/shared/loader/loader.service';
-import {MoreAboutMyself} from './more-about-myself';
+import { Component, Input } from '@angular/core';
+import {  Router  } from '@angular/router';
+import {  FormBuilder } from '@angular/forms';
+import { Http } from '@angular/http';
+import { LoaderService } from '../../../framework/shared/loader/loader.service';
+import { MoreAboutMyself } from './more-about-myself';
 
 @Component({
   moduleId: module.id,
@@ -33,7 +33,7 @@ export class MoreAboutMyselfComponent {
 
 
   }
-  ngOnInit(){
+  ngOnInit() {
     this.remainingWords=this.maxLength;
   }
 

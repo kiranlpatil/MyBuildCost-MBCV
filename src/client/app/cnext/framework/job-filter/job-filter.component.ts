@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {  Component  } from '@angular/core';
 
 
 @Component({
@@ -14,7 +14,7 @@ export class JobFilterComponent {
 
     }
 
-    ngOnInit(){
+    ngOnInit() {
 
 
     }

@@ -1,13 +1,13 @@
-import {Component} from '@angular/core';
-import {TestService} from "../test.service";
-import {MyIndustryService} from "../industry-service";
-import {MyRoleService} from "../role-service";
-import {Message} from "../../../framework/shared/message";
-import {MessageService} from "../../../framework/shared/message.service";
-import {IndustryList} from "../model/industryList";
-import {constants} from "fs";
-import {myRoleListTestService} from "../myRolelist.service";
-import {IndustryExperienceService} from "./industry-experience.service";
+import { Component } from '@angular/core';
+import { TestService } from "../test.service";
+import { MyIndustryService } from "../industry-service";
+import { MyRoleService } from "../role-service";
+import { Message } from "../../../framework/shared/message";
+import { MessageService } from "../../../framework/shared/message.service";
+import { IndustryList } from "../model/industryList";
+import { constants } from "fs";
+import { myRoleListTestService } from "../myRolelist.service";
+import { IndustryExperienceService } from "./industry-experience.service";
 
 @Component({
   moduleId: module.id,
@@ -36,7 +36,7 @@ export class IndustryExperienceListComponent {
 
   }
 
-  ngOnInit(){
+  ngOnInit() {
     this.industryService.getIndustries()
       .subscribe(
         industrylist => this.onIndustryListSuccess(industrylist.data),
@@ -44,14 +44,14 @@ export class IndustryExperienceListComponent {
 
   }
 
-  onIndustryListSuccess(data:any){
+  onIndustryListSuccess(data:any) {
     this.industryData=data;
-    for(let industry of data){
+    for(let industry of data) {
       this.industryNames.push(industry.name);
     }
   }
 
-  onError(error:any){
+  onError(error:any) {
     var message = new Message();
     message.error_msg = error.err_msg;
     message.isError = true;
@@ -65,31 +65,31 @@ export class IndustryExperienceListComponent {
 
   }
 
-  searchIndustryId(industryName:string){
-    for(let industry of this.industryData){
-      if(industry.name===industryName){
+  searchIndustryId(industryName:string) {
+    for(let industry of this.industryData) {
+      if(industry.name===industryName) {
         this.industryRoles.industry=industry._id;
       }
     }
   }
 
-  searchRolesId(roleName:any){
-    for(let role of this.rolesData){
-      if(role.name===roleName){
+  searchRolesId(roleName:any) {
+    for(let role of this.rolesData) {
+      if(role.name===roleName) {
         this.industryRoles.roles.push(role._id);
       }
     }
   }
 
-  onRoleListSuccess(data:any){
+  onRoleListSuccess(data:any) {
     this.rolesData=data;
-    for(let role of data){
+    for(let role of data) {
       this.roleNames.push(role.name);
     }
   }
 
   selectRolesModel(roleName: string) {
-    if(roleName === "u can select max "){
+    if(roleName === "u can select max ") {
       console.log("u can select max ");
     }
     else {
@@ -116,7 +116,7 @@ export class IndustryExperienceListComponent {
     this.showModalStyle = !this.showModalStyle;
   }
 
-  disableRole(){
+  disableRole() {
     this.myRolelist.change(true);
     // this.testService.change(true);
     this.showModalStyle = !this.showModalStyle;

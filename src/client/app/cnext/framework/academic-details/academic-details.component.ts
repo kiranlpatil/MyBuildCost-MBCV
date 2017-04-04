@@ -1,8 +1,8 @@
-import {  Component } from '@angular/core';
-import { FormGroup} from '@angular/forms';
-import {academicdetails} from './academic-details';
-import {VALUE_CONSTANT} from '../../../framework/shared/constants';
-import {EducationalService} from '../educational-service';
+import {   Component  } from '@angular/core';
+import {  FormGroup } from '@angular/forms';
+import {  academicdetails  } from './academic-details';
+import {  VALUE_CONSTANT  } from '../../../framework/shared/constants';
+import {  EducationalService  } from '../educational-service';
 
 @Component({
   moduleId: module.id,
@@ -38,24 +38,24 @@ private  tempSpecialization:string='';
       this.yearList.push(year--);
     }
   }
-  selectedSchoolName(schoolname:string){
+  selectedSchoolName(schoolname:string) {
 this.tempSchoolName=schoolname;
 
   }
 
-  selectedeUniversityName(universityname:string){
+  selectedeUniversityName(universityname:string) {
     this.tempUnivercityName=universityname;
 
   };
-  selectedPassingYear(passingyear:string){
+  selectedPassingYear(passingyear:string) {
     this.tempPassingYear=passingyear;
   };
 
-  selectedSpecialization(remark:string){
+  selectedSpecialization(remark:string) {
     this.tempSpecialization=remark;
   };
 
-  changeValue(){
+  changeValue() {
     this.educationalService.change(true);
 
   }

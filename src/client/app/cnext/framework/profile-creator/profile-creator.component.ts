@@ -1,18 +1,18 @@
-import {Component} from '@angular/core';
-import {LocalStorageService} from '../../../framework/shared/localstorage.service';
-import {LocalStorage, NavigationRoutes} from '../../../framework/shared/constants';
-import {Router} from '@angular/router';
-import {DashboardService} from '../../../framework/dashboard/dashboard.service';
-import {TestService} from '../test.service';
-import {ComplexityService} from '../complexity.service';
-import {ProficiencyService} from '../proficience.service';
-import {ProfessionalService} from '../professional-service';
-import {EducationalService} from '../educational-service';
-import {AwardService} from '../award-service';
-import {myRoleListTestService} from "../myRolelist.service";
-import {MyRoleService} from '../role-service';
-import {myRoTypeTestService} from '../myRole-Type.service';
-import {DisableTestService} from "../disable-service";
+import { Component } from '@angular/core';
+import { LocalStorageService } from '../../../framework/shared/localstorage.service';
+import { LocalStorage, NavigationRoutes } from '../../../framework/shared/constants';
+import { Router } from '@angular/router';
+import { DashboardService } from '../../../framework/dashboard/dashboard.service';
+import { TestService } from '../test.service';
+import { ComplexityService } from '../complexity.service';
+import { ProficiencyService } from '../proficience.service';
+import { ProfessionalService } from '../professional-service';
+import { EducationalService } from '../educational-service';
+import { AwardService } from '../award-service';
+import { myRoleListTestService } from "../myRolelist.service";
+import { MyRoleService } from '../role-service';
+import { myRoTypeTestService } from '../myRole-Type.service';
+import { DisableTestService } from "../disable-service";
 
 
 @Component({
@@ -108,7 +108,7 @@ export class ProfileCreatorComponent {
   }
 
 
-  ngOnInit(){
+  ngOnInit() {
     this.newUser = parseInt(LocalStorageService.getLocalValue(LocalStorage.IS_LOGED_IN));
     if (this.newUser === 0) {
       this._router.navigate([NavigationRoutes.APP_START]);
@@ -117,7 +117,7 @@ export class ProfileCreatorComponent {
     }
 
   }
-  getUserProfile(){
+  getUserProfile() {
     this.dashboardService.getUserProfile()
       .subscribe(
         userprofile => this.onUserProfileSuccess(userprofile),
@@ -139,25 +139,25 @@ export class ProfileCreatorComponent {
     console.log(error);
   }
 
-  showorhide(event:string){
+  showorhide(event:string) {
 
     this.valueOFshowOrHide=event;
 
   }
 
-  hideEmployeeHistory(){
+  hideEmployeeHistory() {
     this.chkEmployeeHistory =!this.chkEmployeeHistory ;
   }
 
-  hideCertification(){
+  hideCertification() {
     this.chkCertification =!this.chkCertification ;
   }
 
-  hideAboutMyself(){
+  hideAboutMyself() {
     this.chkAboutMyself =!this.chkAboutMyself ;
   }
 
-  hideAwards(){
+  hideAwards() {
     this.chkAwards =!this.chkAwards ;
   }
 

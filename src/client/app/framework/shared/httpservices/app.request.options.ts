@@ -1,7 +1,7 @@
-import {  Headers,RequestOptions, RequestOptionsArgs } from '@angular/http';
-import { AppSettings } from '../../shared/index';
-import { LocalStorageService, LocalStorage } from '../../shared/index';
-//import { Config } from '../config/env.config';
+import {   Headers,RequestOptions, RequestOptionsArgs  } from '@angular/http';
+import {  AppSettings  } from '../../shared/index';
+import {  LocalStorageService, LocalStorage  } from '../../shared/index';
+//import {  Config  } from '../config/env.config';
 export class AppRequestOptions extends RequestOptions {
   constructor() {
     super();
@@ -9,7 +9,7 @@ export class AppRequestOptions extends RequestOptions {
 
   merge(options?:RequestOptionsArgs):RequestOptions {
 
-    /* if(options !== null && options.headers !== null){
+    /* if(options !== null && options.headers !== null) {
      var url =  AppSettings.API_ENDPOINT + options.url;
      }*/
     if (options === null) {

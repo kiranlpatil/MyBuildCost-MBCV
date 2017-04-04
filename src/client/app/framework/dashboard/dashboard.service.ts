@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
-import { AppSettings, BaseService, LocalStorageService, LocalStorage, MessageService, API } from '../shared/index';
-import { UserProfile } from './user';
+import {   Injectable  } from '@angular/core';
+import {  Http  } from '@angular/http';
+import {  Observable  } from 'rxjs/Observable';
+import {  AppSettings, BaseService, LocalStorageService, LocalStorage, MessageService, API  } from '../shared/index';
+import {  UserProfile  } from './user';
 
 @Injectable()
 export class DashboardService extends BaseService {

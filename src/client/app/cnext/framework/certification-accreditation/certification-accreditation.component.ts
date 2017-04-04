@@ -1,7 +1,7 @@
 
-import {  Component } from '@angular/core';
-import {certifications} from '../model/certification-accreditation';
-import {DateService} from '../date.service';
+import {   Component  } from '@angular/core';
+import { certifications } from '../model/certification-accreditation';
+import { DateService } from '../date.service';
 
 @Component({
   moduleId: module.id,
@@ -42,7 +42,7 @@ this.tempCompanyName=companyname;
     this.tempYear=year;
   }
 
-  addedCertification(certificate:any){
+  addedCertification(certificate:any) {
     this.tempdetails=certificate;
 
   }

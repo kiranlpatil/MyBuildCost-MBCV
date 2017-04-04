@@ -50,10 +50,9 @@ export class ValidationService {
       mobileNumber = (mobileNumber / 10);
       count += 1;
     }
-    if (count == 10) {
+    if (count === 10) {
       return null;
-    }
-    else {
+    } else {
       return {'invalidMobile': true};
     }
   }
@@ -65,10 +64,9 @@ export class ValidationService {
       birthYear = (birthYear / 10);
       count += 1;
     }
-    if (count == 4) {
+    if (count === 4) {
       return null;
-    }
-    else {
+    } else {
       return {'invalidBirthYear': true};
     }
   }
@@ -80,7 +78,7 @@ export class ValidationService {
       pin = (pin / 10);
       count += 1;
     }
-    if (count == 6) {
+    if (count === 6) {
       return null;
     } else {
       return {'invalidPin': true};

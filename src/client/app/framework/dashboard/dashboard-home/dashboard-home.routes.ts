@@ -1,5 +1,5 @@
-import { Route } from '@angular/router';
-import { DashboardHomeComponent } from './index';
+import {   Route   } from '@angular/router';
+import {  DashboardHomeComponent  } from './index';
 
 export const DashboardHomeRoutes:Route[] = [
   {

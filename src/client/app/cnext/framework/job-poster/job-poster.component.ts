@@ -1,20 +1,20 @@
 
-import {Component} from '@angular/core';
-import {LocalStorageService} from '../../../framework/shared/localstorage.service';
-import {LocalStorage, NavigationRoutes} from '../../../framework/shared/constants';
-import {Router} from '@angular/router';
-import {MyJobInformationService} from '../job-information/job-information.service';
-import {JobInformation} from '../model/job-information';
-import {JobRequirement} from '../model/job-requirement';
-import {JobRequirementService} from '../job-requirement/job-requirement.service';
-import {JobLocationService} from '../job-location/job-location.service';
-import {JobLocation} from '../model/job-location';
-import {myJobLocationService} from '../myjob-location.service';
-import {myJobPostcapabilityService} from '../jobpost-capabilities.service';
-import {JonPostDescriptionService} from '../job-post-description.service';
-import {JobPostComplexityService} from '../job-post-complexity.service';
-import {description} from '../model/description';
-import {JobPostProficiencyService} from "../jobPostProficiency.service";
+import { Component } from '@angular/core';
+import { LocalStorageService } from '../../../framework/shared/localstorage.service';
+import { LocalStorage, NavigationRoutes } from '../../../framework/shared/constants';
+import { Router } from '@angular/router';
+import { MyJobInformationService } from '../job-information/job-information.service';
+import { JobInformation } from '../model/job-information';
+import { JobRequirement } from '../model/job-requirement';
+import { JobRequirementService } from '../job-requirement/job-requirement.service';
+import { JobLocationService } from '../job-location/job-location.service';
+import { JobLocation } from '../model/job-location';
+import { myJobLocationService } from '../myjob-location.service';
+import { myJobPostcapabilityService } from '../jobpost-capabilities.service';
+import { JonPostDescriptionService } from '../job-post-description.service';
+import { JobPostComplexityService } from '../job-post-complexity.service';
+import { description } from '../model/description';
+import { JobPostProficiencyService } from "../jobPostProficiency.service";
 
 
 @Component({
@@ -89,12 +89,12 @@ export class JobPosterComponent {
   }
 
 
-  ngOnInit(){
+  ngOnInit() {
 
 
   }
 
-  postjob(){
+  postjob() {
      console.log(this.jobInformation);
     console.log(this.jobRequirement);
     console.log(this.jobLocation);

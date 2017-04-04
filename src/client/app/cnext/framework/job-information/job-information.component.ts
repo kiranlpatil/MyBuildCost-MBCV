@@ -1,7 +1,7 @@
 
-import {Component} from '@angular/core';
-import {JobInformation} from '../model/job-information';
-import {MyJobInformationService} from './job-information.service';
+import {  Component  } from '@angular/core';
+import {  JobInformation  } from '../model/job-information';
+import {  MyJobInformationService  } from './job-information.service';
 
 
 @Component({
@@ -18,20 +18,20 @@ export class JobInformationComponent {
   }
 
 
-  ngOnInit(){
+  ngOnInit() {
 
 
   }
 
-  isJobTitleSelected(job:any){
+  isJobTitleSelected(job:any) {
     this.jobInformation.jobTitle=job;
   }
 
-  isHiringMangerSelected(manager:any){
+  isHiringMangerSelected(manager:any) {
     this.jobInformation.hiringManager=manager;
   }
 
-  isDepartmentSelected(department:any){
+  isDepartmentSelected(department:any) {
     this.jobInformation.department=department;
     this.joninformationservice.change(this.jobInformation);
   }

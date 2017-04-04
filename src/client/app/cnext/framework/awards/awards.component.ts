@@ -1,8 +1,8 @@
 
-import {  Component } from '@angular/core';
-import {awards} from '../model/awards';
-import {DateService} from '../date.service';
-import {AwardService} from '../award-service';
+import {   Component  } from '@angular/core';
+import {  awards  } from '../model/awards';
+import {  DateService  } from '../date.service';
+import {  AwardService  } from '../award-service';
 
 @Component({
   moduleId: module.id,
@@ -33,7 +33,7 @@ export class AwardsComponent {
 
   }
 
-  changeValue(){
+  changeValue() {
     this.awardService.change(true);
 
   }
@@ -54,7 +54,7 @@ this.temptitle=title;
 this.tempyear=year;
   }
 
-  selectedAward(award:string){
+  selectedAward(award:string) {
 this.tempremark=award;
 
 

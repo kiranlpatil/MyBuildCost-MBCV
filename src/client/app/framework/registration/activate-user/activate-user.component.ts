@@ -1,10 +1,10 @@
-import {  Component,OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { LocalStorage, NavigationRoutes, Messages, ImagePath, ProjectAsset } from '../../shared/constants';
-import { LocalStorageService } from '../../shared/localstorage.service';
-import { ActiveUserService } from './activate-user.service';
-import { MessageService } from '../../shared/message.service';
-//import { Message } from '../../shared/message';
+import {    Component,OnInit  } from '@angular/core';
+import {  Router, ActivatedRoute  } from '@angular/router';
+import {  LocalStorage, NavigationRoutes, Messages, ImagePath, ProjectAsset  } from '../../shared/constants';
+import {  LocalStorageService  } from '../../shared/localstorage.service';
+import {  ActiveUserService  } from './activate-user.service';
+import {  MessageService  } from '../../shared/message.service';
+//import {  Message  } from '../../shared/message';
 
 @Component({
     moduleId: module.id,

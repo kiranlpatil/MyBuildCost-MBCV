@@ -1,20 +1,20 @@
-import {  Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { RegistrationService } from './registration.service';
-import { Registration } from './registration';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ValidationService } from '../shared/customvalidations/validation.service';
-import {
+import {   Component  } from '@angular/core';
+import {  Router  } from '@angular/router';
+import {  RegistrationService  } from './registration.service';
+import {  Registration  } from './registration';
+import {  FormBuilder, FormGroup, Validators  } from '@angular/forms';
+import {  ValidationService  } from '../shared/customvalidations/validation.service';
+import { 
   Message,
   MessageService,
   CommonService,
   NavigationRoutes,
   AppSettings
- } from '../shared/index';
-import { ImagePath, LocalStorage, ProjectAsset } from '../shared/constants';
-import { LocalStorageService } from '../shared/localstorage.service';
-import {LoaderService} from '../shared/loader/loader.service';
-import {RecruitingService} from '../shared/recruiting.service';
+  } from '../shared/index';
+import {  ImagePath, LocalStorage, ProjectAsset  } from '../shared/constants';
+import {  LocalStorageService  } from '../shared/localstorage.service';
+import { LoaderService } from '../shared/loader/loader.service';
+import { RecruitingService } from '../shared/recruiting.service';
 
 
 @Component({

@@ -1,6 +1,6 @@
-import {Component, Input} from '@angular/core';
-import {JonPostDescriptionService} from '../job-post-description.service';
-import {description} from "../model/description";
+import { Component, Input } from '@angular/core';
+import { JonPostDescriptionService } from '../job-post-description.service';
+import { description } from "../model/description";
 
 
 @Component({
@@ -31,11 +31,11 @@ export class DescriptionFieldComponent {
 
   }
 
-  ngOnInit(){
+  ngOnInit() {
     this.remainingWords=this.maxLength;
   }
 
-  wordCount(event:any){
+  wordCount(event:any) {
     this.newstringOne= this.description.split(' ');
     this.newstringTwo= this.description.split('.');
     this.newstringThree= this.description.split(',');
