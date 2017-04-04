@@ -16,16 +16,16 @@
     </div>
 
 
-      <div class="col-sm-4 no-padding">
-        <div class="form-group">
-          <div id="yearf" ng2-auto-complete
-               [source]="yearList"
-               (ngModelChange)="selectedYearModel($event)">
-            <input class="form-control" type="text" required [ngModel]="fromYearModel"  />
-            <label>Year of Certification</label>
-          </div>
-        </div></div>
-
+    <div class="col-sm-4 no-padding">
+      <div class="form-group">
+        <div id="yearf" ng2-auto-complete
+             [source]="yearList"
+             (ngModelChange)="selectedYearModel($event)">
+          <input class="form-control" type="text" required [ngModel]="fromYearModel"  />
+          <label>Year of Certification</label>
+        </div>
+      </div>
+    </div>
   </div>
 
   <div class="col-sm-10 no-padding">
@@ -35,13 +35,13 @@
   </div>
 </div>
 
-  <div class="clear">
-    <button type="button" id="more_fields" (click)="addAnother()" class="btn btn-create-profile" [disabled]="disbleRole" >
-      Add Another <span>+</span>
-    </button>
-    <span *ngIf="disbleButton"><h6><font color="red">Fields should not be empty......</font></h6></span>
+<div class="clear">
+  <button type="button" id="more_fields" (click)="addAnother()" class="btn btn-create-profile" [disabled]="disbleRole" >
+    Add Another <span>+</span>
+  </button>
+  <span *ngIf="disbleButton"><h6><font color="red">Fields should not be empty......</font></h6></span>
 
-  </div>
+</div>
 
 
 

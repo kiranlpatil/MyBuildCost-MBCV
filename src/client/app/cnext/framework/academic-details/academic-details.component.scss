@@ -8,8 +8,8 @@ $border-color: #ccc;
 }
 
 .academic-details {
-  margin: 10px 0 20px;
   border-top: 1px solid $border-color;
+  margin: 10px 0 20px;
 
   &:first-child {
     border: 0;
@@ -17,7 +17,7 @@ $border-color: #ccc;
 
   .form-control {
     border-radius: 0;
-    margin: 0 0 15px 0;
+    margin: 0 0 15px;
   }
 
   textarea {
@@ -34,6 +34,17 @@ $border-color: #ccc;
     }
 
     .col-sm-10 {
+      clear: both;
+      width: 100%;
+    }
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .academic-details {
+    .col-sm-4,
+    .form-control {
+      margin: 0;
       width: 100%;
     }
   }

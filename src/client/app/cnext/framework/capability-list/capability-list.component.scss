@@ -4,19 +4,26 @@ $option-border-color: #999;
 $primary-option: #1c75bd;
 $secondary-option: #00aed5;
 
-.primary-color {
-  width: 10px;
-  height: 10px;
-  background: $primary-option;
-  margin: 0 15px 0 5px;
-  border-radius: 25px;
+.info {
+  font-size: 12px;
+  font-style: italic;
+  margin: 0;
 }
-.secondary-color {
-  width: 10px;
-  height: 10px;
-  margin: 0 0 0 5px;
-  background: $secondary-option;
+
+.color-panel {
   border-radius: 25px;
+  height: 10px;
+  width: 10px;
+}
+
+.primary-color {
+  background: $primary-option;
+  margin: 0 5px 0 0;
+}
+
+.secondary-color {
+  background: $secondary-option;
+  margin: 0 5px 0 15px;
 }
 
 .btn-primary {
@@ -35,7 +42,7 @@ $secondary-option: #00aed5;
 
   .select-option {
     display: inline-block;
-    margin: 5px 20px 5px 0;
+    margin: 3px 20px 3px 0;
     text-align: left;
     text-transform: capitalize;
   }
@@ -154,7 +161,7 @@ $secondary-option: #00aed5;
   }
 }
 
-@media screen and (max-width: 1099px) {
+@media screen and (max-width: 1280px) {
   .primary > label {
     & > input {
       & + span {
@@ -201,6 +208,18 @@ $secondary-option: #00aed5;
   .capability-type {
     .select-option {
       margin: 0 20px 0 0;
+    }
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .select-option > label {
+    padding: 7px 0;
+
+    & > input {
+      & + span {
+        font-size: 10px;
+      }
     }
   }
 }

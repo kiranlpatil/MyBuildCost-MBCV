@@ -8,8 +8,8 @@ $border-color: #ccc;
 }
 
 .form {
-  margin: 10px 0 20px;
   border-top: 1px solid $border-color;
+  margin: 10px 0 20px;
 
   &:first-child {
     border: 0;
@@ -17,9 +17,9 @@ $border-color: #ccc;
 }
 
 .left-content {
-  width: 50%;
   float: left;
   padding-right: 15px;
+  width: 50%;
 
   .worked-from,
   .worked-to {
@@ -41,9 +41,9 @@ $border-color: #ccc;
 }
 
 .right-content {
-  width: 50%;
   float: left;
   padding-left: 15px;
+  width: 50%;
 
   textarea {
     border-radius: 0;
@@ -53,15 +53,16 @@ $border-color: #ccc;
     width: 100%;
   }
 }
+
 @media only screen and (max-width: 1024px) {
   .left-content,
-  .right-content{
-    width: 100%;
+  .right-content {
     padding: 0;
+    width: 100%;
 
     textarea {
-      margin-top: 5px;
       height: 100px;
+      margin-top: 5px;
       width: 83%;
     }
   }
@@ -69,7 +70,7 @@ $border-color: #ccc;
 
 @media only screen and (max-width: 987px) {
   .left-content,
-  .right-content{
+  .right-content {
     textarea {
       width: 100%;
     }

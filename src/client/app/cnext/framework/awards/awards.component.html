@@ -1,14 +1,9 @@
-<div >
+<div *ngFor="let item of tempfield;let i= index" class="awards clearfix">
 
-<div *ngFor="let item of tempfield;let i= index">
-
-  <div>
-    <div class="col-sm-4 no-padding">
-      <div class="form-group">
-        <label>Title</label>
-        <input type="text"   class="form-control" required  [ngModel]="title" (ngModelChange)="selectedTitle($event)"  (focus)="changeValue()"/>
-
-      </div>
+  <div class="col-sm-4 no-padding">
+    <div class="form-group">
+      <input type="text" class="form-control" [ngModel]="title" (ngModelChange)="selectedTitle($event)"  (focus)="changeValue()" required />
+      <label>Title</label>
     </div>
   </div>
 
@@ -18,7 +13,8 @@
             [source]="monthList"
             (ngModelChange)="selectedMonthModel($event)">
 
-        <input class="form-control" [ngModel]="monthModel" [disabled]="disbleRole"  placeholder="MONTH" />
+        <input class="form-control" [ngModel]="monthModel" [disabled]="disbleRole" required />
+        <label>Month</label>
       </div>
     </div>
   </div>
@@ -29,7 +25,8 @@
             [source]="yearList"
             (ngModelChange)="selectedYearModel($event)">
 
-        <input  class="form-control" [ngModel]="yearModel" [disabled]="disbleRole"  placeholder="YYYY" />
+        <input  class="form-control" [ngModel]="yearModel" [disabled]="disbleRole"  required />
+        <label>Year</label>
       </div>
     </div>
   </div>
@@ -37,18 +34,14 @@
   <div class="col-sm-10 no-padding">
     <textarea class="form-control" [ngModel]="specialization" (ngModelChange)="selectedAward($event)" placeholder="Enter Awards Details" class="form-control"></textarea>
   </div>
-
-
 </div>
 
 <div class="clear">
   <button type="button" id="more_fields" (click)="addAnother()" class="btn btn-create-profile" [disabled]="disbleRole" >
     Add Another <span>+</span>
   </button>
-  <span *ngIf="disbleButton"><h6><font color="red">Fields should not be empty......</font></h6></span>
-
-
+  <div class="error-messages" *ngIf="disbleButton"><p>Fields should not be empty.</p></div>
 </div>
-</div>
+
 
 

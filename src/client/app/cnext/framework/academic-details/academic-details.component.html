@@ -1,14 +1,14 @@
 <div class="academic-details clearfix" *ngFor="let item of tempfield;let i= index">
   <div class="col-sm-4 no-padding">
     <div class="form-group">
-      <input type="text"  required class="form-control" [ngModel]="schoolName" (ngModelChange)="selectedSchoolName($event)" (focus)="changeValue()" />
+      <input type="text" class="form-control" [ngModel]="schoolName" (ngModelChange)="selectedSchoolName($event)" (focus)="changeValue()" required />
       <label>School/College Name</label>
     </div>
   </div>
 
   <div class="col-sm-4 no-padding">
     <div class="form-group">
-      <input class="form-control" type="text" required [ngModel]="universityName" (ngModelChange)="selectedeUniversityName($event)" />
+      <input class="form-control" type="text" [ngModel]="universityName" (ngModelChange)="selectedeUniversityName($event)" required />
       <label>Board/university Name</label>
     </div>
   </div>
@@ -18,10 +18,11 @@
       <div id="yearf" ng2-auto-complete
            [source]="yearList"
            (ngModelChange)="selectedPassingYear($event)">
-      <input class="form-control" type="text" required [ngModel]="passingyear" />
-      <label>Year of Passing</label>
+        <input class="form-control" type="text" [ngModel]="passingyear" required />
+        <label>Year of Passing</label>
+      </div>
     </div>
-    </div></div>
+  </div>
 
   <div class="col-sm-10 no-padding">
     <textarea placeholder="Specialization/Remarks" [ngModel]="specialization" (ngModelChange)="selectedSpecialization($event)" class="form-control"></textarea>
@@ -33,7 +34,7 @@
   <button type="button" id="more_fields" (click)="addAnother()" class="btn btn-create-profile" [disabled]="disbleRole" >
     Add Another <span>+</span>
   </button>
-  <span *ngIf="disbleButton"><h6><font color="red">Fields should not be empty......</font></h6></span>
+  <div class="error-messages" *ngIf="disbleButton"><p>Fields should not be empty.</p></div>
 </div>
 
 

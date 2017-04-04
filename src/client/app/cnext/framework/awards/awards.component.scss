@@ -7,9 +7,9 @@ $border-color: #ccc;
   }
 }
 
-.academic-details {
-  margin: 10px 0 20px;
+.awards {
   border-top: 1px solid $border-color;
+  margin: 10px 0 20px;
 
   &:first-child {
     border: 0;
@@ -17,7 +17,7 @@ $border-color: #ccc;
 
   .form-control {
     border-radius: 0;
-    margin: 0 0 15px 0;
+    margin: 0 0 15px;
   }
 
   textarea {
@@ -28,12 +28,22 @@ $border-color: #ccc;
 }
 
 @media only screen and (max-width: 980px) {
-  .academic-details {
+  .awards {
     .col-sm-4 {
       width: 50%;
     }
 
     .col-sm-10 {
+      width: 100%;
+    }
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .academic-details {
+    .col-sm-4,
+    .form-control {
+      margin: 0;
       width: 100%;
     }
   }
