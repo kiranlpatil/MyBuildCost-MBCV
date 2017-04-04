@@ -2,43 +2,13 @@ $text-color: #666;
 $white: #fff;
 $option-border-color: #999;
 $primary-option: #1c75bd;
-$secondary-option: #00aed5;
 
-.primary-color {
-  width: 10px;
-  height: 10px;
-  background: $primary-option;
-  margin: 0 15px 0 5px;
-  border-radius: 25px;
-}
-.secondary-color {
-  width: 10px;
-  height: 10px;
-  margin: 0 0 0 5px;
-  background: $secondary-option;
-  border-radius: 25px;
-}
 
-.btn-primary {
-  float: right;
-
-  &:focus,
-  &:active {
-    outline: none;
-  }
-}
-
-.capability-type {
-  .instructions {
-    margin-top: -5px;
-  }
-
-  .select-option {
-    display: inline-block;
-    margin: 5px 20px 5px 0;
-    text-align: left;
-    text-transform: capitalize;
-  }
+.select-option {
+  display: inline-block;
+  margin: 5px 20px 5px 0;
+  text-align: left;
+  text-transform: capitalize;
 }
 
 .select-option > label {
@@ -53,6 +23,7 @@ $secondary-option: #00aed5;
       border-radius: 25px;
       color: $text-color;
       cursor: pointer;
+      font-size: 12px;
       font-weight: 100;
       padding: 6px 10px;
 
@@ -64,6 +35,8 @@ $secondary-option: #00aed5;
     &:checked {
       & + span {
         color: $white;
+        background: $primary-option;
+        border: 1px solid $primary-option;
       }
     }
   }
@@ -77,40 +50,7 @@ $secondary-option: #00aed5;
       &:checked {
         & + span {
           color: $white;
-        }
-      }
-    }
-  }
-}
-
-.primary > label {
-  & > input {
-
-    & + span {
-      border: 1px solid $primary-option;
-
-      &:hover {
-        border: 1px solid $primary-option;
-      }
-    }
-
-    &:checked {
-      & + span {
-        background-color: $primary-option;
-        border: 1px solid $primary-option;
-      }
-    }
-  }
-
-  &:hover {
-    & > input {
-      & + span {
-        border: 1px solid $primary-option;
-      }
-
-      &:checked {
-        & + span {
-          background-color: $primary-option;
+          background: $primary-option;
           border: 1px solid $primary-option;
         }
       }
@@ -118,48 +58,12 @@ $secondary-option: #00aed5;
   }
 }
 
-.secondary > label {
-  & > input {
-    display: none;
-
-    & + span {
-      border: 1px solid $secondary-option;
-
-      &:hover {
-        border: 1px solid $secondary-option;
-      }
-    }
-
-    &:checked {
-      & + span {
-        background-color: $secondary-option;
-        border: 1px solid $secondary-option;
-      }
-    }
-  }
-
-  &:hover {
-    & > input {
-      & + span {
-        border: 1px solid $secondary-option;
-      }
-
-      &:checked {
-        & + span {
-          background-color: $secondary-option;
-          border: 1px solid $secondary-option;
-        }
-      }
-    }
-  }
-}
-
-@media screen and (max-width: 1099px) {
-  .primary > label {
+@media screen and (max-width: 1280px) {
+  .select-option > label {
     & > input {
       & + span {
         &:hover {
-          border: 1px solid $primary-option;
+          border: 0px solid $primary-option;
         }
       }
     }
@@ -167,40 +71,9 @@ $secondary-option: #00aed5;
     &:hover {
       & > input {
         & + span {
-          border: 1px solid $primary-option;
+          border: 0px solid $primary-option;
         }
       }
-    }
-  }
-
-  .secondary > label {
-    & > input {
-      & + span {
-        &:hover {
-          border: 1px solid $secondary-option;
-        }
-      }
-    }
-
-    &:hover {
-      & > input {
-        & + span {
-          border: 1px solid $secondary-option;
-        }
-      }
-    }
-  }
-}
-
-@media screen and (max-width: 980px) {
-  .btn-primary {
-    float: none;
-    margin-top: 15px;
-  }
-
-  .capability-type {
-    .select-option {
-      margin: 0 20px 0 0;
     }
   }
 }

@@ -150,6 +150,13 @@ $label: #888;
   .profile-name-last {
     color: #1B75BC;
   }
+
+  textarea.form-control {
+    border-radius: 0;
+    height: 100px;
+    resize: vertical;
+    width: 100%;
+  }
 }
 
 .profile-configurations {
@@ -172,7 +179,8 @@ $label: #888;
   }
 
   img {
-    margin-left: 15px;
+    margin-left: 5px;
+    width: 30px;
   }
 
   .btn {
