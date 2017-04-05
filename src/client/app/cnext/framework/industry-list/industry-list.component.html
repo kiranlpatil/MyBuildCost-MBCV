@@ -1,37 +1,10 @@
-<div class="select-role">
-  <div>
-      <div class="radio">
-        <label class="radio-inline">Industry:
-        <cn-single-select-list [radioData]="industryNames"  (selectedData)="selectIndustryModel($event)"></cn-single-select-list>
-        </label>
-      </div>
+<div class="select-industry">
+  <cn-single-select-list [radioData]="industryNames"  (selectedData)="selectIndustryModel($event)"></cn-single-select-list>
 
-    <div class="button-group clearfix">
-      <button class="btn btn-primary" (click)="showHideModal()" [disabled]="disbleButton">Cofirm &amp; Save</button>
-    </div>  <div class="error-messages" *ngIf="!isTitleFilled"><p>Title should not be empty.</p></div>
+  <div class="button-group clearfix">
+    <button class="btn btn-primary" (click)="showHideModal()" [disabled]="disbleButton">Cofirm &amp; Save</button>
   </div>
-
-  <!--<div>-->
-      <!--<div class="role-type clearfix">-->
-        <!--<div class="col-sm-12 col-xs-12 no-padding">-->
-          <!--<div>-->
-            <!--<cn-multi-select-list [checkBoxData]="roleNames"  [maxInput]="'3'" (selectedData)="selectRolesModel($event)"></cn-multi-select-list>-->
-          <!--</div>-->
-        <!--</div>-->
-      <!--</div>-->
-
-  <!--</div>-->
-
-  <!--<div>-->
-      <!--<div class="radio">-->
-        <!--<label class="radio-inline">Industry:-->
-          <!--<cn-single-select-list [radioData]="industryNames"  (selectedData)="selectIndustryModel($event)"></cn-single-select-list>-->
-        <!--</label>-->
-      <!--</div>-->
-      <!--<div class="button-group clearfix">-->
-        <!--<button class="btn btn-primary" >Cofirm &amp; Save</button>-->
-      <!--</div>-->
-  <!--</div>-->
+  <div class="error-messages" *ngIf="!isTitleFilled"><p>Title should not be empty.</p></div>
 </div>
 
 <div class="modal" [style.display]="getStyleModal()">

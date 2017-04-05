@@ -1,10 +1,12 @@
-
-
-<cn-multi-select-list [checkBoxData]="roleNames"  [maxInput]="'3'" (selectedData)="selectRolesModel($event)"></cn-multi-select-list>
-<div class="button-group clearfix">
-  <button class="btn btn-primary" (click)="showHideModal()" [disabled]="disbleButton">Cofirm &amp; Save</button>
+<div class="work-area">
+  <p class="info">Select those areas of work which describe what you are best at or where you would like to position your career. Normally, an individual works
+    across maximum 2 to 3 work areas in parallel. You can select upto maximum 3 work areas. One selected, you would be able to change the work
+    areas only after 3 months.</p>
+  <cn-multi-select-list [checkBoxData]="roleNames"  [maxInput]="'3'" (selectedData)="selectRolesModel($event)"></cn-multi-select-list>
+  <div class="button-group clearfix">
+    <button class="btn btn-primary" (click)="showHideModal()" [disabled]="disbleButton">Cofirm &amp; Save</button>
+  </div>
 </div>
-
 
 <div class="modal" [style.display]="getStyleModal()">
   <div class="modal-bg">

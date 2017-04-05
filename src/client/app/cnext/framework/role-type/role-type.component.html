@@ -1,9 +1,10 @@
-<cn-single-select-list [radioData]="roleTypes"  (selectedData)="selectIndustryModel($event)"></cn-single-select-list>
+<div class="select-role">
+  <cn-single-select-list [radioData]="roleTypes"  (selectedData)="selectIndustryModel($event)"></cn-single-select-list>
 
-<div class="button-group clearfix">
-  <button class="btn btn-primary" (click)="showHideModal()" [disabled]="disbleButton">Cofirm &amp; Save</button>
+  <div class="button-group clearfix">
+    <button class="btn btn-primary" (click)="showHideModal()" [disabled]="disbleButton">Cofirm &amp; Save</button>
+  </div>
 </div>
-
 
 <div class="modal" [style.display]="getStyleModal()">
   <div class="modal-bg">

@@ -1,0 +1,21 @@
+.work-area {
+  .btn {
+    &:focus,
+    &:active {
+      outline: none;
+    }
+  }
+
+  .btn-primary {
+    float: right;
+  }
+}
+
+@media only screen and (max-width: 980px) {
+  .work-area {
+    .btn-primary {
+      float: none;
+      margin-top: 15px;
+    }
+  }
+}
