@@ -5,7 +5,7 @@ import {  Subject  } from 'rxjs/Subject';
 export class ProfessionalService {
 
   // Observable string sources
-  private _showProfessionalSource = new Subject<boolean>();
+   _showProfessionalSource = new Subject<boolean>();
 
   // Observable string streams
   showTest$ = this._showProfessionalSource.asObservable();

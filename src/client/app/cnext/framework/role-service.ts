@@ -5,7 +5,7 @@ import {  Subject  } from 'rxjs/Subject';
 export class MyRoleService {
 
   // Observable string sources
-  private _showRoleSource = new Subject<Array<string>>();
+   _showRoleSource = new Subject<Array<string>>();
 
   // Observable string streams
   showTest$ = this._showRoleSource.asObservable();

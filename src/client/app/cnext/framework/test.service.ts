@@ -5,7 +5,7 @@ import {  Subject  } from 'rxjs/Subject';
 export class TestService {
 
   // Observable string sources
-  private _showTestSource = new Subject<boolean>();
+   _showTestSource = new Subject<boolean>();
 
   // Observable string streams
   showTest$ = this._showTestSource.asObservable();

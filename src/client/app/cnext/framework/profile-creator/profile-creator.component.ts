@@ -1,4 +1,4 @@
-import { Component ,OnInit} from '@angular/core';
+import { Component ,OnInit } from '@angular/core';
 import { LocalStorageService } from '../../../framework/shared/localstorage.service';
 import { LocalStorage, NavigationRoutes } from '../../../framework/shared/constants';
 import { Router } from '@angular/router';
@@ -65,7 +65,6 @@ export class ProfileCreatorComponent implements OnInit {
     this.myRoleType.showTestRoleType$.subscribe(
       data=> {
         this.isRoleTypeShow=data;
-
 
       }
     );
