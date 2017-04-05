@@ -16,64 +16,29 @@ export function retrieve(req:express.Request, res:express.Response, next:any) {
     var industryService = new IndustryService();
     var params = req.params.id;
     var rolesparam = req.query.roles;
-    console.log("Params json" + params);
-    console.log("Array of Param" + rolesparam);
-    industryService.findByName(params, (error, result) => {
+    let item:any={
+      name : req.params.id,
+      roles :JSON.parse(rolesparam)
+    }
+    capabilityService.findByName(item, (error, result) => {
       if (error) {
         next({
           reason: 'Error In Retriving',//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
-          message: "Error in Retriving",
-          code: 403
+          message: Messages.MSG_ERROR_WRONG_TOKEN,
+          code: 401
         });
       }
-      else if (result.length <= 0) {
-        res.status(403).send({message: "No records in Industry"});
-      }
       else {
-        let ids:mongoose.Types.ObjectId[] = new Array(0);
-        for (let role of result[0].roles) {
-          ids.push(new mongoose.Types.ObjectId(role));
-        }
-
-        roleService.retrieveByMultiIdsWithCapability(ids,rolesparam, (error, result) => {
-          if (error) {
-            next({
-              reason: 'Error In Retriving',//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
-              message: Messages.MSG_ERROR_WRONG_TOKEN,
-              code: 401
-            });
-          }
-          else {
-
-            console.log("result "+result);
-            let ids:mongoose.Types.ObjectId[] = new Array(0);
-            for (let role of result) {
-              for (let capability of role.capabilities) {
-                ids.push(new mongoose.Types.ObjectId(capability));
-              }
-            }
-            capabilityService.retrieveByMultiIds(ids, (error, result) => {
-              if (error) {
-                next({
-                  reason: 'Error In Retriving',//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
-                  message: Messages.MSG_ERROR_WRONG_TOKEN,
-                  code: 401
-                });
-              }
-              else {
-                res.send({
-                  "status": "success",
-                  "data": result
-                });
-              }
-            });
-          }
+        res.send({
+          "status": "success",
+          "data": result
         });
       }
     });
+
   }
-  catch(e){
-      res.status(403).send({message: e.message});
-    }
+  catch (e) {
+    res.status(403).send({message: e.message});
   }
+}
 

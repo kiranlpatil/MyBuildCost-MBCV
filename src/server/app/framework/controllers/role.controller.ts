@@ -13,7 +13,6 @@ export function retrieve(req:express.Request, res:express.Response, next:any) {
     var roleService = new RoleService();
     var industryService = new IndustryService();
     var params = req.params.id;
-    console.log("Params json" + params);
     roleService.findByName(params, (error, result) => {
       if (error) {
         next({

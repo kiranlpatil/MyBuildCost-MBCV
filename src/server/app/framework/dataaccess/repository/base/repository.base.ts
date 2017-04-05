@@ -92,9 +92,9 @@ class RepositoryBase<T extends mongoose.Document> implements IRead<T>, IWrite<T>
     });
   }
 
-  /*findRoles(name:string, callback:(error:any, result:T) => void) {
+  findCapabilities(item:any, callback:(error:any, result:T) => void) {
     this.items = new Array(0);
-    this._model.find({"name": name}, (err, industry)=> {
+    this._model.find({"name": item.name},(err, industry)=> {
       if (err) {
         callback(err, null);
       } else {
@@ -102,17 +102,29 @@ class RepositoryBase<T extends mongoose.Document> implements IRead<T>, IWrite<T>
           callback(new Error("Records are not found"), null);
         } else {
           for (let role of industry[0].roles) {
-            let obj:any = {
-              "_id": role._id,
-              "name": role.name
+            for(let o of item.roles){
+              if(o==role.name){
+                let role_object :any={
+                    name:role.name,
+                    capabilities:[]
+                };
+                role_object.capabilities=new Array(0);
+                for(let capability of role.capabilities){
+                  let obj:any = {
+                    "_id": capability._id,
+                    "name": capability.name
+                  };
+                  role_object.capabilities.push(obj);
+                }
+                this.items.push(role_object);
+              }
             }
-            this.items.push(obj);
           }
           callback(null, this.items);
         }
       }
     });
-  }*/
+  }
 }
 
 export = RepositoryBase;
