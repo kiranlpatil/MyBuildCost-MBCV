@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
   private userForm:FormGroup;
   private error_msg:string;
   private isShowErrorMessage:boolean = true;
-  private status:boolean;
+  //private status:boolean;
   private MY_LOGO_PATH:string;
   private EMAIL_ICON:string;
   private PASSWORD_ICON:string;
@@ -123,14 +123,13 @@ export class LoginComponent implements OnInit {
   }
 
 
-  successRedirect(res:any) {debugger
+  successRedirect(res:any) {
     LocalStorageService.setLocalValue(LocalStorage.IS_LOGED_IN, 1);
     LocalStorageService.setLocalValue(LocalStorage.PROFILE_PICTURE,res.data.picture);
     if(res.data.isCandidate) {
 
       this._router.navigate([NavigationRoutes.APP_CREATEPROFILE]);
-    }
-    else{
+    } else {
       this._router.navigate([NavigationRoutes.APP_RECRUITER_DASHBOARD]);
     //  this._router.navigate([NavigationRoutes.APP_COMPANYDETAILS]);
     }

@@ -1,4 +1,4 @@
-import {   Routes  } from '@angular/router';
+import {  Routes  } from '@angular/router';
 import {  LoginRoutes  } from './framework/login/index';
 import {  RegistrationRoutes  } from './framework/registration/index';
 import {  DashboardRoutes  } from './framework/dashboard/index';
@@ -16,11 +16,11 @@ import {  ChangeEmailRoutes  } from './framework/dashboard/settings/change-email
 import {  ActivateEmailRoutes  } from './framework/dashboard/settings/activate-email/activate-email.routes';
 import {   ChangeMobileRoutes  } from './framework/dashboard/settings/change-mobile/change-mobile.routes';
 import {  LandingPageRoutes } from './framework/landing-page/landing-page.routes';
-import {  CandidateRoutes } from "./framework/registration/candidate/candidate.routes";
-import {  RecruiterRoutes } from "./framework/registration/recruiter/recruiter.routes";
-import {  ProfileCreator } from "./cnext/framework/profile-creator/profile-creator.routes";
-import {  CompanyDetailsRoutes  } from "./framework/registration/company_details/company-details.routes";
-import {  RecruiterDashboard  } from "./cnext/framework/recruiter-dashboard/recruiter-dashboard.routes";
+import {  CandidateRoutes } from './framework/registration/candidate/candidate.routes';
+import {  RecruiterRoutes } from './framework/registration/recruiter/recruiter.routes';
+import {  ProfileCreator } from './cnext/framework/profile-creator/profile-creator.routes';
+import {  CompanyDetailsRoutes  } from './framework/registration/company_details/company-details.routes';
+import {  RecruiterDashboard  } from './cnext/framework/recruiter-dashboard/recruiter-dashboard.routes';
 
 
 export const routes: Routes = [

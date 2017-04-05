@@ -1,8 +1,6 @@
 
 import {  Component  } from '@angular/core';
 
-
-
 @Component({
   moduleId: module.id,
   selector: 'cn-recruiter-dashboard',

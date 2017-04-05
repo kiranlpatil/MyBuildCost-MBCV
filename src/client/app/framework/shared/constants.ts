@@ -98,7 +98,7 @@ export class LocalStorage {
     public static VERIFY_CHANGE_PHONE_VALUE = 'verify_change_phone_value';
 }
 
-export class VALUE_CONSTANT{
+export class ValueConstant {
   public static MAX_CAPABILITIES :number=2;
   public static MAX_PROFECIENCES :number=25;
   public static MAX_DOMAINS :number=10;

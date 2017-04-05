@@ -1,5 +1,5 @@
 
-import {   Component  } from '@angular/core';
+import {   Component ,OnInit } from '@angular/core';
 import {  Router  } from '@angular/router';
 import {  RecruiterService  } from './recruiter.service';
 import {  Recruiter  } from './recruiter';
@@ -26,7 +26,7 @@ import { RecruitingService } from '../../shared/recruiting.service';
   styleUrls: ['recruiter.component.css'],
 })
 
-export class RecruiterComponent {
+export class RecruiterComponent implements OnInit {
   private model = new Recruiter();
   private storedcountry:string;
   private storedstate:string;

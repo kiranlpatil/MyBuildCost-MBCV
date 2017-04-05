@@ -1,7 +1,7 @@
 /**
  * Created by techprimelab on 3/9/2017.
  */
-import {  Component  } from '@angular/core';
+import {  Component,OnInit  } from '@angular/core';
 import {  Router  } from '@angular/router';
 import {  CandidateService  } from './candidate.service';
 import {  Candidate  } from './candidate';
@@ -27,22 +27,22 @@ import { DateService  } from '../../../cnext/framework/date.service';
   styleUrls: ['candidate.component.css'],
 })
 
-export class CandidateComponent {
+export class CandidateComponent implements OnInit {
   private model = new Candidate();
   private storedcountry:string;
   private storedstate:string;
   private storedcity:string;
   private locationDetails : any;
-  private countries:string[]=new Array(0);
-  private states:string[]=new Array(0);
-  private cities:string[]=new Array(0);
+   countries:string[]=new Array(0);
+   states:string[]=new Array(0);
+   cities:string[]=new Array(0);
   private isPasswordConfirm: boolean;
   private isFormSubmitted = false;
   private userForm: FormGroup;
   private error_msg: string;
   private isShowErrorMessage: boolean = true;
   private BODY_BACKGROUND:string;
-  private yearList:string[]=this.dateservice.yearList;
+  yearList:string[]=this.dateservice.yearList;
   private passingyear:string;
   private myPassword:string='';
   private isShowMessage:boolean=false;

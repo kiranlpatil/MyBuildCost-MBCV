@@ -117,7 +117,7 @@ import { myRoTypeTestService } from './cnext/framework/myRole-Type.service';
 import { RoleTypeService } from './cnext/framework/role-type/role-type.service';
 import { IndustryExperienceListComponent } from './cnext/framework/industry-experience/industry-experience.component';
 import { IndustryExperienceService } from './cnext/framework/industry-experience/industry-experience.service';
-import { disableTestService, DisableTestService } from './cnext/framework/disable-service';
+import { DisableTestService } from './cnext/framework/disable-service';
 
 
 @NgModule({

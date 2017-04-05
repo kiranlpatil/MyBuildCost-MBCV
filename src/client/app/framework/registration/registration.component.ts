@@ -2,17 +2,15 @@ import {   Component  } from '@angular/core';
 import {  Router  } from '@angular/router';
 import {  RegistrationService  } from './registration.service';
 import {  Registration  } from './registration';
-import {  FormBuilder, FormGroup, Validators  } from '@angular/forms';
-import {  ValidationService  } from '../shared/customvalidations/validation.service';
-import { 
-  Message,
+import {  FormBuilder, FormGroup  } from '@angular/forms';
+import { Message,
   MessageService,
   CommonService,
   NavigationRoutes,
   AppSettings
   } from '../shared/index';
-import {  ImagePath, LocalStorage, ProjectAsset  } from '../shared/constants';
-import {  LocalStorageService  } from '../shared/localstorage.service';
+import { ImagePath, LocalStorage } from '../shared/constants';
+import { LocalStorageService } from '../shared/localstorage.service';
 import { LoaderService } from '../shared/loader/loader.service';
 import { RecruitingService } from '../shared/recruiting.service';
 
@@ -38,7 +36,8 @@ export class RegistrationComponent {
   BODY_BACKGROUND:string;
 
   constructor(private commanService: CommonService, private _router: Router,
-              private registrationService: RegistrationService, private messageService: MessageService,private recruitingService: RecruitingService, private formBuilder: FormBuilder,private loaderService:LoaderService) {
+              private registrationService: RegistrationService, private messageService: MessageService,
+              private recruitingService: RecruitingService, private formBuilder: FormBuilder,private loaderService:LoaderService) {
 
     /*this.userForm = this.formBuilder.group({
       'first_name': ['', Validators.required],

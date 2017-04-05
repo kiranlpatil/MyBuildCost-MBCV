@@ -1,6 +1,7 @@
 import {   Component  } from '@angular/core';
+import {  FormGroup } from '@angular/forms';
 import {  Academicdetails  } from './academic-details';
-import {  VALUE_CONSTANT  } from '../../../framework/shared/constants';
+import {  ValueConstant  } from '../../../framework/shared/constants';
 import {  EducationalService  } from '../educational-service';
 
 @Component({
@@ -33,7 +34,7 @@ export class AcademicDetailComponent {
   }
 
   createYearList(year: number) {
-    for (let i = 0; i < VALUE_CONSTANT.MAX_ACADEMIC_YEAR_LIST; i++) {
+    for (let i = 0; i < ValueConstant.MAX_ACADEMIC_YEAR_LIST; i++) {
       this.yearList.push(year--);
     }
   }
@@ -76,7 +77,8 @@ export class AcademicDetailComponent {
       this.tempfield.push('null');
       this.tempSchoolName='';
       this.tempUnivercityName='';
-      this.tempPassingYear='';this.tempSpecialization='';
+      this.tempPassingYear='';
+      this.tempSpecialization='';
     }
   }
 }

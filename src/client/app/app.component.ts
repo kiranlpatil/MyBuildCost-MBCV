@@ -35,12 +35,13 @@ export class AppComponent implements OnInit {
                 protected loaderService:LoaderService) {
         this.appTheme = AppSettings.INITIAL_THEM;
         if (parseInt(LocalStorageService.getLocalValue(LocalStorage.IS_LOGED_IN)) === 1) {
-          if(LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE)==="true")
-           this._router.navigate(['/createprofile']);
-          else
+          if(LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE)==='true') {
+            this._router.navigate(['/createprofile']);
+          } else {
             this._router.navigate(['/recruiterdashboard']);
-           // this._router.navigate(['/dashboard']);
-          //this._router.navigate([NavigationRoutes.APP_COMPANYDETAILS]);
+            // this._router.navigate(['/dashboard']);
+            //this._router.navigate([NavigationRoutes.APP_COMPANYDETAILS]);
+          }
 
         } else {
             LocalStorageService.setLocalValue(LocalStorage.IS_LOGED_IN, 0);
@@ -52,13 +53,12 @@ export class AppComponent implements OnInit {
 
         this.subscription = messageService.messageObservable$.subscribe(
             (message:Message) => {
-                if (message.isError == true) {
+                if (message.isError === true) {
                 let err = message.error_msg.error;
-                  if(err == "Could not attach click handler to the element. Reason: element not found.") {
+                  if(err === 'Could not attach click handler to the element. Reason: element not found.') {
                     message.isError = false;
 
-                  }
-                  else{
+                  } else {
                     this.showError(message);
 
                   }
@@ -95,7 +95,7 @@ export class AppComponent implements OnInit {
 
     showSuccess(message:Message) {
         this.isShowSuccessMessage = false;
-        console.log("Success message",message);
+        console.log('Success message',message);
         this.customMessage = message.custom_message;
         setTimeout(function () {
             this.isShowSuccessMessage = true;

@@ -1,5 +1,5 @@
 
-import { Component } from '@angular/core';
+import { Component ,OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CompanyDetailsService } from './company-details.service';
 import { CompanyDetails } from './company-details';
@@ -25,7 +25,7 @@ import { Http } from '@angular/http';
   styleUrls: ['company-details.component.css'],
 })
 
-export class CompanyDetailsComponent {
+export class CompanyDetailsComponent implements OnInit {
   private model = new CompanyDetails();
   private companyDetailsForm: FormGroup;
   private company_name: any;
@@ -97,8 +97,7 @@ export class CompanyDetailsComponent {
     this.buttonId = fileInput.target.id;
     if(this.buttonId ==='file-upload1') {
       this.fileName1=this.filesToUpload[0].name;
-    }
-    else if(this.buttonId ==='file-upload2') {
+    } else if(this.buttonId ==='file-upload2') {
       this.fileName2=this.filesToUpload[0].name;
     } else {
       this.fileName3=this.filesToUpload[0].name;

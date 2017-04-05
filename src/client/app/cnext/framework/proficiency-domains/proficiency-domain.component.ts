@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { VALUE_CONSTANT } from '../../../framework/shared/constants';
+import { ValueConstant } from '../../../framework/shared/constants';
 import { ProficiencyService } from '../proficience.service';
 import { MessageService } from '../../../framework/shared/message.service';
 import { Message } from '../../../framework/shared/message';
@@ -80,7 +80,7 @@ export class proficiencyDomainComponent implements OnInit {
   }
 
   selectedProficiencyModel(newVal: any) {
-    if(this.storedProficiency.length < VALUE_CONSTANT.MAX_PROFECIENCES) {
+    if(this.storedProficiency.length < ValueConstant.MAX_PROFECIENCES) {
       this.showAlert=false;
       this.storedProficiency.push(newVal);
       this.deleteSelectedProfeciency(newVal);

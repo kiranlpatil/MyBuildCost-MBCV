@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { VALUE_CONSTANT, LocalStorage } from '../../../framework/shared/constants';
+import { Component ,OnInit } from '@angular/core';
+import { ValueConstant, LocalStorage } from '../../../framework/shared/constants';
 import { TestService } from '../test.service';
 import { ComplexityService } from '../complexity.service';
 import { MyIndustryService } from '../industry-service';
@@ -101,7 +101,7 @@ export class CapabilityListComponent implements OnInit  {
   selectedOption(selectedCapability:any) {
     if (selectedCapability.target.checked) {
       this.searchCapabilityId(selectedCapability.target.value);
-      if(this.primaryCapabilities.length < VALUE_CONSTANT.MAX_CAPABILITIES) {
+      if(this.primaryCapabilities.length < ValueConstant.MAX_CAPABILITIES) {
         this.primaryCapabilities.push(selectedCapability.target.value);
         this.isPrimary[this.capabilities.indexOf(selectedCapability.target.value)]=true;
       } else {

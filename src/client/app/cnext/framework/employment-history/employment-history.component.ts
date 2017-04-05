@@ -1,7 +1,7 @@
 
 import {   Component  } from '@angular/core';
 import { EmployementHistory } from '../model/employment-history';
-import { VALUE_CONSTANT } from '../../../framework/shared/constants';
+import { ValueConstant } from '../../../framework/shared/constants';
 import { EducationalService } from '../educational-service';
 
 @Component({
@@ -42,7 +42,7 @@ export class EmploymentHistoryComponent {
   }
 
   createYearList(year: any) {
-    for (let i = 0; i < VALUE_CONSTANT.MAX_YEAR_LIST; i++) {
+    for (let i = 0; i < ValueConstant.MAX_YEAR_LIST; i++) {
       this.yearList.push(year--);
     }
 
