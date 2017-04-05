@@ -39,7 +39,6 @@ class CapabilityService {
   }
 
   findByName(field:any, callback:(error:any, result:any) => void) {
-    console.log("In Service");
     this.industryRepository.findCapabilities(field,callback);
   }
 

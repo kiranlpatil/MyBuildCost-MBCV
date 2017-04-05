@@ -11,10 +11,7 @@ import CapabilityService = require("../services/capability.service");
 
 export function retrieve(req:express.Request, res:express.Response, next:any) {
   try {
-    var roleService = new RoleService();
     var capabilityService = new CapabilityService();
-    var industryService = new IndustryService();
-    var params = req.params.id;
     var rolesparam = req.query.roles;
     let item:any={
       name : req.params.id,

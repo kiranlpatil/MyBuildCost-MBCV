@@ -3,12 +3,16 @@ var config = require('config');
 import CNextMessages = require("../shared/cnext-messages");
 import ProjectAsset = require("../shared/projectasset");
 import ComplexityRepository = require("../dataaccess/repository/complexity.repository");
+import IndustryRepository = require("../dataaccess/repository/industry.repository");
 class ComplexityService {
   private complexityRepository:ComplexityRepository;
+  private industryRepository:IndustryRepository;
+
   APP_NAME:string;
 
   constructor() {
     this.complexityRepository = new ComplexityRepository();
+    this.industryRepository = new IndustryRepository();
     this.APP_NAME = ProjectAsset.APP_NAME;
   }
 
@@ -32,6 +36,9 @@ class ComplexityService {
   }
 
 
+  findByName(field:any, callback:(error:any, result:any) => void) {
+    this.industryRepository.findComplexities(field,callback);
+  }
 
 }
 

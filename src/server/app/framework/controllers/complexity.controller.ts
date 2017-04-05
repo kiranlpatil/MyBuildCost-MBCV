@@ -13,105 +13,27 @@ import ScenarioService = require("../services/scenario.service");
 
 export function retrieve(req:express.Request, res:express.Response, next:any) {  // todo find better solution
   try {
-    var roleService = new RoleService();
-    var capabilityService = new CapabilityService();
-    var industryService = new IndustryService();
     var complexityService = new ComplexityService();
-    var scenarioService = new ScenarioService();
     var params = req.params.id;
     var rolesparam = req.query.roles;
     var capabilityparam = req.query.capability;
-    console.log("capability json" + capabilityparam);
-    console.log("Array of Param" + rolesparam);
-    industryService.findByName(params, (error, result) => {
+    let item:any={
+      'name':params,
+      'roles':JSON.parse(rolesparam),
+      'capabilities':JSON.parse(capabilityparam)
+    }
+    complexityService.findByName(item, (error, result) => {
       if (error) {
         next({
           reason: 'Error In Retriving',//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
-          message: "Error in Retriving",
-          code: 403
+          message: Messages.MSG_ERROR_WRONG_TOKEN,
+          code: 401
         });
       }
-      else if (result.length <= 0) {
-        res.status(403).send({message: "No records in Industry"});
-      }
       else {
-        let ids:string[] = new Array(0);
-        for (let role of result[0].roles) {
-          ids.push(new mongoose.Types.ObjectId(role));
-        }
-
-        roleService.retrieveByMultiIdsWithCapability(ids, rolesparam, (error, result) => {
-          if (error) {
-            next({
-              reason: 'Error In Retriving',//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
-              message: Messages.MSG_ERROR_WRONG_TOKEN,
-              code: 401
-            });
-          }
-          else {
-
-            console.log("result " + result);
-            let ids:string[] = new Array(0);
-            for (let role of result) {
-              for (let capability of role.capabilities) {
-                ids.push(new mongoose.Types.ObjectId(capability));
-              }
-            }
-            capabilityService.retrieveByMultiidsWithComplexity(ids, capabilityparam, (error, result) => {
-              if (error) {
-                next({
-                  reason: 'Error In Retriving',//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
-                  message: Messages.MSG_ERROR_WRONG_TOKEN,
-                  code: 401
-                });
-              }
-              else {
-                let ids:string[] = new Array(0);
-                for (let capability of result) {
-                  for (let complexity of capability.complexities) {
-                    ids.push(new mongoose.Types.ObjectId(complexity));
-                  }
-                }
-                complexityService.retrieveByMultiIds(ids, (error, result) => { // todo find better solution
-                  if (error) {
-                    next({
-                      reason: 'Error In Retriving',//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
-                      message: Messages.MSG_ERROR_WRONG_TOKEN,
-                      code: 401
-                    });
-                  }
-                  else {
-                    let sendItem:any = {};
-                    sendItem.data =new Array(result.length);
-                    for (let index=0;index< result.length;index++) {
-                      sendItem.data[index]={};
-                      sendItem.data[index].name=result[index].name;
-                      sendItem.data[index].scenario = new Array(0);
-                      scenarioService.retrieveByMultiIds(result[index].scenarios, (error, res) => {
-                        if (error) {
-                          next({
-                            reason: 'Error In Retriving',//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
-                            message: Messages.MSG_ERROR_WRONG_TOKEN,
-                            code: 401
-                          });
-                        }
-                        else {
-                          sendItem.data[index].scenario = res;
-                        }
-                      });
-                    }
-
-                    setTimeout(function () {
-                      res.send({
-                        "status": "success",
-                        "data": sendItem
-                      });
-                    }, 1000);
-                  }
-                });
-              }
-            });
-          }
+        res.send({
+          "status": "success",
+          "data": result
         });
       }
     });

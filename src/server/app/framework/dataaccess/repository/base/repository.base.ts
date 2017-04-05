@@ -125,6 +125,42 @@ class RepositoryBase<T extends mongoose.Document> implements IRead<T>, IWrite<T>
       }
     });
   }
+
+  findComplexities(item:any, callback:(error:any, result:T) => void) {
+    this.items = new Array(0);
+    this._model.find({"name": item.name},(err, industry)=> {
+      if (err) {
+        callback(err, null);
+      } else {
+        if (industry.length <= 0) {
+          callback(new Error("Records are not found"), null);
+        } else {
+          for (let role of industry[0].roles) {
+            for(let o of item.roles){
+              if(o==role.name){
+                for(let capability of role.capabilities){
+                  for(let ob of item.capabilities){
+                    if(ob == capability.name){
+                      for(let complexity of capability.complexities){
+                        let obj:any = {
+                          "_id": complexity._id,
+                          "name": complexity.name,
+                          "scenarios":complexity.scenarios
+                        };
+                        this.items.push(obj);
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+          callback(null, this.items);
+        }
+      }
+    });
+  }
+
 }
 
 export = RepositoryBase;
