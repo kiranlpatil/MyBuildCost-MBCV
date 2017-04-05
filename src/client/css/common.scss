@@ -2,7 +2,7 @@
 $white: #fff;
 $bg-notification-unread: #fafafa;
 $bg-wrapper: #f8f8f8;
-$loader-border: #f3f3f3;
+$loader-border: #d5d5d5;
 $header-bg: #e8e8e8;
 $border-color: #e8e8e8;
 $border-grey: #ccc;
@@ -114,11 +114,11 @@ main {
 
 // Page Loader
 .loader-container {
-  background: $background-black-alpha5;
-  height: 100vh;
-  left: 0;
-  position: fixed;
-  top: 0;
+  //background: $background-black-alpha5;
+  //height: 100vh;
+  //left: 0;
+  //position: fixed;
+  //top: 0;
   width: 100%;
   z-index: 9999;
 
@@ -127,11 +127,11 @@ main {
     border: 5px solid $loader-border;
     border-radius: 50%;
     height: 50px;
-    left: 50%;
-    margin-left: -25px;
-    margin-top: -25px;
+    right: 20px;
+    //margin-left: -25px;
+    //margin-top: -25px;
     position: fixed;
-    top: 50%;
+    bottom: 20px;
     vertical-align: middle;
     width: 50px;
   }
