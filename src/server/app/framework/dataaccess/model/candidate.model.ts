@@ -14,18 +14,20 @@ import EmployeeHistoryModel = require("./employee-history.model");
 import ProficiencyModel = require("./proficiency.model");
 import CapabilityModel = require("./capability.model");
 import RoleModel = require("./role.model");
+import CertificationModel = require("./certification.model");
+import AwardModel = require("./award.model");
 
 interface CandidateModel {
   isVisible : boolean;
   aboutMyself: string;
-  certifications : string[];
-  awards : string[];
+  certifications : CertificationModel[];
+  awards : AwardModel[];
   userId :  {type:mongoose.Schema.Types.ObjectId, ref:'User'};
   location: LocationModel;
   roles: RoleModel;
   academics :  AcademicModel[];
   professionalDetails :  ProfessionalDetailsModel[];
   employmentHistory : EmployeeHistoryModel[];
-  proficiencies : ProficiencyModel[];
+  proficiencies : string[];
 }
 export = CandidateModel;

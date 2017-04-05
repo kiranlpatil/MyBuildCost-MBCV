@@ -1,4 +1,4 @@
 interface ProficiencyModel {
-    name: string[];
+    name: string;
 }
 export = ProficiencyModel;

@@ -1,7 +1,7 @@
-interface CertificationModel {
+interface AwardModel {
     names: string;
     year : string;
     issuedBy : string;
     remark : string;
 }
-export = CertificationModel;
+export = AwardModel;

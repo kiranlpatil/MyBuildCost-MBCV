@@ -1,8 +1,8 @@
 interface EmployeeHistoryModel {
   companyName: string;
   designation : string;
-  from : Date;
-  to : Date;
+  from : string;
+  to : string;
   remarks : string;
 }
 export = EmployeeHistoryModel;
