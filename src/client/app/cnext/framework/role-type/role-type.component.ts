@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component ,OnInit} from '@angular/core';
 import { Message } from '../../../framework/shared/message';
 import { MessageService } from '../../../framework/shared/message.service';
 import { RoleTypeService } from './role-type.service';
@@ -11,7 +11,7 @@ import { TestService } from '../test.service';
   styleUrls: ['role-type.component.css']
 })
 
-export class RoleTypetListComponent {
+export class RoleTypetListComponent implements OnInit{
 
   private showModalStyle: boolean = false;
   private disbleRole: boolean = true;

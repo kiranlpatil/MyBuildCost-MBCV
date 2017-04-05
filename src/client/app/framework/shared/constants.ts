@@ -46,10 +46,10 @@ export class Messages {
     public static MSG_ERROR_UPLOAD_DOCUMENT:string = 'Failed to Upload Document';
     public static MSG_ERROR_CHANGE_THEME:string = 'Failed to Change Theme';
 
-    public static MSG_ERROR_TOKEN_SESSION:string = 'Session has been Expired';
-    public static MSG_ERROR_NETWORK:string = 'Please check your internet connection';
-    public static MSG_ERROR_SERVER_ERROR:string = 'Server error';
-    public static MSG_ERROR_SOMETHING_WRONG:string = 'Something is Wrong.Try again';
+    public static MSG_ERROR_TOKEN_SESSION:string = 'Session has been Expired.';
+    public static MSG_ERROR_NETWORK:string = 'Please check your internet connection.';
+    public static MSG_ERROR_SERVER_ERROR:string = 'Server error.';
+    public static MSG_ERROR_SOMETHING_WRONG:string = 'Check your internet connection and Try again.';
 
     public static MSG_ERROR_IMAGE_TYPE:string = 'Please select valid image type';
     public static MSG_ERROR_IMAGE_SIZE:string = 'Make sure image size is less than 500kb';

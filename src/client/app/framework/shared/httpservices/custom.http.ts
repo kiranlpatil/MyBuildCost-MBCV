@@ -46,7 +46,7 @@ export class CustomHttp extends Http {
          if(err.err_msg && err.err_code) {
            errorInstance.err_msg = err.err_msg;
            errorInstance.err_code = err.err_code;
-          //return Observable.throw(errorInstance);
+          return Observable.throw(errorInstance);
         } else if (err.status) {
           if (err.status === 401 || err.status === 403) {
             errorInstance.err_code = err.status;
@@ -61,12 +61,14 @@ export class CustomHttp extends Http {
 
             errorInstance.err_msg = JSON.parse(err._body).error.message;
           }
-         // return Observable.throw(errorInstance);
-        }
-        return Observable.throw(errorInstance);
+          return Observable.throw(errorInstance);
+        } else {
+           errorInstance.err_msg = Messages.MSG_ERROR_SOMETHING_WRONG;
+           errorInstance.err_code = err.status;
+           return Observable.throw(errorInstance);
 
+         }
       });
-
   }
 }
 

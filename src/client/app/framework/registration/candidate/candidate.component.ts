@@ -39,9 +39,9 @@ export class CandidateComponent implements OnInit {
   private error_msg: string;
   private isShowErrorMessage: boolean = true;
   private BODY_BACKGROUND:string;
-  yearList:string[]=this.dateservice.yearList;
   private passingyear:string;
   private isShowMessage:boolean=false;
+  yearList:string[]=this.dateservice.yearList;
   countries:string[]=new Array(0);
   states:string[]=new Array(0);
   cities:string[]=new Array(0);
