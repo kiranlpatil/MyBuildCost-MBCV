@@ -4,7 +4,7 @@ import { JobLocation } from '../model/job-location';
 import { JobLocationService } from './job-location.service';
 import { Message } from '../../../framework/shared/message';
 import { MessageService } from '../../../framework/shared/message.service';
-import { myJobLocationService } from '../myjob-location.service';
+import { MyJobLocationService } from '../myjob-location.service';
 
 @Component({
   moduleId: module.id,
@@ -14,18 +14,18 @@ import { myJobLocationService } from '../myjob-location.service';
 })
 
 export class JobLocationComponent implements OnInit {
+  pin:number;
   private jobLocationtion = new JobLocation();
   private storedcountry:string;
   private storedstate:string;
   private storedcity:string;
-   pin:number;
   private locationDetails : any;
   private countries:string[]=new Array();
   private  states:string[]=new Array();
   private cities:string[]=new Array();
 
   constructor(private joblocationService:JobLocationService,
-              private myjoblocationService:myJobLocationService,
+              private myjoblocationService:MyJobLocationService,
               private messageService: MessageService
                ) {
   }
@@ -82,7 +82,6 @@ export class JobLocationComponent implements OnInit {
     this.storedcity=city;
     this.jobLocationtion.city=city;
   }
-  
   isPinSelected(pin:any) {
     this.jobLocationtion.pin=pin;
     this.myjoblocationService.change(this.jobLocationtion);

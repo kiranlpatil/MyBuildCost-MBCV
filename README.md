@@ -9,7 +9,8 @@ pre for seed Requirements:-     1. latest node version
                                 3. mongodb
 
 steps: 1.npm install    //npm install --unsafe -perm
-       2.typings install
+       2.typings install (1) for install specific package defination -----> typings install dt~mongoose --save --global
+                                   (2)for the installation of specific type file---> sudo npm install --save @types/crypto-js 
        3.start mongodb:  1. ~mongod
        4.For Development Environment:
                             1. ~npm start

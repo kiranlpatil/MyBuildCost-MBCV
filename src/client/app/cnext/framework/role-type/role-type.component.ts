@@ -1,4 +1,4 @@
-import { Component ,OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Message } from '../../../framework/shared/message';
 import { MessageService } from '../../../framework/shared/message.service';
 import { RoleTypeService } from './role-type.service';
@@ -11,17 +11,13 @@ import { TestService } from '../test.service';
   styleUrls: ['role-type.component.css']
 })
 
-export class RoleTypetListComponent implements OnInit{
+export class RoleTypetListComponent implements OnInit {
 
   private showModalStyle: boolean = false;
   private disbleRole: boolean = true;
   private disbleButton: boolean = false;
   private disableIndustry: boolean = false;
   private roleTypes:string[]=new Array();
-
-
-
-
   constructor(private roleTypeService: RoleTypeService, private messageService:MessageService , private testService : TestService) {
   }
 
@@ -63,8 +59,7 @@ export class RoleTypetListComponent implements OnInit{
     }
   }
   selectIndustryModel(event:string) {
-
+console.log('event');
 
   }
-
 }

@@ -65,7 +65,7 @@ import {  RecruitingService  } from './framework/shared/recruiting.service';
 import { ProfilePictureComponent } from './cnext/framework/profile-picture/profile-picture.component';
 import { ProfileCreatorComponent } from './cnext/framework/profile-creator/profile-creator.component';
 import { CapabilityListComponent } from './cnext/framework/capability-list/capability-list.component';
-import { proficiencyDomainComponent } from './cnext/framework/proficiency-domains/proficiency-domain.component';
+import { ProficiencyDomainComponent } from './cnext/framework/proficiency-domains/proficiency-domain.component';
 import { ComplexityListComponent } from './cnext/framework/complexity-list/complexity-list.component';
 import { MainHeaderComponent } from './framework/main-header/main-header.component';
 import { ComplexityService } from './cnext/framework/complexity.service';
@@ -83,7 +83,7 @@ import { JobInformationComponent } from './cnext/framework/job-information/job-i
 import { JobRequirementComponent } from './cnext/framework/job-requirement/job-requirement.component';
 import { JobLocationComponent } from './cnext/framework/job-location/job-location.component';
 import { DescriptionFieldComponent } from './cnext/framework/description-field/description-field.component';
-import { proficiencyDomainService } from './cnext/framework/proficiency-domains/proficiency-domain.service';
+import { ProficiencyDomainService } from './cnext/framework/proficiency-domains/proficiency-domain.service';
 import { MyRoleService } from './cnext/framework/role-service';
 import { MyIndustryService } from './cnext/framework/industry-service';
 import { CapabilityListService } from './cnext/framework/capability-list/capability-list.service';
@@ -103,23 +103,22 @@ import { AwardService } from './cnext/framework/award-service';
 import { JobLocationService } from './cnext/framework/job-location/job-location.service';
 import { SingleSelectListComponent } from './cnext/framework/single-select-list/single-select-list.component';
 import { MultiSelectListComponent } from './cnext/framework/multi-select-list/multi-select-list.component';
-import { myJobLocationService } from './cnext/framework/myjob-location.service';
-import { myJobPostcapabilityService } from './cnext/framework/jobpost-capabilities.service';
+import { MyJobLocationService } from './cnext/framework/myjob-location.service';
+import { MyJobPostcapabilityService } from './cnext/framework/jobpost-capabilities.service';
 import { JonPostDescriptionService } from './cnext/framework/job-post-description.service';
 import { JobPostComplexityService } from './cnext/framework/job-post-complexity.service';
 import { JobPostProficiencyService } from './cnext/framework/jobPostProficiency.service';
-import { myRoleListTestService } from './cnext/framework/myRolelist.service';
+import { MyRoleListTestService } from './cnext/framework/myRolelist.service';
 import { RoleListComponent } from './cnext/framework/role-list/role-list.component';
 import { RoleTypetListComponent } from './cnext/framework/role-type/role-type.component';
-import { myRoTypeTestService } from './cnext/framework/myRole-Type.service';
+import { MyRoTypeTestService } from './cnext/framework/myRole-Type.service';
 import { RoleTypeService } from './cnext/framework/role-type/role-type.service';
 import { IndustryExperienceListComponent } from './cnext/framework/industry-experience/industry-experience.component';
 import { IndustryExperienceService } from './cnext/framework/industry-experience/industry-experience.service';
 import { DisableTestService } from './cnext/framework/disable-service';
-import {MyJobInformationService} from "./cnext/framework/myJobInformation.service";
-import {JobRequirementService} from "./cnext/framework/myJobRequirement.service";
-import {MYJobTitleService} from "./cnext/framework/myJobTitle.service";
-
+import { MyJobInformationService } from './cnext/framework/myJobInformation.service';
+import { JobRequirementService } from './cnext/framework/myJobRequirement.service';
+import { MYJobTitleService } from './cnext/framework/myJobTitle.service';
 
 @NgModule({
   imports: [
@@ -166,7 +165,7 @@ import {MYJobTitleService} from "./cnext/framework/myJobTitle.service";
     ProfilePictureComponent,
     ProfileCreatorComponent,
     CapabilityListComponent,
-    proficiencyDomainComponent,
+    ProficiencyDomainComponent,
     IndustryListComponent,
     ComplexityListComponent,
     JobPosterComponent,
@@ -242,20 +241,20 @@ import {MYJobTitleService} from "./cnext/framework/myJobTitle.service";
     EducationalService,
     ProfessionalDataService,
     EmploymentHistoryService,
-    proficiencyDomainService,
+    ProficiencyDomainService,
     CompanyDetailsService,
     EmploymentHistoryService,
     DateService,
     MyJobRequirementService,
     MyJobInformationService,
     JobRequirementService,
-    myJobLocationService,
-    myJobPostcapabilityService,
+    MyJobLocationService,
+    MyJobPostcapabilityService,
     JonPostDescriptionService,
     JobPostComplexityService,
     JobPostProficiencyService,
-    myRoleListTestService,
-    myRoTypeTestService,
+    MyRoleListTestService,
+    MyRoTypeTestService,
     RoleTypeService,
     IndustryExperienceService,
     DisableTestService,

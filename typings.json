@@ -4,6 +4,7 @@
   },
   "devDependencies": {},
   "globalDependencies": {
-    "fbsdk": "registry:dt/fbsdk#0.0.0+20161003164619"
+    "fbsdk": "registry:dt/fbsdk#0.0.0+20161003164619",
+    "mongoose": "registry:dt/mongoose#4.7.0+20170322192047"
   }
 }

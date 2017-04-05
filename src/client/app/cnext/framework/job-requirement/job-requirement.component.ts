@@ -5,7 +5,7 @@ import {  IndustryListService  } from '../industry-list/industry-list.service';
 import {  Message  } from '../../../framework/shared/message';
 import {  MyJobRequirementService  } from '../jobrequirement-service';
 import {  ProfessionalDataService  } from '../professional-data/professional-data.service';
-import {JobRequirementService} from "../myJobRequirement.service";
+import { JobRequirementService } from '../myJobRequirement.service';
 
 
 @Component({
@@ -47,7 +47,7 @@ export class JobRequirementComponent implements OnInit {
     this.professionaldataservice.getEducationList()
       .subscribe(
         data=> { this.onEducationListSuccess(data);},
-        error =>{ this.onError(error);});
+        error => { this.onError(error);});
   }
 
 
@@ -55,13 +55,11 @@ export class JobRequirementComponent implements OnInit {
     this.storedIndustry = industry;
     this.industryModel = industry;
     this.jobRequirement.industry = this.industryModel;
-    
     this.industryService.getRoles(industry)
       .subscribe(
         (rolelist:any) => this.onRoleListSuccess(rolelist.data),
         (error:any) => this.onError(error));
   }
-  
   onRoleListSuccess(data:any) {
     for(let role of data) {
       this.roles.push(role.name);
@@ -100,7 +98,7 @@ export class JobRequirementComponent implements OnInit {
     this.professionaldataservice.getCurrentSalaryList()
       .subscribe(
         data=> { this.onCurrentSalaryListSuccess(data);},
-        error =>{ this.onError(error);});
+        error => { this.onError(error);});
 
   }
 
@@ -109,7 +107,6 @@ export class JobRequirementComponent implements OnInit {
     for(let k of data.salary ) {
       this.salarylist.push(k);
     }
-
   }
   selectsalaryModel(salary: any) {
     this.salaryModel = salary;
@@ -119,7 +116,6 @@ export class JobRequirementComponent implements OnInit {
         data => { this.onGetNoticePeriodListSuccess(data);},
         error => { this.onError(error);});
   }
-  
   onGetNoticePeriodListSuccess(data:any) {
     for(let k of data.noticeperiod) {
       this.noticeperiodlist.push(k);

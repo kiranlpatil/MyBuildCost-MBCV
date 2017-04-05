@@ -1,5 +1,3 @@
 export class JobTitle {
-  title : string="";
-
-
+  title : string='';
 }

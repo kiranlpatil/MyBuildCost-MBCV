@@ -7,10 +7,10 @@ import {  Subject  } from 'rxjs/Subject';
 export class JobPostProficiencyService  {
 
   // Observable string sources
-  private _showJobPostProficiencySource = new Subject<any>();
+   _showJobPostProficiencySource = new Subject<any>();
 
   // Observable string streams
-  showTestJobPostProficiency$ = this._showJobPostProficiencySource.asObservable();
+   showTestJobPostProficiency$ = this._showJobPostProficiencySource.asObservable();
 
   // Service message commands
   change(value:any) {

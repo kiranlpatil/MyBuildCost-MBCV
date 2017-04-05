@@ -1,5 +1,4 @@
 import {   Component  } from '@angular/core';
-import {  FormGroup } from '@angular/forms';
 import {  Academicdetails  } from './academic-details';
 import {  ValueConstant  } from '../../../framework/shared/constants';
 import {  EducationalService  } from '../educational-service';

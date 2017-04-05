@@ -1,6 +1,4 @@
-/**
- * Created by techprimelab on 3/9/2017.
- */
+
 import {  Component,OnInit  } from '@angular/core';
 import {  Router  } from '@angular/router';
 import {  CandidateService  } from './candidate.service';
@@ -28,6 +26,11 @@ import { DateService  } from '../../../cnext/framework/date.service';
 })
 
 export class CandidateComponent implements OnInit {
+  yearList:string[]=this.dateservice.yearList;
+  countries:string[]=new Array(0);
+  states:string[]=new Array(0);
+  cities:string[]=new Array(0);
+  myPassword:string='';
   private model = new Candidate();
   private storedcountry:string;
   private storedstate:string;
@@ -41,12 +44,6 @@ export class CandidateComponent implements OnInit {
   private BODY_BACKGROUND:string;
   private passingyear:string;
   private isShowMessage:boolean=false;
-  yearList:string[]=this.dateservice.yearList;
-  countries:string[]=new Array(0);
-  states:string[]=new Array(0);
-  cities:string[]=new Array(0);
-  myPassword:string='';
-
   constructor(private commanService: CommonService, private _router: Router, private http: Http,private dateservice:DateService,
               private candidateService: CandidateService, private messageService: MessageService, private formBuilder: FormBuilder, private loaderService:LoaderService) {
 

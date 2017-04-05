@@ -5,10 +5,10 @@ import {  Subject  } from 'rxjs/Subject';
 export class EducationalService {
 
   // Observable string sources
-  private _showEducationalSource = new Subject<boolean>();
+   _showEducationalSource = new Subject<boolean>();
 
   // Observable string streams
-  showTest$ = this._showEducationalSource.asObservable();
+   showTest$ = this._showEducationalSource.asObservable();
 
   // Service message commands
   change(isAnswerTrue: boolean) {

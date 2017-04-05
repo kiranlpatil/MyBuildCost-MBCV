@@ -8,7 +8,7 @@ export class ProfessionalService {
    _showProfessionalSource = new Subject<boolean>();
 
   // Observable string streams
-  showTest$ = this._showProfessionalSource.asObservable();
+   showTest$ = this._showProfessionalSource.asObservable();
 
   // Service message commands
   change(isAnswerTrue: boolean) {

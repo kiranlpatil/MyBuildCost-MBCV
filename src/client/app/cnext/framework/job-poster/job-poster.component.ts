@@ -6,14 +6,14 @@ import { Router } from '@angular/router';
 import { JobInformation } from '../model/job-information';
 import { JobRequirement } from '../model/job-requirement';
 import { JobLocation } from '../model/job-location';
-import { myJobLocationService } from '../myjob-location.service';
-import { myJobPostcapabilityService } from '../jobpost-capabilities.service';
+import { MyJobLocationService } from '../myjob-location.service';
+import { MyJobPostcapabilityService } from '../jobpost-capabilities.service';
 import { JonPostDescriptionService } from '../job-post-description.service';
 import { JobPostComplexityService } from '../job-post-complexity.service';
 import { Description } from '../model/description';
 import { JobPostProficiencyService } from '../jobPostProficiency.service';
-import {MyJobInformationService} from "../myJobInformation.service";
-import {JobRequirementService} from "../myJobRequirement.service";
+import { MyJobInformationService } from '../myJobInformation.service';
+import { JobRequirementService } from '../myJobRequirement.service';
 
 
 @Component({
@@ -24,20 +24,19 @@ import {JobRequirementService} from "../myJobRequirement.service";
 })
 
 export class JobPosterComponent {
-
+  descModel:Description[]=new Array();
   private jobInformation=new JobInformation();
   private jobRequirement=new JobRequirement();
   private jobLocation=new JobLocation();
   private capabilityIds :string[]=new Array();
   private complexities :string[]=new Array();
   private proficiency :string[]=new Array();
-  descModel:Description[]=new Array();
   private model=new Description();
   constructor(private _router:Router,
               private jobinformation:MyJobInformationService,
               private jobrequirement:JobRequirementService,
-              private myjoblocationService:myJobLocationService,
-              private jobpostcapability:myJobPostcapabilityService,
+              private myjoblocationService:MyJobLocationService,
+              private jobpostcapability:MyJobPostcapabilityService,
               private jobPostDescription:JonPostDescriptionService ,
               private jobPostComplexiyservice:JobPostComplexityService,
               private jobPostProficiency:JobPostProficiencyService) {

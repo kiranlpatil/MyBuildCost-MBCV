@@ -8,7 +8,7 @@ export class TestService {
    _showTestSource = new Subject<boolean>();
 
   // Observable string streams
-  showTest$ = this._showTestSource.asObservable();
+   showTest$ = this._showTestSource.asObservable();
 
   // Service message commands
   change(isAnswerTrue: boolean) {

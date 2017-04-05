@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { IndustryListService } from './industry-list.service';
-import { TestService } from '../test.service';
 import { MyIndustryService } from '../industry-service';
 import { MyRoleService } from '../role-service';
 import { Message } from '../../../framework/shared/message';
 import { MessageService } from '../../../framework/shared/message.service';
 import { IndustryList } from '../model/industryList';
-import { myRoleListTestService } from '../myRolelist.service';
+import { MyRoleListTestService } from '../myRolelist.service';
 import { DisableTestService } from '../disable-service';
-import {MYJobTitleService} from "../myJobTitle.service";
+import { MYJobTitleService } from '../myJobTitle.service';
 
 @Component({
   moduleId: module.id,
@@ -17,7 +16,7 @@ import {MYJobTitleService} from "../myJobTitle.service";
   styleUrls: ['industry-list.component.css']
 })
 
-export class IndustryListComponent implements OnInit{
+export class IndustryListComponent implements OnInit {
   private industryNames :string[]=new Array();
   private storedRoles :string[] =new Array();
   private industryData:any;
@@ -31,13 +30,11 @@ export class IndustryListComponent implements OnInit{
   private storedindustry:string;
   private isTitleFilled:boolean=true;
   private isShowRequired:boolean=true;
-  private title:string="";
+  private title:string='';
 
 
-  constructor(private industryService: IndustryListService, private myindustryService : MyIndustryService,private myRolelist:myRoleListTestService,
-              private roleService : MyRoleService, private messageService:MessageService , private disableService:DisableTestService,
-              private jobtitleservice:MYJobTitleService,
-              ) {
+  constructor(private industryService: IndustryListService, private myindustryService : MyIndustryService,private myRolelist:MyRoleListTestService,
+              private roleService : MyRoleService, private jobtitleservice:MYJobTitleService,private messageService:MessageService , private disableService:DisableTestService) {
 
   }
 
@@ -49,9 +46,8 @@ export class IndustryListComponent implements OnInit{
 
 
     this.jobtitleservice.showTestTitle$.subscribe(
-      data=>{
+      data => {
         this.title=data;
-
       }
     );
   }
@@ -126,18 +122,15 @@ export class IndustryListComponent implements OnInit{
   };
 
   showHideModal() {
-    if(this.title===""){
+    if(this.title==='') {
       this.isTitleFilled=false;
-    }else{
+    } else {
       this.isShowRequired=false;
       this.isTitleFilled=true;
-
-
       this.showModalStyle = !this.showModalStyle;
     }
   }
-
-  disableIndustrires(){
+  disableIndustrires() {
     this.myindustryService.change(this.storedindustry);
 
     this.disableService.change(true);
@@ -149,7 +142,6 @@ export class IndustryListComponent implements OnInit{
       this.disableIndustry = true;
       this.createAndSave();
       this.roleService.change(this.storedRoles);
-
   }
 
   getStyleModal() {

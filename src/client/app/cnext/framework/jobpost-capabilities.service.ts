@@ -5,13 +5,13 @@ import {  Subject  } from 'rxjs/Subject';
 
 
 @Injectable()
-export class myJobPostcapabilityService  {
+export class MyJobPostcapabilityService  {
 
   // Observable string sources
-  private _showJobCpabilitiesSource = new Subject<any>();
+   _showJobCpabilitiesSource = new Subject<any>();
 
   // Observable string streams
-  showTestCapability$ = this._showJobCpabilitiesSource.asObservable();
+   showTestCapability$ = this._showJobCpabilitiesSource.asObservable();
 
   // Service message commands
   change(value:any) {

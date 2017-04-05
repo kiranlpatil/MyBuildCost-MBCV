@@ -3,7 +3,7 @@ import { ValueConstant } from '../../../framework/shared/constants';
 import { ProficiencyService } from '../proficience.service';
 import { MessageService } from '../../../framework/shared/message.service';
 import { Message } from '../../../framework/shared/message';
-import { proficiencyDomainService } from './proficiency-domain.service';
+import { ProficiencyDomainService } from './proficiency-domain.service';
 import { JobPostProficiencyService } from '../jobPostProficiency.service';
 
 @Component({
@@ -13,7 +13,7 @@ import { JobPostProficiencyService } from '../jobPostProficiency.service';
   styleUrls: ['proficiency-domain.component.css']
 })
 
-export class proficiencyDomainComponent implements OnInit {
+export class ProficiencyDomainComponent implements OnInit {
   @Input('type') type : string;
   private selectedproficiencies=new Array();
   private storedProficiency = new Array();
@@ -24,7 +24,7 @@ export class proficiencyDomainComponent implements OnInit {
   private isProficiencyShow:boolean =false;
 
   constructor(private proficiencyService: ProficiencyService,
-              private proficiencydoaminService: proficiencyDomainService,
+              private proficiencydoaminService: ProficiencyDomainService,
               private messageService:MessageService,
               private JobPostProficiency:JobPostProficiencyService) {
 

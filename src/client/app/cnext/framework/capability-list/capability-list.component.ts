@@ -10,7 +10,7 @@ import { MyCapabilityService } from '../capability-service';
 import { LocalStorageService } from '../../../framework/shared/localstorage.service';
 import { MyJobRequirementService } from '../jobrequirement-service';
 import { Message } from '../../../framework/shared/message';
-import { myJobPostcapabilityService } from '../jobpost-capabilities.service';
+import { MyJobPostcapabilityService } from '../jobpost-capabilities.service';
 
 @Component({
   moduleId: module.id,
@@ -40,7 +40,7 @@ export class CapabilityListComponent implements OnInit  {
               private capabilityListServive:CapabilityListService,
               private myCapabilityListService:MyCapabilityService,
               private myJobrequirementService :MyJobRequirementService,
-              private jobpostcapability:myJobPostcapabilityService
+              private jobpostcapability:MyJobPostcapabilityService
   ) {
 
     testService.showTest$.subscribe(

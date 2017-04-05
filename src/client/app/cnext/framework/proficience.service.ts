@@ -8,7 +8,7 @@ export class ProficiencyService {
    _showProfeciencySource = new Subject<boolean>();
 
   // Observable string streams
-  showTest$ = this._showProfeciencySource.asObservable();
+   showTest$ = this._showProfeciencySource.asObservable();
 
   // Service message commands
   change(isAnswerTrue: boolean) {

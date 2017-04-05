@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { TestService } from "../test.service";
-import { MyIndustryService } from "../industry-service";
-import { MyRoleService } from "../role-service";
+import { TestService } from '../test.service';
+import { MyIndustryService } from '../industry-service';
+import { MyRoleService } from '../role-service';
 import { Message } from '../../../framework/shared/message';
 import { MessageService } from '../../../framework/shared/message.service';
 import { IndustryList } from '../model/industryList';
-import { myRoleListTestService } from '../myRolelist.service';
+import { MyRoleListTestService } from '../myRolelist.service';
 import { IndustryExperienceService } from './industry-experience.service';
 
 @Component({
@@ -15,7 +15,7 @@ import { IndustryExperienceService } from './industry-experience.service';
   styleUrls: ['industry-experience.component.css']
 })
 
-export class IndustryExperienceListComponent implements OnInit{
+export class IndustryExperienceListComponent implements OnInit {
   private industryNames :string[]=new Array();
   private storedRoles :string[] =new Array();
   private industryData:any;
@@ -26,10 +26,9 @@ export class IndustryExperienceListComponent implements OnInit{
   private disbleButton: boolean = true;
   private disableIndustry: boolean = false;
   private industryRoles=new IndustryList();
-
   constructor(private industryService: IndustryExperienceService, private myindustryService : MyIndustryService,
               private roleService : MyRoleService, private messageService:MessageService , private testService : TestService,
-              private myRolelist :myRoleListTestService) {
+              private myRolelist :MyRoleListTestService) {
 
   }
 
@@ -42,12 +41,12 @@ export class IndustryExperienceListComponent implements OnInit{
 
   onIndustryListSuccess(data:any) {
     this.industryData=data;
-    for(let industry of data){
+    for(let industry of data) {
       this.industryNames.push(industry.name);
     }
   }
 
-  onError(error:any){
+  onError(error:any) {
     var message = new Message();
     message.error_msg = error.err_msg;
     message.isError = true;
@@ -61,23 +60,23 @@ export class IndustryExperienceListComponent implements OnInit{
 
   }
 
-  searchIndustryId(industryName:string){
-    for(let industry of this.industryData){
-      if(industry.name===industryName){
+  searchIndustryId(industryName:string) {
+    for(let industry of this.industryData) {
+      if(industry.name===industryName) {
         this.industryRoles.industry=industry._id;
       }
     }
   }
 
-  searchRolesId(roleName:any){
-    for(let role of this.rolesData){
-      if(role.name===roleName){
+  searchRolesId(roleName:any) {
+    for(let role of this.rolesData) {
+      if(role.name===roleName) {
         this.industryRoles.roles.push(role._id);
       }
     }
   }
 
-  onRoleListSuccess(data:any){
+  onRoleListSuccess(data:any) {
     this.rolesData=data;
     for(let role of data){
       this.roleNames.push(role.name);
@@ -87,8 +86,7 @@ export class IndustryExperienceListComponent implements OnInit{
   selectRolesModel(roleName: string) {
     if(roleName === 'u can select max ') {
       console.log('u can select max ');
-    }
-    else {
+    } else {
       this.disbleButton = false;
       this.storedRoles.push(roleName);
       this.searchRolesId(roleName);

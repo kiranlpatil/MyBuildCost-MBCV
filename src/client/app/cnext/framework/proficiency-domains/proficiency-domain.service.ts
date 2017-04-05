@@ -5,7 +5,7 @@ import { BaseService } from '../../../framework/shared/httpservices/base.service
 import { API } from '../../../framework/shared/constants';
 
 @Injectable()
-export class proficiencyDomainService extends BaseService {
+export class ProficiencyDomainService extends BaseService {
 
   constructor(private http: Http) {
     super();

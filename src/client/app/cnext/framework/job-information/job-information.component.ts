@@ -1,7 +1,7 @@
 
 import {  Component  } from '@angular/core';
 import {  JobInformation  } from '../model/job-information';
-import {MyJobInformationService} from "../myJobInformation.service";
+import { MyJobInformationService } from '../myJobInformation.service';
 
 
 
@@ -17,9 +17,6 @@ export class JobInformationComponent {
 
   constructor(private joninformationservice:MyJobInformationService) {
   }
-
-  
-
   isJobTitleSelected(job:any) {
     this.jobInformation.jobTitle=job;
   }

@@ -10,7 +10,7 @@ import { Description } from '../model/description';
   styleUrls: ['description-field.component.css']
 })
 
-export class DescriptionFieldComponent implements OnInit{
+export class DescriptionFieldComponent implements OnInit {
   @Input('type') type : string;
   @Input('maxLength') maxLength :number;
 
@@ -23,9 +23,7 @@ export class DescriptionFieldComponent implements OnInit{
  private tempType:string;
  private tempdetail:string;
  private model=new Description();
-
  private remainingWords:number;
-  
   constructor(private jobPostDescription:JonPostDescriptionService) {
 
   }

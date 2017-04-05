@@ -9,13 +9,11 @@ import { ProficiencyService } from '../proficience.service';
 import { ProfessionalService } from '../professional-service';
 import { EducationalService } from '../educational-service';
 import { AwardService } from '../award-service';
-import { myRoleListTestService } from '../myRolelist.service';
-//import { MyRoleService } from '../role-service';
-import { myRoTypeTestService } from '../myRole-Type.service';
-import { DisableTestService } from "../disable-service";
-import {JobTitle} from "../model/jobTitle";
-import {MYJobTitleService} from "../myJobTitle.service";
-
+import { MyRoleListTestService } from '../myRolelist.service';
+import { MyRoTypeTestService } from '../myRole-Type.service';
+import { DisableTestService } from '../disable-service';
+import { JobTitle } from '../model/jobTitle';
+import { MYJobTitleService } from '../myJobTitle.service';
 
 @Component({
   moduleId: module.id,
@@ -25,7 +23,11 @@ import {MYJobTitleService} from "../myJobTitle.service";
 })
 
 export class ProfileCreatorComponent implements OnInit {
-  private fullName: string;private firstName: string;private lastName: string;
+  protected  selectedvalue1:string;
+  protected selectedvalue2:string;
+  private fullName: string;
+  private firstName: string;
+  private lastName: string;
   private   newUser:number;
   private  chkEmployeeHistory:boolean=false;
   private valueOFshowOrHide:string;
@@ -39,12 +41,8 @@ export class ProfileCreatorComponent implements OnInit {
   private isRolesShow:boolean=false;
   private showfield:boolean=false;
   private isRoleTypeShow:boolean=false;
-  private title:string="";
+  private title:string='';
   private jobTitle=new JobTitle();
-
-  protected  selectedvalue1:string;
-  protected selectedvalue2:string;
-
   constructor(private _router:Router,
               private dashboardService:DashboardService,
               private testService : TestService,
@@ -52,15 +50,12 @@ export class ProfileCreatorComponent implements OnInit {
               private professionalService : ProfessionalService,
               private educationalService : EducationalService,
               private complexityService : ComplexityService,
-              private myRoleType:myRoTypeTestService,
-              private jobtitleservice:MYJobTitleService,
-              private awardService: AwardService,private myRolelist :myRoleListTestService,private disableService:DisableTestService) {
+              private myRoleType:MyRoTypeTestService,
+              private awardService: AwardService, private myRolelist : MyRoleListTestService, private disableService: DisableTestService, private jobtitleservice: MYJobTitleService ) {
 
     this.myRolelist.showTestRolelist$.subscribe(
       data => {
         this.isRolesShow=data;
-
-
       }
     );
 
@@ -175,16 +170,13 @@ export class ProfileCreatorComponent implements OnInit {
     LocalStorageService.setLocalValue(LocalStorage.IS_LOGED_IN, 0);
     this._router.navigate([NavigationRoutes.APP_START]);
   }
-  onSubmit(){
-
-
+  onSubmit() {
+  console.log('here');
   }
-
-  selectedtitle(title:string){
+  selectedtitle(title:string) {
      this.title=title;
      this.jobTitle.title=this.title;
-this.jobtitleservice.change( this.jobTitle.title);
-
+     this.jobtitleservice.change( this.jobTitle.title);
   }
 
 }

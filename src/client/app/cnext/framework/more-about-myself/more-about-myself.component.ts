@@ -18,15 +18,12 @@ export class MoreAboutMyselfComponent implements OnInit {
   private wordsTillNow:number;
   private remainingWords:number;
   private maxword:number;
-  
   constructor() {
     this.reSize = new Array(1);
   }
-  
   ngOnInit() {
     this.remainingWords=this.maxLength;
   }
-  
   wordCount(event:any) {
    this.newstringOne= this. aboutMyself.split(' ');
     this.newstringTwo= this. aboutMyself.split('.');
@@ -37,7 +34,6 @@ export class MoreAboutMyselfComponent implements OnInit {
       this. maxword=this.aboutMyself.length;
     }
   }
-  
   addAnother() {
     this.reSize.push('null');
   }

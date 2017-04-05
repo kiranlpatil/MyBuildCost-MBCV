@@ -12,7 +12,6 @@ export class IndustryListService extends BaseService {
   constructor(private http: Http) {
     super();
   }
-  
   addIndustryProfile(industryprofile:any):Observable<any> {
     let headers = new Headers({ 'Content-Type': 'application/json'});
     let options = new RequestOptions({ headers: headers });

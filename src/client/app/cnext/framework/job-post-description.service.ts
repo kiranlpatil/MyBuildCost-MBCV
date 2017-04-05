@@ -5,10 +5,10 @@ import {  Subject  } from 'rxjs/Subject';
 export class JonPostDescriptionService {
 
   // Observable string sources
-  private _showTesDescriptionSource = new Subject<any>();
+   _showTesDescriptionSource = new Subject<any>();
 
   // Observable string streams
-  showTestJobPostDesc$ = this._showTesDescriptionSource.asObservable();
+   showTestJobPostDesc$ = this._showTesDescriptionSource.asObservable();
 
   // Service message commands
   change(desc: any) {

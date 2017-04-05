@@ -2,7 +2,6 @@
 import {   Component  } from '@angular/core';
 import { EmployementHistory } from '../model/employment-history';
 import { ValueConstant } from '../../../framework/shared/constants';
-import { EducationalService } from '../educational-service';
 
 @Component({
   moduleId: module.id,
@@ -12,7 +11,8 @@ import { EducationalService } from '../educational-service';
 })
 
 export class EmploymentHistoryComponent {
-
+  error_msg: string;
+  monthList = new Array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December');
   private tempCompanyName:string='';
   private toYearModel:string;
   private isShowYearMessage:boolean=false;
@@ -29,11 +29,8 @@ export class EmploymentHistoryComponent {
   private year: any;
   private currentDate: any;
   private yearList = new Array();
-  error_msg: string;
-
   constructor() {
     this.tempfield = new Array(1);
-
     this.currentDate = new Date();
     this.year = this.currentDate.getUTCFullYear();
     this.createYearList(this.year);
@@ -96,7 +93,6 @@ export class EmploymentHistoryComponent {
       this.tempWorkedToYear=newval;
     }
   }
-  
   addAnother() {
     if(this.tempCompanyName==='' || this.tempDesignation==='' ||
       this.tempWorkedToMonth==='' || this.tempWorkedToYear==='' ||

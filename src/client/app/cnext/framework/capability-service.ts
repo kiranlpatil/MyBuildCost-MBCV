@@ -5,10 +5,10 @@ import {  Subject  } from 'rxjs/Subject';
 export class MyCapabilityService {
 
   // Observable string sources
-  private _showCapabilitySource = new Subject<Array<string>>();
+   _showCapabilitySource = new Subject<Array<string>>();
 
   // Observable string streams
-  showTest$ = this._showCapabilitySource.asObservable();
+   showTest$ = this._showCapabilitySource.asObservable();
 
   // Service message commands
   change(value: Array<string>) {

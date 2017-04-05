@@ -11,8 +11,7 @@ export class IndustryExperienceService extends BaseService {
   constructor(private http: Http) {
     super();
   }
-  
-  addIndustryProfile(industryprofile:any):Observable<any>{
+  addIndustryProfile(industryprofile:any):Observable<any> {
     let headers = new Headers({ 'Content-Type': 'application/json'});
     let options = new RequestOptions({ headers: headers });
     let body = JSON.stringify(industryprofile);

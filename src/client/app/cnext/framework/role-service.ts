@@ -8,7 +8,7 @@ export class MyRoleService {
    _showRoleSource = new Subject<Array<string>>();
 
   // Observable string streams
-  showTest$ = this._showRoleSource.asObservable();
+   showTest$ = this._showRoleSource.asObservable();
 
   // Service message commands
   change(value: Array<string>) {

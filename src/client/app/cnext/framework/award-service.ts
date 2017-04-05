@@ -1,11 +1,11 @@
-import {   Injectable  } from '@angular/core';
-import {  Subject  } from 'rxjs/Subject';
+import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs/Subject';
 
 @Injectable()
 export class AwardService {
 
   // Observable string sources
-  private _showAwardSource = new Subject<boolean>();
+   _showAwardSource = new Subject<boolean>();
 
   // Observable string streams
   showTest$ = this._showAwardSource.asObservable();

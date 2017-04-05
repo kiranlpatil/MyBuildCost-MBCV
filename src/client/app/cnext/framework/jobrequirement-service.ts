@@ -5,10 +5,10 @@ import {  Subject  } from 'rxjs/Subject';
 export class MyJobRequirementService {
 
   // Observable string sources
-  private _showCapabilitySource = new Subject<any>();
+   _showCapabilitySource = new Subject<any>();
 
   // Observable string streams
-  showTest$ = this._showCapabilitySource.asObservable();
+   showTest$ = this._showCapabilitySource.asObservable();
 
   // Service message commands
   change(value: any) {
