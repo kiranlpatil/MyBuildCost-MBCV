@@ -7,14 +7,13 @@ import { MyJobInformationService } from '../job-information/job-information.serv
 import { JobInformation } from '../model/job-information';
 import { JobRequirement } from '../model/job-requirement';
 import { JobRequirementService } from '../job-requirement/job-requirement.service';
-import { JobLocationService } from '../job-location/job-location.service';
 import { JobLocation } from '../model/job-location';
 import { myJobLocationService } from '../myjob-location.service';
 import { myJobPostcapabilityService } from '../jobpost-capabilities.service';
 import { JonPostDescriptionService } from '../job-post-description.service';
 import { JobPostComplexityService } from '../job-post-complexity.service';
-import { description } from '../model/description';
-import { JobPostProficiencyService } from "../jobPostProficiency.service";
+import { Description } from '../model/description';
+import { JobPostProficiencyService } from '../jobPostProficiency.service';
 
 
 @Component({
@@ -32,8 +31,8 @@ export class JobPosterComponent {
   private capabilityIds :string[]=new Array();
   private complexities :string[]=new Array();
   private proficiency :string[]=new Array();
-  private descModel:description[]=new Array();
-  private model=new description();
+  descModel:Description[]=new Array();
+  private model=new Description();
   constructor(private _router:Router,
               private jobinformation:MyJobInformationService,
               private jobrequirement:JobRequirementService,
@@ -43,67 +42,57 @@ export class JobPosterComponent {
               private jobPostComplexiyservice:JobPostComplexityService,
               private jobPostProficiency:JobPostProficiencyService) {
     this.jobinformation.showTestInformation$.subscribe(
-      data => {
+      data=> {
         this.jobInformation=data;
 
       }
     );
     this.jobrequirement.showTestRequirement$.subscribe(
-      data=>{
+      data=> {
         this.jobRequirement=data;
 
       }
     );
     this.myjoblocationService.showTestLocation$.subscribe(
-      data=>{
+      data=> {
         this.jobLocation=data;
 
       }
     );
     this.jobpostcapability.showTestCapability$.subscribe(
-      data=>{
+      data=> {
         this.capabilityIds=data;
 
       }
     );
     this.jobPostDescription.showTestJobPostDesc$.subscribe(
-      data=>{
+      data=> {
         this.model=data;
 
       }
     );
     this.jobPostComplexiyservice.showTestComplexity$.subscribe(
-      data=>{
+      data=> {
         this.complexities=data;
 
       }
     );
     this.jobPostProficiency.showTestJobPostProficiency$.subscribe(
-      data=>{
+      data=> {
         this.proficiency=data;
 
       }
     );
-
-
   }
 
-
-  ngOnInit() {
-
-
-  }
 
   postjob() {
-     console.log(this.jobInformation);
+    console.log(this.jobInformation);
     console.log(this.jobRequirement);
     console.log(this.jobLocation);
     console.log('capabilities ids',this.capabilityIds);
     console.log(this.complexities);
-
-      console.log(this.model);
-
-
+    console.log(this.model);
 
   }
 

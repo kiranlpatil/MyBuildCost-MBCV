@@ -5,19 +5,15 @@ import {  BaseService  } from '../../../framework/shared/httpservices/base.servi
 import {  API, LocalStorage  } from '../../../framework/shared/constants';
 import {  LocalStorageService  } from '../../../framework/shared/localstorage.service';
 
-
-
-
 @Injectable()
+
 export class IndustryListService extends BaseService {
 
   constructor(private http: Http) {
-    super()
+    super();
   }
-
-
-  addIndustryProfile(industryprofile:any):Observable<any>{
-
+  
+  addIndustryProfile(industryprofile:any):Observable<any> {
     let headers = new Headers({ 'Content-Type': 'application/json'});
     let options = new RequestOptions({ headers: headers });
     let body = JSON.stringify(industryprofile);

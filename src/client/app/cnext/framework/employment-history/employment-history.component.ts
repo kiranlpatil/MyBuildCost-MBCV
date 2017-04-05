@@ -6,31 +6,30 @@ import { EducationalService } from '../educational-service';
 
 @Component({
   moduleId: module.id,
-  selector: 'cn-Employment-History',
+  selector: 'cn-employment-history',
   templateUrl: 'employment-history.component.html',
   styleUrls: ['employment-history.component.css']
 })
 
 export class EmploymentHistoryComponent {
 
- private tempCompanyName:string='';
- private toYearModel:string;
- private isShowYearMessage:boolean=false;
- private tempDesignation:string='';
- private tempWorkedToMonth:string='';
+  private tempCompanyName:string='';
+  private toYearModel:string;
+  private isShowYearMessage:boolean=false;
+  private tempDesignation:string='';
+  private tempWorkedToMonth:string='';
   private tempWorkedToYear:string='';
   private tempWorkedFromMonth:string='';
   private tempWorkedFromYear:string='';
   private tempRemarks:string='';
- private disbleButton:boolean=false;
- private tempfield: string[];
- private selectedEmploymentHistory = new EmployementHistory();
- private selectedEmploysHistory :EmployementHistory[]=new Array();
- private year: any;
- private currentDate: any;
- private yearList = new Array();
- private monthList = new Array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December');
- error_msg: string;
+  private disbleButton:boolean=false;
+  private tempfield: string[];
+  private selectedEmploymentHistory = new EmployementHistory();
+  private selectedEmploysHistory :EmployementHistory[]=new Array();
+  private year: any;
+  private currentDate: any;
+  private yearList = new Array();
+  error_msg: string;
 
   constructor() {
     this.tempfield = new Array(1);
@@ -78,7 +77,7 @@ export class EmploymentHistoryComponent {
   selectedworkfromYearModel(newval: any) {
     this.tempWorkedFromYear=newval;
     this.selectedEmploymentHistory.workedFromYear=this.tempWorkedFromYear;
-}
+  }
 
   selectedworktoMonthModel(newval: any) {
     this.tempWorkedToMonth=newval;
@@ -87,58 +86,43 @@ export class EmploymentHistoryComponent {
   }
 
   selectedworktoYearModel(newval: any) {
-
     if(newval<this.selectedEmploymentHistory.workedFromYear||
       (this.selectedEmploymentHistory.workedFromMonth===this.selectedEmploymentHistory.workedToMonth &&
-      newval===this.selectedEmploymentHistory.workedFromYear))
-    {
+      newval===this.selectedEmploymentHistory.workedFromYear)) {
       this.isShowYearMessage=true;
       this.toYearModel='';
-    }
-    else {
+    } else {
       this.isShowYearMessage=false;
       this.tempWorkedToYear=newval;
-
     }
-
   }
-
-
-
-
-  addAnother() {debugger
-
+  
+  addAnother() {
     if(this.tempCompanyName==='' || this.tempDesignation==='' ||
       this.tempWorkedToMonth==='' || this.tempWorkedToYear==='' ||
       this.tempWorkedFromMonth==='' || this.tempWorkedFromYear==='' ||
-      this.tempRemarks==='' )
-    {
-
+      this.tempRemarks==='' ) {
       this.disbleButton=true;
-    }
-    else {
+    } else {
       this.disbleButton = false;
-
-     let temp= new EmployementHistory();
-     temp.companyName=this.tempCompanyName;
-     temp.designation=this.tempDesignation;
-     temp.remarks=this.tempRemarks;
-     temp.workedFromMonth=this.tempWorkedFromMonth;
-     temp.workedFromYear=this.tempWorkedFromYear;
-     temp.workedToMonth=this.tempWorkedFromMonth;
-     temp.workedToYear=this.tempRemarks;
-
+      let temp= new EmployementHistory();
+      temp.companyName=this.tempCompanyName;
+      temp.designation=this.tempDesignation;
+      temp.remarks=this.tempRemarks;
+      temp.workedFromMonth=this.tempWorkedFromMonth;
+      temp.workedFromYear=this.tempWorkedFromYear;
+      temp.workedToMonth=this.tempWorkedFromMonth;
+      temp.workedToYear=this.tempRemarks;
       this.selectedEmploysHistory.push(temp);
       console.log(this.selectedEmploysHistory);
-      this.tempfield.push('null');}
+      this.tempfield.push('null');
+    }
     this.tempCompanyName='';
-   this.tempDesignation='' ;
+    this.tempDesignation='';
     this.tempWorkedToMonth='';
     this.tempWorkedToYear='';
     this.tempWorkedFromMonth='';
     this.tempWorkedFromYear='' ;
     this.tempRemarks='';
-
-
   }
 }

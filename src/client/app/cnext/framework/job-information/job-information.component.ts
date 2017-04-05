@@ -17,11 +17,7 @@ export class JobInformationComponent {
   constructor(private joninformationservice:MyJobInformationService) {
   }
 
-
-  ngOnInit() {
-
-
-  }
+  
 
   isJobTitleSelected(job:any) {
     this.jobInformation.jobTitle=job;

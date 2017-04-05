@@ -1,6 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { JonPostDescriptionService } from '../job-post-description.service';
-import { description } from "../model/description";
+import { Description } from '../model/description';
 
 
 @Component({
@@ -10,7 +10,7 @@ import { description } from "../model/description";
   styleUrls: ['description-field.component.css']
 })
 
-export class DescriptionFieldComponent {
+export class DescriptionFieldComponent implements OnInit{
   @Input('type') type : string;
   @Input('maxLength') maxLength :number;
 
@@ -22,11 +22,10 @@ export class DescriptionFieldComponent {
  private maxword:number;
  private tempType:string;
  private tempdetail:string;
- private model=new description();
+ private model=new Description();
 
  private remainingWords:number;
-
-
+  
   constructor(private jobPostDescription:JonPostDescriptionService) {
 
   }
@@ -48,10 +47,6 @@ export class DescriptionFieldComponent {
          this.tempdetail = event;
         this.model.detail =  this.tempdetail;
         this.model.selectedType = this.tempType;
-
-
-
-
         this.jobPostDescription.change(this.model);
   }
 }

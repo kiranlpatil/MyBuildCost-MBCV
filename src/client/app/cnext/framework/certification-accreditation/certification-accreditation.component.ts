@@ -1,6 +1,6 @@
 
 import {   Component  } from '@angular/core';
-import { certifications } from '../model/certification-accreditation';
+import { Certifications } from '../model/certification-accreditation';
 
 @Component({
   moduleId: module.id,
@@ -16,7 +16,7 @@ export class CertificationAccreditationComponent {
   private tempCompanyName:string='';
   private tempYear:string='';
   private tempdetails:string='';
-  private selectedcertificates:certifications[]=new Array();
+  private selectedcertificates:Certifications[]=new Array();
   private disbleButton:boolean=false;
 
 
@@ -52,7 +52,7 @@ this.tempCompanyName=companyname;
       this.disbleButton=true;
     } else {
       this.disbleButton = false;
-      let temp=new certifications();
+      let temp=new Certifications();
       temp.certificateName=this.tempCertificateName;
       temp.compaName=this.tempCompanyName;
       temp.yearOfCertification=this.tempYear;

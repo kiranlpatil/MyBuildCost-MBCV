@@ -1,14 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IndustryListService } from './industry-list.service';
-import { TestService } from '../test.service';
 import { MyIndustryService } from '../industry-service';
 import { MyRoleService } from '../role-service';
 import { Message } from '../../../framework/shared/message';
 import { MessageService } from '../../../framework/shared/message.service';
 import { IndustryList } from '../model/industryList';
-import { constants } from 'fs';
-import { myRoleListTestService } from "../myRolelist.service";
-import { DisableTestService } from "../disable-service";
+import { myRoleListTestService } from '../myRolelist.service';
+import { DisableTestService } from '../disable-service';
 
 @Component({
   moduleId: module.id,
@@ -17,7 +15,7 @@ import { DisableTestService } from "../disable-service";
   styleUrls: ['industry-list.component.css']
 })
 
-export class IndustryListComponent {
+export class IndustryListComponent implements OnInit{
   private industryNames :string[]=new Array();
   private storedRoles :string[] =new Array();
   private industryData:any;
@@ -32,7 +30,7 @@ export class IndustryListComponent {
 
 
   constructor(private industryService: IndustryListService, private myindustryService : MyIndustryService,private myRolelist:myRoleListTestService,
-              private roleService : MyRoleService, private messageService:MessageService , private testService : TestService,private disableService:DisableTestService) {
+              private roleService : MyRoleService, private messageService:MessageService , private disableService:DisableTestService) {
 
   }
 
@@ -84,19 +82,16 @@ export class IndustryListComponent {
       }
     }
   }
-
   onRoleListSuccess(data:any) {
     this.rolesData=data;
     for(let role of data) {
       this.roleNames.push(role.name);
     }
   }
-
-  selectRolesModel(roleName: string) {debugger
+  selectRolesModel(roleName: string) {
     if(roleName === 'u can select max ') {
       console.log('u can select max ');
-    }
-    else {
+    } else {
       this.disbleButton = false;
       this.storedRoles.push(roleName);
       this.searchRolesId(roleName);

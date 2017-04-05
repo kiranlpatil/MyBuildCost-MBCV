@@ -1,5 +1,5 @@
 
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { JobLocation } from '../model/job-location';
 import { JobLocationService } from './job-location.service';
 import { Message } from '../../../framework/shared/message';
@@ -13,21 +13,18 @@ import { myJobLocationService } from '../myjob-location.service';
   styleUrls: ['job-location.component.css']
 })
 
-export class JobLocationComponent {
+export class JobLocationComponent implements OnInit {
   private jobLocationtion = new JobLocation();
   private storedcountry:string;
   private storedstate:string;
   private storedcity:string;
-  private pin:number;
+   pin:number;
   private locationDetails : any;
   private countries:string[]=new Array();
   private  states:string[]=new Array();
   private cities:string[]=new Array();
 
-
-
-  constructor(
-              private joblocationService:JobLocationService,
+  constructor(private joblocationService:JobLocationService,
               private myjoblocationService:myJobLocationService,
               private messageService: MessageService
                ) {
@@ -35,15 +32,12 @@ export class JobLocationComponent {
 
 
   ngOnInit() {
-
     this.joblocationService.getAddress()
       .subscribe(
         data=> { this.onAddressSuccess(data);},
         error => { this.onError(error);});
-
   }
   onAddressSuccess(data:any) {
-
     this.locationDetails=data.address;
     for(var  i = 0; i <data.address.length; i++) {
       this.countries.push(data.address[i].country);
@@ -52,7 +46,6 @@ export class JobLocationComponent {
   }
 
   selectCountryModel(country:any) {
-
     for(let item of this.locationDetails) {
       if(item.country===country) {
         let tempStates: string[]= new Array(0);
@@ -89,8 +82,7 @@ export class JobLocationComponent {
     this.storedcity=city;
     this.jobLocationtion.city=city;
   }
-
-
+  
   isPinSelected(pin:any) {
     this.jobLocationtion.pin=pin;
     this.myjoblocationService.change(this.jobLocationtion);
@@ -102,6 +94,4 @@ export class JobLocationComponent {
     message.isError = true;
     this.messageService.message(message);
   }
-
-
 }

@@ -9,13 +9,4 @@ import {  Component  } from '@angular/core';
 })
 
 export class JobFilterComponent {
-
-    constructor() {
-
-    }
-
-    ngOnInit() {
-
-
-    }
 }

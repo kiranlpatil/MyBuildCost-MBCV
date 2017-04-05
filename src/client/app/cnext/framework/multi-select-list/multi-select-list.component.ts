@@ -15,32 +15,23 @@ export class MultiSelectListComponent {
 
  private selectedOptions:string[]=new Array();
 
-  constructor() {
-
-
-  }
-  selectOption(newVal:any) {debugger
+  selectOption(newVal:any) {
     var option=newVal.target.value;
-
-    if (newVal.target.checked) {debugger
+    if (newVal.target.checked) {
       if ((this.selectedOptions.length < parseInt(this.maxInput)) && option !== undefined) {
         this.selectedOptions.push(option);
         this.selectedData.emit(option);
-      }
-      else {
+      } else {
         if(option !== undefined) {
           this.selectedData.emit('u can select max ');
           newVal.target.checked=false;
-        }
-        else
+        } else
           console.log('in elsae else');
       }
-    }
-    else{debugger
+    } else {
       if(option !== undefined) {
-       // this.selectedData.emit(option);
         for(let data of this.selectedOptions) {
-          if(data===option) {
+          if(data === option) {
             this.selectedOptions.splice(this.selectedOptions.indexOf(data), 1);
           }
         }

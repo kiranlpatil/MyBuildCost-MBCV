@@ -1,5 +1,4 @@
-export class description{
-  selectedType:string="";
-  detail:string="";
-
+export class Description {
+  selectedType:string='';
+  detail:string='';
 }

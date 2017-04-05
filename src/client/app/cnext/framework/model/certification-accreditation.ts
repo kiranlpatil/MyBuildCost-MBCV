@@ -1,4 +1,4 @@
-export class certifications {
+export class Certifications {
    certificateName:string='';
    compaName:string='';
   yearOfCertification:string='';

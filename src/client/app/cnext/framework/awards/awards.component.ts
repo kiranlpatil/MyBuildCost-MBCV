@@ -1,6 +1,6 @@
 
 import {   Component  } from '@angular/core';
-import {  awards  } from '../model/awards';
+import {  Awards  } from '../model/awards';
 import { AwardService } from '../award-service';
 
 @Component({
@@ -17,7 +17,7 @@ export class AwardsComponent {
   private tempmonth:string='';
   private tempyear:string='';
   private tempremark:string='';
-  private selectedawards: awards[]=new Array();
+  private selectedawards: Awards[]=new Array();
   private disbleButton:boolean=false;
   constructor( private awardService:AwardService ) {
     this.tempfield = new Array(1);
@@ -41,7 +41,7 @@ export class AwardsComponent {
   addAnother() {
     if (this.temptitle!=='' && this.tempmonth!=='' &&
       this.tempyear!=='' && this.tempremark!=='') {
-      let temp=new awards();
+      let temp=new Awards();
       temp.title=this.temptitle;
       temp.month=this.tempmonth;
       temp.year=this.tempyear;
