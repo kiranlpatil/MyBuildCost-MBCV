@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component ,OnInit} from '@angular/core';
 import { LocalStorageService } from '../../../framework/shared/localstorage.service';
 import { LocalStorage, NavigationRoutes } from '../../../framework/shared/constants';
 import { Router } from '@angular/router';
@@ -9,11 +9,10 @@ import { ProficiencyService } from '../proficience.service';
 import { ProfessionalService } from '../professional-service';
 import { EducationalService } from '../educational-service';
 import { AwardService } from '../award-service';
-import { myRoleListTestService } from "../myRolelist.service";
-import { MyRoleService } from '../role-service';
+import { myRoleListTestService } from '../myRolelist.service';
+//import { MyRoleService } from '../role-service';
 import { myRoTypeTestService } from '../myRole-Type.service';
-import { DisableTestService } from "../disable-service";
-
+import { DisableTestService } from '../disable-service';
 
 @Component({
   moduleId: module.id,
@@ -22,12 +21,10 @@ import { DisableTestService } from "../disable-service";
   styleUrls: ['profile-creator.component.css']
 })
 
-export class ProfileCreatorComponent {
+export class ProfileCreatorComponent implements OnInit {
   private fullName: string;private firstName: string;private lastName: string;
   private   newUser:number;
   private  chkEmployeeHistory:boolean=false;
-  protected  selectedvalue1:string;
-  protected selectedvalue2:string;
   private valueOFshowOrHide:string;
   private  chkCertification:boolean=false;
   private  chkAboutMyself:boolean=false;
@@ -39,6 +36,8 @@ export class ProfileCreatorComponent {
   private isRolesShow:boolean=false;
   private showfield:boolean=false;
   private isRoleTypeShow:boolean=false;
+  protected  selectedvalue1:string;
+  protected selectedvalue2:string;
 
   constructor(private _router:Router,
               private dashboardService:DashboardService,
@@ -51,7 +50,7 @@ export class ProfileCreatorComponent {
               private awardService: AwardService,private myRolelist :myRoleListTestService,private disableService:DisableTestService) {
 
     this.myRolelist.showTestRolelist$.subscribe(
-      data=>{
+      data => {
         this.isRolesShow=data;
 
 
@@ -59,12 +58,12 @@ export class ProfileCreatorComponent {
     );
 
     disableService.showTestDisable$.subscribe(
-      data=>{
+      data=> {
         this.showfield=data;
       }
     );
     this.myRoleType.showTestRoleType$.subscribe(
-      data=>{
+      data=> {
         this.isRoleTypeShow=data;
 
 
@@ -73,35 +72,35 @@ export class ProfileCreatorComponent {
 
 
     testService.showTest$.subscribe(
-        data=>{
+        data=> {
             this.whichStepsVisible[1]=data;
           this.showCapability=data;
         }
       );
       complexityService.showTest$.subscribe(
-        data=>{
-          this.whichStepsVisible[2]=data;
-          this.showComplexity=data;
+        data=> {
+          this.whichStepsVisible[2]= data;
+          this.showComplexity= data;
         }
       );
       proficiencyService.showTest$.subscribe(
-        data=>{
+        data=> {
           this.whichStepsVisible[3]=data;
           this.showProfeciency=data;
         }
       );
     professionalService.showTest$.subscribe(
-        data=>{
+        data=> {
           this.whichStepsVisible[4]=data;
         }
       );
     educationalService.showTest$.subscribe(
-        data=>{
+        data=> {
           this.whichStepsVisible[5]=data;
         }
       );
     awardService.showTest$.subscribe(
-      data=>{
+      data=> {
         this.whichStepsVisible[6]=data;
       }
     );

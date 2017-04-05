@@ -39,7 +39,7 @@ export class JobLocationComponent {
     this.joblocationService.getAddress()
       .subscribe(
         data=> { this.onAddressSuccess(data);},
-        error =>{ this.onError(error);});
+        error => { this.onError(error);});
 
   }
   onAddressSuccess(data:any) {

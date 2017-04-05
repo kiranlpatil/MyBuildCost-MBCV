@@ -29,7 +29,7 @@ export class ProfilePictureComponent  {
 
 
   constructor(private dashboardService: DashboardService,
-              private messageService: MessageService, private profileService: ProfileService) {debugger
+              private messageService: MessageService, private profileService: ProfileService) {
     this.filesToUpload = [];
     /*this.image_path = JSON.parse(LocalStorageService.getLocalValue(LocalStorage.PROFILE_PICTURE)); //TODO:Get it from get user call.
     console.log('Profile Picture',this.image_path);*/

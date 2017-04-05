@@ -33,9 +33,6 @@ export class CandidateComponent implements OnInit {
   private storedstate:string;
   private storedcity:string;
   private locationDetails : any;
-   countries:string[]=new Array(0);
-   states:string[]=new Array(0);
-   cities:string[]=new Array(0);
   private isPasswordConfirm: boolean;
   private isFormSubmitted = false;
   private userForm: FormGroup;
@@ -44,8 +41,11 @@ export class CandidateComponent implements OnInit {
   private BODY_BACKGROUND:string;
   yearList:string[]=this.dateservice.yearList;
   private passingyear:string;
-  private myPassword:string='';
   private isShowMessage:boolean=false;
+  countries:string[]=new Array(0);
+  states:string[]=new Array(0);
+  cities:string[]=new Array(0);
+  myPassword:string='';
 
   constructor(private commanService: CommonService, private _router: Router, private http: Http,private dateservice:DateService,
               private candidateService: CandidateService, private messageService: MessageService, private formBuilder: FormBuilder, private loaderService:LoaderService) {

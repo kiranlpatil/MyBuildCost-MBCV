@@ -12,7 +12,7 @@ import { DisableTestService } from "../disable-service";
 export class SingleSelectListComponent {
   @Input() radioData:SingleSelectList;
   @Output() selectedData = new EventEmitter<string>();
-  private showfield:boolean=false;
+  //private showfield:boolean=false;
 
   constructor(private disableService:DisableTestService) {
 

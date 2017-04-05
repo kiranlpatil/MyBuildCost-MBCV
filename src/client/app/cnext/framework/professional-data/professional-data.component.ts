@@ -1,8 +1,8 @@
 
-import { Component } from '@angular/core';
+import { Component ,OnInit } from '@angular/core';
 import { BaseService } from '../../../framework/shared/httpservices/base.service';
 import { ProfessionalData } from '../model/professional-data';
-import { ProfessionalDataService  } from './professional-data.service'
+import { ProfessionalDataService } from './professional-data.service';
 import { Message } from '../../../framework/shared/message';
 import { MessageService } from '../../../framework/shared/message.service';
 import { ProfessionalService } from '../professional-service';
@@ -13,7 +13,7 @@ import { ProfessionalService } from '../professional-service';
   styleUrls: ['professional-data.component.css']
 })
 
-export class ProfessionalDataComponent extends BaseService {
+export class ProfessionalDataComponent extends BaseService implements OnInit {
   private selectedProfessionalData=new ProfessionalData();
   private realocationlist=new Array();
   private educationlist=new Array();
@@ -38,30 +38,30 @@ export class ProfessionalDataComponent extends BaseService {
 
       this.professionaldataservice.getRealocationList()
         .subscribe(
-          data=> { this.onRealocationListSuccess(data)},
-          error =>{ this.onError(error);});
+          data => { this.onRealocationListSuccess(data); },
+          error => { this.onError(error);});
 
     this.professionaldataservice.getEducationList()
       .subscribe(
         data=> { this.onEducationListSuccess(data);},
-        error =>{ this.onError(error);});
+        error => { this.onError(error);});
 
 
     this.professionaldataservice.getExperienceList()
       .subscribe(
         data=> { this.onExperienceListSuccess(data);},
-        error =>{ this.onError(error);});
+        error => { this.onError(error);});
 
     this.professionaldataservice.getCurrentSalaryList()
       .subscribe(
         data=> { this.onCurrentSalaryListSuccess(data);},
-        error =>{ this.onError(error);});
+        error => { this.onError(error);});
 
 
     this.professionaldataservice.getNoticePeriodList()
       .subscribe(
         data=> { this.onGetNoticePeriodListSuccess(data);},
-        error =>{ this.onError(error);});
+        error => { this.onError(error);});
 
 
   }

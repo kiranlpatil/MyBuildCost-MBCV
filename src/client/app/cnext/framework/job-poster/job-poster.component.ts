@@ -43,7 +43,7 @@ export class JobPosterComponent {
               private jobPostComplexiyservice:JobPostComplexityService,
               private jobPostProficiency:JobPostProficiencyService) {
     this.jobinformation.showTestInformation$.subscribe(
-      data=>{
+      data => {
         this.jobInformation=data;
 
       }

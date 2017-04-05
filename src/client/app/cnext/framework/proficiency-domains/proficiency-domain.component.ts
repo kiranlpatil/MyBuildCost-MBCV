@@ -29,7 +29,7 @@ export class proficiencyDomainComponent implements OnInit {
               private JobPostProficiency:JobPostProficiencyService) {
 
     proficiencyService.showTest$.subscribe(
-      data=>{
+      data => {
         this.isProficiencyShow=data;
       }
     );
@@ -38,7 +38,7 @@ export class proficiencyDomainComponent implements OnInit {
   ngOnInit() {
     if(this.type==='profeciency') {
       this.proficiencyType=true;
-      this.placeHolderName='proficiency'
+      this.placeHolderName='proficiency';
 
       this.proficiencydoaminService.getProficiency()
         .subscribe(
@@ -49,7 +49,7 @@ export class proficiencyDomainComponent implements OnInit {
   }
     if(this.type==='domain') {
       this.domainType=true;
-      this.placeHolderName='domain'
+      this.placeHolderName='domain';
 
       this.proficiencydoaminService.getDomain()
         .subscribe(
@@ -86,8 +86,7 @@ export class proficiencyDomainComponent implements OnInit {
       this.deleteSelectedProfeciency(newVal);
       console.log(this.storedProficiency);
       this.JobPostProficiency.change(this.storedProficiency);
-    }
-    else{
+    } else {
       this.showAlert=true;
     }
 

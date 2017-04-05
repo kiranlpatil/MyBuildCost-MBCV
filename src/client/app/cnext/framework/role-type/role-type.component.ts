@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { Message } from "../../../framework/shared/message";
-import { MessageService } from "../../../framework/shared/message.service";
-import { RoleTypeService } from "./role-type.service";
-import { TestService } from "../test.service";
+import { Message } from '../../../framework/shared/message';
+import { MessageService } from '../../../framework/shared/message.service';
+import { RoleTypeService } from './role-type.service';
+import { TestService } from '../test.service';
 
 @Component({
   moduleId: module.id,
@@ -25,14 +25,14 @@ export class RoleTypetListComponent {
   constructor(private roleTypeService: RoleTypeService, private messageService:MessageService , private testService : TestService) {
   }
 
-  ngOnInit() {debugger
+  ngOnInit() {
     this.roleTypeService.getRoleTypes()
       .subscribe(
         data=> this.onRoleTypesSuccess(data),
         error => this.onError(error));
 
   }
-  onRoleTypesSuccess(data:any) {debugger
+  onRoleTypesSuccess(data:any) {
     for(let proficiency of data.roletypes) {
       this.roleTypes.push(proficiency);
   }}
@@ -62,8 +62,7 @@ export class RoleTypetListComponent {
       return 'none';
     }
   }
-  selectIndustryModel(event:string)
-  {
+  selectIndustryModel(event:string) {
 
 
   }

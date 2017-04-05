@@ -34,7 +34,7 @@ export class RoleListComponent {
               private myIndustryService :MyIndustryService,
               private myRoleType:myRoTypeTestService ) {
     myIndustryService.showTest$.subscribe(
-      data=>{
+      data => {
         this.industry=data;
         this.industryService.getRoles(this.industry)
           .subscribe(

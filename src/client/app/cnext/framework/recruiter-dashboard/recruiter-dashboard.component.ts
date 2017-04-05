@@ -10,11 +10,11 @@ import {  Component  } from '@angular/core';
 
 export class RecruiterDashboardComponent {
 
-  constructor() {
+ /* constructor() {
   }
 
   ngOnInit() {
-  }
+  }*/
 
 
 
