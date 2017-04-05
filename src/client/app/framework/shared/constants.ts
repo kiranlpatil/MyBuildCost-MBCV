@@ -1,7 +1,7 @@
 export class AppSettings {
 //  public static IP = 'http://localhost:8080';
 // public static IP = 'http://ee802b7f.ngrok.io';
-    public static IP = 'http://54.167.209.10:80';
+    public static IP = 'http://54.167.209.10:8080';
     
     public static get API_ENDPOINT():string {
         return this.IP + '/api/';
@@ -191,5 +191,5 @@ export class ImagePath {
 export class ProjectAsset {
     public static APP_NAME = 'C-NEXT';
     public static TAG_LINE = 'The Awesome Web Experience';
-    public static UNDER_LICENECE = '© 2016 Techprimelab Software Pvt. Ltd.';
+    public static UNDER_LICENECE = 'ï¿½ 2016 Techprimelab Software Pvt. Ltd.';
 }
