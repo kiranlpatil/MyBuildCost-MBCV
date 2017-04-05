@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { VALUE_CONSTANT, LocalStorage } from '../../../framework/shared/constants';
 import { TestService } from '../test.service';
 import { ComplexityService } from '../complexity.service';
@@ -19,7 +19,7 @@ import { myJobPostcapabilityService } from '../jobpost-capabilities.service';
   styleUrls: ['capability-list.component.css']
 })
 
-export class CapabilityListComponent {
+export class CapabilityListComponent implements OnInit  {
   private capabilities:string[] =new Array();
   private primaryCapabilities:string[]=new Array();
   private secondaryCapabilities:string[]=new Array();
@@ -41,7 +41,7 @@ export class CapabilityListComponent {
               private myCapabilityListService:MyCapabilityService,
               private myJobrequirementService :MyJobRequirementService,
               private jobpostcapability:myJobPostcapabilityService
-                  ) {
+  ) {
 
     testService.showTest$.subscribe(
       data => {
@@ -83,7 +83,7 @@ export class CapabilityListComponent {
 
   onCapabilityListSuccess(data:any) {
     this.capabilityData=data;
-    if(data != undefined) {
+    if(data !== undefined) {
       this.isPrimary=new Array(data.length);
       this.isSecondary=new Array(data.length);
       for(let capability of data) {
@@ -104,15 +104,11 @@ export class CapabilityListComponent {
       if(this.primaryCapabilities.length < VALUE_CONSTANT.MAX_CAPABILITIES) {
         this.primaryCapabilities.push(selectedCapability.target.value);
         this.isPrimary[this.capabilities.indexOf(selectedCapability.target.value)]=true;
-
-      }
-      else{
+      } else {
         this.secondaryCapabilities.push(selectedCapability.target.value);
         this.isSecondary[this.capabilities.indexOf(selectedCapability.target.value)]=true;
       }
-    }
-    else
-      {
+    } else {
       this.deleteCapabilityById(selectedCapability.target.value);
       for(let capability of this.primaryCapabilities) {
         if(capability===selectedCapability.target.value) {
@@ -128,14 +124,8 @@ export class CapabilityListComponent {
         }
       }
     }
-
     this.myCapabilityListService.change(this.primaryCapabilities);
-
   }
-
-
-
-
   searchCapabilityId(capabilityName:string) {
     for(let capability of this.capabilityData) {
       if(capability.name===capabilityName) {
@@ -152,7 +142,6 @@ export class CapabilityListComponent {
       }
     }
   }
-
   createAndSave() {
     this.complexityService.change(true);
 
@@ -165,6 +154,4 @@ export class CapabilityListComponent {
       });
     this.jobpostcapability.change(this.primaryCapabilities);
   }
-
-
 }

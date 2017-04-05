@@ -56,7 +56,7 @@ export class ComplexityListComponent {
     );
 
     myCapabilityListService.showTest$.subscribe(
-      data => {debugger
+      data => {
         this.capabilities=data;
         console.log('from complex capab',this.capabilities);
 
@@ -68,7 +68,7 @@ export class ComplexityListComponent {
     );
 
     myJobrequirementService.showTest$.subscribe(
-      data => {debugger
+      data => {
         this.isComplexityShow=true;
         this.roles=data.role;
         this.industry=data.industry;
@@ -77,24 +77,15 @@ export class ComplexityListComponent {
 
   }
 
-  onComplexityListSuccess(data:any) {debugger
-
+  onComplexityListSuccess(data:any) {
       this.complexities=data.data;
-   // console.log('complex',this.data);
-
-
-
   }
-
   onError(error:any) {
     var message = new Message();
     message.error_msg = error.err_msg;
     message.isError = true;
     this.messageService.message(message);
   }
-
-
-
   selectOption(selectedComplexity:any) {
     if (selectedComplexity.target.checked) {
       for (let i = 0; i < this.selectedComplexity.length; i++) {
@@ -106,7 +97,7 @@ export class ComplexityListComponent {
       }
       let currentComplexity=new Complexity();
       currentComplexity.name=selectedComplexity.currentTarget.children[0].innerHTML;
-      currentComplexity.scenario=selectedComplexity.target.value
+      currentComplexity.scenario=selectedComplexity.target.value;
       if(selectedComplexity.target.value !== 'none') {
         this.selectedComplexity.push(currentComplexity);
         this.jobPostComplexiyservice.change(this.selectedComplexity);

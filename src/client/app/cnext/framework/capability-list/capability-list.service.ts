@@ -12,12 +12,11 @@ import { LocalStorageService } from '../../../framework/shared/localstorage.serv
 export class CapabilityListService extends BaseService {
 
   constructor(private http: Http) {
-    super()
+    super();
   }
 
 
-  addCapability(capabilitylist:any):Observable<any>{
-
+  addCapability(capabilitylist:any):Observable<any> {
     let headers = new Headers({ 'Content-Type': 'application/json'});
     let options = new RequestOptions({ headers: headers });
     let body = JSON.stringify(capabilitylist);
@@ -33,8 +32,4 @@ export class CapabilityListService extends BaseService {
       .map(this.extractData)
       .catch(this.handleError);
   }
-
-
-
-
 }

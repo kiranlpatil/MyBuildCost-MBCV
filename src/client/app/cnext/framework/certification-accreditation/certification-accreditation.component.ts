@@ -1,7 +1,6 @@
 
 import {   Component  } from '@angular/core';
 import { certifications } from '../model/certification-accreditation';
-import { DateService } from '../date.service';
 
 @Component({
   moduleId: module.id,
@@ -18,33 +17,28 @@ export class CertificationAccreditationComponent {
   private tempYear:string='';
   private tempdetails:string='';
   private selectedcertificates:certifications[]=new Array();
-  private yearList:string[]=this.dateservice.yearList;
   private disbleButton:boolean=false;
 
 
-  constructor(private dateservice:DateService) {
+  constructor() {
 
     this.tempfield = new Array(1);
 
   }
-  selectedCertificate(certificatename:string)
-  {
+  selectedCertificate(certificatename:string) {
 this.tempCertificateName=certificatename;
   }
-  selectedCompanyName(companyname:string)
-  {
+  selectedCompanyName(companyname:string) {
 this.tempCompanyName=companyname;
   }
 
 
-  selectedYearModel(year:string)
-  {
+  selectedYearModel(year:string) {
     this.tempYear=year;
   }
 
   addedCertification(certificate:any) {
     this.tempdetails=certificate;
-
   }
 
 
@@ -52,14 +46,11 @@ this.tempCompanyName=companyname;
 
 
   addAnother() {
-
     if(this.tempCertificateName==='' || this.tempCompanyName==='' ||
-      this.tempYear===''|| this.tempdetails==='')
-    {
+      this.tempYear===''|| this.tempdetails==='') {
 
       this.disbleButton=true;
-    }
-    else {
+    } else {
       this.disbleButton = false;
       let temp=new certifications();
       temp.certificateName=this.tempCertificateName;
@@ -69,13 +60,10 @@ this.tempCompanyName=companyname;
       this.selectedcertificates.push(temp);
       console.log(this.selectedcertificates);
       this.tempfield.push('null');
-
       this.tempCertificateName='';
       this.tempCompanyName='' ;
       this.tempYear='';
       this.tempdetails='';
-
-
     }
   }
 }

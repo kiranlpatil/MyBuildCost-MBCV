@@ -1,8 +1,7 @@
 
 import {   Component  } from '@angular/core';
 import {  awards  } from '../model/awards';
-import {  DateService  } from '../date.service';
-import {  AwardService  } from '../award-service';
+import { AwardService } from '../award-service';
 
 @Component({
   moduleId: module.id,
@@ -19,56 +18,29 @@ export class AwardsComponent {
   private tempyear:string='';
   private tempremark:string='';
   private selectedawards: awards[]=new Array();
-  private monthList:string[]=this.dateservice.monthList;
-  private yearList:string[]=this.dateservice.yearList;
   private disbleButton:boolean=false;
-
-
-
-
-  constructor(private dateservice:DateService,private awardService:AwardService) {
+  constructor( private awardService:AwardService ) {
     this.tempfield = new Array(1);
-
-
-
   }
 
   changeValue() {
     this.awardService.change(true);
-
   }
-  selectedTitle(title:string)
-  {
-
-this.temptitle=title;
+  selectedTitle(title:string) {
+    this.temptitle=title;
   }
-  selectedMonthModel(month:string)
-
-  {
+  selectedMonthModel(month:string) {
     this.tempmonth=month;
-
   }
-  selectedYearModel(year:string)
-  {
-
-this.tempyear=year;
+  selectedYearModel(year:string) {
+    this.tempyear=year;
   }
-
   selectedAward(award:string) {
-this.tempremark=award;
-
-
+    this.tempremark=award;
   }
-
-
-
-
-
   addAnother() {
-
-
-    if (this.temptitle!='' && this.tempmonth!='' &&
-      this.tempyear!='' && this.tempremark!='') {
+    if (this.temptitle!=='' && this.tempmonth!=='' &&
+      this.tempyear!=='' && this.tempremark!=='') {
       let temp=new awards();
       temp.title=this.temptitle;
       temp.month=this.tempmonth;
@@ -81,15 +53,8 @@ this.tempremark=award;
       this.temptitle='' ;
       this.tempmonth ='' ;
       this.tempremark ='' ;this.tempyear='';
-    }
-    else {
-
+    } else {
       this.disbleButton = true;
-
-
     }
-
-
-
   }
 }

@@ -1,6 +1,5 @@
 import {   Component  } from '@angular/core';
-import {  FormGroup } from '@angular/forms';
-import {  academicdetails  } from './academic-details';
+import {  Academicdetails  } from './academic-details';
 import {  VALUE_CONSTANT  } from '../../../framework/shared/constants';
 import {  EducationalService  } from '../educational-service';
 
@@ -13,16 +12,16 @@ import {  EducationalService  } from '../educational-service';
 
 export class AcademicDetailComponent {
 
- private  tempfield: string[];
- private year: any;
- private currentDate: any;
- private yearList = new Array();
- private selectedacademicsdeatils:academicdetails[]=new Array();
+  private  tempfield: string[];
+  private year: any;
+  private currentDate: any;
+  private yearList = new Array();
+  private selectedacademicsdeatils:Academicdetails[]=new Array();
   private disbleButton:boolean=false;
   private tempSchoolName:string='';
   private tempUnivercityName:string='';
-private tempPassingYear:string='';
-private  tempSpecialization:string='';
+  private tempPassingYear:string='';
+  private  tempSpecialization:string='';
   constructor(private educationalService : EducationalService) {
 
     this.tempfield = new Array(1);
@@ -39,7 +38,7 @@ private  tempSpecialization:string='';
     }
   }
   selectedSchoolName(schoolname:string) {
-this.tempSchoolName=schoolname;
+    this.tempSchoolName=schoolname;
 
   }
 
@@ -62,28 +61,22 @@ this.tempSchoolName=schoolname;
 
 
   addAnother() {
-
-      if(this.tempSchoolName==='' || this.tempUnivercityName==='' ||
-        this.tempPassingYear==='' || this.tempSpecialization==='' )
-      {
-
-        this.disbleButton=true;
-      }
-      else {
-        this.disbleButton = false;
-        let temp=new academicdetails();
-        temp.schoolName=this.tempSchoolName;
-        temp.universityName=this.tempUnivercityName;
-        temp.passingyear=this.tempPassingYear;
-        temp.specialization=this.tempSpecialization;
-        this.selectedacademicsdeatils.push(temp);
-
-        console.log(this.selectedacademicsdeatils);
-        this.tempfield.push('null');
-
-        this.tempSchoolName='';
-        this.tempUnivercityName='';
-        this.tempPassingYear='';this.tempSpecialization='';
-      }
+    if(this.tempSchoolName==='' || this.tempUnivercityName==='' ||
+      this.tempPassingYear==='' || this.tempSpecialization==='' ) {
+      this.disbleButton=true;
+    } else {
+      this.disbleButton = false;
+      let temp=new Academicdetails();
+      temp.schoolName=this.tempSchoolName;
+      temp.universityName=this.tempUnivercityName;
+      temp.passingyear=this.tempPassingYear;
+      temp.specialization=this.tempSpecialization;
+      this.selectedacademicsdeatils.push(temp);
+      console.log(this.selectedacademicsdeatils);
+      this.tempfield.push('null');
+      this.tempSchoolName='';
+      this.tempUnivercityName='';
+      this.tempPassingYear='';this.tempSpecialization='';
+    }
   }
 }
