@@ -36,7 +36,7 @@ class RepositoryBase<T extends mongoose.Document> implements IRead<T>, IWrite<T>
     this._model.find({_id: {$in: ids}}, excluded, callback);
   }
 
-  retrieveByMultiIdsAndNames(field:string[], names:string[], excluded:any, callback:(error:any, result:T) => void) {
+  retrieveByMultiIdsAndNames(field:any[], names:any, excluded:any, callback:(error:any, result:T) => void) {
     this._model.find({$and: [{_id: {$in: field}}, {name: {$in: JSON.parse(names)}}]}, excluded, callback);
   }
 
@@ -70,9 +70,9 @@ class RepositoryBase<T extends mongoose.Document> implements IRead<T>, IWrite<T>
 
   //custom API created for C-next Roles capabilities and complexities
 
-  findRoles(name:string, callback:(error:any, result:T) => void) {
+  findRoles(name:string, callback:(error:any, result:any) => void) {
     this.items = new Array(0);
-    this._model.find({"name": name}, (err, industry)=> {
+    this._model.find({"name": name}, (err, industry:any)=> {
       if (err) {
         callback(err, null);
       } else {
@@ -92,9 +92,9 @@ class RepositoryBase<T extends mongoose.Document> implements IRead<T>, IWrite<T>
     });
   }
 
-  findCapabilities(item:any, callback:(error:any, result:T) => void) {
+  findCapabilities(item:any, callback:(error:any, result:any) => void) {
     this.items = new Array(0);
-    this._model.find({"name": item.name},(err, industry)=> {
+    this._model.find({"name": item.name},(err, industry:any)=> {
       if (err) {
         callback(err, null);
       } else {
@@ -126,9 +126,9 @@ class RepositoryBase<T extends mongoose.Document> implements IRead<T>, IWrite<T>
     });
   }
 
-  findComplexities(item:any, callback:(error:any, result:T) => void) {
+  findComplexities(item:any, callback:(error:any, result:any) => void) {
     this.items = new Array(0);
-    this._model.find({"name": item.name},(err, industry)=> {
+    this._model.find({"name": item.name},(err, industry:any)=> {
       if (err) {
         callback(err, null);
       } else {
