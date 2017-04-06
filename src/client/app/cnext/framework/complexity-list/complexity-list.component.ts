@@ -22,7 +22,7 @@ import { JobPostComplexityService } from '../job-post-complexity.service';
 })
 
 export class ComplexityListComponent {
-  private complexities: Complexity[];
+  private complexities: any[]=new Array();
   private selectedComplexity=new Array();
   private isComplexityShow : boolean =false;
   private capabilities=new Array();
@@ -78,7 +78,10 @@ export class ComplexityListComponent {
   }
 
   onComplexityListSuccess(data:any) {
-      this.complexities=data.data;
+    this.complexities=new Array(0);
+    for(let complexity of data) {
+      this.complexities.push(complexity);
+    }
   }
   onError(error:any) {
     var message = new Message();

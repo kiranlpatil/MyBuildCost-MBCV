@@ -424,7 +424,7 @@ export function updateDetails(req: express.Request, res: express.Response, next:
                 "email": result[0].email,
                 "mobile_number": result[0].mobile_number,
                 "picture": result[0].picture,
-                "_id": result[0]._id,
+                "_id": result[0].userId,
                 "current_theme": result[0].current_theme
               },
               access_token: token

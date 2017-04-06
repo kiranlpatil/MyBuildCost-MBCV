@@ -95,9 +95,20 @@ export class RoleListComponent {
     this.disbleRole = true;
     this.disbleButton = true;
     this.disableIndustry = true;
+    this.createAndSave();
     this.roleService.change(this.storedRoles);
 
   }
+
+  createAndSave() {
+    this.industryService.addIndustryProfile(this.industryRoles).subscribe(
+      user => {
+        console.log(user);
+      },
+      error => {
+        console.log(error);
+      });
+  };
 
   getStyleModal() {
     if (this.showModalStyle) {

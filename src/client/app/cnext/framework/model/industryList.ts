@@ -1,4 +1,5 @@
+import {Role} from "./role";
 export class IndustryList {
-  industry: string;
-  roles: string[]= new Array();
+  name: string;
+  roles: Role[]= new Array();
 }

@@ -1,4 +1,5 @@
+import {Scenario} from "./scenario";
 export class Complexity {
   name: string='';
-  scenario: string[]=['10-10','10-10'];
+  scenario: Scenario[]=new Array();
 }

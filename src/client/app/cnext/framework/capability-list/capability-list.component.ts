@@ -83,11 +83,13 @@ export class CapabilityListComponent implements OnInit  {
 
   onCapabilityListSuccess(data:any) {
     this.capabilityData=data;
-    if(data !== undefined) {
-      this.isPrimary=new Array(data.length);
-      this.isSecondary=new Array(data.length);
-      for(let capability of data) {
-        this.capabilities.push(capability.name);
+    if(data !== undefined && data.length > 0) {
+      for(let role of data) {
+        this.isPrimary = new Array(role.capabilities.length);
+        this.isSecondary = new Array(role.capabilities.length);
+        for (let capability of role.capabilities) {
+          this.capabilities.push(capability.name);
+        }
       }
     }
   }
