@@ -23,11 +23,13 @@ import { MYJobTitleService } from '../myJobTitle.service';
 })
 
 export class ProfileCreatorComponent implements OnInit {
+
+  whichStepsVisible : boolean[]=new Array(7);
+  firstName: string;
+  lastName: string;
   protected  selectedvalue1:string;
   protected selectedvalue2:string;
   private fullName: string;
-  private firstName: string;
-  private lastName: string;
   private   newUser:number;
   private  chkEmployeeHistory:boolean=false;
   private valueOFshowOrHide:string;
@@ -37,12 +39,13 @@ export class ProfileCreatorComponent implements OnInit {
   private  showCapability:boolean=false;
   private  showComplexity:boolean=false;
   private  showProfeciency:boolean=false;
-  private  whichStepsVisible : boolean[]=new Array(7);
   private isRolesShow:boolean=false;
   private showfield:boolean=false;
   private isRoleTypeShow:boolean=false;
   private title:string='';
   private jobTitle=new JobTitle();
+
+
   constructor(private _router:Router,
               private dashboardService:DashboardService,
               private testService : TestService,

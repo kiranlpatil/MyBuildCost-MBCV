@@ -1151,6 +1151,25 @@ export function updatePicture(req:express.Request, res:express.Response, next:an
   });
 }
 
+
+export function updateCompanyDetails(req:express.Request, res:express.Response, next:any):void {
+
+    console.log("UpdatePicture user Controller is been hit req ");
+    var userService = new UserService();
+  var user = req.user;
+  var query = {"_id": user._id};
+  /*userService.findOneAndUpdate(query, {picture: mypath}, {new: true}, (error, result) => {
+    if (error) {
+      res.status(403).send({message: error});
+    }
+    else{
+      var auth:AuthInterceptor = new AuthInterceptor();
+      var token = auth.issueTokenWithUid(result);
+      res.status(200).send({access_token: token, data: result});
+    }
+  });*/
+}
+
 export function uploaddocuments(req:express.Request, res:express.Response, next:any):void {
     __dirname = 'src/server/app/framework/public/uploaded-document';
 

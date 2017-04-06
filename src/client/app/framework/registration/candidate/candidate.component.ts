@@ -176,7 +176,8 @@ export class CandidateComponent implements OnInit {
   }
 
   showMessage() {
-  this.isShowMessage =true;
+ // this.isShowMessage =true;
+  this.isShowMessage =false;
 }
   goBack() {
     this.commanService.goBack();

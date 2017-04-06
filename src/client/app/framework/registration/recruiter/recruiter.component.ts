@@ -235,7 +235,8 @@ export class RecruiterComponent implements OnInit {
   }
 
   showMessage() {
-    this.isShowMessage =true;
+    //this.isShowMessage =true;
+    this.isShowMessage =false;
   }
 
   selectPassword(newval:any) {

@@ -113,7 +113,7 @@ export function create(req:express.Request, res:express.Response, next:any) { //
     }
     setTimeout(function () {
       newIndustry.roles = rolesId;
-      console.log("Roles")
+      console.log("Roles",rolesId);
       industryService.create(newIndustry, (error, result) => {
         if (error) {
           console.log("crt role error", error);

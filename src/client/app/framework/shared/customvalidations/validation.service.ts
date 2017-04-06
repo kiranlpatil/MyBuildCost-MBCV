@@ -6,7 +6,7 @@ export class ValidationService {
       'required': 'Required',
       'requiredname': 'Name is required',
       'invalidEmailAddress': 'Email is invalid.',
-      'invalidPassword': 'Password is invalid.',
+      'invalidPassword': 'Password must be of minimum 8digit with minimum 1 uppercase,lowercase,number and one special character($@$!%*?&).',
       'maxlength': `Maximum ${validatorValue.requiredLength} charcters`,
       'minlength': `Minimum ${validatorValue.requiredLength} charcters`,
       'invalidMobile': 'Mobile number should be of 10 digit ',
