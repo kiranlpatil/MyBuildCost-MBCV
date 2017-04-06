@@ -14,7 +14,7 @@ import {  VerifyUserRoutes  } from './framework/registration/verify_user/verify-
 import {  VerifyPhoneRoutes  } from './framework/registration/verify_phone/verify-phone.routes';
 import {  ChangeEmailRoutes  } from './framework/dashboard/settings/change-email/change-email.routes';
 import {  ActivateEmailRoutes  } from './framework/dashboard/settings/activate-email/activate-email.routes';
-import {   ChangeMobileRoutes  } from './framework/dashboard/settings/change-mobile/change-mobile.routes';
+import {  ChangeMobileRoutes  } from './framework/dashboard/settings/change-mobile/change-mobile.routes';
 import {  LandingPageRoutes } from './framework/landing-page/landing-page.routes';
 import {  CandidateRoutes } from './framework/registration/candidate/candidate.routes';
 import {  RecruiterRoutes } from './framework/registration/recruiter/recruiter.routes';

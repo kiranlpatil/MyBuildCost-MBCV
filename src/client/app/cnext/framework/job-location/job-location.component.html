@@ -34,6 +34,6 @@
 
   <div class="col-sm-6">
     <label>PIN:</label>
-    <input type="number" class="form-control" id="pin" [(ngModel)]="pin" (ngModelChange)="isPinSelected($event)" />
+    <input type="number" class="form-control" id="pin" [(ngModel)]="pin" (ngModelChange)="isPinSelected($event)" min="100000" max="999999"/>
   </div>
 </div>

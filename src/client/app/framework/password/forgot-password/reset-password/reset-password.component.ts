@@ -47,7 +47,7 @@ export class ResetPasswordComponent implements OnInit {
     }
 
 
-    ngOnInit() {
+    ngOnInit() {debugger
         this.token = this._router.url.substr('reset_password?access_token'.length + 2);
         this.idPosition = this.token.indexOf('&') + 1;
         this.id = this.token.substring(this.idPosition + 28, this.idPosition + 4);

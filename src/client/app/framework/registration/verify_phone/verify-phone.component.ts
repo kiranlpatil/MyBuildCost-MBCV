@@ -23,6 +23,7 @@ export class VerifyPhoneComponent {
   MY_TAG_LINE: string;
   UNDER_LICENCE: string;
   BODY_BACKGROUND:string;
+  showModalStyle: boolean = false;
 
   constructor(private _router: Router, private formBuilder: FormBuilder,
               private verifyPhoneService: VerifyPhoneService, private messageService: MessageService) {
@@ -38,7 +39,6 @@ export class VerifyPhoneComponent {
   }
 
   onSubmit() {
-
     this.model = this.userForm.value;
     if (LocalStorageService.getLocalValue(LocalStorage.VERIFY_PHONE_VALUE) === 'from_registration') {
       this.verifyPhoneService.verifyPhone(this.model)
@@ -54,7 +54,6 @@ export class VerifyPhoneComponent {
   }
 
   resendVerificationCode() {
-
     if (LocalStorageService.getLocalValue(LocalStorage.VERIFY_PHONE_VALUE) === 'from_registration') {
       this.verifyPhoneService.resendVerificationCode()
         .subscribe(
@@ -66,15 +65,17 @@ export class VerifyPhoneComponent {
             error => (this.resendOtpFail(error)));
     }
   }
-  verifySuccess(res: any) {
-    var message = new Message();
+  verifySuccess(res: any) {debugger
+    this.showModalStyle=!this.showModalStyle;
+   /* var message = new Message();
     message.isError = false;
     message.custom_message = Messages.MSG_SUCCESS_NEWREGISTRATION;
     this.messageService.message(message);
-    this.navigateTo();
+    this.navigateTo();*/
   }
 
-  mobileVerificationSuccess(res: any) {
+  mobileVerificationSuccess(res: any) {debugger
+    this.showModalStyle=!this.showModalStyle;
     var message = new Message();
     message.isError = false;
     message.custom_message = Messages.MSG_SUCCESS_CHANGE_MOBILE_NUMBER;
@@ -133,6 +134,18 @@ export class VerifyPhoneComponent {
 
   navigateTo() {
     this._router.navigate([NavigationRoutes.APP_LOGIN]);
+  }
+
+  getStyleModal() {
+    if (this.showModalStyle) {
+      return 'block';
+    } else {
+      return 'none';
+    }
+  }
+
+  showHideModal() {
+    this.showModalStyle = !this.showModalStyle;
   }
 
 }
