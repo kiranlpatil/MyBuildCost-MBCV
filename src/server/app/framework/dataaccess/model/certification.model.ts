@@ -1,5 +1,5 @@
 interface CertificationModel {
-    names: string;
+    name: string;
     year : string;
     issuedBy : string;
     remark : string;

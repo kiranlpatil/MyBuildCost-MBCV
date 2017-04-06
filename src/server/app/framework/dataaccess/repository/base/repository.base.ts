@@ -81,9 +81,10 @@ class RepositoryBase<T extends mongoose.Document> implements IRead<T>, IWrite<T>
         } else {
           for (let role of industry[0].roles) {
             let obj:any = {
+              "industryName" : industry[0].name,
               "_id": role._id,
               "name": role.name
-            }
+            };
             this.items.push(obj);
           }
           callback(null, this.items);
@@ -111,6 +112,8 @@ class RepositoryBase<T extends mongoose.Document> implements IRead<T>, IWrite<T>
                 role_object.capabilities=new Array(0);
                 for(let capability of role.capabilities){
                   let obj:any = {
+                    "industryName" : industry[0].name,
+                    "roleName":role.name,
                     "_id": capability._id,
                     "name": capability.name
                   };
@@ -143,6 +146,9 @@ class RepositoryBase<T extends mongoose.Document> implements IRead<T>, IWrite<T>
                     if(ob == capability.name){
                       for(let complexity of capability.complexities){
                         let obj:any = {
+                          "industryName" : industry[0].name,
+                          "roleName":role.name,
+                          "capabilityName" : capability.name,
                           "_id": complexity._id,
                           "name": complexity.name,
                           "scenarios":complexity.scenarios

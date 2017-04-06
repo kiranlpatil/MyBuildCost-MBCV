@@ -9,15 +9,19 @@ import CapabilityModel = require("./capability.model");
 import RoleModel = require("./role.model");
 import CertificationModel = require("./certification.model");
 import AwardModel = require("./award.model");
+import IndustryModel = require("./industry.model");
 
 interface CandidateModel {
+  jobTitle : string;
   isVisible : boolean;
   aboutMyself: string;
   certifications : CertificationModel[];
   awards : AwardModel[];
   userId :  {type:mongoose.Schema.Types.ObjectId, ref:'User'};
   location: LocationModel;
-  roles: RoleModel;
+  industry : IndustryModel;
+  intrestedIndustries : string[];
+  roleType: string;
   academics :  AcademicModel[];
   professionalDetails :  ProfessionalDetailsModel[];
   employmentHistory : EmployeeHistoryModel[];

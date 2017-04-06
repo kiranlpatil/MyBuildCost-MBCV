@@ -20,6 +20,9 @@ class CandidateSchema {
   static get schema() {
     var schema = mongoose1.Schema({
 
+      jobTitle :{
+        type: String
+      },
       userId: {
         type: mongoose.Schema.Types.ObjectId, ref: 'User'
       },
@@ -30,24 +33,34 @@ class CandidateSchema {
         type: String
       },
       certifications: {
+        name: String,
+        year : String,
+        issuedBy : String,
+        remark : String
+      },
+      intrestedIndustries : {
         type: [String]
       },
       awards: {
-        type: [String]
-      },
-      roles: [{
         name: String,
-        capabilities: [{
-          complexities: [{
-            scenarios: {
+        year : String,
+        issuedBy : String,
+        remark : String
+      },
+      industry:{
+        roles: [{
+          name: String,
+          capabilities: [{
+            complexities: [{
+              scenarios: {
+                name: String
+              },
               name: String
-            },
+            }],
             name: String
-          }],
-          name: String
+          }]
         }]
-      }],
-      industry: [{type: mongoose.Schema.Types.ObjectId, ref: 'IIndustry'}],
+      },
       location: {
         cityName: String,
         state: String,
