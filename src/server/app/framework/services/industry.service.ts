@@ -25,6 +25,10 @@ class IndustryService {
     this.industryRepository.findByName(field,callback);
   }
 
+  pushIntoArray(name:any, value:string,callback:(error:any, result:any) => void) {
+    this.industryRepository.pushElementInArray(name,value,callback);
+  }
+
   create(item:any, callback:(error:any, result:any) => void) {
     this.industryRepository.create(item, (err, res) => {
       if (err) {

@@ -33,8 +33,6 @@ export function retrieve(req:express.Request, res:express.Response, next:any) {
         });
       }
       else {
-        console.log("Data " + JSON.stringify(result));
-        //  var token = auth.issueTokenWithUid(user);
         res.send({
           "status": "success",
           "data": result
@@ -50,7 +48,6 @@ export function create(req:express.Request, res:express.Response, next:any) { //
   try {
     let newIndustry:IndustryModel = <IndustryModel>req.body;
     let industryService = new IndustryService();
-      console.log("Industry Data"+JSON.stringify(newIndustry));
       industryService.create(newIndustry, (error, result) => {
         if (error) {
           console.log("crt role error", error);
@@ -69,7 +66,6 @@ export function create(req:express.Request, res:express.Response, next:any) { //
               },
               access_token: token
             });
-          console.log("industry inserted");
         }
       });
   }

@@ -166,6 +166,11 @@ class RepositoryBase<T extends mongoose.Document> implements IRead<T>, IWrite<T>
       }
     });
   }
+
+  pushElementInArray(name:string, value:string, callback:(error:any, result:any) => void) {
+    this._model.update({name: name}, { $push:{ "proficiencies.names":value } }, callback);
+  }
+
 }
 
 export = RepositoryBase;

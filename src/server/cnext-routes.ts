@@ -20,6 +20,7 @@ export function cnextInit(app: express.Application) {//todo add interceptor to a
   app.get("/api/industry/:id/proficiency", proficienciesController.retrieve );  //todo done
   app.post("/api/candidate", userInterceptor.create, candidateController.create);  //todo done
   app.put("/api/candidate/:id",  candidateController.updateDetails);//todo add auth interceptor as like update profile of user
+  app.put("/api/industry/:id/proficiency",  proficienciesController.update);//todo add auth interceptor as like update profile of user
   app.get("/api/candidate/:id",candidateController.retrieve);
   app.get("/api/industry/:id/roles/capability", capabilityController.retrieve ); //todo done
   app.get("/api/industry/:id/roles/capability/complexity", complexityController.retrieve ); //todo done
