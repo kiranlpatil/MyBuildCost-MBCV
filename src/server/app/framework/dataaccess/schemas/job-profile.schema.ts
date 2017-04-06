@@ -15,11 +15,47 @@ var mongooseConnection = DataAccess.mongooseConnection;
 class JobProfileSchema {
   static get schema() {
     var schema = mongoose.Schema({
-      proficiences :[{type : mongoose.Schema.Types.ObjectId, ref :'IProficiency'}],
-      domain :[{type : mongoose.Schema.Types.ObjectId, ref :'IDomain'}],
-      location : [{type : mongoose.Schema.Types.ObjectId, ref :'ILocation'}],
+      jobTitle :{
+        type : String
+      },
+      hiringManager :{
+        type : String
+      },
+      department :{
+        type : String
+      },
+      education :{
+        type : String
+      },
       experience :{
-        type : Number
+        type : String
+      },
+      salary :{
+        type : String
+      },
+      profiences :{
+        names : [String]
+      },
+      industry:{
+        name:String,
+        roles: [{
+          name: String,
+          capabilities: [{
+            complexities: [{
+              scenarios: {
+                name: String
+              },
+              name: String
+            }],
+            name: String
+          }]
+        }]
+      },
+      competencies :{
+        type : String
+      },
+      responsibility :{
+        type : String
       },
       postingDate :{
         type : Date

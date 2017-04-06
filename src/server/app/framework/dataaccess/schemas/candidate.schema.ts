@@ -48,6 +48,7 @@ class CandidateSchema {
         remark : String
       },
       industry:{
+        name:String,
         roles: [{
           name: String,
           capabilities: [{
