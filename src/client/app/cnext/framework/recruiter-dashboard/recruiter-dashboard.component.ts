@@ -1,5 +1,7 @@
 
-import {  Component  } from '@angular/core';
+import {  Component,OnInit  } from '@angular/core';
+import { LocalStorageService } from '../../../framework/shared/localstorage.service';
+import {LocalStorage} from "../../../framework/shared/constants";
 
 @Component({
   moduleId: module.id,
@@ -8,13 +10,13 @@ import {  Component  } from '@angular/core';
   styleUrls: ['recruiter-dashboard.component.css']
 })
 
-export class RecruiterDashboardComponent {
-
- /* constructor() {
-  }
-
-  ngOnInit() {
+export class RecruiterDashboardComponent implements  OnInit {
+  company_name:string;
+ /*constructor() {
   }*/
+  ngOnInit() {
+    this.company_name = LocalStorageService.getLocalValue(LocalStorage.COMPANY_NAME);
+  }
 
 
 

@@ -28,7 +28,6 @@ import { Http } from '@angular/http';
 export class CompanyDetailsComponent implements OnInit {
   private model = new CompanyDetails();
   private companyDetailsForm: FormGroup;
-  private company_name: any;
   private filesToUpload: Array<File>;
   private setOfDocuments:string[]=new Array();
   private image_path: any;
@@ -40,6 +39,7 @@ export class CompanyDetailsComponent implements OnInit {
   private fileName2:string;
   private fileName3:string;
   private buttonId:string;
+  company_name: any;
 
 
   constructor(private commanService: CommonService, private _router: Router, private http: Http,
@@ -59,7 +59,6 @@ export class CompanyDetailsComponent implements OnInit {
     }
 
     this.BODY_BACKGROUND = ImagePath.BODY_BACKGROUND;
-    this.company_name = LocalStorageService.getLocalValue(LocalStorage.EMAIL_ID);
   }
 
   ngOnInit() {
