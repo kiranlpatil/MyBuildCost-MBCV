@@ -1,10 +1,10 @@
-import {Component, OnInit, Input} from '@angular/core';
-import {VALUE_CONSTANT} from '../../../framework/shared/constants';
-import {ProficiencyService} from '../proficience.service';
-import {MessageService} from '../../../framework/shared/message.service';
-import {Message} from '../../../framework/shared/message';
-import {proficiencyDomainService} from './proficiency-domain.service';
-import {JobPostProficiencyService} from '../jobPostProficiency.service';
+import { Component, OnInit, Input } from '@angular/core';
+import { ValueConstant } from '../../../framework/shared/constants';
+import { ProficiencyService } from '../proficience.service';
+import { MessageService } from '../../../framework/shared/message.service';
+import { Message } from '../../../framework/shared/message';
+import { ProficiencyDomainService } from './proficiency-domain.service';
+import { JobPostProficiencyService } from '../jobPostProficiency.service';
 
 @Component({
   moduleId: module.id,
@@ -13,7 +13,7 @@ import {JobPostProficiencyService} from '../jobPostProficiency.service';
   styleUrls: ['proficiency-domain.component.css']
 })
 
-export class proficiencyDomainComponent implements OnInit {
+export class ProficiencyDomainComponent implements OnInit {
   @Input('type') type : string;
   private selectedproficiencies=new Array();
   private storedProficiency = new Array();
@@ -24,21 +24,21 @@ export class proficiencyDomainComponent implements OnInit {
   private isProficiencyShow:boolean =false;
 
   constructor(private proficiencyService: ProficiencyService,
-              private proficiencydoaminService: proficiencyDomainService,
+              private proficiencydoaminService: ProficiencyDomainService,
               private messageService:MessageService,
               private JobPostProficiency:JobPostProficiencyService) {
 
     proficiencyService.showTest$.subscribe(
-      data=>{
+      data => {
         this.isProficiencyShow=data;
       }
     );
   }
 
   ngOnInit() {
-    if(this.type==='profeciency'){
+    if(this.type==='profeciency') {
       this.proficiencyType=true;
-      this.placeHolderName='proficiency'
+      this.placeHolderName='proficiency';
 
       this.proficiencydoaminService.getProficiency()
         .subscribe(
@@ -47,9 +47,9 @@ export class proficiencyDomainComponent implements OnInit {
 
 
   }
-    if(this.type==='domain'){
+    if(this.type==='domain') {
       this.domainType=true;
-      this.placeHolderName='domain'
+      this.placeHolderName='domain';
 
       this.proficiencydoaminService.getDomain()
         .subscribe(
@@ -59,20 +59,20 @@ export class proficiencyDomainComponent implements OnInit {
 
   }
 
-  onProficiencySuccess(data:any){
-    for(let proficiency of data.proficiency){
+  onProficiencySuccess(data:any) {
+    for(let proficiency of data.proficiency) {
       this.selectedproficiencies.push(proficiency);
     }
 
   }
-  onGetDomainSuccess(data:any){
-    for(let domain of data.domains){
+  onGetDomainSuccess(data:any) {
+    for(let domain of data.domains) {
       this.selectedproficiencies.push(domain);
     }
 
   }
 
-  onError(error:any){
+  onError(error:any) {
     var message = new Message();
     message.error_msg = error.err_msg;
     message.isError = true;
@@ -80,14 +80,13 @@ export class proficiencyDomainComponent implements OnInit {
   }
 
   selectedProficiencyModel(newVal: any) {
-    if(this.storedProficiency.length < VALUE_CONSTANT.MAX_PROFECIENCES) {
+    if(this.storedProficiency.length < ValueConstant.MAX_PROFECIENCES) {
       this.showAlert=false;
       this.storedProficiency.push(newVal);
       this.deleteSelectedProfeciency(newVal);
       console.log(this.storedProficiency);
       this.JobPostProficiency.change(this.storedProficiency);
-    }
-    else{
+    } else {
       this.showAlert=true;
     }
 

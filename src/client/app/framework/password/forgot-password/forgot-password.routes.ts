@@ -1,5 +1,5 @@
-import {  Route } from '@angular/router';
-import { ForgotPasswordComponent } from './index';
+import {    Route  } from '@angular/router';
+import {  ForgotPasswordComponent  } from './index';
 
 export const ForgotPasswordRoutes: Route[] = [
   {

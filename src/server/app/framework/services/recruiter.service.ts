@@ -48,7 +48,7 @@ class RecruiterService {
               }
               else {
                 var userId1 =res._id;
-                var newItem ={
+                var newItem:any ={
                   isRecruitingForself: item.isRecruitingForself,
                   company_name: item.company_name,
                   company_size: item.company_size,

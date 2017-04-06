@@ -1,10 +1,4 @@
-
-import {Component, Input} from '@angular/core';
-import { Router } from '@angular/router';
-import { FormBuilder} from '@angular/forms';
-import {Http} from '@angular/http';
-import {LoaderService} from '../../../framework/shared/loader/loader.service';
-import {MoreAboutMyself} from './more-about-myself';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   moduleId: module.id,
@@ -13,7 +7,7 @@ import {MoreAboutMyself} from './more-about-myself';
   styleUrls: ['more-about-myself.component.css']
 })
 
-export class MoreAboutMyselfComponent {
+export class MoreAboutMyselfComponent implements OnInit {
 
   private  maxLength :number=250;
   private  reSize: string[];
@@ -24,21 +18,12 @@ export class MoreAboutMyselfComponent {
   private wordsTillNow:number;
   private remainingWords:number;
   private maxword:number;
-
-
-
   constructor() {
     this.reSize = new Array(1);
-
-
-
   }
-  ngOnInit(){
+  ngOnInit() {
     this.remainingWords=this.maxLength;
   }
-
-
-
   wordCount(event:any) {
    this.newstringOne= this. aboutMyself.split(' ');
     this.newstringTwo= this. aboutMyself.split('.');
@@ -49,13 +34,7 @@ export class MoreAboutMyselfComponent {
       this. maxword=this.aboutMyself.length;
     }
   }
-
-
-
-
   addAnother() {
-
     this.reSize.push('null');
-
   }
 }

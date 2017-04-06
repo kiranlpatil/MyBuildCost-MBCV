@@ -1,9 +1,9 @@
-import {  Component,OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { ChangeEmailService } from './change-email.service';
-import { ChangeEmail } from './changeemail';
-import { LocalStorageService } from '../../../shared/localstorage.service';
-import { LocalStorage } from '../../../shared/constants';
+import {    Component,OnInit  } from '@angular/core';
+import {  Router  } from '@angular/router';
+import {  ChangeEmailService  } from './change-email.service';
+import {  ChangeEmail  } from './changeemail';
+import {  LocalStorageService  } from '../../../shared/localstorage.service';
+import {  LocalStorage  } from '../../../shared/constants';
 import {
   Message,
   Messages,
@@ -11,9 +11,9 @@ import {
   CommonService,
   NavigationRoutes,
   ImagePath
- } from '../../../shared/index';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { ValidationService } from '../../../shared/customvalidations/validation.service';
+  } from '../../../shared/index';
+import {  FormGroup, FormBuilder, Validators  } from '@angular/forms';
+import {  ValidationService  } from '../../../shared/customvalidations/validation.service';
 
 
 @Component({

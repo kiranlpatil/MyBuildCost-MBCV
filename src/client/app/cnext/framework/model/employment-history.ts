@@ -1,7 +1,6 @@
 
 
 export class EmployementHistory {
-
   companyName:string='';
   designation:string='';
   workedFromMonth:string='';
@@ -9,5 +8,4 @@ export class EmployementHistory {
   workedToMonth:string='';
   workedToYear:string='';
   remarks:string='';
-
 }

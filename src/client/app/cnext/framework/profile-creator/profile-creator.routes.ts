@@ -1,9 +1,9 @@
-import {  Route } from '@angular/router';
-import { ProfileCreatorComponent } from './index';
+import {    Route  } from '@angular/router';
+import {  ProfileCreatorComponent  } from './index';
 
 export const ProfileCreator: Route[] = [
   {
-    path: 'createprofile',
+    path: 'create_profile',
     component: ProfileCreatorComponent
   }
 ];

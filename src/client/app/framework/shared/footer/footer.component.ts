@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { ProjectAsset } from '../constants';
+import {  Component  } from '@angular/core';
+import {  ProjectAsset  } from '../constants';
 
 @Component({
     moduleId: module.id,

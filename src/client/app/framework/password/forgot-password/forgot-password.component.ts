@@ -1,12 +1,12 @@
-import {  Component } from '@angular/core';
-import {  Router } from '@angular/router';
-import { ForgotPassword } from './forgotpassword';
-import { ForgotPasswordService } from './forgot-password.service';
-import { NavigationRoutes,Message, Messages, MessageService, CommonService} from '../../shared/index';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { ValidationService } from '../../shared/customvalidations/validation.service';
-import { ImagePath, ProjectAsset } from '../../shared/constants';
-import {LoaderService} from '../../shared/loader/loader.service';
+import {    Component  } from '@angular/core';
+import {   Router  } from '@angular/router';
+import {  ForgotPassword  } from './forgotpassword';
+import {  ForgotPasswordService  } from './forgot-password.service';
+import {  NavigationRoutes,Message, Messages, MessageService, CommonService  } from '../../shared/index';
+import {  FormGroup, FormBuilder, Validators  } from '@angular/forms';
+import {  ValidationService  } from '../../shared/customvalidations/validation.service';
+import {  ImagePath, ProjectAsset  } from '../../shared/constants';
+import {  LoaderService  } from '../../shared/loader/loader.service';
 
 
 
@@ -76,7 +76,7 @@ export class ForgotPasswordComponent {
       this._router.navigate([navigateTo]);
     }
   }
-  
+
   goBack() {
     this.commanService.goBack();
     this._router.navigate([NavigationRoutes.APP_LOGIN]);

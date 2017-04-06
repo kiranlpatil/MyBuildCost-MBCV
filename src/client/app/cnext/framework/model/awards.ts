@@ -1,4 +1,4 @@
-export class awards {
+export class Awards {
   title:string='';
   awardsdetails:string='';
   month:string='';

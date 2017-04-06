@@ -12,11 +12,32 @@
     <cn-job-requirement></cn-job-requirement>
   </div>
 
+  <div class="roles section-container">
+    <h4 class="heading">Select Industry (Any one value from the list below) </h4>
+    <div class="main-content">
+      <cn-industry-list></cn-industry-list>
+    </div>
+  </div>
+
+  <div class="section-container" [hidden]="!isRolesShow">
+    <h4 class="heading">Select Area of Work (Max 3)</h4>
+    <div class="main-content">
+      <cn-role-list> ></cn-role-list>
+    </div>
+  </div>
+
+  <div class="section-container" [hidden]="!isRoleTypeShow">
+    <h4 class="heading">Select role Type (Any one of the following)</h4>
+    <div class="main-content">
+      <cn-role-type-list></cn-role-type-list>
+    </div>
+  </div>
 
 
   <div class="section-container">
-    <h4 class="heading"> Text (Max. 11)</h4>
+    <h4 class="heading"> Select Capabilities (Max. 10)</h4>
     <div class="main-content">
+      <p></p>
       <cn-capibility-list></cn-capibility-list>
     </div>
   </div>
@@ -29,16 +50,16 @@
   </div>
 
   <div class="section-container clearfix profeiciency-domain">
-
+    <h4 class="heading">Enter Proficiencies (Max. 25)</h4>
     <div class="main-content clearfix">
-      <div class="col-sm-6 no-padding">
-        <h4 class="heading">Proficiencies (Max. 20)</h4>
-        <cn-proficiency-doamin [type]="'profeciency'"></cn-proficiency-doamin>
-      </div>
-      <div class="col-sm-6 no-padding">
-        <h4 class="heading">Domains (Max. 20)</h4>
-        <cn-proficiency-doamin [type]="'domain'"></cn-proficiency-doamin>
-      </div>
+      <cn-proficiency-doamin [type]="'profeciency'"></cn-proficiency-doamin>
+    </div>
+  </div>
+
+  <div class="section-container clearfix profeiciency-domain">
+      <h4 class="heading">Industry (Max. 20)</h4>
+    <div class="main-content clearfix">
+      <cn-industry-experience-list></cn-industry-experience-list>
     </div>
   </div>
 

@@ -63,7 +63,7 @@ $primary-option: #1c75bd;
     & > input {
       & + span {
         &:hover {
-          border: 0px solid $primary-option;
+          border: 0 solid $primary-option;
         }
       }
     }
@@ -71,10 +71,27 @@ $primary-option: #1c75bd;
     &:hover {
       & > input {
         & + span {
-          border: 0px solid $primary-option;
+          border: 0 solid $primary-option;
         }
       }
     }
   }
 }
 
+@media screen and (max-width: 980px) {
+  .select-option {
+    margin: 0 15px 0 0;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .select-option > label {
+    padding: 7px 0;
+
+    & > input {
+      & + span {
+        font-size: 10px;
+      }
+    }
+  }
+}

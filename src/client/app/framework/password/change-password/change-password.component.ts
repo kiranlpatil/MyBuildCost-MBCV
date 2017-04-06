@@ -1,18 +1,18 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { ChangePasswordService } from './change-password.service';
-import { ChangePassword } from './changepassword';
+import {  Component  } from '@angular/core';
+import {  Router  } from '@angular/router';
+import {  ChangePasswordService  } from './change-password.service';
+import {  ChangePassword  } from './changepassword';
 import {
     Message,
     MessageService,
     CommonService,
     NavigationRoutes,
     ImagePath
-} from '../../shared/index';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { LocalStorageService } from '../../shared/localstorage.service';
-import { LocalStorage } from '../../shared/constants';
-import {LoaderService} from '../../shared/loader/loader.service';
+ } from '../../shared/index';
+import {  FormGroup, FormBuilder, Validators  } from '@angular/forms';
+import {  LocalStorageService  } from '../../shared/localstorage.service';
+import {  LocalStorage  } from '../../shared/constants';
+import {  LoaderService  } from '../../shared/loader/loader.service';
 
 @Component({
     moduleId: module.id,

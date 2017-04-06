@@ -1,14 +1,14 @@
-import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs/Subject';
+import {  Injectable  } from '@angular/core';
+import {  Subject  } from 'rxjs/Subject';
 
 @Injectable()
-export class myRoTypeTestService {
+export class MyRoTypeTestService {
 
   // Observable string sources
-  private _showRoleTyprSource = new Subject<boolean>();
+   _showRoleTyprSource = new Subject<boolean>();
 
   // Observable string streams
-  showTestRoleType$ = this._showRoleTyprSource.asObservable();
+   showTestRoleType$ = this._showRoleTyprSource.asObservable();
 
   // Service message commands
   change(isAnswerTrue: boolean) {

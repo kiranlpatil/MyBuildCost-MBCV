@@ -5,7 +5,7 @@ import { Subject } from 'rxjs/Subject';
 export class AwardService {
 
   // Observable string sources
-  private _showAwardSource = new Subject<boolean>();
+   _showAwardSource = new Subject<boolean>();
 
   // Observable string streams
   showTest$ = this._showAwardSource.asObservable();

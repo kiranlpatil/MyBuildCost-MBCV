@@ -1,5 +1,5 @@
-import { Route } from '@angular/router';
-import { VerifyUserComponent } from './index';
+import {   Route  } from '@angular/router';
+import {  VerifyUserComponent  } from './index';
 
 export const VerifyUserRoutes:Route[] = [
   {

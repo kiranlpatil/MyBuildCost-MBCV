@@ -1,11 +1,11 @@
 
-import {Component} from '@angular/core';
-import {BaseService} from '../../../framework/shared/httpservices/base.service';
-import {ProfessionalData} from '../model/professional-data';
-import {ProfessionalDataService } from './professional-data.service'
-import {Message} from '../../../framework/shared/message';
-import {MessageService} from '../../../framework/shared/message.service';
-import {ProfessionalService} from '../professional-service';
+import { Component ,OnInit } from '@angular/core';
+import { BaseService } from '../../../framework/shared/httpservices/base.service';
+import { ProfessionalData } from '../model/professional-data';
+import { ProfessionalDataService } from './professional-data.service';
+import { Message } from '../../../framework/shared/message';
+import { MessageService } from '../../../framework/shared/message.service';
+import { ProfessionalService } from '../professional-service';
 @Component({
   moduleId: module.id,
   selector: 'cn-professional-data',
@@ -13,7 +13,7 @@ import {ProfessionalService} from '../professional-service';
   styleUrls: ['professional-data.component.css']
 })
 
-export class ProfessionalDataComponent extends BaseService {
+export class ProfessionalDataComponent extends BaseService implements OnInit {
   private selectedProfessionalData=new ProfessionalData();
   private realocationlist=new Array();
   private educationlist=new Array();
@@ -28,7 +28,7 @@ export class ProfessionalDataComponent extends BaseService {
 
 
 
-  constructor(private professionaldataservice:ProfessionalDataService, 
+  constructor(private professionaldataservice:ProfessionalDataService,
               private messageService:MessageService,
               private professionalService : ProfessionalService) {
     super();
@@ -38,75 +38,75 @@ export class ProfessionalDataComponent extends BaseService {
 
       this.professionaldataservice.getRealocationList()
         .subscribe(
-          data=> { this.onRealocationListSuccess(data)},
-          error =>{ this.onError(error);});
+          data => { this.onRealocationListSuccess(data); },
+          error => { this.onError(error);});
 
     this.professionaldataservice.getEducationList()
       .subscribe(
         data=> { this.onEducationListSuccess(data);},
-        error =>{ this.onError(error);});
+        error => { this.onError(error);});
 
 
     this.professionaldataservice.getExperienceList()
       .subscribe(
         data=> { this.onExperienceListSuccess(data);},
-        error =>{ this.onError(error);});
+        error => { this.onError(error);});
 
     this.professionaldataservice.getCurrentSalaryList()
       .subscribe(
         data=> { this.onCurrentSalaryListSuccess(data);},
-        error =>{ this.onError(error);});
+        error => { this.onError(error);});
 
 
     this.professionaldataservice.getNoticePeriodList()
       .subscribe(
         data=> { this.onGetNoticePeriodListSuccess(data);},
-        error =>{ this.onError(error);});
+        error => { this.onError(error);});
 
 
   }
-  onGetNoticePeriodListSuccess(data:any){
-    for(let k of data.noticeperiod){
+  onGetNoticePeriodListSuccess(data:any) {
+    for(let k of data.noticeperiod) {
       this.noticeperiodlist.push(k);
     }
 
   }
 
-  onCurrentSalaryListSuccess(data:any){
-    for(let k of data.salary ){
+  onCurrentSalaryListSuccess(data:any) {
+    for(let k of data.salary ) {
       this.salarylist.push(k);
     }
 
   }
 
-  onExperienceListSuccess(data:any){
-    for(let k of data.experience){
+  onExperienceListSuccess(data:any) {
+    for(let k of data.experience) {
       this.experiencelist.push(k);
     }
 
   }
 
-  onEducationListSuccess(data:any){
-    for(let k of data.educated){
+  onEducationListSuccess(data:any) {
+    for(let k of data.educated) {
       this.educationlist.push(k);
     }
 
   }
-  onRealocationListSuccess(data:any){
-    for(let k of data.realocate ){
+  onRealocationListSuccess(data:any) {
+    for(let k of data.realocate ) {
       this.realocationlist.push(k);
     }
   }
-  onError(error:any){
+  onError(error:any) {
     var message = new Message();
     message.error_msg = error.err_msg;
     message.isError = true;
     this.messageService.message(message);
   }
 
-  changeValue(){
+  changeValue() {
     this.professionalService.change(true);
-    
+
   }
   selectedRealocationModel(newVal: any) {
     this.realocationModel = newVal;

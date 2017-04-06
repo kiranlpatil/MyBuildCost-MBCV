@@ -1,8 +1,7 @@
-import {  Component } from '@angular/core';
-import { FormGroup} from '@angular/forms';
-import {academicdetails} from './academic-details';
-import {VALUE_CONSTANT} from '../../../framework/shared/constants';
-import {EducationalService} from '../educational-service';
+import {   Component  } from '@angular/core';
+import {  Academicdetails  } from './academic-details';
+import {  ValueConstant  } from '../../../framework/shared/constants';
+import {  EducationalService  } from '../educational-service';
 
 @Component({
   moduleId: module.id,
@@ -13,16 +12,16 @@ import {EducationalService} from '../educational-service';
 
 export class AcademicDetailComponent {
 
- private  tempfield: string[];
- private year: any;
- private currentDate: any;
- private yearList = new Array();
- private selectedacademicsdeatils:academicdetails[]=new Array();
+  private  tempfield: string[];
+  private year: any;
+  private currentDate: any;
+  private yearList = new Array();
+  private selectedacademicsdeatils:Academicdetails[]=new Array();
   private disbleButton:boolean=false;
   private tempSchoolName:string='';
   private tempUnivercityName:string='';
-private tempPassingYear:string='';
-private  tempSpecialization:string='';
+  private tempPassingYear:string='';
+  private  tempSpecialization:string='';
   constructor(private educationalService : EducationalService) {
 
     this.tempfield = new Array(1);
@@ -34,56 +33,51 @@ private  tempSpecialization:string='';
   }
 
   createYearList(year: number) {
-    for (let i = 0; i < VALUE_CONSTANT.MAX_ACADEMIC_YEAR_LIST; i++) {
+    for (let i = 0; i < ValueConstant.MAX_ACADEMIC_YEAR_LIST; i++) {
       this.yearList.push(year--);
     }
   }
-  selectedSchoolName(schoolname:string){
-this.tempSchoolName=schoolname;
+  selectedSchoolName(schoolname:string) {
+    this.tempSchoolName=schoolname;
 
   }
 
-  selectedeUniversityName(universityname:string){
+  selectedeUniversityName(universityname:string) {
     this.tempUnivercityName=universityname;
 
   };
-  selectedPassingYear(passingyear:string){
+  selectedPassingYear(passingyear:string) {
     this.tempPassingYear=passingyear;
   };
 
-  selectedSpecialization(remark:string){
+  selectedSpecialization(remark:string) {
     this.tempSpecialization=remark;
   };
 
-  changeValue(){
+  changeValue() {
     this.educationalService.change(true);
 
   }
 
 
   addAnother() {
-
-      if(this.tempSchoolName==='' || this.tempUnivercityName==='' ||
-        this.tempPassingYear==='' || this.tempSpecialization==='' )
-      {
-
-        this.disbleButton=true;
-      }
-      else {
-        this.disbleButton = false;
-        let temp=new academicdetails();
-        temp.schoolName=this.tempSchoolName;
-        temp.universityName=this.tempUnivercityName;
-        temp.passingyear=this.tempPassingYear;
-        temp.specialization=this.tempSpecialization;
-        this.selectedacademicsdeatils.push(temp);
-
-        console.log(this.selectedacademicsdeatils);
-        this.tempfield.push('null');
-
-        this.tempSchoolName='';
-        this.tempUnivercityName='';
-        this.tempPassingYear='';this.tempSpecialization='';
-      }
+    if(this.tempSchoolName==='' || this.tempUnivercityName==='' ||
+      this.tempPassingYear==='' || this.tempSpecialization==='' ) {
+      this.disbleButton=true;
+    } else {
+      this.disbleButton = false;
+      let temp=new Academicdetails();
+      temp.schoolName=this.tempSchoolName;
+      temp.universityName=this.tempUnivercityName;
+      temp.passingyear=this.tempPassingYear;
+      temp.specialization=this.tempSpecialization;
+      this.selectedacademicsdeatils.push(temp);
+      console.log(this.selectedacademicsdeatils);
+      this.tempfield.push('null');
+      this.tempSchoolName='';
+      this.tempUnivercityName='';
+      this.tempPassingYear='';
+      this.tempSpecialization='';
+    }
   }
 }

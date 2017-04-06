@@ -4,17 +4,12 @@ $option-border-color: #999;
 $primary-option: #1c75bd;
 $secondary-option: #00aed5;
 
-.info {
-  font-size: 12px;
-  font-style: italic;
-  margin: 0;
-}
-
 .color-panel {
   border-radius: 25px;
-  height: 10px;
-  width: 10px;
   display: inline-block;
+  height: 10px;
+  padding: 0;
+  width: 10px;
 }
 
 .primary-color {

@@ -1,6 +1,6 @@
-import {  Injectable } from '@angular/core';
-import { Subject } from 'rxjs/Subject';
-import { UserProfile } from '../../dashboard/user';
+import {    Injectable  } from '@angular/core';
+import {  Subject  } from 'rxjs/Subject';
+import {  UserProfile  } from '../../dashboard/user';
 
 @Injectable()
 export class ProfileService {

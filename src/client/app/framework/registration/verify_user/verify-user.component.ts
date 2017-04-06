@@ -1,13 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { NavigationRoutes, ImagePath, ProjectAsset, LocalStorage, Messages } from '../../shared/constants';
-import { ValidationService } from '../../shared/customvalidations/validation.service';
-import { VerifyUser } from './verify_user';
-import { VerifyUserService } from './verify-user.service';
-import { LocalStorageService } from '../../shared/localstorage.service';
-import { Message } from '../../shared/message';
-import { MessageService } from '../../shared/message.service';
+import {   Component, OnInit  } from '@angular/core';
+import {  Router  } from '@angular/router';
+import {  FormBuilder, FormGroup, Validators  } from '@angular/forms';
+import {  NavigationRoutes, ImagePath, ProjectAsset, LocalStorage, Messages  } from '../../shared/constants';
+import {  ValidationService  } from '../../shared/customvalidations/validation.service';
+import {  VerifyUser  } from './verify_user';
+import {  VerifyUserService  } from './verify-user.service';
+import {  LocalStorageService  } from '../../shared/localstorage.service';
+import {  Message  } from '../../shared/message';
+import {  MessageService  } from '../../shared/message.service';
 
 @Component({
     moduleId: module.id,
@@ -47,12 +47,11 @@ export class VerifyUserComponent implements OnInit {
         this.model.email=LocalStorageService.getLocalValue(LocalStorage.EMAIL_ID);
         let val=LocalStorageService.getLocalValue(LocalStorage.FROM_CANDIDATE_REGISTRATION);
         console.log('isCandidate value is true:',this.isCandidate);
-      if(val === 'true'){
+      if(val === 'true') {
         this.isCandidate =true;
         this.chkMobile = false;
         this.chkEmail = true;
-      }
-      else {
+      } else {
         this.isCandidate =false;
         this.chkMobile = true;
         this.chkEmail = false;

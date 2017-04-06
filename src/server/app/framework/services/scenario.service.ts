@@ -13,7 +13,7 @@ class ScenarioService {
   }
 
   retrieve(field:any, callback:(error:any, result:any) => void) {
-    this.scenarioRepository.retrieveAll(field, callback);
+    this.scenarioRepository.retrieveAll(field,{}, callback);
   }
 
   create(item:any, callback:(error:any, result:any) => void) {

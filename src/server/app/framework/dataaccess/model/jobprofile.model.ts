@@ -4,10 +4,10 @@ import IDomain = require("../mongoose/domain");
 import ILocation = require("../mongoose/location");
 
 interface JobProfileModel {
-    profiences :  [{type:mongoose.Schema.Types.ObjectId, ref:'IProficiency'}];
-    domain: {type:mongoose.Schema.Types.ObjectId, ref:'IDomain'};
+    profiences :  any[];
+    domain: any;
     experience : number;
-    location : {type:mongoose.Schema.Types.ObjectId, ref:'ILocation'};
+    location : any;
     postingDate : Date;
     remark : string;
 

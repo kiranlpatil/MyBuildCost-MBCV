@@ -1,23 +1,22 @@
 
-import {  Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { RecruiterService } from './recruiter.service';
-import { Recruiter } from './recruiter';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ValidationService } from '../../shared/customvalidations/validation.service';
+import {   Component ,OnInit } from '@angular/core';
+import {  Router  } from '@angular/router';
+import {  RecruiterService  } from './recruiter.service';
+import {  Recruiter  } from './recruiter';
+import {  FormBuilder, FormGroup, Validators  } from '@angular/forms';
+import {  ValidationService  } from '../../shared/customvalidations/validation.service';
 import {
   Message,
   MessageService,
   CommonService,
   NavigationRoutes,
   AppSettings
-} from '../../shared/index';
-import { ImagePath, LocalStorage, ProjectAsset } from '../../shared/constants';
-import { LocalStorageService } from '../../shared/localstorage.service';
-import {LoaderService} from '../../shared/loader/loader.service';
-import {Http,Response} from '@angular/http';
-import {RecruitingService} from '../../shared/recruiting.service';
-import {DateService} from '../../../cnext/framework/date.service';
+ } from '../../shared/index';
+import {  ImagePath, LocalStorage  } from '../../shared/constants';
+import {  LocalStorageService  } from '../../shared/localstorage.service';
+import { LoaderService } from '../../shared/loader/loader.service';
+import { Http,Response } from '@angular/http';
+import { RecruitingService } from '../../shared/recruiting.service';
 
 
 @Component({
@@ -27,7 +26,7 @@ import {DateService} from '../../../cnext/framework/date.service';
   styleUrls: ['recruiter.component.css'],
 })
 
-export class RecruiterComponent {
+export class RecruiterComponent implements OnInit {
   private model = new Recruiter();
   private storedcountry:string;
   private storedstate:string;
@@ -40,9 +39,9 @@ export class RecruiterComponent {
   private countries:string[]=new Array(0);
   private states:string[]=new Array(0);
   private cities:string[]=new Array(0);
-  private countryModel:string;
-  private stateModel:string;
-  private cityModel:string;
+ // private countryModel:string;
+ // private stateModel:string;
+ // private cityModel:string;
   private isPasswordConfirm: boolean;
   private isFormSubmitted = false;
   private recruiterForm: FormGroup;
@@ -56,10 +55,11 @@ export class RecruiterComponent {
 
 
   constructor(private commanService: CommonService, private _router: Router, private http: Http,
-              private recruiterService: RecruiterService, private recruitmentForService: RecruitingService, private messageService: MessageService, private formBuilder: FormBuilder, private loaderService:LoaderService) {
+              private recruiterService: RecruiterService, private recruitmentForService: RecruitingService,
+              private messageService: MessageService, private formBuilder: FormBuilder, private loaderService:LoaderService) {
 
     recruitmentForService.showRecruitmentFor$.subscribe(
-      data=>{
+      data=> {
         this.isRecruitingForself=data;
         console.log('Recruiting for:',this.isRecruitingForself);
       }
@@ -88,8 +88,8 @@ export class RecruiterComponent {
     this.BODY_BACKGROUND = ImagePath.BODY_BACKGROUND;
     this.image_path = ImagePath.PROFILE_IMG_ICON;
   }
-  ngOnInit()
-  {
+
+  ngOnInit() {
     this.model = this.recruiterForm.value;
 
     this.http.get('address')
@@ -97,7 +97,7 @@ export class RecruiterComponent {
       .subscribe(
         data => {
           this.locationDetails=data.address;
-          for(var  i = 0; i <data.address.length; i++){
+          for(var  i = 0; i <data.address.length; i++) {
             this.countries.push(data.address[i].country);
             console.log(data.address[0].country);
 
@@ -130,10 +130,10 @@ export class RecruiterComponent {
   }
 
   selectCountryModel(newval:string) {
-    for(let item of this.locationDetails){
-      if(item.country===newval){
+    for(let item of this.locationDetails) {
+      if(item.country===newval) {
         let tempStates: string[]= new Array(0);
-        for(let state of item.states){
+        for(let state of item.states) {
           tempStates.push(state.name);
         }
         this.states=tempStates;
@@ -142,17 +142,17 @@ export class RecruiterComponent {
     this.storedcountry=newval;
   }
 
-  selectCompanyHeadquarterModel(newval : string){
+  selectCompanyHeadquarterModel(newval : string) {
 
     this.companyHeadquarter=newval;
     this.recruiterForm.value.company_headquarter_country=this.companyHeadquarter;
   }
 
   selectStateModel(newval:string) {
-    for(let item of this.locationDetails){
-      if(item.country===this.storedcountry){
-        for(let state of item.states){
-          if(state.name===newval){
+    for(let item of this.locationDetails) {
+      if(item.country===this.storedcountry) {
+        for(let state of item.states) {
+          if(state.name===newval) {
             let tempCities: string[]= new Array(0);
             for(let city of state.cities) {
               tempCities.push(city);
@@ -165,7 +165,7 @@ export class RecruiterComponent {
     this.storedstate=newval;
   }
 
-  selectCityModel(newval : string){
+  selectCityModel(newval : string) {
     this.storedcity=newval;
 
   }
@@ -235,7 +235,7 @@ export class RecruiterComponent {
   }
 
   showMessage() {
-    this.isShowMessage =true
+    this.isShowMessage =true;
   }
 
   selectPassword(newval:any) {

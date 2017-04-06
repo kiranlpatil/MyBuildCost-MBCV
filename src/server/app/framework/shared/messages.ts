@@ -41,7 +41,7 @@ class Messages {
   public static MSG_ERROR_ACCOUNT_STATUS: string = 'Account is not active. Kindly verify your account by clicking the link sent after registration';
   public static MSG_ERROR_VERIFY_ACCOUNT: string = 'Please click on the link sent to your email in order to activate your account ';
   public static MSG_ERROR_INVALID_ID: string = 'Invalid Userid';
-  public static MSG_ERROR_USER_NOT_PRESENT: string = 'You are not registered with us.Kindly click on Register Now!!!';
+  public static MSG_ERROR_USER_NOT_PRESENT: string = 'You are not registered with us.Kindly click on Register!';
   public static MSG_ERROR_USER_WITH_EMAIL_PRESENT: string = 'You are already registered.Kindly click on login';
   public static MSG_ERROR_DIRECTORY_NOT_FOUND: string = 'Image directory not found';
   public static MSG_ERROR_INVALID_TOKEN: string = 'Invalid access token';

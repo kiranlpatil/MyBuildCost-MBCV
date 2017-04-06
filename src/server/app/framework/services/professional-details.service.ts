@@ -14,7 +14,7 @@ class ProfessionalDetailsService {
   }
 
   retrieve(field:any, callback:(error:any, result:any) => void) {
-    this.professionalDetailsRepository.retrieveAll(field, callback);
+    this.professionalDetailsRepository.retrieveAll(field,{}, callback);
   }
 
   create(item:any, callback:(error:any, result:any) => void) {

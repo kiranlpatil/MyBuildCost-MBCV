@@ -92,14 +92,21 @@ $profile-section-shadow: rgba(204, 204, 204, 1);
   .poster-wrapper {
     margin: 100px auto 0;
 
-    .col-sm-3 {
-      float: left;
-      width: 30%;
+    .col-sm-3, .col-sm-9 {
+      float: none;
+      margin-bottom: 15px;
+      padding: 0;
+      width: 100%;
     }
+  }
 
-    .col-sm-9 {
-      float: left;
-      width: 70%;
+  .nav-tabs {
+    li {
+      a {
+        padding: 15px;
+        width: auto;
+        font-size: 12px;
+      }
     }
   }
 }

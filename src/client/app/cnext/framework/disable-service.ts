@@ -5,10 +5,10 @@ import { Subject } from 'rxjs/Subject';
 export class DisableTestService {
 
   // Observable string sources
-  private _showDisableTestSource = new Subject<boolean>();
+   _showDisableTestSource = new Subject<boolean>();
 
   // Observable string streams
-  showTestDisable$ = this._showDisableTestSource.asObservable();
+   showTestDisable$ = this._showDisableTestSource.asObservable();
 
   // Service message commands
   change(isAnswerTrue: boolean) {

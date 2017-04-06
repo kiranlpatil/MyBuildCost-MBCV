@@ -1,19 +1,19 @@
-import {Component} from '@angular/core';
-import {LocalStorageService} from '../../../framework/shared/localstorage.service';
-import {LocalStorage, NavigationRoutes} from '../../../framework/shared/constants';
-import {Router} from '@angular/router';
-import {DashboardService} from '../../../framework/dashboard/dashboard.service';
-import {TestService} from '../test.service';
-import {ComplexityService} from '../complexity.service';
-import {ProficiencyService} from '../proficience.service';
-import {ProfessionalService} from '../professional-service';
-import {EducationalService} from '../educational-service';
-import {AwardService} from '../award-service';
-import {myRoleListTestService} from "../myRolelist.service";
-import {MyRoleService} from '../role-service';
-import {myRoTypeTestService} from '../myRole-Type.service';
-import {DisableTestService} from "../disable-service";
-
+import { Component ,OnInit } from '@angular/core';
+import { LocalStorageService } from '../../../framework/shared/localstorage.service';
+import { LocalStorage, NavigationRoutes } from '../../../framework/shared/constants';
+import { Router } from '@angular/router';
+import { DashboardService } from '../../../framework/dashboard/dashboard.service';
+import { TestService } from '../test.service';
+import { ComplexityService } from '../complexity.service';
+import { ProficiencyService } from '../proficience.service';
+import { ProfessionalService } from '../professional-service';
+import { EducationalService } from '../educational-service';
+import { AwardService } from '../award-service';
+import { MyRoleListTestService } from '../myRolelist.service';
+import { MyRoTypeTestService } from '../myRole-Type.service';
+import { DisableTestService } from '../disable-service';
+import { JobTitle } from '../model/jobTitle';
+import { MYJobTitleService } from '../myJobTitle.service';
 
 @Component({
   moduleId: module.id,
@@ -22,12 +22,14 @@ import {DisableTestService} from "../disable-service";
   styleUrls: ['profile-creator.component.css']
 })
 
-export class ProfileCreatorComponent {
-  private fullName: string;private firstName: string;private lastName: string;
-  private   newUser:number;
-  private  chkEmployeeHistory:boolean=false;
+export class ProfileCreatorComponent implements OnInit {
   protected  selectedvalue1:string;
   protected selectedvalue2:string;
+  private fullName: string;
+  private firstName: string;
+  private lastName: string;
+  private   newUser:number;
+  private  chkEmployeeHistory:boolean=false;
   private valueOFshowOrHide:string;
   private  chkCertification:boolean=false;
   private  chkAboutMyself:boolean=false;
@@ -39,7 +41,8 @@ export class ProfileCreatorComponent {
   private isRolesShow:boolean=false;
   private showfield:boolean=false;
   private isRoleTypeShow:boolean=false;
-
+  private title:string='';
+  private jobTitle=new JobTitle();
   constructor(private _router:Router,
               private dashboardService:DashboardService,
               private testService : TestService,
@@ -47,68 +50,65 @@ export class ProfileCreatorComponent {
               private professionalService : ProfessionalService,
               private educationalService : EducationalService,
               private complexityService : ComplexityService,
-              private myRoleType:myRoTypeTestService,
-              private awardService: AwardService,private myRolelist :myRoleListTestService,private disableService:DisableTestService) {
+              private myRoleType:MyRoTypeTestService,
+              private awardService: AwardService, private myRolelist : MyRoleListTestService, private disableService: DisableTestService, private jobtitleservice: MYJobTitleService ) {
 
     this.myRolelist.showTestRolelist$.subscribe(
-      data=>{
+      data => {
         this.isRolesShow=data;
-
-
       }
     );
 
     disableService.showTestDisable$.subscribe(
-      data=>{
+      data=> {
         this.showfield=data;
       }
     );
     this.myRoleType.showTestRoleType$.subscribe(
-      data=>{
+      data=> {
         this.isRoleTypeShow=data;
-
 
       }
     );
 
 
     testService.showTest$.subscribe(
-        data=>{
+        data=> {
             this.whichStepsVisible[1]=data;
           this.showCapability=data;
         }
       );
       complexityService.showTest$.subscribe(
-        data=>{
-          this.whichStepsVisible[2]=data;
-          this.showComplexity=data;
+        data=> {
+          this.whichStepsVisible[2]= data;
+          this.showComplexity= data;
         }
       );
       proficiencyService.showTest$.subscribe(
-        data=>{
+        data=> {
           this.whichStepsVisible[3]=data;
           this.showProfeciency=data;
         }
       );
     professionalService.showTest$.subscribe(
-        data=>{
+        data=> {
           this.whichStepsVisible[4]=data;
         }
       );
     educationalService.showTest$.subscribe(
-        data=>{
+        data=> {
           this.whichStepsVisible[5]=data;
         }
       );
     awardService.showTest$.subscribe(
-      data=>{
+      data=> {
         this.whichStepsVisible[6]=data;
       }
     );
   }
 
 
-  ngOnInit(){
+  ngOnInit() {
     this.newUser = parseInt(LocalStorageService.getLocalValue(LocalStorage.IS_LOGED_IN));
     if (this.newUser === 0) {
       this._router.navigate([NavigationRoutes.APP_START]);
@@ -117,7 +117,7 @@ export class ProfileCreatorComponent {
     }
 
   }
-  getUserProfile(){
+  getUserProfile() {
     this.dashboardService.getUserProfile()
       .subscribe(
         userprofile => this.onUserProfileSuccess(userprofile),
@@ -139,25 +139,25 @@ export class ProfileCreatorComponent {
     console.log(error);
   }
 
-  showorhide(event:string){
+  showorhide(event:string) {
 
     this.valueOFshowOrHide=event;
 
   }
 
-  hideEmployeeHistory(){
+  hideEmployeeHistory() {
     this.chkEmployeeHistory =!this.chkEmployeeHistory ;
   }
 
-  hideCertification(){
+  hideCertification() {
     this.chkCertification =!this.chkCertification ;
   }
 
-  hideAboutMyself(){
+  hideAboutMyself() {
     this.chkAboutMyself =!this.chkAboutMyself ;
   }
 
-  hideAwards(){
+  hideAwards() {
     this.chkAwards =!this.chkAwards ;
   }
 
@@ -170,4 +170,13 @@ export class ProfileCreatorComponent {
     LocalStorageService.setLocalValue(LocalStorage.IS_LOGED_IN, 0);
     this._router.navigate([NavigationRoutes.APP_START]);
   }
+  onSubmit() {
+  console.log('here');
+  }
+  selectedtitle(title:string) {
+     this.title=title;
+     this.jobTitle.title=this.title;
+     this.jobtitleservice.change( this.jobTitle.title);
+  }
+
 }

@@ -1,8 +1,8 @@
-import {Component} from '@angular/core';
-import {Message} from "../../../framework/shared/message";
-import {MessageService} from "../../../framework/shared/message.service";
-import {RoleTypeService} from "./role-type.service";
-import {TestService} from "../test.service";
+import { Component, OnInit } from '@angular/core';
+import { Message } from '../../../framework/shared/message';
+import { MessageService } from '../../../framework/shared/message.service';
+import { RoleTypeService } from './role-type.service';
+import { TestService } from '../test.service';
 
 @Component({
   moduleId: module.id,
@@ -11,33 +11,29 @@ import {TestService} from "../test.service";
   styleUrls: ['role-type.component.css']
 })
 
-export class RoleTypetListComponent {
+export class RoleTypetListComponent implements OnInit {
 
   private showModalStyle: boolean = false;
   private disbleRole: boolean = true;
   private disbleButton: boolean = false;
   private disableIndustry: boolean = false;
   private roleTypes:string[]=new Array();
-
-
-
-
   constructor(private roleTypeService: RoleTypeService, private messageService:MessageService , private testService : TestService) {
   }
 
-  ngOnInit(){debugger
+  ngOnInit() {
     this.roleTypeService.getRoleTypes()
       .subscribe(
         data=> this.onRoleTypesSuccess(data),
         error => this.onError(error));
 
   }
-  onRoleTypesSuccess(data:any){debugger
-    for(let proficiency of data.roletypes){
+  onRoleTypesSuccess(data:any) {
+    for(let proficiency of data.roletypes) {
       this.roleTypes.push(proficiency);
   }}
 
-  onError(error:any){
+  onError(error:any) {
     var message = new Message();
     message.error_msg = error.err_msg;
     message.isError = true;
@@ -46,7 +42,7 @@ export class RoleTypetListComponent {
   showHideModal() {
     this.showModalStyle = !this.showModalStyle;
   }
-  disableRoleltype(){
+  disableRoleltype() {
     this.testService.change(true);
     this.showModalStyle = !this.showModalStyle;
     this.disbleRole = true;
@@ -62,10 +58,8 @@ export class RoleTypetListComponent {
       return 'none';
     }
   }
-  selectIndustryModel(event:string)
-  {
-
+  selectIndustryModel(event:string) {
+console.log('event');
 
   }
-
 }

@@ -1,8 +1,8 @@
-import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs/Rx';
-import {Response, Http, ConnectionBackend, Request, RequestOptions, RequestOptionsArgs} from '@angular/http';
-import {Message, Messages, MessageService, ErrorInstance} from '../../shared/index';
-import {LoaderService} from '../loader/loader.service';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/Rx';
+import { Response, Http, ConnectionBackend, Request, RequestOptions, RequestOptionsArgs } from '@angular/http';
+import { Message, Messages, MessageService, ErrorInstance } from '../../shared/index';
+import { LoaderService } from '../loader/loader.service';
 
 @Injectable()
 export class CustomHttp extends Http {
@@ -43,12 +43,11 @@ export class CustomHttp extends Http {
         var message = new Message();
         message.isError = true;
         var errorInstance = new ErrorInstance();
-         if(err.err_msg && err.err_code){debugger
+         if(err.err_msg && err.err_code) {
            errorInstance.err_msg = err.err_msg;
            errorInstance.err_code = err.err_code;
-          //return Observable.throw(errorInstance);
-        }
-         else if (err.status) {
+          return Observable.throw(errorInstance);
+        } else if (err.status) {
           if (err.status === 401 || err.status === 403) {
             errorInstance.err_code = err.status;
             errorInstance.err_msg = JSON.parse(err._body).error.message;
@@ -62,12 +61,14 @@ export class CustomHttp extends Http {
 
             errorInstance.err_msg = JSON.parse(err._body).error.message;
           }
-         // return Observable.throw(errorInstance);
-        }
-        return Observable.throw(errorInstance);
+          return Observable.throw(errorInstance);
+        } else {
+           errorInstance.err_msg = Messages.MSG_ERROR_SOMETHING_WRONG;
+           errorInstance.err_code = err.status;
+           return Observable.throw(errorInstance);
 
+         }
       });
-
   }
 }
 

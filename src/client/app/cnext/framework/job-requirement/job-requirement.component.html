@@ -1,6 +1,5 @@
 <div class="wrapper clearfix">
 
-
   <div class="col-sm-6">
     <label>Education:</label>
     <div class="list">
@@ -45,28 +44,16 @@
     </div>
   </div>
 
-  <div class="col-sm-6" *ngIf="showIndustry">
+  <!--<div class="col-sm-12" *ngIf="showIndustry">
     <label>Industry:</label>
-    <!--<div class="list">
-      <div ng2-auto-complete
-           [source]="industries"
-           (ngModelChange)="selectIndustryModel($event)">
-        <input class="form-control" [ngModel]="industryModel"  placeholder="Select Industry" />
-      </div>
-    </div>-->
+
     <cn-single-select-list [radioData]="industries"  (selectedData)="selectIndustryModel($event)"></cn-single-select-list>
 
   </div>
 
-  <div class="col-sm-6" *ngIf="showRole">
+  <div class="col-sm-12" *ngIf="showRole">
     <label>Role:</label>
-    <!--<div class="list">
-      <div id="role" ng2-auto-complete
-           [source]="roles"
-           (ngModelChange)="selectRolesModel($event)">
-        <input class="form-control" [ngModel]="roleModel"  placeholder="Select Role"/>
-      </div>
-    </div>-->
+
     <cn-multi-select-list [checkBoxData]="roles"  [maxInput]="'3'" (selectedData)="selectRolesModel($event)"></cn-multi-select-list>
-  </div>
+  </div>-->
 </div>

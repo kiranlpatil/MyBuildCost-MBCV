@@ -1,6 +1,6 @@
-import {Component, OnInit, OnDestroy} from '@angular/core';
-import {Router} from '@angular/router';
-import {NavigationRoutes, ImagePath, LoaderService} from '../shared/index';
+import {  Component, OnInit, OnDestroy  } from '@angular/core';
+import {  Router  } from '@angular/router';
+import { ImagePath, LoaderService } from '../shared/index';
 
 @Component({
     moduleId: module.id,

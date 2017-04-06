@@ -306,7 +306,8 @@ class AuthInterceptor {
             }
             else if (user.length === 0) {
               var newUser:any = <UserModel>{};
-              var randomMobileNumber = Math.floor(Math.random() * (10000000000 - 100000) + 1000000000);
+              //var randomMobileNumber = Math.floor(Math.random() * (10000000000 - 100000) + 1000000000);
+              var randomMobileNumber =Math.floor((Math.random() * 99999) + 100000);
               newUser.first_name = goolePlusObject.given_name;
               newUser.last_name = goolePlusObject.family_name;
               newUser.email = goolePlusObject.email;

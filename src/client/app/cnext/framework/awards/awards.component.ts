@@ -1,8 +1,7 @@
 
-import {  Component } from '@angular/core';
-import {awards} from '../model/awards';
-import {DateService} from '../date.service';
-import {AwardService} from '../award-service';
+import {   Component  } from '@angular/core';
+import {  Awards  } from '../model/awards';
+import { AwardService } from '../award-service';
 
 @Component({
   moduleId: module.id,
@@ -18,58 +17,31 @@ export class AwardsComponent {
   private tempmonth:string='';
   private tempyear:string='';
   private tempremark:string='';
-  private selectedawards: awards[]=new Array();
-  private monthList:string[]=this.dateservice.monthList;
-  private yearList:string[]=this.dateservice.yearList;
+  private selectedawards: Awards[]=new Array();
   private disbleButton:boolean=false;
-
-
-
-
-  constructor(private dateservice:DateService,private awardService:AwardService) {
+  constructor( private awardService:AwardService ) {
     this.tempfield = new Array(1);
-
-
-
   }
 
-  changeValue(){
+  changeValue() {
     this.awardService.change(true);
-
   }
-  selectedTitle(title:string)
-  {
-
-this.temptitle=title;
+  selectedTitle(title:string) {
+    this.temptitle=title;
   }
-  selectedMonthModel(month:string)
-
-  {
+  selectedMonthModel(month:string) {
     this.tempmonth=month;
-
   }
-  selectedYearModel(year:string)
-  {
-
-this.tempyear=year;
+  selectedYearModel(year:string) {
+    this.tempyear=year;
   }
-
-  selectedAward(award:string){
-this.tempremark=award;
-
-
+  selectedAward(award:string) {
+    this.tempremark=award;
   }
-
-
-
-
-
   addAnother() {
-
-
-    if (this.temptitle!='' && this.tempmonth!='' &&
-      this.tempyear!='' && this.tempremark!='') {
-      let temp=new awards();
+    if (this.temptitle!=='' && this.tempmonth!=='' &&
+      this.tempyear!=='' && this.tempremark!=='') {
+      let temp=new Awards();
       temp.title=this.temptitle;
       temp.month=this.tempmonth;
       temp.year=this.tempyear;
@@ -81,15 +53,8 @@ this.tempremark=award;
       this.temptitle='' ;
       this.tempmonth ='' ;
       this.tempremark ='' ;this.tempyear='';
-    }
-    else {
-
+    } else {
       this.disbleButton = true;
-
-
     }
-
-
-
   }
 }

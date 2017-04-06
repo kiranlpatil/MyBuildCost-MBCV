@@ -4,6 +4,6 @@ interface CompanyModel {
     name: string;
     size  : number;
     logoUrl : string;
-    location : [{type:mongoose.Schema.Types.ObjectId, ref:'ILocation'}];
+    location : any[];
 }
 export = CompanyModel;

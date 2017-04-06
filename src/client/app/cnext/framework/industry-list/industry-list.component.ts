@@ -1,14 +1,13 @@
-import {Component} from '@angular/core';
-import {IndustryListService} from './industry-list.service';
-import {TestService} from '../test.service';
-import {MyIndustryService} from '../industry-service';
-import {MyRoleService} from '../role-service';
-import {Message} from '../../../framework/shared/message';
-import {MessageService} from '../../../framework/shared/message.service';
-import {IndustryList} from '../model/industryList';
-import {constants} from 'fs';
-import {myRoleListTestService} from "../myRolelist.service";
-import {DisableTestService} from "../disable-service";
+import { Component, OnInit } from '@angular/core';
+import { IndustryListService } from './industry-list.service';
+import { MyIndustryService } from '../industry-service';
+import { MyRoleService } from '../role-service';
+import { Message } from '../../../framework/shared/message';
+import { MessageService } from '../../../framework/shared/message.service';
+import { IndustryList } from '../model/industryList';
+import { MyRoleListTestService } from '../myRolelist.service';
+import { DisableTestService } from '../disable-service';
+import { MYJobTitleService } from '../myJobTitle.service';
 
 @Component({
   moduleId: module.id,
@@ -17,7 +16,7 @@ import {DisableTestService} from "../disable-service";
   styleUrls: ['industry-list.component.css']
 })
 
-export class IndustryListComponent {
+export class IndustryListComponent implements OnInit {
   private industryNames :string[]=new Array();
   private storedRoles :string[] =new Array();
   private industryData:any;
@@ -29,29 +28,38 @@ export class IndustryListComponent {
   private disableIndustry: boolean = false;
   private industryRoles=new IndustryList();
   private storedindustry:string;
+  private isTitleFilled:boolean=true;
+  private isShowRequired:boolean=true;
+  private title:string='';
 
 
-  constructor(private industryService: IndustryListService, private myindustryService : MyIndustryService,private myRolelist:myRoleListTestService,
-              private roleService : MyRoleService, private messageService:MessageService , private testService : TestService,private disableService:DisableTestService) {
+  constructor(private industryService: IndustryListService, private myindustryService : MyIndustryService,private myRolelist:MyRoleListTestService,
+              private roleService : MyRoleService, private jobtitleservice:MYJobTitleService,private messageService:MessageService , private disableService:DisableTestService) {
 
   }
 
-  ngOnInit(){
+  ngOnInit() {
     this.industryService.getIndustries()
       .subscribe(
         industrylist => this.onIndustryListSuccess(industrylist.data),
         error => this.onError(error));
 
+
+    this.jobtitleservice.showTestTitle$.subscribe(
+      data => {
+        this.title=data;
+      }
+    );
   }
 
-  onIndustryListSuccess(data:any){
+  onIndustryListSuccess(data:any) {
     this.industryData=data;
-    for(let industry of data){
+    for(let industry of data) {
       this.industryNames.push(industry.name);
     }
   }
 
-  onError(error:any){
+  onError(error:any) {
     var message = new Message();
     message.error_msg = error.err_msg;
     message.isError = true;
@@ -69,34 +77,31 @@ export class IndustryListComponent {
     this.storedindustry=industry;
   }
 
-  searchIndustryId(industryName:string){
-    for(let industry of this.industryData){
-      if(industry.name===industryName){
+  searchIndustryId(industryName:string) {
+    for(let industry of this.industryData) {
+      if(industry.name===industryName) {
         this.industryRoles.industry=industry._id;
       }
     }
   }
 
-  searchRolesId(roleName:any){
-    for(let role of this.rolesData){
-      if(role.name===roleName){
+  searchRolesId(roleName:any) {
+    for(let role of this.rolesData) {
+      if(role.name===roleName) {
         this.industryRoles.roles.push(role._id);
       }
     }
   }
-
-  onRoleListSuccess(data:any){
+  onRoleListSuccess(data:any) {
     this.rolesData=data;
-    for(let role of data){
+    for(let role of data) {
       this.roleNames.push(role.name);
     }
   }
-
-  selectRolesModel(roleName: string) {debugger
-    if(roleName === 'u can select max '){
+  selectRolesModel(roleName: string) {
+    if(roleName === 'u can select max ') {
       console.log('u can select max ');
-    }
-    else {
+    } else {
       this.disbleButton = false;
       this.storedRoles.push(roleName);
       this.searchRolesId(roleName);
@@ -117,10 +122,15 @@ export class IndustryListComponent {
   };
 
   showHideModal() {
-    this.showModalStyle = !this.showModalStyle;
+    if(this.title==='') {
+      this.isTitleFilled=false;
+    } else {
+      this.isShowRequired=false;
+      this.isTitleFilled=true;
+      this.showModalStyle = !this.showModalStyle;
+    }
   }
-
-  disableRole(){
+  disableIndustrires() {
     this.myindustryService.change(this.storedindustry);
 
     this.disableService.change(true);
@@ -132,7 +142,6 @@ export class IndustryListComponent {
       this.disableIndustry = true;
       this.createAndSave();
       this.roleService.change(this.storedRoles);
-
   }
 
   getStyleModal() {

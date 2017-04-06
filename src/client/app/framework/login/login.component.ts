@@ -1,9 +1,8 @@
-import { Component, OnInit, NgZone } from '@angular/core';
-import { Router } from '@angular/router';
-import { LoginService } from './login.service';
-import { Login } from './login';
-import {
-  Message,
+import {  Component, OnInit, NgZone  } from '@angular/core';
+import {  Router  } from '@angular/router';
+import {  LoginService  } from './login.service';
+import {  Login  } from './login';
+import { Message,
   Messages,
   MessageService,
   NavigationRoutes,
@@ -14,14 +13,14 @@ import {
   ThemeChangeService,
   ImagePath,
   LoaderService
-} from '../shared/index';
-import { FacebookService } from './facebook.service';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { ValidationService } from '../shared/customvalidations/validation.service';
-import { FBToken } from './fbtoken';
-import { GoogleToken } from './googletoken';
-import { ProjectAsset } from '../shared/constants';
-import {isBoolean} from 'util';
+ } from '../shared/index';
+import {  FacebookService  } from './facebook.service';
+import {  FormGroup, FormBuilder, Validators  } from '@angular/forms';
+import {  ValidationService  } from '../shared/customvalidations/validation.service';
+import {  FBToken  } from './fbtoken';
+import {  GoogleToken  } from './googletoken';
+import {  ProjectAsset  } from '../shared/constants';
+//import { isBoolean } from 'util';
 
 /// <reference path='../../../../../typings/globals/fbsdk/index.d.ts'/>
 /// <reference path='../../../../../tools/manual_typings/project/googleplus.d.ts'/>
@@ -40,7 +39,7 @@ export class LoginComponent implements OnInit {
   private userForm:FormGroup;
   private error_msg:string;
   private isShowErrorMessage:boolean = true;
-  private status:boolean;
+  //private status:boolean;
   private MY_LOGO_PATH:string;
   private EMAIL_ICON:string;
   private PASSWORD_ICON:string;
@@ -88,7 +87,7 @@ export class LoginComponent implements OnInit {
     });
     this._facebookService.loadAndInitFBSDK();
     if (parseInt(LocalStorageService.getLocalValue(LocalStorage.IS_LOGED_IN)) === 1) {
-      this._router.navigate(['/createprofile']);
+      this._router.navigate(['/create_profile']);
     }
   }
 
@@ -124,14 +123,13 @@ export class LoginComponent implements OnInit {
   }
 
 
-  successRedirect(res:any) {debugger
+  successRedirect(res:any) {
     LocalStorageService.setLocalValue(LocalStorage.IS_LOGED_IN, 1);
     LocalStorageService.setLocalValue(LocalStorage.PROFILE_PICTURE,res.data.picture);
-    if(res.data.isCandidate){
+    if(res.data.isCandidate) {
 
       this._router.navigate([NavigationRoutes.APP_CREATEPROFILE]);
-    }
-    else{
+    } else {
       this._router.navigate([NavigationRoutes.APP_RECRUITER_DASHBOARD]);
     //  this._router.navigate([NavigationRoutes.APP_COMPANYDETAILS]);
     }
@@ -276,7 +274,7 @@ export class LoginComponent implements OnInit {
     'onfailure': this.onFailure
   });
 }*/
-  /*onSignIn(googleUser){
+  /*onSignIn(googleUser) {
     var profile = googleUser.getBasicProfile();
     console.log('Email: ' + profile.getEmail());
     var googleToken = googleUser.getAuthResponse().id_token;

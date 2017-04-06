@@ -1,5 +1,5 @@
-import {  Route } from '@angular/router';
-import { RecruiterDashboardComponent } from './index';
+import {    Route  } from '@angular/router';
+import {  RecruiterDashboardComponent  } from './index';
 
 export const RecruiterDashboard: Route[] = [
   {

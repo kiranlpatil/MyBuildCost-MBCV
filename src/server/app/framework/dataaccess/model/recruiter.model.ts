@@ -5,6 +5,6 @@ interface RecruiterModel {
     comapny_name : string;
     company_size : string;
     company_logo: string;
-    userId :  [{type:mongoose.Schema.Types.ObjectId, ref:'User'}];
+    userId :  any[];
 }
 export = RecruiterModel;

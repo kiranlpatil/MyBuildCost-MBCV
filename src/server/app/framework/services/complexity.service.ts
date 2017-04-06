@@ -17,7 +17,7 @@ class ComplexityService {
   }
 
   retrieve(field:any, callback:(error:any, result:any) => void) {
-    this.complexityRepository.retrieveAll(field, callback);
+    this.complexityRepository.retrieveAll(field,{}, callback);
   }
 
   create(item:any, callback:(error:any, result:any) => void) {

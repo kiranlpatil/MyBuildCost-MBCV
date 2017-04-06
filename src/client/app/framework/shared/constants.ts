@@ -1,6 +1,9 @@
 export class AppSettings {
-  public static IP = 'http://localhost:8080';
+  //public static IP = 'http://localhost:8080';
 // public static IP = 'http://ee802b7f.ngrok.io';
+// public static IP = 'http://10.192.33.252:8087';
+  //public static IP = 'http://54.167.209.10:8080';
+  public static IP = '';
 
     public static get API_ENDPOINT():string {
         return this.IP + '/api/';
@@ -46,10 +49,10 @@ export class Messages {
     public static MSG_ERROR_UPLOAD_DOCUMENT:string = 'Failed to Upload Document';
     public static MSG_ERROR_CHANGE_THEME:string = 'Failed to Change Theme';
 
-    public static MSG_ERROR_TOKEN_SESSION:string = 'Session has been Expired';
-    public static MSG_ERROR_NETWORK:string = 'Please check your internet connection';
-    public static MSG_ERROR_SERVER_ERROR:string = 'Server error';
-    public static MSG_ERROR_SOMETHING_WRONG:string = 'Something is Wrong.Try again';
+    public static MSG_ERROR_TOKEN_SESSION:string = 'Session has been Expired.';
+    public static MSG_ERROR_NETWORK:string = 'Please check your internet connection.';
+    public static MSG_ERROR_SERVER_ERROR:string = 'Server error.';
+    public static MSG_ERROR_SOMETHING_WRONG:string = 'Check your internet connection and Try again.';
 
     public static MSG_ERROR_IMAGE_TYPE:string = 'Please select valid image type';
     public static MSG_ERROR_IMAGE_SIZE:string = 'Make sure image size is less than 500kb';
@@ -69,9 +72,8 @@ export class NavigationRoutes {
   public static ACTIVATE_USER: string = '/activate_user';
   public static VERIFY_PHONE: string = '/verify_phone';
   public static APP_CHANGEEMAIL:string = '/change_email';
-  public static APP_CREATEPROFILE:string = '/createprofile';
+  public static APP_CREATEPROFILE:string = '/create_profile';
   public static APP_COMPANYDETAILS:string = '/company_details';
-
 
 }
 
@@ -98,7 +100,7 @@ export class LocalStorage {
     public static VERIFY_CHANGE_PHONE_VALUE = 'verify_change_phone_value';
 }
 
-export class VALUE_CONSTANT{
+export class ValueConstant {
   public static MAX_CAPABILITIES :number=2;
   public static MAX_PROFECIENCES :number=25;
   public static MAX_DOMAINS :number=10;
@@ -191,5 +193,5 @@ export class ImagePath {
 export class ProjectAsset {
     public static APP_NAME = 'C-NEXT';
     public static TAG_LINE = 'The Awesome Web Experience';
-    public static UNDER_LICENECE = '© 2016 Techprimelab Software Pvt. Ltd.';
+    public static UNDER_LICENECE = '� 2016 Techprimelab Software Pvt. Ltd.';
 }

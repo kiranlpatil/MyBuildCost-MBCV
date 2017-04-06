@@ -45,7 +45,7 @@ class CandidateService {
               }
               else {
                 var userId1 =res._id;
-                var newItem ={
+                var newItem :any={
                   isVisible :false,
                   userId:userId1,
                   location: locationId

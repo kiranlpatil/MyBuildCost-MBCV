@@ -1,5 +1,5 @@
-import {  Route } from '@angular/router';
-import { ChangeMobileComponent } from './index';
+import {    Route  } from '@angular/router';
+import {  ChangeMobileComponent  } from './index';
 
 export const ChangeMobileRoutes: Route[] = [
   {

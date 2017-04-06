@@ -3,13 +3,14 @@ $white: #fff;
 $instruction: #00aed5;
 $profile-section-shadow: rgba(204, 204, 204, 1);
 $error: #e82c0c;
+$modal-bg: #f2f2f2;
 
 .profile-wrapper {
 
   .section-container {
-    -moz-box-shadow: 3px 3px 3px 0 $profile-section-shadow;
-    -webkit-box-shadow: 3px 3px 3px 0 $profile-section-shadow;
-    box-shadow: 3px 3px 3px 0 $profile-section-shadow;
+    -moz-box-shadow: 2px 2px 2px 0 $profile-section-shadow;
+    -webkit-box-shadow: 2px 2px 2px 0 $profile-section-shadow;
+    box-shadow: 2px 2px 2px 0 $profile-section-shadow;
     margin-top: 15px;
   }
 
@@ -50,6 +51,12 @@ $error: #e82c0c;
     background: $white;
     padding: 15px;
     text-align: left;
+  }
+
+  .info {
+    font-size: 12px;
+    font-style: italic;
+    margin: 0;
   }
 
   .form-control {
@@ -113,11 +120,48 @@ $error: #e82c0c;
 
   .error-messages {
     padding-left: 0;
+    color: $error;
+    font-size: 12px;
+    padding-left: 0;
 
-    p, span {
+    p {
       color: $error;
       font-size: 12px;
       padding-left: 0;
+    }
+  }
+}
+
+.modal-dialog {
+  border-radius: 25px;
+  text-align: center;
+
+  .modal-body {
+    padding: 30px;
+  }
+
+  .modal-content {
+    background: $modal-bg;
+    border-radius: 25px;
+  }
+
+  p {
+    color: $text-color;
+    font-size: 18px;
+    text-align: center;
+  }
+
+  .button-group {
+    margin-top: 30px;
+  }
+
+  .btn {
+    float: none;
+    margin-top: 0;
+
+    &:focus,
+    &:active {
+      outline: none;
     }
   }
 }

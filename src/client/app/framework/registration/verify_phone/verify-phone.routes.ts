@@ -1,5 +1,5 @@
-import { Route } from '@angular/router';
-import { VerifyPhoneComponent } from './index';
+import {   Route  } from '@angular/router';
+import {  VerifyPhoneComponent  } from './index';
 
 export const VerifyPhoneRoutes:Route[] = [
   {

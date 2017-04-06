@@ -1,12 +1,11 @@
-import { Component } from '@angular/core';
-import { Http } from '@angular/http';
-import { JobRequirement } from '../model/job-requirement';
-import { MessageService } from '../../../framework/shared/message.service';
-import { IndustryListService } from '../industry-list/industry-list.service';
-import { Message } from '../../../framework/shared/message';
-import { MyJobRequirementService } from '../jobrequirement-service';
-import { ProfessionalDataService } from '../professional-data/professional-data.service';
-import { JobRequirementService } from './job-requirement.service';
+import { Component, OnInit } from '@angular/core';
+import {  JobRequirement  } from '../model/job-requirement';
+import {  MessageService  } from '../../../framework/shared/message.service';
+import {  IndustryListService  } from '../industry-list/industry-list.service';
+import {  Message  } from '../../../framework/shared/message';
+import {  MyJobRequirementService  } from '../jobrequirement-service';
+import {  ProfessionalDataService  } from '../professional-data/professional-data.service';
+import { JobRequirementService } from '../myJobRequirement.service';
 
 
 @Component({
@@ -16,7 +15,7 @@ import { JobRequirementService } from './job-requirement.service';
   styleUrls: ['job-requirement.component.css']
 })
 
-export class JobRequirementComponent {
+export class JobRequirementComponent implements OnInit {
   private jobRequirement = new JobRequirement();
   private storedIndustry: string;
   private industries = new Array();
@@ -48,9 +47,7 @@ export class JobRequirementComponent {
     this.professionaldataservice.getEducationList()
       .subscribe(
         data=> { this.onEducationListSuccess(data);},
-        error =>{ this.onError(error);});
-
-
+        error => { this.onError(error);});
   }
 
 
@@ -58,19 +55,13 @@ export class JobRequirementComponent {
     this.storedIndustry = industry;
     this.industryModel = industry;
     this.jobRequirement.industry = this.industryModel;
-
-
     this.industryService.getRoles(industry)
       .subscribe(
         (rolelist:any) => this.onRoleListSuccess(rolelist.data),
         (error:any) => this.onError(error));
-
   }
-
-
-
   onRoleListSuccess(data:any) {
-    for(let role of data){
+    for(let role of data) {
       this.roles.push(role.name);
     }
     this.showRole=true;
@@ -79,78 +70,56 @@ export class JobRequirementComponent {
     this.roleModel =role;
     this.storedRoles.push(role);
     this.jobRequirement.role = this.roleModel;
-
     this.myJobrequirementService.change(this.jobRequirement);
-
-
-
-
   }
   onEducationListSuccess(data:any) {
-    for(let k of data.educated){
+    for(let k of data.educated) {
       this.educationlist.push(k);
     }
-
   }
 
   selecteducationModel(education: any) {
     this.educationModel = education;
-
     this.jobRequirement.education = this.educationModel;
-
-
-
     this.professionaldataservice.getExperienceList()
       .subscribe(
-        data=> { this.onExperienceListSuccess(data);},
-        error =>{ this.onError(error);});
-
+        data => { this.onExperienceListSuccess(data);},
+        error => { this.onError(error);});
   }
   onExperienceListSuccess(data:any) {
-    for(let k of data.experience){
+    for(let k of data.experience) {
       this.experiencelist.push(k);
     }
-
   }
 
   selectexperienceModel(experience: any) {
     this.experienceModel = experience;
-
     this.jobRequirement.experience = this.experienceModel;
-
-
-
     this.professionaldataservice.getCurrentSalaryList()
       .subscribe(
         data=> { this.onCurrentSalaryListSuccess(data);},
-        error =>{ this.onError(error);});
+        error => { this.onError(error);});
 
   }
 
 
   onCurrentSalaryListSuccess(data:any) {
-    for(let k of data.salary ){
+    for(let k of data.salary ) {
       this.salarylist.push(k);
     }
-
   }
   selectsalaryModel(salary: any) {
     this.salaryModel = salary;
     this.jobRequirement.salary = this.salaryModel;
     this.professionaldataservice.getNoticePeriodList()
       .subscribe(
-        data=> { this.onGetNoticePeriodListSuccess(data);},
-        error =>{ this.onError(error);});
-
-
+        data => { this.onGetNoticePeriodListSuccess(data);},
+        error => { this.onError(error);});
   }
-
-
   onGetNoticePeriodListSuccess(data:any) {
-    for(let k of data.noticeperiod){
+    for(let k of data.noticeperiod) {
       this.noticeperiodlist.push(k);
     }
-
   }
 
   selectenoticeperiodModel(noticeperiod: any) {

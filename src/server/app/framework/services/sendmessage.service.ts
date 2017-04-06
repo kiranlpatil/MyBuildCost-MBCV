@@ -20,7 +20,7 @@ class SendMessageService {
     sendMessage(mobileNo:any, callback:any) {
 
         console.log("Send sms on", mobileNo);
-        var otp = Math.floor(Math.random() * (10000 - 1000) + 1000);
+      var otp =Math.floor((Math.random() * 99999) + 100000);
         console.log("otp is", otp);
 
 

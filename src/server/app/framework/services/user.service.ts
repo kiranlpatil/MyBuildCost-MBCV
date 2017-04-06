@@ -66,7 +66,8 @@ class UserService {
       else if (res.length === 0 ){
 
         var query = {"_id": field._id};
-        var otp = Math.floor(Math.random() * (10000 - 1000) + 1000);
+        var otp =Math.floor((Math.random() * 99999) + 100000);
+       // var otp = Math.floor(Math.random() * (10000 - 1000) + 1000);
         var updateData = {"mobile_number": field.new_mobile_number, "otp": otp};
         this.userRepository.findOneAndUpdate(query, updateData, {new: true}, (error, result) => {
           if (error) {
@@ -92,7 +93,8 @@ class UserService {
   changeMobileNumber(field: any, callback: (error: any, result: any) => void) {
 
         var query = {"_id": field._id};
-        var otp = Math.floor(Math.random() * (10000 - 1000) + 1000);
+       // var otp = Math.floor(Math.random() * (10000 - 1000) + 1000);
+        var otp =Math.floor((Math.random() * 99999) + 100000);
         var updateData = {"otp": otp, "temp_mobile": field.new_mobile_number };
 
         this.userRepository.findOneAndUpdate(query, updateData, {new: true}, (error, result) => {
