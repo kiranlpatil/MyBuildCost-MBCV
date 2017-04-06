@@ -26,7 +26,7 @@ export class CompanyDetailsService extends BaseService {
       .catch(this.handleError);
   }
 
-  makeDocumentUplaod(files:Array<File>, params:Array<string>) {
+  makeDocumentUplaod(files:Array<File>, params:Array<string>)  {
     var url = AppSettings.API_ENDPOINT + API.UPLOAD_DOCUMENTS + '/' + LocalStorageService.getLocalValue(LocalStorage.USER_ID);
    // var url = AppSettings.API_ENDPOINT + API.UPLOAD_DOCUMENTS + '/' +'58cb03749ac9d60819a0a581';
     return new Promise((resolve:any, reject:any) => {

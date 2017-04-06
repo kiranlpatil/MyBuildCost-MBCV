@@ -1,9 +1,9 @@
 export class AppSettings {
-  //public static IP = 'http://localhost:8080';
+  public static IP = 'http://localhost:8080';
 // public static IP = 'http://ee802b7f.ngrok.io';
 // public static IP = 'http://10.192.33.252:8087';
   //public static IP = 'http://54.167.209.10:8080';
-  public static IP = '';
+ // public static IP = '';
 
     public static get API_ENDPOINT():string {
         return this.IP + '/api/';

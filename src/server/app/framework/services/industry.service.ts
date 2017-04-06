@@ -28,14 +28,13 @@ class IndustryService {
   create(item:any, callback:(error:any, result:any) => void) {
     this.industryRepository.create(item, (err, res) => {
       if (err) {
-        callback(new Error(CNextMessages.MSG_NOT_FOUND_ANY_RECORD), null);
+        callback(new Error(CNextMessages.MSG_NOT_FOUND_ANY_RECORD_OF_INDUSTRY), null);
       }
       else {
         callback(null, res);
       }
     });
   }
-
 }
 
 Object.seal(IndustryService);

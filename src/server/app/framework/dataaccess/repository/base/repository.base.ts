@@ -72,7 +72,7 @@ class RepositoryBase<T extends mongoose.Document> implements IRead<T>, IWrite<T>
 
   findRoles(name:string, callback:(error:any, result:any) => void) {
     this.items = new Array(0);
-    this._model.find({"name": name}, (err, industry:any)=> {
+    this._model.find({"name": name}, (err:any, industry:any)=> {
       if (err) {
         callback(err, null);
       } else {
@@ -94,7 +94,7 @@ class RepositoryBase<T extends mongoose.Document> implements IRead<T>, IWrite<T>
 
   findCapabilities(item:any, callback:(error:any, result:any) => void) {
     this.items = new Array(0);
-    this._model.find({"name": item.name},(err, industry:any)=> {
+    this._model.find({"name": item.name},(err:any, industry:any)=> {
       if (err) {
         callback(err, null);
       } else {
@@ -128,7 +128,7 @@ class RepositoryBase<T extends mongoose.Document> implements IRead<T>, IWrite<T>
 
   findComplexities(item:any, callback:(error:any, result:any) => void) {
     this.items = new Array(0);
-    this._model.find({"name": item.name},(err, industry:any)=> {
+    this._model.find({"name": item.name},(err:any, industry:any)=> {
       if (err) {
         callback(err, null);
       } else {
