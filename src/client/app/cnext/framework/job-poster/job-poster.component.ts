@@ -14,6 +14,13 @@ import { Description } from '../model/description';
 import { JobPostProficiencyService } from '../jobPostProficiency.service';
 import { MyJobInformationService } from '../myJobInformation.service';
 import { JobRequirementService } from '../myJobRequirement.service';
+import { JobIndustryShowService } from '../myJobIndustryShow.service';
+import { DisableTestService } from '../disable-service';
+import { ComplexityService } from '../complexity.service';
+import { ProficiencyService } from '../proficience.service';
+import { TestService } from '../test.service';
+import { MyRoTypeTestService } from '../myRole-Type.service';
+import { ShowJobFilterService } from '../showJobFilter.service';
 
 
 @Component({
@@ -28,18 +35,66 @@ export class JobPosterComponent {
   private jobInformation=new JobInformation();
   private jobRequirement=new JobRequirement();
   private jobLocation=new JobLocation();
+  private isShowIndustry:boolean=false;
+  private isShowComplexity:boolean=false;
+  private isShowRoleList:boolean=false;
+  private isShowRoletype:boolean=false;
+  private isShowCapability:boolean=false;
+  private isShowProficiency:boolean=false;
   private capabilityIds :string[]=new Array();
   private complexities :string[]=new Array();
   private proficiency :string[]=new Array();
   private model=new Description();
   constructor(private _router:Router,
+              private complexityService: ComplexityService,
               private jobinformation:MyJobInformationService,
               private jobrequirement:JobRequirementService,
               private myjoblocationService:MyJobLocationService,
               private jobpostcapability:MyJobPostcapabilityService,
               private jobPostDescription:JonPostDescriptionService ,
               private jobPostComplexiyservice:JobPostComplexityService,
-              private jobPostProficiency:JobPostProficiencyService) {
+              private jobPostProficiency:JobPostProficiencyService,
+              private myRoleType:MyRoTypeTestService,
+              private testService : TestService,
+              private proficiencyService : ProficiencyService,
+              private jobPostIndustryShow:JobIndustryShowService,
+              private disableService:DisableTestService,
+              private showJobFilter:ShowJobFilterService) {
+
+    this.myRoleType.showTestRoleType$.subscribe(
+      data=> {
+        this.isShowRoletype=data;
+
+      }
+    ); testService.showTest$.subscribe(
+      data => {
+        this.isShowCapability=data;
+      }
+    );
+
+    complexityService.showTest$.subscribe(
+      data => {
+        this.isShowComplexity=data;
+      }
+    );
+    proficiencyService.showTest$.subscribe(
+      data=> {
+        this.isShowProficiency=data;
+      }
+    );
+    this.jobPostIndustryShow.showIndustryt$.subscribe(
+      data => {
+        this.isShowIndustry=data;
+
+
+      }
+    );
+    disableService.showTestDisable$.subscribe(
+      data=> {
+        this.isShowRoleList=data;
+      }
+    );
+
     this.jobinformation.showTestInformation$.subscribe(
       data=> {
         this.jobInformation=data;
@@ -92,6 +147,11 @@ export class JobPosterComponent {
     console.log('capabilities ids',this.capabilityIds);
     console.log(this.complexities);
     console.log(this.model);
+
+  }
+  mockupSearch() {
+
+    this.showJobFilter.change(true);
 
   }
 

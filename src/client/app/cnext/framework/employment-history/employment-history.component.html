@@ -47,7 +47,7 @@
             (ngModelChange)="selectedworktoYearModel($event)">
 
         <input class="form-control" [ngModel]="toYearModel" [disabled]="disbleRole"  placeholder="YYYY" />
-        <div class="error-messages" *ngIf="isShowYearMessage"><p>Year can not be same or lesser please fill again.</p></div>
+        <div class="error-messages" *ngIf="isShowYearMessage"><p>You doesn't fill valid month or year value.</p></div>
 
       </div>
     </div>

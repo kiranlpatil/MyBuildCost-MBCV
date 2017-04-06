@@ -1,5 +1,5 @@
 <div class="select-industry">
-  <div class="error-messages" *ngIf="!isTitleFilled"><p>Title should not be empty.</p></div>
+
   <cn-single-select-list [radioData]="industryNames"  (selectedData)="selectIndustryModel($event)"></cn-single-select-list>
 
   <div class="button-group clearfix">

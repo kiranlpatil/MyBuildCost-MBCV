@@ -27,7 +27,8 @@
           <div class="col-sm-10 no-padding">
             <textarea name="jobTitle" placeholder="Enter Your Job Title" class="form-control"[ngModel]="title" (ngModelChange)="selectedtitle($event)"></textarea>
           </div>
-
+          <div class="error-messages" *ngIf="!isTitleFilled"><p>Title should not be empty.</p></div>
+          <div class="error-messages" *ngIf="isShowRequired"><p>*</p></div>
         </div>
       </div>
 

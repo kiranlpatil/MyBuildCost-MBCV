@@ -6,6 +6,7 @@ import {  Message  } from '../../../framework/shared/message';
 import {  MyJobRequirementService  } from '../jobrequirement-service';
 import {  ProfessionalDataService  } from '../professional-data/professional-data.service';
 import { JobRequirementService } from '../myJobRequirement.service';
+import { JobIndustryShowService } from '../myJobIndustryShow.service';
 
 
 @Component({
@@ -39,7 +40,8 @@ export class JobRequirementComponent implements OnInit {
               private professionaldataservice:ProfessionalDataService,
               private messageService: MessageService,
               private myJobrequirementService :MyJobRequirementService,
-              private jobrequirement:JobRequirementService ) {
+              private jobrequirement:JobRequirementService ,
+              private jobPostIndustryShow:JobIndustryShowService) {
   }
 
 
@@ -131,6 +133,7 @@ export class JobRequirementComponent implements OnInit {
       .subscribe(
         industrylist => this.onIndustryListSuccess(industrylist.data),
         error => this.onError(error));
+    this.jobPostIndustryShow.change(true);
   }
 
 

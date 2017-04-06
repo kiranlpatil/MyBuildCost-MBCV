@@ -44,8 +44,8 @@ export class ProfileCreatorComponent implements OnInit {
   private isRoleTypeShow:boolean=false;
   private title:string='';
   private jobTitle=new JobTitle();
-
-
+  private isTitleFilled:boolean=true;
+  private isShowRequired:boolean=true;
   constructor(private _router:Router,
               private dashboardService:DashboardService,
               private testService : TestService,
@@ -174,7 +174,15 @@ export class ProfileCreatorComponent implements OnInit {
     this._router.navigate([NavigationRoutes.APP_START]);
   }
   onSubmit() {
-  console.log('here');
+
+    if(this.title==='') {
+      this.isTitleFilled=false;
+    } else {
+      this.isShowRequired=false;
+      this.isTitleFilled=true;
+
+    }
+
   }
   selectedtitle(title:string) {
      this.title=title;

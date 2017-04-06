@@ -28,8 +28,6 @@ export class IndustryListComponent implements OnInit {
   private disableIndustry: boolean = false;
   private industryRoles=new IndustryList();
   private storedindustry:string;
-  private isTitleFilled:boolean=true;
-  private isShowRequired:boolean=true;
   private title:string='';
 
 
@@ -122,13 +120,10 @@ export class IndustryListComponent implements OnInit {
   };
 
   showHideModal() {
-    if(this.title==='') {
-      this.isTitleFilled=false;
-    } else {
-      this.isShowRequired=false;
-      this.isTitleFilled=true;
+
+
       this.showModalStyle = !this.showModalStyle;
-    }
+
   }
   disableIndustrires() {
     this.myindustryService.change(this.storedindustry);

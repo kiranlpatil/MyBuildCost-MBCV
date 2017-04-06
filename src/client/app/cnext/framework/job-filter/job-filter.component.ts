@@ -1,4 +1,5 @@
 import {  Component  } from '@angular/core';
+import { ShowJobFilterService } from '../showJobFilter.service';
 
 
 @Component({
@@ -9,4 +10,12 @@ import {  Component  } from '@angular/core';
 })
 
 export class JobFilterComponent {
+  private isShowJobFilter:boolean=false;
+  constructor( private showJobFilter:ShowJobFilterService) {
+    this.showJobFilter.showJobFilter$.subscribe(
+      data=> {
+        this.isShowJobFilter=data;
+      }
+    );
+  }
 }

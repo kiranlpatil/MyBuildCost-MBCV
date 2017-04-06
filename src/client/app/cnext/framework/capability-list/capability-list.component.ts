@@ -144,7 +144,6 @@ export class CapabilityListComponent implements OnInit  {
   }
   createAndSave() {
     this.complexityService.change(true);
-
     this.capabilityListServive.addCapability(this.capabilityIds).subscribe(
       user => {
         console.log(user);

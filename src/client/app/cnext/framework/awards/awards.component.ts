@@ -2,6 +2,7 @@
 import {   Component  } from '@angular/core';
 import {  Awards  } from '../model/awards';
 import { AwardService } from '../award-service';
+import { ValueConstant } from '../../../framework/shared/constants';
 
 @Component({
   moduleId: module.id,
@@ -11,7 +12,7 @@ import { AwardService } from '../award-service';
 })
 
 export class AwardsComponent {
-
+  public monthList = new Array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December');
   private tempfield: string[];
   private temptitle:string='';
   private tempmonth:string='';
@@ -19,10 +20,21 @@ export class AwardsComponent {
   private tempremark:string='';
   private selectedawards: Awards[]=new Array();
   private disbleButton:boolean=false;
+  private year: any;
+  private currentDate: any;
+  private yearList = new Array();
+
   constructor( private awardService:AwardService ) {
     this.tempfield = new Array(1);
+    this.currentDate = new Date();
+    this.year = this.currentDate.getUTCFullYear();
+    this.createYearList(this.year);
   }
-
+  createYearList(year: number) {
+    for (let i = 0; i < ValueConstant.MAX_ACADEMIC_YEAR_LIST; i++) {
+      this.yearList.push(year--);
+    }
+  }
   changeValue() {
     this.awardService.change(true);
   }
