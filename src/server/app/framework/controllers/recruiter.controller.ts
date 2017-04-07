@@ -96,8 +96,6 @@ export function postJob(req:express.Request, res:express.Response, next:any) {
         });
       }
     });
-
-
   }
   catch (e) {
     res.status(403).send({message: e.message});

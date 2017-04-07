@@ -145,24 +145,30 @@ class RepositoryBase<T extends mongoose.Document> implements IRead<T>, IWrite<T>
           for (let role of industry[0].roles) {
             for(let o of item.roles){
               if(o==role.name){
+                let role_object :any={
+                  name:role.name,
+                  capabilities:[]
+                };
                 for(let capability of role.capabilities){
                   for(let ob of item.capabilities){
                     if(ob == capability.name){
+                      let capability_object :any={
+                        name:capability.name,
+                        complexities:[]
+                      };
                       for(let complexity of capability.complexities){
-                        let obj:any = {
-                          "industryName" : industry[0].name,
-                          "roleName":role.name,
-                          "capabilityName" : capability.name,
-                          "_id": complexity._id,
-                          "name": complexity.name,
-                          "scenarios":complexity.scenarios
+                        let complexity_object :any={
+                          name:complexity.name,
+                          scenarios:complexity.scenarios
                         };
-                        this.items.push(obj);
+                        capability_object.complexities.push(complexity_object);
                       }
+                      role_object.capabilities.push(capability_object);
                     }
                   }
                 }
-              }
+                this.items.push(role_object);
+             }
             }
           }
           callback(null, this.items);
