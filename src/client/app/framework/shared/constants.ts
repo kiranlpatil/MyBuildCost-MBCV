@@ -158,7 +158,7 @@ export class API {
 
 export class ImagePath {
 
-    public static FAV_ICON = './assets/framework/images/logo/tpl-favicon.ico';
+    public static FAV_ICON = './assets/framework/images/logo/cnext-favicon.ico';
     public static BODY_BACKGROUND = './assets/framework/images/page_background/page-bg.png';
     public static MY_COLOR_LOGO = './assets/framework/images/logo/logo-color.png';
     public static MY_WHITE_LOGO = './assets/framework/images/logo/logo-white.png';
