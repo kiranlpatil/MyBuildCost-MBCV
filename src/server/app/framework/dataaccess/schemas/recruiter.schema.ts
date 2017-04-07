@@ -19,7 +19,58 @@ class RecruiterSchema {
           },
           "company_logo":{
             type:String
-          }
+          },
+          "company_headquarter_country":{
+            type:String
+          },
+          postedJobs:[{
+            jobTitle :{
+              type : String
+            },
+            hiringManager :{
+              type : String
+            },
+            department :{
+              type : String
+            },
+            education :{
+              type : String
+            },
+            experience :{
+              type : String
+            },
+            salary :{
+              type : String
+            },
+            profiences :{
+              names : [String]
+            },
+            industry:{
+              name:String,
+              roles: [{
+                name: String,
+                capabilities: [{
+                  complexities: [{
+                    scenarios: {
+                      name: String
+                    },
+                    name: String
+                  }],
+                  name: String
+                }]
+              }]
+            },
+            competencies :{
+              type : String
+            },
+            responsibility :{
+
+              type : String
+            },
+            postingDate :{
+              type : Date
+            }
+          }]
         },{ versionKey: false });
 
         return schema;

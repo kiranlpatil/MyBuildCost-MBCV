@@ -13,6 +13,7 @@ import RecruiterModel = require("../dataaccess/model/recruiter.model");
 import RecruiterService = require("../services/recruiter.service");
 import JobProfileModel = require("../dataaccess/model/jobprofile.model");
 import UserService = require("../services/user.service");
+import JobProfileService = require("../services/jobprofile.service");
 
 
 export function create(req:express.Request, res:express.Response, next:any) {
@@ -66,7 +67,7 @@ export function create(req:express.Request, res:express.Response, next:any) {
 
 
 export function updateDetails(req:express.Request, res:express.Response, next:any) {
-  try{
+  try {
 
   }
   catch (e) {
@@ -78,19 +79,24 @@ export function postJob(req:express.Request, res:express.Response, next:any) {
   try {
     var newJob:JobProfileModel = <JobProfileModel>req.body;
     var recruiterService = new RecruiterService();
-    var userService = new UserService();
-    var userId=req.params.id;
-/*    userService.findById(userId,(err,result)=>{
-      if (error) {
-        console.log("crt user error", error);
-        if (error == Messages.MSG_ERROR_CHECK_EMAIL_PRESENT) {
-          next({
-            reason: Messages.MSG_ERROR_RSN_EXISTING_USER,
-            message: Messages.MSG_ERROR_VERIFY_ACCOUNT,
-            code: 403
-          });
-        }
-    });*/
+    var userId = req.params.id;
+    recruiterService.update(userId,newJob, (err, result)=> {
+      if (err) {
+        next({
+          reason: Messages.MSG_ERROR_RSN_USER_NOT_FOUND,
+          message: Messages.MSG_ERROR_RSN_USER_NOT_FOUND,
+          code: 403
+        });
+      } else {
+        res.status(200).send({
+          "status": Messages.STATUS_SUCCESS,
+          "data": {
+            "_id": userId,
+          }
+        });
+      }
+    });
+
 
   }
   catch (e) {

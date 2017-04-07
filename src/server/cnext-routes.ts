@@ -6,6 +6,7 @@ import * as capabilityController from './app/framework/controllers/capability.co
 import * as complexityController from './app/framework/controllers/complexity.controller';
 import * as proficienciesController from './app/framework/controllers/proficiency.controller';
 import * as industryController from './app/framework/controllers/industry.controller';
+import * as recruiterController from './app/framework/controllers/recruiter.controller';
 import * as sharedService from './app/framework/shared/shared.service';
 import * as userInterceptor from './app/framework/interceptor/user.interceptor';
 var AuthInterceptor = require("./app/framework/interceptor/auth.interceptor");
@@ -16,6 +17,7 @@ export function cnextInit(app: express.Application) {//todo add interceptor to a
   app.get("/api/industry",industryController.retrieve); //todo done
   app.get("/api/roletype",userController.getRoleTypes); //todo remove
   app.post("/api/industry",industryController.create); //todo done
+  app.put("/api/recruiter/:id/job",recruiterController.postJob); //todo done
   app.get("/api/industry/:id/role", roleController.retrieve );  //todo done
   app.get("/api/industry/:id/proficiency", proficienciesController.retrieve );  //todo done
   app.post("/api/candidate", userInterceptor.create, candidateController.create);  //todo done

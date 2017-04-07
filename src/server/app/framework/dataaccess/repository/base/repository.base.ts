@@ -70,6 +70,10 @@ class RepositoryBase<T extends mongoose.Document> implements IRead<T>, IWrite<T>
 
   //custom API created for C-next Roles capabilities and complexities
 
+  pushInJobpost(id:string, value:any, callback:(error:any, result:any) => void) {
+    this._model.update({_id: id}, { $push:{ "postedJobs":value.postedJobs } }, callback);
+  }
+
   findRoles(name:string, callback:(error:any, result:any) => void) {
     this.items = new Array(0);
     this._model.find({"name": name}, (err:any, industry:any)=> {

@@ -59,7 +59,7 @@ class JobProfileSchema {
       },
       postingDate :{
         type : Date
-      },
+      }
 
     },{ versionKey: false });
 
