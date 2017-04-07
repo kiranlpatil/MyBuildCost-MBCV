@@ -33,7 +33,6 @@ export class IndustryListComponent implements OnInit {
   private storedindustry:string;
   private title:string='';
   private abcd:string;
-  private showfield: boolean = false;
 
 
 

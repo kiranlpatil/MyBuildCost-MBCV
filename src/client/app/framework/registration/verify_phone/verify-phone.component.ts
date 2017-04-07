@@ -65,7 +65,7 @@ export class VerifyPhoneComponent {
             error => (this.resendOtpFail(error)));
     }
   }
-  verifySuccess(res: any) {debugger
+  verifySuccess(res: any) {
     this.showModalStyle=!this.showModalStyle;
    /* var message = new Message();
     message.isError = false;
@@ -74,7 +74,7 @@ export class VerifyPhoneComponent {
     this.navigateTo();*/
   }
 
-  mobileVerificationSuccess(res: any) {debugger
+  mobileVerificationSuccess(res: any) {
     this.showModalStyle=!this.showModalStyle;
     var message = new Message();
     message.isError = false;

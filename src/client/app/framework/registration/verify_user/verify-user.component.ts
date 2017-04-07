@@ -95,7 +95,7 @@ export class VerifyUserComponent implements OnInit {
         }
     }
 
-    verifyFail(error:any) {debugger
+    verifyFail(error:any) {
         if (error.err_code === 404 || error.err_code === 0) {
             var message = new Message();
             message.error_msg = error.err_msg;

@@ -1,7 +1,7 @@
 
 import {  Component,OnInit  } from '@angular/core';
 import { LocalStorageService } from '../../../framework/shared/localstorage.service';
-import {LocalStorage} from "../../../framework/shared/constants";
+import { LocalStorage } from '../../../framework/shared/constants';
 
 @Component({
   moduleId: module.id,

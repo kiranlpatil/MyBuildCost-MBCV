@@ -26,6 +26,7 @@ import { Http } from '@angular/http';
 })
 
 export class CompanyDetailsComponent implements OnInit {
+  company_name: any;
   private model = new CompanyDetails();
   private companyDetailsForm: FormGroup;
   private filesToUpload: Array<File>;
@@ -39,7 +40,6 @@ export class CompanyDetailsComponent implements OnInit {
   private fileName2:string;
   private fileName3:string;
   private buttonId:string;
-  company_name: any;
 
 
   constructor(private commanService: CommonService, private _router: Router, private http: Http,

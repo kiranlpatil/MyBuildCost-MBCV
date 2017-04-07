@@ -1,6 +1,6 @@
 export class Academicdetails {
   schoolName:string='';
-  universityName:string='';
-  passingyear:string='';
+  board:string='';
+  yearOfPassing:string='';
   specialization:string='';
 }

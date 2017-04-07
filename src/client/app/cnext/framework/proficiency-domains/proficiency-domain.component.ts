@@ -16,7 +16,7 @@ import { JobPostProficiencyService } from '../jobPostProficiency.service';
 export class ProficiencyDomainComponent implements OnInit {
   @Input('type') type : string;
   private selectedproficiencies=new Array();
-  private storedProficiency = new Array();
+  private storedProficiency:string[] = new Array();
   private showAlert: boolean=false;
   private proficiencyType: boolean=false;
   private domainType: boolean=false;
@@ -81,7 +81,6 @@ export class ProficiencyDomainComponent implements OnInit {
 
   selectedProficiencyModel(newVal: any) {
     if(this.storedProficiency.length < ValueConstant.MAX_PROFECIENCES) {
-      this.showAlert=false;
       this.storedProficiency.push(newVal);
       this.deleteSelectedProfeciency(newVal);
       console.log(this.storedProficiency);
@@ -93,7 +92,6 @@ export class ProficiencyDomainComponent implements OnInit {
     let typeTemp:any=document.getElementById(this.type);
     typeTemp.value='';
 
-
   }
 
   deleteItem(newVal: any) {
@@ -102,10 +100,10 @@ export class ProficiencyDomainComponent implements OnInit {
       if (this.storedProficiency[i] === newVal.currentTarget.innerText.trim()) {
         if (i > -1) {
           this.storedProficiency.splice(i, 1);
+          this.selectedproficiencies.push(newVal.currentTarget.innerText.trim());
         }
       }
     }
-    this.selectedproficiencies.push(newVal.currentTarget.innerText);
   }
 
   deleteSelectedProfeciency(newVal: any) {

@@ -69,24 +69,24 @@ export class EmploymentHistoryComponent {
 
   selectedworkfromMonthModel(newval: any) {
     this.tempWorkedFromMonth=newval;
-    this.selectedEmploymentHistory.workedFromMonth=this.tempWorkedFromMonth;
+    this.selectedEmploymentHistory.from.month=this.tempWorkedFromMonth;
 
   }
 
   selectedworkfromYearModel(newval: any) {
     this.tempWorkedFromYear=newval;
-    this.selectedEmploymentHistory.workedFromYear=this.tempWorkedFromYear;
+    this.selectedEmploymentHistory.from.year=this.tempWorkedFromYear;
   }
 
   selectedworktoMonthModel(newval: any) {
     this.tempWorkedToMonth=newval;
-    this.selectedEmploymentHistory.workedToMonth=this.tempWorkedToMonth;
+    this.selectedEmploymentHistory.to.month=this.tempWorkedToMonth;
 
   }
 
   selectedworktoYearModel(newval: any) {
        this.tempWorkedToYear=newval;
-       this.selectedEmploymentHistory.workedToYear=this.tempWorkedToYear;
+       this.selectedEmploymentHistory.to.year=this.tempWorkedToYear;
   }
   addAnother() {
     if(this.tempCompanyName==='' || this.tempDesignation==='' ||
@@ -95,10 +95,10 @@ export class EmploymentHistoryComponent {
       this.tempRemarks==='' ) {
       this.disbleButton=true;
     } else {
-      if(this.tempWorkedToYear<this.selectedEmploymentHistory.workedFromYear||
-        (this.selectedEmploymentHistory.workedFromMonth===this.selectedEmploymentHistory.workedToMonth
+      if(this.tempWorkedToYear<this.selectedEmploymentHistory.from.year||
+        (this.selectedEmploymentHistory.from.month===this.selectedEmploymentHistory.to.month
         &&
-        (this.tempWorkedToYear===this.selectedEmploymentHistory.workedFromYear))||this.tempWorkedToYear===this.selectedEmploymentHistory.workedFromYear&&
+        (this.tempWorkedToYear===this.selectedEmploymentHistory.from.year))||this.tempWorkedToYear===this.selectedEmploymentHistory.from.year&&
         (this.monthList.indexOf(this.tempWorkedToMonth)<this.monthList.indexOf(this.tempWorkedFromMonth) )) {
         this.isShowYearMessage=true;
         this.toYearModel='';
@@ -110,10 +110,10 @@ export class EmploymentHistoryComponent {
         temp.companyName = this.tempCompanyName;
         temp.designation = this.tempDesignation;
         temp.remarks = this.tempRemarks;
-        temp.workedFromMonth = this.tempWorkedFromMonth;
-        temp.workedFromYear = this.tempWorkedFromYear;
-        temp.workedToMonth = this.tempWorkedToMonth;
-        temp.workedToYear = this.tempWorkedToYear;
+        temp.from.month = this.tempWorkedFromMonth;
+        temp.from.year = this.tempWorkedFromYear;
+        temp.to.month= this.tempWorkedToMonth;
+        temp.to.year = this.tempWorkedToYear;
         this.selectedEmploysHistory.push(temp);
         console.log(this.selectedEmploysHistory);
         this.tempfield.push('null');

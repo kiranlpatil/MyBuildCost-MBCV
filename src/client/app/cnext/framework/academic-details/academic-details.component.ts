@@ -68,8 +68,8 @@ export class AcademicDetailComponent {
       this.disbleButton = false;
       let temp=new Academicdetails();
       temp.schoolName=this.tempSchoolName;
-      temp.universityName=this.tempUnivercityName;
-      temp.passingyear=this.tempPassingYear;
+      temp.board=this.tempUnivercityName;
+      temp.yearOfPassing=this.tempPassingYear;
       temp.specialization=this.tempSpecialization;
       this.selectedacademicsdeatils.push(temp);
       console.log(this.selectedacademicsdeatils);
