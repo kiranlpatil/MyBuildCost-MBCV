@@ -41,10 +41,8 @@ export class DescriptionFieldComponent implements OnInit {
       if (this.condition-3>=this.maxLength) {
         this. maxword=this.description.length;
       }
-         this.tempType=this.type;
-         this.tempdetail = event;
-        this.model.detail =  this.tempdetail;
-        this.model.selectedType = this.tempType;
-        this.jobPostDescription.change(this.model);
+    this.jobPostDescription.change({"data":this.newstringOne,"type":this.type});
+        
   }
+  
 }

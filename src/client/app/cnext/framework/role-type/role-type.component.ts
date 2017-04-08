@@ -3,6 +3,7 @@ import { Message } from '../../../framework/shared/message';
 import { MessageService } from '../../../framework/shared/message.service';
 import { RoleTypeService } from './role-type.service';
 import { TestService } from '../test.service';
+import {MyJobPostRoleTypeService} from "../jobpost-roletype.service";
 
 @Component({
   moduleId: module.id,
@@ -20,7 +21,7 @@ export class RoleTypetListComponent implements OnInit {
   private roleTypes:string[]=new Array();
   private role:string;
   private showfield: boolean = false;
-  constructor(private roleTypeService: RoleTypeService, private messageService:MessageService , private testService : TestService) {
+  constructor(private roleTypeService: RoleTypeService, private messageService:MessageService , private testService : TestService,   private jobpostroletype:MyJobPostRoleTypeService) {
   }
 
   ngOnInit() {
@@ -58,7 +59,7 @@ export class RoleTypetListComponent implements OnInit {
     this.showModalStyle = !this.showModalStyle;
     this.disbleRole = true;
     this.disbleButton = true;
-    this.disableIndustry = true;
+    this.jobpostroletype.change(this.role);
     this.createAndSave();
 
   }

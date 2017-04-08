@@ -50,7 +50,7 @@ export class ProficiencyDomainComponent implements OnInit {
 
   }
 
-  onProficiencySuccess(data: any) {
+  onProficiencySuccess(data: any) {debugger
     debugger
     for (let proficiency of data.data.names) {
       this.selectedproficiencies.push(proficiency);

@@ -5,7 +5,7 @@ import {  Subject  } from 'rxjs/Subject';
 
 
 @Injectable()
-export class MyJobPostcapabilityService  {
+export class MyJobPostRoleTypeService  {
 
   // Observable string sources
    _showJobCpabilitiesSource = new Subject<any>();

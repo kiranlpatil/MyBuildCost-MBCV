@@ -104,7 +104,7 @@ import { JobLocationService } from './cnext/framework/job-location/job-location.
 import { SingleSelectListComponent } from './cnext/framework/single-select-list/single-select-list.component';
 import { MultiSelectListComponent } from './cnext/framework/multi-select-list/multi-select-list.component';
 import { MyJobLocationService } from './cnext/framework/myjob-location.service';
-import { MyJobPostcapabilityService } from './cnext/framework/jobpost-capabilities.service';
+import { MyJobPostRoleTypeService } from './cnext/framework/jobpost-roletype.service';
 import { JonPostDescriptionService } from './cnext/framework/job-post-description.service';
 import { JobPostComplexityService } from './cnext/framework/job-post-complexity.service';
 import { JobPostProficiencyService } from './cnext/framework/jobPostProficiency.service';
@@ -254,7 +254,7 @@ import {CandidateAcadmyDetailService} from "./cnext/framework/academic-details/a
     MyJobInformationService,
     JobRequirementService,
     MyJobLocationService,
-    MyJobPostcapabilityService,
+    MyJobPostRoleTypeService,
     JonPostDescriptionService,
     JobPostComplexityService,
     JobPostProficiencyService,

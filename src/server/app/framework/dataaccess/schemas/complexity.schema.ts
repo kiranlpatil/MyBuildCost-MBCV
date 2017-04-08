@@ -12,7 +12,7 @@ class ComplexitySchema {
             type:String
           },
           scenarios : [{
-            type: mongoose.Schema.Types.ObjectId, ref:'IScenario'
+           type:String
           }],
 
 

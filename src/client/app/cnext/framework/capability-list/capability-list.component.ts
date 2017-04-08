@@ -10,7 +10,7 @@ import { MyCapabilityService } from '../capability-service';
 import { LocalStorageService } from '../../../framework/shared/localstorage.service';
 import { MyJobRequirementService } from '../jobrequirement-service';
 import { Message } from '../../../framework/shared/message';
-import { MyJobPostcapabilityService } from '../jobpost-capabilities.service';
+import { MyJobPostRoleTypeService } from '../jobpost-roletype.service';
 import {Industry} from "../model/industry";
 import {IndustryList} from "../model/industryList";
 import {IndustryListService} from "../industry-list/industry-list.service";
@@ -49,8 +49,7 @@ export class CapabilityListComponent implements OnInit  {
               private messageService:MessageService,
               private capabilityListServive:CapabilityListService,
               private myCapabilityListService:MyCapabilityService,
-              private myJobrequirementService :MyJobRequirementService,
-              private jobpostcapability:MyJobPostcapabilityService
+              private myJobrequirementService :MyJobRequirementService
   ) {
 
     testService.showTest$.subscribe(
@@ -206,7 +205,5 @@ export class CapabilityListComponent implements OnInit  {
       error => {
         console.log(error);
       });
-
-    this.jobpostcapability.change(this.primaryCapabilities);
   }
 }

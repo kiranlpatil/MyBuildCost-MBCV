@@ -12,6 +12,7 @@ import { Message } from '../../../framework/shared/message';
 import { JobPostComplexityService } from '../job-post-complexity.service';
 import {IndustryList} from "../model/industryList";
 import {Scenario} from "../model/scenario";
+import {IndustryListService} from "../industry-list/industry-list.service";
 
 @Component({
   moduleId: module.id,
@@ -33,6 +34,7 @@ export class ComplexityListComponent {
   private industryRoles:IndustryList=new IndustryList();
   constructor(
                private complexityService: ComplexityService,
+               private industryService: IndustryListService,
                private proficiencyService: ProficiencyService,
                private complexityListServive:ComplexityListService,
                private messageService:MessageService,
@@ -96,7 +98,7 @@ export class ComplexityListComponent {
     message.isError = true;
     this.messageService.message(message);
   }
-  selectOption(selectedComplexity:any) {debugger
+  selectOption(selectedComplexity:any) {
     if (selectedComplexity.target.checked) {
       let currentComplexity = new Complexity();
       currentComplexity.name = (selectedComplexity.currentTarget.children[0].innerText).trim();
@@ -106,9 +108,20 @@ export class ComplexityListComponent {
       this.count++;
       this.searchSelectedComplexity(currentComplexity);
 
-      if(this.count>=this.complexities.length) {
+      if(this.count>=this.complexities.length) {debugger
+        for(let data of this.complexityData) {
+            this.industryRoles.roles.push(data);
+        }
+        this.industryService.addIndustryProfile(this.industryRoles).subscribe(
+          user => {
+            console.log(user);
+          },
+          error => {
+            console.log(error);
+          });
         this.showfield=true;
         this.proficiencyService.change(true);
+        this.jobPostComplexiyservice.change(this.industryRoles);
       }
     }
 

@@ -38,6 +38,7 @@ export class RoleListComponent {
               private myRoleType:MyRoTypeTestService ) {
     myIndustryService.showTest$.subscribe(
       data => {
+
         this.industry=data;
         this.industryRoles.name=data;
         this.industryService.getRoles(this.industry)
@@ -104,7 +105,7 @@ export class RoleListComponent {
        var r:Role=new Role();
        r.name=roleName;
        this.industryRoles.roles.push(r);
-      
+
     }
   }
   searchRolesId(roleName:any) {

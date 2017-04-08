@@ -9,6 +9,8 @@ import { MyRoleListTestService } from '../myRolelist.service';
 import { DisableTestService } from '../disable-service';
 import { MYJobTitleService } from '../myJobTitle.service';
 import { SingleSelectList } from '../model/single-select-list';
+import {LocalStorageService} from "../../../framework/shared/localstorage.service";
+import {LocalStorage} from "../../../framework/shared/constants";
 
 @Component({
   moduleId: module.id,
@@ -33,6 +35,7 @@ export class IndustryListComponent implements OnInit {
   private storedindustry:string;
   private title:string='';
   private abcd:string;
+  private isCandidate : boolean = true;
 
 
 
@@ -43,7 +46,7 @@ export class IndustryListComponent implements OnInit {
 
   }
 
-  ngOnInit() {
+  ngOnInit() {debugger
     this.industryService.getIndustries()
       .subscribe(
         industrylist => this.onIndustryListSuccess(industrylist.data),
@@ -55,11 +58,26 @@ export class IndustryListComponent implements OnInit {
         this.title=data;
       }
     );
+
+    if(LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE)==="false"){debugger
+      this.isCandidate=false;
+    }
   }
   selectOption(option:string) {
+      
+    
 
-    if(option !== undefined)
+    if(option !== undefined){debugger
+
       this.abcd=option;
+      this.storedindustry=option;
+      if(LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE)==="false"){debugger
+        this.isCandidate=false;
+        this.disableIndustrires();
+      }
+      this.abcd=option;
+      this.storedindustry=option;
+    }
     this.disbleButton=false;
 
   }
@@ -77,24 +95,19 @@ export class IndustryListComponent implements OnInit {
     this.messageService.message(message);
   }
 
-  selectIndustryModel(industry: string) {
-
-    //this.disbleRole=false;
+  selectIndustryModel(industry: string) {debugger
    this.industryRoles.name=industry;
+    if(LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE)==="false"){debugger
+      this.isCandidate=false;
+      this.disableIndustrires();
+
+    }
     this.industryService.getRoles(industry)
       .subscribe(
         rolelist => this.onRoleListSuccess(rolelist.data),
         error => this.onError(error));
     this.storedindustry=industry;
   }
-
-  /*searchIndustryId(industryName:string) {
-    for(let industry of this.industryData) {
-      if(industry.name===industryName) {
-        this.industryRoles.industry=industry._id;
-      }
-    }
-  }*/
 
   searchRolesId(roleName:any) {
     for(let role of this.rolesData) {
@@ -103,12 +116,14 @@ export class IndustryListComponent implements OnInit {
       }
     }
   }
+
   onRoleListSuccess(data:any) {
     this.rolesData=data;
     for(let role of data) {
       this.roleNames.push(role.name);
     }
   }
+
   selectRolesModel(roleName: string) {
     if(roleName === 'u can select max ') {
       console.log('u can select max ');
@@ -119,8 +134,6 @@ export class IndustryListComponent implements OnInit {
     }
   }
 
-
-
   createAndSave() {
     this.industryService.addIndustryProfile(this.industryRoles).subscribe(
       user => {
@@ -129,7 +142,7 @@ export class IndustryListComponent implements OnInit {
       error => {
         console.log(error);
       });
-  };
+  }
 
   showHideModal() {
     this.selectIndustryModel(this.abcd);
@@ -137,7 +150,7 @@ export class IndustryListComponent implements OnInit {
       this.showModalStyle = !this.showModalStyle;
 
   }
-  disableIndustrires() {
+  disableIndustrires() {debugger
 
 
     this.myindustryService.change(this.storedindustry);
@@ -145,12 +158,16 @@ export class IndustryListComponent implements OnInit {
     this.disableService.change(true);
        this.myRolelist.change(true);
      // this.testService.change(true);
-      this.showModalStyle = !this.showModalStyle;
+    
       this.disbleRole = true;
       this.disbleButton = true;
-      this.disableIndustry = true;
+      
+    if(LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE)==="true"){debugger
       this.createAndSave();
-      this.roleService.change(this.storedRoles);
+      this.showModalStyle = !this.showModalStyle;
+      this.disableIndustry = true;
+    }
+      //this.roleService.change(this.storedRoles);
   }
 
   getStyleModal() {

@@ -7,7 +7,7 @@ import { JobInformation } from '../model/job-information';
 import { JobRequirement } from '../model/job-requirement';
 import { JobLocation } from '../model/job-location';
 import { MyJobLocationService } from '../myjob-location.service';
-import { MyJobPostcapabilityService } from '../jobpost-capabilities.service';
+import { MyJobPostRoleTypeService } from '../jobpost-roletype.service';
 import { JonPostDescriptionService } from '../job-post-description.service';
 import { JobPostComplexityService } from '../job-post-complexity.service';
 import { Description } from '../model/description';
@@ -41,16 +41,17 @@ export class JobPosterComponent {
   private isShowRoletype:boolean=false;
   private isShowCapability:boolean=false;
   private isShowProficiency:boolean=false;
-  private capabilityIds :string[]=new Array();
+  private roletype :string;
   private complexities :string[]=new Array();
   private proficiency :string[]=new Array();
-  private model=new Description();
+  private competensies=new Description();
+  private responsibilities=new Description();
   constructor(private _router:Router,
               private complexityService: ComplexityService,
               private jobinformation:MyJobInformationService,
               private jobrequirement:JobRequirementService,
               private myjoblocationService:MyJobLocationService,
-              private jobpostcapability:MyJobPostcapabilityService,
+              private jobpostroletype:MyJobPostRoleTypeService,
               private jobPostDescription:JonPostDescriptionService ,
               private jobPostComplexiyservice:JobPostComplexityService,
               private jobPostProficiency:JobPostProficiencyService,
@@ -113,16 +114,17 @@ export class JobPosterComponent {
 
       }
     );
-    this.jobpostcapability.showTestCapability$.subscribe(
+    this.jobpostroletype.showTestCapability$.subscribe(
       data=> {
-        this.capabilityIds=data;
-
+        this.roletype=data;
       }
     );
     this.jobPostDescription.showTestJobPostDesc$.subscribe(
-      data=> {
-        this.model=data;
-
+      data=> {debugger
+        if(data.type==="competensies")
+        this.competensies=data.data;
+        if(data.type==="responsibilities")
+        this.responsibilities=data.data;
       }
     );
     this.jobPostComplexiyservice.showTestComplexity$.subscribe(
@@ -144,15 +146,13 @@ export class JobPosterComponent {
     console.log(this.jobInformation);
     console.log(this.jobRequirement);
     console.log(this.jobLocation);
-    console.log('capabilities ids',this.capabilityIds);
+    console.log(this.roletype);
     console.log(this.complexities);
-    console.log(this.model);
-
+    console.log(this.competensies);
+    console.log(this.responsibilities);
   }
   mockupSearch() {
-
     this.showJobFilter.change(true);
-
   }
 
   logOut() {
