@@ -95,7 +95,7 @@ $text-color: #666;
 
   .form-group {
     float: left;
-    margin-bottom: 25px;
+    margin-bottom: 35px;
     padding: 0;
     position: relative;
     width: 100%;
@@ -111,6 +111,7 @@ $text-color: #666;
       top: 10px;
       //transition: .2s ease all;
       transition: top .2s ease-in, font-size .2s ease-in;
+      z-index: -1;
     }
 
     input {
@@ -119,7 +120,7 @@ $text-color: #666;
       &:focus ~ label,
       &:valid ~ label {
         font-size: 12px;
-        top: -10px;
+        top: -18px;
       }
     }
 

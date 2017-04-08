@@ -1,20 +1,16 @@
 @import '../../../css/common';
 
 .registration {
+  position: relative;
+
   .content {
     width: 40%;
-  }
-
-  .error-message-registration {
-    text-align: left;
-
-    p {
-      color: $toaster-error;
-      font-size: 10px;
-      font-style: italic;
-      margin: 10px 0 0;
-      text-align: right;
-    }
+    left: 50%;
+    margin: 100px 0 50px;
+    position: relative;
+    top: 0;
+    -webkit-transform: translate(-50%, 0);
+    transform: translate(-50%, 0);
   }
 
   .radio-group {
@@ -84,10 +80,6 @@
   .registration {
     .content {
       width: 90%;
-    }
-
-    .error-message-registration > p {
-      text-align: left;
     }
   }
 

@@ -10,6 +10,15 @@
   }
 }
 
+.modal {
+  .modal-bg {
+    text-align: center;
+    p {
+      text-align: center;
+    }
+  }
+}
+
 @media only screen and (max-width: 1280px) {
   .main-form-wrapper {
     form {

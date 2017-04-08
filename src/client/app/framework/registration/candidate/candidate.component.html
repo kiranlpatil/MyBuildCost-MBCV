@@ -45,9 +45,7 @@
     <input type="password" formControlName="conform_password" id="conform_password"
            (blur)="makePasswordConfirm()" class="form-control" required/>
     <label>Confirm Password</label>
-    <div class="error-message-registration" *ngIf="isPasswordConfirm == true">
-      <span class="error-messages">Passwords does not match.</span>
-    </div>
+      <span class="error-messages" *ngIf="isPasswordConfirm == true">Passwords does not match.</span>
   </div>
 
   <div class="form-group">

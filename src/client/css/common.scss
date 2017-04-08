@@ -493,4 +493,10 @@ control-messages {
   .alert {
     margin: 15px 15px 0;
   }
+
+  recaptcha {
+    div, iframe {
+      width: 100% !important;
+    }
+  }
 }

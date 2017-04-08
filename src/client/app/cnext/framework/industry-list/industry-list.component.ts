@@ -46,7 +46,7 @@ export class IndustryListComponent implements OnInit {
 
   }
 
-  ngOnInit() {debugger
+  ngOnInit() {
     this.industryService.getIndustries()
       .subscribe(
         industrylist => this.onIndustryListSuccess(industrylist.data),
@@ -59,7 +59,7 @@ export class IndustryListComponent implements OnInit {
       }
     );
 
-    if(LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE)==="false"){debugger
+    if(LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE)==="false"){
       this.isCandidate=false;
     }
   }
@@ -67,11 +67,11 @@ export class IndustryListComponent implements OnInit {
       
     
 
-    if(option !== undefined){debugger
+    if(option !== undefined){
 
       this.abcd=option;
       this.storedindustry=option;
-      if(LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE)==="false"){debugger
+      if(LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE)==="false"){
         this.isCandidate=false;
         this.disableIndustrires();
       }
@@ -95,9 +95,9 @@ export class IndustryListComponent implements OnInit {
     this.messageService.message(message);
   }
 
-  selectIndustryModel(industry: string) {debugger
+  selectIndustryModel(industry: string) {
    this.industryRoles.name=industry;
-    if(LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE)==="false"){debugger
+    if(LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE)==="false"){
       this.isCandidate=false;
       this.disableIndustrires();
 
@@ -150,7 +150,7 @@ export class IndustryListComponent implements OnInit {
       this.showModalStyle = !this.showModalStyle;
 
   }
-  disableIndustrires() {debugger
+  disableIndustrires() {
 
 
     this.myindustryService.change(this.storedindustry);
@@ -162,7 +162,7 @@ export class IndustryListComponent implements OnInit {
       this.disbleRole = true;
       this.disbleButton = true;
       
-    if(LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE)==="true"){debugger
+    if(LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE)==="true"){
       this.createAndSave();
       this.showModalStyle = !this.showModalStyle;
       this.disableIndustry = true;
