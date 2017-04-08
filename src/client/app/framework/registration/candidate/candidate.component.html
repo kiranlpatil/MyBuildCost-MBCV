@@ -37,7 +37,7 @@
     <control-messages [control]="userForm.controls.password"></control-messages>
     <input type="password" formControlName="password" id="password" class="form-control" (focus)="showMessage()" [(ngModel)]="myPassword" (ngModelChange)="selectPassword($event)" required/>
     <label>Password</label>
-    <span class="error-messages" *ngIf="isShowMessage">Password must be of minimum 8digit with minimum 1 uppercase,lowercase,number and one special character($@$!%*?&).</span>
+    <span class="error-messages" *ngIf="isShowMessage">Password must be of minimum 8 digit with minimum 1 uppercase,lowercase,number and one special character($@_#!%*?&).</span>
   </div>
 
   <div class="form-group">
@@ -89,7 +89,7 @@
   </div>
 
   <div class="form-group" >
-    <control-messages [control]="userForm.controls.location"></control-messages>
+    <control-messages [control]="userForm.controls.pin"></control-messages>
     <input type="number" formControlName="pin" id="pin" class="form-control" required/>
     <label>PIN Code</label>
   </div>

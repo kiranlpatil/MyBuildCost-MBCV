@@ -69,7 +69,7 @@ export class CandidateComponent implements OnInit {
   }
 
   ngOnInit() {
-    
+
 
     this.http.get('address')
       .map((res: Response) => res.json())
@@ -107,7 +107,7 @@ export class CandidateComponent implements OnInit {
   }
 
   selectStateModel(newval: string) {
-    
+
     for (let item of this.locationDetails) {
       if (item.country === this.storedcountry) {
         for (let state of item.states) {
@@ -126,7 +126,7 @@ export class CandidateComponent implements OnInit {
   }
 
   selectCityModel(newval: string) {
-    
+
     this.storedcity = newval;
     console.log("city is", newval);
     console.log("storedcity city is", this.storedcity);
@@ -223,7 +223,7 @@ export class CandidateComponent implements OnInit {
 
 
   selectPassword(newval: any) {
-    if (this.myPassword.match(/(?=.*\d)(?=.*[a-z])(?=.*[$@$!%*?&])(?=.*[A-Z]).{8,}/)) {
+    if (this.myPassword.match(/(?=.*\d)(?=.*[a-z])(?=.*[$@_#!%*?&])(?=.*[A-Z]).{8,}/)) {
       this.isShowMessage = false;
     }
   }

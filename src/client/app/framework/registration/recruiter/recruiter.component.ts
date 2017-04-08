@@ -264,7 +264,7 @@ export class RecruiterComponent implements OnInit {
   }
 
   selectPassword(newval:any) {
-    if (this.myPassword.match(/(?=.*\d)(?=.*[a-z])(?=.*[$@$!%*?&])(?=.*[A-Z]).{8,}/)) {
+    if (this.myPassword.match(/(?=.*\d)(?=.*[a-z])(?=.*[$@#_!%*?&])(?=.*[A-Z]).{8,}/)) {
 
       this.isShowMessage=false;
     }

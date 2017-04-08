@@ -105,7 +105,7 @@ export class ValueConstant {
   public static MAX_CAPABILITIES :number=2;
   public static MAX_PROFECIENCES :number=25;
   public static MAX_DOMAINS :number=10;
-  public static MAX_YEAR_LIST :number=30;
+  public static MAX_YEAR_LIST :number=60;
   public static MAX_ACADEMIC_YEAR_LIST :number=50;
 }
 

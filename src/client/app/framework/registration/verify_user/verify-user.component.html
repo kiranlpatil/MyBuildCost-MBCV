@@ -6,7 +6,7 @@
 
   <div class="col-lg-4 col-sm-6 col-xs-10 content">
 
-    <h5>Verify your account <span class="glyphicon glyphicon-remove" (click)="navigateTo('/landing')"></span></h5>
+    <h5>Verify Your Account <span class="glyphicon glyphicon-remove" (click)="navigateTo('/landing')"></span></h5>
 
     <div class="alert alert-danger clearfix" [hidden]="isShowErrorMessage">
       <div class="col-sm-1 hidden-xs"><span class="glyphicon glyphicon-warning-sign"></span></div>
@@ -23,13 +23,13 @@
 
       <div class="form-group" id="inputMobile" [hidden]="chkMobile"  >
         <control-messages [control]="userForm.controls.mobile_number"></control-messages>
-        <p>One Time Password(OTP) will be sent on the following mobile Number.</p>
+        <p>One Time Password (OTP) will be sent on the following mobile Number.</p>
         <input type="number" [(ngModel)]="model.mobile_number" formControlName="mobile_number" id="mobile_number" class="form-control" required/>
 
       </div>
 
       <div class="button-group" [hidden]="chkMobile">
-        <button type="submit" class="btn btn-primary">Verify MobileNumber</button>
+        <button type="submit" class="btn btn-primary">Verify Mobile Number</button>
       </div>
       </form>
 

@@ -12,10 +12,13 @@ import { LocalStorage } from '../../../framework/shared/constants';
 
 export class RecruiterDashboardComponent implements  OnInit {
   company_name:string;
+  image_path:string;
  /*constructor() {
   }*/
   ngOnInit() {
     this.company_name = LocalStorageService.getLocalValue(LocalStorage.COMPANY_NAME);
+    this.image_path = LocalStorageService.getLocalValue(LocalStorage.PROFILE_PICTURE);
+    console.log("Company logo",this.image_path);
   }
 
 

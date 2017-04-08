@@ -39,7 +39,7 @@
       <control-messages [control]="recruiterForm.controls.password"></control-messages>
       <input type="password" formControlName="password" id="password" class="form-control" (focus)="showMessage()" [(ngModel)]="myPassword" (ngModelChange)="selectPassword($event)" required/>
       <label>Password</label>
-      <span class="error-messages" *ngIf="isShowMessage">Password must be of minimum 8digit with minimum 1 uppercase,lowercase,number.</span>
+      <span class="error-messages" *ngIf="isShowMessage">Password must be of minimum 8 digit with minimum 1 uppercase,lowercase,number and one special character($@_#!%*?&).</span>
     </div>
 
     <div class="form-group">
@@ -47,7 +47,9 @@
       <input type="password" formControlName="conform_password" id="conform_password"
              (blur)="makePasswordConfirm()" class="form-control" required/>
       <label>Confirm Password</label>
-      <div class="error-message" *ngIf="isPasswordConfirm == true">Passwords does not match.</div>
+      <div class="error-message" *ngIf="isPasswordConfirm == true">
+        Password does not match.
+      </div>
     </div>
 
     <div class="form-group">
@@ -75,6 +77,8 @@
       <input type="number" formControlName="pin" id="pin" class="form-control" required/>
       <label>PIN</label>
     </div>
+
+
 
     <div class="form-group">
       <div ng2-auto-complete
