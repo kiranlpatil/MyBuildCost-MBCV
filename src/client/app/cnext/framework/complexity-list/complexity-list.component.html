@@ -1,4 +1,4 @@
-<div *ngIf="isComplexityShow">
+<div>
   <div class="select-complexity clearfix" *ngFor="let item of complexities;let i = index" (click)="selectOption($event)" >
     <div class="complexity-name col-sm-2 no-padding">
       <p id ="complexity">{{item.name}}</p>

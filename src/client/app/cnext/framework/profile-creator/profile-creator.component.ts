@@ -162,6 +162,11 @@ export class ProfileCreatorComponent implements OnInit {
     if(this.candidate.industry.roles[0].capabilities.length>0){
       this.showCapability=true;
     }
+
+    if(this.candidate.industry.roles[0].capabilities[0].complexities.length>0){
+      this.showComplexity=true;
+    }
+    
   }
 
   getUserProfile() {

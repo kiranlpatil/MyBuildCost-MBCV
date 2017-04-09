@@ -96,26 +96,21 @@ export class CapabilityListComponent implements OnInit  {
           error => this.onError(error));
 
     }
-
   }
 
   OnCandidateDataSuccess(candidateData:any){
-
-
+    
+    
       for(let role of candidateData.data[0].industry.roles){
         for(let capability of role.capabilities){
           this.savedCapabilities.push(capability);
+          this.primaryCapabilities.push(capability.name);
         }
       }
-
-
+    this.showfield=true;
+    this.myCapabilityListService.change(this.primaryCapabilities);
     console.log(this.savedCapabilities);
-   /* for(let role of this.roles){
-      this.storedRoles.push(role.name);
-    }*/
-   /* this.myRoleType.change(true);
-    this.myIndustryService.change(candidateData.data[0].industry.name);
-    this.roleService.change(this.storedRoles);*/
+    this.complexityService.change(true);
   }
 
   onCapabilityListSuccess(data:any) {
@@ -167,14 +162,7 @@ export class CapabilityListComponent implements OnInit  {
     }
     this.myCapabilityListService.change(this.primaryCapabilities);
   }
- /* searchCapabilityId(capabilityName:string) {
-    for(let capability of this.capabilityData) {
-      if(capability.name===capabilityName) {
-        this.capabilityIds.push(capability._id);
-        console.log('add',this.capabilityIds);
-      }
-    }
-  }*/
+
 
   searchCapabilityData(capabilityName:string){
     for(let item of this.capabilityData) {
@@ -209,7 +197,6 @@ export class CapabilityListComponent implements OnInit  {
     for(let capability of this.capabilityData) {
       if(capability.name===capabilityName) {
         this.capabilityIds.splice(this.capabilityIds.indexOf(capability._id), 1);
-
       }
     }
   }
@@ -217,14 +204,6 @@ export class CapabilityListComponent implements OnInit  {
     this.showfield=true;
     this.disablebutton=true;
     this.complexityService.change(true);
-    /*this.capabilityListServive.addCapability(this.capabilityIds).subscribe(
-      user => {
-        console.log(user);
-      },
-      error => {
-        console.log(error);
-      });*/
-
     this.industryService.addIndustryProfile(this.industryRoles).subscribe(
       user => {
         console.log(user);

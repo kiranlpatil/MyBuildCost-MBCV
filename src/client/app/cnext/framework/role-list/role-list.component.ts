@@ -173,16 +173,13 @@ export class RoleListComponent {
     }
   }
 
-  isChecked(choice:any):boolean {
+  isChecked(choice:any):boolean{
     for(let role of this.roles){
       if(role.name===choice){
         return true;
       }
-      else{
-        return false;
     }
-
-  }
     return false;
+  }
 
-}}
+}

@@ -13,6 +13,9 @@ import { JobPostComplexityService } from '../job-post-complexity.service';
 import {Industry} from "../model/industry";
 import {Scenario} from "../model/scenario";
 import {IndustryListService} from "../industry-list/industry-list.service";
+import {LocalStorage} from "../../../framework/shared/constants";
+import {LocalStorageService} from "../../../framework/shared/localstorage.service";
+import {ProfileCreatorService} from "../profile-creator/profile-creator.service";
 
 @Component({
   moduleId: module.id,
@@ -23,7 +26,7 @@ import {IndustryListService} from "../industry-list/industry-list.service";
 
 export class ComplexityListComponent {
   private complexities: any[]=new Array();
-  private selectedComplexity=new Array();
+  private savedComplexities:Complexity[]=new Array();
   private isComplexityShow : boolean =false;
   private capabilities=new Array();
   private roles=new Array();
@@ -42,7 +45,8 @@ export class ComplexityListComponent {
                private myIndustryService :MyIndustryService,
                private roleservice :MyRoleService,
                private myJobrequirementService:MyJobRequirementService,
-               private jobPostComplexiyservice:JobPostComplexityService) {
+               private jobPostComplexiyservice:JobPostComplexityService,
+               private profileCreatorService:ProfileCreatorService) {
     complexityService.showTest$.subscribe(
       data => {
           this.isComplexityShow=data;
@@ -79,6 +83,34 @@ export class ComplexityListComponent {
       }
     );
 
+  }
+  
+  
+  ngOnInit(){
+    if(LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE)==="true"){
+      this.profileCreatorService.getCandidateDetails()
+        .subscribe(
+          candidateData => this.OnCandidateDataSuccess(candidateData),
+          error => this.onError(error));
+    }
+    
+  }
+
+  OnCandidateDataSuccess(candidateData:any){
+
+
+    for(let role of candidateData.data[0].industry.roles){
+      for(let capability of role.capabilities){
+        for(let complexity of capability.complexities) {
+          this.savedComplexities.push(complexity);
+        }
+      }
+    }
+    console.log(this.savedComplexities);
+    /*this.showfield=true;
+    this.myCapabilityListService.change(this.primaryCapabilities);
+    
+    this.complexityService.change(true);*/
   }
 
   onComplexityListSuccess(data:any) {
