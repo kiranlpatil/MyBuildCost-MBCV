@@ -5,24 +5,18 @@
 
   .content {
     width: 40%;
-    left: 50%;
-    margin: 100px 0 50px;
-    position: relative;
-    top: 0;
-    -webkit-transform: translate(-50%, 0);
-    transform: translate(-50%, 0);
   }
 
   .radio-group {
-    padding: 15px;
-  }
+    padding:0 15px 15px;
 
-  .alert {
-    margin: 15px;
+    div {
+      margin-top: 5px;
+    }
   }
 
   form {
-    padding: 15px;
+    padding: 15px 0;
   }
 
   label {
@@ -66,7 +60,7 @@
 @media only screen and (max-width: 980px) {
   .registration {
     .content {
-      width: 80%;
+      width: 90%;
     }
 
     .form-group {
@@ -79,15 +73,13 @@
 @media only screen and (max-width: 767px) {
   .registration {
     .content {
-      width: 90%;
-    }
-  }
-
-  .main-form-wrapper {
-    .content {
       .radio-group {
         padding: 0 0 15px;
       }
+    }
+
+    form {
+      padding: 15px;
     }
   }
 }

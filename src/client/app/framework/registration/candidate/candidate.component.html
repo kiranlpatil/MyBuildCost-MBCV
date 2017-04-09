@@ -37,7 +37,6 @@
     <control-messages [control]="userForm.controls.password"></control-messages>
     <input type="password" formControlName="password" id="password" class="form-control" (focus)="showMessage()" [(ngModel)]="myPassword" (ngModelChange)="selectPassword($event)" required/>
     <label>Password</label>
-    <span class="error-messages" *ngIf="isShowMessage">Password must be of minimum 8 digit with minimum 1 uppercase,lowercase,number and one special character($@_#!%*?&).</span>
   </div>
 
   <div class="form-group">
@@ -52,8 +51,8 @@
     <div id="yearf" ng2-auto-complete
          [source]="yearList"
          (ngModelChange)="selectYearModel($event)">
-      <input  formControlName="birth_year" [ngModel]="passingyear" id="birth_year" class="form-control" required/>
-      <label class="select-label">Year of Birth</label>
+      <input  formControlName="birth_year" [ngModel]="passingyear" id="birth_year" class="form-control" placeholder="Year of Birth" required/>
+      <!--<label class="select-label">Year of Birth</label>-->
     </div>
   </div>
 
@@ -61,8 +60,8 @@
     <div ng2-auto-complete
          [source]="countries"
          (ngModelChange)="selectCountryModel($event)">
-      <input class="form-control" [ngModel]="countryModel" [ngModelOptions]="{standalone: true}" required/>
-      <label class="select-label">Select Country</label>
+      <input class="form-control" [ngModel]="countryModel" [ngModelOptions]="{standalone: true}" placeholder="Select Country" required/>
+      <!--<label class="select-label">Select Country</label>-->
     </div>
   </div>
 
@@ -70,9 +69,9 @@
     <div ng2-auto-complete
          [source]="states"
          (ngModelChange)="selectStateModel($event)">
-      <input class="form-control" [ngModel]="stateModel" [ngModelOptions]="{standalone: true}" (click)="selectCountryMessage()" required/>
-      <label class="select-label">Select State</label>
-      <span *ngIf="isCountrySelected"><h6><font color="red">Please select Country first.</font></h6></span>
+      <input class="form-control" [ngModel]="stateModel" [ngModelOptions]="{standalone: true}" (click)="selectCountryMessage()" placeholder="Select State" required/>
+      <!--<label class="select-label">Select State</label>-->
+      <span *ngIf="isCountrySelected" class="error-messages">Please select Country first.</span>
     </div>
   </div>
 
@@ -80,9 +79,9 @@
     <div ng2-auto-complete
          [source]="cities"
          (ngModelChange)="selectCityModel($event)">
-      <input class="form-control" [ngModel]="cityModel" [ngModelOptions]="{standalone: true}"  (click)="selectStateMessage()" required/>
-      <label class="select-label">Select City</label>
-      <span *ngIf="isStateSelected"><h6><font color="red">Please select Country and State first.</font></h6></span>
+      <input class="form-control" [ngModel]="cityModel" [ngModelOptions]="{standalone: true}"  placeholder="Select City"  (click)="selectStateMessage()" required/>
+      <!--<label class="select-label">Select City</label>-->
+      <span *ngIf="isStateSelected" class="error-messages">Please select Country and State first.</span>
     </div>
   </div>
 

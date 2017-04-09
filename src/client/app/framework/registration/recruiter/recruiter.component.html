@@ -69,7 +69,7 @@
     <div class="form-group">
       <div ng2-auto-complete [source]="cities" (ngModelChange)="selectCityModel($event)">
         <input class="form-control" [ngModel]="cityModel" [ngModelOptions]="{standalone: true}" placeholder="Select City" (click)="selectStateMessage()" required/>
-        <span class="error-messages" *ngIf="isStateSelected">Please select Country and State first.</span>
+        <span *ngIf="isStateSelected"><h6><font color="red">Please select Country and State first.</font></h6></span>
       </div>
     </div>
 

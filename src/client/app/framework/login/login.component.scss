@@ -1,22 +1,5 @@
 @import '../../../css/common';
 
-.main-form-wrapper {
-  .content {
-    form {
-      padding: 15px 30px;
-    }
-  }
-}
-
-@media (max-width: 1280px) {
-  .main-form-wrapper {
-    .content {
-      form {
-        padding: 15px;
-      }
-    }
-  }
-}
 @media (max-width: 767px) {
   .main-form-wrapper {
     .content {

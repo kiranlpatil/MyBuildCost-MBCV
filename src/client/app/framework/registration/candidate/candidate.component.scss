@@ -1,13 +1,20 @@
 @import '../../../../css/common';
 
 .error-messages {
-  color: $bg-disabled;
+  color: #f66761;
   font-size: 10px;
   font-style: italic;
-  margin:  0 0 0 15px;
+  margin: 0;
+  position: absolute;
+  line-height: 11px;
+}
+
+.alert {
+  margin: 0 15px 15px;
 }
 
 .employee-form {
+  padding: 15px 0 0;
 
   .form-group {
     padding: 0 15px;

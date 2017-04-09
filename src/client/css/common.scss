@@ -58,6 +58,7 @@ $modal-bg: rgba(0, 0, 0, .7);
   background-position: 0 0;
   background-repeat: no-repeat;
   background-size: cover;
+  background-attachment: fixed;
 }
 
 %text-ellipsis {
@@ -397,12 +398,6 @@ control-messages {
     div {
       margin: 35px 0 0;
     }
-  }
-}
-
-.registration {
-  .alert {
-    margin: 0 15px 0;
   }
 }
 
