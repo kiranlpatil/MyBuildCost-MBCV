@@ -12,12 +12,12 @@
   <!--<cn-single-select-list [radioData]="industryNames"  (selectedData)="selectIndustryModel($event)" ></cn-single-select-list>-->
 
 
-  <div class="button-group clearfix"  [hidden]="!isCandidate">
+  <div class="button-group clearfix"  >
     <button class="btn btn-primary" (click)="showHideModal()" [disabled]="disbleButton">Confirm &amp; Save</button>
   </div>
 </div>
 
-<div class="modal" [style.display]="getStyleModal()" [hidden]="!isCandidate">
+<div class="modal" [style.display]="getStyleModal()" >
   <div class="modal-bg">
     <div class="modal-dialog modal-md">
       <div class="modal-content">

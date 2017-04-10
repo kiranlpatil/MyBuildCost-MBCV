@@ -7,6 +7,7 @@ import {ProficiencyDomainService} from './proficiency-domain.service';
 import {JobPostProficiencyService} from '../jobPostProficiency.service';
 import {ProfileCreatorService} from "../profile-creator/profile-creator.service";
 import {LocalStorageService} from "../../../framework/shared/localstorage.service";
+import {MyIndustryService} from "../industry-service";
 
 @Component({
   moduleId: module.id,
@@ -27,12 +28,23 @@ export class ProficiencyDomainComponent implements OnInit {
   private isShow: boolean =true;
   private addProficiency:string="";
   private addOther:string="addId";
+  private selectedIndustry: string;
 
   constructor(private proficiencyService: ProficiencyService,
               private proficiencydoaminService: ProficiencyDomainService,
               private messageService: MessageService,
+              private myindustryService : MyIndustryService,
               private JobPostProficiency: JobPostProficiencyService,
               private profileCreatorService:ProfileCreatorService) {
+    myindustryService.showTest$.subscribe(
+      data=>{
+         this.selectedIndustry=data;
+        this.proficiencydoaminService.getProficiency( this.selectedIndustry)
+          .subscribe(
+            data => this.onProficiencySuccess(data),
+            error => this.onError(error));
+      }
+    );
 
     proficiencyService.showTest$.subscribe(
       data => {
@@ -45,13 +57,6 @@ export class ProficiencyDomainComponent implements OnInit {
 
     this.proficiencyType = true;
     this.placeHolderName = 'proficiency';
-
-    this.proficiencydoaminService.getProficiency()
-      .subscribe(
-        data => this.onProficiencySuccess(data),
-        error => this.onError(error));
-
-
       if(LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE)==="true"){
         this.profileCreatorService.getCandidateDetails()
           .subscribe(

@@ -10,6 +10,7 @@ import {LocalStorage} from "../../../framework/shared/constants";
 import {ProfileCreatorService} from "../profile-creator/profile-creator.service";
 import {Candidate} from "../model/candidate";
 import {Industry} from "../model/industry";
+import {Messages} from "../../../framework/shared/constants";
 
 @Component({
   moduleId: module.id,
@@ -43,7 +44,7 @@ export class IndustryListComponent implements OnInit {
     if(LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE)==="true"){
       this.profileCreatorService.getCandidateDetails()
         .subscribe(
-          candidateData => this.OnCandidateDataSuccess(candidateData),
+          candidateData =>  this.OnCandidateDataSuccess(candidateData),
           error => this.onError(error));
 
     }
@@ -75,7 +76,6 @@ export class IndustryListComponent implements OnInit {
       }
       if(LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE)==="false"){
         this.isCandidate=false;
-        this.disableIndustrires();
       }
       this.disbleButton=false;
     }
@@ -97,6 +97,7 @@ export class IndustryListComponent implements OnInit {
 
   selectIndustryModel(industry: string) {
     this.storedindustry=industry;
+    this.disbleButton = false;
   }
 
 
@@ -121,11 +122,10 @@ export class IndustryListComponent implements OnInit {
 
       this.disbleRole = true;
       this.disbleButton = true;
-
-    if(LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE)==="true"){
-      this.createAndSave();
       this.showModalStyle = !this.showModalStyle;
       this.disableIndustry = true;
+    if(LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE)==="true"){
+      this.createAndSave();
     }
   }
 

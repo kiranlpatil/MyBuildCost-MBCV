@@ -45,8 +45,8 @@ class RecruiterSchema {
             salary :{
               type : String
             },
-            profiences :{
-              names : [String]
+            profiencies :{
+              type : [String]
             },
             industry:{
               name:String,
@@ -54,9 +54,9 @@ class RecruiterSchema {
                 name: String,
                 capabilities: [{
                   complexities: [{
-                    scenarios: {
+                    scenarios: [{
                       name: String
-                    },
+                    }],
                     name: String
                   }],
                   name: String

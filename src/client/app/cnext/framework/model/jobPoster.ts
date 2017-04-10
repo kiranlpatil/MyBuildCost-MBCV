@@ -8,12 +8,12 @@ export class JobPosterModel {
   experience : string;
   salary : string;
   joiningPeriod :string;
-  profiences :  string[];
+  profiencies :string[];
   industry : Industry;
   location : JobLocation;
   competencies : string;
   responsibility : string;
-  postingDate : Date;
+  postingDate : string;
   remark : string;
 
 }

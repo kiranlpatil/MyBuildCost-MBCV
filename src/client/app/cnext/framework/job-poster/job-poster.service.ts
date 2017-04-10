@@ -17,7 +17,7 @@ export class JobPosterService extends BaseService {
   postJob(jobDetail:JobPosterModel):Observable<JobPosterModel> {
     let headers = new Headers({ 'Content-Type': 'application/json'});
     let options = new RequestOptions({ headers: headers });
-    let body = JSON.stringify(jobDetail);
+    let body = JSON.stringify({"postedJobs":jobDetail});
    // /**//api/recruiter/:id/job"
     let url:string=API.RECRUITER_PROFILE+'/'+LocalStorageService.getLocalValue(LocalStorage.USER_ID)+'/job';
     return this.http.put(url, body,options)

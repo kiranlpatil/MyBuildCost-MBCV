@@ -154,17 +154,18 @@ export class JobPosterComponent {
     this.jobPosterModel.experience==this.jobRequirement.experience;
     this.jobPosterModel.hiringManager=this.jobInformation.hiringManager;
     this.jobPosterModel.joiningPeriod=this.jobRequirement.noticeperiod;
-    this.jobPosterModel.profiences=this.proficiency;
+    this.jobPosterModel.profiencies=this.proficiency;
     this.jobPosterModel.salary=this.jobRequirement.salary;
     this.jobPosterModel.responsibility=this.responsibilities.detail;
     this.jobPosterModel.department=this.jobInformation.department;
     this.jobPosterModel.industry=this.complexities;
     this.jobPosterModel.location=this.jobLocation;
-    this.jobPosterModel.postingDate= new Date();
+    this.jobPosterModel.postingDate= (new Date()).toISOString();
 
 
     console.log(this.jobPosterModel);
     console.log(this.responsibilities.detail);
+    console.log(this.jobPosterModel.profiencies);
 
     this.jobPostService.postJob(this.jobPosterModel).subscribe(
       user => {

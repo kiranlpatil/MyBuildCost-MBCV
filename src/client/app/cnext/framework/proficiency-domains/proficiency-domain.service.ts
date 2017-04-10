@@ -12,9 +12,9 @@ export class ProficiencyDomainService extends BaseService {
     super();
   }
 
-  getProficiency():Observable<any> {
+  getProficiency(industry:string):Observable<any> {
     var url = API.PROFICIENCYLIST;
-    var industry="IT";
+    var industry=industry;
     var tempurl='industry/'+industry+'/proficiency';
     return this.http.get(tempurl)
       .map(this.extractData)
