@@ -45,6 +45,7 @@ export class JobPosterComponent {
   private isShowCapability:boolean=false;
   private isShowProficiency:boolean=false;
   private roletype :string;
+  private showModalStyle: boolean = false;
   private complexities :Industry=new Industry();
   private proficiency :string[]=new Array();
   private competensies=new Description();
@@ -147,7 +148,7 @@ export class JobPosterComponent {
   }
 
 
-  postjob() {
+  postjob() {debugger
     this.jobPosterModel.jobTitle=this.jobInformation.jobTitle;
     this.jobPosterModel.competencies=this.competensies.detail;
     this.jobPosterModel.education=this.jobRequirement.education;
@@ -175,9 +176,21 @@ export class JobPosterComponent {
         console.log(error);
       });
   }
+  showHideModal() {debugger
+    this.showModalStyle = !this.showModalStyle;
+    this.postjob();
+  }
+  getStyleModal() {
+    if (this.showModalStyle) {
+      return 'block';
+    } else {
+      return 'none';
+    }
+  }
+
   mockupSearch() {
     this.showJobFilter.change(true);
 
-    $("html, body").animate({ scrollTop: 0 }, 500);
+
   }
 }

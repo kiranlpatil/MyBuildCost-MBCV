@@ -10,7 +10,7 @@ import {  AboutRoutes  } from './framework/dashboard/about/index';
 import {  SettingsRoutes  } from './framework/dashboard/settings/index';
 import {  ActivateUserRoutes  } from './framework/registration/activate-user/activate-user.routes';
 import {  ResetPasswordRoutes  } from './framework/password/forgot-password/reset-password/index';
-import {  VerifyUserRoutes  } from './framework/registration/verify_user/verify-user.routes';
+import {  VerifyUserRoutes  } from './framework/registration/verify_user/index';
 import {  VerifyPhoneRoutes  } from './framework/registration/verify_phone/verify-phone.routes';
 import {  ChangeEmailRoutes  } from './framework/dashboard/settings/change-email/change-email.routes';
 import {  ActivateEmailRoutes  } from './framework/dashboard/settings/activate-email/activate-email.routes';

@@ -4,7 +4,7 @@
 -->
   <div class="select-option"  *ngFor="let choice of roleTypes;let i = index">
     <label >
-      <input type="radio"  name="choices" id="{{choice}}" value="{{choice}}" [disabled]="showfield" (click)="selectOption($event.target.value)" [checked]="choice===candidate.roleType"  >
+      <input type="radio"  name="choices" id="{{choice}}" value="{{choice}}" [disabled]="showfield" (click)="selectOption($event.target.value)" [checked]="isChecked(choice)">
       <span>{{choice}}</span>
     </label>
   </div>

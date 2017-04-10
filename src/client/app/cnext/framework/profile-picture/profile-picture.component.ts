@@ -33,13 +33,16 @@ export class ProfilePictureComponent  {
               private messageService: MessageService, private profileService: ProfileService) {
     this.filesToUpload = [];
     this.uploaded_image_path = LocalStorageService.getLocalValue(LocalStorage.PROFILE_PICTURE); //TODO:Get it from get user call.
-    console.log('Profile Picture image_path',this.image_path);
-    console.log('Profile Picture image_path',this.uploaded_image_path);
+    console.log('Profile Picture image_path1',this.image_path);
+    console.log('Profile Picture image_path2',this.uploaded_image_path);
 
-    if (this.image_path === undefined || this.image_path === '' || this.uploaded_image_path === '') {
+    if ( this.uploaded_image_path === undefined) {
       this.image_path = ImagePath.PROFILE_IMG_ICON;
-    } else {
-      this.image_path = this.uploaded_image_path;
+      console.log('Profile Picture to upload image_path5',this.image_path);
+    } else {debugger
+      this.image_path = JSON.parse(this.uploaded_image_path);
+      console.log('Profile Picture to upload image_path3',this.uploaded_image_path);
+      console.log('Profile Picture to upload image_path4',this.image_path);
     }
 
   }

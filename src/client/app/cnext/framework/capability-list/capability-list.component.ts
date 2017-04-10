@@ -67,7 +67,7 @@ export class CapabilityListComponent implements OnInit  {
       }
     );
     roleservice.showTest$.subscribe(
-      data => {
+      data => { 
         this.roles=data;
         this.capabilityListServive.getCapability(this.industry,this.roles)
           .subscribe(
@@ -98,7 +98,7 @@ export class CapabilityListComponent implements OnInit  {
     }
   }
 
-  OnCandidateDataSuccess(candidateData:any){
+  OnCandidateDataSuccess(candidateData:any){ 
 
     if(candidateData.data[0].industry.roles.length > 0) {
       for (let role of candidateData.data[0].industry.roles) {
@@ -107,16 +107,17 @@ export class CapabilityListComponent implements OnInit  {
             this.savedCapabilities.push(capability);
             this.primaryCapabilities.push(capability.name);
           }
+          this.showfield = true;
+          this.myCapabilityListService.change(this.primaryCapabilities);
+          console.log(this.savedCapabilities);
+          this.complexityService.change(true);
         }
       }
-      this.showfield = true;
-      this.myCapabilityListService.change(this.primaryCapabilities);
-      console.log(this.savedCapabilities);
-      this.complexityService.change(true);
+
     }
   }
 
-  onCapabilityListSuccess(data:any) {
+  onCapabilityListSuccess(data:any) { 
     this.capabilityData=data;
     console.log(this.capabilityData);
     if(data !== undefined && data.length > 0) {
@@ -136,7 +137,7 @@ export class CapabilityListComponent implements OnInit  {
     this.messageService.message(message);
   }
 
-  selectedOption(selectedCapability:any) {
+  selectedOption(selectedCapability:any) { 
      this.disablebutton=false;
     if (selectedCapability.target.checked) {
       this.searchCapabilityData(selectedCapability.target.value);

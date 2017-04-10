@@ -110,7 +110,7 @@ $text-color: #666;
       box-sizing: border-box;
 
       &:focus ~ label,
-      &.ng-valid ~ label {
+      &.ng-touched ~ label {
         font-size: 12px;
         top: -18px;
       }
@@ -118,7 +118,7 @@ $text-color: #666;
 
     select {
       &:focus ~ label,
-      &.ng-valid ~ label {
+      &.ng-touched ~ label {
         font-size: 12px;
         top: -18px;
       }

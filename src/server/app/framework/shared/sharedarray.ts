@@ -1,11 +1,12 @@
 /**
  * Created by admin on 10/5/16.
  */
+//import Messages = require("../shared/messages");
 
 class MailAttachments {
     public static AttachmentArray : Array<any> = [
         {
-            path: './src/server/app/framework/public/images/logo/logo-white.png',
+            path: './src/server/app/framework/public/images/logo/cnext-logo-white.png',
             cid: 'unique@company-logo'
         },{
             path: './src/server/app/framework/public/images/banner/banner.png',

@@ -65,6 +65,9 @@ class CandidateSchema {
           }]
         }]
       },
+      secondaryCapability:{
+        type:[String]
+      },
       location: {
         cityName: String,
         state: String,

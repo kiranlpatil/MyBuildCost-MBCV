@@ -66,8 +66,6 @@ export function login(req: express.Request, res: express.Response, next: any) {
                 "_id": result[0]._id,
                 "current_theme": result[0].current_theme,
                 "picture": result[0].picture,
-                "company_name":result[0].company_name,
-                "isRecruitingForself":result[0].isRecruitingForself,
                 "mobile_number":result[0].mobile_number,
                 "isCandidate":result[0].isCandidate
               },

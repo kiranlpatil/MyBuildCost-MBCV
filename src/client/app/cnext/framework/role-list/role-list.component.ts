@@ -66,40 +66,50 @@ export class RoleListComponent {
 
   OnCandidateDataSuccess(candidateData:any){
     if(candidateData.data[0].industry.roles.length > 0) {
-      this.roles.push(candidateData.data[0].industry.roles[0]);
-      for (let role of this.roles) {
+      for (let role of candidateData.data[0].industry.roles) {
         this.storedRoles.push(role.name);
       }
       this.myRoleType.change(true);
       this.myIndustryService.change(candidateData.data[0].industry.name);
       this.roleService.change(this.storedRoles);
-
     }
   }
 
   selectOption(newVal:any) {
-    var option=newVal.target.value;
     if (newVal.target.checked) {
-      if ((this.selectedOptions.length < 3) && option !== undefined) {
-        this.selectedOptions.push(option);
-        this.selectRolesModel(option);
-
+      if ((this.selectedOptions.length < 3) && newVal.target.value  !== undefined) {
+        this.selectedOptions.push(newVal.target.value);
       } else {
-        if(option !== undefined) {
+        if(newVal.target.value !== undefined) {
           this.alert=true;
           newVal.target.checked=false;
         } else
           console.log('in elsae else');
       }
     } else {
-      if(option !== undefined) {
+      if(newVal.target.value !== undefined) {
         for(let data of this.selectedOptions) {
-          if(data === option) {
+          if(data === newVal.target.value) {
             this.selectedOptions.splice(this.selectedOptions.indexOf(data), 1);
           }
         }
       }
     }
+    this.fillDataInModel();
+  }
+
+  fillDataInModel(){
+    this.disbleButton = false;
+    if(this.selectedOptions.length == 0) {
+      this.disbleButton = true;
+    }
+    this.industryRoles = new Industry();
+    this.industryRoles.name = this.industry;
+   for(let option of this.selectedOptions ){
+     var r:Role=new Role();
+     r.name=option;
+     this.industryRoles.roles.push(r);
+   }
   }
   onError(error:any) {
     var message = new Message();
@@ -123,25 +133,21 @@ export class RoleListComponent {
 
     }
   }
-  selectRolesModel(roleName: string) {
+  /*selectRolesModel(roleName: string) {
      if(roleName === 'u can select max ') {
       console.log('u can select max ');
 } else {
       this.disbleButton = false;
       this.storedRoles.push(roleName);
-       var r:Role=new Role();
-       r.name=roleName;
-       this.industryRoles.roles.push(r);
-
     }
-  }
-  searchRolesId(roleName:any) {
+  }*/
+ /* searchRolesId(roleName:any) {
     for(let role of this.rolesData) {
       if(role.name===roleName) {
         this.industryRoles.roles.push(role._id);
       }
     }
-  }
+  }*/
   showHideModal() {
     this.showModalStyle = !this.showModalStyle;
   }
@@ -174,9 +180,10 @@ export class RoleListComponent {
     }
   }
 
-  isChecked(choice:any):boolean{
-    for(let role of this.roles){
-      if(role.name===choice){
+  isChecked(choice:any):boolean{ 
+    for(let role of this.storedRoles){
+      if(role===choice){
+        //this.showfield=true;
         return true;
       }
     }
