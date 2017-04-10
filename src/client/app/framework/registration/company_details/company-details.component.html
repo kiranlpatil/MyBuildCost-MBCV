@@ -35,10 +35,8 @@
           <label for="about_company">About Company:</label>
         </div>
         <div class="col-sm-5">
-        <textarea formControlName="about_company" id="about_company"  placeholder="About company" class="form-control" required></textarea>
-        </div>
-        <div class="col-sm-5">
           <control-messages [control]="companyDetailsForm.controls.about_company"></control-messages>
+          <textarea formControlName="about_company" id="about_company"  placeholder="About company" class="form-control" required></textarea>
         </div>
       </div>
 
@@ -52,9 +50,11 @@
             <textarea type="text" formControlName="description1" id="description1"  placeholder="Description" class="form-control" required></textarea>
           </div>
           <div class="col-sm-5 no-padding">
-            <label for="file-upload1" class="custom-file-upload">Upload File</label>
-            <p class="file-name">{{fileName1}}</p>
-            <input id="file-upload1" type="file"  (change)="fileChangeEvent($event)" placeholder="Upload file" />
+            <div  class="clearfix">
+              <label for="file-upload1" class="custom-file-upload">Upload File</label>
+              <p class="file-name">{{fileName1}}</p>
+              <input id="file-upload1" type="file"  (change)="fileChangeEvent($event)" placeholder="Upload file" />
+            </div>
            <!-- <div class="error-message-registration" *ngIf="isDescriptionEntered">
               <span><h6><font color="red">Please enter description first.</font></h6></span>
             </div>-->
@@ -72,9 +72,11 @@
             <textarea type="text" formControlName="description2" id="description2"  placeholder="Description" class="form-control" value="description2" required></textarea>
           </div>
           <div class="col-sm-5 no-padding">
-            <label for="file-upload2" class="custom-file-upload">Upload File</label>
-            <p class="file-name">{{fileName2}}</p>
-            <input id="file-upload2" type="file" [disabled]="!companyDetailsForm.value.description2" (change)="fileChangeEvent($event)" placeholder="Upload file"/>
+            <div class="clearfix">
+              <label for="file-upload2" class="custom-file-upload">Upload File</label>
+              <p class="file-name">{{fileName2}}</p>
+              <input id="file-upload2" type="file" [disabled]="!companyDetailsForm.value.description2" (change)="fileChangeEvent($event)" placeholder="Upload file"/>
+            </div>
 
           <!--  <div class="error-message-registration" *ngIf="!companyDetailsForm.value.description2">
               <span><h6><font color="red">Please enter description first.</font></h6></span>
@@ -94,9 +96,11 @@
             <textarea type="text" formControlName="description3" id="description3"  placeholder="Description" class="form-control" required></textarea>
           </div>
           <div class="col-sm-5 no-padding">
-            <label for="file-upload3" class="custom-file-upload">Upload File</label>
-            <p class="file-name">{{fileName3}}</p>
-            <input id="file-upload3" type="file" [disabled]="!companyDetailsForm.value.description3" (change)="fileChangeEvent($event)" placeholder="Upload file"/>
+           <div class="clearfix">
+             <label for="file-upload3" class="custom-file-upload">Upload File</label>
+             <p class="file-name">{{fileName3}}</p>
+             <input id="file-upload3" type="file" [disabled]="!companyDetailsForm.value.description3" (change)="fileChangeEvent($event)" placeholder="Upload file"/>
+           </div>
            <!-- <div class="error-message-registration" *ngIf="!companyDetailsForm.value.description3">
               <span><h6><font color="red">Please enter description first.</font></h6></span>
             </div>-->

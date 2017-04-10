@@ -176,5 +176,7 @@ export class JobPosterComponent {
   }
   mockupSearch() {
     this.showJobFilter.change(true);
+
+    $("html, body").animate({ scrollTop: 0 }, 500);
   }
 }

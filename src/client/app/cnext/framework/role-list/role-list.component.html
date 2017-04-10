@@ -7,7 +7,7 @@
       <input type="checkbox"   name="choices" id="{{choice}}" [disabled]="showfield || isChecked(choice)" value="{{choice}}" (click)="selectOption($event)" [checked]="isChecked(choice)" />
       <span>{{choice}}</span>
     </label>
-    <div class="error-messages" *ngIf="alert"><p>You have selected maximum work areas</p></div>
+    <div class="error-messages" *ngIf="alert">You have selected maximum work areas.</div>
   </div>
 
 

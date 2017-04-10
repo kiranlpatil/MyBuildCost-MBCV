@@ -20,12 +20,11 @@
     <form [formGroup]="userForm" (submit)="onSubmit()">
 
       <p><b>You are almost done! We just need to verify your account before you can start using it.</b></p>
+      <p>One Time Password (OTP) will be sent on the following mobile Number.</p>
 
       <div class="form-group" id="inputMobile" [hidden]="chkMobile"  >
         <control-messages [control]="userForm.controls.mobile_number"></control-messages>
-        <p>One Time Password (OTP) will be sent on the following mobile Number.</p>
         <input type="number" [(ngModel)]="model.mobile_number" formControlName="mobile_number" id="mobile_number" class="form-control" required/>
-
       </div>
 
       <div class="button-group" [hidden]="chkMobile">

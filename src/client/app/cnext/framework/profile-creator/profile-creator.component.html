@@ -28,7 +28,7 @@
             <input name="jobTitle" placeholder="ex.Software Engineer" class="form-control job-title" [ngModel]="title" (change)="selectedtitle($event.target.value)" [disabled]="disableTitle">
             <!--<textarea name="jobTitle" placeholder="ex.Software Engineer" class="form-control"[ngModel]="title" (ngModelChange)="selectedtitle($event)" ></textarea>-->
           </div>
-          <div class="error-messages" *ngIf="!isTitleFilled">Title should not be empty.</div>
+          <div class="error-messages" *ngIf="!isTitleFilled">Job title should not be empty.</div>
           <!--<div class="error-messages" *ngIf="isShowRequired"><p>*</p></div>-->
         </div>
       </div>
