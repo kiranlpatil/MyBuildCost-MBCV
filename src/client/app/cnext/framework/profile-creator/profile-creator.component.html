@@ -145,10 +145,10 @@
           <div class="radio">
             <label>Profile Visibility:</label>
             <label class="radio-inline">
-              <input type="radio" name="profile-visibility" id="optionsRadios2"  [ngModel]="selectedvalue1" (ngModelChange)="showorhide($event)" value="option2"> show
+              <input type="radio" name="profile-visibility" id="optionsRadios2"  [ngModel]="selectedvalue1" (change)="showorhide($event.target.value)" value="option2"> show
             </label>
             <label class="radio-inline">
-              <input type="radio" name="profile-visibility" id="optionsRadios3"  [ngModel]="selectedvalue2" (ngModelChange)="showorhide($event)" value="option3" > hide
+              <input type="radio" name="profile-visibility" id="optionsRadios3"  [ngModel]="selectedvalue2" (change)="showorhide($event.target.value)" value="option3" > hide
             </label>
           </div>
           <div class="info"><p>In case you wish to hide your profile visibility from recruiters, select hide option above.<br />You can also choose to show your profile later.</p></div>

@@ -42,7 +42,7 @@ export class ProficiencyDomainComponent implements OnInit {
   }
 
   ngOnInit() {
-    
+
     this.proficiencyType = true;
     this.placeHolderName = 'proficiency';
 
@@ -51,14 +51,14 @@ export class ProficiencyDomainComponent implements OnInit {
         data => this.onProficiencySuccess(data),
         error => this.onError(error));
 
-    
+
       if(LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE)==="true"){
         this.profileCreatorService.getCandidateDetails()
           .subscribe(
             candidateData => this.OnCandidateDataSuccess(candidateData),
             error => this.onError(error));
 
-      
+
     }
 
   }
@@ -67,7 +67,7 @@ export class ProficiencyDomainComponent implements OnInit {
   OnCandidateDataSuccess(candidateData:any){}
 
   onProficiencySuccess(data: any) {
-    
+
     for (let proficiency of data.data.names) {
       this.selectedproficiencies.push(proficiency);
       this.masterDataproficiency.push(proficiency);

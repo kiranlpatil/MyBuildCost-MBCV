@@ -102,7 +102,7 @@ export class CapabilityListComponent implements OnInit  {
 
     if(candidateData.data[0].industry.roles.length > 0) {
       for (let role of candidateData.data[0].industry.roles) {
-        if(role.capabilities > 0) {
+        if(role.capabilities.length > 0) {
           for (let capability of role.capabilities) {
             this.savedCapabilities.push(capability);
             this.primaryCapabilities.push(capability.name);

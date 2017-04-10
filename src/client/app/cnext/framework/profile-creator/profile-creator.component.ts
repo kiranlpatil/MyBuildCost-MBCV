@@ -164,7 +164,7 @@ export class ProfileCreatorComponent implements OnInit {
       }
     }
 
-    if(this.candidate.professionalDetails.length>0){
+    if(this.candidate.professionalDetails !== undefined){
       this.showProfeciency=true;
     }
 

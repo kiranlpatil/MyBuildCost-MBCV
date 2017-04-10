@@ -166,7 +166,6 @@ export class ComplexityListComponent {
         for (let k=0;k<this.complexityData[i].capabilities[j].complexities.length;k++){
           if(this.complexityData[i].capabilities[j].complexities[k].name===selectComplexity.name){
             this.complexityData[i].capabilities[j].complexities[k]=selectComplexity;
-
           }
         }
       }

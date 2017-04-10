@@ -77,13 +77,13 @@ class CandidateSchema {
         yearOfPassing: Number,
         specialization: String
       }],
-      professionalDetails: [{
+      professionalDetails: {
         education: String,
         experience: String,
         currentSalary: String,
         noticePeriod: String,
         relocate: String
-      }],
+      },
       employmentHistory: [{
         companyName: String,
         designation: String,

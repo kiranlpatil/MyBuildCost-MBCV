@@ -10,11 +10,11 @@ export class Candidate {
   aboutMyself: string;
   certifications : Certifications[]=new Array();
   awards : Award[]=new Array();
-  industry : Industry;
+  industry : Industry=new Industry();
   intrestedIndustries : string[];
   roleType: string;
   academics :  Academicdetails[]=new Array();
-  professionalDetails :  ProfessionalData[];
+  professionalDetails :  ProfessionalData=new ProfessionalData();
   employmentHistory : EmployementHistory[]=new Array();
-  proficiencies : string[];
+  proficiencies : string[]=new Array();
 }

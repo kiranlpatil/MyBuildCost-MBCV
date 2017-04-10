@@ -77,8 +77,9 @@ export class IndustryListComponent implements OnInit {
         this.isCandidate=false;
         this.disableIndustrires();
       }
+      this.disbleButton=false;
     }
-    this.disbleButton=false;
+
   }
   onIndustryListSuccess(data:any) {
     this.industryData=data;

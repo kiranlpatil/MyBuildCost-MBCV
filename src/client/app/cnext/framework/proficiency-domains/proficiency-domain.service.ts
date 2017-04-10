@@ -31,6 +31,4 @@ addCandidateProficiency(candidateproficiency:string[]):Observable<string[]>{
     .map(this.extractData)
     .catch(this.handleError);
 }
-
-
 }

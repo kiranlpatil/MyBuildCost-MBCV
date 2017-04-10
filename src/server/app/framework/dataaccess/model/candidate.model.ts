@@ -23,7 +23,7 @@ interface CandidateModel {
   intrestedIndustries : string[];
   roleType: string;
   academics :  AcademicModel[];
-  professionalDetails :  ProfessionalDetailsModel[];
+  professionalDetails :  ProfessionalDetailsModel;
   employmentHistory : EmployeeHistoryModel[];
   proficiencies : string[];
 }
