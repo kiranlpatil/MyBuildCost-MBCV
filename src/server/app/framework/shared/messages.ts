@@ -7,7 +7,7 @@ class Messages {
   //Email subject
   public static EMAIL_SUBJECT_REGISTRATION: string = ' Registration Successful';
   public static EMAIL_SUBJECT_CHANGE_EMAILID: string = 'Confirm change of EmailId';
-  public static EMAIL_SUBJECT_FORGOT_PASSWORD: string = 'New Password for MobileSeed Project';
+  public static EMAIL_SUBJECT_FORGOT_PASSWORD: string = 'New Password for C-NEXT Portal';
   public static EMAIL_SUBJECT_USER_CONTACTED_YOU: string = 'User Contacted you';
 
   //Sendmail

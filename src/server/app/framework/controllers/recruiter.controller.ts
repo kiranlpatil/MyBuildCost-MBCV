@@ -54,6 +54,12 @@ export function create(req:express.Request, res:express.Response, next:any) {
           "data": {
             "reason": Messages.MSG_SUCCESS_REGISTRATION,
             "_id": result.userId,
+            "company_name":result.company_name,
+            "current_theme":result.current_theme,
+            "email":result.email,
+            "isRecruitingForself":result.isRecruitingForself,
+            "mobile_number":result.mobile_number,
+            "isCandidate":result.iscandidate
           },
           access_token: token
         });

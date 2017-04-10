@@ -42,7 +42,7 @@ class RecruiterService {
           }
           else {
             var locationId=res1._id;
-            item.isActivated=true;
+            item.isActivated=false;
             item.isCandidate=false;
             this.userRepository.create(item, (err, res) => {
               if (err) {
@@ -75,7 +75,7 @@ class RecruiterService {
   }
 
   retrieve(field: any, callback: (error: any, result: any) => void) {
-    this.userRepository.retrieve(field, callback);
+    this.recruiterRepository.retrieve(field, callback);
   }
 
   update(_id: string, item: any, callback: (error: any, result: any) => void) { //Todo change with candidate_id now it is a user_id operation

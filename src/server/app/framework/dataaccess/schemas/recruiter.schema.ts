@@ -20,7 +20,7 @@ class RecruiterSchema {
           "company_logo":{
             type:String
           },
-          "company_headquarter_country":{
+          company_headquarter_country:{
             type:String
           },
           setOfDocuments:{

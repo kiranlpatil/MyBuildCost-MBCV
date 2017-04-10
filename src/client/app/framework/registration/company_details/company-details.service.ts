@@ -19,7 +19,7 @@ export class CompanyDetailsService extends BaseService {
     let options = new RequestOptions({ headers: headers });
     let body = JSON.stringify(companyDetails);
     let url =API.RECRUITER_PROFILE+"/"+LocalStorageService.getLocalValue(LocalStorage.USER_ID);
-    return this.http.post(url, body,options)
+    return this.http.put(url, body,options)
       .map(this.extractData)
       .catch(this.handleError);
   }
