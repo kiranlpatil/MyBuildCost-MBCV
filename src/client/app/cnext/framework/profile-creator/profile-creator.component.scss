@@ -9,6 +9,15 @@ $border-color: #e8e8e8;
 $light-blue: #00aed5;
 $label: #888;
 
+.error-messages {
+  color: #f66761;
+  font-size: 10px;
+  font-style: italic;
+  margin: 0;
+  position: absolute;
+  line-height: 11px;
+}
+
 .create-profile {
   background: $profile-background;
   clear: both;
@@ -122,7 +131,7 @@ $label: #888;
   }
 
   .min-height {
-    height: 400px;
+    height: 300px;
     overflow: auto;
   }
 

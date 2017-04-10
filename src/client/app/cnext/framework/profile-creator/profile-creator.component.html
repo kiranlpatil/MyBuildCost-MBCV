@@ -22,14 +22,14 @@
     <div class="col-sm-9">
 
       <div class="section-container">
-        <h4 class="heading">Enter Your Job Title</h4>
+        <h4 class="heading">Enter Your Job Title *</h4>
         <div class="main-content clearfix">
           <div class="col-sm-10 no-padding">
-            <input name="jobTitle" placeholder="ex.Software Engineer" class="form-control"[ngModel]="title" (change)="selectedtitle($event.target.value)" [disabled]="disableTitle">
+            <input name="jobTitle" placeholder="ex.Software Engineer" class="form-control job-title" [ngModel]="title" (change)="selectedtitle($event.target.value)" [disabled]="disableTitle">
             <!--<textarea name="jobTitle" placeholder="ex.Software Engineer" class="form-control"[ngModel]="title" (ngModelChange)="selectedtitle($event)" ></textarea>-->
           </div>
-          <div class="error-messages" *ngIf="!isTitleFilled"><p>Title should not be empty.</p></div>
-          <div class="error-messages" *ngIf="isShowRequired"><p>*</p></div>
+          <div class="error-messages" *ngIf="!isTitleFilled">Title should not be empty.</div>
+          <!--<div class="error-messages" *ngIf="isShowRequired"><p>*</p></div>-->
         </div>
       </div>
 
@@ -43,7 +43,7 @@
       <div class="section-container" [hidden]="!isRolesShow"  id="work-area">
         <h4 class="heading">Select Area of Work (Max 3)</h4>
         <div class="main-content">
-          <cn-role-list> ></cn-role-list>
+          <cn-role-list></cn-role-list>
         </div>
       </div>
 
