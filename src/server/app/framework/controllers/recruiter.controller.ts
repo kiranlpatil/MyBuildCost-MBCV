@@ -66,15 +66,6 @@ export function create(req:express.Request, res:express.Response, next:any) {
 }
 
 
-export function updateDetails(req:express.Request, res:express.Response, next:any) {
-  try {
-
-  }
-  catch (e) {
-    res.status(403).send({message: e.message});
-  }
-}
-
 export function postJob(req:express.Request, res:express.Response, next:any) {
   try {
     var newJob:JobProfileModel = <JobProfileModel>req.body;
