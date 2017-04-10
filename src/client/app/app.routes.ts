@@ -9,7 +9,7 @@ import {  ChangePasswordRoutes  } from './framework/password/change-password/ind
 import {  AboutRoutes  } from './framework/dashboard/about/index';
 import {  SettingsRoutes  } from './framework/dashboard/settings/index';
 import {  ActivateUserRoutes  } from './framework/registration/activate-user/activate-user.routes';
-import {  ResetPasswordRoutes  } from './framework/password/forgot-password/reset-password/reset-password.routes';
+import {  ResetPasswordRoutes  } from './framework/password/forgot-password/reset-password/index';
 import {  VerifyUserRoutes  } from './framework/registration/verify_user/verify-user.routes';
 import {  VerifyPhoneRoutes  } from './framework/registration/verify_phone/verify-phone.routes';
 import {  ChangeEmailRoutes  } from './framework/dashboard/settings/change-email/change-email.routes';
