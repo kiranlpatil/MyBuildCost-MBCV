@@ -1,9 +1,15 @@
 @import '../../../css/common';
 
 .registration {
+  display: table;
   position: relative;
 
   .content {
+    left: 50%;
+    margin: 100px 0 50px;
+    position: relative;
+    top: 0;
+    transform: translate(-50%, 0);
     width: 40%;
   }
 
