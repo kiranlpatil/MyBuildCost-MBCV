@@ -26,5 +26,6 @@ interface CandidateModel {
   professionalDetails :  ProfessionalDetailsModel;
   employmentHistory : EmployeeHistoryModel[];
   proficiencies : string[];
+  secondaryCapability : string[];
 }
 export = CandidateModel;

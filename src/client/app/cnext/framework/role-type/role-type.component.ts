@@ -48,6 +48,7 @@ export class RoleTypetListComponent implements OnInit {
     if(this.candidate.roleType !== undefined){
       this.showfield=true;
       this.disbleButton=true;
+      this.testService.change(true);
     }
   }
 
@@ -93,6 +94,16 @@ export class RoleTypetListComponent implements OnInit {
   selectIndustryModel(event:string) {
 console.log('event');
 
+  }
+
+  isChecked(choice:any):boolean{
+      if(this.candidate.roleType === choice){
+        //this.showfield=true;
+        //this.testService.change(true);
+        //this.disbleButton = true;
+        return true;
+      }
+    return false;
   }
 
   createAndSave() {
