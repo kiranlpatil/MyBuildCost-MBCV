@@ -2,7 +2,7 @@
 
 .main-form-wrapper {
   form {
-    padding: 15px 30px;
+    padding: 15px;
   }
 
   .form-group {
@@ -11,6 +11,11 @@
 }
 
 .modal {
+
+  .modal-dialog {
+    width: 40%;
+  }
+
   .modal-content {
     border-radius: 0;
     border: 0;
@@ -27,18 +32,14 @@
 
   h5 {
     color: $white;
-    font-size: 14px;
-    font-weight: 600;
     margin: 0;
-    padding: 15px;
+    font-family: 'helvlightregular';
+    font-size: 18px;
+    padding: 10px 0 10px 15px;
     position: relative;
     text-align: left;
-    text-transform: uppercase;
   }
 
-  h4 {
-    margin-top: 15px;
-  }
 
   .modal-bg {
     padding: 0;

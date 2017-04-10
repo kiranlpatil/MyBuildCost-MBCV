@@ -1,1 +1,17 @@
 @import '../../../../css/common';
+
+.activate-user {
+  .content {
+    h5 {
+      text-align: left;
+    }
+
+    p {
+      margin-bottom: 20px;
+    }
+  }
+
+  .inner-content {
+    padding: 15px;
+  }
+}

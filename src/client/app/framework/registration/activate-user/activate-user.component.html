@@ -1,23 +1,21 @@
 <section class="main-form-wrapper activate-user" [ngStyle]="{'background-image': 'url(' + BODY_BACKGROUND + ')'}">
 
+  <main-header></main-header>
+
   <app-loader></app-loader>
 
   <div class="col-lg-3 col-md-4 col-sm-6 col-xs-10 content">
 
-    <h5>{{resultStatus}}!</h5>
+    <h5>Congratulations !</h5>
 
-    <div class="clearfix">&nbsp;</div>
+    <div class="inner-content">
+      <p>Your account has been verified successfully. Please click on login .</p>
 
-    <p>{{emailBody}}</p>
+      <div class="btn-group">
+        <a class="btn btn-default"(click)="navigateTo();">LOGIN</a>
+      </div>
 
-    <div class="clearfix">&nbsp;</div>
-
-
-    <div class="btn-group">
-      <a class="btn btn-default"(click)="navigateTo();">LOGIN</a>
     </div>
-
-    <div class="clearfix">&nbsp;</div>
 
   </div>
 </section>
