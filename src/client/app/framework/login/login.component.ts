@@ -123,7 +123,7 @@ export class LoginComponent implements OnInit {
   }
 
 
-  successRedirect(res:any) {
+  successRedirect(res:any) {debugger
     LocalStorageService.setLocalValue(LocalStorage.IS_LOGED_IN, 1);
     LocalStorageService.setLocalValue(LocalStorage.PROFILE_PICTURE,res.data.picture);
     if(res.data.isCandidate === true) {
