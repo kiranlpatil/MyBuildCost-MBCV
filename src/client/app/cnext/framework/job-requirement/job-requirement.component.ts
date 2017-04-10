@@ -50,6 +50,18 @@ export class JobRequirementComponent implements OnInit {
       .subscribe(
         data=> { this.onEducationListSuccess(data);},
         error => { this.onError(error);});
+    this.professionaldataservice.getExperienceList()
+      .subscribe(
+        data => { this.onExperienceListSuccess(data);},
+        error => { this.onError(error);});
+    this.professionaldataservice.getCurrentSalaryList()
+      .subscribe(
+        data=> { this.onCurrentSalaryListSuccess(data);},
+        error => { this.onError(error);});
+    this.professionaldataservice.getNoticePeriodList()
+      .subscribe(
+        data => { this.onGetNoticePeriodListSuccess(data);},
+        error => { this.onError(error);});
   }
 
 
@@ -80,15 +92,14 @@ export class JobRequirementComponent implements OnInit {
     }
   }
 
-  selecteducationModel(education: any) {
+  /*selecteducationModel(education: any) {
     this.educationModel = education;
     this.jobRequirement.education = this.educationModel;
-    this.professionaldataservice.getExperienceList()
-      .subscribe(
-        data => { this.onExperienceListSuccess(data);},
-        error => { this.onError(error);});
-  }
-  onExperienceListSuccess(data:any) {
+
+  }*/
+
+
+  onExperienceListSuccess(data:any) {debugger
     for(let k of data.experience) {
       this.experiencelist.push(k);
     }
@@ -97,10 +108,7 @@ export class JobRequirementComponent implements OnInit {
   selectexperienceModel(experience: any) {
     this.experienceModel = experience;
     this.jobRequirement.experience = this.experienceModel;
-    this.professionaldataservice.getCurrentSalaryList()
-      .subscribe(
-        data=> { this.onCurrentSalaryListSuccess(data);},
-        error => { this.onError(error);});
+
 
   }
 
@@ -113,10 +121,7 @@ export class JobRequirementComponent implements OnInit {
   selectsalaryModel(salary: any) {
     this.salaryModel = salary;
     this.jobRequirement.salary = this.salaryModel;
-    this.professionaldataservice.getNoticePeriodList()
-      .subscribe(
-        data => { this.onGetNoticePeriodListSuccess(data);},
-        error => { this.onError(error);});
+
   }
   onGetNoticePeriodListSuccess(data:any) {
     for(let k of data.noticeperiod) {
@@ -124,9 +129,7 @@ export class JobRequirementComponent implements OnInit {
     }
   }
 
-  selectenoticeperiodModel(noticeperiod: any) {
-     this.noticeperiodModel = noticeperiod;
-    this.jobRequirement.noticeperiod= this.noticeperiodModel;
+  selectenoticeperiodModel(noticeperiod: any) {debugger
     this.jobrequirement.change(this.jobRequirement);
 
     this.industryService.getIndustries()

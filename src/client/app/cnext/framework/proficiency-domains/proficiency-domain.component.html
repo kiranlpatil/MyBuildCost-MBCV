@@ -13,12 +13,12 @@
                (ngModelChange)="selectedProficiencyModel($event)">
             <input  class="form-control" [(ngModel)]="proficiencyModel" id={{type}} placeholder="{{placeHolderName}}" />
            <br/> <br/> <br/> <br/>
-            <button type="button"  class="btn btn-create-profile"  value="Add Other"  (click)="onSelect()" >Click to add new proficiency</button>
-            <div [hidden]="isShow">
+            </div>
+          <button type="button"  class="btn btn-create-profile"  value="Add Other"  (click)="onSelect()" >Click to add new proficiency</button>
+          <div [hidden]="isShow">
             <input  class="form-control" [(ngModel)]="proficiencyother" (ngModelChange)="enterProficiency($event)" id={{addOther}} placeholder="Other Proficiency" />
-              <button type="button"  class="btn btn-create-profile"  value="AddProficiency"  (click)="selectedProficiency()">Add Proficiency</button>
-            </div>
-            </div>
+            <button type="button"  class="btn btn-create-profile"  value="AddProficiency"  (click)="addProficiencyToMasterData()">Add Proficiency</button>
+          </div>
         </div>
       </div>
 

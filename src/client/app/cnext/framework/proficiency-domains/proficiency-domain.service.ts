@@ -31,4 +31,14 @@ addCandidateProficiency(candidateproficiency:string[]):Observable<string[]>{
     .map(this.extractData)
     .catch(this.handleError);
 }
+
+  addProficiencyToMasterData(newProficiency:string,selectedIndustry:string):Observable<string[]>{
+    let headers=new Headers({'Content-Type':'application/json'});
+    let options=new RequestOptions({headers:headers});
+    let body=JSON.stringify({})
+    let url:string=API.INDUSTRY_LIST+'/'+selectedIndustry+'/proficiency?proficiency='+newProficiency;
+    return this.http.put(url, body,options)
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
 }

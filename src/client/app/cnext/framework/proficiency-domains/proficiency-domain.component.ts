@@ -29,6 +29,8 @@ export class ProficiencyDomainComponent implements OnInit {
   private addProficiency:string="";
   private addOther:string="addId";
   private selectedIndustry: string;
+  private proficiencyother: string;
+
 
   constructor(private proficiencyService: ProficiencyService,
               private proficiencydoaminService: ProficiencyDomainService,
@@ -118,11 +120,9 @@ export class ProficiencyDomainComponent implements OnInit {
       if (this.storedProficiency[i] === newVal.currentTarget.innerText.trim()) {
         if (i > -1) {
           this.storedProficiency.splice(i, 1);
-          for(let item of this.masterDataproficiency) {
-            if(item===newVal.currentTarget.innerText.trim()) {
+
               this.selectedproficiencies.push(newVal.currentTarget.innerText.trim());
-            }
-          }
+
         }
       }
 
@@ -155,6 +155,18 @@ export class ProficiencyDomainComponent implements OnInit {
     this.selectedProficiencyModel(this.addProficiency);
     let typeTemp: any = document.getElementById(this.addOther);
     typeTemp.value = '';
+
+  }
+
+  addProficiencyToMasterData(){
+    this.proficiencydoaminService.addProficiencyToMasterData(this.proficiencyother,this.selectedIndustry).subscribe(
+      data => {
+        console.log(data);
+      },
+      error => {
+        console.log(error);
+      });
+    this.selectedProficiencyModel(this.proficiencyother);
 
   }
 

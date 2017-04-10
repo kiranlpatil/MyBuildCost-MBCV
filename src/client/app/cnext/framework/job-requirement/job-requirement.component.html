@@ -1,6 +1,6 @@
 <div class="wrapper clearfix">
 
-  <div class="col-sm-6">
+<!--  <div class="col-sm-6">
     <label>Education:</label>
     <div class="list">
       <div ng2-auto-complete
@@ -9,7 +9,36 @@
         <input class="form-control" [ngModel]="educationModel"   placeholder="Select Education" />
       </div>
     </div>
+  </div>-->
+  <div class="col-sm-6">
+  <label>Education:</label>
+  <select [(ngModel)]="jobRequirement.education">
+    <option *ngFor="let c of educationlist" [ngValue]="c">{{c}}</option>
+  </select>
+    </div>
+
+  <div class="col-sm-6">
+    <label>Education:</label>
+    <select [(ngModel)]="jobRequirement.experience">
+      <option *ngFor="let c of experiencelist" [ngValue]="c">{{c}}</option>
+    </select>
   </div>
+
+  <div class="col-sm-6">
+    <label>Education:</label>
+    <select [(ngModel)]="jobRequirement.salary">
+      <option *ngFor="let c of salarylist" [ngValue]="c">{{c}}</option>
+    </select>
+  </div>
+
+  <div class="col-sm-6">
+    <label>Education:</label>
+    <select [(ngModel)]="jobRequirement.noticeperiod" (change)="selectenoticeperiodModel()">
+      <option *ngFor="let c of noticeperiodlist" [ngValue]="c" >{{c}}</option>
+    </select>
+  </div>
+
+<!--
 
   <div class="col-sm-6">
     <label >Experience:</label>
@@ -42,7 +71,7 @@
         <input class="form-control" [ngModel]="noticeperiodModel"  placeholder="Select Period" />
       </div>
     </div>
-  </div>
+  </div>-->
 
   <!--<div class="col-sm-12" *ngIf="showIndustry">
     <label>Industry:</label>
