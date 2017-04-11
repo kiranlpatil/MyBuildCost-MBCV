@@ -21,6 +21,7 @@ $toaster-message: rgba(102, 102, 102, .35);
 $bg-content: rgba(255, 255, 255, .1);
 $modal-bg: rgba(0, 0, 0, .7);
 $btn-color: #1c75bd;
+$input-bg: rgba(255 , 255, 255, .1);
 
 //Common Classes
 .no-border { border: transparent 1px solid; }
@@ -187,6 +188,19 @@ a {
     &:focus {
       box-shadow: none;
       outline: 0;
+    }
+
+    &:-webkit-autofill,
+    &:-webkit-autofill:hover,
+    &:-webkit-autofill:active,
+    &:-webkit-autofill:focus {
+      -webkit-box-shadow: 0 0 0 1000px white inset !important;
+      background: $input-bg !important;
+      -webkit-text-fill-color: $text-color;
+      border-left: 1px solid $white;
+      border-top: 1px solid $white;
+      border-right: 1px solid $white;
+      color: $text-color !important;
     }
   }
 }

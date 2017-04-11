@@ -1,11 +1,11 @@
-<section class="main-form-wrapper login" [ngStyle]="{'background-image': 'url(' + BODY_BACKGROUND + ')'}">
+<section class="main-form-wrapper login">
   <main-header></main-header>
 
   <app-loader></app-loader>
 
   <div class="col-lg-3 col-md-4 col-sm-6 col-xs-10 content">
 
-    <h5>Login <span class="glyphicon glyphicon-remove" (click)="navigateTo('/landing')"></span></h5>
+   <h5>Login <!--<span class="glyphicon glyphicon-remove" (click)="navigateTo('/landing')"></span>--></h5>
 
     <div class="alert alert-danger clearfix" [hidden]="isShowErrorMessage">
       <div class="col-sm-1 hidden-xs"><span class="glyphicon glyphicon-warning-sign"></span></div>

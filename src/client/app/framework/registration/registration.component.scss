@@ -6,11 +6,12 @@
 
   .content {
     left: 50%;
-    margin: 100px 0 50px;
+    margin: 35px 0;
     position: relative;
     top: 0;
     transform: translate(-50%, 0);
     width: 40%;
+    border: 1px solid transparent;
   }
 
   .radio-group {

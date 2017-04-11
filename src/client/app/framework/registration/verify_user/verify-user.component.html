@@ -1,4 +1,4 @@
-<section class="main-form-wrapper verify-user" [ngStyle]="{'background-image': 'url(' + BODY_BACKGROUND + ')'}">
+<section class="main-form-wrapper verify-user">
 
   <main-header></main-header>
 
@@ -6,7 +6,7 @@
 
   <div class="col-lg-4 col-sm-6 col-xs-10 content">
 
-    <h5>Verify Your Account <span class="glyphicon glyphicon-remove" (click)="navigateTo('/landing')"></span></h5>
+    <h5>Verify Your Account <!--<span class="glyphicon glyphicon-remove" (click)="navigateTo('/landing')"></span>--></h5>
 
     <div class="alert alert-danger clearfix" [hidden]="isShowErrorMessage">
       <div class="col-sm-1 hidden-xs"><span class="glyphicon glyphicon-warning-sign"></span></div>
@@ -20,36 +20,31 @@
     <form [formGroup]="userForm" (submit)="onSubmit()" [hidden]="chkMobile">
       <p><b>You are almost done! We just need to verify your account before you can start using it.</b></p>
       <p>One Time Password (OTP) will be sent on the following mobile Number.</p>
-      <div class="clearfix">&nbsp;</div>
 
       <div class="form-group" id="inputMobile">
         <control-messages [control]="userForm.controls.mobile_number"></control-messages>
         <input type="number" [(ngModel)]="model.mobile_number" formControlName="mobile_number" id="mobile_number" class="form-control" required/>
-        <label>Mobile Number</label>
+       <!-- <label>Mobile Number</label>-->
       </div>
 
       <div class="button-group" >
-        <button type="submit" class="btn btn-primary">Verify</button>
+        <button type="submit" class="btn btn-primary">Send OTP</button>
       </div>
     </form>
 
     <form [formGroup]="userForm" (submit)="onSubmit()" [hidden]="chkEmail">
       <p><b>You are almost done! We just need to verify your account before you can start using it.</b></p>
       <p>Verification link will be emailed on the following email address.</p>
-      <div class="clearfix">&nbsp;</div>
 
       <div class="form-group" id="inputEmail" >
         <control-messages [control]="userForm.controls.email"></control-messages>
         <input type="email" [(ngModel)]="model.email" formControlName="email" id="email" class="form-control" readonly />
-        <label>Email</label>
+        <!--<label>Email</label>-->
       </div>
 
-      <div class="button-group" [hidden]="isMailSent">
-        <button type="submit" class="btn btn-primary">Verify User</button>
-      </div>
-
-      <div class="button-group" [hidden]="chkEmail" *ngIf="isMailSent ==true">
-        <button type="submit" class="btn btn-primary">Resend Verification Email</button>
+      <div class="button-group">
+        <button type="submit" class="btn btn-primary" [hidden]="isMailSent">Send</button>
+        <button type="submit" class="btn btn-danger" [hidden]="chkEmail" *ngIf="isMailSent ==true">Resend Verification Email</button>
       </div>
     </form>
 

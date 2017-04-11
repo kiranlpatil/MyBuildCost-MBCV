@@ -7,7 +7,7 @@ $text-color: #666;
 .main-form-wrapper {
   @extend %background-img;
   background-position: 0 40px;
-  background-color: $bg-wrapper;
+  background-color: $white;
   height: 100vh;
   width: 100%;
 
@@ -20,13 +20,17 @@ $text-color: #666;
     text-align: left;
     top: 50%;
     transform: translate(-50%, -50%);
+    border: 1px solid $border-color;
 
     h5 {
-      color: $white;
+      color: #1c75bd;
       font-family: 'helvlightregular';
-      font-size: 18px;
+      font-size: 14px;
+      font-weight: bold;
       margin: 0;
       padding: 10px 0 10px 15px;
+      background: $bg-wrapper;
+      border-bottom: 1px solid $border-color;
     }
 
     h5 > .glyphicon-remove {
@@ -84,7 +88,7 @@ $text-color: #666;
 
   .form-group {
     float: left;
-    margin-bottom: 35px;
+    margin-bottom: 30px;
     padding: 0;
     position: relative;
     width: 100%;
@@ -96,6 +100,7 @@ $text-color: #666;
       font-size: 14px;
       font-weight: normal;
       left: 0;
+      padding: 0px;
       position: absolute;
       top: 10px;
       transition: .2s ease all;
@@ -108,11 +113,12 @@ $text-color: #666;
     input {
       color: $text-color;
       box-sizing: border-box;
+      padding: 0;
 
       &:focus ~ label,
       &.ng-touched ~ label {
         font-size: 12px;
-        top: -18px;
+        top: -15px;
       }
     }
 
@@ -120,7 +126,7 @@ $text-color: #666;
       &:focus ~ label,
       &.ng-touched ~ label {
         font-size: 12px;
-        top: -18px;
+        top: -15px;
       }
     }
   }
