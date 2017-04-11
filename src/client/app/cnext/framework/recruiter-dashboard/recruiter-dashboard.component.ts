@@ -21,12 +21,6 @@ export class RecruiterDashboardComponent implements  OnInit {
   }
   ngOnInit() {
 
-    var message = new Message();
-    message.isError = false;
-    message.custom_message = Messages.MSG_SUCCESS_UPLOADED_DOCUMENT;
-    this.messageService.message(message);
-
-
     this.company_name = LocalStorageService.getLocalValue(LocalStorage.COMPANY_NAME);
     this.uploaded_image_path = LocalStorageService.getLocalValue(LocalStorage.PROFILE_PICTURE); //TODO:Get it from get user call.
 

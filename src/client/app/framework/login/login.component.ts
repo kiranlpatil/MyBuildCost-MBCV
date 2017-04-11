@@ -120,11 +120,11 @@ export class LoginComponent implements OnInit {
        this._router.navigate([NavigationRoutes.APP_RECRUITER_DASHBOARD]);
     // this._router.navigate([NavigationRoutes.APP_COMPANYDETAILS]);
     }
-    var socialLogin:string = LocalStorageService.getLocalValue(LocalStorage.IS_SOCIAL_LOGIN);
+   /* var socialLogin:string = LocalStorageService.getLocalValue(LocalStorage.IS_SOCIAL_LOGIN);
 
     if(socialLogin === AppSettings.IS_SOCIAL_LOGIN_YES) {
       //window.location.reload(); //this will enable access to dropdown option oof profile.
-    }
+    }*/
   }
 
   loginFail(error:any) {
@@ -140,7 +140,6 @@ export class LoginComponent implements OnInit {
     }
   }
 
-
   onSignUp() {
     this._router.navigate([NavigationRoutes.APP_REGISTRATION]);
   }
@@ -152,7 +151,6 @@ export class LoginComponent implements OnInit {
   closeErrorMessage() {
     this.isShowErrorMessage = true;
   }
-
 
   onFailure(error:any) {
   console.log(error);

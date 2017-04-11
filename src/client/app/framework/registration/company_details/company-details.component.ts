@@ -186,6 +186,10 @@ export class CompanyDetailsComponent implements OnInit {
 
   onCompanyDetailsSuccess(success: any) {
     this.companyDetailsForm.reset();
+    var message = new Message();
+    message.isError = false;
+    message.custom_message = Messages.MSG_SUCCESS_UPLOADED_DOCUMENT;
+    this.messageService.message(message);
     this._router.navigate([NavigationRoutes.APP_RECRUITER_DASHBOARD]);
   }
 
