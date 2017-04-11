@@ -1,5 +1,4 @@
 import {    Component, OnInit  } from '@angular/core';
-import {  Router  } from '@angular/router';
 import {  MessageService  } from '../../../shared/message.service';
 import {  LocalStorageService  } from '../../../shared/localstorage.service';
 import {  LocalStorage, NavigationRoutes  } from '../../../shared/index';
@@ -8,6 +7,8 @@ import {  Messages, ImagePath, ProjectAsset  } from '../../../shared/constants';
 import {  Message  } from '../../../shared/message';
 import {  ResetPassword  } from './reset-password';
 import {  FormGroup, FormBuilder, Validators  } from '@angular/forms';
+import { Router, NavigationCancel,ActivatedRoute, Params} from '@angular/router';
+import { URLSearchParams, } from '@angular/http';
 
 
 @Component({
@@ -31,7 +32,7 @@ export class ResetPasswordComponent implements OnInit {
     UNDER_LICENCE:string;
     BODY_BACKGROUND:string;
 
-    constructor(private _router:Router, private messageService:MessageService,
+    constructor(private activatedRoute: ActivatedRoute,private _router:Router, private messageService:MessageService,
                 private resetPasswordService:ResetPasswordService, private formBuilder:FormBuilder) {
 
         this.userForm = this.formBuilder.group({
@@ -48,12 +49,14 @@ export class ResetPasswordComponent implements OnInit {
 
 
     ngOnInit() {
-        this.token = this._router.url.substr('reset_password?access_token'.length + 2);
-        this.idPosition = this.token.indexOf('&') + 1;
-        this.id = this.token.substring(this.idPosition + 28, this.idPosition + 4);
-        this.token = this.token.substring(this.token.length - 29, 0);
-        LocalStorageService.setLocalValue(LocalStorage.ACCESS_TOKEN, this.token);
-        LocalStorageService.setLocalValue(LocalStorage.USER_ID, this.id);
+
+      this.activatedRoute.queryParams.subscribe((params: Params) => {
+        let access_token = params['access_token'];
+        let id = params['_id'];
+        LocalStorageService.setLocalValue(LocalStorage.ACCESS_TOKEN, access_token);
+        LocalStorageService.setLocalValue(LocalStorage.USER_ID, id);
+      });
+
     }
 
     onSubmit() {
