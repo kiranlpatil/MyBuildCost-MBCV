@@ -33,16 +33,12 @@ export class ProfilePictureComponent  {
               private messageService: MessageService, private profileService: ProfileService) {
     this.filesToUpload = [];
     this.uploaded_image_path = LocalStorageService.getLocalValue(LocalStorage.PROFILE_PICTURE); //TODO:Get it from get user call.
-    console.log('Profile Picture image_path1',this.image_path);
-    console.log('Profile Picture image_path2',this.uploaded_image_path);
 
-    if ( this.uploaded_image_path === "undefined") {
+    if ( this.uploaded_image_path === "undefined" || this.uploaded_image_path === null) {
       this.image_path = ImagePath.PROFILE_IMG_ICON;
-      console.log('Profile Picture to upload image_path5',this.image_path);
     } else {
-      this.image_path = JSON.parse(this.uploaded_image_path);
-      console.log('Profile Picture to upload image_path3',this.uploaded_image_path);
-      console.log('Profile Picture to upload image_path4',this.image_path);
+      this.uploaded_image_path = this.uploaded_image_path.substring(4,this.uploaded_image_path.length-1).replace('"','');
+      this.image_path = AppSettings.IP + this.uploaded_image_path;
     }
 
   }
@@ -76,6 +72,7 @@ export class ProfilePictureComponent  {
 
   fileChangeSuccess(result: any) {
     this.model = result.data;
+    LocalStorageService.setLocalValue(LocalStorage.PROFILE_PICTURE,result.data.picture);
     var socialLogin:string = LocalStorageService.getLocalValue(LocalStorage.IS_SOCIAL_LOGIN);
     if (!this.model.picture || this.model.picture === undefined) {
       this.image_path = ImagePath.PROFILE_IMG_ICON;
