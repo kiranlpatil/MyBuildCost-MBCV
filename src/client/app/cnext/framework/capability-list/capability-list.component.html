@@ -9,7 +9,7 @@
     <div class="capability-type" >
       <div class="select-option" [class.primary]="isPrimary[i]" [class.secondary]="isSecondary[i]" *ngFor="let item of capabilities;let i = index">
         <label>
-          <input type="checkbox" name="checkbox" (click)="selectedOption($event)" id="{{item}}" value="{{item}}"  [disabled]="showfield" [checked]="isChecked(item)">
+          <input type="checkbox" name="checkbox" (click)="selectedOption($event)" id="{{item}}" value="{{item}}"  [disabled]="showfield" [checked]="isPrimary[i] || isSecondary[i]">
           <span>{{item}}</span>
         </label>
       </div>

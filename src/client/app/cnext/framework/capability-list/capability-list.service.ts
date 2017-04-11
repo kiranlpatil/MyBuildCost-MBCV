@@ -19,7 +19,7 @@ export class CapabilityListService extends BaseService {
   addCapability(capabilitylist:any):Observable<any> {
     let headers = new Headers({ 'Content-Type': 'application/json'});
     let options = new RequestOptions({ headers: headers });
-    let body = JSON.stringify(capabilitylist);
+    let body = JSON.stringify({"secondaryCapability":capabilitylist});
     let url:string=API.CANDIDATE_PROFILE+'/'+LocalStorageService.getLocalValue(LocalStorage.USER_ID);
     return this.http.put(url, body,options)
       .map(this.extractData)

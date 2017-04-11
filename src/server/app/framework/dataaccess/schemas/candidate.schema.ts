@@ -62,7 +62,10 @@ class CandidateSchema {
               name: String
             }],
             name: String
-          }]
+          }],
+          secondaryCapability:{
+            type:[String]
+          }
         }]
       },
       secondaryCapability:{

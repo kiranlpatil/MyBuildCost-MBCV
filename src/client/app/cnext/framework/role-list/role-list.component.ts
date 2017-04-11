@@ -133,21 +133,7 @@ export class RoleListComponent {
 
     }
   }
-  /*selectRolesModel(roleName: string) {
-     if(roleName === 'u can select max ') {
-      console.log('u can select max ');
-} else {
-      this.disbleButton = false;
-      this.storedRoles.push(roleName);
-    }
-  }*/
- /* searchRolesId(roleName:any) {
-    for(let role of this.rolesData) {
-      if(role.name===roleName) {
-        this.industryRoles.roles.push(role._id);
-      }
-    }
-  }*/
+
   showHideModal() {
     this.showModalStyle = !this.showModalStyle;
   }
