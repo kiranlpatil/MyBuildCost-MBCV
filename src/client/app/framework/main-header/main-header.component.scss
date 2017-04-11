@@ -2,6 +2,9 @@
 
 .page-header {
   border: 0;
+  -webkit-box-shadow: 0px 3px 3px 0px rgba(0,0,0,0.6);
+  -moz-box-shadow: 0px 3px 3px 0px rgba(0,0,0,0.6);
+  box-shadow: 0px 3px 3px 0px rgba(0,0,0,0.6);
   font-family: 'helvlightregular';
   height: 40px;
   left: 0;

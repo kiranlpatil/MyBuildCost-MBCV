@@ -9,33 +9,43 @@ $border-color: #e8e8e8;
 
 
 
-  .form-control {
-    background-color: $white;
-    border-radius: 0;
-    display: inline-block;
-    box-shadow: none;
-    padding: 6px;
-    width: 70%;
-    font-size: 12px;
+.form-control {
+  background-color: $white;
+  border-radius: 0;
+  display: inline-block;
+  box-shadow: none;
+  padding: 6px;
+  width: 70%;
+  font-size: 12px;
 
-    &:focus,
-    &:active {
-      outline: none;
-    }
+  &:focus,
+  &:active {
+    outline: none;
   }
+}
 
-  .col-sm-6 {
-    margin-bottom: 15px;
+.col-sm-6 {
+  margin-bottom: 15px;
+  display: inline-block;
+
+  .list {
     display: inline-block;
-
-    .list {
-      display: inline-block;
-    }
   }
+}
 
 label {
   width: 30%;
   font-weight: 100;
   font-size: 14px;
   float:left;
+}
+
+@media only screen and (max-width: 1024px) {
+  label {
+    width: 30%;
+    font-weight: 100;
+    font-size: 11px;
+    float:left;
+    line-height: 14px;
+  }
 }

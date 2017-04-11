@@ -34,7 +34,7 @@ $primary-option: #1c75bd;
 
 .select-option > label {
   margin: 0;
-  padding: 10px 0;
+  padding: 0;
 
   & > input {
     display: none;
@@ -46,7 +46,7 @@ $primary-option: #1c75bd;
       cursor: pointer;
       font-size: 12px;
       font-weight: 100;
-      padding: 6px 10px;
+      padding: 4px 10px;
       min-width: 100px;
       display: inline-block;
       text-align: center;

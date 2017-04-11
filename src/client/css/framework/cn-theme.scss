@@ -1,5 +1,5 @@
 // Dark Theme Variables /
-$cn-theme-color: #1c75bd;
+$cn-theme-color: #3694d1;
 $cn-theme-hover: #1a69ac;
 $cn-theme-btn-danger: #ff5024;
 $cn-theme-btn-danger-hover: #d44b24;
@@ -85,10 +85,10 @@ $white: #fff;
 
   // Side Menu Bar
   .dashboard {
-    .menu-container { @extend %cn-theme-gradient; }
+    .menu-container { background: $cn-theme-color; }
 
     nav {
-      .profile { background: $cn-theme-background; }
+      .profile { background: $cn-theme-color; }
     }
 
     nav > ul > li {
@@ -141,16 +141,16 @@ $white: #fff;
   .verify-mobile-modal {
     .modal-body {
       h5 {
-        @extend %cn-theme-gradient;
+        background: $cn-theme-color;
       }
     }
   }
   //cn-create profile
-  .profile-header { @extend %cn-theme-gradient; }
+  .profile-header { background: $cn-theme-color; }
 
   .profile-wrapper {
     .heading {
-      @extend %cn-theme-gradient;
+      background: $cn-theme-color;
     }
 
     .btn-create-profile {
