@@ -26,6 +26,7 @@ export function init(port: number, mode: string,protocol: string) {
   app.use(methodOverride("X-Method-Override"));
   app.use(methodOverride("_method"));
   app.use(express.static('src/'));
+  app.use(express.static('dist/prod/client'));
 
 
   /**

@@ -42,7 +42,7 @@ class RecruiterService {
           }
           else {
             var locationId=res1._id;
-            item.isActivated=false;
+            item.isActivated=true;
             item.isCandidate=false;
             this.userRepository.create(item, (err, res) => {
               if (err) {
