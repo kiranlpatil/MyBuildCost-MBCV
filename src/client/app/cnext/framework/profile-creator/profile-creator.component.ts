@@ -19,6 +19,7 @@ import {ProfileCreatorService} from "./profile-creator.service";
 import {MessageService} from "../../../framework/shared/message.service";
 import {Message} from "../../../framework/shared/message";
 import {MyIndustryService} from "../industry-service";
+import {Industry} from "../model/industry";
 
 @Component({
   moduleId: module.id,
@@ -28,6 +29,13 @@ import {MyIndustryService} from "../industry-service";
 })
 
 export class ProfileCreatorComponent implements OnInit {
+
+  private industries: Industry[]=new Array(0);
+
+
+
+
+
 
   whichStepsVisible : boolean[]=new Array(7);
   firstName: string;
@@ -135,9 +143,26 @@ export class ProfileCreatorComponent implements OnInit {
       this.getUserProfile();
     }
 
+    this.getIndustry();
+
+
   }
 
-  getCandidateProfile(){
+
+
+  selectIndustry(industry:Industry){debugger
+    this.candidate.industry=industry;
+    this.saveCandidateDetails();
+  }
+
+  getIndustry(){debugger
+    this.profileCreatorService.getIndustries()
+      .subscribe(
+        industrylist => this.industries=industrylist.data,
+        error => this.onError(error));
+  }
+
+  getCandidateProfile(){debugger
     this.profileCreatorService.getCandidateDetails()
       .subscribe(
         candidateData => this.OnCandidateDataSuccess(candidateData),
@@ -147,7 +172,6 @@ export class ProfileCreatorComponent implements OnInit {
   OnCandidateDataSuccess(candidateData:any){
     this.candidate=candidateData.data[0];
     if(this.candidate.jobTitle !== undefined){
-      this.title=this.candidate.jobTitle;
       this.disableTitle=true;
     }
     if(this.candidate.industry.name !== undefined){
@@ -176,8 +200,8 @@ export class ProfileCreatorComponent implements OnInit {
   }
 
 
-  onUserProfileSuccess(result:any) { 
-   
+  onUserProfileSuccess(result:any) {
+
     this.firstName= LocalStorageService.getLocalValue(LocalStorage.FIRST_NAME);
     this.lastName=LocalStorageService.getLocalValue(LocalStorage.LAST_NAME);
     this.getCandidateProfile();
@@ -225,26 +249,26 @@ export class ProfileCreatorComponent implements OnInit {
     LocalStorageService.setLocalValue(LocalStorage.IS_LOGED_IN, 0);
     this._router.navigate([NavigationRoutes.APP_START]);
   }
-  onSubmit() {
 
-    if(this.title==='') {
-      this.isTitleFilled=false;
-    } else {
-      this.isShowRequired=false;
-      this.isTitleFilled=true;
-    }
-  }
-  selectedtitle(title:string) {
-     this.candidate.jobTitle=title;
-   //  this.jobtitleservice.change( this.jobTitle.title);
+  selectedtitle() {
     this.profileCreatorService.addProfileDetail(this.candidate).subscribe(
       user => {
         console.log(user);
       },
       error => {
-        console.log(error);
+        this.onError(error)
       });
 
+  }
+
+  saveCandidateDetails() {
+    this.profileCreatorService.addProfileDetail(this.candidate).subscribe(
+      user => {
+        console.log(user);
+      },
+      error => {
+        this.onError(error)
+      });
 
   }
 
