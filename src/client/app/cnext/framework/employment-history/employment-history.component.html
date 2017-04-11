@@ -1,16 +1,16 @@
-<div class="form col-sm-12 no-padding" *ngFor="let item of tempfield;let i= index">
+<div class="form col-sm-12 no-padding" *ngFor="let item of candidate.employmentHistory;let i= index">
 
   <div class="left-content">
     <div class="col-sm-6 no-padding">
       <div class="form-group">
-        <input type="text" class="form-control" [ngModel]="company" (change)="comPanyName($event.target.value)"   required />
+        <input type="text" class="form-control" [(ngModel)]="item.companyName" (change)="postEmploymentHistoy()"   required />
         <label>Company Name</label>
       </div>
     </div>
 
     <div class="col-sm-6 no-padding">
       <div class="form-group">
-        <input type="text" class="form-control" name="designation" [ngModel]="design" (change)="deSignation($event.target.value)" required />
+        <input type="text" class="form-control" name="designation" [(ngModel)]="item.designation" (change)="postEmploymentHistoy()" required />
         <label>Designation</label>
       </div>
     </div>
@@ -18,44 +18,31 @@
     <div class="worked-from col-sm-12 no-padding">
       <label>From Date</label>
       <div class="col-sm-6 no-padding">
-        <div id="monthf" ng2-auto-complete
-             [source]="monthList"
-             (ngModelChange)="selectedworkfromMonthModel($event)">
-          <input class="form-control" [ngModel]="fromMonthModel" [disabled]="disbleRole"  placeholder="MONTH" />
-        </div>
+        <select class="form-control" [(ngModel)]="item.from.month" (change)="postCertificates()">
+          <option *ngFor="let c of monthList" [ngValue]="c">{{c}}</option>
+        </select>
       </div>
       <div class="col-sm-6 no-padding">
-        <div id="yearf" ng2-auto-complete
-             [source]="yearList"
-             (ngModelChange)="selectedworkfromYearModel($event)">
-
-          <input class="form-control" [ngModel]="fromYearModel" [disabled]="disbleRole"  placeholder="YYYY" />
-        </div>
+       <select class="form-control" [(ngModel)]="item.from.year" (change)="postCertificates()">
+          <option *ngFor="let c of yearList" [ngValue]="c">{{c}}</option>
+        </select>
       </div>
     </div>
 
     <div class="worked-to col-sm-12 no-padding">
       <label>To Date</label>
-      <div class="col-sm-6 no-padding" id="montht" ng2-auto-complete
-            [source]="monthList"
-            (ngModelChange)="selectedworktoMonthModel($event)">
-
-        <input class="form-control" [ngModel]="toMonthModel" [disabled]="disbleRole"  placeholder="MONTH" />
-      </div>
-      <div class="col-sm-6 no-padding" id="yeart" ng2-auto-complete
-            [source]="yearList"
-            (ngModelChange)="selectedworktoYearModel($event)">
-
-        <input class="form-control" [ngModel]="toYearModel" [disabled]="disbleRole"  placeholder="YYYY" />
-
-
-      </div>
+      <select class="form-control" [(ngModel)]="item.to.month" (change)="postCertificates()">
+        <option *ngFor="let c of monthList" [ngValue]="c">{{c}}</option>
+      </select>
+      <select class="form-control" [(ngModel)]="item.to.year" (change)="postCertificates()">
+        <option *ngFor="let c of yearList" [ngValue]="c">{{c}}</option>
+      </select>
     </div>
   </div>
 
   <div class="right-content">
       <div>
-        <textarea class="form-control" [ngModel]="remark" (change)="reMark($event.target.value)" Placeholder="Remark"></textarea>
+        <textarea class="form-control" [(ngModel)]="item.remarks" (change)="postEmploymentHistoy()" Placeholder="Remark"></textarea>
       </div>
   </div>
 </div>

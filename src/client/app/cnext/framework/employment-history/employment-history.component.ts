@@ -1,5 +1,5 @@
 
-import {   Component  } from '@angular/core';
+import {Component, Input} from '@angular/core';
 import { EmployementHistory } from '../model/employment-history';
 import {ValueConstant, LocalStorage} from '../../../framework/shared/constants';
 import {EmploymentHistoryService} from "./employment-history.service";
@@ -17,6 +17,8 @@ import {Candidate} from "../model/candidate";
 })
 
 export class EmploymentHistoryComponent {
+  @Input() candidate:Candidate;
+
   public monthList:string[]= new Array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December');
   error_msg: string;
   private tempCompanyName:string='';
@@ -35,7 +37,6 @@ export class EmploymentHistoryComponent {
   private year: any;
   private currentDate: any;
   private yearList = new Array();
-  private candidate:Candidate=new Candidate();
 
 
   constructor(private employmentHistroyservice:EmploymentHistoryService,
@@ -55,6 +56,12 @@ export class EmploymentHistoryComponent {
           candidateData => this.OnCandidateDataSuccess(candidateData),
           error => this.onError(error));
 
+    }
+  }
+
+  ngOnChanges(changes :any){
+    if(this.candidate.employmentHistory.length == 0){
+      this.candidate.employmentHistory.push(new EmployementHistory());
     }
   }
 
@@ -128,7 +135,7 @@ export class EmploymentHistoryComponent {
 
   }
   addAnother() {
-    if(this.tempCompanyName==='' || this.tempDesignation==='' ||
+    /*if(this.tempCompanyName==='' || this.tempDesignation==='' ||
       this.tempWorkedToMonth==='' || this.tempWorkedToYear==='' ||
       this.tempWorkedFromMonth===''||this.tempWorkedFromYear===''||
       this.tempRemarks==='' ) {
@@ -166,14 +173,16 @@ export class EmploymentHistoryComponent {
         this.tempfield.push('null');
         this.selectedEmploymentHistory = new EmployementHistory()
 
-      }}}
+      }}*/
+    this.candidate.employmentHistory.push(new EmployementHistory());
+  }
       postEmploymentHistoy()
       {
 
-        if (this.selectedEmploymentHistory.companyName !== '' && this.selectedEmploymentHistory.designation !== '' &&
+        /*if (this.selectedEmploymentHistory.companyName !== '' && this.selectedEmploymentHistory.designation !== '' &&
           this.selectedEmploymentHistory.from.month !== '' && this.selectedEmploymentHistory.from.year !== '' &&
           this.selectedEmploymentHistory.to.month !== '' && this.selectedEmploymentHistory.to.year !== '' && this.selectedEmploymentHistory.remarks !== '') {
-          this.candidate.employmentHistory.push(this.selectedEmploymentHistory);
+          this.candidate.employmentHistory.push(this.selectedEmploymentHistory);*/
           this.profileCreatorService.addProfileDetail(this.candidate).subscribe(
             user => {
               console.log(user);
@@ -181,7 +190,7 @@ export class EmploymentHistoryComponent {
             error => {
               console.log(error);
             });
-        }
+        /*}*/
       }
 
     }
