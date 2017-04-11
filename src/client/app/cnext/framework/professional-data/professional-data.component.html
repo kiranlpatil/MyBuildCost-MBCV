@@ -1,51 +1,41 @@
 <div class="professional-data clearfix">
   <div class="col-sm-4 no-padding">
     <label >Ready To Realocate?
-      <div ng2-auto-complete
-           [source]="realocationlist"
-           (ngModelChange)="selectedRealocationModel($event)">
-        <input class="form-control" [ngModel]="realocationModel"  placeholder="Ready to relocate" (focus)="changeValue()"/>
-      </div>
+      <select class="form-control" [(ngModel)]="professionalDetails.relocate" (change) = "saveProfessionalData()">
+        <option *ngFor="let c of realocationlist" [ngValue]="c">{{c}}</option>
+      </select>
     </label>
   </div>
 
   <div class="col-sm-4 no-padding">
-    <label >Education:&nbsp;
-      <div ng2-auto-complete
-           [source]="educationlist"
-           (ngModelChange)="selectedEducationModel($event)">
-        <input class="form-control" [ngModel]="educationModel"  placeholder="Select Education" />
-      </div>
+    <label >Education:
+      <select class="form-control" [(ngModel)]="professionalDetails.education" (change) = "saveProfessionalData()">
+        <option *ngFor="let c of educationlist" [ngValue]="c">{{c}}</option>
+      </select>
     </label>
   </div>
 
   <div class="col-sm-4 no-padding">
     <label >Experience:&nbsp;
-      <div ng2-auto-complete
-           [source]="experiencelist"
-           (ngModelChange)="selectedExperienceModel($event)">
-        <input class="form-control" [ngModel]="experienceModel"  placeholder="Select Education" />
-      </div>
+      <select class="form-control" [(ngModel)]="professionalDetails.experience" (change) = "saveProfessionalData()">
+        <option *ngFor="let c of experiencelist" [ngValue]="c">{{c}}</option>
+      </select>
     </label>
   </div>
 
   <div class="col-sm-4 no-padding">
     <label >Current Salary:&nbsp;
-      <div ng2-auto-complete
-           [source]="salarylist"
-           (ngModelChange)="selectedSalaryModel($event)">
-        <input class="form-control" [ngModel]="salaryModel"  placeholder="Select Education" />
-      </div>
+      <select class="form-control" [(ngModel)]="professionalDetails.currentSalary" (change) = "saveProfessionalData()">
+        <option *ngFor="let c of salarylist" [ngValue]="c">{{c}}</option>
+      </select>
     </label>
   </div>
 
   <div class="col-sm-4 no-padding">
     <label >Notice Period:&nbsp;
-      <div ng2-auto-complete
-           [source]="noticeperiodlist"
-           (ngModelChange)="selectedNoticeperiodModel($event)">
-        <input class="form-control" [ngModel]="noticeperiodModel"  placeholder="Select Education" />
-      </div>
+      <select class="form-control" [(ngModel)]="professionalDetails.noticePeriod" (change) = "saveProfessionalData()">
+        <option *ngFor="let c of noticeperiodlist" [ngValue]="c">{{c}}</option>
+      </select>
     </label>
   </div>
 </div>

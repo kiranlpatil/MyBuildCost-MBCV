@@ -1,5 +1,5 @@
 
-import { Component ,OnInit } from '@angular/core';
+import {Component, OnInit, Input} from '@angular/core';
 import { BaseService } from '../../../framework/shared/httpservices/base.service';
 import { ProfessionalData } from '../model/professional-data';
 import { ProfessionalDataService } from './professional-data.service';
@@ -17,19 +17,13 @@ import {LocalStorage} from "../../../framework/shared/constants";
 })
 
 export class ProfessionalDataComponent extends BaseService implements OnInit {
-  private selectedProfessionalData=new ProfessionalData();
+  @Input() professionalDetails:ProfessionalData;
+
   private realocationlist=new Array();
   private educationlist=new Array();
   private experiencelist=new Array();
   private salarylist=new Array();
   private noticeperiodlist=new Array();
-  private realocationModel:string;
-  private educationModel:string;
-  private experienceModel:string;
-  private salaryModel:string;
-  private noticeperiodModel:string;
-
-
 
   constructor(private professionaldataservice:ProfessionalDataService,
               private messageService:MessageService,
@@ -122,34 +116,9 @@ export class ProfessionalDataComponent extends BaseService implements OnInit {
     this.professionalService.change(true);
 
   }
-  selectedRealocationModel(newVal: any) {
-    this.realocationModel = newVal;
-    this.selectedProfessionalData.relocate=this.realocationModel;
 
-  }
-
-  selectedEducationModel(newVal: any) {
-    this.educationModel = newVal;
-    this.selectedProfessionalData.education=this.educationModel;
-
-  }
-
-  selectedExperienceModel(newVal: any) {
-    this.experienceModel = newVal;
-    this.selectedProfessionalData.experience=this.experienceModel;
-
-  }
-
-  selectedSalaryModel(newVal: any) {
-    this.salaryModel = newVal;
-    this.selectedProfessionalData.currentSalary=this.salaryModel;
-  }
-
-  selectedNoticeperiodModel(newVal: any) {
-    this.noticeperiodModel = newVal;
-    this.selectedProfessionalData.noticePeriod=this.noticeperiodModel;
-
-    this.professionaldataservice.addProfessionalData(this.selectedProfessionalData)
+  saveProfessionalData() {
+    this.professionaldataservice.addProfessionalData(this.professionalDetails)
       .subscribe(
         user => console.log(user),
         error => console.log(error));
