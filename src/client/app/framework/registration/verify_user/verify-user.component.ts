@@ -71,7 +71,7 @@ export class VerifyUserComponent implements OnInit {
                 .subscribe(
                     res => (this.verifySuccess(res)),
                     error => (this.verifyFail(error)));
-        } else {debugger
+        } else {
             this.model.email=LocalStorageService.getLocalValue(LocalStorage.EMAIL_ID);
             //this.isMailSent=true;
             this.verifyUserService.verifyUserByMail(this.model)

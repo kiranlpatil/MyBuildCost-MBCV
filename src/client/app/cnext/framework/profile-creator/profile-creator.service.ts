@@ -57,8 +57,16 @@ export class ProfileCreatorService extends BaseService {
   }
 
   getCapability(industry:string,roles:Array<string>):Observable<any> {
- 
+
     var url = API.INDUSTRY_LIST+'/'+industry+'/'+API.ROLE_LIST+'/'+API.CAPABILITY_LIST+'?roles='+JSON.stringify(roles);
+    return this.http.get(url)
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
+
+  getComplexity(industry:string,roles:Array<any>,capabilities:Array<any>):Observable<any> {
+    var url = API.INDUSTRY_LIST+'/'+industry+'/'+API.ROLE_LIST+'/'+API.CAPABILITY_LIST+'/complexity?roles='+JSON.stringify(roles)+'&capability='+JSON.stringify(capabilities);
+    console.log(url);
     return this.http.get(url)
       .map(this.extractData)
       .catch(this.handleError);

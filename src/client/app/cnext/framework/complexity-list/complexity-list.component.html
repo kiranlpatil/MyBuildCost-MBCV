@@ -1,14 +1,20 @@
 <div>
-  <div class="select-complexity clearfix" *ngFor="let item of complexities;let i = index" (click)="selectOption($event)" >
-    <div class="complexity-name col-sm-2 no-padding">
-      <p id ="complexity">{{item.name}}</p>
-    </div>
-    <div class="scenarios col-sm-10 padding-left15">
-      <div class="select-option"  *ngFor="let subitem of item.scenarios">
-        <label>
-          <input type="radio" name="{{item.name}}"  id="{{i}}" value="{{subitem.name}}" [disabled]="showfield" >
-          <span>{{subitem.name}}</span>
-        </label>
+  <div *ngFor="let role of roles">
+    <div *ngFor="let capability of role.capabilities">
+      <div class="select-complexity clearfix" *ngFor="let complexity of capability.complexities">
+        <div class="complexity-name col-sm-2 no-padding">
+          <p id="complexity">{{complexity.name}}</p>
+        </div>
+        <div class="scenarios col-sm-10 padding-left15">
+          <div class="select-option" *ngFor="let scenario of complexity.scenarios">
+            <label>
+              <input type="radio" name="{{complexity.name}}" value="{{scenario.name}}" [disabled]="showfield"
+                     (click)="selectComplexity(scenario,$event)"
+                     [checked]="scenaricomplexityNames.indexOf(scenario.name)!=-1">
+              <span>{{scenario.name}}</span>
+            </label>
+          </div>
+        </div>
       </div>
     </div>
   </div>

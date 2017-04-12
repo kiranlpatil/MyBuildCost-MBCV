@@ -100,7 +100,7 @@ export class CertificationAccreditationComponent {
     this.candidate.certifications.push(new Certifications());
   }
 
-  postCertificates(){debugger
+  postCertificates(){
    /* if(this.newCertificate.remark!=='' && this.newCertificate.year!=='' &&
       this.newCertificate.issuedby!=='' &&  this.newCertificate.name!==''){
       this.candidate.certifications.push(this.newCertificate);*/

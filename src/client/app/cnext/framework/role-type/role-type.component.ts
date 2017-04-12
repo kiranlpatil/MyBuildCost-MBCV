@@ -15,13 +15,13 @@ export class RoleTypetListComponent {
   private selectedRoletype:string='';
   private showModalStyle: boolean = false;
 
-  ngOnChanges (changes:any) {debugger
+  ngOnChanges (changes:any) {
     if (changes.roleTypes != undefined) {
       if (changes.roleTypes.currentValue != undefined)
         this.roleTypes = changes.roleTypes.currentValue;
     }
   }
-  choosedRoleType(roleType:string) {debugger
+  choosedRoleType(roleType:string) {
     this.selectedRoletype = roleType;
   }
   
@@ -29,7 +29,7 @@ export class RoleTypetListComponent {
     this.showModalStyle = !this.showModalStyle;
   }
   
-  disableRoleltype() {debugger
+  disableRoleltype() {
     this.showModalStyle = !this.showModalStyle;
     this.selectRoleType.emit(this.selectedRoletype);
   }

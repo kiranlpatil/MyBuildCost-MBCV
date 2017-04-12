@@ -29,13 +29,13 @@
           </div>
           <div class="col-sm-9 profile-description">
             <h4>Enter Your Job Title</h4>
-              <input name="jobTitle" placeholder="ex.Software Engineer" class="form-control job-title" [ngModel]="title" (change)="selectedtitle($event.target.value)" [disabled]="disableTitle">
+              <input name="jobTitle" placeholder="ex.Software Engineer" class="form-control job-title" [(ngModel)]="candidate.jobTitle" (change)="selectedtitle()" [disabled]="disableTitle">
               <!--<textarea name="jobTitle" placeholder="ex.Software Engineer" class="form-control"[ngModel]="title" (ngModelChange)="selectedtitle($event)" ></textarea>-->
               <div class="error-messages" *ngIf="!isTitleFilled">Job title should not be empty.</div>
               <div class="clearfix">&nbsp;</div>
               <!--<div class="error-messages" *ngIf="isShowRequired"><p>*</p></div>-->
               <h4>Select Industry (Any one value from the list below) </h4>
-            <cn-industry-list [industries]="industries" [candidateIndustry]="candidate.industry" (selectExperiencedIndustry)="selectExperiencedIndustry($event)" ></cn-industry-list>
+            <cn-industry-list [industries]="industries" [candidateIndustry]="candidate.industry" (selectIndustry)="selectIndustry($event)" ></cn-industry-list>
 
           </div>
         </div>
@@ -63,12 +63,12 @@
           </div>
         </div>
 
-      <!--<div class="section-container" [hidden]="!showComplexity">
+      <div class="section-container" [hidden]="!showComplexity">
         <h4 class="heading">Choose Complexities</h4>
         <div class="main-content max-height">
-          <cn-complexity-list></cn-complexity-list>
+          <cn-complexity-list [roles]="roles" [candidateRoles]="candidate.industry.roles"  (selectComplexityWithRole)="selectRole($event)"></cn-complexity-list>
         </div>
-      </div>-->
+      </div>
 
       <div class="section-container clearfix profeiciency-domain" >
         <h4 class="heading">Proficiencies (Max. 25)</h4>

@@ -18,11 +18,13 @@ export class CapabilityListComponent {
   private secondaryNames:string[] = new Array(0);
   private primaryCapabilitiesNumber:number = 0
 
-  ngOnChanges(changes:any) {
+  ngOnChanges(changes:any) {debugger
     if (changes.roles) {
       this.roles = changes.roles.currentValue;
     }
     if (this.candidateRoles) {
+      this.secondaryNames = new Array(0);
+      this.primaryNames= new Array(0);
       for (let role of this.candidateRoles) {
         if (role.capabilities) {
           for (let primary of role.capabilities) {
@@ -30,11 +32,9 @@ export class CapabilityListComponent {
           }
         }
         if (role.secondaryCapabilities) {
-          if (role.secondaryCapabilities) {
             for (let second of role.secondaryCapabilities) {
               this.secondaryNames.push(second.name);
             }
-          }
         }
       }
     }
@@ -59,7 +59,7 @@ export class CapabilityListComponent {
     }
   }
 
-  disableCapability() {
+  disableCapability() {debugger
     this.selectCapabilityWithRole.emit(this.roles);
   }
 }

@@ -15,7 +15,7 @@ export class IndustryExperienceListComponent {
   @Input() candidateExperiencedIndustry:string[] = new Array(0);
   @Output() selectExperiencedIndustry = new EventEmitter();
 
-  ngOnChanges(changes:any) {debugger
+  ngOnChanges(changes:any) {
     if (changes.industries != undefined) {
       if (changes.industries.currentValue != undefined)
         this.industries = changes.industries.currentValue;

@@ -17,7 +17,7 @@ export class RoleListComponent {
   private showModalStyle:boolean = false;
   private candidateRolesList :string[]= new Array(0);
 
-  ngOnChanges(changes:any) {debugger
+  ngOnChanges(changes:any) {
     if(changes.candidateRoles){
       if(changes.candidateRoles.currentValue){
         for(let role of changes.candidateRoles.currentValue){
