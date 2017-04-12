@@ -19,7 +19,7 @@ export function login(req: express.Request, res: express.Response, next: any) {
         next(error);
       }
 
-      else if (result.length > 0 && result[0].isActivated === true) {
+      else if (result.length > 0 ) { //&& result[0].isActivated === true
 
         if (result[0].password === params.password) {
           var auth = new AuthInterceptor();
@@ -244,6 +244,7 @@ export function create(req: express.Request, res: express.Response, next: any) {
   try {
     var newUser: UserModel = <UserModel>req.body;
     var userService = new UserService();
+    newUser.isActivated=true;
     userService.createUser(newUser, (error, result) => {
       if (error) {
         console.log("crt user error",error);

@@ -48,6 +48,7 @@ class CandidateService {
                 var userId1 =res._id;
                 var newItem :any={
                   isVisible :false,
+                  isActivated :true,
                   userId:userId1,
                   location: locationId
                 };
