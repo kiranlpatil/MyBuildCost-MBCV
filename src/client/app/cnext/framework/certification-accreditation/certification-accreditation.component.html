@@ -1,13 +1,13 @@
 <div class="form col-sm-12 no-padding certification" *ngFor="let item of candidate.certifications;let i= index">
 
-    <div class="col-sm-4 no-padding">
+    <div class="col-sm-4 padding-right5">
       <div class="form-group">
         <input type="text" class="form-control" [(ngModel)]="item.name"  (change)="postCertificates()" required />
         <label> Name</label>
       </div>
     </div>
 
-    <div class="col-sm-4 no-padding">
+    <div class="col-sm-4">
       <div class="form-group">
         <input type="text" class="form-control" [(ngModel)]="item.issuedBy"  (change)="postCertificates()" required />
         <label>Issued By</label>
@@ -15,13 +15,11 @@
     </div>
 
 
-    <div class="col-sm-4 no-padding">
-      <div class="form-group">
-          <select class="form-control" [(ngModel)]="item.year" (change)="postCertificates()">
-            <option *ngFor="let c of yearList" [ngValue]="c">{{c}}</option>
-          </select>
-          <label>Year of Certification</label>
-      </div>
+    <div class="col-sm-4 padding-left15">
+      <select class="form-control" [(ngModel)]="item.year" (change)="postCertificates()">
+        <option *ngFor="let c of yearList" [ngValue]="c">{{c}}</option>
+      </select>
+      <!--<label>Year of Certification</label>-->
     </div>
 
 

@@ -15,7 +15,7 @@
            <br/> <br/> <br/> <br/>
             </div>
           <button type="button"  class="btn btn-create-profile"  value="Add Other"  (click)="onSelect()" >Click to add new proficiency</button>
-          <div [hidden]="isShow">
+          <div [hidden]="isShow" class="add-proficiency">
             <input  class="form-control" [(ngModel)]="proficiencyother" (ngModelChange)="enterProficiency($event)" id={{addOther}} placeholder="Other Proficiency" />
             <button type="button"  class="btn btn-create-profile"  value="AddProficiency"  (click)="addProficiencyToMasterData()">Add Proficiency</button>
           </div>
