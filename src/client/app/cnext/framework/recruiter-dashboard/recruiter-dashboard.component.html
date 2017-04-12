@@ -1,12 +1,12 @@
 <div class="job-poster clearfix">
   <div class="bar-container profile-header">
     <div class="container">
-      <div class="user-info col-sm-8 no-padding">
+      <div class="user-info col-md-3 col-sm-4 no-padding">
         <img src= "{{uploaded_image_path}}" alt="User Profile Picture"/>
         <h4>{{company_name}}</h4>
       </div>
       <div class="user-info col-sm-4 no-padding text-right">
-        <button type="submit" class="btn btn-default" (click)="logOut()">Logout</button>
+        <!--<button type="submit" class="btn btn-default" (click)="logOut()">Logout</button>-->
       </div>
     </div>
   </div>
@@ -35,15 +35,17 @@
             <span class="posted-job"><b>Posted jobs</b></span>
           </div>
         </div>
-        <div id="post-new-job" class="tab-pane fade in active">
+        <div id="post-new-job" class="tab-pane fade in active clearfix">
           <cn-job-poster></cn-job-poster>
-        </div>
-      </div>
-    </div>
 
-    <div class="col-sm-12">
-      <div class="col-sm-3 padding-right5">
-        <cn-job-filter></cn-job-filter>
+          <div class="col-sm-12">
+            <div class="col-sm-3 padding-right5">
+              <cn-job-filter></cn-job-filter>
+            </div>
+            <div class="col-sm-9 padding-right5">
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
