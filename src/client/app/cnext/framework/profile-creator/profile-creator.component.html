@@ -62,7 +62,7 @@
         </div>
       </div>
 
-      <div class="section-container" [hidden]="!showComplexity">
+      <!--<div class="section-container" [hidden]="!showComplexity">
         <h4 class="heading">Choose Complexities</h4>
         <div class="main-content max-height">
           <cn-complexity-list></cn-complexity-list>
@@ -81,16 +81,16 @@
         <div class="main-content">
           <cn-industry-experience-list></cn-industry-experience-list>
         </div>
-      </div>
+      </div>-->
 
-      <div class="section-container"  [hidden]="!showProfeciency">
+      <div class="section-container" >
         <h4 class="heading">Professional Data</h4>
         <div class="main-content">
           <cn-professional-data [candidate]="candidate"></cn-professional-data>
         </div>
       </div>
 
-      <div class="section-container" [hidden]="chkEmployeeHistory" [hidden]="!showProfeciency">
+      <div class="section-container">
         <h4 class="heading">Employment Histroy
           <span class="close-dialog">Close this section if not needed
             <span class="glyphicon glyphicon-remove" (click)="hideEmployeeHistory()"></span>
@@ -101,14 +101,14 @@
         </div>
       </div>
 
-      <div class="section-container" [hidden]="!showProfeciency">
+      <div class="section-container" >
         <h4 class="heading">Academic Details</h4>
         <div class="main-content">
           <cn-academic-details [candidate]="candidate" ></cn-academic-details>
         </div>
       </div>
 
-      <div class="section-container" [hidden]="chkCertification" [hidden]="!showProfeciency">
+      <div class="section-container" >
         <h4 class="heading">Certification/Accreditation
           <span class="close-dialog">Close this section if not needed
             <span class="glyphicon glyphicon-remove" (click)="hideCertification()"></span>
@@ -119,7 +119,7 @@
         </div>
       </div>
 
-      <div class="section-container"  [hidden]="chkAwards"  [hidden]="!showProfeciency">
+      <div class="section-container"  >
         <h4 class="heading">Awards
           <span class="close-dialog">Close this section if not needed
             <span class="glyphicon glyphicon-remove" (click)="hideAwards()"></span>
@@ -130,7 +130,7 @@
         </div>
       </div>
 
-      <div class="section-container" [hidden]="chkAboutMyself" [hidden]="!showProfeciency" >
+      <!--<div class="section-container"  >
         <h4 class="heading">More About Myself(Max 250)
           <span class="close-dialog">Close this section if not needed
             <span class="glyphicon glyphicon-remove" (click)="hideAboutMyself()"></span>
@@ -139,7 +139,7 @@
         <div class="main-content">
           <cn-more-about-myself [candidate]="candidate"></cn-more-about-myself>
         </div>
-      </div>
+      </div>-->
       <div class="section-container profile-configurations" [hidden]="!showProfeciency">
         <div class="col-sm-8 no-padding text-left">
           <div class="radio">
