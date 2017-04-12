@@ -33,6 +33,7 @@ export class ProfileCreatorComponent implements OnInit {
 
   private industries: Industry[]=new Array(0);
   private roles: Role[]=new Array(0);
+  private roleTypes: string[]=new Array(0);
 
 
 
@@ -157,9 +158,16 @@ export class ProfileCreatorComponent implements OnInit {
   }
 
 
-  selectRole(role:Role){
-    this.candidate.industry.roles=role;
+  selectRole(roles:Role[]){
+    this.candidate.industry.roles=roles;
     this.saveCandidateDetails();
+    this.getRoleType();
+  }
+
+  selectRoleType(roleType:string){
+    this.candidate.roleType=roleType;
+    this.saveCandidateDetails();
+    this.getRoleType();
   }
 
   getIndustry(){debugger
@@ -176,6 +184,12 @@ export class ProfileCreatorComponent implements OnInit {
         error => this.onError(error));
   }
 
+  getRoleType(){debugger
+    this.profileCreatorService.getRoleTypes()
+      .subscribe(
+        data=> this.roleTypes=data.roleTypes,
+        error => this.onError(error));
+  }
   getCandidateProfile(){debugger
     this.profileCreatorService.getCandidateDetails()
       .subscribe(
@@ -197,7 +211,8 @@ export class ProfileCreatorComponent implements OnInit {
       this.showCapability=true;
     }
     if(this.candidate.industry.roles.length>0){
-     this.isRoleTypeShow=true;
+      this.getRoleType();
+      this.isRoleTypeShow=true;
       if(this.candidate.industry.roles[0].capabilities.length>=1){
         this.showComplexity=true;
         if(this.candidate.industry.roles[0].capabilities[0].complexities.length>0){

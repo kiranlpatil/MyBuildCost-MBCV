@@ -12,7 +12,7 @@ export class Candidate {
   awards : Award[]=new Array();
   industry : Industry=new Industry();
   intrestedIndustries : string[];
-  roleType: string;
+  roleType: string='';
   academics :  Academicdetails[]=new Array();
   professionalDetails :  ProfessionalData=new ProfessionalData();
   employmentHistory : EmployementHistory[]=new Array();
