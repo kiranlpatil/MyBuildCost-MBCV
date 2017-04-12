@@ -63,9 +63,15 @@ class CandidateSchema {
             }],
             name: String
           }],
-          secondaryCapability:{
-            type:[String]
-          }
+          secondaryCapabilities:[{
+            complexities: [{
+              scenarios: [{
+                name: String
+              }],
+              name: String
+            }],
+            name: String
+          }]
         }]
       },
       secondaryCapability:{

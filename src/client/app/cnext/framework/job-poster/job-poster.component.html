@@ -1,17 +1,17 @@
 <div class="clearfix">
   <div class="section-container clearfix">
-    <cn-job-information></cn-job-information>
+    <cn-job-information (selectJobInformation)="selectJobInformation($event)"></cn-job-information>
 
-    <cn-job-location></cn-job-location>
+    <cn-job-location (selectJobLocation)="selectJobLocation($event)"></cn-job-location>
 
-    <cn-job-requirement></cn-job-requirement>
+    <cn-job-requirement (selectJobRequirement)="selectJobRequirement($event)"></cn-job-requirement>
   </div>
 
   <div class="roles section-container"  [hidden]="!isShowIndustry">
     <div class="main-content">
       <h4 class="heading">Select Industry</h4>
       <p class="info">Default value set to your own industry. Select a different value if you wish to hire from a different industry background</p>
-      <cn-industry-list></cn-industry-list>
+      <cn-industry-list [industries]="industries"  (selectIndustry)="selectIndustry($event)" ></cn-industry-list>
     </div>
   </div>
 
@@ -21,19 +21,19 @@
       <p class="info">Select those areas of work which describe what you are best at or where you would like to position your career. Normally, an individual works
         across maximum 2 to 3 work areas in parallel. You can select upto maximum 3 work areas. Once selected, you would be able to change the work
         areas only after 3 months.</p>
-      <cn-role-list> ></cn-role-list>
+      <cn-role-list [roles]="roles"  (selectRoles)="selectRole($event)"></cn-role-list>
     </div>
   </div>
 
   <div class="section-container" [hidden]="!isShowRoletype">
     <div class="main-content">
       <h4 class="heading">Select Role Type (Any one of the following)</h4>
-      <cn-role-type-list></cn-role-type-list>
+      <cn-role-type-list [roleTypes]="roleTypes"  (selectRoleType)="selectRoleType($event)"></cn-role-type-list>
     </div>
   </div>
 
 
-  <div class="section-container"  [hidden]="!isShowCapability">
+  <!--<div class="section-container"  [hidden]="!isShowCapability">
 
     <div class="main-content">
       <h4 class="heading"> Select Capabilities (Max. 10)</h4>
@@ -60,7 +60,7 @@
       <cn-proficiency-doamin [type]="'profeciency'"></cn-proficiency-doamin>
     </div>
   </div>
-
+-->
  <!-- <div class="section-container clearfix profeiciency-domain" [hidden]="!isShowProficiency">
    &lt;!&ndash; <div class="">&ndash;&gt;
       <h4 class="heading">Industry (Max. 20)</h4>

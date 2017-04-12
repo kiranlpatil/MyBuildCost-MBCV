@@ -1,12 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import {  JobRequirement  } from '../model/job-requirement';
-import {  MessageService  } from '../../../framework/shared/message.service';
-import {  IndustryListService  } from '../industry-list/industry-list.service';
-import {  Message  } from '../../../framework/shared/message';
-import {  MyJobRequirementService  } from '../jobrequirement-service';
-import {  ProfessionalDataService  } from '../professional-data/professional-data.service';
-import { JobRequirementService } from '../myJobRequirement.service';
-import { JobIndustryShowService } from '../myJobIndustryShow.service';
+import {Component, OnInit, Output, EventEmitter} from "@angular/core";
+import {JobRequirement} from "../model/job-requirement";
+import {MessageService} from "../../../framework/shared/message.service";
+import {Message} from "../../../framework/shared/message";
+import {ProfessionalDataService} from "../professional-data/professional-data.service";
 
 
 @Component({
@@ -17,137 +13,103 @@ import { JobIndustryShowService } from '../myJobIndustryShow.service';
 })
 
 export class JobRequirementComponent implements OnInit {
+  @Output() selectJobRequirement = new EventEmitter()
   private jobRequirement = new JobRequirement();
-  private storedIndustry: string;
-  private industries = new Array();
-  private roles = new Array();
-  private storedRoles = new Array();
-  private industryModel = '';
-  private roleModel = '';
-  private showIndustry:boolean=false;
-  private showRole:boolean=false;
-  private educationlist=new Array();
-  private experiencelist=new Array();
-  private salarylist=new Array();
-  private noticeperiodlist=new Array();
-  private educationModel: string;
-  private experienceModel: string;
-  private salaryModel: string;
-  private noticeperiodModel: string;
+
+  private educationlist = new Array();
+  private experiencelist = new Array();
+  private salarylist = new Array();
+  private noticeperiodlist = new Array();
 
 
-  constructor(private industryService: IndustryListService,
-              private professionaldataservice:ProfessionalDataService,
-              private messageService: MessageService,
-              private myJobrequirementService :MyJobRequirementService,
-              private jobrequirement:JobRequirementService ,
-              private jobPostIndustryShow:JobIndustryShowService) {
+
+  constructor(private professionaldataservice:ProfessionalDataService,
+              private messageService:MessageService) {
   }
 
 
   ngOnInit() {
     this.professionaldataservice.getEducationList()
       .subscribe(
-        data=> { this.onEducationListSuccess(data);},
-        error => { this.onError(error);});
+        data=> {
+          this.onEducationListSuccess(data);
+        },
+        error => {
+          this.onError(error);
+        });
     this.professionaldataservice.getExperienceList()
       .subscribe(
-        data => { this.onExperienceListSuccess(data);},
-        error => { this.onError(error);});
+        data => {
+          this.onExperienceListSuccess(data);
+        },
+        error => {
+          this.onError(error);
+        });
     this.professionaldataservice.getCurrentSalaryList()
       .subscribe(
-        data=> { this.onCurrentSalaryListSuccess(data);},
-        error => { this.onError(error);});
+        data=> {
+          this.onCurrentSalaryListSuccess(data);
+        },
+        error => {
+          this.onError(error);
+        });
     this.professionaldataservice.getNoticePeriodList()
       .subscribe(
-        data => { this.onGetNoticePeriodListSuccess(data);},
-        error => { this.onError(error);});
+        data => {
+          this.onGetNoticePeriodListSuccess(data);
+        },
+        error => {
+          this.onError(error);
+        });
   }
 
 
-  selectIndustryModel(industry: any) {
-    this.storedIndustry = industry;
-    this.industryModel = industry;
-    this.jobRequirement.industry = this.industryModel;
-    this.industryService.getRoles(industry)
-      .subscribe(
-        (rolelist:any) => this.onRoleListSuccess(rolelist.data),
-        (error:any) => this.onError(error));
-  }
-  onRoleListSuccess(data:any) {
-    for(let role of data) {
-      this.roles.push(role.name);
-    }
-    this.showRole=true;
-  }
-  selectRolesModel(role: any) {
-    this.roleModel =role;
-    this.storedRoles.push(role);
-    this.jobRequirement.role = this.roleModel;
-    this.myJobrequirementService.change(this.jobRequirement);
-  }
   onEducationListSuccess(data:any) {
-    for(let k of data.educated) {
+    for (let k of data.educated) {
       this.educationlist.push(k);
     }
   }
 
-  /*selecteducationModel(education: any) {
-    this.educationModel = education;
-    this.jobRequirement.education = this.educationModel;
-
-  }*/
-
 
   onExperienceListSuccess(data:any) {
-    for(let k of data.experience) {
+    for (let k of data.experience) {
       this.experiencelist.push(k);
     }
   }
 
-  selectexperienceModel(experience: any) {
-    this.experienceModel = experience;
-    this.jobRequirement.experience = this.experienceModel;
-
-
+  selectexperienceModel(experience:any) {
+    this.jobRequirement.experience = experience;
+    this.selectJobRequirement.emit(this.jobRequirement);
+  }
+  selecteducationModel(education:any) {
+    this.jobRequirement.education = education;
+    this.selectJobRequirement.emit(this.jobRequirement);
   }
 
 
   onCurrentSalaryListSuccess(data:any) {
-    for(let k of data.salary ) {
+    for (let k of data.salary) {
       this.salarylist.push(k);
     }
   }
-  selectsalaryModel(salary: any) {
-    this.salaryModel = salary;
-    this.jobRequirement.salary = this.salaryModel;
+
+  selectsalaryModel(salary:any) {
+    this.jobRequirement.salary = salary;
+    this.selectJobRequirement.emit(this.jobRequirement);
 
   }
+
   onGetNoticePeriodListSuccess(data:any) {
-    for(let k of data.noticeperiod) {
+    for (let k of data.noticeperiod) {
       this.noticeperiodlist.push(k);
     }
   }
 
-  selectenoticeperiodModel(noticeperiod: any) {
-    this.jobrequirement.change(this.jobRequirement);
-
-    this.industryService.getIndustries()
-      .subscribe(
-        industrylist => this.onIndustryListSuccess(industrylist.data),
-        error => this.onError(error));
-    this.jobPostIndustryShow.change(true);
+  selectenoticeperiodModel(noticeperiod:any) {
+    this.jobRequirement.noticeperiod = noticeperiod;
+    this.selectJobRequirement.emit(this.jobRequirement);
   }
 
-
-
-
-  onIndustryListSuccess(data: any) {
-    for (let industry of data) {
-      this.industries.push(industry.name);
-    }
-    this.showIndustry=true;
-  }
 
   onError(error:any) {
     var message = new Message();

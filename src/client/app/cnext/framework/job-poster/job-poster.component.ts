@@ -24,6 +24,10 @@ import { ShowJobFilterService } from '../showJobFilter.service';
 import {JobPosterModel} from "../model/jobPoster";
 import {Industry} from "../model/industry";
 import {JobPosterService} from "./job-poster.service";
+import {Role} from "../model/role";
+import {ProfileCreatorService} from "../profile-creator/profile-creator.service";
+import {Message} from "../../../framework/shared/message";
+import {MessageService} from "../../../framework/shared/message.service";
 
 
 @Component({
@@ -34,6 +38,11 @@ import {JobPosterService} from "./job-poster.service";
 })
 
 export class JobPosterComponent {
+  private industries: Industry[]=new Array(0);
+  private roles: Role[]=new Array(0);
+  private roleTypes: string[]=new Array(0);
+
+
   descModel:Description[]=new Array();
   private jobInformation=new JobInformation();
   private jobRequirement=new JobRequirement();
@@ -52,11 +61,13 @@ export class JobPosterComponent {
   private responsibilities=new Description();
   private jobPosterModel=new JobPosterModel();
   constructor(private _router:Router,
+              private profileCreatorService:ProfileCreatorService,
               private complexityService: ComplexityService,
               private jobinformation:MyJobInformationService,
               private jobrequirement:JobRequirementService,
               private myjoblocationService:MyJobLocationService,
               private jobpostroletype:MyJobPostRoleTypeService,
+              private messageService:MessageService ,
               private jobPostDescription:JonPostDescriptionService ,
               private jobPostComplexiyservice:JobPostComplexityService,
               private jobPostProficiency:JobPostProficiencyService,
@@ -128,9 +139,9 @@ export class JobPosterComponent {
     this.jobPostDescription.showTestJobPostDesc$.subscribe(
       data=> {
         if(data.type==="competensies")
-        this.competensies.detail=(data.data.toString()).replace (/,/g, " ");
+          this.competensies.detail=(data.data.toString()).replace (/,/g, " ");
         if(data.type==="responsibilities")
-        this.responsibilities.detail=(data.data.toString()).replace (/,/g, " ");
+          this.responsibilities.detail=(data.data.toString()).replace (/,/g, " ");
       }
     );
     this.jobPostComplexiyservice.showTestComplexity$.subscribe(
@@ -149,18 +160,10 @@ export class JobPosterComponent {
 
 
   postjob() {
-    this.jobPosterModel.jobTitle=this.jobInformation.jobTitle;
     this.jobPosterModel.competencies=this.competensies.detail;
-    this.jobPosterModel.education=this.jobRequirement.education;
-    this.jobPosterModel.experience==this.jobRequirement.experience;
-    this.jobPosterModel.hiringManager=this.jobInformation.hiringManager;
-    this.jobPosterModel.joiningPeriod=this.jobRequirement.noticeperiod;
+
     this.jobPosterModel.profiencies=this.proficiency;
-    this.jobPosterModel.salary=this.jobRequirement.salary;
     this.jobPosterModel.responsibility=this.responsibilities.detail;
-    this.jobPosterModel.department=this.jobInformation.department;
-    this.jobPosterModel.industry=this.complexities;
-    this.jobPosterModel.location=this.jobLocation;
     this.jobPosterModel.postingDate= (new Date()).toISOString();
 
 
@@ -191,6 +194,73 @@ export class JobPosterComponent {
   mockupSearch() {
     this.showJobFilter.change(true);
 
+  }
 
+  selectJobInformation(jobInformation:JobInformation){
+    this.jobPosterModel.jobTitle=jobInformation.jobTitle;
+    this.jobPosterModel.hiringManager=jobInformation.hiringManager;
+    this.jobPosterModel.department=jobInformation.department;
+  }
+
+  selectJobLocation(jobLocation:JobLocation){
+    this.jobPosterModel.location = jobLocation;
+  }
+
+  selectJobRequirement(jobRequirement :JobRequirement){
+    this.jobPosterModel.education=jobRequirement.education;
+    this.jobPosterModel.experience=jobRequirement.experience;
+    this.jobPosterModel.joiningPeriod=jobRequirement.noticeperiod;
+    this.jobPosterModel.salary=jobRequirement.salary;
+    if(jobRequirement.noticeperiod !== undefined) {
+      this.isShowIndustry = true;
+      this.getIndustry();
+    }
+  }
+  selectIndustry(industry:Industry){
+    this.jobPosterModel.industry=industry;
+    //this.saveCandidateDetails();
+    this.getRoles();
+    this.isShowRoleList=true;
+  }
+
+
+  selectRole(roles:Role[]){
+    this.jobPosterModel.industry.roles=roles;
+    //this.saveCandidateDetails();
+    this.getRoleType();
+    this.isShowRoletype=true;
+  }
+
+  selectRoleType(roleType:string){
+    this.jobPosterModel.roleType=roleType;
+//    this.saveCandidateDetails();
+    //this.getCapability();
+  }
+
+  getIndustry(){debugger
+    this.profileCreatorService.getIndustries()
+      .subscribe(
+        industrylist => this.industries=industrylist.data,
+        error => this.onError(error));
+  }
+
+  getRoles(){
+    this.profileCreatorService.getRoles(this.jobPosterModel.industry.name)
+      .subscribe(
+        rolelist => this.roles=rolelist.data,
+        error => this.onError(error));
+  }
+
+  getRoleType(){debugger
+    this.profileCreatorService.getRoleTypes()
+      .subscribe(
+        data=> this.roleTypes=data.roleTypes,
+        error => this.onError(error));
+  }
+  onError(error:any) {
+    var message = new Message();
+    message.error_msg = error.err_msg;
+    message.isError = true;
+    this.messageService.message(message);
   }
 }

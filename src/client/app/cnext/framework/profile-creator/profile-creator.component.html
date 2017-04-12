@@ -35,7 +35,8 @@
               <div class="clearfix">&nbsp;</div>
               <!--<div class="error-messages" *ngIf="isShowRequired"><p>*</p></div>-->
               <h4>Select Industry (Any one value from the list below) </h4>
-              <cn-industry-list></cn-industry-list>
+            <cn-industry-list [industries]="industries" [candidateIndustry]="candidate.industry" (selectIndustry)="selectIndustry($event)" ></cn-industry-list>
+
           </div>
         </div>
       </div>
@@ -43,24 +44,24 @@
       <div class="section-container" [hidden]="!isRolesShow"  id="work-area">
         <h4 class="heading">Select Area of Work (Max 3)</h4>
         <div class="main-content">
-          <cn-role-list></cn-role-list>
+          <cn-role-list [roles]="roles" [candidateRoles]="candidate.industry.roles" (selectRoles)="selectRole($event)"></cn-role-list>
         </div>
       </div>
 
       <div class="section-container" [hidden]="!isRoleTypeShow">
-        <h4 class="heading">Select Role Type (Any one of the following)</h4>
-        <div class="main-content">
-          <cn-role-type-list></cn-role-type-list>
+          <h4 class="heading">Select Role Type (Any one of the following)</h4>
+          <div class="main-content">
+            <cn-role-type-list [roleTypes]="roleTypes" [candidateRoletype]="candidate.roleType" (selectRoleType)="selectRoleType($event)"></cn-role-type-list>
+          </div>
         </div>
-      </div>
 
 
-      <div class="section-container" [hidden]="!showCapability">
-        <h4 class="heading">Choose Your Capabilities (Max. 10)</h4>
-        <div class="main-content">
-          <cn-capibility-list></cn-capibility-list>
+         <div class="section-container" [hidden]="!showCapability">
+          <h4 class="heading">Choose Your Capabilities (Max. 10)</h4>
+          <div class="main-content">
+            <cn-capibility-list [roles]="roles" [candidateRoles]="candidate.industry.roles" (selectCapabilityWithRole)="selectRole($event)"></cn-capibility-list>
+          </div>
         </div>
-      </div>
 
       <!--<div class="section-container" [hidden]="!showComplexity">
         <h4 class="heading">Choose Complexities</h4>

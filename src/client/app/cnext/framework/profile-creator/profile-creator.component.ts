@@ -19,6 +19,8 @@ import {ProfileCreatorService} from "./profile-creator.service";
 import {MessageService} from "../../../framework/shared/message.service";
 import {Message} from "../../../framework/shared/message";
 import {MyIndustryService} from "../industry-service";
+import {Industry} from "../model/industry";
+import {Role} from "../model/role";
 
 @Component({
   moduleId: module.id,
@@ -28,6 +30,15 @@ import {MyIndustryService} from "../industry-service";
 })
 
 export class ProfileCreatorComponent implements OnInit {
+
+  private industries: Industry[]=new Array(0);
+  private roles: Role[]=new Array(0);
+  private roleTypes: string[]=new Array(0);
+  private roleList:string[]=new Array()
+
+
+
+
 
   whichStepsVisible : boolean[]=new Array(7);
   firstName: string;
@@ -135,8 +146,61 @@ export class ProfileCreatorComponent implements OnInit {
       this.getUserProfile();
     }
 
+    this.getIndustry();
   }
 
+
+
+  selectIndustry(industry:Industry){
+    this.candidate.industry=industry;
+    this.saveCandidateDetails();
+    this.getRoles();
+  }
+
+
+  selectRole(roles:Role[]){
+    this.candidate.industry.roles=roles;
+    this.saveCandidateDetails();
+    this.getRoleType();
+  }
+
+  selectRoleType(roleType:string){
+    this.candidate.roleType=roleType;
+    this.saveCandidateDetails();
+      this.getCapability();
+  }
+
+  getIndustry(){debugger
+    this.profileCreatorService.getIndustries()
+      .subscribe(
+        industrylist => this.industries=industrylist.data,
+        error => this.onError(error));
+  }
+
+  getRoles(){
+    this.profileCreatorService.getRoles(this.candidate.industry.name)
+      .subscribe(
+        rolelist => this.roles=rolelist.data,
+        error => this.onError(error));
+  }
+
+
+  getCapability(){
+    for(let role of this.candidate.industry.roles){
+      this.roleList.push(role.name);
+    }
+    this.profileCreatorService.getCapability(this.candidate.industry.name,this.roleList)
+      .subscribe(
+        rolelist => this.roles=rolelist.data,
+        error => this.onError(error));
+  }
+
+  getRoleType(){
+    this.profileCreatorService.getRoleTypes()
+      .subscribe(
+        data=> this.roleTypes=data.roleTypes,
+        error => this.onError(error));
+  }
   getCandidateProfile(){
     this.profileCreatorService.getCandidateDetails()
       .subscribe(
@@ -144,20 +208,23 @@ export class ProfileCreatorComponent implements OnInit {
         error => this.onError(error));
   }
 
-  OnCandidateDataSuccess(candidateData:any){
+  OnCandidateDataSuccess(candidateData:any){debugger
     this.candidate=candidateData.data[0];
     if(this.candidate.jobTitle !== undefined){
-      this.title=this.candidate.jobTitle;
       this.disableTitle=true;
     }
     if(this.candidate.industry.name !== undefined){
       this.isRolesShow=true;
+      this.getRoles();
+
     }
     if(this.candidate.roleType !== undefined){
       this.showCapability=true;
+      this.getCapability();
     }
     if(this.candidate.industry.roles.length>0){
-     this.isRoleTypeShow=true;
+      this.getRoleType();
+      this.isRoleTypeShow=true;
       if(this.candidate.industry.roles[0].capabilities.length>=1){
         this.showComplexity=true;
         if(this.candidate.industry.roles[0].capabilities[0].complexities.length>0){
@@ -176,8 +243,8 @@ export class ProfileCreatorComponent implements OnInit {
   }
 
 
-  onUserProfileSuccess(result:any) { 
-   
+  onUserProfileSuccess(result:any) {
+
     this.firstName= LocalStorageService.getLocalValue(LocalStorage.FIRST_NAME);
     this.lastName=LocalStorageService.getLocalValue(LocalStorage.LAST_NAME);
     this.getCandidateProfile();
@@ -225,26 +292,26 @@ export class ProfileCreatorComponent implements OnInit {
     LocalStorageService.setLocalValue(LocalStorage.IS_LOGED_IN, 0);
     this._router.navigate([NavigationRoutes.APP_START]);
   }
-  onSubmit() {
 
-    if(this.title==='') {
-      this.isTitleFilled=false;
-    } else {
-      this.isShowRequired=false;
-      this.isTitleFilled=true;
-    }
-  }
-  selectedtitle(title:string) {
-     this.candidate.jobTitle=title;
-   //  this.jobtitleservice.change( this.jobTitle.title);
+  selectedtitle() {
     this.profileCreatorService.addProfileDetail(this.candidate).subscribe(
       user => {
         console.log(user);
       },
       error => {
-        console.log(error);
+        this.onError(error)
       });
 
+  }
+
+  saveCandidateDetails() {
+    this.profileCreatorService.addProfileDetail(this.candidate).subscribe(
+      user => {
+        console.log(user);
+      },
+      error => {
+        this.onError(error)
+      });
 
   }
 

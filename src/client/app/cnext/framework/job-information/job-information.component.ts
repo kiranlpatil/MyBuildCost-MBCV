@@ -1,9 +1,5 @@
-
-import {  Component  } from '@angular/core';
+import {  Component,Output,EventEmitter } from '@angular/core';
 import {  JobInformation  } from '../model/job-information';
-import { MyJobInformationService } from '../myJobInformation.service';
-
-
 
 @Component({
   moduleId: module.id,
@@ -13,25 +9,21 @@ import { MyJobInformationService } from '../myJobInformation.service';
 })
 
 export class JobInformationComponent {
+  @Output() selectJobInformation=new EventEmitter();
   private jobInformation=new JobInformation();
-
-  constructor(private joninformationservice:MyJobInformationService) {
-  }
+  
   isJobTitleSelected(job:any) {
     this.jobInformation.jobTitle=job;
+    this.selectJobInformation.emit(this.jobInformation);
   }
 
   isHiringMangerSelected(manager:any) {
     this.jobInformation.hiringManager=manager;
+    this.selectJobInformation.emit(this.jobInformation);
   }
 
   isDepartmentSelected(department:any) {
     this.jobInformation.department=department;
-    this.joninformationservice.change(this.jobInformation);
+    this.selectJobInformation.emit(this.jobInformation);
   }
-
-
-
-
-
 }

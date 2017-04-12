@@ -23,12 +23,7 @@ export class RoleTypeService extends BaseService {
       .catch(this.handleError);
   }
   
-  getRoleTypes():Observable<any> {
-    var url = API.ROLE_TYPE;
-    return this.http.get(url)
-      .map(this.extractData)
-      .catch(this.handleError);
-  }
+  
 
 
 

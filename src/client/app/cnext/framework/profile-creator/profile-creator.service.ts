@@ -30,9 +30,31 @@ export class ProfileCreatorService extends BaseService {
       .catch(this.handleError);
   }
 
+
+  getIndustries():Observable<any> {
+    var url = API.INDUSTRY_LIST;
+    return this.http.get(url)
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
+
 //why it is here
   getRoles(industry:string):Observable<any> {
     var url = 'industry/'+industry+'/role';
+    return this.http.get(url)
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
+
+  getRoleTypes():Observable<any> {
+    var url = API.ROLE_TYPE;
+    return this.http.get(url)
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
+
+  getCapability(industry:string,roles:Array<string>):Observable<any> {
+    var url = API.INDUSTRY_LIST+'/'+industry+'/'+API.ROLE_LIST+'/'+API.CAPABILITY_LIST+'?roles='+JSON.stringify(roles);
     return this.http.get(url)
       .map(this.extractData)
       .catch(this.handleError);

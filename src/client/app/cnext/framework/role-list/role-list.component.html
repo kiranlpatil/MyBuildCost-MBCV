@@ -2,17 +2,18 @@
   <p class="info candidate">Select those areas of work which describe what you are best at or where you would like to position your career. Normally, an individual works
     across maximum 2 to 3 work areas in parallel. You can select upto maximum 3 work areas. One selected, you would be able to change the work
     areas only after 3 months.</p>
-  <div class="select-option"  *ngFor="let choice of roleNames;let i = index">
+  <div class="select-option"  *ngFor="let choice of roles;let i = index">
     <label>
-      <input type="checkbox"   name="choices" id="{{choice}}" [disabled]="showfield || isChecked(choice)" value="{{choice}}" (click)="selectOption($event)" [checked]="isChecked(choice)" />
-      <span>{{choice}}</span>
+      <input type="checkbox"   name="choices"  [disabled]="candidateRoles.length>0" value="{{choice.name}}" (click)="selectOption(choice,$event)" [checked]="candidateRolesList.indexOf(choice.name)!=-1" />
+      <span>{{choice.name}}</span>
     </label>
-    <div class="error-messages" *ngIf="alert">You have selected maximum work areas.</div>
+   <div class="error-messages" *ngIf="alert">You have selected maximum work areas.</div>
   </div>
 
 
+
   <div class="button-group clearfix">
-    <button class="btn btn-primary" (click)="showHideModal()" [disabled]="disbleButton">Confirm &amp; Save</button>
+    <button class="btn btn-primary" (click)="showHideModal()" [disabled]="candidateRoles?(candidateRoles.length>0?true:false):false">Confirm &amp; Save</button>
   </div>
 </div>
 

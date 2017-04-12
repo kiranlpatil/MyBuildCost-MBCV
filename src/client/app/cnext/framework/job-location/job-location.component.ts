@@ -1,5 +1,5 @@
 
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, Output,EventEmitter} from '@angular/core';
 import { JobLocation } from '../model/job-location';
 import { JobLocationService } from './job-location.service';
 import { Message } from '../../../framework/shared/message';
@@ -14,6 +14,8 @@ import { MyJobLocationService } from '../myjob-location.service';
 })
 
 export class JobLocationComponent implements OnInit {
+  @Output() selectJobLocation=new EventEmitter();
+
   pin:number;
   private jobLocationtion = new JobLocation();
   private storedcountry:string;
@@ -85,10 +87,11 @@ export class JobLocationComponent implements OnInit {
   selectCityModel(city : string) {
     this.storedcity=city;
     this.jobLocationtion.cityName=city;
+    this.selectJobLocation.emit(this.jobLocationtion);
   }
   isPinSelected(pin:any) {
     this.jobLocationtion.pin=pin;
-    this.myjoblocationService.change(this.jobLocationtion);
+    this.selectJobLocation.emit(this.jobLocationtion);
 
   }
 
