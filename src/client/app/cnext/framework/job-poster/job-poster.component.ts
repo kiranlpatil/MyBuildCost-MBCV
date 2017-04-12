@@ -41,6 +41,7 @@ export class JobPosterComponent {
   private industries: Industry[]=new Array(0);
   private roles: Role[]=new Array(0);
   private roleTypes: string[]=new Array(0);
+  private roleList: string[]=new Array(0);
 
 
   descModel:Description[]=new Array();
@@ -238,7 +239,8 @@ export class JobPosterComponent {
   selectRoleType(roleType:string){
     this.jobPosterModel.roleType=roleType;
 //    this.saveCandidateDetails();
-    //this.getCapability();
+    this.getCapability();
+    this.isShowCapability=true;
   }
 
   getIndustry(){
@@ -259,6 +261,16 @@ export class JobPosterComponent {
     this.profileCreatorService.getRoleTypes()
       .subscribe(
         data=> this.roleTypes=data.roleTypes,
+        error => this.onError(error));
+  }
+
+  getCapability(){
+    for(let role of this.jobPosterModel.industry.roles){
+      this.roleList.push(role.name);
+    }
+    this.profileCreatorService.getCapability(this.jobPosterModel.industry.name,this.roleList)
+      .subscribe(
+        rolelist => this.roles=rolelist.data,
         error => this.onError(error));
   }
   onError(error:any) {
