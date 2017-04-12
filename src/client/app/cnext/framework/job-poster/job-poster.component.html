@@ -33,7 +33,7 @@
   </div>
 
 
-  <!--<div class="section-container"  [hidden]="!isShowCapability">
+  <div class="section-container"  [hidden]="!isShowCapability">
 
     <div class="main-content">
       <h4 class="heading"> Select Capabilities (Max. 10)</h4>
@@ -43,11 +43,11 @@
         capabilities. You may additionally select upto 10 secondary capabilities.
         Please note that marking the right capabilities is the key to this hiring solution.
         Capabilities once selected can’t be changed for a job profile</p>
-      <cn-capibility-list></cn-capibility-list>
+      <cn-capibility-list [roles]="roles"  (selectCapabilityWithRole)="selectRole($event)"></cn-capibility-list>
     </div>
   </div>
 
-  <div class="section-container"  [hidden]="!isShowComplexity" >
+  <!--<div class="section-container"  [hidden]="!isShowComplexity" >
     <div class="main-content max-height">
       <h4 class="heading">Choose Complexities</h4>
       <cn-complexity-list></cn-complexity-list>
