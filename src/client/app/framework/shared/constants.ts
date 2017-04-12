@@ -1,6 +1,6 @@
 export class AppSettings {
   //public static IP = 'http://10.192.33.53:8080';
-// public static IP = 'http://ee802b7f.ngrok.io';
+  // public static IP = 'http://ee802b7f.ngrok.io';
 // public static IP = 'http://10.192.33.252:8087';
   public static IP = 'http://52.89.221.23:8080';
   //public static IP = '';
@@ -37,6 +37,10 @@ export class Messages {
   public static MSG_SUCCESS_MAIL_VERIFICATION_RESULT_STATUS: string ='Congratulations!';
   public static MSG_SUCCESS_MAIL_VERIFICATION_BODY: string = 'Your account verified successfully.' +
     'You may start using it immediately right now.Click on Login!';
+
+  public static MSG_SUCCESS_FOR_PROFILE_CREATION_STATUS: string ='Your profile created successfully';
+  public static MSG_SUCCESS_FOR_JOB_POST_STATUS: string ='You are successfully posted your job';
+
     public static MSG_ERROR_MAIL_VERIFICATION_BODY: string = 'Your account verification failed due to invalid access token!';
     public static MSG_ERROR_MAIL_VERIFICATION_RESULT_STATUS: string ='Sorry';
     public static MSG_ERROR_LOGIN:string = 'Failed to login';

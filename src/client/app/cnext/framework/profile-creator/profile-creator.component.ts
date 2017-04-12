@@ -1,6 +1,6 @@
 import {Component, OnInit} from "@angular/core";
 import {LocalStorageService} from "../../../framework/shared/localstorage.service";
-import {LocalStorage, NavigationRoutes} from "../../../framework/shared/constants";
+import {LocalStorage, NavigationRoutes, Messages} from "../../../framework/shared/constants";
 import {Router} from "@angular/router";
 import {DashboardService} from "../../../framework/dashboard/dashboard.service";
 import {TestService} from "../test.service";
@@ -382,6 +382,16 @@ export class ProfileCreatorComponent implements OnInit {
       error => {
         this.onError(error)
       });
+
+  }
+
+  onSubmit() {
+    //if(this.candidate.jobTitle && this.candidate.industry.name && this.candidate.intrestedIndustries.length) {
+      var message = new Message();
+      message.custom_message = Messages.MSG_SUCCESS_FOR_PROFILE_CREATION_STATUS;
+      message.isError = false;
+      this.messageService.message(message);
+   // }
 
   }
 
