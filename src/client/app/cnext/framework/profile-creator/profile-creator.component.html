@@ -55,120 +55,120 @@
         </div>
 
 
-      <!--    <div class="section-container" [hidden]="!showCapability">
+         <div class="section-container" [hidden]="!showCapability">
           <h4 class="heading">Choose Your Capabilities (Max. 10)</h4>
           <div class="main-content">
-            <cn-capibility-list></cn-capibility-list>
+            <cn-capibility-list [roles]="roles" [candidateRoles]="candidate.industry.roles" (selectCapabilityWithRole)="selectRole($event)"></cn-capibility-list>
           </div>
         </div>
 
-        <div class="section-container" [hidden]="!showComplexity">
-          <h4 class="heading">Choose Complexities</h4>
-          <div class="main-content max-height">
-            <cn-complexity-list></cn-complexity-list>
-          </div>
-        </div>
+      <!--  <div class="section-container" [hidden]="!showComplexity">
+         <h4 class="heading">Choose Complexities</h4>
+         <div class="main-content max-height">
+           <cn-complexity-list></cn-complexity-list>
+         </div>
+       </div>
 
-        <div class="section-container clearfix profeiciency-domain" [hidden]="!showProfeciency">
-          <h4 class="heading">Proficiencies (Max. 25)</h4>
-          <div class="main-content">
-            <cn-proficiency-doamin [type]="'profeciency'"></cn-proficiency-doamin>
-          </div>
-        </div>
+       <div class="section-container clearfix profeiciency-domain" [hidden]="!showProfeciency">
+         <h4 class="heading">Proficiencies (Max. 25)</h4>
+         <div class="main-content">
+           <cn-proficiency-doamin [type]="'profeciency'"></cn-proficiency-doamin>
+         </div>
+       </div>
 
-        <div class="section-container clearfix profeiciency-domain" [hidden]="!showProfeciency">
-          <h4 class="heading">Select Industry In Which You Have work Exposure / Experience</h4>
-          <div class="main-content">
-            <cn-industry-experience-list></cn-industry-experience-list>
-          </div>
-        </div>
+       <div class="section-container clearfix profeiciency-domain" [hidden]="!showProfeciency">
+         <h4 class="heading">Select Industry In Which You Have work Exposure / Experience</h4>
+         <div class="main-content">
+           <cn-industry-experience-list></cn-industry-experience-list>
+         </div>
+       </div>
 
-        <div class="section-container"  [hidden]="!showProfeciency">
-          <h4 class="heading">Professional Data</h4>
-          <div class="main-content">
-            <cn-professional-data [candidate]="candidate"></cn-professional-data>
-          </div>
-        </div>
+       <div class="section-container"  [hidden]="!showProfeciency">
+         <h4 class="heading">Professional Data</h4>
+         <div class="main-content">
+           <cn-professional-data [candidate]="candidate"></cn-professional-data>
+         </div>
+       </div>
 
-        <div class="section-container" [hidden]="chkEmployeeHistory" [hidden]="!showProfeciency">
-          <h4 class="heading">Employment Histroy
-            <span class="close-dialog">Close this section if not needed
-              <span class="glyphicon glyphicon-remove" (click)="hideEmployeeHistory()"></span>
-            </span>
-          </h4>
-          <div class="main-content clearfix"  >
-            <cn-employment-history></cn-employment-history>
-          </div>
-        </div>
+       <div class="section-container" [hidden]="chkEmployeeHistory" [hidden]="!showProfeciency">
+         <h4 class="heading">Employment Histroy
+           <span class="close-dialog">Close this section if not needed
+             <span class="glyphicon glyphicon-remove" (click)="hideEmployeeHistory()"></span>
+           </span>
+         </h4>
+         <div class="main-content clearfix"  >
+           <cn-employment-history></cn-employment-history>
+         </div>
+       </div>
 
-        <div class="section-container" [hidden]="!showProfeciency">
-          <h4 class="heading">Academic Details</h4>
-          <div class="main-content">
-            <cn-academic-details></cn-academic-details>
-          </div>
-        </div>
+       <div class="section-container" [hidden]="!showProfeciency">
+         <h4 class="heading">Academic Details</h4>
+         <div class="main-content">
+           <cn-academic-details></cn-academic-details>
+         </div>
+       </div>
 
-        <div class="section-container" [hidden]="chkCertification" [hidden]="!showProfeciency">
-          <h4 class="heading">Certification/Accreditation
-            <span class="close-dialog">Close this section if not needed
-              <span class="glyphicon glyphicon-remove" (click)="hideCertification()"></span>
-            </span>
-          </h4>
-          <div class="main-content clearfix" >
-            <cn-certification-accreditation></cn-certification-accreditation>
-          </div>
-        </div>
+       <div class="section-container" [hidden]="chkCertification" [hidden]="!showProfeciency">
+         <h4 class="heading">Certification/Accreditation
+           <span class="close-dialog">Close this section if not needed
+             <span class="glyphicon glyphicon-remove" (click)="hideCertification()"></span>
+           </span>
+         </h4>
+         <div class="main-content clearfix" >
+           <cn-certification-accreditation></cn-certification-accreditation>
+         </div>
+       </div>
 
-        <div class="section-container"  [hidden]="chkAwards"  [hidden]="!showProfeciency">
-          <h4 class="heading">Awards
-            <span class="close-dialog">Close this section if not needed
-              <span class="glyphicon glyphicon-remove" (click)="hideAwards()"></span>
-            </span>
-          </h4>
-          <div class="main-content">
-            <cn-awards></cn-awards>
-          </div>
-        </div>
+       <div class="section-container"  [hidden]="chkAwards"  [hidden]="!showProfeciency">
+         <h4 class="heading">Awards
+           <span class="close-dialog">Close this section if not needed
+             <span class="glyphicon glyphicon-remove" (click)="hideAwards()"></span>
+           </span>
+         </h4>
+         <div class="main-content">
+           <cn-awards></cn-awards>
+         </div>
+       </div>
 
-        <div class="section-container" [hidden]="chkAboutMyself" [hidden]="!showProfeciency" >
-          <h4 class="heading">More About Myself(Max 250)
-            <span class="close-dialog">Close this section if not needed
-              <span class="glyphicon glyphicon-remove" (click)="hideAboutMyself()"></span>
-            </span>
-          </h4>
-          <div class="main-content">
-            <cn-more-about-myself></cn-more-about-myself>
-          </div>
-        </div>
-        <div class="section-container profile-configurations" [hidden]="!showProfeciency">
-          <div class="col-sm-8 no-padding text-left">
-            <div class="radio">
-              <label>Profile Visibility:</label>
-              <label class="radio-inline">
-                <input type="radio" name="profile-visibility" id="optionsRadios2"  [ngModel]="selectedvalue1" (change)="showorhide($event.target.value)" value="option2"> show
-              </label>
-              <label class="radio-inline">
-                <input type="radio" name="profile-visibility" id="optionsRadios3"  [ngModel]="selectedvalue2" (change)="showorhide($event.target.value)" value="option3" > hide
-              </label>
-            </div>
-            <div class="info"><p>In case you wish to hide your profile visibility from recruiters, select hide option above.<br />You can also choose to show your profile later.</p></div>
-            <div class="button-group">
-              <button class="btn btn-primary"(click)="onSubmit()" >Submit</button>
-              <button class="btn btn-default">Cancel</button>
-            </div>
-          </div>
-          <div class="col-sm-4 no-padding text-right">
-            <div>
-              <label>You Can Share it On:</label>
-              <img src="assets/c-next/profile-creator/fb.png" />
-              <img src="assets/c-next/profile-creator/linked-in.png" />
-              <img src="assets/c-next/profile-creator/twitter.png" />
-            </div>
-            <div class="button-group">
-              <button class="btn btn-danger" style="margin-top: 15px;" (click)="logOut()">Logout</button>
-            </div>
-          </div>
-        </div>-->
+       <div class="section-container" [hidden]="chkAboutMyself" [hidden]="!showProfeciency" >
+         <h4 class="heading">More About Myself(Max 250)
+           <span class="close-dialog">Close this section if not needed
+             <span class="glyphicon glyphicon-remove" (click)="hideAboutMyself()"></span>
+           </span>
+         </h4>
+         <div class="main-content">
+           <cn-more-about-myself></cn-more-about-myself>
+         </div>
+       </div>
+       <div class="section-container profile-configurations" [hidden]="!showProfeciency">
+         <div class="col-sm-8 no-padding text-left">
+           <div class="radio">
+             <label>Profile Visibility:</label>
+             <label class="radio-inline">
+               <input type="radio" name="profile-visibility" id="optionsRadios2"  [ngModel]="selectedvalue1" (change)="showorhide($event.target.value)" value="option2"> show
+             </label>
+             <label class="radio-inline">
+               <input type="radio" name="profile-visibility" id="optionsRadios3"  [ngModel]="selectedvalue2" (change)="showorhide($event.target.value)" value="option3" > hide
+             </label>
+           </div>
+           <div class="info"><p>In case you wish to hide your profile visibility from recruiters, select hide option above.<br />You can also choose to show your profile later.</p></div>
+           <div class="button-group">
+             <button class="btn btn-primary"(click)="onSubmit()" >Submit</button>
+             <button class="btn btn-default">Cancel</button>
+           </div>
+         </div>
+         <div class="col-sm-4 no-padding text-right">
+           <div>
+             <label>You Can Share it On:</label>
+             <img src="assets/c-next/profile-creator/fb.png" />
+             <img src="assets/c-next/profile-creator/linked-in.png" />
+             <img src="assets/c-next/profile-creator/twitter.png" />
+           </div>
+           <div class="button-group">
+             <button class="btn btn-danger" style="margin-top: 15px;" (click)="logOut()">Logout</button>
+           </div>
+         </div>
+       </div>-->
     </div>
   </div>
 </div>

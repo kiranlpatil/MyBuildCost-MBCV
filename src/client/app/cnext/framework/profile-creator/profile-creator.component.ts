@@ -34,7 +34,7 @@ export class ProfileCreatorComponent implements OnInit {
   private industries: Industry[]=new Array(0);
   private roles: Role[]=new Array(0);
   private roleTypes: string[]=new Array(0);
-
+  private roleList:string[]=new Array()
 
 
 
@@ -167,7 +167,7 @@ export class ProfileCreatorComponent implements OnInit {
   selectRoleType(roleType:string){
     this.candidate.roleType=roleType;
     this.saveCandidateDetails();
-    this.getRoleType();
+      this.getCapability();
   }
 
   getIndustry(){debugger
@@ -184,20 +184,31 @@ export class ProfileCreatorComponent implements OnInit {
         error => this.onError(error));
   }
 
-  getRoleType(){debugger
+
+  getCapability(){
+    for(let role of this.candidate.industry.roles){
+      this.roleList.push(role.name);
+    }
+    this.profileCreatorService.getCapability(this.candidate.industry.name,this.roleList)
+      .subscribe(
+        rolelist => this.roles=rolelist.data,
+        error => this.onError(error));
+  }
+
+  getRoleType(){
     this.profileCreatorService.getRoleTypes()
       .subscribe(
         data=> this.roleTypes=data.roleTypes,
         error => this.onError(error));
   }
-  getCandidateProfile(){debugger
+  getCandidateProfile(){
     this.profileCreatorService.getCandidateDetails()
       .subscribe(
         candidateData => this.OnCandidateDataSuccess(candidateData),
         error => this.onError(error));
   }
 
-  OnCandidateDataSuccess(candidateData:any){
+  OnCandidateDataSuccess(candidateData:any){debugger
     this.candidate=candidateData.data[0];
     if(this.candidate.jobTitle !== undefined){
       this.disableTitle=true;
@@ -209,6 +220,7 @@ export class ProfileCreatorComponent implements OnInit {
     }
     if(this.candidate.roleType !== undefined){
       this.showCapability=true;
+      this.getCapability();
     }
     if(this.candidate.industry.roles.length>0){
       this.getRoleType();
