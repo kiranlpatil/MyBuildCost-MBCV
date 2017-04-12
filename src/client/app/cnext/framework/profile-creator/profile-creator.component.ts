@@ -177,6 +177,7 @@ export class ProfileCreatorComponent implements OnInit {
       if (this.candidate.industry.roles[0].capabilities) {
         if (this.candidate.industry.roles[0].capabilities.length > 0) {
           this.getComplexity();
+          this.showComplexity = true;
         }
       }
     }
@@ -237,7 +238,7 @@ export class ProfileCreatorComponent implements OnInit {
       this.profileCreatorService.getComplexity(this.candidate.industry.name, this.roleList, this.primaryCapability)
         .subscribe(
           rolelist => {
-            this.rolesForComplexity = rolelist.data
+            this.rolesForComplexity = rolelist.data;
             this.getCandidateForComplexity();
 
           },
