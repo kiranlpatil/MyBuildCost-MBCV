@@ -61,13 +61,13 @@
     </div>
   </div>
 -->
- <!-- <div class="section-container clearfix profeiciency-domain" [hidden]="!isShowProficiency">
-   &lt;!&ndash; <div class="">&ndash;&gt;
+  <div class="section-container clearfix profeiciency-domain">
+   <!-- <div class="">-->
       <h4 class="heading">Industry (Max. 20)</h4>
     <div class="main-content clearfix">
-      <cn-industry-experience-list></cn-industry-experience-list>
+      <cn-industry-experience-list [industries]="industries"  (selectExperiencedIndustry)="selectExperiencedIndustry($event)"></cn-industry-experience-list>
     </div>
-  </div>-->
+  </div>
 
   <div class="section-container col-sm-6" [hidden]="!isShowProficiency">
     <div class="max-height">

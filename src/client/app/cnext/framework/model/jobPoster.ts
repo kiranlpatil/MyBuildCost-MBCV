@@ -16,4 +16,5 @@ export class JobPosterModel {
   postingDate : string ='';
   remark : string ='';
   roleType : string = '';
+  interestedIndustry :string[] = new Array(0);
 }

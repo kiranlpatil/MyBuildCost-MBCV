@@ -35,7 +35,7 @@
               <div class="clearfix">&nbsp;</div>
               <!--<div class="error-messages" *ngIf="isShowRequired"><p>*</p></div>-->
               <h4>Select Industry (Any one value from the list below) </h4>
-            <cn-industry-list [industries]="industries" [candidateIndustry]="candidate.industry" (selectIndustry)="selectIndustry($event)" ></cn-industry-list>
+            <cn-industry-list [industries]="industries" [candidateIndustry]="candidate.industry" (selectExperiencedIndustry)="selectExperiencedIndustry($event)" ></cn-industry-list>
 
           </div>
         </div>
@@ -77,12 +77,12 @@
         </div>
       </div>
 
-      <!--<div class="section-container clearfix profeiciency-domain" [hidden]="!showProfeciency">
+      <div class="section-container clearfix profeiciency-domain">
         <h4 class="heading">Select Industry In Which You Have work Exposure / Experience</h4>
         <div class="main-content">
-          <cn-industry-experience-list></cn-industry-experience-list>
+          <cn-industry-experience-list [industries]="industries" [candidateExperiencedIndustry]="candidate.intrestedIndustries" (selectExperiencedIndustry)="selectExperiencedIndustry($event)"></cn-industry-experience-list>
         </div>
-      </div>-->
+      </div>
 
       <div class="section-container" >
         <h4 class="heading">Professional Data</h4>

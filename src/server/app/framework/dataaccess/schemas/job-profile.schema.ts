@@ -59,7 +59,8 @@ class JobProfileSchema {
       },
       postingDate :{
         type : Date
-      }
+      },
+      interestedIndustry:[{type:String}]
 
     },{ versionKey: false });
 

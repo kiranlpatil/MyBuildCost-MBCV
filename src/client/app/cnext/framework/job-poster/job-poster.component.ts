@@ -206,6 +206,10 @@ export class JobPosterComponent {
     this.jobPosterModel.location = jobLocation;
   }
 
+  selectExperiencedIndustry(experiencedindustry:string[]){
+    this.jobPosterModel.interestedIndustry = experiencedindustry;
+  }
+
   selectJobRequirement(jobRequirement :JobRequirement){
     this.jobPosterModel.education=jobRequirement.education;
     this.jobPosterModel.experience=jobRequirement.experience;
@@ -237,7 +241,7 @@ export class JobPosterComponent {
     //this.getCapability();
   }
 
-  getIndustry(){debugger
+  getIndustry(){
     this.profileCreatorService.getIndustries()
       .subscribe(
         industrylist => this.industries=industrylist.data,
@@ -251,7 +255,7 @@ export class JobPosterComponent {
         error => this.onError(error));
   }
 
-  getRoleType(){debugger
+  getRoleType(){
     this.profileCreatorService.getRoleTypes()
       .subscribe(
         data=> this.roleTypes=data.roleTypes,

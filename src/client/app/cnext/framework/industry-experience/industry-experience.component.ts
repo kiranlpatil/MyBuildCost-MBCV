@@ -1,15 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { TestService } from '../test.service';
-import { MyIndustryService } from '../industry-service';
-import { MyRoleService } from '../role-service';
-import { Message } from '../../../framework/shared/message';
-import { MessageService } from '../../../framework/shared/message.service';
-import { Industry } from '../model/industry';
-import { MyRoleListTestService } from '../myRolelist.service';
-import { IndustryExperienceService } from './industry-experience.service';
-import {ProfileCreatorService} from "../profile-creator/profile-creator.service";
-import {LocalStorageService} from "../../../framework/shared/localstorage.service";
-import {LocalStorage} from "../../../framework/shared/constants";
+import {Component, Input, Output, EventEmitter} from "@angular/core";
+import {Industry} from "../model/industry";
 
 @Component({
   moduleId: module.id,
@@ -18,135 +8,31 @@ import {LocalStorage} from "../../../framework/shared/constants";
   styleUrls: ['industry-experience.component.css']
 })
 
-export class IndustryExperienceListComponent implements OnInit {
-  private industryNames :string[]=new Array();
-  private storedRoles :string[] =new Array();
-  private industryData:any;
-  private rolesData:any;
-  private roleNames:string[] =new Array();
-  private showModalStyle: boolean = false;
-  private disbleRole: boolean = true;
-  private disbleButton: boolean = true;
-  private disableIndustry: boolean = false;
-  private industryRoles=new Industry();
-  private industries:string[] =new Array();
-  constructor(private industryService: IndustryExperienceService, private myindustryService : MyIndustryService,
-              private roleService : MyRoleService, private messageService:MessageService , private testService : TestService,
-              private myRolelist :MyRoleListTestService,
-              private profileCreatorService:ProfileCreatorService) {
+export class IndustryExperienceListComponent {
 
-  }
+  @Input() industries:Industry[] = new Array(0);
+  private selectedIndustries:string[] = new Array(0);
+  @Input() candidateExperiencedIndustry:string[] = new Array(0);
+  @Output() selectExperiencedIndustry = new EventEmitter();
 
-  ngOnInit() {
-    this.industryService.getIndustries()
-      .subscribe(
-        industrylist => this.onIndustryListSuccess(industrylist.data),
-        error => this.onError(error));
-
-      if(LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE)==="true"){
-        this.profileCreatorService.getCandidateDetails()
-          .subscribe(
-            candidateData => this.OnCandidateDataSuccess(candidateData),
-            error => this.onError(error));
-
-      }
-    
-  }
-
-  OnCandidateDataSuccess(candidateData:any){}
-
-  
-  onIndustryListSuccess(data:any) {
-    this.industryData=data;
-    for(let industry of data) {
-      this.industryNames.push(industry.name);
+  ngOnChanges(changes:any) {debugger
+    if (changes.industries != undefined) {
+      if (changes.industries.currentValue != undefined)
+        this.industries = changes.industries.currentValue;
     }
   }
 
-  onError(error:any) {
-    var message = new Message();
-    message.error_msg = error.err_msg;
-    message.isError = true;
-    this.messageService.message(message);
-  }
-
-  selectIndustryModel(industry: string) {
-    this.disbleButton=false;
-    //this.disbleRole=false;
-    this.industries.push(industry);
-    this.searchIndustryId(industry);
-    this.industryService.addIndustryExperience(this.industries).subscribe(
-      user => {
-        console.log(user);
-      },
-      error => {
-        console.log(error);
-      });
-
-  }
-
-  searchIndustryId(industryName:string) {
-    for(let industry of this.industryData) {
-      if(industry.name===industryName) {
-        this.industryRoles.industry=industry._id;
-      }
-    }
-  }
-
-  searchRolesId(roleName:any) {
-    for(let role of this.rolesData) {
-      if(role.name===roleName) {
-        this.industryRoles.roles.push(role._id);
-      }
-    }
-  }
-
-  onRoleListSuccess(data:any) {
-    this.rolesData=data;
-    for(let role of data){
-      this.roleNames.push(role.name);
-    }
-  }
-
-  selectRolesModel(roleName: string) {
-    if(roleName === 'u can select max ') {
-      console.log('u can select max ');
+  selectIndustryModel(industry:string,event:any) {
+    if(event.target.checked) {
+      this.selectedIndustries.push(industry);
     } else {
-      this.disbleButton = false;
-      this.storedRoles.push(roleName);
-      this.searchRolesId(roleName);
+      for (let data of this.selectedIndustries) {
+        if (data === industry) {
+          this.selectedIndustries.splice(this.selectedIndustries.indexOf(data), 1);
+        }
+      }
     }
-  }
-
-
-
-
-  createAndSave() {
-
-  };
-
-  showHideModal() {
-    this.showModalStyle = !this.showModalStyle;
-  }
-
-  disableRole() {
-    this.myRolelist.change(true);
-    // this.testService.change(true);
-    this.showModalStyle = !this.showModalStyle;
-    this.disbleRole = true;
-    this.disbleButton = true;
-    this.disableIndustry = true;
-    this.createAndSave();
-    this.roleService.change(this.storedRoles);
-
-  }
-
-  getStyleModal() {
-    if (this.showModalStyle) {
-      return 'block';
-    } else {
-      return 'none';
-    }
+    this.selectExperiencedIndustry.emit(this.selectedIndustries);
   }
 }
 

@@ -21,6 +21,7 @@ interface JobProfileModel {
     responsibility : string;
     postingDate : Date;
     remark : string;
+    interestedIndustry : string[];
 
 }
 export = JobProfileModel;

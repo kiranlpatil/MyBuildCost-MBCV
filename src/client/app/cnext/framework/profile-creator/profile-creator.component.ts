@@ -157,6 +157,11 @@ export class ProfileCreatorComponent implements OnInit {
     this.getRoles();
   }
 
+  selectExperiencedIndustry(experiencedindustry:string[]){
+    this.candidate.intrestedIndustries=experiencedindustry;
+    this.saveCandidateDetails();
+  }
+
 
   selectRole(roles:Role[]){
     this.candidate.industry.roles=roles;
