@@ -86,8 +86,9 @@ $input-bg: rgba(255 , 255, 255, .1);
 //Body
 body,
 html {
-  background: #f2f2f2;
-  font-family:  Arial, sans-serif;
+  //background: #f2f2f2;
+  font-family: 'gothamrnd-light';
+  font-weight: 600;
   height: 100%;
   text-align: center;
 
@@ -236,12 +237,6 @@ a {
 .btn {
   border-radius: 25px;
   padding: 6px 25px;
-  box-shadow: 1px 1px 1px 1px rgba(0, 0,0, 0.2);
-
-  &:hover,
-  &:active {
-    box-shadow: 1px 1px 1px 1px rgba(0, 0,0, 0.2);
-  }
 }
 
 .btn-default {

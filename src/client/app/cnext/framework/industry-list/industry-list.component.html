@@ -1,15 +1,15 @@
-<div class="select-industry" >
-  <div>
+<div class="select-industry clearfix" >
+  <div class="col-sm-12">
+    <p class="info">Default value set to your own industry. Select a different value if you wish to hire from a different industry background</p>
     <div class="select-option"  *ngFor="let choice of industries;let i = index">
       <label >
         <input type="radio"  name="choice.name" id="{{choice.name}}" value="{{choice.name}}" [disabled]="candidateIndustry.name" (click)="choosedIndustry(choice)" [checked]="choice.name===candidateIndustry.name"  >
         <span>{{choice.name}}</span>
       </label>
     </div>
-  </div>
-
-  <div class="button-group clearfix"  >
-    <button class="btn btn-primary" (click)="showHideModal()" [disabled]="candidateIndustry.name">Confirm</button>
+    <div class="button-group clearfix"  >
+      <button class="btn btn-primary" (click)="showHideModal()" [disabled]="candidateIndustry.name">Confirm</button>
+    </div>
   </div>
 </div>
 

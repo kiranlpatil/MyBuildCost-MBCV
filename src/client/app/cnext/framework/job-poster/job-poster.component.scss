@@ -12,27 +12,58 @@ $border-color: #ddd;
 }
 
 .section-container {
-  padding: 30px 15px 0;
   text-align: left;
 }
 
 .heading {
-  text-align: left;
-  margin: 0 0 15px 0;
+  color: #3694d1;
   font-size: 14px;
+  margin: 0 0 15px;
+  padding: 8px 15px;
+  position: relative;
+  text-align: left;
+  font-family: 'gothamrnd-book';
+  font-weight: bold;
+  background: #f8f8f8;
+  border-radius: 5px;
+
+  span {
+    background: transparent;
+    color: #3694d1;
+    float: right;
+    font-size: 12px;
+    font-style: italic;
+    font-weight: 400;
+  }
+
+  .close-dialog {
+    padding: 2px 35px 0 0;
+  }
+
+  .glyphicon-remove {
+    border: 1px solid #3694d1;
+    border-radius: 50%;
+    font-style: normal;
+    padding: 5px;
+    position: absolute;
+    right: 15px;
+    top: 4px;
+  }
 }
 
 .main-content {
   background: $white;
-  border: 1px solid $border-color;
+  //border: 1px solid $border-color;
   padding: 15px;
   text-align: left;
+}
 
-  .info {
-    font-size: 12px;
-    font-style: italic;
-    margin: 0;
-  }
+.job-info {
+  margin: 15px 30px 0;
+}
+.job-poster {
+ border: 1px solid $border-color;
+  margin: 15px 30px;
 }
 
 .max-height {
@@ -46,12 +77,11 @@ $border-color: #ddd;
 }
 
 .button-group {
-  margin: 0 15px 20px 0;
+  margin: 0 15px 0 0;
   text-align: right;
 
 
   .btn {
-    border-radius: 0;
 
     &:focus,
     &:active {
