@@ -20,9 +20,6 @@ export class DescriptionFieldComponent implements OnInit {
  private newstringThree:string[];
  private condition:number;
  private maxword:number;
- private tempType:string;
- private tempdetail:string;
- private model=new Description();
  private remainingWords:number;
   constructor(private jobPostDescription:JonPostDescriptionService) {
 
@@ -42,7 +39,6 @@ export class DescriptionFieldComponent implements OnInit {
         this. maxword=this.description.length;
       }
     this.jobPostDescription.change({"data":this.newstringOne,"type":this.type});
-        
   }
-  
+
 }
