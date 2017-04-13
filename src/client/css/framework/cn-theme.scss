@@ -33,7 +33,6 @@ $white: #fff;
     border: #3694d1 0 solid;
     color: #fff;
     box-shadow: 1px 1px 1px 1px rgba(0, 0,0, 0.2);
-    display: inline-block;
 
     &:hover,
     &:active,
@@ -42,14 +41,12 @@ $white: #fff;
       border: #58a90f 0 solid;
       color: $white;
       box-shadow: 1px 1px 1px 1px rgba(0, 0,0, 0.2);
-      display: inline-block;
     }
 
     &:disabled  {
       /*background: #67c116;
       border: #3694d1 0 solid;
       box-shadow: 0 0 0 0 rgba(0, 0,0, 0.2);*/
-      display: none;
     }
   }
 

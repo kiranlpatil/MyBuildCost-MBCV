@@ -78,8 +78,8 @@
           </div>
         </div>
 
-        <div class="section-container clearfix profeiciency-domain" [hidden]="!showProfeciency">
-          <div class="main-content">
+        <div class="section-container profeiciency-domain" [hidden]="!showProfeciency">
+          <div class="main-content clearfix">
             <h4 class="heading">Select Industry In Which You Have work Exposure / Experience</h4>
             <cn-industry-experience-list [industries]="industries" [candidateExperiencedIndustry]="candidate.intrestedIndustries" (selectExperiencedIndustry)="selectExperiencedIndustry($event)"></cn-industry-experience-list>
           </div>

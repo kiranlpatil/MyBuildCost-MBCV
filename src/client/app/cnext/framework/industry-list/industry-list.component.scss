@@ -102,12 +102,6 @@ $primary-option: #1c75bd;
   }
 }
 
-@media screen and (max-width: 980px) {
-  .select-option {
-    margin: 0 15px 0 0;
-  }
-}
-
 @media screen and (max-width: 767px) {
   .select-option > label {
     padding: 7px 0;
