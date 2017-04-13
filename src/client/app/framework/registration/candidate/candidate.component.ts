@@ -166,8 +166,7 @@ export class CandidateComponent implements OnInit {
     LocalStorageService.setLocalValue(LocalStorage.FROM_CANDIDATE_REGISTRATION, 'true');
 
     // this.userForm.reset();
-   // this._router.navigate([NavigationRoutes.VERIFY_USER]);
-    this._router.navigate([NavigationRoutes.APP_LOGIN]);
+    this._router.navigate([NavigationRoutes.VERIFY_USER]);
   }
 
   onRegistrationError(error: any) {
