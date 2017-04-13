@@ -1,90 +1,87 @@
-<div class="clearfix">
-  <div class="section-container clearfix">
-    <cn-job-information (selectJobInformation)="selectJobInformation($event)"></cn-job-information>
+<div class="clearfix ">
+  <div class="job-info section-container clearfix">
+    <div class="row">
+      <cn-job-information (selectJobInformation)="selectJobInformation($event)"></cn-job-information>
 
-    <cn-job-location (selectJobLocation)="selectJobLocation($event)"></cn-job-location>
+      <cn-job-requirement (selectJobRequirement)="selectJobRequirement($event)"></cn-job-requirement>
 
-    <cn-job-requirement (selectJobRequirement)="selectJobRequirement($event)"></cn-job-requirement>
+      <cn-job-location (selectJobLocation)="selectJobLocation($event)"></cn-job-location>
+    </div>
   </div>
 
-  <div class="roles section-container"  [hidden]="!isShowIndustry">
+  <div class="job-poster">
+    <div class="roles section-container"  [hidden]="!isShowIndustry">
+      <div class="main-content">
+        <h4 class="heading">Select Industry</h4>
+        <cn-industry-list [industries]="industries"  (selectIndustry)="selectIndustry($event)" ></cn-industry-list>
+      </div>
+    </div>
+
+    <div class="section-container" [hidden]="!isShowRoleList">
+      <div class="main-content">
+        <h4 class="heading">Select Area of Work (Max 3)</h4>
+        <cn-role-list [roles]="roles"  (selectRoles)="selectRole($event)"></cn-role-list>
+      </div>
+    </div>
+
+    <div class="section-container" [hidden]="!isShowRoletype">
+      <div class="main-content">
+        <h4 class="heading">Select Role Type (Any one of the following)</h4>
+        <cn-role-type-list [roleTypes]="roleTypes"  (selectRoleType)="selectRoleType($event)"></cn-role-type-list>
+      </div>
+    </div>
+
+
+    <div class="section-container"  [hidden]="!isShowCapability">
+
+      <div class="main-content">
+        <h4 class="heading"> Select Capabilities (Max. 10)</h4>
+        <cn-capibility-list [roles]="roles"  (selectCapabilityWithRole)="selectRole($event)"></cn-capibility-list>
+      </div>
+    </div>
+
+    <!--<div class="section-container"  [hidden]="!isShowComplexity" >
+      <div class="main-content max-height">
+        <h4 class="heading">Choose Complexities</h4>
+        <cn-complexity-list></cn-complexity-list>
+      </div>
+    </div>
+
+    <div class="section-container clearfix profeiciency-domain"  [hidden]="!isShowProficiency">
+      <div class="main-content clearfix">
+        <h4 class="heading">Enter Proficiencies (Max. 25)</h4>
+        <cn-proficiency-doamin [type]="'profeciency'"></cn-proficiency-doamin>
+      </div>
+    </div>
+  -->
+    <div class="section-container clearfix profeiciency-domain">
+      <!-- <div class="">-->
+      <div class="main-content clearfix">
+        <h4 class="heading">Industry (Max. 20)</h4>
+        <cn-industry-experience-list [industries]="industries"  (selectExperiencedIndustry)="selectExperiencedIndustry($event)"></cn-industry-experience-list>
+      </div>
+    </div>
+
     <div class="main-content">
-      <h4 class="heading">Select Industry</h4>
-      <p class="info">Default value set to your own industry. Select a different value if you wish to hire from a different industry background</p>
-      <cn-industry-list [industries]="industries"  (selectIndustry)="selectIndustry($event)" ></cn-industry-list>
+      <div class="section-container col-sm-6" >
+        <div class="max-height">
+          <h4 class="heading">Compentencies (500 Words):</h4>
+          <cn-description-field [type]="'competensies'" [maxLength]=" '500'" ></cn-description-field>
+        </div>
+      </div>
+
+      <div class="section-container col-sm-6" >
+        <div class="max-height">
+          <h4 class="heading">Responsibilities and Derivables (500 Words):</h4>
+          <cn-description-field [type]="'responsibilities'" [maxLength]=" '500'" ></cn-description-field>
+        </div>
+      </div>
+
+      <div class="button-group" >
+        <button type="submit" class="btn btn-primary" (click)="mockupSearch()">Mock Search</button>
+        <button type="submit" class="btn btn-danger" (click)="showHideModal()">Post Job</button>
+      </div>
     </div>
-  </div>
-
-  <div class="section-container" [hidden]="!isShowRoleList">
-    <div class="main-content">
-      <h4 class="heading">Select Area of Work (Max 3)</h4>
-      <p class="info">Select those areas of work which describe what you are best at or where you would like to position your career. Normally, an individual works
-        across maximum 2 to 3 work areas in parallel. You can select upto maximum 3 work areas. Once selected, you would be able to change the work
-        areas only after 3 months.</p>
-      <cn-role-list [roles]="rolesForMain"  (selectRoles)="selectRole($event)"></cn-role-list>
-    </div>
-  </div>
-
-  <div class="section-container" [hidden]="!isShowRoletype">
-    <div class="main-content">
-      <h4 class="heading">Select Role Type (Any one of the following)</h4>
-      <cn-role-type-list [roleTypes]="roleTypes"  (selectRoleType)="selectRoleType($event)"></cn-role-type-list>
-    </div>
-  </div>
-
-
-  <div class="section-container"  [hidden]="!isShowCapability">
-
-    <div class="main-content">
-      <h4 class="heading"> Select Capabilities (Max. 10)</h4>
-      <p class="info">Select those capabilities which are most critical for this job profile.
-        Selecting too many capabilities would dilute the matching and alignment with the best candidate.
-        Hence you should select maximum 10 primary
-        capabilities. You may additionally select upto 10 secondary capabilities.
-        Please note that marking the right capabilities is the key to this hiring solution.
-        Capabilities once selected can’t be changed for a job profile</p>
-      <cn-capibility-list [roles]="rolesForCapability"  (selectCapabilityWithRole)="selectRole($event)"></cn-capibility-list>
-    </div>
-  </div>
-
-  <div class="section-container"  [hidden]="!isShowComplexity" >
-    <div class="main-content max-height">
-      <h4 class="heading">Choose Complexities</h4>
-      <cn-complexity-list [roles]="rolesForComplexity"   (selectComplexityWithRole)="selectRole($event)"></cn-complexity-list>
-    </div>
-  </div>
-
-  <div class="section-container clearfix profeiciency-domain"  [hidden]="!isShowProficiency">
-    <div class="main-content clearfix">
-      <h4 class="heading">Enter Proficiencies (Max. 25)</h4>
-      <cn-proficiency-doamin [type]="'profeciency'"></cn-proficiency-doamin>
-    </div>
-  </div>
-  <div class="section-container clearfix profeiciency-domain"  [hidden]="!isShowProficiency">
-   <!-- <div class="">-->
-      <h4 class="heading">Industry (Max. 20)</h4>
-    <div class="main-content clearfix">
-      <cn-industry-experience-list [industries]="industries"  (selectExperiencedIndustry)="selectExperiencedIndustry($event)"></cn-industry-experience-list>
-    </div>
-  </div>
-
-  <div class="section-container col-sm-6" [hidden]="!isShowProficiency">
-    <div class="max-height">
-      <h4 class="heading">Compentencies (500 Words):</h4>
-      <cn-description-field [type]="'competensies'" [maxLength]=" '500'" ></cn-description-field>
-    </div>
-  </div>
-
-  <div class="section-container col-sm-6" [hidden]="!isShowProficiency">
-    <div class="max-height">
-      <h4 class="heading">Responsibilities and Derivables (500 Words):</h4>
-      <cn-description-field [type]="'responsibilities'" [maxLength]=" '500'" ></cn-description-field>
-    </div>
-  </div>
-
-  <div class="button-group" [hidden]="!isShowProficiency">
-    <button type="submit" class="btn btn-primary" (click)="mockupSearch()">Mock Search</button>
-    <button type="submit" class="btn btn-danger" (click)="showHideModal()">Post Job</button>
   </div>
 </div>
 
