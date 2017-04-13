@@ -10,6 +10,8 @@ import {LocalStorageService} from "../../../framework/shared/localstorage.servic
 import {Message} from "../../../framework/shared/message";
 import {Candidate} from "../model/candidate";
 import {ProfessionalData} from "../model/professional-data";
+import {TestService} from "../test.service";
+import {DisableAwardGlyphiconService} from "../disableGlyphiconAward.service";
 
 
 @Component({
@@ -33,6 +35,7 @@ export class AwardsComponent {
 
 
   constructor( private awardService:AwardService ,
+               private disableAwardGlyphiconService:DisableAwardGlyphiconService,
                private candidateAward:CandidateAwardService,
                private messageService:MessageService,
                private profileCreatorService:ProfileCreatorService) {
@@ -78,8 +81,11 @@ export class AwardsComponent {
 
 
   addAnother() {
+
+
     for(let item of this.candidate.awards) {
       if (item.name ==="" || item.issuedBy ==="" || item.year ==="") {
+        this.disableAwardGlyphiconService.change(true);
        this.disableAddAnother=false;
         this.isShowError=true;
 
@@ -95,7 +101,11 @@ export class AwardsComponent {
   }
   postAwardDetails(){
     this.isShowError=false;
-
+    for(let item of this.candidate.awards) {
+      if (item.name !== "" || item.issuedBy !== "" || item.year !== "") {
+        this.disableAwardGlyphiconService.change(true);
+      }
+    }
     for(let item of this.candidate.awards) {
       if (item.name ==="" || item.issuedBy ==="" || item.year ==="") {
         this.sendPostCall=false;

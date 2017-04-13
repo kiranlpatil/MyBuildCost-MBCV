@@ -20,6 +20,9 @@ import {MessageService} from "../../../framework/shared/message.service";
 import {Message} from "../../../framework/shared/message";
 import {Industry} from "../model/industry";
 import {Role} from "../model/role";
+import {DisableAwardGlyphiconService} from "../disableGlyphiconAward.service";
+import {DisableCertificateGlyphiconService} from "../disableCertificateGlyphicon.service";
+import {DisableAboutMyselfGlyphiconService} from "../disableAboutMyself.service";
 
 @Component({
   moduleId: module.id,
@@ -61,11 +64,17 @@ export class ProfileCreatorComponent implements OnInit {
   private candidateForRole:Role[];
   private candidateForCapability: Role[];
   private candidateForComplexity:Role[];
+  private isHiddenAboutMyself:boolean=false;
+  private isHiddenAwrard:boolean=false;
+  private isHiddenCertificate:boolean=false;
 
 
   constructor(private _router:Router,
               private dashboardService:DashboardService,
               private testService:TestService,
+              private disableAwardGlyphiconService:DisableAwardGlyphiconService,
+              private disableCertificateGlyphiconService:DisableCertificateGlyphiconService,
+              private disableAboutMyselfGlyphiconService:DisableAboutMyselfGlyphiconService,
               private proficiencyService:ProficiencyService,
               private professionalService:ProfessionalService,
               private educationalService:EducationalService,
@@ -84,6 +93,21 @@ export class ProfileCreatorComponent implements OnInit {
       }
     );
 
+    this.disableAboutMyselfGlyphiconService.removeGlyphiconTest$.subscribe(
+      data => {
+        this.isHiddenAboutMyself = data;
+      }
+    );
+    this.disableCertificateGlyphiconService.removeGlyphiconTest$.subscribe(
+      data => {
+        this.isHiddenCertificate = data;
+      }
+    );
+    this.disableAwardGlyphiconService.removeGlyphiconTest$.subscribe(
+      data => {
+        this.isHiddenAwrard = data;
+      }
+    );
     disableService.showTestDisable$.subscribe(
       data=> {
         this.showfield = data;

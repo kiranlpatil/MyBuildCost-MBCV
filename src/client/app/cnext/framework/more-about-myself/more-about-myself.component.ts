@@ -6,6 +6,7 @@ import {LocalStorageService} from "../../../framework/shared/localstorage.servic
 import {LocalStorage} from "../../../framework/shared/constants";
 import {Message} from "../../../framework/shared/message";
 import {Candidate} from "../model/candidate";
+import {DisableAboutMyselfGlyphiconService} from "../disableAboutMyself.service";
 
 @Component({
   moduleId: module.id,
@@ -26,6 +27,7 @@ export class MoreAboutMyselfComponent implements OnInit {
   private remainingWords:number;
   private maxword:number;
   constructor(private aboutMyselfservice:AboutCandidateService,private messageService:MessageService,
+              private disableAboutMyselfGlyphiconService:DisableAboutMyselfGlyphiconService,
               private profileCreatorService:ProfileCreatorService) {
     this.reSize = new Array(1);
   }
@@ -54,6 +56,7 @@ export class MoreAboutMyselfComponent implements OnInit {
     this.messageService.message(message);
   }
   addAboutMyself() {
+    this.disableAboutMyselfGlyphiconService.change(true);
    this.newstringOne= this.candidate.aboutMyself.split(' ');
     this.newstringTwo= this.candidate.aboutMyself.split('.');
     this.newstringThree= this.candidate.aboutMyself.split(',');

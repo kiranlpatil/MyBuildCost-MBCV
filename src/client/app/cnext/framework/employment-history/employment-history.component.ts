@@ -95,7 +95,7 @@ export class EmploymentHistoryComponent {
 
 
   }
-  postEmploymentHistoy(){debugger
+  postEmploymentHistoy(){
     this.isShowError=false;
     for(let item of this.candidate.employmentHistory) {
       var indexOfFromMonth= this.monthList.indexOf(item.from.month);

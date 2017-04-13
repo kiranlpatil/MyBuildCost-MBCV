@@ -123,7 +123,7 @@
         <div class="section-container" [hidden]="chkCertification" [hidden]="!showProfeciency">
           <div class="main-content clearfix" >
             <h4 class="heading">Certification/Accreditation
-              <span class="close-dialog">Close this section if not needed
+              <span class="close-dialog" [hidden]="isHiddenCertificate">Close this section if not needed
             <span class="glyphicon glyphicon-remove" (click)="hideCertification()"></span>
           </span>
             </h4>
@@ -134,7 +134,7 @@
         <div class="section-container" [hidden]="chkAwards" [hidden]="!showProfeciency">
           <div class="main-content clearfix">
             <h4 class="heading">Awards
-              <span class="close-dialog">Close this section if not needed
+              <span class="close-dialog" [hidden]="isHiddenAwrard">Close this section if not needed
             <span class="glyphicon glyphicon-remove" (click)="hideAwards()"></span>
           </span>
             </h4>
@@ -145,7 +145,7 @@
         <div class="section-container" [hidden]="chkAboutMyself" [hidden]="!showProfeciency">
           <div class="main-content clearfix">
             <h4 class="heading">More About Myself(Max 250)
-              <span class="close-dialog">Close this section if not needed
+              <span class="close-dialog" [hidden]="isHiddenAboutMyself">Close this section if not needed
             <span class="glyphicon glyphicon-remove" (click)="hideAboutMyself()"></span>
           </span>
             </h4>

@@ -7,6 +7,7 @@ import {ProfileCreatorService} from "../profile-creator/profile-creator.service"
 import {LocalStorageService} from "../../../framework/shared/localstorage.service";
 import {Message} from "../../../framework/shared/message";
 import {Candidate} from "../model/candidate";
+import {DisableCertificateGlyphiconService} from "../disableCertificateGlyphicon.service";
 
 @Component({
   moduleId: module.id,
@@ -30,6 +31,7 @@ export class CertificationAccreditationComponent {
 
 
   constructor(private messageService:MessageService,
+              private disableCertificateGlyphiconService:DisableCertificateGlyphiconService,
               private profileCreatorService:ProfileCreatorService) {
 
     this.tempfield = new Array(1);
@@ -94,6 +96,12 @@ export class CertificationAccreditationComponent {
 
   postCertificates(){
     this.isShowError=false;
+    for(let item of this.candidate.certifications) {
+      if (item.name !=="" || item.issuedBy !=="" || item.year !=="") {
+        this.disableCertificateGlyphiconService.change(true);
+
+      }
+    }
     for(let item of this.candidate.certifications) {
       if (item.name ==="" || item.issuedBy ==="" || item.year ==="") {
         this.sendPostCall=false;
