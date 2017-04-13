@@ -8,6 +8,7 @@ import {ProfileCreatorService} from "../profile-creator/profile-creator.service"
 import {LocalStorageService} from "../../../framework/shared/localstorage.service";
 import {Message} from "../../../framework/shared/message";
 import {Candidate} from "../model/candidate";
+import {DisableEmployeeHistoryGlyphiconService} from "../disableEmplyeeHistoryGlyphicon.service";
 
 @Component({
   moduleId: module.id,
@@ -31,6 +32,7 @@ export class EmploymentHistoryComponent {
 
 
   constructor(private messageService:MessageService,
+              private disableEmplyeeHistoryGlyphiconService:DisableEmployeeHistoryGlyphiconService,
               private profileCreatorService:ProfileCreatorService) {
     this.tempfield = new Array(1);
     this.currentDate = new Date();
@@ -96,8 +98,16 @@ export class EmploymentHistoryComponent {
 
   }
   postEmploymentHistoy(){
+
+
     this.isShowError=false;
     for(let item of this.candidate.employmentHistory) {
+      if ( (item.companyName ==="" || item.designation ==="" || item.from.month ==="" ||
+        item.from.year ===""||item.to.month ==="" || item.to.year ==="") )
+      {
+this.disableEmplyeeHistoryGlyphiconService.change(true);
+
+      }
       var indexOfFromMonth= this.monthList.indexOf(item.from.month);
       var indexToMonth=this.monthList.indexOf(item.to.month);
 

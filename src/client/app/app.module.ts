@@ -128,6 +128,7 @@ import {JobPosterService} from "./cnext/framework/job-poster/job-poster.service"
 import {DisableAwardGlyphiconService} from "./cnext/framework/disableGlyphiconAward.service";
 import {DisableCertificateGlyphiconService} from "./cnext/framework/disableCertificateGlyphicon.service";
 import {DisableAboutMyselfGlyphiconService} from "./cnext/framework/disableAboutMyself.service";
+import {DisableEmployeeHistoryGlyphiconService} from "./cnext/framework/disableEmplyeeHistoryGlyphicon.service";
 
 @NgModule({
   imports: [
@@ -276,7 +277,8 @@ import {DisableAboutMyselfGlyphiconService} from "./cnext/framework/disableAbout
     ProfileCreatorService,
     DisableAwardGlyphiconService,
     DisableCertificateGlyphiconService,
-    DisableAboutMyselfGlyphiconService
+    DisableAboutMyselfGlyphiconService,
+    DisableEmployeeHistoryGlyphiconService
 
   ],
   bootstrap: [AppComponent]

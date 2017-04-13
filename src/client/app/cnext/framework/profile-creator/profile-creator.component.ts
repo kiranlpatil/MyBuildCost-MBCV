@@ -23,6 +23,7 @@ import {Role} from "../model/role";
 import {DisableAwardGlyphiconService} from "../disableGlyphiconAward.service";
 import {DisableCertificateGlyphiconService} from "../disableCertificateGlyphicon.service";
 import {DisableAboutMyselfGlyphiconService} from "../disableAboutMyself.service";
+import {DisableEmployeeHistoryGlyphiconService} from "../disableEmplyeeHistoryGlyphicon.service";
 
 @Component({
   moduleId: module.id,
@@ -67,12 +68,15 @@ export class ProfileCreatorComponent implements OnInit {
   private isHiddenAboutMyself:boolean=false;
   private isHiddenAwrard:boolean=false;
   private isHiddenCertificate:boolean=false;
+  private isHiddenEmployeehistory:boolean=false;
+  private isTitleFilled:boolean=true;
 
 
   constructor(private _router:Router,
               private dashboardService:DashboardService,
               private testService:TestService,
               private disableAwardGlyphiconService:DisableAwardGlyphiconService,
+              private disableEmplyeeHistoryGlyphiconService:DisableEmployeeHistoryGlyphiconService,
               private disableCertificateGlyphiconService:DisableCertificateGlyphiconService,
               private disableAboutMyselfGlyphiconService:DisableAboutMyselfGlyphiconService,
               private proficiencyService:ProficiencyService,
@@ -93,6 +97,11 @@ export class ProfileCreatorComponent implements OnInit {
       }
     );
 
+    this.disableEmplyeeHistoryGlyphiconService.removeGlyphiconTest$.subscribe(
+      data => {
+        this.isHiddenEmployeehistory = data;
+      }
+    );
     this.disableAboutMyselfGlyphiconService.removeGlyphiconTest$.subscribe(
       data => {
         this.isHiddenAboutMyself = data;
@@ -215,6 +224,7 @@ export class ProfileCreatorComponent implements OnInit {
   selectProficiency(proficiency:string[]){
     this.candidate.proficiencies=proficiency;
     this.saveCandidateDetails();
+    this.whichStepsVisible[3] = true;
   }
 
   getIndustry() {
@@ -315,6 +325,7 @@ export class ProfileCreatorComponent implements OnInit {
     this.candidateForRole = candidateData.data[0].industry.roles;
 
     if (this.candidate.jobTitle !== undefined) {
+      this.isTitleFilled=false;
       this.disableTitle = true;
     }
     if (this.candidate.industry.name !== undefined) {
@@ -341,13 +352,23 @@ export class ProfileCreatorComponent implements OnInit {
         }
       }
     }
-    if (this.candidate.professionalDetails !== undefined) {
+    if (this.candidate.professionalDetails!== undefined && this.candidate.professionalDetails.education!=='') {
       this.whichStepsVisible[4] = true;
     }
-    if (this.candidate.academics.length>0) {
+    if (this.candidate.academics.length > 0 && this.candidate.academics[0].schoolName !=='') {
       this.whichStepsVisible[5] = true;
     }
-    if (this.candidate.awards.length> 0) {
+    if(this.candidate.certifications.length >0 && this.candidate.certifications[0].name!== ''){
+      this.isHiddenCertificate=true;
+    }
+    if(this.candidate.aboutMyself !== undefined && this.candidate.aboutMyself !== ''){
+      this.isHiddenAboutMyself=true;
+    }
+    if(this.candidate.employmentHistory.length>0 && this.candidate.employmentHistory[0].companyName !== ''){
+      this.isHiddenEmployeehistory=true;
+    }
+    if (this.candidate.awards.length >0 && this.candidate.awards[0].name !== '') {
+      this.isHiddenAwrard=true;
       this.whichStepsVisible[6] = true;
     }
   }
@@ -413,6 +434,7 @@ export class ProfileCreatorComponent implements OnInit {
     this.profileCreatorService.addProfileDetail(this.candidate).subscribe(
       user => {
         console.log(user);
+        this.isTitleFilled=false;
       },
       error => {
         this.onError(error)
