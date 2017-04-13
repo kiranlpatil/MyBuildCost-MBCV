@@ -116,6 +116,8 @@ export class ProfileCreatorComponent implements OnInit {
         this.showComplexity = data;
       }
     );
+
+    // this services are for progressbar
     proficiencyService.showTest$.subscribe(
       data=> {
         this.whichStepsVisible[3] = data;
@@ -177,6 +179,7 @@ export class ProfileCreatorComponent implements OnInit {
         if (this.candidate.industry.roles[0].capabilities.length > 0) {
           this.getComplexity();
           this.showComplexity = true;
+          this.whichStepsVisible[2] = true;
         }
       }
     }
@@ -188,6 +191,7 @@ export class ProfileCreatorComponent implements OnInit {
     this.saveCandidateDetails();
     this.getCapability();
     this.showCapability = true;
+    this.whichStepsVisible[1] = true;
 
   }
 
@@ -287,17 +291,20 @@ export class ProfileCreatorComponent implements OnInit {
       this.getRoles();
 
     }
-    if (this.candidate.roleType !== undefined) {
+    if (this.candidate.roleType !== undefined) { debugger
       this.showCapability = true;
       this.getCapability();
+      this.whichStepsVisible[1] = true;
     }
-    if (this.candidate.industry.roles.length > 0) {
+    if (this.candidate.industry.roles.length > 0) { debugger
       this.getRoleType();
       this.isRoleTypeShow = true;
       if (this.candidate.industry.roles[0].capabilities.length >= 1) {
         this.getComplexity();
         this.showComplexity = true;
+        this.whichStepsVisible[2] = true;
         if (this.candidate.industry.roles[0].capabilities[0].complexities.length > 0) {
+          this.whichStepsVisible[3] = true;
           this.showProfeciency = true;
         }
       }

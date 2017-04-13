@@ -21,7 +21,7 @@
       <p class="info">Select those areas of work which describe what you are best at or where you would like to position your career. Normally, an individual works
         across maximum 2 to 3 work areas in parallel. You can select upto maximum 3 work areas. Once selected, you would be able to change the work
         areas only after 3 months.</p>
-      <cn-role-list [roles]="roles"  (selectRoles)="selectRole($event)"></cn-role-list>
+      <cn-role-list [roles]="rolesForMain"  (selectRoles)="selectRole($event)"></cn-role-list>
     </div>
   </div>
 
@@ -43,14 +43,14 @@
         capabilities. You may additionally select upto 10 secondary capabilities.
         Please note that marking the right capabilities is the key to this hiring solution.
         Capabilities once selected can’t be changed for a job profile</p>
-      <cn-capibility-list [roles]="roles"  (selectCapabilityWithRole)="selectRole($event)"></cn-capibility-list>
+      <cn-capibility-list [roles]="rolesForCapability"  (selectCapabilityWithRole)="selectRole($event)"></cn-capibility-list>
     </div>
   </div>
 
-  <!--<div class="section-container"  [hidden]="!isShowComplexity" >
+  <div class="section-container"  [hidden]="!isShowComplexity" >
     <div class="main-content max-height">
       <h4 class="heading">Choose Complexities</h4>
-      <cn-complexity-list></cn-complexity-list>
+      <cn-complexity-list [roles]="rolesForComplexity"   (selectComplexityWithRole)="selectRole($event)"></cn-complexity-list>
     </div>
   </div>
 
@@ -60,8 +60,7 @@
       <cn-proficiency-doamin [type]="'profeciency'"></cn-proficiency-doamin>
     </div>
   </div>
--->
-  <div class="section-container clearfix profeiciency-domain">
+  <div class="section-container clearfix profeiciency-domain"  [hidden]="!isShowProficiency">
    <!-- <div class="">-->
       <h4 class="heading">Industry (Max. 20)</h4>
     <div class="main-content clearfix">

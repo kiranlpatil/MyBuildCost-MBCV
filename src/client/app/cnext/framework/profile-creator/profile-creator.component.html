@@ -1,4 +1,3 @@
-<button class="btn btn-danger btn-logout" style="margin-top: 15px;" (click)="logOut()">Logout</button>
 <div class="create-profile clearfix">
   <div class="bar-container profile-header">
     <ul class="bar container" id="bar">
@@ -71,28 +70,28 @@
           </div>
         </div>
 
-        <div class="section-container clearfix profeiciency-domain" >
+        <div class="section-container clearfix profeiciency-domain" [hidden]="!showProfeciency">
           <div class="main-content">
             <h4 class="heading">Proficiencies (Max. 25)</h4>
             <cn-proficiency-doamin [type]="'profeciency'"></cn-proficiency-doamin>
           </div>
         </div>
 
-        <div class="section-container clearfix profeiciency-domain">
+        <div class="section-container clearfix profeiciency-domain" [hidden]="!showProfeciency">
           <div class="main-content">
             <h4 class="heading">Select Industry In Which You Have work Exposure / Experience</h4>
             <cn-industry-experience-list [industries]="industries" [candidateExperiencedIndustry]="candidate.intrestedIndustries" (selectExperiencedIndustry)="selectExperiencedIndustry($event)"></cn-industry-experience-list>
           </div>
         </div>
 
-        <div class="section-container">
+        <div class="section-container" [hidden]="!showProfeciency">
           <div class="main-content clearfix">
             <h4 class="heading">Professional Data</h4>
             <cn-professional-data [candidate]="candidate"></cn-professional-data>
           </div>
         </div>
 
-        <div class="section-container">
+        <div class="section-container" [hidden]="!showProfeciency" >
           <div class="main-content clearfix"  >
             <h4 class="heading">Employment Histroy
               <span class="close-dialog">Close this section if not needed
@@ -103,15 +102,15 @@
           </div>
         </div>
 
-        <div class="section-container" >
+        <div class="section-container" [hidden]="!showProfeciency">
           <div class="main-content clearfix">
             <h4 class="heading">Academic Details</h4>
             <cn-academic-details [candidate]="candidate" ></cn-academic-details>
           </div>
         </div>
 
-        <div class="section-container" >
-          <div class="main-content clearfix">
+        <div class="section-container" [hidden]="!showProfeciency">
+          <div class="main-content clearfix" >
             <h4 class="heading">Certification/Accreditation
               <span class="close-dialog">Close this section if not needed
             <span class="glyphicon glyphicon-remove" (click)="hideCertification()"></span>
@@ -121,7 +120,7 @@
           </div>
         </div>
 
-        <div class="section-container">
+        <div class="section-container"  [hidden]="!showProfeciency">
           <div class="main-content clearfix">
             <h4 class="heading">Awards
               <span class="close-dialog">Close this section if not needed
@@ -132,7 +131,7 @@
           </div>
         </div>
 
-        <div class="section-container">
+        <div class="section-container"  [hidden]="!showProfeciency">
           <div class="main-content clearfix">
             <h4 class="heading">More About Myself(Max 250)
               <span class="close-dialog">Close this section if not needed
@@ -143,7 +142,7 @@
           </div>
         </div>
 
-        <div class="section-container profile-configurations" >
+        <div class="section-container profile-configurations" [hidden]="!showProfeciency">
           <div class="col-sm-8 no-padding text-left">
             <div class="button-group">
               <button class="btn btn-primary"(click)="onSubmit()" >Submit</button>
