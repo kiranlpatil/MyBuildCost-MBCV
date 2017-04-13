@@ -49,14 +49,14 @@
       </div>
     </div>
 
-    <div class="section-container clearfix profeiciency-domain" >
+    <div class="section-container clearfix profeiciency-domain" [hidden]="!isShowProficiency">
       <div class="main-content clearfix">
         <h4 class="heading">Enter Proficiencies (Max. 25)</h4>
         <cn-proficiency-doamin [proficiencies]="proficiencies" [type]="'profeciency'" (selectProficiency)="selectProficiency($event)"></cn-proficiency-doamin>
       </div>
     </div>
 
-    <div class="section-container clearfix profeiciency-domain">
+    <div class="section-container clearfix profeiciency-domain" [hidden]="!isShowProficiency">
       <!-- <div class="">-->
       <div class="main-content clearfix">
         <h4 class="heading">Industry (Max. 20)</h4>
@@ -64,7 +64,7 @@
       </div>
     </div>
 
-    <div class="main-content">
+    <div class="main-content"  [hidden]="!isShowProficiency">
       <div class="row">
         <div class="section-container col-sm-6" >
           <div class="max-height">
@@ -73,7 +73,7 @@
           </div>
         </div>
 
-        <div class="section-container col-sm-6" >
+        <div class="section-container col-sm-6" [hidden]="!isShowProficiency" >
           <div class="max-height">
             <h4 class="heading">Responsibilities and Derivables (500 Words):</h4>
             <cn-description-field [type]="'responsibilities'" [maxLength]=" '500'" ></cn-description-field>
@@ -81,7 +81,7 @@
         </div>
       </div>
 
-      <div class="button-group" >
+      <div class="button-group" [hidden]="!isShowProficiency">
         <button type="submit" class="btn btn-primary" (click)="mockupSearch()">Mock Search</button>
         <button type="submit" class="btn btn-danger" (click)="showHideModal()">Post Job</button>
       </div>

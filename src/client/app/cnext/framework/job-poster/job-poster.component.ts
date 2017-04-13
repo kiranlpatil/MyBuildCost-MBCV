@@ -249,6 +249,7 @@ export class JobPosterComponent {
         if (this.jobPosterModel.industry.roles[0].capabilities.length > 0) {
           this.getComplexity();
           this.isShowComplexity = true;
+          this.isShowProficiency=true;
         }
       }
     }
@@ -352,6 +353,7 @@ export class JobPosterComponent {
   }
 
   getProficiency(){
+
     this.profileCreatorService.getProficiency(this.jobPosterModel.industry.name)
       .subscribe(
         data => this.proficiencies=data.data,
