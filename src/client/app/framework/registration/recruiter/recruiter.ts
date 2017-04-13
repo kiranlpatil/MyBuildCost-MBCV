@@ -13,7 +13,7 @@ export class Recruiter {
   conform_password : string;
   location:Location;
   companyDetails:CompanyDetails;
-  pin:number;
+  pin:string;
   captcha:string;
   current_theme : string;
   company_logo:string;

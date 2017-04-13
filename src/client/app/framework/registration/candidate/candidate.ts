@@ -9,8 +9,7 @@ export class Candidate {
   mobile_number : string;
   password : string;
   conform_password : string;
-  pin:number;
+  pin:string;
   location :Location;
-
   current_theme : string;
 }

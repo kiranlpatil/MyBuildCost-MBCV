@@ -84,7 +84,7 @@ class CandidateSchema {
         cityName: String,
         state: String,
         country: String,
-        pin: Number
+        pin: String
       },
       academics: [{
         schoolName: String,

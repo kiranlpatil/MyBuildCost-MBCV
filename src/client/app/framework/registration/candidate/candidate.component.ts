@@ -62,7 +62,7 @@ export class CandidateComponent implements OnInit {
           'pin': ['']
         }
         , Validators.required],
-      'pin': ['', [Validators.required, ValidationService.pinValidator]],
+      'pin': ['', [Validators.required]],
       'captcha': ['', Validators.required]
     });
 

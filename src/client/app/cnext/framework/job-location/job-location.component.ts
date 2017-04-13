@@ -16,7 +16,7 @@ import { MyJobLocationService } from '../myjob-location.service';
 export class JobLocationComponent implements OnInit {
   @Output() selectJobLocation=new EventEmitter();
 
-  pin:number;
+  pin:string;
   private jobLocationtion = new JobLocation();
   private storedcountry:string;
   private storedstate:string;

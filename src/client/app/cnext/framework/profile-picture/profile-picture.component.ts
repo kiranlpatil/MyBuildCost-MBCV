@@ -81,10 +81,10 @@ export class ProfilePictureComponent  {
     } else {
       this.image_path = AppSettings.IP + this.model.picture.substring(4).replace('"', '');
     }
-    var message = new Message();
+    /*var message = new Message();
     message.isError = false;
     message.custom_message = Messages.MSG_SUCCESS_DASHBOARD_PROFILE_PIC;
-    this.messageService.message(message);
+    this.messageService.message(message);*/
     this.profileService.onProfileUpdate(result);
   }
 

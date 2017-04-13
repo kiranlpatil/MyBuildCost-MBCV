@@ -81,7 +81,7 @@ export class RecruiterComponent implements OnInit {
           'pin':[''],
         },
         Validators.required],
-      'pin':['',  [Validators.required,ValidationService.pinValidator]],
+      'pin':['',  [Validators.required]],
       'company_headquarter_country':[''],
       'captcha':['',Validators.required]
 

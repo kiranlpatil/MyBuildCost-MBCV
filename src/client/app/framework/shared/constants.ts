@@ -31,7 +31,7 @@ export class Messages {
   public static MSG_SUCCESS_DASHBOARD_PROFILE: string = 'Your profile updated successfully';
   public static MSG_SUCCESS_DASHBOARD_PROFILE_PIC: string = 'Your profile picture updated successfully.';
   public static MSG_SUCCESS_ATTACH_DOCUMENT: string = 'Your document attached successfully.';
-  public static MSG_SUCCESS_UPLOADED_DOCUMENT: string = 'Your document uploaded successfully.';
+  public static MSG_SUCCESS_UPLOADED_DOCUMENT: string = 'Your documents uploaded successfully.';
   public static MSG_SUCCESS_CONTACT: string = 'Email sent successfully.';
   public static MSG_SUCCESS_CHANGE_THEME: string = 'Theme changed successfully.';
   public static MSG_SUCCESS_MAIL_VERIFICATION_RESULT_STATUS: string ='Congratulations!';

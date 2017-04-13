@@ -11,7 +11,7 @@ export class ValidationService {
       'minlength': `Minimum ${validatorValue.requiredLength} characters`,
       'invalidMobile': 'Mobile number should be of 10 digits ',
       'invalidBirthYear': 'Birth year should be of 4 digits ',
-      'invalidPin': 'Pin should be of 6 digits ',
+     // 'invalidPin': 'Pin should be of 6 digits ',
 
     };
     return config[validatorName];
@@ -70,7 +70,7 @@ export class ValidationService {
       return {'invalidBirthYear': true};
     }
   }
-  static pinValidator(control:any) {
+  /*static pinValidator(control:any) {
     var pin = control.value;
     var count = 0;
 
@@ -83,5 +83,5 @@ export class ValidationService {
     } else {
       return {'invalidPin': true};
     }
-  }
+  }*/
 }
