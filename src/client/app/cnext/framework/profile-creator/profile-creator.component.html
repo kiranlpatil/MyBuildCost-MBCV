@@ -153,10 +153,10 @@
             <div class="radio">
               <label>Profile Visibility:</label>
               <label class="radio-inline">
-                <input type="radio" name="profile-visibility" id="optionsRadios2"  [ngModel]="selectedvalue1" (change)="showorhide($event.target.value)" value="option2" checked="checked"> show
+                <input type="radio" name="profile-visibility" id="optionsRadios2"  (change)="showorhide($event.target.value)" value= true checked="{{candidate.isVisible == true}}" > show
               </label>
               <label class="radio-inline">
-                <input type="radio" name="profile-visibility" id="optionsRadios3"  [ngModel]="selectedvalue2" (change)="showorhide($event.target.value)" value="option3" > hide
+                <input type="radio" name="profile-visibility" id="optionsRadios3"  (change)="showorhide($event.target.value)" value= false checked="{{candidate.isVisible == false}}" > hide
               </label>
             </div>
           </div>

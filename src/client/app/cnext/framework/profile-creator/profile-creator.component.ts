@@ -321,13 +321,13 @@ export class ProfileCreatorComponent implements OnInit {
       }
 
     }
-    if (this.candidate.professionalDetails !== undefined) { 
+    if (this.candidate.professionalDetails !== undefined) {
       this.whichStepsVisible[4] = true;
     }
-    if (this.candidate.academics !== undefined) { 
+    if (this.candidate.academics !== undefined) {
       this.whichStepsVisible[5] = true;
     }
-    if (this.candidate.awards !== undefined) { 
+    if (this.candidate.awards !== undefined) {
       this.whichStepsVisible[6] = true;
     }
   }
@@ -359,9 +359,13 @@ export class ProfileCreatorComponent implements OnInit {
   }
 
   showorhide(event:string) {
-
     this.valueOFshowOrHide = event;
-
+    if(event == "true"){
+      this.candidate.isVisible = true;
+    }else{
+      this.candidate.isVisible = false;
+    }
+    this.saveCandidateDetails();
   }
 
   hideEmployeeHistory() {
