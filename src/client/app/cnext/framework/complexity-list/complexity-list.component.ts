@@ -82,7 +82,7 @@ export class ComplexityListComponent {
           }
         }
       }
-      this.selectComplexityWithRole.emit(this.roles);
+     this.selectComplexityWithRole.emit(this.roles);
     }
   }
 

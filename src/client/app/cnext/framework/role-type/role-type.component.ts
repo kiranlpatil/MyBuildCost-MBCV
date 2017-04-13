@@ -14,6 +14,7 @@ export class RoleTypetListComponent {
   @Output() selectRoleType=new EventEmitter();
   private selectedRoletype:string='';
   private showModalStyle: boolean = false;
+  private disableRoletype: boolean=false;
 
   ngOnChanges (changes:any) {
     if (changes.roleTypes != undefined) {
@@ -24,12 +25,13 @@ export class RoleTypetListComponent {
   choosedRoleType(roleType:string) {
     this.selectedRoletype = roleType;
   }
-  
+
   showHideModal() {
     this.showModalStyle = !this.showModalStyle;
   }
-  
+
   disableRoleltype() {
+    this.disableRoletype= true;
     this.showModalStyle = !this.showModalStyle;
     this.selectRoleType.emit(this.selectedRoletype);
   }

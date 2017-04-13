@@ -15,6 +15,7 @@ export class RoleListComponent {
   @Output() selectRoles=new EventEmitter();
   private selectedRoles:Role[] = new Array(0);
   private showModalStyle:boolean = false;
+  private disableRole:boolean = false;
   private candidateRolesList :string[]= new Array(0);
 
   ngOnChanges(changes:any) {
@@ -53,6 +54,7 @@ export class RoleListComponent {
   }
 
   disableRolelist() {
+    this.disableRole= true;
     this.showModalStyle = !this.showModalStyle;
     this.selectRoles.emit(this.selectedRoles);
   }

@@ -16,7 +16,7 @@ export class CapabilityListComponent {
   @Output() selectCapabilityWithRole = new EventEmitter()
   private primaryNames:string[] = new Array(0);
   private secondaryNames:string[] = new Array(0);
-  private primaryCapabilitiesNumber:number = 0
+  private primaryCapabilitiesNumber:number = 0;
 
   ngOnChanges(changes:any) {
     if (changes.roles) {

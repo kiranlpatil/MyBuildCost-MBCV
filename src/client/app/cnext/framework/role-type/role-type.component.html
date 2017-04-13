@@ -5,14 +5,14 @@
   <div>
     <div class="select-option"  *ngFor="let choice of roleTypes;let i = index">
       <label >
-        <input type="radio"  name="choice" id="{{choice}}" value="{{choice}}" [disabled]="candidateRoletype" (click)="choosedRoleType(choice)" [checked]="choice===candidateRoletype"  >
+        <input type="radio"  name="choice" id="{{choice}}" value="{{choice}}" [disabled]="disableRoletype||candidateRoletype" (click)="choosedRoleType(choice)" [checked]="choice===candidateRoletype"  >
         <span>{{choice}}</span>
       </label>
     </div>
   </div>
 
   <div class="button-group clearfix">
-    <button class="btn btn-primary" (click)="showHideModal()" [disabled]="candidateRoletype">Confirm</button>
+    <button class="btn btn-primary" (click)="showHideModal()" [disabled]="disableRoletype||candidateRoletype">Confirm</button>
   </div>
 </div>
 
