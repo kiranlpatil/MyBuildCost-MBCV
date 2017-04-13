@@ -71,6 +71,17 @@ export class ComplexityListComponent {
     selectedScenario.isChecked = true;
     event.target.checked ? this.numberOfComplexitySelected++ : this.numberOfComplexitySelected--;
     if (this.numberOfComplexitySelected >= this.scenaricomplexityNames.length) {
+      for(let rol  of this.candidateRoles){
+        for(let mainrol of this.roles){
+          if(rol.name = mainrol.name){
+            for(let cap of rol.capabilities){
+              if(cap.isSecondary){
+                mainrol.capabilities.push(cap);
+              }
+            }
+          }
+        }
+      }
       this.selectComplexityWithRole.emit(this.roles);
     }
   }

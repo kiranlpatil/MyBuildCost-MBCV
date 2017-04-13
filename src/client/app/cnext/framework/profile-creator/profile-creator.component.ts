@@ -300,12 +300,12 @@ export class ProfileCreatorComponent implements OnInit {
       this.getRoles();
 
     }
-    if (this.candidate.roleType !== undefined) { debugger
+    if (this.candidate.roleType !== undefined) {
       this.showCapability = true;
       this.getCapability();
       this.whichStepsVisible[1] = true;
     }
-    if (this.candidate.industry.roles.length > 0) { debugger
+    if (this.candidate.industry.roles.length > 0) { 
       this.getRoleType();
       this.getProficiency();
       this.isRoleTypeShow = true;
