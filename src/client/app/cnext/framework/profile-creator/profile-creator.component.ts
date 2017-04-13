@@ -186,7 +186,6 @@ export class ProfileCreatorComponent implements OnInit {
     this.getCapability();
     this.showCapability = true;
     this.whichStepsVisible[1] = true;
-
   }
 
   selectProficiency(proficiency:string[]){

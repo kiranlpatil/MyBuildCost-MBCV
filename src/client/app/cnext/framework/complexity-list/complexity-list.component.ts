@@ -56,7 +56,6 @@ export class ComplexityListComponent {
   }
 
   selectComplexity(role:Role, capability :Capability,complexity:Complexity, selectedScenario:Scenario, event:any) {
-    //role.isAPIForComplexity = true;
     for(let rol  of this.candidateRoles){
         for(let cap of rol.capabilities){
           if(cap.name==capability.name){
