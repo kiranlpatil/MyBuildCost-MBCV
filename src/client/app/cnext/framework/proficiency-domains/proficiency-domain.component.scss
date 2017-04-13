@@ -40,4 +40,10 @@ $btn-color: #3695d1;
   }
 }
 
+@media screen and (max-width: 767px) {
+  .proficiency-container {
+    padding: 0;
+  }
+}
+
 

@@ -202,13 +202,15 @@ $secondary-option: #00aed5;
 
 @media screen and (max-width: 767px) {
   .select-option > label {
-    padding: 7px 0;
-
     & > input {
       & + span {
         font-size: 10px;
       }
     }
+  }
+
+  .capabilities {
+    padding: 0;
   }
 
   .btn-primary {

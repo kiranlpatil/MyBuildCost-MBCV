@@ -65,7 +65,7 @@
         </div>
 
         <div class="section-container" [hidden]="!showComplexity">
-          <div class="main-content max-height">
+          <div class="main-content">
             <h4 class="heading">Choose Complexities</h4>
             <cn-complexity-list [roles]="rolesForComplexity" [candidateRoles]="candidateForComplexity" [isComplexityPresent]="isComplexityPresent"  (selectComplexityWithRole)="selectRole($event)"></cn-complexity-list>
           </div>

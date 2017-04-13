@@ -103,9 +103,13 @@ $primary-option: #1c75bd;
 }
 
 @media screen and (max-width: 767px) {
+  .select-industry {
+    padding: 0;
+  }
+  .select-option {
+    margin: 3px 20px 3px 0;
+  }
   .select-option > label {
-    padding: 7px 0;
-
     & > input {
       & + span {
         font-size: 10px;

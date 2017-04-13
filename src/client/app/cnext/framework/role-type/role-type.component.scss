@@ -111,9 +111,11 @@ $primary-option: #1c75bd;
 
 
 @media screen and (max-width: 767px) {
-  .select-option > label {
-    padding: 7px 0;
+  .select-option {
+    margin: 3px 20px 3px 0;
+  }
 
+  .select-option > label {
     & > input {
       & + span {
         font-size: 10px;
@@ -122,6 +124,8 @@ $primary-option: #1c75bd;
   }
 
   .select-role {
+    padding: 0;
+
     .btn-primary {
       float: none;
     }

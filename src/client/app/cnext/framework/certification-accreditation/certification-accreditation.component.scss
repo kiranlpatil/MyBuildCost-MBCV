@@ -78,10 +78,16 @@ label {
 
 @media only screen and (max-width: 767px) {
   .certification {
+    padding: 0;
+
     .col-sm-4,
     .form-control {
       margin: 0;
       width: 100%;
+    }
+
+    .btn-create-profile {
+      margin-top: 15px;
     }
   }
 }

@@ -11,3 +11,13 @@
     width: 100%;
   }
 }
+
+@media only screen and (max-width: 980px) {
+  .col-sm-10 {
+    width: 100%;
+  }
+
+  .more-about-myself {
+    padding: 0;
+  }
+}

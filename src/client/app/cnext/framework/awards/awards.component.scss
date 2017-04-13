@@ -54,10 +54,17 @@ label {
 
 @media only screen and (max-width: 767px) {
   .awards {
+    padding: 0;
+
     .col-sm-4,
-    .form-control {
+    .col-sm-12 {
       margin: 0;
       width: 100%;
+      padding: 0;
+    }
+
+    .btn-create-profile {
+      margin-top: 15px;
     }
   }
 }
