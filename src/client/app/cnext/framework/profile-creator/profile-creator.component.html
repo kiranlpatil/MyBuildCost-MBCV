@@ -22,7 +22,7 @@
             <div class="col-sm-3 text-center">
               <cn-profile-picture></cn-profile-picture>
               <div class="user-name">
-                <span class="profile-name-first"><!--{{firstName}}--> Prajakta</span><span class="profile-name-last"><!--{{lastName}}-->Pawar</span>
+                <span class="profile-name-first">{{firstName}}</span><span class="profile-name-last">{{lastName}}</span>
               </div>
               <!--<div class="button-group">
                 <button class="btn btn-danger" style="margin-top: 15px;" (click)="logOut()">Logout</button>
@@ -42,14 +42,14 @@
           </div>
         </div>
 
-        <div class="section-container"   id="work-area">
+        <div class="section-container" [hidden]="!isRolesShow"  id="work-area">
           <div class="main-content">
             <h4 class="heading">Select Area of Work (Max 3)</h4>
             <cn-role-list [roles]="rolesForMain" [candidateRoles]="candidateForRole" (selectRoles)="selectRole($event)"></cn-role-list>
           </div>
         </div>
 
-        <div class="section-container">
+        <div class="section-container" [hidden]="!isRoleTypeShow">
           <div class="main-content">
             <h4 class="heading">Select Role Type (Any one of the following)</h4>
             <cn-role-type-list [roleTypes]="roleTypes" [candidateRoletype]="candidate.roleType" (selectRoleType)="selectRoleType($event)"></cn-role-type-list>
@@ -57,14 +57,14 @@
         </div>
 
 
-        <div class="section-container" >
+        <div class="section-container" [hidden]="!showCapability">
           <div class="main-content">
             <h4 class="heading">Choose Your Capabilities (Max. 10)</h4>
             <cn-capibility-list [roles]="rolesForCapability" [candidateRoles]="candidateForCapability" (selectCapabilityWithRole)="selectRole($event)"></cn-capibility-list>
           </div>
         </div>
 
-        <div class="section-container">
+        <div class="section-container" [hidden]="!showComplexity">
           <div class="main-content max-height">
             <h4 class="heading">Choose Complexities</h4>
             <cn-complexity-list [roles]="rolesForComplexity" [candidateRoles]="candidateForComplexity" [isComplexityPresent]="isComplexityPresent"  (selectComplexityWithRole)="selectRole($event)"></cn-complexity-list>
@@ -79,13 +79,13 @@
         </div>
 
         <div class="section-container clearfix profeiciency-domain">
-          <div class="main-content clearfix">
+          <div class="main-content">
             <h4 class="heading">Select Industry In Which You Have work Exposure / Experience</h4>
             <cn-industry-experience-list [industries]="industries" [candidateExperiencedIndustry]="candidate.intrestedIndustries" (selectExperiencedIndustry)="selectExperiencedIndustry($event)"></cn-industry-experience-list>
           </div>
         </div>
 
-        <div class="section-container" >
+        <div class="section-container">
           <div class="main-content clearfix">
             <h4 class="heading">Professional Data</h4>
             <cn-professional-data [candidate]="candidate"></cn-professional-data>
@@ -111,7 +111,7 @@
         </div>
 
         <div class="section-container" >
-          <div class="main-content clearfix" >
+          <div class="main-content clearfix">
             <h4 class="heading">Certification/Accreditation
               <span class="close-dialog">Close this section if not needed
             <span class="glyphicon glyphicon-remove" (click)="hideCertification()"></span>
@@ -121,7 +121,7 @@
           </div>
         </div>
 
-        <div class="section-container"  >
+        <div class="section-container">
           <div class="main-content clearfix">
             <h4 class="heading">Awards
               <span class="close-dialog">Close this section if not needed
@@ -132,7 +132,7 @@
           </div>
         </div>
 
-        <div class="section-container"  >
+        <div class="section-container">
           <div class="main-content clearfix">
             <h4 class="heading">More About Myself(Max 250)
               <span class="close-dialog">Close this section if not needed

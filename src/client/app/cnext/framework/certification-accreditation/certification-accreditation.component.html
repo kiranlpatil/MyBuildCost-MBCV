@@ -1,7 +1,7 @@
-<div class="form col-sm-12 no-padding certification" *ngFor="let item of candidate.certifications;let i= index">
+<div class="form col-sm-12 certification" *ngFor="let item of candidate.certifications;let i= index">
 
-  <div class="col-sm-10 no-padding">
-    <div class="col-sm-4 padding-right5">
+  <div class="row">
+    <div class="col-sm-4">
       <div class="form-group">
         <input type="text" class="form-control" [(ngModel)]="item.name"  (change)="postCertificates()" required />
         <label> Name</label>
@@ -16,7 +16,7 @@
     </div>
 
 
-    <div class="col-sm-4 padding-left15">
+    <div class="col-sm-4">
       <label>Year of Certification</label>
       <select class="form-control" [(ngModel)]="item.year" (change)="postCertificates()">
         <option *ngFor="let c of yearList" [selected]="true" [ngValue]="c">{{c}}</option>
@@ -24,20 +24,19 @@
     </div>
   </div>
 
-  <div class="col-sm-10 no-padding">
-    <div>
+  <div class="col-sm-12 no-padding">
       <textarea class="form-control" [(ngModel)]="item.remark" (change)="postCertificates()" Placeholder="Certification/Accreditation"></textarea>
-    </div>
+  </div>
+
+  <div class="clear">
+    <button type="button" id="more_fields" (click)="addAnother()" class="btn btn-create-profile" [disabled]="disbleRole" >
+      Add Another <span>+</span>
+    </button>
+    <div class="error-messages" *ngIf="disbleButton"><p>Fields should not be empty.</p></div>
   </div>
 </div>
 
-<div class="clear">
-  <button type="button" id="more_fields" (click)="addAnother()" class="btn btn-create-profile" [disabled]="disbleRole" >
-    Add Another <span>+</span>
-  </button>
-  <div class="error-messages" *ngIf="disbleButton"><p>Fields should not be empty.</p></div>
 
-</div>
 
 
 
