@@ -21,26 +21,16 @@ export class EmploymentHistoryComponent {
 
   public monthList:string[]= new Array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December');
   error_msg: string;
-  private tempCompanyName:string='';
-  private toYearModel:string;
-  private isShowYearMessage:boolean=false;
-  private tempDesignation:string='';
-  private tempWorkedToMonth:string='';
-  private tempWorkedToYear:string='';
-  private tempWorkedFromMonth:string='';
-  private tempWorkedFromYear:string='';
-  private tempRemarks:string='';
-  private disbleButton:boolean=false;
   private tempfield: string[];
-  private selectedEmploymentHistory = new EmployementHistory();
-  private selectedEmploysHistory :EmployementHistory[]=new Array();
   private year: any;
   private currentDate: any;
   private yearList = new Array();
+  private disableAddAnother:boolean=true;
+  private sendPostCall:boolean=false;
+  private isShowError:boolean=false;
 
 
-  constructor(private employmentHistroyservice:EmploymentHistoryService,
-              private messageService:MessageService,
+  constructor(private messageService:MessageService,
               private profileCreatorService:ProfileCreatorService) {
     this.tempfield = new Array(1);
     this.currentDate = new Date();
@@ -59,7 +49,7 @@ export class EmploymentHistoryComponent {
     }
   }
 
-  ngOnChanges(changes :any){debugger
+  ngOnChanges(changes :any){
     if(this.candidate.employmentHistory.length == 0){
       this.candidate.employmentHistory.push(new EmployementHistory());
     }
@@ -80,120 +70,62 @@ export class EmploymentHistoryComponent {
 
   }
 
-  comPanyName(companyname:string) {
-    this.tempCompanyName=companyname;
-    this.selectedEmploymentHistory.companyName=this.tempCompanyName;
-    this.postEmploymentHistoy();
-  }
-
-  deSignation(designation:string) {
-    this.tempDesignation=designation;
-    this.selectedEmploymentHistory.designation=this.tempDesignation;
-    this.postEmploymentHistoy();
-
-  }
-
-
-
-  reMark(remark:string) {
-    this.tempRemarks=remark;
-    this.selectedEmploymentHistory.remarks=this.tempRemarks;
-    this.postEmploymentHistoy();
-
-  }
-
-  selectedworkfromMonthModel(newval: any) {
-    this.isShowYearMessage=false;
-    this.tempWorkedFromMonth=newval;
-    this.selectedEmploymentHistory.from.month=this.tempWorkedFromMonth;
-    this.postEmploymentHistoy();
-
-  }
-
-  selectedworkfromYearModel(newval: any) {
-    this.isShowYearMessage=false;
-    this.tempWorkedFromYear=newval;
-    this.selectedEmploymentHistory.from.year=this.tempWorkedFromYear;
-    this.postEmploymentHistoy();
-
-  }
-
-  selectedworktoMonthModel(newval: any) {
-    this.isShowYearMessage=false;
-    this.tempWorkedToMonth=newval;
-    this.selectedEmploymentHistory.to.month=this.tempWorkedToMonth;
-    this.postEmploymentHistoy();
-
-
-  }
-
-  selectedworktoYearModel(newval: any) {
-    this.isShowYearMessage=false;
-       this.tempWorkedToYear=newval;
-       this.selectedEmploymentHistory.to.year=this.tempWorkedToYear;
-        this.postEmploymentHistoy();
-
-  }
   addAnother() {
-    /*if(this.tempCompanyName==='' || this.tempDesignation==='' ||
-      this.tempWorkedToMonth==='' || this.tempWorkedToYear==='' ||
-      this.tempWorkedFromMonth===''||this.tempWorkedFromYear===''||
-      this.tempRemarks==='' ) {
-      this.disbleButton=true;
-    } else {
-      if (this.tempWorkedToYear < this.selectedEmploymentHistory.from.year ||
-        (this.selectedEmploymentHistory.from.month === this.selectedEmploymentHistory.to.month
-        &&
-        (this.tempWorkedToYear === this.selectedEmploymentHistory.from.year)) || (this.tempWorkedToYear === this.selectedEmploymentHistory.from.year &&
-        (this.monthList.indexOf(this.tempWorkedToMonth) < this.monthList.indexOf(this.tempWorkedFromMonth) ))) {
-        this.isShowYearMessage = true;
-        this.toYearModel = '';
 
-      } else {
-        this.disbleButton = false;
-        this.isShowYearMessage = false;
-        let temp = new EmployementHistory();
-        temp.companyName = this.tempCompanyName;
-        temp.designation = this.tempDesignation;
-        temp.remarks = this.tempRemarks;
-        temp.from.month = this.tempWorkedFromMonth;
-        temp.from.year = this.tempWorkedFromYear;
-        temp.to.month = this.tempWorkedToMonth;
-        temp.to.year = this.tempWorkedToYear;
-        this.selectedEmploysHistory.push(temp);
-        console.log(this.selectedEmploysHistory);
+    for(let item of this.candidate.employmentHistory) {
+                  var indexOfFromMonth= this.monthList.indexOf(item.from.month);
+                    var indexToMonth=this.monthList.indexOf(item.to.month);
 
-        this.tempCompanyName = '';
-        this.tempDesignation = '';
-        this.tempWorkedToMonth = '';
-        this.tempWorkedToYear = '';
-        this.tempWorkedFromMonth = '';
-        this.tempWorkedFromYear = '';
-        this.tempRemarks = '';
-        this.tempfield.push('null');
-        this.selectedEmploymentHistory = new EmployementHistory()
+      if ( (item.companyName ==="" || item.designation ==="" || item.from.month ==="" ||
+          item.from.year ===""||item.to.month ==="" || item.to.year ==="") ||
 
-      }}*/
-    this.candidate.employmentHistory.push(new EmployementHistory());
+        (indexOfFromMonth===indexToMonth && item.from.year >= item.to.year) ||(item.from.year > item.to.year)||
+
+        (indexOfFromMonth >= indexToMonth && item.from.year===item.to.year)) {
+        this.disableAddAnother=false;
+        this.isShowError=true;
+
+      }
+    }
+    if(this.disableAddAnother===true)
+    {
+      this.candidate.employmentHistory.push(new EmployementHistory());
+    }
+    this.disableAddAnother=true;
+
+
   }
-      postEmploymentHistoy()
-      {
+  postEmploymentHistoy(){
+    this.isShowError=false;
+    for(let item of this.candidate.employmentHistory) {
+      var indexOfFromMonth= this.monthList.indexOf(item.from.month);
+      var indexToMonth=this.monthList.indexOf(item.to.month);
 
-        /*if (this.selectedEmploymentHistory.companyName !== '' && this.selectedEmploymentHistory.designation !== '' &&
-          this.selectedEmploymentHistory.from.month !== '' && this.selectedEmploymentHistory.from.year !== '' &&
-          this.selectedEmploymentHistory.to.month !== '' && this.selectedEmploymentHistory.to.year !== '' && this.selectedEmploymentHistory.remarks !== '') {
-          this.candidate.employmentHistory.push(this.selectedEmploymentHistory);*/
-          this.profileCreatorService.addProfileDetail(this.candidate).subscribe(
-            user => {
-              console.log(user);
-            },
-            error => {
-              console.log(error);
-            });
-        /*}*/
+      if ( (item.companyName ==="" || item.designation ==="" || item.from.month ==="" ||
+        item.from.year ===""||item.to.month ==="" || item.to.year ==="") ||
+
+        (indexOfFromMonth===indexToMonth && item.from.year >= item.to.year) ||(item.from.year > item.to.year)||
+
+        (indexOfFromMonth >= indexToMonth && item.from.year===item.to.year)) {
+        this.sendPostCall=false;
+
+      }
+    }
+    if(this.sendPostCall===true)
+    {
+      this.profileCreatorService.addProfileDetail(this.candidate).subscribe(
+        user => {
+          console.log(user);
+        },
+        error => {
+          console.log(error);
+        });
+    }
+    this.sendPostCall=true;
+
       }
 
-    }
+  }
 
 
 

@@ -18,12 +18,12 @@
     <div class="worked-from col-sm-12 no-padding">
       <label>From Date</label>
       <div class="col-sm-6 padding-right15">
-        <select class="form-control" [(ngModel)]="item.from.month" (change)="postCertificates()">
+        <select class="form-control" [(ngModel)]="item.from.month" (change)="postEmploymentHistoy()">
           <option *ngFor="let c of monthList" [selected]="true" [ngValue]="c">{{c}}</option>
         </select>
       </div>
       <div class="col-sm-6 padding-left15">
-       <select class="form-control" [(ngModel)]="item.from.year" (change)="postCertificates()">
+       <select class="form-control" [(ngModel)]="item.from.year" (change)="postEmploymentHistoy()">
           <option *ngFor="let c of yearList" [selected]="true" [ngValue]="c">{{c}}</option>
         </select>
       </div>
@@ -32,12 +32,12 @@
     <div class="worked-to col-sm-12 no-padding">
       <label>To Date</label>
       <div class="col-sm-6 padding-right15">
-        <select class="form-control" [(ngModel)]="item.to.month" (change)="postCertificates()">
+        <select class="form-control" [(ngModel)]="item.to.month" (change)="postEmploymentHistoy()">
           <option *ngFor="let c of monthList" [selected]="true" [ngValue]="c">{{c}}</option>
         </select>
       </div>
       <div class="col-sm-6 padding-left15">
-        <select class="form-control" [(ngModel)]="item.to.year" (change)="postCertificates()">
+        <select class="form-control" [(ngModel)]="item.to.year" (change)="postEmploymentHistoy()">
           <option *ngFor="let c of yearList" [selected]="true" [ngValue]="c">{{c}}</option>
         </select>
       </div>
@@ -49,15 +49,15 @@
         <textarea class="form-control" [(ngModel)]="item.remarks" (change)="postEmploymentHistoy()" Placeholder="Remark"></textarea>
       </div>
   </div>
-
+</div>
   <div class="clear">
     <button type="button" id="more_fields" (click)="addAnother()" class="btn btn-create-profile"  >
       Add Another <span>+</span>
     </button>
     <div class="error-messages" *ngIf="isShowYearMessage"><p>Please fill valid month or year.</p></div>
-    <div class="error-messages" *ngIf="disbleButton"><p>Fields should not be empty.</p></div>
+    <div class="error-messages" *ngIf="isShowError"><p>Fields should not be empty Or Dates are not valid</p></div>
   </div>
-</div>
+
 
 
 

@@ -44,9 +44,6 @@ export class ProfileCreatorComponent implements OnInit {
   whichStepsVisible:boolean[] = new Array(7);
   firstName:string;
   lastName:string;
-  protected selectedvalue1:string;
-  protected selectedvalue2:string;
-  private fullName:string;
   private newUser:number;
   private chkEmployeeHistory:boolean = false;
   private valueOFshowOrHide:string;
@@ -59,15 +56,12 @@ export class ProfileCreatorComponent implements OnInit {
   private isRolesShow:boolean = false;
   private showfield:boolean = false;
   private isRoleTypeShow:boolean = false;
-  private title:string = '';
-  private jobTitle = new JobTitle();
-  private isTitleFilled:boolean = true;
-  private isShowRequired:boolean = true;
   private disableTitle:boolean = false;
   private candidate:Candidate = new Candidate();
   private candidateForRole:Role[];
   private candidateForCapability: Role[];
   private candidateForComplexity:Role[];
+
 
   constructor(private _router:Router,
               private dashboardService:DashboardService,

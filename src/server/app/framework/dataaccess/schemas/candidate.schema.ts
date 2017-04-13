@@ -37,7 +37,7 @@ class CandidateSchema {
       },
       certifications: [{
         name: String,
-        year : String,
+        year : Number,
         issuedBy : String,
         remark : String
       }],
@@ -46,7 +46,7 @@ class CandidateSchema {
       },
       awards: [{
         name: String,
-        year : String,
+        year : Number,
         issuedBy : String,
         remark : String
       }],
@@ -104,11 +104,11 @@ class CandidateSchema {
         designation: String,
         from: {
           month: String,
-          year: String
+          year: Number
         },
         to: {
           month: String,
-          year: String
+          year: Number
         },
         remarks: String
       }],

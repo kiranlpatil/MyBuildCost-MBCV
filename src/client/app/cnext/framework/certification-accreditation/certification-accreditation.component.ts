@@ -19,16 +19,14 @@ export class CertificationAccreditationComponent {
   @Input() candidate:Candidate;
 
   private tempfield: string[];
-  private tempCertificateName:string='';
-  private tempCompanyName:string='';
-  private tempYear:string='';
-  private tempdetails:string='';
-  private selectedcertificates:Certifications[]=new Array();
-  private newCertificate=new Certifications();
-  private disbleButton:boolean=false;
   private year: any;
   private currentDate: any;
   private yearList = new Array();
+  private   disableAddAnother:boolean=true;
+  private sendPostCall:boolean=false;
+  private isShowError:boolean=false;
+
+
 
 
   constructor(private messageService:MessageService,
@@ -73,37 +71,37 @@ export class CertificationAccreditationComponent {
   }
 
 
-  addedCertification(certificate:any) {
-    this.tempdetails=certificate;
-    this.newCertificate.remark=certificate;
-    this.postCertificates();
-  }
+
 
 
 
 
 
   addAnother() {
-    /*if(this.tempCertificateName==='' || this.tempCompanyName==='' ||
-      this.tempYear===''|| this.tempdetails==='') {
-      this.disbleButton=true;
-    } else {
-      this.disbleButton = false;
-    /!*  this.tempfield.push('null');*!/
-      this.tempCertificateName='';
-      this.tempCompanyName='' ;
-      this.tempYear='';
-      this.tempdetails='';
+    for(let item of this.candidate.certifications) {
+      if (item.name ==="" || item.issuedBy ==="" || item.year ==="") {
+        this.disableAddAnother=false;
+        this.isShowError=true;
+
+      }
     }
-    this.tempfield.push('null');
-    this.newCertificate=new Certifications();*/
-    this.candidate.certifications.push(new Certifications());
+    if(this.disableAddAnother===true)
+    {
+      this.candidate.certifications.push(new Certifications());
+    }
+    this.disableAddAnother=true;
   }
 
   postCertificates(){
-   /* if(this.newCertificate.remark!=='' && this.newCertificate.year!=='' &&
-      this.newCertificate.issuedby!=='' &&  this.newCertificate.name!==''){
-      this.candidate.certifications.push(this.newCertificate);*/
+    this.isShowError=false;
+    for(let item of this.candidate.certifications) {
+      if (item.name ==="" || item.issuedBy ==="" || item.year ==="") {
+        this.sendPostCall=false;
+
+      }
+    }
+    if(this.sendPostCall===true)
+    {
       this.profileCreatorService.addProfileDetail(this.candidate).subscribe(
         user => {
           console.log(user);
@@ -111,6 +109,9 @@ export class CertificationAccreditationComponent {
         error => {
           console.log(error);
         });
-    /*}*/
+    }
+    this.sendPostCall=true;
+
+
   }
 }

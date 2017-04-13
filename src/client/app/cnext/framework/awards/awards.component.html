@@ -2,7 +2,7 @@
 
   <div class="col-sm-12 no-padding">
 
-    <div class="col-sm-4">
+    <div class="col-sm-4 padding-right15">
       <div class="form-group">
         <input type="text" class="form-control" [(ngModel)]="item.name"(change)="postAwardDetails()"  (focus)="changeValue()" required />
         <label>Title</label>
@@ -26,16 +26,15 @@
 
   <div class="col-sm-12">
     <textarea class="form-control" [(ngModel)]="item.remark"(change)="postAwardDetails()" placeholder="Enter Awards Details" class="form-control"></textarea>
-
-    <div class="clear">
-      <button type="button" id="more_fields" (click)="addAnother()" class="btn btn-create-profile" [disabled]="disbleRole" >
-        Add Another <span>+</span>
-      </button>
-      <div class="error-messages" *ngIf="disbleButton"><p>Fields should not be empty.</p></div>
-    </div>
   </div>
 </div>
-
+</div>
+<div class="clear">
+  <button type="button" id="more_fields" (click)="addAnother()" class="btn btn-create-profile"  >
+    Add Another <span>+</span>
+  </button>
+  <div class="error-messages" *ngIf="isShowError"><p>Fields should not be empty.</p></div>
+</div>
 
 
 

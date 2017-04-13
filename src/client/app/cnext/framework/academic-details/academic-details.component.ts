@@ -23,12 +23,13 @@ export class AcademicDetailComponent {
   private year: any;
   private currentDate: any;
   private yearList = new Array();
-  private selectedacademicsdeatils:Academicdetails=new Academicdetails() ;
-  private disbleButton:boolean=false;
   private tempSchoolName:string='';
   private tempUnivercityName:string='';
   private tempPassingYear:string='';
   private  tempSpecialization:string='';
+  private disableAddAnother:boolean=true;
+  private sendPostCall:boolean=false;
+  private isShowError:boolean=false;
 
 
 
@@ -105,41 +106,41 @@ export class AcademicDetailComponent {
 
 
   addAnother() {
-   /* if(this.tempSchoolName==='' || this.tempUnivercityName==='' ||
-      this.tempPassingYear==='' || this.tempSpecialization==='' ) {
-      this.disbleButton=true;
-    } else {
-      this.disbleButton = false;
-      let temp=new Academicdetails();
-      temp.schoolName=this.tempSchoolName;
-      temp.board=this.tempUnivercityName;
-      temp.yearOfPassing=this.tempPassingYear;
-      temp.specialization=this.tempSpecialization;
-      //this.selectedacademicsdeatils.push(temp);
-      console.log(this.selectedacademicsdeatils);
-     /!* this.tempfield.push('null');*!/
-      this.tempSchoolName='';
-      this.tempUnivercityName='';
-      this.tempPassingYear='';
-      this.tempSpecialization='';
+    for(let item of this.candidate.academics) {
+      if (item.board ==="" || item.schoolName ==="" || item.yearOfPassing ==="") {
+        this.disableAddAnother=false;
+        this.isShowError=true;
 
-    this.tempfield.push('null');
-    this.newAcademicDetails=new Academicdetails();
-    }*/
-    this.candidate.academics.push(new Academicdetails());
+      }
+    }
+    if(this.disableAddAnother===true)
+    {
+      this.candidate.academics.push(new Academicdetails());
+    }
+    this.disableAddAnother=true;
+
   }
 
   postAcademicDetails(){
-   /* if(this.newAcademicDetails.board!=='' && this.newAcademicDetails.schoolName!=='' &&
-        this.newAcademicDetails.yearOfPassing!=='' && this.newAcademicDetails.specialization!==''){
-      this.candidate.academics.push(this.newAcademicDetails);*/
+    this.isShowError=false;
+    for(let item of this.candidate.academics) {
+      if (item.board ==="" || item.schoolName ==="" || item.yearOfPassing ==="") {
+        this.sendPostCall=false;
+
+      }
+    }
+    if(this.sendPostCall===true)
+    {
       this.profileCreatorService.addProfileDetail(this.candidate).subscribe(
-      user => {
-        console.log(user);
-      },
-      error => {
-        console.log(error);
-      });
-  /*}*/
+        user => {
+          console.log(user);
+        },
+        error => {
+          console.log(error);
+        });
+    }
+    this.sendPostCall=true;
+
+
   }
 }

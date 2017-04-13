@@ -23,15 +23,13 @@ export class AwardsComponent {
   @Input() candidate:Candidate;
   public monthList = new Array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December');
   private tempfield: string[];
-  private temptitle:string='';
-  private tempmonth:string='';
-  private tempyear:string='';
-  private tempremark:string='';
-  private selectedawards: Award[]=new Array();
-  private disbleButton:boolean=false;
   private year: any;
   private currentDate: any;
   private yearList = new Array();
+  private disableAddAnother:boolean=true;
+  private sendPostCall:boolean=false;
+  private isShowError:boolean=false;
+
 
 
   constructor( private awardService:AwardService ,
@@ -80,34 +78,32 @@ export class AwardsComponent {
 
 
   addAnother() {
-    /*if (this.temptitle!=='' && this.tempmonth!=='' &&
-      this.tempyear!=='' && this.tempremark!=='') {
-      console.log(this.selectedawards);
+    for(let item of this.candidate.awards) {
+      if (item.name ==="" || item.issuedBy ==="" || item.year ==="") {
+       this.disableAddAnother=false;
+        this.isShowError=true;
 
-      this.disbleButton = false;
-      this.tempfield.push('null');
-      this.temptitle='' ;
-      this.tempmonth ='' ;
-      this.tempremark ='' ;this.tempyear='';
-      this.candidateAward.addCandidateAward(this.selectedawards)
-        .subscribe(
-          user => console.log(user),
-          error => console.log(error))
+      }
+    }
+    if(this.disableAddAnother===true)
+    {
 
-    } else {
-      this.disbleButton = true;
-    }*/
+      this.candidate.awards.push(new Award());
+    }
+    this.disableAddAnother=true;
 
-/*
-    this.newAward=new Award();
-*/
-
-this.candidate.awards.push(new  Award());
   }
   postAwardDetails(){
- /*  if(this.newAward.remark!=='' &&this.newAward.issuedBy!=='' &&
-      this.newAward.names!=='' &&this.newAward.year!==''){
-      this.candidate.awards.push(this.newAward);*!/*/
+    this.isShowError=false;
+
+    for(let item of this.candidate.awards) {
+      if (item.name ==="" || item.issuedBy ==="" || item.year ==="") {
+        this.sendPostCall=false;
+
+      }
+    }
+    if(this.sendPostCall===true)
+    {
       this.profileCreatorService.addProfileDetail(this.candidate).subscribe(
         user => {
           console.log(user);
@@ -115,8 +111,9 @@ this.candidate.awards.push(new  Award());
         error => {
           console.log(error);
         });
-/*
     }
-*/
+    this.sendPostCall=true;
+
+
   }
 }

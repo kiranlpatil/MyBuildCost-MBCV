@@ -266,7 +266,7 @@ export class JobPosterComponent {
     this.isShowCapability = true;
   }
 
-  selectProficiency(proficiency:string[]){debugger
+  selectProficiency(proficiency:string[]){
     this.jobPosterModel.profiencies=proficiency;
   console.log("proficiency",proficiency);
     console.log("proficiency",this.jobPosterModel.profiencies);

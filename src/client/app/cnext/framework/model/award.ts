@@ -1,5 +1,5 @@
 export class Award {
-  names:string='';
+  name:string='';
   year:string='';
   issuedBy:string='';
   remark:string='';
