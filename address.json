@@ -249,6 +249,50 @@
             "Mumbai",
             "Pune"
           ]
+        },
+        {
+          "name": "Andaman and Nicobar Islands",
+          "cities": [
+            "Andaman and Nicobar Islands"
+          ]
+        },
+        {
+          "name": "Chandigarh",
+          "cities": [
+            "Chandigarh"
+          ]
+        },
+        {
+          "name": "Dadar and Nagar Haveli",
+          "cities": [
+            "Dadar",
+            "Nagar Haveli"
+          ]
+        },
+        {
+          "name": "Daman and diu",
+          "cities": [
+            "Daman",
+            "Diu"
+          ]
+        },
+        {
+          "name": "Delhi",
+          "cities": [
+            "Delhi"
+          ]
+        },
+        {
+          "name": "Lakshadweep",
+          "cities": [
+            "Lakshadweep"
+          ]
+        },
+        {
+          "name": "Puducherry",
+          "cities": [
+            "Puducherry"
+          ]
         }
       ]
     },
@@ -256,10 +300,10 @@
       "country": "USA",
       "states": [
         {
-          "name": "Florida",
+          "name": "Alabama",
           "cities": [
-            "Miami",
-            "Tampa"
+            "Mountain Brook",
+            "Vestavia Hills"
           ]
         },
         {
@@ -267,6 +311,41 @@
           "cities": [
             "Losangeles",
             "Hawaii"
+          ]
+        },
+        {
+          "name": "Arizona",
+          "cities": [
+            "Carefree",
+            "Scottsdale"
+          ]
+        },
+        {
+          "name": "Arkansas",
+          "cities": [
+            "Bentonville",
+            "Lowell"
+          ]
+        },
+        {
+          "name": "Colorado",
+          "cities": [
+            "Columbine Valley",
+            "Superior"
+          ]
+        },
+        {
+          "name": "Connecticut",
+          "cities": [
+            "Ridgefield",
+            "Old Greenwich"
+          ]
+        },
+        {
+          "name": "Florida",
+          "cities": [
+            "Jupiter Inlet Colony",
+            "Tierra Verde"
           ]
         }
       ]
