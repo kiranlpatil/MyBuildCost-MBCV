@@ -1,11 +1,13 @@
-<p class="info">An individual may be exposed to multiple industries during the professional life. At times, organisations need individuals who have cross industry expertise. Select such industries where you can claim a reasonable
-  exposure.<span class="error-messages">You can edit this list anytime.</span></p>
+<div class="col-sm-12">
+  <p class="info">An individual may be exposed to multiple industries during the professional life. At times, organisations need individuals who have cross industry expertise. Select such industries where you can claim a reasonable
+    exposure.<span class="error-messages">You can edit this list anytime.</span></p>
 
-<div>
-  <div class="select-option"  *ngFor="let choice of industries;let i = index">
-    <label >
-      <input type="checkbox"  name="choice.name" value="{{choice.name}}" (click)="selectIndustryModel(choice.name,$event)" [checked]="candidateExperiencedIndustry.indexOf(choice.name)!=-1"  >
-      <span>{{choice.name}}</span>
-    </label>
+  <div>
+    <div class="select-option"  *ngFor="let choice of industries;let i = index">
+      <label >
+        <input type="checkbox"  name="choice.name" value="{{choice.name}}" (click)="selectIndustryModel(choice.name,$event)" [checked]="candidateExperiencedIndustry.indexOf(choice.name)!=-1"  >
+        <span>{{choice.name}}</span>
+      </label>
+    </div>
   </div>
 </div>

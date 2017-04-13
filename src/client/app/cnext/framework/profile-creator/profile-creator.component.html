@@ -1,6 +1,7 @@
+<button class="btn btn-danger btn-logout" style="margin-top: 15px;" (click)="logOut()">Logout</button>
 <div class="create-profile clearfix">
   <div class="bar-container profile-header">
-    <ul class="bar" id="bar">
+    <ul class="bar container" id="bar">
       <li class="active"><p>Enter Roles</p></li>
       <li [class.active]="whichStepsVisible[1]"><p>Describe Roles</p></li>
       <li [class.active]="whichStepsVisible[2]"> <p>Proficiency Level</p></li>
@@ -21,7 +22,7 @@
             <div class="col-sm-3 text-center">
               <cn-profile-picture></cn-profile-picture>
               <div class="user-name">
-                <span class="profile-name-first">{{firstName}}</span><span class="profile-name-last">{{lastName}}</span>
+                <span class="profile-name-first"><!--{{firstName}}--> Prajakta</span><span class="profile-name-last"><!--{{lastName}}-->Pawar</span>
               </div>
               <!--<div class="button-group">
                 <button class="btn btn-danger" style="margin-top: 15px;" (click)="logOut()">Logout</button>
@@ -41,14 +42,14 @@
           </div>
         </div>
 
-        <div class="section-container" [hidden]="!isRolesShow"  id="work-area">
+        <div class="section-container"   id="work-area">
           <div class="main-content">
             <h4 class="heading">Select Area of Work (Max 3)</h4>
             <cn-role-list [roles]="rolesForMain" [candidateRoles]="candidateForRole" (selectRoles)="selectRole($event)"></cn-role-list>
           </div>
         </div>
 
-        <div class="section-container" [hidden]="!isRoleTypeShow">
+        <div class="section-container">
           <div class="main-content">
             <h4 class="heading">Select Role Type (Any one of the following)</h4>
             <cn-role-type-list [roleTypes]="roleTypes" [candidateRoletype]="candidate.roleType" (selectRoleType)="selectRoleType($event)"></cn-role-type-list>
@@ -56,14 +57,14 @@
         </div>
 
 
-        <div class="section-container" [hidden]="!showCapability">
+        <div class="section-container" >
           <div class="main-content">
             <h4 class="heading">Choose Your Capabilities (Max. 10)</h4>
             <cn-capibility-list [roles]="rolesForCapability" [candidateRoles]="candidateForCapability" (selectCapabilityWithRole)="selectRole($event)"></cn-capibility-list>
           </div>
         </div>
 
-        <div class="section-container" [hidden]="!showComplexity">
+        <div class="section-container">
           <div class="main-content max-height">
             <h4 class="heading">Choose Complexities</h4>
             <cn-complexity-list [roles]="rolesForComplexity" [candidateRoles]="candidateForComplexity" [isComplexityPresent]="isComplexityPresent"  (selectComplexityWithRole)="selectRole($event)"></cn-complexity-list>
@@ -78,14 +79,14 @@
         </div>
 
         <div class="section-container clearfix profeiciency-domain">
-          <div class="main-content">
+          <div class="main-content clearfix">
             <h4 class="heading">Select Industry In Which You Have work Exposure / Experience</h4>
             <cn-industry-experience-list [industries]="industries" [candidateExperiencedIndustry]="candidate.intrestedIndustries" (selectExperiencedIndustry)="selectExperiencedIndustry($event)"></cn-industry-experience-list>
           </div>
         </div>
 
         <div class="section-container" >
-          <div class="main-content">
+          <div class="main-content clearfix">
             <h4 class="heading">Professional Data</h4>
             <cn-professional-data [candidate]="candidate"></cn-professional-data>
           </div>
@@ -103,7 +104,7 @@
         </div>
 
         <div class="section-container" >
-          <div class="main-content">
+          <div class="main-content clearfix">
             <h4 class="heading">Academic Details</h4>
             <cn-academic-details [candidate]="candidate" ></cn-academic-details>
           </div>
@@ -121,7 +122,7 @@
         </div>
 
         <div class="section-container"  >
-          <div class="main-content">
+          <div class="main-content clearfix">
             <h4 class="heading">Awards
               <span class="close-dialog">Close this section if not needed
             <span class="glyphicon glyphicon-remove" (click)="hideAwards()"></span>
@@ -132,7 +133,7 @@
         </div>
 
         <div class="section-container"  >
-          <div class="main-content">
+          <div class="main-content clearfix">
             <h4 class="heading">More About Myself(Max 250)
               <span class="close-dialog">Close this section if not needed
             <span class="glyphicon glyphicon-remove" (click)="hideAboutMyself()"></span>
@@ -144,19 +145,19 @@
 
         <div class="section-container profile-configurations" >
           <div class="col-sm-8 no-padding text-left">
+            <div class="button-group">
+              <button class="btn btn-primary"(click)="onSubmit()" >Submit</button>
+              <button class="btn btn-default">Cancel</button>
+            </div>
+            <div class="info"><p>In case you wish to hide your profile visibility from recruiters, select hide option above. You can also choose to show your profile later.</p></div>
             <div class="radio">
               <label>Profile Visibility:</label>
               <label class="radio-inline">
-                <input type="radio" name="profile-visibility" id="optionsRadios2"  [ngModel]="selectedvalue1" (change)="showorhide($event.target.value)" value="option2"> show
+                <input type="radio" name="profile-visibility" id="optionsRadios2"  [ngModel]="selectedvalue1" (change)="showorhide($event.target.value)" value="option2" checked="checked"> show
               </label>
               <label class="radio-inline">
                 <input type="radio" name="profile-visibility" id="optionsRadios3"  [ngModel]="selectedvalue2" (change)="showorhide($event.target.value)" value="option3" > hide
               </label>
-            </div>
-            <div class="info"><p>In case you wish to hide your profile visibility from recruiters, select hide option above.<br />You can also choose to show your profile later.</p></div>
-            <div class="button-group">
-              <button class="btn btn-primary"(click)="onSubmit()" >Submit</button>
-              <button class="btn btn-default">Cancel</button>
             </div>
           </div>
           <div class="col-sm-4 no-padding text-right social-links">
@@ -166,9 +167,9 @@
               <img src="assets/c-next/profile-creator/linked-in.png" />
               <img src="assets/c-next/profile-creator/twitter.png" />
             </div>
-            <div class="button-group">
+            <!--<div class="button-group">
               <button class="btn btn-danger" style="margin-top: 15px;" (click)="logOut()">Logout</button>
-            </div>
+            </div>-->
           </div>
         </div>
       </div>

@@ -1,41 +1,41 @@
 <div class="professional-data clearfix">
-  <div class="col-sm-4 padding-right15">
+  <div class="col-sm-4">
     <label >Ready To Realocate?</label>
-      <select class="form-control"   [(ngModel)]="candidate.professionalDetails.relocate" (change) = "saveProfessionalData()">
-        <option >Ready To Realocate? </option>
-        <option *ngFor="let c of realocationlist" [selected]="true" [ngValue]="c">{{c}}</option>
-      </select>
+    <select class="form-control"   [(ngModel)]="candidate.professionalDetails.relocate" (change) = "saveProfessionalData()">
+      <option >Ready To Realocate? </option>
+      <option *ngFor="let c of realocationlist" [selected]="true" [ngValue]="c">{{c}}</option>
+    </select>
 
   </div>
 
   <div class="col-sm-4">
     <label >Education:</label>
-      <select class="form-control" [(ngModel)]="candidate.professionalDetails.education" (change) = "saveProfessionalData()">
-        <option *ngFor="let c of educationlist" [selected]="true" [ngValue]="c">{{c}}</option>
-      </select>
+    <select class="form-control" [(ngModel)]="candidate.professionalDetails.education" (change) = "saveProfessionalData()">
+      <option *ngFor="let c of educationlist" [selected]="true" [ngValue]="c">{{c}}</option>
+    </select>
 
   </div>
 
-  <div class="col-sm-4 padding-left15">
+  <div class="col-sm-4">
     <label >Experience:&nbsp;</label>
-      <select class="form-control" [(ngModel)]="candidate.professionalDetails.experience" (change) = "saveProfessionalData()">
-        <option *ngFor="let c of experiencelist" [selected]="true" [ngValue]="c">{{c}}</option>
-      </select>
+    <select class="form-control" [(ngModel)]="candidate.professionalDetails.experience" (change) = "saveProfessionalData()">
+      <option *ngFor="let c of experiencelist" [selected]="true" [ngValue]="c">{{c}}</option>
+    </select>
 
   </div>
 
-  <div class="col-sm-4 padding-right15">
+  <div class="col-sm-4">
     <label >Current Salary:&nbsp;</label>
-      <select class="form-control" [(ngModel)]="candidate.professionalDetails.currentSalary" (change) = "saveProfessionalData()">
-        <option *ngFor="let c of salarylist" [selected]="true" [ngValue]="c">{{c}}</option>
-      </select>
+    <select class="form-control" [(ngModel)]="candidate.professionalDetails.currentSalary" (change) = "saveProfessionalData()">
+      <option *ngFor="let c of salarylist" [selected]="true" [ngValue]="c">{{c}}</option>
+    </select>
 
   </div>
 
   <div class="col-sm-4">
     <label >Notice Period:&nbsp;</label>
-      <select class="form-control" [(ngModel)]="candidate.professionalDetails.noticePeriod" (change) = "saveProfessionalData()">
-        <option *ngFor="let c of noticeperiodlist" [selected]="true"  [ngValue]="c">{{c}}</option>
-      </select>
+    <select class="form-control" [(ngModel)]="candidate.professionalDetails.noticePeriod" (change) = "saveProfessionalData()">
+      <option *ngFor="let c of noticeperiodlist" [selected]="true"  [ngValue]="c">{{c}}</option>
+    </select>
   </div>
 </div>
