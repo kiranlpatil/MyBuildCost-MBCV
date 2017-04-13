@@ -315,18 +315,16 @@ export class ProfileCreatorComponent implements OnInit {
         if (this.candidate.industry.roles[0].capabilities[0].complexities.length > 0) {
           this.whichStepsVisible[3] = true;
           this.showProfeciency = true;
-
         }
       }
-
     }
     if (this.candidate.professionalDetails !== undefined) {
       this.whichStepsVisible[4] = true;
     }
-    if (this.candidate.academics !== undefined) {
+    if (this.candidate.academics.length>0) {
       this.whichStepsVisible[5] = true;
     }
-    if (this.candidate.awards !== undefined) {
+    if (this.candidate.awards.length> 0) {
       this.whichStepsVisible[6] = true;
     }
   }
