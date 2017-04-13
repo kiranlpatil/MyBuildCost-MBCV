@@ -1,26 +1,23 @@
-
-import { Component } from '@angular/core';
-import { LocalStorageService } from '../../../framework/shared/localstorage.service';
-import { LocalStorage, NavigationRoutes } from '../../../framework/shared/constants';
-import { Router } from '@angular/router';
-import { JobInformation } from '../model/job-information';
-import { JobRequirement } from '../model/job-requirement';
-import { JobLocation } from '../model/job-location';
-import { MyJobLocationService } from '../myjob-location.service';
-import { MyJobPostRoleTypeService } from '../jobpost-roletype.service';
-import { JonPostDescriptionService } from '../job-post-description.service';
-import { JobPostComplexityService } from '../job-post-complexity.service';
-import { Description } from '../model/description';
-import { JobPostProficiencyService } from '../jobPostProficiency.service';
-import { MyJobInformationService } from '../myJobInformation.service';
-import { JobRequirementService } from '../myJobRequirement.service';
-import { JobIndustryShowService } from '../myJobIndustryShow.service';
-import { DisableTestService } from '../disable-service';
-import { ComplexityService } from '../complexity.service';
-import { ProficiencyService } from '../proficience.service';
-import { TestService } from '../test.service';
-import { MyRoTypeTestService } from '../myRole-Type.service';
-import { ShowJobFilterService } from '../showJobFilter.service';
+import {Component} from "@angular/core";
+import {Router} from "@angular/router";
+import {JobInformation} from "../model/job-information";
+import {JobRequirement} from "../model/job-requirement";
+import {JobLocation} from "../model/job-location";
+import {MyJobLocationService} from "../myjob-location.service";
+import {MyJobPostRoleTypeService} from "../jobpost-roletype.service";
+import {JonPostDescriptionService} from "../job-post-description.service";
+import {JobPostComplexityService} from "../job-post-complexity.service";
+import {Description} from "../model/description";
+import {JobPostProficiencyService} from "../jobPostProficiency.service";
+import {MyJobInformationService} from "../myJobInformation.service";
+import {JobRequirementService} from "../myJobRequirement.service";
+import {JobIndustryShowService} from "../myJobIndustryShow.service";
+import {DisableTestService} from "../disable-service";
+import {ComplexityService} from "../complexity.service";
+import {ProficiencyService} from "../proficience.service";
+import {TestService} from "../test.service";
+import {MyRoTypeTestService} from "../myRole-Type.service";
+import {ShowJobFilterService} from "../showJobFilter.service";
 import {JobPosterModel} from "../model/jobPoster";
 import {Industry} from "../model/industry";
 import {JobPosterService} from "./job-poster.service";
@@ -38,47 +35,48 @@ import {MessageService} from "../../../framework/shared/message.service";
 })
 
 export class JobPosterComponent {
-  private industries: Industry[]=new Array(0);
-  private roles: Role[]=new Array(0);
-  private roleTypes: string[]=new Array(0);
-  private roleList: string[]=new Array(0);
-  private primaryCapability : string[] = new Array(0);
+  private industries:Industry[] = new Array(0);
+  private roles:Role[] = new Array(0);
+  private roleTypes:string[] = new Array(0);
+  private roleList:string[] = new Array(0);
+  private primaryCapability:string[] = new Array(0);
 
   private rolesForMain:Role[] = new Array(0);
   private rolesForCapability:Role[] = new Array(0);
   private rolesForComplexity:Role[] = new Array(0);
 
-  descModel:Description[]=new Array();
-  private jobInformation=new JobInformation();
-  private jobRequirement=new JobRequirement();
-  private jobLocation=new JobLocation();
-  private isShowIndustry:boolean=false;
-  private isShowComplexity:boolean=false;
-  private isShowRoleList:boolean=false;
-  private isShowRoletype:boolean=false;
-  private isShowCapability:boolean=false;
-  private isShowProficiency:boolean=false;
-  private roletype :string;
-  private showModalStyle: boolean = false;
-  private complexities :Industry=new Industry();
-  private proficiency :string[]=new Array();
-  private competensies=new Description();
-  private responsibilities=new Description();
-  private jobPosterModel=new JobPosterModel();
+  descModel:Description[] = new Array();
+  private jobInformation = new JobInformation();
+  private jobRequirement = new JobRequirement();
+  private jobLocation = new JobLocation();
+  private isShowIndustry:boolean = false;
+  private isShowComplexity:boolean = false;
+  private isShowRoleList:boolean = false;
+  private isShowRoletype:boolean = false;
+  private isShowCapability:boolean = false;
+  private isShowProficiency:boolean = false;
+  private roletype:string;
+  private showModalStyle:boolean = false;
+  private complexities:Industry = new Industry();
+  private proficiency:string[] = new Array();
+  private competensies = new Description();
+  private responsibilities = new Description();
+  private jobPosterModel = new JobPosterModel();
+
   constructor(private _router:Router,
               private profileCreatorService:ProfileCreatorService,
-              private complexityService: ComplexityService,
+              private complexityService:ComplexityService,
               private jobinformation:MyJobInformationService,
               private jobrequirement:JobRequirementService,
               private myjoblocationService:MyJobLocationService,
               private jobpostroletype:MyJobPostRoleTypeService,
-              private messageService:MessageService ,
-              private jobPostDescription:JonPostDescriptionService ,
+              private messageService:MessageService,
+              private jobPostDescription:JonPostDescriptionService,
               private jobPostComplexiyservice:JobPostComplexityService,
               private jobPostProficiency:JobPostProficiencyService,
               private myRoleType:MyRoTypeTestService,
-              private testService : TestService,
-              private proficiencyService : ProficiencyService,
+              private testService:TestService,
+              private proficiencyService:ProficiencyService,
               private jobPostIndustryShow:JobIndustryShowService,
               private disableService:DisableTestService,
               private showJobFilter:ShowJobFilterService,
@@ -86,78 +84,79 @@ export class JobPosterComponent {
 
     this.myRoleType.showTestRoleType$.subscribe(
       data=> {
-        this.isShowRoletype=data;
+        this.isShowRoletype = data;
 
       }
-    ); testService.showTest$.subscribe(
+    );
+    testService.showTest$.subscribe(
       data => {
-        this.isShowCapability=data;
+        this.isShowCapability = data;
       }
     );
 
     complexityService.showTest$.subscribe(
       data => {
-        this.isShowComplexity=data;
+        this.isShowComplexity = data;
       }
     );
     proficiencyService.showTest$.subscribe(
       data=> {
-        this.isShowProficiency=data;
+        this.isShowProficiency = data;
       }
     );
     this.jobPostIndustryShow.showIndustryt$.subscribe(
       data => {
-        this.isShowIndustry=data;
+        this.isShowIndustry = data;
 
 
       }
     );
     disableService.showTestDisable$.subscribe(
       data=> {
-        this.isShowRoleList=data;
+        this.isShowRoleList = data;
       }
     );
 
     this.jobinformation.showTestInformation$.subscribe(
       data=> {
-        this.jobInformation=data;
+        this.jobInformation = data;
 
       }
     );
     this.jobrequirement.showTestRequirement$.subscribe(
       data=> {
-        this.jobRequirement=data;
+        this.jobRequirement = data;
 
       }
     );
     this.myjoblocationService.showTestLocation$.subscribe(
       data=> {
-        this.jobLocation=data;
+        this.jobLocation = data;
 
       }
     );
     this.jobpostroletype.showTestCapability$.subscribe(
       data=> {
-        this.roletype=data;
+        this.roletype = data;
       }
     );
     this.jobPostDescription.showTestJobPostDesc$.subscribe(
       data=> {
-        if(data.type==="competensies")
-          this.competensies.detail=(data.data.toString()).replace (/,/g, " ");
-        if(data.type==="responsibilities")
-          this.responsibilities.detail=(data.data.toString()).replace (/,/g, " ");
+        if (data.type === "competensies")
+          this.competensies.detail = (data.data.toString()).replace(/,/g, " ");
+        if (data.type === "responsibilities")
+          this.responsibilities.detail = (data.data.toString()).replace(/,/g, " ");
       }
     );
     this.jobPostComplexiyservice.showTestComplexity$.subscribe(
       data=> {
-        this.complexities=data;
+        this.complexities = data;
 
       }
     );
     this.jobPostProficiency.showTestJobPostProficiency$.subscribe(
       data=> {
-        this.proficiency=data;
+        this.proficiency = data;
 
       }
     );
@@ -165,11 +164,11 @@ export class JobPosterComponent {
 
 
   postjob() {
-    this.jobPosterModel.competencies=this.competensies.detail;
+    this.jobPosterModel.competencies = this.competensies.detail;
 
-    this.jobPosterModel.profiencies=this.proficiency;
-    this.jobPosterModel.responsibility=this.responsibilities.detail;
-    this.jobPosterModel.postingDate= (new Date()).toISOString();
+    this.jobPosterModel.profiencies = this.proficiency;
+    this.jobPosterModel.responsibility = this.responsibilities.detail;
+    this.jobPosterModel.postingDate = (new Date()).toISOString();
 
 
     console.log(this.jobPosterModel);
@@ -184,10 +183,12 @@ export class JobPosterComponent {
         console.log(error);
       });
   }
+
   showHideModal() {
     this.showModalStyle = !this.showModalStyle;
     this.postjob();
   }
+
   getStyleModal() {
     if (this.showModalStyle) {
       return 'block';
@@ -201,35 +202,36 @@ export class JobPosterComponent {
 
   }
 
-  selectJobInformation(jobInformation:JobInformation){
-    this.jobPosterModel.jobTitle=jobInformation.jobTitle;
-    this.jobPosterModel.hiringManager=jobInformation.hiringManager;
-    this.jobPosterModel.department=jobInformation.department;
+  selectJobInformation(jobInformation:JobInformation) {
+    this.jobPosterModel.jobTitle = jobInformation.jobTitle;
+    this.jobPosterModel.hiringManager = jobInformation.hiringManager;
+    this.jobPosterModel.department = jobInformation.department;
   }
 
-  selectJobLocation(jobLocation:JobLocation){
+  selectJobLocation(jobLocation:JobLocation) {
     this.jobPosterModel.location = jobLocation;
   }
 
-  selectExperiencedIndustry(experiencedindustry:string[]){
+  selectExperiencedIndustry(experiencedindustry:string[]) {
     this.jobPosterModel.interestedIndustry = experiencedindustry;
   }
 
-  selectJobRequirement(jobRequirement :JobRequirement){
-    this.jobPosterModel.education=jobRequirement.education;
-    this.jobPosterModel.experience=jobRequirement.experience;
-    this.jobPosterModel.joiningPeriod=jobRequirement.noticeperiod;
-    this.jobPosterModel.salary=jobRequirement.salary;
-    if(jobRequirement.noticeperiod !== undefined) {
+  selectJobRequirement(jobRequirement:JobRequirement) {
+    this.jobPosterModel.education = jobRequirement.education;
+    this.jobPosterModel.experience = jobRequirement.experience;
+    this.jobPosterModel.joiningPeriod = jobRequirement.noticeperiod;
+    this.jobPosterModel.salary = jobRequirement.salary;
+    if (jobRequirement.noticeperiod !== undefined) {
       this.isShowIndustry = true;
       this.getIndustry();
     }
   }
-  selectIndustry(industry:Industry){
-    this.jobPosterModel.industry=industry;
+
+  selectIndustry(industry:Industry) {
+    this.jobPosterModel.industry = industry;
     //this.savejobPosterModelDetails();
     this.getRoles();
-    this.isShowRoleList=true;
+    this.isShowRoleList = true;
   }
 
 
@@ -243,50 +245,50 @@ export class JobPosterComponent {
         if (this.jobPosterModel.industry.roles[0].capabilities.length > 0) {
           this.getComplexity();
           this.isShowComplexity = true;
-          
+
         }
       }
     }
 
   }
 
-  selectRoleType(roleType:string){
-    this.jobPosterModel.roleType=roleType;
+  selectRoleType(roleType:string) {
+    this.jobPosterModel.roleType = roleType;
 //    this.savejobPosterModelDetails();
     this.getCapability();
-    this.isShowCapability=true;
+    this.isShowCapability = true;
   }
 
-  getIndustry(){
+  getIndustry() {
     this.profileCreatorService.getIndustries()
       .subscribe(
-        industrylist => this.industries=industrylist.data,
+        industrylist => this.industries = industrylist.data,
         error => this.onError(error));
   }
 
- /* getRoles(){
-    this.profileCreatorService.getRoles(this.jobPosterModel.industry.name)
-      .subscribe(
-        rolelist => this.roles=rolelist.data,
-        error => this.onError(error));
-  }*/
+  /* getRoles(){
+   this.profileCreatorService.getRoles(this.jobPosterModel.industry.name)
+   .subscribe(
+   rolelist => this.roles=rolelist.data,
+   error => this.onError(error));
+   }*/
 
-  getRoleType(){
+  getRoleType() {
     this.profileCreatorService.getRoleTypes()
       .subscribe(
-        data=> this.roleTypes=data.roleTypes,
+        data=> this.roleTypes = data.roleTypes,
         error => this.onError(error));
   }
 
   /*getCapability(){
-    for(let role of this.jobPosterModel.industry.roles){
-      this.roleList.push(role.name);
-    }
-    this.profileCreatorService.getCapability(this.jobPosterModel.industry.name,this.roleList)
-      .subscribe(
-        rolelist => this.roles=rolelist.data,
-        error => this.onError(error));
-  }*/
+   for(let role of this.jobPosterModel.industry.roles){
+   this.roleList.push(role.name);
+   }
+   this.profileCreatorService.getCapability(this.jobPosterModel.industry.name,this.roleList)
+   .subscribe(
+   rolelist => this.roles=rolelist.data,
+   error => this.onError(error));
+   }*/
   onError(error:any) {
     var message = new Message();
     message.error_msg = error.err_msg;
