@@ -321,6 +321,15 @@ export class ProfileCreatorComponent implements OnInit {
       }
 
     }
+    if (this.candidate.professionalDetails !== undefined) { 
+      this.whichStepsVisible[4] = true;
+    }
+    if (this.candidate.academics !== undefined) { 
+      this.whichStepsVisible[5] = true;
+    }
+    if (this.candidate.awards !== undefined) { 
+      this.whichStepsVisible[6] = true;
+    }
   }
 
   getUserProfile() {
