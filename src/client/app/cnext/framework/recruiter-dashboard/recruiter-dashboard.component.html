@@ -5,6 +5,16 @@
         <img src= "{{uploaded_image_path}}" alt="User Profile Picture"/>
         <h4>{{company_name}}</h4>
       </div>
+      <ul class="logout-dropdown">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle drop-down" data-toggle="dropdown" >
+            <img src="assets/framework/images/dashboard/3dots.png">
+          </a>
+          <ul class="dropdown-menu">
+            <li><a (click)="logOut()"><b>Logout</b></a></li>
+          </ul>
+        </li>
+      </ul>
     </div>
     <button type="submit" class="btn btn-default btn-logout" (click)="logOut()">Logout</button>
   </div>

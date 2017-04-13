@@ -527,7 +527,37 @@ control-messages {
   }*/
 }
 
+
+.logout-dropdown {
+  position: fixed;
+  right: 15px;
+  top: 6px;
+  display: none;
+
+  li {
+    width: auto;
+    list-style: none;
+  }
+
+
+  .dropdown-menu {
+    right: 0;
+    margin: 6px 0 0;
+    left: auto;
+  }
+}
+
+
 // Media Queries
+@media only screen and (max-width: 1024px) {
+  .logout-dropdown {
+    display: block;
+  }
+
+  .btn-logout {
+    display: none;
+  }
+}
 @media only screen and (max-width: 768px) {
   .container-fluid>.navbar-collapse,
   .container-fluid>.navbar-header,

@@ -10,6 +10,16 @@
       <li [class.active]="whichStepsVisible[5]"><p>Academic Details</p></li>
       <li [class.active]="whichStepsVisible[6]"><p>Awards</p></li>
     </ul>
+    <ul class="logout-dropdown">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle drop-down" data-toggle="dropdown" >
+          <img src="assets/framework/images/dashboard/3dots.png">
+        </a>
+        <ul class="dropdown-menu">
+          <li><a (click)="logOut()"><b>Logout</b></a></li>
+        </ul>
+      </li>
+    </ul>
   </div>
 
   <div class="profile-wrapper container">
@@ -65,7 +75,7 @@
         </div>
 
         <div class="section-container" [hidden]="!showComplexity">
-          <div class="main-content">
+          <div class="main-content max-height">
             <h4 class="heading">Choose Complexities</h4>
             <cn-complexity-list [roles]="rolesForComplexity" [candidateRoles]="candidateForComplexity" [isComplexityPresent]="isComplexityPresent"  (selectComplexityWithRole)="selectRole($event)"></cn-complexity-list>
           </div>
@@ -74,7 +84,7 @@
         <div class="section-container clearfix profeiciency-domain" [hidden]="!showProfeciency">
           <div class="main-content">
             <h4 class="heading">Proficiencies (Max. 25)</h4>
-            <cn-proficiency-doamin [proficiencies]="proficiencies" [candidate]="candidate"  [type]="'profeciency'" (selectProficiency)="selectProficiency($event)"></cn-proficiency-doamin>
+            <cn-proficiency-doamin [proficiencies]="proficiencies" [candidate]="candidate"  [type]="'profeciency'"></cn-proficiency-doamin>
           </div>
         </div>
 
@@ -93,7 +103,7 @@
         </div>
 
         <div class="section-container" [hidden]="chkEmployeeHistory" [hidden]="!showProfeciency" >
-          <div class="main-content clearfix">
+          <div class="main-content clearfix"  >
             <h4 class="heading">Employment Histroy
               <span class="close-dialog">Close this section if not needed
             <span class="glyphicon glyphicon-remove" (click)="hideEmployeeHistory()"></span>
