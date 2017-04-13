@@ -62,7 +62,9 @@ class CandidateSchema {
               }],
               name: String
             }],
-            name: String
+            name: String,
+            isPrimary : Boolean,
+            isSecondary : Boolean
           }],
           secondaryCapabilities:[{
             complexities: [{

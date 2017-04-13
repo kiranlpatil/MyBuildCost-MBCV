@@ -28,13 +28,13 @@ export class CapabilityListComponent {
       for (let role of this.candidateRoles) {
         if (role.capabilities) {
           for (let primary of role.capabilities) {
-            this.primaryNames.push(primary.name);
-          }
-        }
-        if (role.secondaryCapabilities) {
-            for (let second of role.secondaryCapabilities) {
-              this.secondaryNames.push(second.name);
+            if(primary.isPrimary){
+              this.primaryNames.push(primary.name);
             }
+            else if(primary.isSecondary){
+              this.secondaryNames.push(primary.name);
+            }
+          }
         }
       }
     }
@@ -42,6 +42,7 @@ export class CapabilityListComponent {
 
 
   selectedCapability(selectedRole:Role, selectedCapability:Capability, event:any) {
+    this.roles[0].isAPIForComplexity=true;
     if (event.target.checked) {
       if (this.primaryCapabilitiesNumber < 2) {
         this.primaryCapabilitiesNumber++;

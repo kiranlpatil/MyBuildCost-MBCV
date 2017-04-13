@@ -24,7 +24,7 @@
   <div  *ngIf="!isComplexityPresent"  >
   <div *ngFor="let role of roles">
     <div *ngFor="let capability of role.capabilities">
-      <div class="select-complexity clearfix" *ngFor="let complexity of capability.complexities">
+      <div class="select-complexity clearfix" *ngFor="let complexity of capability.complexities" >
         <div class="complexity-name col-sm-2 no-padding">
           <p id="complexity">{{complexity.name}}</p>
         </div>
@@ -32,7 +32,7 @@
           <div class="select-option" *ngFor="let scenario of complexity.scenarios">
             <label>
               <input type="radio" name="{{complexity.name}}" value="{{scenario.name}}"
-                     (change)="selectComplexity(role,complexity,scenario,$event)"
+                     (change)="selectComplexity(role,capability,complexity,scenario,$event)"
                      [checked]="scenario.isChecked">
               <span>{{scenario.name}}</span>
             </label>

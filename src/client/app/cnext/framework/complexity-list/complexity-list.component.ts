@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, Output} from "@angular/core";
 import {Role} from "../model/role";
 import {Scenario} from "../model/scenario";
 import {Complexity} from "../model/complexity";
+import {Capability} from "../model/capability";
 
 @Component({
   moduleId: module.id,
@@ -54,8 +55,16 @@ export class ComplexityListComponent {
     }
   }
 
-  selectComplexity(role:Role, complexity:Complexity, selectedScenario:Scenario, event:any) {
-    role.isAPIForComplexity = true;
+  selectComplexity(role:Role, capability :Capability,complexity:Complexity, selectedScenario:Scenario, event:any) {
+    //role.isAPIForComplexity = true;
+    for(let rol  of this.candidateRoles){
+        for(let cap of rol.capabilities){
+          if(cap.name==capability.name){
+            capability.isPrimary=cap.isPrimary;
+            capability.isSecondary=cap.isSecondary;
+          }
+        }
+    }
     for (let item of complexity.scenarios) {
       item.isChecked = false;
     }

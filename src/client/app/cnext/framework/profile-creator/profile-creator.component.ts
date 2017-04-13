@@ -18,7 +18,6 @@ import {Candidate} from "../model/candidate";
 import {ProfileCreatorService} from "./profile-creator.service";
 import {MessageService} from "../../../framework/shared/message.service";
 import {Message} from "../../../framework/shared/message";
-import {MyIndustryService} from "../industry-service";
 import {Industry} from "../model/industry";
 import {Role} from "../model/role";
 
@@ -72,7 +71,6 @@ export class ProfileCreatorComponent implements OnInit {
   constructor(private _router:Router,
               private dashboardService:DashboardService,
               private testService:TestService,
-              private myindustryService:MyIndustryService,
               private proficiencyService:ProficiencyService,
               private professionalService:ProfessionalService,
               private educationalService:EducationalService,
@@ -169,7 +167,7 @@ export class ProfileCreatorComponent implements OnInit {
   }
 
 
-  selectRole(roles:Role[]) {
+  selectRole(roles:Role[]) {debugger
     this.candidate.industry.roles = roles;
     this.saveCandidateDetails();
     this.getRoleType();
@@ -183,7 +181,6 @@ export class ProfileCreatorComponent implements OnInit {
         }
       }
     }
-
   }
 
   selectRoleType(roleType:string) {
@@ -234,7 +231,9 @@ export class ProfileCreatorComponent implements OnInit {
   getComplexity() {
     for (let role of this.candidate.industry.roles) {
       for (let capability of role.capabilities) {
-        this.primaryCapability.push(capability.name);
+        if(capability.isPrimary){
+          this.primaryCapability.push(capability.name);
+        }
       }
     }
     if (this.candidate.industry.name != undefined && this.roleList != undefined) {
