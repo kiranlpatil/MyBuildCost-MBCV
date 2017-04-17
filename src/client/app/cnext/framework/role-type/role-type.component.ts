@@ -15,6 +15,7 @@ export class RoleTypetListComponent {
   private selectedRoletype:string='';
   private showModalStyle: boolean = false;
   private disableRoletype: boolean=false;
+  private disableButton: boolean=true;
 
   ngOnChanges (changes:any) {
     if (changes.roleTypes != undefined) {
@@ -23,6 +24,7 @@ export class RoleTypetListComponent {
     }
   }
   choosedRoleType(roleType:string) {
+    this.disableButton=false;
     this.selectedRoletype = roleType;
   }
 

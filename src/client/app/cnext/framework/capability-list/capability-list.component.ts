@@ -17,6 +17,7 @@ export class CapabilityListComponent {
   private primaryNames:string[] = new Array(0);
   private secondaryNames:string[] = new Array(0);
   private primaryCapabilitiesNumber:number = 0;
+  private disableButton:boolean=true;
 
   ngOnChanges(changes:any) {
     if (changes.roles) {
@@ -42,6 +43,7 @@ export class CapabilityListComponent {
 
 
   selectedCapability(selectedRole:Role, selectedCapability:Capability, event:any) {
+    this.disableButton=false;
     this.roles[0].isAPIForComplexity=true;
     if (event.target.checked) {
       if (this.primaryCapabilitiesNumber < 2) {

@@ -16,6 +16,7 @@ export class RoleListComponent {
   private selectedRoles:Role[] = new Array(0);
   private showModalStyle:boolean = false;
   private disableRole:boolean = false;
+  private disableButton:boolean = true;
   private candidateRolesList :string[]= new Array(0);
 
   ngOnChanges(changes:any) {
@@ -34,6 +35,7 @@ export class RoleListComponent {
   }
 
   selectOption(role:Role,event:any) {
+    this.disableButton=false;
     if (event.target.checked) {
       if (this.selectedRoles.length < 3) {
         this.selectedRoles.push(role);
