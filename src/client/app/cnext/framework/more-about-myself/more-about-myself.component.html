@@ -5,7 +5,7 @@
               placeholder="Enter More Details About Yourself"></textarea>-->
 
   <div class="col-sm-12 more-about-myself">
-    <textarea class="form-control" [(ngModel)]="candidate.aboutMyself"  (ngModelChange)="addAboutMyself()" Placeholder="Certification/Accreditation"></textarea>
+    <textarea class="form-control" [(ngModel)]="candidate.aboutMyself"  (ngModelChange)="addAboutMyself()" [maxlength]="maxword"   Placeholder="Enter About Yourself"></textarea>
     <h5>Remaining words are:{{remainingWords}}</h5>
   </div>
 </div>

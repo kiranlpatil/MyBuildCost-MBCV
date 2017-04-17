@@ -29,6 +29,7 @@ export class EmploymentHistoryComponent {
   private disableAddAnother:boolean=true;
   private sendPostCall:boolean=false;
   private isShowError:boolean=false;
+  private isShowDateErrorMessage:boolean=false;
 
 
   constructor(private messageService:MessageService,
@@ -81,11 +82,13 @@ export class EmploymentHistoryComponent {
       if ( (item.companyName ==="" || item.designation ==="" || item.from.month ==="" ||
           item.from.year ===""||item.to.month ==="" || item.to.year ==="") ||
 
-        (indexOfFromMonth===indexToMonth && item.from.year >= item.to.year) ||(item.from.year >= item.to.year)||
+        (indexOfFromMonth===indexToMonth && item.from.year >= item.to.year) ||(item.from.year >item.to.year)||
 
         (indexOfFromMonth >= indexToMonth && item.from.year===item.to.year)) {
         this.disableAddAnother=false;
         this.isShowError=true;
+
+
 
       }
     }
@@ -102,25 +105,49 @@ export class EmploymentHistoryComponent {
 
     this.isShowError=false;
     for(let item of this.candidate.employmentHistory) {
-      if ( (item.companyName ==="" || item.designation ==="" || item.from.month ==="" ||
-        item.from.year ===""||item.to.month ==="" || item.to.year ==="") )
-      {
-this.disableEmplyeeHistoryGlyphiconService.change(true);
-
-      }
-      var indexOfFromMonth= this.monthList.indexOf(item.from.month);
-      var indexToMonth=this.monthList.indexOf(item.to.month);
-
-      if ( (item.companyName ==="" || item.designation ==="" || item.from.month ==="" ||
-        item.from.year ===""||item.to.month ==="" || item.to.year ==="") ||
-
-        (indexOfFromMonth===indexToMonth && item.from.year >= item.to.year) ||(item.from.year >= item.to.year)||
-
-        (indexOfFromMonth >= indexToMonth && item.from.year===item.to.year)) {
-        this.sendPostCall=false;
+      if ((item.companyName !== "" || item.designation !== "" || item.from.month !== "" ||
+        item.from.year !== "" || item.to.month !== "" || item.to.year !== "")) {
+        this.disableEmplyeeHistoryGlyphiconService.change(true);
 
       }
     }
+
+
+
+    for(let item of this.candidate.employmentHistory) {
+      var indexOfFromMonth= this.monthList.indexOf(item.from.month);
+      var indexToMonth=this.monthList.indexOf(item.to.month);
+      if ( ((indexOfFromMonth === indexToMonth && item.from.year >= item.to.year) || (item.from.year >item.to.year) ||
+
+        (indexOfFromMonth >= indexToMonth && item.from.year === item.to.year)) &&
+
+        (item.companyName !== "" && item.designation !== "" && item.from.month !== "" &&
+        item.from.year !== "" && item.to.month !== "" && item.to.year !== "") ) {
+
+        this.isShowDateErrorMessage=true;
+      }
+      else {
+        this.isShowDateErrorMessage=false;
+      }
+    }
+
+
+
+    for(let item of this.candidate.employmentHistory) {
+      var indexOfFromMonth= this.monthList.indexOf(item.from.month);
+      var indexToMonth=this.monthList.indexOf(item.to.month);
+      if ((item.companyName === "" || item.designation === "" || item.from.month === "" ||
+        item.from.year === "" || item.to.month === "" || item.to.year === "") ||
+
+        (indexOfFromMonth === indexToMonth && item.from.year >= item.to.year) || (item.from.year >item.to.year) ||
+
+        (indexOfFromMonth >= indexToMonth && item.from.year === item.to.year)) {
+        this.sendPostCall = false;
+
+      }
+    }
+
+
     if(this.sendPostCall===true)
     {
       this.profileCreatorService.addProfileDetail(this.candidate).subscribe(
@@ -134,7 +161,10 @@ this.disableEmplyeeHistoryGlyphiconService.change(true);
 
     this.sendPostCall=true;
 
-      }
+
+    }
+
+
 
   }
 

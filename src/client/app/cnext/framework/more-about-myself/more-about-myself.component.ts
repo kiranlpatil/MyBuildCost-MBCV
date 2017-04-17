@@ -32,7 +32,9 @@ export class MoreAboutMyselfComponent implements OnInit {
     this.reSize = new Array(1);
   }
   ngOnInit() {
+/*
     this.remainingWords=this.maxLength-this.candidate.aboutMyself.length;
+*/
      /* if(LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE)==="true"){
         this.profileCreatorService.getCandidateDetails()
           .subscribe(
@@ -43,6 +45,12 @@ export class MoreAboutMyselfComponent implements OnInit {
 
   }
   ngOnChanges(changes :any){
+    this.newstringOne= this.candidate.aboutMyself.split(' ');
+    this.newstringTwo= this.candidate.aboutMyself.split('.');
+    this.newstringThree= this.candidate.aboutMyself.split(',');
+    this.wordsTillNow=this.newstringOne.length+this.newstringTwo.length+this.newstringThree.length;
+    this.remainingWords=this.maxLength-(this.wordsTillNow-3);
+
     if(this.candidate.aboutMyself == undefined){
       this.candidate.aboutMyself = '';
     }
