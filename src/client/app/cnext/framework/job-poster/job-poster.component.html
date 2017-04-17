@@ -18,14 +18,14 @@
     </div>
 
     <div class="section-container" [hidden]="!isShowRoleList">
-      <div class="main-content">
+      <div class="main-content clearfix" >
         <h4 class="heading">Select Area of Work (Max 3)</h4>
         <cn-role-list [roles]="rolesForMain"  (selectRoles)="selectRole($event)"></cn-role-list>
       </div>
     </div>
 
     <div class="section-container" [hidden]="!isShowRoletype">
-      <div class="main-content">
+      <div class="main-content clearfix">
         <h4 class="heading">Select Role Type (Any one of the following)</h4>
         <cn-role-type-list [roleTypes]="roleTypes"  (selectRoleType)="selectRoleType($event)"></cn-role-type-list>
       </div>
@@ -34,14 +34,14 @@
 
     <div class="section-container"  [hidden]="!isShowCapability">
 
-      <div class="main-content">
+      <div class="main-content clearfix">
         <h4 class="heading"> Select Capabilities (Max. 10)</h4>
         <cn-capibility-list [roles]="rolesForCapability"  (selectCapabilityWithRole)="selectRole($event)"></cn-capibility-list>
       </div>
     </div>
 
   <div class="section-container"  [hidden]="!isShowComplexity" >
-      <div class="main-content">
+      <div class="main-content clearfix">
         <h4 class="heading">Choose Complexities</h4>
         <div class="max-height">
           <cn-complexity-list [roles]="rolesForComplexity" [candidateRoles]="jobForComplexity"   (selectComplexityWithRole)="selectRoleFromComplexity($event)"></cn-complexity-list>
