@@ -5,6 +5,7 @@ export class ValidationService {
     let config:any = {
       'required': 'Required',
       'requiredEmail': 'Enter login email address',
+      'requiredPassword': 'Enter your password',
       'requiredname': 'Name is required',
       'invalidEmailAddress': 'Email incorrect.',
       'invalidPassword': 'Passwords must contain at least 8 characters, including uppercase, lowercase letters, numbers and one special character($@_!%*?&).',
@@ -20,7 +21,7 @@ export class ValidationService {
 
   static emailValidator(control:any) {
     if (control.value) {
-      if (control.value.match(
+     if (control.value.match(
           /[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?/)) {
         return null;
       } else {
@@ -30,8 +31,18 @@ export class ValidationService {
     return null;
   }
 
+  static requireEmailValidator(control:any) {
+    if (control.value =="" || control.value == undefined) {
+        return {'requiredEmail': true};
+    }
+    else {
+      return null;
+    }
+  }
+
 
   static passwordValidator(control:any) {
+
     if (control.value.match(/(?=.*\d)(?=.*[a-z])(?=.*[$@_#!%*?&])(?=.*[A-Z]).{8,}/)) {
 
       return null;
@@ -39,6 +50,14 @@ export class ValidationService {
     } else {
 
       return {'invalidPassword': true};
+    }
+  }
+
+  static requiredPasswordValidator(control:any){
+    if (control.value =="" || control.value == undefined) {
+      return {'requiredPassword': true};
+    } else {
+      return null;
     }
   }
 

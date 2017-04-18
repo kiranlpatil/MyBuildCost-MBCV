@@ -53,8 +53,8 @@ export class LoginComponent implements OnInit {
               private formBuilder:FormBuilder, private commonService:CommonService, private loaderService:LoaderService,
               private _facebookService:FacebookService) {
     this.userForm = this.formBuilder.group({
-      'email': ['', [Validators.required, ValidationService.emailValidator]],
-      'password': ['', [Validators.required]]
+      'email': ['', [ ValidationService.requireEmailValidator,ValidationService.emailValidator]],
+      'password': ['', [ValidationService.requiredPasswordValidator]]
     });
     this.MY_LOGO_PATH = ImagePath.MY_WHITE_LOGO;
     this.APP_NAME = ProjectAsset.APP_NAME;
