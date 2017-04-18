@@ -4,14 +4,15 @@ export class ValidationService {
   static getValidatorErrorMessage(validatorName:string, validatorValue?:any) {
     let config:any = {
       'required': 'Required',
+      'requiredEmail': 'Enter login email address',
       'requiredname': 'Name is required',
-      'invalidEmailAddress': 'Email is invalid.',
-      'invalidPassword': 'Passwords must contain at least 8 characters, including uppercase, lowercase letters, numbers and one special character($@$!%*?&).',
+      'invalidEmailAddress': 'Email incorrect.',
+      'invalidPassword': 'Passwords must contain at least 8 characters, including uppercase, lowercase letters, numbers and one special character($@_!%*?&).',
       'maxlength': `Maximum ${validatorValue.requiredLength} characters`,
       'minlength': `Minimum ${validatorValue.requiredLength} characters`,
       'invalidMobile': 'Mobile number should be of 10 digits ',
       'invalidBirthYear': 'Birth year should be of 4 digits ',
-     // 'invalidPin': 'Pin should be of 6 digits ',
+      'invalidPin': 'Pin code should not be greater than 20 characters ',
 
     };
     return config[validatorName];
@@ -56,6 +57,7 @@ export class ValidationService {
       return {'invalidMobile': true};
     }
   }
+
   static birthYearValidator(control:any) {
     var birthYear = control.value;
     var count = 0;
@@ -70,7 +72,8 @@ export class ValidationService {
       return {'invalidBirthYear': true};
     }
   }
-  /*static pinValidator(control:any) {
+
+  static pinValidator(control:any) {
     var pin = control.value;
     var count = 0;
 
@@ -78,10 +81,11 @@ export class ValidationService {
       pin = (pin / 10);
       count += 1;
     }
-    if (count === 6) {
+    if (count === 20) {
       return null;
     } else {
       return {'invalidPin': true};
     }
-  }*/
+  }
+
 }

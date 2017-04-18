@@ -133,9 +133,7 @@ export function retrieve(req: express.Request, res: express.Response, next: any)
             code: 401
           })
         }else{
-          console.log("User  Id"+new mongoose.Types.ObjectId(result._id));
           candidateService.retrieve({"userId":new mongoose.Types.ObjectId(result._id)}, (error, resu) => {
-            console.log("Data of Candidate"+JSON.stringify(resu));
             if (error) {
               next({
                 reason: "User Not Available",//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,

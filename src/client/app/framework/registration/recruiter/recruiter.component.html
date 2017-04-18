@@ -39,7 +39,7 @@
       <control-messages [control]="recruiterForm.controls.password"></control-messages>
       <input type="password" formControlName="password" id="password" class="form-control" (focus)="showMessage()" [(ngModel)]="myPassword" (ngModelChange)="selectPassword($event)" required/>
       <label>Password</label>
-      <span class="error-messages" *ngIf="isShowMessage">Password must be of minimum 8 digit with minimum 1 uppercase,lowercase,number and one special character($@_#!%*?&).</span>
+      <!--<span class="error-messages" *ngIf="isShowMessage">Password must be of minimum 8 digit with minimum 1 uppercase,lowercase,number and one special character($@_#!%*?&).</span>-->
     </div>
 
     <div class="form-group">
