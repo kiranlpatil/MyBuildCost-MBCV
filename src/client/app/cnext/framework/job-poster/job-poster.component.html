@@ -9,11 +9,13 @@
     </div>
   </div>
 
-  <div class="job-poster">
-    <div class="roles section-container"  [hidden]="!isShowIndustry">
-      <div class="main-content">
+  <div class="job-poster" [hidden]="!isShowIndustry">
+    <div class="roles section-container">
+      <div class="main-content clearfix">
         <h4 class="heading">Select Industry</h4>
-        <cn-industry-list [industries]="industries"  (selectIndustry)="selectIndustry($event)" ></cn-industry-list>
+        <div class="col-sm-12">
+          <cn-industry-list [industries]="industries"  (selectIndustry)="selectIndustry($event)" ></cn-industry-list>
+        </div>
       </div>
     </div>
 

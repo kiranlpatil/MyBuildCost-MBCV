@@ -76,14 +76,14 @@
         </div>
 
         <div class="section-container" [hidden]="!showComplexity">
-          <div class="main-content max-height clearfix">
+          <div class="main-content clearfix">
             <h4 class="heading">Choose Complexities</h4>
             <cn-complexity-list [roles]="rolesForComplexity" [candidateRoles]="candidateForComplexity" [isComplexityPresent]="isComplexityPresent"  (selectComplexityWithRole)="selectRole($event)"></cn-complexity-list>
           </div>
         </div>
 
         <div class="section-container clearfix profeiciency-domain" [hidden]="!showProfeciency">
-          <div class="main-content">
+          <div class="main-content clearfix">
             <h4 class="heading">Proficiencies (Max. 25)</h4>
             <cn-proficiency-doamin [proficiencies]="proficiencies" [candidate]="candidate"  [type]="'profeciency'" (selectProficiency)="selectProficiency($event)"></cn-proficiency-doamin>
           </div>
@@ -155,7 +155,7 @@
         </div>
 
         <div class="section-container profile-configurations" [hidden]="!showProfeciency">
-          <div class="col-sm-8 no-padding text-left">
+          <div class="col-sm-9 no-padding text-left">
             <div class="button-group">
               <button class="btn btn-primary"(click)="onSubmit()" >Submit</button>
               <button class="btn btn-default">Cancel</button>
@@ -171,7 +171,7 @@
               </label>
             </div>
           </div>
-          <div class="col-sm-4 no-padding text-right social-links">
+          <div class="col-sm-3 no-padding text-right social-links">
             <div>
               <label>You Can Share it On:</label>
               <img src="assets/c-next/profile-creator/fb.png" />

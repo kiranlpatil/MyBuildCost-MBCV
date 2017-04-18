@@ -16,7 +16,7 @@
       Capabilities once selected can’t be changed for a job profile</p>
     <p><span class="color-panel primary-color"></span>Primary <span class="color-panel secondary-color"></span>Secondary
     </p>
-    <div class="capability-type">
+    <div class="capability-type max-height">
       <div *ngFor="let role of roles">
         <div class="select-option"
              *ngFor="let item of role.capabilities;let i = index" [class.primary]="item.isPrimary || primaryNames.indexOf(item.name)!=-1"

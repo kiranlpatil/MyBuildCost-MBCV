@@ -51,13 +51,15 @@
         <textarea class="form-control" [(ngModel)]="item.remarks" (change)="postEmploymentHistoy()" Placeholder="Remark"></textarea>
       </div>
   </div>
-</div>
+
   <div class="clear">
     <button type="button" id="more_fields" (click)="addAnother()" class="btn btn-create-profile"  >
       Add Another <span>+</span>
     </button>
     <div class="error-messages" *ngIf="isShowError"><p>Fields should not be empty Or Dates are not valid</p></div>
   </div>
+</div>
+
 
 
 
