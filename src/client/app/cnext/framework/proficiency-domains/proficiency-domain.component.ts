@@ -46,14 +46,16 @@ export class ProficiencyDomainComponent {
   }
 
   selectedProficiencyModel(newVal: any) {debugger
-    if (this.selectedProficiencies.length < ValueConstant.MAX_PROFECIENCES) {
-      this.selectedProficiencies.push(newVal);
-      this.deleteSelectedProfeciency(newVal);
-      this.selectProficiency.emit(this.selectedProficiencies);
-    } else {
-      this.showAlert = true;
+    if(newVal !=='') {
+      if (this.selectedProficiencies.length < ValueConstant.MAX_PROFECIENCES) {
+        this.selectedProficiencies.push(newVal);
+        this.deleteSelectedProfeciency(newVal);
+        this.selectProficiency.emit(this.selectedProficiencies);
+      } else {
+        this.showAlert = true;
+      }
+      this.proficiencyModel = '';
     }
-    this.proficiencyModel = '';
   }
 
   deleteItem(newVal: any) {
