@@ -9,6 +9,7 @@ import {  ResetPassword  } from './reset-password';
 import {  FormGroup, FormBuilder, Validators  } from '@angular/forms';
 import { Router, NavigationCancel,ActivatedRoute, Params} from '@angular/router';
 import { URLSearchParams, } from '@angular/http';
+import {ValidationService} from "../../../shared/customvalidations/validation.service";
 
 
 @Component({
@@ -36,8 +37,8 @@ export class ResetPasswordComponent implements OnInit {
                 private resetPasswordService:ResetPasswordService, private formBuilder:FormBuilder) {
 
         this.userForm = this.formBuilder.group({
-            'new_password': ['', [Validators.required, Validators.minLength(8)]],
-            'confirm_password': ['', [Validators.required, Validators.minLength(8)]]
+            'new_password': ['',[ValidationService.requirePasswordValidator, ValidationService.passwordValidator]],
+            'confirm_password': ['',[ValidationService.requirePasswordValidator, ValidationService.passwordValidator]]
         });
 
         this.MY_LOGO_PATH = ImagePath.MY_WHITE_LOGO;
@@ -48,7 +49,7 @@ export class ResetPasswordComponent implements OnInit {
     }
 
 
-    ngOnInit() { 
+    ngOnInit() {
 
       this.activatedRoute.queryParams.subscribe((params: Params) => {
         let access_token = params['access_token'];

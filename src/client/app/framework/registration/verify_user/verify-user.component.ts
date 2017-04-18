@@ -33,8 +33,8 @@ export class VerifyUserComponent implements OnInit {
                 private verifyUserService:VerifyUserService,private messageService:MessageService) {
 
         this.userForm = this.formBuilder.group({
-            'mobile_number': ['', [Validators.required, ValidationService.mobileNumberValidator]],
-            'email': ['', [Validators.required, ValidationService.emailValidator]]
+            'mobile_number': ['',[ValidationService.requireMobileNumberValidator, ValidationService.mobileNumberValidator]],
+            'email': ['',[ValidationService.requireEmailValidator, ValidationService.emailValidator]]
         });
 
         this.MY_LOGO_PATH = ImagePath.MY_WHITE_LOGO;

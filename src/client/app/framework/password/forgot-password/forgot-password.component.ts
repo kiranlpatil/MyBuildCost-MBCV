@@ -32,7 +32,7 @@ export class ForgotPasswordComponent {
               private forgotPasswordService:ForgotPasswordService, private messageService:MessageService,
               private formBuilder:FormBuilder,private loaderService:LoaderService) {
     this.userForm = this.formBuilder.group({
-      'email': ['', [Validators.required, ValidationService.emailValidator]]
+      'email': ['', [ValidationService.requireEmailValidator, ValidationService.emailValidator]]
     });
 
     this.MY_LOGO_PATH = ImagePath.MY_WHITE_LOGO;

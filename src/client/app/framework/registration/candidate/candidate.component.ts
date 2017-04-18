@@ -49,7 +49,7 @@ export class CandidateComponent implements OnInit {
     this.userForm = this.formBuilder.group({
       'first_name': ['',ValidationService.requireFirstNameValidator],
       'last_name': ['',ValidationService.requireLastNameValidator],
-      'mobile_number': ['', [ValidationService.requireMobileNumberValidator, ValidationService.mobileNumberValidator]],
+      'mobile_number': ['',[ValidationService.requireMobileNumberValidator, ValidationService.mobileNumberValidator]],
       'email': ['', [ValidationService.requireEmailValidator, ValidationService.emailValidator]],
       'password': ['', [ValidationService.requirePasswordValidator, ValidationService.passwordValidator]],
       'conform_password': ['', ValidationService.requireConfirmPasswordValidator],
