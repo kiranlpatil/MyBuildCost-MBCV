@@ -14,6 +14,10 @@ $error: #e82c0c;
       padding-left: 0;
     }
   }
+
+  .btn-primary:disabled {
+    display: none;
+  }
 }
 
 .info {

@@ -139,6 +139,10 @@ $modal-bg: #f2f2f2;
       padding-left: 0;
     }
   }
+
+  .btn-primary:disabled {
+    display: none;
+  }
 }
 
 .modal-dialog {

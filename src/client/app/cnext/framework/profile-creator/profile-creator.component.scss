@@ -42,6 +42,17 @@ $blue: #3694d1;
   top: 0;
   width: 100%;
   z-index: 99;
+
+  .cn-logo {
+    position: fixed;
+    top: 8px;
+    left: 15px;
+    width: 120px;
+
+    img {
+      width: 100%;
+    }
+  }
 }
 
 .bar {
@@ -240,6 +251,12 @@ $blue: #3694d1;
 }
 
 @media only screen and (max-width: 1280px) {
+  .bar-container {
+    .cn-logo {
+      display: none;
+    }
+  }
+
   .profile-wrapper {
     display: inline-block;
     width: 100%;
@@ -272,6 +289,10 @@ $blue: #3694d1;
   .bar-container {
     height: 50px;
     padding-top: 16px;
+
+    .cn-logo {
+      left: 15px;
+    }
   }
 
   .bar {

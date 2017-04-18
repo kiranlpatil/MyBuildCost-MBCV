@@ -45,6 +45,12 @@ $secondary-option: #00aed5;
     }
   }
 
+  & > input:disabled {
+    & + span {
+      cursor: not-allowed;
+    }
+  }
+
   &:hover {
     & > input {
       & + span {
@@ -55,6 +61,12 @@ $secondary-option: #00aed5;
         & + span {
           color: $white;
         }
+      }
+    }
+
+    & > input:disabled {
+      & + span {
+        cursor: not-allowed;
       }
     }
   }

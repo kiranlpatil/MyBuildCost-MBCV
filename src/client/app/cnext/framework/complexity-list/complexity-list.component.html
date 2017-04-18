@@ -1,45 +1,48 @@
 <div class="col-sm-12  max-height complexities">
   <div *ngIf="isComplexityPresent">
-  <div *ngFor="let role of candidateRoles">
-    <div *ngFor="let capability of role.capabilities">
-      <div class="select-complexity clearfix" *ngFor="let complexity of capability.complexities">
-        <div class="complexity-name col-sm-2 no-padding">
-          <p id="complexity1">{{complexity.name}}</p>
+    <div *ngFor="let role of candidateRoles">
+      <div *ngFor="let capability of role.capabilities">
+        <div class="select-complexity clearfix" *ngFor="let complexity of capability.complexities">
+          <div class="complexity-name col-sm-2 no-padding">
+            <p id="complexity1">{{complexity.name}}</p>
+          </div>
+          <div class="scenarios col-sm-10 padding-left15">
+            <div class="select-option" *ngFor="let scenario of complexity.scenarios">
+              <label>
+                <input type="radio" name="{{complexity.name}}" value="{{scenario.name}}"
+                       (change)="selectComplexity(role,complexity,scenario,$event)"
+                       [checked]="scenario.isChecked" [disabled]="true">
+                <span>{{scenario.name}}</span>
+              </label>
+            </div>
+          </div>
         </div>
-        <div class="scenarios col-sm-10 padding-left15">
-          <div class="select-option" *ngFor="let scenario of complexity.scenarios">
-            <label>
-              <input type="radio" name="{{complexity.name}}" value="{{scenario.name}}"
-                     (change)="selectComplexity(role,complexity,scenario,$event)"
-                     [checked]="scenario.isChecked" [disabled]="true">
-              <span>{{scenario.name}}</span>
-            </label>
+      </div>
+    </div>
+  </div>
+
+  <div  *ngIf="!isComplexityPresent"  >
+    <div *ngFor="let role of roles">
+      <div *ngFor="let capability of role.capabilities">
+        <div class="select-complexity clearfix" *ngFor="let complexity of capability.complexities" >
+          <div class="complexity-name col-sm-2 no-padding">
+            <p id="complexity">{{complexity.name}}</p>
+          </div>
+          <div class="scenarios col-sm-10 padding-left15">
+            <div class="select-option" *ngFor="let scenario of complexity.scenarios">
+              <label>
+                <input type="radio" name="{{complexity.name}}" value="{{scenario.name}}"
+                       (change)="selectComplexity(role,capability,complexity,scenario,$event)"
+                       [checked]="scenario.isChecked">
+                <span>{{scenario.name}}</span>
+              </label>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-
-  <div  *ngIf="!isComplexityPresent"  >
-  <div *ngFor="let role of roles">
-    <div *ngFor="let capability of role.capabilities">
-      <div class="select-complexity clearfix" *ngFor="let complexity of capability.complexities" >
-        <div class="complexity-name col-sm-2 no-padding">
-          <p id="complexity">{{complexity.name}}</p>
-        </div>
-        <div class="scenarios col-sm-10 padding-left15">
-          <div class="select-option" *ngFor="let scenario of complexity.scenarios">
-            <label>
-              <input type="radio" name="{{complexity.name}}" value="{{scenario.name}}"
-                     (change)="selectComplexity(role,capability,complexity,scenario,$event)"
-                     [checked]="scenario.isChecked">
-              <span>{{scenario.name}}</span>
-            </label>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  </div>
+<div class="button-group clearfix">
+  <button class="btn btn-primary">Confirm</button>
 </div>

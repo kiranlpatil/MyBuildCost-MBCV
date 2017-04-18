@@ -17,6 +17,15 @@ $option-theme-color: #1c75bd;
   }
 }
 
+.btn-primary {
+  float: right;
+  margin-top: 15px;
+
+  &:focus,
+  &:active {
+    outline: none;
+  }
+}
 
 .select-option > label {
   margin: 0;
@@ -75,6 +84,10 @@ $option-theme-color: #1c75bd;
 
   .complexities {
     padding: 0;
+  }
+
+  .btn-primary {
+    float: none;
   }
 }
 
