@@ -27,6 +27,8 @@ export class CandidateComponent implements OnInit {
   private storedcountry: string;
   private storedstate: string;
   private storedcity: string;
+  private stateModel: string;
+  private cityModel: string;
   private locationDetails: any;
   private isPasswordConfirm: boolean;
   private isFormSubmitted = false;
@@ -97,7 +99,11 @@ export class CandidateComponent implements OnInit {
     this.model.birth_year = newval;
   }
 
-  selectCountryModel(newval: string) {
+  selectCountryModel(newval: string) {debugger
+    this.states = new Array();
+    this.cities = new Array();
+     this.stateModel='';
+     this.cityModel='';
     for (let item of this.locationDetails) {
       if (item.country === newval) {
         let tempStates: string[] = new Array(0);
@@ -109,6 +115,10 @@ export class CandidateComponent implements OnInit {
     }
     this.storedcountry = newval;
     this.isCountrySelected = false;
+    let tempState: any = document.getElementById("states");
+    let tempCity: any = document.getElementById("cities");
+    tempState.value = '';
+    tempCity.value = '';
   }
 
   selectStateModel(newval: string) {
