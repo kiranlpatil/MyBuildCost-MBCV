@@ -33,6 +33,13 @@ $input-bg: rgba(255 , 255, 255, .1);
   padding: 3px 15px !important;
   background: #266f9e !important;
   border: #266f9e 1px solid !important;
+
+  &:active,
+  &:hover,
+  &:focus {
+    color: $white;
+    outline: 0;
+  }
 }
 
 //Common Classes
@@ -537,12 +544,17 @@ control-messages {
   li {
     width: auto;
     list-style: none;
+
+    img {
+      height: 30px;
+      margin-top: 4px;
+    }
   }
 
 
   .dropdown-menu {
     right: 0;
-    margin: 6px 0 0;
+    margin: 10px 0 0;
     left: auto;
   }
 }

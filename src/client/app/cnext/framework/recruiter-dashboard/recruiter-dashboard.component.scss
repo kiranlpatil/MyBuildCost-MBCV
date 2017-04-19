@@ -139,10 +139,25 @@ $profile-section-shadow: rgba(204, 204, 204, 1);
 }
 
 @media only screen and (max-width: 767px) {
+  .poster-wrapper {
+    padding: 0;
+  }
   .bar-container {
     .user-info {
       img {
-        margin-top: -12px;
+        margin: -12px 15px 0 0;
+      }
+    }
+  }
+
+  .nav-tabs {
+    li {
+      width: 50%;
+
+      a {
+        padding: 10px 5px;
+        margin-right: 0;
+        font-size: 11px;
       }
     }
   }

@@ -109,3 +109,11 @@ $border-color: #ddd;
     }
   }
 }
+
+@media only screen and (max-width: 767px) {
+  .roles {
+    .col-sm-12 {
+      padding: 0;
+    }
+  }
+}

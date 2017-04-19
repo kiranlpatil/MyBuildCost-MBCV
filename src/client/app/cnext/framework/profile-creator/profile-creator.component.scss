@@ -59,7 +59,6 @@ $blue: #3694d1;
   counter-reset: step;
   margin: 0 auto;
   padding: 0;
-  width: 75%;
 
   &::before {
     clear: both;
@@ -244,6 +243,9 @@ $blue: #3694d1;
 }
 
 @media only screen and (max-width: 1366px) {
+  .bar {
+    width: 75%;
+  }
   .profile-configurations {
     /*.col-sm-8, .col-sm-4 {
       width: 50%;
@@ -293,7 +295,9 @@ $blue: #3694d1;
     padding-top: 16px;
 
     .cn-logo {
+      top: 8px;
       left: 15px;
+      width: 90px;
     }
   }
 
