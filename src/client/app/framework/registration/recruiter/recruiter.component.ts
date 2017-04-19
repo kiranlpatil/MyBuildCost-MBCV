@@ -35,13 +35,9 @@ export class RecruiterComponent implements OnInit {
   private locationDetails : any;
   private companySize :any;
   private companyHeadquarter:any;
-
   private countries:string[]=new Array(0);
   private states:string[]=new Array(0);
   private cities:string[]=new Array(0);
- // private countryModel:string;
- // private stateModel:string;
- // private cityModel:string;
   private isPasswordConfirm: boolean;
   private isFormSubmitted = false;
   private recruiterForm: FormGroup;
@@ -62,7 +58,6 @@ export class RecruiterComponent implements OnInit {
     recruitmentForService.showRecruitmentFor$.subscribe(
       data=> {
         this.isRecruitingForself=data;
-        console.log('Recruiting for:',this.isRecruitingForself);
       }
     );
 
@@ -126,11 +121,11 @@ export class RecruiterComponent implements OnInit {
     this.storedcompanySize=newval;
     this.recruiterForm.value.company_size=this.storedcompanySize;
     this.model.company_size=this.recruiterForm.value.company_size;
-    console.log('company_size is',this.recruiterForm.value.company_size);
-    console.log('company_size is',this.storedcompanySize);
   }
 
   selectCountryModel(newval:string) {
+    this.states = new Array();
+    this.cities = new Array();
     for(let item of this.locationDetails) {
       if(item.country===newval) {
         let tempStates: string[]= new Array(0);
@@ -142,6 +137,8 @@ export class RecruiterComponent implements OnInit {
     }
     this.storedcountry=newval;
     this.isCountrySelected=false;
+    document.getElementById("allstates").value ='';
+    document.getElementById("allcities").value ='';
   }
 
   selectCompanyHeadquarterModel(newval : string) {
@@ -151,6 +148,7 @@ export class RecruiterComponent implements OnInit {
   }
 
   selectStateModel(newval:string) {
+    this.cities = new Array();
     for(let item of this.locationDetails) {
       if(item.country===this.storedcountry) {
         for(let state of item.states) {
@@ -166,6 +164,7 @@ export class RecruiterComponent implements OnInit {
     }
     this.storedstate=newval;
     this.isStateSelected=false;
+    document.getElementById("allcities").value='';
   }
 
   selectCityModel(newval : string) {
@@ -175,7 +174,6 @@ export class RecruiterComponent implements OnInit {
 
   onSubmit() {
     this.model = this.recruiterForm.value;
-    console.log('storedcompanySize value',this.storedcompanySize);
     this.model.current_theme = AppSettings.LIGHT_THEM;
 
     this.model.location.country =this.storedcountry;
@@ -202,7 +200,6 @@ export class RecruiterComponent implements OnInit {
     LocalStorageService.setLocalValue(LocalStorage.CHANGE_MAIL_VALUE, 'from_registration');
     LocalStorageService.setLocalValue(LocalStorage.FROM_CANDIDATE_REGISTRATION, 'false');
    // this.recruiterForm.reset();
-    //this._router.navigate([NavigationRoutes.APP_COMPANYDETAILS]);
     this._router.navigate([NavigationRoutes.VERIFY_USER]);
   }
 
@@ -222,7 +219,6 @@ export class RecruiterComponent implements OnInit {
   selectStateMessage() {
 
     if (this.storedstate) {
-      console.log("stord state is:", this.storedstate);
     } else {
       this.isStateSelected = true;
 
@@ -259,7 +255,6 @@ export class RecruiterComponent implements OnInit {
   }
 
   showMessage() {
-    //this.isShowMessage =true;
     this.isShowMessage =false;
   }
 

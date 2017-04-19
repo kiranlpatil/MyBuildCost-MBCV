@@ -148,7 +148,7 @@ export class ValidationService {
     }
   }
 
-  static pinValidator(control:any) {debugger
+  static pinValidator(control:any) {
     var pin = control.value.length;
 
     if (pin <= 20) {

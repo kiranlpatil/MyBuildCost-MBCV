@@ -27,8 +27,6 @@ export class CandidateComponent implements OnInit {
   private storedcountry: string;
   private storedstate: string;
   private storedcity: string;
-  private stateModel: string;
-  private cityModel: string;
   private locationDetails: any;
   private isPasswordConfirm: boolean;
   private isFormSubmitted = false;
@@ -99,30 +97,24 @@ export class CandidateComponent implements OnInit {
     this.model.birth_year = newval;
   }
 
-  selectCountryModel(newval: string) {debugger
+  selectCountryModel(newval: string) {            //TO DO:Use 2way binding.
     this.states = new Array();
     this.cities = new Array();
-     this.stateModel='';
-     this.cityModel='';
     for (let item of this.locationDetails) {
       if (item.country === newval) {
-        let tempStates: string[] = new Array(0);
         for (let state of item.states) {
-          tempStates.push(state.name);
+          this.states.push(state.name);
         }
-        this.states = tempStates;
       }
     }
     this.storedcountry = newval;
     this.isCountrySelected = false;
-    let tempState: any = document.getElementById("states");
-    let tempCity: any = document.getElementById("cities");
-    tempState.value = '';
-    tempCity.value = '';
+    document.getElementById("states").value=''; //TO DO:Don't use js code.
+    document.getElementById("cities").value='';
   }
 
   selectStateModel(newval: string) {
-
+    this.cities = new Array();
     for (let item of this.locationDetails) {
       if (item.country === this.storedcountry) {
         for (let state of item.states) {
@@ -138,13 +130,12 @@ export class CandidateComponent implements OnInit {
     }
     this.storedstate = newval;
     this.isStateSelected = false;
+    document.getElementById("cities").value='';
   }
 
   selectCityModel(newval: string) {
 
     this.storedcity = newval;
-    console.log("city is", newval);
-    console.log("storedcity city is", this.storedcity);
   }
 
   onSubmit() {
@@ -193,7 +184,6 @@ export class CandidateComponent implements OnInit {
   }
 
   showMessage() {
-    // this.isShowMessage =true;
     this.isShowMessage = false;
   }
 

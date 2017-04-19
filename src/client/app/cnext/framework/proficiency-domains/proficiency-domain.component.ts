@@ -45,7 +45,7 @@ export class ProficiencyDomainComponent {
     }
   }
 
-  selectedProficiencyModel(newVal: any) {debugger
+  selectedProficiencyModel(newVal: any) {
     if(newVal !=='') {
       if (this.selectedProficiencies.length < ValueConstant.MAX_PROFECIENCES) {
         this.selectedProficiencies.push(newVal);
@@ -82,7 +82,7 @@ export class ProficiencyDomainComponent {
 
 
   }
-  addProficiencyToMasterData(newVal:any) {debugger
+  addProficiencyToMasterData(newVal:any) {
     if(newVal !=='') {
       for (let i = 0; i < this.masterDataProficiencies.length; i++) {
         if (this.masterDataProficiencies[i] === newVal) {
