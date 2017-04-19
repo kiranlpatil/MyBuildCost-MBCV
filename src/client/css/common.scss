@@ -481,6 +481,10 @@ control-messages {
     text-align: left;
     margin: 0;
 
+    .avtar > img {
+      background: $white;
+    }
+
     form {
       bottom: -2px;
       position: absolute;

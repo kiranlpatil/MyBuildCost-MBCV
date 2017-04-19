@@ -47,9 +47,9 @@
               <input type="text" formControlName="description1" id="description1"  placeholder="Description" class="form-control" required />
               <span *ngIf="!setOfDocuments[0] &&  companyDetailsForm.value.description1 && isDocumentUploaded && companyDetailsForm.value.description2" class="error-messages">Please select file to upload.</span>
             </div>
-            <div class="col-sm-7">
+            <div class="col-sm-7 padding-left15">
               <div  class="clearfix">
-                <label for="file-upload1" class="custom-file-upload">Upload File</label>
+                <label for="file-upload1" class="custom-file-upload"><img src="assets/c-next/company-details/upload2.png" alt="Upload File"/></label>
                 <p class="file-name">{{fileName1}}</p>
                 <input id="file-upload1" type="file"  (change)="fileChangeEvent($event)" placeholder="Upload file" />
               </div>
@@ -63,9 +63,9 @@
               <input type="text" formControlName="description2" id="description2"  placeholder="Description" class="form-control" value="description2" required />
               <span *ngIf="!setOfDocuments[1] && companyDetailsForm.value.description2 && isDocumentUploaded && companyDetailsForm.value.description3" class="error-messages">Please select file to upload.</span>
             </div>
-            <div class="col-sm-7">
+            <div class="col-sm-7 padding-left15">
               <div class="clearfix">
-                <label for="file-upload2" class="custom-file-upload">Upload File</label>
+                <label for="file-upload2" class="custom-file-upload"><img src="assets/c-next/company-details/upload2.png" alt="Upload File"/></label>
                 <p class="file-name">{{fileName2}}</p>
                 <input id="file-upload2" type="file"  (change)="fileChangeEvent($event)" placeholder="Upload file"/>
               </div>
@@ -79,9 +79,9 @@
               <input type="text" formControlName="description3" id="description3"  placeholder="Description" class="form-control" required />
               <span *ngIf="!setOfDocuments[2] && companyDetailsForm.value.description3 && isDocumentUploaded " class="error-messages">Please select file to upload.</span>
             </div>
-            <div class="col-sm-7">
+            <div class="col-sm-7 padding-left15">
              <div class="clearfix">
-               <label for="file-upload3" class="custom-file-upload">Upload File</label>
+               <label for="file-upload3" class="custom-file-upload"><img src="assets/c-next/company-details/upload2.png" alt="Upload File"/></label>
                <p class="file-name">{{fileName3}}</p>
                <input id="file-upload3" type="file" (change)="fileChangeEvent($event)" placeholder="Upload file"/>
              </div>
