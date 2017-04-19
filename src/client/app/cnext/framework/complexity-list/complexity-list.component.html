@@ -24,7 +24,7 @@
     </div>
   </div>
 
-  <div  *ngIf="!isComplexityPresent"  >
+  <div  *ngIf="!isComplexityPresent" class="max-height" >
     <div *ngFor="let role of roles">
       <div *ngFor="let capability of role.capabilities">
         <div class="select-complexity clearfix" *ngFor="let complexity of capability.complexities" >
