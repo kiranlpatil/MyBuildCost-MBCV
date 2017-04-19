@@ -109,8 +109,10 @@ export class CandidateComponent implements OnInit {
     }
     this.storedcountry = newval;
     this.isCountrySelected = false;
-    document.getElementById("states").value=''; //TO DO:Don't use js code.
-    document.getElementById("cities").value='';
+    let tempState: any = document.getElementById("states");
+    let tempCity: any = document.getElementById("cities");
+    tempState.value = '';
+    tempCity.value = '';
   }
 
   selectStateModel(newval: string) {
@@ -130,7 +132,8 @@ export class CandidateComponent implements OnInit {
     }
     this.storedstate = newval;
     this.isStateSelected = false;
-    document.getElementById("cities").value='';
+    let tempCity: any = document.getElementById("cities");
+    tempCity.value = '';
   }
 
   selectCityModel(newval: string) {

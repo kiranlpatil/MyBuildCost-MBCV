@@ -137,8 +137,10 @@ export class RecruiterComponent implements OnInit {
     }
     this.storedcountry=newval;
     this.isCountrySelected=false;
-    document.getElementById("allstates").value ='';
-    document.getElementById("allcities").value ='';
+    let tempState: any = document.getElementById("allstates");
+    let tempCity: any = document.getElementById("allcities");
+    tempState.value = '';
+    tempCity.value = '';
   }
 
   selectCompanyHeadquarterModel(newval : string) {
@@ -164,7 +166,8 @@ export class RecruiterComponent implements OnInit {
     }
     this.storedstate=newval;
     this.isStateSelected=false;
-    document.getElementById("allcities").value='';
+    let tempCity: any = document.getElementById("allcities");
+    tempCity.value = '';
   }
 
   selectCityModel(newval : string) {
