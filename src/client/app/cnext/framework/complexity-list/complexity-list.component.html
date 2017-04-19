@@ -2,7 +2,7 @@
   <p class="info">Depending on your experience and expertise, you have used your capabilities under varying degree of complexity.
     For each capability that you have selected, choose the ost appropriate degree of complexity that
     describes what you are good at doing</p>
-  <div *ngIf="isComplexityPresent" class="max-height">
+  <div *ngIf="isComplexityPresent">
     <div *ngFor="let role of candidateRoles">
       <div *ngFor="let capability of role.capabilities">
         <div class="select-complexity clearfix" *ngFor="let complexity of capability.complexities">
@@ -24,7 +24,7 @@
     </div>
   </div>
 
-  <div  *ngIf="!isComplexityPresent" class="max-height" >
+  <div  *ngIf="!isComplexityPresent" >
     <div *ngFor="let role of roles">
       <div *ngFor="let capability of role.capabilities">
         <div class="select-complexity clearfix" *ngFor="let complexity of capability.complexities" >

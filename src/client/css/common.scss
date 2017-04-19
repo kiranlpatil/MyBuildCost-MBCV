@@ -475,25 +475,11 @@ control-messages {
 
 //company upload page
 #company-logo {
-  margin-top: 30px;
-
   .profile {
     width: 120px;
     padding: 0;
     text-align: left;
     margin: 0;
-
-    .avtar {
-      width: 100%;
-    }
-
-    .avtar > img {
-      border-radius: 0;
-      border: 1px solid $border-color;
-      width: 100%;
-      float: left;
-      margin: 0;
-    }
 
     form {
       bottom: -2px;
@@ -505,33 +491,12 @@ control-messages {
 
     form > label {
       margin-bottom: 0;
-      width: 40px;
-    }
-
-    form > label {
-      /*border: 1px solid #1c75bd;*/
-      /*border-radius: 25px;*/
+      width: 30px;
       cursor: pointer;
       display: inline-block;
-      /*padding: 5px 10px;*/
       float: left;
-      /*margin: 0 10px 0 0;*/
-      /*font-size: 12px;
-      color: #666;
-      font-weight: 100;*/
     }
   }
-  /*.custom-file-upload {
-    width: auto;
-  }*/
-
-  /*.custom-file-upload > img {
-    display: none;
-  }
-
-  .custom-file-upload > span {
-    display: block;
-  }*/
 }
 
 
@@ -646,10 +611,6 @@ control-messages {
     }
   }
 
-  #company-logo {
-    margin-top: 0;
-  }
-
   .company-details {
     control-messages {
       div {
@@ -671,7 +632,7 @@ control-messages {
 
   h4 {
     text-overflow: clip;
-    overflow: auto;
+    overflow: visible;
     white-space: normal;
   }
 }
