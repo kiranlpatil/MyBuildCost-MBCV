@@ -3,7 +3,7 @@
  */
 import {    Injectable  } from '@angular/core';
 import {  Observable  } from 'rxjs/Observable';
-import {  Candidate  } from './candidate';
+import {  CandidateDetail  } from './candidate';
 import {  BaseService, API  } from '../../shared/index';
 import {  Http,Headers, RequestOptions  } from '@angular/http';
 
@@ -13,7 +13,7 @@ export class CandidateService extends BaseService {
     super();
   }
 
-  addCandidate(candidate:Candidate):Observable<Candidate> {
+  addCandidate(candidate:CandidateDetail):Observable<CandidateDetail> {
     let headers = new Headers({ 'Content-Type': 'application/json'});
     let options = new RequestOptions({ headers: headers });
     let body = JSON.stringify(candidate);

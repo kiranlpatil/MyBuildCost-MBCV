@@ -1,5 +1,5 @@
 import {  Location  } from '../location';
-export class Candidate {
+export class CandidateDetail {
   id : any;
   isCandidate :boolean;
   first_name: string;

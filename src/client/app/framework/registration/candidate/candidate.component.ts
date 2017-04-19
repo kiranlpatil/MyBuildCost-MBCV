@@ -1,7 +1,7 @@
 import {Component, OnInit} from "@angular/core";
 import {Router} from "@angular/router";
 import {CandidateService} from "./candidate.service";
-import {Candidate} from "./candidate";
+import {CandidateDetail} from "./candidate";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ValidationService} from "../../shared/customvalidations/validation.service";
 import {Message, MessageService, CommonService, NavigationRoutes, AppSettings} from "../../shared/index";
@@ -23,7 +23,7 @@ export class CandidateComponent implements OnInit {
   states: string[] = new Array(0);
   cities: string[] = new Array(0);
   myPassword: string = '';
-  private model = new Candidate();
+  private model = new CandidateDetail();
   private storedcountry: string;
   private storedstate: string;
   private storedcity: string;
