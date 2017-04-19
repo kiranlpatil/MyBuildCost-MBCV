@@ -114,7 +114,6 @@ export function retrieve(req: express.Request, res: express.Response, next: any)
     let params =req.params.id;
    // delete params.access_token;
 //    var user = req.user;
-    console.log("Id"+params);
     var auth: AuthInterceptor = new AuthInterceptor();
 
     userService.findById(params, (error, result) => {
@@ -145,6 +144,7 @@ export function retrieve(req: express.Request, res: express.Response, next: any)
               res.send({
                 "status": "success",
                 "data": resu,
+                "metadata": result
               });
             }
           });
