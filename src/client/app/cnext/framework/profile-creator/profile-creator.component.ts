@@ -133,13 +133,13 @@ export class ProfileCreatorComponent implements OnInit {
 
     testService.showTest$.subscribe(
       data=> {
-        this.whichStepsVisible[1] = data;
-        this.showCapability = data;
+        this.whichStepsVisible[6] = data;
+        // this.showCapability = data;
       }
     );
     complexityService.showTest$.subscribe(
       data=> {
-        this.whichStepsVisible[2] = data;
+        this.whichStepsVisible[3] = data;
         this.showComplexity = data;
       }
     );
@@ -153,7 +153,7 @@ export class ProfileCreatorComponent implements OnInit {
     );
     professionalService.showTest$.subscribe(
       data=> {
-        this.whichStepsVisible[4] = data;
+        this.whichStepsVisible[5] = data;
       }
     );
     educationalService.showTest$.subscribe(
@@ -163,7 +163,7 @@ export class ProfileCreatorComponent implements OnInit {
     );
     awardService.showTest$.subscribe(
       data=> {
-        this.whichStepsVisible[6] = data;
+        //this.whichStepsVisible[6] = data;
       }
     );
   }
@@ -221,7 +221,7 @@ export class ProfileCreatorComponent implements OnInit {
   selectProficiency(proficiency:string[]){
     this.candidate.proficiencies=proficiency;
     this.saveCandidateDetails();
-    this.whichStepsVisible[3] = true;
+    this.whichStepsVisible[4] = true;
   }
 
   getIndustry() {
@@ -339,15 +339,31 @@ export class ProfileCreatorComponent implements OnInit {
         if (this.candidate.industry.roles[0].capabilities[0].complexities.length > 0) {
           this.whichStepsVisible[3] = true;
           this.showProfeciency = true;
+          if (this.candidate.proficiencies.length > 0) {
+            this.whichStepsVisible[4]=true;
+          }
         }
       }
     }
     if (this.candidate.professionalDetails!== undefined && this.candidate.professionalDetails.education!=='') {
-      this.whichStepsVisible[4] = true;
-    }
-    if (this.candidate.academics.length > 0 && this.candidate.academics[0].schoolName !=='') {
       this.whichStepsVisible[5] = true;
     }
+
+    if(this.candidate.academics.length > 0 && this.candidate.academics[0].schoolName !=='' &&
+      this.candidate.certifications.length >0 && this.candidate.certifications[0].name!== '' &&
+      this.candidate.aboutMyself !== undefined && this.candidate.aboutMyself !== '' &&
+      this.candidate.employmentHistory.length>0 && this.candidate.employmentHistory[0].companyName !== '' &&
+      this.candidate.awards.length >0 && this.candidate.awards[0].name !== ''
+    )
+    {
+      this.whichStepsVisible[6] = true;
+    }
+
+
+
+   /* if (this.candidate.academics.length > 0 && this.candidate.academics[0].schoolName !=='') {
+      this.whichStepsVisible[5] = true;
+    }*/
     if(this.candidate.certifications.length >0 && this.candidate.certifications[0].name!== ''){
       this.isHiddenCertificate=true;
     }
@@ -359,7 +375,7 @@ export class ProfileCreatorComponent implements OnInit {
     }
     if (this.candidate.awards.length >0 && this.candidate.awards[0].name !== '') {
       this.isHiddenAwrard=true;
-      this.whichStepsVisible[6] = true;
+     /* this.whichStepsVisible[6] = true;*/
     }
   }
 

@@ -6,13 +6,13 @@
     </div>
 
     <ul class="bar container" id="bar">
-      <li class="active"><p>Enter Roles</p></li>
-      <li [class.active]="whichStepsVisible[1]"><p>Describe Roles</p></li>
-      <li [class.active]="whichStepsVisible[2]"> <p>Proficiency Level</p></li>
-      <li [class.active]="whichStepsVisible[3]"><p>My Skills</p></li>
-      <li [class.active]="whichStepsVisible[4]"><p>Professional Details</p></li>
-      <li [class.active]="whichStepsVisible[5]"><p>Academic Details</p></li>
-      <li [class.active]="whichStepsVisible[6]"><p>Awards</p></li>
+      <!--<li class="active"><p>Enter Roles</p></li>-->
+      <li [class.active]="whichStepsVisible[1]"><p>Area of Work</p></li>
+      <li [class.active]="whichStepsVisible[2]"><p>Capabilities</p></li>
+      <li [class.active]="whichStepsVisible[3]"><p>Complexities</p></li>
+      <li [class.active]="whichStepsVisible[4]"><p>Proficiencies</p></li>
+      <li [class.active]="whichStepsVisible[5]"><p>Professional Data</p></li>
+      <li [class.active]="whichStepsVisible[6]"><p>Profile Description</p></li>
     </ul>
     <ul class="logout-dropdown">
       <li class="dropdown">
@@ -101,7 +101,7 @@
 
         <div class="section-container" [hidden]="chkEmployeeHistory" [hidden]="!showProfeciency" >
           <div class="main-content clearfix"  >
-            <h4 class="heading">Employment Histroy
+            <h4 class="heading">Employment History
               <span class="close-dialog" [hidden]="isHiddenEmployeehistory">Close this section if not needed
             <span class="glyphicon glyphicon-remove" (click)="hideEmployeeHistory()"></span>
           </span>

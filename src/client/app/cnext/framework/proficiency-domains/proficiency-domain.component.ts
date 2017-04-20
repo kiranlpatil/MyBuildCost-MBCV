@@ -23,6 +23,8 @@ export class ProficiencyDomainComponent {
   private showAlert: boolean = false;
   private proficiencyModel: string;
   private alreadyPresent:boolean=false;
+  private showModalStyle:boolean = false;
+  private otherProficiency:string ='';
 
 
   constructor(private proficiencydoaminService:ProficiencyDomainService ) {
@@ -73,31 +75,35 @@ export class ProficiencyDomainComponent {
     this.proficiencies.names.splice(this.proficiencies.names.indexOf(newVal), 1);
   }
 
-
-  AddProficiency()
-  {
-
-
-
-
-
+  showHideModal(newVal:any) { //TODO
+    this.otherProficiency=newVal;
+    this.showModalStyle = !this.showModalStyle;
   }
-  addProficiencyToMasterData(newVal:any) {
-    if(newVal !=='') {
+  getStyleModal() {
+    if (this.showModalStyle) {
+      return 'block';
+    } else {
+      return 'none';
+    }
+  }
+
+  addProficiencyToMasterData() {
+    this.showModalStyle = !this.showModalStyle;
+    if(this.otherProficiency !=='') {
       for (let i = 0; i < this.masterDataProficiencies.length; i++) {
-        if (this.masterDataProficiencies[i] === newVal) {
+        if (this.masterDataProficiencies[i] === this.otherProficiency) {
           this.alreadyPresent = true;
         }
       }
       if (this.alreadyPresent === false) {
-        this.proficiencydoaminService.addProficiencyToMasterData(newVal, this.candidate.industry.name).subscribe(
+        this.proficiencydoaminService.addProficiencyToMasterData(this.otherProficiency, this.candidate.industry.name).subscribe(
           data => {
             console.log(data);
           },
           error => {
             console.log(error);
           });
-        this.selectedProficiencyModel(newVal);
+        this.selectedProficiencyModel(this.otherProficiency);
       }
     }
     this.alreadyPresent = false;

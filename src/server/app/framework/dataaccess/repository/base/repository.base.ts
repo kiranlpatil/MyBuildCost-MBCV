@@ -5,7 +5,6 @@ import * as mongoose from "mongoose";
 class RepositoryBase<T extends mongoose.Document> implements IRead<T>, IWrite<T> {
 
   private _model:mongoose.Model<mongoose.Document>;
-  private items:any[];
 
   constructor(schemaModel:mongoose.Model<mongoose.Document>) {
     this._model = schemaModel;
@@ -69,148 +68,15 @@ class RepositoryBase<T extends mongoose.Document> implements IRead<T>, IWrite<T>
   }
 
   findOneAndUpdateIndustry(query:any, newData:any, options:any, callback:(err:any, result:any)=>void) {//todo remaining one scenario please check it
-
-    console.log("-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
-    console.log("-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
-    console.log(JSON.stringify(newData))
-    console.log("-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
-    console.log("-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
-
-   /* if (newData.industry.roles) {
-      if (newData.industry.roles[0]) {
-        if (newData.industry.roles[0].isAPIForComplexity == true) {
-          for (let role of newData.industry.roles) {
-            role.secondaryCapabilities = new Array(0);
-            let indexOfSecondaryCapability:number[] = new Array(0);
-            if (role.capabilities) {
-              for (let capability of role.capabilities) {
-                if (capability.isSecondary) {
-                  indexOfSecondaryCapability.push(role.capabilities.indexOf(capability));
-                  role.secondaryCapabilities.push(capability);
-                }
-                if ((capability.isPrimary == undefined && capability.isSecondary == undefined) || (capability.isPrimary == false && capability.isSecondary == false)) {
-                  indexOfSecondaryCapability.push(role.capabilities.indexOf(capability));
-                }
-              }
-              for (let i of indexOfSecondaryCapability) {
-                role.capabilities.splice(i, 1);
-              }
-            }
-          }
-        }
-      }
-    }*/
     this._model.findOneAndUpdate(query, newData, options, function (err, result) {
       callback(err, result);
     });
   }
+
   //custom API created for C-next Roles capabilities and complexities
 
   pushInJobpost(id:string, value:any, callback:(error:any, result:any) => void) {
     this._model.update({_id: id}, { $push:{ "postedJobs":value.postedJobs } }, callback);
-  }
-
-  findRoles(name:string, callback:(error:any, result:any) => void) {
-    this.items = new Array(0);
-    this._model.find({"name": name}, (err:any, industry:any)=> {
-      if (err) {
-        callback(err, null);
-      } else {
-        if (industry.length <= 0) {
-          callback(new Error("Records are not found"), null);
-        } else {
-          for (let role of industry[0].roles) {
-            let obj:any = {
-              "industryName" : industry[0].name,
-              "_id": role._id,
-              "name": role.name
-            };
-            this.items.push(obj);
-          }
-          callback(null, this.items);
-        }
-      }
-    });
-  }
-
-  findCapabilities(item:any, callback:(error:any, result:any) => void) {
-    this.items = new Array(0);
-    this._model.find({"name": item.name},(err:any, industry:any)=> {
-      if (err) {
-        callback(err, null);
-      } else {
-        if (industry.length <= 0) {
-          callback(new Error("Records are not found"), null);
-        } else {
-          for (let role of industry[0].roles) {
-            for(let o of item.roles){
-              if(o==role.name){
-                let role_object :any={
-                    name:role.name,
-                    capabilities:[]
-                };
-                role_object.capabilities=new Array(0);
-                for(let capability of role.capabilities){
-                  let obj:any = {
-                    "industryName" : industry[0].name,
-                    "roleName":role.name,
-                    "_id": capability._id,
-                    "name": capability.name
-                  };
-                  role_object.capabilities.push(obj);
-                }
-                this.items.push(role_object);
-              }
-            }
-          }
-          callback(null, this.items);
-        }
-      }
-    });
-  }
-
-  findComplexities(item:any, callback:(error:any, result:any) => void) {
-    this.items = new Array(0);
-    this._model.find({"name": item.name},(err:any, industry:any)=> {
-      if (err) {
-        callback(err, null);
-      } else {
-        if (industry.length <= 0) {
-          callback(new Error("Records are not found"), null);
-        } else {
-          for (let role of industry[0].roles) {
-            for(let o of item.roles){
-              if(o==role.name){
-                let role_object :any={
-                  name:role.name,
-                  capabilities:[]
-                };
-                for(let capability of role.capabilities){
-                  for(let ob of item.capabilities){
-                    if(ob == capability.name){
-                      let capability_object :any={
-                        name:capability.name,
-                        complexities:[]
-                      };
-                      for(let complexity of capability.complexities){
-                        let complexity_object :any={
-                          name:complexity.name,
-                          scenarios:complexity.scenarios
-                        };
-                        capability_object.complexities.push(complexity_object);
-                      }
-                      role_object.capabilities.push(capability_object);
-                    }
-                  }
-                }
-                this.items.push(role_object);
-             }
-            }
-          }
-          callback(null, this.items);
-        }
-      }
-    });
   }
 
   pushElementInArray(name:string, value:string, callback:(error:any, result:any) => void) {

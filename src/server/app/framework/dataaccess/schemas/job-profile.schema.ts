@@ -43,6 +43,7 @@ class JobProfileSchema {
           capabilities: [{
             complexities: [{
               scenarios: {
+                isChecked : Boolean,
                 name: String
               },
               name: String
