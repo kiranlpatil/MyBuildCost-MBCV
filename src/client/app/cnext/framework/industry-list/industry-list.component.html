@@ -10,11 +10,12 @@
       </div>
     </div>
     <div class="button-group clearfix"  >
-      <button class="btn btn-primary" (click)="showHideModal()" [disabled]="disableButton||candidateIndustry.name">Next</button>
+      <button class="btn btn-primary" (click)="disableIndustrires()" [class.hide-next-btn]="disableButton||candidateIndustry.name" [disabled]="disableButton||candidateIndustry.name" >Next</button>
     </div>
   </div>
 </div>
 
+<!--
 <div class="modal" [style.display]="getStyleModal()" >
   <div class="modal-bg">
     <div class="modal-dialog modal-md">
@@ -35,3 +36,4 @@
     </div>
   </div>
 </div>
+-->

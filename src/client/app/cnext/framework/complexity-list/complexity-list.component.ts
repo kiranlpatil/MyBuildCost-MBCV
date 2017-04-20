@@ -18,9 +18,12 @@ export class ComplexityListComponent {
   @Output() selectComplexityWithRole = new EventEmitter();
   private scenarioNames:string[] = new Array(0);
   private scenaricomplexityNames:string[] = new Array(0);
+  private selectedComplexityNames:string[]=new Array(0);
   private numberOfComplexitySelected:number = 0;
   private isComplexityButtonEnable:boolean = false;
   @Input() isComplexityPresent : boolean=false;
+  private showModalStyle:boolean = false;
+
   ngOnChanges(changes:any) {
     if (changes.roles) {
       this.roles = changes.roles.currentValue;
@@ -69,13 +72,18 @@ export class ComplexityListComponent {
       item.isChecked = false;
     }
     selectedScenario.isChecked = true;
-    event.target.checked ? this.numberOfComplexitySelected++ : this.numberOfComplexitySelected--;
-    if (this.numberOfComplexitySelected >= this.scenaricomplexityNames.length) {
+    if(this.selectedComplexityNames.indexOf(complexity.name)===-1){
+      this.selectedComplexityNames.push(complexity.name);
+    }
+    //event.target.checked ? this.numberOfComplexitySelected++ : this.numberOfComplexitySelected--;
+    if (this.selectedComplexityNames.length === this.scenaricomplexityNames.length) {
       this.isComplexityButtonEnable =true;
     }
   }
 
   saveComplexity(){
+    this.isComplexityButtonEnable =false;
+    this.showModalStyle = !this.showModalStyle;
     for(let rol  of this.candidateRoles){
       for(let mainrol of this.roles){
         if(rol.name = mainrol.name){
@@ -90,4 +98,11 @@ export class ComplexityListComponent {
     this.selectComplexityWithRole.emit(this.roles);
   }
 
+  getStyleModal() {
+    return this.showModalStyle?'block':'none';
+  }
+
+  showHideModal() {
+    this.showModalStyle = !this.showModalStyle;
+  }
 }

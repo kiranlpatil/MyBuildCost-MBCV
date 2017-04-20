@@ -57,7 +57,7 @@ export class RoleListComponent {
 
   disableRolelist() {
     this.disableRole= true;
-    this.showModalStyle = !this.showModalStyle;
+    //this.showModalStyle = !this.showModalStyle;
     this.selectRoles.emit(this.selectedRoles);
   }
 

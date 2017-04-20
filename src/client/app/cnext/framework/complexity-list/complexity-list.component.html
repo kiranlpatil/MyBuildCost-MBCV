@@ -46,6 +46,28 @@
     </div>
   </div>
   <div class="button-group clearfix">
-    <button class="btn btn-primary" (click)="saveComplexity()" [disabled]="!isComplexityButtonEnable">Next</button>
+    <button class="btn btn-primary" [class.hide-next-btn]="!isComplexityButtonEnable" (click)="showHideModal()" [disabled]="!isComplexityButtonEnable">Next</button>
+  </div>
+</div>
+
+
+<div class="modal" [style.display]="getStyleModal()">
+  <div class="modal-bg">
+    <div class="modal-dialog modal-md">
+      <div class="modal-content">
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-sm-12">
+              <p>Saving area of work details. Once saved, you can not change it for 3 months.</p>
+
+              <div class="button-group">
+                <button class="btn btn-primary" (click)="saveComplexity()">Save</button>
+                <button class="btn btn-default" (click)="showHideModal()">Cancel</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

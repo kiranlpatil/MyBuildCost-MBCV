@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, Output} from "@angular/core";
 import {Role} from "../model/role";
 import {Capability} from "../model/capability";
+import {ValueConstant} from "../../../framework/shared/constants";
 
 @Component({
   moduleId: module.id,
@@ -46,7 +47,7 @@ export class CapabilityListComponent {
     this.disableButton=false;
     this.roles[0].isAPIForComplexity=true;
     if (event.target.checked) {
-      if (this.primaryCapabilitiesNumber < 2) {
+      if (this.primaryCapabilitiesNumber < ValueConstant.MAX_CAPABILITIES) {
         this.primaryCapabilitiesNumber++;
         selectedCapability.isPrimary = true;
       } else {
@@ -63,6 +64,7 @@ export class CapabilityListComponent {
   }
 
   disableCapability() {
+    this.disableButton=true;
     this.selectCapabilityWithRole.emit(this.roles);
   }
 }

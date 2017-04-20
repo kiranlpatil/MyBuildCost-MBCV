@@ -37,7 +37,7 @@ export class IndustryListComponent {
   disableIndustrires() {
     this.disableButton=true;
     this.disableIndustry=true;
-    this.showModalStyle = !this.showModalStyle;
+    //this.showModalStyle = !this.showModalStyle;
     this.selectIndustry.emit(this.selectedIndustry); // this.createAndSave();
 
   }
