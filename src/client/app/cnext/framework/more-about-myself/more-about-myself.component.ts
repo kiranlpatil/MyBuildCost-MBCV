@@ -7,6 +7,8 @@ import {LocalStorage} from "../../../framework/shared/constants";
 import {Message} from "../../../framework/shared/message";
 import {Candidate} from "../model/candidate";
 import {DisableAboutMyselfGlyphiconService} from "../disableAboutMyself.service";
+import {isUndefined} from "util";
+import {TestService} from "../test.service";
 
 @Component({
   moduleId: module.id,
@@ -28,7 +30,7 @@ export class MoreAboutMyselfComponent implements OnInit {
   private maxword:number;
   constructor(private aboutMyselfservice:AboutCandidateService,private messageService:MessageService,
               private disableAboutMyselfGlyphiconService:DisableAboutMyselfGlyphiconService,
-              private profileCreatorService:ProfileCreatorService) {
+              private profileCreatorService:ProfileCreatorService,private testService:TestService,) {
     this.reSize = new Array(1);
   }
   ngOnInit() {
@@ -65,6 +67,7 @@ export class MoreAboutMyselfComponent implements OnInit {
     this.messageService.message(message);
   }
   addAboutMyself() {
+
     this.disableAboutMyselfGlyphiconService.change(true);
    this.spaceSplitedString= this.candidate.aboutMyself.split(' ');
     this.dotSplitedString= this.candidate.aboutMyself.split('.');
@@ -81,6 +84,15 @@ export class MoreAboutMyselfComponent implements OnInit {
       error => {
         console.log(error);
       });
+
+    if(this.candidate.aboutMyself !==" "   && this.candidate.employmentHistory !==undefined &&
+       this.candidate.certifications !== undefined && this.candidate.academics !== undefined
+        && this.candidate.awards !== undefined)
+    {
+      this.testService.change(true);
+    }
+
+
   }
 
 }

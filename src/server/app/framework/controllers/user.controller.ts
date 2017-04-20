@@ -880,7 +880,7 @@ export function getAddress (req:express.Request, res:express.Response) {
   }
 }
 export function getRealocation(req:express.Request, res:express.Response) {
- console.log("hii there");
+
   __dirname = './';
   var filepath="realocation.json";
   try {

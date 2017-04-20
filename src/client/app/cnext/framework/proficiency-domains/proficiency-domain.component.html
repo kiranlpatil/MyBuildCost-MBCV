@@ -11,7 +11,7 @@
           <div ng2-auto-complete
                [source]="proficiencies.names"
                (ngModelChange)="selectedProficiencyModel($event)">
-            <input  class="form-control" [(ngModel)]="proficiencyModel" id={{type}} (keyup.enter)="addProficiencyToMasterData($event.target.value)" placeholder="{{proficiencies.label}}" />
+            <input  class="form-control" [(ngModel)]="proficiencyModel" id={{type}} (keyup.enter)="showHideModal($event.target.value)" placeholder="{{proficiencies.label}}" />
            <br/>
             <p class="info-message">*To add other proficiency which are not in the list, just type and enter</p>
 
@@ -31,6 +31,26 @@
             <button type="button" class="btn btn-create-profile" (click)="deleteItem($event)">
               {{item}} <span class="glyphicon glyphicon-remove" ></span>
             </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal" [style.display]="getStyleModal()" >
+  <div class="modal-bg">
+    <div class="modal-dialog modal-md">
+      <div class="modal-content">
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-sm-12">
+              <p>Do you want to add this proficiency ? </p>
+
+              <div class="button-group">
+                <button class="btn btn-primary" (click)="addProficiencyToMasterData()">Save</button>
+                <button class="btn btn-default" (click)="showHideModal()">Cancel</button>
+              </div>
+            </div>
           </div>
         </div>
       </div>

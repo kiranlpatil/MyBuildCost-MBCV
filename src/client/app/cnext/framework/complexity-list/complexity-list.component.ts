@@ -3,6 +3,7 @@ import {Role} from "../model/role";
 import {Scenario} from "../model/scenario";
 import {Complexity} from "../model/complexity";
 import {Capability} from "../model/capability";
+import {ComplexityService} from "../complexity.service";
 
 @Component({
   moduleId: module.id,
@@ -21,6 +22,11 @@ export class ComplexityListComponent {
   private numberOfComplexitySelected:number = 0;
   private isComplexityButtonEnable:boolean = false;
   @Input() isComplexityPresent : boolean=false;
+  constructor(  private complexityService:ComplexityService,)
+  {
+
+
+  }
   ngOnChanges(changes:any) {
     if (changes.roles) {
       this.roles = changes.roles.currentValue;
@@ -76,6 +82,7 @@ export class ComplexityListComponent {
   }
 
   saveComplexity(){
+    this.complexityService.change(true);
     for(let rol  of this.candidateRoles){
       for(let mainrol of this.roles){
         if(rol.name = mainrol.name){
