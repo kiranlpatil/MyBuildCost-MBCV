@@ -24,18 +24,24 @@ export class ProfilePictureComponent  {
 
   private model = new UserProfile();
   private filesToUpload: Array<File>;
-  private   image_path: string;
-  private   uploaded_image_path: string;
+  private image_path: string;
+  private uploaded_image_path: string;
   private isShowErrorMessage: boolean = true;
+  private isCandidate: string;
 
 
   constructor(private dashboardService: DashboardService,
-              private messageService: MessageService, private profileService: ProfileService) {
+              private messageService: MessageService, private profileService: ProfileService) {debugger
     this.filesToUpload = [];
     this.uploaded_image_path = LocalStorageService.getLocalValue(LocalStorage.PROFILE_PICTURE); //TODO:Get it from get user call.
-
+    this.isCandidate = LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE);
     if ( this.uploaded_image_path === "undefined" || this.uploaded_image_path === null) {
-      this.image_path = ImagePath.PROFILE_IMG_ICON;
+      if(this.isCandidate == "true"){
+        this.image_path = ImagePath.PROFILE_IMG_ICON;
+      }
+      else {
+        this.image_path = ImagePath.COMPANY_LOGO_IMG_ICON;
+      }
     } else {
       this.uploaded_image_path = this.uploaded_image_path.substring(4,this.uploaded_image_path.length-1).replace('"','');
       this.image_path = AppSettings.IP + this.uploaded_image_path;

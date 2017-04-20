@@ -6,13 +6,18 @@ export class ValidationService {
       'required': 'Required',
       'requiredEmail': 'Please enter your email address',
       'requiredPassword': 'Please enter your password',
+      'requiredNewPassword': 'Please enter new password',
       'requiredConfirmPassword': 'Please enter confirm password',
+      'requiredCurrentPassword': 'Please enter current password',
       'requiredFirstName': 'Please enter your first name',
       'requiredLastName': 'Please enter your last name',
       'requiredMobileNumber': 'Please enter your mobile number',
       'requiredPin': 'Please enter your pin code',
+      'requiredDescription': 'Please enter description',
+      'requiredCompanyDescription': 'Please say something about your company ',
       'requiredCompanyName': 'Please enter company name',
-      'invalidEmailAddress': 'Email incorrect.',
+      'requiredOtp': 'Please enter OTP',
+      'invalidEmailAddress': 'Email incorrect',
       'invalidPassword': 'Passwords must contain at least 8 characters, including uppercase, lowercase letters, numbers and one special character($@_!%*?&).',
       'maxlength': `Maximum ${validatorValue.requiredLength} characters`,
       'minlength': `Minimum ${validatorValue.requiredLength} characters`,
@@ -63,6 +68,15 @@ export class ValidationService {
     }
   }
 
+  static requireCompanyDescriptionValidator(control:any) {
+    if (control.value =="" || control.value == undefined) {
+      return {'requiredCompanyDescription': true};
+    }
+    else {
+      return null;
+    }
+  }
+
   static requireLastNameValidator(control:any) {
     if (control.value =="" || control.value == undefined) {
       return {'requiredLastName': true};
@@ -102,6 +116,30 @@ export class ValidationService {
     }
   }
 
+  static requireNewPasswordValidator(control:any){
+    if (control.value =="" || control.value == undefined) {
+      return {'requiredNewPassword': true};
+    } else {
+      return null;
+    }
+  }
+
+  static requireCurrentPasswordValidator(control:any){
+    if (control.value =="" || control.value == undefined) {
+      return {'requiredCurrentPassword': true};
+    } else {
+      return null;
+    }
+  }
+
+  static requireOtpValidator(control:any){
+    if (control.value =="" || control.value == undefined) {
+      return {'requiredOtp': true};
+    } else {
+      return null;
+    }
+  }
+
   static requireConfirmPasswordValidator(control:any){
     if (control.value =="" || control.value == undefined) {
       return {'requiredConfirmPassword': true};
@@ -113,6 +151,14 @@ export class ValidationService {
   static requirePinValidator(control:any){
     if (control.value =="" || control.value == undefined) {
       return {'requiredPin': true};
+    } else {
+      return null;
+    }
+  }
+
+  static requireDescriptionValidator(control:any){
+    if (control.value =="" || control.value == undefined) {
+      return {'requiredDescription': true};
     } else {
       return null;
     }

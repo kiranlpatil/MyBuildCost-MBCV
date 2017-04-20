@@ -17,6 +17,7 @@ import { LocalStorageService } from '../../shared/localstorage.service';
 import { LoaderService } from '../../shared/loader/loader.service';
 import { Http } from '@angular/http';
 import {Router, ActivatedRoute, Params} from '@angular/router';
+import {ValidationService} from "../../shared/customvalidations/validation.service";
 
 
 @Component({
@@ -49,14 +50,11 @@ export class CompanyDetailsComponent implements OnInit {
               private companyDetailsService: CompanyDetailsService,private profileService: ProfileService,
               private messageService: MessageService, private formBuilder: FormBuilder, private loaderService: LoaderService,private activatedRoute:ActivatedRoute) {
     this.companyDetailsForm = this.formBuilder.group({
-      'about_company':['',Validators.required],
-      'description1': ['',Validators.required],
-      'description2': ['',Validators.required],
-      'description3': ['',Validators.required]
-
+      'about_company':['',ValidationService.requireCompanyDescriptionValidator],
+      'description1': ['',ValidationService.requireDescriptionValidator],
+      'description2': ['',ValidationService.requireDescriptionValidator],
+      'description3': ['',ValidationService.requireDescriptionValidator]
     });
-
-
 
     this.BODY_BACKGROUND = ImagePath.BODY_BACKGROUND;
   }

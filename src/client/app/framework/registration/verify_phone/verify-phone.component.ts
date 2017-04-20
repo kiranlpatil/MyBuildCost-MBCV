@@ -7,6 +7,7 @@ import {  VerifyPhoneService  } from './verify-phone.service';
 import {  MessageService  } from '../../shared/message.service';
 import {  Message  } from '../../shared/message';
 import {  LocalStorageService  } from '../../shared/localstorage.service';
+import {ValidationService} from "../../shared/customvalidations/validation.service";
 
 @Component({
   moduleId: module.id,
@@ -29,7 +30,7 @@ export class VerifyPhoneComponent {
               private verifyPhoneService: VerifyPhoneService, private messageService: MessageService) {
 
     this.userForm = this.formBuilder.group({
-      'otp': ['', Validators.required]
+      'otp': ['',ValidationService.requireOtpValidator]
     });
 
     this.MY_LOGO_PATH = ImagePath.MY_WHITE_LOGO;

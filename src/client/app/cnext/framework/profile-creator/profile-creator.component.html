@@ -64,14 +64,6 @@
           </div>
         </div>
 
-        <div class="section-container" [hidden]="!isRoleTypeShow">
-          <div class="main-content clearfix">
-            <h4 class="heading">Select Role Type (Any one of the following)</h4>
-            <cn-role-type-list [roleTypes]="roleTypes" [candidateRoletype]="candidate.roleType" (selectRoleType)="selectRoleType($event)"></cn-role-type-list>
-          </div>
-        </div>
-
-
         <div class="section-container" [hidden]="!showCapability">
           <div class="main-content clearfix">
             <h4 class="heading">Choose Your Capabilities (Max. 10)</h4>

@@ -13,6 +13,8 @@ import {  FormGroup, FormBuilder, Validators  } from '@angular/forms';
 import {  LocalStorageService  } from '../../shared/localstorage.service';
 import {  LocalStorage  } from '../../shared/constants';
 import {  LoaderService  } from '../../shared/loader/loader.service';
+import {ValidationService} from "../../shared/customvalidations/validation.service";
+
 
 @Component({
     moduleId: module.id,
@@ -39,9 +41,9 @@ export class ChangePasswordComponent {
                 private formBuilder:FormBuilder,private loaderService:LoaderService) {
 
         this.userForm = this.formBuilder.group({
-            'new_password': ['', Validators.required],
-            'confirm_password': ['', [Validators.required, Validators.minLength(8)]],
-            'current_password': ['', [Validators.required, Validators.minLength(8)]]
+            'new_password': ['', ValidationService.requireNewPasswordValidator, ValidationService.passwordValidator],
+            'confirm_password': ['', [ ValidationService.requireConfirmPasswordValidator]],
+            'current_password': ['', [ValidationService.requireCurrentPasswordValidator, ValidationService.passwordValidator]]
         });
 
         this.PASSWORD_ICON = ImagePath.PASSWORD_ICON_GREY;

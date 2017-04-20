@@ -21,7 +21,7 @@ private candidate:Candidate=new Candidate();
                private profileCreatorService:ProfileCreatorService) {
   }
 
-  ngOnInit() {debugger
+  ngOnInit() {
     this.getCandidateProfile();
   }
 

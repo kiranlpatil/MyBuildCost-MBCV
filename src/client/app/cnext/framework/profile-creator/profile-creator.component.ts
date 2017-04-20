@@ -70,6 +70,7 @@ export class ProfileCreatorComponent implements OnInit {
   private isHiddenCertificate:boolean=false;
   private isHiddenEmployeehistory:boolean=false;
   private isTitleFilled:boolean=true;
+  private flag:boolean=true;
 
 
   constructor(private _router:Router,
@@ -198,8 +199,11 @@ export class ProfileCreatorComponent implements OnInit {
   selectRole(roles:Role[]) {
     this.candidate.industry.roles = roles;
     this.saveCandidateDetails();
-    this.getRoleType();
-    this.isRoleTypeShow = true;
+    if(this.flag) {
+      this.getCapability();
+      this.showCapability = true;
+      this.whichStepsVisible[1] = true;
+    }
     if (this.candidate.industry.roles) {
       if (this.candidate.industry.roles[0].capabilities) {
         if (this.candidate.industry.roles[0].capabilities.length > 0) {
@@ -213,13 +217,6 @@ export class ProfileCreatorComponent implements OnInit {
     }
   }
 
-  selectRoleType(roleType:string) {
-    this.candidate.roleType = roleType;
-    this.saveCandidateDetails();
-    this.getCapability();
-    this.showCapability = true;
-    this.whichStepsVisible[1] = true;
-  }
 
   selectProficiency(proficiency:string[]){
     this.candidate.proficiencies=proficiency;
@@ -241,14 +238,10 @@ export class ProfileCreatorComponent implements OnInit {
         error => this.onError(error));
   }
 
-  getRoleType() {
-    this.profileCreatorService.getRoleTypes()
-      .subscribe(
-        data=> this.roleTypes = data.roleTypes,
-        error => this.onError(error));
-  }
+
 
   getCapability() {
+    this.flag=false;
     for (let role of this.candidate.industry.roles) {
       this.roleList.push(role.name);
     }
@@ -333,15 +326,12 @@ export class ProfileCreatorComponent implements OnInit {
       this.getRoles();
 
     }
-    if (this.candidate.roleType !== undefined) {
+
+    if (this.candidate.industry.roles.length > 0) {
       this.showCapability = true;
       this.getCapability();
       this.whichStepsVisible[1] = true;
-    }
-    if (this.candidate.industry.roles.length > 0) {
-      this.getRoleType();
       this.getProficiency();
-      this.isRoleTypeShow = true;
       if (this.candidate.industry.roles[0].capabilities.length >= 1) {
         this.getComplexity();
         this.showComplexity = true;
@@ -450,7 +440,6 @@ export class ProfileCreatorComponent implements OnInit {
       error => {
         this.onError(error)
       });
-
   }
 
   onSubmit() {

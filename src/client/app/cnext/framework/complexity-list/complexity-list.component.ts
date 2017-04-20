@@ -19,6 +19,7 @@ export class ComplexityListComponent {
   private scenarioNames:string[] = new Array(0);
   private scenaricomplexityNames:string[] = new Array(0);
   private numberOfComplexitySelected:number = 0;
+  private isComplexityButtonEnable:boolean = false;
   @Input() isComplexityPresent : boolean=false;
   ngOnChanges(changes:any) {
     if (changes.roles) {
@@ -70,19 +71,23 @@ export class ComplexityListComponent {
     selectedScenario.isChecked = true;
     event.target.checked ? this.numberOfComplexitySelected++ : this.numberOfComplexitySelected--;
     if (this.numberOfComplexitySelected >= this.scenaricomplexityNames.length) {
-      for(let rol  of this.candidateRoles){
-        for(let mainrol of this.roles){
-          if(rol.name = mainrol.name){
-            for(let cap of rol.capabilities){
-              if(cap.isSecondary){
-                mainrol.capabilities.push(cap);
-              }
+      this.isComplexityButtonEnable =true;
+    }
+  }
+
+  saveComplexity(){
+    for(let rol  of this.candidateRoles){
+      for(let mainrol of this.roles){
+        if(rol.name = mainrol.name){
+          for(let cap of rol.capabilities){
+            if(cap.isSecondary){
+              mainrol.capabilities.push(cap);
             }
           }
         }
       }
-     this.selectComplexityWithRole.emit(this.roles);
     }
+    this.selectComplexityWithRole.emit(this.roles);
   }
 
 }
