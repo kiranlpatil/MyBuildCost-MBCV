@@ -4,6 +4,8 @@ import {Scenario} from "../model/scenario";
 import {Complexity} from "../model/complexity";
 import {Capability} from "../model/capability";
 import {ComplexityService} from "../complexity.service";
+import {LocalStorageService} from "../../../framework/shared/localstorage.service";
+import {LocalStorage} from "../../../framework/shared/constants";
 
 @Component({
   moduleId: module.id,
@@ -24,11 +26,19 @@ export class ComplexityListComponent {
   private isComplexityButtonEnable:boolean = false;
   @Input() isComplexityPresent : boolean=false;
   private showModalStyle:boolean = false;
+  private isCandidate:boolean = false;
+
 
   constructor(  private complexityService:ComplexityService,)
   {
 
 
+  }
+
+  ngOnInit() {
+    if(LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE)==='true') {
+      this.isCandidate = true;
+    }
   }
   ngOnChanges(changes:any) {
     if (changes.roles) {
@@ -89,7 +99,9 @@ export class ComplexityListComponent {
 
   saveComplexity(){
     this.isComplexityButtonEnable =false;
-    this.showModalStyle = !this.showModalStyle;
+    if(this.isCandidate) {
+        this.showModalStyle = !this.showModalStyle;
+    }
     this.complexityService.change(true);
     for(let rol  of this.candidateRoles){
       for(let mainrol of this.roles){

@@ -47,10 +47,13 @@ $blue: #3694d1;
     position: fixed;
     top: 8px;
     left: 15px;
-    width: 120px;
 
-    img {
-      width: 100%;
+    .web-logo {
+      width: 120px;
+    }
+    .ipad-logo {
+      display: none;
+      width: 35px;
     }
   }
 }
@@ -76,7 +79,7 @@ $blue: #3694d1;
     list-style-type: none;
     position: relative;
     text-align: center;
-    width: 14%;
+    width: 16.6%;
 
     p {
       margin: -7px 0;
@@ -272,13 +275,20 @@ $blue: #3694d1;
   }
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 1024px) {
   .bar-container {
     .cn-logo {
-      display: none;
+      .web-logo {
+        display: none;
+      }
+      .ipad-logo {
+        display: block;
+      }
     }
   }
+}
 
+@media only screen and (max-width: 768px) {
   .bar {
     li {
       p {
@@ -289,28 +299,13 @@ $blue: #3694d1;
 }
 
 @media only screen and (max-width: 767px) {
-
   .bar-container {
     height: 50px;
     padding-top: 16px;
-
-    .cn-logo {
-      top: 8px;
-      left: 15px;
-      width: 90px;
-    }
   }
 
   .bar {
-    width: 90%;
-    li {
-      p {
-        display: none;
-      }
-      &::after {
-        display: none;
-      }
-    }
+   display: none;
   }
 
   .profile-wrapper {

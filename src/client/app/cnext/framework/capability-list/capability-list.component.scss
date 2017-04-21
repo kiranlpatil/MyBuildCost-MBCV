@@ -1,12 +1,18 @@
 $primary-option: #1c75bd;
 $secondary-option: #00aed5;
 
+.legends {
+  font-size: 10px;
+  float: right;
+  margin: 0 0 5px 0;
+}
+
 .color-panel {
   border-radius: 25px;
   display: inline-block;
-  height: 10px;
+  height: 8px;
   padding: 0;
-  width: 10px;
+  width: 8px;
 }
 
 .primary-color {
@@ -30,6 +36,8 @@ $secondary-option: #00aed5;
 }
 
 .capability-type {
+  clear: both;
+
   .instructions {
     margin-top: -5px;
   }

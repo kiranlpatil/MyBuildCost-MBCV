@@ -46,7 +46,13 @@
     </div>
   </div>
   <div class="button-group clearfix">
-    <button class="btn btn-primary" [class.hide-next-btn]="!isComplexityButtonEnable" (click)="showHideModal()" [disabled]="!isComplexityButtonEnable">Next</button>
+    <div *ngIf="isCandidate" >
+      <button class="btn btn-primary" [class.hide-next-btn]="!isComplexityButtonEnable" (click)="showHideModal()" [disabled]="!isComplexityButtonEnable">Next</button>
+    </div>
+    <div *ngIf="!isCandidate">
+      <button  class="btn btn-primary" [class.hide-next-btn]="!isComplexityButtonEnable" (click)="saveComplexity()" [disabled]="!isComplexityButtonEnable">Next</button>
+    </div>
+
   </div>
 </div>
 

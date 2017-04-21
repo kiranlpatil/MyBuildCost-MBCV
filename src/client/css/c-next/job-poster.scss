@@ -1,4 +1,5 @@
 $error: #e82c0c;
+$info: #999;
 
 .poster-wrapper {
 
@@ -25,12 +26,13 @@ $error: #e82c0c;
 }
 
 .info {
-  font-size: 12px;
+  font-size: 10px;
   font-style: italic;
   background: url('../../assets/c-next/profile-creator/info.png')  no-repeat  0 0;
   padding-left: 25px;
   display: block;
   margin: 0 0 10px;
+  color: $info;
 }
 
 @media only screen and (max-width: 767px) {

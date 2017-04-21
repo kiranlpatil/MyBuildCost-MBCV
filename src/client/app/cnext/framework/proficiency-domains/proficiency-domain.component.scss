@@ -1,6 +1,7 @@
 $border-color: #e8e8e8;
 $text-color: #666;
-$btn-color: #3695d1;
+$btn-color: #3694d1;
+$message: #00aed5;
 
 .proficiency-container  {
 
@@ -19,6 +20,7 @@ $btn-color: #3695d1;
       font-size: 12px;
       padding: 6px 15px;
       background-color: #fff;
+      border: 1px solid $btn-color;
 
       .glyphicon-remove {
         top: 3px;
@@ -46,8 +48,9 @@ $btn-color: #3695d1;
     margin: 0 0 10px;
   }
 
-  .error-messages {
-    font-size: 10px;
+  .messages {
+    color: $message;
+    padding: 0;
   }
 }
 

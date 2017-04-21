@@ -32,7 +32,6 @@ $white: #fff;
     background: #67c116;
     border: #3694d1 0 solid;
     color: #fff;
-    box-shadow: 1px 1px 1px 1px rgba(0, 0,0, 0.2);
 
     &:hover,
     &:active,
@@ -40,7 +39,6 @@ $white: #fff;
       background: #58a90f;
       border: #58a90f 0 solid;
       color: $white;
-      box-shadow: 1px 1px 1px 1px rgba(0, 0,0, 0.2);
     }
 
     &:disabled  {

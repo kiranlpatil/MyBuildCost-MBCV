@@ -185,6 +185,14 @@ a {
 }
 
 //Forms
+
+select {
+  option {
+    color: #666;
+    font-weight: 900;
+    font-size: 12px;
+  }
+}
 .form-group {
   label {
     color: $text-color;
@@ -244,6 +252,7 @@ a {
 .btn {
   border-radius: 25px;
   padding: 6px 25px;
+  font-weight: bold;
 }
 
 .btn-default {
