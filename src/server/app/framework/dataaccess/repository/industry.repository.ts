@@ -109,6 +109,13 @@ class IndustryRepository extends RepositoryBase<IIndustry> {
       }
     });
   }
+
+  retriveIndustriesWithSortedOrder( excluded:any, callback:(error:any, result:any) => void) {
+    IndustrySchema.find().sort({'sort_order':-1,'name':1}).exec(function (err:any, items:any) {
+      callback(err, items);
+    });
+  }
+
 }
 Object.seal(IndustryRepository);
 export = IndustryRepository;
