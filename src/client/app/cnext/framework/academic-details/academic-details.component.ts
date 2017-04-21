@@ -124,7 +124,7 @@ export class AcademicDetailComponent {
   postAcademicDetails(){
     this.isShowError=false;
     for(let item of this.candidate.academics) {
-      if (item.board ==="" || item.schoolName ==="" || item.yearOfPassing ==="") {
+      if (item.board === '' || item.specialization === '' || item.yearOfPassing === '' || item.yearOfPassing === null) {
         this.sendPostCall=false;
 
       }
