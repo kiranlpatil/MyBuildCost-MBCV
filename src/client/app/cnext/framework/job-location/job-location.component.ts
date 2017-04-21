@@ -50,6 +50,8 @@ export class JobLocationComponent implements OnInit {
   }
 
   selectCountryModel(country:any) {
+    this.states = new Array();
+    this.cities = new Array();
     for(let item of this.locationDetails) {
       if(item.country===country) {
         let tempStates: string[]= new Array(0);
@@ -62,8 +64,13 @@ export class JobLocationComponent implements OnInit {
     this.storedcountry=country;
     this.isCountrySelected = false;
     this.jobLocationtion.country=this.storedcountry;
+    let tempState: any = document.getElementById("statesAll");
+    let tempCity: any = document.getElementById("citiesAll");
+    tempState.value = '';
+    tempCity.value = '';
   }
   selectStateModel(selectedstate:any) {
+    this.cities = new Array();
     for(let item of this.locationDetails) {
       if(item.country===this.storedcountry) {
         for(let state of item.states) {
@@ -80,6 +87,8 @@ export class JobLocationComponent implements OnInit {
     this.storedstate=selectedstate;
     this.isStateSelected = false;
     this.jobLocationtion.state=this.storedstate;
+    let tempCity: any = document.getElementById("citiesAll");
+    tempCity.value = '';
   }
 
 
