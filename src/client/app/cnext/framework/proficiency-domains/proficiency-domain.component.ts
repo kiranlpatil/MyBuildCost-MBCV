@@ -58,6 +58,8 @@ export class ProficiencyDomainComponent {
       }
       this.proficiencyModel = '';
     }
+    let tempCity: any = document.getElementById(this.type);
+    tempCity.value = '';
   }
 
   deleteItem(newVal: any) {
@@ -107,5 +109,7 @@ export class ProficiencyDomainComponent {
       }
     }
     this.alreadyPresent = false;
+    let tempCity: any = document.getElementById(this.type);
+    tempCity.value = '';
   }
 }
