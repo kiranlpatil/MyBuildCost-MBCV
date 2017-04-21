@@ -19,12 +19,14 @@
       </div>
     </div>
 
+    <div id="work-area">
     <div class="section-container" [hidden]="!isShowRoleList">
       <div class="main-content clearfix" >
         <h4 class="heading">Select Area of Work (Max 3)</h4>
         <cn-role-list [roles]="rolesForMain"  (selectRoles)="selectRole($event)"></cn-role-list>
       </div>
     </div>
+      </div>
 
   <!--  <div class="section-container" [hidden]="!isShowRoletype">
       <div class="main-content clearfix">
@@ -33,15 +35,16 @@
       </div>
     </div>
 -->
-
+    <div id="capability-area">
     <div class="section-container"  [hidden]="!isShowCapability">
-
       <div class="main-content clearfix">
         <h4 class="heading">Select Capabilities (Max. 10)</h4>
         <cn-capibility-list [roles]="rolesForCapability"  (selectCapabilityWithRole)="selectRole($event)"></cn-capibility-list>
       </div>
     </div>
+      </div>
 
+    <div id="complexity-area">
   <div class="section-container"  [hidden]="!isShowComplexity" >
       <div class="main-content clearfix">
         <h4 class="heading">Choose Complexities</h4>
@@ -50,14 +53,16 @@
         </div>
       </div>
     </div>
+      </div>
 
     <div class="section-container clearfix profeiciency-domain" [hidden]="!isShowProficiency">
       <div class="main-content clearfix">
         <h4 class="heading">Enter Proficiencies (Max. 25)</h4>
-        <cn-proficiency-doamin [proficiencies]="proficiencies" [type]="'profeciency'" (selectProficiency)="selectProficiency($event)"></cn-proficiency-doamin>
+        <cn-proficiency-doamin [proficiencies]="proficiencies" [type]="'profeciency'" [industry]="jobPosterModel.industry.name" (selectProficiency)="selectProficiency($event)"></cn-proficiency-doamin>
       </div>
     </div>
 
+    <div id="proficiency-area">
     <div class="section-container clearfix profeiciency-domain" [hidden]="!isShowProficiency">
       <!-- <div class="">-->
       <div class="main-content clearfix">
@@ -65,6 +70,7 @@
         <cn-industry-experience-list [industries]="industries"  (selectExperiencedIndustry)="selectExperiencedIndustry($event)"></cn-industry-experience-list>
       </div>
     </div>
+      </div>
 
     <div class="main-content"  [hidden]="!isShowProficiency">
       <div class="row">

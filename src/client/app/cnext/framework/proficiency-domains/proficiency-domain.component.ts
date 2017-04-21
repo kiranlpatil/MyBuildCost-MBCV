@@ -13,6 +13,7 @@ import {ProficiencyDomainService} from "./proficiency-domain.service";
 
 export class ProficiencyDomainComponent {
   @Input('type') type: string;
+  @Input('industry') industry: string;
   @Input() candidate: Candidate;
   @Input() proficiencies: Proficiences=new Proficiences();
   @Output() selectProficiency=new EventEmitter();
@@ -50,9 +51,11 @@ export class ProficiencyDomainComponent {
   selectedProficiencyModel(newVal: any) {
     if(newVal !=='') {
       if (this.selectedProficiencies.length < ValueConstant.MAX_PROFECIENCES) {
-        this.selectedProficiencies.push(newVal);
-        this.deleteSelectedProfeciency(newVal);
-        this.selectProficiency.emit(this.selectedProficiencies);
+        if(this.selectedProficiencies.indexOf(newVal)===-1){
+          this.selectedProficiencies.push(newVal);
+          this.deleteSelectedProfeciency(newVal);
+          this.selectProficiency.emit(this.selectedProficiencies);
+        }
       } else {
         this.showAlert = true;
       }
@@ -98,7 +101,7 @@ export class ProficiencyDomainComponent {
         }
       }
       if (this.alreadyPresent === false) {
-        this.proficiencydoaminService.addProficiencyToMasterData(this.otherProficiency, this.candidate.industry.name).subscribe(
+        this.proficiencydoaminService.addProficiencyToMasterData(this.otherProficiency, this.industry).subscribe(
           data => {
             console.log(data);
           },

@@ -12,4 +12,5 @@ export class CandidateDetail {
   pin:string;
   location :Location;
   current_theme : string;
+  picture : string;
 }

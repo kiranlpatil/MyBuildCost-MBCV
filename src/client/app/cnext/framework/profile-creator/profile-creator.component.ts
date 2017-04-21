@@ -216,8 +216,12 @@ export class ProfileCreatorComponent implements OnInit {
           this.getComplexity();
           this.showComplexity = true;
           this.whichStepsVisible[2] = true;
-          this.showProfeciency = true;
-          this.getProficiency();
+          if(this.candidate.industry.roles[0].capabilities[0].complexities) {
+            if (this.candidate.industry.roles[0].capabilities[0].complexities.length > 0) {
+              this.showProfeciency = true;
+              this.getProficiency();
+            }
+          }
         }
       }
     }

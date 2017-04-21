@@ -255,7 +255,6 @@ export class JobPosterComponent {
         if (this.jobPosterModel.industry.roles[0].capabilities.length > 0) {
           this.getComplexity();
           this.isShowComplexity = true;
-          this.isShowProficiency=true;
         }
       }
     }
@@ -264,6 +263,7 @@ export class JobPosterComponent {
   selectRoleFromComplexity(roles:Role[]) {
     this.jobPosterModel.industry.roles = roles;
     this.jobForComplexity=roles;
+    this.isShowProficiency = true;
   }
 
   /*selectRoleType(roleType:string) {

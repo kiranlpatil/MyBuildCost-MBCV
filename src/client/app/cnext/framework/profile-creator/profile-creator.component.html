@@ -86,7 +86,7 @@
           <div class="section-container clearfix profeiciency-domain" [hidden]="!showProfeciency">
             <div class="main-content clearfix">
               <h4 class="heading">Proficiencies (Max. 25)</h4>
-              <cn-proficiency-doamin [proficiencies]="proficiencies" [candidate]="candidate"  [type]="'profeciency'" (selectProficiency)="selectProficiency($event)"></cn-proficiency-doamin>
+              <cn-proficiency-doamin [proficiencies]="proficiencies" [candidate]="candidate"  [type]="'profeciency'" [industry]="candidate.industry.name" (selectProficiency)="selectProficiency($event)"></cn-proficiency-doamin>
             </div>
           </div>
         </div>
