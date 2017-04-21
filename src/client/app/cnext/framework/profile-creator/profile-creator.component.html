@@ -45,8 +45,8 @@
             <div class="col-sm-9 profile-description">
               <h4>Enter Your Job Title</h4>
               <div class="error-messages" *ngIf="isTitleFilled">Job title should not be empty.</div>
-              <input name="jobTitle" placeholder="ex.Software Engineer" class="form-control job-title" [(ngModel)]="candidate.jobTitle" (change)="selectedtitle()" [disabled]="disableTitle">
-              <!--<textarea name="jobTitle" placeholder="ex.Software Engineer" class="form-control"[ngModel]="title" (ngModelChange)="selectedtitle($event)" ></textarea>-->
+              <input name="jobTitle" placeholder="e.g. Software Engineer" class="form-control job-title" [(ngModel)]="candidate.jobTitle" (change)="selectedtitle()" [disabled]="disableTitle">
+              <!--<textarea name="jobTitle" placeholder="e.g. Software Engineer" class="form-control"[ngModel]="title" (ngModelChange)="selectedtitle($event)" ></textarea>-->
 
               <div class="clearfix">&nbsp;</div>
               <!--<div class="error-messages" *ngIf="isShowRequired"><p>*</p></div>-->

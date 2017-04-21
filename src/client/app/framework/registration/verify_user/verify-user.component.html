@@ -19,7 +19,7 @@
 
     <form [formGroup]="userForm" (submit)="onSubmit()" [hidden]="chkMobile">
       <p><b>You are almost done! We just need to verify your account before you can start using it.</b></p>
-      <p>One Time Password (OTP) will be sent on the following mobile Number.</p>
+      <p>One Time Password (OTP) will be sent on the following mobile number.</p>
 
       <div class="form-group" id="inputMobile">
         <control-messages [control]="userForm.controls.mobile_number"></control-messages>
@@ -38,7 +38,7 @@
 
       <div class="form-group" id="inputEmail" >
         <control-messages [control]="userForm.controls.email"></control-messages>
-        <input type="email" [(ngModel)]="model.email" formControlName="email" id="email" class="form-control" readonly />
+        <input type="email" [(ngModel)]="model.email" formControlName="email" id="email" maxlength="40" class="form-control" readonly />
         <!--<label>Email</label>-->
       </div>
 

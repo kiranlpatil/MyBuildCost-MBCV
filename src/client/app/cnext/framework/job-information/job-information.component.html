@@ -6,7 +6,7 @@
 
   <div class="col-sm-4">
     <label>Hiring Manager:</label>
-    <input class="form-control" type="text" name="HiringManager" [(ngModel)]="hiringManager" (ngModelChange)="isHiringMangerSelected($event)">
+    <input class="form-control" type="text" maxlength="30" name="HiringManager" [(ngModel)]="hiringManager" (ngModelChange)="isHiringMangerSelected($event)">
   </div>
   <div class="col-sm-4">
     <label>Hiring Department:</label>

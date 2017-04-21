@@ -69,7 +69,7 @@ export class ProfileCreatorComponent implements OnInit {
   private isHiddenAwrard:boolean=false;
   private isHiddenCertificate:boolean=false;
   private isHiddenEmployeehistory:boolean=false;
-  private isTitleFilled:boolean=true;
+  private isTitleFilled:boolean=false;
   private flag:boolean=true;
 
 
@@ -184,6 +184,12 @@ export class ProfileCreatorComponent implements OnInit {
 
 
   selectIndustry(industry:Industry) {
+    if(this.candidate.jobTitle !== '' && this.candidate.jobTitle !== "") {
+      this.isTitleFilled =false;
+
+    }  else {
+      this.isTitleFilled =true;
+    }
     this.candidate.industry = industry;
     this.saveCandidateDetails();
     this.getRoles();
@@ -317,7 +323,7 @@ export class ProfileCreatorComponent implements OnInit {
     this.candidate = candidateData.data[0];
     this.candidateForRole = candidateData.data[0].industry.roles;
 
-    if (this.candidate.jobTitle !== undefined) {
+    if (this.candidate.jobTitle !== undefined && this.candidate.jobTitle !== "") {
       this.isTitleFilled=false;
       this.disableTitle = true;
     }
@@ -459,13 +465,14 @@ export class ProfileCreatorComponent implements OnInit {
   }
 
   onSubmit() {
-    //if(this.candidate.jobTitle && this.candidate.industry.name && this.candidate.intrestedIndustries.length) {
+  //  if(this.candidate.jobTitle && this.candidate.industry.name && this.candidate.intrestedIndustries.length) {
       var message = new Message();
       message.custom_message = Messages.MSG_SUCCESS_FOR_PROFILE_CREATION_STATUS;
       message.isError = false;
       this.messageService.message(message);
-   // }
-    this._router.navigate([NavigationRoutes.APP_PROFILESUMMURY]);
+      this._router.navigate([NavigationRoutes.APP_PROFILESUMMURY]);
+
+  //  }
 
   }
 

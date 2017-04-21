@@ -43,7 +43,7 @@ class Messages {
   public static MSG_ERROR_ACCOUNT_STATUS: string = 'Your account is still inactive. Verify your account by clicking the verification link sent on your email.';//dont change It
   public static MSG_ERROR_VERIFY_ACCOUNT: string = 'Please click on the link sent to your email in order to activate your account.';//Dont CHange It
   public static MSG_ERROR_INVALID_ID: string = 'Invalid Userid';
-  public static MSG_ERROR_USER_NOT_PRESENT: string = 'You are not registered with us. Kindly click on Register!';
+  public static MSG_ERROR_USER_NOT_PRESENT: string = 'Please enter valid login email or password.';
   public static MSG_ERROR_USER_WITH_EMAIL_PRESENT: string = 'You are already registered. Kindly click on login.';
   public static MSG_ERROR_DIRECTORY_NOT_FOUND: string = 'Image directory not found.';
   public static MSG_ERROR_INVALID_TOKEN: string = 'Invalid access token';
@@ -51,7 +51,7 @@ class Messages {
   public static MSG_ERROR_WRONG_MOBILE_NUMBER: string = 'Please enter appropriate mobile number';
   public static MSG_ERROR_PROVIDE_EMAIL: string = 'Please provide email address';
   public static MSG_ERROR_INVALID_CREDENTIALS: string = 'The email address or phone number that you have entered does not match any account.';
-  public static MSG_ERROR_WRONG_PASSWORD: string = 'Incorrect Password.';
+  public static MSG_ERROR_WRONG_PASSWORD: string = 'Please enter valid login email or password.';
   public static MSG_ERROR_NOT_USER: string = 'An access token is expired or is invalid';
   public static MSG_ERROR_FIELD_VERIFICATION: string = 'Fields verification failed';
   public static MSG_ERROR_FACEBOOK_AUTH: string = 'Facebook Authentication Failed';

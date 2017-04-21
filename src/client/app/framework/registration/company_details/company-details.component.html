@@ -44,7 +44,7 @@
         <div class="col-sm-12 no-padding">
           <div [class.hide-list]="isSocialLogin">
             <div class="col-sm-5 no-padding">
-              <input type="text" formControlName="description1" id="description1"  placeholder="Description" class="form-control" required />
+              <input type="text" formControlName="description1" id="description1" maxlength="250" placeholder="Description" class="form-control" required />
               <span *ngIf="!setOfDocuments[0] &&  companyDetailsForm.value.description1 && isDocumentUploaded && companyDetailsForm.value.description2" class="error-messages">Please select file to upload.</span>
             </div>
             <div class="col-sm-7 padding-left15">
@@ -60,7 +60,7 @@
         <div class="col-sm-12 no-padding">
           <div [class.hide-list]="isSocialLogin">
             <div class="col-sm-5 no-padding">
-              <input type="text" formControlName="description2" id="description2"  placeholder="Description" class="form-control" value="description2" required />
+              <input type="text" formControlName="description2" id="description2"  maxlength="250" placeholder="Description" class="form-control" value="description2" required />
               <span *ngIf="!setOfDocuments[1] && companyDetailsForm.value.description2 && isDocumentUploaded && companyDetailsForm.value.description3" class="error-messages">Please select file to upload.</span>
             </div>
             <div class="col-sm-7 padding-left15">
@@ -76,7 +76,7 @@
         <div class="col-sm-12 no-padding">
           <div [class.hide-list]="isSocialLogin">
             <div class="col-sm-5 no-padding">
-              <input type="text" formControlName="description3" id="description3"  placeholder="Description" class="form-control" required />
+              <input type="text" formControlName="description3" id="description3"  maxlength="250" placeholder="Description" class="form-control" required />
               <span *ngIf="!setOfDocuments[2] && companyDetailsForm.value.description3 && isDocumentUploaded " class="error-messages">Please select file to upload.</span>
             </div>
             <div class="col-sm-7 padding-left15">

@@ -109,5 +109,8 @@ export class VerifyUserComponent implements OnInit {
         }
     }
 
+     closeErrorMessage() {
+         this.isShowErrorMessage = true;
+     }
 
 }
