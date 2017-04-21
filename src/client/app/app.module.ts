@@ -59,7 +59,7 @@ import {  DashboardComponent  } from './framework/dashboard/dashboard.component'
  import {  RecruiterService  } from './framework/registration/recruiter/recruiter.service';
 import {  TestService  } from './cnext/framework/test.service';
 import {  RecruitingService  } from './framework/shared/recruiting.service';
-
+import {ScrollToModule} from 'ng2-scroll-to';
 
 //C-NEXT IMPORTS
 import { ProfilePictureComponent } from './cnext/framework/profile-picture/profile-picture.component';
@@ -144,7 +144,8 @@ import {AdditionalDetailsComponent} from "./cnext/framework/one-page-summury/sha
     HttpModule,
     ReactiveFormsModule,
     RecaptchaModule.forRoot(), // Keep in mind the 'forRoot'-magic nuances!
-    Ng2AutoCompleteModule
+    Ng2AutoCompleteModule,
+    ScrollToModule.forRoot()
   ],
   declarations: [
     AppComponent,

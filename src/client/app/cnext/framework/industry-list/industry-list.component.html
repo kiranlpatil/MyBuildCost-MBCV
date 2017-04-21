@@ -9,8 +9,9 @@
         </label>
       </div>
     </div>
-    <div class="button-group clearfix"  >
-      <button class="btn btn-primary" (click)="disableIndustrires()" [class.hide-next-btn]="disableButton||candidateIndustry.name" [disabled]="disableButton||candidateIndustry.name" >Next</button>
+
+    <div class="button-group clearfix">
+      <button class="btn btn-primary" scrollTo scrollTargetSelector="#work-area" (click)="disableIndustrires()" [class.hide-next-btn]="disableButton||candidateIndustry.name" [disabled]="disableButton||candidateIndustry.name" >Next</button>
     </div>
   </div>
 </div>

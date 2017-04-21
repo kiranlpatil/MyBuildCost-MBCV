@@ -56,32 +56,38 @@
             </div>
           </div>
         </div>
-
-        <div class="section-container" [hidden]="!isRolesShow"  id="work-area">
-          <div class="main-content clearfix">
-            <h4 class="heading">Select Area of Work (Max 3)</h4>
-            <cn-role-list [roles]="rolesForMain" [candidateRoles]="candidateForRole" (selectRoles)="selectRole($event)"></cn-role-list>
+        <div id="work-area">
+          <div  class="section-container" [hidden]="!isRolesShow">
+            <div class="main-content clearfix">
+              <h4 class="heading">Select Area of Work (Max 3)</h4>
+              <cn-role-list [roles]="rolesForMain" [candidateRoles]="candidateForRole" (selectRoles)="selectRole($event)"></cn-role-list>
+            </div>
+          </div>
+        </div>
+        <div id="capability-area">
+          <div   class="section-container" [hidden]="!showCapability">
+            <div class="main-content clearfix">
+              <h4 class="heading">Choose Your Capabilities (Max. 10)</h4>
+              <cn-capibility-list [roles]="rolesForCapability" [candidateRoles]="candidateForCapability" (selectCapabilityWithRole)="selectRole($event)"></cn-capibility-list>
+            </div>
           </div>
         </div>
 
-        <div class="section-container" [hidden]="!showCapability">
-          <div class="main-content clearfix">
-            <h4 class="heading">Choose Your Capabilities (Max. 10)</h4>
-            <cn-capibility-list [roles]="rolesForCapability" [candidateRoles]="candidateForCapability" (selectCapabilityWithRole)="selectRole($event)"></cn-capibility-list>
+        <div id="complexity-area">
+          <div class="section-container" [hidden]="!showComplexity">
+            <div class="main-content clearfix">
+              <h4 class="heading">Choose Complexities</h4>
+              <cn-complexity-list [roles]="rolesForComplexity" [candidateRoles]="candidateForComplexity" [isComplexityPresent]="isComplexityPresent"  (selectComplexityWithRole)="selectRole($event)"></cn-complexity-list>
+            </div>
           </div>
         </div>
 
-        <div class="section-container" [hidden]="!showComplexity">
-          <div class="main-content clearfix">
-            <h4 class="heading">Choose Complexities</h4>
-            <cn-complexity-list [roles]="rolesForComplexity" [candidateRoles]="candidateForComplexity" [isComplexityPresent]="isComplexityPresent"  (selectComplexityWithRole)="selectRole($event)"></cn-complexity-list>
-          </div>
-        </div>
-
-        <div class="section-container clearfix profeiciency-domain" [hidden]="!showProfeciency">
-          <div class="main-content clearfix">
-            <h4 class="heading">Proficiencies (Max. 25)</h4>
-            <cn-proficiency-doamin [proficiencies]="proficiencies" [candidate]="candidate"  [type]="'profeciency'" (selectProficiency)="selectProficiency($event)"></cn-proficiency-doamin>
+        <div id="proficiency-area">
+          <div class="section-container clearfix profeiciency-domain" [hidden]="!showProfeciency">
+            <div class="main-content clearfix">
+              <h4 class="heading">Proficiencies (Max. 25)</h4>
+              <cn-proficiency-doamin [proficiencies]="proficiencies" [candidate]="candidate"  [type]="'profeciency'" (selectProficiency)="selectProficiency($event)"></cn-proficiency-doamin>
+            </div>
           </div>
         </div>
 
@@ -180,7 +186,7 @@
           </div>
         </div>
       </div>
-      </div>
+    </div>
   </div>
 </div>
 

@@ -392,7 +392,7 @@ export class SeedConfig {
         'node_modules/@angular/platform-browser-dynamic/bundles/platform-browser-dynamic-testing.umd.js',
       '@angular/router/testing': 'node_modules/@angular/router/bundles/router-testing.umd.js',
       'ng2-recaptcha': 'node_modules/ng2-recaptcha/ng2-recaptcha.js',
-
+      'ng2-scroll-to': 'node_modules/ng2-scroll-to/index.js',
       'app/*': '/app/*',
       // For test config
       'dist/dev/*': '/base/dist/dev/*',
@@ -473,6 +473,10 @@ export class SeedConfig {
       },
       'rxjs': {
         main: 'Rx.js',
+        defaultExtension: 'js'
+      },
+      'ng2-scroll-to': {
+        main: 'index.js',
         defaultExtension: 'js'
       }
     }

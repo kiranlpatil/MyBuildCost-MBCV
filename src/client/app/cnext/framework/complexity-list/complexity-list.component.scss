@@ -4,6 +4,19 @@ $white: #fff;
 $option-border-color: #f8f8f8;
 $option-theme-color: #1c75bd;
 
+.complexities {
+  .btn-primary {
+    float: right;
+    margin-top: 15px;
+
+    &:focus,
+    &:active {
+      outline: none;
+    }
+  }
+
+}
+
 .select-complexity {
   padding: 0 0 10px;
   border-bottom: 1px solid $border-color;
@@ -17,15 +30,6 @@ $option-theme-color: #1c75bd;
   }
 }
 
-.btn-primary {
-  float: right;
-  margin-top: 15px;
-
-  &:focus,
-  &:active {
-    outline: none;
-  }
-}
 
 .select-option > label {
   margin: 0;
