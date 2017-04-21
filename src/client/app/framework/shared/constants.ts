@@ -1,8 +1,8 @@
 export class AppSettings {
-  //public static IP = 'http://localhost:8080';
+  public static IP = 'http://localhost:8080';
   // public static IP = 'http://ee802b7f.ngrok.io';
   //public static IP = 'http://10.192.33.252:8087';
-  public static IP = 'http://52.89.221.23:8080';
+ // public static IP = 'http://52.89.221.23:8080';
   //public static IP = '';
 
 
@@ -170,6 +170,7 @@ export class ImagePath {
   public static GOOGLE_ICON = './assets/framework/images/footer/google-plus.svg';
   public static LINKEDIN_ICON = './assets/framework/images/footer/linked-in.svg';
   public static PROFILE_IMG_ICON = './assets/framework/images/dashboard/profile.png';
+  public static COMPANY_LOGO_IMG_ICON = './assets/framework/images/dashboard/logo-Icon.png';
   public static EMAIL_ICON = './assets/framework/images/icons/e-mail.svg';
   public static EMAIL_ICON_GREY = './assets/framework/images/icons/e-mail-grey.svg';
   public static NEW_EMAIL_ICON = './assets/framework/images/icons/new-e-mail.svg';
