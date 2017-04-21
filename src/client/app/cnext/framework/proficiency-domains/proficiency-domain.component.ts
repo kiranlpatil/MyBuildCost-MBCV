@@ -82,8 +82,12 @@ export class ProficiencyDomainComponent {
 
   showHideModal(newVal:any) { //TODO
     this.otherProficiency=newVal;
+
+    if(newVal !== '' && this.masterDataProficiencies.indexOf(newVal)=== -1)
     this.showModalStyle = !this.showModalStyle;
   }
+
+
   getStyleModal() {
     if (this.showModalStyle) {
       return 'block';
