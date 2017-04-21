@@ -15,6 +15,7 @@ class IndustrySchema {
           name : {
             type: String
           },
+          sort_order:Number,
           roles : [{
             name:String,
             capabilities : [{
