@@ -279,7 +279,6 @@ import {AdditionalDetailsComponent} from "./cnext/framework/one-page-summury/sha
     RoleTypeService,
     IndustryExperienceService,
     DisableTestService,
-    MYJobTitleService,
     JobIndustryShowService,
     ShowJobFilterService,
     CandidateAwardService,
