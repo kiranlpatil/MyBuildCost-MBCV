@@ -10,12 +10,14 @@ $theme-color: #3694d1;
 .section-container {
   margin-top: 0;
   text-align: left;
+  background: $white;
 }
 
 .main-content {
   background: $white;
-  padding: 0 15px 15px;
+  padding: 15px;
   text-align: left;
+  position: relative;
 
   .heading {
     color: $theme-color;
@@ -63,6 +65,12 @@ $theme-color: #3694d1;
     color: $info;
   }
 
+  .btn {
+    &:focus,
+    &:active {
+      outline: 0;
+    }
+  }
 
   .btn-create-profile {
     background-color: $white;
@@ -93,6 +101,7 @@ $theme-color: #3694d1;
 
   .form-control {
     width: 100%;
+    border-radius: 0;
   }
 
   span {

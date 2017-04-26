@@ -30,7 +30,7 @@ export class CapabilitiesComponent {
       for (let role of this.candidateRoles) {
         if (role.capabilities) {
           this.compactView = true;
-          for (let primary of role.capabilities) {debugger
+          for (let primary of role.capabilities) {
             if (primary.isPrimary == true) {
               this.primaryNames.push(primary.name);
             }

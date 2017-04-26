@@ -1,5 +1,5 @@
-$primary-option: #1c75bd;
-$secondary-option: #00aed5;
+$primary-option: #3694d1;
+$secondary-option: #81D4FA;
 
 .legends {
   font-size: 10px;
@@ -41,6 +41,10 @@ $secondary-option: #00aed5;
   .instructions {
     margin-top: -5px;
   }
+}
+
+.capability-option {
+  padding: 0;
 }
 
 @media screen and (max-width: 767px) {

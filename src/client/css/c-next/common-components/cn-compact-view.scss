@@ -1,6 +1,6 @@
 $border-color: #e8e8e8;
 $light-blue: #00aed5;
-$primary-option: #1c75bd;
+$primary-option: #3694d1;
 $secondary-option: #81D4FA;
 $modal-bg: rgba(0, 0, 0, .6);
 
@@ -12,6 +12,22 @@ $modal-bg: rgba(0, 0, 0, .6);
   top: 0;
   width: 100%;
   z-index: 2;
+  animation: fadein .5s;
+}
+
+@keyframes fadein {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.modal-content {
+  z-index: 3;
+  position: relative;
+  /*padding-top: 15px;*/
+  box-shadow: none;
+  border-radius: 0;
+  margin: 0 15px;
+  animation: fadein .5s;
 }
 
 .compact-view {
