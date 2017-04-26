@@ -38,16 +38,9 @@
         <cn-capabilities [roles]="rolesForCapability" [candidateRoles]="candidateForCapability"
                             (onComplete)="onCapabilityComplete($event)" [hidden]="!showCapability"></cn-capabilities>
 
-        <div id="complexity-area">
-          <div class="section-container" [hidden]="!showComplexity">
-            <div class="main-content clearfix">
-              <h4 class="heading">Choose Complexities</h4>
-              <cn-complexity-list [roles]="rolesForComplexity" [candidateRoles]="candidateForComplexity"
-                                  [isComplexityPresent]="isComplexityPresent"
-                                  (selectComplexityWithRole)="selectRole($event)"></cn-complexity-list>
-            </div>
-          </div>
-        </div>
+        <cn-complexities [roles]="rolesForComplexity" [candidateRoles]="candidateForComplexity"
+                            [isComplexityPresent]="isComplexityPresent"
+                            (onComplete)="onComplexitytyComplete($event)" [hidden]="!showComplexity"></cn-complexities>
 
         <div id="proficiency-area">
           <div class="section-container clearfix profeiciency-domain" [hidden]="!showProfeciency">

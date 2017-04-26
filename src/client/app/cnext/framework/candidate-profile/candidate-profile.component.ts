@@ -166,7 +166,7 @@ export class CandidateProfileComponent implements OnInit {
     this.showCapability = true;
     this.whichStepsVisible[1] = true;
 
-    if (this.candidate.industry.roles) {
+   /* if (this.candidate.industry.roles) {
       if (this.candidate.industry.roles[0].capabilities) {
         if (this.candidate.industry.roles[0].capabilities.length > 0) {
           this.getComplexity();
@@ -180,17 +180,23 @@ export class CandidateProfileComponent implements OnInit {
           }
         }
       }
-    }
+    }*/
   }
 
   onCapabilityComplete(roles:Role[]){
     this.candidate.industry.roles = roles;
     this.saveCandidateDetails();
-    this.candidateForComplexity = this.candidate.industry.roles;
     this.rolesForComplexity = new Array(0);
     this.getComplexity();
     this.showComplexity = true;
     this.whichStepsVisible[2] = true;
+  }
+
+  onComplexitytyComplete(roles:Role[]){
+    this.candidate.industry.roles = roles;
+    this.saveCandidateDetails();
+    this.showProfeciency = true;
+    this.getProficiency();
   }
 
   selectProficiency(proficiency:string[]) {
@@ -223,6 +229,7 @@ export class CandidateProfileComponent implements OnInit {
   }
 
   getComplexity() {
+    this.primaryCapability=new Array(0);
     for (let role of this.candidate.industry.roles) {
       for (let capability of role.capabilities) {
         if (capability.isPrimary) {

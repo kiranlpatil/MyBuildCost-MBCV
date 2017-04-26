@@ -9,27 +9,28 @@ import {LocalStorage} from "../../../framework/shared/constants";
 
 @Component({
   moduleId: module.id,
-  selector: 'cn-complexity-list',
-  templateUrl: 'complexity-list.component.html',
-  styleUrls: ['complexity-list.component.css']
+  selector: 'cn-complexities',
+  templateUrl: 'complexities.component.html',
+  styleUrls: ['complexities.component.css']
 })
 
-export class ComplexityListComponent {
+export class ComplexitiesComponent {
 
   @Input() roles:Role[] = new Array(0);
   @Input() candidateRoles:Role[] = new Array();
-  @Output() selectComplexityWithRole = new EventEmitter();
+  @Output() onComplete = new EventEmitter();
+  @Input() isComplexityPresent : boolean=true;
+  
   private scenarioNames:string[] = new Array(0);
   private scenaricomplexityNames:string[] = new Array(0);
   private selectedComplexityNames:string[]=new Array(0);
-  private numberOfComplexitySelected:number = 0;
   private isComplexityButtonEnable:boolean = false;
-  @Input() isComplexityPresent : boolean=false;
   private showModalStyle:boolean = false;
   private isCandidate:boolean = false;
+  private compactView:boolean = true;
 
 
-  constructor(  private complexityService:ComplexityService,)
+  constructor(  private complexityService:ComplexityService)
   {
 
 
@@ -73,6 +74,14 @@ export class ComplexityListComponent {
         }
       }
     }
+    
+    if(this.scenarioNames.length>0){
+      this.compactView=true;
+    }
+    else{
+      this.compactView=false;
+    }
+    
   }
 
   selectComplexity(role:Role, capability :Capability,complexity:Complexity, selectedScenario:Scenario, event:any) {
@@ -91,13 +100,13 @@ export class ComplexityListComponent {
     if(this.selectedComplexityNames.indexOf(complexity.name)===-1){
       this.selectedComplexityNames.push(complexity.name);
     }
-    //event.target.checked ? this.numberOfComplexitySelected++ : this.numberOfComplexitySelected--;
     if (this.selectedComplexityNames.length === this.scenaricomplexityNames.length) {
       this.isComplexityButtonEnable =true;
     }
   }
 
   saveComplexity(){
+    this.compactView=true
     this.isComplexityButtonEnable =false;
     if(this.isCandidate) {
         this.showModalStyle = !this.showModalStyle;
@@ -114,7 +123,7 @@ export class ComplexityListComponent {
         }
       }
     }
-    this.selectComplexityWithRole.emit(this.roles);
+    this.onComplete.emit(this.roles);
   }
 
   getStyleModal() {
