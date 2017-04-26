@@ -6,6 +6,7 @@ import {Capability} from "../model/capability";
 import {ComplexityService} from "../complexity.service";
 import {LocalStorageService} from "../../../framework/shared/localstorage.service";
 import {LocalStorage} from "../../../framework/shared/constants";
+import {Section} from "../model/candidate";
 
 @Component({
   moduleId: module.id,
@@ -20,14 +21,16 @@ export class ComplexitiesComponent {
   @Input() candidateRoles:Role[] = new Array();
   @Output() onComplete = new EventEmitter();
   @Input() isComplexityPresent : boolean=true;
-  
+  @Input() highlightedSection: Section;
+
+
   private scenarioNames:string[] = new Array(0);
   private scenaricomplexityNames:string[] = new Array(0);
   private selectedComplexityNames:string[]=new Array(0);
   private isComplexityButtonEnable:boolean = false;
   private showModalStyle:boolean = false;
   private isCandidate:boolean = false;
-  private compactView:boolean = true;
+ // private compactView:boolean = true;
 
 
   constructor(  private complexityService:ComplexityService)
@@ -74,14 +77,14 @@ export class ComplexitiesComponent {
         }
       }
     }
-    
-    if(this.scenarioNames.length>0){
-      this.compactView=true;
-    }
-    else{
-      this.compactView=false;
-    }
-    
+
+    // if(this.scenarioNames.length>0){
+    //   this.compactView=true;
+    // }
+    // else{
+    //   this.compactView=false;
+    // }
+
   }
 
   selectComplexity(role:Role, capability :Capability,complexity:Complexity, selectedScenario:Scenario, event:any) {
@@ -106,7 +109,7 @@ export class ComplexitiesComponent {
   }
 
   saveComplexity(){
-    this.compactView=true
+    //this.compactView=true
     this.isComplexityButtonEnable =false;
     if(this.isCandidate) {
         this.showModalStyle = !this.showModalStyle;
@@ -123,6 +126,7 @@ export class ComplexitiesComponent {
         }
       }
     }
+    this.highlightedSection.name = "Proficiencies";
     this.onComplete.emit(this.roles);
   }
 

@@ -1,6 +1,6 @@
-<div id="complexity-area" *ngIf="!compactView">
-  <div class="section-container" >
-    <div class="main-content clearfix">
+<div id="complexity-area" >
+  <div class="section-container clearfix" >
+    <div class="main-content clearfix modal-content" *ngIf="highlightedSection.name=='Complexities'">
         <div class="col-sm-12 complexities">
           <h4 class="heading">Choose Complexities</h4>
           <p class="info">Depending on your experience and expertise, you have used your capabilities under varying degree
@@ -66,15 +66,19 @@
           </div>
       </div>
     </div>
+
+    <div *ngIf="highlightedSection.name!='Complexities'">
+      <div class="main-content main-content-capabilitites">
+        <div class="col-sm-12">
+          <button class="btn-edit" (click)="highlightedSection.name='Complexities'"></button>
+          <cn-tabular-list-view [roles]="candidateRoles"></cn-tabular-list-view>
+        </div>
+      </div>
+    </div>
+    <div [class.modal-bg]="highlightedSection.name!='Complexities'"></div>
   </div>
 </div>
 
-<div *ngIf="compactView">
-  <div class="col-sm-12">
-    <button class="btn-edit" (click)="compactView=false"></button>
-    <cn-tabular-list-view [roles]="candidateRoles"></cn-tabular-list-view>
-  </div>
-</div>
 
 <div class="modal" [style.display]="getStyleModal()">
   <div class="modal-bg">

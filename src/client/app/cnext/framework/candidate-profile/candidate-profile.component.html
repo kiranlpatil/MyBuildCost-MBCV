@@ -1,6 +1,7 @@
 <div class="create-profile clearfix">
   <div class="bar-container profile-header">
     <div class="cn-logo">
+      {{highlightedSection.name}}
       <img src="assets/c-next/header/cnext-logo-white.png" class="web-logo"/>
       <img src="assets/c-next/header/cnext-logo-small.png" class="ipad-logo"/>
     </div>
@@ -29,16 +30,16 @@
   <div class="candidate-profile-wrapper container">
     <div class="col-sm-12">
       <div class="wrapper">
-          <cn-profile-description [candidate]="candidate"
+          <cn-profile-description [candidate]="candidate" [highlightedSection]="highlightedSection"
                                   (onComplete)="onProfileDescriptionComplete($event)"></cn-profile-description>
 
-           <cn-work-area [roles]="rolesForMain" [selectedRoles]="candidateForRole"
+           <cn-work-area [roles]="rolesForMain" [selectedRoles]="candidateForRole" [highlightedSection]="highlightedSection"
                                 (onComplete)="onWorkAreaComplete($event)" [hidden]="isRolesShow"></cn-work-area>
 
-        <cn-capabilities [roles]="rolesForCapability" [candidateRoles]="candidateForCapability"
+        <cn-capabilities [roles]="rolesForCapability" [candidateRoles]="candidateForCapability" [highlightedSection]="highlightedSection"
                             (onComplete)="onCapabilityComplete($event)" [hidden]="!showCapability"></cn-capabilities>
 
-        <cn-complexities [roles]="rolesForComplexity" [candidateRoles]="candidateForComplexity"
+        <cn-complexities [roles]="rolesForComplexity" [candidateRoles]="candidateForComplexity" [highlightedSection]="highlightedSection"
                             [isComplexityPresent]="isComplexityPresent"
                             (onComplete)="onComplexitytyComplete($event)" [hidden]="!showComplexity"></cn-complexities>
 

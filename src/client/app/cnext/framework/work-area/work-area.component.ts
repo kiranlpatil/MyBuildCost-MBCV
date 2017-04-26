@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Output, Input} from "@angular/core";
 import {Role} from "../model/role";
+import {Section} from "../model/candidate";
 
 @Component({
   moduleId: module.id,
@@ -11,19 +12,20 @@ import {Role} from "../model/role";
 export class WorkAreaComponent {
   @Input() roles:Role[] = new Array(0);
   @Input() selectedRoles:Role[] = new Array(0);
+  @Input() highlightedSection :Section;
   @Output() onComplete = new EventEmitter();
 
-  private compactView:boolean = true;
+  //private compactView:boolean = true;
   private disableButton:boolean = true;
 
-  ngOnChanges(changes:any) {
-    if (this.selectedRoles !== undefined && this.selectedRoles.length > 0) {
-      this.compactView = false;
-    }
-    else{
-      this.compactView =true;
-    }
-  }
+  // ngOnChanges(changes:any) {
+  //   if (this.selectedRoles !== undefined && this.selectedRoles.length > 0) {
+  //     this.compactView = false;
+  //   }
+  //   else{
+  //     this.compactView =true;
+  //   }
+  // }
 
   selectOption(role:Role,event:any) {
     if (event.target.checked) {
@@ -46,7 +48,8 @@ export class WorkAreaComponent {
   }
 
   onNext() {
-    this.compactView=false;
+//    this.compactView=false;
+    this.highlightedSection.name = "Capabilities";
     this.onComplete.emit(this.selectedRoles);
   }
 

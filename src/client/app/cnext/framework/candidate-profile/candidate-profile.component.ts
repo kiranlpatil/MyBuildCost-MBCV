@@ -8,7 +8,7 @@ import {EducationalService} from "../educational-service";
 import {MyRoleListTestService} from "../myRolelist.service";
 import {MyRoTypeTestService} from "../myRole-Type.service";
 import {DisableTestService} from "../disable-service";
-import {Candidate} from "../model/candidate";
+import {Candidate, Section} from "../model/candidate";
 import {CandidateProfileService} from "./candidate-profile.service";
 import {MessageService} from "../../../framework/shared/message.service";
 import {Message} from "../../../framework/shared/message";
@@ -17,6 +17,7 @@ import {DisableAwardGlyphiconService} from "../disableGlyphiconAward.service";
 import {DisableCertificateGlyphiconService} from "../disableCertificateGlyphicon.service";
 import {DisableAboutMyselfGlyphiconService} from "../disableAboutMyself.service";
 import {DisableEmployeeHistoryGlyphiconService} from "../disableEmplyeeHistoryGlyphicon.service";
+
 
 @Component({
   moduleId: module.id,
@@ -57,7 +58,7 @@ export class CandidateProfileComponent implements OnInit {
   private isHiddenCertificate:boolean = false;
   private isHiddenEmployeehistory:boolean = false;
   private isTitleFilled:boolean = false;
-
+  private highlightedSection:Section = new Section();
 
   constructor(private _router:Router,
               private disableAwardGlyphiconService:DisableAwardGlyphiconService,
@@ -140,6 +141,15 @@ export class CandidateProfileComponent implements OnInit {
 
   ngOnInit() {
     this.getCandidateProfile();
+
+    if (this.candidate.jobTitle !== undefined && this.candidate.jobTitle !== ""
+        && this.candidate.industry.name !== undefined && this.candidate.industry.name !== "") {
+      //TODO: Shrikant write logic which should be the active section
+      this.highlightedSection.name = "None";
+    }
+    else{
+      this.highlightedSection.name = "Profile";
+    }
   }
 
   onProfileDescriptionComplete() {

@@ -1,5 +1,5 @@
 <div class="section-container">
-  <div class="main-content clearfix" [class.modal-content]="!compactView" *ngIf="!compactView">
+  <div class="main-content clearfix modal-content" *ngIf="highlightedSection.name=='Profile'">
     <h4 class="heading">Enter Your Job Title</h4>
 
     <div class="col-sm-3 text-center">
@@ -26,12 +26,9 @@
     </div>
   </div>
 
-
-
-
-  <div class="main-content" *ngIf="compactView">
-    <div [class.compact-view]="compactView" class="clearfix">
-      <button class="btn-edit" (click)="compactView=false;disableButton=false"></button>
+  <div class="main-content" *ngIf="highlightedSection.name!='Profile'">
+    <div class="compact-view clearfix">
+      <button class="btn-edit" (click)="highlightedSection.name='Profile';disableButton=false"></button>
 
       <div class="img-container">
         <img src="{{image_path}}" alt="Profile Picture"/>
@@ -47,5 +44,5 @@
       </div>
     </div>
   </div>
-  <div [class.modal-bg]="!compactView"></div>
+  <div [class.modal-bg]="highlightedSection.name!='Profile'"></div>
 </div>

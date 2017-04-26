@@ -1,6 +1,6 @@
 <div id="work-area" >
   <div class="section-container" >
-    <div class="main-content clearfix" [class.modal-content]="compactView" *ngIf="compactView">
+    <div class="main-content clearfix modal-content" *ngIf="highlightedSection.name=='Work-Area'">
       <h4 class="heading">Select Area of Work (Max 3)</h4>
       <div class="work-area col-sm-12">
         <p class="info">
@@ -25,15 +25,16 @@
       </div>
     </div>
 
-    <div class="main-content" *ngIf="!compactView">
-      <div [class.compact-view]="!compactView" class="clearfix">
-        <button class="btn-edit" (click)="compactView=true;disableButton=false"></button>
+    <div class="main-content" *ngIf="highlightedSection.name!='Work-Area'">
+      <div class="compact-view clearfix">
+        <button class="btn-edit" (click)="highlightedSection.name='Work-Area';disableButton=false"></button>
         <h4 class="heading">Area Of Work</h4>
         <div class="select-option" *ngFor="let item of selectedRoles">
           <span class="primary">{{item.name}}</span>
         </div>
       </div>
     </div>
-    <div [class.modal-bg]="compactView"></div>
+
+    <div [class.modal-bg]="highlightedSection.name!='Work-Area'"></div>
   </div>
 </div>

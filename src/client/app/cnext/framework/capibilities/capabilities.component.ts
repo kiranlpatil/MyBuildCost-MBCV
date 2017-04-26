@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, Output} from "@angular/core";
 import {Role} from "../model/role";
 import {Capability} from "../model/capability";
 import {ValueConstant} from "../../../framework/shared/constants";
+import {Section} from "../model/candidate";
 
 @Component({
   moduleId: module.id,
@@ -15,7 +16,9 @@ export class CapabilitiesComponent {
   @Input() roles:Role[] = new Array(0);
   @Input() candidateRoles:Role[] = new Array();
   @Output() onComplete = new EventEmitter();
-  private compactView:boolean=true;
+  @Input() highlightedSection: Section;
+
+  //private compactView:boolean=true;
 
 
   private primaryNames:string[] = new Array(0);
@@ -42,12 +45,12 @@ export class CapabilitiesComponent {
       }
     }
 
-      if(this.primaryNames.length>0 ){
-        this.compactView = true;
-      }
-    else{
-      this.compactView = false;
-    }
+    //   if(this.primaryNames.length>0 ){
+    //     this.compactView = true;
+    //   }
+    // else{
+    //   this.compactView = false;
+    // }
   }
 
   selectedCapability(selectedRole:Role, selectedCapability:Capability, event:any) {
@@ -71,7 +74,8 @@ export class CapabilitiesComponent {
   }
 
   onNext() {
-    this.compactView=true;
+    // this.compactView=true;
+    this.highlightedSection.name = "Complexities";
     this.disableButton = true;
     this.onComplete.emit(this.roles);
   }

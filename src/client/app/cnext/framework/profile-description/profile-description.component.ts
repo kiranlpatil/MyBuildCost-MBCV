@@ -1,7 +1,7 @@
 import {Component, Input, Output, EventEmitter} from "@angular/core";
 import {Router} from "@angular/router";
 import {Industry} from "../model/industry";
-import {Candidate} from "../model/candidate";
+import {Candidate, Section} from "../model/candidate";
 import {AppSettings} from "../../../framework/shared/constants";
 import {DashboardService} from "../../../framework/dashboard/dashboard.service";
 import {CandidateDetail} from "../../../framework/registration/candidate/candidate";
@@ -15,9 +15,10 @@ import {CandidateDetail} from "../../../framework/registration/candidate/candida
 
 export class ProfileDescriptionComponent {
   @Input() candidate:Candidate = new Candidate();
+  @Input() highlightedSection: Section;
   @Output() onComplete = new EventEmitter();
 
-  private compactView:boolean=true;
+ // private compactView:boolean=true;
   private disableButton:boolean=true;
   private candidateDetails:CandidateDetail = new CandidateDetail();
   private image_path:string ;
@@ -35,15 +36,15 @@ export class ProfileDescriptionComponent {
   }
 
 
-  ngOnChanges() {
-    if (this.candidate.jobTitle !== undefined && this.candidate.jobTitle !== ""
-      && this.candidate.industry.name !== undefined && this.candidate.industry.name !== "") {
-      this.compactView = true;
-    }
-    else{
-      this.compactView = false;
-    }
-  }
+  // ngOnChanges() {
+  //   if (this.candidate.jobTitle !== undefined && this.candidate.jobTitle !== ""
+  //     && this.candidate.industry.name !== undefined && this.candidate.industry.name !== "") {
+  //     this.compactView = true;
+  //   }
+  //   else{
+  //     this.compactView = false;
+  //   }
+  // }
 
   onIndustryChange(newIndustry:Industry) {
     if (newIndustry !== undefined && newIndustry.name !== "") {
@@ -56,7 +57,8 @@ export class ProfileDescriptionComponent {
   }
 
   onNext() {
-    this.compactView = true;
+//    this.compactView = true;
+    this.highlightedSection.name = "Work-Area";
     this.onComplete.emit(this.candidate);
   }
 }
