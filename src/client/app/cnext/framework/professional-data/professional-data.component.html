@@ -12,7 +12,7 @@
       </div>
 
       <div class="col-sm-4">
-        <label >Education:</label>
+        <label >Education</label>
         <select class="form-control" [(ngModel)]="candidate.professionalDetails.education" (change) = "saveProfessionalData()">
           <option *ngFor="let c of educationlist" [selected]="true" [ngValue]="c">{{c}}</option>
         </select>
@@ -20,7 +20,7 @@
       </div>
 
       <div class="col-sm-4">
-        <label >Experience:&nbsp;</label>
+        <label >Experience</label>
         <select class="form-control" [(ngModel)]="candidate.professionalDetails.experience" (change) = "saveProfessionalData()">
           <option *ngFor="let c of experiencelist" [selected]="true" [ngValue]="c">{{c}}</option>
         </select>
@@ -28,7 +28,7 @@
       </div>
 
       <div class="col-sm-4">
-        <label >Current Salary:&nbsp;</label>
+        <label >Current Salary</label>
         <select class="form-control" [(ngModel)]="candidate.professionalDetails.currentSalary" (change) = "saveProfessionalData()">
           <option *ngFor="let c of salarylist" [selected]="true" [ngValue]="c">{{c}}</option>
         </select>
@@ -36,7 +36,7 @@
       </div>
 
       <div class="col-sm-4">
-        <label >Notice Period:&nbsp;</label>
+        <label >Notice Period</label>
         <select class="form-control" [(ngModel)]="candidate.professionalDetails.noticePeriod" (change) = "saveProfessionalData()">
           <option *ngFor="let c of noticeperiodlist" [selected]="true"  [ngValue]="c">{{c}}</option>
         </select>

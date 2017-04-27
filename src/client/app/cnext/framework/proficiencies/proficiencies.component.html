@@ -1,8 +1,8 @@
 <div class="clearfix">
   <div id="proficiency-area">
     <div class="section-container clearfix profeiciency-domain" >
-      <div class="main-content clearfix"  *ngIf="highlightedSection.name=='Proficiencies'">
-        <h4 class="heading">Proficiencies (Max. 25)</h4>
+      <div class="main-content  modal-content clearfix"  *ngIf="highlightedSection.name=='Proficiencies'">
+        <h4 class="heading">Proficiencies (Max 25)</h4>
         <div class="proficiency-container col-sm-12">
           <!--<p>Add your <span  *ngIf="proficiencyType">proficiencies/tools/technologies</span><span *ngIf="domainType">domains you work</span></p>-->
           <p class="info">Enter all key words that describe your area of expertise or specialization. These
@@ -18,18 +18,9 @@
                      (ngModelChange)="selectedProficiencyModel($event)">
                   <input class="form-control" [(ngModel)]="proficiencyModel" id={{type}}
                          (keyup.enter)="showHideModal($event.target.value)" placeholder="{{proficiencies.label}}"/>
-                  <br/>
-                  <p class="info-message">*To add other proficiency which are not in the list, just type and enter</p>
-
-                  <br/> <br/>
                 </div>
-                <!--
-                          <button type="button"  class="btn btn-create-profile"  value="Add Other"  (click)="onSelect()" >Click to add new proficiency</button>
-                          <div [hidden]="isShow" class="add-proficiency">
-                            <input  class="form-control" [(ngModel)]="proficiencyother" (ngModelChange)="enterProficiency($event)" id={{addOther}} placeholder="Other Proficiency" />
-                            <button type="button"  class="btn btn-create-profile"  value="AddProficiency"  (click)="addProficiencyToMasterData()">Add Proficiency</button>
-                          </div>-->
               </div>
+              <p class="info-message">To add other proficiency which are not in the list, just type and enter</p>
             </div>
             <div class="col-sm-8 padding-left15">
               <div class="btn-container clearfix">

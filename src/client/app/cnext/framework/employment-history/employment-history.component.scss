@@ -23,24 +23,6 @@ $border-color: #ccc;
   width: 50%;
   float: left;
   padding-right: 15px;
-
-  .worked-from,
-  .worked-to {
-    label {
-      font-weight: 400;
-      margin-bottom: 10px;
-      width: 100%;
-    }
-
-    .form-control {
-      //background: url('assets/framework/images/form/drop-down.png') no-repeat;
-      //background-position: 95% 50%;
-      border-radius: 0;
-      font-weight: 400;
-      margin-bottom: 15px;
-      padding: 6px;
-    }
-  }
 }
 
 .right-content {
@@ -49,11 +31,8 @@ $border-color: #ccc;
   padding-left: 15px;
 
   textarea {
-    border-radius: 0;
     height: 150px;
     margin-top: 15px;
-    resize: vertical;;
-    width: 100%;
   }
 }
 @media only screen and (max-width: 1024px) {

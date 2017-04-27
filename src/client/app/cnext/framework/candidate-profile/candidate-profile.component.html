@@ -94,7 +94,7 @@
 
         <div class="section-container" [hidden]="chkAboutMyself" [hidden]="!showProfeciency">
           <div class="main-content clearfix">
-            <h4 class="heading">More About Myself(Max 250)
+            <h4 class="heading">More About Myself (Max 250)
               <span class="close-dialog" [hidden]="isHiddenAboutMyself">Close this section if not needed
             <span class="glyphicon glyphicon-remove" (click)="hideAboutMyself()"></span>
           </span>
@@ -103,31 +103,39 @@
           </div>
         </div>
 
-        <div class="section-container profile-configurations" [hidden]="!showProfeciency">
-          <div class="col-md-9 col-sm-8 no-padding text-left">
-            <div class="info"><p>In case you wish to hide your profile visibility from recruiters, select hide option
-              above. You can also choose to show your profile later.</p></div>
-            <div class="radio">
-              <label>Profile Visibility:</label>
-              <label class="radio-inline">
-                <input type="radio" name="profile-visibility" id="optionsRadios2"
-                       (change)="showorhide($event.target.value)" value=true [checked]="candidate.isVisible == false">
-                show
-              </label>
-              <label class="radio-inline">
-                <input type="radio" name="profile-visibility" id="optionsRadios3"
-                       (change)="showorhide($event.target.value)" value=false [checked]="candidate.isVisible == true">
-                hide
-              </label>
+        <div class="section-container">
+          <div class="main-content clearfix">
+            <h4 class="heading">Profile Visibility</h4>
+            <div class="col-sm-12">
+              <div class="info"><p>In case you wish to hide your profile from recruiters, select hide option
+                below. You may also choose to show your profile later.</p></div>
+              <div class="radio">
+                <!--<label>Profile Visibility:</label>-->
+                <label class="radio-inline">
+                  <input type="radio" name="profile-visibility" id="optionsRadios2"
+                         (change)="showorhide($event.target.value)" value=true [checked]="candidate.isVisible == false">
+                  Show profile
+                </label>
+                <label class="radio-inline">
+                  <input type="radio" name="profile-visibility" id="optionsRadios3"
+                         (change)="showorhide($event.target.value)" value=false [checked]="candidate.isVisible == true">
+                  Hide profile
+                </label>
+              </div>
             </div>
+          </div>
+        </div>
+
+        <div class="profile-configurations" [hidden]="!showProfeciency">
+          <div class="col-sm-6 no-padding text-left">
             <div class="button-group">
               <button class="btn btn-primary" (click)="onSubmit()">Submit</button>
               <button class="btn btn-default">Cancel</button>
             </div>
           </div>
-          <div class="col-md-3 col-sm-4 no-padding text-right social-links">
+          <div class="col-sm-6 no-padding text-right social-links">
             <div>
-              <label>You Can Share it On:</label>
+              <label>Share On</label>
               <img src="assets/c-next/profile-creator/fb.png"/>
               <img src="assets/c-next/profile-creator/linked-in.png"/>
               <img src="assets/c-next/profile-creator/twitter.png"/>

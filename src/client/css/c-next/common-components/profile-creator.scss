@@ -75,6 +75,7 @@ $theme-color: #3694d1;
     background-color: $white;
     color: $text-color;
     padding: 4px 15px;
+    border: 1px solid $theme-color;
   }
 
   .instructions {
@@ -98,11 +99,6 @@ $theme-color: #3694d1;
     }
   }
 
-  .form-control {
-    width: 100%;
-    border-radius: 0;
-  }
-
   span {
     background-color: $white;
     color: $text-color;
@@ -123,13 +119,13 @@ $theme-color: #3694d1;
     label {
       -moz-transition: top .2s ease-in, font-size .2s ease-in;
       -webkit-transition: top .2s ease-in, font-size .2s ease-in;
-      color: $text-color;
       font-size: 14px;
-      font-weight: normal;
+      font-weight: 600;
       left: 0;
       position: absolute;
       top: 10px;
       transition: .2s ease all;
+      width: 100%;
       z-index: 1;
       //transition: top .2s ease-in, font-size .2s ease-in;
     }
@@ -138,6 +134,7 @@ $theme-color: #3694d1;
       color: $text-color;
       position: relative;
       z-index: 2;
+      border-radius: 0;
 
       &:focus ~ label,
       &:valid ~ label {
@@ -145,6 +142,32 @@ $theme-color: #3694d1;
         top: -10px;
       }
     }
+  }
+
+  textarea {
+    height: 100px;
+    resize: vertical;
+    width: 100%;
+    border-radius: 0;
+  }
+
+  select {
+    border-radius: 0;
+    margin: 0 0 15px;
+  }
+
+  .btn-primary {
+    float: right;
+    margin-top: 15px;
+
+    &:focus,
+    &:active {
+      outline: none;
+    }
+  }
+
+  label {
+    width: 100%;
   }
 }
 
@@ -170,6 +193,10 @@ $theme-color: #3694d1;
       background: none;
       padding-left: 0;
       display: block;
+    }
+
+    .btn-primary {
+      float: none;
     }
   }
 }

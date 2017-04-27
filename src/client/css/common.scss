@@ -22,7 +22,7 @@ $bg-content: rgba(255, 255, 255, .1);
 $modal-bg: rgba(0, 0, 0, .7);
 $btn-color: #1c75bd;
 $input-bg: rgba(255 , 255, 255, .1);
-
+$label: #999;
 
 .btn-logout {
   margin-top: 15px;
@@ -195,11 +195,10 @@ select {
 }
 .form-group {
   label {
-    color: $text-color;
+    color: $label;
     display: block;
     float: left;
     font-size: 14px;
-    font-weight: 100;
   }
 
   .form-control {

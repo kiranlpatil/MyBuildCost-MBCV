@@ -25,16 +25,6 @@ $secondary-option: #81D4FA;
   margin: 0 5px 0 15px;
 }
 
-.btn-primary {
-  float: right;
-  margin-top: 15px;
-
-  &:focus,
-  &:active {
-    outline: none;
-  }
-}
-
 .capability-type {
   clear: both;
 
@@ -50,9 +40,5 @@ $secondary-option: #81D4FA;
 @media screen and (max-width: 767px) {
   .capabilities {
     padding: 0;
-  }
-
-  .btn-primary {
-    float: none;
   }
 }
