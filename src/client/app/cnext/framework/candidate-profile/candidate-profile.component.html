@@ -52,16 +52,7 @@
 
         <cn-professional-data [candidate]="candidate" [highlightedSection]="highlightedSection" (onComplete)="onProfessionalDataComplete($event)" [hidden]="!showProfessionalData"></cn-professional-data>
 
-        <div class="section-container" [hidden]="chkEmployeeHistory" [hidden]="!showProfeciency">
-          <div class="main-content clearfix">
-            <h4 class="heading">Employment History
-              <span class="close-dialog" [hidden]="isHiddenEmployeehistory">Close this section if not needed
-            <span class="glyphicon glyphicon-remove" (click)="hideEmployeeHistory()"></span>
-          </span>
-            </h4>
-            <cn-employment-history [candidate]="candidate"></cn-employment-history>
-          </div>
-        </div>
+        <cn-employment-history [candidate]="candidate" [highlightedSection]="highlightedSection" (onComplete)="onEmploymentHistoryComplete($event)" [hidden]="!showemploymentHistory"></cn-employment-history>
 
         <div class="section-container" [hidden]="!showProfeciency">
           <div class="main-content clearfix">

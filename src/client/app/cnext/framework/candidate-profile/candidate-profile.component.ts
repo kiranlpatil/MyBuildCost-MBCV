@@ -48,6 +48,7 @@ export class CandidateProfileComponent implements OnInit {
   private showIndustryExperience:boolean = false;
   private showProfessionalData:boolean = false;
   private showemploymentHistory:boolean = false;
+  private showAcademicsDetails:boolean = false;
   private isRolesShow:boolean = true;
   private showfield:boolean = false;
   private isRoleTypeShow:boolean = false;
@@ -164,15 +165,7 @@ export class CandidateProfileComponent implements OnInit {
     this.rolesForCapability = new Array(0);
   }
 
-  onExperienceIndustryComplete(experiencedindustry:string[]) {
-    this.showProfessionalData=true;
-    this.candidate.intrestedIndustries = experiencedindustry;
-    this.saveCandidateDetails();
-  }
-
-  onProfessionalDataComplete(){
-    this.showemploymentHistory=true
-  }
+  
 
   onWorkAreaComplete(roles:Role[]) {
     this.candidate.industry.roles = roles;
@@ -224,7 +217,22 @@ export class CandidateProfileComponent implements OnInit {
     this.saveCandidateDetails();
     this.whichStepsVisible[4] = true;
   }
+  
+  onExperienceIndustryComplete(experiencedindustry:string[]) {
+    this.showProfessionalData=true;
+    this.candidate.intrestedIndustries = experiencedindustry;
+    this.saveCandidateDetails();
+  }
 
+  onProfessionalDataComplete(){
+    this.showemploymentHistory=true
+  }
+
+
+  onEmploymentHistoryComplete(){
+    this.showAcademicsDetails=true;
+  }
+  
   getRoles() {
     this.profileCreatorService.getRoles(this.candidate.industry.name)
       .subscribe(
@@ -341,13 +349,14 @@ export class CandidateProfileComponent implements OnInit {
       this.showProfessionalData=true;
       this.whichStepsVisible[5] = true;
     }
-
+    
     if (this.candidate.academics.length > 0 && this.candidate.academics[0].schoolName !== '' &&
       this.candidate.certifications.length > 0 && this.candidate.certifications[0].name !== '' &&
       this.candidate.aboutMyself !== undefined && this.candidate.aboutMyself !== '' &&
       this.candidate.employmentHistory.length > 0 && this.candidate.employmentHistory[0].companyName !== '' &&
       this.candidate.awards.length > 0 && this.candidate.awards[0].name !== ''
     ) {
+      this.showAcademicsDetails=true;
       this.whichStepsVisible[6] = true;
     }
 
@@ -358,6 +367,7 @@ export class CandidateProfileComponent implements OnInit {
       this.isHiddenAboutMyself = true;
     }
     if (this.candidate.employmentHistory.length > 0 && this.candidate.employmentHistory[0].companyName !== '') {
+      this.showemploymentHistory=true;
       this.isHiddenEmployeehistory = true;
     }
     if (this.candidate.awards.length > 0 && this.candidate.awards[0].name !== '') {

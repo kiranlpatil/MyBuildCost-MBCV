@@ -1,5 +1,5 @@
 
-import {Component, Input} from '@angular/core';
+import {Component,EventEmitter, Input, Output} from '@angular/core';
 import { EmployementHistory } from '../model/employment-history';
 import {ValueConstant, LocalStorage} from '../../../framework/shared/constants';
 import {EmploymentHistoryService} from "./employment-history.service";
@@ -7,7 +7,7 @@ import {MessageService} from "../../../framework/shared/message.service";
 import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
 import {LocalStorageService} from "../../../framework/shared/localstorage.service";
 import {Message} from "../../../framework/shared/message";
-import {Candidate} from "../model/candidate";
+import {Candidate, Section} from "../model/candidate";
 import {DisableEmployeeHistoryGlyphiconService} from "../disableEmplyeeHistoryGlyphicon.service";
 
 @Component({
@@ -19,6 +19,9 @@ import {DisableEmployeeHistoryGlyphiconService} from "../disableEmplyeeHistoryGl
 
 export class EmploymentHistoryComponent {
   @Input() candidate:Candidate;
+  @Input() highlightedSection :Section;
+  @Output() onComplete = new EventEmitter();
+
 
   public monthList:string[]= new Array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December');
   error_msg: string;
@@ -164,7 +167,10 @@ export class EmploymentHistoryComponent {
 
     }
 
-
+  onNext() {
+    this.onComplete.emit();
+    this.highlightedSection.name = "AcademicDetails";
+  }
 
   }
 
