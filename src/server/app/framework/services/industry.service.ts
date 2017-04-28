@@ -26,7 +26,7 @@ class IndustryService {
   }
 
   pushIntoArray(name:any, value:string,callback:(error:any, result:any) => void) {
-    this.industryRepository.pushElementInArray(name,value,callback);
+    this.industryRepository.pushElementInArray(value,callback);
   }
 
   create(item:any, callback:(error:any, result:any) => void) {

@@ -3,6 +3,8 @@ import {ValueConstant} from "../../../framework/shared/constants";
 import {Candidate, Section} from "../model/candidate";
 import {Proficiences} from "../model/proficiency";
 import {ProficiencyDomainService} from "./proficiencies.service";
+import {MessageService} from "../../../framework/shared/message.service";
+import {Message} from "../../../framework/shared/message";
 
 @Component({
   moduleId: module.id,
@@ -12,8 +14,6 @@ import {ProficiencyDomainService} from "./proficiencies.service";
 })
 
 export class ProficienciesComponent {
-  @Input('type') type:string;
-  @Input('industry') industry:string;
   @Input() candidate:Candidate;
   @Input() highlightedSection :Section;
   @Input() proficiencies:Proficiences = new Proficiences();
@@ -22,6 +22,7 @@ export class ProficienciesComponent {
 
   private selectedProficiencies = new Array();
   private masterDataProficiencies = new Array();
+  private Proficiencies = new Array();
   private showAlert:boolean = false;
   private proficiencyModel:string;
   private alreadyPresent:boolean = false;
@@ -29,18 +30,22 @@ export class ProficienciesComponent {
   private otherProficiency:string = '';
 
 
-  constructor(private proficiencydoaminService:ProficiencyDomainService) {
+  constructor(private proficiencydoaminService:ProficiencyDomainService ,private messageService:MessageService ) {
+  }
+  ngOnInit() {
+    this.proficiencydoaminService.getProficiency()
+      .subscribe(
+        data => this.OnProficiencyDataSuccess(data),
+        error => this.onError(error));
   }
 
-
-  ngOnChanges(changes:any) {
+  ngOnChanges (changes:any) {
     if (changes.proficiencies != undefined) {
       if (changes.proficiencies.currentValue != undefined)
         this.proficiencies = changes.proficiencies.currentValue;
       if (this.candidate !== undefined) {
         if (this.candidate.proficiencies.length > 0) {
           this.selectedProficiencies = this.candidate.proficiencies;
-          this.masterDataProficiencies = this.candidate.proficiencies;
           for (let proficiency of this.candidate.proficiencies) {
             this.deleteSelectedProfeciency(proficiency);
           }
@@ -48,11 +53,22 @@ export class ProficienciesComponent {
       }
     }
   }
+  OnProficiencyDataSuccess(data:any)
+  {
+this.Proficiencies= data.data;
+this.masterDataProficiencies = data.data;
 
-  selectedProficiencyModel(newVal:any) {
-    if (newVal !== '') {
+  }
+  onError(error:any) {
+    var message = new Message();
+    message.error_msg = error.err_msg;
+    message.isError = true;
+    this.messageService.message(message);
+  }
+  selectedProficiencyModel(newVal: any) {
+    if(newVal !=='') {
       if (this.selectedProficiencies.length < ValueConstant.MAX_PROFECIENCES) {
-        if (this.selectedProficiencies.indexOf(newVal) === -1) {
+        if(this.selectedProficiencies.indexOf(newVal)===-1){
           this.selectedProficiencies.push(newVal);
           this.deleteSelectedProfeciency(newVal);
           this.onComplete.emit(this.selectedProficiencies);
@@ -60,29 +76,28 @@ export class ProficienciesComponent {
       } else {
         this.showAlert = true;
       }
-      this.proficiencyModel = '';
     }
-    let tempCity:any = document.getElementById(this.type);
-    tempCity.value = '';
+    let emptyInputField: any = document.getElementById("proficiencyId");
+    emptyInputField.value = '';
   }
 
-  deleteItem(newVal:any) {
+  deleteItem(newVal: any) {
     this.showAlert = false;
     for (let i = 0; i < this.selectedProficiencies.length; i++) {
       if (this.selectedProficiencies[i] === newVal.currentTarget.innerText.trim()) {
         this.selectedProficiencies.splice(i, 1);
-        this.proficiencies.names.push(newVal.currentTarget.innerText.trim());
+        this.Proficiencies.push(newVal.currentTarget.innerText.trim());
       }
     }
     this.onComplete.emit(this.selectedProficiencies);
   }
 
   deleteSelectedProfeciency(newVal:any) {
-    this.proficiencies.names.splice(this.proficiencies.names.indexOf(newVal), 1);
+    this.Proficiencies.splice(this.Proficiencies.indexOf(newVal), 1);
   }
 
   showHideModal(newVal:any) { //TODO
-    this.otherProficiency = newVal;
+    this.otherProficiency=newVal;
 
     if (newVal !== '' && this.masterDataProficiencies.indexOf(newVal) === -1)
       this.showModalStyle = !this.showModalStyle;
@@ -99,14 +114,14 @@ export class ProficienciesComponent {
 
   addProficiencyToMasterData() {
     this.showModalStyle = !this.showModalStyle;
-    if (this.otherProficiency !== '') {
+    if(this.otherProficiency !=='') {
       for (let i = 0; i < this.masterDataProficiencies.length; i++) {
         if (this.masterDataProficiencies[i] === this.otherProficiency) {
           this.alreadyPresent = true;
         }
       }
       if (this.alreadyPresent === false) {
-        this.proficiencydoaminService.addProficiencyToMasterData(this.otherProficiency, this.industry).subscribe(
+        this.proficiencydoaminService.addProficiencyToMasterData(this.otherProficiency).subscribe(
           data => {
             console.log(data);
           },
@@ -117,8 +132,8 @@ export class ProficienciesComponent {
       }
     }
     this.alreadyPresent = false;
-    let tempCity:any = document.getElementById(this.type);
-    tempCity.value = '';
+    let emptyInputField: any = document.getElementById("proficiencyId");
+    emptyInputField.value = '';
   }
 
   onNext() {

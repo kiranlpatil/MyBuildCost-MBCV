@@ -16,15 +16,16 @@ this.authInterceptor = new AuthInterceptor();
 
 export function cnextInit(app: express.Application) { //todo add interceptor to authenticate
   app.get("/api/industry",industryController.retrieve);
+  app.post("/api/proficiency",proficienciesController.create);
+  app.get("/api/proficiency",proficienciesController.retrieve);
+  app.put("/api/proficiency",proficienciesController.update);
   app.get("/api/roletype",userController.getRoleTypes);
   app.post("/api/industry",industryController.create);
   app.post("/api/filtered",jobProfileController.searchCandidatesByJobProfile);
   app.put("/api/recruiter/:id/job",recruiterController.postJob);
   app.get("/api/industry/:id/role", roleController.retrieve );
-  app.get("/api/industry/:id/proficiency", proficienciesController.retrieve );
   app.post("/api/candidate", userInterceptor.create, candidateController.create);
   app.put("/api/candidate/:id",  candidateController.updateDetails);
-  app.put("/api/industry/:id/proficiency",  proficienciesController.update);
   app.get("/api/candidate/:id",candidateController.retrieve);
   app.get("/api/industry/:id/roles/capability", capabilityController.retrieve );
   app.get("/api/industry/:id/roles/capability/complexity", complexityController.retrieve );

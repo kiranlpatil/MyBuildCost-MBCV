@@ -1,20 +1,39 @@
 import * as express from "express";
 import Messages = require("../shared/messages");
 import IndustryService = require("../services/industry.service");
-import * as mongoose from "mongoose";
 import CNextMessages = require("../shared/cnext-messages");
+import ProficiencyModel = require("../dataaccess/model/proficiency.model");
+import ProficiencyService = require("../services/proficiency.service");
+import AuthInterceptor = require("../interceptor/auth.interceptor");
+
+export function create(req:express.Request, res:express.Response, next:any) {
+  var proficiencyModel:ProficiencyModel = <ProficiencyModel>req.body;
+  var proficiencyService = new ProficiencyService();
+  proficiencyService.create(proficiencyModel, (error, result) => {
+    if (error) {
+      console.log("Error in posting proficiency ", error);
+
+    }
+    else {
+      res.status(200).send({
+        "status":  "success",
+      });
+    }
+
+  });
 
 
+}
 
 export function retrieve(req:express.Request, res:express.Response, next:any) {
   try {
-    var industryService = new IndustryService();
+    var proficiencyService = new ProficiencyService();
     var params = req.params.id;
-    industryService.findByName(params, (error, result) => {
+    proficiencyService.retrieve(params, (error, result) => {
       if (error) {
         next({
-          reason: 'Error In Retriving',//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
-          message: CNextMessages.MSG_NOT_FOUND_ANY_RECORD_OF_INDUSTRY,
+          reason: 'Error In Proficiency  Retriving',
+          message: CNextMessages.PROFICIENCY_NOT_RETRIVED,
           code: 401
         });
       }
@@ -32,19 +51,20 @@ export function retrieve(req:express.Request, res:express.Response, next:any) {
 }
 
 export function update(req:express.Request, res:express.Response, next:any) {
+
+
   try {
-    var industryService = new IndustryService();
+    var proficiencyService = new ProficiencyService();
     var params = req.params.id;
-    industryService.pushIntoArray(params,req.query.proficiency, (error, result) => {
+    proficiencyService.pushIntoArray(req.query.proficiency, (error, result) => {
       if (error) {
         next({
-          reason: 'Error In Retriving',//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
-          message: CNextMessages.MSG_NOT_FOUND_ANY_RECORD_OF_INDUSTRY,
+          reason: 'Error In Proficiency Updation',
+          message: CNextMessages.PROFICIENCY_NOT_UPDATED,
           code: 401
         });
       }
       else {
-        //  var token = auth.issueTokenWithUid(user);
         res.send({
           "status": "success",
           "data": {

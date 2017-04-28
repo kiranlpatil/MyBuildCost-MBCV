@@ -12,11 +12,9 @@ export class ProficiencyDomainService extends BaseService {
     super();
   }
 
-  getProficiency(industry:string):Observable<any> {
+  getProficiency():Observable<any> {
     var url = API.PROFICIENCYLIST;
-    var industry=industry;
-    var tempurl='industry/'+industry+'/proficiency';
-    return this.http.get(tempurl)
+    return this.http.get(url)
       .map(this.extractData)
       .catch(this.handleError);
   }
@@ -32,11 +30,11 @@ addCandidateProficiency(candidateproficiency:string[]):Observable<string[]>{
     .catch(this.handleError);
 }
 
-  addProficiencyToMasterData(newProficiency:string,selectedIndustry:string):Observable<string[]>{
+  addProficiencyToMasterData(newProficiency:string):Observable<string[]>{
     let headers=new Headers({'Content-Type':'application/json'});
     let options=new RequestOptions({headers:headers});
     let body=JSON.stringify({})
-    let url:string=API.INDUSTRY_LIST+'/'+selectedIndustry+'/proficiency?proficiency='+newProficiency;
+    let url:string=API.PROFICIENCYLIST+'?proficiency='+newProficiency;
     return this.http.put(url, body,options)
       .map(this.extractData)
       .catch(this.handleError);

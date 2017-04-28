@@ -1,5 +1,7 @@
 interface ProficiencyModel {
-    label: string;
-    names: string[];
+/*
+    name: string;
+*/
+  proficiencies: string[];
 }
 export = ProficiencyModel;

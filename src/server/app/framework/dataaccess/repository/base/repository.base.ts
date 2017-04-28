@@ -79,8 +79,11 @@ class RepositoryBase<T extends mongoose.Document> implements IRead<T>, IWrite<T>
     this._model.update({_id: id}, { $push:{ "postedJobs":value.postedJobs } }, callback);
   }
 
-  pushElementInArray(name:string, value:string, callback:(error:any, result:any) => void) {
-    this._model.update({name: name}, { $push:{ "proficiencies.names":value } }, callback);
+  pushElementInArray( value:string, callback:(error:any, result:any) => void) {
+/*
+    this._model.update({name: name}, { $push:{ "proficiencies":value } }, callback);
+*/
+    this._model.update({ $push:{ "proficiencies":value } }, callback);
   }
 
 }
