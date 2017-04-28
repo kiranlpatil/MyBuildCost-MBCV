@@ -1,11 +1,11 @@
-<div class="section-container" [hidden]="chkAwards" >
+<div class="section-container awards " [hidden]="chkAwards" >
   <div class="main-content modal-content clearfix" *ngIf="highlightedSection.name =='Awards'">
     <h4 class="heading">Awards
               <span class="close-dialog" [hidden]="isHiddenAwrard">Close this section if not needed
             <span class="glyphicon glyphicon-remove" (click)="hideAwards()"></span>
           </span>
     </h4>
-    <div *ngFor="let item of candidate.awards;let i= index" class="awards col-sm-12 form">
+    <div *ngFor="let item of candidate.awards;let i= index" class="col-sm-12 form">
 
       <div class="row">
 
@@ -35,18 +35,18 @@
         <textarea class="form-control" [(ngModel)]="item.remark"(change)="postAwardDetails()" placeholder="Enter Awards Details" class="form-control"></textarea>
       </div>
     </div>
-    <div class="awards col-sm-12">
+    <div class="col-sm-12">
       <div class="clear">
         <button type="button" id="more_fields" (click)="addAnother()" class="btn btn-create-profile"  >
           Add Another <span>+</span>
         </button>
         <div class="error-messages" *ngIf="isShowError"><p>Fields should not be empty.</p></div>
       </div>
-    </div>
-    <div class="button-group clearfix">
-      <button class="btn btn-primary" scrollTo scrollTargetSelector="#aboutMyself"
-              (click)="onNext()" [disabled]="disableButton">Next
-      </button>
+      <div class="button-group clearfix">
+        <button class="btn btn-primary" scrollTo scrollTargetSelector="#aboutMyself"
+                (click)="onNext()" [disabled]="disableButton">Next
+        </button>
+      </div>
     </div>
   </div>
   <div class="main-content" *ngIf="highlightedSection.name !='Awards'">

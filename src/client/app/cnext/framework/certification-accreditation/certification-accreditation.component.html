@@ -1,11 +1,11 @@
-<div class="section-container" [hidden]="chkCertification" >
+<div class="section-container certification" [hidden]="chkCertification" >
   <div class="main-content modal-content clearfix" *ngIf="highlightedSection.name =='Certification'">
     <h4 class="heading">Certification/Accreditation
               <span class="close-dialog" [hidden]="isHiddenCertificate">Close this section if not needed
             <span class="glyphicon glyphicon-remove" (click)="hideCertification()"></span>
           </span>
     </h4>
-    <div class="form col-sm-12 certification" *ngFor="let item of candidate.certifications;let i= index">
+    <div class="form col-sm-12 " *ngFor="let item of candidate.certifications;let i= index">
 
       <div class="row">
         <div class="col-sm-4">
@@ -43,13 +43,12 @@
         </button>
         <div class="error-messages" *ngIf="isShowError"><p>Fields should not be empty.</p></div>
       </div>
+      <div class="button-group clearfix">
+        <button class="btn btn-primary" scrollTo scrollTargetSelector="#awards"
+                (click)="onNext()" [disabled]="disableButton">Next
+        </button>
+      </div>
     </div>
-    <div class="button-group clearfix">
-      <button class="btn btn-primary" scrollTo scrollTargetSelector="#awards"
-              (click)="onNext()" [disabled]="disableButton">Next
-      </button>
-    </div>
-
   </div>
   <div class="main-content" *ngIf="highlightedSection.name !='Certification'">
     <div class="compact-view clearfix">

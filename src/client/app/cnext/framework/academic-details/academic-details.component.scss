@@ -15,27 +15,18 @@ $border-color: #ccc;
   }
 }
 
-@media only screen and (max-width: 980px) {
-  .academic-details {
-    .col-sm-4 {
-      width: 50%;
-    }
-
-    .col-sm-10 {
-      clear: both;
-      width: 100%;
-    }
-  }
-}
 
 @media only screen and (max-width: 767px) {
   .academic-details {
-    padding: 0;
 
     .col-sm-4,
-    .form-control {
-      margin: 0;
+    .col-sm-12 {
       width: 100%;
+      padding: 0;
+    }
+
+    .row {
+      margin: 0;
     }
   }
 }

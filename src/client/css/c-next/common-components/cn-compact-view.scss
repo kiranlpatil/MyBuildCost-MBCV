@@ -54,9 +54,10 @@ $modal-bg: rgba(0, 0, 0, .2);
   }
 
   .heading {
-    background: none;
-    padding: 0;
-    margin-top: -7px;
+    background: none !important;
+    padding: 0 !important;
+    margin-top: -7px !important;
+    background: #fff !important;
   }
 
   .img-container {
@@ -137,6 +138,12 @@ $modal-bg: rgba(0, 0, 0, .2);
       list-style-image: url('../../../assets/c-next/compact-view/list-type.png');
     }
   }
+
+  .capability-complexity {
+    .heading {
+      margin-top: 0 !important;
+    }
+  }
 }
 
 @media only screen and (max-width: 1280px) {
@@ -167,7 +174,7 @@ $modal-bg: rgba(0, 0, 0, .2);
     }
 
     .heading {
-      margin-top: 0;
+      margin-top: 0 !important;
     }
 
     .select-option {
@@ -179,9 +186,6 @@ $modal-bg: rgba(0, 0, 0, .2);
     .capability-complexity {
       border-top: 0 !important;
 
-      .heading {
-        margin: 0 !important;
-      }
       .content {
         margin: 5px !important;
       }

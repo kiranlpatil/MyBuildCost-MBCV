@@ -1,4 +1,4 @@
-<div class="section-container" >
+<div class="section-container academic-details" >
   <div class="main-content modal-content clearfix" *ngIf="highlightedSection.name =='AcademicDetails'">
     <h4 class="heading">Academic Details</h4>
     <div class="col-sm-12 form" *ngFor="let item of candidate.academics;let i= index">
@@ -40,20 +40,20 @@
       <div class="col-sm-12 no-padding">
         <textarea placeholder="School/College Name"  [(ngModel)]="item.schoolName" [ngModel]="specialization" (change)="postAcademicDetails()" class="form-control"></textarea>
       </div>
-
     </div>
-    <div class="col-sm-12 clearfix academic-details">
+
+    <div class="col-sm-12 clearfix">
       <div class="clear">
         <button type="button" id="more_fields" (click)="addAnother()" class="btn btn-create-profile" [disabled]="disbleRole" >
           Add Another <span>+</span>
         </button>
         <div class="error-messages" *ngIf="isShowError"><p>Fields should not be empty.</p></div>
       </div>
-    </div>
-    <div class="button-group clearfix">
-      <button class="btn btn-primary" scrollTo scrollTargetSelector="#certification"
-              (click)="onNext()" [disabled]="disableButton">Next
-      </button>
+      <div class="button-group clearfix">
+        <button class="btn btn-primary" scrollTo scrollTargetSelector="#certification"
+                (click)="onNext()" [disabled]="disableButton">Next
+        </button>
+      </div>
     </div>
   </div>
   <div class="main-content" *ngIf="highlightedSection.name !='AcademicDetails'">

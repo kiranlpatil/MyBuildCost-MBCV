@@ -32,9 +32,14 @@ $border-color: #ccc;
   .awards {
     padding: 0;
 
-    .col-sm-4 {
-      margin: 0;
+    .col-sm-4,
+    .col-sm-12 {
+      padding: 0;
       width: 100%;
+    }
+
+    .row {
+      margin: 0;
     }
   }
 }

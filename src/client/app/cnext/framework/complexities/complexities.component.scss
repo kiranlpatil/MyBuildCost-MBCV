@@ -35,6 +35,13 @@ $option-theme-color: #1c75bd;
   }
 }
 
+.complexities {
+  .info {
+    background: none;
+    padding-left: 0;
+  }
+}
+
 @media screen and (max-width: 767px) {
   .complexities {
     padding: 0;

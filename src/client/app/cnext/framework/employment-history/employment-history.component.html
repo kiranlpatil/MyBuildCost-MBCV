@@ -1,11 +1,11 @@
 <div class="section-container" [hidden]="chkEmployeeHistory">
   <div class="main-content modal-content clearfix" *ngIf="highlightedSection.name =='EmploymentHistory'">
     <h4 class="heading">Employment History
-              <span class="close-dialog" [hidden]="isHiddenEmployeehistory">Close this section if not needed
-            <span class="glyphicon glyphicon-remove" (click)="hideEmployeeHistory()"></span>
-          </span>
+      <span class="close-dialog" [hidden]="isHiddenEmployeehistory">Close this section if not needed
+        <span class="glyphicon glyphicon-remove" (click)="hideEmployeeHistory()"></span>
+      </span>
     </h4>
-    <div class="form col-sm-12" *ngFor="let item of candidate.employmentHistory;let i= index">
+    <div class="form col-sm-12 clearfix" *ngFor="let item of candidate.employmentHistory;let i= index">
 
       <div class="left-content">
         <div class="col-sm-6 padding-right15">

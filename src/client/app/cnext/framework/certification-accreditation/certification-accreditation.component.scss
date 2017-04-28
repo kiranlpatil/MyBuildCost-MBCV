@@ -48,9 +48,13 @@ $border-color: #ccc;
     padding: 0;
 
     .col-sm-4,
-    .form-control {
-      margin: 0;
+    .col-sm-12 {
+      padding: 0;
       width: 100%;
+    }
+
+    .row {
+      margin: 0;
     }
   }
 }

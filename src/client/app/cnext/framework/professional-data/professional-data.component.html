@@ -42,10 +42,12 @@
         </select>
       </div>
     </div>
-    <div class="button-group clearfix">
-      <button class="btn btn-primary" scrollTo scrollTargetSelector="#Employment-History"
-              (click)="onNext()" [disabled]="disableButton">Next
-      </button>
+    <div class="col-sm-12">
+      <div class="button-group clearfix">
+        <button class="btn btn-primary" scrollTo scrollTargetSelector="#Employment-History"
+                (click)="onNext()" [disabled]="disableButton">Next
+        </button>
+      </div>
     </div>
   </div>
   <div class="main-content" *ngIf="highlightedSection.name !='Professional-Details'">

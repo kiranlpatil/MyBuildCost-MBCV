@@ -214,7 +214,17 @@ $theme-color: #3694d1;
 
     .btn-primary {
       float: none;
-      margin-top: 0;
+      margin-top: 10px;
+    }
+
+    .heading {
+      .close-dialog {
+        visibility: hidden;
+
+        .glyphicon-remove {
+          visibility: visible;
+        }
+      }
     }
   }
 }

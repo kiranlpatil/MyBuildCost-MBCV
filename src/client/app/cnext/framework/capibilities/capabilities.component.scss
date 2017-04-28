@@ -1,48 +1,54 @@
 $primary-option: #3694d1;
 $secondary-option: #81D4FA;
 
-.legends {
-  font-size: 10px;
-  float: right;
-  margin: 0 0 5px 0;
-}
-
-.color-panel {
-  border-radius: 25px;
-  display: inline-block;
-  height: 8px;
-  padding: 0;
-  width: 8px;
-}
-
-.primary-color {
-  background: $primary-option;
-  margin: 0 5px 0 0;
-}
-
-.secondary-color {
-  background: $secondary-option;
-  margin: 0 5px 0 15px;
-}
-
-.capability-type {
-  clear: both;
-
-  .instructions {
-    margin-top: -5px;
-  }
-}
-
-.capability-option {
-  padding: 0;
-}
-
 .compact-view {
   &:hover {
     .btn-edit {
       opacity: 1;
     }
   }
+}
+
+.capabilities {
+  .info {
+    background: none;
+    padding-left: 0;
+  }
+
+  .color-panel {
+    border-radius: 25px;
+    display: inline-block;
+    height: 8px;
+    padding: 0;
+    width: 8px;
+  }
+
+  .primary-color {
+    background: $primary-option;
+    margin: 0 5px 0 0;
+  }
+
+  .secondary-color {
+    background: $secondary-option;
+    margin: 0 5px 0 15px;
+  }
+
+  .legends {
+    font-size: 10px;
+    float: right;
+    margin: 0 0 5px 0;
+  }
+
+  .capability-type {
+    clear: both;
+
+    .instructions {
+      margin-top: -5px;
+    }
+  }
+}
+.capability-option {
+  padding: 0;
 }
 
 @media screen and (max-width: 767px) {

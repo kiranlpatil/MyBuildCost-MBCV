@@ -36,43 +36,31 @@ $border-color: #ccc;
   }
 }
 
-@media only screen and (max-width: 1024px) {
+@media only screen and (max-width: 980px) {
   .left-content,
   .right-content{
     width: 100%;
     padding: 0;
-
-    textarea {
-      margin: 5px 0 15px;
-      height: 100px;
-      width: 100%;
-    }
-  }
-}
-
-@media only screen and (max-width: 980px) {
-  .left-content,
-  .right-content{
-    textarea {
-      width: 100%;
-    }
   }
 }
 
 @media only screen and (max-width: 767px) {
   .left-content {
-    .form-control {
-      margin: 0;
-      width: 100%;
-    }
-
     .col-sm-12 {
       clear: both;
     }
   }
 
+  .col-sm-12 {
+    padding: 0;
+  }
+
   .right-content {
     margin-bottom: 15px;
+
+    textarea {
+      width: 100%;
+    }
   }
 
   .form {
