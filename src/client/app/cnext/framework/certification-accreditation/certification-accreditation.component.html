@@ -1,42 +1,71 @@
-<div class="form col-sm-12 certification" *ngFor="let item of candidate.certifications;let i= index">
+<div class="section-container" [hidden]="chkCertification" >
+  <div class="main-content clearfix" *ngIf="highlightedSection.name =='Certification'">
+    <h4 class="heading">Certification/Accreditation
+              <span class="close-dialog" [hidden]="isHiddenCertificate">Close this section if not needed
+            <span class="glyphicon glyphicon-remove" (click)="hideCertification()"></span>
+          </span>
+    </h4>
+    <div class="form col-sm-12 certification" *ngFor="let item of candidate.certifications;let i= index">
 
-  <div class="row">
-    <div class="col-sm-4">
-      <div class="form-group">
-        <input type="text" class="form-control" [(ngModel)]="item.name"  (change)="postCertificates()" required />
-        <label> Name</label>
+      <div class="row">
+        <div class="col-sm-4">
+          <div class="form-group">
+            <input type="text" class="form-control" [(ngModel)]="item.name"  (change)="postCertificates()" required />
+            <label> Name</label>
+          </div>
+        </div>
+
+        <div class="col-sm-4">
+          <div class="form-group">
+            <input type="text" class="form-control" [(ngModel)]="item.issuedBy"  (change)="postCertificates()" required />
+            <label>Issued By</label>
+          </div>
+        </div>
+
+
+        <div class="col-sm-4">
+          <label>Year of Certification</label>
+          <select class="form-control" [(ngModel)]="item.year" (change)="postCertificates()">
+            <option *ngFor="let c of yearList" [selected]="true" [ngValue]="c">{{c}}</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-sm-12 no-padding">
+        <textarea class="form-control" [(ngModel)]="item.remark" (change)="postCertificates()" Placeholder="Certification/Accreditation"></textarea>
       </div>
     </div>
 
-    <div class="col-sm-4">
-      <div class="form-group">
-        <input type="text" class="form-control" [(ngModel)]="item.issuedBy"  (change)="postCertificates()" required />
-        <label>Issued By</label>
+    <div class="col-sm-12" >
+      <div class="clear">
+        <button type="button" id="more_fields" (click)="addAnother()" class="btn btn-create-profile" [disabled]="disbleRole" >
+          Add Another <span>+</span>
+        </button>
+        <div class="error-messages" *ngIf="isShowError"><p>Fields should not be empty.</p></div>
       </div>
     </div>
+    <div class="button-group clearfix">
+      <button class="btn btn-primary" scrollTo scrollTargetSelector="#awards"
+              (click)="onNext()" [disabled]="disableButton">Next
+      </button>
+    </div>
 
-
-    <div class="col-sm-4">
-      <label>Year of Certification</label>
-      <select class="form-control" [(ngModel)]="item.year" (change)="postCertificates()">
-        <option *ngFor="let c of yearList" [selected]="true" [ngValue]="c">{{c}}</option>
-      </select>
+  </div>
+  <div class="main-content" *ngIf="highlightedSection.name !='Certification'">
+    <div class="compact-view clearfix">
+      <button class="btn-edit" (click)="highlightedSection.name='Certification'"></button>
+      <h4 class="heading">Certifications</h4>
+      <ul>
+        <li *ngFor="let item of candidate.certifications">
+          <p>{{item.name}} at {{item.issuedBy}} in {{item.year}}</p>
+        </li>
+      </ul>
     </div>
   </div>
-
-  <div class="col-sm-12 no-padding">
-      <textarea class="form-control" [(ngModel)]="item.remark" (change)="postCertificates()" Placeholder="Certification/Accreditation"></textarea>
-  </div>
 </div>
 
-<div class="col-sm-12" >
-  <div class="clear">
-    <button type="button" id="more_fields" (click)="addAnother()" class="btn btn-create-profile" [disabled]="disbleRole" >
-      Add Another <span>+</span>
-    </button>
-    <div class="error-messages" *ngIf="isShowError"><p>Fields should not be empty.</p></div>
-  </div>
-</div>
+
+
 
 
 

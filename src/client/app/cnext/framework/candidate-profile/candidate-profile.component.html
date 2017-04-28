@@ -56,16 +56,8 @@
 
         <cn-academic-details [candidate]="candidate" [highlightedSection]="highlightedSection" (onComplete)="onAcademicDetailsComplete($event)" [hidden]="!showemploymentHistory"></cn-academic-details>
 
-        <div class="section-container" [hidden]="chkCertification" [hidden]="!showProfeciency">
-          <div class="main-content clearfix">
-            <h4 class="heading">Certification/Accreditation
-              <span class="close-dialog" [hidden]="isHiddenCertificate">Close this section if not needed
-            <span class="glyphicon glyphicon-remove" (click)="hideCertification()"></span>
-          </span>
-            </h4>
-            <cn-certification-accreditation [candidate]="candidate"></cn-certification-accreditation>
-          </div>
-        </div>
+        <cn-certification-accreditation [candidate]="candidate" [highlightedSection]="highlightedSection" (onComplete)="onCertificationsComplete($event)" [hidden]="!showCertificationDetails"></cn-certification-accreditation>
+
 
         <div class="section-container" [hidden]="chkAwards" [hidden]="!showProfeciency">
           <div class="main-content clearfix">
