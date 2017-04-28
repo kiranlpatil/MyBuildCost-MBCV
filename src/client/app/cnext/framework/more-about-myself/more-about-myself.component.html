@@ -1,9 +1,23 @@
-<div class="clearfix">
-  <div class="col-sm-12 more-about-myself">
-    <textarea class="form-control" [(ngModel)]="candidate.aboutMyself"  (ngModelChange)="addAboutMyself()" [maxlength]="maxword"   Placeholder="Enter About Yourself"></textarea>
-    <p>{{remainingWords}} words remaining</p>
+<div class="section-container"  >
+  <div class="main-content clearfix" *ngIf="highlightedSection.name =='AboutMySelf'">
+    <h4 class="heading">More About Myself (Max 250)</h4>
+    <div class="clearfix">
+      <div class="col-sm-12 more-about-myself">
+        <textarea class="form-control" [(ngModel)]="candidate.aboutMyself"  (ngModelChange)="addAboutMyself()" [maxlength]="maxword"   Placeholder="Enter About Yourself"></textarea>
+        <p>{{remainingWords}} words remaining</p>
+      </div>
+    </div>
   </div>
+  <div class="main-content" *ngIf="highlightedSection.name !='AboutMySelf'">
+    <div class="compact-view clearfix">
+      <button class="btn-edit" (click)="highlightedSection.name='AboutMySelf'"></button>
+      <h4 class="heading">More About Self</h4>
+      <p>{{candidate.aboutMyself}}</p>
+    </div>
+  </div>
+
 </div>
+
 
 
 

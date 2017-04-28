@@ -76,16 +76,8 @@
                    [hidden]="!showAwards"></cn-awards>
 
 
-        <div class="section-container" [hidden]="chkAboutMyself" [hidden]="!showProfeciency">
-          <div class="main-content clearfix">
-            <h4 class="heading">More About Myself (Max 250)
-              <span class="close-dialog" [hidden]="isHiddenAboutMyself">Close this section if not needed
-            <span class="glyphicon glyphicon-remove" (click)="hideAboutMyself()"></span>
-          </span>
-            </h4>
-            <cn-more-about-myself [candidate]="candidate"></cn-more-about-myself>
-          </div>
-        </div>
+        <cn-more-about-myself [candidate]="candidate" [highlightedSection]="highlightedSection" [hidden]="!showAboutMySelf"></cn-more-about-myself>
+
 
         <div class="section-container">
           <div class="main-content clearfix">

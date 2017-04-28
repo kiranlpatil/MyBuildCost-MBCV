@@ -2,7 +2,7 @@ import {Component, OnInit, Input} from "@angular/core";
 import {MessageService} from "../../../framework/shared/message.service";
 import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
 import {Message} from "../../../framework/shared/message";
-import {Candidate} from "../model/candidate";
+import {Candidate, Section} from "../model/candidate";
 import {DisableAboutMyselfGlyphiconService} from "../disableAboutMyself.service";
 import {isUndefined} from "util";
 
@@ -15,6 +15,7 @@ import {isUndefined} from "util";
 
 export class MoreAboutMyselfComponent implements OnInit {
   @Input() candidate:Candidate;
+  @Input() highlightedSection:Section;
   private maxLength:number = 250;
   private reSize:string[];
   private spaceSplitedString:string[];
