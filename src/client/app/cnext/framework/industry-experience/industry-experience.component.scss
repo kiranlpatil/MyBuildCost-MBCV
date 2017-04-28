@@ -8,6 +8,14 @@ $primary-option: #1c75bd;
   padding: 0;
 }
 
+.compact-view {
+  &:hover {
+    .btn-edit {
+      opacity: 1;
+    }
+  }
+}
+
 @media screen and (max-width: 980px) {
   .select-option {
     margin: 0 15px 0 0;

@@ -17,11 +17,6 @@ $message: #00aed5;
     }
 
     .btn-create-profile {
-      font-size: 12px;
-      padding: 6px 15px;
-      background-color: #fff;
-      border: 1px solid $btn-color;
-
       .glyphicon-remove {
         top: 3px;
       }
@@ -51,6 +46,14 @@ $message: #00aed5;
   .messages {
     color: $message;
     padding: 0;
+  }
+}
+
+.compact-view {
+  &:hover {
+    .btn-edit {
+      opacity: 1;
+    }
   }
 }
 

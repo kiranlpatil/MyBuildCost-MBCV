@@ -7,6 +7,14 @@ $border-color: #ccc;
   }
 }
 
+.compact-view {
+  &:hover {
+    .btn-edit {
+      opacity: 1;
+    }
+  }
+}
+
 @media only screen and (max-width: 980px) {
   .academic-details {
     .col-sm-4 {

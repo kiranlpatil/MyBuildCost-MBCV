@@ -77,9 +77,10 @@ $theme-color: #3694d1;
 
   .btn-create-profile {
     background-color: $white;
-    color: $text-color;
-    padding: 4px 15px;
     border: 1px solid $theme-color;
+    color: $text-color;
+    font-size: 12px;
+    padding: 6px 15px;
   }
 
   .instructions {

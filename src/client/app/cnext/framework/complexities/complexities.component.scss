@@ -18,6 +18,12 @@ $option-theme-color: #1c75bd;
   .content {
     border-bottom: 0 ;
   }
+
+  &:hover {
+    .btn-edit {
+      opacity: 1;
+    }
+  }
 }
 
 .select-complexity {
@@ -33,11 +39,11 @@ $option-theme-color: #1c75bd;
   }
 }
 
-
 .select-option > label {
   margin: 0;
   padding: 10px 0;
 }
+
 
 @media screen and (max-width: 980px) {
   .scenarios {

@@ -24,7 +24,7 @@ $modal-bg: rgba(0, 0, 0, .2);
   z-index: 3;
   position: relative;
   border-radius: 0;
-  animation: fadein .5s;
+  /*animation: fadein .5s;*/
   margin: 7px 15px;
   box-shadow: 2px 2px 4px 0 $modal-bg;
   border: 1px solid $primary-option;
@@ -47,6 +47,9 @@ $modal-bg: rgba(0, 0, 0, .2);
     height: 20px;
     width: 20px;
     padding: 0;
+    display: block;
+    transition: opacity 0.25s ease-out;
+    opacity: 0;
   }
 
   .heading {
@@ -100,6 +103,7 @@ $modal-bg: rgba(0, 0, 0, .2);
       min-width: 100px;
       padding: 4px 10px;
       text-align: center;
+      text-transform: capitalize;
     }
 
     .primary {

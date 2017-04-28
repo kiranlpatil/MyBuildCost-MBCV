@@ -23,6 +23,14 @@
   }
 }
 
+.compact-view {
+  &:hover {
+    .btn-edit {
+      opacity: 1;
+    }
+  }
+}
+
 $text-color: #666;
 $white: #fff;
 $option-border-color: #999;
