@@ -1,6 +1,6 @@
 import {Component, Input, EventEmitter, Output} from "@angular/core";
 import {ValueConstant} from "../../../framework/shared/constants";
-import {Candidate, Section} from "../model/candidate";
+import { Section} from "../model/candidate";
 import {Proficiences} from "../model/proficiency";
 import {ProficiencyDomainService} from "./proficiencies.service";
 import {MessageService} from "../../../framework/shared/message.service";
@@ -14,7 +14,7 @@ import {Message} from "../../../framework/shared/message";
 })
 
 export class ProficienciesComponent {
-  @Input() candidate:Candidate;
+  @Input() choosedproficiencies:string[];
   @Input() highlightedSection :Section;
   @Input() proficiencies:Proficiences = new Proficiences();
   @Output() onComplete = new EventEmitter();
@@ -39,19 +39,18 @@ export class ProficienciesComponent {
   }
 
   ngOnChanges (changes:any) {
-    if (changes.proficiencies != undefined) {
-      if (changes.proficiencies.currentValue != undefined)
-        this.proficiencies = changes.proficiencies.currentValue;
-      if (this.candidate !== undefined) {
-        if (this.candidate.proficiencies.length > 0) {
-          this.selectedProficiencies = this.candidate.proficiencies;
-          for (let proficiency of this.candidate.proficiencies) {
+   /* if (changes.proficiencies != undefined) {
+      if (changes.proficiencies.currentValue != undefined) {
+        this.proficiencies = changes.proficiencies.currentValue;*/
+        if (this.choosedproficiencies.length > 0) {
+          this.selectedProficiencies = this.choosedproficiencies;
+          for (let proficiency of this.choosedproficiencies) {
             this.deleteSelectedProfeciency(proficiency);
           }
         }
       }
-    }
-  }
+    /*}*/
+  /*}*/
   OnProficiencyDataSuccess(data:any) {
 this.Proficiencies= data.data;
 this.masterDataProficiencies = data.data;

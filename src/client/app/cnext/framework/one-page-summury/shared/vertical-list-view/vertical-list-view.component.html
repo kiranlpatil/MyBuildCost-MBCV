@@ -21,4 +21,15 @@
       </li>
     </ul>
   </div>
+  <div *ngIf="type=='awards'|| type=='certifications'">
+    <img src="assets/c-next/icons/education-icon.png" alt="awards"/>
+    <span>{{type}}</span>
+    <ul>
+      <li  *ngFor="let item of data;let i = index" >
+        <p>{{item.year}}</p>
+        <p>{{item.name}}</p>
+        <p>{{item.issuedBy}}</p>
+      </li>
+    </ul>
+  </div>
 </div>

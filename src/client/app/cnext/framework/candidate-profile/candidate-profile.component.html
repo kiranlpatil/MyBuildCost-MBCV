@@ -45,7 +45,7 @@
                          [isComplexityPresent]="isComplexityPresent"
                          (onComplete)="onComplexitytyComplete($event)" [hidden]="!showComplexity"></cn-complexities>
 
-        <cn-proficiencies [proficiencies]="proficiencies" [candidate]="candidate"
+        <cn-proficiencies [proficiencies]="proficiencies" [choosedproficiencies]="candidate.proficiencies"
                                 [highlightedSection]="highlightedSection"
                                (onComplete)="onProficiencyComplete($event)" [hidden]="!showProfeciency"></cn-proficiencies>
 

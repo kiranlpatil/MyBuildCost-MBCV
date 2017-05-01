@@ -49,7 +49,7 @@
 <!--
         <cn-proficiency-doamin [proficiencies]="proficiencies" [type]="'profeciency'" [industry]="jobPosterModel.industry.name" (selectProficiency)="selectProficiency($event)"></cn-proficiency-doamin>
 -->
-         <cn-proficiencies [proficiencies]="proficiencies"
+         <cn-proficiencies [proficiencies]="proficiencies" [choosedproficiencies]="jobPosterModel.profiencies"
                                 [highlightedSection]="highlightedSection"
                                (onComplete)="selectProficiency($event)" [hidden]="!isShowProficiency"></cn-proficiencies>
 
