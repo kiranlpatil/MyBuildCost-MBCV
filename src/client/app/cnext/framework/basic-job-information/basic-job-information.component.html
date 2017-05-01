@@ -1,0 +1,47 @@
+<div class="section-container">
+  <div class="main-content clearfix modal-content" *ngIf="highlightedSection.name=='JobProfile'">
+
+    <div class="job-info section-container clearfix">
+      <div class="row">
+        <cn-job-information [jobPosterModel]="jobPosterModel" (selectJobInformation)="selectJobInformation($event)"></cn-job-information>
+
+        <cn-job-requirement [jobPosterModel]="jobPosterModel" (selectJobRequirement)="selectJobRequirement($event)"></cn-job-requirement>
+
+        <cn-job-location [jobLocation]="jobPosterModel.location" (selectJobLocation)="selectJobLocation($event)"></cn-job-location>
+      </div>
+    </div>
+    <div class="roles section-container">
+      <div class="main-content clearfix">
+        <h4 class="heading">Select Industry</h4>
+        <div class="col-sm-12">
+          <cn-industry-list [selectedIndustry]="jobPosterModel.industry" (valueChange)="selectIndustry($event)"></cn-industry-list>
+        </div>
+      </div>
+    </div>
+    <div class="button-group clearfix">
+      <button class="btn btn-primary" scrollTo scrollTargetSelector="#work-area" (click)="onNext()">Next
+      </button>
+    </div>
+  </div>
+
+  <div class="main-content" *ngIf="highlightedSection.name!='JobProfile'">
+    <div class="compact-view clearfix">
+      <button class="btn-edit" (click)="highlightedSection.name='JobProfile';disableButton=false"></button>
+
+      <div>
+        <p><label>Job Title</label> {{jobPosterModel.jobTitle}}</p>
+        <p><label>Hiring Manager</label> {{jobPosterModel.hiringManager}}</p>
+        <p><label>Hiring Department</label> {{jobPosterModel.department}}</p>
+        <p><label>Education</label> {{jobPosterModel.education}}</p>
+        <p><label>Experience</label> {{jobPosterModel.experience}}</p>
+        <p><label>Salary</label> {{jobPosterModel.salary}}</p>
+        <p><label>Notice Period</label> {{jobPosterModel.joiningPeriod}}</p>
+        <p><label>Country</label> {{jobPosterModel.location.country}}</p>
+        <p><label>State</label> {{jobPosterModel.location.state}}</p>
+        <p><label>City</label> {{jobPosterModel.location.cityName}}</p>
+        <p><label>Industry</label> {{jobPosterModel.industry.name}}</p>
+      </div>
+    </div>
+  </div>
+  <!-- <div [class.modal-bg]="highlightedSection.name!='Profile'"></div>-->
+</div>

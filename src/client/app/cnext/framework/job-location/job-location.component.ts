@@ -1,5 +1,5 @@
 
-import {Component, OnInit, Output,EventEmitter} from '@angular/core';
+import {Component, OnInit, Output,EventEmitter,Input} from '@angular/core';
 import { JobLocation } from '../model/job-location';
 import { JobLocationService } from './job-location.service';
 import { Message } from '../../../framework/shared/message';
@@ -15,9 +15,9 @@ import { MyJobLocationService } from '../myjob-location.service';
 
 export class JobLocationComponent implements OnInit {
   @Output() selectJobLocation=new EventEmitter();
-
+   
   pin:string;
-  private jobLocationtion = new JobLocation();
+  @Input() jobLocation = new JobLocation();
   private storedcountry:string;
   private storedstate:string;
   private storedcity:string;
@@ -45,7 +45,6 @@ export class JobLocationComponent implements OnInit {
     this.locationDetails=data.address;
     for(var  i = 0; i <data.address.length; i++) {
       this.countries.push(data.address[i].country);
-      console.log(data.address[0].country);
     }
   }
 
@@ -63,7 +62,7 @@ export class JobLocationComponent implements OnInit {
     }
     this.storedcountry=country;
     this.isCountrySelected = false;
-    this.jobLocationtion.country=this.storedcountry;
+    this.jobLocation.country=this.storedcountry;
     let tempState: any = document.getElementById("statesAll");
     let tempCity: any = document.getElementById("citiesAll");
     tempState.value = '';
@@ -86,7 +85,7 @@ export class JobLocationComponent implements OnInit {
     }
     this.storedstate=selectedstate;
     this.isStateSelected = false;
-    this.jobLocationtion.state=this.storedstate;
+    this.jobLocation.state=this.storedstate;
     let tempCity: any = document.getElementById("citiesAll");
     tempCity.value = '';
   }
@@ -95,12 +94,12 @@ export class JobLocationComponent implements OnInit {
 
   selectCityModel(city : string) {
     this.storedcity=city;
-    this.jobLocationtion.cityName=city;
-    this.selectJobLocation.emit(this.jobLocationtion);
+    this.jobLocation.cityName=city;
+    this.selectJobLocation.emit(this.jobLocation);
   }
   isPinSelected(pin:any) {
-    this.jobLocationtion.pin=pin;
-    this.selectJobLocation.emit(this.jobLocationtion);
+    this.jobLocation.pin=pin;
+    this.selectJobLocation.emit(this.jobLocation);
 
   }
 

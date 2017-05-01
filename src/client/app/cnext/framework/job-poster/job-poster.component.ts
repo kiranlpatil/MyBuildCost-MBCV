@@ -25,6 +25,8 @@ import {Message} from "../../../framework/shared/message";
 import {MessageService} from "../../../framework/shared/message.service";
 import {Proficiences} from "../model/proficiency";
 import {Section} from "../model/candidate";
+import {LocalStorage} from "../../../framework/shared/constants";
+import {LocalStorageService} from "../../../framework/shared/localstorage.service";
 
 
 @Component({
@@ -35,7 +37,6 @@ import {Section} from "../model/candidate";
 })
 
 export class JobPosterComponent {
-  private industries:Industry[] = new Array(0);
   private roleList:string[] = new Array(0);
   private primaryCapability:string[] = new Array(0);
   private proficiencies:Proficiences = new Proficiences();
@@ -49,6 +50,7 @@ export class JobPosterComponent {
   private jobRequirement = new JobRequirement();
   private jobLocation = new JobLocation();
   private isShowIndustry:boolean = false;
+  private isCandidate:boolean = false;
   private isShowComplexity:boolean = false;
   private isShowRoleList:boolean = false;
   private isShowRoletype:boolean = false;
@@ -107,7 +109,6 @@ export class JobPosterComponent {
     disableService.showTestDisable$.subscribe(
       data=> {
         this.isShowRoleList = data;
-        this.highlightedSection.name='Work-Area';
       }
     );
 
@@ -157,6 +158,18 @@ export class JobPosterComponent {
     );
   }
 
+  ngOnInit() {
+
+   
+      if(LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE)==='true') {
+        this.isCandidate = true;
+      }
+    
+
+    if (this.isCandidate != true) {
+      this.highlightedSection.name = "JobProfile";
+    }
+  }
 
   postjob() {
     this.showModalStyle = !this.showModalStyle;
@@ -198,33 +211,17 @@ export class JobPosterComponent {
 
   }
 
-  selectJobInformation(jobInformation:JobInformation) {
-    this.jobPosterModel.jobTitle = jobInformation.jobTitle;
-    this.jobPosterModel.hiringManager = jobInformation.hiringManager;
-    this.jobPosterModel.department = jobInformation.department;
-  }
-
-  selectJobLocation(jobLocation:JobLocation) {
-    this.jobPosterModel.location = jobLocation;
-  }
+  
 
   selectExperiencedIndustry(experiencedindustry:string[]) {
     this.jobPosterModel.interestedIndustry = experiencedindustry;
   }
 
-  selectJobRequirement(jobRequirement:JobRequirement) {
-    this.jobPosterModel.education = jobRequirement.education;
-    this.jobPosterModel.experience = jobRequirement.experience;
-    this.jobPosterModel.joiningPeriod = jobRequirement.noticeperiod;
-    this.jobPosterModel.salary = jobRequirement.salary;
-    if (jobRequirement.noticeperiod !== undefined) {
-      this.isShowIndustry = true;
-      this.getIndustry();
-    }
-  }
 
-  selectIndustry(industry:Industry) {
-    this.jobPosterModel.industry = industry;
+
+  onBasicJobInformationComplete(jobModel:JobPosterModel) {
+    console.log(this.highlightedSection);
+    this.jobPosterModel = jobModel;
     //this.savejobPosterModelDetails();
     this.getRoles();
     this.getProficiency();
@@ -232,7 +229,7 @@ export class JobPosterComponent {
   }
 
 
-  selectRole(roles:Role[]) {debugger
+  selectRole(roles:Role[]) {
     this.jobPosterModel.industry.roles = roles;
     //this.savejobPosterModelDetails();
 
@@ -257,48 +254,13 @@ export class JobPosterComponent {
     this.jobForComplexity = roles;
     this.isShowProficiency = true;
   }
-
-  /*selectRoleType(roleType:string) {
-   this.jobPosterModel.roleType = roleType;
-   //    this.savejobPosterModelDetails();
-   this.getCapability();
-   this.isShowCapability = true;
-   }
-   */
+  
   selectProficiency(proficiency:string[]) {
     this.jobPosterModel.profiencies = proficiency;
   }
 
-  getIndustry() {
-    this.profileCreatorService.getIndustries()
-      .subscribe(
-        industrylist => this.industries = industrylist.data,
-        error => this.onError(error));
-  }
+ 
 
-  /* getRoles(){
-   this.profileCreatorService.getRoles(this.jobPosterModel.industry.name)
-   .subscribe(
-   rolelist => this.roles=rolelist.data,
-   error => this.onError(error));
-   }*/
-
-  /* getRoleType() {
-   this.profileCreatorService.getRoleTypes()
-   .subscribe(
-   data=> this.roleTypes = data.roleTypes,
-   error => this.onError(error));
-   }*/
-
-  /*getCapability(){
-   for(let role of this.jobPosterModel.industry.roles){
-   this.roleList.push(role.name);
-   }
-   this.profileCreatorService.getCapability(this.jobPosterModel.industry.name,this.roleList)
-   .subscribe(
-   rolelist => this.roles=rolelist.data,
-   error => this.onError(error));
-   }*/
   onError(error:any) {
     var message = new Message();
     message.error_msg = error.err_msg;

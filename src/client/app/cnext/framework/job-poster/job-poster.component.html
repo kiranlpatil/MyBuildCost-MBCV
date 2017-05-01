@@ -1,84 +1,50 @@
 <div class="clearfix ">
-  <div class="job-info section-container clearfix">
-    <div class="row">
-      <cn-job-information (selectJobInformation)="selectJobInformation($event)"></cn-job-information>
-
-      <cn-job-requirement (selectJobRequirement)="selectJobRequirement($event)"></cn-job-requirement>
-
-      <cn-job-location (selectJobLocation)="selectJobLocation($event)"></cn-job-location>
-    </div>
-  </div>
-
-  <div class="job-poster" [hidden]="!isShowIndustry">
-    <div class="roles section-container">
-      <div class="main-content clearfix">
-        <h4 class="heading">Select Industry</h4>
-        <div class="col-sm-12">
-          <cn-industry-list  (valueChange)="selectIndustry($event)" ></cn-industry-list>
-        </div>
-      </div>
-    </div>
 
 
-    <cn-work-area [roles]="rolesForMain" [highlightedSection]="highlightedSection" (onComplete)="selectRole($event)" [hidden]="!isShowRoleList"></cn-work-area>
+  <div class="job-poster">
+
+    <cn-basic-job-information [highlightedSection]="highlightedSection" [jobPosterModel]="jobPosterModel"
+                              (onComplete)="onBasicJobInformationComplete($event)"></cn-basic-job-information>
+
+    <cn-work-area [roles]="rolesForMain" [highlightedSection]="highlightedSection" (onComplete)="selectRole($event)"
+                  [hidden]="!isShowRoleList"></cn-work-area>
 
 
+    <cn-capabilities [roles]="rolesForCapability" [candidateRoles]="jobPosterModel.industry.roles"
+                     [highlightedSection]="highlightedSection"
+                     (onComplete)="selectRole($event)" [hidden]="!isShowCapability"></cn-capabilities>
 
 
+    <cn-complexities [roles]="rolesForComplexity" [candidateRoles]="jobPosterModel.industry.roles"
+                     [highlightedSection]="highlightedSection"
+                     [isComplexityPresent]="isComplexityPresent"
+                     (onComplete)="selectRoleFromComplexity($event)" [hidden]="!isShowComplexity"></cn-complexities>
 
 
-        <cn-capabilities [roles]="rolesForCapability" [candidateRoles]="jobPosterModel.industry.roles"
-                         [highlightedSection]="highlightedSection"
-                         (onComplete)="selectRole($event)" [hidden]="!isShowCapability"></cn-capabilities>
+    <cn-proficiencies [proficiencies]="proficiencies" [choosedproficiencies]="jobPosterModel.profiencies"
+                      [highlightedSection]="highlightedSection"
+                      (onComplete)="selectProficiency($event)" [hidden]="!isShowProficiency"></cn-proficiencies>
 
 
+    <cn-industry-experience [candidateExperiencedIndustry]="jobPosterModel.interestedIndustry"
+      [highlightedSection]="highlightedSection"
+      (onComplete)="selectExperiencedIndustry($event)"
+      [hidden]="!isShowProficiency"></cn-industry-experience>
 
 
-
-
-
-        <cn-complexities [roles]="rolesForComplexity" [candidateRoles]="jobPosterModel.industry.roles"
-                         [highlightedSection]="highlightedSection"
-                         [isComplexityPresent]="isComplexityPresent"
-                         (onComplete)="selectRoleFromComplexity($event)" [hidden]="!isShowComplexity"></cn-complexities>
-
-
-
-
-
-<!--
-        <cn-proficiency-doamin [proficiencies]="proficiencies" [type]="'profeciency'" [industry]="jobPosterModel.industry.name" (selectProficiency)="selectProficiency($event)"></cn-proficiency-doamin>
--->
-         <cn-proficiencies [proficiencies]="proficiencies" [choosedproficiencies]="jobPosterModel.profiencies"
-                                [highlightedSection]="highlightedSection"
-                               (onComplete)="selectProficiency($event)" [hidden]="!isShowProficiency"></cn-proficiencies>
-
-
-
-
-<!--
-        <cn-industry-experience-list [industries]="industries"  (selectExperiencedIndustry)="selectExperiencedIndustry($event)"></cn-industry-experience-list>
--->
-        <cn-industry-experience
-                               [highlightedSection]="highlightedSection"
-                                (onComplete)="selectExperiencedIndustry($event)"
-                                [hidden]="!isShowProficiency"></cn-industry-experience>
-
-
-
-    <div class="main-content"  [hidden]="!isShowProficiency">
+    <div class="main-content" [hidden]="!isShowProficiency">
       <div class="row">
-        <div class="section-container col-sm-6" >
+        <div class="section-container col-sm-6">
           <div class="max-height">
             <h4 class="heading">Compentencies (500 Words):</h4>
-            <cn-description-field [type]="'competensies'" [maxLength]=" '500'" ></cn-description-field>
+            <cn-description-field [type]="'competensies'" [maxLength]=" '500'"></cn-description-field>
           </div>
         </div>
 
-        <div class="section-container col-sm-6" [hidden]="!isShowProficiency" >
+        <div class="section-container col-sm-6" [hidden]="!isShowProficiency">
           <div class="max-height">
             <h4 class="heading">Responsibilities and Derivables (500 Words):</h4>
-            <cn-description-field [type]="'responsibilities'" [maxLength]=" '500'" ></cn-description-field>
+            <cn-description-field [type]="'responsibilities'" [maxLength]=" '500'"></cn-description-field>
           </div>
         </div>
       </div>
@@ -91,7 +57,7 @@
   </div>
 </div>
 
-<div class="modal" [style.display]="getStyleModal()" >
+<div class="modal" [style.display]="getStyleModal()">
   <div class="modal-bg">
     <div class="modal-dialog modal-md">
       <div class="modal-content">

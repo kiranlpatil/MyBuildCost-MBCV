@@ -1,15 +1,15 @@
 
   <div class="col-sm-4">
     <label>Job Title:</label>
-    <input class="form-control" type="text" name="JobTitle" [(ngModel)]="jobTitle" (ngModelChange)="isJobTitleSelected($event)" >
+    <input class="form-control" type="text" name="JobTitle" [(ngModel)]="jobPosterModel.jobTitle" (ngModelChange)="isJobTitleSelected($event)" >
   </div>
 
   <div class="col-sm-4">
     <label>Hiring Manager:</label>
-    <input class="form-control" type="text" maxlength="30" name="HiringManager" [(ngModel)]="hiringManager" (ngModelChange)="isHiringMangerSelected($event)">
+    <input class="form-control" type="text" maxlength="30" name="HiringManager" [(ngModel)]="jobPosterModel.hiringManager" (ngModelChange)="isHiringMangerSelected($event)">
   </div>
   <div class="col-sm-4">
     <label>Hiring Department:</label>
-    <input class="form-control" type="text" name="Department" [(ngModel)]="department" (ngModelChange)="isDepartmentSelected($event)">
+    <input class="form-control" type="text" name="Department" [(ngModel)]="jobPosterModel.department" (ngModelChange)="isDepartmentSelected($event)">
   </div>
 

@@ -1,5 +1,6 @@
-import {  Component,Output,EventEmitter } from '@angular/core';
+import {  Component,Output,EventEmitter,Input } from '@angular/core';
 import {  JobInformation  } from '../model/job-information';
+import {JobPosterModel} from "../model/jobPoster";
 
 @Component({
   moduleId: module.id,
@@ -9,6 +10,7 @@ import {  JobInformation  } from '../model/job-information';
 })
 
 export class JobInformationComponent {
+  @Input() jobPosterModel:JobPosterModel = new JobPosterModel();
   @Output() selectJobInformation=new EventEmitter();
   private jobInformation=new JobInformation();
   

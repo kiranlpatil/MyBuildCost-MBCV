@@ -130,6 +130,7 @@ import {CapabilitiesComponent} from "./cnext/framework/capibilities/capabilities
 import {ComplexitiesComponent} from "./cnext/framework/complexities/complexities.component";
 import {ProficienciesComponent} from "./cnext/framework/proficiencies/proficiencies.component";
 import {ProficiencyDomainService} from "./cnext/framework/proficiencies/proficiencies.service";
+import {BasicJobInformationComponent} from "./cnext/framework/basic-job-information/basic-job-information.component";
 
 //C-NEXT IMPORTS
 
@@ -191,6 +192,7 @@ import {ProficiencyDomainService} from "./cnext/framework/proficiencies/proficie
     ComplexitiesComponent,
     JobPosterComponent,
     SingleSelectListComponent,
+    BasicJobInformationComponent,
     JobInformationComponent,
     JobRequirementComponent,
     JobLocationComponent,

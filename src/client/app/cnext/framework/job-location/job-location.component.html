@@ -7,7 +7,7 @@
         <div ng2-auto-complete
              [source]="countries"
              (ngModelChange)="selectCountryModel($event)">
-          <input  [ngModel]="countryModel" class="form-control" placeholder="Country" />
+          <input  [ngModel]="jobLocation.country" class="form-control" placeholder="Country" />
         </div>
       </div>
     </div>
@@ -16,7 +16,7 @@
         <div ng2-auto-complete
              [source]="states"
              (ngModelChange)="selectStateModel($event)">
-          <input id="statesAll" [ngModel]="stateModel" class="form-control" (click)="selectCountryMessage()" placeholder="State" [disabled]="isCountrySelected"/>
+          <input id="statesAll" [ngModel]="jobLocation.state" class="form-control" (click)="selectCountryMessage()" placeholder="State" [disabled]="isCountrySelected"/>
          <!-- <span  class="error-messages">Please select Country first.</span>-->
         </div>
       </div>
@@ -26,7 +26,7 @@
         <div ng2-auto-complete
              [source]="cities"
              (ngModelChange)="selectCityModel($event)">
-          <input  id="citiesAll" [ngModel]="cityModel" class="form-control" (click)="selectStateMessage()" placeholder="City" [disabled]="isStateSelected"/>
+          <input  id="citiesAll" [ngModel]="jobLocation.cityName" class="form-control" (click)="selectStateMessage()" placeholder="City" [disabled]="isStateSelected"/>
          <!-- <span  class="error-messages">Please select Country and State first.</span>-->
         </div>
       </div>

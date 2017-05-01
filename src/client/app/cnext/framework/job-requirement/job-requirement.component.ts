@@ -1,8 +1,9 @@
-import {Component, OnInit, Output, EventEmitter} from "@angular/core";
+import {Component, OnInit, Output, EventEmitter,Input} from "@angular/core";
 import {JobRequirement} from "../model/job-requirement";
 import {MessageService} from "../../../framework/shared/message.service";
 import {Message} from "../../../framework/shared/message";
 import {ProfessionalDataService} from "../professional-data/professional-data.service";
+import {JobPosterModel} from "../model/jobPoster";
 
 
 @Component({
@@ -13,6 +14,7 @@ import {ProfessionalDataService} from "../professional-data/professional-data.se
 })
 
 export class JobRequirementComponent implements OnInit {
+  @Input() jobPosterModel:JobPosterModel = new JobPosterModel();
   @Output() selectJobRequirement = new EventEmitter()
   private jobRequirement = new JobRequirement();
 
@@ -77,12 +79,12 @@ export class JobRequirementComponent implements OnInit {
     }
   }
 
-  selectexperienceModel(experience:any) {
-    this.jobRequirement.experience = experience;
+  selectexperienceModel(experience:any) {debugger
+    this.jobRequirement.experience = this.jobPosterModel.experience;
     this.selectJobRequirement.emit(this.jobRequirement);
   }
   selecteducationModel(education:any) {
-    this.jobRequirement.education = education;
+    this.jobRequirement.education = this.jobPosterModel.education;
     this.selectJobRequirement.emit(this.jobRequirement);
   }
 
@@ -94,7 +96,7 @@ export class JobRequirementComponent implements OnInit {
   }
 
   selectsalaryModel(salary:any) {
-    this.jobRequirement.salary = salary;
+    this.jobRequirement.salary = this.jobPosterModel.salary;
     this.selectJobRequirement.emit(this.jobRequirement);
 
   }
@@ -106,7 +108,7 @@ export class JobRequirementComponent implements OnInit {
   }
 
   selectenoticeperiodModel(noticeperiod:any) {
-    this.jobRequirement.noticeperiod = noticeperiod;
+    this.jobRequirement.noticeperiod = this.jobPosterModel.joiningPeriod;
     this.selectJobRequirement.emit(this.jobRequirement);
   }
 

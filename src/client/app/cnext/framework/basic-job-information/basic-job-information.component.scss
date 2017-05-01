@@ -1,0 +1,44 @@
+$light-blue: #00aed5;
+
+h4 {
+  font-size: 14px;
+  margin: 0 0 10px;
+}
+
+.user-name {
+  margin-top: 15px;
+
+  .profile-name-first, .profile-name-last {
+    color: $light-blue;
+    font-family: 'gothamrnd-light';
+    font-size: 24px;
+    font-weight: 100;
+    background: none;
+    padding: 0;
+    text-transform: capitalize;
+  }
+
+  .profile-name-last {
+    color: #1B75BC;
+    font-family: 'gothamrnd-book';
+    font-weight: 900;
+
+  }
+}
+
+.compact-view {
+  &:hover {
+    .btn-edit {
+      opacity: 1;
+    }
+  }
+}
+
+
+@media only screen and (max-width: 767px) {
+  .user-name {
+    .profile-name-first, .profile-name-last {
+      font-size: 16px;
+    }
+  }
+}
