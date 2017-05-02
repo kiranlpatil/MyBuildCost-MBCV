@@ -1,5 +1,5 @@
 $text-color: #333;
-$bg-tab-content: #f9f9f9;
+$bg-tab-content: #fff;
 $nav-tab: #7264b3;
 $profile-section-shadow: rgba(204, 204, 204, 1);
 $border-color: #ddd;
@@ -44,7 +44,6 @@ $white: #fff;
   -moz-box-shadow: 0 0 1px 0 $profile-section-shadow;
   -webkit-box-shadow: 0 0 1px 0 $profile-section-shadow;
   box-shadow: 0 0 1px 0 $profile-section-shadow;
-  padding-bottom: 20px;
 }
 
 

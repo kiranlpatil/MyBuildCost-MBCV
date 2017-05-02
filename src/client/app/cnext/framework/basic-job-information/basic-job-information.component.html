@@ -28,18 +28,22 @@
     <div class="compact-view clearfix">
       <button class="btn-edit" (click)="highlightedSection.name='JobProfile';disableButton=false"></button>
 
-      <div>
+      <div class="clearfix">
         <p><label>Job Title</label> {{jobPosterModel.jobTitle}}</p>
+        <p><label>Industry</label> {{jobPosterModel.industry.name}}</p>
         <p><label>Hiring Manager</label> {{jobPosterModel.hiringManager}}</p>
         <p><label>Hiring Department</label> {{jobPosterModel.department}}</p>
+      </div>
+      <div class="clearfix">
         <p><label>Education</label> {{jobPosterModel.education}}</p>
         <p><label>Experience</label> {{jobPosterModel.experience}}</p>
         <p><label>Salary</label> {{jobPosterModel.salary}}</p>
         <p><label>Notice Period</label> {{jobPosterModel.joiningPeriod}}</p>
+      </div>
+      <div class="clearfix">
         <p><label>Country</label> {{jobPosterModel.location.country}}</p>
         <p><label>State</label> {{jobPosterModel.location.state}}</p>
         <p><label>City</label> {{jobPosterModel.location.cityName}}</p>
-        <p><label>Industry</label> {{jobPosterModel.industry.name}}</p>
       </div>
     </div>
   </div>

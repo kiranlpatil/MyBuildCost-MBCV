@@ -17,15 +17,16 @@ $profile-background: #f2f2f2;
 }
 
 .job-poster {
-  border: 1px solid $border-color;
-  margin: 15px 30px;
-  background: $profile-background;
+  //border: 1px solid $border-color;
+  //margin: 15px 30px;
+  //background: $profile-background;
+  margin: 15px 0;
   clear: both;
 }
 
 .button-group {
   text-align: right;
-
+  padding: 15px;
 
   .btn {
     margin: 0 0 0 15px;
@@ -42,10 +43,6 @@ $profile-background: #f2f2f2;
     margin: 15px 15px 0;
   }
 
-  .job-poster {
-    margin: 15px;
-  }
-
   .button-group {
     .btn {
       margin: 15px 0 0 15px;
@@ -58,5 +55,9 @@ $profile-background: #f2f2f2;
     .col-sm-12 {
       padding: 0;
     }
+  }
+
+  .job-poster {
+    margin: 0;
   }
 }

@@ -1,10 +1,5 @@
 $light-blue: #00aed5;
 
-h4 {
-  font-size: 14px;
-  margin: 0 0 10px;
-}
-
 .user-name {
   margin-top: 15px;
 
@@ -27,6 +22,17 @@ h4 {
 }
 
 .compact-view {
+  p {
+    width: 24%;
+    padding: 0 0.5%;
+    float:left;
+    margin-bottom: 15px;
+
+    label {
+      width: 100%;
+    }
+  }
+
   &:hover {
     .btn-edit {
       opacity: 1;
@@ -34,11 +40,20 @@ h4 {
   }
 }
 
-
 @media only screen and (max-width: 767px) {
   .user-name {
     .profile-name-first, .profile-name-last {
       font-size: 16px;
+    }
+  }
+
+  @media only screen and (max-width: 1024px) {
+    .compact-view {
+      p {
+        width: 100%;
+        padding: 0;
+        margin-bottom: 10px;
+      }
     }
   }
 }

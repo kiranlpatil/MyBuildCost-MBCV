@@ -32,12 +32,13 @@
       [hidden]="!isShowProficiency"></cn-industry-experience>
 
 
-    <div class="main-content" [hidden]="!isShowProficiency">
+    <div [hidden]="!isShowProficiency">
       <cn-compentacies-and-responsibilities [jobPosterModel]="jobPosterModel" [highlightedSection]="highlightedSection" (onComplete)="onCompentansiesandResponsibilitycomplete($event)" [hidden]="!isShowProficiency"></cn-compentacies-and-responsibilities>
-      <div class="button-group" [hidden]="!isShowProficiency">
-        <button type="submit" class="btn btn-primary" (click)="mockupSearch()">Mock Search</button>
-        <button type="submit" class="btn btn-danger" (click)="showHideModal()">Post Job</button>
-      </div>
+    </div>
+
+    <div class="button-group" [hidden]="!isShowProficiency">
+      <button type="submit" class="btn btn-primary" (click)="mockupSearch()">Mock Search</button>
+      <button type="submit" class="btn btn-danger" (click)="showHideModal()">Post Job</button>
     </div>
   </div>
 </div>

@@ -53,7 +53,7 @@ $white: #fff;
     background: $cn-theme-btn-danger;
     border: $cn-theme-btn-danger 1px solid;
     color: $white;
-    box-shadow: 1px 1px 1px 1px rgba(0, 0,0, 0.2);
+    //box-shadow: 1px 1px 1px 1px rgba(0, 0,0, 0.2);
 
     &:hover,
     &:active,
@@ -61,13 +61,13 @@ $white: #fff;
       background: $cn-theme-btn-danger-hover;
       border: $cn-theme-btn-danger-hover 1px solid;
       color: $white;
-      box-shadow: 1px 1px 1px 1px rgba(0, 0,0, 0.2);
+      //box-shadow: 1px 1px 1px 1px rgba(0, 0,0, 0.2);
     }
 
     &:disabled  {
       background: $cn-theme-btn-danger;
       border: $cn-theme-btn-danger 1px solid;
-      box-shadow: 1px 1px 1px 1px rgba(0, 0,0, 0.2);
+      //box-shadow: 1px 1px 1px 1px rgba(0, 0,0, 0.2);
     }
   }
 
