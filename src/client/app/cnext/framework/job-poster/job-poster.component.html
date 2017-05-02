@@ -37,8 +37,8 @@
     </div>
 
     <div class="button-group" [hidden]="!isShowProficiency">
-      <button type="submit" class="btn btn-primary" (click)="mockupSearch()">Mock Search</button>
-      <button type="submit" class="btn btn-danger" (click)="showHideModal()">Post Job</button>
+      <button type="submit" class="btn btn-primary" (click)="mockupSearch()" [disabled]="disableButton">Mock Search</button>
+      <button type="submit" class="btn btn-danger" (click)="showHideModal()" [disabled]="disableButton">Post Job</button>
     </div>
   </div>
 </div>

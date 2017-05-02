@@ -42,13 +42,15 @@ export class ProficienciesComponent {
    /* if (changes.proficiencies != undefined) {
       if (changes.proficiencies.currentValue != undefined) {
         this.proficiencies = changes.proficiencies.currentValue;*/
-        if (this.choosedproficiencies.length > 0) {
+    if(this.choosedproficiencies != undefined){
+    if (this.choosedproficiencies.length > 0) {
           this.selectedProficiencies = this.choosedproficiencies;
           for (let proficiency of this.choosedproficiencies) {
             this.deleteSelectedProfeciency(proficiency);
           }
         }
       }
+  }
     /*}*/
   /*}*/
   OnProficiencyDataSuccess(data:any) {

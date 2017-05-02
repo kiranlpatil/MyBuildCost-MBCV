@@ -44,7 +44,7 @@ export class DescriptionFieldComponent implements OnInit {
       if (this.condition-3>=this.maxLength) {
         this. maxword=this.description.length;
       }
-    this.onComplete.emit(this.newstringOne);
+    this.onComplete.emit(this.description);
   }
 
 }

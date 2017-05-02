@@ -35,33 +35,21 @@ export class JobRequirementComponent implements OnInit {
       .subscribe(
         data=> {
           this.onEducationListSuccess(data);
-        },
-        error => {
-          this.onError(error);
         });
     this.professionaldataservice.getExperienceList()
       .subscribe(
         data => {
           this.onExperienceListSuccess(data);
-        },
-        error => {
-          this.onError(error);
         });
     this.professionaldataservice.getCurrentSalaryList()
       .subscribe(
         data=> {
           this.onCurrentSalaryListSuccess(data);
-        },
-        error => {
-          this.onError(error);
         });
     this.professionaldataservice.getNoticePeriodList()
       .subscribe(
         data => {
           this.onGetNoticePeriodListSuccess(data);
-        },
-        error => {
-          this.onError(error);
         });
   }
 

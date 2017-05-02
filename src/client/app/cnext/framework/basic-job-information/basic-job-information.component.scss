@@ -1,23 +1,13 @@
 $light-blue: #00aed5;
 
-.user-name {
-  margin-top: 15px;
-
-  .profile-name-first, .profile-name-last {
-    color: $light-blue;
-    font-family: 'gothamrnd-light';
-    font-size: 24px;
-    font-weight: 100;
-    background: none;
-    padding: 0;
-    text-transform: capitalize;
+.job-info {
+  label {
+    width: 100%;
   }
 
-  .profile-name-last {
-    color: #1B75BC;
-    font-family: 'gothamrnd-book';
-    font-weight: 900;
-
+  .form-control {
+    border-radius: 0;
+    margin-bottom: 15px;
   }
 }
 
@@ -41,19 +31,11 @@ $light-blue: #00aed5;
 }
 
 @media only screen and (max-width: 767px) {
-  .user-name {
-    .profile-name-first, .profile-name-last {
-      font-size: 16px;
-    }
-  }
-
-  @media only screen and (max-width: 1024px) {
-    .compact-view {
-      p {
-        width: 100%;
-        padding: 0;
-        margin-bottom: 10px;
-      }
+  .compact-view {
+    p {
+      width: 100%;
+      padding: 0;
+      margin-bottom: 10px;
     }
   }
 }

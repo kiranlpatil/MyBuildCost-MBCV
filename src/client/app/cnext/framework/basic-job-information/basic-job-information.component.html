@@ -1,27 +1,109 @@
 <div class="section-container">
   <div class="main-content clearfix modal-content" *ngIf="highlightedSection.name=='JobProfile'">
+    <form [formGroup]="jobPostForm" (ngSubmit)="onNext(jobPostForm.value)">
+      <div class="job-info section-container clearfix">
+        <div class="row">
+          <div class="col-sm-4" >
+            <label>Job Title:</label>
+            <control-messages [control]="jobPostForm.controls.jobTitle"></control-messages>
+            <input class="form-control" type="text" formControlName="jobTitle"  required/>
+          </div>
 
-    <div class="job-info section-container clearfix">
-      <div class="row">
-        <cn-job-information [jobPosterModel]="jobPosterModel" (selectJobInformation)="selectJobInformation($event)"></cn-job-information>
+          <div class="col-sm-4">
+            <label>Hiring Manager:</label>
+            <control-messages [control]="jobPostForm.controls.hiringManager"></control-messages>
+            <input class="form-control" type="text" maxlength="30" formControlName="hiringManager"
+                     required>
+          </div>
+          <div class="col-sm-4">
+            <label>Hiring Department:</label>
+            <control-messages [control]="jobPostForm.controls.department"></control-messages>
+            <input class="form-control" type="text" formControlName="department"  required>
+          </div>
 
-        <cn-job-requirement [jobPosterModel]="jobPosterModel" (selectJobRequirement)="selectJobRequirement($event)"></cn-job-requirement>
+          <div class="col-sm-4">
+            <label>Educational Qualification:</label>
+            <control-messages [control]="jobPostForm.controls.education"></control-messages>
+            <select class="form-control" formControlName="education" >
+              <option *ngFor="let c of educationlist" [ngValue]="c">{{c}}</option>
+            </select>
+          </div>
 
-        <cn-job-location [jobLocation]="jobPosterModel.location" (selectJobLocation)="selectJobLocation($event)"></cn-job-location>
-      </div>
-    </div>
-    <div class="roles section-container">
-      <div class="main-content clearfix">
-        <h4 class="heading">Select Industry</h4>
-        <div class="col-sm-12">
-          <cn-industry-list [selectedIndustry]="jobPosterModel.industry" (valueChange)="selectIndustry($event)"></cn-industry-list>
+          <div class="col-sm-4">
+            <label>Experience Band:</label>
+            <control-messages [control]="jobPostForm.controls.experience"></control-messages>
+            <select class="form-control" formControlName="experience">
+              <option *ngFor="let c of experiencelist" [ngValue]="c">{{c}}</option>
+            </select>
+          </div>
+
+          <div class="col-sm-4">
+            <label>Salary Band:</label>
+            <control-messages [control]="jobPostForm.controls.salary"></control-messages>
+            <select class="form-control" formControlName="salary">
+              <option *ngFor="let c of salarylist" [ngValue]="c">{{c}}</option>
+            </select>
+          </div>
+
+          <div class="col-sm-4">
+            <label>Joining Period:</label>
+            <control-messages [control]="jobPostForm.controls.joiningPeriod"></control-messages>
+            <select class="form-control" formControlName="joiningPeriod">
+              <option *ngFor="let c of noticeperiodlist" [ngValue]="c">{{c}}</option>
+            </select>
+          </div>
+
+          <div class="col-sm-8">
+            <label>Job Location:</label>
+
+            <div class="col-sm-4 padding-right15">
+              <div class="list">
+                <div ng2-auto-complete
+                     [source]="countries"
+                     (ngModelChange)="selectCountryModel($event)">
+                  <input [ngModel]="jobPosterModel.location.country" [ngModelOptions]="{standalone: true}" class="form-control" placeholder="Country"/>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-4 padding-right15">
+              <div class="list">
+                <div ng2-auto-complete
+                     [source]="states"
+                     (ngModelChange)="selectStateModel($event)">
+                  <input id="statesAll" [ngModel]="jobPosterModel.location.state" [ngModelOptions]="{standalone: true}" class="form-control"
+                         placeholder="State"/>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-4 no-padding">
+              <div class="list">
+                <div ng2-auto-complete
+                     [source]="cities"
+                     (ngModelChange)="selectCityModel($event)">
+                  <input id="citiesAll" [ngModel]="jobPosterModel.location.cityName" [ngModelOptions]="{standalone: true}" class="form-control"
+                         placeholder="City"/>
+                  <!-- <span  class="error-messages">Please select Country and State first.</span>-->
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="button-group clearfix">
-      <button class="btn btn-primary" scrollTo scrollTargetSelector="#work-area" (click)="onNext()">Next
-      </button>
-    </div>
+      <div class="roles section-container">
+        <div class="main-content clearfix">
+          <h4 class="heading">Select Industry</h4>
+          <div class="col-sm-12">
+            <cn-industry-list [selectedIndustry]="jobPosterModel.industry"
+                              (valueChange)="selectIndustry($event)"></cn-industry-list>
+          </div>
+        </div>
+      </div>
+      <div class="button-group clearfix">
+        <button type="submit" class="btn btn-primary" scrollTo scrollTargetSelector="#work-area" (click)="onNext()"
+                [disabled]="!jobPostForm.valid">Next
+        </button>
+      </div>
+    </form>
   </div>
 
   <div class="main-content" *ngIf="highlightedSection.name!='JobProfile'">

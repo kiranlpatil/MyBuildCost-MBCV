@@ -29,7 +29,6 @@ export class JobLocationComponent implements OnInit {
   private isCountrySelected: boolean = false;
 
   constructor(private joblocationService:JobLocationService,
-              private myjoblocationService:MyJobLocationService,
               private messageService: MessageService
                ) {
   }

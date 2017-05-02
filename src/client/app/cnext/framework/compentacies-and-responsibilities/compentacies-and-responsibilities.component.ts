@@ -15,12 +15,12 @@ export class CompentansiesAndResponsibilitiesComponent  {
   @Input() highlightedSection:Section;
   @Output() onComplete = new EventEmitter();
   
-  onCompetenciesComplete(data:string) {
+  onCompetenciesComplete(data:string) {debugger
     this.jobPosterModel.competencies = data;
     this.onComplete.emit(this.jobPosterModel);
   }
 
-  onResponsibilitiesComplete(data:string) {
+  onResponsibilitiesComplete(data:string) {debugger
     this.jobPosterModel.responsibility = data;
     this.onComplete.emit(this.jobPosterModel);
   }

@@ -25,6 +25,12 @@ export class IndustryExperienceListComponent {
       .subscribe(industries => this.industries = industries.data);
   }
 
+  ngOnChanges(changes:any){
+    if(changes.candidateExperiencedIndustry.currentValue != undefined){
+      this.candidateExperiencedIndustry=changes.candidateExperiencedIndustry.currentValue;
+    }
+  }
+
   selectIndustryModel(industry:string,event:any) {
     if(event.target.checked) {
       this.selectedIndustries.push(industry);

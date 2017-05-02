@@ -24,32 +24,32 @@ export class ProfessionalDataService extends BaseService {
       .catch(this.handleError);
   }
 
-  getRealocationList():Observable<ProfessionalData> {
+  getRealocationList():Observable<any> {
     var url = API.REALOCATION;
     return this.http.get(url)
       .map(this.extractData)
       .catch(this.handleError);
   }
-  getEducationList():Observable<ProfessionalData> {
+  getEducationList():Observable<any> {
     var url = API.EDUCATION;
     return this.http.get(url)
       .map(this.extractData)
       .catch(this.handleError);
   }
-  getExperienceList():Observable<ProfessionalData> {
+  getExperienceList():Observable<any> {
     var url = API.EXPERIENCE;
     return this.http.get(url)
       .map(this.extractData)
       .catch(this.handleError);
   }
-  getCurrentSalaryList():Observable<ProfessionalData> {
+  getCurrentSalaryList():Observable<any> {
     var url = API.CURRENTSALARY;
     return this.http.get(url)
       .map(this.extractData)
       .catch(this.handleError);
   }
 
-  getNoticePeriodList():Observable<ProfessionalData> {
+  getNoticePeriodList():Observable<any> {
     var url = API.NOTICEPERIOD;
     return this.http.get(url)
       .map(this.extractData)

@@ -132,6 +132,7 @@ import {ProficienciesComponent} from "./cnext/framework/proficiencies/proficienc
 import {ProficiencyDomainService} from "./cnext/framework/proficiencies/proficiencies.service";
 import {BasicJobInformationComponent} from "./cnext/framework/basic-job-information/basic-job-information.component";
 import {CompentansiesAndResponsibilitiesComponent} from "./cnext/framework/compentacies-and-responsibilities/compentacies-and-responsibilities.component";
+import {BasicJobInformationService} from "./cnext/framework/basic-job-information/basic-job-information.service";
 
 //C-NEXT IMPORTS
 
@@ -251,6 +252,7 @@ import {CompentansiesAndResponsibilitiesComponent} from "./cnext/framework/compe
     ActiveUserService,
     ActiveEmailService,
     VerifyUserService,
+    BasicJobInformationService,
     JobLocationService,
     VerifyPhoneService,
     IndustryListService,
