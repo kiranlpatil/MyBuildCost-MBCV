@@ -1,9 +1,10 @@
 import IndustrySchema = require("../schemas/industry.schema");
 import RepositoryBase = require("./base/repository.base");
 import IIndustry = require("../mongoose/industry");
+import RoleModel = require("../model/role.model");
 
 class IndustryRepository extends RepositoryBase<IIndustry> {
-  private items:any[];
+  private items:RoleModel[];
 
   constructor () {
     super(IndustrySchema);
@@ -31,6 +32,7 @@ class IndustryRepository extends RepositoryBase<IIndustry> {
       }
     });
   }
+
   findCapabilities(item:any, callback:(error:any, result:any) => void) {
     this.items = new Array(0);
     IndustrySchema.find({"name": item.name},(err:any, industry:any)=> {
@@ -66,6 +68,7 @@ class IndustryRepository extends RepositoryBase<IIndustry> {
       }
     });
   }
+
   findComplexities(item:any, callback:(error:any, result:any) => void) {
     this.items = new Array(0);
     IndustrySchema.find({"name": item.name},(err:any, industry:any)=> {

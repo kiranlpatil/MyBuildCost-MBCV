@@ -59,14 +59,13 @@ class CandidateSearchRepository extends RepositoryBase<ICandidate> {
         }
       }
     }
-    console.log("Count of complexity " + countOfComplexity)
     let cardcandidates:CandidateCardViewModel[] = new Array(0);
     for (let role of industry.roles) {
       for (let capability of role.capabilities) {
         for (let candidate of candidates) {
-          let tempCandidate: CandidateCardViewModel= new CandidateCardViewModel();
-          tempCandidate.userId=  candidate.userId;
-           for (let candiRole of candidate.industry.roles) {
+          let tempCandidate:CandidateCardViewModel = new CandidateCardViewModel();
+          tempCandidate.userId = candidate.userId;
+          for (let candiRole of candidate.industry.roles) {
             for (let candiCapability of candiRole.capabilities) {
               if (capability.name == candiCapability.name) {
                 for (let complexity of capability.complexities) {
@@ -89,14 +88,14 @@ class CandidateSearchRepository extends RepositoryBase<ICandidate> {
               }
             }
           }
-          tempCandidate.matching = (tempCandidate.matchedComplexity *100)/ countOfComplexity ;
-          if(tempCandidate.matching>0){
+          tempCandidate.matching = (tempCandidate.matchedComplexity * 100) / countOfComplexity;
+          if (tempCandidate.matching > 0) {
             cardcandidates.push(tempCandidate);
           }
         }
       }
     }
-    callback(null,cardcandidates);
+    callback(null, cardcandidates);
   }
 
 }

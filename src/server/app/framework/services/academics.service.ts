@@ -1,4 +1,3 @@
-import * as fs from 'fs';
 var config = require('config');
 import CNextMessages = require("../shared/cnext-messages");
 import ProjectAsset = require("../shared/projectasset");
