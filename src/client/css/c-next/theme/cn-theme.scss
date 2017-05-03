@@ -30,14 +30,12 @@ $white: #fff;
     border: $cn-theme-color 1px solid;
     color: $white;*/
     background: #67c116;
-    border: #3694d1 0 solid;
     color: #fff;
 
     &:hover,
     &:active,
     &:focus {
       background: #58a90f;
-      border: #58a90f 0 solid;
       color: $white;
     }
 
@@ -51,7 +49,6 @@ $white: #fff;
   // Buttons
   .btn-danger {
     background: $cn-theme-btn-danger;
-    border: $cn-theme-btn-danger 1px solid;
     color: $white;
     //box-shadow: 1px 1px 1px 1px rgba(0, 0,0, 0.2);
 
@@ -59,14 +56,12 @@ $white: #fff;
     &:active,
     &:focus {
       background: $cn-theme-btn-danger-hover;
-      border: $cn-theme-btn-danger-hover 1px solid;
       color: $white;
       //box-shadow: 1px 1px 1px 1px rgba(0, 0,0, 0.2);
     }
 
     &:disabled  {
       background: $cn-theme-btn-danger;
-      border: $cn-theme-btn-danger 1px solid;
       //box-shadow: 1px 1px 1px 1px rgba(0, 0,0, 0.2);
     }
   }

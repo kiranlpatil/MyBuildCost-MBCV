@@ -112,10 +112,12 @@ $modal-bg: rgba(0, 0, 0, .2);
     .primary {
       background-color: $primary-option;
       border: 1px solid $primary-option;
+      box-shadow: 0 0 1px 0 $primary-option inset, 0 0 1px 0 $primary-option;
     }
     .secondary {
       background-color: $secondary-option;
       border: 1px solid $secondary-option;
+      box-shadow: 0 0 1px 0 $secondary-option inset, 0 0 1px 0 $secondary-option;
     }
   }
 

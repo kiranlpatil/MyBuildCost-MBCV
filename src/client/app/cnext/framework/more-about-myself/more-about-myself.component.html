@@ -4,7 +4,7 @@
     <div class="clearfix">
       <div class="col-sm-12 more-about-myself">
         <textarea class="form-control" [(ngModel)]="candidate.aboutMyself"  (ngModelChange)="addAboutMyself()" [maxlength]="maxword"   Placeholder="Enter About Yourself"></textarea>
-        <p>{{remainingWords}} words remaining</p>
+        <p class="error-messages">{{remainingWords}} words remaining</p>
       </div>
     </div>
   </div>

@@ -33,6 +33,7 @@ $label: #999;
   padding: 3px 15px !important;
   background: #266f9e !important;
   border: #266f9e 1px solid !important;
+  box-shadow: 0 0 1px 0 #266f9e inset, 0 0 1px 0 #266f9e !important;
 
   &:active,
   &:hover,
@@ -252,6 +253,16 @@ select {
   border-radius: 25px;
   padding: 6px 25px;
   font-weight: bold;
+  box-shadow: 0 0 1px 0 #fff inset, 0 0 1px 0 #fff;
+  border: 0;
+
+  &:focus,
+  &:active,
+  &:hover {
+    box-shadow: 0 0 1px 0 #fff inset, 0 0 1px 0 #fff;
+    outline: none;
+    border: 0;
+  }
 }
 
 .btn-default {
@@ -259,7 +270,6 @@ select {
   color: $white;
 }
 
-.btn,
 .btn-notification,
 .btn-back {
   &:focus,
