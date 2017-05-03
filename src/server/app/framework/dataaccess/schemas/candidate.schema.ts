@@ -41,7 +41,7 @@ class CandidateSchema {
         issuedBy : String,
         remark : String
       }],
-      intrestedIndustries : {
+      interestedIndustries : {
         type: [String]
       },
       awards: [{

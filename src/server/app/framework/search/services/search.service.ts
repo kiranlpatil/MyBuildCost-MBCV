@@ -1,22 +1,31 @@
-import ProjectAsset = require("../shared/projectasset");
 import JobProfileModel = require("../../dataaccess/model/jobprofile.model");
 import CandidateRepository = require("../../dataaccess/repository/candidate.repository");
+import ProjectAsset = require("../../shared/projectasset");
 class SearchService {
   APP_NAME:string;
-  candidateRepository : CandidateRepository;
+  candidateRepository:CandidateRepository;
+
   constructor() {
     this.APP_NAME = ProjectAsset.APP_NAME;
-    this.candidateRepository= new CandidateRepository;
+    this.candidateRepository = new CandidateRepository();
   }
 
-  getmatchingCandidates(jobProfile: JobProfileModel, callback: (error: any, result: any) => void) {
+  getMatchingCandidates(jobProfile:JobProfileModel, callback:(error:any, result:any) => void) {
 
-    this.candidateRepository.getCandidateByBasicInfo(jobProfile, (err, res) => {
+    let data = {
+      "industry.name": jobProfile.industry.name,
+      "proficiencies": {$in: jobProfile.proficiencies},
+      "interestedIndustries": {$all: jobProfile.interestedIndustries}
+    };
+    this.candidateRepository.retrieve(data, (err, res) => {
+      console.log("In retrieve"+JSON.stringify(res)) ;
+      console.log("In response"+JSON.stringify(err)) ;
       if (err) {
-        callback(err, res);
-      }else {
-
-        this.candidateRepository.
+        callback(err, null);
+      } else {
+        console.log("In Response"+JSON.stringify(res));
+        callback(null, res);
+        //this.candidateRepository.
         //this.candidateRepository.findOneAndUpdateIndustry({'_id':res[0]._id}, item, {new: true}, callback);
       }
     });

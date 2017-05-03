@@ -33,7 +33,7 @@ class JobProfileSchema {
       salary :{
         type : String
       },
-      profiences :{
+      proficiencies :{
         names : [String]
       },
       industry:{
@@ -61,7 +61,7 @@ class JobProfileSchema {
       postingDate :{
         type : Date
       },
-      interestedIndustry:[{type:String}]
+      interestedIndustries:[{type:String}]
 
     },{ versionKey: false });
 

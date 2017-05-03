@@ -20,7 +20,7 @@ interface CandidateModel {
   userId :  {type:mongoose.Schema.Types.ObjectId, ref:'User'};
   location: LocationModel;
   industry : IndustryModel;
-  intrestedIndustries : string[];
+  interestedIndustries : string[];
   roleType: string;
   academics :  AcademicModel[];
   professionalDetails :  ProfessionalDetailsModel;

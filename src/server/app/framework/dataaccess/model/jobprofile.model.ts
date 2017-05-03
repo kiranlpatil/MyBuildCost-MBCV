@@ -14,14 +14,14 @@ interface JobProfileModel {
     experience : string;
     salary : string;
     joiningPeriod :string;
-    profiences :  ProficiencyModel;
+    proficiencies :  string[];
     industry : IndustryModel;
     location : LocationModel;
     competencies : string;
     responsibility : string;
     postingDate : Date;
     remark : string;
-    interestedIndustry : string[];
+    interestedIndustries : string[];
 
 }
 export = JobProfileModel;

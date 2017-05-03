@@ -10,11 +10,12 @@ import * as recruiterController from './app/framework/controllers/recruiter.cont
 import * as jobProfileController from './app/framework/controllers/job-profile.controller';
 import * as sharedService from './app/framework/shared/shared.service';
 import * as userInterceptor from './app/framework/interceptor/user.interceptor';
+import {SearchController} from "./app/framework/search/controller/search.controller";
 var AuthInterceptor = require("./app/framework/interceptor/auth.interceptor");
 this.authInterceptor = new AuthInterceptor();
 
-
 export function cnextInit(app: express.Application) { //todo add interceptor to authenticate
+  var searchController = new SearchController();
   app.get("/api/industry",industryController.retrieve);
   app.get("/api/roletype",userController.getRoleTypes);
   app.post("/api/industry",industryController.create);
@@ -31,4 +32,5 @@ export function cnextInit(app: express.Application) { //todo add interceptor to 
   app.get("/api/companysize",  userController.getCompanySize);
   app.get("/api/function",  userController.getFunction);
   app.put("/api/recruiter/:id",recruiterController.updateDetails);
+  app.post("/api/recruiter/candidate",searchController.retrieve);
 }
