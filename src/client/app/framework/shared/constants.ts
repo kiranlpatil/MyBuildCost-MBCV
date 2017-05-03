@@ -1,5 +1,5 @@
 export class AppSettings {
-  //public static IP = 'http://localhost:8080';
+//  public static IP = 'http://localhost:8080';
   // public static IP = 'http://ee802b7f.ngrok.io';
   //public static IP = 'http://10.192.33.252:8087';
   public static IP = 'http://52.89.221.23:8080';
@@ -126,6 +126,7 @@ export class API {
   public static EMPLOYMENTHISTORY = 'employmentdata';
   public static LOGIN = 'login';
   public static FB_LOGIN = 'fbLogin';
+  public static SEARCHED_CANDIDATE = 'searchedcandidate';
   public static CHANGE_PASSWORD = 'changepassword';
   public static CHANGE_MOBILE = 'changemobilenumber';
   public static CHANGE_EMAIL = 'changeemailid';

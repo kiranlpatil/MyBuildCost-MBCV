@@ -2,7 +2,7 @@ import {   Injectable  } from '@angular/core';
 import {  Subject  } from 'rxjs/Subject';
 
 @Injectable()
-export class ShowJobFilterService {
+export class ShowQcardviewService {
 
   // Observable string sources
   _showJobFilterSource = new Subject<boolean>();

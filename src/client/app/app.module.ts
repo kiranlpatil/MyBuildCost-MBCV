@@ -106,7 +106,7 @@ import {DisableTestService} from "./cnext/framework/disable-service";
 import {MyJobInformationService} from "./cnext/framework/myJobInformation.service";
 import {JobRequirementService} from "./cnext/framework/myJobRequirement.service";
 import {JobIndustryShowService} from "./cnext/framework/myJobIndustryShow.service";
-import {ShowJobFilterService} from "./cnext/framework/showJobFilter.service";
+import {ShowQcardviewService} from "./cnext/framework/showQCard.service";
 import {CandidateAwardService} from "./cnext/framework/awards/awards.service";
 import {AboutCandidateService} from "./cnext/framework/more-about-myself/more-about-myself.service";
 import {CandidateAcadmyDetailService} from "./cnext/framework/academic-details/academic-details.service";
@@ -133,6 +133,9 @@ import {ProficiencyDomainService} from "./cnext/framework/proficiencies/proficie
 import {BasicJobInformationComponent} from "./cnext/framework/basic-job-information/basic-job-information.component";
 import {CompentansiesAndResponsibilitiesComponent} from "./cnext/framework/compentacies-and-responsibilities/compentacies-and-responsibilities.component";
 import {BasicJobInformationService} from "./cnext/framework/basic-job-information/basic-job-information.service";
+import {QCardviewComponent} from "./cnext/framework/q-card-view/q-card-view.component";
+import {QCardViewService} from "./cnext/framework/q-card-view/q-card-view.service";
+import {SortPipe} from "./cnext/framework/q-card-view/q-card-view.pipe";
 
 //C-NEXT IMPORTS
 
@@ -212,7 +215,9 @@ import {BasicJobInformationService} from "./cnext/framework/basic-job-informatio
     WorkAreaComponent,
     RecruiterHeaderComponent,
     RoleTypetListComponent,
-    IndustryExperienceListComponent
+    IndustryExperienceListComponent,
+    QCardviewComponent,
+    SortPipe
 
   ],
   providers: [
@@ -283,7 +288,7 @@ import {BasicJobInformationService} from "./cnext/framework/basic-job-informatio
     IndustryExperienceService,
     DisableTestService,
     JobIndustryShowService,
-    ShowJobFilterService,
+    ShowQcardviewService,
     CandidateAwardService,
     AboutCandidateService,
     JobPosterService,
@@ -292,11 +297,13 @@ import {BasicJobInformationService} from "./cnext/framework/basic-job-informatio
     DisableAwardGlyphiconService,
     DisableCertificateGlyphiconService,
     DisableAboutMyselfGlyphiconService,
-    DisableEmployeeHistoryGlyphiconService
+    DisableEmployeeHistoryGlyphiconService,
+    QCardViewService
 
   ],
   bootstrap: [AppComponent]
 })
+
 export class AppModule {
 }
 
