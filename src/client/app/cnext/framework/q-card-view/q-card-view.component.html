@@ -1,20 +1,19 @@
 <div [hidden]="!isShowQCardView">
 
   <label>Sort by:</label>
-  <select >
-    <option>JobMatching</option>
-    <option>Experience</option>
+  <select id="menu"  [(ngModel)]="qCardModel.name" (change)="sortBy()">
+    <option value="JobMatching">JobMatching</option>
+    <option value="Experience" >Experience</option>
   </select>
+<p>{{matches}}Matches Found</p>
+<div *ngFor="let item of candidates | orderBy:format">
 
-<div *ngFor="let item of candidates | orderBy:''">
-    <table>
-      <tr>
-      <td >{{item.salary}}</td>
-      <td >{{item.experience}}</td>
-      <td >{{item.location}}</td>
-        <td >{{item.matching}}</td>
-      </tr>
-    </table>
+      <span>{{item.salary}}</span>
+      <span >{{item.experience}}</span>
+      <span >{{item.location}}</span>
+        <span >{{item.matching}}</span>
+<br/>
+</div>
 
 </div>
-</div>
+

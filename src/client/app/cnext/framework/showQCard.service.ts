@@ -5,13 +5,13 @@ import {  Subject  } from 'rxjs/Subject';
 export class ShowQcardviewService {
 
   // Observable string sources
-  _showJobFilterSource = new Subject<boolean>();
+  _showJobQCardViewrSource = new Subject<boolean>();
 
   // Observable string streams
-  showJobFilter$ = this._showJobFilterSource.asObservable();
+  showJobQCardView$ = this._showJobQCardViewrSource.asObservable();
 
   // Service message commands
   change(isAnswerTrue: boolean) {
-    this._showJobFilterSource.next(isAnswerTrue);
+    this._showJobQCardViewrSource.next(isAnswerTrue);
   }
 }

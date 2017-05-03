@@ -935,7 +935,6 @@ export function getNoticePeriod(req:express.Request, res:express.Response) {
 
 export function getSearchedCandidate(req:express.Request,res:express.Response){
   __dirname ='./';
-  console.log(req.query.jobPosterModel);
   var filepath="candidate.json";
   try{
     res.sendFile(filepath,{root:__dirname});
