@@ -79,7 +79,6 @@ export class JobPosterComponent {
 
   mockupSearch() {
     this.showJobFilter.change(true);
-
   }
 
   selectExperiencedIndustry(experiencedindustry:string[]) {

@@ -1,64 +1,70 @@
-
-<div class="section-container" >
+<div class="section-container">
   <div class="main-content modal-content clearfix" *ngIf="highlightedSection.name =='Professional-Details'">
     <h4 class="heading">Professional Data</h4>
-    <div class="professional-data clearfix">
-      <div class="col-sm-4">
-        <label >Ready To Relocate?</label>
-        <select class="form-control"   [(ngModel)]="candidate.professionalDetails.relocate" (change) = "saveProfessionalData()">
-          <option *ngFor="let c of realocationlist" [selected]="true" [ngValue]="c">{{c}}</option>
-        </select>
+   <!-- <form [formGroup]="professionalDetailForm" (ngSubmit)="onNext(jobPostForm.value)">-->
+      <div class="professional-data clearfix">
+        <div class="col-sm-4">
+          <label>Ready To Relocate?</label>
+        <!--  <control-messages [control]="professionalDetailForm.controls.relocate"></control-messages>-->
+          <select class="form-control" [(ngModel)]="candidate.professionalDetails.relocate" (change) = "saveProfessionalData()">
+            <option *ngFor="let c of realocationlist"  [ngValue]="c">{{c}}</option>
+          </select>
 
+        </div>
+
+        <div class="col-sm-4">
+          <label>Education</label>
+          <!--<control-messages [control]="professionalDetailForm.controls.education"></control-messages>-->
+          <select class="form-control" [(ngModel)]="candidate.professionalDetails.education" (change) = "saveProfessionalData()">
+            <option *ngFor="let c of educationlist"  [ngValue]="c">{{c}}</option>
+          </select>
+
+        </div>
+
+        <div class="col-sm-4">
+          <label>Experience</label>
+          <!--<control-messages [control]="professionalDetailForm.controls.experience"></control-messages>-->
+          <select class="form-control" [(ngModel)]="candidate.professionalDetails.experience" (change) = "saveProfessionalData()">
+            <option *ngFor="let c of experiencelist"  [ngValue]="c">{{c}}</option>
+          </select>
+
+        </div>
+
+        <div class="col-sm-4">
+          <label>Current Salary</label>
+         <!-- <control-messages [control]="professionalDetailForm.controls.currentSalary"></control-messages>-->
+          <select class="form-control" [(ngModel)]="candidate.professionalDetails.currentSalary" (change) = "saveProfessionalData()">
+            <option *ngFor="let c of salarylist"  [ngValue]="c">{{c}}</option>
+          </select>
+
+        </div>
+
+        <div class="col-sm-4">
+          <label>Notice Period</label>
+         <!-- <control-messages [control]="professionalDetailForm.controls.noticePeriod"></control-messages>-->
+          <select class="form-control" [(ngModel)]="candidate.professionalDetails.noticePeriod" (change) = "saveProfessionalData()">
+            <option *ngFor="let c of noticeperiodlist"  [ngValue]="c">{{c}}</option>
+          </select>
+        </div>
       </div>
-
-      <div class="col-sm-4">
-        <label >Education</label>
-        <select class="form-control" [(ngModel)]="candidate.professionalDetails.education" (change) = "saveProfessionalData()">
-          <option *ngFor="let c of educationlist" [selected]="true" [ngValue]="c">{{c}}</option>
-        </select>
-
+      <div class="col-sm-12">
+        <div class="button-group clearfix">
+          <button type="submit" class="btn btn-primary" scrollTo scrollTargetSelector="#Employment-History"
+                  (click)="onNext()" [disabled]="disableButton">Next
+          </button>
+        </div>
       </div>
-
-      <div class="col-sm-4">
-        <label >Experience</label>
-        <select class="form-control" [(ngModel)]="candidate.professionalDetails.experience" (change) = "saveProfessionalData()">
-          <option *ngFor="let c of experiencelist" [selected]="true" [ngValue]="c">{{c}}</option>
-        </select>
-
-      </div>
-
-      <div class="col-sm-4">
-        <label >Current Salary</label>
-        <select class="form-control" [(ngModel)]="candidate.professionalDetails.currentSalary" (change) = "saveProfessionalData()">
-          <option *ngFor="let c of salarylist" [selected]="true" [ngValue]="c">{{c}}</option>
-        </select>
-
-      </div>
-
-      <div class="col-sm-4">
-        <label >Notice Period</label>
-        <select class="form-control" [(ngModel)]="candidate.professionalDetails.noticePeriod" (change) = "saveProfessionalData()">
-          <option *ngFor="let c of noticeperiodlist" [selected]="true"  [ngValue]="c">{{c}}</option>
-        </select>
-      </div>
-    </div>
-    <div class="col-sm-12">
-      <div class="button-group clearfix">
-        <button class="btn btn-primary" scrollTo scrollTargetSelector="#Employment-History"
-                (click)="onNext()" [disabled]="disableButton">Next
-        </button>
-      </div>
-    </div>
+   <!-- </form>-->
   </div>
   <div class="main-content" *ngIf="highlightedSection.name !='Professional-Details'">
     <div class="compact-view clearfix">
       <button class="btn-edit" (click)="highlightedSection.name='Professional-Details'"></button>
       <h4 class="heading">Professional Data</h4>
-      <p><label >Ready To Relocate?</label> {{candidate.professionalDetails.relocate}}</p>
-      <p><label >Education</label> {{candidate.professionalDetails.education}}</p>
-      <p><label >Experience</label> {{candidate.professionalDetails.experience}}</p>
-      <p><label >Current Salary</label> {{candidate.professionalDetails.currentSalary}}</p>
-      <p><label >Notice Period</label> {{candidate.professionalDetails.noticePeriod}}</p>
+      <p><label>Ready To Relocate?</label> {{candidate.professionalDetails.relocate}}</p>
+      <p><label>Education</label> {{candidate.professionalDetails.education}}</p>
+      <p><label>Experience</label> {{candidate.professionalDetails.experience}}</p>
+      <p><label>Current Salary</label> {{candidate.professionalDetails.currentSalary}}</p>
+      <p><label>Notice Period</label> {{candidate.professionalDetails.noticePeriod}}</p>
     </div>
   </div>
 

@@ -23,6 +23,7 @@ export class IndustryExperienceListComponent {
   constructor(private candidateProfileService:CandidateProfileService) {
     this.candidateProfileService.getIndustries()
       .subscribe(industries => this.industries = industries.data);
+        this.candidateExperiencedIndustry=new Array(0);
   }
 
   ngOnChanges(changes:any){

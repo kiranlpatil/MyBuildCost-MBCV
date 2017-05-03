@@ -1,8 +1,0 @@
-<div>
-  <div class="select-option" (click)="selectOption($event.target.value)" *ngFor="let choice of radioData;let i = index">
-    <label>
-      <input type="radio"  name="choices" id="{{choice}}" value="{{choice}}" [disabled]="showfield" >
-      <span>{{choice}}</span>
-    </label>
-  </div>
-</div>

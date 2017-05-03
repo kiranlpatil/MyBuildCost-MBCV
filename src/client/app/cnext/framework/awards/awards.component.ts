@@ -8,7 +8,7 @@ import {MessageService} from "../../../framework/shared/message.service";
 import {LocalStorageService} from "../../../framework/shared/localstorage.service";
 import {Message} from "../../../framework/shared/message";
 import {Candidate, Section} from "../model/candidate";
-import {DisableAwardGlyphiconService} from "../disableGlyphiconAward.service";
+
 
 
 @Component({
@@ -34,8 +34,6 @@ export class AwardsComponent {
 
 
   constructor(private awardService:AwardService,
-              private disableAwardGlyphiconService:DisableAwardGlyphiconService,
-              private candidateAward:CandidateAwardService,
               private messageService:MessageService,
               private profileCreatorService:CandidateProfileService) {
     this.tempfield = new Array(1);
@@ -86,7 +84,6 @@ export class AwardsComponent {
 
     for (let item of this.candidate.awards) {
       if (item.name === "" || item.issuedBy === "" || item.year === "") {
-        this.disableAwardGlyphiconService.change(true);
         this.disableAddAnother = false;
         this.isShowError = true;
 
@@ -104,7 +101,7 @@ export class AwardsComponent {
     this.isShowError = false;
     for (let item of this.candidate.awards) {
       if (item.name !== "" || item.issuedBy !== "" || item.year !== "") {
-        this.disableAwardGlyphiconService.change(true);
+       
       }
     }
     for (let item of this.candidate.awards) {

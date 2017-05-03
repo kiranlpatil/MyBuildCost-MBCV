@@ -6,17 +6,13 @@ import {ProficiencyService} from "../proficience.service";
 import {ProfessionalService} from "../professional-service";
 import {EducationalService} from "../educational-service";
 import {MyRoleListTestService} from "../myRolelist.service";
-import {MyRoTypeTestService} from "../myRole-Type.service";
 import {DisableTestService} from "../disable-service";
 import {Candidate, Section} from "../model/candidate";
 import {CandidateProfileService} from "./candidate-profile.service";
 import {MessageService} from "../../../framework/shared/message.service";
 import {Message} from "../../../framework/shared/message";
 import {Role} from "../model/role";
-import {DisableAwardGlyphiconService} from "../disableGlyphiconAward.service";
-import {DisableCertificateGlyphiconService} from "../disableCertificateGlyphicon.service";
-import {DisableAboutMyselfGlyphiconService} from "../disableAboutMyself.service";
-import {DisableEmployeeHistoryGlyphiconService} from "../disableEmplyeeHistoryGlyphicon.service";
+
 
 
 @Component({
@@ -54,7 +50,6 @@ export class CandidateProfileComponent implements OnInit {
   private showAboutMySelf:boolean = false;
   private isRolesShow:boolean = true;
   private showfield:boolean = false;
-  private isRoleTypeShow:boolean = false;
   private disableTitle:boolean = false;
   private candidate:Candidate = new Candidate();
   private candidateForRole:Role[];
@@ -68,15 +63,10 @@ export class CandidateProfileComponent implements OnInit {
   private highlightedSection:Section = new Section();
 
   constructor(private _router:Router,
-              private disableAwardGlyphiconService:DisableAwardGlyphiconService,
-              private disableEmplyeeHistoryGlyphiconService:DisableEmployeeHistoryGlyphiconService,
-              private disableCertificateGlyphiconService:DisableCertificateGlyphiconService,
-              private disableAboutMyselfGlyphiconService:DisableAboutMyselfGlyphiconService,
               private proficiencyService:ProficiencyService,
               private professionalService:ProfessionalService,
               private educationalService:EducationalService,
               private complexityService:ComplexityService,
-              private myRoleType:MyRoTypeTestService,
               private messageService:MessageService,
               private myRolelist:MyRoleListTestService,
               private disableService:DisableTestService,
@@ -88,37 +78,13 @@ export class CandidateProfileComponent implements OnInit {
       }
     );
 
-    this.disableEmplyeeHistoryGlyphiconService.removeGlyphiconTest$.subscribe(
-      data => {
-        this.isHiddenEmployeehistory = data;
-      }
-    );
-    this.disableAboutMyselfGlyphiconService.removeGlyphiconTest$.subscribe(
-      data => {
-        this.isHiddenAboutMyself = data;
-      }
-    );
-    this.disableCertificateGlyphiconService.removeGlyphiconTest$.subscribe(
-      data => {
-        this.isHiddenCertificate = data;
-      }
-    );
-    this.disableAwardGlyphiconService.removeGlyphiconTest$.subscribe(
-      data => {
-        this.isHiddenAwrard = data;
-      }
-    );
+
     disableService.showTestDisable$.subscribe(
       data=> {
         this.showfield = data;
       }
     );
-    this.myRoleType.showTestRoleType$.subscribe(
-      data=> {
-        this.isRoleTypeShow = data;
 
-      }
-    );
 
     complexityService.showTest$.subscribe(
       data=> {

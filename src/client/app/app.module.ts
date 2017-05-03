@@ -71,50 +71,29 @@ import {AwardsComponent} from "./cnext/framework/awards/awards.component";
 import {MoreAboutMyselfComponent} from "./cnext/framework/more-about-myself/more-about-myself.component";
 import {ProficiencyService} from "./cnext/framework/proficience.service";
 import {JobPosterComponent} from "./cnext/framework/job-poster/job-poster.component";
-import {JobInformationComponent} from "./cnext/framework/job-information/job-information.component";
-import {JobRequirementComponent} from "./cnext/framework/job-requirement/job-requirement.component";
-import {JobLocationComponent} from "./cnext/framework/job-location/job-location.component";
 import {DescriptionFieldComponent} from "./cnext/framework/description-field/description-field.component";
-import {MyRoleService} from "./cnext/framework/role-service";
-import {MyIndustryService} from "./cnext/framework/industry-service";
 import {MyCapabilityService} from "./cnext/framework/capability-service";
 import {CompanyDetailsComponent} from "./framework/registration/company_details/company-details.component";
 import {CompanyDetailsService} from "./framework/registration/company_details/company-details.service";
 import {RecruiterDashboardComponent} from "./cnext/framework/recruiter-dashboard/recruiter-dashboard.component";
 import {JobFilterComponent} from "./cnext/framework/job-filter/job-filter.component";
-import {MyJobRequirementService} from "./cnext/framework/jobrequirement-service";
 import {IndustryListComponent} from "./cnext/framework/industry-list/industry-list.component";
 import {IndustryListService} from "./cnext/framework/industry-list/industry-list.service";
 import {DateService} from "./cnext/framework/date.service";
 import {ProfessionalService} from "./cnext/framework/professional-service";
 import {EducationalService} from "./cnext/framework/educational-service";
 import {AwardService} from "./cnext/framework/award-service";
-import {JobLocationService} from "./cnext/framework/job-location/job-location.service";
-import {SingleSelectListComponent} from "./cnext/framework/single-select-list/single-select-list.component";
-import {MyJobLocationService} from "./cnext/framework/myjob-location.service";
-import {MyJobPostRoleTypeService} from "./cnext/framework/jobpost-roletype.service";
-import {JonPostDescriptionService} from "./cnext/framework/job-post-description.service";
-import {JobPostComplexityService} from "./cnext/framework/job-post-complexity.service";
-import {JobPostProficiencyService} from "./cnext/framework/jobPostProficiency.service";
 import {MyRoleListTestService} from "./cnext/framework/myRolelist.service";
 import {RoleTypetListComponent} from "./cnext/framework/role-type/role-type.component";
-import {MyRoTypeTestService} from "./cnext/framework/myRole-Type.service";
 import {RoleTypeService} from "./cnext/framework/role-type/role-type.service";
 import {IndustryExperienceListComponent} from "./cnext/framework/industry-experience/industry-experience.component";
 import {IndustryExperienceService} from "./cnext/framework/industry-experience/industry-experience.service";
 import {DisableTestService} from "./cnext/framework/disable-service";
-import {MyJobInformationService} from "./cnext/framework/myJobInformation.service";
-import {JobRequirementService} from "./cnext/framework/myJobRequirement.service";
-import {JobIndustryShowService} from "./cnext/framework/myJobIndustryShow.service";
 import {ShowJobFilterService} from "./cnext/framework/showJobFilter.service";
 import {CandidateAwardService} from "./cnext/framework/awards/awards.service";
 import {AboutCandidateService} from "./cnext/framework/more-about-myself/more-about-myself.service";
 import {CandidateAcadmyDetailService} from "./cnext/framework/academic-details/academic-details.service";
 import {JobPosterService} from "./cnext/framework/job-poster/job-poster.service";
-import {DisableAwardGlyphiconService} from "./cnext/framework/disableGlyphiconAward.service";
-import {DisableCertificateGlyphiconService} from "./cnext/framework/disableCertificateGlyphicon.service";
-import {DisableAboutMyselfGlyphiconService} from "./cnext/framework/disableAboutMyself.service";
-import {DisableEmployeeHistoryGlyphiconService} from "./cnext/framework/disableEmplyeeHistoryGlyphicon.service";
 import {CandidateSummuryComponent} from "./cnext/framework/one-page-summury/candidate-summury/candidate-summury.component";
 import {CandidateBasicInformationComponent} from "./cnext/framework/one-page-summury/candidate-summury/candidate-basic-information/candidate-basic-information.component";
 import {VericalListViewComponent} from "./cnext/framework/one-page-summury/shared/vertical-list-view/vertical-list-view.component";
@@ -193,12 +172,8 @@ import {BasicJobInformationService} from "./cnext/framework/basic-job-informatio
     IndustryListComponent,
     ComplexitiesComponent,
     JobPosterComponent,
-    SingleSelectListComponent,
     BasicJobInformationComponent,
     CompentansiesAndResponsibilitiesComponent,
-    JobInformationComponent,
-    JobRequirementComponent,
-    JobLocationComponent,
     JobFilterComponent,
     ProfessionalDataComponent,
     EmploymentHistoryComponent,
@@ -253,13 +228,9 @@ import {BasicJobInformationService} from "./cnext/framework/basic-job-informatio
     ActiveEmailService,
     VerifyUserService,
     BasicJobInformationService,
-    JobLocationService,
     VerifyPhoneService,
     IndustryListService,
     MyCapabilityService,
-    MyRoleService,
-    MyIndustryService,
-    MyJobRequirementService,
     AwardService,
     ProfessionalService,
     EducationalService,
@@ -269,30 +240,16 @@ import {BasicJobInformationService} from "./cnext/framework/basic-job-informatio
     CompanyDetailsService,
     EmploymentHistoryService,
     DateService,
-    MyJobRequirementService,
-    MyJobInformationService,
-    JobRequirementService,
-    MyJobLocationService,
-    MyJobPostRoleTypeService,
-    JonPostDescriptionService,
-    JobPostComplexityService,
-    JobPostProficiencyService,
     MyRoleListTestService,
-    MyRoTypeTestService,
     RoleTypeService,
     IndustryExperienceService,
     DisableTestService,
-    JobIndustryShowService,
     ShowJobFilterService,
     CandidateAwardService,
     AboutCandidateService,
     JobPosterService,
     CandidateAcadmyDetailService,
     CandidateProfileService,
-    DisableAwardGlyphiconService,
-    DisableCertificateGlyphiconService,
-    DisableAboutMyselfGlyphiconService,
-    DisableEmployeeHistoryGlyphiconService
 
   ],
   bootstrap: [AppComponent]
