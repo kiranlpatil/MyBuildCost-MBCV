@@ -157,6 +157,7 @@ export class API {
   public static COMPANY_DETAILS:string = 'companydetails';
   public static ADDRESS = 'address';
   public static ROLE_TYPE = 'roletype';
+  public static JOB_LIST = 'recruiter';
 
 
 }

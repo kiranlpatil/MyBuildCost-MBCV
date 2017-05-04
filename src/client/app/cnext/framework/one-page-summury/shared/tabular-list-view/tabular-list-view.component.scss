@@ -48,11 +48,16 @@ $border-color: #ccc;
         min-height: inherit;
         margin-bottom: 15px;
       }
+
+      span {
+        display: block;
+        padding-bottom: 5px;
+      }
     }
 
     .heading {
       padding: 0 15px !important;
-      margin: 5px 0 !important;
+      margin: 0 0 5px !important;
 
       h4 {
         padding: 5px 0;

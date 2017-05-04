@@ -47,7 +47,7 @@
             <select class="form-control" [(ngModel)]="item.to.year" (change)="postEmploymentHistoy()">
               <option *ngFor="let c of yearList" [selected]="true" [ngValue]="c">{{c}}</option>
             </select>
-            <div class="error-messages" *ngIf="isShowDateErrorMessage"><p>Please fill valid month/year.</p></div>
+
 
           </div>
         </div>
@@ -61,6 +61,7 @@
     </div>
     <div class="col-sm-12">
       <div class="clear">
+        <div class="error-messages" *ngIf="isShowDateErrorMessage"><p>Please fill valid month/year.</p></div>
         <button type="button" id="more_fields" (click)="addAnother()" class="btn btn-create-profile"  >
           Add Another <span>+</span>
         </button>

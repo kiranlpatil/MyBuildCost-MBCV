@@ -14,6 +14,9 @@ import ComplexityModel = require("../dataaccess/model/complexity.model");
 import ScenarioModel = require("../dataaccess/model/scenario.model");
 import JobProfileModel = require("../dataaccess/model/jobprofile.model");
 import JobProfileService = require("../services/jobprofile.service");
+import * as mongoose from "mongoose";
+import RecruiterService = require("../services/recruiter.service");
+import CNextMessages = require("../shared/cnext-messages");
 
 
 
@@ -41,3 +44,39 @@ export function searchCandidatesByJobProfile (req : express.Request,res :express
   }
 
 }
+
+export function retrieve(req: express.Request, res: express.Response, next: any) {
+  try {
+    var jobProfileService = new JobProfileService();
+    let data ={
+      "postedJobs._id":new mongoose.Types.ObjectId(req.params.id)
+    };
+    jobProfileService.retrieve(data, (error, result) => {
+      if (error) {
+        next({
+          reason: CNextMessages.PROBLEM_IN_RETRIEVE_JOB_PROFILE,
+          message: CNextMessages.PROBLEM_IN_RETRIEVE_JOB_PROFILE,
+          code: 401
+        });
+      }else{
+        console.log("Outer of Controller");
+        console.log("Data1 "+JSON.stringify(result.industry));
+        res.status(200).send({
+          "data": {
+           "industry": result.industry
+          }
+        });
+      }
+
+    });
+
+
+
+  }
+  catch (e) {
+    res.status(403).send({message: e.message});
+  }
+}
+
+
+

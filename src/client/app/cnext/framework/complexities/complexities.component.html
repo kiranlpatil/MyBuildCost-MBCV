@@ -1,73 +1,73 @@
 <div id="complexity-area" >
   <div class="section-container clearfix" >
     <div class="main-content clearfix modal-content" *ngIf="highlightedSection.name=='Complexities'">
-        <div class="complexities">
-          <h4 class="heading">Choose Complexities</h4>
-          <div class="col-sm-12">
-            <div class="info">
-              <ul>
-                <li>Depending on your experience and expertise, you have used your capabilities under varying degree of
-                complexity.
-                </li>
-                <li>For each capability that you have selected, choose the ost appropriate degree of complexity that
-                  describes what you are good at doing
-                </li>
-              </ul>
-            </div>
-            <div *ngIf="isComplexityPresent">
-              <div *ngFor="let role of candidateRoles">
-                <div *ngFor="let capability of role.capabilities">
-                  <div class="select-complexity clearfix" *ngFor="let complexity of capability.complexities">
-                    <div class="complexity-name col-sm-2 no-padding">
-                      <p id="complexity1">{{complexity.name}}</p>
-                    </div>
-                    <div class="scenarios col-sm-10 padding-left15">
-                      <div class="select-option" *ngFor="let scenario of complexity.scenarios">
-                        <label>
-                          <input type="radio" name="{{complexity.name}}" value="{{scenario.name}}"
-                                 (change)="selectComplexity(role,complexity,scenario,$event)"
-                                 [checked]="scenario.isChecked" >
-                          <span>{{scenario.name}}</span>
-                        </label>
-                      </div>
+      <div class="complexities">
+        <h4 class="heading">Choose Complexities</h4>
+        <div class="col-sm-12">
+          <div class="info">
+            <ul>
+              <li>Depending on your experience and expertise, you have used your capabilities under varying degree of
+              complexity.
+              </li>
+              <li>For each capability that you have selected, choose the ost appropriate degree of complexity that
+                describes what you are good at doing
+              </li>
+            </ul>
+          </div>
+          <div *ngIf="isComplexityPresent">
+            <div *ngFor="let role of candidateRoles">
+              <div *ngFor="let capability of role.capabilities">
+                <div class="select-complexity clearfix" *ngFor="let complexity of capability.complexities">
+                  <div class="complexity-name col-sm-2 no-padding">
+                    <p id="complexity1">{{complexity.name}}</p>
+                  </div>
+                  <div class="scenarios col-sm-10 padding-left15">
+                    <div class="select-option" *ngFor="let scenario of complexity.scenarios">
+                      <label>
+                        <input type="radio" name="{{complexity.name}}" value="{{scenario.name}}"
+                               (change)="selectComplexity(role,complexity,scenario,$event)"
+                               [checked]="scenario.isChecked" >
+                        <span>{{scenario.name}}</span>
+                      </label>
                     </div>
                   </div>
                 </div>
-              </div>
-            </div>
-
-            <div *ngIf="!isComplexityPresent">
-              <div *ngFor="let role of roles">
-                <div *ngFor="let capability of role.capabilities">
-                  <div class="select-complexity clearfix" *ngFor="let complexity of capability.complexities">
-                    <div class="complexity-name col-sm-2 no-padding">
-                      <p id="complexity">{{complexity.name}}</p>
-                    </div>
-                    <div class="scenarios col-sm-10 padding-left15">
-                      <div class="select-option" *ngFor="let scenario of complexity.scenarios">
-                        <label>
-                          <input type="radio" name="{{complexity.name}}" value="{{scenario.name}}"
-                                 (change)="selectComplexity(role,capability,complexity,scenario,$event)"
-                                 [checked]="scenario.isChecked">
-                          <span>{{scenario.name}}</span>
-                        </label>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="button-group clearfix">
-              <div *ngIf="isCandidate">
-                <button class="btn btn-primary"  (click)="showHideModal()">Next
-                </button>
-              </div>
-              <div *ngIf="!isCandidate">
-                <button class="btn btn-primary"  (click)="saveComplexity()">Next
-                </button>
               </div>
             </div>
           </div>
+
+          <div *ngIf="!isComplexityPresent">
+            <div *ngFor="let role of roles">
+              <div *ngFor="let capability of role.capabilities">
+                <div class="select-complexity clearfix" *ngFor="let complexity of capability.complexities">
+                  <div class="complexity-name col-sm-2 no-padding">
+                    <p id="complexity">{{complexity.name}}</p>
+                  </div>
+                  <div class="scenarios col-sm-10 padding-left15">
+                    <div class="select-option" *ngFor="let scenario of complexity.scenarios">
+                      <label>
+                        <input type="radio" name="{{complexity.name}}" value="{{scenario.name}}"
+                               (change)="selectComplexity(role,capability,complexity,scenario,$event)"
+                               [checked]="scenario.isChecked">
+                        <span>{{scenario.name}}</span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="button-group clearfix">
+            <div *ngIf="isCandidate">
+              <button class="btn btn-primary"  (click)="showHideModal()">Next
+              </button>
+            </div>
+            <div *ngIf="!isCandidate">
+              <button class="btn btn-primary"  (click)="saveComplexity()">Next
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 

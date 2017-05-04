@@ -14,12 +14,14 @@ import RecruiterService = require("../services/recruiter.service");
 import JobProfileModel = require("../dataaccess/model/jobprofile.model");
 import UserService = require("../services/user.service");
 import JobProfileService = require("../services/jobprofile.service");
+import * as mongoose from "mongoose";
+import CNextMessages = require("../shared/cnext-messages");
 
 
-export function create(req:express.Request, res:express.Response, next:any) {
+export function create(req: express.Request, res: express.Response, next: any) {
   try {
 
-    var newUser:RecruiterModel = <RecruiterModel>req.body;
+    var newUser: RecruiterModel = <RecruiterModel>req.body;
     var recruiterService = new RecruiterService();
     recruiterService.createUser(newUser, (error, result) => {
       if (error) {
@@ -72,13 +74,13 @@ export function create(req:express.Request, res:express.Response, next:any) {
 }
 
 
-export function postJob(req:express.Request, res:express.Response, next:any) {
+export function postJob(req: express.Request, res: express.Response, next: any) {
   try {
-    var newJob:JobProfileModel = <JobProfileModel>req.body;
+    var newJob: JobProfileModel = <JobProfileModel>req.body;
     console.log(newJob);
     var recruiterService = new RecruiterService();
     var userId = req.params.id;
-    recruiterService.update(userId,newJob, (err, result)=> {
+    recruiterService.update(userId, newJob, (err, result) => {
       if (err) {
         next({
           reason: Messages.MSG_ERROR_RSN_USER_NOT_FOUND,
@@ -100,27 +102,27 @@ export function postJob(req:express.Request, res:express.Response, next:any) {
   }
 }
 
-export function updateDetails(req:express.Request, res:express.Response, next:any) {
+export function updateDetails(req: express.Request, res: express.Response, next: any) {
   try {
-    var newRecruiter:RecruiterModel = <RecruiterModel>req.body;
+    var newRecruiter: RecruiterModel = <RecruiterModel>req.body;
     var params = req.query;
     delete params.access_token;
-    var userId:string = req.params.id;
+    var userId: string = req.params.id;
     console.log("updated recruiter" + JSON.stringify(newRecruiter));
-    var auth:AuthInterceptor = new AuthInterceptor();
+    var auth: AuthInterceptor = new AuthInterceptor();
     var recruiterService = new RecruiterService();
     recruiterService.updateDetails(userId, newRecruiter, (error, result) => {
       if (error) {
         next(error);
       }
       else {
-            var token = auth.issueTokenWithUid(newRecruiter);
-            res.send({
-              "status": "success",
-              "data": result,
-              access_token: token
-            });
-          }
+        var token = auth.issueTokenWithUid(newRecruiter);
+        res.send({
+          "status": "success",
+          "data": result,
+          access_token: token
+        });
+      }
     });
   }
   catch (e) {
@@ -128,3 +130,33 @@ export function updateDetails(req:express.Request, res:express.Response, next:an
   }
 }
 
+export function retrieve(req: express.Request, res: express.Response, next: any) {
+  try {
+    var recruiterService = new RecruiterService();
+    console.log("recruiter "+req.params.id);
+    let data ={
+      "userId":new mongoose.Types.ObjectId(req.params.id)
+    };
+    recruiterService.retrieve(data, (error, result) => {
+      if (error) {
+        next({
+          reason: CNextMessages.PROBLEM_IN_RETRIEVE_JOB_PROFILE,
+          message: CNextMessages.PROBLEM_IN_RETRIEVE_JOB_PROFILE,
+          code: 401
+        });
+      }else{
+        res.status(200).send({
+          "status": Messages.STATUS_SUCCESS,
+          "data": result
+        });
+      }
+
+    });
+
+
+
+  }
+  catch (e) {
+    res.status(403).send({message: e.message});
+  }
+}

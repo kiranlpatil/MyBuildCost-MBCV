@@ -24,6 +24,7 @@ export class ProficienciesComponent {
   private masterDataProficiencies = new Array();
   private Proficiencies = new Array();
   private showAlert:boolean = false;
+  private disablebutton:boolean = true;
   private alreadyPresent:boolean = false;
   private showModalStyle:boolean = false;
   private otherProficiency:string = '';
@@ -70,6 +71,7 @@ this.masterDataProficiencies = data.data;
         if(this.selectedProficiencies.indexOf(newVal)===-1){
           this.selectedProficiencies.push(newVal);
           this.deleteSelectedProfeciency(newVal);
+          this.disablebutton=false;
           this.onComplete.emit(this.selectedProficiencies);
         }
       } else {
@@ -87,6 +89,9 @@ this.masterDataProficiencies = data.data;
         this.selectedProficiencies.splice(i, 1);
         this.Proficiencies.push(newVal.currentTarget.innerText.trim());
       }
+    }
+    if(this.selectedProficiencies.length<=0){
+      this.disablebutton=true;
     }
     this.onComplete.emit(this.selectedProficiencies);
   }

@@ -2,13 +2,11 @@
 import {Component,EventEmitter, Input, Output} from '@angular/core';
 import { EmployementHistory } from '../model/employment-history';
 import {ValueConstant, LocalStorage} from '../../../framework/shared/constants';
-import {EmploymentHistoryService} from "./employment-history.service";
 import {MessageService} from "../../../framework/shared/message.service";
 import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
 import {LocalStorageService} from "../../../framework/shared/localstorage.service";
 import {Message} from "../../../framework/shared/message";
 import {Candidate, Section} from "../model/candidate";
-import {DisableEmployeeHistoryGlyphiconService} from "../disableEmplyeeHistoryGlyphicon.service";
 
 @Component({
   moduleId: module.id,
@@ -36,7 +34,6 @@ export class EmploymentHistoryComponent {
 
 
   constructor(private messageService:MessageService,
-              private disableEmplyeeHistoryGlyphiconService:DisableEmployeeHistoryGlyphiconService,
               private profileCreatorService:CandidateProfileService) {
     this.tempfield = new Array(1);
     this.currentDate = new Date();
@@ -110,7 +107,6 @@ export class EmploymentHistoryComponent {
     for(let item of this.candidate.employmentHistory) {
       if ((item.companyName !== "" || item.designation !== "" || item.from.month !== "" ||
         item.from.year !== "" || item.to.month !== "" || item.to.year !== "")) {
-        this.disableEmplyeeHistoryGlyphiconService.change(true);
 
       }
     }

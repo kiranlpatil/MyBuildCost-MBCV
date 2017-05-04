@@ -4,25 +4,25 @@
       <div class="job-info section-container clearfix">
         <div class="row">
           <div class="col-sm-4" >
-            <label>Job Title:</label>
+            <label>Job Title</label>
             <control-messages [control]="jobPostForm.controls.jobTitle"></control-messages>
             <input class="form-control" type="text" formControlName="jobTitle"  required/>
           </div>
 
           <div class="col-sm-4">
-            <label>Hiring Manager:</label>
+            <label>Hiring Manager</label>
             <control-messages [control]="jobPostForm.controls.hiringManager"></control-messages>
             <input class="form-control" type="text" maxlength="30" formControlName="hiringManager"
                      required>
           </div>
           <div class="col-sm-4">
-            <label>Hiring Department:</label>
+            <label>Hiring Department</label>
             <control-messages [control]="jobPostForm.controls.department"></control-messages>
             <input class="form-control" type="text" formControlName="department"  required>
           </div>
 
           <div class="col-sm-4">
-            <label>Educational Qualification:</label>
+            <label>Educational Qualification</label>
             <control-messages [control]="jobPostForm.controls.education"></control-messages>
             <select class="form-control" formControlName="education" >
               <option *ngFor="let c of educationlist" [ngValue]="c">{{c}}</option>
@@ -30,7 +30,7 @@
           </div>
 
           <div class="col-sm-4">
-            <label>Experience Band:</label>
+            <label>Experience Band</label>
             <control-messages [control]="jobPostForm.controls.experience"></control-messages>
             <select class="form-control" formControlName="experience">
               <option *ngFor="let c of experiencelist" [ngValue]="c">{{c}}</option>
@@ -38,7 +38,7 @@
           </div>
 
           <div class="col-sm-4">
-            <label>Salary Band:</label>
+            <label>Salary Band</label>
             <control-messages [control]="jobPostForm.controls.salary"></control-messages>
             <select class="form-control" formControlName="salary">
               <option *ngFor="let c of salarylist" [ngValue]="c">{{c}}</option>
@@ -46,7 +46,7 @@
           </div>
 
           <div class="col-sm-4">
-            <label>Joining Period:</label>
+            <label>Joining Period</label>
             <control-messages [control]="jobPostForm.controls.joiningPeriod"></control-messages>
             <select class="form-control" formControlName="joiningPeriod">
               <option *ngFor="let c of noticeperiodlist" [ngValue]="c">{{c}}</option>
@@ -54,7 +54,7 @@
           </div>
 
           <div class="col-sm-8">
-            <label>Job Location:</label>
+            <label>Job Location</label>
 
             <div class="col-sm-4 padding-right15">
               <div class="list">
@@ -90,12 +90,10 @@
         </div>
       </div>
       <div class="roles section-container">
-        <div class="main-content clearfix">
+        <div class="clearfix">
           <h4 class="heading">Select Industry</h4>
-          <div class="col-sm-12">
-            <cn-industry-list [selectedIndustry]="jobPosterModel.industry"
+          <cn-industry-list [selectedIndustry]="jobPosterModel.industry"
                               (valueChange)="selectIndustry($event)"></cn-industry-list>
-          </div>
         </div>
       </div>
       <div class="button-group clearfix">

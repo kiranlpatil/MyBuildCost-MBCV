@@ -1,3 +1,5 @@
+@import '../../../../../../css/common';
+
 $theme-color: #3694d1;
 $text-color: #576b7c;
 
@@ -73,6 +75,41 @@ $text-color: #576b7c;
         margin: 0;
         word-break: break-all;
       }
+
+      .text-ellipsis {
+        @extend %text-ellipsis;
+      }
     }
   }
 }
+
+/*
+!* mixin for multiline *!
+@mixin multiLineEllipsis($lineHeight: 1.2em, $lineCount: 1, $bgColor: white){
+  overflow: hidden;
+  position: relative;
+  line-height: $lineHeight;
+  max-height: $lineHeight * $lineCount;
+  text-align: justify;
+  margin-right: -1em;
+  padding-right: 1em;
+  &:before {
+    content: '...';
+    position: absolute;
+    right: 0;
+    bottom: 0;
+  }
+  &:after {
+    content: '';
+    position: absolute;
+    right: 0;
+    width: 1em;
+    height: 1em;
+    margin-top: 0.2em;
+    background: $bgColor;
+  }
+}
+
+.block-with-text {
+  @include multiLineEllipsis($lineHeight: 1.2em, $lineCount: 3, $bgColor: white);
+}*/

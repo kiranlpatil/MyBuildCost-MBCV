@@ -45,6 +45,10 @@ $option-theme-color: #1c75bd;
 @media screen and (max-width: 767px) {
   .complexities {
     padding: 0;
+
+    .col-sm-12 {
+      padding: 0;
+    }
   }
 }
 

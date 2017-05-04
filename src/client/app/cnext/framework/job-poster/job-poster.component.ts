@@ -78,7 +78,7 @@ export class JobPosterComponent {
     }
   }
 
-  mockupSearch() {debugger
+  mockupSearch() {
     this.isShowCandidateQCardView=true;
     this.showQCardView.change(true);
 

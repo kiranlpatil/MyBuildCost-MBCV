@@ -3,7 +3,6 @@ import {MessageService} from "../../../framework/shared/message.service";
 import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
 import {Message} from "../../../framework/shared/message";
 import {Candidate, Section} from "../model/candidate";
-import {DisableAboutMyselfGlyphiconService} from "../disableAboutMyself.service";
 import {isUndefined} from "util";
 
 @Component({
@@ -26,7 +25,6 @@ export class MoreAboutMyselfComponent implements OnInit {
   private maxword:number;
 
   constructor(private messageService:MessageService,
-              private disableAboutMyselfGlyphiconService:DisableAboutMyselfGlyphiconService,
               private profileCreatorService:CandidateProfileService) {
     this.reSize = new Array(1);
   }
@@ -58,8 +56,6 @@ export class MoreAboutMyselfComponent implements OnInit {
   }
 
   addAboutMyself() {
-
-    this.disableAboutMyselfGlyphiconService.change(true);
     this.spaceSplitedString = this.candidate.aboutMyself.split(' ');
     this.dotSplitedString = this.candidate.aboutMyself.split('.');
     this.commaSplitedString = this.candidate.aboutMyself.split(',');
@@ -80,8 +76,6 @@ export class MoreAboutMyselfComponent implements OnInit {
       this.candidate.certifications !== undefined && this.candidate.academics !== undefined
       && this.candidate.awards !== undefined) {
     }
-
-
   }
 
 }

@@ -34,14 +34,14 @@
           </div>
           <div class="button-group clearfix">
             <button class="btn btn-primary" scrollTo scrollTargetSelector="#industry-experience"
-                    (click)="onNext()" [disabled]="disableButton">Next
+                    (click)="onNext()" [disabled]="disablebutton">Next
             </button>
           </div>
         </div>
       </div>
       <div class="main-content" *ngIf="highlightedSection.name !='Proficiencies'">
         <div class="compact-view clearfix">
-          <button class="btn-edit" (click)="highlightedSection.name='Proficiencies'"></button>
+          <button class="btn-edit" (click)="highlightedSection.name='Proficiencies';disablebutton=false"></button>
           <h4 class="heading">Proficiencies</h4>
           <div class="select-option" *ngFor="let item of selectedProficiencies">
             <span class="primary">{{item}}</span>

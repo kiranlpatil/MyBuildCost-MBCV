@@ -14,6 +14,7 @@ import {SearchController} from "./app/framework/search/controller/search.control
 var AuthInterceptor = require("./app/framework/interceptor/auth.interceptor");
 this.authInterceptor = new AuthInterceptor();
 
+
 export function cnextInit(app: express.Application) { //todo add interceptor to authenticate
   var searchController = new SearchController();
   app.get("/api/industry",industryController.retrieve);
@@ -33,5 +34,7 @@ export function cnextInit(app: express.Application) { //todo add interceptor to 
   app.get("/api/companysize",  userController.getCompanySize);
   app.get("/api/function",  userController.getFunction);
   app.put("/api/recruiter/:id",recruiterController.updateDetails);
+  app.get("/api/recruiter/:id",recruiterController.retrieve);
+  app.get("/api/recruiter/jobProfile/:id",jobProfileController.retrieve);
   app.post("/api/recruiter/candidate",searchController.retrieve);
 }

@@ -75,6 +75,16 @@ $message: #00aed5;
         }
       }
     }
+
+    .list {
+      input {
+        margin-top: 0;
+      }
+
+      .form-group {
+        margin: 0 0 15px 0;
+      }
+    }
   }
 }
 
