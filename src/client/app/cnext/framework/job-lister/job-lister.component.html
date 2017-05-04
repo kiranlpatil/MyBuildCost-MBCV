@@ -3,7 +3,7 @@
   <option value="Date">Date</option>
 </select>
 <div *ngIf="jobListInput.length > 0">
-  <div *ngFor="let item of jobList | orderBy:format">
+  <div *ngFor="let item of jobListInput | orderBy:format">
     <span>JobTitle : {{item.jobTitle}}</span>
     <span>Department : {{item.department}}</span>
     <span>Posting date : {{item.postingDate | date:'shortDate'}} </span>
