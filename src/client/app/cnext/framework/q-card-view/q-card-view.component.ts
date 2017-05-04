@@ -40,7 +40,7 @@ export class QCardviewComponent  {
   this.toggleFormat();
   }
   get format()   {
-    return this.toggle ? this.qCardModel.name :""; }
+    return this.toggle ? this.qCardModel.name :"JobMatching"; }
   toggleFormat() {
     this.toggle = true; }
 

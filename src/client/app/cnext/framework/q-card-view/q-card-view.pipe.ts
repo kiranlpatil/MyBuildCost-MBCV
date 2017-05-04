@@ -7,7 +7,6 @@ export class SortPipe implements  PipeTransform{
 
 
   transform(array: Array<CandidateQCard>, args: string): Array<CandidateQCard> {
-    console.log(args);
     if (array == null ) {
       return null;
     }
