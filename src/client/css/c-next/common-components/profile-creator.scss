@@ -66,6 +66,13 @@ $theme-color: #3694d1;
     color: $text-color;
     font-size: 12px;
     padding: 6px 15px;
+
+    &:focus,
+    &:active,
+    &:hover {
+      border: 1px solid $theme-color;
+      box-shadow: 0 0 1px 0 #3694d1 inset, 0 0 1px 0 #3694d1;
+    }
   }
 
   .instructions {

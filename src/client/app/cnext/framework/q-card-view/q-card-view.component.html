@@ -1,4 +1,4 @@
-<div class="card-view clearfix" [hidden]="!isShowQCardView">
+<div class="dashboard-view clearfix" [hidden]="!isShowQCardView">
 
   <header class="col-sm-12">
    <p>{{matches}} Matches Found</p>
@@ -12,19 +12,21 @@
     </div>
   </header>
 
-  <div class="col-sm-4" *ngFor="let item of candidates | orderBy:format">
-    <div class="panel clearfix">
-      <div class="col-xs-6 no-padding">
-        <p><img src="assets/c-next/card-view/salary.png" alt="Salary"/>$ {{item.salary}}</p>
-        <p><img src="assets/c-next/card-view/experience.png" alt="Experience"/>{{item.experience}} Years</p>
-        <p><img src="assets/c-next/card-view/relocation.png" alt="Location"/><span *ngIf="item.location == 'Yes'">Ready to Relocate</span><span *ngIf="item.location != 'Yes'">Not Ready to Relocate</span></p>
-      </div>
+  <div class="card-view clearfix">
+    <div class="col-sm-4" *ngFor="let item of candidates | orderBy:format">
+      <div class="panel clearfix">
+        <div class="col-xs-6 no-padding">
+          <p><img src="assets/c-next/card-view/salary.png" alt="Salary"/>$ {{item.salary}}</p>
+          <p><img src="assets/c-next/card-view/experience.png" alt="Experience"/>{{item.experience}} Years</p>
+          <p><img src="assets/c-next/card-view/relocation.png" alt="Location"/><span *ngIf="item.location == 'Yes'">Ready to Relocate</span><span *ngIf="item.location != 'Yes'">Not Ready to Relocate</span></p>
+        </div>
 
-      <div class="col-xs-6 no-padding ">
-        <div class="canvas-container">
-          <cn-progress-bar [value]="item.matching" [color]="'#e77e22'" [rotation]="false"></cn-progress-bar>
-          <cn-progress-bar [value]="item.matching" [color]="'#e77e22'" [rotation]="true" ></cn-progress-bar>
-          <p><span class="percentage">{{item.matching}}%</span><br />Skills<br />matching</p>
+        <div class="col-xs-6 no-padding ">
+          <div class="canvas-container">
+            <cn-progress-bar [value]="item.matching" [color]="'#e77e22'" [rotation]="false"></cn-progress-bar>
+            <cn-progress-bar [value]="item.matching" [color]="'#e77e22'" [rotation]="true" ></cn-progress-bar>
+            <span class="percentage"><span>{{item.matching}}%</span><br />Skills<br />matching</span>
+          </div>
         </div>
       </div>
     </div>

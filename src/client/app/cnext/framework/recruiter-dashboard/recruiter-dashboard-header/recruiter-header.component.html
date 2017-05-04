@@ -1,11 +1,14 @@
 <header class="page-header">
   <div class="container">
-    <div class="user-info col-sm-9 no-padding">
+    <div class="user-info col-sm-3">
       <img src= "{{uploaded_image_path}}" alt="User Profile Picture"/>
       <h4>{{companyName}}</h4>
     </div>
-    <div>{{jobCount}}</div>
-    <div>Jobs Posted</div>
+    <div class="col-sm-4 job-posted">
+      <img src="assets/c-next/header/jobs-posted.png" alt="Job posted"/>
+      <span>{{jobCount}}</span>
+      <p>Jobs Posted</p>
+    </div>
     <ul class="logout-dropdown">
       <li class="dropdown">
         <a href="#" class="dropdown-toggle drop-down" data-toggle="dropdown" >

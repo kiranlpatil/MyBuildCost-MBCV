@@ -1,14 +1,33 @@
-<label>Sort by</label>
-<select [(ngModel)]="qCardModel.name" (change)="sortBy()">
-  <option value="Date">Date</option>
-</select>
-<div *ngIf="jobListInput.length > 0">
-  <div *ngFor="let item of jobListInput | orderBy:format">
-    <span>JobTitle : {{item.jobTitle}}</span>
-    <span>Department : {{item.department}}</span>
-    <span>Posting date : {{item.postingDate | date:'shortDate'}} </span>
-    <span>Hiring Manager : {{item.hiringManager}}</span>
+<div class="dashboard-view clearfix">
+
+  <header class="col-sm-12">
+    <div class="sort-by">
+      <label>Sort by</label>
+      <select [(ngModel)]="qCardModel.name" (change)="sortBy()">
+        <option value="Date">Date</option>
+      </select>
+    </div>
+  </header>
+
+  <div class="col-sm-12 list-view" *ngIf="jobListInput.length > 0">
+    <div class="panel clearfix" *ngFor="let item of jobListInput | orderBy:format">
+      <div class="col-sm-1 col-xs-3 no-padding">
+          <p><span>52</span></p>Matches
+      </div>
+      <div class="col-sm-11 col-xs-9 no-padding">
+        <div class="col-sm-6 no-padding">
+          <h4>{{item.jobTitle}}</h4>
+          <p>{{item.department}}</p>
+        </div>
+        <div class="col-sm-3 no-padding">
+          <p><span class="glyphicon glyphicon-calendar"></span>{{item.postingDate | date:'shortDate'}}</p>
+        </div>
+        <div  class="col-sm-3 no-padding">
+          <p><span class="glyphicon glyphicon-user"></span>{{item.hiringManager}}</p>
+        </div>
+      </div>
+    </div>
   </div>
+  <div *ngIf="jobListInput.length == 0">You havn't posted any job yet</div>
 </div>
-<div *ngIf="jobListInput.length == 0">You havn't posted any job yet</div>
 

@@ -1,65 +1,68 @@
 <button type="button" class="btn btn-block" data-toggle="collapse" data-target="#filter-container">Filters</button>
-<div id="filter-container" class="collapse filter-container" [hidden]="!isShowJobFilter">
-  <p class="info">Adjust these filters to get more numbers of candidates</p>
-  <div class="inner col-sm-12">
-    <label>Proficiency
-      <div ng2-auto-complete
-           [source]="roles"
-           (ngModelChange)="selectRolesModel($event)">
-        <input class="form-control" [ngModel]="roleModel" placeholder="Select"/>
-      </div>
-    </label>
-
-    <label>Domain
-      <div ng2-auto-complete
-           [source]="roles"
-           (ngModelChange)="selectRolesModel($event)">
-        <input class="form-control" [ngModel]="roleModel" placeholder="Select"/>
-      </div>
-    </label>
-
-    <label>Experience
-      <div ng2-auto-complete
-           [source]="roles"
-           (ngModelChange)="selectRolesModel($event)">
-        <input class="form-control" [ngModel]="roleModel" placeholder="Select"/>
-      </div>
-    </label>
-
-    <label>Complexity
-      <div ng2-auto-complete
-           [source]="roles"
-           (ngModelChange)="selectRolesModel($event)">
-        <input class="form-control" [ngModel]="roleModel" placeholder="Select"/>
-      </div>
-    </label>
-
-    <label>Lead Time to Join
-      <div ng2-auto-complete
-           [source]="roles"
-           (ngModelChange)="selectRolesModel($event)">
-        <input class="form-control" [ngModel]="roleModel" placeholder="Select"/>
-      </div>
-    </label>
-
-    <label>Salary Range</label>
-    <div class="col-sm-6 padding-right5">
-      <label>
+<div [hidden]="!isShowJobFilter">
+  <div id="filter-container" class="collapse filter-container">
+    <p class="info">Adjust these filters to get more numbers of candidates</p>
+    <div class="inner col-sm-12">
+      <label>Proficiency
         <div ng2-auto-complete
              [source]="roles"
              (ngModelChange)="selectRolesModel($event)">
-          <input class="form-control" [ngModel]="roleModel" placeholder="Min"/>
+          <input class="form-control" [ngModel]="roleModel" placeholder="Select"/>
         </div>
       </label>
-    </div>
-    <div class="col-sm-6 padding-left5">
-      <label>
+
+      <label>Domain
         <div ng2-auto-complete
              [source]="roles"
              (ngModelChange)="selectRolesModel($event)">
-          <input class="form-control" [ngModel]="roleModel" placeholder="Max"/>
+          <input class="form-control" [ngModel]="roleModel" placeholder="Select"/>
         </div>
       </label>
+
+      <label>Experience
+        <div ng2-auto-complete
+             [source]="roles"
+             (ngModelChange)="selectRolesModel($event)">
+          <input class="form-control" [ngModel]="roleModel" placeholder="Select"/>
+        </div>
+      </label>
+
+      <label>Complexity
+        <div ng2-auto-complete
+             [source]="roles"
+             (ngModelChange)="selectRolesModel($event)">
+          <input class="form-control" [ngModel]="roleModel" placeholder="Select"/>
+        </div>
+      </label>
+
+      <label>Lead Time to Join
+        <div ng2-auto-complete
+             [source]="roles"
+             (ngModelChange)="selectRolesModel($event)">
+          <input class="form-control" [ngModel]="roleModel" placeholder="Select"/>
+        </div>
+      </label>
+
+      <label>Salary Range</label>
+      <div class="col-sm-6 padding-right5">
+        <label>
+          <div ng2-auto-complete
+               [source]="roles"
+               (ngModelChange)="selectRolesModel($event)">
+            <input class="form-control" [ngModel]="roleModel" placeholder="Min"/>
+          </div>
+        </label>
+      </div>
+      <div class="col-sm-6 padding-left5">
+        <label>
+          <div ng2-auto-complete
+               [source]="roles"
+               (ngModelChange)="selectRolesModel($event)">
+            <input class="form-control" [ngModel]="roleModel" placeholder="Max"/>
+          </div>
+        </label>
+      </div>
     </div>
   </div>
 </div>
+
