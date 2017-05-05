@@ -190,8 +190,7 @@ export class CandidateProfileComponent implements OnInit {
   onProfessionalDataComplete(){
     this.showemploymentHistory=true
   }
-
-
+  
   onEmploymentHistoryComplete(){
     this.showAcademicsDetails=true;
   }

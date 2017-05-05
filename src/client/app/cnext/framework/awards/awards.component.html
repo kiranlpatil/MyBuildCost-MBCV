@@ -1,43 +1,44 @@
-<div class="section-container awards " [hidden]="chkAwards" >
+<div class="section-container awards " [hidden]="chkAwards">
   <div class="main-content modal-content clearfix" *ngIf="highlightedSection.name =='Awards'">
     <h4 class="heading">Awards
               <span class="close-dialog" [hidden]="isHiddenAwrard">Close this section if not needed
             <span class="glyphicon glyphicon-remove" (click)="hideAwards()"></span>
           </span>
     </h4>
-    <div *ngFor="let item of candidate.awards;let i= index" class="col-sm-12 form">
-
+    <div [class.hide]="hideDiv[i]" *ngFor="let item of candidate.awards;let i= index" class="col-sm-12 form">
+      <span class="glyphicon glyphicon-trash" (click)="deleteItem(i)"></span>
       <div class="row">
-
         <div class="col-sm-4">
           <div class="form-group">
-            <input type="text" class="form-control" [(ngModel)]="item.name"(change)="postAwardDetails()"  (focus)="changeValue()" required />
+            <input type="text" class="form-control" [(ngModel)]="item.name" (change)="postAwardDetails()"
+                   (focus)="changeValue()" required/>
             <label>Title</label>
           </div>
         </div>
 
         <div class="col-sm-4">
           <div class="form-group">
-            <input type="text" class="form-control" [(ngModel)]="item.issuedBy" (change) = "postAwardDetails()"  (focus)="changeValue()" required />
+            <input type="text" class="form-control" [(ngModel)]="item.issuedBy" (change)="postAwardDetails()"
+                   (focus)="changeValue()" required/>
             <label>Issued By</label>
           </div>
         </div>
 
         <div class="col-sm-4">
-          <label >Year</label>
-          <select class="form-control"   [(ngModel)]="item.year" (change) = "postAwardDetails()">
+          <label>Year</label>
+          <select class="form-control" [(ngModel)]="item.year" (change)="postAwardDetails()">
             <option *ngFor="let AwardYear of yearList" [selected]="true" [ngValue]="AwardYear">{{AwardYear}}</option>
           </select>
         </div>
       </div>
-
       <div class="col-sm-12 no-padding">
-        <textarea class="form-control" [(ngModel)]="item.remark"(change)="postAwardDetails()" placeholder="Enter Awards Details" class="form-control"></textarea>
+        <textarea class="form-control" [(ngModel)]="item.remark" (change)="postAwardDetails()"
+                  placeholder="Enter Awards Details" class="form-control"></textarea>
       </div>
     </div>
     <div class="col-sm-12">
       <div class="clear">
-        <button type="button" id="more_fields" (click)="addAnother()" class="btn btn-create-profile"  >
+        <button type="button" id="more_fields" (click)="addAnother()" class="btn btn-create-profile">
           Add Another <span>+</span>
         </button>
         <div class="error-messages" *ngIf="isShowError"><p>Fields should not be empty.</p></div>
@@ -54,9 +55,11 @@
       <button class="btn-edit" (click)="highlightedSection.name='Awards'"></button>
       <h4 class="heading">Awards</h4>
       <ul>
-        <li *ngFor="let item of candidate.awards">
-          <p>{{item.name}} at {{item.issuedBy}} in {{item.year}}</p>
-        </li>
+        <div *ngFor="let item of candidate.awards">
+          <li *ngIf="item.name != '' && item.issuedBy != ''">
+            <p>{{item.name}} at {{item.issuedBy}} in {{item.year}}</p>
+          </li>
+        </div>
       </ul>
     </div>
   </div>

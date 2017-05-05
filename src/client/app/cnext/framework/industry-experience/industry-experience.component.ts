@@ -37,7 +37,6 @@ export class IndustryExperienceListComponent {
     }
     if(this.candidateExperiencedIndustry === undefined){
       this.candidateExperiencedIndustry= new Array(0);
-      this.candidateExperiencedIndustry.push("s");
     }
   }
 

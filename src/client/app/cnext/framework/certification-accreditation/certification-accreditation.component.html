@@ -5,8 +5,8 @@
             <span class="glyphicon glyphicon-remove" (click)="hideCertification()"></span>
           </span>
     </h4>
-    <div class="form col-sm-12 " *ngFor="let item of candidate.certifications;let i= index">
-
+    <div class="form col-sm-12 " [class.hide]="hideDiv[i]" *ngFor="let item of candidate.certifications;let i= index">
+      <span class="glyphicon glyphicon-trash" (click)="deleteItem(i)"></span>
       <div class="row">
         <div class="col-sm-4">
           <div class="form-group">

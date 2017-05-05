@@ -31,6 +31,8 @@ export class AwardsComponent {
   private disableAddAnother:boolean = true;
   private sendPostCall:boolean = false;
   private isShowError:boolean = false;
+  private isHiddenAwrard:boolean = false;
+  private hideDiv:boolean[] = new Array();
 
 
   constructor(private awardService:AwardService,
@@ -40,26 +42,6 @@ export class AwardsComponent {
     this.currentDate = new Date();
     this.year = this.currentDate.getUTCFullYear();
     this.createYearList(this.year);
-  }
-
-  ngOnInit() {
-    if (LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE) === "true") {
-      this.profileCreatorService.getCandidateDetails()
-        .subscribe(
-          candidateData => this.OnCandidateDataSuccess(candidateData),
-          error => this.onError(error));
-
-    }
-  }
-
-  OnCandidateDataSuccess(candidateData:any) {
-  }
-
-  onError(error:any) {
-    var message = new Message();
-    message.error_msg = error.err_msg;
-    message.isError = true;
-    this.messageService.message(message);
   }
 
   createYearList(year:number) {
@@ -75,6 +57,9 @@ export class AwardsComponent {
   ngOnChanges(changes:any) {
     if (this.candidate.awards.length === 0) {
       this.candidate.awards.push(new Award());
+    }
+    else{
+      this.isHiddenAwrard=true;
     }
   }
 
@@ -101,7 +86,7 @@ export class AwardsComponent {
     this.isShowError = false;
     for (let item of this.candidate.awards) {
       if (item.name !== "" || item.issuedBy !== "" || item.year !== "") {
-       
+        this.isHiddenAwrard=true;
       }
     }
     for (let item of this.candidate.awards) {
@@ -111,17 +96,25 @@ export class AwardsComponent {
       }
     }
     if (this.sendPostCall === true) {
-      this.profileCreatorService.addProfileDetail(this.candidate).subscribe(
-        user => {
-          console.log(user);
-        },
-        error => {
-          console.log(error);
-        });
+      this.postData();
     }
     this.sendPostCall = true;
 
 
+  }
+
+  deleteItem(i:number) {
+    this.hideDiv[i] = true;
+    this.candidate.awards.splice(i, 1);
+    this.postData();
+    this.hideDiv[i]=false;
+  }
+
+  postData(){
+    this.profileCreatorService.addProfileDetail(this.candidate).subscribe(
+      user => {
+        console.log(user);
+      });
   }
 
   onNext() {

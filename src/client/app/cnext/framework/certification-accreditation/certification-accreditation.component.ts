@@ -24,8 +24,10 @@ export class CertificationAccreditationComponent {
   private currentDate:any;
   private yearList = new Array();
   private disableAddAnother:boolean = true;
+  private isHiddenCertificate:boolean = true;
   private sendPostCall:boolean = false;
   private isShowError:boolean = false;
+  private hideDiv:boolean[] = new Array();
 
 
   constructor(private messageService:MessageService,
@@ -42,27 +44,11 @@ export class CertificationAccreditationComponent {
     if (this.candidate.certifications.length == 0) {
       this.candidate.certifications.push(new Certifications());
     }
-  }
-
-  ngOnInit() {
-    if (LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE) === "true") {
-      this.profileCreatorService.getCandidateDetails()
-        .subscribe(
-          candidateData => this.OnCandidateDataSuccess(candidateData),
-          error => this.onError(error));
-
+    else{
+      this.isHiddenCertificate=true;
     }
   }
 
-  OnCandidateDataSuccess(candidateData:any) {
-  }
-
-  onError(error:any) {
-    var message = new Message();
-    message.error_msg = error.err_msg;
-    message.isError = true;
-    this.messageService.message(message);
-  }
 
   createYearList(year:number) {
     for (let i = 0; i < ValueConstant.MAX_ACADEMIC_YEAR_LIST; i++) {
@@ -99,17 +85,24 @@ export class CertificationAccreditationComponent {
       }
     }
     if (this.sendPostCall === true) {
-      this.profileCreatorService.addProfileDetail(this.candidate).subscribe(
-        user => {
-          console.log(user);
-        },
-        error => {
-          console.log(error);
-        });
+     this.postData();
     }
     this.sendPostCall = true;
   }
 
+  deleteItem(i:number) {
+    this.hideDiv[i] = true;
+    this.candidate.certifications.splice(i, 1);
+    this.postData();
+    this.hideDiv[i]=false;
+  }
+  
+  postData(){
+  this.profileCreatorService.addProfileDetail(this.candidate).subscribe(
+    user => {
+      console.log(user);
+    });
+}
   onNext() {
     this.onComplete.emit();
     this.highlightedSection.name = "Awards";
