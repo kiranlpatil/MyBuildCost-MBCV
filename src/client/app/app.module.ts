@@ -112,7 +112,6 @@ import {BasicJobInformationComponent} from "./cnext/framework/basic-job-informat
 import {CompentansiesAndResponsibilitiesComponent} from "./cnext/framework/compentacies-and-responsibilities/compentacies-and-responsibilities.component";
 import {BasicJobInformationService} from "./cnext/framework/basic-job-information/basic-job-information.service";
 import {JobListerComponent} from "./cnext/framework/job-lister/job-lister.component";
-import {JobListerService} from "./cnext/framework/job-lister/job-lister-service";
 import {QCardviewComponent} from "./cnext/framework/q-card-view/q-card-view.component";
 import {QCardViewService} from "./cnext/framework/q-card-view/q-card-view.service";
 import {SortPipe} from "./cnext/framework/q-card-view/q-card-view.pipe";

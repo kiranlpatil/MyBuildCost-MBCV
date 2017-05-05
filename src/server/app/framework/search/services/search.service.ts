@@ -14,23 +14,19 @@ class SearchService {
 
     let data = {
       "industry.name": jobProfile.industry.name,
-      "proficiencies": {$in: jobProfile.proficiencies},
-      "interestedIndustries": {$all: jobProfile.interestedIndustries}
+      //"relocate":true,
+     /* "proficiencies": {$in: jobProfile.proficiencies},
+      "interestedIndustries": {$in: jobProfile.interestedIndustries},
+      "isVisible":true*/
     };
     this.candidateRepository.retrieve(data, (err, res) => {
-      console.log("In retrieve"+JSON.stringify(res)) ;
-      console.log("In response"+JSON.stringify(err)) ;
       if (err) {
         callback(err, null);
       } else {
-        console.log("In Response"+JSON.stringify(res));
-        callback(null, res);
-        //this.candidateRepository.
-        //this.candidateRepository.findOneAndUpdateIndustry({'_id':res[0]._id}, item, {new: true}, callback);
+        this.candidateRepository.getCandidateQCard(res,jobProfile,callback);
       }
     });
   }
-
 }
 
 Object.seal(SearchService);

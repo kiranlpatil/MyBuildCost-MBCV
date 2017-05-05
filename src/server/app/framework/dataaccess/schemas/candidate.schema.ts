@@ -58,7 +58,8 @@ class CandidateSchema {
             complexities: [{
               scenarios: [{
                 isChecked : Boolean,
-                name: String
+                name: String,
+                code : String
               }],
               name: String
             }],
