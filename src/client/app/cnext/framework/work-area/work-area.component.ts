@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Output, Input} from "@angular/core";
 import {Role} from "../model/role";
 import {Section} from "../model/candidate";
+import {ValueConstant} from "../../../framework/shared/constants";
 
 @Component({
   moduleId: module.id,
@@ -15,22 +16,18 @@ export class WorkAreaComponent {
   @Input() highlightedSection :Section;
   @Output() onComplete = new EventEmitter();
 
-  //private compactView:boolean = true;
   private disableButton:boolean = true;
 
-  // ngOnChanges(changes:any) {
-  //   if (this.selectedRoles !== undefined && this.selectedRoles.length > 0) {
-  //     this.compactView = false;
-  //   }
-  //   else{
-  //     this.compactView =true;
-  //   }
-  // }
+/*  ngOnChanges(changes:any) {
+    if(changes.selectedRoles != undefined && changes.selectedRoles.currentValue != undefined){
+      this.selectedRoles=changes.selectedRoles.currentValue;
+    }
+  }*/
 
   selectOption(role:Role,event:any) {
     if (event.target.checked) {
       this.disableButton=false;
-      if (this.selectedRoles.length < 3) {
+      if (this.selectedRoles.length < ValueConstant.MAX_WORKAREA) {
         this.selectedRoles.push(role);
       } else {
           event.target.checked = false;

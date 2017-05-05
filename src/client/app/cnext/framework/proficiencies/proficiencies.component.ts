@@ -49,6 +49,7 @@ export class ProficienciesComponent {
           for (let proficiency of this.choosedproficiencies) {
             this.deleteSelectedProfeciency(proficiency);
           }
+          this.disablebutton=false;
         }
       }
   }

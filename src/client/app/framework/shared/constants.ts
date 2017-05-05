@@ -109,6 +109,8 @@ export class LocalStorage {
 
 export class ValueConstant {
   public static MAX_CAPABILITIES:number = 10;
+  public static MAX_WORKAREA:number = 3;
+  public static MAX_INTERESTEDINDUSTRY:number = 7;
   public static MAX_PROFECIENCES:number = 25;
   public static MAX_DOMAINS:number = 10;
   public static MAX_YEAR_LIST:number = 60;

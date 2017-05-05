@@ -3,7 +3,7 @@ import {Industry} from "../model/industry";
 import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
 import {Section} from "../model/candidate";
 import {LocalStorageService} from "../../../framework/shared/localstorage.service";
-import {LocalStorage} from "../../../framework/shared/constants";
+import {LocalStorage, ValueConstant} from "../../../framework/shared/constants";
 
 @Component({
   moduleId: module.id,
@@ -27,15 +27,27 @@ export class IndustryExperienceListComponent {
   }
 
   ngOnChanges(changes:any){
+    
     if(changes.candidateExperiencedIndustry.currentValue != undefined){
       this.candidateExperiencedIndustry=changes.candidateExperiencedIndustry.currentValue;
+      this.selectedIndustries=this.candidateExperiencedIndustry;
+      if(this.selectedIndustries.length>0){
+        this.disableButton=false;
+      }
+    }
+    if(this.candidateExperiencedIndustry === undefined){
+      this.candidateExperiencedIndustry.push("s");
     }
   }
 
   selectIndustryModel(industry:string,event:any) {
     if(event.target.checked) {
       this.disableButton=false;
-      this.selectedIndustries.push(industry);
+      if(this.selectedIndustries.length<ValueConstant.MAX_INTERESTEDINDUSTRY){
+        this.selectedIndustries.push(industry);
+      } else {
+        event.target.checked = false;
+      }
     } else {
       for (let data of this.selectedIndustries) {
         if (data === industry) {

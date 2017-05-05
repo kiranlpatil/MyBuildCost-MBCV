@@ -40,6 +40,9 @@ export class CapabilitiesComponent {
         }
       }
     }
+    if(this.primaryNames.length>0){
+      this.disableButton=false;
+    }
   }
 
   selectedCapability(selectedRole:Role, selectedCapability:Capability, event:any) {
