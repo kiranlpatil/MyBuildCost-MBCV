@@ -21,7 +21,7 @@ export class ProfileDescriptionComponent {
  // private compactView:boolean=true;
   private disableButton:boolean=true;
   private candidateDetails:CandidateDetail = new CandidateDetail();
-  private image_path:string ;
+  private image_path:string='assets/framework/images/dashboard/profile.png' ;
 
   constructor(private userProfileService:DashboardService) {
   }
@@ -31,7 +31,9 @@ export class ProfileDescriptionComponent {
       .subscribe(
         userprofile => {
           this.candidateDetails = userprofile.data;
+          if(this.candidateDetails.picture != undefined ){
           this.image_path = AppSettings.IP + this.candidateDetails.picture.substring(4).replace('"', '');
+          }
         });
   }
 

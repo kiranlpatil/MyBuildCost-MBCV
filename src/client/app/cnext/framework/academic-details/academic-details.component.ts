@@ -20,7 +20,7 @@ export class AcademicDetailComponent {
   @Input() candidate:Candidate;
   @Input() highlightedSection :Section;
   @Output() onComplete = new EventEmitter();
-  
+
   private  tempfield: string[];
   private year: any;
   private currentDate: any;
@@ -32,41 +32,17 @@ export class AcademicDetailComponent {
   private disableAddAnother:boolean=true;
   private sendPostCall:boolean=false;
   private isShowError:boolean=false;
-
+  private hideDiv:boolean[] = new Array();
 
 
   private newAcademicDetails=new Academicdetails();
   constructor(private educationalService : EducationalService,
-              private acadmicDetailsService:CandidateAcadmyDetailService,
-              private messageService:MessageService,
               private profileCreatorService:CandidateProfileService) {
 
     this.tempfield = new Array(1);
     this.currentDate = new Date();
     this.year = this.currentDate.getUTCFullYear();
     this.createYearList(this.year);
-
-
-
-  }
-
-  ngOnInit(){
-    if(LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE)==="true"){
-      this.profileCreatorService.getCandidateDetails()
-        .subscribe(
-          candidateData => this.OnCandidateDataSuccess(candidateData),
-          error => this.onError(error));
-
-    }
-  }
-
-  OnCandidateDataSuccess(candidateData:any){}
-
-  onError(error: any) {
-    var message = new Message();
-    message.error_msg = error.err_msg;
-    message.isError = true;
-    this.messageService.message(message);
   }
 
   createYearList(year: number) {
@@ -98,7 +74,7 @@ export class AcademicDetailComponent {
   };
 
   changeValue() {
-    this.educationalService.change(true);   //to change the value of upper bubbles
+    this.educationalService.change(true);   //to change the value of progress bar
   }
   ngOnChanges(changes :any){
     if(this.candidate.academics.length===0){
@@ -133,19 +109,25 @@ export class AcademicDetailComponent {
     }
     if(this.sendPostCall===true)
     {
-      this.profileCreatorService.addProfileDetail(this.candidate).subscribe(
-        user => {
-          console.log(user);
-        },
-        error => {
-          console.log(error);
-        });
+      this.postData();
     }
     this.sendPostCall=true;
 
 
   }
+  deleteItem(i:number) {
+    this.hideDiv[i] = true;
+    this.candidate.academics.splice(i, 1);
+    this.postData();
+    this.hideDiv[i]=false;
+  }
+  postData(){
 
+    this.profileCreatorService.addProfileDetail(this.candidate).subscribe(
+      user => {
+        console.log(user);
+      });
+  }
   onNext() {
     this.onComplete.emit();
     this.highlightedSection.name = "Certification";

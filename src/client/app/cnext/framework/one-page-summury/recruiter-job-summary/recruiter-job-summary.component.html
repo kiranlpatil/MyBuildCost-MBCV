@@ -1,0 +1,59 @@
+<!--
+<header class="page-header">
+  <div class="container">
+    <div class="cn-logo">
+      <img src="assets/c-next/header/cnext-logo-white.png" alt="logo"/>
+    </div>
+
+    <ul class="action-list">
+      <li>
+        <img src="assets/c-next/icons/print-icon.png" alt="print"/><span class="hidden-xs">Print Job</span>
+      </li>
+      <li>
+        <img src="assets/c-next/icons/pdf-icon.png" alt="pdf"/><span class="hidden-xs">Generate Pdf</span>
+      </li>
+    </ul>
+  </div>
+  <button class="btn btn-danger btn-logout" (click)="logOut()">Logout</button>
+</header>
+
+
+<section class="container one-page-summary">
+  <div class="col-sm-3 left-content">
+    <div>
+      <cn-recruiter-job-information [jobDetail]="jobDetail" [recruiter]="recruiter"></cn-recruiter-job-information>
+    </div>
+    <div >
+      <h4>About Company</h4>
+      <cn-additional-details [data]="recruiter.companyDetails.about_company"></cn-additional-details>
+    </div>
+    &lt;!&ndash; <div>
+      <cn-contact-details [recruiter]="recruiter"></cn-contact-details>
+    </div>&ndash;&gt;
+  </div>
+
+  <div class="col-sm-9 right-content">
+    <div class="col-sm-12">
+      <cn-tabular-list-view [roles]="jobDetail.industry.roles"></cn-tabular-list-view>
+    </div>
+
+    <div class="col-lg-5 col-md-12">
+      <div *ngIf="secondaryCapabilities.length>0">
+        <h4 >Supplimentry Capabilities</h4>
+        <cn-horizontal-list-view [data]="secondaryCapabilities"></cn-horizontal-list-view>
+      </div>
+      <h4>Proficiency In</h4>
+      <cn-horizontal-list-view [data]="jobDetail.profiencies"></cn-horizontal-list-view>
+    </div>
+    <div class="col-lg-7 col-md-12">
+      <h4>Competencies</h4>
+      <cn-additional-details [data]="jobDetail.competencies"></cn-additional-details>
+    </div>
+    <div class="col-lg-7 col-md-12">
+      <h4>Responsibility</h4>
+      <cn-additional-details [data]="jobDetail.responsibility"></cn-additional-details>
+    </div>
+  </div>
+</section>
+
+-->

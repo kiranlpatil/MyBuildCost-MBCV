@@ -1,11 +1,9 @@
 import {Component, OnInit} from "@angular/core";
 import {Router} from "@angular/router";
-//import {CandidateProfileService} from "../../candidate-profile/candidate-profile.service";
-import {Message} from "../../../../framework/shared/message";
-import {MessageService} from "../../../../framework/shared/message.service";
-//import {Candidate} from "../../model/candidate";
-//import {CandidateDetail} from "../../../../framework/registration/candidate/candidate";
 import {NavigationRoutes} from "../../../../framework/shared/constants";
+import {JobPosterModel} from "../../model/jobPoster";
+import {Recruiter} from "../../../../framework/registration/recruiter/recruiter";
+import {RecruiterDashboardService} from "../../recruiter-dashboard/recruiter-dashboard.service";
 
 
 @Component({
@@ -17,11 +15,35 @@ import {NavigationRoutes} from "../../../../framework/shared/constants";
 
 export class RecruiterJobSummaryComponent implements OnInit {
 
-  constructor( private messageService:MessageService,
-               private _router:Router) {
+  private jobDetail:JobPosterModel=new JobPosterModel();
+  private recruiter:Recruiter=new Recruiter();
+  private secondaryCapabilities:string[]=new Array();
+
+  constructor(private _router:Router,
+              private recruiterDashboardService: RecruiterDashboardService) {
   }
 
   ngOnInit() {
+    this.recruiterDashboardService.getJobList()
+      .subscribe(
+        data => {
+         this.OnRecruiterDataSuccess(data.data[0])
+        });
+  }
+  
+  OnRecruiterDataSuccess(data:any) {
+    this.recruiter = data;
+    this.getSecondaryData();
+  }
+  
+  getSecondaryData(){
+    for(let role of this.jobDetail.industry.roles){
+      for(let capability of role.capabilities){
+        if(capability.isSecondary){
+          this.secondaryCapabilities.push(capability.name);
+        }
+      }
+    }
   }
 
   logOut() {

@@ -1,4 +1,3 @@
-<div id="complexity-area" >
   <div class="section-container clearfix" >
     <div class="main-content clearfix modal-content" *ngIf="highlightedSection.name=='Complexities'">
       <div class="complexities">
@@ -63,7 +62,7 @@
               </button>
             </div>
             <div *ngIf="!isCandidate">
-              <button class="btn btn-primary"  (click)="saveComplexity()">Next
+              <button class="btn btn-primary" scrollTo scrollTargetSelector="#proficiency-area"  (click)="saveComplexity()">Next
               </button>
             </div>
           </div>
@@ -83,7 +82,7 @@
     </div>
     <!--<div [class.modal-bg]="highlightedSection.name!='Complexities'"></div>-->
   </div>
-</div>
+
 
 
 <div class="modal" [style.display]="getStyleModal()">

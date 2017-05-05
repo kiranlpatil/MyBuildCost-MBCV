@@ -17,7 +17,7 @@ export class CandidateBasicInformationComponent {
   @Input() candidateDetails:CandidateDetail=new CandidateDetail();
   @Input() candidate:Candidate=new Candidate();
 
-  private image_path:string;
+  private image_path:string='assets/framework/images/dashboard/profile.png';
   
   ngOnChanges(){
     if(this.candidateDetails !== undefined){

@@ -24,6 +24,7 @@ export class EmploymentHistoryComponent {
   private currentDate:any;
   private yearList = new Array();
   private checkFields:boolean = true;
+  private chkEmployeeHistory:boolean = false;
   private sendPostCall:boolean = false;
   private isShowError:boolean = false;
   private hideDiv:boolean[] = new Array();
@@ -140,9 +141,6 @@ export class EmploymentHistoryComponent {
   }
 
   postData() {
-    if(this.candidate.employmentHistory==undefined){
-
-    }
     this.profileCreatorService.addProfileDetail(this.candidate).subscribe(
       user => {
         console.log(user);
@@ -151,8 +149,13 @@ export class EmploymentHistoryComponent {
 
   setCurrentDate(newval:EmployementHistory){
     newval.to.month=this.monthList[this.currentDate.getUTCMonth()-1];
-      newval.to.year=this.year; 
+      newval.to.year=this.year;
     console.log(newval);
+  }
+
+  hideEmployeeHistory(){
+    this.chkEmployeeHistory=true;
+   this.onNext();
   }
 }
 

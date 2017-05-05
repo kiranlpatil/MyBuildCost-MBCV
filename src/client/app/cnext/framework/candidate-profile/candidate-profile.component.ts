@@ -108,21 +108,14 @@ export class CandidateProfileComponent implements OnInit {
         this.whichStepsVisible[5] = data;
       }
     );
-
+    this.getCandidateProfile();
   }
 
 
   ngOnInit() {
-    this.getCandidateProfile();
+    
 
-    if (this.candidate.jobTitle !== undefined && this.candidate.jobTitle !== ""
-        && this.candidate.industry.name !== undefined && this.candidate.industry.name !== "") {
-      //TODO: Shrikant write logic which should be the active section
-      this.highlightedSection.name = "None";
-    }
-    else{
-      this.highlightedSection.name = "None"; //"Profile";
-    }
+    
   }
 
   onProfileDescriptionComplete() {
@@ -259,7 +252,8 @@ export class CandidateProfileComponent implements OnInit {
   getCandidateProfile() {
     this.profileCreatorService.getCandidateDetails()
       .subscribe(
-        candidateData => this.OnCandidateDataSuccess(candidateData),
+        candidateData => {this.OnCandidateDataSuccess(candidateData);
+        console.log(candidateData)},
         error => this.onError(error));
   }
 
@@ -292,9 +286,16 @@ export class CandidateProfileComponent implements OnInit {
   OnCandidateDataSuccess(candidateData:any) {
     this.candidate = candidateData.data[0];
     this.candidateForRole = candidateData.data[0].industry.roles;
+    console.log(this.candidate);
+    if (this.candidate.jobTitle === undefined || this.candidate.industry.name !== undefined) {
+      //TODO: Shrikant write logic which should be the active section
+      console.log(this.candidate);
+      this.highlightedSection.name = "Profile";
+    }
 
     if (this.candidate.jobTitle !== undefined && this.candidate.jobTitle !== "") {
       this.isTitleFilled = false;
+      this.highlightedSection.name = "None";
       this.disableTitle = true;
     }
     if (this.candidate.industry.name !== undefined) {

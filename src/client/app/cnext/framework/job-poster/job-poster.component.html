@@ -6,30 +6,32 @@
     <cn-basic-job-information [highlightedSection]="highlightedSection" [jobPosterModel]="jobPosterModel"
                               (onComplete)="onBasicJobInformationComplete($event)"></cn-basic-job-information>
 
+    <div id="work-area" >
     <cn-work-area [roles]="rolesForMain" [highlightedSection]="highlightedSection" (onComplete)="selectRole($event)"
                   [hidden]="!isShowRoleList"></cn-work-area>
+    </div>
 
-
+    <div id="capability-area">
     <cn-capabilities [roles]="rolesForCapability" [candidateRoles]="jobPosterModel.industry.roles"
                      [highlightedSection]="highlightedSection"
-                     (onComplete)="selectRole($event)" [hidden]="!isShowCapability"></cn-capabilities>
+                     (onComplete)="selectRole($event)" [hidden]="!isShowCapability"></cn-capabilities></div>
 
-
+    <div id="complexity-area" >
     <cn-complexities [roles]="rolesForComplexity" [candidateRoles]="jobPosterModel.industry.roles"
                      [highlightedSection]="highlightedSection"
                      [isComplexityPresent]="isComplexityPresent"
-                     (onComplete)="selectRoleFromComplexity($event)" [hidden]="!isShowComplexity"></cn-complexities>
+                     (onComplete)="selectRoleFromComplexity($event)" [hidden]="!isShowComplexity"></cn-complexities></div>
 
-
+    <div id="proficiency-area">
     <cn-proficiencies [proficiencies]="proficiencies" [choosedproficiencies]="jobPosterModel.profiencies"
                       [highlightedSection]="highlightedSection"
-                      (onComplete)="selectProficiency($event)" [hidden]="!isShowProficiency"></cn-proficiencies>
+                      (onComplete)="selectProficiency($event)" [hidden]="!isShowProficiency"></cn-proficiencies></div>
 
-
+    <div id="industry-experience">
     <cn-industry-experience [candidateExperiencedIndustry]="jobPosterModel.interestedIndustry"
       [highlightedSection]="highlightedSection"
       (onComplete)="selectExperiencedIndustry($event)"
-      [hidden]="!isShowProficiency"></cn-industry-experience>
+      [hidden]="!isShowProficiency"></cn-industry-experience></div>
 
 
     <div [hidden]="!isShowProficiency">
