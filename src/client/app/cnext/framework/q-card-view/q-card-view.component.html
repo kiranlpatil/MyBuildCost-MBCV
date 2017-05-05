@@ -13,7 +13,7 @@
   </header>
 
   <div class="card-view clearfix">
-    <div class="col-sm-4" *ngFor="let item of candidates | orderBy:format">
+    <div class="col-sm-4" *ngFor= "let item of candidates | orderby:formatcandidate">
       <div class="panel clearfix">
         <div class="col-xs-6 no-padding">
           <p><img src="assets/c-next/card-view/salary.png" alt="Salary"/>$ {{item.salary}}</p>
@@ -32,3 +32,4 @@
     </div>
   </div>
 </div>
+

@@ -39,7 +39,8 @@ export class QCardviewComponent  {
   sortBy(){
   this.toggleFormat();
   }
-  get format()   {
+  get formatcandidate()   {
+    console.log(this.qCardModel.name);
     return this.toggle ? this.qCardModel.name :"JobMatching"; }
   toggleFormat() {
     this.toggle = true; }
