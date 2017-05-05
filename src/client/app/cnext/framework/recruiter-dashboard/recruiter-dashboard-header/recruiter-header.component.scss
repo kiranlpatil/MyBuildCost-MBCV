@@ -10,20 +10,24 @@ $white: #fff;
     }
 
     h4 {
-      margin: 12px 0 0;
+      margin: 0;
       width: auto;
       color: $white;
       text-transform: capitalize;
-      font-family: 'helvlightregular';
+      font-family: 'gothamrnd-book';
       white-space: pre-wrap;
       text-overflow: clip;
       overflow: auto;
       font-size: 14px;
+      vertical-align: middle;
+      display: table-cell;
+      height: 43px;
     }
   }
 
   .job-posted {
     color: #fff;
+    width: auto;
 
     p {
       margin: 0;
