@@ -11,7 +11,7 @@ export class Candidate {
   certifications : Certifications[]=new Array();
   awards : Award[]=new Array();
   industry : Industry=new Industry();
-  intrestedIndustries : string[]=new Array(0);
+  interestedIndustries : string[]=new Array(0);
   roleType: string='';
   academics :  Academicdetails[]=new Array();
   professionalDetails :  ProfessionalData=new ProfessionalData();

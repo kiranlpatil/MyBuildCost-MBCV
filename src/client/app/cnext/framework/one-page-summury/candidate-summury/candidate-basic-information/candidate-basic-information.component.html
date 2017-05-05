@@ -13,7 +13,7 @@
       <p>Specialization area</p>
       <span *ngFor="let role of candidate.industry.roles;let i = index">{{role.name}}<span *ngIf="candidate.industry.roles.length>1 &&  i!=candidate.industry.roles.length-1">,</span></span>
       <p>Industry Exposure</p>
-      <span *ngFor="let industry of candidate.intrestedIndustries;let i = index">{{industry}}<span *ngIf="candidate.intrestedIndustries.length>1 && i!=candidate.intrestedIndustries.length-1">,</span></span>
+      <span *ngFor="let industry of candidate.interestedIndustries;let i = index">{{industry}}<span *ngIf="candidate.interestedIndustries.length>1 && i!=candidate.interestedIndustries.length-1">,</span></span>
       <p>Experience</p>
       <span>{{candidate.professionalDetails.experience}}</span>
       <p>Current Location</p>
