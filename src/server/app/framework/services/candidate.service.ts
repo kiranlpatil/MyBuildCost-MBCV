@@ -1,6 +1,6 @@
 import * as fs from 'fs';
 import * as mongoose from "mongoose";
-import * as sort from "sort-object-array";
+//import * as sort from "sort-object-array";
 var config = require('config');
 import Messages = require("../shared/messages");
 import ProjectAsset = require("../shared/projectasset");
@@ -64,9 +64,9 @@ class CandidateService {
       }
       else{
           if(result.length>0){
-            result[0].academics = sort(result[0].academics, ['yearOfPassing'], ['desc']);
-            result[0].awards = sort(result[0].awards, ['year'], ['desc']);
-            result[0].certifications = sort(result[0].certifications, ['year'], ['desc']);
+  //          result[0].academics = sort(result[0].academics, ['yearOfPassing'], ['desc']);
+    //        result[0].awards = sort(result[0].awards, ['year'], ['desc']);
+      //      result[0].certifications = sort(result[0].certifications, ['year'], ['desc']);
             callback(null, result);
           }
       }
