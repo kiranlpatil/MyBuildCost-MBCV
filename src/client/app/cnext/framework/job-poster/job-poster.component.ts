@@ -119,7 +119,6 @@ export class JobPosterComponent {
 
   selectProficiency(proficiency:string[]) {
     this.jobPosterModel.profiencies = proficiency;
-    this.jobPosterModel.interestedIndustry = proficiency;
   }
 
   onCompentansiesandResponsibilitycomplete(data:any) {

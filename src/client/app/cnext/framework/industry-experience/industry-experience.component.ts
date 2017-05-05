@@ -35,6 +35,9 @@ export class IndustryExperienceListComponent {
         this.disableButton=false;
       }
     }
+    if(this.candidateExperiencedIndustry===undefined){
+      this.candidateExperiencedIndustry=new Array(0);
+    }
   }
 
   selectIndustryModel(industry:string,event:any) {
