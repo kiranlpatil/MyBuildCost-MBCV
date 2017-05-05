@@ -41,7 +41,7 @@ class CandidateSchema {
         issuedBy : String,
         remark : String
       }],
-      intrestedIndustries : {
+      interestedIndustries : {
         type: [String]
       },
       awards: [{
@@ -58,7 +58,8 @@ class CandidateSchema {
             complexities: [{
               scenarios: [{
                 isChecked : Boolean,
-                name: String
+                name: String,
+                code : String
               }],
               name: String
             }],

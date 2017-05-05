@@ -1,5 +1,4 @@
 import {Component} from "@angular/core";
-import {ShowJobFilterService} from "../showJobFilter.service";
 import {JobPosterModel} from "../model/jobPoster";
 import {JobPosterService} from "./job-poster.service";
 import {Role} from "../model/role";
@@ -10,6 +9,7 @@ import {Proficiences} from "../model/proficiency";
 import {Section} from "../model/candidate";
 import {LocalStorage} from "../../../framework/shared/constants";
 import {LocalStorageService} from "../../../framework/shared/localstorage.service";
+import {ShowQcardviewService} from "../showQCard.service";
 
 
 @Component({
@@ -28,6 +28,7 @@ export class JobPosterComponent {
   private rolesForComplexity:Role[] = new Array(0);
   private isCandidate:boolean = false;
   private disableButton:boolean = true;
+  private isShowCandidateQCardView:boolean = false;
   private isShowComplexity:boolean = false;
   private isShowRoleList:boolean = false;
   private isShowRoletype:boolean = false;
@@ -42,7 +43,7 @@ export class JobPosterComponent {
 
   constructor(private profileCreatorService:CandidateProfileService,
               private messageService:MessageService,
-              private showJobFilter:ShowJobFilterService,
+              private showQCardView:ShowQcardviewService,
               private jobPostService:JobPosterService) {
 
   }
@@ -78,7 +79,10 @@ export class JobPosterComponent {
   }
 
   mockupSearch() {
-    this.showJobFilter.change(true);
+    this.isShowCandidateQCardView=true;
+    this.showQCardView.change(true);
+
+
   }
 
   selectExperiencedIndustry(experiencedindustry:string[]) {
@@ -118,8 +122,7 @@ export class JobPosterComponent {
   }
 
   selectProficiency(proficiency:string[]) {
-    this.jobPosterModel.profiencies = proficiency;
-    this.jobPosterModel.interestedIndustry = proficiency;
+    this.jobPosterModel.proficiencies = proficiency;
   }
 
   onCompentansiesandResponsibilitycomplete(data:any) {

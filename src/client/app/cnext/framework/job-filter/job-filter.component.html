@@ -1,49 +1,50 @@
-<div class="filter-container" [hidden]="!isShowJobFilter" >
-  <p>Adjust these filters to get more numbers of candidates</p>
-  <div class="inner col-sm-12">
-    <label>Proficiency:
-      <div ng2-auto-complete
-           [source]="roles"
-           (ngModelChange)="selectRolesModel($event)">
-        <input class="form-control" [ngModel]="roleModel" placeholder="Select"/>
-      </div>
-    </label>
+<button type="button" class="btn btn-block" data-toggle="collapse" data-target="#filter-container">Filters</button>
+<div [hidden]="!isShowJobFilter">
+  <div id="filter-container" class="collapse filter-container">
+    <p class="info">Adjust these filters to get more numbers of candidates</p>
+    <div class="inner col-sm-12">
+      <label>Proficiency
+        <div ng2-auto-complete
+             [source]="roles"
+             (ngModelChange)="selectRolesModel($event)">
+          <input class="form-control" [ngModel]="roleModel" placeholder="Select"/>
+        </div>
+      </label>
 
-    <label>Domain:
-      <div ng2-auto-complete
-           [source]="roles"
-           (ngModelChange)="selectRolesModel($event)">
-        <input class="form-control" [ngModel]="roleModel" placeholder="Select"/>
-      </div>
-    </label>
+      <label>Domain
+        <div ng2-auto-complete
+             [source]="roles"
+             (ngModelChange)="selectRolesModel($event)">
+          <input class="form-control" [ngModel]="roleModel" placeholder="Select"/>
+        </div>
+      </label>
 
-    <label>Experience:
-      <div ng2-auto-complete
-           [source]="roles"
-           (ngModelChange)="selectRolesModel($event)">
-        <input class="form-control" [ngModel]="roleModel" placeholder="Select"/>
-      </div>
-    </label>
+      <label>Experience
+        <div ng2-auto-complete
+             [source]="roles"
+             (ngModelChange)="selectRolesModel($event)">
+          <input class="form-control" [ngModel]="roleModel" placeholder="Select"/>
+        </div>
+      </label>
 
-    <label>Complexity:
-      <div ng2-auto-complete
-           [source]="roles"
-           (ngModelChange)="selectRolesModel($event)">
-        <input class="form-control" [ngModel]="roleModel" placeholder="Select"/>
-      </div>
-    </label>
+      <label>Complexity
+        <div ng2-auto-complete
+             [source]="roles"
+             (ngModelChange)="selectRolesModel($event)">
+          <input class="form-control" [ngModel]="roleModel" placeholder="Select"/>
+        </div>
+      </label>
 
-    <label>Lead Time to Join:
-      <div ng2-auto-complete
-           [source]="roles"
-           (ngModelChange)="selectRolesModel($event)">
-        <input class="form-control" [ngModel]="roleModel" placeholder="Select"/>
-      </div>
-    </label>
+      <label>Lead Time to Join
+        <div ng2-auto-complete
+             [source]="roles"
+             (ngModelChange)="selectRolesModel($event)">
+          <input class="form-control" [ngModel]="roleModel" placeholder="Select"/>
+        </div>
+      </label>
 
-    <p>Salary Range:</p>
-    <div class="row">
-      <div class="col-sm-6">
+      <label>Salary Range</label>
+      <div class="col-sm-6 padding-right5">
         <label>
           <div ng2-auto-complete
                [source]="roles"
@@ -52,7 +53,7 @@
           </div>
         </label>
       </div>
-      <div class="col-sm-6">
+      <div class="col-sm-6 padding-left5">
         <label>
           <div ng2-auto-complete
                [source]="roles"
@@ -64,3 +65,4 @@
     </div>
   </div>
 </div>
+

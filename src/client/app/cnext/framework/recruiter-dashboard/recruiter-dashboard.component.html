@@ -1,7 +1,7 @@
 <cn-recruiter-header [jobCount]="jobCount" [companyName]="companyName"></cn-recruiter-header>
 
-<div class="container">
-  <div class="col-sm-12 recruiter-profile-wrapper">
+<div class="container recruiter-profile-wrapper">
+  <div class="col-sm-12">
 
     <ul class="nav nav-tabs">
       <li>
@@ -19,12 +19,11 @@
       <div id="post-new-job" class="tab-pane fade in active clearfix">
         <cn-job-poster></cn-job-poster>
 
-        <div class="col-sm-12">
-          <div class="col-sm-3 ">
-            <cn-job-filter></cn-job-filter>
-          </div>
-          <div class="col-sm-9 ">
-          </div>
+        <div class="col-sm-3">
+          <cn-job-filter></cn-job-filter>
+        </div>
+        <div class="col-sm-9">
+          <cn-q-card-view></cn-q-card-view>
         </div>
       </div>
     </div>

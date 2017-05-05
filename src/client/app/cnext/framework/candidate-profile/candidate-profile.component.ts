@@ -113,9 +113,9 @@ export class CandidateProfileComponent implements OnInit {
 
 
   ngOnInit() {
-    
 
-    
+
+
   }
 
   onProfileDescriptionComplete() {
@@ -178,11 +178,12 @@ export class CandidateProfileComponent implements OnInit {
     this.candidate.proficiencies = proficiency;
     this.saveCandidateDetails();
     this.whichStepsVisible[4] = true;
+    this.candidate.interestedIndustries
   }
 
   onExperienceIndustryComplete(experiencedindustry:string[]) {
     this.showProfessionalData=true;
-    this.candidate.intrestedIndustries = experiencedindustry;
+    this.candidate.interestedIndustries = experiencedindustry;
     this.saveCandidateDetails();
   }
 
@@ -320,7 +321,7 @@ export class CandidateProfileComponent implements OnInit {
         }
       }
     }
-    if(this.candidate.intrestedIndustries.length>0){
+    if(this.candidate.interestedIndustries.length>0){
       this.showIndustryExperience=true;
     }
 

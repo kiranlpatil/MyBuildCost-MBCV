@@ -37,13 +37,13 @@
     <div [hidden]="!isShowProficiency">
       <cn-compentacies-and-responsibilities [jobPosterModel]="jobPosterModel" [highlightedSection]="highlightedSection" (onComplete)="onCompentansiesandResponsibilitycomplete($event)" [hidden]="!isShowProficiency"></cn-compentacies-and-responsibilities>
     </div>
-
     <div class="button-group" [hidden]="!isShowProficiency">
-      <button type="submit" class="btn btn-primary" (click)="mockupSearch()" [disabled]="disableButton">Mock Search</button>
+      <button type="submit" class="btn btn-primary" (click)="mockupSearch()" >Mock Search</button><!--[disabled]="disableButton"-->
       <button type="submit" class="btn btn-danger" (click)="showHideModal()" [disabled]="disableButton">Post Job</button>
     </div>
   </div>
 </div>
+
 
 <div class="modal" [style.display]="getStyleModal()">
   <div class="modal-bg">

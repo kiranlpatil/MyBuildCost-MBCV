@@ -1,7 +1,6 @@
 $text-color: #666;
 $white: #fff;
 $instruction: #00aed5;
-$profile-section-shadow: rgba(204, 204, 204, 1);
 $error: #e82c0c;
 $border-color: #e8e8e8;
 $info: #999;
@@ -53,21 +52,6 @@ $theme-color: #3694d1;
     }
   }
 
-  .info {
-    font-size: 10px;
-    font-style: italic;
-    background: url('../../../assets/c-next/profile-creator/info.png')  no-repeat  0 0;
-    padding: 2px 0 2px 25px;
-    display: block;
-    margin: 0 0 10px;
-    color: $info;
-
-    ul {
-      padding: 0 0 0 10px;
-      margin-top: -6px;
-    }
-  }
-
   .btn {
     &:focus,
     &:active {
@@ -82,6 +66,13 @@ $theme-color: #3694d1;
     color: $text-color;
     font-size: 12px;
     padding: 6px 15px;
+
+    &:focus,
+    &:active,
+    &:hover {
+      border: 1px solid $theme-color;
+      box-shadow: 0 0 1px 0 #3694d1 inset, 0 0 1px 0 #3694d1;
+    }
   }
 
   .instructions {

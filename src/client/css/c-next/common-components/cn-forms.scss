@@ -69,6 +69,7 @@ $text-color: #666;
 
     .lable-name {
       margin-right: 15px;
+      min-width: 100px;
     }
   }
 
@@ -194,8 +195,8 @@ $text-color: #666;
 
       .radio-inline {
         color: $text-color;
-        display: inline-block;
-        margin: 0 20px 0 0;
+        display: block;
+        margin: 0 15px 0 0;
         width: auto;
       }
 

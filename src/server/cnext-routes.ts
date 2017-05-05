@@ -10,18 +10,20 @@ import * as recruiterController from './app/framework/controllers/recruiter.cont
 import * as jobProfileController from './app/framework/controllers/job-profile.controller';
 import * as sharedService from './app/framework/shared/shared.service';
 import * as userInterceptor from './app/framework/interceptor/user.interceptor';
+import {SearchController} from "./app/framework/search/controller/search.controller";
 var AuthInterceptor = require("./app/framework/interceptor/auth.interceptor");
 this.authInterceptor = new AuthInterceptor();
 
 
 export function cnextInit(app: express.Application) { //todo add interceptor to authenticate
+  var searchController = new SearchController();
   app.get("/api/industry",industryController.retrieve);
   app.post("/api/proficiency",proficienciesController.create);
   app.get("/api/proficiency",proficienciesController.retrieve);
   app.put("/api/proficiency",proficienciesController.update);
   app.get("/api/roletype",userController.getRoleTypes);
   app.post("/api/industry",industryController.create);
-  app.post("/api/filtered",jobProfileController.searchCandidatesByJobProfile);
+  app.post("/api/filtered",searchController.retrieve);
   app.put("/api/recruiter/:id/job",recruiterController.postJob);
   app.get("/api/industry/:id/role", roleController.retrieve );
   app.post("/api/candidate", userInterceptor.create, candidateController.create);
@@ -34,6 +36,5 @@ export function cnextInit(app: express.Application) { //todo add interceptor to 
   app.put("/api/recruiter/:id",recruiterController.updateDetails);
   app.get("/api/recruiter/:id",recruiterController.retrieve);
   app.get("/api/recruiter/jobProfile/:id",jobProfileController.retrieve);
-
-
+  app.post("/api/recruiter/candidate",searchController.retrieve);
 }

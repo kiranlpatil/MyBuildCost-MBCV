@@ -46,21 +46,22 @@ class JobProfileService {
     });
   }
 
-  retrieve(field: any, callback: (error: any, result: any) => void) {
-    this.recruiterRepository.retrieve(field, (err, res) => {
-      let isFound : boolean=false;
-      if (res.length > 0) {
-        let jobProfile = JSON.parse(JSON.stringify(field))
-        for (let item of res[0].postedJobs) {
-          console.log("in If condi "+JSON.stringify(field)+"==="+item._id)
-
-            if("58f9e8c004b81e852e17c209"===item._id.toString()){//new mongoose.Types.ObjectId(item._id)){
-              console.log("True condition");
-              callback(null,item);
+  retrieve(data: any, callback: (error: any, result: any) => void) {
+    let query = {
+      "postedJobs":{ $elemMatch: {"_id":new mongoose.Types.ObjectId(data.postedJob)}}
+    };
+    this.recruiterRepository.retrieve(query, (err, res) => {
+      if(err){
+        callback(new Error("Not Found Any Job posted"), null);
+      }
+      else {
+        if(res.length > 0)
+        {
+          for (let job of res[0].postedJobs) {
+            if (job._id.toString() === data.postedJob) {
+              callback(null, job);
             }
-        }
-        if(!isFound){
-          callback(new Error("Not Found Any Job posted"),null);
+          }
         }
       }
     });

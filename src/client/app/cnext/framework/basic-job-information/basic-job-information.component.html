@@ -24,7 +24,7 @@
           <div class="col-sm-4">
             <label>Educational Qualification</label>
             <control-messages [control]="jobPostForm.controls.education"></control-messages>
-            <select class="form-control" formControlName="education" >
+            <select formControlName="education" >
               <option *ngFor="let c of educationlist" [ngValue]="c">{{c}}</option>
             </select>
           </div>
@@ -32,7 +32,7 @@
           <div class="col-sm-4">
             <label>Experience Band</label>
             <control-messages [control]="jobPostForm.controls.experience"></control-messages>
-            <select class="form-control" formControlName="experience">
+            <select formControlName="experience">
               <option *ngFor="let c of experiencelist" [ngValue]="c">{{c}}</option>
             </select>
           </div>
@@ -40,7 +40,7 @@
           <div class="col-sm-4">
             <label>Salary Band</label>
             <control-messages [control]="jobPostForm.controls.salary"></control-messages>
-            <select class="form-control" formControlName="salary">
+            <select formControlName="salary">
               <option *ngFor="let c of salarylist" [ngValue]="c">{{c}}</option>
             </select>
           </div>
@@ -48,7 +48,7 @@
           <div class="col-sm-4">
             <label>Joining Period</label>
             <control-messages [control]="jobPostForm.controls.joiningPeriod"></control-messages>
-            <select class="form-control" formControlName="joiningPeriod">
+            <select formControlName="joiningPeriod">
               <option *ngFor="let c of noticeperiodlist" [ngValue]="c">{{c}}</option>
             </select>
           </div>
@@ -61,7 +61,7 @@
                 <div ng2-auto-complete
                      [source]="countries"
                      (ngModelChange)="selectCountryModel($event)">
-                  <input [ngModel]="jobPosterModel.location.country" [ngModelOptions]="{standalone: true}" class="form-control" placeholder="Country"/>
+                  <input [ngModel]="jobPosterModel.location.country" [ngModelOptions]="{standalone: true}" class="select" placeholder="Country"/>
                 </div>
               </div>
             </div>
@@ -70,7 +70,7 @@
                 <div ng2-auto-complete
                      [source]="states"
                      (ngModelChange)="selectStateModel($event)">
-                  <input id="statesAll" [ngModel]="jobPosterModel.location.state" [ngModelOptions]="{standalone: true}" class="form-control"
+                  <input id="statesAll" [ngModel]="jobPosterModel.location.state" [ngModelOptions]="{standalone: true}" class="select"
                          placeholder="State"/>
                 </div>
               </div>
@@ -80,7 +80,7 @@
                 <div ng2-auto-complete
                      [source]="cities"
                      (ngModelChange)="selectCityModel($event)">
-                  <input id="citiesAll" [ngModel]="jobPosterModel.location.cityName" [ngModelOptions]="{standalone: true}" class="form-control"
+                  <input id="citiesAll" [ngModel]="jobPosterModel.location.cityName" [ngModelOptions]="{standalone: true}" class="select"
                          placeholder="City"/>
                   <!-- <span  class="error-messages">Please select Country and State first.</span>-->
                 </div>

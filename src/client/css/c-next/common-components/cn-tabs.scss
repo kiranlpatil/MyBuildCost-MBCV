@@ -41,11 +41,20 @@ $white: #fff;
   border-bottom: 1px solid $border-color;
   border-left: 1px solid $border-color;
   border-right: 1px solid $border-color;
-  -moz-box-shadow: 0 0 1px 0 $profile-section-shadow;
-  -webkit-box-shadow: 0 0 1px 0 $profile-section-shadow;
   box-shadow: 0 0 1px 0 $profile-section-shadow;
+  padding-bottom: 15px;
 }
 
+
+@media only screen and (max-width: 1280px) {
+  .nav-tabs {
+    li:first-child {
+      a {
+        margin-left: 5px;
+      }
+    }
+  }
+}
 
 @media only screen and (max-width: 768px) {
   .nav-tabs {
@@ -68,6 +77,12 @@ $white: #fff;
         padding: 10px 5px;
         margin-right: 0;
         font-size: 11px;
+      }
+    }
+
+    li:first-child {
+      a {
+        margin-left: 0;
       }
     }
   }

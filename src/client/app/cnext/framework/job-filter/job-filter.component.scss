@@ -14,10 +14,8 @@ $profile-section-shadow: rgba(204, 204, 204, 1);
   .inner {
     border: 1px solid $border-color;
     background: $bg-tab-content;
-    -moz-box-shadow: 0 0 1px 0 $profile-section-shadow;
-    -webkit-box-shadow: 0 0 1px 0 $profile-section-shadow;
     box-shadow: 0 0 1px 0 $profile-section-shadow;
-    padding: 30px;
+    padding: 15px;
 
     p {
       margin: 0;
@@ -27,10 +25,10 @@ $profile-section-shadow: rgba(204, 204, 204, 1);
       color: $text-color;
       font-weight: 100;
       font-size: 14px;
-      margin: 0 0 20px 0;
+      margin: 10px 0 0 0;
       width: 100%;
 
-      &:last-child {
+      &:first-child {
         margin: 0;
       }
     }
@@ -42,7 +40,7 @@ $profile-section-shadow: rgba(204, 204, 204, 1);
     background-position: 95% 50%;
     border-radius: 0;
     box-shadow: none;
-    margin-top: 10px;
+    margin-top: 5px;
     padding: 6px;
     width: 100%;
 
@@ -53,10 +51,51 @@ $profile-section-shadow: rgba(204, 204, 204, 1);
   }
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (min-width: 768px) {
   .filter-container {
+    display: block;
+  }
+
+  button {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .filter-container {
+    border: 0;
+    background: $bg-tab-content;
+    box-shadow: none;
+
+    p {
+      margin: 0 10px;
+    }
+
+    .col-sm-6 {
+      padding: 0;
+    }
+
     .inner {
       padding: 10px;
+      border: 0;
+      background: transparent;
+      box-shadow: none;
+    }
+  }
+
+  button {
+    border: 0;
+    background: $bg-tab-content;
+    border-radius: 0;
+    padding: 6px 10px;
+    text-align: left;
+
+    &:focus,
+    &:active,
+    &:hover {
+      border: 0;
+      box-shadow: none;
+      outline: 0 !important;
     }
   }
 }

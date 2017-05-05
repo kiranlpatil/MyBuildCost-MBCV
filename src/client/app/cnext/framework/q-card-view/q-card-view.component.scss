@@ -1,0 +1,60 @@
+$border-color: #e8e8e8;
+$orange: #e77e22;
+
+.card-view {
+  clear: both;
+
+  .panel {
+    p {
+      border-bottom: 1px solid $border-color;
+      font-size: 12px;
+      margin: 0;
+      padding: 5px 5px 5px 30px;
+      position: relative;
+
+      img {
+        left: 0;
+        position: absolute;
+        top: 2px;
+      }
+
+      &:first-child {
+        margin-top: 7px;
+      }
+
+      &:last-child {
+        border-bottom: 0 solid $border-color;
+      }
+    }
+  }
+
+  .canvas-container {
+    float: right;
+    height: 110px;
+    position: relative;
+    transform: rotateY(180deg);
+    width: 110px;
+
+    .percentage {
+      color: $orange;
+    }
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .card-view {
+    .col-sm-4 {
+      width: 50%;
+    }
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .card-view {
+    .col-sm-4 {
+      width: 100%;
+    }
+  }
+}
+
+

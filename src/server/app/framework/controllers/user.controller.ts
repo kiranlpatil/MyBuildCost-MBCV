@@ -933,6 +933,17 @@ export function getNoticePeriod(req:express.Request, res:express.Response) {
   }
 }
 
+export function getSearchedCandidate(req:express.Request,res:express.Response){
+  __dirname ='./';
+  var filepath="candidate.json";
+  try{
+    res.sendFile(filepath,{root:__dirname});
+  }
+  catch (e){
+    res.status(403).send({message:e.message});
+  }
+
+}
 
 
 

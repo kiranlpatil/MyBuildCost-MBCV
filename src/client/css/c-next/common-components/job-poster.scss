@@ -1,3 +1,21 @@
+$info: #999;
+
+.info {
+  font-size: 10px;
+  font-style: italic;
+  background: url('../../../assets/c-next/profile-creator/info.png')  no-repeat  0 0;
+  padding: 2px 0 2px 25px;
+  display: block;
+  margin: 0 0 10px;
+  color: $info;
+
+  ul {
+    padding: 0 0 0 10px;
+    margin-top: -6px;
+  }
+}
+
+
 .recruiter-profile-wrapper {
   margin: 65px auto 15px;
 
@@ -14,8 +32,15 @@
   }
 }
 
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 1280px) {
+  .recruiter-profile-wrapper {
+    margin: 55px auto 10px;
+  }
+}
+
+@media only screen and (max-width: 1280px) {
   .candidate-profile-wrapper {
+    margin-top: 55px;
     padding: 0;
   }
 }

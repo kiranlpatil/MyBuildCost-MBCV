@@ -1,4 +1,5 @@
 $white: #fff;
+$border-color: #e8e8e8;
 
 .recruiter-profile-wrapper {
   .col-sm-3 {
@@ -7,6 +8,7 @@ $white: #fff;
 
   .col-sm-9 {
     width: 75%;
+    padding-left: 0;
   }
 }
 
@@ -17,24 +19,46 @@ $white: #fff;
 
 @media only screen and (max-width: 1280px) {
   .recruiter-profile-wrapper {
-    display: inline-block;
+    padding: 0;
+    width: 100%;
+
+    .col-sm-12 {
+      width: 100%;
+      display: inline-block;
+      padding: 0;
+    }
   }
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 1024px) {
   .recruiter-profile-wrapper {
-    .col-sm-3, .col-sm-9 {
-      float: none;
-      margin-bottom: 15px;
+    .col-sm-3 {
+      width: 30%;
+
+    }
+
+    .col-sm-9 {
+      width: 70%;
       padding: 0;
-      width: 100%;
     }
   }
 }
 
 @media only screen and (max-width: 767px) {
   .recruiter-profile-wrapper {
-    padding: 0;
-    width: 100%;
+    .col-sm-9 {
+      float: none;
+      padding: 0;
+      width: 100%;
+    }
+
+    .col-sm-3 {
+      float: none;
+      margin: 0 2%;
+      padding: 0;
+      width: 96%;
+      border: 1px solid $border-color;
+    }
   }
 }
+

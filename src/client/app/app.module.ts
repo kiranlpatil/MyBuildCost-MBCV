@@ -89,7 +89,6 @@ import {RoleTypeService} from "./cnext/framework/role-type/role-type.service";
 import {IndustryExperienceListComponent} from "./cnext/framework/industry-experience/industry-experience.component";
 import {IndustryExperienceService} from "./cnext/framework/industry-experience/industry-experience.service";
 import {DisableTestService} from "./cnext/framework/disable-service";
-import {ShowJobFilterService} from "./cnext/framework/showJobFilter.service";
 import {CandidateAwardService} from "./cnext/framework/awards/awards.service";
 import {AboutCandidateService} from "./cnext/framework/more-about-myself/more-about-myself.service";
 import {CandidateAcadmyDetailService} from "./cnext/framework/academic-details/academic-details.service";
@@ -113,6 +112,12 @@ import {BasicJobInformationComponent} from "./cnext/framework/basic-job-informat
 import {CompentansiesAndResponsibilitiesComponent} from "./cnext/framework/compentacies-and-responsibilities/compentacies-and-responsibilities.component";
 import {BasicJobInformationService} from "./cnext/framework/basic-job-information/basic-job-information.service";
 import {JobListerComponent} from "./cnext/framework/job-lister/job-lister.component";
+import {QCardviewComponent} from "./cnext/framework/q-card-view/q-card-view.component";
+import {QCardViewService} from "./cnext/framework/q-card-view/q-card-view.service";
+import {SortPipe} from "./cnext/framework/q-card-view/q-card-view.pipe";
+import {ProgressBarComponent} from "./cnext/framework/progress-bar/progress-bar.component";
+import {ShowQcardviewService} from "./cnext/framework/showQCard.service";
+import {jobListerSortPipe} from "./cnext/framework/job-lister/job-lister.pipe";
 import {RecruiterDashboardService} from "./cnext/framework/recruiter-dashboard/recruiter-dashboard.service";
 
 
@@ -187,11 +192,15 @@ import {RecruiterDashboardService} from "./cnext/framework/recruiter-dashboard/r
     CompanyDetailsComponent,
     MoreAboutMyselfComponent,
     RecruiterDashboardComponent,
+    ProgressBarComponent,
     WorkAreaComponent,
     RecruiterHeaderComponent,
     RoleTypetListComponent,
     IndustryExperienceListComponent,
-    JobListerComponent
+    JobListerComponent,
+    QCardviewComponent,
+    SortPipe,
+    jobListerSortPipe
 
   ],
   providers: [
@@ -248,13 +257,14 @@ import {RecruiterDashboardService} from "./cnext/framework/recruiter-dashboard/r
     RoleTypeService,
     IndustryExperienceService,
     DisableTestService,
-    ShowJobFilterService,
+    ShowQcardviewService,
     CandidateAwardService,
     AboutCandidateService,
     JobPosterService,
     CandidateAcadmyDetailService,
     CandidateProfileService,
     RecruiterDashboardService,
+    QCardViewService
 
   ],
   bootstrap: [AppComponent]

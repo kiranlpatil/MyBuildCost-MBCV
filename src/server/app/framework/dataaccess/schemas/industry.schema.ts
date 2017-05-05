@@ -21,7 +21,8 @@ class IndustrySchema {
             capabilities : [{
               complexities:[{
                 scenarios:[{
-                  name:String
+                  name:String,
+                  code: String
                 }],
                 name: String
               }],

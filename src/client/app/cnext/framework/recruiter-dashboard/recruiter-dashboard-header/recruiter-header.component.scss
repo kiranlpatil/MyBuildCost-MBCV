@@ -2,9 +2,6 @@ $white: #fff;
 
 .page-header {
   .user-info {
-    position: absolute;
-    left: 15px;
-
     img {
       width: auto;
       height: 40px;
@@ -21,6 +18,48 @@ $white: #fff;
       white-space: pre-wrap;
       text-overflow: clip;
       overflow: auto;
+      font-size: 14px;
+    }
+  }
+
+  .job-posted {
+    color: #fff;
+
+    p {
+      margin: 0;
+      color: #fff;
+      font-size: 10px;
+      line-height: 12px;
+    }
+
+    span {
+      font-size: 20px;
+      line-height: 27px;
+    }
+
+    img {
+      margin-top: -9px;
+    }
+  }
+}
+@media only screen and (max-width: 1280px) {
+  .page-header {
+    .container {
+      width: 100%;
+    }
+
+    .user-info {
+      padding: 0;
+    }
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .page-header {
+    .user-info {
+      h4 {
+        display: none;
+      }
     }
   }
 }

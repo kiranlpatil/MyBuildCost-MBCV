@@ -34,6 +34,7 @@ export function init(app: express.Application) {
     app.get("/api/experience", userController.getExperience);
     app.get("/api/currentsalary", userController.getCurrentSalary);
     app.get("/api/noticeperiod", userController.getNoticePeriod);
+    app.get("/api/searchedcandidate/jobPosterModel", userController.getSearchedCandidate);
 
 
     app.get("/api/fblogin", this.authInterceptor.facebookAuth, userController.fblogin);

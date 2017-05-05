@@ -57,7 +57,20 @@ class CandidateService {
   }
 
   retrieve(field: any, callback: (error: any, result: any) => void) {
-    this.candidateRepository.retrieve(field, callback);
+    this.candidateRepository.retrieve(field, (err, result)=>{
+      if(err){
+          callback(err, null);
+      }
+      else{
+          if(result.length>0){
+            result[0].academics = result[0].academics.sort(function(a,b){return b.yearOfPassing - a.yearOfPassing});
+            result[0].awards = result[0].awards.sort(function(a,b){return b.year - a.year});
+            result[0].certifications = result[0].certifications.sort(function(a,b){return b.year - a.year});
+
+            callback(null, result);
+          }
+      }
+    });
   }
 
   findById(id: any, callback: (error: any, result: any) => void) {

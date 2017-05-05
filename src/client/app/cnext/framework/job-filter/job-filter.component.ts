@@ -1,5 +1,6 @@
 import {  Component  } from '@angular/core';
-import { ShowJobFilterService } from '../showJobFilter.service';
+import { ShowQcardviewService } from '../showQCard.service';
+import {QCardViewService} from "../q-card-view/q-card-view.service";
 
 
 @Component({
@@ -11,8 +12,8 @@ import { ShowJobFilterService } from '../showJobFilter.service';
 
 export class JobFilterComponent {
   private isShowJobFilter:boolean=false;
-  constructor( private showJobFilter:ShowJobFilterService) {
-    this.showJobFilter.showJobFilter$.subscribe(
+  constructor(private showQCardview:ShowQcardviewService) {
+    this.showQCardview.showJobQCardView$.subscribe(
       data=> {
         this.isShowJobFilter=data;
       }

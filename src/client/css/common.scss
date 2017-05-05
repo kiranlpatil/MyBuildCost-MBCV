@@ -187,7 +187,25 @@ a {
 
 //Forms
 
-select {
+select,
+.select {
+  appearance:none;
+  -moz-appearance:none;
+  -webkit-appearance:none;
+  background: url('../assets/framework/images/form/drop-down.png') no-repeat;
+  background-color: $white;
+  background-position: 95% 50%;
+  border: 1px solid $border-grey;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 6px;
+  width: 100%;
+
+  &:focus,
+  &:active {
+    outline: none;
+  }
+
   option {
     color: #666;
     font-weight: 900;
@@ -246,6 +264,10 @@ select {
     appearance: none;
     margin: 0;
   }
+}
+
+[type='radio'] {
+  width: 20px;
 }
 
 //Buttons

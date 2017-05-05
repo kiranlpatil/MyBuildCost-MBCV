@@ -1,15 +1,8 @@
 import * as express from "express";
-import * as multiparty from "multiparty";
 import AuthInterceptor = require("../interceptor/auth.interceptor");
-import SendMailService = require("../services/sendmail.service");
-import UserModel = require("../dataaccess/model/user.model");
 import Messages = require("../shared/messages");
-import ResponseService = require("../shared/response.service");
 import CandidateModel = require("../dataaccess/model/candidate.model");
 import CandidateService = require("../services/candidate.service");
-import EmployeeHistoryService = require("../services/employee-history.service");
-import ProfessionalDetailsService = require("../services/professional-details.service");
-import AcademicService = require("../services/academics.service");
 import UserService = require("../services/user.service");
 import * as mongoose from "mongoose";
 

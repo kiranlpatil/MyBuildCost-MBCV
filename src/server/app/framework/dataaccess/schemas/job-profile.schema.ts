@@ -33,7 +33,7 @@ class JobProfileSchema {
       salary :{
         type : String
       },
-      profiences :{
+      proficiencies :{
         names : [String]
       },
       industry:{
@@ -44,7 +44,8 @@ class JobProfileSchema {
             complexities: [{
               scenarios: {
                 isChecked : Boolean,
-                name: String
+                name: String,
+                code:String
               },
               name: String
             }],
@@ -61,7 +62,7 @@ class JobProfileSchema {
       postingDate :{
         type : Date
       },
-      interestedIndustry:[{type:String}]
+      interestedIndustries:[{type:String}]
 
     },{ versionKey: false });
 
