@@ -63,9 +63,9 @@ class CandidateService {
       }
       else{
           if(result.length>0){
-            result[0].academics = result[0].academics.sort(function(a,b){return b.yearOfPassing - a.yearOfPassing});
-            result[0].awards = result[0].awards.sort(function(a,b){return b.year - a.year});
-            result[0].certifications = result[0].certifications.sort(function(a,b){return b.year - a.year});
+            result[0].academics = result[0].academics.sort(function(a:any,b:any){return b.yearOfPassing - a.yearOfPassing});
+            result[0].awards = result[0].awards.sort(function(a:any,b:any){return b.year - a.year});
+            result[0].certifications = result[0].certifications.sort(function(a:any,b:any){return b.year - a.year});
 
             callback(null, result);
           }
