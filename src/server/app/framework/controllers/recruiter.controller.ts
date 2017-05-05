@@ -77,7 +77,7 @@ export function create(req: express.Request, res: express.Response, next: any) {
 export function postJob(req: express.Request, res: express.Response, next: any) {
   try {
     var newJob: JobProfileModel = <JobProfileModel>req.body;
-    console.log(newJob);
+
     var recruiterService = new RecruiterService();
     var userId = req.params.id;
     recruiterService.update(userId, newJob, (err, result) => {
@@ -90,9 +90,7 @@ export function postJob(req: express.Request, res: express.Response, next: any) 
       } else {
         res.status(200).send({
           "status": Messages.STATUS_SUCCESS,
-          "data": {
-            "_id": userId,
-          }
+          "data": result
         });
       }
     });

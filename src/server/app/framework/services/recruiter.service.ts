@@ -79,15 +79,28 @@ class RecruiterService {
   }
 
   update(_id: string, item: any, callback: (error: any, result: any) => void) { //Todo change with candidate_id now it is a user_id operation
-
-    this.recruiterRepository.retrieve({"userId":new mongoose.Types.ObjectId(_id)}, (err, res) => {
-      if (err) {
-        callback(err, res);
-      }
-      else {
-        this.recruiterRepository.pushInJobpost(res[0]._id, item, callback);
-      }
-    });
+    this.recruiterRepository.findOneAndUpdate({"userId":new mongoose.Types.ObjectId(_id)},
+      {$push:{postedJobs:item.postedJobs}},
+      {"new":true, select: {
+        postedJobs: {
+          $elemMatch:{"postingDate": item.postedJobs.postingDate}
+        }
+      }},
+      function(err, record){
+        if(record){
+          console.log("Updated record "+ JSON.stringify(record));
+          callback(null, record);
+        }else{
+          var error;
+          if(record === null){
+            error = new Error("Unable to update posted job maybe recruiter not found. ");
+            callback(error, null);
+          }
+          else{
+            callback(err, null);
+          }
+        }
+      });
   }
 
   updateDetails(_id: string, item: any, callback: (error: any, result: any) => void) {
