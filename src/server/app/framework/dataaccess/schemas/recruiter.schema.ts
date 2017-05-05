@@ -56,7 +56,8 @@ class RecruiterSchema {
                   complexities: [{
                     scenarios: [{
                       name: String,
-                      isChecked : Boolean
+                      isChecked : Boolean,
+                      code: String
                     }],
                     name: String
                   }],
