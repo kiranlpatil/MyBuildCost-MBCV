@@ -91,7 +91,7 @@ class RecruiterService {
           console.log("Updated record "+ JSON.stringify(record));
           callback(null, record);
         }else{
-          var error;
+          let  error : any;
           if(record === null){
             error = new Error("Unable to update posted job maybe recruiter not found. ");
             callback(error, null);
