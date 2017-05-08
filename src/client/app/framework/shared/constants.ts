@@ -129,6 +129,7 @@ export class API {
   public static LOGIN = 'login';
   public static FB_LOGIN = 'fbLogin';
   public static SEARCHED_CANDIDATE = 'searchedcandidate';
+  public static SEARCH_CANDIDATE = 'recruiter/candidate';
   public static CHANGE_PASSWORD = 'changepassword';
   public static CHANGE_MOBILE = 'changemobilenumber';
   public static CHANGE_EMAIL = 'changeemailid';
