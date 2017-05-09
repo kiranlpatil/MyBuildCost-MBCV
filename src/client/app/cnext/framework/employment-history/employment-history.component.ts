@@ -47,7 +47,7 @@ export class EmploymentHistoryComponent {
     else {
       this.isButtonShow = true;
     }
-    if (changes.candidate.currentValue != undefined) {debugger
+    if (changes.candidate.currentValue != undefined) {
       this.candidate = changes.candidate.currentValue;
       this.isShowError = false;
     }

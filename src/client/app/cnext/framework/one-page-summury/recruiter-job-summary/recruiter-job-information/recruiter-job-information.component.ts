@@ -2,9 +2,6 @@ import {Component,  Input} from "@angular/core";
 import {JobSummary} from "../../../model/jobSummary";
 import {ImagePath} from "../../../../../framework/shared/constants";
 
-
-
-
 @Component({
   moduleId: module.id,
   selector: 'cn-recruiter-job-information',
@@ -24,5 +21,4 @@ export class RecruiterJobInformation  {
       this.image_path=this.recruiter.company_logo;
     }
   }
-  
 }

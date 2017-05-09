@@ -1,6 +1,6 @@
 import {Component, OnInit} from "@angular/core";
 import {Router} from "@angular/router";
-import {NavigationRoutes, ImagePath} from "../../../../framework/shared/constants";
+import {NavigationRoutes} from "../../../../framework/shared/constants";
 import {RecruiterDashboardService} from "../../recruiter-dashboard/recruiter-dashboard.service";
 import {JobSummary} from "../../model/jobSummary";
 

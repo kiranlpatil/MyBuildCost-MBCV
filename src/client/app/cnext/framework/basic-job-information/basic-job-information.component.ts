@@ -87,7 +87,7 @@ export class BasicJobInformationComponent {
     }
   }
 
-  selectCountryModel(country:any) {debugger
+  selectCountryModel(country:any) {
     this.storedLoaction.country=country;
     for(let item of this.locationDetails) {
       if(item.country===country) {
