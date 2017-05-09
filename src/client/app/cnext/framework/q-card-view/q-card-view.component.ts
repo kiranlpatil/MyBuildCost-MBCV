@@ -1,4 +1,4 @@
-import {Component} from "@angular/core";
+import {Component,Input} from "@angular/core";
 import {CandidateQCard} from "../model/candidateQcard";
 import {ShowQcardviewService} from "../showQCard.service";
 import {QCardViewService} from "./q-card-view.service";
@@ -18,20 +18,25 @@ export class QCardviewComponent  {
   private matches:number;
   private qCardModel:QCardsortBy = new QCardsortBy();
   private isShowQCardView:boolean;
-
+  @Input() private jobPosterModel :JobPosterModel;
   constructor(private qCardViewService:QCardViewService, private showQCardview:ShowQcardviewService) {
     this.showQCardview.showJobQCardView$.subscribe(
       data=> {
-        this.showQCardView(data);
+        this.jobPosterModel=data;
+        this.showQCardView();
       }
     );
 
   }
+  ngOnChanges(changes :any){debugger
+        if(changes.jobPosterModel.currentValue){
+              this.showQCardView();
+        }
+  }
 
-  showQCardView(jobPosterModel:JobPosterModel) {
+  showQCardView() {
       this.isShowQCardView=true;
-      console.log(jobPosterModel.toString());
-      this.qCardViewService.getSearchedcandidate(jobPosterModel)
+      this.qCardViewService.getSearchedcandidate(this.jobPosterModel)
         .subscribe(
           data => {
             this.candidates = data,

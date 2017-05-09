@@ -14,17 +14,24 @@
 
     <div class="tab-content">
       <div id="posted-job" class="tab-pane fade">
-          <cn-job-lister [jobListInput]="jobList"></cn-job-lister>
+        <div [hidden]="isJobSelected">
+          <cn-job-lister [jobListInput]="jobList" (jobEventEmitter)="jobSelected($event)"></cn-job-lister>
+        </div>
+        <div [hidden]="!isJobSelected" >
+          <button (click)="isJobSelected=false"> Back</button>
+          <div class="col-sm-3">
+            <cn-job-filter></cn-job-filter>
+          </div>
+          <div class="col-sm-9">
+            <cn-q-card-view [jobPosterModel]="selectedJobProfile"></cn-q-card-view>
+          </div>
+        </div>
+
       </div>
       <div id="post-new-job" class="tab-pane fade in active clearfix">
         <cn-job-poster></cn-job-poster>
 
-        <div class="col-sm-3">
-          <cn-job-filter></cn-job-filter>
-        </div>
-        <div class="col-sm-9">
-          <cn-q-card-view></cn-q-card-view>
-        </div>
+
       </div>
     </div>
   </div>

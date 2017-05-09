@@ -3,6 +3,7 @@ import {Router} from "@angular/router";
 import {LocalStorageService} from "../../../framework/shared/localstorage.service";
 import {LocalStorage, ImagePath, AppSettings, NavigationRoutes} from "../../../framework/shared/constants";
 import {RecruiterDashboardService} from "./recruiter-dashboard.service";
+import {JobPosterModel} from "../model/jobPoster";
 
 @Component({
   moduleId: module.id,
@@ -18,6 +19,8 @@ export class RecruiterDashboardComponent implements OnInit {
   private jobList: any[] = new Array(0);
   private jobCount: any;
   private companyName: any;
+  private selectedJobProfile : JobPosterModel;
+  private isJobSelected: boolean;
 
   constructor(private _router: Router, private recruiterDashboardService: RecruiterDashboardService) {
     this.recruiterDashboardService.getJobList()
@@ -44,6 +47,11 @@ export class RecruiterDashboardComponent implements OnInit {
       this.uploaded_image_path = this.uploaded_image_path.substring(4, this.uploaded_image_path.length - 1).replace('"', '');
       this.uploaded_image_path = AppSettings.IP + this.uploaded_image_path;
     }
+  }
+
+  jobSelected(job : any){
+      this.isJobSelected=true;
+      this.selectedJobProfile = job;
   }
 
   logOut() {

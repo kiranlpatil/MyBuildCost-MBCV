@@ -10,7 +10,7 @@
   </header>
 
   <div class="col-sm-12 list-view" *ngIf="jobListInput.length > 0">
-    <div class="panel clearfix" *ngFor="let item of jobListInput | orderBy:format">
+    <div class="panel clearfix" *ngFor="let item of jobListInput | orderBy:format" (click)="onJobClikecd(item)">
       <div class="col-sm-6 no-padding job-posted clearfix">
         <div class="col-xs-2 no-padding">
           <p><span>52</span></p>Matches
