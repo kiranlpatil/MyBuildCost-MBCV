@@ -40,6 +40,9 @@ export class JobPosterComponent {
   private jobForComplexity:Role[] = new Array(0);
   private flag:boolean = true;
   private highlightedSection:Section = new Section();
+  private address :any;
+  private country : any;
+  private state :any;
 
   constructor(private profileCreatorService:CandidateProfileService,
               private messageService:MessageService,
@@ -77,6 +80,10 @@ export class JobPosterComponent {
 
   showHideModal() {
     this.showModalStyle = !this.showModalStyle;
+  }
+
+  getAddress(event :any){
+    this.state =event.formatted_address;
   }
 
   getStyleModal() {

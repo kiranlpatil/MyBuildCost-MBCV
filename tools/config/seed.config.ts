@@ -372,6 +372,12 @@ export class SeedConfig {
    */
   SYSTEM_CONFIG_DEV: any = {
     defaultJSExtensions: true,
+    transpiler: 'typescript', typescriptOptions: { emitDecoratorMetadata: true },
+    packageConfigPaths: [
+      `/node_modules/*/package.json`,
+      `/node_modules/**/package.json`,
+      `/node_modules/@angular/*/package.json`
+    ],
     paths: {
       [this.BOOTSTRAP_MODULE]: `${this.APP_BASE}${this.BOOTSTRAP_MODULE}`,
       '@angular/common': 'node_modules/@angular/common/bundles/common.umd.js',
@@ -393,12 +399,17 @@ export class SeedConfig {
       '@angular/router/testing': 'node_modules/@angular/router/bundles/router-testing.umd.js',
       'ng2-recaptcha': 'node_modules/ng2-recaptcha/ng2-recaptcha.js',
       'ng2-scroll-to': 'node_modules/ng2-scroll-to/index.js',
+      'ng2-google-place-autocomplete': 'node_modules/ng2-google-place-autocomplete/',
       'app/*': '/app/*',
       // For test config
       'dist/dev/*': '/base/dist/dev/*',
       '*': 'node_modules/*'
     },
     packages: {
+      'ng2-google-place-autocomplete': {
+        main: 'index.ts',
+        defaultExtension: 'ts'
+      }
     }
   };
 

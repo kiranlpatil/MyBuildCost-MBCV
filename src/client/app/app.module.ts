@@ -122,6 +122,7 @@ import {RecruiterDashboardService} from "./cnext/framework/recruiter-dashboard/r
 import {RecruiterJobSummaryComponent} from "./cnext/framework/one-page-summury/recruiter-job-summary/recruiter-job-summary.component";
 import {RecruiterJobInformation} from "./cnext/framework/one-page-summury/recruiter-job-summary/recruiter-job-information/recruiter-job-information.component";
 import {JobFilterService} from "./cnext/framework/job-filter/job-filter.service";
+import {GooglePlaceModule} from 'ng2-google-place-autocomplete';
 
 
 //C-NEXT IMPORTS
@@ -130,6 +131,7 @@ import {JobFilterService} from "./cnext/framework/job-filter/job-filter.service"
   imports: [
     BrowserModule,
     FormsModule,
+    GooglePlaceModule,
     RouterModule.forRoot(routes),
     HttpModule,
     ReactiveFormsModule,
