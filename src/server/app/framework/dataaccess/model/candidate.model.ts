@@ -27,5 +27,6 @@ interface CandidateModel {
   employmentHistory : EmployeeHistoryModel[];
   proficiencies : string[];
   secondaryCapability : string[];
+  lockedOn: Date;
 }
 export = CandidateModel;

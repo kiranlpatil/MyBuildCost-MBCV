@@ -115,6 +115,9 @@ class CandidateSchema {
       }],
       proficiencies: {
         type: [String]
+      },
+      lockedOn :{
+        type: Date
       }
 
     }, {versionKey: false});
