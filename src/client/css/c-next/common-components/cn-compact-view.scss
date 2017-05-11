@@ -3,6 +3,7 @@ $light-blue: #00aed5;
 $primary-option: #3694d1;
 $secondary-option: #81D4FA;
 $modal-bg: rgba(0, 0, 0, .2);
+$active-section: #a8de78;
 
 .modal-bg {
   background: $modal-bg;
@@ -24,10 +25,10 @@ $modal-bg: rgba(0, 0, 0, .2);
   z-index: 3;
   position: relative;
   border-radius: 0;
-  /*animation: fadein .5s;*/
+  animation: fadein .5s;
   margin: 7px 15px;
-  box-shadow: 2px 2px 4px 0 $modal-bg;
-  border: 1px solid $primary-option;
+  box-shadow: 1px 1px 1px 0 $modal-bg;
+  border: 1px solid $active-section;
   padding: 15px;
 }
 
@@ -35,7 +36,7 @@ $modal-bg: rgba(0, 0, 0, .2);
   clear: both;
   border: 1px solid $border-color;
   position: relative;
-  padding: 15px;
+  padding: 10px;
 
   .btn-edit {
     background: url("../assets/c-next/compact-view/editButton.png") no-repeat 50% 50%;
@@ -56,22 +57,20 @@ $modal-bg: rgba(0, 0, 0, .2);
 
   .glyphicon-lock {
     position: absolute;
-    top: 0px;
-    right: 5px;
+    top: 0;
+    right: 0;
     z-index: 4;
     height: 20px;
-    width: 20px;
+    width: 25px;
     background-color: #fff;
     color: #ccc;
     padding: 5px;
-    display: table;
   }
 
   .heading {
     background: none !important;
     padding: 0 !important;
-    margin-top: -7px !important;
-
+    margin: 5px 0 5px 0 !important;
   }
 
   .img-container {
@@ -107,49 +106,32 @@ $modal-bg: rgba(0, 0, 0, .2);
     color: $light-blue;
     padding: 0;
     min-width: 90px;
+    margin-bottom: 0;
   }
 
-  .select-option {
-    span{
-      border-radius: 25px;
-      color: #fff;
-      display: inline-block;
-      font-weight: 600;
-      font-size: 12px;
-      min-width: 100px;
-      padding: 4px 10px;
-      text-align: center;
-      text-transform: capitalize;
-    }
-
-    .primary {
-      background-color: $primary-option;
-      border: 1px solid $primary-option;
-      box-shadow: 0 0 1px 0 $primary-option inset, 0 0 1px 0 $primary-option;
-    }
-    .secondary {
-      background-color: $secondary-option;
-      border: 1px solid $secondary-option;
-      box-shadow: 0 0 1px 0 $secondary-option inset, 0 0 1px 0 $secondary-option;
-    }
+  .option {
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: capitalize;
+    padding: 0;
   }
 
   .content {
     border-bottom: 0 !important;
     padding-bottom: 0 !important;
+  }
 
-    span {
-      padding-left: 0;
-    }
+  span {
+    padding-left: 0;
   }
 
   ul {
     padding: 0 15px;
 
     li {
-      width: 50%;
+      width: 33%;
       float: left;
-      margin-bottom: 15px;
+      margin-bottom: 10px;
       text-transform: capitalize;
       list-style-image: url('../../../assets/c-next/compact-view/list-type.png');
     }
@@ -166,6 +148,16 @@ $modal-bg: rgba(0, 0, 0, .2);
   .compact-view {
     .btn-edit {
       opacity: 1;
+    }
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .compact-view {
+    ul {
+      li {
+        width: 50%;
+      }
     }
   }
 }
