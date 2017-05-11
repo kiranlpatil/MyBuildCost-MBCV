@@ -57,39 +57,13 @@
     </div>
   </div>
 
-  <div class="form-group">
-    <div ng2-auto-complete
-         [source]="countries"
-         (ngModelChange)="selectCountryModel($event)">
-      <input class="form-control" [(ngModel)]="countryModel" [ngModelOptions]="{standalone: true}" placeholder="Select Country"  required/>
-      <!--<label class="select-label">Select Country</label>-->
-    </div>
-  </div>
+
 
   <div class="form-group">
-    <div ng2-auto-complete
-         [source]="states"
-         (ngModelChange)="selectStateModel($event)">
-      <input id="states" class="form-control" [(ngModel)]="stateModel" [ngModelOptions]="{standalone: true}" (click)="selectCountryMessage()" placeholder="Select State" required/>
-      <!--<label class="select-label">Select State</label>-->
-      <span *ngIf="isCountrySelected" class="error-messages">Please select Country first.</span>
-    </div>
-  </div>
+    <control-messages [control]="userForm.controls.location"></control-messages>
 
-  <div class="form-group">
-    <div ng2-auto-complete
-         [source]="cities"
-         (ngModelChange)="selectCityModel($event)">
-      <input id="cities" class="form-control" [(ngModel)]="cityModel" [ngModelOptions]="{standalone: true}"  placeholder="Select City"  (click)="selectStateMessage()" required/>
+    <input type="text" formControlName="location" class="form-control select"  placeholder="Location" (setAddress) = "getAddress($event)" googleplace/>
 
-      <span *ngIf="isStateSelected" class="error-messages">Please select Country and State first.</span>
-    </div>
-  </div>
-
-  <div class="form-group" >
-    <control-messages [control]="userForm.controls.pin"></control-messages>
-    <input type="text" formControlName="pin" id="pin" class="form-control" maxlength="20" required/>
-    <label>PIN Code</label>
   </div>
 
   <div class="form-group recaptcha" >

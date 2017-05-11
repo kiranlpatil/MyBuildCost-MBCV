@@ -56,34 +56,11 @@
           <div class="col-sm-4">
             <label>Job Location</label>
             <control-messages [control]="jobPostForm.controls.location"></control-messages>
-            <input type="text" formControlName="location" class="form-control select"
-                   placeholder=""
-                   [options]="{types: ['(cities)'],componentRestrictions: { country: 'IN'  }}"
-                   [options]='options'
-                   (setAddress) = "getAddress($event)"
-                   (street_number) = 'street_number=$event'
-                   (street)= 'street=$event'
-                   (city)= 'city=$event'
-                   (state)='state=$event'
-                   (district)='district=$event'
-                   (country)='country=$event'
-                   (postal_code)='postal_code=$event'
-                   (lat)='lat=$event'
-                   (lng)='lng=$event'
-                   (adr_address)='adr_address=$event'
-                   (name)='name=$event'
-                   (place_id)='place_id=$event'
-                   (types)='types=$event'
-                   (url)='url=$event'
-                   (utc_offset)='utc_offset=$event'
-                   (vicinity)='vicinity=$event'
-                   (photos)='photos=$event'
-                   (airport)='airport=$event'
-                   (CountryCodes)='CountryCodes=$event'
-                   id="autocomplete"
-                   ng2-google-place-autocomplete/>
+
+            <input type="text" formControlName="location" class="form-control select"  placeholder="" (setAddress) = "getAddress($event)" googleplace/>
+
           </div>
-        </div>
+          </div>
       </div>
       <div class="roles section-container">
         <div class="clearfix">

@@ -10,7 +10,7 @@ import {LocalStorageService} from "../../shared/localstorage.service";
 import {LoaderService} from "../../shared/loader/loader.service";
 import {Http, Response} from "@angular/http";
 import {DateService} from "../../../cnext/framework/date.service";
-
+import {  Location  } from '../location';
 @Component({
   moduleId: module.id,
   selector: 'cn-candidate-registration',
@@ -19,15 +19,8 @@ import {DateService} from "../../../cnext/framework/date.service";
 })
 
 export class CandidateComponent implements OnInit {
-  countries: string[] = new Array(0);
-  states: string[] = new Array(0);
-  cities: string[] = new Array(0);
- // myPassword: string = '';
   private model = new CandidateDetail();
-  private storedcountry: string;
-  private storedstate: string;
-  private storedcity: string;
-  private locationDetails: any;  // TODO minimize coding to manage front end
+  private storedLoaction:Location=new Location();
   private isPasswordConfirm: boolean;
   private isFormSubmitted = false;
   private userForm: FormGroup;
@@ -35,16 +28,13 @@ export class CandidateComponent implements OnInit {
   private isShowErrorMessage: boolean = true;
   private BODY_BACKGROUND: string;
   private passingyear: string;
-  private isShowMessage: boolean = false;
-  private isStateSelected: boolean = false;
-  private isCountrySelected: boolean = false;
   private validBirthYearList = new Array();
   private year: any;
   private currentDate: any;
 
 
-  constructor(private commonService: CommonService, private _router: Router, private http: Http, private dateservice: DateService,
-              private candidateService: CandidateService, private messageService: MessageService, private formBuilder: FormBuilder, private loaderService: LoaderService) {
+  constructor(private commonService: CommonService, private _router: Router, private dateservice: DateService,
+              private candidateService: CandidateService, private messageService: MessageService, private formBuilder: FormBuilder) {
 
     this.userForm = this.formBuilder.group({
       'first_name': ['',ValidationService.requireFirstNameValidator],
@@ -54,15 +44,7 @@ export class CandidateComponent implements OnInit {
       'password': ['', [ValidationService.requirePasswordValidator, ValidationService.passwordValidator]],
       'confirm_password': ['', ValidationService.requireConfirmPasswordValidator],
       'birth_year': ['', [Validators.required, ValidationService.birthYearValidator]],
-      'location': [
-        {
-          'country': ['', Validators.required],
-          'state': ['', Validators.required],
-          'city': ['', Validators.required],
-          'pin': ['']
-        }
-        , Validators.required],
-      'pin': ['', [ValidationService.requirePinValidator,ValidationService.pinValidator]],
+      'location': ['', Validators.required],
       'captcha': ['', Validators.required]
     });
 
@@ -74,21 +56,6 @@ export class CandidateComponent implements OnInit {
 
   ngOnInit() {
     this.validBirthYearList = this.dateservice.createBirthYearList(this.year);
-    this.http.get('address')
-      .map((res: Response) => res.json())
-      .subscribe(
-        data => {
-          this.locationDetails = data.address;
-          for (var i = 0; i < data.address.length; i++) {
-            this.countries.push(data.address[i].country);
-            console.log(data.address[0].country);
-
-          }
-        },
-        err => console.error(err),
-        () => console.log()
-      );
-
   }
 
 
@@ -97,60 +64,18 @@ export class CandidateComponent implements OnInit {
     this.model.birth_year = newval;
   }
 
-  selectCountryModel(newval: string) {            //TODO:Use 2way binding.
-    this.states = new Array();
-    this.cities = new Array();
-    for (let item of this.locationDetails) {
-      if (item.country === newval) {
-        for (let state of item.states) {
-          this.states.push(state.name);
-        }
-      }
-    }
-    this.storedcountry = newval;
-    this.isCountrySelected = false;
-    let tempState: any = document.getElementById("states");
-    let tempCity: any = document.getElementById("cities");
-    tempState.value = '';
-    tempCity.value = '';
-  }
-
-  selectStateModel(newval: string) {      //TODO :USE 2way binding
-    this.cities = new Array();
-    for (let item of this.locationDetails) {
-      if (item.country === this.storedcountry) {
-        for (let state of item.states) {
-          if (state.name === newval) {
-            let tempCities: string[] = new Array(0);
-            for (let city of state.cities) {
-              tempCities.push(city);
-            }
-            this.cities = tempCities;
-          }
-        }
-      }
-    }
-    this.storedstate = newval;
-    this.isStateSelected = false;
-    let tempCity: any = document.getElementById("cities");
-    tempCity.value = '';
-  }
-
-  selectCityModel(newval: string) {
-
-    this.storedcity = newval;
+  getAddress(event :any){
+    this.storedLoaction.city= event.address_components[event.address_components.length - 3].long_name;
+    this.storedLoaction.state=event.address_components[event.address_components.length - 2].long_name;
+    this.storedLoaction.country=event.address_components[event.address_components.length - 1].long_name;
   }
 
   onSubmit() {
-
     this.model = this.userForm.value;
     this.model.current_theme = AppSettings.LIGHT_THEM;
     this.model.isCandidate = true;
-    this.model.location.country = this.storedcountry;
-    this.model.location.state = this.storedstate;
-    this.model.location.city = this.storedcity;
-    this.model.location.pin = this.model.pin;
-
+    this.model.location = this.storedLoaction;
+    console.log(this.model);
     if (!this.makePasswordConfirm()) {
 
       this.isFormSubmitted = true;
@@ -167,8 +92,6 @@ export class CandidateComponent implements OnInit {
     LocalStorageService.setLocalValue(LocalStorage.MOBILE_NUMBER, this.userForm.value.mobile_number);
     LocalStorageService.setLocalValue(LocalStorage.CHANGE_MAIL_VALUE, 'from_registration');
     LocalStorageService.setLocalValue(LocalStorage.FROM_CANDIDATE_REGISTRATION, 'true');
-
-    // this.userForm.reset();
     this._router.navigate([NavigationRoutes.VERIFY_USER]);
   }
 
@@ -181,22 +104,6 @@ export class CandidateComponent implements OnInit {
     } else {
       this.isShowErrorMessage = false;
       this.error_msg = error.err_msg;
-    }
-  }
-
-  selectStateMessage() {
-    if (this.storedstate) {
-      console.log("stord state is:", this.storedstate);
-    } else {
-      this.isStateSelected = true;
-    }
-  }
-
-  selectCountryMessage() {
-    if (this.storedcountry) {
-      console.log("stord state is:", this.storedcountry);
-    } else {
-      this.isCountrySelected = true;
     }
   }
 

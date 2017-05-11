@@ -2,7 +2,6 @@
 
 
   <div class="job-poster">
-    <input type="text" [(ngModel)] = "address"  (setAddress) = "getAddress($event)" googleplace/>
 
     <cn-basic-job-information [highlightedSection]="highlightedSection" [jobPosterModel]="jobPosterModel"
                               (onComplete)="onBasicJobInformationComplete($event)"></cn-basic-job-information>
@@ -29,7 +28,7 @@
                       (onComplete)="selectProficiency($event)" [hidden]="!isShowProficiency"></cn-proficiencies></div>
 
     <div id="industry-experience">
-    <cn-industry-experience [candidateExperiencedIndustry]="jobPosterModel.interestedIndustry"
+    <cn-industry-experience [candidateExperiencedIndustry]="jobPosterModel.interestedIndustries"
       [highlightedSection]="highlightedSection"
       (onComplete)="selectExperiencedIndustry($event)"
       [hidden]="!isShowProficiency"></cn-industry-experience></div>

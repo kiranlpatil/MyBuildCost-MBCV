@@ -66,12 +66,10 @@ export class BasicJobInformationComponent {
         });
   }
 
-  getAddress(event :any){debugger
-    this.address =event.formatted_address;
-    var addressArray=this.address.split(',');
-    this.storedLoaction.cityName=addressArray[0];
-    this.storedLoaction.state=addressArray[1];
-    this.storedLoaction.country=addressArray[2];
+  getAddress(event :any){
+    this.storedLoaction.cityName= event.address_components[event.address_components.length - 3].long_name;
+    this.storedLoaction.state=event.address_components[event.address_components.length - 2].long_name;
+    this.storedLoaction.country=event.address_components[event.address_components.length - 1].long_name;
   }
   
   selectIndustry(industry:Industry) {

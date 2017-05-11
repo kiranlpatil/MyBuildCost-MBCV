@@ -14,9 +14,9 @@ import {
  } from '../../shared/index';
 import {  ImagePath, LocalStorage  } from '../../shared/constants';
 import {  LocalStorageService  } from '../../shared/localstorage.service';
-import { LoaderService } from '../../shared/loader/loader.service';
 import { Http,Response } from '@angular/http';
 import { RecruitingService } from '../../shared/recruiting.service';
+import {  Location  } from '../location';
 
 
 @Component({
@@ -28,16 +28,9 @@ import { RecruitingService } from '../../shared/recruiting.service';
 
 export class RecruiterComponent implements OnInit {
   private model = new Recruiter();
-  private storedcountry:string;
-  private storedstate:string;
-  private storedcity:string;
   private storedcompanySize:any;
-  private locationDetails : any;
   private companySize :any;
   private companyHeadquarter:any;
-  private countries:string[]=new Array(0);
-  private states:string[]=new Array(0);
-  private cities:string[]=new Array(0);
   private isPasswordConfirm: boolean;
   private isFormSubmitted = false;
   private recruiterForm: FormGroup;
@@ -48,12 +41,12 @@ export class RecruiterComponent implements OnInit {
   private isRecruitingForself:boolean = true;
   private isShowMessage:boolean=false;
   private myPassword:string='';
-  private isStateSelected:boolean=false;
-  private isCountrySelected:boolean=false;
+  private storedLoaction:Location=new Location();
+  private address: any;
 
   constructor(private commonService: CommonService, private _router: Router, private http: Http,
               private recruiterService: RecruiterService, private recruitmentForService: RecruitingService,
-              private messageService: MessageService, private formBuilder: FormBuilder, private loaderService:LoaderService) {
+              private messageService: MessageService, private formBuilder: FormBuilder) {
 
     recruitmentForService.showRecruitmentFor$.subscribe(
       data=> {
@@ -68,15 +61,7 @@ export class RecruiterComponent implements OnInit {
       'email': ['',[ValidationService.requireEmailValidator, ValidationService.emailValidator]],
       'password': ['', [ValidationService.requirePasswordValidator, ValidationService.passwordValidator]],
       'confirm_password': ['', [ ValidationService.requireConfirmPasswordValidator]],
-      'location':[
-        {
-          'country':['',Validators.required],
-          'state':['',Validators.required],
-          'city':['',Validators.required],
-          'pin':[''],
-        },
-        Validators.required],
-      'pin':['',[ValidationService.requirePinValidator,ValidationService.pinValidator]],
+      'location':['',Validators.required],
       'company_headquarter_country':[''],
       'captcha':['',Validators.required]
 
@@ -88,20 +73,7 @@ export class RecruiterComponent implements OnInit {
   ngOnInit() {
     this.model = this.recruiterForm.value;
 
-    this.http.get('address')
-      .map((res: Response) => res.json())
-      .subscribe(
-        data => {
-          this.locationDetails=data.address;
-          for(var  i = 0; i <data.address.length; i++) {
-            this.countries.push(data.address[i].country);
-            console.log(data.address[0].country);
-
-          }
-        },
-        err => console.error(err),
-        () => console.log()
-      );
+   
 
     this.http.get('companysize')
       .map((res: Response) => res.json())
@@ -123,70 +95,29 @@ export class RecruiterComponent implements OnInit {
     this.model.company_size=this.recruiterForm.value.company_size;
   }
 
-  selectCountryModel(newval:string) {
-    this.states = new Array();
-    this.cities = new Array();
-    for(let item of this.locationDetails) {
-      if(item.country===newval) {
-        let tempStates: string[]= new Array(0);
-        for(let state of item.states) {
-          tempStates.push(state.name);
-        }
-        this.states=tempStates;
-      }
-    }
-    this.storedcountry=newval;
-    this.isCountrySelected=false;
-    let tempState: any = document.getElementById("allstates");
-    let tempCity: any = document.getElementById("allcities");
-    tempState.value = '';
-    tempCity.value = '';
-  }
 
-  selectCompanyHeadquarterModel(newval : string) {
-
-    this.companyHeadquarter=newval;
+  selectCompanyHeadquarterModel(event : any) {
+    this.companyHeadquarter=event.address_components[event.address_components.length - 1].long_name;
     this.recruiterForm.value.company_headquarter_country=this.companyHeadquarter;
   }
 
-  selectStateModel(newval:string) {
-    this.cities = new Array();
-    for(let item of this.locationDetails) {
-      if(item.country===this.storedcountry) {
-        for(let state of item.states) {
-          if(state.name===newval) {
-            let tempCities: string[]= new Array(0);
-            for(let city of state.cities) {
-              tempCities.push(city);
-            }
-            this.cities=tempCities;
-          }
-        }
-      }
-    }
-    this.storedstate=newval;
-    this.isStateSelected=false;
-    let tempCity: any = document.getElementById("allcities");
-    tempCity.value = '';
-  }
 
-  selectCityModel(newval : string) {
-    this.storedcity=newval;
-
+  getAddress(event :any){
+    this.storedLoaction.city= event.address_components[event.address_components.length - 3].long_name;
+    this.storedLoaction.state=event.address_components[event.address_components.length - 2].long_name;
+    this.storedLoaction.country=event.address_components[event.address_components.length - 1].long_name;
   }
+  
 
   onSubmit() {
     this.model = this.recruiterForm.value;
     this.model.current_theme = AppSettings.LIGHT_THEM;
-
-    this.model.location.country =this.storedcountry;
-    this.model.location.state = this.storedstate;
-    this.model.location.city = this.storedcity;
-    this.model.location.pin = this.model.pin;
+    this.model.location=this.storedLoaction;
     this.model.isCandidate =false;
     this.model.company_size=this.storedcompanySize;
     this.model.company_headquarter_country =this.companyHeadquarter;
     this.model.isRecruitingForself =this.isRecruitingForself;
+    console.log(this.model);
     if (!this.makePasswordConfirm()) {
       this.isFormSubmitted = true;
       this.recruiterService.addRecruiter(this.model)
@@ -202,7 +133,6 @@ export class RecruiterComponent implements OnInit {
     LocalStorageService.setLocalValue(LocalStorage.COMPANY_NAME, this.recruiterForm.value.company_name);
     LocalStorageService.setLocalValue(LocalStorage.CHANGE_MAIL_VALUE, 'from_registration');
     LocalStorageService.setLocalValue(LocalStorage.FROM_CANDIDATE_REGISTRATION, 'false');
-   // this.recruiterForm.reset();
     this._router.navigate([NavigationRoutes.VERIFY_USER]);
   }
 
@@ -218,24 +148,7 @@ export class RecruiterComponent implements OnInit {
     }
   }
 
-  selectStateMessage() {
-
-    if (this.storedstate) {
-    } else {
-      this.isStateSelected = true;
-
-    }
-  }
-
-  selectCountryMessage() {
-
-    if (this.storedcountry) {
-      console.log("stord state is:", this.storedstate);
-    } else {
-      this.isCountrySelected = true;
-
-    }
-  }
+  
 
   goBack() {
     this.commonService.goBack();
