@@ -8,5 +8,5 @@ export class CandidateQCard {
   matching : number;
   salary : string;
   experience : string;
-  location : LocationModel;
+  location : string;
 }

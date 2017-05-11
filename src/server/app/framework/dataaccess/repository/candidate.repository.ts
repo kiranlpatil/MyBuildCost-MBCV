@@ -46,7 +46,7 @@ class CandidateRepository extends RepositoryBase<ICandidate> {
       }
       candidate_card_view.salary = candidate.professionalDetails.currentSalary;
       candidate_card_view.experience = candidate.professionalDetails.experience;
-      candidate_card_view.location.cityName = candidate.professionalDetails.relocate;
+      candidate_card_view.location = candidate.professionalDetails.relocate;
       card_view_candidates.push(candidate_card_view);
       if (card_view_candidates.length == candidates.length) {
         callback(null, card_view_candidates);
