@@ -1,5 +1,5 @@
 <header class="page-header">
-  <div class="container">
+  <div class="container-fluid">
     <div class="cn-logo">
       <img src="assets/c-next/header/cnext-logo-white.png" alt="logo"/>
     </div>
@@ -10,6 +10,18 @@
       </li>
       <li>
         <img src="assets/c-next/icons/pdf-icon.png" alt="pdf"/><span class="hidden-xs">Generate Pdf</span>
+      </li>
+    </ul>
+    <ul class="logout-dropdown">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle drop-down" data-toggle="dropdown" >
+          <img src="assets/framework/images/dashboard/3dots.png">
+        </a>
+        <ul class="dropdown-menu">
+          <li>
+            <a (click)="logOut()"><b>Logout</b></a>
+          </li>
+        </ul>
       </li>
     </ul>
   </div>
