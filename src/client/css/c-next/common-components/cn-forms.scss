@@ -116,7 +116,7 @@ $text-color: #666;
       padding: 0;
 
       &:focus ~ label,
-      &.ng-touched ~ label {
+      &.ng-dirty ~ label {
         font-size: 12px;
         top: -15px;
       }
@@ -124,7 +124,7 @@ $text-color: #666;
 
     select {
       &:focus ~ label,
-      &.ng-touched ~ label {
+      &.ng-dirty ~ label {
         font-size: 12px;
         top: -15px;
       }

@@ -25,13 +25,16 @@ $white: #fff;
     }
   }
 
-  .job-posted {
-    color: #fff;
-    width: auto;
+  .job-posted > li {
+    color: $white;
+    width: 12%;
+    float: left;
+    list-style: none;
+    padding-right: 10px;
 
     p {
       margin: 0;
-      color: #fff;
+      color: $white;
       font-size: 10px;
       line-height: 12px;
     }
@@ -54,6 +57,13 @@ $white: #fff;
 
     .user-info {
       padding: 0;
+    }
+  }
+}
+@media only screen and (max-width: 980px) {
+  .page-header {
+    .job-posted > li {
+      width: 17%;
     }
   }
 }

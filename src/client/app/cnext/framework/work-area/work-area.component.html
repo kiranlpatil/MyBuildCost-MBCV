@@ -1,41 +1,41 @@
+<div class="section-container" >
+  <div class="main-content clearfix modal-content" *ngIf="highlightedSection.name=='Work-Area'">
+    <h4 class="heading">Select Area of Work (Max 3)</h4>
+    <div class="work-area col-sm-12">
+      <p class="info">
+        Select those areas of work which describe what you are best at or where you would like to position your career.
+      </p>
+      <div class="select-option" *ngFor="let item of roles;let i = index">
+        <label>
+          <input type="checkbox" name="choices"
+                 value="{{item.name}}" (click)="selectOption(item,$event)"
+                 [checked]="isSelected(item.name)"/>
+          <span>{{item.name}}</span>
+        </label>
+        <div class="error-messages" *ngIf="alert">You have selected maximum work areas.</div>
+      </div>
 
-  <div class="section-container" >
-    <div class="main-content clearfix modal-content" *ngIf="highlightedSection.name=='Work-Area'">
-      <h4 class="heading">Select Area of Work (Max 3)</h4>
-      <div class="work-area col-sm-12">
-        <p class="info">
-          Select those areas of work which describe what you are best at or where you would like to position your
-          career.
-        </p>
-        <div class="select-option" *ngFor="let item of roles;let i = index">
-          <label>
-            <input type="checkbox" name="choices"
-                   value="{{item.name}}" (click)="selectOption(item,$event)"
-                   [checked]="isSelected(item.name)"/>
-            <span>{{item.name}}</span>
-          </label>
-          <div class="error-messages" *ngIf="alert">You have selected maximum work areas.</div>
-        </div>
-
-        <div class="button-group clearfix">
-          <button class="btn btn-primary" scrollTo scrollTargetSelector="#capability-area" (click)="onNext()" >
-            Next
-          </button>
-        </div>
+      <div class="button-group clearfix">
+        <button class="btn btn-primary" scrollTo scrollTargetSelector="#capability-area" (click)="onNext()" >
+          Next
+        </button>
       </div>
     </div>
-
-    <div class="main-content" *ngIf="highlightedSection.name!='Work-Area'">
-      <div class="compact-view clearfix">
-        <button  class="btn-edit" (click)="highlightedSection.name='Work-Area';disableButton=false" [hidden]="highlightedSection.isLocked"></button>
-         <span class="glyphicon glyphicon-lock" title="you can edit this field after {{highlightedSection.date| date:'shortDate'}}" *ngIf="highlightedSection.isLocked"></span>
-        <h4 class="heading">Area Of Work</h4>
-        <div class="select-option" *ngFor="let item of selectedRoles">
-          <span class="primary">{{item.name}}</span>
-        </div>
-      </div>
-    </div>
-
-    <!--<div [class.modal-bg]="highlightedSection.name!='Work-Area'"></div>-->
   </div>
+
+  <div class="main-content" *ngIf="highlightedSection.name!='Work-Area'">
+    <div class="compact-view clearfix">
+      <button  class="btn-edit" (click)="highlightedSection.name='Work-Area';disableButton=false" [hidden]="highlightedSection.isLocked"></button>
+       <span class="glyphicon glyphicon-lock" title="you can edit this field after {{highlightedSection.date| date:'shortDate'}}" *ngIf="highlightedSection.isLocked"></span>
+      <div class="col-md-2 col-sm-3 padding-right15">
+        <h4 class="heading">Area Of Work</h4>
+      </div>
+      <div class="col-md-10 col-sm-9 padding-left15">
+        <span class="option" *ngFor="let item of selectedRoles;let i = index">
+          {{item.name}}<span *ngIf="selectedRoles.length>1 && i!=selectedRoles.length-1">,</span>&nbsp;
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
 

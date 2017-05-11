@@ -29,6 +29,7 @@ $secondary-option: #81D4FA;
       min-width: 100px;
       display: inline-block;
       text-align: center;
+      user-select: none;
 
       &:hover {
         border: 1px solid $option-border-color;

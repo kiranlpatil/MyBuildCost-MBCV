@@ -42,9 +42,13 @@
       <div class="main-content" *ngIf="highlightedSection.name !='Proficiencies'">
         <div class="compact-view clearfix">
           <button class="btn-edit" (click)="highlightedSection.name='Proficiencies';disablebutton=false"></button>
-          <h4 class="heading">Proficiencies</h4>
-          <div class="select-option" *ngFor="let item of selectedProficiencies">
-            <span class="primary">{{item}}</span>
+          <div class="col-md-2 col-sm-3 padding-right15">
+            <h4 class="heading">Proficiencies</h4>
+          </div>
+          <div class="col-md-10 col-sm-9 padding-left15">
+            <span class="option" *ngFor="let item of selectedProficiencies;let i = index">
+              {{item}}<span *ngIf="selectedProficiencies.length>1 && i!=selectedProficiencies.length-1">,</span>&nbsp;
+            </span>
           </div>
         </div>
       </div>
@@ -56,15 +60,13 @@
   <div class="modal-bg">
     <div class="modal-dialog modal-md">
       <div class="modal-content">
-        <div class="modal-body">
-          <div class="row">
-            <div class="col-sm-12">
-              <p>Do you want to add this proficiency ? </p>
+        <div class="modal-body row">
+          <div class="col-sm-12">
+            <p>Do you want to add this proficiency ? </p>
 
-              <div class="button-group">
-                <button class="btn btn-primary" (click)="addProficiencyToMasterData()">Save</button>
-                <button class="btn btn-default" (click)="showHideModal() ">Cancel</button>
-              </div>
+            <div class="button-group">
+              <button class="btn btn-primary" (click)="addProficiencyToMasterData()">Save</button>
+              <button class="btn btn-default" (click)="showHideModal() ">Cancel</button>
             </div>
           </div>
         </div>

@@ -5,14 +5,11 @@
     <div class="col-sm-12 industry-experience">
       <p class="info">An individual may be exposed to multiple industries during the professional life. At times, organisations need individuals who have cross industry expertise. Select such industries where you can claim a reasonable
         exposure. <span class="messages">You can edit this list anytime.</span></p>
-
-      <div>
-        <div class="select-option"  *ngFor="let choice of industries;let i = index">
-          <label >
-            <input type="checkbox"  name="choice.name" value="{{choice.name}}" (click)="selectIndustryModel(choice.name,$event)" [checked]="candidateExperiencedIndustry.indexOf(choice.name)!=-1"  >
-            <span>{{choice.name}}</span>
-          </label>
-        </div>
+      <div class="select-option"  *ngFor="let choice of industries;let i = index">
+        <label >
+          <input type="checkbox"  name="choice.name" value="{{choice.name}}" (click)="selectIndustryModel(choice.name,$event)" [checked]="candidateExperiencedIndustry.indexOf(choice.name)!=-1">
+          <span>{{choice.name}}</span>
+        </label>
       </div>
       <div class="button-group clearfix">
         <button class="btn btn-primary" scrollTo scrollTargetSelector="#professional-details"
@@ -24,9 +21,13 @@
   <div class="main-content" *ngIf="highlightedSection.name !='IndustryExposure'">
     <div class="compact-view clearfix">
       <button class="btn-edit" (click)="highlightedSection.name='IndustryExposure';disableButton=false"></button>
-      <h4 class="heading">Experienced Industry</h4>
-      <div class="select-option" *ngFor="let item of candidateExperiencedIndustry">
-        <span class="primary">{{item}}</span>
+      <div class="col-md-2 col-sm-3 padding-right15">
+        <h4 class="heading">Experienced Industry</h4>
+      </div>
+      <div class="col-md-10 col-sm-9 padding-left15">
+        <span class="option" *ngFor="let item of candidateExperiencedIndustry;let i = index">
+          {{item}}<span *ngIf="candidateExperiencedIndustry.length>1 && i!=candidateExperiencedIndustry.length-1">,</span>&nbsp;
+        </span>
       </div>
     </div>
   </div>

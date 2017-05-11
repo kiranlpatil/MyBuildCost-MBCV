@@ -84,13 +84,16 @@ $profile-section-shadow: rgba(204, 204, 204, 1);
   .dashboard-view {
     border: 0;
     box-shadow: none;
-
-    header {
-      margin: 0;
-    }
   }
 }
 
+@media only screen and (max-width: 980px) {
+  .dashboard-view {
+    header {
+      margin: 5px 0;
+    }
+  }
+}
 
 @media only screen and (max-width: 767px) {
   .dashboard-view {
