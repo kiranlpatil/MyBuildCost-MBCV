@@ -32,7 +32,9 @@ class RecruiterSchema {
           postedJobs:[{
             candidate_list: [{
               name: String,
-              ids: [String]
+              ids: [{
+                type:String
+              }]
             }],
             jobTitle :{
               type : String

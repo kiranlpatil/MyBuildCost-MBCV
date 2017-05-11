@@ -18,12 +18,14 @@ class JobProfileService {
   private jobprofileRepository:JobProfileRepository;
   private candidateSearchRepository : CandidateSearchRepository
   private  recruiterRepository : RecruiterRepository;
+  candidateRepository:CandidateRepository;
   APP_NAME:string;
 
   constructor() {
     this.jobprofileRepository = new JobProfileRepository();
     this.candidateSearchRepository = new CandidateSearchRepository();
     this.recruiterRepository = new RecruiterRepository();
+    this.candidateRepository = new CandidateRepository();
     this.APP_NAME = ProjectAsset.APP_NAME;
   }
 
@@ -69,6 +71,86 @@ class JobProfileService {
             }
           }
         }
+      }
+    });
+  }
+
+  update(item: any, callback: (error: any, result: any) => void) {
+    /*let data = {
+      "name" : ;
+      "id" :
+    }*/
+    let query = { /*"userId":new mongoose.Types.ObjectId(item.userId),*/
+      "postedJobs":{ $elemMatch: {"_id":new mongoose.Types.ObjectId(item.profileId),
+        "candidate_list":{ $elemMatch:{"name":item.listName}}}}
+    };
+    console.log("postedJobs" + JSON.stringify(query));
+
+    let update ={$push:{ids:item.candidateId}}
+    let requestObj = {
+      "name" : item.listName,
+      "ids" :  [item.candidateId]
+    };
+    console.log("requestObj" + JSON.stringify(requestObj));
+
+    /*this.recruiterRepository.retrieve(query, (err, res) => {
+      if(err){
+        callback(new Error("Not Found Any Job posted"), null);
+      }
+      else {
+        console.log("result" + res);
+      }
+    });*/
+
+    console.log("testsestsestset");
+    this.recruiterRepository.findOneAndUpdate(query,
+      {$push:{"company_name" : "Testing"}},
+      {"new":true},
+      function(err, record){
+        if(record){
+          console.log("Updated record "+ JSON.stringify(record));
+          callback(null, record);
+        }else{
+          let  error : any;
+          if(record === null){
+            error = new Error("Unable to update posted job maybe recruiter not found. ");
+            callback(error, null);
+          }
+          else{
+            callback(err, null);
+          }
+        }
+      });
+  }
+
+
+  getQCardDetails(item: any, callback: (error: any, result: any) => void) {
+    let candidateDetails: any;
+
+    this.candidateRepository.retrieveByMultiIds(item.candidateIds, { }, (err, candidateDetailsRes) => {
+      if (err) {
+        callback(err, null);
+      } else {
+        candidateDetails = candidateDetailsRes;
+        let query = {
+          "postedJobs":{ $elemMatch: {"_id":new mongoose.Types.ObjectId(item.jobId)}}
+        };
+        this.recruiterRepository.retrieve(query, (err, res) => {
+          if(err){
+            callback(new Error("Not Found Any Job posted"), null);
+          }
+          else {
+            if(res.length > 0) {
+              let recruiter: Recruiter = new Recruiter();
+              recruiter = res[0];
+              for (let job of res[0].postedJobs) {
+                if (job._id.toString() === item.jobId) {
+                  this.candidateRepository.getCandidateQCard(candidateDetails, job, callback);
+                }
+              }
+            }
+          }
+        });
       }
     });
   }

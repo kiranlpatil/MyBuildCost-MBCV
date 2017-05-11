@@ -73,5 +73,55 @@ export function retrieve(req: express.Request, res: express.Response, next: any)
   }
 }
 
+export function add(req: express.Request, res: express.Response, next: any) {
+  try {
+
+    var jobProfileService = new JobProfileService();
+    let data ={
+      "userId": req.params.recruiterId,
+      "profileId": req.params.profileId,
+      "listName": req.params.listName,
+      "candidateId": req.params.candidateId
+    };
+
+    jobProfileService.update(data, (err, result) => {
+      if (err) {
+        next({
+          reason: Messages.MSG_ERROR_RSN_USER_NOT_FOUND,
+          message: Messages.MSG_ERROR_RSN_USER_NOT_FOUND,
+          code: 403
+        });
+      } else {
+        res.status(200).send({
+          "status": Messages.STATUS_SUCCESS,
+          "data": result
+        });
+      }
+    });
+  }
+  catch (e) {
+    res.status(403).send({message: e.message});
+  }
+}
+
+export function getQCardDetails(req: express.Request, res: express.Response, next: any) {
+  try {
+    var jobProfileService = new JobProfileService();
+    let data = {
+      "jobId": req.params.id,
+      "candidateIds": req.body.candidateIds
+    };
+    jobProfileService.getQCardDetails(data, (error : Error,result : any)=>{
+      if(error){
+        res.status(304).send(error);
+      }else{
+        res.status(200).send(result);
+      }
+    });
+  }
+  catch (e) {
+    res.status(403).send({message: e.message});
+  }
+}
 
 
