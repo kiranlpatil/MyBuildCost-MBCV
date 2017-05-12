@@ -7,6 +7,8 @@ import CandidateModel = require("../model/candidate.model");
 import IndustryModel = require("../model/industry.model");
 import CandidateCardViewModel = require("../model/candidate-card-view.model");
 import {CandidateQCard} from "../../search/model/candidate-q-card";
+import UserRepository = require("./user.repository");
+import UserModel = require("../model/user.model");
 
 
 class CandidateRepository extends RepositoryBase<ICandidate> {
@@ -16,7 +18,7 @@ class CandidateRepository extends RepositoryBase<ICandidate> {
   }
 
 
-  getCandidateQCard(candidates:CandidateModel[], jobProfile:JobProfileModel, callback:(err : any, res:any)=> void) {
+  getCandidateQCard(candidates:CandidateModel[], jobProfile:JobProfileModel, callback:(err:any, res:any)=> void) {
     let job_posted_selected_complexity:string[] = new Array(0);
     job_posted_selected_complexity = this.getCodesFromindustry(jobProfile.industry);
     let card_view_candidates:CandidateQCard[] = new Array(0);
@@ -27,34 +29,52 @@ class CandidateRepository extends RepositoryBase<ICandidate> {
       candidate_selected_complexity = this.getCodesFromindustry(candidate.industry);
       for (let job_item of job_posted_selected_complexity) {
         for (let candi_item of candidate_selected_complexity) {
-          if (job_item.substr(0,job_item.lastIndexOf("."))== candi_item.substr(0,candi_item.lastIndexOf("."))) {
-            let job_last_digit: number = Number(job_item.substr(job_item.lastIndexOf(".")+1));
-            let candi_last_digit: number = Number(candi_item.substr(candi_item.lastIndexOf(".")+1));
-            if(candi_last_digit == job_last_digit - 1){
-                candidate_card_view.below_one_step_matching +=10;
-            }else if(candi_last_digit == job_last_digit + 1) {
-              candidate_card_view.above_one_step_matching +=10;
-            }else if(candi_last_digit == job_last_digit ){
-              candidate_card_view.exact_matching +=10;
+          if (job_item.substr(0, job_item.lastIndexOf(".")) == candi_item.substr(0, candi_item.lastIndexOf("."))) {
+            let job_last_digit:number = Number(job_item.substr(job_item.lastIndexOf(".") + 1));
+            let candi_last_digit:number = Number(candi_item.substr(candi_item.lastIndexOf(".") + 1));
+            if (candi_last_digit == job_last_digit - 1) {
+              candidate_card_view.below_one_step_matching += 10;
+            } else if (candi_last_digit == job_last_digit + 1) {
+              candidate_card_view.above_one_step_matching += 10;
+            } else if (candi_last_digit == job_last_digit) {
+              candidate_card_view.exact_matching += 10;
             }
             break;
           }
         }
       }
-      candidate_card_view.matching = candidate_card_view.above_one_step_matching + candidate_card_view.below_one_step_matching + candidate_card_view.exact_matching;
-      candidate_card_view.salary = candidate.professionalDetails.currentSalary;
-      candidate_card_view.experience = candidate.professionalDetails.experience;
-      candidate_card_view.location = candidate.professionalDetails.relocate;
-      card_view_candidates.push(candidate_card_view);
-      if (card_view_candidates.length == candidates.length) {
-        callback(null, card_view_candidates);
-      }
+
+      let userRepository:UserRepository = new UserRepository();
+      userRepository.findById(candidate.userId.toString(), (error:any, res:UserModel)=> {
+        if (error) {
+          callback(error, null);
+        } else {
+          candidate_card_view.matching = candidate_card_view.above_one_step_matching + candidate_card_view.below_one_step_matching + candidate_card_view.exact_matching;
+          candidate_card_view.salary = candidate.professionalDetails.currentSalary;
+          candidate_card_view.experience = candidate.professionalDetails.experience;
+          candidate_card_view.education = candidate.professionalDetails.education;
+          candidate_card_view.proficiencies = candidate.proficiencies;
+          candidate_card_view.interestedIndustries = candidate.interestedIndustries;
+          candidate_card_view._id = candidate._id;
+          candidate_card_view.email = res.email;
+          candidate_card_view.first_name = res.first_name;
+          candidate_card_view.last_name = res.last_name;
+          candidate_card_view.mobile_number = res.mobile_number;
+          candidate_card_view.picture = res.picture;
+          candidate_card_view.location = candidate.location.cityName;
+          card_view_candidates.push(candidate_card_view);
+          if (card_view_candidates.length == candidates.length) {
+            callback(null, card_view_candidates);
+          }
+        }
+      });
+
+
     }
 
   }
 
   getCodesFromindustry(industry:IndustryModel):string[] {
-
     let selected_complexity:string[] = new Array(0);
     for (let role of industry.roles) {
       for (let capability of role.capabilities) {
