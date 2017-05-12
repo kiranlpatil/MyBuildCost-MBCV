@@ -23,8 +23,8 @@ class SearchService {
         {"professionalDetails.relocate": "Yes"},
         {"location": jobProfile.location}
       ],*/
-      "proficiencies": {$in: jobProfile.proficiencies},
-      "interestedIndustries": {$in: jobProfile.interestedIndustries},
+   /*   "proficiencies": {$in: jobProfile.proficiencies},
+      "interestedIndustries": {$in: jobProfile.interestedIndustries},*/
       "isVisible": true
     };
     this.candidateRepository.retrieve(data, (err, res) => {
