@@ -17,6 +17,5 @@ export class CandidateQCard {
   proficiencies:string[];
   interestedIndustries:string[];
   picture:string;
-
-    isCandidateRead:boolean;
+  isCandidateRead:boolean;
 }

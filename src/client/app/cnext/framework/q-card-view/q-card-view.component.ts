@@ -15,9 +15,9 @@ import {ValueConstant} from "../../../framework/shared/constants";
   styleUrls: ['q-card-view.component.css'],
 
 })
-export class QCardviewComponent{
+export class QCardviewComponent implements OnInit,OnChanges{
   private candidates:CandidateQCard[] = new Array();
-  private candidates2:CandidateQCard[] = new Array();
+  //private candidates2:CandidateQCard[] = new Array();
   private selectedPerson:CandidateQCard = new CandidateQCard();
   private showMatchedCandidateButton:boolean;
   private candidateSeenIDS = new Array();
@@ -54,9 +54,9 @@ export class QCardviewComponent{
 
         }
   }
-  /*ngOnInit() {
-    this.candidates2 = this.candidate2;
-  }*/
+  ngOnInit() {
+    //this.candidates2 = this.candidate2;
+  }
 
   addToShortList(_id:any)
   {

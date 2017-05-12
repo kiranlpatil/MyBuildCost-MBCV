@@ -21,7 +21,7 @@ export class CandidateDashboardFilterPipe implements  PipeTransform{
         //item.proficiencies.toLowerCase().indexOf(args.filterByValue.toLowerCase()) !== -1);
         for(var i=0;i<args.proficiencyDataForFilter.length;i++) {
             array.filter(item => {
-              if(item.proficiencies.indexOf(args.proficiencyDataForFilter[i]) !== -1) {
+              if(item.proficiencies.indexOf(args.proficiencyDataForFilter[i].toLowerCase()) !== -1) {
                 if(candidatesArray.indexOf(item) == -1) {
                   candidatesArray.push(item);
                 }
@@ -43,7 +43,7 @@ export class CandidateDashboardFilterPipe implements  PipeTransform{
       if(args.industryExposureDataForFilter.length) {
         for(var i=0;i<args.industryExposureDataForFilter.length;i++) {
           array.filter(item => {
-            if(item.interestedIndustries.indexOf(args.industryExposureDataForFilter[i]) !== -1) {
+            if(item.interestedIndustries.indexOf(args.industryExposureDataForFilter[i].toLowerCase()) !== -1) {
               if(candidatesArray.indexOf(item) == -1) {
                 candidatesArray.push(item);
               }
@@ -71,19 +71,24 @@ export class CandidateDashboardFilterPipe implements  PipeTransform{
       }
       if(args.filterByJoinTime) {
         array.filter(item => {
-          if(args.filterByJoinTime === item.noticePeriod) {
-            if(candidatesArray.indexOf(item) == -1) {
-              candidatesArray.push(item);
+          if(args.filterByJoinTime && item.noticePeriod) {
+            if (args.filterByJoinTime.toLowerCase() === item.noticePeriod.toLowerCase()) {
+              if (candidatesArray.indexOf(item) == -1) {
+                candidatesArray.push(item);
+              }
             }
           }
         });
+
       }
       if(args.filterByLocation) {
         array.filter(item => {
-          if(args.filterByLocation.toLocaleLowerCase() === item.location.toLocaleLowerCase()) {
-            if(candidatesArray.indexOf(item) == -1) {
+          if(args.filterByLocation && item.location) {
+          if(args.filterByLocation.toLowerCase() === item.location.toLowerCase()) {
+            if (candidatesArray.indexOf(item) == -1) {
               candidatesArray.push(item);
             }
+          }
           }
         });
       }

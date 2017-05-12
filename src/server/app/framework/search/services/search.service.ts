@@ -19,13 +19,13 @@ class SearchService {
 
     let data = {
       "industry.name": jobProfile.industry.name,
-      $or: [
+      /*$or: [
         {"professionalDetails.relocate": "Yes"},
         {"location": jobProfile.location}
       ],
       "proficiencies": {$in: jobProfile.proficiencies},
       "interestedIndustries": {$in: jobProfile.interestedIndustries},
-      "isVisible": true
+      "isVisible": true*/
     };
     this.candidateRepository.retrieve(data, (err, res) => {
       if (err) {

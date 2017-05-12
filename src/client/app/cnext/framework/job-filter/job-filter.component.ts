@@ -40,6 +40,7 @@ export class JobFilterComponent implements OnInit,OnChanges{
   ngOnChanges(changes :any){
     if(changes.selectedJob.currentValue){
       this.proficiencyList = changes.selectedJob.currentValue.proficiencies;
+      this.industryList = changes.selectedJob.currentValue.interestedIndustries;
       //this.industryList = changes.selectedJob.currentValue.interestedIndustries;
     }
   }
@@ -53,7 +54,7 @@ export class JobFilterComponent implements OnInit,OnChanges{
           this.salaryRangeList = list.salaryRangeList;
           this.educationList = list.education;
           this.jointimeList = list.joining_period;
-          this.industryList = list.industry_exposure;
+          //this.industryList = list.industry_exposure;
           this.experienceRangeList = list.experienceRangeList;
         },
         error => this.onError(error));
