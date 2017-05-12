@@ -69,6 +69,10 @@ class CandidateRepository extends RepositoryBase<ICandidate> {
         }
       });
 
+      setTimeout(()=>{
+        callback(null, card_view_candidates);
+      },5000);
+
 
     }
 
