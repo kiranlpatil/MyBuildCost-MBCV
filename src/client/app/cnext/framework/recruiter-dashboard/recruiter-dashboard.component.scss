@@ -16,6 +16,11 @@ $text-color: #666;
     margin: 0;
     padding: 5px;
     color: $text-color;
+
+    &:focus,
+    &:hover {
+      outline: none;
+    }
   }
 }
 

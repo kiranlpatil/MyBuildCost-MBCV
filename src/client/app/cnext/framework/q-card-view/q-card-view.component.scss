@@ -49,7 +49,7 @@ $orange: #e77e22;
     }
   }
 }
-@media only screen and (device-width: 768px) {
+@media only screen and (max-width: 980px) {
   .card-view {
     .left-side {
       float:right;
