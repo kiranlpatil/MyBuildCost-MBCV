@@ -2,7 +2,7 @@ import JobProfileModel = require("../../dataaccess/model/jobprofile.model");
 import CandidateRepository = require("../../dataaccess/repository/candidate.repository");
 import ProjectAsset = require("../../shared/projectasset");
 import RecruiterRepository = require("../../dataaccess/repository/recruiter.repository");
-import CandidateModel = require("../../../../../../dist/tmp_server/app/framework/dataaccess/model/candidate.model");
+import CandidateModel = require("../../dataaccess/model/candidate.model");
 
 class SearchService {
   APP_NAME:string;

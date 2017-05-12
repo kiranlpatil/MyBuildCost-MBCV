@@ -1,113 +1,125 @@
 <button type="button" class="btn btn-block" data-toggle="collapse" data-target="#filter-container">Filters</button>
-<div [hidden]="!isShowJobFilter">
+<div>
   <div id="filter-container" class="collapse filter-container">
     <p class="info">Adjust these filters to get more numbers of candidates</p>
+
     <div class="inner col-sm-12">
       <label>Proficiency</label>
-      <select  [(ngModel)]="candidateFilter.filterByValue" (change)="filterBy()">
-        <option value="{{itemList}}" *ngFor="let itemList of proficiencyList">{{itemList}}</option>
-      </select>
+      <div *ngFor="let itemList of proficiencyList">
+    <input type="checkbox"
+           value="{{itemList}}"
+           (change)="filterByProficiency($event)">
+      <span>{{itemList}}</span>
+      </div>
     </div>
 
-     <!-- <label>Proficiency
-        <div ng2-auto-complete
-             [source]="proficiencyList"
-             (ngModelChange)="selectRolesModel($event)">
-          <input class="form-control" [ngModel]="roleModel" placeholder="Select"/>
-        </div>
-      </label>-->
     <div class="inner col-sm-12">
-      <label>Current Location</label>
-      <select  [(ngModel)]="candidateFilter.filterByValue" (change)="filterBy()">
+      <label>Location</label>
+      <!--<select (change)="filterByLocation($event.target.value)">
         <option value="{{itemList}}" *ngFor="let itemList of locationList">{{itemList}}</option>
-      </select>
+      </select>-->
+      <label>Current Location</label>
+      <input type="radio" name="radiogroup"
+             [value]="pune"
+             (change)="onSelectionChange($event.target.value)">
+      <label>All</label>
+      <input type="radio" name="radiogroup"
+             [value]="All"
+             (change)="onSelectionChange($event.target.value)">
     </div>
 
-     <!-- <label>Current Location
-        <div ng2-auto-complete
-             [source]="locationList"
-             (ngModelChange)="selectRolesModel($event)">
-          <input class="form-control" [ngModel]="roleModel" placeholder="Select"/>
-        </div>
-      </label>-->
     <div class="inner col-sm-12">
       <label>Experience</label>
-      <select  [(ngModel)]="candidateFilter.filterByValue" (change)="filterBy()">
-        <option value="{{itemList}}" *ngFor="let itemList of experienceList">{{itemList}}</option>
+      <label>Min</label>
+      <select (change)="selectExperiencesMinModel($event.target.value)">
+        <option value="{{itemList}}" *ngFor="let itemList of experienceRangeList">{{itemList}}</option>
+      </select>
+      <label>Max</label>
+      <select (change)="selectExperiencesMaxModel($event.target.value)">
+        <option value="{{itemList}}" *ngFor="let itemList of experienceRangeList">{{itemList}}</option>
       </select>
     </div>
-
-      <!--<label>Experience
+   <!-- <div class="col-sm-6 padding-right5">
+      <label>
         <div ng2-auto-complete
-             [source]="experienceList"
-             (ngModelChange)="selectRolesModel($event)">
-          <input class="form-control" [ngModel]="roleModel" placeholder="Select"/>
+             [source]="experienceRangeList"
+             (click)="selectExperiencesMinModel($event)">
+          <input class="form-control" [ngModel]="candidateFilter.experienceMinValue" placeholder="Min"/>
         </div>
-      </label>-->
+      </label>
+    </div>
+    <div class="col-sm-6 padding-left5">
+      <label>
+        <div ng2-auto-complete
+             [source]="experienceRangeList"
+             (click)="selectExperiencesMaxModel($event)">
+          <input class="form-control" [ngModel]="candidateFilter.experienceMaxValue" placeholder="Max"/>
+        </div>
+      </label>
+    </div>
+-->
 
     <div class="inner col-sm-12">
       <label>Education</label>
-      <select  [(ngModel)]="candidateFilter.filterByValue" (change)="filterBy()">
-        <option value="{{itemList}}" *ngFor="let itemList of educationList">{{itemList}}</option>
-      </select>
+      <div *ngFor="let itemList of educationList">
+        <input type="checkbox"
+               value="{{itemList}}"
+               (change)="filterByEducation($event)"
+        >
+        <span>{{itemList}}</span>
+      </div>
     </div>
 
-      <!--<label>Education
-        <div ng2-auto-complete
-             [source]="educationList"
-             (ngModelChange)="selectRolesModel($event)">
-          <input class="form-control" [ngModel]="roleModel" placeholder="Select"/>
-        </div>
-      </label>-->
 
     <div class="inner col-sm-12">
       <label>Lead Time to Join</label>
-      <select  [(ngModel)]="candidateFilter.filterByValue" (change)="filterBy()">
+      <select  (change)="filterByJoinTime($event.target.value)">
         <option value="{{itemList}}" *ngFor="let itemList of jointimeList">{{itemList}}</option>
       </select>
     </div>
 
-     <!-- <label>Lead Time to Join
-        <div ng2-auto-complete
-             [source]="jointimeList"
-             (ngModelChange)="selectRolesModel($event)">
-          <input class="form-control" [ngModel]="roleModel" placeholder="Select"/>
-        </div>
-      </label>-->
-
-      <!--<label>Salary Range</label>
+     <!-- <label>Salary Range</label>
       <div class="col-sm-6 padding-right5">
         <label>
           <div ng2-auto-complete
-               [source]="salaryrangeListMin"
-               (ngModelChange)="selectRolesModel($event)">
-            <input class="form-control" [ngModel]="roleModel" placeholder="Min"/>
+               [source]="salaryRangeList"
+               (ngModelChange)="selectSalaryMaxModel($event)">
+            <input class="form-control" [ngModel]="candidateFilter.salaryMinValue" placeholder="Min"/>
           </div>
         </label>
       </div>
       <div class="col-sm-6 padding-left5">
         <label>
           <div ng2-auto-complete
-               [source]="salaryrangeListMax"
-               (ngModelChange)="selectRolesModel($event)">
-            <input class="form-control" [ngModel]="roleModel" placeholder="Max"/>
+               [source]="salaryRangeList"
+               (ngModelChange)="selectSalaryMaxModel($event)">
+            <input class="form-control" [ngModel]="candidateFilter.salaryMaxValue" placeholder="Max"/>
           </div>
         </label>
       </div>-->
     <div class="inner col-sm-12">
-      <label>Industry Exposure</label>
-      <select  [(ngModel)]="candidateFilter.filterByValue" (change)="filterBy()">
-        <option value="{{itemList}}" *ngFor="let itemList of jointimeList">{{itemList}}</option>
+      <label>Salary Range</label>
+      <label>Min</label>
+      <select (change)="selectSalaryMinModel($event.target.value)">
+        <option value="{{itemList}}" *ngFor="let itemList of salaryRangeList">{{itemList}}</option>
+      </select>
+      <label>Max</label>
+      <select (change)="selectSalaryMaxModel($event.target.value)">
+        <option value="{{itemList}}" *ngFor="let itemList of salaryRangeList">{{itemList}}</option>
       </select>
     </div>
 
-     <!-- <label>Industry Exposure
-        <div ng2-auto-complete
-             [source]="industryList"
-             (ngModelChange)="selectRolesModel($event)">
-          <input class="form-control" [ngModel]="roleModel" placeholder="Select"/>
-        </div>
-      </label>-->
+    <div class="inner col-sm-12">
+      <label>Industry Exposure</label>
+      <div *ngFor="let itemList of industryList">
+        <input type="checkbox"
+               value="{{itemList}}"
+               (change)="filterByIndustryExposure($event)"
+        >
+        <span>{{itemList}}</span>
+      </div>
+    </div>
+
   </div>
 </div>
 

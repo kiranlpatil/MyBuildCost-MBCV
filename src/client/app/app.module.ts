@@ -128,6 +128,8 @@ import {MultiSelectService} from "./cnext/framework/multi-select/multi-select.se
 import {JobProficienciesComponent} from "./cnext/framework/job-proficiency/job-proficiencies.component";
 
 
+import {CandidateFilterService} from "./cnext/framework/filters/candidate-filter.service";
+import {CandidateDashboardFilterPipe} from "./cnext/framework/filters/candidate-dashboard-filter.pipe";
 //C-NEXT IMPORTS
 
 
@@ -214,7 +216,8 @@ import {JobProficienciesComponent} from "./cnext/framework/job-proficiency/job-p
     SortPipe,
     jobListerSortPipe,
     RecruiterJobSummaryComponent,
-    RecruiterJobInformation
+    RecruiterJobInformation,
+    CandidateDashboardFilterPipe
 
   ],
   providers: [
@@ -279,7 +282,8 @@ import {JobProficienciesComponent} from "./cnext/framework/job-proficiency/job-p
     CandidateProfileService,
     RecruiterDashboardService,
     QCardViewService,
-    JobFilterService
+    JobFilterService,
+    CandidateFilterService
 
   ],
   bootstrap: [AppComponent]

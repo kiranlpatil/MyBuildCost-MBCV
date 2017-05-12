@@ -19,7 +19,7 @@
         <div [hidden]="!isJobSelected" >
           <button (click)="isJobSelected=false"> Back</button>
           <div class="col-sm-3">
-            <cn-job-filter></cn-job-filter>
+            <cn-job-filter [selectedJob]="selectedJobProfile"></cn-job-filter>
           </div>
           <div class="col-sm-9">
             <cn-q-card-view [jobPosterModel]="selectedJobProfile"></cn-q-card-view>

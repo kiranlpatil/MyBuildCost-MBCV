@@ -2,10 +2,10 @@ import RecruiterSchema = require("../schemas/recruiter.schema");
 import RepositoryBase = require("./base/repository.base");
 import IRecruiter = require("../mongoose/recruiter");
 import RecruiterModel = require("../model/recruiter.model");
-import CandidateModel = require("../../../../../../dist/tmp_server/app/framework/dataaccess/model/candidate.model");
 import {JobQCard} from "../../search/model/job-q-card";
 import IndustryModel = require("../model/industry.model");
 import CandidateRepository = require("./candidate.repository");
+import CandidateModel = require("../model/candidate.model");
 
 class RecruiterRepository extends RepositoryBase<IRecruiter> {
   constructor() {

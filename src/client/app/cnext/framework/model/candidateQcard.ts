@@ -9,5 +9,11 @@ export class CandidateQCard {
   matching: number;
   salary: string;
   experience: string;
+  education:string;
   location: string;
+  _id:string;
+  noticePeriod:string;
+  proficiencies:string[];
+  interestedIndustries:string[]
+
 }
