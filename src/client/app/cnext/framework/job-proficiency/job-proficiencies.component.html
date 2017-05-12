@@ -21,24 +21,24 @@
         <div class="compact-view clearfix">
           <button class="btn-edit" (click)="highlightedSection.name='Proficiencies';disablebutton=false"></button>
           <h4 class="heading">Proficiencies</h4>
-          <div>
+          <div class="col-sm-12 no-padding">
             <div class="col-md-2 col-sm-3 padding-right15">
-              <label>Mandatory Proficiencies</label>
+              <label>Mandatory</label>
             </div>
             <div class="col-md-10 col-sm-9 padding-left15">
-              <div class="select-option" *ngFor="let item of jobPosterModel.mandatoryProficiencies">
-                <span class="primary">{{item}}</span>
-              </div>
+              <span class="option" *ngFor="let item of jobPosterModel.mandatoryProficiencies;let i = index">
+                {{item}}<span *ngIf="jobPosterModel.mandatoryProficiencies.length>1 && i!=jobPosterModel.mandatoryProficiencies.length-1">,</span>
+              </span>
             </div>
           </div>
-          <div>
+          <div class="col-sm-12 no-padding">
             <div class="col-md-2 col-sm-3 padding-right15">
-              <label>Additional Proficiencies</label>
+              <label>Additional</label>
             </div>
             <div class="col-md-10 col-sm-9 padding-left15">
-              <div class="select-option" *ngFor="let item of jobPosterModel.proficiencies">
-                <span class="primary">{{item}}</span>
-              </div>
+              <span class="option" *ngFor="let item of jobPosterModel.proficiencies;let i = index">
+                {{item}}<span *ngIf="jobPosterModel.proficiencies.length>1 && i!=jobPosterModel.proficiencies.length-1">,</span>
+              </span>
             </div>
           </div>
         </div>
