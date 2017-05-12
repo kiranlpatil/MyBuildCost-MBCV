@@ -71,12 +71,12 @@ class CandidateRepository extends RepositoryBase<ICandidate> {
           candidate_card_view.proficiencies = candidate.proficiencies;
           candidate_card_view.interestedIndustries = candidate.interestedIndustries;
           candidate_card_view._id = candidate._id;
-         // candidate_card_view.email = res.email;
-         /* candidate_card_view.first_name = res.first_name;
+          candidate_card_view.email = res.email;
+          candidate_card_view.first_name = res.first_name;
           candidate_card_view.last_name = res.last_name;
           candidate_card_view.mobile_number = res.mobile_number;
           candidate_card_view.picture = res.picture;
-         */ candidate_card_view.location = candidate.location.cityName;
+         // candidate_card_view.location = candidate.location.cityName;
           card_view_candidates.push(candidate_card_view);
           if (card_view_candidates.length == count) {
             callback(null, card_view_candidates);
