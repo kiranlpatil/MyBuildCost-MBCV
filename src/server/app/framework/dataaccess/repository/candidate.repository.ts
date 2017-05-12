@@ -18,7 +18,7 @@ class CandidateRepository extends RepositoryBase<ICandidate> {
   }
 
 
-  getCandidateQCard(candidates:CandidateModel[], jobProfile:JobProfileModel, callback:(err:any, res:any)=> void) {
+  getCandidateQCard(candidates:any[], jobProfile:JobProfileModel, callback:(err:any, res:any)=> void) {
     let job_posted_selected_complexity:string[] = new Array(0);
     job_posted_selected_complexity = this.getCodesFromindustry(jobProfile.industry);
     let card_view_candidates:CandidateQCard[] = new Array(0);
