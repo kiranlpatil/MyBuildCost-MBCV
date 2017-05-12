@@ -12,7 +12,7 @@
   </header>
 
   <div class="card-view clearfix">
-    <div class="col-sm-4" *ngFor= "let item of candidates | orderby:qCardModel.sortValue | dashboardfilter:candidateFilter">
+    <div class="col-sm-6" *ngFor= "let item of candidates | orderby:qCardModel.sortValue | dashboardfilter:candidateFilter">
       <div class="panel clearfix">
         <div class="col-sm-7 col-xs-6 no-padding left-side">
           <div><span class="glyphicon glyphicon-heart-empty" (click)="addToShortList(item._id)"></span></div>
