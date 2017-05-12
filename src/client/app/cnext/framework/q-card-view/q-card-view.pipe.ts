@@ -30,6 +30,16 @@ export class SortPipe implements  PipeTransform{
           return 0;
         }
       });
+    } if(args==='Salary' && args!==""){
+      array.sort((a: CandidateQCard, b: CandidateQCard) => {
+        if (Number(a.salary.split(" ")[0]) > Number(b.salary.split(" ")[0])){
+          return -1;
+        }else if(Number(a.salary.split(" ")[0]) < Number(b.salary.split(" ")[0])){
+          return 1;
+        }else{
+          return 0;
+        }
+      });
     }
     return array;
   }

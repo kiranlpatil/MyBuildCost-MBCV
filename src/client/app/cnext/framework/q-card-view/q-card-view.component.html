@@ -5,14 +5,14 @@
 
     <div class="sort-by">
       <label>Sort by</label>
-      <select id="menu"  [(ngModel)]="qCardModel.name" (change)="sortBy()">
-        <option value="{{itemList}}" *ngFor="let itemList of qCardModel.listOfMatchings">{{itemList}}</option>
+      <select id="menu"  [(ngModel)]="qCardModel.sortValue" (change)="sortBy()">
+        <option value="{{itemList}}"  *ngFor="let itemList of qCardModel.listOfMatchings" >{{itemList}}</option>
       </select>
     </div>
   </header>
 
   <div class="card-view clearfix">
-    <div class="col-sm-4" *ngFor= "let item of candidates | orderby:formatcandidate | dashboardfilter:candidateFilter">
+    <div class="col-sm-4" *ngFor= "let item of candidates | orderby:qCardModel.sortValue | dashboardfilter:candidateFilter">
       <div class="panel clearfix">
         <div class="col-sm-7 col-xs-6 no-padding left-side">
           <div><span class="glyphicon glyphicon-heart-empty" (click)="addToShortList(item._id)"></span></div>
