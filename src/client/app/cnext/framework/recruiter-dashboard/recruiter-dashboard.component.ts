@@ -62,6 +62,7 @@ export class RecruiterDashboardComponent implements OnInit {
     }
   }
   rejectedCandidates() {
+    this.candidates=[];
     this.showQCard=true;
     if(this.rejectedCandidatesIDS.length!==0){
       this.qCardViewService.getCandidatesdetails(this.rejectedCandidatesIDS,this.selectedJobProfile)
@@ -72,6 +73,7 @@ export class RecruiterDashboardComponent implements OnInit {
     }
   }
   appliedCandidates(){
+    this.candidates=[];
     this.showQCard=true;
     if(this.appliedCandidatesIDS.length!==0){
       this.qCardViewService.getCandidatesdetails(this.appliedCandidatesIDS,this.selectedJobProfile)
@@ -89,6 +91,7 @@ export class RecruiterDashboardComponent implements OnInit {
 
   }
   showShortlistedCandidate() {
+    this.candidates=[];
     this.showQCard=true;
     if(this.candidateIDS.length!==0){
       this.qCardViewService.getCandidatesdetails(this.candidateIDS,this.selectedJobProfile)
@@ -99,7 +102,8 @@ export class RecruiterDashboardComponent implements OnInit {
 
     }
   }
-  candidateInCart() {
+  candidateInCart() {debugger
+    this.candidates=[];
     this.showQCard=true;
     if(this.candidateInCartIDS.length != 0){
       this.qCardViewService.getCandidatesdetails(this.candidateInCartIDS,this.selectedJobProfile)
@@ -111,7 +115,7 @@ export class RecruiterDashboardComponent implements OnInit {
     }
   }
   ShortlistedCandidate()
-  {
+  { this.candidates=[];
 
     this.showQCard=true;
     if(this.candidateIDS.length != 0){
@@ -123,7 +127,7 @@ export class RecruiterDashboardComponent implements OnInit {
 
     }
   }
-  jobSelected(job : any){
+  jobSelected(job : any){debugger
       this.isJobSelected=true;
       this.selectedJobProfile = job;
       if(this.selectedJobProfile.candidate_list.length != 0){

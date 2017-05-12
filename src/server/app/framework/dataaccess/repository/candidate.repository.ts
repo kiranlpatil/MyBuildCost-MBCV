@@ -18,22 +18,24 @@ class CandidateRepository extends RepositoryBase<ICandidate> {
   }
 
 
-  getCandidateQCard(candidates:any[], jobProfile:JobProfileModel, callback:(err:any, res:any)=> void) {
+  getCandidateQCard(candidates:any[], jobProfile:JobProfileModel,isFromCandidate: boolean, callback:(err:any, res:any)=> void) {
     let job_posted_selected_complexity:string[] = new Array(0);
     job_posted_selected_complexity = this.getCodesFromindustry(jobProfile.industry);
     let card_view_candidates:CandidateQCard[] = new Array(0);
     let count=0;
     for (let candidate of candidates) {
       let isFound : boolean= false;
-      if(jobProfile.candidate_list){
-        for(let list of jobProfile.candidate_list){
-          if(list.ids.indexOf(candidate._id.toString())!=-1){
-            isFound=true;
+      if(!isFromCandidate){
+        if(jobProfile.candidate_list){
+          for(let list of jobProfile.candidate_list){
+            if(list.ids.indexOf(candidate._id.toString())!=-1){
+              isFound=true;
+            }
           }
         }
-      }
-      if(isFound){
-        continue;
+        if(isFound){
+          continue;
+        }
       }
       count++;
       let candidate_selected_complexity:string[] = new Array(0);
