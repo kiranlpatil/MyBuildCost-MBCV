@@ -67,7 +67,7 @@ export class QCardviewComponent implements OnInit, OnChanges {
         console.log(user);
       });
     this.shortlisted = !this.shortlisted;
-    let i=0;
+   /* let i=0;
     for(let item of this.candidates){
 
       if(item._id ===_id){
@@ -75,7 +75,7 @@ export class QCardviewComponent implements OnInit, OnChanges {
       }
       i++;
     }
-    this.matches=this.candidates.length;
+    this.matches=this.candidates.length;*/
   }
 
   matchedCandidate() {

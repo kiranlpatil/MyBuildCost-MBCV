@@ -102,7 +102,7 @@ export class RecruiterDashboardComponent implements OnInit {
     this.showQCard=true;
     this.candidates=[];
     if(this.candidateIDS.length!==0){
-      for(let item of this.candidateInCartIDS ) {
+      for(let item of this.candidateIDS ) {
         this.qCardViewService.getCandidatesdetails(item, this.selectedJobProfile)
           .subscribe(
             data => {
