@@ -82,7 +82,7 @@ class CandidateSchema {
         type:[String]
       },
       location: {
-        cityName: String,
+        city: String,
         state: String,
         country: String,
         pin: String

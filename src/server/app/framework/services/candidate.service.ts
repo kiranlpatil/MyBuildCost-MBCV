@@ -42,6 +42,7 @@ class CandidateService {
                 var userId1 =res._id;
                 var newItem :any={
                   userId:userId1,
+                  location : item.location
                 };
                 this.candidateRepository.create(newItem, (err:any, res:any) => {
                   if (err) {

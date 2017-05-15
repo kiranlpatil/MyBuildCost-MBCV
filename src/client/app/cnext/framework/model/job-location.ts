@@ -1,6 +1,6 @@
 
 export class JobLocation {
-  cityName: string;
+  city: string;
   state  : string;
   country : string;
   pin:string;

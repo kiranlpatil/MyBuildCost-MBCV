@@ -79,7 +79,7 @@ class CandidateRepository extends RepositoryBase<ICandidate> {
           candidate_card_view.last_name = res.last_name;
           candidate_card_view.mobile_number = res.mobile_number;
           candidate_card_view.picture = res.picture;
-         // candidate_card_view.location = candidate.location.cityName;
+          candidate_card_view.location = candidate.location.city;
           card_view_candidates.push(candidate_card_view);
           if (card_view_candidates.length == count) {
             callback(null, card_view_candidates);

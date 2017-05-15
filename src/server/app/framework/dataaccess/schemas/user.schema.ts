@@ -9,7 +9,7 @@ class UserSchema {
     var schema = mongoose.Schema({
 
       location: {
-        cityName: String,
+        city: String,
         state: String,
         country: String,
         pin: String

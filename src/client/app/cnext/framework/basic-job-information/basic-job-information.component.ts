@@ -67,11 +67,11 @@ export class BasicJobInformationComponent {
   }
 
   getAddress(event :any){
-    this.storedLoaction.cityName= event.address_components[event.address_components.length - 3].long_name;
+    this.storedLoaction.city= event.address_components[event.address_components.length - 3].long_name;
     this.storedLoaction.state=event.address_components[event.address_components.length - 2].long_name;
     this.storedLoaction.country=event.address_components[event.address_components.length - 1].long_name;
   }
-  
+
   selectIndustry(industry:Industry) {
     this.storedIndustry = industry;
   }
