@@ -1,18 +1,20 @@
 <div class="dashboard-view clearfix">
-
-
   <div class="card-view clearfix">
-    <div class="col-sm-4" *ngFor="let item of candidates">
+    <div class="col-sm-6" *ngFor="let item of candidates">
       <div class="panel clearfix">
-        <div class="col-xs-6 no-padding">
-          <img src="{{item.picture}}" alt="picture" *ngIf="item.picture!=undefined"/>
-          <img src="{{image_path}}" alt="picture" *ngIf="item.picture==undefined"/>
-          <p> {{item.first_name}}{{item.last_name}}</p>
-          <p>Contact {{item.mobile_number}}</p>
-          <p>Email{{item.email}} Years</p>
-          <span class="percentage">Skills {{item.matching}}%</span><span>match</span>
+        <div class="col-sm-12">
+          <div class="col-sm-5 col-xs-6 no-padding right-side">
+            <img class="profile-picture" src="{{item.picture}}" alt="picture" *ngIf="item.picture!=undefined"/>
+            <img class="profile-picture" src="{{image_path}}" alt="picture" *ngIf="item.picture==undefined"/>
+          </div>
+          <div class="col-sm-7 col-xs-6 no-padding left-side">
+            <p><span class="glyphicon glyphicon-user"></span> {{item.first_name}}{{item.last_name}}</p>
+            <p><span class="glyphicon glyphicon-phone"></span> {{item.mobile_number}}</p>
+            <p><span class="glyphicon glyphicon-envelope"></span> {{item.email}}</p>
+            <p class="percentage"><span class="glyphicon glyphicon-stats"></span>Skills {{item.matching}}% <span>match</span></p>
+          </div>
         </div>
-        <button type="button" data-toggle="modal" data-target="#myModal" (click)="onClick(item)">View Profile</button>
+        <button  class="btn btn-cart btn-block" type="button" data-toggle="modal" data-target="#myModal" (click)="onClick(item)">View Profile</button>
       </div>
     </div>
   </div>

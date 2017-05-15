@@ -28,6 +28,7 @@ export class QCardviewComponent implements OnInit, OnChanges {
   private candidateFilter: CandidateFilter;
   @Input() private jobPosterModel: JobPosterModel;
   @Input() private recruiterId: string;
+  private shortlisted: boolean = false;
 
   constructor(private qCardViewService: QCardViewService, private showQCardview: ShowQcardviewService, private candidateFilterService: CandidateFilterService) {
     this.showQCardview.showJobQCardView$.subscribe(
@@ -65,6 +66,7 @@ export class QCardviewComponent implements OnInit, OnChanges {
       user => {
         console.log(user);
       });
+    this.shortlisted = !this.shortlisted;
   }
 
   matchedCandidate() {
@@ -78,6 +80,7 @@ export class QCardviewComponent implements OnInit, OnChanges {
       .subscribe(
         data => {
           this.candidates = data,
+              console.log ("match",this.candidates);
             this.matches = this.candidates.length
         });
     for (let readedCandidate of this.candidateSeenIDS) {
@@ -123,7 +126,12 @@ export class QCardviewComponent implements OnInit, OnChanges {
 
    "below_one_step_matching": 20,
    "above_one_step_matching": 10,
-   "exact_matching": 140
+   "exact_matching": 140,
+   "mobile_number":"1234567891",
+   "email":"k@gmail.com",
+   "status":"",
+   "picture":'',
+   "isCandidateRead":true
    },
    {
    "_id": "2",
@@ -140,8 +148,12 @@ export class QCardviewComponent implements OnInit, OnChanges {
 
    "below_one_step_matching": 20,
    "above_one_step_matching": 10,
-   "exact_matching": 140
-
+   "exact_matching": 140,
+   "mobile_number":"1234567891",
+   "email":"k@gmail.com",
+   "status":"",
+   "picture":'',
+   "isCandidateRead":true
    },
    {
    "_id": "3",
@@ -157,8 +169,12 @@ export class QCardviewComponent implements OnInit, OnChanges {
    "interestedIndustries":["MNC","IT","GK"],
    "below_one_step_matching": 20,
    "above_one_step_matching": 10,
-   "exact_matching": 140
-
+   "exact_matching": 140,
+   "mobile_number":"1234567891",
+   "email":"k@gmail.com",
+   "status":"",
+   "picture":'',
+   "isCandidateRead":true
    },
    {
    "_id": "4",
@@ -174,8 +190,12 @@ export class QCardviewComponent implements OnInit, OnChanges {
    "interestedIndustries":["MNC","IT","PK"],
    "below_one_step_matching": 20,
    "above_one_step_matching": 10,
-   "exact_matching": 140
-
+   "exact_matching": 140,
+   "mobile_number":"1234567891",
+   "email":"k@gmail.com",
+   "status":"",
+   "picture":'',
+   "isCandidateRead":true
    },
    {
    "_id": "5",
@@ -191,8 +211,12 @@ export class QCardviewComponent implements OnInit, OnChanges {
    "interestedIndustries":["MNC","PK"],
    "below_one_step_matching": 20,
    "above_one_step_matching": 10,
-   "exact_matching": 140
-
+   "exact_matching": 140,
+   "mobile_number":"1234567891",
+   "email":"k@gmail.com",
+   "status":"",
+   "picture":'',
+   "isCandidateRead":true
    },
    {
    "_id": "6",
@@ -208,8 +232,12 @@ export class QCardviewComponent implements OnInit, OnChanges {
    "interestedIndustries":["MNC"],
    "below_one_step_matching": 20,
    "above_one_step_matching": 10,
-   "exact_matching": 140
-
+   "exact_matching": 140,
+   "mobile_number":"1234567891",
+   "email":"k@gmail.com",
+   "status":"",
+   "picture":'',
+   "isCandidateRead":true
    },
    {
    "_id": "7",
@@ -225,8 +253,12 @@ export class QCardviewComponent implements OnInit, OnChanges {
    "interestedIndustries":["MNC","IT","PK"],
    "below_one_step_matching": 20,
    "above_one_step_matching": 10,
-   "exact_matching": 140
-
+   "exact_matching": 140,
+   "mobile_number":"1234567891",
+   "email":"k@gmail.com",
+   "status":"",
+   "picture":'',
+   "isCandidateRead":true
    }
    ]*/
 }
