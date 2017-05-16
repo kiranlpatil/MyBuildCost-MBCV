@@ -9,6 +9,7 @@ import CandidateCardViewModel = require("../model/candidate-card-view.model");
 import {CandidateQCard} from "../../search/model/candidate-q-card";
 import UserRepository = require("./user.repository");
 import UserModel = require("../model/user.model");
+import {ConstVariables} from "../../shared/sharedconstants";
 
 
 class CandidateRepository extends RepositoryBase<ICandidate> {
@@ -23,6 +24,8 @@ class CandidateRepository extends RepositoryBase<ICandidate> {
     job_posted_selected_complexity = this.getCodesFromindustry(jobProfile.industry);
     let card_view_candidates:CandidateQCard[] = new Array(0);
     let count=0;
+    let count_for_break =0;
+    let isSend : boolean=false;
     for (let candidate of candidates) {
       let isFound : boolean= false;
       if(!isFromCandidate){
@@ -37,7 +40,6 @@ class CandidateRepository extends RepositoryBase<ICandidate> {
           continue;
         }
       }
-      count++;
       let candidate_selected_complexity:string[] = new Array(0);
       let candidate_card_view:CandidateQCard = new CandidateQCard();
       candidate_card_view.matching = 0;
@@ -58,16 +60,18 @@ class CandidateRepository extends RepositoryBase<ICandidate> {
           }
         }
       }
-
+      candidate_card_view.above_one_step_matching = (candidate_card_view.above_one_step_matching / job_posted_selected_complexity.length) * 100;
+      candidate_card_view.below_one_step_matching= (candidate_card_view.below_one_step_matching/ job_posted_selected_complexity.length) * 100;
+      candidate_card_view.exact_matching = (candidate_card_view.exact_matching / job_posted_selected_complexity.length) * 100;
+      candidate_card_view.matching = candidate_card_view.above_one_step_matching + candidate_card_view.below_one_step_matching + candidate_card_view.exact_matching;
+      if(candidate_card_view.matching >= ConstVariables.LOWER_LIMIT_FOR_SEARCH_RESULT){
+          count++;
+      }
       let userRepository:UserRepository = new UserRepository();
       userRepository.findById(candidate.userId.toString(), (error:any, res:UserModel)=> {
         if (error) {
           callback(error, null);
         } else {
-          candidate_card_view.above_one_step_matching = (candidate_card_view.above_one_step_matching / job_posted_selected_complexity.length) * 100;
-          candidate_card_view.below_one_step_matching= (candidate_card_view.below_one_step_matching/ job_posted_selected_complexity.length) * 100;
-          candidate_card_view.exact_matching = (candidate_card_view.exact_matching / job_posted_selected_complexity.length) * 100;
-          candidate_card_view.matching = candidate_card_view.above_one_step_matching + candidate_card_view.below_one_step_matching + candidate_card_view.exact_matching;
           candidate_card_view.salary = candidate.professionalDetails.currentSalary;
           candidate_card_view.experience = candidate.professionalDetails.experience;
           candidate_card_view.education = candidate.professionalDetails.education;
@@ -80,9 +84,16 @@ class CandidateRepository extends RepositoryBase<ICandidate> {
           candidate_card_view.mobile_number = res.mobile_number;
           candidate_card_view.picture = res.picture;
           candidate_card_view.location = candidate.location.city;
-          card_view_candidates.push(candidate_card_view);
-          if (card_view_candidates.length == count) {
-            callback(null, card_view_candidates);
+          if(candidate_card_view.matching >= ConstVariables.LOWER_LIMIT_FOR_SEARCH_RESULT){
+            count_for_break++;
+            card_view_candidates.push(candidate_card_view);
+          }
+
+          if (count_for_break == count) {
+            if(!isSend){
+              isSend=true;
+              callback(null, card_view_candidates);
+            }
           }
         }
       });
