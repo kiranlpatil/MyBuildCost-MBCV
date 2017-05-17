@@ -9,6 +9,8 @@ import {RecruitercandidatesListsService} from "../candidate-lists.service";
 import {QCardViewService} from "../q-card-view/q-card-view.service";
 import {RecruiterDashboardService} from "../recruiter-dashboard/recruiter-dashboard.service";
 import {UpdatedIds} from "../model/updatedCandidatesIDS";
+import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
+import {Candidate} from "../model/candidate";
 
 @Component({
   moduleId: module.id,
@@ -27,6 +29,7 @@ export class RecruiterQCardview2Component  {
     _id:''
   };
   private updatedIdsModel:UpdatedIds=new UpdatedIds() ;
+  private selectedCandidate : Candidate= new Candidate();
   private candidateIDS = new Array();
   private candidateInCartIDS:string[] = new Array();
   private rejectedCandidatesIDS = new Array();
@@ -34,7 +37,9 @@ export class RecruiterQCardview2Component  {
   private selectedPerson:CandidateQCard = new CandidateQCard();
   private image_path:string=ImagePath.PROFILE_IMG_ICON;
   private candidateRejected:CandidateQCard[] = new Array(0);
-  constructor(private recruiterQCardViewService: QCardViewService,private recruiterDashboardService: RecruiterDashboardService,
+  constructor(private recruiterQCardViewService: QCardViewService,
+              private profileCreatorService:CandidateProfileService,
+              private recruiterDashboardService: RecruiterDashboardService,
               private qCardViewService:RecruiteQCardView2Service,private candidateLists:RecruitercandidatesListsService) {
 
 
@@ -83,10 +88,16 @@ if (changes.jobPosterModel != undefined && changes.jobPosterModel.currentValue) 
     this.currentrejected.emit(this.updatedIdsModel);
   }
   onClick(item:any){
+    this.profileCreatorService.getCandidateDetailsOfParticularId(item._id).subscribe(
+      candidateData => this.OnCandidateDataSuccess(candidateData.data),
+      error => this.onError(error));
+    this.selectedPerson=item;
 
-    this.selectedPerson = item;
-    console.log(this.selectedPerson);
+  }
 
+  OnCandidateDataSuccess(candidate:Candidate) {
+    this.selectedCandidate = candidate;
+//    this.candidateDetails = candidateData.metadata;
   }
 
 }

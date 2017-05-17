@@ -7,7 +7,6 @@ import UserService = require("../services/user.service");
 import * as mongoose from "mongoose";
 
 
-
 export function create(req:express.Request, res:express.Response, next:any) {
   try {
 
@@ -82,7 +81,7 @@ export function updateDetails(req:express.Request, res:express.Response, next:an
             });
           }
           else {
-            console.log("--------------------------------------------",JSON.stringify(result));
+            console.log("--------------------------------------------", JSON.stringify(result));
             var token = auth.issueTokenWithUid(updatedCandidate);
             res.send({
               "status": "success",
@@ -100,46 +99,79 @@ export function updateDetails(req:express.Request, res:express.Response, next:an
 }
 
 
-export function retrieve(req: express.Request, res: express.Response, next: any) { //todo authentication is remaining
+export function retrieve(req:express.Request, res:express.Response, next:any) { //todo authentication is remaining
   try {
     var userService = new UserService();
     var candidateService = new CandidateService();
-    let params =req.params.id;
-    userService.findById(params, (error, result) => {
-      if (error) {
-        next({
-          reason: Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
-          message: Messages.MSG_ERROR_WRONG_TOKEN,
-          code: 401
-        });
-      }
-      else {
-        if(result.length<=0){
+    let params = req.params.id;
+    let candidateId = req.params.candidateId;
+    if (candidateId) {
+      candidateService.findById(candidateId, (error, resu) => {
+        if (error) {
           next({
             reason: "User Not Available",//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
             message: 'User is not available',//Messages.MSG_ERROR_WRONG_TOKEN,
             code: 401
           })
-        }else{
-          candidateService.retrieve({"userId":new mongoose.Types.ObjectId(result._id)}, (error, resu) => {
+        }
+        else {
+          userService.findById(resu.userId, (error, result) => {
             if (error) {
               next({
                 reason: "User Not Available",//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
                 message: 'User is not available',//Messages.MSG_ERROR_WRONG_TOKEN,
                 code: 401
               })
-            }
-            else {
+            } else {
               res.send({
                 "status": "success",
                 "data": resu,
                 "metadata": result
               });
+
             }
+
           });
         }
-      }
-    });
+      });
+    } else {
+      userService.findById(params, (error, result) => {
+        if (error) {
+          next({
+            reason: Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
+            message: Messages.MSG_ERROR_WRONG_TOKEN,
+            code: 401
+          });
+        }
+        else {
+          if (result.length <= 0) {
+            next({
+              reason: "User Not Available",//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
+              message: 'User is not available',//Messages.MSG_ERROR_WRONG_TOKEN,
+              code: 401
+            })
+          } else {
+            candidateService.retrieve({"userId": new mongoose.Types.ObjectId(result._id)}, (error, resu) => {
+              if (error) {
+                next({
+                  reason: "User Not Available",//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
+                  message: 'User is not available',//Messages.MSG_ERROR_WRONG_TOKEN,
+                  code: 401
+                })
+              }
+              else {
+                res.send({
+                  "status": "success",
+                  "data": resu,
+                  "metadata": result
+                });
+              }
+            });
+          }
+        }
+      });
+    }
+
   }
   catch (e) {
     res.status(403).send({message: e.message});

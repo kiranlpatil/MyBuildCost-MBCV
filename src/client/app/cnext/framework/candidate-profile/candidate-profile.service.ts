@@ -30,6 +30,13 @@ export class CandidateProfileService extends BaseService {
       .catch(this.handleError);
   }
 
+  getCandidateDetailsOfParticularId(candidateId : string):Observable<any> {
+    let url:string=API.CANDIDATE_PROFILE+'/'+LocalStorageService.getLocalValue(LocalStorage.USER_ID)+'/'+candidateId;
+    return this.http.get(url)
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
+
 
   getIndustries():Observable<any> {
     var url = API.INDUSTRY_LIST;
@@ -79,7 +86,7 @@ export class CandidateProfileService extends BaseService {
       .catch(this.handleError);
   }
 
-  
+
 
 
 }

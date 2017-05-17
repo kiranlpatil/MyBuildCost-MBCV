@@ -199,10 +199,8 @@ export class RecruiterDashboardComponent implements OnInit {
               this.appliedCandidatesIDS = item.ids;
             }
           }
-
         }
       }
-
   }
 
   logOut() {

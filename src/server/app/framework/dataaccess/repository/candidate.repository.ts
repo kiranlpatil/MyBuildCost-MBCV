@@ -101,7 +101,7 @@ class CandidateRepository extends RepositoryBase<ICandidate> {
 
     }
     setTimeout(()=>{
-      if(card_view_candidates.length==0){
+      if(!isSend){
         callback(null, card_view_candidates);
       }
     },3000);

@@ -39,6 +39,9 @@
         <h5>Email:{{selectedPerson.email}}</h5>
         <h5>Status{{selectedPerson.status}}</h5>
         <h5>Skills:{{selectedPerson.matching}}</h5>
+        <div class="col-sm-12">
+          <cn-tabular-list-view [roles]="selectedCandidate.industry.roles"></cn-tabular-list-view>
+        </div>
 
       </div>
       <div class="modal-footer">
