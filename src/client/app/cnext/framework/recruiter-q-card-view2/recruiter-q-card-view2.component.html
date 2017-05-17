@@ -16,8 +16,8 @@
           </div>
         </div>
         <button  class="btn btn-cart btn-block" type="button" data-toggle="modal" data-target="#myModal" (click)="onClick(item)">View Profile</button>
-        <button   type="button" (click)="Cancel(item)">Cancel</button>
-        <button   type="button" (click)="rejectCandidate(item)">Reject</button>
+        <button [hidden]="!showButton.isShowRemoveButton"  type="button" (click)="Cancel(item)">Remove</button>
+        <button [hidden]="!showButton.isShowRejectButton"  type="button" (click)="rejectCandidate(item)">Reject</button>
       </div>
     </div>
   </div>

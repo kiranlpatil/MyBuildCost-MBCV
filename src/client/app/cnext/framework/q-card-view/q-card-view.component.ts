@@ -8,6 +8,7 @@ import {CandidateFilter} from "../model/candidate-filter";
 import {CandidateFilterService} from "../filters/candidate-filter.service";
 import {ValueConstant} from "../../../framework/shared/constants";
 import {UpdatedIds} from "../model/updatedCandidatesIDS";
+import {RecruiteQCardView2Service} from "../recruiter-q-card-view2/recruiter-q-card-view2.service";
 
 @Component({
   moduleId: module.id,
@@ -28,20 +29,20 @@ export class QCardviewComponent implements OnInit, OnChanges {
   private updatedIdsModel:UpdatedIds=new UpdatedIds() ;
   private toggle: boolean = false;
   private matches: number;
+  private isCandidateAdd:boolean=false;
   private qCardModel: QCardsortBy = new QCardsortBy();
   private isShowQCardView: boolean;
   private candidateFilter: CandidateFilter;
   @Input() private jobPosterModel: JobPosterModel;
   @Input() private recruiterId: string;
+  @Input() private addToSerchIds: CandidateQCard[];
+
   private shortlisted: boolean = false;
 
-  constructor(private qCardViewService: QCardViewService, private showQCardview: ShowQcardviewService, private candidateFilterService: CandidateFilterService) {
-    this.showQCardview.showJobQCardView$.subscribe(
-      data => {
-        this.jobPosterModel = data;
-        this.showQCardView();
-      }
-    );
+  constructor(private qCardViewService: QCardViewService,
+              private cardViewService:RecruiteQCardView2Service,
+              private showQCardview: ShowQcardviewService, private candidateFilterService: CandidateFilterService) {
+
     this.candidateFilterService.candidateFilterValue$.subscribe(
       (data: CandidateFilter) => {
         this.candidateFilter = data;
@@ -58,15 +59,23 @@ export class QCardviewComponent implements OnInit, OnChanges {
           this.candidateSeenIDS.push(item);
         }
       }
-      /*if (changes.jobPosterModel.currentValue.candidate_list.length != 0) {
-        for (let item of changes.jobPosterModel.currentValue.candidate_list) {
-          if (item.name == "shortListed") {
-            this.candidateshortlisted.push(item.ids);
-          }
 
-        }
-      }*/
+    }
+    for(let item1 of this.candidates)
+
+    {let i=0;
+      for(let item2 of this.addToSerchIds)
+    {
+      if(item1._id===item2._id){
+      this.addToSerchIds.splice(i,1);
+    }
+i++;
     }}
+    if(this.isCandidateAdd===false){
+    this.candidates=this.candidates.concat( this.addToSerchIds);}
+    this.isCandidateAdd=false;
+
+  }
   ngOnInit() {
    // this.candidates2 = this.candidate2;
   }
@@ -84,7 +93,16 @@ export class QCardviewComponent implements OnInit, OnChanges {
 
     this.updatedIdsModel.updatedCandidateInShortlistId=selectedCandidate._id;
     this.updatedIds.emit(this.updatedIdsModel);
+    this.updatedIdsModel=new UpdatedIds();
     /*this.shortlisted = !this.shortlisted;*/
+    let i=0;
+    for(let item of this.candidates){
+
+      if(item._id ===selectedCandidate._id){
+        this.candidates.splice(i,1);
+      }
+      i++;
+    }
 
   }
 
@@ -108,6 +126,7 @@ export class QCardviewComponent implements OnInit, OnChanges {
       }
     }
 
+
   }
 
   addToCart(_id: any) {
@@ -117,6 +136,7 @@ export class QCardviewComponent implements OnInit, OnChanges {
       });
     this.updatedIdsModel.updatedCandidateIncartId=_id;
     this.updatedIds.emit(this.updatedIdsModel);
+    this.updatedIdsModel=new UpdatedIds();
     let i=0;
     for(let item of this.candidates){
 
@@ -125,7 +145,8 @@ export class QCardviewComponent implements OnInit, OnChanges {
       }
       i++;
     }
-    this.matches=this.candidates.length;
+
+
   }
 
   sortBy() {

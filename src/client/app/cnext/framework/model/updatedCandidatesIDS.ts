@@ -3,4 +3,5 @@ export class UpdatedIds {
   public updatedCandidateInShortlistId:string;
   public updatedCandidateRejectedId:string;
   public removeCandidateIncartId:string;
+  public removeCandidateShortListId:string;
 }
