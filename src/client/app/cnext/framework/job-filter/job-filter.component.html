@@ -1,5 +1,6 @@
 <button type="button" class="btn btn-block btn-filter" data-toggle="collapse" data-target="#filter-container">Filters</button>
 <div>
+  <form [formGroup]="userForm" (submit)="clearFilter()">
   <div id="filter-container" class="collapse filter-container">
     <h4>Primary Filters</h4>
     <div class="inner col-sm-12">
@@ -8,7 +9,7 @@
       <h5>Education</h5>
       <div *ngFor="let itemList of educationList">
         <label class="checkbox">
-          <input type="checkbox" value="{{itemList}}" (change)="filterByEducation($event)">{{itemList}}
+          <input type="checkbox" formControlName="eduction" value="{{itemList}}" (change)="filterByEducation($event)">{{itemList}}
         </label>
       </div>
 
@@ -16,16 +17,16 @@
         <h5>Experience</h5>
         <div class="col-sm-6 padding-right5">
           <label>Min</label>
-          <select (change)="selectExperiencesMinModel($event.target.value)">
-            <option [ngValue]="-1" label="select"></option>
+          <select formControlName="experienceMin" (change)="selectExperiencesMinModel($event.target.value)">
+            <!--<option [ngValue]="-1" label="select"></option>-->
             <option value="{{itemList}}"  *ngFor="let itemList of experienceRangeList">{{itemList}}</option>
           </select>
         </div>
         <div class="col-sm-6 padding-left5">
           <label>Max</label>
-          <select (change)="selectExperiencesMaxModel($event.target.value)">
-            <option [ngValue]="-1" label="select"></option>
-            <option value="{{itemList}}" [ngValue]="itemList" *ngFor="let itemList of experienceRangeList">{{itemList}}</option>
+          <select formControlName="experienceMax" (change)="selectExperiencesMaxModel($event.target.value)">
+            <!--<option [ngValue]="-1" label="select"></option>-->
+            <option value="{{itemList}}"  *ngFor="let itemList of experienceRangeList">{{itemList}}</option>
           </select>
         </div>
       </div>
@@ -34,15 +35,15 @@
         <h5>Salary Range</h5>
         <div class="col-sm-6 padding-right5">
           <label>Min</label>
-          <select (change)="selectSalaryMinModel($event.target.value)">
-            <option [ngValue]="-1" label="select"></option>
+          <select formControlName="salaryMin" (change)="selectSalaryMinModel($event.target.value)">
+           <!-- <option [ngValue]="-1" label="select"></option>-->
             <option value="{{itemList}}" *ngFor="let itemList of salaryRangeList">{{itemList}}</option>
           </select>
         </div>
         <div class="col-sm-6 padding-left5">
           <label>Max</label>
-          <select (change)="selectSalaryMaxModel($event.target.value)">
-            <option [ngValue]="-1" label="select"></option>
+          <select formControlName="salaryMax" (change)="selectSalaryMaxModel($event.target.value)">
+            <!--<option [ngValue]="-1" label="select"></option>-->
             <option value="{{itemList}}" *ngFor="let itemList of salaryRangeList">{{itemList}}</option>
           </select>
         </div>
@@ -51,33 +52,34 @@
       <h5>Location</h5>
 
       <label class="radio">
-        <input  type="radio" name="radiogroup" [value]="location" (change)="filterByLocation($event.target.value)">
+        <input  type="radio" name="radiogroup" value="{{location}}" (click)="filterByLocation($event.target.value)">
         {{location}}
       </label>
       <label class="radio">
-        <input type="radio" name="radiogroup" [value]="All" (change)="filterByLocation($event.target.value)">All
+        <input  type="radio" name="radiogroup" value="{{All}}" (click)="filterByLocation($event.target.value)">All
       </label>
 
       <h5>Proficiencies</h5>
       <div *ngFor="let itemList of proficiencyList">
         <label class="checkbox">
-          <input type="checkbox" value="{{itemList}}" (change)="filterByProficiency($event)">{{itemList}}
+          <input formControlName="proficiencies" type="checkbox" value="{{itemList}}" (change)="filterByProficiency($event)">{{itemList}}
         </label>
       </div>
 
       <h5>Lead Time to Join</h5>
-      <select  (change)="filterByJoinTime($event.target.value)">
+      <select  formControlName="timetojoin" (change)="filterByJoinTime($event.target.value)">
         <option [ngValue]="-1" label="select"></option>
-        <option  *ngFor="let itemList of jointimeList" [ngValue]="itemList">{{itemList}}</option>
+        <option  value="{{itemList}}" *ngFor="let itemList of jointimeList">{{itemList}}</option>
       </select>
 
       <h5>Industry Exposure</h5>
       <div *ngFor="let itemList of industryList">
         <label class="checkbox">
-          <input type="checkbox"  value="{{itemList}}" (change)="filterByIndustryExposure($event)">{{itemList}}
+          <input formControlName="industry" type="checkbox"  value="{{itemList}}" (change)="filterByIndustryExposure($event)">{{itemList}}
         </label>
       </div>
     </div>
   </div>
+    </form>
 </div>
 

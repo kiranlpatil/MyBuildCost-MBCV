@@ -10,6 +10,7 @@ import {JobPosterModel} from "../model/jobPoster";
 import {RecruiteQCardView2Service} from "../recruiter-q-card-view2/recruiter-q-card-view2.service";
 import {CandidateQCard} from "../model/candidateQcard";
 import {RecruitercandidatesListsService} from "../candidate-lists.service";
+import {CandidateFilterService} from "../filters/candidate-filter.service";
 
 @Component({
   moduleId: module.id,
@@ -49,7 +50,7 @@ export class RecruiterDashboardComponent implements OnInit {
 
 
 
-  constructor(private _router: Router, private recruiterDashboardService: RecruiterDashboardService,
+  constructor(private candidateFilterService: CandidateFilterService,private _router: Router, private recruiterDashboardService: RecruiterDashboardService,
               private qCardViewService:RecruiteQCardView2Service,private candidateLists:RecruitercandidatesListsService) {
     this.recruiterDashboardService.getJobList()
       .subscribe(
@@ -79,6 +80,7 @@ export class RecruiterDashboardComponent implements OnInit {
   }
   rejectedCandidates() {
     this.showQCard=true;
+    this.candidateFilterService.clearFilter();
 
     if(this.rejectedCandidatesIDS.length>0) {
       this.qCardViewService.getCandidatesdetails(this.rejectedCandidatesIDS, this.selectedJobProfile)
@@ -91,6 +93,7 @@ export class RecruiterDashboardComponent implements OnInit {
   }
   appliedCandidates(){
     this.showQCard=true;
+    this.candidateFilterService.clearFilter();
     this.candidates=[];
     if(this.appliedCandidatesIDS.length>0) {
       this.qCardViewService.getCandidatesdetails(this.appliedCandidatesIDS, this.selectedJobProfile)
@@ -104,10 +107,12 @@ export class RecruiterDashboardComponent implements OnInit {
   showMatchedCandidate()
   {
     this.showQCard=false;
+    this.candidateFilterService.clearFilter();
 
   }
   showShortlistedCandidate() {
     this.showQCard=true;
+    this.candidateFilterService.clearFilter();
     this.candidates=[];
     if(this.candidateInCartIDS.length>0) {
       this.qCardViewService.getCandidatesdetails(this.candidateIDS, this.selectedJobProfile)
@@ -165,6 +170,7 @@ export class RecruiterDashboardComponent implements OnInit {
   }
   candidateInCart() {
     this.showQCard=true;
+    this.candidateFilterService.clearFilter();
     if(this.candidateInCartIDS.length>0) {
       this.qCardViewService.getCandidatesdetails(this.candidateInCartIDS, this.selectedJobProfile)
         .subscribe(

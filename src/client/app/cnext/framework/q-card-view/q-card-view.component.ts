@@ -70,7 +70,9 @@ export class QCardviewComponent implements OnInit, OnChanges {
   ngOnInit() {
    // this.candidates2 = this.candidate2;
   }
-
+  clearFilter() {
+    this.candidateFilterService.clearFilter();
+  }
   addToShortList(selectedCandidate: any) {
     this.qCardViewService.addCandidateLists(this.recruiterId, this.jobPosterModel._id, selectedCandidate._id, ValueConstant.SHORT_LISTED_CANDIDATE, "add").subscribe(
       user => {

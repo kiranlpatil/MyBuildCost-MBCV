@@ -1,4 +1,4 @@
-import {Component, Input, EventEmitter, Output} from "@angular/core";
+import {Component, Input, EventEmitter, Output, OnChanges, OnInit} from "@angular/core";
 import {CandidateQCard} from "../model/candidateQcard";
 import {ShowQcardviewService} from "../showQCard.service";
 import {JobPosterModel} from "../model/jobPoster";
@@ -9,6 +9,8 @@ import {RecruitercandidatesListsService} from "../candidate-lists.service";
 import {QCardViewService} from "../q-card-view/q-card-view.service";
 import {RecruiterDashboardService} from "../recruiter-dashboard/recruiter-dashboard.service";
 import {UpdatedIds} from "../model/updatedCandidatesIDS";
+import {CandidateFilter} from "../model/candidate-filter";
+import {CandidateFilterService} from "../filters/candidate-filter.service";
 import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
 import {Candidate} from "../model/candidate";
 
@@ -19,7 +21,7 @@ import {Candidate} from "../model/candidate";
   styleUrls: ['recruiter-q-card-view2.component.css'],
 
 })
-export class RecruiterQCardview2Component  {
+export class RecruiterQCardview2Component implements OnInit,OnChanges {
   @Output() currentrejected:EventEmitter<any> = new EventEmitter<any>();
   @Input() candidates:CandidateQCard[];
   @Input() recruiterId: string;
@@ -37,11 +39,19 @@ export class RecruiterQCardview2Component  {
   private selectedPerson:CandidateQCard = new CandidateQCard();
   private image_path:string=ImagePath.PROFILE_IMG_ICON;
   private candidateRejected:CandidateQCard[] = new Array(0);
-  constructor(private recruiterQCardViewService: QCardViewService,
+  private candidateFilter: CandidateFilter;
+
+   constructor(private recruiterQCardViewService: QCardViewService,
               private profileCreatorService:CandidateProfileService,
               private recruiterDashboardService: RecruiterDashboardService,
+               private candidateFilterService: CandidateFilterService,
               private qCardViewService:RecruiteQCardView2Service,private candidateLists:RecruitercandidatesListsService) {
 
+    this.candidateFilterService.candidateFilterValue$.subscribe(
+      (data: CandidateFilter) => {
+        this.candidateFilter = data;
+      }
+    );
 
   }
 
@@ -56,8 +66,9 @@ if (changes.jobPosterModel != undefined && changes.jobPosterModel.currentValue) 
 
   }
 
-
-
+   ngOnInit() {
+  //this.candidates = this.candidate2;
+   }
 
 
   Cancel(item:any)
@@ -86,6 +97,9 @@ if (changes.jobPosterModel != undefined && changes.jobPosterModel.currentValue) 
       });
 
     this.currentrejected.emit(this.updatedIdsModel);
+  }
+  clearFilter() {
+  this.candidateFilterService.clearFilter();
   }
   onClick(item:any){
     this.profileCreatorService.getCandidateDetailsOfParticularId(item._id).subscribe(

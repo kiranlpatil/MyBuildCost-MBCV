@@ -10,9 +10,10 @@
       </select>
     </div>
   </header>
-
+  <button type="button" (click)="clearFilter()"> clear filter</button>
   <div class="card-view clearfix">
-    <div class="col-sm-6" *ngFor= "let item of candidates | orderby:qCardModel.sortValue | dashboardfilter:candidateFilter">
+    <div class="col-sm-6" *ngFor= "let item of candidates2 | orderby:qCardModel.sortValue | dashboardfilter:candidateFilter;let i=index;">
+      <span>{{candidateLength}}</span>
       <div class="panel clearfix">
         <div><span class="glyphicon glyphicon-heart-empty" (click)="addToShortList(item)" [class.shortlisted]="item.isCandidateshortListed"></span></div>
         <div [hidden]="!item.isCandidateRead"><span class="glyphicon glyphicon-eye-close"></span></div>

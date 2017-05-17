@@ -1,11 +1,11 @@
-import {Component, Input, OnChanges, OnInit} from '@angular/core';
+import {Component, ElementRef, Input, OnChanges, OnInit} from '@angular/core';
 import { ShowQcardviewService } from '../showQCard.service';
 import {QCardViewService} from "../q-card-view/q-card-view.service";
 import {JobFilterService} from "./job-filter.service";
 import {CandidateFilter} from "../model/candidate-filter";
 import {CandidateFilterService} from "../filters/candidate-filter.service";
 import {JobPosterModel} from "../model/jobPoster";
-
+import {  FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
     moduleId: module.id,
@@ -27,15 +27,33 @@ export class JobFilterComponent implements OnInit,OnChanges{
   private candidateFilter :  CandidateFilter=new CandidateFilter();
   private location:string;
   private All = "All";
+  private userForm:FormGroup;
+
   @Input() private selectedJob :JobPosterModel;
 
 
-  constructor(private showQCardview:ShowQcardviewService,private jobFilterService:JobFilterService,private candidateFilterService:CandidateFilterService) {
+  constructor(private formBuilder:FormBuilder, private showQCardview: ShowQcardviewService, private jobFilterService: JobFilterService, private candidateFilterService: CandidateFilterService) {
     this.showQCardview.showJobQCardView$.subscribe(
       data=> {
         this.isShowJobFilter=true;
       }
     );
+    this.candidateFilterService.clearFilter$.subscribe(() => {
+      this.clearFilter();
+    })
+
+    this.userForm = this.formBuilder.group({
+      eduction:'',
+      experienceMin:'',
+      experienceMax:'',
+      salaryMin:'',
+      salaryMax:'',
+      radiogroup:'',
+      radiogroup1:'',
+      proficiencies:'',
+      timetojoin:'',
+      industry:''
+    });
   }
 
   ngOnChanges(changes :any){
@@ -125,10 +143,12 @@ export class JobFilterComponent implements OnInit,OnChanges{
   }
 
   filterByJoinTime(value:any) {
-    this.candidateFilter.filterByJoinTime = value;
-    this.queryListPush('(args.filterByJoinTime && item.noticePeriod) && (args.filterByJoinTime.toLowerCase() === item.noticePeriod.toLowerCase())');
-    this.buildQuery();
-    this.candidateFilterService.filterby(this.candidateFilter);
+    if(value) {
+      this.candidateFilter.filterByJoinTime = value;
+      this.queryListPush('(args.filterByJoinTime && item.noticePeriod) && (args.filterByJoinTime.toLowerCase() === item.noticePeriod.toLowerCase())');
+      this.buildQuery();
+      this.candidateFilterService.filterby(this.candidateFilter);
+    }
   }
 
 
@@ -203,7 +223,9 @@ export class JobFilterComponent implements OnInit,OnChanges{
   }
   clearFilter() {
     var query = 'true';
+    this.userForm.reset();
     this.candidateFilter=new CandidateFilter();
+    this.queryList  = new Array(0);
     this.candidateFilter.query = query;
     this.candidateFilterService.filterby(this.candidateFilter);
   }

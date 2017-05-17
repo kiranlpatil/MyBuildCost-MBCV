@@ -1,6 +1,7 @@
 <div class="dashboard-view clearfix">
+  <button type="button" (click)="clearFilter()"> clear filter</button>
   <div class="card-view clearfix">
-    <div class="col-sm-6" *ngFor="let item of candidates">
+    <div class="col-sm-6" *ngFor="let item of candidates | dashboardfilter:candidateFilter">
       <div class="panel clearfix">
         <div class="col-sm-12">
           <div class="col-sm-5 col-xs-6 no-padding right-side">
