@@ -51,8 +51,8 @@
       <h5>Location</h5>
 
       <label class="radio">
-        <input type="radio" name="radiogroup" [value]="pune" (change)="filterByLocation($event.target.value)">
-        {{pune}}
+        <input  type="radio" name="radiogroup" [value]="location" (change)="filterByLocation($event.target.value)">
+        {{location}}
       </label>
       <label class="radio">
         <input type="radio" name="radiogroup" [value]="All" (change)="filterByLocation($event.target.value)">All

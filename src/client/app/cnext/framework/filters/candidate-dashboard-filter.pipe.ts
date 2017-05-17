@@ -8,17 +8,11 @@ export class CandidateDashboardFilterPipe implements  PipeTransform {
 
 
   transform(array: Array<CandidateQCard>, args: CandidateFilter): Array<any> {
-    var candidatesArray: CandidateQCard[] = new Array();
-    var temp: CandidateQCard[] = new Array();
-    //var result:CandidateQCard[] = new Array();
-    //candidatesArray = array;
     if (array == null) {
       return null;
     }
 
     if (args) {
-      temp = array;
-      //var query = ;
       //return array.filter(item => item.proficiencies.toLowerCase().indexOf(args.filterByValue.toLowerCase()) !== -1);
 
       return array.filter(item => eval(args.query)

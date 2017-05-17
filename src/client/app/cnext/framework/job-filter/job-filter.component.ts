@@ -25,8 +25,8 @@ export class JobFilterComponent implements OnInit,OnChanges{
   private salaryRangeList : string[] = new Array(0);
   private queryList : string[] = new Array(0);
   private candidateFilter :  CandidateFilter=new CandidateFilter();
-  pune = "pune";
-  All = "All";
+  private location:string;
+  private All = "All";
   @Input() private selectedJob :JobPosterModel;
 
 
@@ -40,9 +40,9 @@ export class JobFilterComponent implements OnInit,OnChanges{
 
   ngOnChanges(changes :any){
     if(changes.selectedJob.currentValue){
-      //this.proficiencyList = changes.selectedJob.currentValue.proficiencies;
-      //this.industryList = changes.selectedJob.currentValue.interestedIndustries;
-      //this.industryList = changes.selectedJob.currentValue.interestedIndustries;
+      this.proficiencyList = changes.selectedJob.currentValue.proficiencies;
+      this.industryList = changes.selectedJob.currentValue.interestedIndustries;
+      this.location = changes.selectedJob.currentValue.location.city;
     }
   }
   ngOnInit() {
@@ -50,12 +50,12 @@ export class JobFilterComponent implements OnInit,OnChanges{
       .subscribe(
         list => {
 
-          this.proficiencyList = list.proficiency;
+          //this.proficiencyList = list.proficiency;
           this.locationList = list.current_location;
           this.salaryRangeList = list.salaryRangeList;
           this.educationList = list.education;
           this.jointimeList = list.joining_period;
-          this.industryList = list.industry_exposure;
+          //this.industryList = list.industry_exposure;
           this.experienceRangeList = list.experienceRangeList;
         },
         error => this.onError(error));
@@ -85,7 +85,6 @@ export class JobFilterComponent implements OnInit,OnChanges{
   }
 
   filterByEducation(event:any) {
-    //this.candidateFilter.filterName = 'Education';
     var value = event.target.value;
     if(event.target.checked) {
       this.candidateFilter.educationDataForFilter.push(value.toLowerCase())
@@ -106,7 +105,6 @@ export class JobFilterComponent implements OnInit,OnChanges{
   }
 
   filterByIndustryExposure(event:any) {
-    //this.candidateFilter.filterName = 'IndustryExposure';
     var value = event.target.value;
     if(event.target.checked) {
       this.candidateFilter.industryExposureDataForFilter.push(value.toLowerCase())
@@ -127,7 +125,6 @@ export class JobFilterComponent implements OnInit,OnChanges{
   }
 
   filterByJoinTime(value:any) {
-    //this.candidateFilter.filterName = 'JoinTime';
     this.candidateFilter.filterByJoinTime = value;
     this.queryListPush('(args.filterByJoinTime && item.noticePeriod) && (args.filterByJoinTime.toLowerCase() === item.noticePeriod.toLowerCase())');
     this.buildQuery();
@@ -136,13 +133,11 @@ export class JobFilterComponent implements OnInit,OnChanges{
 
 
   selectSalaryMinModel(value:any) {
-    //this.candidateFilter.filterName = 'Salary';
     this.candidateFilter.salaryMinValue = value;
     this.salaryFilterBy();
   }
 
   selectSalaryMaxModel(value:any) {
-    //this.candidateFilter.filterName = 'Salary';
     this.candidateFilter.salaryMaxValue = value;
     this.salaryFilterBy();
   }
@@ -156,7 +151,6 @@ export class JobFilterComponent implements OnInit,OnChanges{
   }
 
   selectExperiencesMaxModel(value:any) {
-    //this.candidateFilter.filterName = 'Experience';
     this.candidateFilter.experienceMaxValue = value;
     this.experienceFilterBy();
 
@@ -165,7 +159,6 @@ export class JobFilterComponent implements OnInit,OnChanges{
   selectExperiencesMinModel(value:any) {
     this.candidateFilter.experienceMinValue = value;
     this.experienceFilterBy();
-    //this.candidateFilterService.filterby(this.candidateFilter);
   }
 
   experienceFilterBy() {

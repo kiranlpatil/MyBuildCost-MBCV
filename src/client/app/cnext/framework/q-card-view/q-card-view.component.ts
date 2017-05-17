@@ -138,7 +138,7 @@ export class QCardviewComponent implements OnInit, OnChanges {
     this.toggle = true;
   }
 
-  candidate2 =[
+  /*candidate2 =[
    {
    "_id": "1",
    "first_name" : "krishna",
@@ -351,5 +351,5 @@ export class QCardviewComponent implements OnInit, OnChanges {
       "picture":'',
       "isCandidateRead":true
     }
-   ]
+   ]*/
 }
