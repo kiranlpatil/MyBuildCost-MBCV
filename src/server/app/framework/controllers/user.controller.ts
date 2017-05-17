@@ -7,6 +7,7 @@ import UserService = require("../services/user.service");
 import RecruiterService = require("../services/recruiter.service");
 import Messages = require("../shared/messages");
 import ResponseService = require("../shared/response.service");
+import CandidateService = require("../services/candidate.service");
 
 export function login(req: express.Request, res: express.Response, next: any) {
   try {
@@ -32,12 +33,12 @@ export function login(req: express.Request, res: express.Response, next: any) {
                 next(error);
               }
               else{
-                console.log("recruter is",recruiter[0]);
                 res.status(200).send({
                   "status": Messages.STATUS_SUCCESS,
                   "data": {
                     "email": result[0].email,
                     "_id": result[0]._id,
+                    "end_user_id":recruiter[0]._id,
                     "current_theme": result[0].current_theme,
                     "picture": result[0].picture,
                     "company_headquarter_country":recruiter[0].company_headquarter_country,
@@ -56,20 +57,33 @@ export function login(req: express.Request, res: express.Response, next: any) {
             });
 
           }
-          else{
-            res.status(200).send({
-              "status": Messages.STATUS_SUCCESS,
-              "data": {
-                "first_name": result[0].first_name,
-                "last_name": result[0].last_name,
-                "email": result[0].email,
-                "_id": result[0]._id,
-                "current_theme": result[0].current_theme,
-                "picture": result[0].picture,
-                "mobile_number":result[0].mobile_number,
-                "isCandidate":result[0].isCandidate
-              },
-              access_token: token
+          else {
+
+            var candidateService = new CandidateService();
+
+            candidateService.retrieve({"userId": result[0]._id}, (error, candidate) => {
+              if (error) {
+                next(error);
+              }
+              else {
+
+                res.status(200).send({
+                  "status": Messages.STATUS_SUCCESS,
+                  "data": {
+                    "first_name": result[0].first_name,
+                    "last_name": result[0].last_name,
+                    "email": result[0].email,
+                    "_id": result[0]._id,
+                    "end_user_id": candidate[0]._id,
+                    "current_theme": result[0].current_theme,
+                    "picture": result[0].picture,
+                    "mobile_number": result[0].mobile_number,
+                    "isCandidate": result[0].isCandidate,
+                    "isCompleted" : candidate[0].isCompleted
+                  },
+                  access_token: token
+                });
+              }
             });
           }
 

@@ -118,7 +118,13 @@ class CandidateSchema {
       },
       lockedOn :{
         type: Date
-      }
+      },
+      job_list: [{
+        name: String,
+        ids: [{
+          type:String
+        }]
+      }],
 
     }, {versionKey: false});
 

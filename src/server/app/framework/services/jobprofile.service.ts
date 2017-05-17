@@ -11,14 +11,15 @@ import CandidateRepository = require("../dataaccess/repository/candidate.reposit
 import JobProfileModel = require("../dataaccess/model/jobprofile.model");
 import CandidateSearchRepository = require("../search/candidate-search.repository");
 import RecruiterModel = require("../dataaccess/model/recruiter.model");
+import {ConstVariables} from "../shared/sharedconstants";
 
 
 class JobProfileService {
-  private jobprofileRepository: JobProfileRepository;
-  private candidateSearchRepository: CandidateSearchRepository
-  private recruiterRepository: RecruiterRepository;
-  candidateRepository: CandidateRepository;
-  APP_NAME: string;
+  private jobprofileRepository:JobProfileRepository;
+  private candidateSearchRepository:CandidateSearchRepository;
+  private recruiterRepository:RecruiterRepository;
+  candidateRepository:CandidateRepository;
+  APP_NAME:string;
 
   constructor() {
     this.jobprofileRepository = new JobProfileRepository();
@@ -28,7 +29,7 @@ class JobProfileService {
     this.APP_NAME = ProjectAsset.APP_NAME;
   }
 
-  create(item: any, callback: (error: any, result: any) => void) {
+  create(item:any, callback:(error:any, result:any) => void) {
     this.jobprofileRepository.create(item, (err, res) => {
       if (err) {
         callback(new Error(err), null);
@@ -38,7 +39,7 @@ class JobProfileService {
     });
   }
 
-  searchCandidatesByJobProfile(jobProfile: JobProfileModel, callback: (error: any, result: any) => void) {
+  searchCandidatesByJobProfile(jobProfile:JobProfileModel, callback:(error:any, result:any) => void) {
 
     this.candidateSearchRepository.getCandidateByIndustry(jobProfile, (err, res) => {
       if (err) {
@@ -49,7 +50,7 @@ class JobProfileService {
     });
   }
 
-  retrieve(data: any, callback: (error: any, result: any) => void) {
+  retrieve(data:any, callback:(error:any, result:any) => void) {
     let query = {
       "postedJobs": {$elemMatch: {"_id": new mongoose.Types.ObjectId(data.postedJob)}}
     };
@@ -59,7 +60,7 @@ class JobProfileService {
       }
       else {
         if (res.length > 0) {
-          let recruiter: Recruiter = new Recruiter();
+          let recruiter:Recruiter = new Recruiter();
           recruiter = res[0];
           for (let job of res[0].postedJobs) {
             if (job._id.toString() === data.postedJob) {
@@ -73,7 +74,7 @@ class JobProfileService {
     });
   }
 
-  update(item: any, callback: (error: any, result: any) => void) {
+  update(item:any, callback:(error:any, result:any) => void) {
 
     let query = {
       "postedJobs": {$elemMatch: {"_id": new mongoose.Types.ObjectId(item.profileId)}}
@@ -95,7 +96,7 @@ class JobProfileService {
       }
     };
 
-    let updatedQuery3: any;
+    let updatedQuery3:any;
 
     let updatedQuery4 = {
       "new": true, "upsert": true
@@ -113,12 +114,12 @@ class JobProfileService {
               for (let list of job.candidate_list) {
                 if (list.name == item.listName) {
                   updateFlag = true;
-                  if(item.action=="add") {
+                  if (item.action == "add") {
                     let index = list.ids.indexOf(item.candidateId);    // <-- Not supported in <IE9
                     if (index == -1) {
                       list.ids.push(item.candidateId);
                     }
-                  }else{
+                  } else {
                     let index = list.ids.indexOf(item.candidateId);    // <-- Not supported in <IE9
                     if (index !== -1) {
                       list.ids.splice(index, 1);
@@ -133,14 +134,14 @@ class JobProfileService {
                 }
               }
 
-              let param2: any;
-              updateFlag ? param2 = updatedQuery3:param2 = updatedQuery2;
+              let param2:any;
+              updateFlag ? param2 = updatedQuery3 : param2 = updatedQuery2;
 
               this.recruiterRepository.findOneAndUpdate(updatedQuery1, param2, updatedQuery4, (err, record) => {
                 if (record) {
                   callback(null, record);
                 } else {
-                  let error: any;
+                  let error:any;
                   if (record === null) {
                     error = new Error("Unable to add candidate.");
                     callback(error, null);
@@ -159,8 +160,135 @@ class JobProfileService {
   }
 
 
-  getQCardDetails(item: any, callback: (error: any, result: any) => void) {
-    let candidateDetails: any;
+  applyJob(item:any, callback:(error:any, result:any) => void) {
+
+
+    this.candidateRepository.retrieve({"_id":new mongoose.Types.ObjectId(item.candidateId)},(error, response) =>{
+
+      if(error){
+        callback(new Error("No candidate Found"), null);
+      }else{
+        if(response.length>0){
+          let updateExistingQueryForCandidate : any;
+          let isJobFound : boolean=false;
+          for(let list of response[0].job_list){
+            if (list.name == ConstVariables.APPLIED_CANDIDATE) {
+              isJobFound=true;
+              let index = list.ids.indexOf(item.profileId);
+              if (index == -1) {
+                list.ids.push(item.profileId);
+              }
+              updateExistingQueryForCandidate = {
+                $set: {
+                  "job_list": response[0].job_list
+                }
+              };
+              break;
+            }
+          }
+          let newEntryQueryForCandidate = {
+            $push: {
+              "job_list": {
+                "name": ConstVariables.APPLIED_CANDIDATE,
+                "ids": item.profileId
+              }
+            }
+          };
+          let options = {
+            "new": true, "upsert": true
+          };
+          let latestQueryForCandidate :any;
+          isJobFound ? latestQueryForCandidate = updateExistingQueryForCandidate : latestQueryForCandidate = newEntryQueryForCandidate;
+          let candidateSearchQuery = {
+            "_id": item.candidateId
+          };
+
+          this.candidateRepository.findOneAndUpdate(candidateSearchQuery, latestQueryForCandidate, options, (err, record) => {
+            if (record) {
+              let query = {
+                "postedJobs": {$elemMatch: {"_id": new mongoose.Types.ObjectId(item.profileId)}}
+              };
+              let newEntryQuery = {
+                $push: {
+                  "postedJobs.$.candidate_list": {
+                    "name": ConstVariables.APPLIED_CANDIDATE,
+                    "ids": item.candidateId
+                  }
+                }
+              };
+              let updateExistingQuery : any;
+              this.recruiterRepository.retrieve(query, (err, res) => {
+                if (err) {
+                  callback(new Error("Not Found Any Job posted"), null);
+                }
+                else {
+                  let isFound : boolean =false;
+                  if (res.length > 0) {
+                    for (let job of res[0].postedJobs) {
+                      if (job._id.toString() === item.profileId) {
+                        for (let list of job.candidate_list) {
+                          if (list.name == ConstVariables.APPLIED_CANDIDATE) {
+                            isFound=true;
+                            let index = list.ids.indexOf(item.candidateId);
+                            if (index == -1) {
+                              list.ids.push(item.candidateId);
+                            }
+                            updateExistingQuery = {
+                              $set: {
+                                "postedJobs.$.candidate_list": job.candidate_list
+                              }
+                            };
+                            break;
+                          }
+                        }
+                      }
+                    }
+                    let latestQuery :any;
+                    isFound ? latestQuery = updateExistingQuery : latestQuery = newEntryQuery;
+                    let recruiterSearchQuery = {
+                      "_id": res[0]._id,
+                      "postedJobs._id": item.profileId
+                    };
+
+                    this.recruiterRepository.findOneAndUpdate(recruiterSearchQuery, latestQuery, options, (err, record) => {
+                      if (record) {
+                        callback(null, record);
+                      } else {
+                        let error:any;
+                        if (record === null) {
+                          error = new Error("Unable to add candidate.");
+                          callback(error, null);
+                        }
+                        else {
+                          callback(err, null);
+                        }
+                      }
+                    });
+                  }
+                }
+              });
+
+            } else {
+              let error:any;
+              if (record === null) {
+                error = new Error("Unable to add Job to List.");
+                callback(error, null);
+              }
+              else {
+                callback(err, null);
+              }
+            }
+          });
+
+        }
+      }
+    });
+
+
+  }
+
+  getQCardDetails(item:any, callback:(error:any, result:any) => void) {
+    let candidateDetails:any;
 
     this.candidateRepository.retrieveByMultiIds(item.candidateIds, {}, (err, candidateDetailsRes) => {
       if (err) {
@@ -176,11 +304,11 @@ class JobProfileService {
           }
           else {
             if (res.length > 0) {
-              let recruiter: Recruiter = new Recruiter();
+              let recruiter:Recruiter = new Recruiter();
               recruiter = res[0];
               for (let job of res[0].postedJobs) {
                 if (job._id.toString() === item.jobId) {
-                  this.candidateRepository.getCandidateQCard(candidateDetails, job,true, callback);
+                  this.candidateRepository.getCandidateQCard(candidateDetails, job, true, callback);
                 }
               }
             }

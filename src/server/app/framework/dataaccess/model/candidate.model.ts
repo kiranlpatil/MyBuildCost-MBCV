@@ -10,6 +10,7 @@ import RoleModel = require("./role.model");
 import CertificationModel = require("./certification.model");
 import AwardModel = require("./award.model");
 import IndustryModel = require("./industry.model");
+import JobListModel = require("./job-list.model");
 
 
 interface CandidateModel {
@@ -30,5 +31,6 @@ interface CandidateModel {
   proficiencies : string[];
   secondaryCapability : string[];
   lockedOn: Date;
+  job_list : JobListModel[];
 }
 export = CandidateModel;

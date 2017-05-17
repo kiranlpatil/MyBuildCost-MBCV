@@ -105,6 +105,36 @@ export function update(req: express.Request, res: express.Response, next: any) {
   }
 }
 
+export function apply(req : express.Request, res : express.Response, next :any){
+  try {
+    var jobProfileService = new JobProfileService();
+    let data = {
+      "candidateId": req.params.id,
+      "profileId": req.params.profileId,
+    };
+    jobProfileService.applyJob(data,(err, result)=>{
+        if(err){
+          next({
+            reason: Messages.MSG_ERROR_RSN_USER_NOT_FOUND,
+            message: Messages.MSG_ERROR_RSN_USER_NOT_FOUND,
+            code: 403
+          });
+        }else {
+          res.status(200).send({
+            "status": Messages.STATUS_SUCCESS,
+            "data": result
+          });
+        }
+    });
+
+  }catch (e){
+    res.status(403).send({message: e.message});
+  }
+
+  }
+
+
+
 export function getQCardDetails(req: express.Request, res: express.Response, next: any) {
   try {
     var jobProfileService = new JobProfileService();
