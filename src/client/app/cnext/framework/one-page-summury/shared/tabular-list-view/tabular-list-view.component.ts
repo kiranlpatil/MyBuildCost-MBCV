@@ -1,5 +1,7 @@
-import {Component,Input } from "@angular/core";
+import {Component, Input, Output, EventEmitter} from "@angular/core";
 import {Role} from "../../../model/role";
+import {RecruiterDashboardButton} from "../../../model/buttonAtRecruiterdashboard";
+import {Candidate} from "../../../model/candidate";
 
 @Component({
   moduleId: module.id,
@@ -11,5 +13,18 @@ import {Role} from "../../../model/role";
 export class TabularListViewComponent {
 
   @Input() roles:Role[]=new Array(0);
+  @Input() button:RecruiterDashboardButton;
+  @Input() model: Candidate;
+  @Output() eventReject: EventEmitter<any>= new EventEmitter<any>();
+  @Output() eventCart: EventEmitter<any>= new EventEmitter<any>();
 
+  Reject(){
+
+    this.eventReject.emit(this.model);
+    this.model=new Candidate();
+  }
+  Addto(){debugger
+    this.eventCart.emit(this.model);
+    this.model=new Candidate();
+  }
 }

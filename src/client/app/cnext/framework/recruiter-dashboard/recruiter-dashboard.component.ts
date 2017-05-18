@@ -89,8 +89,13 @@ export class RecruiterDashboardComponent implements OnInit {
     }
   }
   rejectedCandidates() {
-    this.buttonModel.isShowRemoveButton=true;
     this.buttonModel.isShowViewProfileButton=true;
+
+    this.buttonModel.isShowRemoveButton=true;
+    this.buttonModel.isShowViewFullProfileButton=false;
+    this.buttonModel.isShowRejectButton=false;
+    this.buttonModel.isShowAddToCartButton=false;
+
     this.showQCard=true;
     this.candidateFilterService.clearFilter();
 
@@ -126,6 +131,8 @@ this.newrejectedCandidatesIDS=[];
     this.buttonModel.isShowViewProfileButton=true;
     this.buttonModel.isShowRejectButton=true;
     this.buttonModel.isShowAddToCartButton=true;
+    this.buttonModel.isShowRemoveButton=false;
+    this.buttonModel.isShowViewFullProfileButton=false;
 
     this.showQCard=true;
     this.candidateFilterService.clearFilter();
@@ -207,8 +214,9 @@ this.newappliedCandidatesIDS=[];
   }
   showShortlistedCandidate() {
     this.buttonModel.isShowRemoveButton=true;
-    this.buttonModel.isShowViewProfileButton=true;
+    this.buttonModel.isShowViewFullProfileButton=false;
     this.buttonModel.isShowRejectButton=true;
+    this.buttonModel.isShowViewProfileButton=true;
     this.buttonModel.isShowAddToCartButton=true;
 
     this.showQCard=true;
@@ -360,8 +368,11 @@ this.newcandidateIDS=[];
     this.showQCard=true;
     this.candidateFilterService.clearFilter();
     this.buttonModel.isShowRemoveButton=true;
-    this.buttonModel.isShowViewProfileButton=true;
+    this.buttonModel.isShowViewFullProfileButton=true;
     this.buttonModel.isShowRejectButton=true;
+    this.buttonModel.isShowViewProfileButton=false;
+    this.buttonModel.isShowAddToCartButton=false;
+
 
 
         let i=0;
