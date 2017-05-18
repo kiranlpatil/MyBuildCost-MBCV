@@ -144,6 +144,7 @@ import {JobViewComponent} from "./cnext/framework/one-page-summury/recruiter-job
 import {CandidateJobListComponent} from "./cnext/framework/candidate-dashboard/candidate-job-list/candidate-job-list.component";
 import {CandidateJobListService} from "./cnext/framework/candidate-dashboard/candidate-job-list/candidate-job-list.service";
 import {CandidateViewComponent} from "./cnext/framework/one-page-summury/candidate-summury/candidate-view/candidate-view.component";
+import {CandidateInCartService} from "./cnext/framework/candidate-in-cart.service";
 //C-NEXT IMPORTS
 
 
@@ -311,7 +312,8 @@ import {CandidateViewComponent} from "./cnext/framework/one-page-summury/candida
     JobFilterService,
     CandidateFilterService,
     RecruiteQCardView2Service,
-    RecruitercandidatesListsService
+    RecruitercandidatesListsService,
+    CandidateInCartService
 
   ],
   bootstrap: [AppComponent]

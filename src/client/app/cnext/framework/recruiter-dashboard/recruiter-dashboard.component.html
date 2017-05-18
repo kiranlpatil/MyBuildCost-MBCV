@@ -13,7 +13,7 @@
         <div class="candidate-listing" [hidden]="!isJobSelected" >
           <cn-job-filter [selectedJob]="selectedJobProfile"></cn-job-filter>
           <div class="col-sm-12 no-padding">
-            <button class="btn btn-back" (click)="isJobSelected=false">All Jobs</button>
+            <button class="btn btn-back" (click)="showAllJobs()">All Jobs</button>
             <div class="list-view"  *ngIf="selectedJobProfile!=undefined">
               <div class="panel clearfix">
                 <ul>

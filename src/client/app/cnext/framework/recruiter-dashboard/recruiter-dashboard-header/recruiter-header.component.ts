@@ -2,6 +2,8 @@ import {Component, OnInit, Input} from "@angular/core";
 import {Router} from "@angular/router";
 import {LocalStorageService} from "../../../../framework/shared/localstorage.service";
 import {NavigationRoutes, AppSettings, LocalStorage, ImagePath} from "../../../../framework/shared/constants";
+import {CandidateInCartService} from "../../candidate-in-cart.service";
+import {CandidateNumberDifferentList} from "../../job-lister/candidate-diff-list";
 
 @Component({
   moduleId: module.id,
@@ -13,10 +15,17 @@ import {NavigationRoutes, AppSettings, LocalStorage, ImagePath} from "../../../.
 export class RecruiterHeaderComponent implements OnInit {
   @Input() jobCount: any;
   @Input() companyName: any;
+  private candidatesInList: CandidateNumberDifferentList=new CandidateNumberDifferentList();
   company_name: string;
   uploaded_image_path: string;
 
-  constructor(private _router: Router) {
+  constructor(private _router: Router,
+              private candidateInCartService : CandidateInCartService) {
+    candidateInCartService.showCandidateCart$.subscribe(
+      candidates=>{
+        this.candidatesInList =candidates;
+      }
+    );
 
   }
 

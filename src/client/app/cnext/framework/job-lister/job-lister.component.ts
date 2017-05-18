@@ -1,6 +1,9 @@
 import {  Component,Input,EventEmitter,Output  } from '@angular/core';
 import {JobPosterModel} from "../model/jobPoster";
 import {QCardsortBy} from "../model/q-cardview-sortby";
+import {ValueConstant} from "../../../framework/shared/constants";
+import {CandidateInCartService} from "../candidate-in-cart.service";
+import {CandidateNumberDifferentList} from "./candidate-diff-list";
 
 
 @Component({
@@ -16,15 +19,29 @@ export class JobListerComponent {
   public jobListToCheck:JobPosterModel[] = new Array(0);
   private toggle:boolean=false;
   private qCardModel:QCardsortBy=new QCardsortBy();
+  private candidatesInList : CandidateNumberDifferentList= new CandidateNumberDifferentList();
   @Output() jobEventEmitter : EventEmitter<any> =new EventEmitter();
 
-  constructor() {
+  constructor(private candidateInCartService : CandidateInCartService) {
     this.qCardModel.name='Date';
   }
 
   ngOnChanges(changes: any) {
-    if (changes.jobListInput != undefined && changes.jobListInput.length > 0) {
-      this.jobListInput = changes.jobListInput;
+    if (changes.jobListInput.currentValue != undefined && changes.jobListInput.currentValue.length > 0) {
+      this.jobListInput = changes.jobListInput.currentValue;
+      this.totalCandidateInAllCart = 0;
+      for (let i = 0; i < this.jobListInput.length; i++) {
+        for (let list of this.jobListInput[i].candidate_list) {
+          if (list.name == ValueConstant.CART_LISTED_CANDIDATE) {
+            this.jobListInput[i].candidateInCart = list.ids.length;
+            this.candidatesInList.cart += list.ids.length;
+          }
+          if (list.name == ValueConstant.APPLIED_CANDIDATE) {
+            this.candidatesInList.applied += list.ids.length;
+          }
+        }
+      }
+      this.candidateInCartService.change(this.candidatesInList);
     }
   }
 
