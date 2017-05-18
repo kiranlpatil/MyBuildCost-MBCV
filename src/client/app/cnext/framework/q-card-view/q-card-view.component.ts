@@ -81,7 +81,7 @@ i++;
 
   }
   ngOnInit() {
-   this.candidates2 = this.candidate2;
+   //this.candidates2 = this.candidate2;
   }
   clearFilter() {
     this.candidateFilterService.clearFilter();
@@ -168,7 +168,7 @@ i++;
     this.matchFormat = value;
   }
 
-  candidate2 =[
+  /*candidate2 =[
    {
    "_id": "1",
    "first_name" : "krishna",
@@ -381,5 +381,5 @@ i++;
       "picture":'',
       "isCandidateRead":true
     }
-   ]
+   ]*/
 }
