@@ -10,17 +10,15 @@
       </select>
     </div>
   </header>
- <!-- <label class="radio">
-    <input  type="radio" name="radiogroup" #match value="aboveMatch" [(ngModel)]="match.aboveMatch" >
-    aboveMatch
+  <label class="radio">
+    <input  type="radio" name="radiogroup" value="{{match.aboveMatch}}" (click)="matching($event.target.value)">AboveMatch
   </label>
   <label class="radio">
-    <input  type="radio" name="radiogroup" #match value="allMatch" [(ngModel)]="match.allMatch" >allMatch
-  </label>-->
-  {{match}}
+    <input  type="radio" name="radiogroup" value="{{match.belowMatch}}" (click)="matching($event.target.value)">BelowMatch
+  </label>
   <button type="button" (click)="clearFilter()">Clear all filters</button>
   <div class="card-view clearfix">
-    <div class="col-sm-6" *ngFor= "let item of candidates2 | orderby:qCardModel.sortValue | dashboardfilter:candidateFilter;let i=index;">
+    <div class="col-sm-6" *ngFor= "let item of candidates2 | orderby:qCardModel.sortValue | dashboardfilter:candidateFilter | candidatematching: matchFormat;let i=index;">
       <div class="panel clearfix">
         <div><span class="glyphicon glyphicon-heart-empty" (click)="addToShortList(item)" [class.shortlisted]="item.isCandidateshortListed"></span></div>
         <div [hidden]="!item.isCandidateRead"><span class="glyphicon glyphicon-eye-close"></span></div>

@@ -9,7 +9,7 @@ import {CandidateFilterService} from "../filters/candidate-filter.service";
 import {ValueConstant} from "../../../framework/shared/constants";
 import {UpdatedIds} from "../model/updatedCandidatesIDS";
 import {RecruiteQCardView2Service} from "../recruiter-q-card-view2/recruiter-q-card-view2.service";
-import {Match} from "../model/match";
+import {MatchCandidate} from "../model/match-candidate";
 
 @Component({
   moduleId: module.id,
@@ -32,9 +32,10 @@ export class QCardviewComponent implements OnInit, OnChanges {
   private matches: number;
   private isCandidateAdd:boolean=false;
   private qCardModel: QCardsortBy = new QCardsortBy();
-  private match: Match = new Match();
+  private match: MatchCandidate = new MatchCandidate();
   private isShowQCardView: boolean;
   private candidateFilter: CandidateFilter;
+  private matchFormat: string;
   @Input() private jobPosterModel: JobPosterModel;
   @Input() private recruiterId: string;
   @Input() private addToSerchIds: CandidateQCard[];
@@ -51,6 +52,7 @@ export class QCardviewComponent implements OnInit, OnChanges {
         console.log('filter data', this.candidateFilter);
       }
     );
+    this.matchFormat = this.match.aboveMatch;
   }
 
   ngOnChanges(changes: any) {
@@ -162,6 +164,9 @@ i++;
   toggleFormat() {
     this.toggle = true;
   }
+  matching(value:any) {
+    this.matchFormat = value;
+  }
 
   candidate2 =[
    {
@@ -221,8 +226,8 @@ i++;
    "noticePeriod":"Within 1 month",
    "interestedIndustries":["MNC","GK"],
    "below_one_step_matching": 20,
-   "above_one_step_matching": 10,
-   "exact_matching": 30,
+   "above_one_step_matching": 50,
+   "exact_matching": 10,
    "mobile_number":"1234567891",
    "email":"k@gmail.com",
    "status":"",
@@ -241,9 +246,9 @@ i++;
    "proficiencies":["c++","c","java"],
    "noticePeriod":"1-2 Month",
    "interestedIndustries":["MNC","PK","GK","OTHER","STARTUP"],
-   "below_one_step_matching": 10,
+   "below_one_step_matching": 30,
    "above_one_step_matching":40,
-   "exact_matching": 10,
+   "exact_matching": 30,
    "mobile_number":"1234567891",
    "email":"k@gmail.com",
    "status":"",
@@ -264,7 +269,7 @@ i++;
    "interestedIndustries":["java","c"],
    "below_one_step_matching": 20,
    "above_one_step_matching": 30,
-   "exact_matching": 20,
+   "exact_matching": 10,
    "mobile_number":"1234567891",
    "email":"k@gmail.com",
    "status":"",
@@ -283,9 +288,9 @@ i++;
    "proficiencies":["c"],
    "noticePeriod":"Imm",
    "interestedIndustries":["MNC"],
-   "below_one_step_matching": 30,
-   "above_one_step_matching": 30,
-   "exact_matching": 20,
+   "below_one_step_matching": 50,
+   "above_one_step_matching": 50,
+   "exact_matching": 0,
    "mobile_number":"1234567891",
    "email":"k@gmail.com",
    "status":"",
@@ -304,9 +309,9 @@ i++;
    "proficiencies":["java"],
    "noticePeriod":"Beyond 3 months",
    "interestedIndustries":["MNC","PK"],
-   "below_one_step_matching": 20,
-   "above_one_step_matching": 10,
-   "exact_matching": 20,
+   "below_one_step_matching": 30,
+   "above_one_step_matching": 50,
+   "exact_matching": 40,
    "mobile_number":"1234567891",
    "email":"k@gmail.com",
    "status":"",
@@ -325,9 +330,9 @@ i++;
       "proficiencies":["c++"],
       "noticePeriod":"2-3 Month",
       "interestedIndustries":["MNC","PK"],
-      "below_one_step_matching": 20,
+      "below_one_step_matching": 10,
       "above_one_step_matching": 10,
-      "exact_matching": 30,
+      "exact_matching": 10,
       "mobile_number":"1234567891",
       "email":"k@gmail.com",
       "status":"",
@@ -348,7 +353,7 @@ i++;
       "interestedIndustries":["MNC","PK"],
       "below_one_step_matching": 20,
       "above_one_step_matching": 10,
-      "exact_matching": 40,
+      "exact_matching": 10,
       "mobile_number":"1234567891",
       "email":"k@gmail.com",
       "status":"",
@@ -367,9 +372,9 @@ i++;
       "proficiencies":["c++"],
       "noticePeriod":"Immediate",
       "interestedIndustries":["MNC","PK"],
-      "below_one_step_matching": 40,
+      "below_one_step_matching": 20,
       "above_one_step_matching": 10,
-      "exact_matching": 30,
+      "exact_matching": 10,
       "mobile_number":"1234567891",
       "email":"k@gmail.com",
       "status":"",
