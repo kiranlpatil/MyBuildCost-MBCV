@@ -63,7 +63,7 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     window.history.forward();
     if (parseInt(LocalStorageService.getLocalValue(LocalStorage.IS_LOGGED_IN)) === 1) {
-      this._router.navigate(['/create_profile']);
+      this._router.navigate([NavigationRoutes.APP_CANDIDATE_DASHBOARD]);
     }
   }
 
@@ -79,6 +79,8 @@ export class LoginComponent implements OnInit {
 
   loginSuccess(res:any) {
     LocalStorageService.setLocalValue(LocalStorage.IS_CANDIDATE, res.data.isCandidate);
+    LocalStorageService.setLocalValue(LocalStorage.IS_CANDIDATE_FILLED, res.data.isCompleted);
+    LocalStorageService.setLocalValue(LocalStorage.END_USER_ID, res.data.end_user_id);
     LocalStorageService.setLocalValue(LocalStorage.EMAIL_ID, res.data.email);
     LocalStorageService.setLocalValue(LocalStorage.MOBILE_NUMBER, res.data.mobile_number);
     LocalStorageService.setLocalValue(LocalStorage.FIRST_NAME, res.data.first_name);
@@ -107,8 +109,12 @@ export class LoginComponent implements OnInit {
     LocalStorageService.setLocalValue(LocalStorage.IS_LOGGED_IN, 1);
     LocalStorageService.setLocalValue(LocalStorage.PROFILE_PICTURE,res.data.picture);
     if(res.data.isCandidate === true) {
-
+    if(res.data.isCompleted === true) {
+      this._router.navigate([NavigationRoutes.APP_CANDIDATE_DASHBOARD]);
+    }
+      else {
       this._router.navigate([NavigationRoutes.APP_CREATEPROFILE]);
+    }
     } else {
       LocalStorageService.setLocalValue(LocalStorage.COMPANY_NAME,res.data.company_name);
 

@@ -1,0 +1,54 @@
+<header class="page-header">
+  <div class="container">
+    <div class="user-info col-sm-3">
+      <img src= "assets/framework/images/dashboard/profile.png" alt="User Profile"/>
+      <h4>{{candidate.basicInformation.first_name}} {{candidate.basicInformation.last_name}}</h4>
+      <div><h4>{{candidate.jobTitle}}</h4></div>
+    </div>
+    <ul class="job-posted">
+      <li>
+        <div class="canvas-container">
+          <cn-progress-bar [value]="candidate.summary.percentProfileCompleted" [color]="'#fff'" [rotation]="false"></cn-progress-bar>
+          <cn-progress-bar [value]="candidate.summary.percentProfileCompleted" [color]="'#e77e22'" [rotation]="true" ></cn-progress-bar>
+          <span class="percentage"><span>{{candidate.summary.percentProfileCompleted | number : '1.0-0'}}%</span></span>
+        </div>
+        <p>Profile Completed</p>
+      </li>
+      <li>
+        <img src="assets/c-next/header/jobs-posted.png" alt="search"/>
+        <span>{{candidate.summary.numberOfTimeSearched}}</span>
+        <p>Times searched</p>
+      </li>
+      <li>
+        <img src="assets/c-next/header/matching-profiles.png" alt="view"/>
+        <span>{{candidate.summary.numberOfTimesViewed}}</span>
+        <p>Times Viewed</p>
+      </li>
+      <li>
+        <img src="assets/c-next/header/candidates-applied.png" alt="cart"/>
+        <span>{{candidate.summary.numberOfTimesaddedToCart}}</span>
+        <p>Times Added to cart</p>
+      </li>
+      <li>
+        <span (click)="onApplyClick()">{{candidate.summary.numberOfJobApplied}}</span>
+        <p>Applied Jobs</p>
+        <span (click)="onBlockClick()">{{candidate.summary.numberJobsBlocked}}</span>
+        <p>Blocked Jobs</p>
+      </li>
+    </ul>
+    <ul class="logout-dropdown">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle drop-down" data-toggle="dropdown" >
+          <img src="assets/framework/images/dashboard/3dots.png">
+        </a>
+        <ul class="dropdown-menu">
+          <li>
+            <a (click)="logOut()"><b>Logout</b></a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+  <button type="submit" class="btn btn-default btn-logout" (click)="logOut()">Logout</button>
+</header>
+

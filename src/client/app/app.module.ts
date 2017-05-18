@@ -134,6 +134,15 @@ import {CandidateFilterService} from "./cnext/framework/filters/candidate-filter
 import {CandidateDashboardFilterPipe} from "./cnext/framework/filters/candidate-dashboard-filter.pipe";
 import {RecruitercandidatesListsService} from "./cnext/framework/candidate-lists.service";
 import {CandidateDashboardMatchingPipe} from "./cnext/framework/filters/candidate-dashboard-matching.pipe";
+import {CandidateDashboardComponent} from "./cnext/framework/candidate-dashboard/candidate-dashboard.component";
+import {CandiadteDashboardService} from "./cnext/framework/candidate-dashboard/candidate-dashboard.service";
+import {QcardListComponent} from "./cnext/framework/candidate-dashboard/candidate-q-card-list/q-card-list.component";
+import {CandiadteQCardComponent} from "./cnext/framework/candidate-dashboard/candidate-q-card/candidate-q-card.component";
+import {CandidateHeaderComponent} from "./cnext/framework/candidate-dashboard/candidate-header/candidate-header.component";
+import {CandidateFilterComponent} from "./cnext/framework/candidate-dashboard/candiadte-filter/candidate-filter.component";
+import {JobViewComponent} from "./cnext/framework/one-page-summury/recruiter-job-summary/job-view/job-view.component";
+import {CandidateJobListComponent} from "./cnext/framework/candidate-dashboard/candidate-job-list/candidate-job-list.component";
+import {CandidateJobListService} from "./cnext/framework/candidate-dashboard/candidate-job-list/candidate-job-list.service";
 //C-NEXT IMPORTS
 
 
@@ -201,6 +210,8 @@ import {CandidateDashboardMatchingPipe} from "./cnext/framework/filters/candidat
     BasicJobInformationComponent,
     CompentansiesAndResponsibilitiesComponent,
     JobFilterComponent,
+    CandidateJobListComponent,
+    CandidateDashboardComponent,
     ProfessionalDataComponent,
     EmploymentHistoryComponent,
     AcademicDetailComponent,
@@ -209,9 +220,14 @@ import {CandidateDashboardMatchingPipe} from "./cnext/framework/filters/candidat
     DescriptionFieldComponent,
     CompanyDetailsComponent,
     MoreAboutMyselfComponent,
+    CandidateHeaderComponent,
+    CandidateFilterComponent,
     RecruiterDashboardComponent,
     ProgressBarComponent,
     WorkAreaComponent,
+    JobViewComponent,
+    QcardListComponent,
+    CandiadteQCardComponent,
     RecruiterHeaderComponent,
     RoleTypetListComponent,
     IndustryExperienceListComponent,
@@ -269,12 +285,14 @@ import {CandidateDashboardMatchingPipe} from "./cnext/framework/filters/candidat
     MyCapabilityService,
     ProfessionalService,
     EducationalService,
+    CandidateJobListService,
     ProfessionalDataService,
     EmploymentHistoryService,
     ProficiencyDomainService,
     CompanyDetailsService,
     EmploymentHistoryService,
     DateService,
+    CandiadteDashboardService,
     MyRoleListTestService,
     RoleTypeService,
     IndustryExperienceService,

@@ -1,0 +1,182 @@
+@import '../../../../css/common';
+
+$white: #fff;
+$border-color: #e8e8e8;
+$text-color: #666;
+$purple: #7264b5;
+$highlight: #596c7d;
+
+.recruiter-profile-wrapper {
+  .col-sm-3 {
+    width: 25%;
+  }
+
+  .col-sm-9 {
+    width: 75%;
+    padding-left: 0;
+  }
+
+  .btn-back {
+    margin: 0;
+    padding: 5px;
+    color: $text-color;
+
+    &:focus,
+    &:hover {
+      outline: none;
+    }
+  }
+
+  .list-view {
+    color: $text-color;
+    padding: 0;
+    text-align: left;
+
+    .panel {
+      padding: 5px 10px;
+      cursor: pointer;
+      box-shadow: none;
+      margin: 0;
+    }
+
+    p {
+      padding: 0;
+      color: $text-color;
+      @extend %text-ellipsis;
+    }
+
+    .job-posted > .col-xs-2 {
+      font-size: 10px;
+      text-align: center;
+
+      p {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background-color: $purple;
+        color: $white;
+        position: relative;
+        margin: 0 auto 5px auto;
+      }
+
+      span {
+        font-size: 20px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
+
+    h4 {
+      font-size: 20px;
+      margin: 14px 0 0 0;
+      color: $highlight;
+      @extend %text-ellipsis;
+    }
+
+    .contact-info > .col-xs-6 {
+      p {
+        margin-top: 25px;
+      }
+
+      p > img {
+        font-size: 20px;
+        margin-right: 10px;
+        position: relative;
+        top: 0;
+      }
+    }
+  }
+
+  .candidate-listing {
+    .nav-tabs > li > a {
+      width: 150px;
+      border-bottom: 0;
+
+      &:hover,
+      &:focus {
+        background: transparent;
+        border: 1px solid $border-color;
+        border-bottom: 0;
+      }
+    }
+  }
+}
+
+.posted-job {
+  padding: 30px;
+  display: block;
+}
+
+@media only screen and (max-width: 1280px) {
+  .recruiter-profile-wrapper {
+    padding: 0;
+    width: 100%;
+
+    .col-sm-12 {
+      width: 100%;
+      display: inline-block;
+      padding: 0;
+    }
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .recruiter-profile-wrapper {
+    .col-sm-3 {
+      width: 30%;
+
+    }
+
+    .col-sm-9 {
+      width: 70%;
+      padding: 0;
+    }
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .recruiter-profile-wrapper {
+    .col-sm-9 {
+      float: none;
+      padding: 0;
+      width: 100%;
+    }
+
+    .col-sm-3 {
+      float: none;
+      margin: 0 2%;
+      padding: 0;
+      width: 96%;
+      border: 1px solid $border-color;
+    }
+
+    .list-view {
+      p {
+        font-size: 12px;
+      }
+
+      h4 {
+        font-size: 16px;
+        margin: 0;
+      }
+
+      .job-posted {
+        margin-bottom: 10px;
+      }
+
+      .contact-info {
+        padding: 0;
+        clear: both;
+      }
+
+      .contact-info > .col-xs-6 {
+        p {
+          margin-top: 5px;
+        }
+      }
+    }
+  }
+}
+

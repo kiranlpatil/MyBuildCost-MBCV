@@ -22,7 +22,7 @@ class SendMessageService {
         console.log("Send sms on", mobileNo);
       var otp =Math.floor((Math.random() * 99999) + 100000);
         console.log("otp is", otp);
-
+        console.log('sender id',senderId);
 
         var message = "The One Time Password(OTP) for "+" "+this.app_name+" "+"account is"+" "+otp+" "+".Use this OTP to verify your account. ";
         console.log("msg sent to user:", message);
@@ -32,6 +32,7 @@ class SendMessageService {
             }
             else {
                 callback(null, response);
+              console.log(response);
             }
         });
     }

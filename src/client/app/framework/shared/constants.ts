@@ -1,5 +1,5 @@
 export class AppSettings {
-// public static IP = 'http://localhost:8080';
+  //public static IP = 'http://10.192.33.139:8080';
   // public static IP = 'http://ee802b7f.ngrok.io';
   //public static IP = 'http://10.192.33.252:8087';
   //public static IP = 'http://52.89.221.23:8080';
@@ -71,6 +71,7 @@ export class NavigationRoutes {
   public static APP_REGISTRATION:string = '/registration';
   public static APP_FORGOTPASSWORD:string = '/forgotpassword';
   public static APP_DASHBOARD:string = '/dashboard';
+  public static APP_CANDIDATE_DASHBOARD:string = '/candidate_dashboard';
   public static APP_RECRUITER_DASHBOARD:string = '/recruiterdashboard';
   public static APP_LOGIN:string = '/login';
   public static APP_START:string = '/';
@@ -93,8 +94,10 @@ export class LocalStorage {
   public static PROFILE_PICTURE = 'profile_picture';
   public static IS_LOGGED_IN = 'is_user_logged_in';
   public static USER_ID = 'user_id';
+  public static END_USER_ID = 'end_user_id';
   public static _ID = '_id';
   public static IS_CANDIDATE = 'is_candidate';
+  public static IS_CANDIDATE_FILLED = 'is_candidate_filled';
   public static MOBILE_NUMBER = 'mobile_number';
   public static COMPANY_NAME = 'company_name';
   public static COMPANY_SIZE = 'company_size';
@@ -113,6 +116,7 @@ export class LocalStorage {
 
 export class ValueConstant {
   public static MAX_CAPABILITIES:number = 10;
+  public static MATCHING_PERCENTAGE:number = 10;
   public static MAX_WORKAREA:number = 3;
   public static MAX_INTERESTEDINDUSTRY:number = 7;
   public static MAX_PROFECIENCES:number = 25;
@@ -123,6 +127,8 @@ export class ValueConstant {
   public static CART_LISTED_CANDIDATE:string = 'cartListed';
   public static REJECTED_LISTED_CANDIDATE:string = 'rejectedList';
   public static APPLIED_CANDIDATE:string = 'applied';
+  public static BLOCKED_CANDIDATE:string = 'blocked';
+
   public static VALUE_FOR_CNDIDATES_MATCHING = 0;
 }
 

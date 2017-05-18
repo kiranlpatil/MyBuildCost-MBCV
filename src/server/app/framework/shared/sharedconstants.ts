@@ -4,4 +4,5 @@ export class ConstVariables {
     public static CART_LISTED_CANDIDATE:string = 'cartListed';
     public static REJECTED_LISTED_CANDIDATE:string = 'rejectedList';
     public static APPLIED_CANDIDATE:string = 'applied';
+    public static BLOCKED_CANDIDATE:string = 'blocked';
 }

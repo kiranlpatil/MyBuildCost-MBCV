@@ -1,0 +1,117 @@
+$white: #fff;
+$border-color: #ddd;
+$text-color: #333;
+$bg-tab-content: #f9f9f9;
+$profile-section-shadow: rgba(204, 204, 204, 1);
+
+.filter-container {
+  text-align: left;
+
+  p {
+    color: $text-color;
+  }
+
+  h4 {
+    margin: 0;
+    background: #e8e8e8;
+    color: #666;
+    font-size: 16px;
+    padding: 5px 15px;
+    border: 1px solid #ccc;
+  }
+
+  .inner {
+    border: 1px solid $border-color;
+    background: $bg-tab-content;
+    box-shadow: 0 0 1px 0 $profile-section-shadow;
+    padding: 15px;
+
+    h5 {
+      margin: 15px 0 5px 0;
+      font-weight: 900;
+      color: #666;
+    }
+
+    label {
+      color: $text-color;
+      font-weight: 100;
+      font-size: 14px;
+      margin: 10px 0 0 0;
+      width: 100%;
+    }
+
+    .radio,
+    .checkbox {
+      margin-left: 20px;
+    }
+
+    .min-max-values {
+      margin-bottom: 10px;
+    }
+  }
+
+  .form-control {
+    background: url('assets/framework/images/form/drop-down.png') no-repeat;
+    background-color: $white;
+    background-position: 95% 50%;
+    border-radius: 0;
+    box-shadow: none;
+    margin-top: 5px;
+    padding: 6px;
+    width: 100%;
+
+    &:focus,
+    &:active {
+      outline: none;
+    }
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .filter-container {
+    display: block;
+  }
+
+  button {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .filter-container {
+    border: 0;
+    background: $bg-tab-content;
+    box-shadow: none;
+
+    p {
+      margin: 0 10px;
+    }
+
+    .col-sm-6 {
+      padding: 0;
+    }
+
+    .inner {
+      padding: 10px;
+      border: 0;
+      background: transparent;
+      box-shadow: none;
+    }
+  }
+
+  button {
+    border: 0;
+    background: $bg-tab-content;
+    border-radius: 0;
+    padding: 6px 10px;
+    text-align: left;
+
+    &:focus,
+    &:active,
+    &:hover {
+      border: 0;
+      box-shadow: none;
+      outline: 0 !important;
+    }
+  }
+}

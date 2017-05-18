@@ -1,0 +1,80 @@
+<!--
+<button type="button" class="btn btn-block" data-toggle="collapse" data-target="#filter-container">Filters</button>
+<div>
+  <div id="filter-container" class="collapse filter-container">
+    <h4>Primary Filters</h4>
+    <div class="inner col-sm-12">
+      <p class="info">Adjust these filters to get more numbers of candidates</p>
+
+      <h5>Education</h5>
+      <div *ngFor="let itemList of educationList">
+        <label class="checkbox">
+          <input type="checkbox" value="{{itemList}}" (change)="filterByEducation($event)">{{itemList}}
+        </label>
+      </div>
+
+      <div class="min-max-values clearfix">
+        <h5>Experience</h5>
+        <div class="col-sm-6 padding-right5">
+          <label>Min</label>
+          <select (change)="selectExperiencesMinModel($event.target.value)">
+            <option value="{{itemList}}" *ngFor="let itemList of experienceRangeList">{{itemList}}</option>
+          </select>
+        </div>
+        <div class="col-sm-6 padding-left5">
+          <label>Max</label>
+          <select (change)="selectExperiencesMaxModel($event.target.value)">
+            <option value="{{itemList}}" *ngFor="let itemList of experienceRangeList">{{itemList}}</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="min-max-values clearfix">
+        <h5>Salary Range</h5>
+        <div class="col-sm-6 padding-right5">
+          <label>Min</label>
+          <select (change)="selectSalaryMinModel($event.target.value)">
+            <option value="{{itemList}}" *ngFor="let itemList of salaryRangeList">{{itemList}}</option>
+          </select>
+        </div>
+        <div class="col-sm-6 padding-left5">
+          <label>Max</label>
+          <select (change)="selectSalaryMaxModel($event.target.value)">
+            <option value="{{itemList}}" *ngFor="let itemList of salaryRangeList">{{itemList}}</option>
+          </select>
+        </div>
+      </div>
+
+      <h5>Location</h5>
+      <label class="radio">
+        <input type="radio" name="radiogroup" [value]="pune" (change)="onSelectionChange($event.target.value)">
+        {{pune}}
+      </label>
+      <label class="radio">
+        <input type="radio" name="radiogroup" [value]="All" (change)="onSelectionChange($event.target.value)">All
+      </label>
+
+      <h5>Proficiencies</h5>
+      <div *ngFor="let itemList of proficiencyList">
+        <label class="checkbox">
+          <input type="checkbox" value="{{itemList}}" (change)="filterByProficiency($event)">{{itemList}}
+        </label>
+      </div>
+
+      <h5>Lead Time to Join</h5>
+      <select  (change)="filterByJoinTime($event.target.value)">
+        <option value="{{itemList}}" *ngFor="let itemList of jointimeList">{{itemList}}</option>
+      </select>
+
+      <h5>Industry Exposure</h5>
+      <div *ngFor="let itemList of industryList">
+        <label class="checkbox">
+          <input type="checkbox" value="{{itemList}}" (change)="filterByIndustryExposure($event)">{{itemList}}
+        </label>
+      </div>
+    </div>
+  </div>
+</div>
+
+-->
+<p>Filter</p>

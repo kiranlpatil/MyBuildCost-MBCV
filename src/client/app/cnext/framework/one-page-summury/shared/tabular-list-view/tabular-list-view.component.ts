@@ -23,7 +23,7 @@ export class TabularListViewComponent {
     this.eventReject.emit(this.model);
     this.model=new Candidate();
   }
-  Addto(){debugger
+  Addto(){
     this.eventCart.emit(this.model);
     this.model=new Candidate();
   }

@@ -121,6 +121,7 @@ i++;
       .subscribe(
         data => {
           this.candidates = data,
+            console.log('q card data',this.candidates);
             this.matches = this.candidates.length
         });
     for (let readedCandidate of this.candidateSeenIDS) {

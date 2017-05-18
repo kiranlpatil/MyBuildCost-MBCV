@@ -19,11 +19,13 @@ export class RecruiterDashboardService extends BaseService {
       .catch(this.handleError);
   }
 
-  getPostedJobDetails():Observable<any> {
-    let url:string=API.JOB_DETAILS+'/'+LocalStorageService.getLocalValue(LocalStorage.CURRENT_JOB_POSTED_ID);
-    return this.http.get(url)
-      .map(this.extractData)
-      .catch(this.handleError);
+  getPostedJobDetails(jobId:string):Observable<any> {
+    if(jobId != undefined){
+      let url:string=API.JOB_DETAILS+'/'+jobId;
+      return this.http.get(url)
+        .map(this.extractData)
+        .catch(this.handleError);
+    }
   }
 
 }

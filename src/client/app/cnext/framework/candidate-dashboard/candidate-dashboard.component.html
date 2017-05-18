@@ -1,0 +1,35 @@
+<div *ngIf="candidate != undefined">
+  <cn-candidate-header [candidate]="candidate" (onLinkClick)="onLinkClick($event)"></cn-candidate-header>
+
+
+  <div class="container recruiter-profile-wrapper" [hidden]="hidesection">
+    <h4>{{jobList.length}} total jobs available</h4>
+    <div class="col-sm-12">
+      <ul class="nav nav-tabs dashboard-tabs">
+        <li class="active">
+          <a data-toggle="tab" href="#exact-match">Above 75 % Match({{jobList.length}})</a>
+        </li>
+      </ul>
+      <div class="tab-content clearfix">
+        <!--<div class="col-sm-3">
+              <cn-candidate-filter [candiadte]="candiadte"></cn-candidate-filter>
+            </div>-->
+        <div class="col-sm-9 clearfix">
+          <div id="exact-match" class="tab-pane fade active in clearfix">
+            <cn-q-card-list [listOfJobs]="jobList" [type]="'none'"
+                            (onAction)="onActionPerformOnExactList($event)"></cn-q-card-list>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div [hidden]="!hidesection">
+    <cn-candidate-job-list [type]="type" [listOfJobs]="appliedJobs" (onAction)="onActionOnApplyJob($event)"
+                           [hidden]="type !=='apply'"></cn-candidate-job-list>
+    <cn-candidate-job-list [type]="type" [listOfJobs]="blockedJobs" (onAction)="onActionOnBlockJob($event)"
+                           [hidden]="type !=='block'"></cn-candidate-job-list>
+  </div>
+</div>
+
+

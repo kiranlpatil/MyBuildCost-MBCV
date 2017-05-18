@@ -4,6 +4,7 @@ import {Academicdetails} from "./academic-details";
 import {Certifications} from "./certification-accreditation";
 import {ProfessionalData} from "./professional-data";
 import {EmployementHistory} from "./employment-history";
+import {CandidateDetail} from "../../../framework/registration/candidate/candidate";
 export class Candidate {
   jobTitle : string;
   isVisible : boolean;
@@ -19,6 +20,8 @@ export class Candidate {
   proficiencies : string[]=new Array(0);
   secondaryCapability : string[]=new Array();
   lockedOn: Date;
+  summary:Summary=new Summary();
+  basicInformation:CandidateDetail=new CandidateDetail();
   _id : string;
 
 }
@@ -28,4 +31,13 @@ export class Section{
   name : string;
   date : Date;
   isLocked:boolean;
-};
+}
+
+export class Summary{
+  percentProfileCompleted:number=70;
+  numberOfTimeSearched:number=162;
+  numberOfTimesViewed:number=14;
+  numberOfTimesaddedToCart:number=4;
+  numberOfJobApplied:number=0;
+  numberJobsBlocked:number=0;
+}

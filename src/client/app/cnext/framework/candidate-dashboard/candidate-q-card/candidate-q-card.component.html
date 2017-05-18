@@ -1,0 +1,53 @@
+
+  <div class="card-view clearfix">
+    <div class="col-sm-6">
+      <div class="panel clearfix">
+        <div class="col-sm-12">
+          <div class="col-sm-5 col-xs-6 no-padding right-side">
+            <img class="profile-picture" src="assets/framework/images/dashboard/profile.png" alt="Profile Picture"/>
+            <div class="canvas-container">
+              <cn-progress-bar [value]="job.matching" [color]="'#e77e22'" [rotation]="false"></cn-progress-bar>
+              <cn-progress-bar [value]="job.matching" [color]="'#e77e22'" [rotation]="true" ></cn-progress-bar>
+              <span class="percentage"><span>{{job.matching | number : '1.0-0'}}%</span><br />Skills<br />matching</span>
+            </div>
+          </div>
+          <div class="col-sm-7 col-xs-6 no-padding left-side">
+            <h6 >{{job.company_name}}</h6>
+            <p><img src="assets/c-next/card-view/salary.png" alt="Salary"/>$ {{job.salary}}</p>
+            <p><img src="assets/c-next/card-view/experience.png" alt="Experience"/>{{job.experience}}</p>
+            <p><img src="assets/c-next/card-view/relocation.png" alt="Location"/> {{job.location}} </p>
+            <p><img src="assets/c-next/card-view/relocation.png" alt="education"/> {{job.education}}</p>
+            <p><img src="assets/c-next/card-view/relocation.png" alt="size">{{job.company_size}}</p>
+            <p><img src="assets/c-next/card-view/relocation.png" alt="size">{{job.companyAge}}</p>
+          </div>
+        </div>
+          <button class="btn btn-cart btn-block" type="button" (click)="viewJob(job._id)" >View</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" [style.display]="getStyleModal()">
+    <div class="modal-bg">
+      <div class="modal-dialog modal-md">
+        <div class="modal-content">
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-sm-12">
+                <cn-job-view [jobId]="jobId"></cn-job-view>
+                <div class="button-group" [hidden]="type=='apply' || type=='block'" >
+                  <button class="btn btn-primary" (click)="applyJob()">Apply</button>
+                  <button class="btn btn-default" (click)="blockJob() ">NotInterested</button>
+                </div>
+                <div class="button-group" [hidden]="type =='none'">
+                  <button class="btn btn-primary" (click)="closeJob()">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
