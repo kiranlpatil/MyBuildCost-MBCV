@@ -28,7 +28,6 @@ export function cnextInit(app: express.Application) { //todo add interceptor to 
   app.post("/api/candidate", userInterceptor.create, candidateController.create);
   app.put("/api/candidate/:id",  candidateController.updateDetails);
   app.get("/api/candidate/:id",candidateController.retrieve);
-  app.get("/api/candidate/:id/:candidateId",candidateController.retrieve);
   app.get("/api/industry/:id/roles/capability", capabilityController.retrieve );
   app.get("/api/industry/:id/roles/capability/complexity", complexityController.retrieve );
   app.get("/api/companysize",  userController.getCompanySize);
@@ -38,6 +37,8 @@ export function cnextInit(app: express.Application) { //todo add interceptor to 
   app.get("/api/recruiter/jobProfile/:id",jobProfileController.retrieve);
   app.post("/api/recruiter/candidate",searchController.getMatchingCandidates);
   app.get("/api/candidate/:id/jobProfile",searchController.getMatchingJobProfiles);
+  app.get("/api/candidate/:id/:candidateId",candidateController.retrieve);
+  app.get("/api/candidate/:id/list/:listName",candidateController.getList);
   app.put("/api/candidate/:id/jobProfile/:profileId/:listName/:action",jobProfileController.apply);
   app.post("/api/recruiter/jobProfile/:id/candidates",jobProfileController.getQCardDetails);
   app.put("/api/recruiter/:recruiterId/jobProfile/:profileId/:listName/:candidateId/:action",jobProfileController.update);

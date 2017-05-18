@@ -47,7 +47,7 @@ class SearchService {
       if (err) {
         callback(err, null);
       } else {
-        this.recruiterRepository.getJobProfileQCard(res, candidate, callback);
+        this.recruiterRepository.getJobProfileQCard(res, candidate,undefined, callback);
       }
     });
   }

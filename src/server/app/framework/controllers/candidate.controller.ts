@@ -5,6 +5,7 @@ import CandidateModel = require("../dataaccess/model/candidate.model");
 import CandidateService = require("../services/candidate.service");
 import UserService = require("../services/user.service");
 import * as mongoose from "mongoose";
+import RecruiterService = require("../services/recruiter.service");
 
 
 export function create(req:express.Request, res:express.Response, next:any) {
@@ -174,6 +175,52 @@ export function retrieve(req:express.Request, res:express.Response, next:any) { 
 
   }
   catch (e) {
+    res.status(403).send({message: e.message});
+  }
+}
+
+
+export function getList(req:express.Request, res:express.Response, next:any) {
+  try {
+    let candidateId : string = req.params.id;
+    let listName : string= req.params.listName;
+    let candidateService = new CandidateService();
+    let recruiterService = new RecruiterService();
+    candidateService.findById(candidateId,(error :any, response: CandidateModel)=>{
+      if(error){
+        next({
+          reason: Messages.MSG_ERROR_RSN_EXISTING_USER,
+          message: Messages.MSG_ERROR_VERIFY_ACCOUNT,
+          code: 403
+        });
+      }else{
+        for(let list of response.job_list){
+          if(listName==list.name){
+            let data :any ={
+              listName : listName,
+              ids : list.ids,
+              candidate :response
+            };
+            candidateService.getList(data, (err,result)=>{
+              if(err){
+                next({
+                  reason: Messages.MSG_ERROR_RSN_EXISTING_USER,
+                  message: Messages.MSG_ERROR_VERIFY_ACCOUNT,
+                  code: 403
+                });
+              }else{
+                res.send({
+                  "status": "success",
+                  "data": result,
+                });
+              }
+            });
+            break;
+          }
+        }
+      }
+    });
+  } catch (e) {
     res.status(403).send({message: e.message});
   }
 }

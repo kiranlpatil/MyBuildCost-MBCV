@@ -12,8 +12,7 @@ class RecruiterRepository extends RepositoryBase<IRecruiter> {
     super(RecruiterSchema);
   }
 
-  getJobProfileQCard(recruiters:any[], candidate:CandidateModel, callback:(error:any, result:any) => void) {  //todo add condition for exit
-
+  getJobProfileQCard(recruiters:any[], candidate:CandidateModel,jobProfileIds : string[], callback:(error:any, result:any) => void) {  //todo add condition for exit
 
     let jobs_cards:JobQCard[] = new Array(0);
     for (let recruiter of recruiters) {
@@ -29,6 +28,22 @@ class RecruiterRepository extends RepositoryBase<IRecruiter> {
           }
         }
         if (isPresent) {
+          if(jobProfileIds){
+            if(jobProfileIds.indexOf(job._id) ==-1  ){
+              continue;
+            }
+          }else{
+            let isFound :boolean=false;
+            for(let list of candidate.job_list){
+              if(list.ids.indexOf(job._id)!=-1){
+                isFound =true;
+                break;
+              }
+            }
+            if(isFound){
+             continue;
+            }
+          }
           let candidateRepository:CandidateRepository = new CandidateRepository();
           let candidate_selected_complexity:string[] = new Array(0);
           candidate_selected_complexity = candidateRepository.getCodesFromindustry(candidate.industry);
@@ -41,9 +56,9 @@ class RecruiterRepository extends RepositoryBase<IRecruiter> {
                   if (job_item.substr(0, job_item.lastIndexOf(".")) == candi_item.substr(0, candi_item.lastIndexOf("."))) {
                     let job_last_digit:number = Number(job_item.substr(job_item.lastIndexOf(".") + 1));
                     let candi_last_digit:number = Number(candi_item.substr(candi_item.lastIndexOf(".") + 1));
-                    if (job_last_digit == candi_last_digit - 1) {
+                    if (job_last_digit == candi_last_digit + 1) {
                       job_qcard.below_one_step_matching += 1;
-                    } else if (job_last_digit == candi_last_digit + 1) {
+                    } else if (job_last_digit == candi_last_digit - 1) {
                       job_qcard.above_one_step_matching += 1;
                     } else if (job_last_digit == candi_last_digit) {
                       job_qcard.exact_matching += 1;
@@ -52,9 +67,9 @@ class RecruiterRepository extends RepositoryBase<IRecruiter> {
                   }
                 }
               }
-              job_qcard.above_one_step_matching = (job_qcard.above_one_step_matching / candidate_selected_complexity.length) * 100;
-              job_qcard.below_one_step_matching= (job_qcard.below_one_step_matching/ candidate_selected_complexity.length) * 100;
-              job_qcard.exact_matching = (job_qcard.exact_matching / candidate_selected_complexity.length) * 100;
+              job_qcard.above_one_step_matching = (job_qcard.above_one_step_matching / job_selected_complexity.length) * 100;
+              job_qcard.below_one_step_matching= (job_qcard.below_one_step_matching/ job_selected_complexity.length) * 100;
+              job_qcard.exact_matching = (job_qcard.exact_matching / job_selected_complexity.length) * 100;
               job_qcard.matching = job_qcard.above_one_step_matching + job_qcard.below_one_step_matching + job_qcard.exact_matching;
               job_qcard.company_name = recruiter.company_name;
               job_qcard.company_size = recruiter.company_size;

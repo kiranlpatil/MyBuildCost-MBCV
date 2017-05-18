@@ -6,8 +6,11 @@ import ProjectAsset = require("../shared/projectasset");
 import CandidateRepository = require("../dataaccess/repository/candidate.repository");
 import UserRepository = require("../dataaccess/repository/user.repository");
 import LocationRepository = require("../dataaccess/repository/location.repository");
+import RecruiterRepository = require("../dataaccess/repository/recruiter.repository");
+import RecruiterModel = require("../dataaccess/model/recruiter.model");
 class CandidateService {
   private candidateRepository:CandidateRepository;
+  private recruiterRepository:RecruiterRepository;
   private userRepository:UserRepository;
   private locationRepository:LocationRepository;
 
@@ -16,6 +19,7 @@ class CandidateService {
   constructor() {
     this.candidateRepository = new CandidateRepository();
     this.userRepository = new UserRepository();
+    this.recruiterRepository = new RecruiterRepository();
     this.locationRepository=new LocationRepository();
     this.APP_NAME = ProjectAsset.APP_NAME;
   }
@@ -90,6 +94,26 @@ class CandidateService {
       }
     });
   }
+
+  getList(item : any,callback:(error:any, result:any)=>void){
+    let query = {
+      "postedJobs._id": {$in: item.ids},
+    };
+    this.recruiterRepository.retrieve(query,(err,res)=>{
+        if(err){
+          callback(err,null);
+        }else{
+          this.recruiterRepository.getJobProfileQCard(res, item.candidate, item.ids , (canError,canResult)=>{
+            if(canError){
+              callback(canError, null);
+            }else{
+              callback(null,canResult);
+            }
+          });
+        }
+    });
+  }
+
 }
 
 Object.seal(CandidateService);
