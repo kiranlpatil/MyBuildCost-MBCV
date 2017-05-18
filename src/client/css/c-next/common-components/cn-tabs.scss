@@ -30,12 +30,12 @@ $theme-color: #3694d1;
   }
 }
 
-.dashboard-tabs {
+.nav-tabs {
   .active {
     a {
       border: 0 !important;
       border-bottom: 3px solid $theme-color !important;
-      color: $text-color;
+      color: $theme-color !important;
     }
   }
 }

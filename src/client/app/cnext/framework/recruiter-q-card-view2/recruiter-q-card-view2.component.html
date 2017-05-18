@@ -1,27 +1,52 @@
 <div class="dashboard-view clearfix">
-  <button type="button" (click)="clearFilter()">Clear all filters</button>
-  <div class="card-view clearfix">
-    <div class="col-sm-6" *ngFor="let item of candidates | dashboardfilter:candidateFilter">
-      <div class="panel clearfix">
-        <div class="col-sm-12">
-          <div class="col-sm-5 col-xs-6 no-padding right-side">
-            <img class="profile-picture" src="{{item.picture}}" alt="picture" *ngIf="item.picture!=undefined"/>
-            <img class="profile-picture" src="{{image_path}}" alt="picture" *ngIf="item.picture==undefined"/>
-          </div>
-          <div class="col-sm-7 col-xs-6 no-padding left-side">
-            <p><span class="glyphicon glyphicon-user"></span> {{item.first_name}}{{item.last_name}}</p>
-            <p><span class="glyphicon glyphicon-phone"></span> {{item.mobile_number}}</p>
-            <p><span class="glyphicon glyphicon-envelope"></span> {{item.email}}</p>
-            <p class="percentage"><span class="glyphicon glyphicon-stats"></span>Skills {{item.matching}}% <span>match</span></p>
-          </div>
-        </div>
-        <div [hidden]="!showButton.isShowViewProfileButton">
-        <button   class="btn btn-cart btn-block" type="button" data-toggle="modal" [attr.data-target]="'#'+listName" (click)="viewProfile(item,false)">View Profile</button>
-        </div>
-        <button [hidden]="!showButton.isShowRemoveButton"  type="button" (click)="Cancel(item)">Remove</button>
-       <!-- <button [hidden]="!showButton.isShowRejectButton"  type="button" (click)="rejectCandidate(item)">Reject</button>-->
-        <button  [hidden]="!showButton.isShowViewFullProfileButton" type="button" (click)="viewProfile(item,true)" data-toggle="modal" [attr.data-target]="'#'+listName" >View Full Profile</button>
+  <header class="col-sm-12">
+    <div class="form-group">
+      <label class="radio">
+        <input  type="radio" name="radiogroup" value="{{match.aboveMatch}}" (click)="matching($event.target.value)">AboveMatch
+      </label>
+      <label class="radio">
+        <input  type="radio" name="radiogroup" value="{{match.belowMatch}}" (click)="matching($event.target.value)">BelowMatch
+      </label>
+    </div>
+    <p>{{matches}} Matches Found</p>
+    <div class="sort-by">
+      <label>Sort by</label>
+      <select id="menu"  [(ngModel)]="qCardModel.sortValue">
+        <option value="{{itemList}}" *ngFor="let itemList of qCardModel.listOfMatchings">{{itemList}}</option>
+      </select>
+    </div>
+    <button type="button" (click)="clearFilter()">Clear all filters</button>
+  </header>
 
+
+  <div class="card-view clearfix">
+    <div class="col-sm-4" *ngFor="let item of candidates | dashboardfilter:candidateFilter | orderby:qCardModel.sortValue">
+      <div class="panel clearfix">
+        <ul>
+          <!--<li><span class="glyphicon glyphicon-heart-empty" [hidden]="!showButton.isShowRejectButton" (click)="rejectCandidate(item)"></span></li>-->
+          <!--<li><button [hidden]="!showButton.isShowRejectButton"  type="button" (click)="rejectCandidate(item)">Reject</button></li>-->
+          <li>
+            <div [hidden]="!showButton.isShowViewProfileButton">
+              <span class="glyphicon glyphicon-eye-open" data-toggle="modal" [attr.data-target]="'#'+listName" (click)="viewProfile(item,false)"></span>
+            </div>
+          </li>
+          <li>
+            <div [hidden]="!showButton.isShowRemoveButton" >
+              <span class="glyphicon glyphicon-remove" [hidden]="!showButton.isShowRemoveButton" (click)="Cancel(item)"></span>
+            </div>
+          </li>
+        </ul>
+        <img class="profile-picture" src="{{item.picture}}" alt="picture" *ngIf="item.picture!=undefined"/>
+        <img class="profile-picture" src="{{image_path}}" alt="picture" *ngIf="item.picture==undefined"/>
+        <h6>{{item.first_name}} {{item.last_name}}</h6>
+        <div class="left-side personal-info">
+          <p><span class="glyphicon glyphicon-phone"></span> {{item.mobile_number}}</p>
+          <p><span class="glyphicon glyphicon-envelope"></span> {{item.email}}</p>
+          <p><span class="glyphicon glyphicon-stats"></span>Skills {{item.matching}}% match</p>
+        </div>
+        <div class="button-group">
+          <button class="btn btn-cart btn-primary" [hidden]="!showButton.isShowViewFullProfileButton" type="button" (click)="viewProfile(item,true)" data-toggle="modal" [attr.data-target]="'#'+listName" >View Full Profile</button>
+        </div>
       </div>
     </div>
   </div>

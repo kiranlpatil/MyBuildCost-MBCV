@@ -14,6 +14,8 @@ import {CandidateProfileService} from "../candidate-profile/candidate-profile.se
 import {Candidate} from "../model/candidate";
 import {CandidateDetail} from "../../../framework/registration/candidate/candidate";
 import {AddToCartIds} from "../model/addToCartModel";
+import {MatchCandidate} from "../model/match-candidate";
+import {QCardsortBy} from "../model/q-cardview-sortby";
 
 @Component({
   moduleId: module.id,
@@ -51,6 +53,8 @@ export class RecruiterQCardview2Component implements OnInit,OnChanges {
   private image_path: string = ImagePath.PROFILE_IMG_ICON;
   private candidateRejected: CandidateQCard[] = new Array(0);
   private candidateFilter: CandidateFilter;
+  private match: MatchCandidate = new MatchCandidate();
+  private qCardModel: QCardsortBy = new QCardsortBy();
 
   constructor(private recruiterQCardViewService: QCardViewService,
               private qCardView: QCardViewService,
