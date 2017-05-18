@@ -150,6 +150,9 @@ export function generateOtp(req: express.Request, res: express.Response, next: a
             code: 403
           });
         }
+        else {
+          next(error);
+        }
       }
       else if (result.length > 0) {
         res.status(200).send({

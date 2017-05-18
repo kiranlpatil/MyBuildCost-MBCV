@@ -44,6 +44,7 @@ class SendMessageService {
         console.log("msg sent to user:", message);
         msg91.send(Data.mobileNo, message, function (err:any, response:any) {
             if (err) {
+              console.log("message sent error",err);
                 callback(new Error(Messages.MSG_ERROR_MESSAGE_SENDING), null);
             }
             else {
