@@ -1,10 +1,8 @@
 <div>
   <form [formGroup]="userForm" (submit)="clearFilter()">
     <div class="filter-container">
-      <h4>Primary Filters</h4>
+      <h4>Filters</h4>
       <div class="inner col-sm-12">
-        <p class="info">Adjust these filters to get more numbers of Jobs</p>
-
         <h5 data-toggle="collapse" href="#education"
             [class.panel-up]="arrow" [class.panel-down]="!arrow" (click)="arrow=!arrow">Education</h5>
         <div id="education" class="collapse">
