@@ -59,13 +59,22 @@
           <p><span class="glyphicon glyphicon-envelope"></span> {{item.email}}</p>
           <p><span class="glyphicon glyphicon-stats"></span>Skills {{item.matching}}% match</p>
         </div>
-        <div [hidden]="!showButton.isShowViewProfileButton">
-        <button   class="btn btn-cart btn-block" type="button" data-toggle="modal" [attr.data-target]="'#'+listName" (click)="viewProfile(item,false)">View Profile</button>
-        </div>
+
         <!--<button [hidden]="!showButton.isShowRemoveButton"  type="button" (click)="Cancel(item)">Remove</button>-->
        <!-- <button [hidden]="!showButton.isShowRejectButton"  type="button" (click)="rejectCandidate(item)">Reject</button>-->
-        <button  [hidden]="!showButton.isShowViewFullProfileButton" type="button" (click)="viewProfile(item,true)" data-toggle="modal" [attr.data-target]="'#'+listName" >View Full Profile</button>
-        <button  *ngIf = "'shortListed'===listName || 'applied'===listName "   type="button" (click)="addShortlistedTOcart(item)">Add To Cart</button>
+        <div class="button-group">
+          <div class="col-sm-6 padding-right5">
+            <button [hidden]="!showButton.isShowViewFullProfileButton" type="button" (click)="viewProfile(item,true)" data-toggle="modal" [attr.data-target]="'#'+listName" >View Full Profile</button>
+            <div [hidden]="!showButton.isShowViewProfileButton">
+              <button   class="btn btn-cart btn-block" type="button" data-toggle="modal" [attr.data-target]="'#'+listName" (click)="viewProfile(item,false)">View Profile</button>
+            </div>
+          </div>
+          <div class="col-sm-6 padding-left5">
+            <button class="btn btn-cart" *ngIf = "'shortListed'===listName || 'applied'===listName "   type="button" (click)="addShortlistedTOcart(item)">Add To Cart</button>
+          </div>
+        </div>
+
+
       </div>
     </div>
   </div>
