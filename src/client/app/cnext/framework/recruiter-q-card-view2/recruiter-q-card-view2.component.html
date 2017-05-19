@@ -64,7 +64,7 @@
         <!--<button [hidden]="!showButton.isShowRemoveButton"  type="button" (click)="Cancel(item)">Remove</button>-->
        <!-- <button [hidden]="!showButton.isShowRejectButton"  type="button" (click)="rejectCandidate(item)">Reject</button>-->
         <button  [hidden]="!showButton.isShowViewFullProfileButton" type="button" (click)="viewProfile(item,true)" data-toggle="modal" [attr.data-target]="'#'+listName" >View Full Profile</button>
-
+        <button  *ngIf = "'shortListed'===listName || 'applied'===listName "   type="button" (click)="addShortlistedTOcart(item)">Add To Cart</button>
       </div>
     </div>
   </div>
