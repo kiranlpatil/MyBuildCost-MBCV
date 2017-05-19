@@ -55,6 +55,7 @@ export class RecruiterQCardview2Component implements OnInit,OnChanges {
   private candidateFilter: CandidateFilter;
   private match: MatchCandidate = new MatchCandidate();
   private qCardModel: QCardsortBy = new QCardsortBy();
+  private matchFormat : string;
 
   constructor(private recruiterQCardViewService: QCardViewService,
               private qCardView: QCardViewService,
@@ -83,6 +84,7 @@ export class RecruiterQCardview2Component implements OnInit,OnChanges {
   }
 
   ngOnInit() {
+    this.matchFormat = this.match.aboveMatch;
     //this.candidates = this.candidate2;
   }
 
@@ -189,6 +191,10 @@ export class RecruiterQCardview2Component implements OnInit,OnChanges {
       }
     }
 //    this.candidateDetails = candidateData.metadata;
+  }
+
+  matching(value:any) {
+    this.matchFormat = value;
   }
 
 }

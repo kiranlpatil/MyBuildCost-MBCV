@@ -10,7 +10,7 @@ export class SortPipe implements  PipeTransform{
     if (array == null ) {
       return null;
     }
-    if(args==='JobMatching' && args!==""){
+    if(args==='BestMatch' && args!==""){
     array.sort((a: CandidateQCard, b: CandidateQCard) => {
       if (Number(a.matching) >= Number(b.matching) ){
         return -1;

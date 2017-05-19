@@ -65,7 +65,8 @@
           <div class="canvas-container">
             <cn-progress-bar [value]="item.matching" [color]="'#e77e22'" [rotation]="false"></cn-progress-bar>
             <cn-progress-bar [value]="item.matching" [color]="'#e77e22'" [rotation]="true" ></cn-progress-bar>
-            <span>{{item.matching | number : '1.0-0'}}%</span>
+            <span *ngIf="matchFormat == 'aboveMatch'">{{item.exact_matching + item.above_one_step_matching | number : '1.0-0'}}%</span>
+            <span *ngIf="matchFormat == 'belowMatch'">{{item.below_one_step_matching + item.above_one_step_matching + item.exact_matching | number : '1.0-0'}}%</span>
           </div>
           <p>Skills matching</p>
         </div>

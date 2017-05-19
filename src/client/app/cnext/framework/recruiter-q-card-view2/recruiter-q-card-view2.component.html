@@ -32,7 +32,7 @@
 
   <div class="card-view clearfix">
     <div class="col-sm-4"
-         *ngFor="let item of candidates | dashboardfilter:candidateFilter | orderby:qCardModel.sortValue">
+         *ngFor="let item of candidates | dashboardfilter:candidateFilter | orderby:qCardModel.sortValue | candidatematching:matchFormat">
       <div class="panel clearfix">
         <ul>
           <!--<li><span class="glyphicon glyphicon-heart-empty" [hidden]="!showButton.isShowRejectButton" (click)="rejectCandidate(item)"></span></li>-->

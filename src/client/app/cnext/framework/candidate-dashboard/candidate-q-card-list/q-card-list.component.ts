@@ -14,6 +14,7 @@ import {QCardsortBy} from "../../model/q-cardview-sortby";
 export class QcardListComponent  {
   @Input() listOfJobs:JobQcard[];
   @Input() type:string;
+  @Input() joblistCount:any;
   @Output() onAction=new EventEmitter();
   private filterMeta : CandidateFilter;
   private qCardModel: QCardsortBy = new QCardsortBy();

@@ -2,8 +2,8 @@
   <cn-candidate-header [candidate]="candidate" (onLinkClick)="onLinkClick($event)"></cn-candidate-header>
 
 
-  <div class="container-fluid recruiter-profile-wrapper" [hidden]="hidesection">
-    <!--<p>{{jobList.length}} total jobs available</p>-->
+  <div class="container recruiter-profile-wrapper" [hidden]="hidesection">
+    <!--<h4>{{}} total jobs available</h4>-->
     <div>
       <ul class="nav nav-tabs dashboard-tabs">
         <li class="active">
@@ -14,7 +14,7 @@
         <div id="exact-match" class="tab-pane fade active in clearfix">
           <div class="candidate-listing">
             <cn-candidate-filter [candidate]="candidate" [locations]="locationList2"></cn-candidate-filter>
-            <cn-q-card-list [listOfJobs]="jobList" [type]="'none'"
+            <cn-q-card-list [joblistCount]="jobList.length" [listOfJobs]="jobList" [type]="'none'"
                               (onAction)="onActionPerformOnExactList($event)"></cn-q-card-list>
           </div>
           <div class="candidate-listing" [hidden]="!hidesection">

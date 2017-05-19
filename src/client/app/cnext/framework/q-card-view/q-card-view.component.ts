@@ -120,7 +120,7 @@ i++;
     this.qCardViewService.getSearchedcandidate(this.jobPosterModel)
       .subscribe(
         data => {
-          this.candidates = data,
+          this.candidates = data;
             console.log('q card data',this.candidates);
             this.matches = this.candidates.length
         });
