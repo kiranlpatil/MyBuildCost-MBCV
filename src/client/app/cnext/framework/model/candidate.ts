@@ -36,9 +36,9 @@ export class Section{
 
 export class Summary{
   percentProfileCompleted:number=70;
-  numberOfTimeSearched:number=162;
-  numberOfTimesViewed:number=14;
-  numberOfTimesaddedToCart:number=4;
+  numberOfTimeSearched:number=9999;
+  numberOfTimesViewed:number=999;
+  numberOfTimesaddedToCart:number=99;
   numberOfJobApplied:number=0;
   numberJobsBlocked:number=0;
 }

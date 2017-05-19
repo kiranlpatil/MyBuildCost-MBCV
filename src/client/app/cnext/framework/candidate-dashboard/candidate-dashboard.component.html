@@ -1,8 +1,8 @@
 <div *ngIf="candidate != undefined">
-  <cn-candidate-header [candidate]="candidate" (onLinkClick)="onLinkClick($event)"></cn-candidate-header>
+  <cn-candidate-header [candidate]="candidate"></cn-candidate-header>
 
 
-  <div class="container-fluid recruiter-profile-wrapper" [hidden]="hidesection">
+  <div class="container-fluid recruiter-profile-wrapper">
     <!--<h4>{{}} total jobs available</h4>-->
     <div>
       <div class="clearfix">
@@ -11,13 +11,13 @@
             <cn-candidate-filter [candidate]="candidate" [locations]="locationList2"></cn-candidate-filter>
             <ul class="nav nav-tabs sub-tabs">
               <li class="active">
-                <a id="matched_anchor" (click)="showMatchedJobs()" data-toggle="tab" href="#matched"><span class="count"><span>52</span></span> Matched</a>
+                <a id="matched_anchor" (click)="showMatchedJobs()" data-toggle="tab" href="#matched"><span class="count"><span>{{jobList.length}}</span></span> Matched</a>
               </li>
               <li>
-                <a (click)="showappliedJobs()" data-toggle="tab" href="#applied"><span class="count"><span>52</span></span> Applied</a>
+                <a (click)="showappliedJobs()" data-toggle="tab" href="#applied"><span class="count"><span>{{candidate.summary.numberOfJobApplied}}</span></span> Applied</a>
               </li>
               <li>
-                <a (click)="showrejectedJobs()" data-toggle="tab" href="#rejected"><span class="count"><span>52</span></span> Not Interested</a>
+                <a (click)="showrejectedJobs()" data-toggle="tab" href="#rejected"><span class="count"><span>{{candidate.summary.numberJobsBlocked}}</span></span> Not Interested</a>
               </li>
             </ul>
             <div class="tab-content">
@@ -26,11 +26,11 @@
                                 (onAction)="onActionPerformOnExactList($event)"></cn-q-card-list>
               </div>
               <div  id="applied" class="tab-pane fade"  ><!--[hidden]="!hidesection"-->
-                <cn-candidate-job-list [type]="type" [listOfJobs]="appliedJobs" (onAction)="onActionOnApplyJob($event)"
+                <cn-candidate-job-list [type]="'apply'" [listOfJobs]="appliedJobs" (onAction)="onActionOnApplyJob($event)"
                                        ></cn-candidate-job-list><!--[hidden]="type !=='apply'"-->
               </div>
               <div  id="rejected"  class="tab-pane fade"><!-- [hidden]="!hidesection" -->
-                <cn-candidate-job-list [type]="type" [listOfJobs]="blockedJobs" (onAction)="onActionOnBlockJob($event)"
+                <cn-candidate-job-list [type]="'block'" [listOfJobs]="blockedJobs" (onAction)="onActionOnBlockJob($event)"
                                        ></cn-candidate-job-list><!-- [hidden]="type !=='block'" -->
               </div>
             </div>

@@ -13,13 +13,9 @@ export class CandidateJobListComponent  {
   @Input() listOfJobs:JobQcard[];
   @Input() type:string;
   @Output() onAction=new EventEmitter();
-  
 
-  deleteItem(i:number,jobId:string){
-    if(i != -1){
-      this.listOfJobs.splice(i,1)
-    }
-    LocalStorageService.setLocalValue(LocalStorage.CURRENT_JOB_POSTED_ID, jobId);
-    this.onAction.emit(this.type);
+
+  onActionPerform(action:string){
+    this.onAction.emit(action);
   }
 }

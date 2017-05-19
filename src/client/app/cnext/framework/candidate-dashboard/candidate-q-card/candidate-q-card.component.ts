@@ -61,10 +61,14 @@ export class CandiadteQCardComponent {
     this.showModalStyle = !this.showModalStyle;
   }
 
-  deleteItem(i:number,jobId:string){
+  deleteItem(jobId:string){
 
     LocalStorageService.setLocalValue(LocalStorage.CURRENT_JOB_POSTED_ID, jobId);
-    this.onAction.emit("'delete'");
+    this.candidateDashboardService.removeBlockJob().subscribe(
+      data => {
+        console.log(data);
+        this.onAction.emit('delete');
+      });
   }
 
 }

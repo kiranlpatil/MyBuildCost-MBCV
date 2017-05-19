@@ -12,18 +12,9 @@ import {NavigationRoutes} from "../../../../framework/shared/constants";
 
 export class CandidateHeaderComponent  {
   @Input() candidate:Candidate;
-@Output() onLinkClick=new EventEmitter();
+
   constructor(private _router:Router) {
-
   }
-
-  onApplyClick(){
-  this.onLinkClick.emit('apply');
-  }
-
-  onBlockClick(){
-    this.onLinkClick.emit('block');
-}
   logOut() {
     window.localStorage.clear();
     this._router.navigate([NavigationRoutes.APP_START]);

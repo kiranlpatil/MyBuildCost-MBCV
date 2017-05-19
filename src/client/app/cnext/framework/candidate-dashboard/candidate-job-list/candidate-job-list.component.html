@@ -1,7 +1,7 @@
 <div class="dashboard-view clearfix">
   <div class="card-view clearfix">
     <div *ngFor="let job of listOfJobs;let i=index">
-      <cn-candidate-q-card [job]="job" [type]="type"></cn-candidate-q-card>
+      <cn-candidate-q-card [job]="job" [type]="type" (onAction)="onActionPerform($event)"></cn-candidate-q-card>
     </div>
   </div>
 </div>

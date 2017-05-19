@@ -39,7 +39,7 @@ export class CandidateDashboardComponent  {
     this.showrejectedJobs();
   }
 
-  extractList(jobList:JobQcard[]){ 
+  extractList(jobList:JobQcard[]){
     for(let job of jobList){
       var addition=job.above_one_step_matching+job.exact_matching;
       if(addition <= ValueConstant.MATCHING_PERCENTAGE){
@@ -90,16 +90,10 @@ export class CandidateDashboardComponent  {
   }
 
   onActionOnBlockJob(action:string){
-  }
-
-  onLinkClick(type:string){
-    this.hidesection=true;
-    this.type=type;
-    if(this.type=='apply'){
-this.showappliedJobs();
-    }
-    else if(this.type=='block'){
-this.showrejectedJobs();
+if(action === 'delete'){
+  this.candidate.summary.numberJobsBlocked--;
+  this.showrejectedJobs();
+  this.showMatchedJobs();
     }
   }
 
