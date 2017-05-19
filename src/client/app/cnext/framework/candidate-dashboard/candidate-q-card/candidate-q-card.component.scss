@@ -1,26 +1,31 @@
-.card-view {
-  .panel {
-    padding: 35px 0 15px 15px;
+.panel {
+  padding: 40px 0 15px 15px;
 
-    .profile-picture {
-      right: 15px;
-    }
+  .profile-picture {
+    right: 12px;
+    left: auto;
+  }
 
-    h4 {
-      color: #e77e22;
-      font-weight: 900;
-      font-size: 14px;
-      margin: 5px 0 10px;
-      text-transform: capitalize;
-      position: absolute;
-      top: 12px;
-      left: 15px;
-      font-family: 'gothamrnd-book';
-    }
+  h6 {
+    color: #e77e22;
+    font-weight: 900;
+    font-size: 14px;
+    margin: 0 0 10px;
+    text-transform: capitalize;
+    position: absolute;
+    top: 12px;
+    left: 15px;
+    font-family: 'gothamrnd-book';
+  }
 
-    h5 {
-
-    }
+  h5 {
+    position: absolute;
+    top: 17px;
+    left: 15px;
+    font-family: 'gothamrnd-light';
+    font-weight: 600;
+    font-size: 12px;
+    color: #666;
   }
 }
 

@@ -6,6 +6,13 @@ $white: #fff;
 .card-view {
   clear: both;
   text-align: left;
+  position: relative;
+
+  .panel ~ .glyphicon-trash {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
 
   .panel {
     padding: 15px 0 0 0;

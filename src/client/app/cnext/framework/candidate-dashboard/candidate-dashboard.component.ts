@@ -33,15 +33,10 @@ export class CandidateDashboardComponent  {
           this.OnCandidateDataSuccess(candidateData);
         });
 
-    this.candidateDashboardService.getJobList()
-      .subscribe(
-        data => {
-          this.jobList=data;
-          this.extractList(this.jobList);
-        });
 
-    this.onApplyClick();
-    this.onBlockClick();
+    this.showMatchedJobs();
+    this.showappliedJobs();
+    this.showrejectedJobs();
   }
 
   extractList(jobList:JobQcard[]){ 
@@ -101,14 +96,14 @@ export class CandidateDashboardComponent  {
     this.hidesection=true;
     this.type=type;
     if(this.type=='apply'){
-this.onApplyClick();
+this.showappliedJobs();
     }
     else if(this.type=='block'){
-this.onBlockClick();
+this.showrejectedJobs();
     }
   }
 
-  onApplyClick(){
+  showappliedJobs(){
     this.candidateJobListService.getAppliedJobList()
       .subscribe(
         data => {
@@ -118,12 +113,21 @@ this.onBlockClick();
 
   }
 
-  onBlockClick(){
+  showrejectedJobs(){
     this.candidateJobListService.getBlockedJobList()
       .subscribe(
         data => {
           this.blockedJobs=data.data;
           this.candidate.summary.numberJobsBlocked=this.blockedJobs.length;
         });
+  }
+
+  showMatchedJobs() {
+    this.candidateDashboardService.getJobList()
+        .subscribe(
+            data => {
+              this.jobList=data;
+              this.extractList(this.jobList);
+            });
   }
 }

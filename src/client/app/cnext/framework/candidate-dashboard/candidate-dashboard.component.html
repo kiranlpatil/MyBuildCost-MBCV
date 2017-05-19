@@ -2,26 +2,38 @@
   <cn-candidate-header [candidate]="candidate" (onLinkClick)="onLinkClick($event)"></cn-candidate-header>
 
 
-  <div class="container recruiter-profile-wrapper" [hidden]="hidesection">
+  <div class="container-fluid recruiter-profile-wrapper" [hidden]="hidesection">
     <!--<h4>{{}} total jobs available</h4>-->
     <div>
-      <ul class="nav nav-tabs dashboard-tabs">
-        <li class="active">
-          <a data-toggle="tab" href="#exact-match">Above 75 % Match({{jobList.length}})</a>
-        </li>
-      </ul>
-      <div class="tab-content clearfix">
-        <div id="exact-match" class="tab-pane fade active in clearfix">
+      <div class="clearfix">
+        <div>
           <div class="candidate-listing">
             <cn-candidate-filter [candidate]="candidate" [locations]="locationList2"></cn-candidate-filter>
-            <cn-q-card-list [joblistCount]="jobList.length" [listOfJobs]="jobList" [type]="'none'"
-                              (onAction)="onActionPerformOnExactList($event)"></cn-q-card-list>
-          </div>
-          <div class="candidate-listing" [hidden]="!hidesection">
-            <cn-candidate-job-list [type]="type" [listOfJobs]="appliedJobs" (onAction)="onActionOnApplyJob($event)"
-                                   [hidden]="type !=='apply'"></cn-candidate-job-list>
-            <cn-candidate-job-list [type]="type" [listOfJobs]="blockedJobs" (onAction)="onActionOnBlockJob($event)"
-                                   [hidden]="type !=='block'"></cn-candidate-job-list>
+            <ul class="nav nav-tabs sub-tabs">
+              <li class="active">
+                <a id="matched_anchor" (click)="showMatchedJobs()" data-toggle="tab" href="#matched"><span class="count"><span>52</span></span> Matched</a>
+              </li>
+              <li>
+                <a (click)="showappliedJobs()" data-toggle="tab" href="#applied"><span class="count"><span>52</span></span> Applied</a>
+              </li>
+              <li>
+                <a (click)="showrejectedJobs()" data-toggle="tab" href="#rejected"><span class="count"><span>52</span></span> Not Interested</a>
+              </li>
+            </ul>
+            <div class="tab-content">
+              <div id="matched" class="tab-pane fade in active">
+                <cn-q-card-list [joblistCount]="jobList.length" [listOfJobs]="jobList" [type]="'none'"
+                                (onAction)="onActionPerformOnExactList($event)"></cn-q-card-list>
+              </div>
+              <div  id="applied" class="tab-pane fade"  ><!--[hidden]="!hidesection"-->
+                <cn-candidate-job-list [type]="type" [listOfJobs]="appliedJobs" (onAction)="onActionOnApplyJob($event)"
+                                       ></cn-candidate-job-list><!--[hidden]="type !=='apply'"-->
+              </div>
+              <div  id="rejected"  class="tab-pane fade"><!-- [hidden]="!hidesection" -->
+                <cn-candidate-job-list [type]="type" [listOfJobs]="blockedJobs" (onAction)="onActionOnBlockJob($event)"
+                                       ></cn-candidate-job-list><!-- [hidden]="type !=='block'" -->
+              </div>
+            </div>
           </div>
         </div>
       </div>
