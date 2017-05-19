@@ -16,7 +16,7 @@ interface JobProfileModel {
     salary : string;
     joiningPeriod :string;
     proficiencies :  string[];
-  additionalProficiencies :  string[];
+    additionalProficiencies :  string[];
     industry : IndustryModel;
     location : LocationModel;
     competencies : string;

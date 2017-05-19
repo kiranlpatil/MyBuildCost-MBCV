@@ -42,6 +42,9 @@ class RecruiterSchema {
               country: String,
               pin: String
             },
+            joiningPeriod:{
+              type: String
+            },
             jobTitle :{
               type : String
             },
@@ -69,6 +72,7 @@ class RecruiterSchema {
             interestedIndustries: {
               type :[String]
             },
+
             industry:{
               name:String,
               roles: [{

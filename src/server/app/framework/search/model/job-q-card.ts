@@ -14,6 +14,7 @@ export class JobQCard {
   proficiencies : string[];
   company_logo : string;
   company_age: string;
+  joiningPeriod : string;
   industry : string;
   jobTitle : string;
   _id : string;
