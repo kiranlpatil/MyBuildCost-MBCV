@@ -202,11 +202,11 @@ this.showModalStyle=true;
   }
 
   getImagePath(imagePath:string){
-    if(imagePath != undefined){
-      return AppSettings.IP + imagePath.substring(4).replace('"', '');
-    }
-
-    return null;
+  if(imagePath != undefined){
+    return AppSettings.IP + imagePath.substring(4).replace('"', '');
   }
+
+  return null;
+}
 
 }

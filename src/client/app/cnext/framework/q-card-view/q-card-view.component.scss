@@ -1,3 +1,78 @@
+.modal {
+
+  .modal-dialog {
+    width: 80%;
+    height: 80%;
+    top: 50%;
+    -webkit-transform: translate(0, -50%) !important;
+    transform: translate(-50%, -50%) !important;
+    border-radius: 8px;
+    position: fixed;
+    margin: 0 auto;
+    left: 50%;
+  }
+
+  .modal-body {
+    padding: 0;
+    border-radius: 8px;
+    position: relative;
+  }
+
+  .modal-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: #f2f2f2;
+    z-index: 100;
+    right: 0;
+    margin: 0 15px;
+    border-radius: 8px 8px 0 0;
+    box-sizing: border-box;
+    padding: 5px 15px;
+
+    h4 {
+      margin: 0;
+      padding: 5px 15px;
+      text-align: left;
+      font-size: 16px;
+    }
+
+    .close {
+      position: absolute;
+      right: 11px;
+      top: 14px;
+      opacity: 1;
+      width: 13px;
+    }
+  }
+
+  .modal-content {
+    height: 100%;
+    overflow: auto;
+    border-radius: 8px;
+  }
+
+  .button-group {
+    display: block;
+    position: fixed;
+    bottom: -8px;
+    right: 0;
+    background: #f2f2f2;
+    z-index: 100;
+    margin: 0 15px;
+    border-radius: 0 0 8px 8px;
+    box-sizing: border-box;
+    padding: 5px 15px;
+    width: auto;
+    text-align: right;
+
+    button {
+      display: inline-block;
+    }
+  }
+
+}
+
 .card-view {
   .panel {
     padding: 35px 0 15px 15px;
@@ -10,5 +85,10 @@ header{
     margin: 5px;
     list-style: none;
     float: left;
+  }
+
+  .sort-by, .search {
+    float: right;
+    margin-left: 15px;
   }
 }

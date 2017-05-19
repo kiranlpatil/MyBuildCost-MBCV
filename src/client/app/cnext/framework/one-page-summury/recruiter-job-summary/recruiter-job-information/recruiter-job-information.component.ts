@@ -21,4 +21,11 @@ export class RecruiterJobInformation  {
       this.image_path= AppSettings.IP + this.recruiter.company_logo .substring(4).replace('"', '');;
     }
   }
+
+  getImagePath(imagePath:string){
+    if(imagePath != undefined){
+      return AppSettings.IP + imagePath.substring(4).replace('"', '');
+    }
+    return null;
+  }
 }

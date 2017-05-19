@@ -1,7 +1,8 @@
 <div class="basic-description" *ngIf="recruiter != undefined">
 
   <div class="basic-info clearfix">
-    <img src="{{image_path}}" alt="profile"/>
+    <img src= "assets/framework/images/dashboard/profile.png" alt="User Profile" *ngIf="recruiter.company_logo==undefined"/>
+    <img [src]="getImagePath(recruiter.company_logo)"  alt="User Profile" *ngIf="recruiter.company_logo!=undefined"/>
     <p class="name">{{recruiter.company_name}}</p>
   </div>
 

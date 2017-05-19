@@ -1,7 +1,7 @@
 import {Component,Input,EventEmitter,Output} from "@angular/core";
 import {Router} from "@angular/router";
 import {Candidate} from "../../model/candidate";
-import {NavigationRoutes} from "../../../../framework/shared/constants";
+import {AppSettings, NavigationRoutes} from "../../../../framework/shared/constants";
 
 @Component({
   moduleId: module.id,
@@ -15,6 +15,15 @@ export class CandidateHeaderComponent  {
 
   constructor(private _router:Router) {
   }
+
+  getImagePath(imagePath:string){
+    if(imagePath != undefined){
+      return AppSettings.IP + imagePath.substring(4).replace('"', '');
+    }
+
+    return null;
+  }
+
   logOut() {
     window.localStorage.clear();
     this._router.navigate([NavigationRoutes.APP_START]);

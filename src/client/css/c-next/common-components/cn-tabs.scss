@@ -3,11 +3,12 @@ $bg-tab-content: #fff;
 $nav-tab: #7264b3;
 $profile-section-shadow: rgba(204, 204, 204, 1);
 $border-color: #ddd;
+$border-light: #efefef;
 $white: #fff;
 $theme-color: #3694d1;
 
 .nav-tabs {
-  border-bottom: 1px solid $border-color;
+  border-bottom: 1px solid $border-light;
 
   li {
     margin: 0;

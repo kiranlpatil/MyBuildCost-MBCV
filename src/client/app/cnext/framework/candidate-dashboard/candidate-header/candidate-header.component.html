@@ -1,7 +1,8 @@
-<header class="page-header">
+<header class="page-header" *ngIf="candidate != undefined">
   <div class="container-fluid">
     <div class="user-info col-sm-3">
-      <img src= "assets/framework/images/dashboard/profile.png" alt="User Profile"/>
+      <img src= "assets/framework/images/dashboard/profile.png" alt="User Profile" *ngIf="candidate.basicInformation.picture==undefined"/>
+      <img [src]="getImagePath(candidate.basicInformation.picture)"  alt="User Profile" *ngIf="candidate.basicInformation.picture!=undefined"/>
       <h4>{{candidate.basicInformation.first_name}} {{candidate.basicInformation.last_name}}</h4>
       <h5>{{candidate.jobTitle}}</h5>
     </div>

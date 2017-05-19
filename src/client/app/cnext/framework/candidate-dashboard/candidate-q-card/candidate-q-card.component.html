@@ -45,7 +45,7 @@
               <cn-job-view [jobId]="jobId"></cn-job-view>
             </div>
           </div>
-            <div class="button-group" [hidden]="type=='apply' || type=='block'" >
+            <div class="button-group" *ngIf="!hideButton">
               <button class="btn btn-primary" (click)="applyJob()">Apply</button>
               <button class="btn btn-danger" (click)="blockJob() ">Not Interested</button>
             </div>

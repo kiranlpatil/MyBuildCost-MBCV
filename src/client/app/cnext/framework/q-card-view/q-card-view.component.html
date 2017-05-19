@@ -12,17 +12,16 @@
         </div>
       </li>
       <li>
-        <a (click)="clearFilter()">Clear all filters</a>
+        <p>Showing x out of {{matches}}</p>
       </li>
       <li>
-        <p>Showing x out of {{matches}}</p>
+        <a (click)="clearFilter()">Clear all filters</a>
       </li>
     </ul>
     <div class="search">
       <input class="form-control" type="text" />
       <button class="btn btn-search" type="button"><img src="./assets/framework/images/dashboard/search.png"></button>
     </div>
-
 
     <div class="sort-by">
       <label>Sort by</label>
@@ -35,10 +34,10 @@
   <div class="card-view clearfix">
     <div class="col-sm-4" *ngFor= "let item of candidates | orderby:qCardModel.sortValue | dashboardfilter:candidateFilter | candidatematching: matchFormat;let i=index;"><!--| candidatematching: matchFormat-->
       <div class="panel clearfix">
-        <img class="profile-picture" [src]="getImagePath(item.picture)" alt="picture" *ngIf="item.picture!=undefined"/>
+        <img class="profile-picture" src="assets/framework/images/dashboard/profile.png" alt="Profile Picture"/>
         <h6 class="username">{{item.first_name}} {{item.last_name}}</h6>
         <ul>
-          <li><img src="./assets/framework/images/dashboard/shortlist.png" (click)="addToShortList(item)" [class.shortlisted]="item.isCandidateshortListed"></li>
+          <li><span class="glyphicon glyphicon-heart-empty" (click)="addToShortList(item)" [class.shortlisted]="item.isCandidateshortListed"></span></li>
          <!-- <li>
             <div [hidden]="!item.isCandidateRead"><span class="glyphicon glyphicon-eye-close"></span></div>
             <div [hidden]="item.isCandidateRead"><span class="glyphicon glyphicon-eye-open"></span></div>

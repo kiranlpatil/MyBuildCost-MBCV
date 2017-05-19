@@ -65,10 +65,10 @@ $red: #ef4136;
     ul > li {
       width: auto;
       float: left;
-      padding: 0 15px;
+      padding: 0 25px;
 
       &:first-child {
-        padding: 0 15px 0 0;
+        padding: 0;
       }
     }
 
@@ -90,7 +90,7 @@ $red: #ef4136;
         background-color: $purple;
         color: $white;
         position: relative;
-        margin: 0 auto 5px auto;
+        margin: 10px auto 5px auto;
       }
 
       span {
@@ -111,14 +111,14 @@ $red: #ef4136;
 
     .contact-info {
       p {
-        margin-top: 15px;
+        margin-top: 17px;
       }
 
       p > img {
-        font-size: 20px;
         margin-right: 10px;
         position: relative;
         top: 0;
+        width: 15px;
       }
     }
   }

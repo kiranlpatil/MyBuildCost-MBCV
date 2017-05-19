@@ -5,7 +5,7 @@ import {QCardViewService} from "./q-card-view.service";
 import {JobPosterModel} from "../model/jobPoster";
 import {QCardsortBy} from "../model/q-cardview-sortby";
 import {CandidateFilter} from "../model/candidate-filter";
-import {AppSettings, ValueConstant} from "../../../framework/shared/constants";
+import {ValueConstant} from "../../../framework/shared/constants";
 import {UpdatedIds} from "../model/updatedCandidatesIDS";
 import {RecruiteQCardView2Service} from "../recruiter-q-card-view2/recruiter-q-card-view2.service";
 import {MatchCandidate} from "../model/match-candidate";
@@ -215,12 +215,5 @@ export class QCardviewComponent implements OnInit, OnChanges {
 
   matching(value: any) {
     this.matchFormat = value;
-  }
-  getImagePath(imagePath:string){
-    if(imagePath != undefined){
-      return AppSettings.IP + imagePath.substring(4).replace('"', '');
-    }
-
-    return null;
   }
 }
