@@ -94,8 +94,8 @@
             <div class="col-sm-12" *ngIf="selectedCandidate != undefined" >
               <div >
                 <h5>{{candidateDetails.first_name}}{{candidateDetails.last_name}}</h5>
-                <h5>Contact:{{candidateDetails.mobile_number}}</h5>
-                <h5>Email:{{candidateDetails.email}}</h5>
+               <!-- <h5>Contact:{{candidateDetails.mobile_number}}</h5>
+                <h5>Email:{{candidateDetails.email}}</h5>-->
                 <div *ngIf="selectedCandidate.industry != undefined ">
                 <cn-tabular-list-view [roles]="selectedCandidate.industry.roles"></cn-tabular-list-view>
               </div>
