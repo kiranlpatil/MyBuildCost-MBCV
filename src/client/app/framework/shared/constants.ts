@@ -6,6 +6,7 @@ export class AppSettings {
   public static IP = 'http://52.41.194.37:8080';
   //public static IP = '';
 
+
   public static get API_ENDPOINT():string {
     return this.IP + '/api/';
   }
