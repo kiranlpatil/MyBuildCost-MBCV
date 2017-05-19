@@ -1,20 +1,26 @@
 <header class="page-header">
-  <div class="container">
+  <div class="container-fluid">
     <div class="user-info col-sm-3">
       <img src= "assets/framework/images/dashboard/profile.png" alt="User Profile"/>
       <h4>{{candidate.basicInformation.first_name}} {{candidate.basicInformation.last_name}}</h4>
-      <div><h4>{{candidate.jobTitle}}</h4></div>
+      <h5>{{candidate.jobTitle}}</h5>
     </div>
-    <ul class="job-posted">
+    <ul class="list-counts clearfix">
       <li >
-        <div class="canvas-container">
-          <cn-progress-bar [value]="candidate.summary.percentProfileCompleted" [color]="'#fff'" [rotation]="false"></cn-progress-bar>
-          <cn-progress-bar [value]="candidate.summary.percentProfileCompleted" [color]="'#e77e22'" [rotation]="true" ></cn-progress-bar>
-          <span class="percentage"><span>{{candidate.summary.percentProfileCompleted | number : '1.0-0'}}%</span></span>
+        <div class="dropdown">
+          <a  data-toggle="dropdown">
+          <div class="canvas-container">
+            <!-- <cn-progress-bar [value]="candidate.summary.percentProfileCompleted" [color]="'#fff'" [rotation]="false"></cn-progress-bar>
+             <cn-progress-bar [value]="candidate.summary.percentProfileCompleted" [color]="'#e77e22'" [rotation]="true" ></cn-progress-bar>-->
+            <span class="percentage"><span>{{candidate.summary.percentProfileCompleted | number : '1.0-0'}}%</span></span>
+          </div>
+          </a>
+          <p>Profile Completed</p>
+          <ul class="dropdown-menu">
+            <li><a routerLink="/profile_summury">View Profile</a></li>
+            <li><a routerLink="/create_profile">Edit Profile</a></li>
+          </ul>
         </div>
-        <p>Profile Completed</p>
-        <a routerLink="/profile_summury"><button class="btn btn-success pull-right" > View Profile</button></a>
-        <a routerLink="/create_profile"><button class="btn btn-success pull-right" > Edit Profile</button></a>
       </li>
       <li>
         <img src="assets/c-next/header/jobs-posted.png" alt="search"/>
@@ -34,6 +40,8 @@
       <li>
         <span (click)="onApplyClick()">{{candidate.summary.numberOfJobApplied}}</span>
         <p>Applied Jobs</p>
+      </li>
+      <li>
         <span (click)="onBlockClick()">{{candidate.summary.numberJobsBlocked}}</span>
         <p>Blocked Jobs</p>
       </li>

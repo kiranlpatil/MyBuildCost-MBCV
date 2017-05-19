@@ -61,7 +61,7 @@ export class CandidateFilterComponent {
     });
   }
 
-  ngOnChanges(changes :any){ debugger
+  ngOnChanges(changes :any){
     if(changes.candidate){
       if(changes.candidate.currentValue) {
         this.proficiencyList = changes.candidate.currentValue.proficiencies;
