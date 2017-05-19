@@ -30,6 +30,26 @@
 }
 
 .modal {
+  .modal-dialog {
+    width: 80%;
+    height: 80%;
+    top: 50%;
+    transform: translate(0, -50%) !important;
+    border-radius: 8px;
+  }
+
+  .modal-body {
+    padding: 0;
+    border-radius: 8px;
+  }
+
+  .modal-content {
+    height: 100%;
+    overflow: auto;
+    border-radius: 8px;
+  }
+
+
   button {
     display: block;
   }
