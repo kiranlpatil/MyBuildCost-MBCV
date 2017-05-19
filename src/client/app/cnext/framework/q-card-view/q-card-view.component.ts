@@ -10,6 +10,9 @@ import {UpdatedIds} from "../model/updatedCandidatesIDS";
 import {RecruiteQCardView2Service} from "../recruiter-q-card-view2/recruiter-q-card-view2.service";
 import {MatchCandidate} from "../model/match-candidate";
 import {FilterService} from "../filters/filter.service";
+import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
+import {Candidate} from "../model/candidate";
+import {CandidateDetail} from "../../../framework/registration/candidate/candidate";
 
 @Component({
   moduleId: module.id,
@@ -20,7 +23,8 @@ import {FilterService} from "../filters/filter.service";
 })
 export class QCardviewComponent implements OnInit, OnChanges {
   @Output() updatedIds= new EventEmitter<UpdatedIds>();
-
+  private selectedCandidate: Candidate = new Candidate();
+  private candidateDetails: CandidateDetail = new CandidateDetail();
   private candidates: CandidateQCard[] = new Array();
   private candidates2:any[] = new Array();
   private selectedPerson: CandidateQCard = new CandidateQCard();
@@ -36,6 +40,8 @@ export class QCardviewComponent implements OnInit, OnChanges {
   private isShowQCardView: boolean;
   private candidateFilter: CandidateFilter;
   private matchFormat: string;
+  private showModalStyle:boolean = false;
+
   @Input() private jobPosterModel: JobPosterModel;
   @Input() private recruiterId: string;
   @Input() private addToSerchIds: CandidateQCard[];
@@ -43,6 +49,7 @@ export class QCardviewComponent implements OnInit, OnChanges {
   private shortlisted: boolean = false;
 
   constructor(private qCardViewService: QCardViewService,
+              private profileCreatorService :CandidateProfileService,
               private cardViewService:RecruiteQCardView2Service,
               private showQCardview: ShowQcardviewService, private filterService: FilterService) {
 
@@ -134,8 +141,21 @@ i++;
 
 
   }
+  Reject(item:any)
+  {
+    this.showModalStyle = !this.showModalStyle;
+
+    /*this.recruiterQCardViewService.addCandidateLists(this.recruiterId, this.jobPosterModel._id, item._id, ValueConstant.REJECTED_LISTED_CANDIDATE, "add").subscribe(
+      user => {
+        console.log(user);
+      });*/
+
+
+  }
 
   addToCart(_id: any) {
+    this.showModalStyle = false;
+
     this.qCardViewService.addCandidateLists(this.recruiterId, this.jobPosterModel._id, _id, ValueConstant.CART_LISTED_CANDIDATE, "add").subscribe(
       user => {
         console.log(user);
@@ -155,6 +175,28 @@ i++;
 
   }
 
+
+  viewProfile(candidateid:string){
+    this.profileCreatorService.getCandidateDetailsOfParticularId(candidateid).subscribe(
+      candidateData => this.OnCandidateDataSuccess(candidateData));
+
+  }
+
+  OnCandidateDataSuccess(candidate: any) {
+    this.selectedCandidate = candidate.data;
+    this.candidateDetails = candidate.metadata;
+    this.showModalStyle = !this.showModalStyle;
+
+//    this.candidateDetails = candidateData.metadata;
+  }
+
+  getStyleModal() {//TODO remove this from all model
+    if (this.showModalStyle) {
+      return 'block';
+    } else {
+      return 'none';
+    }
+  }
   sortBy() {
     this.toggleFormat();
   }

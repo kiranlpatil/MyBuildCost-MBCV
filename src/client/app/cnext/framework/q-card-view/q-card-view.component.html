@@ -1,33 +1,20 @@
 <div class="dashboard-view clearfix"><!--[hidden]="!isShowQCardView"-->
   <header class="col-sm-12">
-    <ul>
-      <li>
-        <div class="match-cases">
-          <label class="radio-inline">
-            <input  type="radio" name="radiogroup" value="{{match.aboveMatch}}" (click)="matching($event.target.value)">Above Match
-          </label>
-          <label class="radio-inline">
-            <input  type="radio" name="radiogroup" value="{{match.belowMatch}}" (click)="matching($event.target.value)">Below Match
-          </label>
-        </div>
-      </li>
-      <li>
-        <a (click)="clearFilter()">Clear all filters</a>
-      </li>
-      <li>
-        <p>{{matches}} Matche(s) Found</p>
-      </li>
-    </ul>
-
+    <div>
+      <label class="radio-inline">
+        <input  type="radio" name="radiogroup" value="{{match.aboveMatch}}" (click)="matching($event.target.value)">AboveMatch
+      </label>
+      <label class="radio-inline">
+        <input  type="radio" name="radiogroup" value="{{match.belowMatch}}" (click)="matching($event.target.value)">BelowMatch
+      </label>
+    </div>
+    <button type="button" (click)="clearFilter()">Clear all filters</button>
+    <p>{{matches}} Matches Found</p>
     <div class="sort-by">
       <label>Sort by</label>
       <select id="menu"  [(ngModel)]="qCardModel.sortValue" (change)="sortBy()">
         <option value="{{itemList}}" *ngFor="let itemList of qCardModel.listOfMatchings">{{itemList}}</option>
       </select>
-    </div>
-    <div class="search">
-      <input class="form-control" type="text" />
-      <button class="btn btn-search" type="button">Search</button>
     </div>
   </header>
 
@@ -38,10 +25,10 @@
         <h6 class="username">{{item.first_name}} {{item.last_name}}</h6>
         <ul>
           <li><span class="glyphicon glyphicon-heart-empty" (click)="addToShortList(item)" [class.shortlisted]="item.isCandidateshortListed"></span></li>
-          <!--<li>
+          <li>
             <div [hidden]="!item.isCandidateRead"><span class="glyphicon glyphicon-eye-close"></span></div>
             <div [hidden]="item.isCandidateRead"><span class="glyphicon glyphicon-eye-open"></span></div>
-          </li>-->
+          </li>
         </ul>
         <div class="col-sm-7 col-xs-6 no-padding left-side">
           <p><img src="assets/c-next/card-view/salary.png" alt="Salary"/>$ {{item.salary}}</p>
@@ -72,13 +59,43 @@
         </div>
         <div class="button-group">
           <div class="col-sm-6 padding-right5">
-            <button class="btn btn-cart btn-block" type="button" (click)="addToCart(item._id)" >View</button>
+            <button class="btn btn-cart btn-block" type="button" (click)="viewProfile(item._id)" >View</button>
           </div>
           <div  class="col-sm-6 padding-left5">
-            <button class="btn btn-danger btn-block" type="button" (click)="addToCart(item._id)" >Add To Cart</button>
+            <button  type="button" (click)="addToCart(item._id)" >Add To Cart</button>
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>
+
+<div class="modal" [style.display]="getStyleModal()">
+  <div class="modal-bg">
+    <div class="modal-dialog modal-md">
+      <div class="modal-content">
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-sm-12" *ngIf="selectedCandidate != undefined" >
+              <div >
+                <h5>{{candidateDetails.first_name}}{{candidateDetails.last_name}}</h5>
+                <h5>Contact:{{candidateDetails.mobile_number}}</h5>
+                <h5>Email:{{candidateDetails.email}}</h5>
+                <div *ngIf="selectedCandidate.industry != undefined ">
+                <cn-tabular-list-view [roles]="selectedCandidate.industry.roles"></cn-tabular-list-view>
+              </div>
+              <div class="button-group" >
+                <button class="btn btn-primary" (click)="addToCart(selectedCandidate._id)">ADD to cart</button>
+                <button class="btn btn-default" (click)="Reject(selectedCandidate._id) ">Reject</button>
+              </div>
+              <div class="button-group">
+                <button class="btn btn-primary" (click)="closeJob()">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 </div>
