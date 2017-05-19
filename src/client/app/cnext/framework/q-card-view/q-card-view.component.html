@@ -4,10 +4,12 @@
       <li>
         <div class="match-cases">
           <label class="radio-inline">
-            <input  type="radio" name="radiogroup" value="{{match.aboveMatch}}" (click)="matching($event.target.value)">Above Match
+            <input  type="radio" name="radiogroup" value="{{match.aboveMatch}}" (click)="matching($event.target.value)" checked="checked">Exact Match or Higher Capabilities
+            <span></span>
           </label>
           <label class="radio-inline">
-            <input  type="radio" name="radiogroup" value="{{match.belowMatch}}" (click)="matching($event.target.value)">Below Match
+            <input  type="radio" name="radiogroup" value="{{match.belowMatch}}" (click)="matching($event.target.value)">With One Level Lower Capabilities
+            <span></span>
           </label>
         </div>
       </li>
@@ -18,10 +20,10 @@
         <a (click)="clearFilter()">Clear all filters</a>
       </li>
     </ul>
-   <!-- <div class="search">
-      <input class="form-control" type="text" />
-      <button class="btn btn-search" type="button"><img src="./assets/framework/images/dashboard/search.png"></button>
-    </div>-->
+    <!--<div class="search">-->
+      <!--<input class="form-control" type="text" />-->
+      <!--<button class="btn btn-search" type="button"><img src="./assets/framework/images/dashboard/search.png"></button>-->
+    <!--</div>-->
 
     <div class="sort-by">
       <label>Sort by</label>
@@ -98,7 +100,7 @@
                 <cn-tabular-list-view [roles]="selectedCandidate.industry.roles"></cn-tabular-list-view>
               </div>
               <div class="button-group" >
-                <button class="btn btn-primary" (click)="addToCart(selectedCandidate._id)">ADD to cart</button>
+                <button class="btn btn-primary" (click)="addToCart(selectedCandidate._id)">Add To Cart</button>
                 <button class="btn btn-default" (click)="Reject(selectedCandidate._id) ">Reject</button>
               </div>
               <div class="button-group">

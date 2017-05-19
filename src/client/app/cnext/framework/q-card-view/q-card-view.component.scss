@@ -69,6 +69,11 @@
     button {
       display: inline-block;
     }
+
+    button:nth-child(1){
+      background: #3694d1;
+      border-radius: 0;
+    }
   }
 
 }
@@ -85,10 +90,46 @@ header{
     margin: 5px;
     list-style: none;
     float: left;
+
+    li:nth-child(2){
+      margin-top: 5px;
+    }
+    li:nth-child(3){
+      margin-top: 5px;
+    }
   }
 
   .sort-by, .search {
     float: right;
     margin-left: 15px;
+  }
+
+  .match-cases{
+    background: #edf4f7;
+    padding: 5px;
+    padding-left: 0;
+    label{
+      position: relative;
+      z-index: 2;
+      color: black;
+    }
+
+    input{
+      display: none;
+    }
+
+    input:checked + span{
+      background-color: #a5d6f7;
+      border: 8px solid #a5d6f7;
+      box-shadow: 0 0 4px 0 #a5d6f7 inset, 0 0 1px 0 #a5d6f7;
+      position: absolute;
+      z-index: -1;
+      width: 100%;
+      height: 100%;
+      left: 2px;
+      top: -4px;
+      display: inline-block;
+      padding: 5px;
+    }
   }
 }
