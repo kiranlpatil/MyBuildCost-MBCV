@@ -53,6 +53,7 @@ export class RecruiterQCardview2Component implements OnInit,OnChanges {
   private candidateRejected: CandidateQCard[] = new Array(0);
   private candidateFilter: CandidateFilter;
   private qCardModel: QCardsortBy = new QCardsortBy();
+  private showModalStyle:boolean = false;
 
   constructor(private recruiterQCardViewService: QCardViewService,
               private qCardView: QCardViewService,
@@ -105,6 +106,7 @@ export class RecruiterQCardview2Component implements OnInit,OnChanges {
     }
   }
   addShortlistedTOcart(item:any){
+
     this.qCardView.addCandidateLists(this.recruiterId, this.jobPosterModel._id, item._id, ValueConstant.CART_LISTED_CANDIDATE, "add").subscribe(
       user => {
         console.log(user);
@@ -128,6 +130,7 @@ export class RecruiterQCardview2Component implements OnInit,OnChanges {
       }
       i++;
     }
+    this.showModalStyle=false;
 
   }
   rejectCandidate(item: any) {
@@ -156,6 +159,7 @@ export class RecruiterQCardview2Component implements OnInit,OnChanges {
       i++;
     }
     this.currentrejected.emit(this.updatedIdsModel);
+    this.showModalStyle=false;
   }
 
   clearFilter() {
@@ -168,11 +172,20 @@ export class RecruiterQCardview2Component implements OnInit,OnChanges {
       candidateData => this.OnCandidateDataSuccess(candidateData),
       error => this.onError(error));
     this.selectedPerson = item;
+this.showModalStyle=true;
 
   }
 
   onError(err: any) {
 
+  }
+
+  getStyleModal() {//TODO remove this from all model
+    if (this.showModalStyle) {
+      return 'block';
+    } else {
+      return 'none';
+    }
   }
 
   OnCandidateDataSuccess(candidate: any) {

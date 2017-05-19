@@ -13,15 +13,12 @@ export class RecruiterJobInformation  {
   @Input() recruiter: JobSummary=new JobSummary() ;
   private image_path:string=ImagePath.PROFILE_IMG_ICON;
 
-  ngOnChanges(changes:any) {debugger
+  ngOnChanges(changes:any) {
     if(changes.recruiter.currentValue != undefined){
       this.recruiter=changes.recruiter.currentValue;
     }
     if(this.recruiter != undefined && this.recruiter.company_logo != undefined){
       this.image_path= AppSettings.IP + this.recruiter.company_logo .substring(4).replace('"', '');;
     }
-
-
-
   }
 }

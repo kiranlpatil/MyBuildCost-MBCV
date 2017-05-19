@@ -58,18 +58,19 @@
           <p><span class="glyphicon glyphicon-envelope"></span> {{item.email}}</p>
           <p><span class="glyphicon glyphicon-stats"></span>Skills {{item.matching}}% match</p>
         </div>
-        <div class="button-group">
-          <button class="btn btn-cart btn-primary" [hidden]="!showButton.isShowViewFullProfileButton" type="button"
-                  (click)="viewProfile(item,true)" data-toggle="modal" [attr.data-target]="'#'+listName">View Full
-            Profile
-          </button>
+        <div [hidden]="!showButton.isShowViewProfileButton">
+        <button   class="btn btn-cart btn-block" type="button" data-toggle="modal" [attr.data-target]="'#'+listName" (click)="viewProfile(item,false)">View Profile</button>
         </div>
+        <!--<button [hidden]="!showButton.isShowRemoveButton"  type="button" (click)="Cancel(item)">Remove</button>-->
+       <!-- <button [hidden]="!showButton.isShowRejectButton"  type="button" (click)="rejectCandidate(item)">Reject</button>-->
+        <button  [hidden]="!showButton.isShowViewFullProfileButton" type="button" (click)="viewProfile(item,true)" data-toggle="modal" [attr.data-target]="'#'+listName" >View Full Profile</button>
+
       </div>
     </div>
   </div>
 </div>
 
-<div class="modal" id={{listName}} role="dialog">
+<div  class="modal" id={{listName}} role="dialog"  [style.display]="getStyleModal()">
   <div class="modal-bg">
     <div class="modal-dialog modal-md">
       <div class="modal-content">
@@ -77,7 +78,7 @@
           <div class="row">
             <h4 class="modal-title">Profile</h4>
             <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <div class="col-sm-12">
+            <div  class="col-sm-12">
               <div *ngIf="!isFullProfileView">
                 <h5>{{selectedPerson.first_name}}{{selectedPerson.last_name}}</h5>
                 <h5>Contact:{{selectedPerson.mobile_number}}</h5>
@@ -85,11 +86,14 @@
                 <h5>Status{{selectedPerson.status}}</h5>
                 <h5>Skills:{{selectedPerson.matching}}</h5>
                 <cn-tabular-list-view [roles]="selectedCandidate.industry.roles"></cn-tabular-list-view>
+                <div [hidden]="'rejectedList'===listName">
+                  <button   [hidden]="isFullProfileView" data-dismiss="modal" type="button" (click)="rejectCandidate(selectedCandidate)">Reject</button>
+                  <button  [hidden]= "isFullProfileView " data-dismiss="modal"  type="button" (click)="addShortlistedTOcart(selectedCandidate)">Add To Cart</button>
+                </div>
               </div>
               <div *ngIf="isFullProfileView">
                 <cn-candidate-view [candidateId]="selectedCandidate._id"></cn-candidate-view>
-                <button [hidden]="isFullProfileView" type="button" (click)="rejectCandidate(selectedCandidate)">Reject
-                </button>
+                <button [hidden]="!isFullProfileView" type="button" data-dismiss="modal" (click)="rejectCandidate(selectedCandidate)">Reject</button>
               </div>
             </div>
           </div>
