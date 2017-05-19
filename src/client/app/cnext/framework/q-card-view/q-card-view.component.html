@@ -9,7 +9,7 @@
       </label>
     </div>
     <button type="button" (click)="clearFilter()">Clear all filters</button>
-    <p>{{matches}} Matches Found</p>
+    <p>Showing x out of {{matches}}</p>
     <div class="sort-by">
       <label>Sort by</label>
       <select id="menu"  [(ngModel)]="qCardModel.sortValue" (change)="sortBy()">
