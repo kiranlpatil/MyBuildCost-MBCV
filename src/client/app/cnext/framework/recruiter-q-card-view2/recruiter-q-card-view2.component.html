@@ -62,9 +62,11 @@
 
         <!--<button [hidden]="!showButton.isShowRemoveButton"  type="button" (click)="Cancel(item)">Remove</button>-->
        <!-- <button [hidden]="!showButton.isShowRejectButton"  type="button" (click)="rejectCandidate(item)">Reject</button>-->
+        <div [hidden]="!showButton.isShowViewFullProfileButton">
+          <button class="btn btn-cart btn-block" type="button" (click)="viewProfile(item,true)" data-toggle="modal" [attr.data-target]="'#'+listName" >View Full Profile</button>
+        </div>
         <div class="button-group">
           <div class="col-sm-6 padding-right5">
-            <button [hidden]="!showButton.isShowViewFullProfileButton" type="button" (click)="viewProfile(item,true)" data-toggle="modal" [attr.data-target]="'#'+listName" >View Full Profile</button>
             <div [hidden]="!showButton.isShowViewProfileButton">
               <button   class="btn btn-cart btn-block" type="button" data-toggle="modal" [attr.data-target]="'#'+listName" (click)="viewProfile(item,false)">View Profile</button>
             </div>

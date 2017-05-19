@@ -111,6 +111,9 @@
       .button-group{
         display: block;
       }
+      .btn{
+        display: block;
+      }
     }
     .button-group {
       position: absolute;
@@ -119,6 +122,9 @@
       left: 0;
       padding: 5px 5px;
       background: #fff;
+      display: none;
+    }
+    .btn{
       display: none;
     }
   }
