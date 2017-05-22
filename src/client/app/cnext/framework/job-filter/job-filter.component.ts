@@ -145,7 +145,7 @@ export class JobFilterComponent implements OnInit,OnChanges{
   filterByJoinTime(value:any) {
     if(value) {
       this.candidateFilter.filterByJoinTime = value;
-      this.queryListPush('(args.filterByJoinTime && (item.noticePeriod || item.joiningPeriod)) && ((args.filterByJoinTime.toLowerCase() === item.noticePeriod.toLowerCase()) || (args.filterByJoinTime.toLowerCase() === item.noticePeriod.toLowerCase()))');
+      this.queryListPush('((args.filterByJoinTime && item.noticePeriod) && (args.filterByJoinTime.toLowerCase() === item.noticePeriod.toLowerCase()))');
       this.buildQuery();
       this.filterService.filterby(this.candidateFilter);
     }
