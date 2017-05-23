@@ -20,14 +20,14 @@
             <label>Min</label>
             <select formControlName="experienceMin" (change)="selectExperiencesMinModel($event.target.value)">
               <!--<option [ngValue]="-1" label="select"></option>-->
-              <option value="{{itemList}}"  *ngFor="let itemList of experienceRangeList">{{itemList}}</option>
+              <option value="{{itemList}}"  *ngFor="let itemList of experienceRangeList | minrange:candidateFilter.experienceMaxValue">{{itemList}}</option>
             </select>
           </div>
           <div class="col-sm-6 padding-left5">
             <label>Max</label>
             <select formControlName="experienceMax" (change)="selectExperiencesMaxModel($event.target.value)">
               <!--<option [ngValue]="-1" label="select"></option>-->
-              <option value="{{itemList}}"  *ngFor="let itemList of experienceRangeList">{{itemList}}</option>
+              <option value="{{itemList}}"  *ngFor="let itemList of experienceRangeList | maxrange:candidateFilter.experienceMinValue">{{itemList}}</option>
             </select>
           </div>
         </div>
@@ -39,14 +39,14 @@
             <label>Min</label>
             <select formControlName="salaryMin" (change)="selectSalaryMinModel($event.target.value)">
               <!-- <option [ngValue]="-1" label="select"></option>-->
-              <option value="{{itemList}}" *ngFor="let itemList of salaryRangeList">{{itemList}}</option>
+              <option value="{{itemList}}" *ngFor="let itemList of salaryRangeList | minrange:candidateFilter.salaryMaxValue">{{itemList}}</option>
             </select>
           </div>
           <div class="col-sm-6 padding-left5">
             <label>Max</label>
             <select formControlName="salaryMax" (change)="selectSalaryMaxModel($event.target.value)">
               <!--<option [ngValue]="-1" label="select"></option>-->
-              <option value="{{itemList}}" *ngFor="let itemList of salaryRangeList">{{itemList}}</option>
+              <option value="{{itemList}}" *ngFor="let itemList of salaryRangeList | maxrange:candidateFilter.salaryMinValue">{{itemList}}</option>
             </select>
           </div>
         </div>
