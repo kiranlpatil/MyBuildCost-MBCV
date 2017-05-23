@@ -7,7 +7,7 @@ import {CandidateQCard} from "../model/candidateQcard";
 export class CandidateDashboardFilterPipe implements PipeTransform {
 
 
-  transform(array: Array<CandidateQCard>, args: CandidateFilter): Array<any> { debugger
+  transform(array: Array<CandidateQCard>, args: CandidateFilter): Array<any> {
     if (array == null) {
       return null;
     }
