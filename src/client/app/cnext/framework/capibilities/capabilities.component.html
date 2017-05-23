@@ -13,7 +13,7 @@
                 the best job opportunity.</li>
               <li>Hence you should select maximum 10 primary
             capabilities.You may additionally select upto 10 secondary capabilities.</li>
-              </ul>
+            </ul>
           </div>
           <p class="legends">
             <span class="color-panel primary-color"></span>Primary
@@ -53,18 +53,13 @@
           <h4 class="heading">Capabilities</h4>
         </div>
         <div class="col-md-10 col-sm-9 padding-left15">
-        <span class="capability-option" *ngFor="let role of roles;let i = index">
-            <span class="option" *ngFor="let item of role.capabilities">
-              {{item.name}}<span *ngIf="role.capabilities.length>1 && i!=role.capabilities.length-1">,</span>&nbsp;
-            </span>
-        </span>
+          <span class="capability-option" *ngFor="let role of roles;let i = index">
+              <span class="option" *ngFor="let item of role.capabilities">
+                {{item.name}}<span *ngIf="role.capabilities.length>1 && i!=role.capabilities.length-1">,</span>&nbsp;
+              </span>
+          </span>
+        </div>
       </div>
+     <!-- <div [class.modal-bg]="highlightedSection.name!='Capabilities'"></div>-->
     </div>
-   <!-- <div [class.modal-bg]="highlightedSection.name!='Capabilities'"></div>-->
   </div>
-
-
-
-
-
-

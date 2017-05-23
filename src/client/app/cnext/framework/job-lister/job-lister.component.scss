@@ -97,18 +97,6 @@ $theme-color: #3694d1;
     }
   }
 
-  .button-group {
-    height: 25px;
-    vertical-align: middle;
-    display: table-cell;
-
-    .btn {
-      background: $theme-color;
-      font-size: 11px;
-      padding: 2px 25px;
-    }
-  }
-
   .search {
     float: right;
   }
