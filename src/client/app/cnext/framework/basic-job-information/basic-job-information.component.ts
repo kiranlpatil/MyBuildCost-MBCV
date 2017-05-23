@@ -87,3 +87,5 @@ export class BasicJobInformationComponent {
 }
 
 
+/*
+this.username = new FormControl(this.login.username, [Validators.required, Validators.minLength(3), Validators.maxLength(40)]);*/

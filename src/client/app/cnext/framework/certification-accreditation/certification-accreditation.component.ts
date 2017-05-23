@@ -26,6 +26,7 @@ export class CertificationAccreditationComponent {
   private disableAddAnother:boolean = true;
   private isHiddenCertificate:boolean = true;
   private sendPostCall:boolean = false;
+  private chkCertification:boolean = false;
   private isShowError:boolean = false;
   private hideDiv:boolean[] = new Array();
 
@@ -96,13 +97,20 @@ export class CertificationAccreditationComponent {
     this.postData();
     this.hideDiv[i]=false;
   }
-  
+
   postData(){
   this.profileCreatorService.addProfileDetail(this.candidate).subscribe(
     user => {
       console.log(user);
     });
 }
+
+  hideCertification(){
+    this.chkCertification=true;
+    this.onNext();
+
+  }
+  
   onNext() {
     this.onComplete.emit();
     this.highlightedSection.name = "Awards";

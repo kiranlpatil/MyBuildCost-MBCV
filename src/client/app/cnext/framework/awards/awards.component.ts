@@ -26,6 +26,7 @@ export class AwardsComponent {
   private disableAddAnother:boolean = true;
   private sendPostCall:boolean = false;
   private isShowError:boolean = false;
+  private chkAwards:boolean = false;
   private isHiddenAwrard:boolean = false;
   private hideDiv:boolean[] = new Array();
 
@@ -106,7 +107,11 @@ export class AwardsComponent {
         console.log(user);
       });
   }
-
+  hideAwards(){
+      this.chkAwards=true;
+      this.onNext();
+   
+  }
   onNext() {
     this.onComplete.emit();
     this.highlightedSection.name = "AboutMySelf";
