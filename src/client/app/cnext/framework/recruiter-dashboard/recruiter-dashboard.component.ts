@@ -7,7 +7,7 @@ import {
 } from "../../../framework/shared/constants";
 import {RecruiterDashboardService} from "./recruiter-dashboard.service";
 import {JobPosterModel} from "../model/jobPoster";
-import {RecruiteQCardView2Service} from "../recruiter-q-card-view2/recruiter-q-card-view2.service";
+import {RecruiteQCardView2Service} from "./recruiter-q-card-view2/recruiter-q-card-view2.service";
 import {CandidateQCard} from "../model/candidateQcard";
 import {RecruitercandidatesListsService} from "../candidate-lists.service";
 import {RecruiterDashboardButton} from "../model/buttonAtRecruiterdashboard";

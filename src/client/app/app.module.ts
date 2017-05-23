@@ -76,7 +76,7 @@ import {MyCapabilityService} from "./cnext/framework/capability-service";
 import {CompanyDetailsComponent} from "./framework/registration/company_details/company-details.component";
 import {CompanyDetailsService} from "./framework/registration/company_details/company-details.service";
 import {RecruiterDashboardComponent} from "./cnext/framework/recruiter-dashboard/recruiter-dashboard.component";
-import {JobFilterComponent} from "./cnext/framework/job-filter/job-filter.component";
+import {JobFilterComponent} from "./cnext/framework/recruiter-dashboard/job-filter/job-filter.component";
 import {IndustryListComponent} from "./cnext/framework/industry-list/industry-list.component";
 import {IndustryListService} from "./cnext/framework/industry-list/industry-list.service";
 import {DateService} from "./cnext/framework/date.service";
@@ -111,22 +111,22 @@ import {BasicJobInformationComponent} from "./cnext/framework/basic-job-informat
 import {CompentansiesAndResponsibilitiesComponent} from "./cnext/framework/compentacies-and-responsibilities/compentacies-and-responsibilities.component";
 import {BasicJobInformationService} from "./cnext/framework/basic-job-information/basic-job-information.service";
 import {JobListerComponent} from "./cnext/framework/job-lister/job-lister.component";
-import {QCardviewComponent} from "./cnext/framework/q-card-view/q-card-view.component";
-import {QCardViewService} from "./cnext/framework/q-card-view/q-card-view.service";
+import {QCardviewComponent} from "./cnext/framework/recruiter-dashboard/q-card-view/q-card-view.component";
+import {QCardViewService} from "./cnext/framework/recruiter-dashboard/q-card-view/q-card-view.service";
 import {ProgressBarComponent} from "./cnext/framework/progress-bar/progress-bar.component";
 import {ShowQcardviewService} from "./cnext/framework/showQCard.service";
 import {jobListerSortPipe} from "./cnext/framework/job-lister/job-lister.pipe";
 import {RecruiterDashboardService} from "./cnext/framework/recruiter-dashboard/recruiter-dashboard.service";
 import {RecruiterJobSummaryComponent} from "./cnext/framework/one-page-summury/recruiter-job-summary/recruiter-job-summary.component";
 import {RecruiterJobInformation} from "./cnext/framework/one-page-summury/recruiter-job-summary/recruiter-job-information/recruiter-job-information.component";
-import {JobFilterService} from "./cnext/framework/job-filter/job-filter.service";
+import {JobFilterService} from "./cnext/framework/recruiter-dashboard/job-filter/job-filter.service";
 //import {GooglePlaceModule} from 'ng2-google-place-autocomplete';
 import {GoogleplaceDirective} from "angular2-google-map-auto-complete/directives/googleplace.directive"
 import {MultiSelectComponent} from "./cnext/framework/multi-select/multi-select.component";
 import {MultiSelectService} from "./cnext/framework/multi-select/multi-select.service";
 import {JobProficienciesComponent} from "./cnext/framework/job-proficiency/job-proficiencies.component";
-import {RecruiteQCardView2Service} from "./cnext/framework/recruiter-q-card-view2/recruiter-q-card-view2.service";
-import {RecruiterQCardview2Component} from "./cnext/framework/recruiter-q-card-view2/recruiter-q-card-view2.component";
+import {RecruiteQCardView2Service} from "./cnext/framework/recruiter-dashboard/recruiter-q-card-view2/recruiter-q-card-view2.service";
+import {RecruiterQCardview2Component} from "./cnext/framework/recruiter-dashboard/recruiter-q-card-view2/recruiter-q-card-view2.component";
 
 
 import {CandidateDashboardFilterPipe} from "./cnext/framework/filters/candidate-dashboard-filter.pipe";
