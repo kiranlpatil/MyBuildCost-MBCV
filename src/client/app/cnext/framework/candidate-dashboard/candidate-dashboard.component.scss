@@ -11,7 +11,7 @@ $green: #8dc63f;
 $red: #ef4136;
 
 
-.recruiter-profile-wrapper {
+.profile-wrapper {
   margin: 95px auto 15px;
 
   .col-sm-3 {
@@ -19,19 +19,19 @@ $red: #ef4136;
   }
 
   .col-sm-9 {
-    width: 75%;
     padding-left: 0;
+    width: 75%;
   }
 
   .btn-back {
     border: 0;
+    color: $text-color;
     margin: 0;
     padding: 5px;
-    color: $text-color;
-    width: auto;
     position: fixed;
-    top: 55px;
     right: 10px;
+    top: 55px;
+    width: auto;
     z-index: 1000;
 
     &:focus,
@@ -41,33 +41,33 @@ $red: #ef4136;
   }
 
   .list-view {
+    background: #edf4f7;
     color: $text-color;
-    padding: 0;
-    text-align: left;
     position: fixed;
     top: 90px;
-    background: #edf4f7;
+    padding: 0;
+    text-align: left;
     width: 100%;
     z-index: 999;
 
     .panel {
-      padding: 5px 10px;
-      cursor: pointer;
-      box-shadow: none;
-      margin: 0;
       background: transparent;
+      box-shadow: none;
+      cursor: pointer;
+      margin: 0;
+      padding: 5px 10px;
     }
 
     ul {
-      padding: 0;
       margin: 0;
       list-style: none;
+      padding: 0;
     }
 
     ul > li {
-      width: auto;
       float: left;
       padding: 0 15px;
+      width: auto;
 
       &:first-child {
         padding: 0 15px 0 0;
@@ -75,9 +75,9 @@ $red: #ef4136;
     }
 
     p {
+      color: $text-color;
       margin: 5px 0;
       padding: 0;
-      color: $text-color;
       @extend %text-ellipsis;
     }
 
@@ -86,28 +86,28 @@ $red: #ef4136;
       text-align: center;
 
       p {
-        width: 35px;
-        height: 35px;
-        border-radius: 50%;
         background-color: $purple;
+        border-radius: 50%;
         color: $white;
-        position: relative;
+        height: 35px;
         margin: 0 auto 5px auto;
+        position: relative;
+        width: 35px;
       }
 
       span {
         font-size: 14px;
+        left: 50%;
         position: absolute;
         top: 50%;
-        left: 50%;
         transform: translate(-50%, -50%);
       }
     }
 
     h4 {
+      color: $highlight;
       font-size: 18px;
       margin: 5px 0 0;
-      color: $highlight;
       @extend %text-ellipsis;
     }
 
@@ -127,9 +127,9 @@ $red: #ef4136;
 
   .dashboard-tabs {
     background: $white;
+    left: 0;
     position: fixed;
     top: 50px;
-    left: 0;
     width: 100%;
     z-index:999;
   }
@@ -146,20 +146,20 @@ $red: #ef4136;
     }
 
     .count {
-      width: 22px;
-      height: 22px;
-      border-radius: 50%;
       background-color: #7264b5;
+      border-radius: 50%;
       color: #fff;
-      position: absolute;
       display: inline-block;
-      top: 8px;
+      height: 22px;
       left: 8px;
+      position: absolute;
+      top: 8px;
+      width: 22px;
 
       span {
-        left: 50%;
         font-size: 10px;
         font-weight: 100;
+        left: 50%;
         position: absolute;
         top: 50%;
         transform: translate(-50%, -50%);
@@ -238,11 +238,11 @@ $red: #ef4136;
     }
 
     .col-sm-3 {
+      border: 1px solid $border-color;
       float: none;
       margin: 0 2%;
       padding: 0;
       width: 96%;
-      border: 1px solid $border-color;
     }
 
     .list-view {
@@ -260,8 +260,8 @@ $red: #ef4136;
       }
 
       .contact-info {
-        padding: 0;
         clear: both;
+        padding: 0;
       }
 
       .contact-info > .col-xs-6 {

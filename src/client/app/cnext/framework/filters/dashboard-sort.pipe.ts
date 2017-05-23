@@ -1,42 +1,42 @@
 import {Pipe, PipeTransform} from '@angular/core';
 import {CandidateQCard} from "../model/candidateQcard";
 
-@Pipe({name: 'orderby', pure: false})
+@Pipe({name: 'dashboardsort', pure: false})
 
-export class SortPipe implements PipeTransform {
+export class DashboardSortPipe implements PipeTransform {
 
 
   transform(array: Array<CandidateQCard>, args: string): Array<CandidateQCard> {
     if (array == null) {
       return null;
     }
-    if (args === 'Best match' && args !== "") {
+    if (args === 'Best match') {
       array.sort((a: CandidateQCard, b: CandidateQCard) => {
-        if (Number(a.matching) >= Number(b.matching)) {
+        if (Number(a.matching) > Number(b.matching)) {
           return -1;
-        } else if (Number(a.matching) <= Number(b.matching)) {
+        } else if (Number(a.matching) < Number(b.matching)) {
           return 1;
         } else {
           return 0;
         }
       });
     }
-    if (args === 'Experience' && args !== "") {
+    if (args === 'Experience') {
       array.sort((a: CandidateQCard, b: CandidateQCard) => {
-        if (Number(a.experience.split(" ")[0]) >= Number(b.experience.split(" ")[0])) {
+        if (Number(a.experience.split(" ")[0]) > Number(b.experience.split(" ")[0])) {
           return -1;
-        } else if (Number(a.experience.split(" ")[0]) <= Number(b.experience.split(" ")[0])) {
+        } else if (Number(a.experience.split(" ")[0]) < Number(b.experience.split(" ")[0])) {
           return 1;
         } else {
           return 0;
         }
       });
     }
-    if (args === 'Salary' && args !== "") {
+    if (args === 'Salary') {
       array.sort((a: CandidateQCard, b: CandidateQCard) => {
-        if (Number(a.salary.split(" ")[0]) >= Number(b.salary.split(" ")[0])) {
+        if (Number(a.salary.split(" ")[0]) < Number(b.salary.split(" ")[0])) {
           return -1;
-        } else if (Number(a.salary.split(" ")[0]) <= Number(b.salary.split(" ")[0])) {
+        } else if (Number(a.salary.split(" ")[0]) > Number(b.salary.split(" ")[0])) {
           return 1;
         } else {
           return 0;

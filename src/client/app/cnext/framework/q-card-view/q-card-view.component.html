@@ -34,7 +34,7 @@
   </header>
 
   <div class="card-view clearfix">
-    <div class="col-sm-4" *ngFor= "let item of candidates | orderby:qCardModel.sortValue | dashboardfilter:candidateFilter | candidatematching: matchFormat;let i=index;"><!--| candidatematching: matchFormat-->
+    <div class="col-sm-4" *ngFor= "let item of candidates | dashboardsort:qCardModel.sortValue | dashboardfilter:candidateFilter | candidatematching: matchFormat;let i=index;"><!--| candidatematching: matchFormat-->
       <div class="panel clearfix">
         <img class="profile-picture" src="assets/framework/images/dashboard/profile.png" alt="Profile Picture"/>
         <h6 class="username">{{item.first_name}} {{item.last_name}}</h6>

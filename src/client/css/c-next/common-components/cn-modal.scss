@@ -22,14 +22,16 @@ $text-color: #666;
   }
 
   .button-group {
-    margin-top: 30px;button {
+    margin-top: 30px;
+
+    button {
     display: inline-block;
   }
 
-    button:nth-child(1){
+   /* button:nth-child(1){
       background: #3694d1;
       border-radius: 0;
-    }
+    }*/
   }
 
   .btn {

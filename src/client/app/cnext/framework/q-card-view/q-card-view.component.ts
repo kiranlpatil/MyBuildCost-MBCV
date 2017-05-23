@@ -57,7 +57,6 @@ export class QCardviewComponent implements OnInit, OnChanges {
     this.filterService.candidateFilterValue$.subscribe(
       (data: CandidateFilter) => {
         this.candidateFilter = data;
-        console.log('filter data', this.candidateFilter);
       }
     );
     this.filterService.aboveMatch$.subscribe(
@@ -88,7 +87,7 @@ export class QCardviewComponent implements OnInit, OnChanges {
     }
     if (this.isCandidateAdd === false) {
       this.candidates = this.candidates.concat(this.addToSerchIds);
-    }debugger
+    }
     this.latestSearchResultCount.emit(this.candidates.length);
 
 

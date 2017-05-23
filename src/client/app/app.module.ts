@@ -145,7 +145,7 @@ import {CandidateViewComponent} from "./cnext/framework/one-page-summury/candida
 import {CandidateInCartService} from "./cnext/framework/candidate-in-cart.service";
 import {CandidateFilterService} from "./cnext/framework/candidate-dashboard/candiadte-filter/candidate-filter.service";
 import {FilterService} from "./cnext/framework/filters/filter.service";
-import {SortPipe} from "./cnext/framework/filters/q-card-view.pipe";
+import {DashboardSortPipe} from "./cnext/framework/filters/dashboard-sort.pipe";
 //C-NEXT IMPORTS
 
 
@@ -237,7 +237,7 @@ import {SortPipe} from "./cnext/framework/filters/q-card-view.pipe";
     IndustryExperienceListComponent,
     JobListerComponent,
     QCardviewComponent,
-    SortPipe,
+    DashboardSortPipe,
     jobListerSortPipe,
     RecruiterJobSummaryComponent,
     RecruiterJobInformation,

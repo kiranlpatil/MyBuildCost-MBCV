@@ -156,7 +156,7 @@ export class CandidateFilterComponent {
   filterByJoinTime(value:any) {
     if(value) {
       this.candidateFilter.filterByJoinTime = value;
-      this.queryListPush('(args.filterByJoinTime && (item.noticePeriod || item.joiningPeriod)) && ((args.filterByJoinTime.toLowerCase() === item.noticePeriod.toLowerCase()) || (args.filterByJoinTime.toLowerCase() === item.noticePeriod.toLowerCase()))');
+      this.queryListPush('((args.filterByJoinTime && item.joiningPeriod) && (args.filterByJoinTime.toLowerCase() === item.joiningPeriod.toLowerCase()))');
       this.buildQuery();
       this.filterService.filterby(this.candidateFilter);
     }

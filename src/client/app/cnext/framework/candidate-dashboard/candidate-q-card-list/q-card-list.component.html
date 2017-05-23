@@ -22,7 +22,7 @@
   </header>
 
   <div class="card-view clearfix">
-    <div *ngFor="let job of listOfJobs | orderby:qCardModel.sortValue | dashboardfilter:filterMeta;let i=index">
+    <div *ngFor="let job of listOfJobs | dashboardsort:qCardModel.sortValue | dashboardfilter:filterMeta;let i=index">
       <cn-candidate-q-card [job]="job" [type]="type" (onAction)="onActionPerform($event)"></cn-candidate-q-card>
     </div>
   </div>
