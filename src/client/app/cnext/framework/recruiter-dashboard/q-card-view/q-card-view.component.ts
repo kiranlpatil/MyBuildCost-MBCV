@@ -5,7 +5,6 @@ import {CandidateDetail} from "../../../../framework/registration/candidate/cand
 import {CandidateQCard} from "../../model/candidateQcard";
 import {QCardsortBy} from "../../model/q-cardview-sortby";
 import {MatchCandidate} from "../../model/match-candidate";
-import {CandidateFilter} from "../../model/candidate-filter";
 import {JobPosterModel} from "../../model/jobPoster";
 import {QCardViewService} from "./q-card-view.service";
 import {CandidateProfileService} from "../../candidate-profile/candidate-profile.service";
@@ -13,6 +12,7 @@ import {RecruiteQCardView2Service} from "../recruiter-q-card-view2/recruiter-q-c
 import {ShowQcardviewService} from "../../showQCard.service";
 import {QCardFilterService} from "../../filters/q-card-filter.service";
 import {ValueConstant} from "../../../../framework/shared/constants";
+import {QCardFilter} from "../../model/q-card-filter";
 
 
 @Component({
@@ -39,7 +39,7 @@ export class QCardviewComponent implements OnInit, OnChanges {
   private qCardModel: QCardsortBy = new QCardsortBy();
   private match: MatchCandidate = new MatchCandidate();
   private isShowQCardView: boolean;
-  private candidateFilter: CandidateFilter;
+  private candidateFilter: QCardFilter;
   private matchFormat: string;
   private showModalStyle: boolean = false;
   @Output() latestSearchResultCount  = new EventEmitter<number>();
@@ -57,7 +57,7 @@ export class QCardviewComponent implements OnInit, OnChanges {
               private showQCardview: ShowQcardviewService, private qCardFilterService: QCardFilterService) {
 
     this.qCardFilterService.candidateFilterValue$.subscribe(
-      (data: CandidateFilter) => {
+      (data: QCardFilter) => {
         this.candidateFilter = data;
       }
     );

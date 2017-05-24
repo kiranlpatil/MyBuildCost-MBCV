@@ -1,12 +1,12 @@
 import {Injectable} from '@angular/core';
 import {Subject} from 'rxjs/Subject';
-import {CandidateFilter} from "../model/candidate-filter";
+import {QCardFilter} from "../model/q-card-filter";
 
 @Injectable()
 export class QCardFilterService {
 
   // Observable string sources
-  candidateFilter = new Subject<CandidateFilter>();
+  candidateFilter = new Subject<QCardFilter>();
   subjClearFilter = new Subject<any>();
   aboveMatchFilter = new Subject<any>();
 
@@ -19,7 +19,7 @@ export class QCardFilterService {
     this.subjClearFilter.next();
   }
 
-  filterby(data: CandidateFilter) {
+  filterby(data: QCardFilter) {
     this.candidateFilter.next(data);
   }
 

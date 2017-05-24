@@ -1,7 +1,4 @@
-export class CandidateFilter {
-  filterByValue:string='';
-  filterName: string='';
-
+export class QCardFilter {
   salaryMaxValue : string;
   salaryMinValue : string;
   experienceMaxValue : string;

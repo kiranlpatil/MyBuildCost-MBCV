@@ -7,7 +7,6 @@ import {Candidate} from "../../model/candidate";
 import {AddToCartIds} from "../../model/addToCartModel";
 import {CandidateDetail} from "../../../../framework/registration/candidate/candidate";
 import {AppSettings, ImagePath, ValueConstant} from "../../../../framework/shared/constants";
-import {CandidateFilter} from "../../model/candidate-filter";
 import {QCardsortBy} from "../../model/q-cardview-sortby";
 import {QCardViewService} from "../q-card-view/q-card-view.service";
 import {CandidateProfileService} from "../../candidate-profile/candidate-profile.service";
@@ -15,6 +14,7 @@ import {RecruiterDashboardService} from "../recruiter-dashboard.service";
 import {QCardFilterService} from "../../filters/q-card-filter.service";
 import {RecruitercandidatesListsService} from "../../candidate-lists.service";
 import {RecruiteQCardView2Service} from "./recruiter-q-card-view2.service";
+import {QCardFilter} from "../../model/q-card-filter";
 
 @Component({
   moduleId: module.id,
@@ -51,7 +51,7 @@ export class RecruiterQCardview2Component implements OnInit,OnChanges {
   private selectedPerson: CandidateQCard = new CandidateQCard();
   private image_path: string = ImagePath.PROFILE_IMG_ICON;
   private candidateRejected: CandidateQCard[] = new Array(0);
-  private candidateFilter: CandidateFilter;
+  private candidateFilter: QCardFilter;
   private qCardModel: QCardsortBy = new QCardsortBy();
   private showModalStyle:boolean = false;
   private qCardCount = {count:0};
@@ -64,7 +64,7 @@ export class RecruiterQCardview2Component implements OnInit,OnChanges {
               private qCardViewService: RecruiteQCardView2Service, private candidateLists: RecruitercandidatesListsService) {
 
     this.qCardFilterService.candidateFilterValue$.subscribe(
-      (data: CandidateFilter) => {
+      (data: QCardFilter) => {
         this.candidateFilter = data;
       }
     );
