@@ -8,7 +8,7 @@
       <div class="clearfix">
         <div>
           <div class="candidate-listing">
-            <cn-candidate-filter [candidate]="candidate" [locations]="locationList2"></cn-candidate-filter>
+            <cn-candidate-filter [candidate]="candidate" [locations]="locationList2" [role]=false></cn-candidate-filter>
             <ul class="nav nav-tabs sub-tabs">
               <li class="active">
                 <a id="matched_anchor" (click)="showMatchedJobs()" data-toggle="tab" href="#matched"><span class="count"><span>{{jobList.length}}</span></span> Matched</a>

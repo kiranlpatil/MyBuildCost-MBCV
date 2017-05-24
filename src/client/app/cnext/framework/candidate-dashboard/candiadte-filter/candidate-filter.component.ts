@@ -31,9 +31,12 @@ export class CandidateFilterComponent {
   private location:string[]= new Array(0);
   private All = "All";
   private userForm:FormGroup;
+  private isRecuirter:boolean;
 
   @Input() private candidate :Candidate;
   @Input() private locations :any[];
+  @Input() private role :boolean;
+  @Input() private selectedJob :JobPosterModel;
 
 
 
@@ -69,10 +72,25 @@ export class CandidateFilterComponent {
         //this.location = changes.candidate.locations;
       }
     }
+
     if(changes.locations) {
       if(changes.locations.currentValue) {
         this.locationList = changes.locations.currentValue;
       }
+    }
+
+    if(changes.selectedJob){
+      if(changes.selectedJob.currentValue) {
+        this.proficiencyList = changes.selectedJob.currentValue.proficiencies;
+        this.industryList = changes.selectedJob.currentValue.interestedIndustries;
+        this.location = changes.selectedJob.currentValue.location.city;
+      }
+    }
+
+    if(changes.role) {
+      //if(changes.role.currentValue) {
+        this.isRecuirter = changes.role.currentValue;
+      //}
     }
   }
   ngOnInit() {
@@ -90,7 +108,7 @@ export class CandidateFilterComponent {
         (error:any) => this.onError(error));
   }
   onError(err:any) {
-
+    console.log('error on filter data load');
   }
 
   filterByProficiency(event:any) {
@@ -156,7 +174,12 @@ export class CandidateFilterComponent {
   filterByJoinTime(value:any) {
     if(value) {
       this.candidateFilter.filterByJoinTime = value;
-      this.queryListPush('((args.filterByJoinTime && item.joiningPeriod) && (args.filterByJoinTime.toLowerCase() === item.joiningPeriod.toLowerCase()))');
+      if(this.isRecuirter == true) {
+        this.queryListPush('((args.filterByJoinTime && item.noticePeriod) && (args.filterByJoinTime.toLowerCase() === item.noticePeriod.toLowerCase()))');
+      }
+      if(this.isRecuirter == false) {
+        this.queryListPush('((args.filterByJoinTime && item.joiningPeriod) && (args.filterByJoinTime.toLowerCase() === item.joiningPeriod.toLowerCase()))');
+      }
       this.buildQuery();
       this.qCardFilterService.filterby(this.candidateFilter);
     }
@@ -200,13 +223,27 @@ export class CandidateFilterComponent {
     }
   }
 
-  filterByLocation(value:any) {
+  jobsFilterByLocation(value:any) {
     if(value) {
       this.candidateFilter.filterByLocation = value;
       this.queryListPush('(((args.filterByLocation && item.location))&&(args.filterByLocation.toLowerCase() === item.location.toLowerCase()))');
       this.buildQuery();
       this.qCardFilterService.filterby(this.candidateFilter);
     }
+  }
+
+  candidatesFilterByLocation(value:any) {
+    this.candidateFilter.filterByLocation = value;
+    if(value == 'All') {
+      this.queryListPush('((args.filterByLocation && item.location) && ((args.filterByLocation.toLowerCase() === item.location.toLowerCase()) || (args.filterByLocation.toLowerCase() !== item.location.toLowerCase())))');
+      this.queryListRemove('(((args.filterByLocation && item.location))&&(args.filterByLocation.toLowerCase() === item.location.toLowerCase()))');
+    } else {
+      this.queryListPush('(((args.filterByLocation && item.location))&&(args.filterByLocation.toLowerCase() === item.location.toLowerCase()))');
+      this.queryListRemove('((args.filterByLocation && item.location) && ((args.filterByLocation.toLowerCase() === item.location.toLowerCase()) || (args.filterByLocation.toLowerCase() !== item.location.toLowerCase())))');
+    }
+
+    this.buildQuery();
+    this.qCardFilterService.filterby(this.candidateFilter);
   }
 
   filterByCompanySize(value:any) {
