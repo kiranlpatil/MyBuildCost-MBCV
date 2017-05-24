@@ -148,6 +148,7 @@ import {RecuirterQCardMatchingPipe} from "./cnext/framework/filters/recuirter-q-
 import {EmployeeHistoryComponent} from "./cnext/framework/employment-history/employee-history/employee-history.component";
 import {QCardListFilterPipe} from "./cnext/framework/filters/q-card-list-filter.pipe";
 import {MyGoogleDirective} from "./framework/registration/candidate/google-our-place/googleplace.directive";
+import {CandidateDashboardHeaderComponent} from "./cnext/framework/candidate-dashboard/candidate-dashboard-header/candidate-dashboard-header.component";
 
 //C-NEXT IMPORTS
 
@@ -176,6 +177,7 @@ import {MyGoogleDirective} from "./framework/registration/candidate/google-our-p
     RegistrationComponent,
     CandidateComponent,
     RecruiterComponent,
+    CandidateDashboardHeaderComponent,
     ActivateUserComponent,
     ActivateEmailComponent,
     VerifyUserComponent,

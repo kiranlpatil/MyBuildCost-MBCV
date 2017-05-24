@@ -3,7 +3,7 @@
     <h4 class="heading">Enter Your Job Title</h4>
 
     <div class="col-sm-3 text-center">
-      <cn-profile-picture></cn-profile-picture>
+      <cn-profile-picture (onPictureUpload)="onPictureUpload($event)"></cn-profile-picture>
       <div class="user-name">
         <span class="profile-name-first">{{candidateDetails.first_name}}</span><span class="profile-name-last">{{candidateDetails.last_name}}</span>
       </div>

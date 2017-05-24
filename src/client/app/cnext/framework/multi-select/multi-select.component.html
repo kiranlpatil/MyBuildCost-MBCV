@@ -4,7 +4,8 @@
     <div class="form-group">
       <div ng2-auto-complete
            [source]="Proficiencies"
-           (ngModelChange)="selectedProficiencyModel($event)">
+           (ngModelChange)="selectedProficiencyModel($event)"
+           no-match-found-text="No Match Found, Do You Want to Add? Press Enter">
         <input class="form-control" id="proficiencyId"
                (keyup.enter)="showHideModal($event.target.value)" />
       </div>

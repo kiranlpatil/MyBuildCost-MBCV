@@ -1,4 +1,4 @@
-import {  Component  } from '@angular/core';
+import {  Component ,Output, EventEmitter } from '@angular/core';
 import { UserProfile } from '../../../framework/dashboard/user';
 import { DashboardService } from '../../../framework/dashboard/dashboard.service';
 import {
@@ -21,7 +21,7 @@ import {
 })
 
 export class ProfilePictureComponent  {
-
+@Output() onPictureUpload=new EventEmitter();
   private model = new UserProfile();
   private filesToUpload: Array<File>;
   private image_path: string;
@@ -80,6 +80,10 @@ export class ProfilePictureComponent  {
     this.model = result.data;
     LocalStorageService.setLocalValue(LocalStorage.PROFILE_PICTURE,result.data.picture);
     var socialLogin:string = LocalStorageService.getLocalValue(LocalStorage.IS_SOCIAL_LOGIN);
+    if(LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE)==='true'){
+      this.onPictureUpload.emit(result.data.picture);
+    }
+    
     if (!this.model.picture || this.model.picture === undefined) {
       this.image_path = ImagePath.PROFILE_IMG_ICON;
     }  else if(socialLogin === AppSettings.IS_SOCIAL_LOGIN_YES) {

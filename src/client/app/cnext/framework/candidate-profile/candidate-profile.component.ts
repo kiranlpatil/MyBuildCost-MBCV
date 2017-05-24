@@ -293,6 +293,7 @@ export class CandidateProfileComponent implements OnInit {
 
   OnCandidateDataSuccess(candidateData:any) {
     this.candidate = candidateData.data[0];
+    this.candidate.basicInformation = candidateData.metadata;
     this.candidateForRole = candidateData.data[0].industry.roles;
     console.log(this.candidate);
 

@@ -1,7 +1,7 @@
-import {Component,Input,EventEmitter,Output} from "@angular/core";
+import {Component,Input,ElementRef, HostListener} from "@angular/core";
 import {Router} from "@angular/router";
 import {Candidate} from "../../model/candidate";
-import {AppSettings, NavigationRoutes} from "../../../../framework/shared/constants";
+import {AppSettings, NavigationRoutes, ImagePath} from "../../../../framework/shared/constants";
 
 @Component({
   moduleId: module.id,
@@ -12,8 +12,21 @@ import {AppSettings, NavigationRoutes} from "../../../../framework/shared/consta
 
 export class CandidateHeaderComponent  {
   @Input() candidate:Candidate;
+  public isClassVisible:boolean = false;
+  public isOpenProfile:boolean = false;
+  PROFILE_IMG_PATH:string;
+  MY_LOGO:string;
+  newUser:number;
 
-  constructor(private _router:Router) {
+  @HostListener('document:click', ['$event']) onClick(event:any) {
+    if (!this._eref.nativeElement.contains(event.target)) {
+      this.isOpenProfile = false;
+
+    }
+  }
+
+  constructor(private _router:Router,  private _eref:ElementRef) {
+    this.MY_LOGO = ImagePath.MY_WHITE_LOGO;
   }
 
   getImagePath(imagePath:string){
@@ -28,4 +41,24 @@ export class CandidateHeaderComponent  {
     window.localStorage.clear();
     this._router.navigate([NavigationRoutes.APP_START]);
   }
+
+  navigateTo(nav:string) {
+    if (nav !== undefined) {
+      this._router.navigate([nav]);
+    }
+  }
+
+  toggleMenu() {
+    this.isClassVisible = !this.isClassVisible;
+    this.isOpenProfile = false;
+  }
+
+  openDropdownProfile() {
+    this.isOpenProfile = !this.isOpenProfile;
+  }
+
+  closeMenu() {
+    this.isClassVisible = false;
+  }
+
 }

@@ -58,6 +58,9 @@ export class ProfileDescriptionComponent {
     }
   }
 
+  onPictureUpload(imagePath:string){
+this.candidate.basicInformation.picture=imagePath;    
+  }
   onNext() {
 //    this.compactView = true;
     this.highlightedSection.name = "Work-Area";
