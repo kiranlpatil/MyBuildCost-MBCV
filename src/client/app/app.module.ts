@@ -131,7 +131,6 @@ import {RecruiterQCardview2Component} from "./cnext/framework/recruiter-dashboar
 
 import {CandidateDashboardFilterPipe} from "./cnext/framework/filters/candidate-dashboard-filter.pipe";
 import {RecruitercandidatesListsService} from "./cnext/framework/candidate-lists.service";
-import {CandidateDashboardMatchingPipe} from "./cnext/framework/filters/candidate-dashboard-matching.pipe";
 import {CandidateDashboardComponent} from "./cnext/framework/candidate-dashboard/candidate-dashboard.component";
 import {CandiadteDashboardService} from "./cnext/framework/candidate-dashboard/candidate-dashboard.service";
 import {QcardListComponent} from "./cnext/framework/candidate-dashboard/candidate-q-card-list/q-card-list.component";
@@ -148,6 +147,7 @@ import {FilterService} from "./cnext/framework/filters/filter.service";
 import {DashboardSortPipe} from "./cnext/framework/filters/dashboard-sort.pipe";
 import {MinRangeValidation} from "./cnext/framework/filters/min-range-validation.pipe";
 import {MaxRangeValidation} from "./cnext/framework/filters/max-range-validation.pipe";
+import {RecuirterDashboardMatchingPipe} from "./cnext/framework/filters/recuirter-dashboard-matching.pipe";
 //C-NEXT IMPORTS
 
 
@@ -245,7 +245,7 @@ import {MaxRangeValidation} from "./cnext/framework/filters/max-range-validation
     RecruiterJobInformation,
     RecruiterQCardview2Component,
     CandidateDashboardFilterPipe,
-    CandidateDashboardMatchingPipe,
+    RecuirterDashboardMatchingPipe,
     MinRangeValidation,
     MaxRangeValidation
 

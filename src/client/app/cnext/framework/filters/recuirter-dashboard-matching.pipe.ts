@@ -4,7 +4,7 @@ import {ValueConstant} from "../../../framework/shared/constants";
 
 @Pipe({name: 'candidatematching', pure: false})
 
-export class CandidateDashboardMatchingPipe implements PipeTransform {
+export class RecuirterDashboardMatchingPipe implements PipeTransform {
 
   transform(array: Array<CandidateQCard>, args: any): Array<any> {
 
