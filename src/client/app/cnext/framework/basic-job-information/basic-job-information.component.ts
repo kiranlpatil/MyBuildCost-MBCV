@@ -6,6 +6,7 @@ import {ProfessionalDataService} from "../professional-data/professional-data.se
 import {BasicJobInformationService} from "./basic-job-information.service";
 import { FormBuilder, FormGroup,Validators } from '@angular/forms';
 import {JobLocation} from "../model/job-location";
+import {MyGoogleAddress} from "../../../framework/registration/candidate/google-our-place/my-google-address";
 
 @Component({
   moduleId: module.id,
@@ -66,10 +67,10 @@ export class BasicJobInformationComponent {
         });
   }
 
-  getAddress(event :any){
-    this.storedLoaction.city= event.address_components[event.address_components.length - 3].long_name;
-    this.storedLoaction.state=event.address_components[event.address_components.length - 2].long_name;
-    this.storedLoaction.country=event.address_components[event.address_components.length - 1].long_name;
+  getAddress(address :MyGoogleAddress){
+    this.storedLoaction.city= address.city;
+    this.storedLoaction.state= address.state;
+    this.storedLoaction.country= address.country;
   }
 
   selectIndustry(industry:Industry) {

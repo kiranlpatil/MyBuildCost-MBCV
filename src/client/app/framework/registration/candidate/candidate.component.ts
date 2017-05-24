@@ -11,6 +11,7 @@ import {LoaderService} from "../../shared/loader/loader.service";
 import {Http, Response} from "@angular/http";
 import {DateService} from "../../../cnext/framework/date.service";
 import {  Location  } from '../location';
+import {MyGoogleAddress} from "./google-our-place/my-google-address";
 @Component({
   moduleId: module.id,
   selector: 'cn-candidate-registration',
@@ -64,10 +65,10 @@ export class CandidateComponent implements OnInit {
     this.model.birth_year = newval;
   }
 
-  getAddress(event :any){
-    this.storedLoaction.city= event.address_components[event.address_components.length - 3].long_name;
-    this.storedLoaction.state=event.address_components[event.address_components.length - 2].long_name;
-    this.storedLoaction.country=event.address_components[event.address_components.length - 1].long_name;
+  getAddress(address :MyGoogleAddress){
+   this.storedLoaction.city= address.city;
+   this.storedLoaction.state= address.state;
+   this.storedLoaction.country= address.country;
   }
 
   onSubmit() {

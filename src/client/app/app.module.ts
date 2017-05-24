@@ -149,6 +149,7 @@ import {MaxRangeValidation} from "./cnext/framework/filters/max-range-validation
 import {RecuirterQCardMatchingPipe} from "./cnext/framework/filters/recuirter-q-card-matching.pipe";
 import {EmployeeHistoryComponent} from "./cnext/framework/employment-history/employee-history/employee-history.component";
 import {QCardListFilterPipe} from "./cnext/framework/filters/q-card-list-filter.pipe";
+import {MyGoogleDirective} from "./framework/registration/candidate/google-our-place/googleplace.directive";
 
 //C-NEXT IMPORTS
 
@@ -169,6 +170,7 @@ import {QCardListFilterPipe} from "./cnext/framework/filters/q-card-list-filter.
     AppComponent,
     ControlMessagesComponent,
     GoogleplaceDirective,
+    MyGoogleDirective,
     LoaderComponent,
     LandingPageComponent,
     MainHeaderComponent,

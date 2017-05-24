@@ -17,6 +17,7 @@ import {  LocalStorageService  } from '../../shared/localstorage.service';
 import { Http,Response } from '@angular/http';
 import { RecruitingService } from '../../shared/recruiting.service';
 import {  Location  } from '../location';
+import {MyGoogleAddress} from "../candidate/google-our-place/my-google-address";
 
 
 @Component({
@@ -73,7 +74,7 @@ export class RecruiterComponent implements OnInit {
   ngOnInit() {
     this.model = this.recruiterForm.value;
 
-   
+
 
     this.http.get('companysize')
       .map((res: Response) => res.json())
@@ -96,18 +97,16 @@ export class RecruiterComponent implements OnInit {
   }
 
 
-  selectCompanyHeadquarterModel(event : any) {
-    this.companyHeadquarter=event.address_components[event.address_components.length - 1].long_name;
+  selectCompanyHeadquarterModel(address :MyGoogleAddress) {
+    this.companyHeadquarter=address.country;
     this.recruiterForm.value.company_headquarter_country=this.companyHeadquarter;
   }
 
-
-  getAddress(event :any){
-    this.storedLoaction.city= event.address_components[event.address_components.length - 3].long_name;
-    this.storedLoaction.state=event.address_components[event.address_components.length - 2].long_name;
-    this.storedLoaction.country=event.address_components[event.address_components.length - 1].long_name;
+  getAddress(address :MyGoogleAddress){
+    this.storedLoaction.city= address.city;
+    this.storedLoaction.state= address.state;
+    this.storedLoaction.country= address.country;
   }
-  
 
   onSubmit() {
     this.model = this.recruiterForm.value;
@@ -148,7 +147,7 @@ export class RecruiterComponent implements OnInit {
     }
   }
 
-  
+
 
   goBack() {
     this.commonService.goBack();

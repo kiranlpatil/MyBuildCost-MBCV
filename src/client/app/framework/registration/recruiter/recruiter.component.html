@@ -53,7 +53,7 @@
 
     <div class="form-group">
       <control-messages [control]="recruiterForm.controls.location"></control-messages>
-      <input type="text" formControlName="location" class="form-control select" placeholder="Location"  (setAddress) = "getAddress($event)" googleplace/>
+      <input type="text" formControlName="location" class="form-control select" placeholder="Location"  (setAddress) = "getAddress($event)" mygoogleplace/>
 
     </div>
 
@@ -61,7 +61,7 @@
     <div class="form-group">
       <control-messages [control]="recruiterForm.controls.company_headquarter_country"></control-messages>
 
-      <input type="text" formControlName="company_headquarter_country" class="form-control select" placeholder="Company HeadQuarter" (setAddress) = "selectCompanyHeadquarterModel($event)" googleplace/>
+      <input type="text" formControlName="company_headquarter_country" class="form-control select" placeholder="Company HeadQuarter" (setAddress) = "selectCompanyHeadquarterModel($event)" mygoogleplace/>
 
     </div>
 

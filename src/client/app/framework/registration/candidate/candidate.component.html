@@ -62,7 +62,7 @@
   <div class="form-group">
     <control-messages [control]="userForm.controls.location"></control-messages>
 
-    <input type="text" formControlName="location" class="form-control select"  placeholder="Location" (setAddress) = "getAddress($event)" googleplace/>
+    <input type="text" formControlName="location" class="form-control select"  placeholder="Location" (setAddress) = "getAddress($event)" (city)="selectedCity($event)" mygoogleplace/>
 
   </div>
 
