@@ -22,7 +22,7 @@ export class CandidateDashboardComponent  {
   private blockedJobs:JobQcard[]=new Array();
   private hidesection:boolean=false;
   private locationList:string[] = new Array(0);
-  locationList2:string[] = new Array(0);
+  private _locationList:string[] = new Array(0);
   private type:string;
   constructor(private candidateProfileService:CandidateProfileService,
               private candidateDashboardService:CandiadteDashboardService,
@@ -50,7 +50,7 @@ export class CandidateDashboardComponent  {
         }
       }
     }
-    this.locationList2 = this.locationList;
+    this._locationList = this.locationList;
   }
 
   OnCandidateDataSuccess(candidateData:any) {

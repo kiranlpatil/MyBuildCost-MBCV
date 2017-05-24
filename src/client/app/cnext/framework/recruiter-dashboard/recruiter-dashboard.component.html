@@ -11,8 +11,7 @@
           <cn-job-lister [jobListInput]="jobList" (jobEventEmitter)="jobSelected($event)"></cn-job-lister>
         </div>
         <div class="candidate-listing" [hidden]="!isJobSelected" >
-          <!--<cn-job-filter [selectedJob]="selectedJobProfile"></cn-job-filter>-->
-          <cn-candidate-filter [selectedJob]="selectedJobProfile" [role]=true></cn-candidate-filter>
+          <cn-filter [selectedJob]="selectedJobProfile" [role]=true></cn-filter>
           <div class="col-sm-12 no-padding">
             <button class="btn btn-back" (click)="showAllJobs()">All Jobs</button>
             <div class="list-view"  *ngIf="selectedJobProfile!=undefined">

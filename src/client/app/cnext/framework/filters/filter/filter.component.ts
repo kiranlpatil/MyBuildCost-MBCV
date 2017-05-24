@@ -5,17 +5,17 @@ import {JobPosterModel} from "../../model/jobPoster";
 import {ShowQcardviewService} from "../../showQCard.service";
 import {JobFilterService} from "../../recruiter-dashboard/job-filter/job-filter.service";
 import {Candidate} from "../../model/candidate";
-import {QCardFilterService} from "../../filters/q-card-filter.service";
-import {CandidateFilterService} from "./candidate-filter.service";
+import {QCardFilterService} from "../q-card-filter.service";
+import {FilterService} from "./filter.service";
 
 @Component({
     moduleId: module.id,
-    selector: 'cn-candidate-filter',
-    templateUrl: 'candidate-filter.component.html',
-    styleUrls: ['candidate-filter.component.css']
+    selector: 'cn-filter',
+    templateUrl: 'filter.component.html',
+    styleUrls: ['filter.component.css']
 })
 
-export class CandidateFilterComponent {
+export class FilterComponent {
 
   private isShowJobFilter:boolean=false;
   private proficiencyList : string[] = new Array(0);
@@ -40,7 +40,7 @@ export class CandidateFilterComponent {
 
 
 
-  constructor(private formBuilder:FormBuilder, private showQCardview: ShowQcardviewService, private _filterSerive: CandidateFilterService, private qCardFilterService: QCardFilterService) {
+  constructor(private formBuilder:FormBuilder, private showQCardview: ShowQcardviewService, private _filterSerive: FilterService, private qCardFilterService: QCardFilterService) {
     this.showQCardview.showJobQCardView$.subscribe(
       data=> {
         this.isShowJobFilter=true;

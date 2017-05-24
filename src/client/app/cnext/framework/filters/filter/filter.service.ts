@@ -3,7 +3,7 @@ import {Http, Headers, RequestOptions} from "@angular/http";
 import {BaseService} from "../../../../framework/shared/httpservices/base.service";
 
 @Injectable()
-export class   CandidateFilterService extends BaseService{
+export class   FilterService extends BaseService{
 
   constructor(private http:Http) {
     super();

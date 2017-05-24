@@ -135,13 +135,13 @@ import {CandiadteDashboardService} from "./cnext/framework/candidate-dashboard/c
 import {QcardListComponent} from "./cnext/framework/candidate-dashboard/candidate-q-card-list/q-card-list.component";
 import {CandiadteQCardComponent} from "./cnext/framework/candidate-dashboard/candidate-q-card/candidate-q-card.component";
 import {CandidateHeaderComponent} from "./cnext/framework/candidate-dashboard/candidate-header/candidate-header.component";
-import {CandidateFilterComponent} from "./cnext/framework/candidate-dashboard/candiadte-filter/candidate-filter.component";
+import {FilterComponent} from "./cnext/framework/filters/filter/filter.component";
 import {JobViewComponent} from "./cnext/framework/one-page-summury/recruiter-job-summary/job-view/job-view.component";
 import {CandidateJobListComponent} from "./cnext/framework/candidate-dashboard/candidate-job-list/candidate-job-list.component";
 import {CandidateJobListService} from "./cnext/framework/candidate-dashboard/candidate-job-list/candidate-job-list.service";
 import {CandidateViewComponent} from "./cnext/framework/one-page-summury/candidate-summury/candidate-view/candidate-view.component";
 import {CandidateInCartService} from "./cnext/framework/candidate-in-cart.service";
-import {CandidateFilterService} from "./cnext/framework/candidate-dashboard/candiadte-filter/candidate-filter.service";
+import {FilterService} from "./cnext/framework/filters/filter/filter.service";
 import {QCardFilterService} from "./cnext/framework/filters/q-card-filter.service";
 import {QCardListSortPipe} from "./cnext/framework/filters/q-card-list-sort.pipe";
 import {MinRangeValidation} from "./cnext/framework/filters/min-range-validation.pipe";
@@ -231,7 +231,7 @@ import {MyGoogleDirective} from "./framework/registration/candidate/google-our-p
     CompanyDetailsComponent,
     MoreAboutMyselfComponent,
     CandidateHeaderComponent,
-    CandidateFilterComponent,
+    FilterComponent,
     RecruiterDashboardComponent,
     ProgressBarComponent,
     CandidateViewComponent,
@@ -320,7 +320,7 @@ import {MyGoogleDirective} from "./framework/registration/candidate/google-our-p
     RecruiterDashboardService,
     QCardViewService,
     JobFilterService,
-    CandidateFilterService,
+    FilterService,
     RecruiteQCardView2Service,
     RecruitercandidatesListsService,
     CandidateInCartService,
