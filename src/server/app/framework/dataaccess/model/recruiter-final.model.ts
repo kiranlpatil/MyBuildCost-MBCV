@@ -1,4 +1,5 @@
 import JobProfileModel = require("./jobprofile.model");
+import {JobCountModel} from "./job-count.model";
 export class Recruiter { // todo replace all the interface to class
   isRecruitingForself : boolean;
   company_name : string;
@@ -8,6 +9,7 @@ export class Recruiter { // todo replace all the interface to class
   setOfDocuments : string[];
   userId :  any;
   postedJobs : JobProfileModel[];
+  jobCountModel :JobCountModel= new JobCountModel();
   description1:string;
   description2:string;
   description3:string;

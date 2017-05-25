@@ -16,6 +16,7 @@ import UserService = require("../services/user.service");
 import JobProfileService = require("../services/jobprofile.service");
 import * as mongoose from "mongoose";
 import CNextMessages = require("../shared/cnext-messages");
+import {Recruiter} from "../dataaccess/model/recruiter-final.model";
 
 
 export function create(req: express.Request, res: express.Response, next: any) {
@@ -131,11 +132,10 @@ export function updateDetails(req: express.Request, res: express.Response, next:
 export function retrieve(req: express.Request, res: express.Response, next: any) {
   try {
     var recruiterService = new RecruiterService();
-    console.log("recruiter "+req.params.id);
     let data ={
       "userId":new mongoose.Types.ObjectId(req.params.id)
     };
-    recruiterService.retrieve(data, (error, result) => {
+    recruiterService.retrieve(data, (error, result : Recruiter) => {
       if (error) {
         next({
           reason: CNextMessages.PROBLEM_IN_RETRIEVE_JOB_PROFILE,
@@ -145,8 +145,9 @@ export function retrieve(req: express.Request, res: express.Response, next: any)
       }else{
         res.status(200).send({
           "status": Messages.STATUS_SUCCESS,
-          "data": result
-        });
+          "data": result,
+          "data.jobCountModel":result.jobCountModel
+          });
       }
 
     });

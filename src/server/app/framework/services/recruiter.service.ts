@@ -10,6 +10,9 @@ import RecruiterRepository = require("../dataaccess/repository/recruiter.reposit
 import {Recruiter} from "../dataaccess/model/recruiter-final.model";
 import JobProfileModel = require("../dataaccess/model/jobprofile.model");
 import CandidateRepository = require("../dataaccess/repository/candidate.repository");
+import RecruiterModel = require("../dataaccess/model/recruiter.model");
+import {ConstVariables} from "../shared/sharedconstants";
+import {JobCountModel} from "../dataaccess/model/job-count.model";
 
 class RecruiterService {
   private recruiterRepository:RecruiterRepository;
@@ -80,7 +83,38 @@ class RecruiterService {
   }
 
   retrieve(field: any, callback: (error: any, result: any) => void) {
-    this.recruiterRepository.retrieve(field, callback);
+    this.recruiterRepository.retrieve(field, (err,res)=>{
+      if(err){
+        let er = new Error("Unable to retrieve recruiter details.");
+        callback(er, null);
+      }else{
+        if(res.length>0){
+          let recruiter : Recruiter = new Recruiter();
+          recruiter= res[0];
+          recruiter.jobCountModel= new JobCountModel();
+          if(recruiter.postedJobs){
+            for(let job of recruiter.postedJobs){
+              for(let list of job.candidate_list ){
+                  switch (list.name){
+                    case ConstVariables.APPLIED_CANDIDATE :
+                      recruiter.jobCountModel.totalNumberOfCandidatesApplied += list.ids.length;
+                      break;
+                    case ConstVariables.CART_LISTED_CANDIDATE :
+                      recruiter.jobCountModel.totalNumberOfCandidateInCart += list.ids.length;
+                      break;
+                    case ConstVariables.REJECTED_LISTED_CANDIDATE :
+                      recruiter.jobCountModel.totalNumberOfCandidatesRejected += list.ids.length;
+                      break;
+                    default : break;
+                  }
+              }
+            }
+          }
+        }
+        recruiter.jobCountModel.numberOfJobposted= recruiter.postedJobs.length;
+        callback(null,recruiter);
+      }
+    });
   }
 
   update(_id: string, item: any, callback: (error: any, result: any) => void) { //Todo change with candidate_id now it is a user_id operation
