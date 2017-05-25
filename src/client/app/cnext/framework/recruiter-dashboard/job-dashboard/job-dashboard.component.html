@@ -1,1 +1,35 @@
-<h1>{{userId}}</h1>
+
+<ul class="nav nav-tabs sub-tabs">
+  <li class="active">
+    <a (click)="showMatchedCandidate()"  id="matched_anchor" data-toggle="tab" href="#matched"><span class="count"><span>3</span></span> Matched</a>
+  </li>
+  &lt;!&ndash;
+  <li>
+    <a (click)="candidateInCart()" data-toggle="tab" href="#cart"><span class="count"><span>{{recruiterJobView.numberOfCandidatesInCart}}</span></span> In Cart</a>
+  </li>
+  <li>
+    <a (click)="appliedCandidates()" data-toggle="tab" href="#applied"><span class="count"><span>{{recruiterJobView.numberOfCandidatesApplied}}</span></span> Applied</a>
+  </li>
+  <li>
+    <a (click)="rejectedCandidates()" data-toggle="tab" href="#rejected"><span class="count"><span>{{recruiterJobView.numberOfCandidatesrejected}}</span></span> Rejected</a>
+  </li>
+</ul>
+
+  <div class="tab-content">
+    <div id="matched" class="tab-pane fade in active " >
+      <cn-q-card-view [candidateQlist]="candidateQlist" [candidates]="candidateQlist.matchedCandidates" ></cn-q-card-view>
+
+    </div>
+    <div  id="cart" class="tab-pane fade"  >
+      <cn-q-card-view [candidateQlist]="candidateQlist" [candidates]="candidateQlist.cartCandidates" ></cn-q-card-view>
+      <!--<cn-recruiter-dashboard-qcard-view  [candidates]="candidatesInCart" ></cn-recruiter-dashboard-qcard-view>-->
+    </div>
+    <div  id="applied" class="tab-pane fade" >
+      <cn-q-card-view  [candidateQlist]="candidateQlist" [candidates]="candidateQlist.appliedCandidates"></cn-q-card-view>
+<!--      <cn-recruiter-dashboard-qcard-view [candidates]="candidateApplied" ></cn-recruiter-dashboard-qcard-view>-->
+    </div>
+    <div  id="rejected"  class="tab-pane fade">
+      <cn-q-card-view [candidateQlist]="candidateQlist" [candidates]="candidateQlist.rejectedCandidates" ></cn-q-card-view>
+      <!--<cn-recruiter-dashboard-qcard-view [candidates]="candidateApplied"  ></cn-recruiter-dashboard-qcard-view>-->
+    </div>
+  </div>
