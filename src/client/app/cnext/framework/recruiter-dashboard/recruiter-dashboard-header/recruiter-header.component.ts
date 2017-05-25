@@ -3,7 +3,7 @@ import {Router} from "@angular/router";
 import {LocalStorageService} from "../../../../framework/shared/localstorage.service";
 import {NavigationRoutes, AppSettings, LocalStorage, ImagePath} from "../../../../framework/shared/constants";
 import {CandidateInCartService} from "../../candidate-in-cart.service";
-import {CandidateNumberDifferentList} from "../../job-lister/candidate-diff-list";
+import {CandidateNumberDifferentList} from "../job-lister/candidate-diff-list";
 
 @Component({
   moduleId: module.id,

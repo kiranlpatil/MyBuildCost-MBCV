@@ -109,12 +109,12 @@ import {ProficiencyDomainService} from "./cnext/framework/proficiencies/proficie
 import {BasicJobInformationComponent} from "./cnext/framework/basic-job-information/basic-job-information.component";
 import {CompentansiesAndResponsibilitiesComponent} from "./cnext/framework/compentacies-and-responsibilities/compentacies-and-responsibilities.component";
 import {BasicJobInformationService} from "./cnext/framework/basic-job-information/basic-job-information.service";
-import {JobListerComponent} from "./cnext/framework/job-lister/job-lister.component";
+import {JobListerComponent} from "./cnext/framework/recruiter-dashboard/job-lister/job-lister.component";
 import {QCardviewComponent} from "./cnext/framework/recruiter-dashboard/q-card-view/q-card-view.component";
 import {QCardViewService} from "./cnext/framework/recruiter-dashboard/q-card-view/q-card-view.service";
 import {ProgressBarComponent} from "./cnext/framework/progress-bar/progress-bar.component";
 import {ShowQcardviewService} from "./cnext/framework/showQCard.service";
-import {jobListerSortPipe} from "./cnext/framework/job-lister/job-lister.pipe";
+import {jobListerSortPipe} from "./cnext/framework/recruiter-dashboard/job-lister/job-lister.pipe";
 import {RecruiterDashboardService} from "./cnext/framework/recruiter-dashboard/recruiter-dashboard.service";
 import {RecruiterJobSummaryComponent} from "./cnext/framework/one-page-summury/recruiter-job-summary/recruiter-job-summary.component";
 import {RecruiterJobInformation} from "./cnext/framework/one-page-summury/recruiter-job-summary/recruiter-job-information/recruiter-job-information.component";

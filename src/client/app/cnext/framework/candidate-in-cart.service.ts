@@ -1,6 +1,6 @@
 import {   Injectable  } from '@angular/core';
 import {  Subject  } from 'rxjs/Subject';
-import {CandidateNumberDifferentList} from "./job-lister/candidate-diff-list";
+import {CandidateNumberDifferentList} from "./recruiter-dashboard/job-lister/candidate-diff-list";
 
 @Injectable()
 export class CandidateInCartService {

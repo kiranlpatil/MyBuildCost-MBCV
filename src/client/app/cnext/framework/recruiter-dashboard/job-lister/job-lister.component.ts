@@ -1,9 +1,10 @@
 import {  Component,Input,EventEmitter,Output  } from '@angular/core';
 import {CandidateNumberDifferentList} from "./candidate-diff-list";
-import {JobPosterModel} from "../model/jobPoster";
-import {QCardsortBy} from "../model/q-cardview-sortby";
-import {CandidateInCartService} from "../candidate-in-cart.service";
-import {ValueConstant} from "../../../framework/shared/constants";
+import {JobPosterModel} from "../../model/jobPoster";
+import {QCardsortBy} from "../../model/q-cardview-sortby";
+import {CandidateInCartService} from "../../candidate-in-cart.service";
+import {ValueConstant} from "../../../../framework/shared/constants";
+
 
 
 @Component({

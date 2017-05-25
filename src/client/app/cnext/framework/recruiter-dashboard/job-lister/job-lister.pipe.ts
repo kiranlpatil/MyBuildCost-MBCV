@@ -1,5 +1,5 @@
 import {Pipe, PipeTransform} from '@angular/core';
-import {JobPosterModel} from "../model/jobPoster";
+import {JobPosterModel} from "../../model/jobPoster";
 
 @Pipe({name: 'orderBy', pure: false})
 
