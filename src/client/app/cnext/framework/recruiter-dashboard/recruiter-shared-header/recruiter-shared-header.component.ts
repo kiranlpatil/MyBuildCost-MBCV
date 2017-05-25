@@ -1,0 +1,79 @@
+import {Component, OnInit, ElementRef, HostListener} from "@angular/core";
+import {Router} from "@angular/router";
+import {LocalStorageService} from "../../../../framework/shared/localstorage.service";
+import {NavigationRoutes, AppSettings, LocalStorage, ImagePath} from "../../../../framework/shared/constants";
+
+
+@Component({
+  moduleId: module.id,
+  selector: 'cn-recruiter-shared-header',
+  templateUrl: 'recruiter-shared-header.component.html',
+  styleUrls: ['recruiter-shared-header.component.css'],
+})
+
+export class RecruiterSharedHeaderComponent implements OnInit {
+  company_name: string;
+  uploaded_image_path: string;
+  public isClassVisible:boolean = false;
+  public isOpenProfile:boolean = false;
+  PROFILE_IMG_PATH:string;
+  MY_LOGO:string;
+  newUser:number;
+
+  @HostListener('document:click', ['$event']) onClick(event:any) {
+    if (!this._eref.nativeElement.contains(event.target)) {
+      this.isOpenProfile = false;
+
+    }
+  }
+
+  constructor(private _router:Router,  private _eref:ElementRef) {
+    this.MY_LOGO = ImagePath.MY_WHITE_LOGO;
+  }
+
+  ngOnInit() {
+    this.company_name = LocalStorageService.getLocalValue(LocalStorage.COMPANY_NAME);
+    this.uploaded_image_path = LocalStorageService.getLocalValue(LocalStorage.PROFILE_PICTURE); //TODO:Get it from get user call.
+
+    if (this.uploaded_image_path === "undefined" || this.uploaded_image_path === null) {
+      this.uploaded_image_path = ImagePath.PROFILE_IMG_ICON;
+    } else {
+      this.uploaded_image_path = this.uploaded_image_path.substring(4, this.uploaded_image_path.length - 1).replace('"', '');
+      this.uploaded_image_path = AppSettings.IP + this.uploaded_image_path;
+    }
+  }
+
+
+  getImagePath(imagePath:string){
+    if(imagePath != undefined){
+      return AppSettings.IP + imagePath.substring(4).replace('"', '');
+    }
+
+    return null;
+  }
+
+  logOut() {
+    window.localStorage.clear();
+    this._router.navigate([NavigationRoutes.APP_START]);
+  }
+
+  navigateTo(nav:string) {
+    if (nav !== undefined) {
+      this._router.navigate([nav]);
+    }
+  }
+
+  toggleMenu() {
+    this.isClassVisible = !this.isClassVisible;
+    this.isOpenProfile = false;
+  }
+
+  openDropdownProfile() {
+    this.isOpenProfile = !this.isOpenProfile;
+  }
+
+  closeMenu() {
+    this.isClassVisible = false;
+  }
+}
+

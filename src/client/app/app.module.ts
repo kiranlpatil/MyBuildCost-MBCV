@@ -140,6 +140,7 @@ import {CandidateJobListService} from "./cnext/framework/candidate-dashboard/can
 import {CandidateViewComponent} from "./cnext/framework/one-page-summury/candidate-summury/candidate-view/candidate-view.component";
 import {CandidateInCartService} from "./cnext/framework/candidate-in-cart.service";
 import {FilterService} from "./cnext/framework/filters/filter/filter.service";
+import {RecruiterSharedHeaderComponent} from "./cnext/framework/recruiter-dashboard/recruiter-shared-header/recruiter-shared-header.component";
 import {QCardFilterService} from "./cnext/framework/filters/q-card-filter.service";
 import {QCardListSortPipe} from "./cnext/framework/filters/q-card-list-sort.pipe";
 import {MinRangeValidation} from "./cnext/framework/filters/min-range-validation.pipe";
@@ -205,6 +206,7 @@ import {CandidateDashboardHeaderComponent} from "./cnext/framework/candidate-das
     CandidateBasicInformationComponent,
     VericalListViewComponent,
     TabularListViewComponent,
+    RecruiterSharedHeaderComponent,
     AdditionalDetailsComponent,
     HorizontalListViewComponent,
     CandidateProfileComponent,

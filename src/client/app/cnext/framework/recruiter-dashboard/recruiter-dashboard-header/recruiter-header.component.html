@@ -1,9 +1,10 @@
 <header class="page-header">
   <div class="container-fluid">
-    <div class="user-info col-md-2 col-sm-3">
+    <cn-recruiter-shared-header></cn-recruiter-shared-header>
+   <!-- <div class="user-info col-md-2 col-sm-3">
       <img src= "{{uploaded_image_path}}" alt="User Profile Picture"/>
       <h4>{{companyName}}</h4>
-    </div>
+    </div>-->
     <ul class="list-counts clearfix">
       <li>
         <img src="assets/c-next/header/jobs-posted.png" alt="Job posted"/>
@@ -21,19 +22,7 @@
         <p>Candidate Applied</p>
       </li>
     </ul>
-    <ul class="logout-dropdown">
-      <li class="dropdown">
-        <a href="#" class="dropdown-toggle drop-down" data-toggle="dropdown" >
-          <img src="assets/framework/images/dashboard/3dots.png">
-        </a>
-        <ul class="dropdown-menu">
-          <li>
-            <a (click)="logOut()"><b>Logout</b></a>
-          </li>
-        </ul>
-      </li>
-    </ul>
+
   </div>
-  <button type="submit" class="btn btn-default btn-logout" (click)="logOut()">Logout</button>
 </header>
 
