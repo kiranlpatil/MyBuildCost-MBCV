@@ -146,7 +146,7 @@ export function retrieve(req: express.Request, res: express.Response, next: any)
         res.status(200).send({
           "status": Messages.STATUS_SUCCESS,
           "data": result,
-          "data.jobCountModel":result.jobCountModel
+          "jobCountModel":result.jobCountModel
           });
       }
 
