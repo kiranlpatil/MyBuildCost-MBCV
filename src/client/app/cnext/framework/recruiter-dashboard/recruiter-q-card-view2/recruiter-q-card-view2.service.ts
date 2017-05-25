@@ -11,12 +11,11 @@ export class   RecruiteQCardView2Service extends BaseService{
   constructor(private http:Http) {
     super();
   }
-  getSearchedcandidate(jobPosterModel:JobPosterModel)
-  {
+  getSearchedcandidate(id:string) {
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({headers: headers});
-    var body = JSON.stringify(jobPosterModel);
-    return this.http.post(API.SEARCH_CANDIDATE,body,options)
+    let url ="/api/recruiter/jobProfile/"+id+"/candidates";
+    return this.http.get(url,{},options)
       .map(this.extractData)
       .catch(this.handleError);
   }

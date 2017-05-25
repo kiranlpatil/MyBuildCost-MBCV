@@ -140,7 +140,7 @@ export class QCardviewComponent implements OnInit, OnChanges {
 
   showQCardView() {
     this.isShowQCardView = true;
-    this.qCardViewService.getSearchedcandidate(this.jobPosterModel)
+    this.qCardViewService.getSearchedcandidate(this.jobPosterModel._id)
       .subscribe(
         data => {
           this.candidates = data;
