@@ -299,6 +299,14 @@ export class CandidateProfileComponent implements OnInit {
     this.candidateForRole = candidateData.data[0].industry.roles;
     console.log(this.candidate);
 
+    if(candidateData.data[0].isCompleted==true){
+      this.showProfessionalData = true;
+      this.showAboutMySelf=true;
+      this.showAcademicsDetails=true;
+      this.showAwards=true;
+      this.showCertificationDetails=true;
+      this.showemploymentHistory=true;
+    }
     if (this.candidate.jobTitle === undefined || this.candidate.industry.name !== undefined) {
       //TODO: Shrikant write logic which should be the active section
       console.log(this.candidate);
