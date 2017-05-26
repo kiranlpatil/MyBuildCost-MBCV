@@ -85,6 +85,7 @@ export class QCardviewComponent {
         break;
       case ValueConstant.MATCHED_CANDIDATE :
         this.candidateQlist.matchedCandidates.splice(this.candidateQlist.matchedCandidates.indexOf(candidate),1);
+        this.recuirterListCountModel.numberOfMatchedCandidates= this.candidateQlist.matchedCandidates.length;
         isMatchList= true;
         break;
     }
@@ -94,6 +95,8 @@ export class QCardviewComponent {
           this.updateCountModel(data);
         }
       );
+    }else if(action=="remove"){
+      this.recuirterListCountModel.numberOfMatchedCandidates++;
     }
     this.qCardViewService.updateCandidateLists(this.jobId,candidate._id,destinationListName,action).subscribe(
       data=>{
