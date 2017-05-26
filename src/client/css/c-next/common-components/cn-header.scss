@@ -17,7 +17,7 @@ $header-shadow: rgba(0, 0, 0, 0.4);
   text-align: left;
 
   .navbar-brand {
-    margin-left: 15px;
+    margin-left: 0 !important;
 
     img {
       margin-top: -4px;
@@ -58,35 +58,6 @@ $header-shadow: rgba(0, 0, 0, 0.4);
     }
   }
 
-  .list-counts > li {
-    color: $white;
-    float: left;
-    list-style: none;
-    width: auto;
-    text-align: center;
-    padding: 5px 0 5px 25px;
-
-    p {
-      color: $white;
-      font-size: 10px;
-      line-height: 12px;
-      margin: 0;
-    }
-
-    span {
-      font-size: 20px;
-      line-height: 27px;
-    }
-
-    img {
-      margin-top: -9px;
-    }
-
-    .dropdown > a {
-      color: $white;
-    }
-  }
-
   .last-child {
 
     a {
@@ -97,6 +68,32 @@ $header-shadow: rgba(0, 0, 0, 0.4);
         height: 35px;
         margin: 7px 0 0 0;
         width: 35px;
+        border: 2px solid $theme-color;
+
+        &:hover,
+        &:focus {
+          border: 2px solid $white;
+        }
+      }
+
+      .caret {
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        border-top: 5px dashed $white;
+        margin: 8px 0 0 0;
+      }
+    }
+
+    .open > a {
+      background: none;
+
+      &:hover,
+      &:focus {
+        background: none;
+      }
+
+      img {
+        border: 2px solid $white;
       }
     }
 
@@ -111,10 +108,15 @@ $header-shadow: rgba(0, 0, 0, 0.4);
 
       li {
         display: block;
+        margin: 0;
+        width: 100%;
       }
 
       .dropdown-item {
         padding: 15px 10px;
+        font-size: 12px;
+        font-weight: 600;
+        color: #666;
 
         span {
           margin-right: 15px;

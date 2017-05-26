@@ -43,21 +43,7 @@ $blue: #3694d1;
   position: fixed;
   top: 0;
   width: 100%;
-  z-index: 99;
-
-  .cn-logo {
-    position: fixed;
-    top: 8px;
-    left: 15px;
-
-    .web-logo {
-      width: 120px;
-    }
-    .ipad-logo {
-      display: none;
-      width: 35px;
-    }
-  }
+  z-index: 999;
 }
 
 .bar {

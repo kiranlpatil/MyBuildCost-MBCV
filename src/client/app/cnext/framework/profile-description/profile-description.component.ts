@@ -75,6 +75,7 @@ this.candidate.basicInformation.picture=imagePath;
     this.highlightedSection.name = "none";
     this.highlightedSection.isDisable=false;
     this.onComplete.emit(this.candidate);
+    this.showButton = true;
   }
 }
 

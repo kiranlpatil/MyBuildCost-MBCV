@@ -56,6 +56,10 @@ $theme-color: #3694d1;
     z-index: 3;
   }
 
+  .btn-edit[hidden] {
+    display: none;
+  }
+
   .glyphicon-lock {
     background-color: #fff;
     color: #ccc;
@@ -70,7 +74,7 @@ $theme-color: #3694d1;
 
   .heading {
     background: none !important;
-    margin: 5px 0 5px 0 !important;
+    margin: 0px 0 10px 0 !important;
     padding: 0 !important;
   }
 
@@ -126,16 +130,25 @@ $theme-color: #3694d1;
     padding-left: 0;
   }
 
-  ul {
-    padding: 0 15px;
+  ul,
+  .option {
+    padding: 0 0 0 15px;
 
     li {
+      color: #666;
       float: left;
-      list-style-image: url('../../../assets/c-next/compact-view/list-type.png');
+      list-style-image: url('../../../assets/c-next/compact-view/bullet.png');
       margin-bottom: 10px;
+      padding-right: 25px;
       text-transform: capitalize;
       width: 50%;
-      padding-right: 25px;
+    }
+  }
+
+  .option {
+    li {
+      width: 25%;
+      margin-bottom: 0;
     }
   }
 
@@ -167,6 +180,12 @@ $theme-color: #3694d1;
 @media only screen and (max-width: 1024px) {
   .compact-view {
     ul {
+      li {
+        width: 100%;
+      }
+    }
+
+    .option {
       li {
         width: 50%;
       }
@@ -211,7 +230,8 @@ $theme-color: #3694d1;
       }
     }
 
-    ul {
+    ul,
+    .option{
       li {
         float: left;
         width: 100%;

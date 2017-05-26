@@ -29,6 +29,12 @@ $primary-option: #1c75bd;
       opacity: 1;
     }
   }
+
+  .option {
+    li {
+      width: 100%;
+    }
+  }
 }
 
 @media screen and (max-width: 767px) {

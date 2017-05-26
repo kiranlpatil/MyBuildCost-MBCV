@@ -8,9 +8,21 @@ $border-color: #ccc;
 }
 
 .compact-view {
+  min-height: 135px;
+
   &:hover {
     .btn-edit {
       opacity: 1;
+    }
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .compact-view {
+    ul {
+      li {
+        width: 50%;
+      }
     }
   }
 }

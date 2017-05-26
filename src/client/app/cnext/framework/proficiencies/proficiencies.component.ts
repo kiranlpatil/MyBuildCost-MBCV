@@ -38,6 +38,7 @@ export class ProficienciesComponent {
     this.highlightedSection.name="none";
     this.highlightedSection.isDisable=false;
       this.onComplete.emit();
+
   }
 }
 

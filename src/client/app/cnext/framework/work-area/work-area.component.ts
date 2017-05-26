@@ -1,7 +1,8 @@
 import {Component, EventEmitter, Output, Input} from "@angular/core";
 import {Role} from "../model/role";
 import {Section} from "../model/candidate";
-import {ValueConstant} from "../../../framework/shared/constants";
+import {ValueConstant, LocalStorage} from "../../../framework/shared/constants";
+import {LocalStorageService} from "../../../framework/shared/localstorage.service";
 
 @Component({
   moduleId: module.id,
@@ -15,8 +16,15 @@ export class WorkAreaComponent {
   @Input() selectedRoles:Role[] = new Array(0);
   @Input() highlightedSection :Section;
   @Output() onComplete = new EventEmitter();
+  private isCandidate:boolean = false;
 
   private disableButton:boolean = true;
+
+  ngOnInit() {
+    if(LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE)==='true') {
+      this.isCandidate = true;
+    }
+  }
 
 /*  ngOnChanges(changes:any) {
     if(changes.selectedRoles != undefined && changes.selectedRoles.currentValue != undefined){

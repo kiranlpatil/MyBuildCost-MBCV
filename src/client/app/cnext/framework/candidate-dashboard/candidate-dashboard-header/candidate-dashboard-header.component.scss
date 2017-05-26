@@ -1,0 +1,36 @@
+$white: #fff;
+
+.navbar-left {
+  top: 0;
+  position: fixed;
+  left: 200px;
+  z-index: 1000;
+}
+.list-counts > li {
+  color: $white;
+  float: left;
+  list-style: none;
+  width: auto;
+  text-align: center;
+  padding: 5px 25px 5px 0;
+
+  p {
+    color: $white;
+    font-size: 10px;
+    line-height: 12px;
+    margin: 0;
+  }
+
+  span {
+    font-size: 20px;
+    line-height: 27px;
+  }
+
+  img {
+    margin-top: -9px;
+  }
+
+  .dropdown > a {
+    color: $white;
+  }
+}

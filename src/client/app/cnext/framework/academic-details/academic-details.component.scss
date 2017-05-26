@@ -8,6 +8,8 @@ $border-color: #ccc;
 }
 
 .compact-view {
+  min-height: 135px;
+
   &:hover {
     .btn-edit {
       opacity: 1;

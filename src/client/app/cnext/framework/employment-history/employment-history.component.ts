@@ -120,7 +120,6 @@ export class EmploymentHistoryComponent {
     this.onComplete.emit();
     this.highlightedSection.name = "none";
     this.highlightedSection.isDisable=false;
-
   }
 
   hideEmployeeHistory() {

@@ -22,16 +22,16 @@
       </div>
 
       <div class="margin-20">
-        <a (click)="addEmployeeHistory()" style="cursor: default">
+        <a (click)="addEmployeeHistory()" class="btn btn-create-profile">
           Add another +
         </a>
       </div>
       <div class="button-group clearfix">
+        <button class="btn btn-default"  (click)="highlightedSection.name='none';highlightedSection.isDisable=false" [hidden]="showButton" >Cancel</button>
         <button type="submit" class="btn btn-primary" scrollTo scrollTargetSelector="#academic-details"
                 (click)="postData()" [disabled]="!employeeHistory.valid" [hidden]="!showButton">Next
         </button>
         <button class="btn btn-primary"  (click)="onSave()" [hidden]="showButton">Save</button>
-        <button class="btn btn-danger"  (click)="highlightedSection.name='none'" [hidden]="showButton" >Cancel</button>
       </div>
       <div class="clearfix"></div>
     </form>

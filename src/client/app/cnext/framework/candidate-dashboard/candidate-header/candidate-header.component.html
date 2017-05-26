@@ -1,58 +1,3 @@
-<!--
-<header class="page-header" *ngIf="candidate != undefined">
-  <div class="container-fluid">
-    <div class="user-info col-sm-3">
-
-    </div>
-    <ul class="list-counts clearfix">
-      <li >
-        <div class="dropdown">
-          <a  data-toggle="dropdown">
-          <div class="canvas-container">
-            &lt;!&ndash; <cn-progress-bar [value]="candidate.summary.percentProfileCompleted" [color]="'#fff'" [rotation]="false"></cn-progress-bar>
-             <cn-progress-bar [value]="candidate.summary.percentProfileCompleted" [color]="'#e77e22'" [rotation]="true" ></cn-progress-bar>&ndash;&gt;
-            <span class="percentage"><span>{{candidate.summary.percentProfileCompleted | number : '1.0-0'}}%</span></span>
-          </div>
-          </a>
-          <p>Profile Completed</p>
-          <ul class="dropdown-menu">
-
-          </ul>
-        </div>
-      </li>
-      <li>
-        <img src="assets/c-next/header/jobs-posted.png" alt="search"/>
-        <span>{{candidate.summary.numberOfTimeSearched}}</span>
-        <p>Times searched</p>
-      </li>
-      <li>
-        <img src="assets/c-next/header/matching-profiles.png" alt="view"/>
-        <span>{{candidate.summary.numberOfTimesViewed}}</span>
-        <p>Times Viewed</p>
-      </li>
-      <li>
-        <img src="assets/c-next/header/candidates-applied.png" alt="cart"/>
-        <span>{{candidate.summary.numberOfTimesaddedToCart}}</span>
-        <p>Times Added to cart</p>
-      </li>
-    </ul>
-    <ul class="logout-dropdown">
-      <li class="dropdown">
-        <a href="#" class="dropdown-toggle drop-down" data-toggle="dropdown" >
-          <img src="assets/framework/images/dashboard/3dots.png">
-        </a>
-        <ul class="dropdown-menu">
-          <li>
-            <a (click)="logOut()"><b>Logout</b></a>
-          </li>
-        </ul>
-      </li>
-    </ul>
-  </div>
-  <button type="submit" class="btn btn-default btn-logout" (click)="logOut()">Logout</button>
-</header>
--->
-
 <header class="page-header">
   <nav class="navbar navbar-fixed-top">
     <div class="container-fluid">
@@ -71,8 +16,9 @@
           <span class="icon-bar"></span>
         </button>
 
-        <a class="navbar-brand" (click)="navigateTo('/candidate_dashboard'); closeMenu($event);"><img
-          src={{MY_LOGO}}></a>
+        <a class="navbar-brand" (click)="navigateTo('/candidate_dashboard'); closeMenu($event);">
+          <img src={{MY_LOGO}} />
+        </a>
       </div>
 
       <!-- Collect the nav links, forms, and other content for toggling -->
@@ -92,6 +38,7 @@
                  (click)="openDropdownProfile();">
                 <img src= "assets/framework/images/dashboard/profile.png" alt="User Profile" *ngIf="candidate.basicInformation.picture==undefined"/>
                 <img [src]="getImagePath(candidate.basicInformation.picture)"  alt="User Profile" *ngIf="candidate.basicInformation.picture!=undefined"/>
+                <span class="caret"></span>
               </a>
               <ul class="dropdown-menu mobile-dropdown">
                 <li role="menuitem" [routerLinkActive]="['active']" *ngIf="candidate.isCompleted==true">
@@ -103,14 +50,14 @@
                 <li role="menuitem" [routerLinkActive]="['active']" *ngIf="candidate.isCompleted==true">
                   <a class="dropdown-item" [routerLink]="['profile-edit']"
                      (click)="navigateTo('/create_profile'); toggleMenu();">
-                    <span class="glyphicon glyphicon-cog"></span>Edit Profile
+                    <span class="	glyphicon glyphicon-edit"></span>Edit Profile
                   </a>
                 </li>
 
                 <li role="menuitem" *ngIf="candidate.isCompleted==true">
                   <a class="dropdown-item" [routerLink]="['candidate_dashboard']"
                      (click)="navigateTo('/candidate_dashboard'); toggleMenu();">
-                    <span class="glyphicon glyphicon-home"></span>My Dashboard
+                    <span class="glyphicon glyphicon-th"></span>My Dashboard
                   </a>
                 </li>
 

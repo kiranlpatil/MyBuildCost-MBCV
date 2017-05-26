@@ -11,11 +11,11 @@
           <label>Additional Proficiencies</label>
           <cn-multi-select [type]="Additional" [data]="proficiencies" [selectedData]="jobPosterModel.additionalProficiencies" (onComplete)="onOptionalProficiencyComplete($event)" ></cn-multi-select>
           <div class="button-group clearfix">
+            <button class="btn btn-default"  (click)="highlightedSection.name='none'; highlightedSection.isDisable=false" [hidden]="showButton" >Cancel</button>
             <button class="btn btn-primary" scrollTo scrollTargetSelector="#industry-experience"
                     (click)="onNext()" [disabled]="disablebutton" [hidden]="!showButton">Next
             </button>
             <button class="btn btn-primary"  (click)="onSave()" [hidden]="showButton">Save</button>
-            <button class="btn btn-danger"  (click)="highlightedSection.name='none'" [hidden]="showButton" >Cancel</button>
           </div>
         </div>
       </div>

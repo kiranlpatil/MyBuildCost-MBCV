@@ -20,9 +20,9 @@
       <cn-industry-list  [selectedIndustry]="candidate.industry" (valueChange)="onIndustryChange($event)"></cn-industry-list>
 
       <div class="button-group clearfix">
-        <button class="btn btn-primary" scrollTo scrollTargetSelector="#work-area" (click)="onNext()" [hidden]="!showButton">Next</button>
+        <button class="btn btn-default"  (click)="highlightedSection.name='none'; highlightedSection.isDisable=false" [hidden]="showButton" >Cancel</button>
+        <button class="btn btn-primary" scrollTo scrollTargetSelector="#work-area" (click)="onNext()">Next</button><!-- [hidden]="!showButton" -->
       <!--  <button class="btn btn-primary"  (click)="onSave()" [hidden]="showButton">Save</button>-->
-        <button class="btn btn-danger"  (click)="highlightedSection.name='none'" [hidden]="showButton" >Cancel</button>
       </div>
     </div>
   </div>

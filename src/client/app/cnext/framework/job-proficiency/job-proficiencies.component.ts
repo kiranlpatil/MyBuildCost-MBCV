@@ -41,6 +41,7 @@ export class JobProficienciesComponent {
   onSave() {
     this.highlightedSection.name = "none";
     this.highlightedSection.isDisable=false;
+
   }
 }
 

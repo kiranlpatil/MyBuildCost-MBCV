@@ -1,11 +1,6 @@
 <div class="create-profile clearfix">
+  <cn-candidate-header [candidate]="candidate" *ngIf="candidate != undefined"></cn-candidate-header>
   <div class="bar-container profile-header">
-    <cn-candidate-header [candidate]="candidate" *ngIf="candidate != undefined"></cn-candidate-header>
-    <!--<div class="cn-logo">
-      <img src="assets/c-next/header/cnext-logo-white.png" class="web-logo"/>
-      <img src="assets/c-next/header/cnext-logo-small.png" class="ipad-logo"/>
-    </div>-->
-
     <ul class="bar container" id="bar">
       <li [class.active]="whichStepsVisible[1]"><p>Area of Work</p></li>
       <li [class.active]="whichStepsVisible[2]"><p>Capabilities</p></li>
@@ -14,17 +9,6 @@
       <li [class.active]="whichStepsVisible[5]"><p>Professional Data</p></li>
       <li [class.active]="whichStepsVisible[6]"><p>Profile Description</p></li>
     </ul>
-    <!--<ul class="logout-dropdown">
-      <li class="dropdown">
-        <a href="#" class="dropdown-toggle drop-down" data-toggle="dropdown">
-          <img src="assets/framework/images/dashboard/3dots.png">
-        </a>
-        <ul class="dropdown-menu">
-          <li><a (click)="logOut()"><b>Logout</b></a></li>
-        </ul>
-      </li>
-    </ul>
-    <button class="btn btn-danger btn-logout" (click)="logOut()">Logout</button>-->
   </div>
 
   <div class="profile-wrapper container">
@@ -127,8 +111,4 @@
   </div>
 </div>
 
-<!--
-<cn-recruiter-dashboard></cn-recruiter-dashboard>
--->
-<!--<cn-recruiter-dashboard></cn-recruiter-dashboard>-->
 

@@ -12,11 +12,11 @@
         </label>
       </div>
       <div class="button-group clearfix">
+        <button class="btn btn-default"  (click)="highlightedSection.name='none'; highlightedSection.isDisable=false" [hidden]="showButton" >Cancel</button>
         <button class="btn btn-primary" scrollTo scrollTargetSelector="#professional-details"
                 (click)="onNext()" [disabled]="disableButton" [hidden]="!showButton">Next
         </button>
         <button class="btn btn-primary"  (click)="onSave()" [hidden]="showButton">Save</button>
-        <button class="btn btn-danger"  (click)="highlightedSection.name='none'" [hidden]="showButton" >Cancel</button>
       </div>
     </div>
   </div>
@@ -24,9 +24,9 @@
     <div class="compact-view clearfix">
       <button class="btn-edit" (click)="highlightedSection.name='IndustryExposure';disableButton=false;highlightedSection.isDisable=true;showButton=false" [hidden]="highlightedSection.isDisable"></button>
       <h4 class="heading">Experienced Industry</h4>
-      <span class="option col-sm-3 padding-right15" *ngFor="let item of candidateExperiencedIndustry;let i = index">
-        {{item}}
-      </span>
+      <ul class="option">
+        <li *ngFor="let item of candidateExperiencedIndustry;let i = index">{{item}}</li>
+      </ul>
     </div>
   </div>
 </div>

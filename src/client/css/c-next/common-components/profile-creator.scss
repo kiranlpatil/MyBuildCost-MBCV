@@ -10,6 +10,12 @@ $theme-color: #3694d1;
   text-align: left;
 }
 
+.create-profile {
+  .page-header {
+    background: transparent !important;
+  }
+}
+
 .main-content {
   background: $white;
   padding: 7px;
@@ -160,13 +166,22 @@ $theme-color: #3694d1;
     color: $info;
   }
 
-  .btn-primary {
-    float: right;
-    margin-top: 15px;
+  .button-group {
+    text-align: right;
 
-    &:focus,
-    &:active {
-      outline: none;
+    button[hidden] {
+      display: none;
+    }
+
+    .btn {
+      float: right;
+      margin-top: 15px;
+      margin-right: 10px;
+
+      &:focus,
+      &:active {
+        outline: none;
+      }
     }
   }
 

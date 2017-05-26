@@ -54,11 +54,9 @@
             <span class=" glyphicon glyphicon-lock" title="you can edit this field after {{highlightedSection.date| date:'mediumDate'}}" *ngIf="highlightedSection.isLocked"></span>
       -->
       <h4 class="heading">Capabilities</h4>
-      <div class="capability-option" *ngFor="let role of roles;let i = index">
-        <span class="option col-sm-3 padding-right15" *ngFor="let item of role.capabilities">
-         {{item.name}}
-        </span>
-      </div>
+      <ul class="option" *ngFor="let role of roles;let i = index">
+        <li *ngFor="let item of role.capabilities">{{item.name}}</li>
+      </ul>
     </div>
     <!-- <div [class.modal-bg]="highlightedSection.name!='Capabilities'"></div>-->
   </div>
