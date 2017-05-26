@@ -33,7 +33,7 @@ $border-light: #efefef;
     position: fixed;
     top: 55px;
     right: 10px;
-    z-index: 1000;
+    z-index: 999;
 
     &:focus,
     &:hover {
@@ -220,7 +220,7 @@ $border-light: #efefef;
       width: 100%;
       height: 100%;
       left: 0;
-      top: 0px;
+      top: 0;
       /* display: inline-block; */
       padding: 5px;
       color: $theme-color;
@@ -229,6 +229,15 @@ $border-light: #efefef;
 
   .candidate-listing {
     padding: 100px 0 0 200px;
+  }
+}
+
+
+.candidate-profile-wrapper {
+  margin: 135px auto 15px;
+
+  .q-card-header {
+    top: 91px;
   }
 }
 

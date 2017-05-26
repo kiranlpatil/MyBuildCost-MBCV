@@ -5,7 +5,6 @@ $red: #ef4136;
 
 
 .profile-wrapper {
-  margin: 140px auto 15px;
 
   .list-view > ul > li {
     padding: 0 15px;
@@ -50,10 +49,6 @@ $red: #ef4136;
     li:nth-child(5)  > a > .count {
       background-color: $red;
     }
-  }
-
-  .q-card-header {
-    top: 91px;
   }
 
   .candidate-listing {
