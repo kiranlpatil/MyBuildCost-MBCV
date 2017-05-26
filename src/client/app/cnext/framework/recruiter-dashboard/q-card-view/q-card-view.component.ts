@@ -26,16 +26,19 @@ import {CandidateQListModel} from "../job-dashboard/q-cards-candidates";
 export class QCardviewComponent {
 
     @Input() candidateQlist : CandidateQListModel = new CandidateQListModel();
-    @Input() candidates : CandidateQCard = new CandidateQCard();
+    @Input() candidates : CandidateQCard[];
+    @Input() jobId: string;
+    @Input() type : string;
     private qCardModel: QCardsortBy = new QCardsortBy();
     private totalQCardMatches = {count:0};
     private qCardCount = {count:0};
     private match: MatchCandidate = new MatchCandidate();
     private candidateFilter: QCardFilter;
-    private matchFormat: string;
+    private matchFormat: string='belowMatch';
 
 
-  constructor( private qCardFilterService: QCardFilterService) {
+  constructor( private qCardFilterService: QCardFilterService,
+  private qCardViewService :QCardViewService) {
 
     this.qCardFilterService.candidateFilterValue$.subscribe(
       (data: QCardFilter) => {
@@ -48,6 +51,56 @@ export class QCardviewComponent {
       }
     );
   }
+
+  actionOnQCard(action: string, sourceListName : string ,destinationListName : string , candidate : CandidateQCard){debugger
+
+    let isMatchList : boolean= false;
+    switch (sourceListName){
+      case ValueConstant.APPLIED_CANDIDATE :
+        this.candidateQlist.appliedCandidates.splice(this.candidateQlist.appliedCandidates.indexOf(candidate),1);
+        break;
+      case ValueConstant.REJECTED_LISTED_CANDIDATE :
+        this.candidateQlist.rejectedCandidates.splice(this.candidateQlist.rejectedCandidates.indexOf(candidate),1);
+        break;
+      case ValueConstant.CART_LISTED_CANDIDATE :
+        this.candidateQlist.cartCandidates.splice(this.candidateQlist.cartCandidates.indexOf(candidate),1);
+        break;
+      case ValueConstant.SHORT_LISTED_CANDIDATE :
+//        this.candidateQlist.shortListedCandidates.splice(this.candidateQlist.shortListedCandidates.indexOf(candidate),1);
+        break;
+      case ValueConstant.MATCHED_CANDIDATE :
+        this.candidateQlist.matchedCandidates.splice(this.candidateQlist.matchedCandidates.indexOf(candidate),1);
+        isMatchList= true;
+        break;
+    }
+    if(action=="add" && !isMatchList) {
+      this.qCardViewService.updateCandidateLists(this.jobId, candidate._id, sourceListName, "remove").subscribe(
+        data=> {
+          console.log("Success");
+        }
+      );
+    }
+    this.qCardViewService.updateCandidateLists(this.jobId,candidate._id,destinationListName,action).subscribe(
+      data=>{
+        console.log("Success");
+      }
+    );
+
+  }
+
+  addRemoveToShortList(candidate : CandidateQCard){
+    let action: string;
+    (this.candidateQlist.shortListedCandidates.indexOf(candidate)!=-1) ? action='remove': action='add';
+    this.qCardViewService.updateCandidateLists(this.jobId,candidate._id,ValueConstant.SHORT_LISTED_CANDIDATE,action).subscribe(
+      data=>{
+        console.log("Success");
+      }
+    );
+
+  }
+
+
+
   /* @Output() updatedIds = new EventEmitter<UpdatedIds>();
    @Output() idsSelected = new EventEmitter<any>();
    @Output() latestSearchResultCount  = new EventEmitter<number>();

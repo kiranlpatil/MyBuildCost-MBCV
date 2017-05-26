@@ -4,6 +4,8 @@ import {BaseService} from "../../../../framework/shared/httpservices/base.servic
 import {JobPosterModel} from "../../model/jobPoster";
 import {Http, RequestOptions,Headers} from "@angular/http";
 import {API} from "../../../../framework/shared/constants";
+import {LocalStorage} from "../../../../framework/shared/constants";
+import {LocalStorageService} from "../../../../framework/shared/localstorage.service";
 
 @Injectable()
 export class   QCardViewService extends BaseService{
@@ -20,10 +22,10 @@ export class   QCardViewService extends BaseService{
       .map(this.extractData)
       .catch(this.handleError);
   }
-  addCandidateLists(recruiterId:string, profileId:string,candidateId:string, listName:string, action:string):Observable<any> {
+  updateCandidateLists(profileId:string,candidateId:string, listName:string, action:string):Observable<any> {
     let headers = new Headers({ 'Content-Type': 'application/json'});
     let options = new RequestOptions({ headers: headers });
-    let url:string="recruiter/"+recruiterId+"/jobProfile/"+profileId+"/"+listName+"/"+candidateId+"/"+action;
+    let url:string="recruiter/"+LocalStorageService.getLocalValue(LocalStorage.END_USER_ID)+"/jobProfile/"+profileId+"/"+listName+"/"+candidateId+"/"+action;
     let body:any={};
     return this.http.put(url, body,options)
       .map(this.extractData)

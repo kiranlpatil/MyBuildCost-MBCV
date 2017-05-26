@@ -30,13 +30,13 @@ export class JobDashboardComponent implements OnInit {
 
     this.getJobProfile();
     this.getMatchingProfiles();
-    this.getSelectedListData(ValueConstant.CART_LISTED_CANDIDATE);
   }
 
   getJobProfile() {
     this.jobDashboardService.getPostedJobDetails(this.jobId)
       .subscribe(
         (data: any) => {
+
          for(let item of data.data.industry.postedJobs[0].candidate_list) {
            if(item.name == ValueConstant.APPLIED_CANDIDATE)
            this.recruiterJobView.numberOfCandidatesApplied =item.ids.length;
@@ -63,16 +63,16 @@ export class JobDashboardComponent implements OnInit {
         (data: any) => {
           switch (listName){
             case ValueConstant.CART_LISTED_CANDIDATE :
-              this.candidateQlist.cartCandidates=data;
+              this.candidateQlist.cartCandidates=data.data;
               break;
             case ValueConstant.REJECTED_LISTED_CANDIDATE :
-              this.candidateQlist.rejectedCandidates=data;
+              this.candidateQlist.rejectedCandidates=data.data;
               break;
             case ValueConstant.SHORT_LISTED_CANDIDATE :
-              this.candidateQlist.shortListedCandidates=data;
+              this.candidateQlist.shortListedCandidates=data.data;
               break;
             case ValueConstant.APPLIED_CANDIDATE :
-              this.candidateQlist.appliedCandidates=data;
+              this.candidateQlist.appliedCandidates=data.data;
               break;
           }
         });

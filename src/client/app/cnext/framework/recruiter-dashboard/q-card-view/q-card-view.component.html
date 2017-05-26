@@ -2,7 +2,7 @@
   <header class="col-sm-12">
     <ul>
       <li>
-        <div class="match-cases">
+        <div class="match-cases" *ngIf="type=='matchedList'">
           <label class="radio-inline">
             <input  type="radio" name="radiogroup" value="{{match.aboveMatch}}" (click)="matching($event.target.value)" checked="checked">Exact Match or Higher Capabilities
             <span></span>
@@ -34,12 +34,12 @@
   </header>
 
   <div class="card-view clearfix">
-    <div class="col-sm-4" *ngFor= "let item of candidates | candidatematching: matchFormat:totalQCardMatches| dashboardfilter:candidateFilter:qCardCount| dashboardsort:qCardModel.sortValue "><!--| candidatematching: matchFormat-->
+    <div class="col-sm-4" *ngFor= "let item of candidates"><!--| candidatematching: matchFormat-->
       <div class="panel clearfix">
         <img class="profile-picture" src="assets/framework/images/dashboard/profile.png" alt="Profile Picture"/>
         <h6 class="username">{{item.first_name}} {{item.last_name}}</h6>
-        <ul>
-          <li><span class="glyphicon glyphicon-heart-empty" (click)="addToShortList(item)" [class.shortlisted]="item.isCandidateshortListed"></span></li>
+        <ul *ngIf="type=='matchedList'">
+          <li><span class="glyphicon glyphicon-heart-empty" (click)="addRemoveToShortList(item)" [class.shortlisted]="candidateQlist.shortListedCandidates.indexOf(item)!=-1"></span></li>
          <!-- <li>
             <div [hidden]="!item.isCandidateRead"><span class="glyphicon glyphicon-eye-close"></span></div>
             <div [hidden]="item.isCandidateRead"><span class="glyphicon glyphicon-eye-open"></span></div>
@@ -72,14 +72,52 @@
           </div>
           <p>Skills matching</p>
         </div>
-        <div class="button-group">
+        <div class="button-group" *ngIf="type=='matchedList'">
           <div class="col-sm-6 padding-right5">
-            <button class="btn btn-cart btn-block" type="button" (click)="viewProfile(item._id)" >View</button>
+            <button class="btn btn-cart btn-block" type="button" (click)="viewProfile(item._id)">View</button>
           </div>
-          <div  class="col-sm-6 padding-left5">
-            <button class="btn btn-cart btn-block"  type="button" (click)="addToCart(item._id)" >Add To Cart</button>
+          <div class="col-sm-6 padding-left5">
+            <button class="btn btn-cart btn-block" type="button"
+                    (click)="actionOnQCard('add','matchedList','cartListed',item)">Add To Cart
+            </button>
           </div>
         </div>
+        <div class="button-group" *ngIf="type=='cartListed'" >
+          <div class="col-sm-6 padding-right5">
+            <button class="btn btn-cart btn-block" type="button" (click)="viewProfile(item._id)">View</button>
+          </div>
+          <div class="col-sm-6 padding-left5">
+            <button class="btn btn-cart btn-block" type="button"
+                    (click)="actionOnQCard('remove','cartListed','cartListed',item)">Remove
+            </button>
+          </div>
+          <div class="col-sm-6 padding-left5">
+            <button class="btn btn-cart btn-block" type="button"
+                    (click)="actionOnQCard('add','cartListed','rejectedList', item)">Reject
+            </button>
+          </div>
+        </div>
+        <div class="button-group" *ngIf="type=='applied'">
+          <div class="col-sm-6 padding-right5">
+            <button class="btn btn-cart btn-block" type="button" (click)="viewProfile(item._id)">View</button>
+          </div>
+          <div class="col-sm-6 padding-left5">
+            <button class="btn btn-cart btn-block" type="button"
+                    (click)="actionOnQCard('add','applied','cartListed',item)">Add To Cart
+            </button>
+          </div>
+        </div>
+        <div class="button-group" *ngIf="type=='rejectedList'">
+          <div class="col-sm-6 padding-right5">
+            <button class="btn btn-cart btn-block" type="button" (click)="viewProfile(item._id)">View</button>
+          </div>
+          <div class="col-sm-6 padding-left5">
+            <button class="btn btn-cart btn-block" type="button"
+                    (click)="actionOnQCard('remove','rejectedList','rejectedList',item)">Remove
+            </button>
+          </div>
+
+
       </div>
     </div>
   </div>
