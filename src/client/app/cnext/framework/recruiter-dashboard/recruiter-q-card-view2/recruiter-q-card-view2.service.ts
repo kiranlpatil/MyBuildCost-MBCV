@@ -8,7 +8,7 @@ import {Observable} from "rxjs/Observable";
 @Injectable()
 export class   RecruiteQCardView2Service extends BaseService{
 
-  constructor(private http:Http) {
+  /*constructor(private http:Http) {
     super();
   }
   getSearchedcandidate(id:string) {
@@ -40,5 +40,5 @@ export class   RecruiteQCardView2Service extends BaseService{
     return this.http.post(url,body,options)
       .map(this.extractData)
       .catch(this.handleError);
-  }
+  }*/
 }

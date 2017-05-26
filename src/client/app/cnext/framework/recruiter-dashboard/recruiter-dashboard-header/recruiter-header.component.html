@@ -1,10 +1,6 @@
 <header class="page-header">
   <div class="container-fluid">
-    <cn-recruiter-shared-header></cn-recruiter-shared-header>
-   <!-- <div class="user-info col-md-2 col-sm-3">
-      <img src= "{{uploaded_image_path}}" alt="User Profile Picture"/>
-      <h4>{{companyName}}</h4>
-    </div>-->
+   <!-- <cn-recruiter-shared-header></cn-recruiter-shared-header>-->
     <ul class="list-counts clearfix">
       <li>
         <img src="assets/c-next/header/jobs-posted.png" alt="Job posted"/>
@@ -13,16 +9,15 @@
       </li>
       <li>
         <img src="assets/c-next/header/matching-profiles.png" alt="Matching Profiles"/>
-        <span>{{candidatesInList.cart}}</span>
+        <span>{{headerInfo.totalNumberOfCandidateInCart}}</span>
         <p>Canidates in Cart</p>
       </li>
       <li>
         <img src="assets/c-next/header/candidates-applied.png" alt="Candidates Applied"/>
-        <span>{{candidatesInList.applied}}</span>
+        <span>{{headerInfo.totalNumberOfCandidatesApplied}}</span>
         <p>Candidate Applied</p>
       </li>
     </ul>
-
   </div>
 </header>
 

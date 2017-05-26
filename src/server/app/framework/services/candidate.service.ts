@@ -95,11 +95,11 @@ class CandidateService {
     });
   }
 
-  getList(item : any,callback:(error:any, result:any)=>void){
+  getList(item : any,callback:(error:any, result:any)=>void) {
     let query = {
       "postedJobs._id": {$in: item.ids},
     };
-    this.recruiterRepository.retrieve(query,(err,res)=>{
+    this.recruiterRepository.retrieve(query,(err,res)=> {
         if(err){
           callback(err,null);
         }else{

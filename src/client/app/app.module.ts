@@ -150,6 +150,9 @@ import {EmployeeHistoryComponent} from "./cnext/framework/employment-history/emp
 import {QCardListFilterPipe} from "./cnext/framework/filters/q-card-list-filter.pipe";
 import {MyGoogleDirective} from "./framework/registration/candidate/google-our-place/googleplace.directive";
 import {CandidateDashboardHeaderComponent} from "./cnext/framework/candidate-dashboard/candidate-dashboard-header/candidate-dashboard-header.component";
+import {JobDashboardComponent} from "./cnext/framework/recruiter-dashboard/job-dashboard/job-dashboard.component";
+import {JobDashboardService} from "./cnext/framework/recruiter-dashboard/job-dashboard/job-dashboard.service";
+import {ReferenceService} from "./cnext/framework/model/newClass";
 
 //C-NEXT IMPORTS
 
@@ -253,7 +256,8 @@ import {CandidateDashboardHeaderComponent} from "./cnext/framework/candidate-das
     QCardListFilterPipe,
     RecuirterQCardMatchingPipe,
     MinRangeValidation,
-    MaxRangeValidation
+    MaxRangeValidation,
+    JobDashboardComponent
 
   ],
   providers: [
@@ -325,7 +329,9 @@ import {CandidateDashboardHeaderComponent} from "./cnext/framework/candidate-das
     RecruitercandidatesListsService,
     CandidateInCartService,
     RecruitercandidatesListsService,
-    QCardFilterService
+    QCardFilterService,
+    JobDashboardService,
+    ReferenceService
 
   ],
   bootstrap: [AppComponent]

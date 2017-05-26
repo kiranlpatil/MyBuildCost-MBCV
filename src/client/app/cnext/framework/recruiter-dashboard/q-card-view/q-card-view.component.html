@@ -1,8 +1,8 @@
-<div class="dashboard-view clearfix"><!--[hidden]="!isShowQCardView"-->
-  <header class="col-sm-12 q-card-header">
+<div class="dashboard-view clearfix"> <!--[hidden]="!isShowQCardView"-->
+  <header class="col-sm-12">
     <ul>
       <li>
-        <div class="match-cases">
+        <div class="match-cases" *ngIf="type=='matchedList'">
           <label class="radio-inline">
             <input  type="radio" name="radiogroup" value="{{match.aboveMatch}}" (click)="matching($event.target.value)" checked="checked">Exact Match or Higher Capabilities
             <span></span>
@@ -27,23 +27,23 @@
 
     <div class="sort-by">
       <label>Sort by</label>
-      <select id="menu"  [(ngModel)]="qCardModel.sortValue" (change)="sortBy()">
+      <select id="menu"  [(ngModel)]="qCardModel.sortValue">
         <option value="{{itemList}}" *ngFor="let itemList of qCardModel.listOfMatchings">{{itemList}}</option>
       </select>
     </div>
   </header>
 
   <div class="card-view clearfix">
-    <div class="col-sm-4" *ngFor= "let item of candidates | candidatematching: matchFormat:totalQCardMatches| dashboardfilter:candidateFilter:qCardCount| dashboardsort:qCardModel.sortValue ;let i=index;"><!--| candidatematching: matchFormat-->
+    <!--<div class="col-sm-4" *ngFor= "let item of candidates">&lt;!&ndash;| candidatematching: matchFormat&ndash;&gt;-->
+      <div class="col-sm-4" *ngFor= "let item of candidates | dashboardsort:qCardModel.sortValue | candidatematching: matchForma: totalQCardMatches | dashboardfilter:filterMeta:qCardCount;let i=index;">
       <div class="panel clearfix">
         <img class="profile-picture" src="assets/framework/images/dashboard/profile.png" alt="Profile Picture"/>
         <h6 class="username">{{item.first_name}} {{item.last_name}}</h6>
-        <ul>
-          <li><span class="glyphicon glyphicon-heart-empty" (click)="addToShortList(item)" [class.shortlisted]="item.isCandidateshortListed"></span></li>
-         <!-- <li>
-            <div [hidden]="!item.isCandidateRead"><span class="glyphicon glyphicon-eye-close"></span></div>
-            <div [hidden]="item.isCandidateRead"><span class="glyphicon glyphicon-eye-open"></span></div>
-          </li>-->
+        <ul *ngIf="type=='matchedList'">
+          <li>
+            <span class="glyphicon glyphicon-heart-empty" *ngIf="emailsOfShrortListedCandidates.indexOf(item.email)==-1" (click)="addRemoveToShortList(item)" ></span>
+            <span style="height:10px;width:10px;background-color: red" *ngIf="emailsOfShrortListedCandidates.indexOf(item.email)!=-1" (click)="addRemoveToShortList(item)" >Stared</span>
+          </li>
         </ul>
         <div class="col-sm-7 col-xs-6 no-padding left-side">
           <p><img src="assets/c-next/card-view/salary.png" alt="Salary"/>$ {{item.salary}}</p>
@@ -72,20 +72,58 @@
           </div>
           <p>Skills matching</p>
         </div>
-        <div class="button-group">
+        <div class="button-group" *ngIf="type=='matchedList'">
           <div class="col-sm-6 padding-right5">
-            <button class="btn btn-cart btn-block" type="button" (click)="viewProfile(item._id)" >View</button>
+            <button class="btn btn-cart btn-block" type="button" (click)="viewProfile(item._id)">View</button>
           </div>
-          <div  class="col-sm-6 padding-left5">
-            <button class="btn btn-cart btn-block"  type="button" (click)="addToCart(item._id)" >Add To Cart</button>
+          <div class="col-sm-6 padding-left5">
+            <button class="btn btn-cart btn-block" type="button"
+                    (click)="actionOnQCard('add','matchedList','cartListed',item)">Add To Cart
+            </button>
           </div>
         </div>
+        <div class="button-group" *ngIf="type=='cartListed'" >
+          <div class="col-sm-6 padding-right5">
+            <button class="btn btn-cart btn-block" type="button" (click)="viewProfile(item._id)">View</button>
+          </div>
+          <div class="col-sm-6 padding-left5">
+            <button class="btn btn-cart btn-block" type="button"
+                    (click)="actionOnQCard('remove','cartListed','cartListed',item)">Remove
+            </button>
+          </div>
+          <div class="col-sm-6 padding-left5">
+            <button class="btn btn-cart btn-block" type="button"
+                    (click)="actionOnQCard('add','cartListed','rejectedList', item)">Reject
+            </button>
+          </div>
+        </div>
+        <div class="button-group" *ngIf="type=='applied'">
+          <div class="col-sm-6 padding-right5">
+            <button class="btn btn-cart btn-block" type="button" (click)="viewProfile(item._id)">View</button>
+          </div>
+          <div class="col-sm-6 padding-left5">
+            <button class="btn btn-cart btn-block" type="button"
+                    (click)="actionOnQCard('add','applied','cartListed',item)">Add To Cart
+            </button>
+          </div>
+        </div>
+        <div class="button-group" *ngIf="type=='rejectedList'">
+          <div class="col-sm-6 padding-right5">
+            <button class="btn btn-cart btn-block" type="button" (click)="viewProfile(item._id)">View</button>
+          </div>
+          <div class="col-sm-6 padding-left5">
+            <button class="btn btn-cart btn-block" type="button"
+                    (click)="actionOnQCard('remove','rejectedList','rejectedList',item)">Remove
+            </button>
+          </div>
+
+
       </div>
     </div>
   </div>
 </div>
-
-<div class="modal" [style.display]="getStyleModal()">
+</div>
+<div *ngIf="type!='cartListed'"class="modal" [style.display]="getStyleModal()">
   <div class="modal-bg">
     <div class="modal-dialog modal-md">
       <div class="modal-content">
@@ -113,4 +151,8 @@
     </div>
   </div>
 </div>
+</div>
+
+<div *ngIf="type=='cartListed'" class="modal" [style.display]="getStyleModal()">
+  <cn-candidate-view [candidateId]="selectedCandidate._id"></cn-candidate-view>
 </div>

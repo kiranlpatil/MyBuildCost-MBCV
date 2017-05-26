@@ -68,7 +68,7 @@ export class JobPosterComponent {
         this.onSuccess(data.data.postedJobs[0]._id);
       });
   }
-  
+
   onSuccess(jobId:string) {
     if(jobId != undefined){
       LocalStorageService.setLocalValue(LocalStorage.CURRENT_JOB_POSTED_ID, jobId);
@@ -80,7 +80,7 @@ export class JobPosterComponent {
     this.showModalStyle = !this.showModalStyle;
   }
 
-  
+
 
   getStyleModal() {
     if (this.showModalStyle) {
@@ -158,11 +158,12 @@ export class JobPosterComponent {
   }
 
   getRoles() {
+    if(this.jobPosterModel.industry.name !== undefined){
     this.profileCreatorService.getRoles(this.jobPosterModel.industry.name)
       .subscribe(
         rolelist => this.rolesForMain = rolelist.data,
         error => this.onError(error));
-  }
+  }}
 
   getCapability() {
     this.flag = false;

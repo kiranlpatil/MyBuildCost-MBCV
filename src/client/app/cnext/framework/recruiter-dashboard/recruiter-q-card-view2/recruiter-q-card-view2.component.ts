@@ -13,7 +13,7 @@ import {CandidateProfileService} from "../../candidate-profile/candidate-profile
 import {RecruiterDashboardService} from "../recruiter-dashboard.service";
 import {QCardFilterService} from "../../filters/q-card-filter.service";
 import {RecruitercandidatesListsService} from "../../candidate-lists.service";
-import {RecruiteQCardView2Service} from "./recruiter-q-card-view2.service";
+//import {RecruiteQCardView2Service} from "./recruiter-q-card-view2.service";
 import {QCardFilter} from "../../model/q-card-filter";
 
 @Component({
@@ -23,8 +23,8 @@ import {QCardFilter} from "../../model/q-card-filter";
   styleUrls: ['recruiter-q-card-view2.component.css'],
 
 })
-export class RecruiterQCardview2Component implements OnInit,OnChanges {
-  @Output() addShortListedToCartIds: EventEmitter<any>= new EventEmitter<any>();
+export class RecruiterQCardview2Component {
+ /* @Output() addShortListedToCartIds: EventEmitter<any>= new EventEmitter<any>();
   @Output() addappliedToCartIds: EventEmitter<any>= new EventEmitter<any>();
   @Output() currentrejected: EventEmitter<any> = new EventEmitter<any>();
   @Output() removeIDs: EventEmitter<any> = new EventEmitter<any>();
@@ -208,6 +208,6 @@ this.showModalStyle=true;
   }
 
   return null;
-}
+}*/
 
 }

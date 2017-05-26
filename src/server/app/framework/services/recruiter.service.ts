@@ -92,6 +92,7 @@ class RecruiterService {
           recruiter= res[0];
           if(recruiter){
             recruiter.jobCountModel= new JobCountModel();
+            recruiter.jobCountModel.numberOfJobposted= recruiter.postedJobs.length;
           }
           if(res.length>0){
            if(recruiter.postedJobs){
@@ -113,7 +114,6 @@ class RecruiterService {
             }
           }
         }
-        recruiter.jobCountModel.numberOfJobposted= recruiter.postedJobs.length;
         callback(null,[recruiter]);
       }
     });
@@ -142,6 +142,31 @@ class RecruiterService {
           }
         }
       });
+  }
+
+  findById(id: any, callback: (error: any, result: any) => void) {
+    this.recruiterRepository.findById(id, callback);
+  }
+
+
+  getList(item : any,callback:(error:any, result:any)=>void) {
+    console.log("333333333333333");
+    let query = {
+      "postedJobs._id": {$in: item.ids},
+    };
+    this.recruiterRepository.retrieve(query,(err,res)=> {
+      if(err){
+        callback(err,null);
+      }else{
+        this.recruiterRepository.getJobProfileQCard(res, item.candidate, item.ids , (canError,canResult)=>{
+          if(canError){
+            callback(canError, null);
+          }else{
+            callback(null,canResult);
+          }
+        });
+      }
+    });
   }
 
   updateDetails(_id: string, item: any, callback: (error: any, result: any) => void) {

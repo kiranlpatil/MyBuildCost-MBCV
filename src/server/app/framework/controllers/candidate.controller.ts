@@ -195,7 +195,7 @@ export function getList(req:express.Request, res:express.Response, next:any) {
         });
       }else{
         for(let list of response.job_list){
-          if(listName==list.name){
+          if(listName===list.name){
             let data :any ={
               listName : listName,
               ids : list.ids,

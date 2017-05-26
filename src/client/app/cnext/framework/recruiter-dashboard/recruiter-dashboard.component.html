@@ -1,4 +1,5 @@
-<cn-recruiter-header [jobCount]="jobCount" [companyName]="companyName"></cn-recruiter-header>
+<cn-recruiter-header [headerInfo]="recruiterHeaderDetails" [jobCount]="recruiterDashboard.postedJobs.length" [companyName]="recruiterDashboard.company_name"></cn-recruiter-header>
+
 <div class="container-fluid profile-wrapper recruiter-profile-wrapper">
   <div>
     <ul class="nav nav-tabs dashboard-tabs">
@@ -8,9 +9,9 @@
     <div class="tab-content">
       <div id="posted-job" class="tab-pane fade active in clearfix">
         <div [hidden]="isJobSelected">
-          <cn-job-lister [jobListInput]="jobList" (jobEventEmitter)="jobSelected($event)"></cn-job-lister>
+          <cn-job-lister [headerInfoForJob]="recruiterHeaderDetails" [jobListInput]="recruiterDashboard.postedJobs" (jobEventEmitter)="jobSelected($event)"></cn-job-lister>
         </div>
-        <div class="candidate-listing" [hidden]="!isJobSelected" >
+       <!-- <div class="candidate-listing" [hidden]="!isJobSelected" >
           <cn-filter [selectedJob]="selectedJobProfile" [role]=true></cn-filter>
           <div class="col-sm-12 no-padding">
             <button class="btn btn-back" (click)="showAllJobs()">All Jobs</button>
@@ -32,38 +33,38 @@
               <li class="active">
                 <a (click)="showMatchedCandidate()"  id="matched_anchor" data-toggle="tab" href="#matched"><span class="count"><span>{{this.selectedJobProfile.numberOfCandidatesInList.matched}}</span></span> Matched</a>
               </li>
-              <li>
+             &lt;!&ndash; <li>
                 <a (click)="showShortlistedCandidate()" data-toggle="tab" href="#shortlisted"><span class="count"><span>{{this.selectedJobProfile.numberOfCandidatesInList.shortlist}}</span></span> Shortlisted</a>
+              </li>&ndash;&gt;
+              <li>
+                <a (click)="candidateInCart()" data-toggle="tab" href="#cart"><span class="count"><span>{{recuriterJobViewMode.numberOfCandidatesInCart}}</span></span> In Cart</a>
               </li>
               <li>
-                <a (click)="candidateInCart()" data-toggle="tab" href="#cart"><span class="count"><span>{{this.selectedJobProfile.numberOfCandidatesInList.cart}}</span></span> In Cart</a>
+                <a (click)="appliedCandidates()" data-toggle="tab" href="#applied"><span class="count"><span>{{recuriterJobViewMode.numberOfCandidatesApplied}}</span></span> Applied</a>
               </li>
               <li>
-                <a (click)="appliedCandidates()" data-toggle="tab" href="#applied"><span class="count"><span>{{this.selectedJobProfile.numberOfCandidatesInList.applied}}</span></span> Applied</a>
-              </li>
-              <li>
-                <a (click)="rejectedCandidates()" data-toggle="tab" href="#rejected"><span class="count"><span>{{selectedJobProfile.numberOfCandidatesInList.rejected}}</span></span> Rejected</a>
+                <a (click)="rejectedCandidates()" data-toggle="tab" href="#rejected"><span class="count"><span>{{recuriterJobViewMode.numberOfCandidatesrejected}}</span></span> Rejected</a>
               </li>
             </ul>
             <div class="tab-content">
               <div id="matched" class="tab-pane fade in active " [hidden]="showQCard">
-                <cn-q-card-view (updatedIds)="updateIds($event)" (latestSearchResultCount)="latestSearchResultCount($event)" [addToSerchIds]="newcandidates" [jobPosterModel]="selectedJobProfile"  [recruiterId]="recruiter._id"></cn-q-card-view>
+                <cn-q-card-view (updatedIds)="updateIds($event)" (latestSearchResultCount)="latestSearchResultCount($event)" [candidates]="candidates" [jobPosterModel]="selectedJobProfile"  [recruiterId]="recruiter._id"></cn-q-card-view>
               </div>
               <div  id="shortlisted" class="tab-pane fade"  [hidden]="!showQCard">
-                <cn-recruiter-dashboard-qcard-view (addappliedToCartIds)="appliedToCartIds($event)" (addShortListedToCartIds)="shortlistToCartIds($event)" [showButton]="buttonModel" (removeIDs)="removeFromIds($event)" (removeRejectedIDs)="removeFromRejectedList($event)" (currentrejected)="rejectedIds($event)" [listName]="shortList" [jobPosterModel]="selectedJobProfile" [candidates]="candidatesshortlisted"  [recruiterId]="recruiter._id" ></cn-recruiter-dashboard-qcard-view><!--[candidates]="candidates"-->
+                <cn-recruiter-dashboard-qcard-view (addappliedToCartIds)="appliedToCartIds($event)" (addShortListedToCartIds)="shortlistToCartIds($event)" [showButton]="buttonModel" (removeIDs)="removeFromIds($event)" (removeRejectedIDs)="removeFromRejectedList($event)" (currentrejected)="rejectedIds($event)" [listName]="shortList" [jobPosterModel]="selectedJobProfile" [candidates]="candidatesshortlisted"  [recruiterId]="recruiter._id" ></cn-recruiter-dashboard-qcard-view>&lt;!&ndash;[candidates]="candidates"&ndash;&gt;
               </div>
               <div  id="cart" class="tab-pane fade"  [hidden]="!showQCard">
                 <cn-recruiter-dashboard-qcard-view (addappliedToCartIds)="appliedToCartIds($event)"  (addShortListedToCartIds)="shortlistToCartIds($event)" [showButton]="buttonModel" (removeIDs)="removeFromIds($event)"  (removeRejectedIDs)="removeFromRejectedList($event)" (currentrejected)="rejectedIds($event)" [listName]="cartList" [jobPosterModel]="selectedJobProfile"  [candidates]="candidatesInCart" [recruiterId]="recruiter._id"></cn-recruiter-dashboard-qcard-view>
               </div>
               <div  id="applied" class="tab-pane fade"  [hidden]="!showQCard">
-                <cn-recruiter-dashboard-qcard-view (addappliedToCartIds)="appliedToCartIds($event)" (addShortListedToCartIds)="shortlistToCartIds($event)" [showButton]="buttonModel" (removeIDs)="removeFromIds($event)" (removeRejectedIDs)="removeFromRejectedList($event)" (currentrejected)="rejectedIds($event)" [listName]="appliedList" [candidates]="candidateApplied" [jobPosterModel]="selectedJobProfile" [recruiterId]="recruiter._id"></cn-recruiter-dashboard-qcard-view>
+                <cn-recruiter-dashboard-qcard-view (addappliedToCartIds)="appliedToCartIds($event)" (addShortListedToCartIds)="shortlistToCartIds($event)" [showButton]="buttonModel" (removeIDs)="removeFromIds($event)" (removeRejectedIDs)="removeFromRejectedList($event)" (currentrejected)="rejectedIds($event)" [listName]="appliedList"  [jobPosterModel]="selectedJobProfile" [candidates]="candidateApplied" [recruiterId]="recruiter._id"></cn-recruiter-dashboard-qcard-view>
               </div>
               <div  id="rejected"  class="tab-pane fade"  [hidden]="!showQCard">
                 <cn-recruiter-dashboard-qcard-view (addappliedToCartIds)="appliedToCartIds($event)" (addShortListedToCartIds)="shortlistToCartIds($event)"  [showButton]="buttonModel" (removeIDs)="removeFromIds($event)" (removeRejectedIDs)="removeFromRejectedList($event)" (currentrejected)="rejectedIds($event)" [listName]="rejecteList"  [jobPosterModel]="selectedJobProfile" [candidates]="candidateRejected"  [recruiterId]="recruiter._id"></cn-recruiter-dashboard-qcard-view>
               </div>
             </div>
           </div>
-        </div>
+        </div>-->
       </div>
 
       <div id="post-new-job" class="tab-pane fade clearfix">

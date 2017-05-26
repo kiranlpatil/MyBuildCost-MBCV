@@ -26,4 +26,12 @@ export class RecruiterDashboardService extends BaseService {
         .catch(this.handleError);
   }
 
+  getCandidatesOfLists(Id:string,listname:string):Observable<any> {
+    let url:string=API.CANDIDATESFROMLISTS+'/'+Id+'/'+'list'+'/'+listname;
+
+    return this.http.get(url)
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
+
 }

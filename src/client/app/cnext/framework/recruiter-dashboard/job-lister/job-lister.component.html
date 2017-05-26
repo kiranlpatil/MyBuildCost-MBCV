@@ -7,13 +7,17 @@
     </div>-->
   </header>
 
-  <div class="card-view" *ngIf="jobListInput.length > 0">
-    <div class="col-md-3" *ngFor="let item of jobListInput | orderBy:format;let i = index" (click)="onJobClikecd(item)">
+  <div class="card-view" >
+    <div class="col-md-3" *ngFor="let item of jobListInput | orderBy:format;let i = index" (click)="onJobClikecd(item._id)">
       <div class="panel clearfix">
         <span class="glyphicon glyphicon-trash"></span>
         <div class="job-posted clearfix">
           <div class="col-xs-2 no-padding">
-            <p><span>{{item.candidateInCart}}</span></p>
+
+            <div *ngFor="let i of item.candidate_list">
+              <p *ngIf="i.name == 'cartListed'"><span>{{i.ids.length}}</span></p>
+            </div>
+            <p *ngIf="item.candidate_list.length == 0"><span>0</span></p>
           </div>
           <div class="col-xs-10 padding-left15">
             <h4>{{item.jobTitle}}</h4>
@@ -41,6 +45,6 @@
       </div>
     </div>
   </div>
-  <div class="col-sm-12 text-center" *ngIf="jobListInput.length == 0">You havn't posted any job yet</div>
+  <div class="col-sm-12 text-center" *ngIf="jobListInput.length==0">You havn't posted any job yet</div>
 </div>
 

@@ -1,10 +1,6 @@
 import {Component, OnInit} from "@angular/core";
 import {Router} from "@angular/router";
-import {LocalStorageService} from "../../../framework/shared/localstorage.service";
-import {
-  LocalStorage, ImagePath, AppSettings, NavigationRoutes,
-  ValueConstant
-} from "../../../framework/shared/constants";
+import {NavigationRoutes, ValueConstant} from "../../../framework/shared/constants";
 import {RecruiterDashboardService} from "./recruiter-dashboard.service";
 import {JobPosterModel} from "../model/jobPoster";
 import {RecruiteQCardView2Service} from "./recruiter-q-card-view2/recruiter-q-card-view2.service";
@@ -12,7 +8,9 @@ import {CandidateQCard} from "../model/candidateQcard";
 import {RecruitercandidatesListsService} from "../candidate-lists.service";
 import {RecruiterDashboardButton} from "../model/buttonAtRecruiterdashboard";
 import {QCardFilterService} from "../filters/q-card-filter.service";
-import {CandidatesInDiffList} from "../model/candidatesinDiffList";
+import {RecruiterDashboard} from "../model/recruiter-dashboard";
+import {RecruiterJobView} from "../model/recruiter-job-view";
+import {RecruiterHeaderDetails} from "../model/recuirterheaderdetails";
 
 @Component({
   moduleId: module.id,
@@ -22,77 +20,77 @@ import {CandidatesInDiffList} from "../model/candidatesinDiffList";
 })
 
 export class RecruiterDashboardComponent implements OnInit {
-  company_name:string;
-  uploaded_image_path:string;
-  public shortList:any = ValueConstant.SHORT_LISTED_CANDIDATE;
-  public cartList:any = ValueConstant.CART_LISTED_CANDIDATE;
-  public appliedList:any = ValueConstant.APPLIED_CANDIDATE;
-  public rejecteList:any = ValueConstant.REJECTED_LISTED_CANDIDATE;
-  private recruiter:any = {
+  company_name: string;
+  uploaded_image_path: string;
+  public shortList: any = ValueConstant.SHORT_LISTED_CANDIDATE;
+  public cartList: any = ValueConstant.CART_LISTED_CANDIDATE;
+  public appliedList: any = ValueConstant.APPLIED_CANDIDATE;
+  public rejecteList: any = ValueConstant.REJECTED_LISTED_CANDIDATE;
+  private recruiter: any = {
     _id: ''
   };
-  private jobList:any[] = new Array(0);
-  private jobCount:any;
-  private companyName:any;
-  private selectedJobProfile:JobPosterModel= new JobPosterModel();
-  private isJobSelected:boolean;
-  private showQCard:boolean;
+  private jobList: any[] = new Array(0);
+  private jobCount: any;
+  private companyName: any;
+  private recuriterJobViewMode: RecruiterJobView = new RecruiterJobView()
+  private selectedJobProfile: JobPosterModel = new JobPosterModel();
+  private isJobSelected: boolean;
+  private showQCard: boolean;
   private candidateIDS = new Array(0);
   private newcandidateIDS = new Array(0);
-  private candidateInCartIDS:string[] = new Array(0);
-  private newcandidateInCartIDS:string[] = new Array(0);
+  private candidateInCartIDS: string[] = new Array(0);
+  private newcandidateInCartIDS: string[] = new Array(0);
   private ids = new Array();
-  private isIdDuplicate:boolean = false;
-  private isPresent:boolean = false;
+  private isIdDuplicate: boolean = false;
+  private isPresent: boolean = false;
   private rejectedCandidatesIDS = new Array(0);
   private appliedCandidatesIDSHistroy = new Array(0);
   private newrejectedCandidatesIDS = new Array(0);
   private appliedCandidatesIDS = new Array(0);
   private newappliedCandidatesIDS = new Array(0);
-  private candidates:CandidateQCard[] = new Array(0);
-  private buttonModel:RecruiterDashboardButton = new RecruiterDashboardButton();
-  private candidatesInCart:CandidateQCard[] = new Array(0);
-  private candidatesshortlisted:CandidateQCard[] = new Array(0);
-  private candidateApplied:CandidateQCard[] = new Array(0);
-  private candidateRejected:CandidateQCard[] = new Array(0);
-  private newcandidates:CandidateQCard[] = new Array(0);
-  private removeFromlist:string[] = new Array(0);
-  private newSearchListlist:string[] = new Array(0);
-  private newSearchListlistTwo:string[] = new Array(0);
-  private removerejectedList:string[] = new Array(0);
+  private candidates: CandidateQCard[] = new Array(0);
+  private buttonModel: RecruiterDashboardButton = new RecruiterDashboardButton();
+  private candidatesInCart: CandidateQCard[] = new Array(0);
+  private candidatesshortlisted: CandidateQCard[] = new Array(0);
+  private candidateApplied: CandidateQCard[] = new Array(0);
+  private candidateRejected: CandidateQCard[] = new Array(0);
+  private newcandidates: CandidateQCard[] = new Array(0);
+  private removeFromlist: string[] = new Array(0);
+  private newSearchListlist: string[] = new Array(0);
+  private newSearchListlistTwo: string[] = new Array(0);
+  private removerejectedList: string[] = new Array(0);
 
-  constructor(private qCardFilterService:QCardFilterService, private _router:Router, private recruiterDashboardService:RecruiterDashboardService,
-              private qCardViewService:RecruiteQCardView2Service, private candidateLists:RecruitercandidatesListsService) {
+  private recruiterDashboard: RecruiterDashboard = new RecruiterDashboard();
+  private recruiterHeaderDetails: RecruiterHeaderDetails = new RecruiterHeaderDetails();
+
+  constructor(private qCardFilterService: QCardFilterService, private _router: Router, private recruiterDashboardService: RecruiterDashboardService,
+              private qCardViewService: RecruiteQCardView2Service, private candidateLists: RecruitercandidatesListsService) {
   }
 
 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              getRecruiterData() {debugger
+  getRecruiterData() {
     this.recruiterDashboardService.getJobList()
       .subscribe(
-        data => {
-          if (data.data[0] != undefined)
-            this.recruiter = data.data[0];
-          this.jobList = this.recruiter.postedJobs;
-          this.companyName = this.recruiter.company_name;
-          if (this.jobList.length >= 0)
-            this.jobCount = this.jobList.length                                                                                                                             ;
+        (data: any) => {
+          this.recruiterDashboard = <RecruiterDashboard>data.data[0];
+          this.recruiterHeaderDetails = <RecruiterHeaderDetails>data.jobCountModel;
         });
   }
 
   ngOnInit() {
     this.getRecruiterData();
-    this.company_name = LocalStorageService.getLocalValue(LocalStorage.COMPANY_NAME);
-    this.uploaded_image_path = LocalStorageService.getLocalValue(LocalStorage.PROFILE_PICTURE); //TODO:Get it from get user call.
+    /* this.company_name = LocalStorageService.getLocalValue(LocalStorage.COMPANY_NAME);
+     this.uploaded_image_path = LocalStorageService.getLocalValue(LocalStorage.PROFILE_PICTURE); //TODO:Get it from get user call.
 
-    if (this.uploaded_image_path === "undefined" || this.uploaded_image_path === null) {
-      this.uploaded_image_path = ImagePath.PROFILE_IMG_ICON;
-    } else {
-      this.uploaded_image_path = this.uploaded_image_path.substring(4, this.uploaded_image_path.length - 1).replace('"', '');
-      this.uploaded_image_path = AppSettings.IP + this.uploaded_image_path;
-    }
+     if (this.uploaded_image_path === "undefined" || this.uploaded_image_path === null) {
+     this.uploaded_image_path = ImagePath.PROFILE_IMG_ICON;
+     } else {
+     this.uploaded_image_path = this.uploaded_image_path.substring(4, this.uploaded_image_path.length - 1).replace('"', '');
+     this.uploaded_image_path = AppSettings.IP + this.uploaded_image_path;
+     }*/
   }
 
-  rejectedCandidates() {
+  /*rejectedCandidates() {
     this.buttonModel.isShowViewProfileButton = true;
 
     this.buttonModel.isShowRemoveButton = true;
@@ -125,12 +123,12 @@ export class RecruiterDashboardComponent implements OnInit {
       .subscribe(
         data => {
           this.candidateRejected = data;
-          this.selectedJobProfile.numberOfCandidatesInList.rejected= data.length;
+          this.selectedJobProfile.numberOfCandidatesInList.rejected = data.length;
 
         });
     this.newrejectedCandidatesIDS = [];
 
-  }
+  }*/
 
   showAllJobs() {
     this.qCardFilterService.clearFilter();
@@ -139,7 +137,7 @@ export class RecruiterDashboardComponent implements OnInit {
     this.getRecruiterData();
   }
 
-  appliedCandidates() {
+  /*appliedCandidates() {
     this.buttonModel.isShowViewProfileButton = true;
     this.buttonModel.isShowRejectButton = true;
     this.buttonModel.isShowAddToCartButton = true;
@@ -172,16 +170,29 @@ export class RecruiterDashboardComponent implements OnInit {
       .subscribe(
         data => {
           this.candidateApplied = data;
-          this.selectedJobProfile.numberOfCandidatesInList.applied  = data.length;
+          this.selectedJobProfile.numberOfCandidatesInList.applied = data.length;
 
         });
 
     this.newappliedCandidatesIDS = [];
-  }
+  }*/
 
-  showMatchedCandidate() {
+  /*showMatchedCandidate() {
     this.showQCard = false;
     this.qCardFilterService.clearFilter();
+    this.getRecruiterData();
+    for (let x of  this.recruiterDashboard.postedJobs) {
+      if (x._id === this.recuriterJobViewMode.jobProfileModel._id) {
+        this.recuriterJobViewMode.jobProfileModel = x;
+      }
+    }
+    this.qCardViewService.getSearchedcandidate(this.recuriterJobViewMode.jobProfileModel)
+      .subscribe(
+        data => {
+          this.candidates = data;
+          console.log('q card data', this.candidates);
+          /!*    this.matches = this.candidates.length*!/
+        });
     for (let item of this.removeFromlist) {
       for (let item2 of this.rejectedCandidatesIDS) {
         if (item === item2) {
@@ -218,9 +229,9 @@ export class RecruiterDashboardComponent implements OnInit {
 
     this.newSearchListlist = [];
 
-  }
+  }*/
 
-  showShortlistedCandidate() {
+ /* showShortlistedCandidate() {
     this.buttonModel.isShowRemoveButton = true;
     this.buttonModel.isShowViewFullProfileButton = false;
     this.buttonModel.isShowRejectButton = true;
@@ -253,13 +264,13 @@ export class RecruiterDashboardComponent implements OnInit {
       .subscribe(
         data => {
           this.candidatesshortlisted = data;
-          this.selectedJobProfile.numberOfCandidatesInList.shortlist= data.length;
+          this.selectedJobProfile.numberOfCandidatesInList.shortlist = data.length;
 
         });
     this.newcandidateIDS = [];
-  }
+  }*/
 
-  removeFromRejectedList(reject:any) {
+  removeFromRejectedList(reject: any) {
     for (let item of  this.removerejectedList) {
       if (item === reject) {
         this.isIdDuplicate = true;
@@ -272,7 +283,7 @@ export class RecruiterDashboardComponent implements OnInit {
     this.isIdDuplicate = false;
   }
 
-  removeFromIds(reject:any) {
+  removeFromIds(reject: any) {
     for (let item of  this.removeFromlist) {
       if (item === reject) {
         this.isIdDuplicate = true;
@@ -285,7 +296,7 @@ export class RecruiterDashboardComponent implements OnInit {
     this.isIdDuplicate = false;
   }
 
-  rejectedIds(model:any) {
+  rejectedIds(model: any) {
     this.showQCard = true;
     this.candidates = [];
     if (model.updatedCandidateRejectedId != undefined) {
@@ -316,7 +327,7 @@ export class RecruiterDashboardComponent implements OnInit {
 
   }
 
-  appliedToCartIds(item:any) {
+  appliedToCartIds(item: any) {
     if (item != undefined) {
       this.candidateInCartIDS.push(item);
       this.appliedCandidatesIDSHistroy.push(item);
@@ -325,7 +336,7 @@ export class RecruiterDashboardComponent implements OnInit {
   }
 
 
-  shortlistToCartIds(item:any) {
+  shortlistToCartIds(item: any) {
     this.showQCard = true;
     this.candidates = [];
 
@@ -351,7 +362,7 @@ export class RecruiterDashboardComponent implements OnInit {
 
   }
 
-  updateIds(model:any) {
+  updateIds(model: any) {
     this.showQCard = true;
     this.candidates = [];
 
@@ -379,6 +390,16 @@ export class RecruiterDashboardComponent implements OnInit {
 
   }
 
+  incrementListCounts() {
+
+    this.recuriterJobViewMode.numberOfMatchedCandidates++;
+    this.recuriterJobViewMode.numberOfCandidatesInCart++;
+    this.recuriterJobViewMode.numberOfCandidatesApplied++;
+    this.recuriterJobViewMode.numberOfCandidatesrejected++;
+
+
+  }
+
   candidateInCart() {
     this.showQCard = true;
     this.qCardFilterService.clearFilter();
@@ -388,78 +409,84 @@ export class RecruiterDashboardComponent implements OnInit {
     this.buttonModel.isShowViewProfileButton = false;
     this.buttonModel.isShowAddToCartButton = false;
 
-
-    let i = 0;
-    for (let item1 of this.candidateInCartIDS) {
-
-      for (let item2 of this.removeFromlist) {
-
-        if (item1 === item2) {
-          this.isPresent = true;
-        }
-      }
-      if (this.isPresent === false) {
-        this.newcandidateInCartIDS.push(item1);
-      }
-      this.isPresent = false;
-      i++;
-    }
-
-
-    this.qCardViewService.getCandidatesdetails(this.newcandidateInCartIDS, this.selectedJobProfile)
+    this.recruiterDashboardService.getCandidatesOfLists(this.recuriterJobViewMode.jobProfileModel._id, ValueConstant.CART_LISTED_CANDIDATE)
       .subscribe(
         data => {
           this.candidatesInCart = data;
-          this.selectedJobProfile.numberOfCandidatesInList.cart= data.length;
+          this.selectedJobProfile.numberOfCandidatesInList.cart = data.length;
         });
-    this.newcandidateInCartIDS = [];
+    /* let i = 0;
+     for (let item1 of this.candidateInCartIDS) {
+
+     for (let item2 of this.removeFromlist) {
+
+     if (item1 === item2) {
+     this.isPresent = true;
+     }
+     }
+     if (this.isPresent === false) {
+     this.newcandidateInCartIDS.push(item1);
+     }
+     this.isPresent = false;
+     i++;
+     }
+
+
+     this.qCardViewService.getCandidatesdetails(this.newcandidateInCartIDS, this.selectedJobProfile)
+     .subscribe(
+     data => {
+     this.candidatesInCart = data;
+     this.selectedJobProfile.numberOfCandidatesInList.cart= data.length;
+     });
+     this.newcandidateInCartIDS = [];*/
   }
 
-  latestSearchResultCount(latestValue : number){
-      this.selectedJobProfile.numberOfCandidatesInList.matched=latestValue;
+  latestSearchResultCount(latestValue: number) {
+    this.selectedJobProfile.numberOfCandidatesInList.matched = latestValue;
   }
 
-  jobSelected(job:any) {
+  jobSelected(job: any) {
     this.isJobSelected = true;
-    this.selectedJobProfile = job;
-    this.selectedJobProfile.numberOfCandidatesInList = new CandidatesInDiffList();
-    if (this.selectedJobProfile.candidate_list.length != 0) {
-      for (let item of this.selectedJobProfile.candidate_list) {
-        for(let data of item.ids){
-          if(data=="undefined"){
-            item.ids.splice(item.ids.indexOf(data),1);
+    this.recuriterJobViewMode.jobProfileModel = job;
+    /* this.selectedJobProfile = job;*/
+    /*  this.selectedJobProfile.numberOfCandidatesInList = new CandidatesInDiffList();*/
+    if (this.recuriterJobViewMode.jobProfileModel.candidate_list.length != 0) {
+      for (let item of this.recuriterJobViewMode.jobProfileModel.candidate_list) {
+        for (let data of item.ids) {
+          if (data == "undefined") {
+            item.ids.splice(item.ids.indexOf(data), 1);
           }
         }
         if (item.name == "shortListed") {
           if (item.ids.length > 0) {
             this.candidateIDS = item.ids;
-            this.selectedJobProfile.numberOfCandidatesInList.shortlist = item.ids.length;
+            /*this.selectedJobProfile.numberOfCandidatesInList.shortlist = item.ids.length;*/
           }
         }
         if (item.name == "cartListed") {
           if (item.ids.length > 0) {
             this.candidateInCartIDS = item.ids;
-            this.selectedJobProfile.numberOfCandidatesInList.cart = item.ids.length;
+            this.recuriterJobViewMode.numberOfCandidatesInCart = item.ids.length;
           }
         }
         if (item.name == "rejectedList") {
           if (item.ids.length > 0) {
             this.rejectedCandidatesIDS = item.ids;
-            this.selectedJobProfile.numberOfCandidatesInList.rejected = item.ids.length;
+            this.recuriterJobViewMode.numberOfCandidatesrejected = item.ids.length;
 
           }
         }
         if (item.name == "applied") {
           if (item.ids.length > 0) {
             this.appliedCandidatesIDS = item.ids;
-            this.selectedJobProfile.numberOfCandidatesInList.applied = item.ids.length;
+            this.recuriterJobViewMode.numberOfCandidatesApplied = item.ids.length;
 
           }
         }
       }
     }
-    setTimeout(()=> {
-      let matcheElement:any = document.getElementById("matched_anchor");
+    setTimeout(() => {
+      let matcheElement: any = document.getElementById("matched_anchor");
       matcheElement.click();
     }, 300);
 

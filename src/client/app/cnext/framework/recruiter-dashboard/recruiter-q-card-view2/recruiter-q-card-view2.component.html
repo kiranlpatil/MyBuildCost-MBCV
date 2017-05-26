@@ -1,15 +1,16 @@
+<!--
 <div class="dashboard-view clearfix">
   <header class="col-sm-12 q-card-header">
     <ul>
       <li>
-        <!--<div class="match-cases">
+        &lt;!&ndash;<div class="match-cases">
           <label class="radio-inline">
             <input type="radio" name="radiogroup" value="{{match.aboveMatch}}" (click)="matching($event.target.value)">AboveMatch
           </label>
           <label class="radio-inline">
             <input type="radio" name="radiogroup" value="{{match.belowMatch}}" (click)="matching($event.target.value)">BelowMatch
           </label>
-        </div>-->
+        </div>&ndash;&gt;
       </li>
       <li>
         <p>Showing {{qCardCount.count}} out of {{candidates.length}}</p>
@@ -18,10 +19,10 @@
         <a (click)="clearFilter()">Clear all filters</a>
       </li>
     </ul>
-   <!-- <div class="search">
+   &lt;!&ndash; <div class="search">
       <input class="form-control" type="text" />
       <button class="btn btn-search" type="button"><img src="./assets/framework/images/dashboard/search.png"></button>
-    </div>-->
+    </div>&ndash;&gt;
     <div class="sort-by">
       <label>Sort by</label>
       <select id="menu" [(ngModel)]="qCardModel.sortValue">
@@ -35,18 +36,18 @@
          *ngFor="let item of candidates | dashboardfilter:candidateFilter:qCardCount | dashboardsort:qCardModel.sortValue">
       <div class="panel clearfix">
         <ul>
-          <!--<li><span class="glyphicon glyphicon-heart-empty" [hidden]="!showButton.isShowRejectButton" (click)="rejectCandidate(item)"></span></li>-->
-          <!--<li><button [hidden]="!showButton.isShowRejectButton"  type="button" (click)="rejectCandidate(item)">Reject</button></li>-->
-        <!--  <li>
+          &lt;!&ndash;<li><span class="glyphicon glyphicon-heart-empty" [hidden]="!showButton.isShowRejectButton" (click)="rejectCandidate(item)"></span></li>&ndash;&gt;
+          &lt;!&ndash;<li><button [hidden]="!showButton.isShowRejectButton"  type="button" (click)="rejectCandidate(item)">Reject</button></li>&ndash;&gt;
+        &lt;!&ndash;  <li>
             <div [hidden]="!showButton.isShowViewProfileButton">
               <span class="glyphicon glyphicon-eye-open" data-toggle="modal" [attr.data-target]="'#'+listName"
                     (click)="viewProfile(item,false)"></span>
             </div>
-          </li>-->
+          </li>&ndash;&gt;
           <li>
             <div [hidden]="!showButton.isShowRemoveButton">
-             <!-- <span class="glyphicon glyphicon-remove" [hidden]="!showButton.isShowRemoveButton"
-                    (click)="Cancel(item)"></span>-->
+             &lt;!&ndash; <span class="glyphicon glyphicon-remove" [hidden]="!showButton.isShowRemoveButton"
+                    (click)="Cancel(item)"></span>&ndash;&gt;
               <img alt="close_img" src="./assets/framework/images/dashboard/close-red.png" [hidden]="!showButton.isShowRemoveButton" (click)="Cancel(item)">
             </div>
           </li>
@@ -60,8 +61,8 @@
           <p><span class="glyphicon glyphicon-stats"></span>Skills {{item.matching}}% match</p>
         </div>
 
-        <!--<button [hidden]="!showButton.isShowRemoveButton"  type="button" (click)="Cancel(item)">Remove</button>-->
-       <!-- <button [hidden]="!showButton.isShowRejectButton"  type="button" (click)="rejectCandidate(item)">Reject</button>-->
+        &lt;!&ndash;<button [hidden]="!showButton.isShowRemoveButton"  type="button" (click)="Cancel(item)">Remove</button>&ndash;&gt;
+       &lt;!&ndash; <button [hidden]="!showButton.isShowRejectButton"  type="button" (click)="rejectCandidate(item)">Reject</button>&ndash;&gt;
         <div class="button-group" [hidden]="!showButton.isShowViewFullProfileButton">
           <button class="btn btn-cart btn-block" type="button" (click)="viewProfile(item,true)" data-toggle="modal" [attr.data-target]="'#'+listName" >View Full Profile</button>
         </div>
@@ -91,9 +92,9 @@
             <div  class="col-sm-12">
               <div *ngIf="!isFullProfileView">
                 <h5>{{selectedPerson.first_name}}{{selectedPerson.last_name}}</h5>
-               <!-- <h5>Contact:{{selectedPerson.mobile_number}}</h5>
+               &lt;!&ndash; <h5>Contact:{{selectedPerson.mobile_number}}</h5>
                 <h5>Email:{{selectedPerson.email}}</h5>
-                <h5>Status{{selectedPerson.status}}</h5>-->
+                <h5>Status{{selectedPerson.status}}</h5>&ndash;&gt;
                 <h5>Skills:{{selectedPerson.matching}}</h5>
                 <cn-tabular-list-view [roles]="selectedCandidate.industry.roles"></cn-tabular-list-view>
                 <div [hidden]="'rejectedList'===listName">
@@ -113,3 +114,4 @@
   </div>
 </div>
 
+-->
