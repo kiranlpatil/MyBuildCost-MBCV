@@ -9,10 +9,11 @@ $theme-color: #27aae1;
 $orange: #fbb040;
 $green: #8dc63f;
 $red: #ef4136;
+$border-light: #efefef;
 
 
 .profile-wrapper {
-  margin: 100px auto 15px;
+  margin: 140px auto 15px;
 
  /* .col-sm-3 {
     width: 25%;
@@ -180,6 +181,49 @@ $red: #ef4136;
 
     li:nth-child(5)  > a > .count {
       background-color: $red;
+    }
+  }
+
+  .q-card-header {
+    background: $white;
+    position: fixed;
+    top: 198px;
+    z-index: 999;
+    padding: 4px 215px 4px 5px;
+    border-bottom: 1px solid $border-light;
+
+    ul {
+      margin-top: 7px;
+    }
+  }
+
+  .match-cases{
+    padding: 0;
+    border: 1px solid $border-color;
+
+    label{
+      position: relative;
+      z-index: 2;
+      color: $text-color;
+      padding: 5px;
+      margin: 0;
+    }
+
+    input{
+      display: none;
+    }
+
+    input:checked + span{
+      box-shadow: 0 0 4px 0 #a5d6f7 inset, 0 0 1px 0 #a5d6f7;
+      position: absolute;
+      /* z-index: -1; */
+      width: 100%;
+      height: 100%;
+      left: 0;
+      top: 0px;
+      /* display: inline-block; */
+      padding: 5px;
+      color: $theme-color;
     }
   }
 
