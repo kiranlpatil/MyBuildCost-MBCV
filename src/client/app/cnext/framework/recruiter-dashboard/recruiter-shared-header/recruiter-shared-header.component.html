@@ -37,20 +37,21 @@
               <a id="simple-dropdown" class="simple-dropdown" data-toggle="dropdown"
                  (click)="openDropdownProfile();">
                 <img src= "{{uploaded_image_path}}"  alt="User Profile" />
+                <span class="caret"></span>
               </a>
               <ul class="dropdown-menu mobile-dropdown">
                <!-- navigateTo('/create_profile');-->
                 <li role="menuitem" [routerLinkActive]="['active']" >
                   <a class="dropdown-item" [routerLink]="['profile-edit']"
                      (click)="toggleMenu();">
-                    <span class="glyphicon glyphicon-cog"></span>Edit Profile
+                    <span class="glyphicon glyphicon-edit"></span>Edit Profile
                   </a>
                 </li>
 
                 <li role="menuitem" >
                   <a class="dropdown-item" [routerLink]="['recruiter_dashboard']"
                      (click)="navigateTo('/recruiterdashboard'); toggleMenu();">
-                    <span class="glyphicon glyphicon-home"></span>My Dashboard
+                    <span class="glyphicon glyphicon-th"></span>My Dashboard
                   </a>
                 </li>
 
