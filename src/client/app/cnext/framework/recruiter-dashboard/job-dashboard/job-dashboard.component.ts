@@ -6,6 +6,7 @@ import {RecruiterJobView} from "../../model/recruiter-job-view";
 import {ValueConstant} from "../../../../framework/shared/constants";
 import {CandidateQCard} from "../../model/candidateQcard";
 import {CandidateQListModel} from "./q-cards-candidates";
+import {JobPosterModel} from "../../model/jobPoster";
 
 @Component({
   moduleId: module.id,
@@ -20,6 +21,7 @@ export class JobDashboardComponent implements OnInit {
   jobId : any;
   private recruiterJobView:RecruiterJobView = new RecruiterJobView();
   private candidateQlist : CandidateQListModel= new CandidateQListModel();
+  private selectedJobProfile: JobPosterModel = new JobPosterModel();
   constructor(private activatedRoute:ActivatedRoute,private jobDashboardService :JobDashboardService) {
 
   }
@@ -36,6 +38,7 @@ export class JobDashboardComponent implements OnInit {
     this.jobDashboardService.getPostedJobDetails(this.jobId)
       .subscribe(
         (data: any) => {
+          this.selectedJobProfile = data.data.industry.postedJobs[0];
 
          for(let item of data.data.industry.postedJobs[0].candidate_list) {
            if(item.name == ValueConstant.APPLIED_CANDIDATE)

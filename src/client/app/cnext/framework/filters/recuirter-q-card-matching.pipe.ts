@@ -6,7 +6,7 @@ import {ValueConstant} from "../../../framework/shared/constants";
 
 export class RecuirterQCardMatchingPipe implements PipeTransform {
 
-  transform(array: Array<CandidateQCard>, args: any,totalQCardMatches:any): Array<any> {
+  transform(array: Array<CandidateQCard>, args: any, totalQCardMatches:any): Array<any> {
 
     var defaultMatch = ValueConstant.VALUE_FOR_CNDIDATES_PERCENT_MATCHING_LOWER_BOUND;
     var result:CandidateQCard[];
