@@ -7,6 +7,8 @@ import {ValueConstant} from "../../../../framework/shared/constants";
 import {CandidateQCard} from "../../model/candidateQcard";
 import {CandidateQListModel} from "./q-cards-candidates";
 import {JobPosterModel} from "../../model/jobPoster";
+import {RecruiterHeaderDetails} from "../../model/recuirterheaderdetails";
+import {ReferenceService} from "../../model/newClass";
 
 @Component({
   moduleId: module.id,
@@ -19,13 +21,18 @@ import {JobPosterModel} from "../../model/jobPoster";
 export class JobDashboardComponent implements OnInit {
 
   jobId : any;
+  jobCount:any;
+ private  headerInfo:any;
   private recruiterJobView:RecruiterJobView = new RecruiterJobView();
   private candidateQlist : CandidateQListModel= new CandidateQListModel();
   private selectedJobProfile: JobPosterModel = new JobPosterModel();
-  constructor(private activatedRoute:ActivatedRoute,private jobDashboardService :JobDashboardService) {
+  constructor(public refrence:ReferenceService,private activatedRoute:ActivatedRoute,private jobDashboardService :JobDashboardService) {
 
   }
   ngOnInit() {
+    this.headerInfo =  this.refrence.data;
+    this.jobCount=this.headerInfo.numberOfJobposted;
+
     this.activatedRoute.params.subscribe(params => {
       this.jobId = params['jobId'];
     });

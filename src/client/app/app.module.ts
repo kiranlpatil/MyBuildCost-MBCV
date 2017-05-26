@@ -152,6 +152,7 @@ import {MyGoogleDirective} from "./framework/registration/candidate/google-our-p
 import {CandidateDashboardHeaderComponent} from "./cnext/framework/candidate-dashboard/candidate-dashboard-header/candidate-dashboard-header.component";
 import {JobDashboardComponent} from "./cnext/framework/recruiter-dashboard/job-dashboard/job-dashboard.component";
 import {JobDashboardService} from "./cnext/framework/recruiter-dashboard/job-dashboard/job-dashboard.service";
+import {ReferenceService} from "./cnext/framework/model/newClass";
 
 //C-NEXT IMPORTS
 
@@ -329,7 +330,8 @@ import {JobDashboardService} from "./cnext/framework/recruiter-dashboard/job-das
     CandidateInCartService,
     RecruitercandidatesListsService,
     QCardFilterService,
-    JobDashboardService
+    JobDashboardService,
+    ReferenceService
 
   ],
   bootstrap: [AppComponent]

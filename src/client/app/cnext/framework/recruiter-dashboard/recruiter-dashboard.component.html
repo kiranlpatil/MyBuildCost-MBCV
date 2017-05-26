@@ -9,7 +9,7 @@
     <div class="tab-content">
       <div id="posted-job" class="tab-pane fade active in clearfix">
         <div [hidden]="isJobSelected">
-          <cn-job-lister [jobListInput]="recruiterDashboard.postedJobs" (jobEventEmitter)="jobSelected($event)"></cn-job-lister>
+          <cn-job-lister [headerInfoForJob]="recruiterHeaderDetails" [jobListInput]="recruiterDashboard.postedJobs" (jobEventEmitter)="jobSelected($event)"></cn-job-lister>
         </div>
        <!-- <div class="candidate-listing" [hidden]="!isJobSelected" >
           <cn-filter [selectedJob]="selectedJobProfile" [role]=true></cn-filter>

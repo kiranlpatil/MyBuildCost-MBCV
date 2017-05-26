@@ -1,4 +1,4 @@
-<div class="dashboard-view clearfix"><!--[hidden]="!isShowQCardView"-->
+<div class="dashboard-view clearfix"> <!--[hidden]="!isShowQCardView"-->
   <header class="col-sm-12">
     <ul>
       <li>
@@ -122,8 +122,8 @@
     </div>
   </div>
 </div>
-
-<!--<div class="modal" [style.display]="getStyleModal()">
+</div>
+<div *ngIf="type!='cartListed'"class="modal" [style.display]="getStyleModal()">
   <div class="modal-bg">
     <div class="modal-dialog modal-md">
       <div class="modal-content">
@@ -132,8 +132,8 @@
             <div class="col-sm-12" *ngIf="selectedCandidate != undefined" >
               <div >
                 <h5>{{candidateDetails.first_name}}{{candidateDetails.last_name}}</h5>
-               &lt;!&ndash; <h5>Contact:{{candidateDetails.mobile_number}}</h5>
-                <h5>Email:{{candidateDetails.email}}</h5>&ndash;&gt;
+               <!-- <h5>Contact:{{candidateDetails.mobile_number}}</h5>
+                <h5>Email:{{candidateDetails.email}}</h5>-->
                 <div *ngIf="selectedCandidate.industry != undefined ">
                 <cn-tabular-list-view [roles]="selectedCandidate.industry.roles"></cn-tabular-list-view>
               </div>
@@ -151,4 +151,8 @@
     </div>
   </div>
 </div>
-</div>-->
+</div>
+
+<div *ngIf="type=='cartListed'" class="modal" [style.display]="getStyleModal()">
+  <cn-candidate-view [candidateId]="selectedCandidate._id"></cn-candidate-view>
+</div>

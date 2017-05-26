@@ -8,6 +8,9 @@ import {ValueConstant} from "../../../../framework/shared/constants";
 import {QCardFilter} from "../../model/q-card-filter";
 import {CandidateQListModel} from "../job-dashboard/q-cards-candidates";
 import {RecruiterJobView} from "../../model/recruiter-job-view";
+import {Candidate} from "../../model/candidate";
+import {CandidateDetail} from "../../../../framework/registration/candidate/candidate";
+import {CandidateProfileService} from "../../candidate-profile/candidate-profile.service";
 
 
 @Component({
@@ -31,10 +34,13 @@ export class QCardviewComponent {
   private match: MatchCandidate = new MatchCandidate();
   private filterMeta: QCardFilter;
   private matchFormat: string = 'aboveMatch';
+  private selectedCandidate: Candidate = new Candidate();
+  private candidateDetails: CandidateDetail = new CandidateDetail();
+  private showModalStyle: boolean = false;
 
 
   constructor(private qCardFilterService: QCardFilterService,
-              private qCardViewService: QCardViewService) {
+              private profileCreatorService: CandidateProfileService,private qCardViewService: QCardViewService) {
 
     this.qCardFilterService.candidateFilterValue$.subscribe(
       (data: QCardFilter) => {
@@ -140,6 +146,30 @@ export class QCardviewComponent {
 
   matching(value: any) {
     this.matchFormat = value;
+  }
+  viewProfile(candidateid: string) {
+    this.profileCreatorService.getCandidateDetailsOfParticularId(candidateid).subscribe(
+      candidateData => this.OnCandidateDataSuccess(candidateData));
+
+  }
+
+  OnCandidateDataSuccess(candidate: any) {
+    this.selectedCandidate = candidate.data;
+    this.candidateDetails = candidate.metadata;
+    this.showModalStyle = !this.showModalStyle;
+
+    //    this.candidateDetails = candidateData.metadata;
+  }
+
+  getStyleModal() {//TODO remove this from all model
+    if (this.showModalStyle) {
+      return 'block';
+    } else {
+      return 'none';
+    }
+  }
+  closeJob(){
+    this.showModalStyle = !this.showModalStyle;
   }
 
 }

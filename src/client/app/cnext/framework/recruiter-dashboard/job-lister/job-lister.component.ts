@@ -1,4 +1,4 @@
-import {  Component,Input,EventEmitter,Output  } from '@angular/core';
+import {Component, Input, EventEmitter, Output, OnInit, OnDestroy} from '@angular/core';
 import {CandidateNumberDifferentList} from "./candidate-diff-list";
 import {JobPosterModel} from "../../model/jobPoster";
 import {QCardsortBy} from "../../model/q-cardview-sortby";
@@ -6,6 +6,8 @@ import {CandidateInCartService} from "../../candidate-in-cart.service";
 import {ValueConstant} from "../../../../framework/shared/constants";
 import {RecruiterDashboard} from "../../model/recruiter-dashboard";
 import {Router} from "@angular/router";
+import {RecruiterHeaderDetails} from "../../model/recuirterheaderdetails";
+import {ReferenceService} from "../../model/newClass";
 
 
 
@@ -13,11 +15,12 @@ import {Router} from "@angular/router";
   moduleId: module.id,
   selector: 'cn-job-lister',
   templateUrl: 'job-lister.component.html',
-  styleUrls: ['job-lister.component.css']
+  styleUrls: ['job-lister.component.css'],
 })
 
-export class JobListerComponent {
+export class JobListerComponent implements OnInit, OnDestroy{
   @Input() jobListInput: any[] = new Array(0);
+  @Input() headerInfoForJob:RecruiterHeaderDetails;
   //public jobList:JobPosterModel[] = new Array(0);
   //public jobListToCheck:JobPosterModel[] = new Array(0);
   private toggle:boolean=false;
@@ -26,7 +29,7 @@ export class JobListerComponent {
   //private candidatesInLists : RecruiterDashboard= new RecruiterDashboard();
   @Output() jobEventEmitter : EventEmitter<any> =new EventEmitter();
 
-  constructor(private _router:Router) {
+  constructor(private _router:Router,public refrence:ReferenceService) {
     this.qCardModel.name='Date';
   }
 
@@ -50,7 +53,12 @@ export class JobListerComponent {
     }*/
   }
 
+  ngOnInit() {
+  }
 
+  ngOnDestroy() {
+    this.refrence.data = this.headerInfoForJob;
+  }
   sortBy(){
     this.toggleFormat();
   }
