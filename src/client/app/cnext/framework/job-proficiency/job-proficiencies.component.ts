@@ -1,6 +1,7 @@
 import {Component, Input, EventEmitter, Output} from "@angular/core";
 import {Section} from "../model/candidate";
 import {JobPosterModel} from "../model/jobPoster";
+import {ValueConstant} from "../../../framework/shared/constants";
 
 
 
@@ -18,6 +19,13 @@ export class JobProficienciesComponent {
   @Output() onComplete = new EventEmitter();
   private showButton:boolean = true;
   private disablebutton:boolean = true;
+  private maxNumberOfMandatory:number;
+  private maxNumberOfAdditional:number;
+  
+  ngOnInit(){
+    this.maxNumberOfMandatory=ValueConstant.MAX_MANDATORY_PROFECIENCES;
+    this.maxNumberOfAdditional=ValueConstant.MAX_ADDITIONAL_PROFECIENCES;
+  }
 
   onMandatoryProficiencyComplete(mandatory:string[]){
     this.jobPosterModel.proficiencies=mandatory;

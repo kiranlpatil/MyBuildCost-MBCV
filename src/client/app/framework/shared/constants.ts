@@ -121,7 +121,8 @@ export class ValueConstant {
   public static MAX_WORKAREA:number = 3;
   public static MAX_INTERESTEDINDUSTRY:number = 7;
   public static MAX_PROFECIENCES:number = 25;
-  public static MAX_DOMAINS:number = 10;
+  public static MAX_MANDATORY_PROFECIENCES:number = 5;
+  public static MAX_ADDITIONAL_PROFECIENCES:number = 5;
   public static MAX_YEAR_LIST:number = 60;
   public static MAX_ACADEMIC_YEAR_LIST:number = 50;
   public static SHORT_LISTED_CANDIDATE:string = 'shortListed';

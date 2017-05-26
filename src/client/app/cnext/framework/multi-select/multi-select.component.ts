@@ -11,6 +11,7 @@ import {MultiSelectService} from "./multi-select.service";
 
 export class MultiSelectComponent {
   @Input() selectedData:string[];
+  @Input() maxLength:number;
   @Input() type:string;
   @Input() data:string[];
   @Output() onComplete = new EventEmitter();
@@ -45,7 +46,7 @@ export class MultiSelectComponent {
   
   selectedProficiencyModel(newVal:any) {
     if (newVal !== '') {
-      if (this.selectedProficiencies.length < ValueConstant.MAX_PROFECIENCES) {
+      if (this.selectedProficiencies.length < this.maxLength) {
         if (this.selectedProficiencies.indexOf(newVal) === -1) {
           this.selectedProficiencies.push(newVal);
           this.deleteSelectedProfeciency(newVal);
@@ -56,7 +57,7 @@ export class MultiSelectComponent {
       }
     }
 
-    let emptyInputField: any = document.getElementById("proficiencyId");
+    let emptyInputField: any = document.getElementById(this.type);
     emptyInputField.value = '';
   }
 
@@ -109,7 +110,7 @@ export class MultiSelectComponent {
       }
     }
     this.alreadyPresent = false;
-    let emptyInputField: any = document.getElementById("proficiencyId");
+    let emptyInputField: any = document.getElementById(this.type);
     emptyInputField.value = '';
   }
 }

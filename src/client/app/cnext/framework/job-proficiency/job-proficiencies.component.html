@@ -7,9 +7,9 @@
           capability. <span class="messages">You can edit this list anytime.</span></p>
         <div class="col-sm-12">
           <label>Mandatory Proficiencies</label>
-          <cn-multi-select [type]="Mandatory" [data]="proficiencies" [selectedData]="jobPosterModel.proficiencies" (onComplete)="onMandatoryProficiencyComplete($event)"  ></cn-multi-select>
+          <cn-multi-select [type]="'Mandatory'" [data]="proficiencies" [maxLength]="maxNumberOfMandatory" [selectedData]="jobPosterModel.proficiencies" (onComplete)="onMandatoryProficiencyComplete($event)"  ></cn-multi-select>
           <label>Additional Proficiencies</label>
-          <cn-multi-select [type]="Additional" [data]="proficiencies" [selectedData]="jobPosterModel.additionalProficiencies" (onComplete)="onOptionalProficiencyComplete($event)" ></cn-multi-select>
+          <cn-multi-select [type]="'Additional'" [data]="proficiencies" [maxLength]="maxNumberOfAdditional" [selectedData]="jobPosterModel.additionalProficiencies" (onComplete)="onOptionalProficiencyComplete($event)" ></cn-multi-select>
           <div class="button-group clearfix">
             <button class="btn btn-default"  (click)="highlightedSection.name='none'; highlightedSection.isDisable=false" [hidden]="showButton" >Cancel</button>
             <button class="btn btn-primary" scrollTo scrollTargetSelector="#industry-experience"

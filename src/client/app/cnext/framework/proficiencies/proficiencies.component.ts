@@ -1,5 +1,6 @@
 import {Component, Input, EventEmitter, Output} from "@angular/core";
 import {Section} from "../model/candidate";
+import {ValueConstant} from "../../../framework/shared/constants";
 
 @Component({
   moduleId: module.id,
@@ -14,8 +15,11 @@ export class ProficienciesComponent {
   @Input() proficiencies:string[];
   @Output() onComplete = new EventEmitter();
   @Output() onSelect = new EventEmitter();
+  private maxProficiencies:number;
 
-
+ngOnInit(){
+  this.maxProficiencies=ValueConstant.MAX_PROFECIENCES;
+}
 
   private showButton:boolean = true;
 
