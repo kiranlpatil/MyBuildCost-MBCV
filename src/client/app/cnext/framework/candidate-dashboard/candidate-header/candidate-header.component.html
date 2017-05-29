@@ -33,9 +33,8 @@
           </li>
 
           <li class="dropdown last-child">
-            <div class="dropdown" [class.open]="isOpenProfile">
-              <a id="simple-dropdown" class="simple-dropdown" data-toggle="dropdown"
-                 (click)="openDropdownProfile();">
+            <div class="dropdown">
+              <a class="simple-dropdown dropdown-toggle" data-toggle="dropdown" href="#" >
                 <img src= "assets/framework/images/dashboard/profile.png" alt="User Profile" *ngIf="candidate.basicInformation.picture==undefined"/>
                 <img [src]="getImagePath(candidate.basicInformation.picture)"  alt="User Profile" *ngIf="candidate.basicInformation.picture!=undefined"/>
                 <span class="caret"></span>
@@ -48,20 +47,20 @@
                 <li class="divider"></li>
                 <li role="menuitem" [routerLinkActive]="['active']" *ngIf="candidate.isCompleted==true">
                   <a class="dropdown-item" [routerLink]="['profile-summury']"
-                     (click)="navigateTo('/profile_summury'); toggleMenu();">
+                     (click)="navigateTo('/profile_summury');">
                     <span class="glyphicon glyphicon-user"></span>View Profile
                   </a>
                 </li>
                 <li role="menuitem" [routerLinkActive]="['active']" *ngIf="candidate.isCompleted==true">
                   <a class="dropdown-item" [routerLink]="['profile-edit']"
-                     (click)="navigateTo('/create_profile'); toggleMenu();">
+                     (click)="navigateTo('/create_profile');">
                     <span class="	glyphicon glyphicon-edit"></span>Edit Profile
                   </a>
                 </li>
 
                 <li role="menuitem" *ngIf="candidate.isCompleted==true">
                   <a class="dropdown-item" [routerLink]="['candidate_dashboard']"
-                     (click)="navigateTo('/candidate_dashboard'); toggleMenu();">
+                     (click)="navigateTo('/candidate_dashboard');">
                     <span class="glyphicon glyphicon-th"></span>My Dashboard
                   </a>
                 </li>
