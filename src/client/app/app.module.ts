@@ -119,7 +119,6 @@ import {RecruiterDashboardService} from "./cnext/framework/recruiter-dashboard/r
 import {RecruiterJobSummaryComponent} from "./cnext/framework/one-page-summury/recruiter-job-summary/recruiter-job-summary.component";
 import {RecruiterJobInformation} from "./cnext/framework/one-page-summury/recruiter-job-summary/recruiter-job-information/recruiter-job-information.component";
 //import {GooglePlaceModule} from 'ng2-google-place-autocomplete';
-import {GoogleplaceDirective} from "angular2-google-map-auto-complete/directives/googleplace.directive"
 import {MultiSelectComponent} from "./cnext/framework/multi-select/multi-select.component";
 import {MultiSelectService} from "./cnext/framework/multi-select/multi-select.service";
 import {JobProficienciesComponent} from "./cnext/framework/job-proficiency/job-proficiencies.component";
@@ -172,7 +171,6 @@ import {ReferenceService} from "./cnext/framework/model/newClass";
   declarations: [
     AppComponent,
     ControlMessagesComponent,
-    GoogleplaceDirective,
     MyGoogleDirective,
     LoaderComponent,
     LandingPageComponent,

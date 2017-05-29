@@ -1,4 +1,3 @@
-
 import {Component, OnInit} from "@angular/core";
 import {Router, ActivatedRoute, Params} from '@angular/router';
 import {JobDashboardService} from "./job-dashboard.service";
@@ -27,7 +26,10 @@ export class JobDashboardComponent implements OnInit {
   private whichListVisible : boolean[]= new Array(4);
   private candidateQlist : CandidateQListModel= new CandidateQListModel();
   private selectedJobProfile: JobPosterModel = new JobPosterModel();
-  constructor(public refrence:ReferenceService,private activatedRoute:ActivatedRoute,private jobDashboardService :JobDashboardService) {
+  constructor(public refrence:ReferenceService,
+              private activatedRoute:ActivatedRoute,
+              private jobDashboardService :JobDashboardService,
+              private _router : Router) {
 
   }
   ngOnInit() {
@@ -106,6 +108,12 @@ export class JobDashboardComponent implements OnInit {
               break;
           }
         });
+  }
+
+  navigateTo(navigateTo: string) {
+    if (navigateTo !== undefined ) {
+      this._router.navigate([navigateTo]);
+    }
   }
 
 

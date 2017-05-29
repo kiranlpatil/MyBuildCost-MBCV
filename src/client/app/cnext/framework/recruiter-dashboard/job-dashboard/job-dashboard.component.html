@@ -23,7 +23,7 @@
 
     <cn-filter [selectedJob]="selectedJobProfile" [role]=true></cn-filter>
     <div class="col-sm-12 no-padding">
-      <button class="btn btn-back" (click)="showAllJobs()">All Jobs</button>
+      <button class="btn btn-back" (click)="navigateTo('recruiterdashboard')">All Jobs</button>
       <div class="list-view"  *ngIf="selectedJobProfile!=undefined">
         <div class="panel clearfix">
           <ul>
