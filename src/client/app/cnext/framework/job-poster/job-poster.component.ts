@@ -90,6 +90,9 @@ export class JobPosterComponent {
     }
   }
 
+  closeJob(){
+    this.showModalStyle = !this.showModalStyle;
+  }
   mockupSearch() {
     this.isShowCandidateQCardView=true;
     this.showQCardView.change(this.jobPosterModel);
