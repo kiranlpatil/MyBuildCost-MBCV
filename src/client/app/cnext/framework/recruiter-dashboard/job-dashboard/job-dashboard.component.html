@@ -2,7 +2,7 @@
 <div class="container-fluid profile-wrapper recruiter-profile-wrapper">
   <ul class="nav nav-tabs dashboard-tabs">
     <li class="active"><a data-toggle="tab" href="#">My Job Posts</a></li>
-    <li><a data-toggle="tab" href="#">Post New Job / Search</a></li>
+    <li><a data-toggle="tab" (click)="navigateTo('recruiterdashboard','post_new_job')">Post New Job / Search</a></li>
   </ul>
   <div class="candidate-listing">
     <ul class="nav nav-tabs sub-tabs">
@@ -23,7 +23,7 @@
 
     <cn-filter [selectedJob]="selectedJobProfile" [role]=true></cn-filter>
     <div class="col-sm-12 no-padding">
-      <button class="btn btn-back" (click)="navigateTo('recruiterdashboard')">All Jobs</button>
+      <button class="btn btn-back" (click)="navigateTo('recruiterdashboard',undefined)">All Jobs</button>
       <div class="list-view"  *ngIf="selectedJobProfile!=undefined">
         <div class="panel clearfix">
           <ul>

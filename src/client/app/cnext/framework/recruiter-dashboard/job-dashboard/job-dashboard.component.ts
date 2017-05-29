@@ -3,10 +3,8 @@ import {Router, ActivatedRoute, Params} from '@angular/router';
 import {JobDashboardService} from "./job-dashboard.service";
 import {RecruiterJobView} from "../../model/recruiter-job-view";
 import {ValueConstant} from "../../../../framework/shared/constants";
-import {CandidateQCard} from "../../model/candidateQcard";
 import {CandidateQListModel} from "./q-cards-candidates";
 import {JobPosterModel} from "../../model/jobPoster";
-import {RecruiterHeaderDetails} from "../../model/recuirterheaderdetails";
 import {ReferenceService} from "../../model/newClass";
 
 @Component({
@@ -90,7 +88,7 @@ export class JobDashboardComponent implements OnInit {
     this.jobDashboardService.getSelectedListData(this.jobId, listName)
       .subscribe(
         (data: any) => {
-          switch (listName){
+          switch (listName) {
             case ValueConstant.CART_LISTED_CANDIDATE :
               this.candidateQlist.cartCandidates=data.data;
               this.whichListVisible[1]= true;
@@ -110,9 +108,13 @@ export class JobDashboardComponent implements OnInit {
         });
   }
 
-  navigateTo(navigateTo: string) {
+  navigateTo(navigateTo: string, item : string) {
     if (navigateTo !== undefined ) {
-      this._router.navigate([navigateTo]);
+      if(item) {
+        this._router.navigate([navigateTo , item]);
+      }else {
+        this._router.navigate([navigateTo]);
+      }
     }
   }
 
