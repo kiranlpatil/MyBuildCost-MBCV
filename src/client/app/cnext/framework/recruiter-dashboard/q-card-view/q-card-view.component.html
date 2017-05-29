@@ -32,7 +32,7 @@
       </select>
     </div>
   </header>
-
+  <div class="col-sm-12 text-center" *ngIf="type=='matchedList' && candidates.length==0 || undefined "   >No matching candidates found.</div>
   <div class="card-view clearfix">
     <!--<div class="col-sm-4" *ngFor= "let item of candidates">&lt;!&ndash;| candidatematching: matchFormat&ndash;&gt;-->
       <div class="col-sm-4" *ngFor= "let item of candidates | qcardlistsort:qCardModel.sortValue | qcardmatching: matchFormat: totalQCardMatches :type | qcardlistfilter:filterMeta:qCardCount;let i=index;">
