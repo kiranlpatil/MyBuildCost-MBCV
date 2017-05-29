@@ -81,12 +81,12 @@
               [class.panel-up]="arrow3" [class.panel-down]="!arrow3" (click)="arrow3=!arrow3">Location</h5>
           <div id="location" class="collapse">
             <label class="radio">
-              <input type="radio" name="radiogroup" value="{{location}}"
+              <input type="radio" [attr.id]="'radio-button-1'" name="radiogroup" value="{{location}}"
                      (click)="candidatesFilterByLocation($event.target.value)">
               {{location}}
             </label>
             <label class="radio">
-              <input type="radio" name="radiogroup" value="{{All}}"
+              <input type="radio" [attr.id]="'radio-button-2'" name="radiogroup" value="{{All}}"
                      (click)="candidatesFilterByLocation($event.target.value)">All
             </label>
           </div>

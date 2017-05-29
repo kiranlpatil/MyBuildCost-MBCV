@@ -35,7 +35,7 @@
 
   <div class="card-view clearfix">
     <!--<div class="col-sm-4" *ngFor= "let item of candidates">&lt;!&ndash;| candidatematching: matchFormat&ndash;&gt;-->
-      <div class="col-sm-4" *ngFor= "let item of candidates | dashboardsort:qCardModel.sortValue | candidatematching: matchForma: totalQCardMatches | dashboardfilter:filterMeta:qCardCount;let i=index;">
+      <div class="col-sm-4" *ngFor= "let item of candidates | qcardlistsort:qCardModel.sortValue | qcardmatching: matchFormat: totalQCardMatches :type | qcardlistfilter:filterMeta:qCardCount;let i=index;">
       <div class="panel clearfix">
         <img class="profile-picture" src="assets/framework/images/dashboard/profile.png" alt="Profile Picture"/>
         <h6 class="username">{{item.first_name}} {{item.last_name}}</h6>
@@ -71,8 +71,9 @@
           <div class="canvas-container">
             <cn-progress-bar [value]="item.matching" [color]="'#e77e22'" [rotation]="false"></cn-progress-bar>
             <cn-progress-bar [value]="item.matching" [color]="'#e77e22'" [rotation]="true" ></cn-progress-bar>
-            <span *ngIf="matchFormat == 'aboveMatch'">{{item.exact_matching + item.above_one_step_matching | number : '1.0-0'}}%</span>
-            <span *ngIf="matchFormat == 'belowMatch'">{{item.below_one_step_matching + item.above_one_step_matching + item.exact_matching | number : '1.0-0'}}%</span>
+            <span *ngIf="matchFormat == 'aboveMatch' && type == 'matchedList'">{{item.exact_matching + item.above_one_step_matching | number : '1.0-0'}}%</span>
+            <span *ngIf="matchFormat == 'belowMatch' && type == 'matchedList'">{{item.matching | number : '1.0-0'}}%</span>
+            <span *ngIf="type !== 'matchedList'">{{item.matching | number : '1.0-0'}}%</span>
           </div>
           <p>Skills matching</p>
         </div>
