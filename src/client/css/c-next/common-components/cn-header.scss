@@ -109,7 +109,6 @@ $header-shadow: rgba(0, 0, 0, 0.4);
       padding: 0;
 
       li {
-        display: block;
         margin: 0;
         width: 100%;
       }
@@ -126,7 +125,7 @@ $header-shadow: rgba(0, 0, 0, 0.4);
       }
 
       .divider {
-        margin: 0;
+        margin: 5px 0 0;
       }
 
       p {
@@ -138,49 +137,92 @@ $header-shadow: rgba(0, 0, 0, 0.4);
       }
     }
   }
+}
 
-  $white: #fff;
+.navbar-left {
+  top: 0;
+  position: fixed;
+  left: 200px;
+  z-index: 1000;
+}
+.list-counts > li {
+  color: $white;
+  float: left;
+  list-style: none;
+  width: auto;
+  text-align: center;
+  padding: 5px 25px 5px 0;
 
-  .navbar-left {
-    top: 0;
-    position: fixed;
-    left: 200px;
-    z-index: 1000;
-  }
-  .list-counts > li {
+  p {
     color: $white;
-    float: left;
-    list-style: none;
-    width: auto;
-    text-align: center;
-    padding: 5px 25px 5px 0;
+    font-size: 10px;
+    line-height: 12px;
+    margin: 0;
+  }
 
-    p {
-      color: $white;
-      font-size: 10px;
-      line-height: 12px;
-      margin: 0;
+  span {
+    font-size: 20px;
+    line-height: 27px;
+  }
+
+  img {
+    margin-top: -9px;
+  }
+
+  .dropdown > a {
+    color: $white;
+  }
+}
+
+@media only screen and (min-width: 1366px) {
+  .page-header {
+
+    .user-info-desktop {
+      display: block;
     }
-
-    span {
-      font-size: 20px;
-      line-height: 27px;
+    .user-info-ipad,
+    .divider {
+      display: none;
     }
-
-    img {
-      margin-top: -9px;
-    }
-
-    .dropdown > a {
-      color: $white;
+  }
+}
+@media only screen and (max-width: 1366px) {
+  .page-header {
+    .user-info {
+      h4,
+      h5 {
+        max-width: 115px;
+      }
     }
   }
 }
 
-@media only screen and (max-width: 1280px) {
+@media only screen and (max-width: 1365px) {
   .page-header {
     .container {
       width: 100%;
+    }
+
+    .user-info-desktop {
+      display: none;
+    }
+    .user-info-ipad,
+    .divider {
+      display: block;
+
+      h4, h5 {
+        color: #666;
+        width: 100%;
+        padding: 5px 10px;
+        text-align: left;
+        display: block;
+        font-size: 14px;
+        margin: 0;
+        overflow: visible;
+        text-overflow: clip;
+        white-space: pre-wrap;
+        max-width: inherit;
+      }
     }
   }
 }
@@ -198,12 +240,6 @@ $header-shadow: rgba(0, 0, 0, 0.4);
       }
 
       p {
-        display: none;
-      }
-    }
-
-    .user-info {
-      h4 {
         display: none;
       }
     }

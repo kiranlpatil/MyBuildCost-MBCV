@@ -1,4 +1,6 @@
 @import '../../../../css/common';
+$border-gray: #ccc;
+$theme-color: #66afe9;
 
 .error-messages {
   color: #f66761;
@@ -19,6 +21,28 @@
   .form-group {
     padding: 0 15px;
     width: 50%;
+  }
+
+  .list {
+    .form-control {
+      appearance: none;
+      border: 0;
+      border-bottom: 1px solid $border-gray;
+      -moz-appearance:none;
+      -webkit-appearance:none;
+      background: url('../assets/framework/images/form/drop-down.png') no-repeat;
+      background-color: $white;
+      background-position: 95% 50%;
+      border-radius: 0;
+      box-shadow: none;
+      padding: 6px;
+      width: 100%;
+
+      &:focus,
+      &:active {
+        border: 1px solid $theme-color;
+      }
+    }
   }
 
   label {

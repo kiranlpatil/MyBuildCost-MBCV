@@ -16,7 +16,7 @@
       <label>Company Name</label>
     </div>
 
-    <div class="form-group">
+    <div class="form-group list">
       <div ng2-auto-complete [source]="companySize" (ngModelChange)="selectCompanySizeModel($event)">
         <input class="form-control" [ngModel]="storedcompanySize" [ngModelOptions]="{standalone: true}"
                placeholder="Company Size" required/>
@@ -51,17 +51,17 @@
       <span class="error-messages" *ngIf="isPasswordConfirm == true">Passwords does not match.</span>
     </div>
 
-    <div class="form-group">
+    <div class="form-group list">
       <control-messages [control]="recruiterForm.controls.location"></control-messages>
-      <input type="text" formControlName="location" class="form-control select" placeholder="Location"  (setAddress) = "getAddress($event)" mygoogleplace/>
+      <input type="text" formControlName="location" class="form-control" placeholder="Location"  (setAddress) = "getAddress($event)" mygoogleplace/>
 
     </div>
 
 
-    <div class="form-group">
+    <div class="form-group list">
       <control-messages [control]="recruiterForm.controls.company_headquarter_country"></control-messages>
 
-      <input type="text" formControlName="company_headquarter_country" class="form-control select" placeholder="Company HeadQuarter" (setAddress) = "selectCompanyHeadquarterModel($event)" mygoogleplace/>
+      <input type="text" formControlName="company_headquarter_country" class="form-control" placeholder="Company HeadQuarter" (setAddress) = "selectCompanyHeadquarterModel($event)" mygoogleplace/>
 
     </div>
 

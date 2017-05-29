@@ -24,7 +24,7 @@
           <div class="col-sm-4">
             <label>Educational Qualification</label>
             <control-messages [control]="jobPostForm.controls.education"></control-messages>
-            <select class="form-control" formControlName="education" >
+            <select class="select" formControlName="education" >
               <option *ngFor="let c of educationlist" [ngValue]="c">{{c}}</option>
             </select>
           </div>
@@ -32,7 +32,7 @@
           <div class="col-sm-4">
             <label>Experience Band</label>
             <control-messages [control]="jobPostForm.controls.experience"></control-messages>
-            <select class="form-control" formControlName="experience">
+            <select class="select" formControlName="experience">
               <option *ngFor="let c of experiencelist" [ngValue]="c">{{c}}</option>
             </select>
           </div>
@@ -40,7 +40,7 @@
           <div class="col-sm-4">
             <label>Salary Band</label>
             <control-messages [control]="jobPostForm.controls.salary"></control-messages>
-            <select class="form-control" formControlName="salary">
+            <select class="select" formControlName="salary">
               <option *ngFor="let c of salarylist" [ngValue]="c">{{c}}</option>
             </select>
           </div>
@@ -48,7 +48,7 @@
           <div class="col-sm-4">
             <label>Joining Period</label>
             <control-messages [control]="jobPostForm.controls.joiningPeriod"></control-messages>
-            <select class="form-control" formControlName="joiningPeriod">
+            <select class="select" formControlName="joiningPeriod">
               <option *ngFor="let c of noticeperiodlist" [ngValue]="c">{{c}}</option>
             </select>
           </div>

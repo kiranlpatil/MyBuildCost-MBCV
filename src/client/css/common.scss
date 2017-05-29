@@ -23,6 +23,9 @@ $modal-bg: rgba(0, 0, 0, .7);
 $btn-color: #1c75bd;
 $input-bg: rgba(255 , 255, 255, .1);
 $label: #999;
+$theme-color: #66afe9;
+$gray-shadow: rgba(0,0,0,.075);
+$blue-shadow: rgba(102,175,233,.6);
 
 .btn-logout {
   margin-top: 15px;
@@ -202,7 +205,9 @@ select,
 
   &:focus,
   &:active {
-    outline: none;
+    border: 1px solid $theme-color;
+    box-shadow: inset 0 1px 1px $gray-shadow, 0 0 8px $blue-shadow;
+    outline: 0;
   }
 
   option {

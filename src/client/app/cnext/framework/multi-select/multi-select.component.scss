@@ -9,7 +9,7 @@ $message: #00aed5;
     border: 1px solid $border-color;
     min-height: 65px;
     padding: 15px 15px 5px;
-    margin-top: 5px;
+    margin-top: 0;
 
     div {
       float: left;
@@ -27,6 +27,10 @@ $message: #00aed5;
       font-size: 12px;
       padding-left: 20px;
     }
+  }
+
+  input {
+    margin-top: 0;
   }
 
   .info-message {
@@ -70,6 +74,19 @@ $message: #00aed5;
 
     .form-group {
       margin: 0 0 15px 0;
+    }
+  }
+}
+
+.modal {
+  .modal-bg {
+     p,
+     .button-group {
+       text-align: center;
+     }
+
+    .btn {
+      float: none;
     }
   }
 }

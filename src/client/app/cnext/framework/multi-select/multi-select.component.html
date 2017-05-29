@@ -1,14 +1,12 @@
 <p class="instructions" *ngIf="showAlert">You can select maximum {{maxLength}} proficiencies.</p>
 <div class="list clearfix">
   <div class="col-sm-4 no-padding">
-    <div class="form-group">
-      <div ng2-auto-complete
-           [source]="Proficiencies"
-           (ngModelChange)="selectedProficiencyModel($event)"
-           no-match-found-text="No Match Found, Press Enter to add It">
-        <input class="form-control"  #elem [id]="type"
-               (keyup.enter)="showHideModal($event.target.value)" />
-      </div>
+    <div ng2-auto-complete
+         [source]="Proficiencies"
+         (ngModelChange)="selectedProficiencyModel($event)"
+         no-match-found-text="No Match Found, Press Enter to add It">
+      <input class="select"  #elem [id]="type"
+             (keyup.enter)="showHideModal($event.target.value)" />
     </div>
     <p class="info-message">To add other proficiency which are not in the list, just type and enter</p>
   </div>

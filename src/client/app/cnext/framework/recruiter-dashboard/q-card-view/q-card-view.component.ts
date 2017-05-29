@@ -106,7 +106,7 @@ export class QCardviewComponent {
         this.updateCountModel(data);
       }
     );
-
+    this.showModalStyle=false;
   }
 
   addRemoveToShortList(candidate: CandidateQCard) {

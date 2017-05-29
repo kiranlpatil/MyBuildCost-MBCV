@@ -47,7 +47,7 @@
       <span class="error-messages" *ngIf="isPasswordConfirm == true">Passwords does not match.</span>
   </div>
 
-  <div class="form-group">
+  <div class="form-group list">
     <div id="yearf" ng2-auto-complete
          [source]="validBirthYearList"
          (ngModelChange)="selectYearModel($event)"
@@ -59,10 +59,10 @@
 
 
 
-  <div class="form-group">
+  <div class="form-group list">
     <control-messages [control]="userForm.controls.location"></control-messages>
 
-    <input type="text" formControlName="location" class="form-control select"  placeholder="Location" (setAddress) = "getAddress($event)" (city)="selectedCity($event)" mygoogleplace/>
+    <input type="text" formControlName="location" class="form-control"  placeholder="Location" (setAddress) = "getAddress($event)" (city)="selectedCity($event)" mygoogleplace/>
 
   </div>
 
