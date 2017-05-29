@@ -7,7 +7,7 @@
     </div>-->
   </header>
 
-  <div class="card-view" >
+  <div class="card-view">
     <div class="col-md-3" *ngFor="let item of jobListInput | orderBy:format;let i = index" (click)="onJobClikecd(item._id)">
       <div class="panel clearfix">
         <span class="glyphicon glyphicon-trash"></span>
@@ -45,6 +45,7 @@
       </div>
     </div>
   </div>
-  <div class="col-sm-12 text-center" *ngIf="jobListInput.length==0">You havn't posted any job yet</div>
+ <div class="col-sm-12 text-center" *ngIf="jobListInput.length==0">You havn't posted any job yet</div>
 </div>
+
 

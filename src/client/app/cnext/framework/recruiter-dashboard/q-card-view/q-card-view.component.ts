@@ -1,4 +1,4 @@
-import {Component, Input} from "@angular/core";
+import {Component, Input, Output, EventEmitter} from "@angular/core";
 import {CandidateQCard} from "../../model/candidateQcard";
 import {QCardsortBy} from "../../model/q-cardview-sortby";
 import {MatchCandidate} from "../../model/match-candidate";
@@ -27,6 +27,8 @@ export class QCardviewComponent {
   @Input() recuirterListCountModel: RecruiterJobView = new RecruiterJobView();
   @Input() jobId: string;
   @Input() type: string;
+  @Output() addedTocart: EventEmitter<any> = new EventEmitter<any>();
+  @Output() removeFromapplied: EventEmitter<any> = new EventEmitter<any>();
   private emailsOfShrortListedCandidates: string[] = new Array(0)
   private qCardModel: QCardsortBy = new QCardsortBy();
   private totalQCardMatches = {count: 0};
@@ -106,9 +108,18 @@ export class QCardviewComponent {
         this.updateCountModel(data);
       }
     );
-    this.showModalStyle=false;
-  }
+    this.showModalStyle = false;
+    if (destinationListName === ValueConstant.CART_LISTED_CANDIDATE && ( sourceListName === ValueConstant.MATCHED_CANDIDATE || sourceListName === ValueConstant.APPLIED_CANDIDATE )){
+      this.addedTocart.emit(true);
+    if( sourceListName === ValueConstant.APPLIED_CANDIDATE){
+      this.removeFromapplied.emit(true);
+    }}
 
+
+      if (sourceListName === ValueConstant.CART_LISTED_CANDIDATE && (destinationListName=== ValueConstant.CART_LISTED_CANDIDATE|| destinationListName === ValueConstant.REJECTED_LISTED_CANDIDATE))
+        this.addedTocart.emit(false);
+
+  }
   addRemoveToShortList(candidate: CandidateQCard) {
     let action: string;
     (this.emailsOfShrortListedCandidates.indexOf(candidate.email) != -1) ? action = 'remove' : action = 'add';

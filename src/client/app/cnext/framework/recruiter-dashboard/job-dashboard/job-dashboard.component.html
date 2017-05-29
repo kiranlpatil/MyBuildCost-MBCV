@@ -54,16 +54,16 @@
       </li>
     </ul>
     <div id="matched" class="tab-pane fade in active " >
-      <cn-q-card-view *ngIf="whichListVisible[0]" [candidateQlist]="candidateQlist" [candidates]="candidateQlist.matchedCandidates" [type]="'matchedList'" [jobId]="jobId" [recuirterListCountModel]="recruiterJobView"></cn-q-card-view>
+      <cn-q-card-view (addedTocart)="AddedToCart($event)"    *ngIf="whichListVisible[0]" [candidateQlist]="candidateQlist" [candidates]="candidateQlist.matchedCandidates" [type]="'matchedList'" [jobId]="jobId" [recuirterListCountModel]="recruiterJobView"></cn-q-card-view>
     </div>
     <div  id="cart" class="tab-pane fade">
-      <cn-q-card-view *ngIf="whichListVisible[1]" [candidateQlist]="candidateQlist" [candidates]="candidateQlist.cartCandidates" [type]="'cartListed'" [jobId]="jobId" [recuirterListCountModel]="recruiterJobView"></cn-q-card-view>
+      <cn-q-card-view (addedTocart)="AddedToCart($event)" *ngIf="whichListVisible[1]" [candidateQlist]="candidateQlist" [candidates]="candidateQlist.cartCandidates" [type]="'cartListed'" [jobId]="jobId" [recuirterListCountModel]="recruiterJobView"></cn-q-card-view>
     </div>
     <div  id="applied" class="tab-pane fade" >
-      <cn-q-card-view  *ngIf="whichListVisible[2]" [candidateQlist]="candidateQlist" [candidates]="candidateQlist.appliedCandidates" [type]="'applied'" [jobId]="jobId" [recuirterListCountModel]="recruiterJobView"></cn-q-card-view>
+      <cn-q-card-view (addedTocart)="AddedToCart($event)"(removeFromapplied)="RemovedFromApplied($event)"  *ngIf="whichListVisible[2]" [candidateQlist]="candidateQlist" [candidates]="candidateQlist.appliedCandidates" [type]="'applied'" [jobId]="jobId" [recuirterListCountModel]="recruiterJobView"></cn-q-card-view>
     </div>
     <div  id="rejected"  class="tab-pane fade">
-      <cn-q-card-view *ngIf="whichListVisible[3]" [candidateQlist]="candidateQlist" [candidates]="candidateQlist.rejectedCandidates" [type]="'rejectedList'" [jobId]="jobId" [recuirterListCountModel]="recruiterJobView"></cn-q-card-view>
+      <cn-q-card-view  (addedTocart)="AddedToCart($event)" *ngIf="whichListVisible[3]" [candidateQlist]="candidateQlist" [candidates]="candidateQlist.rejectedCandidates" [type]="'rejectedList'" [jobId]="jobId" [recuirterListCountModel]="recruiterJobView"></cn-q-card-view>
     </div>
 
   </div>
