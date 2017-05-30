@@ -30,12 +30,23 @@ class IndustryService {
   }
 
   create(item:any, callback:(error:any, result:any) => void) {
-    this.industryRepository.create(item, (err, res) => {
-      if (err) {
+
+    this.industryRepository.findByName(item.name,(errinCreate : any , response : any)=>{
+      if (errinCreate) {
         callback(new Error(CNextMessages.PROBLEM_IN_CREATING_INDUSTRY), null);
-      }
-      else {
-        callback(null, res);
+      }else{
+        if(response.length == 0 ){
+          this.industryRepository.create(item, (err, res) => {
+            if (err) {
+              callback(new Error(CNextMessages.PROBLEM_IN_CREATING_INDUSTRY), null);
+            }
+            else {
+              callback(null, res);
+            }
+          });
+        }else {
+          this.industryRepository.findOneAndUpdate({'_id':response[0]._id}, item , {new: true}, callback);
+        }
       }
     });
   }

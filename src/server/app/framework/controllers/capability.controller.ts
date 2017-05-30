@@ -16,7 +16,7 @@ export function retrieve(req:express.Request, res:express.Response, next:any) {
     let item:any={
       name : req.params.id,
       roles :JSON.parse(rolesparam)
-    }
+    };
     capabilityService.findByName(item, (error, result) => {
       if (error) {
         next({
