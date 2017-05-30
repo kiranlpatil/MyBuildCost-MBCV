@@ -1,17 +1,16 @@
 <div class="clearfix">
     <div class="section-container clearfix proficiency-container" >
       <div class="main-content  modal-content clearfix"  *ngIf="highlightedSection.name=='Proficiencies'">
-        <h4 class="heading">Proficiencies (Max 25)</h4>
+        <h4 class="heading">Proficiencies </h4>
         <p class="info">Enter all key words that describe your area of expertise or specialization. These
           proficiencies will be used for second level of matching post
           capability. <span class="messages">You can edit this list anytime.</span></p>
         <div class="col-sm-12">
           <label>Mandatory Proficiencies</label>
           <cn-multi-select [type]="'Mandatory'" [data]="proficiencies" [maxLength]="maxNumberOfMandatory" [selectedData]="jobPosterModel.proficiencies" (onComplete)="onMandatoryProficiencyComplete($event)"  ></cn-multi-select>
-          <label>Additional Proficiencies</label>
-          <cn-multi-select [type]="'Additional'" [data]="proficiencies" [maxLength]="maxNumberOfAdditional" [selectedData]="jobPosterModel.additionalProficiencies" (onComplete)="onOptionalProficiencyComplete($event)" ></cn-multi-select>
+          <label *ngIf="jobPosterModel.proficiencies != undefined && jobPosterModel.proficiencies.length==5">Additional Proficiencies</label>
+          <cn-multi-select [type]="'Additional'" [data]="proficiencies" [maxLength]="maxNumberOfAdditional" [selectedData]="jobPosterModel.additionalProficiencies" (onComplete)="onOptionalProficiencyComplete($event)" *ngIf="jobPosterModel.proficiencies != undefined && jobPosterModel.proficiencies.length==5"></cn-multi-select>
           <div class="button-group clearfix">
-            <button class="btn btn-default"  (click)="highlightedSection.name='none'; highlightedSection.isDisable=false" [hidden]="showButton" >Cancel</button>
             <button class="btn btn-primary" scrollTo scrollTargetSelector="#industry-experience"
                     (click)="onNext()" [disabled]="disablebutton" [hidden]="!showButton">Next
             </button>
