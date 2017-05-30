@@ -22,17 +22,36 @@ $primary-option: #1c75bd;
 }
 
 .compact-view {
-  min-height: 107px;
-
-  &:hover {
-    .btn-edit {
-      opacity: 1;
-    }
-  }
-
   .option {
-    li {
+    padding: 0;
+  }
+}
+
+.work-area-section {
+  position: absolute;
+  top: 88px;
+  left: 125px;
+  width: 39%;
+
+  .main-content {
+    padding-left: 7px;
+    background: transparent;
+
+    .compact-view {
+      border: 0;
+      padding: 0;
+
+      .btn-edit {
+        position: relative;
+        top: 5px;
+        display: inline-block;
+        z-index: 0;
+      }
+    }
+
+    .option {
       width: 100%;
+      display: block;
     }
   }
 }

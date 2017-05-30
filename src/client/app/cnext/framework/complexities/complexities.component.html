@@ -77,7 +77,11 @@
 <!--
           <span class=" glyphicon glyphicon-lock" title="you can edit this field after {{highlightedSection.date| date:'mediumDate'}}" *ngIf="highlightedSection.isLocked"></span>
 -->
-          <div class="col-sm-12">
+          <a data-toggle="collapse" data-target="#demo" >
+            <h4 class="heading">Complexities handled </h4>
+            <span class="glyphicon glyphicon-eye-open"></span>
+          </a>
+          <div id="demo" class="collapse col-sm-12">
             <cn-tabular-list-view [roles]="candidateRoles"></cn-tabular-list-view>
           </div>
         </div>

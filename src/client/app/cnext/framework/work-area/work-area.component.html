@@ -3,7 +3,7 @@
     <h4 class="heading">Select Area of Work (Max 3)</h4>
     <div class="work-area col-sm-12">
       <p class="info">
-        Select those areas of work which describe what you are best at or where you would like to position your career.
+        Select those areas of work that describe what you are best at or where you would like to position your career.
       </p>
       <div class="select-option" *ngFor="let item of roles;let i = index">
         <label>
@@ -24,17 +24,21 @@
   </div>
 </div>
 
-<div class="section-container" [ngClass]="(highlightedSection.name=='Profile' || isCandidate == false)?'full-width':'half-width'" *ngIf="highlightedSection.name!='Work-Area'">
+<div class="section-container" [ngClass]="(highlightedSection.name=='Profile' || isCandidate == false)?'full-width':'half-width work-area-section'" *ngIf="highlightedSection.name!='Work-Area'">
 <div class="main-content" >
   <div class="compact-view clearfix">
-    <button  class="btn-edit" (click)="highlightedSection.name='Work-Area';highlightedSection.sectionName='capability';disableButton=false;highlightedSection.isDisable=true" [hidden]="highlightedSection.isDisable"></button> <!--[hidden]="highlightedSection.isLocked"-->
+     <!--[hidden]="highlightedSection.isLocked"-->
     <!--
            <span class="glyphicon glyphicon-lock" title="This section can be updated only after {{highlightedSection.date| date:'mediumDate'}}" *ngIf="highlightedSection.isLocked"></span>
     -->
-    <h4 class="heading">Area Of Work</h4>
-    <ul class="option" *ngFor="let item of selectedRoles;let i = index">
-       <li>{{item.name}}</li>
-    </ul>
+    <p><label>Area Of Work</label>
+      <button  class="btn-edit" (click)="highlightedSection.name='Work-Area';highlightedSection.sectionName='capability';disableButton=false;highlightedSection.isDisable=true" [hidden]="highlightedSection.isDisable"></button>
+      <span class="option" *ngFor="let item of selectedRoles;let i = index">
+        {{item.name}}&nbsp;<span *ngIf="selectedRoles.length>1 && i!=selectedRoles.length-1">,</span>&nbsp;
+      </span>
+    </p>
+
+
   </div>
 </div>
 </div>

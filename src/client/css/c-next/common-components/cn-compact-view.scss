@@ -46,7 +46,7 @@ $theme-color: #3694d1;
     border: 0;
     display: block;
     height: 20px;
-    opacity: 0;
+    opacity: 1;
     padding: 0;
     position: absolute;
     right: 0;
@@ -54,6 +54,14 @@ $theme-color: #3694d1;
     transition: opacity 0.25s ease-out;
     width: 20px;
     z-index: 3;
+  }
+
+  .glyphicon-eye-open {
+    color: $theme-color;
+    font-size: 16px;
+    position: absolute;
+    right: 27px;
+    top: 4px;
   }
 
   .btn-edit[hidden] {
@@ -149,6 +157,23 @@ $theme-color: #3694d1;
     li {
       width: 25%;
       margin-bottom: 0;
+    }
+  }
+}
+
+.profile-main-content {
+  .compact-view {
+    min-height: 150px;
+
+    .img-container {
+      .custom-file-upload > img {
+        width: 25px !important;
+        bottom: 0;
+        right: 0;
+        left: 100%;
+        margin-left: -11px;
+        background: transparent;
+      }
     }
   }
 }

@@ -1,6 +1,6 @@
 <div class="section-container" *ngIf="highlightedSection.name=='Profile'">
   <div class="main-content clearfix modal-content" >
-    <h4 class="heading">Enter Your Job Title</h4>
+    <h4 class="heading">My Profile</h4>
 
     <div class="col-sm-3 text-center">
       <cn-profile-picture (onPictureUpload)="onPictureUpload($event)"></cn-profile-picture>
@@ -16,7 +16,7 @@
              [(ngModel)]="candidate.jobTitle">
 
       <div class="clearfix">&nbsp;</div>
-      <h4>Select Industry (Any one value from the list below) </h4>
+      <h4>Select your Core Industry (Any One)</h4>
       <cn-industry-list  [selectedIndustry]="candidate.industry" (valueChange)="onIndustryChange($event)"></cn-industry-list>
 
       <div class="button-group clearfix">
@@ -27,15 +27,16 @@
     </div>
   </div>
 </div>
-<div class="section-container" [ngClass]="(highlightedSection.name !=='Work-Area')?'half-width':'full-width'">
-  <div class="main-content" *ngIf="highlightedSection.name!='Profile'">
+<div class="section-container" [ngClass]="(highlightedSection.name !=='Work-Area' && highlightedSection.name !=='Capabilities')?'half-width':'full-width'">
+  <div class="main-content profile-main-content" *ngIf="highlightedSection.name!='Profile'">
     <div class="compact-view clearfix">
       <button class="btn-edit" (click)="highlightedSection.name='Profile';disableButton=false;showButton=false;;highlightedSection.isDisable=true" [hidden]="highlightedSection.isDisable" ></button> <!--[hidden]="highlightedSection.isLocked"-->
       <!--
             <span class=" glyphicon glyphicon-lock" title="you can edit this field after {{highlightedSection.date| date:'mediumDate'}}" *ngIf="highlightedSection.isLocked"></span>
       -->
       <div class="img-container">
-        <img src="{{image_path}}" alt="Profile Picture"/>
+        <!--<img src="{{image_path}}" alt="Profile Picture"/>-->
+        <cn-profile-picture (onPictureUpload)="onPictureUpload($event)"></cn-profile-picture>
       </div>
 
       <div>

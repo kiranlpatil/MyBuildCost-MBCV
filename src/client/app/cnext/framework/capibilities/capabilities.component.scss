@@ -2,10 +2,10 @@ $primary-option: #3694d1;
 $secondary-option: #81D4FA;
 
 .compact-view {
-  &:hover {
-    .btn-edit {
-      opacity: 1;
-    }
+  min-height: 150px;
+
+  .option {
+    padding:0;
   }
 }
 
