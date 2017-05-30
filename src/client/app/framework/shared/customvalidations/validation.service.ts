@@ -18,7 +18,10 @@ export class ValidationService {
       'requiredCompanyName': 'Please enter company name',
       'requiredOtp': 'Please enter OTP',
       'invalidEmailAddress': 'Email incorrect',
+/*
       'invalidPassword': 'Passwords must contain at least 8 characters, including uppercase, lowercase letters, numbers and one special character($@_!%*?&).',
+*/
+      'invalidPassword': 'Passwords must contain at least 8 characters and must be alpha-numeric.',
       'maxlength': `Maximum ${validatorValue.requiredLength} characters`,
       'minlength': `Minimum ${validatorValue.requiredLength} characters`,
       'invalidMobile': 'Mobile number should be of 10 digits ',
@@ -98,7 +101,10 @@ export class ValidationService {
 
   static passwordValidator(control:any) {
 
+    if (control.value.match(/(?=.*\d)(?=.*[a-z]).{8,}/)) {
+/*
     if (control.value.match(/(?=.*\d)(?=.*[a-z])(?=.*[$@_#!%*?&])(?=.*[A-Z]).{8,}/)) {
+*/
 
       return null;
 
