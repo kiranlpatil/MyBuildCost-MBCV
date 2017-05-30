@@ -75,11 +75,12 @@ export class QCardviewComponent {
   }
 
   actionOnQCard(action: string, sourceListName: string, destinationListName: string, candidate: CandidateQCard) {
-
+    debugger
     let isMatchList: boolean = false;
     switch (sourceListName) {
       case ValueConstant.APPLIED_CANDIDATE :
-      /*  this.candidateQlist.appliedCandidates.splice(this.candidateQlist.appliedCandidates.indexOf(candidate), 1);*/
+        if(destinationListName===ValueConstant.REJECTED_LISTED_CANDIDATE)
+       this.candidateQlist.appliedCandidates.splice(this.candidateQlist.appliedCandidates.indexOf(candidate), 1);
 
         break;
       case ValueConstant.REJECTED_LISTED_CANDIDATE :
@@ -87,6 +88,7 @@ export class QCardviewComponent {
         break;
       case ValueConstant.CART_LISTED_CANDIDATE :
         this.candidateQlist.cartCandidates.splice(this.candidateQlist.cartCandidates.indexOf(candidate), 1);
+        console.log(this.candidateQlist.cartCandidates.indexOf(candidate));
         break;
       case ValueConstant.SHORT_LISTED_CANDIDATE :
 //        this.candidateQlist.shortListedCandidates.splice(this.candidateQlist.shortListedCandidates.indexOf(candidate),1);
@@ -133,7 +135,8 @@ export class QCardviewComponent {
 
       if (sourceListName === ValueConstant.CART_LISTED_CANDIDATE && (destinationListName=== ValueConstant.CART_LISTED_CANDIDATE|| destinationListName === ValueConstant.REJECTED_LISTED_CANDIDATE))
         this.addedTocart.emit(false);
-
+    if (sourceListName ===ValueConstant.APPLIED_CANDIDATE &&  destinationListName === ValueConstant.REJECTED_LISTED_CANDIDATE)
+      this.addedTocart.emit(false);
   }
 
   addRemoveToShortList(candidate: CandidateQCard) {
