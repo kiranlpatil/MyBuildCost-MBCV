@@ -21,7 +21,7 @@ export class JobProficienciesComponent {
   private disablebutton:boolean = true;
   private maxNumberOfMandatory:number;
   private maxNumberOfAdditional:number;
-  
+
   ngOnInit(){
     this.maxNumberOfMandatory=ValueConstant.MAX_MANDATORY_PROFECIENCES;
     this.maxNumberOfAdditional=ValueConstant.MAX_ADDITIONAL_PROFECIENCES;
@@ -41,7 +41,7 @@ export class JobProficienciesComponent {
     this.jobPosterModel.additionalProficiencies=optional;
     this.onComplete.emit(this.jobPosterModel);
   }
-  
+
   onNext() {
     this.highlightedSection.name = "IndustryExposure";
     this.highlightedSection.isDisable=false;
