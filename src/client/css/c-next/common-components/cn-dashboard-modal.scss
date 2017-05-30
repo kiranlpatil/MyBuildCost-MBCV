@@ -1,3 +1,6 @@
+$theme-color: #3694d1;
+$white: #fff;
+
 .dashboard-modal {
 
   .modal-dialog {
@@ -23,13 +26,14 @@
     position: fixed;
     top: 0;
     left: 0;
-    background: #f2f2f2;
+    background: $theme-color;
     z-index: 100;
     right: 0;
-    margin: 0 8px;
-    border-radius: 8px 8px 0 0;
+    margin: 0 7px;
+    border-radius: 0;
     box-sizing: border-box;
-    padding: 5px 15px;
+    padding: 5px 15px 5px 0;
+    border-bottom: 1px solid $theme-color;
 
     img {
       width: 30px;
@@ -42,14 +46,16 @@
       margin: 0;
       padding: 5px 15px;
       text-align: left;
-      font-size: 16px;
+      color: $white;
+      font-size: 14px;
     }
 
     h4 {
       margin: 0;
       padding: 5px 15px;
       text-align: left;
-      font-size: 16px;
+      color: $white;
+      font-size: 14px;
     }
 
     .close {
@@ -66,6 +72,7 @@
     height: 100%;
     overflow: auto;
     border-radius: 8px;
+    border: 1px solid #f2f2f2;
   }
 
   .button-group {

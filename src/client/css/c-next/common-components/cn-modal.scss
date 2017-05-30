@@ -2,46 +2,23 @@ $modal-bg: #f2f2f2;
 $text-color: #666;
 
 .modal-dialog {
-  border-radius: 25px;
+  border-radius: 8px;
   text-align: center;
   position: relative;
 
   .modal-body {
-    padding: 30px;
+    padding: 0;
   }
 
   .modal-content {
     background: $modal-bg;
-    border-radius: 25px;
+    border-radius: 8px;
   }
 
   p {
     color: $text-color;
-    font-size: 18px;
+    font-size: 14px;
     text-align: center;
-  }
-
-  .button-group {
-    margin-top: 30px;
-
-    button {
-    display: inline-block;
-  }
-
-   /* button:nth-child(1){
-      background: #3694d1;
-      border-radius: 0;
-    }*/
-  }
-
-  .btn {
-    float: none;
-    margin-top: 0;
-
-    &:focus,
-    &:active {
-      outline: none;
-    }
   }
 
   .close {
@@ -49,5 +26,30 @@ $text-color: #666;
     top: 15px;
     right: 15px;
     z-index: 15;
+  }
+}
+
+.popup {
+  .button-group {
+    margin: 20px 0 10px;
+    text-align: center;
+  }
+
+  .btn {
+    display: inline-block;
+    float: none !important;
+    margin-top: 0;
+
+    &:focus,
+    &:active {
+      outline: none;
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .modal-dialog {
+    width: 450px;
+    margin: 0 auto;
   }
 }
