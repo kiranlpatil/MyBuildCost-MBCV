@@ -43,30 +43,36 @@ export class CustomHttp extends Http {
         var message = new Message();
         message.isError = true;
         var errorInstance = new ErrorInstance();
+        console.log ("Error Instance 7: ", errorInstance);
          if(err.err_msg && err.err_code) {
            errorInstance.err_msg = err.err_msg;
            errorInstance.err_code = err.err_code;
           return Observable.throw(errorInstance);
         } else if (err.status) {
+           console.log ("Error Instance 1: ", errorInstance);
           if (err.status === 401 || err.status === 403) {
             errorInstance.err_code = err.status;
             errorInstance.err_msg = JSON.parse(err._body).error.message;
           } else if (err.status === 404) {
+
             errorInstance.err_msg = Messages.MSG_ERROR_SERVER_ERROR;
             errorInstance.err_code = err.status;
+            console.log ("Error Instance 2: ",errorInstance);
           } else if (err.status === 0) {
             errorInstance.err_msg = Messages.MSG_ERROR_SOMETHING_WRONG;
             errorInstance.err_code = err.status;
+            console.log ("Error Instance 3: ",errorInstance);
           } else  {
-
+            console.log ("Error Instance 4: ",errorInstance);
             errorInstance.err_msg = JSON.parse(err._body).error.message;
           }
+           console.log ("Error Instance 5: ", errorInstance);
           return Observable.throw(errorInstance);
         } else {
            errorInstance.err_msg = Messages.MSG_ERROR_SOMETHING_WRONG;
            errorInstance.err_code = err.status;
            return Observable.throw(errorInstance);
-
+           console.log ("Error Instance 6: ", errorInstance);
          }
       });
   }

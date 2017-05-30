@@ -10,8 +10,9 @@ import RecruiterService = require("../services/recruiter.service");
 
 export function create(req:express.Request, res:express.Response, next:any) {
   try {
-
+console.log("USer is",req.body);
     var newUser:CandidateModel = <CandidateModel>req.body;
+    console.log("USer is",newUser);
     var candidateService = new CandidateService();
     candidateService.createUser(newUser, (error, result) => {
       if (error) {

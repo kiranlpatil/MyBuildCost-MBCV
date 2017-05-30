@@ -1,9 +1,11 @@
 export class AppSettings {
-  //public static IP = 'http://localhost:3000';
+ // public static IP = 'http://localhost:8080';
   // public static IP = 'http://ee802b7f.ngrok.io';
   //public static IP = 'http://10.192.33.252:8087';
-  public static IP = 'http://52.89.221.23:8080';
-  //public static IP = 'http://52.41.194.37:8080';
+  //public static IP = 'http://52.89.221.23:8080';
+ // public static IP = 'http://52.41.194.37:8080';
+ // public static IP = 'http://52.41.194.37:8080';
+  public static IP = 'http://localhost:3000';
   //public static IP = '';
 
 
@@ -121,8 +123,7 @@ export class ValueConstant {
   public static MAX_WORKAREA:number = 3;
   public static MAX_INTERESTEDINDUSTRY:number = 7;
   public static MAX_PROFECIENCES:number = 25;
-  public static MAX_MANDATORY_PROFECIENCES:number = 5;
-  public static MAX_ADDITIONAL_PROFECIENCES:number = 5;
+  public static MAX_DOMAINS:number = 10;
   public static MAX_YEAR_LIST:number = 60;
   public static MAX_ACADEMIC_YEAR_LIST:number = 50;
   public static SHORT_LISTED_CANDIDATE:string = 'shortListed';
@@ -130,7 +131,6 @@ export class ValueConstant {
   public static REJECTED_LISTED_CANDIDATE:string = 'rejectedList';
   public static APPLIED_CANDIDATE:string = 'applied';
   public static BLOCKED_CANDIDATE:string = 'blocked';
-  public static MATCHED_CANDIDATE:string = 'matchedList';
 
   public static VALUE_FOR_CNDIDATES_PERCENT_MATCHING_LOWER_BOUND = 40;
 }
@@ -182,7 +182,6 @@ export class API {
   public static JOB_DETAILS = 'recruiter/jobProfile';
   public static SHORTLIST_CANDIDATE = 'shortlistedcandidate';
   public static CANDIDATE_DETAILS = 'recruiter/jobProfile';
-  public static CANDIDATESFROMLISTS = 'recruiter/jobProfile';
 
 
 }
