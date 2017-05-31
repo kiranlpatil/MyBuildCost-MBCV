@@ -30,7 +30,7 @@
 <div class="section-container" [ngClass]="(highlightedSection.name !=='Work-Area' && highlightedSection.name !=='Capabilities')?'half-width':'full-width'">
   <div class="main-content profile-main-content" *ngIf="highlightedSection.name!='Profile'">
     <div class="compact-view clearfix">
-      <button class="btn-edit" (click)="highlightedSection.name='Profile';disableButton=false;showButton=false;;highlightedSection.isDisable=true" [hidden]="highlightedSection.isDisable" ></button> <!--[hidden]="highlightedSection.isLocked"-->
+     <!--[hidden]="highlightedSection.isLocked"-->
       <!--
             <span class=" glyphicon glyphicon-lock" title="you can edit this field after {{highlightedSection.date| date:'mediumDate'}}" *ngIf="highlightedSection.isLocked"></span>
       -->
@@ -43,6 +43,7 @@
         <p class="user-name">
           <span class="profile-name-first">{{candidateDetails.first_name}}</span>
           <span class="profile-name-last">{{candidateDetails.last_name}}</span>
+          <button class="btn-edit" (click)="highlightedSection.name='Profile';disableButton=false;showButton=false;;highlightedSection.isDisable=true" [hidden]="highlightedSection.isDisable" ></button>
         </p>
         <p><label>Job Title</label> {{candidate.jobTitle}}</p>
         <p><label>Industry</label> {{candidate.industry.name}}</p>

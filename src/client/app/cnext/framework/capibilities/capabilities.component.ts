@@ -67,7 +67,7 @@ export class CapabilitiesComponent {
 
   onNext() {
     this.highlightedSection.name = "Complexities";
-    this.highlightedSection.isDisable=false;
+    this.highlightedSection.isDisable=true;
     this.disableButton = true;
     this.onComplete.emit(this.roles);
   }

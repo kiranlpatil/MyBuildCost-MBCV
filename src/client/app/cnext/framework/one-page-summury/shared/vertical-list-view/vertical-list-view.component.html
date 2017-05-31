@@ -1,5 +1,5 @@
 <div class="vertical-view" *ngIf="data != undefined">
-  <div *ngIf="type=='employment'">
+  <div *ngIf="type=='employment history'">
     <div *ngIf="data[0].designation!=undefined && data[0].designation !=''">
       <img src="assets/c-next/icons/employment-icon.png" alt="employment"/>
       <span>{{type}}</span>
@@ -15,7 +15,7 @@
       </ul>
     </div>
   </div>
-  <div *ngIf="type=='education'">
+  <div *ngIf="type=='acedemic details'">
     <div *ngIf="data[0].specialization!=undefined && data[0].specialization !=''">
     <img src="assets/c-next/icons/education-icon.png" alt="education"/>
     <span>{{type}}</span>
@@ -32,8 +32,9 @@
     </div>
   </div>
   <div *ngIf="type=='awards'|| type=='certifications'">
-    <div *ngIf="data[0].specialization!=undefined && data[0].specialization !=''">
-    <img src="assets/c-next/icons/education-icon.png" alt="awards"/>
+    <div ><!--*ngIf="data[0].specialization!=undefined && data[0].specialization !=''"-->
+    <img src="assets/c-next/icons/certificates.png" alt="certifications" *ngIf="type=='certifications'"/>
+      <img src="assets/c-next/icons/awards.png" alt="awards" *ngIf="type=='awards'"/>
     <span>{{type}}</span>
     <ul>
       <li  *ngFor="let item of data;let i = index" >

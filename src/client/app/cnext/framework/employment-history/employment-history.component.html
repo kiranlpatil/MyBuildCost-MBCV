@@ -5,7 +5,7 @@
         <span class="glyphicon glyphicon-remove" (click)="hideEmployeeHistory()"></span>
       </span>
     </h4>
-    <form [formGroup]="employeeHistory" novalidate (ngSubmit)="save(employeeHistory)">
+    <form [formGroup]="employeeHistory" novalidate >
       <!--empHistories-->
       <div formArrayName="emplyeeHistories">
         <div *ngFor="let history of employeeHistory.controls.emplyeeHistories.controls; let i=index"
@@ -40,18 +40,20 @@
   </div>
 </div>
 
-<div class="section-container" [ngClass]="(highlightedSection.name=='AcademicDetails')?'full-width':'half-width'"  [hidden]="chkEmployeeHistory">
+<div class="section-container" [ngClass]="(highlightedSection.name=='AcademicDetails' || highlightedSection.name=='Awards' || highlightedSection.name=='Certification')?'full-width':'quarter-width'"  [hidden]="chkEmployeeHistory">
   <div class="main-content" *ngIf="highlightedSection.name !='EmploymentHistory'">
     <div class="compact-view clearfix">
       <button class="btn-edit" (click)="highlightedSection.name='EmploymentHistory';highlightedSection.isDisable=true;showButton=false" [hidden]="highlightedSection.isDisable"></button>
-      <h4 class="heading">Employment History</h4>
-      <ul>
+      <!--<ul>
         <div *ngFor="let item of candidate.employmentHistory">
           <li *ngIf="item.designation != '' && item.companyName != ''"><p>{{item.designation}} at
             {{item.companyName}} </p>
             <p>From {{item.from.month}} {{item.from.year}} to {{item.to.month}} {{item.to.year}}</p></li>
         </div>
-      </ul>
+      </ul>-->
+      <div *ngIf="candidate.employmentHistory.length>0">
+        <cn-vertical-list-view [data]="candidate.employmentHistory" [type]="'employment history'" ></cn-vertical-list-view>
+      </div>
     </div>
   </div>
 </div>

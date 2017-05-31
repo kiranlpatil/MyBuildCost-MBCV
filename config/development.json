@@ -7,9 +7,9 @@
     "mail": {
       "host": "http://localhost:8080/",
       //"host":"http://7a4647ae.ngrok.io/"
-      "MAIL_SENDER": "redminestatus@techprimelab.com",
-      "MAIL_SENDER_PASSWORD": "Contactu$@tpl",
-      "ADMIN_MAIL": "admin@techprimelab.com"
+      "MAIL_SENDER": "cnext1@inunison.in",
+      "MAIL_SENDER_PASSWORD": "cnext123",
+      "ADMIN_MAIL": "cnext1@inunison.in"
 
     },
     "facebookIds":{

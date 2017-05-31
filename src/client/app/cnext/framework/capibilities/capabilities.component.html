@@ -49,11 +49,13 @@
 <div class="section-container" [ngClass]="(highlightedSection.name=='Work-Area' || highlightedSection.name=='Profile')?'full-width':'half-width'"  *ngIf="highlightedSection.name!='Capabilities'">
   <div class="main-content" >
     <div class="compact-view clearfix">
-      <button class="btn-edit" (click)="highlightedSection.name='Capabilities';highlightedSection.isDisable=true" [hidden]="highlightedSection.isDisable" ></button> <!--[hidden]="highlightedSection.isLocked"-->
+     <!--[hidden]="highlightedSection.isLocked"-->
       <!--
             <span class=" glyphicon glyphicon-lock" title="you can edit this field after {{highlightedSection.date| date:'mediumDate'}}" *ngIf="highlightedSection.isLocked"></span>
       -->
-      <h4 class="heading">Capabilities</h4>
+      <h4 class="heading">Capabilities
+        <button class="btn-edit" (click)="highlightedSection.name='Capabilities';highlightedSection.isDisable=true" [hidden]="highlightedSection.isDisable" ></button>
+      </h4>
 
       <span class="option" *ngFor="let role of roles;let i = index">
         <span *ngFor="let item of role.capabilities">

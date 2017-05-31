@@ -1,10 +1,10 @@
 
 <div class="section-container profeiciency-domain" >
   <div class="main-content modal-content clearfix" *ngIf="highlightedSection.name=='IndustryExposure'">
-    <h4 class="heading">Select Industry In Which You Have work Exposure / Experience</h4>
+    <h4 class="heading">In addition to your core industry, select Industries In which you have work exposure / experience</h4>
     <div class="col-sm-12 industry-experience">
       <p class="info">An individual may be exposed to multiple industries during the professional life. At times, organisations need individuals who have cross industry expertise. Select such industries where you can claim a reasonable
-        exposure. <span class="messages">You can edit this list anytime.</span></p>
+        exposure.</p>
       <div class="select-option"  *ngFor="let choice of industries;let i = index">
         <label >
           <input type="checkbox"  name="choice.name" value="{{choice.name}}" (click)="selectIndustryModel(choice.name,$event)" [checked]="candidateExperiencedIndustry.indexOf(choice.name)!=-1">
@@ -24,11 +24,12 @@
   </div>
   <div class="main-content" *ngIf="highlightedSection.name !='IndustryExposure'">
     <div class="compact-view clearfix">
-      <button class="btn-edit" (click)="highlightedSection.name='IndustryExposure';disableButton=false;highlightedSection.isDisable=true;showButton=false" [hidden]="highlightedSection.isDisable"></button>
-      <h4 class="heading">Experienced Industry</h4>
-      <ul class="option">
-        <li *ngFor="let item of candidateExperiencedIndustry;let i = index">{{item}}</li>
-      </ul>
+      <h4 class="heading">Addition Industries In which you have work exposure / experience
+        <button class="btn-edit" (click)="highlightedSection.name='IndustryExposure';disableButton=false;highlightedSection.isDisable=true;showButton=false" [hidden]="highlightedSection.isDisable"></button>
+      </h4>
+      <span class="option" *ngFor="let item of candidateExperiencedIndustry;let i = index">
+        <span>{{item}}</span>&nbsp;<span *ngIf="candidateExperiencedIndustry.length>1 && i!=candidateExperiencedIndustry.length -1">,</span>&nbsp;
+      </span>
     </div>
   </div>
 </div>

@@ -31,9 +31,10 @@
 
     <div id="industry-experience">
     <cn-industry-experience [candidateExperiencedIndustry]="jobPosterModel.interestedIndustries"
+                            [choosedIndeustry]="jobPosterModel.industry.name"
       [highlightedSection]="highlightedSection"
       (onComplete)="selectExperiencedIndustry($event)"
-      [hidden]="!isShowProficiency"></cn-industry-experience></div>
+      [hidden]="!isShowProficiency" *ngIf="jobPosterModel != undefined && jobPosterModel.industry != undefined"></cn-industry-experience></div>
 
 
     <div [hidden]="!isShowProficiency">

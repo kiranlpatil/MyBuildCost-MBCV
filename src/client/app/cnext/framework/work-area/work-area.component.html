@@ -31,8 +31,10 @@
     <!--
            <span class="glyphicon glyphicon-lock" title="This section can be updated only after {{highlightedSection.date| date:'mediumDate'}}" *ngIf="highlightedSection.isLocked"></span>
     -->
-    <p><label>Area Of Work</label>
-      <button  class="btn-edit" (click)="highlightedSection.name='Work-Area';highlightedSection.sectionName='capability';disableButton=false;highlightedSection.isDisable=true" [hidden]="highlightedSection.isDisable"></button>
+    <p>
+      <label>Area Of Work
+        <button  class="btn-edit" (click)="highlightedSection.name='Work-Area';highlightedSection.sectionName='capability';disableButton=false;highlightedSection.isDisable=true" [hidden]="highlightedSection.isDisable"></button>
+      </label>
       <span class="option" *ngFor="let item of selectedRoles;let i = index">
         {{item.name}}&nbsp;<span *ngIf="selectedRoles.length>1 && i!=selectedRoles.length-1">,</span>&nbsp;
       </span>

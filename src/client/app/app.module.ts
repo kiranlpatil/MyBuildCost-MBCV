@@ -152,6 +152,7 @@ import {CandidateDashboardHeaderComponent} from "./cnext/framework/candidate-das
 import {JobDashboardComponent} from "./cnext/framework/recruiter-dashboard/job-dashboard/job-dashboard.component";
 import {JobDashboardService} from "./cnext/framework/recruiter-dashboard/job-dashboard/job-dashboard.service";
 import {ReferenceService} from "./cnext/framework/model/newClass";
+import {AcademicsComponent} from "./cnext/framework/academic-details/academics/academics.component";
 
 //C-NEXT IMPORTS
 
@@ -207,6 +208,7 @@ import {ReferenceService} from "./cnext/framework/model/newClass";
     CandidateBasicInformationComponent,
     VericalListViewComponent,
     TabularListViewComponent,
+    AcademicsComponent,
     RecruiterSharedHeaderComponent,
     AdditionalDetailsComponent,
     HorizontalListViewComponent,

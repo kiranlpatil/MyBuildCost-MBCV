@@ -4,10 +4,10 @@
       <cn-candidate-description [candidateDetails]="candidateDetails" [candidate]="candidate"></cn-candidate-description>
     </div>
     <div *ngIf="candidate.employmentHistory.length>0">
-      <cn-vertical-list-view [data]="candidate.employmentHistory" [type]="'employment'" ></cn-vertical-list-view>
+      <cn-vertical-list-view [data]="candidate.employmentHistory" [type]="'employment history'" ></cn-vertical-list-view>
     </div>
     <div *ngIf="candidate.academics.length>0">
-      <cn-vertical-list-view [data]="candidate.academics" [type]="'education'" ></cn-vertical-list-view>
+      <cn-vertical-list-view [data]="candidate.academics" [type]="'acedemic details'" ></cn-vertical-list-view>
     </div>
     <div *ngIf="candidate.awards.length>0">
       <cn-vertical-list-view [data]="candidate.awards" [type]="'awards'" ></cn-vertical-list-view>

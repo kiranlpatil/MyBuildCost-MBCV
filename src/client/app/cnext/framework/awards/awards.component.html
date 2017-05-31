@@ -53,18 +53,13 @@
     </div>
   </div>
 </div>
-<div class="section-container" *ngIf="highlightedSection.name !='Awards'" [ngClass]="(highlightedSection.name=='Certification')?'full-width':'half-width'">
+<div class="section-container" *ngIf="highlightedSection.name !='Awards'" [ngClass]="(highlightedSection.name=='Certification' || highlightedSection.name=='EmploymentHistory' || highlightedSection.name=='AcademicDetails' )?'full-width':'quarter-width'">
   <div class="main-content" >
     <div class="compact-view clearfix">
       <button class="btn-edit" (click)="highlightedSection.name='Awards';highlightedSection.isDisable=true;showButton=false" [hidden]="highlightedSection.isDisable"></button>
-      <h4 class="heading">Awards</h4>
-      <ul>
-        <div *ngFor="let item of candidate.awards">
-          <li *ngIf="item.name != '' && item.issuedBy != ''">
-            <p>{{item.name}} at {{item.issuedBy}} in {{item.year}}</p>
-          </li>
-        </div>
-      </ul>
+      <div *ngIf="candidate.awards.length>0">
+        <cn-vertical-list-view [data]="candidate.awards" [type]="'awards'" ></cn-vertical-list-view>
+      </div>
     </div>
   </div>
 </div>

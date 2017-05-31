@@ -10,10 +10,9 @@ $border-color: #ccc;
 .compact-view {
   min-height: 135px;
 
-  &:hover {
-    .btn-edit {
-      opacity: 1;
-    }
+  .btn-edit {
+    top: 20px;
+    left: 79px;
   }
 }
 

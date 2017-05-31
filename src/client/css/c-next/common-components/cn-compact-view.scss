@@ -35,33 +35,38 @@ $theme-color: #3694d1;
 
 .compact-view {
   clear: both;
-  border: 1px solid $border-color;
+  //border: 1px solid $border-color;
   position: relative;
   padding: 10px;
 
   .btn-edit {
-    background: url("../assets/c-next/compact-view/editButton.png") no-repeat 50% 50%;
+    background: url("../assets/c-next/compact-view/pencil.png") no-repeat 50% 50%;
     background-color: #fff;
     background-size: cover;
     border: 0;
-    display: block;
+    //display: block;
     height: 20px;
     opacity: 1;
     padding: 0;
-    position: absolute;
-    right: 0;
-    top: 0;
+    //position: absolute;
+    //right: 0;
+    //top: 0;
     transition: opacity 0.25s ease-out;
     width: 20px;
     z-index: 3;
+
+    position: relative;
+    top: -4px;
+    display: inline-block;
+    left: -2px;
   }
 
-  .glyphicon-eye-open {
+  .see-more {
     color: $theme-color;
-    font-size: 16px;
+    font-size: 14px;
     position: absolute;
-    right: 27px;
-    top: 4px;
+    right: 0;
+    top: 15px;
   }
 
   .btn-edit[hidden] {
@@ -117,15 +122,15 @@ $theme-color: #3694d1;
 
   label {
     color: $light-blue;
-    min-width: 90px;
+    //min-width: 90px;
     margin-bottom: 0;
-    padding: 0;
+    padding: 0 10px 0 0;
   }
 
   .option {
     font-weight: 600;
     font-size: 12px;
-    //padding: 0;
+    padding: 0;
     text-transform: capitalize;
   }
 
@@ -145,11 +150,12 @@ $theme-color: #3694d1;
     li {
       color: #666;
       float: left;
-      list-style-image: url('../../../assets/c-next/compact-view/bullet.png');
+      list-style-type: none;
+      //list-style-image: url('../../../assets/c-next/compact-view/bullet.png');
       margin-bottom: 10px;
       padding-right: 25px;
       text-transform: capitalize;
-      width: 50%;
+      width: 100%;
     }
   }
 
@@ -176,6 +182,11 @@ $theme-color: #3694d1;
       }
     }
   }
+}
+
+.quarter-width {
+  width: 25%;
+  float:left;
 }
 
 .half-width {

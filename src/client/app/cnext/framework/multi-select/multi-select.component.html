@@ -5,10 +5,9 @@
          [source]="Proficiencies"
          (ngModelChange)="selectedProficiencyModel($event)"
          no-match-found-text="No Match Found, Press Enter to add It">
-      <input class="select"  #elem [id]="type"
+      <input class="form-control"  #elem [id]="type"
              (keyup.enter)="showHideModal($event.target.value)" />
     </div>
-    <p class="info-message">To add other proficiency which are not in the list, just type and enter</p>
   </div>
   <div class="col-sm-8 padding-left15">
     <div class="btn-container clearfix">

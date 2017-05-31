@@ -1,77 +1,49 @@
-<div class="section-container academic-details" *ngIf="highlightedSection.name =='AcademicDetails'">
-  <div class="main-content modal-content clearfix" >
+<div class="section-container">
+  <div class="main-content modal-content clearfix" *ngIf="highlightedSection.name =='AcademicDetails'">
     <h4 class="heading">Academic Details</h4>
-    <div class="col-sm-12 form" [class.hide]="hideDiv[i]" *ngFor="let item of candidate.academics;let i= index">
-      <span class="glyphicon glyphicon-trash" (click)="deleteItem(i)"></span>
-      <div class="row">
-        <div class="col-sm-4">
-          <div class="form-group">
-            <input type="text" class="form-control" [(ngModel)]="item.specialization" (change)="postAcademicDetails()"
-                   (focus)="changeValue()" required/>
-            <label>Degree</label>
+    <form [formGroup]="academicDetail" novalidate >
+      <div formArrayName="acdemicDetails">
+        <div *ngFor="let history of academicDetail.controls.acdemicDetails.controls; let i=index"
+             class="panel panel-default">
+          <div>
+          <span class="glyphicon glyphicon-trash pull-right"
+                *ngIf="academicDetail.controls.acdemicDetails.controls.length>0 && academicDetail.controls.acdemicDetails.controls.length !==1 "
+                (click)="removeAcdemicDetail(i)"></span>
           </div>
-        </div>
-
-        <div class="col-sm-4">
-          <div class="form-group">
-            <input class="form-control" type="text" [(ngModel)]="item.board" (change)="postAcademicDetails()" required/>
-            <label>Board/University Name</label>
+          <div class="panel-body" [formGroupName]="i">
+            <cn-academics [group]="academicDetail.controls.acdemicDetails.controls[i]"></cn-academics>
           </div>
-        </div>
-
-        <div class="col-sm-4">
-          <label>Year </label>
-          <select class="form-control" [(ngModel)]="item.yearOfPassing" (change)="postAcademicDetails()">
-            <option *ngFor="let acadmicyear of yearList" [selected]="true" [ngValue]="acadmicyear">{{acadmicyear}}
-            </option>
-          </select>
-
         </div>
       </div>
 
-      <div class="col-sm-12 no-padding">
-        <textarea placeholder="School/College Name" [(ngModel)]="item.schoolName" [ngModel]="specialization"
-                  (change)="postAcademicDetails()" class="form-control"></textarea>
-      </div>
-    </div>
-
-    <div class="col-sm-12 clearfix">
-      <div class="clear">
-        <button type="button" id="more_fields" (click)="addAnother()" class="btn btn-create-profile"
-                [disabled]="disbleRole">
-          Add Another <span>+</span>
+      <div class="margin-20">
+        <button (click)="addAcdemicDetail()" class="btn btn-create-profile" [disabled]="!academicDetail.valid">
+          Add another
         </button>
-        <div class="error-messages" *ngIf="isShowError"><p>Fields should not be empty.</p></div>
       </div>
       <div class="button-group clearfix">
-        <button class="btn btn-default"  (click)="highlightedSection.name='none';highlightedSection.isDisable=false" [hidden]="showButton" >Cancel</button>
-        <button class="btn btn-primary" scrollTo scrollTargetSelector="#certification"
-                (click)="onNext()" [disabled]="disableButton" [hidden]="!showButton">Next
+        <button class="btn btn-default"  (click)="highlightedSection.name='none';highlightedSection.isDisable=false" [hidden]="showButton">Cancel</button>
+        <button type="submit" class="btn btn-primary" scrollTo scrollTargetSelector="#certification"
+                (click)="postData('next')" [disabled]="!academicDetail.valid"  [hidden]="!showButton">Next
         </button>
-        <button class="btn btn-primary"  (click)="onSave()" [hidden]="showButton">Save</button>
+        <button type="submit" class="btn btn-primary" (click)="postData('save')" [disabled]="!academicDetail.valid"
+                [hidden]="showButton">Save
+        </button>
       </div>
-    </div>
+      <div class="clearfix"></div>
+    </form>
   </div>
-
 </div>
-<div class="section-container"  [ngClass]="(highlightedSection.name=='EmploymentHistory')?'full-width':'half-width'" *ngIf="highlightedSection.name !='AcademicDetails'">
+
+
+<div class="section-container"  [ngClass]="(highlightedSection.name=='EmploymentHistory' || highlightedSection.name=='Awards' || highlightedSection.name=='Certification')?'full-width':'quarter-width'" *ngIf="highlightedSection.name !='AcademicDetails'">
   <div class="main-content">
     <div class="compact-view clearfix">
       <button class="btn-edit" (click)="highlightedSection.name='AcademicDetails';highlightedSection.isDisable=true;showButton=false" [hidden]="highlightedSection.isDisable"></button>
-      <h4 class="heading">Academic Details</h4>
-      <ul>
-        <div *ngFor="let item of candidate.academics">
-          <li *ngIf="item.specialization != '' && item.board != ''">
-            <p>{{item.specialization}} at {{item.board}} in {{item.yearOfPassing}}</p>
-          </li>
-        </div>
-      </ul>
+      <div *ngIf="candidate.academics.length>0">
+        <cn-vertical-list-view [data]="candidate.academics" [type]="'acedemic details'" ></cn-vertical-list-view>
+      </div>
     </div>
   </div>
 </div>
-
-
-
-
-
 

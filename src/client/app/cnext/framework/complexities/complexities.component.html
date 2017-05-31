@@ -1,18 +1,13 @@
   <div class="section-container clearfix" >
     <div class="main-content clearfix modal-content" *ngIf="highlightedSection.name=='Complexities'">
       <div class="complexities">
-        <h4 class="heading">Choose Complexities</h4>
+        <h4 class="heading">Choose Complexities for the above Capabilities</h4>
         <div class="col-sm-12">
-          <div class="info">
-            <ul>
-              <li>Depending on your experience and expertise, you have used your capabilities under varying degree of
-              complexity.
-              </li>
-              <li>For each capability that you have selected, choose the ost appropriate degree of complexity that
-                describes what you are good at doing
-              </li>
-            </ul>
-          </div>
+          <p class="info">
+            This section provides a list of complexity scenarios for your selected capabilities.
+            For each scenario, select the most appropriate level of complexity that you are capable of handling.
+            If you have not handled a particular complexity, choose not applicable.
+          </p>
           <div *ngIf="isComplexityPresent">
             <div *ngFor="let role of candidateRoles">
               <div *ngFor="let capability of role.capabilities">
@@ -73,13 +68,15 @@
     <div *ngIf="highlightedSection.name!='Complexities'">
       <div class="main-content">
         <div class="compact-view clearfix">
-          <button class="btn-edit" (click)="highlightedSection.name='Complexities';highlightedSection.isDisable=true" [hidden]="highlightedSection.isDisable"></button> <!--[hidden]="highlightedSection.isLocked"-->
+          <!--[hidden]="highlightedSection.isLocked"-->
 <!--
           <span class=" glyphicon glyphicon-lock" title="you can edit this field after {{highlightedSection.date| date:'mediumDate'}}" *ngIf="highlightedSection.isLocked"></span>
 -->
           <a data-toggle="collapse" data-target="#demo" >
-            <h4 class="heading">Complexities handled </h4>
-            <span class="glyphicon glyphicon-eye-open"></span>
+            <h4 class="heading">Complexities handled for the above Capabilities
+              <button class="btn-edit" (click)="highlightedSection.name='Complexities';highlightedSection.isDisable=true" [hidden]="highlightedSection.isDisable"></button>
+            </h4>
+            <span class="see-more">more...</span>
           </a>
           <div id="demo" class="collapse col-sm-12">
             <cn-tabular-list-view [roles]="candidateRoles"></cn-tabular-list-view>

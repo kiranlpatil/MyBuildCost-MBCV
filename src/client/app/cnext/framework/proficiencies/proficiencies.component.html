@@ -2,9 +2,12 @@
   <div class="section-container clearfix profeiciency-domain" >
     <div class="main-content  modal-content clearfix"  *ngIf="highlightedSection.name=='Proficiencies'">
       <h4 class="heading">Proficiencies (Max 25)</h4>
-      <p class="info">Enter all key words that describe your area of expertise or specialization. These
-        proficiencies will be used for second level of matching post
-        capability. <span class="messages">You can edit this list anytime.</span></p>
+      <p class="info">Enter all key words that describe your area of expertise or specialization.
+        Ensure that you cover all relevant aspects of Technologies, Products, Methodologies, Models, Processes, Tools,
+        Domain expertise and any additional key words that describe your work.
+        These keywords will help the recruiter identify your specialties / proficiencies.
+        Selecting too many proficiencies would dilute the matching and alignment with the best job opportunity.
+        Hence you should select maximum 25 proficiencies.</p>
       <div class="proficiency-container col-sm-12">
 
         <cn-multi-select  [data]="proficiencies" [selectedData]="choosedproficiencies" [maxLength]="maxProficiencies" (onComplete)="onProficiencyComplete($event)"  ></cn-multi-select>
@@ -20,10 +23,11 @@
     </div>
     <div class="main-content" *ngIf="highlightedSection.name !='Proficiencies'">
       <div class="compact-view clearfix">
-        <button class="btn-edit" (click)="highlightedSection.name='Proficiencies';highlightedSection.isDisable=true;showButton=false" [hidden]="highlightedSection.isDisable"></button>
-        <h4 class="heading">Proficiencies</h4>
-        <span class="option col-sm-3 padding-right15" *ngFor="let item of choosedproficiencies;let i = index">
-          {{item}}
+        <h4 class="heading">Proficiencies
+          <button class="btn-edit" (click)="highlightedSection.name='Proficiencies';highlightedSection.isDisable=true;showButton=false" [hidden]="highlightedSection.isDisable"></button>
+        </h4>
+        <span class="option" *ngFor="let item of choosedproficiencies;let i = index">
+          <span>{{item}}</span>&nbsp;<span *ngIf="choosedproficiencies.length>1 && i!=choosedproficiencies.length -1">,</span>&nbsp;
         </span>
       </div>
     </div>

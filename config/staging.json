@@ -5,10 +5,10 @@
       "name": "c-next-backend"
     },
     "mail": {
-      "host":"https://10.192.33.252:1400/",
-      "MAIL_SENDER": "redminestatus@techprimelab.com",
-      "MAIL_SENDER_PASSWORD": "Contactu$@tpl",
-      "ADMIN_MAIL": "admin@techprimelab.com"
+      "host":"http://52.89.221.23:8080/",
+      "MAIL_SENDER": "cnext1@inunison.in",
+      "MAIL_SENDER_PASSWORD": "cnext123",
+      "ADMIN_MAIL": "cnext1@inunison.in"
 
     },
     "facebookIds":{

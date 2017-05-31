@@ -55,7 +55,7 @@ export class WorkAreaComponent {
   onNext() {
 //    this.compactView=false;
     this.highlightedSection.name = "Capabilities";
-    this.highlightedSection.isDisable=false;
+    this.highlightedSection.isDisable=true;
     this.onComplete.emit(this.selectedRoles);
   }
 
