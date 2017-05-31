@@ -1,5 +1,6 @@
 import {Pipe, PipeTransform} from '@angular/core';
 import {CandidateQCard} from "../model/candidateQcard";
+let lastArgs:any= undefined;
 
 @Pipe({name: 'qcardlistsort', pure: false})
 
@@ -9,6 +10,11 @@ export class QCardListSortPipe implements PipeTransform {
   transform(array: Array<CandidateQCard>, args: string): Array<CandidateQCard> {
     if (array == null) {
       return null;
+    }
+    if(lastArgs == args){
+      return array
+    }else{
+      lastArgs =args;
     }
     if (args === 'Best match') {
       array.sort((a: CandidateQCard, b: CandidateQCard) => {
