@@ -173,7 +173,14 @@ $blue: #3694d1;
   }
 }
 
+.profile-visibility {
+  .heading {
+    display: inline;
+  }
+}
+
 .profile-configurations {
+
   label {
     padding-left: 0;
     color: $label;
@@ -205,6 +212,7 @@ $blue: #3694d1;
 
   .button-group {
     margin-top: 15px;
+    margin-bottom: 15px;
   }
 
   .social-links {

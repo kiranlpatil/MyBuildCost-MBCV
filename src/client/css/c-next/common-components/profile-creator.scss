@@ -210,6 +210,45 @@ $theme-color: #3694d1;
   }
 }
 
+.divider {
+  border-bottom: 1px solid #f7f6f6;
+  height: 20px;
+}
+
+.switch {
+  padding: 1px 3px 0 0;
+  //border: 1px solid #e8e8e8;
+  height: 27px;
+  width: auto;
+  display: inline-block;
+  margin: 0 0 5px 10px;
+
+  label{
+    color: #666;
+    padding: 0 !important;
+    margin: 0 -4px 0 0 !important;
+  }
+
+  input{
+    display: none;
+  }
+
+  input + span {
+    background: #f8fbfd;
+    width: 100%;
+    height: 100%;
+    padding: 5px;
+    border: 1px solid $border-color;
+    font-weight: 900;
+  }
+
+  input:checked + span{
+    background: $theme-color;
+    color: $white;
+    border: 1px solid $theme-color;
+  }
+}
+
 @media only screen and (max-width: 980px) {
   .main-content {
     .btn-default {

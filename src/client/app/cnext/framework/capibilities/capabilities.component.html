@@ -1,23 +1,16 @@
 <div class="section-container clear clearfix" *ngIf="highlightedSection.name=='Capabilities'">
   <div class="main-content clearfix modal-content" >
-    <h4 class="heading">Choose Your Capabilities (Max 10)</h4>
+    <h4 class="heading">Choose Your Capabilities</h4>
 
     <div class="clearfix">
       <div class="capabilities col-sm-12">
-        <div class="info">
-          <ul>
-            <li>Select those capabilities which describe what you are best at or where you would
-              like to position your career. </li>
-            <li> Selecting too many capabilities would dilute the matching and alignment with
-              the best job opportunity.</li>
-            <li>Hence you should select maximum 10 primary
-          capabilities.You may additionally select upto 10 secondary capabilities.</li>
-          </ul>
-        </div>
-        <p class="legends">
+        <p class="info">
+          Select those capabilities which describe what you are best at or where you would like to position your career.
+        </p>
+        <!--<p class="legends">
           <span class="color-panel primary-color"></span>Primary
           <span class="color-panel secondary-color"></span>Secondary
-        </p>
+        </p>-->
         <div class="capability-type max-height">
           <span class="capability-option" *ngFor="let role of roles">
             <div class="select-option"
@@ -66,3 +59,4 @@
     <!-- <div [class.modal-bg]="highlightedSection.name!='Capabilities'"></div>-->
   </div>
 </div>
+<div class="clearfix divider clear"></div>

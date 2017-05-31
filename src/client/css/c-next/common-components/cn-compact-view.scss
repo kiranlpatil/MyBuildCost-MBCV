@@ -87,7 +87,7 @@ $theme-color: #3694d1;
 
   .heading {
     background: none !important;
-    margin: 0px 0 10px 0 !important;
+    margin: 0 0 10px 0 !important;
     padding: 0 !important;
   }
 
@@ -95,11 +95,11 @@ $theme-color: #3694d1;
     border: 1px solid $border-color;
     box-sizing: border-box;
     float: left;
-    height: 85px;
+    height: 110px;
     margin: 0 15px 0 0;
     overflow: hidden;
     position: relative;
-    width: 85px;
+    width: 110px;
 
     img {
       background: #e6e6e6;
@@ -113,6 +113,8 @@ $theme-color: #3694d1;
 
   .user-name {
     margin-top: 0 !important;
+    margin-bottom: 10px;
+    display: block;
   }
 
   p {

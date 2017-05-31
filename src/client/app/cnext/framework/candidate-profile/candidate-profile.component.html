@@ -70,23 +70,22 @@
 
         <div class="section-container" [hidden]="!showAboutMySelf">
           <div class="main-content clearfix">
-            <h4 class="heading">Profile Visibility</h4>
-            <div class="col-sm-12">
+            <div class="compact-view clearfix profile-visibility">
+              <h4 class="heading">Profile Visibility</h4>
+              <div class="switch">
+              <label class="radio-inline">
+                <input type="radio" name="profile-visibility"
+                       (change)="showorhide('show',$event)" value=true [checked]="candidate.isVisible == true">
+                <span>Show</span>
+              </label>
+              <label class="radio-inline">
+                <input type="radio" name="profile-visibility"
+                       (change)="showorhide('hide',$event)" value=false [checked]="candidate.isVisible == false">
+                <span>Hide</span>
+              </label>
+              </div>
               <div class="info">In case you wish to hide your profile from recruiters, select hide option
-                below. You may also choose to show your profile later.</div>
-              <div class="radio">
-                <!--<label>Profile Visibility:</label>-->
-
-                <label class="radio-inline">
-                  <input type="radio" name="profile-visibility"
-                         (change)="showorhide('show',$event)" value=true [checked]="candidate.isVisible == true">
-                  Show profile
-                </label>
-                <label class="radio-inline">
-                  <input type="radio" name="profile-visibility"
-                         (change)="showorhide('hide',$event)" value=false [checked]="candidate.isVisible == false">
-                  Hide profile
-                </label>
+                below. You may also choose to show your profile later.
               </div>
             </div>
           </div>
