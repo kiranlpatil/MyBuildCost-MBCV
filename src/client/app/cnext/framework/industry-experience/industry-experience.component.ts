@@ -17,23 +17,28 @@ export class IndustryExperienceListComponent {
   private industries:Industry[] = new Array(0);
   private selectedIndustries:string[] = new Array(0);
   @Input() highlightedSection :Section;
+  @Input() choosedIndeustry :string;
   @Input() candidateExperiencedIndustry:string[] = new Array(0);
   @Output() onComplete = new EventEmitter();
   private disableButton:boolean=true;
   constructor(private candidateProfileService:CandidateProfileService) {
-    this.candidateProfileService.getIndustries()
-      .subscribe(industries => this.industries = industries.data);
+    this.getIndustries();
         this.candidateExperiencedIndustry=new Array(0);
   }
 
   ngOnChanges(changes:any){
 
-    if(changes.candidateExperiencedIndustry.currentValue != undefined){
+    if(changes.candidateExperiencedIndustry != undefined && changes.candidateExperiencedIndustry.currentValue != undefined){
       this.candidateExperiencedIndustry=changes.candidateExperiencedIndustry.currentValue;
       this.selectedIndustries=this.candidateExperiencedIndustry;
       if(this.selectedIndustries.length>0){
         this.disableButton=false;
       }
+    }
+
+    if(changes.choosedIndeustry != undefined && changes.choosedIndeustry.currentValue != undefined){
+      this.choosedIndeustry=changes.choosedIndeustry.currentValue;
+      this.getIndustries();
     }
     if(this.candidateExperiencedIndustry === undefined){
       this.candidateExperiencedIndustry= new Array(0);
@@ -76,6 +81,20 @@ export class IndustryExperienceListComponent {
   onSave() {
       this.highlightedSection.name = "none";
       this.highlightedSection.isDisable=false;
+  }
+  
+  getIndustries(){
+    this.candidateProfileService.getIndustries()
+      .subscribe(industries => this.onIndustryListSuccess(industries.data));
+  }
+  
+  onIndustryListSuccess(data:Industry[]){
+    this.industries = data;
+    for (let item of this.industries){
+      if(item.name===this.choosedIndeustry){
+        this.industries.splice(this.industries.indexOf(item), 1);
+      }
+    }
   }
 }
 

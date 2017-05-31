@@ -38,9 +38,10 @@
                                (onSelect)="onProficiencySelect($event)" (onComplete)="onProficiencyComplete($event)" [hidden]="!showProfeciency"></cn-proficiencies></div>
         <div id="industry-experience">
         <cn-industry-experience [candidateExperiencedIndustry]="candidate.interestedIndustries"
+                                [choosedIndeustry]="candidate.industry.name"
                                 [highlightedSection]="highlightedSection"
                                 (onComplete)="onExperienceIndustryComplete($event)"
-                                [hidden]="!showIndustryExperience"></cn-industry-experience></div>
+                                [hidden]="!showIndustryExperience" *ngIf="candidate != undefined || candidate.industry !=undefined"></cn-industry-experience></div>
 
 
         <cn-professional-data [candidate]="candidate" [highlightedSection]="highlightedSection"

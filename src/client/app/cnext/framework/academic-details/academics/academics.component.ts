@@ -6,19 +6,18 @@ import {ValueConstant} from "../../../../framework/shared/constants";
 
 @Component({
   moduleId: module.id,
-  selector: 'cn-employee-history',
-  templateUrl: 'employee-history.component.html',
-  styleUrls: ['employee-history.component.css']
+  selector: 'cn-academics',
+  templateUrl: 'academics.component.html',
+  styleUrls: ['academics.component.css']
 })
 
-export class EmployeeHistoryComponent {
+export class AcademicsComponent {
   @Input('group')
-  public employeeForm: FormGroup;
+  public academicForm: FormGroup;
   private tempfield:string[];
   private year:any;
   private currentDate:any;
   private yearList = new Array();
-  public monthList:string[] = new Array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December');
 
   constructor() {
     this.tempfield = new Array(1);
@@ -26,20 +25,14 @@ export class EmployeeHistoryComponent {
     this.year = this.currentDate.getUTCFullYear();
     this.year=this.year-ValueConstant.MAX_YEAR_LIST;
     this.createYearList(this.year); //TODO use the service for date list
-  }
 
+  }
+  
   createYearList(year:any) {
-   
     for (let i = 0; i <= ValueConstant.MAX_YEAR_LIST; i++) {
       this.yearList.push(year++);
     }
   }
-
-  setCurrentDate(){
-
-    console.log("in set current date");
-  }
-
 }
 
 

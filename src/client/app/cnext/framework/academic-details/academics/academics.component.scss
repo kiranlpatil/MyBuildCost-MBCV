@@ -1,0 +1,33 @@
+$border-color: #ccc;
+
+.btn {
+  &:focus,
+  &:active {
+    outline: none;
+  }
+}
+
+.compact-view {
+  min-height: 135px;
+
+  &:hover {
+    .btn-edit {
+      opacity: 1;
+    }
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .academic-details {
+
+    .col-sm-4,
+    .col-sm-12 {
+      width: 100%;
+      padding: 0;
+    }
+
+    .row {
+      margin: 0;
+    }
+  }
+}

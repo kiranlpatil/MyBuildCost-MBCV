@@ -1,0 +1,107 @@
+<div [formGroup]="academicForm">
+  <div>
+    <div class="row">
+      <div class="col-sm-4">
+        <div class="form-group">
+          <input type="text" class="form-control"  formControlName="specialization" required/>
+          <label>Degree</label>
+          <small  class="text-danger" *ngIf="academicForm.get('specialization').touched && academicForm.get('specialization').hasError('required')">
+            Degree Name is required
+          </small>
+        </div>
+      </div>
+
+      <div class="col-sm-4">
+        <div class="form-group">
+          <input class="form-control" type="text"  formControlName="board"  required/>
+          <label>Board/University Name</label>
+          <small  class="text-danger" *ngIf="academicForm.get('board').touched && academicForm.get('board').hasError('required')">
+            Board/University Name is required
+          </small>
+        </div>
+      </div>
+
+      <div class="col-sm-4">
+        <label>Year </label>
+        <select class="form-control"  formControlName="yearOfPassing" >
+          <option *ngFor="let acadmicyear of yearList" [ngValue]="acadmicyear">{{acadmicyear}}
+          </option>
+        </select>
+        <small  class="text-danger" *ngIf="academicForm.get('yearOfPassing').touched && academicForm.get('yearOfPassing').hasError('required')">
+          Year Of Passing is required
+        </small>
+      </div>
+    </div>
+
+    <div class="col-sm-12 no-padding">
+        <textarea placeholder="School/College Name"  formControlName="schoolName" class="form-control"></textarea>
+    </div>
+  </div>
+  <!--<div class="left-content">
+    <div class="col-sm-6 padding-right15">
+      <div class="form-group">
+        <input type="text" class="form-control" formControlName="companyName" required/>
+        <label>Company Name</label>
+        <small  class="text-danger" *ngIf="employeeForm.get('companyName').touched && employeeForm.get('companyName').hasError('required')">
+          Company Name is required
+        </small>
+      </div>
+    </div>
+
+    <div class="col-sm-6 padding-left15">
+      <div class="form-group">
+        <input type="text" class="form-control" formControlName="designation" required/>
+        <label>Designation</label>
+        <small *ngIf="employeeForm.get('designation').touched && employeeForm.get('designation').hasError('required')" class="text-danger">
+          Designation is required
+        </small>
+      </div>
+    </div>
+
+    <div class="col-sm-12 no-padding">
+      <div class="worked-from col-sm-6 padding-right15">
+        <div formGroupName="from">
+          <label>From Date</label>
+          <div class="col-sm-6 padding-right5">
+            <select class="form-control" formControlName="month" required>
+              <option *ngFor="let c of monthList" [ngValue]="c">{{c}}</option>
+            </select>
+          </div>
+          <div class="col-sm-6 padding-left5">
+            <select class="form-control" formControlName="year" required>
+              <option *ngFor="let c of yearList"  [ngValue]="c">{{c}}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="worked-to col-sm-6 padding-left15">
+        <div formGroupName="to">
+          <label>To Date</label>
+          <div class="col-sm-6 padding-right5">
+            <select class="form-control" formControlName="month" required>
+              <option *ngFor="let c of monthList" [ngValue]="c">{{c}}</option>
+            </select>
+          </div>
+          <div class="col-sm-6 padding-left5">
+            <select class="form-control" formControlName="year" required>
+              <option *ngFor="let c of yearList"  [ngValue]="c">{{c}}</option>
+            </select>
+          </div>
+          &lt;!&ndash;<div >  &lt;!&ndash;*ngIf="item.to.month ==''"&ndash;&gt;
+            <label class="checkbox-inline">
+              <input type="checkbox" (click)="setCurrentDate()" name="TillDate" value="TillDate"/>Till Date
+            </label>
+          </div>&ndash;&gt;
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="right-content">
+    <div>
+      <textarea class="form-control" formControlName="remarks" Placeholder="Remark"></textarea>
+    </div>
+  </div>-->
+</div>
+
+
