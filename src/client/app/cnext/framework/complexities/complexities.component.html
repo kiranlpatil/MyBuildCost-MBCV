@@ -8,7 +8,7 @@
             For each scenario, select the most appropriate level of complexity that you are capable of handling.
             If you have not handled a particular complexity, choose not applicable.
           </p>
-          <div *ngIf="isComplexityPresent">
+          <div *ngIf="candidateRoles && candidateRoles[0] && candidateRoles[0].capabilities && candidateRoles[0].capabilities[0] && candidateRoles[0].capabilities[0].complexities && candidateRoles[0].capabilities[0].complexities.length > 0">
             <div *ngFor="let role of candidateRoles">
               <div *ngFor="let capability of role.capabilities">
                 <div class="select-complexity clearfix" *ngFor="let complexity of capability.complexities">
@@ -30,7 +30,7 @@
             </div>
           </div>
 
-          <div *ngIf="!isComplexityPresent">
+          <div *ngIf="!(candidateRoles && candidateRoles[0] && candidateRoles[0].capabilities && candidateRoles[0].capabilities[0] && candidateRoles[0].capabilities[0].complexities && candidateRoles[0].capabilities[0].complexities.length > 0)">
             <div *ngFor="let role of roles">
               <div *ngFor="let capability of role.capabilities">
                 <div class="select-complexity clearfix" *ngFor="let complexity of capability.complexities">

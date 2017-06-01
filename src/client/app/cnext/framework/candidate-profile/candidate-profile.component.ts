@@ -284,7 +284,7 @@ export class CandidateProfileComponent implements OnInit {
       .subscribe(
         candidateData => {
           this.candidateForComplexity = candidateData.data[0].industry.roles;
-          if (this.candidateForComplexity[0].capabilities[0].complexities.length > 0) {
+          if (this.candidateForComplexity && this.candidateForComplexity[0].capabilities && this.candidateForComplexity[0].capabilities[0] && this.candidateForComplexity[0].capabilities[0].complexities.length > 0) {
             this.isComplexityPresent = true;
           }
         },
