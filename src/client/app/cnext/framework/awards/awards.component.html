@@ -35,7 +35,7 @@
     </form>
   </div>
 </div>
- 
+
 <div class="section-container" *ngIf="highlightedSection.name !='Awards'" [ngClass]="(highlightedSection.name=='Certification' || highlightedSection.name=='EmploymentHistory' || highlightedSection.name=='AcademicDetails' )?'full-width':'quarter-width'">
   <div class="main-content">
     <div class="compact-view clearfix">
@@ -47,7 +47,7 @@
           <span class="glyphicon glyphicon-plus"></span>
         </h4>
       </div>
-      <div  class="vertical-container" *ngIf="candidate.awards != undefined && candidate.awards.length>0 && candidate.awards[0].name!=='' && candidate.awards[0].issuedBy!==''">
+      <div  class="vertical-container" *ngIf=" candidate.awards.length>0 ">
         <button class="btn-edit" (click)="highlightedSection.name='Awards';highlightedSection.isDisable=true;showButton=false" [hidden]="highlightedSection.isDisable"></button>
         <cn-vertical-list-view [data]="candidate.awards" [type]="'awards'" ></cn-vertical-list-view>
       </div>

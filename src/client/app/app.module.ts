@@ -153,6 +153,8 @@ import {JobDashboardComponent} from "./cnext/framework/recruiter-dashboard/job-d
 import {JobDashboardService} from "./cnext/framework/recruiter-dashboard/job-dashboard/job-dashboard.service";
 import {ReferenceService} from "./cnext/framework/model/newClass";
 import {AcademicsComponent} from "./cnext/framework/academic-details/academics/academics.component";
+import {CandidateCompareViewComponent} from "./cnext/framework/single-page-compare-view/candidate-compare-view/candidate-compare-view.component";
+import {CapabilityCompareComponent} from "./cnext/framework/single-page-compare-view/shared/capability-compare/capability-compare.component";
 import {CerificatesComponent} from "./cnext/framework/certification-accreditation/cerificates/certificates.component";
 import {AwardComponent} from "./cnext/framework/awards/award/award.component";
 
@@ -230,6 +232,8 @@ import {AwardComponent} from "./cnext/framework/awards/award/award.component";
     CandidateDashboardComponent,
     ProfessionalDataComponent,
     EmploymentHistoryComponent,
+    CandidateCompareViewComponent,
+    CapabilityCompareComponent,
     AcademicDetailComponent,
     CertificationAccreditationComponent,
     AwardsComponent,
