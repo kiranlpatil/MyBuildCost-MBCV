@@ -8,7 +8,6 @@ import {LocalStorageService} from "../../../framework/shared/localstorage.servic
 import {LocalStorage} from "../../../framework/shared/constants";
 import {Section} from "../model/candidate";
 
-
 @Component({
   moduleId: module.id,
   selector: 'cn-complexities',
@@ -32,6 +31,7 @@ export class ComplexitiesComponent {
   private showModalStyle:boolean = false;
   private isCandidate:boolean = false;
   private count:number=0;
+  private elements:any;
  // private compactView:boolean = true;
 
 
@@ -101,6 +101,16 @@ export class ComplexitiesComponent {
       this.isComplexityButtonEnable =true;
     }*/
   }
+
+  /*scrollToTop() {
+    //this.elementContainer = document.getElementsByClassName('complexity-container');
+    //this.elements[0].scrollTop += 65;
+
+    var element = angular.element(anchor);
+    angular.element(container).animate({scrollTop:
+    element.offset().top - angular.element(container)[0].offsetHeight
+    }, "slow");
+  }*/
 
   saveComplexity(){
     //this.compactView=true

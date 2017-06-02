@@ -59,6 +59,7 @@ export class CandidateProfileComponent implements OnInit {
   private isHiddenCertificate:boolean = false;
   private isHiddenEmployeehistory:boolean = false;
   private isTitleFilled:boolean = false;
+  private showTooltip:boolean = false;
   private highlightedSection:Section = new Section();
 
   constructor(private _router:Router,

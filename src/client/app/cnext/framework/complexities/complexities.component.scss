@@ -8,6 +8,16 @@ $option-theme-color: #1c75bd;
   padding-left: 0;
 }
 
+.main-content {
+  .heading {
+    margin-bottom: 5px;
+  }
+
+  .info {
+    margin-bottom: 5px;
+  }
+}
+
 .compact-view {
   padding: 10px 10px 0;
 
@@ -27,7 +37,7 @@ $option-theme-color: #1c75bd;
 }
 
 .select-complexity {
-  padding: 10px 0;
+  padding: 5px 0;
   border-bottom: 1px solid $border-color;
 
   .complexity-name {
@@ -37,6 +47,11 @@ $option-theme-color: #1c75bd;
       font-size: 12px;
     }
   }
+}
+
+.complexity-container {
+  max-height: 330px;
+  overflow: auto;
 }
 
 @media screen and (max-width: 767px) {

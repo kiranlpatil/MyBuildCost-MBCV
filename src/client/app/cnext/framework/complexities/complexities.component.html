@@ -8,7 +8,7 @@
             For each scenario, select the most appropriate level of complexity that you are capable of handling.
             If you have not handled a particular complexity, choose not applicable.
           </p>
-          <div *ngIf="candidateRoles && candidateRoles[0] && candidateRoles[0].capabilities && candidateRoles[0].capabilities[0] && candidateRoles[0].capabilities[0].complexities && candidateRoles[0].capabilities[0].complexities.length > 0">
+          <div class="complexity-container" *ngIf="candidateRoles && candidateRoles[0] && candidateRoles[0].capabilities && candidateRoles[0].capabilities[0] && candidateRoles[0].capabilities[0].complexities && candidateRoles[0].capabilities[0].complexities.length > 0">
             <div *ngFor="let role of candidateRoles">
               <div *ngFor="let capability of role.capabilities">
                 <div class="select-complexity clearfix" *ngFor="let complexity of capability.complexities">
@@ -18,9 +18,9 @@
                   <div class="scenarios col-sm-10 padding-left15">
                     <div class="select-option" *ngFor="let scenario of complexity.scenarios">
                       <label>
-                        <input type="radio" name="{{complexity.name}}" value="{{scenario.name}}"
+                        <input class="selected-complexity" type="radio" name="{{complexity.name}}" value="{{scenario.name}}"
                                (change)="selectComplexity(role,complexity,scenario,$event)"
-                               [checked]="scenario.isChecked" >
+                               [checked]="scenario.isChecked">
                         <span>{{scenario.name}}</span>
                       </label>
                     </div>

@@ -1,4 +1,4 @@
-import {Component, Input, EventEmitter, Output} from "@angular/core";
+import {Component, Input, EventEmitter, Output, ViewChild, ElementRef} from "@angular/core";
 import {ValueConstant} from "../../../framework/shared/constants";
 import {MultiSelectService} from "./multi-select.service";
 
@@ -23,10 +23,19 @@ export class MultiSelectComponent {
   private alreadyPresent:boolean = false;
   private showModalStyle:boolean = false;
   private otherProficiency:string = '';
+  @ViewChild("myInput")
+  private _inputElement: ElementRef;
 
   constructor(private proficiencydoaminService:MultiSelectService) {
+
   }
-  
+
+ /* ngOnInit() {
+    debugger
+  document.getElementById('save-button').focus();
+
+  }
+  */
   ngOnChanges(changes:any) {
     if(this.data != undefined){
       if(this.data.length > 0) {
@@ -87,6 +96,7 @@ export class MultiSelectComponent {
 
   getStyleModal() {
     if (this.showModalStyle) {
+      this._inputElement.nativeElement.focus();
       return 'block';
     } else {
       return 'none';
