@@ -176,6 +176,7 @@ export class CandidateProfileComponent implements OnInit {
 
   onProficiencySelect(proficiency:string[]) {
     this.candidate.proficiencies = proficiency;
+    this.highlightedSection.isProficiencyFilled=true;
     this.saveCandidateDetails();
     this.whichStepsVisible[4] = true;
   }
@@ -314,6 +315,7 @@ export class CandidateProfileComponent implements OnInit {
     console.log(this.candidate);
 
     if(candidateData.data[0].isCompleted==true){
+      this.showIndustryExperience=true;
       this.showProfessionalData = true;
       this.showAboutMySelf=true;
       this.showAcademicsDetails=true;
@@ -360,14 +362,17 @@ export class CandidateProfileComponent implements OnInit {
         this.whichStepsVisible[2] = true;
         if (this.candidate.industry.roles[0].capabilities[0].complexities.length > 0) {
           this.whichStepsVisible[3] = true;
-          this.showProfeciency = true;
-          if (this.candidate.proficiencies.length > 0) {
-            this.whichStepsVisible[4] = true;
-          }
         }
       }
     }
-    if (this.candidate.interestedIndustries !== undefined && this.candidate.interestedIndustries.length >= 1) {
+    
+    if (this.candidate.proficiencies !== undefined && this.candidate.proficiencies.length > 0) {
+      this.highlightedSection.isProficiencyFilled=true;
+      this.showProfeciency = true;
+      this.whichStepsVisible[4] = true;
+    }
+    
+    if (this.candidate.interestedIndustries !== undefined) {
       this.showIndustryExperience = true;
     }
 

@@ -33,6 +33,7 @@ export class Section{
   date : Date;
   isLocked:boolean;
   isDisable:boolean;
+  isProficiencyFilled:boolean=false;
 }
 
 export class Summary{

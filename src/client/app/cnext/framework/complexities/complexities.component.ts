@@ -137,7 +137,11 @@ export class ComplexitiesComponent {
         }
       }
     }
-    this.highlightedSection.name = "Proficiencies";
+    if(this.highlightedSection.isProficiencyFilled){
+      this.highlightedSection.name = "none";
+    } else{
+      this.highlightedSection.name = "Proficiencies";
+    }
     this.highlightedSection.isDisable=false;
     this.onComplete.emit(this.roles);
   }
