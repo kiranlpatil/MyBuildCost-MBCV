@@ -363,15 +363,23 @@ export class CandidateProfileComponent implements OnInit {
         if (this.candidate.industry.roles[0].capabilities[0].complexities.length > 0) {
           this.whichStepsVisible[3] = true;
         }
+        else{
+          this.highlightedSection.name='Complexities';
+        }
       }
+      else{
+        this.highlightedSection.name='Capabilities';
+      }
+    } else{
+      this.highlightedSection.name='Work-Area';
     }
-    
+
     if (this.candidate.proficiencies !== undefined && this.candidate.proficiencies.length > 0) {
       this.highlightedSection.isProficiencyFilled=true;
       this.showProfeciency = true;
       this.whichStepsVisible[4] = true;
     }
-    
+
     if (this.candidate.interestedIndustries !== undefined && this.candidate.interestedIndustries.length > 0) {
       this.showIndustryExperience = true;
     }
