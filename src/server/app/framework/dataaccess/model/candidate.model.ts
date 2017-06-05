@@ -32,5 +32,12 @@ interface CandidateModel {
   secondaryCapability : string[];
   lockedOn: Date;
   job_list : JobListModel[];
+  salaryMatch : string;
+  experienceMatch : string;
+  educationMatch : string;
+  releaseMatch : string;
+  interestedIndustryMatch : string[];
+  proficienciesMatch : string[];
+
 }
 export = CandidateModel;

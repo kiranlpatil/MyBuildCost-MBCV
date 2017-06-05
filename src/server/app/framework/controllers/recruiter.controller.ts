@@ -143,11 +143,18 @@ export function retrieve(req: express.Request, res: express.Response, next: any)
           code: 401
         });
       }else{
-        res.status(200).send({
-          "status": Messages.STATUS_SUCCESS,
-          "data": result,
-          "jobCountModel":result[0].jobCountModel
+        if(result[0]){
+          res.status(200).send({
+            "status": Messages.STATUS_SUCCESS,
+            "data": result,
+            "jobCountModel":result[0].jobCountModel
           });
+        }else{
+          res.status(200).send({
+            "status": Messages.STATUS_SUCCESS,
+            "data": result
+          });
+        }
       }
 
     });

@@ -6,6 +6,7 @@ import CandidateService = require("../services/candidate.service");
 import UserService = require("../services/user.service");
 import * as mongoose from "mongoose";
 import RecruiterService = require("../services/recruiter.service");
+import SearchService = require("../search/services/search.service");
 
 
 export function create(req:express.Request, res:express.Response, next:any) {
@@ -82,7 +83,6 @@ export function updateDetails(req:express.Request, res:express.Response, next:an
             });
           }
           else {
-            console.log("--------------------------------------------", JSON.stringify(result));
             var token = auth.issueTokenWithUid(updatedCandidate);
             res.send({
               "status": "success",
@@ -180,35 +180,64 @@ export function retrieve(req:express.Request, res:express.Response, next:any) { 
 }
 
 
+export function metchResult(req:express.Request, res:express.Response, next:any) {
+  try {
+    var searchService = new SearchService();
+    let jobId = req.params.jobId;
+    let candidateId = req.params.candidateId;
+      searchService.getMatchingResult(candidateId,jobId,  (error: any, result: any) => {
+        if (error) {
+          next({
+            reason: "User Not Available",//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
+            message: 'User is not available',//Messages.MSG_ERROR_WRONG_TOKEN,
+            code: 401
+          })
+        }
+        else {
+          res.send({
+            "status": "success",
+            "data": result,
+          });
+
+        }
+      });
+
+  }
+  catch (e) {
+    res.status(403).send({message: e.message});
+  }
+}
+
+
 export function getList(req:express.Request, res:express.Response, next:any) {
   try {
-    let candidateId : string = req.params.id;
-    let listName : string= req.params.listName;
+    let candidateId:string = req.params.id;
+    let listName:string = req.params.listName;
     let candidateService = new CandidateService();
     let recruiterService = new RecruiterService();
-    candidateService.findById(candidateId,(error :any, response: CandidateModel)=>{
-      if(error){
+    candidateService.findById(candidateId, (error:any, response:CandidateModel)=> {
+      if (error) {
         next({
           reason: Messages.MSG_ERROR_RSN_EXISTING_USER,
           message: Messages.MSG_ERROR_VERIFY_ACCOUNT,
           code: 403
         });
-      }else{
-        for(let list of response.job_list){
-          if(listName===list.name){
-            let data :any ={
-              listName : listName,
-              ids : list.ids,
-              candidate :response
+      } else {
+        for (let list of response.job_list) {
+          if (listName === list.name) {
+            let data:any = {
+              listName: listName,
+              ids: list.ids,
+              candidate: response
             };
-            candidateService.getList(data, (err,result)=>{
-              if(err){
+            candidateService.getList(data, (err, result)=> {
+              if (err) {
                 next({
                   reason: Messages.MSG_ERROR_RSN_EXISTING_USER,
                   message: Messages.MSG_ERROR_VERIFY_ACCOUNT,
                   code: 403
                 });
-              }else{
+              } else {
                 res.send({
                   "status": "success",
                   "data": result,
