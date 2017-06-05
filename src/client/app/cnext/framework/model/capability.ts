@@ -10,3 +10,7 @@ export class SecondaryCapability {
   name: string='';
   complexities: Complexity[]= new Array(0);
 }
+export class DefaultCompexities {
+  name: string='';
+  complexities: Complexity[]= new Array(0);
+}

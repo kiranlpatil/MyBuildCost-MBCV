@@ -84,7 +84,8 @@ class IndustryRepository extends RepositoryBase<IIndustry> {
               if(o==role.name){
                 let role_object :any={
                   name:role.name,
-                  capabilities:[]
+                  capabilities:[],
+                  default_complexities : role.default_complexities
                 };
                 for(let capability of role.capabilities){
                   for(let ob of item.capabilities){

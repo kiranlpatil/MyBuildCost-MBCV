@@ -12,6 +12,10 @@ import {CandidateProfileService} from "./candidate-profile.service";
 import {MessageService} from "../../../framework/shared/message.service";
 import {Message} from "../../../framework/shared/message";
 import {Role} from "../model/role";
+import {Complexity} from "../model/complexity";
+/*
+import underline = Chalk.underline;
+*/
 
 
 @Component({
@@ -60,6 +64,7 @@ export class CandidateProfileComponent implements OnInit {
   private isHiddenEmployeehistory:boolean = false;
   private isTitleFilled:boolean = false;
   private showTooltip:boolean = false;
+  private goto:boolean = false;
   private highlightedSection:Section = new Section();
 
   constructor(private _router:Router,
@@ -127,7 +132,7 @@ export class CandidateProfileComponent implements OnInit {
   }
 
 
-  onWorkAreaComplete(roles:Role[]) {
+  onWorkAreaComplete(roles:Role[]) {debugger
     this.candidate.industry.roles = roles;
     this.saveCandidateDetails();
     this.candidateForCapability = this.candidate.industry.roles;
@@ -137,8 +142,8 @@ export class CandidateProfileComponent implements OnInit {
     this.whichStepsVisible[1] = true;
 
     if (this.candidate.industry.roles) {
-      if (this.candidate.industry.roles[0].capabilities) {
-        if (this.candidate.industry.roles[0].capabilities.length > 0) {
+      if (this.candidate.industry.roles[0].capabilities|| this.candidate.industry.roles[0].default_complexities) {
+        if (this.candidate.industry.roles[0].capabilities.length > 0 || this.candidate.industry.roles[0].default_complexities.length>0) {
           this.getComplexity();
           this.showComplexity = true;
           this.whichStepsVisible[2] = true;
@@ -153,7 +158,7 @@ export class CandidateProfileComponent implements OnInit {
     }
   }
 
-  onCapabilityComplete(roles:Role[]) {
+  onCapabilityComplete(roles:Role[]) {debugger
     this.candidate.industry.roles = roles;
     this.candidateForCapability = this.candidate.industry.roles;
     this.saveCandidateDetails();
@@ -162,7 +167,7 @@ export class CandidateProfileComponent implements OnInit {
     this.whichStepsVisible[2] = true;
   }
 
-  onComplexitytyComplete(roles:Role[]) {
+  onComplexitytyComplete(roles:Role[]) {debugger
     this.candidate.industry.roles = roles;
     var date = new Date();
     date.setDate(date.getDate() + 90);
@@ -231,7 +236,7 @@ export class CandidateProfileComponent implements OnInit {
         error => this.onError(error));
   }
 
-  getCapability() {
+  getCapability() {debugger
     this.roleList = new Array(0);
     for (let role of this.candidate.industry.roles) {
       this.roleList.push(role.name);
@@ -241,13 +246,25 @@ export class CandidateProfileComponent implements OnInit {
         .subscribe(
           rolelist => {
             this.rolesForCapability = rolelist.data
+            for(let item of this.rolesForCapability){
+              if(item.capabilities.length>0){
+                this.goto=true;
+              }
+            }
+            if(this.goto===false)
+            {  this.highlightedSection.name = "Complexities";
+              this.highlightedSection.isDisable=false;
+              this.onCapabilityComplete( rolelist.data);
+
+            };
+            this.goto=false;
             this.getCandidateForCapability();
           },
           error => this.onError(error));
     }
   }
 
-  getComplexity() {
+  getComplexity() {debugger
     this.primaryCapability = new Array(0);
     for (let role of this.candidate.industry.roles) {
       for (let capability of role.capabilities) {
@@ -259,7 +276,7 @@ export class CandidateProfileComponent implements OnInit {
     if (this.candidate.industry.name != undefined && this.roleList != undefined) {
       this.profileCreatorService.getComplexity(this.candidate.industry.name, this.roleList, this.primaryCapability)
         .subscribe(
-          rolelist => {
+          rolelist => {debugger
             this.rolesForComplexity = rolelist.data;
             this.getCandidateForComplexity();
 
@@ -285,14 +302,21 @@ export class CandidateProfileComponent implements OnInit {
         error => this.onError(error));
   }
 
-  getCandidateForComplexity() {
+  getCandidateForComplexity() {debugger
     this.profileCreatorService.getCandidateDetails()
       .subscribe(
         candidateData => {
           this.candidateForComplexity = candidateData.data[0].industry.roles;
-          if (this.candidateForComplexity && this.candidateForComplexity[0].capabilities && this.candidateForComplexity[0].capabilities[0] && this.candidateForComplexity[0].capabilities[0].complexities.length > 0) {
+         /* if(this.candidateForComplexity[0]!=undefined){*/
+          if ((this.candidateForComplexity && this.candidateForComplexity[0].capabilities
+            && this.candidateForComplexity[0].capabilities[0] &&
+            this.candidateForComplexity[0].capabilities[0].complexities.length > 0)/*||
+            (this.candidateForComplexity && this.candidateForComplexity[0].default_complexities
+              && this.candidateForComplexity[0].default_complexities[0] &&
+              this.candidateForComplexity[0].default_complexities[0].complexities.length > 0)*/) {
             this.isComplexityPresent = true;
           }
+        /*}*/
         },
         error => this.onError(error));
   }
@@ -446,7 +470,7 @@ export class CandidateProfileComponent implements OnInit {
     this._router.navigate([NavigationRoutes.APP_START]);
   }
 
-  saveCandidateDetails() {
+  saveCandidateDetails() {debugger
     this.profileCreatorService.addProfileDetail(this.candidate).subscribe(
       user => {
         console.log(user);

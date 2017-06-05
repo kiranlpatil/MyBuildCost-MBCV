@@ -32,7 +32,7 @@ export class WorkAreaComponent {
     }
   }*/
 
-  selectOption(role:Role,event:any) {
+  selectOption(role:Role,event:any) {debugger
     if (event.target.checked) {
       this.disableButton=false;
       if (this.selectedRoles.length < ValueConstant.MAX_WORKAREA) {
@@ -52,7 +52,7 @@ export class WorkAreaComponent {
     }
   }
 
-  onNext() {
+  onNext() {debugger
 //    this.compactView=false;
     this.highlightedSection.name = "Capabilities";
     this.highlightedSection.isDisable=false;

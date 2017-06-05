@@ -27,6 +27,7 @@ export class ComplexitiesComponent {
   private scenarioNames:string[] = new Array(0);
   private scenaricomplexityNames:string[] = new Array(0);
   private selectedComplexityNames:string[]=new Array(0);
+  private selectedDefaultComplexityNames:string[]=new Array(0);
   private isComplexityButtonEnable:boolean = false;
   private showModalStyle:boolean = false;
   private isCandidate:boolean = false;
@@ -74,9 +75,16 @@ export class ComplexitiesComponent {
     // }
 
   }
+  selectDefaultComplexity(role:Role,complexity:Complexity, selectedScenario:Scenario, event:any) {
+    for (let item of complexity.scenarios) {debugger
+      item.isChecked = false;
+    }
+    selectedScenario.isChecked = true;
+
+  }
 
   selectComplexity(role:Role, capability :Capability,complexity:Complexity, selectedScenario:Scenario, event:any) {
-    for(let rol  of this.candidateRoles){
+    for(let rol  of this.candidateRoles){debugger
         for(let cap of rol.capabilities){
           if(cap.name==capability.name){
             capability.isPrimary=cap.isPrimary;
@@ -113,7 +121,7 @@ export class ComplexitiesComponent {
     }, "slow");
   }*/
 
-  saveComplexity(){
+  saveComplexity(){debugger
     //this.compactView=true
     this.isComplexityButtonEnable =false;
     if(this.isCandidate) {
@@ -123,7 +131,7 @@ export class ComplexitiesComponent {
     this.complexityService.change(true);
     for(let rol  of this.candidateRoles){
       for(let mainrol of this.roles){
-        if(rol.name = mainrol.name){
+        if(rol.name === mainrol.name){
           for(let cap of rol.capabilities){
             for(let mainCap of mainrol.capabilities){
               if(mainCap.name === cap.name){
@@ -137,6 +145,17 @@ export class ComplexitiesComponent {
         }
       }
     }
+   /* for(let rol  of this.candidateRoles){
+      for(let mainrol of this.roles){
+        if(rol.name === mainrol.name){
+          for(let defaultCap of rol.default_complexities){
+              mainrol.capabilities.push(defaultCap);
+
+          }
+        }
+      }
+    }*/
+
     this.highlightedSection.name = "Proficiencies";
     this.highlightedSection.isDisable=false;
     this.onComplete.emit(this.roles);

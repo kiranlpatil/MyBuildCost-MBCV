@@ -22,6 +22,7 @@ export class CapabilitiesComponent {
   private secondaryNames:string[] = new Array(0);
   private primaryCapabilitiesNumber:number = 0;
   private disableButton:boolean = true;
+  private callNext:boolean = true;
 
   ngOnChanges(changes:any) {
     if (this.candidateRoles) {
@@ -40,9 +41,22 @@ export class CapabilitiesComponent {
       }*/
     }
     this.primaryCapabilitiesNumber= this.primaryNames.length;
+
+    /*for(let role of this.roles){debugger
+      if(role.capabilities.length>0){
+        this.callNext=false;
+      }
+
+    }
+
+    if(this.callNext){debugger
+     this. onNext();
+
+    }*/
     if(this.primaryNames.length>0){
       this.disableButton=false;
     }
+    /*this.callNext=true;*/
   }
 
   selectedCapability(selectedRole:Role, selectedCapability:Capability, event:any) {
