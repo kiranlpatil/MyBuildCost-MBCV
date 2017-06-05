@@ -62,7 +62,7 @@ $theme-color: #3694d1;
   .heading-compact {
     color: $theme-color;
     font-size: 12px;
-    margin: 25px 0 5px;
+    margin: 5px 0 5px;
 
     img {
       margin-right: 5px;
@@ -228,6 +228,22 @@ $theme-color: #3694d1;
       font-size: 12px;
       cursor: pointer;
     }
+  }
+}
+
+.description-form {
+  .panel-default {
+    background: #f8f8f8;
+    border: 0;
+    padding: 0;
+  }
+
+  .panel-body {
+    padding: 5px;
+  }
+
+  .glyphicon-trash {
+    background-color: transparent;
   }
 }
 

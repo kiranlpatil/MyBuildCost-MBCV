@@ -26,7 +26,10 @@
       <p>Skills matching</p>
     </div>
     <div class="button-group">
+<!--
       <button class="btn btn-cart btn-block" type="button" (click)="viewJob(job._id)" >View</button>
+-->
+      <button class="btn btn-cart btn-block" type="button" (click)="viewJob(job._id)" >Compare</button>
     </div>
   </div>
 </div>
@@ -41,7 +44,10 @@
             <img src="/assets/c-next/card-view/close-white.png" (click)="closeJob()" class="close"/>
           </div>
           <div class="col-sm-12 no-padding">
+<!--
             <cn-job-view [jobId]="jobId"></cn-job-view>
+-->
+         <cn-candidate-compare-view></cn-candidate-compare-view>
           </div>
           <div class="button-group" *ngIf="!hideButton">
             <button class="btn btn-primary" (click)="applyJob()">Apply</button>

@@ -1,74 +1,8 @@
-<!--
-<div class="section-container awards " [hidden]="chkAwards">
-  <div class="main-content modal-content clearfix" *ngIf="highlightedSection.name =='Awards'">
-    <h4 class="heading">Awards
-              <span class="close-dialog" [hidden]="isHiddenAwrard">Close this section if not needed
-            <span class="glyphicon glyphicon-remove" (click)="hideAwards()"></span>
-          </span>
-    </h4>
-    <div [class.hide]="hideDiv[i]" *ngFor="let item of candidate.awards;let i= index" class="col-sm-12 form">
-      <span class="glyphicon glyphicon-trash" (click)="deleteItem(i)"></span>
-      <div class="row">
-        <div class="col-sm-4">
-          <div class="form-group">
-            <input type="text" class="form-control" [(ngModel)]="item.name" (change)="postAwardDetails()"
-                    required/>
-            <label>Title</label>
-          </div>
-        </div>
 
-        <div class="col-sm-4">
-          <div class="form-group">
-            <input type="text" class="form-control" [(ngModel)]="item.issuedBy" (change)="postAwardDetails()"
-                   required/>
-            <label>Issued By</label>
-          </div>
-        </div>
-
-        <div class="col-sm-4">
-          <label>Year</label>
-          <select class="form-control" [(ngModel)]="item.year" (change)="postAwardDetails()">
-            <option *ngFor="let AwardYear of yearList" [selected]="true" [ngValue]="AwardYear">{{AwardYear}}</option>
-          </select>
-        </div>
-      </div>
-      <div class="col-sm-12 no-padding">
-        <textarea class="form-control" [(ngModel)]="item.remark" (change)="postAwardDetails()"
-                  placeholder="Enter Awards Details" class="form-control"></textarea>
-      </div>
-    </div>
-    <div class="col-sm-12">
-      <div class="clear">
-        <button type="button" id="more_fields" (click)="addAnother()" class="btn btn-create-profile">
-          Add Another <span>+</span>
-        </button>
-        <div class="error-messages" *ngIf="isShowError"><p>Fields should not be empty.</p></div>
-      </div>
-      <div class="button-group clearfix">
-        <button class="btn btn-default"  (click)="highlightedSection.name='none';highlightedSection.isDisable=false" [hidden]="showButton" >Cancel</button>
-        <button class="btn btn-primary" scrollTo scrollTargetSelector="#aboutMyself"
-                (click)="onNext()" [disabled]="disableButton" [hidden]="!showButton">Next
-        </button>
-        <button class="btn btn-primary"  (click)="onSave()" [hidden]="showButton">Save</button>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="section-container" *ngIf="highlightedSection.name !='Awards'" [ngClass]="(highlightedSection.name=='Certification' || highlightedSection.name=='EmploymentHistory' || highlightedSection.name=='AcademicDetails' )?'full-width':'quarter-width'">
-  <div class="main-content" >
-    <div class="compact-view clearfix">
-      <button class="btn-edit" (click)="highlightedSection.name='Awards';highlightedSection.isDisable=true;showButton=false" [hidden]="highlightedSection.isDisable"></button>
-      <div *ngIf="candidate.awards.length>0">
-        <cn-vertical-list-view [data]="candidate.awards" [type]="'awards'" ></cn-vertical-list-view>
-      </div>
-    </div>
-  </div>
-</div>
--->
 <div class="section-container">
   <div class="main-content modal-content clearfix" *ngIf="highlightedSection.name =='Awards'">
     <h4 class="heading">Awards</h4>
-    <form [formGroup]="awardDetail" novalidate >
+    <form class="description-form" [formGroup]="awardDetail" novalidate >
       <div formArrayName="awards">
         <div *ngFor="let history of awardDetail.controls.awards.controls; let i=index"
              class="panel panel-default">
@@ -101,18 +35,19 @@
     </form>
   </div>
 </div>
- 
+
 <div class="section-container" *ngIf="highlightedSection.name !='Awards'" [ngClass]="(highlightedSection.name=='Certification' || highlightedSection.name=='EmploymentHistory' || highlightedSection.name=='AcademicDetails' )?'full-width':'quarter-width'">
   <div class="main-content">
     <div class="compact-view clearfix">
       <div *ngIf="candidate.awards.length == 0"><!--*ngIf="candidate.awards != undefined && candidate.awards.length==1 && candidate.awards[0].name=='' && candidate.awards[0].issuedBy=='' "-->
-        Awards
+
         <h4 class="heading-compact" (click)="highlightedSection.name='Awards';highlightedSection.isDisable=true;showButton=false" >
-          <img src="assets/c-next/icons/education-icon.png" alt="employment"/>
+          <img src="assets/c-next/icons/awards.png" alt="employment"/>
+          Awards
           <span class="glyphicon glyphicon-plus"></span>
         </h4>
       </div>
-      <div  *ngIf="candidate.awards != undefined && candidate.awards.length>0 && candidate.awards[0].name!=='' && candidate.awards[0].issuedBy!==''">
+      <div  class="vertical-container" *ngIf=" candidate.awards.length>0 ">
         <button class="btn-edit" (click)="highlightedSection.name='Awards';highlightedSection.isDisable=true;showButton=false" [hidden]="highlightedSection.isDisable"></button>
         <cn-vertical-list-view [data]="candidate.awards" [type]="'awards'" ></cn-vertical-list-view>
       </div>

@@ -1,6 +1,6 @@
 <div [formGroup]="employeeForm">
   <div class="left-content">
-    <div class="col-sm-6 padding-right15">
+    <div class="col-sm-6 padding-right5">
       <div class="form-group">
         <input type="text" class="form-control" formControlName="companyName" required/>
         <label>Company Name</label>
@@ -10,7 +10,7 @@
       </div>
     </div>
 
-    <div class="col-sm-6 padding-left15">
+    <div class="col-sm-6 padding-left5">
       <div class="form-group">
         <input type="text" class="form-control" formControlName="designation" required/>
         <label>Designation</label>
@@ -21,15 +21,17 @@
     </div>
 
     <div class="col-sm-12 no-padding">
-      <div class="worked-from col-sm-6 padding-right15">
+      <div class="worked-from col-sm-6 no-padding">
         <div formGroupName="from">
-          <label>From Date</label>
-          <div class="col-sm-6 padding-right5">
+          <div class="col-sm-3 no-padding">
+            <label>From Date</label>
+          </div>
+          <div class="col-sm-6 padding-left5">
             <select class="form-control" formControlName="month" required>
               <option *ngFor="let c of monthList" [ngValue]="c">{{c}}</option>
             </select>
           </div>
-          <div class="col-sm-6 padding-left5">
+          <div class="col-sm-3 padding-left5">
             <select class="form-control" formControlName="year" required>
               <option *ngFor="let c of yearList"  [ngValue]="c">{{c}}</option>
             </select>
@@ -37,15 +39,17 @@
         </div>
       </div>
 
-      <div class="worked-to col-sm-6 padding-left15">
+      <div class="worked-to col-sm-6 padding-left5">
         <div formGroupName="to">
-          <label>To Date</label>
+          <div class="col-sm-3 no-padding">
+            <label>To Date</label>
+          </div>
           <div class="col-sm-6 padding-right5">
             <select class="form-control" formControlName="month" required>
               <option *ngFor="let c of monthList" [ngValue]="c">{{c}}</option>
             </select>
           </div>
-          <div class="col-sm-6 padding-left5">
+          <div class="col-sm-3 padding-left5">
             <select class="form-control" formControlName="year" required>
               <option *ngFor="let c of yearList"  [ngValue]="c">{{c}}</option>
             </select>

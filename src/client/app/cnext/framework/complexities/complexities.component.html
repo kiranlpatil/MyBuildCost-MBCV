@@ -72,11 +72,12 @@
 <!--
           <span class=" glyphicon glyphicon-lock" title="you can edit this field after {{highlightedSection.date| date:'mediumDate'}}" *ngIf="highlightedSection.isLocked"></span>
 -->
-          <a data-toggle="collapse" data-target="#demo" >
+          <a data-toggle="collapse" data-target="#demo" (click)="showMore = !showMore" >
             <h4 class="heading">Complexities handled for the above Capabilities
               <button class="btn-edit" (click)="highlightedSection.name='Complexities';highlightedSection.isDisable=true" [hidden]="highlightedSection.isDisable"></button>
             </h4>
-            <span class="see-more">more...</span>
+            <span class="see-more" *ngIf="!showMore">more...</span>
+            <span class="see-more" *ngIf="showMore">less...</span>
           </a>
           <div id="demo" class="collapse col-sm-12">
             <cn-tabular-list-view [roles]="candidateRoles"></cn-tabular-list-view>

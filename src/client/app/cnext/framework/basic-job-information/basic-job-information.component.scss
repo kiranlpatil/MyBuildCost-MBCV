@@ -12,14 +12,20 @@ $light-blue: #00aed5;
 }
 
 .compact-view {
+  .heading {
+    font-size: 21px;
+    text-align: center;
+    margin-bottom: 15px !important;
+
+  }
   p {
-    width: 25%;
+    width: 16%;
     padding: 0 0.5% 0 0;
     float:left;
     margin-bottom: 10px;
 
     label {
-      width: auto;
+      width: 100%;
     }
   }
 }

@@ -30,6 +30,7 @@ export class ComplexitiesComponent {
   private isComplexityButtonEnable:boolean = false;
   private showModalStyle:boolean = false;
   private isCandidate:boolean = false;
+  private showMore:boolean = false;
   private count:number=0;
   private elements:any;
  // private compactView:boolean = true;

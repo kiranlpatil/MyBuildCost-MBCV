@@ -16,8 +16,9 @@
   </div>
   <div class="main-content" *ngIf="highlightedSection.name !='AboutMySelf'">
     <div class="compact-view clearfix">
-      <h4 class="heading">More About Self
+      <h4 class="heading" >More About Self
         <button class="btn-edit" (click)="highlightedSection.name='AboutMySelf';highlightedSection.isDisable=true;showButton=false" [hidden]="highlightedSection.isDisable"></button>
+        <!--<span class="glyphicon glyphicon-plus"></span>-->
       </h4>
       <p>{{candidate.aboutMyself}}</p>
     </div>

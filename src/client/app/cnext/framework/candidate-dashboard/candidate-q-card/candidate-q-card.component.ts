@@ -42,6 +42,7 @@ export class CandiadteQCardComponent {
     }
     this.showModalStyle = !this.showModalStyle;
   }
+  
 
   blockJob(newVal:any) { //TODO prjakta
     this.showModalStyle = !this.showModalStyle;

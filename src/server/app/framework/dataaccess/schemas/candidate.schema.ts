@@ -34,7 +34,8 @@ class CandidateSchema {
         default: false
       },
       isVisible: {
-        type: Boolean
+        type: Boolean,
+        default: true
       },
       aboutMyself: {
         type: String

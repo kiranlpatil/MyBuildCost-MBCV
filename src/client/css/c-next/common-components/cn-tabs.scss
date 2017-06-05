@@ -6,6 +6,7 @@ $border-color: #ddd;
 $border-light: #efefef;
 $white: #fff;
 $theme-color: #3694d1;
+$orange: #ffc107;
 
 .nav-tabs {
   border-bottom: 1px solid $border-light;
@@ -35,6 +36,39 @@ $theme-color: #3694d1;
       border: 0 !important;
       border-bottom: 3px solid $theme-color !important;
       color: $theme-color !important;
+    }
+  }
+}
+
+.dashboard-tabs {
+  border-bottom: 1px solid #ffc107 ;
+
+  li {
+    width: 200px;
+
+    a {
+      background-color: $bg-tab-content !important;
+      border: 0 solid $bg-tab-content;
+      border-bottom: 3px solid $bg-tab-content;
+      border-radius: 0;
+      color: $text-color;
+      font-family: 'gothamrnd-book';
+      font-size: 12px;
+      padding: 10px 15px;
+
+      &:focus,
+      &:hover {
+        color: $text-color;
+      }
+    }
+  }
+
+  .active {
+    a {
+      background-color: $orange !important;
+      border: 0 !important;
+      border-bottom: 3px solid $orange !important;
+      color: $white !important;
     }
   }
 }

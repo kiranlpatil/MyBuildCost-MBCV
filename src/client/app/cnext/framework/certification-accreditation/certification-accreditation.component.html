@@ -1,7 +1,7 @@
 <div class="section-container">
   <div class="main-content modal-content clearfix" *ngIf="highlightedSection.name =='Certification'">
     <h4 class="heading">Certification/Accreditation</h4>
-    <form [formGroup]="certificationDetail" novalidate >
+    <form class="description-form" [formGroup]="certificationDetail" novalidate >
       <div formArrayName="certifications">
         <div *ngFor="let history of certificationDetail.controls.certifications.controls; let i=index"
              class="panel panel-default">
@@ -39,14 +39,15 @@
   <div class="main-content">
     <div class="compact-view clearfix">
       <div *ngIf="candidate.certifications.length==0">
-        Certifications
+
         <h4 class="heading-compact" (click)="highlightedSection.name='Certification';highlightedSection.isDisable=true;showButton=false" >
-          <img src="assets/c-next/icons/education-icon.png" alt="employment"/>
+          <img src="assets/c-next/icons/certificates.png" alt="employment"/>
+          Certifications
           <span class="glyphicon glyphicon-plus"></span>
         </h4>
       </div>
 
-      <div *ngIf="candidate.certifications.length>0">
+      <div class="vertical-container" *ngIf="candidate.certifications.length>0">
         <button class="btn-edit" (click)="highlightedSection.name='Certification';highlightedSection.isDisable=true;showButton=false" [hidden]="highlightedSection.isDisable"></button>
         <cn-vertical-list-view [data]="candidate.certifications" [type]="'certifications'" ></cn-vertical-list-view>
       </div>

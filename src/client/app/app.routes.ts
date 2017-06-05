@@ -25,6 +25,7 @@ import {ProfileCreator} from "./cnext/framework/candidate-profile/candidate-prof
 import {RecruiterSummary} from "./cnext/framework/one-page-summury/recruiter-job-summary/recruiter-job-summary.routes";
 import {CandidateDashboard} from "./cnext/framework/candidate-dashboard/candidate-dashboard.routes";
 import {JobDashboardRoutes} from "./cnext/framework/recruiter-dashboard/job-dashboard/job-dashboard.routes";
+import {CandidateCompare} from "./cnext/framework/single-page-compare-view/candidate-compare-view/candidate-compare-view.routes";
 
 
 export const routes: Routes = [
@@ -42,6 +43,7 @@ export const routes: Routes = [
   ...RecruiterDashboard,
   ...RecruiterSummary,
   ...ForgotPasswordRoutes,
+  ...CandidateCompare,
   ...ResetPasswordRoutes,
   ...DashboardProfileRoutes,
   ...ChangePasswordRoutes,
