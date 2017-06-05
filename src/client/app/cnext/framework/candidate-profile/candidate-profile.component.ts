@@ -147,8 +147,8 @@ export class CandidateProfileComponent implements OnInit {
           this.getComplexity();
           this.showComplexity = true;
           this.whichStepsVisible[2] = true;
-          if (this.candidate.industry.roles[0].capabilities[0].complexities) {
-            if (this.candidate.industry.roles[0].capabilities[0].complexities.length > 0) {
+          if (this.candidate.industry.roles[0].capabilities[0].complexities || this.candidate.industry.roles[0].default_complexities[0].complexities) {
+            if (this.candidate.industry.roles[0].capabilities[0].complexities.length > 0 || this.candidate.industry.roles[0].default_complexities[0].complexities.length > 0) {
               this.showProfeciency = true;
               this.getProficiency();
             }
@@ -267,11 +267,12 @@ export class CandidateProfileComponent implements OnInit {
   getComplexity() {debugger
     this.primaryCapability = new Array(0);
     for (let role of this.candidate.industry.roles) {
+      if(role.capabilities && role.capabilities.length>0){
       for (let capability of role.capabilities) {
         if (capability.isPrimary) {
           this.primaryCapability.push(capability.name);
         }
-      }
+      }}
     }
     if (this.candidate.industry.name != undefined && this.roleList != undefined) {
       this.profileCreatorService.getComplexity(this.candidate.industry.name, this.roleList, this.primaryCapability)
@@ -307,16 +308,14 @@ export class CandidateProfileComponent implements OnInit {
       .subscribe(
         candidateData => {
           this.candidateForComplexity = candidateData.data[0].industry.roles;
-         /* if(this.candidateForComplexity[0]!=undefined){*/
-          if ((this.candidateForComplexity && this.candidateForComplexity[0].capabilities
+         /* if ((this.candidateForComplexity && this.candidateForComplexity[0].capabilities
             && this.candidateForComplexity[0].capabilities[0] &&
-            this.candidateForComplexity[0].capabilities[0].complexities.length > 0)/*||
+            this.candidateForComplexity[0].capabilities[0].complexities.length > 0)||
             (this.candidateForComplexity && this.candidateForComplexity[0].default_complexities
               && this.candidateForComplexity[0].default_complexities[0] &&
-              this.candidateForComplexity[0].default_complexities[0].complexities.length > 0)*/) {
+              this.candidateForComplexity[0].default_complexities[0].complexities.length > 0)) {
             this.isComplexityPresent = true;
-          }
-        /*}*/
+          }*/
         },
         error => this.onError(error));
   }
