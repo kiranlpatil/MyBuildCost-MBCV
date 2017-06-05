@@ -462,6 +462,6 @@ export class CandidateProfileComponent implements OnInit {
   }
 
   onSubmit() {
-    this._router.navigate([NavigationRoutes.APP_PROFILESUMMURY]);
+    this._router.navigate([NavigationRoutes.APP_CANDIDATE_DASHBOARD]);
   }
 }
