@@ -8,7 +8,7 @@
           <div>
           <span class="glyphicon glyphicon-trash pull-right"
                 *ngIf="academicDetail.controls.acdemicDetails.controls.length>0 && academicDetail.controls.acdemicDetails.controls.length !==1 "
-                (click)="removeAcdemicDetail(i)"></span>
+                (click)="removeAcademicDetail(i)"></span>
           </div>
           <div class="panel-body" [formGroupName]="i">
             <cn-academics [group]="academicDetail.controls.acdemicDetails.controls[i]"></cn-academics>
@@ -17,7 +17,7 @@
       </div>
 
       <div class="margin-20">
-        <button (click)="addAcdemicDetail()" class="btn btn-create-profile" [disabled]="!academicDetail.valid">
+        <button (click)="addAcademicDetail()" class="btn btn-create-profile" [disabled]="!academicDetail.valid">
           Add another
         </button>
       </div>

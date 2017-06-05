@@ -72,7 +72,7 @@ export class JobPosterComponent {
   }
 
   onSuccess(jobId:string) {
-    if(jobId != undefined){
+    if(jobId != undefined) {
       LocalStorageService.setLocalValue(LocalStorage.CURRENT_JOB_POSTED_ID, jobId);
       this._router.navigate([NavigationRoutes.APP_JOB_SUMMURY]);
     }

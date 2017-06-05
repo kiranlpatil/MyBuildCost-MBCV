@@ -47,7 +47,7 @@ export class AcademicDetailComponent {
           controlArray.push(fb);
         });
         if (!this.candidate.academics) {
-          this.addAcdemicDetail();
+          this.addAcademicDetail();
         }
       }
     }
@@ -62,17 +62,17 @@ export class AcademicDetailComponent {
     });
   }
 
-  addAcdemicDetail() {
+  addAcademicDetail() {
     const control = <FormArray>this.academicDetail.controls['acdemicDetails'];
     const addrCtrl = this.initAcademicDetails();
     control.push(addrCtrl);
   }
 
-  removeAcdemicDetail(i:number) {
+  removeAcademicDetail(i:number) {
     const control = <FormArray>this.academicDetail.controls['acdemicDetails'];
     control.removeAt(i);
   }
-  
+
   postData(type:string) {
     this.candidate.academics = this.academicDetail.value.acdemicDetails;
     this.profileCreatorService.addProfileDetail(this.candidate).subscribe(
@@ -81,7 +81,7 @@ export class AcademicDetailComponent {
           this.onNext();
         }
         else if (type == 'save') {
-          this.onSave()
+          this.onSave();
         }
       });
   }

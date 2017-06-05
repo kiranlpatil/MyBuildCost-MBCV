@@ -14,16 +14,16 @@ export class RecruiterJobInformation  {
   private image_path:string=ImagePath.PROFILE_IMG_ICON;
 
   ngOnChanges(changes:any) {
-    if(changes.recruiter.currentValue != undefined){
+    if(changes.recruiter.currentValue != undefined) {
       this.recruiter=changes.recruiter.currentValue;
     }
-    if(this.recruiter != undefined && this.recruiter.company_logo != undefined){
-      this.image_path= AppSettings.IP + this.recruiter.company_logo .substring(4).replace('"', '');;
+    if(this.recruiter != undefined && this.recruiter.company_logo != undefined) {
+      this.image_path= AppSettings.IP + this.recruiter.company_logo .substring(4).replace('"', '');
     }
   }
 
-  getImagePath(imagePath:string){
-    if(imagePath != undefined){
+  getImagePath(imagePath:string) {
+    if(imagePath != undefined) {
       return AppSettings.IP + imagePath.substring(4).replace('"', '');
     }
     return null;
