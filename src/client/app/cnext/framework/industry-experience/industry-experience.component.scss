@@ -19,6 +19,15 @@ $primary-option: #1c75bd;
   }
 }
 
+.heading {
+  .sub-heading {
+    float: none !important;
+    position: relative;
+    font-size: 12px !important;
+    padding: 0 !important;
+  }
+}
+
 @media screen and (max-width: 980px) {
   .select-option {
     margin: 0 15px 0 0;

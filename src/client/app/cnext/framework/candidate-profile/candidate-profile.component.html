@@ -88,8 +88,10 @@
               </div>
              <!--<span class="glyphicon glyphicon-info-sign"></span>-->
 
-              <div class="info profile-info">In case you wish to hide your profile from recruiters, select hide option
-                below. You may also choose to show your profile later.
+              <div class="info profile-info" *ngIf="!candidate.isVisible">On Selecting Show, you profile will be considered for searches against appropriate job profiles and will be visible to recruiters. You can change this setting later
+              </div>
+              <div class="info profile-info" *ngIf="candidate.isVisible">Selecting Hide will hide your profile from recruiters.
+                You can change this setting later
               </div>
             </div>
           </div>

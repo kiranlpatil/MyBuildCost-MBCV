@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output} from "@angular/core";
+import {Component, EventEmitter, Input, Output, ViewChild, ElementRef} from "@angular/core";
 import {Role} from "../model/role";
 import {Scenario} from "../model/scenario";
 import {Complexity} from "../model/complexity";
@@ -35,7 +35,8 @@ export class ComplexitiesComponent {
   private elements:any;
  // private compactView:boolean = true;
 
-
+  @ViewChild("save")
+  private _inputElement1: ElementRef;
   constructor(  private complexityService:ComplexityService) {
   }
 
@@ -147,7 +148,13 @@ export class ComplexitiesComponent {
   }
 
   getStyleModal() {
-    return this.showModalStyle?'block':'none';
+    if (this.showModalStyle) {
+      this._inputElement1.nativeElement.focus();
+      return 'block';
+    } else {
+      this._inputElement1.nativeElement.focus();
+      return 'none';
+    }
   }
 
   showHideModal() {

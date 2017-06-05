@@ -57,7 +57,7 @@
               </button>
             </div>
             <div *ngIf="!isCandidate">
-              <button class="btn btn-primary" scrollTo scrollTargetSelector="#proficiency-area"  (click)="saveComplexity()">Next
+              <button class="btn btn-primary" (click)="saveComplexity()">Next
               </button>
             </div>
           </div>
@@ -100,9 +100,12 @@
               <p>Saving above details. Once saved, you can not change it for 3 months.</p>
 
               <div class="button-group">
-                <button class="btn btn-primary" scrollTo scrollTargetSelector="#proficiency-area"
-                        (click)="saveComplexity()">Save </button>
+                <form>
+                <input type="submit" #save class="btn btn-primary" ref-searchInput (click)="saveComplexity()" value="Save" />
+                <!--<button class="btn btn-primary" scrollTo scrollTargetSelector="#proficiency-area"
+                        (click)="saveComplexity()">Save </button>-->
                 <button class="btn btn-default" (click)="showHideModal()">Cancel</button>
+                  </form>
               </div>
             </div>
           </div>
