@@ -65,10 +65,6 @@
         <h4>Proficiency In</h4>
         <cn-proficiency-compare [data]="data.proficiencies" [matchdData]="data.proficienciesMatch"></cn-proficiency-compare>
       </div>
-      <div class="col-sm-6" *ngIf="postedJob.additionalProficiencies != undefined && postedJob.additionalProficiencies.length>0" >
-        <h4>Additional Proficiency</h4>
-        <cn-horizontal-list-view [data]="postedJob.additionalProficiencies"></cn-horizontal-list-view>
-      </div>
     </div>
     <!--<div class="col-sm-12 no-padding">
       <div class="col-sm-6">
