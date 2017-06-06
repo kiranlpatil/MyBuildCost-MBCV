@@ -6,9 +6,8 @@ import CandidateModel = require("../../dataaccess/model/candidate.model");
 import RecruiterModel = require("../../dataaccess/model/recruiter.model");
 import CNextMessages = require("../../shared/cnext-messages");
 import JobProfileService = require("../../services/jobprofile.service");
-import Candidate = require("../../dataaccess/model/candidate-final.model");
+//import Candidate = require("../../dataaccess/model/candidate-final.model");
 import {ConstVariables} from "../../shared/sharedconstants";
-
 class SearchService {
   APP_NAME:string;
   candidateRepository:CandidateRepository;
