@@ -18,9 +18,12 @@
         <cn-profile-description [candidate]="candidate" [highlightedSection]="highlightedSection"
                                 (onComplete)="onProfileDescriptionComplete($event)"></cn-profile-description>
 
-        <cn-work-area [roles]="rolesForMain" [selectedRoles]="candidateForRole"
-                      [highlightedSection]="highlightedSection"
-                      (onComplete)="onWorkAreaComplete($event)" [hidden]="isRolesShow"></cn-work-area>
+        <div id="work-area">
+          <cn-work-area [roles]="rolesForMain" [selectedRoles]="candidateForRole"
+                        [highlightedSection]="highlightedSection"
+                        (onComplete)="onWorkAreaComplete($event)" [hidden]="isRolesShow"></cn-work-area>
+        </div>
+
 
         <cn-capabilities [roles]="rolesForCapability" [candidateRoles]="candidateForCapability"
                          [highlightedSection]="highlightedSection"

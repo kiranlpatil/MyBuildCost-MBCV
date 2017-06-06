@@ -363,15 +363,7 @@ export class CandidateProfileComponent implements OnInit {
         if (this.candidate.industry.roles[0].capabilities[0].complexities.length > 0) {
           this.whichStepsVisible[3] = true;
         }
-        else{
-          this.highlightedSection.name='Complexities';
-        }
       }
-      else{
-        this.highlightedSection.name='Capabilities';
-      }
-    } else{
-      this.highlightedSection.name='Work-Area';
     }
 
     if (this.candidate.proficiencies !== undefined && this.candidate.proficiencies.length > 0) {
@@ -380,7 +372,7 @@ export class CandidateProfileComponent implements OnInit {
       this.whichStepsVisible[4] = true;
     }
 
-    if (this.candidate.interestedIndustries !== undefined && this.candidate.interestedIndustries.length > 0) {
+    if (this.candidate.interestedIndustries !== undefined) {
       this.showIndustryExperience = true;
     }
 
@@ -470,6 +462,6 @@ export class CandidateProfileComponent implements OnInit {
   }
 
   onSubmit() {
-    this._router.navigate([NavigationRoutes.APP_CANDIDATE_DASHBOARD]);
+    this._router.navigate([NavigationRoutes.APP_PROFILESUMMURY]);
   }
 }

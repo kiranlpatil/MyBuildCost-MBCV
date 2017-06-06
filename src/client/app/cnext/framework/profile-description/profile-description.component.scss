@@ -3,6 +3,14 @@ $light-blue: #00aed5;
 h4 {
   font-size: 14px;
   margin: 0 0 10px;
+  font-family: 'gothamrnd-book';
+  font-weight: 900;
+}
+
+.main-content {
+  input {
+    width: 75%;
+  }
 }
 
 .user-name {

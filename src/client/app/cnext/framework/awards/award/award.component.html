@@ -5,9 +5,9 @@
         <div class="form-group">
           <input type="text" class="form-control"  formControlName="name" required/>
           <label>Title</label>
-          <small  class="text-danger" *ngIf="awardForm.get('name').touched && awardForm.get('name').hasError('required')">
-            Award Name is required
-          </small>
+          <div  class="error-messages" *ngIf="awardForm.get('name').touched && awardForm.get('name').hasError('required')">
+           <p>Award Name is required</p>
+          </div>
         </div>
       </div>
 
@@ -15,9 +15,9 @@
         <div class="form-group">
           <input class="form-control" type="text"  formControlName="issuedBy"  required/>
           <label>Issued By</label>
-          <small  class="text-danger" *ngIf="awardForm.get('issuedBy').touched && awardForm.get('issuedBy').hasError('required')">
-            Authority Name is required
-          </small>
+          <div  class="error-messages" *ngIf="awardForm.get('issuedBy').touched && awardForm.get('issuedBy').hasError('required')">
+            <p>Authority Name is required</p>
+          </div>
         </div>
       </div>
 
@@ -27,9 +27,9 @@
           <option *ngFor="let acadmicyear of yearList" [ngValue]="acadmicyear">{{acadmicyear}}
           </option>
         </select>
-        <small  class="text-danger" *ngIf="awardForm.get('year').touched && awardForm.get('year').hasError('required')">
-          Issued Year is required
-        </small>
+        <div  class="error-messages" *ngIf="awardForm.get('year').touched && awardForm.get('year').hasError('required')">
+          <p>Issued Year is required</p>
+        </div>
       </div>
     </div>
 

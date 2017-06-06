@@ -14,7 +14,7 @@
       <div class="form-group">
         <input type="text" class="form-control" formControlName="designation" required/>
         <label>Designation</label>
-        <div  class="error-messages"  *ngIf="employeeForm.get('designation').touched && employeeForm.get('designation').hasError('required')" class="text-danger">
+        <div  class="error-messages"  *ngIf="employeeForm.get('designation').touched && employeeForm.get('designation').hasError('required')">
           <p>Designation is required</p>
         </div>
       </div>

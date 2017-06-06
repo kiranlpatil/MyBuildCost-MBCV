@@ -69,6 +69,8 @@ this.candidate.basicInformation.picture=imagePath;
     this.highlightedSection.isDisable=false;
 
     this.onComplete.emit(this.candidate);
+    let height = screen.height;
+    //window.scrollBy(0, -(height * 10));
   }
   onSave() {
 //    this.compactView = true;

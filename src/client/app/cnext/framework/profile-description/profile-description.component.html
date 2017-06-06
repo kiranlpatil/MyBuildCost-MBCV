@@ -21,7 +21,7 @@
     </div>
     <div class="button-group clearfix">
       <button class="btn btn-default"  (click)="highlightedSection.name='none'; highlightedSection.isDisable=false" [hidden]="showButton" >Cancel</button>
-      <button class="btn btn-primary" scrollTo scrollTargetSelector="#work-area" (click)="onNext()">Next</button><!-- [hidden]="!showButton" -->
+      <button class="btn btn-primary" (click)="onNext()">Next</button><!-- [hidden]="!showButton" -->
       <!--  <button class="btn btn-primary"  (click)="onSave()" [hidden]="showButton">Save</button>-->
     </div>
   </div>
