@@ -74,8 +74,8 @@
             <span *ngIf="matchFormat == 'aboveMatch' && type == 'matchedList'">{{item.exact_matching + item.above_one_step_matching | number : '1.0-0'}}%</span>
             <span *ngIf="matchFormat == 'belowMatch' && type == 'matchedList'">{{item.matching | number : '1.0-0'}}%</span>
             <span *ngIf="type !== 'matchedList'">{{item.matching | number : '1.0-0'}}%</span>
+            <p>Match</p>
           </div>
-          <p>Skills matching</p>
         </div>
         <div class="button-group" *ngIf="type=='matchedList'">
           <div class="col-sm-6 padding-right5">

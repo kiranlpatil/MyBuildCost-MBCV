@@ -222,11 +222,13 @@ $header-shadow: rgba(0, 0, 0, 0.4);
         padding: 5px 10px;
         text-align: left;
         display: block;
-        font-size: 14px;
+        font-size: 12px;
         margin: 0;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
+        overflow: auto;
+        text-overflow: clip;
+        white-space: pre-wrap;
+        height: auto;
+        max-width: inherit;
       }
     }
   }

@@ -113,7 +113,7 @@ export class CandidateProfileComponent implements OnInit {
 
 
   ngOnInit() {
-    this.whichStepsVisible[0]=true;
+    this.whichStepsVisible[0] = true;
 
   }
 
@@ -167,7 +167,7 @@ export class CandidateProfileComponent implements OnInit {
     var date = new Date();
     date.setDate(date.getDate() + 90);
     this.candidate.lockedOn = date;
-    this.highlightedSection.date=date;
+    this.highlightedSection.date = date;
     this.candidateForComplexity = this.candidate.industry.roles;
     this.saveCandidateDetails();
     this.showProfeciency = true;
@@ -176,23 +176,25 @@ export class CandidateProfileComponent implements OnInit {
 
   onProficiencySelect(proficiency:string[]) {
     this.candidate.proficiencies = proficiency;
-    this.highlightedSection.isProficiencyFilled=true;
+    this.highlightedSection.isProficiencyFilled = true;
     this.saveCandidateDetails();
     this.whichStepsVisible[4] = true;
   }
 
-  onProficiencyComplete(event:any){
+  onProficiencyComplete(event:any) {
     this.showIndustryExperience = true;
   }
 
   onExperienceIndustrySelect(experiencedindustry:string[]) {
     this.candidate.interestedIndustries = experiencedindustry;
-    this.candidate.isCompleted=true;
+    this.candidate.isCompleted = true;
     this.saveCandidateDetails();
   }
-  onExperienceIndustryComplete(){
+
+  onExperienceIndustryComplete() {
     this.showProfessionalData = true;
   }
+
   onProfessionalDataComplete() {
     this.showemploymentHistory = true;
     this.showAcademicsDetails = true;
@@ -217,14 +219,15 @@ export class CandidateProfileComponent implements OnInit {
 
   }
 
-  onMoreAboutMySelfComplete(data:string){
+  onMoreAboutMySelfComplete(data:string) {
     console.log(data);
-    if(data != ''){
-      this.whichStepsVisible[6]=true;
-    }else{
-      this.whichStepsVisible[6]=false;
+    if (data != '') {
+      this.whichStepsVisible[6] = true;
+    } else {
+      this.whichStepsVisible[6] = false;
     }
   }
+
   getRoles() {
     this.profileCreatorService.getRoles(this.candidate.industry.name)
       .subscribe(
@@ -312,24 +315,22 @@ export class CandidateProfileComponent implements OnInit {
     this.candidate = candidateData.data[0];
     this.candidate.basicInformation = candidateData.metadata;
     this.candidateForRole = candidateData.data[0].industry.roles;
-    console.log(this.candidate);
 
-    if(candidateData.data[0].isCompleted==true){
-      this.showIndustryExperience=true;
+    if (candidateData.data[0].isCompleted == true) {
+      this.showIndustryExperience = true;
       this.showProfessionalData = true;
-      this.showAboutMySelf=true;
-      this.showAcademicsDetails=true;
-      this.showAwards=true;
-      this.showCertificationDetails=true;
-      this.showemploymentHistory=true;
+      this.showAboutMySelf = true;
+      this.showAcademicsDetails = true;
+      this.showAwards = true;
+      this.showCertificationDetails = true;
+      this.showemploymentHistory = true;
     }
-    if (this.candidate.jobTitle === undefined || this.candidate.industry.name !== undefined) {
+    if (this.candidate.jobTitle === undefined || this.candidate.industry.name == undefined) {
       //TODO: Shrikant write logic which should be the active section
-      console.log(this.candidate);
       this.highlightedSection.name = "Profile";
     }
-    if(this.candidate.isVisible == undefined){
-      this.candidate.isVisible=true;
+    if (this.candidate.isVisible == undefined) {
+      this.candidate.isVisible = true;
     }
     if (this.candidate.lockedOn != undefined) {
       if (this.dateDifferenceInDays(new Date(), new Date(this.candidate.lockedOn)) <= 90) {
@@ -349,21 +350,28 @@ export class CandidateProfileComponent implements OnInit {
     if (this.candidate.industry.name !== undefined) {
       this.isRolesShow = false;
       this.getRoles();
-    }
-
-    if (this.candidate.industry.roles.length > 0) {
-      this.showCapability = true;
-      this.getCapability();
-      this.whichStepsVisible[1] = true;
-      this.getProficiency();
-      if (this.candidate.industry.roles[0].capabilities.length >= 1) {
-        this.getComplexity();
-        this.showComplexity = true;
-        this.whichStepsVisible[2] = true;
-        if (this.candidate.industry.roles[0].capabilities[0].complexities.length > 0) {
-          this.whichStepsVisible[3] = true;
+      if (this.candidate.industry.roles.length > 0) {
+        this.showCapability = true;
+        this.getCapability();
+        this.whichStepsVisible[1] = true;
+        this.getProficiency();
+        if (this.candidate.industry.roles[0].capabilities.length >= 1) {
+          this.getComplexity();
+          this.showComplexity = true;
+          this.whichStepsVisible[2] = true;
+          if (this.candidate.industry.roles[0].capabilities[0].complexities.length > 0) {
+            this.whichStepsVisible[3] = true;
+          } else {
+            this.highlightedSection.name = 'Complexities';
+          }
+        } else {
+          this.highlightedSection.name = 'Capabilities';
         }
+      } else {
+        this.highlightedSection.name = 'Work-Area';
       }
+    } else {
+      this.highlightedSection.name = 'Profile';
     }
 
     if (this.candidate.proficiencies !== undefined && this.candidate.proficiencies.length > 0) {
@@ -372,7 +380,7 @@ export class CandidateProfileComponent implements OnInit {
       this.whichStepsVisible[4] = true;
     }
 
-    if (this.candidate.interestedIndustries !== undefined) {
+    if (this.candidate.interestedIndustries !== undefined && this.candidate.interestedIndustries.length > 0) {
       this.showIndustryExperience = true;
     }
 
@@ -380,6 +388,33 @@ export class CandidateProfileComponent implements OnInit {
       this.showProfessionalData = true;
       this.whichStepsVisible[5] = true;
     }
+
+
+    /*
+    Do not remove this code it will in use after capability bug
+    if (this.candidate.proficiencies !== undefined && this.candidate.proficiencies.length > 0) {
+      this.highlightedSection.isProficiencyFilled = true;
+      this.showProfeciency = true;
+      this.whichStepsVisible[4] = true;
+      if (this.candidate.interestedIndustries !== undefined && this.candidate.interestedIndustries.length > 0) {
+        this.showIndustryExperience = true;
+        if (this.candidate.professionalDetails !== undefined && this.candidate.professionalDetails.education !== '') {
+          this.showProfessionalData = true;
+          this.whichStepsVisible[5] = true;
+        } else {
+          this.showProfessionalData = true;
+          this.whichStepsVisible[5] = true;
+          this.highlightedSection.name = 'Professional-Details';
+        }
+      } else {
+        this.showIndustryExperience = true;
+        this.highlightedSection.name = 'IndustryExposure';
+      }
+    } else {
+      this.showProfeciency = true;
+      this.whichStepsVisible[4] = true;
+      this.highlightedSection.name = 'Proficiencies';
+    }*/
 
     if (this.candidate.academics.length > 0 && this.candidate.academics[0].schoolName !== '') {
       this.showAcademicsDetails = true;
@@ -415,14 +450,14 @@ export class CandidateProfileComponent implements OnInit {
     return Math.floor(( Date.UTC(storedDate.getFullYear(), storedDate.getMonth(), storedDate.getDate()) - Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate())) / (1000 * 60 * 60 * 24));
   }
 
-  showorhide(type:string,event:any) {
+  showorhide(type:string, event:any) {
     if (type == "show") {
-      if(event.target.checked){
+      if (event.target.checked) {
         this.candidate.isVisible = true;
       }
     } else {
       if (type == "hide") {
-        if(event.target.checked){
+        if (event.target.checked) {
           this.candidate.isVisible = false;
         }
       }
@@ -462,6 +497,6 @@ export class CandidateProfileComponent implements OnInit {
   }
 
   onSubmit() {
-    this._router.navigate([NavigationRoutes.APP_PROFILESUMMURY]);
+    this._router.navigate([NavigationRoutes.APP_CANDIDATE_DASHBOARD]);
   }
 }

@@ -28,26 +28,21 @@
 
 
         <ul class="nav navbar-nav navbar-right">
-          <li class="user-info">
+          <li class="user-info user-info-desktop">
             <h4>{{company_name}}</h4>
           </li>
 
           <li class="dropdown last-child">
-            <div class="dropdown" [class.open]="isOpenProfile">
-              <a id="simple-dropdown" class="simple-dropdown" data-toggle="dropdown"
-                 (click)="openDropdownProfile();">
+            <div class="dropdown">
+              <a class="simple-dropdown dropdown-toggle" data-toggle="dropdown" href="#">
                 <img src= "{{uploaded_image_path}}"  alt="User Profile" />
                 <span class="caret"></span>
               </a>
               <ul class="dropdown-menu mobile-dropdown">
-               <!-- navigateTo('/create_profile');-->
-               <!-- <li role="menuitem" [routerLinkActive]="['active']" >
-                  <a class="dropdown-item" [routerLink]="['profile-edit']"
-                     (click)="toggleMenu();">
-                    <span class="glyphicon glyphicon-edit"></span>Edit Profile
-                  </a>
-                </li>-->
-
+                <li class="user-info user-info-ipad">
+                  <h4>{{company_name}}</h4>
+                </li>
+                <li class="divider"></li>
                 <li role="menuitem" >
                   <a class="dropdown-item" [routerLink]="['recruiter_dashboard']"
                      (click)="navigateTo('/recruiterdashboard'); toggleMenu();">

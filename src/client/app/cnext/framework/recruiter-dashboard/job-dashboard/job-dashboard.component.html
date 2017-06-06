@@ -26,13 +26,16 @@
       <button class="btn btn-back" (click)="navigateTo('recruiterdashboard',undefined)">All Jobs</button>
       <div class="list-view"  *ngIf="selectedJobProfile!=undefined">
         <div class="panel clearfix">
-          <ul>
-            <li class="job-posted"><p><span>{{recruiterJobView.numberOfCandidatesInCart}}</span></p></li>
-            <li><h4>{{selectedJobProfile.jobTitle}}</h4><p>IT</p></li>
-            <li class="contact-info">
+          <ul class="pull-left">
+            <!--<li class="job-posted"><p><span>{{recruiterJobView.numberOfCandidatesInCart}}</span></p></li>-->
+            <li><h4>{{selectedJobProfile.jobTitle}}</h4></li>
+          </ul>
+          <ul class="pull-right contact-info">
+            <li><p>IT</p></li>
+            <li>
               <p><img src="../../../../assets/c-next/post-job/calendar.png" alt="calendar"/>{{selectedJobProfile.postingDate | date :'dd MMM yyyy'}}<!--25 May 2017--></p>
             </li>
-            <li class="contact-info">
+            <li>
               <p><img src="../../../../assets/c-next/post-job/contact-person.png" alt="Hiring Manager"/>{{selectedJobProfile.hiringManager}}</p>
             </li>
           </ul>
