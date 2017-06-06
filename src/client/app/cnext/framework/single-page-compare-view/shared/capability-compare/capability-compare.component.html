@@ -13,6 +13,7 @@
         <div class="col-sm-9">
           <div class="heading visible-xs"><h4>Complexities Handled</h4></div>
           <div  *ngFor="let complexity of capability.complexities;let i=index">
+            <p>{{complexity.match}}</p>
             <div class="col-sm-4 padding-right15" [class.exact]="complexity.match=='exact'" [class.above]="complexity.match=='above'"
                  [class.below]="complexity.match=='below'" [class.missing]="complexity.match=='missing'">
               <!--<div *ngIf="complexity.match=='exact'"></div>

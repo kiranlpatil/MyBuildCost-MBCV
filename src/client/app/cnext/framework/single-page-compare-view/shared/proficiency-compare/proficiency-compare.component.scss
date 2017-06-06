@@ -1,0 +1,19 @@
+$theme-color: #1c75bd;
+$white: #fff;
+
+.option {
+  background: $theme-color;
+  border-radius: 25px;
+  color: $white;
+  display: inline-block;
+  font-size: 10px;
+  font-weight: normal;
+  margin: 5px 15px 5px 0;
+  min-width: 100px;
+  padding: 4px 10px;
+  text-align: center;
+
+  .exact {
+    color: #f00;
+  }
+}
