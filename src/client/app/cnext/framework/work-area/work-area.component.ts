@@ -57,6 +57,8 @@ export class WorkAreaComponent {
     this.highlightedSection.name = "Capabilities";
     this.highlightedSection.isDisable=false;
     this.onComplete.emit(this.selectedRoles);
+    let height = screen.height;
+    //window.scrollBy(0, -(height * 10));
   }
 
   isSelected(value:string) {
