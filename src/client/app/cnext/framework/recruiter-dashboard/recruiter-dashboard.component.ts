@@ -16,6 +16,7 @@ export class RecruiterDashboardComponent implements OnInit {
   private recruiterDashboard: RecruiterDashboard = new RecruiterDashboard();
   private recruiterHeaderDetails: RecruiterHeaderDetails = new RecruiterHeaderDetails();
   private tabName : string;
+  private showTabsForJobPoster:boolean = false;
 
   constructor( private recruiterDashboardService: RecruiterDashboardService,
                private activatedRoute:ActivatedRoute) {

@@ -70,7 +70,9 @@ this.candidate.basicInformation.picture=imagePath;
 
     this.onComplete.emit(this.candidate);
     let height = screen.height;
-    //window.scrollBy(0, -(height * 10));
+    var p = document.getElementById('work-area');
+    var top = p.offsetTop;
+    window.scrollBy(0, -(top - 50));
   }
   onSave() {
 //    this.compactView = true;

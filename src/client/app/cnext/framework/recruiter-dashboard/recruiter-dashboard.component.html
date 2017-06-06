@@ -3,11 +3,11 @@
 <div class="container-fluid profile-wrapper recruiter-profile-wrapper">
     <ul class="nav nav-tabs dashboard-tabs">
       <li class="active"><a data-toggle="tab" href="#posted-job">My Job Posts</a></li>
-      <li><a data-toggle="tab" id="post_job" href="#post_new_job">Post New Job / Search</a></li>
+      <li><a data-toggle="tab" id="post_job" href="#post_new_job">Post New Job</a></li>
     </ul>
     <div class="tab-content">
       <div id="posted-job" class="tab-pane fade active in clearfix">
-        <div >
+        <div>
           <cn-job-lister [headerInfoForJob]="recruiterHeaderDetails" [jobListInput]="recruiterDashboard.postedJobs" (jobEventEmitter)="jobSelected($event)"></cn-job-lister>
         </div>
       </div>
