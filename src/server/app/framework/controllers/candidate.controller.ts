@@ -188,8 +188,8 @@ export function metchResult(req:express.Request, res:express.Response, next:any)
       searchService.getMatchingResult(candidateId,jobId,  (error: any, result: any) => {
         if (error) {
           next({
-            reason: "User Not Available",//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
-            message: 'User is not available',//Messages.MSG_ERROR_WRONG_TOKEN,
+            reason: "Problem in Search Matching Result",//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
+            message: 'Problem in Search Matching Result',//Messages.MSG_ERROR_WRONG_TOKEN,
             code: 401
           })
         }
