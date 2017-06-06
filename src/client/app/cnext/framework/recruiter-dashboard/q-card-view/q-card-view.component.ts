@@ -182,6 +182,13 @@ export class QCardviewComponent {
   matching(value: any) {
     this.matchFormat = value;
   }
+
+  changeSort(){
+    if(this.type != "matchedList"){
+      this.matchFormat=this.match.belowMatch;
+    }
+  }
+
   viewProfile(candidate: CandidateQCard) {
     this.modelCandidate=candidate;
     this.profileCreatorService.getCandidateDetailsOfParticularId(candidate._id).subscribe(

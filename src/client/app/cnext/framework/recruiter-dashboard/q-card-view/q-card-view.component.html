@@ -27,15 +27,15 @@
 
     <div class="sort-by">
       <label>Sort by</label>
-      <select id="menu"  [(ngModel)]="qCardModel.sortValue">
-        <option value="{{itemList}}" *ngFor="let itemList of qCardModel.listOfMatchings">{{itemList}}</option>
+      <select id="menu"  [(ngModel)]="qCardModel.sortValue"   (change)="changeSort()">
+        <option value="{{itemList}}" *ngFor="let itemList of qCardModel.listOfMatchings" >{{itemList}}</option>
       </select>
     </div>
   </header>
   <div class="col-sm-12 text-center" *ngIf="type=='matchedList' && candidates.length==0 || undefined "   >No matching candidates found.</div>
   <div class="card-view clearfix">
     <!--<div class="col-sm-4" *ngFor= "let item of candidates">&lt;!&ndash;| candidatematching: matchFormat&ndash;&gt;-->
-      <div class="col-sm-4" *ngFor= "let item of candidates | qcardmatching: matchFormat: totalQCardMatches :type | qcardlistfilter:filterMeta:qCardCount | qcardlistsort:qCardModel.sortValue;let i=index;">
+      <div class="col-sm-4" *ngFor= "let item of candidates | qcardmatching: matchFormat: totalQCardMatches :type | qcardlistfilter:filterMeta:qCardCount | qcardlistsort:[qCardModel.sortValue,matchFormat];let i=index;">
       <div class="panel clearfix">
         <img class="profile-picture" src="assets/framework/images/dashboard/profile.png" alt="Profile Picture"/>
         <h6 class="username">{{item.first_name}} {{item.last_name}}</h6>
