@@ -21,6 +21,7 @@ export class IndustryListComponent {
   }
 
   onValueChange(industry:Industry) {
+    industry.roles = new Array(0);
     this.valueChange.emit(industry);
   }
 }
