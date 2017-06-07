@@ -16,6 +16,15 @@
       <p><img src="assets/c-next/card-view/relocation.png" alt="Location"/> {{job.location}} </p>
       <p><img src="assets/c-next/card-view/education.png" alt="education"/> {{job.education}}</p>
       <p><img src="assets/c-next/card-view/company-size.png" alt="size">{{job.company_size}}</p>
+      <p class="proficiencies">
+        <img src="assets/c-next/card-view/proficiencies.png" alt="Location"/>
+            <span *ngFor="let proficiency of job.proficiencies;let i=index" >
+            <span *ngIf="i < 5">{{proficiency}}
+              <span *ngIf="i>=0 && i<4 &&  job.proficiencies.length-1 != i ">,&nbsp;</span>
+            </span>
+          </span>
+        <br /><span *ngIf="job.proficiencies.length > 5">( {{job.proficiencies.length-5}} More )</span>
+      </p>
     </div>
     <div class="col-sm-5 col-xs-6 no-padding right-side">
       <div class="canvas-container">
