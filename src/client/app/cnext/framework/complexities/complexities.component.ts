@@ -49,7 +49,6 @@ export class ComplexitiesComponent {
     if (changes.roles) {
 
       this.roles = changes.roles.currentValue;
-      console.log(this.count++,this.roles);
     }
     if (this.candidateRoles) {
       this.scenarioNames = new Array(0);

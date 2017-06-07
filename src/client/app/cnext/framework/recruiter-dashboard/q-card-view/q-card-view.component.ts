@@ -88,9 +88,7 @@ export class QCardviewComponent {
         this.candidateQlist.rejectedCandidates.splice(this.candidateQlist.rejectedCandidates.indexOf(candidate), 1);
         break;
       case ValueConstant.CART_LISTED_CANDIDATE :
-        console.log(this.candidateQlist.cartCandidates);
         this.candidateQlist.cartCandidates.splice(this.candidateQlist.cartCandidates.indexOf(candidate), 1);
-        console.log(this.candidateQlist.cartCandidates.indexOf(candidate));
         break;
       case ValueConstant.SHORT_LISTED_CANDIDATE :
 //        this.candidateQlist.shortListedCandidates.splice(this.candidateQlist.shortListedCandidates.indexOf(candidate),1);

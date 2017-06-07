@@ -30,7 +30,7 @@ $theme-color: #3694d1;
   margin: 7px;
   box-shadow: 1px 1px 1px 0 $modal-bg;
   border: 1px solid $theme-color;
-  padding: 15px;
+  padding: 15px !important;
 }
 
 .compact-view {

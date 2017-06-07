@@ -216,7 +216,6 @@ export class JobPosterComponent {
       .subscribe(
         data => {
           this.proficiencies = data.data[0].proficiencies;
-          console.log(this.proficiencies);
         },
         error => this.onError(error));
   }

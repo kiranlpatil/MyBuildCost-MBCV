@@ -67,7 +67,6 @@ export class MoreAboutMyselfComponent implements OnInit {
     }
     this.profileCreatorService.addProfileDetail(this.candidate).subscribe(
       user => {
-        console.log(user);
         this.highlightedSection.isDisable=false;
 
       },

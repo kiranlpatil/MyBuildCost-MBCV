@@ -52,13 +52,13 @@ export class CustomHttp extends Http {
             errorInstance.err_code = err.status;
             errorInstance.err_msg = JSON.parse(err._body).error.message;
           } else if (err.status === 404) {
+
             errorInstance.err_msg = Messages.MSG_ERROR_SERVER_ERROR;
             errorInstance.err_code = err.status;
           } else if (err.status === 0) {
             errorInstance.err_msg = Messages.MSG_ERROR_SOMETHING_WRONG;
             errorInstance.err_code = err.status;
           } else  {
-
             errorInstance.err_msg = JSON.parse(err._body).error.message;
           }
           return Observable.throw(errorInstance);
@@ -66,7 +66,6 @@ export class CustomHttp extends Http {
            errorInstance.err_msg = Messages.MSG_ERROR_SOMETHING_WRONG;
            errorInstance.err_code = err.status;
            return Observable.throw(errorInstance);
-
          }
       });
   }

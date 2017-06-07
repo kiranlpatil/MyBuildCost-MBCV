@@ -26,10 +26,8 @@ export class CandiadteQCardComponent {
   ngOnChanges(changes:any){
     if(changes.type != undefined){
       this.type=changes.type.currentValue;
-      console.log(this.type);
       if(this.type=='none'){
         this.hideButton=false;
-        console.log(this.hideButton);
       }
     }
   }
@@ -42,13 +40,12 @@ export class CandiadteQCardComponent {
     }
     this.showModalStyle = !this.showModalStyle;
   }
-  
+
 
   blockJob(newVal:any) { //TODO prjakta
     this.showModalStyle = !this.showModalStyle;
     this.candidateDashboardService.blockJob().subscribe(
       data => {
-        console.log(data);
         this.onAction.emit('block');
       });
   }
@@ -65,7 +62,6 @@ export class CandiadteQCardComponent {
     this.showModalStyle = !this.showModalStyle;
     this.candidateDashboardService.applyJob().subscribe(
       data => {
-        console.log(data);
         this.onAction.emit('apply');
       },
       error => (console.log(error)));//TODO remove on error
@@ -80,7 +76,6 @@ export class CandiadteQCardComponent {
     LocalStorageService.setLocalValue(LocalStorage.CURRENT_JOB_POSTED_ID, jobId);
     this.candidateDashboardService.removeBlockJob().subscribe(
       data => {
-        console.log(data);
         this.onAction.emit('delete');
       });
   }

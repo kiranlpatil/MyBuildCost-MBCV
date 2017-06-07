@@ -25,7 +25,7 @@
       <cn-tabular-list-view [roles]="candidate.industry.roles"></cn-tabular-list-view>
     </div>
 
-    <div class="col-lg-5 col-md-12">
+    <div class="col-sm-12">
       <div *ngIf="secondaryCapabilities.length>0">
         <h4 >Supplimentry Capabilities</h4>
         <cn-horizontal-list-view [data]="secondaryCapabilities"></cn-horizontal-list-view>
@@ -33,7 +33,7 @@
       <h4>Proficiency In</h4>
       <cn-horizontal-list-view [data]="candidate.proficiencies"></cn-horizontal-list-view>
     </div>
-    <div class="col-lg-7 col-md-12" *ngIf="candidate.aboutMyself != undefined && candidate.aboutMyself!=''">
+    <div class="col-sm-12" *ngIf="candidate.aboutMyself != undefined && candidate.aboutMyself!=''">
       <h4>Additional Information</h4>
       <cn-additional-details [data]="candidate.aboutMyself"></cn-additional-details>
     </div>

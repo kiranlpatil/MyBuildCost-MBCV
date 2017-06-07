@@ -46,7 +46,6 @@ export class VerifyUserComponent implements OnInit {
         this.model.mobile_number=LocalStorageService.getLocalValue(LocalStorage.MOBILE_NUMBER);
         this.model.email=LocalStorageService.getLocalValue(LocalStorage.EMAIL_ID);
         let val=LocalStorageService.getLocalValue(LocalStorage.FROM_CANDIDATE_REGISTRATION);
-        console.log('isCandidate value is true:',this.isCandidate);
       if(val === 'true') {
         this.isCandidate =true;
         this.chkMobile = false;

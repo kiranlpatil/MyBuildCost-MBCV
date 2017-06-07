@@ -120,7 +120,6 @@ export class CompanyDetailsComponent implements OnInit {
           } else {
             this.setOfDocuments[2]=result.data.document;
           }
-          console.log('setOfDocuments is:',this.setOfDocuments);
           this.fileChangeSuccess(result);
         }
       }, (error:any) => {

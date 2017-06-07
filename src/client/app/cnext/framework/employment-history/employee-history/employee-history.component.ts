@@ -29,13 +29,13 @@ export class EmployeeHistoryComponent {
   }
 
   createYearList(year:any) {
-   
+
     for (let i = 0; i <= ValueConstant.MAX_YEAR_LIST; i++) {
       this.yearList.push(year++);
     }
   }
 
-  setCurrentDate(){
+  setCurrentDate(){                        //TODO remove it.
 
     console.log("in set current date");
   }

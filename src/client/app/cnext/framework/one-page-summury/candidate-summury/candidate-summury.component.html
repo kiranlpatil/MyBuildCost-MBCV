@@ -1,11 +1,6 @@
 <header class="page-header" *ngIf="candidate != undefined">
   <cn-candidate-header [candidate]="candidate"></cn-candidate-header>
   <div class="container">
-    <!--<div class="cn-logo">
-      <a class="navbar-brand" (click)="navigateTo('/candidate_dashboard'); closeMenu($event);">
-        <img src="assets/c-next/header/cnext-logo-white.png" alt="logo"/></a>
-    </div>-->
-
     <ul class="action-list">
       <li>
         <img src="assets/c-next/icons/print-icon.png" alt="print"/><span class="hidden-xs">Print Profile</span>
@@ -14,20 +9,7 @@
         <img src="assets/c-next/icons/pdf-icon.png" alt="pdf"/><span class="hidden-xs">Generate Pdf</span>
       </li>
     </ul>
-   <!-- <ul class="logout-dropdown">
-      <li class="dropdown">
-        <a href="#" class="dropdown-toggle drop-down" data-toggle="dropdown" >
-          <img src="assets/framework/images/dashboard/3dots.png">
-        </a>
-        <ul class="dropdown-menu">
-          <li>
-            <a (click)="logOut()"><b>Logout</b></a>
-          </li>
-        </ul>
-      </li>
-    </ul>-->
   </div>
- <!-- <button class="btn btn-danger btn-logout" (click)="logOut()">Logout</button>-->
 </header>
 
 

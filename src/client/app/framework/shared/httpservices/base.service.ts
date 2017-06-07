@@ -18,7 +18,6 @@ export class BaseService  {
   }
   extractDataWithoutToken(res:Response) {
     let body = res.json();
-   console.log('extractDataWithoutToken');
     return body || {};
   }
   handleError(error:any) {
