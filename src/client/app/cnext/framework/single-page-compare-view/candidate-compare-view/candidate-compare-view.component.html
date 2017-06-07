@@ -43,7 +43,7 @@
         </div>
       </div>
     </div>
-    <div>
+    <div *ngIf="recruiter != undefined">
       <h4>About Company</h4>
       <cn-additional-details [data]="recruiter.about_company"></cn-additional-details>
     </div>

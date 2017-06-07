@@ -47,7 +47,7 @@
 <!--
             <cn-job-view [jobId]="jobId"></cn-job-view>
 -->
-         <cn-candidate-compare-view></cn-candidate-compare-view>
+            <cn-candidate-compare-view [jobId]="jobId"></cn-candidate-compare-view>
           </div>
           <div class="button-group" *ngIf="!hideButton">
             <button class="btn btn-primary" (click)="applyJob()">Apply</button>

@@ -1,6 +1,6 @@
 <div class="vertical-view" *ngIf="data != undefined">
   <div *ngIf="type=='employment history'">
-    <div *ngIf="data[0].designation!=undefined && data[0].designation !=''">
+    <div >  <!--*ngIf="data[0].designation!=undefined && data[0].designation !=''"-->
       <img src="assets/c-next/icons/employment-icon.png" alt="employment"/>
       <span>{{type}}</span>
       <ul>
@@ -16,7 +16,7 @@
     </div>
   </div>
   <div *ngIf="type=='acedemic details'">
-    <div *ngIf="data[0].specialization!=undefined && data[0].specialization !=''">
+    <div > <!--*ngIf="data[0].specialization!=undefined && data[0].specialization !=''"-->
     <img src="assets/c-next/icons/education-icon.png" alt="education"/>
     <span>{{type}}</span>
     <ul>

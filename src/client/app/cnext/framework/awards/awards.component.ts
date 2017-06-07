@@ -18,7 +18,6 @@ export class AwardsComponent {
   @Output() onComplete = new EventEmitter();
 
   public awardDetail:FormGroup;
-  private showAddButton:boolean = true;
 
 
   private isButtonShow:boolean = false;
@@ -69,7 +68,6 @@ export class AwardsComponent {
     const control = <FormArray>this.awardDetail.controls['awards'];
     const addrCtrl = this.initAwardDetails();
     control.push(addrCtrl);
-    this.showAddButton=false;
   }
 
   removeAward(i:number) {
