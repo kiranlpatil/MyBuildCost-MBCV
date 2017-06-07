@@ -41,10 +41,8 @@ export class WorkAreaComponent {
           event.target.checked = false;
       }
     } else {
-        for (let data of this.selectedRoles) {
-          if (data.name === role.name) {
-            this.selectedRoles.splice(this.selectedRoles.indexOf(data), 1);
-          }
+      if(this.selectedRoles.indexOf(role)>=0){
+        this.selectedRoles.splice(this.selectedRoles.indexOf(role), 1);
       }
       if(this.selectedRoles.length===0){
         this.disableButton=true
@@ -57,8 +55,6 @@ export class WorkAreaComponent {
     this.highlightedSection.name = "Capabilities";
     this.highlightedSection.isDisable=false;
     this.onComplete.emit(this.selectedRoles);
-    let height = screen.height;
-    //window.scrollBy(0, -(height * 10));
   }
 
   isSelected(value:string) {

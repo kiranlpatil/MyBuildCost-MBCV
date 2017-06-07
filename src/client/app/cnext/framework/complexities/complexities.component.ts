@@ -75,7 +75,7 @@ export class ComplexitiesComponent {
 
   }
 
-  selectComplexity(role:Role, capability :Capability,complexity:Complexity, selectedScenario:Scenario, event:any) {
+  selectComplexity(role:Role, capability :Capability,complexity:Complexity, selectedScenario:Scenario, event:any) {debugger
     for(let rol  of this.candidateRoles){
         for(let cap of rol.capabilities){
           if(cap.name==capability.name){
@@ -143,6 +143,7 @@ export class ComplexitiesComponent {
       this.highlightedSection.name = "Proficiencies";
     }
     this.highlightedSection.isDisable=false;
+    this.candidateRoles= this.roles;
     this.onComplete.emit(this.roles);
   }
 

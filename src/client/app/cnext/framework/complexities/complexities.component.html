@@ -19,7 +19,7 @@
                     <div class="select-option" *ngFor="let scenario of complexity.scenarios">
                       <label>
                         <input class="selected-complexity" type="radio" name="{{complexity.name}}" value="{{scenario.name}}"
-                               (change)="selectComplexity(role,complexity,scenario,$event)"
+                               (change)="selectComplexity(role,capability,complexity,scenario,$event)"
                                [checked]="scenario.isChecked">
                         <span>{{scenario.name}}</span>
                       </label>

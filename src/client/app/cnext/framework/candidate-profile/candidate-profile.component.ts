@@ -131,12 +131,13 @@ export class CandidateProfileComponent implements OnInit {
     this.candidate.industry.roles = roles;
     this.saveCandidateDetails();
     this.candidateForCapability = this.candidate.industry.roles;
+    this.candidateForComplexity = this.candidate.industry.roles;
     this.rolesForCapability = new Array(0);
     this.getCapability();
     this.showCapability = true;
     this.whichStepsVisible[1] = true;
 
-    if (this.candidate.industry.roles) {
+/*    if (this.candidate.industry.roles) {
       if (this.candidate.industry.roles[0].capabilities) {
         if (this.candidate.industry.roles[0].capabilities.length > 0) {
           this.getComplexity();
@@ -150,7 +151,7 @@ export class CandidateProfileComponent implements OnInit {
           }
         }
       }
-    }
+    }*/
   }
 
   onCapabilityComplete(roles:Role[]) {
