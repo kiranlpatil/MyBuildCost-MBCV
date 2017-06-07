@@ -50,9 +50,11 @@
   <div class="form-group list">
     <div id="yearf" ng2-auto-complete
          [source]="validBirthYearList"
+         max-num-list="60"
+         [accept-user-input]="false"
          (ngModelChange)="selectYearModel($event)"
-         no-match-found-text="please select it">
-      <input  formControlName="birth_year" [ngModel]="passingyear" id="birth_year" class="form-control" placeholder="Year of Birth" required/>
+         no-match-found-text="Please select valid birth year.">
+      <input  formControlName="birth_year" [ngModel]="passingyear" id="birth_year" class="form-control" placeholder="Year of Birth"  required/>
       <!--<label class="select-label">Year of Birth</label>-->
     </div>
   </div>

@@ -155,10 +155,20 @@ $profile-section-shadow: rgba(0, 0, 0, 0.04);
       left: 50%;
       position: absolute;
       text-align: center;
-      top: 50%;
+      top: 45%;
       transform: translate(-50%, -50%) rotateY(180deg);
       font-family: 'gothamrnd-book';
       font-size: 20px;
+    }
+
+    p {
+      position: absolute;
+      left: 50%;
+      text-align: center;
+      top: 66%;
+      transform: translate(-50%, -50%) rotateY(180deg);
+      color: $orange;
+      font-size: 10px;
     }
   }
 

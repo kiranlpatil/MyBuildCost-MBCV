@@ -13,9 +13,11 @@ import { ActivatedRoute} from '@angular/router';
 
 export class RecruiterDashboardComponent implements OnInit {
   company_name: string;
+/*  test : string="HI <p>helll</p> hiidhi<div>dssddsds</div>";*/
   private recruiterDashboard: RecruiterDashboard = new RecruiterDashboard();
   private recruiterHeaderDetails: RecruiterHeaderDetails = new RecruiterHeaderDetails();
   private tabName : string;
+  private showTabsForJobPoster:boolean = false;
 
   constructor( private recruiterDashboardService: RecruiterDashboardService,
                private activatedRoute:ActivatedRoute) {

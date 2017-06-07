@@ -2,6 +2,7 @@ $theme-color: #27aae1;
 $orange: #fbb040;
 $green: #8dc63f;
 $red: #ef4136;
+$active-color: #f2faff;
 
 
 .profile-wrapper {
@@ -55,7 +56,8 @@ $red: #ef4136;
     padding: 0 0 0 200px;
 
     .matched {
-      margin-top: 40px;
+      margin-top: 35px;
+      background: $active-color;
     }
   }
 }

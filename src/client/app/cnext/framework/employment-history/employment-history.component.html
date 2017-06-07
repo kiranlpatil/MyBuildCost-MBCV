@@ -1,10 +1,6 @@
-<div class="section-container" [hidden]="chkEmployeeHistory">
+<div class="section-container" >
   <div class="main-content modal-content clearfix" *ngIf="highlightedSection.name =='EmploymentHistory'">
-    <h4 class="heading">Employment History
-      <span class="close-dialog" [hidden]="isButtonShow">Close this section if not needed
-        <span class="glyphicon glyphicon-remove" (click)="hideEmployeeHistory()"></span>
-      </span>
-    </h4>
+    <h4 class="heading">Employment History</h4>
     <form class="description-form" [formGroup]="employeeHistory" novalidate >
       <!--empHistories-->
       <div formArrayName="emplyeeHistories">
@@ -40,7 +36,7 @@
   </div>
 </div>
 
-<div class="section-container" [ngClass]="(highlightedSection.name=='AcademicDetails' || highlightedSection.name=='Awards' || highlightedSection.name=='Certification')?'full-width':'quarter-width'"  [hidden]="chkEmployeeHistory">
+<div class="section-container" [ngClass]="(highlightedSection.name=='AcademicDetails' || highlightedSection.name=='Awards' || highlightedSection.name=='Certification')?'full-width':'quarter-width'"  >
   <div class="main-content" *ngIf="highlightedSection.name !='EmploymentHistory'">
     <div class="compact-view clearfix">
       <!--<ul>
@@ -50,11 +46,11 @@
             <p>From {{item.from.month}} {{item.from.year}} to {{item.to.month}} {{item.to.year}}</p></li>
         </div>
       </ul>-->
-      <div *ngIf="candidate.employmentHistory.length==0">
-        <h4 class="heading-compact" (click)="highlightedSection.name='EmploymentHistory';highlightedSection.isDisable=true;showButton=false;" >
+      <div *ngIf="candidate.employmentHistory.length==0 || !showAddButton" >
+        <h4 class="heading-compact" (click)="highlightedSection.name='EmploymentHistory';addEmployeeHistory();highlightedSection.isDisable=true;showButton=false;" >
           <img src="assets/c-next/icons/employment-icon.png" alt="employment"/>
           Employment History
-          <span class="glyphicon glyphicon-plus"></span>
+          <span class="glyphicon glyphicon-plus" ></span>
         </h4>
       </div>
       <div class="vertical-container" *ngIf="candidate.employmentHistory.length>0">

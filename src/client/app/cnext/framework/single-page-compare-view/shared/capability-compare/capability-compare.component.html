@@ -13,15 +13,13 @@
         <div class="col-sm-9">
           <div class="heading visible-xs"><h4>Complexities Handled</h4></div>
           <div  *ngFor="let complexity of capability.complexities;let i=index">
-            <div class="col-sm-4 padding-right15" [class.exact]="complexity.match=='exact'" [class.above]="complexity.match=='above'"
-                 [class.below]="complexity.match=='below'" [class.missing]="complexity.match=='missing'">
-              <!--<div *ngIf="complexity.match=='exact'"></div>
-              <div *ngIf="complexity.match=='above'"></div>
-              <div *ngIf="complexity.match=='below'"></div>
-              <div *ngIf="complexity.match=='missing'"></div>-->
-              <span class="complexity-name">{{complexity.name}}</span>
-              <div *ngFor="let scenario of complexity.scenarios">
-                <span *ngIf="scenario.isChecked">{{scenario.name}}</span>
+            <div class="col-sm-4 padding-right15">
+              <div class="details" [class.exact]="complexity.match=='exact'" [class.above]="complexity.match=='above'"
+                   [class.below]="complexity.match=='below'" [class.missing]="complexity.match=='missing'">
+                <span class="complexity-name">{{complexity.name}}</span>
+                <div *ngFor="let scenario of complexity.scenarios">
+                  <span *ngIf="scenario.isChecked">{{scenario.name}}</span>
+                </div>
               </div>
             </div>
             <div class="clearfix devider" *ngIf="(i+1)%3==0"></div>

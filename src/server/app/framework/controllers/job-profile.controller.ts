@@ -17,6 +17,7 @@ import JobProfileService = require("../services/jobprofile.service");
 import * as mongoose from "mongoose";
 import RecruiterService = require("../services/recruiter.service");
 import CNextMessages = require("../shared/cnext-messages");
+import SearchService = require("../search/services/search.service");
 
 
 
@@ -134,6 +135,34 @@ export function apply(req : express.Request, res : express.Response, next :any){
   }
 
   }
+
+export function metchResultForJob(req:express.Request, res:express.Response, next:any) {
+  try {
+    var searchService = new SearchService();
+    let jobId = req.params.jobId;
+    let candidateId = req.params.candidateId;
+    searchService.getMatchingResult(candidateId,jobId,  (error: any, result: any) => {
+      if (error) {
+        next({
+          reason: "Problem in Search Matching Result",//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
+          message: 'Problem in Search Matching Result',//Messages.MSG_ERROR_WRONG_TOKEN,
+          code: 401
+        })
+      }
+      else {
+        res.send({
+          "status": "success",
+          "data": result,
+        });
+
+      }
+    });
+
+  }
+  catch (e) {
+    res.status(403).send({message: e.message});
+  }
+}
 
 
 

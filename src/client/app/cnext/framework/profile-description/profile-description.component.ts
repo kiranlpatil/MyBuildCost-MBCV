@@ -69,6 +69,10 @@ this.candidate.basicInformation.picture=imagePath;
     this.highlightedSection.isDisable=false;
 
     this.onComplete.emit(this.candidate);
+    let height = screen.height;
+    var p = document.getElementById('work-area');
+    var top = p.offsetTop;
+    window.scrollBy(0, -(top - 50));
   }
   onSave() {
 //    this.compactView = true;

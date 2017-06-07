@@ -18,6 +18,7 @@ export class CertificationAccreditationComponent {
 
   public certificationDetail:FormGroup;
 
+  private showAddButton:boolean = true;
 
   private isButtonShow:boolean = false;
   private showButton:boolean = true;
@@ -67,6 +68,7 @@ export class CertificationAccreditationComponent {
     const control = <FormArray>this.certificationDetail.controls['certifications'];
     const addrCtrl = this.initCerificateDetails();
     control.push(addrCtrl);
+    this.showAddButton=false;
   }
 
   removeCertification(i:number) {

@@ -12,120 +12,13 @@ import {FormGroup, FormArray, FormBuilder, Validators} from "@angular/forms";
 })
 
 export class AwardsComponent {
-  /* @Input() candidate:Candidate;
-   @Input() highlightedSection:Section;
-   @Output() onComplete = new EventEmitter();
-
-   public monthList = new Array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December');
-   private tempfield:string[];
-   private year:any;
-   private currentDate:any;
-   private yearList = new Array();
-   private disableAddAnother:boolean = true;
-   private sendPostCall:boolean = false;
-   private isShowError:boolean = false;
-   private chkAwards:boolean = false;
-   private isHiddenAwrard:boolean = false;
-   private hideDiv:boolean[] = new Array();
-   private showButton:boolean = true;
-
-   constructor(private profileCreatorService:CandidateProfileService) {
-   this.tempfield = new Array(1);
-   this.currentDate = new Date();
-   this.year = this.currentDate.getUTCFullYear();
-   this.createYearList(this.year);
-   }
-
-   createYearList(year:number) {
-   for (let i = 0; i < ValueConstant.MAX_ACADEMIC_YEAR_LIST; i++) {
-   this.yearList.push(year--);
-   }
-   }
-
-
-   ngOnChanges(changes:any) {
-   if (this.candidate.awards.length === 0) {
-   this.candidate.awards.push(new Award());
-   }
-   else {
-   this.isHiddenAwrard = true;
-   }
-   }
-
-
-   addAnother() {
-
-
-   for (let item of this.candidate.awards) {
-   if (item.name === "" || item.issuedBy === "" || item.year === "") {
-   this.disableAddAnother = false;
-   this.isShowError = true;
-
-   }
-   }
-   if (this.disableAddAnother === true) {
-
-   this.candidate.awards.push(new Award());
-   }
-   this.disableAddAnother = true;
-
-   }
-
-   postAwardDetails() {
-   this.isShowError = false;
-   for (let item of this.candidate.awards) {
-   if (item.name !== "" || item.issuedBy !== "" || item.year !== "") {
-   this.isHiddenAwrard = true;
-   }
-   }
-   for (let item of this.candidate.awards) {
-   if (item.name === "" || item.issuedBy === "" || item.year === "") {
-   this.sendPostCall = false;
-
-   }
-   }
-   if (this.sendPostCall === true) {
-   this.postData();
-   }
-   this.sendPostCall = true;
-
-
-   }
-
-   deleteItem(i:number) {
-   this.hideDiv[i] = true;
-   this.candidate.awards.splice(i, 1);
-   this.postData();
-   this.hideDiv[i] = false;
-   }
-
-   postData() {
-   this.profileCreatorService.addProfileDetail(this.candidate).subscribe(
-   user => {
-   console.log(user);
-   });
-   }
-   hideAwards(){
-   this.chkAwards=true;
-   this.onNext();
-
-   }
-   onNext() {
-   this.onComplete.emit();
-   this.highlightedSection.name = "AboutMySelf";
-   this.highlightedSection.isDisable=false;
-   }
-   onSave() {
-   this.onComplete.emit();
-   this.highlightedSection.name = "none";
-   this.highlightedSection.isDisable=false;
-   }*/
 
   @Input() candidate:Candidate;
   @Input() highlightedSection:Section;
   @Output() onComplete = new EventEmitter();
 
   public awardDetail:FormGroup;
+  private showAddButton:boolean = true;
 
 
   private isButtonShow:boolean = false;
@@ -176,6 +69,7 @@ export class AwardsComponent {
     const control = <FormArray>this.awardDetail.controls['awards'];
     const addrCtrl = this.initAwardDetails();
     control.push(addrCtrl);
+    this.showAddButton=false;
   }
 
   removeAward(i:number) {

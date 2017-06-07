@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output} from "@angular/core";
+import {Component, EventEmitter, Input, Output, ViewChild, ElementRef} from "@angular/core";
 import {Role} from "../model/role";
 import {Scenario} from "../model/scenario";
 import {Complexity} from "../model/complexity";
@@ -36,7 +36,8 @@ export class ComplexitiesComponent {
   private elements:any;
  // private compactView:boolean = true;
 
-
+  @ViewChild("save")
+  private _inputElement1: ElementRef;
   constructor(  private complexityService:ComplexityService) {
   }
 
@@ -49,7 +50,6 @@ export class ComplexitiesComponent {
     if (changes.roles) {
 
       this.roles = changes.roles.currentValue;
-      console.log(this.count++,this.roles);
     }
     if (this.candidateRoles) {
       this.scenarioNames = new Array(0);
@@ -83,8 +83,8 @@ export class ComplexitiesComponent {
 
   }
 
-  selectComplexity(role:Role, capability :Capability,complexity:Complexity, selectedScenario:Scenario, event:any) {
-    for(let rol  of this.candidateRoles){debugger
+  selectComplexity(role:Role, capability :Capability,complexity:Complexity, selectedScenario:Scenario, event:any) {debugger
+    for(let rol  of this.candidateRoles){
         for(let cap of rol.capabilities){
           if(cap.name==capability.name){
             capability.isPrimary=cap.isPrimary;
@@ -121,7 +121,7 @@ export class ComplexitiesComponent {
     }, "slow");
   }*/
 
-  saveComplexity(){debugger
+  saveComplexity(){
     //this.compactView=true
     this.isComplexityButtonEnable =false;
     if(this.isCandidate) {
@@ -145,24 +145,34 @@ export class ComplexitiesComponent {
         }
       }
     }
-   /* for(let rol  of this.candidateRoles){
-      for(let mainrol of this.roles){
-        if(rol.name === mainrol.name){
-          for(let defaultCap of rol.default_complexities){
-              mainrol.capabilities.push(defaultCap);
+    /* for(let rol  of this.candidateRoles){
+     for(let mainrol of this.roles){
+     if(rol.name === mainrol.name){
+     for(let defaultCap of rol.default_complexities){
+     mainrol.capabilities.push(defaultCap);
 
-          }
-        }
-      }
-    }*/
-
-    this.highlightedSection.name = "Proficiencies";
+     }
+     }
+     }
+     }*/
+    if(this.highlightedSection.isProficiencyFilled){
+      this.highlightedSection.name = "none";
+    } else{
+      this.highlightedSection.name = "Proficiencies";
+    }
     this.highlightedSection.isDisable=false;
+    this.candidateRoles= this.roles;
     this.onComplete.emit(this.roles);
   }
 
   getStyleModal() {
-    return this.showModalStyle?'block':'none';
+    if (this.showModalStyle) {
+      this._inputElement1.nativeElement.focus();
+      return 'block';
+    } else {
+      this._inputElement1.nativeElement.focus();
+      return 'none';
+    }
   }
 
   showHideModal() {

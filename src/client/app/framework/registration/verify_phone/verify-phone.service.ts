@@ -41,7 +41,6 @@ export class VerifyPhoneService extends BaseService {
   changeMobile (user:VerifyUser):Observable<any> {
     var url=API.VERIFY_MOBILE +'/'+LocalStorageService.getLocalValue(LocalStorage.USER_ID);
     var body = JSON.stringify(user);
-    console.log('body :'+body);
     return this.http.put(url,body)
       .map(this.extractData)
       .catch(this.handleError);

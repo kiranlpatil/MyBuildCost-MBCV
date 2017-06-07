@@ -8,7 +8,7 @@
           <div>
           <span class="glyphicon glyphicon-trash pull-right"
                 *ngIf="academicDetail.controls.acdemicDetails.controls.length>0 && academicDetail.controls.acdemicDetails.controls.length !==1 "
-                (click)="removeAcdemicDetail(i)"></span>
+                (click)="removeAcademicDetail(i)"></span>
           </div>
           <div class="panel-body" [formGroupName]="i">
             <cn-academics [group]="academicDetail.controls.acdemicDetails.controls[i]"></cn-academics>
@@ -17,7 +17,7 @@
       </div>
 
       <div class="margin-20">
-        <button (click)="addAcdemicDetail()" class="btn btn-create-profile" [disabled]="!academicDetail.valid">
+        <button (click)="addAcademicDetail()" class="btn btn-create-profile" [disabled]="!academicDetail.valid">
           Add another
         </button>
       </div>
@@ -39,12 +39,12 @@
 <div class="section-container"  [ngClass]="(highlightedSection.name=='EmploymentHistory' || highlightedSection.name=='Awards' || highlightedSection.name=='Certification')?'full-width':'quarter-width'" *ngIf="highlightedSection.name !='AcademicDetails'">
   <div class="main-content">
     <div class="compact-view clearfix">
-      <div *ngIf="candidate.academics.length==0">
+      <div *ngIf="candidate.academics.length==0 || !showAddButton">
 
-        <h4 class="heading-compact" (click)="highlightedSection.name='AcademicDetails';highlightedSection.isDisable=true;showButton=false" >
+        <h4 class="heading-compact" (click)="highlightedSection.name='AcademicDetails';addAcademicDetail();highlightedSection.isDisable=true;showButton=false" >
           <img src="assets/c-next/icons/education-icon.png" alt="employment"/>
           Acedemic Details
-          <span class="glyphicon glyphicon-plus"></span>
+          <span class="glyphicon glyphicon-plus" ></span>
         </h4>
       </div>
 

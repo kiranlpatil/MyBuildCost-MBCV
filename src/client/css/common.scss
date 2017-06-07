@@ -146,7 +146,7 @@ main {
   //position: fixed;
   //top: 0;
   width: 100%;
-  z-index: 9999;
+  z-index: 100000;
 
   .inner-loader {
     animation: spin 2s linear infinite;
@@ -397,7 +397,7 @@ h4 {
   position: fixed;
   right: 15px;
   text-align: left;
-  top: 71px;
+  top: 91px;
   width: 400px;
   z-index: 10;
 

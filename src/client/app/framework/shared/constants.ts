@@ -131,7 +131,6 @@ export class ValueConstant {
   public static APPLIED_CANDIDATE:string = 'applied';
   public static BLOCKED_CANDIDATE:string = 'blocked';
   public static MATCHED_CANDIDATE:string = 'matchedList';
-
   public static VALUE_FOR_CNDIDATES_PERCENT_MATCHING_LOWER_BOUND = 40;
 }
 

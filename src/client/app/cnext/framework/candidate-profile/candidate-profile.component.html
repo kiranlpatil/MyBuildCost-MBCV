@@ -18,9 +18,12 @@
         <cn-profile-description [candidate]="candidate" [highlightedSection]="highlightedSection"
                                 (onComplete)="onProfileDescriptionComplete($event)"></cn-profile-description>
 
-        <cn-work-area [roles]="rolesForMain" [selectedRoles]="candidateForRole"
-                      [highlightedSection]="highlightedSection"
-                      (onComplete)="onWorkAreaComplete($event)" [hidden]="isRolesShow"></cn-work-area>
+        <div id="work-area">
+          <cn-work-area [roles]="rolesForMain" [selectedRoles]="candidateForRole"
+                        [highlightedSection]="highlightedSection"
+                        (onComplete)="onWorkAreaComplete($event)" [hidden]="isRolesShow"></cn-work-area>
+        </div>
+
 
         <cn-capabilities [roles]="rolesForCapability" [candidateRoles]="candidateForCapability"
                          [highlightedSection]="highlightedSection"
@@ -88,8 +91,10 @@
               </div>
              <!--<span class="glyphicon glyphicon-info-sign"></span>-->
 
-              <div class="info profile-info">In case you wish to hide your profile from recruiters, select hide option
-                below. You may also choose to show your profile later.
+              <div class="info profile-info" *ngIf="!candidate.isVisible">On Selecting Show, you profile will be considered for searches against appropriate job profiles and will be visible to recruiters. You can change this setting later
+              </div>
+              <div class="info profile-info" *ngIf="candidate.isVisible">Selecting Hide will hide your profile from recruiters.
+                You can change this setting later
               </div>
             </div>
           </div>

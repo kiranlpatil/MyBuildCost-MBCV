@@ -1,0 +1,77 @@
+
+$text-color: #576b7c;
+$name: #666;
+$blue-color: #3694d1;
+$green: #7DC527;
+$red: #96e328;
+$orange: #FFB316;
+$gray: #ccc;
+
+.basic-description {
+  text-align: left;
+
+  p, span, label {
+    color: $text-color;
+    font-size: 12px;
+    word-break: break-all;
+  }
+
+  .basic-info {
+    img {
+      float: left;
+      margin-right: 15px;
+      height: 50px;
+      width: 50px;
+      border-radius: 50%;
+    }
+
+    .name {
+      color: $name;
+      font-family: 'gothamrnd-book';
+      font-weight: bold;
+      text-transform: capitalize;
+    }
+
+    p {
+      color: $text-color;
+      margin: 0 0 5px;
+    }
+  }
+
+  .details {
+    border-bottom: 1px solid $blue-color;
+    margin: 15px 0;
+    padding-bottom: 15px;
+
+    .col-sm-6 {
+      min-height: 20px;
+    }
+
+    span {
+      color: $text-color;
+      width: 100%;
+    }
+
+    label {
+      color: $blue-color;
+      font-weight: bold;
+      font-family: 'gothamrnd-book';
+      margin: 5px 0 0 0;
+      width: 100%;
+    }
+  }
+}
+
+.exact {
+  color: $green !important;
+}
+
+.above {
+  color: $orange !important;
+}
+.below {
+  color: $red !important;
+}
+.missing {
+  color: $gray !important;
+}

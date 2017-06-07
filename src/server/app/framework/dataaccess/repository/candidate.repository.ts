@@ -57,9 +57,9 @@ class CandidateRepository extends RepositoryBase<ICandidate> {
           if (job_item.substr(0, job_item.lastIndexOf(".")) == candi_item.substr(0, candi_item.lastIndexOf("."))) {
             let job_last_digit:number = Number(job_item.substr(job_item.lastIndexOf(".") + 1));
             let candi_last_digit:number = Number(candi_item.substr(candi_item.lastIndexOf(".") + 1));
-            if (candi_last_digit == job_last_digit - 1) {
+            if (candi_last_digit == job_last_digit - ConstVariables.DIFFERENCE_IN_COMPLEXITY_SCENARIO) {
               candidate_card_view.below_one_step_matching += 1;
-            } else if (candi_last_digit == job_last_digit + 1) {
+            } else if (candi_last_digit == job_last_digit + ConstVariables.DIFFERENCE_IN_COMPLEXITY_SCENARIO) {
               candidate_card_view.above_one_step_matching += 1;
             } else if (candi_last_digit == job_last_digit) {
               candidate_card_view.exact_matching += 1;
@@ -68,22 +68,6 @@ class CandidateRepository extends RepositoryBase<ICandidate> {
           }
         }
       }
-      /*for (let job_item of job_posted_selected_complexity) {
-        for (let candi_item of candidate_selected_complexity) {
-          if (job_item.substr(0, job_item.lastIndexOf(".")) == candi_item.substr(0, candi_item.lastIndexOf("."))) {
-            let job_last_digit:number = Number(job_item.substr(job_item.lastIndexOf(".") + 1));
-            let candi_last_digit:number = Number(candi_item.substr(candi_item.lastIndexOf(".") + 1));
-            if (candi_last_digit == job_last_digit - 10) {
-              candidate_card_view.below_one_step_matching += 10;
-            } else if (candi_last_digit == job_last_digit + 10) {
-              candidate_card_view.above_one_step_matching += 10;
-            } else if (candi_last_digit == job_last_digit) {
-              candidate_card_view.exact_matching += 10;
-            }
-            break;
-          }
-        }
-      }*/
       candidate_card_view.above_one_step_matching = (candidate_card_view.above_one_step_matching / job_posted_selected_complexity.length) * 100;
       candidate_card_view.below_one_step_matching= (candidate_card_view.below_one_step_matching/ job_posted_selected_complexity.length) * 100;
       candidate_card_view.exact_matching = (candidate_card_view.exact_matching / job_posted_selected_complexity.length) * 100;

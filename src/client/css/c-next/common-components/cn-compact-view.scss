@@ -30,7 +30,7 @@ $theme-color: #3694d1;
   margin: 7px;
   box-shadow: 1px 1px 1px 0 $modal-bg;
   border: 1px solid $theme-color;
-  padding: 15px;
+  padding: 15px !important;
 }
 
 .compact-view {
@@ -71,8 +71,9 @@ $theme-color: #3694d1;
     color: $theme-color;
     font-size: 12px;
     position: absolute;
-    right: 0;
+    right: 15px;
     top: 17px;
+    z-index: 0;
   }
 
   .btn-edit[hidden] {
@@ -95,6 +96,7 @@ $theme-color: #3694d1;
     background: none !important;
     margin: 0 0 5px 0 !important;
     padding: 0 !important;
+    z-index: 1;
   }
 
   .img-container {

@@ -7,7 +7,6 @@ export class FacebookService {
 
   constructor() {
     if (!window.fbAsyncInit) {
-      console.log('define');
       window.fbAsyncInit = function () {
         FB.init({
           appId: '1000308350087499',

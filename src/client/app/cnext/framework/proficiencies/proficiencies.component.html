@@ -12,12 +12,12 @@
 
         <cn-multi-select  [data]="proficiencies" [selectedData]="choosedproficiencies" [maxLength]="maxProficiencies" (onComplete)="onProficiencyComplete($event)"  ></cn-multi-select>
         <div class="button-group clearfix">
-          <button class="btn btn-default" [disabled]="choosedproficiencies.length<=0"
-                  (click)="highlightedSection.name='none'; highlightedSection.isDisable=false"  [hidden]="showButton">Cancel</button>
+ <!--         <button class="btn btn-default" [disabled]="choosedproficiencies.length<=0"
+                  (click)="highlightedSection.name='none'; highlightedSection.isDisable=false"  [hidden]="showButton">Cancel</button>-->
           <button class="btn btn-primary" scrollTo scrollTargetSelector="#industry-experience"
                   (click)="onNext()" [disabled]="choosedproficiencies.length<=0" [hidden]="!showButton">Next</button>
           <button class="btn btn-primary"
-                  (click)="onSave()" [disabled]="choosedproficiencies.length<=0" [hidden]="showButton">Save</button>
+                  (click)="onSave()" [disabled]="choosedproficiencies.length<=0" [hidden]="showButton">Next</button>
         </div>
       </div>
     </div>

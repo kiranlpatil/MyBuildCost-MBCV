@@ -22,36 +22,27 @@
       <span *ngFor="let role of postedJob.industry.roles;let i = index">{{role.name}}
         <span *ngIf="postedJob.industry.roles.length>1 &&  i!=postedJob.industry.roles.length-1">,</span>
       </span>
-          <label>Industry Exposure</label>
+          <label>Additional Industry</label>
       <span *ngFor="let industry of postedJob.interestedIndustries;let i = index">{{industry}}<span
         *ngIf="recruiter.postedJobs[0].interestedIndustries.length>1 && i!=postedJob.interestedIndustries-1">,</span>
       </span>
-          <label>Education</label>
+          <label [class.exact]="data.educationMatch=='exact'" [class.above]="data.educationMatch=='above'"
+                 [class.below]="data.educationMatch=='below'" [class.missing]="data.educationMatch=='missing'">Education</label>
           <span>{{postedJob.education}}</span>
-          <span>{{postedJob.educationMatch}}</span>
-          <label>Experience</label>
+          <label [class.exact]="data.experienceMatch=='exact'" [class.above]="data.experienceMatch=='above'"
+                 [class.below]="data.experienceMatch=='below'" [class.missing]="data.experienceMatch=='missing'">Experience</label>
           <span>{{postedJob.experience}}</span>
-          <span>{{postedJob.experienceMatch}}</span>
-          <label>Salary</label>
+          <label [class.exact]="data.salaryMatch=='exact'" [class.above]="data.salaryMatch=='above'"
+                 [class.below]="data.salaryMatch=='below'" [class.missing]="data.salaryMatch=='missing'" >Salary</label>
           <span>{{postedJob.salary}}</span>
-          <span>{{postedJob.salaryMatch}}</span>
-          <label>Joining Period</label>
-          <span>{{postedJob.joiningPeriod}}</span>
+          <label  [class.exact]="data.releaseMatch=='exact'" [class.above]="data.releaseMatch=='above'"
+                  [class.below]="data.releaseMatch=='below'" [class.missing]="data.releaseMatch=='missing'">Joining Period</label>
+          <span>{{data.joiningPeriod}}</span>
           <label>Location</label>
           <span>pune</span>
         </div>
       </div>
-
-
-
-
-
-
-
     </div>
-
-
-
     <div>
       <h4>About Company</h4>
       <cn-additional-details [data]="recruiter.about_company"></cn-additional-details>
@@ -63,7 +54,7 @@
 
   <div class="col-sm-9 right-content" *ngFor="let postedJob of recruiter.postedJobs">
     <div class="col-sm-12">
-      <cn-capability-compare [roles]="postedJob.industry.roles"></cn-capability-compare>
+      <cn-capability-compare [roles]="data.industry.roles"></cn-capability-compare>
     </div>
     <div class="col-sm-12 no-padding">
       <!--<div class="col-sm-6" *ngIf="secondaryCapabilities.length>0">
@@ -72,11 +63,7 @@
       </div>-->
       <div class="col-sm-6">
         <h4>Proficiency In</h4>
-        <cn-horizontal-list-view [data]="postedJob.proficiencies"></cn-horizontal-list-view>
-      </div>
-      <div class="col-sm-6" *ngIf="postedJob.additionalProficiencies != undefined && postedJob.additionalProficiencies.length>0" >
-        <h4>Additional Proficiency</h4>
-        <cn-horizontal-list-view [data]="postedJob.additionalProficiencies"></cn-horizontal-list-view>
+        <cn-proficiency-compare [data]="data.proficiencies" [matchdData]="data.proficienciesMatch"></cn-proficiency-compare>
       </div>
     </div>
     <!--<div class="col-sm-12 no-padding">

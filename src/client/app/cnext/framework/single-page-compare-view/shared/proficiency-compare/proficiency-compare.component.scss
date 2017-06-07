@@ -1,9 +1,11 @@
 $theme-color: #3694d1;
 $white: #fff;
+$gray: #ccc;
+$green: #7DC527;
 
 .option {
-  border: 1px solid $theme-color;
-  border-radius: 25px;
+  border: 1px solid $gray;
+  border-radius: 4px;
   color: $theme-color;
   display: inline-block;
   font-size: 10px;
@@ -12,4 +14,10 @@ $white: #fff;
   min-width: 100px;
   padding: 4px 10px;
   text-align: center;
+  border-left: 10px solid $gray;
+}
+
+.exact {
+  border: 1px solid $green;
+  border-left: 10px solid $green;
 }

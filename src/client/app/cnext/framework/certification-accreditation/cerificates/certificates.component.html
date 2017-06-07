@@ -5,9 +5,9 @@
         <div class="form-group">
           <input type="text" class="form-control"  formControlName="name" required/>
           <label>Certification Name</label>
-          <small  class="text-danger" *ngIf="certificateForm.get('name').touched && certificateForm.get('name').hasError('required')">
+          <div  class="error-messages" *ngIf="certificateForm.get('name').touched && certificateForm.get('name').hasError('required')">
             Certification Name is required
-          </small>
+          </div>
         </div>
       </div>
 
@@ -15,9 +15,9 @@
         <div class="form-group">
           <input class="form-control" type="text"  formControlName="issuedBy"  required/>
           <label>Certification authority</label>
-          <small  class="text-danger" *ngIf="certificateForm.get('issuedBy').touched && certificateForm.get('issuedBy').hasError('required')">
+          <div  class="error-messages" *ngIf="certificateForm.get('issuedBy').touched && certificateForm.get('issuedBy').hasError('required')">
             Authority Name is required
-          </small>
+          </div>
         </div>
       </div>
 
@@ -27,9 +27,9 @@
           <option *ngFor="let acadmicyear of yearList" [ngValue]="acadmicyear">{{acadmicyear}}
           </option>
         </select>
-        <small  class="text-danger" *ngIf="certificateForm.get('year').touched && certificateForm.get('year').hasError('required')">
+        <div  class="error-messages" *ngIf="certificateForm.get('year').touched && certificateForm.get('year').hasError('required')">
           Year Of Passing is required
-        </small>
+        </div>
       </div>
     </div>
 

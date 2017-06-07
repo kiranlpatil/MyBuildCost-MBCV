@@ -21,6 +21,10 @@ $option-theme-color: #1c75bd;
 .compact-view {
   padding: 10px 10px 0;
 
+  a {
+    display: block;
+  }
+
   .content {
     border-bottom: 0 ;
   }

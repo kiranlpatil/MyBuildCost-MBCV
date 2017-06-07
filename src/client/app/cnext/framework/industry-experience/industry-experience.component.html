@@ -1,7 +1,7 @@
 
 <div class="section-container profeiciency-domain" >
   <div class="main-content modal-content clearfix" *ngIf="highlightedSection.name=='IndustryExposure'">
-    <h4 class="heading">In addition to your core industry, select Industries In which you have work exposure / experience</h4>
+    <h4 class="heading">Additional Industry Exposure <span class="sub-heading">(In additional to your core industry, select Industries In which you have work exposure / experience)</span></h4>
     <div class="col-sm-12 industry-experience">
       <p class="info">An individual may be exposed to multiple industries during the professional life. At times, organisations need individuals who have cross industry expertise. Select such industries where you can claim a reasonable
         exposure.</p>
@@ -16,15 +16,15 @@
         <button class="btn btn-default"  (click)="highlightedSection.name='none'; highlightedSection.isDisable=false" [hidden]="showButton" >Cancel</button>
 -->
         <button class="btn btn-primary" scrollTo scrollTargetSelector="#professional-details"
-                (click)="onNext()" [disabled]="disableButton" [hidden]="!showButton">Next
+                (click)="onNext()"  [hidden]="!showButton">Next
         </button>
-        <button class="btn btn-primary"  (click)="onSave()" [hidden]="showButton">Save</button>
+        <button class="btn btn-primary"  (click)="onSave()" [hidden]="showButton">Next</button>
       </div>
     </div>
   </div>
   <div class="main-content" *ngIf="highlightedSection.name !='IndustryExposure'">
     <div class="compact-view clearfix">
-      <h4 class="heading">Addition Industries In which you have work exposure / experience
+      <h4 class="heading">Additional Industries In which you have work exposure / experience
         <button class="btn-edit" (click)="highlightedSection.name='IndustryExposure';disableButton=false;highlightedSection.isDisable=true;showButton=false" [hidden]="highlightedSection.isDisable"></button>
       </h4>
       <span class="option" *ngFor="let item of candidateExperiencedIndustry;let i = index">

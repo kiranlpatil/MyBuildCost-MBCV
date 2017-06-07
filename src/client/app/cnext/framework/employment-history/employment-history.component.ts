@@ -22,6 +22,7 @@ export class EmploymentHistoryComponent {
   private chkEmployeeHistory:boolean = false;
   private isButtonShow:boolean = false;
   private showButton:boolean = true;
+  private showAddButton:boolean = true;
 
   constructor(private _fb:FormBuilder, private profileCreatorService:CandidateProfileService) {
   }
@@ -54,9 +55,7 @@ export class EmploymentHistoryComponent {
         /*(<FormGroup>this.employeeHistory.controls['emplyeeHistories'])
          .setValue(this.candidate.employmentHistory, {onlySelf: true});*/
 
-        console.log(this.employeeHistory.value);
         this.emphis.emplyeeHistories = this.candidate.employmentHistory;
-        console.log(this.emphis);
         /*for (let item of this.candidate.employmentHistory) {
           this.form.controls['students'].push(new FormControl('This will not show'));
           this.employeeHistory
@@ -98,6 +97,7 @@ export class EmploymentHistoryComponent {
     const control = <FormArray>this.employeeHistory.controls['emplyeeHistories'];
     const addrCtrl = this.initEmployeeHistory();
     control.push(addrCtrl);
+    this.showAddButton=false;
     /* subscribe to individual address value changes
      addrCtrl.valueChanges.subscribe(x => {
      console.log(x);
@@ -109,18 +109,15 @@ export class EmploymentHistoryComponent {
     control.removeAt(i);
   }
 
-  save(model:any) {
+  save(model:any) {         //TODO Remove it
     console.log(this.employeeHistory);
     console.log(model);
   }
 
   postData(type:string) {
-    console.log(this.employeeHistory);
     this.candidate.employmentHistory = this.employeeHistory.value.emplyeeHistories;
-    console.log(this.candidate.employmentHistory);
     this.profileCreatorService.addProfileDetail(this.candidate).subscribe(
       user => {
-        console.log(user);
         if(type=='next'){
           this.onNext();
         }
