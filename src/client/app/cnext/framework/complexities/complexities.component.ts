@@ -25,6 +25,7 @@ export class ComplexitiesComponent {
 
 
   private scenarioNames:string[] = new Array(0);
+  private selectedScenarioNames:string[] = new Array(0);
   private scenaricomplexityNames:string[] = new Array(0);
   private selectedComplexityNames:string[]=new Array(0);
   private selectedDefaultComplexityNames:string[]=new Array(0);
@@ -48,18 +49,32 @@ export class ComplexitiesComponent {
   }
   ngOnChanges(changes:any) {
     if (changes.roles) {
-
       this.roles = changes.roles.currentValue;
     }
 
-    if (this.candidateRoles) {
+    if (this.roles) {
       this.scenarioNames = new Array(0);
-      for (let role of this.candidateRoles) {
+      for (let role of this.roles) {
         if (role.capabilities) {
           for (let primary of role.capabilities) {
             if (primary.complexities) {
               for (let complexity of primary.complexities) {
                 this.scenarioNames.push(complexity.name);
+              }
+            }
+          }
+        }
+      }
+    }
+
+    if (this.candidateRoles) {
+      this.selectedScenarioNames = new Array(0);
+      for (let role of this.candidateRoles) {
+        if (role.capabilities) {
+          for (let primary of role.capabilities) {
+            if (primary.complexities) {
+              for (let complexity of primary.complexities) {
+                this.selectedScenarioNames.push(complexity.name);
               }
             }
           }
@@ -105,6 +120,7 @@ export class ComplexitiesComponent {
       item.isChecked = false;
     }
     if(!isFound){
+      this.selectedScenarioNames.push(complexity.name);
       this.count++;
     }
     selectedScenario.isChecked = true;
@@ -115,10 +131,8 @@ export class ComplexitiesComponent {
   }
 
 
-
-  saveComplexity(){debugger
+  saveComplexity(){
     //this.compactView=true
-    console.log(this.roles);
     this.isComplexityButtonEnable =false;
     if(this.isCandidate) {
         this.showModalStyle = !this.showModalStyle;
@@ -141,24 +155,13 @@ export class ComplexitiesComponent {
         }
       }
     }
-    /* for(let rol  of this.candidateRoles){
-     for(let mainrol of this.roles){
-     if(rol.name === mainrol.name){
-     for(let defaultCap of rol.default_complexities){
-     mainrol.capabilities.push(defaultCap);
-
-     }
-     }
-     }
-     }*/
-    if(this.highlightedSection.isProficiencyFilled){debugger
+    if(this.highlightedSection.isProficiencyFilled){
       this.highlightedSection.name = "none";
     } else{
       this.highlightedSection.name = "Proficiencies";
     }
     this.highlightedSection.isDisable=false;
     this.candidateRoles= this.roles;
-    //this.onComplete.emit(this.roles);
     this.onComplete.emit(this.roles);
   }
 

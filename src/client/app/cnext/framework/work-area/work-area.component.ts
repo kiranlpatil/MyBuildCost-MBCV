@@ -40,18 +40,28 @@ export class WorkAreaComponent {
 
   selectOption(role:Role,event:any) {debugger
     if (event.target.checked) {
-      this.disableButton=false;
       if (this.selectedRoles.length < ValueConstant.MAX_WORKAREA) {
-        this.selectedRoles.push(role);
+        let isFound : boolean=false;
+        for(let selrole of this.selectedRoles){
+          if(role.name === selrole.name){
+            isFound=true;
+          }
+        }
+        if(!isFound){
+          this.selectedRoles.push(role);
+        }
       } else {
           event.target.checked = false;
       }
     } else {
-      if(this.selectedRoles.indexOf(role)>=0){
-        this.selectedRoles.splice(this.selectedRoles.indexOf(role), 1);
+      let tempRole : Role;
+      for(let selrole of this.selectedRoles){
+        if(role.name === selrole.name){
+          tempRole=selrole;
+        }
       }
-      if(this.selectedRoles.length===0){
-        this.disableButton=true
+      if(tempRole){
+        this.selectedRoles.splice(this.selectedRoles.indexOf(tempRole), 1);
       }
     }
   }
