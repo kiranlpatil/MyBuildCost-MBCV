@@ -51,6 +51,7 @@ export class ComplexitiesComponent {
 
       this.roles = changes.roles.currentValue;
     }
+
     if (this.candidateRoles) {
       this.scenarioNames = new Array(0);
       for (let role of this.candidateRoles) {
@@ -75,16 +76,20 @@ export class ComplexitiesComponent {
     // }
 
   }
-  selectDefaultComplexity(role:Role,complexity:Complexity, selectedScenario:Scenario, event:any) {
-    for (let item of complexity.scenarios) {debugger
+  selectDefaultComplexity(role:Role,complexity:Complexity, selectedScenario:Scenario, event:any) {debugger
+
+    for (let item of complexity.scenarios) {
+
       item.isChecked = false;
     }
+
     selectedScenario.isChecked = true;
+
 
   }
 
   selectComplexity(role:Role, capability :Capability,complexity:Complexity, selectedScenario:Scenario, event:any) {debugger
-    for(let rol  of this.candidateRoles){
+    for(let rol  of this.candidateRoles){debugger
         for(let cap of rol.capabilities){
           if(cap.name==capability.name){
             capability.isPrimary=cap.isPrimary;
@@ -106,23 +111,14 @@ export class ComplexitiesComponent {
     if(this.selectedComplexityNames.indexOf(complexity.name)===-1){
       this.selectedComplexityNames.push(complexity.name);
     }
-   /* if (this.selectedComplexityNames.length === this.scenaricomplexityNames.length) {
-      this.isComplexityButtonEnable =true;
-    }*/
+
   }
 
-  /*scrollToTop() {
-    //this.elementContainer = document.getElementsByClassName('complexity-container');
-    //this.elements[0].scrollTop += 65;
 
-    var element = angular.element(anchor);
-    angular.element(container).animate({scrollTop:
-    element.offset().top - angular.element(container)[0].offsetHeight
-    }, "slow");
-  }*/
 
-  saveComplexity(){
+  saveComplexity(){debugger
     //this.compactView=true
+    console.log(this.roles);
     this.isComplexityButtonEnable =false;
     if(this.isCandidate) {
         this.showModalStyle = !this.showModalStyle;
@@ -155,13 +151,14 @@ export class ComplexitiesComponent {
      }
      }
      }*/
-    if(this.highlightedSection.isProficiencyFilled){
+    if(this.highlightedSection.isProficiencyFilled){debugger
       this.highlightedSection.name = "none";
     } else{
       this.highlightedSection.name = "Proficiencies";
     }
     this.highlightedSection.isDisable=false;
     this.candidateRoles= this.roles;
+    //this.onComplete.emit(this.roles);
     this.onComplete.emit(this.roles);
   }
 

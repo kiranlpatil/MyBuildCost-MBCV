@@ -62,7 +62,7 @@ export class CandidateProfileComponent implements OnInit {
   private isHiddenAwrard:boolean = false;
   private isHiddenCertificate:boolean = false;
   private isHiddenEmployeehistory:boolean = false;
-  private isTitleFilled:boolean = false;
+  private isHiddenEmployeehistory:boolean = false;
   private showTooltip:boolean = false;
   private goto:boolean = false;
   private highlightedSection:Section = new Section();
@@ -168,7 +168,7 @@ export class CandidateProfileComponent implements OnInit {
     this.whichStepsVisible[2] = true;
   }
 
-  onComplexitytyComplete(roles:Role[]) {
+  onComplexitytyComplete(roles:Role[]) {debugger
     this.candidate.industry.roles = roles;
     var date = new Date();
     date.setDate(date.getDate() + 90);
@@ -255,10 +255,14 @@ export class CandidateProfileComponent implements OnInit {
                 this.goto=true;
               }
             }
-            if(this.goto===false)
-            {  this.highlightedSection.name = "Complexities";
-              this.highlightedSection.isDisable=false;
-              this.onCapabilityComplete( rolelist.data);
+            if(this.goto===false){
+               if( this.whichStepsVisible[3] != true){
+              this.highlightedSection.name = "Complexities";
+              this.highlightedSection.isDisable=false;}
+
+              this.getComplexity();
+              this.showComplexity = true;
+              this.whichStepsVisible[2] = true;
 
             };
             this.goto=false;
@@ -332,7 +336,7 @@ export class CandidateProfileComponent implements OnInit {
         error => this.onError(error));
   }
 
-  OnCandidateDataSuccess(candidateData:any) {
+  OnCandidateDataSuccess(candidateData:any) {debugger
     this.candidate = candidateData.data[0];
     this.candidate.basicInformation = candidateData.metadata;
     this.candidateForRole = candidateData.data[0].industry.roles;
@@ -376,15 +380,25 @@ export class CandidateProfileComponent implements OnInit {
         this.getCapability();
         this.whichStepsVisible[1] = true;
         this.getProficiency();
-        if (this.candidate.industry.roles[0].capabilities.length >= 1) {
+        if ((this.candidate.industry.roles[0].capabilities.length >= 1 && this.candidate.industry.roles[0].capabilities)|| (this.candidate.industry.roles[0].default_complexities[0].complexities.length > 0 && this.candidate.industry.roles[0].default_complexities!=undefined)) {
           this.getComplexity();
           this.showComplexity = true;
           this.whichStepsVisible[2] = true;
-          if (this.candidate.industry.roles[0].capabilities[0].complexities.length > 0) {
+          if (this.candidate.industry.roles[0].capabilities[0]!=undefined){
+            if (this.candidate.industry.roles[0].capabilities[0].complexities.length > 0) {
+              debugger
+              this.whichStepsVisible[3] = true;
+            } else {
+              this.highlightedSection.name = 'Complexities';
+            }
+        }
+          if (this.candidate.industry.roles[0].default_complexities[0].complexities.length> 0 ) {debugger
             this.whichStepsVisible[3] = true;
           } else {
             this.highlightedSection.name = 'Complexities';
           }
+
+
         } else {
           this.highlightedSection.name = 'Capabilities';
         }
