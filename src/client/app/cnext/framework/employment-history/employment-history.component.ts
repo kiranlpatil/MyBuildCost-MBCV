@@ -108,6 +108,7 @@ export class EmploymentHistoryComponent {
   removeEmployeeHistory(i:number) {
     const control = <FormArray>this.employeeHistory.controls['emplyeeHistories'];
     control.removeAt(i);
+    this.postData('dalete');
   }
 
   save(model:any) {         //TODO Remove it
@@ -123,7 +124,7 @@ export class EmploymentHistoryComponent {
           this.onNext();
         }
         else if(type== 'save'){
-          this.onSave()
+          this.onSave();
         }
       });
   }
@@ -138,10 +139,7 @@ export class EmploymentHistoryComponent {
     this.highlightedSection.name = "none";
     this.highlightedSection.isDisable=false;
   }
-  hideEmployeeHistory() {
-    this.chkEmployeeHistory = true;
-    this.onNext();
-  }
+  
 }
 
 export class EmpHis {

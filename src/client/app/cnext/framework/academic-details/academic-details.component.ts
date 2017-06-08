@@ -66,9 +66,10 @@ export class AcademicDetailComponent {
     control.push(addrCtrl);
   }
 
-  removeAcademicDetail(i:number) {
+  removeAcademicDetail(i:number) {debugger
     const control = <FormArray>this.academicDetail.controls['acdemicDetails'];
     control.removeAt(i);
+    this.postData('dalete');
   }
 
   postData(type:string) {

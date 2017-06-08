@@ -5,6 +5,7 @@ import {LocalStorageService} from "../../../../framework/shared/localstorage.ser
 import {Candidate} from "../../model/candidate";
 import {CandidateProfileService} from "../../candidate-profile/candidate-profile.service";
 import {CandidateCompareService} from "./candidate-compare-view.service";
+import {RecruiterDashboardService} from "../../recruiter-dashboard/recruiter-dashboard.service";
 
 
 @Component({
@@ -21,11 +22,11 @@ export class CandidateCompareViewComponent implements OnInit {
   /*private candidate:Candidate = new Candidate();*/
   private recruiter:any;
   private data:any;
-  constructor(private _router:Router,private candiadteCompareService:CandidateCompareService) {
+  constructor(private _router:Router,private candiadteCompareService:CandidateCompareService,private recruiterDashboardService: RecruiterDashboardService) {
   }
 
   ngOnInit() {
-    this.recruiter={
+    /*this.recruiter={
       "_id": "591dbf7c391ea4b93e398db6",
       "company_name": "Persistent System ltd.",
       "company_size": "400-500",
@@ -716,337 +717,188 @@ export class CandidateCompareViewComponent implements OnInit {
           }
         }
       ]
-    }
+    }*/
 
     this.data={
-      "_id": "59352c6edf2fcd693c7c82f4",
-      "userId": "59352c6ddf2fcd693c7c82f3",
+      "_id": "593959a5060676644500aa1f",
+      "userId": "593959a5060676644500aa1e",
       "jobTitle": "Software Engineer",
-      "aboutMyself": "",
-      "lockedOn": "2017-09-03T10:04:55.821Z",
+      "aboutMyself": "Well, I grew up in Cincinnati. As a child, I originally wanted to be a fireman, then later became interested in dinosaurs. I excelled in the sciences from early on, placing first in my fourth-grade science fair. ",
+      "lockedOn": "2017-09-06T14:07:40.703Z",
       "job_list": [],
       "proficiencies": [
         "ABC",
+        "ABC ALGOL",
         "C",
-        "javascript",
-        "java"
+        "C++",
+        "ABSET",
+        "ABSYS",
+        "Bertrand",
+        "BETA",
+        "Bistro",
+        "BitC",
+        "BLISS",
+        "C--",
+        "Blockly",
+        "C#",
+        "C/AL",
+        "Caché ObjectScript",
+        "C Shell",
+        "Caml",
+        "Cayenne",
+        "java",
+        "dsdsds",
+        "xzcczvv",
+        "zcxccvv",
+        "xyz",
+        "angular"
       ],
-      "employmentHistory": [],
+      "employmentHistory": [
+        {
+          "remarks": "Well, I grew up in Cincinnati. As a child, I originally wanted to be a fireman, then later became interested in dinosaurs. I excelled in the sciences from early on, placing first in my fourth-grade science fair. ",
+          "designation": "Software Engineer",
+          "companyName": "Techprimelab",
+          "_id": "59395d92060676644500ab51",
+          "to": {
+            "year": 1975,
+            "month": "February"
+          },
+          "from": {
+            "year": 1970,
+            "month": "January"
+          }
+        }
+      ],
       "professionalDetails": {
-        "relocate": "Yes",
+        "education": "Under Graduate",
+        "experience": "1 year",
+        "currentSalary": "3 Lac",
         "noticePeriod": "Immediate",
-        "currentSalary": "7 Lakh",
-        "experience": "4 year",
-        "education": "Graduate"
+        "relocate": "Yes"
       },
-      "academics": [],
+      "academics": [
+        {
+          "_id": "59395c6d060676644500ab46",
+          "schoolName": "Well, I grew up in Cincinnati. As a child, I originally wanted to be a fireman, then later became interested in dinosaurs. I excelled in the sciences from early on, placing first in my fourth-grade science fair. ",
+          "board": "Sanskar Vidyalaya",
+          "yearOfPassing": 1961,
+          "specialization": "SSC"
+        },
+        {
+          "_id": "59395c6d060676644500ab45",
+          "schoolName": "Well, I grew up in Cincinnati. As a child, I originally wanted to be a fireman, then later became interested in dinosaurs. I excelled in the sciences from early on, placing first in my fourth-grade science fair. ",
+          "board": "Sp College",
+          "yearOfPassing": 1958,
+          "specialization": "Hsc"
+        }
+      ],
       "location": {
-        "country": "United States",
-        "state": "Florida",
-        "city": "West Palm Beach"
+        "city": "Pune",
+        "state": "Maharashtra",
+        "country": "India"
       },
       "industry": {
         "name": "IT",
         "roles": [
           {
+            "_id": "59395c6d060676644500ab49",
             "name": "Project/ Program/ Contracts/ Client Management",
-            "_id": "59352d61df2fcd693c7c8381",
             "default_complexities": [],
             "capabilities": [
               {
-                "isPrimary": true,
+                "_id": "59395c6d060676644500ab4a",
                 "name": "Client Expectation Management",
-                "_id": "59352d61df2fcd693c7c838a",
-                "complexities": [
-                  {
-                    "name": "Nature of Interactions",
-                    "_id": "59352d61df2fcd693c7c838d",
-                    "scenarios": [
-                      {
-                        "isChecked": false,
-                        "_id": "59352b61df2fcd693c7c82f2",
-                        "name": "Amicable",
-                        "code": "10002.120.10"
-                      },
-                      {
-                        "isChecked": true,
-                        "_id": "59352b61df2fcd693c7c82f1",
-                        "name": "Aggressive",
-                        "code": "10002.120.20"
-                      },
-                      {
-                        "isChecked": false,
-                        "_id": "59352b61df2fcd693c7c82f0",
-                        "name": "Hostile",
-                        "code": "10002.120.30"
-                      },
-                      {
-                        "isChecked": false,
-                        "_id": "59352b61df2fcd693c7c82ef",
-                        "name": "Not Applicable",
-                        "code": "10002.120.0"
-                      }
-                    ],
-                    "match": "above"
-                  },
-                  {
-                    "name": "Level of Client involvement needed",
-                    "_id": "59352d61df2fcd693c7c838c",
-                    "scenarios": [
-                      {
-                        "isChecked": false,
-                        "_id": "59352b61df2fcd693c7c82ed",
-                        "name": "High dependency on client",
-                        "code": "10002.130.10"
-                      },
-                      {
-                        "isChecked": true,
-                        "_id": "59352b61df2fcd693c7c82ec",
-                        "name": "Moderate dependency on client",
-                        "code": "10002.130.20"
-                      },
-                      {
-                        "isChecked": false,
-                        "_id": "59352b61df2fcd693c7c82eb",
-                        "name": "Minimal dependency on client",
-                        "code": "10002.130.30"
-                      },
-                      {
-                        "isChecked": false,
-                        "_id": "59352b61df2fcd693c7c82ea",
-                        "name": "Not Applicable",
-                        "code": "10002.130.0"
-                      }
-                    ],
-                    "match": "exact"
-                  },
-                  {
-                    "name": "Independence in managing change",
-                    "_id": "59352d61df2fcd693c7c838b",
-                    "scenarios": [
-                      {
-                        "isChecked": false,
-                        "_id": "59352b61df2fcd693c7c82e8",
-                        "name": "Handle moderate changes to the project / program with support of senior management",
-                        "code": "10002.140.10"
-                      },
-                      {
-                        "isChecked": true,
-                        "_id": "59352b61df2fcd693c7c82e7",
-                        "name": "Independently handle moderate changes to the project / program without any escalations to senior management",
-                        "code": "10002.140.20"
-                      },
-                      {
-                        "isChecked": false,
-                        "_id": "59352b61df2fcd693c7c82e6",
-                        "name": "Independently handle disruptive changes to the project / program without causing escalations to senior management",
-                        "code": "10002.140.30"
-                      },
-                      {
-                        "isChecked": false,
-                        "_id": "59352b61df2fcd693c7c82e5",
-                        "name": "Not Applicable",
-                        "code": "10002.140.0"
-                      }
-                    ],
-                    "match": "below"
-                  }
-                ]
-              },
-              {
                 "isPrimary": true,
-                "name": "People Management",
-                "_id": "59352d61df2fcd693c7c8385",
                 "complexities": [
                   {
-                    "name": "Project Skill Availability",
-                    "_id": "59352d61df2fcd693c7c8389",
+                    "_id": "59395c6d060676644500ab4d",
+                    "name": "Nature of Interactions",
                     "scenarios": [
                       {
-                        "isChecked": false,
-                        "_id": "59352b61df2fcd693c7c82e2",
-                        "name": "All skills are adequately available",
-                        "code": "10003.120.10"
+                        "name": "Amicable",
+                        "code": "10002.120.10",
+                        "_id": "5939596c060676644500a9f9",
+                        "isChecked": false
                       },
                       {
-                        "isChecked": true,
-                        "_id": "59352b61df2fcd693c7c82e1",
-                        "name": "Manage with some skill gaps",
-                        "code": "10003.120.20"
+                        "name": "Aggressive",
+                        "code": "10002.120.20",
+                        "_id": "5939596c060676644500a9f8",
+                        "isChecked": true
                       },
                       {
-                        "isChecked": false,
-                        "_id": "59352b61df2fcd693c7c82e0",
-                        "name": "Manage with large skill gaps",
-                        "code": "10003.120.30"
+                        "name": "Hostile",
+                        "code": "10002.120.30",
+                        "_id": "5939596c060676644500a9f7",
+                        "isChecked": false
                       },
                       {
-                        "isChecked": false,
-                        "_id": "59352b61df2fcd693c7c82df",
                         "name": "Not Applicable",
-                        "code": "10003.120.0"
-                      }
-                    ],
-                    "match": "below"
-                  },
-                  {
-                    "name": "Degree of Resource Churn handled",
-                    "_id": "59352d61df2fcd693c7c8388",
-                    "scenarios": [
-                      {
-                        "isChecked": false,
-                        "_id": "59352b61df2fcd693c7c82dd",
-                        "name": "Reasonable",
-                        "code": "10003.130.10"
-                      },
-                      {
-                        "isChecked": true,
-                        "_id": "59352b61df2fcd693c7c82dc",
-                        "name": "Frequent",
-                        "code": "10003.130.20"
-                      },
-                      {
-                        "isChecked": false,
-                        "_id": "59352b61df2fcd693c7c82db",
-                        "name": "Disruptive",
-                        "code": "10003.130.30"
-                      },
-                      {
-                        "isChecked": false,
-                        "_id": "59352b61df2fcd693c7c82da",
-                        "name": "Not Applicable",
-                        "code": "10003.130.0"
-                      }
-                    ],
-                    "match": "below"
-                  },
-                  {
-                    "name": "Team diversity handled (culture, age, behaviours)",
-                    "_id": "59352d61df2fcd693c7c8387",
-                    "scenarios": [
-                      {
-                        "isChecked": false,
-                        "_id": "59352b61df2fcd693c7c82d8",
-                        "name": "Homogeneous Team composition",
-                        "code": "10003.140.10"
-                      },
-                      {
-                        "isChecked": true,
-                        "_id": "59352b61df2fcd693c7c82d7",
-                        "name": "Mixed Team composition",
-                        "code": "10003.140.20"
-                      },
-                      {
-                        "isChecked": false,
-                        "_id": "59352b61df2fcd693c7c82d6",
-                        "name": "Highly Diverse Team composition",
-                        "code": "10003.140.30"
-                      },
-                      {
-                        "isChecked": false,
-                        "_id": "59352b61df2fcd693c7c82d5",
-                        "name": "Not Applicable",
-                        "code": "10003.140.0"
+                        "code": "10002.120.0",
+                        "_id": "5939596c060676644500a9f6",
+                        "isChecked": false
                       }
                     ],
                     "match": "exact"
                   },
                   {
-                    "name": "Work Environment handled",
-                    "_id": "59352d61df2fcd693c7c8386",
+                    "_id": "59395c6d060676644500ab4c",
+                    "name": "Level of Client involvement needed",
                     "scenarios": [
                       {
-                        "isChecked": false,
-                        "_id": "59352b61df2fcd693c7c82d3",
-                        "name": "Comfortable",
-                        "code": "10003.150.10"
+                        "name": "High dependency on client",
+                        "code": "10002.130.10",
+                        "_id": "5939596c060676644500a9f4",
+                        "isChecked": false
                       },
                       {
-                        "isChecked": true,
-                        "_id": "59352b61df2fcd693c7c82d2",
-                        "name": "Extra Efforts",
-                        "code": "10003.150.20"
+                        "name": "Moderate dependency on client",
+                        "code": "10002.130.20",
+                        "_id": "5939596c060676644500a9f3",
+                        "isChecked": true
                       },
                       {
-                        "isChecked": false,
-                        "_id": "59352b61df2fcd693c7c82d1",
-                        "name": "Highly demanding",
-                        "code": "10003.150.30"
+                        "name": "Minimal dependency on client",
+                        "code": "10002.130.30",
+                        "_id": "5939596c060676644500a9f2",
+                        "isChecked": false
                       },
                       {
-                        "isChecked": false,
-                        "_id": "59352b61df2fcd693c7c82d0",
                         "name": "Not Applicable",
-                        "code": "10003.150.0"
+                        "code": "10002.130.0",
+                        "_id": "5939596c060676644500a9f1",
+                        "isChecked": false
                       }
                     ],
                     "match": "missing"
-                  }
-                ]
-              },
-              {
-                "isPrimary": true,
-                "name": "Project Transitions",
-                "_id": "59352d61df2fcd693c7c8382",
-                "complexities": [
-                  {
-                    "name": "Max no of projects transitioned in parallel",
-                    "_id": "59352d61df2fcd693c7c8384",
-                    "scenarios": [
-                      {
-                        "isChecked": false,
-                        "_id": "59352b61df2fcd693c7c82cd",
-                        "name": "Single",
-                        "code": "10004.120.10"
-                      },
-                      {
-                        "isChecked": false,
-                        "_id": "59352b61df2fcd693c7c82cc",
-                        "name": "2 - 5",
-                        "code": "10004.120.20"
-                      },
-                      {
-                        "isChecked": true,
-                        "_id": "59352b61df2fcd693c7c82cb",
-                        "name": "More than 5",
-                        "code": "10004.120.30"
-                      },
-                      {
-                        "isChecked": false,
-                        "_id": "59352b61df2fcd693c7c82ca",
-                        "name": "Not Applicable",
-                        "code": "10004.120.0"
-                      }
-                    ],
-                    "match": "exact"
                   },
                   {
-                    "name": "Nature of Transition Received",
-                    "_id": "59352d61df2fcd693c7c8383",
+                    "_id": "59395c6d060676644500ab4b",
+                    "name": "Independence in managing change",
                     "scenarios": [
                       {
-                        "isChecked": false,
-                        "_id": "59352b61df2fcd693c7c82c8",
-                        "name": "Single team - colocated",
-                        "code": "10004.130.10"
+                        "name": "Handle moderate changes to the project / program with support of senior management",
+                        "code": "10002.140.10",
+                        "_id": "5939596c060676644500a9ef",
+                        "isChecked": true
                       },
                       {
-                        "isChecked": true,
-                        "_id": "59352b61df2fcd693c7c82c7",
-                        "name": "Single team - different location",
-                        "code": "10004.130.20"
+                        "name": "Independently handle moderate changes to the project / program without any escalations to senior management",
+                        "code": "10002.140.20",
+                        "_id": "5939596c060676644500a9ee",
+                        "isChecked": false
                       },
                       {
-                        "isChecked": false,
-                        "_id": "59352b61df2fcd693c7c82c6",
-                        "name": "Multiple teams - colocated",
-                        "code": "10004.130.30"
+                        "name": "Independently handle disruptive changes to the project / program without causing escalations to senior management",
+                        "code": "10002.140.30",
+                        "_id": "5939596c060676644500a9ed",
+                        "isChecked": false
                       },
                       {
-                        "isChecked": false,
-                        "_id": "59352b61df2fcd693c7c82c5",
                         "name": "Not Applicable",
-                        "code": "10004.130.0"
+                        "code": "10002.140.0",
+                        "_id": "5939596c060676644500a9ec",
+                        "isChecked": false
                       }
                     ],
                     "match": "exact"
@@ -1056,38 +908,62 @@ export class CandidateCompareViewComponent implements OnInit {
             ]
           },
           {
+            "_id": "59395c6d060676644500ab48",
             "name": "IT Security",
-            "_id": "59352d61df2fcd693c7c8380",
             "default_complexities": [],
             "capabilities": []
           },
           {
-            "name": "UI / UX",
-            "_id": "59352d61df2fcd693c7c837f",
+            "_id": "59395c6d060676644500ab47",
+            "name": "Digital / Social Media Marketing",
             "default_complexities": [],
             "capabilities": []
           }
         ]
       },
-      "awards": [],
-      "interestedIndustries": [
-        "ABC",
-        "PQR",
-        "XYZ"
+      "awards": [
+        {
+          "_id": "59395c6d060676644500ab4e",
+          "remark": "Well, I grew up in Cincinnati. As a child, I originally wanted to be a fireman, then later became interested in dinosaurs. I excelled in the sciences from early on, placing first in my fourth-grade science fair. ",
+          "name": "cgr",
+          "issuedBy": "hjfdhkhfh",
+          "year": 1960
+        }
       ],
-      "certifications": [],
+      "interestedIndustries": [
+        "any"
+      ],
+      "certifications": [
+        {
+          "_id": "59395c6d060676644500ab50",
+          "remark": "Well, I grew up in Cincinnati. As a child, I originally wanted to be a fireman, then later became interested in dinosaurs. I excelled in the sciences from early on, placing first in my fourth-grade science fair. ",
+          "name": "JAVA",
+          "issuedBy": "SEED",
+          "year": 1958
+        },
+        {
+          "_id": "59395c6d060676644500ab4f",
+          "remark": "Well, I grew up in Cincinnati. As a child, I originally wanted to be a fireman, then later became interested in dinosaurs. I excelled in the sciences from early on, placing first in my fourth-grade science fair. ",
+          "name": "c",
+          "issuedBy": "cdac",
+          "year": 1957
+        }
+      ],
       "isVisible": true,
-      "isCompleted": false,
-      "experienceMatch": "above",
-      "salaryMatch": "below",
-      "educationMatch": "above",
+      "isCompleted": true,
+      "experienceMatch": "exact",
+      "salaryMatch": "above",
+      "educationMatch": "exact",
       "releaseMatch": "exact",
       "interestedIndustryMatch": [
-        "ABC",
-        "XYZ"
+        "any"
       ],
       "proficienciesMatch": [
-        "javascript"
+        "ABC",
+        "ABC ALGOL",
+        "ABSET",
+        "ABSYS",
+        "Bertrand"
       ]
     }
     /*app.get("/api/candidate/:candidateId/matchresult/:jobId",candidateController.metchResult);
@@ -1105,9 +981,19 @@ export class CandidateCompareViewComponent implements OnInit {
       /*this.recruiterId = LocalStorageService.getLocalValue(LocalStorage.CURRENT_JOB_POSTED_ID);*/
       this.recruiterId=this.jobId;
       this.getCompareDetail(this.candidateId,this.recruiterId);
+      this.recruiterDashboardService.getPostedJobDetails(this.jobId)
+        .subscribe(
+          data => {
+            this.OnRecruiterDataSuccess(data.data.industry)
+          });
     }
   }
 
+
+  OnRecruiterDataSuccess(data: any) {
+    this.recruiter = data;
+  }
+  
   getCompareDetail(candidateId:string,recruiterId:string) {
     this.candiadteCompareService.getCompareDetail(candidateId,recruiterId)
       .subscribe(
@@ -1117,6 +1003,7 @@ export class CandidateCompareViewComponent implements OnInit {
 
   OnCompareSuccess(data:any) {debugger
     console.log('data after compare  ',data)
+    this.data=data.data;
   }
 
 

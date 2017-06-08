@@ -15,7 +15,7 @@
           <div  *ngFor="let complexity of capability.complexities;let i=index">
             <div class="col-sm-4 padding-right15">
               <div class="details" [class.exact]="complexity.match=='exact'" [class.above]="complexity.match=='above'"
-                   [class.below]="complexity.match=='below'" [class.missing]="complexity.match=='missing'">
+                   [class.below]="complexity.match=='below'" [class.missing]="complexity.match=='missing'" [class.extra]="complexity.match=='extra'">
                 <span class="complexity-name">{{complexity.name}}</span>
                 <div *ngFor="let scenario of complexity.scenarios">
                   <span *ngIf="scenario.isChecked">{{scenario.name}}</span>

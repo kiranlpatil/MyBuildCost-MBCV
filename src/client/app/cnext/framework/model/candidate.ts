@@ -29,7 +29,7 @@ export class Candidate {
 
 
 export class Section{
-  name : string;
+  name : string='';
   date : Date;
   isLocked:boolean;
   isDisable:boolean;

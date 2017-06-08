@@ -5,7 +5,8 @@ $text-color: #666;
 $red: #96e328;
 $orange: #FFB316;
 $gray: #ccc;
-$green: #7DC527;
+$green: #b0f153;
+$black:#3694d1;
 
 .exact {
   border: 1px solid $green !important;
@@ -25,6 +26,11 @@ $green: #7DC527;
 .missing {
   border: 1px solid $gray !important;
   border-left: 10px solid $gray !important;
+}
+
+.extra {
+  border: 1px solid $black !important;
+  border-left: 10px solid $black !important;
 }
 
 .capability-complexity {

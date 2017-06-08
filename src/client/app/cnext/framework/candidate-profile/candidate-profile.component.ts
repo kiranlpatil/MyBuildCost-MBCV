@@ -65,7 +65,7 @@ export class CandidateProfileComponent implements OnInit {
   private isTitleFilled:boolean = false;
   private showTooltip:boolean = false;
   private goto:boolean = false;
-  private showGuidedTour:boolean = false;
+/*  private showGuidedTour:boolean=true ;*/
   private highlightedSection:Section = new Section();
 
   constructor(private _router:Router,
@@ -341,20 +341,13 @@ export class CandidateProfileComponent implements OnInit {
     this.candidate = candidateData.data[0];
     this.candidate.basicInformation = candidateData.metadata;
     this.candidateForRole = candidateData.data[0].industry.roles;
-
-    if (candidateData.data[0].isCompleted == true) {
-      this.showIndustryExperience = true;
-      this.showProfessionalData = true;
-      this.showAboutMySelf = true;
-      this.showAcademicsDetails = true;
-      this.showAwards = true;
-      this.showCertificationDetails = true;
-      this.showemploymentHistory = true;
-    }
-    if (this.candidate.jobTitle === undefined || this.candidate.industry.name == undefined) {
+    if (this.candidate.jobTitle === undefined || this.candidate.industry.name == undefined ) {
       //TODO: Shrikant write logic which should be the active section
-      this.highlightedSection.name = "Profile";
+      this.highlightedSection.name='GuideTour';
     }
+    
+   
+    
     if (this.candidate.isVisible == undefined) {
       this.candidate.isVisible = true;
     }
@@ -368,11 +361,12 @@ export class CandidateProfileComponent implements OnInit {
       }
     }
 
-    if (this.candidate.jobTitle !== undefined && this.candidate.jobTitle !== "") {
+   /* if (this.candidate.jobTitle !== undefined && this.candidate.jobTitle !== "") {
       this.isTitleFilled = false;
       this.highlightedSection.name = "None";
       this.disableTitle = true;
-    }
+    }*/
+    if (this.highlightedSection.name !='GuideTour') {
     if (this.candidate.industry.name !== undefined) {
       this.isRolesShow = false;
       this.getRoles();
@@ -389,6 +383,7 @@ export class CandidateProfileComponent implements OnInit {
             if (this.candidate.industry.roles[0].capabilities[0].complexities.length > 0) {
               debugger
               this.whichStepsVisible[3] = true;
+              this.highlightedSection.name = "None";
             } else {
               this.highlightedSection.name = 'Complexities';
             }
@@ -411,6 +406,7 @@ export class CandidateProfileComponent implements OnInit {
     } else {
       this.highlightedSection.name = 'Profile';
     }
+    }
 
     if (this.candidate.proficiencies !== undefined && this.candidate.proficiencies.length > 0) {
       this.highlightedSection.isProficiencyFilled=true;
@@ -427,7 +423,15 @@ export class CandidateProfileComponent implements OnInit {
       this.whichStepsVisible[5] = true;
     }
 
-
+    if (candidateData.data[0].isCompleted == true) {
+      this.showIndustryExperience = true;
+      this.showProfessionalData = true;
+      this.showAboutMySelf = true;
+      this.showAcademicsDetails = true;
+      this.showAwards = true;
+      this.showCertificationDetails = true;
+      this.showemploymentHistory = true;
+    }
     /*
     Do not remove this code it will in use after capability bug
     if (this.candidate.proficiencies !== undefined && this.candidate.proficiencies.length > 0) {

@@ -73,6 +73,7 @@ export class AwardsComponent {
   removeAward(i:number) {
     const control = <FormArray>this.awardDetail.controls['awards'];
     control.removeAt(i);
+    this.postData('dalete');
   }
 
   postData(type:string) {

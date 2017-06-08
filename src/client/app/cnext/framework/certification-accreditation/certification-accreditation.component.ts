@@ -73,6 +73,7 @@ export class CertificationAccreditationComponent {
   removeCertification(i:number) {
     const control = <FormArray>this.certificationDetail.controls['certifications'];
     control.removeAt(i);
+    this.postData('dalete');
   }
 
   postData(type:string) {

@@ -1,4 +1,4 @@
-<section class="container-fluid one-page-summary">
+<section class="container-fluid one-page-summary" *ngIf="recruiter != undefined && data != undefined" >
   <div class="col-sm-3 left-content">
     <div>
       <div class="basic-description" *ngIf="recruiter != undefined">
@@ -37,9 +37,9 @@
           <span>{{postedJob.salary}}</span>
           <label  [class.exact]="data.releaseMatch=='exact'" [class.above]="data.releaseMatch=='above'"
                   [class.below]="data.releaseMatch=='below'" [class.missing]="data.releaseMatch=='missing'">Joining Period</label>
-          <span>{{data.joiningPeriod}}</span>
+          <span>{{postedJob.joiningPeriod}}</span>
           <label>Location</label>
-          <span>pune</span>
+          <span>{{postedJob.location.city}}location</span>
         </div>
       </div>
     </div>
