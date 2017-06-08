@@ -20,7 +20,7 @@ class DataAccess {
 
     var host = config.get("TplSeed.database.host");
     var name = config.get("TplSeed.database.name");
-    this.mongooseInstance = Mongoose.connect('mongodb://waqar:waqar@' + 'localhost' + ':' + 27017 + '/' + name,{auth:{authdb:"admin"}});
+    this.mongooseInstance = Mongoose.connect('mongodb://' + host + '/' +name);
     return this.mongooseInstance;
   }
 }
