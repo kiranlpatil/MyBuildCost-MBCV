@@ -191,6 +191,7 @@ export class QCardviewComponent {
     this.modelCandidate=candidate;
     this.profileCreatorService.getCandidateDetailsOfParticularId(candidate._id).subscribe(
       candidateData => this.OnCandidateDataSuccess(candidateData));
+    
 
   }
 

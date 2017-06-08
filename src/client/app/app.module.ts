@@ -160,6 +160,8 @@ import {AwardComponent} from "./cnext/framework/awards/award/award.component";
 import {ProficiencyCompareComponent} from "./cnext/framework/single-page-compare-view/shared/proficiency-compare/proficiency-compare.component";
 import {CandidateCompareService} from "./cnext/framework/single-page-compare-view/candidate-compare-view/candidate-compare-view.service";
 import {TooltipComponent} from "./cnext/framework/tool-tip-component/tool-tip-component";
+import {JobCompareService} from "./cnext/framework/single-page-compare-view/job-compare-view/job-compare-view.service";
+import {JobCompareViewComponent} from "./cnext/framework/single-page-compare-view/job-compare-view/job-compare-view.component";
 
 //C-NEXT IMPORTS
 
@@ -254,6 +256,7 @@ import {TooltipComponent} from "./cnext/framework/tool-tip-component/tool-tip-co
     CandidateViewComponent,
     WorkAreaComponent,
     JobViewComponent,
+    JobCompareViewComponent,
     QcardListComponent,
     CandiadteQCardComponent,
     RecruiterHeaderComponent,
@@ -294,6 +297,7 @@ import {TooltipComponent} from "./cnext/framework/tool-tip-component/tool-tip-co
     ValidationService,
     ComplexityService,
     ProficiencyService,
+    JobCompareService,
     ChangePasswordService,
     ChangeEmailService,
     ChangeMobileService,

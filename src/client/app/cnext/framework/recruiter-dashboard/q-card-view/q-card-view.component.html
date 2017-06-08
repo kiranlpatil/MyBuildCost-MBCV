@@ -123,9 +123,10 @@
             <div>
              <!-- <h5>Contact:{{candidateDetails.mobile_number}}</h5>
               <h5>Email:{{candidateDetails.email}}</h5>-->
-                <div *ngIf="selectedCandidate.industry != undefined ">
+                <!--<div *ngIf="selectedCandidate.industry != undefined ">
                 <cn-tabular-list-view [roles]="selectedCandidate.industry.roles"></cn-tabular-list-view>
-              </div>
+              </div>-->
+              <cn-job-compare-view [candiadteId]="selectedCandidate._id" [jobId]="jobId"></cn-job-compare-view>
             </div>
           </div>
           <div class="button-group" *ngIf="type=='applied'">
