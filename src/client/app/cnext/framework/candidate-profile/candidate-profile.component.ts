@@ -65,6 +65,7 @@ export class CandidateProfileComponent implements OnInit {
   private isTitleFilled:boolean = false;
   private showTooltip:boolean = false;
   private goto:boolean = false;
+  private showGuidedTour:boolean = false;
   private highlightedSection:Section = new Section();
 
   constructor(private _router:Router,

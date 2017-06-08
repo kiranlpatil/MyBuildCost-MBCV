@@ -2,7 +2,7 @@ $theme-color: #27aae1;
 $orange: #fbb040;
 $green: #8dc63f;
 $red: #ef4136;
-$active-color: #f2faff;
+$active-color: #edf1f5;
 
 
 .profile-wrapper {
@@ -34,6 +34,8 @@ $active-color: #f2faff;
 
   .sub-tabs {
     top: 50px;
+    border-bottom: 1px solid #d1dce4;
+    border-top: 0 solid #d1dce4;
 
     li:first-child > a > .count {
       background-color: $green;

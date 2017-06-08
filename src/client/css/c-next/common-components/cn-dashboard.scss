@@ -15,7 +15,9 @@ $border-blue: #d1dce4;
 
 
 .profile-wrapper {
-  margin: 95px auto 0;
+  .wrapper-border {
+    border: 1px solid $border-color;
+  }
 
 
   .btn-back {
@@ -253,13 +255,6 @@ $border-blue: #d1dce4;
 
   .q-card-header {
     top: 90px;
-  }
-}
-
-@media only screen and (max-width: 1280px) {
-  .profile-wrapper {
-    padding: 0;
-    width: 100%;
   }
 }
 

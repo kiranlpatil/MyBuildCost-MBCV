@@ -31,7 +31,19 @@ export class ProfessionalDataComponent extends BaseService implements OnInit {
   private noticeperiodlist=new Array();
   private disableButton:boolean=true;
   /*private professionalDetails:ProfessionalData=new ProfessionalData();*/
-  tooltipMessage : string="<p class='info'>An individual may be exposed to multiple industries during the professional life.</p>";
+  tooltipMessage : string=
+
+      "<ul>" +
+      "<li><p><strong> Ready to Relocate </strong></br>" + "&nbspSelect if you are open to relocate from your current location as per job demand.</br></p></li>" +
+      "<li><p><strong> Education </strong></br>" + "&nbspSpecify your highest degree you attened.</br></p></li>" +
+      "<li><p><strong> Notice Period </strong></br>" + "&nbspMention your notice period you have to serve before you can take up new job.</br></p></li>" +
+      "<li><p><strong> Industry Exposure </strong></br>" + "&nbspPlease mention if you have experience working with local or multinational companies.</br></p></li>" +
+      "<li><p><strong> Experiance </strong></br>" + "&nbspNumber of years relevent experience for your selected Industry.</br></p></li>" +
+      "<li><p><strong> Current Salary </strong></br>" + "&nbspPlease mention your current salary (CTC).</br></p></li>" +
+      "</ul>"
+
+
+
 
   constructor(private professionaldataservice:ProfessionalDataService,
               private messageService:MessageService,

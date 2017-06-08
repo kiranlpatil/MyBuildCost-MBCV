@@ -4,13 +4,16 @@ $theme-color: #3694d1;
 $white: #fff;
 $purple: #7366ad;
 $profile-section-shadow: rgba(0, 0, 0, 0.04);
+$active-color: #edf1f5;
 
 .card-view {
   clear: both;
   text-align: left;
+  margin-top: 20px;
+  background-color: $active-color;
 
   .panel {
-    border:1px solid $border-color;
+    //border:1px solid $border-color;
     border-radius: 0;
     box-shadow: 2px 2px 2px $profile-section-shadow;
     margin: 10px 0 10px;

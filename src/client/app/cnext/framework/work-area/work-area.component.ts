@@ -18,7 +18,12 @@ export class WorkAreaComponent {
   @Output() onComplete = new EventEmitter();
   private isCandidate:boolean = false;
   private disableButton:boolean = true;
-  tooltipMessage : string="<p class='info'>Select those areas of work that describe what you are best at or where you would like to position your career.</p>";
+  tooltipMessage : string=
+
+      "<ul>" +
+      "<li><p><strong> Area Of Work </strong></br>" + "&nbspSelect those areas of work that describe what you are best at or where you would like to position your career.</br></p></li>" +
+      "</ul>"
+
 
 
   ngOnInit() {
