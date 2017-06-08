@@ -1,10 +1,8 @@
 <div class="section-container" *ngIf="highlightedSection.name=='Work-Area'">
+  <cn-tool-tip [message]="tooltipMessage"></cn-tool-tip>
   <div class="main-content clearfix modal-content" >
     <h4 class="heading">Select Area of Work (Max 3)</h4>
     <div class="work-area col-sm-12">
-      <p class="info">
-        Select those areas of work that describe what you are best at or where you would like to position your career.
-      </p>
       <div class="select-option" *ngFor="let item of roles;let i = index">
         <label>
           <input type="checkbox" name="choices"

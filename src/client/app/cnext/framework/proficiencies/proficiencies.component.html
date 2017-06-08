@@ -1,13 +1,8 @@
 <div class="clearfix">
-  <div class="section-container clearfix profeiciency-domain" >
-    <div class="main-content  modal-content clearfix"  *ngIf="highlightedSection.name=='Proficiencies'">
+  <div class="section-container clearfix profeiciency-domain" *ngIf="highlightedSection.name=='Proficiencies'">
+    <cn-tool-tip [message]="tooltipMessage"></cn-tool-tip>
+    <div class="main-content  modal-content clearfix"  >
       <h4 class="heading">Proficiencies (Max 25)</h4>
-      <p class="info">Enter all key words that describe your area of expertise or specialization.
-        Ensure that you cover all relevant aspects of Technologies, Products, Methodologies, Models, Processes, Tools,
-        Domain expertise and any additional key words that describe your work.
-        These keywords will help the recruiter identify your specialties / proficiencies.
-        Selecting too many proficiencies would dilute the matching and alignment with the best job opportunity.
-        Hence you should select maximum 25 proficiencies.</p>
       <div class="proficiency-container col-sm-12">
 
         <cn-multi-select  [data]="proficiencies" [selectedData]="choosedproficiencies" [maxLength]="maxProficiencies" (onComplete)="onProficiencyComplete($event)"  ></cn-multi-select>
@@ -21,7 +16,10 @@
         </div>
       </div>
     </div>
-    <div class="main-content" *ngIf="highlightedSection.name !='Proficiencies'">
+  </div>
+
+  <div class="section-container clearfix profeiciency-domain" *ngIf="highlightedSection.name !='Proficiencies'">
+    <div class="main-content">
       <div class="compact-view clearfix">
         <h4 class="heading">Proficiencies
           <button class="btn-edit" (click)="highlightedSection.name='Proficiencies';highlightedSection.isDisable=true;showButton=false" [hidden]="highlightedSection.isDisable"></button>

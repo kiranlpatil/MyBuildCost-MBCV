@@ -1,10 +1,8 @@
-
-<div class="section-container profeiciency-domain" >
-  <div class="main-content modal-content clearfix" *ngIf="highlightedSection.name=='IndustryExposure'">
+<div class="section-container profeiciency-domain" *ngIf="highlightedSection.name=='IndustryExposure'" >
+  <cn-tool-tip [message]="tooltipMessage"></cn-tool-tip>
+  <div class="main-content modal-content clearfix">
     <h4 class="heading">Additional Industry Exposure <span class="sub-heading">(In additional to your core industry, select Industries In which you have work exposure / experience)</span></h4>
     <div class="col-sm-12 industry-experience">
-      <p class="info">An individual may be exposed to multiple industries during the professional life. At times, organisations need individuals who have cross industry expertise. Select such industries where you can claim a reasonable
-        exposure.</p>
       <div class="select-option"  *ngFor="let choice of industries;let i = index">
         <label >
           <input type="checkbox"  name="choice.name" value="{{choice.name}}" (click)="selectIndustryModel(choice.name,$event)" [checked]="candidateExperiencedIndustry.indexOf(choice.name)!=-1">
@@ -12,9 +10,6 @@
         </label>
       </div>
       <div class="button-group clearfix">
-<!--
-        <button class="btn btn-default"  (click)="highlightedSection.name='none'; highlightedSection.isDisable=false" [hidden]="showButton" >Cancel</button>
--->
         <button class="btn btn-primary" scrollTo scrollTargetSelector="#professional-details"
                 (click)="onNext()"  [hidden]="!showButton">Next
         </button>
@@ -22,7 +17,9 @@
       </div>
     </div>
   </div>
-  <div class="main-content" *ngIf="highlightedSection.name !='IndustryExposure'">
+</div>
+<div class="section-container profeiciency-domain" *ngIf="highlightedSection.name !='IndustryExposure'">
+  <div class="main-content">
     <div class="compact-view clearfix">
       <h4 class="heading">Additional Industries In which you have work exposure / experience
         <button class="btn-edit" (click)="highlightedSection.name='IndustryExposure';disableButton=false;highlightedSection.isDisable=true;showButton=false" [hidden]="highlightedSection.isDisable"></button>

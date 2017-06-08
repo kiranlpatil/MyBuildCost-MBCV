@@ -1,4 +1,5 @@
-  <div class="section-container clearfix" >
+  <div class="section-container clearfix" *ngIf="highlightedSection.name=='Complexities'">
+    <cn-tool-tip [message]="tooltipMessage"></cn-tool-tip>
     <div class="main-content clearfix modal-content" *ngIf="highlightedSection.name=='Complexities'">
       <div class="complexities">
         <h4 class="heading">Choose Complexities for the above Capabilities <span class="pull-right">{{count}} / {{scenarioNames.length}} selected </span></h4>
@@ -115,30 +116,23 @@
       </div>
     </div>
 
-    <div *ngIf="highlightedSection.name!='Complexities'">
-      <div class="main-content">
-        <div class="compact-view clearfix">
-          <!--[hidden]="highlightedSection.isLocked"-->
-<!--
-          <span class=" glyphicon glyphicon-lock" title="you can edit this field after {{highlightedSection.date| date:'mediumDate'}}" *ngIf="highlightedSection.isLocked"></span>
--->
-          <a data-toggle="collapse" data-target="#demo"  >
-            <h4 class="heading">Complexities handled for the above Capabilities
-              <button class="btn-edit" (click)="highlightedSection.name='Complexities';highlightedSection.isDisable=true" [hidden]="highlightedSection.isDisable"></button>
-            </h4>
-            <span class="see-more" *ngIf="!showMore">more...</span>
-            <span class="see-more" *ngIf="showMore">less...</span>
-          </a>
-          <div id="demo" class="collapse col-sm-12">
-            <cn-tabular-list-view [roles]="candidateRoles"></cn-tabular-list-view>
-          </div>
-        </div>
+<div class="section-container clearfix" *ngIf="highlightedSection.name!='Complexities'">
+  <div class="main-content">
+    <div class="compact-view clearfix">
+      <a data-toggle="collapse" data-target="#demo" (click)="showMore = !showMore" >
+        <h4 class="heading">Complexities handled for the above Capabilities
+          <button class="btn-edit" (click)="highlightedSection.name='Complexities';highlightedSection.isDisable=true" [hidden]="highlightedSection.isDisable"></button>
+        </h4>
+        <span class="see-more" *ngIf="!showMore">more...</span>
+        <span class="see-more" *ngIf="showMore">less...</span>
+      </a>
+      <div id="demo" class="collapse col-sm-12">
+        <cn-tabular-list-view [roles]="candidateRoles"></cn-tabular-list-view>
       </div>
     </div>
-    <!--<div [class.modal-bg]="highlightedSection.name!='Complexities'"></div>-->
   </div>
-
-
+</div>
+<!--<div [class.modal-bg]="highlightedSection.name!='Complexities'"></div>-->
 
 <div class="modal popup" [style.display]="getStyleModal()">
   <div class="modal-bg">
@@ -147,7 +141,10 @@
         <div class="modal-body">
           <div class="row">
             <div class="col-sm-12">
+<!--
               <p>Saving above details. Once saved, you can not change it for 3 months.</p>
+-->
+              <p>Do you want to save these Details ?</p>
 
               <div class="button-group">
                 <form>

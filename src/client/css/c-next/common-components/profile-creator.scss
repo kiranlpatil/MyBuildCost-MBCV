@@ -8,6 +8,67 @@ $theme-color: #3694d1;
 
 .section-container {
   text-align: left;
+  position: relative;
+
+  .tooltip-message {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 16%;
+    margin-right: -16%;
+    background: #fdefc4;
+    clear: both;
+    padding: 0;
+    border-radius: 8px;
+    border: 1px solid #f0daa6;
+    font-size: 12px;
+    -webkit-animation: fadeinout 2s linear forwards;
+    animation: fadeinout 2s linear forwards;
+    z-index: 4;
+
+
+    .tooltiptail {
+      display: block;
+      border-color: transparent #fdefc4 transparent transparent;
+      border-style: solid;
+      border-width: 15px 25px 0px 56px;
+      width: 0;
+      height: 0;
+      position: absolute;
+      top: 39px;
+      left: -76px;
+      z-index: 4;
+      /* box-shadow: 1px 1px 1px #ccc; */
+      transform: rotate(-21deg);
+    }
+
+   /* .tail1 {
+      display: block;
+      border-color: transparent #967c2c transparent transparent;
+      border-style: solid;
+      border-width: 15px 25px 0px 56px;
+      width: 0;
+      height: 0;
+      position: absolute;
+      top: 39px;
+      left: -76px;
+      z-index: 9;
+      !* box-shadow: 1px 1px 1px #ccc; *!
+      transform: rotate(-21deg);
+    }*/
+  }
+}
+
+@-webkit-keyframes fadeinout {
+  0% { opacity: 0; }
+  30% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes fadeinout {
+  0% { opacity: 0; }
+  30% { opacity: 0; }
+  100% { opacity: 1; }
 }
 
 .create-profile {
@@ -218,8 +279,18 @@ $theme-color: #3694d1;
       padding-top: 0;
       margin-top: 0;
     }
+  }
+}
+
+.description-form {
+  .panel-default {
+    background: #f8f8f8;
+    border: 0;
+    padding: 0;
+    position: relative;
 
     .glyphicon-trash {
+      background-color: transparent;
       color: #999;
       padding: 5px;
       position: absolute;
@@ -229,21 +300,9 @@ $theme-color: #3694d1;
       cursor: pointer;
     }
   }
-}
-
-.description-form {
-  .panel-default {
-    background: #f8f8f8;
-    border: 0;
-    padding: 0;
-  }
 
   .panel-body {
     padding: 5px;
-  }
-
-  .glyphicon-trash {
-    background-color: transparent;
   }
 }
 

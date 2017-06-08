@@ -22,6 +22,8 @@ export class IndustryExperienceListComponent {
   @Output() onComplete = new EventEmitter();
   @Output() onNextComplete = new EventEmitter();
   private disableButton:boolean=true;
+  tooltipMessage : string="<p class='info'>An individual may be exposed to multiple industries during the professional life. At times, organisations need individuals who have cross industry expertise. Select such industries where you can claim a reasonable exposure.</p>";
+
   constructor(private candidateProfileService:CandidateProfileService) {
     this.getIndustries();
         this.candidateExperiencedIndustry=new Array(0);
@@ -98,6 +100,9 @@ export class IndustryExperienceListComponent {
         this.industries.splice(this.industries.indexOf(item), 1);
       }
     }
+    var newIndustry=new Industry();
+    newIndustry.name="any";
+    this.industries.push(newIndustry);
   }
 }
 

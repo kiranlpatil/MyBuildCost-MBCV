@@ -16,10 +16,11 @@ export class ProficienciesComponent {
   @Output() onComplete = new EventEmitter();
   @Output() onSelect = new EventEmitter();
   private maxProficiencies:number;
+  tooltipMessage : string="<p class='info'>Enter all key words that describe your area of expertise or specialization.Ensure that you cover all relevant aspects of Technologies, Products, Methodologies, Models, Processes, Tools, Domain expertise and any additional key words that describe your work. These keywords will help the recruiter identify your specialties / proficiencies. Selecting too many proficiencies would dilute the matching and alignment with the best job opportunity. Hence you should select maximum 25 proficiencies.</p>";
 
-ngOnInit(){
-  this.maxProficiencies=ValueConstant.MAX_PROFECIENCES;
-}
+  ngOnInit(){
+    this.maxProficiencies=ValueConstant.MAX_PROFECIENCES;
+  }
 
   private showButton:boolean = true;
 

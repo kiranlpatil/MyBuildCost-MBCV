@@ -524,7 +524,7 @@ export class CandidateProfileComponent implements OnInit {
   saveCandidateDetails() {
     this.profileCreatorService.addProfileDetail(this.candidate).subscribe(
       user => {
-        console.log(user);
+       // console.log(user);
       },
       error => {
         this.onError(error)

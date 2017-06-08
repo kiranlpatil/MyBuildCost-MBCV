@@ -25,6 +25,8 @@ export class MoreAboutMyselfComponent implements OnInit {
   private remainingWords:number;
   private maxword:number;
   private showButton:boolean = true;
+  tooltipMessage : string="<p class='info'>An individual may be exposed to multiple industries during the professional life.</p>";
+
   constructor(private messageService:MessageService,
               private profileCreatorService:CandidateProfileService) {
     this.reSize = new Array(1);

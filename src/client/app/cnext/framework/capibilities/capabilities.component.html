@@ -1,16 +1,10 @@
 <div class="section-container clear clearfix" *ngIf="highlightedSection.name=='Capabilities'">
+  <cn-tool-tip [message]="tooltipMessage"></cn-tool-tip>
   <div class="main-content clearfix modal-content" >
     <h4 class="heading">Choose Your Capabilities</h4>
 
     <div class="clearfix">
       <div class="capabilities col-sm-12">
-        <p class="info">
-          Select those capabilities which describe what you are best at or where you would like to position your career.
-        </p>
-        <!--<p class="legends">
-          <span class="color-panel primary-color"></span>Primary
-          <span class="color-panel secondary-color"></span>Secondary
-        </p>-->
         <div class="capability-type max-height">
           <span class="capability-option" *ngFor="let role of roles">
             <div class="select-option"
@@ -37,15 +31,9 @@
   </div>
 </div>
 
-<!-- -->
-
 <div class="section-container" [ngClass]="(highlightedSection.name=='Work-Area' || highlightedSection.name=='Profile')?'full-width':'half-width'"  *ngIf="highlightedSection.name!='Capabilities'">
   <div class="main-content" >
     <div class="compact-view clearfix">
-     <!--[hidden]="highlightedSection.isLocked"-->
-      <!--
-            <span class=" glyphicon glyphicon-lock" title="you can edit this field after {{highlightedSection.date| date:'mediumDate'}}" *ngIf="highlightedSection.isLocked"></span>
-      -->
       <h4 class="heading">Capabilities
         <button class="btn-edit" (click)="highlightedSection.name='Capabilities';highlightedSection.isDisable=true" [hidden]="highlightedSection.isDisable" ></button>
       </h4>

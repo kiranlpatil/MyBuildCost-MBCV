@@ -23,6 +23,7 @@ export class EmploymentHistoryComponent {
   private isButtonShow:boolean = false;
   private showButton:boolean = true;
   private showAddButton:boolean = true;
+  tooltipMessage : string="<p class='info'>An individual may be exposed to multiple industries during the professional life.</p>";
 
   constructor(private _fb:FormBuilder, private profileCreatorService:CandidateProfileService) {
   }

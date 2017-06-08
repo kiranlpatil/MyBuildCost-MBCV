@@ -1,0 +1,19 @@
+.tooltip-message {
+  .message {
+    padding: 10px;
+  }
+
+  h4 {
+    margin: 0;
+    padding: 5px;
+    background: #a2263c;
+    color: #fff;
+    font-size: 12px;
+    border-radius: 8px 8px 0 0;
+  }
+
+  .glyphicon-info-sign {
+   padding: 0 10px 0 5px;
+   top: 2px;
+  }
+}

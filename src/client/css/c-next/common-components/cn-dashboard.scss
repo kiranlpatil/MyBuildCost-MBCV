@@ -10,7 +10,7 @@ $orange: #fbb040;
 $green: #8dc63f;
 $red: #ef4136;
 $border-light: #efefef;
-$active-color: #f2faff;
+$active-color: #edf1f5;
 $border-blue: #d1dce4;
 
 
@@ -40,7 +40,7 @@ $border-blue: #d1dce4;
     padding: 0;
     text-align: left;
     position: fixed;
-    top: 80px;
+    top: 83px;
     background: $active-color;
     width: 100%;
     z-index: 999;
@@ -206,7 +206,8 @@ $border-blue: #d1dce4;
 
   .match-cases{
     padding: 0 4px 0 0;
-    //border: 1px solid $border-color;
+    border: 1px solid $border-blue;
+    border-radius: 12px;
     height: 27px;
 
     label{
@@ -215,11 +216,11 @@ $border-blue: #d1dce4;
       margin: 4px -4px 0 0;
 
       &:first-child > span {
-        border-radius: 8px 0 0 8px;
+        border-radius: 12px 0 0 12px;
       }
 
       &:last-child > span {
-        border-radius: 0 8px 8px 0;
+        border-radius: 0 12px 12px 0;
       }
     }
 
@@ -243,6 +244,7 @@ $border-blue: #d1dce4;
   .candidate-listing {
     padding: 115px 0 15px 200px;
     background: $active-color;
+    min-height: 100%;
   }
 }
 

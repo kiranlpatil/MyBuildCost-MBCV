@@ -6,7 +6,8 @@ $border-color: #ddd;
 $border-light: #efefef;
 $white: #fff;
 $theme-color: #3694d1;
-$active-tab: #f2faff;
+$active-tab: #edf1f5;
+$active-tab-border: #b2bcc3;
 
 .nav-tabs {
   border-bottom: 1px solid $border-light;
@@ -35,6 +36,7 @@ $active-tab: #f2faff;
 
   .active {
     a {
+      background: $active-tab !important;
       border: 0 !important;
       border-bottom: 3px solid $theme-color !important;
       color: $theme-color !important;
@@ -43,7 +45,7 @@ $active-tab: #f2faff;
 }
 
 .dashboard-tabs {
-  border-bottom: 1px solid $active-tab ;
+  border-bottom: 1px solid $active-tab-border;
 
   li {
     width: auto;
@@ -67,10 +69,11 @@ $active-tab: #f2faff;
 
   .active {
     a {
-      background-color: $active-tab !important;
-      border: 0 !important;
+      background: $active-tab !important;
+      border: 1px solid $active-tab-border !important;
       border-bottom: 3px solid $active-tab !important;
       color: $theme-color !important;
+      top: 1px;
     }
   }
 }

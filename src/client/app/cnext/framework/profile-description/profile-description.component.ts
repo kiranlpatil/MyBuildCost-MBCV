@@ -23,6 +23,11 @@ export class ProfileDescriptionComponent {
   private showButton:boolean=true;
   private candidateDetails:CandidateDetail = new CandidateDetail();
   private image_path:string='assets/framework/images/dashboard/profile.png' ;
+  tooltipMessage : string="<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>" +
+      "<ul>" +
+      "<li>Step1</li>" +
+      "<li>Step2</li>" +
+      "</ul>";
 
   constructor(private userProfileService:DashboardService) {
   }

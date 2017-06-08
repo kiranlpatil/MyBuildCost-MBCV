@@ -31,6 +31,7 @@ export class ProfessionalDataComponent extends BaseService implements OnInit {
   private noticeperiodlist=new Array();
   private disableButton:boolean=true;
   /*private professionalDetails:ProfessionalData=new ProfessionalData();*/
+  tooltipMessage : string="<p class='info'>An individual may be exposed to multiple industries during the professional life.</p>";
 
   constructor(private professionaldataservice:ProfessionalDataService,
               private messageService:MessageService,

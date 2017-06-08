@@ -3,6 +3,7 @@ $border-color: #ddd;
 $text-color: #333;
 $bg-tab-content: #f9f9f9;
 $profile-section-shadow: rgba(204, 204, 204, 1);
+$active-tab-border: #b2bcc3;
 
 .filter-container {
   padding-bottom: 60px;
@@ -11,7 +12,7 @@ $profile-section-shadow: rgba(204, 204, 204, 1);
   left: 0;
   height: 100vh;
   overflow: auto;
-  border: 1px solid $border-color;
+  border: 1px solid $active-tab-border;
   //background: $bg-tab-content;
   //box-shadow: 0 0 1px 0 $profile-section-shadow;
   text-align: left;

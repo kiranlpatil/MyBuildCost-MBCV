@@ -157,9 +157,10 @@ $current: #FFC107;
 }
 
 .profile-wrapper {
-  margin: 65px auto 0;
+  margin: 65px 15px 0;
   padding: 0;
   border: 1px solid $border-color;
+  width: 85%;
 
   .col-sm-3 {
     width: 25%;

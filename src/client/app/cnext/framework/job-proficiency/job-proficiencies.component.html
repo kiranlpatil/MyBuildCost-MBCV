@@ -1,52 +1,52 @@
 <div class="clearfix">
-    <div class="section-container clearfix proficiency-container" >
-      <div class="main-content  modal-content clearfix"  *ngIf="highlightedSection.name=='Proficiencies'">
-        <h4 class="heading">Proficiencies </h4>
-        <p class="info">Enter all key words that describe your area of expertise or specialization. These
-          proficiencies will be used for second level of matching post
-          capability. <span class="messages">You can edit this list anytime.</span></p>
-        <div class="col-sm-12">
-          <label>Mandatory Proficiencies</label>
-          <cn-multi-select [type]="'Mandatory'" [data]="proficiencies" [maxLength]="maxNumberOfMandatory" [selectedData]="jobPosterModel.proficiencies" (onComplete)="onMandatoryProficiencyComplete($event)"  ></cn-multi-select>
-          <label *ngIf="showAdditional">Additional Proficiencies</label>
-          <cn-multi-select [type]="'Additional'" [data]="proficiencies" [maxLength]="maxNumberOfAdditional" [selectedData]="jobPosterModel.additionalProficiencies" (onComplete)="onOptionalProficiencyComplete($event)"  *ngIf="showAdditional"></cn-multi-select>
-          <div class="button-group clearfix">
-            <button class="btn btn-primary" scrollTo scrollTargetSelector="#industry-experience"
-                    (click)="onNext()" [disabled]="disablebutton" [hidden]="!showButton">Next
-            </button>
-            <button class="btn btn-primary"  (click)="onSave()" [hidden]="showButton">Next</button>
-          </div>
+  <div class="section-container clearfix proficiency-container" *ngIf="highlightedSection.name=='Proficiencies'">
+    <cn-tool-tip [message]="tooltipMessage"></cn-tool-tip>
+    <div class="main-content  modal-content clearfix" >
+      <h4 class="heading">Proficiencies </h4>
+      <div class="col-sm-12">
+        <label>Mandatory Proficiencies</label>
+        <cn-multi-select [type]="'Mandatory'" [data]="proficiencies" [maxLength]="maxNumberOfMandatory" [selectedData]="jobPosterModel.proficiencies" (onComplete)="onMandatoryProficiencyComplete($event)"  ></cn-multi-select>
+        <label *ngIf="showAdditional">Additional Proficiencies</label>
+        <cn-multi-select [type]="'Additional'" [data]="proficiencies" [maxLength]="maxNumberOfAdditional" [selectedData]="jobPosterModel.additionalProficiencies" (onComplete)="onOptionalProficiencyComplete($event)"  *ngIf="showAdditional"></cn-multi-select>
+        <div class="button-group clearfix">
+          <button class="btn btn-primary" scrollTo scrollTargetSelector="#industry-experience"
+                  (click)="onNext()" [disabled]="disablebutton" [hidden]="!showButton">Next
+          </button>
+          <button class="btn btn-primary"  (click)="onSave()" [hidden]="showButton">Next</button>
         </div>
       </div>
-      <div class="main-content" *ngIf="highlightedSection.name !='Proficiencies'">
-        <div class="compact-view clearfix">
+    </div>
+  </div>
+  <div class="section-container clearfix proficiency-container" *ngIf="highlightedSection.name !='Proficiencies'">
+    <div class="main-content" >
+      <div class="compact-view clearfix">
 
-          <h4 class="heading">Proficiencies
-            <button class="btn-edit" (click)="highlightedSection.name='Proficiencies';disablebutton=false;showButton=false"></button>
-          </h4>
-          <div class="col-sm-6 padding-right15">
-            <div>
-              <label>Mandatory</label>
-            </div>
-            <div>
-              <span class="option" *ngFor="let item of jobPosterModel.proficiencies;let i = index">
-                {{item}}&nbsp;<span *ngIf="jobPosterModel.proficiencies.length>1 && i!=jobPosterModel.proficiencies.length-1">,</span>&nbsp;
-              </span>
-            </div>
+        <h4 class="heading">Proficiencies
+          <button class="btn-edit" (click)="highlightedSection.name='Proficiencies';disablebutton=false;showButton=false"></button>
+        </h4>
+        <div class="col-sm-6 padding-right15">
+          <div>
+            <label>Mandatory</label>
           </div>
-          <div class="col-sm-6 padding-left15" *ngIf="jobPosterModel.additionalProficiencies!= undefined && jobPosterModel.additionalProficiencies.length > 0">
-            <div>
-              <label>Additional</label>
-            </div>
-            <div>
-              <span class="option" *ngFor="let item of jobPosterModel.additionalProficiencies;let i = index">
-                {{item}}&nbsp;<span *ngIf="jobPosterModel.additionalProficiencies.length>1 && i!=jobPosterModel.additionalProficiencies.length-1">,</span>&nbsp;
-              </span>
-            </div>
+          <div>
+            <span class="option" *ngFor="let item of jobPosterModel.proficiencies;let i = index">
+              {{item}}&nbsp;<span *ngIf="jobPosterModel.proficiencies.length>1 && i!=jobPosterModel.proficiencies.length-1">,</span>&nbsp;
+            </span>
+          </div>
+        </div>
+        <div class="col-sm-6 padding-left15" *ngIf="jobPosterModel.additionalProficiencies!= undefined && jobPosterModel.additionalProficiencies.length > 0">
+          <div>
+            <label>Additional</label>
+          </div>
+          <div>
+            <span class="option" *ngFor="let item of jobPosterModel.additionalProficiencies;let i = index">
+              {{item}}&nbsp;<span *ngIf="jobPosterModel.additionalProficiencies.length>1 && i!=jobPosterModel.additionalProficiencies.length-1">,</span>&nbsp;
+            </span>
           </div>
         </div>
       </div>
     </div>
+  </div>
 </div>
 
 

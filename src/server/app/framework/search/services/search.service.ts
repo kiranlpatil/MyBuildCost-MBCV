@@ -113,25 +113,29 @@ class SearchService {
     });
   }
 
-  compareTwoOptions(first: number , second : number): string{
-      if(first < second){
-        return "below";
-      }else if(first > second){
-        return "above";
-      }else{
-        return "exact";
-      }
+  compareTwoOptions(first:number, second:number):string {
+    if (first < second) {
+      return "below";
+    } else if (first > second) {
+      return "above";
+    } else {
+      return "exact";
+    }
   }
 
-  getEductionSwitchCase(education: string) : number{
-    switch (education){
-      case "Under Graduate": return 1;
-      case "Graduate": return 2;
-      case "Post Graduate": return 3;
+  getEductionSwitchCase(education:string):number {
+    switch (education) {
+      case "Under Graduate":
+        return 1;
+      case "Graduate":
+        return 2;
+      case "Post Graduate":
+        return 3;
     }
     return -1;
   }
-  getPeriodSwitchCase(period: string) : number{
+
+  getPeriodSwitchCase(period:string):number {
     switch (period) {
       case "Immediate" :
         return 1;
@@ -147,41 +151,45 @@ class SearchService {
     return -1;
   }
 
-  getResult(candidate:any, job:JobProfileModel, callback:(error:any, result:any) => void) {
-    let newCandidate =  candidate.toObject();
+  getResult(candidate:any, job:any, callback:(error:any, result:any) => void) {
+    let newCandidate = candidate.toObject();
     let candiExperience:string[] = newCandidate.professionalDetails.experience.split(" ");
     let jobExperience:string[] = job.experience.split(" ");
-    let canSalary: string[] =newCandidate.professionalDetails.currentSalary.split(" ");
-    let jobSalary: string[] =job.salary.split(" ");
-    newCandidate.experienceMatch = this.compareTwoOptions(Number(candiExperience[0]),Number(jobExperience[0]));
-    newCandidate.salaryMatch = this.compareTwoOptions(Number(canSalary[0]),Number(jobSalary[0]));
-    let canEducation : number=this.getEductionSwitchCase(newCandidate.professionalDetails.education);
-    let jobEducation : number=this.getEductionSwitchCase(job.education);
-    newCandidate.educationMatch = this.compareTwoOptions(canEducation,jobEducation);
-    newCandidate.releaseMatch = this.compareTwoOptions(this.getPeriodSwitchCase(newCandidate.professionalDetails.noticePeriod),this.getPeriodSwitchCase(job.joiningPeriod));
+    let canSalary:string[] = newCandidate.professionalDetails.currentSalary.split(" ");
+    let jobSalary:string[] = job.salary.split(" ");
+    newCandidate.experienceMatch = this.compareTwoOptions(Number(candiExperience[0]), Number(jobExperience[0]));
+    newCandidate.salaryMatch = this.compareTwoOptions(Number(canSalary[0]), Number(jobSalary[0]));
+    let canEducation:number = this.getEductionSwitchCase(newCandidate.professionalDetails.education);
+    let jobEducation:number = this.getEductionSwitchCase(job.education);
+    newCandidate.educationMatch = this.compareTwoOptions(canEducation, jobEducation);
+    newCandidate.releaseMatch = this.compareTwoOptions(this.getPeriodSwitchCase(newCandidate.professionalDetails.noticePeriod), this.getPeriodSwitchCase(job.joiningPeriod));
     newCandidate.interestedIndustryMatch = new Array(0);
 
     for (let industry of job.interestedIndustries) {
       console.log(industry + "====" + job.interestedIndustries);
-      if (newCandidate.interestedIndustries.indexOf(industry) != -1){
+      if (newCandidate.interestedIndustries.indexOf(industry) != -1) {
         newCandidate.interestedIndustryMatch.push(industry)
       }
     }
     newCandidate.proficienciesMatch = new Array(0);
     for (let proficiency of job.proficiencies) {
-      if (newCandidate.proficiencies.indexOf(proficiency)!=-1) {
+      if (newCandidate.proficiencies.indexOf(proficiency) != -1) {
         newCandidate.proficienciesMatch.push(proficiency);
       }
     }
     for (let jobRole of job.industry.roles) {
+      let isRoleFound:boolean = false;
       for (let role of newCandidate.industry.roles) {
         if (jobRole.name == role.name) {
+          isRoleFound = true;
           for (let jobCap of jobRole.capabilities) {
+            let isCapFound:boolean = false;
             for (let cap of role.capabilities) {
-             if (jobCap.name == cap.name) {
+              if (jobCap.name == cap.name) {
+                isCapFound = true;
                 for (let jobCom of jobCap.complexities) {
                   for (let complexity of cap.complexities) {
-                    if(jobCom.name==complexity.name){
+                    if (jobCom.name == complexity.name) {
                       let jobSceNum:string;
                       for (let jobScen of jobCom.scenarios) {
                         if (jobScen.isChecked) {
@@ -205,7 +213,7 @@ class SearchService {
                           complexity.match = "exact";
                         }
                       }
-                      if(complexity.match==undefined){
+                      if (complexity.match == undefined) {
                         complexity.match = "missing";
                       }
 
@@ -216,50 +224,71 @@ class SearchService {
               }
 
             }
+            if (!isCapFound) {
+              let newcap = jobCap.toObject();
+
+              for (let jobCompl of jobCap.complexities) {
+                jobCompl.match = "extra";
+              }
+              role.capabilities.push(newcap);
+            }
           }
         }
       }
+      if (!isRoleFound) {
+        let newrole = jobRole.toObject();
+        for (let jcap of newrole.capabilities) {
+          for (let cm of jcap.complexities) {
+            cm.match = "extra";
+          }
+        }
+        newCandidate.industry.roles.push(newrole);
+      }
     }
-    callback(null,newCandidate);
+    callback(null, newCandidate);
 
 
   }
 
-  getResultForJob(candidate:CandidateModel, job:any, callback:(error:any, result:any) => void) {
-    let newJob =  job.toObject();
+  getResultForJob(candidate:any, job:any, callback:(error:any, result:any) => void) {
+    let newJob = job.toObject();
     let candiExperience:string[] = candidate.professionalDetails.experience.split(" ");
     let jobExperience:string[] = newJob.experience.split(" ");
-    let canSalary: string[] =candidate.professionalDetails.currentSalary.split(" ");
-    let jobSalary: string[] =newJob.salary.split(" ");
-    newJob.experienceMatch = this.compareTwoOptions(Number(candiExperience[0]),Number(jobExperience[0]));
-    newJob.salaryMatch = this.compareTwoOptions(Number(canSalary[0]),Number(jobSalary[0]));
-    let canEducation : number=this.getEductionSwitchCase(candidate.professionalDetails.education);
-    let jobEducation : number=this.getEductionSwitchCase(newJob.education);
-    newJob.educationMatch = this.compareTwoOptions(canEducation,jobEducation);
-    newJob.releaseMatch = this.compareTwoOptions(this.getPeriodSwitchCase(candidate.professionalDetails.noticePeriod),this.getPeriodSwitchCase(newJob.joiningPeriod));
+    let canSalary:string[] = candidate.professionalDetails.currentSalary.split(" ");
+    let jobSalary:string[] = newJob.salary.split(" ");
+    newJob.experienceMatch = this.compareTwoOptions(Number(candiExperience[0]), Number(jobExperience[0]));
+    newJob.salaryMatch = this.compareTwoOptions(Number(canSalary[0]), Number(jobSalary[0]));
+    let canEducation:number = this.getEductionSwitchCase(candidate.professionalDetails.education);
+    let jobEducation:number = this.getEductionSwitchCase(newJob.education);
+    newJob.educationMatch = this.compareTwoOptions(canEducation, jobEducation);
+    newJob.releaseMatch = this.compareTwoOptions(this.getPeriodSwitchCase(candidate.professionalDetails.noticePeriod), this.getPeriodSwitchCase(newJob.joiningPeriod));
     newJob.interestedIndustryMatch = new Array(0);
 
     for (let industry of newJob.interestedIndustries) {
       console.log(industry + "====" + newJob.interestedIndustries);
-      if (candidate.interestedIndustries.indexOf(industry) != -1){
+      if (candidate.interestedIndustries.indexOf(industry) != -1) {
         newJob.interestedIndustryMatch.push(industry)
       }
     }
     newJob.proficienciesMatch = new Array(0);
     for (let proficiency of newJob.proficiencies) {
-      if (candidate.proficiencies.indexOf(proficiency)!=-1) {
+      if (candidate.proficiencies.indexOf(proficiency) != -1) {
         newJob.proficienciesMatch.push(proficiency);
       }
     }
-    for (let jobRole of newJob.industry.roles) {
-      for (let role of candidate.industry.roles) {
+    for (let role of candidate.industry.roles) {
+      let isRoleFound : boolean = false;
+      for (let jobRole of newJob.industry.roles) {
         if (jobRole.name == role.name) {
-          for (let jobCap of jobRole.capabilities) {
-            for (let cap of role.capabilities) {
+          isRoleFound=true;
+          for (let cap of role.capabilities) {
+            let isCapFound: boolean=false;
+            for (let jobCap of jobRole.capabilities) {
               if (jobCap.name == cap.name) {
+                isCapFound = true;
                 for (let jobCom of jobCap.complexities) {
                   for (let complexity of cap.complexities) {
-                    if(jobCom.name==complexity.name){
+                    if (jobCom.name == complexity.name) {
                       let jobSceNum:string;
                       for (let jobScen of jobCom.scenarios) {
                         if (jobScen.isChecked) {
@@ -283,7 +312,7 @@ class SearchService {
                           jobCom.match = "exact";
                         }
                       }
-                      if(jobCom.match==undefined){
+                      if (jobCom.match == undefined) {
                         jobCom.match = "missing";
                       }
 
@@ -294,11 +323,27 @@ class SearchService {
               }
 
             }
+            if (!isCapFound) {
+              let newcap = cap.toObject();
+              for (let jobCompl of newcap.complexities) {
+                jobCompl.match = "extra";
+              }
+              jobRole.capabilities.push(newcap);
+            }
           }
         }
       }
+      if (!isRoleFound) {
+        let newrole = role.toObject();
+        for (let ccap of newrole.capabilities) {
+          for (let cm of ccap.complexities) {
+            cm.match = "extra";
+          }
+        }
+        newJob.industry.roles.push(newrole);
+      }
     }
-    callback(null,newJob);
+    callback(null, newJob);
   }
 
 

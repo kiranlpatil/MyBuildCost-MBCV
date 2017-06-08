@@ -1,5 +1,6 @@
-<div class="section-container">
-  <div class="main-content modal-content clearfix" *ngIf="highlightedSection.name =='Professional-Details'">
+<div class="section-container"  *ngIf="highlightedSection.name =='Professional-Details'">
+  <cn-tool-tip [message]="tooltipMessage"></cn-tool-tip>
+  <div class="main-content modal-content clearfix">
     <h4 class="heading">Professional Preferences & Experience Summary (Mandatory)</h4>
    <!-- <form [formGroup]="professionalDetailForm" (ngSubmit)="onNext(jobPostForm.value)">-->
       <div class="professional-data clearfix">
@@ -71,7 +72,9 @@
       </div>
    <!-- </form>-->
   </div>
-  <div class="main-content" *ngIf="highlightedSection.name !='Professional-Details'">
+</div>
+<div  class="section-container" *ngIf="highlightedSection.name !='Professional-Details'">
+  <div class="main-content" >
     <div class="compact-view clearfix">
       <h4 class="heading">Professional Preferences & Experience Summary
         <button class="btn-edit" (click)="highlightedSection.name='Professional-Details';highlightedSection.isDisable=true;disableButton=false;showButton=false" [hidden]="highlightedSection.isDisable"></button>

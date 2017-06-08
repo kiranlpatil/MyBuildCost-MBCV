@@ -34,7 +34,7 @@ export class ComplexitiesComponent {
   private showMore:boolean = false;
   private count:number=0;
   private elements:any;
- // private compactView:boolean = true;
+  tooltipMessage : string="<p class='info'> This section provides a list of complexity scenarios for your selected capabilities.For each scenario, select the most appropriate level of complexity that you are capable of handling.If you have not handled a particular complexity, choose not applicable.</p>";
 
   @ViewChild("save")
   private _inputElement1: ElementRef;

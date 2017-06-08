@@ -1,5 +1,6 @@
-<div class="section-container">
-  <div class="main-content clearfix modal-content" *ngIf="highlightedSection.name=='JobProfile'">
+<div class="section-container" *ngIf="highlightedSection.name=='JobProfile'">
+  <cn-tool-tip [message]="tooltipMessage"></cn-tool-tip>
+  <div class="main-content clearfix modal-content" >
     <form [formGroup]="jobPostForm"  novalidate>
       <div class="job-info section-container clearfix">
         <div class="row">
@@ -76,8 +77,9 @@
       </div>
     </form>
   </div>
-
-  <div class="main-content" *ngIf="highlightedSection.name!='JobProfile'">
+</div>
+<div class="section-container" *ngIf="highlightedSection.name!='JobProfile'">
+  <div class="main-content">
     <div class="compact-view clearfix">
       <h4 class="heading">Job Description
         <button class="btn-edit" (click)="highlightedSection.name='JobProfile';disableButton=false"></button>

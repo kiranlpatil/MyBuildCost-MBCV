@@ -17,8 +17,9 @@ export class WorkAreaComponent {
   @Input() highlightedSection :Section;
   @Output() onComplete = new EventEmitter();
   private isCandidate:boolean = false;
-
   private disableButton:boolean = true;
+  tooltipMessage : string="<p class='info'>Select those areas of work that describe what you are best at or where you would like to position your career.</p>";
+
 
   ngOnInit() {
     if(LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE)==='true') {
