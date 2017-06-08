@@ -22,7 +22,7 @@
         </div>
         <div class="button-group clearfix">
           <button class="btn btn-primary" scrollTo scrollTargetSelector="#complexity-area"
-                  (click)="onNext()" [disabled]="disableButton">Next
+                  (click)="onNext()" [disabled]="!(primaryNames.length>0)">Next
           </button>
 
         </div>
@@ -38,7 +38,7 @@
         <button class="btn-edit" (click)="highlightedSection.name='Capabilities';highlightedSection.isDisable=true" [hidden]="highlightedSection.isDisable" ></button>
       </h4>
 
-      <span class="option" *ngFor="let role of roles;let i = index">
+      <span class="option" *ngFor="let role of candidateRoles;let i = index">
         <span *ngFor="let item of role.capabilities">
           {{item.name}}&nbsp;<span *ngIf="role.capabilities.length>1 && i!=role.capabilities.length -1">,</span>&nbsp;
         </span>

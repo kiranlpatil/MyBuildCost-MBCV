@@ -14,7 +14,8 @@
       </div>
 
       <div class="button-group clearfix">
-        <button class="btn btn-primary" scrollTo scrollTargetSelector="#capability-area" (click)="onNext()" > <!-- [hidden]="!showButton"  -->
+        {{selectedRoles.length}}
+        <button class="btn btn-primary" scrollTo scrollTargetSelector="#capability-area" (click)="onNext()" [disabled]="!(selectedRoles.length>0)" > <!-- [hidden]="!showButton"  -->
           Next
         </button>
       </div>
@@ -30,7 +31,7 @@
            <span class="glyphicon glyphicon-lock" title="This section can be updated only after {{highlightedSection.date| date:'mediumDate'}}" *ngIf="highlightedSection.isLocked"></span>
     -->
     <h4 class="heading">Area Of Work
-      <button  class="btn-edit" (click)="highlightedSection.name='Work-Area';highlightedSection.sectionName='capability';disableButton=false;highlightedSection.isDisable=true" [hidden]="highlightedSection.isDisable"></button>
+      <button  class="btn-edit" (click)="highlightedSection.name='Work-Area';highlightedSection.sectionName='capability';highlightedSection.isDisable=true" [hidden]="highlightedSection.isDisable"></button>
     </h4>
     <p>
       <span class="option" *ngFor="let item of selectedRoles;let i = index">

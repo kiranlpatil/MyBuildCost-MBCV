@@ -30,24 +30,9 @@ export class CapabilitiesComponent {
 
   ngOnChanges(changes:any) {
     if (this.candidateRoles) {
-       this.setPrimaryCapabilitydata();
-      /*      for (let role of this.candidateRoles) {
-        if (role.capabilities) {
-          for (let primary of role.capabilities) {
-            if (primary.isPrimary == true) {
-              this.primaryNames.push(primary.name);
-            }
-            else if( primary.isPrimary == false) {
-              this.secondaryNames.push(primary.name);
-            }
-          }
-        }
-      }*/
+      this.setPrimaryCapabilitydata();
     }
-    this.primaryCapabilitiesNumber= this.primaryNames.length;
-    if(this.primaryNames.length>0){
-      this.disableButton=false;
-    }
+    this.primaryCapabilitiesNumber = this.primaryNames.length;
   }
 
   selectedCapability(selectedRole:Role, selectedCapability:Capability, event:any) {
@@ -66,10 +51,10 @@ export class CapabilitiesComponent {
     } else {
       if (selectedCapability.isPrimary) {
         this.primaryCapabilitiesNumber--;
-        this.primaryNames.splice(this.primaryNames.indexOf(selectedCapability.name),1);
+        this.primaryNames.splice(this.primaryNames.indexOf(selectedCapability.name), 1);
         selectedCapability.isPrimary = false;
       } else if (selectedCapability.isSecondary) {
-        this.secondaryNames.splice(this.secondaryNames.indexOf(selectedCapability.name),1);
+        this.secondaryNames.splice(this.secondaryNames.indexOf(selectedCapability.name), 1);
         selectedCapability.isSecondary = false;
       }
     }
@@ -77,7 +62,7 @@ export class CapabilitiesComponent {
 
   onNext() {
     this.highlightedSection.name = "Complexities";
-    this.highlightedSection.isDisable=false;
+    this.highlightedSection.isDisable = false;
     this.disableButton = true;
     this.onComplete.emit(this.roles);
   }
@@ -85,14 +70,22 @@ export class CapabilitiesComponent {
   setPrimaryCapabilitydata(){
     this.secondaryNames = new Array(0);
     this.primaryNames = new Array(0);
+
     for (let role of this.candidateRoles) {
-      if (role.capabilities) {
-        for (let primary of role.capabilities) {
-          if (primary.isPrimary == true) {
-            this.primaryNames.push(primary.name);
-          }
-          else if( primary.isSecondary == true) {
-            this.secondaryNames.push(primary.name);
+      for (let mainRole of this.roles) {
+        if (role.name === mainRole.name) {
+          if (role.capabilities) {
+            for (let cap of role.capabilities) {
+              if (mainRole.capabilities) {
+                for (let mainCap of mainRole.capabilities) {
+                  if (cap.name === mainCap.name) {
+                    cap.isPrimary ? this.primaryNames.push(cap.name) : (cap.isSecondary ? this.secondaryNames.push(cap.name) : console.log(""));
+                    mainCap.isPrimary = cap.isPrimary;
+                    mainCap.isSecondary = cap.isSecondary;
+                  }
+                }
+              }
+            }
           }
         }
       }

@@ -1,35 +1,4 @@
 .panel {
-  padding: 40px 0 15px 15px;
-  min-height: 260px;
-
-  .profile-picture {
-    right: 12px;
-    left: auto;
-  }
-
-  h6 {
-    color: #e77e22;
-    font-weight: 900;
-    font-size: 14px;
-    margin: 0 0 10px;
-    text-transform: capitalize;
-    position: absolute;
-    top: 12px;
-    left: 15px;
-    font-family: 'gothamrnd-book';
-  }
-
-  h5 {
-    position: absolute;
-    top: 17px;
-    left: 15px;
-    font-family: 'gothamrnd-light';
-    font-weight: 600;
-    font-size: 12px;
-    color: #666;
-  }
-
-  ul li span {
-    font-size: 12px;
-  }
+  padding: 0;
+  border: 0;
 }

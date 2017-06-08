@@ -13,3 +13,9 @@ $white: #fff;
 .q-card-header {
   border-top: 0;
 }
+
+@media only screen and (max-width: 980px) {
+  .card-view {
+    margin-top: 40px;
+  }
+}

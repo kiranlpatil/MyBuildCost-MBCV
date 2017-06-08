@@ -163,19 +163,21 @@ export class CandidateProfileComponent implements OnInit {
   onCapabilityComplete(roles:Role[]) {
     this.candidate.industry.roles = roles;
     this.candidateForCapability = this.candidate.industry.roles;
+    this.candidateForRole = this.candidate.industry.roles;
     this.saveCandidateDetails();
     this.getComplexity();
     this.showComplexity = true;
     this.whichStepsVisible[2] = true;
   }
 
-  onComplexitytyComplete(roles:Role[]) {debugger
+  onComplexitytyComplete(roles:Role[]) {
     this.candidate.industry.roles = roles;
     var date = new Date();
     date.setDate(date.getDate() + 90);
     this.candidate.lockedOn = date;
     this.highlightedSection.date = date;
     this.candidateForComplexity = this.candidate.industry.roles;
+    //this.candidateForCapability = this.candidate.industry.roles;
     this.saveCandidateDetails();
     this.showProfeciency = true;
     this.getProficiency();
@@ -208,22 +210,6 @@ export class CandidateProfileComponent implements OnInit {
     this.showCertificationDetails = true;
     this.showAwards = true;
     this.showAboutMySelf = true;
-  }
-
-  onEmploymentHistoryComplete() {
-
-  }
-
-  onAcademicDetailsComplete() {
-
-  }
-
-  onCertificationsComplete() {
-
-  }
-
-  onAwardsComplete() {
-
   }
 
   onMoreAboutMySelfComplete(data:string) {
@@ -288,6 +274,7 @@ export class CandidateProfileComponent implements OnInit {
         .subscribe(
           rolelist => {
             this.rolesForComplexity = rolelist.data;
+            this.highlightedSection.name = "Complexities";
             this.getCandidateForComplexity();
 
           },
@@ -375,13 +362,11 @@ export class CandidateProfileComponent implements OnInit {
         this.getCapability();
         this.whichStepsVisible[1] = true;
         this.getProficiency();
-        if ((this.candidate.industry.roles[0].capabilities.length >= 1 && this.candidate.industry.roles[0].capabilities)|| (this.candidate.industry.roles[0].default_complexities[0].complexities.length > 0 && this.candidate.industry.roles[0].default_complexities!=undefined)) {
+        if ((this.candidate.industry.roles[0].capabilities.length >= 1 && this.candidate.industry.roles[0].capabilities)|| (this.candidate.industry.roles[0].default_complexities && this.candidate.industry.roles[0].default_complexities[0].complexities.length > 0 )) {
           this.getComplexity();
-          this.showComplexity = true;
           this.whichStepsVisible[2] = true;
           if (this.candidate.industry.roles[0].capabilities[0] != undefined) {
             if (this.candidate.industry.roles[0].capabilities[0].complexities.length > 0) {
-              debugger
               this.whichStepsVisible[3] = true;
               this.highlightedSection.name = "None";
             } else {
@@ -390,7 +375,6 @@ export class CandidateProfileComponent implements OnInit {
           }
           if(this.candidate.industry.roles[0].default_complexities!=undefined && this.candidate.industry.roles[0].default_complexities[0]!=undefined){
           if (this.candidate.industry.roles[0].default_complexities[0].complexities.length > 0) {
-            debugger
             this.whichStepsVisible[3] = true;
           } else {
             this.highlightedSection.name = 'Complexities';

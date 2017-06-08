@@ -20,11 +20,6 @@
         <a (click)="clearFilter()">Clear all filters</a>
       </li>
     </ul>
-    <!--<div class="search">-->
-      <!--<input class="form-control" type="text" />-->
-      <!--<button class="btn btn-search" type="button"><img src="./assets/framework/images/dashboard/search.png"></button>-->
-    <!--</div>-->
-
     <div class="sort-by">
       <label>Sort by</label>
       <select id="menu"  [(ngModel)]="qCardModel.sortValue"   (change)="changeSort()">
@@ -37,45 +32,47 @@
     <!--<div class="col-sm-4" *ngFor= "let item of candidates">&lt;!&ndash;| candidatematching: matchFormat&ndash;&gt;-->
       <div class="col-sm-4" *ngFor= "let item of candidates | qcardmatching: matchFormat: totalQCardMatches :type | qcardlistfilter:filterMeta:qCardCount | qcardlistsort:[qCardModel.sortValue,matchFormat];let i=index;">
       <div class="panel clearfix">
-        <img class="profile-picture" src="assets/framework/images/dashboard/profile.png" alt="Profile Picture"/>
-        <h6 class="username">{{item.first_name}} {{item.last_name}}</h6>
         <ul>
           <li  *ngIf="type=='matchedList'">
             <span class="glyphicon glyphicon-star" *ngIf="emailsOfShrortListedCandidates.indexOf(item.email)==-1" (click)="addRemoveToShortList(item)" ></span>
             <span class="glyphicon glyphicon-star active-star" *ngIf="emailsOfShrortListedCandidates.indexOf(item.email)!=-1" (click)="addRemoveToShortList(item)" ></span>
           </li>
           <li *ngIf="type=='cartListed' || type=='rejectedList'">
-              <a (click)="actionOnQCard('remove','cartListed','cartListed',item)"  *ngIf="type=='cartListed'" ><img src="assets/c-next/card-view/close-red.png" /></a>
-              <a (click)="actionOnQCard('remove','rejectedList','rejectedList',item)"  *ngIf="type=='rejectedList'" ><img src="assets/c-next/card-view/close-red.png" /></a>
+            <a (click)="actionOnQCard('remove','cartListed','cartListed',item)"  *ngIf="type=='cartListed'" ><img src="assets/c-next/card-view/close-red.png" /></a>
+            <a (click)="actionOnQCard('remove','rejectedList','rejectedList',item)"  *ngIf="type=='rejectedList'" ><img src="assets/c-next/card-view/close-red.png" /></a>
           </li>
         </ul>
-        <div class="col-sm-7 col-xs-6 no-padding left-side">
+        <header class="clearfix">
+          <div class="col-md-8 col-sm-7 col-xs-6 no-padding">
+            <h6 class="username">
+              <img class="profile-picture" src="assets/framework/images/dashboard/profile.png" alt="Profile Picture"/>
+              {{item.first_name}} {{item.last_name}}
+            </h6>
+            <p class="proficiencies">
+              <img src="assets/c-next/card-view/proficiencies.png" alt="Location"/>
+              <span *ngFor="let proficiency of item.proficiencies;let i=index" >
+                <span *ngIf="i < 5">{{proficiency}}
+                  <span *ngIf="i>=0 && i<4 &&  item.proficiencies.length-1 != i ">,&nbsp;</span>
+                </span>
+              </span>
+              <br /><span *ngIf="item.proficiencies.length > 5">( {{item.proficiencies.length-5}} More )</span>
+            </p>
+          </div>
+          <div class="col-md-4 col-sm-5 col-xs-6 no-padding">
+            <div class="canvas-container">
+              <cn-progress-bar [value]="item.matching" [color]="'#e77e22'" [rotation]="false"></cn-progress-bar>
+              <cn-progress-bar [value]="item.matching" [color]="'#e77e22'" [rotation]="true" ></cn-progress-bar>
+              <span *ngIf="matchFormat == 'aboveMatch' && type == 'matchedList'">{{item.exact_matching + item.above_one_step_matching | number : '1.0-0'}}%</span>
+              <span *ngIf="matchFormat == 'belowMatch' && type == 'matchedList'">{{item.matching | number : '1.0-0'}}%</span>
+              <span *ngIf="type !== 'matchedList'">{{item.matching | number : '1.0-0'}}%</span>
+              <p>Match</p>
+            </div>
+          </div>
+        </header>
+        <div class="col-xs-12 details">
           <p><img src="assets/c-next/card-view/salary.png" alt="Salary"/>$ {{item.salary}}</p>
           <p><img src="assets/c-next/card-view/experience.png" alt="Experience"/>{{item.experience}}</p>
           <p><img src="assets/c-next/card-view/relocation.png" alt="Location"/> {{item.location}}</p>
-          <!--<p><img src="assets/c-next/card-view/relocation.png" alt="Location"/> {{item.education}}</p>-->
-          <!--<p><img src="assets/c-next/card-view/relocation.png" alt="Location"/> {{item.noticePeriod}}</p>-->
-          <p class="proficiencies">
-            <img src="assets/c-next/card-view/proficiencies.png" alt="Location"/>
-            <span *ngFor="let proficiency of item.proficiencies;let i=index" >
-            <span *ngIf="i < 5">{{proficiency}}
-              <span *ngIf="i>=0 && i<4 &&  item.proficiencies.length-1 != i ">,&nbsp;</span>
-            </span>
-          </span>
-            <br /><span *ngIf="item.proficiencies.length > 5">( {{item.proficiencies.length-5}} More )</span>
-          </p>
-          <!--<p><img src="assets/c-next/card-view/relocation.png" alt="Location"/> {{item.interestedIndustries}}</p>-->
-          <!--<p><img src="assets/c-next/card-view/relocation.png" alt="Location"/><span *ngIf="item.location == 'Yes'">Ready to Relocate</span><span *ngIf="item.location != 'Yes'">Not Ready to Relocate</span></p>-->
-        </div>
-        <div class="col-sm-5 col-xs-6 no-padding right-side">
-          <div class="canvas-container">
-            <cn-progress-bar [value]="item.matching" [color]="'#e77e22'" [rotation]="false"></cn-progress-bar>
-            <cn-progress-bar [value]="item.matching" [color]="'#e77e22'" [rotation]="true" ></cn-progress-bar>
-            <span *ngIf="matchFormat == 'aboveMatch' && type == 'matchedList'">{{item.exact_matching + item.above_one_step_matching | number : '1.0-0'}}%</span>
-            <span *ngIf="matchFormat == 'belowMatch' && type == 'matchedList'">{{item.matching | number : '1.0-0'}}%</span>
-            <span *ngIf="type !== 'matchedList'">{{item.matching | number : '1.0-0'}}%</span>
-            <p>Match</p>
-          </div>
         </div>
         <div class="button-group" *ngIf="type=='matchedList'">
           <div class="col-sm-6 padding-right5">
@@ -91,16 +88,6 @@
           <div class="col-sm-12 no-padding">
             <button class="btn btn-cart btn-block" type="button" (click)="viewProfile(item)">View</button>
           </div>
-          <!--<div class="col-sm-6 padding-left5">
-            <button class="btn btn-cart btn-block" type="button"
-                    (click)="actionOnQCard('remove','cartListed','cartListed',item)">Remove
-            </button>
-          </div>-->
-         <!-- <div class="col-sm-6 padding-left5">
-            <button class="btn btn-cart btn-block" type="button"
-                    (click)="actionOnQCard('add','cartListed','rejectedList', item)">Reject
-            </button>
-          </div>-->
         </div>
         <div class="button-group" *ngIf="type=='applied'">
           <div class="col-sm-6 padding-right5">
