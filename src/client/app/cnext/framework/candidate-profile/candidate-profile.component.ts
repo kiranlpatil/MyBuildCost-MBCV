@@ -62,7 +62,7 @@ export class CandidateProfileComponent implements OnInit {
   private isHiddenAwrard:boolean = false;
   private isHiddenCertificate:boolean = false;
   private isHiddenEmployeehistory:boolean = false;
-  private isHiddenEmployeehistory:boolean = false;
+  private isTitleFilled:boolean = false;
   private showTooltip:boolean = false;
   private goto:boolean = false;
   private highlightedSection:Section = new Section();
