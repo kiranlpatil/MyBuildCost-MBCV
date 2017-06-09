@@ -28,10 +28,10 @@
         <div class="panel clearfix">
           <ul class="pull-left">
             <!--<li class="job-posted"><p><span>{{recruiterJobView.numberOfCandidatesInCart}}</span></p></li>-->
-            <li><h4>{{selectedJobProfile.jobTitle}}</h4></li>
-            <li>
+            <li><h4 title="View Job Details" (click)="viewJobdetails()">{{selectedJobProfile.jobTitle}}</h4></li>
+            <!--<li>
               <a class="view-details" (click)="viewJobdetails()">view job details</a>
-            </li>
+            </li>-->
           </ul>
           <ul class="pull-right">
             <li class="contact-info"><p>IT</p></li>

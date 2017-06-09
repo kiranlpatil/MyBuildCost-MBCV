@@ -42,16 +42,7 @@ export class RecruiterSharedHeaderComponent implements OnInit {
       this.uploaded_image_path = AppSettings.IP + this.uploaded_image_path;
     }
   }
-
-
-  getImagePath(imagePath:string){
-    if(imagePath != undefined){
-      return AppSettings.IP + imagePath.substring(4).replace('"', '');
-    }
-
-    return null;
-  }
-
+  
   logOut() {
     window.localStorage.clear();
     this._router.navigate([NavigationRoutes.APP_START]);
