@@ -164,7 +164,8 @@ export class CompanyDetailsComponent implements OnInit {
     message.isError = false;
     message.custom_message = Messages.MSG_SUCCESS_UPLOADED_DOCUMENT;
     this.messageService.message(message);
-    this._router.navigate([NavigationRoutes.APP_RECRUITER_DASHBOARD]);
+    localStorage.clear();
+    this._router.navigate([NavigationRoutes.APP_LOGIN]);
   }
 
   onCompanyDetailsError(error: any) {
