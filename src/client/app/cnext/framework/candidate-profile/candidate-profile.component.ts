@@ -41,6 +41,7 @@ export class CandidateProfileComponent implements OnInit {
   private candidateForCapability:Role[];
   private candidateForComplexity:Role[];
   private showTooltip:boolean = false;
+  private showModalStyle:boolean = false;
   private goto:boolean = false;
   private highlightedSection:Section = new Section();
 
@@ -279,7 +280,7 @@ export class CandidateProfileComponent implements OnInit {
         this.highlightedSection.isLocked = false;
       }
     }
-    
+
     if (this.highlightedSection.name != 'GuideTour') {
       if (this.candidate.industry.name !== undefined) {
         this.isRolesShow = false;
@@ -371,7 +372,7 @@ export class CandidateProfileComponent implements OnInit {
      this.highlightedSection.name = 'Proficiencies';
      }*/
   }
-  
+
   dateDifferenceInDays(currentDate:Date, storedDate:Date) {
     return Math.floor(( Date.UTC(storedDate.getFullYear(), storedDate.getMonth(), storedDate.getDate()) - Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate())) / (1000 * 60 * 60 * 24));
   }
@@ -390,7 +391,7 @@ export class CandidateProfileComponent implements OnInit {
     }
     this.saveCandidateDetails();
   }
-  
+
   logOut() {
     window.localStorage.clear();
     this._router.navigate([NavigationRoutes.APP_START]);
@@ -402,6 +403,22 @@ export class CandidateProfileComponent implements OnInit {
   }
 
   onSubmit() {
+    this.showModalStyle = !this.showModalStyle
     this._router.navigate([NavigationRoutes.APP_CANDIDATE_DASHBOARD]);
   }
+
+
+  showHideModal() {
+    this.showModalStyle = !this.showModalStyle;
+    setInterval(() => this.onSubmit(), 1000 * 19);
+  }
+
+  getStyleModal() {
+    if (this.showModalStyle) {
+      return 'block';
+    } else {
+      return 'none';
+    }
+  }
+
 }
