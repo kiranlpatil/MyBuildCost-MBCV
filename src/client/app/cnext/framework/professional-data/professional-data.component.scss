@@ -1,16 +1,16 @@
 .compact-view {
   p {
     float:left;
-    width: 16%;
+    width: 25%;
 
-    &:nth-child(4),
+   /* &:nth-child(4),
     &:nth-child(5) {
       width: 14%;
     }
 
     &:last-child {
       width: 20%;
-    }
+    }*/
   }
 
   &:hover {
