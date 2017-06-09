@@ -2,25 +2,25 @@ $theme-color: #3694d1;
 $heading-color: #dbeef6;
 $border-color: #e8e8e8;
 $text-color: #666;
-$red: #96e328;
+$light-green: #96e328;
 $orange: #FFB316;
 $gray: #ccc;
-$green: #b0f153;
-$black:#3694d1;
+$green: #68ab26;
+$blue:#3694d1;
 
 .exact {
+  border: 1px solid $light-green !important;
+  border-left: 10px solid $light-green !important;
+}
+
+.above {
   border: 1px solid $green !important;
   border-left: 10px solid $green !important;
 }
 
-.above {
+.below {
   border: 1px solid $orange !important;
   border-left: 10px solid $orange !important;
-}
-
-.below {
-  border: 1px solid $red !important;
-  border-left: 10px solid $red !important;
 }
 
 .missing {
@@ -29,8 +29,8 @@ $black:#3694d1;
 }
 
 .extra {
-  border: 1px solid $black !important;
-  border-left: 10px solid $black !important;
+  border: 1px solid $blue !important;
+  border-left: 10px solid $blue !important;
 }
 
 .capability-complexity {

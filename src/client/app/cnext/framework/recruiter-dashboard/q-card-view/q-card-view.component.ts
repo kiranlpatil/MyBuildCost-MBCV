@@ -4,7 +4,7 @@ import {QCardsortBy} from "../../model/q-cardview-sortby";
 import {MatchCandidate} from "../../model/match-candidate";
 import {QCardViewService} from "./q-card-view.service";
 import {QCardFilterService} from "../../filters/q-card-filter.service";
-import {ValueConstant} from "../../../../framework/shared/constants";
+import {ValueConstant, AppSettings} from "../../../../framework/shared/constants";
 import {QCardFilter} from "../../model/q-card-filter";
 import {CandidateQListModel} from "../job-dashboard/q-cards-candidates";
 import {RecruiterJobView} from "../../model/recruiter-job-view";
@@ -213,5 +213,10 @@ export class QCardviewComponent {
   closeJob(){
     this.showModalStyle = !this.showModalStyle;
   }
-
+  getImagePath(imagePath:string) {
+    if(imagePath != undefined) {
+      return AppSettings.IP + imagePath.substring(4).replace('"', '');
+    }
+    return null;
+  }
 }

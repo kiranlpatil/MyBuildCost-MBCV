@@ -9,12 +9,12 @@
       </li>
       <li>
         <img src="assets/c-next/header/matching-profiles.png" alt="Matching Profiles"/>
-        <span>{{headerInfo.totalNumberOfCandidateInCart}}</span>
+        <span *ngIf="headerInfo">{{headerInfo.totalNumberOfCandidateInCart}}</span>
         <p>Candidates in Cart</p>
       </li>
       <li>
         <img src="assets/c-next/header/candidates-applied.png" alt="Candidates Applied"/>
-        <span>{{headerInfo.totalNumberOfCandidatesApplied}}</span>
+        <span  *ngIf="headerInfo">{{headerInfo.totalNumberOfCandidatesApplied}}</span>
         <p>Candidate Applied</p>
       </li>
     </ul>

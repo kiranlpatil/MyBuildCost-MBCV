@@ -5,10 +5,6 @@ import {ComplexityService} from "../complexity.service";
 import {Candidate, Section} from "../model/candidate";
 import {CandidateProfileService} from "./candidate-profile.service";
 import {Role} from "../model/role";
-/*
- import underline = Chalk.underline;
- */
-
 
 @Component({
   moduleId: module.id,

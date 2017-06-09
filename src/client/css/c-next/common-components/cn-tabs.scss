@@ -58,7 +58,7 @@ $active-tab-border: #b2bcc3;
       color: $text-color;
       font-family: 'gothamrnd-book';
       font-size: 12px;
-      padding: 7px 15px 5px;
+      padding: 10px 15px 3px;
 
       &:focus,
       &:hover {
@@ -73,7 +73,8 @@ $active-tab-border: #b2bcc3;
       border: 1px solid $active-tab-border !important;
       border-bottom: 3px solid $active-tab !important;
       color: $theme-color !important;
-      top: 1px;
+      padding: 7px 15px 5px;
+      top: 2px;
     }
   }
 }

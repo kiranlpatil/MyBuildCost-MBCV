@@ -1,7 +1,9 @@
-
-<div>
+<div *ngIf="recruiterDashboard">
 <cn-recruiter-header [headerInfo]="recruiterHeaderDetails" [jobCount]="recruiterDashboard.postedJobs.length" [companyName]="recruiterDashboard.company_name"></cn-recruiter-header>
-
+</div>
+<div *ngIf="!recruiterDashboard">
+  <cn-recruiter-header [headerInfo]="recruiterHeaderDetails" [jobCount]=0 [companyName]="please"></cn-recruiter-header>
+</div>
 <div class="container-fluid profile-wrapper">
   <ul class="nav nav-tabs dashboard-tabs" [class.move-left]="setValue">
     <li class="active"><a data-toggle="tab" href="#posted-job">My Job Posts</a></li>
@@ -9,7 +11,7 @@
   </ul>
   <div class="tab-content">
     <div id="posted-job" class="tab-pane fade active in clearfix">
-      <div>
+      <div *ngIf="recruiterDashboard">
         <cn-job-lister [headerInfoForJob]="recruiterHeaderDetails" [jobListInput]="recruiterDashboard.postedJobs" (jobEventEmitter)="jobSelected($event)"></cn-job-lister>
       </div>
     </div>
@@ -18,5 +20,4 @@
       <cn-job-poster></cn-job-poster>
     </div>
   </div>
-</div>
 </div>

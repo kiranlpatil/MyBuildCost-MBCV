@@ -17,7 +17,6 @@ export class JobCompareService extends BaseService {
 
 */
     let url:string = API.RECRUITER_PROFILE + '/jobProfile/' +recruiterId  + '/matchresult/' + candidateId;
-    console.log(url)
     return this.http.get(url)
       .map(this.extractData)
       .catch(this.handleError);

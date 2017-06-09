@@ -1,6 +1,6 @@
 import {Component, OnInit,Input} from "@angular/core";
 import {Router} from "@angular/router";
-import {NavigationRoutes, LocalStorage} from "../../../../framework/shared/constants";
+import {NavigationRoutes, LocalStorage, AppSettings} from "../../../../framework/shared/constants";
 import {LocalStorageService} from "../../../../framework/shared/localstorage.service";
 import {Candidate} from "../../model/candidate";
 import {CandidateProfileService} from "../../candidate-profile/candidate-profile.service";
@@ -720,250 +720,1286 @@ export class CandidateCompareViewComponent implements OnInit {
     }*/
 
     this.data={
-      "_id": "593959a5060676644500aa1f",
-      "userId": "593959a5060676644500aa1e",
+      "_id": "59352c6edf2fcd693c7c82f4",
+      "userId": "59352c6ddf2fcd693c7c82f3",
       "jobTitle": "Software Engineer",
-      "aboutMyself": "Well, I grew up in Cincinnati. As a child, I originally wanted to be a fireman, then later became interested in dinosaurs. I excelled in the sciences from early on, placing first in my fourth-grade science fair. ",
-      "lockedOn": "2017-09-06T14:07:40.703Z",
+      "aboutMyself": "xyz",
+      "lockedOn": "2017-09-06T02:10:12.496Z",
       "job_list": [],
       "proficiencies": [
         "ABC",
-        "ABC ALGOL",
         "C",
-        "C++",
-        "ABSET",
-        "ABSYS",
-        "Bertrand",
-        "BETA",
-        "Bistro",
-        "BitC",
-        "BLISS",
-        "C--",
-        "Blockly",
-        "C#",
-        "C/AL",
-        "Caché ObjectScript",
-        "C Shell",
-        "Caml",
-        "Cayenne",
+        "javascript",
         "java",
-        "dsdsds",
-        "xzcczvv",
-        "zcxccvv",
-        "xyz",
-        "angular"
+        "angular 2",
+        "ABC ALGOL"
       ],
-      "employmentHistory": [
-        {
-          "remarks": "Well, I grew up in Cincinnati. As a child, I originally wanted to be a fireman, then later became interested in dinosaurs. I excelled in the sciences from early on, placing first in my fourth-grade science fair. ",
-          "designation": "Software Engineer",
-          "companyName": "Techprimelab",
-          "_id": "59395d92060676644500ab51",
-          "to": {
-            "year": 1975,
-            "month": "February"
-          },
-          "from": {
-            "year": 1970,
-            "month": "January"
-          }
-        }
-      ],
+      "employmentHistory": [],
       "professionalDetails": {
-        "education": "Under Graduate",
-        "experience": "1 year",
-        "currentSalary": "3 Lac",
+        "education": "Graduate",
+        "experience": "4 year",
+        "currentSalary": "7 Lakh",
         "noticePeriod": "Immediate",
         "relocate": "Yes"
       },
-      "academics": [
-        {
-          "_id": "59395c6d060676644500ab46",
-          "schoolName": "Well, I grew up in Cincinnati. As a child, I originally wanted to be a fireman, then later became interested in dinosaurs. I excelled in the sciences from early on, placing first in my fourth-grade science fair. ",
-          "board": "Sanskar Vidyalaya",
-          "yearOfPassing": 1961,
-          "specialization": "SSC"
-        },
-        {
-          "_id": "59395c6d060676644500ab45",
-          "schoolName": "Well, I grew up in Cincinnati. As a child, I originally wanted to be a fireman, then later became interested in dinosaurs. I excelled in the sciences from early on, placing first in my fourth-grade science fair. ",
-          "board": "Sp College",
-          "yearOfPassing": 1958,
-          "specialization": "Hsc"
-        }
-      ],
+      "academics": [],
       "location": {
-        "city": "Pune",
-        "state": "Maharashtra",
-        "country": "India"
+        "city": "West Palm Beach",
+        "state": "Florida",
+        "country": "United States"
       },
       "industry": {
         "name": "IT",
         "roles": [
           {
-            "_id": "59395c6d060676644500ab49",
             "name": "Project/ Program/ Contracts/ Client Management",
+            "_id": "5938b5c4c2be7e6a1537dce7",
             "default_complexities": [],
             "capabilities": [
               {
-                "_id": "59395c6d060676644500ab4a",
-                "name": "Client Expectation Management",
                 "isPrimary": true,
+                "name": "Client Expectation Management",
+                "_id": "5938b5c4c2be7e6a1537dcfa",
                 "complexities": [
                   {
-                    "_id": "59395c6d060676644500ab4d",
                     "name": "Nature of Interactions",
+                    "_id": "5938b5c4c2be7e6a1537dcfd",
                     "scenarios": [
                       {
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c82f2",
                         "name": "Amicable",
-                        "code": "10002.120.10",
-                        "_id": "5939596c060676644500a9f9",
-                        "isChecked": false
+                        "code": "10002.120.10"
                       },
                       {
+                        "isChecked": true,
+                        "_id": "59352b61df2fcd693c7c82f1",
                         "name": "Aggressive",
-                        "code": "10002.120.20",
-                        "_id": "5939596c060676644500a9f8",
-                        "isChecked": true
+                        "code": "10002.120.20"
                       },
                       {
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c82f0",
                         "name": "Hostile",
-                        "code": "10002.120.30",
-                        "_id": "5939596c060676644500a9f7",
-                        "isChecked": false
+                        "code": "10002.120.30"
                       },
                       {
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c82ef",
                         "name": "Not Applicable",
-                        "code": "10002.120.0",
-                        "_id": "5939596c060676644500a9f6",
-                        "isChecked": false
+                        "code": "10002.120.0"
                       }
                     ],
                     "match": "exact"
                   },
                   {
-                    "_id": "59395c6d060676644500ab4c",
                     "name": "Level of Client involvement needed",
+                    "_id": "5938b5c4c2be7e6a1537dcfc",
                     "scenarios": [
                       {
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c82ed",
                         "name": "High dependency on client",
-                        "code": "10002.130.10",
-                        "_id": "5939596c060676644500a9f4",
-                        "isChecked": false
+                        "code": "10002.130.10"
                       },
                       {
+                        "isChecked": true,
+                        "_id": "59352b61df2fcd693c7c82ec",
                         "name": "Moderate dependency on client",
-                        "code": "10002.130.20",
-                        "_id": "5939596c060676644500a9f3",
-                        "isChecked": true
+                        "code": "10002.130.20"
                       },
                       {
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c82eb",
                         "name": "Minimal dependency on client",
-                        "code": "10002.130.30",
-                        "_id": "5939596c060676644500a9f2",
-                        "isChecked": false
+                        "code": "10002.130.30"
                       },
                       {
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c82ea",
                         "name": "Not Applicable",
-                        "code": "10002.130.0",
-                        "_id": "5939596c060676644500a9f1",
-                        "isChecked": false
+                        "code": "10002.130.0"
+                      }
+                    ],
+                    "match": "exact"
+                  },
+                  {
+                    "name": "Independence in managing change",
+                    "_id": "5938b5c4c2be7e6a1537dcfb",
+                    "scenarios": [
+                      {
+                        "isChecked": true,
+                        "_id": "59352b61df2fcd693c7c82e8",
+                        "name": "Handle moderate changes to the project / program with support of senior management",
+                        "code": "10002.140.10"
+                      },
+                      {
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c82e7",
+                        "name": "Independently handle moderate changes to the project / program without any escalations to senior management",
+                        "code": "10002.140.20"
+                      },
+                      {
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c82e6",
+                        "name": "Independently handle disruptive changes to the project / program without causing escalations to senior management",
+                        "code": "10002.140.30"
+                      },
+                      {
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c82e5",
+                        "name": "Not Applicable",
+                        "code": "10002.140.0"
+                      }
+                    ],
+                    "match": "above"
+                  }
+                ]
+              },
+              {
+                "isPrimary": true,
+                "name": "People Management",
+                "_id": "5938b5c4c2be7e6a1537dcf5",
+                "complexities": [
+                  {
+                    "name": "Project Skill Availability",
+                    "_id": "5938b5c4c2be7e6a1537dcf9",
+                    "scenarios": [
+                      {
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c82e2",
+                        "name": "All skills are adequately available",
+                        "code": "10003.120.10"
+                      },
+                      {
+                        "isChecked": true,
+                        "_id": "59352b61df2fcd693c7c82e1",
+                        "name": "Manage with some skill gaps",
+                        "code": "10003.120.20"
+                      },
+                      {
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c82e0",
+                        "name": "Manage with large skill gaps",
+                        "code": "10003.120.30"
+                      },
+                      {
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c82df",
+                        "name": "Not Applicable",
+                        "code": "10003.120.0"
+                      }
+                    ],
+                    "match": "exact"
+                  },
+                  {
+                    "name": "Degree of Resource Churn handled",
+                    "_id": "5938b5c4c2be7e6a1537dcf8",
+                    "scenarios": [
+                      {
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c82dd",
+                        "name": "Reasonable",
+                        "code": "10003.130.10"
+                      },
+                      {
+                        "isChecked": true,
+                        "_id": "59352b61df2fcd693c7c82dc",
+                        "name": "Frequent",
+                        "code": "10003.130.20"
+                      },
+                      {
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c82db",
+                        "name": "Disruptive",
+                        "code": "10003.130.30"
+                      },
+                      {
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c82da",
+                        "name": "Not Applicable",
+                        "code": "10003.130.0"
+                      }
+                    ],
+                    "match": "exact"
+                  },
+                  {
+                    "name": "Team diversity handled (culture, age, behaviours)",
+                    "_id": "5938b5c4c2be7e6a1537dcf7",
+                    "scenarios": [
+                      {
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c82d8",
+                        "name": "Homogeneous Team composition",
+                        "code": "10003.140.10"
+                      },
+                      {
+                        "isChecked": true,
+                        "_id": "59352b61df2fcd693c7c82d7",
+                        "name": "Mixed Team composition",
+                        "code": "10003.140.20"
+                      },
+                      {
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c82d6",
+                        "name": "Highly Diverse Team composition",
+                        "code": "10003.140.30"
+                      },
+                      {
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c82d5",
+                        "name": "Not Applicable",
+                        "code": "10003.140.0"
+                      }
+                    ],
+                    "match": "exact"
+                  },
+                  {
+                    "name": "Work Environment handled",
+                    "_id": "5938b5c4c2be7e6a1537dcf6",
+                    "scenarios": [
+                      {
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c82d3",
+                        "name": "Comfortable",
+                        "code": "10003.150.10"
+                      },
+                      {
+                        "isChecked": true,
+                        "_id": "59352b61df2fcd693c7c82d2",
+                        "name": "Extra Efforts",
+                        "code": "10003.150.20"
+                      },
+                      {
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c82d1",
+                        "name": "Highly demanding",
+                        "code": "10003.150.30"
+                      },
+                      {
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c82d0",
+                        "name": "Not Applicable",
+                        "code": "10003.150.0"
+                      }
+                    ],
+                    "match": "exact"
+                  }
+                ]
+              },
+              {
+                "isPrimary": true,
+                "name": "Project Transitions",
+                "_id": "5938b5c4c2be7e6a1537dcf2",
+                "complexities": [
+                  {
+                    "name": "Max no of projects transitioned in parallel",
+                    "_id": "5938b5c4c2be7e6a1537dcf4",
+                    "scenarios": [
+                      {
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c82cd",
+                        "name": "Single",
+                        "code": "10004.120.10"
+                      },
+                      {
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c82cc",
+                        "name": "2 - 5",
+                        "code": "10004.120.20"
+                      },
+                      {
+                        "isChecked": true,
+                        "_id": "59352b61df2fcd693c7c82cb",
+                        "name": "More than 5",
+                        "code": "10004.120.30"
+                      },
+                      {
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c82ca",
+                        "name": "Not Applicable",
+                        "code": "10004.120.0"
+                      }
+                    ],
+                    "match": "exact"
+                  },
+                  {
+                    "name": "Nature of Transition Received",
+                    "_id": "5938b5c4c2be7e6a1537dcf3",
+                    "scenarios": [
+                      {
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c82c8",
+                        "name": "Single team - colocated",
+                        "code": "10004.130.10"
+                      },
+                      {
+                        "isChecked": true,
+                        "_id": "59352b61df2fcd693c7c82c7",
+                        "name": "Single team - different location",
+                        "code": "10004.130.20"
+                      },
+                      {
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c82c6",
+                        "name": "Multiple teams - colocated",
+                        "code": "10004.130.30"
+                      },
+                      {
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c82c5",
+                        "name": "Not Applicable",
+                        "code": "10004.130.0"
+                      }
+                    ],
+                    "match": "exact"
+                  }
+                ]
+              },
+              {
+                "isPrimary": true,
+                "name": "Project Profitability",
+                "_id": "5938b5c4c2be7e6a1537dcef",
+                "complexities": [
+                  {
+                    "name": "Increase margins by deploying higher roles & services",
+                    "_id": "5938b5c4c2be7e6a1537dcf1",
+                    "scenarios": [
+                      {
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c82bc",
+                        "name": "Upto 5% increase in margin",
+                        "code": "10006.120.10"
+                      },
+                      {
+                        "isChecked": true,
+                        "_id": "59352b61df2fcd693c7c82bb",
+                        "name": "5 to 10% increase in margin",
+                        "code": "10006.120.20"
+                      },
+                      {
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c82ba",
+                        "name": "Above 10% increase in margins",
+                        "code": "10006.120.30"
+                      },
+                      {
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c82b9",
+                        "name": "Not Applicable",
+                        "code": "10006.120.0"
                       }
                     ],
                     "match": "missing"
                   },
                   {
-                    "_id": "59395c6d060676644500ab4b",
-                    "name": "Independence in managing change",
+                    "name": "Increase profitability through Vendor Negotiations",
+                    "_id": "5938b5c4c2be7e6a1537dcf0",
                     "scenarios": [
                       {
-                        "name": "Handle moderate changes to the project / program with support of senior management",
-                        "code": "10002.140.10",
-                        "_id": "5939596c060676644500a9ef",
-                        "isChecked": true
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c82b7",
+                        "name": "Upto 5% reduction in cost",
+                        "code": "10006.130.10"
                       },
                       {
-                        "name": "Independently handle moderate changes to the project / program without any escalations to senior management",
-                        "code": "10002.140.20",
-                        "_id": "5939596c060676644500a9ee",
-                        "isChecked": false
+                        "isChecked": true,
+                        "_id": "59352b61df2fcd693c7c82b6",
+                        "name": "5 to 10% reduction in cost",
+                        "code": "10006.130.20"
                       },
                       {
-                        "name": "Independently handle disruptive changes to the project / program without causing escalations to senior management",
-                        "code": "10002.140.30",
-                        "_id": "5939596c060676644500a9ed",
-                        "isChecked": false
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c82b5",
+                        "name": "Above 10% reduction in costs",
+                        "code": "10006.130.30"
                       },
                       {
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c82b4",
                         "name": "Not Applicable",
-                        "code": "10002.140.0",
-                        "_id": "5939596c060676644500a9ec",
-                        "isChecked": false
+                        "code": "10006.130.0"
+                      }
+                    ],
+                    "match": "missing"
+                  }
+                ]
+              },
+              {
+                "isPrimary": true,
+                "name": "Onsite Coordination",
+                "_id": "5938b5c4c2be7e6a1537dcea",
+                "complexities": [
+                  {
+                    "name": "Nature of Interactions",
+                    "_id": "5938b5c4c2be7e6a1537dcee",
+                    "scenarios": [
+                      {
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c82b1",
+                        "name": "Amicable",
+                        "code": "10007.120.10"
+                      },
+                      {
+                        "isChecked": true,
+                        "_id": "59352b61df2fcd693c7c82b0",
+                        "name": "Aggressive",
+                        "code": "10007.120.20"
+                      },
+                      {
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c82af",
+                        "name": "Hostile",
+                        "code": "10007.120.30"
+                      },
+                      {
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c82ae",
+                        "name": "Not Applicable",
+                        "code": "10007.120.0"
+                      }
+                    ],
+                    "match": "missing"
+                  },
+                  {
+                    "name": "Level of Technical Involvement",
+                    "_id": "5938b5c4c2be7e6a1537dced",
+                    "scenarios": [
+                      {
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c82ac",
+                        "name": "Minimal",
+                        "code": "10007.130.10"
+                      },
+                      {
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c82ab",
+                        "name": "Moderate",
+                        "code": "10007.130.20"
+                      },
+                      {
+                        "isChecked": true,
+                        "_id": "59352b61df2fcd693c7c82aa",
+                        "name": "Hands-On",
+                        "code": "10007.130.30"
+                      },
+                      {
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c82a9",
+                        "name": "Not Applicable",
+                        "code": "10007.130.0"
+                      }
+                    ],
+                    "match": "missing"
+                  },
+                  {
+                    "name": "Involvement in Requirement Gathering & Design",
+                    "_id": "5938b5c4c2be7e6a1537dcec",
+                    "scenarios": [
+                      {
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c82a7",
+                        "name": "Module Level",
+                        "code": "10007.140.10"
+                      },
+                      {
+                        "isChecked": true,
+                        "_id": "59352b61df2fcd693c7c82a6",
+                        "name": "System Level",
+                        "code": "10007.140.20"
+                      },
+                      {
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c82a5",
+                        "name": "Solution Level",
+                        "code": "10007.140.30"
+                      },
+                      {
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c82a4",
+                        "name": "Not Applicable",
+                        "code": "10007.140.0"
+                      }
+                    ],
+                    "match": "missing"
+                  },
+                  {
+                    "name": "Involvement in UAT Support & Deployment",
+                    "_id": "5938b5c4c2be7e6a1537dceb",
+                    "scenarios": [
+                      {
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c82a2",
+                        "name": "Coordination only",
+                        "code": "10007.150.10"
+                      },
+                      {
+                        "isChecked": true,
+                        "_id": "59352b61df2fcd693c7c82a1",
+                        "name": "Participates in UAT / deployment with limited ownership",
+                        "code": "10007.150.20"
+                      },
+                      {
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c82a0",
+                        "name": "Independently Responsble for UAT / deployment",
+                        "code": "10007.150.30"
+                      },
+                      {
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c829f",
+                        "name": "Not Applicable",
+                        "code": "10007.150.0"
+                      }
+                    ],
+                    "match": "missing"
+                  }
+                ]
+              },
+              {
+                "isPrimary": true,
+                "name": "Client Contract Management",
+                "_id": "5938b5c4c2be7e6a1537dce8",
+                "complexities": [
+                  {
+                    "name": "Exposure to Contract compliances",
+                    "_id": "5938b5c4c2be7e6a1537dce9",
+                    "scenarios": [
+                      {
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c827c",
+                        "name": "No involvement in contract compliances & audits",
+                        "code": "10010.120.10"
+                      },
+                      {
+                        "isChecked": true,
+                        "_id": "59352b61df2fcd693c7c827b",
+                        "name": "Handle document complaince audits",
+                        "code": "10010.120.20"
+                      },
+                      {
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c827a",
+                        "name": "Handle complex and detailed compliance audits",
+                        "code": "10010.120.30"
+                      },
+                      {
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c8279",
+                        "name": "Not Applicable",
+                        "code": "10010.120.0"
                       }
                     ],
                     "match": "exact"
+                  }
+                ]
+              },
+              {
+                "isPrimary": true,
+                "name": "Vendor Contract Management",
+                "_id": "5938b2b9f115cb1b1387bdc0",
+                "complexities": [
+                  {
+                    "name": "Enforcement of contract non-compliances",
+                    "_id": "5938b2b9f115cb1b1387bdc1",
+                    "scenarios": [
+                      {
+                        "isChecked": true,
+                        "_id": "59352b61df2fcd693c7c8276",
+                        "name": "Handing over to Legal team for enforcement of contract voilations",
+                        "code": "10011.120.10"
+                      },
+                      {
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c8275",
+                        "name": "Independent handling of contract non-compliances with minimal involvement of Legal team",
+                        "code": "10011.120.20"
+                      },
+                      {
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c8274",
+                        "name": "",
+                        "code": "10011.120.30"
+                      },
+                      {
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c8273",
+                        "name": "Not Applicable",
+                        "code": "10011.120.0"
+                      }
+                    ],
+                    "match": "missing"
                   }
                 ]
               }
             ]
           },
           {
-            "_id": "59395c6d060676644500ab48",
             "name": "IT Security",
+            "_id": "5938b5c4c2be7e6a1537dce4",
             "default_complexities": [],
-            "capabilities": []
+            "capabilities": [
+              {
+                "isPrimary": true,
+                "name": "Proactive Vigilance",
+                "_id": "5938b5c4c2be7e6a1537dce5",
+                "complexities": [
+                  {
+                    "name": "Degree of Ownership",
+                    "_id": "5938b5c4c2be7e6a1537dce6",
+                    "scenarios": [
+                      {
+                        "isChecked": true,
+                        "_id": "59352b61df2fcd693c7c822b",
+                        "name": "Collation of upcoming security threats and coordinate for fixes",
+                        "code": "10016.110.10"
+                      },
+                      {
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c822a",
+                        "name": "Provide solutions for fixes for potential threats",
+                        "code": "10016.110.20"
+                      },
+                      {
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c8229",
+                        "name": "Architectural & Design decisions for migration to more secure systems / envronments",
+                        "code": "10016.110.30"
+                      },
+                      {
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c8228",
+                        "name": "Not Applicable",
+                        "code": "10016.110.0"
+                      }
+                    ],
+                    "match": "missing"
+                  }
+                ]
+              }
+            ]
           },
           {
-            "_id": "59395c6d060676644500ab47",
-            "name": "Digital / Social Media Marketing",
+            "name": "UI / UX",
+            "_id": "5938b5c4c2be7e6a1537dcdd",
             "default_complexities": [],
-            "capabilities": []
+            "capabilities": [
+              {
+                "isPrimary": true,
+                "name": "UI Design",
+                "_id": "5938b5c4c2be7e6a1537dcde",
+                "complexities": [
+                  {
+                    "name": "Level of constraints imposed by Wireframe designer",
+                    "_id": "5938b5c4c2be7e6a1537dce3",
+                    "scenarios": [
+                      {
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c8159",
+                        "name": "Free hand to design the UI",
+                        "code": "10031.120.10"
+                      },
+                      {
+                        "isChecked": true,
+                        "_id": "59352b61df2fcd693c7c8158",
+                        "name": "Design the UI within constraints and limitations posed by the Wireframe designer",
+                        "code": "10031.120.20"
+                      },
+                      {
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c8157",
+                        "name": "",
+                        "code": "10031.120.30"
+                      },
+                      {
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c8156",
+                        "name": "Not Applicable",
+                        "code": "10031.120.0"
+                      }
+                    ],
+                    "match": "missing"
+                  },
+                  {
+                    "name": "Tool Expertise",
+                    "_id": "5938b5c4c2be7e6a1537dce2",
+                    "scenarios": [
+                      {
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c8154",
+                        "name": "Work with some guidance",
+                        "code": "10031.130.10"
+                      },
+                      {
+                        "isChecked": true,
+                        "_id": "59352b61df2fcd693c7c8153",
+                        "name": "Independent work with reasonable speed",
+                        "code": "10031.130.20"
+                      },
+                      {
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c8152",
+                        "name": "High expertise, high speed of work",
+                        "code": "10031.130.30"
+                      },
+                      {
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c8151",
+                        "name": "Not Applicable",
+                        "code": "10031.130.0"
+                      }
+                    ],
+                    "match": "missing"
+                  },
+                  {
+                    "name": "No of UI Design tools / products handled",
+                    "_id": "5938b5c4c2be7e6a1537dce1",
+                    "scenarios": [
+                      {
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c814f",
+                        "name": "None",
+                        "code": "10031.140.10"
+                      },
+                      {
+                        "isChecked": true,
+                        "_id": "59352b61df2fcd693c7c814e",
+                        "name": "Single Tool",
+                        "code": "10031.140.20"
+                      },
+                      {
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c814d",
+                        "name": "Multiple Tools",
+                        "code": "10031.140.30"
+                      },
+                      {
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c814c",
+                        "name": "Not Applicable",
+                        "code": "10031.140.0"
+                      }
+                    ],
+                    "match": "missing"
+                  },
+                  {
+                    "name": "Type of devices in a single wireframe",
+                    "_id": "5938b5c4c2be7e6a1537dce0",
+                    "scenarios": [
+                      {
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c814a",
+                        "name": "Desktop",
+                        "code": "10031.150.10"
+                      },
+                      {
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c8149",
+                        "name": "Handheld",
+                        "code": "10031.150.20"
+                      },
+                      {
+                        "isChecked": true,
+                        "_id": "59352b61df2fcd693c7c8148",
+                        "name": "Desktop + Handheld",
+                        "code": "10031.150.30"
+                      },
+                      {
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c8147",
+                        "name": "Not Applicable",
+                        "code": "10031.150.0"
+                      }
+                    ],
+                    "match": "missing"
+                  },
+                  {
+                    "name": "Logo Design",
+                    "_id": "5938b5c4c2be7e6a1537dcdf",
+                    "scenarios": [
+                      {
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c8145",
+                        "name": "Build around Visual Impact",
+                        "code": "10031.160.10"
+                      },
+                      {
+                        "isChecked": true,
+                        "_id": "59352b61df2fcd693c7c8144",
+                        "name": "Build around Business Concept",
+                        "code": "10031.160.20"
+                      },
+                      {
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c8143",
+                        "name": "Build around Emotions",
+                        "code": "10031.160.30"
+                      },
+                      {
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c8142",
+                        "name": "Not Applicable",
+                        "code": "10031.160.0"
+                      }
+                    ],
+                    "match": "missing"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Testing",
+            "_id": "5938b2b9f115cb1b1387bdad",
+            "default_complexities": [],
+            "capabilities": [
+              {
+                "isPrimary": true,
+                "name": "Functional Testing",
+                "_id": "5938b2b9f115cb1b1387bdba",
+                "complexities": [
+                  {
+                    "name": "Test Recording & Report",
+                    "_id": "5938b2b9f115cb1b1387bdbd",
+                    "scenarios": [
+                      {
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c8104",
+                        "name": "Manual",
+                        "code": "10035.120.10"
+                      },
+                      {
+                        "isChecked": true,
+                        "_id": "59352b61df2fcd693c7c8103",
+                        "name": "Using given test recording tool",
+                        "code": "10035.120.20"
+                      },
+                      {
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c8102",
+                        "name": "Setup and configure the test recording tool",
+                        "code": "10035.120.30"
+                      },
+                      {
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c8101",
+                        "name": "Not Applicable",
+                        "code": "10035.120.0"
+                      }
+                    ],
+                    "match": "extra"
+                  },
+                  {
+                    "name": "Phase of Testing involved",
+                    "_id": "5938b2b9f115cb1b1387bdbc",
+                    "scenarios": [
+                      {
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c80ff",
+                        "name": "SIT (System & Integration Testing)",
+                        "code": "10035.130.10"
+                      },
+                      {
+                        "isChecked": true,
+                        "_id": "59352b61df2fcd693c7c80fe",
+                        "name": "UAT (User Acceptance Testing)",
+                        "code": "10035.130.20"
+                      },
+                      {
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c80fd",
+                        "name": "Pre-Production",
+                        "code": "10035.130.30"
+                      },
+                      {
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c80fc",
+                        "name": "Not Applicable",
+                        "code": "10035.130.0"
+                      }
+                    ],
+                    "match": "extra"
+                  },
+                  {
+                    "name": "Test Data Setup",
+                    "_id": "5938b2b9f115cb1b1387bdbb",
+                    "scenarios": [
+                      {
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c80fa",
+                        "name": "Use Readymade test data",
+                        "code": "10035.140.10"
+                      },
+                      {
+                        "isChecked": true,
+                        "_id": "59352b61df2fcd693c7c80f9",
+                        "name": "Use the application or database procedures to create test data",
+                        "code": "10035.140.20"
+                      },
+                      {
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c80f8",
+                        "name": "Masking of Production data (Data obfuscation)",
+                        "code": "10035.140.30"
+                      },
+                      {
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c80f7",
+                        "name": "Not Applicable",
+                        "code": "10035.140.0"
+                      }
+                    ],
+                    "match": "extra"
+                  }
+                ]
+              },
+              {
+                "isPrimary": true,
+                "name": "Test Case Design",
+                "_id": "5938b2b9f115cb1b1387bdb4",
+                "complexities": [
+                  {
+                    "name": "Regression",
+                    "_id": "5938b2b9f115cb1b1387bdb9",
+                    "scenarios": [
+                      {
+                        "isChecked": true,
+                        "_id": "59352b61df2fcd693c7c80f4",
+                        "name": "Identify scenarios for regression testing based on impact of a given requirement",
+                        "code": "10036.120.10"
+                      },
+                      {
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c80f3",
+                        "name": "Review the Regression test pack with Business users and get signoff for the same",
+                        "code": "10036.120.20"
+                      },
+                      {
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c80f2",
+                        "name": "",
+                        "code": "10036.120.30"
+                      },
+                      {
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c80f1",
+                        "name": "Not Applicable",
+                        "code": "10036.120.0"
+                      }
+                    ],
+                    "match": "extra"
+                  },
+                  {
+                    "name": "Scenario complexity",
+                    "_id": "5938b2b9f115cb1b1387bdb8",
+                    "scenarios": [
+                      {
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c80ef",
+                        "name": "Involves test cases with upto 25 steps",
+                        "code": "10036.130.10"
+                      },
+                      {
+                        "isChecked": true,
+                        "_id": "59352b61df2fcd693c7c80ee",
+                        "name": "Involves test cases with steps between 25 to 50",
+                        "code": "10036.130.20"
+                      },
+                      {
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c80ed",
+                        "name": "Involves test cases with more than 50 steps",
+                        "code": "10036.130.30"
+                      },
+                      {
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c80ec",
+                        "name": "Not Applicable",
+                        "code": "10036.130.0"
+                      }
+                    ],
+                    "match": "extra"
+                  },
+                  {
+                    "name": "Application Interfaces",
+                    "_id": "5938b2b9f115cb1b1387bdb7",
+                    "scenarios": [
+                      {
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c80ea",
+                        "name": "Single system, no external interfaces",
+                        "code": "10036.140.10"
+                      },
+                      {
+                        "isChecked": true,
+                        "_id": "59352b61df2fcd693c7c80e9",
+                        "name": "Testing across two systems",
+                        "code": "10036.140.20"
+                      },
+                      {
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c80e8",
+                        "name": "Testing across interfaces with multiple systems",
+                        "code": "10036.140.30"
+                      },
+                      {
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c80e7",
+                        "name": "Not Applicable",
+                        "code": "10036.140.0"
+                      }
+                    ],
+                    "match": "extra"
+                  },
+                  {
+                    "name": "Review Participation",
+                    "_id": "5938b2b9f115cb1b1387bdb6",
+                    "scenarios": [
+                      {
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c80e5",
+                        "name": "Participation in reviews conducted within Testing team",
+                        "code": "10036.150.10"
+                      },
+                      {
+                        "isChecked": true,
+                        "_id": "59352b61df2fcd693c7c80e4",
+                        "name": "Participate in review forums where requirements are being framed by Business owners",
+                        "code": "10036.150.20"
+                      },
+                      {
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c80e3",
+                        "name": "",
+                        "code": "10036.150.30"
+                      },
+                      {
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c80e2",
+                        "name": "Not Applicable",
+                        "code": "10036.150.0"
+                      }
+                    ],
+                    "match": "extra"
+                  },
+                  {
+                    "name": "Participation in Shift Left Testing",
+                    "_id": "5938b2b9f115cb1b1387bdb5",
+                    "scenarios": [
+                      {
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c80e0",
+                        "name": "Traditional Shift Left Testing",
+                        "code": "10036.160.10"
+                      },
+                      {
+                        "isChecked": true,
+                        "_id": "59352b61df2fcd693c7c80df",
+                        "name": "Agile / DevOps Shift Left testing",
+                        "code": "10036.160.20"
+                      },
+                      {
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c80de",
+                        "name": "",
+                        "code": "10036.160.30"
+                      },
+                      {
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c80dd",
+                        "name": "Not Applicable",
+                        "code": "10036.160.0"
+                      }
+                    ],
+                    "match": "extra"
+                  }
+                ]
+              },
+              {
+                "isPrimary": true,
+                "name": "Test Project Management",
+                "_id": "5938b2b9f115cb1b1387bdae",
+                "complexities": [
+                  {
+                    "name": "Estimation of Testing Efforts",
+                    "_id": "5938b2b9f115cb1b1387bdb3",
+                    "scenarios": [
+                      {
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c80c5",
+                        "name": "Stable Requirements & Scope",
+                        "code": "10038.120.10"
+                      },
+                      {
+                        "isChecked": true,
+                        "_id": "59352b61df2fcd693c7c80c4",
+                        "name": "Changing Requirements & Scope",
+                        "code": "10038.120.20"
+                      },
+                      {
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c80c3",
+                        "name": "Volatile Requirements & Scope",
+                        "code": "10038.120.30"
+                      },
+                      {
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c80c2",
+                        "name": "Not Applicable",
+                        "code": "10038.120.0"
+                      }
+                    ],
+                    "match": "extra"
+                  },
+                  {
+                    "name": "Technology",
+                    "_id": "5938b2b9f115cb1b1387bdb2",
+                    "scenarios": [
+                      {
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c80c0",
+                        "name": "Legacy / Stable",
+                        "code": "10038.130.10"
+                      },
+                      {
+                        "isChecked": true,
+                        "_id": "59352b61df2fcd693c7c80bf",
+                        "name": "Emerging Technologies",
+                        "code": "10038.130.20"
+                      },
+                      {
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c80be",
+                        "name": "Mix of Legacy & Emerging",
+                        "code": "10038.130.30"
+                      },
+                      {
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c80bd",
+                        "name": "Not Applicable",
+                        "code": "10038.130.0"
+                      }
+                    ],
+                    "match": "extra"
+                  },
+                  {
+                    "name": "Application / Platform Complexity",
+                    "_id": "5938b2b9f115cb1b1387bdb1",
+                    "scenarios": [
+                      {
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c80bb",
+                        "name": "Simple to understand & Implement",
+                        "code": "10038.140.10"
+                      },
+                      {
+                        "isChecked": true,
+                        "_id": "59352b61df2fcd693c7c80ba",
+                        "name": "Average as per industry norms",
+                        "code": "10038.140.20"
+                      },
+                      {
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c80b9",
+                        "name": "Complex to understand the functionality, technology & Business Logic",
+                        "code": "10038.140.30"
+                      },
+                      {
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c80b8",
+                        "name": "Not Applicable",
+                        "code": "10038.140.0"
+                      }
+                    ],
+                    "match": "extra"
+                  },
+                  {
+                    "name": "Project Team Location",
+                    "_id": "5938b2b9f115cb1b1387bdb0",
+                    "scenarios": [
+                      {
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c80b6",
+                        "name": "Single / Co-located",
+                        "code": "10038.150.10"
+                      },
+                      {
+                        "isChecked": true,
+                        "_id": "59352b61df2fcd693c7c80b5",
+                        "name": "Multi-location within country / region",
+                        "code": "10038.150.20"
+                      },
+                      {
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c80b4",
+                        "name": "Global locations",
+                        "code": "10038.150.30"
+                      },
+                      {
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c80b3",
+                        "name": "Not Applicable",
+                        "code": "10038.150.0"
+                      }
+                    ],
+                    "match": "extra"
+                  },
+                  {
+                    "name": "Implementation Complexity handled",
+                    "_id": "5938b2b9f115cb1b1387bdaf",
+                    "scenarios": [
+                      {
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c80b1",
+                        "name": "Single system implementation",
+                        "code": "10038.160.10"
+                      },
+                      {
+                        "isChecked": true,
+                        "_id": "59352b61df2fcd693c7c80b0",
+                        "name": "Small scale System Integration",
+                        "code": "10038.160.20"
+                      },
+                      {
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c80af",
+                        "name": "Large Scale Integration",
+                        "code": "10038.160.30"
+                      },
+                      {
+                        "isChecked": false,
+                        "_id": "59352b61df2fcd693c7c80ae",
+                        "name": "Not Applicable",
+                        "code": "10038.160.0"
+                      }
+                    ],
+                    "match": "extra"
+                  }
+                ]
+              }
+            ]
           }
         ]
       },
-      "awards": [
-        {
-          "_id": "59395c6d060676644500ab4e",
-          "remark": "Well, I grew up in Cincinnati. As a child, I originally wanted to be a fireman, then later became interested in dinosaurs. I excelled in the sciences from early on, placing first in my fourth-grade science fair. ",
-          "name": "cgr",
-          "issuedBy": "hjfdhkhfh",
-          "year": 1960
-        }
-      ],
+      "awards": [],
       "interestedIndustries": [
-        "any"
-      ],
-      "certifications": [
-        {
-          "_id": "59395c6d060676644500ab50",
-          "remark": "Well, I grew up in Cincinnati. As a child, I originally wanted to be a fireman, then later became interested in dinosaurs. I excelled in the sciences from early on, placing first in my fourth-grade science fair. ",
-          "name": "JAVA",
-          "issuedBy": "SEED",
-          "year": 1958
-        },
-        {
-          "_id": "59395c6d060676644500ab4f",
-          "remark": "Well, I grew up in Cincinnati. As a child, I originally wanted to be a fireman, then later became interested in dinosaurs. I excelled in the sciences from early on, placing first in my fourth-grade science fair. ",
-          "name": "c",
-          "issuedBy": "cdac",
-          "year": 1957
-        }
-      ],
-      "isVisible": true,
-      "isCompleted": true,
-      "experienceMatch": "exact",
-      "salaryMatch": "above",
-      "educationMatch": "exact",
-      "releaseMatch": "exact",
-      "interestedIndustryMatch": [
-        "any"
-      ],
-      "proficienciesMatch": [
         "ABC",
-        "ABC ALGOL",
-        "ABSET",
-        "ABSYS",
-        "Bertrand"
+        "PQR",
+        "XYZ"
+      ],
+      "certifications": [],
+      "isVisible": true,
+      "isCompleted": false,
+      "experienceMatch": "above",
+      "salaryMatch": "above",
+      "educationMatch": "above",
+      "releaseMatch": "exact",
+      "interestedIndustryMatch": [],
+      "proficienciesMatch": [
+        "javascript",
+        "angular 2",
+        "java",
+        "ABC"
       ]
     }
     /*app.get("/api/candidate/:candidateId/matchresult/:jobId",candidateController.metchResult);
@@ -1005,7 +2041,12 @@ export class CandidateCompareViewComponent implements OnInit {
     console.log('data after compare  ',data)
     this.data=data.data;
   }
-
+  getImagePath(imagePath:string) {
+    if(imagePath != undefined) {
+      return AppSettings.IP + imagePath.substring(4).replace('"', '');
+    }
+    return null;
+  }
 
 
 

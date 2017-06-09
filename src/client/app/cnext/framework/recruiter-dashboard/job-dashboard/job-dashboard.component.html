@@ -29,6 +29,9 @@
           <ul class="pull-left">
             <!--<li class="job-posted"><p><span>{{recruiterJobView.numberOfCandidatesInCart}}</span></p></li>-->
             <li><h4>{{selectedJobProfile.jobTitle}}</h4></li>
+            <li>
+              <a class="view-details" (click)="viewJobdetails()">view job details</a>
+            </li>
           </ul>
           <ul class="pull-right">
             <li class="contact-info"><p>IT</p></li>
@@ -37,9 +40,6 @@
             </li>
             <li class="contact-info">
               <p><img src="../../../../assets/c-next/post-job/contact-person.png" alt="Hiring Manager"/>{{selectedJobProfile.hiringManager}}</p>
-            </li>
-            <li>
-              <a class="view-details" (click)="viewJobdetails()">view job details</a>
             </li>
           </ul>
         </div>
@@ -85,7 +85,7 @@
         <div class="modal-body">
           <div class="modal-header">
             <h4>Job Description</h4>
-            <img src="/assets/c-next/card-view/close-grey.png" (click)="closeJob()" class="close"/>
+            <img src="/assets/c-next/card-view/close-white.png" (click)="closeJob()" class="close"/>
           </div>
             <cn-job-view [jobId]="selectedJobProfile._id"></cn-job-view>
         </div>
