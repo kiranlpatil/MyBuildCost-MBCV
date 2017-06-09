@@ -57,7 +57,9 @@ class RecruiterRepository extends RepositoryBase<IRecruiter> {
                   if (job_item.substr(0, job_item.lastIndexOf(".")) == candi_item.substr(0, candi_item.lastIndexOf("."))) {
                     let job_last_digit:number = Number(job_item.substr(job_item.lastIndexOf(".") + 1));
                     let candi_last_digit:number = Number(candi_item.substr(candi_item.lastIndexOf(".") + 1));
-                    if (job_last_digit == candi_last_digit + ConstVariables.DIFFERENCE_IN_COMPLEXITY_SCENARIO) {
+                    if(job_last_digit == 0){
+
+                    }else if (job_last_digit == candi_last_digit + ConstVariables.DIFFERENCE_IN_COMPLEXITY_SCENARIO) {
                       job_qcard.below_one_step_matching += 1;
                     } else if (job_last_digit == candi_last_digit - ConstVariables.DIFFERENCE_IN_COMPLEXITY_SCENARIO) {
                       job_qcard.above_one_step_matching += 1;

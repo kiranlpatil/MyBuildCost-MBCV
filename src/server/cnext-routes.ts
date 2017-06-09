@@ -10,7 +10,7 @@ import * as recruiterController from './app/framework/controllers/recruiter.cont
 import * as jobProfileController from './app/framework/controllers/job-profile.controller';
 import * as sharedService from './app/framework/shared/shared.service';
 import * as userInterceptor from './app/framework/interceptor/user.interceptor';
-import {SearchController} from "./app/framework/search/controller/search.controller";
+import { SearchController } from "./app/framework/search/controller/search.controller";
 var AuthInterceptor = require("./app/framework/interceptor/auth.interceptor");
 this.authInterceptor = new AuthInterceptor();
 

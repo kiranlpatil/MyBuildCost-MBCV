@@ -57,11 +57,13 @@ class CandidateRepository extends RepositoryBase<ICandidate> {
           if (job_item.substr(0, job_item.lastIndexOf(".")) == candi_item.substr(0, candi_item.lastIndexOf("."))) {
             let job_last_digit:number = Number(job_item.substr(job_item.lastIndexOf(".") + 1));
             let candi_last_digit:number = Number(candi_item.substr(candi_item.lastIndexOf(".") + 1));
-            if (candi_last_digit == job_last_digit - ConstVariables.DIFFERENCE_IN_COMPLEXITY_SCENARIO) {
+            if(candi_last_digit === 0){
+
+            }else if (candi_last_digit == job_last_digit - ConstVariables.DIFFERENCE_IN_COMPLEXITY_SCENARIO) {
               candidate_card_view.below_one_step_matching += 1;
-            } else if (candi_last_digit == job_last_digit + ConstVariables.DIFFERENCE_IN_COMPLEXITY_SCENARIO) {
+            }else if (candi_last_digit == job_last_digit + ConstVariables.DIFFERENCE_IN_COMPLEXITY_SCENARIO) {
               candidate_card_view.above_one_step_matching += 1;
-            } else if (candi_last_digit == job_last_digit) {
+            }else if (candi_last_digit == job_last_digit) {
               candidate_card_view.exact_matching += 1;
             }
             break;
