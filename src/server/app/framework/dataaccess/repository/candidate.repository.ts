@@ -122,6 +122,18 @@ class CandidateRepository extends RepositoryBase<ICandidate> {
   getCodesFromindustry(industry:IndustryModel):string[] {
     let selected_complexity:string[] = new Array(0);
     for (let role of industry.roles) {
+      for (let capability of role.default_complexities) {
+        for (let complexity of capability.complexities) {
+          for (let scenario of complexity.scenarios) {
+            if (scenario.isChecked) {
+              if (scenario.code) {
+                selected_complexity.push(scenario.code);
+              }
+            }
+          }
+        }
+      }
+
       for (let capability of role.capabilities) {
         for (let complexity of capability.complexities) {
           for (let scenario of complexity.scenarios) {
