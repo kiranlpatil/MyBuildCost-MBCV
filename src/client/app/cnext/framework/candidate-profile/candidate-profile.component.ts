@@ -410,7 +410,7 @@ export class CandidateProfileComponent implements OnInit {
 
   showHideModal() {
     this.showModalStyle = !this.showModalStyle;
-    setInterval(() => this.onSubmit(), 1000 * 19);
+    setInterval(() => this.onSubmit(), 1000 * 11);
   }
 
   getStyleModal() {

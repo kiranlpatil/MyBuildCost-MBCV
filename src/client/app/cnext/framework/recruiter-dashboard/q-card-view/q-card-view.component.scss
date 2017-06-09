@@ -1,9 +1,19 @@
+$border-color: #e8e8e8;
+
 .card-view {
   margin-top: 90px;
 
   .panel {
     padding: 0;
     border: 0;
+  }
+
+  .border-bottom {
+    border-bottom: 1px solid $border-color;
+  }
+
+  .details {
+    padding: 0 10px;
   }
 }
 
@@ -32,5 +42,12 @@ header{
 .recruiter-modal {
   .modal-header {
     left: 0;
+  }
+}
+
+.details {
+  .col-sm-6,
+  .col-sm-12 {
+    padding: 10px;
   }
 }

@@ -8,7 +8,7 @@ $active-tab-border: #b2bcc3;
 .filter-container {
   padding-bottom: 60px;
   position: fixed;
-  top: 49px;
+  top: 85px;
   left: 0;
   height: 100vh;
   overflow: auto;
@@ -29,10 +29,17 @@ $active-tab-border: #b2bcc3;
     //background: #e8e8e8;
     color: #666;
     font-size: 16px;
-    padding: 15px 15px 0 15px;
+    padding: 15px 15px 10px 15px;
     //border: 1px solid #ccc;
     font-size: 12px;
     font-family: 'gothamrnd-book';
+    position: fixed;
+    top: 50px;
+    left: 0;
+    background-color: #fff;
+    width: 200px;
+    z-index: 10;
+    border-right: 1px solid $active-tab-border;
   }
 
   .inner {

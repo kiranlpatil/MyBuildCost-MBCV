@@ -21,9 +21,10 @@ $active-color: #edf1f5;
     margin: 10px 0 10px;
     padding: 45px 15px 10px 15px;
     position: relative;
+    cursor: pointer;
 
     ul {
-      display: none;
+      display: block;
       list-style: none;
       padding: 0;
       margin: 0;
@@ -56,6 +57,11 @@ $active-color: #edf1f5;
       .glyphicon-eye-open,
       .active-star {
         color: $orange;
+      }
+
+      img {
+        width: 10px;
+        height: 10px;
       }
     }
 
@@ -141,6 +147,8 @@ $active-color: #edf1f5;
     }
 
     &:hover {
+      box-shadow: 0 0 5px 2px rgba(52, 148, 209, 0.4);
+
       .button-group,
       ul {
         display: block;
@@ -261,6 +269,13 @@ header {
       margin: -3px 0 0 -37px;
     }
 
+  }
+
+  .clear-filter {
+    position: fixed;
+    top: 63px;
+    left: 102px;
+    z-index: 10;
   }
 }
 

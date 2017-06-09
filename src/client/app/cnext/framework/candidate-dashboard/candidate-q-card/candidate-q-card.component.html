@@ -1,7 +1,7 @@
 <div class="col-sm-4">
-  <div class="panel clearfix">
+  <div class="panel clearfix" (click)="viewJob(job._id)" >
     <ul>
-      <li *ngIf="type=='block'"><span class="glyphicon glyphicon-trash" (click)="deleteItem(job._id)" ></span></li>
+      <li *ngIf="type=='block'"><img src="assets/c-next/card-view/close-grey.png" (click)="deleteItem(job._id)"/></li>
     </ul>
     <header class="clearfix">
       <div  class="col-md-8 col-sm-7 col-xs-6 no-padding">
@@ -36,9 +36,9 @@
       <p><img src="assets/c-next/card-view/education.png" alt="education"/> {{job.education}}</p>
       <p><img src="assets/c-next/card-view/company-size.png" alt="size">{{job.company_size}}</p>
     </div>
-    <div class="button-group">
-      <button class="btn btn-cart btn-block" type="button" (click)="viewJob(job._id)" >Compare</button>
-    </div>
+    <!--<div class="button-group">
+      <button class="btn btn-cart btn-block" type="button">Compare</button>
+    </div>-->
   </div>
 </div>
 

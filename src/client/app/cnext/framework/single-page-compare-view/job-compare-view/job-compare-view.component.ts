@@ -21,7 +21,7 @@ export class JobCompareViewComponent {
 
 
   ngOnInit() {
-   /* this.data = {
+    this.data = {
       "_id": "593959a5060676644500aa1f",
       "userId": "593959a5060676644500aa1e",
       "jobTitle": "Software Engineer",
@@ -236,7 +236,7 @@ export class JobCompareViewComponent {
       ],
       "isVisible": true,
       "isCompleted": true
-    }*/
+    }
   }
 
   ngOnChanges(changes:any) {

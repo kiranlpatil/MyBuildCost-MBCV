@@ -10,6 +10,7 @@ $light-blue: #00aed5;
 $label: #888;
 $blue: #3694d1;
 $current: #FFC107;
+$green-text: #42a948;
 
 
 .error-messages {
@@ -246,6 +247,26 @@ $current: #FFC107;
 
 .glyphicon-info-sign {
 color: #ccc;
+}
+
+.get-set-go {
+
+  .modal-dialog {
+    width: 70%;
+  }
+
+  .modal-content {
+    background: $white;
+  }
+
+  img {
+    width: 200px;
+  }
+
+  p {
+    font-size: 34px;
+    color: $green-text;
+  }
 }
 
 @media only screen and (max-width: 1366px) {
