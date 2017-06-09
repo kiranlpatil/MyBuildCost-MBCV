@@ -1,74 +1,59 @@
 <div class="guided-tour" *ngIf="highlightedSection.name=='GuideTour'">
   <div class="modal-background"></div>
   <div class="inner">
-    <div id="myCarousel" class="carousel slide" data-ride="carousel">
-      <!-- Indicators -->
-      <ol class="carousel-indicators">
-        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-        <li data-target="#myCarousel" data-slide-to="1"></li>
-        <li data-target="#myCarousel" data-slide-to="2"></li>
-        <li data-target="#myCarousel" data-slide-to="3"></li>
-        <li data-target="#myCarousel" data-slide-to="4"></li>
-        <li data-target="#myCarousel" data-slide-to="5"></li>
-        <li data-target="#myCarousel" data-slide-to="6"></li>
-        <li data-target="#myCarousel" data-slide-to="7"></li>
-        <li data-target="#myCarousel" data-slide-to="8"></li>
-        <li data-target="#myCarousel" data-slide-to="9"></li>
-      </ol>
+    <div id="myCarousel" class="carousel slide"  data-ride="carousel">
 
       <!-- Wrapper for slides -->
       <div class="carousel-inner">
-        <div class="item active">
+        <div class="item carousel-slide active">
           <img src="../assets/c-next/guided-tour/1.png" alt="Los Angeles" style="width:100%;">
         </div>
 
-        <div class="item">
+        <div class="item carousel-slide">
           <img src="../assets/c-next/guided-tour/2.png" alt="Chicago" style="width:100%;">
         </div>
 
-        <div class="item">
+        <div class="item carousel-slide">
           <img src="../assets/c-next/guided-tour/3.png" alt="New york" style="width:100%;">
         </div>
 
-        <div class="item">
+        <div class="item carousel-slide">
           <img src="../assets/c-next/guided-tour/4.png" alt="Los Angeles" style="width:100%;">
         </div>
 
-        <div class="item">
+        <div class="item carousel-slide">
           <img src="../assets/c-next/guided-tour/5.png" alt="Chicago" style="width:100%;">
         </div>
 
-        <div class="item">
+        <div class="item carousel-slide">
           <img src="../assets/c-next/guided-tour/6.png" alt="New york" style="width:100%;">
         </div>
 
-        <div class="item">
+        <div class="item carousel-slide">
           <img src="../assets/c-next/guided-tour/7.png" alt="Los Angeles" style="width:100%;">
         </div>
 
-        <div class="item">
+        <div class="item carousel-slide">
           <img src="../assets/c-next/guided-tour/8.png" alt="Chicago" style="width:100%;">
         </div>
 
-        <div class="item">
+        <div class="item carousel-slide">
           <img src="../assets/c-next/guided-tour/9.png" alt="New york" style="width:100%;">
         </div>
 
-        <div class="item">
+        <div class="item carousel-slide">
           <img src="../assets/c-next/guided-tour/10.png" alt="New york" style="width:100%;">
         </div>
       </div>
 
       <!-- Left and right controls -->
-      <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-        <span class="glyphicon glyphicon-chevron-left"></span>
-        <span class="sr-only">Previous</span>
+      <a class="left" (click)="showHide(true)" *ngIf="isShowPrev" href="#myCarousel" data-slide="prev">
+        <a class="btn btn-primary">Previous</a>
       </a>
-      <a class="right carousel-control" href="#myCarousel" data-slide="next">
-        <span class="glyphicon glyphicon-chevron-right"></span>
-        <span class="sr-only">Next</span>
+      <a class="right"  *ngIf="isShowNext" (click)="showHide(false)" href="#myCarousel" data-slide="next">
+        <a class="btn btn-primary">Next</a>
       </a>
-      <button class="btn btn-danger" (click)="highlightedSection.name='Profile'">Skip</button>
+      <a class="btn btn-danger skip" (click)="highlightedSection.name='Profile'">Skip</a>
     </div>
   </div>
 </div>

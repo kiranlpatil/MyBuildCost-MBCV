@@ -22,7 +22,8 @@ export class CandidateProfileComponent implements OnInit {
   private primaryCapability:string[] = new Array();
   private proficiencies:string[] = new Array();
   private isComplexityPresent:boolean = false;
-
+  private isShowNext: boolean= true;
+  private isShowPrev: boolean= false;
   whichStepsVisible:boolean[] = new Array(7);
   private showCapability:boolean = false;
   private showComplexity:boolean = false;
@@ -57,9 +58,33 @@ export class CandidateProfileComponent implements OnInit {
   }
 
 
+  showHide(isPrev: boolean){
+    let carouselData : any = document.getElementsByClassName("carousel-slide");
+    let isFound : boolean=false;
+    let isPrevFound : boolean=false;
+
+    for(let index=0;index<carouselData.length;index++){
+      if(isPrev){
+        (index==1) ? carouselData[index].classList.contains("active") ?  isPrevFound =true: console.log(): console.log();
+      }
+      if(index==carouselData.length-2){
+        if(!isPrev){
+          carouselData[index].classList.contains("active") ?  isFound=true: console.log();
+        }
+      }
+    }
+    (isFound) ? this.isShowNext =false : this.isShowNext = true;
+    (isPrevFound) ? this.isShowPrev =false : this.isShowPrev = true;
+  }
+
   ngOnInit() {
     this.whichStepsVisible[0] = true;
-  }
+    let item: any  = $('#myCarousel');
+    item.carousel({
+      interval: false
+    });
+
+    }
 
   onProfileDescriptionComplete() {
     this.saveCandidateDetails();
