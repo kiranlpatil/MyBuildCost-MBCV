@@ -41,6 +41,7 @@ export class CandidateProfileComponent implements OnInit {
   private candidateForCapability:Role[];
   private candidateForComplexity:Role[];
   private showTooltip:boolean = false;
+  private setTimeoutId : any;
   private showModalStyle:boolean = false;
   private goto:boolean = false;
   private highlightedSection:Section = new Section();
@@ -403,14 +404,19 @@ export class CandidateProfileComponent implements OnInit {
   }
 
   onSubmit() {
-    this.showModalStyle = !this.showModalStyle
+    this.showModalStyle = !this.showModalStyle;
+    if(this.setTimeoutId!==undefined) {
+      clearTimeout(this.setTimeoutId);
+    }
     this._router.navigate([NavigationRoutes.APP_CANDIDATE_DASHBOARD]);
   }
 
 
   showHideModal() {
     this.showModalStyle = !this.showModalStyle;
-    setInterval(() => this.onSubmit(), 1000 * 11);
+    this.setTimeoutId = setTimeout(()=> {
+      this.onSubmit();
+    }, 1000 * 11);
   }
 
   getStyleModal() {
