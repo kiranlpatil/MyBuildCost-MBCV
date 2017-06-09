@@ -69,24 +69,18 @@ import {AcademicDetailComponent} from "./cnext/framework/academic-details/academ
 import {CertificationAccreditationComponent} from "./cnext/framework/certification-accreditation/certification-accreditation.component";
 import {AwardsComponent} from "./cnext/framework/awards/awards.component";
 import {MoreAboutMyselfComponent} from "./cnext/framework/more-about-myself/more-about-myself.component";
-import {ProficiencyService} from "./cnext/framework/proficience.service";
 import {JobPosterComponent} from "./cnext/framework/job-poster/job-poster.component";
 import {DescriptionFieldComponent} from "./cnext/framework/description-field/description-field.component";
-import {MyCapabilityService} from "./cnext/framework/capability-service";
 import {CompanyDetailsComponent} from "./framework/registration/company_details/company-details.component";
 import {CompanyDetailsService} from "./framework/registration/company_details/company-details.service";
 import {RecruiterDashboardComponent} from "./cnext/framework/recruiter-dashboard/recruiter-dashboard.component";
 import {IndustryListComponent} from "./cnext/framework/industry-list/industry-list.component";
 import {IndustryListService} from "./cnext/framework/industry-list/industry-list.service";
 import {DateService} from "./cnext/framework/date.service";
-import {ProfessionalService} from "./cnext/framework/professional-service";
-import {EducationalService} from "./cnext/framework/educational-service";
-import {MyRoleListTestService} from "./cnext/framework/myRolelist.service";
 import {RoleTypetListComponent} from "./cnext/framework/role-type/role-type.component";
 import {RoleTypeService} from "./cnext/framework/role-type/role-type.service";
 import {IndustryExperienceListComponent} from "./cnext/framework/industry-experience/industry-experience.component";
 import {IndustryExperienceService} from "./cnext/framework/industry-experience/industry-experience.service";
-import {DisableTestService} from "./cnext/framework/disable-service";
 import {CandidateAwardService} from "./cnext/framework/awards/awards.service";
 import {AboutCandidateService} from "./cnext/framework/more-about-myself/more-about-myself.service";
 import {CandidateAcadmyDetailService} from "./cnext/framework/academic-details/academic-details.service";
@@ -296,7 +290,6 @@ import {JobCompareViewComponent} from "./cnext/framework/single-page-compare-vie
     CommonService,
     ValidationService,
     ComplexityService,
-    ProficiencyService,
     JobCompareService,
     ChangePasswordService,
     ChangeEmailService,
@@ -318,9 +311,6 @@ import {JobCompareViewComponent} from "./cnext/framework/single-page-compare-vie
     BasicJobInformationService,
     VerifyPhoneService,
     IndustryListService,
-    MyCapabilityService,
-    ProfessionalService,
-    EducationalService,
     CandidateJobListService,
     ProfessionalDataService,
     EmploymentHistoryService,
@@ -329,10 +319,8 @@ import {JobCompareViewComponent} from "./cnext/framework/single-page-compare-vie
     EmploymentHistoryService,
     DateService,
     CandiadteDashboardService,
-    MyRoleListTestService,
     RoleTypeService,
     IndustryExperienceService,
-    DisableTestService,
     ShowQcardviewService,
     CandidateAwardService,
     MultiSelectService,

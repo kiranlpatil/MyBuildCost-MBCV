@@ -5,7 +5,6 @@ import { ProfessionalData } from '../model/professional-data';
 import { ProfessionalDataService } from './professional-data.service';
 import { Message } from '../../../framework/shared/message';
 import { MessageService } from '../../../framework/shared/message.service';
-import { ProfessionalService } from '../professional-service';
 import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
 import {Candidate, Section} from "../model/candidate";
 import { FormBuilder, FormGroup,Validators } from '@angular/forms';
@@ -47,7 +46,6 @@ export class ProfessionalDataComponent extends BaseService implements OnInit {
 
   constructor(private professionaldataservice:ProfessionalDataService,
               private messageService:MessageService,
-              private professionalService : ProfessionalService,
               private formBuilder: FormBuilder,
               private profileCreatorService:CandidateProfileService) {
     super();
@@ -149,12 +147,11 @@ export class ProfessionalDataComponent extends BaseService implements OnInit {
   }
 
   changeValue() {
-    this.professionalService.change(true);
+    
 
   }
 
   saveProfessionalData() {
-    this.professionalService.change(true);
     if(this.candidate.professionalDetails.currentSalary !='' && this.candidate.professionalDetails.education!= '' && 
       this.candidate.professionalDetails.experience != '' && this.candidate.professionalDetails.noticePeriod != '' && this.candidate.professionalDetails.relocate != '' ){
       this.disableButton=false;

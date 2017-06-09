@@ -1,6 +1,4 @@
 import {Component, Input} from "@angular/core";
-import {LocalStorage} from "../../../../framework/shared/constants";
-import {LocalStorageService} from "../../../../framework/shared/localstorage.service";
 import {JobCompareService} from "./job-compare-view.service";
 
 @Component({
@@ -21,9 +19,8 @@ export class JobCompareViewComponent {
   }
 
 
-   ngOnInit() {
-
-    this.data={
+  ngOnInit() {
+    this.data = {
       "_id": "593959a5060676644500aa1f",
       "userId": "593959a5060676644500aa1e",
       "jobTitle": "Software Engineer",
@@ -239,26 +236,18 @@ export class JobCompareViewComponent {
       "isVisible": true,
       "isCompleted": true
     }
-   /*app.get("/api/candidate/:candidateId/matchresult/:jobId",candidateController.metchResult);
+  }
 
-
-   http://localhost:8080/api/candidate/59352c6edf2fcd693c7c82f4/matchresult/59353128df2fcd693c7c8391*/
-
-
-   }
-
-  ngOnChanges(changes:any) {debugger
+  ngOnChanges(changes:any) {
     if (changes.candiadteId != undefined && changes.candiadteId.currentValue != undefined) {
       this.candiadteId = changes.candiadteId.currentValue;
     }
-    if ( changes.jobId != undefined && changes.jobId.currentValue != undefined ) {
+    if (changes.jobId != undefined && changes.jobId.currentValue != undefined) {
       this.recruiterId = changes.jobId.currentValue;
     }
-    if(this.candiadteId != undefined && this.recruiterId != undefined ){
+    if (this.candiadteId != undefined && this.recruiterId != undefined) {
       this.getCompareDetail(this.candiadteId, this.recruiterId);
-
     }
-    
   }
 
   getCompareDetail(candidateId:string, recruiterId:string) {
@@ -269,7 +258,6 @@ export class JobCompareViewComponent {
   }
 
   OnCompareSuccess(data:any) {
-    console.log('data after compare  ', data)
     this.data = data.data;
   }
 }
