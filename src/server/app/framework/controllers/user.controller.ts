@@ -1171,7 +1171,6 @@ export function googlelogin(req: express.Request, res: express.Response, next: a
 export function updatePicture(req:express.Request, res:express.Response, next:any):void {
     __dirname = 'src/server/app/framework/public/profileimage';
     var form = new multiparty.Form({uploadDir: __dirname});
-    console.log("UpdatePicture user Controller is been hit req ",req);
     form.parse(req, (err:Error, fields:any, files:any) => {
         if (err) {
             next({
@@ -1195,16 +1194,53 @@ export function updatePicture(req:express.Request, res:express.Response, next:an
                     try {
                         var user = req.user;
                         var query = {"_id": user._id};
-                        userService.findOneAndUpdate(query, {picture: mypath}, {new: true}, (error, result) => {
-                            if (error) {
+
+                      userService.findById(user._id,  (error, result) => {
+                        if (error) {
+                          res.status(403).send({message: error});
+                        }
+                        else{
+                          if(!result.isCandidate){
+                            console.log("Is candidate"+ JSON.stringify(result));
+                            let recruiterService : RecruiterService= new RecruiterService();
+                            let query1 = {"userId": result._id};
+                            recruiterService.findOneAndUpdate(query1, {company_logo: mypath}, {new: true}, (error, response1) => {
+                              if (error) {
                                 res.status(403).send({message: error});
-                            }
-                            else{
+                              }
+                              else{
+                                console.log("-----------------------------------------------------------");
+                                console.log("updated");
+                                userService.findOneAndUpdate(query, {picture: mypath}, {new: true}, (error, response) => {
+                                  if (error) {
+                                    res.status(403).send({message: error});
+                                  }
+                                  else{
+                                    var auth:AuthInterceptor = new AuthInterceptor();
+                                    var token = auth.issueTokenWithUid(response);
+                                    res.status(200).send({access_token: token, data: response});
+                                  }
+                                });
+
+                              }
+                            });
+
+                          }else{
+                            userService.findOneAndUpdate(query, {picture: mypath}, {new: true}, (error, response) => {
+                              if (error) {
+                                res.status(403).send({message: error});
+                              }
+                              else{
                                 var auth:AuthInterceptor = new AuthInterceptor();
-                                var token = auth.issueTokenWithUid(result);
-                                res.status(200).send({access_token: token, data: result});
-                            }
-                        });
+                                var token = auth.issueTokenWithUid(response);
+                                res.status(200).send({access_token: token, data: response});
+                              }
+                            });
+                          }
+
+
+                        }
+                      });
                     }
                     catch (e) {
                         res.status(403).send({message: e.message});

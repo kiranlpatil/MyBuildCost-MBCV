@@ -76,6 +76,7 @@ class RecruiterRepository extends RepositoryBase<IRecruiter> {
               job_qcard.matching = job_qcard.above_one_step_matching + job_qcard.below_one_step_matching + job_qcard.exact_matching;
               job_qcard.company_name = recruiter.company_name;
               job_qcard.company_size = recruiter.company_size;
+              job_qcard.company_logo = recruiter.company_logo;
               job_qcard.salary = job.salary;
               job_qcard.experience = job.experience;
               job_qcard.education = job.education;

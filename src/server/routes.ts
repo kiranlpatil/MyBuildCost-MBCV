@@ -46,7 +46,6 @@ export function init(app: express.Application) {
     //app.post("/api/googletoken", userController.getGoogleToken);
      app.put("/api/updatepicture/:id", this.authInterceptor.requiresAuth, userController.updatePicture);
      app.put("/api/changetheme/:id", this.authInterceptor.requiresAuth, userController.changeTheme);
-     app.all("/updatepicture/:id", this.authInterceptor.requiresAuth, userController.updatePicture);
      app.post("/api/sendrecruitermail/:id", this.authInterceptor.requiresAuth,userController.recruiterVerificationMail);
      app.post("/api/companydetails/:id", this.authInterceptor.requiresAuth,userController.updateCompanyDetails);
      app.put("/api/uploaddocuments/:id", this.authInterceptor.requiresAuth, userController.uploaddocuments);

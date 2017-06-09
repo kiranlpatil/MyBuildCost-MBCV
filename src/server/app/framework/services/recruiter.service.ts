@@ -82,6 +82,10 @@ class RecruiterService {
     });
   }
 
+  findOneAndUpdate(query: any, newData: any, options: any, callback: (error: any, result: any) => void) {
+    this.recruiterRepository.findOneAndUpdate(query, newData, options, callback);
+  }
+
   retrieve(field: any, callback: (error: any, result: any) => void) {
     this.recruiterRepository.retrieve(field, (err,res)=>{
         if(err){
