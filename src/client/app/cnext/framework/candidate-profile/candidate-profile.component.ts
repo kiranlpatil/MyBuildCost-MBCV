@@ -106,6 +106,7 @@ export class CandidateProfileComponent implements OnInit {
     this.getCapability();
     this.showCapability = true;
     this.whichStepsVisible[1] = true;
+    this.whichStepsVisible[3] = false
   }
 
   onCapabilityComplete(roles:Role[]) {
