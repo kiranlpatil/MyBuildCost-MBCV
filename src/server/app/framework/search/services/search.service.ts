@@ -182,7 +182,50 @@ class SearchService {
       for (let role of newCandidate.industry.roles) {
         if (jobRole.name == role.name) {
           isRoleFound = true;
-          for (let jobCap of jobRole.capabilities) {
+          if(jobRole.default_complexities){
+            for (let jobDefCap of jobRole.default_complexities) {
+              if(role.default_complexities){
+                for (let capDef of role.default_complexities) {
+                  for (let jobCom of jobDefCap.complexities) {
+                    for (let complexity of capDef.complexities) {
+                      if (jobCom.name == complexity.name) {
+                        let jobSceNum:string;
+                        for (let jobScen of jobCom.scenarios) {
+                          if (jobScen.isChecked) {
+                            jobSceNum = jobScen.code;
+                          }
+                        }
+                        let comNum:string;
+                        for (let scenario of complexity.scenarios) {
+                          if (scenario.isChecked) {
+                            comNum = scenario.code;
+                          }
+                        }
+                        if (jobSceNum.substr(0, jobSceNum.lastIndexOf(".")) == comNum.substr(0, comNum.lastIndexOf("."))) {
+                          let job_last_digit:number = Number(jobSceNum.substr(jobSceNum.lastIndexOf(".") + 1));
+                          let candi_last_digit:number = Number(comNum.substr(comNum.lastIndexOf(".") + 1));
+                          if (job_last_digit == candi_last_digit + ConstVariables.DIFFERENCE_IN_COMPLEXITY_SCENARIO) {
+                            complexity.match = "above";
+                          } else if (job_last_digit == candi_last_digit - ConstVariables.DIFFERENCE_IN_COMPLEXITY_SCENARIO) {
+                            complexity.match = "below";
+                          } else if (job_last_digit == candi_last_digit) {
+                            complexity.match = "exact";
+                          }
+                        }
+                        if (complexity.match == undefined) {
+                          complexity.match = "missing";
+                        }
+
+                      }
+
+                    }
+                  }
+                }
+              }
+            }
+
+          }
+              for (let jobCap of jobRole.capabilities) {
             let isCapFound:boolean = false;
             for (let cap of role.capabilities) {
               if (jobCap.name == cap.name) {
@@ -242,6 +285,12 @@ class SearchService {
             cm.match = "extra";
           }
         }
+        for (let jobDefCap of newrole.default_complexities) {
+            for (let cm of jobDefCap.complexities) {
+              cm.match = "extra";
+            }
+        }
+
         newCandidate.industry.roles.push(newrole);
       }
     }
@@ -281,6 +330,50 @@ class SearchService {
       for (let jobRole of newJob.industry.roles) {
         if (jobRole.name == role.name) {
           isRoleFound=true;
+        if(role.default_complexities){
+          for (let canDefcap of role.default_complexities) {
+            if(jobRole.default_complexities) {
+              for (let jobDefCap of jobRole.default_complexities) {
+                for (let jobCom of jobDefCap.complexities) {
+                  for (let complexity of canDefcap.complexities) {
+                    if (jobCom.name == complexity.name) {
+                      let jobSceNum:string;
+                      for (let jobScen of jobCom.scenarios) {
+                        if (jobScen.isChecked) {
+                          jobSceNum = jobScen.code;
+                        }
+                      }
+                      let comNum:string;
+                      for (let scenario of complexity.scenarios) {
+                        if (scenario.isChecked) {
+                          comNum = scenario.code;
+                        }
+                      }
+                      if (jobSceNum.substr(0, jobSceNum.lastIndexOf(".")) == comNum.substr(0, comNum.lastIndexOf("."))) {
+                        let job_last_digit:number = Number(jobSceNum.substr(jobSceNum.lastIndexOf(".") + 1));
+                        let candi_last_digit:number = Number(comNum.substr(comNum.lastIndexOf(".") + 1));
+                        if (job_last_digit == candi_last_digit + ConstVariables.DIFFERENCE_IN_COMPLEXITY_SCENARIO) {
+                          jobCom.match = "below";
+                        } else if (job_last_digit == candi_last_digit - ConstVariables.DIFFERENCE_IN_COMPLEXITY_SCENARIO) {
+                          jobCom.match = "above";
+                        } else if (job_last_digit == candi_last_digit) {
+                          jobCom.match = "exact";
+                        }
+                      }
+                      if (jobCom.match == undefined) {
+                        jobCom.match = "missing";
+                      }
+
+                    }
+
+                  }
+                }
+
+              }
+            }
+          }
+
+        }
           for (let cap of role.capabilities) {
             let isCapFound: boolean=false;
             for (let jobCap of jobRole.capabilities) {
@@ -340,6 +433,12 @@ class SearchService {
             cm.match = "extra";
           }
         }
+        for (let jobDefCap of newrole.default_complexities) {
+          for (let cm of jobDefCap.complexities) {
+            cm.match = "extra";
+          }
+        }
+
         newJob.industry.roles.push(newrole);
       }
     }
