@@ -1,5 +1,6 @@
 import {Component, Input} from "@angular/core";
 import {JobCompareService} from "./job-compare-view.service";
+import {AppSettings} from "../../../../framework/shared/constants";
 
 @Component({
   moduleId: module.id,
@@ -260,4 +261,5 @@ export class JobCompareViewComponent {
   OnCompareSuccess(data:any) {
     this.data = data.data;
   }
+  
 }

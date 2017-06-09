@@ -1,6 +1,6 @@
 import {Component, OnInit,Input} from "@angular/core";
 import {Router} from "@angular/router";
-import {NavigationRoutes, LocalStorage} from "../../../../framework/shared/constants";
+import {NavigationRoutes, LocalStorage, AppSettings} from "../../../../framework/shared/constants";
 import {LocalStorageService} from "../../../../framework/shared/localstorage.service";
 import {Candidate} from "../../model/candidate";
 import {CandidateProfileService} from "../../candidate-profile/candidate-profile.service";
@@ -2041,7 +2041,12 @@ export class CandidateCompareViewComponent implements OnInit {
     console.log('data after compare  ',data)
     this.data=data.data;
   }
-
+  getImagePath(imagePath:string) {
+    if(imagePath != undefined) {
+      return AppSettings.IP + imagePath.substring(4).replace('"', '');
+    }
+    return null;
+  }
 
 
 

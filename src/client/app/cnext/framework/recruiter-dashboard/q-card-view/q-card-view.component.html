@@ -45,7 +45,8 @@
         <header class="clearfix">
           <div class="col-md-8 col-sm-7 col-xs-6 no-padding">
             <h6 class="username">
-              <img class="profile-picture" src="assets/framework/images/dashboard/profile.png" alt="Profile Picture"/>
+              <img src= "assets/framework/images/dashboard/profile.png" class="profile-picture" alt="User Profile" *ngIf="item.picture==undefined"/>
+              <img [src]="getImagePath(item.picture)" class="profile-picture" alt="User Profile" *ngIf="item.picture!=undefined"/>
               {{item.first_name}} {{item.last_name}}
             </h6>
             <p class="proficiencies">
@@ -115,7 +116,8 @@
       <div class="modal-content">
         <div class="modal-body">
           <div class="modal-header">
-            <img src="assets/framework/images/dashboard/profile.png" />
+            <img src= "assets/framework/images/dashboard/profile.png" class="profile-picture" alt="User Profile" *ngIf="candidateDetails.picture==undefined"/>
+            <img [src]="getImagePath(candidateDetails.picture)" class="profile-picture" alt="User Profile" *ngIf="candidateDetails.picture!=undefined"/>
             <h5>{{candidateDetails.first_name}} {{candidateDetails.last_name}}</h5>
             <img src="/assets/c-next/card-view/close-white.png" (click)="closeJob()" class="close"/>
           </div>
