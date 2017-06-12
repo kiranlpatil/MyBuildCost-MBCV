@@ -37,6 +37,7 @@ export class JobPosterComponent {
   private showIndustryExposure:boolean = false;
   private showCompentensies:boolean = false;
   private showModalStyle:boolean = false;
+  private isCapabilitypresent:boolean = false;
   private jobPosterModel = new JobPosterModel();
   private jobForComplexity:Role[] = new Array(0);
   private flag:boolean = true;
@@ -130,6 +131,7 @@ export class JobPosterComponent {
         }
       }
     }
+
   }
 
   selectRoleFromComplexity(roles:Role[]) {
@@ -188,6 +190,19 @@ export class JobPosterComponent {
         .subscribe(
           rolelist => {
             this.rolesForCapability = rolelist.data
+            for(let role of this.rolesForCapability){
+              if(role.capabilities!=undefined){
+                if(role.capabilities.length>0 )
+                {
+                  this.isCapabilitypresent=true;
+                }}
+            }
+            if(this.isCapabilitypresent==false){
+              this.isShowCapability = false;
+              this.isShowComplexity = true;
+              this.getComplexity();
+            }
+            this.isCapabilitypresent=false;
           },
           error => this.onError(error));
     }
@@ -195,9 +210,11 @@ export class JobPosterComponent {
 
   getComplexity() {
     for (let role of this.jobPosterModel.industry.roles) {
-      for (let capability of role.capabilities) {
-        if (capability.isPrimary) {
-          this.primaryCapability.push(capability.name);
+      if(role.capabilities){
+        for (let capability of role.capabilities) {
+          if (capability.isPrimary) {
+            this.primaryCapability.push(capability.name);
+          }
         }
       }
     }
@@ -206,6 +223,7 @@ export class JobPosterComponent {
         .subscribe(
           rolelist => {
             this.rolesForComplexity = rolelist.data;
+            this.highlightedSection.name = "Complexities";
             this.jobForComplexity = this.jobPosterModel.industry.roles;
           });
     }

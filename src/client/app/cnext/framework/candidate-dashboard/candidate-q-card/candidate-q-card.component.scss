@@ -1,4 +1,11 @@
 .panel {
   padding: 0;
   border: 0;
+  cursor: pointer;
+}
+
+.dashboard-modal {
+  .modal-content {
+    margin: 7px 15px 7px 7px;
+  }
 }

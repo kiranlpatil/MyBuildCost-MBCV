@@ -1,3 +1,14 @@
-<div class="option" *ngFor="let item of data;let i = index" [class.exact]="checkData(item)">
+<!--<div class="option" *ngFor="let item of data;let i = index" [class.exact]="checkData(item)">
+    <span>{{item}}</span>
+</div>-->
+
+
+<div class="option exact" *ngFor="let item of matchdData;let i = index" >
+    <span>{{item}}</span>
+</div>
+<p *ngIf="isCandidate=='true'">These are your Extra Proficiencies</p>
+
+<p *ngIf="isCandidate=='false'">These are Candidates additional Proficiencies</p>
+<div class="option" *ngFor="let item of data;let i = index">
     <span>{{item}}</span>
 </div>

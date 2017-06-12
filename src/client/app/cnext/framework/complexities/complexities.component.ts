@@ -145,12 +145,16 @@ export class ComplexitiesComponent {
     for(let rol  of this.candidateRoles){
       for(let mainrol of this.roles){
         if(rol.name === mainrol.name){
-          for(let cap of rol.capabilities){
-            for(let mainCap of mainrol.capabilities){
-              if(mainCap.name === cap.name){
-                if(cap.isSecondary){
-                  mainCap.isSecondary=true;
-                  mainCap.isPrimary = false;
+          if(rol.capabilities){
+            for(let cap of rol.capabilities){
+              if(mainrol.capabilities){
+                for(let mainCap of mainrol.capabilities){
+                  if(mainCap.name === cap.name){
+                    if(cap.isSecondary){
+                      mainCap.isSecondary=true;
+                      mainCap.isPrimary = false;
+                    }
+                  }
                 }
               }
             }

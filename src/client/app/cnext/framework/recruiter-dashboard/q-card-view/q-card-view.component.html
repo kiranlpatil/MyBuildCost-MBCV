@@ -17,7 +17,7 @@
         <p>Showing {{qCardCount.count}} out of {{totalQCardMatches.count}}</p>
       </li>
       <li>
-        <a (click)="clearFilter()">Clear all filters</a>
+        <a class="clear-filter" (click)="clearFilter()">Clear all filters</a>
       </li>
     </ul>
     <div class="sort-by">
@@ -31,15 +31,15 @@
   <div class="card-view clearfix">
     <!--<div class="col-sm-4" *ngFor= "let item of candidates">&lt;!&ndash;| candidatematching: matchFormat&ndash;&gt;-->
       <div class="col-sm-4" *ngFor= "let item of candidates | qcardmatching: matchFormat: totalQCardMatches :type | qcardlistfilter:filterMeta:qCardCount | qcardlistsort:[qCardModel.sortValue,matchFormat];let i=index;">
-      <div class="panel clearfix">
+      <div class="panel clearfix" (click)="viewProfile(item)">
         <ul>
           <li  *ngIf="type=='matchedList'">
             <span class="glyphicon glyphicon-star" *ngIf="emailsOfShrortListedCandidates.indexOf(item.email)==-1" (click)="addRemoveToShortList(item)" ></span>
             <span class="glyphicon glyphicon-star active-star" *ngIf="emailsOfShrortListedCandidates.indexOf(item.email)!=-1" (click)="addRemoveToShortList(item)" ></span>
           </li>
           <li *ngIf="type=='cartListed' || type=='rejectedList'">
-            <a (click)="actionOnQCard('remove','cartListed','cartListed',item)"  *ngIf="type=='cartListed'" ><img src="assets/c-next/card-view/close-red.png" /></a>
-            <a (click)="actionOnQCard('remove','rejectedList','rejectedList',item)"  *ngIf="type=='rejectedList'" ><img src="assets/c-next/card-view/close-red.png" /></a>
+            <a (click)="actionOnQCard('remove','cartListed','cartListed',item)"  *ngIf="type=='cartListed'" ><img src="assets/c-next/card-view/close-grey.png" /></a>
+            <a (click)="actionOnQCard('remove','rejectedList','rejectedList',item)"  *ngIf="type=='rejectedList'" ><img src="assets/c-next/card-view/close-grey.png" /></a>
           </li>
         </ul>
         <header class="clearfix">
@@ -70,40 +70,44 @@
             </div>
           </div>
         </header>
+        <div class="col-xs-6 details">
+          <p class="border-bottom"><img src="assets/c-next/card-view/salary.png" alt="Salary"/>$ {{item.salary}}</p>
+        </div>
+        <div class="col-xs-6 details">
+          <p class="border-bottom"><img src="assets/c-next/card-view/experience.png" alt="Experience"/>{{item.experience}}</p>
+        </div>
         <div class="col-xs-12 details">
-          <p><img src="assets/c-next/card-view/salary.png" alt="Salary"/>$ {{item.salary}}</p>
-          <p><img src="assets/c-next/card-view/experience.png" alt="Experience"/>{{item.experience}}</p>
           <p><img src="assets/c-next/card-view/relocation.png" alt="Location"/> {{item.location}}</p>
         </div>
         <div class="button-group" *ngIf="type=='matchedList'">
-          <div class="col-sm-6 padding-right5">
-            <button class="btn btn-cart btn-block" type="button" (click)="viewProfile(item)">View</button>
-          </div>
-          <div class="col-sm-6 padding-left5">
+          <!--<div class="col-sm-6 padding-right5">
+            <button class="btn btn-cart btn-block" type="button" >View</button>
+          </div>-->
+          <div class="col-sm-12 no-padding">
             <button class="btn btn-cart btn-block" type="button"
                     (click)="actionOnQCard('add','matchedList','cartListed',item)">Add To Cart
             </button>
           </div>
         </div>
         <div class="button-group" *ngIf="type=='cartListed'" >
-          <div class="col-sm-12 no-padding">
+         <!-- <div class="col-sm-12 no-padding">
             <button class="btn btn-cart btn-block" type="button" (click)="viewProfile(item)">View</button>
-          </div>
+          </div>-->
         </div>
         <div class="button-group" *ngIf="type=='applied'">
-          <div class="col-sm-6 padding-right5">
+          <!--<div class="col-sm-6 padding-right5">
             <button class="btn btn-cart btn-block" type="button" (click)="viewProfile(item)">View</button>
-          </div>
-          <div class="col-sm-6 padding-left5">
+          </div>-->
+          <div class="col-sm-12 no-padding">
             <button class="btn btn-cart btn-block" type="button"
                     (click)="actionOnQCard('add','applied','cartListed',item)">Add To Cart
             </button>
           </div>
         </div>
         <div class="button-group" *ngIf="type=='rejectedList'">
-          <div class="col-sm-12 no-padding">
+         <!-- <div class="col-sm-12 no-padding">
             <button class="btn btn-cart btn-block" type="button" (click)="viewProfile(item)">View</button>
-          </div>
+          </div>-->
         </div>
     </div>
   </div>
@@ -133,10 +137,13 @@
           </div>
           <div class="button-group" *ngIf="type=='applied'">
             <button class="btn btn-default" (click)="actionOnQCard('add','applied','cartListed',modelCandidate)">Add To Cart</button>
-            <button class="btn btn-default" (click)="actionOnQCard('add','applied','rejectedList', modelCandidate)">Reject</button>
+            <button class="btn btn-danger" (click)="actionOnQCard('add','applied','rejectedList', modelCandidate)">Reject</button>
           </div>
           <div class="button-group" *ngIf="type=='matchedList'">
-            <button class="btn btn-default" (click)="actionOnQCard('add','matchedList','rejectedList', modelCandidate)">Reject</button>
+            <button class="btn btn-primary" type="button"
+                    (click)="actionOnQCard('add','matchedList','cartListed',modelCandidate)">Add To Cart
+            </button>
+            <button class="btn btn-danger" (click)="actionOnQCard('add','matchedList','rejectedList', modelCandidate)">Reject</button>
           </div>
         </div>
       </div>
@@ -157,7 +164,8 @@
             <cn-candidate-view [candidateId]="selectedCandidate._id"></cn-candidate-view>
           </div>
           <div class="button-group" >
-            <button class="btn btn-default" (click)="actionOnQCard('add','cartListed','rejectedList', modelCandidate)">Reject</button>
+            <button class="btn btn-danger" (click)="actionOnQCard('add','cartListed','rejectedList', modelCandidate)">Reject</button>
+
           </div>
         </div>
       </div>
