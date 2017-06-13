@@ -21,11 +21,11 @@ $toaster-message: rgba(102, 102, 102, .35);
 $bg-content: rgba(255, 255, 255, .1);
 $modal-bg: rgba(0, 0, 0, .7);
 $btn-color: #1c75bd;
-$input-bg: rgba(255 , 255, 255, .1);
+$input-bg: rgba(255, 255, 255, .1);
 $label: #999;
 $theme-color: #66afe9;
-$gray-shadow: rgba(0,0,0,.075);
-$blue-shadow: rgba(102,175,233,.6);
+$gray-shadow: rgba(0, 0, 0, .075);
+$blue-shadow: rgba(102, 175, 233, .6);
 $body-bg: #edf1f5;
 
 .btn-logout {
@@ -48,15 +48,25 @@ $body-bg: #edf1f5;
 }
 
 //Common Classes
-.no-border { border: transparent 1px solid; }
+.no-border {
+  border: transparent 1px solid;
+}
 
-.no-padding { padding: 0; }
+.no-padding {
+  padding: 0;
+}
 
-.clear { clear: both; }
+.clear {
+  clear: both;
+}
 
-.margin-right15 { margin-right: 15px; }
+.margin-right15 {
+  margin-right: 15px;
+}
 
-.margin-left15 { margin-left: 15px; }
+.margin-left15 {
+  margin-left: 15px;
+}
 
 .padding-left5 {
   padding-left: 5px;
@@ -78,7 +88,9 @@ $body-bg: #edf1f5;
   padding-right: 15px;
 }
 
-:focus { outline: none; }
+:focus {
+  outline: none;
+}
 
 %background-img {
   background-position: 0 0;
@@ -167,10 +179,13 @@ main {
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
-
 
 // Paragraphs
 p {
@@ -194,9 +209,9 @@ a {
 
 select,
 .select {
-  appearance:none;
-  -moz-appearance:none;
-  -webkit-appearance:none;
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
   background: url('../assets/framework/images/form/drop-down.png') no-repeat;
   background-color: $white;
   background-position: 95% 50%;
@@ -219,6 +234,7 @@ select,
     font-size: 12px;
   }
 }
+
 .form-group {
   label {
     color: $label;
@@ -370,7 +386,6 @@ h4 {
   margin: 30px auto 0;
 }
 
-
 .max-height {
   max-height: 285px;
   overflow: auto;
@@ -444,8 +459,12 @@ ng2-auto-complete {
   animation: fadein .5s;
 
   @keyframes fadein {
-    from { opacity: 0; }
-    to   { opacity: 1; }
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
   }
 
   .modal-bg {
@@ -518,7 +537,7 @@ control-messages {
   }
 }
 
-.company-details  {
+.company-details {
   .about-company > control-messages {
     div {
       margin: 120px 0 0;
@@ -556,7 +575,6 @@ control-messages {
   }
 }
 
-
 .logout-dropdown {
   position: fixed;
   right: 15px;
@@ -573,14 +591,12 @@ control-messages {
     }
   }
 
-
   .dropdown-menu {
     right: 0;
     margin: 10px 0 0;
     left: auto;
   }
 }
-
 
 // Media Queries
 @media only screen and (max-width: 1024px) {
@@ -592,11 +608,12 @@ control-messages {
     display: none;
   }
 }
+
 @media only screen and (max-width: 768px) {
-  .container-fluid>.navbar-collapse,
-  .container-fluid>.navbar-header,
-  .container>.navbar-collapse,
-  .container>.navbar-header {
+  .container-fluid > .navbar-collapse,
+  .container-fluid > .navbar-header,
+  .container > .navbar-collapse,
+  .container > .navbar-header {
     margin-left: 0;
     margin-right: 0;
   }
@@ -675,7 +692,6 @@ control-messages {
       }
     }
   }
-
 
   .max-height {
     max-height: inherit;

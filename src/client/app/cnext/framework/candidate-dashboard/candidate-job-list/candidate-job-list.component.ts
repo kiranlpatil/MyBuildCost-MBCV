@@ -1,5 +1,5 @@
-import { Component, Input, EventEmitter, Output } from '@angular/core';
-import { JobQcard } from '../../model/JobQcard';
+import {Component, EventEmitter, Input, Output} from "@angular/core";
+import {JobQcard} from "../../model/JobQcard";
 
 @Component({
   moduleId: module.id,
@@ -8,12 +8,12 @@ import { JobQcard } from '../../model/JobQcard';
   styleUrls: ['candidate-job-list.component.css'],
 })
 export class CandidateJobListComponent {
-  @Input() listOfJobs:JobQcard[];
-  @Input() type:string;
+  @Input() listOfJobs: JobQcard[];
+  @Input() type: string;
   @Output() onAction = new EventEmitter();
 
 
-  onActionPerform(action:string) {
+  onActionPerform(action: string) {
     this.onAction.emit(action);
   }
 }

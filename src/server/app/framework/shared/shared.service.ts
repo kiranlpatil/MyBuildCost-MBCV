@@ -1,7 +1,7 @@
 var Messages = require("./messages");
 var logger = require("./logger/logger");
 
-export function logHandler(err:any, req:any, res:any, next:any) {
+export function logHandler(err: any, req: any, res: any, next: any) {
   if (err.code) {
     logger.info(err);
     console.log("***Client error = ", err);
@@ -18,7 +18,7 @@ export function logHandler(err:any, req:any, res:any, next:any) {
 };
 
 
-export function errorHandler(err:any, req:any, res:any, next:any) {
+export function errorHandler(err: any, req: any, res: any, next: any) {
   if (err.code) {
     logger.info(err);
     console.log("Error Handler");
@@ -37,11 +37,11 @@ export function errorHandler(err:any, req:any, res:any, next:any) {
     logger.info(responseObject);
     res.status(500).send(responseObject);
 
-    console.log("responseObject in errorHandler:",responseObject);
+    console.log("responseObject in errorHandler:", responseObject);
   }
 };
 
-export function clientHandler(err:any, req:any, res:any, next:any) {
+export function clientHandler(err: any, req: any, res: any, next: any) {
   console.log("Client Handler");
   var errObject = {
     status: Messages.STATUS_ERROR,

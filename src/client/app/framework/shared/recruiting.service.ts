@@ -1,5 +1,5 @@
-import {    Injectable  } from '@angular/core';
-import {  Subject  } from 'rxjs/Subject';
+import {Injectable} from "@angular/core";
+import {Subject} from "rxjs/Subject";
 
 
 @Injectable()
@@ -9,7 +9,7 @@ export class RecruitingService {
   //showRecruitmentFor$ Observable to observe recruitmentSource
   showRecruitmentFor$ = this.recruitmentSource.asObservable();
 
-  change(recruitmentFor:boolean) {
+  change(recruitmentFor: boolean) {
     this.recruitmentSource.next(recruitmentFor);
   }
 }

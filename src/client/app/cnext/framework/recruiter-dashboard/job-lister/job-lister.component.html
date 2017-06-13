@@ -1,14 +1,15 @@
 <div class="job-list clearfix">
 
   <header class="col-sm-12">
-   <!-- <div class="search">
-      <input class="form-control" type="text" />
-      <button class="btn btn-search" type="button"><img src="./assets/framework/images/dashboard/search.png"></button>
-    </div>-->
+    <!-- <div class="search">
+       <input class="form-control" type="text" />
+       <button class="btn btn-search" type="button"><img src="./assets/framework/images/dashboard/search.png"></button>
+     </div>-->
   </header>
 
   <div class="card-view clearfix">
-    <div class="col-md-3" *ngFor="let item of jobListInput | orderBy:format;let i = index" (click)="onJobClikecd(item._id)">
+    <div class="col-md-3" *ngFor="let item of jobListInput | orderBy:format;let i = index"
+         (click)="onJobClikecd(item._id)">
       <div class="panel clearfix">
         <span class="glyphicon glyphicon-trash"></span>
         <div class="job-posted clearfix">
@@ -45,7 +46,7 @@
       </div>
     </div>
   </div>
- <!--div class="col-sm-12 text-center" *ngIf="jobListInput.length==0">You havn't posted any job yet</div>-->
+  <!--div class="col-sm-12 text-center" *ngIf="jobListInput.length==0">You havn't posted any job yet</div>-->
 </div>
 
 

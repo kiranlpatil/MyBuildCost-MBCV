@@ -4,7 +4,8 @@
       <div class="form-group">
         <input type="text" class="form-control" formControlName="companyName" required/>
         <label>Company Name</label>
-        <div  class="error-messages" *ngIf="employeeForm.get('companyName').touched && employeeForm.get('companyName').hasError('required')">
+        <div class="error-messages"
+             *ngIf="employeeForm.get('companyName').touched && employeeForm.get('companyName').hasError('required')">
           <p>Company Name is required</p>
         </div>
       </div>
@@ -14,7 +15,8 @@
       <div class="form-group">
         <input type="text" class="form-control" formControlName="designation" required/>
         <label>Designation</label>
-        <div  class="error-messages"  *ngIf="employeeForm.get('designation').touched && employeeForm.get('designation').hasError('required')">
+        <div class="error-messages"
+             *ngIf="employeeForm.get('designation').touched && employeeForm.get('designation').hasError('required')">
           <p>Designation is required</p>
         </div>
       </div>
@@ -33,7 +35,7 @@
           </div>
           <div class="col-sm-3 padding-left5">
             <select class="form-control" formControlName="year" required>
-              <option *ngFor="let c of yearList"  [ngValue]="c">{{c}}</option>
+              <option *ngFor="let c of yearList" [ngValue]="c">{{c}}</option>
             </select>
           </div>
         </div>
@@ -51,7 +53,7 @@
           </div>
           <div class="col-sm-3 padding-left5">
             <select class="form-control" formControlName="year" required>
-              <option *ngFor="let c of yearList"  [ngValue]="c">{{c}}</option>
+              <option *ngFor="let c of yearList" [ngValue]="c">{{c}}</option>
             </select>
           </div>
           <!--<div >  &lt;!&ndash;*ngIf="item.to.month ==''"&ndash;&gt;

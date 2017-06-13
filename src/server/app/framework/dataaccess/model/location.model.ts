@@ -1,7 +1,7 @@
 interface LocationModel {
-    city: string;
-    state  : string;
-    country : string;
-    pin : string;
+  city: string;
+  state: string;
+  country: string;
+  pin: string;
 }
 export = LocationModel;

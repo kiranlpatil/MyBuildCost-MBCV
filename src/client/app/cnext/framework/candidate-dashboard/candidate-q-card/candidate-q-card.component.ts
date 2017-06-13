@@ -1,4 +1,4 @@
-import {Component, Input, EventEmitter, Output} from "@angular/core";
+import {Component, EventEmitter, Input, Output} from "@angular/core";
 import {JobQcard} from "../../model/JobQcard";
 import {LocalStorage} from "../../../../framework/shared/constants";
 import {LocalStorageService} from "../../../../framework/shared/localstorage.service";
@@ -12,27 +12,27 @@ import {CandiadteDashboardService} from "../candidate-dashboard.service";
   styleUrls: ['candidate-q-card.component.css'],
 })
 export class CandiadteQCardComponent {
-  @Input() job:JobQcard;
-  @Input() type:string;
+  @Input() job: JobQcard;
+  @Input() type: string;
   @Output() onAction = new EventEmitter();
-  private showModalStyle:boolean = false;
-  private hideButton:boolean = true;
+  private showModalStyle: boolean = false;
+  private hideButton: boolean = true;
 
-  private jobId:string;
+  private jobId: string;
 
-  constructor(private candidateDashboardService:CandiadteDashboardService) {
+  constructor(private candidateDashboardService: CandiadteDashboardService) {
   }
 
-  ngOnChanges(changes:any){
-    if(changes.type != undefined){
-      this.type=changes.type.currentValue;
-      if(this.type=='none'){
-        this.hideButton=false;
+  ngOnChanges(changes: any) {
+    if (changes.type != undefined) {
+      this.type = changes.type.currentValue;
+      if (this.type == 'none') {
+        this.hideButton = false;
       }
     }
   }
 
-  viewJob(jobId:string) {
+  viewJob(jobId: string) {
 
     if (jobId != undefined) {
       LocalStorageService.setLocalValue(LocalStorage.CURRENT_JOB_POSTED_ID, jobId);
@@ -42,7 +42,7 @@ export class CandiadteQCardComponent {
   }
 
 
-  blockJob(newVal:any) { //TODO prjakta
+  blockJob(newVal: any) { //TODO prjakta
     this.showModalStyle = !this.showModalStyle;
     this.candidateDashboardService.blockJob().subscribe(
       data => {
@@ -67,11 +67,11 @@ export class CandiadteQCardComponent {
       error => (console.log(error)));//TODO remove on error
   }
 
-  closeJob(){
+  closeJob() {
     this.showModalStyle = !this.showModalStyle;
   }
 
-  deleteItem(jobId:string){
+  deleteItem(jobId: string) {
 
     LocalStorageService.setLocalValue(LocalStorage.CURRENT_JOB_POSTED_ID, jobId);
     this.candidateDashboardService.removeBlockJob().subscribe(

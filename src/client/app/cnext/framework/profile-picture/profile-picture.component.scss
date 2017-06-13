@@ -1,4 +1,4 @@
-$border-color:  #e8e8e8;
+$border-color: #e8e8e8;
 
 .profile {
   padding: 0;
@@ -25,13 +25,13 @@ $border-color:  #e8e8e8;
     text-align: right;
   }
 
-  .avtar >  img {
+  .avtar > img {
     border-radius: 0;
     width: 100%;
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
   }
 
   [type='file'] {

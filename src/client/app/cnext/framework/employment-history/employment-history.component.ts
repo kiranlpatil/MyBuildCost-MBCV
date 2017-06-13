@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, Output} from "@angular/core";
 import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
 import {Candidate, Section} from "../model/candidate";
-import {FormGroup, FormArray, FormBuilder, Validators} from "@angular/forms";
+import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   moduleId: module.id,
@@ -11,21 +11,21 @@ import {FormGroup, FormArray, FormBuilder, Validators} from "@angular/forms";
 })
 
 export class EmploymentHistoryComponent {
-  @Input() candidate:Candidate;
-  @Input() highlightedSection:Section;
+  @Input() candidate: Candidate;
+  @Input() highlightedSection: Section;
   @Output() onComplete = new EventEmitter();
 
-  public employeeHistory:FormGroup;
+  public employeeHistory: FormGroup;
 
-  error_msg:string;
-  private emphis:EmpHis = new EmpHis();
-  private chkEmployeeHistory:boolean = false;
-  private isButtonShow:boolean = false;
-  private showButton:boolean = true;
-  private showAddButton:boolean = true;
-  tooltipMessage : string="<p class='info'>An individual may be exposed to multiple industries during the professional life.</p>";
+  error_msg: string;
+  private emphis: EmpHis = new EmpHis();
+  private chkEmployeeHistory: boolean = false;
+  private isButtonShow: boolean = false;
+  private showButton: boolean = true;
+  private showAddButton: boolean = true;
+  tooltipMessage: string = "<p class='info'>An individual may be exposed to multiple industries during the professional life.</p>";
 
-  constructor(private _fb:FormBuilder, private profileCreatorService:CandidateProfileService) {
+  constructor(private _fb: FormBuilder, private profileCreatorService: CandidateProfileService) {
   }
 
   ngOnInit() {
@@ -42,7 +42,7 @@ export class EmploymentHistoryComponent {
     })
   }
 
-  ngOnChanges(changes:any) {
+  ngOnChanges(changes: any) {
     /* if (this.candidate.employmentHistory.length == 0) {
      this.candidate.employmentHistory.push(new EmployementHistory());
      }
@@ -58,11 +58,11 @@ export class EmploymentHistoryComponent {
 
         this.emphis.emplyeeHistories = this.candidate.employmentHistory;
         /*for (let item of this.candidate.employmentHistory) {
-          this.form.controls['students'].push(new FormControl('This will not show'));
-          this.employeeHistory
-            .patchValue(this.emphis);
-          console.log(this.employeeHistory.value)
-        }*/
+         this.form.controls['students'].push(new FormControl('This will not show'));
+         this.employeeHistory
+         .patchValue(this.emphis);
+         console.log(this.employeeHistory.value)
+         }*/
 
         let controlArray = <FormArray>this.employeeHistory.controls['emplyeeHistories'];
         this.candidate.employmentHistory.forEach(item => {
@@ -70,7 +70,7 @@ export class EmploymentHistoryComponent {
           fb.patchValue(item);
           controlArray.push(fb);
         });
-        if(!this.candidate.employmentHistory) {
+        if (!this.candidate.employmentHistory) {
           this.addEmployeeHistory();
         }
 
@@ -98,32 +98,32 @@ export class EmploymentHistoryComponent {
     const control = <FormArray>this.employeeHistory.controls['emplyeeHistories'];
     const addrCtrl = this.initEmployeeHistory();
     control.push(addrCtrl);
-    this.showAddButton=false;
+    this.showAddButton = false;
     /* subscribe to individual address value changes
      addrCtrl.valueChanges.subscribe(x => {
      console.log(x);
      })*/
   }
 
-  removeEmployeeHistory(i:number) {
+  removeEmployeeHistory(i: number) {
     const control = <FormArray>this.employeeHistory.controls['emplyeeHistories'];
     control.removeAt(i);
     this.postData('dalete');
   }
 
-  save(model:any) {         //TODO Remove it
+  save(model: any) {         //TODO Remove it
     console.log(this.employeeHistory);
     console.log(model);
   }
 
-  postData(type:string) {
+  postData(type: string) {
     this.candidate.employmentHistory = this.employeeHistory.value.emplyeeHistories;
     this.profileCreatorService.addProfileDetail(this.candidate).subscribe(
       user => {
-        if(type=='next'){
+        if (type == 'next') {
           this.onNext();
         }
-        else if(type== 'save'){
+        else if (type == 'save') {
           this.onSave();
         }
       });
@@ -132,18 +132,19 @@ export class EmploymentHistoryComponent {
   onNext() {
     this.onComplete.emit();
     this.highlightedSection.name = "AcademicDetails";
-    this.highlightedSection.isDisable=false;
+    this.highlightedSection.isDisable = false;
   }
+
   onSave() {
     this.onComplete.emit();
     this.highlightedSection.name = "none";
-    this.highlightedSection.isDisable=false;
+    this.highlightedSection.isDisable = false;
   }
-  
+
 }
 
 export class EmpHis {
-  emplyeeHistories:any;
+  emplyeeHistories: any;
 }
 
 

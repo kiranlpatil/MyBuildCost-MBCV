@@ -15,43 +15,43 @@ import {Role} from "../model/role";
 
 export class CandidateProfileComponent implements OnInit {
 
-  private rolesForMain:Role[] = new Array(0);
-  private rolesForCapability:Role[] = new Array(0);
-  private rolesForComplexity:Role[] = new Array(0);
-  private roleList:string[] = new Array()
-  private primaryCapability:string[] = new Array();
-  private proficiencies:string[] = new Array();
-  private isComplexityPresent:boolean = false;
-  private isShowNext: boolean= true;
-  private isShowPrev: boolean= false;
-  whichStepsVisible:boolean[] = new Array(7);
-  private showCapability:boolean = false;
-  private showComplexity:boolean = false;
-  private showProfeciency:boolean = false;
-  private showIndustryExperience:boolean = false;
-  private showProfessionalData:boolean = false;
-  private showemploymentHistory:boolean = false;
-  private showAcademicsDetails:boolean = false;
-  private showCertificationDetails:boolean = false;
-  private showAwards:boolean = false;
-  private showAboutMySelf:boolean = false;
-  private isRolesShow:boolean = true;
-  private candidate:Candidate = new Candidate();
-  private candidateForRole:Role[];
-  private candidateForCapability:Role[];
-  private candidateForComplexity:Role[];
-  private showTooltip:boolean = false;
-  private setTimeoutId : any;
-  private showModalStyle:boolean = false;
-  private goto:boolean = false;
-  private highlightedSection:Section = new Section();
+  private rolesForMain: Role[] = new Array(0);
+  private rolesForCapability: Role[] = new Array(0);
+  private rolesForComplexity: Role[] = new Array(0);
+  private roleList: string[] = new Array()
+  private primaryCapability: string[] = new Array();
+  private proficiencies: string[] = new Array();
+  private isComplexityPresent: boolean = false;
+  private isShowNext: boolean = true;
+  private isShowPrev: boolean = false;
+  whichStepsVisible: boolean[] = new Array(7);
+  private showCapability: boolean = false;
+  private showComplexity: boolean = false;
+  private showProfeciency: boolean = false;
+  private showIndustryExperience: boolean = false;
+  private showProfessionalData: boolean = false;
+  private showemploymentHistory: boolean = false;
+  private showAcademicsDetails: boolean = false;
+  private showCertificationDetails: boolean = false;
+  private showAwards: boolean = false;
+  private showAboutMySelf: boolean = false;
+  private isRolesShow: boolean = true;
+  private candidate: Candidate = new Candidate();
+  private candidateForRole: Role[];
+  private candidateForCapability: Role[];
+  private candidateForComplexity: Role[];
+  private showTooltip: boolean = false;
+  private setTimeoutId: any;
+  private showModalStyle: boolean = false;
+  private goto: boolean = false;
+  private highlightedSection: Section = new Section();
 
-  constructor(private _router:Router,
-              private complexityService:ComplexityService,
-              private profileCreatorService:CandidateProfileService) {
+  constructor(private _router: Router,
+              private complexityService: ComplexityService,
+              private profileCreatorService: CandidateProfileService) {
 
     complexityService.showTest$.subscribe(
-      data=> {
+      data => {
         this.whichStepsVisible[3] = data;
         this.showComplexity = data;
       }
@@ -60,33 +60,33 @@ export class CandidateProfileComponent implements OnInit {
   }
 
 
-  showHide(isPrev: boolean){
-    let carouselData : any = document.getElementsByClassName("carousel-slide");
-    let isFound : boolean=false;
-    let isPrevFound : boolean=false;
+  showHide(isPrev: boolean) {
+    let carouselData: any = document.getElementsByClassName("carousel-slide");
+    let isFound: boolean = false;
+    let isPrevFound: boolean = false;
 
-    for(let index=0;index<carouselData.length;index++){
-      if(isPrev){
-        (index==1) ? carouselData[index].classList.contains("active") ?  isPrevFound =true: console.log(): console.log();
+    for (let index = 0; index < carouselData.length; index++) {
+      if (isPrev) {
+        (index == 1) ? carouselData[index].classList.contains("active") ? isPrevFound = true : console.log() : console.log();
       }
-      if(index==carouselData.length-2){
-        if(!isPrev){
-          carouselData[index].classList.contains("active") ?  isFound=true: console.log();
+      if (index == carouselData.length - 2) {
+        if (!isPrev) {
+          carouselData[index].classList.contains("active") ? isFound = true : console.log();
         }
       }
     }
-    (isFound) ? this.isShowNext =false : this.isShowNext = true;
-    (isPrevFound) ? this.isShowPrev =false : this.isShowPrev = true;
+    (isFound) ? this.isShowNext = false : this.isShowNext = true;
+    (isPrevFound) ? this.isShowPrev = false : this.isShowPrev = true;
   }
 
   ngOnInit() {
     this.whichStepsVisible[0] = true;
-    let item: any  = $('#myCarousel');
+    let item: any = $('#myCarousel');
     item.carousel({
       interval: false
     });
 
-    }
+  }
 
   onProfileDescriptionComplete() {
     this.saveCandidateDetails();
@@ -98,7 +98,7 @@ export class CandidateProfileComponent implements OnInit {
   }
 
 
-  onWorkAreaComplete(roles:Role[]) {
+  onWorkAreaComplete(roles: Role[]) {
     this.candidate.industry.roles = roles;
     this.saveCandidateDetails();
     this.candidateForCapability = this.candidate.industry.roles;
@@ -110,7 +110,7 @@ export class CandidateProfileComponent implements OnInit {
     this.whichStepsVisible[3] = false
   }
 
-  onCapabilityComplete(roles:Role[]) {
+  onCapabilityComplete(roles: Role[]) {
     this.candidate.industry.roles = roles;
     this.candidateForCapability = this.candidate.industry.roles;
     this.candidateForRole = this.candidate.industry.roles;
@@ -120,7 +120,7 @@ export class CandidateProfileComponent implements OnInit {
     this.whichStepsVisible[2] = true;
   }
 
-  onComplexitytyComplete(roles:Role[]) {
+  onComplexitytyComplete(roles: Role[]) {
     this.candidate.industry.roles = roles;
     var date = new Date();
     date.setDate(date.getDate() + 90);
@@ -133,18 +133,18 @@ export class CandidateProfileComponent implements OnInit {
     this.getProficiency();
   }
 
-  onProficiencySelect(proficiency:string[]) {
+  onProficiencySelect(proficiency: string[]) {
     this.candidate.proficiencies = proficiency;
     this.highlightedSection.isProficiencyFilled = true;
     this.saveCandidateDetails();
     this.whichStepsVisible[4] = true;
   }
 
-  onProficiencyComplete(event:any) {
+  onProficiencyComplete(event: any) {
     this.showIndustryExperience = true;
   }
 
-  onExperienceIndustrySelect(experiencedindustry:string[]) {
+  onExperienceIndustrySelect(experiencedindustry: string[]) {
     this.candidate.interestedIndustries = experiencedindustry;
     this.candidate.isCompleted = true;
     this.saveCandidateDetails();
@@ -162,7 +162,7 @@ export class CandidateProfileComponent implements OnInit {
     this.showAboutMySelf = true;
   }
 
-  onMoreAboutMySelfComplete(data:string) {
+  onMoreAboutMySelfComplete(data: string) {
     if (data != '') {
       this.whichStepsVisible[6] = true;
     } else {
@@ -259,7 +259,7 @@ export class CandidateProfileComponent implements OnInit {
         });
   }
 
-  OnCandidateDataSuccess(candidateData:any) {
+  OnCandidateDataSuccess(candidateData: any) {
     this.candidate = candidateData.data[0];
     this.candidate.basicInformation = candidateData.metadata;
     this.candidateForRole = candidateData.data[0].industry.roles;
@@ -374,11 +374,11 @@ export class CandidateProfileComponent implements OnInit {
      }*/
   }
 
-  dateDifferenceInDays(currentDate:Date, storedDate:Date) {
+  dateDifferenceInDays(currentDate: Date, storedDate: Date) {
     return Math.floor(( Date.UTC(storedDate.getFullYear(), storedDate.getMonth(), storedDate.getDate()) - Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate())) / (1000 * 60 * 60 * 24));
   }
 
-  showorhide(type:string, event:any) {
+  showorhide(type: string, event: any) {
     if (type == "show") {
       if (event.target.checked) {
         this.candidate.isVisible = true;
@@ -400,12 +400,13 @@ export class CandidateProfileComponent implements OnInit {
 
   saveCandidateDetails() {
     this.profileCreatorService.addProfileDetail(this.candidate).subscribe(
-      user => {});
+      user => {
+      });
   }
 
   onSubmit() {
     this.showModalStyle = !this.showModalStyle;
-    if(this.setTimeoutId!==undefined) {
+    if (this.setTimeoutId !== undefined) {
       clearTimeout(this.setTimeoutId);
     }
     this._router.navigate([NavigationRoutes.APP_CANDIDATE_DASHBOARD]);
@@ -414,7 +415,7 @@ export class CandidateProfileComponent implements OnInit {
 
   showHideModal() {
     this.showModalStyle = !this.showModalStyle;
-    this.setTimeoutId = setTimeout(()=> {
+    this.setTimeoutId = setTimeout(() => {
       this.onSubmit();
     }, 1000 * 11);
   }

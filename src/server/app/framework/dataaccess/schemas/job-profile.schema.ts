@@ -15,40 +15,40 @@ var mongooseConnection = DataAccess.mongooseConnection;
 class JobProfileSchema {
   static get schema() {
     var schema = mongoose.Schema({
-      jobTitle :{
-        type : String
+      jobTitle: {
+        type: String
       },
-      hiringManager :{
-        type : String
+      hiringManager: {
+        type: String
       },
-      department :{
-        type : String
+      department: {
+        type: String
       },
-      education :{
-        type : String
+      education: {
+        type: String
       },
-      experience :{
-        type : String
+      experience: {
+        type: String
       },
-      salary :{
-        type : String
+      salary: {
+        type: String
       },
-      proficiencies :{
-        names : [String]
+      proficiencies: {
+        names: [String]
       },
-      mandatoryProficiencies :{
-        names : [String]
+      mandatoryProficiencies: {
+        names: [String]
       },
-      industry:{
-        name:String,
+      industry: {
+        name: String,
         roles: [{
           name: String,
           capabilities: [{
             complexities: [{
               scenarios: {
-                isChecked : Boolean,
+                isChecked: Boolean,
                 name: String,
-                code:String
+                code: String
               },
               name: String
             }],
@@ -56,18 +56,18 @@ class JobProfileSchema {
           }]
         }]
       },
-      competencies :{
-        type : String
+      competencies: {
+        type: String
       },
-      responsibility :{
-        type : String
+      responsibility: {
+        type: String
       },
-      postingDate :{
-        type : Date
+      postingDate: {
+        type: Date
       },
-      interestedIndustries:[{type:String}]
+      interestedIndustries: [{type: String}]
 
-    },{ versionKey: false });
+    }, {versionKey: false});
 
     return schema;
   }

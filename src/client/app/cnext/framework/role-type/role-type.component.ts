@@ -1,4 +1,4 @@
-import {Component, Input, Output, EventEmitter} from "@angular/core";
+import {Component, EventEmitter, Input, Output} from "@angular/core";
 
 @Component({
   moduleId: module.id,
@@ -9,22 +9,23 @@ import {Component, Input, Output, EventEmitter} from "@angular/core";
 
 export class RoleTypetListComponent {
 
-  @Input() roleTypes:string[] = new Array(0);
-  @Input() candidateRoletype:string='';
-  @Output() selectRoleType=new EventEmitter();
-  private selectedRoletype:string='';
+  @Input() roleTypes: string[] = new Array(0);
+  @Input() candidateRoletype: string = '';
+  @Output() selectRoleType = new EventEmitter();
+  private selectedRoletype: string = '';
   private showModalStyle: boolean = false;
-  private disableRoletype: boolean=false;
-  private disableButton: boolean=true;
+  private disableRoletype: boolean = false;
+  private disableButton: boolean = true;
 
-  ngOnChanges (changes:any) {
+  ngOnChanges(changes: any) {
     if (changes.roleTypes != undefined) {
       if (changes.roleTypes.currentValue != undefined)
         this.roleTypes = changes.roleTypes.currentValue;
     }
   }
-  choosedRoleType(roleType:string) {
-    this.disableButton=false;
+
+  choosedRoleType(roleType: string) {
+    this.disableButton = false;
     this.selectedRoletype = roleType;
   }
 
@@ -33,7 +34,7 @@ export class RoleTypetListComponent {
   }
 
   disableRoleltype() {
-    this.disableRoletype= true;
+    this.disableRoletype = true;
     this.showModalStyle = !this.showModalStyle;
     this.selectRoleType.emit(this.selectedRoletype);
   }

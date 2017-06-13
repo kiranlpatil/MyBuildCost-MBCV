@@ -1,116 +1,116 @@
-import {  Component, OnInit, ElementRef, HostListener  } from '@angular/core';
-import {  MessageService, Message, CommonService  } from '../../shared/index';
-import {  Router  } from '@angular/router';
-import {  Subscription  } from 'rxjs/Subscription';
-import {  ProfileService  } from '../../shared/profileservice/profile.service';
-import {  UserProfile  } from '../../dashboard/user';
-import {  DashboardService  } from '../../dashboard/dashboard.service';
-import {  AppSettings, ImagePath, LocalStorage, NavigationRoutes  } from '../../shared/constants';
-import {  LocalStorageService  } from '../../shared/localstorage.service';
+import {Component, ElementRef, HostListener, OnInit} from "@angular/core";
+import {CommonService, Message, MessageService} from "../../shared/index";
+import {Router} from "@angular/router";
+import {Subscription} from "rxjs/Subscription";
+import {ProfileService} from "../../shared/profileservice/profile.service";
+import {UserProfile} from "../../dashboard/user";
+import {DashboardService} from "../../dashboard/dashboard.service";
+import {AppSettings, ImagePath, LocalStorage, NavigationRoutes} from "../../shared/constants";
+import {LocalStorageService} from "../../shared/localstorage.service";
 
 @Component({
-    moduleId: module.id,
-    selector: 'tpl-header',
-    templateUrl: 'header.component.html',
-    styleUrls: ['header.component.css'],
+  moduleId: module.id,
+  selector: 'tpl-header',
+  templateUrl: 'header.component.html',
+  styleUrls: ['header.component.css'],
 })
 
 export class HeaderComponent implements OnInit {
-    model = new UserProfile();
-    public isClassVisible:boolean = false;
-    public isOpenProfile:boolean = false;
-    public isOpenNotification:boolean = false;
-    subscription:Subscription;
-    PROFILE_IMG_PATH:string;
-    MY_LOGO:string;
-    newUser:number;
+  model = new UserProfile();
+  public isClassVisible: boolean = false;
+  public isOpenProfile: boolean = false;
+  public isOpenNotification: boolean = false;
+  subscription: Subscription;
+  PROFILE_IMG_PATH: string;
+  MY_LOGO: string;
+  newUser: number;
 
-    @HostListener('document:click', ['$event']) onClick(event:any) {
-        if (!this._eref.nativeElement.contains(event.target)) {
-            this.isOpenProfile = false;
-            this.isOpenNotification = false;
-        }
+  @HostListener('document:click', ['$event']) onClick(event: any) {
+    if (!this._eref.nativeElement.contains(event.target)) {
+      this.isOpenProfile = false;
+      this.isOpenNotification = false;
     }
+  }
 
-    constructor(private _router:Router, private commonService:CommonService, private dashboardService:DashboardService,
-                private profileService:ProfileService, private messageService:MessageService,
-                private _eref:ElementRef) {
-        this.subscription = profileService.profileUpdateObservable$.subscribe(
-            (user:UserProfile) => {
-                this.onUserProfileSuccess(user);
-            });
+  constructor(private _router: Router, private commonService: CommonService, private dashboardService: DashboardService,
+              private profileService: ProfileService, private messageService: MessageService,
+              private _eref: ElementRef) {
+    this.subscription = profileService.profileUpdateObservable$.subscribe(
+      (user: UserProfile) => {
+        this.onUserProfileSuccess(user);
+      });
 
-        this.PROFILE_IMG_PATH = ImagePath.PROFILE_IMG_ICON;
-        this.MY_LOGO = ImagePath.MY_COLOR_LOGO;
-    }
+    this.PROFILE_IMG_PATH = ImagePath.PROFILE_IMG_ICON;
+    this.MY_LOGO = ImagePath.MY_COLOR_LOGO;
+  }
 
-    ngOnInit() {
-        this.newUser = parseInt(LocalStorageService.getLocalValue(LocalStorage.IS_LOGGED_IN));
-        if (this.newUser === 0) {
-            this._router.navigate([NavigationRoutes.APP_START]);
-        } else {
-            this.getUserProfile();
-        }
-    }
-
-    getUserProfile() {
-        this.dashboardService.getUserProfile()
-            .subscribe(
-                userprofile => this.onUserProfileSuccess(userprofile),
-                error => this.OnUserProfileFail(error));
-    }
-
-    onUserProfileSuccess(user:any) {
-        this.model = user.data;
-      var socialLogin:string = LocalStorageService.getLocalValue(LocalStorage.IS_SOCIAL_LOGIN);
-     if(socialLogin === AppSettings.IS_SOCIAL_LOGIN_YES) {
-        this.PROFILE_IMG_PATH = this.model.social_profile_picture;
-      } else if (!this.model.picture || this.model.picture === undefined) {
-            this.PROFILE_IMG_PATH = ImagePath.PROFILE_IMG_ICON;
-        } else {
-            this.PROFILE_IMG_PATH = AppSettings.IP + this.model.picture.substring(4).replace('"', '');
-     }
-    }
-
-    OnUserProfileFail(error:any) {
-        var message = new Message();
-        message.error_msg = error.err_msg;
-        message.isError = true;
-        this.messageService.message(message);
-    }
-
-    navigateTo(nav:string) {
-        if (nav !== undefined) {
-            this._router.navigate([nav]);
-        }
-    }
-
-    toggleMenu() {
-        this.isClassVisible = !this.isClassVisible;
-        this.isOpenNotification = false;
-        this.isOpenProfile = false;
-    }
-
-    openDropdownNotification() {
-        this.isOpenNotification = !this.isOpenNotification;
-        this.isOpenProfile = false;
-    }
-
-    openDropdownProfile() {
-        this.isOpenProfile = !this.isOpenProfile;
-        this.isOpenNotification = false;
-    }
-
-    closeMenu() {
-        this.isClassVisible = false;
-    }
-
-    logOut() {
-      window.localStorage.clear();
+  ngOnInit() {
+    this.newUser = parseInt(LocalStorageService.getLocalValue(LocalStorage.IS_LOGGED_IN));
+    if (this.newUser === 0) {
       this._router.navigate([NavigationRoutes.APP_START]);
+    } else {
+      this.getUserProfile();
     }
+  }
 
-    closeNotificationDropdown() {
-        this.isOpenNotification = false;
+  getUserProfile() {
+    this.dashboardService.getUserProfile()
+      .subscribe(
+        userprofile => this.onUserProfileSuccess(userprofile),
+        error => this.OnUserProfileFail(error));
+  }
+
+  onUserProfileSuccess(user: any) {
+    this.model = user.data;
+    var socialLogin: string = LocalStorageService.getLocalValue(LocalStorage.IS_SOCIAL_LOGIN);
+    if (socialLogin === AppSettings.IS_SOCIAL_LOGIN_YES) {
+      this.PROFILE_IMG_PATH = this.model.social_profile_picture;
+    } else if (!this.model.picture || this.model.picture === undefined) {
+      this.PROFILE_IMG_PATH = ImagePath.PROFILE_IMG_ICON;
+    } else {
+      this.PROFILE_IMG_PATH = AppSettings.IP + this.model.picture.substring(4).replace('"', '');
     }
+  }
+
+  OnUserProfileFail(error: any) {
+    var message = new Message();
+    message.error_msg = error.err_msg;
+    message.isError = true;
+    this.messageService.message(message);
+  }
+
+  navigateTo(nav: string) {
+    if (nav !== undefined) {
+      this._router.navigate([nav]);
+    }
+  }
+
+  toggleMenu() {
+    this.isClassVisible = !this.isClassVisible;
+    this.isOpenNotification = false;
+    this.isOpenProfile = false;
+  }
+
+  openDropdownNotification() {
+    this.isOpenNotification = !this.isOpenNotification;
+    this.isOpenProfile = false;
+  }
+
+  openDropdownProfile() {
+    this.isOpenProfile = !this.isOpenProfile;
+    this.isOpenNotification = false;
+  }
+
+  closeMenu() {
+    this.isClassVisible = false;
+  }
+
+  logOut() {
+    window.localStorage.clear();
+    this._router.navigate([NavigationRoutes.APP_START]);
+  }
+
+  closeNotificationDropdown() {
+    this.isOpenNotification = false;
+  }
 }

@@ -6,8 +6,8 @@ import ProficiencyModel = require("../dataaccess/model/proficiency.model");
 import ProficiencyService = require("../services/proficiency.service");
 import AuthInterceptor = require("../interceptor/auth.interceptor");
 
-export function create(req:express.Request, res:express.Response, next:any) {
-  var proficiencyModel:ProficiencyModel = <ProficiencyModel>req.body;
+export function create(req: express.Request, res: express.Response, next: any) {
+  var proficiencyModel: ProficiencyModel = <ProficiencyModel>req.body;
   var proficiencyService = new ProficiencyService();
   proficiencyService.create(proficiencyModel, (error, result) => {
     if (error) {
@@ -16,7 +16,7 @@ export function create(req:express.Request, res:express.Response, next:any) {
     }
     else {
       res.status(200).send({
-        "status":  "success",
+        "status": "success",
       });
     }
 
@@ -25,7 +25,7 @@ export function create(req:express.Request, res:express.Response, next:any) {
 
 }
 
-export function retrieve(req:express.Request, res:express.Response, next:any) {
+export function retrieve(req: express.Request, res: express.Response, next: any) {
   try {
     var proficiencyService = new ProficiencyService();
     var params = req.params.id;
@@ -50,7 +50,7 @@ export function retrieve(req:express.Request, res:express.Response, next:any) {
   }
 }
 
-export function update(req:express.Request, res:express.Response, next:any) {
+export function update(req: express.Request, res: express.Response, next: any) {
 
 
   try {

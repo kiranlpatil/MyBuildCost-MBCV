@@ -4,13 +4,11 @@ import {CandidateService} from "./candidate.service";
 import {CandidateDetail} from "./candidate";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ValidationService} from "../../shared/customvalidations/validation.service";
-import {Message, MessageService, CommonService, NavigationRoutes, AppSettings} from "../../shared/index";
-import {ImagePath, LocalStorage, ValueConstant} from "../../shared/constants";
+import {AppSettings, CommonService, Message, MessageService, NavigationRoutes} from "../../shared/index";
+import {ImagePath, LocalStorage} from "../../shared/constants";
 import {LocalStorageService} from "../../shared/localstorage.service";
-import {LoaderService} from "../../shared/loader/loader.service";
-import {Http, Response} from "@angular/http";
 import {DateService} from "../../../cnext/framework/date.service";
-import {  Location  } from '../location';
+import {Location} from "../location";
 import {MyGoogleAddress} from "./google-our-place/my-google-address";
 @Component({
   moduleId: module.id,
@@ -21,7 +19,7 @@ import {MyGoogleAddress} from "./google-our-place/my-google-address";
 
 export class CandidateComponent implements OnInit {
   private model = new CandidateDetail();
-  private storedLoaction:Location=new Location();
+  private storedLoaction: Location = new Location();
   private isPasswordConfirm: boolean;
   private isFormSubmitted = false;
   private userForm: FormGroup;
@@ -38,9 +36,9 @@ export class CandidateComponent implements OnInit {
               private candidateService: CandidateService, private messageService: MessageService, private formBuilder: FormBuilder) {
 
     this.userForm = this.formBuilder.group({
-      'first_name': ['',ValidationService.requireFirstNameValidator],
-      'last_name': ['',ValidationService.requireLastNameValidator],
-      'mobile_number': ['',[ValidationService.requireMobileNumberValidator, ValidationService.mobileNumberValidator]],
+      'first_name': ['', ValidationService.requireFirstNameValidator],
+      'last_name': ['', ValidationService.requireLastNameValidator],
+      'mobile_number': ['', [ValidationService.requireMobileNumberValidator, ValidationService.mobileNumberValidator]],
       'email': ['', [ValidationService.requireEmailValidator, ValidationService.emailValidator]],
       'password': ['', [ValidationService.requirePasswordValidator, ValidationService.passwordValidator]],
       'confirm_password': ['', ValidationService.requireConfirmPasswordValidator],
@@ -65,10 +63,10 @@ export class CandidateComponent implements OnInit {
     this.model.birth_year = newval;
   }
 
-  getAddress(address :MyGoogleAddress){
-   this.storedLoaction.city= address.city;
-   this.storedLoaction.state= address.state;
-   this.storedLoaction.country= address.country;
+  getAddress(address: MyGoogleAddress) {
+    this.storedLoaction.city = address.city;
+    this.storedLoaction.state = address.state;
+    this.storedLoaction.country = address.country;
   }
 
   onSubmit() {

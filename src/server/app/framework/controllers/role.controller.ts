@@ -5,10 +5,9 @@ import ResponseService = require("../shared/response.service");
 import RoleModel = require("../dataaccess/model/role.model");
 import RoleService = require("../services/role.service");
 import IndustryService = require("../services/industry.service");
-import * as mongoose from "mongoose";
 
 
-export function retrieve(req:express.Request, res:express.Response, next:any) {
+export function retrieve(req: express.Request, res: express.Response, next: any) {
   try {
     var roleService = new RoleService();
     var industryService = new IndustryService();

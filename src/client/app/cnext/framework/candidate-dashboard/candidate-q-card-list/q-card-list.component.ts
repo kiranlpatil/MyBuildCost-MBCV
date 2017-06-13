@@ -1,4 +1,4 @@
-import {Component, Input, EventEmitter, Output, OnChanges} from "@angular/core";
+import {Component, EventEmitter, Input, OnChanges, Output} from "@angular/core";
 import {JobQcard} from "../../model/JobQcard";
 import {QCardFilterService} from "../../filters/q-card-filter.service";
 import {QCardsortBy} from "../../model/q-cardview-sortby";
@@ -12,15 +12,15 @@ import {QCardFilter} from "../../model/q-card-filter";
 
 })
 export class QcardListComponent implements OnChanges {
-  @Input() listOfJobs:JobQcard[];
-  @Input() type:string;
-  @Input() joblistCount:any;
-  @Output() onAction=new EventEmitter();
-  private filterMeta : QCardFilter;
+  @Input() listOfJobs: JobQcard[];
+  @Input() type: string;
+  @Input() joblistCount: any;
+  @Output() onAction = new EventEmitter();
+  private filterMeta: QCardFilter;
   private qCardModel: QCardsortBy = new QCardsortBy();
-  private qCardCount = {count:0};
+  private qCardCount = {count: 0};
 
-  constructor(private qCardFilterService:QCardFilterService) {
+  constructor(private qCardFilterService: QCardFilterService) {
     this.qCardFilterService.candidateFilterValue$.subscribe(
       (data: QCardFilter) => {
         this.filterMeta = data;
@@ -33,9 +33,10 @@ export class QcardListComponent implements OnChanges {
     this.qCardCount.count = this.listOfJobs.length;
   }
 
-  onActionPerform(action:string){
+  onActionPerform(action: string) {
     this.onAction.emit(action);
   }
+
   clearFilter() {
     this.qCardFilterService.clearFilter();
   }

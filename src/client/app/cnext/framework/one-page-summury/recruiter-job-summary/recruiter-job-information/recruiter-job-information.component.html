@@ -1,37 +1,38 @@
 <div class="basic-description" *ngIf="recruiter != undefined">
 
   <div class="basic-info clearfix">
-    <img src= "assets/framework/images/dashboard/profile.png" alt="User Profile" *ngIf="recruiter.company_logo==undefined"/>
-    <img [src]="getImagePath(recruiter.company_logo)"  alt="User Profile" *ngIf="recruiter.company_logo!=undefined"/>
+    <img src="assets/framework/images/dashboard/profile.png" alt="User Profile"
+         *ngIf="recruiter.company_logo==undefined"/>
+    <img [src]="getImagePath(recruiter.company_logo)" alt="User Profile" *ngIf="recruiter.company_logo!=undefined"/>
     <p class="name">{{recruiter.company_name}}</p>
   </div>
 
 
   <div class="details clearfix" *ngFor="let postedJob of recruiter.postedJobs">
-      <label>Job Title</label>
-      <span>{{postedJob.jobTitle}}</span>
-      <label>Hiring Manger</label>
-      <span>{{postedJob.hiringManager}}</span>
-      <label>Department</label>
-      <span>{{postedJob.department}}</span>
-      <label>Industry</label>
-      <span>{{postedJob.industry.name}}</span>
-      <label>Specialization area</label>
-      <span *ngFor="let role of postedJob.industry.roles;let i = index">{{role.name}}
+    <label>Job Title</label>
+    <span>{{postedJob.jobTitle}}</span>
+    <label>Hiring Manger</label>
+    <span>{{postedJob.hiringManager}}</span>
+    <label>Department</label>
+    <span>{{postedJob.department}}</span>
+    <label>Industry</label>
+    <span>{{postedJob.industry.name}}</span>
+    <label>Specialization area</label>
+    <span *ngFor="let role of postedJob.industry.roles;let i = index">{{role.name}}
         <span *ngIf="postedJob.industry.roles.length>1 &&  i!=postedJob.industry.roles.length-1">,</span>
       </span>
-      <label>Industry Exposure</label>
-      <span *ngFor="let industry of postedJob.interestedIndustries;let i = index">{{industry}}<span
-        *ngIf="recruiter.postedJobs[0].interestedIndustries.length>1 && i!=postedJob.interestedIndustries-1">,</span>
+    <label>Industry Exposure</label>
+    <span *ngFor="let industry of postedJob.interestedIndustries;let i = index">{{industry}}<span
+      *ngIf="recruiter.postedJobs[0].interestedIndustries.length>1 && i!=postedJob.interestedIndustries-1">,</span>
       </span>
-      <label>Education</label>
-      <span>{{postedJob.education}}</span>
-      <label>Experience</label>
-      <span>{{postedJob.experience}}</span>
-      <label>Joining Period</label>
-      <span>{{postedJob.joiningPeriod}}</span>
-      <label>Location</label>
-      <span>pune</span>
+    <label>Education</label>
+    <span>{{postedJob.education}}</span>
+    <label>Experience</label>
+    <span>{{postedJob.experience}}</span>
+    <label>Joining Period</label>
+    <span>{{postedJob.joiningPeriod}}</span>
+    <label>Location</label>
+    <span>pune</span>
   </div>
 </div>
 

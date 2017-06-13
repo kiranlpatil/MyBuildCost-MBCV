@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { RecruiterDashboardService } from './recruiter-dashboard.service';
-import { RecruiterDashboard } from '../model/recruiter-dashboard';
-import { RecruiterHeaderDetails } from '../model/recuirterheaderdetails';
-import { ActivatedRoute} from '@angular/router';
+import {Component, OnInit} from "@angular/core";
+import {RecruiterDashboardService} from "./recruiter-dashboard.service";
+import {RecruiterDashboard} from "../model/recruiter-dashboard";
+import {RecruiterHeaderDetails} from "../model/recuirterheaderdetails";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   moduleId: module.id,
@@ -13,14 +13,14 @@ import { ActivatedRoute} from '@angular/router';
 
 export class RecruiterDashboardComponent implements OnInit {
   company_name: string;
-/*  test : string="HI <p>helll</p> hiidhi<div>dssddsds</div>";*/
+  /*  test : string="HI <p>helll</p> hiidhi<div>dssddsds</div>";*/
   private recruiterDashboard: RecruiterDashboard = new RecruiterDashboard();
   private recruiterHeaderDetails: RecruiterHeaderDetails = new RecruiterHeaderDetails();
-  private tabName : string;
-  private showTabsForJobPoster:boolean = false;
+  private tabName: string;
+  private showTabsForJobPoster: boolean = false;
 
-  constructor( private recruiterDashboardService: RecruiterDashboardService,
-               private activatedRoute:ActivatedRoute) {
+  constructor(private recruiterDashboardService: RecruiterDashboardService,
+              private activatedRoute: ActivatedRoute) {
   }
 
 
@@ -36,7 +36,7 @@ export class RecruiterDashboardComponent implements OnInit {
   ngOnInit() {
     this.activatedRoute.params.subscribe(params => {
       this.tabName = params['id'];
-      if(this.tabName === 'post_new_job') {
+      if (this.tabName === 'post_new_job') {
         let matcheElement: any = document.getElementById('post_job');
         matcheElement.click();
       }

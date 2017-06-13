@@ -1,16 +1,16 @@
-import {  Component, OnInit, OnDestroy  } from '@angular/core';
-import {  Router  } from '@angular/router';
-import { ImagePath, LoaderService } from '../shared/index';
+import {Component} from "@angular/core";
+import {ImagePath} from "../shared/index";
 
 @Component({
-    moduleId: module.id,
-    selector: 'landing-page',
-    templateUrl: 'landing-page.component.html',
-    styleUrls: ['landing-page.component.css'],
+  moduleId: module.id,
+  selector: 'landing-page',
+  templateUrl: 'landing-page.component.html',
+  styleUrls: ['landing-page.component.css'],
 })
 export class LandingPageComponent {
-    BODY_BACKGROUND:string;
-    constructor() {
-        this.BODY_BACKGROUND = ImagePath.BODY_BACKGROUND;
-    }
+  BODY_BACKGROUND: string;
+
+  constructor() {
+    this.BODY_BACKGROUND = ImagePath.BODY_BACKGROUND;
+  }
 }

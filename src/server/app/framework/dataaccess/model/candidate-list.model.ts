@@ -1,6 +1,5 @@
-
 interface CandidateListModel {
-    name : string;
-    ids : string[];
+  name: string;
+  ids: string[];
 }
 export = CandidateListModel;

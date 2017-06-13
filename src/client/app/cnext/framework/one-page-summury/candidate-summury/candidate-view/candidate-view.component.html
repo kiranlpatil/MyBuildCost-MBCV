@@ -1,19 +1,20 @@
 <section class="container one-page-summary" *ngIf="candidate != undefined && candidateDetails != undefined">
   <div class="col-sm-3 left-content">
     <div>
-      <cn-candidate-description [candidateDetails]="candidateDetails" [candidate]="candidate"></cn-candidate-description>
+      <cn-candidate-description [candidateDetails]="candidateDetails"
+                                [candidate]="candidate"></cn-candidate-description>
     </div>
     <div *ngIf="candidate.employmentHistory.length>0">
-      <cn-vertical-list-view [data]="candidate.employmentHistory" [type]="'employment history'" ></cn-vertical-list-view>
+      <cn-vertical-list-view [data]="candidate.employmentHistory" [type]="'employment history'"></cn-vertical-list-view>
     </div>
     <div *ngIf="candidate.academics.length>0">
-      <cn-vertical-list-view [data]="candidate.academics" [type]="'acedemic details'" ></cn-vertical-list-view>
+      <cn-vertical-list-view [data]="candidate.academics" [type]="'acedemic details'"></cn-vertical-list-view>
     </div>
     <div *ngIf="candidate.awards.length>0">
-      <cn-vertical-list-view [data]="candidate.awards" [type]="'awards'" ></cn-vertical-list-view>
+      <cn-vertical-list-view [data]="candidate.awards" [type]="'awards'"></cn-vertical-list-view>
     </div>
     <div *ngIf="candidate.certifications.length>0">
-      <cn-vertical-list-view [data]="candidate.certifications" [type]="'certifications'" ></cn-vertical-list-view>
+      <cn-vertical-list-view [data]="candidate.certifications" [type]="'certifications'"></cn-vertical-list-view>
     </div>
     <!-- <div>
       <cn-contact-details [candidateDetails]="candidateDetails"></cn-contact-details>
@@ -27,7 +28,7 @@
 
     <div class="col-sm-12">
       <div *ngIf="secondaryCapabilities.length>0">
-        <h4 >Supplimentry Capabilities</h4>
+        <h4>Supplimentry Capabilities</h4>
         <cn-horizontal-list-view [data]="secondaryCapabilities"></cn-horizontal-list-view>
       </div>
       <h4>Proficiency In</h4>

@@ -6,29 +6,29 @@ var mongoose = DataAccess.mongooseInstance;
 var mongooseConnection = DataAccess.mongooseConnection;
 
 class EmploymentHistorySchema {
-    static get schema() {
-        var schema = mongoose.Schema({
+  static get schema() {
+    var schema = mongoose.Schema({
 
-          companyName : {
-            type : String
-          },
-          designation : {
-            type : String
-          },
-          from : {
-            type : Date
-          },
-          to :{
-            type: Date
-          },
-          remark :{
-            type: String
-          }
+      companyName: {
+        type: String
+      },
+      designation: {
+        type: String
+      },
+      from: {
+        type: Date
+      },
+      to: {
+        type: Date
+      },
+      remark: {
+        type: String
+      }
 
-        },{ versionKey: false });
+    }, {versionKey: false});
 
-        return schema;
-    }
+    return schema;
+  }
 }
 var schema = mongooseConnection.model<IProfessionalDetails>("EmploymentHistory", EmploymentHistorySchema.schema);
 export = schema;

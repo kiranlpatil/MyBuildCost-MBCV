@@ -1,5 +1,4 @@
-import {Component, Input, Output, EventEmitter} from "@angular/core";
-import {Router} from "@angular/router";
+import {Component, EventEmitter, Input, Output} from "@angular/core";
 import {Industry} from "../model/industry";
 import {Candidate, Section} from "../model/candidate";
 import {AppSettings} from "../../../framework/shared/constants";
@@ -14,23 +13,23 @@ import {CandidateDetail} from "../../../framework/registration/candidate/candida
 })
 
 export class ProfileDescriptionComponent {
-  @Input() candidate:Candidate = new Candidate();
+  @Input() candidate: Candidate = new Candidate();
   @Input() highlightedSection: Section;
   @Output() onComplete = new EventEmitter();
 
- // private compactView:boolean=true;
-  private disableButton:boolean=true;
-  private showButton:boolean=true;
-  private candidateDetails:CandidateDetail = new CandidateDetail();
-  private image_path:string='assets/framework/images/dashboard/profile.png' ;
-  tooltipMessage : string=
-      "<ul>" +
-      "<li><h5> Job Title </h5><p>Enter your current job title</p></li>" +
-      "<li><h5>Core Industry</h5><p>Enter your core Industry in which you are working or have your maximum experience</p></li>" +
-      "<li><h5>Profile Picture</h5><p>Please update your latest profile picture. Profiles with your best picture increase your possiblity to get shortlisted.</p></li>" +
-      "</ul>";
+  // private compactView:boolean=true;
+  private disableButton: boolean = true;
+  private showButton: boolean = true;
+  private candidateDetails: CandidateDetail = new CandidateDetail();
+  private image_path: string = 'assets/framework/images/dashboard/profile.png';
+  tooltipMessage: string =
+    "<ul>" +
+    "<li><h5> Job Title </h5><p>Enter your current job title</p></li>" +
+    "<li><h5>Core Industry</h5><p>Enter your core Industry in which you are working or have your maximum experience</p></li>" +
+    "<li><h5>Profile Picture</h5><p>Please update your latest profile picture. Profiles with your best picture increase your possiblity to get shortlisted.</p></li>" +
+    "</ul>";
 
-  constructor(private userProfileService:DashboardService) {
+  constructor(private userProfileService: DashboardService) {
   }
 
   ngOnInit() {
@@ -38,8 +37,8 @@ export class ProfileDescriptionComponent {
       .subscribe(
         userprofile => {
           this.candidateDetails = userprofile.data;
-          if(this.candidateDetails.picture != undefined ){
-          this.image_path = AppSettings.IP + this.candidateDetails.picture.substring(4).replace('"', '');
+          if (this.candidateDetails.picture != undefined) {
+            this.image_path = AppSettings.IP + this.candidateDetails.picture.substring(4).replace('"', '');
           }
         });
   }
@@ -55,24 +54,25 @@ export class ProfileDescriptionComponent {
   //   }
   // }
 
-  onIndustryChange(newIndustry:Industry) {
+  onIndustryChange(newIndustry: Industry) {
     if (newIndustry !== undefined && newIndustry.name !== "") {
       if (this.candidate.industry.name !== newIndustry.name) {
         this.candidate.industry = newIndustry;
-        this.candidate.industry.roles=new Array();
-        this.disableButton=false;
+        this.candidate.industry.roles = new Array();
+        this.disableButton = false;
       }
     }
   }
 
-  onPictureUpload(imagePath:string){
-this.candidate.basicInformation.picture=imagePath;
-    this.image_path=AppSettings.IP + imagePath.substring(4).replace('"', '');
+  onPictureUpload(imagePath: string) {
+    this.candidate.basicInformation.picture = imagePath;
+    this.image_path = AppSettings.IP + imagePath.substring(4).replace('"', '');
   }
+
   onNext() {
 //    this.compactView = true;
     this.highlightedSection.name = "Work-Area";
-    this.highlightedSection.isDisable=false;
+    this.highlightedSection.isDisable = false;
 
     this.onComplete.emit(this.candidate);
     let height = screen.height;
@@ -80,10 +80,11 @@ this.candidate.basicInformation.picture=imagePath;
     var top = p.offsetTop;
     window.scrollBy(0, -(top - 50));
   }
+
   onSave() {
 //    this.compactView = true;
     this.highlightedSection.name = "none";
-    this.highlightedSection.isDisable=false;
+    this.highlightedSection.isDisable = false;
     this.onComplete.emit(this.candidate);
     this.showButton = true;
   }

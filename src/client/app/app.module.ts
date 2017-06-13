@@ -5,11 +5,11 @@ import {APP_BASE_HREF} from "@angular/common";
 import {RouterModule} from "@angular/router";
 import {RecaptchaModule} from "ng2-recaptcha";
 import {routes} from "./app.routes";
-import {HttpModule, Http, XHRBackend, RequestOptions} from "@angular/http";
+import {Http, HttpModule, RequestOptions, XHRBackend} from "@angular/http";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {ValidationService} from "./framework/shared/customvalidations/validation.service";
 import {ControlMessagesComponent} from "./framework/shared/customvalidations/controlmessages.component";
-import {MessageService, AppRequestOptions, CustomHttp, LoaderService} from "./framework/shared/index";
+import {AppRequestOptions, CustomHttp, LoaderService, MessageService} from "./framework/shared/index";
 import {LoginComponent} from "./framework/login/login.component";
 import {DashboardComponent} from "./framework/dashboard/dashboard.component";
 import {ChangePasswordComponent} from "./framework/password/change-password/change-password.component";
@@ -164,7 +164,7 @@ import {JobCompareViewComponent} from "./cnext/framework/single-page-compare-vie
   imports: [
     BrowserModule,
     FormsModule,
-  //  GooglePlaceModule,
+    //  GooglePlaceModule,
     RouterModule.forRoot(routes),
     HttpModule,
     ReactiveFormsModule,
@@ -273,8 +273,8 @@ import {JobCompareViewComponent} from "./cnext/framework/single-page-compare-vie
   providers: [
     {
       provide: Http,
-      useFactory: (backend:XHRBackend, defaultOptions:RequestOptions, messageService:MessageService,
-                   loaderService:LoaderService) => new CustomHttp(backend, defaultOptions, messageService, loaderService),
+      useFactory: (backend: XHRBackend, defaultOptions: RequestOptions, messageService: MessageService,
+                   loaderService: LoaderService) => new CustomHttp(backend, defaultOptions, messageService, loaderService),
       deps: [XHRBackend, RequestOptions, MessageService, LoaderService]
     },
     {provide: RequestOptions, useClass: AppRequestOptions},

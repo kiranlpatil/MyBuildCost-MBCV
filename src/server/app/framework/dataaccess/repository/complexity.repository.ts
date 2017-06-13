@@ -3,7 +3,7 @@ import RepositoryBase = require("./base/repository.base");
 import IComplexity = require("../mongoose/complexity");
 
 class ComplexityRepository extends RepositoryBase<IComplexity> {
-  constructor () {
+  constructor() {
     super(ComplexitySchema);
   }
 }

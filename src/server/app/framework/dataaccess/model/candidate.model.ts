@@ -15,29 +15,29 @@ import JobListModel = require("./job-list.model");
 
 interface CandidateModel {
 
-  jobTitle : string;
-  isVisible : boolean;
+  jobTitle: string;
+  isVisible: boolean;
   aboutMyself: string;
-  certifications : CertificationModel[];
-  awards : AwardModel[];
-  userId :  {type:mongoose.Schema.Types.ObjectId, ref:'User'};
+  certifications: CertificationModel[];
+  awards: AwardModel[];
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' };
   location: LocationModel;
-  industry : IndustryModel;
-  interestedIndustries : string[];
+  industry: IndustryModel;
+  interestedIndustries: string[];
   roleType: string;
-  academics :  AcademicModel[];
-  professionalDetails :  ProfessionalDetailsModel;
-  employmentHistory : EmployeeHistoryModel[];
-  proficiencies : string[];
-  secondaryCapability : string[];
+  academics: AcademicModel[];
+  professionalDetails: ProfessionalDetailsModel;
+  employmentHistory: EmployeeHistoryModel[];
+  proficiencies: string[];
+  secondaryCapability: string[];
   lockedOn: Date;
-  job_list : JobListModel[];
-  salaryMatch : string;
-  experienceMatch : string;
-  educationMatch : string;
-  releaseMatch : string;
-  interestedIndustryMatch : string[];
-  proficienciesMatch : string[];
+  job_list: JobListModel[];
+  salaryMatch: string;
+  experienceMatch: string;
+  educationMatch: string;
+  releaseMatch: string;
+  interestedIndustryMatch: string[];
+  proficienciesMatch: string[];
 
 }
 export = CandidateModel;

@@ -3,7 +3,7 @@ import RepositoryBase = require("./base/repository.base");
 import IRole = require("../mongoose/role");
 
 class RoleRepository extends RepositoryBase<IRole> {
-  constructor () {
+  constructor() {
     super(RoleSchema);
   }
 }

@@ -1,8 +1,7 @@
-
 export class ValidationService {
 
-  static getValidatorErrorMessage(validatorName:string, validatorValue?:any) {
-    let config:any = {
+  static getValidatorErrorMessage(validatorName: string, validatorValue?: any) {
+    let config: any = {
       'required': 'Required',
       'requiredEmail': 'Please enter your email address',
       'requiredPassword': 'Please enter your password',
@@ -18,9 +17,9 @@ export class ValidationService {
       'requiredCompanyName': 'Please enter company name',
       'requiredOtp': 'Please enter OTP',
       'invalidEmailAddress': 'Email incorrect',
-/*
-      'invalidPassword': 'Passwords must contain at least 8 characters, including uppercase, lowercase letters, numbers and one special character($@_!%*?&).',
-*/
+      /*
+       'invalidPassword': 'Passwords must contain at least 8 characters, including uppercase, lowercase letters, numbers and one special character($@_!%*?&).',
+       */
       'invalidPassword': 'Passwords must contain at least 8 characters and must be alpha-numeric.',
       'maxlength': `Maximum ${validatorValue.requiredLength} characters`,
       'minlength': `Minimum ${validatorValue.requiredLength} characters`,
@@ -32,7 +31,7 @@ export class ValidationService {
     return config[validatorName];
   }
 
-  static emailValidator(control:any) {
+  static emailValidator(control: any) {
     if (control.value) {
       if (control.value.match(
           /[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?/)) {
@@ -44,8 +43,8 @@ export class ValidationService {
     return null;
   }
 
-  static requireEmailValidator(control:any) {
-    if (control.value =="" || control.value == undefined) {
+  static requireEmailValidator(control: any) {
+    if (control.value == "" || control.value == undefined) {
       return {'requiredEmail': true};
     }
     else {
@@ -53,8 +52,8 @@ export class ValidationService {
     }
   }
 
-  static requireFirstNameValidator(control:any) {
-    if (control.value =="" || control.value == undefined) {
+  static requireFirstNameValidator(control: any) {
+    if (control.value == "" || control.value == undefined) {
       return {'requiredFirstName': true};
     }
     else {
@@ -62,8 +61,8 @@ export class ValidationService {
     }
   }
 
-  static requireCompanyNameValidator(control:any) {
-    if (control.value =="" || control.value == undefined) {
+  static requireCompanyNameValidator(control: any) {
+    if (control.value == "" || control.value == undefined) {
       return {'requiredCompanyName': true};
     }
     else {
@@ -71,8 +70,8 @@ export class ValidationService {
     }
   }
 
-  static requireCompanyDescriptionValidator(control:any) {
-    if (control.value =="" || control.value == undefined) {
+  static requireCompanyDescriptionValidator(control: any) {
+    if (control.value == "" || control.value == undefined) {
       return {'requiredCompanyDescription': true};
     }
     else {
@@ -80,8 +79,8 @@ export class ValidationService {
     }
   }
 
-  static requireLastNameValidator(control:any) {
-    if (control.value =="" || control.value == undefined) {
+  static requireLastNameValidator(control: any) {
+    if (control.value == "" || control.value == undefined) {
       return {'requiredLastName': true};
     }
     else {
@@ -89,8 +88,8 @@ export class ValidationService {
     }
   }
 
-  static requireMobileNumberValidator(control:any) {
-    if (control.value =="" || control.value == undefined) {
+  static requireMobileNumberValidator(control: any) {
+    if (control.value == "" || control.value == undefined) {
       return {'requiredMobileNumber': true};
     }
     else {
@@ -99,12 +98,12 @@ export class ValidationService {
   }
 
 
-  static passwordValidator(control:any) {
+  static passwordValidator(control: any) {
 
     if (control.value.match(/(?=.*\d)(?=.*[a-z]).{8,}/)) {
-/*
-    if (control.value.match(/(?=.*\d)(?=.*[a-z])(?=.*[$@_#!%*?&])(?=.*[A-Z]).{8,}/)) {
-*/
+      /*
+       if (control.value.match(/(?=.*\d)(?=.*[a-z])(?=.*[$@_#!%*?&])(?=.*[A-Z]).{8,}/)) {
+       */
 
       return null;
 
@@ -114,63 +113,63 @@ export class ValidationService {
     }
   }
 
-  static requirePasswordValidator(control:any){
-    if (control.value =="" || control.value == undefined) {
+  static requirePasswordValidator(control: any) {
+    if (control.value == "" || control.value == undefined) {
       return {'requiredPassword': true};
     } else {
       return null;
     }
   }
 
-  static requireNewPasswordValidator(control:any){
-    if (control.value =="" || control.value == undefined) {
+  static requireNewPasswordValidator(control: any) {
+    if (control.value == "" || control.value == undefined) {
       return {'requiredNewPassword': true};
     } else {
       return null;
     }
   }
 
-  static requireCurrentPasswordValidator(control:any){
-    if (control.value =="" || control.value == undefined) {
+  static requireCurrentPasswordValidator(control: any) {
+    if (control.value == "" || control.value == undefined) {
       return {'requiredCurrentPassword': true};
     } else {
       return null;
     }
   }
 
-  static requireOtpValidator(control:any){
-    if (control.value =="" || control.value == undefined) {
+  static requireOtpValidator(control: any) {
+    if (control.value == "" || control.value == undefined) {
       return {'requiredOtp': true};
     } else {
       return null;
     }
   }
 
-  static requireConfirmPasswordValidator(control:any){
-    if (control.value =="" || control.value == undefined) {
+  static requireConfirmPasswordValidator(control: any) {
+    if (control.value == "" || control.value == undefined) {
       return {'requiredConfirmPassword': true};
     } else {
       return null;
     }
   }
 
-  static requirePinValidator(control:any){
-    if (control.value =="" || control.value == undefined) {
+  static requirePinValidator(control: any) {
+    if (control.value == "" || control.value == undefined) {
       return {'requiredPin': true};
     } else {
       return null;
     }
   }
 
-  static requireDescriptionValidator(control:any){
-    if (control.value =="" || control.value == undefined) {
+  static requireDescriptionValidator(control: any) {
+    if (control.value == "" || control.value == undefined) {
       return {'requiredDescription': true};
     } else {
       return null;
     }
   }
 
-  static mobileNumberValidator(control:any) {
+  static mobileNumberValidator(control: any) {
     var mobileNumber = control.value;
     var count = 0;
 
@@ -185,28 +184,28 @@ export class ValidationService {
     }
   }
 
-  static birthYearValidator(control:any) {
+  static birthYearValidator(control: any) {
     var birthYear = control.value;
     var count = 0;
-    var isValid:boolean=false;
+    var isValid: boolean = false;
     var currentDate = new Date();
     var year = currentDate.getUTCFullYear() - 18;
-    if(birthYear > year-60 && birthYear<=year) {
-      isValid=true;
+    if (birthYear > year - 60 && birthYear <= year) {
+      isValid = true;
     }
     while (birthYear > 1) {
       birthYear = (birthYear / 10);
       count += 1;
 
     }
-    if (count === 4 && isValid===true) {
+    if (count === 4 && isValid === true) {
       return null;
     } else {
       return {'invalidBirthYear': true};
     }
   }
 
-  static pinValidator(control:any) {
+  static pinValidator(control: any) {
     var pin = control.value.length;
 
     if (pin <= 20) {

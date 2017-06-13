@@ -2,7 +2,7 @@ var Messages = require("./messages");
 
 class ResponseService {
 
-  static errorMessage(reason:string, message:string, code:number) {
+  static errorMessage(reason: string, message: string, code: number) {
     var otherObject = {
       reason: reason,
       message: message,
@@ -13,7 +13,7 @@ class ResponseService {
     return sendData;
   }
 
-  static errorMessageWithToken(reason:string, message:string, code:number, token:any) {
+  static errorMessageWithToken(reason: string, message: string, code: number, token: any) {
     var otherObject = {
       "status": Messages.STATUS_ERROR,
       "error": {

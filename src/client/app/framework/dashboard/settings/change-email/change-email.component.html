@@ -18,7 +18,7 @@
       <form [formGroup]="userForm" (submit)="onSubmit()">
 
         <div class="form-group" [class.fb-email-input]="isSocialLogin">
-          <label><img src="{{EMAIL_ICON}}" /> Current Email</label>
+          <label><img src="{{EMAIL_ICON}}"/> Current Email</label>
           <control-messages [control]="userForm.controls.current_email"></control-messages>
           <input [(ngModel)]="model.current_email" formControlName="current_email" id="current_email"
                  placeholder="Current Email"
@@ -26,14 +26,14 @@
         </div>
 
         <div class="form-group" [class.fb-email-input]="isSocialLogin">
-          <label><img src="{{NEW_EMAIL_ICON}}" /> New Email</label>
+          <label><img src="{{NEW_EMAIL_ICON}}"/> New Email</label>
           <control-messages [control]="userForm.controls.new_email"></control-messages>
           <input [(ngModel)]="model.new_email" formControlName="new_email" id="new_email" placeholder="New Email"
                  class="form-control"/>
         </div>
 
         <div class="form-group" [class.fb-email-input]="isSocialLogin">
-          <label><img src="{{CONFIRM_EMAIL_ICON}}" /> Confirm Email</label>
+          <label><img src="{{CONFIRM_EMAIL_ICON}}"/> Confirm Email</label>
           <control-messages [control]="userForm.controls.confirm_email"></control-messages>
           <input [(ngModel)]="model.confirm_email" formControlName="confirm_email" id="confirm_email"
                  placeholder="Confirm Email"

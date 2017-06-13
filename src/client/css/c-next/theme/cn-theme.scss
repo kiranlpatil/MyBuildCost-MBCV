@@ -11,18 +11,22 @@ $white: #fff;
 //Dark Theme common classes
 // Gradient Background
 %cn-theme-gradient {
-  background: linear-gradient(141deg, $cn-theme-gradient-light  0%, $cn-theme-gradient-dark 100%);
+  background: linear-gradient(141deg, $cn-theme-gradient-light 0%, $cn-theme-gradient-dark 100%);
 }
 
 .cn-theme {
 
   // Loader
   .loader-container {
-    .inner-loader { border-top: 5px solid $cn-theme-color; }
+    .inner-loader {
+      border-top: 5px solid $cn-theme-color;
+    }
   }
 
   // Heading
-  h3 { color: $cn-theme-color; }
+  h3 {
+    color: $cn-theme-color;
+  }
 
   // Buttons
   .btn-primary {
@@ -39,7 +43,7 @@ $white: #fff;
       color: $white;
     }
 
-    &:disabled  {
+    &:disabled {
       /*background: #67c116;
       border: #3694d1 0 solid;
       box-shadow: 0 0 0 0 rgba(0, 0,0, 0.2);*/
@@ -60,7 +64,7 @@ $white: #fff;
       //box-shadow: 1px 1px 1px 1px rgba(0, 0,0, 0.2);
     }
 
-    &:disabled  {
+    &:disabled {
       background: $cn-theme-btn-danger;
       //box-shadow: 1px 1px 1px 1px rgba(0, 0,0, 0.2);
     }
@@ -68,7 +72,9 @@ $white: #fff;
 
   // Other Links
   .other-links {
-    a { color: $cn-theme-color; }
+    a {
+      color: $cn-theme-color;
+    }
   }
 
   // Forms
@@ -87,10 +93,14 @@ $white: #fff;
 
   // Side Menu Bar
   .dashboard {
-    .menu-container { background: $cn-theme-color; }
+    .menu-container {
+      background: $cn-theme-color;
+    }
 
     nav {
-      .profile { background: $cn-theme-color; }
+      .profile {
+        background: $cn-theme-color;
+      }
     }
 
     nav > ul > li {
@@ -148,7 +158,9 @@ $white: #fff;
     }
   }
   //cn-create profile
-  .profile-header { background: $cn-theme-color; }
+  .profile-header {
+    background: $cn-theme-color;
+  }
 
   .profile-wrapper {
     .heading {
@@ -171,7 +183,7 @@ $white: #fff;
   .cn-theme {
     // Buttons
     .btn-default {
-      &:disabled  {
+      &:disabled {
         opacity: .3;
       }
     }

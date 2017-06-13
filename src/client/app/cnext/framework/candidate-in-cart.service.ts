@@ -1,6 +1,5 @@
-import {   Injectable  } from '@angular/core';
-import {  Subject  } from 'rxjs/Subject';
-import {CandidateNumberDifferentList} from "./recruiter-dashboard/job-lister/candidate-diff-list";
+import {Injectable} from "@angular/core";
+import {Subject} from "rxjs/Subject";
 
 @Injectable()
 export class CandidateInCartService {

@@ -1,4 +1,4 @@
-import {Component, OnInit} from "@angular/core";
+import {Component} from "@angular/core";
 import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
 import {Candidate, Summary} from "../model/candidate";
 import {CandiadteDashboardService} from "./candidate-dashboard.service";
@@ -15,18 +15,19 @@ import {CandidateJobListService} from "./candidate-job-list/candidate-job-list.s
   styleUrls: ['candidate-dashboard.component.css']
 })
 
-export class CandidateDashboardComponent  {
-  private candidate:Candidate=new Candidate();
-  private jobList:JobQcard[]=new Array();
-  private appliedJobs:JobQcard[]=new Array();
-  private blockedJobs:JobQcard[]=new Array();
-  private hidesection:boolean=false;
-  private locationList:string[] = new Array(0);
-  private _locationList:string[] = new Array(0);
-  private type:string;
-  constructor(private candidateProfileService:CandidateProfileService,
-              private candidateDashboardService:CandiadteDashboardService,
-              private candidateJobListService:CandidateJobListService){
+export class CandidateDashboardComponent {
+  private candidate: Candidate = new Candidate();
+  private jobList: JobQcard[] = new Array();
+  private appliedJobs: JobQcard[] = new Array();
+  private blockedJobs: JobQcard[] = new Array();
+  private hidesection: boolean = false;
+  private locationList: string[] = new Array(0);
+  private _locationList: string[] = new Array(0);
+  private type: string;
+
+  constructor(private candidateProfileService: CandidateProfileService,
+              private candidateDashboardService: CandiadteDashboardService,
+              private candidateJobListService: CandidateJobListService) {
     this.candidateProfileService.getCandidateDetails()
       .subscribe(
         candidateData => {
@@ -39,13 +40,13 @@ export class CandidateDashboardComponent  {
     this.showrejectedJobs();
   }
 
-  extractList(jobList:JobQcard[]){
-    for(let job of jobList){
-      var addition=job.above_one_step_matching+job.exact_matching;
-      if(addition <= ValueConstant.MATCHING_PERCENTAGE){
-        this.jobList.splice(this.jobList.indexOf(job),1);
+  extractList(jobList: JobQcard[]) {
+    for (let job of jobList) {
+      var addition = job.above_one_step_matching + job.exact_matching;
+      if (addition <= ValueConstant.MATCHING_PERCENTAGE) {
+        this.jobList.splice(this.jobList.indexOf(job), 1);
       } else {
-        if(this.locationList.indexOf(job.location) == -1) {
+        if (this.locationList.indexOf(job.location) == -1) {
           this.locationList.push(job.location);
         }
       }
@@ -53,75 +54,75 @@ export class CandidateDashboardComponent  {
     this._locationList = this.locationList;
   }
 
-  OnCandidateDataSuccess(candidateData:any) {
+  OnCandidateDataSuccess(candidateData: any) {
     this.candidate = candidateData.data[0];
     this.candidate.basicInformation = candidateData.metadata;
-    this.candidate.summary=new Summary();
+    this.candidate.summary = new Summary();
   }
 
-  onActionPerformOnExactList(action:string){
-    for(let job of this.jobList){
-      if(job._id===LocalStorageService.getLocalValue(LocalStorage.CURRENT_JOB_POSTED_ID)){
+  onActionPerformOnExactList(action: string) {
+    for (let job of this.jobList) {
+      if (job._id === LocalStorageService.getLocalValue(LocalStorage.CURRENT_JOB_POSTED_ID)) {
         this.jobList.splice(this.jobList.indexOf(job), 1);
       }
     }
     this.onActionPerform(action);
   }
 
-  onActionPerformOnApproxList(action:string){
-    for(let job of this.jobList){
-      if(job._id===LocalStorageService.getLocalValue(LocalStorage.CURRENT_JOB_POSTED_ID)){
+  onActionPerformOnApproxList(action: string) {
+    for (let job of this.jobList) {
+      if (job._id === LocalStorageService.getLocalValue(LocalStorage.CURRENT_JOB_POSTED_ID)) {
         this.jobList.splice(this.jobList.indexOf(job), 1);
       }
     }
     this.onActionPerform(action);
   }
 
-  onActionPerform(action:string){
-    if(action==='block'){
-    this.candidate.summary.numberJobsBlocked++;
+  onActionPerform(action: string) {
+    if (action === 'block') {
+      this.candidate.summary.numberJobsBlocked++;
     }
-    else if(action==='apply'){
+    else if (action === 'apply') {
       this.candidate.summary.numberOfJobApplied++;
     }
   }
 
-  onActionOnApplyJob(action:string){
+  onActionOnApplyJob(action: string) {
   }
 
-  onActionOnBlockJob(action:string){
-if(action === 'delete'){
-  this.candidate.summary.numberJobsBlocked--;
-  this.showrejectedJobs();
-  this.showMatchedJobs();
+  onActionOnBlockJob(action: string) {
+    if (action === 'delete') {
+      this.candidate.summary.numberJobsBlocked--;
+      this.showrejectedJobs();
+      this.showMatchedJobs();
     }
   }
 
-  showappliedJobs(){
+  showappliedJobs() {
     this.candidateJobListService.getAppliedJobList()
       .subscribe(
         data => {
-          this.appliedJobs=data.data;
-          this.candidate.summary.numberOfJobApplied=this.appliedJobs.length;
+          this.appliedJobs = data.data;
+          this.candidate.summary.numberOfJobApplied = this.appliedJobs.length;
         });
 
   }
 
-  showrejectedJobs(){
+  showrejectedJobs() {
     this.candidateJobListService.getBlockedJobList()
       .subscribe(
         data => {
-          this.blockedJobs=data.data;
-          this.candidate.summary.numberJobsBlocked=this.blockedJobs.length;
+          this.blockedJobs = data.data;
+          this.candidate.summary.numberJobsBlocked = this.blockedJobs.length;
         });
   }
 
   showMatchedJobs() {
     this.candidateDashboardService.getJobList()
-        .subscribe(
-            data => {
-              this.jobList=data;
-              this.extractList(this.jobList);
-            });
+      .subscribe(
+        data => {
+          this.jobList = data;
+          this.extractList(this.jobList);
+        });
   }
 }

@@ -5,16 +5,16 @@ var mongoose = DataAccess.mongooseInstance;
 var mongooseConnection = DataAccess.mongooseConnection;
 
 class ScenarioSchema {
-    static get schema() {
-        var schema = mongoose.Schema({
-          name : {
-            type : String
-          }
+  static get schema() {
+    var schema = mongoose.Schema({
+      name: {
+        type: String
+      }
 
-        },{ versionKey: false });
+    }, {versionKey: false});
 
-        return schema;
-    }
+    return schema;
+  }
 }
 var schema = mongooseConnection.model<IScenario>("Scenario", ScenarioSchema.schema);
 export = schema;

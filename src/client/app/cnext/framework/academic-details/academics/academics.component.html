@@ -3,9 +3,10 @@
     <div class="row">
       <div class="col-sm-4">
         <div class="form-group">
-          <input type="text" class="form-control"  formControlName="specialization" required/>
+          <input type="text" class="form-control" formControlName="specialization" required/>
           <label>Degree</label>
-          <div  class="error-messages" *ngIf="academicForm.get('specialization').touched && academicForm.get('specialization').hasError('required')">
+          <div class="error-messages"
+               *ngIf="academicForm.get('specialization').touched && academicForm.get('specialization').hasError('required')">
             <p>Degree Name is required</p>
           </div>
         </div>
@@ -13,9 +14,10 @@
 
       <div class="col-sm-4">
         <div class="form-group">
-          <input class="form-control" type="text"  formControlName="board"  required/>
+          <input class="form-control" type="text" formControlName="board" required/>
           <label>Board/University Name</label>
-          <div  class="error-messages" *ngIf="academicForm.get('board').touched && academicForm.get('board').hasError('required')">
+          <div class="error-messages"
+               *ngIf="academicForm.get('board').touched && academicForm.get('board').hasError('required')">
             <p>Board/University Name is required</p>
           </div>
         </div>
@@ -23,18 +25,19 @@
 
       <div class="col-sm-4">
         <label>Year </label>
-        <select class="form-control"  formControlName="yearOfPassing" >
+        <select class="form-control" formControlName="yearOfPassing">
           <option *ngFor="let acadmicyear of yearList" [ngValue]="acadmicyear">{{acadmicyear}}
           </option>
         </select>
-        <div  class="error-messages" *ngIf="academicForm.get('yearOfPassing').touched && academicForm.get('yearOfPassing').hasError('required')">
+        <div class="error-messages"
+             *ngIf="academicForm.get('yearOfPassing').touched && academicForm.get('yearOfPassing').hasError('required')">
           <p>Year Of Passing is required</p>
         </div>
       </div>
     </div>
 
     <div class="col-sm-12 no-padding">
-        <textarea placeholder="School/College Name"  formControlName="schoolName" class="form-control"></textarea>
+      <textarea placeholder="School/College Name" formControlName="schoolName" class="form-control"></textarea>
     </div>
   </div>
 </div>

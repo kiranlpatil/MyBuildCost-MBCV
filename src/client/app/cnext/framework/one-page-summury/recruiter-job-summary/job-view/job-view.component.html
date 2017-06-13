@@ -3,7 +3,7 @@
     <div>
       <cn-recruiter-job-information [recruiter]="recruiter"></cn-recruiter-job-information>
     </div>
-    <div >
+    <div>
       <h4>About Company</h4>
       <cn-additional-details [data]="recruiter.about_company"></cn-additional-details>
     </div>
@@ -15,14 +15,15 @@
     </div>
     <div class="col-sm-12 no-padding">
       <div class="col-sm-12" *ngIf="secondaryCapabilities.length>0">
-        <h4 >Supplimentry Capabilities</h4>
+        <h4>Supplimentry Capabilities</h4>
         <cn-horizontal-list-view [data]="secondaryCapabilities"></cn-horizontal-list-view>
       </div>
       <div class="col-sm-12">
         <h4>Proficiency In</h4>
         <cn-horizontal-list-view [data]="postedJob.proficiencies"></cn-horizontal-list-view>
       </div>
-      <div class="col-sm-12" *ngIf="postedJob.additionalProficiencies != undefined && postedJob.additionalProficiencies.length>0" >
+      <div class="col-sm-12"
+           *ngIf="postedJob.additionalProficiencies != undefined && postedJob.additionalProficiencies.length>0">
         <h4>Additional Proficiency</h4>
         <cn-horizontal-list-view [data]="postedJob.additionalProficiencies"></cn-horizontal-list-view>
       </div>

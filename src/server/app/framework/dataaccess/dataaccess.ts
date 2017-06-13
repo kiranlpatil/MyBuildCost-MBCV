@@ -3,14 +3,14 @@ import * as Mongoose from "mongoose";
 var config = require('config');
 
 class DataAccess {
-  static mongooseInstance:any;
-  static mongooseConnection:Mongoose.Connection;
+  static mongooseInstance: any;
+  static mongooseConnection: Mongoose.Connection;
 
   constructor() {
     DataAccess.connect();
   }
 
-  static connect():Mongoose.Connection {
+  static connect(): Mongoose.Connection {
     if (this.mongooseInstance) return this.mongooseInstance;
 
     this.mongooseConnection = Mongoose.connection;
@@ -20,7 +20,7 @@ class DataAccess {
 
     var host = config.get("TplSeed.database.host");
     var name = config.get("TplSeed.database.name");
-    this.mongooseInstance = Mongoose.connect('mongodb://' + host + '/' +name);
+    this.mongooseInstance = Mongoose.connect('mongodb://' + host + '/' + name);
     return this.mongooseInstance;
   }
 }

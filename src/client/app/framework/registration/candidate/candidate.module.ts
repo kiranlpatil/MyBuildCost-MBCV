@@ -2,10 +2,10 @@
  * Created by techprimelab on 3/9/2017.
  */
 
-import {    NgModule  } from '@angular/core';
-import {  CandidateComponent  } from './candidate.component';
-import {  CommonModule  } from '@angular/common';
-import {  CandidateService  } from './candidate.service';
+import {NgModule} from "@angular/core";
+import {CandidateComponent} from "./candidate.component";
+import {CommonModule} from "@angular/common";
+import {CandidateService} from "./candidate.service";
 
 @NgModule({
   imports: [CommonModule],
@@ -13,4 +13,5 @@ import {  CandidateService  } from './candidate.service';
   exports: [CandidateComponent],
   providers: [CandidateService]
 })
-export class CandidateModule { }
+export class CandidateModule {
+}

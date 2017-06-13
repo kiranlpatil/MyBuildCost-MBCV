@@ -1,5 +1,6 @@
 <div *ngIf="recruiterDashboard">
-<cn-recruiter-header [headerInfo]="recruiterHeaderDetails" [jobCount]="recruiterDashboard.postedJobs.length" [companyName]="recruiterDashboard.company_name"></cn-recruiter-header>
+  <cn-recruiter-header [headerInfo]="recruiterHeaderDetails" [jobCount]="recruiterDashboard.postedJobs.length"
+                       [companyName]="recruiterDashboard.company_name"></cn-recruiter-header>
 </div>
 <div *ngIf="!recruiterDashboard">
   <cn-recruiter-header [headerInfo]="recruiterHeaderDetails" [jobCount]=0 [companyName]="please"></cn-recruiter-header>
@@ -12,7 +13,8 @@
   <div class="tab-content">
     <div id="posted-job" class="tab-pane fade active in clearfix">
       <div *ngIf="recruiterDashboard">
-        <cn-job-lister [headerInfoForJob]="recruiterHeaderDetails" [jobListInput]="recruiterDashboard.postedJobs" (jobEventEmitter)="jobSelected($event)"></cn-job-lister>
+        <cn-job-lister [headerInfoForJob]="recruiterHeaderDetails" [jobListInput]="recruiterDashboard.postedJobs"
+                       (jobEventEmitter)="jobSelected($event)"></cn-job-lister>
       </div>
     </div>
     <!--<cn-tool-tip [message]="test"></cn-tool-tip>-->

@@ -3,7 +3,7 @@ import RepositoryBase = require("./base/repository.base");
 import IScenario = require("../mongoose/scenario");
 
 class ScenarioRepository extends RepositoryBase<IScenario> {
-  constructor () {
+  constructor() {
     super(ScenarioSchema);
   }
 }

@@ -1,14 +1,13 @@
-import * as fs from 'fs';
 var config = require('config');
 import CNextMessages = require("../shared/cnext-messages");
 import ProjectAsset = require("../shared/projectasset");
 import ComplexityRepository = require("../dataaccess/repository/complexity.repository");
 import IndustryRepository = require("../dataaccess/repository/industry.repository");
 class ComplexityService {
-  private complexityRepository:ComplexityRepository;
-  private industryRepository:IndustryRepository;
+  private complexityRepository: ComplexityRepository;
+  private industryRepository: IndustryRepository;
 
-  APP_NAME:string;
+  APP_NAME: string;
 
   constructor() {
     this.complexityRepository = new ComplexityRepository();
@@ -16,11 +15,11 @@ class ComplexityService {
     this.APP_NAME = ProjectAsset.APP_NAME;
   }
 
-  retrieve(field:any, callback:(error:any, result:any) => void) {
+  retrieve(field: any, callback: (error: any, result: any) => void) {
     this.complexityRepository.retrieveAll({}, callback);
   }
 
-  create(item:any, callback:(error:any, result:any) => void) {
+  create(item: any, callback: (error: any, result: any) => void) {
     this.complexityRepository.create(item, (err, res) => {
       if (err) {
         callback(new Error("Problem in Creating Complexity model"), null);
@@ -31,13 +30,13 @@ class ComplexityService {
     });
   }
 
-  retrieveByMultiIds(item:any, callback:(error:any, result:any) => void) {
-    this.complexityRepository.retrieveByMultiIds(item,{  _id: 0 }, callback);
+  retrieveByMultiIds(item: any, callback: (error: any, result: any) => void) {
+    this.complexityRepository.retrieveByMultiIds(item, {_id: 0}, callback);
   }
 
 
-  findByName(field:any, callback:(error:any, result:any) => void) {
-    this.industryRepository.findComplexities(field,callback);
+  findByName(field: any, callback: (error: any, result: any) => void) {
+    this.industryRepository.findComplexities(field, callback);
   }
 
 }

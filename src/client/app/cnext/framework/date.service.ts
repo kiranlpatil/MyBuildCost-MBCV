@@ -1,6 +1,6 @@
-import {  Injectable  } from '@angular/core';
-import { BaseService } from '../../framework/shared/httpservices/base.service';
-import { ValueConstant } from '../../framework/shared/constants';
+import {Injectable} from "@angular/core";
+import {BaseService} from "../../framework/shared/httpservices/base.service";
+import {ValueConstant} from "../../framework/shared/constants";
 @Injectable()
 export class DateService extends BaseService {
   monthList = new Array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December');
@@ -8,6 +8,7 @@ export class DateService extends BaseService {
   error_msg: string;
   private year: any;
   private currentDate: any;
+
   constructor() {
     super();
     this.currentDate = new Date();

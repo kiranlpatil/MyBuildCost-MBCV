@@ -1,6 +1,7 @@
 <div class="description">
-      <textarea class="form-control" [(ngModel)]="description"  maxlength={{maxword}} (ngModelChange)="wordCount()" placeholder="Describe your {{type}}"></textarea>
-      <span class="error-messages" *ngIf="remainingWords != undefined ">{{remainingWords}} words remaining</span>
+  <textarea class="form-control" [(ngModel)]="description" maxlength={{maxword}} (ngModelChange)="wordCount()"
+            placeholder="Describe your {{type}}"></textarea>
+  <span class="error-messages" *ngIf="remainingWords != undefined ">{{remainingWords}} words remaining</span>
 </div>
 
 

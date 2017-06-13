@@ -1,8 +1,7 @@
-import {Component, OnInit} from "@angular/core";
+import {Component} from "@angular/core";
 import {Router} from "@angular/router";
-import {NavigationRoutes, LocalStorage} from "../../../../framework/shared/constants";
+import {LocalStorage, NavigationRoutes} from "../../../../framework/shared/constants";
 import {LocalStorageService} from "../../../../framework/shared/localstorage.service";
-
 
 
 @Component({
@@ -13,10 +12,12 @@ import {LocalStorageService} from "../../../../framework/shared/localstorage.ser
 })
 
 export class RecruiterJobSummaryComponent {
-  private jobId:string;
+  private jobId: string;
+
   constructor(private _router: Router) {
-    this.jobId=LocalStorageService.getLocalValue(LocalStorage.CURRENT_JOB_POSTED_ID);
+    this.jobId = LocalStorageService.getLocalValue(LocalStorage.CURRENT_JOB_POSTED_ID);
   }
+
   logOut() {
     window.localStorage.clear();
     this._router.navigate([NavigationRoutes.APP_START]);

@@ -26,7 +26,6 @@ $theme-color: #3694d1;
     animation: fadeinout 2s linear forwards;
     z-index: 1;
 
-
     .tooltiptail {
       display: block;
       border-color: transparent #fdefc4 transparent transparent;
@@ -42,20 +41,20 @@ $theme-color: #3694d1;
       transform: rotate(-21deg);
     }
 
-   /* .tail1 {
-      display: block;
-      border-color: transparent #967c2c transparent transparent;
-      border-style: solid;
-      border-width: 15px 25px 0px 56px;
-      width: 0;
-      height: 0;
-      position: absolute;
-      top: 39px;
-      left: -76px;
-      z-index: 9;
-      !* box-shadow: 1px 1px 1px #ccc; *!
-      transform: rotate(-21deg);
-    }*/
+    /* .tail1 {
+       display: block;
+       border-color: transparent #967c2c transparent transparent;
+       border-style: solid;
+       border-width: 15px 25px 0px 56px;
+       width: 0;
+       height: 0;
+       position: absolute;
+       top: 39px;
+       left: -76px;
+       z-index: 9;
+       !* box-shadow: 1px 1px 1px #ccc; *!
+       transform: rotate(-21deg);
+     }*/
 
     ul {
       padding: 0 5px;
@@ -80,15 +79,27 @@ $theme-color: #3694d1;
 }
 
 @-webkit-keyframes fadeinout {
-  0% { opacity: 0; }
-  30% { opacity: 0; }
-  100% { opacity: 1; }
+  0% {
+    opacity: 0;
+  }
+  30% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 @keyframes fadeinout {
-  0% { opacity: 0; }
-  30% { opacity: 0; }
-  100% { opacity: 1; }
+  0% {
+    opacity: 0;
+  }
+  30% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 .create-profile {
@@ -190,7 +201,6 @@ $theme-color: #3694d1;
     font-style: italic;
     margin: 0;
   }
-
 
   .error-messages {
     padding-left: 0;
@@ -340,13 +350,13 @@ $theme-color: #3694d1;
   display: inline-block;
   margin: 0 0 5px 10px;
 
-  label{
+  label {
     color: #666;
     padding: 0 !important;
     margin: 0 -4px 0 0 !important;
   }
 
-  input{
+  input {
     display: none;
   }
 
@@ -361,7 +371,7 @@ $theme-color: #3694d1;
     margin-right: -1px;
   }
 
-  input:checked + span{
+  input:checked + span {
     background: $theme-color;
     color: $white;
     border: 1px solid $theme-color;

@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, OnInit} from "@angular/core";
+import {Component, Input} from "@angular/core";
 import {RecruiterDashboardService} from "../../../recruiter-dashboard/recruiter-dashboard.service";
 import {JobSummary} from "../../../model/jobSummary";
 
@@ -10,9 +10,9 @@ import {JobSummary} from "../../../model/jobSummary";
   styleUrls: ['job-view.component.css'],
 
 })
-export class JobViewComponent  {
-  @Input() jobId:string;
-  private recruiter:JobSummary=new JobSummary();
+export class JobViewComponent {
+  @Input() jobId: string;
+  private recruiter: JobSummary = new JobSummary();
   private secondaryCapabilities: string[] = new Array();
 
 
@@ -22,10 +22,10 @@ export class JobViewComponent  {
   ngOnInit() {
   }
 
-  ngOnChanges(changes:any){
-    if (changes.jobId !=undefined && changes.jobId.currentValue != undefined  ) {
+  ngOnChanges(changes: any) {
+    if (changes.jobId != undefined && changes.jobId.currentValue != undefined) {
 
-      this.jobId=changes.jobId.currentValue;
+      this.jobId = changes.jobId.currentValue;
       this.recruiterDashboardService.getPostedJobDetails(this.jobId)
         .subscribe(
           data => {

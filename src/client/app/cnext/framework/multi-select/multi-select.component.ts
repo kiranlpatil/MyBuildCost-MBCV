@@ -1,5 +1,4 @@
-import {Component, Input, EventEmitter, Output, ViewChild, ElementRef} from "@angular/core";
-import {ValueConstant} from "../../../framework/shared/constants";
+import {Component, ElementRef, EventEmitter, Input, Output, ViewChild} from "@angular/core";
 import {MultiSelectService} from "./multi-select.service";
 
 @Component({
@@ -10,35 +9,35 @@ import {MultiSelectService} from "./multi-select.service";
 })
 
 export class MultiSelectComponent {
-  @Input() selectedData:string[];
-  @Input() maxLength:number;
-  @Input() type:string;
-  @Input() data:string[];
+  @Input() selectedData: string[];
+  @Input() maxLength: number;
+  @Input() type: string;
+  @Input() data: string[];
   @Output() onComplete = new EventEmitter();
 
   private selectedProficiencies = new Array();
   private masterDataProficiencies = new Array();
   private Proficiencies = new Array();
-  private showAlert:boolean = false;
-  private alreadyPresent:boolean = false;
-  private showModalStyle:boolean = false;
-  private otherProficiency:string = '';
+  private showAlert: boolean = false;
+  private alreadyPresent: boolean = false;
+  private showModalStyle: boolean = false;
+  private otherProficiency: string = '';
   @ViewChild("myInput")
   private _inputElement: ElementRef;
 
-  constructor(private proficiencydoaminService:MultiSelectService) {
+  constructor(private proficiencydoaminService: MultiSelectService) {
 
   }
 
- /* ngOnInit() {
-    debugger
-  document.getElementById('save-button').focus();
+  /* ngOnInit() {
+   debugger
+   document.getElementById('save-button').focus();
 
-  }
-  */
-  ngOnChanges(changes:any) {
-    if(this.data != undefined){
-      if(this.data.length > 0) {
+   }
+   */
+  ngOnChanges(changes: any) {
+    if (this.data != undefined) {
+      if (this.data.length > 0) {
         this.Proficiencies = this.data;
         this.masterDataProficiencies = this.data;
       }
@@ -52,8 +51,8 @@ export class MultiSelectComponent {
       }
     }
   }
-  
-  selectedProficiencyModel(newVal:any) {
+
+  selectedProficiencyModel(newVal: any) {
     if (newVal !== '') {
       if (this.selectedProficiencies.length < this.maxLength) {
         if (this.selectedProficiencies.indexOf(newVal) === -1) {
@@ -70,7 +69,7 @@ export class MultiSelectComponent {
     emptyInputField.value = '';
   }
 
-  deleteItem(newVal:any) {
+  deleteItem(newVal: any) {
     this.showAlert = false;
     for (let i = 0; i < this.selectedProficiencies.length; i++) {
       if (this.selectedProficiencies[i] === newVal.currentTarget.innerText.trim()) {
@@ -81,13 +80,13 @@ export class MultiSelectComponent {
     this.onComplete.emit(this.selectedProficiencies);
   }
 
-  deleteSelectedProfeciency(newVal:any) {
-    if(this.Proficiencies.indexOf(newVal)!= -1){
-    this.Proficiencies.splice(this.Proficiencies.indexOf(newVal), 1);
-  }
+  deleteSelectedProfeciency(newVal: any) {
+    if (this.Proficiencies.indexOf(newVal) != -1) {
+      this.Proficiencies.splice(this.Proficiencies.indexOf(newVal), 1);
+    }
   }
 
-  showHideModal(newVal:any) { //TODO
+  showHideModal(newVal: any) { //TODO
     this.otherProficiency = newVal;
 
     if (newVal !== '' && this.masterDataProficiencies.indexOf(newVal) === -1)

@@ -15,7 +15,7 @@ export function login(req: express.Request, res: express.Response, next: any) {
     var userService = new UserService();
     var params = req.body;
     delete params.access_token;
-    userService.retrieve({"email":params.email}, (error, result) => {
+    userService.retrieve({"email": params.email}, (error, result) => {
       if (error) {
         next(error);
       }
@@ -25,29 +25,29 @@ export function login(req: express.Request, res: express.Response, next: any) {
         if (result[0].password === params.password) {
           var auth = new AuthInterceptor();
           var token = auth.issueTokenWithUid(result[0]);
-          if(result[0].isCandidate === false){
+          if (result[0].isCandidate === false) {
             var recruiterService = new RecruiterService();
 
-            recruiterService.retrieve({"userId":result[0]._id}, (error, recruiter) => {
+            recruiterService.retrieve({"userId": result[0]._id}, (error, recruiter) => {
               if (error) {
                 next(error);
               }
-              else{
+              else {
                 res.status(200).send({
                   "status": Messages.STATUS_SUCCESS,
                   "data": {
                     "email": result[0].email,
                     "_id": result[0]._id,
-                    "end_user_id":recruiter[0]._id,
+                    "end_user_id": recruiter[0]._id,
                     "current_theme": result[0].current_theme,
                     "picture": result[0].picture,
-                    "company_headquarter_country":recruiter[0].company_headquarter_country,
-                    "company_name":recruiter[0].company_name,
-                    "setOfDocuments":recruiter[0].setOfDocuments,
-                    "company_size":recruiter[0].company_size,
-                    "isRecruitingForself":recruiter[0].isRecruitingForself,
-                    "mobile_number":result[0].mobile_number,
-                    "isCandidate":result[0].isCandidate
+                    "company_headquarter_country": recruiter[0].company_headquarter_country,
+                    "company_name": recruiter[0].company_name,
+                    "setOfDocuments": recruiter[0].setOfDocuments,
+                    "company_size": recruiter[0].company_size,
+                    "isRecruitingForself": recruiter[0].isRecruitingForself,
+                    "mobile_number": result[0].mobile_number,
+                    "isCandidate": result[0].isCandidate
                   },
                   access_token: token
                 });
@@ -79,7 +79,7 @@ export function login(req: express.Request, res: express.Response, next: any) {
                     "picture": result[0].picture,
                     "mobile_number": result[0].mobile_number,
                     "isCandidate": result[0].isCandidate,
-                    "isCompleted" : candidate[0].isCompleted
+                    "isCompleted": candidate[0].isCompleted
                   },
                   access_token: token
                 });
@@ -89,7 +89,7 @@ export function login(req: express.Request, res: express.Response, next: any) {
 
         }
 
-        else{
+        else {
           next({
             reason: Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
             message: Messages.MSG_ERROR_WRONG_PASSWORD,
@@ -97,16 +97,15 @@ export function login(req: express.Request, res: express.Response, next: any) {
           });
         }
       }
-      else if(result.length > 0 && result[0].isActivated === false){
-        if(result[0].password === params.password){
-           next({
-             reason: Messages.MSG_ERROR_RSN_INVALID_REGISTRATION_STATUS,
-             message: Messages.MSG_ERROR_VERIFY_ACCOUNT,
-             code: 403
-           });
-         }
-         else
-        {
+      else if (result.length > 0 && result[0].isActivated === false) {
+        if (result[0].password === params.password) {
+          next({
+            reason: Messages.MSG_ERROR_RSN_INVALID_REGISTRATION_STATUS,
+            message: Messages.MSG_ERROR_VERIFY_ACCOUNT,
+            code: 403
+          });
+        }
+        else {
           next({
             reason: Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
             message: Messages.MSG_ERROR_WRONG_PASSWORD,
@@ -139,7 +138,7 @@ export function generateOtp(req: express.Request, res: express.Response, next: a
     var Data = {
       new_mobile_number: params.mobile_number,
       old_mobile_number: user.mobile_number,
-      _id:user._id
+      _id: user._id
     };
     userService.generateOtp(Data, (error, result) => {
       if (error) {
@@ -261,10 +260,10 @@ export function create(req: express.Request, res: express.Response, next: any) {
   try {
     var newUser: UserModel = <UserModel>req.body;
     var userService = new UserService();
-   // newUser.isActivated=true;
+    // newUser.isActivated=true;
     userService.createUser(newUser, (error, result) => {
       if (error) {
-        console.log("crt user error",error);
+        console.log("crt user error", error);
 
         if (error == Messages.MSG_ERROR_CHECK_EMAIL_PRESENT) {
           next({
@@ -280,7 +279,7 @@ export function create(req: express.Request, res: express.Response, next: any) {
             code: 403
           });
         }
-        else{
+        else {
           next({
             reason: Messages.MSG_ERROR_RSN_EXISTING_USER,
             message: Messages.MSG_ERROR_USER_WITH_EMAIL_PRESENT,
@@ -317,9 +316,9 @@ export function forgotPassword(req: express.Request, res: express.Response, next
     var userService = new UserService();
     var params = req.body;   //email
 
-   /* var linkq =req.url;
-    var fullUrl = app.get("/api/address",  userController.getAddress);req.protocol + '://' + req.get('host') + req.originalUrl;
-    console.log(fullUrl);*/
+    /* var linkq =req.url;
+     var fullUrl = app.get("/api/address",  userController.getAddress);req.protocol + '://' + req.get('host') + req.originalUrl;
+     console.log(fullUrl);*/
     userService.forgotPassword(params, (error, result) => {
 
       if (error) {
@@ -358,21 +357,21 @@ export function notifications(req: express.Request, res: express.Response, next:
     var token = auth.issueTokenWithUid(user);
 
     //retrieve notification for a particular user
-    var params = { _id : user._id };
+    var params = {_id: user._id};
     var userService = new UserService();
 
     userService.retrieve(params, (error, result) => {
-     if (error) {
+      if (error) {
         next(error);
-     }
-     else if (result.length > 0) {
+      }
+      else if (result.length > 0) {
         var token = auth.issueTokenWithUid(user);
-       res.send({
-         "status":"success",
-         "data":result[0].notifications,
-         access_token: token
-       });
-     }
+        res.send({
+          "status": "success",
+          "data": result[0].notifications,
+          access_token: token
+        });
+      }
     });
   }
   catch (e) {
@@ -389,11 +388,11 @@ export function pushNotifications(req: express.Request, res: express.Response, n
     var token = auth.issueTokenWithUid(user);
 
     //retrieve notification for a particular user
-    var params = { _id : user._id };
+    var params = {_id: user._id};
     var userService = new UserService();
-    var data ={ $push : { notifications: body_data } };
+    var data = {$push: {notifications: body_data}};
 
-    userService.findOneAndUpdate(params, data, {new: true},(error, result) => {
+    userService.findOneAndUpdate(params, data, {new: true}, (error, result) => {
       if (error) {
         next(error);
       }
@@ -405,7 +404,7 @@ export function pushNotifications(req: express.Request, res: express.Response, n
 
         });
       }
-     });
+    });
   }
   catch (e) {
 
@@ -417,15 +416,15 @@ export function updateNotifications(req: express.Request, res: express.Response,
   try {
     var user = req.user;
     var body_data = req.body;
-    console.log('Notification id :'+JSON.stringify(body_data));
+    console.log('Notification id :' + JSON.stringify(body_data));
     var auth: AuthInterceptor = new AuthInterceptor();
     var token = auth.issueTokenWithUid(user);
 
-    var params = { _id : user._id };
+    var params = {_id: user._id};
     var userService = new UserService();
-    var data ={ is_read : true };
+    var data = {is_read: true};
 
-    userService.findAndUpdateNotification(params, data ,{new :true},(error, result) => {
+    userService.findAndUpdateNotification(params, data, {new: true}, (error, result) => {
       if (error) {
         next(error);
       }
@@ -520,9 +519,9 @@ export function retrieve(req: express.Request, res: express.Response, next: any)
             "email": user.email,
             "mobile_number": user.mobile_number,
             "picture": user.picture,
-            "social_profile_picture":user.social_profile_picture,
+            "social_profile_picture": user.social_profile_picture,
             "_id": user.userId,
-            "current_theme":user.current_theme
+            "current_theme": user.current_theme
           },
           access_token: token
         });
@@ -602,7 +601,7 @@ export function changeMobileNumber(req: express.Request, res: express.Response, 
   try {
     var user = req.user;
 
-    var params =req.body;
+    var params = req.body;
     var auth: AuthInterceptor = new AuthInterceptor();
     var userService = new UserService();
 
@@ -623,7 +622,7 @@ export function changeMobileNumber(req: express.Request, res: express.Response, 
       else {
         var Data = {
           current_mobile_number: user.mobile_number,
-          _id:user._id,
+          _id: user._id,
           new_mobile_number: params.new_mobile_number
         }
         userService.changeMobileNumber(Data, (error, result) => {
@@ -670,7 +669,7 @@ export function changeEmailId(req: express.Request, res: express.Response, next:
       if (error) {
         next(error);
       }
-      else if (result.length > 0 &&  result[0].isActivated === true) {
+      else if (result.length > 0 && result[0].isActivated === true) {
         next({
           reason: Messages.MSG_ERROR_RSN_EXISTING_USER,
           message: Messages.MSG_ERROR_REGISTRATION,
@@ -678,7 +677,7 @@ export function changeEmailId(req: express.Request, res: express.Response, next:
         });
 
       }
-      else if (result.length > 0 &&   result[0].isActivated === false) {
+      else if (result.length > 0 && result[0].isActivated === false) {
         next({
           reason: Messages.MSG_ERROR_RSN_EXISTING_USER,
           message: Messages.MSG_ERROR_ACCOUNT_STATUS,
@@ -739,7 +738,7 @@ export function verifyMobileNumber(req: express.Request, res: express.Response, 
     var params = req.body; //otp
     var userService = new UserService();
     var query = {"_id": user._id};
-    var updateData = {"mobile_number": user.temp_mobile,"temp_mobile":user.mobile_number};
+    var updateData = {"mobile_number": user.temp_mobile, "temp_mobile": user.mobile_number};
     if (user.otp === params.otp) {
       userService.findOneAndUpdate(query, updateData, {new: true}, (error, result) => {
         if (error) {
@@ -836,17 +835,17 @@ export function verifyAccount(req: express.Request, res: express.Response, next:
 
 export function verifyChangedEmailId(req: express.Request, res: express.Response, next: any) {
   try {
-console.log("Changemailverification hit");
+    console.log("Changemailverification hit");
     var user = req.user;
     var params = req.query;
     delete params.access_token;
     var userService = new UserService();
 
     var query = {"_id": user._id};
-    var updateData = {"email":user.temp_email,"temp_email": user.email};
+    var updateData = {"email": user.temp_email, "temp_email": user.email};
     userService.findOneAndUpdate(query, updateData, {new: true}, (error, result) => {
       if (error) {
-        console.log("Changemailverification hit error",error);
+        console.log("Changemailverification hit error", error);
         next(error);
       }
       else {
@@ -864,125 +863,120 @@ console.log("Changemailverification hit");
   }
 }
 
-export function getIndustry (req:express.Request, res:express.Response) {
+export function getIndustry(req: express.Request, res: express.Response) {
   __dirname = './';
-  var filepath="industry.json";
+  var filepath = "industry.json";
   try {
-    res.sendFile(filepath,{root: __dirname});
+    res.sendFile(filepath, {root: __dirname});
   }
   catch (e) {
     res.status(403).send({message: e.message});
   }
 }
 
-export function getCompanySize (req:express.Request, res:express.Response) {
+export function getCompanySize(req: express.Request, res: express.Response) {
   __dirname = './';
-  var filepath="company-size.json";
+  var filepath = "company-size.json";
   try {
-    res.sendFile(filepath,{root: __dirname});
+    res.sendFile(filepath, {root: __dirname});
   }
   catch (e) {
     res.status(403).send({message: e.message});
   }
 }
 
-export function getAddress (req:express.Request, res:express.Response) {
+export function getAddress(req: express.Request, res: express.Response) {
   __dirname = './';
-  var filepath="address.json";
+  var filepath = "address.json";
   try {
-    res.sendFile(filepath,{root: __dirname});
+    res.sendFile(filepath, {root: __dirname});
   }
   catch (e) {
     res.status(403).send({message: e.message});
   }
 }
-export function getRealocation(req:express.Request, res:express.Response) {
+export function getRealocation(req: express.Request, res: express.Response) {
 
   __dirname = './';
-  var filepath="realocation.json";
+  var filepath = "realocation.json";
   try {
-    res.sendFile(filepath,{root: __dirname});
+    res.sendFile(filepath, {root: __dirname});
   }
   catch (e) {
     res.status(403).send({message: e.message});
   }
 }
-export function getEducation(req:express.Request, res:express.Response) {
+export function getEducation(req: express.Request, res: express.Response) {
   __dirname = './';
-  var filepath="education.json";
+  var filepath = "education.json";
   try {
-    res.sendFile(filepath,{root: __dirname});
-  }
-  catch (e) {
-    res.status(403).send({message: e.message});
-  }
-}
-
-export function getExperience(req:express.Request, res:express.Response) {
-  __dirname = './';
-  var filepath="experienceList.json";
-  try {
-    res.sendFile(filepath,{root: __dirname});
-  }
-  catch (e) {
-    res.status(403).send({message: e.message});
-  }
-}
-export function getCurrentSalary(req:express.Request, res:express.Response) {
-  __dirname = './';
-  var filepath="currentsalaryList.json";
-  try {
-    res.sendFile(filepath,{root: __dirname});
+    res.sendFile(filepath, {root: __dirname});
   }
   catch (e) {
     res.status(403).send({message: e.message});
   }
 }
 
-export function getNoticePeriod(req:express.Request, res:express.Response) {
+export function getExperience(req: express.Request, res: express.Response) {
   __dirname = './';
-  var filepath="noticeperiodList.json";
+  var filepath = "experienceList.json";
   try {
-    res.sendFile(filepath,{root: __dirname});
+    res.sendFile(filepath, {root: __dirname});
+  }
+  catch (e) {
+    res.status(403).send({message: e.message});
+  }
+}
+export function getCurrentSalary(req: express.Request, res: express.Response) {
+  __dirname = './';
+  var filepath = "currentsalaryList.json";
+  try {
+    res.sendFile(filepath, {root: __dirname});
   }
   catch (e) {
     res.status(403).send({message: e.message});
   }
 }
 
-export function getSearchedCandidate(req:express.Request,res:express.Response){
-  __dirname ='./';
-  var filepath="candidate.json";
-  try{
-    res.sendFile(filepath,{root:__dirname});
-  }
-  catch (e){
-    res.status(403).send({message:e.message});
-  }
-
-}
-
-
-
-
-
-
-
-export function getCountries (req:express.Request, res:express.Response) {
+export function getNoticePeriod(req: express.Request, res: express.Response) {
   __dirname = './';
-  var filepath="country.json";
+  var filepath = "noticeperiodList.json";
   try {
-    res.sendFile(filepath,{root: __dirname});
+    res.sendFile(filepath, {root: __dirname});
   }
   catch (e) {
     res.status(403).send({message: e.message});
   }
 }
-export function getIndiaStates (req:express.Request, res:express.Response) {
+
+export function getSearchedCandidate(req: express.Request, res: express.Response) {
   __dirname = './';
-  var filepath="indiaStates.json";
+  var filepath = "candidate.json";
   try {
-    res.sendFile(filepath,{root: __dirname});
+    res.sendFile(filepath, {root: __dirname});
+  }
+  catch (e) {
+    res.status(403).send({message: e.message});
+  }
+
+}
+
+
+export function getCountries(req: express.Request, res: express.Response) {
+  __dirname = './';
+  var filepath = "country.json";
+  try {
+    res.sendFile(filepath, {root: __dirname});
+  }
+  catch (e) {
+    res.status(403).send({message: e.message});
+  }
+}
+export function getIndiaStates(req: express.Request, res: express.Response) {
+  __dirname = './';
+  var filepath = "indiaStates.json";
+  try {
+    res.sendFile(filepath, {root: __dirname});
   }
   catch (e) {
     res.status(403).send({message: e.message});
@@ -990,76 +984,76 @@ export function getIndiaStates (req:express.Request, res:express.Response) {
 }
 getRoleTypes
 
-export function getRoleTypes (req:express.Request, res:express.Response) {
+export function getRoleTypes(req: express.Request, res: express.Response) {
   __dirname = './';
-  var filepath="roltype.json";
+  var filepath = "roltype.json";
   try {
-    res.sendFile(filepath,{root: __dirname});
+    res.sendFile(filepath, {root: __dirname});
   }
   catch (e) {
     res.status(403).send({message: e.message});
   }
 }
 
-export function getFunction (req:express.Request, res:express.Response) {
+export function getFunction(req: express.Request, res: express.Response) {
   __dirname = './';
-  var filepath="function.json";
+  var filepath = "function.json";
   try {
-    res.sendFile(filepath,{root: __dirname});
+    res.sendFile(filepath, {root: __dirname});
   }
   catch (e) {
     res.status(403).send({message: e.message});
   }
 }
-export function getRole (req:express.Request, res:express.Response) {
+export function getRole(req: express.Request, res: express.Response) {
   __dirname = './';
-  var filepath="roles.json";
+  var filepath = "roles.json";
   try {
-    res.sendFile(filepath,{root: __dirname});
+    res.sendFile(filepath, {root: __dirname});
   }
   catch (e) {
     res.status(403).send({message: e.message});
   }
 }
-export function  getProficiency (req:express.Request, res:express.Response) {
+export function getProficiency(req: express.Request, res: express.Response) {
   __dirname = './';
-  var filepath="proficiency.json";
+  var filepath = "proficiency.json";
   try {
-    res.sendFile(filepath,{root: __dirname});
-  }
-  catch (e) {
-    res.status(403).send({message: e.message});
-  }
-}
-
-export function  getDomain (req:express.Request, res:express.Response) {
-  __dirname = './';
-  var filepath="domain.json";
-  try {
-    res.sendFile(filepath,{root: __dirname});
+    res.sendFile(filepath, {root: __dirname});
   }
   catch (e) {
     res.status(403).send({message: e.message});
   }
 }
 
-
-export function getCapability (req:express.Request, res:express.Response) {
+export function getDomain(req: express.Request, res: express.Response) {
   __dirname = './';
-  var filepath="capability.json";
+  var filepath = "domain.json";
   try {
-    res.sendFile(filepath,{root: __dirname});
+    res.sendFile(filepath, {root: __dirname});
   }
   catch (e) {
     res.status(403).send({message: e.message});
   }
 }
 
-export function getComplexity (req:express.Request, res:express.Response) {
+
+export function getCapability(req: express.Request, res: express.Response) {
   __dirname = './';
-  var filepath="complexity.json";
+  var filepath = "capability.json";
   try {
-    res.sendFile(filepath,{root: __dirname});
+    res.sendFile(filepath, {root: __dirname});
+  }
+  catch (e) {
+    res.status(403).send({message: e.message});
+  }
+}
+
+export function getComplexity(req: express.Request, res: express.Response) {
+  __dirname = './';
+  var filepath = "complexity.json";
+  try {
+    res.sendFile(filepath, {root: __dirname});
   }
   catch (e) {
     res.status(403).send({message: e.message});
@@ -1111,7 +1105,7 @@ export function googlelogin(req: express.Request, res: express.Response, next: a
   try {
     var userService = new UserService();
     var params = req.user;
-    console.log("params in google login",params);
+    console.log("params in google login", params);
     var auth = new AuthInterceptor();
     userService.retrieve(params, (error, result) => {
       if (error) {
@@ -1151,192 +1145,191 @@ export function googlelogin(req: express.Request, res: express.Response, next: a
 };
 
 /*export function getGoogleToken(req : express.Request, res: express.Response, next: any) {
-  var token = JSON.stringify(req.body.token);
+ var token = JSON.stringify(req.body.token);
 
-  var url = 'https://www.googleapis.com/oauth2/v3/tokeninfo?id_token='+token;
-  console.log('url : '+token);
-  request(url, function( error:any , response:any , body:any ) {
-    if(error){
-      console.log('error :'+error);
-      //res.send(error);
-    }
-    else if (body) {
-      console.log('body :'+JSON.stringify(body));
-      //res.send(body);
-    }
-  });
+ var url = 'https://www.googleapis.com/oauth2/v3/tokeninfo?id_token='+token;
+ console.log('url : '+token);
+ request(url, function( error:any , response:any , body:any ) {
+ if(error){
+ console.log('error :'+error);
+ //res.send(error);
+ }
+ else if (body) {
+ console.log('body :'+JSON.stringify(body));
+ //res.send(body);
+ }
+ });
  // res.send(token);
-}*/
+ }*/
 
-export function updatePicture(req:express.Request, res:express.Response, next:any):void {
-    __dirname = 'src/server/app/framework/public/profileimage';
-    var form = new multiparty.Form({uploadDir: __dirname});
-    form.parse(req, (err:Error, fields:any, files:any) => {
+export function updatePicture(req: express.Request, res: express.Response, next: any): void {
+  __dirname = 'src/server/app/framework/public/profileimage';
+  var form = new multiparty.Form({uploadDir: __dirname});
+  form.parse(req, (err: Error, fields: any, files: any) => {
+    if (err) {
+      next({
+        reason: Messages.MSG_ERROR_RSN_DIRECTORY_NOT_FOUND,
+        message: Messages.MSG_ERROR_DIRECTORY_NOT_FOUND,
+        code: 401
+      });
+    } else {
+      var path = JSON.stringify(files.file[0].path);
+      var image_path = files.file[0].path;
+      var originalFilename = JSON.stringify(image_path.substr(files.file[0].path.lastIndexOf('/') + 1));
+      var userService = new UserService();
+
+      userService.UploadImage(path, originalFilename, function (err: any, tempath: any) {
         if (err) {
-            next({
-                reason: Messages.MSG_ERROR_RSN_DIRECTORY_NOT_FOUND,
-                message: Messages.MSG_ERROR_DIRECTORY_NOT_FOUND,
-                code: 401
-            });
-        } else {
-            var path = JSON.stringify(files.file[0].path);
-            var image_path = files.file[0].path;
-            var originalFilename = JSON.stringify(image_path.substr(files.file[0].path.lastIndexOf('/') + 1));
-            var userService = new UserService();
+          next(err);
+        }
+        else {
+          var mypath = tempath;
 
-            userService.UploadImage(path, originalFilename, function (err:any, tempath:any) {
-                if (err) {
-                    next(err);
-                }
-                else {
-                    var mypath = tempath;
+          try {
+            var user = req.user;
+            var query = {"_id": user._id};
 
-                    try {
-                        var user = req.user;
-                        var query = {"_id": user._id};
-
-                      userService.findById(user._id,  (error, result) => {
+            userService.findById(user._id, (error, result) => {
+              if (error) {
+                res.status(403).send({message: error});
+              }
+              else {
+                if (!result.isCandidate) {
+                  console.log("Is candidate" + JSON.stringify(result));
+                  let recruiterService: RecruiterService = new RecruiterService();
+                  let query1 = {"userId": result._id};
+                  recruiterService.findOneAndUpdate(query1, {company_logo: mypath}, {new: true}, (error, response1) => {
+                    if (error) {
+                      res.status(403).send({message: error});
+                    }
+                    else {
+                      console.log("-----------------------------------------------------------");
+                      console.log("updated");
+                      userService.findOneAndUpdate(query, {picture: mypath}, {new: true}, (error, response) => {
                         if (error) {
                           res.status(403).send({message: error});
                         }
-                        else{
-                          if(!result.isCandidate){
-                            console.log("Is candidate"+ JSON.stringify(result));
-                            let recruiterService : RecruiterService= new RecruiterService();
-                            let query1 = {"userId": result._id};
-                            recruiterService.findOneAndUpdate(query1, {company_logo: mypath}, {new: true}, (error, response1) => {
-                              if (error) {
-                                res.status(403).send({message: error});
-                              }
-                              else{
-                                console.log("-----------------------------------------------------------");
-                                console.log("updated");
-                                userService.findOneAndUpdate(query, {picture: mypath}, {new: true}, (error, response) => {
-                                  if (error) {
-                                    res.status(403).send({message: error});
-                                  }
-                                  else{
-                                    var auth:AuthInterceptor = new AuthInterceptor();
-                                    var token = auth.issueTokenWithUid(response);
-                                    res.status(200).send({access_token: token, data: response});
-                                  }
-                                });
-
-                              }
-                            });
-
-                          }else{
-                            userService.findOneAndUpdate(query, {picture: mypath}, {new: true}, (error, response) => {
-                              if (error) {
-                                res.status(403).send({message: error});
-                              }
-                              else{
-                                var auth:AuthInterceptor = new AuthInterceptor();
-                                var token = auth.issueTokenWithUid(response);
-                                res.status(200).send({access_token: token, data: response});
-                              }
-                            });
-                          }
-
-
+                        else {
+                          var auth: AuthInterceptor = new AuthInterceptor();
+                          var token = auth.issueTokenWithUid(response);
+                          res.status(200).send({access_token: token, data: response});
                         }
                       });
+
                     }
-                    catch (e) {
-                        res.status(403).send({message: e.message});
+                  });
+
+                } else {
+                  userService.findOneAndUpdate(query, {picture: mypath}, {new: true}, (error, response) => {
+                    if (error) {
+                      res.status(403).send({message: error});
                     }
+                    else {
+                      var auth: AuthInterceptor = new AuthInterceptor();
+                      var token = auth.issueTokenWithUid(response);
+                      res.status(200).send({access_token: token, data: response});
+                    }
+                  });
                 }
+
+
+              }
             });
+          }
+          catch (e) {
+            res.status(403).send({message: e.message});
+          }
         }
+      });
+    }
 
   });
 }
 
 
-export function updateCompanyDetails(req:express.Request, res:express.Response, next:any):void {
+export function updateCompanyDetails(req: express.Request, res: express.Response, next: any): void {
 
-    console.log("UpdatePicture user Controller is been hit req ");
-    var userService = new UserService();
+  console.log("UpdatePicture user Controller is been hit req ");
+  var userService = new UserService();
   var user = req.user;
   var query = {"_id": user._id};
   /*userService.findOneAndUpdate(query, {picture: mypath}, {new: true}, (error, result) => {
-    if (error) {
-      res.status(403).send({message: error});
-    }
-    else{
-      var auth:AuthInterceptor = new AuthInterceptor();
-      var token = auth.issueTokenWithUid(result);
-      res.status(200).send({access_token: token, data: result});
-    }
-  });*/
+   if (error) {
+   res.status(403).send({message: error});
+   }
+   else{
+   var auth:AuthInterceptor = new AuthInterceptor();
+   var token = auth.issueTokenWithUid(result);
+   res.status(200).send({access_token: token, data: result});
+   }
+   });*/
 }
 
-export function uploaddocuments(req:express.Request, res:express.Response, next:any):void {
-    __dirname = 'src/server/app/framework/public/uploaded-document';
+export function uploaddocuments(req: express.Request, res: express.Response, next: any): void {
+  __dirname = 'src/server/app/framework/public/uploaded-document';
 
-    var form = new multiparty.Form({uploadDir: __dirname});
-    console.log("updatedocuments user Controller is been hit req ", req);
-    form.parse(req, (err: Error, fields: any, files: any) => {
-      if (err) {
-        next({
-          reason: Messages.MSG_ERROR_RSN_DIRECTORY_NOT_FOUND,
-          message: Messages.MSG_ERROR_DIRECTORY_NOT_FOUND,
-          code: 401
-        });
-      } else {
-        console.log("fields of doc upload:" + fields);
-        console.log("files of doc upload:" + files);
+  var form = new multiparty.Form({uploadDir: __dirname});
+  console.log("updatedocuments user Controller is been hit req ", req);
+  form.parse(req, (err: Error, fields: any, files: any) => {
+    if (err) {
+      next({
+        reason: Messages.MSG_ERROR_RSN_DIRECTORY_NOT_FOUND,
+        message: Messages.MSG_ERROR_DIRECTORY_NOT_FOUND,
+        code: 401
+      });
+    } else {
+      console.log("fields of doc upload:" + fields);
+      console.log("files of doc upload:" + files);
 
-        var path = JSON.stringify(files.file[0].path);
-        console.log("Path url of doc upload:" + path);
-        var document_path = files.file[0].path;
-        console.log("Document path of doc upload:" + document_path);
-        var originalFilename = JSON.stringify(document_path.substr(files.file[0].path.lastIndexOf('/') + 1));
-        console.log("Original FileName of doc upload:" + originalFilename);
+      var path = JSON.stringify(files.file[0].path);
+      console.log("Path url of doc upload:" + path);
+      var document_path = files.file[0].path;
+      console.log("Document path of doc upload:" + document_path);
+      var originalFilename = JSON.stringify(document_path.substr(files.file[0].path.lastIndexOf('/') + 1));
+      console.log("Original FileName of doc upload:" + originalFilename);
 
-        res.status(200).send({
-          "status": Messages.STATUS_SUCCESS,
-          "data": {
-            "document":document_path
-          }
-        });
+      res.status(200).send({
+        "status": Messages.STATUS_SUCCESS,
+        "data": {
+          "document": document_path
+        }
+      });
 
-        /*   var userService = new UserService();
-            userService.UploadDocuments(path, originalFilename, function (err:any, tempath:any) {
-         if (err) {
-         console.log("Err message of uploaddocument is:",err);
-         next(err);
-         }
-         else {
-         var mypath = tempath;
-         try {
-         var user = req.user;
-         var query = {"_id": user._id};
-         userService.findOneAndUpdate(query, {document1: mypath}, {new: true}, (error, result) => {
-         if (error) {
-         res.status(403).send({message: error});
-         }
-         else{
-         var auth:AuthInterceptor = new AuthInterceptor();
-         var token = auth.issueTokenWithUid(result);
-         res.status(200).send({access_token: token, data: result});
-         }
-         });
-         }
-         catch (e) {
-         res.status(403).send({message: e.message});
-         }
-         }
-         });*/
-      }
+      /*   var userService = new UserService();
+       userService.UploadDocuments(path, originalFilename, function (err:any, tempath:any) {
+       if (err) {
+       console.log("Err message of uploaddocument is:",err);
+       next(err);
+       }
+       else {
+       var mypath = tempath;
+       try {
+       var user = req.user;
+       var query = {"_id": user._id};
+       userService.findOneAndUpdate(query, {document1: mypath}, {new: true}, (error, result) => {
+       if (error) {
+       res.status(403).send({message: error});
+       }
+       else{
+       var auth:AuthInterceptor = new AuthInterceptor();
+       var token = auth.issueTokenWithUid(result);
+       res.status(200).send({access_token: token, data: result});
+       }
+       });
+       }
+       catch (e) {
+       res.status(403).send({message: e.message});
+       }
+       }
+       });*/
+    }
 
-    });
+  });
 
 
 }
 
-export  function profilecreate(req:express.Request, res:express.Response)
-{
+export function profilecreate(req: express.Request, res: express.Response) {
   try {
 
     console.log("In profile create");
@@ -1347,12 +1340,11 @@ export  function profilecreate(req:express.Request, res:express.Response)
 }
 
 
-export  function professionaldata(req:express.Request, res:express.Response)
-{
+export function professionaldata(req: express.Request, res: express.Response) {
   try {
 
-    var newUser=req.body;
-   console.log("newUser",JSON.stringify(newUser));
+    var newUser = req.body;
+    console.log("newUser", JSON.stringify(newUser));
 
   }
   catch (e) {
@@ -1361,12 +1353,11 @@ export  function professionaldata(req:express.Request, res:express.Response)
 
 }
 
-export  function employmentdata(req:express.Request, res:express.Response)
-{
+export function employmentdata(req: express.Request, res: express.Response) {
   try {
 
-    var newUser=req.body;
-    console.log("newUser",JSON.stringify(newUser));
+    var newUser = req.body;
+    console.log("newUser", JSON.stringify(newUser));
 
   }
   catch (e) {
@@ -1374,8 +1365,6 @@ export  function employmentdata(req:express.Request, res:express.Response)
   }
 
 }
-
-
 
 
 export function changeTheme(req: express.Request, res: express.Response, next: any): void {

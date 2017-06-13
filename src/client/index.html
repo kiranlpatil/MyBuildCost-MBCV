@@ -2,50 +2,54 @@
 <html lang="en">
 <head>
   <base href="<%= APP_BASE %>">
-  <link rel="shortcut icon" type="image/x-icon" href="<%= FAV_ICON %>" />
+  <link rel="shortcut icon" type="image/x-icon" href="<%= FAV_ICON %>"/>
   <link rel="manifest" href="./manifest.json">
   <meta name="mobile-web-app-capable" content="yes">
   <link rel="icon" sizes="192x192" href="src/client/assets/framework/web-icon/xxxhdpi.png">
   <link rel="icon" sizes="144x144" href="src/client/assets/framework/web-icon/xxhdpi.png">
   <link rel="apple-touch-icon" sizes="144x144" href="src/client/assets/framework/web-icon/hdpi.png">
   <link rel="apple-touch-icon-precomposed" sizes="144x144" href="src/client/assets/framework/web-icon/hdpi.png">
-  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBZSx1QoLge0fUxDJ0MZAu4RsGZMdv40EU&libraries=places"></script>
+  <script type="text/javascript"
+          src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBZSx1QoLge0fUxDJ0MZAu4RsGZMdv40EU&libraries=places"></script>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
- <!-- <meta http-equiv="Content-Security-Policy" content="default-src http: 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval' 'unsafe-inline' ws://localhost:*; script-src 'self' 'unsafe-eval' 'unsafe-inline'; media-src * blob:">-->
-  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=0" />
+  <!-- <meta http-equiv="Content-Security-Policy" content="default-src http: 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval' 'unsafe-inline' ws://localhost:*; script-src 'self' 'unsafe-eval' 'unsafe-inline'; media-src * blob:">-->
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=0"/>
   <title><%= APP_TITLE %></title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="google-signin-client_id" content="244363436693-l4fglqbjitj39t9dsg7lkep5esfoe1bq.apps.googleusercontent.com">
+  <meta name="google-signin-client_id"
+        content="244363436693-l4fglqbjitj39t9dsg7lkep5esfoe1bq.apps.googleusercontent.com">
   <!-- inject:css -->
   <!-- endinject -->
 </head>
 <body>
 <script src="https://apis.google.com/js/api.js"></script>
 <% if (BUILD_TYPE === 'prod') { %>
-  <!--<script src="cordova.js"></script>-->
+<!--<script src="cordova.js"></script>-->
 <% } %>
 
-  <tpl-app></tpl-app>
+<tpl-app></tpl-app>
 
-  <script>
+<script>
   // Fixes undefined module function in SystemJS bundle
-  function module() {}
-  </script>
+  function module() {
+  }
+</script>
 
-  <!-- shims:js -->
-  <!-- endinject -->
+<!-- shims:js -->
+<!-- endinject -->
 
-  <% if (BUILD_TYPE === 'dev') { %>
-  <script src="<%= APP_BASE %>app/system-config.js"></script>
-  <% } %>
+<% if (BUILD_TYPE === 'dev') { %>
+<script src="<%= APP_BASE %>app/system-config.js"></script>
+<% } %>
 
-  <!-- libs:js -->
-  <!-- endinject -->
+<!-- libs:js -->
+<!-- endinject -->
 
-  <!-- inject:js -->
-  <!-- endinject -->
+<!-- inject:js -->
+<!-- endinject -->
 <!--<script src="https://apis.google.com/js/platform.js" async defer></script>--><!--
 <script>
   if('serviceWorker' in navigator) {
@@ -58,15 +62,15 @@
   }
 </script>-->
 
-  <% if (BUILD_TYPE  === 'dev') { %>
-  <script>
+<% if (BUILD_TYPE === 'dev') { %>
+<script>
   System.import('<%= BOOTSTRAP_MODULE %>')
     .catch(function (e) {
       console.error(e.stack || e,
         'Not expecting this error? Report it at https://github.com/mgechev/angular2-seed/issues');
     });
-  </script>
-  <% } %>
+</script>
+<% } %>
 
 </body>
 </html>

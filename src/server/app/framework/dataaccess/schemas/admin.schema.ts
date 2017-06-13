@@ -7,15 +7,15 @@ var mongoose = DataAccess.mongooseInstance;
 var mongooseConnection = DataAccess.mongooseConnection;
 
 class AdminSchema {
-    static get schema() {
-        var schema = mongoose.Schema({
-          userId : {
-            type : mongoose.Schema.Types.ObjectId, ref :'User'
-          }
-        },{ versionKey: false });
+  static get schema() {
+    var schema = mongoose.Schema({
+      userId: {
+        type: mongoose.Schema.Types.ObjectId, ref: 'User'
+      }
+    }, {versionKey: false});
 
-        return schema;
-    }
+    return schema;
+  }
 }
 var schema = mongooseConnection.model<IAdmin>("Role", AdminSchema.schema);
 export = schema;

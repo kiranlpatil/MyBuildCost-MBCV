@@ -1,13 +1,13 @@
 export class AppSettings {
- // public static IP = 'http://localhost:8080';
+  public static IP = 'http://localhost:8080';
   // public static IP = 'http://ee802b7f.ngrok.io';
   //public static IP = 'http://10.192.33.252:8087';
- public static IP = 'http://52.89.221.23:8080';
+  //public static IP = 'http://52.89.221.23:8080';
   //public static IP = 'http://52.41.194.37:8080';
   //public static IP = '';
 
 
-  public static get API_ENDPOINT():string {
+  public static get API_ENDPOINT(): string {
     return this.IP + '/api/';
   }
 
@@ -18,73 +18,73 @@ export class AppSettings {
 }
 
 export class Messages {
-  public static MSG_SUCCESS_LOGIN:string = 'You are successfully logged in.';
-  public static MSG_SUCCESS_REGISTRATION:string = 'Kindly verify your account.';
-  public static MSG_SUCCESS_CHANGE_MOBILE_NUMBER:string = 'Mobile number changed successfully.';
-  public static MSG_SUCCESS_RESEND_VERIFICATION_CODE:string = 'New One Time Password (OTP) sent on your mobile number.';
-  public static MSG_SUCCESS_MAIL_VERIFICATION:string = 'Verification email sent successfully on your email account. Kindly verify your account.';
-  public static MSG_SUCCESS_NEWREGISTRATION:string = 'Registration successful. Mobile number verified. Kindly login';
-  public static MSG_SUCCESS_RESET_PASSWORD:string = 'Your password is reset successfully';
-  public static MSG_SUCCESS_CHANGE_PASSWORD:string = 'Your password has been changed successfully';
-  public static MSG_SUCCESS_CHANGE_EMAIL:string = 'Kindly click on the link sent to your new email for email verification';
-  public static MSG_SUCCESS_CHANGE_MOBILE:string = 'Verify your new mobile number by entering OTP sent on your mobile number';
-  public static MSG_SUCCESS_FORGOT_PASSWORD:string = 'Email has been sent successfully on your registered email to reset password';
-  public static MSG_SUCCESS_DASHBOARD_PROFILE:string = 'Your profile updated successfully';
-  public static MSG_SUCCESS_DASHBOARD_PROFILE_PIC:string = 'Your profile picture updated successfully.';
-  public static MSG_SUCCESS_ATTACH_DOCUMENT:string = 'Your document attached successfully.';
-  public static MSG_SUCCESS_UPLOADED_DOCUMENT:string = 'Your documents uploaded successfully.';
-  public static MSG_SUCCESS_CONTACT:string = 'Email sent successfully.';
-  public static MSG_SUCCESS_CHANGE_THEME:string = 'Theme changed successfully.';
-  public static MSG_SUCCESS_MAIL_VERIFICATION_RESULT_STATUS:string = 'Congratulations!';
-  public static MSG_SUCCESS_MAIL_VERIFICATION_BODY:string = 'Your account verified successfully.' +
+  public static MSG_SUCCESS_LOGIN: string = 'You are successfully logged in.';
+  public static MSG_SUCCESS_REGISTRATION: string = 'Kindly verify your account.';
+  public static MSG_SUCCESS_CHANGE_MOBILE_NUMBER: string = 'Mobile number changed successfully.';
+  public static MSG_SUCCESS_RESEND_VERIFICATION_CODE: string = 'New One Time Password (OTP) sent on your mobile number.';
+  public static MSG_SUCCESS_MAIL_VERIFICATION: string = 'Verification email sent successfully on your email account. Kindly verify your account.';
+  public static MSG_SUCCESS_NEWREGISTRATION: string = 'Registration successful. Mobile number verified. Kindly login';
+  public static MSG_SUCCESS_RESET_PASSWORD: string = 'Your password is reset successfully';
+  public static MSG_SUCCESS_CHANGE_PASSWORD: string = 'Your password has been changed successfully';
+  public static MSG_SUCCESS_CHANGE_EMAIL: string = 'Kindly click on the link sent to your new email for email verification';
+  public static MSG_SUCCESS_CHANGE_MOBILE: string = 'Verify your new mobile number by entering OTP sent on your mobile number';
+  public static MSG_SUCCESS_FORGOT_PASSWORD: string = 'Email has been sent successfully on your registered email to reset password';
+  public static MSG_SUCCESS_DASHBOARD_PROFILE: string = 'Your profile updated successfully';
+  public static MSG_SUCCESS_DASHBOARD_PROFILE_PIC: string = 'Your profile picture updated successfully.';
+  public static MSG_SUCCESS_ATTACH_DOCUMENT: string = 'Your document attached successfully.';
+  public static MSG_SUCCESS_UPLOADED_DOCUMENT: string = 'Your documents uploaded successfully.';
+  public static MSG_SUCCESS_CONTACT: string = 'Email sent successfully.';
+  public static MSG_SUCCESS_CHANGE_THEME: string = 'Theme changed successfully.';
+  public static MSG_SUCCESS_MAIL_VERIFICATION_RESULT_STATUS: string = 'Congratulations!';
+  public static MSG_SUCCESS_MAIL_VERIFICATION_BODY: string = 'Your account verified successfully.' +
     'You may start using it immediately right now.Click on Login!';
 
-  public static MSG_SUCCESS_FOR_PROFILE_CREATION_STATUS:string = 'Your profile created successfully';
-  public static MSG_SUCCESS_FOR_JOB_POST_STATUS:string = 'You are successfully posted your job';
+  public static MSG_SUCCESS_FOR_PROFILE_CREATION_STATUS: string = 'Your profile created successfully';
+  public static MSG_SUCCESS_FOR_JOB_POST_STATUS: string = 'You are successfully posted your job';
 
-  public static MSG_ERROR_MAIL_VERIFICATION_BODY:string = 'Your account verification failed due to invalid access token!';
-  public static MSG_ERROR_MAIL_VERIFICATION_RESULT_STATUS:string = 'Sorry';
-  public static MSG_ERROR_LOGIN:string = 'Failed to login';
-  public static MSG_ERROR_FB_LOGIN:string = 'Failed to Facebook login';
-  public static MSG_ERROR_REGISTRATION:string = 'Failed to new user registration';
-  public static MSG_ERROR_CHANGE_PASSWORD:string = 'Failed to change password';
-  public static MSG_ERROR_CHANGE_EMAIL:string = 'Failed to change email';
-  public static MSG_ERROR_FORGOT_PASSWORD:string = 'Failed to reset password';
-  public static MSG_ERROR_DASHBOARD_PROFILE:string = 'Failed to update Profile';
-  public static MSG_ERROR_CONTACT:string = 'Failed to send email';
-  public static MSG_ERROR_DASHBOARD_PROFILE_PIC:string = 'Failed to change Profile Picture';
-  public static MSG_ERROR_ATTACH_DOCUMENT:string = 'Failed to attach Document';
-  public static MSG_ERROR_CHANGE_THEME:string = 'Failed to Change Theme';
+  public static MSG_ERROR_MAIL_VERIFICATION_BODY: string = 'Your account verification failed due to invalid access token!';
+  public static MSG_ERROR_MAIL_VERIFICATION_RESULT_STATUS: string = 'Sorry';
+  public static MSG_ERROR_LOGIN: string = 'Failed to login';
+  public static MSG_ERROR_FB_LOGIN: string = 'Failed to Facebook login';
+  public static MSG_ERROR_REGISTRATION: string = 'Failed to new user registration';
+  public static MSG_ERROR_CHANGE_PASSWORD: string = 'Failed to change password';
+  public static MSG_ERROR_CHANGE_EMAIL: string = 'Failed to change email';
+  public static MSG_ERROR_FORGOT_PASSWORD: string = 'Failed to reset password';
+  public static MSG_ERROR_DASHBOARD_PROFILE: string = 'Failed to update Profile';
+  public static MSG_ERROR_CONTACT: string = 'Failed to send email';
+  public static MSG_ERROR_DASHBOARD_PROFILE_PIC: string = 'Failed to change Profile Picture';
+  public static MSG_ERROR_ATTACH_DOCUMENT: string = 'Failed to attach Document';
+  public static MSG_ERROR_CHANGE_THEME: string = 'Failed to Change Theme';
 
-  public static MSG_ERROR_TOKEN_SESSION:string = 'Session has been expired.';
-  public static MSG_ERROR_NETWORK:string = 'Internal Server Error.';
-  public static MSG_ERROR_SERVER_ERROR:string = 'Server error.';
-  public static MSG_ERROR_SOMETHING_WRONG:string = 'Internal Server Error.';
+  public static MSG_ERROR_TOKEN_SESSION: string = 'Session has been expired.';
+  public static MSG_ERROR_NETWORK: string = 'Internal Server Error.';
+  public static MSG_ERROR_SERVER_ERROR: string = 'Server error.';
+  public static MSG_ERROR_SOMETHING_WRONG: string = 'Internal Server Error.';
 
-  public static MSG_ERROR_IMAGE_TYPE:string = 'Please select valid image type.';
-  public static MSG_ERROR_IMAGE_SIZE:string = 'Make sure image size is less than 500kb';
-  public static MSG_ERROR_FB_AUTH:string = 'User cancelled login or did not fully authorize';
-  public static MSG_ERROR_FB_domain_error:string = 'The domain of this URL isn not included in the app domains';
-  public static MSG_WARNING_ON_EDIT_CANDIDATE:string = 'This section can be updated only after';
+  public static MSG_ERROR_IMAGE_TYPE: string = 'Please select valid image type.';
+  public static MSG_ERROR_IMAGE_SIZE: string = 'Make sure image size is less than 500kb';
+  public static MSG_ERROR_FB_AUTH: string = 'User cancelled login or did not fully authorize';
+  public static MSG_ERROR_FB_domain_error: string = 'The domain of this URL isn not included in the app domains';
+  public static MSG_WARNING_ON_EDIT_CANDIDATE: string = 'This section can be updated only after';
 }
 
 export class NavigationRoutes {
-  public static APP_REGISTRATION:string = '/registration';
-  public static APP_FORGOTPASSWORD:string = '/forgotpassword';
-  public static APP_DASHBOARD:string = '/dashboard';
-  public static APP_CANDIDATE_DASHBOARD:string = '/candidate_dashboard';
-  public static APP_RECRUITER_DASHBOARD:string = '/recruiterdashboard';
-  public static APP_LOGIN:string = '/login';
-  public static APP_START:string = '/';
-  public static APP_LANDING:string = '/landing';
-  public static VERIFY_USER:string = '/verify_user';
-  public static ACTIVATE_USER:string = '/activate_user';
-  public static VERIFY_PHONE:string = '/verify_phone';
-  public static APP_CHANGEEMAIL:string = '/change_email';
-  public static APP_CREATEPROFILE:string = '/create_profile';
-  public static APP_PROFILESUMMURY:string = '/profile_summury';
-  public static APP_JOB_SUMMURY:string = '/job_summary';
-  public static APP_COMPANYDETAILS:string = '/company_details';
+  public static APP_REGISTRATION: string = '/registration';
+  public static APP_FORGOTPASSWORD: string = '/forgotpassword';
+  public static APP_DASHBOARD: string = '/dashboard';
+  public static APP_CANDIDATE_DASHBOARD: string = '/candidate_dashboard';
+  public static APP_RECRUITER_DASHBOARD: string = '/recruiterdashboard';
+  public static APP_LOGIN: string = '/login';
+  public static APP_START: string = '/';
+  public static APP_LANDING: string = '/landing';
+  public static VERIFY_USER: string = '/verify_user';
+  public static ACTIVATE_USER: string = '/activate_user';
+  public static VERIFY_PHONE: string = '/verify_phone';
+  public static APP_CHANGEEMAIL: string = '/change_email';
+  public static APP_CREATEPROFILE: string = '/create_profile';
+  public static APP_PROFILESUMMURY: string = '/profile_summury';
+  public static APP_JOB_SUMMURY: string = '/job_summary';
+  public static APP_COMPANYDETAILS: string = '/company_details';
 
 }
 
@@ -116,21 +116,21 @@ export class LocalStorage {
 }
 
 export class ValueConstant {
-  public static MAX_CAPABILITIES:number = 10;
-  public static MATCHING_PERCENTAGE:number = 10;
-  public static MAX_WORKAREA:number = 3;
-  public static MAX_INTERESTEDINDUSTRY:number = 7;
-  public static MAX_PROFECIENCES:number = 25;
-  public static MAX_MANDATORY_PROFECIENCES:number = 5;
-  public static MAX_ADDITIONAL_PROFECIENCES:number = 5;
-  public static MAX_YEAR_LIST:number = 60;
-  public static MAX_ACADEMIC_YEAR_LIST:number = 50;
-  public static SHORT_LISTED_CANDIDATE:string = 'shortListed';
-  public static CART_LISTED_CANDIDATE:string = 'cartListed';
-  public static REJECTED_LISTED_CANDIDATE:string = 'rejectedList';
-  public static APPLIED_CANDIDATE:string = 'applied';
-  public static BLOCKED_CANDIDATE:string = 'blocked';
-  public static MATCHED_CANDIDATE:string = 'matchedList';
+  public static MAX_CAPABILITIES: number = 10;
+  public static MATCHING_PERCENTAGE: number = 10;
+  public static MAX_WORKAREA: number = 3;
+  public static MAX_INTERESTEDINDUSTRY: number = 7;
+  public static MAX_PROFECIENCES: number = 25;
+  public static MAX_MANDATORY_PROFECIENCES: number = 5;
+  public static MAX_ADDITIONAL_PROFECIENCES: number = 5;
+  public static MAX_YEAR_LIST: number = 60;
+  public static MAX_ACADEMIC_YEAR_LIST: number = 50;
+  public static SHORT_LISTED_CANDIDATE: string = 'shortListed';
+  public static CART_LISTED_CANDIDATE: string = 'cartListed';
+  public static REJECTED_LISTED_CANDIDATE: string = 'rejectedList';
+  public static APPLIED_CANDIDATE: string = 'applied';
+  public static BLOCKED_CANDIDATE: string = 'blocked';
+  public static MATCHED_CANDIDATE: string = 'matchedList';
   public static VALUE_FOR_CNDIDATES_PERCENT_MATCHING_LOWER_BOUND = 40;
 }
 
@@ -174,7 +174,7 @@ export class API {
   public static DOMAINLIST = 'domain';
   public static CAPABILITY_LIST = 'capability';
   public static ROLE_LIST = 'roles';
-  public static COMPANY_DETAILS:string = 'companydetails';
+  public static COMPANY_DETAILS: string = 'companydetails';
   public static ADDRESS = 'address';
   public static ROLE_TYPE = 'roletype';
   public static JOB_LIST = 'recruiter';

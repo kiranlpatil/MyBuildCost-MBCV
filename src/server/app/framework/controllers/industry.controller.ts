@@ -1,5 +1,4 @@
 import * as express from "express";
-import * as multiparty from "multiparty";
 import AuthInterceptor = require("../interceptor/auth.interceptor");
 import SendMailService = require("../services/sendmail.service");
 import UserModel = require("../dataaccess/model/user.model");
@@ -20,7 +19,7 @@ import RoleService = require("../services/role.service");
 import CNextMessages = require("../shared/cnext-messages");
 
 
-export function retrieve(req:express.Request, res:express.Response, next:any) {
+export function retrieve(req: express.Request, res: express.Response, next: any) {
   try {
     var industryService = new IndustryService();
     var params = {};
@@ -44,30 +43,30 @@ export function retrieve(req:express.Request, res:express.Response, next:any) {
     res.status(403).send({message: e.message});
   }
 }
-export function create(req:express.Request, res:express.Response, next:any) { //todo code should be review be Sudhakar
+export function create(req: express.Request, res: express.Response, next: any) { //todo code should be review be Sudhakar
   try {
-    let newIndustry:IndustryModel = <IndustryModel>req.body;
+    let newIndustry: IndustryModel = <IndustryModel>req.body;
     let industryService = new IndustryService();
-      industryService.create(newIndustry, (error, result) => {
-        if (error) {
-          console.log("crt role error", error);
-        }
-        else {
-          var auth:AuthInterceptor = new AuthInterceptor();
-          var token = auth.issueTokenWithUid(newIndustry);
-          res.status(200).send({
-              "status": Messages.STATUS_SUCCESS,
-              "data": {
-                "reason": "Data inserted Successfully in Industry",
-                "code_name": newIndustry.code_name,
-                "name": newIndustry.name,
-                "roles": newIndustry.roles,
-                "_id": result._id,
-              },
-              access_token: token
-            });
-        }
-      });
+    industryService.create(newIndustry, (error, result) => {
+      if (error) {
+        console.log("crt role error", error);
+      }
+      else {
+        var auth: AuthInterceptor = new AuthInterceptor();
+        var token = auth.issueTokenWithUid(newIndustry);
+        res.status(200).send({
+          "status": Messages.STATUS_SUCCESS,
+          "data": {
+            "reason": "Data inserted Successfully in Industry",
+            "code_name": newIndustry.code_name,
+            "name": newIndustry.name,
+            "roles": newIndustry.roles,
+            "_id": result._id,
+          },
+          access_token: token
+        });
+      }
+    });
   }
   catch (e) {
     res.status(403).send({"status": Messages.STATUS_ERROR, "error_message": e.message});

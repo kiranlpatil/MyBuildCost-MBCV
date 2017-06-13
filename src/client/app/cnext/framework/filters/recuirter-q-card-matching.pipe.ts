@@ -6,20 +6,20 @@ import {ValueConstant} from "../../../framework/shared/constants";
 
 export class RecuirterQCardMatchingPipe implements PipeTransform {
 
-  transform(array: Array<CandidateQCard>, args: any, totalQCardMatches:any,cartType:any): Array<any> {
+  transform(array: Array<CandidateQCard>, args: any, totalQCardMatches: any, cartType: any): Array<any> {
 
     var defaultMatch = ValueConstant.VALUE_FOR_CNDIDATES_PERCENT_MATCHING_LOWER_BOUND;
-    var result:CandidateQCard[];
+    var result: CandidateQCard[];
     if (array == null) {
       return null;
     }
-    if(cartType =='matchedList') {
+    if (cartType == 'matchedList') {
       if (args == 'aboveMatch') {
         result = array.filter(item => ((item.exact_matching + item.above_one_step_matching) >= defaultMatch));
         result.sort((a: CandidateQCard, b: CandidateQCard) => {
-          if (Number(a.exact_matching+a.above_one_step_matching) > Number(b.exact_matching+b.above_one_step_matching)) {
+          if (Number(a.exact_matching + a.above_one_step_matching) > Number(b.exact_matching + b.above_one_step_matching)) {
             return -1;
-          } else if (Number(a.exact_matching+a.above_one_step_matching) < Number(b.exact_matching+b.above_one_step_matching)) {
+          } else if (Number(a.exact_matching + a.above_one_step_matching) < Number(b.exact_matching + b.above_one_step_matching)) {
             return 1;
           } else {
             return 0;

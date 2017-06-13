@@ -1,21 +1,21 @@
-import { Component ,OnInit } from '@angular/core';
-import { CompanyDetailsService } from './company-details.service';
-import { CompanyDetails } from './company-details';
-import {  FormBuilder, FormGroup, Validators  } from '@angular/forms';
+import {Component, OnInit} from "@angular/core";
+import {CompanyDetailsService} from "./company-details.service";
+import {CompanyDetails} from "./company-details";
+import {FormBuilder, FormGroup} from "@angular/forms";
 import {
+  AppSettings,
+  CommonService,
   Message,
+  Messages,
   MessageService,
   NavigationRoutes,
-  ProfileService,
-  CommonService,
-  Messages,
-  AppSettings
- } from '../../shared/index';
-import { ImagePath, LocalStorage } from '../../shared/constants';
-import { LocalStorageService } from '../../shared/localstorage.service';
-import { LoaderService } from '../../shared/loader/loader.service';
-import { Http } from '@angular/http';
-import {Router, ActivatedRoute, Params} from '@angular/router';
+  ProfileService
+} from "../../shared/index";
+import {ImagePath, LocalStorage} from "../../shared/constants";
+import {LocalStorageService} from "../../shared/localstorage.service";
+import {LoaderService} from "../../shared/loader/loader.service";
+import {Http} from "@angular/http";
+import {ActivatedRoute, Params, Router} from "@angular/router";
 import {ValidationService} from "../../shared/customvalidations/validation.service";
 
 @Component({
@@ -30,7 +30,7 @@ export class CompanyDetailsComponent implements OnInit {
   private model = new CompanyDetails();
   private companyDetailsForm: FormGroup;
   private filesToUpload: Array<File>;
-  private setOfDocuments:string[]=new Array(3);
+  private setOfDocuments: string[] = new Array(3);
   private image_path: any;
   private error_msg: string;
   private isShowErrorMessage: boolean = true;
@@ -38,19 +38,19 @@ export class CompanyDetailsComponent implements OnInit {
   private isDocumentUploaded: boolean = true;
   private BODY_BACKGROUND: string;
   private submitted = false;
-  private fileName1:string;
-  private fileName2:string;
-  private fileName3:string;
-  private buttonId:string;
+  private fileName1: string;
+  private fileName2: string;
+  private fileName3: string;
+  private buttonId: string;
 
   constructor(private commonService: CommonService, private _router: Router, private http: Http,
-              private companyDetailsService: CompanyDetailsService,private profileService: ProfileService,
-              private messageService: MessageService, private formBuilder: FormBuilder, private loaderService: LoaderService,private activatedRoute:ActivatedRoute) {
+              private companyDetailsService: CompanyDetailsService, private profileService: ProfileService,
+              private messageService: MessageService, private formBuilder: FormBuilder, private loaderService: LoaderService, private activatedRoute: ActivatedRoute) {
     this.companyDetailsForm = this.formBuilder.group({
-      'about_company':['',ValidationService.requireCompanyDescriptionValidator],
-      'description1': ['',ValidationService.requireDescriptionValidator],
-      'description2': ['',ValidationService.requireDescriptionValidator],
-      'description3': ['',ValidationService.requireDescriptionValidator]
+      'about_company': ['', ValidationService.requireCompanyDescriptionValidator],
+      'description1': ['', ValidationService.requireDescriptionValidator],
+      'description2': ['', ValidationService.requireDescriptionValidator],
+      'description3': ['', ValidationService.requireDescriptionValidator]
     });
 
     this.BODY_BACKGROUND = ImagePath.BODY_BACKGROUND;
@@ -59,33 +59,33 @@ export class CompanyDetailsComponent implements OnInit {
   ngOnInit() {
     this.company_name = LocalStorageService.getLocalValue(LocalStorage.COMPANY_NAME);
 
-      this.activatedRoute.queryParams.subscribe((params: Params) => {
-        let access_token = params['access_token'];
-        let id = params['_id'];
-        LocalStorageService.setLocalValue(LocalStorage.ACCESS_TOKEN, access_token);
-        LocalStorageService.setLocalValue(LocalStorage.USER_ID, id);
-        this.companyDetailsService.activateAccount()
-          .subscribe(
-            res => (console.log("account activated")),
-            error => (console.log("account not activated")));
-      });
+    this.activatedRoute.queryParams.subscribe((params: Params) => {
+      let access_token = params['access_token'];
+      let id = params['_id'];
+      LocalStorageService.setLocalValue(LocalStorage.ACCESS_TOKEN, access_token);
+      LocalStorageService.setLocalValue(LocalStorage.USER_ID, id);
+      this.companyDetailsService.activateAccount()
+        .subscribe(
+          res => (console.log("account activated")),
+          error => (console.log("account not activated")));
+    });
 
   }
 
   onSubmit() {
-      if (this.setOfDocuments[0] === undefined || this.setOfDocuments[1] === undefined || this.setOfDocuments[2] === undefined) {
-        this.isDocumentUploaded = true;
-      }
-      else {
-        this.isDocumentUploaded = false;
-        this.submitted = true;
-        this.model = this.companyDetailsForm.value;
-        this.model.setOfDocuments = this.setOfDocuments;
-        this.companyDetailsService.companyDetails(this.model)
-          .subscribe(
-            success => this.onCompanyDetailsSuccess(success),
-            error => this.onCompanyDetailsError(error));
-      }
+    if (this.setOfDocuments[0] === undefined || this.setOfDocuments[1] === undefined || this.setOfDocuments[2] === undefined) {
+      this.isDocumentUploaded = true;
+    }
+    else {
+      this.isDocumentUploaded = false;
+      this.submitted = true;
+      this.model = this.companyDetailsForm.value;
+      this.model.setOfDocuments = this.setOfDocuments;
+      this.companyDetailsService.companyDetails(this.model)
+        .subscribe(
+          success => this.onCompanyDetailsSuccess(success),
+          error => this.onCompanyDetailsError(error));
+    }
   }
 
 
@@ -103,28 +103,28 @@ export class CompanyDetailsComponent implements OnInit {
 
     this.filesToUpload = <Array<File>> fileInput.target.files;
 
-      if(this.buttonId ==='file-upload1') {
-        this.fileName1=this.filesToUpload[0].name;
-      } else if(this.buttonId ==='file-upload2') {
-        this.fileName2=this.filesToUpload[0].name;
-      } else {
-        this.fileName3=this.filesToUpload[0].name;
-      }
+    if (this.buttonId === 'file-upload1') {
+      this.fileName1 = this.filesToUpload[0].name;
+    } else if (this.buttonId === 'file-upload2') {
+      this.fileName2 = this.filesToUpload[0].name;
+    } else {
+      this.fileName3 = this.filesToUpload[0].name;
+    }
 
-      this.companyDetailsService.makeDocumentUplaod(this.filesToUpload, []).then((result: any) => {
-        if (result !== null) {
-          if(this.buttonId ==='file-upload1') {
-            this.setOfDocuments[0]=result.data.document;
-          } else if(this.buttonId ==='file-upload2') {
-            this.setOfDocuments[1]=result.data.document;
-          } else {
-            this.setOfDocuments[2]=result.data.document;
-          }
-          this.fileChangeSuccess(result);
+    this.companyDetailsService.makeDocumentUplaod(this.filesToUpload, []).then((result: any) => {
+      if (result !== null) {
+        if (this.buttonId === 'file-upload1') {
+          this.setOfDocuments[0] = result.data.document;
+        } else if (this.buttonId === 'file-upload2') {
+          this.setOfDocuments[1] = result.data.document;
+        } else {
+          this.setOfDocuments[2] = result.data.document;
         }
-      }, (error:any) => {
-        this.fileChangeFail(error);
-      });
+        this.fileChangeSuccess(result);
+      }
+    }, (error: any) => {
+      this.fileChangeFail(error);
+    });
   }
 
 

@@ -1,4 +1,4 @@
-import {Component,Input } from "@angular/core";
+import {Component, Input} from "@angular/core";
 
 @Component({
   moduleId: module.id,
@@ -9,17 +9,17 @@ import {Component,Input } from "@angular/core";
 
 export class VericalListViewComponent {
 
-  @Input() data:any;
-  @Input() type:string='';
-  private readMore:boolean[] = new Array();
-  private isReadMore:boolean[] = new Array();
+  @Input() data: any;
+  @Input() type: string = '';
+  private readMore: boolean[] = new Array();
+  private isReadMore: boolean[] = new Array();
 
   /*ngOnChanges() {
-    if (data!= undefined) {
-      if (data.remark) {
+   if (data!= undefined) {
+   if (data.remark) {
 
-      }
-    }
-  }*/
+   }
+   }
+   }*/
 
 }

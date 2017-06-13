@@ -8,17 +8,17 @@ var mongoose = DataAccess.mongooseInstance;
 var mongooseConnection = DataAccess.mongooseConnection;
 
 class DomainSchema {
-    static get schema() {
-        var schema = mongoose.Schema({
-          name : {
-            type: String
-          },
-          roles : [{type : mongoose.Schema.Types.ObjectId, ref :'IRole'}]
+  static get schema() {
+    var schema = mongoose.Schema({
+      name: {
+        type: String
+      },
+      roles: [{type: mongoose.Schema.Types.ObjectId, ref: 'IRole'}]
 
-        },{ versionKey: false });
+    }, {versionKey: false});
 
-        return schema;
-    }
+    return schema;
+  }
 }
 var schema = mongooseConnection.model<IDomain>("Domain", DomainSchema.schema);
 export = schema;

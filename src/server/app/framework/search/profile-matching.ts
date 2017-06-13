@@ -1,4 +1,4 @@
-export interface ProfileMatching{
-    matching : number;
+export interface ProfileMatching {
+  matching: number;
 
 }

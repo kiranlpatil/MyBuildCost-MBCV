@@ -1,5 +1,3 @@
-
-
 <header class="page-header">
   <nav class="navbar navbar-fixed-top">
     <div class="container-fluid">
@@ -26,7 +24,6 @@
       <div class="collapse navbar-collapse" [class.in]="isClassVisible" id="bs-example-navbar-collapse-1">
 
 
-
         <ul class="nav navbar-nav navbar-right">
           <li class="user-info user-info-desktop">
             <h4>{{company_name}}</h4>
@@ -35,7 +32,7 @@
           <li class="dropdown last-child">
             <div class="dropdown">
               <a class="simple-dropdown dropdown-toggle" data-toggle="dropdown" href="#">
-                <img src= "{{uploaded_image_path}}"  alt="User Profile" />
+                <img src="{{uploaded_image_path}}" alt="User Profile"/>
                 <span class="caret"></span>
               </a>
               <ul class="dropdown-menu mobile-dropdown">
@@ -43,7 +40,7 @@
                   <h4>{{company_name}}</h4>
                 </li>
                 <li class="divider"></li>
-                <li role="menuitem" >
+                <li role="menuitem">
                   <a class="dropdown-item" [routerLink]="['recruiter_dashboard']"
                      (click)="navigateTo('/recruiterdashboard'); toggleMenu();">
                     <span class="glyphicon glyphicon-th"></span>My Dashboard

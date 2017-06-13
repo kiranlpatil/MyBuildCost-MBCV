@@ -11,13 +11,17 @@
             <cn-filter [candidate]="candidate" [locations]="_locationList" [role]=false></cn-filter>
             <ul class="nav nav-tabs sub-tabs">
               <li class="active">
-                <a id="matched_anchor" (click)="showMatchedJobs()" data-toggle="tab" href="#matched"><span class="count"><span>{{jobList.length}}</span></span> Matched</a>
+                <a id="matched_anchor" (click)="showMatchedJobs()" data-toggle="tab" href="#matched"><span
+                  class="count"><span>{{jobList.length}}</span></span> Matched</a>
               </li>
               <li>
-                <a (click)="showappliedJobs()" data-toggle="tab" href="#applied"><span class="applied-count count"><span>{{candidate.summary.numberOfJobApplied}}</span></span> Applied</a>
+                <a (click)="showappliedJobs()" data-toggle="tab" href="#applied"><span
+                  class="applied-count count"><span>{{candidate.summary.numberOfJobApplied}}</span></span> Applied</a>
               </li>
               <li>
-                <a (click)="showrejectedJobs()" data-toggle="tab" href="#rejected"><span class="rejected-count count"><span>{{candidate.summary.numberJobsBlocked}}</span></span> Not Interested</a>
+                <a (click)="showrejectedJobs()" data-toggle="tab" href="#rejected"><span
+                  class="rejected-count count"><span>{{candidate.summary.numberJobsBlocked}}</span></span> Not
+                  Interested</a>
               </li>
             </ul>
             <div class="tab-content">
@@ -25,13 +29,15 @@
                 <cn-q-card-list [joblistCount]="jobList.length" [listOfJobs]="jobList" [type]="'none'"
                                 (onAction)="onActionPerformOnExactList($event)"></cn-q-card-list>
               </div>
-              <div  id="applied" class="tab-pane fade"  ><!--[hidden]="!hidesection"-->
-                <cn-candidate-job-list [type]="'apply'" [listOfJobs]="appliedJobs" (onAction)="onActionOnApplyJob($event)"
-                                       ></cn-candidate-job-list><!--[hidden]="type !=='apply'"-->
+              <div id="applied" class="tab-pane fade"><!--[hidden]="!hidesection"-->
+                <cn-candidate-job-list [type]="'apply'" [listOfJobs]="appliedJobs"
+                                       (onAction)="onActionOnApplyJob($event)"
+                ></cn-candidate-job-list><!--[hidden]="type !=='apply'"-->
               </div>
-              <div  id="rejected"  class="tab-pane fade"><!-- [hidden]="!hidesection" -->
-                <cn-candidate-job-list [type]="'block'" [listOfJobs]="blockedJobs" (onAction)="onActionOnBlockJob($event)"
-                                       ></cn-candidate-job-list><!-- [hidden]="type !=='block'" -->
+              <div id="rejected" class="tab-pane fade"><!-- [hidden]="!hidesection" -->
+                <cn-candidate-job-list [type]="'block'" [listOfJobs]="blockedJobs"
+                                       (onAction)="onActionOnBlockJob($event)"
+                ></cn-candidate-job-list><!-- [hidden]="type !=='block'" -->
               </div>
             </div>
           </div>

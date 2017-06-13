@@ -13,31 +13,31 @@ import {Section} from "../model/candidate";
 
 export class CapabilitiesComponent {
 
-  @Input() roles:Role[] = new Array(0);
-  @Input() candidateRoles:Role[] = new Array();
+  @Input() roles: Role[] = new Array(0);
+  @Input() candidateRoles: Role[] = new Array();
   @Output() onComplete = new EventEmitter();
   @Input() highlightedSection: Section;
 
-  private primaryNames:string[] = new Array(0);
-  private secondaryNames:string[] = new Array(0);
-  private primaryCapabilitiesNumber:number = 0;
-  private disableButton:boolean = true;
-  tooltipMessage : string=
+  private primaryNames: string[] = new Array(0);
+  private secondaryNames: string[] = new Array(0);
+  private primaryCapabilitiesNumber: number = 0;
+  private disableButton: boolean = true;
+  tooltipMessage: string =
 
-      "<ul>" +
-      "<li>" +
-      "<h5>Capablities </h5><p class='info'>Select those capabilities which describe what you are best at or where you would like to position your career. These capablities are going to help you find best job you desire.</p>" +
-      "</li>" +
-      "</ul>";
+    "<ul>" +
+    "<li>" +
+    "<h5>Capablities </h5><p class='info'>Select those capabilities which describe what you are best at or where you would like to position your career. These capablities are going to help you find best job you desire.</p>" +
+    "</li>" +
+    "</ul>";
 
-  ngOnChanges(changes:any) {
+  ngOnChanges(changes: any) {
     if (this.candidateRoles) {
       this.setPrimaryCapabilitydata();
     }
     this.primaryCapabilitiesNumber = this.primaryNames.length;
   }
 
-  selectedCapability(selectedRole:Role, selectedCapability:Capability, event:any) {
+  selectedCapability(selectedRole: Role, selectedCapability: Capability, event: any) {
     this.disableButton = false;
     this.roles[0].isAPIForComplexity = true;
     if (event.target.checked) {
@@ -69,7 +69,7 @@ export class CapabilitiesComponent {
     this.onComplete.emit(this.roles);
   }
 
-  setPrimaryCapabilitydata(){
+  setPrimaryCapabilitydata() {
     this.secondaryNames = new Array(0);
     this.primaryNames = new Array(0);
 

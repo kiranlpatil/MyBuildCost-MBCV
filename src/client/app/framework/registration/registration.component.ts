@@ -1,18 +1,12 @@
-import {   Component  } from '@angular/core';
-import {  Router  } from '@angular/router';
-import {  RegistrationService  } from './registration.service';
-import {  Registration  } from './registration';
-import {  FormBuilder, FormGroup  } from '@angular/forms';
-import { Message,
-  MessageService,
-  CommonService,
-  NavigationRoutes,
-  AppSettings
-  } from '../shared/index';
-import { ImagePath, LocalStorage } from '../shared/constants';
-import { LocalStorageService } from '../shared/localstorage.service';
-import { LoaderService } from '../shared/loader/loader.service';
-import { RecruitingService } from '../shared/recruiting.service';
+import {Component} from "@angular/core";
+import {Router} from "@angular/router";
+import {RegistrationService} from "./registration.service";
+import {Registration} from "./registration";
+import {FormBuilder, FormGroup} from "@angular/forms";
+import {CommonService, MessageService} from "../shared/index";
+import {ImagePath} from "../shared/constants";
+import {LoaderService} from "../shared/loader/loader.service";
+import {RecruitingService} from "../shared/recruiting.service";
 
 
 @Component({
@@ -28,80 +22,81 @@ export class RegistrationComponent {
   isFormSubmitted = false;
   userForm: FormGroup;
   error_msg: string;
-  isCandidate:boolean =false;
-  isRecruiter:boolean = true;
+  isCandidate: boolean = false;
+  isRecruiter: boolean = true;
   isShowErrorMessage: boolean = true;
-  isRecruitingForself:boolean = true;
-  BODY_BACKGROUND:string;
+  isRecruitingForself: boolean = true;
+  BODY_BACKGROUND: string;
 
   constructor(private commonService: CommonService, private _router: Router,
               private registrationService: RegistrationService, private messageService: MessageService,
-              private recruitingService: RecruitingService, private formBuilder: FormBuilder,private loaderService:LoaderService) {
+              private recruitingService: RecruitingService, private formBuilder: FormBuilder, private loaderService: LoaderService) {
 
 
     this.BODY_BACKGROUND = ImagePath.BODY_BACKGROUND;
   }
-/*
-  onSubmit() {
-    this.model = this.userForm.value;
-    this.model.current_theme = AppSettings.LIGHT_THEM;
-    if (!this.makePasswordConfirm()) {
-      this.isFormSubmitted = true;
-      this.registrationService.addRegistration(this.model)
-        .subscribe(
-          user => this.onRegistrationSuccess(user),
-          error => this.onRegistrationError(error));
-    }
-  }
 
-  onRegistrationSuccess(user: any) {
-    LocalStorageService.setLocalValue(LocalStorage.USER_ID, user.data._id);
-    LocalStorageService.setLocalValue(LocalStorage.EMAIL_ID,this.userForm.value.email);
-    LocalStorageService.setLocalValue(LocalStorage.MOBILE_NUMBER, this.userForm.value.mobile_number);
-    LocalStorageService.setLocalValue(LocalStorage.CHANGE_MAIL_VALUE, 'from_registration'); //TODO use navigation routes(framework)
-    this.userForm.reset();
-    this._router.navigate([NavigationRoutes.VERIFY_USER]);
-  }
+  /*
+   onSubmit() {
+   this.model = this.userForm.value;
+   this.model.current_theme = AppSettings.LIGHT_THEM;
+   if (!this.makePasswordConfirm()) {
+   this.isFormSubmitted = true;
+   this.registrationService.addRegistration(this.model)
+   .subscribe(
+   user => this.onRegistrationSuccess(user),
+   error => this.onRegistrationError(error));
+   }
+   }
 
-  onRegistrationError(error: any) {
-    if (error.err_code === 404 || error.err_code === 0) {
-      var message = new Message();
-      message.error_msg = error.err_msg;
-      message.isError = true;
-      this.messageService.message(message);
-    } else {
-      this.isShowErrorMessage = false;
-      this.error_msg = error.err_msg;
-    }
-  }
-*/
-/*
+   onRegistrationSuccess(user: any) {
+   LocalStorageService.setLocalValue(LocalStorage.USER_ID, user.data._id);
+   LocalStorageService.setLocalValue(LocalStorage.EMAIL_ID,this.userForm.value.email);
+   LocalStorageService.setLocalValue(LocalStorage.MOBILE_NUMBER, this.userForm.value.mobile_number);
+   LocalStorageService.setLocalValue(LocalStorage.CHANGE_MAIL_VALUE, 'from_registration'); //TODO use navigation routes(framework)
+   this.userForm.reset();
+   this._router.navigate([NavigationRoutes.VERIFY_USER]);
+   }
 
-  goBack() {
-    this.commonService.goBack();
-    this._router.navigate(['/']);
-  }
+   onRegistrationError(error: any) {
+   if (error.err_code === 404 || error.err_code === 0) {
+   var message = new Message();
+   message.error_msg = error.err_msg;
+   message.isError = true;
+   this.messageService.message(message);
+   } else {
+   this.isShowErrorMessage = false;
+   this.error_msg = error.err_msg;
+   }
+   }
+   */
+  /*
 
-  navigateTo(navigateTo: string) {
-    if (navigateTo !== undefined ) {
-      this._router.navigate([navigateTo]);
-    }
-  }
-  makePasswordConfirm(): boolean {
-    if (this.model.confirm_password !== this.model.password) {
-      this.isPasswordConfirm = true;
-      return true;
-    } else {
-      this.isPasswordConfirm = false;
-      return false;
-    }
-  }
+   goBack() {
+   this.commonService.goBack();
+   this._router.navigate(['/']);
+   }
 
- closeErrorMessage() {
- this.isShowErrorMessage = true;
- }
+   navigateTo(navigateTo: string) {
+   if (navigateTo !== undefined ) {
+   this._router.navigate([navigateTo]);
+   }
+   }
+   makePasswordConfirm(): boolean {
+   if (this.model.confirm_password !== this.model.password) {
+   this.isPasswordConfirm = true;
+   return true;
+   } else {
+   this.isPasswordConfirm = false;
+   return false;
+   }
+   }
 
-*/
+   closeErrorMessage() {
+   this.isShowErrorMessage = true;
+   }
+
+   */
 
   showHideCandidate() { //TODO use single variable for all view.
     this.isCandidate = false;

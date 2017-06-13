@@ -8,7 +8,7 @@ class CNextMessages {
   public static PROBLEM_IN_CREATING_INDUSTRY: string = "Industry is not inserted in to Database";
   public static PROBLEM_IN_RETRIEVE_JOB_PROFILE: string = "Problem in retrieving the job profile";
 
- }
+}
 export=CNextMessages;
 
 

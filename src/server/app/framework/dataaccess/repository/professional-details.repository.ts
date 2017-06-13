@@ -3,7 +3,7 @@ import RepositoryBase = require("./base/repository.base");
 import IProfessionalDetails = require("../mongoose/professional-details");
 
 class ProfessionalDetailsRepository extends RepositoryBase<IProfessionalDetails> {
-  constructor () {
+  constructor() {
     super(ProfessionalDetailsSchema);
   }
 }

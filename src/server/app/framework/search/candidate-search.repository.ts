@@ -1,5 +1,4 @@
 import CandidateSchema = require("../dataaccess/schemas/candidate.schema");
-import * as mongoose from "mongoose";
 import CandidateModel = require("../dataaccess/model/candidate.model");
 import IndustryModel = require("../dataaccess/model/industry.model");
 import CandidateCardViewModel = require("../dataaccess/model/candidate-card-view.model");
@@ -14,7 +13,7 @@ class CandidateSearchRepository extends RepositoryBase<ICandidate> {
     super(CandidateSchema);
   }
 
-  getCandidateByIndustry(jobProfile:JobProfileModel, callback:(error:any, result:any) => void) { //todo change it with new approach
+  getCandidateByIndustry(jobProfile: JobProfileModel, callback: (error: any, result: any) => void) { //todo change it with new approach
 
     if (jobProfile.industry.roles.length > 2) {
       CandidateSchema.find({
@@ -24,7 +23,7 @@ class CandidateSearchRepository extends RepositoryBase<ICandidate> {
           {'industry.roles': {"$elemMatch": {name: jobProfile.industry.roles[1].name}}},
           {'industry.roles': {"$elemMatch": {name: jobProfile.industry.roles[2].name}}},
         ]
-      }, (error:any, res:any)=> {
+      }, (error: any, res: any) => {
         this.filterCandidates(res, jobProfile.industry, callback);
       });
     } else if (jobProfile.industry.roles.length > 1) {
@@ -34,7 +33,7 @@ class CandidateSearchRepository extends RepositoryBase<ICandidate> {
           {'industry.roles': {"$elemMatch": {name: jobProfile.industry.roles[0].name}}},
           {'industry.roles': {"$elemMatch": {name: jobProfile.industry.roles[1].name}}},
         ]
-      }, (error:any, res:any)=> {
+      }, (error: any, res: any) => {
         this.filterCandidates(res, jobProfile.industry, callback);
       });
     } else if (jobProfile.industry.roles.length > 0) {
@@ -43,13 +42,13 @@ class CandidateSearchRepository extends RepositoryBase<ICandidate> {
           {'industry.name': jobProfile.industry.name},
           {'industry.roles': {"$elemMatch": {name: jobProfile.industry.roles[0].name}}},
         ]
-      }, (error:any, res:any)=> {
+      }, (error: any, res: any) => {
         this.filterCandidates(res, jobProfile.industry, callback);
       });
     }
   }
 
-  filterCandidates(candidates:CandidateModel[], industry:IndustryModel, callback:(err:any, result:any)=>void) {
+  filterCandidates(candidates: CandidateModel[], industry: IndustryModel, callback: (err: any, result: any) => void) {
     let countOfComplexity = 0;
     let satisfiedComplexity = 0;
     for (let role of industry.roles) {
@@ -59,11 +58,11 @@ class CandidateSearchRepository extends RepositoryBase<ICandidate> {
         }
       }
     }
-    let cardcandidates:CandidateCardViewModel[] = new Array(0);
+    let cardcandidates: CandidateCardViewModel[] = new Array(0);
     for (let role of industry.roles) {
       for (let capability of role.capabilities) {
         for (let candidate of candidates) {
-          let tempCandidate:CandidateCardViewModel = new CandidateCardViewModel();
+          let tempCandidate: CandidateCardViewModel = new CandidateCardViewModel();
           tempCandidate.userId = candidate.userId;
           for (let candiRole of candidate.industry.roles) {
             for (let candiCapability of candiRole.capabilities) {

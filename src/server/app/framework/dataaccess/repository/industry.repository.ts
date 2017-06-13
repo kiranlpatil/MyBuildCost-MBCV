@@ -4,15 +4,15 @@ import IIndustry = require("../mongoose/industry");
 import RoleModel = require("../model/role.model");
 
 class IndustryRepository extends RepositoryBase<IIndustry> {
-  private items:RoleModel[];
+  private items: RoleModel[];
 
-  constructor () {
+  constructor() {
     super(IndustrySchema);
   }
 
-  findRoles(name:string, callback:(error:any, result:any) => void) {
+  findRoles(name: string, callback: (error: any, result: any) => void) {
     this.items = new Array(0);
-    IndustrySchema.find({"name": name}, (err:any, industry:any)=> {
+    IndustrySchema.find({"name": name}, (err: any, industry: any) => {
       if (err) {
         callback(err, null);
       } else {
@@ -20,8 +20,8 @@ class IndustryRepository extends RepositoryBase<IIndustry> {
           callback(new Error("Records are not found"), null);
         } else {
           for (let role of industry[0].roles) {
-            let obj:any = {
-              "industryName" : industry[0].name,
+            let obj: any = {
+              "industryName": industry[0].name,
               "_id": role._id,
               "name": role.name
             };
@@ -33,9 +33,9 @@ class IndustryRepository extends RepositoryBase<IIndustry> {
     });
   }
 
-  findCapabilities(item:any, callback:(error:any, result:any) => void) {
+  findCapabilities(item: any, callback: (error: any, result: any) => void) {
     this.items = new Array(0);
-    IndustrySchema.find({"name": item.name},(err:any, industry:any)=> {
+    IndustrySchema.find({"name": item.name}, (err: any, industry: any) => {
       if (err) {
         callback(err, null);
       } else {
@@ -43,18 +43,18 @@ class IndustryRepository extends RepositoryBase<IIndustry> {
           callback(new Error("Records are not found"), null);
         } else {
           for (let role of industry[0].roles) {
-            for(let o of item.roles){
-              if(o==role.name){
-                let role_object :any={
-                  name:role.name,
-                  capabilities:[],
-                  default_complexities : role.default_complexities
+            for (let o of item.roles) {
+              if (o == role.name) {
+                let role_object: any = {
+                  name: role.name,
+                  capabilities: [],
+                  default_complexities: role.default_complexities
                 };
-                role_object.capabilities=new Array(0);
-                for(let capability of role.capabilities){
-                  let obj:any = {
-                    "industryName" : industry[0].name,
-                    "roleName":role.name,
+                role_object.capabilities = new Array(0);
+                for (let capability of role.capabilities) {
+                  let obj: any = {
+                    "industryName": industry[0].name,
+                    "roleName": role.name,
                     "_id": capability._id,
                     "name": capability.name
                   };
@@ -70,9 +70,9 @@ class IndustryRepository extends RepositoryBase<IIndustry> {
     });
   }
 
-  findComplexities(item:any, callback:(error:any, result:any) => void) {
+  findComplexities(item: any, callback: (error: any, result: any) => void) {
     this.items = new Array(0);
-    IndustrySchema.find({"name": item.name},(err:any, industry:any)=> {
+    IndustrySchema.find({"name": item.name}, (err: any, industry: any) => {
       if (err) {
         callback(err, null);
       } else {
@@ -80,24 +80,24 @@ class IndustryRepository extends RepositoryBase<IIndustry> {
           callback(new Error("Records are not found"), null);
         } else {
           for (let role of industry[0].roles) {
-            for(let o of item.roles){
-              if(o==role.name){
-                let role_object :any={
-                  name:role.name,
-                  capabilities:[],
-                  default_complexities : role.default_complexities
+            for (let o of item.roles) {
+              if (o == role.name) {
+                let role_object: any = {
+                  name: role.name,
+                  capabilities: [],
+                  default_complexities: role.default_complexities
                 };
-                for(let capability of role.capabilities){
-                  for(let ob of item.capabilities){
-                    if(ob == capability.name){
-                      let capability_object :any={
-                        name:capability.name,
-                        complexities:[]
+                for (let capability of role.capabilities) {
+                  for (let ob of item.capabilities) {
+                    if (ob == capability.name) {
+                      let capability_object: any = {
+                        name: capability.name,
+                        complexities: []
                       };
-                      for(let complexity of capability.complexities){
-                        let complexity_object :any={
-                          name:complexity.name,
-                          scenarios:complexity.scenarios
+                      for (let complexity of capability.complexities) {
+                        let complexity_object: any = {
+                          name: complexity.name,
+                          scenarios: complexity.scenarios
                         };
                         capability_object.complexities.push(complexity_object);
                       }
@@ -115,8 +115,8 @@ class IndustryRepository extends RepositoryBase<IIndustry> {
     });
   }
 
-  retriveIndustriesWithSortedOrder( excluded:any, callback:(error:any, result:any) => void) {
-    IndustrySchema.find().sort({'sort_order':-1,'name':1}).exec(function (err:any, items:any) {
+  retriveIndustriesWithSortedOrder(excluded: any, callback: (error: any, result: any) => void) {
+    IndustrySchema.find().sort({'sort_order': -1, 'name': 1}).exec(function (err: any, items: any) {
       callback(err, items);
     });
   }

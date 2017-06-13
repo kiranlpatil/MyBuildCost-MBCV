@@ -1,15 +1,15 @@
 interface UserModel {
-    first_name: string;
-    last_name: string;
-    email: string;
-    mobile_number: number;
-    isCandidate: boolean;
-    password: string;
-    isActivated: boolean;
-    opt: number;
-    picture: string;
-    social_profile_picture:string;
-    current_theme: string;
-    notifications: Array<any>;
+  first_name: string;
+  last_name: string;
+  email: string;
+  mobile_number: number;
+  isCandidate: boolean;
+  password: string;
+  isActivated: boolean;
+  opt: number;
+  picture: string;
+  social_profile_picture: string;
+  current_theme: string;
+  notifications: Array<any>;
 }
 export = UserModel;

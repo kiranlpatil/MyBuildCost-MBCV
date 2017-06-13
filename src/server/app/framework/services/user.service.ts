@@ -3,7 +3,8 @@ import UserModel = require("../dataaccess/model/user.model");
 import IUserService = require("./user.service");
 import SendMailService = require("./sendmail.service");
 import SendMessageService = require("./sendmessage.service");
-import * as fs from 'fs';
+import * as fs from "fs";
+import * as mongoose from "mongoose";
 //import * as config from 'config';
 var config = require('config');
 import Messages = require("../shared/messages");
@@ -11,14 +12,14 @@ import AuthInterceptor = require("../../framework/interceptor/auth.interceptor")
 import ProjectAsset = require("../shared/projectasset");
 import MailAttachments = require("../shared/sharedarray");
 import RecruiterRepository = require("../dataaccess/repository/recruiter.repository");
-import * as mongoose from "mongoose";
 
 class UserService {
   private userRepository: UserRepository;
   private recruiterRepository: RecruiterRepository;
   APP_NAME: string;
-  company_name :string;
-  mid_content :any;
+  company_name: string;
+  mid_content: any;
+
   constructor() {
     this.userRepository = new UserRepository();
     this.recruiterRepository = new RecruiterRepository();
@@ -42,17 +43,17 @@ class UserService {
       }
       else {
 
-         this.userRepository.create(item, (err, res) => {
-         if (err) {
-         callback(new Error(Messages.MSG_ERROR_REGISTRATION_MOBILE_NUMBER), null);
-         }
-         else  {
+        this.userRepository.create(item, (err, res) => {
+          if (err) {
+            callback(new Error(Messages.MSG_ERROR_REGISTRATION_MOBILE_NUMBER), null);
+          }
+          else {
 
-         callback(null, res);
+            callback(null, res);
 
-         }
+          }
 
-         });
+        });
       }
 
     });
@@ -61,19 +62,19 @@ class UserService {
 
 
   generateOtp(field: any, callback: (error: any, result: any) => void) {
-    this.userRepository.retrieve({"mobile_number": field.new_mobile_number,"isActivated":true}, (err, res) => {
+    this.userRepository.retrieve({"mobile_number": field.new_mobile_number, "isActivated": true}, (err, res) => {
 
       if (err) {
-        console.log("err genrtotp retriv",err);
+        console.log("err genrtotp retriv", err);
       }
-      else if (res.length > 0 && (res[0]._id)!== field._id) {
+      else if (res.length > 0 && (res[0]._id) !== field._id) {
         callback(new Error(Messages.MSG_ERROR_REGISTRATION_MOBILE_NUMBER), null);
       }
-      else if (res.length === 0 ){
+      else if (res.length === 0) {
 
         var query = {"_id": field._id};
-        var otp =Math.floor((Math.random() * 99999) + 100000);
-       // var otp = Math.floor(Math.random() * (10000 - 1000) + 1000);
+        var otp = Math.floor((Math.random() * 99999) + 100000);
+        // var otp = Math.floor(Math.random() * (10000 - 1000) + 1000);
         var updateData = {"mobile_number": field.new_mobile_number, "otp": otp};
         this.userRepository.findOneAndUpdate(query, updateData, {new: true}, (error, result) => {
           if (error) {
@@ -90,7 +91,7 @@ class UserService {
           }
         });
       }
-      else{
+      else {
         callback(new Error(Messages.MSG_ERROR_REGISTRATION_MOBILE_NUMBER), null);
       }
     });
@@ -98,26 +99,26 @@ class UserService {
 
   changeMobileNumber(field: any, callback: (error: any, result: any) => void) {
 
-        var query = {"_id": field._id};
-       // var otp = Math.floor(Math.random() * (10000 - 1000) + 1000);
-        var otp =Math.floor((Math.random() * 99999) + 100000);
-        var updateData = {"otp": otp, "temp_mobile": field.new_mobile_number };
+    var query = {"_id": field._id};
+    // var otp = Math.floor(Math.random() * (10000 - 1000) + 1000);
+    var otp = Math.floor((Math.random() * 99999) + 100000);
+    var updateData = {"otp": otp, "temp_mobile": field.new_mobile_number};
 
-        this.userRepository.findOneAndUpdate(query, updateData, {new: true}, (error, result) => {
-          if (error) {
-            callback(new Error(Messages.MSG_ERROR_REGISTRATION), null);
-          }
-          else {
-            var Data = {
-              current_mobile_number:field.current_mobile_number,
-              mobileNo: field.new_mobile_number,
-              otp: otp
-            }
-            var sendMessageService = new SendMessageService();
-            sendMessageService.sendChangeMobileMessage(Data, callback);
+    this.userRepository.findOneAndUpdate(query, updateData, {new: true}, (error, result) => {
+      if (error) {
+        callback(new Error(Messages.MSG_ERROR_REGISTRATION), null);
+      }
+      else {
+        var Data = {
+          current_mobile_number: field.current_mobile_number,
+          mobileNo: field.new_mobile_number,
+          otp: otp
+        }
+        var sendMessageService = new SendMessageService();
+        sendMessageService.sendChangeMobileMessage(Data, callback);
 
-          }
-        });
+      }
+    });
 
   }
 
@@ -134,31 +135,31 @@ class UserService {
         var host = config.get('TplSeed.mail.host');
         console.log("frgt pwd host", host);
         var link = host + "reset_password?access_token=" + token + "&_id=" + res[0]._id;
-        if(res[0].isCandidate === true){
-          this.mid_content = content.replace('$link$',link).replace('$first_name$',res[0].first_name).replace('$app_name$',this.APP_NAME);
+        if (res[0].isCandidate === true) {
+          this.mid_content = content.replace('$link$', link).replace('$first_name$', res[0].first_name).replace('$app_name$', this.APP_NAME);
           var mailOptions = {
             to: field.email,
             subject: Messages.EMAIL_SUBJECT_FORGOT_PASSWORD,
-            html: header1 + this.mid_content +footer1
+            html: header1 + this.mid_content + footer1
             , attachments: MailAttachments.AttachmentArray
           };
           var sendMailService = new SendMailService();
           sendMailService.sendMail(mailOptions, callback);
 
         } else {
-          this.recruiterRepository.retrieve({"userId":new mongoose.Types.ObjectId(res[0]._id)}, (err, recruiter) => {
+          this.recruiterRepository.retrieve({"userId": new mongoose.Types.ObjectId(res[0]._id)}, (err, recruiter) => {
             if (err) {
               callback(err, null);
             }
             else {
               this.company_name = recruiter[0].company_name;
-              console.log("recruiter company  is :",this.company_name);
-              this.mid_content = content.replace('$link$',link).replace('$first_name$',this.company_name).replace('$app_name$',this.APP_NAME);
+              console.log("recruiter company  is :", this.company_name);
+              this.mid_content = content.replace('$link$', link).replace('$first_name$', this.company_name).replace('$app_name$', this.APP_NAME);
 
               var mailOptions = {
                 to: field.email,
                 subject: Messages.EMAIL_SUBJECT_FORGOT_PASSWORD,
-                html: header1 + this.mid_content +footer1
+                html: header1 + this.mid_content + footer1
                 , attachments: MailAttachments.AttachmentArray
               };
               var sendMailService = new SendMailService();
@@ -183,7 +184,7 @@ class UserService {
 
   SendChangeMailVerification(field: any, callback: (error: any, result: any) => void) {
     var query = {"email": field.current_email, "isActivated": true};
-    var updateData = { "temp_email": field.new_email};
+    var updateData = {"temp_email": field.new_email};
     this.userRepository.findOneAndUpdate(query, updateData, {new: true}, (error, result) => {
       if (error) {
 
@@ -200,7 +201,7 @@ class UserService {
         var header1 = fs.readFileSync("./src/server/app/framework/public/header1.html").toString();
         var content = fs.readFileSync("./src/server/app/framework/public/change.mail.html").toString();
         var footer1 = fs.readFileSync("./src/server/app/framework/public/footer1.html").toString();
-        var mid_content = content.replace('$link$',link);
+        var mid_content = content.replace('$link$', link);
 
         var mailOptions = {
           to: field.new_email,
@@ -228,11 +229,11 @@ class UserService {
         var header1 = fs.readFileSync("./src/server/app/framework/public/header1.html").toString();
         var content = fs.readFileSync("./src/server/app/framework/public/recruiter.mail.html").toString();
         var footer1 = fs.readFileSync("./src/server/app/framework/public/footer1.html").toString();
-        var mid_content = content.replace('$link$',link);
+        var mid_content = content.replace('$link$', link);
         var mailOptions = {
           to: field.email,
           subject: Messages.EMAIL_SUBJECT_REGISTRATION,
-          html: header1 +mid_content+footer1
+          html: header1 + mid_content + footer1
           , attachments: MailAttachments.AttachmentArray
         };
         var sendMailService = new SendMailService();
@@ -246,6 +247,7 @@ class UserService {
       }
     });
   }
+
   sendRecruiterVerificationMail(field: any, callback: (error: any, result: any) => void) {
 
     this.userRepository.retrieve({"email": field.email}, (err, res) => {
@@ -257,11 +259,11 @@ class UserService {
         var header1 = fs.readFileSync("./src/server/app/framework/public/header1.html").toString();
         var content = fs.readFileSync("./src/server/app/framework/public/recruiter.mail.html").toString();
         var footer1 = fs.readFileSync("./src/server/app/framework/public/footer1.html").toString();
-        var mid_content = content.replace('$link$',link);
+        var mid_content = content.replace('$link$', link);
         var mailOptions = {
           to: field.email,
           subject: Messages.EMAIL_SUBJECT_REGISTRATION,
-          html: header1 +mid_content+footer1
+          html: header1 + mid_content + footer1
           , attachments: MailAttachments.AttachmentArray
         }
         var sendMailService = new SendMailService();
@@ -281,12 +283,12 @@ class UserService {
     var header1 = fs.readFileSync("./src/server/app/framework/public/header1.html").toString();
     var content = fs.readFileSync("./src/server/app/framework/public/contactus.mail.html").toString();
     var footer1 = fs.readFileSync("./src/server/app/framework/public/footer1.html").toString();
-    var mid_content = content.replace('$first_name$',field.first_name).replace('$email$',field.email).replace('$message$',field.message);
+    var mid_content = content.replace('$first_name$', field.first_name).replace('$email$', field.email).replace('$message$', field.message);
     var to = config.get('TplSeed.mail.ADMIN_MAIL');
     var mailOptions = {
       to: to,
       subject: Messages.EMAIL_SUBJECT_USER_CONTACTED_YOU,
-      html: header1 + mid_content+ footer1
+      html: header1 + mid_content + footer1
       , attachments: MailAttachments.AttachmentArray
     }
     var sendMailService = new SendMailService();
@@ -333,7 +335,7 @@ class UserService {
 
   UploadDocuments(tempPath: any, fileName: any, cb: any) {
     var targetpath = fileName;
-    fs.rename(tempPath, targetpath, function (err:any) {
+    fs.rename(tempPath, targetpath, function (err: any) {
       cb(null, tempPath);
     });
   }

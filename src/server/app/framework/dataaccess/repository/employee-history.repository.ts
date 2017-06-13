@@ -3,7 +3,7 @@ import RepositoryBase = require("./base/repository.base");
 import IEmploymentHistory = require("../mongoose/employment-history");
 
 class EmployeeHistoryRepository extends RepositoryBase<IEmploymentHistory> {
-  constructor () {
+  constructor() {
     super(EmploymentHistorySchema);
   }
 }

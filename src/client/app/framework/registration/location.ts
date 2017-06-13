@@ -1,6 +1,6 @@
 export class Location {
-  city : string;
+  city: string;
   state: string;
-  country : string;
-  pin : string;
+  country: string;
+  pin: string;
 }

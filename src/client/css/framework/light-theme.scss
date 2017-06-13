@@ -14,7 +14,6 @@ $white: #fff;
   background: linear-gradient(141deg, $light-theme-gradient-dark 0%, $light-theme-gradient-light 100%);
 }
 
-
 .light-theme {
 
   // Loader
@@ -25,7 +24,9 @@ $white: #fff;
     }
   }
   // Heading
-  h3 { color: $light-theme-color; }
+  h3 {
+    color: $light-theme-color;
+  }
 
   // buttons
   .btn-default {
@@ -41,17 +42,18 @@ $white: #fff;
       color: $white;
     }
 
-    &:disabled  {
+    &:disabled {
       background: $light-theme-color;
       border: $light-theme-color 1px solid;
     }
   }
 
-
   // Other Links
   .other-links {
 
-    a { color: $light-theme-color; }
+    a {
+      color: $light-theme-color;
+    }
   }
 
   // Forms
@@ -66,15 +68,21 @@ $white: #fff;
   }
 
   // Header
-  header { @extend %light-theme-gradient; }
+  header {
+    @extend %light-theme-gradient;
+  }
 
   // Side Menu Bar
   .dashboard {
 
-    .menu-container { @extend %light-theme-gradient; }
+    .menu-container {
+      @extend %light-theme-gradient;
+    }
 
     nav {
-      .profile {  background: $light-theme-background; }
+      .profile {
+        background: $light-theme-background;
+      }
     }
 
     nav > ul > li {
@@ -90,7 +98,9 @@ $white: #fff;
   }
 
   //create profile
-  .profile-header { @extend %light-theme-gradient; }
+  .profile-header {
+    @extend %light-theme-gradient;
+  }
 
   .profile-wrapper {
     .heading {
@@ -132,7 +142,7 @@ $white: #fff;
     // Buttons
     .btn-default {
 
-      &:disabled  {
+      &:disabled {
         opacity: .4;
       }
     }

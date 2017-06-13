@@ -1,7 +1,7 @@
-<div class="section-container" >
+<div class="section-container">
   <div class="main-content modal-content clearfix" *ngIf="highlightedSection.name =='EmploymentHistory'">
     <h4 class="heading">Employment History</h4>
-    <form class="description-form" [formGroup]="employeeHistory" novalidate >
+    <form class="description-form" [formGroup]="employeeHistory" novalidate>
       <!--empHistories-->
       <div formArrayName="emplyeeHistories">
         <div *ngFor="let history of employeeHistory.controls.emplyeeHistories.controls; let i=index"
@@ -23,9 +23,11 @@
         </button>
       </div>
       <div class="button-group clearfix">
-        <button class="btn btn-default"  (click)="highlightedSection.name='none';highlightedSection.isDisable=false" [hidden]="showButton">Cancel</button>
+        <button class="btn btn-default" (click)="highlightedSection.name='none';highlightedSection.isDisable=false"
+                [hidden]="showButton">Cancel
+        </button>
         <button type="submit" class="btn btn-primary" scrollTo scrollTargetSelector="#academic-details"
-                (click)="postData('next')" [disabled]="!employeeHistory.valid"  [hidden]="!showButton">Next
+                (click)="postData('next')" [disabled]="!employeeHistory.valid" [hidden]="!showButton">Next
         </button>
         <button type="submit" class="btn btn-primary" (click)="postData('save')" [disabled]="!employeeHistory.valid"
                 [hidden]="showButton">Save
@@ -36,7 +38,8 @@
   </div>
 </div>
 
-<div class="section-container" [ngClass]="(highlightedSection.name=='AcademicDetails' || highlightedSection.name=='Awards' || highlightedSection.name=='Certification')?'full-width':'quarter-width'"  >
+<div class="section-container"
+     [ngClass]="(highlightedSection.name=='AcademicDetails' || highlightedSection.name=='Awards' || highlightedSection.name=='Certification')?'full-width':'quarter-width'">
   <div class="main-content" *ngIf="highlightedSection.name !='EmploymentHistory'">
     <div class="compact-view clearfix">
       <!--<ul>
@@ -46,16 +49,20 @@
             <p>From {{item.from.month}} {{item.from.year}} to {{item.to.month}} {{item.to.year}}</p></li>
         </div>
       </ul>-->
-      <div *ngIf="employeeHistory.controls.emplyeeHistories.controls.length==0" >
-        <h4 class="heading-compact" (click)="highlightedSection.name='EmploymentHistory';addEmployeeHistory();highlightedSection.isDisable=true;showButton=false;" >
+      <div *ngIf="employeeHistory.controls.emplyeeHistories.controls.length==0">
+        <h4 class="heading-compact"
+            (click)="highlightedSection.name='EmploymentHistory';addEmployeeHistory();highlightedSection.isDisable=true;showButton=false;">
           <img src="assets/c-next/icons/employment-icon.png" alt="employment"/>
           Employment History
-          <span class="glyphicon glyphicon-plus" ></span>
+          <span class="glyphicon glyphicon-plus"></span>
         </h4>
       </div>
       <div class="vertical-container" *ngIf="employeeHistory.controls.emplyeeHistories.controls.length>0">
-        <button class="btn-edit" (click)="highlightedSection.name='EmploymentHistory';highlightedSection.isDisable=true;showButton=false" [hidden]="highlightedSection.isDisable"></button>
-        <cn-vertical-list-view [data]="candidate.employmentHistory" [type]="'employment history'"  ></cn-vertical-list-view>
+        <button class="btn-edit"
+                (click)="highlightedSection.name='EmploymentHistory';highlightedSection.isDisable=true;showButton=false"
+                [hidden]="highlightedSection.isDisable"></button>
+        <cn-vertical-list-view [data]="candidate.employmentHistory"
+                               [type]="'employment history'"></cn-vertical-list-view>
       </div>
     </div>
   </div>

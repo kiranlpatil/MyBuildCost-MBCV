@@ -1,19 +1,22 @@
-<div class="section-container profeiciency-domain" *ngIf="highlightedSection.name=='IndustryExposure'" >
+<div class="section-container profeiciency-domain" *ngIf="highlightedSection.name=='IndustryExposure'">
   <cn-tool-tip [message]="tooltipMessage"></cn-tool-tip>
   <div class="main-content modal-content clearfix">
-    <h4 class="heading">Additional Industry Exposure <span class="sub-heading">(In additional to your core industry, select Industries In which you have work exposure / experience)</span></h4>
+    <h4 class="heading">Additional Industry Exposure <span class="sub-heading">(In additional to your core industry, select Industries In which you have work exposure / experience)</span>
+    </h4>
     <div class="col-sm-12 industry-experience">
-      <div class="select-option"  *ngFor="let choice of industries;let i = index">
-        <label >
-          <input type="checkbox"  name="choice.name" value="{{choice.name}}" (click)="selectIndustryModel(choice.name,$event)" [checked]="candidateExperiencedIndustry.indexOf(choice.name)!=-1">
+      <div class="select-option" *ngFor="let choice of industries;let i = index">
+        <label>
+          <input type="checkbox" name="choice.name" value="{{choice.name}}"
+                 (click)="selectIndustryModel(choice.name,$event)"
+                 [checked]="candidateExperiencedIndustry.indexOf(choice.name)!=-1">
           <span>{{choice.name}}</span>
         </label>
       </div>
       <div class="button-group clearfix">
         <button class="btn btn-primary" scrollTo scrollTargetSelector="#professional-details"
-                (click)="onNext()"  [hidden]="!showButton">Next
+                (click)="onNext()" [hidden]="!showButton">Next
         </button>
-        <button class="btn btn-primary"  (click)="onSave()" [hidden]="showButton">Next</button>
+        <button class="btn btn-primary" (click)="onSave()" [hidden]="showButton">Next</button>
       </div>
     </div>
   </div>
@@ -22,10 +25,13 @@
   <div class="main-content">
     <div class="compact-view clearfix">
       <h4 class="heading">Additional Industries In which you have work exposure / experience
-        <button class="btn-edit" (click)="highlightedSection.name='IndustryExposure';disableButton=false;highlightedSection.isDisable=true;showButton=false" [hidden]="highlightedSection.isDisable"></button>
+        <button class="btn-edit"
+                (click)="highlightedSection.name='IndustryExposure';disableButton=false;highlightedSection.isDisable=true;showButton=false"
+                [hidden]="highlightedSection.isDisable"></button>
       </h4>
       <span class="option" *ngFor="let item of candidateExperiencedIndustry;let i = index">
-        <span>{{item}}</span>&nbsp;<span *ngIf="candidateExperiencedIndustry.length>1 && i!=candidateExperiencedIndustry.length -1">,</span>&nbsp;
+        <span>{{item}}</span>&nbsp;<span
+        *ngIf="candidateExperiencedIndustry.length>1 && i!=candidateExperiencedIndustry.length -1">,</span>&nbsp;
       </span>
     </div>
   </div>

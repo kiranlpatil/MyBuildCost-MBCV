@@ -1,5 +1,5 @@
-import {    Route  } from '@angular/router';
-import {  RegistrationComponent  } from './index';
+import {Route} from "@angular/router";
+import {RegistrationComponent} from "./index";
 
 export const RegistrationRoutes: Route[] = [
   {

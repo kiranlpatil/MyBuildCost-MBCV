@@ -1,5 +1,5 @@
-import {    Injectable  } from '@angular/core';
-import {  Subject  } from 'rxjs/Subject';
+import {Injectable} from "@angular/core";
+import {Subject} from "rxjs/Subject";
 
 
 @Injectable()
@@ -9,7 +9,7 @@ export class ThemeChangeService {
   //showTheme$ Observable to observe themeSource
   showTheme$ = this.themeSource.asObservable();
 
-  change(theme:string) {
+  change(theme: string) {
     this.themeSource.next(theme);
   }
 }

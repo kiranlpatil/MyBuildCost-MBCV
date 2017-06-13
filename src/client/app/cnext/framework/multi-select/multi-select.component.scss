@@ -3,7 +3,7 @@ $text-color: #666;
 $btn-color: #3694d1;
 $message: #00aed5;
 
-.list  {
+.list {
   .btn-container {
     //border: 1px solid $border-color;
     min-height: 65px;
@@ -22,7 +22,7 @@ $message: #00aed5;
     }
 
     span {
-      color:  $btn-color;
+      color: $btn-color;
       font-size: 12px;
       padding-left: 20px;
     }

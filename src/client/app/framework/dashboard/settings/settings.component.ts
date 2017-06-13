@@ -1,19 +1,19 @@
-import {  Component, OnInit, OnDestroy  } from '@angular/core';
+import {Component, OnDestroy, OnInit} from "@angular/core";
 import {
-    ThemeChangeService,
-    CommonService,
-    AppSettings,
-    LocalStorage,
-    LocalStorageService,
-    Message,
-    Messages,
-    MessageService
- } from '../../shared/index';
-import {  FormGroup, FormBuilder, Validators  } from '@angular/forms';
-import {  SettingsService  } from './settings.service';
-import {  UserProfile  } from './../user';
-import {  ProjectAsset  } from '../../shared/constants';
-import { LoaderService } from '../../shared/loader/loader.service';
+  AppSettings,
+  CommonService,
+  LocalStorage,
+  LocalStorageService,
+  Message,
+  Messages,
+  MessageService,
+  ThemeChangeService
+} from "../../shared/index";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {SettingsService} from "./settings.service";
+import {UserProfile} from "./../user";
+import {ProjectAsset} from "../../shared/constants";
+import {LoaderService} from "../../shared/loader/loader.service";
 
 @Component({
   moduleId: module.id,
@@ -22,17 +22,17 @@ import { LoaderService } from '../../shared/loader/loader.service';
   styleUrls: ['settings.component.css'],
   providers: [SettingsService],
 })
-export class SettingsComponent implements OnInit,OnDestroy {
-  themeIs:string;
-  isSocialLogin:boolean;
+export class SettingsComponent implements OnInit, OnDestroy {
+  themeIs: string;
+  isSocialLogin: boolean;
   model = new UserProfile();
-  userForm:FormGroup;
+  userForm: FormGroup;
   INITIAL_THEME = AppSettings.INITIAL_THEM;
   LIGHT_THEME = AppSettings.LIGHT_THEM;
-  APP_NAME:string;
+  APP_NAME: string;
 
-  constructor(private commonService:CommonService, private themeChangeService:ThemeChangeService, private changeThemeServie:SettingsService,
-              private messageService:MessageService, private formBuilder:FormBuilder, private loaderService:LoaderService) {
+  constructor(private commonService: CommonService, private themeChangeService: ThemeChangeService, private changeThemeServie: SettingsService,
+              private messageService: MessageService, private formBuilder: FormBuilder, private loaderService: LoaderService) {
 
     //this.themeIs = LocalStorageService.getLocalValue(LocalStorage.MY_THEME);
     this.themeIs = AppSettings.INITIAL_THEM;
@@ -46,7 +46,7 @@ export class SettingsComponent implements OnInit,OnDestroy {
 
   ngOnInit() {
 
-    var socialLogin:string = LocalStorageService.getLocalValue(LocalStorage.IS_SOCIAL_LOGIN);
+    var socialLogin: string = LocalStorageService.getLocalValue(LocalStorage.IS_SOCIAL_LOGIN);
     if (socialLogin === 'YES') {
       this.isSocialLogin = true;
     } else {
@@ -62,24 +62,24 @@ export class SettingsComponent implements OnInit,OnDestroy {
   darkTheme() {
     this.themeChangeService.change(this.INITIAL_THEME);
     this.changeThemeServie.chageTheme(this.INITIAL_THEME)
-        .subscribe(
-            body => this.changeThemeSuccess(body),
-            error => this.changeThemeFail(error));
+      .subscribe(
+        body => this.changeThemeSuccess(body),
+        error => this.changeThemeFail(error));
   }
 
   lightTheme() {
     this.themeChangeService.change(this.INITIAL_THEME);
     this.changeThemeServie.chageTheme(this.INITIAL_THEME)
-        .subscribe(
-            body => this.changeThemeSuccess(body),
-            error => this.changeThemeFail(error));
+      .subscribe(
+        body => this.changeThemeSuccess(body),
+        error => this.changeThemeFail(error));
   }
 
   goBack() {
     this.commonService.goBack();
   }
 
-  changeThemeSuccess(body:any) {
+  changeThemeSuccess(body: any) {
     var message = new Message();
     message.isError = false;
     message.custom_message = Messages.MSG_SUCCESS_CHANGE_THEME;
@@ -88,7 +88,7 @@ export class SettingsComponent implements OnInit,OnDestroy {
     LocalStorageService.setLocalValue(LocalStorage.MY_THEME, body.data.current_theme);
   }
 
-  changeThemeFail(error:any) {
+  changeThemeFail(error: any) {
     var message = new Message();
     message.isError = false;
     message.custom_message = Messages.MSG_ERROR_CHANGE_THEME;

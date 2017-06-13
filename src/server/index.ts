@@ -1,21 +1,21 @@
-import * as http from 'http';
-import * as express from 'express';
-import * as bodyParser from 'body-parser';
-import * as path from 'path';
-import * as compression from 'compression';
-import * as routes from './routes';
-import * as cnextRoutes from './cnext-routes'
-import * as methodOverride  from 'method-override';
-import * as cors from 'cors';
-import * as fs from 'fs';
+import * as http from "http";
+import * as express from "express";
+import * as bodyParser from "body-parser";
+import * as path from "path";
+import * as compression from "compression";
+import * as routes from "./routes";
+import * as cnextRoutes from "./cnext-routes";
+import * as methodOverride from "method-override";
+import * as cors from "cors";
+import * as fs from "fs";
 var spdy = require('spdy');
 
 var _clientDir = '../client';
 var app = express();
 
-export function init(port: number, mode: string,protocol: string) {
+export function init(port: number, mode: string, protocol: string) {
 
-  app.use(bodyParser.urlencoded({ extended: false }));
+  app.use(bodyParser.urlencoded({extended: false}));
   app.use(bodyParser.json({limit: '40mb'}));
   app.use(bodyParser.urlencoded({limit: '40mb', extended: true}));
   app.use(bodyParser.text());
@@ -34,7 +34,7 @@ export function init(port: number, mode: string,protocol: string) {
    * @note Dev server will only give for you middleware.
    */
   if (mode == 'dev') {
-    app.all('/*', function(req, res, next) {
+    app.all('/*', function (req, res, next) {
       res.header('Access-Control-Allow-Origin', '*');
       res.header('Access-Control-Allow-Headers', 'X-Requested-With');
       next();
@@ -50,7 +50,7 @@ export function init(port: number, mode: string,protocol: string) {
     var renderIndex = (req: express.Request, res: express.Response) => {
       res.sendFile(path.resolve(__dirname, _clientDir + '/index.html'));
     };
-   app.get('/*', renderIndex);
+    app.get('/*', renderIndex);
     /**
      * Api Routes for `Development`.
      */
@@ -95,8 +95,8 @@ export function init(port: number, mode: string,protocol: string) {
    * Server with gzip compression.
    */
   //HTTP START:
-  if(protocol == 'http') {
-    return new Promise<http.Server>((resolve:any, reject:any) => {
+  if (protocol == 'http') {
+    return new Promise<http.Server>((resolve: any, reject: any) => {
       let server = app.listen(port, () => {
         var port = server.address().port;
         console.log('App is listening on port:' + port);
@@ -114,7 +114,7 @@ export function init(port: number, mode: string,protocol: string) {
     };
 
     return spdy.createServer(options, app)
-      .listen(port, (error:any) => {
+      .listen(port, (error: any) => {
         if (error) {
           console.error(error)
           return process.exit(1);

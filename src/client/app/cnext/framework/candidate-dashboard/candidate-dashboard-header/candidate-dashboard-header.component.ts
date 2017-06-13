@@ -9,6 +9,6 @@ import {Candidate} from "../../model/candidate";
 })
 
 export class CandidateDashboardHeaderComponent {
-  @Input() candidate:Candidate;
+  @Input() candidate: Candidate;
 
 }

@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input,ViewChild  } from '@angular/core';
+import {Component, ElementRef, Input, ViewChild} from "@angular/core";
 
 @Component({
   moduleId: module.id,
@@ -8,13 +8,13 @@ import { Component, ElementRef, Input,ViewChild  } from '@angular/core';
 })
 
 export class ProgressBarComponent {
-  @ViewChild('canvas') canvasRef:ElementRef;
-  @Input() value : number;
-  @Input() color : string;
-  @Input() rotation : boolean = false;
+  @ViewChild('canvas') canvasRef: ElementRef;
+  @Input() value: number;
+  @Input() color: string;
+  @Input() rotation: boolean = false;
   private canvas: HTMLCanvasElement;
-  private ctx : CanvasRenderingContext2D;
-  private imd:any = null;
+  private ctx: CanvasRenderingContext2D;
+  private imd: any = null;
 
   ngOnChanges(changes: any) {
     this.canvas = this.canvasRef.nativeElement;
@@ -22,11 +22,11 @@ export class ProgressBarComponent {
     this.canvas.height = 90;
     if (this.canvas.getContext) {
       this.ctx = this.canvas.getContext('2d');
-      this.ctx.clearRect(0, 0,this.canvas.width,this.canvas.height);
+      this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
       this.ctx.beginPath();
     }
     this.ctx.lineWidth = 2.0;
-    if (this.rotation && this.value != 100){
+    if (this.rotation && this.value != 100) {
       this.ctx.strokeStyle = '#e8e8e8';
     }
     else {

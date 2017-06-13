@@ -12,28 +12,28 @@ import {CandidateProfileService} from "../../../candidate-profile/candidate-prof
 
 })
 export class CandidateViewComponent {
-  @Input() candidateId:string;
-  private candidateDetails:CandidateDetail = new CandidateDetail();
-  private candidate:Candidate = new Candidate();
-  private secondaryCapabilities:string[] = new Array();
+  @Input() candidateId: string;
+  private candidateDetails: CandidateDetail = new CandidateDetail();
+  private candidate: Candidate = new Candidate();
+  private secondaryCapabilities: string[] = new Array();
 
-  constructor(private profileCreatorService:CandidateProfileService) {
+  constructor(private profileCreatorService: CandidateProfileService) {
   }
 
-  ngOnChanges(changes:any) {
+  ngOnChanges(changes: any) {
     if (changes.candidateId != undefined && changes.candidateId.currentValue != undefined) {
       this.candidateId = changes.candidateId.currentValue;
       this.getCandidateProfile(this.candidateId);
     }
   }
 
-  getCandidateProfile(candidateId:string) {
+  getCandidateProfile(candidateId: string) {
     this.profileCreatorService.getCandidateDetailsOfParticularId(candidateId)
       .subscribe(
         candidateData => this.OnCandidateDataSuccess(candidateData));
   }
 
-  OnCandidateDataSuccess(candidateData:any) {
+  OnCandidateDataSuccess(candidateData: any) {
     this.candidate = candidateData.data;
     this.candidateDetails = candidateData.metadata;
     this.getSecondaryData();

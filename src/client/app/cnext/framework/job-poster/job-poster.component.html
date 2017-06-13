@@ -20,7 +20,8 @@
 
       <cn-job-proficiencies [proficiencies]="proficiencies" [jobPosterModel]="jobPosterModel"
                             [highlightedSection]="highlightedSection"
-                            (onComplete)="selectProficiency($event)" (onNextComplete)="onProficiencyComplete($event)" [hidden]="!isShowProficiency">
+                            (onComplete)="selectProficiency($event)" (onNextComplete)="onProficiencyComplete($event)"
+                            [hidden]="!isShowProficiency">
       </cn-job-proficiencies>
 
       <cn-industry-experience [candidateExperiencedIndustry]="jobPosterModel.interestedIndustries"
@@ -30,9 +31,9 @@
                               [hidden]="!showIndustryExposure" (onNextComplete)="onIndustryExposureComplete($event)"
                               *ngIf="jobPosterModel != undefined && jobPosterModel.industry != undefined"></cn-industry-experience>
 
-        <cn-compentacies-and-responsibilities [jobPosterModel]="jobPosterModel" [highlightedSection]="highlightedSection"
-                                              (onComplete)="onCompentansiesandResponsibilitycomplete($event)"
-                                              [hidden]="!showCompentensies"></cn-compentacies-and-responsibilities>
+      <cn-compentacies-and-responsibilities [jobPosterModel]="jobPosterModel" [highlightedSection]="highlightedSection"
+                                            (onComplete)="onCompentansiesandResponsibilitycomplete($event)"
+                                            [hidden]="!showCompentensies"></cn-compentacies-and-responsibilities>
 
       <div class="button-group" [hidden]="!isShowProficiency">
         <!--<button type="submit" class="btn btn-primary" (click)="mockupSearch()" >Mock Search</button>-->
@@ -40,7 +41,8 @@
         <!--
               <button type="submit" class="btn btn-primary">Save Job</button>
         -->
-        <button type="submit" class="btn btn-danger" (click)="showHideModal()" [disabled]="disableButton">Post Job</button>
+        <button type="submit" class="btn btn-danger" (click)="showHideModal()" [disabled]="disableButton">Post Job
+        </button>
       </div>
     </div>
   </div>

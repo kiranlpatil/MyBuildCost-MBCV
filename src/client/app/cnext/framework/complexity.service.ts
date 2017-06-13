@@ -1,14 +1,14 @@
-import {   Injectable  } from '@angular/core';
-import {  Subject  } from 'rxjs/Subject';
+import {Injectable} from "@angular/core";
+import {Subject} from "rxjs/Subject";
 
 @Injectable()
 export class ComplexityService {
 
   // Observable string sources
-   _showComplexitySource = new Subject<boolean>();
+  _showComplexitySource = new Subject<boolean>();
 
   // Observable string streams
-   showTest$ = this._showComplexitySource.asObservable();
+  showTest$ = this._showComplexitySource.asObservable();
 
   // Service message commands
   change(isAnswerTrue: boolean) {

@@ -1,7 +1,7 @@
-import {Component, Input, EventEmitter, Output} from "@angular/core";
+import {Component, EventEmitter, Input, Output} from "@angular/core";
 import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
 import {Candidate, Section} from "../model/candidate";
-import {FormGroup, FormArray, FormBuilder, Validators} from "@angular/forms";
+import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 
 @Component({
@@ -13,17 +13,17 @@ import {FormGroup, FormArray, FormBuilder, Validators} from "@angular/forms";
 
 export class AwardsComponent {
 
-  @Input() candidate:Candidate;
-  @Input() highlightedSection:Section;
+  @Input() candidate: Candidate;
+  @Input() highlightedSection: Section;
   @Output() onComplete = new EventEmitter();
 
-  public awardDetail:FormGroup;
+  public awardDetail: FormGroup;
 
 
-  private isButtonShow:boolean = false;
-  private showButton:boolean = true;
+  private isButtonShow: boolean = false;
+  private showButton: boolean = true;
 
-  constructor(private _fb:FormBuilder, private profileCreatorService:CandidateProfileService) {
+  constructor(private _fb: FormBuilder, private profileCreatorService: CandidateProfileService) {
   }
 
   ngOnInit() {
@@ -37,7 +37,7 @@ export class AwardsComponent {
     })
   }
 
-  ngOnChanges(changes:any) {
+  ngOnChanges(changes: any) {
     if (changes.candidate.currentValue != undefined) {
       this.candidate = changes.candidate.currentValue;
       if (this.candidate.awards != undefined && this.candidate.awards.length > 0) {
@@ -70,23 +70,23 @@ export class AwardsComponent {
     control.push(addrCtrl);
   }
 
-  removeAward(i:number) {
+  removeAward(i: number) {
     const control = <FormArray>this.awardDetail.controls['awards'];
     control.removeAt(i);
     this.postData('dalete');
   }
 
-  postData(type:string) {
+  postData(type: string) {
     this.candidate.awards = this.awardDetail.value.awards;
     this.profileCreatorService.addProfileDetail(this.candidate).subscribe(
-        user => {
-          if (type == 'next') {
-            this.onNext();
-          }
-          else if (type == 'save') {
-            this.onSave()
-          }
-        });
+      user => {
+        if (type == 'next') {
+          this.onNext();
+        }
+        else if (type == 'save') {
+          this.onSave()
+        }
+      });
   }
 
   onNext() {

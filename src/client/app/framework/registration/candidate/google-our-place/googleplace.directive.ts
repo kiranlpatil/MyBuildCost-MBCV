@@ -1,26 +1,26 @@
-import {Directive, ElementRef, EventEmitter, Output} from '@angular/core';
-import {NgModel} from '@angular/forms';
+import {Directive, ElementRef, EventEmitter, Output} from "@angular/core";
+import {NgModel} from "@angular/forms";
 import {MyGoogleAddress} from "./my-google-address";
 
-declare var google:any;
+declare var google: any;
 
 @Directive({
   selector: '[mygoogleplace]',
   providers: [NgModel],
   host: {
-    '(input)' : 'onInputChange()'
+    '(input)': 'onInputChange()'
   }
 })
-export class MyGoogleDirective  {
+export class MyGoogleDirective {
   @Output() setAddress: EventEmitter<MyGoogleAddress> = new EventEmitter();
-  address: MyGoogleAddress= new MyGoogleAddress();
-  private place :any;
-  modelValue:any;
-  autocomplete:any;
-  private _el:HTMLElement;
+  address: MyGoogleAddress = new MyGoogleAddress();
+  private place: any;
+  modelValue: any;
+  autocomplete: any;
+  private _el: HTMLElement;
 
 
-  constructor(el: ElementRef,private model:NgModel) {
+  constructor(el: ElementRef, private model: NgModel) {
     this._el = el.nativeElement;
     this.modelValue = this.model;
     var input = this._el;
@@ -28,7 +28,7 @@ export class MyGoogleDirective  {
       types: ['(cities)']
     };
     this.autocomplete = new google.maps.places.Autocomplete(input, options);
-    google.maps.event.addListener(this.autocomplete, 'place_changed', ()=> {
+    google.maps.event.addListener(this.autocomplete, 'place_changed', () => {
       this.place = this.autocomplete.getPlace();
       this.invokeEvent(this.place);
     });
@@ -60,18 +60,17 @@ export class MyGoogleDirective  {
   }
 
 
-
-  invokeEvent(place:Object) {
-    let city =this.findCity(this.place.address_components);
-    let state =this.findState(this.place.address_components);
-    let country =this.findCountry(this.place.address_components);
-    if(state === undefined){
-      state=city;
+  invokeEvent(place: Object) {
+    let city = this.findCity(this.place.address_components);
+    let state = this.findState(this.place.address_components);
+    let country = this.findCountry(this.place.address_components);
+    if (state === undefined) {
+      state = city;
     }
-    let myaddress: MyGoogleAddress= new MyGoogleAddress();
-    myaddress.city=city;
-    myaddress.state=state;
-    myaddress.country=country;
+    let myaddress: MyGoogleAddress = new MyGoogleAddress();
+    myaddress.city = city;
+    myaddress.state = state;
+    myaddress.country = country;
     this.setAddress.emit(myaddress);
   }
 

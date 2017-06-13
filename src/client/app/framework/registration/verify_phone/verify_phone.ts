@@ -1,3 +1,3 @@
 export class VerifyUser {
-    otp:string;
+  otp: string;
 }

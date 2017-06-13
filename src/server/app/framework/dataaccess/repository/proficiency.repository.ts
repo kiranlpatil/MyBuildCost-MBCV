@@ -3,7 +3,7 @@ import RepositoryBase = require("./base/repository.base");
 import IProficiency = require("../mongoose/proficiency");
 
 class ProficiencyRepository extends RepositoryBase<IProficiency> {
-  constructor () {
+  constructor() {
     super(ProficiencySchema);
   }
 }

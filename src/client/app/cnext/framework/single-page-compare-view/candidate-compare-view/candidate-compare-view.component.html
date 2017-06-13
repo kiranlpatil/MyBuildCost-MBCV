@@ -1,11 +1,13 @@
-<section class="container-fluid one-page-summary" *ngIf="recruiter != undefined && data != undefined" >
+<section class="container-fluid one-page-summary" *ngIf="recruiter != undefined && data != undefined">
   <div class="col-sm-3 left-content">
     <div>
       <div class="basic-description" *ngIf="recruiter != undefined">
 
         <div class="basic-info clearfix">
-          <img src= "assets/framework/images/dashboard/profile.png" alt="User Profile" *ngIf="recruiter.company_logo==undefined"/>
-          <img [src]="getImagePath(recruiter.company_logo)"  alt="User Profile" *ngIf="recruiter.company_logo!=undefined"/>
+          <img src="assets/framework/images/dashboard/profile.png" alt="User Profile"
+               *ngIf="recruiter.company_logo==undefined"/>
+          <img [src]="getImagePath(recruiter.company_logo)" alt="User Profile"
+               *ngIf="recruiter.company_logo!=undefined"/>
           <p class="name">{{recruiter.company_name}}</p>
         </div>
 
@@ -19,24 +21,26 @@
           <label>Industry</label>
           <span>{{postedJob.industry.name}}</span>
           <label>Specialization area</label>
-      <span *ngFor="let role of postedJob.industry.roles;let i = index">{{role.name}}
+          <span *ngFor="let role of postedJob.industry.roles;let i = index">{{role.name}}
         <span *ngIf="postedJob.industry.roles.length>1 &&  i!=postedJob.industry.roles.length-1">,</span>
       </span>
           <label>Additional Industry</label>
-      <span *ngFor="let industry of postedJob.interestedIndustries;let i = index">{{industry}}<span
-        *ngIf="recruiter.postedJobs[0].interestedIndustries.length>1 && i!=postedJob.interestedIndustries-1">,</span>
+          <span *ngFor="let industry of postedJob.interestedIndustries;let i = index">{{industry}}<span
+            *ngIf="recruiter.postedJobs[0].interestedIndustries.length>1 && i!=postedJob.interestedIndustries-1">,</span>
       </span>
           <label [class.exact]="data.educationMatch=='exact'" [class.above]="data.educationMatch=='above'"
-                 [class.below]="data.educationMatch=='below'" [class.missing]="data.educationMatch=='missing'">Education</label>
+                 [class.below]="data.educationMatch=='below'"
+                 [class.missing]="data.educationMatch=='missing'">Education</label>
           <span>{{postedJob.education}}</span>
           <label [class.exact]="data.experienceMatch=='exact'" [class.above]="data.experienceMatch=='above'"
                  [class.below]="data.experienceMatch=='below'" [class.missing]="data.experienceMatch=='missing'">Experience</label>
           <span>{{postedJob.experience}}</span>
           <label [class.exact]="data.salaryMatch=='exact'" [class.above]="data.salaryMatch=='above'"
-                 [class.below]="data.salaryMatch=='below'" [class.missing]="data.salaryMatch=='missing'" >Salary</label>
+                 [class.below]="data.salaryMatch=='below'" [class.missing]="data.salaryMatch=='missing'">Salary</label>
           <span>{{postedJob.salary}}</span>
-          <label  [class.exact]="data.releaseMatch=='exact'" [class.above]="data.releaseMatch=='above'"
-                  [class.below]="data.releaseMatch=='below'" [class.missing]="data.releaseMatch=='missing'">Joining Period</label>
+          <label [class.exact]="data.releaseMatch=='exact'" [class.above]="data.releaseMatch=='above'"
+                 [class.below]="data.releaseMatch=='below'" [class.missing]="data.releaseMatch=='missing'">Joining
+            Period</label>
           <span>{{postedJob.joiningPeriod}}</span>
           <label>Location</label>
           <span>{{postedJob.location.city}}location</span>
@@ -62,8 +66,9 @@
         <cn-horizontal-list-view [data]="secondaryCapabilities"></cn-horizontal-list-view>
       </div>-->
 
-        <h4>Proficiencies Matched With Job.</h4>
-        <cn-proficiency-compare [data]="data.proficiencies" [matchdData]="data.proficienciesMatch"></cn-proficiency-compare>
+      <h4>Proficiencies Matched With Job.</h4>
+      <cn-proficiency-compare [data]="data.proficiencies"
+                              [matchdData]="data.proficienciesMatch"></cn-proficiency-compare>
 
     </div>
     <!--<div class="col-sm-12 no-padding">

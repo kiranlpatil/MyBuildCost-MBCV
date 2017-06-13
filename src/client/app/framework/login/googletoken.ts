@@ -3,6 +3,6 @@
  */
 
 export class GoogleToken {
-  googleToken:String ;
+  googleToken: String;
 }
 

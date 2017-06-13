@@ -1,13 +1,12 @@
-
 <div class="list clearfix">
   <div class="col-sm-4 no-padding">
     <div ng2-auto-complete
          [source]="Proficiencies"
          (ngModelChange)="selectedProficiencyModel($event)"
          no-match-found-text="No Match Found, Press Enter to add It">
-      <input class="form-control"  #elem [id]="type"
-             (keyup.enter)="showHideModal($event.target.value)" />
-      <div class="error-messages"*ngIf="showAlert"><p>You can select maximum {{maxLength}} proficiencies.</p></div>
+      <input class="form-control" #elem [id]="type"
+             (keyup.enter)="showHideModal($event.target.value)"/>
+      <div class="error-messages" *ngIf="showAlert"><p>You can select maximum {{maxLength}} proficiencies.</p></div>
     </div>
   </div>
   <div class="col-sm-8 padding-left15">
@@ -31,8 +30,9 @@
               <p>Do you want to add this proficiency ? </p>
               <div class="button-group">
                 <form>
-                  <input type="submit" #myInput class="btn btn-primary" (click)="addProficiencyToMasterData()" value="Save" />
-                  <button class="btn btn-default" (click)="showHideModal()" >Cancel</button>
+                  <input type="submit" #myInput class="btn btn-primary" (click)="addProficiencyToMasterData()"
+                         value="Save"/>
+                  <button class="btn btn-default" (click)="showHideModal()">Cancel</button>
                 </form>
               </div>
             </div>

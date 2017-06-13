@@ -1,5 +1,5 @@
-import {    Route  } from '@angular/router';
-import {  DashboardProfileComponent  } from './index';
+import {Route} from "@angular/router";
+import {DashboardProfileComponent} from "./index";
 
 export const DashboardProfileRoutes: Route[] = [
   {

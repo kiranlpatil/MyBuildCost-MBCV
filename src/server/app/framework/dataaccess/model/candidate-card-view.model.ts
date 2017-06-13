@@ -12,9 +12,9 @@ import AwardModel = require("./award.model");
 import IndustryModel = require("./industry.model");
 
 class CandidateCardViewModel {
-  jobTitle : string;
-  userId :  {type:mongoose.Schema.Types.ObjectId, ref:'User'};
-  matching : number=0;
-  matchedComplexity : number=0;
+  jobTitle: string;
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' };
+  matching: number = 0;
+  matchedComplexity: number = 0;
 }
 export = CandidateCardViewModel;

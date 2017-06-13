@@ -1,5 +1,4 @@
-
-import * as winston from 'winston';
+import * as winston from "winston";
 
 
 var logger = new winston.Logger({
@@ -25,7 +24,7 @@ var logger = new winston.Logger({
 
 module.exports = logger;
 module.exports.stream = {
-  write: function (message:any, encoding:any) {
+  write: function (message: any, encoding: any) {
     logger.info(message);
   }
 };

@@ -1,17 +1,17 @@
-import {   Injectable  } from '@angular/core';
-import {  Subject  } from 'rxjs/Subject';
+import {Injectable} from "@angular/core";
+import {Subject} from "rxjs/Subject";
 
 @Injectable()
 export class LoaderService {
 
-    status: Subject<boolean> = new Subject();
+  status: Subject<boolean> = new Subject();
 
 
-    public start(): void {
-        this.status.next(true);
-    }
+  public start(): void {
+    this.status.next(true);
+  }
 
-    public stop(): void {
-        this.status.next(false);
-    }
+  public stop(): void {
+    this.status.next(false);
+  }
 }

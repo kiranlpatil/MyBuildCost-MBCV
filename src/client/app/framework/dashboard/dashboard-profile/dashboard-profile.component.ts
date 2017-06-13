@@ -1,34 +1,33 @@
-import {   Component, OnInit, NgZone, OnDestroy  } from '@angular/core';
-import {  Router  } from '@angular/router';
-import {  DashboardService  } from '../dashboard.service';
-import {  UserProfile  } from '../user';
-import {  FormGroup, FormBuilder, Validators  } from '@angular/forms';
-import {  ValidationService  } from '../../shared/customvalidations/validation.service';
+import {Component, NgZone, OnDestroy, OnInit} from "@angular/core";
+import {Router} from "@angular/router";
+import {DashboardService} from "../dashboard.service";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {ValidationService} from "../../shared/customvalidations/validation.service";
 import {
-    Message,
-    MessageService,
-    CommonService,
-    Messages,
-    ProfileService,
-    AppSettings,
-    ImagePath,
-    LocalStorage,
-    ThemeChangeService,
-    LocalStorageService
- } from '../../shared/index';
-import {  NavigationRoutes  } from '../../shared/constants';
-import {  LoaderService  } from '../../shared/loader/loader.service';
+  AppSettings,
+  CommonService,
+  ImagePath,
+  LocalStorage,
+  LocalStorageService,
+  Message,
+  Messages,
+  MessageService,
+  ProfileService,
+  ThemeChangeService
+} from "../../shared/index";
+import {NavigationRoutes} from "../../shared/constants";
+import {LoaderService} from "../../shared/loader/loader.service";
 import {CandidateDetail} from "../../registration/candidate/candidate";
 
 
 @Component({
-    moduleId: module.id,
-    selector: 'tpl-dashboard-home',
-    templateUrl: 'dashboard-profile.component.html',
-    styleUrls: ['dashboard-profile.component.css'],
+  moduleId: module.id,
+  selector: 'tpl-dashboard-home',
+  templateUrl: 'dashboard-profile.component.html',
+  styleUrls: ['dashboard-profile.component.css'],
 })
 
-export class DashboardProfileComponent implements OnInit,OnDestroy {
+export class DashboardProfileComponent implements OnInit, OnDestroy {
 
   model = new CandidateDetail();
   submitted = false;
@@ -80,14 +79,14 @@ export class DashboardProfileComponent implements OnInit,OnDestroy {
     if (this.newUser === 0) {
       this._router.navigate([NavigationRoutes.APP_START]);
     } else {
-    //  this.loaderService.start();
+      //  this.loaderService.start();
       this.getUserProfile();
     }
     document.body.scrollTop = 0;
   }
 
   ngOnDestroy() {
- //this.loaderService.stop();
+    //this.loaderService.stop();
   }
 
   getUserProfile() {
@@ -104,13 +103,13 @@ export class DashboardProfileComponent implements OnInit,OnDestroy {
     }
     if (result !== null) {
       this.model = result.data;
-      var socialLogin:string = LocalStorageService.getLocalValue(LocalStorage.IS_SOCIAL_LOGIN);
-     if (socialLogin === AppSettings.IS_SOCIAL_LOGIN_YES) {
+      var socialLogin: string = LocalStorageService.getLocalValue(LocalStorage.IS_SOCIAL_LOGIN);
+      if (socialLogin === AppSettings.IS_SOCIAL_LOGIN_YES) {
         this.image_path = this.model.social_profile_picture;
-      }  else if (this.image_path === undefined && socialLogin !== AppSettings.IS_SOCIAL_LOGIN_YES) {
+      } else if (this.image_path === undefined && socialLogin !== AppSettings.IS_SOCIAL_LOGIN_YES) {
         this.image_path = ImagePath.PROFILE_IMG_ICON;
 
-     }  else if (this.model.picture !== undefined && socialLogin !== AppSettings.IS_SOCIAL_LOGIN_YES) {
+      } else if (this.model.picture !== undefined && socialLogin !== AppSettings.IS_SOCIAL_LOGIN_YES) {
         this.image_path = AppSettings.IP + this.model.picture.substring(4).replace('"', '');
       }
     }
@@ -174,7 +173,7 @@ export class DashboardProfileComponent implements OnInit,OnDestroy {
           if (result !== null) {
             this.fileChangeSuccess(result);
           }
-        }, (error:any) => {
+        }, (error: any) => {
           this.fileChangeFail(error);
         });
       } else {
@@ -193,10 +192,10 @@ export class DashboardProfileComponent implements OnInit,OnDestroy {
 
   fileChangeSuccess(result: any) {
     this.model = result.data;
-    var socialLogin:string = LocalStorageService.getLocalValue(LocalStorage.IS_SOCIAL_LOGIN);
+    var socialLogin: string = LocalStorageService.getLocalValue(LocalStorage.IS_SOCIAL_LOGIN);
     if (!this.model.picture || this.model.picture === undefined) {
       this.image_path = ImagePath.PROFILE_IMG_ICON;
-    }  else if(socialLogin === AppSettings.IS_SOCIAL_LOGIN_YES) {
+    } else if (socialLogin === AppSettings.IS_SOCIAL_LOGIN_YES) {
       this.image_path = this.model.picture;
     } else {
       this.image_path = AppSettings.IP + this.model.picture.substring(4).replace('"', '');

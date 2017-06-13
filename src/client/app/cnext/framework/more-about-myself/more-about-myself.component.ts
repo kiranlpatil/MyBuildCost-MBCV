@@ -1,9 +1,8 @@
-import {Component, OnInit, EventEmitter, Input, Output} from "@angular/core";
+import {Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
 import {MessageService} from "../../../framework/shared/message.service";
 import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
 import {Message} from "../../../framework/shared/message";
 import {Candidate, Section} from "../model/candidate";
-import {isUndefined} from "util";
 
 @Component({
   moduleId: module.id,
@@ -13,29 +12,29 @@ import {isUndefined} from "util";
 })
 
 export class MoreAboutMyselfComponent implements OnInit {
-  @Input() candidate:Candidate;
-  @Input() highlightedSection:Section;
-  @Output() onComplete=new EventEmitter();
-  private maxLength:number = 250;
-  private reSize:string[];
-  private spaceSplitedString:string[];
-  private dotSplitedString:string[];
-  private commaSplitedString:string[];
-  private wordsTillNow:number;
-  private remainingWords:number;
-  private maxword:number;
-  private showButton:boolean = true;
-  tooltipMessage : string="<ul><li><h5>More about myself</h5><p class='info'>More About Myself. Please mention any additional details you feel are important for recruiter to know about you and are not cover in any of the section above</p></li></ul>";
+  @Input() candidate: Candidate;
+  @Input() highlightedSection: Section;
+  @Output() onComplete = new EventEmitter();
+  private maxLength: number = 250;
+  private reSize: string[];
+  private spaceSplitedString: string[];
+  private dotSplitedString: string[];
+  private commaSplitedString: string[];
+  private wordsTillNow: number;
+  private remainingWords: number;
+  private maxword: number;
+  private showButton: boolean = true;
+  tooltipMessage: string = "<ul><li><h5>More about myself</h5><p class='info'>More About Myself. Please mention any additional details you feel are important for recruiter to know about you and are not cover in any of the section above</p></li></ul>";
 
-  constructor(private messageService:MessageService,
-              private profileCreatorService:CandidateProfileService) {
+  constructor(private messageService: MessageService,
+              private profileCreatorService: CandidateProfileService) {
     this.reSize = new Array(1);
   }
 
   ngOnInit() {
   }
 
-  ngOnChanges(changes:any) {
+  ngOnChanges(changes: any) {
     if (this.candidate.aboutMyself !== undefined) {
       this.spaceSplitedString = this.candidate.aboutMyself.split(' ');
       this.dotSplitedString = this.candidate.aboutMyself.split('.');
@@ -48,10 +47,10 @@ export class MoreAboutMyselfComponent implements OnInit {
     }
   }
 
-  OnCandidateDataSuccess(candidateData:any) {
+  OnCandidateDataSuccess(candidateData: any) {
   }
 
-  onError(error:any) {
+  onError(error: any) {
     var message = new Message();
     message.error_msg = error.err_msg;
     message.isError = true;
@@ -69,7 +68,7 @@ export class MoreAboutMyselfComponent implements OnInit {
     }
     this.profileCreatorService.addProfileDetail(this.candidate).subscribe(
       user => {
-        this.highlightedSection.isDisable=false;
+        this.highlightedSection.isDisable = false;
 
       },
       error => {

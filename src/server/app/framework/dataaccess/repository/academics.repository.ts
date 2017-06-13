@@ -3,7 +3,7 @@ import RepositoryBase = require("./base/repository.base");
 import IAcademic = require("../mongoose/academics");
 
 class AcademicsRepository extends RepositoryBase<IAcademic> {
-  constructor () {
+  constructor() {
     super(AcademicSchema);
   }
 }

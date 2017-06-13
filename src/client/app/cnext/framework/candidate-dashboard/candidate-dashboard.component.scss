@@ -4,7 +4,6 @@ $green: #8dc63f;
 $red: #ef4136;
 $active-color: #edf1f5;
 
-
 .profile-wrapper {
 
   .list-view > ul > li {
@@ -41,15 +40,15 @@ $active-color: #edf1f5;
       background-color: $green;
     }
 
-    li:nth-child(2)  > a > .count {
+    li:nth-child(2) > a > .count {
       background-color: $orange;
     }
 
-    li:nth-child(4)  > a > .count {
+    li:nth-child(4) > a > .count {
       background-color: $theme-color;
     }
 
-    li:nth-child(5)  > a > .count {
+    li:nth-child(5) > a > .count {
       background-color: $red;
     }
   }

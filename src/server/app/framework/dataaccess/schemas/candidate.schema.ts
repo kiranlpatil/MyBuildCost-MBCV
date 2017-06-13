@@ -20,17 +20,17 @@ class CandidateSchema {
   static get schema() {
     var schema = mongoose1.Schema({
 
-      jobTitle :{
+      jobTitle: {
         type: String
       },
-      roleType :{
+      roleType: {
         type: String
       },
       userId: {
         type: mongoose.Schema.Types.ObjectId, ref: 'User'
       },
-      isCompleted :{
-        type : Boolean,
+      isCompleted: {
+        type: Boolean,
         default: false
       },
       isVisible: {
@@ -42,42 +42,42 @@ class CandidateSchema {
       },
       certifications: [{
         name: String,
-        year : Number,
-        issuedBy : String,
-        remark : String
+        year: Number,
+        issuedBy: String,
+        remark: String
       }],
-      interestedIndustries : {
+      interestedIndustries: {
         type: [String]
       },
       awards: [{
         name: String,
-        year : Number,
-        issuedBy : String,
-        remark : String
+        year: Number,
+        issuedBy: String,
+        remark: String
       }],
-      industry:{
-        name:String,
+      industry: {
+        name: String,
         roles: [{
           name: String,
           capabilities: [{
             complexities: [{
               scenarios: [{
-                isChecked : Boolean,
+                isChecked: Boolean,
                 name: String,
-                code : String
+                code: String
               }],
               name: String
             }],
             name: String,
-            isPrimary : Boolean,
-            isSecondary : Boolean
+            isPrimary: Boolean,
+            isSecondary: Boolean
           }],
           default_complexities: [{
             complexities: [{
               scenarios: [{
-                isChecked : Boolean,
+                isChecked: Boolean,
                 name: String,
-                code : String
+                code: String
               }],
               name: String
             }],
@@ -120,20 +120,20 @@ class CandidateSchema {
       proficiencies: {
         type: [String]
       },
-      lockedOn :{
+      lockedOn: {
         type: Date
       },
       job_list: [{
         name: String,
         ids: [{
-          type:String
+          type: String
         }]
       }],
 
     }, {versionKey: false});
 
     return schema;
-   }
+  }
 }
 var schema = mongooseConnection.model<ICandidate>("Candidate", CandidateSchema.schema);
 export = schema;

@@ -17,13 +17,12 @@
         </button>
 
         <a class="navbar-brand" (click)="navigateTo('/candidate_dashboard'); closeMenu($event);">
-          <img src={{MY_LOGO}} />
+          <img src={{MY_LOGO}}/>
         </a>
       </div>
 
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" [class.in]="isClassVisible" id="bs-example-navbar-collapse-1">
-
 
 
         <ul class="nav navbar-nav navbar-right">
@@ -34,9 +33,11 @@
 
           <li class="dropdown last-child">
             <div class="dropdown">
-              <a class="simple-dropdown dropdown-toggle" data-toggle="dropdown" href="#" >
-                <img src= "assets/framework/images/dashboard/profile.png" alt="User Profile" *ngIf="candidate.basicInformation.picture==undefined"/>
-                <img [src]="getImagePath(candidate.basicInformation.picture)"  alt="User Profile" *ngIf="candidate.basicInformation.picture!=undefined"/>
+              <a class="simple-dropdown dropdown-toggle" data-toggle="dropdown" href="#">
+                <img src="assets/framework/images/dashboard/profile.png" alt="User Profile"
+                     *ngIf="candidate.basicInformation.picture==undefined"/>
+                <img [src]="getImagePath(candidate.basicInformation.picture)" alt="User Profile"
+                     *ngIf="candidate.basicInformation.picture!=undefined"/>
                 <span class="caret"></span>
               </a>
               <ul class="dropdown-menu mobile-dropdown">

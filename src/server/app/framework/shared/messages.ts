@@ -1,6 +1,6 @@
 class Messages {
   //Image Paths
-  public static EMAIL_TEMPLATE_LOGO:string ='./src/server/app/framework/public/images/logo/cnext-logo-white.png'
+  public static EMAIL_TEMPLATE_LOGO: string = './src/server/app/framework/public/images/logo/cnext-logo-white.png'
 
   //status
   public static STATUS_SUCCESS: string = 'Success';
@@ -77,12 +77,12 @@ class Messages {
   public static MSG_ERROR_RSN_WHILE_CONTACTING: string = 'There may be a network problem.';
 
   //Verify errors
-    public static MSG_ERROR_CHECK_EMAIL_ACCOUNT: string = "Error: User already has an account associated with this email address."; //should be same to MSG_ERROR_EMAIL_ACTIVE_NOW
+  public static MSG_ERROR_CHECK_EMAIL_ACCOUNT: string = "Error: User already has an account associated with this email address."; //should be same to MSG_ERROR_EMAIL_ACTIVE_NOW
 
-    public static MSG_ERROR_CHECK_INACTIVE_ACCOUNT: string = "Error: Your account is still inactive. Verify your account by clicking the verification link sent on your email."; //should be same to MSG_ERROR_ACCOUNT_STATUS
-    public static MSG_ERROR_CHECK_INVALID_ACCOUNT: string = "Error: There is no user registered with this email address."; // should be same to MSG_ERROR_USER_NOT_FOUND
-    public static MSG_ERROR_CHECK_MOBILE_PRESENT: string = "Error: User already present with this mobile number."; //should be same to MSG_ERROR_REGISTRATION_MOBILE_NUMBER
-    public static MSG_ERROR_CHECK_EMAIL_PRESENT: string ="Error: Please click on the link sent to your email in order to activate your account. "
+  public static MSG_ERROR_CHECK_INACTIVE_ACCOUNT: string = "Error: Your account is still inactive. Verify your account by clicking the verification link sent on your email."; //should be same to MSG_ERROR_ACCOUNT_STATUS
+  public static MSG_ERROR_CHECK_INVALID_ACCOUNT: string = "Error: There is no user registered with this email address."; // should be same to MSG_ERROR_USER_NOT_FOUND
+  public static MSG_ERROR_CHECK_MOBILE_PRESENT: string = "Error: User already present with this mobile number."; //should be same to MSG_ERROR_REGISTRATION_MOBILE_NUMBER
+  public static MSG_ERROR_CHECK_EMAIL_PRESENT: string = "Error: Please click on the link sent to your email in order to activate your account. "
 }
 export=Messages;
 

@@ -6,19 +6,19 @@ var mongoose = DataAccess.mongooseInstance;
 var mongooseConnection = DataAccess.mongooseConnection;
 
 class RoleSchema {
-    static get schema() {
-        var schema = mongoose.Schema({
-          name : {
-            type :  String
-          },
-          capabilities : [{
-            type : mongoose.Schema.Types.ObjectId, ref :'ICapability'
-          }]
+  static get schema() {
+    var schema = mongoose.Schema({
+      name: {
+        type: String
+      },
+      capabilities: [{
+        type: mongoose.Schema.Types.ObjectId, ref: 'ICapability'
+      }]
 
-        },{ versionKey: false });
+    }, {versionKey: false});
 
-        return schema;
-    }
+    return schema;
+  }
 }
 var schema = mongooseConnection.model<IRole>("Role", RoleSchema.schema);
 export = schema;

@@ -1,19 +1,19 @@
 import * as express from "express";
+import * as mongoose from "mongoose";
 import AuthInterceptor = require("../interceptor/auth.interceptor");
 import Messages = require("../shared/messages");
 import CandidateModel = require("../dataaccess/model/candidate.model");
 import CandidateService = require("../services/candidate.service");
 import UserService = require("../services/user.service");
-import * as mongoose from "mongoose";
 import RecruiterService = require("../services/recruiter.service");
 import SearchService = require("../search/services/search.service");
 
 
-export function create(req:express.Request, res:express.Response, next:any) {
+export function create(req: express.Request, res: express.Response, next: any) {
   try {
-console.log("USer is",req.body);
-    var newUser:CandidateModel = <CandidateModel>req.body;
-    console.log("USer is",newUser);
+    console.log("USer is", req.body);
+    var newUser: CandidateModel = <CandidateModel>req.body;
+    console.log("USer is", newUser);
     var candidateService = new CandidateService();
     candidateService.createUser(newUser, (error, result) => {
       if (error) {
@@ -41,7 +41,7 @@ console.log("USer is",req.body);
         }
       }
       else {
-        var auth:AuthInterceptor = new AuthInterceptor();
+        var auth: AuthInterceptor = new AuthInterceptor();
         var token = auth.issueTokenWithUid(newUser);
         res.status(200).send({
           "status": Messages.STATUS_SUCCESS,
@@ -60,15 +60,15 @@ console.log("USer is",req.body);
 }
 
 
-export function updateDetails(req:express.Request, res:express.Response, next:any) {
+export function updateDetails(req: express.Request, res: express.Response, next: any) {
   try {
-    var updatedCandidate:CandidateModel = <CandidateModel>req.body;
+    var updatedCandidate: CandidateModel = <CandidateModel>req.body;
     var params = req.query;
     delete params.access_token;
-    var userId:string = req.params.id;
+    var userId: string = req.params.id;
     console.log("candidate" + userId);
     console.log("updated candidate" + JSON.stringify(updatedCandidate));
-    var auth:AuthInterceptor = new AuthInterceptor();
+    var auth: AuthInterceptor = new AuthInterceptor();
     var candidateService = new CandidateService();
     candidateService.update(userId, updatedCandidate, (error, result) => {
       if (error) {
@@ -101,7 +101,7 @@ export function updateDetails(req:express.Request, res:express.Response, next:an
 }
 
 
-export function retrieve(req:express.Request, res:express.Response, next:any) { //todo authentication is remaining
+export function retrieve(req: express.Request, res: express.Response, next: any) { //todo authentication is remaining
   try {
     var userService = new UserService();
     var candidateService = new CandidateService();
@@ -181,27 +181,27 @@ export function retrieve(req:express.Request, res:express.Response, next:any) { 
 }
 
 
-export function metchResult(req:express.Request, res:express.Response, next:any) {
+export function metchResult(req: express.Request, res: express.Response, next: any) {
   try {
     var searchService = new SearchService();
     let jobId = req.params.jobId;
     let candidateId = req.params.candidateId;
-      searchService.getMatchingResult(candidateId,jobId,  (error: any, result: any) => {
-        if (error) {
-          next({
-            reason: "Problem in Search Matching Result",//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
-            message: 'Problem in Search Matching Result',//Messages.MSG_ERROR_WRONG_TOKEN,
-            code: 401
-          })
-        }
-        else {
-          res.send({
-            "status": "success",
-            "data": result,
-          });
+    searchService.getMatchingResult(candidateId, jobId, (error: any, result: any) => {
+      if (error) {
+        next({
+          reason: "Problem in Search Matching Result",//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
+          message: 'Problem in Search Matching Result',//Messages.MSG_ERROR_WRONG_TOKEN,
+          code: 401
+        })
+      }
+      else {
+        res.send({
+          "status": "success",
+          "data": result,
+        });
 
-        }
-      });
+      }
+    });
 
   }
   catch (e) {
@@ -210,13 +210,13 @@ export function metchResult(req:express.Request, res:express.Response, next:any)
 }
 
 
-export function getList(req:express.Request, res:express.Response, next:any) {
+export function getList(req: express.Request, res: express.Response, next: any) {
   try {
-    let candidateId:string = req.params.id;
-    let listName:string = req.params.listName;
+    let candidateId: string = req.params.id;
+    let listName: string = req.params.listName;
     let candidateService = new CandidateService();
     let recruiterService = new RecruiterService();
-    candidateService.findById(candidateId, (error:any, response:CandidateModel)=> {
+    candidateService.findById(candidateId, (error: any, response: CandidateModel) => {
       if (error) {
         next({
           reason: Messages.MSG_ERROR_RSN_EXISTING_USER,
@@ -226,12 +226,12 @@ export function getList(req:express.Request, res:express.Response, next:any) {
       } else {
         for (let list of response.job_list) {
           if (listName === list.name) {
-            let data:any = {
+            let data: any = {
               listName: listName,
               ids: list.ids,
               candidate: response
             };
-            candidateService.getList(data, (err, result)=> {
+            candidateService.getList(data, (err, result) => {
               if (err) {
                 next({
                   reason: Messages.MSG_ERROR_RSN_EXISTING_USER,

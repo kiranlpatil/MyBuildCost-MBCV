@@ -1,12 +1,12 @@
-import {   Component  } from '@angular/core';
-import {  Router  } from '@angular/router';
-import {  FormBuilder, FormGroup, Validators  } from '@angular/forms';
-import {  NavigationRoutes, ImagePath, ProjectAsset, Messages, LocalStorage  } from '../../shared/constants';
-import {  VerifyUser  } from './verify_phone';
-import {  VerifyPhoneService  } from './verify-phone.service';
-import {  MessageService  } from '../../shared/message.service';
-import {  Message  } from '../../shared/message';
-import {  LocalStorageService  } from '../../shared/localstorage.service';
+import {Component} from "@angular/core";
+import {Router} from "@angular/router";
+import {FormBuilder, FormGroup} from "@angular/forms";
+import {ImagePath, LocalStorage, Messages, NavigationRoutes, ProjectAsset} from "../../shared/constants";
+import {VerifyUser} from "./verify_phone";
+import {VerifyPhoneService} from "./verify-phone.service";
+import {MessageService} from "../../shared/message.service";
+import {Message} from "../../shared/message";
+import {LocalStorageService} from "../../shared/localstorage.service";
 import {ValidationService} from "../../shared/customvalidations/validation.service";
 
 @Component({
@@ -23,14 +23,14 @@ export class VerifyPhoneComponent {
   MY_LOGO_PATH: string;
   MY_TAG_LINE: string;
   UNDER_LICENCE: string;
-  BODY_BACKGROUND:string;
+  BODY_BACKGROUND: string;
   showModalStyle: boolean = false;
 
   constructor(private _router: Router, private formBuilder: FormBuilder,
               private verifyPhoneService: VerifyPhoneService, private messageService: MessageService) {
 
     this.userForm = this.formBuilder.group({
-      'otp': ['',ValidationService.requireOtpValidator]
+      'otp': ['', ValidationService.requireOtpValidator]
     });
 
     this.MY_LOGO_PATH = ImagePath.MY_WHITE_LOGO;
@@ -61,22 +61,23 @@ export class VerifyPhoneComponent {
           res => (this.resendOtpSuccess(res)),
           error => (this.resendOtpFail(error)));
     } else {
-        this.verifyPhoneService.resendChangeMobileVerificationCode()
-          .subscribe(res => (this.resendChangeMobileOtpSuccess(res)),
-            error => (this.resendOtpFail(error)));
+      this.verifyPhoneService.resendChangeMobileVerificationCode()
+        .subscribe(res => (this.resendChangeMobileOtpSuccess(res)),
+          error => (this.resendOtpFail(error)));
     }
   }
+
   verifySuccess(res: any) {
-    this.showModalStyle=!this.showModalStyle;
-   /* var message = new Message();
-    message.isError = false;
-    message.custom_message = Messages.MSG_SUCCESS_NEWREGISTRATION;
-    this.messageService.message(message);
-    this.navigateTo();*/
+    this.showModalStyle = !this.showModalStyle;
+    /* var message = new Message();
+     message.isError = false;
+     message.custom_message = Messages.MSG_SUCCESS_NEWREGISTRATION;
+     this.messageService.message(message);
+     this.navigateTo();*/
   }
 
   mobileVerificationSuccess(res: any) {
-    this.showModalStyle=!this.showModalStyle;
+    this.showModalStyle = !this.showModalStyle;
     var message = new Message();
     message.isError = false;
     message.custom_message = Messages.MSG_SUCCESS_CHANGE_MOBILE_NUMBER;

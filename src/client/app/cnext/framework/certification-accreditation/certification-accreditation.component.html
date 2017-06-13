@@ -1,7 +1,7 @@
 <div class="section-container">
   <div class="main-content modal-content clearfix" *ngIf="highlightedSection.name =='Certification'">
     <h4 class="heading">Certification/Accreditation</h4>
-    <form class="description-form" [formGroup]="certificationDetail" novalidate >
+    <form class="description-form" [formGroup]="certificationDetail" novalidate>
       <div formArrayName="certifications">
         <div *ngFor="let history of certificationDetail.controls.certifications.controls; let i=index"
              class="panel panel-default">
@@ -22,9 +22,11 @@
         </button>
       </div>
       <div class="button-group clearfix">
-        <button class="btn btn-default"  (click)="highlightedSection.name='none';highlightedSection.isDisable=false" >Cancel</button>
+        <button class="btn btn-default" (click)="highlightedSection.name='none';highlightedSection.isDisable=false">
+          Cancel
+        </button>
         <button type="submit" class="btn btn-primary" scrollTo scrollTargetSelector="#certification"
-                (click)="postData('next')" [disabled]="!certificationDetail.valid"  [hidden]="!showButton">Next
+                (click)="postData('next')" [disabled]="!certificationDetail.valid" [hidden]="!showButton">Next
         </button>
         <button type="submit" class="btn btn-primary" (click)="postData('save')" [disabled]="!certificationDetail.valid"
                 [hidden]="showButton">Save
@@ -35,12 +37,15 @@
   </div>
 </div>
 
- <div class="section-container" [ngClass]="(highlightedSection.name=='EmploymentHistory' || highlightedSection.name=='Awards' || highlightedSection.name=='AcademicDetails' )?'full-width':'quarter-width'" *ngIf="highlightedSection.name !='Certification'">
+<div class="section-container"
+     [ngClass]="(highlightedSection.name=='EmploymentHistory' || highlightedSection.name=='Awards' || highlightedSection.name=='AcademicDetails' )?'full-width':'quarter-width'"
+     *ngIf="highlightedSection.name !='Certification'">
   <div class="main-content">
     <div class="compact-view clearfix">
       <div *ngIf="certificationDetail.controls.certifications.controls.length==0">
 
-        <h4 class="heading-compact" (click)="highlightedSection.name='Certification';addCertification();highlightedSection.isDisable=true;showButton=false" >
+        <h4 class="heading-compact"
+            (click)="highlightedSection.name='Certification';addCertification();highlightedSection.isDisable=true;showButton=false">
           <img src="assets/c-next/icons/certificates.png" alt="employment"/>
           Certifications
           <span class="glyphicon glyphicon-plus"></span>
@@ -48,8 +53,10 @@
       </div>
 
       <div class="vertical-container" *ngIf="certificationDetail.controls.certifications.controls.length>0">
-        <button class="btn-edit" (click)="highlightedSection.name='Certification';highlightedSection.isDisable=true;showButton=false" [hidden]="highlightedSection.isDisable"></button>
-        <cn-vertical-list-view [data]="candidate.certifications" [type]="'certifications'" ></cn-vertical-list-view>
+        <button class="btn-edit"
+                (click)="highlightedSection.name='Certification';highlightedSection.isDisable=true;showButton=false"
+                [hidden]="highlightedSection.isDisable"></button>
+        <cn-vertical-list-view [data]="candidate.certifications" [type]="'certifications'"></cn-vertical-list-view>
       </div>
     </div>
   </div>

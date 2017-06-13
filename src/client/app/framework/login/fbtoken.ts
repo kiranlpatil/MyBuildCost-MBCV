@@ -1,5 +1,4 @@
-
 export class FBToken {
-  token:String ;
+  token: String;
 }
 

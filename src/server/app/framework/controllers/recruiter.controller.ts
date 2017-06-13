@@ -1,4 +1,6 @@
 import * as express from "express";
+import * as mongoose from "mongoose";
+import {Recruiter} from "../dataaccess/model/recruiter-final.model";
 import AuthInterceptor = require("../interceptor/auth.interceptor");
 import SendMailService = require("../services/sendmail.service");
 import UserModel = require("../dataaccess/model/user.model");
@@ -14,9 +16,7 @@ import RecruiterService = require("../services/recruiter.service");
 import JobProfileModel = require("../dataaccess/model/jobprofile.model");
 import UserService = require("../services/user.service");
 import JobProfileService = require("../services/jobprofile.service");
-import * as mongoose from "mongoose";
 import CNextMessages = require("../shared/cnext-messages");
-import {Recruiter} from "../dataaccess/model/recruiter-final.model";
 
 
 export function create(req: express.Request, res: express.Response, next: any) {
@@ -50,19 +50,19 @@ export function create(req: express.Request, res: express.Response, next: any) {
         }
       }
       else {
-        var auth:AuthInterceptor = new AuthInterceptor();
+        var auth: AuthInterceptor = new AuthInterceptor();
         var token = auth.issueTokenWithUid(newUser);
         res.status(200).send({
           "status": Messages.STATUS_SUCCESS,
           "data": {
             "reason": Messages.MSG_SUCCESS_REGISTRATION,
             "_id": result.userId,
-            "company_name":result.company_name,
-            "current_theme":result.current_theme,
-            "email":result.email,
-            "isRecruitingForself":result.isRecruitingForself,
-            "mobile_number":result.mobile_number,
-            "isCandidate":result.iscandidate
+            "company_name": result.company_name,
+            "current_theme": result.current_theme,
+            "email": result.email,
+            "isRecruitingForself": result.isRecruitingForself,
+            "mobile_number": result.mobile_number,
+            "isCandidate": result.iscandidate
           },
           access_token: token
         });
@@ -132,24 +132,24 @@ export function updateDetails(req: express.Request, res: express.Response, next:
 export function retrieve(req: express.Request, res: express.Response, next: any) {
   try {
     var recruiterService = new RecruiterService();
-    let data ={
-      "userId":new mongoose.Types.ObjectId(req.params.id)
+    let data = {
+      "userId": new mongoose.Types.ObjectId(req.params.id)
     };
-    recruiterService.retrieve(data, (error : any, result : Recruiter[]) => {
+    recruiterService.retrieve(data, (error: any, result: Recruiter[]) => {
       if (error) {
         next({
           reason: CNextMessages.PROBLEM_IN_RETRIEVE_JOB_PROFILE,
           message: CNextMessages.PROBLEM_IN_RETRIEVE_JOB_PROFILE,
           code: 401
         });
-      }else{
-        if(result[0]){
+      } else {
+        if (result[0]) {
           res.status(200).send({
             "status": Messages.STATUS_SUCCESS,
             "data": result,
-            "jobCountModel":result[0].jobCountModel
+            "jobCountModel": result[0].jobCountModel
           });
-        }else{
+        } else {
           res.status(200).send({
             "status": Messages.STATUS_SUCCESS,
             "data": result
@@ -160,18 +160,17 @@ export function retrieve(req: express.Request, res: express.Response, next: any)
     });
 
 
-
   }
   catch (e) {
     res.status(403).send({message: e.message});
   }
 }
 
-export function getFilterList (req:express.Request, res:express.Response) {
+export function getFilterList(req: express.Request, res: express.Response) {
   __dirname = './';
-  var filepath="recruiter-filter-list.json";
+  var filepath = "recruiter-filter-list.json";
   try {
-    res.sendFile(filepath,{root: __dirname});
+    res.sendFile(filepath, {root: __dirname});
   }
   catch (e) {
     res.status(403).send({message: e.message});
@@ -179,15 +178,15 @@ export function getFilterList (req:express.Request, res:express.Response) {
 }
 
 
-export function getList(req:express.Request, res:express.Response, next:any) {
+export function getList(req: express.Request, res: express.Response, next: any) {
   try {
-    let data:any = {
+    let data: any = {
       "jobProfileId": req.params.id,
       "listName": req.params.listName
     };
     let candidateService = new CandidateService();
     let recruiterService = new RecruiterService();
-    recruiterService.getCandidateList(data, (error:any, response:any)=> {
+    recruiterService.getCandidateList(data, (error: any, response: any) => {
       if (error) {
         next({
           reason: Messages.MSG_ERROR_RSN_EXISTING_USER,

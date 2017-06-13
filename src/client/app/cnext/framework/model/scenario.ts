@@ -1,5 +1,5 @@
 export class Scenario {
-  name: string='';
-  isChecked: boolean=false;
+  name: string = '';
+  isChecked: boolean = false;
 }
 

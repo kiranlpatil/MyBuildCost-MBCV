@@ -5,25 +5,25 @@ var mongoose = DataAccess.mongooseInstance;
 var mongooseConnection = DataAccess.mongooseConnection;
 
 class LocationSchema {
-    static get schema() {
-        var schema = mongoose.Schema({
-          city : {
-            type : String
-          },
-          state : {
-            type : String
-          },
-          country : {
-            type : String
-          } ,
-          pin : {
-            type : String
-          }
+  static get schema() {
+    var schema = mongoose.Schema({
+      city: {
+        type: String
+      },
+      state: {
+        type: String
+      },
+      country: {
+        type: String
+      },
+      pin: {
+        type: String
+      }
 
-        },{ versionKey: false });
+    }, {versionKey: false});
 
-        return schema;
-    }
+    return schema;
+  }
 }
 var schema = mongooseConnection.model<ILocation>("Location", LocationSchema.schema);
 export = schema;

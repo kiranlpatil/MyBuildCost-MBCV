@@ -11,13 +11,13 @@
 
   <div class="form-group">
     <control-messages [control]="userForm.controls.first_name"></control-messages>
-    <input type="text" formControlName="first_name" id="first_name" class="form-control" maxlength="20"required/>
+    <input type="text" formControlName="first_name" id="first_name" class="form-control" maxlength="20" required/>
     <label>First Name</label>
   </div>
 
   <div class="form-group">
     <control-messages [control]="userForm.controls.last_name"></control-messages>
-    <input type="text" formControlName="last_name" id="last_name" class="form-control" maxlength="20"required/>
+    <input type="text" formControlName="last_name" id="last_name" class="form-control" maxlength="20" required/>
     <label>Last Name</label>
   </div>
 
@@ -44,7 +44,7 @@
     <input type="password" formControlName="confirm_password" id="confirm_password"
            (blur)="makePasswordConfirm()" class="form-control" required/>
     <label>Confirm Password</label>
-      <span class="error-messages" *ngIf="isPasswordConfirm == true">Passwords does not match.</span>
+    <span class="error-messages" *ngIf="isPasswordConfirm == true">Passwords does not match.</span>
   </div>
 
   <div class="form-group list">
@@ -54,21 +54,22 @@
          [accept-user-input]="false"
          (ngModelChange)="selectYearModel($event)"
          no-match-found-text="Please select valid birth year.">
-      <input  formControlName="birth_year" [ngModel]="passingyear" id="birth_year" class="form-control" placeholder="Year of Birth"  required/>
+      <input formControlName="birth_year" [ngModel]="passingyear" id="birth_year" class="form-control"
+             placeholder="Year of Birth" required/>
       <!--<label class="select-label">Year of Birth</label>-->
     </div>
   </div>
 
 
-
   <div class="form-group list">
     <control-messages [control]="userForm.controls.location"></control-messages>
 
-    <input type="text" formControlName="location" class="form-control"  placeholder="Location" (setAddress) = "getAddress($event)" (city)="selectedCity($event)" mygoogleplace/>
+    <input type="text" formControlName="location" class="form-control" placeholder="Location"
+           (setAddress)="getAddress($event)" (city)="selectedCity($event)" mygoogleplace/>
 
   </div>
 
-  <div class="form-group recaptcha" >
+  <div class="form-group recaptcha">
     <recaptcha
       [(ngModel)]="userForm.captcha"
       formControlName="captcha"

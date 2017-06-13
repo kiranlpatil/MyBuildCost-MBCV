@@ -1,13 +1,12 @@
 import {JobPosterModel} from "./jobPoster";
-import {RecruiterHeaderDetails} from "./recuirterheaderdetails";
-export class  RecruiterDashboard {
+export class RecruiterDashboard {
 
   //public candidateCountModel:RecruiterHeaderDetails;
-  about_company:string;
-  company_name:string;
-  company_size:string;
-  userId:string;
-  _id:string;
-  public  postedJobs:JobPosterModel[] = new Array(0);
+  about_company: string;
+  company_name: string;
+  company_size: string;
+  userId: string;
+  _id: string;
+  public postedJobs: JobPosterModel[] = new Array(0);
 
 }

@@ -1,4 +1,3 @@
-
 $text-color: #576b7c;
 $name: #666;
 $blue-color: #3694d1;
@@ -6,7 +5,7 @@ $light-green: #96e328;
 $orange: #FFB316;
 $gray: #ccc;
 $green: #68ab26;
-$blue:#3694d1;
+$blue: #3694d1;
 
 .basic-description {
   text-align: left;
@@ -70,9 +69,11 @@ $blue:#3694d1;
 .above {
   color: $green !important;
 }
+
 .below {
   color: $orange !important;
 }
+
 .missing {
   color: $gray !important;
 }

@@ -1,51 +1,50 @@
-import {   Injectable  } from '@angular/core';
-import {  Http  } from '@angular/http';
-import {  Observable  } from 'rxjs/Observable';
-import {  AppSettings, BaseService, LocalStorageService, LocalStorage, MessageService, API  } from '../shared/index';
-import {  UserProfile  } from './user';
+import {Injectable} from "@angular/core";
+import {Http} from "@angular/http";
+import {Observable} from "rxjs/Observable";
+import {API, AppSettings, BaseService, LocalStorage, LocalStorageService, MessageService} from "../shared/index";
 import {CandidateDetail} from "../registration/candidate/candidate";
 
 @Injectable()
 export class DashboardService extends BaseService {
 
-    constructor(protected http:Http, protected messageService:MessageService) {
-        super();
-    }
+  constructor(protected http: Http, protected messageService: MessageService) {
+    super();
+  }
 
-    getUserProfile():Observable<any> { //todo
-        var url = API.USER_PROFILE + '/' + LocalStorageService.getLocalValue(LocalStorage.USER_ID);
-        return this.http.get(url)
-            .map(this.extractData)
-            .catch(this.handleError);
-    }
+  getUserProfile(): Observable<any> { //todo
+    var url = API.USER_PROFILE + '/' + LocalStorageService.getLocalValue(LocalStorage.USER_ID);
+    return this.http.get(url)
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
 
-    updateProfile(model:CandidateDetail):Observable<CandidateDetail> {
-        var url = API.USER_PROFILE + '/' + LocalStorageService.getLocalValue(LocalStorage.USER_ID);
-        let body = JSON.stringify(model);
-        return this.http.put(url, body)
-            .map(this.extractData)
-            .catch(this.handleError);
-    }
+  updateProfile(model: CandidateDetail): Observable<CandidateDetail> {
+    var url = API.USER_PROFILE + '/' + LocalStorageService.getLocalValue(LocalStorage.USER_ID);
+    let body = JSON.stringify(model);
+    return this.http.put(url, body)
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
 
-    makePictureUplaod(files:Array<File>, params:Array<string>) {
-        var url = AppSettings.API_ENDPOINT + API.UPDATE_PICTURE + '/' + LocalStorageService.getLocalValue(LocalStorage.USER_ID);
-        return new Promise((resolve:any, reject:any) => {
-            var formData:any = new FormData();
-            var xhr = new XMLHttpRequest();
-            formData.append('file', files[0], files[0].name);
+  makePictureUplaod(files: Array<File>, params: Array<string>) {
+    var url = AppSettings.API_ENDPOINT + API.UPDATE_PICTURE + '/' + LocalStorageService.getLocalValue(LocalStorage.USER_ID);
+    return new Promise((resolve: any, reject: any) => {
+      var formData: any = new FormData();
+      var xhr = new XMLHttpRequest();
+      formData.append('file', files[0], files[0].name);
 
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState === 4) {
-                    if (xhr.status === 200) {
-                        resolve(JSON.parse(xhr.response));
-                    } else {
-                        reject(xhr.response);
-                    }
-                }
-            };
-            xhr.open('PUT', url, true);
-            xhr.setRequestHeader('Authorization', 'Bearer ' + LocalStorageService.getLocalValue(LocalStorage.ACCESS_TOKEN));
-            xhr.send(formData);
-        });
-    }
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+          if (xhr.status === 200) {
+            resolve(JSON.parse(xhr.response));
+          } else {
+            reject(xhr.response);
+          }
+        }
+      };
+      xhr.open('PUT', url, true);
+      xhr.setRequestHeader('Authorization', 'Bearer ' + LocalStorageService.getLocalValue(LocalStorage.ACCESS_TOKEN));
+      xhr.send(formData);
+    });
+  }
 }

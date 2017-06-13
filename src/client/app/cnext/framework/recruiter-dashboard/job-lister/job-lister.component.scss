@@ -90,11 +90,11 @@ $theme-color: #3694d1;
         color: #999;
       }
 
-     img {
-       width: 13px;
-       text-align: center;
-       margin: 10px auto;
-       display: block;
+      img {
+        width: 13px;
+        text-align: center;
+        margin: 10px auto;
+        display: block;
       }
     }
   }
@@ -112,7 +112,6 @@ $theme-color: #3694d1;
   }
 }
 
-
 @media only screen and (max-width: 1024px) {
   .job-list {
     .card-view > .col-md-3 {
@@ -129,6 +128,7 @@ $theme-color: #3694d1;
     }
   }
 }
+
 @media only screen and (max-width: 767px) {
   .job-list {
     .card-view {

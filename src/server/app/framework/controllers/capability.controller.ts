@@ -5,17 +5,16 @@ import ResponseService = require("../shared/response.service");
 import RoleModel = require("../dataaccess/model/role.model");
 import RoleService = require("../services/role.service");
 import IndustryService = require("../services/industry.service");
-import * as mongoose from "mongoose";
 import CapabilityService = require("../services/capability.service");
 
 
-export function retrieve(req:express.Request, res:express.Response, next:any) {
+export function retrieve(req: express.Request, res: express.Response, next: any) {
   try {
     var capabilityService = new CapabilityService();
     var rolesparam = req.query.roles;
-    let item:any={
-      name : req.params.id,
-      roles :JSON.parse(rolesparam)
+    let item: any = {
+      name: req.params.id,
+      roles: JSON.parse(rolesparam)
     };
     capabilityService.findByName(item, (error, result) => {
       if (error) {

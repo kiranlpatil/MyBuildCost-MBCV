@@ -1,7 +1,7 @@
-import {    Injectable  } from '@angular/core';
-import {  Http  } from '@angular/http';
-import {  Observable  } from 'rxjs/Observable';
-import {  BaseService, LocalStorageService,LocalStorage,MessageService,API  } from '../../shared/index';
+import {Injectable} from "@angular/core";
+import {Http} from "@angular/http";
+import {Observable} from "rxjs/Observable";
+import {API, BaseService, LocalStorage, LocalStorageService, MessageService} from "../../shared/index";
 
 
 @Injectable()
@@ -21,7 +21,7 @@ export class ActiveUserService extends BaseService {
     } else {
 
       var url = API.VERIFY_USER + '/' + LocalStorageService.getLocalValue(LocalStorage.USER_ID);
-      var newData = {'isActivated': true }; //JSON.stringify();
+      var newData = {'isActivated': true}; //JSON.stringify();
       return this.http.put(url, newData)
         .map(this.extractData)
         .catch(this.handleError);

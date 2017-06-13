@@ -3,7 +3,7 @@
     <div class="col-sm-3 hidden-xs"><h4>Core Capabilities</h4></div>
     <div class="col-sm-9 hidden-xs"><h4>Complexities Handled</h4></div>
   </div>
-  <div  *ngFor="let role of roles">
+  <div *ngFor="let role of roles">
     <div *ngFor="let capability of role.capabilities">
       <div class="content clearfix" *ngIf="capability.isPrimary">
         <div class="col-sm-3">
@@ -12,7 +12,7 @@
         </div>
         <div class="col-sm-9">
           <div class="heading visible-xs"><h4>Complexities Handled</h4></div>
-          <div  *ngFor="let complexity of capability.complexities;let i=index">
+          <div *ngFor="let complexity of capability.complexities;let i=index">
             <div class="col-sm-4 padding-right15">
               <span class="complexity-name">{{complexity.name}}</span>
               <div *ngFor="let scenario of complexity.scenarios">
@@ -25,12 +25,12 @@
       </div>
     </div>
     <div *ngFor="let capability of role.default_complexities">
-      <div class="content clearfix" >
+      <div class="content clearfix">
         <div class="col-sm-3">
           <span>{{capability.name}}</span>
         </div>
         <div class="col-sm-9">
-          <div  *ngFor="let complexity of capability.complexities;let i=index">
+          <div *ngFor="let complexity of capability.complexities;let i=index">
             <div class="col-sm-4 padding-right15">
               <span class="complexity-name">{{complexity.name}}</span>
               <div *ngFor="let scenario of complexity.scenarios">

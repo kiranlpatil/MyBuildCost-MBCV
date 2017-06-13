@@ -1,10 +1,10 @@
-import {Component, Input, Output, EventEmitter} from "@angular/core";
+import {Component, EventEmitter, Input, Output} from "@angular/core";
 import {CandidateQCard} from "../../model/candidateQcard";
 import {QCardsortBy} from "../../model/q-cardview-sortby";
 import {MatchCandidate} from "../../model/match-candidate";
 import {QCardViewService} from "./q-card-view.service";
 import {QCardFilterService} from "../../filters/q-card-filter.service";
-import {ValueConstant, AppSettings} from "../../../../framework/shared/constants";
+import {AppSettings, ValueConstant} from "../../../../framework/shared/constants";
 import {QCardFilter} from "../../model/q-card-filter";
 import {CandidateQListModel} from "../job-dashboard/q-cards-candidates";
 import {RecruiterJobView} from "../../model/recruiter-job-view";
@@ -44,7 +44,7 @@ export class QCardviewComponent {
 
 
   constructor(private qCardFilterService: QCardFilterService,
-              private profileCreatorService: CandidateProfileService,private qCardViewService: QCardViewService) {
+              private profileCreatorService: CandidateProfileService, private qCardViewService: QCardViewService) {
 
     this.qCardFilterService.candidateFilterValue$.subscribe(
       (data: QCardFilter) => {
@@ -59,7 +59,7 @@ export class QCardviewComponent {
   }
 
   ngOnInlit() {
-      this.matchFormat = 'aboveMatch';
+    this.matchFormat = 'aboveMatch';
   }
 
   ngOnChanges(changes: any) {
@@ -79,9 +79,9 @@ export class QCardviewComponent {
     let isMatchList: boolean = false;
     switch (sourceListName) {
       case ValueConstant.APPLIED_CANDIDATE :
-/*
-       this.candidateQlist.appliedCandidates.splice(this.candidateQlist.appliedCandidates.indexOf(candidate), 1);
-*/
+        /*
+         this.candidateQlist.appliedCandidates.splice(this.candidateQlist.appliedCandidates.indexOf(candidate), 1);
+         */
 
         break;
       case ValueConstant.REJECTED_LISTED_CANDIDATE :
@@ -99,7 +99,7 @@ export class QCardviewComponent {
         isMatchList = true;
         break;
     }
-    if (action == "add" && !isMatchList &&  sourceListName!=ValueConstant.APPLIED_CANDIDATE) {
+    if (action == "add" && !isMatchList && sourceListName != ValueConstant.APPLIED_CANDIDATE) {
       this.qCardViewService.updateCandidateLists(this.jobId, candidate._id, sourceListName, "remove").subscribe(
         data => {
           this.updateCountModel(data);
@@ -115,26 +115,26 @@ export class QCardviewComponent {
     );
     this.showModalStyle = false;
 
-    if (destinationListName === ValueConstant.CART_LISTED_CANDIDATE && ( sourceListName === ValueConstant.MATCHED_CANDIDATE || sourceListName === ValueConstant.APPLIED_CANDIDATE )){
+    if (destinationListName === ValueConstant.CART_LISTED_CANDIDATE && ( sourceListName === ValueConstant.MATCHED_CANDIDATE || sourceListName === ValueConstant.APPLIED_CANDIDATE )) {
 
-      for(let candidateInApplied of this.candidateQlist.appliedCandidates){
-      for(let candidateInCart  of this.candidateQlist.cartCandidates){
-          if(candidateInApplied._id===candidateInCart._id ){
-            this.isAlreadyPresentInCart=true;
+      for (let candidateInApplied of this.candidateQlist.appliedCandidates) {
+        for (let candidateInCart  of this.candidateQlist.cartCandidates) {
+          if (candidateInApplied._id === candidateInCart._id) {
+            this.isAlreadyPresentInCart = true;
           }
         }
       }
-      if(!this.isAlreadyPresentInCart)
-      this.addedTocart.emit(true);
+      if (!this.isAlreadyPresentInCart)
+        this.addedTocart.emit(true);
 
-      this.isAlreadyPresentInCart=false;
+      this.isAlreadyPresentInCart = false;
     }
 
-    if(destinationListName === ValueConstant.CART_LISTED_CANDIDATE &&  sourceListName === ValueConstant.APPLIED_CANDIDATE)
+    if (destinationListName === ValueConstant.CART_LISTED_CANDIDATE && sourceListName === ValueConstant.APPLIED_CANDIDATE)
       this.candidateQlist.cartCandidates.push(candidate);
 
-      if (sourceListName === ValueConstant.CART_LISTED_CANDIDATE && (destinationListName=== ValueConstant.CART_LISTED_CANDIDATE|| destinationListName === ValueConstant.REJECTED_LISTED_CANDIDATE))
-        this.addedTocart.emit(false);
+    if (sourceListName === ValueConstant.CART_LISTED_CANDIDATE && (destinationListName === ValueConstant.CART_LISTED_CANDIDATE || destinationListName === ValueConstant.REJECTED_LISTED_CANDIDATE))
+      this.addedTocart.emit(false);
 
   }
 
@@ -181,17 +181,17 @@ export class QCardviewComponent {
     this.matchFormat = value;
   }
 
-  changeSort(){
-    if(this.type != "matchedList"){
-      this.matchFormat=this.match.belowMatch;
+  changeSort() {
+    if (this.type != "matchedList") {
+      this.matchFormat = this.match.belowMatch;
     }
   }
 
   viewProfile(candidate: CandidateQCard) {
-    this.modelCandidate=candidate;
+    this.modelCandidate = candidate;
     this.profileCreatorService.getCandidateDetailsOfParticularId(candidate._id).subscribe(
       candidateData => this.OnCandidateDataSuccess(candidateData));
-    
+
 
   }
 
@@ -210,11 +210,13 @@ export class QCardviewComponent {
       return 'none';
     }
   }
-  closeJob(){
+
+  closeJob() {
     this.showModalStyle = !this.showModalStyle;
   }
-  getImagePath(imagePath:string) {
-    if(imagePath != undefined) {
+
+  getImagePath(imagePath: string) {
+    if (imagePath != undefined) {
       return AppSettings.IP + imagePath.substring(4).replace('"', '');
     }
     return null;

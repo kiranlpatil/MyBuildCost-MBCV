@@ -1,27 +1,27 @@
-import {  Component ,Output, EventEmitter } from '@angular/core';
-import { UserProfile } from '../../../framework/dashboard/user';
-import { DashboardService } from '../../../framework/dashboard/dashboard.service';
+import {Component, EventEmitter, Output} from "@angular/core";
+import {UserProfile} from "../../../framework/dashboard/user";
+import {DashboardService} from "../../../framework/dashboard/dashboard.service";
 import {
-    Message,
-    MessageService,
-    Messages,
-    ProfileService,
-    AppSettings,
-    ImagePath,
-    LocalStorage,
-    LocalStorageService
- } from '../../../framework/shared/index';
+  AppSettings,
+  ImagePath,
+  LocalStorage,
+  LocalStorageService,
+  Message,
+  Messages,
+  MessageService,
+  ProfileService
+} from "../../../framework/shared/index";
 
 
 @Component({
-    moduleId: module.id,
-    selector: 'cn-profile-picture',
-    templateUrl: 'profile-picture.component.html',
-    styleUrls: ['profile-picture.component.css'],
+  moduleId: module.id,
+  selector: 'cn-profile-picture',
+  templateUrl: 'profile-picture.component.html',
+  styleUrls: ['profile-picture.component.css'],
 })
 
-export class ProfilePictureComponent  {
-@Output() onPictureUpload=new EventEmitter();
+export class ProfilePictureComponent {
+  @Output() onPictureUpload = new EventEmitter();
   private model = new UserProfile();
   private filesToUpload: Array<File>;
   private image_path: string;
@@ -35,15 +35,15 @@ export class ProfilePictureComponent  {
     this.filesToUpload = [];
     this.uploaded_image_path = LocalStorageService.getLocalValue(LocalStorage.PROFILE_PICTURE); //TODO:Get it from get user call.
     this.isCandidate = LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE);
-    if ( this.uploaded_image_path === "undefined" || this.uploaded_image_path === null) {
-      if(this.isCandidate == "true"){
+    if (this.uploaded_image_path === "undefined" || this.uploaded_image_path === null) {
+      if (this.isCandidate == "true") {
         this.image_path = ImagePath.PROFILE_IMG_ICON;
       }
       else {
         this.image_path = ImagePath.COMPANY_LOGO_IMG_ICON;
       }
     } else {
-      this.uploaded_image_path = this.uploaded_image_path.substring(4,this.uploaded_image_path.length-1).replace('"','');
+      this.uploaded_image_path = this.uploaded_image_path.substring(4, this.uploaded_image_path.length - 1).replace('"', '');
       this.image_path = AppSettings.IP + this.uploaded_image_path;
     }
 
@@ -59,7 +59,7 @@ export class ProfilePictureComponent  {
           if (result !== null) {
             this.fileChangeSuccess(result);
           }
-        }, (error:any) => {
+        }, (error: any) => {
           this.fileChangeFail(error);
         });
       } else {
@@ -78,15 +78,15 @@ export class ProfilePictureComponent  {
 
   fileChangeSuccess(result: any) {
     this.model = result.data;
-    LocalStorageService.setLocalValue(LocalStorage.PROFILE_PICTURE,result.data.picture);
-    var socialLogin:string = LocalStorageService.getLocalValue(LocalStorage.IS_SOCIAL_LOGIN);
-    if(LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE)==='true'){
+    LocalStorageService.setLocalValue(LocalStorage.PROFILE_PICTURE, result.data.picture);
+    var socialLogin: string = LocalStorageService.getLocalValue(LocalStorage.IS_SOCIAL_LOGIN);
+    if (LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE) === 'true') {
       this.onPictureUpload.emit(result.data.picture);
     }
-    
+
     if (!this.model.picture || this.model.picture === undefined) {
       this.image_path = ImagePath.PROFILE_IMG_ICON;
-    }  else if(socialLogin === AppSettings.IS_SOCIAL_LOGIN_YES) {
+    } else if (socialLogin === AppSettings.IS_SOCIAL_LOGIN_YES) {
       this.image_path = this.model.picture;
     } else {
       this.image_path = AppSettings.IP + this.model.picture.substring(4).replace('"', '');

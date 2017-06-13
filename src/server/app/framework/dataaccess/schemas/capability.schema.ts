@@ -6,19 +6,19 @@ var mongoose = DataAccess.mongooseInstance;
 var mongooseConnection = DataAccess.mongooseConnection;
 
 class CapabilitySchema {
-    static get schema() {
-        var schema = mongoose.Schema({
-         name:{
-           type:String
-         },
-          complexities : [{
-            type:mongoose.Schema.Types.ObjectId, ref:'IComplexity'
-          }],
+  static get schema() {
+    var schema = mongoose.Schema({
+      name: {
+        type: String
+      },
+      complexities: [{
+        type: mongoose.Schema.Types.ObjectId, ref: 'IComplexity'
+      }],
 
-        },{ versionKey: false });
+    }, {versionKey: false});
 
-        return schema;
-    }
+    return schema;
+  }
 }
 var schema = mongooseConnection.model<ICapability>("Capability", CapabilitySchema.schema);
 export = schema;

@@ -1,25 +1,23 @@
-import {  Component, OnInit, NgZone  } from '@angular/core';
-import {  Router  } from '@angular/router';
-import {  LoginService  } from './login.service';
-import {  Login  } from './login';
-import { Message,
-  Messages,
-  MessageService,
-  NavigationRoutes,
-  LocalStorage,
-  LocalStorageService,
+import {Component, NgZone, OnInit} from "@angular/core";
+import {Router} from "@angular/router";
+import {LoginService} from "./login.service";
+import {Login} from "./login";
+import {
   AppSettings,
   CommonService,
-  ThemeChangeService,
   ImagePath,
-  LoaderService
- } from '../shared/index';
-import {  FacebookService  } from './facebook.service';
-import {  FormGroup, FormBuilder, Validators  } from '@angular/forms';
-import {  ValidationService  } from '../shared/customvalidations/validation.service';
-import {  FBToken  } from './fbtoken';
-import {  GoogleToken  } from './googletoken';
-import {  ProjectAsset  } from '../shared/constants';
+  LoaderService,
+  LocalStorage,
+  LocalStorageService,
+  Message,
+  MessageService,
+  NavigationRoutes,
+  ThemeChangeService
+} from "../shared/index";
+import {FacebookService} from "./facebook.service";
+import {FormBuilder, FormGroup} from "@angular/forms";
+import {ValidationService} from "../shared/customvalidations/validation.service";
+import {ProjectAsset} from "../shared/constants";
 
 @Component({
   moduleId: module.id,
@@ -31,24 +29,24 @@ import {  ProjectAsset  } from '../shared/constants';
 
 export class LoginComponent implements OnInit {
   private model = new Login();
-  private userForm:FormGroup;
-  private error_msg:string;
-  private isShowErrorMessage:boolean = true;
-  private MY_LOGO_PATH:string;
-  private EMAIL_ICON:string;
-  private PASSWORD_ICON:string;
-  private APP_NAME:string;
-  private MY_TAG_LINE:string;
-  private UNDER_LICENCE:string;
-  private BODY_BACKGROUND:string;
+  private userForm: FormGroup;
+  private error_msg: string;
+  private isShowErrorMessage: boolean = true;
+  private MY_LOGO_PATH: string;
+  private EMAIL_ICON: string;
+  private PASSWORD_ICON: string;
+  private APP_NAME: string;
+  private MY_TAG_LINE: string;
+  private UNDER_LICENCE: string;
+  private BODY_BACKGROUND: string;
 
 
-  constructor(private _router:Router, private loginService:LoginService, private themeChangeService:ThemeChangeService,
-              private messageService:MessageService, private _ngZone:NgZone,
-              private formBuilder:FormBuilder, private commonService:CommonService, private loaderService:LoaderService,
-              private _facebookService:FacebookService) {
+  constructor(private _router: Router, private loginService: LoginService, private themeChangeService: ThemeChangeService,
+              private messageService: MessageService, private _ngZone: NgZone,
+              private formBuilder: FormBuilder, private commonService: CommonService, private loaderService: LoaderService,
+              private _facebookService: FacebookService) {
     this.userForm = this.formBuilder.group({
-      'email': ['', [ ValidationService.requireEmailValidator,ValidationService.emailValidator]],
+      'email': ['', [ValidationService.requireEmailValidator, ValidationService.emailValidator]],
       'password': ['', [ValidationService.requirePasswordValidator]]
     });
     this.MY_LOGO_PATH = ImagePath.MY_WHITE_LOGO;
@@ -77,7 +75,7 @@ export class LoginComponent implements OnInit {
         error => (this.loginFail(error)));
   }
 
-  loginSuccess(res:any) {
+  loginSuccess(res: any) {
     LocalStorageService.setLocalValue(LocalStorage.IS_CANDIDATE, res.data.isCandidate);
     LocalStorageService.setLocalValue(LocalStorage.IS_CANDIDATE_FILLED, res.data.isCompleted);
     LocalStorageService.setLocalValue(LocalStorage.END_USER_ID, res.data.end_user_id);
@@ -99,31 +97,31 @@ export class LoginComponent implements OnInit {
   }
 
   navigateTo(navigateTo: string) {
-    if (navigateTo !== undefined ) {
+    if (navigateTo !== undefined) {
       this._router.navigate([navigateTo]);
     }
   }
 
 
-  successRedirect(res:any) {
+  successRedirect(res: any) {
     LocalStorageService.setLocalValue(LocalStorage.IS_LOGGED_IN, 1);
-    LocalStorageService.setLocalValue(LocalStorage.PROFILE_PICTURE,res.data.picture);
-    if(res.data.isCandidate === true) {
-    if(res.data.isCompleted === true) {
-      this._router.navigate([NavigationRoutes.APP_CANDIDATE_DASHBOARD]);
-    }
+    LocalStorageService.setLocalValue(LocalStorage.PROFILE_PICTURE, res.data.picture);
+    if (res.data.isCandidate === true) {
+      if (res.data.isCompleted === true) {
+        this._router.navigate([NavigationRoutes.APP_CANDIDATE_DASHBOARD]);
+      }
       else {
-      this._router.navigate([NavigationRoutes.APP_CREATEPROFILE]);
-    }
+        this._router.navigate([NavigationRoutes.APP_CREATEPROFILE]);
+      }
     } else {
-      LocalStorageService.setLocalValue(LocalStorage.COMPANY_NAME,res.data.company_name);
+      LocalStorageService.setLocalValue(LocalStorage.COMPANY_NAME, res.data.company_name);
 
-       this._router.navigate([NavigationRoutes.APP_RECRUITER_DASHBOARD]);
+      this._router.navigate([NavigationRoutes.APP_RECRUITER_DASHBOARD]);
     }
 
   }
 
-  loginFail(error:any) {
+  loginFail(error: any) {
 
     if (error.err_code === 404 || error.err_code === 0) {
       var message = new Message();
@@ -144,9 +142,9 @@ export class LoginComponent implements OnInit {
     this._router.navigate([NavigationRoutes.APP_FORGOTPASSWORD]);
   }
 
-  onFailure(error:any) {
-  console.log(error);
-}
+  onFailure(error: any) {
+    console.log(error);
+  }
 
 }
 

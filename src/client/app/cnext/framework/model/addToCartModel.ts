@@ -1,6 +1,6 @@
 export class AddToCartIds {
 
-  public addShortListedToCartIds:string;
-  public addApliedToCartIds:string;
-  public listname:string;
+  public addShortListedToCartIds: string;
+  public addApliedToCartIds: string;
+  public listname: string;
 }

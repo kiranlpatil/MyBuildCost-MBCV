@@ -1,4 +1,4 @@
-import {  Injectable  } from '@angular/core';
+import {Injectable} from "@angular/core";
 //import { Observable  } from 'rxjs/Observable';
 /// <reference path='../../../../../typings/globals/fbsdk/index.d.ts' />
 
@@ -18,7 +18,7 @@ export class FacebookService {
   }
 
   loadAndInitFBSDK() {
-    var js:any,
+    var js: any,
       id = 'facebook-jssdk',
       ref = document.getElementsByTagName('script')[0];
 

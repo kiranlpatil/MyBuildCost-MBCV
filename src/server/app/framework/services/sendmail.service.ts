@@ -12,9 +12,9 @@ var smtpTransport = nodemailer.createTransport({
 
 class SendMailService {
 
-  sendMail(mailOptions:any, callback:any) {
+  sendMail(mailOptions: any, callback: any) {
 
-    smtpTransport.sendMail(mailOptions, function (error:any, response:any) {
+    smtpTransport.sendMail(mailOptions, function (error: any, response: any) {
       if (error) {
         callback(new Error(Messages.MSG_ERROR_EMAIL), response);
       }

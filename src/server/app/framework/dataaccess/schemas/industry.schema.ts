@@ -7,48 +7,48 @@ var mongoose = DataAccess.mongooseInstance;
 var mongooseConnection = DataAccess.mongooseConnection;
 
 class IndustrySchema {
-    static get schema() {
-        var schema = mongoose.Schema({
-          code_name : {
-            type : String
-          },
-          name : {
-            type: String
-          },
-          sort_order:Number,
-          roles : [{
-            name:String,
-            capabilities : [{
-              complexities:[{
-                scenarios:[{
-                  name:String,
-                  code: String
-                }],
-                name: String
-              }],
-              name : String
+  static get schema() {
+    var schema = mongoose.Schema({
+      code_name: {
+        type: String
+      },
+      name: {
+        type: String
+      },
+      sort_order: Number,
+      roles: [{
+        name: String,
+        capabilities: [{
+          complexities: [{
+            scenarios: [{
+              name: String,
+              code: String
             }],
-            default_complexities: [{
-              complexities: [{
-                scenarios: [{
-                  name: String,
-                  isChecked : Boolean,
-                  code: String
-                }],
-                name: String
-              }],
-              name: String
-            }]
+            name: String
           }],
-          proficiencies : {
-            label : String,
-            names : [String]
-          }
+          name: String
+        }],
+        default_complexities: [{
+          complexities: [{
+            scenarios: [{
+              name: String,
+              isChecked: Boolean,
+              code: String
+            }],
+            name: String
+          }],
+          name: String
+        }]
+      }],
+      proficiencies: {
+        label: String,
+        names: [String]
+      }
 
-        },{ versionKey: false });
+    }, {versionKey: false});
 
-        return schema;
-    }
+    return schema;
+  }
 }
 var schema = mongooseConnection.model<IIndustry>("Industry", IndustrySchema.schema);
 export = schema;

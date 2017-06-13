@@ -1,5 +1,5 @@
-import {    Route  } from '@angular/router';
-import {  CandidateSummuryComponent  } from './index';
+import {Route} from "@angular/router";
+import {CandidateSummuryComponent} from "./index";
 
 export const CandidateSummury: Route[] = [
   {

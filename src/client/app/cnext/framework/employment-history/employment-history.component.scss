@@ -45,16 +45,13 @@ $border-color: #ccc;
   display: none;
 }
 
-
 .full-width {
   margin-top: 20px;
 }
 
-
-
 @media only screen and (max-width: 980px) {
   .left-content,
-  .right-content{
+  .right-content {
     width: 100%;
     padding: 0;
   }

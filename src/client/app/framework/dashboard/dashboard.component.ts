@@ -1,16 +1,16 @@
-import {   Component, OnInit, NgZone, OnDestroy  } from '@angular/core';
-import {  Router  } from '@angular/router';
-import {  DashboardService  } from './dashboard.service';
-import {  UserProfile  } from './user';
+import {Component, NgZone, OnDestroy, OnInit} from "@angular/core";
+import {Router} from "@angular/router";
+import {DashboardService} from "./dashboard.service";
+import {UserProfile} from "./user";
 import {
+  LocalStorage,
+  LocalStorageService,
   Message,
   MessageService,
   NavigationRoutes,
-  LocalStorageService,
-  LocalStorage,
   ProfileService
- } from '../shared/index';
-import {  LoaderService  } from '../shared/loader/loader.service';
+} from "../shared/index";
+import {LoaderService} from "../shared/loader/loader.service";
 
 
 @Component({
@@ -20,14 +20,14 @@ import {  LoaderService  } from '../shared/loader/loader.service';
   styleUrls: ['dashboard.component.css'],
 })
 
-export class DashboardComponent implements OnInit,OnDestroy {
+export class DashboardComponent implements OnInit, OnDestroy {
   mode = 'Observable';
   model = new UserProfile();
   overlayStyle = false;
-  newUser:number;
+  newUser: number;
 
-  constructor(private _router:Router, private dashboardService:DashboardService, private messageService:MessageService,
-              private profileService:ProfileService, private zone:NgZone, private loaderService:LoaderService) {
+  constructor(private _router: Router, private dashboardService: DashboardService, private messageService: MessageService,
+              private profileService: ProfileService, private zone: NgZone, private loaderService: LoaderService) {
   }
 
   ngOnInit() {
@@ -40,7 +40,7 @@ export class DashboardComponent implements OnInit,OnDestroy {
   }
 
   ngOnDestroy() {
-   // this.loaderService.stop();
+    // this.loaderService.stop();
     // this.loaderService.showLoading(false);
   }
 
@@ -51,7 +51,7 @@ export class DashboardComponent implements OnInit,OnDestroy {
         error => this.onUserProfileError(error));
   }
 
-  onUserProfileSuccess(result:any) {
+  onUserProfileSuccess(result: any) {
     LocalStorageService.setLocalValue(LocalStorage.EMAIL_ID, result.data.email);
     LocalStorageService.setLocalValue(LocalStorage.MOBILE_NUMBER, result.data.mobile_number);
     this.zone.run(() => {
@@ -62,14 +62,14 @@ export class DashboardComponent implements OnInit,OnDestroy {
     });
   }
 
-  onUserProfileError(error:any) {
+  onUserProfileError(error: any) {
     var message = new Message();
     message.error_msg = error.err_msg;
     message.isError = true;
     this.messageService.message(message);
   }
 
-  navigateTo(nav:string) {
+  navigateTo(nav: string) {
     if (nav !== undefined) {
       this._router.navigate([nav]);
     }

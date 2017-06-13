@@ -1,7 +1,7 @@
-import {Component, Input, Output, EventEmitter} from "@angular/core";
+import {Component, EventEmitter, Input, Output} from "@angular/core";
 import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
 import {Candidate, Section} from "../model/candidate";
-import {FormGroup, FormArray, FormBuilder, Validators} from "@angular/forms";
+import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   moduleId: module.id,
@@ -12,18 +12,17 @@ import {FormGroup, FormArray, FormBuilder, Validators} from "@angular/forms";
 
 export class CertificationAccreditationComponent {
 
-  @Input() candidate:Candidate;
-  @Input() highlightedSection:Section;
+  @Input() candidate: Candidate;
+  @Input() highlightedSection: Section;
   @Output() onComplete = new EventEmitter();
 
-  public certificationDetail:FormGroup;
+  public certificationDetail: FormGroup;
 
-  
 
-  private isButtonShow:boolean = false;
-  private showButton:boolean = true;
+  private isButtonShow: boolean = false;
+  private showButton: boolean = true;
 
-  constructor(private _fb:FormBuilder, private profileCreatorService:CandidateProfileService) {
+  constructor(private _fb: FormBuilder, private profileCreatorService: CandidateProfileService) {
   }
 
   ngOnInit() {
@@ -37,7 +36,7 @@ export class CertificationAccreditationComponent {
     })
   }
 
-  ngOnChanges(changes:any) {
+  ngOnChanges(changes: any) {
     if (changes.candidate.currentValue != undefined) {
       this.candidate = changes.candidate.currentValue;
       if (this.candidate.certifications != undefined && this.candidate.certifications.length > 0) {
@@ -70,23 +69,23 @@ export class CertificationAccreditationComponent {
     control.push(addrCtrl);
   }
 
-  removeCertification(i:number) {
+  removeCertification(i: number) {
     const control = <FormArray>this.certificationDetail.controls['certifications'];
     control.removeAt(i);
     this.postData('dalete');
   }
 
-  postData(type:string) {
+  postData(type: string) {
     this.candidate.certifications = this.certificationDetail.value.certifications;
     this.profileCreatorService.addProfileDetail(this.candidate).subscribe(
-        user => {
-          if (type == 'next') {
-            this.onNext();
-          }
-          else if (type == 'save') {
-            this.onSave()
-          }
-        });
+      user => {
+        if (type == 'next') {
+          this.onNext();
+        }
+        else if (type == 'save') {
+          this.onSave()
+        }
+      });
   }
 
   onNext() {

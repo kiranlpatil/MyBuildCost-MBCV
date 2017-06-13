@@ -1,6 +1,6 @@
 <div class="section-container" *ngIf="highlightedSection.name=='Profile'">
   <cn-tool-tip [message]="tooltipMessage"></cn-tool-tip>
-  <div class="main-content clearfix modal-content" >
+  <div class="main-content clearfix modal-content">
     <h4 class="heading">My Profile</h4>
 
     <div class="col-sm-3 text-center">
@@ -18,19 +18,23 @@
 
       <div class="clearfix">&nbsp;</div>
       <h4>Select your Core Industry (Any One)</h4>
-      <cn-industry-list  [selectedIndustry]="candidate.industry" (valueChange)="onIndustryChange($event)"></cn-industry-list>
+      <cn-industry-list [selectedIndustry]="candidate.industry"
+                        (valueChange)="onIndustryChange($event)"></cn-industry-list>
     </div>
     <div class="button-group clearfix">
-      <button class="btn btn-default"  (click)="highlightedSection.name='none'; highlightedSection.isDisable=false" [hidden]="showButton" >Cancel</button>
+      <button class="btn btn-default" (click)="highlightedSection.name='none'; highlightedSection.isDisable=false"
+              [hidden]="showButton">Cancel
+      </button>
       <button class="btn btn-primary" (click)="onNext()">Next</button><!-- [hidden]="!showButton" -->
       <!--  <button class="btn btn-primary"  (click)="onSave()" [hidden]="showButton">Save</button>-->
     </div>
   </div>
 </div>
-<div class="section-container" [ngClass]="(highlightedSection.name !=='Work-Area' && highlightedSection.name !=='Capabilities')?'half-width':'full-width'">
+<div class="section-container"
+     [ngClass]="(highlightedSection.name !=='Work-Area' && highlightedSection.name !=='Capabilities')?'half-width':'full-width'">
   <div class="main-content profile-main-content" *ngIf="highlightedSection.name!='Profile'">
     <div class="compact-view clearfix">
-     <!--[hidden]="highlightedSection.isLocked"-->
+      <!--[hidden]="highlightedSection.isLocked"-->
       <!--
             <span class=" glyphicon glyphicon-lock" title="you can edit this field after {{highlightedSection.date| date:'mediumDate'}}" *ngIf="highlightedSection.isLocked"></span>
       -->
@@ -43,7 +47,9 @@
         <p class="user-name">
           <span class="profile-name-first">{{candidateDetails.first_name}}</span>
           <span class="profile-name-last">{{candidateDetails.last_name}}</span>
-          <button class="btn-edit" (click)="highlightedSection.name='Profile';disableButton=false;showButton=false;;highlightedSection.isDisable=true" [hidden]="highlightedSection.isDisable" ></button>
+          <button class="btn-edit"
+                  (click)="highlightedSection.name='Profile';disableButton=false;showButton=false;;highlightedSection.isDisable=true"
+                  [hidden]="highlightedSection.isDisable"></button>
         </p>
         <p><label>Job Title</label> {{candidate.jobTitle}}</p>
         <p><label>Industry</label> {{candidate.industry.name}}</p>

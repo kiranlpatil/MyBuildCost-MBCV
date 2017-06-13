@@ -1,41 +1,40 @@
-import * as fs from 'fs';
 var config = require('config');
 import CNextMessages = require("../shared/cnext-messages");
 import ProjectAsset = require("../shared/projectasset");
 import IndustryRepository = require("../dataaccess/repository/industry.repository");
 import IndustryModel = require("../dataaccess/model/industry.model");
 class IndustryService {
-  private industryRepository:IndustryRepository;
-  APP_NAME:string;
+  private industryRepository: IndustryRepository;
+  APP_NAME: string;
 
   constructor() {
     this.industryRepository = new IndustryRepository();
     this.APP_NAME = ProjectAsset.APP_NAME;
   }
 
-  retrieveAll(field:any, callback:(error:any, result:any) => void) {
-    this.industryRepository.retriveIndustriesWithSortedOrder({  roles :0 }, callback);
+  retrieveAll(field: any, callback: (error: any, result: any) => void) {
+    this.industryRepository.retriveIndustriesWithSortedOrder({roles: 0}, callback);
   }
 
-  retrieve(field:any, callback:(error:any, result:any) => void) {
-    this.industryRepository.retrieve(field,callback);
+  retrieve(field: any, callback: (error: any, result: any) => void) {
+    this.industryRepository.retrieve(field, callback);
   }
 
-  findByName(field:any, callback:(error:any, result:any) => void) {
-    this.industryRepository.findByName(field,callback);
+  findByName(field: any, callback: (error: any, result: any) => void) {
+    this.industryRepository.findByName(field, callback);
   }
 
-  pushIntoArray(name:any, value:string,callback:(error:any, result:any) => void) {
-    this.industryRepository.pushElementInArray(value,callback);
+  pushIntoArray(name: any, value: string, callback: (error: any, result: any) => void) {
+    this.industryRepository.pushElementInArray(value, callback);
   }
 
-  create(item:any, callback:(error:any, result:any) => void) {
+  create(item: any, callback: (error: any, result: any) => void) {
 
-    this.industryRepository.findByName(item.name,(errinCreate : any , response : any)=>{
+    this.industryRepository.findByName(item.name, (errinCreate: any, response: any) => {
       if (errinCreate) {
         callback(new Error(CNextMessages.PROBLEM_IN_CREATING_INDUSTRY), null);
-      }else{
-        if(response.length == 0 ){
+      } else {
+        if (response.length == 0) {
           this.industryRepository.create(item, (err, res) => {
             if (err) {
               callback(new Error(CNextMessages.PROBLEM_IN_CREATING_INDUSTRY), null);
@@ -44,8 +43,8 @@ class IndustryService {
               callback(null, res);
             }
           });
-        }else {
-          this.industryRepository.findOneAndUpdate({'_id':response[0]._id}, item , {new: true}, callback);
+        } else {
+          this.industryRepository.findOneAndUpdate({'_id': response[0]._id}, item, {new: true}, callback);
         }
       }
     });

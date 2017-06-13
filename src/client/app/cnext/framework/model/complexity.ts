@@ -1,7 +1,7 @@
-import { Scenario } from './scenario';
+import {Scenario} from "./scenario";
 export class Complexity {
-  name: string='';
-  scenarios: Scenario[]=new Array();
-  isChecked : boolean=false;
-  match : string;
+  name: string = '';
+  scenarios: Scenario[] = new Array();
+  isChecked: boolean = false;
+  match: string;
 }

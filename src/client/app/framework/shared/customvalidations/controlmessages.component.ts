@@ -1,21 +1,22 @@
-import {  Component, Input  } from '@angular/core';
-import {  FormControl  } from '@angular/forms';
-import {  ValidationService  } from './validation.service';
+import {Component, Input} from "@angular/core";
+import {FormControl} from "@angular/forms";
+import {ValidationService} from "./validation.service";
 
 @Component({
-    selector: 'control-messages',
-    template: `<div *ngIf='errorMessage !== null'>{{errorMessage}}</div>`
+  selector: 'control-messages',
+  template: `
+    <div *ngIf='errorMessage !== null'>{{errorMessage}}</div>`
 })
 export class ControlMessagesComponent {
-    @Input() control:FormControl;
+  @Input() control: FormControl;
 
-    get errorMessage() {
-        for (let propertyName in this.control.errors) {
-            if (this.control.errors.hasOwnProperty(propertyName) && this.control.touched) {
-                return ValidationService.getValidatorErrorMessage(propertyName, this.control.errors[propertyName]);
-            }
-        }
-
-        return null;
+  get errorMessage() {
+    for (let propertyName in this.control.errors) {
+      if (this.control.errors.hasOwnProperty(propertyName) && this.control.touched) {
+        return ValidationService.getValidatorErrorMessage(propertyName, this.control.errors[propertyName]);
+      }
     }
+
+    return null;
+  }
 }

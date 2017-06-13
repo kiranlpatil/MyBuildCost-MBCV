@@ -34,7 +34,7 @@ $active-color: #edf1f5;
       right: 5px;
 
       li {
-        float:left;
+        float: left;
         padding: 0 5px;
         cursor: pointer;
       }
@@ -114,7 +114,7 @@ $active-color: #edf1f5;
       font-family: 'gothamrnd-book';
       position: relative;
       top: 0;
-      left:0;
+      left: 0;
       @extend %text-ellipsis;
     }
 
@@ -305,12 +305,12 @@ header {
 @media only screen and (max-width: 980px) {
   .card-view {
     .left-side {
-      float:right;
+      float: right;
       width: 100%;
     }
 
     .right-side {
-      float:left;
+      float: left;
       width: 100%;
     }
   }

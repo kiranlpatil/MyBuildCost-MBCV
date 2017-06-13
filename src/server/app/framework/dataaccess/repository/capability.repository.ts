@@ -3,7 +3,7 @@ import RepositoryBase = require("./base/repository.base");
 import ICapability = require("../mongoose/capability");
 
 class CapabilityRepository extends RepositoryBase<ICapability> {
-  constructor () {
+  constructor() {
     super(CapabilitySchema);
   }
 }

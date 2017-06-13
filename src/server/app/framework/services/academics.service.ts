@@ -5,19 +5,19 @@ import EmployeeHistoryRepository = require("../dataaccess/repository/employee-hi
 import ProfessionalDetailsRepository = require("../dataaccess/repository/professional-details.repository");
 import AcademicsRepository = require("../dataaccess/repository/academics.repository");
 class AcademicService {
-  private academicsRepository : AcademicsRepository;
-  APP_NAME:string;
+  private academicsRepository: AcademicsRepository;
+  APP_NAME: string;
 
   constructor() {
     this.academicsRepository = new AcademicsRepository();
     this.APP_NAME = ProjectAsset.APP_NAME;
   }
 
-  retrieve(field:any, callback:(error:any, result:any) => void) {
+  retrieve(field: any, callback: (error: any, result: any) => void) {
     this.academicsRepository.retrieveAll({}, callback);
   }
 
-  create(item:any, callback:(error:any, result:any) => void) {
+  create(item: any, callback: (error: any, result: any) => void) {
     this.academicsRepository.create(item, (err, res) => {
       if (err) {
         callback(err, null);
@@ -28,8 +28,8 @@ class AcademicService {
     });
   }
 
-  retrieveByMultiIds(item:any, callback:(error:any, result:any) => void) {
-    this.academicsRepository.retrieveByMultiIds(item,{ }, callback);
+  retrieveByMultiIds(item: any, callback: (error: any, result: any) => void) {
+    this.academicsRepository.retrieveByMultiIds(item, {}, callback);
   }
 
 }

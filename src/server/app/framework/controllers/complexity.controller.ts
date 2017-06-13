@@ -5,22 +5,21 @@ import ResponseService = require("../shared/response.service");
 import RoleModel = require("../dataaccess/model/role.model");
 import RoleService = require("../services/role.service");
 import IndustryService = require("../services/industry.service");
-import * as mongoose from "mongoose";
 import CapabilityService = require("../services/capability.service");
 import ComplexityService = require("../services/complexity.service");
 import ScenarioService = require("../services/scenario.service");
 
 
-export function retrieve(req:express.Request, res:express.Response, next:any) {  // todo find better solution
+export function retrieve(req: express.Request, res: express.Response, next: any) {  // todo find better solution
   try {
     var complexityService = new ComplexityService();
     var params = req.params.id;
     var rolesparam = req.query.roles;
     var capabilityparam = req.query.capability;
-    let item:any={
-      'name':params,
-      'roles':JSON.parse(rolesparam),
-      'capabilities':JSON.parse(capabilityparam)
+    let item: any = {
+      'name': params,
+      'roles': JSON.parse(rolesparam),
+      'capabilities': JSON.parse(capabilityparam)
     }
     complexityService.findByName(item, (error, result) => {
       if (error) {

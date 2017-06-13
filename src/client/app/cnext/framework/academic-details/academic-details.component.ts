@@ -1,7 +1,7 @@
-import {Component, Input, Output, EventEmitter} from "@angular/core";
+import {Component, EventEmitter, Input, Output} from "@angular/core";
 import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
 import {Candidate, Section} from "../model/candidate";
-import {FormGroup, FormArray, FormBuilder, Validators} from "@angular/forms";
+import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   moduleId: module.id,
@@ -11,15 +11,15 @@ import {FormGroup, FormArray, FormBuilder, Validators} from "@angular/forms";
 })
 
 export class AcademicDetailComponent {
-  @Input() candidate:Candidate;
-  @Input() highlightedSection:Section;
+  @Input() candidate: Candidate;
+  @Input() highlightedSection: Section;
   @Output() onComplete = new EventEmitter();
 
-  public academicDetail:FormGroup;
-  private isButtonShow:boolean = false;
-  private showButton:boolean = true;
+  public academicDetail: FormGroup;
+  private isButtonShow: boolean = false;
+  private showButton: boolean = true;
 
-  constructor(private _fb:FormBuilder, private profileCreatorService:CandidateProfileService) {
+  constructor(private _fb: FormBuilder, private profileCreatorService: CandidateProfileService) {
   }
 
   ngOnInit() {
@@ -33,7 +33,7 @@ export class AcademicDetailComponent {
     })
   }
 
-  ngOnChanges(changes:any) {
+  ngOnChanges(changes: any) {
     if (changes.candidate.currentValue != undefined) {
       this.candidate = changes.candidate.currentValue;
       if (this.candidate.academics != undefined && this.candidate.academics.length > 0) {
@@ -66,13 +66,14 @@ export class AcademicDetailComponent {
     control.push(addrCtrl);
   }
 
-  removeAcademicDetail(i:number) {debugger
+  removeAcademicDetail(i: number) {
+    debugger
     const control = <FormArray>this.academicDetail.controls['acdemicDetails'];
     control.removeAt(i);
     this.postData('dalete');
   }
 
-  postData(type:string) {
+  postData(type: string) {
     this.candidate.academics = this.academicDetail.value.acdemicDetails;
     this.profileCreatorService.addProfileDetail(this.candidate).subscribe(
       user => {

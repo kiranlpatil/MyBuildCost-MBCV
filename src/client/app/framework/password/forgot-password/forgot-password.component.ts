@@ -1,13 +1,12 @@
-import {    Component  } from '@angular/core';
-import {   Router  } from '@angular/router';
-import {  ForgotPassword  } from './forgotpassword';
-import {  ForgotPasswordService  } from './forgot-password.service';
-import {  NavigationRoutes,Message, Messages, MessageService, CommonService  } from '../../shared/index';
-import {  FormGroup, FormBuilder, Validators  } from '@angular/forms';
-import {  ValidationService  } from '../../shared/customvalidations/validation.service';
-import {  ImagePath, ProjectAsset  } from '../../shared/constants';
-import {  LoaderService  } from '../../shared/loader/loader.service';
-
+import {Component} from "@angular/core";
+import {Router} from "@angular/router";
+import {ForgotPassword} from "./forgotpassword";
+import {ForgotPasswordService} from "./forgot-password.service";
+import {CommonService, Message, Messages, MessageService, NavigationRoutes} from "../../shared/index";
+import {FormBuilder, FormGroup} from "@angular/forms";
+import {ValidationService} from "../../shared/customvalidations/validation.service";
+import {ImagePath, ProjectAsset} from "../../shared/constants";
+import {LoaderService} from "../../shared/loader/loader.service";
 
 
 @Component({
@@ -18,19 +17,19 @@ import {  LoaderService  } from '../../shared/loader/loader.service';
 })
 export class ForgotPasswordComponent {
   model = new ForgotPassword();
-  userForm:FormGroup;
-  error_msg:string;
-  isShowErrorMessage:boolean = true;
-  MY_LOGO_PATH:string;
-  MY_TAG_LINE:string;
-  UNDER_LICENCE:string;
-  EMAIL_ICON:string;
-  BODY_BACKGROUND:string;
-  forgotPasswordButtonLabel:string;
+  userForm: FormGroup;
+  error_msg: string;
+  isShowErrorMessage: boolean = true;
+  MY_LOGO_PATH: string;
+  MY_TAG_LINE: string;
+  UNDER_LICENCE: string;
+  EMAIL_ICON: string;
+  BODY_BACKGROUND: string;
+  forgotPasswordButtonLabel: string;
 
-  constructor(private commonService:CommonService, private _router:Router,
-              private forgotPasswordService:ForgotPasswordService, private messageService:MessageService,
-              private formBuilder:FormBuilder,private loaderService:LoaderService) {
+  constructor(private commonService: CommonService, private _router: Router,
+              private forgotPasswordService: ForgotPasswordService, private messageService: MessageService,
+              private formBuilder: FormBuilder, private loaderService: LoaderService) {
     this.userForm = this.formBuilder.group({
       'email': ['', [ValidationService.requireEmailValidator, ValidationService.emailValidator]]
     });
@@ -46,12 +45,12 @@ export class ForgotPasswordComponent {
   onSubmit() {
     this.model = this.userForm.value;
     this.forgotPasswordService.forgotPassword(this.model)
-        .subscribe(
-            body => this.forgotPasswordSuccess(body),
-            error => this.forgotPasswordFail(error));
+      .subscribe(
+        body => this.forgotPasswordSuccess(body),
+        error => this.forgotPasswordFail(error));
   }
 
-  forgotPasswordSuccess(body:ForgotPassword) {
+  forgotPasswordSuccess(body: ForgotPassword) {
     var message = new Message();
     message.isError = false;
     message.custom_message = Messages.MSG_SUCCESS_FORGOT_PASSWORD;
@@ -59,7 +58,7 @@ export class ForgotPasswordComponent {
     this.forgotPasswordButtonLabel = 'Resend Email';
   }
 
-  forgotPasswordFail(error:any) {
+  forgotPasswordFail(error: any) {
     if (error.err_code === 404 || error.err_code === 0) {
       var message = new Message();
       message.error_msg = error.err_msg;
@@ -70,8 +69,9 @@ export class ForgotPasswordComponent {
       this.error_msg = error.err_msg;
     }
   }
+
   navigateTo(navigateTo: string) {
-    if (navigateTo !== undefined ) {
+    if (navigateTo !== undefined) {
       this._router.navigate([navigateTo]);
     }
   }

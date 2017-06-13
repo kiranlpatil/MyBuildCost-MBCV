@@ -3,7 +3,7 @@
     <div class="col-sm-3 hidden-xs"><h4>Core Capabilities</h4></div>
     <div class="col-sm-9 hidden-xs"><h4>Complexities Handled</h4></div>
   </div>
-  <div  *ngFor="let role of roles">
+  <div *ngFor="let role of roles">
     <div *ngFor="let capability of role.capabilities">
       <div class="content clearfix" *ngIf="capability.isPrimary">
         <div class="col-sm-3">
@@ -12,10 +12,11 @@
         </div>
         <div class="col-sm-9">
           <div class="heading visible-xs"><h4>Complexities Handled</h4></div>
-          <div  *ngFor="let complexity of capability.complexities;let i=index">
+          <div *ngFor="let complexity of capability.complexities;let i=index">
             <div class="col-sm-4 padding-right15">
               <div class="details" [class.exact]="complexity.match=='exact'" [class.above]="complexity.match=='above'"
-                   [class.below]="complexity.match=='below'" [class.missing]="complexity.match=='missing'" [class.extra]="complexity.match=='extra'">
+                   [class.below]="complexity.match=='below'" [class.missing]="complexity.match=='missing'"
+                   [class.extra]="complexity.match=='extra'">
                 <span class="complexity-name">{{complexity.name}}</span>
                 <div *ngFor="let scenario of complexity.scenarios">
                   <span *ngIf="scenario.isChecked">{{scenario.name}}</span>

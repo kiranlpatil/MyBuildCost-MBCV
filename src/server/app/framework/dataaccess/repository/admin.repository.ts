@@ -4,7 +4,7 @@ import Candidate = require("../mongoose/candidate");
 import IAdmin = require("../mongoose/admin");
 
 class AdminRepository extends RepositoryBase<IAdmin> {
-  constructor () {
+  constructor() {
     super(AdminSchema);
   }
 }

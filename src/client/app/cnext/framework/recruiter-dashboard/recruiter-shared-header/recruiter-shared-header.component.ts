@@ -1,7 +1,7 @@
-import {Component, OnInit, ElementRef, HostListener} from "@angular/core";
+import {Component, ElementRef, HostListener, OnInit} from "@angular/core";
 import {Router} from "@angular/router";
 import {LocalStorageService} from "../../../../framework/shared/localstorage.service";
-import {NavigationRoutes, AppSettings, LocalStorage, ImagePath} from "../../../../framework/shared/constants";
+import {AppSettings, ImagePath, LocalStorage, NavigationRoutes} from "../../../../framework/shared/constants";
 
 
 @Component({
@@ -14,20 +14,20 @@ import {NavigationRoutes, AppSettings, LocalStorage, ImagePath} from "../../../.
 export class RecruiterSharedHeaderComponent implements OnInit {
   company_name: string;
   uploaded_image_path: string;
-  public isClassVisible:boolean = false;
-  public isOpenProfile:boolean = false;
-  PROFILE_IMG_PATH:string;
-  MY_LOGO:string;
-  newUser:number;
+  public isClassVisible: boolean = false;
+  public isOpenProfile: boolean = false;
+  PROFILE_IMG_PATH: string;
+  MY_LOGO: string;
+  newUser: number;
 
-  @HostListener('document:click', ['$event']) onClick(event:any) {
+  @HostListener('document:click', ['$event']) onClick(event: any) {
     if (!this._eref.nativeElement.contains(event.target)) {
       this.isOpenProfile = false;
 
     }
   }
 
-  constructor(private _router:Router,  private _eref:ElementRef) {
+  constructor(private _router: Router, private _eref: ElementRef) {
     this.MY_LOGO = ImagePath.MY_WHITE_LOGO;
   }
 
@@ -42,13 +42,13 @@ export class RecruiterSharedHeaderComponent implements OnInit {
       this.uploaded_image_path = AppSettings.IP + this.uploaded_image_path;
     }
   }
-  
+
   logOut() {
     window.localStorage.clear();
     this._router.navigate([NavigationRoutes.APP_START]);
   }
 
-  navigateTo(nav:string) {
+  navigateTo(nav: string) {
     if (nav !== undefined) {
       this._router.navigate([nav]);
     }

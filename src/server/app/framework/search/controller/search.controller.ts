@@ -1,6 +1,5 @@
 import * as express from "express";
 //import AuthInterceptor = require("");
-import * as mongoose from "mongoose";
 import JobProfileModel = require("../../dataaccess/model/jobprofile.model");
 import SearchService = require("../services/search.service");
 import CandidateService = require("../../services/candidate.service");
@@ -12,12 +11,12 @@ export class SearchController {
 
   }
 
-  getMatchingCandidates(req:express.Request, res:express.Response) {
+  getMatchingCandidates(req: express.Request, res: express.Response) {
     let searchService = new SearchService();
     let profileId = req.params.id;
     let recruiterService = new RecruiterService();
-    recruiterService.getJobById(profileId, (err : any, jobres:any)=>{
-      searchService.getMatchingCandidates(jobres, (error:Error, result:any)=> {
+    recruiterService.getJobById(profileId, (err: any, jobres: any) => {
+      searchService.getMatchingCandidates(jobres, (error: Error, result: any) => {
         if (error) {
           res.status(304).send(error);
         } else {
@@ -27,15 +26,15 @@ export class SearchController {
     });
   }
 
-  getMatchingJobProfiles(req:express.Request, res:express.Response) {
+  getMatchingJobProfiles(req: express.Request, res: express.Response) {
     let searchService = new SearchService();
     let candidateService = new CandidateService();
     let candidateId = req.params.id;
-    candidateService.findById(candidateId, (error:Error, candiRes:any)=> {
+    candidateService.findById(candidateId, (error: Error, candiRes: any) => {
       if (error) {
         res.status(304).send(error);
       } else {
-        searchService.getMatchingJobProfile(candiRes, (error: Error, result:any)=> {
+        searchService.getMatchingJobProfile(candiRes, (error: Error, result: any) => {
           if (error) {
             res.status(304).send(error);
           } else {

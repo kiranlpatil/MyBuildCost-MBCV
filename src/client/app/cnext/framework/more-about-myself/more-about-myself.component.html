@@ -1,23 +1,28 @@
 <div class="section-container clear" *ngIf="highlightedSection.name =='AboutMySelf'">
   <cn-tool-tip [message]="tooltipMessage"></cn-tool-tip>
-  <div class="main-content modal-content clearfix" >
+  <div class="main-content modal-content clearfix">
     <h4 class="heading">More About Myself (Max 250)</h4>
     <div class="clearfix">
       <div class="col-sm-12 more-about-myself">
-        <textarea class="form-control" [(ngModel)]="candidate.aboutMyself"  (ngModelChange)="addAboutMyself()" [maxlength]="maxword"   Placeholder="Enter About Yourself"></textarea>
+        <textarea class="form-control" [(ngModel)]="candidate.aboutMyself" (ngModelChange)="addAboutMyself()"
+                  [maxlength]="maxword" Placeholder="Enter About Yourself"></textarea>
         <p class="error-messages">{{remainingWords}} words remaining</p>
       </div>
     </div>
     <div class="button-group">
-      <button class="btn btn-primary"  (click)="highlightedSection.name='none'; highlightedSection.isDisable=false">Next</button>
+      <button class="btn btn-primary" (click)="highlightedSection.name='none'; highlightedSection.isDisable=false">
+        Next
+      </button>
     </div>
   </div>
 </div>
-<div class="section-container clear"  *ngIf="highlightedSection.name !='AboutMySelf'">
+<div class="section-container clear" *ngIf="highlightedSection.name !='AboutMySelf'">
   <div class="main-content">
     <div class="compact-view clearfix">
-      <h4 class="heading" >More About Self
-        <button class="btn-edit" (click)="highlightedSection.name='AboutMySelf';highlightedSection.isDisable=true;showButton=false" [hidden]="highlightedSection.isDisable"></button>
+      <h4 class="heading">More About Self
+        <button class="btn-edit"
+                (click)="highlightedSection.name='AboutMySelf';highlightedSection.isDisable=true;showButton=false"
+                [hidden]="highlightedSection.isDisable"></button>
         <!--<span class="glyphicon glyphicon-plus"></span>-->
       </h4>
       <p>{{candidate.aboutMyself}}</p>

@@ -1,4 +1,4 @@
-import {Component, Input, Output, EventEmitter} from "@angular/core";
+import {Component, EventEmitter, Input, Output} from "@angular/core";
 import {Industry} from "../model/industry";
 import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
 import {Section} from "../model/candidate";
@@ -13,45 +13,45 @@ import {LocalStorage, ValueConstant} from "../../../framework/shared/constants";
 })
 
 export class IndustryExperienceListComponent {
-  private showButton:boolean = true;
-  private industries:Industry[] = new Array(0);
-  private selectedIndustries:string[] = new Array(0);
-  @Input() highlightedSection :Section;
-  @Input() choosedIndeustry :string;
-  @Input() candidateExperiencedIndustry:string[] = new Array(0);
+  private showButton: boolean = true;
+  private industries: Industry[] = new Array(0);
+  private selectedIndustries: string[] = new Array(0);
+  @Input() highlightedSection: Section;
+  @Input() choosedIndeustry: string;
+  @Input() candidateExperiencedIndustry: string[] = new Array(0);
   @Output() onComplete = new EventEmitter();
   @Output() onNextComplete = new EventEmitter();
-  private disableButton:boolean=true;
-  tooltipMessage : string="<ul><li><h5>Industry Exposure</h5><p class='info'>An individual may be exposed to multiple industries during the professional life. At times, organisations need individuals who have cross industry expertise.</p></li><li><p>Select such industries where you can claim a reasonable exposure.</p></li></ul>";
+  private disableButton: boolean = true;
+  tooltipMessage: string = "<ul><li><h5>Industry Exposure</h5><p class='info'>An individual may be exposed to multiple industries during the professional life. At times, organisations need individuals who have cross industry expertise.</p></li><li><p>Select such industries where you can claim a reasonable exposure.</p></li></ul>";
 
-  constructor(private candidateProfileService:CandidateProfileService) {
+  constructor(private candidateProfileService: CandidateProfileService) {
     this.getIndustries();
-        this.candidateExperiencedIndustry=new Array(0);
+    this.candidateExperiencedIndustry = new Array(0);
   }
 
-  ngOnChanges(changes:any){
+  ngOnChanges(changes: any) {
 
-    if(changes.candidateExperiencedIndustry != undefined && changes.candidateExperiencedIndustry.currentValue != undefined){
-      this.candidateExperiencedIndustry=changes.candidateExperiencedIndustry.currentValue;
-      this.selectedIndustries=this.candidateExperiencedIndustry;
-      if(this.selectedIndustries.length>0){
-        this.disableButton=false;
+    if (changes.candidateExperiencedIndustry != undefined && changes.candidateExperiencedIndustry.currentValue != undefined) {
+      this.candidateExperiencedIndustry = changes.candidateExperiencedIndustry.currentValue;
+      this.selectedIndustries = this.candidateExperiencedIndustry;
+      if (this.selectedIndustries.length > 0) {
+        this.disableButton = false;
       }
     }
 
-    if(changes.choosedIndeustry != undefined && changes.choosedIndeustry.currentValue != undefined){
-      this.choosedIndeustry=changes.choosedIndeustry.currentValue;
+    if (changes.choosedIndeustry != undefined && changes.choosedIndeustry.currentValue != undefined) {
+      this.choosedIndeustry = changes.choosedIndeustry.currentValue;
       this.getIndustries();
     }
-    if(this.candidateExperiencedIndustry === undefined){
-      this.candidateExperiencedIndustry= new Array(0);
+    if (this.candidateExperiencedIndustry === undefined) {
+      this.candidateExperiencedIndustry = new Array(0);
     }
   }
 
-  selectIndustryModel(industry:string,event:any) {
-    if(event.target.checked) {
-      this.disableButton=false;
-      if(this.selectedIndustries.length<ValueConstant.MAX_INTERESTEDINDUSTRY){
+  selectIndustryModel(industry: string, event: any) {
+    if (event.target.checked) {
+      this.disableButton = false;
+      if (this.selectedIndustries.length < ValueConstant.MAX_INTERESTEDINDUSTRY) {
         this.selectedIndustries.push(industry);
       } else {
         event.target.checked = false;
@@ -63,45 +63,46 @@ export class IndustryExperienceListComponent {
         }
       }
     }
-    if(this.selectedIndustries.length <= 0){
-      this.disableButton=true;
+    if (this.selectedIndustries.length <= 0) {
+      this.disableButton = true;
     }
     this.onComplete.emit(this.selectedIndustries);
   }
 
   onNext() {
 
-    if(LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE)==='true') {
+    if (LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE) === 'true') {
       this.highlightedSection.name = "Professional-Details";
-      this.highlightedSection.isDisable=false;
+      this.highlightedSection.isDisable = false;
       this.onNextComplete.emit()
     }
-    else{
+    else {
       this.onNextComplete.emit();
       this.highlightedSection.name = "Compentancies";
-      this.highlightedSection.isDisable=false;
+      this.highlightedSection.isDisable = false;
 
     }
   }
+
   onSave() {
-      this.highlightedSection.name = "none";
-      this.highlightedSection.isDisable=false;
+    this.highlightedSection.name = "none";
+    this.highlightedSection.isDisable = false;
   }
-  
-  getIndustries(){
+
+  getIndustries() {
     this.candidateProfileService.getIndustries()
       .subscribe(industries => this.onIndustryListSuccess(industries.data));
   }
-  
-  onIndustryListSuccess(data:Industry[]){
+
+  onIndustryListSuccess(data: Industry[]) {
     this.industries = data;
-    for (let item of this.industries){
-      if(item.name===this.choosedIndeustry){
+    for (let item of this.industries) {
+      if (item.name === this.choosedIndeustry) {
         this.industries.splice(this.industries.indexOf(item), 1);
       }
     }
-    var newIndustry=new Industry();
-    newIndustry.name="any";
+    var newIndustry = new Industry();
+    newIndustry.name = "any";
     this.industries.push(newIndustry);
   }
 }

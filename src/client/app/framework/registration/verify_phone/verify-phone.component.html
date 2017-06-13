@@ -6,7 +6,8 @@
 
   <div class="col-md-4 col-sm-6 col-xs-10 content">
 
-    <h5>Verify Your Mobile Number <!--<span class="glyphicon glyphicon-remove" (click)="navigateTo('/landing')"></span>--></h5>
+    <h5>Verify Your Mobile Number
+      <!--<span class="glyphicon glyphicon-remove" (click)="navigateTo('/landing')"></span>--></h5>
 
     <div class="alert alert-danger clearfix" [hidden]="isShowErrorMessage">
       <div class="col-sm-1 hidden-xs"><span class="glyphicon glyphicon-warning-sign"></span></div>
@@ -29,7 +30,7 @@
 
       <div class="button-group">
         <button type="submit" class="btn btn-primary" [disabled]="!userForm.valid">Verify Phone</button>
-        <a class="btn btn-danger"  (click)="resendVerificationCode()">Resend OTP</a>
+        <a class="btn btn-danger" (click)="resendVerificationCode()">Resend OTP</a>
       </div>
     </form>
   </div>

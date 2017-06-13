@@ -17,10 +17,14 @@ $white: #fff;
   // Loader
   .loader-container {
 
-    .inner-loader { border-top: 5px solid $dark-theme-color; }
+    .inner-loader {
+      border-top: 5px solid $dark-theme-color;
+    }
   }
   // Heading
-  h3 { color: $dark-theme-color; }
+  h3 {
+    color: $dark-theme-color;
+  }
 
   // Buttons
   .btn-default {
@@ -36,7 +40,7 @@ $white: #fff;
       color: $white;
     }
 
-    &:disabled  {
+    &:disabled {
       background: $dark-theme-color;
       border: $dark-theme-color 1px solid;
     }
@@ -45,7 +49,9 @@ $white: #fff;
   // Other Links
   .other-links {
 
-    a { color: $dark-theme-color; }
+    a {
+      color: $dark-theme-color;
+    }
   }
 
   // Forms
@@ -60,7 +66,9 @@ $white: #fff;
     }
   }
   // Header
-  header {  @extend %dark-theme-gradient; }
+  header {
+    @extend %dark-theme-gradient;
+  }
 
   //splash screen header
 
@@ -80,10 +88,14 @@ $white: #fff;
   // Side Menu Bar
   .dashboard {
 
-    .menu-container { @extend %dark-theme-gradient; }
+    .menu-container {
+      @extend %dark-theme-gradient;
+    }
 
     nav {
-      .profile { background: $dark-theme-background; }
+      .profile {
+        background: $dark-theme-background;
+      }
     }
 
     nav > ul > li {
@@ -128,7 +140,7 @@ $white: #fff;
     // Buttons
     .btn-default {
 
-      &:disabled  {
+      &:disabled {
         opacity: .3;
       }
     }

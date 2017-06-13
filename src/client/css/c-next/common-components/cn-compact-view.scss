@@ -18,8 +18,12 @@ $theme-color: #3694d1;
 }
 
 @keyframes fadein {
-  from { opacity: 0; }
-  to   { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .modal-content {
@@ -113,7 +117,7 @@ $theme-color: #3694d1;
       background: #e6e6e6;
       left: 50%;
       position: absolute;
-      transform: translate(-50%,-50%);
+      transform: translate(-50%, -50%);
       top: 50%;
       width: 100%;
     }
@@ -186,23 +190,20 @@ $theme-color: #3694d1;
   margin-top: -21px;
 }
 
-
-
 .quarter-width {
   width: 25%;
-  float:left;
+  float: left;
   margin-top: 15px;
 }
 
 .half-width {
   width: 50%;
-  float:left;
+  float: left;
 }
 
 .full-width {
   width: 100%;
 }
-
 
 @media only screen and (max-width: 1280px) {
   .compact-view {
@@ -266,7 +267,7 @@ $theme-color: #3694d1;
     }
 
     ul,
-    .option{
+    .option {
       li {
         float: left;
         width: 100%;

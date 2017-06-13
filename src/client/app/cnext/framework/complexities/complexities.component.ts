@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output, ViewChild, ElementRef} from "@angular/core";
+import {Component, ElementRef, EventEmitter, Input, Output, ViewChild} from "@angular/core";
 import {Role} from "../model/role";
 import {Scenario} from "../model/scenario";
 import {Complexity} from "../model/complexity";
@@ -17,40 +17,42 @@ import {Section} from "../model/candidate";
 
 export class ComplexitiesComponent {
 
-  @Input() roles:Role[] = new Array(0);
-  @Input() candidateRoles:Role[] = new Array();
+  @Input() roles: Role[] = new Array(0);
+  @Input() candidateRoles: Role[] = new Array();
   @Output() onComplete = new EventEmitter();
-  @Input() isComplexityPresent : boolean=true;
+  @Input() isComplexityPresent: boolean = true;
   @Input() highlightedSection: Section;
 
 
-  private scenarioNames:string[] = new Array(0);
-  private selectedScenarioNames:string[] = new Array(0);
-  private scenaricomplexityNames:string[] = new Array(0);
-  private selectedComplexityNames:string[]=new Array(0);
-  private selectedDefaultComplexityNames:string[]=new Array(0);
-  private isComplexityButtonEnable:boolean = false;
-  private showModalStyle:boolean = false;
-  private isCandidate:boolean = false;
-  private showMore:boolean = false;
-  private count:number=0;
-  private elements:any;
-  tooltipMessage : string="<ul><li>" +
-      "<h5>Complexities</h5><p class='info'> This section provides a list of complexity scenarios for your selected capabilities.For each scenario, select the most appropriate level of complexity that you are capable of handling.</p></li><li><p>If you have not handled a particular complexity, choose not applicable.</p>" +
-      "</li></ul>";
+  private scenarioNames: string[] = new Array(0);
+  private selectedScenarioNames: string[] = new Array(0);
+  private scenaricomplexityNames: string[] = new Array(0);
+  private selectedComplexityNames: string[] = new Array(0);
+  private selectedDefaultComplexityNames: string[] = new Array(0);
+  private isComplexityButtonEnable: boolean = false;
+  private showModalStyle: boolean = false;
+  private isCandidate: boolean = false;
+  private showMore: boolean = false;
+  private count: number = 0;
+  private elements: any;
+  tooltipMessage: string = "<ul><li>" +
+    "<h5>Complexities</h5><p class='info'> This section provides a list of complexity scenarios for your selected capabilities.For each scenario, select the most appropriate level of complexity that you are capable of handling.</p></li><li><p>If you have not handled a particular complexity, choose not applicable.</p>" +
+    "</li></ul>";
 
 
   @ViewChild("save")
   private _inputElement1: ElementRef;
-  constructor(  private complexityService:ComplexityService) {
+
+  constructor(private complexityService: ComplexityService) {
   }
 
   ngOnInit() {
-    if(LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE)==='true') {
+    if (LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE) === 'true') {
       this.isCandidate = true;
     }
   }
-  ngOnChanges(changes:any) {
+
+  ngOnChanges(changes: any) {
     if (changes.roles) {
       this.roles = changes.roles.currentValue;
     }
@@ -94,7 +96,9 @@ export class ComplexitiesComponent {
     // }
 
   }
-  selectDefaultComplexity(role:Role,complexity:Complexity, selectedScenario:Scenario, event:any) {debugger
+
+  selectDefaultComplexity(role: Role, complexity: Complexity, selectedScenario: Scenario, event: any) {
+    debugger
 
     for (let item of complexity.scenarios) {
 
@@ -106,52 +110,54 @@ export class ComplexitiesComponent {
 
   }
 
-  selectComplexity(role:Role, capability :Capability,complexity:Complexity, selectedScenario:Scenario, event:any) {debugger
-    for(let rol  of this.candidateRoles){debugger
-        for(let cap of rol.capabilities){
-          if(cap.name==capability.name){
-            capability.isPrimary=cap.isPrimary;
-            capability.isSecondary=cap.isSecondary;
-          }
+  selectComplexity(role: Role, capability: Capability, complexity: Complexity, selectedScenario: Scenario, event: any) {
+    debugger
+    for (let rol  of this.candidateRoles) {
+      debugger
+      for (let cap of rol.capabilities) {
+        if (cap.name == capability.name) {
+          capability.isPrimary = cap.isPrimary;
+          capability.isSecondary = cap.isSecondary;
         }
+      }
     }
-    let isFound : boolean = false;
+    let isFound: boolean = false;
     for (let item of complexity.scenarios) {
-      if(item.isChecked){
-        isFound =true;
+      if (item.isChecked) {
+        isFound = true;
       }
       item.isChecked = false;
     }
-    if(!isFound){
+    if (!isFound) {
       this.selectedScenarioNames.push(complexity.name);
       this.count++;
     }
     selectedScenario.isChecked = true;
-    if(this.selectedComplexityNames.indexOf(complexity.name)===-1){
+    if (this.selectedComplexityNames.indexOf(complexity.name) === -1) {
       this.selectedComplexityNames.push(complexity.name);
     }
 
   }
 
 
-  saveComplexity(){
+  saveComplexity() {
     //this.compactView=true
-    this.isComplexityButtonEnable =false;
-    if(this.isCandidate) {
-        this.showModalStyle = !this.showModalStyle;
-      this.highlightedSection.isLocked=true;
+    this.isComplexityButtonEnable = false;
+    if (this.isCandidate) {
+      this.showModalStyle = !this.showModalStyle;
+      this.highlightedSection.isLocked = true;
     }
     this.complexityService.change(true);
-    for(let rol  of this.candidateRoles){
-      for(let mainrol of this.roles){
-        if(rol.name === mainrol.name){
-          if(rol.capabilities){
-            for(let cap of rol.capabilities){
-              if(mainrol.capabilities){
-                for(let mainCap of mainrol.capabilities){
-                  if(mainCap.name === cap.name){
-                    if(cap.isSecondary){
-                      mainCap.isSecondary=true;
+    for (let rol  of this.candidateRoles) {
+      for (let mainrol of this.roles) {
+        if (rol.name === mainrol.name) {
+          if (rol.capabilities) {
+            for (let cap of rol.capabilities) {
+              if (mainrol.capabilities) {
+                for (let mainCap of mainrol.capabilities) {
+                  if (mainCap.name === cap.name) {
+                    if (cap.isSecondary) {
+                      mainCap.isSecondary = true;
                       mainCap.isPrimary = false;
                     }
                   }
@@ -162,13 +168,13 @@ export class ComplexitiesComponent {
         }
       }
     }
-    if(this.highlightedSection.isProficiencyFilled){
+    if (this.highlightedSection.isProficiencyFilled) {
       this.highlightedSection.name = "none";
-    } else{
+    } else {
       this.highlightedSection.name = "Proficiencies";
     }
-    this.highlightedSection.isDisable=false;
-    this.candidateRoles= this.roles;
+    this.highlightedSection.isDisable = false;
+    this.candidateRoles = this.roles;
     this.onComplete.emit(this.roles);
   }
 

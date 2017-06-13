@@ -1,38 +1,36 @@
-import {   OnInit, Injectable  } from '@angular/core';
-import {  Observable  } from 'rxjs/Observable';
-import {  BaseService, API  } from '../../shared/index';
-import {  Http,Headers, RequestOptions  } from '@angular/http';
-import { CompanyDetails } from './company-details';
-import { AppSettings, LocalStorage } from '../../shared/constants';
-import { LocalStorageService } from '../../shared/localstorage.service';
-
+import {Injectable} from "@angular/core";
+import {Observable} from "rxjs/Observable";
+import {API, BaseService} from "../../shared/index";
+import {Headers, Http, RequestOptions} from "@angular/http";
+import {CompanyDetails} from "./company-details";
+import {AppSettings, LocalStorage} from "../../shared/constants";
+import {LocalStorageService} from "../../shared/localstorage.service";
 
 
 @Injectable()
 export class CompanyDetailsService extends BaseService {
   model = new CompanyDetails();
 
-  constructor(private http:Http ) {
+  constructor(private http: Http) {
 
     super();
   }
 
 
-
-  companyDetails(companyDetails:CompanyDetails):Observable<CompanyDetails> {
-    let headers = new Headers({ 'Content-Type': 'application/json'});
-    let options = new RequestOptions({ headers: headers });
+  companyDetails(companyDetails: CompanyDetails): Observable<CompanyDetails> {
+    let headers = new Headers({'Content-Type': 'application/json'});
+    let options = new RequestOptions({headers: headers});
     let body = JSON.stringify(companyDetails);
-    let url =API.RECRUITER_PROFILE+"/"+LocalStorageService.getLocalValue(LocalStorage.USER_ID);
-    return this.http.put(url, body,options)
+    let url = API.RECRUITER_PROFILE + "/" + LocalStorageService.getLocalValue(LocalStorage.USER_ID);
+    return this.http.put(url, body, options)
       .map(this.extractData)
       .catch(this.handleError);
   }
 
-  makeDocumentUplaod(files:Array<File>, params:Array<string>)  {
+  makeDocumentUplaod(files: Array<File>, params: Array<string>) {
     var url = AppSettings.API_ENDPOINT + API.UPLOAD_DOCUMENTS + '/' + LocalStorageService.getLocalValue(LocalStorage.USER_ID);
-    return new Promise((resolve:any, reject:any) => {
-      var formData:any = new FormData();
+    return new Promise((resolve: any, reject: any) => {
+      var formData: any = new FormData();
       var xhr = new XMLHttpRequest();
       formData.append('file', files[0], files[0].name);
 
@@ -54,14 +52,12 @@ export class CompanyDetailsService extends BaseService {
   activateAccount(): Observable<any> {
 
     var url = API.VERIFY_USER + '/' + LocalStorageService.getLocalValue(LocalStorage.USER_ID);
-    var newData = {'isActivated': true }; //JSON.stringify();
+    var newData = {'isActivated': true}; //JSON.stringify();
     return this.http.put(url, newData)
       .map(this.extractData)
       .catch(this.handleError);
 
   }
-
-
 
 
 }

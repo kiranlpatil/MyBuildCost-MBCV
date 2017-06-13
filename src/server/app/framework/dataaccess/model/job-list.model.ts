@@ -1,5 +1,5 @@
 interface JobListModel {
-    name : string;
-    ids  : string[];
+  name: string;
+  ids: string[];
 }
 export = JobListModel;

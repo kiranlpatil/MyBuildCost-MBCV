@@ -1,7 +1,7 @@
-import {   Route  } from '@angular/router';
-import {  VerifyUserComponent  } from './index';
+import {Route} from "@angular/router";
+import {VerifyUserComponent} from "./index";
 
-export const VerifyUserRoutes:Route[] = [
+export const VerifyUserRoutes: Route[] = [
   {
     path: 'verify_user',
     component: VerifyUserComponent

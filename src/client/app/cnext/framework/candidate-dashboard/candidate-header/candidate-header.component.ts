@@ -1,7 +1,7 @@
-import {Component,Input,ElementRef, HostListener} from "@angular/core";
+import {Component, ElementRef, HostListener, Input} from "@angular/core";
 import {Router} from "@angular/router";
 import {Candidate} from "../../model/candidate";
-import {AppSettings, NavigationRoutes, ImagePath} from "../../../../framework/shared/constants";
+import {AppSettings, ImagePath, NavigationRoutes} from "../../../../framework/shared/constants";
 
 @Component({
   moduleId: module.id,
@@ -10,27 +10,27 @@ import {AppSettings, NavigationRoutes, ImagePath} from "../../../../framework/sh
   styleUrls: ['candidate-header.component.css'],
 })
 
-export class CandidateHeaderComponent  {
-  @Input() candidate:Candidate;
-  public isClassVisible:boolean = false;
-  public isOpenProfile:boolean = false;
-  PROFILE_IMG_PATH:string;
-  MY_LOGO:string;
-  newUser:number;
+export class CandidateHeaderComponent {
+  @Input() candidate: Candidate;
+  public isClassVisible: boolean = false;
+  public isOpenProfile: boolean = false;
+  PROFILE_IMG_PATH: string;
+  MY_LOGO: string;
+  newUser: number;
 
-  @HostListener('document:click', ['$event']) onClick(event:any) {
+  @HostListener('document:click', ['$event']) onClick(event: any) {
     if (!this._eref.nativeElement.contains(event.target)) {
       this.isOpenProfile = false;
 
     }
   }
 
-  constructor(private _router:Router,  private _eref:ElementRef) {
+  constructor(private _router: Router, private _eref: ElementRef) {
     this.MY_LOGO = ImagePath.MY_WHITE_LOGO;
   }
 
-  getImagePath(imagePath:string){
-    if(imagePath != undefined){
+  getImagePath(imagePath: string) {
+    if (imagePath != undefined) {
       return AppSettings.IP + imagePath.substring(4).replace('"', '');
     }
 
@@ -42,7 +42,7 @@ export class CandidateHeaderComponent  {
     this._router.navigate([NavigationRoutes.APP_START]);
   }
 
-  navigateTo(nav:string) {
+  navigateTo(nav: string) {
     if (nav !== undefined) {
       this._router.navigate([nav]);
     }
