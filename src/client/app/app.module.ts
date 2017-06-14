@@ -85,7 +85,7 @@ import {CandidateAwardService} from "./cnext/framework/awards/awards.service";
 import {AboutCandidateService} from "./cnext/framework/more-about-myself/more-about-myself.service";
 import {CandidateAcademyDetailService} from "./cnext/framework/academic-details/academic-details.service";
 import {JobPosterService} from "./cnext/framework/job-poster/job-poster.service";
-import {CandidateSummuryComponent} from "./cnext/framework/one-page-summury/candidate-summury/candidate-summury.component";
+import {CandidateSummaryComponent} from "./cnext/framework/one-page-summury/candidate-summury/candidate-summary.component";
 import {CandidateBasicInformationComponent} from "./cnext/framework/one-page-summury/candidate-summury/candidate-basic-information/candidate-basic-information.component";
 import {VericalListViewComponent} from "./cnext/framework/one-page-summury/shared/vertical-list-view/vertical-list-view.component";
 import {TabularListViewComponent} from "./cnext/framework/one-page-summury/shared/tabular-list-view/tabular-list-view.component";
@@ -206,7 +206,7 @@ import {JobCompareViewComponent} from "./cnext/framework/single-page-compare-vie
     //C-NEXT COMPONENT
 
     ProfilePictureComponent,
-    CandidateSummuryComponent,
+    CandidateSummaryComponent,
     CandidateBasicInformationComponent,
     VericalListViewComponent,
     TabularListViewComponent,

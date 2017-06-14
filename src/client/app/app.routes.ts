@@ -20,7 +20,7 @@ import {CandidateRoutes} from "./framework/registration/candidate/candidate.rout
 import {RecruiterRoutes} from "./framework/registration/recruiter/recruiter.routes";
 import {CompanyDetailsRoutes} from "./framework/registration/company_details/company-details.routes";
 import {RecruiterDashboard} from "./cnext/framework/recruiter-dashboard/recruiter-dashboard.routes";
-import {CandidateSummury} from "./cnext/framework/one-page-summury/candidate-summury/candidate-summury.routes";
+import {CandidateSummary} from "./cnext/framework/one-page-summury/candidate-summury/candidate-summary.routes";
 import {ProfileCreator} from "./cnext/framework/candidate-profile/candidate-profile.routes";
 import {RecruiterSummary} from "./cnext/framework/one-page-summury/recruiter-job-summary/recruiter-job-summary.routes";
 import {CandidateDashboard} from "./cnext/framework/candidate-dashboard/candidate-dashboard.routes";
@@ -54,7 +54,7 @@ export const routes: Routes = [
   ...AboutRoutes,
   ...SettingsRoutes,
   ...ProfileCreator,
-  ...CandidateSummury,
+  ...CandidateSummary,
   ...CompanyDetailsRoutes,
   ...JobDashboardRoutes,
   ...StartRoutes,

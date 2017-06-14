@@ -8,12 +8,12 @@ import {CandidateProfileService} from "../../candidate-profile/candidate-profile
 
 @Component({
   moduleId: module.id,
-  selector: 'cn-candidate-summury',
-  templateUrl: 'candidate-summury.component.html',
-  styleUrls: ['candidate-summury.component.css']
+  selector: 'cn-candidate-summary',
+  templateUrl: 'candidate-summary.component.html',
+  styleUrls: ['candidate-summary.component.css']
 })
 
-export class CandidateSummuryComponent implements OnInit {
+export class CandidateSummaryComponent implements OnInit {
 
   private candidateId: string;
   private candidate: Candidate = new Candidate();

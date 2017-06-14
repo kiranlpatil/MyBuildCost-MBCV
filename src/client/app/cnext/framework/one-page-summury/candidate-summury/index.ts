@@ -1,3 +1,3 @@
-export * from './candidate-summury.component';
-export * from './candidate-summury.routes';
+export * from './candidate-summary.component';
+export * from './candidate-summary.routes';
 

@@ -23,6 +23,7 @@ export class CandidateDashboardComponent {
   private hideSection: boolean = false;
   private locationList: string[] = new Array(0);
   private _locationList: string[] = new Array(0);
+  private type: string;
 
   constructor(private candidateProfileService: CandidateProfileService,
               private candidateDashboardService: CandidateDashboardService,
