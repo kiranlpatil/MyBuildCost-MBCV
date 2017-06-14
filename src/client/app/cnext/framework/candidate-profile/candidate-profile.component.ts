@@ -27,10 +27,10 @@ export class CandidateProfileComponent implements OnInit {
   whichStepsVisible: boolean[] = new Array(7);
   private showCapability: boolean = false;
   private showComplexity: boolean = false;
-  private showProfeciency: boolean = false;
+  private showProficiency: boolean = false;
   private showIndustryExperience: boolean = false;
   private showProfessionalData: boolean = false;
-  private showemploymentHistory: boolean = false;
+  private showEmploymentHistory: boolean = false;
   private showAcademicsDetails: boolean = false;
   private showCertificationDetails: boolean = false;
   private showAwards: boolean = false;
@@ -40,7 +40,7 @@ export class CandidateProfileComponent implements OnInit {
   private candidateForRole: Role[];
   private candidateForCapability: Role[];
   private candidateForComplexity: Role[];
-  private showTooltip: boolean = false;
+ // private showTooltip: boolean = false;
   private setTimeoutId: any;
   private showModalStyle: boolean = false;
   private goto: boolean = false;
@@ -120,7 +120,7 @@ export class CandidateProfileComponent implements OnInit {
     this.whichStepsVisible[2] = true;
   }
 
-  onComplexitytyComplete(roles: Role[]) {
+  onComplexityComplete(roles: Role[]) {
     this.candidate.industry.roles = roles;
     var date = new Date();
     date.setDate(date.getDate() + 90);
@@ -129,7 +129,7 @@ export class CandidateProfileComponent implements OnInit {
     this.candidateForComplexity = this.candidate.industry.roles;
     //this.candidateForCapability = this.candidate.industry.roles;
     this.saveCandidateDetails();
-    this.showProfeciency = true;
+    this.showProficiency = true;
     this.getProficiency();
   }
 
@@ -155,7 +155,7 @@ export class CandidateProfileComponent implements OnInit {
   }
 
   onProfessionalDataComplete() {
-    this.showemploymentHistory = true;
+    this.showEmploymentHistory = true;
     this.showAcademicsDetails = true;
     this.showCertificationDetails = true;
     this.showAwards = true;
@@ -328,7 +328,7 @@ export class CandidateProfileComponent implements OnInit {
 
     if (this.candidate.proficiencies !== undefined && this.candidate.proficiencies.length > 0) {
       this.highlightedSection.isProficiencyFilled = true;
-      this.showProfeciency = true;
+      this.showProficiency = true;
       this.whichStepsVisible[4] = true;
     }
 
@@ -348,7 +348,7 @@ export class CandidateProfileComponent implements OnInit {
       this.showAcademicsDetails = true;
       this.showAwards = true;
       this.showCertificationDetails = true;
-      this.showemploymentHistory = true;
+      this.showEmploymentHistory = true;
     }
     if (this.candidate.aboutMyself !== undefined && this.candidate.aboutMyself !== '') {
       this.whichStepsVisible[6] = true;
@@ -357,7 +357,7 @@ export class CandidateProfileComponent implements OnInit {
      Do not remove this code it will in use after capability bug
      if (this.candidate.proficiencies !== undefined && this.candidate.proficiencies.length > 0) {
      this.highlightedSection.isProficiencyFilled = true;
-     this.showProfeciency = true;
+     this.showProficiency = true;
      this.whichStepsVisible[4] = true;
      if (this.candidate.interestedIndustries !== undefined && this.candidate.interestedIndustries.length > 0) {
      this.showIndustryExperience = true;
@@ -374,7 +374,7 @@ export class CandidateProfileComponent implements OnInit {
      this.highlightedSection.name = 'IndustryExposure';
      }
      } else {
-     this.showProfeciency = true;
+     this.showProficiency = true;
      this.whichStepsVisible[4] = true;
      this.highlightedSection.name = 'Proficiencies';
      }*/
@@ -384,7 +384,7 @@ export class CandidateProfileComponent implements OnInit {
     return Math.floor(( Date.UTC(storedDate.getFullYear(), storedDate.getMonth(), storedDate.getDate()) - Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate())) / (1000 * 60 * 60 * 24));
   }
 
-  showorhide(type: string, event: any) {
+  showOrHide(type: string, event: any) {
     if (type == "show") {
       if (event.target.checked) {
         this.candidate.isVisible = true;

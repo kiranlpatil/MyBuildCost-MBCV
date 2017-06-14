@@ -26,13 +26,13 @@ export class CandidateComponent implements OnInit {
   private error_msg: string;
   private isShowErrorMessage: boolean = true;
   private BODY_BACKGROUND: string;
-  private passingyear: string;
+  private passingYear: string;
   private validBirthYearList = new Array();
   private year: any;
   private currentDate: any;
 
 
-  constructor(private commonService: CommonService, private _router: Router, private dateservice: DateService,
+  constructor(private commonService: CommonService, private _router: Router, private dateService: DateService,
               private candidateService: CandidateService, private messageService: MessageService, private formBuilder: FormBuilder) {
 
     this.userForm = this.formBuilder.group({
@@ -54,13 +54,13 @@ export class CandidateComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.validBirthYearList = this.dateservice.createBirthYearList(this.year);
+    this.validBirthYearList = this.dateService.createBirthYearList(this.year);
   }
 
 
-  selectYearModel(newval: any) {
-    this.passingyear = newval;
-    this.model.birth_year = newval;
+  selectYearModel(year: any) {
+    this.passingYear = year;
+    this.model.birth_year = year;
   }
 
   getAddress(address: MyGoogleAddress) {

@@ -3,17 +3,17 @@ import {Subject} from "rxjs/Subject";
 import {CandidateQCard} from "./model/candidateQcard";
 
 @Injectable()
-export class RecruitercandidatesListsService {
+export class RecruiterCandidatesListsService {
 
   // Observable string sources
-  _showRecruitercandidatesListSource = new Subject<CandidateQCard[]>();
+  showRecruiterCandidatesListSource = new Subject<CandidateQCard[]>();
 
   // Observable string streams
-  showTest$ = this._showRecruitercandidatesListSource.asObservable();
+  showTest$ = this.showRecruiterCandidatesListSource.asObservable();
 
   // Service message commands
   change(value: CandidateQCard[]) {
-    this._showRecruitercandidatesListSource.next(value);
+    this.showRecruiterCandidatesListSource.next(value);
   }
 
 

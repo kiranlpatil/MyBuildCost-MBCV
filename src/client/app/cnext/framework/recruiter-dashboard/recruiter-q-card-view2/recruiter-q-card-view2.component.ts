@@ -46,7 +46,7 @@ export class RecruiterQCardview2Component {
    private profileCreatorService: CandidateProfileService,
    private recruiterDashboardService: RecruiterDashboardService,
    private qCardFilterService: QCardFilterService,
-   private qCardViewService: RecruiteQCardView2Service, private candidateLists: RecruitercandidatesListsService) {
+   private qCardViewService: RecruiteQCardView2Service, private candidateLists: RecruiterCandidatesListsService) {
 
    this.qCardFilterService.candidateFilterValue$.subscribe(
    (data: QCardFilter) => {

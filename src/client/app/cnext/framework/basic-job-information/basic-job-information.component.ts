@@ -33,7 +33,7 @@ export class BasicJobInformationComponent {
     "</li>" +
     "</ul>";
 
-  constructor(private professionaldataService: ProfessionalDataService,
+  constructor(private professionalDataService: ProfessionalDataService,
               private formBuilder: FormBuilder) {
 
     this.jobPostForm = this.formBuilder.group({
@@ -49,22 +49,22 @@ export class BasicJobInformationComponent {
   }
 
   ngOnInit() {
-    this.professionaldataService.getEducationList()
+    this.professionalDataService.getEducationList()
       .subscribe(
         data => {
           this.educationList = data.educated;
         });
-    this.professionaldataService.getExperienceList()
+    this.professionalDataService.getExperienceList()
       .subscribe(
         data => {
           this.experienceList = data.experience;
         });
-    this.professionaldataService.getCurrentSalaryList()
+    this.professionalDataService.getCurrentSalaryList()
       .subscribe(
         data => {
           this.salaryList = data.salary;
         });
-    this.professionaldataService.getNoticePeriodList()
+    this.professionalDataService.getNoticePeriodList()
       .subscribe(
         data => {
           this.noticePeriodList = data.noticeperiod;

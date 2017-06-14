@@ -11,7 +11,7 @@ import {CandidateDashboardService} from "../candidate-dashboard.service";
   templateUrl: 'candidate-q-card.component.html',
   styleUrls: ['candidate-q-card.component.css'],
 })
-export class CandiadteQCardComponent {
+export class CandidateQCardComponent {
   @Input() job: JobQcard;
   @Input() type: string;
   @Output() onAction = new EventEmitter();

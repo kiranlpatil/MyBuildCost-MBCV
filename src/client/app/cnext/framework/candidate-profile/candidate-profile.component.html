@@ -106,12 +106,12 @@
         <cn-complexities [roles]="rolesForComplexity" [candidateRoles]="candidateForComplexity"
                          [highlightedSection]="highlightedSection"
                          [isComplexityPresent]="isComplexityPresent"
-                         (onComplete)="onComplexitytyComplete($event)" [hidden]="!showComplexity"></cn-complexities>
+                         (onComplete)="onComplexityComplete($event)" [hidden]="!showComplexity"></cn-complexities>
 
         <cn-proficiencies [proficiencies]="proficiencies" [choosedproficiencies]="candidate.proficiencies"
                           [highlightedSection]="highlightedSection"
                           (onSelect)="onProficiencySelect($event)" (onComplete)="onProficiencyComplete($event)"
-                          [hidden]="!showProfeciency"></cn-proficiencies>
+                          [hidden]="!showProficiency"></cn-proficiencies>
 
         <cn-industry-experience [candidateExperiencedIndustry]="candidate.interestedIndustries"
                                 [choosedIndeustry]="candidate.industry.name"
@@ -132,11 +132,11 @@
 
         <cn-employment-history [candidate]="candidate" [highlightedSection]="highlightedSection"
                                (onComplete)="onEmploymentHistoryComplete($event)"
-                               [hidden]="!showemploymentHistory"></cn-employment-history>
+                               [hidden]="!showEmploymentHistory"></cn-employment-history>
 
         <cn-academic-details [candidate]="candidate" [highlightedSection]="highlightedSection"
                              (onComplete)="onAcademicDetailsComplete($event)"
-                             [hidden]="!showemploymentHistory"></cn-academic-details>
+                             [hidden]="!showEmploymentHistory"></cn-academic-details>
 
         <cn-certification-accreditation [candidate]="candidate" [highlightedSection]="highlightedSection"
                                         (onComplete)="onCertificationsComplete($event)"
@@ -154,12 +154,12 @@
               <div class="switch">
                 <label class="radio-inline">
                   <input type="radio" name="profile-visibility"
-                         (change)="showorhide('show',$event)" value=true [checked]="candidate.isVisible == true">
+                         (change)="showOrHide('show',$event)" value=true [checked]="candidate.isVisible == true">
                   <span>Show</span>
                 </label>
                 <label class="radio-inline">
                   <input type="radio" name="profile-visibility"
-                         (change)="showorhide('hide',$event)" value=false [checked]="candidate.isVisible == false">
+                         (change)="showOrHide('hide',$event)" value=false [checked]="candidate.isVisible == false">
                   <span>Hide</span>
                 </label>
               </div>

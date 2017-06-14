@@ -81,9 +81,9 @@ export class RecruiterComponent implements OnInit {
 
   }
 
-  selectCompanySizeModel(newval: string) {
+  selectCompanySizeModel(size: string) {
 
-    this.storedcompanySize = newval;
+    this.storedcompanySize = size;
     this.recruiterForm.value.company_size = this.storedcompanySize;
     this.model.company_size = this.recruiterForm.value.company_size;
   }

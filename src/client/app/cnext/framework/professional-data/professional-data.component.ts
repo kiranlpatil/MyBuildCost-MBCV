@@ -41,7 +41,7 @@ export class ProfessionalDataComponent extends BaseService implements OnInit {
     "</ul>";
 
 
-  constructor(private professionaldataService: ProfessionalDataService,
+  constructor(private professionalDataService: ProfessionalDataService,
               private messageService: MessageService,
               private formBuilder: FormBuilder,
               private profileCreatorService: CandidateProfileService) {
@@ -72,7 +72,7 @@ export class ProfessionalDataComponent extends BaseService implements OnInit {
 
   ngOnInit() {
 
-    this.professionaldataService.getRealocationList()
+    this.professionalDataService.getRealocationList()
       .subscribe(
         data => {
           this.onRealocationListSuccess(data);
@@ -81,7 +81,7 @@ export class ProfessionalDataComponent extends BaseService implements OnInit {
           this.onError(error);
         });
 
-    this.professionaldataService.getEducationList()
+    this.professionalDataService.getEducationList()
       .subscribe(
         data => {
           this.onEducationListSuccess(data);
@@ -91,7 +91,7 @@ export class ProfessionalDataComponent extends BaseService implements OnInit {
         });
 
 
-    this.professionaldataService.getExperienceList()
+    this.professionalDataService.getExperienceList()
       .subscribe(
         data => {
           this.onExperienceListSuccess(data);
@@ -100,7 +100,7 @@ export class ProfessionalDataComponent extends BaseService implements OnInit {
           this.onError(error);
         });
 
-    this.professionaldataService.getCurrentSalaryList()
+    this.professionalDataService.getCurrentSalaryList()
       .subscribe(
         data => {
           this.onCurrentSalaryListSuccess(data);
@@ -110,7 +110,7 @@ export class ProfessionalDataComponent extends BaseService implements OnInit {
         });
 
 
-    this.professionaldataService.getNoticePeriodList()
+    this.professionalDataService.getNoticePeriodList()
       .subscribe(
         data => {
           this.onGetNoticePeriodListSuccess(data);

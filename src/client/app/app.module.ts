@@ -119,11 +119,11 @@ import {RecruiteQCardView2Service} from "./cnext/framework/recruiter-dashboard/r
 import {RecruiterQCardview2Component} from "./cnext/framework/recruiter-dashboard/recruiter-q-card-view2/recruiter-q-card-view2.component";
 
 
-import {RecruitercandidatesListsService} from "./cnext/framework/candidate-lists.service";
+import {RecruiterCandidatesListsService} from "./cnext/framework/candidate-lists.service";
 import {CandidateDashboardComponent} from "./cnext/framework/candidate-dashboard/candidate-dashboard.component";
 import {CandidateDashboardService} from "./cnext/framework/candidate-dashboard/candidate-dashboard.service";
 import {QcardListComponent} from "./cnext/framework/candidate-dashboard/candidate-q-card-list/q-card-list.component";
-import {CandiadteQCardComponent} from "./cnext/framework/candidate-dashboard/candidate-q-card/candidate-q-card.component";
+import {CandidateQCardComponent} from "./cnext/framework/candidate-dashboard/candidate-q-card/candidate-q-card.component";
 import {CandidateHeaderComponent} from "./cnext/framework/candidate-dashboard/candidate-header/candidate-header.component";
 import {FilterComponent} from "./cnext/framework/filters/filter/filter.component";
 import {JobViewComponent} from "./cnext/framework/one-page-summury/recruiter-job-summary/job-view/job-view.component";
@@ -250,7 +250,7 @@ import {JobCompareViewComponent} from "./cnext/framework/single-page-compare-vie
     JobViewComponent,
     JobCompareViewComponent,
     QcardListComponent,
-    CandiadteQCardComponent,
+    CandidateQCardComponent,
     RecruiterHeaderComponent,
     RoleTypetListComponent,
     IndustryExperienceListComponent,
@@ -330,9 +330,9 @@ import {JobCompareViewComponent} from "./cnext/framework/single-page-compare-vie
     QCardViewService,
     FilterService,
     RecruiteQCardView2Service,
-    RecruitercandidatesListsService,
+    RecruiterCandidatesListsService,
     CandidateInCartService,
-    RecruitercandidatesListsService,
+    RecruiterCandidatesListsService,
     QCardFilterService,
     JobDashboardService,
     ReferenceService
