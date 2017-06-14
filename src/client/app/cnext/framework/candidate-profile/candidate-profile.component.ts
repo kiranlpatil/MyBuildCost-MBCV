@@ -162,6 +162,21 @@ export class CandidateProfileComponent implements OnInit {
     this.showAboutMySelf = true;
   }
 
+  onEmploymentHistoryComplete() {
+
+  }
+
+  onAcademicDetailsComplete() {
+
+  }
+
+  onCertificationsComplete() {
+
+  }
+
+  onAwardsComplete() {
+
+  }
   onMoreAboutMySelfComplete(data: string) {
     if (data != '') {
       this.whichStepsVisible[6] = true;

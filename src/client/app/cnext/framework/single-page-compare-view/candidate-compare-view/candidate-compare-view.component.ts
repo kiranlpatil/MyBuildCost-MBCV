@@ -2002,11 +2002,7 @@ export class CandidateCompareViewComponent implements OnInit {
      ]
      }*/
     /*app.get("/api/candidate/:candidateId/matchresult/:jobId",candidateController.metchResult);
-
-
      http://localhost:8080/api/candidate/59352c6edf2fcd693c7c82f4/matchresult/59353128df2fcd693c7c8391*/
-
-
   }
 
   ngOnChanges(changes: any) {

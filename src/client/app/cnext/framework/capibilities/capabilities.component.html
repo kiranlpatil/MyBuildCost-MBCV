@@ -41,11 +41,18 @@
                 [hidden]="highlightedSection.isDisable"></button>
       </h4>
 
-      <span class="option" *ngFor="let role of candidateRoles;let i = index">
-        <span *ngFor="let item of role.capabilities">
-          {{item.name}}&nbsp;<span *ngIf="role.capabilities.length>1 && i!=role.capabilities.length -1">,</span>&nbsp;
+      <span class="option" *ngFor="let item of primaryNames;let i = index">
+        <span>
+          {{item}}&nbsp;<span *ngIf="primaryNames.length>1 && i!=primaryNames.length -1">,</span>&nbsp;
         </span>
       </span>
+      <div *ngIf="secondaryNames != undefined && secondaryNames.length>0">
+      <span class="option" *ngFor="let item of secondaryNames;let j = index">
+        <span>
+          {{item}}&nbsp;<span *ngIf="secondaryNames.length>1 && j != secondaryNames.length -1">,</span>&nbsp;
+        </span>
+      </span>
+      </div>
     </div>
     <!-- <div [class.modal-bg]="highlightedSection.name!='Capabilities'"></div>-->
   </div>
