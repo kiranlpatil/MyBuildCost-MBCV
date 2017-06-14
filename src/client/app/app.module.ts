@@ -121,7 +121,7 @@ import {RecruiterQCardview2Component} from "./cnext/framework/recruiter-dashboar
 
 import {RecruitercandidatesListsService} from "./cnext/framework/candidate-lists.service";
 import {CandidateDashboardComponent} from "./cnext/framework/candidate-dashboard/candidate-dashboard.component";
-import {CandiadteDashboardService} from "./cnext/framework/candidate-dashboard/candidate-dashboard.service";
+import {CandidateDashboardService} from "./cnext/framework/candidate-dashboard/candidate-dashboard.service";
 import {QcardListComponent} from "./cnext/framework/candidate-dashboard/candidate-q-card-list/q-card-list.component";
 import {CandiadteQCardComponent} from "./cnext/framework/candidate-dashboard/candidate-q-card/candidate-q-card.component";
 import {CandidateHeaderComponent} from "./cnext/framework/candidate-dashboard/candidate-header/candidate-header.component";
@@ -316,7 +316,7 @@ import {JobCompareViewComponent} from "./cnext/framework/single-page-compare-vie
     CompanyDetailsService,
     EmploymentHistoryService,
     DateService,
-    CandiadteDashboardService,
+    CandidateDashboardService,
     RoleTypeService,
     IndustryExperienceService,
     ShowQcardviewService,

@@ -2,7 +2,7 @@ import {Component, EventEmitter, Input, Output} from "@angular/core";
 import {JobQcard} from "../../model/JobQcard";
 import {LocalStorage} from "../../../../framework/shared/constants";
 import {LocalStorageService} from "../../../../framework/shared/localstorage.service";
-import {CandiadteDashboardService} from "../candidate-dashboard.service";
+import {CandidateDashboardService} from "../candidate-dashboard.service";
 
 
 @Component({
@@ -20,7 +20,7 @@ export class CandiadteQCardComponent {
 
   private jobId: string;
 
-  constructor(private candidateDashboardService: CandiadteDashboardService) {
+  constructor(private candidateDashboardService: CandidateDashboardService) {
   }
 
   ngOnChanges(changes: any) {

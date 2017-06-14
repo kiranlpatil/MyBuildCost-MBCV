@@ -15,11 +15,11 @@
                   class="count"><span>{{jobList.length}}</span></span> Matched</a>
               </li>
               <li>
-                <a (click)="showappliedJobs()" data-toggle="tab" href="#applied"><span
+                <a (click)="showAppliedJobs()" data-toggle="tab" href="#applied"><span
                   class="applied-count count"><span>{{candidate.summary.numberOfJobApplied}}</span></span> Applied</a>
               </li>
               <li>
-                <a (click)="showrejectedJobs()" data-toggle="tab" href="#rejected"><span
+                <a (click)="showRejectedJobs()" data-toggle="tab" href="#rejected"><span
                   class="rejected-count count"><span>{{candidate.summary.numberJobsBlocked}}</span></span> Not
                   Interested</a>
               </li>
@@ -29,12 +29,12 @@
                 <cn-q-card-list [joblistCount]="jobList.length" [listOfJobs]="jobList" [type]="'none'"
                                 (onAction)="onActionPerformOnExactList($event)"></cn-q-card-list>
               </div>
-              <div id="applied" class="tab-pane fade"><!--[hidden]="!hidesection"-->
+              <div id="applied" class="tab-pane fade"><!--[hidden]="!hideSection"-->
                 <cn-candidate-job-list [type]="'apply'" [listOfJobs]="appliedJobs"
                                        (onAction)="onActionOnApplyJob($event)"
                 ></cn-candidate-job-list><!--[hidden]="type !=='apply'"-->
               </div>
-              <div id="rejected" class="tab-pane fade"><!-- [hidden]="!hidesection" -->
+              <div id="rejected" class="tab-pane fade"><!-- [hidden]="!hideSection" -->
                 <cn-candidate-job-list [type]="'block'" [listOfJobs]="blockedJobs"
                                        (onAction)="onActionOnBlockJob($event)"
                 ></cn-candidate-job-list><!-- [hidden]="type !=='block'" -->

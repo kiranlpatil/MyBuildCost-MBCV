@@ -21,7 +21,7 @@ export class CandidateCompareViewComponent implements OnInit {
   private recruiter: any;
   private data: any;
 
-  constructor(private _router: Router, private candiadteCompareService: CandidateCompareService, private recruiterDashboardService: RecruiterDashboardService) {
+  constructor(private _router: Router, private candidateCompareService: CandidateCompareService, private recruiterDashboardService: RecruiterDashboardService) {
   }
 
   ngOnInit() {
@@ -2026,7 +2026,7 @@ export class CandidateCompareViewComponent implements OnInit {
   }
 
   getCompareDetail(candidateId: string, recruiterId: string) {
-    this.candiadteCompareService.getCompareDetail(candidateId, recruiterId)
+    this.candidateCompareService.getCompareDetail(candidateId, recruiterId)
       .subscribe(
         data => this.OnCompareSuccess(data),
         error => console.log(error));

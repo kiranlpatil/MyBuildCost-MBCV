@@ -1,7 +1,7 @@
 import {Component} from "@angular/core";
 import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
 import {Candidate, Summary} from "../model/candidate";
-import {CandiadteDashboardService} from "./candidate-dashboard.service";
+import {CandidateDashboardService} from "./candidate-dashboard.service";
 import {JobQcard} from "../model/JobQcard";
 import {LocalStorage, ValueConstant} from "../../../framework/shared/constants";
 import {LocalStorageService} from "../../../framework/shared/localstorage.service";
@@ -20,13 +20,12 @@ export class CandidateDashboardComponent {
   private jobList: JobQcard[] = new Array();
   private appliedJobs: JobQcard[] = new Array();
   private blockedJobs: JobQcard[] = new Array();
-  private hidesection: boolean = false;
+  private hideSection: boolean = false;
   private locationList: string[] = new Array(0);
   private _locationList: string[] = new Array(0);
-  private type: string;
 
   constructor(private candidateProfileService: CandidateProfileService,
-              private candidateDashboardService: CandiadteDashboardService,
+              private candidateDashboardService: CandidateDashboardService,
               private candidateJobListService: CandidateJobListService) {
     this.candidateProfileService.getCandidateDetails()
       .subscribe(
@@ -36,8 +35,8 @@ export class CandidateDashboardComponent {
 
 
     this.showMatchedJobs();
-    this.showappliedJobs();
-    this.showrejectedJobs();
+    this.showAppliedJobs();
+    this.showRejectedJobs();
   }
 
   extractList(jobList: JobQcard[]) {
@@ -93,12 +92,12 @@ export class CandidateDashboardComponent {
   onActionOnBlockJob(action: string) {
     if (action === 'delete') {
       this.candidate.summary.numberJobsBlocked--;
-      this.showrejectedJobs();
+      this.showRejectedJobs();
       this.showMatchedJobs();
     }
   }
 
-  showappliedJobs() {
+  showAppliedJobs() {
     this.candidateJobListService.getAppliedJobList()
       .subscribe(
         data => {
@@ -108,7 +107,7 @@ export class CandidateDashboardComponent {
 
   }
 
-  showrejectedJobs() {
+  showRejectedJobs() {
     this.candidateJobListService.getBlockedJobList()
       .subscribe(
         data => {

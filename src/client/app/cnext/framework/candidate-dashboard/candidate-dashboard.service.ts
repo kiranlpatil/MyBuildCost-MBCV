@@ -6,7 +6,7 @@ import {BaseService} from "../../../framework/shared/httpservices/base.service";
 import {LocalStorageService} from "../../../framework/shared/localstorage.service";
 
 @Injectable()
-export class CandiadteDashboardService extends BaseService {//todo THIS CODE SHOULD FIT IN 30 LINE:SHRIKANT
+export class CandidateDashboardService extends BaseService {//todo THIS CODE SHOULD FIT IN 30 LINE:SHRIKANT
 
   constructor(private http: Http) {
     super();
