@@ -1,8 +1,9 @@
 import {Component, EventEmitter, Input, Output} from "@angular/core";
 import {Role} from "../model/role";
 import {Capability} from "../model/capability";
-import {ValueConstant} from "../../../framework/shared/constants";
+import {LocalStorage, ValueConstant} from "../../../framework/shared/constants";
 import {Section} from "../model/candidate";
+import {LocalStorageService} from "../../../framework/shared/localstorage.service";
 
 @Component({
   moduleId: module.id,
@@ -22,13 +23,30 @@ export class CapabilitiesComponent {
   private secondaryNames: string[] = new Array(0);
   private primaryCapabilitiesNumber: number = 0;
   private disableButton: boolean = true;
-  tooltipMessage: string =
+  private isCandidate: boolean = false;
+  tooltipCandidateMessage: string =
 
     "<ul>" +
     "<li>" +
-    "<h5>Capablities </h5><p class='info'>Select those capabilities which describe what you are best at or where you would like to position your career. These capablities are going to help you find best job you desire.</p>" +
+    "<h5>Capablities </h5><p class='info'>Select those capabilities which describe what you are best at or where you would like to position your career. " +
+    "These capablities are going to help you find best job you desire.</p>" +
     "</li>" +
     "</ul>";
+
+  tooltipRecruiterMessage: string =
+
+      "<ul>" +
+      "<li>" +
+      "<h5>Capablities </h5><p class='info'>Select those capabilities that are required in the candidate." +
+      "These capablities are going to help you find best candidate you desire.</p>" +
+      "</li>" +
+      "</ul>";
+
+  ngOnInit() {
+    if (LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE) === 'true') {
+      this.isCandidate = true;
+    }
+  }
 
   ngOnChanges(changes: any) {
     if (this.candidateRoles) {

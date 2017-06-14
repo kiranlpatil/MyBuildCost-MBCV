@@ -29,7 +29,7 @@ export class BasicJobInformationComponent {
   private storedLoaction: JobLocation = new JobLocation();
   tooltipMessage: string = "<ul>" +
     "<li><h5>Job description</h5>" +
-    "<p class='info'>Enter all key words that describe your area of expertise or specialization.</p>" +
+    "<p class='info'>Enter all key words that describe the required area of expertise or specialization.</p>" +
     "</li>" +
     "</ul>";
 

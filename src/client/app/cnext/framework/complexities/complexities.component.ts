@@ -36,9 +36,17 @@ export class ComplexitiesComponent {
   private showMore:boolean = false;
   private count:number = 0;
   private elements:any;
-  tooltipMessage:string = "<ul><li>" +
-    "<h5>Complexities</h5><p class='info'> This section provides a list of complexity scenarios for your selected capabilities.For each scenario, select the most appropriate level of complexity that you are capable of handling.</p></li><li><p>If you have not handled a particular complexity, choose not applicable.</p>" +
+  tooltipCandidateMessage:string = "<ul><li>" +
+    "<h5>Complexities</h5><p class='info'> This section provides a list of complexity scenarios for your selected capabilities." +
+      "For each scenario, select the most appropriate level of complexity that you are capable of handling.</p></li>" +
+      "<li><p>If you have not handled a particular complexity, choose not applicable.</p>" +
     "</li></ul>";
+
+  tooltipRecruiterMessage:string = "<ul><li>" +
+      "<h5>Complexities</h5><p class='info'> This section provides a list of complexity scenarios for selected capabilities." +
+      "For each scenario, select the most appropriate level of complexity that candidates are required to be capable of handling.</p></li>" +
+      "<li><p>If you have not handled a particular complexity, choose not applicable.</p>" +
+      "</li></ul>";
 
 
   @ViewChild("save")

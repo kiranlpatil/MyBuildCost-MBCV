@@ -1,5 +1,6 @@
 <div class="section-container clearfix" *ngIf="highlightedSection.name=='Complexities'">
-  <cn-tool-tip [message]="tooltipMessage"></cn-tool-tip>
+  <cn-tool-tip [message]="tooltipCandidateMessage" *ngIf="isCandidate"></cn-tool-tip>
+  <cn-tool-tip [message]="tooltipRecruiterMessage" *ngIf="!isCandidate"></cn-tool-tip>
   <div class="main-content clearfix modal-content">
     <div class="complexities">
       <h4 class="heading">Choose Complexities for the above Capabilities <span class="pull-right">{{selectedComplexityNames.length}} / {{scenarioNames.length}} selected </span>

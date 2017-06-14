@@ -18,11 +18,15 @@ export class WorkAreaComponent {
   @Output() onComplete = new EventEmitter();
   private isCandidate: boolean = false;
   private disableButton: boolean = true;
-  tooltipMessage: string =
+  tooltipCandidateMessage: string =
     "<ul>" +
     "<li><h5> Area Of Work </h5><p>Select those areas of work that describe what you are best at or where you would like to position your career.</p></li>" +
-    "</ul>"
+    "</ul>";
 
+  tooltipRecruiterMessage: string =
+      "<ul>" +
+      "<li><h5> Area Of Work </h5><p>Select those areas of work that describe your requirement the best.</p></li>" +
+      "</ul>";
 
   ngOnInit() {
     if (LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE) === 'true') {

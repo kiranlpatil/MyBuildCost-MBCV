@@ -12,7 +12,7 @@ import {LocalStorage, ValueConstant} from "../../../framework/shared/constants";
   styleUrls: ['industry-experience.component.css']
 })
 
-export class IndustryExperienceListComponent {
+export class IndustryExperienceListComponent{
   private showButton: boolean = true;
   private industries: Industry[] = new Array(0);
   private selectedIndustries: string[] = new Array(0);
@@ -22,11 +22,27 @@ export class IndustryExperienceListComponent {
   @Output() onComplete = new EventEmitter();
   @Output() onNextComplete = new EventEmitter();
   private disableButton: boolean = true;
-  tooltipMessage: string = "<ul><li><h5>Industry Exposure</h5><p class='info'>An individual may be exposed to multiple industries during the professional life. At times, organisations need individuals who have cross industry expertise.</p></li><li><p>Select such industries where you can claim a reasonable exposure.</p></li></ul>";
+  private isCandidate:boolean = false;
+
+  tooltipCandidateMessage: string = "<ul><li><h5>Industry Exposure</h5>" +
+      "<p class='info'>An individual may be exposed to multiple industries during the professional life. " +
+      "At times, organisations need individuals who have cross industry expertise.</p></li>" +
+      "<li><p>Select such industries where you can claim a reasonable exposure.</p></li></ul>";
+
+  tooltipRecruiterMessage: string = "<ul><li><h5>Industry Exposure</h5>" +
+      "<p class='info'>Candidates may be exposed to multiple industries during the professional life. " +
+      "At times, organisations need candidates who have cross industry expertise.</p></li>" +
+      "<li><p>Select such industries where you can claim a reasonable exposure.</p></li></ul>";
 
   constructor(private candidateProfileService: CandidateProfileService) {
     this.getIndustries();
     this.candidateExperiencedIndustry = new Array(0);
+  }
+
+  ngOnInit() {
+    if (LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE) === 'true') {
+      this.isCandidate = true;
+    }
   }
 
   ngOnChanges(changes: any) {

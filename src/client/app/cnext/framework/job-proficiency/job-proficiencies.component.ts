@@ -22,7 +22,7 @@ export class JobProficienciesComponent implements OnInit {
   private showAdditional: boolean = false;
   private maxNumberOfMandatory: number;
   private maxNumberOfAdditional: number;
-  tooltipMessage: string = "<ul><li><h5>Proficiencies</h5><p class='info'>Enter all key words that describe your area of expertise or specialization. These proficiencies will be used for second level of matching post capability.</p></li></ul>";
+  tooltipMessage: string = "<ul><li><h5>Proficiencies</h5><p class='info'>Enter all key words that describe the required area of expertise or specialization. These proficiencies will be used for second level of matching post capability.</p></li></ul>";
 
   ngOnInit() {
     this.maxNumberOfMandatory = ValueConstant.MAX_MANDATORY_PROFECIENCES;

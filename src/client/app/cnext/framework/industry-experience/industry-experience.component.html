@@ -1,5 +1,6 @@
 <div class="section-container profeiciency-domain" *ngIf="highlightedSection.name=='IndustryExposure'">
-  <cn-tool-tip [message]="tooltipMessage"></cn-tool-tip>
+  <cn-tool-tip [message]="tooltipCandidateMessage" *ngIf="isCandidate"></cn-tool-tip>
+  <cn-tool-tip [message]="tooltipRecruiterMessage" *ngIf="!isCandidate"></cn-tool-tip>
   <div class="main-content modal-content clearfix">
     <h4 class="heading">Additional Industry Exposure <span class="sub-heading">(In additional to your core industry, select Industries In which you have work exposure / experience)</span>
     </h4>
