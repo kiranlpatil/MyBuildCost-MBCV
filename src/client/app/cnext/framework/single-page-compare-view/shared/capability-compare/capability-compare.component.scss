@@ -3,7 +3,7 @@ $heading-color: #dbeef6;
 $border-color: #e8e8e8;
 $text-color: #666;
 $light-green: #96e328;
-$orange: #FFB316;
+$orange: #ffb316;
 $gray: #ccc;
 $green: #68ab26;
 $blue: #3694d1;
@@ -34,11 +34,52 @@ $blue: #3694d1;
 }
 
 .capability-complexity {
+  .legends {
+    float: right;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    li {
+      float: left;
+      font-size: 11px;
+    }
+
+    span {
+      margin: 0 5px 0 15px;
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .legend-above {
+      background: $green;
+    }
+
+    .legend-exact {
+      background: $light-green;
+    }
+
+    .legend-below {
+      background: $orange;
+    }
+
+    .legend-missing {
+      background: $gray;
+    }
+
+    .legend-extra {
+      background: $blue;
+    }
+  }
+
   .heading {
     border-bottom: 1px solid $border-color;
     border-radius: 0;
     margin: 0;
     width: 100%;
+    clear: both;
 
     h4 {
       font-family: gothamrnd-book;

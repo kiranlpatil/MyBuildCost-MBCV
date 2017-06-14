@@ -2,7 +2,7 @@ $text-color: #576b7c;
 $name: #666;
 $blue-color: #3694d1;
 $light-green: #96e328;
-$orange: #FFB316;
+$orange: #ffb316;
 $gray: #ccc;
 $green: #68ab26;
 $blue: #3694d1;
@@ -10,7 +10,9 @@ $blue: #3694d1;
 .basic-description {
   text-align: left;
 
-  p, span, label {
+  p,
+  span,
+  label {
     color: $text-color;
     font-size: 12px;
     word-break: break-all;
@@ -56,7 +58,7 @@ $blue: #3694d1;
       color: $blue-color;
       font-weight: bold;
       font-family: 'gothamrnd-book';
-      margin: 5px 0 0 0;
+      margin: 5px 0 0;
       width: 100%;
     }
   }
