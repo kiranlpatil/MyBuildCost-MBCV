@@ -14,13 +14,11 @@ import {ValueConstant} from "../../../../framework/shared/constants";
 export class CerificatesComponent {
   @Input('group')
   public certificateForm: FormGroup;
-  private tempfield: string[];
   private year: any;
   private currentDate: any;
   private yearList = new Array();
 
   constructor() {
-    this.tempfield = new Array(1);
     this.currentDate = new Date();
     this.year = this.currentDate.getUTCFullYear();
     this.year = this.year - ValueConstant.MAX_YEAR_LIST;

@@ -14,14 +14,12 @@ import {ValueConstant} from "../../../../framework/shared/constants";
 export class EmployeeHistoryComponent {
   @Input('group')
   public employeeForm: FormGroup;
-  private tempfield: string[];
   private year: any;
   private currentDate: any;
   private yearList = new Array();
   public monthList: string[] = new Array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December');
 
   constructor() {
-    this.tempfield = new Array(1);
     this.currentDate = new Date();
     this.year = this.currentDate.getUTCFullYear();
     this.year = this.year - ValueConstant.MAX_YEAR_LIST;
