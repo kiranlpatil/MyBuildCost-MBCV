@@ -29,7 +29,7 @@ $active-tab-border: #b2bcc3;
     //background: #e8e8e8;
     color: #666;
     font-size: 16px;
-    padding: 15px 15px 10px 15px;
+    padding: 15px 15px 25px;
     //border: 1px solid #ccc;
     font-size: 12px;
     font-family: 'gothamrnd-book';
@@ -46,7 +46,7 @@ $active-tab-border: #b2bcc3;
     padding: 0 15px 15px;
 
     h5 {
-      margin: 20px 0 5px 0;
+      margin: 20px 0 5px;
       font-weight: 900;
       color: #999;
       position: relative;
@@ -71,7 +71,7 @@ $active-tab-border: #b2bcc3;
       margin-bottom: 10px;
     }
 
-    h5:after {
+    h5::after {
       height: 8px;
       width: 8px;
       position: absolute;
@@ -80,11 +80,11 @@ $active-tab-border: #b2bcc3;
       content: "";
     }
 
-    .panel-up:after {
+    .panel-up::after {
       background: url(../../../../../assets/framework/images/dashboard/up-arrow.png) no-repeat 50% 40%;
     }
 
-    .panel-down:after {
+    .panel-down::after {
       background: url("../../../../../assets/framework/images/dashboard/down-arrow.png") no-repeat 50% 60%;
     }
   }
