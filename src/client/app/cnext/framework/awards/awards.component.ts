@@ -73,18 +73,17 @@ export class AwardsComponent {
   removeAward(i: number) {
     const control = <FormArray>this.awardDetail.controls['awards'];
     control.removeAt(i);
-    this.postData('dalete');
+    this.postData('do_nothing');
   }
 
   postData(type: string) {
     this.candidate.awards = this.awardDetail.value.awards;
     this.profileCreatorService.addProfileDetail(this.candidate).subscribe(
       user => {
-        if (type == 'next') {
+        if (type === 'next') {
           this.onNext();
-        }
-        else if (type == 'save') {
-          this.onSave()
+        }else if (type === 'save') {
+          this.onSave();
         }
       });
   }

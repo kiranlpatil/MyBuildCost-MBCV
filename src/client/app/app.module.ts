@@ -83,7 +83,7 @@ import {IndustryExperienceListComponent} from "./cnext/framework/industry-experi
 import {IndustryExperienceService} from "./cnext/framework/industry-experience/industry-experience.service";
 import {CandidateAwardService} from "./cnext/framework/awards/awards.service";
 import {AboutCandidateService} from "./cnext/framework/more-about-myself/more-about-myself.service";
-import {CandidateAcadmyDetailService} from "./cnext/framework/academic-details/academic-details.service";
+import {CandidateAcademyDetailService} from "./cnext/framework/academic-details/academic-details.service";
 import {JobPosterService} from "./cnext/framework/job-poster/job-poster.service";
 import {CandidateSummuryComponent} from "./cnext/framework/one-page-summury/candidate-summury/candidate-summury.component";
 import {CandidateBasicInformationComponent} from "./cnext/framework/one-page-summury/candidate-summury/candidate-basic-information/candidate-basic-information.component";
@@ -326,7 +326,7 @@ import {JobCompareViewComponent} from "./cnext/framework/single-page-compare-vie
     MultiSelectService,
     AboutCandidateService,
     JobPosterService,
-    CandidateAcadmyDetailService,
+    CandidateAcademyDetailService,
     CandidateProfileService,
     RecruiterDashboardService,
     QCardViewService,

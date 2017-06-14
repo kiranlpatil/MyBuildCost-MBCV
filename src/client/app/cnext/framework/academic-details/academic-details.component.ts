@@ -24,13 +24,13 @@ export class AcademicDetailComponent {
 
   ngOnInit() {
     this.academicDetail = this._fb.group({
-      acdemicDetails: this._fb.array([])
+      academicDetails: this._fb.array([])
     });
 
     //subscribe to addresses value changes
-    this.academicDetail.controls['acdemicDetails'].valueChanges.subscribe(x => {
+    this.academicDetail.controls['academicDetails'].valueChanges.subscribe(x => {
       this.isButtonShow = true;
-    })
+    });
   }
 
   ngOnChanges(changes: any) {
@@ -38,7 +38,7 @@ export class AcademicDetailComponent {
       this.candidate = changes.candidate.currentValue;
       if (this.candidate.academics != undefined && this.candidate.academics.length > 0) {
 
-        let controlArray = <FormArray>this.academicDetail.controls['acdemicDetails'];
+        let controlArray = <FormArray>this.academicDetail.controls['academicDetails'];
         this.candidate.academics.forEach(item => {
           const fb = this.initAcademicDetails();
           fb.patchValue(item);
@@ -61,20 +61,19 @@ export class AcademicDetailComponent {
   }
 
   addAcademicDetail() {
-    const control = <FormArray>this.academicDetail.controls['acdemicDetails'];
+    const control = <FormArray>this.academicDetail.controls['academicDetails'];
     const addrCtrl = this.initAcademicDetails();
     control.push(addrCtrl);
   }
 
   removeAcademicDetail(i: number) {
-    debugger
-    const control = <FormArray>this.academicDetail.controls['acdemicDetails'];
+    const control = <FormArray>this.academicDetail.controls['academicDetails'];
     control.removeAt(i);
-    this.postData('dalete');
+    this.postData('delete');
   }
 
   postData(type: string) {
-    this.candidate.academics = this.academicDetail.value.acdemicDetails;
+    this.candidate.academics = this.academicDetail.value.academicDetails;
     this.profileCreatorService.addProfileDetail(this.candidate).subscribe(
       user => {
         if (type == 'next') {

@@ -108,7 +108,7 @@ export class EmploymentHistoryComponent {
   removeEmployeeHistory(i: number) {
     const control = <FormArray>this.employeeHistory.controls['emplyeeHistories'];
     control.removeAt(i);
-    this.postData('dalete');
+    this.postData('delete');
   }
 
   save(model: any) {         //TODO Remove it

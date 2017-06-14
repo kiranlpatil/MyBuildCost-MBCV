@@ -1,6 +1,6 @@
 import {Industry} from "./industry";
 import {Award} from "./award";
-import {Academicdetails} from "./academic-details";
+import {AcademicDetails} from "./academic-details";
 import {Certifications} from "./certification-accreditation";
 import {ProfessionalData} from "./professional-data";
 import {EmployementHistory} from "./employment-history";
@@ -14,7 +14,7 @@ export class Candidate {
   industry: Industry = new Industry();
   interestedIndustries: string[] = new Array(0);
   roleType: string = '';
-  academics: Academicdetails[] = new Array();
+  academics: AcademicDetails[] = new Array();
   professionalDetails: ProfessionalData = new ProfessionalData();
   employmentHistory: EmployementHistory[] = new Array();
   proficiencies: string[] = new Array(0);

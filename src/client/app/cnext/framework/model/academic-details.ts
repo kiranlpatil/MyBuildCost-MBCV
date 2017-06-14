@@ -1,4 +1,4 @@
-export class Academicdetails {
+export class AcademicDetails {
   schoolName: string = '';
   board: string = '';
   yearOfPassing: string = '';

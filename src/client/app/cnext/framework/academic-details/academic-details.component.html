@@ -2,16 +2,16 @@
   <div class="main-content modal-content clearfix" *ngIf="highlightedSection.name =='AcademicDetails'">
     <h4 class="heading">Academic Details</h4>
     <form class="description-form" [formGroup]="academicDetail" novalidate>
-      <div formArrayName="acdemicDetails">
-        <div *ngFor="let history of academicDetail.controls.acdemicDetails.controls; let i=index"
+      <div formArrayName="academicDetails">
+        <div *ngFor="let history of academicDetail.controls.academicDetails.controls; let i=index"
              class="panel panel-default">
           <div>
           <span class="glyphicon glyphicon-trash pull-right"
-                *ngIf="academicDetail.controls.acdemicDetails.controls.length>0 && academicDetail.controls.acdemicDetails.controls.length !==1 "
+                *ngIf="academicDetail.controls.academicDetails.controls.length>0 && academicDetail.controls.academicDetails.controls.length !==1 "
                 (click)="removeAcademicDetail(i)"></span>
           </div>
           <div class="panel-body" [formGroupName]="i">
-            <cn-academics [group]="academicDetail.controls.acdemicDetails.controls[i]"></cn-academics>
+            <cn-academics [group]="academicDetail.controls.academicDetails.controls[i]"></cn-academics>
           </div>
         </div>
       </div>
@@ -43,17 +43,17 @@
      *ngIf="highlightedSection.name !='AcademicDetails'">
   <div class="main-content">
     <div class="compact-view clearfix">
-      <div *ngIf="academicDetail.controls.acdemicDetails.controls.length==0">
+      <div *ngIf="academicDetail.controls.academicDetails.controls.length==0">
 
         <h4 class="heading-compact"
             (click)="highlightedSection.name='AcademicDetails';addAcademicDetail();highlightedSection.isDisable=true;showButton=false">
           <img src="assets/c-next/icons/education-icon.png" alt="employment"/>
-          Acedemic Details
+          Academic Details
           <span class="glyphicon glyphicon-plus"></span>
         </h4>
       </div>
 
-      <div class="vertical-container" *ngIf="academicDetail.controls.acdemicDetails.controls.length>0">
+      <div class="vertical-container" *ngIf="academicDetail.controls.academicDetails.controls.length>0">
         <button class="btn-edit"
                 (click)="highlightedSection.name='AcademicDetails';highlightedSection.isDisable=true;showButton=false"
                 [hidden]="highlightedSection.isDisable"></button>
