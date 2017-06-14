@@ -41,6 +41,7 @@ export class QCardviewComponent {
   private candidateDetails: CandidateDetail = new CandidateDetail();
   private showModalStyle: boolean = false;
   private isAlreadyPresentInCart: boolean = false;
+  private isShortlistedclicked: boolean = false;
 
 
   constructor(private qCardFilterService: QCardFilterService,
@@ -138,7 +139,8 @@ export class QCardviewComponent {
 
   }
 
-  addRemoveToShortList(candidate: CandidateQCard) {
+  addRemoveToShortList(candidate: CandidateQCard) {debugger
+    this.isShortlistedclicked=true;
     let action: string;
     (this.emailsOfShrortListedCandidates.indexOf(candidate.email) != -1) ? action = 'remove' : action = 'add';
     if (action == 'add') {
@@ -188,11 +190,12 @@ export class QCardviewComponent {
   }
 
   viewProfile(candidate: CandidateQCard) {
-    this.modelCandidate = candidate;
-    this.profileCreatorService.getCandidateDetailsOfParticularId(candidate._id).subscribe(
-      candidateData => this.OnCandidateDataSuccess(candidateData));
-
-
+    if(!this.isShortlistedclicked) {
+      this.modelCandidate = candidate;
+      this.profileCreatorService.getCandidateDetailsOfParticularId(candidate._id).subscribe(
+        candidateData => this.OnCandidateDataSuccess(candidateData));
+    }
+    this.isShortlistedclicked=false;
   }
 
   OnCandidateDataSuccess(candidate: any) {

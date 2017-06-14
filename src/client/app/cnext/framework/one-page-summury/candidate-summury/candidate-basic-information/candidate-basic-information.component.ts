@@ -18,8 +18,7 @@ export class CandidateBasicInformationComponent {
   @Input() candidate: Candidate = new Candidate();
 
   private image_path: string = ImagePath.PROFILE_IMG_ICON;
-
-  ngOnChanges() {
+  ngOnChanges() {debugger
     if (this.candidateDetails !== undefined) {
       if (this.candidateDetails.picture !== undefined) {
         this.image_path = AppSettings.IP + this.candidateDetails.picture.substring(4).replace('"', '');

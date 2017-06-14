@@ -27,7 +27,7 @@
     <div *ngFor="let capability of role.default_complexities">
       <div class="content clearfix">
         <div class="col-sm-3">
-          <span>{{capability.name}}</span>
+          <span>{{role.name}} (General Complexity)</span>
         </div>
         <div class="col-sm-9">
           <div *ngFor="let complexity of capability.complexities;let i=index">

@@ -17,33 +17,34 @@ import {Section} from "../model/candidate";
 
 export class ComplexitiesComponent {
 
-  @Input() roles: Role[] = new Array(0);
-  @Input() candidateRoles: Role[] = new Array();
+  @Input() roles:Role[] = new Array(0);
+  @Input() candidateRoles:Role[] = new Array();
+  private roleWithDefaultComplexity:Role[] = new Array();
   @Output() onComplete = new EventEmitter();
-  @Input() isComplexityPresent: boolean = true;
-  @Input() highlightedSection: Section;
+  @Input() isComplexityPresent:boolean = true;
+  @Input() highlightedSection:Section;
 
 
-  private scenarioNames: string[] = new Array(0);
-  private selectedScenarioNames: string[] = new Array(0);
-  private scenaricomplexityNames: string[] = new Array(0);
-  private selectedComplexityNames: string[] = new Array(0);
-  private selectedDefaultComplexityNames: string[] = new Array(0);
-  private isComplexityButtonEnable: boolean = false;
-  private showModalStyle: boolean = false;
-  private isCandidate: boolean = false;
-  private showMore: boolean = false;
-  private count: number = 0;
-  private elements: any;
-  tooltipMessage: string = "<ul><li>" +
+  private scenarioNames:string[] = new Array(0);
+  private selectedScenarioNames:string[] = new Array(0);
+  private scenaricomplexityNames:string[] = new Array(0);
+  private selectedComplexityNames:string[] = new Array(0);
+  private selectedDefaultComplexityNames:string[] = new Array(0);
+  private isComplexityButtonEnable:boolean = false;
+  private showModalStyle:boolean = false;
+  private isCandidate:boolean = false;
+  private showMore:boolean = false;
+  private count:number = 0;
+  private elements:any;
+  tooltipMessage:string = "<ul><li>" +
     "<h5>Complexities</h5><p class='info'> This section provides a list of complexity scenarios for your selected capabilities.For each scenario, select the most appropriate level of complexity that you are capable of handling.</p></li><li><p>If you have not handled a particular complexity, choose not applicable.</p>" +
     "</li></ul>";
 
 
   @ViewChild("save")
-  private _inputElement1: ElementRef;
+  private _inputElement1:ElementRef;
 
-  constructor(private complexityService: ComplexityService) {
+  constructor(private complexityService:ComplexityService) {
   }
 
   ngOnInit() {
@@ -52,7 +53,7 @@ export class ComplexitiesComponent {
     }
   }
 
-  ngOnChanges(changes: any) {
+  ngOnChanges(changes:any) {
     if (changes.roles) {
       this.roles = changes.roles.currentValue;
     }
@@ -62,6 +63,15 @@ export class ComplexitiesComponent {
       for (let role of this.roles) {
         if (role.capabilities) {
           for (let primary of role.capabilities) {
+            if (primary.complexities) {
+              for (let complexity of primary.complexities) {
+                this.scenarioNames.push(complexity.name);
+              }
+            }
+          }
+        }
+        if (role.default_complexities) {
+          for (let primary of role.default_complexities) {
             if (primary.complexities) {
               for (let complexity of primary.complexities) {
                 this.scenarioNames.push(complexity.name);
@@ -84,6 +94,15 @@ export class ComplexitiesComponent {
             }
           }
         }
+        if (role.default_complexities) {
+          for (let primary of role.default_complexities) {
+            if (primary.complexities) {
+              for (let complexity of primary.complexities) {
+                this.selectedScenarioNames.push(complexity.name);
+              }
+            }
+          }
+        }
       }
     }
 
@@ -97,7 +116,8 @@ export class ComplexitiesComponent {
 
   }
 
-  selectDefaultComplexity(role: Role, complexity: Complexity, selectedScenario: Scenario, event: any) {
+  selectDefaultComplexity(role:Role, complexity:Complexity, selectedScenario:Scenario, event:any) {
+    debugger
     debugger
 
     for (let item of complexity.scenarios) {
@@ -106,11 +126,15 @@ export class ComplexitiesComponent {
     }
 
     selectedScenario.isChecked = true;
+    if (this.selectedComplexityNames.indexOf(complexity.name) === -1) {
+      this.selectedComplexityNames.push(complexity.name);
+    }
 
-
+    this.roleWithDefaultComplexity.push(role);
   }
 
-  selectComplexity(role: Role, capability: Capability, complexity: Complexity, selectedScenario: Scenario, event: any) {
+  selectComplexity(role:Role, capability:Capability, complexity:Complexity, selectedScenario:Scenario, event:any) {
+    debugger
     debugger
     for (let rol  of this.candidateRoles) {
       debugger
@@ -121,7 +145,7 @@ export class ComplexitiesComponent {
         }
       }
     }
-    let isFound: boolean = false;
+    let isFound:boolean = false;
     for (let item of complexity.scenarios) {
       if (item.isChecked) {
         isFound = true;
@@ -165,6 +189,14 @@ export class ComplexitiesComponent {
               }
             }
           }
+        }
+      }
+    }
+
+    for (let role of this.roleWithDefaultComplexity) {
+      for (let mainRole of this.roles) {
+        if (role.name === mainRole.name) {
+          mainRole.default_complexities = role.default_complexities;
         }
       }
     }

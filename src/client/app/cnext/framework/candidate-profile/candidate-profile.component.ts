@@ -306,24 +306,15 @@ export class CandidateProfileComponent implements OnInit {
           this.getCapability();
           this.whichStepsVisible[1] = true;
           this.getProficiency();
-          if ((this.candidate.industry.roles[0].capabilities.length >= 1 && this.candidate.industry.roles[0].capabilities) || (this.candidate.industry.roles[0].default_complexities && this.candidate.industry.roles[0].default_complexities[0].complexities.length > 0 )) {
+          if (( this.candidate.industry.roles[0].capabilities && this.candidate.industry.roles[0].capabilities.length >= 1 ) || (this.candidate.industry.roles[0].default_complexities && this.candidate.industry.roles[0].default_complexities.length >= 1)) {
             this.getComplexity();
             this.whichStepsVisible[2] = true;
-            if (this.candidate.industry.roles[0].capabilities[0] != undefined) {
-              if (this.candidate.industry.roles[0].capabilities[0].complexities.length > 0) {
+              if ((this.candidate.industry.roles[0].capabilities[0] != undefined && this.candidate.industry.roles[0].capabilities[0].complexities.length > 0)||( this.candidate.industry.roles[0].default_complexities[0] != undefined  && this.candidate.industry.roles[0].default_complexities[0].complexities.length > 0)) {
                 this.whichStepsVisible[3] = true;
                 this.highlightedSection.name = "None";
               } else {
                 this.highlightedSection.name = 'Complexities';
               }
-            }
-            if (this.candidate.industry.roles[0].default_complexities != undefined && this.candidate.industry.roles[0].default_complexities[0] != undefined) {
-              if (this.candidate.industry.roles[0].default_complexities[0].complexities.length > 0) {
-                this.whichStepsVisible[3] = true;
-              } else {
-                this.highlightedSection.name = 'Complexities';
-              }
-            }
           } else {
             this.highlightedSection.name = 'Capabilities';
           }

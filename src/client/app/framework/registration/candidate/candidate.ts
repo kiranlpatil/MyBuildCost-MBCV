@@ -10,7 +10,7 @@ export class CandidateDetail {
   password: string = '';
   confirm_password: string = '';
   pin: string = '';
-  location: Location;
+  location: Location= new Location();
   current_theme: string;
   picture: string = "assets/framework/images/dashboard/default-profile.png";
   social_profile_picture: string;
