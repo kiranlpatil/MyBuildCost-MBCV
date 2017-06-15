@@ -13,7 +13,7 @@
         </p>
         <div class="complexity-container">
           <div
-            *ngIf="!(candidateRoles && candidateRoles[0] && candidateRoles[0].default_complexities  && candidateRoles[0].default_complexities[0] && candidateRoles[0].default_complexities[0].complexities && candidateRoles[0].default_complexities[0].complexities.length > 0)">
+            *ngIf="isPresentDefaultComplexity">
             <div *ngFor="let role of roles">
               <div *ngIf="role.default_complexities!=undefined && role.default_complexities[0]!=undefined">
                 <div *ngFor="let complexity of role.default_complexities[0].complexities">
@@ -36,8 +36,33 @@
               </div>
             </div>
           </div>
-          <div
-            *ngIf="(candidateRoles && candidateRoles[0] && candidateRoles[0].capabilities && candidateRoles[0].capabilities[0] && candidateRoles[0].capabilities[0].complexities && candidateRoles[0].capabilities[0].complexities.length > 0)">
+
+
+          <div *ngIf="isPresentDefaultComplexityCandidate">
+            <div *ngFor="let role of candidateRoles">
+              <div *ngIf="role.default_complexities!=undefined && role.default_complexities[0]!=undefined">
+                <div *ngFor="let complexity of role.default_complexities[0].complexities">
+                  <div class="select-complexity clearfix">
+                    <div class="complexity-name col-sm-2 no-padding">
+                      <p>{{complexity.name}}</p>
+                    </div>
+                    <div class="scenarios col-sm-10 padding-left15">
+                      <div class="select-option" *ngFor="let scenario of complexity.scenarios">
+                        <label>
+                          <input class="selected-complexity" type="radio" name="{{complexity.name}}"
+                                 value="{{scenario.name}}"
+                                 (change)="selectDefaultComplexity(role,complexity,scenario,$event)"
+                                 [checked]=" scenario.isChecked">
+                          <span>{{scenario.name}}</span>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="isPresentCapabilityCandidate">
             <div *ngFor="let role of candidateRoles">
               <div *ngFor="let capability of role.capabilities">
                 <div class="select-complexity clearfix" *ngFor="let complexity of capability.complexities">
@@ -60,33 +85,10 @@
             </div>
           </div>
 
-          <div
-            *ngIf="(candidateRoles && candidateRoles[0] && candidateRoles[0].default_complexities  && candidateRoles[0].default_complexities[0] && candidateRoles[0].default_complexities[0].complexities && candidateRoles[0].default_complexities[0].complexities.length > 0)">
-            <div *ngFor="let role of candidateRoles">
-              <div *ngIf="role.default_complexities!=undefined && role.default_complexities[0]!=undefined">
-                <div *ngFor="let complexity of role.default_complexities[0].complexities">
-                  <div class="select-complexity clearfix">
-                    <div class="complexity-name col-sm-2 no-padding">
-                      <p>{{complexity.name}}</p>
-                    </div>
-                    <div class="scenarios col-sm-10 padding-left15">
-                      <div class="select-option" *ngFor="let scenario of complexity.scenarios">
-                        <label>
-                          <input class="selected-complexity" type="radio" name="{{complexity.name}}"
-                                 value="{{scenario.name}}"
-                                 (change)="selectDefaultComplexity(role,complexity,scenario,$event)"
-                                 [checked]="scenario.isChecked">
-                          <span>{{scenario.name}}</span>
-                        </label>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div
-            *ngIf="!(candidateRoles && candidateRoles[0] && candidateRoles[0].capabilities && candidateRoles[0].capabilities[0] && candidateRoles[0].capabilities[0].complexities && candidateRoles[0].capabilities[0].complexities.length > 0)">
+
+
+
+          <div *ngIf="isPresentCapability">
             <div *ngFor="let role of roles">
               <div *ngFor="let capability of role.capabilities">
                 <div class="select-complexity clearfix" *ngFor="let complexity of capability.complexities">
@@ -127,7 +129,7 @@
     <div class="compact-view clearfix">
       <a data-toggle="collapse" data-target="#demo" (click)="showMore = !showMore">
         <h4 class="heading">Complexities handled for the above Capabilities
-          <button class="btn-edit" (click)="highlightedSection.name='Complexities';highlightedSection.isDisable=true"
+          <button class="btn-edit" (click)="edit()"
                   [hidden]="highlightedSection.isDisable"></button>
         </h4>
         <span class="see-more" *ngIf="!showMore">more...</span>

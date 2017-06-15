@@ -44,6 +44,8 @@ export class CandidateProfileComponent implements OnInit {
   private setTimeoutId: any;
   private showModalStyle: boolean = false;
   private goto: boolean = false;
+  private isPresentCapability: boolean = false;
+  private isPresentDefaultcomplexity: boolean = false;
   private highlightedSection: Section = new Section();
 
   constructor(private _router: Router,
@@ -258,7 +260,7 @@ export class CandidateProfileComponent implements OnInit {
         candidateData => this.candidateForCapability = candidateData.data[0].industry.roles);
   }
 
-  getCandidateForComplexity() {
+  getCandidateForComplexity() {debugger
     this.profileCreatorService.getCandidateDetails()
       .subscribe(
         candidateData => {
@@ -306,10 +308,24 @@ export class CandidateProfileComponent implements OnInit {
           this.getCapability();
           this.whichStepsVisible[1] = true;
           this.getProficiency();
-          if (( this.candidate.industry.roles[0].capabilities && this.candidate.industry.roles[0].capabilities.length >= 1 ) || (this.candidate.industry.roles[0].default_complexities && this.candidate.industry.roles[0].default_complexities.length >= 1)) {
+
+          for(let role of this.candidate.industry.roles)
+          {
+            if(role.default_complexities[0]!=undefined && role.default_complexities[0].complexities.length>0) {
+              this.isPresentDefaultcomplexity=true;
+            }
+            if(role.capabilities !=undefined && role.capabilities.length>0) {
+              this.isPresentCapability=true;
+            }
+          }
+     /*     if (( this.candidate.industry.roles[0].capabilities && this.candidate.industry.roles[0].capabilities.length >= 1 ) || (this.candidate.industry.roles[0].default_complexities && this.candidate.industry.roles[0].default_complexities.length >= 1)) {*/
+          if ( this.isPresentCapability|| this.isPresentDefaultcomplexity){
             this.getComplexity();
             this.whichStepsVisible[2] = true;
+/*
               if ((this.candidate.industry.roles[0].capabilities[0] != undefined && this.candidate.industry.roles[0].capabilities[0].complexities.length > 0)||( this.candidate.industry.roles[0].default_complexities[0] != undefined  && this.candidate.industry.roles[0].default_complexities[0].complexities.length > 0)) {
+*/
+              if (this.isPresentCapability|| this.isPresentDefaultcomplexity) {
                 this.whichStepsVisible[3] = true;
                 this.highlightedSection.name = "None";
               } else {
