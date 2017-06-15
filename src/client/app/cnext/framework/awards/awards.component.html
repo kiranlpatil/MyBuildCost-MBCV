@@ -1,5 +1,5 @@
-<div class="section-container">
-  <div class="main-content modal-content clearfix" *ngIf="highlightedSection.name =='Awards'">
+<div class="section-container clear"  *ngIf="highlightedSection.name =='Awards'">
+  <div class="main-content modal-content clearfix">
     <h4 class="heading">Awards</h4>
     <form class="description-form" [formGroup]="awardDetail" novalidate>
       <div formArrayName="awards">
@@ -38,7 +38,7 @@
 </div>
 
 <div class="section-container" *ngIf="highlightedSection.name !='Awards'"
-     [ngClass]="(highlightedSection.name=='Certification' || highlightedSection.name=='EmploymentHistory' || highlightedSection.name=='AcademicDetails' )?'full-width':'quarter-width'">
+     [ngClass]="(highlightedSection.name=='Awards' )?'full-width':'quarter-width'">
   <div class="main-content">
     <div class="compact-view clearfix">
       <div *ngIf="awardDetail.controls.awards.controls.length==0">
