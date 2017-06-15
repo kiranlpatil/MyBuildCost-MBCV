@@ -56,7 +56,7 @@
         <button class="btn-edit"
                 (click)="highlightedSection.name='Certification';highlightedSection.isDisable=true;showButton=false"
                 [hidden]="highlightedSection.isDisable"></button>
-        <cn-vertical-list-view [data]="candidate.certifications" [type]="'certifications'"></cn-vertical-list-view>
+        <cn-vertical-list-view [data]="candidate.certifications" [type]="'certifications'" [calledFrom]="'candidateview'"></cn-vertical-list-view>
       </div>
     </div>
   </div>

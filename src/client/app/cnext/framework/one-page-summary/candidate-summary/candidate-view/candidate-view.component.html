@@ -5,16 +5,16 @@
                                 [candidate]="candidate"></cn-candidate-description>
     </div>
     <div *ngIf="candidate.employmentHistory.length>0">
-      <cn-vertical-list-view [data]="candidate.employmentHistory" [type]="'employment history'"></cn-vertical-list-view>
+      <cn-vertical-list-view [data]="candidate.employmentHistory" [type]="'employment history'" [calledFrom]="'singlepageview'"></cn-vertical-list-view>
     </div>
     <div *ngIf="candidate.academics.length>0">
-      <cn-vertical-list-view [data]="candidate.academics" [type]="'acedemic details'"></cn-vertical-list-view>
+      <cn-vertical-list-view [data]="candidate.academics" [type]="'acedemic details'" [calledFrom]="'singlepageview'"></cn-vertical-list-view>
     </div>
     <div *ngIf="candidate.awards.length>0">
-      <cn-vertical-list-view [data]="candidate.awards" [type]="'awards'"></cn-vertical-list-view>
+      <cn-vertical-list-view [data]="candidate.awards" [type]="'awards'" [calledFrom]="'singlepageview'"></cn-vertical-list-view>
     </div>
     <div *ngIf="candidate.certifications.length>0">
-      <cn-vertical-list-view [data]="candidate.certifications" [type]="'certifications'"></cn-vertical-list-view>
+      <cn-vertical-list-view [data]="candidate.certifications" [type]="'certifications'" [calledFrom]="'singlepageview'"></cn-vertical-list-view>
     </div>
     <!-- <div>
       <cn-contact-details [candidateDetails]="candidateDetails"></cn-contact-details>

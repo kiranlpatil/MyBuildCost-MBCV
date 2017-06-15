@@ -57,7 +57,7 @@
         <button class="btn-edit"
                 (click)="highlightedSection.name='AcademicDetails';highlightedSection.isDisable=true;showButton=false"
                 [hidden]="highlightedSection.isDisable"></button>
-        <cn-vertical-list-view [data]="candidate.academics" [type]="'acedemic details'"></cn-vertical-list-view>
+        <cn-vertical-list-view [data]="candidate.academics" [type]="'acedemic details'" [calledFrom]="'candidateview'"></cn-vertical-list-view>
       </div>
     </div>
   </div>

@@ -4,14 +4,29 @@
       <img src="assets/c-next/icons/employment-icon.png" alt="employment"/>
       <span>{{type}}</span>
       <ul>
-        <li *ngFor="let item of data;let i = index">
-          <p>{{item.from.year}} - {{item.to.year}}</p>
-          <p>{{item.designation}}</p>
-          <p>{{item.companyName}}</p>
-          <p [class.text-ellipsis]="!readMore[i]" [class.text-wrap]="readMore[i]">{{item.remarks}}</p>
-          <p class="read-more" (click)="readMore[i] = !readMore[i]" *ngIf="item.remarks.length>30">Read More</p>
-          <p class="read-less" (click)="readMore[i] = !readMore[i]">Read Less</p>
-        </li>
+        <div *ngIf="calledFrom=='singlepageview'">
+          <li *ngFor="let item of data;let i = index">
+            <p>{{item.from.year}} - {{item.to.year}}</p>
+            <p>{{item.designation}}</p>
+            <p>{{item.companyName}}</p>
+            <p [class.text-ellipsis]="!readMore[i]" [class.text-wrap]="readMore[i]">{{item.remarks}}</p>
+            <p class="read-more" (click)="readMore[i] = !readMore[i]" *ngIf="item.remarks.length>30">Read More</p>
+            <p class="read-less" (click)="readMore[i] = !readMore[i]">Read Less</p>
+          </li>
+        </div>
+        <div *ngIf="calledFrom=='candidateview'">
+          <li *ngFor="let item of data;let i = index">
+            <div *ngIf="i == 0">
+              <p>{{item.from.year}} - {{item.to.year}}</p>
+              <p>{{item.designation}}</p>
+              <p>{{item.companyName}}</p>
+              <p [class.text-ellipsis]="!readMore[i]" [class.text-wrap]="readMore[i]">{{item.remarks}}</p>
+              <p class="read-more" (click)="readMore[i] = !readMore[i]" *ngIf="item.remarks.length>30">Read More</p>
+              <p class="read-less" (click)="readMore[i] = !readMore[i]">Read Less</p>
+            </div>
+          </li>
+          <p *ngIf="data.length != 1">{{data.length-1}} more.</p>
+        </div>
       </ul>
     </div>
   </div>
@@ -20,6 +35,7 @@
       <img src="assets/c-next/icons/education-icon.png" alt="education"/>
       <span>{{type}}</span>
       <ul>
+        <div *ngIf="calledFrom=='singlepageview'">
         <li *ngFor="let item of data;let i = index">
           <p>{{item.yearOfPassing}}</p>
           <p>{{item.specialization}}</p>
@@ -28,6 +44,20 @@
           <p class="read-more" (click)="readMore[i] = !readMore[i]" *ngIf="item.schoolName.length>30">Read More</p>
           <p class="read-less" (click)="readMore[i] = !readMore[i]">Read Less</p>
         </li>
+        </div>
+        <div *ngIf="calledFrom=='candidateview'">
+          <li *ngFor="let item of data;let i = index">
+            <div *ngIf="i == 0">
+            <p>{{item.yearOfPassing}}</p>
+            <p>{{item.specialization}}</p>
+            <p>{{item.board}}</p>
+            <p [class.text-ellipsis]="!readMore[i]" [class.text-wrap]="readMore[i]">{{item.schoolName}}</p>
+            <p class="read-more" (click)="readMore[i] = !readMore[i]" *ngIf="item.schoolName.length>30">Read More</p>
+              <p class="read-less" (click)="readMore[i] = !readMore[i]">Read Less</p>
+            </div>
+          </li>
+          <p *ngIf="data.length != 1">{{data.length-1}} more.</p>
+        </div>
       </ul>
     </div>
   </div>
@@ -37,7 +67,19 @@
       <img src="assets/c-next/icons/awards.png" alt="awards" *ngIf="type=='awards'"/>
       <span>{{type}}</span>
       <ul>
+        <div *ngIf="calledFrom=='singlepageview'">
         <li *ngFor="let item of data;let i = index">
+          <div *ngIf="i == 0">
+          <p>{{item.year}}</p>
+          <p>{{item.name}}</p>
+          <p>{{item.issuedBy}}</p>
+          <p [class.text-ellipsis]="!readMore[i]" [class.text-wrap]="readMore[i]">{{item.remark}}</p>
+          <p class="read-more" (click)="readMore[i] = !readMore[i]" *ngIf="item.remark.length>20  ">Read More</p>
+            <p class="read-less" (click)="readMore[i] = !readMore[i]">Read Less</p></div>
+        </li>
+        </div>
+        <div *ngIf="calledFrom=='candidateview'">
+          <li *ngFor="let item of data;let i = index">
           <p>{{item.year}}</p>
           <p>{{item.name}}</p>
           <p>{{item.issuedBy}}</p>
@@ -45,6 +87,8 @@
           <p class="read-more" (click)="readMore[i] = !readMore[i]" *ngIf="item.remark.length>20  ">Read More</p>
           <p class="read-less" (click)="readMore[i] = !readMore[i]">Read Less</p>
         </li>
+          <p *ngIf="data.length != 1">{{data.length-1}} more.</p>
+        </div>
       </ul>
     </div>
   </div>

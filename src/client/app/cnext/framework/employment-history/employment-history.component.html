@@ -62,7 +62,7 @@
                 (click)="highlightedSection.name='EmploymentHistory';highlightedSection.isDisable=true;showButton=false"
                 [hidden]="highlightedSection.isDisable"></button>
         <cn-vertical-list-view [data]="candidate.employmentHistory"
-                               [type]="'employment history'"></cn-vertical-list-view>
+                               [type]="'employment history'" [calledFrom]="'candidateview'"></cn-vertical-list-view>
       </div>
     </div>
   </div>
