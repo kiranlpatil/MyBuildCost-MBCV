@@ -1,7 +1,7 @@
-import {Component, ElementRef, HostListener, Input} from "@angular/core";
-import {Router} from "@angular/router";
-import {Candidate} from "../../model/candidate";
-import {AppSettings, ImagePath, NavigationRoutes} from "../../../../framework/shared/constants";
+import { Component, ElementRef, HostListener, Input } from '@angular/core';
+import { Router } from '@angular/router';
+import { Candidate, Section } from '../../model/candidate';
+import { AppSettings, ImagePath, NavigationRoutes } from '../../../../framework/shared/constants';
 
 @Component({
   moduleId: module.id,
@@ -17,6 +17,7 @@ export class CandidateHeaderComponent {
   PROFILE_IMG_PATH: string;
   MY_LOGO: string;
   newUser: number;
+  private highlightedSection: Section = new Section();
 
   @HostListener('document:click', ['$event']) onClick(event: any) {
     if (!this._eref.nativeElement.contains(event.target)) {
@@ -30,7 +31,7 @@ export class CandidateHeaderComponent {
   }
 
   getImagePath(imagePath: string) {
-    if (imagePath != undefined) {
+    if (imagePath !== undefined) {
       return AppSettings.IP + imagePath.substring(4).replace('"', '');
     }
 
@@ -47,7 +48,9 @@ export class CandidateHeaderComponent {
       this._router.navigate([nav]);
     }
   }
-
+  onSkip() {
+    this.highlightedSection.name='none';
+  }
   toggleMenu() {
     this.isClassVisible = !this.isClassVisible;
     this.isOpenProfile = false;

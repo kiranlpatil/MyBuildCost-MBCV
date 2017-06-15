@@ -46,6 +46,12 @@
                   <h5 *ngIf="candidate.jobTitle != undefined">{{candidate.jobTitle}}</h5>
                 </li>
                 <li class="divider"></li>
+                <li role="menuitem">
+                  <a class="dropdown-item"
+                     (click)="highlightedSection.name='GuideTour'">
+                    <span class="glyphicon glyphicon-road"></span>Guided Tour
+                  </a>
+                </li>
                 <li role="menuitem" [routerLinkActive]="['active']" *ngIf="candidate.isCompleted==true">
                   <a class="dropdown-item" [routerLink]="['profile-summary']"
                      (click)="navigateTo('/profile_summary');">
@@ -82,3 +88,6 @@
   </nav>
 </header>
 
+<div *ngIf="highlightedSection.name=='GuideTour'">
+  <cn-guided-tour (onSkip)="onSkip($event)"></cn-guided-tour>
+</div>

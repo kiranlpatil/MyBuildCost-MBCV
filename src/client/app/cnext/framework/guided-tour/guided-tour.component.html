@@ -1,0 +1,63 @@
+<div class="guided-tour">
+  <div class="modal-background"></div>
+  <div class="inner">
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+
+      <!-- Wrapper for slides -->
+      <div class="carousel-inner">
+        <div class="item carousel-slide active">
+          <img src="../assets/c-next/guided-tour/welcome.png" alt="Welcome Screen" style="width:100%;">
+        </div>
+
+        <div class="item carousel-slide">
+          <img src="../assets/c-next/guided-tour/1.png" style="width:100%;">
+        </div>
+
+        <div class="item carousel-slide">
+          <img src="../assets/c-next/guided-tour/2.png" style="width:100%;">
+        </div>
+
+        <div class="item carousel-slide">
+          <img src="../assets/c-next/guided-tour/3.png" style="width:100%;">
+        </div>
+
+        <div class="item carousel-slide">
+          <img src="../assets/c-next/guided-tour/4.png" style="width:100%;">
+        </div>
+
+        <div class="item carousel-slide">
+          <img src="../assets/c-next/guided-tour/5.png" style="width:100%;">
+        </div>
+
+        <div class="item carousel-slide">
+          <img src="../assets/c-next/guided-tour/6.png" style="width:100%;">
+        </div>
+
+        <div class="item carousel-slide">
+          <img src="../assets/c-next/guided-tour/7.png" style="width:100%;">
+        </div>
+
+        <div class="item carousel-slide">
+          <img src="../assets/c-next/guided-tour/8.png" style="width:100%;">
+        </div>
+
+        <div class="item carousel-slide">
+          <img src="../assets/c-next/guided-tour/9.png" style="width:100%;">
+        </div>
+
+        <div class="item carousel-slide">
+          <img src="../assets/c-next/guided-tour/10.png" style="width:100%;">
+        </div>
+      </div>
+
+      <!-- Left and right controls -->
+      <a class="left" (click)="showHide(true)" *ngIf="isShowPrev" href="#myCarousel" data-slide="prev">
+        <a class="btn btn-primary">Previous</a>
+      </a>
+      <a class="right" *ngIf="isShowNext" (click)="showHide(false)" href="#myCarousel" data-slide="next">
+        <a class="btn btn-primary">Next</a>
+      </a>
+      <a class="btn btn-danger skip" (click)="onSkipClick()">Skip</a>
+    </div>
+  </div>
+</div>

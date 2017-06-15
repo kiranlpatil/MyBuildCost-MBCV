@@ -155,6 +155,7 @@ import {CandidateCompareService} from "./cnext/framework/single-page-compare-vie
 import {TooltipComponent} from "./cnext/framework/tool-tip-component/tool-tip-component";
 import {JobCompareService} from "./cnext/framework/single-page-compare-view/job-compare-view/job-compare-view.service";
 import {JobCompareViewComponent} from "./cnext/framework/single-page-compare-view/job-compare-view/job-compare-view.component";
+import {GuidedTourComponent} from "./cnext/framework/guided-tour/guided-tour.component";
 
 //C-NEXT IMPORTS
 
@@ -217,6 +218,7 @@ import {JobCompareViewComponent} from "./cnext/framework/single-page-compare-vie
     CandidateProfileComponent,
     ProfileDescriptionComponent,
     CapabilitiesComponent,
+    GuidedTourComponent,
     JobProficienciesComponent,
     ProficienciesComponent,
     IndustryListComponent,

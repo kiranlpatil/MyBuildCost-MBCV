@@ -230,7 +230,8 @@ $green-text: #42a948;
 
   .btn {
     margin-right: 15px;
-    &:focus, &:active {
+    &:focus,
+    &:active {
       outline: none;
     }
   }
@@ -286,7 +287,8 @@ $green-text: #42a948;
   }
 
   .profile-configurations {
-    .col-sm-8, .col-sm-4 {
+    .col-sm-8,
+    .col-sm-4 {
       width: 50%;
     }
 

@@ -1,10 +1,10 @@
-import {Component, OnInit} from "@angular/core";
-import {NavigationRoutes} from "../../../framework/shared/constants";
-import {Router} from "@angular/router";
-import {ComplexityService} from "../complexity.service";
-import {Candidate, Section} from "../model/candidate";
-import {CandidateProfileService} from "./candidate-profile.service";
-import {Role} from "../model/role";
+import {Component, OnInit} from '@angular/core';
+import {NavigationRoutes} from '../../../framework/shared/constants';
+import {Router} from '@angular/router';
+import {ComplexityService} from '../complexity.service';
+import {Candidate, Section} from '../model/candidate';
+import {CandidateProfileService} from './candidate-profile.service';
+import {Role} from '../model/role';
 
 @Component({
   moduleId: module.id,
@@ -63,17 +63,17 @@ export class CandidateProfileComponent implements OnInit {
 
 
   showHide(isPrev: boolean) {
-    let carouselData: any = document.getElementsByClassName("carousel-slide");
+    let carouselData: any = document.getElementsByClassName('carousel-slide');
     let isFound: boolean = false;
     let isPrevFound: boolean = false;
 
     for (let index = 0; index < carouselData.length; index++) {
       if (isPrev) {
-        (index == 1) ? carouselData[index].classList.contains("active") ? isPrevFound = true : console.log() : console.log();
+        (index === 1) ? carouselData[index].classList.contains('active') ? isPrevFound = true : console.log() : console.log();
       }
-      if (index == carouselData.length - 2) {
+      if (index === carouselData.length - 2) {
         if (!isPrev) {
-          carouselData[index].classList.contains("active") ? isFound = true : console.log();
+          carouselData[index].classList.contains('active') ? isFound = true : console.log();
         }
       }
     }
@@ -85,9 +85,14 @@ export class CandidateProfileComponent implements OnInit {
     this.whichStepsVisible[0] = true;
     let item: any = $('#myCarousel');
     item.carousel({
-      interval: false
+      interval: 1000000000000
     });
 
+  }
+
+  onSkip() {
+    console.log('fromon');
+    this.highlightedSection.name='Profile';
   }
 
   onProfileDescriptionComplete() {
@@ -109,7 +114,7 @@ export class CandidateProfileComponent implements OnInit {
     this.getCapability();
     this.showCapability = true;
     this.whichStepsVisible[1] = true;
-    this.whichStepsVisible[3] = false
+    this.whichStepsVisible[3] = false;
   }
 
   onCapabilityComplete(roles: Role[]) {
@@ -198,7 +203,7 @@ export class CandidateProfileComponent implements OnInit {
     for (let role of this.candidate.industry.roles) {
       this.roleList.push(role.name);
     }
-    if (this.candidate.industry.name != undefined && this.roleList != undefined) {
+    if (this.candidate.industry.name !== undefined && this.roleList != undefined) {
       this.profileCreatorService.getCapability(this.candidate.industry.name, this.roleList)
         .subscribe(
           rolelist => {
@@ -210,7 +215,7 @@ export class CandidateProfileComponent implements OnInit {
             }
             if (this.goto === false) {
               if (this.whichStepsVisible[3] !== true) {
-                this.highlightedSection.name = "Complexities";
+                this.highlightedSection.name = 'Complexities';
                 this.highlightedSection.isDisable = false;
               }
               this.getComplexity();
@@ -234,7 +239,7 @@ export class CandidateProfileComponent implements OnInit {
         }
       }
     }
-    if (this.candidate.industry.name != undefined && this.roleList != undefined) {
+    if (this.candidate.industry.name !== undefined && this.roleList !== undefined) {
       this.profileCreatorService.getComplexity(this.candidate.industry.name, this.roleList, this.primaryCapability)
         .subscribe(
           rolelist => {
@@ -286,20 +291,19 @@ export class CandidateProfileComponent implements OnInit {
     }
 
 
-    if (this.candidate.isVisible == undefined) {
+    if (this.candidate.isVisible === undefined) {
       this.candidate.isVisible = true;
     }
-    if (this.candidate.lockedOn != undefined) {
+    if (this.candidate.lockedOn !== undefined) {
       if (this.dateDifferenceInDays(new Date(), new Date(this.candidate.lockedOn)) <= 90) {
         this.highlightedSection.date = this.candidate.lockedOn;
         this.highlightedSection.isLocked = true;
-      }
-      else {
+      } else {
         this.highlightedSection.isLocked = false;
       }
     }
 
-    if (this.highlightedSection.name != 'GuideTour') {
+    if (this.highlightedSection.name !== 'GuideTour') {
       if (this.candidate.industry.name !== undefined) {
         this.isRolesShow = false;
         this.getRoles();
@@ -327,7 +331,7 @@ export class CandidateProfileComponent implements OnInit {
 */
               if (this.isPresentCapability|| this.isPresentDefaultcomplexity) {
                 this.whichStepsVisible[3] = true;
-                this.highlightedSection.name = "None";
+                this.highlightedSection.name = 'None';
               } else {
                 this.highlightedSection.name = 'Complexities';
               }
@@ -397,7 +401,10 @@ export class CandidateProfileComponent implements OnInit {
   }
 
   dateDifferenceInDays(currentDate: Date, storedDate: Date) {
-    return Math.floor(( Date.UTC(storedDate.getFullYear(), storedDate.getMonth(), storedDate.getDate()) - Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate())) / (1000 * 60 * 60 * 24));
+    return Math.floor(( Date.UTC(storedDate.getFullYear(),
+            storedDate.getMonth(),
+            storedDate.getDate()) - Date.UTC(currentDate.getFullYear(),
+            currentDate.getMonth(), currentDate.getDate())) / (1000 * 60 * 60 * 24));
   }
 
   showOrHide(type: string, event: any) {
@@ -406,7 +413,7 @@ export class CandidateProfileComponent implements OnInit {
         this.candidate.isVisible = true;
       }
     } else {
-      if (type == "hide") {
+      if (type === 'hide') {
         if (event.target.checked) {
           this.candidate.isVisible = false;
         }
