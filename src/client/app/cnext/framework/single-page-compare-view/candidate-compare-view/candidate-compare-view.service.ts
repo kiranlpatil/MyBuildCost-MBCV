@@ -1,8 +1,8 @@
-import {Injectable} from "@angular/core";
-import {Http} from "@angular/http";
-import {Observable} from "rxjs/Observable";
-import {BaseService} from "../../../../framework/shared/httpservices/base.service";
-import {API} from "../../../../framework/shared/constants";
+import { Injectable } from '@angular/core';
+import { Http } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
+import { BaseService } from '../../../../framework/shared/httpservices/base.service';
+import { API } from '../../../../framework/shared/constants';
 
 @Injectable()
 export class CandidateCompareService extends BaseService {
@@ -22,6 +22,4 @@ export class CandidateCompareService extends BaseService {
       .map(this.extractData)
       .catch(this.handleError);
   }
-
-
 }

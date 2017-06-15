@@ -1,4 +1,4 @@
-import {CandidateQCard} from "../../model/candidateQcard";
+import { CandidateQCard } from '../../model/candidateQcard';
 export class CandidateQListModel {
   matchedCandidates: CandidateQCard[] = new Array(0);
   shortListedCandidates: CandidateQCard[] = new Array(0);

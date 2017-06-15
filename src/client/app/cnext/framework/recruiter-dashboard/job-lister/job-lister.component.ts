@@ -1,8 +1,8 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from "@angular/core";
-import {QCardsortBy} from "../../model/q-cardview-sortby";
-import {Router} from "@angular/router";
-import {RecruiterHeaderDetails} from "../../model/recuirterheaderdetails";
-import {ReferenceService} from "../../model/newClass";
+import { Component, EventEmitter, Input, OnChanges, OnDestroy, Output } from '@angular/core';
+import { QCardsortBy } from '../../model/q-cardview-sortby';
+import { Router } from '@angular/router';
+import { RecruiterHeaderDetails } from '../../model/recuirterheaderdetails';
+import { ReferenceService } from '../../model/newClass';
 
 
 @Component({
@@ -10,19 +10,18 @@ import {ReferenceService} from "../../model/newClass";
   selector: 'cn-job-lister',
   templateUrl: 'job-lister.component.html',
   styleUrls: ['job-lister.component.css'],
-})
+ })
 
-export class JobListerComponent implements OnInit, OnDestroy {
+export class JobListerComponent implements  OnDestroy, OnChanges {
   @Input() jobListInput: any[] = new Array(0);
   @Input() headerInfoForJob: RecruiterHeaderDetails;
+  @Output() jobEventEmitter: EventEmitter<any> = new EventEmitter();
   //public jobList:JobPosterModel[] = new Array(0);
   //public jobListToCheck:JobPosterModel[] = new Array(0);
   private toggle: boolean = false;
   private qCardModel: QCardsortBy = new QCardsortBy();
   // private candidatesInList : CandidateNumberDifferentList= new CandidateNumberDifferentList();
   //private candidatesInLists : RecruiterDashboard= new RecruiterDashboard();
-  @Output() jobEventEmitter: EventEmitter<any> = new EventEmitter();
-
   constructor(private _router: Router, public refrence: ReferenceService) {
     this.qCardModel.name = 'Date';
   }
@@ -46,10 +45,6 @@ export class JobListerComponent implements OnInit, OnDestroy {
      this.candidateInCartService.change(this.candidatesInLists);
      }*/
   }
-
-  ngOnInit() {
-  }
-
   ngOnDestroy() {
     this.refrence.data = this.headerInfoForJob;
   }
@@ -64,7 +59,7 @@ export class JobListerComponent implements OnInit, OnDestroy {
   }
 
   get format() {
-    return this.toggle ? this.qCardModel.name : "Date";
+    return this.toggle ? this.qCardModel.name : 'Date';
   }
 
   toggleFormat() {

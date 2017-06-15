@@ -1,4 +1,4 @@
-import {Component, ElementRef, Input, ViewChild} from "@angular/core";
+import { Component, ElementRef, Input, OnChanges, ViewChild } from '@angular/core';
 
 @Component({
   moduleId: module.id,
@@ -7,7 +7,7 @@ import {Component, ElementRef, Input, ViewChild} from "@angular/core";
   styleUrls: ['progress-bar.component.css']
 })
 
-export class ProgressBarComponent {
+export class ProgressBarComponent implements OnChanges {
   @ViewChild('canvas') canvasRef: ElementRef;
   @Input() value: number;
   @Input() color: string;
@@ -26,10 +26,9 @@ export class ProgressBarComponent {
       this.ctx.beginPath();
     }
     this.ctx.lineWidth = 2.0;
-    if (this.rotation && this.value != 100) {
+    if (this.rotation && this.value !== 100) {
       this.ctx.strokeStyle = '#e8e8e8';
-    }
-    else {
+    } else {
       this.ctx.strokeStyle = this.color;
     }
     this.ctx.lineCap = 'round';

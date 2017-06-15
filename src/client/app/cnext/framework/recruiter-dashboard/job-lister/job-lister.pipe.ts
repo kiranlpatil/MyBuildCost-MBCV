@@ -1,9 +1,9 @@
-import {Pipe, PipeTransform} from "@angular/core";
-import {JobPosterModel} from "../../model/jobPoster";
+import { Pipe, PipeTransform } from '@angular/core';
+import { JobPosterModel } from '../../model/jobPoster';
 
 @Pipe({name: 'orderBy', pure: false})
 
-export class jobListerSortPipe implements PipeTransform {
+export class JobListerSortPipe implements PipeTransform {
 
 
   transform(array: Array<JobPosterModel>, args: string): Array<JobPosterModel> {

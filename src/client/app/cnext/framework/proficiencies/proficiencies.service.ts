@@ -23,7 +23,7 @@ export class ProficiencyDomainService extends BaseService {
   addCandidateProficiency(candidateproficiency: string[]): Observable<string[]> {
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({headers: headers});
-    let body = JSON.stringify({"proficiencies": candidateproficiency})
+    let body = JSON.stringify({'proficiencies': candidateproficiency});
     let url: string = API.CANDIDATE_PROFILE + '/' + LocalStorageService.getLocalValue(LocalStorage.USER_ID);
     return this.http.put(url, body, options)
       .map(this.extractData)
@@ -33,7 +33,7 @@ export class ProficiencyDomainService extends BaseService {
   addProficiencyToMasterData(newProficiency: string): Observable<string[]> {
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({headers: headers});
-    let body = JSON.stringify({})
+    let body = JSON.stringify({});
     let url: string = API.PROFICIENCYLIST + '?proficiency=' + newProficiency;
     return this.http.put(url, body, options)
       .map(this.extractData)

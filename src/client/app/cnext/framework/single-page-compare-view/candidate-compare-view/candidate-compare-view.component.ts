@@ -1,9 +1,9 @@
-import {Component, Input, OnInit} from "@angular/core";
-import {Router} from "@angular/router";
-import {AppSettings, LocalStorage} from "../../../../framework/shared/constants";
-import {LocalStorageService} from "../../../../framework/shared/localstorage.service";
-import {CandidateCompareService} from "./candidate-compare-view.service";
-import {RecruiterDashboardService} from "../../recruiter-dashboard/recruiter-dashboard.service";
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AppSettings, LocalStorage } from '../../../../framework/shared/constants';
+import { LocalStorageService } from '../../../../framework/shared/localstorage.service';
+import { CandidateCompareService } from './candidate-compare-view.service';
+import { RecruiterDashboardService } from '../../recruiter-dashboard/recruiter-dashboard.service';
 
 
 @Component({
@@ -13,7 +13,7 @@ import {RecruiterDashboardService} from "../../recruiter-dashboard/recruiter-das
   styleUrls: ['candidate-compare-view.component.css']
 })
 
-export class CandidateCompareViewComponent implements OnInit {
+export class CandidateCompareViewComponent implements OnInit, OnChanges {
   @Input() jobId: string;
   private candidateId: string;
   private recruiterId: string;
@@ -2015,7 +2015,7 @@ export class CandidateCompareViewComponent implements OnInit {
       this.recruiterDashboardService.getPostedJobDetails(this.jobId)
         .subscribe(
           data => {
-            this.OnRecruiterDataSuccess(data.data.industry)
+            this.OnRecruiterDataSuccess(data.data.industry);
           });
     }
   }
@@ -2033,7 +2033,7 @@ export class CandidateCompareViewComponent implements OnInit {
   }
 
   OnCompareSuccess(data: any) {
-    console.log('data after compare  ', data)
+    console.log('data after compare  ', data);
     this.data = data.data;
   }
 

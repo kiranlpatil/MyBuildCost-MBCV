@@ -1,5 +1,5 @@
-import {Route} from "@angular/router";
-import {JobCompareViewComponent} from "./index";
+import { Route } from '@angular/router';
+import { JobCompareViewComponent } from './index';
 
 export const JobCompare: Route[] = [
   {

@@ -1,8 +1,7 @@
-import {Component, ElementRef, HostListener, OnInit} from "@angular/core";
-import {Router} from "@angular/router";
-import {LocalStorageService} from "../../../../framework/shared/localstorage.service";
-import {AppSettings, ImagePath, LocalStorage, NavigationRoutes} from "../../../../framework/shared/constants";
-
+import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { LocalStorageService } from '../../../../framework/shared/localstorage.service';
+import { AppSettings, ImagePath, LocalStorage, NavigationRoutes } from '../../../../framework/shared/constants';
 
 @Component({
   moduleId: module.id,
@@ -35,7 +34,7 @@ export class RecruiterSharedHeaderComponent implements OnInit {
     this.company_name = LocalStorageService.getLocalValue(LocalStorage.COMPANY_NAME);
     this.uploaded_image_path = LocalStorageService.getLocalValue(LocalStorage.PROFILE_PICTURE); //TODO:Get it from get user call.
 
-    if (this.uploaded_image_path === "undefined" || this.uploaded_image_path === null) {
+    if (this.uploaded_image_path === 'undefined' || this.uploaded_image_path === null) {
       this.uploaded_image_path = ImagePath.PROFILE_IMG_ICON;
     } else {
       this.uploaded_image_path = this.uploaded_image_path.substring(4, this.uploaded_image_path.length - 1).replace('"', '');

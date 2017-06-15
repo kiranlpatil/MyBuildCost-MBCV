@@ -1,5 +1,5 @@
-import {Injectable} from "@angular/core";
-import {BaseService} from "../../../../framework/shared/httpservices/base.service";
+import { Injectable } from '@angular/core';
+import { BaseService } from '../../../../framework/shared/httpservices/base.service';
 
 @Injectable()
 export class RecruiteQCardView2Service extends BaseService {

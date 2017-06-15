@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output} from "@angular/core";
+import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
 
 @Component({
   moduleId: module.id,
@@ -7,7 +7,7 @@ import {Component, EventEmitter, Input, Output} from "@angular/core";
   styleUrls: ['role-type.component.css']
 })
 
-export class RoleTypetListComponent {
+export class RoleTypeListComponent implements OnChanges {
 
   @Input() roleTypes: string[] = new Array(0);
   @Input() candidateRoletype: string = '';

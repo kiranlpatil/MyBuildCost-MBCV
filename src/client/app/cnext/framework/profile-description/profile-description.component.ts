@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output} from "@angular/core";
+import {Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
 import {Industry} from "../model/industry";
 import {Candidate, Section} from "../model/candidate";
 import {AppSettings} from "../../../framework/shared/constants";
@@ -12,7 +12,7 @@ import {CandidateDetail} from "../../../framework/registration/candidate/candida
   styleUrls: ['profile-description.component.css']
 })
 
-export class ProfileDescriptionComponent {
+export class ProfileDescriptionComponent implements OnInit {
   @Input() candidate: Candidate = new Candidate();
   @Input() highlightedSection: Section;
   @Output() onComplete = new EventEmitter();
@@ -71,7 +71,7 @@ export class ProfileDescriptionComponent {
 
   onNext() {
 //    this.compactView = true;
-    this.highlightedSection.name = "Work-Area";
+    this.highlightedSection.name = 'Work-Area';
     this.highlightedSection.isDisable = false;
 
     this.onComplete.emit(this.candidate);
@@ -83,7 +83,7 @@ export class ProfileDescriptionComponent {
 
   onSave() {
 //    this.compactView = true;
-    this.highlightedSection.name = "none";
+    this.highlightedSection.name = 'none';
     this.highlightedSection.isDisable = false;
     this.onComplete.emit(this.candidate);
     this.showButton = true;

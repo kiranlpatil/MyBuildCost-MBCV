@@ -1,6 +1,6 @@
-import {Component, Input} from "@angular/core";
-import {LocalStorageService} from "../../../../../framework/shared/localstorage.service";
-import {LocalStorage} from "../../../../../framework/shared/constants";
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { LocalStorageService } from '../../../../../framework/shared/localstorage.service';
+import { LocalStorage } from '../../../../../framework/shared/constants';
 
 @Component({
   moduleId: module.id,
@@ -9,14 +9,14 @@ import {LocalStorage} from "../../../../../framework/shared/constants";
   styleUrls: ['proficiency-compare.component.css']
 })
 
-export class ProficiencyCompareComponent {
+export class ProficiencyCompareComponent implements OnInit ,OnChanges {
   @Input() data: any;
   @Input() matchdData: any = new Array(0);
 
   private isCandidate: string;
 
   ngOnInit() {
-    this.isCandidate = LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE)
+    this.isCandidate = LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE);
   }
 
 
@@ -30,7 +30,7 @@ export class ProficiencyCompareComponent {
     }
 
     if (this.matchdData != undefined && this.data != undefined) {
-      this.sortProficiency()
+      this.sortProficiency();
     }
   }
 
@@ -41,8 +41,7 @@ export class ProficiencyCompareComponent {
       } else {
         return false;
       }
-    }
-    else {
+    } else {
       return false;
     }
   }

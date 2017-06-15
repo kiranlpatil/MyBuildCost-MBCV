@@ -15,7 +15,6 @@ export class ProficienciesComponent {
   @Input() proficiencies: string[];
   @Output() onComplete = new EventEmitter();
   @Output() onSelect = new EventEmitter();
-  private maxProficiencies: number;
   tooltipMessage: string = "<ul><li><h5>Key Skills</h5><p class='info'>" +
       "Enter all key words that describe your area of expertise or specialization.</p></li>" +
     "<li><p class='info'>Ensure that you cover all relevant aspects of Technologies, Products, Methodologies, Models, " +
@@ -23,7 +22,7 @@ export class ProficienciesComponent {
       "These keywords will help the recruiter identify your specialties / proficiencies</p></li>" +
     "<li><p class='info'>Selecting too many Key Skills would dilute the matching and alignment with the " +
       "best job opportunity. Hence you should select maximum 25 Key Skills.</p></li></ul>";
-
+  private maxProficiencies: number;
   ngOnInit() {
     this.maxProficiencies = ValueConstant.MAX_PROFECIENCES;
   }
@@ -42,95 +41,14 @@ export class ProficienciesComponent {
 
   onNext() {
     this.onComplete.emit();
-    this.highlightedSection.name = "IndustryExposure";
+    this.highlightedSection.name = 'IndustryExposure';
     this.highlightedSection.isDisable = false;
   }
 
   onSave() {
-    this.highlightedSection.name = "none";
+    this.highlightedSection.name = 'none';
     this.highlightedSection.isDisable = false;
     this.onComplete.emit();
 
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

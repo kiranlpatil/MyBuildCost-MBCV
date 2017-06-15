@@ -1,12 +1,12 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { BaseService } from '../../../framework/shared/httpservices/base.service';
-import { ProfessionalData } from '../model/professional-data';
-import { ProfessionalDataService } from './professional-data.service';
-import { Message } from '../../../framework/shared/message';
-import { MessageService } from '../../../framework/shared/message.service';
-import { CandidateProfileService } from '../candidate-profile/candidate-profile.service';
-import { Candidate, Section } from '../model/candidate';
-import { FormBuilder } from '@angular/forms';
+import {Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
+import {BaseService} from "../../../framework/shared/httpservices/base.service";
+import {ProfessionalData} from "../model/professional-data";
+import {ProfessionalDataService} from "./professional-data.service";
+import {Message} from "../../../framework/shared/message";
+import {MessageService} from "../../../framework/shared/message.service";
+import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
+import {Candidate, Section} from "../model/candidate";
+import {FormBuilder} from "@angular/forms";
 
 @Component({
   moduleId: module.id,
@@ -20,15 +20,6 @@ export class ProfessionalDataComponent extends BaseService implements OnInit {
   @Input() highlightedSection: Section;
   @Output() onComplete = new EventEmitter();
 
-  /* private professionalDetailForm : FormGroup;*/
-  private realocationList = new Array();
-  private showButton: boolean = true;
-  private educationList = new Array();
-  private experienceList = new Array();
-  private salaryList = new Array();
-  private noticePeriodList = new Array();
-  private disableButton: boolean = true;
-  /*private professionalDetails:ProfessionalData=new ProfessionalData();*/
   tooltipMessage: string =
 
     "<ul>" +
@@ -39,8 +30,15 @@ export class ProfessionalDataComponent extends BaseService implements OnInit {
     "<li><h5> Experiance </h5><p>Number of years relevent experience for your selected Industry.</p></li>" +
     "<li><h5> Current Salary </h5><p>Please mention your current salary (CTC).</p></li>" +
     "</ul>";
-
-
+  /* private professionalDetailForm : FormGroup;*/
+  showButton: boolean = true;
+  private realocationList = new Array();
+  private educationList = new Array();
+  private experienceList = new Array();
+  private salaryList = new Array();
+  private noticePeriodList = new Array();
+  private disableButton: boolean = true;
+  /*private professionalDetails:ProfessionalData=new ProfessionalData();*/
   constructor(private professionalDataService: ProfessionalDataService,
               private messageService: MessageService,
               private formBuilder: FormBuilder,

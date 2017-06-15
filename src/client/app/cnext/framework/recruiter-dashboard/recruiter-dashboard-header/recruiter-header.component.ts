@@ -1,4 +1,4 @@
-import {Component, Input} from "@angular/core";
+import { Component, Input } from '@angular/core';
 
 @Component({
   moduleId: module.id,
@@ -12,8 +12,8 @@ export class RecruiterHeaderComponent {
   @Input() companyName: string;
   @Input() headerInfo: any;
 
-  constructor() {
+ /* constructor() {
 
-  }
+  }*/
 }
 

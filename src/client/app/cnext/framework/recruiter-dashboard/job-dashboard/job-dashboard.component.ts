@@ -1,11 +1,11 @@
-import {Component, OnInit} from "@angular/core";
-import {ActivatedRoute, Router} from "@angular/router";
-import {JobDashboardService} from "./job-dashboard.service";
-import {RecruiterJobView} from "../../model/recruiter-job-view";
-import {ValueConstant} from "../../../../framework/shared/constants";
-import {CandidateQListModel} from "./q-cards-candidates";
-import {JobPosterModel} from "../../model/jobPoster";
-import {ReferenceService} from "../../model/newClass";
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { JobDashboardService } from './job-dashboard.service';
+import { RecruiterJobView } from '../../model/recruiter-job-view';
+import { ValueConstant } from '../../../../framework/shared/constants';
+import { CandidateQListModel } from './q-cards-candidates';
+import { JobPosterModel } from '../../model/jobPoster';
+import { ReferenceService } from '../../model/newClass';
 
 @Component({
   moduleId: module.id,
@@ -13,7 +13,7 @@ import {ReferenceService} from "../../model/newClass";
   templateUrl: 'job-dashboard.component.html',
   styleUrls: ['job-dashboard.component.css']
 
-})
+ })
 
 export class JobDashboardComponent implements OnInit {
 
@@ -129,8 +129,7 @@ export class JobDashboardComponent implements OnInit {
     }
   }
 
-  viewJobdetails() {
-    debugger
+  viewJobDetails() {
     this.showModalStyle = true;
   }
 

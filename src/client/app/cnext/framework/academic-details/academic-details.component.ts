@@ -1,7 +1,7 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { CandidateProfileService } from '../candidate-profile/candidate-profile.service';
-import { Candidate, Section } from '../model/candidate';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from "@angular/core";
+import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
+import {Candidate, Section} from "../model/candidate";
+import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   moduleId: module.id,
@@ -10,15 +10,14 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['academic-details.component.css']
 })
 
-export class AcademicDetailComponent {
+export class AcademicDetailComponent implements OnInit, OnChanges {
   @Input() candidate: Candidate;
   @Input() highlightedSection: Section;
   @Output() onComplete = new EventEmitter();
 
   public academicDetail: FormGroup;
+  public showButton: boolean = true;
   private isButtonShow: boolean = false;
-  private showButton: boolean = true;
-
   constructor(private _fb: FormBuilder, private profileCreatorService: CandidateProfileService) {
   }
 
@@ -76,10 +75,9 @@ export class AcademicDetailComponent {
     this.candidate.academics = this.academicDetail.value.academicDetails;
     this.profileCreatorService.addProfileDetail(this.candidate).subscribe(
       user => {
-        if (type == 'next') {
+        if (type === 'next') {
           this.onNext();
-        }
-        else if (type == 'save') {
+        } else if (type === 'save') {
           this.onSave();
         }
       });
@@ -87,15 +85,14 @@ export class AcademicDetailComponent {
 
   onNext() {
     this.onComplete.emit();
-    this.highlightedSection.name = "Certification";
+    this.highlightedSection.name = 'Certification';
     this.highlightedSection.isDisable = false;
   }
 
   onSave() {
     this.onComplete.emit();
-    this.highlightedSection.name = "none";
+    this.highlightedSection.name = 'none';
     this.highlightedSection.isDisable = false;
   }
-
 
 }

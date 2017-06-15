@@ -77,7 +77,7 @@ import {RecruiterDashboardComponent} from "./cnext/framework/recruiter-dashboard
 import {IndustryListComponent} from "./cnext/framework/industry-list/industry-list.component";
 import {IndustryListService} from "./cnext/framework/industry-list/industry-list.service";
 import {DateService} from "./cnext/framework/date.service";
-import {RoleTypetListComponent} from "./cnext/framework/role-type/role-type.component";
+import {RoleTypeListComponent} from "./cnext/framework/role-type/role-type.component";
 import {RoleTypeService} from "./cnext/framework/role-type/role-type.service";
 import {IndustryExperienceListComponent} from "./cnext/framework/industry-experience/industry-experience.component";
 import {IndustryExperienceService} from "./cnext/framework/industry-experience/industry-experience.service";
@@ -108,7 +108,7 @@ import {QCardviewComponent} from "./cnext/framework/recruiter-dashboard/q-card-v
 import {QCardViewService} from "./cnext/framework/recruiter-dashboard/q-card-view/q-card-view.service";
 import {ProgressBarComponent} from "./cnext/framework/progress-bar/progress-bar.component";
 import {ShowQcardviewService} from "./cnext/framework/showQCard.service";
-import {jobListerSortPipe} from "./cnext/framework/recruiter-dashboard/job-lister/job-lister.pipe";
+import {JobListerSortPipe} from "./cnext/framework/recruiter-dashboard/job-lister/job-lister.pipe";
 import {RecruiterDashboardService} from "./cnext/framework/recruiter-dashboard/recruiter-dashboard.service";
 import {RecruiterJobSummaryComponent} from "./cnext/framework/one-page-summary/recruiter-job-summary/recruiter-job-summary.component";
 import {RecruiterJobInformation} from "./cnext/framework/one-page-summary/recruiter-job-summary/recruiter-job-information/recruiter-job-information.component";
@@ -254,12 +254,12 @@ import {GuidedTourComponent} from "./cnext/framework/guided-tour/guided-tour.com
     QcardListComponent,
     CandidateQCardComponent,
     RecruiterHeaderComponent,
-    RoleTypetListComponent,
+    RoleTypeListComponent,
     IndustryExperienceListComponent,
     JobListerComponent,
     QCardviewComponent,
     QCardListSortPipe,
-    jobListerSortPipe,
+    JobListerSortPipe,
     RecruiterJobSummaryComponent,
     RecruiterJobInformation,
     RecruiterQCardview2Component,

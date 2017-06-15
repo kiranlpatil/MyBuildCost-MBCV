@@ -1,5 +1,5 @@
-import {Component} from "@angular/core";
-//import {RecruiteQCardView2Service} from "./recruiter-q-card-view2.service";
+import { Component } from '@angular/core';
+//import {RecruiteQCardView2Service} from './recruiter-q-card-view2.service';
 
 @Component({
   moduleId: module.id,
@@ -8,7 +8,7 @@ import {Component} from "@angular/core";
   styleUrls: ['recruiter-q-card-view2.component.css'],
 
 })
-export class RecruiterQCardview2Component {
+export class RecruiterQCardview2Component {//TODO remove this commented code if not in use
   /* @Output() addShortListedToCartIds: EventEmitter<any>= new EventEmitter<any>();
    @Output() addappliedToCartIds: EventEmitter<any>= new EventEmitter<any>();
    @Output() currentrejected: EventEmitter<any> = new EventEmitter<any>();

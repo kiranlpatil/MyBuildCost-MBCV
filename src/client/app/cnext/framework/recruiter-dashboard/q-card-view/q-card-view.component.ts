@@ -1,16 +1,16 @@
-import {Component, EventEmitter, Input, Output} from "@angular/core";
-import {CandidateQCard} from "../../model/candidateQcard";
-import {QCardsortBy} from "../../model/q-cardview-sortby";
-import {MatchCandidate} from "../../model/match-candidate";
-import {QCardViewService} from "./q-card-view.service";
-import {QCardFilterService} from "../../filters/q-card-filter.service";
-import {AppSettings, ValueConstant} from "../../../../framework/shared/constants";
-import {QCardFilter} from "../../model/q-card-filter";
-import {CandidateQListModel} from "../job-dashboard/q-cards-candidates";
-import {RecruiterJobView} from "../../model/recruiter-job-view";
-import {Candidate} from "../../model/candidate";
-import {CandidateDetail} from "../../../../framework/registration/candidate/candidate";
-import {CandidateProfileService} from "../../candidate-profile/candidate-profile.service";
+import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
+import { CandidateQCard } from '../../model/candidateQcard';
+import { QCardsortBy } from '../../model/q-cardview-sortby';
+import { MatchCandidate } from '../../model/match-candidate';
+import { QCardViewService } from './q-card-view.service';
+import { QCardFilterService } from '../../filters/q-card-filter.service';
+import { AppSettings, ValueConstant } from '../../../../framework/shared/constants';
+import { QCardFilter } from '../../model/q-card-filter';
+import { CandidateQListModel } from '../job-dashboard/q-cards-candidates';
+import { RecruiterJobView } from '../../model/recruiter-job-view';
+import { Candidate } from '../../model/candidate';
+import { CandidateDetail } from '../../../../framework/registration/candidate/candidate';
+import { CandidateProfileService } from '../../candidate-profile/candidate-profile.service';
 /*import underline = Chalk.underline;*/
 
 
@@ -21,7 +21,7 @@ import {CandidateProfileService} from "../../candidate-profile/candidate-profile
   styleUrls: ['q-card-view.component.css'],
 
 })
-export class QCardviewComponent {
+export class QCardviewComponent implements OnChanges {
 
   @Input() candidateQlist: CandidateQListModel = new CandidateQListModel();
   @Input() candidates: CandidateQCard[];
@@ -29,10 +29,10 @@ export class QCardviewComponent {
   @Input() jobId: string;
   @Input() type: string;
   @Output() addedTocart: EventEmitter<any> = new EventEmitter<any>();
-  private emailsOfShrortListedCandidates: string[] = new Array(0)
-  private qCardModel: QCardsortBy = new QCardsortBy();
-  private totalQCardMatches = {count: 0};
-  private qCardCount = {count: 0};
+  public qCardModel: QCardsortBy = new QCardsortBy();
+  public totalQCardMatches = {count: 0};
+  public qCardCount = {count: 0};
+  private emailsOfShrortListedCandidates: string[] = new Array(0);
   private match: MatchCandidate = new MatchCandidate();
   private filterMeta: QCardFilter;
   private matchFormat: string = 'aboveMatch';
@@ -54,7 +54,7 @@ export class QCardviewComponent {
     );
     this.qCardFilterService.aboveMatch$.subscribe(
       () => {
-        this.matchFormat = this.match.aboveMatch
+        this.matchFormat = this.match.aboveMatch;
       }
     );
   }
@@ -76,7 +76,6 @@ export class QCardviewComponent {
   }
 
   actionOnQCard(action: string, sourceListName: string, destinationListName: string, candidate: CandidateQCard) {
-    debugger
     let isMatchList: boolean = false;
     switch (sourceListName) {
       case ValueConstant.APPLIED_CANDIDATE :
@@ -100,13 +99,13 @@ export class QCardviewComponent {
         isMatchList = true;
         break;
     }
-    if (action == "add" && !isMatchList && sourceListName != ValueConstant.APPLIED_CANDIDATE) {
+    if (action === "add" && !isMatchList && sourceListName != ValueConstant.APPLIED_CANDIDATE) {
       this.qCardViewService.updateCandidateLists(this.jobId, candidate._id, sourceListName, "remove").subscribe(
         data => {
           this.updateCountModel(data);
         }
       );
-    } else if (action == "remove") {
+    } else if (action === "remove") {
       this.recuirterListCountModel.numberOfMatchedCandidates++;
     }
     this.qCardViewService.updateCandidateLists(this.jobId, candidate._id, destinationListName, action).subscribe(
@@ -139,11 +138,11 @@ export class QCardviewComponent {
 
   }
 
-  addRemoveToShortList(candidate: CandidateQCard) {debugger
+  addRemoveToShortList(candidate: CandidateQCard) {
     this.isShortlistedclicked=true;
     let action: string;
     (this.emailsOfShrortListedCandidates.indexOf(candidate.email) != -1) ? action = 'remove' : action = 'add';
-    if (action == 'add') {
+    if (action === 'add') {
       this.emailsOfShrortListedCandidates.push(candidate.email);
     } else {
       this.emailsOfShrortListedCandidates.splice(this.emailsOfShrortListedCandidates.indexOf(candidate.email), 1);
@@ -159,7 +158,7 @@ export class QCardviewComponent {
   updateCountModel(data: any) {
     var _jobId = this.jobId;
     var item = data.data.postedJobs.filter(function (item: any) {
-      return (item._id == _jobId)
+      return (item._id == _jobId);
     });
     for (let candidateItem of item[0].candidate_list) {
       if (candidateItem.name == ValueConstant.APPLIED_CANDIDATE) {
@@ -184,7 +183,7 @@ export class QCardviewComponent {
   }
 
   changeSort() {
-    if (this.type != "matchedList") {
+    if (this.type != 'matchedList') {
       this.matchFormat = this.match.belowMatch;
     }
   }

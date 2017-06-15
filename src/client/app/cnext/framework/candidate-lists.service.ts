@@ -1,6 +1,6 @@
-import {Injectable} from "@angular/core";
-import {Subject} from "rxjs/Subject";
-import {CandidateQCard} from "./model/candidateQcard";
+import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs/Subject';
+import { CandidateQCard } from './model/candidateQcard';
 
 @Injectable()
 export class RecruiterCandidatesListsService {
