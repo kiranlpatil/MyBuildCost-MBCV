@@ -1,19 +1,19 @@
-import {Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
-import {BaseService} from "../../../framework/shared/httpservices/base.service";
-import {ProfessionalData} from "../model/professional-data";
-import {ProfessionalDataService} from "./professional-data.service";
-import {Message} from "../../../framework/shared/message";
-import {MessageService} from "../../../framework/shared/message.service";
-import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
-import {Candidate, Section} from "../model/candidate";
-import {FormBuilder} from "@angular/forms";
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { BaseService } from '../../../framework/shared/httpservices/base.service';
+import { ProfessionalData } from '../model/professional-data';
+import { ProfessionalDataService } from './professional-data.service';
+import { Message } from '../../../framework/shared/message';
+import { MessageService } from '../../../framework/shared/message.service';
+import { CandidateProfileService } from '../candidate-profile/candidate-profile.service';
+import { Candidate, Section } from '../model/candidate';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   moduleId: module.id,
   selector: 'cn-professional-data',
   templateUrl: 'professional-data.component.html',
   styleUrls: ['professional-data.component.css']
-})
+ })
 
 export class ProfessionalDataComponent extends BaseService implements OnInit {
   @Input() candidate: Candidate;

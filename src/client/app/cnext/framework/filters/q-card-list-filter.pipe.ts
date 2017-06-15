@@ -1,6 +1,6 @@
-import {Pipe, PipeTransform} from "@angular/core";
-import {CandidateQCard} from "../model/candidateQcard";
-import {QCardFilter} from "../model/q-card-filter";
+import { Pipe, PipeTransform } from '@angular/core';
+import { CandidateQCard } from '../model/candidateQcard';
+import { QCardFilter } from '../model/q-card-filter';
 
 @Pipe({name: 'qcardlistfilter', pure: false})
 

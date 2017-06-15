@@ -1,8 +1,8 @@
-import {Component, EventEmitter, Input, OnChanges, Output} from "@angular/core";
-import {JobQcard} from "../../model/JobQcard";
-import {QCardFilterService} from "../../filters/q-card-filter.service";
-import {QCardsortBy} from "../../model/q-cardview-sortby";
-import {QCardFilter} from "../../model/q-card-filter";
+import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
+import { JobQcard } from '../../model/JobQcard';
+import { QCardFilterService } from '../../filters/q-card-filter.service';
+import { QCardsortBy } from '../../model/q-cardview-sortby';
+import { QCardFilter } from '../../model/q-card-filter';
 
 @Component({
   moduleId: module.id,

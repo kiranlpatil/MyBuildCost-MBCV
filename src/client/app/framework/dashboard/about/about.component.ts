@@ -1,7 +1,7 @@
-import {Component, OnDestroy, OnInit} from "@angular/core";
-import {CommonService} from "../../shared/index";
-import {ImagePath} from "../../shared/constants";
-import {LoaderService} from "../../shared/loader/loader.service";
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { CommonService } from '../../shared/index';
+import { ImagePath } from '../../shared/constants';
+import { LoaderService } from '../../shared/loader/loader.service';
 
 @Component({
   moduleId: module.id,

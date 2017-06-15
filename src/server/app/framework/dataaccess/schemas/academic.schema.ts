@@ -1,5 +1,5 @@
-import DataAccess = require("../dataaccess");
-import IAcademic = require("../mongoose/academics");
+import DataAccess = require('../dataaccess');
+import IAcademic = require('../mongoose/academics');
 
 var mongoose = DataAccess.mongooseInstance;
 var mongooseConnection = DataAccess.mongooseConnection;
@@ -25,5 +25,5 @@ class AcademicSchema {
     return schema;
   }
 }
-var schema = mongooseConnection.model<IAcademic>("Academic", AcademicSchema.schema);
+var schema = mongooseConnection.model<IAcademic>('Academic', AcademicSchema.schema);
 export = schema;

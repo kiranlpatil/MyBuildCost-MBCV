@@ -1,7 +1,7 @@
-import {Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
-import {Section} from "../model/candidate";
-import {JobPosterModel} from "../model/jobPoster";
-import {ValueConstant} from "../../../framework/shared/constants";
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Section } from '../model/candidate';
+import { JobPosterModel } from '../model/jobPoster';
+import { ValueConstant } from '../../../framework/shared/constants';
 
 
 @Component({
@@ -22,7 +22,9 @@ export class JobProficienciesComponent implements OnInit {
   private showAdditional: boolean = false;
   private maxNumberOfMandatory: number;
   private maxNumberOfAdditional: number;
-  tooltipMessage: string = "<ul><li><h5>Proficiencies</h5><p class='info'>Enter all key words that describe the required area of expertise or specialization. These proficiencies will be used for second level of matching post capability.</p></li></ul>";
+  tooltipMessage: string = "<ul><li><h5>Key Skills</h5>" +
+      "<p class='info'>Enter all key words that describe the required area of expertise or specialization. " +
+      "These Key Skills will be used for second level of matching post capability.</p></li></ul>";
 
   ngOnInit() {
     this.maxNumberOfMandatory = ValueConstant.MAX_MANDATORY_PROFECIENCES;
@@ -51,13 +53,13 @@ export class JobProficienciesComponent implements OnInit {
   }
 
   onNext() {
-    this.highlightedSection.name = "IndustryExposure";
+    this.highlightedSection.name = 'IndustryExposure';
     this.highlightedSection.isDisable = false;
     this.onNextComplete.emit();
   }
 
   onSave() {
-    this.highlightedSection.name = "none";
+    this.highlightedSection.name = 'none';
     this.highlightedSection.isDisable = false;
     this.onNextComplete.emit();
   }

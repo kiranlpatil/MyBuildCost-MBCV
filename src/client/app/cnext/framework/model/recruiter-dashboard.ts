@@ -1,4 +1,4 @@
-import {JobPosterModel} from "./jobPoster";
+import { JobPosterModel } from './jobPoster';
 export class RecruiterDashboard {
 
   //public candidateCountModel:RecruiterHeaderDetails;

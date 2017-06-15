@@ -1,5 +1,5 @@
-import {Component, EventEmitter, Input, Output} from "@angular/core";
-import {JobQcard} from "../../model/JobQcard";
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { JobQcard } from '../../model/JobQcard';
 
 @Component({
   moduleId: module.id,

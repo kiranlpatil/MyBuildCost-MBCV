@@ -1,10 +1,10 @@
-import {Component, OnInit} from '@angular/core';
-import {NavigationRoutes} from '../../../framework/shared/constants';
-import {Router} from '@angular/router';
-import {ComplexityService} from '../complexity.service';
-import {Candidate, Section} from '../model/candidate';
-import {CandidateProfileService} from './candidate-profile.service';
-import {Role} from '../model/role';
+import { Component, OnInit } from '@angular/core';
+import { NavigationRoutes } from '../../../framework/shared/constants';
+import { Router } from '@angular/router';
+import { ComplexityService } from '../complexity.service';
+import { Candidate, Section } from '../model/candidate';
+import { CandidateProfileService } from './candidate-profile.service';
+import { Role } from '../model/role';
 
 @Component({
   moduleId: module.id,

@@ -1,6 +1,6 @@
-import {Industry} from "./industry";
-import {JobLocation} from "./job-location";
-import {CandidatesInDiffList} from "./candidatesinDiffList";
+import { Industry } from './industry';
+import { JobLocation } from './job-location';
+import { CandidatesInDiffList } from './candidatesinDiffList';
 export class JobPosterModel {
   _id: string;
   recruiterId: string;

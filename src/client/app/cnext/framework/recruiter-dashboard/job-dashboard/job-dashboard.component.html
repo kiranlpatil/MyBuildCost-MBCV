@@ -32,20 +32,23 @@
         <div class="panel clearfix">
           <ul class="pull-left">
             <!--<li class="job-posted"><p><span>{{recruiterJobView.numberOfCandidatesInCart}}</span></p></li>-->
-            <li><h4 title="View Job Details" (click)="viewJobdetails()">{{selectedJobProfile.jobTitle}}</h4></li>
+            <li>
+              <h4 title="View Job Details">{{selectedJobProfile.jobTitle}}</h4>
+              <a class="job-details" (click)="viewJobdetails()">view job</a>
+            </li>
             <!--<li>
               <a class="view-details" (click)="viewJobdetails()">view job details</a>
             </li>-->
           </ul>
-          <ul class="pull-right">
-            <li class="contact-info"><p>IT</p></li>
+          <ul class="pull-right job-info">
+            <li class="contact-info"><label>Industry</label><p>IT</p></li>
             <li class="contact-info">
-              <p><img src="../../../../assets/c-next/post-job/calendar.png" alt="calendar"/>{{selectedJobProfile.postingDate
-                | date :'dd MMM yyyy'}}<!--25 May 2017--></p>
+              <label>Posted Date</label>
+              <p>{{selectedJobProfile.postingDate | date :'dd MMM yyyy'}}</p>
             </li>
             <li class="contact-info">
-              <p><img src="../../../../assets/c-next/post-job/contact-person.png" alt="Hiring Manager"/>{{selectedJobProfile.hiringManager}}
-              </p>
+              <label>Hiring Manager</label>
+              <p>{{selectedJobProfile.hiringManager}}</p>
             </li>
           </ul>
         </div>

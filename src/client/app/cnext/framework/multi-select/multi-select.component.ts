@@ -1,5 +1,5 @@
-import {Component, ElementRef, EventEmitter, Input, Output, ViewChild} from "@angular/core";
-import {MultiSelectService} from "./multi-select.service";
+import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { MultiSelectService } from './multi-select.service';
 
 @Component({
   moduleId: module.id,

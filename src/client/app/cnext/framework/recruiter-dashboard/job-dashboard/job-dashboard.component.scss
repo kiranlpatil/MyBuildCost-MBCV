@@ -7,3 +7,29 @@
   font-size: 12px;
   display: block;
 }
+
+.job-info {
+  margin-top: -4px !important;
+
+  li {
+    text-align: center;
+    margin-top: 0 !important;
+  }
+
+  li > p {
+    margin-top: -4px;
+    font-size: 12px;
+  }
+}
+
+.list-view {
+  li > h4 {
+    display: inline;
+    cursor: default;
+  }
+
+  li > a {
+    font-size: 9px;
+    text-decoration: underline;
+  }
+}

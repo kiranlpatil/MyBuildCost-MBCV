@@ -11,7 +11,7 @@ import {ValidationService} from "../../../shared/customvalidations/validation.se
 
 @Component({
   moduleId: module.id,
-  selector: 'tpl-changeemail',
+  selector: 'tpl-change-email',
   templateUrl: 'change-email.component.html',
   styleUrls: ['change-email.component.css'],
 })

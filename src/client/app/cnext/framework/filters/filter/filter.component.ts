@@ -1,11 +1,11 @@
-import {Component, Input} from "@angular/core";
-import {FormBuilder, FormGroup} from "@angular/forms";
-import {JobPosterModel} from "../../model/jobPoster";
-import {ShowQcardviewService} from "../../showQCard.service";
-import {Candidate} from "../../model/candidate";
-import {QCardFilterService} from "../q-card-filter.service";
-import {FilterService} from "./filter.service";
-import {QCardFilter} from "../../model/q-card-filter";
+import { Component, Input } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { JobPosterModel } from '../../model/jobPoster';
+import { ShowQcardviewService } from '../../showQCard.service';
+import { Candidate } from '../../model/candidate';
+import { QCardFilterService } from '../q-card-filter.service';
+import { FilterService } from './filter.service';
+import { QCardFilter } from '../../model/q-card-filter';
 
 @Component({
   moduleId: module.id,
@@ -28,7 +28,7 @@ export class FilterComponent {
   private queryList: string[] = new Array(0);
   private qCardFilter: QCardFilter = new QCardFilter();
   private location: string[] = new Array(0);
-  private All = "All";
+  private All = 'All';
   private userForm: FormGroup;
   private isRecuirter: boolean;
 

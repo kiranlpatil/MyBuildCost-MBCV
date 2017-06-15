@@ -1,12 +1,12 @@
-import {Component, ElementRef, EventEmitter, Input, Output, ViewChild} from "@angular/core";
-import {Role} from "../model/role";
-import {Scenario} from "../model/scenario";
-import {Complexity} from "../model/complexity";
-import {Capability} from "../model/capability";
-import {ComplexityService} from "../complexity.service";
-import {LocalStorageService} from "../../../framework/shared/localstorage.service";
-import {LocalStorage} from "../../../framework/shared/constants";
-import {Section} from "../model/candidate";
+import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { Role } from '../model/role';
+import { Scenario } from '../model/scenario';
+import { Complexity } from '../model/complexity';
+import { Capability } from '../model/capability';
+import { ComplexityService } from '../complexity.service';
+import { LocalStorageService } from '../../../framework/shared/localstorage.service';
+import { LocalStorage } from '../../../framework/shared/constants';
+import { Section } from '../model/candidate';
 
 @Component({
   moduleId: module.id,
@@ -27,9 +27,9 @@ export class ComplexitiesComponent {
 
   private scenarioNames:string[] = new Array(0);
   private selectedScenarioNames:string[] = new Array(0);
-  private scenaricomplexityNames:string[] = new Array(0);
+  //private scenaricomplexityNames:string[] = new Array(0);
   private selectedComplexityNames:string[] = new Array(0);
-  private selectedDefaultComplexityNames:string[] = new Array(0);
+  //private selectedDefaultComplexityNames:string[] = new Array(0);
   private isComplexityButtonEnable:boolean = false;
   private showModalStyle:boolean = false;
   private isCandidate:boolean = false;
@@ -39,7 +39,7 @@ export class ComplexitiesComponent {
   private isPresentDefaultComplexity:boolean = false;
   private isPresentDefaultComplexityCandidate:boolean = false;
   private count:number = 0;
-  private elements:any;
+ // private elements:any;
   tooltipCandidateMessage:string = "<ul><li>" +
     "<h5>Complexities</h5><p class='info'> This section provides a list of complexity scenarios for your selected capabilities." +
       "For each scenario, select the most appropriate level of complexity that you are capable of handling.</p></li>" +

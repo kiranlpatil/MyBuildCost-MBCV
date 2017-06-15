@@ -1,8 +1,8 @@
-import {CalenderData} from "./calenderData";
+import { CalendarData } from './calendarData';
 export class EmployementHistory {
   companyName: string = '';
   designation: string = '';
-  from: CalenderData = new CalenderData();
-  to: CalenderData = new CalenderData();
+  from: CalendarData = new CalendarData();
+  to: CalendarData = new CalendarData();
   remarks: string = '';
 }

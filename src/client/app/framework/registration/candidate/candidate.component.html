@@ -35,17 +35,20 @@
 
   <div class="form-group">
     <control-messages [control]="userForm.controls.password"></control-messages>
-    <input type="password" formControlName="password" id="password" class="form-control" required/>
+    <input type="password" formControlName="password" id="password" [(ngModel)]="model.password" class="form-control"(blur)="makePasswordConfirm()" required/>
+
     <label>Password</label>
   </div>
 
+
   <div class="form-group">
     <control-messages [control]="userForm.controls.confirm_password"></control-messages>
-    <input type="password" formControlName="confirm_password" id="confirm_password"
+    <input type="password" formControlName="confirm_password" id="confirm_password" [(ngModel)]="model.confirm_password"
            (blur)="makePasswordConfirm()" class="form-control" required/>
     <label>Confirm Password</label>
-    <span class="error-messages" *ngIf="isPasswordConfirm == true">Passwords does not match.</span>
+    <span class="error-messages" *ngIf="isPasswordConfirm == true"> Passwords do not match </span>
   </div>
+
 
   <div class="form-group list">
     <div id="yearf" ng2-auto-complete

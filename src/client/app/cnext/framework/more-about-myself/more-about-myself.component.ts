@@ -1,8 +1,8 @@
-import {Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
-import {MessageService} from "../../../framework/shared/message.service";
-import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
-import {Message} from "../../../framework/shared/message";
-import {Candidate, Section} from "../model/candidate";
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { MessageService } from '../../../framework/shared/message.service';
+import { CandidateProfileService } from '../candidate-profile/candidate-profile.service';
+import { Message} from '../../../framework/shared/message';
+import { Candidate, Section } from '../model/candidate';
 
 @Component({
   moduleId: module.id,

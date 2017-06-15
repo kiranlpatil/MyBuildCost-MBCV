@@ -35,7 +35,7 @@ export class RecruiterComponent implements OnInit {
   private isRecruitingForself: boolean = true;
   private isShowMessage: boolean = false;
   private myPassword: string = '';
-  private storedLoaction: Location = new Location();
+  private storedLocation: Location = new Location();
   private address: any;
 
   constructor(private commonService: CommonService, private _router: Router, private http: Http,
@@ -95,15 +95,15 @@ export class RecruiterComponent implements OnInit {
   }
 
   getAddress(address: MyGoogleAddress) {
-    this.storedLoaction.city = address.city;
-    this.storedLoaction.state = address.state;
-    this.storedLoaction.country = address.country;
+    this.storedLocation.city = address.city;
+    this.storedLocation.state = address.state;
+    this.storedLocation.country = address.country;
   }
 
   onSubmit() {
     this.model = this.recruiterForm.value;
     this.model.current_theme = AppSettings.LIGHT_THEM;
-    this.model.location = this.storedLoaction;
+    this.model.location = this.storedLocation;
     this.model.isCandidate = false;
     this.model.company_size = this.storedcompanySize;
     this.model.company_headquarter_country = this.companyHeadquarter;

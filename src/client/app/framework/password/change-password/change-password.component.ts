@@ -10,7 +10,7 @@ import {ValidationService} from "../../shared/customvalidations/validation.servi
 
 @Component({
   moduleId: module.id,
-  selector: 'tpl-changepassword',
+  selector: 'tpl-change-password',
   templateUrl: 'change-password.component.html',
   styleUrls: ['change-password.component.css'],
 })

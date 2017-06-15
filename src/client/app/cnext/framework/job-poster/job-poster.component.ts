@@ -1,16 +1,16 @@
-import {Component} from "@angular/core";
-import {JobPosterModel} from "../model/jobPoster";
-import {JobPosterService} from "./job-poster.service";
-import {Role} from "../model/role";
-import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
-import {Message} from "../../../framework/shared/message";
-import {MessageService} from "../../../framework/shared/message.service";
-import {Proficiences} from "../model/proficiency";
-import {Section} from "../model/candidate";
-import {LocalStorage, NavigationRoutes} from "../../../framework/shared/constants";
-import {LocalStorageService} from "../../../framework/shared/localstorage.service";
-import {ShowQcardviewService} from "../showQCard.service";
-import {Router} from "@angular/router";
+import { Component, OnInit } from '@angular/core';
+import { JobPosterModel } from '../model/jobPoster';
+import { JobPosterService } from './job-poster.service';
+import { Role } from '../model/role';
+import { CandidateProfileService } from '../candidate-profile/candidate-profile.service';
+import { Message } from '../../../framework/shared/message';
+import { MessageService } from '../../../framework/shared/message.service';
+import { Proficiences } from '../model/proficiency';
+import { Section } from '../model/candidate';
+import { LocalStorage, NavigationRoutes } from '../../../framework/shared/constants';
+import { LocalStorageService } from '../../../framework/shared/localstorage.service';
+import { ShowQcardviewService } from '../showQCard.service';
+import { Router } from '@angular/router';
 
 @Component({
   moduleId: module.id,
@@ -19,7 +19,7 @@ import {Router} from "@angular/router";
   styleUrls: ['job-poster.component.css']
 })
 
-export class JobPosterComponent {
+export class JobPosterComponent implements OnInit {
   private roleList: string[] = new Array(0);
   private primaryCapability: string[] = new Array(0);
   private proficiencies: Proficiences = new Proficiences();
@@ -42,10 +42,6 @@ export class JobPosterComponent {
   private jobForComplexity: Role[] = new Array(0);
   private flag: boolean = true;
   private highlightedSection: Section = new Section();
-  private address: any;
-  private country: any;
-  private state: any;
-
   constructor(private profileCreatorService: CandidateProfileService,
               private messageService: MessageService,
               private showQCardView: ShowQcardviewService,
@@ -57,9 +53,9 @@ export class JobPosterComponent {
   ngOnInit() {
     if (LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE) === 'true') {
       this.isCandidate = true;
-    }
+     }
     if (this.isCandidate !== true) {
-      this.highlightedSection.name = "JobProfile";
+      this.highlightedSection.name = 'JobProfile';
     }
   }
 
@@ -161,8 +157,7 @@ export class JobPosterComponent {
 
   onCompentansiesandResponsibilitycomplete(data: any) {
     this.jobPosterModel = data;
-    if (this.jobPosterModel.competencies != undefined && this.jobPosterModel.competencies !== '' &&
-      this.jobPosterModel.responsibility != undefined && this.jobPosterModel.responsibility !== '') {
+    if (this.jobPosterModel.competencies != undefined && this.jobPosterModel.competencies !== ''  ) {
       this.disableButton = false;
     }
   }
@@ -226,7 +221,7 @@ export class JobPosterComponent {
         .subscribe(
           rolelist => {
             this.rolesForComplexity = rolelist.data;
-            this.highlightedSection.name = "Complexities";
+            this.highlightedSection.name = 'Complexities';
             this.jobForComplexity = this.jobPosterModel.industry.roles;
           });
     }

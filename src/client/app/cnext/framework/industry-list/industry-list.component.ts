@@ -1,6 +1,6 @@
-import {Component, EventEmitter, Input, Output} from "@angular/core";
-import {Industry} from "../model/industry";
-import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Industry } from '../model/industry';
+import { CandidateProfileService } from '../candidate-profile/candidate-profile.service';
 
 @Component({
   moduleId: module.id,

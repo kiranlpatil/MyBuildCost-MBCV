@@ -85,12 +85,12 @@ import {CandidateAwardService} from "./cnext/framework/awards/awards.service";
 import {AboutCandidateService} from "./cnext/framework/more-about-myself/more-about-myself.service";
 import {CandidateAcademyDetailService} from "./cnext/framework/academic-details/academic-details.service";
 import {JobPosterService} from "./cnext/framework/job-poster/job-poster.service";
-import {CandidateSummaryComponent} from "./cnext/framework/one-page-summury/candidate-summury/candidate-summary.component";
-import {CandidateBasicInformationComponent} from "./cnext/framework/one-page-summury/candidate-summury/candidate-basic-information/candidate-basic-information.component";
-import {VericalListViewComponent} from "./cnext/framework/one-page-summury/shared/vertical-list-view/vertical-list-view.component";
-import {TabularListViewComponent} from "./cnext/framework/one-page-summury/shared/tabular-list-view/tabular-list-view.component";
-import {HorizontalListViewComponent} from "./cnext/framework/one-page-summury/shared/horizontal-list-view/horizontal-list-view.component";
-import {AdditionalDetailsComponent} from "./cnext/framework/one-page-summury/shared/additional-details/additional-details.component";
+import {CandidateSummaryComponent} from "./cnext/framework/one-page-summary/candidate-summary/candidate-summary.component";
+import {CandidateBasicInformationComponent} from "./cnext/framework/one-page-summary/candidate-summary/candidate-basic-information/candidate-basic-information.component";
+import {VericalListViewComponent} from "./cnext/framework/one-page-summary/shared/vertical-list-view/vertical-list-view.component";
+import {TabularListViewComponent} from "./cnext/framework/one-page-summary/shared/tabular-list-view/tabular-list-view.component";
+import {HorizontalListViewComponent} from "./cnext/framework/one-page-summary/shared/horizontal-list-view/horizontal-list-view.component";
+import {AdditionalDetailsComponent} from "./cnext/framework/one-page-summary/shared/additional-details/additional-details.component";
 import {ProfileDescriptionComponent} from "./cnext/framework/profile-description/profile-description.component";
 import {CandidateProfileComponent} from "./cnext/framework/candidate-profile/candidate-profile.component";
 import {CandidateProfileService} from "./cnext/framework/candidate-profile/candidate-profile.service";
@@ -101,7 +101,7 @@ import {ComplexitiesComponent} from "./cnext/framework/complexities/complexities
 import {ProficienciesComponent} from "./cnext/framework/proficiencies/proficiencies.component";
 import {ProficiencyDomainService} from "./cnext/framework/proficiencies/proficiencies.service";
 import {BasicJobInformationComponent} from "./cnext/framework/basic-job-information/basic-job-information.component";
-import {CompentansiesAndResponsibilitiesComponent} from "./cnext/framework/compentacies-and-responsibilities/compentacies-and-responsibilities.component";
+import {CompentenciesAndResponsibilitiesComponent} from "./cnext/framework/compentacies-and-responsibilities/compentacies-and-responsibilities.component";
 import {BasicJobInformationService} from "./cnext/framework/basic-job-information/basic-job-information.service";
 import {JobListerComponent} from "./cnext/framework/recruiter-dashboard/job-lister/job-lister.component";
 import {QCardviewComponent} from "./cnext/framework/recruiter-dashboard/q-card-view/q-card-view.component";
@@ -110,8 +110,8 @@ import {ProgressBarComponent} from "./cnext/framework/progress-bar/progress-bar.
 import {ShowQcardviewService} from "./cnext/framework/showQCard.service";
 import {jobListerSortPipe} from "./cnext/framework/recruiter-dashboard/job-lister/job-lister.pipe";
 import {RecruiterDashboardService} from "./cnext/framework/recruiter-dashboard/recruiter-dashboard.service";
-import {RecruiterJobSummaryComponent} from "./cnext/framework/one-page-summury/recruiter-job-summary/recruiter-job-summary.component";
-import {RecruiterJobInformation} from "./cnext/framework/one-page-summury/recruiter-job-summary/recruiter-job-information/recruiter-job-information.component";
+import {RecruiterJobSummaryComponent} from "./cnext/framework/one-page-summary/recruiter-job-summary/recruiter-job-summary.component";
+import {RecruiterJobInformation} from "./cnext/framework/one-page-summary/recruiter-job-summary/recruiter-job-information/recruiter-job-information.component";
 import {MultiSelectComponent} from "./cnext/framework/multi-select/multi-select.component";
 import {MultiSelectService} from "./cnext/framework/multi-select/multi-select.service";
 import {JobProficienciesComponent} from "./cnext/framework/job-proficiency/job-proficiencies.component";
@@ -126,10 +126,10 @@ import {QcardListComponent} from "./cnext/framework/candidate-dashboard/candidat
 import {CandidateQCardComponent} from "./cnext/framework/candidate-dashboard/candidate-q-card/candidate-q-card.component";
 import {CandidateHeaderComponent} from "./cnext/framework/candidate-dashboard/candidate-header/candidate-header.component";
 import {FilterComponent} from "./cnext/framework/filters/filter/filter.component";
-import {JobViewComponent} from "./cnext/framework/one-page-summury/recruiter-job-summary/job-view/job-view.component";
+import {JobViewComponent} from "./cnext/framework/one-page-summary/recruiter-job-summary/job-view/job-view.component";
 import {CandidateJobListComponent} from "./cnext/framework/candidate-dashboard/candidate-job-list/candidate-job-list.component";
 import {CandidateJobListService} from "./cnext/framework/candidate-dashboard/candidate-job-list/candidate-job-list.service";
-import {CandidateViewComponent} from "./cnext/framework/one-page-summury/candidate-summury/candidate-view/candidate-view.component";
+import {CandidateViewComponent} from "./cnext/framework/one-page-summary/candidate-summary/candidate-view/candidate-view.component";
 import {CandidateInCartService} from "./cnext/framework/candidate-in-cart.service";
 import {FilterService} from "./cnext/framework/filters/filter/filter.service";
 import {RecruiterSharedHeaderComponent} from "./cnext/framework/recruiter-dashboard/recruiter-shared-header/recruiter-shared-header.component";
@@ -148,7 +148,7 @@ import {ReferenceService} from "./cnext/framework/model/newClass";
 import {AcademicsComponent} from "./cnext/framework/academic-details/academics/academics.component";
 import {CandidateCompareViewComponent} from "./cnext/framework/single-page-compare-view/candidate-compare-view/candidate-compare-view.component";
 import {CapabilityCompareComponent} from "./cnext/framework/single-page-compare-view/shared/capability-compare/capability-compare.component";
-import {CerificatesComponent} from "./cnext/framework/certification-accreditation/cerificates/certificates.component";
+import {CertificatesComponent} from "./cnext/framework/certification-accreditation/cerificates/certificates.component";
 import {AwardComponent} from "./cnext/framework/awards/award/award.component";
 import {ProficiencyCompareComponent} from "./cnext/framework/single-page-compare-view/shared/proficiency-compare/proficiency-compare.component";
 import {CandidateCompareService} from "./cnext/framework/single-page-compare-view/candidate-compare-view/candidate-compare-view.service";
@@ -227,7 +227,7 @@ import {GuidedTourComponent} from "./cnext/framework/guided-tour/guided-tour.com
     JobPosterComponent,
     MultiSelectComponent,
     BasicJobInformationComponent,
-    CompentansiesAndResponsibilitiesComponent,
+    CompentenciesAndResponsibilitiesComponent,
     CandidateJobListComponent,
     CandidateDashboardComponent,
     ProfessionalDataComponent,
@@ -243,7 +243,7 @@ import {GuidedTourComponent} from "./cnext/framework/guided-tour/guided-tour.com
     MoreAboutMyselfComponent,
     CandidateHeaderComponent,
     FilterComponent,
-    CerificatesComponent,
+    CertificatesComponent,
     AwardComponent,
     RecruiterDashboardComponent,
     ProgressBarComponent,

@@ -1,5 +1,5 @@
-import {Route} from "@angular/router";
-import {ActivateEmailComponent} from "./index";
+import { Route } from '@angular/router';
+import { ActivateEmailComponent } from './index';
 
 export const ActivateEmailRoutes: Route[] = [
   {

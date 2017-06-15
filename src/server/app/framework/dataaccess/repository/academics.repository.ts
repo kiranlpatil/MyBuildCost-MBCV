@@ -1,6 +1,6 @@
-import AcademicSchema = require("../schemas/academic.schema");
-import RepositoryBase = require("./base/repository.base");
-import IAcademic = require("../mongoose/academics");
+import AcademicSchema = require('../schemas/academic.schema');
+import RepositoryBase = require('./base/repository.base');
+import IAcademic = require('../mongoose/academics');
 
 class AcademicsRepository extends RepositoryBase<IAcademic> {
   constructor() {

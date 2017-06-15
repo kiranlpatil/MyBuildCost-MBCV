@@ -1,4 +1,4 @@
-import {RecruiterHeaderDetails} from "./recuirterheaderdetails";
+import { RecruiterHeaderDetails } from './recuirterheaderdetails';
 export class ReferenceService {
 
   public data: RecruiterHeaderDetails;

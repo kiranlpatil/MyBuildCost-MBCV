@@ -1,4 +1,4 @@
-export class CalenderData {
+export class CalendarData {
   month: string = '';
   year: string = '';
 }

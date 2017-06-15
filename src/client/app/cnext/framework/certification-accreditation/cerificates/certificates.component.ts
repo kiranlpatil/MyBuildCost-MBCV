@@ -1,7 +1,7 @@
-import {Component, Input} from "@angular/core";
+import { Component, Input } from '@angular/core';
 
-import {FormGroup} from "@angular/forms";
-import {ValueConstant} from "../../../../framework/shared/constants";
+import { FormGroup } from '@angular/forms';
+import { ValueConstant } from '../../../../framework/shared/constants';
 
 
 @Component({
@@ -11,7 +11,7 @@ import {ValueConstant} from "../../../../framework/shared/constants";
   styleUrls: ['certificates.component.css']
 })
 
-export class CerificatesComponent {
+export class CertificatesComponent {
   @Input('group')
   public certificateForm: FormGroup;
   private year: any;

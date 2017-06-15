@@ -1,6 +1,6 @@
-import {Component, EventEmitter, Input, Output} from "@angular/core";
-import {Section} from "../model/candidate";
-import {JobPosterModel} from "../model/jobPoster";
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Section } from '../model/candidate';
+import { JobPosterModel } from '../model/jobPoster';
 
 @Component({
   moduleId: module.id,
@@ -9,7 +9,7 @@ import {JobPosterModel} from "../model/jobPoster";
   styleUrls: ['compentacies-and-responsibilities.component.css']
 })
 
-export class CompentansiesAndResponsibilitiesComponent {
+export class CompentenciesAndResponsibilitiesComponent {
   @Input() jobPosterModel: JobPosterModel;
   @Input() highlightedSection: Section;
   @Output() onComplete = new EventEmitter();

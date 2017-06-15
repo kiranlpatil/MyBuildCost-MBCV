@@ -1,6 +1,6 @@
-import {Injectable} from "@angular/core";
-import {Subject} from "rxjs/Subject";
-import {QCardFilter} from "../model/q-card-filter";
+import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs/Subject';
+import { QCardFilter } from '../model/q-card-filter';
 
 @Injectable()
 export class QCardFilterService {

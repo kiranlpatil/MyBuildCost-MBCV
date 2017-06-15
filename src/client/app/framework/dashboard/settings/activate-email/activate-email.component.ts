@@ -1,8 +1,8 @@
-import {Component} from "@angular/core";
-import {ActivatedRoute, Router} from "@angular/router";
-import {ImagePath, NavigationRoutes, ProjectAsset} from "../../../shared/constants";
-import {ActiveEmailService} from "./activate-email.service";
-import {MessageService} from "../../../shared/message.service";
+import { Component } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ImagePath, NavigationRoutes, ProjectAsset } from '../../../shared/constants';
+import { ActiveEmailService } from './activate-email.service';
+import { MessageService } from '../../../shared/message.service';
 
 @Component({
   moduleId: module.id,

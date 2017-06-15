@@ -1,4 +1,4 @@
-import {Complexity} from "./complexity";
+import { Complexity } from './complexity';
 export class Capability {
   name: string = '';
   complexities: Complexity[] = new Array(0);
@@ -10,7 +10,7 @@ export class SecondaryCapability {
   name: string = '';
   complexities: Complexity[] = new Array(0);
 }
-export class DefaultCompexities {
+export class DefaultComplexities {
   name: string = '';
   complexities: Complexity[] = new Array(0);
 }

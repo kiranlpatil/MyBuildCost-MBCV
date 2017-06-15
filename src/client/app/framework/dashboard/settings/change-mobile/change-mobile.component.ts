@@ -12,7 +12,7 @@ import {LoaderService} from "../../../shared/loader/loader.service";
 
 @Component({
   moduleId: module.id,
-  selector: 'tpl-changemobile',
+  selector: 'tpl-change-mobile',
   templateUrl: 'change-mobile.component.html',
   styleUrls: ['change-mobile.component.css'],
 })

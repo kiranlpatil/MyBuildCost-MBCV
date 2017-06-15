@@ -19,7 +19,7 @@ import {MyGoogleAddress} from "./google-our-place/my-google-address";
 
 export class CandidateComponent implements OnInit {
   private model = new CandidateDetail();
-  private storedLoaction: Location = new Location();
+  private storedLocation: Location = new Location();
   private isPasswordConfirm: boolean;
   private isFormSubmitted = false;
   private userForm: FormGroup;
@@ -64,16 +64,16 @@ export class CandidateComponent implements OnInit {
   }
 
   getAddress(address: MyGoogleAddress) {
-    this.storedLoaction.city = address.city;
-    this.storedLoaction.state = address.state;
-    this.storedLoaction.country = address.country;
+    this.storedLocation.city = address.city;
+    this.storedLocation.state = address.state;
+    this.storedLocation.country = address.country;
   }
 
   onSubmit() {
     this.model = this.userForm.value;
     this.model.current_theme = AppSettings.LIGHT_THEM;
     this.model.isCandidate = true;
-    this.model.location = this.storedLoaction;
+    this.model.location = this.storedLocation;
     this.model.email = this.model.email.toLowerCase();
 
     if (!this.makePasswordConfirm()) {

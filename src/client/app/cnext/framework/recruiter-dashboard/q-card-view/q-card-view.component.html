@@ -2,7 +2,7 @@
   <header class="col-sm-12 q-card-header">
     <ul>
       <li>
-        <div class="match-cases" *ngIf="type=='matchedList'">
+        <!--<div class="match-cases" *ngIf="type=='matchedList'">
           <label class="radio-inline">
             <input type="radio" name="radiogroup" value="{{match.aboveMatch}}" (click)="matching($event.target.value)"
                    checked="checked">
@@ -12,20 +12,22 @@
             <input type="radio" name="radiogroup" value="{{match.belowMatch}}" (click)="matching($event.target.value)">
             <span>With One Level Lower Capabilities</span>
           </label>
-        </div>
+        </div>-->
       </li>
-      <li>
+      <!--<li>
         <p>Showing {{qCardCount.count}} out of {{totalQCardMatches.count}}</p>
-      </li>
+      </li>-->
       <li>
         <a class="clear-filter" (click)="clearFilter()">Clear all filters</a>
       </li>
     </ul>
     <div class="sort-by">
-      <label>Sort by</label>
-      <select id="menu" [(ngModel)]="qCardModel.sortValue" (change)="changeSort()">
-        <option value="{{itemList}}" *ngFor="let itemList of qCardModel.listOfMatchings">{{itemList}}</option>
-      </select>
+      <div class="form-group">
+        <label>Sort by</label>
+        <select id="menu" [(ngModel)]="qCardModel.sortValue" (change)="changeSort()" >
+          <option value="{{itemList}}" *ngFor="let itemList of qCardModel.listOfMatchings">{{itemList}}</option>
+        </select>
+      </div>
     </div>
   </header>
 

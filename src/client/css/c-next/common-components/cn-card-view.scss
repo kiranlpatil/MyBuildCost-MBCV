@@ -245,8 +245,24 @@ header {
     float: right;
     margin-left: 15px;
 
+    .form-group {
+      margin-bottom: 0 !important;
+    }
+
+    .form-group > label {
+      margin: 5px;
+    }
+
     select {
-      width: 120px;
+      border: 0;
+      border-bottom: 1px solid #ccc;
+      -moz-appearance: none;
+      -webkit-appearance: none;
+      background: transparent url(../assets/framework/images/form/drop-down.png) no-repeat 95% 50%;
+      border-radius: 0;
+      box-shadow: none;
+      padding: 6px;
+      width: 100px;
     }
   }
 

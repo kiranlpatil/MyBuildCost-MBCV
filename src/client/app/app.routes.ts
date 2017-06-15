@@ -20,9 +20,9 @@ import {CandidateRoutes} from "./framework/registration/candidate/candidate.rout
 import {RecruiterRoutes} from "./framework/registration/recruiter/recruiter.routes";
 import {CompanyDetailsRoutes} from "./framework/registration/company_details/company-details.routes";
 import {RecruiterDashboard} from "./cnext/framework/recruiter-dashboard/recruiter-dashboard.routes";
-import {CandidateSummary} from "./cnext/framework/one-page-summury/candidate-summury/candidate-summary.routes";
+import {CandidateSummary} from "./cnext/framework/one-page-summary/candidate-summary/candidate-summary.routes";
 import {ProfileCreator} from "./cnext/framework/candidate-profile/candidate-profile.routes";
-import {RecruiterSummary} from "./cnext/framework/one-page-summury/recruiter-job-summary/recruiter-job-summary.routes";
+import {RecruiterSummary} from "./cnext/framework/one-page-summary/recruiter-job-summary/recruiter-job-summary.routes";
 import {CandidateDashboard} from "./cnext/framework/candidate-dashboard/candidate-dashboard.routes";
 import {JobDashboardRoutes} from "./cnext/framework/recruiter-dashboard/job-dashboard/job-dashboard.routes";
 import {CandidateCompare} from "./cnext/framework/single-page-compare-view/candidate-compare-view/candidate-compare-view.routes";

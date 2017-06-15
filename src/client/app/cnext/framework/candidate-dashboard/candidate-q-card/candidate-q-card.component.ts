@@ -1,8 +1,8 @@
-import {Component, EventEmitter, Input, Output} from "@angular/core";
-import {JobQcard} from "../../model/JobQcard";
-import {LocalStorage} from "../../../../framework/shared/constants";
-import {LocalStorageService} from "../../../../framework/shared/localstorage.service";
-import {CandidateDashboardService} from "../candidate-dashboard.service";
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { JobQcard } from '../../model/JobQcard';
+import { LocalStorage } from '../../../../framework/shared/constants';
+import { LocalStorageService } from '../../../../framework/shared/localstorage.service';
+import { CandidateDashboardService } from '../candidate-dashboard.service';
 
 
 @Component({

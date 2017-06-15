@@ -1,7 +1,7 @@
-import {Component, EventEmitter, Input, Output} from "@angular/core";
-import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
-import {Candidate, Section} from "../model/candidate";
-import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { CandidateProfileService } from '../candidate-profile/candidate-profile.service';
+import { Candidate, Section } from '../model/candidate';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   moduleId: module.id,

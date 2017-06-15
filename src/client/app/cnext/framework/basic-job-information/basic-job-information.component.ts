@@ -1,11 +1,11 @@
-import {Component, EventEmitter, Input, Output} from "@angular/core";
-import {Industry} from "../model/industry";
-import {Section} from "../model/candidate";
-import {JobPosterModel} from "../model/jobPoster";
-import {ProfessionalDataService} from "../professional-data/professional-data.service";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {JobLocation} from "../model/job-location";
-import {MyGoogleAddress} from "../../../framework/registration/candidate/google-our-place/my-google-address";
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import { Industry } from '../model/industry';
+import { Section } from '../model/candidate';
+import { JobPosterModel } from '../model/jobPoster';
+import { ProfessionalDataService } from '../professional-data/professional-data.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { JobLocation } from '../model/job-location';
+import { MyGoogleAddress } from '../../../framework/registration/candidate/google-our-place/my-google-address';
 
 @Component({
   moduleId: module.id,
@@ -14,7 +14,7 @@ import {MyGoogleAddress} from "../../../framework/registration/candidate/google-
   styleUrls: ['basic-job-information.component.css']
 })
 
-export class BasicJobInformationComponent {
+export class BasicJobInformationComponent implements OnInit {
   @Input() jobPosterModel: JobPosterModel = new JobPosterModel();
   @Input() highlightedSection: Section;
   @Output() onComplete = new EventEmitter();
@@ -26,7 +26,7 @@ export class BasicJobInformationComponent {
   private noticePeriodList = new Array();
   private address: string;
   private storedIndustry: Industry;
-  private storedLoaction: JobLocation = new JobLocation();
+  private storedLocation: JobLocation = new JobLocation();
   tooltipMessage: string = "<ul>" +
     "<li><h5>Job description</h5>" +
     "<p class='info'>Enter all key words that describe the required area of expertise or specialization.</p>" +
@@ -72,9 +72,9 @@ export class BasicJobInformationComponent {
   }
 
   getAddress(address: MyGoogleAddress) {
-    this.storedLoaction.city = address.city;
-    this.storedLoaction.state = address.state;
-    this.storedLoaction.country = address.country;
+    this.storedLocation.city = address.city;
+    this.storedLocation.state = address.state;
+    this.storedLocation.country = address.country;
   }
 
   selectIndustry(industry: Industry) {
@@ -86,7 +86,7 @@ export class BasicJobInformationComponent {
     if (this.storedIndustry) {
       this.jobPosterModel.industry = this.storedIndustry;
     }
-    this.jobPosterModel.location = this.storedLoaction;
+    this.jobPosterModel.location = this.storedLocation;
     if (this.jobPosterModel.industry) {
       this.highlightedSection.name = "Work-Area";
       this.onComplete.emit(this.jobPosterModel);

@@ -28,8 +28,8 @@ export class CapabilitiesComponent {
 
     "<ul>" +
     "<li>" +
-    "<h5>Capablities </h5><p class='info'>Select those capabilities which describe what you are best at or where you would like to position your career. " +
-    "These capablities are going to help you find best job you desire.</p>" +
+    "<h5>Capabilities </h5><p class='info'>Select those capabilities which describe what you are best at or where you would like to position your career. " +
+    "These Capabilities are going to help you find best job you desire.</p>" +
     "</li>" +
     "</ul>";
 
@@ -37,8 +37,8 @@ export class CapabilitiesComponent {
 
       "<ul>" +
       "<li>" +
-      "<h5>Capablities </h5><p class='info'>Select those capabilities that are required in the candidate." +
-      "These capablities are going to help you find best candidate you desire.</p>" +
+      "<h5>Capabilities </h5><p class='info'>Select those capabilities that are required in the candidate." +
+      "These Capabilities are going to help you find best candidate you desire.</p>" +
       "</li>" +
       "</ul>";
 

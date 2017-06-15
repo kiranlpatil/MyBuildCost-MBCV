@@ -1,10 +1,10 @@
-import {Injectable} from "@angular/core";
-import {Headers, Http, RequestOptions} from "@angular/http";
-import {Observable} from "rxjs/Observable";
-import {BaseService} from "../../../framework/shared/httpservices/base.service";
-import {API, LocalStorage} from "../../../framework/shared/constants";
-import {LocalStorageService} from "../../../framework/shared/localstorage.service";
-import {Candidate} from "../model/candidate";
+import { Injectable } from '@angular/core';
+import { Headers, Http, RequestOptions } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
+import { BaseService } from '../../../framework/shared/httpservices/base.service';
+import { API, LocalStorage } from '../../../framework/shared/constants';
+import { LocalStorageService } from '../../../framework/shared/localstorage.service';
+import { Candidate } from '../model/candidate';
 
 @Injectable()
 export class CandidateProfileService extends BaseService {

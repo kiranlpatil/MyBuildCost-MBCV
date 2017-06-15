@@ -1,8 +1,8 @@
 export class AppSettings {
-  //public static IP = 'http://localhost:8080';
+  public static IP = 'http://localhost:8080';
   // public static IP = 'http://ee802b7f.ngrok.io';
   //public static IP = 'http://10.192.33.252:8087';
- public static IP = 'http://52.89.221.23:8080';
+  //public static IP = 'http://52.89.221.23:8080';
   //public static IP = 'http://52.41.194.37:8080';
   //public static IP = '';
 
@@ -82,7 +82,7 @@ export class NavigationRoutes {
   public static VERIFY_PHONE: string = '/verify_phone';
   public static APP_CHANGEEMAIL: string = '/change_email';
   public static APP_CREATEPROFILE: string = '/create_profile';
-  public static APP_PROFILESUMMURY: string = '/profile_summury';
+  public static APP_PROFILESUMMURY: string = '/profile_summary';
   public static APP_JOB_SUMMURY: string = '/job_summary';
   public static APP_COMPANYDETAILS: string = '/company_details';
 
