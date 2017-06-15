@@ -59,7 +59,7 @@
         </div>
         <div *ngIf="!isRecuirter">
           <h5 data-toggle="collapse" href="#company-size"
-              [class.panel-up]="arrow8" [class.panel-down]="!arrow8" (click)="arrow8=!arrow8">Comapny Size</h5>
+              [class.panel-up]="arrow8" [class.panel-down]="!arrow8" (click)="arrow8=!arrow8">Company Size</h5>
           <div id="company-size" class="collapse">
             <select formControlName="companysize" (change)="filterByCompanySize($event.target.value)">
               <option value="{{itemList}}" *ngFor="let itemList of companySizeList">{{itemList}}</option>

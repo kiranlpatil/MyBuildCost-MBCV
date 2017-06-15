@@ -15,6 +15,11 @@ import { QCardFilter } from '../../model/q-card-filter';
 })
 
 export class FilterComponent {
+  @Input() private candidate: Candidate;
+  @Input() private locations: any[];
+  @Input() private role: boolean;
+  @Input() private selectedJob: JobPosterModel;
+
 
   private isShowJobFilter: boolean = false;
   private proficiencyList: string[] = new Array(0);
@@ -31,14 +36,7 @@ export class FilterComponent {
   private All = 'All';
   private userForm: FormGroup;
   private isRecuirter: boolean;
-
-  @Input() private candidate: Candidate;
-  @Input() private locations: any[];
-  @Input() private role: boolean;
-  @Input() private selectedJob: JobPosterModel;
-
-
-  constructor(private formBuilder: FormBuilder, private showQCardview: ShowQcardviewService, private _filterSerive: FilterService, private qCardFilterService: QCardFilterService) {
+  constructor(private formBuilder: FormBuilder, private showQCardview: ShowQcardviewService, private _filterService: FilterService, private qCardFilterService: QCardFilterService) {
     this.showQCardview.showJobQCardView$.subscribe(
       data => {
         this.isShowJobFilter = true;
@@ -85,7 +83,7 @@ export class FilterComponent {
   }
 
   ngOnInit() {
-    this._filterSerive.getListForFilter()
+    this._filterService.getListForFilter()
       .subscribe(
         (list: any) => {
           //this.proficiencyList = list.proficiency;
