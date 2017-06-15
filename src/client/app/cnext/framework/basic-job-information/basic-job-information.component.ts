@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Industry } from '../model/industry';
 import { Section } from '../model/candidate';
 import { JobPosterModel } from '../model/jobPoster';
@@ -88,7 +88,7 @@ export class BasicJobInformationComponent implements OnInit {
     }
     this.jobPosterModel.location = this.storedLocation;
     if (this.jobPosterModel.industry) {
-      this.highlightedSection.name = "Work-Area";
+      this.highlightedSection.name = 'Work-Area';
       this.onComplete.emit(this.jobPosterModel);
     } else {
       this.jobPosterModel.industry = new Industry();
