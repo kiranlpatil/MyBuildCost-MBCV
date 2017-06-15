@@ -1,7 +1,7 @@
-import {Component, EventEmitter, Input, Output} from "@angular/core";
-import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
-import {Candidate, Section} from "../model/candidate";
-import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { CandidateProfileService } from '../candidate-profile/candidate-profile.service';
+import { Candidate, Section } from '../model/candidate';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 
 @Component({
@@ -90,13 +90,13 @@ export class AwardsComponent {
 
   onNext() {
     this.onComplete.emit();
-    this.highlightedSection.name = "none";
+    this.highlightedSection.name = 'none';
     this.highlightedSection.isDisable = false;
   }
 
   onSave() {
     this.onComplete.emit();
-    this.highlightedSection.name = "none";
+    this.highlightedSection.name = 'none';
     this.highlightedSection.isDisable = false;
   }
 }

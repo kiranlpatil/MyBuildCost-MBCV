@@ -1,11 +1,11 @@
-import {Component, EventEmitter, Input, Output} from "@angular/core";
-import {Industry} from "../model/industry";
-import {Section} from "../model/candidate";
-import {JobPosterModel} from "../model/jobPoster";
-import {ProfessionalDataService} from "../professional-data/professional-data.service";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {JobLocation} from "../model/job-location";
-import {MyGoogleAddress} from "../../../framework/registration/candidate/google-our-place/my-google-address";
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import { Industry } from '../model/industry';
+import { Section } from '../model/candidate';
+import { JobPosterModel } from '../model/jobPoster';
+import { ProfessionalDataService } from '../professional-data/professional-data.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { JobLocation } from '../model/job-location';
+import { MyGoogleAddress } from '../../../framework/registration/candidate/google-our-place/my-google-address';
 
 @Component({
   moduleId: module.id,
@@ -14,7 +14,7 @@ import {MyGoogleAddress} from "../../../framework/registration/candidate/google-
   styleUrls: ['basic-job-information.component.css']
 })
 
-export class BasicJobInformationComponent {
+export class BasicJobInformationComponent implements OnInit {
   @Input() jobPosterModel: JobPosterModel = new JobPosterModel();
   @Input() highlightedSection: Section;
   @Output() onComplete = new EventEmitter();
