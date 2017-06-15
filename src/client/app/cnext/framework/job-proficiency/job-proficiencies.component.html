@@ -2,13 +2,13 @@
   <div class="section-container clearfix proficiency-container" *ngIf="highlightedSection.name=='Proficiencies'">
     <cn-tool-tip [message]="tooltipMessage"></cn-tool-tip>
     <div class="main-content  modal-content clearfix">
-      <h4 class="heading">Proficiencies </h4>
+      <h4 class="heading">Key Skills </h4>
       <div class="col-sm-12">
-        <label>Mandatory Proficiencies</label>
+        <label>Mandatory Key Skills</label>
         <cn-multi-select [type]="'Mandatory'" [data]="proficiencies" [maxLength]="maxNumberOfMandatory"
                          [selectedData]="jobPosterModel.proficiencies"
                          (onComplete)="onMandatoryProficiencyComplete($event)"></cn-multi-select>
-        <label *ngIf="showAdditional">Additional Proficiencies</label>
+        <label *ngIf="showAdditional">Additional Key Skills</label>
         <cn-multi-select [type]="'Additional'" [data]="proficiencies" [maxLength]="maxNumberOfAdditional"
                          [selectedData]="jobPosterModel.additionalProficiencies"
                          (onComplete)="onOptionalProficiencyComplete($event)" *ngIf="showAdditional"></cn-multi-select>
@@ -25,7 +25,7 @@
     <div class="main-content">
       <div class="compact-view clearfix">
 
-        <h4 class="heading">Proficiencies
+        <h4 class="heading">Key Skills
           <button class="btn-edit"
                   (click)="highlightedSection.name='Proficiencies';disablebutton=false;showButton=false"></button>
         </h4>

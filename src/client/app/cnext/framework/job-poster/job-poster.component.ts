@@ -161,8 +161,7 @@ export class JobPosterComponent {
 
   onCompentansiesandResponsibilitycomplete(data: any) {
     this.jobPosterModel = data;
-    if (this.jobPosterModel.competencies != undefined && this.jobPosterModel.competencies !== '' &&
-      this.jobPosterModel.responsibility != undefined && this.jobPosterModel.responsibility !== '') {
+    if (this.jobPosterModel.competencies != undefined && this.jobPosterModel.competencies !== ''  ) {
       this.disableButton = false;
     }
   }

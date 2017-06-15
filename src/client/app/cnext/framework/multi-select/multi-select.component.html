@@ -6,7 +6,7 @@
          no-match-found-text="No Match Found, Press Enter to add It">
       <input class="form-control" #elem [id]="type"
              (keyup.enter)="showHideModal($event.target.value)" placeholder="Enter words that describe your area of expertise. E.g. for IT:- Java, C++. for Manufacturing:- Metal Cutting"/>
-      <div class="error-messages" *ngIf="showAlert"><p>You can select maximum {{maxLength}} proficiencies.</p></div>
+      <div class="error-messages" *ngIf="showAlert"><p>You can select maximum {{maxLength}} Key skills.</p></div>
     </div>
   </div>
   <div class="col-sm-12 no-padding">
@@ -27,7 +27,7 @@
         <div class="modal-body">
           <div class="row">
             <div class="col-sm-12">
-              <p>Do you want to add this proficiency ? </p>
+              <p>Do you want to add this Key Skills ? </p>
               <div class="button-group">
                 <form>
                   <input type="submit" #myInput class="btn btn-primary" (click)="addProficiencyToMasterData()"
