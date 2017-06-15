@@ -44,15 +44,15 @@
       </div>
 
       <div>
-        <p class="user-name">
+        <p lass="truncate-text" class="user-name">
           <span class="profile-name-first">{{candidateDetails.first_name}}</span>
           <span class="profile-name-last">{{candidateDetails.last_name}}</span>
           <button class="btn-edit"
                   (click)="highlightedSection.name='Profile';disableButton=false;showButton=false;;highlightedSection.isDisable=true"
                   [hidden]="highlightedSection.isDisable"></button>
         </p>
-        <p class="truncate-text"><label>Job Title</label> {{candidate.jobTitle}}</p>
-        <p><label>Industry</label> {{candidate.industry.name}}</p>
+        <p class="truncate-text"><label>Job Title</label> <span title="{{candidate.jobTitle}}">{{candidate.jobTitle}}</span></p>
+        <p lass="truncate-text"><label>Industry</label> <span title="{{candidate.industry.name}}">{{candidate.industry.name}}</span></p>
       </div>
     </div>
   </div>
