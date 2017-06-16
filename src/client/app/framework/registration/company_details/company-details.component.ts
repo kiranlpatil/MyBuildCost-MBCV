@@ -111,7 +111,7 @@ export class CompanyDetailsComponent implements OnInit {
       this.fileName3 = this.filesToUpload[0].name;
     }
 
-    this.companyDetailsService.makeDocumentUplaod(this.filesToUpload, []).then((result: any) => {
+    this.companyDetailsService.makeDocumentUpload(this.filesToUpload, []).then((result: any) => {
       if (result !== null) {
         if (this.buttonId === 'file-upload1') {
           this.setOfDocuments[0] = result.data.document;

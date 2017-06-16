@@ -30,14 +30,14 @@ export class EmploymentHistoryComponent {
 
   ngOnInit() {
     this.employeeHistory = this._fb.group({
-      emplyeeHistories: this._fb.array([])
+      employeeHistories: this._fb.array([])
     });
 
     // add address
     //this.addEmployeeHistory();
 
     //subscribe to addresses value changes
-    this.employeeHistory.controls['emplyeeHistories'].valueChanges.subscribe(x => {
+    this.employeeHistory.controls['employeeHistories'].valueChanges.subscribe(x => {
       this.isButtonShow = true;
     })
   }
@@ -53,10 +53,10 @@ export class EmploymentHistoryComponent {
       this.candidate = changes.candidate.currentValue;
       if (this.candidate.employmentHistory != undefined && this.candidate.employmentHistory.length > 0) {
 
-        /*(<FormGroup>this.employeeHistory.controls['emplyeeHistories'])
+        /*(<FormGroup>this.employeeHistory.controls['employeeHistories'])
          .setValue(this.candidate.employmentHistory, {onlySelf: true});*/
 
-        this.emphis.emplyeeHistories = this.candidate.employmentHistory;
+        this.emphis.employeeHistories = this.candidate.employmentHistory;
         /*for (let item of this.candidate.employmentHistory) {
          this.form.controls['students'].push(new FormControl('This will not show'));
          this.employeeHistory
@@ -64,7 +64,7 @@ export class EmploymentHistoryComponent {
          console.log(this.employeeHistory.value)
          }*/
 
-        let controlArray = <FormArray>this.employeeHistory.controls['emplyeeHistories'];
+        let controlArray = <FormArray>this.employeeHistory.controls['employeeHistories'];
         this.candidate.employmentHistory.forEach(item => {
           const fb = this.initEmployeeHistory();
           fb.patchValue(item);
@@ -95,7 +95,7 @@ export class EmploymentHistoryComponent {
   }
 
   addEmployeeHistory() {
-    const control = <FormArray>this.employeeHistory.controls['emplyeeHistories'];
+    const control = <FormArray>this.employeeHistory.controls['employeeHistories'];
     const addrCtrl = this.initEmployeeHistory();
     control.push(addrCtrl);
     this.showAddButton = false;
@@ -106,7 +106,7 @@ export class EmploymentHistoryComponent {
   }
 
   removeEmployeeHistory(i: number) {
-    const control = <FormArray>this.employeeHistory.controls['emplyeeHistories'];
+    const control = <FormArray>this.employeeHistory.controls['employeeHistories'];
     control.removeAt(i);
     this.postData('delete');
   }
@@ -117,7 +117,7 @@ export class EmploymentHistoryComponent {
   }
 
   postData(type: string) {
-    this.candidate.employmentHistory = this.employeeHistory.value.emplyeeHistories;
+    this.candidate.employmentHistory = this.employeeHistory.value.employeeHistories;
     this.profileCreatorService.addProfileDetail(this.candidate).subscribe(
       user => {
         if (type == 'next') {
@@ -144,7 +144,7 @@ export class EmploymentHistoryComponent {
 }
 
 export class EmpHis {
-  emplyeeHistories: any;
+  employeeHistories: any;
 }
 
 

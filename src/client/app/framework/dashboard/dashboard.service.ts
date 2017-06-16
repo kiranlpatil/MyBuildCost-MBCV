@@ -26,7 +26,7 @@ export class DashboardService extends BaseService {
       .catch(this.handleError);
   }
 
-  makePictureUplaod(files: Array<File>, params: Array<string>) {
+  makeDocumentUpload(files: Array<File>, params: Array<string>) {
     var url = AppSettings.API_ENDPOINT + API.UPDATE_PICTURE + '/' + LocalStorageService.getLocalValue(LocalStorage.USER_ID);
     return new Promise((resolve: any, reject: any) => {
       var formData: any = new FormData();
