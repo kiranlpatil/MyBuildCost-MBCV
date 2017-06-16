@@ -28,7 +28,7 @@
               <div id="matched" class="tab-pane fade in active matched">
                 <cn-q-card-list [joblistCount]="jobList.length" [listOfJobs]="jobList" [type]="'none'"
                                 (onAction)="onActionPerformOnExactList($event)"></cn-q-card-list>
-                <p *ngIf="candidate.summary.numberOfmatched==0">There are no matched candidates.</p>
+                <p *ngIf="candidate.summary.numberOfmatched==0">There are no matched jobs.</p>
               </div>
               <div id="applied" class="tab-pane fade"><!--[hidden]="!hideSection"-->
                 <cn-candidate-job-list [type]="'apply'" [listOfJobs]="appliedJobs"
