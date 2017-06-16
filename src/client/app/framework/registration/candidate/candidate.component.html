@@ -59,7 +59,7 @@
          (ngModelChange)="selectYearModel($event)"
          no-match-found-text="Please select valid birth year.">
       <input formControlName="birth_year" [ngModel]="passingYear" id="birth_year" class="form-control"
-             placeholder="Year of Birth" required/>
+             placeholder="Year of Birth" required autocomplete="off"/>
       <!--<label class="select-label">Year of Birth</label>-->
     </div>
   </div>
