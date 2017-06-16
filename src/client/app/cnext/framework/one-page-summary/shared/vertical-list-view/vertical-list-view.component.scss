@@ -100,4 +100,18 @@ $bg-color: #fff;
       }
     }
   }
+
+  .candidate-vertical-view {
+    li:first-child {
+      display: block;
+    }
+
+    li {
+      display: none;
+
+      &::after {
+        display: none;
+      }
+    }
+  }
 }
