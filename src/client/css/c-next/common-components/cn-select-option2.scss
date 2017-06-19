@@ -1,0 +1,215 @@
+$text-color: #666;
+$white: #fff;
+$option-border-color: #e8e8e8;
+$primary-option: #3694d1;
+$secondary-option: #3694d1;
+
+.select-option2 {
+  display: inline-block;
+  margin: 5px 10px 5px 0;
+  text-align: left;
+}
+
+.select-option2 > label {
+  margin: 0;
+  padding: 0;
+  position: relative;
+
+  & > input {
+    display: block;
+    position: absolute;
+    top: 4px;
+    left: 5px;
+
+    & + span {
+      border: 1px solid $option-border-color;
+      border-radius: 25px;
+      box-shadow: 0 0 1px 0 $option-border-color inset, 0 0 1px 0 $option-border-color;
+      color: $text-color;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 2px 10px 2px 25px;
+      min-width: 100px;
+      display: inline-block;
+      text-align: center;
+      user-select: none;
+
+      &:hover {
+        border: 1px solid $option-border-color;
+        box-shadow: 0 0 1px 0 $option-border-color inset, 0 0 1px 0 $option-border-color;
+      }
+    }
+
+    &:checked {
+      & + span {
+        color: $white;
+        background-color: $primary-option;
+        border: 1px solid $primary-option;
+        box-shadow: 0 0 1px 0 $primary-option inset, 0 0 1px 0 $primary-option;
+      }
+    }
+  }
+
+  & > input:disabled {
+    & + span {
+      cursor: not-allowed;
+    }
+  }
+
+  &:hover {
+    & > input {
+      & + span {
+        cursor: pointer;
+      }
+
+      &:checked {
+        & + span {
+          color: $white;
+        }
+      }
+    }
+
+    & > input:disabled {
+      & + span {
+        cursor: not-allowed;
+      }
+    }
+  }
+}
+
+.primary > label {
+  & > input {
+
+    & + span {
+      border: 1px solid $primary-option;
+      box-shadow: 0 0 1px 0 $primary-option inset, 0 0 1px 0 $primary-option;
+
+      &:hover {
+        border: 1px solid $primary-option;
+        box-shadow: 0 0 1px 0 $primary-option inset, 0 0 1px 0 $primary-option;
+      }
+    }
+
+    &:checked {
+      & + span {
+        background-color: $primary-option;
+        border: 1px solid $primary-option;
+        box-shadow: 0 0 1px 0 $primary-option inset, 0 0 1px 0 $primary-option;
+      }
+    }
+  }
+
+  &:hover {
+    & > input {
+      & + span {
+        border: 1px solid $primary-option;
+        box-shadow: 0 0 1px 0 $primary-option inset, 0 0 1px 0 $primary-option;
+      }
+
+      &:checked {
+        & + span {
+          background-color: $primary-option;
+          border: 1px solid $primary-option;
+          box-shadow: 0 0 1px 0 $primary-option inset, 0 0 1px 0 $primary-option;
+        }
+      }
+    }
+  }
+}
+
+.secondary > label {
+  & > input {
+    display: none;
+
+    & + span {
+      border: 1px solid $primary-option;
+      box-shadow: 0 0 1px 0 $primary-option inset, 0 0 1px 0 $primary-option;
+
+      &:hover {
+        border: 1px solid $primary-option;
+        box-shadow: 0 0 1px 0 $primary-option inset, 0 0 1px 0 $primary-option;
+      }
+    }
+
+    &:checked {
+      & + span {
+        background-color: $primary-option;
+        border: 1px solid $primary-option;
+        box-shadow: 0 0 1px 0 $primary-option inset, 0 0 1px 0 $primary-option;
+      }
+    }
+  }
+
+  &:hover {
+    & > input {
+      & + span {
+        border: 1px solid $primary-option;
+        box-shadow: 0 0 1px 0 $primary-option inset, 0 0 1px 0 $primary-option;
+      }
+
+      &:checked {
+        & + span {
+          background-color: $primary-option;
+          border: 1px solid $primary-option;
+          box-shadow: 0 0 1px 0 $primary-option inset, 0 0 1px 0 $primary-option;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1280px) {
+  .primary > label {
+    & > input {
+      & + span {
+        &:hover {
+          border: 1px solid $primary-option;
+          box-shadow: 0 0 1px 0 $primary-option inset, 0 0 1px 0 $primary-option;
+        }
+      }
+    }
+
+    &:hover {
+      & > input {
+        & + span {
+          border: 1px solid $primary-option;
+          box-shadow: 0 0 1px 0 $primary-option inset, 0 0 1px 0 $primary-option;
+        }
+      }
+    }
+  }
+
+  .secondary > label {
+    & > input {
+      & + span {
+        &:hover {
+          border: 1px solid $primary-option;
+          box-shadow: 0 0 1px 0 $primary-option inset, 0 0 1px 0 $primary-option;
+        }
+      }
+    }
+
+    &:hover {
+      & > input {
+        & + span {
+          border: 1px solid $primary-option;
+          box-shadow: 0 0 1px 0 $primary-option inset, 0 0 1px 0 $primary-option;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .select-option {
+    margin: 5px 10px 5px 0;
+  }
+  .select-option > label {
+    & > input {
+      & + span {
+        font-size: 10px;
+      }
+    }
+  }
+}

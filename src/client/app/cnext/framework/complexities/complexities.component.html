@@ -9,7 +9,7 @@
         <div class="complexity-container">
           <div
             *ngIf="isPresentDefaultComplexity">
-            <div *ngFor="let role of roles">
+            <div *ngFor="let role of roles;let i = index">
               <div *ngIf="role.default_complexities!=undefined && role.default_complexities[0]!=undefined">
                 <h5 class="sub-areas">{{role.name}} <span class="glyphicon glyphicon-chevron-right"></span> Common Capabilities</h5>
                 <div *ngFor="let complexity of role.default_complexities[0].complexities">
@@ -35,7 +35,7 @@
 
 
           <div *ngIf="isPresentDefaultComplexityCandidate">
-            <div *ngFor="let role of candidateRoles">
+            <div *ngFor="let role of candidateRoles;let i = index">
               <div *ngIf="role.default_complexities!=undefined && role.default_complexities[0]!=undefined">
                 <h5 class="sub-areas">{{role.name}} <span class="glyphicon glyphicon-chevron-right"></span> Common Capabilities</h5>
                 <div *ngFor="let complexity of role.default_complexities[0].complexities">
@@ -60,7 +60,7 @@
             </div>
           </div>
           <div *ngIf="isPresentCapabilityCandidate">
-            <div *ngFor="let role of candidateRoles">
+            <div *ngFor="let role of candidateRoles;let i = index">
               <div *ngFor="let capability of role.capabilities">
                 <h5 class="sub-areas">{{role.name}} <span class="glyphicon glyphicon-chevron-right"></span> {{capability.name}}</h5>
                 <div class="select-complexity clearfix" *ngFor="let complexity of capability.complexities">
@@ -83,7 +83,7 @@
             </div>
           </div>
           <div *ngIf="isPresentCapability">
-            <div *ngFor="let role of roles">
+            <div *ngFor="let role of roles;let i = index">
               <div *ngFor="let capability of role.capabilities">
                 <h5 class="sub-areas">{{role.name}} <span class="glyphicon glyphicon-chevron-right"></span>  {{capability.name}}</h5>
                 <div class="select-complexity clearfix" *ngFor="let complexity of capability.complexities">
