@@ -14,9 +14,9 @@ declare var google: any;
 export class MyGoogleDirective {
   @Output() setAddress: EventEmitter<MyGoogleAddress> = new EventEmitter();
   address: MyGoogleAddress = new MyGoogleAddress();
-  private place: any;
   modelValue: any;
   autocomplete: any;
+  private place: any;
   private _el: HTMLElement;
 
 
