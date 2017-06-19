@@ -26,7 +26,7 @@ export class ProgressBarComponent implements OnChanges {
       this.ctx.beginPath();
     }
     this.ctx.lineWidth = 2.0;
-    if (this.rotation && this.value !== 100) {
+    if (this.rotation && this.value <= 99.99) {debugger
       this.ctx.strokeStyle = '#e8e8e8';
     } else {
       this.ctx.strokeStyle = this.color;

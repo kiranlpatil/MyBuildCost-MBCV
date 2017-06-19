@@ -36,6 +36,7 @@ export class FilterComponent {
   private All = 'All';
   private userForm: FormGroup;
   private isRecuirter: boolean;
+
   constructor(private formBuilder: FormBuilder, private showQCardview: ShowQcardviewService, private _filterService: FilterService, private qCardFilterService: QCardFilterService) {
     this.showQCardview.showJobQCardView$.subscribe(
       data => {
@@ -105,8 +106,7 @@ export class FilterComponent {
     var value = event.target.value;
     if (event.target.checked) {
       this.qCardFilter.proficiencyDataForFilter.push(value.toLowerCase())
-    }
-    else {
+    } else {
       var index = this.qCardFilter.proficiencyDataForFilter.indexOf(value.toLowerCase());
       if (index > -1) {
         this.qCardFilter.proficiencyDataForFilter.splice(index, 1);
@@ -125,8 +125,7 @@ export class FilterComponent {
     var value = event.target.value;
     if (event.target.checked) {
       this.qCardFilter.educationDataForFilter.push(value.toLowerCase())
-    }
-    else {
+    } else {
       var index = this.qCardFilter.educationDataForFilter.indexOf(value.toLowerCase());
       if (index > -1) {
         this.qCardFilter.educationDataForFilter.splice(index, 1);
@@ -145,8 +144,7 @@ export class FilterComponent {
     var value = event.target.value;
     if (event.target.checked) {
       this.qCardFilter.industryExposureDataForFilter.push(value.toLowerCase())
-    }
-    else {
+    } else {
       var index = this.qCardFilter.industryExposureDataForFilter.indexOf(value.toLowerCase());
       if (index > -1) {
         this.qCardFilter.industryExposureDataForFilter.splice(index, 1);
@@ -278,5 +276,4 @@ export class FilterComponent {
     }
     this.qCardFilterService.filterby(this.qCardFilter);
   }
-
 }
