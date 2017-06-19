@@ -41,7 +41,7 @@ export class Summary {
   numberOfTimeSearched: number = 9999;
   numberOfTimesViewed: number = 999;
   numberOfTimesAddedToCart: number = 99;
-  numberOfJobApplied: number;
-  numberJobsBlocked: number;
+  numberOfJobApplied: number=0;
+  numberJobsBlocked: number=0;
   numberOfmatched: number;
 }
