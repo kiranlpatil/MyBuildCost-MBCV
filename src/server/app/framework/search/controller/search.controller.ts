@@ -12,6 +12,7 @@ export class SearchController {
   }
 
   getMatchingCandidates(req: express.Request, res: express.Response) {
+    console.time("getMatchingCandidatesController");
     let searchService = new SearchService();
     let profileId = req.params.id;
     let recruiterService = new RecruiterService();
@@ -20,6 +21,7 @@ export class SearchController {
         if (error) {
           res.status(304).send(error);
         } else {
+          console.timeEnd("getMatchingCandidatesController");
           res.status(200).send(result);
         }
       });

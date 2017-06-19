@@ -135,5 +135,5 @@ class CandidateSchema {
     return schema;
   }
 }
-var schema = mongooseConnection.model<ICandidate>("Candidate", CandidateSchema.schema);
+var schema = mongooseConnection.model<ICandidate>('Candidate', CandidateSchema.schema);
 export = schema;

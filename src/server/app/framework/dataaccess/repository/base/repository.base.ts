@@ -18,6 +18,15 @@ class RepositoryBase<T extends mongoose.Document> implements IRead<T>, IWrite<T>
     this._model.find(field, callback)
   }
 
+  retrieveWithLean(field: any, callback: (error: any, result: any) => void) {
+    console.time('repo2 time');
+    this._model.find(field).lean().exec((err, res)=> {
+      console.timeEnd('repo2 time');
+      callback(err,res);
+    });
+  }
+
+
   update(_id: mongoose.Types.ObjectId, item: T, callback: (error: any, result: any) => void) {
     this._model.update({_id: _id}, item, callback);
 

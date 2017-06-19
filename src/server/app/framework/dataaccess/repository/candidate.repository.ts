@@ -19,12 +19,11 @@ class CandidateRepository extends RepositoryBase<ICandidate> {
 
 
   getCandidateQCard(candidates: any[], jobProfile: JobProfileModel, candidatesIds: string[], callback: (err: any, res: any) => void) {
-    let job_posted_selected_complexity: string[] = new Array(0);
+    console.time('getCandidateQCardForLoop');
+    let job_posted_selected_complexity: string[];
     job_posted_selected_complexity = this.getCodesFromindustry(jobProfile.industry);
-    let card_view_candidates: CandidateQCard[] = new Array(0);
-    let count = 0;
-    let count_for_break = 0;
-    let isSend: boolean = false;
+    let candidate_q_card_map :any={};
+    let idsOfSelectedCandidates : string[]= new Array(0);
     for (let candidate of candidates) {
       let isFound: boolean = false;
       if (candidatesIds) {
@@ -34,10 +33,10 @@ class CandidateRepository extends RepositoryBase<ICandidate> {
       } else {
         if (jobProfile.candidate_list) {
           for (let list of jobProfile.candidate_list) {
-            if (list.name == ConstVariables.SHORT_LISTED_CANDIDATE) {
+            if (list.name === ConstVariables.SHORT_LISTED_CANDIDATE) {
               continue;
             }
-            if (list.ids.indexOf(candidate._id.toString()) != -1) {
+            if (list.ids.indexOf(candidate._id.toString()) !== -1) {
               isFound = true;
               break;
             }
@@ -73,52 +72,52 @@ class CandidateRepository extends RepositoryBase<ICandidate> {
       candidate_card_view.below_one_step_matching = (candidate_card_view.below_one_step_matching / job_posted_selected_complexity.length) * 100;
       candidate_card_view.exact_matching = (candidate_card_view.exact_matching / job_posted_selected_complexity.length) * 100;
       candidate_card_view.matching = candidate_card_view.above_one_step_matching + candidate_card_view.below_one_step_matching + candidate_card_view.exact_matching;
+      candidate_card_view.salary = candidate.professionalDetails.currentSalary;
+      candidate_card_view.experience = candidate.professionalDetails.experience;
+      candidate_card_view.education = candidate.professionalDetails.education;
+      candidate_card_view.proficiencies = candidate.proficiencies;
+      candidate_card_view.interestedIndustries = candidate.interestedIndustries;
+      candidate_card_view._id = candidate._id;
+      candidate_card_view.location = candidate.location.city;
+      candidate_card_view.noticePeriod = candidate.professionalDetails.noticePeriod;
       if (candidate_card_view.matching >= ConstVariables.LOWER_LIMIT_FOR_SEARCH_RESULT) {
-        count++;
+        candidate_q_card_map[candidate.userId]=candidate_card_view;
+        idsOfSelectedCandidates.push(candidate.userId);
       }
-      let userRepository: UserRepository = new UserRepository();
-      userRepository.findById(candidate.userId.toString(), (error: any, res: UserModel) => {
-        if (error) {
-          callback(error, null);
-        } else {
-          candidate_card_view.salary = candidate.professionalDetails.currentSalary;
-          candidate_card_view.experience = candidate.professionalDetails.experience;
-          candidate_card_view.education = candidate.professionalDetails.education;
-          candidate_card_view.proficiencies = candidate.proficiencies;
-          candidate_card_view.interestedIndustries = candidate.interestedIndustries;
-          candidate_card_view._id = candidate._id;
-          candidate_card_view.email = res.email;
-          candidate_card_view.first_name = res.first_name;
-          candidate_card_view.last_name = res.last_name;
-          candidate_card_view.mobile_number = res.mobile_number;
-          candidate_card_view.picture = res.picture;
-          candidate_card_view.location = candidate.location.city;
-          candidate_card_view.noticePeriod = candidate.professionalDetails.noticePeriod;
-          if (candidate_card_view.matching >= ConstVariables.LOWER_LIMIT_FOR_SEARCH_RESULT) {
-            count_for_break++;
-            card_view_candidates.push(candidate_card_view);
-          }
-
-          if (count_for_break == count) {
-            if (!isSend) {
-              isSend = true;
-              callback(null, card_view_candidates);
-            }
-          }
-        }
-      });
 
     }
-    setTimeout(() => {
-      if (!isSend) {
-        callback(null, card_view_candidates);
+    let candidates_q_cards_send : CandidateQCard[] = new Array(0);
+    let userRepository: UserRepository = new UserRepository();
+    console.timeEnd('getCandidateQCardForLoop');
+    userRepository.retrieveByMultiIds(idsOfSelectedCandidates,{}, (error: any, res: any) => {
+      if (error) {
+        callback(error, null);
       }
-    }, 3000);
+       else {
+        if(res.length>0){
+          console.time('retrieveByMultiIds');
+          for(let user of res){
+            let candidateQcard : CandidateQCard= candidate_q_card_map[user._id];
+            candidateQcard.email=user.email;
+            candidateQcard.first_name=user.first_name;
+            candidateQcard.last_name=user.last_name;
+            candidateQcard.mobile_number=user.mobile_number;
+            candidateQcard.picture=user.picture;
+            candidates_q_cards_send.push(candidateQcard);
+          }
+          console.timeEnd('retrieveByMultiIds');
+          callback(null,candidates_q_cards_send);
+        }else {
+          callback(null,candidates_q_cards_send);
+        }
+      }
+    });
 
 
   }
 
   getCodesFromindustry(industry: IndustryModel): string[] {
+    console.time('getCodesFromindustry');
     let selected_complexity: string[] = new Array(0);
     for (let role of industry.roles) {
       for (let capability of role.default_complexities) {
@@ -145,6 +144,7 @@ class CandidateRepository extends RepositoryBase<ICandidate> {
         }
       }
     }
+    console.time('getCodesFromindustry');
     return selected_complexity;
   }
 
