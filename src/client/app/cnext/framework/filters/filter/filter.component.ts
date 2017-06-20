@@ -270,9 +270,11 @@ export class FilterComponent {
     this.qCardFilter = new QCardFilter();
     this.queryList = new Array(0);
     this.qCardFilter.query = query;
-    if (this.role) {
-      (<HTMLInputElement>document.getElementById('radio-button-1')).checked = false;
-      (<HTMLInputElement>document.getElementById('radio-button-2')).checked = false;
+    if (this.role) {debugger
+      if((<HTMLInputElement>document.getElementById('radio-button-1'))!=null && (<HTMLInputElement>document.getElementById('radio-button-2'))!=null){
+        (<HTMLInputElement>document.getElementById('radio-button-1')).checked = false;
+        (<HTMLInputElement>document.getElementById('radio-button-2')).checked = false;
+      }
     }
     this.qCardFilterService.filterby(this.qCardFilter);
   }

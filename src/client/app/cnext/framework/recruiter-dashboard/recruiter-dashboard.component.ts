@@ -3,6 +3,7 @@ import { RecruiterDashboardService } from './recruiter-dashboard.service';
 import { RecruiterDashboard } from '../model/recruiter-dashboard';
 import { RecruiterHeaderDetails } from '../model/recuirterheaderdetails';
 import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   moduleId: module.id,
@@ -20,7 +21,7 @@ export class RecruiterDashboardComponent implements OnInit {
  // private showTabsForJobPoster: boolean = false;
 
   constructor(private recruiterDashboardService: RecruiterDashboardService,
-              private activatedRoute: ActivatedRoute) {
+              private activatedRoute: ActivatedRoute,private _router: Router) {
   }
 
 
@@ -43,5 +44,11 @@ export class RecruiterDashboardComponent implements OnInit {
     });
     this.getRecruiterData();
   }
-
+  navigateTo(nav: string) {debugger
+    this.activeTabPJ=false;
+    this.activeTabPNJ= true;
+    if (nav !== undefined) {
+      this._router.navigate([nav]);
+    }
+  }
 }

@@ -106,6 +106,7 @@ export class JobPosterComponent implements OnInit {
 
 
   onBasicJobInformationComplete(jobModel: JobPosterModel) {
+    jobModel.industry.roles=[];
     this.jobPosterModel = jobModel;
     this.getRoles();
     this.getProficiency();
@@ -131,7 +132,7 @@ export class JobPosterComponent implements OnInit {
 
   }
 
-  selectRoleFromComplexity(roles: Role[]) {
+  selectRoleFromComplexity(roles: Role[]) {debugger
     this.jobPosterModel.industry.roles = roles;
     this.jobForComplexity = roles;
     this.isShowProficiency = true;
@@ -169,7 +170,7 @@ export class JobPosterComponent implements OnInit {
     this.messageService.message(message);
   }
 
-  getRoles() {
+  getRoles() {debugger
     if (this.jobPosterModel.industry.name !== undefined) {
       this.profileCreatorService.getRoles(this.jobPosterModel.industry.name)
         .subscribe(
@@ -178,8 +179,10 @@ export class JobPosterComponent implements OnInit {
     }
   }
 
-  getCapability() {
-    this.flag = false;
+  getCapability() {debugger
+    this.primaryCapability=new Array();
+   // this.flag = false;
+    this.roleList=new Array();
     for (let role of this.jobPosterModel.industry.roles) {
       this.roleList.push(role.name);
     }
@@ -206,7 +209,8 @@ export class JobPosterComponent implements OnInit {
     }
   }
 
-  getComplexity() {
+  getComplexity() {debugger
+    this.primaryCapability=new Array();
     for (let role of this.jobPosterModel.industry.roles) {
       if (role.capabilities) {
         for (let capability of role.capabilities) {
