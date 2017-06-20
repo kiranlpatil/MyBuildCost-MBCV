@@ -68,7 +68,7 @@ $active-color: #edf1f5;
     p {
       @extend %text-ellipsis;
       border-bottom: 1px solid $border-color;
-      font-size: 12px;
+      font-size: 13px;
       margin: 0;
       padding: 8px 5px 8px 30px;
       position: relative;
@@ -108,7 +108,7 @@ $active-color: #edf1f5;
     h6 {
       color: $orange;
       font-weight: 900;
-      font-size: 14px;
+      font-size: 13px;
       margin: 0 0 5px;
       text-transform: capitalize;
       font-family: 'gothamrnd-book';
@@ -122,7 +122,7 @@ $active-color: #edf1f5;
       color: $orange;
       font-family: 'gothamrnd-light';
       font-weight: 600;
-      font-size: 12px;
+      font-size: 13px;
       color: #666;
       margin: 0 0 5px;
       @extend %text-ellipsis;
@@ -213,7 +213,7 @@ $active-color: #edf1f5;
 }
 
 header {
-  font-size: 12px;
+  font-size: 13px;
   text-align: left;
 
   ul {

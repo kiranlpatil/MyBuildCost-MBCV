@@ -60,7 +60,7 @@ $theme-color: #3694d1;
     position: relative;
     top: -4px;
     display: inline-block;
-    left: -2px;
+    left: 0;
   }
 
   .see-more {
@@ -132,7 +132,7 @@ $theme-color: #3694d1;
   }
 
   p {
-    font-size: 12px;
+    font-size: 13px;
     margin: 0;
   }
 
@@ -145,7 +145,7 @@ $theme-color: #3694d1;
 
   .option {
     font-weight: 600;
-    font-size: 12px;
+    font-size: 13px;
     padding: 0;
     text-transform: capitalize;
   }

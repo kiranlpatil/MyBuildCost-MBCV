@@ -21,7 +21,7 @@ $theme-color: #3694d1;
     padding: 0;
     border-radius: 8px;
     border: 1px solid #f0daa6;
-    font-size: 12px;
+    font-size: 13px;
     -webkit-animation: fadeinout 2s linear forwards;
     animation: fadeinout 2s linear forwards;
     z-index: 1;
@@ -37,24 +37,8 @@ $theme-color: #3694d1;
       top: 39px;
       left: -76px;
       z-index: 4;
-      /* box-shadow: 1px 1px 1px #ccc; */
       transform: rotate(-21deg);
     }
-
-    /* .tail1 {
-       display: block;
-       border-color: transparent #967c2c transparent transparent;
-       border-style: solid;
-       border-width: 15px 25px 0px 56px;
-       width: 0;
-       height: 0;
-       position: absolute;
-       top: 39px;
-       left: -76px;
-       z-index: 9;
-       !* box-shadow: 1px 1px 1px #ccc; *!
-       transform: rotate(-21deg);
-     }*/
 
     ul {
       padding: 0 5px;
@@ -71,7 +55,7 @@ $theme-color: #3694d1;
 
     h5 {
       margin: 0 0 5px;
-      font-size: 12px;
+      font-size: 13px;
       font-weight: 900;
       font-family: 'gothamrnd-book';
     }
@@ -117,7 +101,7 @@ $theme-color: #3694d1;
 
   .heading {
     color: $theme-color;
-    font-size: 14px;
+    font-size: 13px;
     margin: 0 0 15px;
     padding: 8px 15px;
     position: relative;
@@ -131,7 +115,7 @@ $theme-color: #3694d1;
       background: transparent;
       color: $theme-color;
       float: right;
-      font-size: 12px;
+      font-size: 13px;
       font-style: italic;
       font-weight: 400;
     }
@@ -159,8 +143,8 @@ $theme-color: #3694d1;
 
   .heading-compact {
     color: $theme-color;
-    font-size: 12px;
-    margin: 5px 0 5px;
+    font-size: 13px;
+    margin: 5px 0;
 
     img {
       margin-right: 5px;
@@ -191,7 +175,7 @@ $theme-color: #3694d1;
     border: 1px solid $theme-color;
     box-shadow: 0 0 1px 0 #3694d1 inset, 0 0 1px 0 #3694d1;
     color: $text-color;
-    font-size: 12px;
+    font-size: 13px;
     padding: 6px 15px;
 
     &:focus,
@@ -204,7 +188,7 @@ $theme-color: #3694d1;
 
   .instructions {
     color: $instruction;
-    font-size: 12px;
+    font-size: 13px;
     font-style: italic;
     margin: 0;
   }
@@ -234,7 +218,7 @@ $theme-color: #3694d1;
 
   .form-group {
     float: left;
-    margin: 15px 0 15px 0;
+    margin: 15px 0;
     padding: 0;
     position: relative;
     width: 100%;
@@ -242,7 +226,7 @@ $theme-color: #3694d1;
     label {
       -moz-transition: top .2s ease-in, font-size .2s ease-in;
       -webkit-transition: top .2s ease-in, font-size .2s ease-in;
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 600;
       left: 0;
       position: absolute;

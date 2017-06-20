@@ -37,7 +37,7 @@ $theme-color: #3694d1;
 
     span {
       color: $text-color;
-      font-size: 12px;
+      font-size: 13px;
       padding: 0;
       @extend %text-ellipsis;
     }
@@ -59,7 +59,7 @@ $theme-color: #3694d1;
 
       span {
         color: $white;
-        font-size: 14px;
+        font-size: 13px;
         position: absolute;
         top: 50%;
         left: 50%;
@@ -86,7 +86,7 @@ $theme-color: #3694d1;
         margin-top: 0;
         border: 0;
         padding-left: 5px;
-        font-size: 12px;
+        font-size: 13px;
         color: #999;
       }
 
