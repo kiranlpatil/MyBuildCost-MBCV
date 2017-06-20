@@ -1,5 +1,6 @@
 import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { MultiSelectService } from './multi-select.service';
+import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
 
 @Component({
   moduleId: module.id,
@@ -25,7 +26,7 @@ export class MultiSelectComponent {
   @ViewChild("myInput")
   private _inputElement: ElementRef;
 
-  constructor(private proficiencydoaminService: MultiSelectService) {
+  constructor(private proficiencydoaminService: MultiSelectService,private profileCreatorService: CandidateProfileService) {
 
   }
 
@@ -39,6 +40,10 @@ export class MultiSelectComponent {
     if (this.data != undefined) {
       if (this.data.length > 0) {
         this.Proficiencies = this.data;
+        for(let item of this.Proficiencies) {
+          if(item.length==1){
+            this.Proficiencies.splice(this.Proficiencies.indexOf(item),1);}
+        }
         this.masterDataProficiencies = this.data;
       }
     }
@@ -70,11 +75,13 @@ export class MultiSelectComponent {
   }
 
   deleteItem(newVal: any) {
+
     this.showAlert = false;
     for (let i = 0; i < this.selectedProficiencies.length; i++) {
       if (this.selectedProficiencies[i] === newVal.currentTarget.innerText.trim()) {
         this.selectedProficiencies.splice(i, 1);
-        this.Proficiencies.push(newVal.currentTarget.innerText.trim());
+        if( newVal.currentTarget.innerText.trim().length>1){
+        this.Proficiencies.push(newVal.currentTarget.innerText.trim());}
       }
     }
     this.onComplete.emit(this.selectedProficiencies);
@@ -89,8 +96,19 @@ export class MultiSelectComponent {
   showHideModal(newVal: any) { //TODO
     this.otherProficiency = newVal;
 
-    if (newVal !== '' && this.masterDataProficiencies.indexOf(newVal) === -1)
-      this.showModalStyle = !this.showModalStyle;
+    if(this.selectedProficiencies.indexOf(newVal) ===-1) {
+      if (newVal != '' && this.masterDataProficiencies.indexOf(newVal) === -1) {
+        debugger
+        this.showModalStyle = true;
+      }
+      else {
+        if (this.masterDataProficiencies.indexOf(newVal) != -1) {
+          this.addProficiencyToMasterData();
+        }
+      }
+    }else{
+      this.showModalStyle =false;
+    }
   }
 
   getStyleModal() {
@@ -103,11 +121,19 @@ export class MultiSelectComponent {
   }
 
   addProficiencyToMasterData() {
-    this.showModalStyle = !this.showModalStyle;
+    this.profileCreatorService.getProficiency()
+      .subscribe(
+        data => {
+          this.masterDataProficiencies = data.data[0].proficiencies;
+        });
+    this.showModalStyle = false;
     if (this.otherProficiency !== '') {
       for (let i = 0; i < this.masterDataProficiencies.length; i++) {
-        if (this.masterDataProficiencies[i] === this.otherProficiency) {
+        if (this.masterDataProficiencies[i].toUpperCase() === this.otherProficiency.toUpperCase()) {
           this.alreadyPresent = true;
+          if( this.otherProficiency.length==1){
+            this.selectedProficiencyModel(this.otherProficiency);
+          }
         }
       }
       if (this.alreadyPresent === false) {

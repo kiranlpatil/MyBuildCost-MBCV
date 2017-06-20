@@ -18,7 +18,7 @@
       </span>
     <label>Industry Exposure</label>
     <span *ngFor="let industry of candidate.interestedIndustries;let i = index">{{industry}}
-        <span *ngIf="candidate.interestedIndustries.length>1 && i!=candidate.interestedIndustries.length-1">,</span>
+        <span *ngIf="candidate.interestedIndustries.length>1 && i<candidate.interestedIndustries.length-1">,</span>
       </span>
     <label>Experience</label>
     <span>{{candidate.professionalDetails.experience}}</span>

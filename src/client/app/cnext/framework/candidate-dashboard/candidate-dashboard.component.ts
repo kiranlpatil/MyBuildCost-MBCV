@@ -112,6 +112,9 @@ export class CandidateDashboardComponent {
           this.appliedJobs = data.data;
           this.candidate.summary.numberOfJobApplied = this.appliedJobs.length;
         });
+    if( this.candidate.summary.numberOfJobApplied===undefined){
+      this.candidate.summary.numberOfJobApplied=0;
+    }
   }
 
   showRejectedJobs() {debugger
@@ -122,6 +125,9 @@ export class CandidateDashboardComponent {
           this.blockedJobs = data.data;
           this.candidate.summary.numberJobsBlocked = this.blockedJobs.length;
         });
+    if( this.candidate.summary.numberJobsBlocked===undefined){
+      this.candidate.summary.numberJobsBlocked=0;
+    }
   }
 
   showMatchedJobs() {
