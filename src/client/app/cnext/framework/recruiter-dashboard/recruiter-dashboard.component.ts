@@ -45,8 +45,6 @@ export class RecruiterDashboardComponent implements OnInit {
     this.getRecruiterData();
   }
   navigateTo(nav: string) {debugger
-    this.activeTabPJ=false;
-    this.activeTabPNJ= true;
     if (nav !== undefined) {
       this._router.navigate([nav]);
     }
