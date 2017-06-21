@@ -259,6 +259,8 @@ export class CandidateProfileComponent implements OnInit {
     this.candidate = candidateData.data[0];
     this.candidate.basicInformation = candidateData.metadata;
     this.candidateForRole = candidateData.data[0].industry.roles;
+    this.candidateForCapability = candidateData.data[0].industry.roles;
+    this.candidateForComplexity = candidateData.data[0].industry.roles;
     if (this.candidate.jobTitle === undefined || this.candidate.industry.name == undefined) {
       //TODO: Shrikant write logic which should be the active section
       this.highlightedSection.name = 'GuideTour';
