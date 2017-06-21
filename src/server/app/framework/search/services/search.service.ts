@@ -146,15 +146,15 @@ class SearchService {
     return -1;
   }
 
-  getPeriodSwitchCase(period: string): number {
+  getPeriodSwitchCase(period: string): number {//TO DO :Do not use hard coding
     switch (period) {
       case 'Immediate' :
         return 1;
-      case 'Within 1 month':
+      case 'Within 1 months':
         return 2;
-      case '1-2 Month':
+      case '1-2 Months':
         return 3;
-      case '2-3 Month':
+      case '2-3 Months':
         return 4;
       case 'Beyond 3 months':
         return 5;
