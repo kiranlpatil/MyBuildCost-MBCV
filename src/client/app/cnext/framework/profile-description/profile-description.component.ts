@@ -22,6 +22,7 @@ export class ProfileDescriptionComponent implements OnInit {
   private changedIndustry:Industry=new Industry();
   private disableButton: boolean = true;
   private showButton: boolean = true;
+  private savedJobTitle:string;
   private candidateDetails: CandidateDetail = new CandidateDetail();
   private showModalStyle:boolean = false;
   private image_path: string = 'assets/framework/images/dashboard/profile.png';
@@ -54,6 +55,7 @@ export class ProfileDescriptionComponent implements OnInit {
     if (this.candidate.jobTitle !== undefined && this.candidate.jobTitle !== ""
       && this.candidate.industry.name !== undefined && this.candidate.industry.name !== "") {
       this.savedIndustry=this.candidate.industry.name;
+      this.savedJobTitle=this.candidate.jobTitle;
       console.log(this.savedIndustry);
     }
   }
@@ -65,6 +67,9 @@ export class ProfileDescriptionComponent implements OnInit {
 */
        this.changedIndustry=newIndustry;
      /* }*/
+     if(this.candidate.jobTitle && this.candidate.jobTitle !== '') {
+       this.disableButton=false;
+     }
     }
   }
 
@@ -101,6 +106,17 @@ export class ProfileDescriptionComponent implements OnInit {
     }
   }
 
+  onJobTitleChange() {debugger
+    if(this.candidate && this.candidate.jobTitle === '') {
+      this.disableButton=true;
+    } else {
+      if((this.candidate.industry && this.candidate.industry.name !=='') || (this.changedIndustry && this.changedIndustry.name !=='')){
+this.disableButton=false;
+      }
+      console.log("hello");
+    }
+  }
+
   getStyleModal() {
     if (this.showModalStyle) {
       return 'block';
@@ -111,6 +127,11 @@ export class ProfileDescriptionComponent implements OnInit {
 
   showHideModal() {
     this.showModalStyle = !this.showModalStyle;
+  }
+  onCancel() {
+    this.highlightedSection.name='none';
+    this.highlightedSection.isDisable=false;
+    this.candidate.jobTitle=this.savedJobTitle;
   }
 }
 

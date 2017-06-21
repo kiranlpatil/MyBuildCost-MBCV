@@ -14,7 +14,7 @@
       <h4>Enter Your Job Title</h4>
       <div class="error-messages" *ngIf="isTitleFilled">Job title should not be empty.</div>
       <input name="jobTitle" placeholder="e.g. Software Engineer" class="form-control job-title"
-             [(ngModel)]="candidate.jobTitle">
+             [(ngModel)]="candidate.jobTitle" (ngModelChange)="onJobTitleChange()">
 
       <div class="clearfix">&nbsp;</div>
       <h4>Select your Core Industry (Any One)</h4>
@@ -22,11 +22,11 @@
                         (valueChange)="onIndustryChange($event)"></cn-industry-list>
     </div>
     <div class="button-group clearfix">
-      <button class="btn btn-default" (click)="highlightedSection.name='none'; highlightedSection.isDisable=false"
+      <button class="btn btn-default" (click)="onCancel()"
               [hidden]="showButton">Cancel
       </button>
-      <button class="btn btn-primary" (click)="onNext()" [hidden]="!showButton">Next</button>
-        <button class="btn btn-primary"  (click)="onSave()" [hidden]="showButton">Save</button>
+      <button class="btn btn-primary" (click)="onNext()" [hidden]="!showButton" [disabled]="disableButton">Next</button>
+        <button class="btn btn-primary"  (click)="onSave()" [hidden]="showButton" [disabled]="disableButton">Save</button>
     </div>
   </div>
 </div>
