@@ -75,7 +75,7 @@ $white: #fff;
     border-radius: 0;
     border: 1px solid $white;
     padding: 15px 0;
-    background: $white;
+    background: $white !important;
   }
 
   .button-group {
