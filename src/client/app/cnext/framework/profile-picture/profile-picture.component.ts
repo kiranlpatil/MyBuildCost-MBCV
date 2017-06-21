@@ -27,6 +27,7 @@ export class ProfilePictureComponent {
   private image_path: string;
   private uploaded_image_path: string;
   private isShowErrorMessage: boolean = true;
+  private isLoading: boolean = false;
   private isCandidate: string;
 
 
@@ -51,6 +52,7 @@ export class ProfilePictureComponent {
 
 
   fileChangeEvent(fileInput: any) {
+    this.isLoading = true;
     this.filesToUpload = <Array<File>> fileInput.target.files;
     if (this.filesToUpload[0].type === 'image/jpeg' || this.filesToUpload[0].type === 'image/png'
       || this.filesToUpload[0].type === 'image/jpg' || this.filesToUpload[0].type === 'image/gif') {
@@ -76,7 +78,7 @@ export class ProfilePictureComponent {
     }
   }
 
-  fileChangeSuccess(result: any) {
+  fileChangeSuccess(result: any) {debugger
     this.model = result.data;
     LocalStorageService.setLocalValue(LocalStorage.PROFILE_PICTURE, result.data.picture);
     var socialLogin: string = LocalStorageService.getLocalValue(LocalStorage.IS_SOCIAL_LOGIN);
@@ -91,7 +93,7 @@ export class ProfilePictureComponent {
     } else {
       this.image_path = AppSettings.IP + this.model.picture.substring(4).replace('"', '');
     }
-
+    this.isLoading = false;
     this.profileService.onProfileUpdate(result);
   }
 
