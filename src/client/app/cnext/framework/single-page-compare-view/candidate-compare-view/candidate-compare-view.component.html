@@ -26,7 +26,7 @@
       </span>
           <label>Additional Industry</label>
           <span *ngFor="let industry of postedJob.interestedIndustries;let i = index">{{industry}}<span
-            *ngIf="recruiter.postedJobs[0].interestedIndustries.length>1 && i!=postedJob.interestedIndustries-1">,</span>
+            *ngIf="recruiter.postedJobs[0].interestedIndustries.length>1 && i!=postedJob.interestedIndustries.length-1">,</span>
       </span>
           <label [class.exact]="data.educationMatch=='exact'" [class.above]="data.educationMatch=='above'"
                  [class.below]="data.educationMatch=='below'"

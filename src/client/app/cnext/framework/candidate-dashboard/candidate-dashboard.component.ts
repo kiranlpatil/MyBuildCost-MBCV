@@ -105,7 +105,7 @@ export class CandidateDashboardComponent {
   }
 
   showAppliedJobs() {
-    this.qcardFilterService.clearFilter();
+   /* this.qcardFilterService.clearFilter();*/
     this.candidateJobListService.getAppliedJobList()
       .subscribe(
         data => {
@@ -118,7 +118,7 @@ export class CandidateDashboardComponent {
   }
 
   showRejectedJobs() {
-    this.qcardFilterService.clearFilter();
+   /* this.qcardFilterService.clearFilter();*/
     this.candidateJobListService.getBlockedJobList()
       .subscribe(
         data => {
@@ -131,7 +131,7 @@ export class CandidateDashboardComponent {
   }
 
   showMatchedJobs() {
-    this.qcardFilterService.clearFilter();
+    /*this.qcardFilterService.clearFilter();*/
     this.candidateDashboardService.getJobList()
       .subscribe(
         data => {
