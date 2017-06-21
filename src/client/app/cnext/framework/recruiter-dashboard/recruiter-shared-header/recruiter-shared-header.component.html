@@ -16,7 +16,7 @@
           <span class="icon-bar"></span>
         </button>
 
-        <a class="navbar-brand" (click)="navigateTo('/recruiterdashboard'); closeMenu($event);"><img
+        <a class="navbar-brand" (click)="redirectToRecruiterDashboard(); closeMenu($event);"><img
           src={{MY_LOGO}}></a>
       </div>
 
@@ -37,8 +37,8 @@
                 </li>
                 <li class="divider"></li>
                 <li role="menuitem">
-                  <a class="dropdown-item" [routerLink]="['recruiter_dashboard']"
-                     (click)="navigateTo('/recruiterdashboard'); toggleMenu();">
+                  <a class="dropdown-item"
+                     (click)="redirectToRecruiterDashboard(); toggleMenu();">
                     <span class="glyphicon glyphicon-th"></span>My Dashboard
                   </a>
                 </li>

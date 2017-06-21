@@ -4,6 +4,7 @@ import { RecruiterDashboard } from '../model/recruiter-dashboard';
 import { RecruiterHeaderDetails } from '../model/recuirterheaderdetails';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
+import {RedirectRecruiterDashboardService} from "../redirect-dashboard.service";
 
 @Component({
   moduleId: module.id,
@@ -22,7 +23,13 @@ export class RecruiterDashboardComponent implements OnInit {
  // private showTabsForJobPoster: boolean = false;
 
   constructor(private recruiterDashboardService: RecruiterDashboardService,
-              private activatedRoute: ActivatedRoute,private _router: Router) {
+              private activatedRoute: ActivatedRoute,private _router: Router,
+              private redirectRecruiterDashboard: RedirectRecruiterDashboardService) {
+    redirectRecruiterDashboard.showTest$.subscribe(
+      isShow=>{
+        let matcheElement: any = document.getElementById('recr_job_dashboard');
+        matcheElement.click();
+    })
   }
 
 

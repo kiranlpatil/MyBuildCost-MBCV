@@ -2,6 +2,7 @@ import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LocalStorageService } from '../../../../framework/shared/localstorage.service';
 import { AppSettings, ImagePath, LocalStorage, NavigationRoutes } from '../../../../framework/shared/constants';
+import {RedirectRecruiterDashboardService} from "../../redirect-dashboard.service";
 
 @Component({
   moduleId: module.id,
@@ -26,7 +27,8 @@ export class RecruiterSharedHeaderComponent implements OnInit {
     }
   }
 
-  constructor(private _router: Router, private _eref: ElementRef) {
+  constructor(private _router: Router, private _eref: ElementRef,
+              private redirectRecruiterDashboard: RedirectRecruiterDashboardService) {
     this.MY_LOGO = ImagePath.MY_WHITE_LOGO;
   }
 
@@ -52,6 +54,12 @@ export class RecruiterSharedHeaderComponent implements OnInit {
       this._router.navigate([nav]);
     }
   }
+
+  redirectToRecruiterDashboard(){
+    this.redirectRecruiterDashboard.change(true);
+
+  }
+
 
   toggleMenu() {
     this.isClassVisible = !this.isClassVisible;
