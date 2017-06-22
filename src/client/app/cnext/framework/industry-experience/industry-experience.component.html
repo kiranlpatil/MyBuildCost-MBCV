@@ -17,7 +17,7 @@
         <button class="btn btn-primary" scrollTo scrollTargetSelector="#professional-details"
                 (click)="onNext()" [hidden]="!showButton">Next
         </button>
-        <button class="btn btn-primary" (click)="onSave()" [hidden]="showButton">Next</button>
+        <button class="btn btn-primary" (click)="onSave()" [hidden]="showButton" [disabled]="selectedIndustries.length==0">Next</button>
       </div>
     </div>
   </div>

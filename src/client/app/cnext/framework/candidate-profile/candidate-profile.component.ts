@@ -73,7 +73,6 @@ export class CandidateProfileComponent implements OnInit {
     this.isRolesShow = false;
     this.candidateForRole = this.candidate.industry.roles;
     this.candidateForCapability = this.candidate.industry.roles;
-    this.rolesForCapability = new Array(0);
   }
 
 
