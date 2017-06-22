@@ -28,7 +28,9 @@
               <div id="matched" class="tab-pane fade in active matched">
                 <cn-q-card-list [joblistCount]="jobList.length" [listOfJobs]="jobList" [type]="'none'"
                                 (onAction)="onActionPerformOnExactList($event)"></cn-q-card-list>
-                <p *ngIf="candidate.summary.numberOfmatched==0">There are no matched jobs.</p>
+                <div class="welcome-text" *ngIf="candidate.summary.numberOfmatched==0">
+                  <p>Currently there are no jobs. You can edit your profile again.</p>
+                </div>
               </div>
               <div id="applied" class="tab-pane fade"><!--[hidden]="!hideSection"-->
                 <cn-candidate-job-list [type]="'apply'" [listOfJobs]="appliedJobs"

@@ -62,3 +62,13 @@ $active-color: #edf1f5;
     }
   }
 }
+
+.welcome-text {
+  width: 80%;
+  margin: 0 auto;
+
+  h4 {
+    color: $theme-color;
+    font-size: 20px;
+  }
+}
