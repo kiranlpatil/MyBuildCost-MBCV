@@ -160,8 +160,8 @@ export class ComplexitiesComponent {
     }
 
     selectedScenario.isChecked = true;
-    if (this.selectedComplexityNames.indexOf(complexity.name) === -1) {
-      this.selectedComplexityNames.push(complexity.name);
+    if (this.selectedScenarioNames.indexOf(complexity.name) === -1) {
+      this.selectedScenarioNames.push(complexity.name);
     }
 
     this.roleWithDefaultComplexity.push(role);
@@ -189,8 +189,8 @@ export class ComplexitiesComponent {
       this.count++;
     }
     selectedScenario.isChecked = true;
-    if (this.selectedComplexityNames.indexOf(complexity.name) === -1) {
-      this.selectedComplexityNames.push(complexity.name);
+    if (this.selectedScenarioNames.indexOf(complexity.name) === -1) {
+      this.selectedScenarioNames.push(complexity.name);
     }
 
   }
