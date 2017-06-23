@@ -224,17 +224,20 @@ class SearchService {
                   for (let jobCom of jobDefCap.complexities) {
                     for (let complexity of capDef.complexities) {
                       if (jobCom.name == complexity.name) {
-                        let jobSceNum: string;
+                        let jobSceNum: string='';
                         for (let jobScen of jobCom.scenarios) {
                           if (jobScen.isChecked) {
                             jobSceNum = jobScen.code;
                           }
                         }
-                        let comNum: string;
+                        let comNum: string = '';
                         for (let scenario of complexity.scenarios) {
                           if (scenario.isChecked) {
                             comNum = scenario.code;
                           }
+                        }
+                        if(comNum === '' ||jobSceNum === ''){
+                          continue;
                         }
                         if (jobSceNum.substr(0, jobSceNum.lastIndexOf('.')) == comNum.substr(0, comNum.lastIndexOf('.'))) {
                           let job_last_digit: number = Number(jobSceNum.substr(jobSceNum.lastIndexOf('.') + 1));
