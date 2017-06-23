@@ -20,17 +20,41 @@ class SearchService {
   getMatchingCandidates(jobProfile: JobProfileModel, callback: (error: any, result: any) => void) {
     console.time('getMatching Candidate');
     let data: any;
+    let isFound: boolean=false;
     if (jobProfile.interestedIndustries && jobProfile.interestedIndustries.length > 0) {
-      data = {
-        'industry.name': jobProfile.industry.name,
-        $or: [
-          {'professionalDetails.relocate': 'Yes'},
-          {'location.city': jobProfile.location.city}
-        ],
-        'proficiencies': {$in: jobProfile.proficiencies},
-        'interestedIndustries': {$in: jobProfile.interestedIndustries},
-        'isVisible': true,
-      };
+      /*isFound= jobProfile.interestedIndustries.filter((name : string)=> {
+        if(name === 'None'){
+          return name;
+        }
+      });*/
+      for(let name of jobProfile.interestedIndustries){
+        if(name==='None') {
+          isFound=true;
+        }
+      }
+      if(isFound) {
+        data = {
+          'industry.name': jobProfile.industry.name,
+          $or: [
+            {'professionalDetails.relocate': 'Yes'},
+            {'location.city': jobProfile.location.city}
+          ],
+          'proficiencies': {$in: jobProfile.proficiencies},
+          'isVisible': true,
+        };
+      }else {
+        data = {
+          'industry.name': jobProfile.industry.name,
+          $or: [
+            {'professionalDetails.relocate': 'Yes'},
+            {'location.city': jobProfile.location.city}
+          ],
+          'proficiencies': {$in: jobProfile.proficiencies},
+          'interestedIndustries': {$in: jobProfile.interestedIndustries},
+          'isVisible': true,
+        };
+      }
+
     } else {
       data = {
         'isVisible': true,
