@@ -25,7 +25,7 @@ class SearchService {
         'industry.name': jobProfile.industry.name,
         $or: [
           {'professionalDetails.relocate': 'Yes'},
-          {'location': jobProfile.location}
+          {'location.city': jobProfile.location.city}
         ],
         'proficiencies': {$in: jobProfile.proficiencies},
         'interestedIndustries': {$in: jobProfile.interestedIndustries},
@@ -38,7 +38,7 @@ class SearchService {
         'proficiencies': {$in: jobProfile.proficiencies},
         $or: [
           {'professionalDetails.relocate': 'Yes'},
-          {'location': jobProfile.location}
+          {'location.city': jobProfile.location.city}
         ]
       };
     }
