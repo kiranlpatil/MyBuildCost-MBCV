@@ -5,6 +5,7 @@ $light-green: #96e328;
 $orange: #ffb316;
 $gray: #ccc;
 $green: #68ab26;
+$red: #e82c0c;
 
 .basic-description {
   text-align: left;
@@ -75,5 +76,5 @@ $green: #68ab26;
 }
 
 .missing {
-  color: $gray !important;
+  color: $red !important;
 }

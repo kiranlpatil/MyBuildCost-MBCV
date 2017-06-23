@@ -7,6 +7,7 @@ $orange: #ffb316;
 $gray: #ccc;
 $green: #68ab26;
 $blue: #3694d1;
+$red: #e82c0c;
 
 .exact {
   border: 1px solid $light-green !important;
@@ -24,13 +25,13 @@ $blue: #3694d1;
 }
 
 .missing {
-  border: 1px solid $gray !important;
-  border-left: 10px solid $gray !important;
+  border: 1px solid $red; !important;
+  border-left: 10px solid $red; !important;
 }
 
 .extra {
-  border: 1px solid $blue !important;
-  border-left: 10px solid $blue !important;
+  border: 1px solid $gray !important;
+  border-left: 10px solid $gray !important;
 }
 
 .capability-complexity {
@@ -66,11 +67,11 @@ $blue: #3694d1;
     }
 
     .legend-missing {
-      background: $gray;
+      background: $red;
     }
 
     .legend-extra {
-      background: $blue;
+      background: $gray;
     }
   }
 
