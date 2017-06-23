@@ -55,12 +55,10 @@ export class Messages {
   public static MSG_ERROR_DASHBOARD_PROFILE_PIC: string = 'Failed to change Profile Picture';
   public static MSG_ERROR_ATTACH_DOCUMENT: string = 'Failed to attach Document';
   public static MSG_ERROR_CHANGE_THEME: string = 'Failed to Change Theme';
-
   public static MSG_ERROR_TOKEN_SESSION: string = 'Session has been expired.';
   public static MSG_ERROR_NETWORK: string = 'Internal Server Error.';
   public static MSG_ERROR_SERVER_ERROR: string = 'Server error.';
   public static MSG_ERROR_SOMETHING_WRONG: string = 'Internal Server Error.';
-
   public static MSG_ERROR_IMAGE_TYPE: string = 'Please select valid image type.';
   public static MSG_ERROR_IMAGE_SIZE: string = 'Make sure image size is less than 500kb';
   public static MSG_ERROR_FB_AUTH: string = 'User cancelled login or did not fully authorize';
@@ -183,12 +181,9 @@ export class API {
   public static SHORTLIST_CANDIDATE = 'shortlistedcandidate';
   public static CANDIDATE_DETAILS = 'recruiter/jobProfile';
   public static CANDIDATESFROMLISTS = 'recruiter/jobProfile';
-
-
 }
 
 export class ImagePath {
-
   public static FAV_ICON = './assets/framework/images/logo/cnext-favicon.ico';
   public static BODY_BACKGROUND = './assets/framework/images/page_background/page-bg.png';
   public static MY_COLOR_LOGO = './assets/framework/images/logo/logo-color.png';
@@ -220,7 +215,6 @@ export class ImagePath {
   public static FIRST_NAME_ICON_GREY = './assets/framework/images/icons/first-name-grey.svg';
   public static LAST_NAME_ICON = './assets/framework/images/icons/last-name.svg';
   public static LAST_NAME_ICON_GREY = './assets/framework/images/icons/last-name-grey.svg';
-
 }
 
 export class ProjectAsset {

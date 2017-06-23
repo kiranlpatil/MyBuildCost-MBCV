@@ -6,14 +6,14 @@
                                 (onComplete)="onBasicJobInformationComplete($event)"></cn-basic-job-information>
 
 
-      <cn-work-area [roles]="rolesForMain" [highlightedSection]="highlightedSection" (onComplete)="selectRole($event)"
+      <cn-work-area [roles]="rolesForMain" [selectedRoles]="jobForRole" [highlightedSection]="highlightedSection" (onComplete)="selectRole($event)"
                     [hidden]="!isShowRoleList"></cn-work-area>
 
-      <cn-capabilities [roles]="rolesForCapability" [candidateRoles]="jobPosterModel.industry.roles"
+      <cn-capabilities [roles]="rolesForCapability" [candidateRoles]="jobForCapability"
                        [highlightedSection]="highlightedSection"
-                       (onComplete)="selectRole($event)" [hidden]="!isShowCapability"></cn-capabilities>
+                       (onComplete)="selectCapability($event)" [hidden]="!isShowCapability"></cn-capabilities>
 
-      <cn-complexities [roles]="rolesForComplexity" [candidateRoles]="jobPosterModel.industry.roles"
+      <cn-complexities [roles]="rolesForComplexity" [candidateRoles]="jobForComplexity"
                        [highlightedSection]="highlightedSection"
                        [isComplexityPresent]="isComplexityPresent"
                        (onComplete)="selectRoleFromComplexity($event)" [hidden]="!isShowComplexity"></cn-complexities>

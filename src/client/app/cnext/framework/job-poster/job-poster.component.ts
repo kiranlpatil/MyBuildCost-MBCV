@@ -41,6 +41,9 @@ export class JobPosterComponent implements OnInit {
   private isCapabilitypresent: boolean = false;
   private jobPosterModel = new JobPosterModel();
   private jobForComplexity: Role[] = new Array(0);
+  private jobForRole: Role[]= new Array(0);
+  private jobForCapability: Role[]= new Array(0);
+
   private flag: boolean = true;
   private highlightedSection: Section = new Section();
   constructor(private profileCreatorService: CandidateProfileService,
@@ -110,32 +113,37 @@ export class JobPosterComponent implements OnInit {
     jobModel.industry.roles=[];
     this.jobPosterModel = jobModel;
     this.getRoles();
-    this.getProficiency();
     this.isShowRoleList = true;
+    this.jobForRole = this.jobPosterModel.industry.roles;
+    this.jobForCapability = this.jobPosterModel.industry.roles;
   }
 
 
   selectRole(roles: Role[]) {
     this.jobPosterModel.industry.roles = roles;
+    this.jobForCapability = this.jobPosterModel.industry.roles;
+    this.jobForComplexity = this.jobPosterModel.industry.roles;
+    this.rolesForCapability = new Array(0);
     if (this.flag) {
       this.getCapability();
       this.isShowCapability = true;
     }
-    this.isShowRoletype = true;
-    if (this.jobPosterModel.industry.roles) {
-      if (this.jobPosterModel.industry.roles[0].capabilities) {
-        if (this.jobPosterModel.industry.roles[0].capabilities.length > 0) {
-          this.getComplexity();
-          this.isShowComplexity = true;
-        }
-      }
-    }
+  }
 
+  selectCapability(roles: Role[]) {
+    this.jobPosterModel.industry.roles = roles;
+    this.jobForCapability = this.jobPosterModel.industry.roles;
+    this.jobForRole = this.jobPosterModel.industry.roles;
+    this.jobForComplexity = this.jobPosterModel.industry.roles;
+    this.getComplexity();
+    this.isShowComplexity = true;
   }
 
   selectRoleFromComplexity(roles: Role[]) {
     this.jobPosterModel.industry.roles = roles;
-    this.jobForComplexity = roles;
+    this.jobForComplexity = this.jobPosterModel.industry.roles;
+    this.jobForCapability = this.jobPosterModel.industry.roles
+    this.getProficiency();
     this.isShowProficiency = true;
   }
 
@@ -183,7 +191,7 @@ export class JobPosterComponent implements OnInit {
   getCapability() {
     this.primaryCapability=new Array();
    // this.flag = false;
-    this.roleList=new Array();
+    this.roleList=new Array(0);
     for (let role of this.jobPosterModel.industry.roles) {
       this.roleList.push(role.name);
     }
@@ -205,11 +213,15 @@ export class JobPosterComponent implements OnInit {
               this.getComplexity();
             }
             this.isCapabilitypresent = false;
+            this.getJobForCapability();
           },
           error => this.onError(error));
     }
   }
 
+  getJobForCapability() {
+    this.jobForCapability=this.jobPosterModel.industry.roles;
+  }
   getComplexity() {
     this.primaryCapability=new Array();
     for (let role of this.jobPosterModel.industry.roles) {
@@ -227,7 +239,7 @@ export class JobPosterComponent implements OnInit {
           rolelist => {
             this.rolesForComplexity = rolelist.data;
             this.highlightedSection.name = 'Complexities';
-            this.jobForComplexity = this.jobPosterModel.industry.roles;
+            //this.jobForComplexity = this.jobPosterModel.industry.roles;
           });
     }
   }

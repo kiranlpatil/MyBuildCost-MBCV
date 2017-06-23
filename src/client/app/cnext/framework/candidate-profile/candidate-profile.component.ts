@@ -89,7 +89,6 @@ export class CandidateProfileComponent implements OnInit {
   }
 
   onCapabilityComplete(roles: Role[]) {
-
     this.candidate.industry.roles = roles;
     this.candidateForCapability = this.candidate.industry.roles;
     this.candidateForRole = this.candidate.industry.roles;
