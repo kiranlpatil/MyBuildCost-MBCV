@@ -4,7 +4,7 @@
     <h4 class="heading">Professional Preferences & Experience Summary (Mandatory)</h4>
     <!-- <form [formGroup]="professionalDetailForm" (ngSubmit)="onNext(jobPostForm.value)">-->
     <div class="professional-data clearfix">
-      <div class="col-sm-4">
+      <div class="col-sm-3">
         <label>Ready To Relocate?</label>
         <!--  <control-messages [control]="professionalDetailForm.controls.relocate"></control-messages>-->
         <select [(ngModel)]="candidate.professionalDetails.relocate" (change)="saveProfessionalData()">
@@ -13,7 +13,7 @@
 
       </div>
 
-      <div class="col-sm-4">
+      <div class="col-sm-3">
         <label>Education</label>
         <!--<control-messages [control]="professionalDetailForm.controls.education"></control-messages>-->
         <select [(ngModel)]="candidate.professionalDetails.education" (change)="saveProfessionalData()">
@@ -22,7 +22,7 @@
 
       </div>
 
-      <div class="col-sm-4">
+      <div class="col-sm-3">
         <label>Experience</label>
         <!--<control-messages [control]="professionalDetailForm.controls.experience"></control-messages>-->
         <select [(ngModel)]="candidate.professionalDetails.experience" (change)="saveProfessionalData()">
@@ -31,7 +31,7 @@
 
       </div>
 
-      <div class="col-sm-4">
+      <div class="col-sm-3">
         <label>Current Salary</label>
         <!-- <control-messages [control]="professionalDetailForm.controls.currentSalary"></control-messages>-->
         <select [(ngModel)]="candidate.professionalDetails.currentSalary" (change)="saveProfessionalData()">
@@ -40,7 +40,7 @@
 
       </div>
 
-      <div class="col-sm-4">
+      <div class="col-sm-3">
         <label>Notice Period</label>
         <!-- <control-messages [control]="professionalDetailForm.controls.noticePeriod"></control-messages>-->
         <select [(ngModel)]="candidate.professionalDetails.noticePeriod" (change)="saveProfessionalData()">
