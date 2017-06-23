@@ -97,9 +97,6 @@ $blue: #3694d1;
     span {
       font-size: 13px;
       color: $text-color;
-      text-overflow: ellipsis;
-      overflow: hidden;
-      white-space: nowrap;
       width: 100%;
       display: block;
     }
@@ -119,6 +116,10 @@ $blue: #3694d1;
   .details {
     padding: 5px;
     border-radius: 4px;
+  }
+
+  .col-sm-4 {
+    width: 33.33%;
   }
 }
 
