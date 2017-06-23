@@ -5,26 +5,6 @@
     <li><a data-toggle="tab" (click)="navigateTo('recruiterdashboard','post_new_job')">Post New Job</a></li>
   </ul>
   <div class="candidate-listing">
-    <ul class="nav nav-tabs sub-tabs">
-      <li class="active">
-        <a (click)="getMatchingProfiles()" data-toggle="tab" href="#matched"><span class="count"><span>{{recruiterJobView.numberOfMatchedCandidates}}</span></span>
-          Matched</a>
-      </li>
-      <li>
-        <a (click)="getSelectedListData('cartListed')" data-toggle="tab" href="#cart"><span class="count"><span>{{recruiterJobView.numberOfCandidatesInCart}}</span></span>
-          In Cart</a>
-      </li>
-      <li>
-        <a (click)="getSelectedListData('applied')" data-toggle="tab" href="#applied"><span class="count"><span>{{recruiterJobView.numberOfCandidatesApplied}}</span></span>
-          Applied</a>
-      </li>
-      <li>
-        <a (click)="getSelectedListData('rejectedList')" data-toggle="tab" href="#rejected"><span class="count"><span>{{recruiterJobView.numberOfCandidatesrejected}}</span></span>
-          Rejected</a>
-      </li>
-    </ul>
-
-
     <cn-filter [selectedJob]="selectedJobProfile" [role]=true></cn-filter>
     <div class="col-sm-12 no-padding">
       <button class="btn btn-back" (click)="navigateTo('recruiterdashboard',undefined)">All Jobs</button>
@@ -66,41 +46,41 @@
     </div>
     <ul class="nav nav-tabs sub-tabs">
       <li class="active">
-        <a (click)="getMatchingProfiles()" id="matched_anchor" data-toggle="tab" href="#matched"><span
+        <a (click)="getMatchingProfiles()" id="matched_anchor" data-toggle="tab" href="#matched-job"><span
           class="match-count count"><span>{{recruiterJobView.numberOfMatchedCandidates}}</span></span> Matched</a>
       </li>
       <li>
-        <a (click)="getSelectedListData('cartListed')" data-toggle="tab" href="#cart"><span class="count"><span>{{recruiterJobView.numberOfCandidatesInCart}}</span></span>
+        <a (click)="getSelectedListData('cartListed')" data-toggle="tab" href="#cart-job"><span class="count"><span>{{recruiterJobView.numberOfCandidatesInCart}}</span></span>
           In Cart</a>
       </li>
       <li>
-        <a (click)="getSelectedListData('applied')" data-toggle="tab" href="#applied"><span class="applied-count count"><span>{{recruiterJobView.numberOfCandidatesApplied}}</span></span>
+        <a (click)="getSelectedListData('applied')" data-toggle="tab" href="#applied-job"><span class="applied-count count"><span>{{recruiterJobView.numberOfCandidatesApplied}}</span></span>
           Applied</a>
       </li>
       <li>
-        <a (click)="getSelectedListData('rejectedList')" data-toggle="tab" href="#rejected"><span
+        <a (click)="getSelectedListData('rejectedList')" data-toggle="tab" href="#rejected-job"><span
           class="rejected-count count"><span>{{recruiterJobView.numberOfCandidatesrejected}}</span></span> Rejected</a>
       </li>
     </ul>
-    <div id="matched" class="tab-pane fade in active ">
+    <div id="matched-job" class="tab-pane fade in active ">
       <cn-q-card-view (addedTocart)="AddedToCart($event)" *ngIf="whichListVisible[0]" [candidateQlist]="candidateQlist" [filterMeta]="filterMeta"
                       [candidates]="candidateQlist.matchedCandidates" [type]="'matchedList'" [jobId]="jobId"
                       [recuirterListCountModel]="recruiterJobView"></cn-q-card-view>
       <p *ngIf="recruiterJobView.numberOfMatchedCandidates==0">No matched candidates found</p>
     </div>
-    <div id="cart" class="tab-pane fade">
+    <div id="cart-job" class="tab-pane fade">
       <cn-q-card-view (addedTocart)="AddedToCart($event)" *ngIf="whichListVisible[1]" [candidateQlist]="candidateQlist" [filterMeta]="filterMeta"
                       [candidates]="candidateQlist.cartCandidates" [type]="'cartListed'" [jobId]="jobId"
                       [recuirterListCountModel]="recruiterJobView"></cn-q-card-view>
       <p *ngIf="recruiterJobView.numberOfCandidatesInCart==0">There are no candidates in Cart</p>
     </div>
-    <div id="applied" class="tab-pane fade">
+    <div id="applied-job" class="tab-pane fade">
       <cn-q-card-view (addedTocart)="AddedToCart($event)" *ngIf="whichListVisible[2]" [candidateQlist]="candidateQlist" [filterMeta]="filterMeta"
                       [candidates]="candidateQlist.appliedCandidates" [type]="'applied'" [jobId]="jobId"
                       [recuirterListCountModel]="recruiterJobView"></cn-q-card-view>
       <p *ngIf="recruiterJobView.numberOfCandidatesApplied==0">There are no candidates in Applied</p>
     </div>
-    <div id="rejected" class="tab-pane fade">
+    <div id="rejected-job" class="tab-pane fade">
       <cn-q-card-view (addedTocart)="AddedToCart($event)" *ngIf="whichListVisible[3]" [candidateQlist]="candidateQlist" [filterMeta]="filterMeta"
                       [candidates]="candidateQlist.rejectedCandidates" [type]="'rejectedList'" [jobId]="jobId"
                       [recuirterListCountModel]="recruiterJobView"></cn-q-card-view>
