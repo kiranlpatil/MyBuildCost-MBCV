@@ -75,7 +75,7 @@ $bg-color: #fff;
         color: $text-color;
         margin: -4px 0 5px;
         padding: 0 0 5px 30px;
-        word-break: break-all;
+        word-break: keep-all;
       }
 
       .text-ellipsis {

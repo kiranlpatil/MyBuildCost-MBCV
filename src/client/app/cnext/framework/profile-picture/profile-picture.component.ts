@@ -65,18 +65,18 @@ export class ProfilePictureComponent {
           this.fileChangeFail(error);
         });
       } else {
-        this.isLoading = false;
         var message = new Message();
         message.isError = true;
         message.error_msg = Messages.MSG_ERROR_IMAGE_SIZE;
         this.messageService.message(message);
+        this.isLoading = false;
       }
     } else {
-      this.isLoading = false;
       var message = new Message();
       message.isError = true;
       message.error_msg = Messages.MSG_ERROR_IMAGE_TYPE;
       this.messageService.message(message);
+      this.isLoading = false;
     }
   }
 
@@ -100,12 +100,14 @@ export class ProfilePictureComponent {
   }
 
   fileChangeFail(error: any) {
+    this.isLoading = true;
     var message = new Message();
     message.isError = true;
     if (error.err_code === 404 || error.err_code === 0) {
       message.error_msg = error.err_msg;
       this.messageService.message(message);
     } else {
+      this.isLoading = false;
       message.error_msg = Messages.MSG_ERROR_DASHBOARD_PROFILE_PIC;
       this.messageService.message(message);
     }
