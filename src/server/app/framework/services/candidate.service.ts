@@ -1,15 +1,17 @@
-import * as mongoose from "mongoose";
-var config = require('config');
-import Messages = require("../shared/messages");
-import ProjectAsset = require("../shared/projectasset");
-import CandidateRepository = require("../dataaccess/repository/candidate.repository");
-import UserRepository = require("../dataaccess/repository/user.repository");
-import LocationRepository = require("../dataaccess/repository/location.repository");
-import RecruiterRepository = require("../dataaccess/repository/recruiter.repository");
-import RecruiterModel = require("../dataaccess/model/recruiter.model");
+import * as mongoose from 'mongoose';
+import Messages = require('../shared/messages');
+import ProjectAsset = require('../shared/projectasset');
+import CandidateRepository = require('../dataaccess/repository/candidate.repository');
+import UserRepository = require('../dataaccess/repository/user.repository');
+import LocationRepository = require('../dataaccess/repository/location.repository');
+import RecruiterRepository = require('../dataaccess/repository/recruiter.repository');
+import IndustryRepository = require('../dataaccess/repository/industry.repository');
+import IndustryModel = require("../dataaccess/model/industry.model");
+import ScenarioModel = require("../dataaccess/model/scenario.model");
 class CandidateService {
   private candidateRepository: CandidateRepository;
   private recruiterRepository: RecruiterRepository;
+  private industryRepositiry: IndustryRepository;
   private userRepository: UserRepository;
   private locationRepository: LocationRepository;
 
@@ -20,12 +22,13 @@ class CandidateService {
     this.userRepository = new UserRepository();
     this.recruiterRepository = new RecruiterRepository();
     this.locationRepository = new LocationRepository();
+    this.industryRepositiry = new IndustryRepository();
     this.APP_NAME = ProjectAsset.APP_NAME;
   }
 
   createUser(item: any, callback: (error: any, result: any) => void) {
-    console.log("USer is", item);
-    this.userRepository.retrieve({"email": item.email}, (err, res) => {
+    console.log('USer is', item);
+    this.userRepository.retrieve({'email': item.email}, (err, res) => {
       if (err) {
         callback(new Error(err), null);
       }
@@ -69,13 +72,13 @@ class CandidateService {
       else {
         if (result.length > 0) {
           result[0].academics = result[0].academics.sort(function (a: any, b: any) {
-            return b.yearOfPassing - a.yearOfPassing
+            return b.yearOfPassing - a.yearOfPassing;
           });
           result[0].awards = result[0].awards.sort(function (a: any, b: any) {
-            return b.year - a.year
+            return b.year - a.year;
           });
           result[0].certifications = result[0].certifications.sort(function (a: any, b: any) {
-            return b.year - a.year
+            return b.year - a.year;
           });
 
           callback(null, result);
@@ -90,20 +93,69 @@ class CandidateService {
 
   update(_id: string, item: any, callback: (error: any, result: any) => void) {
 
-    this.candidateRepository.retrieve({"userId": new mongoose.Types.ObjectId(_id)}, (err, res) => {
-
+    this.candidateRepository.retrieve({'userId': new mongoose.Types.ObjectId(_id)}, (err, res) => {
       if (err) {
         callback(err, res);
-      }
-      else {
-        this.candidateRepository.findOneAndUpdateIndustry({'_id': res[0]._id}, item, {new: true}, callback);
+      } else {
+        this.industryRepositiry.retrieve({"name": item.industry.name}, (error: any, industries: IndustryModel[]) => {
+          if (err) {
+            callback(err, res);
+          } else {
+            if(item.capability_matrix === undefined) {
+              item.capability_matrix = { };
+            }
+            if (item.industry.roles && item.industry.roles.length > 0) {
+              for (let role of item.industry.roles) {
+                if (role.capabilities && role.capabilities.length > 0) {
+                  for (let capability of role.capabilities) {
+                    if (capability.code) {
+                      for (let mainRole of industries[0].roles) {
+                        if (role.code.toString() == mainRole.code) {
+                          for (let mainCap of mainRole.capabilities) {
+                            if (capability.code.toString() == mainCap.code) {
+                              for (let mainComp of mainCap.complexities) {
+                                let itemcode = mainCap.code +'_' + mainComp.code;
+                                if (item.capability_matrix[itemcode] === undefined) {
+                                  item.capability_matrix[itemcode] = -1;
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+                for (let capability of  role.default_complexities) {
+                  if (capability.code) {
+                    for (let mainRole of industries[0].roles) {
+                      if (role.code.toString() == mainRole.code) {
+                         for (let mainCap of mainRole.default_complexities) {
+                          if (capability.code.toString() == mainCap.code) {
+                            for (let mainComp of mainCap.complexities) {
+                              let itemcode = mainCap.code +'_'+ mainComp.code;
+                              if (item.capability_matrix[itemcode] === undefined) {
+                                item.capability_matrix[itemcode] = -1;
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+            this.candidateRepository.findOneAndUpdateIndustry({'_id': res[0]._id}, item, {new: true}, callback);
+          }
+        });
       }
     });
   }
 
   getList(item: any, callback: (error: any, result: any) => void) {
     let query = {
-      "postedJobs._id": {$in: item.ids},
+      'postedJobs._id': {$in: item.ids},
     };
     this.recruiterRepository.retrieve(query, (err, res) => {
       if (err) {

@@ -58,7 +58,7 @@ export function create(req: express.Request, res: express.Response, next: any) {
           "status": Messages.STATUS_SUCCESS,
           "data": {
             "reason": "Data inserted Successfully in Industry",
-            "code_name": newIndustry.code_name,
+            "code": newIndustry.code,
             "name": newIndustry.name,
             "roles": newIndustry.roles,
             "_id": result._id,

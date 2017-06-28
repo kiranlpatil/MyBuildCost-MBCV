@@ -40,6 +40,9 @@ class CandidateSchema {
       aboutMyself: {
         type: String
       },
+      capability_matrix : {
+        type : Object
+      },
       certifications: [{
         name: String,
         year: Number,
@@ -59,8 +62,11 @@ class CandidateSchema {
         name: String,
         roles: [{
           name: String,
+          code: String,
           capabilities: [{
+            code: String,
             complexities: [{
+              code: String,
               scenarios: [{
                 isChecked: Boolean,
                 name: String,
@@ -73,7 +79,9 @@ class CandidateSchema {
             isSecondary: Boolean
           }],
           default_complexities: [{
+            code: String,
             complexities: [{
+              code: String,
               scenarios: [{
                 isChecked: Boolean,
                 name: String,

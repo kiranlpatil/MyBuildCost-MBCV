@@ -12,7 +12,7 @@ class IndustryRepository extends RepositoryBase<IIndustry> {
 
   findRoles(name: string, callback: (error: any, result: any) => void) {
     this.items = new Array(0);
-    IndustrySchema.find({"name": name}, (err: any, industry: any) => {
+    IndustrySchema.find({'name': name}).lean().exec((err: any, industry: any)=> {
       if (err) {
         callback(err, null);
       } else {
@@ -23,7 +23,8 @@ class IndustryRepository extends RepositoryBase<IIndustry> {
             let obj: any = {
               "industryName": industry[0].name,
               "_id": role._id,
-              "name": role.name
+              "name": role.name,
+              "code": role.code,
             };
             this.items.push(obj);
           }
@@ -35,7 +36,7 @@ class IndustryRepository extends RepositoryBase<IIndustry> {
 
   findCapabilities(item: any, callback: (error: any, result: any) => void) {
     this.items = new Array(0);
-    IndustrySchema.find({"name": item.name}, (err: any, industry: any) => {
+    IndustrySchema.find({'name': item.name}).lean().exec((err: any, industry: any)=> {
       if (err) {
         callback(err, null);
       } else {
@@ -47,6 +48,7 @@ class IndustryRepository extends RepositoryBase<IIndustry> {
               if (o == role.name) {
                 let role_object: any = {
                   name: role.name,
+                  code: role.code,
                   capabilities: [],
                   default_complexities: role.default_complexities
                 };
@@ -56,7 +58,8 @@ class IndustryRepository extends RepositoryBase<IIndustry> {
                     "industryName": industry[0].name,
                     "roleName": role.name,
                     "_id": capability._id,
-                    "name": capability.name
+                    "name": capability.name,
+                    'code': capability.code
                   };
                   role_object.capabilities.push(obj);
                 }
@@ -67,12 +70,12 @@ class IndustryRepository extends RepositoryBase<IIndustry> {
           callback(null, this.items);
         }
       }
-    });
+    });;
   }
 
   findComplexities(item: any, callback: (error: any, result: any) => void) {
     this.items = new Array(0);
-    IndustrySchema.find({"name": item.name}, (err: any, industry: any) => {
+    IndustrySchema.find({'name': item.name}).lean().exec((err: any, industry: any)=> {
       if (err) {
         callback(err, null);
       } else {
@@ -84,6 +87,7 @@ class IndustryRepository extends RepositoryBase<IIndustry> {
               if (o == role.name) {
                 let role_object: any = {
                   name: role.name,
+                  code: role.code,
                   capabilities: [],
                   default_complexities: role.default_complexities
                 };
@@ -92,11 +96,13 @@ class IndustryRepository extends RepositoryBase<IIndustry> {
                     if (ob == capability.name) {
                       let capability_object: any = {
                         name: capability.name,
+                        code: capability.code,
                         complexities: []
                       };
                       for (let complexity of capability.complexities) {
                         let complexity_object: any = {
                           name: complexity.name,
+                          code: complexity.code,
                           scenarios: complexity.scenarios
                         };
                         capability_object.complexities.push(complexity_object);

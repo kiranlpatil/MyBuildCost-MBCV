@@ -9,7 +9,7 @@ var mongooseConnection = DataAccess.mongooseConnection;
 class IndustrySchema {
   static get schema() {
     var schema = mongoose.Schema({
-      code_name: {
+      code: {
         type: String
       },
       name: {
@@ -18,8 +18,11 @@ class IndustrySchema {
       sort_order: Number,
       roles: [{
         name: String,
+        code: String,
         capabilities: [{
+          code: String,
           complexities: [{
+            code: String,
             scenarios: [{
               name: String,
               code: String
@@ -29,7 +32,9 @@ class IndustrySchema {
           name: String
         }],
         default_complexities: [{
+          code: String,
           complexities: [{
+            code: String,
             scenarios: [{
               name: String,
               isChecked: Boolean,

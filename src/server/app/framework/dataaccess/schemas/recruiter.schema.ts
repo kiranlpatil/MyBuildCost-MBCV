@@ -11,13 +11,13 @@ class RecruiterSchema {
       userId: {
         type: mongoose.Schema.Types.ObjectId, ref: 'User'
       },
-      "company_name": {
+      company_name: {
         type: String
       },
-      "company_size": {
+      company_size: {
         type: String
       },
-      "company_logo": {
+      company_logo: {
         type: String
       },
       company_headquarter_country: {
@@ -30,6 +30,9 @@ class RecruiterSchema {
         type: [String]
       },
       postedJobs: [{
+        capability_matrix : {
+          type : Object
+        },
         candidate_list: [{
           name: String,
           ids: [{
@@ -76,9 +79,12 @@ class RecruiterSchema {
         industry: {
           name: String,
           roles: [{
+            code: String,
             name: String,
             capabilities: [{
+              code: String,
               complexities: [{
+                code: String,
                 scenarios: [{
                   name: String,
                   isChecked: Boolean,
@@ -91,7 +97,9 @@ class RecruiterSchema {
               isSecondary: Boolean
             }],
             default_complexities: [{
+              code: String,
               complexities: [{
+                code: String,
                 scenarios: [{
                   name: String,
                   isChecked: Boolean,

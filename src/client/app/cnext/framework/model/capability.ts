@@ -1,6 +1,7 @@
 import { Complexity } from './complexity';
 export class Capability {
   name: string = '';
+  code: string;
   complexities: Complexity[] = new Array(0);
   isPrimary: boolean = false;
   isSecondary: boolean = false;
