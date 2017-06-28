@@ -25,10 +25,10 @@
         <button class="btn btn-default" (click)="highlightedSection.name='none';highlightedSection.isDisable=false">
           Cancel
         </button>
-        <button type="submit" class="btn btn-primary" scrollTo scrollTargetSelector="#certification"
+        <button type="submit" class="btn btn-success" scrollTo scrollTargetSelector="#certification"
                 (click)="postData('next')" [disabled]="!awardDetail.valid" [hidden]="!showButton">Next
         </button>
-        <button type="submit" class="btn btn-primary" (click)="postData('save')" [disabled]="!awardDetail.valid"
+        <button type="submit" class="btn btn-success" (click)="postData('save')" [disabled]="!awardDetail.valid"
                 [hidden]="showButton">Save
         </button>
       </div>

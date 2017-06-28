@@ -29,7 +29,7 @@
       </div>
 
       <div class="button-group">
-        <button type="submit" class="btn btn-primary" [disabled]="!userForm.valid">Verify Phone</button>
+        <button type="submit" class="btn btn-success" [disabled]="!userForm.valid">Verify Phone</button>
         <a class="btn btn-danger" (click)="resendVerificationCode()">Resend OTP</a>
       </div>
     </form>
@@ -50,7 +50,7 @@
                 <p>Your Account verified Successfully.Kindly Click On Sign In.</p>
 
                 <div class="button-group">
-                  <button class="btn btn-primary" (click)="navigateTo()">Sign In</button>
+                  <button class="btn btn-success" (click)="navigateTo()">Sign In</button>
                 </div>
               </div>
 

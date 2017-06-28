@@ -160,11 +160,11 @@
         </div>
         <div class="button-group clearfix">
           <div *ngIf="isCandidate">
-            <button class="btn btn-primary" (click)="showHideModal()">Next
+            <button class="btn btn-success" (click)="showHideModal()">Next
             </button>
           </div>
           <div *ngIf="!isCandidate">
-            <button class="btn btn-primary" (click)="saveComplexity()">Next
+            <button class="btn btn-success" (click)="saveComplexity()">Next
             </button>
           </div>
         </div>
@@ -203,7 +203,7 @@
 
               <div class="button-group">
                 <form>
-                  <input type="submit" #save class="btn btn-primary" ref-searchInput (click)="saveComplexity()"
+                  <input type="submit" #save class="btn btn-success" ref-searchInput (click)="saveComplexity()"
                          value="Save"/>
                   <button class="btn btn-default" (click)="showHideModal()">Cancel</button>
                 </form>

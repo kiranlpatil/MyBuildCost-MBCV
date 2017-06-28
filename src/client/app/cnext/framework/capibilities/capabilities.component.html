@@ -23,11 +23,11 @@
           </span>
         </div>
         <div class="button-group clearfix">
-          <button class="btn btn-primary" scrollTo scrollTargetSelector="#complexity-area"
+          <button class="btn btn-success" scrollTo scrollTargetSelector="#complexity-area"
                   (click)="onNext()" [disabled]="!(primaryNames.length>0)" [hidden]="!showButton">Next
           </button>
           <button class="btn btn-default" (click)="onCancel()" [hidden]="showButton">Cancel</button>
-          <button class="btn btn-primary"  (click)="onSave()"  [disabled]="!(primaryNames.length>0)" [hidden]="showButton">Save</button>
+          <button class="btn btn-success"  (click)="onSave()"  [disabled]="!(primaryNames.length>0)" [hidden]="showButton">Save</button>
         </div>
       </div>
     </div>

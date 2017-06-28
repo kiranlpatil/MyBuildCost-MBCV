@@ -1,0 +1,11 @@
+.btn-search {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+
+  &:focus,
+  &:active,
+  &:hover {
+    outline: none;
+  }
+}

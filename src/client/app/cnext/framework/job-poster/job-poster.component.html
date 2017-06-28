@@ -36,10 +36,10 @@
                                             [hidden]="!showCompentensies"></cn-compentacies-and-responsibilities>
 
       <div class="button-group" [hidden]="!isShowProficiency">
-        <!--<button type="submit" class="btn btn-primary" (click)="mockupSearch()" >Mock Search</button>-->
+        <!--<button type="submit" class="btn btn-success" (click)="mockupSearch()" >Mock Search</button>-->
         <!--[disabled]="disableButton"-->
         <!--
-              <button type="submit" class="btn btn-primary">Save Job</button>
+              <button type="submit" class="btn btn-success">Save Job</button>
         -->
         <button type="submit" class="btn btn-danger" (click)="showHideModal()" [disabled]="disableButton">Post Job
         </button>
@@ -58,7 +58,7 @@
             <div class="col-sm-12">
               <p>Do you want to add your job post details to your job listing.</p>
               <div class="button-group">
-                <button class="btn btn-primary" (click)="postjob()">Yes</button>
+                <button class="btn btn-success" (click)="postjob()">Yes</button>
                 <button class="btn btn-default" (click)="closeJob()">Cancel</button>
               </div>
             </div>

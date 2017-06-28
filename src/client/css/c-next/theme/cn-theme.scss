@@ -1,8 +1,8 @@
 // Dark Theme Variables /
 $cn-theme-color: #3694d1;
-$cn-theme-hover: #1a69ac;
+$cn-theme-hover: #317db5;
 $cn-theme-btn-danger: #e77e22;
-$cn-theme-btn-danger-hover: #D26F23;
+$cn-theme-btn-danger-hover: #d26f23;
 $cn-theme-background: #6f3025;
 $cn-theme-gradient-light: #1c75bd;
 $cn-theme-gradient-dark: #284598;
@@ -29,10 +29,7 @@ $white: #fff;
   }
 
   // Buttons
-  .btn-primary {
-    /*background: $cn-theme-color;
-    border: $cn-theme-color 1px solid;
-    color: $white;*/
+  .btn-success {
     background: #67c116;
     color: #fff;
 
@@ -42,11 +39,17 @@ $white: #fff;
       background: #58a90f;
       color: $white;
     }
+  }
 
-    &:disabled {
-      /*background: #67c116;
-      border: #3694d1 0 solid;
-      box-shadow: 0 0 0 0 rgba(0, 0,0, 0.2);*/
+  .btn-primary {
+    background: $cn-theme-color;
+    color: $white;
+
+    &:hover,
+    &:active,
+    &:focus {
+      background: $cn-theme-hover;
+      color: $white;
     }
   }
 
@@ -54,19 +57,16 @@ $white: #fff;
   .btn-danger {
     background: $cn-theme-btn-danger;
     color: $white;
-    //box-shadow: 1px 1px 1px 1px rgba(0, 0,0, 0.2);
 
     &:hover,
     &:active,
     &:focus {
       background: $cn-theme-btn-danger-hover;
       color: $white;
-      //box-shadow: 1px 1px 1px 1px rgba(0, 0,0, 0.2);
     }
 
     &:disabled {
       background: $cn-theme-btn-danger;
-      //box-shadow: 1px 1px 1px 1px rgba(0, 0,0, 0.2);
     }
   }
 

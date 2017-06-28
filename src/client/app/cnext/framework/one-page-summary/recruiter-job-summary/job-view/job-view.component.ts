@@ -1,6 +1,8 @@
-import {Component, Input} from "@angular/core";
-import {RecruiterDashboardService} from "../../../recruiter-dashboard/recruiter-dashboard.service";
-import {JobSummary} from "../../../model/jobSummary";
+import { Component, Input } from '@angular/core';
+import { RecruiterDashboardService } from '../../../recruiter-dashboard/recruiter-dashboard.service';
+import { JobSummary } from '../../../model/jobSummary';
+import { Router } from '@angular/router';
+import {NavigationRoutes} from '../../../../../framework/shared/constants';
 
 
 @Component({
@@ -16,14 +18,14 @@ export class JobViewComponent {
   private secondaryCapabilities: string[] = new Array();
 
 
-  constructor(private recruiterDashboardService: RecruiterDashboardService) {
+  constructor(private recruiterDashboardService: RecruiterDashboardService, private _router: Router) {
   }
 
   ngOnInit() {
   }
 
   ngOnChanges(changes: any) {
-    if (changes.jobId != undefined && changes.jobId.currentValue != undefined) {
+    if (changes.jobId !== undefined && changes.jobId.currentValue !== undefined) {
 
       this.jobId = changes.jobId.currentValue;
       this.recruiterDashboardService.getPostedJobDetails(this.jobId)
@@ -48,6 +50,10 @@ export class JobViewComponent {
         }
       }
     }
+  }
+
+  goToDashboard() {
+    this._router.navigate([NavigationRoutes.APP_RECRUITER_DASHBOARD]);
   }
 
 }
