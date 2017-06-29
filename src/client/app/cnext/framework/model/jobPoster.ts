@@ -14,6 +14,7 @@ export class JobPosterModel {
   proficiencies: string[] = new Array(0);
   additionalProficiencies: string[] = new Array(0);
   industry: Industry = new Industry();
+  capability_matrix:any;
   location: JobLocation = new JobLocation();
   competencies: string = '';
   responsibility: string = '';

@@ -12,6 +12,7 @@ export class Candidate {
   certifications: Certifications[] = new Array();
   awards: Award[] = new Array();
   industry: Industry = new Industry();
+  capability_matrix:any;
   interestedIndustries: string[] = new Array(0);
   roleType: string = '';
   academics: AcademicDetails[] = new Array();

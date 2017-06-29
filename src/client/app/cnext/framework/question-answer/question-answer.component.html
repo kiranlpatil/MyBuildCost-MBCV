@@ -1,0 +1,23 @@
+<div *ngIf="complexityDetails">
+  <p>
+    <span *ngIf="complexityDetails.rolename">{{complexityDetails.rolename}} -- </span>
+    <span *ngIf="complexityDetails.capabilityName">{{complexityDetails.capabilityName}} -- </span>
+    <span *ngIf="complexityDetails.defaultComplexityName">{{complexityDetails.defaultComplexityName}} --</span>
+  </p>
+
+  <p>
+    <span *ngIf="isCandidate && complexityDetails.questionForCandidate">{{complexityDetails.questionForCandidate}}</span>
+    <span *ngIf="!isCandidate && complexityDetails.questionForRecruiter">{{complexityDetails.questionForRecruiter}}</span>
+  </p>
+
+  <div class="scenarios col-sm-10 padding-left15">
+    <div class="select-option2" *ngFor="let scenario of complexityDetails.scenarios">
+      <label>
+        <input type="radio" name="{{complexityDetails.name}}" value="{{scenario.name}}"
+               (change)="onQuestionSelect(scenario,$event)"
+               [checked]="isChecked(scenario.code)">
+        <span>{{scenario.name}}</span>
+      </label>
+    </div>
+  </div>
+</div>

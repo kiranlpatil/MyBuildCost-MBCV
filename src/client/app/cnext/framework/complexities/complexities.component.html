@@ -4,11 +4,11 @@
   <cn-tool-tip [message]="tooltipRecruiterMessage" *ngIf="!isCandidate"></cn-tool-tip>
   <div class="main-content clearfix modal-content">
     <div class="complexities">
-      <h4 class="heading"><span class="light-font">Choose </span>Complexities<span class="light-font"> for </span>Capabilities <span class="light-font">selected above </span> <span class="pull-right">{{selectedScenarioNames.length}} / {{scenarioNames.length}} selected </span>
+      <h4 class="heading"><span class="light-font">Choose </span>Complexities<span class="light-font"> for </span>Capabilities <span class="light-font">selected above </span> <span class="pull-right"> </span>
       </h4>
       <div class="col-sm-12">
         <div class="complexity-container">
-          <div *ngIf="isPresentDefaultComplexity">
+          <!--<div *ngIf="isPresentDefaultComplexity">
             <div *ngFor="let role of roles;let i = index">
               <div *ngIf="role.default_complexities!=undefined && role.default_complexities[0]!=undefined">
                 <div class="panel-group" id="accordion1">
@@ -157,9 +157,18 @@
                 </div>
               </div>
             </div>
+          </div>-->
+          <div>
+            <cn-question-answer [complexityDetails]="currentComplexityDetails" (onComplete)="onAnswered($event)" ></cn-question-answer>
+            <div class="button-group clearfix">
+              <div *ngIf="isCandidate">
+                <button class="btn btn-success" (click)="onNext()">Next</button>
+                <button class="btn btn-success" (click)="onPrevious()">Previous</button>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="button-group clearfix">
+       <!-- <div class="button-group clearfix">
           <div *ngIf="isCandidate">
             <button class="btn btn-success" (click)="showHideModal()">Next
             </button>
@@ -168,12 +177,13 @@
             <button class="btn btn-success" (click)="saveComplexity()">Next
             </button>
           </div>
-        </div>
+        </div>-->
       </div>
     </div>
   </div>
 </div>
 <div class="section-container clearfix" *ngIf="highlightedSection.name!='Complexities'">
+<!--
   <div class="main-content">
     <div class="compact-view clearfix">
       <a data-toggle="collapse" data-target="#demo" (click)="showMore = !showMore">
@@ -189,6 +199,9 @@
       </div>
     </div>
   </div>
+-->
+
+  <p>compact View of complexity</p>
 </div>
 <div class="clearfix divider clear"></div>
 <!--<div [class.modal-bg]="highlightedSection.name!='Complexities'"></div>-->

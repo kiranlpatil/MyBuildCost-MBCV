@@ -98,7 +98,10 @@ export class CandidateProfileComponent implements OnInit {
     this.showComplexity = true;
     this.whichStepsVisible[2] = true;
   }
-
+  onComplextyAnswered(capability_matrix:any) {
+    this.candidate.capability_matrix=capability_matrix;
+    this.saveCandidateDetails();
+  }
   onComplexityComplete(roles: Role[]) {
     this.candidate.industry.roles = roles;
     var date = new Date();
@@ -218,7 +221,7 @@ export class CandidateProfileComponent implements OnInit {
           rolelist => {
             this.rolesForComplexity = rolelist.data;
             this.showComplexity = true;
-            //this.getCandidateForComplexity();
+            this.getCandidateForComplexity();
           });
     }
   }
@@ -237,13 +240,13 @@ export class CandidateProfileComponent implements OnInit {
         candidateData => this.candidateForCapability = candidateData.data[0].industry.roles);
   }
 
- /* getCandidateForComplexity() {debugger
+  getCandidateForComplexity() {
     this.profileCreatorService.getCandidateDetails()
       .subscribe(
         candidateData => {
-          this.candidateForComplexity = candidateData.data[0].industry.roles;
+          this.candidate.capability_matrix = candidateData.data[0].capability_matrix;
         });
-  }*/
+  }
 
   getProficiency() {
     this.profileCreatorService.getProficiency()

@@ -150,7 +150,10 @@ export class JobPosterComponent implements OnInit {
     this.getComplexity();
     this.isShowComplexity = true;
   }
-
+  onComplextyAnswered(capability_matrix:any){
+    this.jobPosterModel.capability_matrix=capability_matrix;
+    //this.saveCandidateDetails();
+  }
   selectRoleFromComplexity(roles: Role[]) {
     this.jobPosterModel.industry.roles = roles;
     this.jobForComplexity = this.jobPosterModel.industry.roles;

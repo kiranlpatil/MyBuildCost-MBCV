@@ -157,6 +157,7 @@ import {JobCompareService} from "./cnext/framework/single-page-compare-view/job-
 import {JobCompareViewComponent} from "./cnext/framework/single-page-compare-view/job-compare-view/job-compare-view.component";
 import {GuidedTourComponent} from "./cnext/framework/guided-tour/guided-tour.component";
 import {RedirectRecruiterDashboardService} from "./cnext/framework/redirect-dashboard.service";
+import {QuestionAnswerComponent} from "./cnext/framework/question-answer/question-answer.component";
 
 //C-NEXT IMPORTS
 
@@ -226,6 +227,7 @@ import {RedirectRecruiterDashboardService} from "./cnext/framework/redirect-dash
     ComplexitiesComponent,
     EmployeeHistoryComponent,
     JobPosterComponent,
+    QuestionAnswerComponent,
     MultiSelectComponent,
     BasicJobInformationComponent,
     CompetenciesAndResponsibilitiesComponent,

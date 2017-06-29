@@ -13,7 +13,7 @@
                        [highlightedSection]="highlightedSection"
                        (onComplete)="selectCapability($event)" [hidden]="!isShowCapability"></cn-capabilities>
 
-      <cn-complexities [roles]="rolesForComplexity" [candidateRoles]="jobForComplexity"
+      <cn-complexities [roles]="rolesForComplexity" [complexities]="jobPosterModel.capability_matrix"
                        [highlightedSection]="highlightedSection"
                        [isComplexityPresent]="isComplexityPresent"
                        (onComplete)="selectRoleFromComplexity($event)" [hidden]="!isShowComplexity"></cn-complexities>

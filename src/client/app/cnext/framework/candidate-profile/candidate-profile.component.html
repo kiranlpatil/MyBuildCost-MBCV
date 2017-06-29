@@ -43,9 +43,10 @@
                          [highlightedSection]="highlightedSection"
                          (onComplete)="onCapabilityComplete($event)" [hidden]="!showCapability"></cn-capabilities>
 
-        <cn-complexities [roles]="rolesForComplexity" [candidateRoles]="candidateForComplexity"
+        <cn-complexities [roles]="rolesForComplexity" [complexities]="candidate.capability_matrix"
                          [highlightedSection]="highlightedSection"
                          [isComplexityPresent]="isComplexityPresent"
+                         (onComplextyAnswered)="onComplextyAnswered($event)"
                          (onComplete)="onComplexityComplete($event)" [hidden]="!showComplexity"></cn-complexities>
 
         <cn-proficiencies [proficiencies]="proficiencies" [choosedproficiencies]="candidate.proficiencies"
