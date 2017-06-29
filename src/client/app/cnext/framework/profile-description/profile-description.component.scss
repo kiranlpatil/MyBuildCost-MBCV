@@ -44,6 +44,8 @@ h4 {
 }*/
 
 .compact-view {
+  z-index: 1;
+
   &:hover {
     .btn-edit {
       opacity: 1;

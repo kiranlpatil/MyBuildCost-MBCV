@@ -1,8 +1,8 @@
 $border-color: #e8e8e8;
 $light-blue: #00aed5;
 $primary-option: #3694d1;
-$secondary-option: #81D4FA;
-$modal-bg: rgba(0, 0, 0, .2);
+$secondary-option: #81d4fa;
+$modal-bg: rgba(0, 0, 0, .05);
 $active-section: #a8de78;
 $theme-color: #3694d1;
 
@@ -42,9 +42,10 @@ $theme-color: #3694d1;
   //border: 1px solid $border-color;
   position: relative;
   padding: 10px;
+  z-index: 5;
 
   .btn-edit {
-    background: #fff url("../assets/c-next/compact-view/pencil.png") no-repeat 50% 50%;
+    background: transparent url("../assets/c-next/compact-view/pencil.png") no-repeat 50% 50%;
     background-size: cover;
     border: 0;
     //display: block;
@@ -56,7 +57,7 @@ $theme-color: #3694d1;
     //top: 0;
     transition: opacity 0.25s ease-out;
     width: 20px;
-    z-index: 1;
+    z-index: 5;
     position: relative;
     top: -4px;
     display: inline-block;
