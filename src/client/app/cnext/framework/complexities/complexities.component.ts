@@ -286,10 +286,14 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
 
   onNext() {
     this.onComplextyAnswered.emit(this.complexities);
-    this.getComplexityDetails(this.complexityIds[++this.currentComplexity]);
+    if(this.currentComplexity<=this.complexityIds.length) {
+      this.getComplexityDetails(this.complexityIds[++this.currentComplexity]);
+    }
   }
   onPrevious() {
-    this.getComplexityDetails(this.complexityIds[--this.currentComplexity]);
+    if(this.currentComplexity>=0) {
+      this.getComplexityDetails(this.complexityIds[--this.currentComplexity]);
+    }
   }
 
   getComplexityDetails(complexityId: string) {
@@ -334,7 +338,6 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
         }
       }
     }
-
   }
 
   getStyleModal() {

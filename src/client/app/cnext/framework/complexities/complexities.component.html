@@ -162,8 +162,9 @@
             <cn-question-answer [complexityDetails]="currentComplexityDetails" (onComplete)="onAnswered($event)" ></cn-question-answer>
             <div class="button-group clearfix">
               <div *ngIf="isCandidate">
-                <button class="btn btn-success" (click)="onNext()">Next</button>
-                <button class="btn btn-success" (click)="onPrevious()">Previous</button>
+                <p>{{currentComplexity}}</p>
+                <button class="btn btn-success" (click)="onNext()" [disabled]="currentComplexity===complexityIds.length">Next</button>
+                <button class="btn btn-success" (click)="onPrevious()" [disabled]="currentComplexity===0">Previous</button>
               </div>
             </div>
           </div>
@@ -214,7 +215,6 @@
           <div class="row">
             <div class="col-sm-12">
               <p>Do you want to save these Details ?</p>
-
               <div class="button-group">
                 <form>
                   <input type="submit" #save class="btn btn-success" ref-searchInput (click)="saveComplexity()"

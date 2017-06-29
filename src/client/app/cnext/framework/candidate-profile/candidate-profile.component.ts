@@ -95,7 +95,6 @@ export class CandidateProfileComponent implements OnInit {
     this.candidateForComplexity = this.candidate.industry.roles;
     this.saveCandidateDetails();
     this.getComplexity();
-    this.showComplexity = true;
     this.whichStepsVisible[2] = true;
   }
   onComplextyAnswered(capability_matrix:any) {
@@ -195,7 +194,6 @@ export class CandidateProfileComponent implements OnInit {
                 this.highlightedSection.isDisable = false;
               }
               this.getComplexity();
-              this.showComplexity = true;
               this.whichStepsVisible[2] = true;
             }
             this.goto = false;
@@ -220,7 +218,6 @@ export class CandidateProfileComponent implements OnInit {
         .subscribe(
           rolelist => {
             this.rolesForComplexity = rolelist.data;
-            this.showComplexity = true;
             this.getCandidateForComplexity();
           });
     }
@@ -244,7 +241,9 @@ export class CandidateProfileComponent implements OnInit {
     this.profileCreatorService.getCandidateDetails()
       .subscribe(
         candidateData => {
-          this.candidate.capability_matrix = candidateData.data[0].capability_matrix;
+          this.candidate.capability_matrix = Object.assign({},candidateData.data[0].capability_matrix);
+          console.log('this.candidate.capability_matrix',this.candidate.capability_matrix);
+          this.showComplexity = true;
         });
   }
 
