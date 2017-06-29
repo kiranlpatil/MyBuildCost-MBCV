@@ -1,3 +1,4 @@
+<div class="modal-bg" *ngIf="highlightedSection.name=='Profile'"></div>
 <div class="section-container" *ngIf="highlightedSection.name=='Profile'">
   <cn-tool-tip [message]="tooltipMessage"></cn-tool-tip>
   <div class="main-content clearfix modal-content">
@@ -58,7 +59,6 @@
   </div>
   <!-- <div [class.modal-bg]="highlightedSection.name!='Profile'"></div>-->
 </div>
-
 
 <div class="modal popup" [style.display]="getStyleModal()">
   <div class="modal-dialog modal-md">

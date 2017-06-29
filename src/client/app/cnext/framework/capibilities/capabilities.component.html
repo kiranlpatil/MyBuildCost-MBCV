@@ -1,3 +1,4 @@
+<div class="modal-bg" *ngIf="highlightedSection.name=='Capabilities'"></div>
 <div class="section-container clear clearfix" *ngIf="highlightedSection.name=='Capabilities'">
   <cn-tool-tip [message]="tooltipCandidateMessage" *ngIf="isCandidate"></cn-tool-tip>
   <cn-tool-tip [message]="tooltipRecruiterMessage" *ngIf="!isCandidate"></cn-tool-tip>

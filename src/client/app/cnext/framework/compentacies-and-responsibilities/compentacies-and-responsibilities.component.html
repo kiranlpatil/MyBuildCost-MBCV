@@ -1,35 +1,26 @@
-<div>
-  <div class="main-content clearfix modal-content" *ngIf="highlightedSection.name =='Compentancies'">
+<div class="modal-bg" *ngIf="highlightedSection.name=='Compentancies'"></div>
+<div class="section-container clearfix" *ngIf="highlightedSection.name =='Compentancies'">
+  <div class="main-content clearfix modal-content">
     <div class="row">
-      <div class="section-container col-sm-12">
+      <div class="col-sm-12">
         <div class="max-height">
           <h4 class="heading">Additional information about the job (500 Words)</h4>
           <cn-description-field [description]="jobPosterModel.competencies" [type]="'competensies'" [maxLength]=" '500'"
                                 (onComplete)="onCompetenciesComplete($event)"></cn-description-field>
         </div>
       </div>
-
-    <!--  <div class="section-container col-sm-6">
-        <div class="max-height">
-          <h4 class="heading">Responsibilities and Derivables (500 Words)</h4>
-          <cn-description-field [description]="jobPosterModel.responsibility" [type]="'responsibilities'"
-                                [maxLength]=" '500'"
-                                (onComplete)="onResponsibilitiesComplete($event)"></cn-description-field>
-        </div>
-      </div>-->
     </div>
   </div>
-  <div class="main-content" *ngIf="highlightedSection.name !='Compentancies'">
+</div>
+<div class="section-container clearfix" *ngIf="highlightedSection.name !='Compentancies'">
+  <div class="main-content">
     <div class="compact-view clearfix">
-      <button class="btn-edit" (click)="highlightedSection.name='Compentancies'"></button>
       <div class="col-sm-12">
-        <h4 class="heading">Additional information about the Job</h4>
+        <h4 class="heading">Additional information about the Job
+          <button class="btn-edit" (click)="highlightedSection.name='Compentancies'"></button>
+        </h4>
         <p class="primary">{{jobPosterModel.competencies}}</p>
       </div>
-      <!--<div class="col-sm-6">
-        <h4 class="heading">Responsibilities and Derivables</h4>
-        <p class="primary">{{jobPosterModel.responsibility}}</p>
-      </div>-->
     </div>
   </div>
 </div>
