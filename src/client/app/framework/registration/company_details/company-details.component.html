@@ -17,8 +17,11 @@
     </div>
 
     <form [formGroup]="companyDetailsForm" (submit)="onSubmit()" novalidate>
-
-      <h4>{{company_name}} Company</h4>
+<div>
+  <label>Company Name:</label>
+  <h4> {{company_name}}</h4>
+</div>
+     <!-- <h4> Company Name:{{company_name}}</h4>-->
 
       <div class="col-sm-3 no-padding">
         <div>
@@ -31,11 +34,11 @@
 
       <div class="col-sm-9 no-padding">
         <div>
-          <label for="about_company">About Company:</label>
+          <label for="about_company">About Company*:</label>
         </div>
         <div class="about-company">
           <control-messages [control]="companyDetailsForm.controls.about_company"></control-messages>
-          <textarea formControlName="about_company" id="about_company" placeholder="About company"
+          <textarea formControlName="about_company" id="about_company" placeholder="Describe your company"
                     class="form-control about-company" required></textarea>
         </div>
       </div>
