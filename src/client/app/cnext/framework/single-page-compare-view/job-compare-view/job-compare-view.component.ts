@@ -1,5 +1,6 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { JobCompareService } from './job-compare-view.service';
+import {Capability} from "../../model/capability";
 
 @Component({
   moduleId: module.id,
@@ -11,6 +12,7 @@ import { JobCompareService } from './job-compare-view.service';
 export class JobCompareViewComponent implements OnChanges {
   @Input() candiadteId: string;
   @Input() jobId: string;
+  capabilities: Capability[];
 
   private recruiterId: string;
   private data: any;
@@ -39,6 +41,7 @@ export class JobCompareViewComponent implements OnChanges {
 
   OnCompareSuccess(data: any) {
     this.data = data.data;
+    this.capabilities= this.jobCompareService.getStandardMatrix(this.data.match_map);
   }
 
 }

@@ -58,7 +58,7 @@
 
   <div class="col-sm-9 right-content" *ngFor="let postedJob of recruiter.postedJobs">
     <div class="col-sm-12">
-      <cn-capability-compare [roles]="data.industry.roles"></cn-capability-compare>
+      <cn-capability-compare [capabilities]="data.industry.roles[0].capabilities"></cn-capability-compare>
     </div>
     <div class="col-sm-12 no-padding">
       <!--<div class="col-sm-6" *ngIf="secondaryCapabilities.length>0">

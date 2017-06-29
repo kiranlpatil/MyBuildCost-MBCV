@@ -1,5 +1,6 @@
-import { Component, Input, OnChanges } from '@angular/core';
+import {Component, Input, OnChanges, OnInit} from '@angular/core';
 import { Role } from '../../../model/role';
+import {Capability} from "../../../model/capability";
 
 @Component({
   moduleId: module.id,
@@ -8,12 +9,13 @@ import { Role } from '../../../model/role';
   styleUrls: ['capability-compare.component.css']
 })
 
-export class CapabilityCompareComponent implements OnChanges {
+export class CapabilityCompareComponent  implements OnChanges{
 
-  @Input() roles: Role[] = new Array(0);
+  @Input() capabilities: Capability[] = new Array(0);
 
   ngOnChanges() {
     //  console.log("in compare view",this.roles);
   }
+
 
 }

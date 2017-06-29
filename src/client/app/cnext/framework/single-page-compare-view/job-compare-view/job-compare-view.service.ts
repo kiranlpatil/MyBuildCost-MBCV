@@ -3,6 +3,9 @@ import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { BaseService } from '../../../../framework/shared/httpservices/base.service';
 import { API } from '../../../../framework/shared/constants';
+import {Capability} from "../../model/capability";
+import {Complexity} from "../../model/complexity";
+import {Scenario} from "../../model/scenario";
 
 @Injectable()
 export class JobCompareService extends BaseService {
@@ -21,4 +24,55 @@ export class JobCompareService extends BaseService {
       .map(this.extractData)
       .catch(this.handleError);
   }
+
+  getStandardMatrix(data : any) : Capability[] {
+    let capabilities : Capability[] = new Array(0);
+    for(let value1 in data) {
+      let temp = capabilities.filter((capability : Capability)=>{
+        if(capability.name == data[value1].capability_name){
+          return true;
+        }else {
+          return false;
+        }
+      });
+      let cap : Capability;
+      let complexities : Complexity[];
+      if(temp.length>0) {
+          cap = temp[0];
+        complexities  = cap.complexities;
+      }else {
+        cap = new Capability();
+        cap.name= data[value1].capability_name;
+        complexities  = new Array(0);
+      }
+      for(let value2 in data) {
+        if(data[value1].capability_name === data[value2].capability_name) {
+          let sce = new Scenario();
+          sce.name = data[value2].scenario_name;
+          let com = new Complexity();
+          com.name= data[value2].complexity_name;
+          com.scenarios.push(sce);
+          let isFound : boolean= false;
+          for(let complex of cap.complexities){
+            if(complex.name == com.name ) {
+              isFound =true;
+              break;
+            }
+          }
+          if(!isFound) {
+            complexities.push(com);
+          }
+        }
+      }
+      if(temp.length > 0) {
+
+      }else {
+        cap.complexities=complexities;
+        capabilities.push(cap);
+      }
+    }
+    return capabilities;
+  }
+
+
 }
