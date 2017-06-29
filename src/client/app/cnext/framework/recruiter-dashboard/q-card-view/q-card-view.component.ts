@@ -71,7 +71,6 @@ export class QCardviewComponent implements OnChanges {
         for (let candidate of changes.candidateQlist.currentValue.shortListedCandidates) {
           this.emailsOfShrortListedCandidates.push(candidate.email);
         }
-
       }
     }
   }

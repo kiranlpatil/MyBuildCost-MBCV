@@ -36,7 +36,7 @@ let code:any[] =scenario.code.split('.');
 }
 
 isChecked(code:string) {
-  let splitCode:string=this.complexityDetails.code;
+  let splitCode:string[]=this.complexityDetails.code.split('_');
     let usercode:string =splitCode[0]+'.'+splitCode[1]+'.'+this.complexityDetails.userChoice;
     if(code===usercode) {
       return true;
