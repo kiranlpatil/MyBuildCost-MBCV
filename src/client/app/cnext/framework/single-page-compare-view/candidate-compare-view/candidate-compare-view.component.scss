@@ -32,6 +32,8 @@ $blue: #3694d1;
       font-family: 'gothamrnd-book';
       font-weight: bold;
       text-transform: capitalize;
+      width: calc(100% - 70px);
+      float: left;
     }
 
     p {
@@ -42,7 +44,7 @@ $blue: #3694d1;
 
   .details {
     border-bottom: 1px solid $blue-color;
-    margin: 15px 0;
+    margin: 0px 0;
     padding-bottom: 15px;
 
     .col-sm-6 {
@@ -54,11 +56,15 @@ $blue: #3694d1;
       width: 100%;
     }
 
+    .first-label {
+      margin-top: 0;
+    }
+
     label {
       color: $blue-color;
       font-weight: bold;
       font-family: 'gothamrnd-book';
-      margin: 5px 0 0;
+      margin: 20px 0 0;
       width: 100%;
     }
   }

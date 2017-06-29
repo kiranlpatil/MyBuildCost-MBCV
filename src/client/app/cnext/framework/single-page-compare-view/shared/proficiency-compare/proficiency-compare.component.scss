@@ -1,24 +1,42 @@
 $theme-color: #3694d1;
 $white: #fff;
 $gray: #ccc;
-$green: #68ab26;
-$red: #e82c0c;
+$green: #7E9B5D;
+$red: #EF5C48;
+$light-green: #B1D669;
+$orange: #EAA83D;
+
 
 .option {
-  border: 1px solid $gray;
-  border-radius: 4px;
-  color: $theme-color;
+  border-radius: 28px;
+  color: $white;
   display: inline-block;
-  font-size: 10px;
+  font-size: 12px;
   font-weight: bold;
   margin: 5px 15px 5px 0;
   min-width: 100px;
-  padding: 4px 10px;
+  padding: 5px 15px;
   text-align: center;
-  border-left: 10px solid $gray;
+  height: 28px;
+  background: $green;
 }
 
 .exact {
-  border: 1px solid $green;
-  border-left: 10px solid $green;
+  background: $green;
+}
+
+.above {
+  background: $light-green !important;
+}
+
+.below {
+  background: $orange !important;
+}
+
+.missing {
+  background: $red !important;
+}
+
+.extra {
+  background: $gray !important;
 }

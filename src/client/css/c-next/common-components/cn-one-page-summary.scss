@@ -61,6 +61,14 @@ $border-color: #e8e8e8;
   }
 }
 
+.proficiencies-matched-heading,
+.extra-proficiencies-heading {
+  float: left;
+  width: auto;
+  margin: 2px 15px 0 0 !important;
+  padding: 10px 0;
+}
+
 @media only screen and (max-width: 1366px) {
   .one-page-summary {
     width: 100%;

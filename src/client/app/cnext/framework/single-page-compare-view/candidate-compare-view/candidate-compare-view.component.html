@@ -12,7 +12,7 @@
         </div>
 
         <div class="details clearfix" *ngFor="let postedJob of recruiter.postedJobs">
-          <label>Job Title</label>
+          <label class="first-label">Job Title </label>
           <span>{{postedJob.jobTitle}}</span>
           <label>Hiring Manger</label>
           <span>{{postedJob.hiringManager}}</span>
@@ -66,7 +66,7 @@
         <cn-horizontal-list-view [data]="secondaryCapabilities"></cn-horizontal-list-view>
       </div>-->
 
-      <h4>Proficiencies Matched With Job.</h4>
+      <h4 class="proficiencies-matched-heading">Proficiencies Matched With Job.</h4>
       <cn-proficiency-compare [data]="data.proficiencies"
                               [matchdData]="data.proficienciesMatch"></cn-proficiency-compare>
 
