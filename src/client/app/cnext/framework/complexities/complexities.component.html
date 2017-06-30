@@ -9,10 +9,10 @@
         <span class="light-font">selected above </span> <span class="pull-right">{{currentComplexity}}</span>
       </h4>
       <div class="complexity-container">
-          <cn-question-answer [complexityDetails]="currentComplexityDetails" (onComplete)="onAnswered($event)" ></cn-question-answer>
+          <cn-question-answer [complexityDetails]="currentComplexityDetails" [slideQuestionToLeft]="slideToLeft" [slideQuestionToRight]="slideToRight" (onComplete)="onAnswered($event)" ></cn-question-answer>
           <div class="button-group clearfix clear">
             <div *ngIf="isCandidate">
-              <button class="btn btn-success" (click)="onNext()" [disabled]="currentComplexity===complexityIds.length">Next</button>
+              <button class="btn btn-success btn-next" (click)="onNext()" [disabled]="currentComplexity===complexityIds.length">Next</button>
               <button class="btn btn-prev" (click)="onPrevious()" [disabled]="currentComplexity===0"><span class="glyphicon glyphicon-chevron-left"></span></button>
             </div>
           </div>

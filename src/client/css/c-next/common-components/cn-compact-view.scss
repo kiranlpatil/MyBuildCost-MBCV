@@ -35,6 +35,7 @@ $theme-color: #3694d1;
   box-shadow: 1px 1px 1px 0 $modal-bg;
   border: 1px solid $theme-color;
   padding: 0 0 15px 0 !important;
+  overflow: hidden;
 }
 
 .compact-view {

@@ -1,5 +1,5 @@
 <section class="container-fluid one-page-summary" *ngIf="data != undefined && typeOfView =='spa_candidate'">
-  <section class="container-fluid one-page-summary" *ngIf="candidate != undefined && candidateDetails != undefined">
+  <section class="container-fluid" *ngIf="candidate != undefined && candidateDetails != undefined">
     <div class="col-sm-3 left-content">
       <div>
         <div class="basic-description" *ngIf="candidateDetails != undefined">
@@ -61,22 +61,27 @@
       <div class="col-sm-12">
         <cn-capability-compare [capabilities]="capabilities"></cn-capability-compare>
       </div>
+      <div class="col-sm-12">
       <h4>Proficiency In</h4>
       <cn-proficiency-compare [data]="data.proficiencies"
                               [matchdData]="data.proficienciesMatch"></cn-proficiency-compare>
-    </div>
-    Candidate has Additional Capabilities
-    <div *ngIf="data != undefined">
+        </div>
+      <div class="col-sm-12">
+        <h4>Candidate has Additional Capabilities</h4>
+        <div *ngIf="data != undefined">
       <span *ngFor="let cap of data.additionalCapabilites" >
       {{cap}}
       </span>
+        </div>
+      </div>
     </div>
+
 
   </section>
 </section>
 
 <section class="container-fluid one-page-summary" *ngIf="data != undefined && typeOfView =='spa_job'">
-  <section class="container-fluid one-page-summary">
+  <section class="container-fluid ">
     <div class="col-sm-3 left-content">
       <div>
         <div class="basic-description" *ngIf="recruiter != undefined">
@@ -125,8 +130,8 @@
           </div>
         </div>
       </div>
-      <div *ngIf="recruiter != undefined">
-        <h4>About Company</h4>
+      <div class="about-company-label" *ngIf="recruiter != undefined">
+        <label>About Company</label>
         <cn-additional-details [data]="recruiter.about_company"></cn-additional-details>
       </div>
       <!--  &lt;!&ndash; <div>
@@ -142,20 +147,35 @@
         <div class="pull-left col-xs-8 no-padding text-left">
       <cn-proficiency-compare [data]="data.proficiencies"
                               [matchdData]="data.proficienciesMatch"></cn-proficiency-compare>
+          <div class="col-xs-12">
+
+
         </div>
+          </div>
+        <div class="col-xs-12 no-padding">
+          <h4 style="color: #3694d1;">These are your Extra Proficiencies</h4>
+          <div class="option pull-left" *ngFor="let item of data.proficiencies;let i = index" style="padding-top: 6px;padding-right: 7px;">
+            <span>{{item}}</span>
+          </div>
         </div>
-      you have Additional Capabilities
-      <div *ngIf="data != undefined">
-        <span *ngFor="let cap of data.additionalCapabilites" >
-          {{cap}}
-        </span>
-      </div>
+
+        <div class="col-xs-12 no-padding">
+          <h4 style="color: #3694d1;">You have Additional Capabilities </h4>
+          <div *ngIf="data != undefined">
+          <span class="ption pull-left" *ngFor="let cap of data.additionalCapabilites" style="padding-top: 7px;" >
+            {{cap}}
+          </span>
+          </div>
+        </div>
+
+        </div>
+
     </div>
   </section>
 </section>
 
 <section *ngIf="data != undefined && typeOfView=='compact'">
-    <div class="">
+    <div class="one-page-summary">
       <div class="col-xs-12">
         <cn-capability-compare [capabilities]="capabilities"></cn-capability-compare>
       </div>
@@ -166,12 +186,17 @@
                               [matchdData]="data.proficienciesMatch"></cn-proficiency-compare>
           </div>
       </div>
-      Candidate has Additional Capabilities
-      <div *ngIf="data != undefined">
-      <span *ngFor="let cap of data.additionalCapabilites" >
-      {{cap}}
-      </span>
-      </div>
+      <div class="col-sm-12 proficiency-compare-section-area">
+
+        <h4> Candidate has Additional Capabilities </h4>
+        <div class="pull-left col-xs-8 no-padding text-left">
+        <div *ngIf="data != undefined">
+        <span *ngFor="let cap of data.additionalCapabilites" >
+        {{cap}}
+        </span>
+        </div>
+          </div>
+        </div>
     </div>
 </section>
 

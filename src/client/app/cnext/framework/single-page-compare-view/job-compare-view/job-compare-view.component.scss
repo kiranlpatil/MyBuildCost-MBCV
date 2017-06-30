@@ -40,9 +40,9 @@ $red: #e82c0c;
   }
 
   .details {
-    border-bottom: 1px solid $blue-color;
-    margin: 15px 0;
-    padding-bottom: 15px;
+    /*border-bottom: 1px solid $blue-color;*/
+    margin: 0px 0;
+    padding: 0px;
 
     .col-sm-6 {
       min-height: 20px;
@@ -51,14 +51,16 @@ $red: #e82c0c;
     span {
       color: $text-color;
       width: 100%;
+      font-size: 11px;
     }
 
     label {
       color: $blue-color;
       font-weight: bold;
       font-family: 'gothamrnd-book';
-      margin: 20px 0 0;
+      margin: 10px 0 0;
       width: 100%;
+      font-size: 12px;
     }
   }
 }
@@ -77,4 +79,19 @@ $red: #e82c0c;
 
 .missing {
   color: $red !important;
+}
+
+.first-label {
+  margin-top: 0;
+}
+
+.about-company-label {
+  label {
+    color: #3694d1;
+    font-weight: bold;
+    font-family: 'gothamrnd-book';
+    margin: 10px 0 0;
+    width: 100%;
+    font-size: 12px;
+  }
 }

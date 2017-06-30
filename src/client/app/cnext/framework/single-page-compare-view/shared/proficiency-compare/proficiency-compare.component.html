@@ -6,11 +6,3 @@
 <div class="option exact" *ngFor="let item of matchdData;let i = index">
   <span>{{item}}</span>
 </div>
-<div class="col-xs-12 no-padding">
-<h4 *ngIf="isCandidate=='true'">These are your Extra Proficiencies</h4>
-
-<h4 *ngIf="isCandidate=='false'">These are Candidates additional Proficiencies</h4>
-<div class="option" *ngFor="let item of data;let i = index">
-  <span>{{item}}</span>
-</div>
-</div>

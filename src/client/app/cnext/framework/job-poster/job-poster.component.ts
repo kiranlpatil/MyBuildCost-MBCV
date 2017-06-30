@@ -77,10 +77,11 @@ export class JobPosterComponent implements OnInit {
     this.jobPostService.postJob(this.jobPosterModel).subscribe(
       data => {
         this.jobPosterModel._id = data.data.postedJobs[0]._id;
+        this.jobPosterModel.capability_matrix = data.data.postedJobs[0].capability_matrix;
       });
   }
   onSuccess(jobId: string) {
-    if (jobId != undefined) {
+    if (jobId !== undefined) {
       LocalStorageService.setLocalValue(LocalStorage.CURRENT_JOB_POSTED_ID, jobId);
       this._router.navigate([NavigationRoutes.APP_JOB_SUMMURY]);
     }
@@ -189,7 +190,6 @@ export class JobPosterComponent implements OnInit {
   onProficiencyComplete(event: any) {
     this.showIndustryExposure = true;
     this.updateJob();
-
   }
 
   onIndustryExposureComplete(event: any) {

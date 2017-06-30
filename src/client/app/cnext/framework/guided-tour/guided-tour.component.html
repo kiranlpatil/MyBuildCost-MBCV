@@ -6,57 +6,66 @@
       <!-- Wrapper for slides -->
       <div class="carousel-inner">
         <div class="item carousel-slide active">
-          <img src="../assets/c-next/guided-tour/welcome.png" alt="Welcome Screen" style="width:100%;">
+          <img src="../assets/c-next/guided-tour/slide13.png" style="width:100%;">
         </div>
 
         <div class="item carousel-slide">
-          <img src="../assets/c-next/guided-tour/1.png" style="width:100%;">
+          <img src="../assets/c-next/guided-tour/slide1.png" style="width:100%;">
         </div>
 
         <div class="item carousel-slide">
-          <img src="../assets/c-next/guided-tour/2.png" style="width:100%;">
+          <img src="../assets/c-next/guided-tour/slide2.png" style="width:100%;">
         </div>
 
         <div class="item carousel-slide">
-          <img src="../assets/c-next/guided-tour/3.png" style="width:100%;">
+          <img src="../assets/c-next/guided-tour/slide3.png" style="width:100%;">
         </div>
 
         <div class="item carousel-slide">
-          <img src="../assets/c-next/guided-tour/4.png" style="width:100%;">
+          <img src="../assets/c-next/guided-tour/slide4.png" style="width:100%;">
         </div>
 
         <div class="item carousel-slide">
-          <img src="../assets/c-next/guided-tour/5.png" style="width:100%;">
+          <img src="../assets/c-next/guided-tour/slide12.png" style="width:100%;">
         </div>
 
         <div class="item carousel-slide">
-          <img src="../assets/c-next/guided-tour/6.png" style="width:100%;">
+          <img src="../assets/c-next/guided-tour/slide5.png" style="width:100%;">
         </div>
 
         <div class="item carousel-slide">
-          <img src="../assets/c-next/guided-tour/7.png" style="width:100%;">
+          <img src="../assets/c-next/guided-tour/slide6.png" style="width:100%;">
         </div>
 
         <div class="item carousel-slide">
-          <img src="../assets/c-next/guided-tour/8.png" style="width:100%;">
+          <img src="../assets/c-next/guided-tour/slide7.png" style="width:100%;">
         </div>
 
         <div class="item carousel-slide">
-          <img src="../assets/c-next/guided-tour/9.png" style="width:100%;">
+          <img src="../assets/c-next/guided-tour/slide8.png" style="width:100%;">
         </div>
 
         <div class="item carousel-slide">
-          <img src="../assets/c-next/guided-tour/10.png" style="width:100%;">
+          <img src="../assets/c-next/guided-tour/slide9.png" style="width:100%;">
         </div>
+
+        <div class="item carousel-slide">
+          <img src="../assets/c-next/guided-tour/slide10.png" style="width:100%;">
+        </div>
+
+        <div class="item carousel-slide">
+          <img src="../assets/c-next/guided-tour/slide11.png" style="width:100%;">
+        </div>
+
       </div>
 
       <!-- Left and right controls -->
       <div class="button-container">
         <a class="left" (click)="showHide(true)" *ngIf="isShowPrev" href="#myCarousel" data-slide="prev">
-          <a class="btn btn-success">Previous</a>
+          <a class="btn btn-default btn-prev">Previous</a>
         </a>
         <a class="right" *ngIf="isShowNext" (click)="showHide(false)" href="#myCarousel" data-slide="next">
-          <a class="btn btn-success">Next</a>
+          <a class="btn btn-default btn-next">Next</a>
         </a>
         <a class="btn btn-danger skip"  *ngIf="isShowNext" (click)="onSkipClick()">Skip</a>
         <a class="btn btn-danger skip"  *ngIf="!isShowNext" (click)="onSkipClick()">Finish</a>

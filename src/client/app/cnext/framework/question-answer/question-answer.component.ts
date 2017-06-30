@@ -14,6 +14,8 @@ import { Scenario } from '../model/scenario';
 export class QuestionAnswerComponent implements OnInit,OnChanges {
 
   @Input() complexityDetails:ComplexityDetails = new ComplexityDetails();
+  @Input() slideQuestionToRight:boolean;
+  @Input() slideQuestionToLeft:boolean;
   @Output() onComplete = new EventEmitter();
   private isCandidate:boolean = false;
 

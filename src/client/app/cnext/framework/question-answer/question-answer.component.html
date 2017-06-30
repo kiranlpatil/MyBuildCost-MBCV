@@ -1,4 +1,4 @@
-<div class="complexity-details" *ngIf="complexityDetails">
+<div class="complexity-details" *ngIf="complexityDetails" [class.slide-left]="slideQuestionToRight" [class.slide-right]="slideQuestionToLeft">
   <p class="breadcrumbs">
     <span *ngIf="complexityDetails.rolename">{{complexityDetails.rolename}} </span>
     <span *ngIf="complexityDetails.capabilityName"> >> {{complexityDetails.capabilityName}} </span>

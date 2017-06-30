@@ -2,6 +2,13 @@ $theme-color: #3694d1;
 
 .complexity-details {
   padding: 0 15px 0 50px;
+  transition: 2s;
+  width: 100%;
+  -webkit-transition: 2s;
+  -moz-transition: 2s;
+  position: absolute;
+  left: 0;
+  opacity: 1;
 
   .breadcrumbs {
     font-size: 12px;
@@ -18,3 +25,90 @@ $theme-color: #3694d1;
     font-weight: bold;
   }
 }
+
+.slide-right {
+  -webkit-animation: SlideTORight 1s ease-in 1;
+  animation: SlideTORight 1s ease-in 1;
+}
+
+.slide-left {
+  -webkit-animation: SlideTOLeft 1s ease-in 1;
+  animation: SlideTOLeft 1s ease-in 1;
+}
+
+@-webkit-keyframes SlideTORight {
+  0% {
+    left: 0;
+    opacity: 1;
+  }
+  33% {
+    left: 100%;
+    opacity: 0;
+  }
+  66% {
+    left: -100%;
+    opacity: 1;
+  }
+  100% {
+    left: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes SlideTORight {
+  0% {
+    left: 0;
+    opacity: 1;
+  }
+  33% {
+    left: 100%;
+    opacity: 0;
+  }
+  66% {
+    left: -100%;
+    opacity: 0;
+  }
+  100% {
+    left: 0;
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes SlideTOLeft {
+  0% {
+    left: 0;
+    opacity: 1;
+  }
+  33% {
+    left: -100%;
+    opacity: 0;
+  }
+  66% {
+    left: 100%;
+    opacity: 0;
+  }
+  100% {
+    left: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes SlideTOLeft {
+  0% {
+    left: 0;
+    opacity: 1;
+  }
+  33% {
+    left: -100%;
+    opacity: 0;
+  }
+  66% {
+    left: 100%;
+    opacity: 0;
+  }
+  100% {
+    left: 0;
+    opacity: 1;
+  }
+}
+
