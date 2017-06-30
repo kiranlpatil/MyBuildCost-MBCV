@@ -12,18 +12,23 @@ import RecruiterRepository = require("../dataaccess/repository/recruiter.reposit
 import JobProfileModel = require("../dataaccess/model/jobprofile.model");
 import CandidateRepository = require("../dataaccess/repository/candidate.repository");
 import RecruiterModel = require("../dataaccess/model/recruiter.model");
+import CapabilityMatrixService = require("./capbility-matrix.builder");
+import IndustryModel = require("../dataaccess/model/industry.model");
+import IndustryRepository = require("../dataaccess/repository/industry.repository");
 
 class RecruiterService {
   private recruiterRepository: RecruiterRepository;
   private candidateRepository: CandidateRepository;
   private userRepository: UserRepository;
   private locationRepository: LocationRepository;
+  private industryRepositiry: IndustryRepository;
 
   APP_NAME: string;
 
   constructor() {
     this.recruiterRepository = new RecruiterRepository();
     this.userRepository = new UserRepository();
+    this.industryRepositiry = new IndustryRepository();
     this.locationRepository = new LocationRepository();
     this.candidateRepository = new CandidateRepository();
     this.APP_NAME = ProjectAsset.APP_NAME;
@@ -151,34 +156,99 @@ class RecruiterService {
   }
 
   updateJob(_id: string, item: any, callback: (error: any, result: any) => void) { //Todo change with candidate_id now it is a user_id operation
-    this.recruiterRepository.findOneAndUpdate(
-      {
-        "userId": new mongoose.Types.ObjectId(_id),
-        'postedJobs._id': new mongoose.Types.ObjectId(item.postedJobs._id)
-      },
-      {$set: {'postedJobs.$': item.postedJobs}},
-      {
-        "new": true, select: {
-        postedJobs: {
-          $elemMatch: {"postingDate": item.postedJobs.postingDate}
+
+    var capabilityMatrixService: CapabilityMatrixService = new CapabilityMatrixService();
+    this.industryRepositiry.retrieve({'name': item.postedJobs.industry.name}, (error: any, industries: IndustryModel[]) => {
+      if (error) {
+        callback(error, null);
+      } else {
+        if (item.capability_matrix === undefined) {
+          item.capability_matrix = {};
         }
+        let new_capability_matrix: any = {};
+        /* if (item.industry.roles && item.industry.roles.length > 0) {
+         for (let role of item.industry.roles) {
+         if (role.capabilities && role.capabilities.length > 0) {
+         for (let capability of role.capabilities) {
+         if (capability.code) {
+         for (let mainRole of industries[0].roles) {
+         if (role.code.toString() === mainRole.code.toString()) {
+         for (let mainCap of mainRole.capabilities) {
+         if (capability.code.toString() === mainCap.code.toString()) {
+         for (let mainComp of mainCap.complexities) {
+         let itemcode = mainCap.code +'_' + mainComp.code;
+         if (item.capability_matrix[itemcode] === undefined) {
+         new_capability_matrix[itemcode] = -1;
+         item.capability_matrix[itemcode] = -1;
+         }else if(item.capability_matrix !== -1) {
+         new_capability_matrix[itemcode]= item.capability_matrix[itemcode];
+         }else {
+         new_capability_matrix[itemcode] = -1;
+         }
+         }
+         }
+         }
+         }
+         }
+         }
+         }
+         }
+         for (let capability of  role.default_complexities) {
+         if (capability.code) {
+         for (let mainRole of industries[0].roles) {
+         if (role.code.toString() === mainRole.code.toString()) {
+         for (let mainCap of mainRole.default_complexities) {
+         if (capability.code.toString() === mainCap.code.toString()) {
+         for (let mainComp of mainCap.complexities) {
+         let itemcode = mainCap.code +'_'+ mainComp.code;
+         if (item.capability_matrix[itemcode] === undefined) {
+         new_capability_matrix[itemcode] = -1;
+         item.capability_matrix[itemcode] = -1;
+         }else if(item.capability_matrix !== -1) {
+         new_capability_matrix[itemcode]= item.capability_matrix[itemcode];
+         }else {
+         new_capability_matrix[itemcode] = -1;
+         }
+         }
+         }
+         }
+         }
+         }
+         }
+         }
+         }
+         }
+         */
+        item.postedJobs.capability_matrix = capabilityMatrixService.getCapabilityMatrix(item.postedJobs, industries, new_capability_matrix);
+        this.recruiterRepository.findOneAndUpdate(
+          {
+            "userId": new mongoose.Types.ObjectId(_id),
+            'postedJobs._id': new mongoose.Types.ObjectId(item.postedJobs._id)
+          },
+          {$set: {'postedJobs.$': item.postedJobs}},
+          {
+            "new": true, select: {
+            postedJobs: {
+              $elemMatch: {"postingDate": item.postedJobs.postingDate}
+            }
+          }
+          },
+          function (err, record) {
+            if (record) {
+              console.log("Updated record " + JSON.stringify(record));
+              callback(null, record);
+            } else {
+              let error: any;
+              if (record === null) {
+                error = new Error("Unable to update posted job maybe recruiter & job post not found. ");
+                callback(error, null);
+              } else {
+                callback(err, null);
+              }
+            }
+          });
       }
-      },
-      function (err, record) {
-        if (record) {
-          console.log("Updated record " + JSON.stringify(record));
-          callback(null, record);
-        } else {
-          let error: any;
-          if (record === null) {
-            error = new Error("Unable to update posted job maybe recruiter & job post not found. ");
-            callback(error, null);
-          }
-          else {
-            callback(err, null);
-          }
-        }
-      });
+    });
   }
 
 
