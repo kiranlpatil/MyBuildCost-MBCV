@@ -32,7 +32,7 @@ interface CandidateModel {
   secondaryCapability: string[];
   lockedOn: Date;
   job_list: JobListModel[];
-  capability_matrix: Object;
+  capability_matrix: any;
   salaryMatch: string;
   experienceMatch: string;
   educationMatch: string;

@@ -20,9 +20,7 @@ class CandidateRepository extends RepositoryBase<ICandidate> {
 
   getCandidateQCard(candidates: any[], jobProfile: JobProfileModel, candidatesIds: string[], callback: (err: any, res: any) => void) {
     console.time('getCandidateQCardForLoop');
-    let job_posted_selected_complexity: string[];
-    job_posted_selected_complexity = this.getCodesFromindustry(jobProfile.industry);
-    let candidate_q_card_map :any={};
+    let candidate_q_card_map :any = { };
     let idsOfSelectedCandidates : string[]= new Array(0);
     for (let candidate of candidates) {
       let isFound: boolean = false;
@@ -46,31 +44,25 @@ class CandidateRepository extends RepositoryBase<ICandidate> {
           continue;
         }
       }
-      let candidate_selected_complexity: string[] = new Array(0);
       let candidate_card_view: CandidateQCard = new CandidateQCard();
       candidate_card_view.matching = 0;
-      candidate_selected_complexity = this.getCodesFromindustry(candidate.industry);
-      for (let job_item of job_posted_selected_complexity) {
-        for (let candi_item of candidate_selected_complexity) {
-          if (job_item.substr(0, job_item.lastIndexOf(".")) == candi_item.substr(0, candi_item.lastIndexOf("."))) {
-            let job_last_digit: number = Number(job_item.substr(job_item.lastIndexOf(".") + 1));
-            let candi_last_digit: number = Number(candi_item.substr(candi_item.lastIndexOf(".") + 1));
-            if (candi_last_digit === 0) {
-
-            } else if (candi_last_digit == job_last_digit - ConstVariables.DIFFERENCE_IN_COMPLEXITY_SCENARIO) {
-              candidate_card_view.below_one_step_matching += 1;
-            } else if (candi_last_digit == job_last_digit + ConstVariables.DIFFERENCE_IN_COMPLEXITY_SCENARIO) {
-              candidate_card_view.above_one_step_matching += 1;
-            } else if (candi_last_digit == job_last_digit) {
-              candidate_card_view.exact_matching += 1;
-            }
-            break;
-          }
+      let count =0;
+      for (let cap in jobProfile.capability_matrix) {
+        if (jobProfile.capability_matrix[cap] === -1 || jobProfile.capability_matrix[cap] === 0 || jobProfile.capability_matrix[cap] === undefined) {
+        } else if (jobProfile.capability_matrix[cap] === candidate.capability_matrix[cap]) {
+            candidate_card_view.exact_matching += 1;
+          count++;
+        } else if (jobProfile.capability_matrix[cap] === (candidate.capability_matrix[cap] - ConstVariables.DIFFERENCE_IN_COMPLEXITY_SCENARIO)) {
+          candidate_card_view.below_one_step_matching += 1;
+          count++;
+        } else if (jobProfile.capability_matrix[cap] === (candidate.capability_matrix[cap] + ConstVariables.DIFFERENCE_IN_COMPLEXITY_SCENARIO)) {
+          candidate_card_view.below_one_step_matching += 1;
+          count++;
         }
       }
-      candidate_card_view.above_one_step_matching = (candidate_card_view.above_one_step_matching / job_posted_selected_complexity.length) * 100;
-      candidate_card_view.below_one_step_matching = (candidate_card_view.below_one_step_matching / job_posted_selected_complexity.length) * 100;
-      candidate_card_view.exact_matching = (candidate_card_view.exact_matching / job_posted_selected_complexity.length) * 100;
+      candidate_card_view.above_one_step_matching = (candidate_card_view.above_one_step_matching / count) * 100;
+      candidate_card_view.below_one_step_matching = (candidate_card_view.below_one_step_matching / count) * 100;
+      candidate_card_view.exact_matching = (candidate_card_view.exact_matching / count) * 100;
       candidate_card_view.matching = candidate_card_view.above_one_step_matching + candidate_card_view.below_one_step_matching + candidate_card_view.exact_matching;
       candidate_card_view.salary = candidate.professionalDetails.currentSalary;
       candidate_card_view.experience = candidate.professionalDetails.experience;
@@ -78,9 +70,9 @@ class CandidateRepository extends RepositoryBase<ICandidate> {
       candidate_card_view.proficiencies = candidate.proficiencies;
       candidate_card_view.interestedIndustries = candidate.interestedIndustries;
       candidate_card_view._id = candidate._id;//todo solve the problem of location from front end
-      if(candidate.location){
+      if(candidate.location) {
         candidate_card_view.location = candidate.location.city;
-      }else{
+      }else {
         candidate_card_view.location = 'Pune';
       }
       candidate_card_view.noticePeriod = candidate.professionalDetails.noticePeriod;
@@ -98,7 +90,7 @@ class CandidateRepository extends RepositoryBase<ICandidate> {
         callback(error, null);
       }
        else {
-        if(res.length>0){
+        if(res.length>0) {
           console.time('retrieveByMultiIds');
           for(let user of res){
             let candidateQcard : CandidateQCard= candidate_q_card_map[user._id];

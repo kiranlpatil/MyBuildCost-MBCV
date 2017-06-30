@@ -28,6 +28,6 @@ interface JobProfileModel {
   remark: string;
   interestedIndustries: string[];
   candidate_list: CandidateListModel[];
-  capability_matrix : Object;
+  capability_matrix : any;
 }
 export = JobProfileModel;

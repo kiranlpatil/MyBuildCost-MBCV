@@ -45,34 +45,25 @@ class RecruiterRepository extends RepositoryBase<IRecruiter> {
               continue;
             }
           }
-          let candidateRepository: CandidateRepository = new CandidateRepository();
-          let candidate_selected_complexity: string[] = new Array(0);
-          candidate_selected_complexity = candidateRepository.getCodesFromindustry(candidate.industry);
-          let job_selected_complexity: string[] = new Array(0);
           let job_qcard: JobQCard = new JobQCard();
           job_qcard.matching = 0;
-          job_selected_complexity = candidateRepository.getCodesFromindustry(job.industry);
-          for (let job_item of job_selected_complexity) {
-            for (let candi_item of candidate_selected_complexity) {
-              if (job_item.substr(0, job_item.lastIndexOf(".")) == candi_item.substr(0, candi_item.lastIndexOf("."))) {
-                let job_last_digit: number = Number(job_item.substr(job_item.lastIndexOf(".") + 1));
-                let candi_last_digit: number = Number(candi_item.substr(candi_item.lastIndexOf(".") + 1));
-                if (job_last_digit == 0) {
-
-                } else if (job_last_digit == candi_last_digit + ConstVariables.DIFFERENCE_IN_COMPLEXITY_SCENARIO) {
-                  job_qcard.below_one_step_matching += 1;
-                } else if (job_last_digit == candi_last_digit - ConstVariables.DIFFERENCE_IN_COMPLEXITY_SCENARIO) {
-                  job_qcard.above_one_step_matching += 1;
-                } else if (job_last_digit == candi_last_digit) {
-                  job_qcard.exact_matching += 1;
-                }
-                break;
-              }
+          let count : number = 0;
+          for (let cap in job.capability_matrix) {
+            if (job.capability_matrix[cap] === -1 || job.capability_matrix[cap] === 0 || job.capability_matrix[cap] === undefined) {
+            } else if (job.capability_matrix[cap] === candidate.capability_matrix[cap]) {
+              job_qcard.exact_matching += 1;
+              count++;
+            } else if (job.capability_matrix[cap] === (candidate.capability_matrix[cap] - ConstVariables.DIFFERENCE_IN_COMPLEXITY_SCENARIO)) {
+              job_qcard.below_one_step_matching += 1;
+              count++;
+            } else if (job.capability_matrix[cap] === (candidate.capability_matrix[cap] + ConstVariables.DIFFERENCE_IN_COMPLEXITY_SCENARIO)) {
+              job_qcard.below_one_step_matching += 1;
+              count++;
             }
           }
-          job_qcard.above_one_step_matching = (job_qcard.above_one_step_matching / job_selected_complexity.length) * 100;
-          job_qcard.below_one_step_matching = (job_qcard.below_one_step_matching / job_selected_complexity.length) * 100;
-          job_qcard.exact_matching = (job_qcard.exact_matching / job_selected_complexity.length) * 100;
+          job_qcard.above_one_step_matching = (job_qcard.above_one_step_matching / count) * 100;
+          job_qcard.below_one_step_matching = (job_qcard.below_one_step_matching / count) * 100;
+          job_qcard.exact_matching = (job_qcard.exact_matching / count) * 100;
           job_qcard.matching = job_qcard.above_one_step_matching + job_qcard.below_one_step_matching + job_qcard.exact_matching;
           job_qcard.company_name = recruiter.company_name;
           job_qcard.company_size = recruiter.company_size;

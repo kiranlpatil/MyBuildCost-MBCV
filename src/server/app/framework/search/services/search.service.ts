@@ -83,6 +83,7 @@ class SearchService {
       'location': 1,
       'interestedIndustries': 1,
       'professionalDetails': 1,
+      'capability_matrix':1
     };
     this.candidateRepository.retrieveWithLean(data, included_fields, (err, res) => {
       if (err) {
