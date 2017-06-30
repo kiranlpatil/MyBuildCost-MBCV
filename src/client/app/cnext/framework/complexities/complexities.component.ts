@@ -33,8 +33,8 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
 
   tooltipCandidateMessage: string = "<ul><li>" +
     "<h5>Complexities</h5><p class='info'> This section provides a list of complexity scenarios for your selected capabilities." +
-    "For each scenario, select the most appropriate level of complexity that you are capable of handling.</p></li>" +
-    "<li><p>If you have not handled a particular complexity, choose not applicable.</p>" +
+    "If more than one options are applicable to you, choose the option with a higher level of expertise.</p></li>" +
+    "<li><p>If a scenario was applicable to you in past but is no more relevant to you, avoid choosing such scenarios.</p>" +
     "</li></ul>";
   tooltipRecruiterMessage: string = '<ul><li>' +
     '<h5>Complexities</h5><p class="info"> This section provides a list of complexity scenarios for selected capabilities.' +
