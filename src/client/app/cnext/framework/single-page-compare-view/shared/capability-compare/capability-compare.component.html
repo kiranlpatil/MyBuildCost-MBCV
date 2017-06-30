@@ -6,33 +6,37 @@
     <li><span class="legend-missing"></span>Missing</li>
     <li><span class="legend-extra"></span>Extra</li>
   </ul>
-  <div class="heading clearfix">
+  <!--<div class="heading clearfix">
     <div class="col-sm-3 hidden-xs"><h4>Core Capabilities</h4></div>
     <div class="col-sm-9 hidden-xs"><h4>Complexities Handled</h4></div>
-  </div>
-    <div *ngFor="let capability of capabilities">
-      <div class="content clearfix" >
-        <div class="col-sm-3">
-          <div class="heading visible-xs"><h4>Core Capabilities</h4></div>
-          <span>{{capability.name}}</span>
-        </div>
-        <div class="col-sm-9 padding-left15">
-          <div class="heading visible-xs"><h4>Complexities Handled</h4></div>
-          <div *ngFor="let complexity of capability.complexities;let i=index">
-            <div class="col-sm-4 padding-right15">
-              <div class="details" [class.exact]="complexity.match==2" [class.above]="complexity.match==3"
-                   [class.below]="complexity.match==1" [class.missing]="complexity.match == 0"
-                   [class.extra]="complexity.match==4">
-                <span class="complexity-name">{{complexity.name}}</span>
-                <div *ngFor="let scenario of complexity.scenarios">
-                  <span >{{scenario.name}}</span>
+  </div>-->
+</div>
+
+<div class="capability-complexity-container">
+  <div class="row-section">
+    <div>
+      <div class="column1" *ngFor="let capability of capabilities">
+        <div class="content clearfix" >
+          <div class="">
+            <div *ngFor="let complexity of capability.complexities;let i=index">
+              <div class="col-sm-12 no-padding row-background">
+                <div class="" [class.exact]="complexity.match==2" [class.above]="complexity.match==3"
+                     [class.below]="complexity.match==1" [class.missing]="complexity.match == 0"
+                     [class.extra]="complexity.match==4">
+                  <span class="complexity-name">{{complexity.name}}</span>
+                  <div *ngFor="let scenario of complexity.scenarios">
+                    <span >{{scenario.name}}</span>
+                  </div>
                 </div>
               </div>
+
             </div>
-            <div class="clearfix devider" *ngIf="(i+1)%3==0"></div>
+          </div>
+          <div class="capability-label">
+            <span>{{capability.name}}</span>
           </div>
         </div>
       </div>
     </div>
-
+  </div>
 </div>

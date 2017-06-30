@@ -2,52 +2,77 @@ $theme-color: #3694d1;
 $heading-color: #dbeef6;
 $border-color: #e8e8e8;
 $text-color: #666;
-$light-green: #96e328;
-$orange: #ffb316;
+$light-green: #B1D669;
+$orange: #EAA83D;
 $gray: #ccc;
-$green: #68ab26;
+$green: #7E9B5D;
 $blue: #3694d1;
-$red: #e82c0c;
+$red: #EF5C48;
+$white: #ffffff;
 
 .exact {
-  border: 1px solid $light-green !important;
-  border-left: 10px solid $light-green !important;
+  background: $light-green !important;
+  padding: 10px 5px;
 }
 
 .above {
-  border: 1px solid $green !important;
-  border-left: 10px solid $green !important;
+  background: $green !important;
+  padding: 10px 5px;
 }
 
 .below {
-  border: 1px solid $orange !important;
-  border-left: 10px solid $orange !important;
+  background: $orange !important;
+  padding: 10px 5px;
 }
 
 .missing {
-  border: 1px solid $red !important;
-  border-left: 10px solid $red !important;
+  background: $red !important;
+  padding: 10px 5px;
 }
 
 .extra {
-  border: 1px solid $gray !important;
-  border-left: 10px solid $gray !important;
+  background: $gray !important;
+  padding: 10px 5px;
+}
+
+.row-background {
+  color: $white;
+  font-size: 11px;
+}
+
+.capability-label {
+  padding: 5px 0;
+  display: inline-block;
+  text-align: center;
+  width: 100%;
+  span {
+    font-size: 11px;
+    text-align: center;
+    display: inline-block;
+    word-break: break-word;
+    float: left;
+    height: 50px;
+    word-wrap: break-word;
+    padding: 0 20px;
+    color: #B3B3B3;
+  }
 }
 
 .capability-complexity {
   .legends {
-    float: right;
+    float: left;
     list-style: none;
-    margin: 0;
+    margin: 0 0 10px 0;
     padding: 0;
 
     li {
       float: left;
       font-size: 11px;
+      margin-right: 15px;
     }
 
     span {
-      margin: 0 5px 0 15px;
+      margin: 0 5px 0 5px;
       width: 9px;
       height: 9px;
       border-radius: 50%;
@@ -165,5 +190,34 @@ $red: #e82c0c;
       padding: 0 15px;
       width: 100%;
     }
+  }
+}
+
+
+.capability-complexity-container{
+  min-width:320px;
+  width: 100%;
+  margin: 0px auto;
+  display: inline-block;
+}
+.row-section {
+  display:table;
+  margin: 0;
+  border-collapse:separate;
+}
+.column1{
+  width: 10%;
+  display: table-cell;
+  padding: 0px;
+  background: #fff;
+  border-right: 1px solid #fff;
+  vertical-align: bottom;
+  word-break: break-all;
+}
+@media only screen
+and (max-width: 840px) {
+  .column1{
+    display: table-row;
+    width: 100%;
   }
 }
