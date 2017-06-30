@@ -5,8 +5,10 @@ export class JobQCard {
   above_one_step_matching: number = 0;
   exact_matching: number = 0;
   matching: number;
-  salary: string;
-  experience: string;
+  salaryMinValue: string;
+  salaryMaxValue: string;
+  experienceMinValue: string;
+  experienceMaxValue: string;
   education: string;
   location: string;
   company_size: string;

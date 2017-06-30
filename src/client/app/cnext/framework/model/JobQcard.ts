@@ -1,9 +1,11 @@
 export class JobQcard {
   education: string;
   location: string;
-  salary: string;
+  salaryMinValue: string;
+  salaryMaxValue: string;
   company_size: string;
-  experience: string;
+  experienceMinValue: string;
+  experienceMaxValue: string;
   companyAge: string;
   matching: number;
   company_name: string;

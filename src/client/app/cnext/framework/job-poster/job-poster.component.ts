@@ -114,12 +114,14 @@ export class JobPosterComponent implements OnInit {
     jobModel.industry.roles=[];
     this.jobPosterModel.department = jobModel.department;
     this.jobPosterModel.education = jobModel.education;
-    this.jobPosterModel.experience = jobModel.experience;
+    this.jobPosterModel.experienceMaxValue = jobModel.experienceMaxValue;
+    this.jobPosterModel.experienceMinValue = jobModel.experienceMinValue;
     this.jobPosterModel.hiringManager = jobModel.hiringManager;
     this.jobPosterModel.jobTitle = jobModel.jobTitle;
     this.jobPosterModel.joiningPeriod = jobModel.joiningPeriod;
     this.jobPosterModel.location = jobModel.location;
-    this.jobPosterModel.salary= jobModel.salary;
+    this.jobPosterModel.salaryMaxValue= jobModel.salaryMaxValue;
+    this.jobPosterModel.salaryMinValue= jobModel.salaryMinValue;
     if(this.jobPosterModel.industry.name !== jobModel.industry.name){
       this.jobPosterModel.industry = jobModel.industry;
       this.highlightedSection.name = 'Work-Area';

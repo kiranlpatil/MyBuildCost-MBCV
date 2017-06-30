@@ -8,8 +8,10 @@ export class JobPosterModel {
   hiringManager: string = '';
   department: string = '';
   education: string = '';
-  experience: string = '';
-  salary: string = '';
+  experienceMaxValue: string = '';
+  experienceMinValue: string = '';
+  salaryMaxValue: string = '';
+  salaryMinValue: string = '';
   joiningPeriod: string = '';
   proficiencies: string[] = new Array(0);
   additionalProficiencies: string[] = new Array(0);

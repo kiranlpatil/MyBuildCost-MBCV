@@ -60,12 +60,24 @@ class RecruiterSchema {
         education: {
           type: String
         },
-        experience: {
+        /*experience: {
+          type: String
+        },*/
+        experienceMinValue: {
           type: String
         },
-        salary: {
+        experienceMaxValue: {
           type: String
         },
+        salaryMinValue: {
+         type: String
+         },
+         salaryMaxValue: {
+         type: String
+         },
+        /*salary: {
+          type: String
+        },*/
         proficiencies: {
           type: [String]
         },

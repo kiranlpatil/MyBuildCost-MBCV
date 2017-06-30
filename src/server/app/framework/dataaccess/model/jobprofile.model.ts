@@ -11,8 +11,12 @@ interface JobProfileModel {
   hiringManager: string;
   department: string;
   education: string;
-  experience: string;
-  salary: string;
+  //experience: string;
+  experienceMaxValue: string;
+  experienceMinValue: string;
+  salaryMaxValue: string;
+  salaryMinValue: string;
+  //salary: string;
   joiningPeriod: string;
   proficiencies: string[];
   additionalProficiencies: string[];

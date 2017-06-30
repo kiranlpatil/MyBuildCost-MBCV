@@ -199,7 +199,14 @@ export class FilterComponent {
 
   selectSalaryMaxModel(value: any) {
     if(value == ''){
-      this.queryListRemove('((Number(item.salary.split(" ")[0]) >= Number(args.salaryMinValue)) && (Number(item.salary.split(" ")[0]) <= Number(args.salaryMaxValue)))');
+      if (this.isRecuirter === true) {
+        this.queryListRemove('((Number(item.salary.split(" ")[0]) >= Number(args.salaryMinValue)) && ' +
+          '(Number(item.salary.split(" ")[0]) <= Number(args.salaryMaxValue)))');
+      }else if(this.isRecuirter === false) {
+        this.queryListRemove('((Number(args.salaryMinValue) <= Number(item.salaryMinValue)  && ' +
+          'Number(item.salaryMinValue) <= Number(args.salaryMaxValue)) || (Number(args.salaryMinValue) ' +
+          '<= Number(item.salaryMaxValue)  && Number(item.salaryMaxValue) <= Number(args.salaryMaxValue)))');
+      }
       this.qCardFilter.salaryMaxValue = this.salaryRangeList[this.salaryRangeList.length -1];
       return
     }
@@ -209,7 +216,14 @@ export class FilterComponent {
 
   salaryFilterBy() {
     if (Number(this.qCardFilter.salaryMaxValue) && Number(this.qCardFilter.salaryMinValue)) {
-      this.queryListPush('((Number(item.salary.split(" ")[0]) >= Number(args.salaryMinValue)) && (Number(item.salary.split(" ")[0]) <= Number(args.salaryMaxValue)))');
+      if (this.isRecuirter === true) {
+        this.queryListPush('((Number(item.salary.split(" ")[0]) >= Number(args.salaryMinValue)) && ' +
+          '(Number(item.salary.split(" ")[0]) <= Number(args.salaryMaxValue)))');
+      }else if(this.isRecuirter === false) {
+        this.queryListPush('((Number(args.salaryMinValue) <= Number(item.salaryMinValue)  && ' +
+          'Number(item.salaryMinValue) <= Number(args.salaryMaxValue)) || (Number(args.salaryMinValue) ' +
+          '<= Number(item.salaryMaxValue)  && Number(item.salaryMaxValue) <= Number(args.salaryMaxValue)))');
+      }
       this.showClearFilter = true;
       this.buildQuery();
       this.qCardFilterService.filterby(this.qCardFilter);
@@ -218,7 +232,14 @@ export class FilterComponent {
 
   selectExperiencesMaxModel(value: any) {
     if(value == ''){
-      this.queryListRemove('((Number(item.experience.split(" ")[0]) >= Number(args.experienceMinValue)) && (Number(item.experience.split(" ")[0]) <= Number(args.experienceMaxValue)))');
+      if (this.isRecuirter === true) {
+        this.queryListRemove('((Number(item.experience.split(" ")[0]) >= Number(args.experienceMinValue)) && ' +
+          '(Number(item.experience.split(" ")[0]) <= Number(args.experienceMaxValue)))');
+      }else if(this.isRecuirter === false) {
+        this.queryListRemove('((Number(args.experienceMinValue) <= Number(item.experienceMinValue)  && ' +
+          'Number(item.experienceMinValue) <= Number(args.experienceMaxValue)) || (Number(args.experienceMinValue) ' +
+          '<= Number(item.experienceMaxValue)  && Number(item.experienceMaxValue) <= Number(args.experienceMaxValue)))');
+      }
       this.qCardFilter.experienceMaxValue = this.experienceRangeList[this.experienceRangeList.length -1];
       return
     }
@@ -238,7 +259,14 @@ export class FilterComponent {
 
   experienceFilterBy() {
     if (Number(this.qCardFilter.experienceMinValue) != undefined && Number(this.qCardFilter.experienceMaxValue) != undefined) {
-      this.queryListPush('((Number(item.experience.split(" ")[0]) >= Number(args.experienceMinValue)) && (Number(item.experience.split(" ")[0]) <= Number(args.experienceMaxValue)))');
+      if (this.isRecuirter === true) {
+        this.queryListPush('((Number(item.experience.split(" ")[0]) >= Number(args.experienceMinValue)) && ' +
+          '(Number(item.experience.split(" ")[0]) <= Number(args.experienceMaxValue)))');
+      }else if(this.isRecuirter === false) {
+        this.queryListPush('((Number(args.experienceMinValue) <= Number(item.experienceMinValue)  && ' +
+          'Number(item.experienceMinValue) <= Number(args.experienceMaxValue)) || (Number(args.experienceMinValue) ' +
+          '<= Number(item.experienceMaxValue)  && Number(item.experienceMaxValue) <= Number(args.experienceMaxValue)))');
+      }
       this.showClearFilter = true;
       this.buildQuery();
       this.qCardFilterService.filterby(this.qCardFilter);

@@ -6,6 +6,7 @@ import { ProfessionalDataService } from '../professional-data/professional-data.
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { JobLocation } from '../model/job-location';
 import { MyGoogleAddress } from '../../../framework/registration/candidate/google-our-place/my-google-address';
+import {FilterService} from "../filters/filter/filter.service";
 
 @Component({
   moduleId: module.id,
@@ -21,8 +22,12 @@ export class BasicJobInformationComponent implements OnInit,OnChanges {
   private savedjobPosterModel: JobPosterModel = new JobPosterModel();
   private jobPostForm: FormGroup;
   private educationList = new Array();
-  private experienceList = new Array();
-  private salaryList = new Array();
+  private experienceRangeList: string[] = new Array(0);
+  private fromYear:string = '';
+  private toYear:string = '';
+  private salaryRangeList: string[] = new Array(0);
+  private fromValue:string = '';
+  private toValue:string = '';
   private noticePeriodList = new Array();
   private address: string;
   private showButton: boolean = true;
@@ -41,15 +46,17 @@ export class BasicJobInformationComponent implements OnInit,OnChanges {
       '</ul>';
 
   constructor(private professionalDataService: ProfessionalDataService,
-              private formBuilder: FormBuilder) {
+              private formBuilder: FormBuilder, private _filterService: FilterService,) {
 
     this.jobPostForm = this.formBuilder.group({
       'jobTitle': ['', Validators.required],
       'hiringManager': ['', Validators.required],
       'department': ['', Validators.required],
       'education': ['', Validators.required],
-      'experience': ['', Validators.required],
-      'salary': ['', Validators.required],
+      'experienceMaxValue': ['', Validators.required],
+      'experienceMinValue': ['', Validators.required],
+      'salaryMaxValue': ['', Validators.required],
+      'salaryMinValue': ['', Validators.required],
       'joiningPeriod': ['', Validators.required],
       'location': ['', Validators.required],
     });
@@ -61,15 +68,11 @@ export class BasicJobInformationComponent implements OnInit,OnChanges {
         data => {
           this.educationList = data.educated;
         });
-    this.professionalDataService.getExperienceList()
+    this._filterService.getListForFilter()
       .subscribe(
-        data => {
-          this.experienceList = data.experience;
-        });
-    this.professionalDataService.getCurrentSalaryList()
-      .subscribe(
-        data => {
-          this.salaryList = data.salary;
+        (list: any) => {
+          this.experienceRangeList = list.experienceRangeList;
+          this.salaryRangeList = list.salaryRangeList;
         });
     this.professionalDataService.getNoticePeriodList()
       .subscribe(
@@ -111,6 +114,24 @@ export class BasicJobInformationComponent implements OnInit,OnChanges {
     this.jobPosterModel=Object.assign({},this.savedjobPosterModel);
     this.highlightedSection.name='none';
     //this.highlightedSection.name='none';
+  }
+
+  selectExperiencesMaxModel(value: any) {
+    this.toYear=value;
+
+  }
+
+  selectExperiencesMinModel(value: any) {
+    this.fromYear=value;
+  }
+
+  selectSalaryMaxModel(value: any) {
+    this.toValue=value;
+
+  }
+
+  selectSalaryMinModel(value: any) {
+    this.fromValue=value;
   }
 }
 
