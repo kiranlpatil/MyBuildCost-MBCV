@@ -178,27 +178,22 @@ class SearchService {
         callback(err, null);
       } else {
         let newCandidate = candidate.toObject();
+        let jobMinExperience: number = Number(job.experienceMinValue);
+        let jobMaxExperience: number = Number(job.experienceMinValue);
+        let jobMinSalary: number = Number(job.salaryMinValue);
+        let jobMaxSalary: number = Number(job.salaryMinValue);
         let candiExperience: string[] = newCandidate.professionalDetails.experience.split(' ');
-        let jobExperience: string[] = job.experience.split(' ');
-        let canSalary: string[] = newCandidate.professionalDetails.currentSalary.split(' ');
-        let jobSalary: string[] = job.salary.split(' ');
-        let salary1: string ;
-        let salary2 :string ;
-        let experience1 : string;
-        let experience2 : string;
-        if(!isCandidate) {
-          salary1=candiExperience[0];
-          salary2= jobExperience[0];
-          experience1=canSalary[0];
-          experience2= jobSalary[0];
+        let canSalary: string[] =  newCandidate.professionalDetails.currentSalary.split(' ');
+        if((jobMaxExperience >= Number(candiExperience[0])) && (jobMinExperience <= Number(candiExperience[0]))){
+          newCandidate.experienceMatch ='match';
         }else {
-          salary1=candiExperience[0];
-          salary2= jobExperience[0];
-          experience1=canSalary[0];
-          experience2= jobSalary[0];
+          newCandidate.experienceMatch ='missing';
         }
-        newCandidate.experienceMatch = this.compareTwoOptions(Number(experience1), Number(experience2));
-        newCandidate.salaryMatch = this.compareTwoOptions(Number(salary1), Number(salary2));
+        if((jobMaxSalary >= Number(canSalary[0])) && (jobMinSalary <= Number(canSalary[0]))){
+          newCandidate.salaryMatch ='match';
+        }else {
+          newCandidate.salaryMatch ='missing';
+        }
         let canEducation: number = this.getEductionSwitchCase(newCandidate.professionalDetails.education);
         let jobEducation: number = this.getEductionSwitchCase(job.education);
         newCandidate.educationMatch = this.compareTwoOptions(canEducation, jobEducation);

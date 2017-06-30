@@ -112,10 +112,10 @@
             <span>{{postedJob.education}}</span>
             <label [class.exact]="data.experienceMatch=='exact'" [class.above]="data.experienceMatch=='above'"
                    [class.below]="data.experienceMatch=='below'" [class.missing]="data.experienceMatch=='missing'">Experience</label>
-            <span>{{postedJob.experience}}</span>
+            <span>{{postedJob.experienceMinValue}} - {{postedJob.experienceMaxValue}}</span>
             <label [class.exact]="data.salaryMatch=='exact'" [class.above]="data.salaryMatch=='above'"
                    [class.below]="data.salaryMatch=='below'" [class.missing]="data.salaryMatch=='missing'">Salary</label>
-            <span>{{postedJob.salary}}</span>
+            <span>{{postedJob.salaryMinValue}} - {{postedJob.salaryMaxValue}}</span>
             <label [class.exact]="data.releaseMatch=='exact'" [class.above]="data.releaseMatch=='above'"
                    [class.below]="data.releaseMatch=='below'" [class.missing]="data.releaseMatch=='missing'">Joining
               Period</label>
