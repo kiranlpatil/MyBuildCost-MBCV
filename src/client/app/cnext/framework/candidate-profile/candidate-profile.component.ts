@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { NavigationRoutes } from '../../../framework/shared/constants';
-import { Router } from '@angular/router';
-import { ComplexityService } from '../complexity.service';
-import { Candidate, Section } from '../model/candidate';
-import { CandidateProfileService } from './candidate-profile.service';
-import { Role } from '../model/role';
+import {Component, OnInit} from "@angular/core";
+import {NavigationRoutes} from "../../../framework/shared/constants";
+import {Router} from "@angular/router";
+import {ComplexityService} from "../complexity.service";
+import {Candidate, Section} from "../model/candidate";
+import {CandidateProfileService} from "./candidate-profile.service";
+import {Role} from "../model/role";
 
 @Component({
   moduleId: module.id,
@@ -18,9 +18,9 @@ export class CandidateProfileComponent implements OnInit {
   private rolesForMain: Role[] = new Array(0);
   private rolesForCapability: Role[] = new Array(0);
   private rolesForComplexity: Role[] = new Array(0);
-  private roleList: string[] = new Array();
-  private primaryCapability: string[] = new Array();
-  private proficiencies: string[] = new Array();
+  private roleList: string[] = [];
+  private primaryCapability: string[] = [];
+  private proficiencies: string[] = [];
   private isComplexityPresent: boolean = false;
   private isShowNext: boolean = true;
   private isShowPrev: boolean = false;
@@ -102,13 +102,10 @@ export class CandidateProfileComponent implements OnInit {
     this.saveCandidateDetails();
   }
   onComplexityComplete(roles: Role[]) {
-    this.candidate.industry.roles = roles;
     var date = new Date();
     date.setDate(date.getDate() + 90);
     this.candidate.lockedOn = date;
     this.highlightedSection.date = date;
-    this.candidateForComplexity = this.candidate.industry.roles;
-    this.candidateForCapability = this.candidate.industry.roles;
     this.saveCandidateDetails();
     this.showProficiency = true;
     this.getProficiency();
@@ -182,7 +179,7 @@ export class CandidateProfileComponent implements OnInit {
       this.profileCreatorService.getCapability(this.candidate.industry.name, this.roleList)
         .subscribe(
           rolelist => {
-            this.rolesForCapability = rolelist.data
+            this.rolesForCapability = rolelist.data;
             for (let item of this.rolesForCapability) {
               if (item.capabilities.length > 0) {
                 this.goto = true;

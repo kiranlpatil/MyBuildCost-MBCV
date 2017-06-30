@@ -59,133 +59,7 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
       this.complexities = changes.complexities.currentValue;
       this.getComplexityIds(this.complexities);
     }
-    /* this.showMore=false;
-     this.roleWithDefaultComplexity=new Array();
-     this.scenarioNames=new Array();
-     this.selectedScenarioNames=new Array();
-     this.isPresentCapability=false;
-     this.isPresentDefaultComplexity=false;
-     this.isPresentCapabilityCandidate=false;
-     this.isPresentDefaultComplexityCandidate=false;
-
-     if (changes.roles) {
-     this.roles = changes.roles.currentValue;
-     }
-
-     if (this.roles) {
-     for (let role of this.roles) {
-     if (role.capabilities) {
-     for (let primary of role.capabilities) {
-     if (primary.complexities) {
-     this.isPresentCapability=true;
-     for (let complexity of primary.complexities) {
-     this.scenarioNames.push(complexity.name);
-     }
-     }
-     }
-     }
-     if (role.default_complexities) {
-     for (let primary of role.default_complexities) {
-     if (primary.complexities) {
-     for (let complexity of primary.complexities) {
-     this.isPresentDefaultComplexity=true;
-     this.scenarioNames.push(complexity.name);
-     }
-     }
-     }
-     }
-     }
-     }
-
-     if (this.candidateRoles) {
-     for (let role of this.candidateRoles) {
-     if (role.capabilities) {
-     for (let primary of role.capabilities) {
-     if (primary.complexities) {
-     for (let complexity of primary.complexities) {
-     this.isPresentCapabilityCandidate=true;
-     this.isPresentCapability=false;
-     this.selectedScenarioNames.push(complexity.name);
-     }
-     }else {
-     for(let mainRole of this.roles){
-     for(let mainCap of mainRole.capabilities){
-     if(primary.name == mainCap.name){
-     primary.complexities= mainCap.complexities;
-     break;
-     }
-     }
-     }
-
-     }
-     }
-     }
-     if (role.default_complexities) {
-     for (let primary of role.default_complexities) {
-     if (primary.complexities) {
-     for (let complexity of primary.complexities) {
-     this.isPresentDefaultComplexityCandidate=true;
-     this.isPresentDefaultComplexity=false;
-     for(let scenario of complexity.scenarios){
-     if(scenario.isChecked) {
-     this.selectedScenarioNames.push(complexity.name);
-     }
-     }
-     }
-     }
-     }
-     }
-     }
-     }
-     }*/
   }
-
-  /*selectDefaultComplexity(role:Role, complexity:Complexity, selectedScenario:Scenario, event:any) {
-
-
-   for (let item of complexity.scenarios) {
-
-   item.isChecked = false;
-   }
-
-   selectedScenario.isChecked = true;
-   if (this.selectedScenarioNames.indexOf(complexity.name) === -1) {
-   this.selectedScenarioNames.push(complexity.name);
-   }
-
-   this.roleWithDefaultComplexity.push(role);
-   }
-
-   selectComplexity(role:Role, capability:Capability, complexity:Complexity, selectedScenario:Scenario, event:any) {
-   for (let rol  of this.candidateRoles) {
-
-   for (let cap of rol.capabilities) {
-   if (cap.name == capability.name) {
-   capability.isPrimary = cap.isPrimary;
-   capability.isSecondary = cap.isSecondary;
-   }
-   }
-   }
-   let isFound:boolean = false;
-   for (let item of complexity.scenarios) {
-   if (item.isChecked) {
-   isFound = true;
-   }
-   item.isChecked = false;
-   }
-   if (!isFound) {
-   this.selectedScenarioNames.push(complexity.name);
-   this.count++;
-   }
-   selectedScenario.isChecked = true;
-   if (this.selectedScenarioNames.indexOf(complexity.name) === -1) {
-   this.selectedScenarioNames.push(complexity.name);
-   }
-
-   }
-
-   */
-
   getComplexityIds(complexities: any) {
     this.complexityIds = [];
     for (let id in complexities) {
@@ -197,62 +71,12 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
   }
 
   saveComplexity() {
-    //this.compactView=true
     this.isComplexityButtonEnable = false;
     if (this.isCandidate) {
       this.showModalStyle = !this.showModalStyle;
       this.highlightedSection.isLocked = true;
     }
     this.complexityService.change(true);
-    /* for (let rol  of this.candidateRoles) {
-     for (let mainrol of this.roles) {
-     if (rol.name === mainrol.name) {
-     if (rol.capabilities) {
-     for (let cap of rol.capabilities) {
-     if (mainrol.capabilities) {
-     for (let mainCap of mainrol.capabilities) {
-     if (mainCap.name === cap.name) {
-     if(cap.complexities){
-     mainCap.complexities=cap.complexities;
-     }
-     if (cap.isSecondary) {
-     mainCap.isSecondary = true;
-     mainCap.isPrimary = false;
-     }else if(cap.isPrimary){
-     mainCap.isSecondary = false;
-     mainCap.isPrimary = true;
-     }
-     }
-     }
-     }
-     }
-     }
-     if(rol.default_complexities){
-     for (let cap of rol.default_complexities) {
-     if (mainrol.capabilities) {
-     for (let mainCap of mainrol.default_complexities) {
-     if (mainCap.name === cap.name) {
-     mainCap.complexities=cap.complexities;
-     if (cap.isSecondary) {
-     mainCap.isSecondary = true;
-     mainCap.isPrimary = false;
-     }
-     }
-     }
-     }
-     }
-     }
-     }
-     }
-     }
-     if(this.roleWithDefaultComplexity.length>0){
-     for (let role of this.roleWithDefaultComplexity) {
-     for (let mainRole of this.roles) {
-     if (role.name === mainRole.name) {
-     mainRole.default_complexities = role.default_complexities;
-     }
-     }
-     }}*/
     if (this.highlightedSection.isProficiencyFilled) {
       this.highlightedSection.name = 'none';
     } else {
@@ -271,8 +95,11 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
 
   onNext() {
     this.onComplextyAnswered.emit(this.complexities);
-    if(this.currentComplexity<=this.complexityIds.length) {
+    if (this.currentComplexity < this.complexityIds.length - 1) {
       this.getComplexityDetails(this.complexityIds[++this.currentComplexity]);
+    }
+    if (this.currentComplexity === this.complexityIds.length - 1) {
+      this.showHideModal();
     }
   }
   onPrevious() {
@@ -345,9 +172,6 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
   edit() {
     this.highlightedSection.name = 'Complexities';
     this.highlightedSection.isDisable = true;
-   /* if (!this.isPresentCapability) {
-      this.roles = this.candidateRoles;
-    }*/
     this.showMore = false;
   }
 }
