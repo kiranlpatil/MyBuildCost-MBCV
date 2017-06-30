@@ -29,5 +29,6 @@ interface JobProfileModel {
   interestedIndustries: string[];
   candidate_list: CandidateListModel[];
   capability_matrix : any;
+  postedJobs : any;
 }
 export = JobProfileModel;
