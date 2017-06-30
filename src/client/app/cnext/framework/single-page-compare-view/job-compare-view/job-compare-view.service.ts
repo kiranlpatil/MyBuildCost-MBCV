@@ -72,16 +72,19 @@ export class JobCompareService extends BaseService {
         cap.complexities = this.sortComplexities(cap.complexities);
         capabilities.push(cap);
       }
+    /*} debugger
+    for(let i=0 ;i<8;i++){
+        capabilities.push(capabilities[i]);*/
     }
     return capabilities;
   }
 
   sortComplexities (complexities : Complexity[]): Complexity[] {
     complexities=complexities.sort((o1, o2) => {
-      if (o1.match < o2.match) {
+      if (o1.match > o2.match) {
         return 1;
       }
-      if (o1.match > o2.match) {
+      if (o1.match < o2.match) {
         return -1;
       }
       return 0;
