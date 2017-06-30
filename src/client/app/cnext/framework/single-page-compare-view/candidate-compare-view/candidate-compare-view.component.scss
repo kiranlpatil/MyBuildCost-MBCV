@@ -56,10 +56,6 @@ $blue: #3694d1;
       width: 100%;
     }
 
-    .first-label {
-      margin-top: 0;
-    }
-
     label {
       color: $blue-color;
       font-weight: bold;
@@ -68,6 +64,10 @@ $blue: #3694d1;
       width: 100%;
     }
   }
+}
+
+.first-label {
+  margin-top: 0;
 }
 
 .exact {

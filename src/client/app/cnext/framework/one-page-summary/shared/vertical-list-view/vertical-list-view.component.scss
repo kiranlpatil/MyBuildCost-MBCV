@@ -8,6 +8,7 @@ $bg-color: #fff;
   font-size: 13px;
   margin-bottom: 15px;
   text-align: left;
+  margin-top: 10px;
 
   &::before {
     clear: both;
@@ -21,11 +22,12 @@ $bg-color: #fff;
 
   img {
     margin-right: 5px;
-    width: 25px;
+    width: 21px;
   }
 
   span {
     color: $theme-color;
+    font-size: 12px;
     text-transform: capitalize;
   }
 

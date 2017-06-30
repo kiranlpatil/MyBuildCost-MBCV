@@ -24,6 +24,7 @@
                      [class.extra]="complexity.match==4">
                   <span class="complexity-name">{{complexity.name}}</span>
                   <div class="complexity-scenarios-description" *ngFor="let scenario of complexity.scenarios">
+                    <span class="complexity-name">{{complexity.name}}</span>
                     <span >{{scenario.name}}</span>
                   </div>
                 </div>

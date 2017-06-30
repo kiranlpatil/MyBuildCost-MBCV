@@ -12,8 +12,8 @@ $white: #ffffff;
 
 .exact {
   background: $light-green !important;
-  padding: 10px 5px;
-  height: 59px;
+  padding: 10px 5px 0px;
+  height: 57px;
 }
 
 .exact:hover {
@@ -30,13 +30,23 @@ $white: #ffffff;
     font-size: 12px;
     z-index: 9;
     border: 1px solid $white;
+    span {
+      max-width: auto;
+      overflow: inherit;
+      white-space: normal;
+      display: block;
+      position: relative;
+    }
+  }
+  .complexity-name {
+    display: block;
   }
 }
 
 .above {
   background: $green !important;
-  padding: 10px 5px;
-  height: 59px;
+  padding: 10px 5px 0px;
+  height: 57px;
 }
 
 .above:hover {
@@ -53,6 +63,16 @@ $white: #ffffff;
     font-size: 12px;
     z-index: 9;
     border: 1px solid $white;
+    span {
+      max-width: auto;
+      overflow: inherit;
+      white-space: normal;
+      display: block;
+      position: relative;
+    }
+  }
+  .complexity-name {
+    display: block;
   }
 }
 
@@ -60,8 +80,8 @@ $white: #ffffff;
 
 .below {
   background: $orange !important;
-  padding: 10px 5px;
-  height: 59px;
+  padding: 10px 5px 0px;
+  height: 57px;
 }
 
 .below:hover {
@@ -78,13 +98,23 @@ $white: #ffffff;
     font-size: 12px;
     z-index: 9;
     border: 1px solid $white;
+    span {
+      max-width: auto;
+      overflow: inherit;
+      white-space: normal;
+      display: block;
+      position: relative;
+    }
+  }
+  .complexity-name {
+    display: block;
   }
 }
 
 .missing {
   background: $red !important;
-  padding: 10px 5px;
-  height: 59px;
+  padding: 10px 5px 0px;
+  height: 57px;
 }
 
 .missing:hover {
@@ -101,13 +131,27 @@ $white: #ffffff;
     font-size: 12px;
     z-index: 9;
     border: 1px solid $white;
+    span {
+      max-width: auto;
+      overflow: inherit;
+      white-space: normal;
+      display: block;
+      position: relative;
+    }
   }
+  .complexity-name {
+    display: block;
+  }
+}
+
+.complexity-name {
+  word-break: break-word;
 }
 
 .extra {
   background: $gray !important;
-  padding: 10px 5px;
-  height: 59px;
+  padding: 10px 5px 0px;
+  height: 57px;
 }
 
 .extra:hover {
@@ -124,6 +168,16 @@ $white: #ffffff;
     font-size: 12px;
     z-index: 9;
     border: 1px solid $white;
+    span {
+      max-width: auto;
+       overflow: inherit;
+       white-space: normal;
+       display: block;
+       position: relative;
+    }
+  }
+  .complexity-name {
+    display: block;
   }
 }
 
@@ -183,14 +237,24 @@ $white: #ffffff;
 }
 
 .complexity-scenarios-description {
-  /*white-space: nowrap;
+ /* white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;*/
+  .complexity-name {
+    display: none;
+  }
+  span {
+    max-width: 92%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: table-cell;
+    position: absolute;
+  }
 }
 
 .capability-complexity {
   padding-left: 10px;
-  padding-top: 15px;
   .legends {
     float: left;
     list-style: none;
@@ -344,7 +408,7 @@ $white: #ffffff;
   display: table-cell;
   padding: 0px;
   background: #fff;
-  border-right: 1px solid #fff;
+  border-right: 2px solid #fff;
   vertical-align: bottom;
   word-break: break-all;
 }
