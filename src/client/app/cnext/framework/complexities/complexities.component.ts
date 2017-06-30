@@ -33,7 +33,7 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
   private showMore: boolean = false;
   private slideToRight: boolean = false;
   private slideToLeft: boolean = false;
-  private capabilities : Capability[]= new Array();
+  private capabilities: Capability[] = [];
 
 
   tooltipCandidateMessage: string = "<ul><li>" +
@@ -68,7 +68,8 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
       this.complexities = changes.complexities.currentValue;
       this.getComplexityIds(this.complexities);
       this.complexityComponentService.getCapabilityMatrix().subscribe(
-        capa => {debugger
+        capa => {
+          debugger;
           this.capabilities= this.jobCompareService.getStandardMatrix(capa.data);
         });
     }
@@ -158,8 +159,16 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
                     this.currentComplexityDetails.isChecked = true;
                   }
                   this.currentComplexityDetails.code=complexityId;
-                  this.currentComplexityDetails.questionForCandidate='xxx xxxx xxxx xxxx'+complexity.name+'?';
-                  this.currentComplexityDetails.questionForRecruiter='xxx xxxx xxxx xxxx'+complexity.name+'?';
+                  if (complexity.questionForCandidate !== undefined && complexity.questionForCandidate !== null && complexity.questionForCandidate !== '') {
+                    this.currentComplexityDetails.questionForCandidate = complexity.questionForCandidate;
+                  } else {
+                    this.currentComplexityDetails.questionForCandidate = complexity.name;
+                  }
+                  if (complexity.questionForRecruiter !== undefined && complexity.questionForRecruiter !== null && complexity.questionForRecruiter !== '') {
+                    this.currentComplexityDetails.questionForRecruiter = complexity.questionForCandidate;
+                  } else {
+                    this.currentComplexityDetails.questionForRecruiter = complexity.name;
+                  }
                 }
               }
             }
@@ -176,8 +185,16 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
                   this.currentComplexityDetails.scenarios=complexity.scenarios.slice();
                   this.currentComplexityDetails.userChoice=this.complexities[this.complexityIds[this.currentComplexity]];
                   this.currentComplexityDetails.code=complexityId;
-                  this.currentComplexityDetails.questionForCandidate='xxx xxxx xxxx xxxx'+complexity.name+'?';
-                  this.currentComplexityDetails.questionForRecruiter='xxx xxxx xxxx xxxx'+complexity.name+'?';
+                  if (complexity.questionForCandidate !== undefined && complexity.questionForCandidate !== null && complexity.questionForCandidate !== '') {
+                    this.currentComplexityDetails.questionForCandidate = complexity.questionForCandidate;
+                  } else {
+                    this.currentComplexityDetails.questionForCandidate = complexity.name;
+                  }
+                  if (complexity.questionForRecruiter !== undefined && complexity.questionForRecruiter !== null && complexity.questionForRecruiter !== '') {
+                    this.currentComplexityDetails.questionForRecruiter = complexity.questionForCandidate;
+                  } else {
+                    this.currentComplexityDetails.questionForRecruiter = complexity.name;
+                  }
                 }
               }
             }
