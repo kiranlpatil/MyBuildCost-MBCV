@@ -8,8 +8,12 @@ export class CandidateQCard {
   last_name: string;
   matching: number;
   status: string;
+  salaryMinValue: string;
+  salaryMaxValue: string;
   salary: string;
   experience: string;
+  experienceMinValue: string;
+  experienceMaxValue: string;
   education: string;
   location: string;
   _id: string;
