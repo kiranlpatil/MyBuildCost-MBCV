@@ -16,9 +16,11 @@
       </div>
       <div class="button-group clearfix">
         <button class="btn btn-success" scrollTo scrollTargetSelector="#professional-details"
-                (click)="onNext()" [hidden]="!showButton">Next
+                (click)="onNext()" [hidden]="!showButton" [disabled]="selectedIndustries.length==0">Next
         </button>
-        <button class="btn btn-success" (click)="onSave()" [hidden]="showButton" [disabled]="selectedIndustries.length==0">Save</button>
+        <button class="btn btn-success" (click)="onSave()" [hidden]="showButton"
+                [disabled]="selectedIndustries.length==0">Next
+        </button>
       </div>
     </div>
   </div>
