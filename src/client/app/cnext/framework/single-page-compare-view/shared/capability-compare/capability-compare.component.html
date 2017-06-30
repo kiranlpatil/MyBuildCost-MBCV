@@ -20,9 +20,9 @@
           <div class="heading visible-xs"><h4>Complexities Handled</h4></div>
           <div *ngFor="let complexity of capability.complexities;let i=index">
             <div class="col-sm-4 padding-right15">
-              <div class="details" [class.exact]="complexity.match=='exact'" [class.above]="complexity.match=='above'"
-                   [class.below]="complexity.match=='below'" [class.missing]="complexity.match=='missing'"
-                   [class.extra]="complexity.match=='extra'">
+              <div class="details" [class.exact]="complexity.match==2" [class.above]="complexity.match==3"
+                   [class.below]="complexity.match==1" [class.missing]="complexity.match == 0"
+                   [class.extra]="complexity.match==4">
                 <span class="complexity-name">{{complexity.name}}</span>
                 <div *ngFor="let scenario of complexity.scenarios">
                   <span >{{scenario.name}}</span>

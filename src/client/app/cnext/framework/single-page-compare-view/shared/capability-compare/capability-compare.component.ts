@@ -13,6 +13,7 @@ export class CapabilityCompareComponent  implements OnChanges{
 
   @Input() capabilities: Capability[] = new Array(0);
 
+
   ngOnChanges() {
     //  console.log("in compare view",this.roles);
   }

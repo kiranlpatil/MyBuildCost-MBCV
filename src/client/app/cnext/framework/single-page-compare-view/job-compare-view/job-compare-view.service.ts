@@ -28,8 +28,8 @@ export class JobCompareService extends BaseService {
   getStandardMatrix(data : any) : Capability[] {
     let capabilities : Capability[] = new Array(0);
     for(let value1 in data) {
-      let temp = capabilities.filter((capability : Capability)=>{
-        if(capability.name == data[value1].capability_name){
+      let temp = capabilities.filter((capability : Capability)=> {
+        if(capability.name == data[value1].capability_name) {
           return true;
         }else {
           return false;
@@ -50,11 +50,12 @@ export class JobCompareService extends BaseService {
           let sce = new Scenario();
           sce.name = data[value2].scenario_name;
           let com = new Complexity();
+          com.match= data[value2].match;
           com.name= data[value2].complexity_name;
           com.scenarios.push(sce);
           let isFound : boolean= false;
           for(let complex of cap.complexities){
-            if(complex.name == com.name ) {
+            if(complex.name === com.name ) {
               isFound =true;
               break;
             }
