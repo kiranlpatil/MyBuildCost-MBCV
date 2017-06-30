@@ -14,37 +14,21 @@ import {ComplexityDetails} from "../model/complexity-detail";
 })
 
 export class ComplexitiesComponent implements OnInit, OnChanges {
-  @Input() roles: Role[] = new Array(0);
-  @Input() complexities: any;
+  @Input() roles: Role[] = new Array(0); //TODO remove this
+  @Input() complexities: any; //TODO why this is of type of ANY
   @Output() onComplete = new EventEmitter();
   @Output() onComplextyAnswered = new EventEmitter();
   @Input() highlightedSection: Section;
   @Input() isComplexityPresent: boolean = true;
 
-  private complexityIds: string[] = new Array();
+  private complexityIds: string[] = [];
   private currentComplexityDetails:ComplexityDetails=new ComplexityDetails();
-  /* @Input() roles:Role[] = new Array(0);
-   @Input() candidateRoles:Role[] = new Array();
-   private roleWithDefaultComplexity:Role[] = new Array();
-   @Output() onComplete = new EventEmitter();
-   @Input() isComplexityPresent:boolean = true;
-   @Input() highlightedSection:Section;*/
- /* private scenarioNames: string[] = new Array(0);
-  private selectedScenarioNames: string[] = new Array(0);
-  //private scenaricomplexityNames:string[] = new Array(0);
-  private selectedComplexityNames: string[] = new Array(0);
-  //private selectedDefaultComplexityNames:string[] = new Array(0);*/
   private isComplexityButtonEnable: boolean = false;
   private showModalStyle: boolean = false;
   private isCandidate: boolean = false;
   private currentComplexity: number=0;
   private showMore: boolean = false;
- /* private isPresentCapabilityCandidate: boolean = false;
-  private isPresentCapability: boolean = false;
-  private isPresentDefaultComplexity: boolean = false;
-  private isPresentDefaultComplexityCandidate: boolean = false;
-  private count: number = 0;*/
-  // private elements:any;
+
   tooltipCandidateMessage: string = "<ul><li>" +
     "<h5>Complexities</h5><p class='info'> This section provides a list of complexity scenarios for your selected capabilities." +
     "For each scenario, select the most appropriate level of complexity that you are capable of handling.</p></li>" +
@@ -203,7 +187,7 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
    */
 
   getComplexityIds(complexities: any) {
-    this.complexityIds=new Array();
+    this.complexityIds = [];
     for (let id in complexities) {
       this.complexityIds.push(id);
     }
@@ -270,15 +254,16 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
      }
      }}*/
     if (this.highlightedSection.isProficiencyFilled) {
-      this.highlightedSection.name = "none";
+      this.highlightedSection.name = 'none';
     } else {
-      this.highlightedSection.name = "Proficiencies";
+      this.highlightedSection.name = 'Proficiencies';
     }
     this.highlightedSection.isDisable = false;
     this.onComplete.emit();
   }
 
   onAnswered(complexityDetail: ComplexityDetails) {
+    //this.currentComplexityDetails.isChecked=false;
     this.complexities[this.complexityIds[this.currentComplexity]] = complexityDetail.userChoice;
     console.log(this.complexities);
     this.onNext();
@@ -296,7 +281,7 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
     }
   }
 
-  getComplexityDetails(complexityId: string) {
+  getComplexityDetails(complexityId: string) {  //TODO remove after amits call of updated get API
     if(complexityId !== undefined && complexityId !== ''){
       let splitedString:string[]=complexityId.split('_');
       for(let role of this.roles){
@@ -310,6 +295,9 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
                   this.currentComplexityDetails.name=complexity.name;
                   this.currentComplexityDetails.scenarios=complexity.scenarios.slice();
                   this.currentComplexityDetails.userChoice=this.complexities[this.complexityIds[this.currentComplexity]];
+                  if (this.currentComplexityDetails.userChoice !== '-1') {
+                    this.currentComplexityDetails.isChecked = true;
+                  }
                   this.currentComplexityDetails.code=complexityId;
                   this.currentComplexityDetails.questionForCandidate='xxx xxxx xxxx xxxx'+complexity.name+'?';
                   this.currentComplexityDetails.questionForRecruiter='xxx xxxx xxxx xxxx'+complexity.name+'?';
@@ -356,7 +344,7 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
 
   edit() {
     this.highlightedSection.name = 'Complexities';
-    this.highlightedSection.isDisable = true
+    this.highlightedSection.isDisable = true;
    /* if (!this.isPresentCapability) {
       this.roles = this.candidateRoles;
     }*/

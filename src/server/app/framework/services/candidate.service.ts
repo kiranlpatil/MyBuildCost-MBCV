@@ -1,4 +1,4 @@
-import * as mongoose from 'mongoose';
+import * as mongoose from "mongoose";
 import Messages = require('../shared/messages');
 import ProjectAsset = require('../shared/projectasset');
 import CandidateRepository = require('../dataaccess/repository/candidate.repository');
@@ -155,6 +155,7 @@ class CandidateService {
                 }
               }
             }
+            item.capability_matrix = new_capability_matrix;
             this.candidateRepository.findOneAndUpdateIndustry({'_id': res[0]._id}, item, {new: true}, callback);
           }
         });

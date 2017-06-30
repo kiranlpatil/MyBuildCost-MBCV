@@ -1,5 +1,5 @@
-import * as express from 'express';
-import * as mongoose from 'mongoose';
+import * as express from "express";
+import * as mongoose from "mongoose";
 import AuthInterceptor = require('../interceptor/auth.interceptor');
 import Messages = require('../shared/messages');
 import CandidateModel = require('../dataaccess/model/candidate.model');
@@ -128,7 +128,6 @@ export function retrieve(req: express.Request, res: express.Response, next: any)
                 'data': resu,
                 'metadata': result
               });
-
             }
 
           });
