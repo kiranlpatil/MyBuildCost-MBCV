@@ -1,5 +1,6 @@
 import {Location} from "../location";
 import {CompanyDetails} from "../company_details/company-details";
+import {JobPosterModel} from "../../../cnext/framework/model/jobPoster";
 
 export class Recruiter {
   id: any;
@@ -18,4 +19,11 @@ export class Recruiter {
   current_theme: string;
   company_logo: string;
   company_headquarter_country: string;
+  setOfDocuments: string[];
+  userId: any;
+  postedJobs: JobPosterModel[];
+  description1: string;
+  description2: string;
+  description3: string;
+  about_company: string;
 }

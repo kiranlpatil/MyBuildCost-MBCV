@@ -1,6 +1,11 @@
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 import { JobCompareService } from './job-compare-view.service';
-import {Capability} from "../../model/capability";
+import {Capability} from '../../model/capability';
+import {Candidate} from '../../model/candidate';
+import {CandidateDetail} from '../../../../framework/registration/candidate/candidate';
+import {CandidateProfileService} from '../../candidate-profile/candidate-profile.service';
+import {RecruiterDashboardService} from '../../recruiter-dashboard/recruiter-dashboard.service';
+import {Recruiter} from '../../../../framework/registration/recruiter/recruiter';
 
 @Component({
   moduleId: module.id,
@@ -13,11 +18,20 @@ export class JobCompareViewComponent implements OnChanges {
   @Input() candiadteId: string;
   @Input() jobId: string;
   capabilities: Capability[];
-
+  candidate : Candidate= new Candidate();
+  candidateDetails : CandidateDetail = new CandidateDetail();
+  // use typeOf View is one of
+  // 1. compact
+  // 2. spa_candidate
+  // 3. spa_job
+  @Input() typeOfView : string ='spa_candidate';
   private recruiterId: string;
   private data: any;
-
-  constructor(private jobCompareService: JobCompareService) {
+  private recruiter : Recruiter;
+  private secondaryCapabilities: string[] = new Array(0);
+  constructor(private jobCompareService: JobCompareService,
+              private profileCreatorService : CandidateProfileService,
+              private recruiterDashboardService: RecruiterDashboardService) {
   }
 
   ngOnChanges(changes: any) {
@@ -27,8 +41,47 @@ export class JobCompareViewComponent implements OnChanges {
     if (changes.jobId != undefined && changes.jobId.currentValue != undefined) {
       this.recruiterId = changes.jobId.currentValue;
     }
-    if (this.candiadteId != undefined && this.recruiterId != undefined) {
+    if (this.candiadteId != undefined && this.recruiterId != undefined && this.typeOfView ) {
       this.getCompareDetail(this.candiadteId, this.recruiterId);
+      this.candiadteId = changes.candiadteId.currentValue;
+      switch (this.typeOfView) {
+        case 'spa_candidate' :
+          this.getCandidateProfile(this.candiadteId)
+          break;
+        case 'spa_job' :
+          this.recruiterDashboardService.getPostedJobDetails(this.jobId)
+            .subscribe(
+              data => {
+                this.OnRecruiterDataSuccess(data.data.industry);
+              });
+          break;
+      }
+    }
+  }
+
+  OnRecruiterDataSuccess(data: any) {
+    this.recruiter = data;
+  }
+
+  getCandidateProfile(candidateId: string) {
+    this.profileCreatorService.getCandidateDetailsOfParticularId(candidateId)
+      .subscribe(
+        candidateData => this.OnCandidateDataSuccess(candidateData));
+  }
+
+  OnCandidateDataSuccess(candidateData: any) {
+    this.candidate = candidateData.data;
+    this.candidateDetails = candidateData.metadata;
+    this.getSecondaryData();
+  }
+
+  getSecondaryData() {
+    for (let role of this.candidate.industry.roles) {
+      for (let capability of role.capabilities) {
+        if (capability.isSecondary) {
+          this.secondaryCapabilities.push(capability.name);
+        }
+      }
     }
   }
 

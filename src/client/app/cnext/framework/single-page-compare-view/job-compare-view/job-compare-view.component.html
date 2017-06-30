@@ -1,17 +1,55 @@
-<section class="container-fluid one-page-summary" *ngIf="  data != undefined">
-  <!--
+<section class="container-fluid one-page-summary" *ngIf="data != undefined && typeOfView =='spa_candidate'">
+  <section class="container-fluid one-page-summary" *ngIf="candidate != undefined && candidateDetails != undefined">
+    <div class="col-sm-3 left-content">
+      <div>
+        <cn-candidate-description [candidateDetails]="candidateDetails"
+                                  [candidate]="candidate"></cn-candidate-description>
+      </div>
+      <div *ngIf="candidate.employmentHistory.length>0">
+        <cn-vertical-list-view [data]="candidate.employmentHistory" [type]="'employment history'"
+                               [calledFrom]="'singlepageview'"></cn-vertical-list-view>
+      </div>
+      <div *ngIf="candidate.academics.length>0">
+        <cn-vertical-list-view [data]="candidate.academics" [type]="'acedemic details'"
+                               [calledFrom]="'singlepageview'"></cn-vertical-list-view>
+      </div>
+      <div *ngIf="candidate.awards.length>0">
+        <cn-vertical-list-view [data]="candidate.awards" [type]="'awards'"
+                               [calledFrom]="'singlepageview'"></cn-vertical-list-view>
+      </div>
+      <div *ngIf="candidate.certifications.length>0">
+        <cn-vertical-list-view [data]="candidate.certifications" [type]="'certifications'"
+                               [calledFrom]="'singlepageview'"></cn-vertical-list-view>
+      </div>
+    </div>
+
+    <div class="col-sm-9 right-content">
+      <div class="col-sm-12">
+        <cn-capability-compare [capabilities]="capabilities"></cn-capability-compare>
+      </div>
+      <h4>Proficiency In</h4>
+      <cn-proficiency-compare [data]="data.proficiencies"
+                              [matchdData]="data.proficienciesMatch"></cn-proficiency-compare>
+    </div>
+  </section>
+</section>
+
+<section class="container-fluid one-page-summary" *ngIf="data != undefined && typeOfView =='spa_job'">
+  <section class="container-fluid one-page-summary">
     <div class="col-sm-3 left-content">
       <div>
         <div class="basic-description" *ngIf="recruiter != undefined">
 
           <div class="basic-info clearfix">
-            <img src= "assets/framework/images/dashboard/profile.png" alt="User Profile" *ngIf="recruiter.company_logo==undefined"/>
-            <img [src]="getImagePath(recruiter.company_logo)"  alt="User Profile" *ngIf="recruiter.company_logo!=undefined"/>
+            <img src="assets/framework/images/dashboard/profile.png" alt="User Profile"
+                 *ngIf="recruiter.company_logo==undefined"/>
+            <img [src]="getImagePath(recruiter.company_logo)" alt="User Profile"
+                 *ngIf="recruiter.company_logo!=undefined"/>
             <p class="name">{{recruiter.company_name}}</p>
           </div>
 
           <div class="details clearfix" *ngFor="let postedJob of recruiter.postedJobs">
-            <label>Job Title</label>
+            <label class="first-label">Job Title </label>
             <span>{{postedJob.jobTitle}}</span>
             <label>Hiring Manger</label>
             <span>{{postedJob.hiringManager}}</span>
@@ -20,27 +58,29 @@
             <label>Industry</label>
             <span>{{postedJob.industry.name}}</span>
             <label>Specialization area</label>
-        <span *ngFor="let role of postedJob.industry.roles;let i = index">{{role.name}}
-          <span *ngIf="postedJob.industry.roles.length>1 &&  i!=postedJob.industry.roles.length-1">,</span>
-        </span>
+            <span *ngFor="let role of postedJob.industry.roles;let i = index">{{role.name}}
+        <span *ngIf="postedJob.industry.roles.length>1 &&  i!=postedJob.industry.roles.length-1">,</span>
+      </span>
             <label>Additional Industry</label>
-        <span *ngFor="let industry of postedJob.interestedIndustries;let i = index">{{industry}}<span
-          *ngIf="recruiter.postedJobs[0].interestedIndustries.length>1 && i!=postedJob.interestedIndustries-1">,</span>
-        </span>
+            <span *ngFor="let industry of postedJob.interestedIndustries;let i = index">{{industry}}<span
+              *ngIf="recruiter.postedJobs[0].interestedIndustries.length>1 && i!=postedJob.interestedIndustries.length-1">,</span>
+      </span>
             <label [class.exact]="data.educationMatch=='exact'" [class.above]="data.educationMatch=='above'"
-                   [class.below]="data.educationMatch=='below'" [class.missing]="data.educationMatch=='missing'">Education</label>
+                   [class.below]="data.educationMatch=='below'"
+                   [class.missing]="data.educationMatch=='missing'">Education</label>
             <span>{{postedJob.education}}</span>
             <label [class.exact]="data.experienceMatch=='exact'" [class.above]="data.experienceMatch=='above'"
                    [class.below]="data.experienceMatch=='below'" [class.missing]="data.experienceMatch=='missing'">Experience</label>
             <span>{{postedJob.experience}}</span>
             <label [class.exact]="data.salaryMatch=='exact'" [class.above]="data.salaryMatch=='above'"
-                   [class.below]="data.salaryMatch=='below'" [class.missing]="data.salaryMatch=='missing'" >Salary</label>
+                   [class.below]="data.salaryMatch=='below'" [class.missing]="data.salaryMatch=='missing'">Salary</label>
             <span>{{postedJob.salary}}</span>
-            <label  [class.exact]="data.releaseMatch=='exact'" [class.above]="data.releaseMatch=='above'"
-                    [class.below]="data.releaseMatch=='below'" [class.missing]="data.releaseMatch=='missing'">Joining Period</label>
+            <label [class.exact]="data.releaseMatch=='exact'" [class.above]="data.releaseMatch=='above'"
+                   [class.below]="data.releaseMatch=='below'" [class.missing]="data.releaseMatch=='missing'">Joining
+              Period</label>
             <span>{{postedJob.joiningPeriod}}</span>
             <label>Location</label>
-            <span>{{postedJob.location.city}}location</span>
+            <span>{{postedJob.location.city}}</span>
           </div>
         </div>
       </div>
@@ -48,37 +88,32 @@
         <h4>About Company</h4>
         <cn-additional-details [data]="recruiter.about_company"></cn-additional-details>
       </div>
-      &lt;!&ndash;  &lt;!&ndash; <div>
+      <!--  &lt;!&ndash; <div>
          <cn-contact-details [recruiter]="recruiter"></cn-contact-details>
-       </div>&ndash;&gt;&ndash;&gt;
+       </div>&ndash;&gt;-->
     </div>
-  -->
-
-
-  <cn-capability-compare [capabilities]="capabilities"></cn-capability-compare>
-
-
-  <!--<div class="col-sm-6" *ngIf="secondaryCapabilities.length>0">
-    <h4 >Supplimentary Capabilities</h4>
-    <cn-horizontal-list-view [data]="secondaryCapabilities"></cn-horizontal-list-view>
-  </div>-->
-
-  <h4>Proficiency In</h4>
-  <cn-proficiency-compare [data]="data.proficiencies" [matchdData]="data.proficienciesMatch"></cn-proficiency-compare>
-
-
-  <!--<div class="col-sm-12 no-padding">
-    <div class="col-sm-6">
-      <h4>Competencies</h4>
-      <cn-additional-details [data]="postedJob.competencies"></cn-additional-details>
+    <div class="col-sm-9 right-content">
+      <div class="col-sm-12">
+        <cn-capability-compare [capabilities]="capabilities"></cn-capability-compare>
+      </div>
+      <h4>Proficiency In</h4>
+      <cn-proficiency-compare [data]="data.proficiencies"
+                              [matchdData]="data.proficienciesMatch"></cn-proficiency-compare>
     </div>
-    <div class="col-sm-6">
-      <h4>Responsibility</h4>
-      <cn-additional-details [data]="postedJob.responsibility"></cn-additional-details>
-    </div>
-  </div>-->
-
+  </section>
 </section>
+
+<section *ngIf="data != undefined && typeOfView=='compact'">
+    <div class="col-sm-9 right-content">
+      <div class="col-sm-12">
+        <cn-capability-compare [capabilities]="capabilities"></cn-capability-compare>
+      </div>
+      <h4>Proficiency In</h4>
+      <cn-proficiency-compare [data]="data.proficiencies"
+                              [matchdData]="data.proficienciesMatch"></cn-proficiency-compare>
+    </div>
+</section>
+
 
 
 

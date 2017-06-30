@@ -147,7 +147,7 @@
               <!--<div *ngIf="selectedCandidate.industry != undefined ">
               <cn-tabular-list-view [roles]="selectedCandidate.industry.roles"></cn-tabular-list-view>
             </div>-->
-              <cn-job-compare-view [candiadteId]="selectedCandidate._id" [jobId]="jobId"></cn-job-compare-view>
+              <cn-job-compare-view [typeOfView]="'compact'" [candiadteId]="selectedCandidate._id" [jobId]="jobId"></cn-job-compare-view>
             </div>
           </div>
           <div class="button-group" *ngIf="type=='applied'">
@@ -182,7 +182,7 @@
             <img src="/assets/c-next/card-view/close-white.png" (click)="closeJob()" class="close"/>
           </div>
           <div class="row">
-            <cn-candidate-view [candidateId]="selectedCandidate._id"></cn-candidate-view>
+            <cn-job-compare-view [typeOfView]="'spa_candidate'" [candiadteId]="selectedCandidate._id" [jobId]="jobId"></cn-job-compare-view>
           </div>
           <div class="button-group">
             <button class="btn btn-danger" (click)="actionOnQCard('add','cartListed','rejectedList', modelCandidate)">
