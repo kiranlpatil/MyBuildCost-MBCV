@@ -63,6 +63,7 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
     }
   }
   getComplexityIds(complexities: any) {
+    this.currentComplexity = 0;
     this.complexityIds = [];
     for (let id in complexities) {
       this.complexityIds.push(id);
@@ -96,7 +97,15 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
 
   onNext() {
       this.onComplextyAnswered.emit(this.complexities);
-    this.getComplexityDetails(this.complexityIds[++this.currentComplexity]);
+    if (this.currentComplexity === this.complexityIds.length - 1) {
+      if (this.isCandidate) {
+        this.showHideModal();
+      } else {
+        this.saveComplexity();
+      }
+    } else if (this.currentComplexity <= this.complexityIds.length - 1) {
+      this.getComplexityDetails(this.complexityIds[++this.currentComplexity]);
+    }
     if(this.slideToLeft === true) {
       this.slideToLeft= !this.slideToLeft;
     }
@@ -107,7 +116,9 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
     }, 1001);
       }
   onPrevious() {
-    this.getComplexityDetails(this.complexityIds[--this.currentComplexity]);
+    if (this.currentComplexity >= 0) {
+      this.getComplexityDetails(this.complexityIds[--this.currentComplexity]);
+    }
     if(this.slideToRight === true) {
       this.slideToRight= !this.slideToRight;
     }
@@ -131,6 +142,9 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
                   this.currentComplexityDetails.name=complexity.name;
                   this.currentComplexityDetails.scenarios=complexity.scenarios.slice();
                   this.currentComplexityDetails.userChoice=this.complexities[this.complexityIds[this.currentComplexity]];
+                  if (this.currentComplexityDetails.userChoice !== '-1') {
+                    this.currentComplexityDetails.isChecked = true;
+                  }
                   this.currentComplexityDetails.code=complexityId;
                   this.currentComplexityDetails.questionForCandidate='xxx xxxx xxxx xxxx'+complexity.name+'?';
                   this.currentComplexityDetails.questionForRecruiter='xxx xxxx xxxx xxxx'+complexity.name+'?';

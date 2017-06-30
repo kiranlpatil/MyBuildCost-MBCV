@@ -239,7 +239,6 @@ export class CandidateProfileComponent implements OnInit {
       .subscribe(
         candidateData => {
           this.candidate.capability_matrix = Object.assign({},candidateData.data[0].capability_matrix);
-          console.log('this.candidate.capability_matrix',this.candidate.capability_matrix);
           this.showComplexity = true;
         });
   }

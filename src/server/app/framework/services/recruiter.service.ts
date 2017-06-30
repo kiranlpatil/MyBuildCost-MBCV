@@ -162,8 +162,8 @@ class RecruiterService {
       if (error) {
         callback(error, null);
       } else {
-        if (item.capability_matrix === undefined) {
-          item.capability_matrix = {};
+        if (item.postedJobs.capability_matrix === undefined) {
+          item.postedJobs.capability_matrix = {};
         }
         let new_capability_matrix: any = {};
         /* if (item.industry.roles && item.industry.roles.length > 0) {

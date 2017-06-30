@@ -16,6 +16,7 @@
       <cn-complexities [roles]="rolesForComplexity" [complexities]="jobPosterModel.capability_matrix"
                        [highlightedSection]="highlightedSection"
                        [isComplexityPresent]="isComplexityPresent"
+                       (onComplextyAnswered)="onComplextyAnswered($event)"
                        (onComplete)="selectRoleFromComplexity($event)" [hidden]="!isShowComplexity"></cn-complexities>
 
       <cn-job-proficiencies [proficiencies]="proficiencies" [jobPosterModel]="jobPosterModel"
