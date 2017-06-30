@@ -12,14 +12,14 @@
 </div>
 
 <div class="capability-complexity-container">
-  <div class="row-section">
+  <div class="row-section">const
     <div>
       <div class="column1"  *ngFor="let capability of capabilities; let i= index" [class.more-capability]="i== capabilities.length-1 && capabilities.length >= 10">
         <div class="content clearfix" >
           <div class="">
             <div *ngFor="let complexity of capability.complexities;let i=index">
               <div class="col-sm-12 no-padding row-background">
-                <div class="" [class.exact]="complexity.match==2" [class.above]="complexity.match==3"
+                <div class="" [class.exact]="complexity.match==2 || isCompact " [class.above]="complexity.match==3"
                      [class.below]="complexity.match==1" [class.missing]="complexity.match == 0"
                      [class.extra]="complexity.match==4">
                   <span class="complexity-name">{{complexity.name}}</span>

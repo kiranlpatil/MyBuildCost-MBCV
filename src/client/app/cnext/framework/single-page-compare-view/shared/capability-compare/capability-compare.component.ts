@@ -12,7 +12,7 @@ import {Capability} from "../../../model/capability";
 export class CapabilityCompareComponent  implements OnChanges{
 
   @Input() capabilities: Capability[] = new Array(0);
-
+  @Input() isCompact : boolean = false;
   ngOnChanges() {
     //  console.log("in compare view",this.roles);
   }
