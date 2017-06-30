@@ -4,7 +4,7 @@
   <div class="main-content clearfix modal-content">
     <form [formGroup]="jobPostForm" novalidate>
       <div class="job-info section-container clearfix">
-        <div class="row">
+        <div class="col-sm-12 no-padding">
           <div class="col-sm-4">
             <label>Job Title</label>
             <control-messages [control]="jobPostForm.controls.jobTitle"></control-messages>
@@ -33,37 +33,41 @@
 
           <div class="col-sm-4">
             <label>Experience</label>
-            <control-messages [control]="jobPostForm.controls.experienceMinValue"></control-messages>
-            <select class="select" formControlName="experienceMinValue" (change)="selectExperiencesMinModel($event.target.value)">
-              <option value="" selected></option>
-              <option *ngFor="let c of experienceRangeList | minrange:toYear">{{c}}</option>
-            </select>
-          </div>
-
-          <div class="col-sm-4">
-            <control-messages [control]="jobPostForm.controls.experienceMaxValue"></control-messages>
-            <select class="select" formControlName="experienceMaxValue" (change)="selectExperiencesMaxModel($event.target.value)">
-              <option value="" selected></option>
-              <option *ngFor="let c of experienceRangeList | maxrange:fromYear">{{c}}</option>
-            </select>
+            <div class="col-sm-6 padding-right15 min-range">
+              <control-messages [control]="jobPostForm.controls.experienceMinValue"></control-messages>
+              <select class="select" formControlName="experienceMinValue" (change)="selectExperiencesMinModel($event.target.value)">
+                <option value="" selected></option>
+                <option *ngFor="let c of experienceRangeList | minrange:toYear">{{c}}</option>
+              </select>
+            </div>
+            <div class="col-sm-6 padding-left15">
+              <control-messages [control]="jobPostForm.controls.experienceMaxValue"></control-messages>
+              <select class="select" formControlName="experienceMaxValue" (change)="selectExperiencesMaxModel($event.target.value)">
+                <option value="" selected></option>
+                <option *ngFor="let c of experienceRangeList | maxrange:fromYear">{{c}}</option>
+              </select>
+            </div>
           </div>
 
           <div class="col-sm-4">
             <label>Salary Band</label>
-            <control-messages [control]="jobPostForm.controls.salaryMinValue"></control-messages>
-            <select class="select" formControlName="salaryMinValue" (change)="selectSalaryMinModel($event.target.value)">
-              <option value="" selected></option>
-              <option *ngFor="let c of salaryRangeList| minrange:toValue">{{c}}</option>
-            </select>
+            <div class="col-sm-6 padding-right15 min-range">
+              <control-messages [control]="jobPostForm.controls.salaryMinValue"></control-messages>
+              <select class="select" formControlName="salaryMinValue" (change)="selectSalaryMinModel($event.target.value)">
+                <option value="" selected></option>
+                <option *ngFor="let c of salaryRangeList| minrange:toValue">{{c}}</option>
+              </select>
+            </div>
+            <div class="col-sm-6 padding-left15">
+              <control-messages [control]="jobPostForm.controls.salaryMaxValue"></control-messages>
+              <select class="select" formControlName="salaryMaxValue" (change)="selectSalaryMaxModel($event.target.value)">
+                <option value="" selected></option>
+                <option *ngFor="let c of salaryRangeList| maxrange:fromValue">{{c}}</option>
+              </select>
+            </div>
           </div>
 
-          <div class="col-sm-4">
-            <control-messages [control]="jobPostForm.controls.salaryMaxValue"></control-messages>
-            <select class="select" formControlName="salaryMaxValue" (change)="selectSalaryMaxModel($event.target.value)">
-              <option value="" selected></option>
-              <option *ngFor="let c of salaryRangeList| maxrange:fromValue">{{c}}</option>
-            </select>
-          </div>
+
 
           <div class="col-sm-4">
             <label>Joining Period</label>
@@ -82,13 +86,17 @@
 
           </div>
         </div>
-      </div>
-      <div class="roles section-container">
-        <div class="clearfix">
-          <h4 class="heading">Select Industry</h4>
-          <cn-industry-list [selectedIndustry]="jobPosterModel.industry"
-                            (valueChange)="selectIndustry($event)"></cn-industry-list>
+        <div class="col-sm-12">
+          <div class="roles section-container">
+            <div class="clearfix">
+              <h4 class="heading">Select Industry</h4>
+              <cn-industry-list [selectedIndustry]="jobPosterModel.industry"
+                                (valueChange)="selectIndustry($event)"></cn-industry-list>
+            </div>
+          </div>
         </div>
+
+
       </div>
       <div class="button-group clearfix">
         <button class="btn btn-success" scrollTo scrollTargetSelector="#work-area" (click)="onNext()"

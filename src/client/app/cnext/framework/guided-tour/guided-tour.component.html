@@ -51,14 +51,16 @@
       </div>
 
       <!-- Left and right controls -->
-      <a class="left" (click)="showHide(true)" *ngIf="isShowPrev" href="#myCarousel" data-slide="prev">
-        <a class="btn btn-success">Previous</a>
-      </a>
-      <a class="right" *ngIf="isShowNext" (click)="showHide(false)" href="#myCarousel" data-slide="next">
-        <a class="btn btn-success">Next</a>
-      </a>
-      <a class="btn btn-danger skip"  *ngIf="isShowNext" (click)="onSkipClick()">Skip</a>
-      <a class="btn btn-danger skip"  *ngIf="!isShowNext" (click)="onSkipClick()">Finish</a>
+      <div class="button-container">
+        <a class="left" (click)="showHide(true)" *ngIf="isShowPrev" href="#myCarousel" data-slide="prev">
+          <a class="btn btn-success">Previous</a>
+        </a>
+        <a class="right" *ngIf="isShowNext" (click)="showHide(false)" href="#myCarousel" data-slide="next">
+          <a class="btn btn-success">Next</a>
+        </a>
+        <a class="btn btn-danger skip"  *ngIf="isShowNext" (click)="onSkipClick()">Skip</a>
+        <a class="btn btn-danger skip"  *ngIf="!isShowNext" (click)="onSkipClick()">Finish</a>
+      </div>
     </div>
   </div>
 </div>

@@ -58,7 +58,9 @@ export class FilterComponent {
     if (changes.candidate) {
       if (changes.candidate.currentValue) {
         this.proficiencyList = changes.candidate.currentValue.proficiencies;
-        this.industryList = changes.candidate.currentValue.interestedIndustries;
+        if(changes.candidate.currentValue.interestedIndustries[0]!='None') {
+          this.industryList = changes.candidate.currentValue.interestedIndustries;
+        }
         //this.location = changes.candidate.locations;
       }
     }
@@ -72,7 +74,9 @@ export class FilterComponent {
     if (changes.selectedJob) {
       if (changes.selectedJob.currentValue) {
         this.proficiencyList = changes.selectedJob.currentValue.proficiencies;
-        this.industryList = changes.selectedJob.currentValue.interestedIndustries;
+        if(changes.candidate.currentValue.interestedIndustries[0]!='None') {
+          this.industryList = changes.selectedJob.currentValue.interestedIndustries;
+        }
         this.location = changes.selectedJob.currentValue.location.city;
       }
     }

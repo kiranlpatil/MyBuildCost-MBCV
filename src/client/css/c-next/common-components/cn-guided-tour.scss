@@ -14,13 +14,21 @@
   .carousel {
     position: relative;
 
-    .skip {
+
+    .button-container {
+      background: rgba(0, 0, 0, 0.6);
       position: absolute;
-      right: 15px;
-      bottom: 15px;
+      right: 0;
+      bottom: 0;
+      padding:10px;
+    }
+
+    .skip {
       min-width: 80px;
       font-size: 13px;
       padding: 3px 6px;
+      float:left;
+      margin: 0 7px;
     }
 
     .left,
@@ -28,23 +36,10 @@
       a {
         opacity: 1;
         padding: 3px 6px;
-        position: absolute;
         min-width: 80px;
         font-size: 13px;
-      }
-    }
-
-    .left {
-      a {
-        bottom: 15px;
-        right: 200px;
-      }
-    }
-
-    .right {
-      a {
-        bottom: 15px;
-        right: 110px;
+        float:left;
+        margin: 0 7px;
       }
     }
   }

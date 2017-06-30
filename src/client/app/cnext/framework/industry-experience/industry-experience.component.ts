@@ -62,11 +62,18 @@ export class IndustryExperienceListComponent implements OnInit,OnChanges {
 
   selectIndustryModel(industry: string, event: any) {
     if (event.target.checked) {
+    if(this.candidateExperiencedIndustry.indexOf('None')!=-1){
+      this.candidateExperiencedIndustry.splice(this.candidateExperiencedIndustry.indexOf('None'));
+    }
       this.disableButton = false;
       if (this.selectedIndustries.length < ValueConstant.MAX_INTERESTEDINDUSTRY) {
         this.selectedIndustries.push(industry);
       } else {
-        event.target.checked = false;
+        event.target.checked = false;0
+      }
+      if(industry==='None'){
+        this.selectedIndustries=new Array(0);
+        this.selectedIndustries.push(industry);
       }
     } else {
       for (let data of this.selectedIndustries) {
@@ -115,6 +122,9 @@ export class IndustryExperienceListComponent implements OnInit,OnChanges {
     var newIndustry = new Industry();
     newIndustry.name = 'None';
     this.industries.unshift(newIndustry);
+    if(this.candidateExperiencedIndustry.length==0) {
+      this.candidateExperiencedIndustry.push(newIndustry.name);
+    }
   }
 }
 
