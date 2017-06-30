@@ -15,6 +15,18 @@ $white: #fff;
     left: 50%;
   }
 
+  .compare-modal-dialog {
+    width: 100%;
+    height: calc(100% - 70px);
+    top: 50%;
+    -webkit-transform: translate(0, -50%) !important;
+    transform: translate(-50%, -50%) !important;
+    border-radius: 0;
+    position: fixed;
+    margin: 10px auto 0;
+    left: 50%;
+  }
+
   .modal-body {
     padding: 0;
     border-radius: 0;
@@ -25,7 +37,7 @@ $white: #fff;
   .modal-header {
     position: fixed;
     top: -28px;
-    left: -8px;
+    left: 0;
     background: $theme-color;
     z-index: 100;
     right: 0;
@@ -89,7 +101,7 @@ $white: #fff;
     box-sizing: border-box;
     padding: 5px 15px;
     width: auto;
-    margin: 0 15px 0 233px;
+    margin: 0 15px 0 240px;
     text-align: right;
 
     button {
@@ -121,7 +133,7 @@ $white: #fff;
       position: fixed;
       height: 100%;
       top: 7px;
-      left: 7px;
+      left: 15px;
       overflow: auto;
       width: 225px;
       padding: 15px;
