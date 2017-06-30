@@ -123,7 +123,7 @@ class RecruiterService {
     });
   }
 
-  update(_id: string, item: any, callback: (error: any, result: any) => void) { //Todo change with candidate_id now it is a user_id operation
+  addJob(_id: string, item: any, callback: (error: any, result: any) => void) { //Todo change with candidate_id now it is a user_id operation
     this.recruiterRepository.findOneAndUpdate({"userId": new mongoose.Types.ObjectId(_id)},
       {$push: {postedJobs: item.postedJobs}},
       {
@@ -149,6 +149,38 @@ class RecruiterService {
         }
       });
   }
+
+  updateJob(_id: string, item: any, callback: (error: any, result: any) => void) { //Todo change with candidate_id now it is a user_id operation
+    this.recruiterRepository.findOneAndUpdate(
+      {
+        "userId": new mongoose.Types.ObjectId(_id),
+        'postedJobs._id': new mongoose.Types.ObjectId(item.postedJobs._id)
+      },
+      {$set: {'postedJobs.$': item.postedJobs}},
+      {
+        "new": true, select: {
+        postedJobs: {
+          $elemMatch: {"postingDate": item.postedJobs.postingDate}
+        }
+      }
+      },
+      function (err, record) {
+        if (record) {
+          console.log("Updated record " + JSON.stringify(record));
+          callback(null, record);
+        } else {
+          let error: any;
+          if (record === null) {
+            error = new Error("Unable to update posted job maybe recruiter & job post not found. ");
+            callback(error, null);
+          }
+          else {
+            callback(err, null);
+          }
+        }
+      });
+  }
+
 
   findById(id: any, callback: (error: any, result: any) => void) {
     this.recruiterRepository.findById(id, callback);

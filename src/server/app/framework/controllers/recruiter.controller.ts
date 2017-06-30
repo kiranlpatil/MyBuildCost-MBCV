@@ -1,6 +1,6 @@
-import * as express from 'express';
-import * as mongoose from 'mongoose';
-import {Recruiter} from '../dataaccess/model/recruiter-final.model';
+import * as express from "express";
+import * as mongoose from "mongoose";
+import {Recruiter} from "../dataaccess/model/recruiter-final.model";
 import AuthInterceptor = require('../interceptor/auth.interceptor');
 import Messages = require('../shared/messages');
 import CandidateService = require('../services/candidate.service');
@@ -68,23 +68,41 @@ export function create(req: express.Request, res: express.Response, next: any) {
 export function postJob(req: express.Request, res: express.Response, next: any) {
   try {
     var newJob: JobProfileModel = <JobProfileModel>req.body;
-
     var recruiterService = new RecruiterService();
     var userId = req.params.id;
-    recruiterService.update(userId, newJob, (err, result) => {
-      if (err) {
-        next({
-          reason: Messages.MSG_ERROR_RSN_USER_NOT_FOUND,
-          message: Messages.MSG_ERROR_RSN_USER_NOT_FOUND,
-          code: 403
-        });
-      } else {
-        res.status(200).send({
-          'status': Messages.STATUS_SUCCESS,
-          'data': result
-        });
-      }
-    });
+    if (newJob.postedJobs._id !== undefined && newJob.postedJobs._id !== null && newJob.postedJobs._id !== '') {
+      recruiterService.updateJob(userId, newJob, (err, result) => {
+        if (err) {
+          next({
+            reason: Messages.MSG_ERROR_RSN_USER_NOT_FOUND,
+            message: Messages.MSG_ERROR_RSN_USER_NOT_FOUND,
+            code: 403
+          });
+        } else {
+          res.status(200).send({
+            'status': Messages.STATUS_SUCCESS,
+            'data': result
+          });
+        }
+      });
+    }
+    else {
+      recruiterService.addJob(userId, newJob, (err, result) => {
+        if (err) {
+          next({
+            reason: Messages.MSG_ERROR_RSN_USER_NOT_FOUND,
+            message: Messages.MSG_ERROR_RSN_USER_NOT_FOUND,
+            code: 403
+          });
+        } else {
+          res.status(200).send({
+            'status': Messages.STATUS_SUCCESS,
+            'data': result
+          });
+        }
+      });
+    }
+
   }
   catch (e) {
     res.status(403).send({message: e.message});

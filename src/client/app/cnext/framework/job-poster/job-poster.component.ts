@@ -1,16 +1,16 @@
-import { Component, OnInit ,Input} from '@angular/core';
-import { JobPosterModel } from '../model/jobPoster';
-import { JobPosterService } from './job-poster.service';
-import { Role } from '../model/role';
-import { CandidateProfileService } from '../candidate-profile/candidate-profile.service';
-import { Message } from '../../../framework/shared/message';
-import { MessageService } from '../../../framework/shared/message.service';
-import { Proficiences } from '../model/proficiency';
-import { Section } from '../model/candidate';
-import { LocalStorage, NavigationRoutes } from '../../../framework/shared/constants';
-import { LocalStorageService } from '../../../framework/shared/localstorage.service';
-import { ShowQcardviewService } from '../showQCard.service';
-import { Router } from '@angular/router';
+import {Component, Input, OnInit} from "@angular/core";
+import {JobPosterModel} from "../model/jobPoster";
+import {JobPosterService} from "./job-poster.service";
+import {Role} from "../model/role";
+import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
+import {Message} from "../../../framework/shared/message";
+import {MessageService} from "../../../framework/shared/message.service";
+import {Proficiences} from "../model/proficiency";
+import {Section} from "../model/candidate";
+import {LocalStorage, NavigationRoutes} from "../../../framework/shared/constants";
+import {LocalStorageService} from "../../../framework/shared/localstorage.service";
+import {ShowQcardviewService} from "../showQCard.service";
+import {Router} from "@angular/router";
 
 @Component({
   moduleId: module.id,
@@ -66,13 +66,19 @@ export class JobPosterComponent implements OnInit {
   postjob() {
     this.showModalStyle = !this.showModalStyle;
     this.jobPosterModel.postingDate = new Date();
-    ;
     this.jobPostService.postJob(this.jobPosterModel).subscribe(
       data => {
         this.onSuccess(data.data.postedJobs[0]._id);
       });
   }
 
+  updateJob() {
+    this.jobPosterModel.postingDate = new Date();
+    this.jobPostService.postJob(this.jobPosterModel).subscribe(
+      data => {
+        this.jobPosterModel._id = data.data.postedJobs[0]._id;
+      });
+  }
   onSuccess(jobId: string) {
     if (jobId != undefined) {
       LocalStorageService.setLocalValue(LocalStorage.CURRENT_JOB_POSTED_ID, jobId);
@@ -107,6 +113,7 @@ export class JobPosterComponent implements OnInit {
   selectExperiencedIndustry(experiencedindustry: string[]) {
     this.showCompentensies = true;
     this.jobPosterModel.interestedIndustries = experiencedindustry;
+    this.updateJob();
   }
 
 
@@ -130,6 +137,7 @@ export class JobPosterComponent implements OnInit {
     this.isShowRoleList = true;
     this.jobForRole = this.jobPosterModel.industry.roles;
     this.jobForCapability = this.jobPosterModel.industry.roles;
+    this.updateJob();
   }
 
 
@@ -142,6 +150,7 @@ export class JobPosterComponent implements OnInit {
       this.getCapability();
       this.isShowCapability = true;
     }
+    this.updateJob();
   }
 
   selectCapability(roles: Role[]) {
@@ -151,15 +160,18 @@ export class JobPosterComponent implements OnInit {
     this.jobForComplexity = this.jobPosterModel.industry.roles;
     this.getComplexity();
     this.isShowComplexity = true;
+    this.updateJob();
   }
   onComplextyAnswered(capability_matrix:any){
     this.jobPosterModel.capability_matrix=capability_matrix;
+    this.updateJob();
     //this.saveCandidateDetails();
   }
   selectRoleFromComplexity(roles: Role[]) {
     this.jobPosterModel.industry.roles = roles;
+    this.updateJob();
     this.jobForComplexity = this.jobPosterModel.industry.roles;
-    this.jobForCapability = this.jobPosterModel.industry.roles
+    this.jobForCapability = this.jobPosterModel.industry.roles;
     this.getProficiency();
     this.isShowProficiency = true;
   }
@@ -171,10 +183,12 @@ export class JobPosterComponent implements OnInit {
     if (jobModel.additionalProficiencies != undefined) {
       this.jobPosterModel.additionalProficiencies = jobModel.additionalProficiencies;
     }
+    this.updateJob();
   }
 
   onProficiencyComplete(event: any) {
     this.showIndustryExposure = true;
+    this.updateJob();
 
   }
 
@@ -187,6 +201,7 @@ export class JobPosterComponent implements OnInit {
     if (this.jobPosterModel.competencies != undefined && this.jobPosterModel.competencies !== ''  ) {
       this.disableButton = false;
     }
+    this.updateJob();
   }
 
   onError(error: any) {
@@ -206,7 +221,7 @@ export class JobPosterComponent implements OnInit {
   }
 
   getCapability() {
-    this.primaryCapability=new Array();
+    this.primaryCapability = [];
    // this.flag = false;
     this.roleList=new Array(0);
     for (let role of this.jobPosterModel.industry.roles) {
@@ -216,7 +231,7 @@ export class JobPosterComponent implements OnInit {
       this.profileCreatorService.getCapability(this.jobPosterModel.industry.name, this.roleList)
         .subscribe(
           rolelist => {
-            this.rolesForCapability = rolelist.data
+            this.rolesForCapability = rolelist.data;
             for (let role of this.rolesForCapability) {
               if (role.capabilities != undefined) {
                 if (role.capabilities.length > 0) {
@@ -240,7 +255,7 @@ export class JobPosterComponent implements OnInit {
     this.jobForCapability=this.jobPosterModel.industry.roles;
   }
   getComplexity() {
-    this.primaryCapability=new Array();
+    this.primaryCapability = [];
     for (let role of this.jobPosterModel.industry.roles) {
       if (role.capabilities) {
         for (let capability of role.capabilities) {
