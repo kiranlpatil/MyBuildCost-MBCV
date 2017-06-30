@@ -120,6 +120,7 @@ export class CandidateProfileComponent implements OnInit {
 
   onProficiencyComplete(event: any) {
     this.showIndustryExperience = true;
+    this.candidate.isCompleted = true;
   }
 
   onExperienceIndustrySelect(experiencedindustry: string[]) {
