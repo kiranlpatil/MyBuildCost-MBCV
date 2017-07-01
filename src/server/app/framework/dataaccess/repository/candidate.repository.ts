@@ -53,10 +53,12 @@ class CandidateRepository extends RepositoryBase<ICandidate> {
             candidate_card_view.exact_matching += 1;
           count++;
         } else if (jobProfile.capability_matrix[cap] === (candidate.capability_matrix[cap] - ConstVariables.DIFFERENCE_IN_COMPLEXITY_SCENARIO)) {
-          candidate_card_view.below_one_step_matching += 1;
+          candidate_card_view.above_one_step_matching += 1;
           count++;
         } else if (jobProfile.capability_matrix[cap] === (candidate.capability_matrix[cap] + ConstVariables.DIFFERENCE_IN_COMPLEXITY_SCENARIO)) {
           candidate_card_view.below_one_step_matching += 1;
+          count++;
+        } else {
           count++;
         }
       }
