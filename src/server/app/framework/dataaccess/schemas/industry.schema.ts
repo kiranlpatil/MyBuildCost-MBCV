@@ -37,6 +37,8 @@ class IndustrySchema {
           code: String,
           complexities: [{
             code: String,
+            questionForCandidate: String,
+            questionForRecruiter: String,
             scenarios: [{
               name: String,
               isChecked: Boolean,
