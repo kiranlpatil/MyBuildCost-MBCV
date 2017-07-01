@@ -70,7 +70,7 @@ class IndustryRepository extends RepositoryBase<IIndustry> {
           callback(null, this.items);
         }
       }
-    });;
+    });
   }
 
   findComplexities(item: any, callback: (error: any, result: any) => void) {
@@ -103,6 +103,8 @@ class IndustryRepository extends RepositoryBase<IIndustry> {
                         let complexity_object: any = {
                           name: complexity.name,
                           code: complexity.code,
+                          questionForCandidate: complexity.questionForCandidate,
+                          questionForRecruiter: complexity.questionForRecruiter,
                           scenarios: complexity.scenarios
                         };
                         capability_object.complexities.push(complexity_object);
