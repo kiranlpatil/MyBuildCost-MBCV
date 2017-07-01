@@ -126,7 +126,7 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
 
     setTimeout(() => {
       this.slideToRight=false;
-    }, 1001);
+    }, 3000);
       }
   onPrevious() {
     if (this.currentComplexity >= 0) {
@@ -138,7 +138,7 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
     this.slideToLeft= !this.slideToLeft;
     setTimeout(() => {
       this.slideToLeft=false;
-    }, 1001);
+    }, 3000);
   }
 
   getComplexityDetails(complexityId: string) {  //TODO remove after amits call of updated get API

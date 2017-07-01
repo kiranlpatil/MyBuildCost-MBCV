@@ -70,7 +70,7 @@ $theme-color: #3694d1;
     font-size: 12px;
     position: absolute;
     left: 350px;
-    top: 17px;
+    top: 7px;
     z-index: 0;
   }
 
@@ -273,5 +273,12 @@ $theme-color: #3694d1;
         width: 100%;
       }
     }
+  }
+}
+
+
+#demo {
+  span {
+    color: #fff !important;
   }
 }

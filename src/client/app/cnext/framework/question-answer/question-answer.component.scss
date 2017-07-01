@@ -27,13 +27,13 @@ $theme-color: #3694d1;
 }
 
 .slide-right {
-  -webkit-animation: SlideTORight 1s ease-in 1;
-  animation: SlideTORight 1s ease-in 1;
+  -webkit-animation: SlideTORight 2s ease-out 1s;
+  animation: SlideTORight 2s ease-out 1s;
 }
 
 .slide-left {
-  -webkit-animation: SlideTOLeft 1s ease-in 1;
-  animation: SlideTOLeft 1s ease-in 1;
+  -webkit-animation: SlideTOLeft 2s ease-out 1s;
+  animation: SlideTOLeft 2s ease-out 1s;
 }
 
 @-webkit-keyframes SlideTORight {
