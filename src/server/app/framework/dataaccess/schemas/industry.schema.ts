@@ -19,10 +19,13 @@ class IndustrySchema {
       roles: [{
         name: String,
         code: String,
+        sort_order: Number,
         capabilities: [{
+          sort_order: Number,
           code: String,
           complexities: [{
             code: String,
+            sort_order: Number,
             questionForCandidate: String,
             questionForRecruiter: String,
             scenarios: [{

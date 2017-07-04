@@ -180,18 +180,18 @@ class SearchService {
       } else {
         let newCandidate = candidate.toObject();
         let jobMinExperience: number = Number(job.experienceMinValue);
-        let jobMaxExperience: number = Number(job.experienceMinValue);
+        let jobMaxExperience: number = Number(job.experienceMaxValue);
         let jobMinSalary: number = Number(job.salaryMinValue);
-        let jobMaxSalary: number = Number(job.salaryMinValue);
+        let jobMaxSalary: number = Number(job.salaryMaxValue);
         let candiExperience: string[] = newCandidate.professionalDetails.experience.split(' ');
         let canSalary: string[] =  newCandidate.professionalDetails.currentSalary.split(' ');
         if((jobMaxExperience >= Number(candiExperience[0])) && (jobMinExperience <= Number(candiExperience[0]))){
-          newCandidate.experienceMatch ='match';
+          newCandidate.experienceMatch ='exact';
         }else {
           newCandidate.experienceMatch ='missing';
         }
         if((jobMaxSalary >= Number(canSalary[0])) && (jobMinSalary <= Number(canSalary[0]))){
-          newCandidate.salaryMatch ='match';
+          newCandidate.salaryMatch ='exact';
         }else {
           newCandidate.salaryMatch ='missing';
         }

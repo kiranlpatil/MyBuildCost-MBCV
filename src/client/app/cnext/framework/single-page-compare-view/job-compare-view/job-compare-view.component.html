@@ -24,8 +24,7 @@
             <span *ngFor="let industry of candidate.interestedIndustries;let i = index">{{industry}}
         <span *ngIf="candidate.interestedIndustries.length>1 && i<candidate.interestedIndustries.length-1">,</span>
       </span>
-            <label [class.exact]="data.experienceMatch=='exact'" [class.above]="data.experienceMatch=='above'"
-                   [class.below]="data.experienceMatch=='below'" [class.missing]="data.experienceMatch=='missing'">Experience</label>
+            <label [class.exact]="data.experienceMatch=='exact'" [class.missing]="data.experienceMatch=='missing'">Experience</label>
             <span>{{candidate.professionalDetails.experience}}</span>
             <label>Current Location</label>
             <span>{{candidateDetails.location.city}}</span><!--<span>{{candidateDetails.location.city}}</span>-->

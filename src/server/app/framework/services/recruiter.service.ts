@@ -46,29 +46,20 @@ class RecruiterService {
         } else if (res[0].isActivated === false) {
           callback(new Error(Messages.MSG_ERROR_VERIFY_ACCOUNT), null);
         }
-      }
-      else {
-        this.locationRepository.create(item.location, (err, res1) => {
-          if (err) {
-            callback(new Error(Messages.MSG_ERROR_REGISTRATION_MOBILE_NUMBER), null);
-          }
-          else {
-            var locationId = res1._id;
+      }else {
             item.isActivated = false;
             item.isCandidate = false;
             this.userRepository.create(item, (err, res) => {
               if (err) {
                 callback(new Error(Messages.MSG_ERROR_REGISTRATION_MOBILE_NUMBER), null);
-              }
-              else {
+              }else {
                 var userId1 = res._id;
                 var newItem: any = {
                   isRecruitingForself: item.isRecruitingForself,
                   company_name: item.company_name,
                   company_size: item.company_size,
                   company_logo: item.company_logo,
-                  userId: userId1,
-                  location: locationId
+                  userId: userId1
                 };
                 this.recruiterRepository.create(newItem, (err: any, res: any) => {
                   if (err) {
@@ -79,9 +70,6 @@ class RecruiterService {
                 });
               }
             });
-          }
-        });
-
       }
     });
   }

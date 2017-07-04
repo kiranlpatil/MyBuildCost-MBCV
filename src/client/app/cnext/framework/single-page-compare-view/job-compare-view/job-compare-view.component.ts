@@ -21,10 +21,6 @@ export class JobCompareViewComponent implements OnChanges {
   capabilities: Capability[];
   candidate : Candidate= new Candidate();
   candidateDetails : CandidateDetail = new CandidateDetail();
-  // use typeOf View is one of
-  // 1. compact
-  // 2. spa_candidate
-  // 3. spa_job
   @Input() typeOfView : string ='compact';
   private recruiterId: string;
   private data: any;
