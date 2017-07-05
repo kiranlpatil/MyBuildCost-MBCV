@@ -102,28 +102,42 @@ export class CompanyDetailsComponent implements OnInit {
 
     this.filesToUpload = <Array<File>> fileInput.target.files;
 
-    if (this.buttonId === 'file-upload1') {
-      this.fileName1 = this.filesToUpload[0].name;
-    } else if (this.buttonId === 'file-upload2') {
-      this.fileName2 = this.filesToUpload[0].name;
-    } else {
-      this.fileName3 = this.filesToUpload[0].name;
-    }
-
-    this.companyDetailsService.makeDocumentUpload(this.filesToUpload, []).then((result: any) => {
-      if (result !== null) {
-        if (this.buttonId === 'file-upload1') {
-          this.setOfDocuments[0] = result.data.document;
-        } else if (this.buttonId === 'file-upload2') {
-          this.setOfDocuments[1] = result.data.document;
-        } else {
-          this.setOfDocuments[2] = result.data.document;
-        }
-        this.fileChangeSuccess(result);
+    if (this.filesToUpload[0].size <= 5242880) {
+      if (this.buttonId === 'file-upload1') {
+        this.fileName1 = this.filesToUpload[0].name;
+      } else if (this.buttonId === 'file-upload2') {
+        this.fileName2 = this.filesToUpload[0].name;
+      } else {
+        this.fileName3 = this.filesToUpload[0].name;
       }
-    }, (error: any) => {
-      this.fileChangeFail(error);
-    });
+      /*this.dashboardService.makeDocumentUpload(this.filesToUpload, []).then((result: any) => {
+        if (result !== null) {
+          this.fileChangeSuccess(result);
+        }
+      }, (error: any) => {
+        this.fileChangeFail(error);
+      });*/
+      this.companyDetailsService.makeDocumentUpload(this.filesToUpload, []).then((result: any) => {
+        if (result !== null) {
+          if (this.buttonId === 'file-upload1') {
+            this.setOfDocuments[0] = result.data.document;
+          } else if (this.buttonId === 'file-upload2') {
+            this.setOfDocuments[1] = result.data.document;
+          } else {
+            this.setOfDocuments[2] = result.data.document;
+          }
+          this.fileChangeSuccess(result);
+        }
+      }, (error: any) => {
+        this.fileChangeFail(error);
+      });
+    } else {
+      var message = new Message();
+      message.isError = true;
+      message.error_msg = Messages.MSG_ERROR_DOCUMENT_SIZE;
+      this.messageService.message(message);
+     // this.isLoading = false;
+    }
   }
 
 

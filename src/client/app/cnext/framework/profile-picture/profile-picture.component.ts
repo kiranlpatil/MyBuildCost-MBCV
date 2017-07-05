@@ -56,7 +56,8 @@ export class ProfilePictureComponent {
     this.filesToUpload = <Array<File>> fileInput.target.files;
     if (this.filesToUpload[0].type === 'image/jpeg' || this.filesToUpload[0].type === 'image/png'
       || this.filesToUpload[0].type === 'image/jpg' || this.filesToUpload[0].type === 'image/gif') {
-      if (this.filesToUpload[0].size <= 5000000) {
+      console.log("File size is:",this.filesToUpload[0]);
+      if (this.filesToUpload[0].size <= 5242880) {
         this.dashboardService.makeDocumentUpload(this.filesToUpload, []).then((result: any) => {
           if (result !== null) {
             this.fileChangeSuccess(result);
