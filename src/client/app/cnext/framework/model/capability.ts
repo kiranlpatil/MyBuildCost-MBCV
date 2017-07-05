@@ -4,6 +4,7 @@ export class Capability {
   complexities: Complexity[] = new Array(0);
   isPrimary: boolean = false;
   isSecondary: boolean = false;
+  isFound : boolean = false;
   code: string = '';
 }
 
