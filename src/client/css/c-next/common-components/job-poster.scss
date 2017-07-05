@@ -22,6 +22,20 @@ $info: #666;
   .hide-recruiter-info {
     display: none;
   }
+
+  .modal-bg {
+    z-index: 1;
+  }
+
+  .compact-view {
+    .heading {
+      z-index: 2 !important;
+    }
+
+    .btn-edit {
+      z-index: 3;
+    }
+  }
 }
 
 .candidate-profile-wrapper {

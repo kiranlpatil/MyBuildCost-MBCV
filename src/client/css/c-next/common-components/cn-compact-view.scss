@@ -43,7 +43,8 @@ $theme-color: #3694d1;
   //border: 1px solid $border-color;
   position: relative;
   padding: 10px;
-  z-index: 1;
+  z-index: 2;
+  user-select: none;
 
   .btn-edit {
     background: transparent url("../assets/c-next/compact-view/pencil.png") no-repeat 50% 50%;
