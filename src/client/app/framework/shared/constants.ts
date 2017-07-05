@@ -23,13 +23,13 @@ export class Messages {
   public static MSG_SUCCESS_CHANGE_MOBILE_NUMBER: string = 'Mobile number changed successfully.';
   public static MSG_SUCCESS_RESEND_VERIFICATION_CODE: string = 'New One Time Password (OTP) sent on your mobile number.';
   public static MSG_SUCCESS_MAIL_VERIFICATION: string = 'Verification email sent successfully on your email account. Kindly proceed by clikcing on th elink provided in your email.';
-  public static MSG_SUCCESS_NEWREGISTRATION: string = 'Registration successful. Mobile number verified. Kindly login';
-  public static MSG_SUCCESS_RESET_PASSWORD: string = 'Your password is reset successfully';
-  public static MSG_SUCCESS_CHANGE_PASSWORD: string = 'Your password has been changed successfully';
-  public static MSG_SUCCESS_CHANGE_EMAIL: string = 'Kindly click on the link sent to your new email for email verification';
-  public static MSG_SUCCESS_CHANGE_MOBILE: string = 'Verify your new mobile number by entering OTP sent on your mobile number';
-  public static MSG_SUCCESS_FORGOT_PASSWORD: string = 'Email has been sent successfully on your registered email to reset password';
-  public static MSG_SUCCESS_DASHBOARD_PROFILE: string = 'Your profile updated successfully';
+  public static MSG_SUCCESS_NEWREGISTRATION: string = 'Registration successful. Mobile number verified. Kindly login.';
+  public static MSG_SUCCESS_RESET_PASSWORD: string = 'Your password is reset successfully.';
+  public static MSG_SUCCESS_CHANGE_PASSWORD: string = 'Your password has been changed successfully.';
+  public static MSG_SUCCESS_CHANGE_EMAIL: string = 'Kindly click on the link sent to your new email for email verification.';
+  public static MSG_SUCCESS_CHANGE_MOBILE: string = 'Verify your new mobile number by entering OTP sent on your mobile number.';
+  public static MSG_SUCCESS_FORGOT_PASSWORD: string = 'Email has been sent successfully on your registered email to reset password.';
+  public static MSG_SUCCESS_DASHBOARD_PROFILE: string = 'Your profile updated successfully.';
   public static MSG_SUCCESS_DASHBOARD_PROFILE_PIC: string = 'Your profile picture updated successfully.';
   public static MSG_SUCCESS_ATTACH_DOCUMENT: string = 'Your document attached successfully.';
   public static MSG_SUCCESS_UPLOADED_DOCUMENT: string = 'Your documents uploaded successfully.';
@@ -39,32 +39,32 @@ export class Messages {
   public static MSG_SUCCESS_MAIL_VERIFICATION_BODY: string = 'Your account verified successfully.' +
     'You may start using it immediately right now.Click on Login!';
 
-  public static MSG_SUCCESS_FOR_PROFILE_CREATION_STATUS: string = 'Your profile created successfully';
+  public static MSG_SUCCESS_FOR_PROFILE_CREATION_STATUS: string = 'Your profile created successfully.';
   public static MSG_SUCCESS_FOR_JOB_POST_STATUS: string = 'You have successfully posted the new job. You can search for matching candidates for this job through your dashboard.';
 
   public static MSG_ERROR_MAIL_VERIFICATION_BODY: string = 'Your account verification failed due to invalid access token!';
-  public static MSG_ERROR_MAIL_VERIFICATION_RESULT_STATUS: string = 'Sorry';
-  public static MSG_ERROR_LOGIN: string = 'Failed to login';
-  public static MSG_ERROR_FB_LOGIN: string = 'Failed to Facebook login';
-  public static MSG_ERROR_REGISTRATION: string = 'Failed to new user registration';
-  public static MSG_ERROR_CHANGE_PASSWORD: string = 'Failed to change password';
-  public static MSG_ERROR_CHANGE_EMAIL: string = 'Failed to change email';
-  public static MSG_ERROR_FORGOT_PASSWORD: string = 'Failed to reset password';
-  public static MSG_ERROR_DASHBOARD_PROFILE: string = 'Failed to update Profile';
-  public static MSG_ERROR_CONTACT: string = 'Failed to send email';
-  public static MSG_ERROR_DASHBOARD_PROFILE_PIC: string = 'Failed to change Profile Picture';
-  public static MSG_ERROR_ATTACH_DOCUMENT: string = 'Failed to attach Document';
-  public static MSG_ERROR_CHANGE_THEME: string = 'Failed to Change Theme';
+  public static MSG_ERROR_MAIL_VERIFICATION_RESULT_STATUS: string = 'Sorry.';
+  public static MSG_ERROR_LOGIN: string = 'Failed to login.';
+  public static MSG_ERROR_FB_LOGIN: string = 'Failed to Facebook login.';
+  public static MSG_ERROR_REGISTRATION: string = 'Failed to new user registration.';
+  public static MSG_ERROR_CHANGE_PASSWORD: string = 'Failed to change password.';
+  public static MSG_ERROR_CHANGE_EMAIL: string = 'Failed to change email.';
+  public static MSG_ERROR_FORGOT_PASSWORD: string = 'Failed to reset password.';
+  public static MSG_ERROR_DASHBOARD_PROFILE: string = 'Failed to update Profile.';
+  public static MSG_ERROR_CONTACT: string = 'Failed to send email.';
+  public static MSG_ERROR_DASHBOARD_PROFILE_PIC: string = 'Failed to change Profile Picture.';
+  public static MSG_ERROR_ATTACH_DOCUMENT: string = 'Failed to attach Document.';
+  public static MSG_ERROR_CHANGE_THEME: string = 'Failed to Change Theme.';
   public static MSG_ERROR_TOKEN_SESSION: string = 'Session has been expired.';
   public static MSG_ERROR_NETWORK: string = 'Internal Server Error.';
   public static MSG_ERROR_SERVER_ERROR: string = 'Server error.';
   public static MSG_ERROR_SOMETHING_WRONG: string = 'Internal Server Error.';
-  public static MSG_ERROR_IMAGE_TYPE: string = 'Please select valid image type.';
-  public static MSG_ERROR_IMAGE_SIZE: string = 'Please Make sure the image size is less than 5 MB';
-  public static MSG_ERROR_DOCUMENT_SIZE: string = 'Please Make sure the document size is less than 5 MB';
-  public static MSG_ERROR_FB_AUTH: string = 'User cancelled login or did not fully authorize';
-  public static MSG_ERROR_FB_domain_error: string = 'The domain of this URL isn not included in the app domains';
-  public static MSG_WARNING_ON_EDIT_CANDIDATE: string = 'This section can be updated only after';
+  public static MSG_ERROR_IMAGE_TYPE: string = 'Make sure to upload JPG,JPEG,GIF,PNG file and try again.';
+  public static MSG_ERROR_IMAGE_SIZE: string = 'Please Make sure the image size is less than 5 MB.';
+  public static MSG_ERROR_DOCUMENT_SIZE: string = 'Please Make sure the document size is less than 5 MB.';
+  public static MSG_ERROR_FB_AUTH: string = 'User cancelled login or did not fully authorize.';
+  public static MSG_ERROR_FB_domain_error: string = 'The domain of this URL isn not included in the app domains.';
+  public static MSG_WARNING_ON_EDIT_CANDIDATE: string = 'This section can be updated only after.';
 }
 
 export class NavigationRoutes {
