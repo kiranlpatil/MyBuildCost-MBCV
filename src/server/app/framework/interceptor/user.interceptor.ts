@@ -5,14 +5,14 @@ export function login(req: any, res: any, next: any) {
   if ((req.body.email === undefined) || (req.body.password === undefined)) {
     next({
       reason: Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
-      message: Messages.MSG_ERROR_FIELD_VERIFICATION,
+      message: Messages.MSG_ERROR_WRONG_PASSWORD,
       code: 401
     });
   }
   else if ((req.body.email === "") || (req.body.password === "")) {
     next({
       reason: Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
-      message: Messages.MSG_ERROR_FIELD_VERIFICATION,
+      message: Messages.MSG_ERROR_WRONG_PASSWORD,
       code: 401
     });
   }

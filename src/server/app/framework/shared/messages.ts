@@ -55,7 +55,7 @@ class Messages {
   public static MSG_ERROR_INVALID_CREDENTIALS: string = 'The email address or phone number that you have entered does not match any account.';
   public static MSG_ERROR_WRONG_PASSWORD: string = 'Please enter valid login email or password.';
   public static MSG_ERROR_NOT_USER: string = 'An access token is expired or is invalid';
-  public static MSG_ERROR_FIELD_VERIFICATION: string = 'Fields verification failed';
+  public static MSG_ERROR_FIELD_VERIFICATION: string = 'Fields Verification Failed';
   public static MSG_ERROR_FACEBOOK_AUTH: string = 'Facebook Authentication Failed';
   public static MSG_ERROR_GOOGLE_AUTH: string = 'Google plus Authentication Failed';
   public static MSG_ERROR_EMPTY_FIELD: string = 'Fields cannot be empty';

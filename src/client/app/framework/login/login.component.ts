@@ -65,7 +65,7 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  onSubmit() {
+  onSubmit() {debugger
 
     this.model = this.userForm.value;
     this.model.email = this.model.email.toLowerCase();
