@@ -1,8 +1,8 @@
-import { Component, EventEmitter, Input, Output,OnInit,OnChanges } from '@angular/core';
-import { ComplexityDetails } from '../model/complexity-detail';
-import { LocalStorage } from '../../../framework/shared/constants';
-import { LocalStorageService } from '../../../framework/shared/localstorage.service';
-import { Scenario } from '../model/scenario';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from "@angular/core";
+import {ComplexityDetails} from "../model/complexity-detail";
+import {LocalStorage} from "../../../framework/shared/constants";
+import {LocalStorageService} from "../../../framework/shared/localstorage.service";
+import {Scenario} from "../model/scenario";
 
 @Component({
   moduleId: module.id,
@@ -32,14 +32,15 @@ export class QuestionAnswerComponent implements OnInit,OnChanges {
 
 onQuestionSelect(scenario:Scenario,event:any) {
 let code:any[] =scenario.code.split('.');
-  this.complexityDetails.userChoice=code[2];
+  this.complexityDetails.userChoice = scenario.code;
   this.onComplete.emit(this.complexityDetails);
 }
 
 isChecked(code:string) {
-  let splitCode:string[]=this.complexityDetails.code.split('_');
+  /*let splitCode:string[]=this.complexityDetails.code.split('_');
     let usercode:string =splitCode[0]+'.'+splitCode[1]+'.'+this.complexityDetails.userChoice;
-    if(code===usercode) {
+   */
+  if (code === this.complexityDetails.userChoice) {
       return true;
     } else {
       return false;

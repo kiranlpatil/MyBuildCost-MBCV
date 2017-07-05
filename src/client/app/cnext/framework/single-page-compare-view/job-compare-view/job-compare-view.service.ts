@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
-import { BaseService } from '../../../../framework/shared/httpservices/base.service';
-import { API } from '../../../../framework/shared/constants';
+import {Injectable} from "@angular/core";
+import {Http} from "@angular/http";
+import {Observable} from "rxjs/Observable";
+import {BaseService} from "../../../../framework/shared/httpservices/base.service";
+import {API} from "../../../../framework/shared/constants";
 import {Capability} from "../../model/capability";
 import {Complexity} from "../../model/complexity";
 import {Scenario} from "../../model/scenario";
@@ -72,7 +72,7 @@ export class JobCompareService extends BaseService {
         cap.complexities = this.sortComplexities(cap.complexities);
         capabilities.push(cap);
       }
-    /*} debugger
+      /*}
     for(let i=0 ;i<8;i++){
         capabilities.push(capabilities[i]);*/
     }

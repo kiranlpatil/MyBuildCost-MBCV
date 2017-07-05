@@ -144,6 +144,7 @@ class CandidateService {
             let custom_code = capability.code + '_' + complexity.code;
             if (custom_code === cap) {
               isFound = true;
+              match_view.scenarios = complexity.scenarios.slice();
               let scenarios = complexity.scenarios.filter((sce: ScenarioModel) => {
                 sce.code = sce.code.replace('.', '_');
                 sce.code = sce.code.replace('.', '_');
@@ -155,9 +156,22 @@ class CandidateService {
                 }
               });
               match_view.capability_name = capability.name;
+              match_view.role_name = role.name;
+              match_view.code = custom_code;
+              if (complexity.questionForCandidate !== undefined && complexity.questionForCandidate !== null && complexity.questionForCandidate !== '') {
+                match_view.questionForCandidate = complexity.questionForCandidate;
+              } else {
+                match_view.questionForCandidate = complexity.name;
+              }
+              if (complexity.questionForRecruiter !== undefined && complexity.questionForRecruiter !== null && complexity.questionForRecruiter !== '') {
+                match_view.questionForRecruiter = complexity.questionForCandidate;
+              } else {
+                match_view.questionForRecruiter = complexity.name;
+              }
               match_view.complexity_name = complexity.name;
-              if(scenarios[0]){
+              if (scenarios[0]) {
                 match_view.scenario_name = scenarios[0].name;
+                match_view.userChoice = scenarios[0].code;
               }
               keyValueCapability[cap]=match_view;
               break;
@@ -172,6 +186,7 @@ class CandidateService {
             let custom_code = capability.code + '_' + complexity.code;
             if (custom_code === cap) {
               isFound = true;
+              match_view.scenarios = complexity.scenarios.slice();
               let scenarios = complexity.scenarios.filter((sce: ScenarioModel) => {
                 sce.code = sce.code.replace('.', '_');
                 sce.code = sce.code.replace('.', '_');
@@ -184,8 +199,21 @@ class CandidateService {
               });
               match_view.capability_name = capability.name;
               match_view.complexity_name = complexity.name;
+              match_view.role_name = role.name;
+              match_view.code = custom_code;
+              if (complexity.questionForCandidate !== undefined && complexity.questionForCandidate !== null && complexity.questionForCandidate !== '') {
+                match_view.questionForCandidate = complexity.questionForCandidate;
+              } else {
+                match_view.questionForCandidate = complexity.name;
+              }
+              if (complexity.questionForRecruiter !== undefined && complexity.questionForRecruiter !== null && complexity.questionForRecruiter !== '') {
+                match_view.questionForRecruiter = complexity.questionForCandidate;
+              } else {
+                match_view.questionForRecruiter = complexity.name;
+              }
               if(scenarios[0]){
                 match_view.scenario_name = scenarios[0].name;
+                match_view.userChoice = scenarios[0].code;
               }
               keyValueCapability[cap]=match_view;
               break;

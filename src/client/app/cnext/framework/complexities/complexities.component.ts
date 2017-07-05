@@ -25,6 +25,7 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
   @Input() isComplexityPresent: boolean = true;
 
   private complexityIds: string[] = [];
+  private complexityList: any[] = [];
   private currentComplexityDetails:ComplexityDetails=new ComplexityDetails();
   private isComplexityButtonEnable: boolean = false;
   private showModalStyle: boolean = false;
@@ -34,7 +35,7 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
   private slideToRight: boolean = false;
   private slideToLeft: boolean = false;
   private capabilities: Capability[] = [];
-
+  private complexityData: any;
 
   tooltipCandidateMessage: string = "<ul><li>" +
     "<h5>Complexities</h5><p class='info'> This section provides a list of complexity scenarios for your selected capabilities." +
@@ -66,10 +67,11 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
     }
     if (changes.complexities && changes.complexities.currentValue) {
       this.complexities = changes.complexities.currentValue;
-      this.getComplexityIds(this.complexities);
       this.complexityComponentService.getCapabilityMatrix().subscribe(
         capa => {
-          debugger;
+          this.complexityData = capa.data;
+          this.getComplexityIds(this.complexities);
+          console.log('data from complexity', capa.data);
           this.capabilities= this.jobCompareService.getStandardMatrix(capa.data);
         });
     }
@@ -80,6 +82,7 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
     this.complexityIds = [];
     for (let id in complexities) {
       this.complexityIds.push(id);
+      this.complexityList.push(this.complexityData[id]);
     }
     if(this.currentComplexity === 0) {
       this.getComplexityDetails(this.complexityIds[this.currentComplexity]);
@@ -104,7 +107,9 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
 
   onAnswered(complexityDetail: ComplexityDetails) {
     this.complexities[this.complexityIds[this.currentComplexity]] = complexityDetail.userChoice;
+    this.complexityData[this.complexityIds[this.currentComplexity]] = complexityDetail;
     console.log(this.complexities);
+    console.log(this.complexityData[this.complexityIds[this.currentComplexity]]);
     this.onNext();
   }
 
@@ -142,75 +147,11 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
   }
 
   getComplexityDetails(complexityId: string) {  //TODO remove after amits call of updated get API
-    if(complexityId !== undefined && complexityId !== ''){
-      let splitedString:string[]=complexityId.split('_');
-      for(let role of this.roles){
-        if(role.capabilities) {
-          for(let capability of role.capabilities){
-            if(splitedString[0]===capability.code) {
-              for(let complexity of capability.complexities){
-                if(splitedString[1]===complexity.code) {
-                  this.currentComplexityDetails.rolename=role.name;
-                  this.currentComplexityDetails.capabilityName=capability.name;
-                  this.currentComplexityDetails.name=complexity.name;
-                  this.currentComplexityDetails.scenarios=complexity.scenarios.slice();
-                  for (let scenario of this.currentComplexityDetails.scenarios) {
-                    if (scenario.name === undefined || scenario.name === null || scenario.name === '') {
-                      this.currentComplexityDetails.scenarios.splice(this.currentComplexityDetails.scenarios.indexOf(scenario), 1);
-                    }
-                  }
-                  this.currentComplexityDetails.userChoice=this.complexities[this.complexityIds[this.currentComplexity]];
-                  if (this.currentComplexityDetails.userChoice !== '-1') {
-                    this.currentComplexityDetails.isChecked = true;
-                  }
-                  this.currentComplexityDetails.code=complexityId;
-                  if (complexity.questionForCandidate !== undefined && complexity.questionForCandidate !== null && complexity.questionForCandidate !== '') {
-                    this.currentComplexityDetails.questionForCandidate = complexity.questionForCandidate;
-                  } else {
-                    this.currentComplexityDetails.questionForCandidate = complexity.name;
-                  }
-                  if (complexity.questionForRecruiter !== undefined && complexity.questionForRecruiter !== null && complexity.questionForRecruiter !== '') {
-                    this.currentComplexityDetails.questionForRecruiter = complexity.questionForCandidate;
-                  } else {
-                    this.currentComplexityDetails.questionForRecruiter = complexity.name;
-                  }
-                }
-              }
-            }
-          }
-        }
-        if(role.default_complexities) {
-          for(let capability of role.default_complexities){
-            if(splitedString[0]===capability.code) {
-              for(let complexity of capability.complexities){
-                if(splitedString[1]===complexity.code) {
-                  this.currentComplexityDetails.rolename=role.name;
-                  this.currentComplexityDetails.capabilityName='Common Capability';
-                  this.currentComplexityDetails.name=complexity.name;
-                  this.currentComplexityDetails.scenarios=complexity.scenarios.slice();
-                  for (let scenario of this.currentComplexityDetails.scenarios) {
-                    if (scenario.name === undefined || scenario.name === null || scenario.name === '') {
-                      this.currentComplexityDetails.scenarios.splice(this.currentComplexityDetails.scenarios.indexOf(scenario), 1);
-                    }
-                  }
-                  this.currentComplexityDetails.userChoice=this.complexities[this.complexityIds[this.currentComplexity]];
-                  this.currentComplexityDetails.code=complexityId;
-                  if (complexity.questionForCandidate !== undefined && complexity.questionForCandidate !== null && complexity.questionForCandidate !== '') {
-                    this.currentComplexityDetails.questionForCandidate = complexity.questionForCandidate;
-                  } else {
-                    this.currentComplexityDetails.questionForCandidate = complexity.name;
-                  }
-                  if (complexity.questionForRecruiter !== undefined && complexity.questionForRecruiter !== null && complexity.questionForRecruiter !== '') {
-                    this.currentComplexityDetails.questionForRecruiter = complexity.questionForCandidate;
-                  } else {
-                    this.currentComplexityDetails.questionForRecruiter = complexity.name;
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
+
+    if (this.complexityData !== undefined) {
+      console.log(this.complexityData[complexityId]);
+      this.currentComplexityDetails = this.complexityData[complexityId];
+      console.log('current complexity details', this.currentComplexityDetails);
     }
   }
 

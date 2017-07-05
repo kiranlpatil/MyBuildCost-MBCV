@@ -1,7 +1,7 @@
 <div class="complexity-details" *ngIf="complexityDetails" [class.slide-left]="slideQuestionToRight" [class.slide-right]="slideQuestionToLeft">
   <p class="breadcrumbs">
-    <span *ngIf="complexityDetails.rolename">{{complexityDetails.rolename}} </span>
-    <span *ngIf="complexityDetails.capabilityName"> >> {{complexityDetails.capabilityName}} </span>
+    <span *ngIf="complexityDetails.role_name">{{complexityDetails.role_name}} </span>
+    <span *ngIf="complexityDetails.capability_name"> >> {{complexityDetails.capability_name}} </span>
     <span *ngIf="complexityDetails.defaultComplexityName"> >> {{complexityDetails.defaultComplexityName}}</span>
   </p>
 
@@ -13,7 +13,7 @@
   <div class="scenarios">
     <div class="select-option2" *ngFor="let scenario of complexityDetails.scenarios">
       <label>
-        <input type="radio" name="{{complexityDetails.name}}" value="{{scenario.name}}"
+        <input type="radio" name="{{complexityDetails.complexity_name}}" value="{{scenario.name}}"
                (change)="onQuestionSelect(scenario,$event)"
                [checked]="isChecked(scenario.code)">
         <span>{{scenario.name}}</span>
