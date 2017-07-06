@@ -28,6 +28,8 @@ $info: #666;
   }
 
   .compact-view {
+    z-index: 2;
+
     .heading {
       z-index: 2 !important;
     }

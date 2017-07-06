@@ -53,9 +53,9 @@
 
     <div class="form-group">
       <control-messages [control]="recruiterForm.controls.location"></control-messages>
-      <input type="text" formControlName="location" class="form-control" placeholder="Current Location"
+      <input type="text" formControlName="location" class="form-control" placeholder=""
              (setAddress)="getAddress($event)" mygoogleplace/>
-
+      <label>Current Location</label>
     </div>
 
 
@@ -63,8 +63,8 @@
       <control-messages [control]="recruiterForm.controls.company_headquarter_country"></control-messages>
 
       <input type="text" formControlName="company_headquarter_country" class="form-control"
-             placeholder="Company Head Quarter" (setAddress)="selectCompanyHeadquarterModel($event)" mygoogleplace/>
-
+             placeholder="" (setAddress)="selectCompanyHeadquarterModel($event)" mygoogleplace/>
+      <label>Company Head Quarter</label>
     </div>
 
     <div class="form-group recaptcha">
