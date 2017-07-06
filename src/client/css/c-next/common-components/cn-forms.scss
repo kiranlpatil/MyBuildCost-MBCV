@@ -1,0 +1,231 @@
+@import '../../common';
+
+$bg-wrapper: #f8f8f8;
+$white: #fff;
+$text-color: #666;
+
+.main-form-wrapper {
+  @extend %background-img;
+  background: $white 0 40px;
+  height: 100vh;
+  width: 100%;
+
+  .content {
+    background: $white;
+    left: 50%;
+    margin-right: -50%;
+    padding: 0;
+    position: absolute;
+    text-align: left;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid $border-color;
+
+    h5 {
+      color: #1c75bd;
+      font-family: 'helvlightregular';
+      font-size: 13px;
+      font-weight: bold;
+      margin: 0;
+      padding: 10px 0 10px 15px;
+      background: $bg-wrapper !important;
+      border-bottom: 1px solid $border-color;
+    }
+
+    h5 > .glyphicon-remove {
+      color: $white;
+      font-size: 13px;
+      position: absolute;
+      right: 15px;
+      top: 12px;
+      cursor: pointer;
+    }
+
+    p {
+      text-align: left;
+    }
+  }
+
+  form {
+    margin-top: 0;
+    padding: 15px;
+
+    [type='number'] {
+      -moz-appearance: textfield;
+      -webkit-appearance: none;
+      appearance: none;
+      margin: 0;
+    }
+
+    .form-control {
+      color: $text-color;
+    }
+  }
+
+  .radio-group {
+    padding: 15px 0;
+    width: 100%;
+
+    .lable-name {
+      margin-right: 15px;
+      min-width: 100px;
+    }
+  }
+
+  .button-group {
+    clear: both;
+    text-align: left;
+    width: 100%;
+
+    .btn {
+      float: none;
+
+      &:focus, &:active {
+
+      }
+    }
+  }
+
+  .form-group {
+    float: left;
+    margin-bottom: 40px;
+    padding: 0;
+    position: relative;
+    width: 100%;
+
+    label {
+      //-moz-transition: top .2s ease-in, font-size .2s ease-in;
+      //-webkit-transition: top .2s ease-in, font-size .2s ease-in;
+      font-size: 12px;
+      font-weight: 600;
+      left: 0;
+      padding: 0;
+      position: absolute;
+      top: -15px;
+      //transition: .2s ease all;
+      //-moz-transition: .2s ease all;
+      //-webkit-transition: .2s ease all;
+      //transition: top .2s ease-in, font-size .2s ease-in;
+      z-index: -1;
+    }
+
+    .form-control {
+      color: $text-color;
+      box-sizing: border-box;
+      padding: 0;
+
+      &:focus ~ label,
+      &.ng-dirty ~ label {
+        //font-size: 12px;
+        //top: -15px;
+      }
+    }
+
+    select {
+      &:focus ~ label,
+      &.ng-dirty ~ label {
+        //font-size: 12px;
+        //top: -15px;
+      }
+    }
+  }
+}
+
+// Media Queries
+@media only screen and (max-width: 1280px) {
+  .main-form-wrapper {
+    .content {
+      h5 {
+        padding: 10px 15px;
+      }
+
+      h5 > .glyphicon-remove {
+        right: 15px;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .main-form-wrapper {
+    .content {
+      .employee-form {
+        padding: 0;
+      }
+
+      .employer-form {
+        padding: 15px;
+      }
+    }
+
+    .profile {
+      margin: 0 !important;
+    }
+  }
+}
+
+@media (max-width: 768px) and (orientation: landscape) {
+  .main-form-wrapper {
+    height: 100%;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .main-form-wrapper {
+    .content {
+      left: 50%;
+      margin: 100px 0 50px;
+      position: relative;
+      top: 0;
+      transform: translate(-50%, 0);
+
+      form {
+        padding: 15px;
+      }
+
+      .employee-form,
+      .employer-form {
+        padding: 0;
+      }
+
+      .radio-group {
+        padding: 15px 0;
+      }
+
+      .radio-inline {
+        color: $text-color;
+        display: block;
+        margin: 0 15px 0 0;
+        width: auto;
+      }
+
+      form > .form-group,
+      .lable-name {
+        padding: 0;
+        width: 100%;
+      }
+
+      .form-group > label {
+        left: 0;
+      }
+    }
+
+    control-messages {
+      div {
+        left: 0;
+        margin-top: 35px;
+        padding: 0;
+        text-align: left;
+      }
+    }
+  }
+
+  .employer-form {
+    control-messages {
+      div {
+        padding: 0 0 0 15px;
+      }
+    }
+  }
+}
+
