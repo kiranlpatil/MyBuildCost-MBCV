@@ -187,7 +187,7 @@
     </section>
   </section>
   <div *ngIf="data && (typeOfView =='spa_job' || typeOfView =='spa_candidate')">
-    <div style="padding-left: 235px;">
+    <div class="spa-candidate-col">
       <div class="col-sm-12">
         <cn-capability-compare [capabilities]="capabilities"></cn-capability-compare>
       </div>
@@ -195,12 +195,10 @@
         <h4 class="pull-left col-xs-3 no-padding text-left">Key Skills</h4>
         <div class="pull-left col-xs-8 no-padding text-left">
           <div class="option exact" *ngFor="let item of data.proficienciesMatch;let i = index">
-            <span>{{item}}</span> <img class="" src="assets/framework/images/dashboard/right-tick.svg"/> ,
+            <span>{{item}}</span> <img class="" src="assets/framework/images/dashboard/right-tick.svg"/>
           </div>
-          <div class="option exact" *ngFor="let item of data.proficienciesUnMatch;let i = index">
-            <span>{{item}}</span><img class="" src="assets/framework/images/dashboard/info-red.svg"/> ,
-          </div>
-          <div class="col-xs-12">
+          <div class="option missing" *ngFor="let item of data.proficienciesUnMatch;let i = index">
+            <span>{{item}}</span><img class="" src="assets/framework/images/dashboard/info-red.svg"/>
           </div>
         </div>
       </div>
@@ -215,9 +213,9 @@
             These are candidates Extra Key Skills
           </h4>
           <div class="pull-left col-xs-8 no-padding text-left">
-            <div class="option" *ngFor="let item of data.proficiencies;let i = index"
+            <div class="pull-left" *ngFor="let item of data.proficiencies;let i = index"
                  style="padding-top: 6px;padding-right: 7px;">
-              <span>{{item}}</span>
+              <span>{{item}}</span>,
             </div>
           </div>
         </div>
@@ -233,8 +231,8 @@
           >Candidate have Additional Capabilities </h4>
           <div *ngIf="data != undefined">
             <div class="pull-left col-xs-8 no-padding text-left">
-              <div class="option" *ngFor="let cap of data.additionalCapabilites" style="padding-top: 7px;">
-                {{cap}},
+              <div class="pull-left" *ngFor="let cap of data.additionalCapabilites" style="padding-top: 7px;padding-right: 7px;">
+                <span>{{cap}}</span>,
               </div>
             </div>
           </div>
@@ -263,11 +261,11 @@
       <h4 class="pull-left col-xs-3 no-padding text-left"
           *ngIf="(typeOfView =='compact'&& data && data.additionalCapabilites && data.additionalCapabilites.length>0)">
         Candidate has Additional Capabilities </h4>
-      <div class="pull-left col-xs-6 no-padding text-left additional-capabilities-lists">
+      <div>
         <div class="pull-left col-xs-9 no-padding text-left">
           <div *ngIf="data != undefined">
-            <div class="option" *ngFor="let cap of data.additionalCapabilites">
-              {{cap}}
+            <div class="pull-left" *ngFor="let cap of data.additionalCapabilites" style="padding-top: 6px;padding-right: 7px;">
+              <span> {{cap}} </span>,
             </div>
           </div>
         </div>

@@ -167,7 +167,6 @@ $red: #e82c0c;
   padding: 5px 10px 5px 15px;
   text-align: center;
   height: 28px;
-  border: 1px solid $light-green;
   background: transparent !important;
   img {
     width: 18px;
@@ -176,8 +175,20 @@ $red: #e82c0c;
   }
 }
 
+.option.exact {
+  border: 1px solid $light-green;
+}
+
+.option.missing {
+  border: 1px solid $red;
+}
+
 .additional-capabilities-lists {
   padding-top: 8px;
+}
+
+.spa-candidate-col {
+  padding-left: 235px;
 }
 
 .job-info-labal {
