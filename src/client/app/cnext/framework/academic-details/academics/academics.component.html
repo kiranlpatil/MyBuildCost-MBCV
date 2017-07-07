@@ -3,8 +3,8 @@
     <div class="row">
       <div class="col-sm-4">
         <div class="form-group">
-          <input type="text" class="form-control" formControlName="specialization" required/>
           <label>Degree</label>
+          <input type="text" class="form-control" formControlName="specialization" required/>
           <div class="error-messages"
                *ngIf="academicForm.get('specialization').touched && academicForm.get('specialization').hasError('required')">
             <p>Degree Name is required</p>
@@ -14,8 +14,8 @@
 
       <div class="col-sm-4">
         <div class="form-group">
-          <input class="form-control" type="text" formControlName="board" required/>
           <label>Board/University Name</label>
+          <input class="form-control" type="text" formControlName="board" required/>
           <div class="error-messages"
                *ngIf="academicForm.get('board').touched && academicForm.get('board').hasError('required')">
             <p>Board/University Name is required</p>
@@ -24,20 +24,22 @@
       </div>
 
       <div class="col-sm-4">
-        <label>Year </label>
-        <select class="form-control" formControlName="yearOfPassing">
-          <option *ngFor="let academicYear of yearList" [ngValue]="academicYear">{{academicYear}}
-          </option>
-        </select>
-        <div class="error-messages"
-             *ngIf="academicForm.get('yearOfPassing').touched && academicForm.get('yearOfPassing').hasError('required')">
-          <p>Year Of Passing is required</p>
+        <div class="form-group">
+          <label>Year </label>
+          <select class="select" formControlName="yearOfPassing">
+            <option *ngFor="let academicYear of yearList" [ngValue]="academicYear">{{academicYear}}
+            </option>
+          </select>
+          <div class="error-messages"
+               *ngIf="academicForm.get('yearOfPassing').touched && academicForm.get('yearOfPassing').hasError('required')">
+            <p>Year Of Passing is required</p>
+          </div>
         </div>
       </div>
     </div>
 
     <div class="col-sm-12 no-padding">
-      <label>School/College Name</label>
+      <label>School/College Name <span class="optional-field">(Optional)</span></label>
       <textarea row="2" formControlName="schoolName" class="form-control"></textarea>
     </div>
   </div>

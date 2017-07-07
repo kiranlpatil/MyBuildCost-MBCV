@@ -3,8 +3,8 @@
     <div class="row">
       <div class="col-sm-4">
         <div class="form-group">
-          <input type="text" class="form-control" formControlName="name" required/>
           <label>Certification Name</label>
+          <input type="text" class="form-control" formControlName="name" required/>
           <div class="error-messages"
                *ngIf="certificateForm.get('name').touched && certificateForm.get('name').hasError('required')">
             Certification Name is required
@@ -14,8 +14,8 @@
 
       <div class="col-sm-4">
         <div class="form-group">
-          <input class="form-control" type="text" formControlName="issuedBy" required/>
           <label>Certification authority</label>
+          <input class="form-control" type="text" formControlName="issuedBy" required/>
           <div class="error-messages"
                *ngIf="certificateForm.get('issuedBy').touched && certificateForm.get('issuedBy').hasError('required')">
             Authority Name is required
@@ -24,20 +24,22 @@
       </div>
 
       <div class="col-sm-4">
-        <label>Year </label>
-        <select class="form-control" formControlName="year">
-          <option *ngFor="let academicYear of yearList" [ngValue]="academicYear">{{academicYear}}
-          </option>
-        </select>
-        <div class="error-messages"
-             *ngIf="certificateForm.get('year').touched && certificateForm.get('year').hasError('required')">
-          Year Of Passing is required
+        <div class="form-group">
+          <label>Year </label>
+          <select class="select" formControlName="year">
+            <option *ngFor="let academicYear of yearList" [ngValue]="academicYear">{{academicYear}}
+            </option>
+          </select>
+          <div class="error-messages"
+               *ngIf="certificateForm.get('year').touched && certificateForm.get('year').hasError('required')">
+            Year Of Passing is required
+          </div>
         </div>
       </div>
     </div>
 
     <div class="col-sm-12 no-padding">
-      <label>Certification/Accreditation Details</label>
+      <label>Certification/Accreditation Details <span class="optional-field">(Optional)</span></label>
       <textarea row="2" formControlName="remark"
                 class="form-control"></textarea>
     </div>

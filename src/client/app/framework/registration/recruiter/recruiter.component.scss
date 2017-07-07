@@ -30,26 +30,6 @@ $theme-color: #66afe9;
     }
   }
 
-  .list {
-    .form-control {
-      appearance: none;
-      border: 0;
-      border-bottom: 1px solid $border-gray;
-      -moz-appearance: none;
-      -webkit-appearance: none;
-      background: $white url('../assets/framework/images/form/drop-down.png') no-repeat 95% 50%;
-      border-radius: 0;
-      box-shadow: none;
-      padding: 6px;
-      width: 100%;
-
-      &:focus,
-      &:active {
-        border: 1px solid $theme-color;
-      }
-    }
-  }
-
   .recaptcha {
     margin-bottom: 10px;
   }
@@ -58,7 +38,7 @@ $theme-color: #66afe9;
 @media only screen and (max-width: 1280px) {
   .employer-form {
     .button-group {
-      padding: 0 0 15px 0;
+      padding: 0 0 15px;
     }
   }
 }

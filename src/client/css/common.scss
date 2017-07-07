@@ -27,6 +27,8 @@ $theme-color: #66afe9;
 $gray-shadow: rgba(0, 0, 0, .075);
 $blue-shadow: rgba(102, 175, 233, .6);
 $body-bg: #edf1f5;
+$required-field: #e82c0c;
+$optional-field: #66afe9;
 
 .btn-logout {
   margin-top: 15px;
@@ -86,6 +88,27 @@ $body-bg: #edf1f5;
 .padding-right15 {
   padding-left: 0;
   padding-right: 15px;
+}
+
+.required-field {
+  color: $required-field;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.optional-field {
+  color: $optional-field !important;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.input-group-addon {
+  padding: 6px 12px 6px 0;
+  background-color: transparent;
+  border: 1px solid transparent;
+  border-bottom: 1px solid #ccc;
+  border-radius: 4px;
+  font-weight: bold;
 }
 
 :focus {
@@ -212,17 +235,19 @@ select,
   appearance: none;
   -moz-appearance: none;
   -webkit-appearance: none;
-  background: $white url('../assets/framework/images/form/drop-down.png') no-repeat 95% 50%;
-  border: 1px solid $border-grey;
+  background: $white url('../assets/framework/images/form/drop-down.png') no-repeat 98% 50%;
+  border: 1px solid $white;
+  border-bottom: 1px solid $border-grey;
   border-radius: 0;
   box-shadow: none;
-  padding: 6px;
+  padding: 6px 0;
   width: 100%;
 
   &:focus,
   &:active {
-    border: 1px solid $theme-color;
-    box-shadow: inset 0 1px 1px $gray-shadow, 0 0 8px $blue-shadow;
+    border: 1px solid $white;
+    border-bottom: 1px solid $theme-color;
+    //box-shadow: inset 0 1px 1px $gray-shadow, 0 0 8px $blue-shadow;
     outline: 0;
   }
 
@@ -288,7 +313,7 @@ select,
 }
 
 [type='radio'] {
-  margin-top: 2px !important;
+  margin-top: 4px !important;
   width: 20px;
 }
 
@@ -518,6 +543,14 @@ control-messages {
   control-messages {
     div {
       padding: 0 0 0 15px;
+    }
+  }
+
+  .form-group{
+    control-messages {
+      div {
+        margin: 53px 0 0;
+      }
     }
   }
 }

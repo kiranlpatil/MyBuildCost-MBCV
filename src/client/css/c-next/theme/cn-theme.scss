@@ -84,6 +84,7 @@ $white: #fff;
       &:focus,
       &:active {
         border-bottom: $cn-theme-color 1px solid;
+        box-shadow: none;
       }
     }
   }

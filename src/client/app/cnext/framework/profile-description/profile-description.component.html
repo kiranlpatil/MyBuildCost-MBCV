@@ -12,7 +12,7 @@
     </div>
 
     <div class="col-sm-9 profile-description">
-      <h4>Enter Your Job Title</h4>
+      <h4>Enter your current Job Title</h4>
       <div class="error-messages" *ngIf="isTitleFilled">Job title should not be empty.</div>
       <input name="jobTitle" placeholder="e.g. Software Engineer" class="form-control job-title"
              [(ngModel)]="candidate.jobTitle" (ngModelChange)="onJobTitleChange()">

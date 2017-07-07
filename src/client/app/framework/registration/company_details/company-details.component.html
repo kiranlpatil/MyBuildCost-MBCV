@@ -17,15 +17,12 @@
     </div>
 
     <form [formGroup]="companyDetailsForm" (submit)="onSubmit()" novalidate>
-<div>
-  <label>Company Name:</label>
-  <h4> {{company_name}}</h4>
-</div>
+      <h4> {{company_name}}</h4>
      <!-- <h4> Company Name:{{company_name}}</h4>-->
 
       <div class="col-sm-3 no-padding">
         <div>
-          <label>Company Logo:</label>
+          <label>Company Logo</label>
         </div>
         <div id="company-logo">
           <cn-profile-picture></cn-profile-picture>
@@ -34,7 +31,7 @@
 
       <div class="col-sm-9 no-padding">
         <div>
-          <label for="about_company">About Company*:</label>
+          <label for="about_company">About Company<!-- <span class="required-field">*</span>--></label>
         </div>
         <div class="about-company">
           <control-messages [control]="companyDetailsForm.controls.about_company"></control-messages>
@@ -44,7 +41,7 @@
       </div>
 
       <div class="col-sm-12 upload-documents">
-        <label>Upload Document:</label>
+        <label>Upload Document</label>
         <div class="col-sm-12 no-padding">
           <div [class.hide-list]="isSocialLogin">
             <div class="col-sm-5 no-padding">

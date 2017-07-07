@@ -216,7 +216,7 @@ $theme-color: #3694d1;
     display: none;
   }
 
-  .form-group {
+ /* .form-group {
     float: left;
     margin: 15px 0;
     padding: 0;
@@ -250,7 +250,7 @@ $theme-color: #3694d1;
         top: -10px;
       }
     }
-  }
+  }*/
 
   textarea {
     height: 100px;
@@ -304,6 +304,8 @@ $theme-color: #3694d1;
 }
 
 .description-form {
+  padding: 0 15px;
+
   .panel-default {
     background: #f8f8f8;
     border: 0;
@@ -322,24 +324,39 @@ $theme-color: #3694d1;
     }
   }
 
+  .form-group {
+    margin-bottom: 20px;
+
+    label {
+      margin: 0;
+    }
+  }
+
   .panel-body {
-    padding: 5px;
-    margin-right: 30px;
+    padding: 15px;
   }
 
   select {
-    padding: 6px;
+    padding: 6px 0;
+    background: transparent url(../assets/framework/images/form/drop-down.png) no-repeat 98% 50%;
+    border-top: transparent 1px solid;
+    border-left: transparent 1px solid;
+    border-right: transparent 1px solid;
+    box-shadow: none;
+
+    &:focus,
+    &:active,
+    &:hover {
+      border-top: transparent 1px solid;
+      border-left: transparent 1px solid;
+      border-right: transparent 1px solid;
+    }
   }
 
-  .form-control {
-    border: 1px solid $border-color !important;
-    background: $white !important;
-    padding: 6px !important;
-  }
-
-  label {
-    top: -10px !important;
-    font-size: 12px !important;
+  textarea {
+    height: 107px;
+    margin-top: 0;
+    background: transparent;
   }
 }
 

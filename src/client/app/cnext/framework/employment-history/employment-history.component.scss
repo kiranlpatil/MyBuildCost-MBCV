@@ -7,33 +7,6 @@ $border-color: #ccc;
   }
 }
 
-.left-content {
-  width: 65%;
-  float: left;
-  padding-right: 15px;
-
-  label {
-    width: 100%;
-  }
-
-  .worked-to {
-    select {
-      margin-bottom: 5px;
-    }
-  }
-}
-
-.right-content {
-  width: 32%;
-  float: left;
-  padding-left: 15px;
-
-  textarea {
-    height: 150px;
-    margin-top: 15px;
-  }
-}
-
 .compact-view {
   .btn-edit {
     top: 20px;
@@ -49,28 +22,3 @@ $border-color: #ccc;
   margin-top: 20px;
 }
 
-@media only screen and (max-width: 980px) {
-  .left-content,
-  .right-content {
-    width: 100%;
-    padding: 0;
-  }
-}
-
-@media only screen and (max-width: 767px) {
-  .left-content {
-    padding: 0 15px;
-  }
-
-  .col-sm-12,
-  .col-sm-6,
-  .form {
-    clear: both;
-    padding: 0;
-  }
-
-  .right-content {
-    margin-bottom: 15px;
-    padding: 0 15px;
-  }
-}

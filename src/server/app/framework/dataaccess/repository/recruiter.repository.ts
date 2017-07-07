@@ -48,7 +48,9 @@ class RecruiterRepository extends RepositoryBase<IRecruiter> {
           let job_qcard: JobQCard = new JobQCard();
           job_qcard.matching = 0;
           let count : number = 0;
+          console.log(job.jobTitle);
           for (let cap in job.capability_matrix) {
+            console.log(cap+'=>'+job.capability_matrix[cap] +'=='+candidate.capability_matrix[cap])
             if (job.capability_matrix[cap] === -1 || job.capability_matrix[cap] === 0 || job.capability_matrix[cap] === undefined) {
             } else if (job.capability_matrix[cap] === candidate.capability_matrix[cap]) {
               job_qcard.exact_matching += 1;
@@ -63,6 +65,8 @@ class RecruiterRepository extends RepositoryBase<IRecruiter> {
               count++;
             }
           }
+          console.log('----------------------------------------------------------------------------------------------------------------------------');
+
           job_qcard.above_one_step_matching = (job_qcard.above_one_step_matching / count) * 100;
           job_qcard.below_one_step_matching = (job_qcard.below_one_step_matching / count) * 100;
           job_qcard.exact_matching = (job_qcard.exact_matching / count) * 100;

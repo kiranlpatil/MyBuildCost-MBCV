@@ -3,8 +3,8 @@
     <div class="row">
       <div class="col-sm-4">
         <div class="form-group">
-          <input type="text" class="form-control" formControlName="name" required/>
           <label>Title</label>
+          <input type="text" class="form-control" formControlName="name" required/>
           <div class="error-messages"
                *ngIf="awardForm.get('name').touched && awardForm.get('name').hasError('required')">
             <p>Award Name is required</p>
@@ -14,29 +14,33 @@
 
       <div class="col-sm-4">
         <div class="form-group">
-          <input class="form-control" type="text" formControlName="issuedBy" required/>
           <label>Issued By</label>
-          <div class="error-messages"
-               *ngIf="awardForm.get('issuedBy').touched && awardForm.get('issuedBy').hasError('required')">
-            <p>Authority Name is required</p>
+          <div class="form-group">
+            <input class="form-control" type="text" formControlName="issuedBy" required/>
+            <div class="error-messages"
+                 *ngIf="awardForm.get('issuedBy').touched && awardForm.get('issuedBy').hasError('required')">
+              <p>Authority Name is required</p>
+            </div>
           </div>
         </div>
       </div>
 
       <div class="col-sm-4">
-        <label>Issued Year </label>
-        <select class="form-control" formControlName="year">
-          <option *ngFor="let academicYear of yearList" [ngValue]="academicYear">{{academicYear}}
-          </option>
-        </select>
-        <div class="error-messages" *ngIf="awardForm.get('year').touched && awardForm.get('year').hasError('required')">
-          <p>Issued Year is required</p>
+        <div class="form-group">
+          <label>Issued Year </label>
+          <select class="form-control" formControlName="year">
+            <option *ngFor="let academicYear of yearList" [ngValue]="academicYear">{{academicYear}}
+            </option>
+          </select>
+          <div class="error-messages" *ngIf="awardForm.get('year').touched && awardForm.get('year').hasError('required')">
+            <p>Issued Year is required</p>
+          </div>
         </div>
       </div>
     </div>
 
     <div class="col-sm-12 no-padding">
-      <label>Awards Details</label>
+      <label>Awards Details <span class="optional-field">(Optional)</span></label>
       <textarea row="2" formControlName="remark" class="form-control"></textarea>
     </div>
   </div>

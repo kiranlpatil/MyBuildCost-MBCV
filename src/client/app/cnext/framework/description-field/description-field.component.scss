@@ -13,6 +13,12 @@
   margin: 0 0 15px;
   resize: none;
   width: 100%;
+
+  &:focus,
+  &:hover,
+  &:active {
+    box-shadow: none;
+  }
 }
 
 .description {

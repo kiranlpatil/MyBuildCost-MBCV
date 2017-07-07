@@ -1,5 +1,5 @@
 export class AppSettings {
-  //public static IP = 'http://localhost:8080';
+ // public static IP = 'http://localhost:8080';
   // public static IP = 'http://ee802b7f.ngrok.io';
   //public static IP = 'http://10.192.33.252:8087';
    public static IP = 'http://52.89.221.23:8080';
@@ -18,12 +18,12 @@ export class AppSettings {
 }
 
 export class Messages {
-  public static MSG_SUCCESS_LOGIN: string = 'You are successfully logged in.';
+  public static MSG_SUCCESS_LOGIN: string = 'You are successfully signed in.';
   public static MSG_SUCCESS_REGISTRATION: string = 'Kindly verify your account.';
   public static MSG_SUCCESS_CHANGE_MOBILE_NUMBER: string = 'Mobile number changed successfully.';
   public static MSG_SUCCESS_RESEND_VERIFICATION_CODE: string = 'New One Time Password (OTP) sent on your mobile number.';
   public static MSG_SUCCESS_MAIL_VERIFICATION: string = 'Verification email sent successfully on your email account. Kindly proceed by clikcing on th elink provided in your email.';
-  public static MSG_SUCCESS_NEWREGISTRATION: string = 'Registration successful. Mobile number verified. Kindly login.';
+  public static MSG_SUCCESS_NEWREGISTRATION: string = 'Registration successful. Mobile number verified. Kindly sign in.';
   public static MSG_SUCCESS_RESET_PASSWORD: string = 'Your password is reset successfully.';
   public static MSG_SUCCESS_CHANGE_PASSWORD: string = 'Your password has been changed successfully.';
   public static MSG_SUCCESS_CHANGE_EMAIL: string = 'Kindly click on the link sent to your new email for email verification.';
@@ -37,15 +37,15 @@ export class Messages {
   public static MSG_SUCCESS_CHANGE_THEME: string = 'Theme changed successfully.';
   public static MSG_SUCCESS_MAIL_VERIFICATION_RESULT_STATUS: string = 'Congratulations!';
   public static MSG_SUCCESS_MAIL_VERIFICATION_BODY: string = 'Your account verified successfully.' +
-    'You may start using it immediately right now.Click on Login!';
+    'You may start using it immediately right now.Click on Sign In!';
 
   public static MSG_SUCCESS_FOR_PROFILE_CREATION_STATUS: string = 'Your profile created successfully.';
   public static MSG_SUCCESS_FOR_JOB_POST_STATUS: string = 'You have successfully posted the new job. You can search for matching candidates for this job through your dashboard.';
 
   public static MSG_ERROR_MAIL_VERIFICATION_BODY: string = 'Your account verification failed due to invalid access token!';
   public static MSG_ERROR_MAIL_VERIFICATION_RESULT_STATUS: string = 'Sorry.';
-  public static MSG_ERROR_LOGIN: string = 'Failed to login.';
-  public static MSG_ERROR_FB_LOGIN: string = 'Failed to Facebook login.';
+  public static MSG_ERROR_LOGIN: string = 'Failed to sign in.';
+  public static MSG_ERROR_FB_LOGIN: string = 'Failed to Facebook sign in.';
   public static MSG_ERROR_REGISTRATION: string = 'Failed to new user registration.';
   public static MSG_ERROR_CHANGE_PASSWORD: string = 'Failed to change password.';
   public static MSG_ERROR_CHANGE_EMAIL: string = 'Failed to change email.';

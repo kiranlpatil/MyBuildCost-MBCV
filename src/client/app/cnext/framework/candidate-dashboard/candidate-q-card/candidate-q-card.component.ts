@@ -69,7 +69,7 @@ export class CandidateQCardComponent {
       error => (console.log(error)));//TODO remove on error
   }
 
-  closeJob() {
+  closeJob(isHide : boolean) {
     this.showModalStyle = !this.showModalStyle;
   }
 

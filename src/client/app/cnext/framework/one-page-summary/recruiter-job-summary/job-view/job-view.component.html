@@ -19,12 +19,12 @@
         <cn-horizontal-list-view [data]="secondaryCapabilities"></cn-horizontal-list-view>
       </div>
       <div class="col-sm-12">
-        <h4>Proficiency In</h4>
+        <h4>Key Skills</h4>
         <cn-horizontal-list-view [data]="postedJob.proficiencies"></cn-horizontal-list-view>
       </div>
       <div class="col-sm-12"
            *ngIf="postedJob.additionalProficiencies != undefined && postedJob.additionalProficiencies.length>0">
-        <h4>Additional Proficiency</h4>
+        <h4>Additional Key Skills</h4>
         <cn-horizontal-list-view [data]="postedJob.additionalProficiencies"></cn-horizontal-list-view>
       </div>
     </div>

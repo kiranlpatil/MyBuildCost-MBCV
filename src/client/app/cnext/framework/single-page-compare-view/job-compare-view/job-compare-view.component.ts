@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges } from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, Output} from '@angular/core';
 import { JobCompareService } from './job-compare-view.service';
 import {Capability} from '../../model/capability';
 import {Candidate} from '../../model/candidate';
@@ -22,6 +22,7 @@ export class JobCompareViewComponent implements OnChanges {
   candidate : Candidate= new Candidate();
   candidateDetails : CandidateDetail = new CandidateDetail();
   @Input() typeOfView : string ='compact';
+  @Output() close : EventEmitter<boolean> = new EventEmitter();
   private recruiterId: string;
   private data: any;
   private recruiter : Recruiter;
@@ -99,6 +100,9 @@ export class JobCompareViewComponent implements OnChanges {
       return AppSettings.IP + imagePath.substring(4).replace('"', '');
     }
     return null;
+  }
+  closeThis() {
+    this.close.emit(true);
   }
 
 }

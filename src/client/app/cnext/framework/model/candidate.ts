@@ -8,6 +8,7 @@ import { CandidateDetail } from '../../../framework/registration/candidate/candi
 export class Candidate {
   jobTitle: string;
   isVisible: boolean;
+  isSubmitted: boolean;
   aboutMyself: string = '';
   certifications: Certifications[] = new Array();
   awards: Award[] = new Array();

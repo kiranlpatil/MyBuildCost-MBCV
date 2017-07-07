@@ -6,21 +6,27 @@
       <div class="job-info section-container clearfix">
         <div class="col-sm-12 no-padding">
           <div class="col-sm-4">
-            <label>Job Title</label>
-            <control-messages [control]="jobPostForm.controls.jobTitle"></control-messages>
-            <input class="form-control" type="text" formControlName="jobTitle" required/>
+            <div class="form-group">
+              <label>Job Title</label>
+              <control-messages [control]="jobPostForm.controls.jobTitle"></control-messages>
+              <input class="form-control" type="text" formControlName="jobTitle" required/>
+            </div>
           </div>
 
           <div class="col-sm-4">
-            <label>Hiring Manager</label>
-            <control-messages [control]="jobPostForm.controls.hiringManager"></control-messages>
-            <input class="form-control" type="text" maxlength="30" formControlName="hiringManager"
-                   required>
+            <div class="form-group">
+              <label>Hiring Manager</label>
+              <control-messages [control]="jobPostForm.controls.hiringManager"></control-messages>
+              <input class="form-control" type="text" maxlength="30" formControlName="hiringManager"
+                     required>
+             </div>
           </div>
           <div class="col-sm-4">
-            <label>Hiring Department</label>
-            <control-messages [control]="jobPostForm.controls.department"></control-messages>
-            <input class="form-control" type="text" formControlName="department" required>
+            <div class="form-group">
+              <label>Hiring Department</label>
+              <control-messages [control]="jobPostForm.controls.department"></control-messages>
+              <input class="form-control" type="text" formControlName="department" required>
+            </div>
           </div>
 
           <div class="col-sm-4">
@@ -67,8 +73,6 @@
             </div>
           </div>
 
-
-
           <div class="col-sm-4">
             <label>Joining Period</label>
             <control-messages [control]="jobPostForm.controls.joiningPeriod"></control-messages>
@@ -78,12 +82,13 @@
           </div>
 
           <div class="col-sm-4">
-            <label>Job Location</label>
-            <control-messages [control]="jobPostForm.controls.location"></control-messages>
+            <div class="form-group">
+              <label>Job Location</label>
+              <control-messages [control]="jobPostForm.controls.location"></control-messages>
 
-            <input type="text" formControlName="location" class="form-control" placeholder=""
-                   (setAddress)="getAddress($event)" mygoogleplace/>
-
+              <input type="text" formControlName="location" class="form-control" placeholder=""
+                     (setAddress)="getAddress($event)" mygoogleplace/>
+            </div>
           </div>
         </div>
         <div class="col-sm-12">
@@ -95,8 +100,6 @@
             </div>
           </div>
         </div>
-
-
       </div>
       <div class="button-group clearfix">
         <button class="btn btn-success" scrollTo scrollTargetSelector="#work-area" (click)="onNext()"

@@ -33,6 +33,10 @@ class CandidateSchema {
         type: Boolean,
         default: false
       },
+      isSubmitted: {
+        type: Boolean,
+        default: false
+      },
       isVisible: {
         type: Boolean,
         default: true

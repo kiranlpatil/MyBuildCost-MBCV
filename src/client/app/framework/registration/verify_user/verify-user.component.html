@@ -27,7 +27,7 @@
         <control-messages [control]="userForm.controls.mobile_number"></control-messages>
         <input type="number" [(ngModel)]="model.mobile_number" formControlName="mobile_number" id="mobile_number"
                class="form-control" required/>
-        <!-- <label>Mobile Number</label>-->
+         <label>Mobile Number</label>
       </div>
 
       <div class="button-group">
@@ -43,6 +43,7 @@
         <control-messages [control]="userForm.controls.email"></control-messages>
         <input type="email" [(ngModel)]="model.email" formControlName="email" id="email" maxlength="40"
                class="form-control" readonly/>
+        <label>Email Address</label>
       </div>
 
       <div class="button-group">

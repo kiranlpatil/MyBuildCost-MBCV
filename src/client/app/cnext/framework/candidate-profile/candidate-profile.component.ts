@@ -409,6 +409,8 @@ export class CandidateProfileComponent implements OnInit {
   }
 
   onSubmit() {
+    this.candidate.isSubmitted=true;
+    this.saveCandidateDetails();
     this.showModalStyle = !this.showModalStyle;
     if (this.setTimeoutId !== undefined) {
       clearTimeout(this.setTimeoutId);

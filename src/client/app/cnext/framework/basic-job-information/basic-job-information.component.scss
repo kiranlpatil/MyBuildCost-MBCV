@@ -1,8 +1,11 @@
 $light-blue: #00aed5;
 
 .job-info {
+  padding-top: 15px;
+
   label {
     width: 100%;
+    margin: 0;
   }
 
   .form-control {

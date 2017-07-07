@@ -30,7 +30,7 @@
     </header>
     <div class="col-sm-6 details">
       <p><img src="assets/c-next/card-view/industry.png" alt="Salary"/> {{job.industry}}</p>
-      <p><img src="assets/c-next/card-view/salary.png" alt="Salary"/>$ {{job.salaryMinValue}} - {{job.salaryMaxValue}}</p>
+      <p><img src="assets/c-next/card-view/salary.png" alt="Salary"/>₹ {{job.salaryMinValue}} - {{job.salaryMaxValue}}</p>
       <p><img src="assets/c-next/card-view/experience.png" alt="Experience"/>{{job.experienceMinValue}} - {{job.experienceMaxValue}}</p>
     </div>
     <div class="col-sm-6 details">
@@ -46,13 +46,14 @@
     <div class="compare-modal-dialog modal-md">
       <div class="modal-content">
         <div class="modal-body">
-          <div class="modal-header">
+          <cn-job-compare-view [typeOfView]="'spa_job'" [candiadteId]="candidateId" [jobId]="jobId" (close)="closeJob($event)" ></cn-job-compare-view>
+<!--          <div class="modal-header">
             <h4>Job Description</h4>
             <img src="/assets/c-next/card-view/close-white.png" (click)="closeJob()" class="close"/>
           </div>
           <div class="col-sm-12 no-padding">
             <cn-job-compare-view [typeOfView]="'spa_job'" [candiadteId]="candidateId" [jobId]="jobId"></cn-job-compare-view>
-          </div>
+          </div>-->
           <div class="button-group" *ngIf="!hideButton">
             <button class="btn btn-primary" (click)="applyJob()">Apply</button>
             <button class="btn btn-danger" (click)="blockJob() ">Not Interested</button>

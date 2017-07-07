@@ -213,6 +213,12 @@ class SearchService {
           }
         }
 
+        newCandidate.proficienciesUnMatch = new Array(0);
+        for (let proficiency of job.proficiencies) {
+          if (newCandidate.proficienciesMatch.indexOf(proficiency) == -1) {
+            newCandidate.proficienciesUnMatch.push(proficiency);
+          }
+        }
 //        let match_map: Map<string,MatchViewModel> = new Map<string,MatchViewModel>();
         newCandidate['match_map'] = {};
         newCandidate = this.buildCompareView(job,newCandidate,industries);

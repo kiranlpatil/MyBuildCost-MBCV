@@ -19,8 +19,9 @@
     <div class="form-group list">
       <div ng2-auto-complete  max-num-list="10" [source]="companySize" (ngModelChange)="selectCompanySizeModel($event)">
         <input class="form-control" [ngModel]="storedcompanySize" [ngModelOptions]="{standalone: true}"
-               placeholder="Company Size" required/>
+               placeholder="" required/>
       </div>
+      <label>Company Size</label>
     </div>
 
     <div class="form-group">
@@ -29,8 +30,9 @@
       <label>Email</label>
     </div>
 
-    <div class="form-group">
+    <div class="input-group form-group">
       <control-messages [control]="recruiterForm.controls.mobile_number"></control-messages>
+      <span class="input-group-addon">+91</span>
       <input type="number" formControlName="mobile_number" id="mobile_number" class="form-control" required/>
       <label>Mobile</label>
     </div>
@@ -53,9 +55,9 @@
 
     <div class="form-group">
       <control-messages [control]="recruiterForm.controls.location"></control-messages>
-      <input type="text" formControlName="location" class="form-control" placeholder="Current Location"
+      <input type="text" formControlName="location" class="form-control" placeholder=""
              (setAddress)="getAddress($event)" mygoogleplace/>
-
+      <label>Current Location</label>
     </div>
 
 
@@ -63,8 +65,8 @@
       <control-messages [control]="recruiterForm.controls.company_headquarter_country"></control-messages>
 
       <input type="text" formControlName="company_headquarter_country" class="form-control"
-             placeholder="Company Head Quarter" (setAddress)="selectCompanyHeadquarterModel($event)" mygoogleplace/>
-
+             placeholder="" (setAddress)="selectCompanyHeadquarterModel($event)" mygoogleplace/>
+      <label>Company Head Quarter</label>
     </div>
 
     <div class="form-group recaptcha">

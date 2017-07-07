@@ -27,8 +27,9 @@
     <label>Email</label>
   </div>
 
-  <div class="form-group">
+  <div class="input-group form-group">
     <control-messages [control]="userForm.controls.mobile_number"></control-messages>
+    <span class="input-group-addon">+91</span>
     <input type="number" formControlName="mobile_number" id="mobile_number" class="form-control" required/>
     <label>Mobile</label>
   </div>
@@ -58,8 +59,8 @@
          (ngModelChange)="selectYearModel($event)"
          no-match-found-text="Please select valid birth year.">
       <input formControlName="birth_year" [ngModel]="passingYear" id="birth_year" class="form-control"
-             placeholder="Year of Birth" required autocomplete="off"/>
-      <!--<label class="select-label">Year of Birth</label>-->
+             placeholder="" required autocomplete="off"/>
+      <label class="select-label">Year of Birth</label>
     </div>
   </div>
 
@@ -67,9 +68,9 @@
   <div class="form-group">
     <control-messages [control]="userForm.controls.location"></control-messages>
 
-    <input type="text" formControlName="location" class="form-control" placeholder="Current Location"
+    <input type="text" formControlName="location" class="form-control" placeholder=""
            (setAddress)="getAddress($event)" (city)="selectedCity($event)" mygoogleplace/>
-
+    <label>Current Location</label>
   </div>
 
   <div class="form-group recaptcha">
