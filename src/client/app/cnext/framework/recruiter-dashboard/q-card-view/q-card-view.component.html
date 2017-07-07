@@ -39,15 +39,15 @@
         <ul>
           <li *ngIf="type=='matchedList'">
             <span class="glyphicon glyphicon-star" *ngIf="emailsOfShrortListedCandidates.indexOf(item.email)==-1"
-                  (click)="addRemoveToShortList(item)"></span>
+                  (click)="addRemoveToShortList(item)" title="Shortlist the candidate"></span>
             <span class="glyphicon glyphicon-star active-star"
                   *ngIf="emailsOfShrortListedCandidates.indexOf(item.email)!=-1"
-                  (click)="addRemoveToShortList(item)"></span>
+                  (click)="addRemoveToShortList(item)" title="Remove candidate from shortlisted"></span>
           </li>
           <li *ngIf="type=='cartListed' || type=='rejectedList'">
-            <a (click)="actionOnQCard('remove','cartListed','cartListed',item)" *ngIf="type=='cartListed'"><img
+            <a (click)="actionOnQCard('remove','cartListed','cartListed',item)" *ngIf="type=='cartListed'" title='Remove candidate from "Cart" list'><img
               src="assets/c-next/card-view/close-grey.png"/></a>
-            <a (click)="actionOnQCard('remove','rejectedList','rejectedList',item)" *ngIf="type=='rejectedList'"><img
+            <a (click)="actionOnQCard('remove','rejectedList','rejectedList',item)" *ngIf="type=='rejectedList'" title='Remove candidate from "Rejected" list'><img
               src="assets/c-next/card-view/close-grey.png"/></a>
           </li>
         </ul>
@@ -61,7 +61,7 @@
               {{item.first_name}} {{item.last_name}}
             </h6>
             <p class="proficiencies" title="Key Skills">
-              <img src="assets/c-next/card-view/proficiencies.png" alt="Location"/>
+              <img src="assets/c-next/card-view/proficiencies.png" alt="Key Skills"/>
               <span *ngFor="let proficiency of item.proficiencies;let i=index">
                 <span *ngIf="i < 5">{{proficiency}}
                   <span *ngIf="i>=0 && i<4 &&  item.proficiencies.length-1 != i ">,&nbsp;</span>
