@@ -46,7 +46,7 @@ $border-color: #e8e8e8;
 .one-page-summary {
   margin-top: 55px;
   text-align: left;
-  padding: 15px 0 60px !important;
+  padding: 15px 0 0px !important;
   background: #fff;
 
   .left-content {
@@ -76,7 +76,8 @@ $border-color: #e8e8e8;
     margin: 0 15px 0 0;
     padding: 10px 0;
     float: left;
-    width: auto;
+    width: 200px;
+    white-space: inherit;
   }
 }
 

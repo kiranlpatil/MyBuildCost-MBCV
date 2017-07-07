@@ -461,7 +461,8 @@ $white: #ffffff;
   margin: 0;
   border-collapse:separate;
   border: 1px solid #E6E6E6;
-  border-right: 0;
+  /*border-right: 0;*/
+  width: 100%;
 }
 .column1{
   /*width: 10%;*/
@@ -483,3 +484,29 @@ and (max-width: 840px) {
     width: 100%;
   }
 }*/
+
+.capability-of-capabilities-section {
+  width: 100%;
+  display: inline-block;
+  .content {
+    font-size: 12px;
+    padding: 10px 0;
+    border-top: 1px solid #E6E6E6;
+    display: inline-block;
+    width: 100%;
+    .complexity-name {
+      color: #3694d1;
+      margin-bottom: 2px;
+      width: 100%;
+      display: inline-block;
+    }
+    .complexities-col {
+      display: block;
+      width: 100%;
+    }
+    .scenario-row {
+      margin-bottom: 10px;
+      display: inline-block;
+    }
+  }
+}
