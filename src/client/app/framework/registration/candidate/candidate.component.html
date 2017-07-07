@@ -11,19 +11,19 @@
 
   <div class="form-group">
     <control-messages [control]="userForm.controls.first_name"></control-messages>
-    <input type="text" formControlName="first_name" id="first_name" class="form-control" maxlength="20" required/>
+    <input type="text" formControlName="first_name" id="first_name" class="form-control" maxlength="20" autocomplete="off" required/>
     <label>First Name</label>
   </div>
 
   <div class="form-group">
     <control-messages [control]="userForm.controls.last_name"></control-messages>
-    <input type="text" formControlName="last_name" id="last_name" class="form-control" maxlength="20" required/>
+    <input type="text" formControlName="last_name" id="last_name" class="form-control" autocomplete="off" maxlength="20" required/>
     <label>Last Name</label>
   </div>
 
   <div class="form-group">
     <control-messages [control]="userForm.controls.email"></control-messages>
-    <input type="email" formControlName="email" id="email" maxlength="40" class="form-control" required/>
+    <input type="email" formControlName="email" id="email" maxlength="40" class="form-control" autocomplete="off" required/>
     <label>Email</label>
   </div>
 

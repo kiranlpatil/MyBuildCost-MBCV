@@ -12,7 +12,7 @@
   <div class="row clearfix">
     <div class="form-group">
       <control-messages [control]="recruiterForm.controls.company_name"></control-messages>
-      <input type="text" formControlName="company_name" id="company_name" class="form-control" maxlength="40" required/>
+      <input type="text" formControlName="company_name" id="company_name" class="form-control" maxlength="40" autocomplete="off" required/>
       <label>Company Name</label>
     </div>
 
@@ -26,7 +26,7 @@
 
     <div class="form-group">
       <control-messages [control]="recruiterForm.controls.email"></control-messages>
-      <input type="email" formControlName="email" id="email" maxlength="40" class="form-control" required/>
+      <input type="email" formControlName="email" id="email" maxlength="40" class="form-control" autocomplete="off" required/>
       <label>Email</label>
     </div>
 
