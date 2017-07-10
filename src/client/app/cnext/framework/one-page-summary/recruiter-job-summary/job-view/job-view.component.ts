@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angular/core';
 import { RecruiterDashboardService } from '../../../recruiter-dashboard/recruiter-dashboard.service';
 import { JobSummary } from '../../../model/jobSummary';
 import { Router } from '@angular/router';
@@ -12,8 +12,9 @@ import {NavigationRoutes} from '../../../../../framework/shared/constants';
   styleUrls: ['job-view.component.css'],
 
 })
-export class JobViewComponent {
+export class JobViewComponent implements OnChanges ,OnInit {
   @Input() jobId: string;
+  @Input() calledFrom: string;
   private recruiter: JobSummary = new JobSummary();
   private secondaryCapabilities: string[] = new Array();
 
@@ -22,6 +23,7 @@ export class JobViewComponent {
   }
 
   ngOnInit() {
+    //this.calledFrom ='jobposter';
   }
 
   ngOnChanges(changes: any) {
@@ -31,8 +33,12 @@ export class JobViewComponent {
       this.recruiterDashboardService.getPostedJobDetails(this.jobId)
         .subscribe(
           data => {
-            this.OnRecruiterDataSuccess(data.data.industry)
+            this.OnRecruiterDataSuccess(data.data.industry);
           });
+    }
+    if (changes.calledFrom !== undefined && changes.calledFrom.currentValue !== undefined) {
+      this.calledFrom = changes.calledFrom.currentValue;
+      console.log("In ngchange",this.calledFrom);
     }
   }
 
@@ -56,4 +62,8 @@ export class JobViewComponent {
     this._router.navigate([NavigationRoutes.APP_RECRUITER_DASHBOARD]);
   }
 
+  onJobClicked(item: any) {
+    //this.jobEventEmitter.emit(item);
+    this._router.navigate(['jobdashboard/', item]);
+  }
 }

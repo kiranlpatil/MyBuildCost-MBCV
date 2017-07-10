@@ -38,9 +38,9 @@
         <cn-additional-details [data]="postedJob.responsibility"></cn-additional-details>
       </div>-->
     </div>
-    <div class="col-sm-12 no-padding">
+    <div class="col-sm-12 no-padding" [hidden]="calledFrom ==='jobDashboard'">
       <div class="button-group">
-        <button class="btn btn-primary btn-search" (click)="goToDashboard()">Search Candidates for this Job</button>
+        <button class="btn btn-primary btn-search" (click)="onJobClicked(postedJob._id)">Search Candidates for this Job</button>
       </div>
     </div>
   </div>

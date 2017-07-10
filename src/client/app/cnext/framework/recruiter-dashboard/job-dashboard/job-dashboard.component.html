@@ -26,7 +26,7 @@
           </div>
           <div class="col-md-5 col-sm-6 no-padding">
             <ul class="pull-right job-info">
-              <li class="contact-info"><label>Industry</label><p>IT</p></li>
+              <li class="contact-info"><label>Industry</label><p>{{selectedJobProfile.industry.name}}</p></li>
               <li class="contact-info">
                 <label>Hiring Manager</label>
                 <p>{{selectedJobProfile.hiringManager}}</p>
@@ -102,7 +102,7 @@
             <h4>Job Description</h4>
             <img src="/assets/c-next/card-view/close-white.png" (click)="closeJob()" class="close"/>
           </div>
-          <cn-job-view [jobId]="selectedJobProfile._id"></cn-job-view>
+          <cn-job-view [jobId]="selectedJobProfile._id" [calledFrom]="'jobDashboard'"></cn-job-view>
         </div>
       </div>
     </div>
