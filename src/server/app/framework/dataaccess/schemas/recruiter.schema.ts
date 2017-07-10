@@ -93,10 +93,13 @@ class RecruiterSchema {
           roles: [{
             code: String,
             name: String,
+            sort_order: Number,
             capabilities: [{
               code: String,
+              sort_order: Number,
               complexities: [{
                 code: String,
+                sort_order: Number,
                 scenarios: [{
                   name: String,
                   isChecked: Boolean,

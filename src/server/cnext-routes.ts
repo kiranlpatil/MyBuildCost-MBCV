@@ -20,7 +20,6 @@ export function cnextInit(app: express.Application) { //todo add interceptor to 
   app.post('/api/proficiency', proficienciesController.create);
   app.get('/api/proficiency', proficienciesController.retrieve);
   app.put('/api/proficiency', proficienciesController.update);
-  app.get('/api/roletype', userController.getRoleTypes);
   app.post('/api/industry', industryController.create);
   app.put('/api/recruiter/:id/job', recruiterController.postJob);
   app.get('/api/industry/:id/role', roleController.retrieve);
