@@ -30,7 +30,7 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
   private isComplexityButtonEnable: boolean = false;
   private showModalStyle: boolean = false;
   private isCandidate: boolean = false;
-  private currentComplexity: number = 0;
+  private currentComplexity: number;
   private showMore: boolean = false;
   private slideToRight: boolean = false;
   private slideToLeft: boolean = false;
@@ -76,28 +76,31 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
     }
   }
 
-  /*getCurrentComplexityPosition(){
+  getCurrentComplexityPosition() {
    for (let i = 0; i < this.complexityIds.length; i++) {
    if(this.complexityList[i].userChoice===undefined || this.complexityList[i].userChoice === ''){
-   this.currentComplexity=i;
-   break;
+     return i;
    }
    }
-   }*/
+    return 0;
+  }
   getComplexityIds(complexities: any) {
     this.currentComplexity = 0;
     this.complexityIds = [];
     this.complexityIds = Object.keys(complexities);
+    this.complexityList = [];
     for (let id in complexities) {
       this.complexityList.push(this.complexityData[id]);
     }
-    // this.getCurrentComplexityPosition();
-    if (this.currentComplexity === 0) {
-      this.getComplexityDetails(this.complexityIds[this.currentComplexity]);
-    }
+    this.currentComplexity = this.getCurrentComplexityPosition();
+    this.getComplexityDetails(this.complexityIds[this.currentComplexity]);
   }
 
   saveComplexity() {
+    this.complexityComponentService.getCapabilityMatrix().subscribe(
+      capa => {
+        this.capabilities = this.jobCompareService.getStandardMatrix(capa.data);
+      });
     this.isComplexityButtonEnable = false;
     if (this.isCandidate) {
       this.showModalStyle = !this.showModalStyle;
