@@ -52,6 +52,7 @@ export class JobCompareService extends BaseService {
           let com = new Complexity();
           com.match= data[value2].match;
           com.name= data[value2].complexity_name;
+          com.complexityDetails = data[value2];
           com.scenarios.push(sce);
           let isFound : boolean= false;
           for(let complex of cap.complexities){
