@@ -26,6 +26,7 @@ export class ForgotPasswordComponent {
   EMAIL_ICON: string;
   BODY_BACKGROUND: string;
   forgotPasswordButtonLabel: string;
+  private submitStatus: boolean;
 
   constructor(private commonService: CommonService, private _router: Router,
               private forgotPasswordService: ForgotPasswordService, private messageService: MessageService,
@@ -44,6 +45,10 @@ export class ForgotPasswordComponent {
 
   onSubmit() {
     this.model = this.userForm.value;
+    if(this.model.email == '') {
+      this.submitStatus = true;
+      return;
+    }
     this.forgotPasswordService.forgotPassword(this.model)
       .subscribe(
         body => this.forgotPasswordSuccess(body),

@@ -37,6 +37,10 @@ export class RecruiterComponent implements OnInit {
   private myPassword: string = '';
   private storedLocation: Location = new Location();
   private address: any;
+  private submitStatus: boolean;
+  private companySizeErrorMessage: string;
+  private locationErrorMessage: string;
+  private companyHQErrorMessage: string;
 
   constructor(private commonService: CommonService, private _router: Router, private http: Http,
               private recruiterService: RecruiterService, private recruitmentForService: RecruitingService,
@@ -57,7 +61,7 @@ export class RecruiterComponent implements OnInit {
       'confirm_password': ['', [ValidationService.requireConfirmPasswordValidator]],
       'location': ['', Validators.required],
       'company_headquarter_country': [''],
-      'captcha': ['', Validators.required]
+      //'captcha': ['', Validators.required]
 
     });
     this.BODY_BACKGROUND = ImagePath.BODY_BACKGROUND;
@@ -82,7 +86,7 @@ export class RecruiterComponent implements OnInit {
   }
 
   selectCompanySizeModel(size: string) {
-
+    this.companySizeErrorMessage = undefined;
     this.storedcompanySize = size;
     this.recruiterForm.value.company_size = this.storedcompanySize;
     this.model.company_size = this.recruiterForm.value.company_size;
@@ -90,11 +94,13 @@ export class RecruiterComponent implements OnInit {
 
 
   selectCompanyHeadquarterModel(address: MyGoogleAddress) {
+    this.companyHQErrorMessage = undefined;
     this.companyHeadquarter = address.country;
     this.recruiterForm.value.company_headquarter_country = this.companyHeadquarter;
   }
 
   getAddress(address: MyGoogleAddress) {
+    this.locationErrorMessage = undefined;
     this.storedLocation.city = address.city;
     this.storedLocation.state = address.state;
     this.storedLocation.country = address.country;
@@ -102,6 +108,21 @@ export class RecruiterComponent implements OnInit {
 
   onSubmit() {
     this.model = this.recruiterForm.value;
+    if(this.model.company_name == '' || this.storedcompanySize == undefined || this.model.mobile_number == '' ||
+      this.model.email == '' || this.model.password == '' || this.model.confirm_password == '' ||
+      this.storedLocation == null || this.companyHeadquarter == undefined) {
+      if(this.storedcompanySize == undefined){
+        this.companySizeErrorMessage = "You can't leave this empty.";
+      }
+      if(this.storedLocation.city == undefined){
+        this.locationErrorMessage = "You can't leave this empty.";
+      }
+      if(this.companyHeadquarter == undefined){
+        this.companyHQErrorMessage = "You can't leave this empty.";
+      }
+      this.submitStatus = true;
+      return;
+    }
     this.model.current_theme = AppSettings.LIGHT_THEM;
     this.model.location = this.storedLocation;
     this.model.isCandidate = false;

@@ -9,10 +9,14 @@ import {ValidationService} from "./validation.service";
 })
 export class ControlMessagesComponent {
   @Input() control: FormControl;
+  @Input() submitStatus: boolean;
 
   get errorMessage() {
     for (let propertyName in this.control.errors) {
       if (this.control.errors.hasOwnProperty(propertyName) && this.control.touched) {
+        return ValidationService.getValidatorErrorMessage(propertyName, this.control.errors[propertyName]);
+      }
+      if (this.control.errors.hasOwnProperty(propertyName) && this.submitStatus) {
         return ValidationService.getValidatorErrorMessage(propertyName, this.control.errors[propertyName]);
       }
     }

@@ -30,7 +30,9 @@ export class CandidateComponent implements OnInit {
   private validBirthYearList = new Array();
   private year: any;
   private currentDate: any;
-
+  private submitStatus: boolean;
+  private birthYearErrorMessage: string;
+  private locationErrorMessage: string;
 
   constructor(private commonService: CommonService, private _router: Router, private dateService: DateService,
               private candidateService: CandidateService, private messageService: MessageService, private formBuilder: FormBuilder) {
@@ -43,8 +45,8 @@ export class CandidateComponent implements OnInit {
       'password': ['', [ValidationService.requirePasswordValidator, ValidationService.passwordValidator]],
       'confirm_password': ['', ValidationService.requireConfirmPasswordValidator],
       'birth_year': ['', [Validators.required, ValidationService.birthYearValidator]],
-      'location': ['', Validators.required],
-      'captcha': ['', Validators.required]
+      'location': [''],
+      //'captcha': ['', Validators.required]
     });
 
 
@@ -59,17 +61,32 @@ export class CandidateComponent implements OnInit {
 
 
   selectYearModel(year: any) {
+    this.birthYearErrorMessage = undefined;
     this.passingYear = year;
     this.model.birth_year = year;
   }
 
   getAddress(address: MyGoogleAddress) {
+    this.locationErrorMessage = undefined;
     this.storedLocation.city = address.city;
     this.storedLocation.state = address.state;
     this.storedLocation.country = address.country;
   }
 
   onSubmit() {
+    this.model = this.userForm.value;
+    if(this.model.first_name == '' || this.model.last_name == '' || this.model.mobile_number == '' ||
+      this.model.email == '' || this.model.password == '' || this.model.confirm_password == '' ||
+      this.storedLocation.city == undefined || this.model.birth_year == undefined) {
+      if(this.model.birth_year == undefined) {
+        this.birthYearErrorMessage = "You can't leave this empty.";
+      }
+      if(this.storedLocation.city == undefined) {
+        this.locationErrorMessage = "You can't leave this empty.";
+      }
+      this.submitStatus = true;
+      return;
+    }
     this.model = this.userForm.value;
     this.model.current_theme = AppSettings.LIGHT_THEM;
     this.model.isCandidate = true;

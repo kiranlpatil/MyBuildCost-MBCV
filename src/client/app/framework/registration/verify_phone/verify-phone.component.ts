@@ -25,6 +25,7 @@ export class VerifyPhoneComponent {
   UNDER_LICENCE: string;
   BODY_BACKGROUND: string;
   showModalStyle: boolean = false;
+  private submitStatus: boolean;
 
   constructor(private _router: Router, private formBuilder: FormBuilder,
               private verifyPhoneService: VerifyPhoneService, private messageService: MessageService) {
@@ -41,6 +42,10 @@ export class VerifyPhoneComponent {
 
   onSubmit() {
     this.model = this.userForm.value;
+    if(this.model.otp == '') {
+      this.submitStatus = true;
+      return;
+    }
     if (LocalStorageService.getLocalValue(LocalStorage.VERIFY_PHONE_VALUE) === 'from_registration') {
       this.verifyPhoneService.verifyPhone(this.model)
         .subscribe(

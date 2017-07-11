@@ -7,11 +7,11 @@
   </div>
 </div>
 
-<form [formGroup]="recruiterForm" (submit)="onSubmit()" class="employer-form">
+<form [formGroup]="recruiterForm" (submit)="onSubmit()" class="employer-form" novalidate>
 
   <div class="row clearfix">
     <div class="form-group">
-      <control-messages [control]="recruiterForm.controls.company_name"></control-messages>
+      <control-messages [control]="recruiterForm.controls.company_name" [submitStatus] = "submitStatus"></control-messages>
       <input type="text" formControlName="company_name" id="company_name" class="form-control" maxlength="40" autocomplete="off" required/>
       <label>Company Name</label>
     </div>
@@ -22,16 +22,17 @@
                placeholder="" required/>
       </div>
       <label>Company Size</label>
+      <div class="error-messages" *ngIf='companySizeErrorMessage != undefined'>{{companySizeErrorMessage}}</div>
     </div>
 
     <div class="form-group">
-      <control-messages [control]="recruiterForm.controls.email"></control-messages>
+      <control-messages [control]="recruiterForm.controls.email" [submitStatus] = "submitStatus"></control-messages>
       <input type="email" formControlName="email" id="email" maxlength="40" class="form-control" autocomplete="off" required/>
       <label>Email</label>
     </div>
 
     <div class="input-group form-group">
-      <control-messages [control]="recruiterForm.controls.mobile_number"></control-messages>
+      <control-messages [control]="recruiterForm.controls.mobile_number" [submitStatus] = "submitStatus"></control-messages>
       <span class="input-group-addon">+91</span>
       <input type="number" formControlName="mobile_number" id="mobile_number" class="form-control" required/>
       <label>Mobile</label>
@@ -39,45 +40,47 @@
 
 
     <div class="form-group">
-      <control-messages [control]="recruiterForm.controls.password"></control-messages>
+      <control-messages [control]="recruiterForm.controls.password" [submitStatus] = "submitStatus"></control-messages>
       <input type="password" formControlName="password" id="password" [(ngModel)]="model.password"
              class="form-control" (focus)="showMessage()" [(ngModel)]="myPassword" (ngModelChange)="selectPassword($event)" required/>
       <label>Password</label>
     </div>
 
     <div class="form-group">
-      <control-messages [control]="recruiterForm.controls.confirm_password"></control-messages>
+      <control-messages [control]="recruiterForm.controls.confirm_password" [submitStatus] = "submitStatus"></control-messages>
       <input type="password" formControlName="confirm_password" id="confirm_password" [(ngModel)]="model.confirm_password"
              (blur)="makePasswordConfirm()" class="form-control" required/>
       <label>Confirm Password</label>
-      <span class="error-messages" *ngIf="isPasswordConfirm == true">Passwords do not match.</span>
+      <span class="error-messages" *ngIf="isPasswordConfirm == true">These passwords don't match. Try again</span>
     </div>
 
     <div class="form-group">
-      <control-messages [control]="recruiterForm.controls.location"></control-messages>
+      <!--<control-messages [control]="recruiterForm.controls.location" [submitStatus] = "submitStatus"></control-messages>-->
       <input type="text" formControlName="location" class="form-control" placeholder=""
              (setAddress)="getAddress($event)" mygoogleplace/>
       <label>Current Location</label>
+      <div class="error-messages" *ngIf='locationErrorMessage != undefined'>{{locationErrorMessage}}</div>
     </div>
 
 
     <div class="form-group">
-      <control-messages [control]="recruiterForm.controls.company_headquarter_country"></control-messages>
+      <!--<control-messages [control]="recruiterForm.controls.company_headquarter_country" [submitStatus] = "submitStatus"></control-messages>-->
 
       <input type="text" formControlName="company_headquarter_country" class="form-control"
              placeholder="" (setAddress)="selectCompanyHeadquarterModel($event)" mygoogleplace/>
       <label>Company Head Quarter</label>
+      <div class="error-messages" *ngIf='companyHQErrorMessage != undefined'>{{companyHQErrorMessage}}</div>
     </div>
 
-    <div class="form-group recaptcha">
+    <!--<div class="form-group recaptcha">
       <recaptcha
         [(ngModel)]="recruiterForm.captcha"
         formControlName="captcha"
         siteKey="6LdEDRkUAAAAAKCCqc0EIlMY8FLxSdH4GxrYSI6A" required></recaptcha>
-    </div>
+    </div>-->
   </div>
 
   <div class="button-group">
-    <button type="submit" class="btn btn-success" [disabled]="!recruiterForm.valid">Create my account</button>
+    <button type="submit" class="btn btn-success" >Create my account</button>
   </div>
 </form>

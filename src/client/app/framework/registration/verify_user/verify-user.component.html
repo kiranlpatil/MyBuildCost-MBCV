@@ -18,7 +18,7 @@
       </div>
     </div>
 
-    <form [formGroup]="userForm" (submit)="onSubmit()" [hidden]="chkMobile">
+    <form [formGroup]="userForm" (submit)="onSubmit()" [hidden]="chkMobile" novalidate>
       <p>You are almost done!</p>
       <p> We just need to verify your account before you can start using the system.</p>
       <p>One Time Password (OTP) will be sent on the following mobile number.</p>

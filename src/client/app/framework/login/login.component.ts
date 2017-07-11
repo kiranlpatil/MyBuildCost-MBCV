@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
   private MY_TAG_LINE: string;
   private UNDER_LICENCE: string;
   private BODY_BACKGROUND: string;
-
+  private submitStatus: boolean;
 
   constructor(private _router: Router, private loginService: LoginService, private themeChangeService: ThemeChangeService,
               private messageService: MessageService, private _ngZone: NgZone,
@@ -66,8 +66,12 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-
     this.model = this.userForm.value;
+    if(this.model.email == '' || this.model.password == '') {
+      this.submitStatus = true;
+      return;
+    }
+
     this.model.email = this.model.email.toLowerCase();
     this.loginService.userLogin(this.model)
       .subscribe(

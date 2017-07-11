@@ -18,18 +18,18 @@
       </div>
     </div>
 
-    <form [formGroup]="userForm" (submit)="onSubmit()">
+    <form [formGroup]="userForm" (submit)="onSubmit()" novalidate>
 
       <p>Please enter the verification code sent to your phone number.</p>
 
       <div class="form-group">
-        <control-messages [control]="userForm.controls.otp"></control-messages>
+        <control-messages [control]="userForm.controls.otp" [submitStatus] = "submitStatus"></control-messages>
         <input type="number" formControlName="otp" id="otp" class="form-control" required/>
         <label>One Time Password(OTP)</label>
       </div>
 
       <div class="button-group">
-        <button type="submit" class="btn btn-success" [disabled]="!userForm.valid">Verify OTP</button>
+        <button type="submit" class="btn btn-success">Verify OTP</button>
         <a class="btn btn-danger" (click)="resendVerificationCode()">Resend OTP</a>
       </div>
     </form>

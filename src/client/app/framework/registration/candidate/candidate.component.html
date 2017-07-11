@@ -7,47 +7,47 @@
   </div>
 </div>
 
-<form [formGroup]="userForm" (submit)="onSubmit()" class="employee-form">
+<form [formGroup]="userForm" (submit)="onSubmit()" class="employee-form" novalidate>
 
   <div class="form-group">
-    <control-messages [control]="userForm.controls.first_name"></control-messages>
+    <control-messages [control]="userForm.controls.first_name" [submitStatus] = "submitStatus"></control-messages>
     <input type="text" formControlName="first_name" id="first_name" class="form-control" maxlength="20" autocomplete="off" required/>
     <label>First Name</label>
   </div>
 
   <div class="form-group">
-    <control-messages [control]="userForm.controls.last_name"></control-messages>
+    <control-messages [control]="userForm.controls.last_name" [submitStatus] = "submitStatus"></control-messages>
     <input type="text" formControlName="last_name" id="last_name" class="form-control" autocomplete="off" maxlength="20" required/>
     <label>Last Name</label>
   </div>
 
   <div class="form-group">
-    <control-messages [control]="userForm.controls.email"></control-messages>
+    <control-messages [control]="userForm.controls.email" [submitStatus] = "submitStatus"></control-messages>
     <input type="email" formControlName="email" id="email" maxlength="40" class="form-control" autocomplete="off" required/>
     <label>Email</label>
   </div>
 
   <div class="input-group form-group">
-    <control-messages [control]="userForm.controls.mobile_number"></control-messages>
+    <control-messages [control]="userForm.controls.mobile_number" [submitStatus] = "submitStatus"></control-messages>
     <span class="input-group-addon">+91</span>
     <input type="number" formControlName="mobile_number" id="mobile_number" class="form-control" required/>
     <label>Mobile</label>
   </div>
 
   <div class="form-group">
-    <control-messages [control]="userForm.controls.password"></control-messages>
+    <control-messages [control]="userForm.controls.password" [submitStatus] = "submitStatus"></control-messages>
     <input type="password" formControlName="password" id="password" [(ngModel)]="model.password"
            class="form-control"(blur)="makePasswordConfirm()" required/>
     <label>Password</label>
   </div>
 
   <div class="form-group">
-    <control-messages [control]="userForm.controls.confirm_password"></control-messages>
+    <control-messages [control]="userForm.controls.confirm_password" [submitStatus] = "submitStatus"></control-messages>
     <input type="password" formControlName="confirm_password" id="confirm_password"
            [(ngModel)]="model.confirm_password" (blur)="makePasswordConfirm()" class="form-control" required/>
     <label>Confirm Password</label>
     <span class="error-messages"
-          *ngIf="isPasswordConfirm == true"> Passwords do not match </span>
+          *ngIf="isPasswordConfirm == true"> These passwords don't match. Try again? </span>
   </div>
 
   <div class="form-group">
@@ -57,31 +57,33 @@
          max-num-list="10"
          [accept-user-input]="false"
          (ngModelChange)="selectYearModel($event)"
-         no-match-found-text="Please select valid birth year.">
+         no-match-found-text="The year doesn't look right. Be sure to use your actual year of birth.">
       <input formControlName="birth_year" [ngModel]="passingYear" id="birth_year" class="form-control"
              placeholder="" required autocomplete="off"/>
       <label class="select-label">Year of Birth</label>
+      <div class="error-messages" *ngIf='birthYearErrorMessage !== undefined'>{{birthYearErrorMessage}}</div>
     </div>
   </div>
 
 
   <div class="form-group">
-    <control-messages [control]="userForm.controls.location"></control-messages>
+    <!--<control-messages [control]="userForm.controls.location" [submitStatus] = "submitStatus"></control-messages>-->
 
     <input type="text" formControlName="location" class="form-control" placeholder=""
            (setAddress)="getAddress($event)" (city)="selectedCity($event)" mygoogleplace/>
     <label>Current Location</label>
+    <div class="error-messages" *ngIf='locationErrorMessage !== undefined'>{{locationErrorMessage}}</div>
   </div>
 
-  <div class="form-group recaptcha">
+  <!--<div class="form-group recaptcha">
     <recaptcha
       [(ngModel)]="userForm.captcha"
       formControlName="captcha"
       siteKey="6LdEDRkUAAAAAKCCqc0EIlMY8FLxSdH4GxrYSI6A"></recaptcha>
-  </div>
+  </div>-->
 
   <div class="button-group">
-    <button type="submit" class="btn btn-success" [disabled]="!userForm.valid">Create my account</button>
+    <button type="submit" class="btn btn-success">Create my account</button>
   </div>
 </form>
 
