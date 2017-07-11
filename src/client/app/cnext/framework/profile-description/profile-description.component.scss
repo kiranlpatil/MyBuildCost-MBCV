@@ -1,20 +1,8 @@
 $light-blue: #00aed5;
-$job-title: #333;
-
-h4 {
-  font-size: 13px;
-  margin: 0 0 10px;
-  font-family: 'gothamrnd-book';
-  font-weight: 900;
-}
-
-.main-content {
-  input {
-    width: 75%;
-  }
-}
+$black: #333;
 
 .user-name {
+  margin-bottom: 10px;
 
   .profile-name-first,
   .profile-name-last {
@@ -28,7 +16,7 @@ h4 {
 }
 
 .job-title {
-  color: $job-title;
+  color: $black;
   font-family: 'gothamrnd-light';
   font-size: 20px;
   background: none;
@@ -41,6 +29,16 @@ h4 {
   &:hover {
     .btn-edit {
       opacity: 1;
+    }
+  }
+
+  .profile-details {
+    display: inline-block;
+    width: 40%;
+
+    label {
+      min-width: 150px;
+      color: $black;
     }
   }
 }

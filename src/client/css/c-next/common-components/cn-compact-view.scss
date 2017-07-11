@@ -5,6 +5,7 @@ $secondary-option: #81d4fa;
 $modal-bg: rgba(0, 0, 0, .5);
 $active-section: #a8de78;
 $theme-color: #3694d1;
+$black: #333;
 
 .modal-bg {
   background: $modal-bg;
@@ -51,6 +52,7 @@ $theme-color: #3694d1;
   top: 50%;
   left: 50%;
   width: 950px;
+  height: 500px;
   transform: translate(-50%, -50%) !important;
 }
 
@@ -119,11 +121,11 @@ $theme-color: #3694d1;
     border-radius: 50%;
     box-sizing: border-box;
     float: left;
-    height: 80px;
+    height: 85px;
     margin: 0 15px 0 0;
     overflow: hidden;
     position: relative;
-    width: 80px;
+    width: 85px;
 
     img {
       background: #e6e6e6;
@@ -139,19 +141,13 @@ $theme-color: #3694d1;
     }
   }
 
-  .user-name {
-    margin-top: 0 !important;
-    margin-bottom: 3px;
-    display: block;
-  }
-
   p {
-    font-size: 13px;
+    font-size: 12px;
     margin: 0;
   }
 
   label {
-    color: $light-blue !important;
+    color: $light-blue;
     //min-width: 90px;
     margin-bottom: 0;
     padding: 0 10px 0 0;

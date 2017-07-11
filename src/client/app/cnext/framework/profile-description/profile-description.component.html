@@ -2,7 +2,7 @@
 <div class="section-container" *ngIf="highlightedSection.name=='Profile'">
   <cn-tool-tip [message]="tooltipMessage"></cn-tool-tip>
   <div class="main-content clearfix edit-modal-content">
-    <h4 class="heading">My Profile</h4>
+    <h4 class="heading">Enter your profile details</h4>
 
     <div class="col-sm-3 text-center">
       <cn-profile-picture (onPictureUpload)="onPictureUpload($event)"></cn-profile-picture>
@@ -11,12 +11,49 @@
       </div>
     </div>
 
-    <div class="col-sm-9 profile-description">
-      <h4>Enter your current Job Title</h4>
-      <div class="error-messages" *ngIf="isTitleFilled">Job title should not be empty.</div>
-      <input name="jobTitle" placeholder="e.g. Software Engineer" class="form-control job-title"
-             [(ngModel)]="candidate.jobTitle" (ngModelChange)="onJobTitleChange()">
+    <div class="col-sm-9 no-adding">
+
+      <div class="col-sm-6 form-group">
+        <label>Job Title</label>
+        <input name="jobTitle" placeholder="e.g. Software Engineer" class="form-control"
+               [(ngModel)]="candidate.jobTitle" (ngModelChange)="onJobTitleChange()">
+        <div class="error-messages" *ngIf="isTitleFilled">Job title should not be empty.</div>
+      </div>
+
+
+      <div class="col-sm-6 form-group">
+        <label>Current Company</label>
+        <!--<control-messages [control]="professionalDetailForm.controls.education"></control-messages>-->
+        <input name="jobTitle" placeholder="e.g. Software Engineer" class="form-control"
+               [(ngModel)]="candidate.jobTitle" (ngModelChange)="onJobTitleChange()">
+
+      </div>
+
+
+      <div class="col-sm-6 form-group">
+        <label>Current Location</label>
+        <!--<control-messages [control]="professionalDetailForm.controls.education"></control-messages>-->
+        <input name="jobTitle" placeholder="e.g. Software Engineer" class="form-control"
+               [(ngModel)]="candidate.jobTitle" (ngModelChange)="onJobTitleChange()">
+      </div>
+
+      <div class="col-sm-6 form-group">
+        <label>Highest Qualification</label>
+        <!--<control-messages [control]="professionalDetailForm.controls.education"></control-messages>-->
+        <select [(ngModel)]="candidate.professionalDetails.education" (change)="saveProfessionalData()">
+          <option *ngFor="let c of educationList" [ngValue]="c">{{c}}</option>
+        </select>
+      </div>
+
+      <div class="col-sm-6 form-group">
+        <label>Total Experience</label>
+        <!--<control-messages [control]="professionalDetailForm.controls.experience"></control-messages>-->
+        <select [(ngModel)]="candidate.professionalDetails.experience" (change)="saveProfessionalData()">
+          <option *ngFor="let c of experienceList" [ngValue]="c">{{c}}</option>
+        </select>
+      </div>
     </div>
+
     <div class="button-group clearfix">
       <button class="btn btn-default" (click)="onCancel()"
               [hidden]="showButton">Cancel
@@ -42,11 +79,16 @@
       </div>
 
       <div>
-        <p lass="truncate-text" class="user-name">
+        <p class="user-name">
           <span class="profile-name-first">{{candidateDetails.first_name}}</span>&nbsp;
           <span class="profile-name-last">{{candidateDetails.last_name}}</span>
           <span class="job-title" title="{{candidate.jobTitle}}">  {{candidate.jobTitle}}</span>
         </p>
+
+        <p class="profile-details truncate-text"><label>Current company</label> {{candidate.professionalDetails.currentCompany}}</p>
+        <p class="profile-details truncate-text"><label>Current Location</label> xxxxxxxxxxx</p>
+        <p class="profile-details truncate-text"><label>Total Experience</label> {{candidate.professionalDetails.experience}}</p>
+        <p class="profile-details truncate-text"><label>Highest Qualification</label> {{candidate.professionalDetails.education}}</p>
       </div>
     </div>
   </div>

@@ -119,6 +119,13 @@ class CandidateSchema {
         noticePeriod: String,
         relocate: String,
         industryExposure: String,
+        currentCompany: String,
+        location: {
+          city: String,
+          state: String,
+          country: String,
+          pin: String
+        },
       },
       employmentHistory: [{
         companyName: String,

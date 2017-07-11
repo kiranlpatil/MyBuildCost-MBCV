@@ -7,6 +7,7 @@ interface ProfessionalDetailsModel {
   noticePeriod: string;
   relocate: string;
   industryExposure: string;
+  currentCompany: string;
 }
 export = ProfessionalDetailsModel;
 

@@ -16,10 +16,6 @@ $label-border: #a7a7a7;
 $bg-tabs: #edf1f5;
 
 .profile-wrapper {
-  .wrapper-border {
-    //border: 1px solid $border-color;
-    //background: #fff;
-  }
 
   .btn-back {
     border: 0;
@@ -261,7 +257,7 @@ $bg-tabs: #edf1f5;
   }
 }
 
-.candidate-profile-wrapper {
+.candidate-dashboard-wrapper {
 
   .q-card-header {
     top: 90px;

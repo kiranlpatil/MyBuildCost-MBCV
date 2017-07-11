@@ -5,32 +5,6 @@
     <h4 class="heading">Professional Preferences & Experience Summary (Mandatory)</h4>
     <!-- <form [formGroup]="professionalDetailForm" (ngSubmit)="onNext(jobPostForm.value)">-->
     <div class="professional-data clearfix">
-      <div class="col-sm-3">
-        <label>Ready To Relocate?</label>
-        <!--  <control-messages [control]="professionalDetailForm.controls.relocate"></control-messages>-->
-        <select [(ngModel)]="candidate.professionalDetails.relocate" (change)="saveProfessionalData()">
-          <option *ngFor="let c of realocationList" [ngValue]="c">{{c}}</option>
-        </select>
-
-      </div>
-
-      <div class="col-sm-3">
-        <label>Education</label>
-        <!--<control-messages [control]="professionalDetailForm.controls.education"></control-messages>-->
-        <select [(ngModel)]="candidate.professionalDetails.education" (change)="saveProfessionalData()">
-          <option *ngFor="let c of educationList" [ngValue]="c">{{c}}</option>
-        </select>
-
-      </div>
-
-      <div class="col-sm-3">
-        <label>Experience</label>
-        <!--<control-messages [control]="professionalDetailForm.controls.experience"></control-messages>-->
-        <select [(ngModel)]="candidate.professionalDetails.experience" (change)="saveProfessionalData()">
-          <option *ngFor="let c of experienceList" [ngValue]="c">{{c}}</option>
-        </select>
-
-      </div>
 
       <div class="col-sm-3">
         <label>Current Salary</label>
@@ -42,6 +16,23 @@
       </div>
 
       <div class="col-sm-3">
+        <label>Ready To Relocate?</label>
+        <!--  <control-messages [control]="professionalDetailForm.controls.relocate"></control-messages>-->
+        <select [(ngModel)]="candidate.professionalDetails.relocate" (change)="saveProfessionalData()">
+          <option *ngFor="let c of realocationList" [ngValue]="c">{{c}}</option>
+        </select>
+
+      </div>
+
+      <div class="col-sm-3">
+        <label>Company Culture</label>
+        <!-- <control-messages [control]="professionalDetailForm.controls.noticePeriod"></control-messages>-->
+        <select [(ngModel)]="candidate.professionalDetails.industryExposure" (change)="saveProfessionalData()">
+          <option *ngFor="let c of industryExposureList" [ngValue]="c">{{c}}</option>
+        </select>
+      </div>
+
+      <div class="col-sm-3">
         <label>Notice Period</label>
         <!-- <control-messages [control]="professionalDetailForm.controls.noticePeriod"></control-messages>-->
         <select [(ngModel)]="candidate.professionalDetails.noticePeriod" (change)="saveProfessionalData()">
@@ -49,13 +40,7 @@
         </select>
       </div>
 
-      <div class="col-sm-3">
-        <label>Industry Culture</label>
-        <!-- <control-messages [control]="professionalDetailForm.controls.noticePeriod"></control-messages>-->
-        <select [(ngModel)]="candidate.professionalDetails.industryExposure" (change)="saveProfessionalData()">
-          <option *ngFor="let c of industryExposureList" [ngValue]="c">{{c}}</option>
-        </select>
-      </div>
+
     </div>
     <div class="col-sm-12">
       <div class="button-group clearfix">
@@ -79,12 +64,11 @@
                 (click)="highlightedSection.name='Professional-Details';highlightedSection.isDisable=true;disableButton=false;showButton=false"
                 [hidden]="highlightedSection.isDisable" title="Edit Professional Preferences & Experience Summary"></button>
       </h4>
-      <p><label>Ready To Relocate?</label> {{candidate.professionalDetails.relocate}}</p>
-      <p><label>Education</label> {{candidate.professionalDetails.education}}</p>
-      <p><label>Experience</label> {{candidate.professionalDetails.experience}}</p>
+
       <p><label>Current Salary</label> {{candidate.professionalDetails.currentSalary}}</p>
+      <p><label>Ready To Relocate?</label> {{candidate.professionalDetails.relocate}}</p>
+      <p><label>Company Culture</label> {{candidate.professionalDetails.industryExposure}}</p>
       <p><label>Notice Period</label> {{candidate.professionalDetails.noticePeriod}}</p>
-      <p><label>Industry Exposure</label> {{candidate.professionalDetails.industryExposure}}</p>
     </div>
   </div>
 </div>
