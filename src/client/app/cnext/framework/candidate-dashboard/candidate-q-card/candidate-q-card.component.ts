@@ -3,6 +3,8 @@ import { JobQcard } from '../../model/JobQcard';
 import { LocalStorage } from '../../../../framework/shared/constants';
 import { LocalStorageService } from '../../../../framework/shared/localstorage.service';
 import { CandidateDashboardService } from '../candidate-dashboard.service';
+import {Message} from "../../../../framework/shared/message";
+import {MessageService} from "../../../../framework/shared/message.service";
 
 
 @Component({
@@ -21,7 +23,7 @@ export class CandidateQCardComponent {
 
   private jobId: string;
 
-  constructor(private candidateDashboardService: CandidateDashboardService) {
+  constructor(private candidateDashboardService: CandidateDashboardService,private messageService: MessageService) {
   }
 
   ngOnChanges(changes: any) {
@@ -49,6 +51,7 @@ export class CandidateQCardComponent {
     this.candidateDashboardService.blockJob().subscribe(
       data => {
         this.onAction.emit('block');
+        this.displayMsg("REJECT");
       });
   }
 
@@ -65,8 +68,18 @@ export class CandidateQCardComponent {
     this.candidateDashboardService.applyJob().subscribe(
       data => {
         this.onAction.emit('apply');
+        this.displayMsg("APPLY");
       },
       error => (console.log(error)));//TODO remove on error
+  }
+
+  displayMsg(condition){
+    var message = new Message();
+    message.isError = false;
+    if(condition=="APPLY"){message.custom_message = "You appiled for this job.";}
+    if(condition=="REJECT"){message.custom_message = "You rejected this job.";}
+    if(condition=="DELETE"){message.custom_message = "Removed job from 'Not Interested' list. And added to matching jobs";}
+    this.messageService.message(message);
   }
 
   closeJob(isHide : boolean) {
@@ -79,6 +92,7 @@ export class CandidateQCardComponent {
     this.candidateDashboardService.removeBlockJob().subscribe(
       data => {
         this.onAction.emit('delete');
+        this.displayMsg("DELETE");
       });
   }
 

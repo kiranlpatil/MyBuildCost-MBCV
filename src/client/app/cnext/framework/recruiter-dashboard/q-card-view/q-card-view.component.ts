@@ -11,6 +11,8 @@ import { RecruiterJobView } from '../../model/recruiter-job-view';
 import { Candidate } from '../../model/candidate';
 import { CandidateDetail } from '../../../../framework/registration/candidate/candidate';
 import { CandidateProfileService } from '../../candidate-profile/candidate-profile.service';
+import {Message} from "../../../../framework/shared/message";
+import {MessageService} from "../../../../framework/shared/message.service";
 /*import underline = Chalk.underline;*/
 
 
@@ -46,7 +48,7 @@ export class QCardviewComponent implements OnChanges {
 
 
   constructor(private qCardFilterService: QCardFilterService,
-              private profileCreatorService: CandidateProfileService, private qCardViewService: QCardViewService) {
+              private profileCreatorService: CandidateProfileService, private qCardViewService: QCardViewService, private messageService: MessageService) {
 
    /* this.qCardFilterService.candidateFilterValue$.subscribe(
       (data: QCardFilter) => {
@@ -135,9 +137,21 @@ export class QCardviewComponent implements OnChanges {
 
     if (sourceListName === ValueConstant.CART_LISTED_CANDIDATE && (destinationListName === ValueConstant.CART_LISTED_CANDIDATE || destinationListName === ValueConstant.REJECTED_LISTED_CANDIDATE))
       this.addedTocart.emit(false);
+    if(destinationListName=="cartListed"&& action=="add"){this.displayMsg("cartListed");}
+    if(destinationListName=="rejectedList"&& action=="add"){this.displayMsg("rejectedList");}
+    if(destinationListName=="cartListed"&& action=="remove"){this.displayMsg("removedcartListed");}
+    if(destinationListName=="rejectedList"&& action=="remove"){this.displayMsg("removedrejectedList");}
 
   }
-
+  displayMsg(condition){
+    var message = new Message();
+    message.isError = false;
+    if(condition=="cartListed"){message.custom_message = "Successfully added in cart";}
+    if(condition=="rejectedList"){message.custom_message = "You Rejected this Candidate. Moved to rejected list";}
+    if(condition=="removedcartListed"){message.custom_message = "Removed from cart. And added in matching Jobs";}
+    if(condition=="removedrejectedList"){message.custom_message = "Removed from rejected list. And added in matching Jobs";}
+    this.messageService.message(message);
+  }
   addRemoveToShortList(candidate: CandidateQCard) {
     this.isShortlistedclicked=true;
     let action: string;
