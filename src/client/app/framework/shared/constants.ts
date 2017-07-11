@@ -73,7 +73,7 @@ export class NavigationRoutes {
   public static APP_DASHBOARD: string = '/dashboard';
   public static APP_CANDIDATE_DASHBOARD: string = '/candidate_dashboard';
   public static APP_RECRUITER_DASHBOARD: string = '/recruiterdashboard';
-  public static APP_LOGIN: string = '/login';
+  public static APP_LOGIN: string = '/signin';
   public static APP_START: string = '/';
   public static APP_LANDING: string = '/landing';
   public static VERIFY_USER: string = '/verify_user';

@@ -6,7 +6,7 @@ import {CandidateComponent} from "./index";
 
 export const CandidateRoutes: Route[] = [
   {
-    path: 'candidate_registration',
+    path: 'applicant-signup',
     component: CandidateComponent
   }
 ];

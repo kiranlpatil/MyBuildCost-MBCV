@@ -1,0 +1,83 @@
+
+
+.registration {
+  display: table;
+  position: relative;
+
+  .content {
+    left: 50%;
+    margin: 65px 0 20px;
+    position: relative;
+    top: 0;
+    transform: translate(-50%, 0);
+    width: 40%;
+    //border: 1px solid transparent;
+  }
+
+  .radio-group {
+    padding: 0 15px 15px;
+
+    div {
+      margin: 0 0 15px;
+    }
+  }
+
+  input {
+
+    &:focus,
+    &:active {
+      outline: none;
+    }
+  }
+}
+
+@media only screen and (max-width: 1366px) {
+  .registration {
+    .content {
+      width: 50%;
+    }
+  }
+}
+
+@media only screen and (max-width: 1280px) {
+  .registration {
+    .content {
+      width: 60%;
+    }
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .registration {
+    .content {
+      width: 70%;
+    }
+  }
+}
+
+@media only screen and (max-width: 980px) {
+  .registration {
+    .content {
+      width: 90%;
+    }
+
+    .form-group {
+      padding: 0;
+      width: 100%;
+    }
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .registration {
+    .content {
+      .radio-group {
+        padding: 0 0 15px;
+      }
+    }
+
+    form {
+      padding: 15px;
+    }
+  }
+}

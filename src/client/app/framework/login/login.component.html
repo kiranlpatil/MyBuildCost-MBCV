@@ -1,5 +1,5 @@
 <section class="main-form-wrapper login">
-  <main-header></main-header>
+  <main-header [MainHeaderMenuHideShow]="mainHeaderMenuHideShow"></main-header>
 
   <app-loader></app-loader>
 
@@ -35,7 +35,7 @@
       <div class="button-group">
         <button type="submit" class="btn btn-success">Sign in</button>
         <div class="other-links">
-          <a (click)="onSignUp()">Register</a>&nbsp; &nbsp; | &nbsp; &nbsp;
+          <!--<a (click)="onSignUp()">Register</a>&nbsp; &nbsp; | &nbsp; &nbsp;-->
           <a (click)="onForgotPassword()">Forgot Password</a>
         </div>
       </div>

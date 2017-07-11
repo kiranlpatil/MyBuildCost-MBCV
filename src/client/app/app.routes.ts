@@ -32,7 +32,6 @@ import {JobCompare} from "./cnext/framework/single-page-compare-view/job-compare
 export const routes: Routes = [
   ...LandingPageRoutes,
   ...LoginRoutes,
-  ...RegistrationRoutes,
   ...CandidateRoutes,
   ...RecruiterRoutes,
   ...ActivateUserRoutes,

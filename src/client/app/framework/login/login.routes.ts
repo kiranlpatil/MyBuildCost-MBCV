@@ -4,7 +4,7 @@ import {LoginComponent} from "./index";
 
 export const LoginRoutes: Route[] = [
   {
-    path: 'login',
+    path: 'signin',
     component: LoginComponent
   }
 ];

@@ -40,6 +40,7 @@ export class LoginComponent implements OnInit {
   private UNDER_LICENCE: string;
   private BODY_BACKGROUND: string;
   private submitStatus: boolean;
+  private mainHeaderMenuHideShow: string;
 
   constructor(private _router: Router, private loginService: LoginService, private themeChangeService: ThemeChangeService,
               private messageService: MessageService, private _ngZone: NgZone,
@@ -59,6 +60,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.mainHeaderMenuHideShow = 'signin';
     window.history.forward();
     if (parseInt(LocalStorageService.getLocalValue(LocalStorage.IS_LOGGED_IN)) === 1) {
       this._router.navigate([NavigationRoutes.APP_CANDIDATE_DASHBOARD]);

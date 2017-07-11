@@ -36,6 +36,7 @@ export class RecruiterComponent implements OnInit {
   private isShowMessage: boolean = false;
   private myPassword: string = '';
   private storedLocation: Location = new Location();
+  private mainHeaderMenuHideShow:string;
   private address: any;
   private submitStatus: boolean;
   private companySizeErrorMessage: string;
@@ -46,11 +47,11 @@ export class RecruiterComponent implements OnInit {
               private recruiterService: RecruiterService, private recruitmentForService: RecruitingService,
               private messageService: MessageService, private formBuilder: FormBuilder) {
 
-    recruitmentForService.showRecruitmentFor$.subscribe(
+    /*recruitmentForService.showRecruitmentFor$.subscribe(
       data => {
         this.isRecruitingForself = data;
       }
-    );
+    );*/
 
     this.recruiterForm = this.formBuilder.group({
       'company_name': ['', ValidationService.requireCompanyNameValidator],
@@ -70,6 +71,7 @@ export class RecruiterComponent implements OnInit {
 
   ngOnInit() {
     this.model = this.recruiterForm.value;
+    this.mainHeaderMenuHideShow = 'recruiter';
 
 
     this.http.get('companysize')
@@ -185,5 +187,11 @@ export class RecruiterComponent implements OnInit {
 
       this.isShowMessage = false;
     }
+  }
+  recruitmentForOthers() {
+    this.isRecruitingForself = false;
+  }
+  recruitmentForSelf() {
+    this.isRecruitingForself = true;
   }
 }

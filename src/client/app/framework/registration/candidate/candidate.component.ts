@@ -28,6 +28,7 @@ export class CandidateComponent implements OnInit {
   private BODY_BACKGROUND: string;
   private passingYear: string;
   private validBirthYearList = new Array();
+  private mainHeaderMenuHideShow:string;
   private year: any;
   private currentDate: any;
   private submitStatus: boolean;
@@ -57,6 +58,7 @@ export class CandidateComponent implements OnInit {
 
   ngOnInit() {
     this.validBirthYearList = this.dateService.createBirthYearList(this.year);
+    this.mainHeaderMenuHideShow = 'applicant';
   }
 
 

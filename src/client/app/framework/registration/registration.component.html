@@ -1,14 +1,14 @@
 <section class="main-form-wrapper registration">
   <main-header></main-header>
-  <app-loader></app-loader>
+  <!--<app-loader></app-loader>-->
   <div class="content">
 
     <h5>Register </h5>
 
     <form>
 
-      <div class="radio-group text-left clearfix">
-        <div>
+      <!--<div class="radio-group text-left clearfix">-->
+        <!--<div>
           <label class="lable-name">Register as</label>
           <label for="candidate" class="radio-inline">
             <input type="radio" id="candidate" name="register_as" value="candidate" (click)="showHideCandidate()"
@@ -21,9 +21,9 @@
             Recruiter
           </label>
 
-        </div>
+        </div>-->
 
-        <div class="registration-btn-radio text-left clearfix" [hidden]="isRecruiter">
+       <!-- <div class="registration-btn-radio text-left clearfix" *ngIf="isCandidate">
           <label class="lable-name">Recruiting for</label>
           <label for="self" class="radio-inline">
             <input type="radio" id="self" name="recruiting_for" value="self" (click)="recruitmentForSelf()" checked/>
@@ -34,16 +34,17 @@
             <input type="radio" id="others" name="recruiting_for" value="others" (click)="recruitmentForOthers()"/>
             Other company
           </label>
-        </div>
-      </div>
+        </div>-->
 
-      <div class="Employee_form" [hidden]="isCandidate">
+
+     <!-- <div class="Employee_form" *ngIf="!isCandidate">
         <cn-candidate-registration></cn-candidate-registration>
       </div>
 
-      <div class="Employer_form" [hidden]="isRecruiter">
+      <div class="Employer_form" *ngIf="isCandidate">
         <cn-recruiter-registration></cn-recruiter-registration>
-      </div>
+      </div>-->
+      <router-outlet></router-outlet>
     </form>
   </div>
 </section>

@@ -1,4 +1,4 @@
-import {Component} from "@angular/core";
+import {Component, OnInit} from "@angular/core";
 import {Router} from "@angular/router";
 import {RegistrationService} from "./registration.service";
 import {Registration} from "./registration";
@@ -7,7 +7,7 @@ import {CommonService, MessageService} from "../shared/index";
 import {ImagePath} from "../shared/constants";
 import {LoaderService} from "../shared/loader/loader.service";
 import {RecruitingService} from "../shared/recruiting.service";
-
+import {ActivatedRoute, Params, Router} from "@angular/router";
 
 @Component({
   moduleId: module.id,
@@ -16,24 +16,38 @@ import {RecruitingService} from "../shared/recruiting.service";
   styleUrls: ['registration.component.css'],
 })
 
-export class RegistrationComponent {
+export class RegistrationComponent implements OnInit {
   model = new Registration();
   isPasswordConfirm: boolean;
   isFormSubmitted = false;
   userForm: FormGroup;
   error_msg: string;
-  isCandidate: boolean = false;
+  isCandidate: boolean;
   isRecruiter: boolean = true;
   isShowErrorMessage: boolean = true;
   isRecruitingForself: boolean = true;
   BODY_BACKGROUND: string;
 
-  constructor(private commonService: CommonService, private _router: Router,
+  constructor(private activatedRoute: ActivatedRoute, private commonService: CommonService, private _router: Router,
               private registrationService: RegistrationService, private messageService: MessageService,
               private recruitingService: RecruitingService, private formBuilder: FormBuilder, private loaderService: LoaderService) {
 
-
+    this.isCandidate = false;
     this.BODY_BACKGROUND = ImagePath.BODY_BACKGROUND;
+  }
+
+  ngOnInit() {
+   /* this.activatedRoute.queryParams.subscribe((params: Params) => {
+      //let access_token = params['access_token'];
+      var id = String(params['id']);
+      //console.log('id',id);
+     //alert(id);
+      if(id == 'recruiter') {
+        //alert(id);
+        this.showHideRecruiter();
+      }
+    });
+*/
   }
 
   /*
@@ -99,16 +113,18 @@ export class RegistrationComponent {
    */
 
   showHideCandidate() { //TODO use single variable for all view.
-    this.isCandidate = false;
-    this.isRecruiter = true;
+    this.isCandidate = !this.isCandidate;
+    //this.isRecruiter = true;
+    //alert(this.isCandidate);
   }
 
   showHideRecruiter() {
-    this.isRecruiter = false;
-    this.isCandidate = true;
+    this.isCandidate = !this.isCandidate;
+    //this.isCandidate = true;
+    //alert(this.isCandidate);
   }
 
-  recruitmentForSelf() {
+ /* recruitmentForSelf() {
     this.isRecruitingForself = true;
     this.recruitingService.change(this.isRecruitingForself);
 
@@ -118,6 +134,6 @@ export class RegistrationComponent {
     this.isRecruitingForself = false;
     this.recruitingService.change(this.isRecruitingForself);
 
-  }
+  }*/
 
 }
