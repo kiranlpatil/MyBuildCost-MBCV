@@ -143,7 +143,7 @@ export class QCardviewComponent implements OnChanges {
     if(destinationListName=="rejectedList"&& action=="remove"){this.displayMsg("removedrejectedList");}
 
   }
-  displayMsg(condition){
+  displayMsg(condition:string){
     var message = new Message();
     message.isError = false;
     if(condition=="cartListed"){message.custom_message = "Successfully added in cart";}
