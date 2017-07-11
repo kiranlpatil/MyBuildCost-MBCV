@@ -94,7 +94,7 @@ $white: #fff;
     display: block;
     position: fixed;
     bottom: -7px;
-    right: 0;
+    right: 10px;
     background: transparent;
     z-index: 100;
     border-radius: 0;
@@ -130,14 +130,23 @@ $white: #fff;
 
     .left-content {
       background: #f0f5f7;
-      position: fixed;
-      height: 100%;
-      top: 7px;
-      left: 15px;
-      overflow: auto;
+      position: absolute;
+      min-height: 100%;
       width: 225px;
       padding: 15px;
       z-index: 1;
+      left: 0;
+      top: 0;
+    }
+    .left-container {
+      background: #f0f5f7;
+      position: absolute;
+      left: 0;
+      top: 0px;
+      width: 225px;
+      padding: 15px;
+      z-index: 1;
+      height: calc(100vh - 72px);
     }
 
     .right-content {

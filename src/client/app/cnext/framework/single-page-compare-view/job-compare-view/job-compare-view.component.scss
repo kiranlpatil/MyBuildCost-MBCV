@@ -13,7 +13,7 @@ $red: #e82c0c;
   span,
   label {
     color: $text-color;
-    font-size: 13px;
+    font-size: 12px;
     word-break: keep-all;
   }
 
@@ -51,7 +51,7 @@ $red: #e82c0c;
     span {
       color: $text-color;
       width: 100%;
-      font-size: 11px;
+      font-size: 12px;
     }
 
     label {
@@ -195,5 +195,12 @@ $red: #e82c0c;
   div {
     padding: 6px 6px 0;
     color: #fff;
+  }
+  .user-job-label {
+    label,
+    .company-name,
+    .jobTitle-name {
+      font-size: 12px;
+    }
   }
 }

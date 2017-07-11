@@ -269,16 +269,17 @@ $white: #ffffff;
   display: inline-block;
   text-align: center;
   width: 100%;
-  height: 50px;
+  height: 56px;
   overflow: hidden;
   span {
-    font-size: 11px;
+    font-size: 12px;
     text-align: center;
-    display: table-row;
+    display: table;
     word-break: break-word;
     height: 60px;
+    margin: 0 auto;
     word-wrap: break-word;
-    padding: 0 20px;
+    padding: 0px;
     color: #B3B3B3;
   }
 }
@@ -322,7 +323,7 @@ $white: #ffffff;
 
     li {
       float: left;
-      font-size: 11px;
+      font-size: 12px;
       margin-right: 15px;
     }
 
