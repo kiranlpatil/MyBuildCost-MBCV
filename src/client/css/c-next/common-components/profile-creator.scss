@@ -94,6 +94,8 @@ $theme-color: #3694d1;
 
 .main-content {
   background: $white;
+  border: 1px solid $border-color;
+  margin-bottom: 15px;
   //padding: 7px;
   padding: 0;
   text-align: left;

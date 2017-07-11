@@ -1,7 +1,7 @@
 <div class="modal-bg" *ngIf="highlightedSection.name=='Profile'"></div>
 <div class="section-container" *ngIf="highlightedSection.name=='Profile'">
   <cn-tool-tip [message]="tooltipMessage"></cn-tool-tip>
-  <div class="main-content clearfix modal-content">
+  <div class="main-content clearfix edit-modal-content">
     <h4 class="heading">My Profile</h4>
 
     <div class="col-sm-3 text-center">
@@ -21,8 +21,8 @@
       <button class="btn btn-default" (click)="onCancel()"
               [hidden]="showButton">Cancel
       </button>
-      <button class="btn btn-success" (click)="onNext()" [hidden]="!showButton" [disabled]="disableButton">Next</button>
-        <button class="btn btn-success"  (click)="onSave()" [hidden]="showButton" [disabled]="disableButton">Save</button>
+      <button class="btn btn-success" (click)="onNext()" [hidden]="!showButton">Next</button>
+        <button class="btn btn-success"  (click)="onSave()" [hidden]="showButton">Save</button>
     </div>
   </div>
 </div>
@@ -33,6 +33,9 @@
       <!--
             <span class=" glyphicon glyphicon-lock" title="you can edit this field after {{highlightedSection.date| date:'mediumDate'}}" *ngIf="highlightedSection.isLocked"></span>
       -->
+      <button class="btn-edit"
+              (click)="highlightedSection.name='Profile';disableButton=false;showButton=false;highlightedSection.isDisable=true"
+              [hidden]="highlightedSection.isDisable" title="Edit My Profile"></button>
       <div class="img-container">
         <!--<img src="{{image_path}}" alt="Profile Picture"/>-->
         <cn-profile-picture (onPictureUpload)="onPictureUpload($event)"></cn-profile-picture>
@@ -42,11 +45,8 @@
         <p lass="truncate-text" class="user-name">
           <span class="profile-name-first">{{candidateDetails.first_name}}</span>&nbsp;
           <span class="profile-name-last">{{candidateDetails.last_name}}</span>
-          <button class="btn-edit"
-                  (click)="highlightedSection.name='Profile';disableButton=false;showButton=false;highlightedSection.isDisable=true"
-                  [hidden]="highlightedSection.isDisable" title="Edit My Profile"></button>
+          <span class="job-title" title="{{candidate.jobTitle}}">  {{candidate.jobTitle}}</span>
         </p>
-        <p class="truncate-text"><label>Job Title</label> <span title="{{candidate.jobTitle}}">{{candidate.jobTitle}}</span></p>
       </div>
     </div>
   </div>

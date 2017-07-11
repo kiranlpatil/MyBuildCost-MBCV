@@ -21,7 +21,7 @@
   </div>
 </div>
 <div class="section-container " *ngIf="highlightedSection.name!='Complexities'">
-  <div class="main-content">
+  <div class="main-content clearfix">
     <div class="compact-view">
       <a data-toggle="collapse" data-target="#demo" (click)="showMore = !showMore">
         <h4 class="heading">Complexities handled for the above Capabilities
@@ -39,7 +39,6 @@
     </div>
   </div>
 </div>
-<div class="clearfix divider clear"></div>
 <!--<div [class.modal-bg]="highlightedSection.name!='Complexities'"></div>-->
 
 <div class="modal popup" [style.display]="getStyleModal()">

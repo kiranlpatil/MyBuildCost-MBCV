@@ -9,7 +9,10 @@ import {CandidateDetail} from "../../../framework/registration/candidate/candida
   moduleId: module.id,
   selector: 'cn-profile-description',
   templateUrl: 'profile-description.component.html',
-  styleUrls: ['profile-description.component.css']
+  styleUrls: ['profile-description.component.css'],
+   host: {
+         '(document:keydown)': 'keyboardInput($event)'
+       }
 })
 
 export class ProfileDescriptionComponent implements OnInit {
@@ -70,6 +73,7 @@ export class ProfileDescriptionComponent implements OnInit {
   }
 
   onNext() {
+    console.log("from next");
     this.candidate.industry = this.changedIndustry;
     this.candidate.industry.roles = [];
     this.disableButton = false;
@@ -86,6 +90,7 @@ export class ProfileDescriptionComponent implements OnInit {
   }
 
   onSave() {
+    console.log("from save");
 //    this.compactView = true;
     if (this.changedIndustry.name !== this.savedIndustry || this.candidate.jobTitle !== this.savedJobTitle) {
       if(this.changedIndustry.name !== this.savedIndustry) {
@@ -126,11 +131,21 @@ export class ProfileDescriptionComponent implements OnInit {
   }
 
   onCancel() {
+    console.log("from cancel");
     this.highlightedSection.name = 'none';
     this.highlightedSection.isDisable = false;
     this.candidate.jobTitle = this.savedJobTitle;
     this.changedIndustry = new Industry();
     this.changedIndustry.name = this.savedIndustry;
+  }
+
+  keyboardInput(event: KeyboardEvent) {
+    if (event.keyCode === 39) {
+      this.onNext();
+    }
+    if (event.keyCode === 37) {
+      this.onCancel();
+    }
   }
 }
 

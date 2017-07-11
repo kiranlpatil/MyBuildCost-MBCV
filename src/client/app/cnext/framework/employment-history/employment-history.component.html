@@ -40,7 +40,7 @@
 </div>
 
 <div class="section-container"
-     [ngClass]="(highlightedSection.name=='EmploymentHistory')?'full-width':'quarter-width'">
+     [ngClass]="(highlightedSection.name=='EmploymentHistory')?'full-width':'half-width'">
   <div class="main-content" *ngIf="highlightedSection.name !='EmploymentHistory'">
     <div class="compact-view clearfix">
       <div *ngIf="employeeHistory.controls.employeeHistories.controls.length==0">
