@@ -1,13 +1,71 @@
-<div class="select-industry clearfix">
-  <div class="col-sm-12 no-padding">
-    <div class="max-height">
-      <div class="select-option" *ngFor="let item of industries;let i = index">
-        <label>
-          <input type="radio" name="item.name" id="{{item.name}}" value="{{item.name}}"
-                 (click)="onValueChange(item)" [checked]="item.name===selectedIndustry.name">
-          <span>{{item.name}}</span>
-        </label>
+<div class="modal-bg" *ngIf="highlightedSection.name=='Industry'"></div>
+<div class="section-container" *ngIf="highlightedSection.name=='Industry'">
+  <!--
+    <cn-tool-tip [message]="tooltipMessage"></cn-tool-tip>
+  -->
+  <div class="main-content clearfix modal-content">
+    <div class="col-sm-9 profile-description">
+      <div class="select-industry clearfix">
+        <div class="col-sm-12 no-padding">
+          <h4>Select your Industry (Any One)</h4>
+          <div class="max-height">
+            <div class="select-option" *ngFor="let item of industries;let i = index">
+              <label>
+                <input type="radio" name="item.name" id="{{item.name}}" value="{{item.name}}"
+                       (click)="onValueChange(item)" [checked]="item.name===selectedIndustry.name">
+                <span>{{item.name}}</span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="button-group clearfix">
+      <button class="btn btn-success" (click)="onNext()" [disabled]="disableButton">Next</button>
+    </div>
+  </div>
+</div>
+<div class="section-container">
+  <div class="main-content profile-main-content" *ngIf="highlightedSection.name!='Industry'">
+    <div class="compact-view clearfix">
+      <!--[hidden]="highlightedSection.isLocked"-->
+      <!--
+            <span class=" glyphicon glyphicon-lock" title="you can edit this field after {{highlightedSection.date| date:'mediumDate'}}" *ngIf="highlightedSection.isLocked"></span>
+      -->
+
+
+      <div>
+        <p lass="truncate-text" class="user-name">
+
+          <button class="btn-edit"
+                  (click)="highlightedSection.name='Industry';disableButton=false;showButton=false;highlightedSection.isDisable=true"
+                  [hidden]="highlightedSection.isDisable" title="Edit My Profile"></button>
+        </p>
+        <p lass="truncate-text"><label>Industry</label> <span title="{{selectedIndustry.name}}">{{selectedIndustry.name}}</span>
+        </p>
+      </div>
+    </div>
+  </div>
+  <!-- <div [class.modal-bg]="highlightedSection.name!='Profile'"></div>-->
+</div>
+
+<!--
+<div class="modal popup" [style.display]="getStyleModal()">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-sm-12">
+            <p>Warning !!!</p><p>
+            You have opted to delete an area of work. This would delete the hierarchy of any capabilities and complexities that you have selected under this area of work. This would not impact the capabilities and complexities that you have selected under any other area of work</p>
+            <div class="button-group">
+              <button class="btn btn-success" (click)="showModalStyle = !showModalStyle;onNext()">Ok</button>
+              <button class="btn btn-default" (click)="showHideModal()">Cancel</button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </div>
+-->

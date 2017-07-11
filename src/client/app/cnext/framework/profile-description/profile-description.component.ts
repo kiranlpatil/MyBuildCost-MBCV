@@ -62,18 +62,7 @@ export class ProfileDescriptionComponent implements OnInit {
     }
   }
 
-  onIndustryChange(newIndustry: Industry) {
-    if (newIndustry !== undefined && newIndustry.name !== "") {
-      /*
-       if (this.savedIndustry !== newIndustry.name) {
-       */
-      this.changedIndustry = newIndustry;
-      /* }*/
-      if (this.candidate.jobTitle && this.candidate.jobTitle !== '') {
-        this.disableButton = false;
-      }
-    }
-  }
+
 
   onPictureUpload(imagePath: string) {
     this.candidate.basicInformation.picture = imagePath;
@@ -82,11 +71,11 @@ export class ProfileDescriptionComponent implements OnInit {
 
   onNext() {
     this.candidate.industry = this.changedIndustry;
-    this.candidate.industry.roles = new Array();
+    this.candidate.industry.roles = [];
     this.disableButton = false;
     this.savedIndustry = this.candidate.industry.name;
 //    this.compactView = true;
-    this.highlightedSection.name = 'Work-Area';
+    this.highlightedSection.name = 'Industry';
     this.highlightedSection.isDisable = false;
 
     this.onComplete.emit(this.candidate);

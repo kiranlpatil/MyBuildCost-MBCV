@@ -16,11 +16,6 @@
       <div class="error-messages" *ngIf="isTitleFilled">Job title should not be empty.</div>
       <input name="jobTitle" placeholder="e.g. Software Engineer" class="form-control job-title"
              [(ngModel)]="candidate.jobTitle" (ngModelChange)="onJobTitleChange()">
-
-      <div class="clearfix">&nbsp;</div>
-      <h4>Select your Industry (Any One)</h4>
-      <cn-industry-list [selectedIndustry]="candidate.industry"
-                        (valueChange)="onIndustryChange($event)"></cn-industry-list>
     </div>
     <div class="button-group clearfix">
       <button class="btn btn-default" (click)="onCancel()"
@@ -31,8 +26,7 @@
     </div>
   </div>
 </div>
-<div class="section-container"
-     [ngClass]="(highlightedSection.name !=='Work-Area' && highlightedSection.name !=='Capabilities')?'half-width':'full-width'">
+<div class="section-container">
   <div class="main-content profile-main-content" *ngIf="highlightedSection.name!='Profile'">
     <div class="compact-view clearfix">
       <!--[hidden]="highlightedSection.isLocked"-->
@@ -53,28 +47,10 @@
                   [hidden]="highlightedSection.isDisable" title="Edit My Profile"></button>
         </p>
         <p class="truncate-text"><label>Job Title</label> <span title="{{candidate.jobTitle}}">{{candidate.jobTitle}}</span></p>
-        <p lass="truncate-text"><label>Industry</label> <span title="{{candidate.industry.name}}">{{candidate.industry.name}}</span></p>
       </div>
     </div>
   </div>
   <!-- <div [class.modal-bg]="highlightedSection.name!='Profile'"></div>-->
 </div>
 
-<div class="modal popup" [style.display]="getStyleModal()">
-  <div class="modal-dialog modal-md">
-    <div class="modal-content">
-      <div class="modal-body">
-        <div class="row">
-          <div class="col-sm-12">
-            <p>Warning !!!</p><p>
-              You have opted to delete an area of work. This would delete the hierarchy of any capabilities and complexities that you have selected under this area of work. This would not impact the capabilities and complexities that you have selected under any other area of work</p>
-            <div class="button-group">
-              <button class="btn btn-success" (click)="showModalStyle = !showModalStyle;onNext()">Ok</button>
-              <button class="btn btn-default" (click)="showHideModal()">Cancel</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+

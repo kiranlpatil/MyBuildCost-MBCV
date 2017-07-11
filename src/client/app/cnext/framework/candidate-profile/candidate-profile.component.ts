@@ -5,6 +5,7 @@ import {ComplexityService} from "../complexity.service";
 import {Candidate, Section} from "../model/candidate";
 import {CandidateProfileService} from "./candidate-profile.service";
 import {Role} from "../model/role";
+import {Industry} from "../model/industry";
 
 @Component({
   moduleId: module.id,
@@ -35,6 +36,7 @@ export class CandidateProfileComponent implements OnInit {
   private showAwards:boolean = false;
   private showAboutMySelf:boolean = false;
   private isRolesShow:boolean = true;
+  private isIndustryShow: boolean = true;
   private candidate:Candidate = new Candidate();
   private candidateForRole:Role[];
   private candidateForCapability:Role[];
@@ -71,12 +73,19 @@ export class CandidateProfileComponent implements OnInit {
 
   onProfileDescriptionComplete() {
     this.saveCandidateDetails();
-    this.getRoles();
-    this.isRolesShow = false;
-    this.candidateForRole = this.candidate.industry.roles;
-    this.candidateForCapability = this.candidate.industry.roles;
+    this.isIndustryShow = false;
   }
 
+  onIndustryChange(newIndustry: Industry) {
+    if (newIndustry !== undefined && newIndustry.name !== '') {
+      this.candidate.industry = newIndustry;
+      this.saveCandidateDetails();
+      this.getRoles();
+      this.isRolesShow = false;
+      this.candidateForRole = this.candidate.industry.roles;
+      this.candidateForCapability = this.candidate.industry.roles;
+    }
+  }
 
   onWorkAreaComplete(roles:Role[]) {
     this.candidate.industry.roles = roles;
@@ -283,6 +292,7 @@ export class CandidateProfileComponent implements OnInit {
 
     if (this.highlightedSection.name !== 'GuideTour') {
       if (this.candidate.industry.name !== undefined) {
+        this.isIndustryShow = false;
         this.isRolesShow = false;
         this.getRoles();
         if (this.candidate.industry.roles.length > 0) {

@@ -31,7 +31,8 @@
       <div class="wrapper wrapper-border">
         <cn-profile-description [candidate]="candidate" [highlightedSection]="highlightedSection"
                                 (onComplete)="onProfileDescriptionComplete($event)"></cn-profile-description>
-
+        <cn-industry-list [selectedIndustry]="candidate.industry" [highlightedSection]="highlightedSection"
+                          (valueChange)="onIndustryChange($event)" [hidden]="isIndustryShow"></cn-industry-list>
         <div id="work-area">
           <cn-work-area [roles]="rolesForMain" [selectedRoles]="candidateForRole"
                         [highlightedSection]="highlightedSection"
