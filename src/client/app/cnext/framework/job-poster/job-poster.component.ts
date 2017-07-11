@@ -11,6 +11,7 @@ import {LocalStorage, NavigationRoutes} from "../../../framework/shared/constant
 import {LocalStorageService} from "../../../framework/shared/localstorage.service";
 import {ShowQcardviewService} from "../showQCard.service";
 import {Router} from "@angular/router";
+import {Industry} from "../model/industry";
 
 @Component({
   moduleId: module.id,
@@ -33,7 +34,7 @@ export class JobPosterComponent implements OnInit {
   private setCapabilityMatrix: boolean = true;
   private isShowComplexity: boolean = false;
   private isShowRoleList: boolean = false;
-  private isShowRoletype: boolean = false;
+  private isShowIndustryList: boolean = false;
   private isShowCapability: boolean = false;
   private isShowProficiency: boolean = false;
   private showIndustryExposure: boolean = false;
@@ -113,7 +114,6 @@ export class JobPosterComponent implements OnInit {
     this.showQCardView.change(this.jobPosterModel);
   }
   onBasicJobInformationComplete(jobModel: JobPosterModel) {
-    jobModel.industry.roles=[];
     this.jobPosterModel.department = jobModel.department;
     this.jobPosterModel.education = jobModel.education;
     this.jobPosterModel.experienceMaxValue = jobModel.experienceMaxValue;
@@ -124,8 +124,14 @@ export class JobPosterComponent implements OnInit {
     this.jobPosterModel.location = jobModel.location;
     this.jobPosterModel.salaryMaxValue= jobModel.salaryMaxValue;
     this.jobPosterModel.salaryMinValue= jobModel.salaryMinValue;
-    if(this.jobPosterModel.industry.name !== jobModel.industry.name){
-      this.jobPosterModel.industry = jobModel.industry;
+    this.isShowIndustryList = true;
+    this.updateJob();
+  }
+
+  selectIndustry(industry: Industry) {
+    if (this.jobPosterModel.industry.name !== industry.name) {
+      this.jobPosterModel.industry = industry;
+      this.jobPosterModel.industry.roles = [];
       this.highlightedSection.name = 'Work-Area';
     }
     this.getRoles();
@@ -134,8 +140,6 @@ export class JobPosterComponent implements OnInit {
     this.jobForCapability = this.jobPosterModel.industry.roles;
     this.updateJob();
   }
-
-
   selectRole(roles: Role[]) {
     this.jobPosterModel.industry.roles = roles;
     this.jobForCapability = this.jobPosterModel.industry.roles;

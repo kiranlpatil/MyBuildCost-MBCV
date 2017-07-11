@@ -5,6 +5,8 @@
       <cn-basic-job-information [highlightedSection]="highlightedSection" [jobPosterModel]="jobPosterModel"
                                 (onComplete)="onBasicJobInformationComplete($event)"></cn-basic-job-information>
 
+      <cn-industry-list [selectedIndustry]="jobPosterModel.industry" [highlightedSection]="highlightedSection"
+                        (valueChange)="selectIndustry($event)" [hidden]="!isShowIndustryList"></cn-industry-list>
 
       <cn-work-area [roles]="rolesForMain" [selectedRoles]="jobForRole" [highlightedSection]="highlightedSection" (onComplete)="selectRole($event)"
                     [hidden]="!isShowRoleList"></cn-work-area>

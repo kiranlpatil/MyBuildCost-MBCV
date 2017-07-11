@@ -91,19 +91,11 @@
             </div>
           </div>
         </div>
-        <div class="col-sm-12">
-          <div class="roles section-container">
-            <div class="clearfix">
-              <h4 class="heading">Select Industry</h4>
-              <cn-industry-list [selectedIndustry]="jobPosterModel.industry"
-                                (valueChange)="selectIndustry($event)"></cn-industry-list>
-            </div>
-          </div>
-        </div>
+
       </div>
       <div class="button-group clearfix">
         <button class="btn btn-success" scrollTo scrollTargetSelector="#work-area" (click)="onNext()"
-                [disabled]="!jobPostForm.valid || storedIndustry==undefined" [hidden]="!showButton">Next
+                [hidden]="!showButton">Next
         </button>
         <button class="btn btn-success" scrollTo scrollTargetSelector="#work-area" (click)="onNext()"
                 [disabled]="!jobPostForm.valid || storedIndustry==undefined" [hidden]="showButton">Save
@@ -126,7 +118,6 @@
         <p><label>Education</label> {{jobPosterModel.education}}</p>
         <p><label>Experience Band</label> {{jobPosterModel.experienceMinValue}} - {{jobPosterModel.experienceMaxValue}}</p>
         <p><label>Salary Band</label> {{jobPosterModel.salaryMinValue}} - {{jobPosterModel.salaryMaxValue}}</p>
-        <p><label>Industry</label> {{jobPosterModel.industry.name}}</p>
         <p><label>Notice Period</label> {{jobPosterModel.joiningPeriod}}</p>
       </div>
       <div class="clearfix">
