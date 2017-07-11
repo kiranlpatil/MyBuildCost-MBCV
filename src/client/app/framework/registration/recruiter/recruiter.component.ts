@@ -118,6 +118,11 @@ export class RecruiterComponent implements OnInit {
       this.submitStatus = true;
       return;
     }
+
+    if(!this.recruiterForm.valid){
+      return
+    }
+
     this.model.current_theme = AppSettings.LIGHT_THEM;
     this.model.location = this.storedLocation;
     this.model.isCandidate = false;

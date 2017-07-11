@@ -89,6 +89,11 @@ export class CandidateComponent implements OnInit {
       this.submitStatus = true;
       return;
     }
+
+    if(!this.userForm.valid){
+      return
+    }
+
     this.model = this.userForm.value;
     this.model.current_theme = AppSettings.LIGHT_THEM;
     this.model.isCandidate = true;

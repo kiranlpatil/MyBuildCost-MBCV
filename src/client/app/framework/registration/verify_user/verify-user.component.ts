@@ -63,6 +63,9 @@ export class VerifyUserComponent implements OnInit {
   }
 
   onSubmit() {
+    if(!this.userForm.valid){
+      return;
+    }
     if (!this.chkMobile) {
       this.model = this.userForm.value;
       LocalStorageService.setLocalValue(LocalStorage.MOBILE_NUMBER, this.model.mobile_number);

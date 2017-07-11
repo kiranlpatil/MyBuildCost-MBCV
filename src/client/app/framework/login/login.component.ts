@@ -74,6 +74,10 @@ export class LoginComponent implements OnInit {
       return;
     }
 
+    if(!this.userForm.valid){
+      return
+    }
+
     this.model.email = this.model.email.toLowerCase();
     this.loginService.userLogin(this.model)
       .subscribe(
