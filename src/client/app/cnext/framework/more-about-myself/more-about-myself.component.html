@@ -20,7 +20,8 @@
     <div class="col-sm-3 no-padding">
       <cn-tool-tip [message]="tooltipMessage"></cn-tool-tip>
     </div>
-    <button class="btn-prev"><span class="glyphicon glyphicon-chevron-left"></span></button>
+    <button class="btn-prev" (click)="highlightedSection.name='Profile'"><span
+      class="glyphicon glyphicon-chevron-left"></span></button>
   </div>
 </div>
 <div class="section-container clear" *ngIf="highlightedSection.name !='AboutMySelf'">
