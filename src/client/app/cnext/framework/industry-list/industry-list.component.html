@@ -19,8 +19,12 @@
           </div>
         </div>
       </div>
+      <div class="error-messages"
+           *ngIf="!isValid">
+        <p>You can't leave this empty.</p>
+      </div>
       <div class="button-group clearfix">
-        <button class="btn btn-success" (click)="onNext()" [disabled]="disableButton">Next</button>
+        <button class="btn btn-success" (click)="onNext()">Next</button>
       </div>
     </div>
 

@@ -17,6 +17,7 @@ export class IndustryListComponent implements OnChanges {
 
   private industries: Industry[] = new Array(0);
   private choosedIndustry: Industry = new Industry();
+  private isValid:boolean = true;
   constructor(private candidateProfileService: CandidateProfileService) {
     this.candidateProfileService.getIndustries()
       .subscribe(industries => this.industries = industries.data);
@@ -29,11 +30,16 @@ export class IndustryListComponent implements OnChanges {
     }
   }
   onValueChange(industry: Industry) {
+    this.isValid = true;
     industry.roles = new Array(0);
     this.choosedIndustry = Object.assign(industry);
   }
 
   onNext() {
+    if(this.choosedIndustry.name == ''){
+      this.isValid = false;
+      return;
+    }
     this.valueChange.emit(this.choosedIndustry);
     this.highlightedSection.name = 'Work-Area';
     this.highlightedSection.isDisable = false;
