@@ -1,41 +1,47 @@
 <div class="modal-bg" *ngIf="highlightedSection.name=='EmploymentHistory'"></div>
 <div class="section-container clear" *ngIf="highlightedSection.name =='EmploymentHistory'">
-  <div class="main-content modal-content clearfix" >
-    <h4 class="heading">Employment History</h4>
-    <form class="description-form" [formGroup]="employeeHistory" novalidate>
-      <!--empHistories-->
-      <div formArrayName="employeeHistories">
-        <div *ngFor="let history of employeeHistory.controls.employeeHistories.controls; let i=index"
-             class="panel panel-default">
-          <div>
+  <div class="main-content edit-modal-content clearfix" >
+    <div class="col-sm-9">
+      <h4 class="heading">Employment History</h4>
+      <form class="description-form" [formGroup]="employeeHistory" novalidate>
+        <!--empHistories-->
+        <div formArrayName="employeeHistories">
+          <div *ngFor="let history of employeeHistory.controls.employeeHistories.controls; let i=index"
+               class="panel panel-default">
+            <div>
           <span class="glyphicon glyphicon-trash pull-right"
                 *ngIf="employeeHistory.controls.employeeHistories.controls.length>0 && employeeHistory.controls.employeeHistories.controls.length !==1 "
                 (click)="removeEmployeeHistory(i)"></span>
-          </div>
-          <div class="panel-body" [formGroupName]="i">
-            <cn-employee-history [group]="employeeHistory.controls.employeeHistories.controls[i]"></cn-employee-history>
+            </div>
+            <div class="panel-body" [formGroupName]="i">
+              <cn-employee-history [group]="employeeHistory.controls.employeeHistories.controls[i]"></cn-employee-history>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="margin-20">
-        <button (click)="addEmployeeHistory()" class="btn btn-create-profile" [disabled]="!employeeHistory.valid">
-          Add another
-        </button>
-      </div>
-      <div class="button-group clearfix">
-        <button class="btn btn-default" (click)="highlightedSection.name='none';highlightedSection.isDisable=false"
-                [hidden]="showButton">Cancel
-        </button>
-        <button type="submit" class="btn btn-success" scrollTo scrollTargetSelector="#academic-details"
-                (click)="postData('next')" [disabled]="!employeeHistory.valid" [hidden]="!showButton">Next
-        </button>
-        <button type="submit" class="btn btn-success" (click)="postData('save')" [disabled]="!employeeHistory.valid"
-                [hidden]="showButton">Save
-        </button>
-      </div>
-      <div class="clearfix"></div>
-    </form>
+        <div class="margin-20">
+          <button (click)="addEmployeeHistory()" class="btn btn-create-profile" [disabled]="!employeeHistory.valid">
+            Add another
+          </button>
+        </div>
+        <div class="button-group clearfix">
+          <button class="btn btn-default" (click)="highlightedSection.name='none';highlightedSection.isDisable=false"
+                  [hidden]="showButton">Cancel
+          </button>
+          <button type="submit" class="btn btn-success" scrollTo scrollTargetSelector="#academic-details"
+                  (click)="postData('next')" [disabled]="!employeeHistory.valid" [hidden]="!showButton">Next
+          </button>
+          <button type="submit" class="btn btn-success" (click)="postData('save')" [disabled]="!employeeHistory.valid"
+                  [hidden]="showButton">Save
+          </button>
+        </div>
+        <div class="clearfix"></div>
+      </form>
+    </div>
+    <div class="col-sm-3 no-padding">
+      <cn-tool-tip></cn-tool-tip>
+    </div>
+    <button class="btn-prev"><span class="glyphicon glyphicon-chevron-left"></span></button>
   </div>
 </div>
 

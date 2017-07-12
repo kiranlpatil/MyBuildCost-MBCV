@@ -1,34 +1,40 @@
 <div class="modal-bg" *ngIf="highlightedSection.name=='IndustryExposure'"></div>
 <div class="section-container profeiciency-domain" *ngIf="highlightedSection.name=='IndustryExposure'">
-  <cn-tool-tip [message]="tooltipCandidateMessage" *ngIf="isCandidate"></cn-tool-tip>
-  <cn-tool-tip [message]="tooltipRecruiterMessage" *ngIf="!isCandidate"></cn-tool-tip>
-  <div class="main-content modal-content clearfix">
-    <h4 class="heading">Additional Industry Exposure <span class="sub-heading">(In additional to your core industry, select Industries In which you have work exposure / experience)</span>
-    </h4>
-    <div class="col-sm-12 industry-experience">
-      <div class="select-option" *ngFor="let choice of industries;let i = index">
-        <label>
-          <input type="checkbox" name="choice.name" value="{{choice.name}}"
-                 (click)="selectIndustryModel(choice.name,$event)"
-                 [checked]="candidateExperiencedIndustry.indexOf(choice.name)!=-1">
-          <span>{{choice.name}}</span>
-        </label>
-      </div>
-      <div class="button-group clearfix">
-        <button class="btn btn-success" scrollTo scrollTargetSelector="#professional-details"
-                (click)="onNext()" [hidden]="!showButton" [disabled]="selectedIndustries.length==0">Next
-        </button>
-        <button class="btn btn-success" (click)="onSave()" [hidden]="showButton"
-                [disabled]="selectedIndustries.length==0">Next
-        </button>
+
+  <div class="main-content edit-modal-content clearfix">
+    <div class="col-sm-9">
+      <h4 class="heading">Additional Industry Exposure <span class="sub-heading">(In additional to your core industry, select Industries In which you have work exposure / experience)</span>
+      </h4>
+      <div class="col-sm-12 industry-experience">
+        <div class="select-option" *ngFor="let choice of industries;let i = index">
+          <label>
+            <input type="checkbox" name="choice.name" value="{{choice.name}}"
+                   (click)="selectIndustryModel(choice.name,$event)"
+                   [checked]="candidateExperiencedIndustry.indexOf(choice.name)!=-1">
+            <span>{{choice.name}}</span>
+          </label>
+        </div>
+        <div class="button-group clearfix">
+          <button class="btn btn-success" scrollTo scrollTargetSelector="#professional-details"
+                  (click)="onNext()" [hidden]="!showButton" [disabled]="selectedIndustries.length==0">Next
+          </button>
+          <button class="btn btn-success" (click)="onSave()" [hidden]="showButton"
+                  [disabled]="selectedIndustries.length==0">Next
+          </button>
+        </div>
       </div>
     </div>
+    <div class="col-sm-3 no-padding">
+      <cn-tool-tip [message]="tooltipCandidateMessage" *ngIf="isCandidate"></cn-tool-tip>
+      <cn-tool-tip [message]="tooltipRecruiterMessage" *ngIf="!isCandidate"></cn-tool-tip>
+    </div>
+    <button class="btn-prev"><span class="glyphicon glyphicon-chevron-left"></span></button>
   </div>
 </div>
 <div class="section-container profeiciency-domain" *ngIf="highlightedSection.name !='IndustryExposure'">
   <div class="main-content">
     <div class="compact-view clearfix">
-      <h4 class="heading">Additional Industries In which you have work exposure / experience
+      <h4 class="heading-compact">Additional Industries In which you have work exposure / experience
         <button class="btn-edit"
                 (click)="highlightedSection.name='IndustryExposure';disableButton=false;highlightedSection.isDisable=true;showButton=false"
                 [hidden]="highlightedSection.isDisable" title="Edit Industry Exposure"></button>

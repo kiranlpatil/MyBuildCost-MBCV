@@ -1,26 +1,32 @@
 <div class="modal-bg" *ngIf="highlightedSection.name=='AboutMySelf'"></div>
 <div class="section-container clear" *ngIf="highlightedSection.name =='AboutMySelf'">
-  <cn-tool-tip [message]="tooltipMessage"></cn-tool-tip>
-  <div class="main-content modal-content clearfix">
-    <h4 class="heading">More About Myself (Max 250)</h4>
-    <div class="clearfix">
-      <div class="col-sm-12 more-about-myself">
+
+  <div class="main-content edit-modal-content clearfix">
+    <div class="col-sm-9">
+      <h4 class="heading">More About Myself (Max 250)</h4>
+      <div class="clearfix">
+        <div class="col-sm-12 more-about-myself">
         <textarea class="form-control" [(ngModel)]="candidate.aboutMyself" (ngModelChange)="addAboutMyself()"
                   [maxlength]="maxword" Placeholder="Enter About Yourself"></textarea>
-        <p class="error-messages">{{remainingWords}} words remaining</p>
+          <p class="error-messages">{{remainingWords}} words remaining</p>
+        </div>
+      </div>
+      <div class="button-group">
+        <button class="btn btn-success" (click)="highlightedSection.name='none'; highlightedSection.isDisable=false">
+          Next
+        </button>
       </div>
     </div>
-    <div class="button-group">
-      <button class="btn btn-success" (click)="highlightedSection.name='none'; highlightedSection.isDisable=false">
-        Next
-      </button>
+    <div class="col-sm-3 no-padding">
+      <cn-tool-tip [message]="tooltipMessage"></cn-tool-tip>
     </div>
+    <button class="btn-prev"><span class="glyphicon glyphicon-chevron-left"></span></button>
   </div>
 </div>
 <div class="section-container clear" *ngIf="highlightedSection.name !='AboutMySelf'">
   <div class="main-content">
     <div class="compact-view clearfix">
-      <h4 class="heading">More About Self
+      <h4 class="heading-compact">More About Self
         <button class="btn-edit"
                 (click)="highlightedSection.name='AboutMySelf';highlightedSection.isDisable=true;showButton=false"
                 [hidden]="highlightedSection.isDisable" title="Edit More About Self"></button>

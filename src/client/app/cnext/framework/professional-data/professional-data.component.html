@@ -1,65 +1,70 @@
 <div class="modal-bg" *ngIf="highlightedSection.name=='Professional-Details'"></div>
 <div class="section-container" *ngIf="highlightedSection.name =='Professional-Details'">
-  <cn-tool-tip [message]="tooltipMessage"></cn-tool-tip>
-  <div class="main-content modal-content clearfix">
-    <h4 class="heading">Professional Preferences & Experience Summary (Mandatory)</h4>
-    <!-- <form [formGroup]="professionalDetailForm" (ngSubmit)="onNext(jobPostForm.value)">-->
-    <div class="professional-data clearfix">
 
-      <div class="col-sm-3">
-        <label>Current Salary</label>
-        <!-- <control-messages [control]="professionalDetailForm.controls.currentSalary"></control-messages>-->
-        <select [(ngModel)]="candidate.professionalDetails.currentSalary" (change)="saveProfessionalData()">
-          <option *ngFor="let c of salaryList" [ngValue]="c">{{c}}</option>
-        </select>
+  <div class="main-content edit-modal-content clearfix">
+    <div class="col-sm-9">
+      <h4 class="heading">Professional Preferences & Experience Summary (Mandatory)</h4>
+      <!-- <form [formGroup]="professionalDetailForm" (ngSubmit)="onNext(jobPostForm.value)">-->
+      <div class="professional-data clearfix">
+
+        <div class="col-sm-3">
+          <label>Current Salary</label>
+          <!-- <control-messages [control]="professionalDetailForm.controls.currentSalary"></control-messages>-->
+          <select [(ngModel)]="candidate.professionalDetails.currentSalary" (change)="saveProfessionalData()">
+            <option *ngFor="let c of salaryList" [ngValue]="c">{{c}}</option>
+          </select>
+
+        </div>
+
+        <div class="col-sm-3">
+          <label>Ready To Relocate?</label>
+          <!--  <control-messages [control]="professionalDetailForm.controls.relocate"></control-messages>-->
+          <select [(ngModel)]="candidate.professionalDetails.relocate" (change)="saveProfessionalData()">
+            <option *ngFor="let c of realocationList" [ngValue]="c">{{c}}</option>
+          </select>
+
+        </div>
+
+        <div class="col-sm-3">
+          <label>Company Culture</label>
+          <!-- <control-messages [control]="professionalDetailForm.controls.noticePeriod"></control-messages>-->
+          <select [(ngModel)]="candidate.professionalDetails.industryExposure" (change)="saveProfessionalData()">
+            <option *ngFor="let c of industryExposureList" [ngValue]="c">{{c}}</option>
+          </select>
+        </div>
+
+        <div class="col-sm-3">
+          <label>Notice Period</label>
+          <!-- <control-messages [control]="professionalDetailForm.controls.noticePeriod"></control-messages>-->
+          <select [(ngModel)]="candidate.professionalDetails.noticePeriod" (change)="saveProfessionalData()">
+            <option *ngFor="let c of noticePeriodList" [ngValue]="c">{{c}}</option>
+          </select>
+        </div>
+
 
       </div>
-
-      <div class="col-sm-3">
-        <label>Ready To Relocate?</label>
-        <!--  <control-messages [control]="professionalDetailForm.controls.relocate"></control-messages>-->
-        <select [(ngModel)]="candidate.professionalDetails.relocate" (change)="saveProfessionalData()">
-          <option *ngFor="let c of realocationList" [ngValue]="c">{{c}}</option>
-        </select>
-
+      <div class="col-sm-12">
+        <div class="button-group clearfix">
+          <!--
+                    <button class="btn btn-default"  (click)="highlightedSection.name='none'; highlightedSection.isDisable=false" [hidden]="showButton" >Cancel</button>
+          -->
+          <button type="submit" class="btn btn-success" scrollTo scrollTargetSelector="#Employment-History"
+                  (click)="onNext()" [disabled]="disableButton" [hidden]="!showButton">Next
+          </button>
+          <button class="btn btn-success" (click)="onSave()" [hidden]="showButton">Save</button>
+        </div>
       </div>
-
-      <div class="col-sm-3">
-        <label>Company Culture</label>
-        <!-- <control-messages [control]="professionalDetailForm.controls.noticePeriod"></control-messages>-->
-        <select [(ngModel)]="candidate.professionalDetails.industryExposure" (change)="saveProfessionalData()">
-          <option *ngFor="let c of industryExposureList" [ngValue]="c">{{c}}</option>
-        </select>
-      </div>
-
-      <div class="col-sm-3">
-        <label>Notice Period</label>
-        <!-- <control-messages [control]="professionalDetailForm.controls.noticePeriod"></control-messages>-->
-        <select [(ngModel)]="candidate.professionalDetails.noticePeriod" (change)="saveProfessionalData()">
-          <option *ngFor="let c of noticePeriodList" [ngValue]="c">{{c}}</option>
-        </select>
-      </div>
-
-
     </div>
-    <div class="col-sm-12">
-      <div class="button-group clearfix">
-        <!--
-                  <button class="btn btn-default"  (click)="highlightedSection.name='none'; highlightedSection.isDisable=false" [hidden]="showButton" >Cancel</button>
-        -->
-        <button type="submit" class="btn btn-success" scrollTo scrollTargetSelector="#Employment-History"
-                (click)="onNext()" [disabled]="disableButton" [hidden]="!showButton">Next
-        </button>
-        <button class="btn btn-success" (click)="onSave()" [hidden]="showButton">Save</button>
-      </div>
+    <div class="col-sm-3 no-padding">
+      <cn-tool-tip [message]="tooltipMessage"></cn-tool-tip>
     </div>
-    <!-- </form>-->
+    <button class="btn-prev"><span class="glyphicon glyphicon-chevron-left"></span></button>
   </div>
 </div>
 <div class="section-container" *ngIf="highlightedSection.name !='Professional-Details'">
   <div class="main-content">
     <div class="compact-view clearfix">
-      <h4 class="heading">Professional Preferences & Experience Summary
+      <h4 class="heading-compact">Professional Preferences & Experience Summary
         <button class="btn-edit"
                 (click)="highlightedSection.name='Professional-Details';highlightedSection.isDisable=true;disableButton=false;showButton=false"
                 [hidden]="highlightedSection.isDisable" title="Edit Professional Preferences & Experience Summary"></button>
