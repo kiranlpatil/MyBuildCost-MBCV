@@ -132,7 +132,7 @@ export class JobPosterComponent implements OnInit {
     if (this.jobPosterModel.industry.name !== industry.name) {
       this.jobPosterModel.industry = industry;
       this.jobPosterModel.industry.roles = [];
-      this.highlightedSection.name = 'Work-Area';
+      this.highlightedSection.name = 'Industry';
     }
     this.getRoles();
     this.isShowRoleList = true;
