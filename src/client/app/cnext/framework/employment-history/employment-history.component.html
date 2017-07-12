@@ -13,10 +13,15 @@
                 (click)="removeEmployeeHistory(i)"></span>
           </div>
           <div class="panel-body" [formGroupName]="i">
-            <cn-employee-history [group]="employeeHistory.controls.employeeHistories.controls[i]"></cn-employee-history>
+            <cn-employee-history [group]="employeeHistory.controls.employeeHistories.controls[i]" [submitStatus] = "submitStatus"></cn-employee-history>
           </div>
         </div>
       </div>
+
+      <!--<div class="error-messages"
+           *ngIf="submitStatus">
+        <p>Please mentioned service period</p>
+      </div>-->
 
       <div class="margin-20">
         <button (click)="addEmployeeHistory()" class="btn btn-create-profile" [disabled]="!employeeHistory.valid">
@@ -30,7 +35,7 @@
         <button type="submit" class="btn btn-success" scrollTo scrollTargetSelector="#academic-details"
                 (click)="postData('next')" [disabled]="!employeeHistory.valid" [hidden]="!showButton">Next
         </button>
-        <button type="submit" class="btn btn-success" (click)="postData('save')" [disabled]="!employeeHistory.valid"
+        <button type="submit" class="btn btn-success" (click)="postData('save')"
                 [hidden]="showButton">Save
         </button>
       </div>

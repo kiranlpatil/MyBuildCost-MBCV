@@ -13,6 +13,8 @@ import { ValueConstant } from '../../../../framework/shared/constants';
 export class EmployeeHistoryComponent {
   @Input('group')
   public employeeForm: FormGroup;
+
+  @Input() submitStatus: boolean;
   private year: any;
   private currentDate: any;
   private yearList = new Array();

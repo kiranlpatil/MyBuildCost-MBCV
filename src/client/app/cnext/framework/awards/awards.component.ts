@@ -22,6 +22,7 @@ export class AwardsComponent implements OnInit {
 
   private isButtonShow: boolean = false;
   private showButton: boolean = true;
+  private submitStatus: boolean;
 
   constructor(private _fb: FormBuilder, private profileCreatorService: CandidateProfileService) {
   }
@@ -65,6 +66,7 @@ export class AwardsComponent implements OnInit {
   }
 
   addAward() {
+    this.submitStatus = false;
     const control = <FormArray>this.awardDetail.controls['awards'];
     const addrCtrl = this.initAwardDetails();
     control.push(addrCtrl);
@@ -77,6 +79,10 @@ export class AwardsComponent implements OnInit {
   }
 
   postData(type: string) {
+    if(!this.awardDetail.valid){
+      this.submitStatus = true;
+      return;
+    }
     this.candidate.awards = this.awardDetail.value.awards;
     this.profileCreatorService.addProfileDetail(this.candidate).subscribe(
       user => {

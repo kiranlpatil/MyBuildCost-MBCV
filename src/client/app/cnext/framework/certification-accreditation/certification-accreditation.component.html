@@ -12,7 +12,7 @@
                 (click)="removeCertification(i)"></span>
           </div>
           <div class="panel-body" [formGroupName]="i">
-            <cn-certificates [group]="certificationDetail.controls.certifications.controls[i]"></cn-certificates>
+            <cn-certificates [group]="certificationDetail.controls.certifications.controls[i]" [submitStatus] = "submitStatus"></cn-certificates>
           </div>
         </div>
       </div>
@@ -29,8 +29,7 @@
         <button type="submit" class="btn btn-success" scrollTo scrollTargetSelector="#certification"
                 (click)="postData('next')" [disabled]="!certificationDetail.valid" [hidden]="!showButton">Next
         </button>
-        <button type="submit" class="btn btn-success" (click)="postData('save')" [disabled]="!certificationDetail.valid"
-                [hidden]="showButton">Save
+        <button type="submit" class="btn btn-success" (click)="postData('save')" [hidden]="showButton">Save
         </button>
       </div>
       <div class="clearfix"></div>

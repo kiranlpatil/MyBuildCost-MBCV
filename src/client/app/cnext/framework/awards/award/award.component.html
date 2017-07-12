@@ -6,7 +6,7 @@
           <label>Title</label>
           <input type="text" class="form-control" formControlName="name" required/>
           <div class="error-messages"
-               *ngIf="awardForm.get('name').touched && awardForm.get('name').hasError('required')">
+               *ngIf="(awardForm.get('name').touched || submitStatus)&& awardForm.get('name').hasError('required')">
             <p>Award Name is required</p>
           </div>
         </div>
@@ -18,7 +18,7 @@
           <div class="form-group">
             <input class="form-control" type="text" formControlName="issuedBy" required/>
             <div class="error-messages"
-                 *ngIf="awardForm.get('issuedBy').touched && awardForm.get('issuedBy').hasError('required')">
+                 *ngIf="(awardForm.get('issuedBy').touched || submitStatus)&& awardForm.get('issuedBy').hasError('required')">
               <p>Authority Name is required</p>
             </div>
           </div>
@@ -32,7 +32,7 @@
             <option *ngFor="let academicYear of yearList" [ngValue]="academicYear">{{academicYear}}
             </option>
           </select>
-          <div class="error-messages" *ngIf="awardForm.get('year').touched && awardForm.get('year').hasError('required')">
+          <div class="error-messages" *ngIf="(awardForm.get('year').touched || submitStatus)&& awardForm.get('year').hasError('required')">
             <p>Issued Year is required</p>
           </div>
         </div>

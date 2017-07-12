@@ -12,7 +12,7 @@
                 (click)="removeAcademicDetail(i)"></span>
           </div>
           <div class="panel-body" [formGroupName]="i">
-            <cn-academics [group]="academicDetail.controls.academicDetails.controls[i]"></cn-academics>
+            <cn-academics [group]="academicDetail.controls.academicDetails.controls[i]" [submitStatus] = "submitStatus"></cn-academics>
           </div>
         </div>
       </div>
@@ -29,8 +29,7 @@
         <button type="submit" class="btn btn-success" scrollTo scrollTargetSelector="#certification"
                 (click)="postData('next')" [disabled]="!academicDetail.valid" [hidden]="!showButton">Next
         </button>
-        <button type="submit" class="btn btn-success" (click)="postData('save')" [disabled]="!academicDetail.valid"
-                [hidden]="showButton">Save
+        <button type="submit" class="btn btn-success" (click)="postData('save')" [hidden]="showButton">Save
         </button>
       </div>
       <div class="clearfix"></div>

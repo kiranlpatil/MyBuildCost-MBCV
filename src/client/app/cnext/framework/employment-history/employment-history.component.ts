@@ -24,7 +24,7 @@ export class EmploymentHistoryComponent {
   private showButton: boolean = true;
   private showAddButton: boolean = true;
   tooltipMessage: string = "<p class='info'>An individual may be exposed to multiple industries during the professional life.</p>";
-
+  private submitStatus: boolean;
   constructor(private _fb: FormBuilder, private profileCreatorService: CandidateProfileService) {
   }
 
@@ -117,6 +117,10 @@ export class EmploymentHistoryComponent {
   }
 
   postData(type: string) {
+    if(!this.employeeHistory.valid){
+      this.submitStatus = true;
+      return;
+    }
     this.candidate.employmentHistory = this.employeeHistory.value.employeeHistories;
     this.profileCreatorService.addProfileDetail(this.candidate).subscribe(
       user => {
