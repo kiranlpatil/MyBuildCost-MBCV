@@ -1,12 +1,16 @@
-$border-color: #e8e8e8;
 $text-color: #666;
 $white: #fff;
-$option-border-color: #f8f8f8;
-$option-theme-color: #1c75bd;
-$complexity-bg: #f8f8f8;
+$theme-color: #0d75fa;
 
 .compact-view {
-  padding: 10px 10px 0;
+  padding: 5px;
+
+  .heading-compact {
+    background: $theme-color;
+    color: $white;
+    margin: 0;
+    padding: 5px;
+  }
 
   a {
     display: block;
@@ -24,6 +28,11 @@ $complexity-bg: #f8f8f8;
 
   .glyphicon-lock {
     background-color: #dbeef6;
+  }
+
+  .add-more {
+    color: $white;
+    font-size: 12px;
   }
 }
 

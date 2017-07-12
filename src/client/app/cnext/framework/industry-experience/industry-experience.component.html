@@ -3,7 +3,7 @@
 
   <div class="main-content edit-modal-content clearfix">
     <div class="col-sm-9">
-      <h4 class="heading">Additional Industry Exposure <span class="sub-heading">(In additional to your core industry, select Industries In which you have work exposure / experience)</span>
+      <h4 class="heading">Additional Industry Exposure<!-- <span class="sub-heading">(In additional to your core industry, select Industries In which you have work exposure / experience)</span>-->
       </h4>
       <div class="col-sm-12 industry-experience">
         <div class="select-option" *ngFor="let choice of industries;let i = index">
@@ -18,13 +18,6 @@
              *ngIf="submitStatus">
           <p>You can't leave this empty.</p>
         </div>
-        <div class="button-group clearfix">
-          <button class="btn btn-success" scrollTo scrollTargetSelector="#professional-details"
-                  (click)="onNext()" [hidden]="!showButton">Next
-          </button>
-          <button class="btn btn-success" (click)="onSave()" [hidden]="showButton">Next
-          </button>
-        </div>
       </div>
     </div>
     <div class="col-sm-3 no-padding">
@@ -33,6 +26,14 @@
     </div>
     <button class="btn-prev" (click)="highlightedSection.name='Proficiencies'"><span
       class="glyphicon glyphicon-chevron-left"></span></button>
+
+    <div class="button-group clearfix">
+      <button class="btn btn-primary" scrollTo scrollTargetSelector="#professional-details"
+              (click)="onNext()" [hidden]="!showButton">Next
+      </button>
+      <button class="btn btn-primary" (click)="onSave()" [hidden]="showButton">Next
+      </button>
+    </div>
   </div>
 </div>
 <div class="section-container profeiciency-domain" *ngIf="highlightedSection.name !='IndustryExposure'">

@@ -6,8 +6,8 @@
   <div class="main-content clearfix edit-modal-content">
     <div class="col-sm-9 profile-description">
       <div class="select-industry clearfix">
-        <div class="col-sm-12 no-padding">
-          <h4>Select your Industry (Any One)</h4>
+        <h4 class="heading">Select your Industry (Any One)</h4>
+        <div class="col-sm-12">
           <div class="max-height">
             <div class="select-option" *ngFor="let item of industries;let i = index">
               <label>
@@ -19,22 +19,21 @@
           </div>
         </div>
       </div>
-      <div class="error-messages"
-           *ngIf="!isValid">
+      <div class="error-messages" *ngIf="!isValid">
         <p>You can't leave this empty.</p>
       </div>
-      <div class="button-group clearfix">
-        <button class="btn btn-success" (click)="onNext()">Next</button>
-      </div>
+
     </div>
 
     <div class="col-sm-3 no-padding">
-      <cn-tool-tip></cn-tool-tip>
+      <cn-tool-tip [message]="tooltipMessage"></cn-tool-tip>
     </div>
 
-    <button class="btn-prev" (click)="highlightedSection.name='Profile'">
-      <span class="glyphicon glyphicon-chevron-left"></span>
-    </button>
+    <button class="btn-prev"><span class="glyphicon glyphicon-chevron-left"></span></button>
+
+    <div class="button-group clearfix">
+      <button class="btn btn-primary" (click)="onNext()">Next</button>
+    </div>
 
   </div>
 </div>

@@ -17,6 +17,7 @@ $black: #333;
     font-size: 13px;
     height: 100vh;
     padding: 50px 0 0;
+    position: fixed;
 
     ul {
       padding: 0 5px;
@@ -98,7 +99,7 @@ $black: #333;
 
   .heading-compact {
     color: $theme-color;
-    font-size: 14px;
+    font-size: 13px;
     margin: 5px 0;
 
     img {
@@ -126,18 +127,19 @@ $black: #333;
   }
 
   .btn-create-profile {
-    background-color: $white;
+    background-color: $theme-color;
     border: 1px solid $theme-color;
-    box-shadow: 0 0 1px 0 #3694d1 inset, 0 0 1px 0 #3694d1;
-    color: $text-color;
+    border-radius: 25px;
+    box-shadow: 0 0 1px 0 $theme-color inset, 0 0 1px 0 $theme-color;
+    color: $white;
     font-size: 13px;
-    padding: 6px 15px;
+    padding: 3px 15px;
 
     &:focus,
     &:active,
     &:hover {
       border: 1px solid $theme-color;
-      box-shadow: 0 0 1px 0 #3694d1 inset, 0 0 1px 0 #3694d1;
+      box-shadow: 0 0 1px 0 $theme-color inset, 0 0 1px 0 $theme-color;
     }
   }
 
@@ -227,6 +229,9 @@ $black: #333;
 
   .button-group {
     text-align: right;
+    position: absolute;
+    bottom: 0;
+    padding: 7px 0;
 
     button[hidden] {
       display: none;
@@ -234,7 +239,6 @@ $black: #333;
 
     .btn {
       float: right;
-      margin-top: 15px;
       margin-right: 10px;
 
       &:focus,
@@ -408,3 +412,4 @@ $black: #333;
     }
   }
 }
+

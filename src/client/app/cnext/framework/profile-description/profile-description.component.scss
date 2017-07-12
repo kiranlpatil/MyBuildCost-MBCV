@@ -1,4 +1,4 @@
-$light-blue: #00aed5;
+$light-blue: #0d75fa;
 $black: #333;
 
 .user-name {
@@ -8,7 +8,7 @@ $black: #333;
   .profile-name-last {
     color: $light-blue;
     font-family: 'gothamrnd-book';
-    font-size: 20px;
+    font-size: 14px;
     background: none;
     padding: 0;
     text-transform: capitalize;
@@ -26,6 +26,14 @@ $black: #333;
 
 .compact-view {
 
+  .user-name {
+
+    .profile-name-first,
+    .profile-name-last {
+      font-size: 20px;
+    }
+  }
+
   &:hover {
     .btn-edit {
       opacity: 1;
@@ -41,6 +49,10 @@ $black: #333;
       color: $black;
     }
   }
+}
+
+.form-container {
+  padding: 0 50px;
 }
 
 .truncate-text {

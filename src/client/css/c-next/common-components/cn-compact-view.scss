@@ -47,8 +47,8 @@ $white: #fff;
   margin: 0 auto;
   box-shadow: 1px 1px 1px 0 $modal-bg;
   border: 2px solid $white;
-  padding: 0 0 15px !important;
-  overflow: hidden;
+  padding: 0;
+  overflow: auto;
   top: 50%;
   left: 50%;
   width: 950px;
@@ -294,6 +294,38 @@ $white: #fff;
         float: left;
         width: 100%;
       }
+    }
+  }
+}
+
+.my-info {
+  height: 350px;
+  position: relative;
+  border-right: 1px solid $border-color;
+}
+
+.description-container {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+
+  .image-container {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    margin: 0 auto 15px;
+    display: block;
+    position: relative;
+
+    .avtar {
+      border-radius: 50% !important;
+    }
+
+    .avtar > form {
+      bottom: -15px !important;
+      position: absolute !important;
+      right: 33% !important;
     }
   }
 }

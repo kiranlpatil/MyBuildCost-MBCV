@@ -5,7 +5,8 @@
     <div class="clearfix">
       <div class="capabilities col-sm-9">
         <h4 class="heading">Select those capabilities that describe your current strenght</h4>
-        <div class="capability-type">
+        <div class="col-sm-12">
+          <div class="capability-type">
           <span class="capability-option" *ngFor="let role of roles">
             <!--<h5 class="sub-areas">Area Of Work - {{role.name}}</h5>-->
             <div class="select-option"
@@ -20,14 +21,8 @@
               </label>
             </div>
           </span>
-        </div>
-        <div class="error-messages" *ngIf="emptyCapabilities">Select your capabilities.</div>
-        <div class="button-group clearfix">
-          <button class="btn btn-success" scrollTo scrollTargetSelector="#complexity-area"
-                  (click)="onNext()" [hidden]="!showButton">Next
-          </button>
-          <button class="btn btn-default" (click)="onCancel()" [hidden]="showButton">Cancel</button>
-          <button class="btn btn-success"  (click)="onSave()"  [hidden]="showButton">Save</button>
+          </div>
+          <div class="error-messages" *ngIf="emptyCapabilities">Select your capabilities.</div>
         </div>
       </div>
 
@@ -38,6 +33,14 @@
 
       <button class="btn-prev" (click)="highlightedSection.name='Work-Area'"><span
         class="glyphicon glyphicon-chevron-left"></span></button>
+
+      <div class="button-group clearfix">
+        <button class="btn btn-primary" scrollTo scrollTargetSelector="#complexity-area"
+                (click)="onNext()" [hidden]="!showButton">Next
+        </button>
+        <button class="btn btn-primary" (click)="onCancel()" [hidden]="showButton">Cancel</button>
+        <button class="btn btn-primary"  (click)="onSave()"  [hidden]="showButton">Save</button>
+      </div>
     </div>
   </div>
 </div>

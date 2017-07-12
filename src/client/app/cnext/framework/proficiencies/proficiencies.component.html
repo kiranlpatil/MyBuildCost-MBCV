@@ -9,16 +9,6 @@
 
           <cn-multi-select [data]="proficiencies" [selectedData]="choosedproficiencies" [maxLength]="maxProficiencies"
                            (onComplete)="onProficiencyComplete($event)" [submitStatus] = "submitStatus"></cn-multi-select>
-          <div class="button-group clearfix">
-            <!--         <button class="btn btn-default" [disabled]="choosedproficiencies.length<=0"
-                             (click)="highlightedSection.name='none'; highlightedSection.isDisable=false"  [hidden]="showButton">Cancel</button>-->
-            <button class="btn btn-success" scrollTo scrollTargetSelector="#industry-experience"
-                    (click)="onNext()" [hidden]="!showButton">Next
-            </button>
-            <button class="btn btn-success"
-                    (click)="onSave()" [hidden]="showButton">Next
-            </button>
-          </div>
         </div>
       </div>
       <div class="col-sm-3 no-padding">
@@ -26,6 +16,17 @@
       </div>
       <button class="btn-prev" (click)="highlightedSection.name='Complexities'"><span
         class="glyphicon glyphicon-chevron-left"></span></button>
+
+      <div class="button-group clearfix">
+        <!--         <button class="btn btn-default" [disabled]="choosedproficiencies.length<=0"
+                         (click)="highlightedSection.name='none'; highlightedSection.isDisable=false"  [hidden]="showButton">Cancel</button>-->
+        <button class="btn btn-primary" scrollTo scrollTargetSelector="#industry-experience"
+                (click)="onNext()" [hidden]="!showButton">Next
+        </button>
+        <button class="btn btn-primary"
+                (click)="onSave()" [hidden]="showButton">Next
+        </button>
+      </div>
     </div>
   </div>
 

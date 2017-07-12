@@ -1,6 +1,3 @@
-$border-color: #e8e8e8;
-$text-color: #666;
-$btn-color: #3694d1;
 $message: #00aed5;
 
 .proficiency-container {
@@ -12,8 +9,6 @@ $message: #00aed5;
 }
 
 .compact-view {
-  width: 75%;
-
   &:hover {
     .btn-edit {
       opacity: 1;

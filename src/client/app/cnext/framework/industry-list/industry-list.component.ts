@@ -15,6 +15,13 @@ export class IndustryListComponent implements OnChanges {
   @Input() highlightedSection: Section;
   @Output() valueChange = new EventEmitter();
 
+  tooltipMessage: string =
+      '<ul>' +
+      '<li><p>1. Provide your current job or latest job title. </p></li>' +
+      '<li><p>2. Enter your industry. This industry forms the core of your current professional profile. In next sections, you shall be shown questions and parameters that are relevant to this industry. If you have worked in multiple industries, choose the one that is most relevent as on date. You shall get option to include additional industries in later section.</p></li>' +
+      '<li><p>3. Please update your latest profile picture. Profiles with your best picture increase your possiblity to get shortlisted.</p></li>' +
+      '</ul>';
+
   private industries: Industry[] = new Array(0);
   private choosedIndustry: Industry = new Industry();
   private isValid:boolean = true;
