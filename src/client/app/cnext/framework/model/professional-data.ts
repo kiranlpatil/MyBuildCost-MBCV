@@ -6,5 +6,5 @@ export class ProfessionalData {
   relocate: string = '';
   industryExposure: string = '';
   currentCompany: string = '';
-  //location:Location=new Location();
+  location: string = '';
 }
