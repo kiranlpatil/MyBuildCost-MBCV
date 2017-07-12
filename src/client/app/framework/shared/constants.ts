@@ -1,8 +1,8 @@
 export class AppSettings {
-  public static IP = 'http://localhost:8080';
+  //public static IP = 'http://localhost:8080';
   // public static IP = 'http://ee802b7f.ngrok.io';
   //public static IP = 'http://10.192.33.252:8087';
-  //public static IP = 'http://52.89.221.23:8080';
+  public static IP = 'http://52.89.221.23:8080';
  // public static IP = 'http://52.41.194.37:8080';
   //public static IP = '';
 
@@ -73,7 +73,7 @@ export class NavigationRoutes {
   public static APP_DASHBOARD: string = '/dashboard';
   public static APP_CANDIDATE_DASHBOARD: string = '/candidate_dashboard';
   public static APP_RECRUITER_DASHBOARD: string = '/recruiterdashboard';
-  public static APP_LOGIN: string = '/login';
+  public static APP_LOGIN: string = '/signin';
   public static APP_START: string = '/';
   public static APP_LANDING: string = '/landing';
   public static VERIFY_USER: string = '/verify_user';

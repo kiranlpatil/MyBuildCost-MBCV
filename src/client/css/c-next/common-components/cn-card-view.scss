@@ -300,9 +300,10 @@ header {
   top: 175px !important;
 }
 
-#matched-job {
+#matched-job,
+#cart-job{
   .card-view {
-    margin-top: 95px;
+    margin-top: 85px;
   }
 }
 

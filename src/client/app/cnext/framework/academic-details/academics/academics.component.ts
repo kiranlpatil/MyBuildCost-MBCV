@@ -14,6 +14,8 @@ import { ValueConstant } from '../../../../framework/shared/constants';
 export class AcademicsComponent {
   @Input('group')
   public academicForm: FormGroup;
+
+  @Input() submitStatus: boolean;
   private year: any;
   private currentDate: any;
   private yearList = new Array();

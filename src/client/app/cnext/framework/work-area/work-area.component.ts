@@ -31,6 +31,7 @@ export class WorkAreaComponent implements OnInit,OnChanges {
   private showModalStyle:boolean = false;
   private showModalStyle2:boolean = false;
   private showButton: boolean = true;
+  private emptyWorkAreas:boolean;
 
 
   ngOnInit() {
@@ -52,6 +53,7 @@ export class WorkAreaComponent implements OnInit,OnChanges {
 
   selectOption(role: Role, event: any) {
     if (event.target.checked) {
+      this.emptyWorkAreas = false;
       if (this.savedSelectedRoles.length < ValueConstant.MAX_WORKAREA) {
         let isFound: boolean = false;
         for (let selrole of this.savedSelectedRoles) {
@@ -80,6 +82,10 @@ export class WorkAreaComponent implements OnInit,OnChanges {
   }
 
   onNext() {
+    if(!(this.savedSelectedRoles.length>0)){
+      this.emptyWorkAreas = true;
+      return;
+    }
     this.selectedRoles=new Array(0);
     for(let role of this.savedSelectedRoles){
       let savetempRole =Object.assign({}, role);
@@ -90,6 +96,9 @@ export class WorkAreaComponent implements OnInit,OnChanges {
     this.onComplete.emit(this.selectedRoles);
   }
 onSave() {
+  if(!(this.savedSelectedRoles.length>0)){
+    return;
+  }
     var roleId:any[]=new Array(0);
     var goNext:boolean;
     if(this.selectedRoles.length === this.savedSelectedRoles.length ) {

@@ -21,6 +21,7 @@ export class CertificationAccreditationComponent {
 
   private isButtonShow: boolean = false;
   private showButton: boolean = true;
+  private submitStatus: boolean;
 
   constructor(private _fb: FormBuilder, private profileCreatorService: CandidateProfileService) {
   }
@@ -64,6 +65,7 @@ export class CertificationAccreditationComponent {
   }
 
   addCertification() {
+    this.submitStatus = false;
     const control = <FormArray>this.certificationDetail.controls['certifications'];
     const addrCtrl = this.initCertificateDetails();
     control.push(addrCtrl);
@@ -76,6 +78,10 @@ export class CertificationAccreditationComponent {
   }
 
   postData(type: string) {
+    if(!this.certificationDetail.valid){
+      this.submitStatus = true;
+      return;
+    }
     this.candidate.certifications = this.certificationDetail.value.certifications;
     this.profileCreatorService.addProfileDetail(this.candidate).subscribe(
       user => {

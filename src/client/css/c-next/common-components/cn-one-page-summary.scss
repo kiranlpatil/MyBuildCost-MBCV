@@ -70,15 +70,24 @@ $border-color: #e8e8e8;
 }
 
 .proficiency-compare-section-area {
+  font-size: 12px;
   h4 {
-    font-size: 13px;
+    font-size: 12px;
     font-family: gothamrnd-book;
     margin: 0 15px 0 0;
-    padding: 10px 0;
+    padding: 7px 0;
     float: left;
     width: 200px;
     white-space: inherit;
   }
+}
+
+.left-content {
+  width: 250px;
+}
+
+.right-content {
+  width: calc(100% - 250px);
 }
 
 @media only screen and (max-width: 1366px) {
@@ -87,11 +96,11 @@ $border-color: #e8e8e8;
   }
 
   .left-content {
-    width: 20%;
+    width: 250px;
   }
 
   .right-content {
-    width: 80%;
+    width: calc(100% - 250px);
   }
 }
 

@@ -27,6 +27,7 @@ export class CapabilitiesComponent {
   private primaryCapabilitiesNumber: number = 0;
   private disableButton: boolean = true;
   private isCandidate: boolean = false;
+  private emptyCapabilities: boolean;
   tooltipCandidateMessage: string =
 
     "<ul>" +
@@ -61,6 +62,7 @@ export class CapabilitiesComponent {
     this.disableButton = false;
     this.roles[0].isAPIForComplexity = true;
     if (event.target.checked) {
+      this.emptyCapabilities = false;
       if (this.primaryCapabilitiesNumber < ValueConstant.MAX_CAPABILITIES) {
         this.primaryCapabilitiesNumber++;
         selectedCapability.isPrimary = true;
@@ -85,6 +87,10 @@ export class CapabilitiesComponent {
   }
 
   onNext() {
+    if(!(this.primaryNames.length>0)){
+      this.emptyCapabilities = true;
+      return;
+    }
     this.highlightedSection.name = "Complexities";
     this.highlightedSection.isDisable = false;
     this.disableButton = true;
@@ -100,6 +106,10 @@ export class CapabilitiesComponent {
   }
 
 onSave(){
+    if(!(this.primaryNames.length>0)){
+      this.emptyCapabilities = true;
+      return;
+    }
     if(this.savedprimaryNames.length===this.primaryNames.length && this.savedsecondaryNames.length===this.secondaryNames.length){
       var goNext:boolean=false;
       for(let primary of this.primaryNames){

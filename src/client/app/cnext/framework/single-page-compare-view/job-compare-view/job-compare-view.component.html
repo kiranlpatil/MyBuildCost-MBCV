@@ -6,9 +6,10 @@
     <img [src]="getImagePath(recruiter.company_logo)" alt="User Profile"
          *ngIf="recruiter.company_logo!=undefined"/>
     <div class="job-info-labal pull-left">
-      <div>
+      <div class="user-job-label">
         <span *ngIf="recruiter.postedJobs[0]">{{recruiter.postedJobs[0].jobTitle}}</span>
-        <span>{{recruiter.company_name}}</span>
+        <label>at</label>
+        <span class="company-name">{{recruiter.company_name}}</span>
       </div>
     </div>
     <img src="/assets/c-next/card-view/close-white.png" (click)="closeThis()" class="close"/>
@@ -19,8 +20,11 @@
     <img [src]="getImagePath(candidateDetails.picture)" alt="User Profile"
          *ngIf="candidateDetails.picture!=undefined"/>
     <div class="job-info-labal">
-      <div class="name pull-left">{{candidateDetails.first_name}} {{candidateDetails.last_name}}</div>
-      <div class="pull-left">{{candidate.jobTitle}}</div>
+      <div class="user-job-label pull-left">
+        <span class="name">{{candidateDetails.first_name}} {{candidateDetails.last_name}}</span>
+        <label>at</label>
+        <span class="jobTitle-name">{{candidate.jobTitle}}</span>
+      </div>
     </div>
 
     <img src="/assets/c-next/card-view/close-white.png" (click)="closeThis()" class="close"/>
@@ -29,163 +33,172 @@
 
 <div class="col-sm-12 no-padding">
   <section class="container-fluid one-page-summary" *ngIf="data != undefined && typeOfView =='spa_candidate'">
-    <section *ngIf="candidate != undefined && candidateDetails != undefined">
-      <div class="col-sm-3 left-content">
-        <div>
-          <div class="basic-description" *ngIf="candidateDetails != undefined">
-            <div class="basic-info clearfix">
-              <!-- <img src="assets/framework/images/dashboard/profile.png" alt="User Profile"
-                    *ngIf="candidateDetails.picture==undefined"/>
-               <img [src]="getImagePath(candidateDetails.picture)" alt="User Profile"
-                    *ngIf="candidateDetails.picture!=undefined"/>
-               <p class="name">{{candidateDetails.first_name}} {{candidateDetails.last_name}}</p>
-               <p>{{candidate.jobTitle}}</p>-->
-            </div>
+    <div class="left-container">
+      <section *ngIf="candidate != undefined && candidateDetails != undefined" >
+        <div class="col-sm-3 left-content">
+          <div>
+            <div class="basic-description" *ngIf="candidateDetails != undefined">
+              <div class="basic-info clearfix">
+                <!-- <img src="assets/framework/images/dashboard/profile.png" alt="User Profile"
+                      *ngIf="candidateDetails.picture==undefined"/>
+                 <img [src]="getImagePath(candidateDetails.picture)" alt="User Profile"
+                      *ngIf="candidateDetails.picture!=undefined"/>
+                 <p class="name">{{candidateDetails.first_name}} {{candidateDetails.last_name}}</p>
+                 <p>{{candidate.jobTitle}}</p>-->
+              </div>
 
-            <div class="details clearfix">
-              <label>Mobile</label>
-              <span>{{candidateDetails.mobile_number}}</span>
-              <label>Email</label>
-              <span>{{candidateDetails.email}}</span>
-              <label>Specialization area</label>
-              <span *ngFor="let role of candidate.industry.roles;let i = index">{{role.name}}
-        <span *ngIf="candidate.industry.roles.length>1 &&  i!=candidate.industry.roles.length-1">,</span>
-      </span>
-              <label>Industry Exposure</label>
-              <span *ngFor="let industry of candidate.interestedIndustries;let i = index">{{industry}}
-        <span *ngIf="candidate.interestedIndustries.length>1 && i<candidate.interestedIndustries.length-1">,</span>
-      </span>
-              <label [class.exact]="data.experienceMatch=='exact'" [class.missing]="data.experienceMatch=='missing'">Experience</label>
-              <span>{{candidate.professionalDetails.experience}}</span>
-              <label>Current Location</label>
-              <span>{{candidateDetails.location.city}}</span><!--<span>{{candidateDetails.location.city}}</span>-->
-              <label [class.exact]="data.releaseMatch=='exact'" [class.above]="data.releaseMatch=='above'"
-                     [class.below]="data.releaseMatch=='below'" [class.missing]="data.releaseMatch=='missing'">
-                Ready to Relocate</label>
-              <span>{{candidate.professionalDetails.relocate}}</span>
-              <label [class.exact]="data.salaryMatch=='exact'" [class.above]="data.salaryMatch=='above'"
-                     [class.below]="data.salaryMatch=='below'" [class.missing]="data.salaryMatch=='missing'">Current
-                Salary</label>
-              <span>{{candidate.professionalDetails.currentSalary}}</span>
-            </div>
-          </div>
-        </div>
-        <div *ngIf="candidate.employmentHistory.length>0">
-          <cn-vertical-list-view [data]="candidate.employmentHistory" [type]="'employment history'"
-                                 [calledFrom]="'singlepageview'"></cn-vertical-list-view>
-        </div>
-        <div *ngIf="candidate.academics.length>0">
-          <cn-vertical-list-view [data]="candidate.academics" [type]="'academic details'"
-                                 [calledFrom]="'singlepageview'"></cn-vertical-list-view>
-        </div>
-        <div *ngIf="candidate.awards.length>0">
-          <cn-vertical-list-view [data]="candidate.awards" [type]="'awards'"
-                                 [calledFrom]="'singlepageview'"></cn-vertical-list-view>
-        </div>
-        <div *ngIf="candidate.certifications.length>0">
-          <cn-vertical-list-view [data]="candidate.certifications" [type]="'certifications'"
-                                 [calledFrom]="'singlepageview'"></cn-vertical-list-view>
-        </div>
-      </div>
-    </section>
-  </section>
-
-
-  <section class="container-fluid one-page-summary" *ngIf="data != undefined && typeOfView =='spa_job'">
-    <section class="container-fluid ">
-      <div class="col-sm-3 left-content">
-        <div>
-          <div class="basic-description" *ngIf="recruiter != undefined">
-
-            <!-- <div class="basic-info clearfix">
-               <img src="assets/framework/images/dashboard/profile.png" alt="User Profile"
-                    *ngIf="recruiter.company_logo==undefined"/>
-               <img [src]="getImagePath(recruiter.company_logo)" alt="User Profile"
-                    *ngIf="recruiter.company_logo!=undefined"/>
-               <p class="name">{{recruiter.company_name}}</p>
-             </div>-->
-
-            <div class="details clearfix" *ngFor="let postedJob of recruiter.postedJobs">
-              <!-- <label class="first-label">Job Title </label>
-               <span>{{postedJob.jobTitle}}</span>-->
-              <label>Hiring Manager</label>
-              <span>{{postedJob.hiringManager}}</span>
-              <label>Department</label>
-              <span>{{postedJob.department}}</span>
-              <label>Industry</label>
-              <span>{{postedJob.industry.name}}</span>
-              <label>Specialization area</label>
-              <span *ngFor="let role of postedJob.industry.roles;let i = index">{{role.name}}
-        <span *ngIf="postedJob.industry.roles.length>1 &&  i!=postedJob.industry.roles.length-1">,</span>
-      </span>
-              <label>Additional Industry</label>
-              <span *ngFor="let industry of postedJob.interestedIndustries;let i = index">{{industry}}<span
-                *ngIf="recruiter.postedJobs[0].interestedIndustries.length>1 && i!=postedJob.interestedIndustries.length-1">,</span>
-      </span>
-              <label [class.exact]="data.educationMatch=='exact'" [class.above]="data.educationMatch=='above'"
-                     [class.below]="data.educationMatch=='below'"
-                     [class.missing]="data.educationMatch=='missing'">
-                <strong class="pull-left">Education</strong>
-                <img class="exact-img" src="assets/framework/images/dashboard/right-tick.svg"/>
-                <div class="info-description">
-                  <img class="missing-img" src="assets/framework/images/dashboard/info-red.svg"/>
-                  <div class="info-hover-section">
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                    industry's standard dummy text ever since the 1500s,
-                  </div>
-                </div>
-              </label>
-              <span>{{postedJob.education}}</span>
-              <label [class.exact]="data.experienceMatch=='exact'" [class.above]="data.experienceMatch=='above'"
-                     [class.below]="data.experienceMatch=='below'" [class.missing]="data.experienceMatch=='missing'">
-                <strong class="pull-left"> Experience Band</strong>
-                <img class="exact-img" src="assets/framework/images/dashboard/right-tick.svg"/>
-                <div class="info-description">
-                  <img class="missing-img" src="assets/framework/images/dashboard/info-red.svg"/>
-                  <div class="info-hover-section">
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                    industry's standard dummy text ever since the 1500s,
-                  </div>
-                </div>
-              </label>
-              <span>{{postedJob.experienceMinValue}} - {{postedJob.experienceMaxValue}}</span>
-              <label [class.exact]="data.salaryMatch=='exact'" [class.above]="data.salaryMatch=='above'"
-                     [class.below]="data.salaryMatch=='below'" [class.missing]="data.salaryMatch=='missing'">
-                <strong class="pull-left"> Salary Band </strong>
-                <img class="exact-img" src="assets/framework/images/dashboard/right-tick.svg"/>
-                <div class="info-description">
-                  <img class="missing-img" src="assets/framework/images/dashboard/info-red.svg"/>
-                  <div class="info-hover-section">
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                    industry's standard dummy text ever since the 1500s,
-                  </div>
-                </div>
-              </label>
-              <span>{{postedJob.salaryMinValue}} - {{postedJob.salaryMaxValue}}</span>
-              <label [class.exact]="data.releaseMatch=='exact'" [class.above]="data.releaseMatch=='above'"
-                     [class.below]="data.releaseMatch=='below'" [class.missing]="data.releaseMatch=='missing'">Joining
-                Period</label>
-              <span>{{postedJob.joiningPeriod}}</span>
-              <label>Location</label>
-              <span>{{postedJob.location.city}}</span>
-              <div> About Job
-                {{postedJob.competencies}}
+              <div class="details clearfix">
+                <label>Mobile</label>
+                <span>{{candidateDetails.mobile_number}}</span>
+                <label>Email</label>
+                <span>{{candidateDetails.email}}</span>
+                <label>Specialization area</label>
+                <span *ngFor="let role of candidate.industry.roles;let i = index">{{role.name}}
+          <span *ngIf="candidate.industry.roles.length>1 &&  i!=candidate.industry.roles.length-1">,</span>
+        </span>
+                <label>Industry Exposure</label>
+                <span *ngFor="let industry of candidate.interestedIndustries;let i = index">{{industry}}
+          <span *ngIf="candidate.interestedIndustries.length>1 && i<candidate.interestedIndustries.length-1">,</span>
+        </span>
+                <label [class.exact]="data.experienceMatch=='exact'" [class.missing]="data.experienceMatch=='missing'">Experience</label>
+                <span>{{candidate.professionalDetails.experience}}</span>
+                <label>Current company</label>
+                <span> Techprimelab </span>
+                <label>Current Location</label>
+                <span>{{candidateDetails.location.city}}</span><!--<span>{{candidateDetails.location.city}}</span>-->
+                <label [class.exact]="data.releaseMatch=='exact'" [class.above]="data.releaseMatch=='above'"
+                       [class.below]="data.releaseMatch=='below'" [class.missing]="data.releaseMatch=='missing'">
+                  Ready to Relocate</label>
+                <span>{{candidate.professionalDetails.relocate}}</span>
+                <label [class.exact]="data.salaryMatch=='exact'" [class.above]="data.salaryMatch=='above'"
+                       [class.below]="data.salaryMatch=='below'" [class.missing]="data.salaryMatch=='missing'">Current
+                  Salary</label>
+                <span>{{candidate.professionalDetails.currentSalary}}</span>
               </div>
             </div>
           </div>
+          <div *ngIf="candidate.employmentHistory.length>0">
+            <cn-vertical-list-view [data]="candidate.employmentHistory" [type]="'employment history'"
+                                   [calledFrom]="'singlepageview'"></cn-vertical-list-view>
+          </div>
+          <div *ngIf="candidate.academics.length>0">
+            <cn-vertical-list-view [data]="candidate.academics" [type]="'academic details'"
+                                   [calledFrom]="'singlepageview'"></cn-vertical-list-view>
+          </div>
+          <div *ngIf="candidate.awards.length>0">
+            <cn-vertical-list-view [data]="candidate.awards" [type]="'awards'"
+                                   [calledFrom]="'singlepageview'"></cn-vertical-list-view>
+          </div>
+          <div *ngIf="candidate.certifications.length>0">
+            <cn-vertical-list-view [data]="candidate.certifications" [type]="'certifications'"
+                                   [calledFrom]="'singlepageview'"></cn-vertical-list-view>
+          </div>
         </div>
-
-        <div class="about-company-label" *ngIf="recruiter != undefined">
-          <label>About Company</label>
-          <cn-additional-details [data]="recruiter.about_company"></cn-additional-details>
-        </div>
-        <!--  &lt;!&ndash; <div>
-           <cn-contact-details [recruiter]="recruiter"></cn-contact-details>
-         </div>&ndash;&gt;-->
-      </div>
-
-    </section>
+      </section>
+    </div>
   </section>
+
+  <div class="col-sm-12 no-padding">
+    <section class="container-fluid one-page-summary" *ngIf="data != undefined && typeOfView =='spa_job'">
+    <div class="left-container">
+        <section class=" ">
+          <div class="col-sm-3 left-content">
+            <div>
+              <div class="basic-description" *ngIf="recruiter != undefined">
+
+                <!-- <div class="basic-info clearfix">
+                   <img src="assets/framework/images/dashboard/profile.png" alt="User Profile"
+                        *ngIf="recruiter.company_logo==undefined"/>
+                   <img [src]="getImagePath(recruiter.company_logo)" alt="User Profile"
+                        *ngIf="recruiter.company_logo!=undefined"/>
+                   <p class="name">{{recruiter.company_name}}</p>
+                 </div>-->
+
+                <div class="details clearfix" *ngFor="let postedJob of recruiter.postedJobs">
+                  <!-- <label class="first-label">Job Title </label>
+                   <span>{{postedJob.jobTitle}}</span>-->
+                  <label>Hiring Manager</label>
+                  <span>{{postedJob.hiringManager}}</span>
+                  <label>Department</label>
+                  <span>{{postedJob.department}}</span>
+                  <label>Industry</label>
+                  <span>{{postedJob.industry.name}}</span>
+                  <label>Specialization area</label>
+                  <span *ngFor="let role of postedJob.industry.roles;let i = index">{{role.name}}
+            <span *ngIf="postedJob.industry.roles.length>1 &&  i!=postedJob.industry.roles.length-1">,</span>
+          </span>
+                  <label>Additional Industry</label>
+                  <span *ngFor="let industry of postedJob.interestedIndustries;let i = index">{{industry}}<span
+                    *ngIf="recruiter.postedJobs[0].interestedIndustries.length>1 && i!=postedJob.interestedIndustries.length-1">,</span>
+          </span>
+                  <label [class.exact]="data.educationMatch=='exact'" [class.above]="data.educationMatch=='above'"
+                         [class.below]="data.educationMatch=='below'"
+                         [class.missing]="data.educationMatch=='missing'">
+                    <strong class="pull-left">Education</strong>
+                    <img class="exact-img" src="assets/framework/images/dashboard/right-tick.svg"/>
+                    <div class="info-description">
+                      <img class="missing-img" src="assets/framework/images/dashboard/info-red.svg"/>
+                      <div class="info-hover-section">
+                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                        industry's standard dummy text ever since the 1500s,
+                      </div>
+                    </div>
+                  </label>
+                  <span>{{postedJob.education}}</span>
+                  <label [class.exact]="data.experienceMatch=='exact'" [class.above]="data.experienceMatch=='above'"
+                         [class.below]="data.experienceMatch=='below'" [class.missing]="data.experienceMatch=='missing'">
+                    <strong class="pull-left"> Experience Band</strong>
+                    <img class="exact-img" src="assets/framework/images/dashboard/right-tick.svg"/>
+                    <div class="info-description">
+                      <img class="missing-img" src="assets/framework/images/dashboard/info-red.svg"/>
+                      <div class="info-hover-section">
+                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                        industry's standard dummy text ever since the 1500s,
+                      </div>
+                    </div>
+                  </label>
+                  <span>{{postedJob.experienceMinValue}} - {{postedJob.experienceMaxValue}}</span>
+                  <label [class.exact]="data.salaryMatch=='exact'" [class.above]="data.salaryMatch=='above'"
+                         [class.below]="data.salaryMatch=='below'" [class.missing]="data.salaryMatch=='missing'">
+                    <strong class="pull-left"> Salary Band </strong>
+                    <img class="exact-img" src="assets/framework/images/dashboard/right-tick.svg"/>
+                    <div class="info-description">
+                      <img class="missing-img" src="assets/framework/images/dashboard/info-red.svg"/>
+                      <div class="info-hover-section">
+                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                        industry's standard dummy text ever since the 1500s,
+                      </div>
+                    </div>
+                  </label>
+                  <span>{{postedJob.salaryMinValue}} - {{postedJob.salaryMaxValue}}</span>
+                  <label [class.exact]="data.releaseMatch=='exact'" [class.above]="data.releaseMatch=='above'"
+                         [class.below]="data.releaseMatch=='below'" [class.missing]="data.releaseMatch=='missing'">Joining
+                    Period</label>
+                  <span>{{postedJob.joiningPeriod}}</span>
+                  <label>Location</label>
+                  <span>{{postedJob.location.city}}</span>
+                  <label>Current company</label>
+                  <span> Techprimelab </span>
+                  <label>About Job</label>
+                  <span>
+                    {{postedJob.competencies}}
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <div class="about-company-label" *ngIf="recruiter != undefined">
+              <label>About Company</label>
+              <cn-additional-details [data]="recruiter.about_company"></cn-additional-details>
+            </div>
+            <!--  &lt;!&ndash; <div>
+               <cn-contact-details [recruiter]="recruiter"></cn-contact-details>
+             </div>&ndash;&gt;-->
+          </div>
+        </section>
+      </div>
+    </section>
+  </div>
   <div *ngIf="data && (typeOfView =='spa_job' || typeOfView =='spa_candidate')">
     <div class="spa-candidate-col">
       <div class="col-sm-12">
@@ -198,7 +211,7 @@
             <span>{{item}}</span> <img class="" src="assets/framework/images/dashboard/right-tick.svg"/>
           </div>
           <div class="option missing" *ngFor="let item of data.proficienciesUnMatch;let i = index">
-            <span>{{item}}</span><img class="" src="assets/framework/images/dashboard/info-red.svg"/>
+            <span>{{item}}</span><img class="" src="assets/framework/images/dashboard/missing.svg"/>
           </div>
         </div>
       </div>
@@ -206,11 +219,11 @@
         <div class="col-sm-12 proficiency-compare-section-area">
           <h4 class="pull-left col-xs-3 no-padding text-left"
               *ngIf="(typeOfView =='spa_job' && data && data.proficiencies && data.proficiencies.length>0)">
-            These are your Extra Key Skills
+            These are your extra key skills
           </h4>
           <h4 class="pull-left col-xs-3 no-padding text-left"
               *ngIf="(typeOfView =='spa_candidate' && data && data.proficiencies && data.proficiencies.length>0)">
-            These are candidates Extra Key Skills
+            These are candidates extra key skills
           </h4>
           <div class="pull-left col-xs-8 no-padding text-left">
             <div class="pull-left" *ngFor="let item of data.proficiencies;let i = index"
@@ -225,10 +238,10 @@
         <div class="col-sm-12 proficiency-compare-section-area">
           <h4 class="pull-left col-xs-3 no-padding text-left"
               *ngIf="(typeOfView =='spa_job' && data && data.additionalCapabilites && data.additionalCapabilites.length>0)"
-          >You have Additional Capabilities </h4>
+          >Your additional capabilities </h4>
           <h4 class="pull-left col-xs-3 no-padding text-left"
               *ngIf="(typeOfView =='spa_candidate'&& data && data.additionalCapabilites && data.additionalCapabilites.length>0)"
-          >Candidate have Additional Capabilities </h4>
+          >Candidate additional capabilities </h4>
           <div *ngIf="data != undefined">
             <div class="pull-left col-xs-8 no-padding text-left">
               <div class="pull-left" *ngFor="let cap of data.additionalCapabilites" style="padding-top: 7px;padding-right: 7px;">
@@ -241,7 +254,6 @@
     </div>
   </div>
 
-
 </div>
 
 <section *ngIf="data != undefined && typeOfView=='compact'">
@@ -250,8 +262,8 @@
       <cn-capability-compare [capabilities]="capabilities"></cn-capability-compare>
     </div>
     <div class="col-sm-12 proficiency-compare-section-area">
-      <h4 class="pull-left col-xs-3 no-padding text-left">Key Skills</h4>
-      <div class="pull-left col-xs-9 no-padding text-left">
+      <h4 class="pull-left col-xs-3 no-padding text-left">Key skills</h4>
+      <div class="pull-left col-xs-7 no-padding text-left">
         <div class="option exact" *ngFor="let item of data.proficiencies;let i = index">
           <span>{{item}}</span> <img class="" src="assets/framework/images/dashboard/right-tick.svg"/>
         </div>
@@ -260,9 +272,9 @@
     <div class="col-sm-12 proficiency-compare-section-area">
       <h4 class="pull-left col-xs-3 no-padding text-left"
           *ngIf="(typeOfView =='compact'&& data && data.additionalCapabilites && data.additionalCapabilites.length>0)">
-        Candidate has Additional Capabilities </h4>
+        Candidate has additional capabilities </h4>
       <div>
-        <div class="pull-left col-xs-9 no-padding text-left">
+        <div class="pull-left col-xs-7 no-padding text-left">
           <div *ngIf="data != undefined">
             <div class="pull-left" *ngFor="let cap of data.additionalCapabilites" style="padding-top: 6px;padding-right: 7px;">
               <span> {{cap}} </span>,

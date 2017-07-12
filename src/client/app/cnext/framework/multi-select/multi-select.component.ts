@@ -15,6 +15,7 @@ export class MultiSelectComponent implements OnChanges {
   @Input() type: string;
   @Input() data: string[];
   @Output() onComplete = new EventEmitter();
+  @Input() submitStatus: boolean;
 
   private selectedProficiencies = new Array();
   private masterDataProficiencies = new Array();
@@ -59,6 +60,7 @@ export class MultiSelectComponent implements OnChanges {
 
   selectedProficiencyModel(newVal: any) {
     if (newVal !== '') {
+      this.submitStatus = false;
       if (this.selectedProficiencies.length < this.maxLength) {
         if (this.selectedProficiencies.indexOf(newVal) === -1) {
           this.selectedProficiencies.push(newVal);

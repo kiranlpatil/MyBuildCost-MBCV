@@ -6,7 +6,7 @@
           <label>Certification Name</label>
           <input type="text" class="form-control" formControlName="name" required/>
           <div class="error-messages"
-               *ngIf="certificateForm.get('name').touched && certificateForm.get('name').hasError('required')">
+               *ngIf="(certificateForm.get('name').touched || submitStatus)&& certificateForm.get('name').hasError('required')">
             Certification Name is required
           </div>
         </div>
@@ -17,7 +17,7 @@
           <label>Certification authority</label>
           <input class="form-control" type="text" formControlName="issuedBy" required/>
           <div class="error-messages"
-               *ngIf="certificateForm.get('issuedBy').touched && certificateForm.get('issuedBy').hasError('required')">
+               *ngIf="(certificateForm.get('issuedBy').touched || submitStatus)&& certificateForm.get('issuedBy').hasError('required')">
             Authority Name is required
           </div>
         </div>
@@ -31,7 +31,7 @@
             </option>
           </select>
           <div class="error-messages"
-               *ngIf="certificateForm.get('year').touched && certificateForm.get('year').hasError('required')">
+               *ngIf="(certificateForm.get('year').touched || submitStatus)&& certificateForm.get('year').hasError('required')">
             Year Of Passing is required
           </div>
         </div>

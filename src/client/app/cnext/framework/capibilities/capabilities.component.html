@@ -21,12 +21,13 @@
             </div>
           </span>
         </div>
+        <div class="error-messages" *ngIf="emptyCapabilities">Select your capabilities.</div>
         <div class="button-group clearfix">
           <button class="btn btn-success" scrollTo scrollTargetSelector="#complexity-area"
-                  (click)="onNext()" [disabled]="!(primaryNames.length>0)" [hidden]="!showButton">Next
+                  (click)="onNext()" [hidden]="!showButton">Next
           </button>
           <button class="btn btn-default" (click)="onCancel()" [hidden]="showButton">Cancel</button>
-          <button class="btn btn-success"  (click)="onSave()"  [disabled]="!(primaryNames.length>0)" [hidden]="showButton">Save</button>
+          <button class="btn btn-success"  (click)="onSave()"  [hidden]="showButton">Save</button>
         </div>
       </div>
 

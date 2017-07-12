@@ -18,6 +18,7 @@ export class AcademicDetailComponent implements OnInit, OnChanges {
   public academicDetail: FormGroup;
   public showButton: boolean = true;
   private isButtonShow: boolean = false;
+  private submitStatus: boolean;
   constructor(private _fb: FormBuilder, private profileCreatorService: CandidateProfileService) {
   }
 
@@ -60,6 +61,7 @@ export class AcademicDetailComponent implements OnInit, OnChanges {
   }
 
   addAcademicDetail() {
+    this.submitStatus = false;
     const control = <FormArray>this.academicDetail.controls['academicDetails'];
     const addrCtrl = this.initAcademicDetails();
     control.push(addrCtrl);
@@ -72,6 +74,10 @@ export class AcademicDetailComponent implements OnInit, OnChanges {
   }
 
   postData(type: string) {
+    if(!this.academicDetail.valid){
+      this.submitStatus = true;
+      return;
+    }
     this.candidate.academics = this.academicDetail.value.academicDetails;
     this.profileCreatorService.addProfileDetail(this.candidate).subscribe(
       user => {

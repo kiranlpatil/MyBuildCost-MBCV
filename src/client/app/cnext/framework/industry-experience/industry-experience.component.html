@@ -14,12 +14,15 @@
             <span>{{choice.name}}</span>
           </label>
         </div>
+        <div class="error-messages"
+             *ngIf="submitStatus">
+          <p>You can't leave this empty.</p>
+        </div>
         <div class="button-group clearfix">
           <button class="btn btn-success" scrollTo scrollTargetSelector="#professional-details"
-                  (click)="onNext()" [hidden]="!showButton" [disabled]="selectedIndustries.length==0">Next
+                  (click)="onNext()" [hidden]="!showButton">Next
           </button>
-          <button class="btn btn-success" (click)="onSave()" [hidden]="showButton"
-                  [disabled]="selectedIndustries.length==0">Next
+          <button class="btn btn-success" (click)="onSave()" [hidden]="showButton">Next
           </button>
         </div>
       </div>

@@ -28,11 +28,9 @@ import {NotificationService} from "./framework/shared/notification/notification.
 import {NotificationComponent} from "./framework/shared/notification/notification.component";
 import {ForgotPasswordService} from "./framework/password/forgot-password/forgot-password.service";
 import {SocialIconComponent} from "./framework/shared/footer/social-icon/social-icon.component";
-import {RegistrationService} from "./framework/registration/registration.service";
 import {LoaderComponent} from "./framework/shared/loader/loader.component";
 import {ThemeChangeService} from "./framework/shared/themechange.service";
 import {LoginService} from "./framework/login/login.service";
-import {RegistrationComponent} from "./framework/registration/registration.component";
 import {DashboardService} from "./framework/dashboard/dashboard.service";
 import {ProfileService} from "./framework/shared/profileservice/profile.service";
 import {ContactService} from "./framework/dashboard/contact/contact.service";
@@ -56,7 +54,6 @@ import {CandidateComponent} from "./framework/registration/candidate/candidate.c
 import {RecruiterComponent} from "./framework/registration/recruiter/recruiter.component";
 import {CandidateService} from "./framework/registration/candidate/candidate.service";
 import {RecruiterService} from "./framework/registration/recruiter/recruiter.service";
-import {RecruitingService} from "./framework/shared/recruiting.service";
 import {ScrollToModule} from "ng2-scroll-to";
 import {ProfilePictureComponent} from "./cnext/framework/profile-picture/profile-picture.component";
 import {MainHeaderComponent} from "./framework/main-header/main-header.component";
@@ -183,7 +180,6 @@ import {ComplexityComponentService} from "./cnext/framework/complexities/complex
     MainHeaderComponent,
     TooltipComponent,
     LoginComponent,
-    RegistrationComponent,
     CandidateComponent,
     RecruiterComponent,
     CandidateDashboardHeaderComponent,
@@ -287,7 +283,6 @@ import {ComplexityComponentService} from "./cnext/framework/complexities/complex
       useValue: '<%= APP_BASE %>'
     },
     MessageService,
-    RecruitingService,
     ComplexityComponentService,
     FacebookService,
     LoginService,
@@ -302,7 +297,6 @@ import {ComplexityComponentService} from "./cnext/framework/complexities/complex
     NotificationService,
     ForgotPasswordService,
     ThemeChangeService,
-    RegistrationService,
     CandidateService,
     RecruiterService,
     DashboardService,

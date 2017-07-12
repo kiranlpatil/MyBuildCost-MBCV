@@ -8,7 +8,6 @@ import {AppSettings, CommonService, Message, MessageService, NavigationRoutes} f
 import {ImagePath, LocalStorage} from "../../shared/constants";
 import {LocalStorageService} from "../../shared/localstorage.service";
 import {Http, Response} from "@angular/http";
-import {RecruitingService} from "../../shared/recruiting.service";
 import {Location} from "../location";
 import {MyGoogleAddress} from "../candidate/google-our-place/my-google-address";
 
@@ -36,6 +35,7 @@ export class RecruiterComponent implements OnInit {
   private isShowMessage: boolean = false;
   private myPassword: string = '';
   private storedLocation: Location = new Location();
+  private mainHeaderMenuHideShow:string;
   private address: any;
   private submitStatus: boolean;
   private companySizeErrorMessage: string;
@@ -43,14 +43,8 @@ export class RecruiterComponent implements OnInit {
   private companyHQErrorMessage: string;
 
   constructor(private commonService: CommonService, private _router: Router, private http: Http,
-              private recruiterService: RecruiterService, private recruitmentForService: RecruitingService,
-              private messageService: MessageService, private formBuilder: FormBuilder) {
+              private recruiterService: RecruiterService, private messageService: MessageService, private formBuilder: FormBuilder) {
 
-    recruitmentForService.showRecruitmentFor$.subscribe(
-      data => {
-        this.isRecruitingForself = data;
-      }
-    );
 
     this.recruiterForm = this.formBuilder.group({
       'company_name': ['', ValidationService.requireCompanyNameValidator],
@@ -70,6 +64,7 @@ export class RecruiterComponent implements OnInit {
 
   ngOnInit() {
     this.model = this.recruiterForm.value;
+    this.mainHeaderMenuHideShow = 'recruiter';
 
 
     this.http.get('companysize')
@@ -123,6 +118,11 @@ export class RecruiterComponent implements OnInit {
       this.submitStatus = true;
       return;
     }
+
+    if(!this.recruiterForm.valid){
+      return
+    }
+
     this.model.current_theme = AppSettings.LIGHT_THEM;
     this.model.location = this.storedLocation;
     this.model.isCandidate = false;
@@ -185,5 +185,11 @@ export class RecruiterComponent implements OnInit {
 
       this.isShowMessage = false;
     }
+  }
+  recruitmentForOthers() {
+    this.isRecruitingForself = false;
+  }
+  recruitmentForSelf() {
+    this.isRecruitingForself = true;
   }
 }

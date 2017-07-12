@@ -14,6 +14,9 @@ import { ValueConstant } from '../../../../framework/shared/constants';
 export class CertificatesComponent {
   @Input('group')
   public certificateForm: FormGroup;
+
+  @Input() submitStatus: boolean;
+
   private year: any;
   private currentDate: any;
   private yearList = new Array();

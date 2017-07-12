@@ -49,6 +49,10 @@ export class ForgotPasswordComponent {
       this.submitStatus = true;
       return;
     }
+    if(!this.userForm.valid) {
+      this.submitStatus = true;
+      return;
+    }
     this.forgotPasswordService.forgotPassword(this.model)
       .subscribe(
         body => this.forgotPasswordSuccess(body),

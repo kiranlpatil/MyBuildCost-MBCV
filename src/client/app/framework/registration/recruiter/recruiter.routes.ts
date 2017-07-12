@@ -3,7 +3,7 @@ import {RecruiterComponent} from "./index";
 
 export const RecruiterRoutes: Route[] = [
   {
-    path: 'recruiterRegistration',
+    path: 'recruiter-signup',
     component: RecruiterComponent
   }
 ];

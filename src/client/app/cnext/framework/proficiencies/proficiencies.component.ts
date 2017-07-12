@@ -28,7 +28,7 @@ export class ProficienciesComponent {
   }
 
   private showButton: boolean = true;
-
+  private submitStatus: boolean;
 
   onProficiencyComplete(proficiency: string[]) {
     /*if (proficiency.length > 0) {
@@ -36,16 +36,25 @@ export class ProficienciesComponent {
      } else {
      this.disablebutton = true;
      }*/
+    this.submitStatus = false;
     this.onSelect.emit(proficiency);
   }
 
   onNext() {
+    if(this.choosedproficiencies.length == 0){
+      this.submitStatus = true;
+      return
+    }
     this.onComplete.emit();
     this.highlightedSection.name = 'IndustryExposure';
     this.highlightedSection.isDisable = false;
   }
 
   onSave() {
+    if(this.choosedproficiencies.length == 0){
+      this.submitStatus = true;
+      return
+    }
     this.highlightedSection.name = 'none';
     this.highlightedSection.isDisable = false;
     this.onComplete.emit();

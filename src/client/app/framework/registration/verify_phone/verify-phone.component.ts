@@ -46,6 +46,10 @@ export class VerifyPhoneComponent {
       this.submitStatus = true;
       return;
     }
+    if(!this.userForm.valid){
+      return
+    }
+
     if (LocalStorageService.getLocalValue(LocalStorage.VERIFY_PHONE_VALUE) === 'from_registration') {
       this.verifyPhoneService.verifyPhone(this.model)
         .subscribe(

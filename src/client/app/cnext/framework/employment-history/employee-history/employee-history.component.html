@@ -5,7 +5,7 @@
         <label>Company Name</label>
         <input type="text" class="form-control" formControlName="companyName" required/>
         <div class="error-messages"
-             *ngIf="employeeForm.get('companyName').touched && employeeForm.get('companyName').hasError('required')">
+             *ngIf="(employeeForm.get('companyName').touched || submitStatus) && employeeForm.get('companyName').hasError('required')">
           <p>Company Name is required</p>
         </div>
       </div>
@@ -16,7 +16,7 @@
         <label>Designation</label>
         <input type="text" class="form-control" formControlName="designation" required/>
         <div class="error-messages"
-             *ngIf="employeeForm.get('designation').touched && employeeForm.get('designation').hasError('required')">
+             *ngIf="(employeeForm.get('designation').touched || submitStatus)&& employeeForm.get('designation').hasError('required')">
           <p>Designation is required</p>
         </div>
       </div>

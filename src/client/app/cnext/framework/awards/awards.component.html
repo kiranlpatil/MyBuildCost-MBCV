@@ -11,31 +11,31 @@
           <span class="glyphicon glyphicon-trash pull-right"
                 *ngIf="awardDetail.controls.awards.controls.length>0 && awardDetail.controls.awards.controls.length !==1 "
                 (click)="removeAward(i)"></span>
-            </div>
-            <div class="panel-body" [formGroupName]="i">
-              <cn-award [group]="awardDetail.controls.awards.controls[i]"></cn-award>
-            </div>
+          </div>
+          <div class="panel-body" [formGroupName]="i">
+            <cn-award [group]="awardDetail.controls.awards.controls[i]" [submitStatus] = "submitStatus"></cn-award>
           </div>
         </div>
+      </div>
 
-        <div class="margin-20">
-          <button (click)="addAward()" class="btn btn-create-profile" [disabled]="!awardDetail.valid">
-            Add another
-          </button>
-        </div>
-        <div class="button-group clearfix">
-          <button class="btn btn-default" (click)="highlightedSection.name='none';highlightedSection.isDisable=false">
-            Cancel
-          </button>
-          <button type="submit" class="btn btn-success" scrollTo scrollTargetSelector="#certification"
-                  (click)="postData('next')" [disabled]="!awardDetail.valid" [hidden]="!showButton">Next
-          </button>
-          <button type="submit" class="btn btn-success" (click)="postData('save')" [disabled]="!awardDetail.valid"
-                  [hidden]="showButton">Save
-          </button>
-        </div>
-        <div class="clearfix"></div>
-      </form>
+      <div class="margin-20">
+        <button (click)="addAward()" class="btn btn-create-profile" [disabled]="!awardDetail.valid">
+          Add another
+        </button>
+      </div>
+      <div class="button-group clearfix">
+        <button class="btn btn-default" (click)="highlightedSection.name='none';highlightedSection.isDisable=false">
+          Cancel
+        </button>
+        <button type="submit" class="btn btn-success" scrollTo scrollTargetSelector="#certification"
+                (click)="postData('next')" [hidden]="!showButton">Next
+        </button>
+        <button type="submit" class="btn btn-success" (click)="postData('save')"
+                [hidden]="showButton">Save
+        </button>
+      </div>
+      <div class="clearfix"></div>
+    </form>
     </div>
     <div class="col-sm-3 no-padding">
       <cn-tool-tip></cn-tool-tip>

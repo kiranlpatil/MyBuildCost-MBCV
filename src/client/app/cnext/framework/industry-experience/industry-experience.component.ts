@@ -32,6 +32,8 @@ export class IndustryExperienceListComponent implements OnInit,OnChanges {
   private selectedIndustries: string[] = new Array(0);
   private disableButton: boolean = true;
   private isCandidate:boolean = false;
+  private submitStatus: boolean;
+
   constructor(private candidateProfileService: CandidateProfileService) {
     this.getIndustries();
     this.candidateExperiencedIndustry = new Array(0);
@@ -62,6 +64,7 @@ export class IndustryExperienceListComponent implements OnInit,OnChanges {
 
   selectIndustryModel(industry: string, event: any) {
     if (event.target.checked) {
+      this.submitStatus = false;
     if(this.candidateExperiencedIndustry.indexOf('None')!=-1){
       this.candidateExperiencedIndustry.splice(this.candidateExperiencedIndustry.indexOf('None'));
     }
@@ -89,7 +92,10 @@ export class IndustryExperienceListComponent implements OnInit,OnChanges {
   }
 
   onNext() {
-
+    if(this.selectedIndustries.length==0) {
+      this.submitStatus = true;
+      return;
+    }
     if (LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE) === 'true') {
       this.highlightedSection.name = 'Professional-Details';
       this.highlightedSection.isDisable = false;
@@ -103,6 +109,10 @@ export class IndustryExperienceListComponent implements OnInit,OnChanges {
   }
 
   onSave() {
+    if(this.selectedIndustries.length==0) {
+      this.submitStatus = true;
+      return;
+    }
     this.highlightedSection.name = 'none';
     this.highlightedSection.isDisable = false;
   }

@@ -6,7 +6,11 @@
     </button>
   </div>
 </div>
-
+<section class="main-form-wrapper registration">
+  <main-header [MainHeaderMenuHideShow]="mainHeaderMenuHideShow"></main-header>
+  <!--<app-loader></app-loader>-->
+  <div class="content">
+    <h5>Register </h5>
 <form [formGroup]="userForm" (submit)="onSubmit()" class="employee-form" novalidate>
 
   <div class="form-group">
@@ -86,4 +90,5 @@
     <button type="submit" class="btn btn-success">Create my account</button>
   </div>
 </form>
-
+  </div>
+</section>

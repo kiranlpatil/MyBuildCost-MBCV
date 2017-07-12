@@ -1,6 +1,5 @@
 import {Routes} from "@angular/router";
 import {LoginRoutes} from "./framework/login/index";
-import {RegistrationRoutes} from "./framework/registration/index";
 import {DashboardRoutes} from "./framework/dashboard/index";
 import {ForgotPasswordRoutes} from "./framework/password/forgot-password/index";
 import {StartRoutes} from "./framework/start/start.routes";
@@ -32,7 +31,6 @@ import {JobCompare} from "./cnext/framework/single-page-compare-view/job-compare
 export const routes: Routes = [
   ...LandingPageRoutes,
   ...LoginRoutes,
-  ...RegistrationRoutes,
   ...CandidateRoutes,
   ...RecruiterRoutes,
   ...ActivateUserRoutes,
