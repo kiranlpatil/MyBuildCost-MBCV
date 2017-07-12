@@ -43,8 +43,7 @@ $black: #333;
   z-index: 100;
   position: fixed;
   border-radius: 0;
-  //animation: fadein .5s;
-  margin: 7px 15px;
+  margin: 0 auto;
   box-shadow: 1px 1px 1px 0 $modal-bg;
   border: 1px solid $theme-color;
   padding: 0 0 15px !important;
@@ -54,6 +53,7 @@ $black: #333;
   width: 950px;
   height: 500px;
   transform: translate(-50%, -50%) !important;
+  border-radius: 10px;
 }
 
 .compact-view {
@@ -105,7 +105,6 @@ $black: #333;
   }
 
   .heading {
-    background: none !important;
     margin: 0 0 15px !important;
     padding: 0 !important;
     border-radius: 0 !important;
@@ -137,7 +136,7 @@ $black: #333;
     }
 
     form {
-      display: none;
+      display: none !important;
     }
   }
 
@@ -199,7 +198,7 @@ $black: #333;
 
 .quarter-width {
   width: 25%;
-  float: left
+  float: left;
 }
 
 .half-width {

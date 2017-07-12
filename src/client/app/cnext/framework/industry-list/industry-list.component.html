@@ -19,10 +19,17 @@
           </div>
         </div>
       </div>
+      <div class="button-group clearfix">
+        <button class="btn btn-success" (click)="onNext()" [disabled]="disableButton">Next</button>
+      </div>
     </div>
-    <div class="button-group clearfix">
-      <button class="btn btn-success" (click)="onNext()" [disabled]="disableButton">Next</button>
+
+    <div class="col-sm-3 no-padding">
+      <cn-tool-tip></cn-tool-tip>
     </div>
+
+    <button class="btn-prev"><span class="glyphicon glyphicon-chevron-left"></span></button>
+
   </div>
 </div>
 <div class="section-container">

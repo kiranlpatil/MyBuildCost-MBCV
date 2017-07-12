@@ -4,41 +4,19 @@ $instruction: #00aed5;
 $error: #e82c0c;
 $border-color: #e8e8e8;
 $info: #999;
-$theme-color: #3694d1;
+$theme-color: #0d75fa;
+$black: #333;
 
 .section-container {
   text-align: left;
   position: relative;
 
   .tooltip-message {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 18%;
-    margin-right: -18%;
-    background: #fdefc4;
+    background: $theme-color;
     clear: both;
-    padding: 0;
-    border-radius: 8px;
-    border: 1px solid #f0daa6;
     font-size: 13px;
-    -webkit-animation: fadeinout 2s linear forwards;
-    animation: fadeinout 2s linear forwards;
-    z-index: 3;
-
-    .tooltiptail {
-      display: block;
-      border-color: transparent #fdefc4 transparent transparent;
-      border-style: solid;
-      border-width: 15px 25px 0 56px;
-      width: 0;
-      height: 0;
-      position: absolute;
-      top: 39px;
-      left: -76px;
-      z-index: 4;
-      transform: rotate(-21deg);
-    }
+    height: 100vh;
+    padding: 50px 0 0;
 
     ul {
       padding: 0 5px;
@@ -47,10 +25,10 @@ $theme-color: #3694d1;
     }
 
     p {
-      margin: 0 0 5px;
-      font-size: 10px;
+      margin: 0 0 15px;
+      font-size: 11px;
       display: block;
-      color: #666;
+      color: $white;
     }
 
     h5 {
@@ -58,31 +36,8 @@ $theme-color: #3694d1;
       font-size: 13px;
       font-weight: 900;
       font-family: 'gothamrnd-book';
+      color: $white;
     }
-  }
-}
-
-@-webkit-keyframes fadeinout {
-  0% {
-    opacity: 0;
-  }
-  30% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-@keyframes fadeinout {
-  0% {
-    opacity: 0;
-  }
-  30% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
   }
 }
 
@@ -102,15 +57,13 @@ $theme-color: #3694d1;
   position: relative;
 
   .heading {
-    color: $theme-color;
-    font-size: 13px;
+    color: $black !important;
+    font-size: 20px;
     margin: 0 0 15px;
-    padding: 8px 15px;
+    padding: 15px 15px 8px;
     position: relative;
     text-align: left;
-    font-family: 'gothamrnd-book';
-    font-weight: bold;
-    background: #f1f1f1;
+    font-family: 'gothamrnd-light';
     border-radius: 5px;
 
     span {
@@ -289,6 +242,14 @@ $theme-color: #3694d1;
         outline: none;
       }
     }
+  }
+
+  .btn-prev {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    background: transparent;
+    border: 0;
   }
 
   .form {

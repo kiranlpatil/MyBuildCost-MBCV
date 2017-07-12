@@ -1,11 +1,8 @@
 <div class="modal-bg" *ngIf="highlightedSection.name=='Complexities'"></div>
 <div class="section-container clearfix" *ngIf="highlightedSection.name=='Complexities'">
-  <cn-tool-tip [message]="tooltipCandidateMessage" *ngIf="isCandidate"></cn-tool-tip>
-  <cn-tool-tip [message]="tooltipRecruiterMessage" *ngIf="!isCandidate"></cn-tool-tip>
-  <div class="main-content clearfix modal-content">
-    <div class="complexities">
-      <h4 class="heading">
-        Capabilities Details
+  <div class="main-content clearfix edit-modal-content">
+    <div class="complexities col-sm-9">
+      <h4 class="heading">Capabilities Details
         <span class="pull-right">{{currentComplexity+1}}/{{complexityIds.length}}</span>
       </h4>
       <div class="complexity-container">
@@ -13,18 +10,22 @@
           <div class="button-group clearfix clear">
             <div>
               <button class="btn btn-success btn-next" (click)="onNext()" [disabled]="currentComplexity===complexityIds.length">Next</button>
-              <button class="btn btn-prev" (click)="onPrevious()" [disabled]="currentComplexity===0"><span class="glyphicon glyphicon-chevron-left"></span></button>
             </div>
           </div>
       </div>
     </div>
+    <div class="col-sm-3 no-padding">
+      <cn-tool-tip [message]="tooltipCandidateMessage" *ngIf="isCandidate"></cn-tool-tip>
+      <cn-tool-tip [message]="tooltipRecruiterMessage" *ngIf="!isCandidate"></cn-tool-tip>
+    </div>
+    <button class="btn-prev" (click)="onPrevious()" [disabled]="currentComplexity===0"><span class="glyphicon glyphicon-chevron-left"></span></button>
   </div>
 </div>
 <div class="section-container " *ngIf="highlightedSection.name!='Complexities'">
   <div class="main-content clearfix">
     <div class="compact-view">
       <a data-toggle="collapse" data-target="#demo" (click)="showMore = !showMore">
-        <h4 class="heading">Complexities handled for the above Capabilities
+        <h4 class="heading-compact">Complexities handled for the above Capabilities
           <button class="btn-edit" (click)="edit()"
                   [hidden]="highlightedSection.isDisable" title="Edit Complexities"></button>
         </h4>
