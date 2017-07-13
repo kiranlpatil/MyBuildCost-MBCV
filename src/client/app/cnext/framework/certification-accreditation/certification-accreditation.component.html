@@ -29,9 +29,9 @@
         Cancel
       </button>
       <button type="submit" class="btn btn-primary" scrollTo scrollTargetSelector="#certification"
-              (click)="postData('next')" [hidden]="!showButton">Next
+              (click)="postData('next')" *ngIf="!candidate.isSubmitted">Next
       </button>
-      <button type="submit" class="btn btn-primary" (click)="postData('save')" [hidden]="showButton">Save
+      <button type="submit" class="btn btn-primary" (click)="postData('save')" *ngIf="candidate.isSubmitted">Save
       </button>
       <button (click)="addCertification()" class="btn btn-add-another" [disabled]="!certificationDetail.valid">
         Add another

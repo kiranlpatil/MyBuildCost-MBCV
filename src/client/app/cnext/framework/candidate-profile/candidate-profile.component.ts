@@ -148,27 +148,23 @@ export class CandidateProfileComponent implements OnInit {
 
   onProfessionalDataComplete() {
     this.whichStepsVisible[5] = true;
-    this.showEmploymentHistory = true;
-    this.showAcademicsDetails = true;
-    this.showCertificationDetails = true;
-    this.showAwards = true;
     this.showAboutMySelf = true;
   }
 
   onEmploymentHistoryComplete() {
-
+    this.showEmploymentHistory = true;
   }
 
   onAcademicDetailsComplete() {
-
+    this.showAcademicsDetails = true;
   }
 
   onCertificationsComplete() {
-
+    this.showCertificationDetails = true;
   }
 
   onAwardsComplete() {
-
+    this.showAwards = true;
   }
 
   onMoreAboutMySelfComplete(data:string) {

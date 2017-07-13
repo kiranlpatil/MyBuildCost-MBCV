@@ -26,13 +26,10 @@
     </div>
     <div class="button-group clearfix">
       <div class="saving-loader">Saving...</div>
-      <button class="btn btn-default" (click)="highlightedSection.name='none';highlightedSection.isDisable=false">
-        Cancel
+      <button type="submit" class="btn btn-primary" *ngIf="!candidate.isSubmitted"
+              (click)="postData('next')">Next
       </button>
-      <button type="submit" class="btn btn-primary" scrollTo scrollTargetSelector="#certification"
-              (click)="postData('next')" [hidden]="!showButton">Next
-      </button>
-      <button type="submit" class="btn btn-primary" (click)="postData('save')" [hidden]="showButton">Save
+      <button type="submit" class="btn btn-primary" (click)="postData('save')" *ngIf="candidate.isSubmitted">Done
       </button>
       <button (click)="addAcademicDetail()" class="btn btn-add-another" [disabled]="!academicDetail.valid">
         Add another

@@ -28,10 +28,10 @@
         Cancel
       </button>
       <button type="submit" class="btn btn-primary" scrollTo scrollTargetSelector="#certification"
-              (click)="postData('next')" [hidden]="!showButton">Next
+              (click)="postData('next')" *ngIf="!candidate.isSubmitted">Next
       </button>
       <button type="submit" class="btn btn-primary" (click)="postData('save')"
-              [hidden]="showButton">Save
+              *ngIf="candidate.isSubmitted">Done
       </button>
       <button (click)="addAward()" class="btn btn-add-another" [disabled]="!awardDetail.valid">
         Add another
