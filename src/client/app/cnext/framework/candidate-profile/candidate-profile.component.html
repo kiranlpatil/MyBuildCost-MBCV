@@ -74,7 +74,7 @@
                               (onComplete)="onProfessionalDataComplete($event)"
                               [hidden]="!showProfessionalData"></cn-professional-data>
       </div>
-      <div class="wrapper">
+      <div class="wrapper clearfix">
         <cn-more-about-myself [candidate]="candidate" [highlightedSection]="highlightedSection"
                               (onComplete)="onMoreAboutMySelfComplete($event)"
                               [hidden]="!showAboutMySelf"></cn-more-about-myself>
@@ -120,9 +120,9 @@
           </div>
         </div>
 
-        <div class="profile-configurations" [hidden]="!showAboutMySelf">
+        <div class="profile-configurations" [hidden]="!showAboutMySelf" >
           <div class="col-sm-6 text-left">
-            <div class="button-group">
+            <div class="button-group" *ngIf="!candidate.isSubmitted">
               <button class="btn btn-success" tabindex="1" (click)="showHideModal()">Submit</button>
               <!--<button class="btn btn-default">Cancel</button>-->
             </div>

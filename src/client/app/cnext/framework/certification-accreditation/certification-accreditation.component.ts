@@ -36,6 +36,8 @@ export class CertificationAccreditationComponent {
     this.certificationDetail.controls['certifications'].valueChanges.subscribe(x => {
       this.isButtonShow = true;
     });
+
+    this.addCertification();
   }
 
   ngOnChanges(changes: any) {

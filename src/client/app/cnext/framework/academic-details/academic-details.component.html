@@ -49,21 +49,30 @@
     <div class="compact-view clearfix">
       <div *ngIf="academicDetail.controls.academicDetails.controls.length==0">
 
-        <h4 class="heading-compact"
-            (click)="highlightedSection.name='AcademicDetails';addAcademicDetail();highlightedSection.isDisable=true;showButton=false">
+        <h4 class="heading-compact">
           <img src="assets/c-next/icons/education-icon.png" alt="employment"/>
           Academic Details
-          <span class="glyphicon glyphicon-plus" title="Add Academic Details"></span>
         </h4>
       </div>
 
-      <div class="vertical-container" *ngIf="academicDetail.controls.academicDetails.controls.length>0">
-       <!-- <button class="btn-edit"
-
-                [hidden]="highlightedSection.isDisable" tooltip="Edit Academic Details"></button>-->
-        <cn-vertical-list-view [data]="candidate.academics" [type]="'academic details'" [calledFrom]="'candidateview'"></cn-vertical-list-view>
+      <div class="" *ngIf="academicDetail.controls.academicDetails.controls.length>0">
+        <h4 class="heading-compact">
+          <img src="assets/c-next/icons/education-icon.png" alt="employment"/>
+          Academic Details
+        </h4>
+        <ul>
+          <div *ngFor="let item of candidate.academics;let i = index">
+            <div *ngIf="i == 0">
+              <li>
+                <p>{{item.specialization}} at {{item.board}} in {{item.yearOfPassing}}</p>
+                <p *ngIf="candidate.academics.length != 1">( {{candidate.academics.length-1}} more )</p>
+              </li>
+            </div>
+          </div>
+        </ul>
       </div>
     </div>
   </div>
 </div>
+
 

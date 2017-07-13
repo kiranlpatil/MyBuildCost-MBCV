@@ -49,18 +49,26 @@
       <div *ngIf="awardDetail.controls.awards.controls.length==0">
         <!--*ngIf="candidate.awards != undefined && candidate.awards.length==1 && candidate.awards[0].name=='' && candidate.awards[0].issuedBy=='' "-->
 
-        <h4 class="heading-compact"
-            (click)="highlightedSection.name='Awards';addAward();highlightedSection.isDisable=true;showButton=false">
+        <h4 class="heading-compact">
           <img src="assets/c-next/icons/awards.png" alt="employment"/>
           Awards
-          <span class="glyphicon glyphicon-plus" title="Add Awards"></span>
         </h4>
       </div>
-      <div class="vertical-container" *ngIf=" awardDetail.controls.awards.controls.length>0 ">
-       <!-- <button class="btn-edit"
-
-                [hidden]="highlightedSection.isDisable" title="Edit Awards"></button>-->
-        <cn-vertical-list-view [data]="candidate.awards" [type]="'awards'" [calledFrom]="'candidateview'"></cn-vertical-list-view>
+      <div class="" *ngIf=" awardDetail.controls.awards.controls.length>0 ">
+        <h4 class="heading-compact">
+          <img src="assets/c-next/icons/awards.png" alt="employment"/>
+          Awards
+        </h4>
+        <ul>
+          <div *ngFor="let item of candidate.awards;let i = index">
+            <div *ngIf="i == 0">
+              <li>
+                <p>{{item.name}} at {{item.issuedBy}} in {{item.year}}</p>
+                <p *ngIf="candidate.awards.length != 1">( {{candidate.awards.length-1}} more )</p>
+              </li>
+            </div>
+          </div>
+        </ul>
       </div>
     </div>
   </div>

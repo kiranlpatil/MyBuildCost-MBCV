@@ -32,6 +32,8 @@ export class AcademicDetailComponent implements OnInit, OnChanges {
     this.academicDetail.controls['academicDetails'].valueChanges.subscribe(x => {
       this.isButtonShow = true;
     });
+
+    this.addAcademicDetail();
   }
 
   ngOnChanges(changes: any) {

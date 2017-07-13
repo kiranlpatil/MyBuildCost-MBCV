@@ -1,3 +1,4 @@
+<div class="clearfix divider clear">&nbsp;</div>
 <div class="modal-bg" *ngIf="highlightedSection.name=='Certification'"></div>
 <div class="section-container clear"  *ngIf="highlightedSection.name =='Certification'">
   <div class="main-content edit-modal-content clearfix">
@@ -48,19 +49,27 @@
     <div class="compact-view clearfix">
       <div *ngIf="certificationDetail.controls.certifications.controls.length==0">
 
-        <h4 class="heading-compact"
-            (click)="highlightedSection.name='Certification';addCertification();highlightedSection.isDisable=true;showButton=false">
+        <h4 class="heading-compact">
           <img src="assets/c-next/icons/certificates.png" alt="employment"/>
           Certifications
-          <span class="glyphicon glyphicon-plus" title="Add Certifications"></span>
         </h4>
       </div>
 
-      <div class="vertical-container" *ngIf="certificationDetail.controls.certifications.controls.length>0">
-       <!-- <button class="btn-edit"
-
-                [hidden]="highlightedSection.isDisable" title="Edit Certifications"></button>-->
-        <cn-vertical-list-view [data]="candidate.certifications" [type]="'certifications'" [calledFrom]="'candidateview'"></cn-vertical-list-view>
+      <div class="" *ngIf="certificationDetail.controls.certifications.controls.length>0">
+        <h4 class="heading-compact">
+          <img src="assets/c-next/icons/certificates.png" alt="employment"/>
+          Certifications
+        </h4>
+        <ul>
+          <div *ngFor="let item of candidate.certifications;let i = index">
+            <div *ngIf="i == 0">
+              <li>
+                <p>{{item.name}} at {{item.issuedBy}} in {{item.year}}</p>
+                <p *ngIf="candidate.certifications.length != 1">( {{candidate.certifications.length-1}} more )</p>
+              </li>
+            </div>
+          </div>
+        </ul>
       </div>
     </div>
   </div>

@@ -36,7 +36,9 @@ export class AwardsComponent implements OnInit {
     //subscribe to addresses value changes
     this.awardDetail.controls['awards'].valueChanges.subscribe(x => {
       this.isButtonShow = true;
-    })
+    });
+
+    this.addAward();
   }
 
   ngOnChanges(changes: any) {

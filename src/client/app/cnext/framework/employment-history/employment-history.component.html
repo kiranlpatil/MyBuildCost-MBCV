@@ -56,24 +56,20 @@
         <h4 class="heading-compact">
           <img src="assets/c-next/icons/employment-icon.png" alt="employment"/>
           Employment History
-          <!--<span class="glyphicon glyphicon-plus" title="Add Employment History"></span>-->
         </h4>
       </div>
       <div class="" *ngIf="employeeHistory.controls.employeeHistories.controls.length>0">
-        <!--<button class="btn-edit"
-
-                [hidden]="highlightedSection.isDisable" title="Edit Employment History"></button>-->
-       <!-- <cn-vertical-list-view [data]="candidate.employmentHistory"
-                               [type]="'employment history'" [calledFrom]="'candidateview'"></cn-vertical-list-view>-->
-        <h4 class="heading-compact">Employment History</h4>
+        <h4 class="heading-compact"> <img src="assets/c-next/icons/employment-icon.png" alt="employment"/>Employment History</h4>
         <ul>
-          <li *ngFor="let item of candidate.employmentHistory;let i = index">
+          <div *ngFor="let item of candidate.employmentHistory;let i = index">
             <div *ngIf="i == 0">
-              <p>{{item.designation}} at {{item.companyName}} </p>
-              <p>From {{item.from.month}} {{item.from.year}} to {{item.to.month}} {{item.to.year}}</p>
-              <p *ngIf="candidate.employmentHistory.length != 1">( {{candidate.employmentHistory.length-1}} more )</p>
+              <li>
+                <p>{{item.designation}} at {{item.companyName}} </p>
+                <p>From {{item.from.month}} {{item.from.year}} to {{item.to.month}} {{item.to.year}}</p>
+                <p *ngIf="candidate.employmentHistory.length != 1">( {{candidate.employmentHistory.length-1}} more )</p>
+              </li>
             </div>
-          </li>
+          </div>
         </ul>
       </div>
     </div>
