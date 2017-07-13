@@ -7,7 +7,7 @@ import {Message} from "../../../framework/shared/message";
 import {MessageService} from "../../../framework/shared/message.service";
 import {Proficiences} from "../model/proficiency";
 import {Section} from "../model/candidate";
-import {LocalStorage, NavigationRoutes} from "../../../framework/shared/constants";
+import {LocalStorage} from "../../../framework/shared/constants";
 import {LocalStorageService} from "../../../framework/shared/localstorage.service";
 import {ShowQcardviewService} from "../showQCard.service";
 import {Router} from "@angular/router";
@@ -67,6 +67,7 @@ export class JobPosterComponent implements OnInit {
 
   postjob() {
     this.showModalStyle = !this.showModalStyle;
+    this.jobPosterModel.isJobPosted = true;
     this.jobPosterModel.postingDate = new Date();
     this.jobPostService.postJob(this.jobPosterModel).subscribe(
       data => {
@@ -90,7 +91,7 @@ export class JobPosterComponent implements OnInit {
   onSuccess(jobId: string) {
     if (jobId !== undefined) {
       LocalStorageService.setLocalValue(LocalStorage.CURRENT_JOB_POSTED_ID, jobId);
-      this._router.navigate([NavigationRoutes.APP_JOB_SUMMURY]);
+      this._router.navigate(['jobdashboard/', jobId]);
     }
   }
 

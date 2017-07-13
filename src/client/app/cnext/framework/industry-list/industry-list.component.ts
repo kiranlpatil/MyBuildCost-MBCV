@@ -2,6 +2,8 @@ import {Component, EventEmitter, Input, OnChanges, Output} from "@angular/core";
 import {Industry} from "../model/industry";
 import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
 import {Section} from "../model/candidate";
+import {LocalStorageService} from "../../../framework/shared/localstorage.service";
+import {LocalStorage} from "../../../framework/shared/constants";
 
 @Component({
   moduleId: module.id,
@@ -48,6 +50,14 @@ export class IndustryListComponent implements OnChanges {
     this.valueChange.emit(this.choosedIndustry);
     this.highlightedSection.name = 'Work-Area';
     this.highlightedSection.isDisable = false;
+  }
+
+  onPrevious() {
+    if (LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE) === 'true') {
+      this.highlightedSection.name = 'Profile';
+    } else {
+      this.highlightedSection.name = 'JobProfile';
+    }
   }
 }
 

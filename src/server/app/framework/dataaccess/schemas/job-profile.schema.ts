@@ -59,6 +59,10 @@ class JobProfileSchema {
       competencies: {
         type: String
       },
+      isJobPosted: {
+        type: Boolean,
+        default: false
+      },
       responsibility: {
         type: String
       },
