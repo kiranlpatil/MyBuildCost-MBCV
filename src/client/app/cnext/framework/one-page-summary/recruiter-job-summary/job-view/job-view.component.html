@@ -2,11 +2,9 @@
   <div class="col-sm-3 left-content">
     <div>
       <cn-recruiter-job-information [recruiter]="recruiter"></cn-recruiter-job-information>
+
     </div>
-    <div>
-      <h4>About Company</h4>
-      <cn-additional-details [data]="recruiter.about_company"></cn-additional-details>
-    </div>
+
   </div>
 
   <div class="col-sm-9 right-content" *ngFor="let postedJob of recruiter.postedJobs">
