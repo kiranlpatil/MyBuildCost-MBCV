@@ -22,7 +22,7 @@
           <label>Job Title</label>
           <input name="jobTitle" placeholder="e.g. Software Engineer" class="form-control"
                  [(ngModel)]="candidate.jobTitle" (ngModelChange)="onJobTitleChange()">
-          <div class="error-messages" *ngIf="isTitleFilled">Job title should not be empty.</div>
+          <div class="error-messages" *ngIf="(candidate.jobTitle == '' || candidate.jobTitle == undefined) && !isValid">You can't leave this empty.</div>
         </div>
 
 
@@ -31,7 +31,7 @@
           <!--<control-messages [control]="professionalDetailForm.controls.education"></control-messages>-->
           <input name="currentcompany" class="form-control" placeholder="Current Company"
                  [(ngModel)]="candidate.professionalDetails.currentCompany">
-
+          <div class="error-messages" *ngIf="(candidate.professionalDetails.currentCompany == '' || candidate.professionalDetails.currentCompany == undefined) && !isValid">You can't leave this empty.</div>
         </div>
 
         <div class="form-group">
@@ -39,6 +39,7 @@
           <!--<control-messages [control]="professionalDetailForm.controls.education"></control-messages>-->
           <input name="location" class="form-control" placeholder="Location"
                  [(ngModel)]="candidate.professionalDetails.location">
+          <!--<div class="error-messages" *ngIf="islocationValid && !isValid">You can't leave this empty.</div>-->
         </div>
 
         <div class="form-group">
@@ -47,6 +48,7 @@
           <select [(ngModel)]="candidate.professionalDetails.education">
             <option *ngFor="let c of educationList" [ngValue]="c">{{c}}</option>
           </select>
+          <div class="error-messages" *ngIf="(candidate.professionalDetails.education == '' || candidate.professionalDetails.education == undefined) && !isValid">You can't leave this empty.</div>
         </div>
 
         <div class="form-group">
@@ -55,6 +57,7 @@
           <select [(ngModel)]="candidate.professionalDetails.experience">
             <option *ngFor="let c of experienceList" [ngValue]="c">{{c}}</option>
           </select>
+          <div class="error-messages" *ngIf="(candidate.professionalDetails.experience == '' || candidate.professionalDetails.experience == undefined) && !isValid">You can't leave this empty.</div>
         </div>
 
       </div>

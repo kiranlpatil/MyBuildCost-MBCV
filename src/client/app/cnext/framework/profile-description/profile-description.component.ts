@@ -31,6 +31,8 @@ export class ProfileDescriptionComponent implements OnInit {
   private candidateDetails: CandidateDetail = new CandidateDetail();
   private showModalStyle: boolean = false;
   private educationList:any = [];
+  private isValid: boolean = true;
+  private islocationValid: boolean = true;
   private image_path: string = 'assets/framework/images/dashboard/profile.png';
   tooltipMessage: string =
     '<ul>' +
@@ -97,6 +99,16 @@ export class ProfileDescriptionComponent implements OnInit {
     }
   }
   onNext() {
+    if((this.candidate.jobTitle == '' || this.candidate.jobTitle == undefined ) ||
+      (this.candidate.professionalDetails.currentCompany == '' ||
+      this.candidate.professionalDetails.currentCompany== undefined ) ||
+      (this.candidate.professionalDetails.education == '' ||
+      this.candidate.professionalDetails.education == undefined ) ||
+      (this.candidate.professionalDetails.experience == '' ||
+      this.candidate.professionalDetails.experience == undefined ) ){
+      this.isValid = false;
+      return;
+    }
     console.log("from next");
     this.candidate.industry = this.changedIndustry;
     this.candidate.industry.roles = [];
@@ -114,6 +126,16 @@ export class ProfileDescriptionComponent implements OnInit {
   }
 
   onSave() {
+    if((this.candidate.jobTitle == '' || this.candidate.jobTitle == undefined ) ||
+      (this.candidate.professionalDetails.currentCompany == '' ||
+      this.candidate.professionalDetails.currentCompany== undefined ) ||
+      (this.candidate.professionalDetails.education == '' ||
+      this.candidate.professionalDetails.education == undefined ) ||
+      (this.candidate.professionalDetails.experience == '' ||
+      this.candidate.professionalDetails.experience == undefined ) ){
+      this.isValid = false;
+      return;
+    }
     console.log("from save");
 //    this.compactView = true;
     if (this.changedIndustry.name !== this.savedIndustry || this.candidate.jobTitle !== this.savedJobTitle) {
