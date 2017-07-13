@@ -47,7 +47,7 @@
       </div>
 
       <div class="button-group">
-        <button type="submit" class="btn btn-success" [hidden]="isMailSent" >Send</button>
+        <button type="submit" class="btn btn-success" [hidden]="isMailSent" [disabled]="isMailSent ==true">Send</button>
         <button type="submit" class="btn btn-danger" [hidden]="chkEmail" *ngIf="isMailSent ==true">Resend Verification
           Email
         </button>

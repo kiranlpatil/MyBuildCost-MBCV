@@ -63,7 +63,9 @@ export class VerifyUserComponent implements OnInit {
   }
 
   onSubmit() {
-    if(!this.userForm.valid){
+    if(this.isCandidate && this.userForm.value.mobile_number == null){
+      return;
+    }else if(!this.isCandidate && this.userForm.value.email == null){
       return;
     }
     if (!this.chkMobile) {
