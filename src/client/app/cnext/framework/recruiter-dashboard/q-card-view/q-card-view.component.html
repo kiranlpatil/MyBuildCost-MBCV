@@ -60,17 +60,9 @@
                    *ngIf="item.picture!=undefined"/>
               {{item.first_name}} {{item.last_name}}
             </h6>
-            <p class="proficiencies" title="Key Skills">
-              <img src="assets/c-next/card-view/proficiencies.png" alt="Key Skills"/>
-              <span *ngFor="let proficiency of item.proficiencies;let i=index">
-                <span *ngIf="i < 5">{{proficiency}}
-                  <span *ngIf="i>=0 && i<4 &&  item.proficiencies.length-1 != i ">,&nbsp;</span>
-                </span>
-              </span>
-              <br/><span *ngIf="item.proficiencies.length > 5">( {{item.proficiencies.length-5}} More )</span>
-            </p>
+
           </div>
-          <div class="col-md-4 col-sm-5 col-xs-6 no-padding">
+          <div class="col-md-4 col-sm-5 col-xs-6 no-padding canvas-cricle">
             <div class="canvas-container" title="Matching Percentage">
               <cn-progress-bar [value]="item.matching" [color]="'#e77e22'" [rotation]="false"></cn-progress-bar>
               <cn-progress-bar [value]="item.matching" [color]="'#e77e22'" [rotation]="true"></cn-progress-bar>
@@ -82,15 +74,21 @@
             </div>
           </div>
         </header>
-        <div class="col-xs-12 details" >
-          <p class="border-bottom" title="Salary"><img src="assets/c-next/card-view/salary.png" alt="Salary"/>₹ {{item.salary}}</p>
-        </div>
-        <div class="col-xs-12 details">
-          <p class="border-bottom" title="Experience"><img src="assets/c-next/card-view/experience.png" alt="Experience"/>{{item.experience}}
-          </p>
-        </div>
-        <div class="col-xs-12 details">
-          <p title="Current Location"><img src="assets/c-next/card-view/relocation.png" alt="Location"/> {{item.location}}</p>
+        <div class="col-sm-8 no-padding">
+          <div class="col-sm-12 details">
+            <p class="proficiencies" title="Key Skills">
+              <img src="assets/c-next/card-view/proficiencies.png" alt="Key Skills"/>
+              <span *ngFor="let proficiency of item.proficiencies;let i=index">
+                <span *ngIf="i < 5">{{proficiency}}
+                  <span *ngIf="i>=0 && i<4 &&  item.proficiencies.length-1 != i ">,&nbsp;</span>
+                </span>
+              </span>
+              <br/><span *ngIf="item.proficiencies.length > 5">( {{item.proficiencies.length-5}} More )</span>
+            </p>
+            <p class="border-bottom" title="Salary"><img src="assets/c-next/card-view/salary.png" alt="Salary"/>₹ {{item.salary}}</p>
+            <p class="border-bottom" title="Experience"><img src="assets/c-next/card-view/experience.png" alt="Experience"/>{{item.experience}}</p>
+            <p title="Current Location"><img src="assets/c-next/card-view/relocation.png" alt="Location"/> {{item.location}}</p>
+          </div>
         </div>
         <div class="button-group" *ngIf="type=='matchedList'">
           <!--<div class="col-sm-6 padding-right5">

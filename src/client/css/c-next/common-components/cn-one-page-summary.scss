@@ -4,10 +4,10 @@ $border-color: #e8e8e8;
 
 .page-header {
   background: $theme-color;
-  border-bottom: 1px solid $theme-color;
+  /*border-bottom: 1px solid $theme-color;
   -webkit-box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.4);
   -moz-box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.4);
-  box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.4);*/
   height: 50px;
   left: 0;
   margin: 0 auto;
@@ -73,7 +73,7 @@ $border-color: #e8e8e8;
   font-size: 12px;
   h4 {
     font-size: 14px;
-    font-family: gothamrnd-book;
+    font-family: 'gothamrnd-light';
     margin: 0 15px 0 0;
     padding: 7px 0;
     float: left;

@@ -2,7 +2,7 @@ $text-color: #576b7c;
 $name: #666;
 $blue-color: #0d75fa;
 $light-green: #96e328;
-$orange: #ffb316;
+$orange: #fca338;
 $gray: #ccc;
 $green: #68ab26;
 $red: #e82c0c;
@@ -134,9 +134,13 @@ $red: #e82c0c;
   }*/
 }
 
+.info-description {
+  position: relative;
+}
+
 .info-description:hover .info-hover-section {
   display: block;
-  position: fixed;
+  position: absolute;
   background: #fff;
   padding: 10px 15px;
   z-index: 9999;
@@ -144,6 +148,7 @@ $red: #e82c0c;
   margin-top: 15px;
   font-size: 12px;
   color: #576b7c;
+  top: 0;
   font-weight: 100;
   font-family: 'gothamrnd-light';
   box-shadow: 0px 2px 4px 0px #c1c1c1;

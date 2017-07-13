@@ -634,6 +634,12 @@ control-messages {
   }
 }
 
+.canvas-cricle {
+  position: absolute;
+  right: 0px;
+  top: 56px;
+}
+
 // Media Queries
 @media only screen and (max-width: 1024px) {
   .logout-dropdown {

@@ -1,7 +1,7 @@
-$theme-color: #27aae1;
-$orange: #fbb040;
+$theme-color: #0d75fa;
+$orange: #ff9700;
 $green: #8dc63f;
-$red: #ef4136;
+$red: #e91d62;
 $active-color: #edf1f5;
 
 .profile-wrapper {
@@ -37,7 +37,7 @@ $active-color: #edf1f5;
     border-top: 0 solid #d1dce4;
 
     li:first-child > a > .count {
-      background-color: $green;
+      background-color: $theme-color;
     }
 
     li:nth-child(2) > a > .count {

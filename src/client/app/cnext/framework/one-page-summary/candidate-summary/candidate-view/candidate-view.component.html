@@ -31,12 +31,22 @@
         <h4>Supplimentary Capabilities</h4>
         <cn-horizontal-list-view [data]="secondaryCapabilities"></cn-horizontal-list-view>
       </div>
-      <h4>Key Skills</h4>
-      <cn-horizontal-list-view [data]="candidate.proficiencies"></cn-horizontal-list-view>
     </div>
-    <div class="col-sm-12" *ngIf="candidate.aboutMyself != undefined && candidate.aboutMyself!=''">
-      <h4>Additional Information</h4>
-      <cn-additional-details [data]="candidate.aboutMyself"></cn-additional-details>
+    <div class="col-sm-12 proficiency-compare-section-area">
+      <div class="pull-left col-xs-3 no-padding text-left">
+        <h4>Key Skills</h4>
+      </div>
+      <div class="pull-left col-xs-8 no-padding text-left">
+        <cn-horizontal-list-view [data]="candidate.proficiencies"></cn-horizontal-list-view>
+      </div>
+    </div>
+    <div class="col-sm-12 proficiency-compare-section-area" *ngIf="candidate.aboutMyself != undefined && candidate.aboutMyself!=''">
+      <div class="pull-left col-xs-3 no-padding text-left">
+        <h4>Additional Information</h4>
+      </div>
+      <div class="pull-left col-xs-8 no-padding text-left">
+        <cn-additional-details [data]="candidate.aboutMyself"></cn-additional-details>
+      </div>
     </div>
   </div>
 </section>

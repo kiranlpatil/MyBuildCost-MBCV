@@ -17,7 +17,7 @@
           <br/><span *ngIf="job.proficiencies.length > 5">( {{job.proficiencies.length-5}} More )</span>
         </p>
       </div>
-      <div class="col-md-4 col-sm-5 col-xs-6 no-padding" title="Matching Percentage">
+      <div class="col-md-4 col-sm-5 col-xs-6 no-padding canvas-cricle" title="Matching Percentage">
         <div class="canvas-container">
           <cn-progress-bar [value]="job.above_one_step_matching + job.exact_matching | number : '1.0-0'"
                            [color]="'#e77e22'" [rotation]="false"></cn-progress-bar>
@@ -28,15 +28,15 @@
         </div>
       </div>
     </header>
-    <div class="col-sm-12 details">
-      <p title="Industry"><img src="assets/c-next/card-view/industry.png" alt="Industry" /> {{job.industry}}</p>
-      <p title="Salary"><img src="assets/c-next/card-view/salary.png" alt="Salary"/>₹ {{job.salaryMinValue}} - {{job.salaryMaxValue}}</p>
-      <p title="Experience"><img src="assets/c-next/card-view/experience.png" alt="Experience" />{{job.experienceMinValue}} - {{job.experienceMaxValue}}</p>
-    </div>
-    <div class="col-sm-12 details">
-      <p title="Current Location"><img src="assets/c-next/card-view/relocation.png" alt="Current Location" /> {{job.location}} </p>
-      <p title="Education"><img src="assets/c-next/card-view/education.png" alt="Education" /> {{job.education}}</p>
-      <p title="Company size"><img src="assets/c-next/card-view/company-size.png" alt="Company Size" >{{job.company_size}}</p>
+    <div class="col-sm-8 no-padding">
+      <div class="col-sm-12 details">
+        <p title="Industry"><img src="assets/c-next/card-view/industry.png" alt="Industry" /> {{job.industry}}</p>
+        <p title="Salary"><img src="assets/c-next/card-view/salary.png" alt="Salary"/>₹ {{job.salaryMinValue}} - {{job.salaryMaxValue}}</p>
+        <p title="Experience"><img src="assets/c-next/card-view/experience.png" alt="Experience" />{{job.experienceMinValue}} - {{job.experienceMaxValue}}</p>
+        <p title="Current Location"><img src="assets/c-next/card-view/relocation.png" alt="Current Location" /> {{job.location}} </p>
+        <p title="Education"><img src="assets/c-next/card-view/education.png" alt="Education" /> {{job.education}}</p>
+        <p title="Company size"><img src="assets/c-next/card-view/company-size.png" alt="Company Size" >{{job.company_size}}</p>
+      </div>
     </div>
   </div>
 </div>

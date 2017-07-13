@@ -16,19 +16,29 @@
         <h4>Supplimentary Capabilities</h4>
         <cn-horizontal-list-view [data]="secondaryCapabilities"></cn-horizontal-list-view>
       </div>-->
-      <div class="col-sm-12">
-        <h4>Key Skills</h4>
-        <cn-horizontal-list-view [data]="postedJob.proficiencies"></cn-horizontal-list-view>
+      <div class="col-sm-12 proficiency-compare-section-area">
+        <div class="pull-left col-xs-3 no-padding text-left">
+          <h4>Key Skills</h4>
+        </div>
+        <div class="pull-left col-xs-8 no-padding text-left">
+          <cn-horizontal-list-view [data]="postedJob.proficiencies"></cn-horizontal-list-view>
+        </div>
       </div>
-      <div class="col-sm-12"
+      <div class="col-sm-12 proficiency-compare-section-are"
            *ngIf="postedJob.additionalProficiencies != undefined && postedJob.additionalProficiencies.length>0">
-        <h4>Additional Key Skills</h4>
-        <cn-horizontal-list-view [data]="postedJob.additionalProficiencies"></cn-horizontal-list-view>
+        <div class="pull-left col-xs-3 no-padding text-left">
+          <h4>Additional Key Skills</h4>
+        </div>
+        <div class="pull-left col-xs-8 no-padding text-left">
+          <cn-horizontal-list-view [data]="postedJob.additionalProficiencies"></cn-horizontal-list-view>
+        </div>
       </div>
     </div>
-    <div class="col-sm-12 no-padding">
-      <div class="col-sm-12">
+    <div class="col-sm-12 proficiency-compare-section-area">
+      <div class="pull-left col-xs-3 no-padding text-left">
         <h4>Competencies and Responsibilities</h4>
+      </div>
+      <div class="pull-left col-xs-8 no-padding text-left">
         <cn-additional-details [data]="postedJob.competencies"></cn-additional-details>
       </div>
       <!--<div class="col-sm-12">

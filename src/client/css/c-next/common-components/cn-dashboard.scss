@@ -5,10 +5,10 @@ $border-color: #e8e8e8;
 $text-color: #666;
 $purple: #7366ad;
 $highlight: #596c7d;
-$theme-color: #27aae1;
-$orange: #fbb040;
+$theme-color: #0d75fa;
+$orange: #ff9700;
 $green: #8dc63f;
-$red: #ef4136;
+$red: #e91d62;
 $border-light: #efefef;
 $active-color: #edf1f5;
 $border-blue: #d1dce4;
@@ -188,7 +188,7 @@ $bg-tabs: #edf1f5;
     }
 
     li > a > .match-count {
-      background-color: $green;
+      background-color: $theme-color;
     }
 
     li > a > .shortlisted-count {
@@ -196,7 +196,7 @@ $bg-tabs: #edf1f5;
     }
 
     li > a > .applied-count {
-      background-color: $theme-color;
+      background-color: $orange;
     }
 
     li > a > .rejected-count {
