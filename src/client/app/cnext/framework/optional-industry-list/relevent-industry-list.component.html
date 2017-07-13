@@ -1,0 +1,26 @@
+<div class="section-container">
+  <!--
+    <cn-tool-tip [message]="tooltipMessage"></cn-tool-tip>
+  -->
+  <div class="main-content clearfix modal-content">
+    <div class="col-sm-9 profile-description">
+      <div class="select-industry clearfix">
+        <div class="col-sm-12 no-padding">
+          <h4>Select your Industry (Any One)</h4>
+          <div class="max-height">
+            <div class="select-option" *ngFor="let item of industries;let i = index">
+              <label>
+                <input type="radio" name="item.name" id="{{item.name}}" value="{{item.name}}"
+                       (click)="onValueChange(item)" [checked]="true">
+                <span>{{item.name}}</span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="button-group clearfix">
+      <button class="btn btn-success" (click)="onNext()" [disabled]="disableButton">Next</button>
+    </div>
+  </div>
+</div>
