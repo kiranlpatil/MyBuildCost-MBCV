@@ -157,6 +157,7 @@ import {RedirectRecruiterDashboardService} from "./cnext/framework/redirect-dash
 import {QuestionAnswerComponent} from "./cnext/framework/question-answer/question-answer.component";
 import {ComplexityComponentService} from "./cnext/framework/complexities/complexity.service";
 import {ReleventIndustryListComponent} from "./cnext/framework/optional-industry-list/relevent-industry-list.component";
+import {ReleventIndustryListService} from "./cnext/framework/optional-industry-list/relevent-industry-list.service";
 
 //C-NEXT IMPORTS
 
@@ -339,7 +340,8 @@ import {ReleventIndustryListComponent} from "./cnext/framework/optional-industry
     QCardFilterService,
     JobDashboardService,
     ReferenceService,
-    RedirectRecruiterDashboardService
+    RedirectRecruiterDashboardService,
+    ReleventIndustryListService
 
   ],
   bootstrap: [AppComponent]

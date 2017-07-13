@@ -10,9 +10,9 @@
           <div class="max-height">
             <div class="select-option" *ngFor="let item of industries;let i = index">
               <label>
-                <input type="radio" name="item.name" id="{{item.name}}" value="{{item.name}}"
+                <input type="radio" name="item.name" id="{{item}}" value="{{item}}"
                        (click)="onValueChange(item)" [checked]="true">
-                <span>{{item.name}}</span>
+                <span>{{item}}</span>
               </label>
             </div>
           </div>
