@@ -39,6 +39,7 @@ export class JobPosterComponent implements OnInit {
   private isShowProficiency: boolean = false;
   private showIndustryExposure: boolean = false;
   private showCompentensies: boolean = false;
+  private showReleventIndustryList: boolean = false;
   private showModalStyle: boolean = false;
   private isCapabilitypresent: boolean = false;
   private jobPosterModel = new JobPosterModel();
@@ -187,12 +188,13 @@ export class JobPosterComponent implements OnInit {
   }
 
   selectExperiencedIndustry(experiencedindustry: string[]) {
-    this.showCompentensies = true;
+    //this.showCompentensies = true;
     this.jobPosterModel.interestedIndustries = experiencedindustry;
     this.updateJob();
   }
   onIndustryExposureComplete(event: any) {
-    this.showCompentensies = true;
+    //this.showCompentensies = true;
+    this.showReleventIndustryList = true;
   }
 
   onCompentansiesandResponsibilitycomplete(data: any) {
