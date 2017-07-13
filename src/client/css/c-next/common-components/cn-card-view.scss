@@ -158,8 +158,7 @@ $active-color: #edf1f5;
 
   header {
     margin: 10px 10px 0;
-    padding-bottom: 10px;
-    border-bottom: 1px solid $border-color;
+    padding-bottom: 0px;
   }
 
   .canvas-container {
@@ -208,7 +207,7 @@ $active-color: #edf1f5;
   }
 
   .details {
-    padding: 10px;
+    padding: 0 10px;
   }
 }
 
@@ -301,7 +300,9 @@ header {
 }
 
 #matched-job,
-#cart-job{
+#cart-job,
+#applied-job,
+#rejected-job {
   .card-view {
     margin-top: 85px;
   }

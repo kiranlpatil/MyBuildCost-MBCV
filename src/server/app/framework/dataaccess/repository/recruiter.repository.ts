@@ -95,11 +95,7 @@ class RecruiterRepository extends RepositoryBase<IRecruiter> {
           callback(null, jobs_cards);
         }
     }
-    setTimeout(() => {
-      if(!isSend) {
-        callback(null, jobs_cards);
-      }
-    }, 4000);
+
   }
 
 

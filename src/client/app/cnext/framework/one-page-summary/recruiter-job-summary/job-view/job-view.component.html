@@ -2,22 +2,20 @@
   <div class="col-sm-3 left-content">
     <div>
       <cn-recruiter-job-information [recruiter]="recruiter"></cn-recruiter-job-information>
+
     </div>
-    <div>
-      <h4>About Company</h4>
-      <cn-additional-details [data]="recruiter.about_company"></cn-additional-details>
-    </div>
+
   </div>
 
   <div class="col-sm-9 right-content" *ngFor="let postedJob of recruiter.postedJobs">
     <div class="col-sm-12">
-      <cn-tabular-list-view [roles]="postedJob.industry.roles"></cn-tabular-list-view>
+      <cn-capability-compare [isCompact]="true" [capabilities]="capabilities" > </cn-capability-compare>
     </div>
     <div class="col-sm-12 no-padding">
-      <div class="col-sm-12" *ngIf="secondaryCapabilities.length>0">
+      <!--<div class="col-sm-12" *ngIf="secondaryCapabilities.length>0">
         <h4>Supplimentary Capabilities</h4>
         <cn-horizontal-list-view [data]="secondaryCapabilities"></cn-horizontal-list-view>
-      </div>
+      </div>-->
       <div class="col-sm-12">
         <h4>Key Skills</h4>
         <cn-horizontal-list-view [data]="postedJob.proficiencies"></cn-horizontal-list-view>

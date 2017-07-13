@@ -16,7 +16,7 @@ $blue-color: #0d75fa;
   .basic-info {
     img {
       float: left;
-      margin: 0 15px 25px 0;
+      margin: 0 15px 0px 0;
       height: 50px;
       width: 50px;
       border-radius: 50%;
@@ -27,6 +27,8 @@ $blue-color: #0d75fa;
       font-family: 'gothamrnd-book';
       font-weight: bold;
       text-transform: capitalize;
+      float: right;
+      width: 66%;
     }
 
     p {
@@ -36,7 +38,6 @@ $blue-color: #0d75fa;
   }
 
   .details {
-    border-bottom: 1px solid $blue-color;
     margin: 0 0 15px;
     padding-bottom: 15px;
 

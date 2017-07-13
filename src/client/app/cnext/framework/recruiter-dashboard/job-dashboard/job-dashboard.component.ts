@@ -78,6 +78,9 @@ export class JobDashboardComponent implements OnInit {
       this.whichListVisible[i] = false;
     }
     this.whichListVisible[0] = true;
+    if(this.candidateQlist.matchedCandidates.length>0){
+      return;
+    }
     this.jobDashboardService.getSearchedcandidate(this.jobId)
       .subscribe(
         (data: any) => {
@@ -106,6 +109,31 @@ export class JobDashboardComponent implements OnInit {
    /* this.qcardFilterService.clearFilter();*/
     for (let i = 0; i < this.whichListVisible.length; i++) {
       this.whichListVisible[i] = false;
+    }
+    switch (listName) {
+      case ValueConstant.CART_LISTED_CANDIDATE :
+        if(this.candidateQlist.cartCandidates.length>0) {
+          this.whichListVisible[1] = true;
+          return;
+        }
+        break;
+      case ValueConstant.REJECTED_LISTED_CANDIDATE :
+        if(this.candidateQlist.rejectedCandidates.length>0) {
+          this.whichListVisible[3] = true;
+          return;
+        }
+        break;
+      case ValueConstant.SHORT_LISTED_CANDIDATE :
+        if(this.candidateQlist.shortListedCandidates.length>0) {
+          return;
+        }
+        break;
+      case ValueConstant.APPLIED_CANDIDATE :
+        if(this.candidateQlist.appliedCandidates.length>0) {
+          this.whichListVisible[2] = true;
+          return;
+        }
+        break;
     }
     this.jobDashboardService.getSelectedListData(this.jobId, listName)
       .subscribe(

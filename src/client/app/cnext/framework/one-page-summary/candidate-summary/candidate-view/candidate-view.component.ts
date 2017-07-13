@@ -1,9 +1,9 @@
-import {Component, Input} from "@angular/core";
-import {CandidateDetail} from "../../../../../framework/registration/candidate/candidate";
-import {Candidate} from "../../../model/candidate";
-import {CandidateProfileService} from "../../../candidate-profile/candidate-profile.service";
-import {ComplexityComponentService} from "../../../complexities/complexity.service";
-import {JobCompareService} from "../../../single-page-compare-view/job-compare-view/job-compare-view.service";
+import {Component, Input, OnChanges} from '@angular/core';
+import {CandidateDetail} from '../../../../../framework/registration/candidate/candidate';
+import {Candidate} from '../../../model/candidate';
+import {CandidateProfileService} from '../../../candidate-profile/candidate-profile.service';
+import {ComplexityComponentService} from '../../../complexities/complexity.service';
+import {JobCompareService} from '../../../single-page-compare-view/job-compare-view/job-compare-view.service';
 
 
 @Component({
@@ -13,7 +13,8 @@ import {JobCompareService} from "../../../single-page-compare-view/job-compare-v
   styleUrls: ['candidate-view.component.css'],
 
 })
-export class CandidateViewComponent {
+
+export class CandidateViewComponent implements OnChanges{
   @Input() candidateId: string;
   private candidateDetails: CandidateDetail = new CandidateDetail();
   private candidate: Candidate = new Candidate();
@@ -28,7 +29,7 @@ export class CandidateViewComponent {
     if (changes.candidateId != undefined && changes.candidateId.currentValue != undefined) {
       this.candidateId = changes.candidateId.currentValue;
       this.getCandidateProfile(this.candidateId);
-      this.complexityComponentService.getCapabilityMatrix().subscribe(
+      this.complexityComponentService.getCapabilityMatrix(undefined).subscribe(
         capa => {
           this.capabilities= this.jobCompareService.getStandardMatrix(capa.data);
         });

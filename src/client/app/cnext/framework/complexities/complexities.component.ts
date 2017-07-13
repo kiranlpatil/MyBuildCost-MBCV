@@ -1,13 +1,13 @@
-import {Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, ViewChild} from "@angular/core";
-import {Role} from "../model/role";
-import {ComplexityService} from "../complexity.service";
-import {LocalStorageService} from "../../../framework/shared/localstorage.service";
-import {LocalStorage} from "../../../framework/shared/constants";
-import {Section} from "../model/candidate";
-import {ComplexityDetails} from "../model/complexity-detail";
-import {ComplexityComponentService} from "./complexity.service";
-import {JobCompareService} from "../single-page-compare-view/job-compare-view/job-compare-view.service";
-import {Capability} from "../model/capability";
+import {Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, ViewChild} from '@angular/core';
+import {Role} from '../model/role';
+import {ComplexityService} from '../complexity.service';
+import {LocalStorageService} from '../../../framework/shared/localstorage.service';
+import {LocalStorage} from '../../../framework/shared/constants';
+import {Section} from '../model/candidate';
+import {ComplexityDetails} from '../model/complexity-detail';
+import {ComplexityComponentService} from './complexity.service';
+import {JobCompareService} from '../single-page-compare-view/job-compare-view/job-compare-view.service';
+import {Capability} from '../model/capability';
 
 @Component({
   moduleId: module.id,
@@ -67,7 +67,7 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
     }
     if (changes.complexities && changes.complexities.currentValue) {
       this.complexities = changes.complexities.currentValue;
-      this.complexityComponentService.getCapabilityMatrix().subscribe(
+      this.complexityComponentService.getCapabilityMatrix(undefined).subscribe(
         capa => {
           this.complexityData = capa.data;
           this.getComplexityIds(this.complexities);
@@ -97,7 +97,7 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
   }
 
   saveComplexity() {
-    this.complexityComponentService.getCapabilityMatrix().subscribe(
+    this.complexityComponentService.getCapabilityMatrix(undefined).subscribe(
       capa => {
         this.capabilities = this.jobCompareService.getStandardMatrix(capa.data);
       });

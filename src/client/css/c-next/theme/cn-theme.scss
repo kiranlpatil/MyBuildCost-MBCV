@@ -48,6 +48,8 @@ $black: #000;
   .btn-primary {
     background: $cn-theme-color;
     color: $white;
+    height: 38px;
+    padding: 9px 25px !important;
 
     &:hover,
     &:active,

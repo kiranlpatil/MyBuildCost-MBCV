@@ -490,7 +490,7 @@ and (max-width: 840px) {
   width: 100%;
   display: inline-block;
   .content {
-    font-size: 12px;
+    font-size: 14px;
     padding: 10px 0;
     border-top: 1px solid #E6E6E6;
     display: inline-block;
@@ -510,6 +510,9 @@ and (max-width: 840px) {
     .scenario-row {
       margin-bottom: 10px;
       display: inline-block;
+      span {
+        font-size: 12px;
+      }
     }
   }
 }

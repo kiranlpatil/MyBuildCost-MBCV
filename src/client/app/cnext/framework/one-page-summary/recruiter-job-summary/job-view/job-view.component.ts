@@ -3,6 +3,8 @@ import { RecruiterDashboardService } from '../../../recruiter-dashboard/recruite
 import { JobSummary } from '../../../model/jobSummary';
 import { Router } from '@angular/router';
 import {NavigationRoutes} from '../../../../../framework/shared/constants';
+import {ComplexityComponentService} from "../../../complexities/complexity.service";
+import {JobCompareService} from "../../../single-page-compare-view/job-compare-view/job-compare-view.service";
 
 
 @Component({
@@ -16,10 +18,12 @@ export class JobViewComponent implements OnChanges ,OnInit {
   @Input() jobId: string;
   @Input() calledFrom: string;
   private recruiter: JobSummary = new JobSummary();
-  private secondaryCapabilities: string[] = new Array();
+  private capabilities : any;
 
-
-  constructor(private recruiterDashboardService: RecruiterDashboardService, private _router: Router) {
+  constructor(private recruiterDashboardService: RecruiterDashboardService,
+              private complexityComponentService : ComplexityComponentService,
+              private _router: Router,
+              private jobCompareService : JobCompareService) {
   }
 
   ngOnInit() {
@@ -44,17 +48,16 @@ export class JobViewComponent implements OnChanges ,OnInit {
 
   OnRecruiterDataSuccess(data: any) {
     this.recruiter = data;
-    this.getSecondaryData();
+    this.getCapabilities();
 
   }
 
-  getSecondaryData() {
-    for (let role of this.recruiter.postedJobs[0].industry.roles) {
-      for (let capability of role.capabilities) {
-        if (capability.isSecondary) {
-          this.secondaryCapabilities.push(capability.name);
-        }
-      }
+  getCapabilities() {
+    if(this.recruiter && this.recruiter.postedJobs[0]){
+      this.complexityComponentService.getCapabilityMatrix(this.recruiter.postedJobs[0]._id).subscribe(
+        capa => {
+          this.capabilities= this.jobCompareService.getStandardMatrix(capa.data);
+        });
     }
   }
 
