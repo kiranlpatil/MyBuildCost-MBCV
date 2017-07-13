@@ -67,12 +67,17 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
     }
     if (changes.complexities && changes.complexities.currentValue) {
       this.complexities = changes.complexities.currentValue;
-      this.complexityComponentService.getCapabilityMatrix(undefined).subscribe(
+      let jobId : string;
+      if(!this.isCandidate) {
+        jobId=LocalStorageService.getLocalValue(LocalStorage.POSTED_JOB);
+      }
+      this.complexityComponentService.getCapabilityMatrix(jobId).subscribe(
         capa => {
           this.complexityData = capa.data;
           this.getComplexityIds(this.complexities);
           this.capabilities = this.jobCompareService.getStandardMatrix(capa.data);
         });
+
     }
   }
 
@@ -97,7 +102,11 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
   }
 
   saveComplexity() {
-    this.complexityComponentService.getCapabilityMatrix(undefined).subscribe(
+    let jobId : string;
+    if(!this.isCandidate) {
+      jobId=LocalStorageService.getLocalValue(LocalStorage.POSTED_JOB);
+    }
+    this.complexityComponentService.getCapabilityMatrix(jobId).subscribe(
       capa => {
         this.capabilities = this.jobCompareService.getStandardMatrix(capa.data);
       });
