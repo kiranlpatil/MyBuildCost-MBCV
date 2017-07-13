@@ -32,9 +32,9 @@
           </div>
         </div>
 
-        <!--<div class="col-sm-12">
+        <div class="col-sm-12">
           <label>Company Culture</label>
-          &lt;!&ndash; <control-messages [control]="professionalDetailForm.controls.noticePeriod"></control-messages>&ndash;&gt;
+          <!-- <control-messages [control]="professionalDetailForm.controls.noticePeriod"></control-messages>-->
           <select [(ngModel)]="candidate.professionalDetails.industryExposure" (change)="saveProfessionalData()">
             <option *ngFor="let c of industryExposureList" [ngValue]="c">{{c}}</option>
           </select>
@@ -42,7 +42,7 @@
                *ngIf="candidate.professionalDetails.industryExposure == '' && !isValid">
             <p>You can't leave this empty.</p>
           </div>
-        </div>-->
+        </div>
 
         <div class="col-sm-12">
           <label>Notice Period</label>

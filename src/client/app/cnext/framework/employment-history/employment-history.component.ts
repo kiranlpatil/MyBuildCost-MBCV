@@ -34,12 +34,12 @@ export class EmploymentHistoryComponent {
     });
 
     // add address
-    //this.addEmployeeHistory();
+    this.addEmployeeHistory();
 
     //subscribe to addresses value changes
     this.employeeHistory.controls['employeeHistories'].valueChanges.subscribe(x => {
       this.isButtonShow = true;
-    })
+    });
   }
 
   ngOnChanges(changes: any) {
