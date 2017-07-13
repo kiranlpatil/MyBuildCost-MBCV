@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, Output, EventEmitter} from '@angular/core';
 import {ReleventIndustryListService} from "./relevent-industry-list.service";
 
 
@@ -11,6 +11,8 @@ import {ReleventIndustryListService} from "./relevent-industry-list.service";
 
 export class ReleventIndustryListComponent implements OnInit {
   industries:String[] = new Array();
+  @Output() onNextComplete = new EventEmitter();
+
   constructor(private releventIndustryService:ReleventIndustryListService) {
 
   }
@@ -36,5 +38,9 @@ export class ReleventIndustryListComponent implements OnInit {
   }
   onError(error:any) {
   console.log('----errorr------');
+  }
+
+  onNext() {
+    this.onNextComplete.emit();
   }
 }

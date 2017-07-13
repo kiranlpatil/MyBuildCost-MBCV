@@ -289,4 +289,8 @@ export class JobPosterComponent implements OnInit {
   getJobForComplexity() {
     this.isShowComplexity = true;
   }
+  onReleventIndustryComplete(event:any) {
+    this.showCompentensies = true;
+  }
+
 }

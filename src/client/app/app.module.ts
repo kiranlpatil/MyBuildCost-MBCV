@@ -156,8 +156,8 @@ import {GuidedTourComponent} from "./cnext/framework/guided-tour/guided-tour.com
 import {RedirectRecruiterDashboardService} from "./cnext/framework/redirect-dashboard.service";
 import {QuestionAnswerComponent} from "./cnext/framework/question-answer/question-answer.component";
 import {ComplexityComponentService} from "./cnext/framework/complexities/complexity.service";
-import {ReleventIndustryListComponent} from "./cnext/framework/optional-industry-list/relevent-industry-list.component";
-import {ReleventIndustryListService} from "./cnext/framework/optional-industry-list/relevent-industry-list.service";
+import {ReleventIndustryListComponent} from "./cnext/framework/relevent-industry-list/relevent-industry-list.component";
+import {ReleventIndustryListService} from "./cnext/framework/relevent-industry-list/relevent-industry-list.service";
 
 //C-NEXT IMPORTS
 
