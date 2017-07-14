@@ -4,7 +4,7 @@
       <cn-basic-job-information [highlightedSection]="highlightedSection" [jobPosterModel]="jobPosterModel"
                                 (onComplete)="onBasicJobInformationComplete($event)"></cn-basic-job-information>
     </div>
-    <div class="wrapper">
+    <div class="wrapper" [hidden]="!isShowIndustryList">
       <cn-industry-list [selectedIndustry]="jobPosterModel.industry" [highlightedSection]="highlightedSection"
                         (valueChange)="selectIndustry($event)" [hidden]="!isShowIndustryList"></cn-industry-list>
 
@@ -14,14 +14,14 @@
       <cn-capabilities [roles]="rolesForCapability" [candidateRoles]="jobForCapability"
                        [highlightedSection]="highlightedSection"
                        (onComplete)="selectCapability($event)" [hidden]="!isShowCapability"></cn-capabilities>
-    <div class="wrapper">
+    <div class="wrapper" [hidden]="!isShowComplexity">
       <cn-complexities [roles]="rolesForComplexity" [complexities]="jobPosterModel.capability_matrix"
                        [highlightedSection]="highlightedSection"
                        [isComplexityPresent]="isComplexityPresent"
                        (onComplextyAnswered)="onComplextyAnswered($event)"
                        (onComplete)="selectRoleFromComplexity($event)" [hidden]="!isShowComplexity"></cn-complexities>
     </div>
-    <div class="wrapper">
+    <div class="wrapper" [hidden]="!isShowProficiency">
       <cn-job-proficiencies [proficiencies]="proficiencies" [jobPosterModel]="jobPosterModel"
                             [highlightedSection]="highlightedSection"
                             (onComplete)="selectProficiency($event)" (onNextComplete)="onProficiencyComplete($event)"
@@ -35,7 +35,7 @@
                               [hidden]="!showIndustryExposure" (onNextComplete)="onIndustryExposureComplete($event)"
                               *ngIf="jobPosterModel != undefined && jobPosterModel.industry != undefined"></cn-industry-experience>
     </div>
-    <div class="wrapper">
+    <div class="wrapper" [hidden]="!showCompentensies">
       <cn-compentacies-and-responsibilities [jobPosterModel]="jobPosterModel" [highlightedSection]="highlightedSection"
                                             (onComplete)="onCompentansiesandResponsibilitycomplete($event)"
                                             [hidden]="!showCompentensies"></cn-compentacies-and-responsibilities>

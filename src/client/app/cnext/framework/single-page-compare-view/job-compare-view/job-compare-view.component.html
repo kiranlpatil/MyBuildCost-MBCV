@@ -65,7 +65,8 @@
                 <label>Current company</label>
                 <span>{{candidate.professionalDetails.currentCompany}}</span>
                 <label>Current Location</label>
-                <span>{{candidateDetails.location.city}}</span><!--<span>{{candidateDetails.location.city}}</span>-->
+                <span *ngIf="candidate.location && candidate.location.city ">{{candidate.location.city}}</span>
+                <!--<span>{{candidateDetails.location.city}}</span>-->
                 <label [class.exact]="data.releaseMatch=='exact'" [class.above]="data.releaseMatch=='above'"
                        [class.below]="data.releaseMatch=='below'" [class.missing]="data.releaseMatch=='missing'">
                   Ready to Relocate</label>

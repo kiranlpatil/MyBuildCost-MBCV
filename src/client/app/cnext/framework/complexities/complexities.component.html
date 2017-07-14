@@ -28,7 +28,7 @@
       <button class="btn btn-primary" (click)="onNext()" [disabled]="currentComplexity===complexityIds.length"
               *ngIf="isCandidate">Next
       </button>
-      <button class="btn btn-primary" (click)="onNext()" [disabled]="currentComplexity===complexityIds.length"
+      <button class="btn btn-primary" (click)="onNextCapability()" [disabled]="currentComplexity===complexityIds.length"
               *ngIf="!isCandidate">Next
       </button>
     </div>

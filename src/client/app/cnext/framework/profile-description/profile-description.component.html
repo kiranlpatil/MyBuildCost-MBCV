@@ -109,7 +109,8 @@
         </p>
 
         <p class="profile-details truncate-text"><label>Current company</label> {{candidate.professionalDetails.currentCompany}}</p>
-        <p class="profile-details truncate-text"><label>Current Location</label> xxxxxxxxxxx</p>
+        <p class="profile-details truncate-text" *ngIf="candidate.location && candidate.location.city"><label>Current
+          Location</label> {{candidate.location.city}}</p>
         <p class="profile-details truncate-text"><label>Total Experience</label> {{candidate.professionalDetails.experience}}</p>
         <p class="profile-details truncate-text"><label>Highest Qualification</label> {{candidate.professionalDetails.education}}</p>
       </div>

@@ -37,7 +37,7 @@ export class ProfileDescriptionComponent implements OnInit {
   private islocationValid: boolean = true;
   private image_path: string = 'assets/framework/images/dashboard/profile.png';
   private jobTitleValidationMessage = Messages.MSG_ERROR_VALIDATION_JOBTITLE_REQUIRED;
-  private currentCompanyValidationMessage = Messages.MSG_ERROR_VALIDATION_CURRENTCOMPANY_REQUIRED
+  private currentCompanyValidationMessage = Messages.MSG_ERROR_VALIDATION_CURRENTCOMPANY_REQUIRED;
   private educationValidationMessage= Messages.MSG_ERROR_VALIDATION_EDUCATION_REQUIRED;
   private experienceValidationMessage= Messages.MSG_ERROR_VALIDATION_EXPERIENCE_REQUIRED;
   private storedLocation: Location = new Location();
@@ -108,6 +108,11 @@ export class ProfileDescriptionComponent implements OnInit {
     }
   }
   onNext() {
+    if (this.storedLocation.city == undefined) {
+      this.storedLocation.city = 'pune';
+      this.storedLocation.state = 'maharashtra';
+      this.storedLocation.country = 'india';
+    }
     if((this.candidate.jobTitle == '' || this.candidate.jobTitle == undefined ) ||
       (this.candidate.professionalDetails.currentCompany == '' ||
       this.candidate.professionalDetails.currentCompany== undefined ) ||
@@ -119,6 +124,7 @@ export class ProfileDescriptionComponent implements OnInit {
       return;
     }
     console.log("from next");
+    this.candidate.location = this.storedLocation;
     this.candidate.industry = this.changedIndustry;
     this.candidate.industry.roles = [];
     this.disableButton = false;
@@ -135,6 +141,11 @@ export class ProfileDescriptionComponent implements OnInit {
   }
 
   onSave() {
+    if (this.storedLocation.city == undefined) {
+      this.storedLocation.city = 'pune';
+      this.storedLocation.state = 'maharashtra';
+      this.storedLocation.country = 'india';
+    }
     if((this.candidate.jobTitle == '' || this.candidate.jobTitle == undefined ) ||
       (this.candidate.professionalDetails.currentCompany == '' ||
       this.candidate.professionalDetails.currentCompany== undefined ) ||
@@ -147,7 +158,7 @@ export class ProfileDescriptionComponent implements OnInit {
     }
     console.log("from save");
 //    this.compactView = true;
-    this.candidate.professionalDetails.location = this.storedLocation;
+    this.candidate.location = this.storedLocation;
     this.savedJobTitle = this.candidate.jobTitle ;
     this.highlightedSection.name = 'none';
     this.highlightedSection.isDisable = false;
