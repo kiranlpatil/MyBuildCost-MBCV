@@ -2,6 +2,8 @@ import {Component, Input, OnChanges, OnInit} from '@angular/core';
 import { Role } from '../../../model/role';
 import {Capability} from "../../../model/capability";
 import {Scenario} from "../../../model/scenario";
+import {AppSettings, LocalStorage} from "../../../../../framework/shared/constants";
+import {LocalStorageService} from "../../../../../framework/shared/localstorage.service";
 
 @Component({
   moduleId: module.id,
@@ -15,6 +17,9 @@ export class CapabilityCompareComponent  implements OnChanges{
   @Input() capabilities: Capability[] = new Array(0);
   @Input() rowsToShow: number;
   @Input() isCompact : boolean = false;
+  @Input() candidate_picture : string;
+  @Input() job_picture : string;
+  isCandidate: boolean;
   maxArray : number[]= new Array(0);
   ngOnChanges(changes : any) {
     if(changes.capabilities && changes.capabilities.currentValue) {
@@ -40,8 +45,19 @@ export class CapabilityCompareComponent  implements OnChanges{
 
 
       this.maxArray = new Array(max);
+      if (LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE) === 'true') {
+        this.isCandidate = true;
+      }else {
+        this.isCandidate = false;
+      }
     }
     //  console.log("in compare view",this.roles);
+  }
+  getImagePath(imagePath: string) {
+    if (imagePath !== undefined) {
+      return AppSettings.IP + imagePath.substring(4).replace('"', '');
+    }
+    return null;
   }
 
 

@@ -2,10 +2,11 @@ import {Injectable} from "@angular/core";
 import {Http} from "@angular/http";
 import {Observable} from "rxjs/Observable";
 import {BaseService} from "../../../../framework/shared/httpservices/base.service";
-import {API} from "../../../../framework/shared/constants";
+import {API, LocalStorage} from "../../../../framework/shared/constants";
 import {Capability} from "../../model/capability";
 import {Complexity} from "../../model/complexity";
 import {Scenario} from "../../model/scenario";
+import {LocalStorageService} from "../../../../framework/shared/localstorage.service";
 
 @Injectable()
 export class JobCompareService extends BaseService {
@@ -19,7 +20,18 @@ export class JobCompareService extends BaseService {
      /api/recruiter/jobProfile/:jobId/matchresult/:candidateId
 
      */
-    let url: string = API.RECRUITER_PROFILE + '/jobProfile/' + recruiterId + '/matchresult/' + candidateId;
+    let isCandidate: boolean= false;
+    if (LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE) === 'true') {
+      isCandidate = true;
+    }else {
+      isCandidate = false;
+    }
+    let url: string ;
+    if(isCandidate) {
+      url= API.CANDIDATE_PROFILE + '/' + candidateId + '/matchresult/' + recruiterId;
+    }else {
+      url= API.RECRUITER_PROFILE + '/jobProfile/' + recruiterId + '/matchresult/' + candidateId;
+    }
     return this.http.get(url)
       .map(this.extractData)
       .catch(this.handleError);
@@ -49,6 +61,8 @@ export class JobCompareService extends BaseService {
         if(data[value1].capability_name === data[value2].capability_name) {
           let sce = new Scenario();
           sce.name = data[value2].scenario_name;
+          sce.candidate_scenario_name=data[value2].candidate_scenario_name;
+          sce.job_scenario_name=data[value2].job_scenario_name;
           let com = new Complexity();
           com.match= data[value2].match;
           com.name= data[value2].complexity_name;

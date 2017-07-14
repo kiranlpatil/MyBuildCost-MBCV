@@ -202,7 +202,12 @@
   <div *ngIf="data && (typeOfView =='spa_job' || typeOfView =='spa_candidate')">
     <div class="spa-candidate-col">
       <div class="col-sm-12">
-        <cn-capability-compare [capabilities]="capabilities"></cn-capability-compare>
+        <div *ngIf="typeOfView =='spa_job' && recruiter != undefined" >
+          <cn-capability-compare [job_picture]="recruiter.company_logo"  [capabilities]="capabilities"></cn-capability-compare>
+        </div>
+        <div *ngIf="typeOfView =='spa_candidate' && candidateDetails != undefined">
+          <cn-capability-compare [candidate_picture]="candidateDetails.picture"   [capabilities]="capabilities"></cn-capability-compare>
+        </div>
       </div>
       <div class="col-sm-12 proficiency-compare-section-area">
         <h4 class="pull-left col-xs-3 no-padding text-left">Key Skills</h4>
@@ -259,7 +264,10 @@
 <section *ngIf="data != undefined && typeOfView=='compact'">
   <div class="one-page-summary">
     <div class="col-xs-12">
-      <cn-capability-compare [capabilities]="capabilities"></cn-capability-compare>
+      <div *ngIf="typeOfView =='spa_candidate' && candidateDetails != undefined">
+        <cn-capability-compare [candidate_picture]="candidateDetails.picture"   [capabilities]="capabilities"></cn-capability-compare>
+      </div>
+
     </div>
     <div class="col-sm-12 proficiency-compare-section-area">
       <h4 class="pull-left col-xs-3 no-padding text-left">Key skills</h4>

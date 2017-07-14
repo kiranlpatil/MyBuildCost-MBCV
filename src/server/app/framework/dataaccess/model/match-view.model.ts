@@ -7,6 +7,8 @@ class MatchViewModel {
   complexity_name: string;
   complexity_number: number;
   total_complexity_in_capability: number;
+  candidate_scenario_name: string;
+  job_scenario_name: string;
   scenario_name: string;
   match: Match;
   scenarios: ScenarioModel[];
