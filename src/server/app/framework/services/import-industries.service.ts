@@ -26,9 +26,10 @@ class ImportIndustryService {
       } else {
         if (response.length == 0) {
           console.log('response'+JSON.stringify(response));
-          callback(null, response);
+          callback('Empty Response', null);
         } else {
-          callback('Empty response', null);
+          console.log('response : '+JSON.stringify(response));
+          callback(null, response);
           //this.importIndustriesRepository.findOneAndUpdate({'_id': response[0]._id}, item, {new: true}, callback);
         }
       }

@@ -185,6 +185,7 @@ function addComplexities(newRow:any,compareComplexities:any){
           let s : ScenarioClassModel = new ScenarioClassModel();
           s.name='Not Applicable';
           s.code=""+0;
+          scenarios.push(s);
           complexities.scenarios=scenarios;
           compareComplexities.push(complexities);
         }
@@ -197,7 +198,8 @@ function addComplexities(newRow:any,compareComplexities:any){
     var complexities= new ComplexityClassModel();
     complexities.name=newRow.complexity;
     complexities.code=newRow.complexity_code;
-    complexities.question=newRow.complexity_question_for_participant;
+    complexities.questionForCandidate=newRow.complexity_question_for_participant;
+    complexities.questionForRecruiter=newRow.complexity_question_for_recruiter;
     let scenarios : ScenarioClassModel[] = new Array(0);
     for(let sceIndex : number =0 ;sceIndex<5; sceIndex++){
       let sceName = 'Scenario'+(sceIndex+1).toString();
@@ -210,6 +212,7 @@ function addComplexities(newRow:any,compareComplexities:any){
     let s : ScenarioClassModel = new ScenarioClassModel();
     s.name='Not Applicable';
     s.code=""+0;
+    scenarios.push(s);
     complexities.scenarios=scenarios;
     compareComplexities.push(complexities);
     return compareComplexities;

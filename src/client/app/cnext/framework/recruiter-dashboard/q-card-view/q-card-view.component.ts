@@ -138,19 +138,19 @@ export class QCardviewComponent implements OnChanges {
 
     if (sourceListName === ValueConstant.CART_LISTED_CANDIDATE && (destinationListName === ValueConstant.CART_LISTED_CANDIDATE || destinationListName === ValueConstant.REJECTED_LISTED_CANDIDATE))
       this.addedTocart.emit(false);
-    if(destinationListName=="cartListed"&& action=="add"){this.displayMsg("cartListed");}
-    if(destinationListName=="rejectedList"&& action=="add"){this.displayMsg("rejectedList");}
-    if(destinationListName=="cartListed"&& action=="remove"){this.displayMsg("removedcartListed");}
-    if(destinationListName=="rejectedList"&& action=="remove"){this.displayMsg("removedrejectedList");}
+    if(destinationListName=="cartListed"&& action=="add"){this.displayMsg("cartListed",candidate);}
+    if(destinationListName=="rejectedList"&& action=="add"){this.displayMsg("rejectedList",candidate);}
+    if(destinationListName=="cartListed"&& action=="remove"){this.displayMsg("removedcartListed",candidate);}
+    if(destinationListName=="rejectedList"&& action=="remove"){this.displayMsg("removedrejectedList",candidate);}
 
   }
-  displayMsg(condition:string){
+  displayMsg(condition:string,candidate: CandidateQCard){
     var message = new Message();
     message.isError = false;
-    if(condition=="cartListed"){message.custom_message = "Successfully added in cart";}
-    if(condition=="rejectedList"){message.custom_message = "You Rejected this Candidate. Moved to rejected list";}
-    if(condition=="removedcartListed"){message.custom_message = "Removed from cart. And added in matching Jobs";}
-    if(condition=="removedrejectedList"){message.custom_message = "Removed from rejected list. And added in matching Jobs";}
+    if(condition=="cartListed"){message.custom_message = "You added the candidate "+candidate.first_name+" "+candidate.last_name+" in Cart";}
+    if(condition=="rejectedList"){message.custom_message = "You moved "+candidate.first_name+" "+candidate.last_name+" this Candidate to Rejected list";}
+    if(condition=="removedcartListed"){message.custom_message = "Removed "+candidate.first_name+" "+candidate.last_name+" from cart. And added in Matching Jobs";}
+    if(condition=="removedrejectedList"){message.custom_message = "Removed "+candidate.first_name+" "+candidate.last_name+" from Rejected list. And added in Matching Jobs";}
     this.messageService.message(message);
   }
   addRemoveToShortList(candidate: CandidateQCard) {

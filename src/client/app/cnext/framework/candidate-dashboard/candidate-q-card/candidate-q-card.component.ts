@@ -77,9 +77,9 @@ export class CandidateQCardComponent {
   displayMsg(condition: string){
     var message = new Message();
     message.isError = false;
-    if(condition=="APPLY"){message.custom_message = "You appiled for this job.";}
-    if(condition=="REJECT"){message.custom_message = "You rejected this job.";}
-    if(condition=="DELETE"){message.custom_message = "Removed job from 'Not Interested' list. And added to matching jobs";}
+    if(condition=="APPLY"){message.custom_message = "You appiled for "+this.job.jobTitle+" at "+this.job.company_name+" this job.";}
+    if(condition=="REJECT"){message.custom_message = "You moved "+this.job.jobTitle+" at "+this.job.company_name+" this job to Not Intrested.";}
+    if(condition=="DELETE"){message.custom_message = "Removed "+this.job.jobTitle+" at "+this.job.company_name+" job from 'Not Interested' list. And added to Matching jobs";}
     this.messageService.message(message);
   }
 
