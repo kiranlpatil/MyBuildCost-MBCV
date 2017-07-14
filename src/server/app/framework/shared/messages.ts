@@ -1,6 +1,6 @@
 class Messages {
   //Image Paths
-  public static EMAIL_TEMPLATE_LOGO: string = './src/server/app/framework/public/images/logo/cnext-logo-white.png'
+  public static EMAIL_TEMPLATE_LOGO: string = './src/server/app/framework/public/images/logo/job-mosis-logo.png'
 
   //status
   public static STATUS_SUCCESS: string = 'Success';

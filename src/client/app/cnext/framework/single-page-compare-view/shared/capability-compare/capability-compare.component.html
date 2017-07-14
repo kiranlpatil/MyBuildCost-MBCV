@@ -30,8 +30,8 @@
                   <div *ngFor="let scenario of complexity.scenarios">
                     <div class="complexity-scenarios-description">
                       <span class="complexity-name">{{complexity.name}}</span>
-                      <span>{{scenario.name }}</span>
-                      <div *ngIf="complexity.match != 2">
+                      <span class="scenario-name-top" [class.not-match-overlay]="complexity.match != 2">{{scenario.name }}</span>
+                      <div *ngIf="complexity.match != 2" [class.unmatch-overlay-show]="complexity.match != 2">
                         <div class="col-xs-12 no-padding user-info-modal">
                           <div class="col-xs-2 no-padding ">
                             <span> <img style="width: 24px;" src="/assets/framework/images/dashboard/profile.png" alt="User Profile"

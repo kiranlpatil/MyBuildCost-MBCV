@@ -24,6 +24,14 @@ $white: #ffffff;
   line-height: 16px;
 }
 
+.not-match-overlay {
+  display: block;
+}
+
+.unmatch-overlay-show {
+  display: none;
+}
+
 .compact-view:hover {
   .complexity-scenarios-description {
     white-space: inherit;
@@ -32,8 +40,8 @@ $white: #ffffff;
     padding: 5px;
     bottom: 0;
     min-height: 59px;
-    width: 200%;
-    left: -27px;
+    wwidth: 160%;
+    left: -37px;
     box-shadow: 0px 0px 4px 0px #757575;
     color : white !important;
     font-size: 12px;
@@ -45,6 +53,13 @@ $white: #ffffff;
       white-space: normal;
       display: block;
       position: relative;
+      word-break: keep-all;
+    }
+    .not-match-overlay {
+      display: none;
+    }
+    .unmatch-overlay-show {
+      display: block;
     }
   }
   .complexity-name {
@@ -60,8 +75,8 @@ $white: #ffffff;
     padding: 5px;
     bottom: 0;
     min-height: 59px;
-    width: 200%;
-    left: -27px;
+    width: 160%;
+    left: -37px;
     box-shadow: 0px 0px 4px 0px #757575;
     font-size: 12px;
     z-index: 9;
@@ -72,6 +87,13 @@ $white: #ffffff;
       white-space: normal;
       display: block;
       position: relative;
+      word-break: keep-all;
+    }
+    .not-match-overlay {
+      display: none;
+    }
+    .unmatch-overlay-show {
+      display: block;
     }
   }
   .complexity-name {
@@ -94,8 +116,8 @@ $white: #ffffff;
     padding: 5px;
     bottom: 0;
     min-height: 59px;
-    width: 200%;
-    left: -27px;
+    width: 160%;
+    left: -37px;
     box-shadow: 0px 0px 4px 0px #757575;
     font-size: 12px;
     z-index: 9;
@@ -106,6 +128,13 @@ $white: #ffffff;
       white-space: normal;
       display: block;
       position: relative;
+      word-break: keep-all;
+    }
+    .not-match-overlay {
+      display: none;
+    }
+    .unmatch-overlay-show {
+      display: block;
     }
   }
   .complexity-name {
@@ -130,8 +159,8 @@ $white: #ffffff;
     padding: 5px;
     bottom: 0;
     min-height: 59px;
-    width: 200%;
-    left: -27px;
+    width: 160%;
+    left: -37px;
     box-shadow: 0px 0px 4px 0px #757575;
     font-size: 12px;
     z-index: 9;
@@ -142,6 +171,13 @@ $white: #ffffff;
       white-space: normal;
       display: block;
       position: relative;
+      word-break: keep-all;
+    }
+    .not-match-overlay {
+      display: none;
+    }
+    .unmatch-overlay-show {
+      display: block;
     }
   }
   .complexity-name {
@@ -164,8 +200,8 @@ $white: #ffffff;
     padding: 5px;
     bottom: 0;
     min-height: 59px;
-    width: 200%;
-    left: -27px;
+    width: 160%;
+    left: -37px;
     box-shadow: 0px 0px 4px 0px #757575;
     font-size: 12px;
     z-index: 9;
@@ -176,6 +212,13 @@ $white: #ffffff;
       white-space: normal;
       display: block;
       position: relative;
+      word-break: keep-all;
+    }
+    .not-match-overlay {
+      display: none;
+    }
+    .unmatch-overlay-show {
+      display: block;
     }
   }
   .complexity-name {
@@ -204,8 +247,8 @@ $white: #ffffff;
     padding: 5px;
     bottom: 0;
     min-height: 59px;
-    width: 200%;
-    left: -27px;
+    width: 160%;
+    left: -37px;
     box-shadow: 0px 0px 4px 0px #757575;
     font-size: 12px;
     z-index: 9;
@@ -216,6 +259,13 @@ $white: #ffffff;
        white-space: normal;
        display: block;
        position: relative;
+      word-break: keep-all;
+    }
+    .not-match-overlay {
+      display: none;
+    }
+    .unmatch-overlay-show {
+      display: block;
     }
   }
   .complexity-name {

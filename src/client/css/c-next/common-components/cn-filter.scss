@@ -10,7 +10,7 @@ $theme-color: #0d75fa;
 .filter-container {
   padding-bottom: 60px;
   position: fixed;
-  top: 85px;
+  top: 127px;
   left: 0;
   height: 100vh;
   overflow: auto;
@@ -29,7 +29,7 @@ $theme-color: #0d75fa;
   h4 {
     margin: 0;
     color: #666;
-    padding: 15px;
+    padding: 61px 15px 15px;
     font-size: 13px;
     font-family: 'gothamrnd-book';
     position: fixed;
@@ -42,7 +42,7 @@ $theme-color: #0d75fa;
   }
 
   .inner {
-    padding: 0 15px 15px;
+    padding: 49px 15px 15px;
 
     h5 {
       margin: 20px 0 5px;

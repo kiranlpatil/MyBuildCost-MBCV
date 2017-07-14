@@ -650,6 +650,10 @@ control-messages {
   margin: 0 0 10px;
 }
 
+.navbar-brand {
+  padding: 0px 15px 15px 15px;
+}
+
 // Media Queries
 @media only screen and (max-width: 1024px) {
   .logout-dropdown {
