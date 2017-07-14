@@ -121,13 +121,13 @@ export class BasicJobInformationComponent implements OnInit,OnChanges {
       this.jobPosterModel.industry = this.storedIndustry;
     }
     this.jobPosterModel.location = this.storedLocation;
-    if (this.jobPosterModel.industry) {
+    //if (this.jobPosterModel.industry) {
       this.savedjobPosterModel=Object.assign({},this.jobPosterModel);
       this.highlightedSection.name = 'Industry';
       this.onComplete.emit(this.jobPosterModel);
-    } else {
+    /*} else {
       this.jobPosterModel.industry = new Industry();
-    }
+    }*/
   }
   onCancel() {
     this.jobPosterModel=Object.assign({},this.savedjobPosterModel);
