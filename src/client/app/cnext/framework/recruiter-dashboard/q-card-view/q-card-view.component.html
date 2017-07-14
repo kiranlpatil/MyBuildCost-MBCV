@@ -76,8 +76,7 @@
         </header>
         <div class="col-sm-8 no-padding">
           <div class="col-sm-12 details">
-            <p class="proficiencies" title="Key Skills">
-              <img src="assets/c-next/card-view/proficiencies.png" alt="Key Skills"/>
+            <p class="proficiencies proficiencies-icon" title="Key Skills">
               <span *ngFor="let proficiency of item.proficiencies;let i=index">
                 <span *ngIf="i < 5">{{proficiency}}
                   <span *ngIf="i>=0 && i<4 &&  item.proficiencies.length-1 != i ">,&nbsp;</span>
@@ -85,9 +84,11 @@
               </span>
               <br/><span *ngIf="item.proficiencies.length > 5">( {{item.proficiencies.length-5}} More )</span>
             </p>
-            <p class="border-bottom" title="Salary"><img src="assets/c-next/card-view/salary.png" alt="Salary"/>₹ {{item.salary}}</p>
-            <p class="border-bottom" title="Experience"><img src="assets/c-next/card-view/experience.png" alt="Experience"/>{{item.experience}}</p>
-            <p title="Current Location"><img src="assets/c-next/card-view/relocation.png" alt="Location"/> {{item.location}}</p>
+            <div class="icons-section">
+              <p class="border-bottom salary" title="Salary">₹ {{item.salary}}</p>
+              <p class="border-bottom experience" title="Experience">{{item.experience}}</p>
+              <p class="current-location" title="Current Location"> {{item.location}}</p>
+            </div>
           </div>
         </div>
         <div class="button-group" *ngIf="type=='matchedList'">

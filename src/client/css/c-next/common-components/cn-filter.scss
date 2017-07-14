@@ -5,6 +5,7 @@ $bg-tab-content: #f9f9f9;
 $profile-section-shadow: rgba(204, 204, 204, 1);
 $border-color: #e8e8e8;
 $filter-bg: #edf1f5;
+$theme-color: #0d75fa;
 
 .filter-container {
   padding-bottom: 60px;
@@ -45,11 +46,11 @@ $filter-bg: #edf1f5;
 
     h5 {
       margin: 20px 0 5px;
-      font-weight: 900;
-      color: #999;
+      font-weight: 500;
+      color: $theme-color;
       position: relative;
       cursor: pointer;
-      font-size: 12px;
+      font-size: 13px;
       font-family: 'gothamrnd-book';
     }
 

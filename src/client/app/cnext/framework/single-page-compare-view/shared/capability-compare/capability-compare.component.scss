@@ -325,6 +325,7 @@ $white: #ffffff;
       float: left;
       font-size: 12px;
       margin-right: 15px;
+      color: $text-color;
     }
 
     span {
@@ -498,6 +499,8 @@ and (max-width: 840px) {
     .capability-label-name {
       font-size: 14px;
       color: $theme-color;
+      font-family: 'gothamrnd-book';
+      font-weight: 500;
     }
     .complexity-name {
       color: $text-color;

@@ -7,6 +7,7 @@ $white: #fff;
 $purple: #7366ad;
 $profile-section-shadow: rgba(0, 0, 0, 0.04);
 $active-color: #edf1f5;
+$pink: #e91d62;
 
 .card-view {
   clear: both;
@@ -56,7 +57,7 @@ $active-color: #edf1f5;
 
       .glyphicon-eye-open,
       .active-star {
-        color: $orange;
+        color: $theme-color;
       }
 
       img {
@@ -106,7 +107,7 @@ $active-color: #edf1f5;
     }
 
     h6 {
-      color: $orange;
+      color: $theme-color;
       font-weight: 900;
       font-size: 13px;
       margin: 0 0 5px;
@@ -134,7 +135,8 @@ $active-color: #edf1f5;
       border: 1px solid $theme-color;
       box-shadow: none;
       color: $white;
-      width: 100%;
+      width: 40%;
+      margin: 0 auto;
 
       &:hover,
       &:focus,
@@ -162,7 +164,7 @@ $active-color: #edf1f5;
   }
 
   .canvas-container {
-    color: $orange;
+    color: $theme-color;
     float: none;
     margin: 0 auto;
     height: 90px;
@@ -186,7 +188,7 @@ $active-color: #edf1f5;
       text-align: center;
       top: 73%;
       transform: translate(-50%, -50%) rotateY(180deg);
-      color: $orange;
+      color: $theme-color;
       font-size: 10px;
       padding: 0;
     }
@@ -198,7 +200,6 @@ $active-color: #edf1f5;
     bottom: 0;
     left: 0;
     padding: 5px 5px;
-    background: #fff;
     display: none;
 
     .btn {
@@ -351,6 +352,142 @@ header {
     font-size: 20px;
   }
 }
+
+
+
+.icons-section {
+  .industry {
+    background: url("/src/client/assets/c-next/card-view/blue-icons/industry.png") no-repeat 3px 8px;
+  }
+  .salary {
+    background: url("/src/client/assets/c-next/card-view/blue-icons/salary.png") no-repeat 1px 8px;
+  }
+  .experience {
+    background: url("/src/client/assets/c-next/card-view/blue-icons/experience.png") no-repeat 2px 8px;
+  }
+  .current-location {
+    background: url("/src/client/assets/c-next/card-view/blue-icons/relocation.png") no-repeat 6px 8px;
+  }
+  .education {
+    background: url("/src/client/assets/c-next/card-view/blue-icons/education.png") no-repeat 3px 10px;
+  }
+  .company-size {
+    background: url("/src/client/assets/c-next/card-view/blue-icons/company-size.png") no-repeat 5px 6px;
+  }
+}
+
+.proficiencies-icon {
+  background: url("/src/client/assets/c-next/card-view/blue-icons/proficiency.png") no-repeat 5px 9px;
+  min-height: 52px;
+}
+
+#applied,
+#applied-job {
+  .icons-section {
+    .industry {
+      background: url("/src/client/assets/c-next/card-view/orange-icons/industry.png") no-repeat 3px 8px;
+    }
+    .salary {
+      background: url("/src/client/assets/c-next/card-view/orange-icons/salary.png") no-repeat 1px 8px;
+    }
+    .experience {
+      background: url("/src/client/assets/c-next/card-view/orange-icons/experience.png") no-repeat 2px 8px;
+    }
+    .current-location {
+      background: url("/src/client/assets/c-next/card-view/orange-icons/relocation.png") no-repeat 6px 8px;
+    }
+    .education {
+      background: url("/src/client/assets/c-next/card-view/orange-icons/education.png") no-repeat 3px 10px;
+    }
+    .company-size {
+      background: url("/src/client/assets/c-next/card-view/orange-icons/company-size.png") no-repeat 5px 6px;
+    }
+  }
+  .card-view,
+  .dashboard-view h6 {
+    color: $orange;
+    .canvas-container {
+      color: $orange;
+      p {
+        color: $orange;
+      }
+    }
+  }
+  .proficiencies-icon {
+    background: url("/src/client/assets/c-next/card-view/orange-icons/proficiency.png") no-repeat 5px 9px;
+    min-height: 52px;
+  }
+}
+
+#rejected,
+#rejected-job {
+  .icons-section {
+    .industry {
+      background: url("/src/client/assets/c-next/card-view/pink-icons/industry.png") no-repeat 3px 8px;
+    }
+    .salary {
+      background: url("/src/client/assets/c-next/card-view/pink-icons/salary.png") no-repeat 1px 8px;
+    }
+    .experience {
+      background: url("/src/client/assets/c-next/card-view/pink-icons/experience.png") no-repeat 2px 8px;
+    }
+    .current-location {
+      background: url("/src/client/assets/c-next/card-view/pink-icons/relocation.png") no-repeat 6px 8px;
+    }
+    .education {
+      background: url("/src/client/assets/c-next/card-view/pink-icons/education.png") no-repeat 3px 10px;
+    }
+    .company-size {
+      background: url("/src/client/assets/c-next/card-view/pink-icons/company-size.png") no-repeat 5px 6px;
+    }
+  }
+  .card-view,
+  .dashboard-view h6 {
+    color: $pink;
+    .canvas-container {
+      color: $pink;
+      p {
+        color: $pink;
+      }
+    }
+  }
+  .proficiencies-icon {
+    background: url("/src/client/assets/c-next/card-view/pink-icons/proficiency.png") no-repeat 5px 9px;
+    min-height: 52px;
+  }
+}
+
+#cart-job {
+  .icons-section {
+    .industry {
+      background: url("/src/client/assets/c-next/card-view/purple-icons/industry.png") no-repeat 3px 8px;
+    }
+    .salary {
+      background: url("/src/client/assets/c-next/card-view/purple-icons/salary.png") no-repeat 1px 8px;
+    }
+    .experience {
+      background: url("/src/client/assets/c-next/card-view/purple-icons/experience.png") no-repeat 2px 8px;
+    }
+    .current-location {
+      background: url("/src/client/assets/c-next/card-view/purple-icons/relocation.png") no-repeat 6px 8px;
+    }
+  }
+  .card-view,
+  .dashboard-view h6 {
+    color: $purple;
+    .canvas-container {
+      color: $purple;
+      p {
+        color: $purple;
+      }
+    }
+  }
+  .proficiencies-icon {
+    background: url("/src/client/assets/c-next/card-view/purple-icons/proficiency.png") no-repeat 5px 9px;
+    min-height: 52px;
+  }
+}
+
 
 @media only screen and (min-width: 1367px) {
   .card-view {

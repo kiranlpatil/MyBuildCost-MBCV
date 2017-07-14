@@ -45,19 +45,19 @@
       </div>
     </div>
     <ul class="nav nav-tabs sub-tabs">
-      <li class="active">
+      <li class="active match-count-tabs">
         <a (click)="getMatchingProfiles()" id="matched_anchor" data-toggle="tab" href="#matched-job"><span
           class="match-count count"><span>{{recruiterJobView.numberOfMatchedCandidates}}</span></span> Matched</a>
       </li>
-      <li>
+      <li class="cart-job-tabs">
         <a (click)="getSelectedListData('cartListed')" data-toggle="tab" href="#cart-job"><span class="count"><span>{{recruiterJobView.numberOfCandidatesInCart}}</span></span>
           In Cart</a>
       </li>
-      <li>
+      <li class="applied-count-tabs">
         <a (click)="getSelectedListData('applied')" data-toggle="tab" href="#applied-job"><span class="applied-count count"><span>{{recruiterJobView.numberOfCandidatesApplied}}</span></span>
           Applied</a>
       </li>
-      <li>
+      <li class="rejected-job-tabs">
         <a (click)="getSelectedListData('rejectedList')" data-toggle="tab" href="#rejected-job"><span
           class="rejected-count count"><span>{{recruiterJobView.numberOfCandidatesrejected}}</span></span> Rejected</a>
       </li>

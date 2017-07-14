@@ -163,6 +163,9 @@ $red: #e82c0c;
 }
 
 .about-company-label {
+  color: $text-color;
+  width: 100%;
+  font-size: 12px;
   label {
     color: #0d75fa;
     font-weight: 500;

@@ -183,6 +183,21 @@ $bg-tabs: #edf1f5;
       }
     }
 
+    li.cart-job-tabs.active a {
+      border-bottom: 3px solid $purple !important;
+      color: $purple !important;
+    }
+
+    li.applied-count-tabs.active a {
+      border-bottom: 3px solid $orange !important;
+      color: $orange !important;
+    }
+
+    li.rejected-job-tabs.active a {
+      border-bottom: 3px solid $red !important;
+      color: $red !important;
+    }
+
     li > a > .match-count {
       background-color: $theme-color;
     }
