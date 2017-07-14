@@ -31,15 +31,16 @@
                     <div class="complexity-scenarios-description">
                       <span class="complexity-name">{{complexity.name}}</span>
                       <span>{{scenario.name }}</span>
-                      <i *ngIf="!isCandidate && complexity.match != 2">
+                      <div *ngIf="complexity.match != 2">
+                      <i >
                           <span> <img src="/assets/framework/images/dashboard/profile.png" alt="User Profile"
                                       *ngIf="candidate_picture==undefined"/>
                             <img [src]="getImagePath(candidate_picture)" alt="User Profile"
                                  *ngIf="candidate_picture!=undefined"/>
                           </span>
-                          <span>XXXXX</span>
+                          <span>{{scenario.candidate_scenario_name}} </span>
                       </i>
-                      <i *ngIf="isCandidate && complexity.match != 2">
+                      <i>
                       <span> <img src="/assets/framework/images/dashboard/profile.png" alt="User Profile"
                                   *ngIf="job_picture==undefined"/>
                         <img src="/assets/framework/images/dashboard/profile.png" alt="User Profile"
@@ -47,6 +48,7 @@
                       </span>
                       <span>{{scenario.job_scenario_name }}</span>
                       </i>
+                      </div>
                     </div>
                   </div>
                 </div>
