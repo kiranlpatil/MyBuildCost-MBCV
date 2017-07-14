@@ -21,14 +21,14 @@ export class BasicJobInformationComponent implements OnInit,OnChanges {
   @Output() onComplete = new EventEmitter();
   private savedjobPosterModel: JobPosterModel = new JobPosterModel();
   private jobPostForm: FormGroup;
-  private educationList = [];
+  private educationList:any = [];
   private experienceRangeList: string[] = new Array(0);
   private fromYear:string = '';
   private toYear:string = '';
   private salaryRangeList: string[] = new Array(0);
   private fromValue:string = '';
   private toValue:string = '';
-  private noticePeriodList = [];
+  private noticePeriodList:any = [];
   private address: string;
   private showButton: boolean = true;
   private storedIndustry: Industry;

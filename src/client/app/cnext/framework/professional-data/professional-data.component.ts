@@ -30,10 +30,10 @@ export class ProfessionalDataComponent extends BaseService implements OnInit {
     "</ul>";
   /* private professionalDetailForm : FormGroup;*/
   showButton: boolean = true;
-  private realocationList = [];
-  private salaryList = [];
-  private noticePeriodList = [];
-  private industryExposureList = [];
+  private realocationList:any = [];
+  private salaryList:any = [];
+  private noticePeriodList:any = [];
+  private industryExposureList:any = [];
   private isValid: boolean = true;
   /*private professionalDetails:ProfessionalData=new ProfessionalData();*/
   constructor(private professionalDataService: ProfessionalDataService,
