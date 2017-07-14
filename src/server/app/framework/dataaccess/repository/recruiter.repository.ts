@@ -16,6 +16,9 @@ class RecruiterRepository extends RepositoryBase<IRecruiter> {
   getJobProfileQCard(recruiters: any[], candidate: CandidateModel, jobProfileIds: string[], callback: (error: any, result: any) => void) {
     let isSend : boolean = false;
     let jobs_cards: JobQCard[] = new Array(0);
+    if(recruiters.length==0) {
+      callback(null, jobs_cards);
+    }
     for (let recruiter of recruiters) {
       for (let job of recruiter.postedJobs) {
         if(!job.isJobPosted) {
