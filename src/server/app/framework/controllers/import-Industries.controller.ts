@@ -19,7 +19,7 @@ let importIndustriesService = new ImportIndustryService();
 //http://localhost:8080/api/readxlsx
 
 export function readXlsx(req: express.Request, res: express.Response) {
-  var filepath = "E:\\Softwares\\NewIndustryDataExcel.xlsx";
+  var filepath = "./src/server/app/framework/public/config/NewIndustryDataExcel.xlsx";
   var rolesArray=[];
   xlsxj({
     input: filepath,
