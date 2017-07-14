@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Role} from '../model/role';
 import {Capability} from '../model/capability';
-import {LocalStorage, ValueConstant} from '../../../framework/shared/constants';
+import {LocalStorage, ValueConstant, Messages} from '../../../framework/shared/constants';
 import {Section} from '../model/candidate';
 import {LocalStorageService} from '../../../framework/shared/localstorage.service';
 
@@ -28,6 +28,7 @@ export class CapabilitiesComponent {
   private disableButton: boolean = true;
   private isCandidate: boolean = false;
   private emptyCapabilities: boolean;
+  private requiredCapabilitiesValidationMessage = Messages.MSG_ERROR_VALIDATION_CAPABILITIES_REQUIRED;
   tooltipCandidateMessage: string =
 
     "<ul>" +

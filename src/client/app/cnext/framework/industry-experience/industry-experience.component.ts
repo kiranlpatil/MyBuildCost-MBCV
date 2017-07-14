@@ -3,7 +3,7 @@ import { Industry } from '../model/industry';
 import { CandidateProfileService } from '../candidate-profile/candidate-profile.service';
 import { Section } from '../model/candidate';
 import { LocalStorageService } from '../../../framework/shared/localstorage.service';
-import { LocalStorage, ValueConstant } from '../../../framework/shared/constants';
+import {LocalStorage, ValueConstant, Messages} from '../../../framework/shared/constants';
 
 @Component({
   moduleId: module.id,
@@ -33,6 +33,7 @@ export class IndustryExperienceListComponent implements OnInit,OnChanges {
   private disableButton: boolean = true;
   private isCandidate:boolean = false;
   private submitStatus: boolean;
+  private requiedIndustryExposureValidationMessage = Messages.MSG_ERROR_VALIDATION_INDUSTRY_EXPOSURE_REQUIRED;
 
   constructor(private candidateProfileService: CandidateProfileService) {
     this.getIndustries();

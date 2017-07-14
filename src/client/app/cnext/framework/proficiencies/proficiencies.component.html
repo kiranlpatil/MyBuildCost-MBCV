@@ -8,7 +8,11 @@
         <div class="proficiency-container col-sm-12 scrollable-content">
 
           <cn-multi-select [data]="proficiencies" [selectedData]="choosedproficiencies" [maxLength]="maxProficiencies"
-                           (onComplete)="onProficiencyComplete($event)" [submitStatus] = "submitStatus"></cn-multi-select>
+                           (onComplete)="onProficiencyComplete($event)" [submitStatus] = "submitStatus"
+                           [requiredKeySkillsValidationMessage] = "requiredKeySkillsValidationMessage"
+                           [maxKeySkillsValidationMessage] = "maxKeySkillsValidationMessage">
+
+          </cn-multi-select>
         </div>
       </div>
       <div class="col-sm-3 no-padding">

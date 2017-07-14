@@ -3,7 +3,7 @@ import {Industry} from "../model/industry";
 import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
 import {Section} from "../model/candidate";
 import {LocalStorageService} from "../../../framework/shared/localstorage.service";
-import {LocalStorage} from "../../../framework/shared/constants";
+import {LocalStorage, Messages} from "../../../framework/shared/constants";
 
 @Component({
   moduleId: module.id,
@@ -25,6 +25,7 @@ export class IndustryListComponent implements OnChanges {
   private industries: Industry[] = new Array(0);
   private choosedIndustry: Industry = new Industry();
   private isValid:boolean = true;
+  private requiredFieldMessage = Messages.MSG_ERROR_VALIDATION_INDUSTRY_REQUIRED;
   constructor(private candidateProfileService: CandidateProfileService) {
     this.candidateProfileService.getIndustries()
       .subscribe(industries => this.industries = industries.data);

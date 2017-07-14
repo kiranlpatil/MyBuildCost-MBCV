@@ -7,7 +7,7 @@
       <h4 class="heading" *ngIf="!isCandidate && currentCapability">Tell us about your experience in
         {{currentCapability.name}}
       </h4>
-      <div class="error-messages" *ngIf="!isValid"><p>You can't leave this empty.</p></div>
+      <div class="error-messages" *ngIf="!isValid"><p>{{requiedValidationMessage}}</p></div>
       <div class="complexity-container scrollable-content" *ngIf="isCandidate">
         <cn-question-answer [complexityDetails]="currentComplexityDetails" [slideQuestionToLeft]="slideToLeft"
                             [slideQuestionToRight]="slideToRight"

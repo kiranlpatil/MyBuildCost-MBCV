@@ -6,7 +6,7 @@
       <div class=" col-sm-9 no-padding">
         <h4 class="heading">Select those capabilities that describe your current strenght
         </h4>
-        <div class="error-messages" *ngIf="emptyCapabilities">Select your capabilities.</div>
+        <div class="error-messages" *ngIf="emptyCapabilities">{{requiredCapabilitiesValidationMessage}}</div>
         <div class="col-sm-12 scrollable-content capabilities">
           <div class="capability-type">
             <span class="capability-option" *ngFor="let role of roles">

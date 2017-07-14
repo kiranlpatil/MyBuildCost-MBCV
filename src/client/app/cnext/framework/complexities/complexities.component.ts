@@ -2,7 +2,7 @@ import {Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, V
 import {Role} from "../model/role";
 import {ComplexityService} from "../complexity.service";
 import {LocalStorageService} from "../../../framework/shared/localstorage.service";
-import {LocalStorage} from "../../../framework/shared/constants";
+import {LocalStorage, Messages} from "../../../framework/shared/constants";
 import {Section} from "../model/candidate";
 import {ComplexityDetails} from "../model/complexity-detail";
 import {ComplexityComponentService} from "./complexity.service";
@@ -39,6 +39,7 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
   private isValid: boolean =true;
   private currentCapability: Capability = new Capability();
   private currentCapabilityNumber: number;
+  private requiedValidationMessage = Messages.MSG_ERROR_VALIDATION_COMPLEXITY_REQUIRED;
   tooltipCandidateMessage: string = "<ul><li>" +
     "<p>1. This section provides a list of complexity scenarios for your selected capabilities." +
     "If more than one options are applicable to you, choose the option where you can demonstrate a higher level of expertise.</p></li>" +

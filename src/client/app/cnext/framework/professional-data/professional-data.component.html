@@ -15,7 +15,7 @@
           </select>
           <div class="error-messages"
                *ngIf="candidate.professionalDetails.currentSalary == '' && !isValid">
-            <p>You can't leave this field empty.</p>
+            <p>{{requiedSalaryValidationMessage}}</p>
           </div>
 
         </div>
@@ -28,7 +28,7 @@
           </select>
           <div class="error-messages"
                *ngIf="candidate.professionalDetails.relocate == '' && !isValid">
-            <p>You can't leave this field empty.</p>
+            <p>{{requiedRelocateValidationMessage}}</p>
           </div>
         </div>
 
@@ -40,7 +40,7 @@
           </select>
           <div class="error-messages"
                *ngIf="candidate.professionalDetails.industryExposure == '' && !isValid">
-            <p>You can't leave this field empty.</p>
+            <p>{{requiedIndustryExposureValidationMessage}}</p>
           </div>
         </div>
 
@@ -52,7 +52,7 @@
           </select>
           <div class="error-messages"
                *ngIf="candidate.professionalDetails.noticePeriod == '' && !isValid">
-            <p>You can't leave this field empty.</p>
+            <p>{{requiedNoticePeriodValidationMessage}}</p>
           </div>
         </div>
 
