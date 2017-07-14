@@ -46,7 +46,7 @@ class Messages {
   public static MSG_ERROR_VERIFY_CANDIDATE_ACCOUNT: string = 'Please contact the administrator to activate your account.';//Dont CHange It
   public static MSG_ERROR_INVALID_ID: string = 'Invalid Userid';
   public static MSG_ERROR_USER_NOT_PRESENT: string = 'Please enter valid login email or password.';
-  public static MSG_ERROR_USER_WITH_EMAIL_PRESENT: string = 'You are already registered. Kindly click on login.';
+  public static MSG_ERROR_USER_WITH_EMAIL_PRESENT: string = 'You are already registered. Kindly click on sign in.';
   public static MSG_ERROR_DIRECTORY_NOT_FOUND: string = 'Image directory not found.';
   public static MSG_ERROR_INVALID_TOKEN: string = 'Invalid access token';
   public static MSG_ERROR_WRONG_OTP: string = 'The OTP you have entered is incorrect.';

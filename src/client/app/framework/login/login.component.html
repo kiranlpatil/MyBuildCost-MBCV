@@ -3,18 +3,18 @@
 
   <app-loader></app-loader>
 
-  <div class="col-lg-3 col-md-4 col-sm-6 col-xs-10 content">
+  <div class="col-lg-4 col-md-4 col-sm-6 col-xs-10 content">
 
     <h5>Sign In <!--<span class="glyphicon glyphicon-remove" (click)="navigateTo('/landing')"></span>--></h5>
 
-    <div class="alert alert-danger clearfix" [hidden]="isShowErrorMessage">
+    <!--<div class="alert alert-danger clearfix" [hidden]="isShowErrorMessage">
       <div class="col-sm-1 hidden-xs"><span class="glyphicon glyphicon-warning-sign"></span></div>
       <div class="col-sm-10 col-xs-11 error-msg"><b>{{ error_msg }}</b></div>
       <div class="col-sm-1 col-xs-1 close-msg">
         <button (click)="isShowErrorMessage = true" class="btn-close"><span class="glyphicon glyphicon-remove"></span>
         </button>
       </div>
-    </div>
+    </div>-->
 
     <form [formGroup]="userForm" (submit)="onSubmit()" novalidate>
 
@@ -31,7 +31,7 @@
         <input type="password" formControlName="password" id="password" autocomplete="off" class="form-control" />
         <label>Enter Password</label>
       </div>
-
+      <div class="col-sm-10 col-xs-11 error-msg alert alert-danger form-alert" [hidden]="isShowErrorMessage"><b>{{ error_msg }}</b></div>
       <div class="button-group">
         <button type="submit" class="btn btn-success">Sign in</button>
         <div class="other-links">

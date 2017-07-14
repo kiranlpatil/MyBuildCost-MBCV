@@ -643,6 +643,13 @@ control-messages {
   top: 56px;
 }
 
+.form-alert{
+  background-color:transparent;
+  border-color: transparent;
+  padding: 0;
+  margin: 0 0 10px;
+}
+
 // Media Queries
 @media only screen and (max-width: 1024px) {
   .logout-dropdown {
