@@ -1,29 +1,82 @@
 <div class="modal-bg" *ngIf="highlightedSection.name=='Profile'"></div>
 <div class="section-container" *ngIf="highlightedSection.name=='Profile'">
-  <cn-tool-tip [message]="tooltipMessage"></cn-tool-tip>
-  <div class="main-content clearfix modal-content">
-    <h4 class="heading">My Profile</h4>
+  <div class="main-content clearfix edit-modal-content">
 
-    <div class="col-sm-3 text-center">
-      <cn-profile-picture (onPictureUpload)="onPictureUpload($event)"></cn-profile-picture>
-      <div class="user-name">
-        <span class="profile-name-first">{{candidateDetails.first_name}}&nbsp;</span><span class="profile-name-last">{{candidateDetails.last_name}}</span>
+    <div class="col-sm-9 no-padding">
+      <h4 class="heading">Enter your profile details</h4>
+      <div class="scrollable-content">
+        <div class="col-sm-4 text-center my-info">
+          <div class="description-container">
+            <div class="image-container">
+              <cn-profile-picture (onPictureUpload)="onPictureUpload($event)"></cn-profile-picture>
+            </div>
+            <div class="user-name">
+              <span class="profile-name-first">{{candidateDetails.first_name}}&nbsp;</span><span class="profile-name-last">{{candidateDetails.last_name}}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-8 form-container">
+
+          <div class="form-group">
+            <label>Job Title</label>
+            <input name="jobTitle" placeholder="e.g. Software Engineer" class="form-control"
+                   [(ngModel)]="candidate.jobTitle" (ngModelChange)="onJobTitleChange()">
+            <div class="error-messages" *ngIf="(candidate.jobTitle == '' || candidate.jobTitle == undefined) && !isValid">You can't leave this empty.</div>
+          </div>
+
+
+          <div class="form-group">
+            <label>Current Company</label>
+            <!--<control-messages [control]="professionalDetailForm.controls.education"></control-messages>-->
+            <input name="currentcompany" class="form-control" placeholder=""
+                   [(ngModel)]="candidate.professionalDetails.currentCompany">
+            <div class="error-messages" *ngIf="(candidate.professionalDetails.currentCompany == '' || candidate.professionalDetails.currentCompany == undefined) && !isValid">You can't leave this empty.</div>
+          </div>
+
+          <div class="form-group">
+            <label>Current Location</label>
+            <!--<control-messages [control]="professionalDetailForm.controls.education"></control-messages>-->
+            <input name="location" class="form-control" placeholder=""
+                   [(ngModel)]="candidate.professionalDetails.location">
+            <!--<div class="error-messages" *ngIf="islocationValid && !isValid">You can't leave this empty.</div>-->
+          </div>
+
+          <div class="form-group">
+            <label>Highest Qualification</label>
+            <!--<control-messages [control]="professionalDetailForm.controls.education"></control-messages>-->
+            <select [(ngModel)]="candidate.professionalDetails.education">
+              <option *ngFor="let c of educationList" [ngValue]="c">{{c}}</option>
+            </select>
+            <div class="error-messages" *ngIf="(candidate.professionalDetails.education == '' || candidate.professionalDetails.education == undefined) && !isValid">You can't leave this empty.</div>
+          </div>
+
+          <div class="form-group">
+            <label>Total Experience</label>
+            <!--<control-messages [control]="professionalDetailForm.controls.experience"></control-messages>-->
+            <select [(ngModel)]="candidate.professionalDetails.experience">
+              <option *ngFor="let c of experienceList" [ngValue]="c">{{c}}</option>
+            </select>
+            <div class="error-messages" *ngIf="(candidate.professionalDetails.experience == '' || candidate.professionalDetails.experience == undefined) && !isValid">You can't leave this empty.</div>
+          </div>
+
+        </div>
       </div>
     </div>
 
-    <div class="col-sm-9 profile-description">
-      <h4>Enter your current Job Title</h4>
-      <div class="error-messages" *ngIf="isTitleFilled">Job title should not be empty.</div>
-      <input name="jobTitle" placeholder="e.g. Software Engineer" class="form-control job-title"
-             [(ngModel)]="candidate.jobTitle" (ngModelChange)="onJobTitleChange()">
+    <div class="col-sm-3 no-padding">
+      <cn-tool-tip [message]="tooltipMessage"></cn-tool-tip>
     </div>
+
     <div class="button-group clearfix">
-      <button class="btn btn-default" (click)="onCancel()"
-              [hidden]="showButton">Cancel
-      </button>
-      <button class="btn btn-success" (click)="onNext()" [hidden]="!showButton" [disabled]="disableButton">Next</button>
-        <button class="btn btn-success"  (click)="onSave()" [hidden]="showButton" [disabled]="disableButton">Save</button>
+     <!-- <div class="saving-loader">Saving...</div>-->
+      <!-- <button class="btn btn-default" (click)="onCancel()"
+               [hidden]="showButton">Cancel
+       </button>-->
+      <button class="btn btn-primary" (click)="onNext()" [hidden]="!showButton">Next</button>
+      <button class="btn btn-primary"  (click)="onSave()" [hidden]="showButton">Save</button>
     </div>
+
   </div>
 </div>
 <div class="section-container">
@@ -33,20 +86,25 @@
       <!--
             <span class=" glyphicon glyphicon-lock" title="you can edit this field after {{highlightedSection.date| date:'mediumDate'}}" *ngIf="highlightedSection.isLocked"></span>
       -->
+      <button class="btn-edit"
+              (click)="highlightedSection.name='Profile';disableButton=false;showButton=false;highlightedSection.isDisable=true"
+              [hidden]="highlightedSection.isDisable" title="Edit My Profile"></button>
       <div class="img-container">
         <!--<img src="{{image_path}}" alt="Profile Picture"/>-->
         <cn-profile-picture (onPictureUpload)="onPictureUpload($event)"></cn-profile-picture>
       </div>
 
       <div>
-        <p lass="truncate-text" class="user-name">
+        <p class="user-name truncate-text">
           <span class="profile-name-first">{{candidateDetails.first_name}}</span>&nbsp;
           <span class="profile-name-last">{{candidateDetails.last_name}}</span>
-          <button class="btn-edit"
-                  (click)="highlightedSection.name='Profile';disableButton=false;showButton=false;highlightedSection.isDisable=true"
-                  [hidden]="highlightedSection.isDisable" title="Edit My Profile"></button>
+          <span class="job-title" title="{{candidate.jobTitle}}">  {{candidate.jobTitle}}</span>
         </p>
-        <p class="truncate-text"><label>Job Title</label> <span title="{{candidate.jobTitle}}">{{candidate.jobTitle}}</span></p>
+
+        <p class="profile-details truncate-text"><label>Current company</label> {{candidate.professionalDetails.currentCompany}}</p>
+        <p class="profile-details truncate-text"><label>Current Location</label> xxxxxxxxxxx</p>
+        <p class="profile-details truncate-text"><label>Total Experience</label> {{candidate.professionalDetails.experience}}</p>
+        <p class="profile-details truncate-text"><label>Highest Qualification</label> {{candidate.professionalDetails.education}}</p>
       </div>
     </div>
   </div>

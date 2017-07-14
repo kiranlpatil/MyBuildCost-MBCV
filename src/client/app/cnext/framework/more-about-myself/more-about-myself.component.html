@@ -1,36 +1,49 @@
 <div class="modal-bg" *ngIf="highlightedSection.name=='AboutMySelf'"></div>
 <div class="section-container clear" *ngIf="highlightedSection.name =='AboutMySelf'">
-  <cn-tool-tip [message]="tooltipMessage"></cn-tool-tip>
-  <div class="main-content modal-content clearfix">
-    <h4 class="heading">More About Myself (Max 250)</h4>
-    <div class="clearfix">
-      <div class="col-sm-12 more-about-myself">
+
+  <div class="main-content edit-modal-content clearfix">
+    <div class="col-sm-9 no-padding">
+      <h4 class="heading">About myself (Max 250)</h4>
+      <div class="col-sm-12 scrollable-content">
+        <div class="col-sm-8 more-about-myself">
         <textarea class="form-control" [(ngModel)]="candidate.aboutMyself" (ngModelChange)="addAboutMyself()"
                   [maxlength]="maxword" Placeholder="Enter About Yourself"></textarea>
-        <p class="error-messages">{{remainingWords}} words remaining</p>
+          <p class="error-messages">{{remainingWords}} words remaining</p>
+        </div>
       </div>
     </div>
+    <div class="col-sm-3 no-padding">
+      <cn-tool-tip [message]="tooltipMessage"></cn-tool-tip>
+    </div>
     <div class="button-group">
-      <button class="btn btn-success" (click)="highlightedSection.name='none'; highlightedSection.isDisable=false">
+      <!--<div class="saving-loader">Saving...</div>-->
+      <button class="btn btn-primary"
+              (click)="highlightedSection.name='EmploymentHistory'; highlightedSection.isDisable=false"
+              *ngIf="!candidate.isSubmitted">
         Next
       </button>
+      <button class="btn btn-primary" (click)="highlightedSection.name='none'; highlightedSection.isDisable=false"
+              *ngIf="candidate.isSubmitted">
+        Done
+      </button>
     </div>
+    <button class="btn-prev" (click)="highlightedSection.name='Professional-Details'"><span
+            class="glyphicon glyphicon-chevron-left"></span></button>
   </div>
 </div>
 <div class="section-container clear" *ngIf="highlightedSection.name !='AboutMySelf'">
-  <div class="main-content">
+  <div class="main-content"  (click)="highlightedSection.name='AboutMySelf';highlightedSection.isDisable=true;showButton=false">
     <div class="compact-view clearfix">
-      <h4 class="heading">More About Self
-        <button class="btn-edit"
-                (click)="highlightedSection.name='AboutMySelf';highlightedSection.isDisable=true;showButton=false"
-                [hidden]="highlightedSection.isDisable" title="Edit More About Self"></button>
+      <h4 class="heading-compact">About myself <span class="optional-field">(Optional)</span>
+        <!--<button class="btn-edit"
+
+                [hidden]="highlightedSection.isDisable" title="Edit More About Self"></button>-->
         <!--<span class="glyphicon glyphicon-plus"></span>-->
       </h4>
       <p>{{candidate.aboutMyself}}</p>
     </div>
   </div>
 </div>
-<!--<div class="clearfix divider clear"></div>-->
 
 
 

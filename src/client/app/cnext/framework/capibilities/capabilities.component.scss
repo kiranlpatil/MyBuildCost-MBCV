@@ -2,6 +2,12 @@ $primary-option: #3694d1;
 $secondary-option: #81d4fa;
 $border-color: #e8e8e8;
 
+.error-messages {
+  position: fixed;
+  bottom: 15px;
+  left: 15px;
+}
+
 .compact-view {
   .option {
     padding: 0;
@@ -9,6 +15,7 @@ $border-color: #e8e8e8;
 }
 
 .capabilities {
+  padding: 0 15px 0 30px;
   .color-panel {
     border-radius: 25px;
     display: inline-block;

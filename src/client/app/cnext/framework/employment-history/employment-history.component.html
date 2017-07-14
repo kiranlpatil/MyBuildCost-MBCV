@@ -1,67 +1,76 @@
 <div class="modal-bg" *ngIf="highlightedSection.name=='EmploymentHistory'"></div>
 <div class="section-container clear" *ngIf="highlightedSection.name =='EmploymentHistory'">
-  <div class="main-content modal-content clearfix" >
-    <h4 class="heading">Employment History</h4>
-    <form class="description-form" [formGroup]="employeeHistory" novalidate>
-      <!--empHistories-->
-      <div formArrayName="employeeHistories">
-        <div *ngFor="let history of employeeHistory.controls.employeeHistories.controls; let i=index"
-             class="panel panel-default">
-          <div>
-          <span class="glyphicon glyphicon-trash pull-right"
+  <div class="main-content edit-modal-content clearfix" >
+    <div class="col-sm-9 no-padding">
+      <h4 class="heading">Employment History</h4>
+      <div class="scrollable-content">
+        <form class="description-form" [formGroup]="employeeHistory" novalidate>
+          <!--empHistories-->
+          <div class="col-sm-8" formArrayName="employeeHistories">
+            <div *ngFor="let history of employeeHistory.controls.employeeHistories.controls; let i=index"
+                 class="panel panel-default">
+              <div>
+                <span class="glyphicon glyphicon-trash pull-right"
                 *ngIf="employeeHistory.controls.employeeHistories.controls.length>0 && employeeHistory.controls.employeeHistories.controls.length !==1 "
                 (click)="removeEmployeeHistory(i)"></span>
+              </div>
+              <div class="panel-body" [formGroupName]="i">
+                <cn-employee-history [group]="employeeHistory.controls.employeeHistories.controls[i]" [submitStatus] = "submitStatus"></cn-employee-history>
+              </div>
+            </div>
           </div>
-          <div class="panel-body" [formGroupName]="i">
-            <cn-employee-history [group]="employeeHistory.controls.employeeHistories.controls[i]" [submitStatus] = "submitStatus"></cn-employee-history>
-          </div>
-        </div>
-      </div>
 
-      <!--<div class="error-messages"
-           *ngIf="submitStatus">
-        <p>Please mentioned service period</p>
-      </div>-->
-
-      <div class="margin-20">
-        <button (click)="addEmployeeHistory()" class="btn btn-create-profile" [disabled]="!employeeHistory.valid">
-          Add another
-        </button>
+          <!--<div class="error-messages"
+               *ngIf="submitStatus">
+            <p>Please mentioned service period</p>
+          </div>-->
+        </form>
       </div>
-      <div class="button-group clearfix">
-        <button class="btn btn-default" (click)="highlightedSection.name='none';highlightedSection.isDisable=false"
-                [hidden]="showButton">Cancel
-        </button>
-        <button type="submit" class="btn btn-success" scrollTo scrollTargetSelector="#academic-details"
-                (click)="postData('next')" [disabled]="!employeeHistory.valid" [hidden]="!showButton">Next
-        </button>
-        <button type="submit" class="btn btn-success" (click)="postData('save')"
-                [hidden]="showButton">Save
-        </button>
-      </div>
-      <div class="clearfix"></div>
-    </form>
+    </div>
+    <div class="col-sm-3 no-padding">
+      <cn-tool-tip [message]="tooltipMessage"></cn-tool-tip>
+    </div>
+    <div class="button-group clearfix">
+      <!--<div class="saving-loader">Saving...</div>-->
+      <button type="submit" class="btn btn-primary"
+              (click)="postData('next')" *ngIf="!candidate.isSubmitted"
+      >Next
+      </button>
+      <button type="submit" class="btn btn-primary" (click)="postData('save')"
+              *ngIf="candidate.isSubmitted">Done
+      </button>
+      <button (click)="addEmployeeHistory()" class="btn btn-add-another" [disabled]="!employeeHistory.valid">
+        Add another
+      </button>
+    </div>
+    <button class="btn-prev" (click)="highlightedSection.name='AboutMySelf'"><span
+      class="glyphicon glyphicon-chevron-left"></span></button>
   </div>
 </div>
 
 <div class="section-container"
-     [ngClass]="(highlightedSection.name=='EmploymentHistory')?'full-width':'quarter-width'">
+     [ngClass]="(highlightedSection.name=='EmploymentHistory')?'full-width':'half-width'">
   <div class="main-content" *ngIf="highlightedSection.name !='EmploymentHistory'">
-    <div class="compact-view clearfix">
+    <div class="compact-view clearfix" (click)="highlightedSection.name='EmploymentHistory';highlightedSection.isDisable=true;showButton=false">
       <div *ngIf="employeeHistory.controls.employeeHistories.controls.length==0">
-        <h4 class="heading-compact"
-            (click)="highlightedSection.name='EmploymentHistory';addEmployeeHistory();highlightedSection.isDisable=true;showButton=false;">
+        <h4 class="heading-compact">
           <img src="assets/c-next/icons/employment-icon.png" alt="employment"/>
           Employment History
-          <span class="glyphicon glyphicon-plus" title="Add Employment History"></span>
         </h4>
       </div>
-      <div class="vertical-container" *ngIf="employeeHistory.controls.employeeHistories.controls.length>0">
-        <button class="btn-edit"
-                (click)="highlightedSection.name='EmploymentHistory';highlightedSection.isDisable=true;showButton=false"
-                [hidden]="highlightedSection.isDisable" title="Edit Employment History"></button>
-        <cn-vertical-list-view [data]="candidate.employmentHistory"
-                               [type]="'employment history'" [calledFrom]="'candidateview'"></cn-vertical-list-view>
+      <div class="" *ngIf="employeeHistory.controls.employeeHistories.controls.length>0">
+        <h4 class="heading-compact"> <img src="assets/c-next/icons/employment-icon.png" alt="employment"/>Employment History</h4>
+        <ul>
+          <div *ngFor="let item of candidate.employmentHistory;let i = index">
+            <div *ngIf="i == 0">
+              <li>
+                <p>{{item.designation}} at {{item.companyName}} </p>
+                <p>From {{item.from.month}} {{item.from.year}} to {{item.to.month}} {{item.to.year}}</p>
+                <p *ngIf="candidate.employmentHistory.length != 1">( {{candidate.employmentHistory.length-1}} more )</p>
+              </li>
+            </div>
+          </div>
+        </ul>
       </div>
     </div>
   </div>

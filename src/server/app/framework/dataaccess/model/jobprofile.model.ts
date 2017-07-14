@@ -8,6 +8,7 @@ import CandidateListModel = require("./candidate-list.model");
 
 interface JobProfileModel {
   jobTitle: string;
+  isJobPosted: boolean;
   hiringManager: string;
   department: string;
   education: string;

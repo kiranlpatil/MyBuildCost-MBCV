@@ -1,12 +1,23 @@
-$border-color: #e8e8e8;
 $text-color: #666;
 $white: #fff;
-$option-border-color: #f8f8f8;
-$option-theme-color: #1c75bd;
-$complexity-bg: #f8f8f8;
+$theme-color: #0d75fa;
+
+.error-messages {
+  position: fixed;
+  margin: 5px 15px;
+  bottom: 0;
+  left: 0;
+}
 
 .compact-view {
-  padding: 10px 10px 0;
+  padding: 0;
+
+  .heading-compact {
+    background: $theme-color;
+    color: $white;
+    margin: 0;
+    padding: 5px 15px;
+  }
 
   a {
     display: block;
@@ -25,13 +36,20 @@ $complexity-bg: #f8f8f8;
   .glyphicon-lock {
     background-color: #dbeef6;
   }
+
+  .add-more {
+    color: $white;
+    font-size: 12px;
+    font-weight: 300;
+
+    .glyphicon {
+      padding: 0 10px 0 20px;
+      color: $white;
+    }
+  }
 }
 
 .complexity-container {
-  overflow: hidden;
-  position: relative;
-  min-height: 250px;
-  //background:red;
 
   .btn-prev {
     position: absolute;
@@ -58,3 +76,14 @@ $complexity-bg: #f8f8f8;
   }
 }
 
+.question-count {
+  position: absolute;
+  bottom: 15px;
+  right: 37%;
+}
+
+.heading {
+  overflow: visible !important;
+  text-overflow: clip !important;
+  white-space: normal !important;
+}

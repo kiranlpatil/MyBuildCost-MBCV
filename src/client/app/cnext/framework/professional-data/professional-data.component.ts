@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from "@angular/core";
 import {BaseService} from "../../../framework/shared/httpservices/base.service";
 import {ProfessionalData} from "../model/professional-data";
 import {ProfessionalDataService} from "./professional-data.service";
@@ -15,7 +15,7 @@ import {FormBuilder} from "@angular/forms";
   styleUrls: ['professional-data.component.css']
  })
 
-export class ProfessionalDataComponent extends BaseService implements OnInit {
+export class ProfessionalDataComponent extends BaseService implements OnInit,OnChanges {
   @Input() candidate: Candidate;
   @Input() highlightedSection: Section;
   @Output() onComplete = new EventEmitter();
@@ -23,22 +23,18 @@ export class ProfessionalDataComponent extends BaseService implements OnInit {
   tooltipMessage: string =
 
     "<ul>" +
-    "<li><h5> Ready to Relocate</h5><p>Select if you are open to relocate from your current location as per job demand.</p></li>" +
-    "<li><h5> Education </h5><p>Specify the highest academic degree that you possess.</p></li>" +
-    "<li><h5> Notice Period </h5><p>Mention the notice period you have to serve before you can take up new job.</p></li>" +
-    "<li><h5> Industry Culture </h5><p>Please mention if you have experience working with local or multinational companies.</p></li>" +
-    "<li><h5> Experiance </h5><p>Number of years of Professional Experience that you possess. </p></li>" +
-    "<li><h5> Current Salary </h5><p>Please mention your current salary (CTC).</p></li>" +
+    "<li><p>1. Please mention your current salary (CTC).</p></li>" +
+    "<li><p>2. Select if you are open to relocate from your current location as per job demand.</p></li>" +
+    "<li><p>3. Mention the notice period you have to serve before you can take up new job.</p></li>" +
+
     "</ul>";
   /* private professionalDetailForm : FormGroup;*/
   showButton: boolean = true;
-  private realocationList = new Array();
-  private educationList = new Array();
-  private experienceList = new Array();
-  private salaryList = new Array();
-  private noticePeriodList = new Array();
-  private industryExposureList = new Array();
-  private disableButton: boolean = true;
+  private realocationList:any = [];
+  private salaryList:any = [];
+  private noticePeriodList:any = [];
+  private industryExposureList:any = [];
+  private isValid: boolean = true;
   /*private professionalDetails:ProfessionalData=new ProfessionalData();*/
   constructor(private professionalDataService: ProfessionalDataService,
               private messageService: MessageService,
@@ -62,9 +58,9 @@ export class ProfessionalDataComponent extends BaseService implements OnInit {
      this.professionalDetailForm.education.value=this.candidate.professionalDetails;
      }*/
     if (changes.candidate != undefined && changes.candidate.professionalDetails != undefined) {
-      if (this.candidate.professionalDetails.currentSalary !== '' && this.candidate.professionalDetails.education !== '' &&
-        this.candidate.professionalDetails.experience !== '' && this.candidate.professionalDetails.noticePeriod !== '' && this.candidate.professionalDetails.relocate !== '') {
-        this.disableButton = false;
+      if (this.candidate.professionalDetails.currentSalary !== '' && this.candidate.professionalDetails.noticePeriod !==
+        '' && this.candidate.professionalDetails.relocate !== '' && this.candidate.professionalDetails.industryExposure !== '') {
+        this.isValid = true;
       }
     }
   }
@@ -75,34 +71,6 @@ export class ProfessionalDataComponent extends BaseService implements OnInit {
       .subscribe(
         data => {
           this.onRealocationListSuccess(data);
-        },
-        error => {
-          this.onError(error);
-        });
-
-    this.professionalDataService.getEducationList()
-      .subscribe(
-        data => {
-          this.onEducationListSuccess(data);
-        },
-        error => {
-          this.onError(error);
-        });
-
-
-    this.professionalDataService.getExperienceList()
-      .subscribe(
-        data => {
-          this.onExperienceListSuccess(data);
-        },
-        error => {
-          this.onError(error);
-        });
-
-    this.professionalDataService.getCurrentSalaryList()
-      .subscribe(
-        data => {
-          this.onCurrentSalaryListSuccess(data);
         },
         error => {
           this.onError(error);
@@ -125,7 +93,11 @@ export class ProfessionalDataComponent extends BaseService implements OnInit {
         error => {
           this.onError(error);
         });
-
+    this.professionalDataService.getCurrentSalaryList()
+      .subscribe(
+        data => {
+          this.onCurrentSalaryListSuccess(data);
+        });
 
   }
 
@@ -136,31 +108,16 @@ export class ProfessionalDataComponent extends BaseService implements OnInit {
     }
 
   }
-
-  onGetIndustryExposureListSuccess(data: any) {
-    for (let k of data.industryexposure) {
-      this.industryExposureList.push(k);
-    }
-  }
-
   onCurrentSalaryListSuccess(data: any) {
     for (let k of data.salary) {
       this.salaryList.push(k);
     }
   }
 
-  onExperienceListSuccess(data: any) {
-    for (let k of data.experience) {
-      this.experienceList.push(k);
+  onGetIndustryExposureListSuccess(data: any) {
+    for (let k of data.industryexposure) {
+      this.industryExposureList.push(k);
     }
-
-  }
-
-  onEducationListSuccess(data: any) {
-    for (let k of data.educated) {
-      this.educationList.push(k);
-    }
-
   }
 
   onRealocationListSuccess(data: any) {
@@ -182,10 +139,6 @@ export class ProfessionalDataComponent extends BaseService implements OnInit {
   }
 
   saveProfessionalData() {
-    if (this.candidate.professionalDetails.currentSalary !== '' && this.candidate.professionalDetails.education !== '' &&
-      this.candidate.professionalDetails.experience !== '' && this.candidate.professionalDetails.noticePeriod !== '' && this.candidate.professionalDetails.relocate !== '') {
-      this.disableButton = false;
-    }
     console.log(this.candidate);
     this.profileCreatorService.addProfileDetail(this.candidate).subscribe(
       user => {
@@ -194,16 +147,25 @@ export class ProfessionalDataComponent extends BaseService implements OnInit {
   }
 
   onNext() {
-    /*this.professionalDetails=this.professionalDetailForm.value;
-     this.candidate.professionalDetails=this.professionalDetails;
-     this.saveProfessionalData();*/
+    if (this.candidate.professionalDetails.currentSalary == '' ||
+      this.candidate.professionalDetails.industryExposure == '' || this.candidate.professionalDetails.noticePeriod == ''
+      || this.candidate.professionalDetails.relocate == '') {
+      this.isValid = false;
+      return;
+    }
     this.onComplete.emit();
-    this.highlightedSection.name = "none";
+    this.highlightedSection.name = "AboutMySelf";
     this.highlightedSection.isDisable = false;
 
   }
 
   onSave() {
+    if (this.candidate.professionalDetails.currentSalary == '' ||
+      this.candidate.professionalDetails.industryExposure == '' || this.candidate.professionalDetails.noticePeriod == ''
+      || this.candidate.professionalDetails.relocate == '') {
+      this.isValid = false;
+      return;
+    }
     this.onComplete.emit();
     this.highlightedSection.name = "none";
     this.highlightedSection.isDisable = false;

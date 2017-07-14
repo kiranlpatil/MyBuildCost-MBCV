@@ -1,6 +1,6 @@
-import { Industry } from './industry';
-import { JobLocation } from './job-location';
-import { CandidatesInDiffList } from './candidatesinDiffList';
+import {Industry} from "./industry";
+import {JobLocation} from "./job-location";
+import {CandidatesInDiffList} from "./candidatesinDiffList";
 export class JobPosterModel {
   _id: string;
   recruiterId: string;
@@ -21,9 +21,10 @@ export class JobPosterModel {
   competencies: string = '';
   responsibility: string = '';
   postingDate: Date;
+  isJobPosted: boolean;
   remark: string = '';
   roleType: string = '';
   interestedIndustries: string[] = new Array(0);
-  candidate_list: any = new Array();
+  candidate_list: any = [];
   numberOfCandidatesInList: CandidatesInDiffList = new CandidatesInDiffList();
 }

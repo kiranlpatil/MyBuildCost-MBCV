@@ -1,116 +1,121 @@
 <div class="modal-bg" *ngIf="highlightedSection.name=='JobProfile'"></div>
 <div class="section-container" *ngIf="highlightedSection.name=='JobProfile'">
-  <cn-tool-tip [message]="tooltipMessage"></cn-tool-tip>
-  <div class="main-content clearfix modal-content">
-    <form [formGroup]="jobPostForm" novalidate>
-      <div class="job-info section-container clearfix">
-        <div class="col-sm-12 no-padding">
-          <div class="col-sm-4">
-            <div class="form-group">
-              <label>Job Title</label>
-              <control-messages [control]="jobPostForm.controls.jobTitle"></control-messages>
-              <input class="form-control" type="text" formControlName="jobTitle" required/>
+  <div class="main-content clearfix edit-modal-content">
+    <h4 class="heading">Job Description</h4>
+    <div class="col-sm-9 no-padding">
+      <div class="scrollable-content">
+        <form [formGroup]="jobPostForm" novalidate>
+          <div class="job-info section-container clearfix">
+            <div class="col-sm-12 no-padding">
+              <div class="col-sm-8">
+                <div class="form-group">
+                  <label>Job Title</label>
+                  <control-messages [control]="jobPostForm.controls.jobTitle"></control-messages>
+                  <input class="form-control" type="text" formControlName="jobTitle" required/>
+                </div>
+              </div>
+
+              <div class="col-sm-8">
+                <div class="form-group">
+                  <label>Hiring Manager</label>
+                  <control-messages [control]="jobPostForm.controls.hiringManager"></control-messages>
+                  <input class="form-control" type="text" maxlength="30" formControlName="hiringManager"
+                         required>
+                </div>
+              </div>
+              <div class="col-sm-8">
+                <div class="form-group">
+                  <label>Hiring Department</label>
+                  <control-messages [control]="jobPostForm.controls.department"></control-messages>
+                  <input class="form-control" type="text" formControlName="department" required>
+                </div>
+              </div>
+
+              <div class="col-sm-8">
+                <label>Educational Qualification</label>
+                <control-messages [control]="jobPostForm.controls.education"></control-messages>
+                <select class="select" formControlName="education">
+                  <option *ngFor="let c of educationList" [ngValue]="c">{{c}}</option>
+                </select>
+              </div>
+
+              <div class="col-sm-8">
+                <label>Experience Band</label>
+                <div class="col-sm-6 padding-right15 min-range">
+                  <control-messages [control]="jobPostForm.controls.experienceMinValue"></control-messages>
+                  <select class="select" formControlName="experienceMinValue" (change)="selectExperiencesMinModel($event.target.value)">
+                    <option value="" selected></option>
+                    <option *ngFor="let c of experienceRangeList | minrange:toYear">{{c}}</option>
+                  </select>
+                </div>
+                <div class="col-sm-6 padding-left15">
+                  <control-messages [control]="jobPostForm.controls.experienceMaxValue"></control-messages>
+                  <select class="select" formControlName="experienceMaxValue" (change)="selectExperiencesMaxModel($event.target.value)">
+                    <option value="" selected></option>
+                    <option *ngFor="let c of experienceRangeList | maxrange:fromYear">{{c}}</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="col-sm-8">
+                <label>Salary Band</label>
+                <div class="col-sm-6 padding-right15 min-range">
+                  <control-messages [control]="jobPostForm.controls.salaryMinValue"></control-messages>
+                  <select class="select" formControlName="salaryMinValue" (change)="selectSalaryMinModel($event.target.value)">
+                    <option value="" selected></option>
+                    <option *ngFor="let c of salaryRangeList| minrange:toValue">{{c}}</option>
+                  </select>
+                </div>
+                <div class="col-sm-6 padding-left15">
+                  <control-messages [control]="jobPostForm.controls.salaryMaxValue"></control-messages>
+                  <select class="select" formControlName="salaryMaxValue" (change)="selectSalaryMaxModel($event.target.value)">
+                    <option value="" selected></option>
+                    <option *ngFor="let c of salaryRangeList| maxrange:fromValue">{{c}}</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="col-sm-8">
+                <label>Joining Period</label>
+                <control-messages [control]="jobPostForm.controls.joiningPeriod"></control-messages>
+                <select class="select" formControlName="joiningPeriod">
+                  <option *ngFor="let c of noticePeriodList" [ngValue]="c">{{c}}</option>
+                </select>
+              </div>
+
+              <div class="col-sm-8">
+                <div class="form-group">
+                  <label>Job Location</label>
+                  <control-messages [control]="jobPostForm.controls.location"></control-messages>
+
+                  <input type="text" formControlName="location" class="form-control" placeholder=""
+                         (setAddress)="getAddress($event)" mygoogleplace/>
+                </div>
+              </div>
             </div>
-          </div>
 
-          <div class="col-sm-4">
-            <div class="form-group">
-              <label>Hiring Manager</label>
-              <control-messages [control]="jobPostForm.controls.hiringManager"></control-messages>
-              <input class="form-control" type="text" maxlength="30" formControlName="hiringManager"
-                     required>
-             </div>
           </div>
-          <div class="col-sm-4">
-            <div class="form-group">
-              <label>Hiring Department</label>
-              <control-messages [control]="jobPostForm.controls.department"></control-messages>
-              <input class="form-control" type="text" formControlName="department" required>
-            </div>
-          </div>
-
-          <div class="col-sm-4">
-            <label>Educational Qualification</label>
-            <control-messages [control]="jobPostForm.controls.education"></control-messages>
-            <select class="select" formControlName="education">
-              <option *ngFor="let c of educationList" [ngValue]="c">{{c}}</option>
-            </select>
-          </div>
-
-          <div class="col-sm-4">
-            <label>Experience Band</label>
-            <div class="col-sm-6 padding-right15 min-range">
-              <control-messages [control]="jobPostForm.controls.experienceMinValue"></control-messages>
-              <select class="select" formControlName="experienceMinValue" (change)="selectExperiencesMinModel($event.target.value)">
-                <option value="" selected></option>
-                <option *ngFor="let c of experienceRangeList | minrange:toYear">{{c}}</option>
-              </select>
-            </div>
-            <div class="col-sm-6 padding-left15">
-              <control-messages [control]="jobPostForm.controls.experienceMaxValue"></control-messages>
-              <select class="select" formControlName="experienceMaxValue" (change)="selectExperiencesMaxModel($event.target.value)">
-                <option value="" selected></option>
-                <option *ngFor="let c of experienceRangeList | maxrange:fromYear">{{c}}</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="col-sm-4">
-            <label>Salary Band</label>
-            <div class="col-sm-6 padding-right15 min-range">
-              <control-messages [control]="jobPostForm.controls.salaryMinValue"></control-messages>
-              <select class="select" formControlName="salaryMinValue" (change)="selectSalaryMinModel($event.target.value)">
-                <option value="" selected></option>
-                <option *ngFor="let c of salaryRangeList| minrange:toValue">{{c}}</option>
-              </select>
-            </div>
-            <div class="col-sm-6 padding-left15">
-              <control-messages [control]="jobPostForm.controls.salaryMaxValue"></control-messages>
-              <select class="select" formControlName="salaryMaxValue" (change)="selectSalaryMaxModel($event.target.value)">
-                <option value="" selected></option>
-                <option *ngFor="let c of salaryRangeList| maxrange:fromValue">{{c}}</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="col-sm-4">
-            <label>Joining Period</label>
-            <control-messages [control]="jobPostForm.controls.joiningPeriod"></control-messages>
-            <select class="select" formControlName="joiningPeriod">
-              <option *ngFor="let c of noticePeriodList" [ngValue]="c">{{c}}</option>
-            </select>
-          </div>
-
-          <div class="col-sm-4">
-            <div class="form-group">
-              <label>Job Location</label>
-              <control-messages [control]="jobPostForm.controls.location"></control-messages>
-
-              <input type="text" formControlName="location" class="form-control" placeholder=""
-                     (setAddress)="getAddress($event)" mygoogleplace/>
-            </div>
-          </div>
-        </div>
-
+        </form>
       </div>
-      <div class="button-group clearfix">
-        <button class="btn btn-success" scrollTo scrollTargetSelector="#work-area" (click)="onNext()"
-                [hidden]="!showButton">Next
-        </button>
-        <button class="btn btn-success" scrollTo scrollTargetSelector="#work-area" (click)="onNext()"
-                [disabled]="!jobPostForm.valid || storedIndustry==undefined" [hidden]="showButton">Save
-        </button>
-<!--
-        <button class="btn btn-default" (click)="onCancel()" [hidden]="showButton">Cancel</button>
--->
-      </div>
-    </form>
+    </div>
+    <cn-tool-tip [message]="tooltipMessage"></cn-tool-tip>
+    <div class="button-group clearfix">
+      <button class="btn btn-success" scrollTo scrollTargetSelector="#work-area" (click)="onNext()"
+              [hidden]="!showButton">Next
+      </button>
+      <button class="btn btn-success" scrollTo scrollTargetSelector="#work-area" (click)="onNext()"
+              [disabled]="!jobPostForm.valid || storedIndustry==undefined" [hidden]="showButton">Save
+      </button>
+      <!--
+              <button class="btn btn-default" (click)="onCancel()" [hidden]="showButton">Cancel</button>
+      -->
+    </div>
   </div>
 </div>
 <div class="section-container" *ngIf="highlightedSection.name!='JobProfile'">
   <div class="main-content">
     <div class="compact-view clearfix">
-      <h4 class="heading">Job Description
+      <h4 class="heading-compact">Job Description
         <button class="btn-edit" (click)="highlightedSection.name='JobProfile';showButton=false;disableButton=false" title="Edit Job Description"></button>
       </h4>
       <div class="clearfix">
@@ -119,8 +124,6 @@
         <p><label>Experience Band</label> {{jobPosterModel.experienceMinValue}} - {{jobPosterModel.experienceMaxValue}}</p>
         <p><label>Salary Band</label> {{jobPosterModel.salaryMinValue}} - {{jobPosterModel.salaryMaxValue}}</p>
         <p><label>Notice Period</label> {{jobPosterModel.joiningPeriod}}</p>
-      </div>
-      <div class="clearfix">
         <p><label>Hiring Manager</label> {{jobPosterModel.hiringManager}}</p>
         <p><label>Hiring Department</label> {{jobPosterModel.department}}</p>
         <p><label>Country</label> {{jobPosterModel.location.country}}</p>

@@ -13,6 +13,7 @@ import {Scenario} from "../../../model/scenario";
 export class CapabilityCompareComponent  implements OnChanges{
 
   @Input() capabilities: Capability[] = new Array(0);
+  @Input() rowsToShow: number;
   @Input() isCompact : boolean = false;
   maxArray : number[]= new Array(0);
   ngOnChanges(changes : any) {

@@ -1,8 +1,8 @@
 $text-color: #666;
 $white: #fff;
 $option-border-color: #999;
-$primary-option: #3694d1;
-$secondary-option: #81D4FA;
+$primary-option: #0d75fa;
+$secondary-option: #0d75fa;
 
 .select-option {
   display: inline-block;
@@ -18,10 +18,10 @@ $secondary-option: #81D4FA;
     display: none;
 
     & + span {
-      border: 1px solid $option-border-color;
+      border: 1px solid $primary-option;
       border-radius: 25px;
-      box-shadow: 0 0 1px 0 $option-border-color inset, 0 0 1px 0 $option-border-color;
-      color: $text-color;
+      box-shadow: 0 0 1px 0 $primary-option inset, 0 0 1px 0 $primary-option;
+      color: $primary-option;
       cursor: pointer;
       font-size: 13px;
       font-weight: 600;
@@ -32,8 +32,8 @@ $secondary-option: #81D4FA;
       user-select: none;
 
       &:hover {
-        border: 1px solid $option-border-color;
-        box-shadow: 0 0 1px 0 $option-border-color inset, 0 0 1px 0 $option-border-color;
+        border: 1px solid $primary-option;
+        box-shadow: 0 0 1px 0 $primary-option inset, 0 0 1px 0 $primary-option;
       }
     }
 

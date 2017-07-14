@@ -1,27 +1,36 @@
 <div class="modal-bg" *ngIf="highlightedSection.name=='Work-Area'"></div>
 <div class="section-container" *ngIf="highlightedSection.name=='Work-Area'">
-  <cn-tool-tip [message]="tooltipCandidateMessage" *ngIf="isCandidate"></cn-tool-tip>
-  <cn-tool-tip [message]="tooltipRecruiterMessage" *ngIf="!isCandidate"></cn-tool-tip>
-  <div class="main-content clearfix modal-content">
-    <h4 class="heading">Select Area of Work That Describes Your Current Focus (Max 3)</h4>
-    <div class="work-area col-sm-12">
-      <div class="select-option" *ngFor="let item of roles;let i = index">
-        <label>
-          <input type="checkbox" name="choices"
-                 value="{{item.name}}" (click)="selectOption(item,$event)"
-                 [checked]="isSelected(item.name)"/>
-          <span>{{item.name}}</span>
-        </label>
-        <div class="error-messages" *ngIf="alert">You have selected maximum work areas.</div>
-      </div>
-      <div class="error-messages" *ngIf="emptyWorkAreas">Select areas you have worked.</div>
+  <div class="main-content clearfix edit-modal-content">
 
-      <div class="button-group clearfix">
-        <button class="btn btn-success" scrollTo scrollTargetSelector="#capability-area" (click)="onNext()"
-                [hidden]="!showButton">Next</button>
-        <button class="btn btn-default" (click)="onCancel()" [hidden]="showButton">Cancel</button>
-        <button class="btn btn-success"  (click)="onSave()"  [hidden]="showButton">Save</button>
+    <div class="col-sm-9 no-padding">
+      <h4 class="heading">Select Area of Work That Describes Your Current Focus (Max 3)</h4>
+      <div class="error-messages" *ngIf="emptyWorkAreas">Select areas you have worked.</div>
+      <div class="col-sm-12 work-area scrollable-content">
+        <div class="select-option" *ngFor="let item of roles;let i = index">
+          <label>
+            <input type="checkbox" name="choices"
+                   value="{{item.name}}" (click)="selectOption(item,$event)"
+                   [checked]="isSelected(item.name)"/>
+            <span>{{item.name}}</span>
+          </label>
+          <div class="error-messages" *ngIf="alert">You have selected maximum work areas.If you want to select a new work area, deselect any of the earlier ones.</div>
+        </div>
       </div>
+    </div>
+
+    <div class="col-sm-3 no-padding">
+      <cn-tool-tip [message]="tooltipCandidateMessage" *ngIf="isCandidate"></cn-tool-tip>
+      <cn-tool-tip [message]="tooltipRecruiterMessage" *ngIf="!isCandidate"></cn-tool-tip>
+    </div>
+    <button class="btn-prev" (click)="highlightedSection.name='Industry'"><span
+      class="glyphicon glyphicon-chevron-left"></span></button>
+
+    <div class="button-group clearfix">
+      <!--<div class="saving-loader">Saving...</div>-->
+      <button class="btn btn-primary" scrollTo scrollTargetSelector="#capability-area" (click)="onNext()"
+              [hidden]="!showButton">Next</button>
+      <button class="btn btn-default" (click)="onCancel()" [hidden]="showButton">Cancel</button>
+      <button class="btn btn-primary"  (click)="onSave()"  [hidden]="showButton">Save</button>
     </div>
   </div>
 </div>
@@ -32,8 +41,8 @@
         <div class="modal-body">
           <div class="row">
             <div class="col-sm-12">
-<p >You can select maximum 3 areas of work. To change your options you should
-        deselect the area of work which does not best describe your current focus.</p>
+              <p>You can select maximum 3 areas of work. To change your options you should
+                      deselect the area of work which does not best describe your current focus.</p>
               <div class="button-group">
                 <form>
                   <button class="btn btn-success" (click)="showHideModal()">OK</button>
@@ -46,22 +55,24 @@
     </div>
 </div>
 
-<div class="section-container" [class.recruite-view]="isCandidate == false"
+<div class="section-container"
      *ngIf="highlightedSection.name!='Work-Area'">
-  <div class="main-content">
+  <div class="main-content" (click)="highlightedSection.name='Work-Area';showButton=false;highlightedSection.sectionName='capability';highlightedSection.isDisable=true">
     <div class="compact-view clearfix">
-      <h4 class="heading">Area Of Work
-        <button class="btn-edit"
-                (click)="highlightedSection.name='Work-Area';showButton=false;highlightedSection.sectionName='capability';highlightedSection.isDisable=true"
-                [hidden]="highlightedSection.isDisable" title="Edit Work Area"></button>
-      </h4>
-      <ul>
-        <li *ngFor="let item of selectedRoles;let i = index">
+      <div class="col-sm-3 padding-right15">
+        <h4 class="heading-compact">Area Of Work
+         <!-- <button class="btn-edit"
+                  (click)="highlightedSection.name='Work-Area';showButton=false;highlightedSection.sectionName='capability';highlightedSection.isDisable=true"
+                  [hidden]="highlightedSection.isDisable" title="Edit Work Area"></button>-->
+        </h4>
+      </div>
+      <div class="col-sm-9 padding-left15">
+        <div class="option-list" *ngFor="let item of selectedRoles;let i = index">
           <span class="option">
             {{item.name}}
           </span>
-        </li>
-      </ul>
+        </div>
+      </div>
     </div>
   </div>
 </div>

@@ -1,7 +1,6 @@
 $light-blue: #00aed5;
 
 .job-info {
-  padding-top: 15px;
 
   label {
     width: 100%;
@@ -10,6 +9,10 @@ $light-blue: #00aed5;
 
   .form-control {
     border-radius: 0;
+    margin-bottom: 15px;
+  }
+
+  select {
     margin-bottom: 15px;
   }
 }
@@ -22,7 +25,7 @@ $light-blue: #00aed5;
 
   }
   p {
-    width: 16%;
+    width: 25%;
     padding: 0 0.5% 0 0;
     float: left;
     margin-bottom: 10px;

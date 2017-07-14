@@ -1,23 +1,31 @@
 <div class="modal-bg" *ngIf="highlightedSection.name=='Compentancies'"></div>
 <div class="section-container clearfix" *ngIf="highlightedSection.name =='Compentancies'">
-  <div class="main-content clearfix modal-content">
-    <div class="row">
-      <div class="col-sm-12">
-        <div class="max-height">
-          <h4 class="heading">Additional information about the job (500 Words)</h4>
-          <cn-description-field [description]="jobPosterModel.competencies" [type]="'competensies'" [maxLength]=" '500'"
-                                (onComplete)="onCompetenciesComplete($event)"></cn-description-field>
+  <div class="main-content clearfix edit-modal-content">
+    <div>
+      <h4 class="heading">Additional information about the job (500 Words)</h4>
+      <div class="col-sm-9 no-padding">
+        <div class="scrollable-content">
+          <div class="col-sm-8">
+            <cn-description-field [description]="jobPosterModel.competencies" [type]="'competensies'" [maxLength]=" '500'"
+                                  (onComplete)="onCompetenciesComplete($event)"></cn-description-field>
+          </div>
         </div>
+      </div>
+      <cn-tool-tip [message]="tooltipMessage"></cn-tool-tip>
+      <button class="btn-prev" (click)="highlightedSection.name='IndustryExposure'"><span
+              class="glyphicon glyphicon-chevron-left"></span></button>
+      <div class="button-group clearfix">
+        <button class="btn btn-primary" (click)="highlightedSection.name='None'">Review your job
+        </button>
       </div>
     </div>
   </div>
 </div>
 <div class="section-container clearfix" *ngIf="highlightedSection.name !='Compentancies'">
-  <div class="main-content">
+  <div class="main-content" (click)="highlightedSection.name='Compentancies'" title="Edit Additional Information">
     <div class="compact-view clearfix">
       <div class="col-sm-12 no-padding">
-        <h4 class="heading">Additional Information about the Job
-          <button class="btn-edit" (click)="highlightedSection.name='Compentancies'" title="Edit Additional Information"></button>
+        <h4 class="heading-compact">Additional Information about the Job
         </h4>
         <p class="primary">{{jobPosterModel.competencies}}</p>
       </div>

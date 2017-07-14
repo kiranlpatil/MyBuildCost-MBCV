@@ -1,39 +1,52 @@
 <div class="modal-bg" *ngIf="highlightedSection.name=='Proficiencies'"></div>
 <div class="clearfix">
   <div class="section-container clearfix profeiciency-domain" *ngIf="highlightedSection.name=='Proficiencies'">
-    <cn-tool-tip [message]="tooltipMessage"></cn-tool-tip>
-    <div class="main-content  modal-content clearfix">
-      <h4 class="heading">Key Skills (Max 25)</h4>
-      <div class="proficiency-container col-sm-12">
 
-        <cn-multi-select [data]="proficiencies" [selectedData]="choosedproficiencies" [maxLength]="maxProficiencies"
-                         (onComplete)="onProficiencyComplete($event)" [submitStatus] = "submitStatus"></cn-multi-select>
-        <div class="button-group clearfix">
-          <!--         <button class="btn btn-default" [disabled]="choosedproficiencies.length<=0"
-                           (click)="highlightedSection.name='none'; highlightedSection.isDisable=false"  [hidden]="showButton">Cancel</button>-->
-          <button class="btn btn-success" scrollTo scrollTargetSelector="#industry-experience"
-                  (click)="onNext()" [hidden]="!showButton">Next
-          </button>
-          <button class="btn btn-success"
-                  (click)="onSave()" [hidden]="showButton">Next
-          </button>
+    <div class="main-content  edit-modal-content clearfix">
+      <div class="col-sm-9 no-padding">
+        <h4 class="heading">Keywods that describes your area of expertise</h4>
+        <div class="proficiency-container col-sm-12 scrollable-content">
+
+          <cn-multi-select [data]="proficiencies" [selectedData]="choosedproficiencies" [maxLength]="maxProficiencies"
+                           (onComplete)="onProficiencyComplete($event)" [submitStatus] = "submitStatus"></cn-multi-select>
         </div>
+      </div>
+      <div class="col-sm-3 no-padding">
+        <cn-tool-tip [message]="tooltipMessage"></cn-tool-tip>
+      </div>
+      <button class="btn-prev" (click)="highlightedSection.name='Complexities'"><span
+        class="glyphicon glyphicon-chevron-left"></span></button>
+
+      <div class="button-group clearfix">
+       <!-- <div class="saving-loader">Saving...</div>-->
+        <!--         <button class="btn btn-default" [disabled]="choosedproficiencies.length<=0"
+                         (click)="highlightedSection.name='none'; highlightedSection.isDisable=false"  [hidden]="showButton">Cancel</button>-->
+        <button class="btn btn-primary" scrollTo scrollTargetSelector="#industry-experience"
+                (click)="onNext()" [hidden]="!showButton">Next
+        </button>
+        <button class="btn btn-primary"
+                (click)="onSave()" [hidden]="showButton">Done
+        </button>
       </div>
     </div>
   </div>
 
   <div class="section-container clearfix profeiciency-domain" *ngIf="highlightedSection.name !='Proficiencies'">
-    <div class="main-content">
+    <div class="main-content" (click)="highlightedSection.name='Proficiencies';highlightedSection.isDisable=true;showButton=false">
       <div class="compact-view clearfix">
-        <h4 class="heading">Key Skills
-          <button class="btn-edit"
-                  (click)="highlightedSection.name='Proficiencies';highlightedSection.isDisable=true;showButton=false"
-                  [hidden]="highlightedSection.isDisable" title="Edit Key Skills"></button>
-        </h4>
-        <span class="option" *ngFor="let item of choosedproficiencies;let i = index">
-          <span>{{item}}</span>&nbsp;<span
-          *ngIf="choosedproficiencies.length>1 && i!=choosedproficiencies.length -1">,</span>&nbsp;
-        </span>
+        <div class="col-sm-3 padding-right15">
+          <h4 class="heading-compact">Key Skills
+          <!--  <button class="btn-edit"
+                    (click)="highlightedSection.name='Proficiencies';highlightedSection.isDisable=true;showButton=false"
+                    [hidden]="highlightedSection.isDisable" title="Edit Key Skills"></button>-->
+          </h4>
+        </div>
+        <div class="col-sm-9 padding-left15">
+          <span class="option-list" *ngFor="let item of choosedproficiencies;let i = index">
+            <span class="option">{{item}}</span>&nbsp;<!--<span
+            *ngIf="choosedproficiencies.length>1 && i!=choosedproficiencies.length -1">,</span>&nbsp;-->
+          </span>
+        </div>
       </div>
     </div>
   </div>

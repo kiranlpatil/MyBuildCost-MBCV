@@ -16,6 +16,7 @@ export class AcademicDetailComponent implements OnInit, OnChanges {
   @Output() onComplete = new EventEmitter();
 
   public academicDetail: FormGroup;
+  tooltipMessage: string = "<ul><li><p>1. An individual must provide latest qualification details first.</p></li></ul>";
   public showButton: boolean = true;
   private isButtonShow: boolean = false;
   private submitStatus: boolean;
@@ -31,6 +32,8 @@ export class AcademicDetailComponent implements OnInit, OnChanges {
     this.academicDetail.controls['academicDetails'].valueChanges.subscribe(x => {
       this.isButtonShow = true;
     });
+
+    this.addAcademicDetail();
   }
 
   ngOnChanges(changes: any) {

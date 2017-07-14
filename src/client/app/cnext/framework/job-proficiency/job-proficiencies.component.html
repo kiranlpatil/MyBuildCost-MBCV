@@ -1,34 +1,44 @@
 <div class="modal-bg" *ngIf="highlightedSection.name=='Proficiencies'"></div>
 <div class="clearfix">
-  <div class="section-container clearfix proficiency-container" *ngIf="highlightedSection.name=='Proficiencies'">
-    <cn-tool-tip [message]="tooltipMessage"></cn-tool-tip>
-    <div class="main-content  modal-content clearfix">
-      <h4 class="heading">Key Skills </h4>
-      <div class="col-sm-12">
-        <label>Mandatory Key Skills</label>
-        <cn-multi-select [type]="'Mandatory'" [data]="proficiencies" [maxLength]="maxNumberOfMandatory"
-                         [selectedData]="jobPosterModel.proficiencies"
-                         (onComplete)="onMandatoryProficiencyComplete($event)"></cn-multi-select>
-        <label *ngIf="showAdditional">Additional Key Skills</label>
-        <cn-multi-select [type]="'Additional'" [data]="proficiencies" [maxLength]="maxNumberOfAdditional"
-                         [selectedData]="jobPosterModel.additionalProficiencies"
-                         (onComplete)="onOptionalProficiencyComplete($event)" *ngIf="showAdditional"></cn-multi-select>
-        <div class="button-group clearfix">
-          <button class="btn btn-success" scrollTo scrollTargetSelector="#industry-experience"
-                  (click)="onNext()" [disabled]="disablebutton" [hidden]="!showButton">Next
-          </button>
-          <button class="btn btn-success" (click)="onSave()" [hidden]="showButton">Next</button>
+  <div class="section-container clearfix" *ngIf="highlightedSection.name=='Proficiencies'">
+    <div class="main-content  edit-modal-content clearfix">
+      <div class="col-sm-9 no-padding">
+        <h4 class="heading">Keywords that describe your area of epertise </h4>
+        <div class="proficiency-container">
+          <div class="col-sm-12">
+            <label>Mandatory Key Skills</label>
+          </div>
+          <cn-multi-select [type]="'Mandatory'" [data]="proficiencies" [maxLength]="maxNumberOfMandatory"
+                           [selectedData]="jobPosterModel.proficiencies"
+                           (onComplete)="onMandatoryProficiencyComplete($event)"></cn-multi-select>
+          <div class="clearfix">&nbsp;</div>
+          <div class="col-sm-12">
+            <label>Additional Key Skills</label>
+          </div>
+          <cn-multi-select [type]="'Additional'" [data]="proficiencies" [maxLength]="maxNumberOfAdditional"
+                           [selectedData]="jobPosterModel.additionalProficiencies"
+                           (onComplete)="onOptionalProficiencyComplete($event)"></cn-multi-select>
         </div>
+      </div>
+      <div class="col-sm-3">
+        <cn-tool-tip [message]="tooltipMessage"></cn-tool-tip>
+      </div>
+      <button class="btn-prev" (click)="highlightedSection.name='Complexities'"><span
+              class="glyphicon glyphicon-chevron-left"></span></button>
+      <div class="button-group clearfix">
+        <button class="btn btn-success" scrollTo scrollTargetSelector="#industry-experience"
+                (click)="onNext()" [disabled]="disablebutton" [hidden]="!showButton">Next
+        </button>
+        <button class="btn btn-success" (click)="onSave()" [hidden]="showButton">Next</button>
       </div>
     </div>
   </div>
-  <div class="section-container clearfix proficiency-container" *ngIf="highlightedSection.name !='Proficiencies'">
-    <div class="main-content">
+  <div class="section-container clearfix" *ngIf="highlightedSection.name !='Proficiencies'">
+    <div class="main-content" (click)="highlightedSection.name='Proficiencies';disablebutton=false;showButton=false">
       <div class="compact-view clearfix">
 
-        <h4 class="heading">Key Skills
-          <button class="btn-edit"
-                  (click)="highlightedSection.name='Proficiencies';disablebutton=false;showButton=false" title="Edit Key Skills"></button>
+        <h4 class="heading-compact">Key Skills
+          <!--<button class="btn-edit" title="Edit Key Skills"></button>-->
         </h4>
         <div class="col-sm-6 padding-right15">
           <div>

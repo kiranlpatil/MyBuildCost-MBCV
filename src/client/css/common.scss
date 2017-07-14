@@ -8,7 +8,7 @@ $border-color: #e8e8e8;
 $border-grey: #ccc;
 $wrapper-text: #aaa;
 $wrapper-border: #999;
-$text-color: #666;
+$text-color: #333;
 $sub-heading: #666;
 $grey-background: #777;
 $error-success: #42a948;
@@ -242,6 +242,7 @@ select,
   box-shadow: none;
   padding: 6px 0;
   width: 100%;
+  font-size: 14px;
 
   &:focus,
   &:active {
@@ -276,6 +277,7 @@ select,
     color: $text-color;
     display: block;
     padding: 6px 0;
+    font-size: 14px;
 
     &:focus {
       box-shadow: none;
@@ -319,8 +321,8 @@ select,
 
 //Buttons
 .btn {
-  border-radius: 25px;
-  padding: 6px 25px;
+  border-radius: 4px;
+  padding: 9px 25px;
   font-weight: bold;
   box-shadow: 0 0 1px 0 #fff inset, 0 0 1px 0 #fff;
   border: 0;

@@ -1,13 +1,15 @@
 $border-color: #e8e8e8;
 $text-color: #666;
-$btn-color: #3694d1;
-$message: #00aed5;
+$white: #fff;
+$theme-color: #0d75fa;
+$message: #0d75fa;
 
 .list {
   .btn-container {
-    //border: 1px solid $border-color;
-    min-height: 65px;
-    padding: 15px 0;
+    border: 1px solid $border-color;
+    border-radius: 4px;
+    min-height: 260px;
+    padding: 15px;
     margin-top: 0;
 
     div {
@@ -22,7 +24,7 @@ $message: #00aed5;
     }
 
     span {
-      color: $btn-color;
+      color: $white;
       font-size: 13px;
       padding-left: 20px;
     }
@@ -41,13 +43,35 @@ $message: #00aed5;
 }
 
 .error-messages {
+  position: absolute;
+
   p {
     color: #f66761;
     font-size: 10px;
-    font-style: italic;
     line-height: 12px;
     margin: 2px 0;
   }
+}
+
+.keyskill-form-group {
+  margin-bottom: 30px;
+
+  .form-control {
+    border: 0;
+    box-shadow: none;
+    border-bottom: 1px solid #ccc;
+    border-radius: 0;
+    padding: 6px 150px 6px 0;
+
+    &:focus,
+    &:active {
+      border-bottom: 1px solid $theme-color;
+    }
+  }
+}
+
+.job-proficiency-container {
+  min-height: 65px !important;
 }
 
 @media screen and (max-width: 767px) {

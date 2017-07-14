@@ -73,7 +73,7 @@ export class CandidateQCardComponent {
       error => (console.log(error)));//TODO remove on error
   }
 
-  displayMsg(condition:string){
+  displayMsg(condition: string){
     var message = new Message();
     message.isError = false;
     if(condition=="APPLY"){message.custom_message = "You appiled for this job.";}

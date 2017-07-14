@@ -1,22 +1,24 @@
 <div class="list clearfix">
-  <div class="col-sm-12 no-padding">
-    <div ng2-auto-complete
-         [source]="Proficiencies"
-         min-chars="2"
-         max-num-list="10"
-         (ngModelChange)="selectedProficiencyModel($event)"
-         no-match-found-text="No Match Found, Press Enter to add this key skill.">
-      <input class="form-control" #elem [id]="type"
-             (keyup.enter)="showHideModal($event.target.value)" placeholder="Enter words that describe your area of expertise. E.g. for IT:- Java, C++. for Manufacturing:- Metal Cutting"/>
-      <div class="error-messages" *ngIf="showAlert"><p>You can select maximum {{maxLength}} Key skills.</p></div>
+  <div class="col-sm-12">
+    <div class="keyskill-form-group">
+      <label>Add your skills</label>
+      <div ng2-auto-complete
+           [source]="Proficiencies"
+           min-chars="2"
+           max-num-list="10"
+           (ngModelChange)="selectedProficiencyModel($event)"
+           no-match-found-text="No Match Found, Press Enter to add this key skill.">
+        <input class="form-control" #elem [id]="type"
+               (keyup.enter)="showHideModal($event.target.value)" placeholder="Enter words that describe your area of expertise. E.g. for IT:- Java, C++."/>
+        <div class="error-messages" *ngIf="showAlert"><p>You can select maximum {{maxLength}} Key skills.</p></div>
+        <div class="error-messages"
+             *ngIf="submitStatus">
+          <p>Select value from drop down.</p>
+        </div>
+      </div>
     </div>
-  </div>
-  <div class="error-messages"
-       *ngIf="submitStatus">
-    <p>You can't leave this empty.</p>
-  </div>
-  <div class="col-sm-12 no-padding">
-    <div class="btn-container clearfix">
+
+    <div class="btn-container clearfix" [class.job-proficiency-container]="type==='Mandatory'||type==='Additional'">
       <div *ngFor="let item of selectedProficiencies; let i = index">
         <button type="button" class="btn btn-create-profile" (click)="deleteItem($event)">
           {{item}} <span class="glyphicon glyphicon-remove"></span>
@@ -30,7 +32,7 @@
   <div class="modal-bg">
     <div class="modal-dialog modal-md">
       <div class="modal-content">
-        <div class="modal-body">
+        <div class="modal-body key-skill">
           <div class="row">
             <div class="col-sm-12">
               <p>Do you want to add "{{ otherProficiency }}" as your key Skill ? </p>

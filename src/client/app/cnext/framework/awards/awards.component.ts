@@ -23,6 +23,7 @@ export class AwardsComponent implements OnInit {
   private isButtonShow: boolean = false;
   private showButton: boolean = true;
   private submitStatus: boolean;
+  tooltipMessage: string = "<ul><li><p>1. Award message</p></li></ul>";
 
   constructor(private _fb: FormBuilder, private profileCreatorService: CandidateProfileService) {
   }
@@ -35,7 +36,9 @@ export class AwardsComponent implements OnInit {
     //subscribe to addresses value changes
     this.awardDetail.controls['awards'].valueChanges.subscribe(x => {
       this.isButtonShow = true;
-    })
+    });
+
+    this.addAward();
   }
 
   ngOnChanges(changes: any) {

@@ -16,32 +16,21 @@ $info: #666;
 }
 
 .recruiter-profile-wrapper {
-  margin: 95px 0 15px;
-  width: 85%;
+  margin: 95px auto 15px;
+  width: 850px;
 
   .hide-recruiter-info {
     display: none;
   }
 
-  .modal-bg {
-    z-index: 1;
-  }
-
-  .compact-view {
-    z-index: 2;
-
-    .heading {
-      z-index: 2 !important;
-    }
-
-    .btn-edit {
-      z-index: 3;
-    }
+  .edit-modal-content {
+    margin: 30px auto !important;
   }
 }
 
 .candidate-profile-wrapper {
-  margin: 70px 0 15px;
+  width: 850px;
+  margin: 70px auto 15px;
 
   .hide-candidate-info {
     display: none;

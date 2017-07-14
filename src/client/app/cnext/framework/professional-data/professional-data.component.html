@@ -1,93 +1,97 @@
 <div class="modal-bg" *ngIf="highlightedSection.name=='Professional-Details'"></div>
 <div class="section-container" *ngIf="highlightedSection.name =='Professional-Details'">
-  <cn-tool-tip [message]="tooltipMessage"></cn-tool-tip>
-  <div class="main-content modal-content clearfix">
-    <h4 class="heading">Professional Preferences & Experience Summary (Mandatory)</h4>
-    <!-- <form [formGroup]="professionalDetailForm" (ngSubmit)="onNext(jobPostForm.value)">-->
-    <div class="professional-data clearfix">
-      <div class="col-sm-3">
-        <label>Ready To Relocate?</label>
-        <!--  <control-messages [control]="professionalDetailForm.controls.relocate"></control-messages>-->
-        <select [(ngModel)]="candidate.professionalDetails.relocate" (change)="saveProfessionalData()">
-          <option *ngFor="let c of realocationList" [ngValue]="c">{{c}}</option>
-        </select>
 
-      </div>
+  <div class="main-content edit-modal-content clearfix">
+    <div class="col-sm-9 no-padding">
+      <h4 class="heading">Professional Preferences (Mandatory)</h4>
+      <!-- <form [formGroup]="professionalDetailForm" (ngSubmit)="onNext(jobPostForm.value)">-->
+      <div class="col-sm-9 professional-data scrollable-content clearfix">
 
-      <div class="col-sm-3">
-        <label>Education</label>
-        <!--<control-messages [control]="professionalDetailForm.controls.education"></control-messages>-->
-        <select [(ngModel)]="candidate.professionalDetails.education" (change)="saveProfessionalData()">
-          <option *ngFor="let c of educationList" [ngValue]="c">{{c}}</option>
-        </select>
+        <div class="col-sm-12 form-gruop">
+          <label>Current Salary</label>
+          <!-- <control-messages [control]="professionalDetailForm.controls.currentSalary"></control-messages>-->
+          <select [(ngModel)]="candidate.professionalDetails.currentSalary" (change)="saveProfessionalData()">
+            <option *ngFor="let c of salaryList" [ngValue]="c">{{c}}</option>
+          </select>
+          <div class="error-messages"
+               *ngIf="candidate.professionalDetails.currentSalary == '' && !isValid">
+            <p>You can't leave this field empty.</p>
+          </div>
 
-      </div>
+        </div>
 
-      <div class="col-sm-3">
-        <label>Experience</label>
-        <!--<control-messages [control]="professionalDetailForm.controls.experience"></control-messages>-->
-        <select [(ngModel)]="candidate.professionalDetails.experience" (change)="saveProfessionalData()">
-          <option *ngFor="let c of experienceList" [ngValue]="c">{{c}}</option>
-        </select>
+        <div class="col-sm-12 form-gruop">
+          <label>Ready To Relocate?</label>
+          <!--  <control-messages [control]="professionalDetailForm.controls.relocate"></control-messages>-->
+          <select [(ngModel)]="candidate.professionalDetails.relocate" (change)="saveProfessionalData()">
+            <option *ngFor="let c of realocationList" [ngValue]="c">{{c}}</option>
+          </select>
+          <div class="error-messages"
+               *ngIf="candidate.professionalDetails.relocate == '' && !isValid">
+            <p>You can't leave this field empty.</p>
+          </div>
+        </div>
 
-      </div>
+        <div class="col-sm-12 form-gruop">
+          <label>Company Culture</label>
+          <!-- <control-messages [control]="professionalDetailForm.controls.noticePeriod"></control-messages>-->
+          <select [(ngModel)]="candidate.professionalDetails.industryExposure" (change)="saveProfessionalData()">
+            <option *ngFor="let c of industryExposureList" [ngValue]="c">{{c}}</option>
+          </select>
+          <div class="error-messages"
+               *ngIf="candidate.professionalDetails.industryExposure == '' && !isValid">
+            <p>You can't leave this field empty.</p>
+          </div>
+        </div>
 
-      <div class="col-sm-3">
-        <label>Current Salary</label>
-        <!-- <control-messages [control]="professionalDetailForm.controls.currentSalary"></control-messages>-->
-        <select [(ngModel)]="candidate.professionalDetails.currentSalary" (change)="saveProfessionalData()">
-          <option *ngFor="let c of salaryList" [ngValue]="c">{{c}}</option>
-        </select>
+        <div class="col-sm-12 form-gruop">
+          <label>Notice Period</label>
+          <!-- <control-messages [control]="professionalDetailForm.controls.noticePeriod"></control-messages>-->
+          <select [(ngModel)]="candidate.professionalDetails.noticePeriod" (change)="saveProfessionalData()">
+            <option *ngFor="let c of noticePeriodList" [ngValue]="c">{{c}}</option>
+          </select>
+          <div class="error-messages"
+               *ngIf="candidate.professionalDetails.noticePeriod == '' && !isValid">
+            <p>You can't leave this field empty.</p>
+          </div>
+        </div>
 
-      </div>
 
-      <div class="col-sm-3">
-        <label>Notice Period</label>
-        <!-- <control-messages [control]="professionalDetailForm.controls.noticePeriod"></control-messages>-->
-        <select [(ngModel)]="candidate.professionalDetails.noticePeriod" (change)="saveProfessionalData()">
-          <option *ngFor="let c of noticePeriodList" [ngValue]="c">{{c}}</option>
-        </select>
-      </div>
-
-      <div class="col-sm-3">
-        <label>Industry Culture</label>
-        <!-- <control-messages [control]="professionalDetailForm.controls.noticePeriod"></control-messages>-->
-        <select [(ngModel)]="candidate.professionalDetails.industryExposure" (change)="saveProfessionalData()">
-          <option *ngFor="let c of industryExposureList" [ngValue]="c">{{c}}</option>
-        </select>
       </div>
     </div>
-    <div class="col-sm-12">
+    <div class="col-sm-3 no-padding">
+      <cn-tool-tip [message]="tooltipMessage"></cn-tool-tip>
+    </div>
+
       <div class="button-group clearfix">
         <!--
                   <button class="btn btn-default"  (click)="highlightedSection.name='none'; highlightedSection.isDisable=false" [hidden]="showButton" >Cancel</button>
         -->
-        <button type="submit" class="btn btn-success" scrollTo scrollTargetSelector="#Employment-History"
-                (click)="onNext()" [disabled]="disableButton" [hidden]="!showButton">Next
+       <!-- <div class="saving-loader">Saving...</div>-->
+        <button type="submit" class="btn btn-primary" scrollTo scrollTargetSelector="#Employment-History"
+                (click)="onNext()" [hidden]="!showButton">Next
         </button>
-        <button class="btn btn-success" (click)="onSave()" [hidden]="showButton">Save</button>
+        <button class="btn btn-primary" (click)="onSave()" [hidden]="showButton">Done</button>
       </div>
-    </div>
-    <!-- </form>-->
+
+    <button class="btn-prev" (click)="highlightedSection.name='IndustryExposure'"><span
+      class="glyphicon glyphicon-chevron-left"></span></button>
   </div>
 </div>
 <div class="section-container" *ngIf="highlightedSection.name !='Professional-Details'">
-  <div class="main-content">
+  <div class="main-content" (click)="highlightedSection.name='Professional-Details';highlightedSection.isDisable=true;isValid=true;showButton=false">
     <div class="compact-view clearfix">
-      <h4 class="heading">Professional Preferences & Experience Summary
-        <button class="btn-edit"
-                (click)="highlightedSection.name='Professional-Details';highlightedSection.isDisable=true;disableButton=false;showButton=false"
-                [hidden]="highlightedSection.isDisable" title="Edit Professional Preferences & Experience Summary"></button>
+      <h4 class="heading-compact">Professional Preferences
+       <!-- <button class="btn-edit"
+                [hidden]="highlightedSection.isDisable" title="Edit Professional Preferences & Experience Summary"></button>-->
       </h4>
-      <p><label>Ready To Relocate?</label> {{candidate.professionalDetails.relocate}}</p>
-      <p><label>Education</label> {{candidate.professionalDetails.education}}</p>
-      <p><label>Experience</label> {{candidate.professionalDetails.experience}}</p>
+
       <p><label>Current Salary</label> {{candidate.professionalDetails.currentSalary}}</p>
+      <p><label>Ready To Relocate?</label> {{candidate.professionalDetails.relocate}}</p>
+      <p><label>Company Culture</label> {{candidate.professionalDetails.industryExposure}}</p>
       <p><label>Notice Period</label> {{candidate.professionalDetails.noticePeriod}}</p>
-      <p><label>Industry Exposure</label> {{candidate.professionalDetails.industryExposure}}</p>
     </div>
   </div>
 </div>
-<div class="clearfix divider clear"></div>
 
 

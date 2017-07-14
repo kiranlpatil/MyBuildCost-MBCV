@@ -18,13 +18,13 @@ export class IndustryExperienceListComponent implements OnInit,OnChanges {
   @Input() candidateExperiencedIndustry: string[] = new Array(0);
   @Output() onComplete = new EventEmitter();
   @Output() onNextComplete = new EventEmitter();
-  tooltipCandidateMessage: string = '<ul><li><h5>Industry Exposure</h5>' +
-    '<p class="info">An individual may be exposed to multiple industries during the professional life. ' +
+  tooltipCandidateMessage: string = '<ul><li>' +
+    '<p>1. An individual may be exposed to multiple industries during the professional life. ' +
   'At times, organisations need individuals who have cross industry expertise.</p></li>' +
-  '<li><p>Select such industries where you can claim a reasonable exposure.</p></li></ul>';
+  '<li><p>2. Select such industries where you can claim a reasonable exposure.</p></li></ul>';
 
-  tooltipRecruiterMessage: string = '<ul><li><h5>Industry Exposure</h5>' +
-    '<p class="info">If you wish the candidate to have exposure to any industry besides his core industry, please select such additional industries.' +
+  tooltipRecruiterMessage: string = '<ul><li>' +
+    '<p>1. If you wish the candidate to have exposure to any industry besides his core industry, please select such additional industries.' +
   '</p></li>' +
   '</ul>';
   private showButton: boolean = true;

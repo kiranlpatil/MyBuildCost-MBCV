@@ -23,7 +23,7 @@ export class EmploymentHistoryComponent {
   private isButtonShow: boolean = false;
   private showButton: boolean = true;
   private showAddButton: boolean = true;
-  tooltipMessage: string = "<p class='info'>An individual may be exposed to multiple industries during the professional life.</p>";
+  tooltipMessage: string = "<ul><li><p>1. An individual may be exposed to multiple industries during the professional life.</p></li></ul>";
   private submitStatus: boolean;
   constructor(private _fb: FormBuilder, private profileCreatorService: CandidateProfileService) {
   }
@@ -34,12 +34,12 @@ export class EmploymentHistoryComponent {
     });
 
     // add address
-    //this.addEmployeeHistory();
+    this.addEmployeeHistory();
 
     //subscribe to addresses value changes
     this.employeeHistory.controls['employeeHistories'].valueChanges.subscribe(x => {
       this.isButtonShow = true;
-    })
+    });
   }
 
   ngOnChanges(changes: any) {

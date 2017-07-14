@@ -1,45 +1,55 @@
 <div class="modal-bg" *ngIf="highlightedSection.name=='Complexities'"></div>
 <div class="section-container clearfix" *ngIf="highlightedSection.name=='Complexities'">
-  <cn-tool-tip [message]="tooltipCandidateMessage" *ngIf="isCandidate"></cn-tool-tip>
-  <cn-tool-tip [message]="tooltipRecruiterMessage" *ngIf="!isCandidate"></cn-tool-tip>
-  <div class="main-content clearfix modal-content">
-    <div class="complexities">
-      <h4 class="heading">
-        Capabilities Details
-        <span class="pull-right">{{currentComplexity+1}}/{{complexityIds.length}}</span>
+  <div class="main-content clearfix edit-modal-content">
+    <div class="complexities col-sm-9 no-padding">
+      <h4 class="heading">Tell us about your experience in: {{currentComplexityDetails.capability_name}}
       </h4>
-      <div class="complexity-container">
+      <div class="error-messages" *ngIf="!isValid"><p>You can't leave this empty.</p></div>
+      <div class="complexity-container scrollable-content">
           <cn-question-answer [complexityDetails]="currentComplexityDetails" [slideQuestionToLeft]="slideToLeft" [slideQuestionToRight]="slideToRight" (onComplete)="onAnswered($event)" ></cn-question-answer>
-          <div class="button-group clearfix clear">
-            <div>
-              <button class="btn btn-success btn-next" (click)="onNext()" [disabled]="currentComplexity===complexityIds.length">Next</button>
-              <button class="btn btn-prev" (click)="onPrevious()" [disabled]="currentComplexity===0"><span class="glyphicon glyphicon-chevron-left"></span></button>
-            </div>
-          </div>
       </div>
     </div>
+    <div class="col-sm-3 no-padding">
+      <cn-tool-tip [message]="tooltipCandidateMessage" *ngIf="isCandidate"></cn-tool-tip>
+      <cn-tool-tip [message]="tooltipRecruiterMessage" *ngIf="!isCandidate"></cn-tool-tip>
+    </div>
+    <div class="button-group clearfix clear">
+      <!--<div class="saving-loader">Saving...</div>-->
+        <button class="btn btn-primary" (click)="onNext()" [disabled]="currentComplexity===complexityIds.length">Next</button>
+    </div>
+    <span class="question-count">{{currentComplexity+1}} of {{complexityIds.length}}</span>
+<!--
+    <span  class="question-count"> {{currentComplexityDetails.complexity_number}}</span><span *ngIf="currentComplexityDetails.total_complexity_in_capability"> of {{currentComplexityDetails.total_complexity_in_capability}}</span>
+-->
+    <button class="btn-prev" (click)="onPrevious()" ><span class="glyphicon glyphicon-chevron-left"></span></button>
   </div>
 </div>
 <div class="section-container " *ngIf="highlightedSection.name!='Complexities'">
-  <div class="main-content">
+  <div class="main-content clearfix">
     <div class="compact-view">
-      <a data-toggle="collapse" data-target="#demo" (click)="showMore = !showMore">
-        <h4 class="heading">Complexities handled for the above Capabilities
-          <button class="btn-edit" (click)="edit()"
-                  [hidden]="highlightedSection.isDisable" title="Edit Complexities"></button>
+      <a data-toggle="collapse" data-target="#demo">
+        <h4 class="heading-compact">Capabilities
+          <span class="add-more" (click)="highlightedSection.name='Capabilities'"><span class="glyphicon glyphicon-plus-sign"></span>Add More</span>
+          <!--<button class="btn-edit" (click)="edit()"
+                  [hidden]="highlightedSection.isDisable" title="Edit Complexities"></button>-->
         </h4>
-        <span class="see-more" *ngIf="!showMore">more...</span>
-        <span class="see-more" *ngIf="showMore">less...</span>
       </a>
       <div id="demo">
-        <div class="col-sm-12 no-padding">
-          <cn-capability-compare [isCompact]="true" [capabilities]="capabilities"></cn-capability-compare>
+        <div class="col-sm-12 no-padding" (click)="edit()">
+          <cn-capability-compare [isCompact]="true" [rowsToShow]="5" [capabilities]="capabilities"></cn-capability-compare>
         </div>
+        <!--<div class="see-more" *ngIf="!showMore">
+          <p>Show more</p>
+          <span class="glyphicon glyphicon-chevron-down"></span>
+        </div>
+        <div class="see-more" *ngIf="showMore">
+          <span class="glyphicon glyphicon-chevron-up"></span>
+          <p>Show less</p>
+        </div>-->
       </div>
     </div>
   </div>
 </div>
-<div class="clearfix divider clear"></div>
 <!--<div [class.modal-bg]="highlightedSection.name!='Complexities'"></div>-->
 
 <div class="modal popup" [style.display]="getStyleModal()">
