@@ -112,8 +112,8 @@
                 If you are on the lookout of job change, it is recommended to keep this setting to "Yes". You can change this setting later.
               </div>
               <div class="pull-right">
-                <span class="switch-label">Yes</span>
-                <span class="switch-label">No</span>
+                <span class="switch-label" *ngIf="candidate.isVisible == true">Yes</span>
+                <span class="switch-label" *ngIf="candidate.isVisible == false">No</span>
                 <div class="switch">
                   <label class="radio-inline">
                     <input type="radio" name="profile-visibility"
