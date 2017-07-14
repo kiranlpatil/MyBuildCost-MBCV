@@ -20,25 +20,22 @@ let importIndustriesService = new ImportIndustryService();
 
 export function readXlsx(req: express.Request, res: express.Response) {
   var filepath = "./src/server/app/framework/public/config/NewIndustryDataExcel.xlsx";
-  var rolesArray=[];
+  var rolesArray:any=[];
   xlsxj({
     input: filepath,
     output: "output.json"
-  }, function(err, result) {
+  }, function(err:any, result:any) {
     if(err) {
       console.error(err);
     }else {
-      let i;
       console.log(result.length);
-      let industry:any;
-      var compareRow = [];
-      for (i = 0; i < result.length; i++) {
+      var compareRow:any = [];
+      for (let i = 0; i < result.length; i++) {
         compareRow = addRole(result[i], compareRow)
       }
-      let i;
-      let j;
+      let j:number;
       for (let i = 0; i < compareRow.length; i++) {
-        var compareCapabilities = [];
+        var compareCapabilities:any = [];
         for (j = 1; j < result.length; j++) {
           var currentRow = result[j];
           if (compareRow[i].name == currentRow.area_of_work) {
@@ -51,7 +48,7 @@ export function readXlsx(req: express.Request, res: express.Response) {
       }
       for (let i = 0; i < compareRow.length; i++) {
         for (let capIndex = 0; capIndex < compareRow[i].capabilities.length; capIndex++) {
-          let complexities = [];
+          let complexities:any = [];
           for (let j = 0; j < result.length; j++) {
             let currentRow = result[j];
             if (compareRow[i].capabilities[capIndex].name == currentRow.capability) {
@@ -62,7 +59,7 @@ export function readXlsx(req: express.Request, res: express.Response) {
         }
       }
       for(let i=0;i<compareRow.length;i++){
-        var capabilityObject;
+        var capabilityObject:any;
         compareRow[i].default_complexities=new Array(0);
         capabilityObject=compareRow[i].capabilities[0];
         var input=compareRow[i].capabilities[0].name;
@@ -102,7 +99,7 @@ export function readXlsx(req: express.Request, res: express.Response) {
 }
 
 function addRole(newRow:any,row:any){
-   let i;
+   let i:number;
    if(row.length!=0){
    for(i=0;i<row.length;i++){
      if(newRow.area_of_work==row[i].name){
@@ -131,8 +128,8 @@ function addRole(newRow:any,row:any){
   }
 }
 
-function addCapabilities(newRow,compareCapabilities){
-  let i;
+function addCapabilities(newRow:any,compareCapabilities:any){
+  let i:number;
   if(compareCapabilities.length!=0){
     for(i=0;i<compareCapabilities.length;i++){
       if(newRow.capability==compareCapabilities[i].name){
@@ -162,8 +159,8 @@ function addCapabilities(newRow,compareCapabilities){
   }
 }
 
-function addComplexities(newRow,compareComplexities){
-  let i;
+function addComplexities(newRow:any,compareComplexities:any){
+  let i:number;
   //console.log(compareCapabilities);
   if(compareComplexities.length!=0){
     for(i=0;i<compareComplexities.length;i++){
@@ -181,7 +178,7 @@ function addComplexities(newRow,compareComplexities){
             let sceName = 'Scenario'+(sceIndex+1).toString();
             let s1 : ScenarioClassModel = new ScenarioClassModel();
             s1.name=newRow[sceName];
-            s1.code=(sceIndex+1)*10;
+            s1.code=((sceIndex+1)*10).toString();
             if(s1.name!==""){
             scenarios.push(s1);}
           }
@@ -206,7 +203,7 @@ function addComplexities(newRow,compareComplexities){
       let sceName = 'Scenario'+(sceIndex+1).toString();
       let s1 : ScenarioClassModel = new ScenarioClassModel();
       s1.name=newRow[sceName];
-      s1.code=(sceIndex+1)*10;
+      s1.code=((sceIndex+1)*10).toString();
       if(s1.name!==""){
         scenarios.push(s1);}
     }
