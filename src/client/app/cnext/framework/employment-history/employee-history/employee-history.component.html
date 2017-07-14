@@ -1,6 +1,6 @@
-<div [formGroup]="employeeForm">
+<div class="col-sm-12 no-padding" [formGroup]="employeeForm">
   <div class="left-content">
-    <div class="col-sm-6 padding-right5">
+    <div class="col-sm-12 no-padding">
       <div class="form-group">
         <label>Company Name</label>
         <input type="text" class="form-control" formControlName="companyName" required/>
@@ -11,7 +11,7 @@
       </div>
     </div>
 
-    <div class="col-sm-6 padding-left5">
+    <div class="col-sm-12 no-padding">
       <div class="form-group">
         <label>Designation</label>
         <input type="text" class="form-control" formControlName="designation" required/>
@@ -23,12 +23,12 @@
     </div>
 
     <div class="col-sm-12 no-padding">
-      <div class="worked-from col-sm-6 no-padding">
+      <div class="worked-from col-sm-12 no-padding">
         <div formGroupName="from">
-          <div class="col-sm-2 no-padding">
+          <div class="col-sm-3 no-padding">
             <label>From Date</label>
           </div>
-          <div class="col-sm-6 padding-left5">
+          <div class="col-sm-5 padding-left5">
             <select class="select" formControlName="month" required>
               <option value ={{month}} *ngFor="let month of monthList">{{month}}</option>
             </select>
@@ -41,12 +41,12 @@
         </div>
       </div>
 
-      <div class="worked-to col-sm-6 padding-left5">
+      <div class="worked-to col-sm-12 no-padding">
         <div formGroupName="to">
-          <div class="col-sm-2 no-padding">
+          <div class="col-sm-3 no-padding">
             <label>To Date</label>
           </div>
-          <div class="col-sm-6 padding-right5">
+          <div class="col-sm-5 padding-right5">
             <select class="select" formControlName="month" required>
               <option value ={{month}} *ngFor="let month of monthList" >{{month}}</option>
             </select>

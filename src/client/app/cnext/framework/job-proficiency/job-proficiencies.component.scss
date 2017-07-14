@@ -4,6 +4,7 @@ $btn-color: #3694d1;
 $message: #00aed5;
 
 .proficiency-container {
+  padding: 0 15px 0 30px;
 
   .info-message {
     font-size: 13px;
@@ -24,14 +25,11 @@ $message: #00aed5;
 }
 
 .compact-view {
+  border-bottom: 1px solid $border-color;
   &:hover {
     .btn-edit {
       opacity: 1;
     }
-  }
-
-  .option {
-    padding: 0;
   }
 }
 

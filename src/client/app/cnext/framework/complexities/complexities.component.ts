@@ -36,16 +36,17 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
   private slideToLeft: boolean = false;
   private capabilities: Capability[] = [];
   private complexityData: any;
+  private isValid: boolean =true;
 
   tooltipCandidateMessage: string = "<ul><li>" +
-    "<h5>Complexities</h5><p class='info'> This section provides a list of complexity scenarios for your selected capabilities." +
-    "If more than one options are applicable to you, choose the option with a higher level of expertise.</p></li>" +
-    "<li><p>If a scenario was applicable to you in past but is no more relevant to you, avoid choosing such scenarios.</p>" +
+    "<p>1. This section provides a list of complexity scenarios for your selected capabilities." +
+    "If more than one options are applicable to you, choose the option where you can demonstrate a higher level of expertise.</p></li>" +
+    "<li><p>2. If a scenario was applicable to you in past but is no more relevant to you, avoid choosing such scenarios.In such cases, choose 'Not Applicable.</p>" +
     "</li></ul>";
   tooltipRecruiterMessage: string = '<ul><li>' +
-    '<h5>Complexities</h5><p class="info"> This section provides a list of complexity scenarios for selected capabilities.' +
+    '<p>1. This section provides a list of complexity scenarios for selected capabilities.' +
     'For each scenario, select the most appropriate level that candidate is required to handle.</p></li>' +
-    '<li><p>For scenarios that are not relevant to your job profile, choose "not applicable".</p>' +
+    '<li><p>2. For scenarios that are not relevant to your job profile, choose "Not Applicable".</p>' +
     '</li></ul>';
   @ViewChild("save")
   private _inputElement1: ElementRef;
@@ -126,12 +127,19 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
   }
 
   onAnswered(complexityDetail: ComplexityDetails) {
+    this.isValid = true;
     this.complexities[this.complexityIds[this.currentComplexity]] = complexityDetail.userChoice;
     this.complexityData[this.complexityIds[this.currentComplexity]] = complexityDetail;
     this.onNext();
   }
 
   onNext() {
+    this.isValid = true;
+    if(this.complexities[this.complexityIds[this.currentComplexity]] == -1){
+        this.isValid = false;
+        return;
+    }
+
     this.onComplextyAnswered.emit(this.complexities);
     if (this.slideToLeft === true) {
       this.slideToLeft = !this.slideToLeft;
@@ -154,8 +162,16 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
   }
 
   onPrevious() {
+    this.isValid = true;
+    if(this.complexities[this.complexityIds[this.currentComplexity]] == -1){
+      this.isValid = false;
+      return;
+    }
     if (this.currentComplexity >= 0) {
       this.getComplexityDetails(this.complexityIds[--this.currentComplexity]);
+    }
+    if (this.currentComplexity == 0) {
+      this.highlightedSection.name ='Capabilities';
     }
     if (this.slideToRight === true) {
       this.slideToRight = !this.slideToRight;

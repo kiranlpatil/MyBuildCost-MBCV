@@ -1,7 +1,7 @@
 $theme-color: #0d75fa;
 $heading-color: #dbeef6;
 $border-color: #e8e8e8;
-$text-color: #666;
+$text-color: #333;
 $light-green: #B1D669;
 $orange: #EAA83D;
 $gray: #ccc;
@@ -495,8 +495,12 @@ and (max-width: 840px) {
     border-top: 1px solid #E6E6E6;
     display: inline-block;
     width: 100%;
-    .complexity-name {
+    .capability-label-name {
+      font-size: 14px;
       color: $theme-color;
+    }
+    .complexity-name {
+      color: $text-color;
       margin-bottom: 2px;
       width: 100%;
       display: inline-block;
@@ -513,6 +517,9 @@ and (max-width: 840px) {
       span {
         font-size: 12px;
       }
+    }
+    .scenario-row > span {
+      color: $text-color;
     }
   }
 }

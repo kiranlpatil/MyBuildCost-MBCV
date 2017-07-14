@@ -1,62 +1,74 @@
+<div class="clearfix divider clear">&nbsp;</div>
 <div class="modal-bg" *ngIf="highlightedSection.name=='Certification'"></div>
 <div class="section-container clear"  *ngIf="highlightedSection.name =='Certification'">
-  <div class="main-content modal-content clearfix">
-    <h4 class="heading">Certification/Accreditation</h4>
-    <form class="description-form" [formGroup]="certificationDetail" novalidate>
-      <div formArrayName="certifications">
-        <div *ngFor="let history of certificationDetail.controls.certifications.controls; let i=index"
-             class="panel panel-default">
-          <div>
-          <span class="glyphicon glyphicon-trash pull-right"
-                *ngIf="certificationDetail.controls.certifications.controls.length>0 && certificationDetail.controls.certifications.controls.length !==1 "
-                (click)="removeCertification(i)"></span>
+  <div class="main-content edit-modal-content clearfix">
+    <div class="col-sm-9 no-padding">
+      <h4 class="heading">Certification/Accreditation</h4>
+      <div class="scrollable-content">
+        <form class="description-form" [formGroup]="certificationDetail" novalidate>
+          <div class="col-sm-8" formArrayName="certifications">
+            <div *ngFor="let history of certificationDetail.controls.certifications.controls; let i=index"
+                 class="panel panel-default">
+              <div>
+            <span class="glyphicon glyphicon-trash pull-right"
+                  *ngIf="certificationDetail.controls.certifications.controls.length>0 && certificationDetail.controls.certifications.controls.length !==1 "
+                  (click)="removeCertification(i)"></span>
+              </div>
+              <div class="panel-body" [formGroupName]="i">
+                <cn-certificates [group]="certificationDetail.controls.certifications.controls[i]" [submitStatus] = "submitStatus"></cn-certificates>
+              </div>
+            </div>
           </div>
-          <div class="panel-body" [formGroupName]="i">
-            <cn-certificates [group]="certificationDetail.controls.certifications.controls[i]" [submitStatus] = "submitStatus"></cn-certificates>
-          </div>
-        </div>
+        </form>
       </div>
-
-      <div class="margin-20">
-        <button (click)="addCertification()" class="btn btn-create-profile" [disabled]="!certificationDetail.valid">
-          Add another
-        </button>
-      </div>
-      <div class="button-group clearfix">
-        <button class="btn btn-default" (click)="highlightedSection.name='none';highlightedSection.isDisable=false">
-          Cancel
-        </button>
-        <button type="submit" class="btn btn-success" scrollTo scrollTargetSelector="#certification"
-                (click)="postData('next')" [disabled]="!certificationDetail.valid" [hidden]="!showButton">Next
-        </button>
-        <button type="submit" class="btn btn-success" (click)="postData('save')" [hidden]="showButton">Save
-        </button>
-      </div>
-      <div class="clearfix"></div>
-    </form>
+    </div>
+    <div class="col-sm-3 no-padding">
+      <cn-tool-tip [message]="tooltipMessage"></cn-tool-tip>
+    </div>
+    <div class="button-group clearfix">
+      <!--<div class="saving-loader">Saving...</div>-->
+      <button type="submit" class="btn btn-primary" scrollTo scrollTargetSelector="#certification"
+              (click)="postData('next')" *ngIf="!candidate.isSubmitted">Next
+      </button>
+      <button type="submit" class="btn btn-primary" (click)="postData('save')" *ngIf="candidate.isSubmitted">Save
+      </button>
+      <button (click)="addCertification()" class="btn btn-add-another" [disabled]="!certificationDetail.valid">
+        Add another
+      </button>
+    </div>
+    <button class="btn-prev" (click)="highlightedSection.name='Awards'"><span
+      class="glyphicon glyphicon-chevron-left"></span></button>
   </div>
 </div>
 
 <div class="section-container"
-     [ngClass]="(highlightedSection.name=='Certification')?'full-width':'quarter-width'"
+     [ngClass]="(highlightedSection.name=='Certification')?'full-width':'half-width'"
      *ngIf="highlightedSection.name !='Certification'">
-  <div class="main-content">
+  <div class="main-content" (click)="highlightedSection.name='Certification';highlightedSection.isDisable=true;showButton=false">
     <div class="compact-view clearfix">
       <div *ngIf="certificationDetail.controls.certifications.controls.length==0">
 
-        <h4 class="heading-compact"
-            (click)="highlightedSection.name='Certification';addCertification();highlightedSection.isDisable=true;showButton=false">
+        <h4 class="heading-compact">
           <img src="assets/c-next/icons/certificates.png" alt="employment"/>
           Certifications
-          <span class="glyphicon glyphicon-plus" title="Add Certifications"></span>
         </h4>
       </div>
 
-      <div class="vertical-container" *ngIf="certificationDetail.controls.certifications.controls.length>0">
-        <button class="btn-edit"
-                (click)="highlightedSection.name='Certification';highlightedSection.isDisable=true;showButton=false"
-                [hidden]="highlightedSection.isDisable" title="Edit Certifications"></button>
-        <cn-vertical-list-view [data]="candidate.certifications" [type]="'certifications'" [calledFrom]="'candidateview'"></cn-vertical-list-view>
+      <div class="" *ngIf="certificationDetail.controls.certifications.controls.length>0">
+        <h4 class="heading-compact">
+          <img src="assets/c-next/icons/certificates.png" alt="employment"/>
+          Certifications
+        </h4>
+        <ul>
+          <div *ngFor="let item of candidate.certifications;let i = index">
+            <div *ngIf="i == 0">
+              <li>
+                <p>{{item.name}} at {{item.issuedBy}} in {{item.year}}</p>
+                <p *ngIf="candidate.certifications.length != 1">( {{candidate.certifications.length-1}} more )</p>
+              </li>
+            </div>
+          </div>
+        </ul>
       </div>
     </div>
   </div>

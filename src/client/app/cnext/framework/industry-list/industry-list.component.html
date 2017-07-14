@@ -1,48 +1,59 @@
-<div class="modal-bg" *ngIf="highlightedSection.name=='Industry'"></div>
-<div class="section-container" *ngIf="highlightedSection.name=='Industry'">
+<div class="modal-bg" *ngIf="highlightedSection && highlightedSection.name=='Industry'"></div>
+<div class="section-container" *ngIf="highlightedSection && highlightedSection.name=='Industry'">
   <!--
     <cn-tool-tip [message]="tooltipMessage"></cn-tool-tip>
   -->
-  <div class="main-content clearfix modal-content">
-    <div class="col-sm-9 profile-description">
-      <div class="select-industry clearfix">
-        <div class="col-sm-12 no-padding">
-          <h4>Select your Industry (Any One)</h4>
-          <div class="max-height">
-            <div class="select-option" *ngFor="let item of industries;let i = index">
-              <label>
-                <input type="radio" name="item.name" id="{{item.name}}" value="{{item.name}}"
-                       (click)="onValueChange(item)" [checked]="item.name===selectedIndustry.name">
-                <span>{{item.name}}</span>
-              </label>
-            </div>
+  <div class="main-content clearfix edit-modal-content">
+    <div class="col-sm-9 profile-description no-padding">
+      <h4 class="heading">Select your Industry (Any One)</h4>
+      <div class="error-messages" *ngIf="!isValid"><p>You can't leave this empty.</p></div>
+      <div class="scrollable-content">
+        <div class="col-sm-12 select-industry">
+          <div class="select-option" *ngFor="let item of industries;let i = index">
+            <label>
+              <input type="radio" name="item.name" id="{{item.name}}" value="{{item.name}}"
+                     (click)="onValueChange(item)" [checked]="item.name===selectedIndustry.name">
+              <span>{{item.name}}</span>
+            </label>
           </div>
         </div>
       </div>
     </div>
-    <div class="button-group clearfix">
-      <button class="btn btn-success" (click)="onNext()" [disabled]="disableButton">Next</button>
+
+    <div class="col-sm-3 no-padding">
+      <cn-tool-tip [message]="tooltipMessage"></cn-tool-tip>
     </div>
+
+    <button class="btn-prev" (click)="onPrevious()">
+      <span class="glyphicon glyphicon-chevron-left"></span>
+    </button>
+
+    <div class="button-group clearfix">
+      <!--<div class="saving-loader">Saving...</div>-->
+      <button class="btn btn-primary" (click)="onNext()">Next</button>
+    </div>
+
   </div>
 </div>
-<div class="section-container">
-  <div class="main-content profile-main-content" *ngIf="highlightedSection.name!='Industry'">
+<div class="section-container" *ngIf="highlightedSection && highlightedSection.name!='Industry'">
+  <div class="main-content"  (click)="highlightedSection.name='Industry';disableButton=false;showButton=false;highlightedSection.isDisable=true">
     <div class="compact-view clearfix">
       <!--[hidden]="highlightedSection.isLocked"-->
       <!--
             <span class=" glyphicon glyphicon-lock" title="you can edit this field after {{highlightedSection.date| date:'mediumDate'}}" *ngIf="highlightedSection.isLocked"></span>
       -->
 
-
-      <div>
-        <p lass="truncate-text" class="user-name">
-
-          <button class="btn-edit"
-                  (click)="highlightedSection.name='Industry';disableButton=false;showButton=false;highlightedSection.isDisable=true"
-                  [hidden]="highlightedSection.isDisable" title="Edit My Profile"></button>
-        </p>
-        <p lass="truncate-text"><label>Industry</label> <span title="{{selectedIndustry.name}}">{{selectedIndustry.name}}</span>
-        </p>
+      <div class="col-sm-3 padding-right15">
+        <h4 class="heading-compact">Industry
+          <!-- <button class="btn-edit"
+                   (click)="highlightedSection.name='Industry';disableButton=false;showButton=false;highlightedSection.isDisable=true"
+                   [hidden]="highlightedSection.isDisable" title="Edit My Profile"></button>-->
+        </h4>
+      </div>
+      <div class="col-sm-9 padding-left15">
+        <div class="option-list">
+          <span class="option" title="{{selectedIndustry.name}}">{{selectedIndustry.name}}</span>
+        </div>
       </div>
     </div>
   </div>

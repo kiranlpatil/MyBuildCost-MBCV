@@ -5,4 +5,6 @@ export class ProfessionalData {
   noticePeriod: string = '';
   relocate: string = '';
   industryExposure: string = '';
+  currentCompany: string = '';
+  location: string = '';
 }

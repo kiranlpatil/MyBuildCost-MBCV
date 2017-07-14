@@ -20,22 +20,16 @@ $border-color: #ccc;
 }
 
 .left-content {
-  width: 50%;
-  float: left;
-  padding-right: 5px;
+  width: 100%;
+  //float: left;
+  //padding-right: 5px;
 
-  .worked-to,
-  .worked-from {
-    select {
-      margin-bottom: 0;
-    }
-  }
 }
 
 .right-content {
-  width: 50%;
-  float: left;
-  padding-left: 5px;
+  width: 100%;
+  //float: left;
+  //padding-left: 5px;
 }
 
 .compact-view {
@@ -49,6 +43,11 @@ $border-color: #ccc;
 .hide {
   display: none;
 }
+
+.form-group, select {
+  margin-bottom: 20px;
+}
+
 
 @media only screen and (max-width: 980px) {
   .left-content,

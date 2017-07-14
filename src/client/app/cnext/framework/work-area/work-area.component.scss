@@ -4,26 +4,18 @@ $option-border-color: #999;
 $primary-option: #1c75bd;
 
 .error-messages {
-  color: #f66761;
-  font-size: 10px;
-  font-style: italic;
-  margin: 0;
-  position: absolute;
-  line-height: 11px;
+  position: fixed;
+  bottom: 15px;
+  left: 15px;
 }
 
 .work-area {
+  padding: 0 15px 0 30px;
   .btn {
     &:focus,
     &:active {
       outline: none;
     }
-  }
-}
-
-.compact-view {
-  .option {
-    padding: 0;
   }
 }
 

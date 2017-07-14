@@ -42,6 +42,7 @@ export class CompanyDetailsComponent implements OnInit {
   private fileName2: string;
   private fileName3: string;
   private buttonId: string;
+  private submitStatus: boolean;
 
   constructor(private commonService: CommonService, private _router: Router, private http: Http,
               private companyDetailsService: CompanyDetailsService, private profileService: ProfileService,
@@ -73,8 +74,14 @@ export class CompanyDetailsComponent implements OnInit {
   }
 
   onSubmit() {
+    if(!this.companyDetailsForm.valid){
+      this.submitStatus = true;
+      return;
+    }
     if (this.setOfDocuments[0] === undefined || this.setOfDocuments[1] === undefined || this.setOfDocuments[2] === undefined) {
       this.isDocumentUploaded = true;
+      this.submitStatus = true;
+      return;
     } else {
       this.isDocumentUploaded = false;
       this.submitted = true;

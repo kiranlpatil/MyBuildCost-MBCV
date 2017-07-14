@@ -18,12 +18,13 @@ export class WorkAreaComponent implements OnInit,OnChanges {
   @Output() onComplete = new EventEmitter();
   tooltipCandidateMessage: string =
     '<ul>' +
-    '<li><h5> Area Of Work </h5><p>Select those areas of work that best describe your current focus. If there are areas that you have worked in past but are no more relevent, you should not select such areas as they may fetch jobs that are no more relevant to you.</p></li>' +
+    '<li><p>1. Select those areas of work that best describe your current focus. </p></li>' +
+    '<li><p>2. If there are areas that you have worked in past but are no more relevent, you should not select such areas as they may fetch jobs that are no more relevant to you.</p></li>' +
     '</ul>';
 
   tooltipRecruiterMessage: string =
     '<ul>' +
-    '<li><h5> Area Of Work </h5><p>Select those areas in which the candidate is expected to work.</p></li>' +
+    '<li><p>1. Select those areas in which the candidate is expected to work.</p></li>' +
     '</ul>';
   private savedSelectedRoles: Role[] = new Array(0);
   private isCandidate: boolean = false;

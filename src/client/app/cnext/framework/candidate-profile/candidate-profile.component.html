@@ -27,29 +27,34 @@
 
 
   <div class="profile-wrapper candidate-profile-wrapper container">
-    <div class="col-sm-12">
-      <div class="wrapper wrapper-border">
+    <div class="col-sm-12 no-padding">
+      <div class="wrapper">
+
         <cn-profile-description [candidate]="candidate" [highlightedSection]="highlightedSection"
                                 (onComplete)="onProfileDescriptionComplete($event)"></cn-profile-description>
+      </div>
+      <div class="wrapper">
         <cn-industry-list [selectedIndustry]="candidate.industry" [highlightedSection]="highlightedSection"
                           (valueChange)="onIndustryChange($event)" [hidden]="isIndustryShow"></cn-industry-list>
-        <div id="work-area">
-          <cn-work-area [roles]="rolesForMain" [selectedRoles]="candidateForRole"
-                        [highlightedSection]="highlightedSection"
-                        (onComplete)="onWorkAreaComplete($event)" [hidden]="isRolesShow"></cn-work-area>
-        </div>
 
+        <cn-work-area [roles]="rolesForMain" [selectedRoles]="candidateForRole"
+                      [highlightedSection]="highlightedSection"
+                      (onComplete)="onWorkAreaComplete($event)" [hidden]="isRolesShow"></cn-work-area>
 
-        <cn-capabilities [roles]="rolesForCapability" [candidateRoles]="candidateForCapability"
-                         [highlightedSection]="highlightedSection"
-                         (onComplete)="onCapabilityComplete($event)" [hidden]="!showCapability"></cn-capabilities>
+      </div>
 
+      <cn-capabilities [roles]="rolesForCapability" [candidateRoles]="candidateForCapability"
+                       [highlightedSection]="highlightedSection"
+                       (onComplete)="onCapabilityComplete($event)" [hidden]="!showCapability"></cn-capabilities>
+
+      <div class="wrapper complexity-wrapper">
         <cn-complexities [roles]="rolesForComplexity" [complexities]="candidate.capability_matrix"
                          [highlightedSection]="highlightedSection"
                          [isComplexityPresent]="isComplexityPresent"
                          (onComplextyAnswered)="onComplextyAnswered($event)"
                          (onComplete)="onComplexityComplete($event)" [hidden]="!showComplexity"></cn-complexities>
-
+      </div>
+      <div class="wrapper">
         <cn-proficiencies [proficiencies]="proficiencies" [choosedproficiencies]="candidate.proficiencies"
                           [highlightedSection]="highlightedSection"
                           (onSelect)="onProficiencySelect($event)" (onComplete)="onProficiencyComplete($event)"
@@ -63,11 +68,13 @@
                                 [hidden]="!showIndustryExperience"
                                 *ngIf="candidate != undefined || candidate.industry !=undefined"></cn-industry-experience>
 
-
+      </div>
+      <div class="wrapper">
         <cn-professional-data [candidate]="candidate" [highlightedSection]="highlightedSection"
                               (onComplete)="onProfessionalDataComplete($event)"
                               [hidden]="!showProfessionalData"></cn-professional-data>
-
+      </div>
+      <div class="wrapper clearfix">
         <cn-more-about-myself [candidate]="candidate" [highlightedSection]="highlightedSection"
                               (onComplete)="onMoreAboutMySelfComplete($event)"
                               [hidden]="!showAboutMySelf"></cn-more-about-myself>
@@ -88,37 +95,35 @@
                    (onComplete)="onAwardsComplete($event)"
                    [hidden]="!showAwards"></cn-awards>
 
-
+      </div>
+      <div class="wrapper profile-visibility-wrapper">
         <div class="section-container clear" [hidden]="!showAboutMySelf">
           <div class="main-content clearfix">
             <div class="compact-view clearfix profile-visibility">
-              <h4 class="heading">Profile Visibility</h4>
+              <h4 class="heading-compact">Profile Visibility for employer</h4>
+              <div class="info profile-info" *ngIf="!candidate.isVisible">If enabled, your profile will be available in employer search.</div>
+              <div class="info profile-info" *ngIf="candidate.isVisible">Warning: Selecting Hide will hide your profile from recruiters. If you are on the lookout of job change, it is recommended to keep this setting to "Show". You can change this setting later.
+              </div>
               <div class="switch">
                 <label class="radio-inline">
                   <input type="radio" name="profile-visibility"
                          (change)="showOrHide('show',$event)" value=true [checked]="candidate.isVisible == true">
-                  <span>Show</span>
+                  <span></span>
                 </label>
                 <label class="radio-inline">
                   <input type="radio" name="profile-visibility"
                          (change)="showOrHide('hide',$event)" value=false [checked]="candidate.isVisible == false">
-                  <span>Hide</span>
+                  <span></span>
                 </label>
-              </div>
-              <div class="info profile-info" *ngIf="!candidate.isVisible">On Selecting Show, you profile will be
-                considered for searches against appropriate job profiles and will be visible to recruiters. You can
-                change this setting later
-              </div>
-              <div class="info profile-info" *ngIf="candidate.isVisible">Warning: Selecting Hide will hide your profile from recruiters. If you are on the lookout of job change, it is recommended to keep this setting to "Show". You can change this setting later.
               </div>
             </div>
           </div>
         </div>
 
-        <div class="profile-configurations" [hidden]="!showAboutMySelf">
+        <div class="profile-configurations" [hidden]="!showAboutMySelf" >
           <div class="col-sm-6 text-left">
-            <div class="button-group">
-              <button class="btn btn-success" (click)="showHideModal()">Submit</button>
+            <div class="button-group" *ngIf="!candidate.isSubmitted">
+              <button class="btn btn-success" tabindex="1" (click)="showHideModal()">Submit</button>
               <!--<button class="btn btn-default">Cancel</button>-->
             </div>
           </div>

@@ -1,26 +1,27 @@
 <div class="clearfix container profile-wrapper recruiter-profile-wrapper">
   <div class="col-sm-12">
     <div class="wrapper wrapper-border job-poster">
-
       <cn-basic-job-information [highlightedSection]="highlightedSection" [jobPosterModel]="jobPosterModel"
                                 (onComplete)="onBasicJobInformationComplete($event)"></cn-basic-job-information>
-
+    </div>
+    <div class="wrapper">
       <cn-industry-list [selectedIndustry]="jobPosterModel.industry" [highlightedSection]="highlightedSection"
                         (valueChange)="selectIndustry($event)" [hidden]="!isShowIndustryList"></cn-industry-list>
 
       <cn-work-area [roles]="rolesForMain" [selectedRoles]="jobForRole" [highlightedSection]="highlightedSection" (onComplete)="selectRole($event)"
                     [hidden]="!isShowRoleList"></cn-work-area>
-
+    </div>
       <cn-capabilities [roles]="rolesForCapability" [candidateRoles]="jobForCapability"
                        [highlightedSection]="highlightedSection"
                        (onComplete)="selectCapability($event)" [hidden]="!isShowCapability"></cn-capabilities>
-
+    <div class="wrapper">
       <cn-complexities [roles]="rolesForComplexity" [complexities]="jobPosterModel.capability_matrix"
                        [highlightedSection]="highlightedSection"
                        [isComplexityPresent]="isComplexityPresent"
                        (onComplextyAnswered)="onComplextyAnswered($event)"
                        (onComplete)="selectRoleFromComplexity($event)" [hidden]="!isShowComplexity"></cn-complexities>
-
+    </div>
+    <div class="wrapper">
       <cn-job-proficiencies [proficiencies]="proficiencies" [jobPosterModel]="jobPosterModel"
                             [highlightedSection]="highlightedSection"
                             (onComplete)="selectProficiency($event)" (onNextComplete)="onProficiencyComplete($event)"
@@ -33,20 +34,20 @@
                               (onComplete)="selectExperiencedIndustry($event)"
                               [hidden]="!showIndustryExposure" (onNextComplete)="onIndustryExposureComplete($event)"
                               *ngIf="jobPosterModel != undefined && jobPosterModel.industry != undefined"></cn-industry-experience>
-
+    </div>
+    <div class="wrapper">
       <cn-compentacies-and-responsibilities [jobPosterModel]="jobPosterModel" [highlightedSection]="highlightedSection"
                                             (onComplete)="onCompentansiesandResponsibilitycomplete($event)"
                                             [hidden]="!showCompentensies"></cn-compentacies-and-responsibilities>
-
-      <div class="button-group" [hidden]="!isShowProficiency">
-        <!--<button type="submit" class="btn btn-success" (click)="mockupSearch()" >Mock Search</button>-->
-        <!--[disabled]="disableButton"-->
-        <!--
-              <button type="submit" class="btn btn-success">Save Job</button>
-        -->
-        <button type="submit" class="btn btn-danger btn-post-job" (click)="showHideModal()" [disabled]="disableButton">Post Job
-        </button>
-      </div>
+    </div>
+    <div class="button-group" [hidden]="!isShowProficiency">
+      <!--<button type="submit" class="btn btn-success" (click)="mockupSearch()" >Mock Search</button>-->
+      <!--[disabled]="disableButton"-->
+      <!--
+            <button type="submit" class="btn btn-success">Save Job</button>
+      -->
+      <button type="submit" class="btn btn-danger btn-post-job" (click)="showHideModal()" [disabled]="disableButton">Post Job
+      </button>
     </div>
   </div>
 </div>

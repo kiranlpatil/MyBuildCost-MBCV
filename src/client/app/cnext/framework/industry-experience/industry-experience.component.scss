@@ -3,6 +3,13 @@ $white: #fff;
 $option-border-color: #999;
 $primary-option: #1c75bd;
 
+.error-messages {
+  position: fixed;
+ /* margin: -25px 0 0;*/
+  bottom: 0;
+  left: 15px;
+}
+
 .messages {
   color: #00aed5;
   padding: 0;
@@ -14,9 +21,6 @@ $primary-option: #1c75bd;
       opacity: 1;
     }
   }
-  .option {
-    padding: 0;
-  }
 }
 
 .heading {
@@ -26,6 +30,10 @@ $primary-option: #1c75bd;
     font-size: 13px !important;
     padding: 0 !important;
   }
+}
+
+.industry-experience {
+  padding: 0 15px 0 30px;
 }
 
 @media screen and (max-width: 980px) {

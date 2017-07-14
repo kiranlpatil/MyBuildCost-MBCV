@@ -1,7 +1,7 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { CandidateProfileService } from '../candidate-profile/candidate-profile.service';
-import { Candidate, Section } from '../model/candidate';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {Component, EventEmitter, Input, Output} from "@angular/core";
+import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
+import {Candidate, Section} from "../model/candidate";
+import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   moduleId: module.id,
@@ -15,6 +15,7 @@ export class CertificationAccreditationComponent {
   @Input() candidate: Candidate;
   @Input() highlightedSection: Section;
   @Output() onComplete = new EventEmitter();
+  tooltipMessage: string = "<ul><li><p>1. Certification/Accreditation Message</p></li></ul>";
 
   public certificationDetail: FormGroup;
 
@@ -35,6 +36,8 @@ export class CertificationAccreditationComponent {
     this.certificationDetail.controls['certifications'].valueChanges.subscribe(x => {
       this.isButtonShow = true;
     });
+
+    this.addCertification();
   }
 
   ngOnChanges(changes: any) {
@@ -96,7 +99,7 @@ export class CertificationAccreditationComponent {
 
   onNext() {
     this.onComplete.emit();
-    this.highlightedSection.name = 'none';
+    this.highlightedSection.name = 'Awards';
     this.highlightedSection.isDisable = false;
   }
 

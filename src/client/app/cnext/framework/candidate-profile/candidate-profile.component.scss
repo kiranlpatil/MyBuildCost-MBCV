@@ -21,16 +21,11 @@ $green-text: #42a948;
   line-height: 11px;
 }
 
-.wrapper {
-  //border: 1px solid $border-color;
-  //background: $white;
-  padding-top: 15px;
-}
 
 .create-profile {
   //background: $profile-background;
   clear: both;
-  padding-bottom: 50px;
+  padding-bottom: 15px;
 }
 
 .bar-container {
@@ -114,7 +109,7 @@ $green-text: #42a948;
   }
 
   .active {
-    P {
+    p {
       color: $white;
       opacity: 1;
     }
@@ -159,9 +154,6 @@ $green-text: #42a948;
 
 .profile-wrapper {
   padding: 0;
-  //border: 1px solid $border-color;
-  width: 85%;
-
   .col-sm-3 {
     width: 25%;
   }
@@ -199,6 +191,7 @@ $green-text: #42a948;
 }
 
 .profile-visibility {
+  min-height: 80px;
   .heading {
     display: inline;
   }
@@ -274,18 +267,9 @@ $green-text: #42a948;
   .bar {
     width: 70%;
   }
-  .profile-configurations {
-    /*.col-sm-8, .col-sm-4 {
-      width: 50%;
-    }*/
-  }
 }
 
 @media only screen and (max-width: 1280px) {
-  /*.profile-wrapper {
-    display: inline-block;
-  }*/
-
   .profile-configurations {
     .col-sm-8,
     .col-sm-4 {

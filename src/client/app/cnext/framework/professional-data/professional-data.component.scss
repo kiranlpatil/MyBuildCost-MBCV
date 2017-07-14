@@ -1,7 +1,21 @@
+.error-messages {
+  position: absolute;
+  margin: -24px 0 0 0;
+
+  p {
+    margin: 0;
+  }
+}
+
+select {
+  margin-bottom: 25px;
+}
+
 .compact-view {
   p {
     float: left;
-    width: 25%;
+    width: 50%;
+    margin: 10px 0 0;
   }
 
   &:hover {
@@ -21,8 +35,8 @@
 
   .compact-view {
     p {
-      width: 33%;
-      margin-bottom: 15px;
+      width: 50%;
+      margin: 10px 0 0;
     }
   }
 }

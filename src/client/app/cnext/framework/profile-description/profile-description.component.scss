@@ -1,67 +1,59 @@
 $light-blue: #0d75fa;
-
-h4 {
-  font-size: 13px;
-  margin: 0 0 10px;
-  font-family: 'gothamrnd-book';
-  font-weight: 900;
-}
-
-.main-content {
-  input {
-    width: 75%;
-  }
-}
+$black: #333;
 
 .user-name {
-  margin-top: 15px;
-  word-wrap: break-word;
+  margin-bottom: 10px;
 
   .profile-name-first,
   .profile-name-last {
     color: $light-blue;
     font-family: 'gothamrnd-book';
-    font-size: 20px;
-    font-weight: 900;
+    font-size: 14px;
     background: none;
     padding: 0;
     text-transform: capitalize;
   }
-
- /* .profile-name-last {
-    color: #1B75BC;
-    font-family: 'gothamrnd-book';
-    font-weight: 900;
-  }*/
 }
 
-/*.main-content {
-  .button-group {
-    position: absolute;
-    bottom:0;
-    right: 0;
-  }
-}*/
+.job-title {
+  color: $black;
+  font-family: 'gothamrnd-light';
+  font-size: 20px;
+  background: none;
+  padding: 0;
+  text-transform: capitalize;
+}
 
 .compact-view {
+
+  .user-name {
+
+    .profile-name-first,
+    .profile-name-last {
+      font-size: 20px;
+    }
+  }
 
   &:hover {
     .btn-edit {
       opacity: 1;
     }
   }
+
+  .profile-details {
+    display: inline-block;
+    width: 43%;
+  }
+}
+
+.form-container {
+  padding: 0 50px;
 }
 
 .truncate-text {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-}
-
-.profile-main-content {
-  .compact-view {
-    min-height: 185px;
-  }
 }
 
 @media only screen and (max-width: 767px) {

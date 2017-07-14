@@ -1,10 +1,10 @@
 <div class="complexity-details" *ngIf="complexityDetails" [class.slide-left]="slideQuestionToRight" [class.slide-right]="slideQuestionToLeft">
-  <p class="breadcrumbs">
+ <!-- <p class="breadcrumbs">
     <span *ngIf="complexityDetails.role_name">{{complexityDetails.role_name}} </span>
     <span *ngIf="complexityDetails.capability_name"> >> {{complexityDetails.capability_name}} </span>
     <span *ngIf="complexityDetails.defaultComplexityName"> >> {{complexityDetails.defaultComplexityName}}</span>
     <span> {{complexityDetails.complexity_number}}</span><span *ngIf="complexityDetails.total_complexity_in_capability">/{{complexityDetails.total_complexity_in_capability}}</span>
-  </p>
+  </p>-->
 
   <p class="question">
     <span *ngIf="isCandidate && complexityDetails.questionForCandidate">{{complexityDetails.questionForCandidate}}</span>
