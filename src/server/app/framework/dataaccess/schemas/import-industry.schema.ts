@@ -1,21 +1,16 @@
+/**
+ * Created by techprime002 on 7/11/2017.
+ */
 import DataAccess = require("../dataaccess");
-import IScenario = require("../mongoose/scenario");
-import IRole = require("../mongoose/role");
-import IIndustry = require("../mongoose/industry");
+import ImportIndustryModel = require("../model/industry-class.model");
+import IImportIndustry = require("../mongoose/import-industry");
 
 var mongoose = DataAccess.mongooseInstance;
 var mongooseConnection = DataAccess.mongooseConnection;
 
-class IndustrySchema {
+class ImportIndustrySchema {
   static get schema() {
     var schema = mongoose.Schema({
-      code: {
-        type: String
-      },
-      name: {
-        type: String
-      },
-      sort_order: Number,
       roles: [{
         name: String,
         code: String,
@@ -26,7 +21,6 @@ class IndustrySchema {
           complexities: [{
             code: String,
             sort_order: Number,
-            question:String,
             questionForCandidate: String,
             questionForRecruiter: String,
             scenarios: [{
@@ -53,9 +47,11 @@ class IndustrySchema {
           name: String
         }]
       }],
-      proficiencies: {
-        label: String,
-        names: [String]
+      capabilities: {
+        type: String
+      },
+      industry: {
+        type: String
       }
 
     }, {versionKey: false});
@@ -63,5 +59,5 @@ class IndustrySchema {
     return schema;
   }
 }
-var schema = mongooseConnection.model<IIndustry>("Industry", IndustrySchema.schema);
+var schema = mongooseConnection.model<IImportIndustry>("ImportIndustry", ImportIndustrySchema.schema);
 export = schema;

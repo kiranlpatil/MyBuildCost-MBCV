@@ -2,6 +2,7 @@ import * as express from "express";
 import * as userController from "./app/framework/controllers/user.controller";
 import * as candidateController from "./app/framework/controllers/candidate.controller";
 import * as recruiterController from "./app/framework/controllers/recruiter.controller";
+import * as importIndustriesController from "./app/framework/controllers/import-Industries.controller";
 import * as sharedService from "./app/framework/shared/shared.service";
 import * as userInterceptor from "./app/framework/interceptor/user.interceptor";
 var AuthInterceptor = require("./app/framework/interceptor/auth.interceptor");
@@ -50,6 +51,9 @@ export function init(app: express.Application) {
   app.post("/api/sendrecruitermail/:id", this.authInterceptor.requiresAuth, userController.recruiterVerificationMail);
   app.post("/api/companydetails/:id", this.authInterceptor.requiresAuth, userController.updateCompanyDetails);
   app.put("/api/uploaddocuments/:id", this.authInterceptor.requiresAuth, userController.uploaddocuments);
+
+  app.get("/api/readxlsx", importIndustriesController.readXlsx);
+  app.post("/api/createImportIndusry", importIndustriesController.create);
 
   app.use(sharedService.logHandler);
   app.use(sharedService.errorHandler);
