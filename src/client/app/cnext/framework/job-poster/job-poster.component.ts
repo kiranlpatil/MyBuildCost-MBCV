@@ -46,6 +46,7 @@ export class JobPosterComponent implements OnInit {
   private jobForComplexity: Role[] = new Array(0);
   private jobForRole: Role[]= new Array(0);
   private jobForCapability: Role[]= new Array(0);
+  private rolesForRelevent: Role[] = new Array(0);
 
   private flag: boolean = true;
   private highlightedSection: Section = new Section();
@@ -194,7 +195,12 @@ export class JobPosterComponent implements OnInit {
   }
   onIndustryExposureComplete(event: any) {
     //this.showCompentensies = true;
+
+    this.highlightedSection.name = 'ReleventIndustry';
     this.showReleventIndustryList = true;
+    var rolesForRelevent: Role[] = new Array(0);
+    rolesForRelevent = this.rolesForMain;
+    this.rolesForRelevent = rolesForRelevent;
   }
 
   onCompentansiesandResponsibilitycomplete(data: any) {

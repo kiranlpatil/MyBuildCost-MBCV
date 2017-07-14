@@ -1,4 +1,5 @@
-<div class="section-container">
+<div class="modal-bg" *ngIf="highlightedSection.name=='ReleventIndustry'"></div>
+<div class="section-container" *ngIf="highlightedSection.name=='ReleventIndustry'">
   <!--
     <cn-tool-tip [message]="tooltipMessage"></cn-tool-tip>
   -->
@@ -6,21 +7,41 @@
     <div class="col-sm-9 profile-description">
       <div class="select-industry clearfix">
         <div class="col-sm-12 no-padding">
-          <h4>Select your Industry (Any One)</h4>
+          <span>{{suggestionMsgForReleventIndustry}}</span>
+          <input type="checkbox" name="relevent" value="relevent" (change)="getReleventIndustry($event)" [checked]="showRleventindustry == true"> Relevent Industry<br>
+          <div *ngIf="showRleventindustry">
           <div class="max-height">
-            <div class="select-option" *ngFor="let item of industries;let i = index">
+            <div class="select-option" *ngFor="let item of releventIndustries;let i = index">
               <label>
-                <input type="radio" name="item.name" id="{{item}}" value="{{item}}"
-                       (click)="onValueChange(item)" [checked]="true">
-                <span>{{item}}</span>
+                <input type="checkbox" name="item.name" id="{{item.name}}" value="{{item.name}}"
+                       (click)="onValueChange($event,i)" [checked]="item.isChecked == true">
+                <span>{{item.name}}</span>
               </label>
             </div>
+          </div>
           </div>
         </div>
       </div>
     </div>
     <div class="button-group clearfix">
       <button class="btn btn-success" (click)="onNext()" [disabled]="disableButton">Next</button>
+    </div>
+  </div>
+</div>
+
+<div class="section-container" *ngIf="highlightedSection.name!='ReleventIndustry'">
+  <div class="main-content">
+    <div class="compact-view clearfix">
+      <h4 class="heading">ReleventIndustry
+        <button class="btn-edit" (click)="highlightedSection.name='ReleventIndustry';showButton=false;disableButton=false" title="ReleventIndustry"></button>
+      </h4>
+      <!--<div class="clearfix">
+        <div class="select-option" *ngFor="let item of industries;let i = index">
+          <label>
+            <p>{{item}}</p>
+          </label>
+        </div>
+      </div>-->
     </div>
   </div>
 </div>

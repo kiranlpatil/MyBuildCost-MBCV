@@ -33,7 +33,7 @@
                               (onComplete)="selectExperiencedIndustry($event)"
                               [hidden]="!showIndustryExposure" (onNextComplete)="onIndustryExposureComplete($event)"
                               *ngIf="jobPosterModel != undefined && jobPosterModel.industry != undefined"></cn-industry-experience>
-      <cn-relevent-industry-list [hidden]="!showReleventIndustryList" (onNextComplete)="onReleventIndustryComplete($event)"></cn-relevent-industry-list>
+      <cn-relevent-industry-list [roles]="rolesForRelevent" [highlightedSection]="highlightedSection" [hidden]="!showReleventIndustryList" (onNextComplete)="onReleventIndustryComplete($event)"></cn-relevent-industry-list>
       <cn-compentacies-and-responsibilities [jobPosterModel]="jobPosterModel" [highlightedSection]="highlightedSection"
                                             (onComplete)="onCompentansiesandResponsibilitycomplete($event)"
                                             [hidden]="!showCompentensies"></cn-compentacies-and-responsibilities>

@@ -234,8 +234,10 @@ export function getReleventIndustryList(req: express.Request, res: express.Respo
   } catch (e) {
     res.status(403).send({message: e.message});
   }*/
+  var rolesparam = req.query.roles;
+console.log('----------------rolesparma----------------------------',rolesparam);
   __dirname = './';
-  var filepath = 'domain.json';
+  var filepath = 'relevent-industries.json';
   try {
     res.sendFile(filepath, {root: __dirname});
   }
