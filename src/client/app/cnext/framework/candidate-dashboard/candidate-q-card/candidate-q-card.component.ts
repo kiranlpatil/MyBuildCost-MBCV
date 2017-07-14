@@ -17,6 +17,7 @@ export class CandidateQCardComponent {
   @Input() job: JobQcard;
   @Input() type: string;
   @Output() onAction = new EventEmitter();
+  @Input() progress_bar_color : string='#0d75fa';
   candidateId: string;
   private showModalStyle: boolean = false;
   private hideButton: boolean = true;

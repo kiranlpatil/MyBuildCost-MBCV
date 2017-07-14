@@ -36,7 +36,7 @@
                 </div>
               </div>
               <div id="applied" class="tab-pane fade"><!--[hidden]="!hideSection"-->
-                <cn-candidate-job-list [type]="'apply'" [listOfJobs]="appliedJobs"
+                <cn-candidate-job-list [progress_bar_color]="'#ff9700'" [type]="'apply'" [listOfJobs]="appliedJobs"
                                        (onAction)="onActionOnApplyJob($event)"
                 ></cn-candidate-job-list><!--[hidden]="type !=='apply'"-->
                 <div class="empty-list-message" *ngIf="candidate.summary.numberOfJobApplied==0 ">
@@ -44,7 +44,7 @@
                 </div>
               </div>
               <div id="rejected" class="tab-pane fade"><!-- [hidden]="!hideSection" -->
-                <cn-candidate-job-list [type]="'block'" [listOfJobs]="blockedJobs"
+                <cn-candidate-job-list [progress_bar_color]="'#e91d62'" [type]="'block'" [listOfJobs]="blockedJobs"
                                        (onAction)="onActionOnBlockJob($event)"
                 ></cn-candidate-job-list><!-- [hidden]="type !=='block'" -->
                 <div class="empty-list-message"  *ngIf="candidate.summary.numberJobsBlocked==0 ">

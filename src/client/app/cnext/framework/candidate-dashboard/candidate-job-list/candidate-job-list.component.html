@@ -10,7 +10,7 @@
 </header>
   <div class="card-view clearfix">
     <div *ngFor="let job of listOfJobs| qcardlistsort:[qCardModel.sortValue,'aboveMatch','candidate']| qcardlistfilter:filterMeta:qCardCount ;let i=index">
-      <cn-candidate-q-card [job]="job" [type]="type" (onAction)="onActionPerform($event)"></cn-candidate-q-card>
+      <cn-candidate-q-card [progress_bar_color]="progress_bar_color"  [job]="job" [type]="type" (onAction)="onActionPerform($event)"></cn-candidate-q-card>
     </div>
   </div>
 </div>
