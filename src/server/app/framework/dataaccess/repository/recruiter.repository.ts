@@ -56,13 +56,13 @@ class RecruiterRepository extends RepositoryBase<IRecruiter> {
           let count : number = 0;
           for (let cap in job.capability_matrix) {
             if (job.capability_matrix[cap] === -1 || job.capability_matrix[cap] === 0 || job.capability_matrix[cap] === undefined) {
-            } else if (job.capability_matrix[cap] === candidate.capability_matrix[cap]) {
+            } else if (job.capability_matrix[cap] == candidate.capability_matrix[cap]) {
               job_qcard.exact_matching += 1;
               count++;
-            } else if (job.capability_matrix[cap] === (Number(candidate.capability_matrix[cap]) - ConstVariables.DIFFERENCE_IN_COMPLEXITY_SCENARIO)) {
+            } else if (job.capability_matrix[cap] == (Number(candidate.capability_matrix[cap]) - ConstVariables.DIFFERENCE_IN_COMPLEXITY_SCENARIO)) {
               job_qcard.above_one_step_matching += 1;
               count++;
-            } else if (job.capability_matrix[cap] === (Number(candidate.capability_matrix[cap]) + ConstVariables.DIFFERENCE_IN_COMPLEXITY_SCENARIO)) {
+            } else if (job.capability_matrix[cap] == (Number(candidate.capability_matrix[cap]) + ConstVariables.DIFFERENCE_IN_COMPLEXITY_SCENARIO)) {
               job_qcard.below_one_step_matching += 1;
               count++;
             } else {
