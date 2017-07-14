@@ -1,31 +1,34 @@
+import {Messages} from "../../shared/constants";
+
 export class ValidationService {
 
-  static getValidatorErrorMessage(validatorName: string, validatorValue?: any) {
+  static  getValidatorErrorMessage(validatorName: string, validatorValue?: any) {
     let config: any = {
       'required': 'Required',
-      'requiredEmail': 'Enter your email address',
-      'requiredPassword': 'Enter your password',
-      'requiredNewPassword': 'Enter a new password',
-      'requiredConfirmPassword': 'Enter confirm password',
-      'requiredCurrentPassword': 'Enter a current password',
-      'requiredFirstName': "You can't leave this empty",
-      'requiredLastName': "You can't leave this empty",
-      'requiredMobileNumber': "You can't leave this empty.",
-      'requiredPin': 'Enter your pin code',
-      'requiredDescription': 'Enter a description',
-      'requiredCompanyDescription': 'Please say something about your company ',
-      'requiredCompanyName': "You can't leave this empty",
-      'requiredOtp': 'Enter OTP received',
-      'invalidEmailAddress': 'Enter valid email address',
+      'requiredEmail': Messages.MSG_ERROR_VALIDATION_EMAIL_REQUIRED,
+      'requiredPassword': Messages.MSG_ERROR_VALIDATION_PASSWORD_REQUIRED,
+      'requiredNewPassword': Messages.MSG_ERROR_VALIDATION_NEWPASSWORD_REQUIRED,
+      'requiredConfirmPassword': Messages.MSG_ERROR_VALIDATION_CONFIRMPASSWORD_REQUIRED,
+      'requiredCurrentPassword': Messages.MSG_ERROR_VALIDATION_CURRENTPASSWORD_REQUIRED,
+      'requiredFirstName': Messages.MSG_ERROR_VALIDATION_FIRSTNAME_REQUIRED,
+      'requiredLastName': Messages.MSG_ERROR_VALIDATION_LASTNAME_REQUIRED,
+      'requiredMobileNumber': Messages.MSG_ERROR_VALIDATION_MOBILE_NUMBER_REQUIRED,
+      'requiredPin': Messages.MSG_ERROR_VALIDATION_PIN_REQUIRED,
+      'requiredDescription': Messages.MSG_ERROR_VALIDATION_DESCRIPTION_REQUIRED,
+      'requiredCompanyDescription': Messages.MSG_ERROR_VALIDATION_ABOUT_COMPANY_REQUIRED,
+      'requiredCompanyName': Messages.MSG_ERROR_VALIDATION_COMPANYNAME_REQUIRED,
+      'requiredOtp': Messages.MSG_ERROR_VALIDATION_OTP_REQUIRED,
+      'invalidEmailAddress': Messages.MSG_ERROR_VALIDATION_INVALID_EMAIL_REQUIRED,
       /*
        'invalidPassword': 'Passwords must contain at least 8 characters, including uppercase, lowercase letters, numbers and one special character($@_!%*?&).',
        */
-      'invalidPassword': 'Passwords must contain at least 8 characters and must be alpha-numeric.',
+      'invalidPassword': Messages.MSG_ERROR_VALIDATION_PASSWORD,
+      'invalidMobile': Messages.MSG_ERROR_VALIDATION_OTP_MOBILE_NUMBER,
+      'invalidBirthYear': Messages.MSG_ERROR_VALIDATION_BIRTH_YEAR,
+      'invalidPin': Messages.MSG_ERROR_VALIDATION_PIN_NUMBER,
+
       'maxlength': `Maximum ${validatorValue.requiredLength} characters`,
-      'minlength': `Minimum ${validatorValue.requiredLength} characters`,
-      'invalidMobile': 'This phone number format is not recognized. Please check the number.',
-      'invalidBirthYear': "You can't leave this empty.",
-      'invalidPin': 'Pin code should not be greater than 20 characters ',
+      'minlength': `Minimum ${validatorValue.requiredLength} characters`
 
     };
     return config[validatorName];

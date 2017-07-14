@@ -24,7 +24,7 @@
       <p>One Time Password (OTP) will be sent on the following mobile number.</p>
 
       <div class="form-group" id="inputMobile">
-        <control-messages [control]="userForm.controls.mobile_number"></control-messages>
+        <control-messages [control]="userForm.controls.mobile_number" [submitStatus]="submitMobileStatus"></control-messages>
         <input type="number" [(ngModel)]="model.mobile_number" formControlName="mobile_number" id="mobile_number"
                class="form-control" required/>
          <label>Mobile Number</label>
@@ -40,7 +40,7 @@
       <p>Verification link will be emailed on the following email address.</p>
 
       <div class="form-group" id="inputEmail">
-        <control-messages [control]="userForm.controls.email"></control-messages>
+        <control-messages [control]="userForm.controls.email" [submitStatus]="submitEmailStatus"></control-messages>
         <input type="email" [(ngModel)]="model.email" formControlName="email" id="email" maxlength="40"
                class="form-control" readonly/>
         <label>Email Address</label>

@@ -65,6 +65,66 @@ export class Messages {
   public static MSG_ERROR_FB_AUTH: string = 'User cancelled login or did not fully authorize.';
   public static MSG_ERROR_FB_domain_error: string = 'The domain of this URL isn not included in the app domains.';
   public static MSG_WARNING_ON_EDIT_CANDIDATE: string = 'This section can be updated only after.';
+
+  public static MSG_ERROR_VALIDATION_EMAIL_REQUIRED = 'Enter your email address.';
+  public static MSG_ERROR_VALIDATION_PASSWORD_REQUIRED = 'Enter your password.';
+  public static MSG_ERROR_VALIDATION_NEWPASSWORD_REQUIRED = 'Enter a new password';
+  public static MSG_ERROR_VALIDATION_CONFIRMPASSWORD_REQUIRED = 'Enter confirm password';
+  public static MSG_ERROR_VALIDATION_CURRENTPASSWORD_REQUIRED = 'Enter a current password';
+  public static MSG_ERROR_VALIDATION_FIRSTNAME_REQUIRED = "You can't leave this empty";
+  public static MSG_ERROR_VALIDATION_LASTNAME_REQUIRED = "You can't leave this empty";
+  public static MSG_ERROR_VALIDATION_MOBILE_NUMBER_REQUIRED = "You can't leave this empty.";
+  public static MSG_ERROR_VALIDATION_PIN_REQUIRED = 'Enter your pin code';
+  public static MSG_ERROR_VALIDATION_DESCRIPTION_REQUIRED = 'Enter a description';
+  public static MSG_ERROR_VALIDATION_ABOUT_COMPANY_REQUIRED = 'Please say something about your company ';
+  public static MSG_ERROR_VALIDATION_COMPANYNAME_REQUIRED = "You can't leave this empty";
+  public static MSG_ERROR_VALIDATION_OTP_REQUIRED = 'Enter OTP received';
+  public static MSG_ERROR_VALIDATION_INVALID_EMAIL_REQUIRED = 'Enter valid email address';
+  public static MSG_ERROR_VALIDATION_PASSWORD_MISMATCHED = 'Passwords does not match.';
+  public static MSG_ERROR_VALIDATION_BIRTHYEAR_REQUIRED = "You can't leave this empty.";
+  public static MSG_ERROR_VALIDATION_LOCATION_REQUIRED = "You can't leave this empty.";
+  public static MSG_ERROR_VALIDATION_HEADQUARTER_REQUIRED = "You can't leave this empty.";
+  public static MSG_ERROR_VALIDATION_COMPANYSIZE_REQUIRED = "You can't leave this empty.";
+  public static MSG_ERROR_VALIDATION_JOBTITLE_REQUIRED = "You can't leave this empty.";
+  public static MSG_ERROR_VALIDATION_CURRENTCOMPANY_REQUIRED = "You can't leave this empty.";
+  public static MSG_ERROR_VALIDATION_EDUCATION_REQUIRED = "You can't leave this empty.";
+  public static MSG_ERROR_VALIDATION_EXPERIENCE_REQUIRED = "You can't leave this empty.";
+  public static MSG_ERROR_VALIDATION_INDUSTRY_REQUIRED = "You can't leave this empty.";
+  public static MSG_ERROR_VALIDATION_AREAS_WORKED_REQUIRED = "Select areas you have worked.";
+  public static MSG_ERROR_VALIDATION_MAX_AREAS_WORKED_CROSSED = "You have selected maximum work areas.If you want to select a new work area, deselect any of the earlier ones.";
+  public static MSG_ERROR_VALIDATION_CAPABILITIES_REQUIRED = "Select your capabilities."
+  public static MSG_ERROR_VALIDATION_COMPLEXITY_REQUIRED = "You can't leave this empty.";
+  public static MSG_ERROR_VALIDATION_MAX_SKILLS_CROSSED = "You can select maximum "
+  public static MSG_ERROR_VALIDATION_KEYSKILLS_REQUIRED = "Select value from drop down."
+  public static MSG_ERROR_VALIDATION_INDUSTRY_EXPOSURE_REQUIRED = "You can't leave this empty.";
+  public static MSG_ERROR_VALIDATION_CURRENTSALARY_REQUIRED = "You can't leave this empty.";
+  public static MSG_ERROR_VALIDATION_RELOCATE_REQUIRED = "You can't leave this empty.";
+  public static MSG_ERROR_VALIDATION_NOTICEPERIOD_REQUIRED = "You can't leave this empty.";
+  public static MSG_ERROR_VALIDATION_MAX_WORD_ALLOWED = "words remaining";
+  public static MSG_ERROR_VALIDATION_DESIGNATION_REQUIRED = "You can't leave this empty.";
+  public static MSG_ERROR_VALIDATION_DEGREE_NAME_REQUIRED = "Degree Name is required";
+  public static MSG_ERROR_VALIDATION_UNIVERSITY_NAME_REQUIRED = "Board/University Name is required";
+  public static MSG_ERROR_VALIDATION_YEAR_OF_PASSING_REQUIRED = "Year Of Passing is required";
+  public static MSG_ERROR_VALIDATION_CERTIFICATION_NAME_REQUIRED = "Certification Name is required";
+  public static MSG_ERROR_VALIDATION_CERTIFICATION_AUTHORITY_REQUIRED = "Authority Name is required";
+  public static MSG_ERROR_VALIDATION_CERTIFICATION_YEAR_REQUIRED = "Year Of Passing is required";
+  public static MSG_ERROR_VALIDATION_AWARD_NAME_REQUIRED = "Award Name is required";
+  public static MSG_ERROR_VALIDATION_AWARD_AUTHORITY_REQUIRED = "Authority Name is required";
+  public static MSG_ERROR_VALIDATION_AWARD_YEAR_REQUIRED = "Issued Year is required";
+  public static MSG_ERROR_VALIDATION_JOB_TITLE_REQUIRED = "Enter job title";
+  public static MSG_ERROR_VALIDATION_HIRING_MANAGER_REQUIRED = "Enter hiring manager name";
+  public static MSG_ERROR_VALIDATION_HIRING_DEPARTMENT_REQUIRED = "Enter hiring department";
+  public static MSG_ERROR_VALIDATION_EDUCATIONAL_QUALIFICATION_REQUIRED = "Select educational qualification";
+  public static MSG_ERROR_VALIDATION_MIN_EXPERIENCE_REQUIRED = "Select minimum experience expected";
+  public static MSG_ERROR_VALIDATION_MAX_EXPERIENCE_REQUIRED = "Select maximum experience expected";
+  public static MSG_ERROR_VALIDATION_MIN_SALARY_REQUIRED = "Select minimum salary offered";
+  public static MSG_ERROR_VALIDATION_MAX_SALARY_REQUIRED = "Select maximum salary offered";
+  public static MSG_ERROR_VALIDATION_JOINING_PERIOD_REQUIRED = "Select joining period";
+  public static MSG_ERROR_VALIDATION_OTP_MOBILE_NUMBER = "Please provide valid mobile number.";
+  public static MSG_ERROR_VALIDATION_PASSWORD = "Passwords must contain at least 8 characters and must be alpha-numeric.";
+  public static MSG_ERROR_VALIDATION_BIRTH_YEAR = "You can't leave this empty.";
+  public static MSG_ERROR_VALIDATION_PIN_NUMBER = "Pin code should not be greater than 20 characters.";
+
 }
 
 export class NavigationRoutes {

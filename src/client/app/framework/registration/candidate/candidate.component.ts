@@ -5,7 +5,7 @@ import {CandidateDetail} from "./candidate";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ValidationService} from "../../shared/customvalidations/validation.service";
 import {AppSettings, CommonService, Message, MessageService, NavigationRoutes} from "../../shared/index";
-import {ImagePath, LocalStorage} from "../../shared/constants";
+import {ImagePath, LocalStorage, Messages} from "../../shared/constants";
 import {LocalStorageService} from "../../shared/localstorage.service";
 import {DateService} from "../../../cnext/framework/date.service";
 import {Location} from "../location";
@@ -34,6 +34,7 @@ export class CandidateComponent implements OnInit {
   private submitStatus: boolean;
   private birthYearErrorMessage: string;
   private locationErrorMessage: string;
+  private passwordMismatchMessage: string;
 
   constructor(private commonService: CommonService, private _router: Router, private dateService: DateService,
               private candidateService: CandidateService, private messageService: MessageService, private formBuilder: FormBuilder) {
@@ -81,10 +82,10 @@ export class CandidateComponent implements OnInit {
       this.model.email == '' || this.model.password == '' || this.model.confirm_password == '' ||
       this.storedLocation.city == undefined || this.model.birth_year == undefined) {
       if(this.model.birth_year == undefined) {
-        this.birthYearErrorMessage = "You can't leave this empty.";
+        this.birthYearErrorMessage = Messages.MSG_ERROR_VALIDATION_BIRTHYEAR_REQUIRED;
       }
       if(this.storedLocation.city == undefined) {
-        this.locationErrorMessage = "You can't leave this empty.";
+        this.locationErrorMessage = Messages.MSG_ERROR_VALIDATION_LOCATION_REQUIRED;
       }
       this.submitStatus = true;
       return;
@@ -137,13 +138,14 @@ export class CandidateComponent implements OnInit {
   }
 
   makePasswordConfirm(): boolean {
-       if (this.model.confirm_password !== this.model.password && this.model.confirm_password !== "") {
-      this.isPasswordConfirm = true;
-      return true;
-    } else {
-      this.isPasswordConfirm = false;
-      return false;
-    }
+  if (this.model.confirm_password !== this.model.password && this.model.confirm_password !== "") {
+    this.isPasswordConfirm = true;
+    this.passwordMismatchMessage = Messages.MSG_ERROR_VALIDATION_PASSWORD_MISMATCHED;
+    return true;
+  } else {
+    this.isPasswordConfirm = false;
+    return false;
+  }
   }
 
 }
