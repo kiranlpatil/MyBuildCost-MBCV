@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from "@angular/core";
 import {BaseService} from "../../../framework/shared/httpservices/base.service";
 import {ProfessionalData} from "../model/professional-data";
 import {ProfessionalDataService} from "./professional-data.service";
@@ -15,7 +15,7 @@ import {FormBuilder} from "@angular/forms";
   styleUrls: ['professional-data.component.css']
  })
 
-export class ProfessionalDataComponent extends BaseService implements OnInit {
+export class ProfessionalDataComponent extends BaseService implements OnInit,OnChanges {
   @Input() candidate: Candidate;
   @Input() highlightedSection: Section;
   @Output() onComplete = new EventEmitter();
