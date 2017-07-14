@@ -22,7 +22,7 @@ export class Messages {
   public static MSG_SUCCESS_REGISTRATION: string = 'Kindly verify your account.';
   public static MSG_SUCCESS_CHANGE_MOBILE_NUMBER: string = 'Mobile number changed successfully.';
   public static MSG_SUCCESS_RESEND_VERIFICATION_CODE: string = 'New One Time Password (OTP) sent on your mobile number.';
-  public static MSG_SUCCESS_MAIL_VERIFICATION: string = 'Verification email sent successfully on your email account. Kindly proceed by clikcing on th elink provided in your email.';
+  public static MSG_SUCCESS_MAIL_VERIFICATION: string = 'Verification email sent successfully on your email account. Kindly proceed by clicking on the link provided in your email.';
   public static MSG_SUCCESS_NEWREGISTRATION: string = 'Registration successful. Mobile number verified. Kindly sign in.';
   public static MSG_SUCCESS_RESET_PASSWORD: string = 'Your password is reset successfully.';
   public static MSG_SUCCESS_CHANGE_PASSWORD: string = 'Your password has been changed successfully.';
@@ -282,7 +282,7 @@ export class ImagePath {
 }
 
 export class ProjectAsset {
-  public static APP_NAME = 'C-NEXT';
+  public static APP_NAME = 'Job Mosis';
   public static TAG_LINE = 'The Awesome Web Experience';
   public static UNDER_LICENECE = '&#169; 2016 Techprimelab Software Pvt. Ltd.';
 }

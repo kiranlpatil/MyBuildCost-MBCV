@@ -153,7 +153,7 @@ class UserService {
             }
             else {
               this.company_name = recruiter[0].company_name;
-              console.log("recruiter company  is :", this.company_name);
+
               this.mid_content = content.replace('$link$', link).replace('$first_name$', this.company_name).replace('$app_name$', this.APP_NAME);
 
               var mailOptions = {
