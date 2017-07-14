@@ -17,14 +17,17 @@
       <!--<div class="saving-loader">Saving...</div>-->
         <button class="btn btn-primary" (click)="onNext()" [disabled]="currentComplexity===complexityIds.length">Next</button>
     </div>
-    <span class="question-count">{{currentComplexity+1}}/{{complexityIds.length}}</span>
+    <span class="question-count">{{currentComplexity+1}} of {{complexityIds.length}}</span>
+<!--
+    <span  class="question-count"> {{currentComplexityDetails.complexity_number}}</span><span *ngIf="currentComplexityDetails.total_complexity_in_capability"> of {{currentComplexityDetails.total_complexity_in_capability}}</span>
+-->
     <button class="btn-prev" (click)="onPrevious()" ><span class="glyphicon glyphicon-chevron-left"></span></button>
   </div>
 </div>
 <div class="section-container " *ngIf="highlightedSection.name!='Complexities'">
   <div class="main-content clearfix">
     <div class="compact-view">
-      <a>
+      <a data-toggle="collapse" data-target="#demo">
         <h4 class="heading-compact">Capabilities
           <span class="add-more" (click)="highlightedSection.name='Capabilities'"><span class="glyphicon glyphicon-plus-sign"></span>Add More</span>
           <!--<button class="btn-edit" (click)="edit()"
@@ -35,14 +38,14 @@
         <div class="col-sm-12 no-padding" (click)="edit()">
           <cn-capability-compare [isCompact]="true" [rowsToShow]="5" [capabilities]="capabilities"></cn-capability-compare>
         </div>
-        <div class="see-more" *ngIf="!showMore">
+        <!--<div class="see-more" *ngIf="!showMore">
           <p>Show more</p>
           <span class="glyphicon glyphicon-chevron-down"></span>
         </div>
         <div class="see-more" *ngIf="showMore">
           <span class="glyphicon glyphicon-chevron-up"></span>
           <p>Show less</p>
-        </div>
+        </div>-->
       </div>
     </div>
   </div>
