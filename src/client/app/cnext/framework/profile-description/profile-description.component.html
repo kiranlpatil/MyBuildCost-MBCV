@@ -22,7 +22,7 @@
             <label>Job Title</label>
             <input name="jobTitle" placeholder="e.g. Software Engineer" class="form-control"
                    [(ngModel)]="candidate.jobTitle" (ngModelChange)="onJobTitleChange()">
-            <div class="error-messages" *ngIf="(candidate.jobTitle == '' || candidate.jobTitle == undefined) && !isValid">You can't leave this empty.</div>
+            <div class="error-messages" *ngIf="(candidate.jobTitle == '' || candidate.jobTitle == undefined) && !isValid">{{jobTitleValidationMessage}}</div>
           </div>
 
 
@@ -31,16 +31,23 @@
             <!--<control-messages [control]="professionalDetailForm.controls.education"></control-messages>-->
             <input name="currentcompany" class="form-control" placeholder=""
                    [(ngModel)]="candidate.professionalDetails.currentCompany">
-            <div class="error-messages" *ngIf="(candidate.professionalDetails.currentCompany == '' || candidate.professionalDetails.currentCompany == undefined) && !isValid">You can't leave this empty.</div>
+            <div class="error-messages" *ngIf="(candidate.professionalDetails.currentCompany == '' || candidate.professionalDetails.currentCompany == undefined) && !isValid">{{currentCompanyValidationMessage}}</div>
           </div>
 
-          <div class="form-group">
+          <!--<div class="form-group">
             <label>Current Location</label>
-            <!--<control-messages [control]="professionalDetailForm.controls.education"></control-messages>-->
+            &lt;!&ndash;<control-messages [control]="professionalDetailForm.controls.education"></control-messages>&ndash;&gt;
             <input name="location" class="form-control" placeholder=""
                    [(ngModel)]="candidate.professionalDetails.location">
-            <!--<div class="error-messages" *ngIf="islocationValid && !isValid">You can't leave this empty.</div>-->
+            &lt;!&ndash;<div class="error-messages" *ngIf="islocationValid && !isValid">You can't leave this empty.</div>&ndash;&gt;
+          </div>-->
+          <div class="form-group">
+            <label>Current Location</label>
+            <input type="text" class="form-control" placeholder="" (setAddress)="getAddress($event)" (city)="selectedCity($event)" mygoogleplace/>
+            <!--<div class="error-messages" *ngIf='locationErrorMessage !== undefined'>{{locationErrorMessage}}</div>-->
           </div>
+
+
 
           <div class="form-group">
             <label>Highest Qualification</label>
@@ -48,7 +55,7 @@
             <select [(ngModel)]="candidate.professionalDetails.education">
               <option *ngFor="let c of educationList" [ngValue]="c">{{c}}</option>
             </select>
-            <div class="error-messages" *ngIf="(candidate.professionalDetails.education == '' || candidate.professionalDetails.education == undefined) && !isValid">You can't leave this empty.</div>
+            <div class="error-messages" *ngIf="(candidate.professionalDetails.education == '' || candidate.professionalDetails.education == undefined) && !isValid">{{educationValidationMessage}}</div>
           </div>
 
           <div class="form-group">
@@ -57,7 +64,7 @@
             <select [(ngModel)]="candidate.professionalDetails.experience">
               <option *ngFor="let c of experienceList" [ngValue]="c">{{c}}</option>
             </select>
-            <div class="error-messages" *ngIf="(candidate.professionalDetails.experience == '' || candidate.professionalDetails.experience == undefined) && !isValid">You can't leave this empty.</div>
+            <div class="error-messages" *ngIf="(candidate.professionalDetails.experience == '' || candidate.professionalDetails.experience == undefined) && !isValid">{{experienceValidationMessage}}</div>
           </div>
 
         </div>

@@ -1,3 +1,5 @@
+import {Location} from "../../../framework/registration/location";
+
 export class ProfessionalData {
   education: string = '';
   experience: string = '';
@@ -6,5 +8,5 @@ export class ProfessionalData {
   relocate: string = '';
   industryExposure: string = '';
   currentCompany: string = '';
-  location: string = '';
+  location: Location = new Location();
 }

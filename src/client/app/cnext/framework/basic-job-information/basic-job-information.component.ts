@@ -7,6 +7,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {JobLocation} from "../model/job-location";
 import {MyGoogleAddress} from "../../../framework/registration/candidate/google-our-place/my-google-address";
 import {FilterService} from "../filters/filter/filter.service";
+import {Messages} from "../../../framework/shared/constants";
 
 @Component({
   moduleId: module.id,
@@ -31,8 +32,22 @@ export class BasicJobInformationComponent implements OnInit,OnChanges {
   private noticePeriodList:any = [];
   private address: string;
   private showButton: boolean = true;
+  private submitStatus: boolean;
   private storedIndustry: Industry;
   private storedLocation: JobLocation = new JobLocation();
+  private requiredLocationValidationMessage = Messages.MSG_ERROR_VALIDATION_JOINING_PERIOD_REQUIRED
+
+  private requiredJoiningPeriodValidationMessage = Messages.MSG_ERROR_VALIDATION_JOINING_PERIOD_REQUIRED;
+  private requiredMaxSalaryValidationMessage = Messages.MSG_ERROR_VALIDATION_MAX_SALARY_REQUIRED;
+  private requiredMinSalaryValidationMessage = Messages.MSG_ERROR_VALIDATION_MIN_SALARY_REQUIRED
+  private requiredMaxExperienceValidationMessage = Messages.MSG_ERROR_VALIDATION_MAX_EXPERIENCE_REQUIRED;
+  private requiredMinExperienceValidationMessage = Messages.MSG_ERROR_VALIDATION_MIN_EXPERIENCE_REQUIRED;
+  private requiredEducationalValidationMessage = Messages.MSG_ERROR_VALIDATION_EDUCATIONAL_QUALIFICATION_REQUIRED;
+  private requiredHiringDepartmentValidationMessage = Messages.MSG_ERROR_VALIDATION_HIRING_DEPARTMENT_REQUIRED;
+  private requiredHiringManagerValidationMessage = Messages.MSG_ERROR_VALIDATION_HIRING_MANAGER_REQUIRED
+  private requiredTitleValidationMessage = Messages.MSG_ERROR_VALIDATION_JOB_TITLE_REQUIRED;
+
+
   tooltipMessage: string =  '<ul>' +
       '<li><p>1. This job name would be displayed in the posting.</p></li>' +
       '<li><p>2. Name of the manager who has given the requirement for this job.</p></li>' +
@@ -97,6 +112,10 @@ export class BasicJobInformationComponent implements OnInit,OnChanges {
   }
 
   onNext() {
+    if(!this.jobPostForm.valid || this.storedIndustry==undefined) {
+      this.submitStatus = true;
+      return;
+    }
     this.jobPosterModel = this.jobPostForm.value;
     if (this.storedIndustry) {
       this.jobPosterModel.industry = this.storedIndustry;

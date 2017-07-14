@@ -1,10 +1,12 @@
 import {Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
 import {Industry} from "../model/industry";
 import {Candidate, Section} from "../model/candidate";
-import {AppSettings} from "../../../framework/shared/constants";
+import {AppSettings, Messages} from "../../../framework/shared/constants";
 import {DashboardService} from "../../../framework/dashboard/dashboard.service";
 import {CandidateDetail} from "../../../framework/registration/candidate/candidate";
 import {ProfessionalDataService} from "../professional-data/professional-data.service";
+import {Location} from "../../../framework/registration/location";
+import {MyGoogleAddress} from "../../../framework/registration/candidate/google-our-place/my-google-address";
 
 @Component({
   moduleId: module.id,
@@ -34,6 +36,13 @@ export class ProfileDescriptionComponent implements OnInit {
   private isValid: boolean = true;
   private islocationValid: boolean = true;
   private image_path: string = 'assets/framework/images/dashboard/profile.png';
+  private jobTitleValidationMessage = Messages.MSG_ERROR_VALIDATION_JOBTITLE_REQUIRED;
+  private currentCompanyValidationMessage = Messages.MSG_ERROR_VALIDATION_CURRENTCOMPANY_REQUIRED
+  private educationValidationMessage= Messages.MSG_ERROR_VALIDATION_EDUCATION_REQUIRED;
+  private experienceValidationMessage= Messages.MSG_ERROR_VALIDATION_EXPERIENCE_REQUIRED;
+  private storedLocation: Location = new Location();
+
+
   tooltipMessage: string =
     '<ul>' +
     '<li><p>1. Enter your current or latest job title. </p></li>' +
@@ -105,7 +114,7 @@ export class ProfileDescriptionComponent implements OnInit {
       (this.candidate.professionalDetails.education == '' ||
       this.candidate.professionalDetails.education == undefined ) ||
       (this.candidate.professionalDetails.experience == '' ||
-      this.candidate.professionalDetails.experience == undefined ) ){
+      this.candidate.professionalDetails.experience == undefined )|| this.storedLocation.city == undefined){
       this.isValid = false;
       return;
     }
@@ -132,25 +141,17 @@ export class ProfileDescriptionComponent implements OnInit {
       (this.candidate.professionalDetails.education == '' ||
       this.candidate.professionalDetails.education == undefined ) ||
       (this.candidate.professionalDetails.experience == '' ||
-      this.candidate.professionalDetails.experience == undefined ) ){
+      this.candidate.professionalDetails.experience == undefined ) || this.storedLocation.city == undefined ){
       this.isValid = false;
       return;
     }
     console.log("from save");
 //    this.compactView = true;
-    if (this.changedIndustry.name !== this.savedIndustry || this.candidate.jobTitle !== this.savedJobTitle) {
-      if(this.changedIndustry.name !== this.savedIndustry) {
-        this.showModalStyle = !this.showModalStyle;
-      }
-      else {
-        this.savedJobTitle = this.candidate.jobTitle ;
-        this.highlightedSection.name = 'none';
-        this.highlightedSection.isDisable = false;
-        this.onComplete.emit(this.candidate);
-      }
-    } else {
-      this.onCancel();
-    }
+    this.candidate.professionalDetails.location = this.storedLocation;
+    this.savedJobTitle = this.candidate.jobTitle ;
+    this.highlightedSection.name = 'none';
+    this.highlightedSection.isDisable = false;
+    this.onComplete.emit(this.candidate);
   }
 
   onJobTitleChange() {
@@ -193,6 +194,17 @@ export class ProfileDescriptionComponent implements OnInit {
       this.onCancel();
     }
   }
+
+  getAddress(address: MyGoogleAddress) {
+    //this.locationErrorMessage = undefined;
+    this.storedLocation.city = address.city;
+    this.storedLocation.state = address.state;
+    this.storedLocation.country = address.country;
+  }
+
+
+
+
 }
 
 

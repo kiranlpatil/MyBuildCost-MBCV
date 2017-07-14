@@ -67,6 +67,22 @@ export function updateDetails(req: express.Request, res: express.Response, next:
     delete params.access_token;
     var userId: string = req.params.id;
     var auth: AuthInterceptor = new AuthInterceptor();
+
+    var userService = new UserService();
+    var query = {"_id": userId};
+    var updateData = {"location": updatedCandidate.professionalDetails.location};
+    userService.findOneAndUpdate(query, updateData, {new: true}, (error, result) => {
+      if (error) {
+        next(error);
+      }
+      else {
+        res.send({
+          "status": "Success",
+          "data": {"message": "Password changed successfully"}
+        });
+      }
+    });
+
     var candidateService = new CandidateService();
     candidateService.update(userId, updatedCandidate, (error, result) => {
       if (error) {
