@@ -31,7 +31,7 @@ export class ProficienciesComponent {
   private showButton: boolean = true;
   private submitStatus: boolean;
   private requiredKeySkillsValidationMessage = Messages.MSG_ERROR_VALIDATION_KEYSKILLS_REQUIRED;
-  private maxKeySkillsValidationMessage = Messages.MSG_ERROR_VALIDATION_MAX_SKILLS_CROSSED + this.maxProficiencies;
+  private maxKeySkillsValidationMessage = Messages.MSG_ERROR_VALIDATION_MAX_SKILLS_CROSSED + ValueConstant.MAX_PROFECIENCES;
 
   onProficiencyComplete(proficiency: string[]) {
     /*if (proficiency.length > 0) {

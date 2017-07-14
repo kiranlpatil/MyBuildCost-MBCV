@@ -121,7 +121,7 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
       });
     this.isComplexityButtonEnable = false;
     if (this.isCandidate) {
-      this.showModalStyle = !this.showModalStyle;
+     // this.showModalStyle = !this.showModalStyle;
       this.highlightedSection.isLocked = true;
     }
     this.complexityService.change(true);
@@ -143,9 +143,14 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
   }
 
   onCapabilityAnswered(capability: Capability) {
-
     this.capabilities[this.currentCapabilityNumber] = capability;
-    this.onNextCapability();
+    let currentNumber = this.currentCapabilityNumber;
+    if (currentNumber + 1 === this.capabilities.length) {
+      this.saveComplexity();
+    }
+    else if(this.currentCapabilityNumber< this.capabilities.length){
+      this.onNextCapability();
+    }
   }
 
   oncurrentComplexityAnswered(complexityDetails: ComplexityDetails) {
@@ -157,9 +162,7 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
   getCapabilityDetail(currentCapability: number) {
 
     this.currentCapability = this.capabilities[this.currentCapabilityNumber];
-    if (this.currentCapabilityNumber === this.capabilities.length) {
-      this.saveComplexity();
-    }
+
 
   }
 
@@ -186,7 +189,7 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
     this.slideToRight = !this.slideToRight;
     if (this.currentComplexity === this.complexityIds.length - 1) {
       if (this.isCandidate) {
-        this.showHideModal();
+        this.saveComplexity();
       } else {
         this.saveComplexity();
       }
