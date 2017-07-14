@@ -40,7 +40,17 @@
         font-size: 13px;
         float:left;
         margin: 0 7px;
+        line-height: 32px;
       }
+    }
+
+    .preview-btn {
+      position: fixed;
+      top: 50%;
+      left: 0;
+      margin: 0 !important;
+      padding: 0 !important;
+      min-width: inherit !important;
     }
 
     .btn-next,
