@@ -30,6 +30,10 @@ class RecruiterSchema {
         type: [String]
       },
       postedJobs: [{
+        isJobPosted:{
+          type: Boolean,
+          default: false
+        },
         capability_matrix : {
           type : Object
         },

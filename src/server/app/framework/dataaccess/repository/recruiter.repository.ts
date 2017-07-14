@@ -19,6 +19,9 @@ class RecruiterRepository extends RepositoryBase<IRecruiter> {
     let jobs_cards: JobQCard[] = new Array(0);
     for (let recruiter of recruiters) {
       for (let job of recruiter.postedJobs) {
+       /* if(!job.isJobPosted) {
+          continue;
+        }*/
         let isPresent: boolean = false;
         for (let proficiency of candidate.proficiencies) {
           if (job.proficiencies.indexOf(proficiency) != -1) {
