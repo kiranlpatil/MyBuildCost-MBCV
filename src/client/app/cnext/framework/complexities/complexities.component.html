@@ -38,10 +38,10 @@
     <!--
         <span  class="question-count"> {{currentComplexityDetails.complexity_number}}</span><span *ngIf="currentComplexityDetails.total_complexity_in_capability"> of {{currentComplexityDetails.total_complexity_in_capability}}</span>
     -->
-    <button class="btn-prev" (click)="onPrevious()"><span class="glyphicon glyphicon-chevron-left"
-                                                          *ngIf="isCandidate"></span></button>
-    <button class="btn-prev" (click)="onPreviousCapability()"><span class="glyphicon glyphicon-chevron-left"
-                                                                    *ngIf="!isCandidate"></span></button>
+    <button class="btn-prev" (click)="onPrevious()"  *ngIf="isCandidate"><span class="glyphicon glyphicon-chevron-left"
+                                                         ></span></button>
+    <button class="btn-prev" (click)="onPreviousCapability()" *ngIf="!isCandidate"><span class="glyphicon glyphicon-chevron-left"
+                                                                    ></span></button>
   </div>
 </div>
 <div class="section-container " *ngIf="highlightedSection.name!='Complexities'">

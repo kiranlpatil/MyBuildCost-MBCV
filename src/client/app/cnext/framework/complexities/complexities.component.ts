@@ -224,10 +224,6 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
 
   onPrevious() {
     this.isValid = true;
-    if(this.complexities[this.complexityIds[this.currentComplexity]] == -1){
-      this.isValid = false;
-      return;
-    }
     if (this.currentComplexity == 0) {
       this.highlightedSection.name ='Capabilities';
       return;
