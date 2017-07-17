@@ -43,24 +43,25 @@ export class ReleventIndustryListComponent implements OnInit {
     }
   }
 
-  getReleventIndustries() { debugger
+  getReleventIndustries() {
     console.log('-------------------this.roles-------',this.roles);
     if(this.roles.length) {
       this.roles.forEach(x => this.workAreas.push(x.name));
       console.log('-------------------this.roles----arrrray---',this.workAreas);
       this.releventIndustryService.getReleventIndustries(this.workAreas)
         .subscribe(
-          data => {
-            this.onGetIndustriesSuccess(data);
+          res => {
+            this.onGetIndustriesSuccess(res);
           },
           error => {
             this.onError(error);
           });
     }
   }
-  onGetIndustriesSuccess(data:any) {
-    this.releventIndustries = data.industries;
-    console.log('--------data-----',data);
+  onGetIndustriesSuccess(res:any) {
+    this.releventIndustries = new Array(0);
+    this.releventIndustries = <ReleventIndustry[]>res.data;
+    console.log('--------data-----',res.data);
   }
   onError(error:any) {
   console.log('----errorr------');

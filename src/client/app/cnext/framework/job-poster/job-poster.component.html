@@ -35,9 +35,10 @@
                               [hidden]="!showIndustryExposure" (onNextComplete)="onIndustryExposureComplete($event)"
                               *ngIf="jobPosterModel != undefined && jobPosterModel.industry != undefined"></cn-industry-experience>
     </div>
-    <div class="wrapper">
-      <cn-relevent-industry-list [roles]="rolesForRelevent" [highlightedSection]="highlightedSection" [hidden]="!showReleventIndustryList" (onNextComplete)="onReleventIndustryComplete($event)"></cn-relevent-industry-list>
-    </div>
+     <div class="wrapper">
+       <cn-relevent-industry-list [roles]="rolesForRelevent" [highlightedSection]="highlightedSection" [hidden]="!showReleventIndustryList" (onNextComplete)="onReleventIndustryComplete($event)"></cn-relevent-industry-list>
+
+     </div>
     <div class="wrapper">
       <cn-compentacies-and-responsibilities [jobPosterModel]="jobPosterModel" [highlightedSection]="highlightedSection"
                                             (onComplete)="onCompentansiesandResponsibilitycomplete($event)"

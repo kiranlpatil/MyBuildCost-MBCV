@@ -209,39 +209,3 @@ export function getList(req: express.Request, res: express.Response, next: any) 
     res.status(403).send({message: e.message});
   }
 }
-
-export function getReleventIndustryList(req: express.Request, res: express.Response, next: any) {
- /* try {
-    let data: any = {
-      'jobProfileId': req.params.id,
-      'listName': req.params.listName
-    };
-    let recruiterService = new RecruiterService();
-    recruiterService.getReleventIndustriesList(data, (error: any, response: any) => {
-      if (error) {
-        next({
-          reason: Messages.MSG_ERROR_RSN_EXISTING_USER,
-          message: Messages.MSG_ERROR_VERIFY_ACCOUNT,
-          code: 403
-        });
-      } else {
-        res.send({
-          'status': 'success',
-          'data': response,
-        });
-      }
-    });
-  } catch (e) {
-    res.status(403).send({message: e.message});
-  }*/
-  var rolesparam = req.query.roles;
-console.log('----------------rolesparma----------------------------',rolesparam);
-  __dirname = './';
-  var filepath = 'relevent-industries.json';
-  try {
-    res.sendFile(filepath, {root: __dirname});
-  }
-  catch (e) {
-    res.status(403).send({message: e.message});
-  }
-}

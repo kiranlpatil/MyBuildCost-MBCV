@@ -66,6 +66,7 @@ export class Messages {
   public static MSG_ERROR_FB_domain_error: string = 'The domain of this URL isn not included in the app domains.';
   public static MSG_WARNING_ON_EDIT_CANDIDATE: string = 'This section can be updated only after.';
   public static SUGGESTION_MSG_FOR_RELEVENT_INDUSTRY = 'Based on the profile you have selected, we suggest to search candidate from following industries for matching profiles. Remove if you dont want to search candidates from any specific industry';
+  public static SUGGESTION_MSG_ABOUT_DOMAIN = 'In addition to IT industry, do you want the candidate to have MANDATORY experience in any specific Domain? If yes, select such MUST HAVE DOMAINS.';
 }
 
 export class NavigationRoutes {

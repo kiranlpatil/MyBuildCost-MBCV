@@ -49,6 +49,29 @@ class IndustryService {
       }
     });
   }
+  getReleventIndustryList(data: any, callback: (error: any, result: any) => void) {
+
+    //let query = { roles: { $elemMatch: {"name":{$in: JSON.parse(data)}}}};
+    let query = { "roles.name": {$in :JSON.parse(data)}};
+    this.industryRepository.retrieve(query, (err, res) => {
+      if (err) {
+        callback(err, null);
+      } else {
+        var industries:any[] = new Array(0);
+        if(res.length > 0) {
+          for (let item of res) {
+             var obj = {name:item.name};
+             industries.push(obj);
+          }
+          callback(null, industries);
+        } else {
+          var industries:any[] = new Array(0);
+          callback(null, industries);
+        }
+      }
+    });
+
+  }
 }
 
 Object.seal(IndustryService);

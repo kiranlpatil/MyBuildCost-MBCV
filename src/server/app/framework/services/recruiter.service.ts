@@ -333,10 +333,6 @@ class RecruiterService {
     });
   }
 
-  /*getReleventIndustriesList(id: any, callback: (error: any, result: any) => void) {
-
-  }*/
-
 }
 
 Object.seal(RecruiterService);

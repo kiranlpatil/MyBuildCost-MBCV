@@ -72,3 +72,38 @@ export function create(req: express.Request, res: express.Response, next: any) {
     res.status(403).send({"status": Messages.STATUS_ERROR, "error_message": e.message});
   }
 }
+
+export function getReleventIndustryList(req: express.Request, res: express.Response, next: any) {
+  try {
+    var rolesparam = req.query.roles;
+    console.log('----------------rolesparma----------------------------',JSON.parse(rolesparam))
+    let industryService = new IndustryService();
+    industryService.getReleventIndustryList(rolesparam, (error: any, response: any) => {
+      if (error) {
+        next({
+          reason: Messages.MSG_ERROR_RSN_EXISTING_USER,
+          message: Messages.MSG_ERROR_VERIFY_ACCOUNT,
+          code: 403
+        });
+      } else {
+        res.send({
+          'status': 'success',
+          'data': response,
+        });
+      }
+    });
+  } catch (e) {
+    res.status(403).send({message: e.message});
+  }
+
+  /*console.log('----------------rolesparma----------------------------',JSON.parse(rolesparam));
+   console.log('----------------rolesparma----------------------------',JSON.parse(rolesparam)[0]);
+   __dirname = './';
+   var filepath = 'relevent-industries.json';
+   try {
+   res.sendFile(filepath, {root: __dirname});
+   }
+   catch (e) {
+   res.status(403).send({message: e.message});
+   }*/
+}

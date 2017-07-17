@@ -200,7 +200,7 @@ export class JobPosterComponent implements OnInit {
     this.highlightedSection.name = 'ReleventIndustry';
     this.showReleventIndustryList = true;
     var rolesForRelevent: Role[] = new Array(0);
-    rolesForRelevent = this.rolesForMain;
+    rolesForRelevent = this.jobForRole;
     this.rolesForRelevent = rolesForRelevent;
   }
 
