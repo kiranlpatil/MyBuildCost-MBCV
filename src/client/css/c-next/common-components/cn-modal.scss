@@ -13,6 +13,7 @@ $text-color: #666;
   .modal-content {
     background: $modal-bg;
     border-radius: 8px;
+    user-select: none;
   }
 
   p {
