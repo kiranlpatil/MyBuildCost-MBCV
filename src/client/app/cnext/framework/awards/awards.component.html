@@ -65,7 +65,7 @@
             <div *ngIf="i == 0">
               <li>
                 <p>{{item.name}} at {{item.issuedBy}} in {{item.year}}</p>
-                <p *ngIf="candidate.awards.length != 1">( {{candidate.awards.length-1}} more )</p>
+                <p class="more-elements" *ngIf="candidate.awards.length != 1">{{candidate.awards.length-1}} more</p>
               </li>
             </div>
           </div>
