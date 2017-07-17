@@ -34,7 +34,7 @@ export class IndustryListComponent implements OnChanges {
   ngOnChanges(changes: any) {
     if (changes.selectedIndustry !== undefined && changes.selectedIndustry.currentValue !== undefined) {
       this.selectedIndustry = changes.selectedIndustry.currentValue;
-      this.choosedIndustry = this.selectedIndustry;
+      this.choosedIndustry = Object.assign(this.selectedIndustry);
     }
   }
   onValueChange(industry: Industry) {
@@ -48,12 +48,20 @@ export class IndustryListComponent implements OnChanges {
       this.isValid = false;
       return;
     }
-    this.valueChange.emit(this.choosedIndustry);
+    if (this.choosedIndustry.name === this.selectedIndustry.name) {
+
+    }
+    else {
+      this.valueChange.emit(this.choosedIndustry);
+    }
     this.highlightedSection.name = 'Work-Area';
     this.highlightedSection.isDisable = false;
   }
 
   onPrevious() {
+    if (this.choosedIndustry.name !== this.selectedIndustry.name) {
+      this.choosedIndustry = Object.assign(this.selectedIndustry);
+    }
     if (LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE) === 'true') {
       this.highlightedSection.name = 'Profile';
     } else {
