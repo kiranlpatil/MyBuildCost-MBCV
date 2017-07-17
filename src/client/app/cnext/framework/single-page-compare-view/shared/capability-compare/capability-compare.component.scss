@@ -38,14 +38,15 @@ $white: #ffffff;
     position: absolute;
     background: #3694d1;
     padding: 5px;
-    bottom: 0;
+    bottom: inherit;
     min-height: 59px;
     wwidth: 160%;
     left: -37px;
     box-shadow: 0px 0px 4px 0px #757575;
     color : white !important;
     font-size: 12px;
-    z-index: 9;
+    z-index: 99;
+    top: 0;
     border: 1px solid $white;
     span {
       max-width: auto;
@@ -54,6 +55,9 @@ $white: #ffffff;
       display: block;
       position: relative;
       word-break: keep-all;
+      img {
+        border-radius: 24px;
+      }
     }
     .not-match-overlay {
       display: none;
@@ -73,13 +77,14 @@ $white: #ffffff;
     position: absolute;
     background: $light-green;
     padding: 5px;
-    bottom: 0;
+    bottom: inherit;
     min-height: 59px;
     width: 160%;
     left: -37px;
     box-shadow: 0px 0px 4px 0px #757575;
     font-size: 12px;
-    z-index: 9;
+    z-index: 99;
+    top: 0;
     border: 1px solid $white;
     span {
       max-width: auto;
@@ -114,13 +119,14 @@ $white: #ffffff;
     position: absolute;
     background: $green;
     padding: 5px;
-    bottom: 0;
+    bottom: inherit;
     min-height: 59px;
     width: 160%;
     left: -37px;
     box-shadow: 0px 0px 4px 0px #757575;
     font-size: 12px;
-    z-index: 9;
+    z-index: 99;
+    top: 0;
     border: 1px solid $white;
     span {
       max-width: auto;
@@ -157,13 +163,14 @@ $white: #ffffff;
     position: absolute;
     background: $orange;
     padding: 5px;
-    bottom: 0;
+    bottom: inherit;
     min-height: 59px;
     width: 160%;
     left: -37px;
     box-shadow: 0px 0px 4px 0px #757575;
     font-size: 12px;
-    z-index: 9;
+    z-index: 99;
+    top: 0;
     border: 1px solid $white;
     span {
       max-width: auto;
@@ -198,13 +205,14 @@ $white: #ffffff;
     position: absolute;
     background: $red;
     padding: 5px;
-    bottom: 0;
+    bottom: inherit;
     min-height: 59px;
     width: 160%;
     left: -37px;
     box-shadow: 0px 0px 4px 0px #757575;
     font-size: 12px;
-    z-index: 9;
+    z-index: 99;
+    top: 0;
     border: 1px solid $white;
     span {
       max-width: auto;
@@ -245,13 +253,14 @@ $white: #ffffff;
     position: absolute;
     background: $gray;
     padding: 5px;
-    bottom: 0;
+    bottom: inherit;
     min-height: 59px;
     width: 160%;
     left: -37px;
     box-shadow: 0px 0px 4px 0px #757575;
     font-size: 12px;
-    z-index: 9;
+    z-index: 99;
+    top: 0;
     border: 1px solid $white;
     span {
       max-width: auto;
@@ -349,6 +358,9 @@ $white: #ffffff;
     display: table-cell;
     position: absolute;
     font-style: italic;
+    img {
+      border-radius: 24px;
+    }
   }
 }
 
