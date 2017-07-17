@@ -39,7 +39,8 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
   private isValid: boolean =true;
   private currentCapability: Capability = new Capability();
   private currentCapabilityNumber: number;
-  private requiedValidationMessage = Messages.MSG_ERROR_VALIDATION_COMPLEXITY_REQUIRED;
+  private requiedValidationMessageCandidate = Messages.MSG_ERROR_VALIDATION_COMPLEXITY_REQUIRED_CANDIDATE;
+  private requiedValidationMessageRecruiter = Messages.MSG_ERROR_VALIDATION_COMPLEXITY_REQUIRED_RECRUITER;
   tooltipCandidateMessage: string = "<ul><li>" +
     "<p>1. This section provides a list of complexity scenarios for your selected capabilities." +
     "If more than one options are applicable to you, choose the option where you can demonstrate a higher level of expertise.</p></li>" +
@@ -167,12 +168,30 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
   }
 
   onNextCapability() {
+    //this.currentCapabilityNumber++;
+    for(let complexity of this.capabilities[this.currentCapabilityNumber].complexities){
+      if(complexity.complexityDetails.userChoice == undefined){
+        this.isValid = false;
+        return;
+      }
+    }
 
+    let currentCapability = this.currentCapabilityNumber;
+    if(currentCapability + 1 == this.capabilities.length){
+      this.isValid = true;
+      this.highlightedSection.name ='Proficiencies';
+      return;
+    }
+    this.isValid = true;
     this.getCapabilityDetail(++this.currentCapabilityNumber);
   }
 
   onPreviousCapability() {
-
+    this.isValid = true;
+    if(this.currentCapabilityNumber == 0){
+      this.highlightedSection.name ='Capabilities';
+      return;
+    }
     this.getCapabilityDetail(--this.currentCapabilityNumber);
   }
   onNext() {
@@ -209,12 +228,14 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
       this.isValid = false;
       return;
     }
-    if (this.currentComplexity >= 0) {
-      this.getComplexityDetails(this.complexityIds[--this.currentComplexity]);
-    }
     if (this.currentComplexity == 0) {
       this.highlightedSection.name ='Capabilities';
+      return;
     }
+    if (this.currentComplexity > 0) {
+      this.getComplexityDetails(this.complexityIds[--this.currentComplexity]);
+    }
+
     if (this.slideToRight === true) {
       this.slideToRight = !this.slideToRight;
     }

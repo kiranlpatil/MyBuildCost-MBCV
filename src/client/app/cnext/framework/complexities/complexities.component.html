@@ -7,7 +7,8 @@
       <h4 class="heading" *ngIf="!isCandidate && currentCapability">Which is the most appropriate level that candidate
         is required to handle in <span class="capability-name">{{currentCapability.name}}</span>
       </h4>
-      <div class="error-messages" *ngIf="!isValid"><p>{{requiedValidationMessage}}</p></div>
+      <div class="error-messages" *ngIf="!isValid && isCandidate"><p>{{requiedValidationMessageCandidate}}</p></div>
+      <div class="error-messages" *ngIf="!isValid && !isCandidate"><p>{{requiedValidationMessageRecruiter}}</p></div>
       <div class="complexity-container scrollable-content" *ngIf="isCandidate">
         <cn-question-answer [complexityDetails]="currentComplexityDetails" [slideQuestionToLeft]="slideToLeft"
                             [slideQuestionToRight]="slideToRight"
