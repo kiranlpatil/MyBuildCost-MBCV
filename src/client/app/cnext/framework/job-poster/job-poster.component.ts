@@ -69,6 +69,8 @@ export class JobPosterComponent implements OnInit {
     this.showModalStyle = !this.showModalStyle;
     this.jobPosterModel.isJobPosted = true;
     this.jobPosterModel.postingDate = new Date();
+    let expiringDateInSeconds = new Date().getTime() + 2592000000;
+    this.jobPosterModel.expiringDate = new Date(expiringDateInSeconds);
     this.jobPostService.postJob(this.jobPosterModel).subscribe(
       data => {
         this.onSuccess(data.data.postedJobs[0]._id);
@@ -77,6 +79,8 @@ export class JobPosterComponent implements OnInit {
 
   updateJob() {
     this.jobPosterModel.postingDate = new Date();
+    let expiringDateInSeconds = new Date().getTime() + 2592000000;
+    this.jobPosterModel.expiringDate = new Date(expiringDateInSeconds);
     this.jobPostService.postJob(this.jobPosterModel).subscribe(
       data => {
         this.jobPosterModel._id = data.data.postedJobs[0]._id;

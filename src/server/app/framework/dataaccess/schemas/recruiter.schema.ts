@@ -138,6 +138,9 @@ class RecruiterSchema {
         },
         postingDate: {
           type: Date
+        },
+        expiringDate: {
+          type: Date
         }
       }]
     }, {versionKey: false});

@@ -98,10 +98,11 @@ class SearchService {
 
   getMatchingJobProfile(candidate: CandidateModel, callback: (error: any, result: any) => void) {
 
+    let currentDate = new Date();
     let data = {
       'postedJobs.industry.name': candidate.industry.name,
       'postedJobs.proficiencies': {$in: candidate.proficiencies},
-      'postedJobs.interestedIndustries': {$in: candidate.interestedIndustries}
+      'postedJobs.expiringDate': {$gte: currentDate}
     };
     let excluded_fields = {
       'postedJobs.industry': 0,
