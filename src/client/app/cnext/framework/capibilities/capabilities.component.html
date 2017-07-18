@@ -9,7 +9,7 @@
         <h4 class="heading" *ngIf="!isCandidate">Capabilities that are required in the candidate
         </h4>
         <div class="error-messages" *ngIf="emptyCapabilities">{{requiredCapabilitiesValidationMessage}}</div>
-        <div class="col-sm-12 scrollable-content capabilities">
+        <div class="scrollable-content capabilities">
           <div class="capability-type">
             <span class="capability-option" *ngFor="let role of roles">
               <!--<h5 class="sub-areas">Area Of Work - {{role.name}}</h5>-->

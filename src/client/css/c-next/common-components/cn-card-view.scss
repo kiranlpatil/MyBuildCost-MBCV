@@ -152,7 +152,7 @@ $pink: #e91d62;
     }
 
     &:hover {
-      box-shadow: 0 0 5px 2px rgba(52, 148, 209, 0.4);
+      box-shadow: 0 0 5px 2px rgba(13, 117, 250, 0.4);
 
       .button-group,
       ul {
@@ -163,7 +163,7 @@ $pink: #e91d62;
 
   header {
     margin: 10px 10px 0;
-    padding-bottom: 0px;
+    padding-bottom: 0;
   }
 
   .canvas-container {
@@ -265,7 +265,7 @@ header {
       border-radius: 0;
       box-shadow: none;
       padding: 6px;
-      width: 100px;
+      width: 130px;
     }
   }
 

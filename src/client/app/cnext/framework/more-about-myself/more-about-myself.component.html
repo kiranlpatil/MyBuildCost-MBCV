@@ -4,8 +4,8 @@
   <div class="main-content edit-modal-content clearfix">
     <div class="col-sm-9 no-padding">
       <h4 class="heading">About Myself (Optional)</h4>
-      <div class="col-sm-12 scrollable-content">
-        <div class="col-sm-8 more-about-myself">
+      <div class="scrollable-content">
+        <div class="col-sm-8 no-padding more-about-myself">
         <textarea class="form-control" [(ngModel)]="candidate.aboutMyself" (ngModelChange)="addAboutMyself()"
                   [maxlength]="maxword" Placeholder="Enter About Yourself"></textarea>
           <p class="error-messages">{{remainingWords + remainingWordsMessage}}</p>

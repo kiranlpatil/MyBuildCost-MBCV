@@ -9,53 +9,10 @@ $primary-option: #1c75bd;
   left: 15px;
 }
 
-.work-area {
-  padding: 0 15px 0 30px;
-  .btn {
-    &:focus,
-    &:active {
-      outline: none;
-    }
-  }
-}
-
-.work-area-section {
-  position: absolute;
-  top: 90px;
-  left: 142px;
-  width: 36%;
-
-  .main-content {
-    padding-left: 7px;
-    padding-top: 4px;
-    background: transparent;
-
-    .compact-view {
-      border: 0;
-      padding: 0;
-    }
-  }
-}
-
-.recruite-view {
-  width: 50%;
-  float: left;
-}
-
 .compact-view {
   &:hover {
     .btn-edit {
       opacity: 1;
-    }
-  }
-}
-
-@media screen and (max-width: 767px) {
-  .work-area {
-    padding: 0;
-
-    .btn-success {
-      float: none;
     }
   }
 }

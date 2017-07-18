@@ -1,40 +1,32 @@
-<div class="col-sm-12 no-padding" [formGroup]="certificateForm">
-  <div>
-    <div class="row">
-      <div class="col-sm-12">
-        <div class="form-group">
-          <label>Certification Name</label>
-          <input type="text" class="form-control" formControlName="name" required/>
-          <div class="error-messages"
-               *ngIf="(certificateForm.get('name').touched || submitStatus)&& certificateForm.get('name').hasError('required')">
-          {{requiredNameValidationMessage}}
-          </div>
-        </div>
+<div [formGroup]="certificateForm">
+  <div class="col-sm-12 no-padding" >
+    <div class="form-group">
+      <label>Certification Name</label>
+      <input type="text" class="form-control" formControlName="name" required/>
+      <div class="error-messages"
+           *ngIf="(certificateForm.get('name').touched || submitStatus)&& certificateForm.get('name').hasError('required')">
+      {{requiredNameValidationMessage}}
       </div>
+    </div>
 
-      <div class="col-sm-12">
-        <div class="form-group">
-          <label>Certification authority</label>
-          <input class="form-control" type="text" formControlName="issuedBy" required/>
-          <div class="error-messages"
-               *ngIf="(certificateForm.get('issuedBy').touched || submitStatus)&& certificateForm.get('issuedBy').hasError('required')">
-          {{requiredAuthorityValidationMessage}}
-          </div>
-        </div>
+    <div class="form-group">
+      <label>Certification authority</label>
+      <input class="form-control" type="text" formControlName="issuedBy" required/>
+      <div class="error-messages"
+           *ngIf="(certificateForm.get('issuedBy').touched || submitStatus)&& certificateForm.get('issuedBy').hasError('required')">
+      {{requiredAuthorityValidationMessage}}
       </div>
+    </div>
 
-      <div class="col-sm-12">
-        <div class="form-group">
-          <label>Year </label>
-          <select class="select" formControlName="year">
-            <option *ngFor="let academicYear of yearList" [ngValue]="academicYear">{{academicYear}}
-            </option>
-          </select>
-          <div class="error-messages"
-               *ngIf="(certificateForm.get('year').touched || submitStatus)&& certificateForm.get('year').hasError('required')">
-            {{requiredYearValidationMessage}}
-          </div>
-        </div>
+    <div class="form-group">
+      <label>Year </label>
+      <select class="select" formControlName="year">
+        <option *ngFor="let academicYear of yearList" [ngValue]="academicYear">{{academicYear}}
+        </option>
+      </select>
+      <div class="error-messages"
+           *ngIf="(certificateForm.get('year').touched || submitStatus)&& certificateForm.get('year').hasError('required')">
+        {{requiredYearValidationMessage}}
       </div>
     </div>
 

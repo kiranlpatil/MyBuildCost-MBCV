@@ -81,18 +81,16 @@ $switch-shadow: rgba(0, 0, 0, 0.2);
 
 .profile-visibility-wrapper {
   .main-content {
-    cursor: default;
+    .compact-view {
+      cursor: default !important;
+    }
   }
-}
-
-.profile-main-content {
-  cursor: default !important;
 }
 
 .scrollable-content {
   overflow: auto;
   height: 385px;
-  padding-left: 30px;
+  padding: 0 15px 0 70px;
 }
 
 .main-content {
@@ -100,7 +98,6 @@ $switch-shadow: rgba(0, 0, 0, 0.2);
   text-align: left;
   position: relative;
   background: $white;
-  cursor: pointer;
 
   .heading {
     color: $black !important;
@@ -111,6 +108,10 @@ $switch-shadow: rgba(0, 0, 0, 0.2);
     text-align: left;
     font-family: 'gothamrnd-light';
     border-radius: 5px;
+    overflow: visible !important;
+    text-overflow: clip !important;
+    white-space: normal !important;
+    width: 100% !important;
 
     span {
       background: transparent;
@@ -179,9 +180,10 @@ $switch-shadow: rgba(0, 0, 0, 0.2);
     box-shadow: 0 0 1px 0 $theme-color inset, 0 0 1px 0 $theme-color;
     color: $white;
     font-size: 13px;
-    padding: 3px 15px;
+    padding: 1px 15px;
     height: auto !important;
     margin: 5px 5px 0 0;
+    font-family: 'gothamrnd-book';
 
     &:focus,
     &:active,
@@ -248,8 +250,9 @@ $switch-shadow: rgba(0, 0, 0, 0.2);
   }
 
   label {
-    font-size: 13px;
+    font-size: 14px;
     color: $black;
+    font-family: 'gothamrnd-book';
   }
 
   .button-group {
@@ -285,8 +288,8 @@ $switch-shadow: rgba(0, 0, 0, 0.2);
     left: 15px;
     background: transparent;
     border: 0;
-    background: url('../../assets/c-next/profile-creator/previous.png');
-    padding: 12px 10px;
+    background: url('../../assets/c-next/profile-creator/previous.png') center center;
+    padding: 12px 7px;
 
     span {
       display: none;
@@ -308,7 +311,7 @@ $switch-shadow: rgba(0, 0, 0, 0.2);
 }
 
 .description-form {
-  padding: 0 15px;
+  padding: 0;
 
   .panel-default {
     //background: #f8f8f8;
@@ -368,6 +371,9 @@ $switch-shadow: rgba(0, 0, 0, 0.2);
 .btn-add-another {
   background: transparent;
   color: $theme-color;
+  font-size: 14px !important;
+  font-family: 'gothamrnd-book';
+  font-weight: 600;
 }
 
 .divider {

@@ -1,4 +1,4 @@
-$text-color: #666;
+$text-color: #333;
 $white: #fff;
 $option-border-color: #e8e8e8;
 $primary-option: #3694d1;
@@ -25,13 +25,14 @@ $secondary-option: #3694d1;
     & + span {
       color: $text-color;
       cursor: pointer;
-      font-size: 13px;
+      font-size: 14px;
       font-weight: 600;
       padding: 2px 10px 2px 25px;
       min-width: 100px;
       display: inline-block;
       text-align: left;
       user-select: none;
+      font-family: 'gothamrnd-book';
     }
 
     &:checked {

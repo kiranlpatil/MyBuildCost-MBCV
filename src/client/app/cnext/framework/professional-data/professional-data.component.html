@@ -5,58 +5,57 @@
     <div class="col-sm-9 no-padding">
       <h4 class="heading">Professional Preferences (Mandatory)</h4>
       <!-- <form [formGroup]="professionalDetailForm" (ngSubmit)="onNext(jobPostForm.value)">-->
-      <div class="col-sm-9 professional-data scrollable-content clearfix">
+      <div class="professional-data scrollable-content clearfix">
+        <div class="col-sm-8 no-padding">
+          <div class="form-group">
+            <label>Current Salary</label>
+            <!-- <control-messages [control]="professionalDetailForm.controls.currentSalary"></control-messages>-->
+            <select [(ngModel)]="candidate.professionalDetails.currentSalary" (change)="saveProfessionalData()">
+              <option *ngFor="let c of salaryList" [ngValue]="c">{{c}}</option>
+            </select>
+            <div class="error-messages"
+                 *ngIf="candidate.professionalDetails.currentSalary == '' && !isValid">
+              <p>{{requiedSalaryValidationMessage}}</p>
+            </div>
 
-        <div class="col-sm-12 form-gruop">
-          <label>Current Salary</label>
-          <!-- <control-messages [control]="professionalDetailForm.controls.currentSalary"></control-messages>-->
-          <select [(ngModel)]="candidate.professionalDetails.currentSalary" (change)="saveProfessionalData()">
-            <option *ngFor="let c of salaryList" [ngValue]="c">{{c}}</option>
-          </select>
-          <div class="error-messages"
-               *ngIf="candidate.professionalDetails.currentSalary == '' && !isValid">
-            <p>{{requiedSalaryValidationMessage}}</p>
           </div>
 
-        </div>
+          <div class="form-group">
+            <label>Ready To Relocate?</label>
+            <!--  <control-messages [control]="professionalDetailForm.controls.relocate"></control-messages>-->
+            <select [(ngModel)]="candidate.professionalDetails.relocate" (change)="saveProfessionalData()">
+              <option *ngFor="let c of realocationList" [ngValue]="c">{{c}}</option>
+            </select>
+            <div class="error-messages"
+                 *ngIf="candidate.professionalDetails.relocate == '' && !isValid">
+              <p>{{requiedRelocateValidationMessage}}</p>
+            </div>
+          </div>
 
-        <div class="col-sm-12 form-gruop">
-          <label>Ready To Relocate?</label>
-          <!--  <control-messages [control]="professionalDetailForm.controls.relocate"></control-messages>-->
-          <select [(ngModel)]="candidate.professionalDetails.relocate" (change)="saveProfessionalData()">
-            <option *ngFor="let c of realocationList" [ngValue]="c">{{c}}</option>
-          </select>
-          <div class="error-messages"
-               *ngIf="candidate.professionalDetails.relocate == '' && !isValid">
-            <p>{{requiedRelocateValidationMessage}}</p>
+          <div class="form-group">
+            <label>Company Culture</label>
+            <!-- <control-messages [control]="professionalDetailForm.controls.noticePeriod"></control-messages>-->
+            <select [(ngModel)]="candidate.professionalDetails.industryExposure" (change)="saveProfessionalData()">
+              <option *ngFor="let c of industryExposureList" [ngValue]="c">{{c}}</option>
+            </select>
+            <div class="error-messages"
+                 *ngIf="candidate.professionalDetails.industryExposure == '' && !isValid">
+              <p>{{requiedIndustryExposureValidationMessage}}</p>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Notice Period</label>
+            <!-- <control-messages [control]="professionalDetailForm.controls.noticePeriod"></control-messages>-->
+            <select [(ngModel)]="candidate.professionalDetails.noticePeriod" (change)="saveProfessionalData()">
+              <option *ngFor="let c of noticePeriodList" [ngValue]="c">{{c}}</option>
+            </select>
+            <div class="error-messages"
+                 *ngIf="candidate.professionalDetails.noticePeriod == '' && !isValid">
+              <p>{{requiedNoticePeriodValidationMessage}}</p>
+            </div>
           </div>
         </div>
-
-        <div class="col-sm-12 form-gruop">
-          <label>Company Culture</label>
-          <!-- <control-messages [control]="professionalDetailForm.controls.noticePeriod"></control-messages>-->
-          <select [(ngModel)]="candidate.professionalDetails.industryExposure" (change)="saveProfessionalData()">
-            <option *ngFor="let c of industryExposureList" [ngValue]="c">{{c}}</option>
-          </select>
-          <div class="error-messages"
-               *ngIf="candidate.professionalDetails.industryExposure == '' && !isValid">
-            <p>{{requiedIndustryExposureValidationMessage}}</p>
-          </div>
-        </div>
-
-        <div class="col-sm-12 form-gruop">
-          <label>Notice Period</label>
-          <!-- <control-messages [control]="professionalDetailForm.controls.noticePeriod"></control-messages>-->
-          <select [(ngModel)]="candidate.professionalDetails.noticePeriod" (change)="saveProfessionalData()">
-            <option *ngFor="let c of noticePeriodList" [ngValue]="c">{{c}}</option>
-          </select>
-          <div class="error-messages"
-               *ngIf="candidate.professionalDetails.noticePeriod == '' && !isValid">
-            <p>{{requiedNoticePeriodValidationMessage}}</p>
-          </div>
-        </div>
-
-
       </div>
     </div>
     <div class="col-sm-3 no-padding">

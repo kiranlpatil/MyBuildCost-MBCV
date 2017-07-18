@@ -15,32 +15,3 @@ $border-color: #e8e8e8;
     }
   }
 }
-
-.select-industry {
-  padding: 0 15px 0 30px;
-  .btn {
-    &:focus,
-    &:active {
-      outline: none;
-    }
-  }
-
-  .btn-success {
-    float: right;
-    margin-top: 15px;
-  }
-}
-
-@media only screen and (max-width: 767px) {
-  .select-industry {
-    .btn-success {
-      float: none;
-    }
-  }
-}
-
-@media screen and (max-width: 767px) {
-  .select-industry {
-    padding: 0;
-  }
-}

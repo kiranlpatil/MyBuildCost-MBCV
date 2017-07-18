@@ -4,19 +4,17 @@
     <cn-tool-tip [message]="tooltipMessage"></cn-tool-tip>
   -->
   <div class="main-content clearfix edit-modal-content">
-    <div class="col-sm-9 profile-description no-padding">
+    <div class="col-sm-9 no-padding">
       <h4 class="heading" *ngIf="isCandidate">Select your Industry (Any One)</h4>
       <h4 class="heading" *ngIf="!isCandidate">Select industry in which candidate is expected to work (Any One)</h4>
       <div class="error-messages" *ngIf="!isValid"><p>{{requiredFieldMessage}}</p></div>
       <div class="scrollable-content">
-        <div class="col-sm-12 select-industry">
-          <div class="select-option" *ngFor="let item of industries;let i = index">
-            <label>
-              <input type="radio" name="item.name" id="{{item.name}}" value="{{item.name}}"
-                     (click)="onValueChange(item)" [checked]="item.name===selectedIndustry.name">
-              <span>{{item.name}}</span>
-            </label>
-          </div>
+        <div class="select-option" *ngFor="let item of industries;let i = index">
+          <label>
+            <input type="radio" name="item.name" id="{{item.name}}" value="{{item.name}}"
+                   (click)="onValueChange(item)" [checked]="item.name===selectedIndustry.name">
+            <span>{{item.name}}</span>
+          </label>
         </div>
       </div>
     </div>

@@ -4,7 +4,7 @@ $purple: #7264b5;
 $highlight: #596c7d;
 $white: #fff;
 $text-color: #999;
-$theme-color: #3694d1;
+$theme-color: #0d75fa;
 
 .welcome-text {
   height: 100vh;
@@ -133,6 +133,28 @@ $theme-color: #3694d1;
   /*.search {
     float: right;
   }*/
+}
+
+.panel {
+  position: relative;
+
+  .btn-edit-job {
+    display: none;
+    background: $theme-color;
+    padding: 3px 10px;
+    color: #fff;
+    border: 1px solid $theme-color;
+    position: absolute;
+    right: 5px;
+    bottom: 5px;
+    z-index: 10;
+  }
+
+  &:hover {
+    .btn-edit-job {
+      display: block;
+    }
+  }
 }
 
 @media only screen and (min-width: 1367px) {

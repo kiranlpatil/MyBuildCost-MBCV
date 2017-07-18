@@ -5,16 +5,18 @@
       <h4 class="heading">Awards</h4>
       <div class="scrollable-content">
         <form class="description-form" [formGroup]="awardDetail" novalidate>
-          <div class="col-sm-8" formArrayName="awards">
-            <div *ngFor="let history of awardDetail.controls.awards.controls; let i=index"
-                 class="panel panel-default">
-              <div>
-            <span class="glyphicon glyphicon-trash pull-right"
-                  *ngIf="awardDetail.controls.awards.controls.length>0 && awardDetail.controls.awards.controls.length !==1 "
-                  (click)="removeAward(i)"></span>
-              </div>
-              <div class="panel-body" [formGroupName]="i">
-                <cn-award [group]="awardDetail.controls.awards.controls[i]" [submitStatus] = "submitStatus"></cn-award>
+          <div class="row">
+            <div class="col-sm-8 no-padding" formArrayName="awards">
+              <div *ngFor="let history of awardDetail.controls.awards.controls; let i=index"
+                       class="panel panel-default">
+                <div>
+                  <span class="glyphicon glyphicon-trash pull-right"
+                        *ngIf="awardDetail.controls.awards.controls.length>0 && awardDetail.controls.awards.controls.length !==1 "
+                        (click)="removeAward(i)"></span>
+                </div>
+                <div class="panel-body" [formGroupName]="i">
+                  <cn-award [group]="awardDetail.controls.awards.controls[i]" [submitStatus] = "submitStatus"></cn-award>
+                </div>
               </div>
             </div>
           </div>

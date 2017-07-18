@@ -5,21 +5,21 @@
       <h4 class="heading">Employment History</h4>
       <div class="scrollable-content">
         <form class="description-form" [formGroup]="employeeHistory" novalidate>
-          <!--empHistories-->
-          <div class="col-sm-8" formArrayName="employeeHistories">
-            <div *ngFor="let history of employeeHistory.controls.employeeHistories.controls; let i=index"
-                 class="panel panel-default">
-              <div>
+          <div class="row">
+            <div class="col-sm-8 no-padding" formArrayName="employeeHistories">
+              <div *ngFor="let history of employeeHistory.controls.employeeHistories.controls; let i=index"
+                   class="panel panel-default">
+                <div>
                 <span class="glyphicon glyphicon-trash pull-right"
-                *ngIf="employeeHistory.controls.employeeHistories.controls.length>0 && employeeHistory.controls.employeeHistories.controls.length !==1 "
-                (click)="removeEmployeeHistory(i)"></span>
-              </div>
-              <div class="panel-body" [formGroupName]="i">
-                <cn-employee-history [group]="employeeHistory.controls.employeeHistories.controls[i]" [submitStatus] = "submitStatus"></cn-employee-history>
+                      *ngIf="employeeHistory.controls.employeeHistories.controls.length>0 && employeeHistory.controls.employeeHistories.controls.length !==1 "
+                      (click)="removeEmployeeHistory(i)"></span>
+                </div>
+                <div class="panel-body" [formGroupName]="i">
+                  <cn-employee-history [group]="employeeHistory.controls.employeeHistories.controls[i]" [submitStatus] = "submitStatus"></cn-employee-history>
+                </div>
               </div>
             </div>
           </div>
-
           <div class="error-messages"
                *ngIf="submitStatus">
             <p>Please mentioned service period</p>

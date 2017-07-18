@@ -6,7 +6,7 @@
       <h4 class="heading" *ngIf="isCandidate">Select Area of Work That Describes Your Current Focus (Max 3)</h4>
       <h4 class="heading" *ngIf="!isCandidate">In which Area Candidate Is Expected To Work </h4>
       <div class="error-messages" *ngIf="emptyWorkAreas">{{requiredValidationMessage}}</div>
-      <div class="col-sm-12 work-area scrollable-content">
+      <div class="scrollable-content">
         <div class="select-option" *ngFor="let item of roles;let i = index">
           <label>
             <input type="checkbox" name="choices"
