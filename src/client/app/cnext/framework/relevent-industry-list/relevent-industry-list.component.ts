@@ -2,7 +2,6 @@ import {Component, OnInit, Output, EventEmitter, Input} from '@angular/core';
 import {ReleventIndustryListService} from "./relevent-industry-list.service";
 import {LocalStorage, Messages} from "../../../framework/shared/constants";
 import {Section} from "../model/candidate";
-import {Observable} from "rxjs/Observable";
 import {ReleventIndustry} from "./relevent-industry";
 import {Role} from "../model/role";
 import {Industry} from "../model/industry";
@@ -27,7 +26,6 @@ export class ReleventIndustryListComponent implements OnInit {
   suggestionMsgForReleventIndustry:string;
   showRleventindustry:boolean=false;
   private showButton: boolean = true;
-  //arr = Observable.of(this.releventIndustries);
 
 
   tooltipMessage: string =
@@ -40,9 +38,6 @@ export class ReleventIndustryListComponent implements OnInit {
   }
 
   ngOnInit() {
-    /*this.arr.subscribe(data => {
-      this.releventIndustries2 = data;
-    });*/
     this.suggestionMsgForReleventIndustry = Messages.SUGGESTION_MSG_FOR_RELEVENT_INDUSTRY;
     this.getReleventIndustries();
 
@@ -81,10 +76,6 @@ export class ReleventIndustryListComponent implements OnInit {
     this.onNextComplete.emit(this.workAreasToUpdate);
   }
   onSave() {
-    /*if(this.selectedIndustries.length==0) {
-      this.submitStatus = true;
-      return;
-    }*/
     this.highlightedSection.name = 'none';
     this.highlightedSection.isDisable = false;
     this.onNextComplete.emit(this.workAreasToUpdate);
@@ -112,21 +103,6 @@ export class ReleventIndustryListComponent implements OnInit {
     });
 
     this.goNext();
-    /*if(this.workAreasToUpdate.length) {
-      /!*this.releventIndustryService.updateSelectedReleventIndustries(this.workAreasToUpdate)
-        .subscribe(
-          (data: any) => this.onUpdateSuccess(data),
-          (error: any) => this.onUpdateError(error)
-        )*!/
-    } else {
-      this.goNext();
-    }*/
   }
-  /*onUpdateSuccess(data:any) {
-   this.goNext();
-  }
-  onUpdateError(error:any) {
-  console.log('onUpdateError');
-  }*/
 
 }
