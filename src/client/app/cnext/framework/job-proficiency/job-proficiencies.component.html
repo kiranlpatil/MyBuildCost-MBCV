@@ -5,14 +5,14 @@
       <div class="col-sm-9 no-padding">
         <h4 class="heading">Keywords that describe candidates area of epertise </h4>
         <div class="scrollable-content proficiency-container">
-          <div class="col-sm-12">
+          <div class="col-sm-12 no-padding">
             <label>Mandatory Key Skills</label>
           </div>
           <cn-multi-select [type]="'Mandatory'" [data]="proficiencies" [maxLength]="maxNumberOfMandatory"
                            [selectedData]="jobPosterModel.proficiencies"
                            (onComplete)="onMandatoryProficiencyComplete($event)"></cn-multi-select>
           <div class="clearfix">&nbsp;</div>
-          <div class="col-sm-12">
+          <div class="col-sm-12 no-padding">
             <label>Additional Key Skills</label>
           </div>
           <cn-multi-select [type]="'Additional'" [data]="proficiencies" [maxLength]="maxNumberOfAdditional"
