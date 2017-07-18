@@ -65,8 +65,9 @@ export class CandidateComponent implements OnInit {
 
   selectYearModel(year: any) {
     this.birthYearErrorMessage = undefined;
-    this.passingYear = year;
-    this.model.birth_year = year;
+    if(year == ""){
+      this.userForm.controls['birth_year'].setValue(undefined);
+    }
   }
 
   /*getAddress(address: MyGoogleAddress) {
