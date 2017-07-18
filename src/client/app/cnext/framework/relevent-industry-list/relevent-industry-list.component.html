@@ -5,12 +5,12 @@
   -->
   <div class="main-content clearfix edit-modal-content">
     <div class="col-sm-9 profile-description">
-      <div class="select-industry clearfix">
-        <div class="col-sm-12 no-padding">
-          <span>{{suggestionMsgForReleventIndustry}}</span>
-          <input type="checkbox" name="relevent" value="relevent" (change)="getReleventIndustry($event)" [checked]="showRleventindustry == true"> Relevent Industry<br>
+      <h4 class="heading">Would you like to search matching candidates from these additional Industries?</h4>
+      <div class="scrollable-content">
+        <p>{{suggestionMsgForReleventIndustry}}</p>
+        <input type="checkbox" name="relevent" value="relevent" (change)="getReleventIndustry($event)" [checked]="showRleventindustry == true"> Relevent Industry
+        <div class="col-sm-12 no-padding select-industry">
           <div *ngIf="showRleventindustry">
-          <div class="max-height">
             <div class="select-option" *ngFor="let item of releventIndustries;let i = index">
               <label>
                 <input type="checkbox" name="item.name" id="{{item.name}}" value="{{item.name}}"
@@ -19,9 +19,11 @@
               </label>
             </div>
           </div>
-          </div>
         </div>
       </div>
+    </div>
+    <div class="col-sm-3 no-padding">
+      <cn-tool-tip [message]="tooltipMessage"></cn-tool-tip>
     </div>
     <button class="btn-prev" (click)="highlightedSection.name='IndustryExposure'"><span
       class="glyphicon glyphicon-chevron-left"></span></button>
@@ -40,14 +42,14 @@
 <div class="section-container" *ngIf="highlightedSection.name!='ReleventIndustry'">
   <div class="main-content">
     <div class="compact-view clearfix">
-      <h4 class="heading">ReleventIndustry
-        <button class="btn-edit" (click)="highlightedSection.name='ReleventIndustry';showButton=false;disableButton=false" title="ReleventIndustry"></button>
-      </h4>
-      <div class="clearfix">
-        <div class="select-option" *ngFor="let item of workAreasToUpdate;let i = index">
-          <label>
-            <p>{{item}}</p>
-          </label>
+      <div class="col-sm-3 padding-right15">
+        <h4 class="heading-compact">Additional Industries
+          <button class="btn-edit" (click)="highlightedSection.name='ReleventIndustry';showButton=false;disableButton=false" title="ReleventIndustry"></button>
+        </h4>
+      </div>
+      <div class="col-sm-9 padding-left15">
+        <div class="option-list" *ngFor="let item of workAreasToUpdate;let i = index">
+          <span class="option">{{item}}</span>
         </div>
       </div>
     </div>

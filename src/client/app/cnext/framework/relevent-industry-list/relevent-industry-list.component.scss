@@ -1,0 +1,12 @@
+.select-industry {
+  margin-top: 15px;
+}
+
+.compact-view {
+
+  &:hover {
+    .btn-edit {
+      opacity: 1;
+    }
+  }
+}

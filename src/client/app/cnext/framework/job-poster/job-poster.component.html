@@ -40,7 +40,6 @@
 
     </div>
     <div class="wrapper">
-    <div class="wrapper" [hidden]="!showCompentensies">
       <cn-compentacies-and-responsibilities [jobPosterModel]="jobPosterModel" [highlightedSection]="highlightedSection"
                                             (onComplete)="onCompentansiesandResponsibilitycomplete($event)"
                                             [hidden]="!showCompentensies"></cn-compentacies-and-responsibilities>
@@ -54,7 +53,6 @@
       <button type="submit" class="btn btn-danger btn-post-job" (click)="showHideModal()">Post Job
       </button>
     </div>
-  </div>
 </div>
 
 

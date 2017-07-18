@@ -34,6 +34,7 @@ export class IndustryExperienceListComponent implements OnInit,OnChanges {
   private isCandidate:boolean = false;
   private submitStatus: boolean;
   private requiedIndustryExposureValidationMessage = Messages.MSG_ERROR_VALIDATION_INDUSTRY_EXPOSURE_REQUIRED;
+  private suggestionMessageAboutDomain = Messages.SUGGESTION_MSG_ABOUT_DOMAIN;
 
   constructor(private candidateProfileService: CandidateProfileService) {
     this.getIndustries();

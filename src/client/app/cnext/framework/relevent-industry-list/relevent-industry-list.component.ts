@@ -28,6 +28,13 @@ export class ReleventIndustryListComponent implements OnInit {
   showRleventindustry:boolean=false;
   private showButton: boolean = true;
   //arr = Observable.of(this.releventIndustries);
+
+
+  tooltipMessage: string =
+      '<ul>' +
+      '<li><p>1. Relevant Industry Message.</p></li>' +
+      '</ul>';
+
   constructor(private releventIndustryService:ReleventIndustryListService) {
 
   }
