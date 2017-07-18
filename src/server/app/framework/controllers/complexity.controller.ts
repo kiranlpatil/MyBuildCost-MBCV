@@ -20,7 +20,8 @@ export function retrieve(req: express.Request, res: express.Response, next: any)
       'name': params,
       'roles': JSON.parse(rolesparam),
       'capabilities': JSON.parse(capabilityparam)
-    }
+    };
+    console.time("getComplexity");
     complexityService.findByName(item, (error, result) => {
       if (error) {
         next({
@@ -28,8 +29,8 @@ export function retrieve(req: express.Request, res: express.Response, next: any)
           message: Messages.MSG_ERROR_WRONG_TOKEN,
           code: 401
         });
-      }
-      else {
+      }else {
+        console.timeEnd("getComplexity");
         res.send({
           "status": "success",
           "data": result

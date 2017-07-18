@@ -12,6 +12,7 @@ export function retrieve(req: express.Request, res: express.Response, next: any)
     var roleService = new RoleService();
     var industryService = new IndustryService();
     var params = req.params.id;
+    console.time('GetRole');
     roleService.findByName(params, (error, result) => {
       if (error) {
         next({
@@ -24,6 +25,7 @@ export function retrieve(req: express.Request, res: express.Response, next: any)
         res.status(403).send({message: "No records in Industry"});
       }
       else {
+        console.timeEnd('GetRole');
         res.send({
           "status": "success",
           "data": result

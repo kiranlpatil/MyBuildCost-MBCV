@@ -52,11 +52,7 @@ class IndustrySchema {
           }],
           name: String
         }]
-      }],
-      proficiencies: {
-        label: String,
-        names: [String]
-      }
+      }]
 
     }, {versionKey: false});
 

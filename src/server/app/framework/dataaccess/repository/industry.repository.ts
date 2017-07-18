@@ -12,6 +12,7 @@ class IndustryRepository extends RepositoryBase<IIndustry> {
 
   findRoles(name: string, callback: (error: any, result: any) => void) {
     this.items = new Array(0);
+    console.time("findRole");
     IndustrySchema.find({'name': name}).lean().exec((err: any, industry: any)=> {
       if (err) {
         callback(err, null);
@@ -28,6 +29,7 @@ class IndustryRepository extends RepositoryBase<IIndustry> {
             };
             this.items.push(obj);
           }
+          console.timeEnd("findRole");
           callback(null, this.items);
         }
       }
@@ -36,6 +38,8 @@ class IndustryRepository extends RepositoryBase<IIndustry> {
 
   findCapabilities(item: any, callback: (error: any, result: any) => void) {
     this.items = new Array(0);
+    console.time("findCapability");
+
     IndustrySchema.find({'name': item.name}).lean().exec((err: any, industry: any)=> {
       if (err) {
         callback(err, null);
@@ -67,6 +71,7 @@ class IndustryRepository extends RepositoryBase<IIndustry> {
               }
             }
           }
+          console.timeEnd("findCapability");
           callback(null, this.items);
         }
       }
@@ -75,6 +80,7 @@ class IndustryRepository extends RepositoryBase<IIndustry> {
 
   findComplexities(item: any, callback: (error: any, result: any) => void) {
     this.items = new Array(0);
+    console.time("findComplexity");
     IndustrySchema.find({'name': item.name}).lean().exec((err: any, industry: any)=> {
       if (err) {
         callback(err, null);
@@ -117,6 +123,7 @@ class IndustryRepository extends RepositoryBase<IIndustry> {
               }
             }
           }
+          console.timeEnd("findComplexity");
           callback(null, this.items);
         }
       }
@@ -124,7 +131,7 @@ class IndustryRepository extends RepositoryBase<IIndustry> {
   }
 
   retriveIndustriesWithSortedOrder(excluded: any, callback: (error: any, result: any) => void) {
-    IndustrySchema.find().sort({'sort_order': -1, 'name': 1}).exec(function (err: any, items: any) {
+    IndustrySchema.find({},excluded).lean().sort({'sort_order': -1, 'name': 1}).exec(function (err: any, items: any) {
       callback(err, items);
     });
   }

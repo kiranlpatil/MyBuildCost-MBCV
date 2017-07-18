@@ -15,7 +15,9 @@ class RepositoryBase<T extends mongoose.Document> implements IRead<T>, IWrite<T>
   }
 
   retrieve(field: any, callback: (error: any, result: any) => void) {
-    this._model.find(field, callback)
+    this._model.find(field,{}).lean().exec((err, res)=> {
+      callback(err,res);
+    });
   }
 
   retrieveWithLean(field: any, projection :any, callback: (error: any, result: any) => void) {
@@ -32,8 +34,10 @@ class RepositoryBase<T extends mongoose.Document> implements IRead<T>, IWrite<T>
 
   }
 
-  retrieveAll(excluded: any, callback: (error: any, result: T) => void) {
-    this._model.find({}, excluded, callback);
+  retrieveAll(excluded: any, callback: (error: any, result: any) => void) {
+    this._model.find({}, excluded).lean().exec((err, res)=> {
+      callback(err,res);
+    });
   }
 
   retrieveByMultiIds(ids: string[], excluded: any, callback: (error: any, result: T) => void) {
@@ -62,7 +66,7 @@ class RepositoryBase<T extends mongoose.Document> implements IRead<T>, IWrite<T>
   findByName(name: string, callback: (error: any, result: T) => void) {
     this._model.find({"name": name}, callback);
   }
-
+;
   toObjectId(_id: string): mongoose.Types.ObjectId {
     return mongoose.Types.ObjectId.createFromHexString(_id)
   }

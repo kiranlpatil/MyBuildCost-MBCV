@@ -114,17 +114,19 @@ class CandidateService {
   }
 
   getCapabilityValueKeyMatrix(_id: string,  callback: (error: any, result: any) => void) {
-
-    this.candidateRepository.retrieve({'_id': new mongoose.Types.ObjectId(_id)}, (err, res) => {
+    this.candidateRepository.findByIdwithExclude(_id,{capability_matrix:1,'industry.name':1}, (err, res) => {
       if (err) {
-        callback(err, res);
+        callback(err, null);
       } else {
-        this.industryRepositiry.retrieve({'name': res[0].industry.name}, (error: any, industries: IndustryModel[]) => {
+        console.time('-------get candidateRepository-----');
+        this.industryRepositiry.retrieve({'name': res.industry.name}, (error: any, industries: IndustryModel[]) => {
           if (err) {
-            callback(err, res);
+            callback(err, null);
           } else {
+            console.timeEnd('-------get candidateRepository-----');
 
-            let new_capability_matrix: any =  this.getCapabilityValueKeyMatrixBuild(res[0].capability_matrix,industries);
+            let new_capability_matrix: any =  this.getCapabilityValueKeyMatrixBuild(res.capability_matrix,industries);
+
             callback(null, new_capability_matrix);
           }
         });

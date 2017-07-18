@@ -185,7 +185,7 @@ export function retrieve(req: express.Request, res: express.Response, next: any)
               reason: 'User Not Available',//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
               message: 'User is not available',//Messages.MSG_ERROR_WRONG_TOKEN,
               code: 401
-            })
+            });
           } else {
             candidateService.retrieve({'userId': new mongoose.Types.ObjectId(result._id)}, (error, resu) => {
               if (error) {

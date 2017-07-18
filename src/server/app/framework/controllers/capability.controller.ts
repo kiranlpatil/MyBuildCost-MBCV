@@ -16,6 +16,7 @@ export function retrieve(req: express.Request, res: express.Response, next: any)
       name: req.params.id,
       roles: JSON.parse(rolesparam)
     };
+    console.time("getCapability");
     capabilityService.findByName(item, (error, result) => {
       if (error) {
         next({
@@ -25,6 +26,7 @@ export function retrieve(req: express.Request, res: express.Response, next: any)
         });
       }
       else {
+        console.timeEnd("getCapability");
         res.send({
           "status": "success",
           "data": result
