@@ -74,11 +74,11 @@
               <li>
                 <p>{{item.designation}} at {{item.companyName}} </p>
                 <p>From {{item.from.month}} {{item.from.year}} to {{item.to.month}} {{item.to.year}}</p>
-                <p class="more-elements" *ngIf="candidate.employmentHistory.length != 1">{{candidate.employmentHistory.length-1}} more</p>
               </li>
             </div>
           </div>
         </ul>
+        <p class="more-elements" *ngIf="candidate.employmentHistory.length != 1">{{candidate.employmentHistory.length-1}} more</p>
       </div>
     </div>
   </div>

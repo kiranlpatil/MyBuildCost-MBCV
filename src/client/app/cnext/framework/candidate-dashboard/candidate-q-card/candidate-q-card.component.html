@@ -7,7 +7,8 @@
       <div class="col-md-8 col-sm-7 col-xs-6 no-padding">
         <h6 title="Job Title: {{job.jobTitle}}">{{job.jobTitle}}</h6>
         <h5 title="Company Name: {{job.company_name}}">{{job.company_name}}</h5>
-        <p class="proficiencies proficiencies-icon" title="Key Skills">
+        <p class="proficiencies" title="Key Skills">
+          <span class="proficiencies-icon"></span>
           <span *ngFor="let proficiency of job.proficiencies;let i=index">
           <span *ngIf="i < 5">{{proficiency}}
             <span *ngIf="i>=0 && i<4 &&  job.proficiencies.length-1 != i ">,&nbsp;</span>
@@ -29,13 +30,34 @@
     </header>
     <div class="col-sm-8 no-padding">
       <div class="col-sm-12 details icons-section">
-        <p class="industry" title="Industry"> {{job.industry}}</p>
-        <p class="salary" title="Salary">₹ {{job.salaryMinValue}} - {{job.salaryMaxValue}} lakh </p>
-        <p class="experience" title="Experience">{{job.experienceMinValue}} - {{job.experienceMaxValue}} year</p>
-        <p class="current-location" title="Current Location"> {{job.location}} </p>
-        <p class="education" title="Education"> {{job.education}}</p>
-        <p class="company-size" title="Company size">{{job.company_size}}</p>
-        <p title="Date Posted">{{job.postingDate| date:'mediumDate'}}</p>
+        <p title="Industry">
+          <span class="industry"></span>
+          {{job.industry}}
+        </p>
+        <p title="Salary">
+          <span class="salary"></span>
+          ₹ {{job.salaryMinValue}} - {{job.salaryMaxValue}} lakh
+        </p>
+        <p title="Experience">
+          <span class="experience"></span>
+          {{job.experienceMinValue}} - {{job.experienceMaxValue}} year
+        </p>
+        <p title="Current Location">
+          <span class="current-location"></span>
+          {{job.location}}
+        </p>
+        <p title="Education">
+          <span class="education"></span>
+          {{job.education}}
+        </p>
+        <p title="Company size">
+          <span class="company-size"></span>
+          {{job.company_size}}
+        </p>
+        <p title="Date Posted">
+          <span class="date-posted"></span>
+          {{job.postingDate| date:'mediumDate'}}
+        </p>
       </div>
     </div>
   </div>

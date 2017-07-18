@@ -3,17 +3,17 @@
     <cn-recruiter-shared-header></cn-recruiter-shared-header>
     <ul class="nav navbar-nav navbar-left list-counts">
       <li>
-        <img src="assets/c-next/header/jobs-posted.png" alt="Job posted"/>
+        <div class="jobs-posted"></div>
         <span>{{jobCount}}</span>
         <p>Jobs Posted</p>
       </li>
       <li>
-        <img src="assets/c-next/header/matching-profiles.png" alt="Matching Profiles"/>
+        <div class="matching-profiles"></div>
         <span *ngIf="headerInfo">{{headerInfo.totalNumberOfCandidateInCart}}</span>
         <p>Candidates in Cart</p>
       </li>
       <li>
-        <img src="assets/c-next/header/candidates-applied.png" alt="Candidates Applied"/>
+        <div class="candidates-applied"></div>
         <span *ngIf="headerInfo">{{headerInfo.totalNumberOfCandidatesApplied}}</span>
         <p> Applied Candidates</p>
       </li>

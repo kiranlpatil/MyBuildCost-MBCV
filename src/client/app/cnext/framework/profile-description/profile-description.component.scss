@@ -56,6 +56,10 @@ $black: #333;
   white-space: nowrap;
 }
 
+.scrollable-content {
+  padding: 0 !important;
+}
+
 @media only screen and (max-width: 767px) {
   .user-name {
     .profile-name-first, .profile-name-last {

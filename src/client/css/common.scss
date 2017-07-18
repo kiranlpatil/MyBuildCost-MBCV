@@ -242,7 +242,8 @@ select,
   box-shadow: none;
   padding: 6px 0;
   width: 100%;
-  font-size: 14px;
+  font-size: 16px;
+  font-family: 'gothamrnd-book';
 
   &:focus,
   &:active {
@@ -264,7 +265,8 @@ select,
     color: $label;
     display: block;
     float: left;
-    font-size: 12px;
+    font-size: 14px;
+    font-family: 'gothamrnd-book';
   }
 
   .form-control {
@@ -277,7 +279,8 @@ select,
     color: $text-color;
     display: block;
     padding: 6px 0;
-    font-size: 14px;
+    font-size: 16px;
+    font-family: 'gothamrnd-book';
 
     &:focus {
       box-shadow: none;
@@ -327,6 +330,7 @@ select,
   font-weight: bold;
   box-shadow: 0 0 1px 0 #fff inset, 0 0 1px 0 #fff;
   border: 0;
+  font-size: 16px;
 
   &:focus,
   &:active,

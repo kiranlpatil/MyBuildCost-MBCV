@@ -199,11 +199,11 @@ $white: #fff;
 
     li {
       color: #666;
-      float: left;
+      //float: left;
       //list-style-type: disc;
       list-style-image: url('../../../assets/c-next/compact-view/list-type.png');
       margin-bottom: 0;
-      padding: 0 25px 0 5px;
+      padding: 0 15px 0 8px;
       text-transform: capitalize;
       width: 100%;
     }
@@ -213,7 +213,7 @@ $white: #fff;
     color: $theme-color;
     font-size: 11px;
     font-style: italic;
-    margin-top: 10px;
+    margin: 10px 0 0 25px;
   }
 
 }

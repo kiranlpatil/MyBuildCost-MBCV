@@ -76,7 +76,8 @@
         </header>
         <div class="col-sm-8 no-padding">
           <div class="col-sm-12 details">
-            <p class="proficiencies proficiencies-icon" title="Key Skills">
+            <p class="proficiencies" title="Key Skills">
+              <span class="proficiencies-icon"></span>
               <span *ngFor="let proficiency of item.proficiencies;let i=index">
                 <span *ngIf="i < 5">{{proficiency}}
                   <span *ngIf="i>=0 && i<4 &&  item.proficiencies.length-1 != i ">,&nbsp;</span>
@@ -85,9 +86,18 @@
               <br/><span *ngIf="item.proficiencies.length > 5">( {{item.proficiencies.length-5}} More )</span>
             </p>
             <div class="icons-section">
-              <p class="border-bottom salary" title="Salary">₹ {{item.salary}}</p>
-              <p class="border-bottom experience" title="Experience">{{item.experience}}</p>
-              <p class="current-location" title="Current Location"> {{item.location}}</p>
+              <p class="border-bottom" title="Salary">
+                <span class="salary"></span>
+                ₹ {{item.salary}}
+              </p>
+              <p class="border-bottom" title="Experience">
+                <span class="experience"></span>
+                {{item.experience}}
+              </p>
+              <p title="Current Location">
+                <span class="current-location"></span>
+                {{item.location}}
+              </p>
             </div>
           </div>
         </div>

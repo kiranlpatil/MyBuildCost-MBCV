@@ -66,11 +66,11 @@
             <div *ngIf="i == 0">
               <li>
                 <p>{{item.specialization}} at {{item.board}} in {{item.yearOfPassing}}</p>
-                <p class="more-elements" *ngIf="candidate.academics.length != 1">{{candidate.academics.length-1}} more</p>
               </li>
             </div>
           </div>
         </ul>
+        <p class="more-elements" *ngIf="candidate.academics.length != 1">{{candidate.academics.length-1}} more</p>
       </div>
     </div>
   </div>

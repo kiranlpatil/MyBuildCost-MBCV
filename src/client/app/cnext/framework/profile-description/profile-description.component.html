@@ -4,19 +4,18 @@
 
     <div class="col-sm-9 no-padding">
       <h4 class="heading">Enter your profile details</h4>
-      <div class="scrollable-content">
-        <div class="col-sm-4 text-center my-info">
-          <div class="description-container">
-            <div class="image-container">
-              <cn-profile-picture (onPictureUpload)="onPictureUpload($event)"></cn-profile-picture>
-            </div>
-            <div class="user-name">
-              <span class="profile-name-first">{{candidateDetails.first_name}}&nbsp;</span><span class="profile-name-last">{{candidateDetails.last_name}}</span>
-            </div>
+      <div class="col-sm-4 text-center my-info">
+        <div class="description-container">
+          <div class="image-container">
+            <cn-profile-picture (onPictureUpload)="onPictureUpload($event)"></cn-profile-picture>
+          </div>
+          <div class="user-name">
+            <span class="profile-name-first">{{candidateDetails.first_name}}&nbsp;</span><span class="profile-name-last">{{candidateDetails.last_name}}</span>
           </div>
         </div>
-
-        <div class="col-sm-8 form-container">
+      </div>
+        <div class="scrollable-content col-sm-8">
+        <div class="form-container">
 
           <div class="form-group">
             <label>Job Title</label>
