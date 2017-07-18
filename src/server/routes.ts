@@ -53,7 +53,7 @@ export function init(app: express.Application) {
   app.put("/api/uploaddocuments/:id", this.authInterceptor.requiresAuth, userController.uploaddocuments);
 
   app.get("/api/readxlsx", importIndustriesController.readXlsx);
-  app.post("/api/createImportIndusry", importIndustriesController.create);
+  //app.post("/api/createImportIndusry", importIndustriesController.create);
 
   app.use(sharedService.logHandler);
   app.use(sharedService.errorHandler);

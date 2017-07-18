@@ -7,5 +7,10 @@ class IndustryClassModel {
   name: string;
   roles: RoleClassModel[];
   proficiencies: ProficiencyModel
+
+  constructor (name:string, roles:any){
+    this.name = name;
+    this.roles = roles;
+  }
 }
 export = IndustryClassModel;
