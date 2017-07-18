@@ -36,7 +36,7 @@
                               *ngIf="jobPosterModel != undefined && jobPosterModel.industry != undefined"></cn-industry-experience>
     </div>
      <div class="wrapper">
-       <cn-relevent-industry-list [roles]="jobForRole" [highlightedSection]="highlightedSection" [hidden]="!showReleventIndustryList" (onNextComplete)="onReleventIndustryComplete($event)" (checkReleventIndustries)="checkReleventIndustries($event)"></cn-relevent-industry-list>
+       <cn-relevent-industry-list [roles]="jobForRole" [industry]="jobPosterModel.industry" [highlightedSection]="highlightedSection" [hidden]="!showReleventIndustryList" (onNextComplete)="onReleventIndustryComplete($event)" (checkReleventIndustries)="checkReleventIndustries($event)"></cn-relevent-industry-list>
 
      </div>
     <div class="wrapper">

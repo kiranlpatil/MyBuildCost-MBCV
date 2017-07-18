@@ -76,9 +76,9 @@ export function create(req: express.Request, res: express.Response, next: any) {
 export function getReleventIndustryList(req: express.Request, res: express.Response, next: any) {
   try {
     var rolesparam = req.query.roles;
-    console.log('----------------rolesparma----------------------------',JSON.parse(rolesparam))
+    var industryName = req.query.industryName;
     let industryService = new IndustryService();
-    industryService.getReleventIndustryList(rolesparam, (error: any, response: any) => {
+    industryService.getReleventIndustryList(rolesparam,industryName, (error: any, response: any) => {
       if (error) {
         next({
           reason: Messages.MSG_ERROR_RSN_EXISTING_USER,

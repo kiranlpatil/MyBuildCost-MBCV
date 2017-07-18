@@ -13,8 +13,8 @@ export class ReleventIndustryListService extends BaseService {
     super();
   }
 
-    getReleventIndustries(data:string[]): Observable<any> { debugger
-      var url = API.RElEVENT_INDUSTRIES + '?roles=' + JSON.stringify(data);
+    getReleventIndustries(data:string[],industryName:string): Observable<any> { debugger
+      var url = API.RElEVENT_INDUSTRIES + '?roles=' + JSON.stringify(data)+'&industryName=' + industryName;
     return this.http.get(url)
       .map(this.extractData)
       .catch(this.handleError);

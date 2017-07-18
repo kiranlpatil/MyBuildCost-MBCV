@@ -5,6 +5,7 @@ import {Section} from "../model/candidate";
 import {Observable} from "rxjs/Observable";
 import {ReleventIndustry} from "./relevent-industry";
 import {Role} from "../model/role";
+import {Industry} from "../model/industry";
 
 
 @Component({
@@ -22,6 +23,7 @@ export class ReleventIndustryListComponent implements OnInit {
   @Output() checkReleventIndustries = new EventEmitter();
   @Input() highlightedSection: Section;
   @Input() roles: Role[] = new Array(0);
+  @Input() industry:Industry;
   suggestionMsgForReleventIndustry:string;
   showRleventindustry:boolean=false;
   //arr = Observable.of(this.releventIndustries);
@@ -47,7 +49,7 @@ export class ReleventIndustryListComponent implements OnInit {
   getReleventIndustries() {
     if(this.roles.length) {
       this.roles.forEach(x => this.workAreas.push(x.name));
-      this.releventIndustryService.getReleventIndustries(this.workAreas)
+      this.releventIndustryService.getReleventIndustries(this.workAreas,this.industry.name)
         .subscribe(
           res => {
             this.onGetIndustriesSuccess(res);
@@ -63,7 +65,7 @@ export class ReleventIndustryListComponent implements OnInit {
     this.checkReleventIndustries.emit(res.data.length);
   }
   onError(error:any) {
-  console.log('----errorr------');
+  console.log('----errorr------',error);
   }
 
   goNext() {
@@ -71,7 +73,7 @@ export class ReleventIndustryListComponent implements OnInit {
     this.onNextComplete.emit(this.workAreasToUpdate);
   }
 
-  getReleventIndustry(event:any) { debugger
+  getReleventIndustry(event:any) {
     this.showRleventindustry = event.target.checked;
     //this.showRleventindustry = true;
   //if(event.target.checked) {
