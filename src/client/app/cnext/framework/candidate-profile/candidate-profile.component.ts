@@ -450,7 +450,7 @@ export class CandidateProfileComponent implements OnInit {
     if (this.setTimeoutId !== undefined) {
       clearTimeout(this.setTimeoutId);
     }
-    this._router.navigate([NavigationRoutes.APP_CANDIDATE_DASHBOARD]);
+    this.goToDashboard();
   }
 
 
@@ -461,6 +461,9 @@ export class CandidateProfileComponent implements OnInit {
     }, 1000 * 11);
   }
 
+  goToDashboard() {
+    this._router.navigate([NavigationRoutes.APP_CANDIDATE_DASHBOARD]);
+  }
   getStyleModal() {
     if (this.showModalStyle) {
       return 'block';
