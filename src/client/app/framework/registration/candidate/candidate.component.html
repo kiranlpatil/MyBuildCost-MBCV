@@ -65,7 +65,7 @@
       <input formControlName="birth_year" [ngModel]="passingYear" id="birth_year" class="form-control"
              placeholder="" required autocomplete="off"/>
       <label class="select-label">Year of Birth</label>
-      <div class="error-messages" *ngIf='birthYearErrorMessage !== undefined'>{{birthYearErrorMessage}}</div>
+      <div class="error-messages" *ngIf='userForm.get("birth_year").value == undefined'>{{birthYearErrorMessage}}</div>
     </div>
   </div>
 
