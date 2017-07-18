@@ -148,8 +148,7 @@
       <button class="btn btn-success" (click)="onNext()"
               [hidden]="!showButton">Next
       </button>
-      <button class="btn btn-success" (click)="onNext()"
-              [disabled]="!jobPostForm.valid || storedIndustry==undefined" [hidden]="showButton">Save
+      <button class="btn btn-success" (click)="onNext()" [hidden]="showButton">Save
       </button>
       <!--
               <button class="btn btn-default" (click)="onCancel()" [hidden]="showButton">Cancel</button>
