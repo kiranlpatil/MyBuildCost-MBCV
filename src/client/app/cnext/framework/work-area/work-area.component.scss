@@ -42,6 +42,14 @@ $primary-option: #1c75bd;
   float: left;
 }
 
+.compact-view {
+  &:hover {
+    .btn-edit {
+      opacity: 1;
+    }
+  }
+}
+
 @media screen and (max-width: 767px) {
   .work-area {
     padding: 0;

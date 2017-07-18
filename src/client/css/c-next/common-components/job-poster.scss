@@ -1,8 +1,8 @@
-$info: #666;
+$info: #888;
 
 .info {
-  font-size: 10px;
-  //font-style: italic;
+  font-size: 11px;
+  font-style: italic;
   //background: url('../../../assets/c-next/profile-creator/info-orange.png')  no-repeat  0 0;
   padding: 2px 0 2px;
   display: block;
@@ -30,9 +30,23 @@ $info: #666;
 
 .candidate-profile-wrapper {
   width: 850px;
-  margin: 70px auto 15px;
+  margin: 100px auto 15px;
 
   .hide-candidate-info {
     display: none;
+  }
+}
+
+#complexity-compact-view {
+  .row-section,
+  .content {
+    border: 0;
+  }
+}
+
+@media only screen and (max-width: 980px) {
+  .recruiter-profile-wrapper,
+  .candidate-profile-wrapper {
+    width: 90%;
   }
 }

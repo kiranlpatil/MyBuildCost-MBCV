@@ -158,7 +158,7 @@ import {QuestionAnswerComponent} from "./cnext/framework/question-answer/questio
 import {ComplexityComponentService} from "./cnext/framework/complexities/complexity.service";
 import {ReleventIndustryListComponent} from "./cnext/framework/relevent-industry-list/relevent-industry-list.component";
 import {ReleventIndustryListService} from "./cnext/framework/relevent-industry-list/relevent-industry-list.service";
-
+import {MultipleQuestionAnswerComponent} from "./cnext/framework/multiple-question-answer/multiple-question-answer.component";
 //C-NEXT IMPORTS
 
 
@@ -220,6 +220,7 @@ import {ReleventIndustryListService} from "./cnext/framework/relevent-industry-l
     ProfileDescriptionComponent,
     CapabilitiesComponent,
     GuidedTourComponent,
+    MultipleQuestionAnswerComponent,
     JobProficienciesComponent,
     ProficienciesComponent,
     IndustryListComponent,

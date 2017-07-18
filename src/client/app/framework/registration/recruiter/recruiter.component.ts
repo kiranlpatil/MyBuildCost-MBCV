@@ -5,7 +5,7 @@ import {Recruiter} from "./recruiter";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ValidationService} from "../../shared/customvalidations/validation.service";
 import {AppSettings, CommonService, Message, MessageService, NavigationRoutes} from "../../shared/index";
-import {ImagePath, LocalStorage} from "../../shared/constants";
+import {ImagePath, LocalStorage, Messages} from "../../shared/constants";
 import {LocalStorageService} from "../../shared/localstorage.service";
 import {Http, Response} from "@angular/http";
 import {Location} from "../location";
@@ -41,6 +41,7 @@ export class RecruiterComponent implements OnInit {
   private companySizeErrorMessage: string;
   private locationErrorMessage: string;
   private companyHQErrorMessage: string;
+  private passwordMismatchMessage: string;
 
   constructor(private commonService: CommonService, private _router: Router, private http: Http,
               private recruiterService: RecruiterService, private messageService: MessageService, private formBuilder: FormBuilder) {
@@ -107,13 +108,13 @@ export class RecruiterComponent implements OnInit {
       this.model.email == '' || this.model.password == '' || this.model.confirm_password == '' ||
       this.storedLocation == null || this.companyHeadquarter == undefined) {
       if(this.storedcompanySize == undefined){
-        this.companySizeErrorMessage = "You can't leave this empty.";
+        this.companySizeErrorMessage = Messages.MSG_ERROR_VALIDATION_COMPANYSIZE_REQUIRED;
       }
       if(this.storedLocation.city == undefined){
-        this.locationErrorMessage = "You can't leave this empty.";
+        this.locationErrorMessage = Messages.MSG_ERROR_VALIDATION_LOCATION_REQUIRED;
       }
       if(this.companyHeadquarter == undefined){
-        this.companyHQErrorMessage = "You can't leave this empty.";
+        this.companyHQErrorMessage = Messages.MSG_ERROR_VALIDATION_HEADQUARTER_REQUIRED;
       }
       this.submitStatus = true;
       return;
@@ -168,6 +169,7 @@ export class RecruiterComponent implements OnInit {
 
   makePasswordConfirm(): boolean {
     if (this.model.confirm_password !== this.model.password && this.model.confirm_password !== "") {
+      this.passwordMismatchMessage = Messages.MSG_ERROR_VALIDATION_PASSWORD_MISMATCHED;
       this.isPasswordConfirm = true;
       return true;
     } else {

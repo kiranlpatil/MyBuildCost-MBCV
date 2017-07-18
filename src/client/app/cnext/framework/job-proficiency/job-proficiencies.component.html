@@ -4,7 +4,7 @@
     <div class="main-content  edit-modal-content clearfix">
       <div class="col-sm-9 no-padding">
         <h4 class="heading">Keywords that describe your area of epertise </h4>
-        <div class="proficiency-container">
+        <div class="scrollable-content proficiency-container">
           <div class="col-sm-12">
             <label>Mandatory Key Skills</label>
           </div>
@@ -38,33 +38,32 @@
       <div class="compact-view clearfix">
 
         <h4 class="heading-compact">Key Skills
-          <!--<button class="btn-edit" title="Edit Key Skills"></button>-->
+          <button class="btn-edit" (click)="highlightedSection.name='Proficiencies';disablebutton=false;showButton=false" title="Edit Key Skills"></button>
         </h4>
-        <div class="col-sm-6 padding-right15">
+        <div class="col-sm-12 no-padding">
           <div>
             <label>Mandatory</label>
           </div>
-          <div>
-            <span class="option" *ngFor="let item of jobPosterModel.proficiencies;let i = index">
-              {{item}}&nbsp;<span
-              *ngIf="jobPosterModel.proficiencies.length>1 && i!=jobPosterModel.proficiencies.length-1">,</span>&nbsp;
+          <div class="option-list" *ngFor="let item of jobPosterModel.proficiencies;let i = index">
+            <span class="option">
+              {{item}}
             </span>
           </div>
         </div>
-        <div class="col-sm-6 padding-left15"
+        <div class="col-sm-12 no-padding"
              *ngIf="jobPosterModel.additionalProficiencies!= undefined && jobPosterModel.additionalProficiencies.length > 0">
           <div>
             <label>Additional</label>
           </div>
-          <div>
-            <span class="option" *ngFor="let item of jobPosterModel.additionalProficiencies;let i = index">
-              {{item}}&nbsp;<span
-              *ngIf="jobPosterModel.additionalProficiencies.length>1 && i!=jobPosterModel.additionalProficiencies.length-1">,</span>&nbsp;
+          <div class="option-list" *ngFor="let item of jobPosterModel.additionalProficiencies;let i = index">
+            <span class="option">
+              {{item}}
             </span>
           </div>
         </div>
       </div>
     </div>
+    <div class="divider clearfix">&nbsp;</div>
   </div>
 </div>
 

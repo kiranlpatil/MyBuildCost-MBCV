@@ -5,7 +5,7 @@
     <div class="col-sm-9 no-padding">
       <h4 class="heading">Additional Industry Exposure<!-- <span class="sub-heading">(In additional to your core industry, select Industries In which you have work exposure / experience)</span>-->
       </h4>
-      <div class="error-messages" *ngIf="submitStatus"><p>You can't leave this empty.</p> </div>
+      <div class="error-messages" *ngIf="submitStatus"><p>{{requiedIndustryExposureValidationMessage}}</p> </div>
       <div class="col-sm-12 industry-experience scrollable-content">
         <div class="select-option" *ngFor="let choice of industries;let i = index">
           <label>
@@ -37,12 +37,11 @@
 <div class="section-container profeiciency-domain" *ngIf="highlightedSection.name !='IndustryExposure'">
   <div class="main-content"  (click)="highlightedSection.name='IndustryExposure';disableButton=false;highlightedSection.isDisable=true;showButton=false">
     <div class="compact-view clearfix">
+      <button class="btn-edit"
+              (click)="highlightedSection.name='IndustryExposure';disableButton=false;highlightedSection.isDisable=true;showButton=false"
+              [hidden]="highlightedSection.isDisable" title="Edit Industry Exposure"></button>
       <div class="col-sm-3 padding-right15">
-        <h4 class="heading-compact">Industry Exposure
-         <!-- <button class="btn-edit"
-                  (click)="highlightedSection.name='IndustryExposure';disableButton=false;highlightedSection.isDisable=true;showButton=false"
-                  [hidden]="highlightedSection.isDisable" title="Edit Industry Exposure"></button>-->
-        </h4>
+        <h4 class="heading-compact">Industry Exposure</h4>
       </div>
       <div class="col-sm-9 padding-left15">
         <div class="option-list" *ngFor="let item of candidateExperiencedIndustry;let i = index">

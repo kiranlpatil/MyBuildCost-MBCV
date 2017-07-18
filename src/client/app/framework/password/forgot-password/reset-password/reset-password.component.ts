@@ -31,6 +31,8 @@ export class ResetPasswordComponent implements OnInit {
   MY_TAG_LINE: string;
   UNDER_LICENCE: string;
   BODY_BACKGROUND: string;
+  submitStatus:boolean;
+  passwordMismatchMessage: string;
 
   constructor(private activatedRoute: ActivatedRoute, private _router: Router, private messageService: MessageService,
               private resetPasswordService: ResetPasswordService, private formBuilder: FormBuilder) {
@@ -60,6 +62,10 @@ export class ResetPasswordComponent implements OnInit {
   }
 
   onSubmit() {
+    if(!this.userForm.valid){
+      this.submitStatus = true;
+      return;
+    }
     this.model = this.userForm.value;
     if (!this.makePasswordConfirm()) {
       this.resetPasswordService.newPassword(this.model)
@@ -97,6 +103,7 @@ export class ResetPasswordComponent implements OnInit {
   makePasswordConfirm(): boolean {
     if (this.model.confirm_password !== this.model.new_password) {
       this.isPasswordConfirm = true;
+      this.passwordMismatchMessage = Messages.MSG_ERROR_VALIDATION_PASSWORD_MISMATCHED;
       return true;
     } else {
       this.isPasswordConfirm = false;

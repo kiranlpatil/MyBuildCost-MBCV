@@ -24,20 +24,29 @@ $white: #ffffff;
   line-height: 16px;
 }
 
+.not-match-overlay {
+  display: block;
+}
+
+.unmatch-overlay-show {
+  display: none;
+}
+
 .compact-view:hover {
   .complexity-scenarios-description {
     white-space: inherit;
     position: absolute;
     background: #3694d1;
     padding: 5px;
-    bottom: 0;
+    bottom: inherit;
     min-height: 59px;
-    width: 125%;
-    left: -27px;
+    wwidth: 160%;
+    left: -37px;
     box-shadow: 0px 0px 4px 0px #757575;
     color : white !important;
     font-size: 12px;
-    z-index: 9;
+    z-index: 99;
+    top: 0;
     border: 1px solid $white;
     span {
       max-width: auto;
@@ -45,6 +54,16 @@ $white: #ffffff;
       white-space: normal;
       display: block;
       position: relative;
+      word-break: keep-all;
+      img {
+        border-radius: 24px;
+      }
+    }
+    .not-match-overlay {
+      display: none;
+    }
+    .unmatch-overlay-show {
+      display: block;
     }
   }
   .complexity-name {
@@ -58,13 +77,14 @@ $white: #ffffff;
     position: absolute;
     background: $light-green;
     padding: 5px;
-    bottom: 0;
+    bottom: inherit;
     min-height: 59px;
-    width: 125%;
-    left: -27px;
+    width: 160%;
+    left: -37px;
     box-shadow: 0px 0px 4px 0px #757575;
     font-size: 12px;
-    z-index: 9;
+    z-index: 99;
+    top: 0;
     border: 1px solid $white;
     span {
       max-width: auto;
@@ -72,6 +92,13 @@ $white: #ffffff;
       white-space: normal;
       display: block;
       position: relative;
+      word-break: keep-all;
+    }
+    .not-match-overlay {
+      display: none;
+    }
+    .unmatch-overlay-show {
+      display: block;
     }
   }
   .complexity-name {
@@ -92,13 +119,14 @@ $white: #ffffff;
     position: absolute;
     background: $green;
     padding: 5px;
-    bottom: 0;
+    bottom: inherit;
     min-height: 59px;
-    width: 125%;
-    left: -27px;
+    width: 160%;
+    left: -37px;
     box-shadow: 0px 0px 4px 0px #757575;
     font-size: 12px;
-    z-index: 9;
+    z-index: 99;
+    top: 0;
     border: 1px solid $white;
     span {
       max-width: auto;
@@ -106,6 +134,13 @@ $white: #ffffff;
       white-space: normal;
       display: block;
       position: relative;
+      word-break: keep-all;
+    }
+    .not-match-overlay {
+      display: none;
+    }
+    .unmatch-overlay-show {
+      display: block;
     }
   }
   .complexity-name {
@@ -128,13 +163,14 @@ $white: #ffffff;
     position: absolute;
     background: $orange;
     padding: 5px;
-    bottom: 0;
+    bottom: inherit;
     min-height: 59px;
-    width: 125%;
-    left: -27px;
+    width: 160%;
+    left: -37px;
     box-shadow: 0px 0px 4px 0px #757575;
     font-size: 12px;
-    z-index: 9;
+    z-index: 99;
+    top: 0;
     border: 1px solid $white;
     span {
       max-width: auto;
@@ -142,6 +178,13 @@ $white: #ffffff;
       white-space: normal;
       display: block;
       position: relative;
+      word-break: keep-all;
+    }
+    .not-match-overlay {
+      display: none;
+    }
+    .unmatch-overlay-show {
+      display: block;
     }
   }
   .complexity-name {
@@ -162,13 +205,14 @@ $white: #ffffff;
     position: absolute;
     background: $red;
     padding: 5px;
-    bottom: 0;
+    bottom: inherit;
     min-height: 59px;
-    width: 125%;
-    left: -27px;
+    width: 160%;
+    left: -37px;
     box-shadow: 0px 0px 4px 0px #757575;
     font-size: 12px;
-    z-index: 9;
+    z-index: 99;
+    top: 0;
     border: 1px solid $white;
     span {
       max-width: auto;
@@ -176,6 +220,13 @@ $white: #ffffff;
       white-space: normal;
       display: block;
       position: relative;
+      word-break: keep-all;
+    }
+    .not-match-overlay {
+      display: none;
+    }
+    .unmatch-overlay-show {
+      display: block;
     }
   }
   .complexity-name {
@@ -184,7 +235,7 @@ $white: #ffffff;
 }
 
 .complexity-name {
-  word-break: break-word;
+  word-break: keep-all;
   font-family: 'gothamrnd-book';
   font-style: normal !important;
 }
@@ -202,13 +253,14 @@ $white: #ffffff;
     position: absolute;
     background: $gray;
     padding: 5px;
-    bottom: 0;
+    bottom: inherit;
     min-height: 59px;
-    width: 125%;
-    left: -27px;
+    width: 160%;
+    left: -37px;
     box-shadow: 0px 0px 4px 0px #757575;
     font-size: 12px;
-    z-index: 9;
+    z-index: 99;
+    top: 0;
     border: 1px solid $white;
     span {
       max-width: auto;
@@ -216,6 +268,13 @@ $white: #ffffff;
        white-space: normal;
        display: block;
        position: relative;
+      word-break: keep-all;
+    }
+    .not-match-overlay {
+      display: none;
+    }
+    .unmatch-overlay-show {
+      display: block;
     }
   }
   .complexity-name {
@@ -299,6 +358,9 @@ $white: #ffffff;
     display: table-cell;
     position: absolute;
     font-style: italic;
+    img {
+      border-radius: 24px;
+    }
   }
 }
 
@@ -407,6 +469,14 @@ $white: #ffffff;
   }
 }
 
+
+.user-info-modal {
+  margin-top: 5px;
+  .clearfix {
+    margin-bottom: 8px;
+  }
+}
+
 @media only screen and (max-width: 767px) {
   .capability-complexity {
     border-top: 1px solid $theme-color;
@@ -500,7 +570,7 @@ and (max-width: 840px) {
       font-size: 14px;
       color: $theme-color;
       font-family: 'gothamrnd-book';
-      font-weight: 500;
+      font-weight: 600;
     }
     .complexity-name {
       color: $text-color;
@@ -508,7 +578,7 @@ and (max-width: 840px) {
       width: 100%;
       display: inline-block;
       font-size: 14px;
-      font-weight: 500;
+      font-weight: 700;
     }
     .complexities-col {
       display: block;
@@ -519,10 +589,10 @@ and (max-width: 840px) {
       display: inline-block;
       span {
         font-size: 12px;
+        color: $text-color;
+        font-family: 'gothamrnd-book';
+        font-weight: 600;
       }
-    }
-    .scenario-row > span {
-      color: $text-color;
     }
   }
 }

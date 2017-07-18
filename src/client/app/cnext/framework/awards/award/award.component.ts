@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 
 import { FormGroup } from '@angular/forms';
-import { ValueConstant } from '../../../../framework/shared/constants';
+import { ValueConstant, Messages } from '../../../../framework/shared/constants';
 
 
 @Component({
@@ -19,6 +19,9 @@ export class AwardComponent {
   private year: any;
   private currentDate: any;
   private yearList = new Array();
+  private requiredNameValidationMessage = Messages.MSG_ERROR_VALIDATION_AWARD_NAME_REQUIRED
+  private requiredAuthorityValidationMessage = Messages.MSG_ERROR_VALIDATION_AWARD_AUTHORITY_REQUIRED;
+  private requiredYearValidationMessage = Messages.MSG_ERROR_VALIDATION_AWARD_YEAR_REQUIRED;
 
   constructor() {
     this.currentDate = new Date();

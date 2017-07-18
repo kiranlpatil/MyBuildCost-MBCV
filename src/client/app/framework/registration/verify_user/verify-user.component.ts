@@ -28,6 +28,9 @@ export class VerifyUserComponent implements OnInit {
   MY_TAG_LINE: string;
   UNDER_LICENCE: string;
   BODY_BACKGROUND: string;
+  submitMobileStatus: boolean;
+  submitEmailStatus: boolean;
+
 
   constructor(private _router: Router, private formBuilder: FormBuilder,
               private verifyUserService: VerifyUserService, private messageService: MessageService) {
@@ -63,9 +66,18 @@ export class VerifyUserComponent implements OnInit {
   }
 
   onSubmit() {
-    if(this.isCandidate && this.userForm.value.mobile_number == null){
+    if(this.isCandidate && this.userForm.value.mobile_number == 'null'){
+      this.submitMobileStatus = true;
       return;
-    }else if(!this.isCandidate && this.userForm.value.email == null){
+    }else if(!this.isCandidate && this.userForm.value.email == 'null' && !this.userForm.get('email').valid){
+      this.submitEmailStatus = true;
+      return;
+    }
+    if(this.isCandidate && this.userForm.value.mobile_number != 'null' && !this.userForm.get('mobile_number').valid){
+      this.submitMobileStatus = true;
+      return;
+    }else if(!this.isCandidate && this.userForm.value.email != 'null' && !this.userForm.get('email').valid){
+      this.submitEmailStatus = true;
       return;
     }
     if (!this.chkMobile) {

@@ -6,7 +6,7 @@
   <div class="main-content clearfix edit-modal-content">
     <div class="col-sm-9 profile-description no-padding">
       <h4 class="heading">Select your Industry (Any One)</h4>
-      <div class="error-messages" *ngIf="!isValid"><p>You can't leave this empty.</p></div>
+      <div class="error-messages" *ngIf="!isValid"><p>{{requiredFieldMessage}}</p></div>
       <div class="scrollable-content">
         <div class="col-sm-12 select-industry">
           <div class="select-option" *ngFor="let item of industries;let i = index">
@@ -42,12 +42,12 @@
       <!--
             <span class=" glyphicon glyphicon-lock" title="you can edit this field after {{highlightedSection.date| date:'mediumDate'}}" *ngIf="highlightedSection.isLocked"></span>
       -->
+      <button class="btn-edit"
+              (click)="highlightedSection.name='Industry';disableButton=false;showButton=false;highlightedSection.isDisable=true"
+              [hidden]="highlightedSection.isDisable" title="Edit My Profile"></button>
 
       <div class="col-sm-3 padding-right15">
         <h4 class="heading-compact">Industry
-          <!-- <button class="btn-edit"
-                   (click)="highlightedSection.name='Industry';disableButton=false;showButton=false;highlightedSection.isDisable=true"
-                   [hidden]="highlightedSection.isDisable" title="Edit My Profile"></button>-->
         </h4>
       </div>
       <div class="col-sm-9 padding-left15">
@@ -57,6 +57,7 @@
       </div>
     </div>
   </div>
+  <div class="divider clearfix">&nbsp;</div>
   <!-- <div [class.modal-bg]="highlightedSection.name!='Profile'"></div>-->
 </div>
 

@@ -7,7 +7,7 @@
           <input type="text" class="form-control" formControlName="name" required/>
           <div class="error-messages"
                *ngIf="(awardForm.get('name').touched || submitStatus)&& awardForm.get('name').hasError('required')">
-            <p>Award Name is required</p>
+            <p>{{requiredNameValidationMessage}}</p>
           </div>
         </div>
       </div>
@@ -19,7 +19,7 @@
             <input class="form-control" type="text" formControlName="issuedBy" required/>
             <div class="error-messages"
                  *ngIf="(awardForm.get('issuedBy').touched || submitStatus)&& awardForm.get('issuedBy').hasError('required')">
-              <p>Authority Name is required</p>
+              <p>{{requiredAuthorityValidationMessage}}</p>
             </div>
           </div>
         </div>
@@ -33,7 +33,7 @@
             </option>
           </select>
           <div class="error-messages" *ngIf="(awardForm.get('year').touched || submitStatus)&& awardForm.get('year').hasError('required')">
-            <p>Issued Year is required</p>
+            <p>{{requiredYearValidationMessage}}</p>
           </div>
         </div>
       </div>

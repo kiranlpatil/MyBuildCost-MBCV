@@ -6,22 +6,28 @@
   <cn-candidate-header [candidate]="candidate" *ngIf="candidate != undefined"></cn-candidate-header>
   <div class="bar-container profile-header">
     <ul class="bar container" id="bar">
-      <li [class.active]="whichStepsVisible[0]" [class.current]="highlightedSection.name=='Profile'"><p>My Profile</p>
+      <li [class.active]="whichStepsVisible[0] && !candidate.isSubmitted" [class.current]="highlightedSection.name=='Profile'
+      || highlightedSection.name=='Industry'" ><p>About Me</p>
       </li>
-      <li [class.active]="whichStepsVisible[1]" [class.current]="highlightedSection.name=='Work-Area'"><p>Area of
+      <li [class.active]="whichStepsVisible[1] && !candidate.isSubmitted " [class.current]="highlightedSection.name=='Work-Area'"><p>Area of
         Work</p></li>
-      <li [class.active]="whichStepsVisible[2]" [class.current]="highlightedSection.name=='Capabilities'"><p>
+      <li [class.active]="whichStepsVisible[2] && !candidate.isSubmitted " [class.current]="highlightedSection.name=='Capabilities' || highlightedSection.name=='Complexities' "><p>
         Capabilities</p></li>
-      <li [class.active]="whichStepsVisible[3]" [class.current]="highlightedSection.name=='Complexities'"><p>
-        Complexities</p></li>
-      <li [class.active]="whichStepsVisible[4]"
+      <!--<li [class.active]="whichStepsVisible[3]" [class.current]="highlightedSection.name=='Complexities'"><p>
+        Complexities</p></li>-->
+      <li [class.active]="whichStepsVisible[4] && !candidate.isSubmitted "
           [class.current]="highlightedSection.name=='Proficiencies' || highlightedSection.name=='IndustryExposure'"><p>
-        Key Skills</p></li>
-      <li [class.active]="whichStepsVisible[5]" [class.current]="highlightedSection.name=='Professional-Details'"><p>
-        Professional Data</p></li>
-      <li [class.active]="whichStepsVisible[6]"
-          [class.current]="highlightedSection.name=='AboutMySelf' || highlightedSection.name=='AcademicDetails' || highlightedSection.name=='Awards' || highlightedSection.name=='EmploymentHistory' || highlightedSection.name=='Certification'">
-        <p>Profile Description</p></li>
+        My Skills</p></li>
+      <!--<li [class.active]="whichStepsVisible[5]" [class.current]="highlightedSection.name=='Professional-Details'"><p>
+        Professional Data</p></li>-->
+      <li [class.active]="whichStepsVisible[6] && !candidate.isSubmitted "
+          [class.current]="highlightedSection.name=='Professional-Details' ||
+          highlightedSection.name=='AboutMySelf' ||
+          highlightedSection.name=='AcademicDetails' ||
+          highlightedSection.name=='Awards' ||
+          highlightedSection.name=='EmploymentHistory' ||
+          highlightedSection.name=='Certification'">
+        <p>More About Me</p></li>
     </ul>
   </div>
 
@@ -101,12 +107,14 @@
           <div class="main-content clearfix">
             <div class="compact-view clearfix profile-visibility">
               <h4 class="heading-compact">Profile Visibility for employer</h4>
-              <div class="info profile-info" *ngIf="!candidate.isVisible">If enabled, your profile will be available in employer search.</div>
-              <div class="info profile-info" *ngIf="candidate.isVisible">Warning: Selecting Hide will hide your profile from recruiters. If you are on the lookout of job change, it is recommended to keep this setting to "Show". You can change this setting later.
+              <div class="info profile-info" *ngIf="!candidate.isVisible">If "No", your profile will not be visible to recruiter.
+                If you are on the lookout of job change, it is recommended to keep this setting to "Yes". You can change this setting later.</div>
+              <div class="info profile-info" *ngIf="candidate.isVisible">If "Yes", your profile will be available in employer search.
               </div>
               <div class="pull-right">
-                <span class="switch-label">Yes</span>
-                <div class="switch">
+                <span class="switch-label" *ngIf="candidate.isVisible == true">Yes</span>
+                <span class="switch-label" *ngIf="candidate.isVisible == false">No</span>
+                <div class="switch" [class.switch-elnabled]="candidate.isVisible == true" [class.switch-disabled]="candidate.isVisible == false">
                   <label class="radio-inline">
                     <input type="radio" name="profile-visibility"
                            (change)="showOrHide('show',$event)" value=true [checked]="candidate.isVisible == true">
@@ -122,16 +130,16 @@
             </div>
           </div>
         </div>
-
-        <div class="profile-configurations" [hidden]="!showAboutMySelf" >
-          <div class="col-sm-6 text-left">
-            <div class="button-group" *ngIf="!candidate.isSubmitted">
-              <button class="btn btn-success" tabindex="1" (click)="showHideModal()">Submit</button>
-              <!--<button class="btn btn-default">Cancel</button>-->
-            </div>
+      </div>
+      <div class="profile-configurations" [hidden]="!showAboutMySelf" >
+        <div class="text-left">
+          <div class="button-group" *ngIf="!candidate.isSubmitted">
+            <button class="btn btn-success" tabindex="1" (click)="showHideModal()">Submit</button>
+            <!--<button class="btn btn-default">Cancel</button>-->
           </div>
         </div>
       </div>
+
     </div>
   </div>
 </div>

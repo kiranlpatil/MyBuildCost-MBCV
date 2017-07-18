@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, Output} from "@angular/core";
 import {Section} from "../model/candidate";
 import {ValueConstant} from "../../../framework/shared/constants";
+import {Messages} from "../../../framework/shared/constants";
 
 @Component({
   moduleId: module.id,
@@ -29,6 +30,8 @@ export class ProficienciesComponent {
 
   private showButton: boolean = true;
   private submitStatus: boolean;
+  private requiredKeySkillsValidationMessage = Messages.MSG_ERROR_VALIDATION_KEYSKILLS_REQUIRED;
+  private maxKeySkillsValidationMessage = Messages.MSG_ERROR_VALIDATION_MAX_SKILLS_CROSSED + ValueConstant.MAX_PROFECIENCES;
 
   onProficiencyComplete(proficiency: string[]) {
     /*if (proficiency.length > 0) {

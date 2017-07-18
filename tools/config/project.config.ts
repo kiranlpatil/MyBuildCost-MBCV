@@ -18,7 +18,7 @@ export class ProjectConfig extends SeedConfig {
 
   constructor() {
     super();
-     this.APP_TITLE = 'C-Next-Job-Portal';
+     this.APP_TITLE = 'JobMosis-Job-Portal';
      this.FAV_ICON = ImagePath.FAV_ICON;
      this.SPLASH_SCREEN = ImagePath.BODY_BACKGROUND;
      this.APP_LOGO = ImagePath.MY_WHITE_LOGO;

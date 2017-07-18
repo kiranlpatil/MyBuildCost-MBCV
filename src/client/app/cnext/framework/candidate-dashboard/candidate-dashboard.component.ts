@@ -18,9 +18,9 @@ import {QCardFilterService} from "../filters/q-card-filter.service";
 
 export class CandidateDashboardComponent {
   private candidate: Candidate = new Candidate();
-  private jobList: JobQcard[] = new Array();
-  private appliedJobs: JobQcard[] = new Array();
-  private blockedJobs: JobQcard[] = new Array();
+  private jobList: JobQcard[] = new Array(0);
+  private appliedJobs: JobQcard[] = new Array(0);
+  private blockedJobs: JobQcard[] = new Array(0);
   private hideSection: boolean = false;
   private locationList: string[] = new Array(0);
   private _locationList: string[] = new Array(0);

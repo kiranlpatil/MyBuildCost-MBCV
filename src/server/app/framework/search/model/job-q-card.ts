@@ -17,6 +17,7 @@ export class JobQCard {
   company_logo: string;
   company_age: string;
   joiningPeriod: string;
+  postingDate: Date;
   industry: string;
   jobTitle: string;
   _id: string;

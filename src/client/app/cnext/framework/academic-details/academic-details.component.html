@@ -51,6 +51,7 @@
         <h4 class="heading-compact">
           <img src="assets/c-next/icons/education-icon.png" alt="employment"/>
           Academic Details
+          <button class="btn-edit" (click)="highlightedSection.name='AcademicDetails';highlightedSection.isDisable=true;showButton=false" title="Edit Academic Details"></button>
         </h4>
       </div>
 
@@ -58,13 +59,14 @@
         <h4 class="heading-compact">
           <img src="assets/c-next/icons/education-icon.png" alt="employment"/>
           Academic Details
+          <button class="btn-edit" (click)="highlightedSection.name='AcademicDetails';highlightedSection.isDisable=true;showButton=false" title="Edit Academic Details"></button>
         </h4>
         <ul>
           <div *ngFor="let item of candidate.academics;let i = index">
             <div *ngIf="i == 0">
               <li>
                 <p>{{item.specialization}} at {{item.board}} in {{item.yearOfPassing}}</p>
-                <p *ngIf="candidate.academics.length != 1">( {{candidate.academics.length-1}} more )</p>
+                <p class="more-elements" *ngIf="candidate.academics.length != 1">{{candidate.academics.length-1}} more</p>
               </li>
             </div>
           </div>

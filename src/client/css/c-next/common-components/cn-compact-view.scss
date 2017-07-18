@@ -60,7 +60,7 @@ $white: #fff;
   clear: both;
   //border: 1px solid $border-color;
   position: relative;
-  padding: 5px;
+  padding: 5px 10px;
   //z-index: 2;
   user-select: none;
 
@@ -70,7 +70,7 @@ $white: #fff;
     border: 0;
     display: inline-block;
     height: 20px;
-    opacity: 1;
+    opacity: 0;
     padding: 0;
     transition: opacity 0.25s ease-out;
     width: 20px;
@@ -131,7 +131,7 @@ $white: #fff;
     box-sizing: border-box;
     float: left;
     height: 85px;
-    margin: 0 15px 0 0;
+    margin: 5px 15px 5px 0;
     overflow: hidden;
     position: relative;
     width: 85px;
@@ -151,7 +151,9 @@ $white: #fff;
   }
 
   p {
+    font-family: 'gothamrnd-book';
     font-size: 12px;
+    font-weight: 600;
     margin: 0;
   }
 
@@ -160,7 +162,7 @@ $white: #fff;
     margin-bottom: 0;
     padding: 0 10px 0 0;
     font-size: 14px;
-    font-weight: 500;
+    font-weight: 600;
     font-family: 'gothamrnd-book';
     min-width: 145px;
     color: $black;
@@ -172,7 +174,8 @@ $white: #fff;
   }
 
   .option {
-    font-weight: 900;
+    font-family: 'gothamrnd-book';
+    font-weight: 600;
     font-size: 12px;
     text-transform: capitalize;
     background: $theme-color;
@@ -191,7 +194,8 @@ $white: #fff;
   }
 
   ul {
-    padding-left: 22px;
+    padding-left: 20px;
+    margin: 0;
 
     li {
       color: #666;
@@ -199,10 +203,17 @@ $white: #fff;
       //list-style-type: disc;
       list-style-image: url('../../../assets/c-next/compact-view/list-type.png');
       margin-bottom: 0;
-      padding-right: 25px;
+      padding: 0 25px 0 5px;
       text-transform: capitalize;
       width: 100%;
     }
+  }
+
+  .more-elements {
+    color: $theme-color;
+    font-size: 11px;
+    font-style: italic;
+    margin-top: 10px;
   }
 
 }
@@ -245,12 +256,18 @@ $white: #fff;
   }
 }
 
+@media only screen and (max-width: 1366px) {
+  .edit-modal-content {
+    margin: 30px auto 0;
+  }
+}
 
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 980px) {
   .edit-modal-content {
     width: 90%;
   }
 }
+
 
 @media only screen and (max-width: 767px) {
 

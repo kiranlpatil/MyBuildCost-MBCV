@@ -1,16 +1,18 @@
 $profile-background: #f2f2f2;
 $process-color: #224879;
 $active-color: #fff;
-$active-text-color: #224879;
+$active-text-color: #000;
 $active-progress-line: #8eb4d9;
 $bubble-background: #35567e;
 $white: #fff;
 $border-color: #e8e8e8;
 $light-blue: #00aed5;
 $label: #888;
-$blue: #3694d1;
-$current: #FFC107;
+$blue: #0d75fa;
+$current: #ff9700;
 $green-text: #42a948;
+$current-border: #888;
+$green: #8cc63f;
 
 .error-messages {
   color: #f66761;
@@ -20,7 +22,6 @@ $green-text: #42a948;
   position: absolute;
   line-height: 11px;
 }
-
 
 .create-profile {
   //background: $profile-background;
@@ -32,7 +33,7 @@ $green-text: #42a948;
   -webkit-box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.4);
   -moz-box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.4);
   box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.4);
-  height: 50px;
+  height: 80px;
   left: 0;
   margin: 0 auto;
   padding-top: 6px;
@@ -44,8 +45,9 @@ $green-text: #42a948;
 
 .bar {
   counter-reset: step;
-  margin: 0 auto;
-  padding: 0;
+  margin: 13px auto;
+  padding: 0 10px 0 0;
+  width: 975px;
 
   &::before {
     clear: both;
@@ -63,19 +65,20 @@ $green-text: #42a948;
     list-style-type: none;
     position: relative;
     text-align: center;
-    width: 14.24%;
+    width: 20%;
 
     p {
-      margin: -7px 0;
+      margin: -5px 0;
       color: $white;
-      opacity: 0.3;
+      opacity: 1;
       font-size: 12px;
+      padding: 0 0 3px;
     }
 
     &::before {
-      background-color: #fff;
+      background-color: $blue;
       border-radius: 50%;
-      color: #3694d1;
+      color: $white;
       content: counter(step);
       counter-increment: step;
       display: block;
@@ -87,7 +90,8 @@ $green-text: #42a948;
       text-align: center;
       width: 20px;
       z-index: 2;
-      opacity: 0.3;
+      opacity: 1;
+      border: 1px solid $blue;
     }
 
     &::after {
@@ -99,7 +103,7 @@ $green-text: #42a948;
       top: 10px;
       width: 80%;
       z-index: 1;
-      opacity: 0.3;
+      opacity: 1;
     }
 
     &:last-child::after {
@@ -115,10 +119,11 @@ $green-text: #42a948;
     }
 
     &::before {
-      background: $white;
-      border: 1px solid lighten($active-color, 30%);
-      color: $active-text-color;
+      background: $green;
+      border: 1px solid lighten($white, 30%);
+      color: $white;
       opacity: 1;
+      content: "\2713";
     }
 
     &::after {
@@ -131,8 +136,9 @@ $green-text: #42a948;
     &::before {
       background: $current !important;
       opacity: 1;
-      border: 1px solid lighten($active-color, 30%);
-      color: $active-text-color;
+      border: 1px solid $current;
+      color: $white;
+      content: counter(step);
     }
 
     &::after {
@@ -142,11 +148,10 @@ $green-text: #42a948;
 
     p {
       top: -9px;
-      border-bottom: 3px solid $current;
+      border-bottom: 2px solid $current-border;
       width: auto;
       display: inline-block;
       position: relative;
-      padding: 0;
       opacity: 1;
     }
   }
@@ -191,7 +196,7 @@ $green-text: #42a948;
 }
 
 .profile-visibility {
-  min-height: 80px;
+  min-height: 85px;
   .heading {
     display: inline;
   }
@@ -263,13 +268,11 @@ $green-text: #42a948;
   }
 }
 
-@media only screen and (max-width: 1366px) {
+
+@media only screen and (max-width: 1280px) {
   .bar {
     width: 70%;
   }
-}
-
-@media only screen and (max-width: 1280px) {
   .profile-configurations {
     .col-sm-8,
     .col-sm-4 {

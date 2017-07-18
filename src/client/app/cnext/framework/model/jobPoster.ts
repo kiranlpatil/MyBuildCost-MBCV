@@ -21,6 +21,7 @@ export class JobPosterModel {
   competencies: string = '';
   responsibility: string = '';
   postingDate: Date;
+  expiringDate: Date;
   isJobPosted: boolean;
   remark: string = '';
   roleType: string = '';

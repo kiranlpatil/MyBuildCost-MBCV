@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Role} from '../model/role';
 import {Capability} from '../model/capability';
-import {LocalStorage, ValueConstant} from '../../../framework/shared/constants';
+import {LocalStorage, ValueConstant, Messages} from '../../../framework/shared/constants';
 import {Section} from '../model/candidate';
 import {LocalStorageService} from '../../../framework/shared/localstorage.service';
 
@@ -28,6 +28,8 @@ export class CapabilitiesComponent {
   private disableButton: boolean = true;
   private isCandidate: boolean = false;
   private emptyCapabilities: boolean;
+  private requiredCapabilitiesValidationMessage = Messages.MSG_ERROR_VALIDATION_CAPABILITIES_REQUIRED;
+  private capabilitiesCodes : string[]= new Array(0);
   tooltipCandidateMessage: string =
 
     "<ul>" +
@@ -54,6 +56,22 @@ export class CapabilitiesComponent {
   ngOnChanges(changes: any) {
     if (this.candidateRoles) {
       this.setPrimaryCapabilitydata();
+    }
+    if(changes.roles && changes.roles.currentValue) {
+      this.capabilitiesCodes= new Array(0);
+      for(let role of changes.roles.currentValue) {
+        let duplicateCapabilityIndex : number;
+          for(let capability of role.capabilities) {
+            if(this.capabilitiesCodes.indexOf(capability.code) != -1 ) {
+              duplicateCapabilityIndex= role.capabilities.indexOf(capability);
+            }else {
+              this.capabilitiesCodes.push(capability.code);
+            }
+          }
+          if(duplicateCapabilityIndex != undefined) {
+            role.capabilities.splice(duplicateCapabilityIndex,1);
+          }
+      }
     }
     this.primaryCapabilitiesNumber = this.primaryNames.length;
   }
@@ -155,12 +173,12 @@ onSave(){
 
     for (let role of this.candidateRoles) {
       for (let mainRole of this.roles) {
-        if (role.name === mainRole.name) {
+        if (role.code === mainRole.code) {
           if (role.capabilities) {
             for (let cap of role.capabilities) {
               if (mainRole.capabilities) {
                 for (let mainCap of mainRole.capabilities) {
-                  if (cap.name === mainCap.name) {
+                  if (cap.code === mainCap.code) {
                     cap.isPrimary ? this.primaryNames.push(cap.name) : (cap.isSecondary ? this.secondaryNames.push(cap.name) : console.log(""));
                     mainCap.isPrimary = cap.isPrimary;
                     mainCap.isSecondary = cap.isSecondary;

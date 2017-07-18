@@ -16,6 +16,8 @@ export class MultiSelectComponent implements OnChanges {
   @Input() data: string[];
   @Output() onComplete = new EventEmitter();
   @Input() submitStatus: boolean;
+  @Input() requiredKeySkillsValidationMessage: string;
+  @Input() maxKeySkillsValidationMessage: string;
 
   private selectedProficiencies = new Array();
   private masterDataProficiencies = new Array();

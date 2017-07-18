@@ -7,7 +7,7 @@
           <input type="text" class="form-control" formControlName="specialization" required/>
           <div class="error-messages"
                *ngIf="(academicForm.get('specialization').touched || submitStatus) && academicForm.get('specialization').hasError('required')">
-            <p>Degree Name is required</p>
+            <p>{{requiredDegreeValidationMessage}}</p>
           </div>
         </div>
       </div>
@@ -18,7 +18,7 @@
           <input class="form-control" type="text" formControlName="board" required/>
           <div class="error-messages"
                *ngIf="(academicForm.get('board').touched || submitStatus) && academicForm.get('board').hasError('required')">
-            <p>Board/University Name is required</p>
+            <p>{{requiredUniversityValidationMessage}}</p>
           </div>
         </div>
       </div>
@@ -32,7 +32,7 @@
           </select>
           <div class="error-messages"
                *ngIf="(academicForm.get('yearOfPassing').touched || submitStatus) && academicForm.get('yearOfPassing').hasError('required')">
-            <p>Year Of Passing is required</p>
+            <p>{{requiredYearOfPassingValidationMessage}}</p>
           </div>
         </div>
       </div>

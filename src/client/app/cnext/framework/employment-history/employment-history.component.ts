@@ -117,29 +117,63 @@ export class EmploymentHistoryComponent {
   }
 
   postData(type: string) {
-    if(!this.employeeHistory.valid){
+    let empHistoryData = this.employeeHistory.value.employeeHistories[0];
+
+    if(type == 'delete' && this.employeeHistory.valid){
+      this.candidate.employmentHistory = this.employeeHistory.value.employeeHistories;
+      this.profileCreatorService.addProfileDetail(this.candidate).subscribe(
+        user => {
+          if (type == 'next') {
+            this.onNext();
+          }
+          else if (type == 'save') {
+            this.onSave();
+          }
+          return;
+        });
+    }
+
+
+    if(empHistoryData.companyName != "" && empHistoryData.designation != ""
+      && empHistoryData.from.month != "" && empHistoryData.from.year != ""
+      && empHistoryData.to.month != "" && empHistoryData.to.year != ""){
+      this.candidate.employmentHistory = this.employeeHistory.value.employeeHistories;
+      this.profileCreatorService.addProfileDetail(this.candidate).subscribe(
+        user => {
+          if (type == 'next') {
+            this.onNext();
+          }
+          else if (type == 'save') {
+            this.onSave();
+          }
+          return;
+        });
+    }
+
+    if(empHistoryData.companyName != "" || empHistoryData.designation != ""
+      || empHistoryData.from.month != "" || empHistoryData.from.year != ""
+      || empHistoryData.to.month != "" || empHistoryData.to.year != ""){
       this.submitStatus = true;
       return;
     }
-    this.candidate.employmentHistory = this.employeeHistory.value.employeeHistories;
-    this.profileCreatorService.addProfileDetail(this.candidate).subscribe(
-      user => {
-        if (type == 'next') {
-          this.onNext();
-        }
-        else if (type == 'save') {
-          this.onSave();
-        }
-      });
+
+    if (type == 'next') {
+      this.onNext();
+    }
+    else if (type == 'save') {
+      this.onSave();
+    }
   }
 
   onNext() {
+    this.submitStatus = false;
     this.onComplete.emit();
     this.highlightedSection.name = 'AcademicDetails';
     this.highlightedSection.isDisable = false;
   }
 
   onSave() {
+    this.submitStatus = false;
     this.onComplete.emit();
     this.highlightedSection.name = 'none';
     this.highlightedSection.isDisable = false;

@@ -51,19 +51,21 @@
         <h4 class="heading-compact">
           <img src="assets/c-next/icons/awards.png" alt="employment"/>
           Awards
+          <button class="btn-edit" (click)="highlightedSection.name='Awards';highlightedSection.isDisable=true;showButton=false" title="Edit Awards"></button>
         </h4>
       </div>
       <div class="" *ngIf=" awardDetail.controls.awards.controls.length>0 ">
         <h4 class="heading-compact">
           <img src="assets/c-next/icons/awards.png" alt="employment"/>
           Awards
+          <button class="btn-edit" (click)="highlightedSection.name='Awards';highlightedSection.isDisable=true;showButton=false" title="Edit Awards"></button>
         </h4>
         <ul>
           <div *ngFor="let item of candidate.awards;let i = index">
             <div *ngIf="i == 0">
               <li>
                 <p>{{item.name}} at {{item.issuedBy}} in {{item.year}}</p>
-                <p *ngIf="candidate.awards.length != 1">( {{candidate.awards.length-1}} more )</p>
+                <p class="more-elements" *ngIf="candidate.awards.length != 1">{{candidate.awards.length-1}} more</p>
               </li>
             </div>
           </div>

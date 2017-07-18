@@ -8,9 +8,12 @@ $border-color: #ccc;
 }
 
 .compact-view {
-  .btn-edit {
-    top: 20px;
-    left: 150px;
+  padding-bottom: 10px !important;
+
+  &:hover {
+    .btn-edit {
+      opacity: 1;
+    }
   }
 }
 

@@ -81,20 +81,46 @@ export class CertificationAccreditationComponent {
   }
 
   postData(type: string) {
-    if(!this.certificationDetail.valid){
+    let certificationsData = this.certificationDetail.value.certifications[0];
+
+    if(type == 'delete' && this.certificationDetail.valid){
+      this.candidate.certifications = this.certificationDetail.value.certifications;
+      this.profileCreatorService.addProfileDetail(this.candidate).subscribe(
+        user => {
+          if (type == 'next') {
+            this.onNext();
+          }
+          else if (type == 'save') {
+            this.onSave()
+          }
+        });
+    }
+
+
+    if(certificationsData.issuedBy != "" && certificationsData.name != "" && certificationsData.year != "") {
+      this.candidate.certifications = this.certificationDetail.value.certifications;
+      this.profileCreatorService.addProfileDetail(this.candidate).subscribe(
+        user => {
+          if (type == 'next') {
+            this.onNext();
+          }
+          else if (type == 'save') {
+            this.onSave()
+          }
+        });
+    }
+
+    if(certificationsData.issuedBy != "" || certificationsData.name != "" || certificationsData.year != "") {
       this.submitStatus = true;
       return;
     }
-    this.candidate.certifications = this.certificationDetail.value.certifications;
-    this.profileCreatorService.addProfileDetail(this.candidate).subscribe(
-      user => {
-        if (type == 'next') {
-          this.onNext();
-        }
-        else if (type == 'save') {
-          this.onSave()
-        }
-      });
+
+    if (type == 'next') {
+      this.onNext();
+    }
+    else if (type == 'save') {
+      this.onSave()
+    }
   }
 
   onNext() {

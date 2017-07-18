@@ -1,8 +1,8 @@
 export class AppSettings {
-   public static IP = 'http://localhost:8080';
+  //public static IP = 'http://localhost:8080';
   // public static IP = 'http://ee802b7f.ngrok.io';
   //public static IP = 'http://10.192.33.252:8087';
-  //public static IP = 'http://52.89.221.23:8080';
+    public static IP = 'http://52.89.221.23:8080';
  // public static IP = 'http://52.41.194.37:8080';
   //public static IP = '';
 
@@ -22,7 +22,7 @@ export class Messages {
   public static MSG_SUCCESS_REGISTRATION: string = 'Kindly verify your account.';
   public static MSG_SUCCESS_CHANGE_MOBILE_NUMBER: string = 'Mobile number changed successfully.';
   public static MSG_SUCCESS_RESEND_VERIFICATION_CODE: string = 'New One Time Password (OTP) sent on your mobile number.';
-  public static MSG_SUCCESS_MAIL_VERIFICATION: string = 'Verification email sent successfully on your email account. Kindly proceed by clikcing on th elink provided in your email.';
+  public static MSG_SUCCESS_MAIL_VERIFICATION: string = 'Verification email sent successfully on your email account. Kindly proceed by clicking on the link provided in your email.';
   public static MSG_SUCCESS_NEWREGISTRATION: string = 'Registration successful. Mobile number verified. Kindly sign in.';
   public static MSG_SUCCESS_RESET_PASSWORD: string = 'Your password is reset successfully.';
   public static MSG_SUCCESS_CHANGE_PASSWORD: string = 'Your password has been changed successfully.';
@@ -65,6 +65,65 @@ export class Messages {
   public static MSG_ERROR_FB_AUTH: string = 'User cancelled login or did not fully authorize.';
   public static MSG_ERROR_FB_domain_error: string = 'The domain of this URL isn not included in the app domains.';
   public static MSG_WARNING_ON_EDIT_CANDIDATE: string = 'This section can be updated only after.';
+
+  public static MSG_ERROR_VALIDATION_EMAIL_REQUIRED = 'Enter your email address.';
+  public static MSG_ERROR_VALIDATION_PASSWORD_REQUIRED = 'Enter your password.';
+  public static MSG_ERROR_VALIDATION_NEWPASSWORD_REQUIRED = 'Enter a new password';
+  public static MSG_ERROR_VALIDATION_CONFIRMPASSWORD_REQUIRED = 'Enter confirm password';
+  public static MSG_ERROR_VALIDATION_CURRENTPASSWORD_REQUIRED = 'Enter a current password';
+  public static MSG_ERROR_VALIDATION_FIRSTNAME_REQUIRED = "You can't leave this empty";
+  public static MSG_ERROR_VALIDATION_LASTNAME_REQUIRED = "You can't leave this empty";
+  public static MSG_ERROR_VALIDATION_MOBILE_NUMBER_REQUIRED = "You can't leave this empty.";
+  public static MSG_ERROR_VALIDATION_PIN_REQUIRED = 'Enter your pin code';
+  public static MSG_ERROR_VALIDATION_DESCRIPTION_REQUIRED = 'Enter a description';
+  public static MSG_ERROR_VALIDATION_ABOUT_COMPANY_REQUIRED = 'Please say something about your company ';
+  public static MSG_ERROR_VALIDATION_COMPANYNAME_REQUIRED = "You can't leave this empty";
+  public static MSG_ERROR_VALIDATION_OTP_REQUIRED = 'Enter OTP received';
+  public static MSG_ERROR_VALIDATION_INVALID_EMAIL_REQUIRED = 'Enter valid email address';
+  public static MSG_ERROR_VALIDATION_PASSWORD_MISMATCHED = 'Passwords does not match.';
+  public static MSG_ERROR_VALIDATION_BIRTHYEAR_REQUIRED = "You can't leave this empty.";
+  public static MSG_ERROR_VALIDATION_LOCATION_REQUIRED = "You can't leave this empty.";
+  public static MSG_ERROR_VALIDATION_HEADQUARTER_REQUIRED = "You can't leave this empty.";
+  public static MSG_ERROR_VALIDATION_COMPANYSIZE_REQUIRED = "You can't leave this empty.";
+  public static MSG_ERROR_VALIDATION_JOBTITLE_REQUIRED = "You can't leave this empty.";
+  public static MSG_ERROR_VALIDATION_CURRENTCOMPANY_REQUIRED = "You can't leave this empty.";
+  public static MSG_ERROR_VALIDATION_EDUCATION_REQUIRED = "You can't leave this empty.";
+  public static MSG_ERROR_VALIDATION_EXPERIENCE_REQUIRED = "You can't leave this empty.";
+  public static MSG_ERROR_VALIDATION_INDUSTRY_REQUIRED = "You can't leave this empty.";
+  public static MSG_ERROR_VALIDATION_AREAS_WORKED_REQUIRED = "Select areas you have worked.";
+  public static MSG_ERROR_VALIDATION_MAX_AREAS_WORKED_CROSSED = "You have selected maximum work areas.If you want to select a new work area, deselect any of the earlier ones.";
+  public static MSG_ERROR_VALIDATION_CAPABILITIES_REQUIRED = "Select your capabilities.";
+  public static MSG_ERROR_VALIDATION_COMPLEXITY_REQUIRED = "You can't leave this empty.";
+  public static MSG_ERROR_VALIDATION_MAX_SKILLS_CROSSED = "You can select maximum ";
+  public static MSG_ERROR_VALIDATION_KEYSKILLS_REQUIRED = "Select value from drop down.";
+  public static MSG_ERROR_VALIDATION_INDUSTRY_EXPOSURE_REQUIRED = "You can't leave this empty.";
+  public static MSG_ERROR_VALIDATION_CURRENTSALARY_REQUIRED = "You can't leave this empty.";
+  public static MSG_ERROR_VALIDATION_RELOCATE_REQUIRED = "You can't leave this empty.";
+  public static MSG_ERROR_VALIDATION_NOTICEPERIOD_REQUIRED = "You can't leave this empty.";
+  public static MSG_ERROR_VALIDATION_MAX_WORD_ALLOWED = "words remaining";
+  public static MSG_ERROR_VALIDATION_DESIGNATION_REQUIRED = "You can't leave this empty.";
+  public static MSG_ERROR_VALIDATION_DEGREE_NAME_REQUIRED = "Degree Name is required";
+  public static MSG_ERROR_VALIDATION_UNIVERSITY_NAME_REQUIRED = "Board/University Name is required";
+  public static MSG_ERROR_VALIDATION_YEAR_OF_PASSING_REQUIRED = "Year Of Passing is required";
+  public static MSG_ERROR_VALIDATION_CERTIFICATION_NAME_REQUIRED = "Certification Name is required";
+  public static MSG_ERROR_VALIDATION_CERTIFICATION_AUTHORITY_REQUIRED = "Authority Name is required";
+  public static MSG_ERROR_VALIDATION_CERTIFICATION_YEAR_REQUIRED = "Year Of Passing is required";
+  public static MSG_ERROR_VALIDATION_AWARD_NAME_REQUIRED = "Award Name is required";
+  public static MSG_ERROR_VALIDATION_AWARD_AUTHORITY_REQUIRED = "Authority Name is required";
+  public static MSG_ERROR_VALIDATION_AWARD_YEAR_REQUIRED = "Issued Year is required";
+  public static MSG_ERROR_VALIDATION_JOB_TITLE_REQUIRED = "Enter job title";
+  public static MSG_ERROR_VALIDATION_HIRING_MANAGER_REQUIRED = "Enter hiring manager name";
+  public static MSG_ERROR_VALIDATION_HIRING_DEPARTMENT_REQUIRED = "Enter hiring department";
+  public static MSG_ERROR_VALIDATION_EDUCATIONAL_QUALIFICATION_REQUIRED = "Select educational qualification";
+  public static MSG_ERROR_VALIDATION_MIN_EXPERIENCE_REQUIRED = "Select minimum experience expected";
+  public static MSG_ERROR_VALIDATION_MAX_EXPERIENCE_REQUIRED = "Select maximum experience expected";
+  public static MSG_ERROR_VALIDATION_MIN_SALARY_REQUIRED = "Select minimum salary offered";
+  public static MSG_ERROR_VALIDATION_MAX_SALARY_REQUIRED = "Select maximum salary offered";
+  public static MSG_ERROR_VALIDATION_JOINING_PERIOD_REQUIRED = "Select joining period";
+  public static MSG_ERROR_VALIDATION_OTP_MOBILE_NUMBER = "Please provide valid mobile number.";
+  public static MSG_ERROR_VALIDATION_PASSWORD = "Passwords must contain at least 8 characters and must be alpha-numeric.";
+  public static MSG_ERROR_VALIDATION_BIRTH_YEAR = "You can't leave this empty.";
+  public static MSG_ERROR_VALIDATION_PIN_NUMBER = "Pin code should not be greater than 20 characters.";
   public static SUGGESTION_MSG_FOR_RELEVENT_INDUSTRY = 'Based on the profile you have selected, we suggest to search candidate from following industries for matching profiles. Remove if you dont want to search candidates from any specific industry';
   public static SUGGESTION_MSG_ABOUT_DOMAIN = 'In addition to IT industry, do you want the candidate to have MANDATORY experience in any specific Domain? If yes, select such MUST HAVE DOMAINS.';
 }
@@ -194,7 +253,7 @@ export class ImagePath {
   public static FAV_ICON = './assets/framework/images/logo/cnext-favicon.ico';
   public static BODY_BACKGROUND = './assets/framework/images/page_background/page-bg.png';
   public static MY_COLOR_LOGO = './assets/framework/images/logo/logo-color.png';
-  public static MY_WHITE_LOGO = './assets/framework/images/logo/cnext-logo-white.png';
+  public static MY_WHITE_LOGO = './assets/framework/images/logo/job-mosis-logo.png';
   public static FACEBOOK_ICON = './assets/framework/images/footer/fb.svg';
   public static GOOGLE_ICON = './assets/framework/images/footer/google-plus.svg';
   public static LINKEDIN_ICON = './assets/framework/images/footer/linked-in.svg';
@@ -225,7 +284,7 @@ export class ImagePath {
 }
 
 export class ProjectAsset {
-  public static APP_NAME = 'C-NEXT';
+  public static APP_NAME = 'Job Mosis';
   public static TAG_LINE = 'The Awesome Web Experience';
   public static UNDER_LICENECE = '&#169; 2016 Techprimelab Software Pvt. Ltd.';
 }

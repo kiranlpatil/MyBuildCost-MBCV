@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from "@angular/core";
 import {Role} from "../model/role";
 import {Section} from "../model/candidate";
-import {LocalStorage, ValueConstant} from "../../../framework/shared/constants";
+import {LocalStorage, Messages, ValueConstant} from "../../../framework/shared/constants";
 import {LocalStorageService} from "../../../framework/shared/localstorage.service";
 
 @Component({
@@ -33,7 +33,8 @@ export class WorkAreaComponent implements OnInit,OnChanges {
   private showModalStyle2:boolean = false;
   private showButton: boolean = true;
   private emptyWorkAreas:boolean;
-
+  private requiredValidationMessage = Messages.MSG_ERROR_VALIDATION_AREAS_WORKED_REQUIRED;
+  private maxLimitExtend = Messages.MSG_ERROR_VALIDATION_MAX_AREAS_WORKED_CROSSED ;
 
   ngOnInit() {
     if (LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE) === 'true') {
@@ -82,6 +83,14 @@ export class WorkAreaComponent implements OnInit,OnChanges {
     }
   }
 
+  onPrevious() {
+    this.selectedRoles = new Array(0);
+    for (let role of this.savedSelectedRoles) {
+      let savetempRole = Object.assign({}, role);
+      this.selectedRoles.push(savetempRole);
+    }
+    this.highlightedSection.name = 'Industry';
+  }
   onNext() {
     if(!(this.savedSelectedRoles.length>0)){
       this.emptyWorkAreas = true;
@@ -114,7 +123,7 @@ onSave() {
       if(goNext) {
         this.onNext();
       } else {
-        this.onCancel();
+        this.onNext();
       }
     } else {
       this.onNext();

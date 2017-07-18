@@ -9,11 +9,11 @@
            (ngModelChange)="selectedProficiencyModel($event)"
            no-match-found-text="No Match Found, Press Enter to add this key skill.">
         <input class="form-control" #elem [id]="type"
-               (keyup.enter)="showHideModal($event.target.value)" placeholder="Enter words that describe your area of expertise. E.g. for IT:- Java, C++."/>
-        <div class="error-messages" *ngIf="showAlert"><p>You can select maximum {{maxLength}} Key skills.</p></div>
+               (keyup.enter)="showHideModal($event.target.value)" placeholder="E.g. for IT:- Java, C++. for Manufacturing:- Metal Cutting"/>
+        <div class="error-messages" *ngIf="showAlert"><p>{{maxKeySkillsValidationMessage}}</p></div>
         <div class="error-messages"
              *ngIf="submitStatus">
-          <p>Select value from drop down.</p>
+          <p>{{requiredKeySkillsValidationMessage}}</p>
         </div>
       </div>
     </div>

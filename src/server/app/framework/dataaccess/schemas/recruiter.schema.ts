@@ -139,6 +139,9 @@ class RecruiterSchema {
         postingDate: {
           type: Date
         },
+        expiringDate: {
+          type: Date
+        },
         releventIndustries:[{type:String}]
       }]
     }, {versionKey: false});

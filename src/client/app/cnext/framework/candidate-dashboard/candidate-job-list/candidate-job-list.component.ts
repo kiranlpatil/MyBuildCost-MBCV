@@ -14,6 +14,7 @@ export class CandidateJobListComponent {
   @Input() listOfJobs: JobQcard[];
   @Input() type: string;
   @Output() onAction = new EventEmitter();
+  @Input() progress_bar_color : string;
   private filterMeta: QCardFilter;
   private qCardModel: QCardsortBy = new QCardsortBy();
   private qCardCount = {count: 0};

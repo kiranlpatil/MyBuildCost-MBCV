@@ -77,19 +77,43 @@ export class AcademicDetailComponent implements OnInit, OnChanges {
   }
 
   postData(type: string) {
-    if(!this.academicDetail.valid){
+    let academicsData = this.academicDetail.value.academicDetails[0];
+
+    if(type == 'delete' && this.academicDetail.valid){
+      this.candidate.academics = this.academicDetail.value.academicDetails;
+      this.profileCreatorService.addProfileDetail(this.candidate).subscribe(
+        user => {
+          if (type === 'next') {
+            this.onNext();
+          } else if (type === 'save') {
+            this.onSave();
+          }
+        });
+    }
+
+    if(academicsData.board != "" && academicsData.specialization != "" && academicsData.yearOfPassing != "") {
+      this.candidate.academics = this.academicDetail.value.academicDetails;
+      this.profileCreatorService.addProfileDetail(this.candidate).subscribe(
+        user => {
+          if (type === 'next') {
+            this.onNext();
+          } else if (type === 'save') {
+            this.onSave();
+          }
+        });
+    }
+
+    if(academicsData.board != ""
+      || academicsData.specialization != "" || academicsData.yearOfPassing != "") {
       this.submitStatus = true;
       return;
     }
-    this.candidate.academics = this.academicDetail.value.academicDetails;
-    this.profileCreatorService.addProfileDetail(this.candidate).subscribe(
-      user => {
-        if (type === 'next') {
-          this.onNext();
-        } else if (type === 'save') {
-          this.onSave();
-        }
-      });
+
+    if (type === 'next') {
+      this.onNext();
+    } else if (type === 'save') {
+      this.onSave();
+    }
   }
 
   onNext() {

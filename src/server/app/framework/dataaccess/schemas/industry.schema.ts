@@ -26,6 +26,7 @@ class IndustrySchema {
           complexities: [{
             code: String,
             sort_order: Number,
+            question:String,
             questionForCandidate: String,
             questionForRecruiter: String,
             scenarios: [{

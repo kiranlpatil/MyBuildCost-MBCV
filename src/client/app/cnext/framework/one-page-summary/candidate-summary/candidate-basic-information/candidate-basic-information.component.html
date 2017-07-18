@@ -1,4 +1,4 @@
-<div class="basic-description" *ngIf="candidateDetails != undefined">
+<div class="basic-description profile-summary" *ngIf="candidateDetails != undefined">
   <div class="basic-info clearfix">
     <img src="assets/framework/images/dashboard/profile.png" alt="User Profile"
          *ngIf="candidateDetails.picture==undefined"/>
@@ -25,7 +25,8 @@
     <label>Current company</label>
     <span>{{candidate.professionalDetails.currentCompany}}</span>
     <label>Current Location</label>
-    <span>{{candidateDetails.location.city}}</span><!--<span>{{candidateDetails.location.city}}</span>-->
+    <span *ngIf="candidate.location && candidate.location.city">{{candidate.location.city}}</span>
+    <!--<span>{{candidateDetails.location.city}}</span>-->
     <label>Ready to Relocate</label>
     <span>{{candidate.professionalDetails.relocate}}</span>
     <label>Current Salary</label>

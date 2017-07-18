@@ -26,6 +26,7 @@ interface JobProfileModel {
   competencies: string;
   responsibility: string;
   postingDate: Date;
+  expiringDate: Date;
   remark: string;
   interestedIndustries: string[];
   candidate_list: CandidateListModel[];

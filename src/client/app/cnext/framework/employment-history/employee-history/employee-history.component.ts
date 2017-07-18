@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { ValueConstant } from '../../../../framework/shared/constants';
+import { ValueConstant, Messages } from '../../../../framework/shared/constants';
 
 
 @Component({
@@ -21,6 +21,8 @@ export class EmployeeHistoryComponent {
   public monthList: string[] = new Array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December');
 private fromYear:number;
 private toYear:number;
+private requiredCompanyNameValidationMessage = Messages.MSG_ERROR_VALIDATION_COMPANYNAME_REQUIRED;
+private requiredDesignationValidationMessage = Messages.MSG_ERROR_VALIDATION_DESIGNATION_REQUIRED;
 
 constructor() {
     this.currentDate = new Date();

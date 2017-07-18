@@ -7,6 +7,7 @@ import {MessageService} from "../../../framework/shared/message.service";
 import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
 import {Candidate, Section} from "../model/candidate";
 import {FormBuilder} from "@angular/forms";
+import {Messages} from '../../../framework/shared/constants';
 
 @Component({
   moduleId: module.id,
@@ -35,6 +36,10 @@ export class ProfessionalDataComponent extends BaseService implements OnInit,OnC
   private noticePeriodList:any = [];
   private industryExposureList:any = [];
   private isValid: boolean = true;
+  private requiedSalaryValidationMessage = Messages.MSG_ERROR_VALIDATION_CURRENTSALARY_REQUIRED;
+  private requiedRelocateValidationMessage = Messages.MSG_ERROR_VALIDATION_RELOCATE_REQUIRED;
+  private requiedIndustryExposureValidationMessage = Messages.MSG_ERROR_VALIDATION_INDUSTRY_EXPOSURE_REQUIRED;
+  private requiedNoticePeriodValidationMessage = Messages.MSG_ERROR_VALIDATION_NOTICEPERIOD_REQUIRED;
   /*private professionalDetails:ProfessionalData=new ProfessionalData();*/
   constructor(private professionalDataService: ProfessionalDataService,
               private messageService: MessageService,

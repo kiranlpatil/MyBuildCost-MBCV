@@ -20,10 +20,10 @@
             </div>
           </div>
 
-          <!--<div class="error-messages"
+          <div class="error-messages"
                *ngIf="submitStatus">
             <p>Please mentioned service period</p>
-          </div>-->
+          </div>
         </form>
       </div>
     </div>
@@ -56,17 +56,25 @@
         <h4 class="heading-compact">
           <img src="assets/c-next/icons/employment-icon.png" alt="employment"/>
           Employment History
+          <button class="btn-edit"
+            (click)="highlightedSection.name='EmploymentHistory';highlightedSection.isDisable=true;showButton=false"
+             title="Edit Employment History"></button>
         </h4>
       </div>
       <div class="" *ngIf="employeeHistory.controls.employeeHistories.controls.length>0">
-        <h4 class="heading-compact"> <img src="assets/c-next/icons/employment-icon.png" alt="employment"/>Employment History</h4>
+        <h4 class="heading-compact"> <img src="assets/c-next/icons/employment-icon.png" alt="employment"/>
+          Employment History
+          <button class="btn-edit"
+            (click)="highlightedSection.name='EmploymentHistory';highlightedSection.isDisable=true;showButton=false"
+            title="Edit Employment History"></button>
+        </h4>
         <ul>
           <div *ngFor="let item of candidate.employmentHistory;let i = index">
             <div *ngIf="i == 0">
               <li>
                 <p>{{item.designation}} at {{item.companyName}} </p>
                 <p>From {{item.from.month}} {{item.from.year}} to {{item.to.month}} {{item.to.year}}</p>
-                <p *ngIf="candidate.employmentHistory.length != 1">( {{candidate.employmentHistory.length-1}} more )</p>
+                <p class="more-elements" *ngIf="candidate.employmentHistory.length != 1">{{candidate.employmentHistory.length-1}} more</p>
               </li>
             </div>
           </div>

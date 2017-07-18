@@ -357,50 +357,50 @@ header {
 
 .icons-section {
   .industry {
-    background: url("/src/client/assets/c-next/card-view/blue-icons/industry.png") no-repeat 3px 8px;
+    background: url("../assets/c-next/card-view/blue-icons/industry.png") no-repeat 3px 8px;
   }
   .salary {
-    background: url("/src/client/assets/c-next/card-view/blue-icons/salary.png") no-repeat 1px 8px;
+    background: url("../assets/c-next/card-view/blue-icons/salary.png") no-repeat 1px 8px;
   }
   .experience {
-    background: url("/src/client/assets/c-next/card-view/blue-icons/experience.png") no-repeat 2px 8px;
+    background: url("../assets/c-next/card-view/blue-icons/experience.png") no-repeat 2px 8px;
   }
   .current-location {
-    background: url("/src/client/assets/c-next/card-view/blue-icons/relocation.png") no-repeat 6px 8px;
+    background: url("../assets/c-next/card-view/blue-icons/relocation.png") no-repeat 6px 8px;
   }
   .education {
-    background: url("/src/client/assets/c-next/card-view/blue-icons/education.png") no-repeat 3px 10px;
+    background: url("../assets/c-next/card-view/blue-icons/education.png") no-repeat 3px 10px;
   }
   .company-size {
-    background: url("/src/client/assets/c-next/card-view/blue-icons/company-size.png") no-repeat 5px 6px;
+    background: url("../assets/c-next/card-view/blue-icons/company-size.png") no-repeat 5px 6px;
   }
 }
 
 .proficiencies-icon {
-  background: url("/src/client/assets/c-next/card-view/blue-icons/proficiency.png") no-repeat 5px 9px;
-  min-height: 52px;
+  background: url("../assets/c-next/card-view/blue-icons/proficiency.png") no-repeat 5px 9px;
+  min-height: 53px !important;
 }
 
 #applied,
 #applied-job {
   .icons-section {
     .industry {
-      background: url("/src/client/assets/c-next/card-view/orange-icons/industry.png") no-repeat 3px 8px;
+      background: url("../assets/c-next/card-view/orange-icons/industry.png") no-repeat 3px 8px;
     }
     .salary {
-      background: url("/src/client/assets/c-next/card-view/orange-icons/salary.png") no-repeat 1px 8px;
+      background: url("../assets/c-next/card-view/orange-icons/salary.png") no-repeat 1px 8px;
     }
     .experience {
-      background: url("/src/client/assets/c-next/card-view/orange-icons/experience.png") no-repeat 2px 8px;
+      background: url("../assets/c-next/card-view/orange-icons/experience.png") no-repeat 2px 8px;
     }
     .current-location {
-      background: url("/src/client/assets/c-next/card-view/orange-icons/relocation.png") no-repeat 6px 8px;
+      background: url("../assets/c-next/card-view/orange-icons/relocation.png") no-repeat 6px 8px;
     }
     .education {
-      background: url("/src/client/assets/c-next/card-view/orange-icons/education.png") no-repeat 3px 10px;
+      background: url("../assets/c-next/card-view/orange-icons/education.png") no-repeat 3px 10px;
     }
     .company-size {
-      background: url("/src/client/assets/c-next/card-view/orange-icons/company-size.png") no-repeat 5px 6px;
+      background: url("../assets/c-next/card-view/orange-icons/company-size.png") no-repeat 5px 6px;
     }
   }
   .card-view,
@@ -414,8 +414,8 @@ header {
     }
   }
   .proficiencies-icon {
-    background: url("/src/client/assets/c-next/card-view/orange-icons/proficiency.png") no-repeat 5px 9px;
-    min-height: 52px;
+    background: url("../assets/c-next/card-view/orange-icons/proficiency.png") no-repeat 5px 9px;
+    min-height: 53px !important;
   }
 }
 
@@ -423,22 +423,22 @@ header {
 #rejected-job {
   .icons-section {
     .industry {
-      background: url("/src/client/assets/c-next/card-view/pink-icons/industry.png") no-repeat 3px 8px;
+      background: url("../assets/c-next/card-view/pink-icons/industry.png") no-repeat 3px 8px;
     }
     .salary {
-      background: url("/src/client/assets/c-next/card-view/pink-icons/salary.png") no-repeat 1px 8px;
+      background: url("../assets/c-next/card-view/pink-icons/salary.png") no-repeat 1px 8px;
     }
     .experience {
-      background: url("/src/client/assets/c-next/card-view/pink-icons/experience.png") no-repeat 2px 8px;
+      background: url("../assets/c-next/card-view/pink-icons/experience.png") no-repeat 2px 8px;
     }
     .current-location {
-      background: url("/src/client/assets/c-next/card-view/pink-icons/relocation.png") no-repeat 6px 8px;
+      background: url("../assets/c-next/card-view/pink-icons/relocation.png") no-repeat 6px 8px;
     }
     .education {
-      background: url("/src/client/assets/c-next/card-view/pink-icons/education.png") no-repeat 3px 10px;
+      background: url("../assets/c-next/card-view/pink-icons/education.png") no-repeat 3px 10px;
     }
     .company-size {
-      background: url("/src/client/assets/c-next/card-view/pink-icons/company-size.png") no-repeat 5px 6px;
+      background: url("../assets/c-next/card-view/pink-icons/company-size.png") no-repeat 5px 6px;
     }
   }
   .card-view,
@@ -452,24 +452,24 @@ header {
     }
   }
   .proficiencies-icon {
-    background: url("/src/client/assets/c-next/card-view/pink-icons/proficiency.png") no-repeat 5px 9px;
-    min-height: 52px;
+    background: url("../assets/c-next/card-view/pink-icons/proficiency.png") no-repeat 5px 9px;
+    min-height: 53px !important;
   }
 }
 
 #cart-job {
   .icons-section {
     .industry {
-      background: url("/src/client/assets/c-next/card-view/purple-icons/industry.png") no-repeat 3px 8px;
+      background: url("../assets/c-next/card-view/purple-icons/industry.png") no-repeat 3px 8px;
     }
     .salary {
-      background: url("/src/client/assets/c-next/card-view/purple-icons/salary.png") no-repeat 1px 8px;
+      background: url("../assets/c-next/card-view/purple-icons/salary.png") no-repeat 1px 8px;
     }
     .experience {
-      background: url("/src/client/assets/c-next/card-view/purple-icons/experience.png") no-repeat 2px 8px;
+      background: url("../assets/c-next/card-view/purple-icons/experience.png") no-repeat 2px 8px;
     }
     .current-location {
-      background: url("/src/client/assets/c-next/card-view/purple-icons/relocation.png") no-repeat 6px 8px;
+      background: url("../assets/c-next/card-view/purple-icons/relocation.png") no-repeat 6px 8px;
     }
   }
   .card-view,
@@ -483,8 +483,8 @@ header {
     }
   }
   .proficiencies-icon {
-    background: url("/src/client/assets/c-next/card-view/purple-icons/proficiency.png") no-repeat 5px 9px;
-    min-height: 52px;
+    background: url("../assets/c-next/card-view/purple-icons/proficiency.png") no-repeat 5px 9px;
+    min-height: 53px !important;
   }
 }
 

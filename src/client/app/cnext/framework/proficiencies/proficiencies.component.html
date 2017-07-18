@@ -8,7 +8,11 @@
         <div class="proficiency-container col-sm-12 scrollable-content">
 
           <cn-multi-select [data]="proficiencies" [selectedData]="choosedproficiencies" [maxLength]="maxProficiencies"
-                           (onComplete)="onProficiencyComplete($event)" [submitStatus] = "submitStatus"></cn-multi-select>
+                           (onComplete)="onProficiencyComplete($event)" [submitStatus] = "submitStatus"
+                           [requiredKeySkillsValidationMessage] = "requiredKeySkillsValidationMessage"
+                           [maxKeySkillsValidationMessage] = "maxKeySkillsValidationMessage">
+
+          </cn-multi-select>
         </div>
       </div>
       <div class="col-sm-3 no-padding">
@@ -34,11 +38,11 @@
   <div class="section-container clearfix profeiciency-domain" *ngIf="highlightedSection.name !='Proficiencies'">
     <div class="main-content" (click)="highlightedSection.name='Proficiencies';highlightedSection.isDisable=true;showButton=false">
       <div class="compact-view clearfix">
+          <button class="btn-edit"
+                   (click)="highlightedSection.name='Proficiencies';highlightedSection.isDisable=true;showButton=false"
+                   [hidden]="highlightedSection.isDisable" title="Edit Key Skills"></button>
         <div class="col-sm-3 padding-right15">
           <h4 class="heading-compact">Key Skills
-          <!--  <button class="btn-edit"
-                    (click)="highlightedSection.name='Proficiencies';highlightedSection.isDisable=true;showButton=false"
-                    [hidden]="highlightedSection.isDisable" title="Edit Key Skills"></button>-->
           </h4>
         </div>
         <div class="col-sm-9 padding-left15">
@@ -49,6 +53,7 @@
         </div>
       </div>
     </div>
+    <div class="divider clearfix">&nbsp;</div>
   </div>
 </div>
 

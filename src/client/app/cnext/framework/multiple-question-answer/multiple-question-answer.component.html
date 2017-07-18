@@ -1,0 +1,26 @@
+<div class="complexity-details" *ngIf="capabilityDetails" [class.slide-left]="slideQuestionToRight"
+     [class.slide-right]="slideQuestionToLeft">
+  <!-- <p class="breadcrumbs">
+     <span *ngIf="complexityDetails.role_name">{{complexityDetails.role_name}} </span>
+     <span *ngIf="complexityDetails.capability_name"> >> {{complexityDetails.capability_name}} </span>
+     <span *ngIf="complexityDetails.defaultComplexityName"> >> {{complexityDetails.defaultComplexityName}}</span>
+     <span> {{complexityDetails.complexity_number}}</span><span *ngIf="complexityDetails.total_complexity_in_capability">/{{complexityDetails.total_complexity_in_capability}}</span>
+   </p>-->
+  <div *ngFor="let complexity of capabilityDetails.complexities">
+    <p class="question">
+      <span *ngIf="isCandidate && complexity.complexityDetails.questionForCandidate">{{complexity.complexityDetails.questionForCandidate}}</span>
+      <span *ngIf="!isCandidate && complexity.complexityDetails.questionForRecruiter">{{complexity.complexityDetails.questionForRecruiter}}</span>
+    </p>
+
+    <div class="scenarios">
+      <div class="select-option2" *ngFor="let scenario of complexity.complexityDetails.scenarios">
+        <label>
+          <input type="radio" name="{{complexity.complexityDetails.complexity_name}}" value="{{scenario.name}}"
+                 (change)="onQuestionSelect(complexity.complexityDetails,scenario,$event)"
+                 [checked]="scenario.code===complexity.complexityDetails.userChoice">
+          <span>{{scenario.name}}</span>
+        </label>
+      </div>
+    </div>
+  </div>
+</div>

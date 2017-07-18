@@ -5,8 +5,8 @@
     </ul>
     <header class="clearfix">
       <div class="col-md-8 col-sm-7 col-xs-6 no-padding">
-        <h6 title="Job Title">{{job.jobTitle}}</h6>
-        <h5 title="Company Name">{{job.company_name}}</h5>
+        <h6 title="Job Title: {{job.jobTitle}}">{{job.jobTitle}}</h6>
+        <h5 title="Company Name: {{job.company_name}}">{{job.company_name}}</h5>
         <p class="proficiencies proficiencies-icon" title="Key Skills">
           <span *ngFor="let proficiency of job.proficiencies;let i=index">
           <span *ngIf="i < 5">{{proficiency}}
@@ -19,9 +19,9 @@
       <div class="col-md-4 col-sm-5 col-xs-6 no-padding canvas-cricle" title="Matching Percentage">
         <div class="canvas-container">
           <cn-progress-bar [value]="job.above_one_step_matching + job.exact_matching | number : '1.0-0'"
-                           [color]="'#0d75fa'" [rotation]="false"></cn-progress-bar>
+                           [color]="progress_bar_color" [rotation]="false"></cn-progress-bar>
           <cn-progress-bar [value]="job.above_one_step_matching + job.exact_matching | number : '1.0-0'"
-                           [color]="'#0d75fa'" [rotation]="true"></cn-progress-bar>
+                           [color]="progress_bar_color" [rotation]="true"></cn-progress-bar>
           <span>{{job.above_one_step_matching+job.exact_matching | number : '1.0-0'}}%</span>
           <p>Match</p>
         </div>
@@ -35,6 +35,7 @@
         <p class="current-location" title="Current Location"> {{job.location}} </p>
         <p class="education" title="Education"> {{job.education}}</p>
         <p class="company-size" title="Company size">{{job.company_size}}</p>
+        <p title="Date Posted">{{job.postingDate| date:'mediumDate'}}</p>
       </div>
     </div>
   </div>

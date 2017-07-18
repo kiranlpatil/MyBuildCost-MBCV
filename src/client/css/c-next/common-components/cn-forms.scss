@@ -3,6 +3,7 @@
 $bg-wrapper: #f8f8f8;
 $white: #fff;
 $text-color: #666;
+$heading-color: #333;
 
 .main-form-wrapper {
   @extend %background-img;
@@ -22,14 +23,15 @@ $text-color: #666;
     border: 1px solid $border-color;
 
     h5 {
-      color: #0d75fa;
+      color: $heading-color;
       font-family: 'helvlightregular';
-      font-size: 13px;
+      font-size: 20px;
       font-weight: bold;
       margin: 0;
-      padding: 10px 0 10px 15px;
-      background: $bg-wrapper !important;
-      border-bottom: 1px solid $border-color;
+      padding: 15px 0 10px 15px;
+      background: transparent !important;
+      border-bottom: 0px solid $border-color;
+      font-family: gothamrnd-light;
     }
 
     h5 > .glyphicon-remove {
@@ -43,6 +45,7 @@ $text-color: #666;
 
     p {
       text-align: left;
+      margin: 0px 0 20px;
     }
   }
 
@@ -74,7 +77,7 @@ $text-color: #666;
 
   .button-group {
     clear: both;
-    text-align: left;
+    text-align: right;
     width: 100%;
 
     .btn {
@@ -97,17 +100,18 @@ $text-color: #666;
     label {
       //-moz-transition: top .2s ease-in, font-size .2s ease-in;
       //-webkit-transition: top .2s ease-in, font-size .2s ease-in;
-      font-size: 12px;
+      font-size: 13px;
       font-weight: 600;
       left: 0;
       padding: 0;
       position: absolute;
-      top: -15px;
+      top: -20px;
       //transition: .2s ease all;
       //-moz-transition: .2s ease all;
       //-webkit-transition: .2s ease all;
       //transition: top .2s ease-in, font-size .2s ease-in;
       z-index: -1;
+      color: #333;
     }
 
     .form-control {

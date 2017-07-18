@@ -67,6 +67,7 @@ $theme-color: #3694d1;
 
     span {
       color: $text-color;
+      display: block;
       font-size: 13px;
       padding: 0;
       @extend %text-ellipsis;

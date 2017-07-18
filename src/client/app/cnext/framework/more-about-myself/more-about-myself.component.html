@@ -3,12 +3,12 @@
 
   <div class="main-content edit-modal-content clearfix">
     <div class="col-sm-9 no-padding">
-      <h4 class="heading">About myself (Max 250)</h4>
+      <h4 class="heading">About myself (Optional)</h4>
       <div class="col-sm-12 scrollable-content">
         <div class="col-sm-8 more-about-myself">
         <textarea class="form-control" [(ngModel)]="candidate.aboutMyself" (ngModelChange)="addAboutMyself()"
                   [maxlength]="maxword" Placeholder="Enter About Yourself"></textarea>
-          <p class="error-messages">{{remainingWords}} words remaining</p>
+          <p class="error-messages">{{remainingWords + remainingWordsMessage}}</p>
         </div>
       </div>
     </div>
@@ -35,14 +35,15 @@
   <div class="main-content"  (click)="highlightedSection.name='AboutMySelf';highlightedSection.isDisable=true;showButton=false">
     <div class="compact-view clearfix">
       <h4 class="heading-compact">About myself <span class="optional-field">(Optional)</span>
-        <!--<button class="btn-edit"
-
-                [hidden]="highlightedSection.isDisable" title="Edit More About Self"></button>-->
+        <button class="btn-edit"
+                (click)="highlightedSection.name='AboutMySelf';highlightedSection.isDisable=true;showButton=false"
+                [hidden]="highlightedSection.isDisable" title="Edit More About Self"></button>
         <!--<span class="glyphicon glyphicon-plus"></span>-->
       </h4>
       <p>{{candidate.aboutMyself}}</p>
     </div>
   </div>
+  <div class="divider clearfix">&nbsp;</div>
 </div>
 
 

@@ -65,7 +65,8 @@
                 <label>Current company</label>
                 <span>{{candidate.professionalDetails.currentCompany}}</span>
                 <label>Current Location</label>
-                <span>{{candidateDetails.location.city}}</span><!--<span>{{candidateDetails.location.city}}</span>-->
+                <span *ngIf="candidate.location && candidate.location.city ">{{candidate.location.city}}</span>
+                <!--<span>{{candidateDetails.location.city}}</span>-->
                 <label [class.exact]="data.releaseMatch=='exact'" [class.above]="data.releaseMatch=='above'"
                        [class.below]="data.releaseMatch=='below'" [class.missing]="data.releaseMatch=='missing'">
                   Ready to Relocate</label>
@@ -183,6 +184,8 @@
                   <span>
                     {{postedJob.competencies}}
                   </span>
+                  <label>Date Posted</label>
+                  <span>{{postedJob.postingDate | date:'mediumDate'}}</span>
                 </div>
               </div>
             </div>
@@ -264,7 +267,7 @@
 <section *ngIf="data != undefined && typeOfView=='compact'">
   <div class="one-page-summary">
     <div class="col-xs-12">
-      <div *ngIf="typeOfView =='spa_candidate' && candidateDetails != undefined">
+      <div *ngIf="candidateDetails != undefined">
         <cn-capability-compare [candidate_picture]="candidateDetails.picture"   [capabilities]="capabilities"></cn-capability-compare>
       </div>
 

@@ -82,19 +82,45 @@ export class AwardsComponent implements OnInit {
   }
 
   postData(type: string) {
-    if(!this.awardDetail.valid){
+    let awardsData = this.awardDetail.value.awards[0];
+
+    if(type == 'delete' && this.awardDetail.valid){
+      this.candidate.awards = this.awardDetail.value.awards;
+      this.profileCreatorService.addProfileDetail(this.candidate).subscribe(
+        user => {
+          if (type === 'next') {
+            this.onNext();
+          } else if (type === 'save') {
+            this.onSave();
+
+          }
+          return;
+        });
+    }
+
+    if(awardsData.issuedBy != "" && awardsData.name != "" && awardsData.year != "") {
+      this.candidate.awards = this.awardDetail.value.awards;
+      this.profileCreatorService.addProfileDetail(this.candidate).subscribe(
+        user => {
+          if (type === 'next') {
+            this.onNext();
+          } else if (type === 'save') {
+            this.onSave();
+          }
+          return;
+        });
+    }
+
+    if(awardsData.issuedBy != "" || awardsData.name != "" || awardsData.year != "") {
       this.submitStatus = true;
       return;
     }
-    this.candidate.awards = this.awardDetail.value.awards;
-    this.profileCreatorService.addProfileDetail(this.candidate).subscribe(
-      user => {
-        if (type === 'next') {
-          this.onNext();
-        }else if (type === 'save') {
-          this.onSave();
-        }
-      });
+
+    if (type === 'next') {
+      this.onNext();
+    } else if (type === 'save') {
+      this.onSave();
+    }
   }
 
   onNext() {

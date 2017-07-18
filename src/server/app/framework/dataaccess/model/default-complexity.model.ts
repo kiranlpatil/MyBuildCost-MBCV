@@ -1,7 +1,7 @@
 import IComplexity = require("../mongoose/complexity");
 import ComplexityModel = require("./complexity.model");
 
-interface DefaultComplexityModel {
+class DefaultComplexityModel {
   complexities: ComplexityModel[];
   name: string;
   code: string;

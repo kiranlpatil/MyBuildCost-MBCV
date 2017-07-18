@@ -16,11 +16,14 @@ class RecruiterRepository extends RepositoryBase<IRecruiter> {
   getJobProfileQCard(recruiters: any[], candidate: CandidateModel, jobProfileIds: string[], callback: (error: any, result: any) => void) {
     let isSend : boolean = false;
     let jobs_cards: JobQCard[] = new Array(0);
+    if(recruiters.length==0) {
+      callback(null, jobs_cards);
+    }
     for (let recruiter of recruiters) {
       for (let job of recruiter.postedJobs) {
-       /* if(!job.isJobPosted) {
+        if(!job.isJobPosted) {
           continue;
-        }*/
+        }
         let isPresent: boolean = false;
         for (let proficiency of candidate.proficiencies) {
           if (job.proficiencies.indexOf(proficiency) != -1) {
@@ -53,13 +56,13 @@ class RecruiterRepository extends RepositoryBase<IRecruiter> {
           let count : number = 0;
           for (let cap in job.capability_matrix) {
             if (job.capability_matrix[cap] === -1 || job.capability_matrix[cap] === 0 || job.capability_matrix[cap] === undefined) {
-            } else if (job.capability_matrix[cap] === candidate.capability_matrix[cap]) {
+            } else if (job.capability_matrix[cap] == candidate.capability_matrix[cap]) {
               job_qcard.exact_matching += 1;
               count++;
-            } else if (job.capability_matrix[cap] === (Number(candidate.capability_matrix[cap]) - ConstVariables.DIFFERENCE_IN_COMPLEXITY_SCENARIO)) {
+            } else if (job.capability_matrix[cap] == (Number(candidate.capability_matrix[cap]) - ConstVariables.DIFFERENCE_IN_COMPLEXITY_SCENARIO)) {
               job_qcard.above_one_step_matching += 1;
               count++;
-            } else if (job.capability_matrix[cap] === (Number(candidate.capability_matrix[cap]) + ConstVariables.DIFFERENCE_IN_COMPLEXITY_SCENARIO)) {
+            } else if (job.capability_matrix[cap] == (Number(candidate.capability_matrix[cap]) + ConstVariables.DIFFERENCE_IN_COMPLEXITY_SCENARIO)) {
               job_qcard.below_one_step_matching += 1;
               count++;
             } else {
@@ -86,6 +89,7 @@ class RecruiterRepository extends RepositoryBase<IRecruiter> {
           //job_qcard.industry = job.industry.name; //todo add industry name
           job_qcard.jobTitle = job.jobTitle;
           job_qcard.joiningPeriod = job.joiningPeriod;
+          job_qcard.postingDate = job.postingDate;
           if ((job_qcard.above_one_step_matching+job_qcard.exact_matching) >= ConstVariables.LOWER_LIMIT_FOR_SEARCH_RESULT) {
             jobs_cards.push(job_qcard);
           }

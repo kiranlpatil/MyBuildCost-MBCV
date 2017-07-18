@@ -1,3 +1,5 @@
+$theme-color: #0d75fa;
+
 .list-view {
   left: 0 !important;
   border-bottom: 1px solid #d1dce4;
@@ -52,6 +54,7 @@
     text-decoration: underline;
     margin-top: 10px;
     display: block;
+    color: $theme-color;
   }
 }
 

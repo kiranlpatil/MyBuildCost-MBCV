@@ -82,6 +82,7 @@ $black: #000;
   .other-links {
     a {
       color: $cn-theme-color;
+      font-size: 12px;
     }
   }
 
@@ -168,7 +169,7 @@ $black: #000;
   }
   //cn-create profile
   .profile-header {
-    background: $cn-theme-color;
+    background: $black;
   }
 
   .profile-wrapper {

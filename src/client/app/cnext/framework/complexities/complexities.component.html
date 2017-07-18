@@ -2,11 +2,22 @@
 <div class="section-container clearfix" *ngIf="highlightedSection.name=='Complexities'">
   <div class="main-content clearfix edit-modal-content">
     <div class="complexities col-sm-9 no-padding">
-      <h4 class="heading">Tell us about your experience in {{currentComplexityDetails.capability_name}}
+      <h4 class="heading" *ngIf="isCandidate && currentComplexityDetails">Tell us about your experience in
+        <span class="capability-name">{{currentComplexityDetails.capability_name}}</span></h4>
+      <h4 class="heading" *ngIf="!isCandidate && currentCapability">Which is the most appropriate level that candidate
+        is required to handle in <span class="capability-name">{{currentCapability.name}}</span>
       </h4>
-      <div class="error-messages" *ngIf="!isValid"><p>You can't leave this empty.</p></div>
-      <div class="complexity-container scrollable-content">
-          <cn-question-answer [complexityDetails]="currentComplexityDetails" [slideQuestionToLeft]="slideToLeft" [slideQuestionToRight]="slideToRight" (onComplete)="onAnswered($event)" ></cn-question-answer>
+      <div class="error-messages" *ngIf="!isValid && isCandidate"><p>{{requiedValidationMessageCandidate}}</p></div>
+      <div class="error-messages" *ngIf="!isValid && !isCandidate"><p>{{requiedValidationMessageRecruiter}}</p></div>
+      <div class="complexity-container scrollable-content" *ngIf="isCandidate">
+        <cn-question-answer [complexityDetails]="currentComplexityDetails" [slideQuestionToLeft]="slideToLeft"
+                            [slideQuestionToRight]="slideToRight"
+                            (onComplete)="onAnswered($event)"></cn-question-answer>
+      </div>
+      <div class="complexity-container scrollable-content" *ngIf="!isCandidate">
+        <cn-multiple-question-answer [capabilityDetails]="currentCapability" [slideQuestionToLeft]="slideToLeft"
+                                     [slideQuestionToRight]="slideToRight" (onComplete)="onCapabilityAnswered($event)"
+                                     (onQuestionComplete)="oncurrentComplexityAnswered($event)"></cn-multiple-question-answer>
       </div>
     </div>
     <div class="col-sm-3 no-padding">
@@ -15,13 +26,22 @@
     </div>
     <div class="button-group clearfix clear">
       <!--<div class="saving-loader">Saving...</div>-->
-        <button class="btn btn-primary" (click)="onNext()" [disabled]="currentComplexity===complexityIds.length">Next</button>
+      <button class="btn btn-primary" (click)="onNext()" [disabled]="currentComplexity===complexityIds.length"
+              *ngIf="isCandidate">Next
+      </button>
+      <button class="btn btn-primary" (click)="onNextCapability()" [disabled]="currentComplexity===complexityIds.length"
+              *ngIf="!isCandidate">Next
+      </button>
     </div>
-    <span class="question-count">{{currentComplexity+1}} of {{complexityIds.length}}</span>
-<!--
-    <span  class="question-count"> {{currentComplexityDetails.complexity_number}}</span><span *ngIf="currentComplexityDetails.total_complexity_in_capability"> of {{currentComplexityDetails.total_complexity_in_capability}}</span>
--->
-    <button class="btn-prev" (click)="onPrevious()" ><span class="glyphicon glyphicon-chevron-left"></span></button>
+    <span class="question-count" *ngIf="isCandidate">{{currentComplexity+1}} of {{complexityIds.length}}</span>
+    <span class="question-count" *ngIf="!isCandidate">{{currentCapabilityNumber+1}} of {{capabilities.length}}</span>
+    <!--
+        <span  class="question-count"> {{currentComplexityDetails.complexity_number}}</span><span *ngIf="currentComplexityDetails.total_complexity_in_capability"> of {{currentComplexityDetails.total_complexity_in_capability}}</span>
+    -->
+    <button class="btn-prev" (click)="onPrevious()"  *ngIf="isCandidate"><span class="glyphicon glyphicon-chevron-left"
+                                                         ></span></button>
+    <button class="btn-prev" (click)="onPreviousCapability()" *ngIf="!isCandidate"><span class="glyphicon glyphicon-chevron-left"
+                                                                    ></span></button>
   </div>
 </div>
 <div class="section-container " *ngIf="highlightedSection.name!='Complexities'">
@@ -30,13 +50,13 @@
       <a data-toggle="collapse" data-target="#demo">
         <h4 class="heading-compact">Capabilities
           <span class="add-more" (click)="highlightedSection.name='Capabilities'"><span class="glyphicon glyphicon-plus-sign"></span>Add More</span>
-          <!--<button class="btn-edit" (click)="edit()"
-                  [hidden]="highlightedSection.isDisable" title="Edit Complexities"></button>-->
+          <button class="btn-edit" (click)="edit()"
+                  [hidden]="highlightedSection.isDisable" title="Edit Complexities"></button>
         </h4>
       </a>
-      <div id="demo">
+      <div id="demo" class="collapse">
         <div class="col-sm-12 no-padding" (click)="edit()">
-          <cn-capability-compare [isCompact]="true" [rowsToShow]="5" [capabilities]="capabilities"></cn-capability-compare>
+          <cn-capability-compare id="complexity-compact-view" [isCompact]="true" [rowsToShow]="5" [capabilities]="capabilities"></cn-capability-compare>
         </div>
         <!--<div class="see-more" *ngIf="!showMore">
           <p>Show more</p>

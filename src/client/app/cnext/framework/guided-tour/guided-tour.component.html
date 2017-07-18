@@ -26,10 +26,6 @@
         </div>
 
         <div class="item carousel-slide">
-          <img src="../assets/c-next/guided-tour/slide12.jpg" style="width:100%;">
-        </div>
-
-        <div class="item carousel-slide">
           <img src="../assets/c-next/guided-tour/slide5.jpg" style="width:100%;">
         </div>
 
@@ -57,12 +53,18 @@
           <img src="../assets/c-next/guided-tour/slide11.jpg" style="width:100%;">
         </div>
 
+        <div class="item carousel-slide">
+          <img src="../assets/c-next/guided-tour/slide12.jpg" style="width:100%;">
+        </div>
+
       </div>
 
       <!-- Left and right controls -->
       <div class="button-container">
         <a class="left" (click)="showHide(true)" *ngIf="isShowPrev" href="#myCarousel" data-slide="prev">
-          <a class="btn btn-default btn-prev">Previous</a>
+          <a class="preview-btn">
+            <img src="assets/c-next/profile-creator/previous.png" />
+          </a>
         </a>
         <a class="right" *ngIf="isShowNext" (click)="showHide(false)" href="#myCarousel" data-slide="next">
           <a class="btn btn-default btn-next">Next</a>

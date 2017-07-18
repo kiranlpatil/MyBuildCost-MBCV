@@ -22,13 +22,13 @@ $bg-content: rgba(255, 255, 255, .1);
 $modal-bg: rgba(0, 0, 0, .7);
 $btn-color: #1c75bd;
 $input-bg: rgba(255, 255, 255, .1);
-$label: #999;
+$label: #333;
 $theme-color: #66afe9;
 $gray-shadow: rgba(0, 0, 0, .075);
 $blue-shadow: rgba(102, 175, 233, .6);
 $body-bg: #edf1f5;
 $required-field: #e82c0c;
-$optional-field: #66afe9;
+$optional-field: #0d75fa;
 
 .btn-logout {
   margin-top: 15px;
@@ -264,7 +264,7 @@ select,
     color: $label;
     display: block;
     float: left;
-    font-size: 13px;
+    font-size: 12px;
   }
 
   .form-control {
@@ -426,7 +426,7 @@ h4 {
 .other-links {
   float: right;
   font-size: 11px;
-  margin: 14px 0 0;
+  margin: 14px 14px 22px;
   text-align: right;
 }
 
@@ -456,6 +456,9 @@ h4 {
 .toaster-error {
   background: $toaster-error;
   z-index: 1000;
+  p {
+    color: #fff;
+  }
 }
 
 .toaster-success {
@@ -648,6 +651,14 @@ control-messages {
   border-color: transparent;
   padding: 0;
   margin: 0 0 10px;
+}
+
+.navbar-brand {
+  padding: 0px 15px 15px 15px;
+}
+
+.profile-summary {
+  margin-top: 30px;
 }
 
 // Media Queries

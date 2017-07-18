@@ -22,10 +22,11 @@
   </div>
 </div>
 <div class="section-container clearfix" *ngIf="highlightedSection.name !='Compentancies'">
-  <div class="main-content" (click)="highlightedSection.name='Compentancies'" title="Edit Additional Information">
+  <div class="main-content" (click)="highlightedSection.name='Compentancies'" title="Edit Additional Information about the Job">
     <div class="compact-view clearfix">
       <div class="col-sm-12 no-padding">
         <h4 class="heading-compact">Additional Information about the Job
+          <button class="btn-edit" (click)="highlightedSection.name='Compentancies'" title="Edit Additional Information about the Job"></button>
         </h4>
         <p class="primary">{{jobPosterModel.competencies}}</p>
       </div>

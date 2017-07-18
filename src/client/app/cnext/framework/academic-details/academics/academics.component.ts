@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 
 import { FormGroup } from '@angular/forms';
-import { ValueConstant } from '../../../../framework/shared/constants';
+import { ValueConstant, Messages } from '../../../../framework/shared/constants';
 
 
 @Component({
@@ -19,6 +19,9 @@ export class AcademicsComponent {
   private year: any;
   private currentDate: any;
   private yearList = new Array();
+  private requiredDegreeValidationMessage = Messages.MSG_ERROR_VALIDATION_DEGREE_NAME_REQUIRED;
+  private requiredUniversityValidationMessage = Messages.MSG_ERROR_VALIDATION_UNIVERSITY_NAME_REQUIRED;
+  private requiredYearOfPassingValidationMessage = Messages.MSG_ERROR_VALIDATION_YEAR_OF_PASSING_REQUIRED;
 
   constructor() {
     this.currentDate = new Date();
