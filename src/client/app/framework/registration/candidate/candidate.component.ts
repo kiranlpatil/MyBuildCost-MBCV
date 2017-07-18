@@ -68,6 +68,8 @@ export class CandidateComponent implements OnInit {
     if(year == ""){
       this.userForm.controls['birth_year'].setValue(undefined);
     }
+    this.passingYear = year;
+    this.model.birth_year = year;
   }
 
   /*getAddress(address: MyGoogleAddress) {
