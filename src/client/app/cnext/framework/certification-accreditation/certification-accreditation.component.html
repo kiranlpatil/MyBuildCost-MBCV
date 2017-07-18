@@ -50,16 +50,16 @@
     <div class="compact-view clearfix">
       <div *ngIf="certificationDetail.controls.certifications.controls.length==0">
 
-        <h4 class="heading-compact">
-          <img src="assets/c-next/icons/certificates.png" alt="employment"/>
+        <h4 class="heading-compact icons-section">
+          <span class="certification"></span>
           Certifications
           <button class="btn-edit" (click)="highlightedSection.name='Certification';highlightedSection.isDisable=true;showButton=false" title="Edit Certifications"></button>
         </h4>
       </div>
 
       <div class="" *ngIf="certificationDetail.controls.certifications.controls.length>0">
-        <h4 class="heading-compact">
-          <img src="assets/c-next/icons/certificates.png" alt="employment"/>
+        <h4 class="heading-compact icons-section">
+          <span class="certification"></span>
           Certifications
           <button class="btn-edit" (click)="highlightedSection.name='Certification';highlightedSection.isDisable=true;showButton=false" title="Edit Certifications"></button>
         </h4>

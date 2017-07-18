@@ -50,15 +50,15 @@
       <div *ngIf="awardDetail.controls.awards.controls.length==0">
         <!--*ngIf="candidate.awards != undefined && candidate.awards.length==1 && candidate.awards[0].name=='' && candidate.awards[0].issuedBy=='' "-->
 
-        <h4 class="heading-compact">
-          <img src="assets/c-next/icons/awards.png" alt="employment"/>
+        <h4 class="heading-compact icons-section">
+          <span class="award"></span>
           Awards
           <button class="btn-edit" (click)="highlightedSection.name='Awards';highlightedSection.isDisable=true;showButton=false" title="Edit Awards"></button>
         </h4>
       </div>
       <div class="" *ngIf=" awardDetail.controls.awards.controls.length>0 ">
-        <h4 class="heading-compact">
-          <img src="assets/c-next/icons/awards.png" alt="employment"/>
+        <h4 class="heading-compact icons-section">
+          <span class="award"></span>
           Awards
           <button class="btn-edit" (click)="highlightedSection.name='Awards';highlightedSection.isDisable=true;showButton=false" title="Edit Awards"></button>
         </h4>

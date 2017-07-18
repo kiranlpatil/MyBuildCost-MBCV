@@ -491,3 +491,37 @@ $switch-shadow: rgba(0, 0, 0, 0.2);
   }
 }
 
+.icons-section {
+  .education-icon {
+    background: url(../assets/c-next/card-view/sprite.png) no-repeat -10px -167px;
+    width: 20px !important;
+    height: 20px;
+    position: absolute;
+    left: 5px;
+  }
+
+  .certification {
+    background: url(../assets/c-next/card-view/sprite.png) no-repeat -10px -222px;
+    width: 20px !important;
+    height: 20px;
+    position: absolute;
+    left: 5px;
+  }
+
+  .employment-history {
+    background: url(../assets/c-next/card-view/sprite.png) no-repeat -10px -195px;
+    width: 20px !important;
+    height: 20px;
+    position: absolute;
+    left: 5px;
+  }
+
+  .award {
+    background: url(../assets/c-next/card-view/sprite.png) no-repeat -10px -249px;
+    width: 20px !important;
+    height: 20px;
+    position: absolute;
+    left: 5px;
+  }
+}
+

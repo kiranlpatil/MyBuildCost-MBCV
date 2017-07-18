@@ -21,7 +21,7 @@ $border-color: #e8e8e8;
   form {
     bottom: -21%;
     position: absolute;
-    right: 32%;
+    right: 34%;
   }
 
   .avtar > img {
@@ -39,14 +39,10 @@ $border-color: #e8e8e8;
 
   .custom-file-upload {
     cursor: pointer;
-    width: 45px;
+    width: auto;
 
     img {
       width: 100%;
-    }
-
-    span {
-      display: none;
     }
   }
 }

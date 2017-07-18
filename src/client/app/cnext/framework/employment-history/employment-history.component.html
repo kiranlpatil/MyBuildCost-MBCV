@@ -53,8 +53,8 @@
   <div class="main-content" *ngIf="highlightedSection.name !='EmploymentHistory'">
     <div class="compact-view clearfix" (click)="highlightedSection.name='EmploymentHistory';highlightedSection.isDisable=true;showButton=false">
       <div *ngIf="employeeHistory.controls.employeeHistories.controls.length==0">
-        <h4 class="heading-compact">
-          <img src="assets/c-next/icons/employment-icon.png" alt="employment"/>
+        <h4 class="heading-compact icons-section">
+          <span class="employment-history"></span>
           Employment History
           <button class="btn-edit"
             (click)="highlightedSection.name='EmploymentHistory';highlightedSection.isDisable=true;showButton=false"
@@ -62,7 +62,8 @@
         </h4>
       </div>
       <div class="" *ngIf="employeeHistory.controls.employeeHistories.controls.length>0">
-        <h4 class="heading-compact"> <img src="assets/c-next/icons/employment-icon.png" alt="employment"/>
+        <h4 class="heading-compact icons-section">
+          <span class="employment-history"></span>
           Employment History
           <button class="btn-edit"
             (click)="highlightedSection.name='EmploymentHistory';highlightedSection.isDisable=true;showButton=false"

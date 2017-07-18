@@ -412,6 +412,13 @@ header {
     position: absolute;
     left: 0;
   }
+
+  .edit-profile-pic {
+    background: url(../assets/c-next/card-view/sprite.png) no-repeat -9px -87px;
+    width: 22px !important;
+    height: 22px;
+    display: block;
+  }
 }
 
 .proficiencies-icon {

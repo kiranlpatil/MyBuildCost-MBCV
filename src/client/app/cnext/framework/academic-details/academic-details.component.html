@@ -50,16 +50,18 @@
     <div class="compact-view clearfix">
       <div *ngIf="academicDetail.controls.academicDetails.controls.length==0">
 
-        <h4 class="heading-compact">
-          <img src="assets/c-next/icons/education-icon.png" alt="employment"/>
+        <h4 class="heading-compact icons-section">
+          <!--<img src="assets/c-next/icons/education-icon.png" alt="employment"/>-->
+          <span class="education-icon"></span>
           Academic Details
           <button class="btn-edit" (click)="highlightedSection.name='AcademicDetails';highlightedSection.isDisable=true;showButton=false" title="Edit Academic Details"></button>
         </h4>
       </div>
 
       <div class="" *ngIf="academicDetail.controls.academicDetails.controls.length>0">
-        <h4 class="heading-compact">
-          <img src="assets/c-next/icons/education-icon.png" alt="employment"/>
+        <h4 class="heading-compact icons-section">
+          <!--<img src="assets/c-next/icons/education-icon.png" alt="employment"/>-->
+          <span class="education-icon"></span>
           Academic Details
           <button class="btn-edit" (click)="highlightedSection.name='AcademicDetails';highlightedSection.isDisable=true;showButton=false" title="Edit Academic Details"></button>
         </h4>

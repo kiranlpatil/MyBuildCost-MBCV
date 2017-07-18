@@ -23,6 +23,10 @@ $border-color: #ccc;
 }
 
 .compact-view {
+  .heading-compact {
+    padding-left: 25px;
+  }
+
   &:hover {
     .btn-edit {
       opacity: 1;
