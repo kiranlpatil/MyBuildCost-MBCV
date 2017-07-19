@@ -13,12 +13,13 @@
     </p>
 
     <div class="scenarios">
-      <div class="select-option2" *ngFor="let scenario of complexity.complexityDetails.scenarios">
+      <div class="item-radio" *ngFor="let scenario of complexity.complexityDetails.scenarios">
         <label>
           <input type="radio" name="{{complexity.complexityDetails.complexity_name}}" value="{{scenario.name}}"
                  (change)="onQuestionSelect(complexity.complexityDetails,scenario,$event)"
                  [checked]="scenario.code===complexity.complexityDetails.userChoice">
           <span>{{scenario.name}}</span>
+          <div class="check"></div>
         </label>
       </div>
     </div>
