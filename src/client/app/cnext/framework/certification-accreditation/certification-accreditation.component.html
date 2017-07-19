@@ -33,7 +33,7 @@
       </button>
       <button type="submit" class="btn btn-primary" (click)="postData('save')" *ngIf="candidate.isSubmitted">Save
       </button>
-      <button (click)="addCertification()" class="btn btn-add-another" [disabled]="!certificationDetail.valid">
+      <button (click)="addCertification('addAnother')" class="btn btn-add-another" [disabled]="!certificationDetail.valid">
         Add another
       </button>
     </div>
@@ -71,7 +71,7 @@
             </div>
           </div>
         </ul>
-        <p class="more-elements" *ngIf="candidate.certifications.length != 1">{{candidate.certifications.length-1}} more</p>
+        <p class="more-elements" *ngIf="candidate.certifications.length > 1">{{candidate.certifications.length-1}} more</p>
       </div>
     </div>
   </div>
