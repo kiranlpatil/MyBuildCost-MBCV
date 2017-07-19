@@ -1,7 +1,7 @@
-import IndustrySchema = require("../schemas/industry.schema");
-import RepositoryBase = require("./base/repository.base");
-import IIndustry = require("../mongoose/industry");
-import RoleModel = require("../model/role.model");
+import IndustrySchema = require('../schemas/industry.schema');
+import RepositoryBase = require('./base/repository.base');
+import IIndustry = require('../mongoose/industry');
+import RoleModel = require('../model/role.model');
 
 class IndustryRepository extends RepositoryBase<IIndustry> {
   private items: RoleModel[];
@@ -12,24 +12,24 @@ class IndustryRepository extends RepositoryBase<IIndustry> {
 
   findRoles(name: string, callback: (error: any, result: any) => void) {
     this.items = new Array(0);
-    console.time("findRole");
-    IndustrySchema.find({'name': name}).lean().exec((err: any, industry: any)=> {
+    console.time('findRole');
+    IndustrySchema.find({'name': name},{'roles.capabilities':0,'roles.default_complexities':0}).lean().exec((err: any, industry: any)=> {
       if (err) {
         callback(err, null);
       } else {
         if (industry.length <= 0) {
-          callback(new Error("Records are not found"), null);
+          callback(new Error('Records are not found'), null);
         } else {
           for (let role of industry[0].roles) {
             let obj: any = {
-              "industryName": industry[0].name,
-              "_id": role._id,
-              "name": role.name,
-              "code": role.code,
+              'industryName': industry[0].name,
+              '_id': role._id,
+              'name': role.name,
+              'code': role.code,
             };
             this.items.push(obj);
           }
-          console.timeEnd("findRole");
+          console.timeEnd('findRole');
           callback(null, this.items);
         }
       }
@@ -38,14 +38,14 @@ class IndustryRepository extends RepositoryBase<IIndustry> {
 
   findCapabilities(item: any, callback: (error: any, result: any) => void) {
     this.items = new Array(0);
-    console.time("findCapability");
+    console.time('findCapability');
 
-    IndustrySchema.find({'name': item.name}).lean().exec((err: any, industry: any)=> {
+    IndustrySchema.find({'name': item.name},{'roles.capabilities.complexities':0}).lean().exec((err: any, industry: any)=> {
       if (err) {
         callback(err, null);
       } else {
         if (industry.length <= 0) {
-          callback(new Error("Records are not found"), null);
+          callback(new Error('Records are not found'), null);
         } else {
           for (let role of industry[0].roles) {
             for (let o of item.roles) {
@@ -59,10 +59,10 @@ class IndustryRepository extends RepositoryBase<IIndustry> {
                 role_object.capabilities = new Array(0);
                 for (let capability of role.capabilities) {
                   let obj: any = {
-                    "industryName": industry[0].name,
-                    "roleName": role.name,
-                    "_id": capability._id,
-                    "name": capability.name,
+                    'industryName': industry[0].name,
+                    'roleName': role.name,
+                    '_id': capability._id,
+                    'name': capability.name,
                     'code': capability.code
                   };
                   role_object.capabilities.push(obj);
@@ -71,7 +71,7 @@ class IndustryRepository extends RepositoryBase<IIndustry> {
               }
             }
           }
-          console.timeEnd("findCapability");
+          console.timeEnd('findCapability');
           callback(null, this.items);
         }
       }
@@ -80,13 +80,13 @@ class IndustryRepository extends RepositoryBase<IIndustry> {
 
   findComplexities(item: any, callback: (error: any, result: any) => void) {
     this.items = new Array(0);
-    console.time("findComplexity");
+    console.time('findComplexity');
     IndustrySchema.find({'name': item.name}).lean().exec((err: any, industry: any)=> {
       if (err) {
         callback(err, null);
       } else {
         if (industry.length <= 0) {
-          callback(new Error("Records are not found"), null);
+          callback(new Error('Records are not found'), null);
         } else {
           for (let role of industry[0].roles) {
             for (let o of item.roles) {
@@ -123,7 +123,7 @@ class IndustryRepository extends RepositoryBase<IIndustry> {
               }
             }
           }
-          console.timeEnd("findComplexity");
+          console.timeEnd('findComplexity');
           callback(null, this.items);
         }
       }
