@@ -9,10 +9,10 @@ class RoleClassModel {
   capabilities: CapabilityClassModel[];
   default_complexities: DefaultComplexityModel[]
 
-  constructor (role:any){
-    this.name=role.area_of_work;
-    this.code=role.area_of_work_code;
-    this.sort_order=role.area_of_work_display_sequence;
+  constructor(name:string, code:string, sort_order:number) {
+    this.name = name;
+    this.code = code;
+    this.sort_order = sort_order;
   }
 }
 export = RoleClassModel;

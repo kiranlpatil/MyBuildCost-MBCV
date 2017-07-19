@@ -1,3 +1,4 @@
+import RoleClassModel = require("../dataaccess/model/role-class.model");
 var config = require('config');
 import CNextMessages = require("../shared/cnext-messages");
 import ProjectAsset = require("../shared/projectasset");
@@ -39,6 +40,29 @@ class RoleService {
 
   findByName(field: any, callback: (error: any, result: any) => void) {
     this.industryRepository.findRoles(field, callback);
+  }
+
+  addRole(currentRow:any, roles:any) {
+
+    if (roles.length != 0) {
+      for (let i = 0; i < roles.length; i++) {
+        if (currentRow.area_of_work == roles[i].name) {
+          return roles;
+        }
+        else {
+          if (i == (roles.length - 1)) {
+            let newRole = new RoleClassModel(currentRow.area_of_work, currentRow.area_of_work_code, currentRow.area_of_work_display_sequence);
+            roles.push(newRole);
+          }
+        }
+      }
+      return roles;
+    }
+    else {
+      let newRole = new RoleClassModel(currentRow.area_of_work, currentRow.area_of_work_code, currentRow.area_of_work_display_sequence);
+      roles.push(newRole);
+      return roles;
+    }
   }
 
 }

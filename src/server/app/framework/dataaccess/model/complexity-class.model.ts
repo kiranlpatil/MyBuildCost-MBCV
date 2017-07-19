@@ -10,11 +10,11 @@ class ComplexityClassModel {
   scenarios: ScenarioClassModel[];
   match: string;
 
-  constructor (complexity:any){
-    this.name = complexity.complexity;
-    this.code = complexity.complexity_code;
-    this.questionForCandidate = complexity.complexity_question_for_participant;
-    this.questionForRecruiter = complexity.complexity_question_for_recruiter;
+  constructor(name:string, code:string, questionForCandidate:string, questionForRecruiter:string) {
+    this.name = name;
+    this.code = code;
+    this.questionForCandidate = questionForCandidate;
+    this.questionForRecruiter = questionForRecruiter;
   }
 
 }

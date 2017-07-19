@@ -1,3 +1,4 @@
+import CapabilityClassModel = require("../dataaccess/model/capability-class.model");
 var config = require('config');
 import CNextMessages = require("../shared/cnext-messages");
 import ProjectAsset = require("../shared/projectasset");
@@ -41,6 +42,27 @@ class CapabilityService {
     this.industryRepository.findCapabilities(field, callback);
   }
 
+  addCapabilities(currentRow:any, capabilities:any) {
+    if (capabilities.length != 0) {
+      for (let i = 0; i < capabilities.length; i++) {
+        if (currentRow.capability == capabilities[i].name) {
+          //addCapabilities(currentRow,capabilities)
+        }
+        else {
+          if (i == (capabilities.length - 1)) {
+            var newCapability = new CapabilityClassModel(currentRow.capability, currentRow.capability_code, currentRow.capability_display_sequence);
+            capabilities.push(newCapability);
+          }
+        }
+      }
+      return capabilities;
+    }
+    else {
+      var newCapability = new CapabilityClassModel(currentRow.capability, currentRow.capability_code, currentRow.capability_display_sequence);
+      capabilities.push(newCapability);
+      return capabilities;
+    }
+  }
 }
 
 Object.seal(CapabilityService);

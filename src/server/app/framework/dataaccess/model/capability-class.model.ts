@@ -9,10 +9,10 @@ class CapabilityClassModel {
   isPrimary: boolean;
   isSecondary: boolean
 
-  constructor (capabitity:any){
-    this.name=capabitity.capability;
-    this.code=capabitity.capability_code;
-    this.sort_order=capabitity.capability_display_sequence;
+  constructor(name:string, code:string, sort_order:number) {
+    this.name = name;
+    this.code = code;
+    this.sort_order = sort_order;
   }
 
 }
