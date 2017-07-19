@@ -21,7 +21,9 @@
           <h4>Key Skills</h4>
         </div>
         <div class="pull-left col-xs-8 no-padding text-left">
-          <cn-horizontal-list-view [data]="postedJob.proficiencies"></cn-horizontal-list-view>
+          <div class="pull-left" style="padding-top: 6px;padding-right: 7px; font-size: 12px;" *ngFor="let item of postedJob.proficiencies;let i = index">
+            <span>{{item}}</span>,
+          </div>
         </div>
       </div>
       <div class="col-sm-12 proficiency-compare-section-are"
@@ -30,7 +32,9 @@
           <h4>Additional Key Skills</h4>
         </div>
         <div class="pull-left col-xs-8 no-padding text-left">
-          <cn-horizontal-list-view [data]="postedJob.additionalProficiencies"></cn-horizontal-list-view>
+          <div class="pull-left" style="padding-top: 6px;padding-right: 7px; font-size: 12px;" *ngFor="let item of postedJob.additionalProficiencies;let i = index">
+            <span>{{item}}</span>,
+          </div>
         </div>
       </div>
     </div>

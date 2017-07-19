@@ -81,6 +81,7 @@ $theme-color: #0d75fa;
 
     .panel-up::after {
       background: url(../../../../../assets/framework/images/dashboard/up-arrow.png) no-repeat 50% 40%;
+      top: 5px;
     }
 
     .panel-down::after {
