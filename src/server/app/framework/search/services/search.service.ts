@@ -105,7 +105,7 @@ class SearchService {
       'postedJobs.expiringDate': {$gte: currentDate}
     };
     let excluded_fields = {
-      'postedJobs.industry': 0,
+      'postedJobs.industry.roles': 0,
     };
     this.recruiterRepository.retrieveWithLean(data,excluded_fields, (err, res) => {
       if (err) {
