@@ -16,7 +16,7 @@ $error-failure: #a94442;
 $toaster-error: #f66761;
 $toaster-success: #ffd; // #3ec59d;
 $bg-disabled: #e82c0c;
-$background-black-alpha5: rgba(0, 0, 0, .5);
+$background-black-alpha5: rgba(0, 0, 0, .1);
 $toaster-message: rgba(102, 102, 102, .35);
 $bg-content: rgba(255, 255, 255, .1);
 $modal-bg: rgba(0, 0, 0, .7);
@@ -175,18 +175,17 @@ main {
 
 // Page Loader
 .loader-container {
-  //background: $background-black-alpha5;
-  //height: 100vh;
-  //left: 0;
-  //position: fixed;
-  //top: 0;
-//  display: none;
+  background: $background-black-alpha5;
+  height: 100vh;
+  left: 0;
+  position: fixed;
+  top: 0;
   width: 100%;
   z-index: 100000;
 
   .inner-loader {
     animation: spin 2s linear infinite;
-    border: 5px solid $loader-border;
+    border: 5px solid $white;
     border-radius: 50%;
     //display: none;
     height: 50px;
@@ -194,10 +193,12 @@ main {
     //margin-left: -25px;
     //margin-top: -25px;
     position: fixed;
-    bottom: 20px;
+    /*bottom: 20px;*/
     vertical-align: middle;
     width: 50px;
     z-index: 100000;
+    left: 50%;
+    top: 45%;
   }
 }
 

@@ -89,9 +89,26 @@ export class QCardviewComponent implements OnChanges {
         break;
       case ValueConstant.REJECTED_LISTED_CANDIDATE :
         this.candidateQlist.rejectedCandidates.splice(this.candidateQlist.rejectedCandidates.indexOf(candidate), 1);
+        for(let item of this.candidateQlist.matchedCandidates){
+          if(item._id == candidate._id){
+            isFound=true;
+          }
+        }
+        if(!isFound){
+          this.candidateQlist.matchedCandidates.push(candidate);
+        }
         break;
       case ValueConstant.CART_LISTED_CANDIDATE :
         this.candidateQlist.cartCandidates.splice(this.candidateQlist.cartCandidates.indexOf(candidate), 1);
+        let isFound : boolean=false;
+        for(let item of this.candidateQlist.matchedCandidates){
+          if(item._id == candidate._id){
+            isFound=true;
+          }
+        }
+        if(!isFound){
+          this.candidateQlist.matchedCandidates.push(candidate);
+        }
         break;
       case ValueConstant.SHORT_LISTED_CANDIDATE :
 //        this.candidateQlist.shortListedCandidates.splice(this.candidateQlist.shortListedCandidates.indexOf(candidate),1);
