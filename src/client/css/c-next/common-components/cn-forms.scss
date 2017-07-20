@@ -19,6 +19,7 @@ $heading-color: #333;
     top: 50%;
     transform: translate(-50%, -50%);
     border: 1px solid $border-color;
+    box-shadow: -1px 3px 10px rgba(0, 0, 0, 0.15);
 
     h5 {
       color: $heading-color;
