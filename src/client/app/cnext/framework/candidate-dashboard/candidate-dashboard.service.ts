@@ -4,24 +4,31 @@ import {Observable} from "rxjs/Observable";
 import {API, LocalStorage, ValueConstant} from "../../../framework/shared/constants";
 import {BaseService} from "../../../framework/shared/httpservices/base.service";
 import {LocalStorageService} from "../../../framework/shared/localstorage.service";
+import {LoaderService} from "../../../framework/shared/loader/loader.service";
 
 @Injectable()
 export class CandidateDashboardService extends BaseService {//todo THIS CODE SHOULD FIT IN 30 LINE:SHRIKANT
 
-  constructor(private http: Http) {
+  constructor(private http: Http,
+              private loaderService: LoaderService) {
     super();
   }
 
   getJobList(): Observable<any> {
-
-    //52.41.194.37:8080/api/candidate/5915c1c864a08cff1aa9c91a/jobProfile
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({headers: headers});
     let url: string = API.CANDIDATE_PROFILE + '/' + LocalStorageService.getLocalValue(LocalStorage.END_USER_ID) + '/jobProfile';
+    this.loaderService.start();
     return this.http.get(url, options)
       .map(this.extractData)
-      .catch(this.handleError);
+      .catch(this.errorHandle);
   }
+
+  errorHandle(error: any) {
+    this.loaderService.stop();
+    return Observable.throw(error);
+  }
+
 
   applyJob(): Observable<any> {//todo USE THE CONSTANYS IN URL :SHRIKANT
 

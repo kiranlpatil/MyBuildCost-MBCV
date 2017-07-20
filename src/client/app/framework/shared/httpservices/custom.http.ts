@@ -35,11 +35,11 @@ export class CustomHttp extends Http {
   }
 
   intercept(observable: Observable<any>): Observable<Response> {
-    this.loaderService.start();
-    return observable.do(() => this.loaderService.stop())
+   // this.loaderService.start();
+    return observable.do(() => console.log(''))
       .catch((err, source) => {
 
-        this.loaderService.stop();
+//        this.loaderService.stop();
         var message = new Message();
         message.isError = true;
         var errorInstance = new ErrorInstance();

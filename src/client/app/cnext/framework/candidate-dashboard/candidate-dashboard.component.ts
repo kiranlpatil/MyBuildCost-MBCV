@@ -1,12 +1,13 @@
-import { Component } from '@angular/core';
-import { CandidateProfileService } from '../candidate-profile/candidate-profile.service';
-import { Candidate, Summary } from '../model/candidate';
-import { CandidateDashboardService } from './candidate-dashboard.service';
-import { JobQcard } from '../model/JobQcard';
-import { LocalStorage, ValueConstant } from '../../../framework/shared/constants';
-import { LocalStorageService } from '../../../framework/shared/localstorage.service';
-import { CandidateJobListService } from './candidate-job-list/candidate-job-list.service';
+import {Component} from "@angular/core";
+import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
+import {Candidate, Summary} from "../model/candidate";
+import {CandidateDashboardService} from "./candidate-dashboard.service";
+import {JobQcard} from "../model/JobQcard";
+import {LocalStorage, ValueConstant} from "../../../framework/shared/constants";
+import {LocalStorageService} from "../../../framework/shared/localstorage.service";
+import {CandidateJobListService} from "./candidate-job-list/candidate-job-list.service";
 import {QCardFilterService} from "../filters/q-card-filter.service";
+import {LoaderService} from "../../../framework/shared/loader/loader.service";
 
 
 @Component({
@@ -29,7 +30,8 @@ export class CandidateDashboardComponent {
   constructor(private candidateProfileService: CandidateProfileService,
               private candidateDashboardService: CandidateDashboardService,
               private candidateJobListService: CandidateJobListService,
-              private qcardFilterService:QCardFilterService) {
+              private qcardFilterService:QCardFilterService,
+              private loaderService: LoaderService) {
     this.candidateProfileService.getCandidateDetails()
       .subscribe(
         candidateData => {
@@ -144,6 +146,7 @@ export class CandidateDashboardComponent {
     this.candidateDashboardService.getJobList()
       .subscribe(
         data => {
+          this.loaderService.stop();
           this.jobList = data;
           this.candidate.summary.numberOfmatched= this.jobList.length;
           this.extractList(this.jobList);

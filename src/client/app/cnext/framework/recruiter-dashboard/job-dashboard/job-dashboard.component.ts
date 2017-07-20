@@ -1,13 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { JobDashboardService } from './job-dashboard.service';
-import { RecruiterJobView } from '../../model/recruiter-job-view';
-import { ValueConstant } from '../../../../framework/shared/constants';
-import { CandidateQListModel } from './q-cards-candidates';
-import { JobPosterModel } from '../../model/jobPoster';
-import { ReferenceService } from '../../model/newClass';
-import { QCardFilterService } from '../../filters/q-card-filter.service';
-import { QCardFilter } from '../../model/q-card-filter';
+import {Component, OnInit} from "@angular/core";
+import {ActivatedRoute, Router} from "@angular/router";
+import {JobDashboardService} from "./job-dashboard.service";
+import {RecruiterJobView} from "../../model/recruiter-job-view";
+import {ValueConstant} from "../../../../framework/shared/constants";
+import {CandidateQListModel} from "./q-cards-candidates";
+import {JobPosterModel} from "../../model/jobPoster";
+import {ReferenceService} from "../../model/newClass";
+import {QCardFilterService} from "../../filters/q-card-filter.service";
+import {QCardFilter} from "../../model/q-card-filter";
+import {LoaderService} from "../../../../framework/shared/loader/loader.service";
 
 @Component({
   moduleId: module.id,
@@ -32,7 +33,8 @@ export class JobDashboardComponent implements OnInit {
   constructor(public refrence: ReferenceService,
               private activatedRoute: ActivatedRoute,
               private jobDashboardService: JobDashboardService,
-              private _router:Router,private qcardFilterService:QCardFilterService) {
+              private _router:Router,private qcardFilterService:QCardFilterService,
+              private loaderService: LoaderService) {
     this.qcardFilterService.candidateFilterValue$.subscribe(
       (data: QCardFilter) => {
         this.filterMeta = data;
@@ -87,6 +89,7 @@ export class JobDashboardComponent implements OnInit {
           this.jobDashboardService.getSelectedListData(this.jobId, ValueConstant.SHORT_LISTED_CANDIDATE)
             .subscribe(
               (listdata: any) => {
+                this.loaderService.stop();
                 this.recruiterJobView.numberOfMatchedCandidates = data.length;
                 let temp = new CandidateQListModel();
                 temp.shortListedCandidates = listdata.data;
