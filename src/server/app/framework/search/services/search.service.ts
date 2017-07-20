@@ -42,7 +42,7 @@ class SearchService {
           isFound = true;
         }
       }
-      if(jobProfile.releventIndustries.length) {
+      if(jobProfile.releventIndustries && jobProfile.releventIndustries.length) {
         isReleventIndustriesFound = true;
       }
       if (isFound) {
