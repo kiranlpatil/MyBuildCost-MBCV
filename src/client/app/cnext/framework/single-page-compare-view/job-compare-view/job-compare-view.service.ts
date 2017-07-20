@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {Http} from "@angular/http";
+import {Headers, Http, RequestOptions} from "@angular/http";
 import {Observable} from "rxjs/Observable";
 import {BaseService} from "../../../../framework/shared/httpservices/base.service";
 import {API, LocalStorage} from "../../../../framework/shared/constants";
@@ -32,7 +32,9 @@ export class JobCompareService extends BaseService {
     }else {
       url= API.RECRUITER_PROFILE + '/jobProfile/' + recruiterId + '/matchresult/' + candidateId;
     }
-    return this.http.get(url)
+    let headers = new Headers({'Content-Type': 'application/json'});
+    let options = new RequestOptions({headers: headers});
+    return this.http.get(url, options)
       .map(this.extractData)
       .catch(this.handleError);
   }
@@ -41,7 +43,7 @@ export class JobCompareService extends BaseService {
     let capabilities : Capability[] = new Array(0);
     for(let value1 in data) {
       let temp = capabilities.filter((capability : Capability)=> {
-        if(capability.name == data[value1].capability_name) {
+        if (capability.name.toString() === data[value1].capability_name.toString()) {
           return true;
         }else {
           return false;

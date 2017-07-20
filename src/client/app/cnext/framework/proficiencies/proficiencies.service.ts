@@ -13,8 +13,10 @@ export class ProficiencyDomainService extends BaseService {
   }
 
   getProficiency(): Observable<any> {
+    let headers = new Headers({'Content-Type': 'application/json'});
+    let options = new RequestOptions({headers: headers});
     var url = API.PROFICIENCYLIST;
-    return this.http.get(url)
+    return this.http.get(url, options)
       .map(this.extractData)
       .catch(this.handleError);
   }

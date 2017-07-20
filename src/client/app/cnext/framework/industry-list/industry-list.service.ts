@@ -1,10 +1,10 @@
-import { Injectable } from '@angular/core';
-import { Headers, Http, RequestOptions } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
-import { BaseService } from '../../../framework/shared/httpservices/base.service';
-import { API, LocalStorage } from '../../../framework/shared/constants';
-import { LocalStorageService } from '../../../framework/shared/localstorage.service';
-import { Industry } from '../model/industry';
+import {Injectable} from "@angular/core";
+import {Headers, Http, RequestOptions} from "@angular/http";
+import {Observable} from "rxjs/Observable";
+import {BaseService} from "../../../framework/shared/httpservices/base.service";
+import {API, LocalStorage} from "../../../framework/shared/constants";
+import {LocalStorageService} from "../../../framework/shared/localstorage.service";
+import {Industry} from "../model/industry";
 
 @Injectable()
 
@@ -26,15 +26,19 @@ export class IndustryListService extends BaseService {
 
   getIndustries(): Observable<any> {
     var url = API.INDUSTRY_LIST;
-    return this.http.get(url)
+    let headers = new Headers({'Content-Type': 'application/json'});
+    let options = new RequestOptions({headers: headers});
+    return this.http.get(url, options)
       .map(this.extractData)
       .catch(this.handleError);
   }
 
 
   getRoles(industry: string): Observable<any> {
+    let headers = new Headers({'Content-Type': 'application/json'});
+    let options = new RequestOptions({headers: headers});
     var url = 'industry/' + industry + '/role';
-    return this.http.get(url)
+    return this.http.get(url, options)
       .map(this.extractData)
       .catch(this.handleError);
   }

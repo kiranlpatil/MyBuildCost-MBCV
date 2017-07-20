@@ -7,7 +7,7 @@ import {ValidationService} from "../../shared/customvalidations/validation.servi
 import {AppSettings, CommonService, Message, MessageService, NavigationRoutes} from "../../shared/index";
 import {ImagePath, LocalStorage, Messages} from "../../shared/constants";
 import {LocalStorageService} from "../../shared/localstorage.service";
-import {Http, Response} from "@angular/http";
+import {Headers, Http, RequestOptions, Response} from "@angular/http";
 import {Location} from "../location";
 import {MyGoogleAddress} from "../candidate/google-our-place/my-google-address";
 
@@ -66,13 +66,13 @@ export class RecruiterComponent implements OnInit {
   ngOnInit() {
     this.model = this.recruiterForm.value;
     this.mainHeaderMenuHideShow = 'recruiter';
-
-
-    this.http.get('companysize')
+    let headers = new Headers({'Content-Type': 'application/json'});
+    let options = new RequestOptions({headers: headers});
+    let url: string = 'companysize';
+    this.http.get(url, options)
       .map((res: Response) => res.json())
       .subscribe(
         data => {
-
           this.companySize = data.companysize;
         },
         err => console.error(err),
@@ -104,7 +104,7 @@ export class RecruiterComponent implements OnInit {
 
   onSubmit() {
     this.model = this.recruiterForm.value;
-    if(this.model.company_name == '' || this.storedcompanySize == undefined || this.model.mobile_number == '' ||
+    if (this.model.company_name === '' || this.storedcompanySize == undefined || this.model.mobile_number == '' ||
       this.model.email == '' || this.model.password == '' || this.model.confirm_password == '' ||
       this.storedLocation == null || this.companyHeadquarter == undefined) {
       if(this.storedcompanySize == undefined){
@@ -168,7 +168,7 @@ export class RecruiterComponent implements OnInit {
   }
 
   makePasswordConfirm(): boolean {
-    if (this.model.confirm_password !== this.model.password && this.model.confirm_password !== "") {
+    if (this.model.confirm_password !== this.model.password && this.model.confirm_password !== '') {
       this.passwordMismatchMessage = Messages.MSG_ERROR_VALIDATION_PASSWORD_MISMATCHED;
       this.isPasswordConfirm = true;
       return true;

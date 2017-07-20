@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { BaseService } from '../../../../framework/shared/httpservices/base.service';
-import { Headers, Http, RequestOptions } from '@angular/http';
-import { LocalStorage } from '../../../../framework/shared/constants';
-import { LocalStorageService } from '../../../../framework/shared/localstorage.service';
+import {Injectable} from "@angular/core";
+import {Observable} from "rxjs";
+import {BaseService} from "../../../../framework/shared/httpservices/base.service";
+import {Headers, Http, RequestOptions} from "@angular/http";
+import {LocalStorage} from "../../../../framework/shared/constants";
+import {LocalStorageService} from "../../../../framework/shared/localstorage.service";
 
 @Injectable()
 export class QCardViewService extends BaseService {
@@ -14,8 +14,8 @@ export class QCardViewService extends BaseService {
   getSearchedcandidate(id: string) {
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({headers: headers});
-    let url = "/api/recruiter/jobProfile/" + id + "/candidates";
-    return this.http.get(url)
+    let url = '/api/recruiter/jobProfile/' + id + '/candidates';
+    return this.http.get(url, options)
       .map(this.extractData)
       .catch(this.handleError);
   }
@@ -23,7 +23,7 @@ export class QCardViewService extends BaseService {
   updateCandidateLists(profileId: string, candidateId: string, listName: string, action: string): Observable<any> {
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({headers: headers});
-    let url: string = "recruiter/" + LocalStorageService.getLocalValue(LocalStorage.END_USER_ID) + "/jobProfile/" + profileId + "/" + listName + "/" + candidateId + "/" + action;
+    let url: string = 'recruiter/' + LocalStorageService.getLocalValue(LocalStorage.END_USER_ID) + '/jobProfile/' + profileId + '/' + listName + '/' + candidateId + '/' + action;
     let body: any = {};
     return this.http.put(url, body, options)
       .map(this.extractData)
