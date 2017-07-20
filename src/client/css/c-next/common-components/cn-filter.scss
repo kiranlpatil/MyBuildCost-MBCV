@@ -98,6 +98,7 @@ $theme-color: #0d75fa;
     margin-top: 5px;
     padding: 6px;
     width: 100%;
+    font-size: 14px;
 
     &:focus,
     &:active {
@@ -105,7 +106,8 @@ $theme-color: #0d75fa;
     }
   }
   select {
-    padding: 0px 0 6px 0;
+    padding: 0 0 6px;
+    font-size: 14px;
   }
 }
 
