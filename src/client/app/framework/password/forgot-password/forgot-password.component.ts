@@ -86,7 +86,7 @@ export class ForgotPasswordComponent {
   }
 
   goBack() {
-    this.commonService.goBack();
+    //this.commonService.goBack();
     this._router.navigate([NavigationRoutes.APP_LOGIN]);
   }
 

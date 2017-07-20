@@ -6,8 +6,6 @@ $text-color: #666;
 $heading-color: #333;
 
 .main-form-wrapper {
-  @extend %background-img;
-  background: $white 0 40px;
   height: 100vh;
   width: 100%;
 
@@ -21,6 +19,7 @@ $heading-color: #333;
     top: 50%;
     transform: translate(-50%, -50%);
     border: 1px solid $border-color;
+    box-shadow: -1px 3px 10px rgba(0, 0, 0, 0.15);
 
     h5 {
       color: $heading-color;

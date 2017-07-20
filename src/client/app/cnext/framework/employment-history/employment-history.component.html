@@ -3,6 +3,9 @@
   <div class="main-content edit-modal-content clearfix" >
 
     <h4 class="heading">Employment History</h4>
+    <div class="error-messages edit-error-msg" *ngIf="!isValidservicePeriod">
+      <p>Please mentioned service period</p>
+    </div>
     <div class="scrollable-content">
       <form class="description-form" [formGroup]="employeeHistory" novalidate>
         <div class="row">
@@ -19,10 +22,6 @@
               </div>
             </div>
           </div>
-        </div>
-        <div class="error-messages edit-error-msg"
-             *ngIf="!isValidservicePeriod">
-          <p>Please mentioned service period</p>
         </div>
       </form>
     </div>

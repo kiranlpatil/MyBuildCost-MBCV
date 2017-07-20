@@ -1,10 +1,9 @@
-import { AfterViewInit, Component,  OnInit } from '@angular/core';
-import { RecruiterDashboardService } from './recruiter-dashboard.service';
-import { RecruiterDashboard } from '../model/recruiter-dashboard';
-import { RecruiterHeaderDetails } from '../model/recuirterheaderdetails';
-import { ActivatedRoute } from '@angular/router';
-import { Router } from '@angular/router';
-import { RedirectRecruiterDashboardService } from '../redirect-dashboard.service';
+import {AfterViewInit, Component, OnInit} from "@angular/core";
+import {RecruiterDashboardService} from "./recruiter-dashboard.service";
+import {RecruiterDashboard} from "../model/recruiter-dashboard";
+import {RecruiterHeaderDetails} from "../model/recuirterheaderdetails";
+import {ActivatedRoute, Router} from "@angular/router";
+import {RedirectRecruiterDashboardService} from "../redirect-dashboard.service";
 
 @Component({
   moduleId: module.id,
@@ -18,6 +17,7 @@ export class RecruiterDashboardComponent implements OnInit, AfterViewInit {
   private recruiterDashboard: RecruiterDashboard = new RecruiterDashboard();
   private recruiterHeaderDetails: RecruiterHeaderDetails = new RecruiterHeaderDetails();
   private tabName: string;
+  private jobId: string;
   private screenType: string='';
  // private showTabsForJobPoster: boolean = false;
 
@@ -52,17 +52,26 @@ export class RecruiterDashboardComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     this.activatedRoute.params.subscribe(params => {
+      /*let param:string = this._router.parseUrl(this._router.url).queryParams["auth"];
+       console.log(param);*/
       this.tabName = params['id'];
       if (this.tabName === 'post_new_job') {
           let matchElement: any = document.getElementById('post_job');
           matchElement.click();
       }
     });
+
   }
 
   navigateTo(nav: string) {
     if (nav !== undefined) {
       this._router.navigate([nav]);
     }
+  }
+
+  jobSelected(jobId: string) {
+    this.jobId = jobId;
+    let matchElement: any = document.getElementById('post_job');
+    matchElement.click();
   }
 }

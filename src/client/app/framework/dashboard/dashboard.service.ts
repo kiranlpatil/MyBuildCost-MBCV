@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {Http} from "@angular/http";
+import {Headers, Http, RequestOptions} from "@angular/http";
 import {Observable} from "rxjs/Observable";
 import {API, AppSettings, BaseService, LocalStorage, LocalStorageService, MessageService} from "../shared/index";
 import {CandidateDetail} from "../registration/candidate/candidate";
@@ -13,7 +13,9 @@ export class DashboardService extends BaseService {
 
   getUserProfile(): Observable<any> { //todo
     var url = API.USER_PROFILE + '/' + LocalStorageService.getLocalValue(LocalStorage.USER_ID);
-    return this.http.get(url)
+    let headers = new Headers({'Content-Type': 'application/json'});
+    let options = new RequestOptions({headers: headers});
+    return this.http.get(url, options)
       .map(this.extractData)
       .catch(this.handleError);
   }

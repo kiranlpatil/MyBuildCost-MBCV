@@ -78,6 +78,17 @@ $message: #0d75fa;
   min-height: 62px !important;
 }
 
+
+.keyskill-popup {
+  .button-group {
+    width: 100% !important;
+    background: transparent !important;
+    z-index: 3;
+  }
+}
+
+
+
 @media screen and (max-width: 767px) {
   .list {
     padding: 0;

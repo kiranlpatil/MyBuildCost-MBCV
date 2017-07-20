@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {Http} from "@angular/http";
+import {Headers, Http, RequestOptions} from "@angular/http";
 import {Observable} from "rxjs/Observable";
 import {BaseService} from "../httpservices/base.service";
 import {API, LocalStorage} from "../constants";
@@ -17,8 +17,10 @@ export class HeaderService extends BaseService {
   }
 
   getUserProfile(): Observable<UserProfile> {
+    let headers = new Headers({'Content-Type': 'application/json'});
+    let options = new RequestOptions({headers: headers});
     var url = API.USER_PROFILE + '/' + LocalStorageService.getLocalValue(LocalStorage.USER_ID);
-    return this.http.get(url)
+    return this.http.get(url, options)
       .map(this.extractData)
       .catch(this.handleError);
   }

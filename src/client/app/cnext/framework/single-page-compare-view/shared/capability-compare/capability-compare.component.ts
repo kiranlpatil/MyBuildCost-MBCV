@@ -20,6 +20,7 @@ export class CapabilityCompareComponent  implements OnChanges{
   @Input() candidate_picture : string;
   @Input() job_picture : string;
   isCandidate: boolean;
+  showMore: boolean = false;
   maxArray : number[]= new Array(0);
   ngOnChanges(changes : any) {
     if(changes.capabilities && changes.capabilities.currentValue) {
@@ -51,6 +52,11 @@ export class CapabilityCompareComponent  implements OnChanges{
         this.isCandidate = false;
       }
     }
+
+    if(changes.rowsToShow && changes.rowsToShow.currentValue) {
+      this.rowsToShow = changes.rowsToShow.currentValue;
+      console.log(this.rowsToShow);
+    }
     //  console.log("in compare view",this.roles);
   }
   getImagePath(imagePath: string) {
@@ -60,5 +66,12 @@ export class CapabilityCompareComponent  implements OnChanges{
     return null;
   }
 
+  isShowMore() {
+    this.showMore = true;
+  }
+
+  isShowLess() {
+    this.showMore = false;
+  }
 
 }

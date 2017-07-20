@@ -12,7 +12,7 @@
               <input class="form-control" type="text" formControlName="jobTitle" required/>
               <div class="error-messages"
                    *ngIf="(jobPostForm.get('jobTitle').touched || submitStatus)&& jobPostForm.get('jobTitle').hasError('required')">
-                <p>{{requiredTitleValidationMessage}}</p>
+                <p>{{titleValidationMessage}}</p>
               </div>
             </div>
           </div>
@@ -25,7 +25,7 @@
                      required>
               <div class="error-messages"
                    *ngIf="(jobPostForm.get('hiringManager').touched || submitStatus)&& jobPostForm.get('hiringManager').hasError('required')">
-                <p>{{requiredHiringManagerValidationMessage}}</p>
+                <p>{{hiringManagerValidationMessage}}</p>
               </div>
             </div>
           </div>
@@ -37,7 +37,7 @@
               <input class="form-control" type="text" formControlName="department" required>
               <div class="error-messages"
                    *ngIf="(jobPostForm.get('department').touched || submitStatus)&& jobPostForm.get('department').hasError('required')">
-                <p>{{requiredHiringDepartmentValidationMessage}}</p>
+                <p>{{hiringDepartmentValidationMessage}}</p>
               </div>
             </div>
           </div>
@@ -51,7 +51,7 @@
               </select>
               <div class="error-messages"
                    *ngIf="(jobPostForm.get('education').touched || submitStatus)&& jobPostForm.get('education').hasError('required')">
-                <p>{{requiredEducationalValidationMessage}}</p>
+                <p>{{educationalValidationMessage}}</p>
               </div>
             </div>
           </div>
@@ -61,24 +61,22 @@
               <label>Experience Band</label>
               <div class="col-sm-6 padding-right15 min-range">
                 <!--<control-messages [control]="jobPostForm.controls.experienceMinValue"></control-messages>-->
-                <select class="select" formControlName="experienceMinValue" (change)="selectExperiencesMinModel($event.target.value)">
-                  <option value="" selected></option>
-                  <option *ngFor="let c of experienceRangeList | minrange:toYear">{{c}}</option>
+                <select class="select" formControlName="experienceMinValue">
+                  <option *ngFor="let c of experienceRangeList" [ngValue]="c">{{c}}</option>
                 </select>
                 <div class="error-messages"
-                     *ngIf="(jobPostForm.get('experienceMinValue').touched || submitStatus)&& jobPostForm.get('experienceMinValue').hasError('required')">
-                  <p>{{requiredMinExperienceValidationMessage}}</p>
+                     *ngIf="(((jobPostForm.get('experienceMinValue').touched || submitStatus) && jobPostForm.get('experienceMinValue').hasError('required')) || !isExperienceValid)">
+                  <p>{{minExperienceValidationMessage}}</p>
                 </div>
               </div>
               <div class="col-sm-6 padding-left15">
                 <!--<control-messages [control]="jobPostForm.controls.experienceMaxValue"></control-messages>-->
-                <select class="select" formControlName="experienceMaxValue" (change)="selectExperiencesMaxModel($event.target.value)">
-                  <option value="" selected></option>
-                  <option *ngFor="let c of experienceRangeList | maxrange:fromYear">{{c}}</option>
+                <select class="select" formControlName="experienceMaxValue">
+                  <option *ngFor="let c of experienceRangeList" [ngValue]="c">{{c}}</option>
                 </select>
                 <div class="error-messages"
                      *ngIf="(jobPostForm.get('experienceMaxValue').touched || submitStatus)&& jobPostForm.get('experienceMaxValue').hasError('required')">
-                  <p>{{requiredMaxExperienceValidationMessage}}</p>
+                  <p>{{maxExperienceValidationMessage}}</p>
                 </div>
               </div>
             </div>
@@ -89,24 +87,22 @@
               <label>Salary Band</label>
               <div class="col-sm-6 padding-right15 min-range">
                 <!--<control-messages [control]="jobPostForm.controls.salaryMinValue"></control-messages>-->
-                <select class="select" formControlName="salaryMinValue" (change)="selectSalaryMinModel($event.target.value)">
-                  <option value="" selected></option>
-                  <option *ngFor="let c of salaryRangeList| minrange:toValue">{{c}}</option>
+                <select class="select" formControlName="salaryMinValue">
+                  <option *ngFor="let c of salaryRangeList" [ngValue]="c">{{c}}</option>
                 </select>
                 <div class="error-messages"
-                     *ngIf="(jobPostForm.get('salaryMinValue').touched || submitStatus)&& jobPostForm.get('salaryMinValue').hasError('required')">
-                  <p>{{requiredMinSalaryValidationMessage}}</p>
+                     *ngIf="(((jobPostForm.get('salaryMinValue').touched || submitStatus) && jobPostForm.get('salaryMinValue').hasError('required')) || !isSalaryValid)">
+                  <p>{{minSalaryValidationMessage}}</p>
                 </div>
               </div>
               <div class="col-sm-6 padding-left15">
                 <!--<control-messages [control]="jobPostForm.controls.salaryMaxValue"></control-messages>-->
-                <select class="select" formControlName="salaryMaxValue" (change)="selectSalaryMaxModel($event.target.value)">
-                  <option value="" selected></option>
-                  <option *ngFor="let c of salaryRangeList| maxrange:fromValue">{{c}}</option>
+                <select class="select" formControlName="salaryMaxValue">
+                  <option *ngFor="let c of salaryRangeList" [ngValue]="c">{{c}}</option>
                 </select>
                 <div class="error-messages"
                      *ngIf="(jobPostForm.get('salaryMaxValue').touched || submitStatus)&& jobPostForm.get('salaryMaxValue').hasError('required')">
-                  <p>{{requiredMaxSalaryValidationMessage}}</p>
+                  <p>{{maxSalaryValidationMessage}}</p>
                 </div>
               </div>
             </div>
@@ -121,7 +117,7 @@
               </select>
               <div class="error-messages"
                    *ngIf="(jobPostForm.get('joiningPeriod').touched || submitStatus)&& jobPostForm.get('joiningPeriod').hasError('required')">
-                <p>{{requiredJoiningPeriodValidationMessage}}</p>
+                <p>{{joiningPeriodValidationMessage}}</p>
               </div>
             </div>
           </div>
@@ -135,7 +131,7 @@
                      (setAddress)="getAddress($event)" mygoogleplace/>
               <div class="error-messages"
                    *ngIf="(jobPostForm.get('location').touched || submitStatus)&& jobPostForm.get('location').hasError('required')">
-                <p>{{requiredLocationValidationMessage}}</p>
+                <p>{{locationValidationMessage}}</p>
               </div>
             </div>
           </div>

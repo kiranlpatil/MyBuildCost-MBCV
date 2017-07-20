@@ -89,7 +89,7 @@ $switch-shadow: rgba(0, 0, 0, 0.2);
 
 .scrollable-content {
   overflow: auto;
-  height: 500px;
+  height: 496px;
   padding: 70px 250px 60px 70px;
   position: fixed;
   top: 0;
@@ -223,6 +223,7 @@ $switch-shadow: rgba(0, 0, 0, 0.2);
 
   .edit-error-msg {
     z-index: 3;
+    max-width: 500px;
   }
 
   span {
@@ -540,3 +541,9 @@ $switch-shadow: rgba(0, 0, 0, 0.2);
   }
 }
 
+
+.edit-keyskill {
+  .button-group, .heading {
+    z-index: 1 !important;
+  }
+}

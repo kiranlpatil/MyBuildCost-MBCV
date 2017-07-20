@@ -26,6 +26,7 @@ import {CandidateDashboard} from "./cnext/framework/candidate-dashboard/candidat
 import {JobDashboardRoutes} from "./cnext/framework/recruiter-dashboard/job-dashboard/job-dashboard.routes";
 import {CandidateCompare} from "./cnext/framework/single-page-compare-view/candidate-compare-view/candidate-compare-view.routes";
 import {JobCompare} from "./cnext/framework/single-page-compare-view/job-compare-view/job-compare-view.routes";
+import {JobPosterRoutes} from "./cnext/framework/job-poster/job-poster.routes";
 
 
 export const routes: Routes = [
@@ -55,6 +56,7 @@ export const routes: Routes = [
   ...CandidateSummary,
   ...CompanyDetailsRoutes,
   ...JobDashboardRoutes,
+  ...JobPosterRoutes,
   ...StartRoutes,
 
 ];

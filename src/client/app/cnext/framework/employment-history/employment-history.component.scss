@@ -1,5 +1,12 @@
 $border-color: #ccc;
 
+.error-messages {
+  position: fixed;
+  margin: 5px 15px;
+  bottom: 0;
+  left: 0;
+}
+
 .btn {
   &:focus,
   &:active {

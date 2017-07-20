@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
-import { BaseService } from '../../../../framework/shared/httpservices/base.service';
-import { API } from '../../../../framework/shared/constants';
+import {Injectable} from "@angular/core";
+import {Headers, Http, RequestOptions} from "@angular/http";
+import {Observable} from "rxjs/Observable";
+import {BaseService} from "../../../../framework/shared/httpservices/base.service";
+import {API} from "../../../../framework/shared/constants";
 
 @Injectable()
 export class CandidateCompareService extends BaseService {
@@ -16,9 +16,10 @@ export class CandidateCompareService extends BaseService {
     /*
      /api/candidate/:candidateId/matchresult/:jobId
      */
-
+    let headers = new Headers({'Content-Type': 'application/json'});
+    let options = new RequestOptions({headers: headers});
     let url: string = API.CANDIDATE_PROFILE + '/' + candidateId + '/matchresult/' + recruiterId;
-    return this.http.get(url)
+    return this.http.get(url, options)
       .map(this.extractData)
       .catch(this.handleError);
   }
