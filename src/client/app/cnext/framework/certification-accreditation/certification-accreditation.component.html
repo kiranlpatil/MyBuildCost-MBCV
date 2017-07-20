@@ -2,31 +2,30 @@
 <div class="modal-bg" *ngIf="highlightedSection.name=='Certification'"></div>
 <div class="section-container clear"  *ngIf="highlightedSection.name =='Certification'">
   <div class="main-content edit-modal-content clearfix">
-    <div class="col-sm-9 no-padding">
-      <h4 class="heading">Certification/Accreditation</h4>
-      <div class="scrollable-content">
-        <form class="description-form" [formGroup]="certificationDetail" novalidate>
-          <div class="row">
-            <div class="col-sm-8 no-padding" formArrayName="certifications">
-              <div *ngFor="let history of certificationDetail.controls.certifications.controls; let i=index"
-                   class="panel panel-default">
-                <div>
-              <span class="glyphicon glyphicon-trash pull-right"
-                    *ngIf="certificationDetail.controls.certifications.controls.length>0 && certificationDetail.controls.certifications.controls.length !==1 "
-                    (click)="removeCertification(i)"></span>
-                </div>
-                <div class="panel-body" [formGroupName]="i">
-                  <cn-certificates [group]="certificationDetail.controls.certifications.controls[i]" [submitStatus] = "submitStatus"></cn-certificates>
-                </div>
+
+    <h4 class="heading">Certification/Accreditation</h4>
+    <div class="scrollable-content">
+      <form class="description-form" [formGroup]="certificationDetail" novalidate>
+        <div class="row">
+          <div class="col-sm-8 no-padding" formArrayName="certifications">
+            <div *ngFor="let history of certificationDetail.controls.certifications.controls; let i=index"
+                 class="panel panel-default">
+              <div>
+            <span class="glyphicon glyphicon-trash pull-right"
+                  *ngIf="certificationDetail.controls.certifications.controls.length>0 && certificationDetail.controls.certifications.controls.length !==1 "
+                  (click)="removeCertification(i)"></span>
+              </div>
+              <div class="panel-body" [formGroupName]="i">
+                <cn-certificates [group]="certificationDetail.controls.certifications.controls[i]" [submitStatus] = "submitStatus"></cn-certificates>
               </div>
             </div>
           </div>
-        </form>
-      </div>
+        </div>
+      </form>
     </div>
-    <div class="col-sm-3 no-padding">
-      <cn-tool-tip [message]="tooltipMessage"></cn-tool-tip>
-    </div>
+
+    <cn-tool-tip [message]="tooltipMessage"></cn-tool-tip>
+
     <div class="button-group clearfix">
       <!--<div class="saving-loader">Saving...</div>-->
       <button type="submit" class="btn btn-primary" scrollTo scrollTargetSelector="#certification"
@@ -34,7 +33,7 @@
       </button>
       <button type="submit" class="btn btn-primary" (click)="postData('save')" *ngIf="candidate.isSubmitted">Save
       </button>
-      <button (click)="addCertification()" class="btn btn-add-another" [disabled]="!certificationDetail.valid">
+      <button (click)="addCertification('addAnother')" class="btn btn-add-another" [disabled]="!certificationDetail.valid">
         Add another
       </button>
     </div>
@@ -72,7 +71,7 @@
             </div>
           </div>
         </ul>
-        <p class="more-elements" *ngIf="candidate.certifications.length != 1">{{candidate.certifications.length-1}} more</p>
+        <p class="more-elements" *ngIf="candidate.certifications.length > 1">{{candidate.certifications.length-1}} more</p>
       </div>
     </div>
   </div>

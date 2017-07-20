@@ -53,8 +53,10 @@ $theme-color: #0d75fa;
 
 .main-content {
   .heading {
+    font-size: 20px !important;
+
     .capability-name {
-      font-size: 24px !important;
+      font-size: 20px !important;
       float: none !important;
       color: $text-color !important;
       padding-bottom: 2px !important;
@@ -67,15 +69,8 @@ $theme-color: #0d75fa;
   }
 }
 
-.complexity-container {
-  height: 380px !important;
-
-  .btn-next {
-    position: absolute;
-    right: 15px;
-    bottom: 15px;
-    z-index: 10;
-  }
+.scrollable-content {
+  padding: 100px 250px 60px 70px !important;
 }
 
 .question-count {

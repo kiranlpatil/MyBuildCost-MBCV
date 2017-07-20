@@ -11,8 +11,8 @@ import { RecruiterJobView } from '../../model/recruiter-job-view';
 import { Candidate } from '../../model/candidate';
 import { CandidateDetail } from '../../../../framework/registration/candidate/candidate';
 import { CandidateProfileService } from '../../candidate-profile/candidate-profile.service';
-import {Message} from "../../../../framework/shared/message";
-import {MessageService} from "../../../../framework/shared/message.service";
+import { Message } from "../../../../framework/shared/message";
+import { MessageService } from "../../../../framework/shared/message.service";
 /*import underline = Chalk.underline;*/
 
 
@@ -80,6 +80,7 @@ export class QCardviewComponent implements OnChanges {
 
   actionOnQCard(action: string, sourceListName: string, destinationListName: string, candidate: CandidateQCard) {
     let isMatchList: boolean = false;
+    let isFound : boolean=false;
     switch (sourceListName) {
       case ValueConstant.APPLIED_CANDIDATE :
         /*
@@ -89,8 +90,9 @@ export class QCardviewComponent implements OnChanges {
         break;
       case ValueConstant.REJECTED_LISTED_CANDIDATE :
         this.candidateQlist.rejectedCandidates.splice(this.candidateQlist.rejectedCandidates.indexOf(candidate), 1);
+       isFound=false;
         for(let item of this.candidateQlist.matchedCandidates){
-          if(item._id == candidate._id){
+          if(item._id == candidate._id) {
             isFound=true;
           }
         }
@@ -100,7 +102,7 @@ export class QCardviewComponent implements OnChanges {
         break;
       case ValueConstant.CART_LISTED_CANDIDATE :
         this.candidateQlist.cartCandidates.splice(this.candidateQlist.cartCandidates.indexOf(candidate), 1);
-        let isFound : boolean=false;
+        isFound=false;
         for(let item of this.candidateQlist.matchedCandidates){
           if(item._id == candidate._id){
             isFound=true;

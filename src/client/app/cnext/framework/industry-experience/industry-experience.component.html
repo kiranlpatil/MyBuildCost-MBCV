@@ -2,26 +2,23 @@
 <div class="section-container profeiciency-domain" *ngIf="highlightedSection.name=='IndustryExposure'">
 
   <div class="main-content edit-modal-content clearfix">
-    <div class="col-sm-9 no-padding"><!--Additional Industry Exposure-->
-      <h4 class="heading">Should candidate need to have exposure is any of these domains?<!-- <span class="sub-heading">(In additional to your core industry, select Industries In which you have work exposure / experience)</span>-->
-      </h4>
-      <div class="error-messages" *ngIf="submitStatus"><p>{{requiedIndustryExposureValidationMessage}}</p> </div>
-      <div class="industry-experience scrollable-content">
-        <p>{{suggestionMessageAboutDomain}}</p>
-        <div class="select-option" *ngFor="let choice of industries;let i = index">
-          <label>
-            <input type="checkbox" name="choice.name" value="{{choice.name}}"
-                   (click)="selectIndustryModel(choice.name,$event)"
-                   [checked]="candidateExperiencedIndustry.indexOf(choice.name)!=-1">
-            <span>{{choice.name}}</span>
-          </label>
-        </div>
+    <!--Additional Industry Exposure-->
+    <h4 class="heading">Should candidate need to have exposure is any of these domains?<!-- <span class="sub-heading">(In additional to your core industry, select Industries In which you have work exposure / experience)</span>-->
+    </h4>
+    <div class="error-messages edit-error-msg" *ngIf="submitStatus"><p>{{requiedIndustryExposureValidationMessage}}</p> </div>
+    <div class="scrollable-content">
+      <p>{{suggestionMessageAboutDomain}}</p>
+      <div class="select-option" *ngFor="let choice of industries;let i = index">
+        <label>
+          <input type="checkbox" name="choice.name" value="{{choice.name}}"
+                 (click)="selectIndustryModel(choice.name,$event)"
+                 [checked]="candidateExperiencedIndustry.indexOf(choice.name)!=-1">
+          <span>{{choice.name}}</span>
+        </label>
       </div>
     </div>
-    <div class="col-sm-3 no-padding">
-      <cn-tool-tip [message]="tooltipCandidateMessage" *ngIf="isCandidate"></cn-tool-tip>
-      <cn-tool-tip [message]="tooltipRecruiterMessage" *ngIf="!isCandidate"></cn-tool-tip>
-    </div>
+    <cn-tool-tip [message]="tooltipCandidateMessage" *ngIf="isCandidate"></cn-tool-tip>
+    <cn-tool-tip [message]="tooltipRecruiterMessage" *ngIf="!isCandidate"></cn-tool-tip>
     <button class="btn-prev" (click)="highlightedSection.name='Proficiencies'"><span
       class="glyphicon glyphicon-chevron-left"></span></button>
 

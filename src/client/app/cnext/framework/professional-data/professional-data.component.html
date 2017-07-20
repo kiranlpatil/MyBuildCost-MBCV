@@ -2,76 +2,73 @@
 <div class="section-container" *ngIf="highlightedSection.name =='Professional-Details'">
 
   <div class="main-content edit-modal-content clearfix">
-    <div class="col-sm-9 no-padding">
-      <h4 class="heading">Professional Preferences (Mandatory)</h4>
-      <!-- <form [formGroup]="professionalDetailForm" (ngSubmit)="onNext(jobPostForm.value)">-->
-      <div class="professional-data scrollable-content clearfix">
-        <div class="col-sm-8 no-padding">
-          <div class="form-group">
-            <label>Current Salary</label>
-            <!-- <control-messages [control]="professionalDetailForm.controls.currentSalary"></control-messages>-->
-            <select [(ngModel)]="candidate.professionalDetails.currentSalary" (change)="saveProfessionalData()">
-              <option *ngFor="let c of salaryList" [ngValue]="c">{{c}}</option>
-            </select>
-            <div class="error-messages"
-                 *ngIf="candidate.professionalDetails.currentSalary == '' && !isValid">
-              <p>{{requiedSalaryValidationMessage}}</p>
-            </div>
-
+    <h4 class="heading">Professional Preferences (Mandatory)</h4>
+    <!-- <form [formGroup]="professionalDetailForm" (ngSubmit)="onNext(jobPostForm.value)">-->
+    <div class="scrollable-content clearfix">
+      <div class="col-sm-8 no-padding">
+        <div class="form-group">
+          <label>Current Salary</label>
+          <!-- <control-messages [control]="professionalDetailForm.controls.currentSalary"></control-messages>-->
+          <select [(ngModel)]="candidate.professionalDetails.currentSalary" (change)="saveProfessionalData()">
+            <option *ngFor="let c of salaryList" [ngValue]="c">{{c}}</option>
+          </select>
+          <div class="error-messages"
+               *ngIf="candidate.professionalDetails.currentSalary == '' && !isValid">
+            <p>{{requiedSalaryValidationMessage}}</p>
           </div>
 
-          <div class="form-group">
-            <label>Ready To Relocate?</label>
-            <!--  <control-messages [control]="professionalDetailForm.controls.relocate"></control-messages>-->
-            <select [(ngModel)]="candidate.professionalDetails.relocate" (change)="saveProfessionalData()">
-              <option *ngFor="let c of realocationList" [ngValue]="c">{{c}}</option>
-            </select>
-            <div class="error-messages"
-                 *ngIf="candidate.professionalDetails.relocate == '' && !isValid">
-              <p>{{requiedRelocateValidationMessage}}</p>
-            </div>
-          </div>
+        </div>
 
-          <div class="form-group">
-            <label>Company Culture</label>
-            <!-- <control-messages [control]="professionalDetailForm.controls.noticePeriod"></control-messages>-->
-            <select [(ngModel)]="candidate.professionalDetails.industryExposure" (change)="saveProfessionalData()">
-              <option *ngFor="let c of industryExposureList" [ngValue]="c">{{c}}</option>
-            </select>
-            <div class="error-messages"
-                 *ngIf="candidate.professionalDetails.industryExposure == '' && !isValid">
-              <p>{{requiedIndustryExposureValidationMessage}}</p>
-            </div>
+        <div class="form-group">
+          <label>Ready To Relocate?</label>
+          <!--  <control-messages [control]="professionalDetailForm.controls.relocate"></control-messages>-->
+          <select [(ngModel)]="candidate.professionalDetails.relocate" (change)="saveProfessionalData()">
+            <option *ngFor="let c of realocationList" [ngValue]="c">{{c}}</option>
+          </select>
+          <div class="error-messages"
+               *ngIf="candidate.professionalDetails.relocate == '' && !isValid">
+            <p>{{requiedRelocateValidationMessage}}</p>
           </div>
+        </div>
 
-          <div class="form-group">
-            <label>Notice Period</label>
-            <!-- <control-messages [control]="professionalDetailForm.controls.noticePeriod"></control-messages>-->
-            <select [(ngModel)]="candidate.professionalDetails.noticePeriod" (change)="saveProfessionalData()">
-              <option *ngFor="let c of noticePeriodList" [ngValue]="c">{{c}}</option>
-            </select>
-            <div class="error-messages"
-                 *ngIf="candidate.professionalDetails.noticePeriod == '' && !isValid">
-              <p>{{requiedNoticePeriodValidationMessage}}</p>
-            </div>
+        <div class="form-group">
+          <label>Company Culture</label>
+          <!-- <control-messages [control]="professionalDetailForm.controls.noticePeriod"></control-messages>-->
+          <select [(ngModel)]="candidate.professionalDetails.industryExposure" (change)="saveProfessionalData()">
+            <option *ngFor="let c of industryExposureList" [ngValue]="c">{{c}}</option>
+          </select>
+          <div class="error-messages"
+               *ngIf="candidate.professionalDetails.industryExposure == '' && !isValid">
+            <p>{{requiedIndustryExposureValidationMessage}}</p>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Notice Period</label>
+          <!-- <control-messages [control]="professionalDetailForm.controls.noticePeriod"></control-messages>-->
+          <select [(ngModel)]="candidate.professionalDetails.noticePeriod" (change)="saveProfessionalData()">
+            <option *ngFor="let c of noticePeriodList" [ngValue]="c">{{c}}</option>
+          </select>
+          <div class="error-messages"
+               *ngIf="candidate.professionalDetails.noticePeriod == '' && !isValid">
+            <p>{{requiedNoticePeriodValidationMessage}}</p>
           </div>
         </div>
       </div>
     </div>
-    <div class="col-sm-3 no-padding">
-      <cn-tool-tip [message]="tooltipMessage"></cn-tool-tip>
-    </div>
 
-      <div class="button-group clearfix">
-        <!--
-                  <button class="btn btn-default"  (click)="highlightedSection.name='none'; highlightedSection.isDisable=false" [hidden]="showButton" >Cancel</button>
-        -->
-       <!-- <div class="saving-loader">Saving...</div>-->
-        <button type="submit" class="btn btn-primary" scrollTo scrollTargetSelector="#Employment-History"
-                (click)="onNext()" [hidden]="!showButton">Next
-        </button>
-        <button class="btn btn-primary" (click)="onSave()" [hidden]="showButton">Done</button>
-      </div>
+    <cn-tool-tip [message]="tooltipMessage"></cn-tool-tip>
+
+    <div class="button-group clearfix">
+      <!--
+                <button class="btn btn-default"  (click)="highlightedSection.name='none'; highlightedSection.isDisable=false" [hidden]="showButton" >Cancel</button>
+      -->
+     <!-- <div class="saving-loader">Saving...</div>-->
+      <button type="submit" class="btn btn-primary" scrollTo scrollTargetSelector="#Employment-History"
+              (click)="onNext()" [hidden]="!showButton">Next
+      </button>
+      <button class="btn btn-primary" (click)="onSave()" [hidden]="showButton">Done</button>
+    </div>
 
     <button class="btn-prev" (click)="highlightedSection.name='IndustryExposure'"><span
       class="glyphicon glyphicon-chevron-left"></span></button>

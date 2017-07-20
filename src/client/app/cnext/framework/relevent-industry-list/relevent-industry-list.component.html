@@ -4,28 +4,27 @@
     <cn-tool-tip [message]="tooltipMessage"></cn-tool-tip>
   -->
   <div class="main-content clearfix edit-modal-content">
-    <div class="col-sm-9 no-padding profile-description">
-      <h4 class="heading">Would you like to search matching candidates from these additional Industries?</h4>
-      <div class="scrollable-content">
-        <p>{{suggestionMsgForReleventIndustry}}</p>
-        <input type="checkbox" name="relevent" value="relevent" (change)="getReleventIndustry($event)"
-               [checked]="showRleventindustry == true"> Relevent Industry
-        <div class="col-sm-12 no-padding select-industry">
-          <div *ngIf="showRleventindustry">
-            <div class="select-option" *ngFor="let item of releventIndustries;let i = index">
-              <label>
-                <input type="checkbox" name="item.name" id="{{item.name}}" value="{{item.name}}"
-                       (click)="onValueChange($event,i)" [checked]="item.isChecked == true">
-                <span>{{item.name}}</span>
-              </label>
-            </div>
+
+    <h4 class="heading">Would you like to search matching candidates from these additional Industries?</h4>
+    <div class="scrollable-content">
+      <p>{{suggestionMsgForReleventIndustry}}</p>
+      <input type="checkbox" name="relevent" value="relevent" (change)="getReleventIndustry($event)"
+             [checked]="showRleventindustry == true"> Relevent Industry
+      <div class="col-sm-12 no-padding select-industry">
+        <div *ngIf="showRleventindustry">
+          <div class="select-option" *ngFor="let item of releventIndustries;let i = index">
+            <label>
+              <input type="checkbox" name="item.name" id="{{item.name}}" value="{{item.name}}"
+                     (click)="onValueChange($event,i)" [checked]="item.isChecked == true">
+              <span>{{item.name}}</span>
+            </label>
           </div>
         </div>
       </div>
     </div>
-    <div class="col-sm-3 no-padding">
-      <cn-tool-tip [message]="tooltipMessage"></cn-tool-tip>
-    </div>
+
+    <cn-tool-tip [message]="tooltipMessage"></cn-tool-tip>
+
     <button class="btn-prev" (click)="highlightedSection.name='IndustryExposure'"><span
       class="glyphicon glyphicon-chevron-left"></span></button>
     <div class="button-group clearfix">

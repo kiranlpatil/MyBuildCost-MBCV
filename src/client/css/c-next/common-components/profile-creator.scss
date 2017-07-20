@@ -19,9 +19,9 @@ $switch-shadow: rgba(0, 0, 0, 0.2);
     clear: both;
     font-size: 13px;
     height: 100%;
-    padding: 10px 0 0;
+    padding: 15px;
     position: fixed;
-    width: 25%;
+    width: 235px;
     right: 0;
     top: 0;
 
@@ -89,8 +89,13 @@ $switch-shadow: rgba(0, 0, 0, 0.2);
 
 .scrollable-content {
   overflow: auto;
-  height: 385px;
-  padding: 0 15px 0 70px;
+  height: 500px;
+  padding: 70px 250px 60px 70px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1;
 }
 
 .main-content {
@@ -111,7 +116,9 @@ $switch-shadow: rgba(0, 0, 0, 0.2);
     overflow: visible !important;
     text-overflow: clip !important;
     white-space: normal !important;
-    width: 100% !important;
+    width: calc(100% - 235px) !important;
+    background: $white;
+    z-index: 2;
 
     span {
       background: transparent;
@@ -214,6 +221,10 @@ $switch-shadow: rgba(0, 0, 0, 0.2);
     }
   }
 
+  .edit-error-msg {
+    z-index: 3;
+  }
+
   span {
     //background-color: $white;
     color: $text-color;
@@ -259,8 +270,10 @@ $switch-shadow: rgba(0, 0, 0, 0.2);
     text-align: right;
     position: absolute;
     bottom: 0;
-    padding: 7px 25.5% 7px 15px;
-    width: 100%;
+    padding: 7px 15px;
+    width: calc(100% - 235px);
+    z-index: 2;
+    background: $white;
 
     button[hidden] {
       display: none;
@@ -273,7 +286,7 @@ $switch-shadow: rgba(0, 0, 0, 0.2);
 
     .btn {
       float: right;
-      margin-right: 10px;
+      margin-left: 10px;
 
       &:focus,
       &:active {
@@ -290,6 +303,7 @@ $switch-shadow: rgba(0, 0, 0, 0.2);
     border: 0;
     background: url('../../assets/c-next/profile-creator/previous.png') center center;
     padding: 12px 7px;
+    z-index: 2;
 
     span {
       display: none;
@@ -362,9 +376,10 @@ $switch-shadow: rgba(0, 0, 0, 0.2);
   }
 
   textarea {
-    height: 107px;
+    height: 65px;
     margin-top: 0;
     background: transparent;
+    border-radius: 4px;
   }
 }
 

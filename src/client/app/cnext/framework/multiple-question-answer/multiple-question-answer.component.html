@@ -6,7 +6,7 @@
      <span *ngIf="complexityDetails.defaultComplexityName"> >> {{complexityDetails.defaultComplexityName}}</span>
      <span> {{complexityDetails.complexity_number}}</span><span *ngIf="complexityDetails.total_complexity_in_capability">/{{complexityDetails.total_complexity_in_capability}}</span>
    </p>-->
-  <div *ngFor="let complexity of capabilityDetails.complexities">
+  <div class="question-container" *ngFor="let complexity of capabilityDetails.complexities">
     <p class="question">
       <span *ngIf="isCandidate && complexity.complexityDetails.questionForCandidate">{{complexity.complexityDetails.questionForCandidate}}</span>
       <span *ngIf="!isCandidate && complexity.complexityDetails.questionForRecruiter">{{complexity.complexityDetails.questionForRecruiter}}</span>

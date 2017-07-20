@@ -28,7 +28,7 @@ export class CapabilitiesComponent {
   private disableButton: boolean = true;
   private isCandidate: boolean = false;
   private isValid: boolean = true;
-  private validationMessage = Messages.MSG_ERROR_VALIDATION_CAPABILITIES_REQUIRED;
+  private validationMessage = Messages.MSG_ERROR_VALIDATION_CAPABILITIES_REQUIRED_RECRUITER;
   private capabilitiesCodes : string[]= new Array(0);
   tooltipCandidateMessage: string =
 
@@ -124,7 +124,7 @@ export class CapabilitiesComponent {
     this.validationMessage = '';
     if(this.primaryNames.length == 0){
       this.isValid = false;
-      this.validationMessage = Messages.MSG_ERROR_VALIDATION_CAPABILITIES_REQUIRED;
+      this.validationMessage = this.isCandidate ? Messages.MSG_ERROR_VALIDATION_CAPABILITIES_REQUIRED_CANDIDATE : Messages.MSG_ERROR_VALIDATION_CAPABILITIES_REQUIRED_RECRUITER;
       return;
     }
     this.highlightedSection.name = "Complexities";
@@ -146,7 +146,7 @@ export class CapabilitiesComponent {
     this.validationMessage = '';
     if(this.primaryNames.length == 0){
       this.isValid = false;
-      this.validationMessage = Messages.MSG_ERROR_VALIDATION_CAPABILITIES_REQUIRED;
+      this.validationMessage = this.isCandidate ? Messages.MSG_ERROR_VALIDATION_CAPABILITIES_REQUIRED_CANDIDATE : Messages.MSG_ERROR_VALIDATION_CAPABILITIES_REQUIRED_RECRUITER;
       return;
     }
 

@@ -1,7 +1,7 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { CandidateProfileService } from '../candidate-profile/candidate-profile.service';
-import { Candidate, Section } from '../model/candidate';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {Component, EventEmitter, Input, Output} from "@angular/core";
+import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
+import {Candidate, Section} from "../model/candidate";
+import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   moduleId: module.id,
@@ -25,17 +25,15 @@ export class EmploymentHistoryComponent {
   private showAddButton: boolean = true;
   tooltipMessage: string = "<ul><li><p>1. An individual may be exposed to multiple industries during the professional life.</p></li></ul>";
   private submitStatus: boolean;
-  constructor(private _fb: FormBuilder, private profileCreatorService: CandidateProfileService) {
-  }
+  private isValidservicePeriod: boolean = true;
 
-  ngOnInit() {
+  constructor(private _fb: FormBuilder, private profileCreatorService: CandidateProfileService) {
     this.employeeHistory = this._fb.group({
       employeeHistories: this._fb.array([])
     });
+  }
 
-    // add address
-    this.addEmployeeHistory();
-
+  ngOnInit() {
     //subscribe to addresses value changes
     this.employeeHistory.controls['employeeHistories'].valueChanges.subscribe(x => {
       this.isButtonShow = true;
@@ -43,37 +41,22 @@ export class EmploymentHistoryComponent {
   }
 
   ngOnChanges(changes: any) {
-    /* if (this.candidate.employmentHistory.length == 0) {
-     this.candidate.employmentHistory.push(new EmployementHistory());
-     }
-     else {
-     this.isButtonShow = true;
-     }*/
     if (changes.candidate.currentValue != undefined) {
       this.candidate = changes.candidate.currentValue;
       if (this.candidate.employmentHistory != undefined && this.candidate.employmentHistory.length > 0) {
 
-        /*(<FormGroup>this.employeeHistory.controls['employeeHistories'])
-         .setValue(this.candidate.employmentHistory, {onlySelf: true});*/
-
         this.emphis.employeeHistories = this.candidate.employmentHistory;
-        /*for (let item of this.candidate.employmentHistory) {
-         this.form.controls['students'].push(new FormControl('This will not show'));
-         this.employeeHistory
-         .patchValue(this.emphis);
-         console.log(this.employeeHistory.value)
-         }*/
 
+        this.clearEmployeeHistory();
         let controlArray = <FormArray>this.employeeHistory.controls['employeeHistories'];
         this.candidate.employmentHistory.forEach(item => {
           const fb = this.initEmployeeHistory();
           fb.patchValue(item);
           controlArray.push(fb);
         });
-        if (!this.candidate.employmentHistory) {
-          this.addEmployeeHistory();
-        }
-
+      }
+      if (this.candidate.employmentHistory.length == 0) {
+        this.addEmployeeHistory("fromNgOnChanges");
       }
     }
   }
@@ -94,21 +77,27 @@ export class EmploymentHistoryComponent {
     });
   }
 
-  addEmployeeHistory() {
-    const control = <FormArray>this.employeeHistory.controls['employeeHistories'];
-    const addrCtrl = this.initEmployeeHistory();
-    control.push(addrCtrl);
-    this.showAddButton = false;
-    /* subscribe to individual address value changes
-     addrCtrl.valueChanges.subscribe(x => {
-     console.log(x);
-     })*/
+  addEmployeeHistory(calledFrom: string) {
+    if ((calledFrom == "fromNgOnChanges" && this.employeeHistory.controls["employeeHistories"].value.length == 0) || calledFrom == "addAnother") {
+      const control = <FormArray>this.employeeHistory.controls['employeeHistories'];
+      const addrCtrl = this.initEmployeeHistory();
+      control.push(addrCtrl);
+      this.showAddButton = false;
+    }
   }
 
   removeEmployeeHistory(i: number) {
     const control = <FormArray>this.employeeHistory.controls['employeeHistories'];
     control.removeAt(i);
+    this.candidate.employmentHistory.splice(i, 1);
     this.postData('delete');
+  }
+
+  clearEmployeeHistory() {
+    const control = <FormArray>this.employeeHistory.controls['employeeHistories'];
+    for (let index = 0; index < control.length; index++) {
+      control.removeAt(index);
+    }
   }
 
   save(model: any) {         //TODO Remove it
@@ -117,9 +106,66 @@ export class EmploymentHistoryComponent {
   }
 
   postData(type: string) {
-    let empHistoryData = this.employeeHistory.value.employeeHistories[0];
+    let isDataValid = false;
+    this.isValidservicePeriod = true;
 
-    if(type == 'delete' && this.employeeHistory.valid){
+    if (type == 'delete') {
+      this.profileCreatorService.addProfileDetail(this.candidate).subscribe(
+        user => {
+        });
+      return;
+    }
+
+    let empHistory = this.employeeHistory.value.employeeHistories;
+    if(empHistory.length == 1){
+      if (empHistory[0].companyName == "" && empHistory[0].designation == ""
+        && empHistory[0].from.month == "" && empHistory[0].from.year == ""
+        && empHistory[0].to.month == "" && empHistory[0].to.year == "") {
+        if (type == 'next') {
+          this.onNext();
+        }
+        else if (type == 'save') {
+          this.onSave();
+        }
+        return;
+      }
+    }
+
+    for (let history of this.employeeHistory.value.employeeHistories) {
+      if (history.companyName != "" && history.designation != ""
+        && history.from.month != "" && history.from.year != ""
+        && history.to.month != "" && history.to.year != "") {
+
+        if((new Date(history.from.month +"-"+history.from.year) > new Date(history.to.month+"-"+history.to.year))) {
+          this.isValidservicePeriod = false;
+          return;
+        }else{
+          isDataValid = true;
+        }
+
+
+      } else if (history.companyName != "" || history.designation != ""
+        || history.from.month != "" || history.from.year != ""
+        || history.to.month != "" || history.to.year != "") {
+
+        if (history.from.month == "" || history.from.year == ""
+          || history.to.month == "" || history.to.year == "" ||
+          (new Date(history.from.month +"-"+history.from.year) > new Date(history.to.month+"-"+history.to.year))) {
+          this.isValidservicePeriod = false;
+        }
+
+        this.submitStatus = true;
+        return;
+      } else {
+        this.isValidservicePeriod = false;
+        isDataValid = false;
+        this.submitStatus = true;
+        return;
+      }
+    }
+
+
+    if (isDataValid) {
       this.candidate.employmentHistory = this.employeeHistory.value.employeeHistories;
       this.profileCreatorService.addProfileDetail(this.candidate).subscribe(
         user => {
@@ -129,31 +175,7 @@ export class EmploymentHistoryComponent {
           else if (type == 'save') {
             this.onSave();
           }
-          return;
         });
-    }
-
-
-    if(empHistoryData.companyName != "" && empHistoryData.designation != ""
-      && empHistoryData.from.month != "" && empHistoryData.from.year != ""
-      && empHistoryData.to.month != "" && empHistoryData.to.year != ""){
-      this.candidate.employmentHistory = this.employeeHistory.value.employeeHistories;
-      this.profileCreatorService.addProfileDetail(this.candidate).subscribe(
-        user => {
-          if (type == 'next') {
-            this.onNext();
-          }
-          else if (type == 'save') {
-            this.onSave();
-          }
-          return;
-        });
-    }
-
-    if(empHistoryData.companyName != "" || empHistoryData.designation != ""
-      || empHistoryData.from.month != "" || empHistoryData.from.year != ""
-      || empHistoryData.to.month != "" || empHistoryData.to.year != ""){
-      this.submitStatus = true;
       return;
     }
 

@@ -1,27 +1,21 @@
 <div class="modal-bg" *ngIf="highlightedSection.name=='Work-Area'"></div>
 <div class="section-container" *ngIf="highlightedSection.name=='Work-Area'">
   <div class="main-content clearfix edit-modal-content">
-
-    <div class="col-sm-9 no-padding">
-      <h4 class="heading" *ngIf="isCandidate">Select Area of Work That Describes Your Current Focus (Max 3)</h4>
-      <h4 class="heading" *ngIf="!isCandidate">In which Area Candidate Is Expected To Work </h4>
-      <div class="error-messages" *ngIf="!isValid">{{validationMessage}}</div>
-      <div class="scrollable-content">
-        <div class="select-option" *ngFor="let item of roles;let i = index">
-          <label>
-            <input type="checkbox" name="choices"
-                   value="{{item.name}}" (click)="selectOption(item,$event)"
-                   [checked]="isSelected(item.name)"/>
-            <span>{{item.name}}</span>
-          </label>
-        </div>
+    <h4 class="heading" *ngIf="isCandidate">Select Area of Work That Describes Your Current Focus (Max 3)</h4>
+    <h4 class="heading" *ngIf="!isCandidate">In which Area Candidate Is Expected To Work </h4>
+    <div class="error-messages edit-error-msg" *ngIf="!isValid">{{validationMessage}}</div>
+    <div class="scrollable-content">
+      <div class="select-option" *ngFor="let item of roles;let i = index">
+        <label>
+          <input type="checkbox" name="choices"
+                 value="{{item.name}}" (click)="selectOption(item,$event)"
+                 [checked]="isSelected(item.name)"/>
+          <span>{{item.name}}</span>
+        </label>
       </div>
     </div>
-
-    <div class="col-sm-3 no-padding">
-      <cn-tool-tip [message]="tooltipCandidateMessage" *ngIf="isCandidate"></cn-tool-tip>
-      <cn-tool-tip [message]="tooltipRecruiterMessage" *ngIf="!isCandidate"></cn-tool-tip>
-    </div>
+    <cn-tool-tip [message]="tooltipCandidateMessage" *ngIf="isCandidate"></cn-tool-tip>
+    <cn-tool-tip [message]="tooltipRecruiterMessage" *ngIf="!isCandidate"></cn-tool-tip>
     <button class="btn-prev" (click)="onPrevious()"><span
       class="glyphicon glyphicon-chevron-left"></span></button>
 

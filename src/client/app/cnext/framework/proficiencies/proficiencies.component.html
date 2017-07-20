@@ -3,21 +3,17 @@
   <div class="section-container clearfix profeiciency-domain" *ngIf="highlightedSection.name=='Proficiencies'">
 
     <div class="main-content  edit-modal-content clearfix">
-      <div class="col-sm-9 no-padding">
-        <h4 class="heading">Keywods that describes your area of expertise</h4>
-        <div class="scrollable-content">
+      <h4 class="heading">Keywods that describes your area of expertise</h4>
+      <div class="scrollable-content">
 
-          <cn-multi-select [data]="proficiencies" [selectedData]="choosedproficiencies" [maxLength]="maxProficiencies"
-                           (onComplete)="onProficiencyComplete($event)" [submitStatus] = "submitStatus"
-                           [requiredKeySkillsValidationMessage] = "requiredKeySkillsValidationMessage"
-                           [maxKeySkillsValidationMessage] = "maxKeySkillsValidationMessage">
+        <cn-multi-select [data]="proficiencies" [selectedData]="choosedproficiencies" [maxLength]="maxProficiencies"
+                         (onComplete)="onProficiencyComplete($event)" [submitStatus] = "submitStatus"
+                         [requiredKeySkillsValidationMessage] = "requiredKeySkillsValidationMessage"
+                         [maxKeySkillsValidationMessage] = "maxKeySkillsValidationMessage">
 
-          </cn-multi-select>
-        </div>
+        </cn-multi-select>
       </div>
-      <div class="col-sm-3 no-padding">
-        <cn-tool-tip [message]="tooltipMessage"></cn-tool-tip>
-      </div>
+      <cn-tool-tip [message]="tooltipMessage"></cn-tool-tip>
       <button class="btn-prev" (click)="highlightedSection.name='Complexities'"><span
         class="glyphicon glyphicon-chevron-left"></span></button>
 

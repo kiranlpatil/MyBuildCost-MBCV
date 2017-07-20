@@ -2,49 +2,43 @@
 <div class="section-container clear clearfix" *ngIf="highlightedSection.name=='Capabilities'">
 
   <div class="main-content clearfix edit-modal-content">
-    <div class="clearfix">
-      <div class=" col-sm-9 no-padding">
-        <h4 class="heading" *ngIf="isCandidate">Select those capabilities that describe your current strenght
-        </h4>
-        <h4 class="heading" *ngIf="!isCandidate">Capabilities that are required in the candidate
-        </h4>
-        <div class="error-messages" *ngIf="!isValid">{{validationMessage}}</div>
-        <div class="scrollable-content capabilities">
-          <div class="capability-type">
-            <span class="capability-option" *ngFor="let role of roles">
-              <!--<h5 class="sub-areas">Area Of Work - {{role.name}}</h5>-->
-              <div class="select-option"
-                   *ngFor="let item of role.capabilities;let i = index"
-                   [class.primary]="item.isPrimary || primaryNames.indexOf(item.name)!=-1"
-                   [class.secondary]="item.isSecondary || secondaryNames.indexOf(item.name)!=-1">
-                <label *ngIf="capabilitiesCodes.indexOf(item.code)!=-1">
-                  <input type="checkbox" name="checkbox" (click)="selectedCapability(role,item,$event)" id="{{item.name}}"
-                         value="{{item.name}}"
-                         [checked]="secondaryNames.indexOf(item.name)!=-1||primaryNames.indexOf(item.name)!=-1">
-                  <span>{{item.name}}</span>
-                </label>
-              </div>
-            </span>
+    <h4 class="heading" *ngIf="isCandidate">Select those capabilities that describe your current strenght
+    </h4>
+    <h4 class="heading" *ngIf="!isCandidate">Capabilities that are required in the candidate
+    </h4>
+    <div class="error-messages edit-error-msg" *ngIf="!isValid">{{validationMessage}}</div>
+    <div class="scrollable-content capabilities">
+      <div class="capability-type">
+        <span class="capability-option" *ngFor="let role of roles">
+          <!--<h5 class="sub-areas">Area Of Work - {{role.name}}</h5>-->
+          <div class="select-option"
+               *ngFor="let item of role.capabilities;let i = index"
+               [class.primary]="item.isPrimary || primaryNames.indexOf(item.name)!=-1"
+               [class.secondary]="item.isSecondary || secondaryNames.indexOf(item.name)!=-1">
+            <label *ngIf="capabilitiesCodes.indexOf(item.code)!=-1">
+              <input type="checkbox" name="checkbox" (click)="selectedCapability(role,item,$event)" id="{{item.name}}"
+                     value="{{item.name}}"
+                     [checked]="secondaryNames.indexOf(item.name)!=-1||primaryNames.indexOf(item.name)!=-1">
+              <span>{{item.name}}</span>
+            </label>
           </div>
-        </div>
+        </span>
       </div>
+    </div>
 
-      <div class="col-sm-3 no-padding">
-        <cn-tool-tip [message]="tooltipCandidateMessage" *ngIf="isCandidate"></cn-tool-tip>
-        <cn-tool-tip [message]="tooltipRecruiterMessage" *ngIf="!isCandidate"></cn-tool-tip>
-      </div>
+    <cn-tool-tip [message]="tooltipCandidateMessage" *ngIf="isCandidate"></cn-tool-tip>
+    <cn-tool-tip [message]="tooltipRecruiterMessage" *ngIf="!isCandidate"></cn-tool-tip>
 
-      <button class="btn-prev" (click)="highlightedSection.name='Work-Area'"><span
-        class="glyphicon glyphicon-chevron-left"></span></button>
+    <button class="btn-prev" (click)="highlightedSection.name='Work-Area'"><span
+      class="glyphicon glyphicon-chevron-left"></span></button>
 
-      <div class="button-group clearfix">
-        <!--<div class="saving-loader">Saving...</div>-->
-        <button class="btn btn-primary" scrollTo scrollTargetSelector="#complexity-area"
-                (click)="onNext()" [hidden]="!showButton">Next
-        </button>
-        <button class="btn btn-primary" (click)="onCancel()" [hidden]="showButton">Cancel</button>
-        <button class="btn btn-primary"  (click)="onSave()"  [hidden]="showButton">Save</button>
-      </div>
+    <div class="button-group clearfix">
+      <!--<div class="saving-loader">Saving...</div>-->
+      <button class="btn btn-primary" scrollTo scrollTargetSelector="#complexity-area"
+              (click)="onNext()" [hidden]="!showButton">Next
+      </button>
+      <button class="btn btn-primary" (click)="onCancel()" [hidden]="showButton">Cancel</button>
+      <button class="btn btn-primary"  (click)="onSave()"  [hidden]="showButton">Save</button>
     </div>
   </div>
 </div>

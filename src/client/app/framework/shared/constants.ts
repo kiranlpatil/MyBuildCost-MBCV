@@ -1,8 +1,8 @@
 export class AppSettings {
-   public static IP = 'http://localhost:8080';
+   //public static IP = 'http://localhost:8080';
   // public static IP = 'http://ee802b7f.ngrok.io';
   //public static IP = 'http://10.192.33.252:8087';
-    //public static IP = 'http://52.89.221.23:8080';
+    public static IP = 'http://52.89.221.23:8080';
  // public static IP = 'http://52.41.194.37:8080';
   //public static IP = '';
 
@@ -92,7 +92,8 @@ export class Messages {
   public static MSG_ERROR_VALIDATION_INDUSTRY_REQUIRED = "You can't leave this empty.";
   public static MSG_ERROR_VALIDATION_AREAS_WORKED_REQUIRED = "Select areas you have worked.";
   public static MSG_ERROR_VALIDATION_MAX_AREAS_WORKED_CROSSED = "You have selected maximum work areas. To select a new work area, deselect any of the earlier ones.";
-  public static MSG_ERROR_VALIDATION_CAPABILITIES_REQUIRED = "Select your capabilities.";
+  public static MSG_ERROR_VALIDATION_CAPABILITIES_REQUIRED_CANDIDATE = "Select your capabilities.";
+  public static MSG_ERROR_VALIDATION_CAPABILITIES_REQUIRED_RECRUITER = "Select capabilities that are required in the candidate";
   public static MSG_ERROR_VALIDATION_MAX_CAPABILITIES_CROSSED = "You can select maximum 10 capabilities. To select a new capability, deselect any of the earlier selected capability.";
   public static MSG_ERROR_VALIDATION_COMPLEXITY_REQUIRED_CANDIDATE = "Answer this question";
   public static MSG_ERROR_VALIDATION_COMPLEXITY_REQUIRED_RECRUITER = "Answer all these questions.";
@@ -289,5 +290,5 @@ export class ImagePath {
 export class ProjectAsset {
   public static APP_NAME = 'Job Mosis';
   public static TAG_LINE = 'The Awesome Web Experience';
-  public static UNDER_LICENECE = '&#169; 2016 Techprimelab Software Pvt. Ltd.';
+  public static UNDER_LICENECE = '&#169; 2017 Techprimelab Software Pvt. Ltd.';
 }

@@ -40,6 +40,7 @@ export class ProfileDescriptionComponent implements OnInit {
   private currentCompanyValidationMessage = Messages.MSG_ERROR_VALIDATION_CURRENTCOMPANY_REQUIRED;
   private educationValidationMessage= Messages.MSG_ERROR_VALIDATION_EDUCATION_REQUIRED;
   private experienceValidationMessage= Messages.MSG_ERROR_VALIDATION_EXPERIENCE_REQUIRED;
+  private locationErrorMessage = Messages.MSG_ERROR_VALIDATION_LOCATION_REQUIRED;
   private storedLocation: Location = new Location();
 
 
@@ -108,11 +109,11 @@ export class ProfileDescriptionComponent implements OnInit {
     }
   }
   onNext() {
-    if (this.storedLocation.city == undefined) {
+    /*if (this.storedLocation.city == undefined) {
       this.storedLocation.city = 'pune';
       this.storedLocation.state = 'maharashtra';
       this.storedLocation.country = 'india';
-    }
+    }*/
     if((this.candidate.jobTitle == '' || this.candidate.jobTitle == undefined ) ||
       (this.candidate.professionalDetails.currentCompany == '' ||
       this.candidate.professionalDetails.currentCompany== undefined ) ||
@@ -207,7 +208,6 @@ export class ProfileDescriptionComponent implements OnInit {
   }
 
   getAddress(address: MyGoogleAddress) {
-    //this.locationErrorMessage = undefined;
     this.storedLocation.city = address.city;
     this.storedLocation.state = address.state;
     this.storedLocation.country = address.country;

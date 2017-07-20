@@ -1,35 +1,34 @@
 <div class="modal-bg" *ngIf="highlightedSection.name=='EmploymentHistory'"></div>
 <div class="section-container clear" *ngIf="highlightedSection.name =='EmploymentHistory'">
   <div class="main-content edit-modal-content clearfix" >
-    <div class="col-sm-9 no-padding">
-      <h4 class="heading">Employment History</h4>
-      <div class="scrollable-content">
-        <form class="description-form" [formGroup]="employeeHistory" novalidate>
-          <div class="row">
-            <div class="col-sm-8 no-padding" formArrayName="employeeHistories">
-              <div *ngFor="let history of employeeHistory.controls.employeeHistories.controls; let i=index"
-                   class="panel panel-default">
-                <div>
-                <span class="glyphicon glyphicon-trash pull-right"
-                      *ngIf="employeeHistory.controls.employeeHistories.controls.length>0 && employeeHistory.controls.employeeHistories.controls.length !==1 "
-                      (click)="removeEmployeeHistory(i)"></span>
-                </div>
-                <div class="panel-body" [formGroupName]="i">
-                  <cn-employee-history [group]="employeeHistory.controls.employeeHistories.controls[i]" [submitStatus] = "submitStatus"></cn-employee-history>
-                </div>
+
+    <h4 class="heading">Employment History</h4>
+    <div class="scrollable-content">
+      <form class="description-form" [formGroup]="employeeHistory" novalidate>
+        <div class="row">
+          <div class="col-sm-8 no-padding" formArrayName="employeeHistories">
+            <div *ngFor="let history of employeeHistory.controls.employeeHistories.controls; let i=index"
+                 class="panel panel-default">
+              <div>
+              <span class="glyphicon glyphicon-trash pull-right"
+                    *ngIf="employeeHistory.controls.employeeHistories.controls.length>0 && employeeHistory.controls.employeeHistories.controls.length !==1 "
+                    (click)="removeEmployeeHistory(i)"></span>
+              </div>
+              <div class="panel-body" [formGroupName]="i">
+                <cn-employee-history [group]="employeeHistory.controls.employeeHistories.controls[i]" [submitStatus] = "submitStatus"></cn-employee-history>
               </div>
             </div>
           </div>
-          <div class="error-messages"
-               *ngIf="submitStatus">
-            <p>Please mentioned service period</p>
-          </div>
-        </form>
-      </div>
+        </div>
+        <div class="error-messages edit-error-msg"
+             *ngIf="!isValidservicePeriod">
+          <p>Please mentioned service period</p>
+        </div>
+      </form>
     </div>
-    <div class="col-sm-3 no-padding">
-      <cn-tool-tip [message]="tooltipMessage"></cn-tool-tip>
-    </div>
+
+    <cn-tool-tip [message]="tooltipMessage"></cn-tool-tip>
+
     <div class="button-group clearfix">
       <!--<div class="saving-loader">Saving...</div>-->
       <button type="submit" class="btn btn-primary"
@@ -39,7 +38,7 @@
       <button type="submit" class="btn btn-primary" (click)="postData('save')"
               *ngIf="candidate.isSubmitted">Done
       </button>
-      <button (click)="addEmployeeHistory()" class="btn btn-add-another" [disabled]="!employeeHistory.valid">
+      <button (click)="addEmployeeHistory('addAnother')" class="btn btn-add-another" [disabled]="!employeeHistory.valid">
         Add another
       </button>
     </div>
@@ -79,7 +78,7 @@
             </div>
           </div>
         </ul>
-        <p class="more-elements" *ngIf="candidate.employmentHistory.length != 1">{{candidate.employmentHistory.length-1}} more</p>
+        <p class="more-elements" *ngIf="candidate.employmentHistory.length > 1">{{candidate.employmentHistory.length-1}} more</p>
       </div>
     </div>
   </div>

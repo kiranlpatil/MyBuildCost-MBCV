@@ -2,27 +2,26 @@
 <div class="clearfix">
   <div class="section-container clearfix" *ngIf="highlightedSection.name=='Proficiencies'">
     <div class="main-content  edit-modal-content clearfix">
-      <div class="col-sm-9 no-padding">
-        <h4 class="heading">Keywords that describe candidates area of epertise </h4>
-        <div class="scrollable-content proficiency-container">
-          <div class="col-sm-12 no-padding">
-            <label>Mandatory Key Skills</label>
-          </div>
-          <cn-multi-select [type]="'Mandatory'" [data]="proficiencies" [maxLength]="maxNumberOfMandatory"
-                           [selectedData]="jobPosterModel.proficiencies"
-                           (onComplete)="onMandatoryProficiencyComplete($event)"></cn-multi-select>
-          <div class="clearfix">&nbsp;</div>
-          <div class="col-sm-12 no-padding">
-            <label>Additional Key Skills</label>
-          </div>
-          <cn-multi-select [type]="'Additional'" [data]="proficiencies" [maxLength]="maxNumberOfAdditional"
-                           [selectedData]="jobPosterModel.additionalProficiencies"
-                           (onComplete)="onOptionalProficiencyComplete($event)"></cn-multi-select>
+
+      <h4 class="heading">Keywords that describe candidates area of epertise </h4>
+      <div class="scrollable-content proficiency-container">
+        <div class="col-sm-12 no-padding">
+          <label>Mandatory Key Skills</label>
         </div>
+        <cn-multi-select [type]="'Mandatory'" [data]="proficiencies" [maxLength]="maxNumberOfMandatory"
+                         [selectedData]="jobPosterModel.proficiencies"
+                         (onComplete)="onMandatoryProficiencyComplete($event)"></cn-multi-select>
+        <div class="clearfix">&nbsp;</div>
+        <div class="col-sm-12 no-padding">
+          <label>Additional Key Skills</label>
+        </div>
+        <cn-multi-select [type]="'Additional'" [data]="proficiencies" [maxLength]="maxNumberOfAdditional"
+                         [selectedData]="jobPosterModel.additionalProficiencies"
+                         (onComplete)="onOptionalProficiencyComplete($event)"></cn-multi-select>
       </div>
-      <div class="col-sm-3">
-        <cn-tool-tip [message]="tooltipMessage"></cn-tool-tip>
-      </div>
+
+      <cn-tool-tip [message]="tooltipMessage"></cn-tool-tip>
+
       <button class="btn-prev" (click)="highlightedSection.name='Complexities'"><span
               class="glyphicon glyphicon-chevron-left"></span></button>
       <div class="button-group clearfix">
@@ -41,24 +40,28 @@
           <button class="btn-edit" (click)="highlightedSection.name='Proficiencies';disablebutton=false;showButton=false" title="Edit Key Skills"></button>
         </h4>
         <div class="col-sm-12 no-padding">
-          <div>
+          <div class="col-sm-3 padding-right15">
             <label>Mandatory</label>
           </div>
-          <div class="option-list" *ngFor="let item of jobPosterModel.proficiencies;let i = index">
+          <div class="col-sm-9 padding-left15">
+            <div class="option-list" *ngFor="let item of jobPosterModel.proficiencies;let i = index">
             <span class="option">
               {{item}}
             </span>
+            </div>
           </div>
         </div>
         <div class="col-sm-12 no-padding"
              *ngIf="jobPosterModel.additionalProficiencies!= undefined && jobPosterModel.additionalProficiencies.length > 0">
-          <div>
+          <div class="col-sm-3 padding-right15">
             <label>Additional</label>
           </div>
-          <div class="option-list" *ngFor="let item of jobPosterModel.additionalProficiencies;let i = index">
+          <div class="col-sm-9 padding-left15">
+            <div class="option-list" *ngFor="let item of jobPosterModel.additionalProficiencies;let i = index">
             <span class="option">
               {{item}}
             </span>
+            </div>
           </div>
         </div>
       </div>

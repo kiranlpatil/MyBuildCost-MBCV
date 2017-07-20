@@ -55,7 +55,7 @@ export class IndustryExperienceListComponent implements OnInit,OnChanges {
       }
     }
 
-    if (changes.choosedIndustry !== undefined && changes.choosedIndustry.currentValue !== undefined) { debugger
+    if (changes.choosedIndustry !== undefined && changes.choosedIndustry.currentValue !== undefined) {
       this.choosedIndustry = changes.choosedIndustry.currentValue;
       this.suggestionMessageAboutDomain = "In addition to "+ this.choosedIndustry + " industry, do you want the candidate to have mandatory experience in any specific Domain? If yes, select such MUST HAVE DOMAINS from below.";
       this.getIndustries();

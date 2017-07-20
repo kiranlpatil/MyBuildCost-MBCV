@@ -26,19 +26,16 @@ export class AwardsComponent implements OnInit {
   tooltipMessage: string = "<ul><li><p>1. Award message</p></li></ul>";
 
   constructor(private _fb: FormBuilder, private profileCreatorService: CandidateProfileService) {
-  }
-
-  ngOnInit() {
     this.awardDetail = this._fb.group({
       awards: this._fb.array([])
     });
+  }
 
+  ngOnInit() {
     //subscribe to addresses value changes
     this.awardDetail.controls['awards'].valueChanges.subscribe(x => {
       this.isButtonShow = true;
     });
-
-    this.addAward();
   }
 
   ngOnChanges(changes: any) {
@@ -46,15 +43,16 @@ export class AwardsComponent implements OnInit {
       this.candidate = changes.candidate.currentValue;
       if (this.candidate.awards != undefined && this.candidate.awards.length > 0) {
 
+        this.clearAwardDetails();
         let controlArray = <FormArray>this.awardDetail.controls['awards'];
         this.candidate.awards.forEach(item => {
           const fb = this.initAwardDetails();
           fb.patchValue(item);
           controlArray.push(fb);
         });
-        if (!this.candidate.awards) {
-          this.addAward();
-        }
+      }
+      if (this.candidate.awards.length == 0) {
+        this.addAward("fromNgOnChanges");
       }
     }
   }
@@ -68,54 +66,79 @@ export class AwardsComponent implements OnInit {
     });
   }
 
-  addAward() {
-    this.submitStatus = false;
-    const control = <FormArray>this.awardDetail.controls['awards'];
-    const addrCtrl = this.initAwardDetails();
-    control.push(addrCtrl);
+  addAward(calledFrom: string) {
+    if ((calledFrom == "fromNgOnChanges" && this.awardDetail.controls["awards"].value.length == 0) || calledFrom == "addAnother") {
+      this.submitStatus = false;
+      const control = <FormArray>this.awardDetail.controls['awards'];
+      const addrCtrl = this.initAwardDetails();
+      control.push(addrCtrl);
+    }
   }
 
   removeAward(i: number) {
     const control = <FormArray>this.awardDetail.controls['awards'];
     control.removeAt(i);
+    this.candidate.awards.splice(i, 1);
     this.postData('do_nothing');
   }
 
+  clearAwardDetails() {
+    const control = <FormArray>this.awardDetail.controls['awards'];
+    for (let index = 0; index < control.length; index++) {
+      control.removeAt(index);
+    }
+  }
+
   postData(type: string) {
-    let awardsData = this.awardDetail.value.awards[0];
+    let isDataValid = false;
 
-    if(type == 'delete' && this.awardDetail.valid){
-      this.candidate.awards = this.awardDetail.value.awards;
+    if (type == 'delete') {
       this.profileCreatorService.addProfileDetail(this.candidate).subscribe(
         user => {
-          if (type === 'next') {
-            this.onNext();
-          } else if (type === 'save') {
-            this.onSave();
-
-          }
-          return;
         });
-    }
-
-    if(awardsData.issuedBy != "" && awardsData.name != "" && awardsData.year != "") {
-      this.candidate.awards = this.awardDetail.value.awards;
-      this.profileCreatorService.addProfileDetail(this.candidate).subscribe(
-        user => {
-          if (type === 'next') {
-            this.onNext();
-          } else if (type === 'save') {
-            this.onSave();
-          }
-          return;
-        });
-    }
-
-    if(awardsData.issuedBy != "" || awardsData.name != "" || awardsData.year != "") {
-      this.submitStatus = true;
       return;
     }
 
+    let awards = this.awardDetail.value.awards;
+    if(awards.length == 1){
+      if (awards[0].issuedBy == "" && awards[0].name == ""
+        && awards[0].year == "") {
+        if (type == 'next') {
+          this.onNext();
+        }
+        else if (type == 'save') {
+          this.onSave();
+        }
+        return;
+      }
+    }
+
+    for (let awardsData of this.awardDetail.value.awards) {
+      if (awardsData.issuedBy != "" && awardsData.name != "" && awardsData.year != "") {
+        isDataValid = true;
+      } else if(awardsData.issuedBy != "" || awardsData.name != "" || awardsData.year != "") {
+        this.submitStatus = true;
+        return;
+      } else {
+        isDataValid = false;
+        this.submitStatus = true;
+        return;
+      }
+    }
+
+    if (isDataValid) {
+      this.candidate.awards = this.awardDetail.value.awards;
+      this.profileCreatorService.addProfileDetail(this.candidate).subscribe(
+        user => {
+          if (type == 'next') {
+            this.onNext();
+          }
+          else if (type == 'save') {
+            this.onSave();
+          }
+        });
+      return;
+    }
     if (type === 'next') {
       this.onNext();
     } else if (type === 'save') {

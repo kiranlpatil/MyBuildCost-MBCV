@@ -21,19 +21,16 @@ export class AcademicDetailComponent implements OnInit, OnChanges {
   private isButtonShow: boolean = false;
   private submitStatus: boolean;
   constructor(private _fb: FormBuilder, private profileCreatorService: CandidateProfileService) {
-  }
-
-  ngOnInit() {
     this.academicDetail = this._fb.group({
       academicDetails: this._fb.array([])
     });
+  }
 
+  ngOnInit() {
     //subscribe to addresses value changes
     this.academicDetail.controls['academicDetails'].valueChanges.subscribe(x => {
       this.isButtonShow = true;
     });
-
-    this.addAcademicDetail();
   }
 
   ngOnChanges(changes: any) {
@@ -41,15 +38,16 @@ export class AcademicDetailComponent implements OnInit, OnChanges {
       this.candidate = changes.candidate.currentValue;
       if (this.candidate.academics != undefined && this.candidate.academics.length > 0) {
 
+        this.clearAcademicDetails();
         let controlArray = <FormArray>this.academicDetail.controls['academicDetails'];
         this.candidate.academics.forEach(item => {
           const fb = this.initAcademicDetails();
           fb.patchValue(item);
           controlArray.push(fb);
         });
-        if (!this.candidate.academics) {
-          this.addAcademicDetail();
-        }
+      }
+      if (this.candidate.academics.length == 0) {
+        this.addAcademicDetail("fromNgOnChanges");
       }
     }
   }
@@ -63,51 +61,80 @@ export class AcademicDetailComponent implements OnInit, OnChanges {
     });
   }
 
-  addAcademicDetail() {
-    this.submitStatus = false;
-    const control = <FormArray>this.academicDetail.controls['academicDetails'];
-    const addrCtrl = this.initAcademicDetails();
-    control.push(addrCtrl);
+  addAcademicDetail(calledFrom: string) {
+    if ((calledFrom == "fromNgOnChanges" && this.academicDetail.controls["academicDetails"].value.length == 0) || calledFrom == "addAnother") {
+      const control = <FormArray>this.academicDetail.controls['academicDetails'];
+      const addrCtrl = this.initAcademicDetails();
+      control.push(addrCtrl);
+    }
   }
 
   removeAcademicDetail(i: number) {
     const control = <FormArray>this.academicDetail.controls['academicDetails'];
     control.removeAt(i);
+    this.candidate.academics.splice(i, 1);
     this.postData('delete');
   }
 
+  clearAcademicDetails() {
+    const control = <FormArray>this.academicDetail.controls['academicDetails'];
+    for (let index = 0; index < control.length; index++) {
+      control.removeAt(index);
+    }
+  }
+
   postData(type: string) {
-    let academicsData = this.academicDetail.value.academicDetails[0];
+    let isDataValid = false;
 
-    if(type == 'delete' && this.academicDetail.valid){
-      this.candidate.academics = this.academicDetail.value.academicDetails;
+    if (type == 'delete') {
       this.profileCreatorService.addProfileDetail(this.candidate).subscribe(
         user => {
-          if (type === 'next') {
-            this.onNext();
-          } else if (type === 'save') {
-            this.onSave();
-          }
         });
-    }
-
-    if(academicsData.board != "" && academicsData.specialization != "" && academicsData.yearOfPassing != "") {
-      this.candidate.academics = this.academicDetail.value.academicDetails;
-      this.profileCreatorService.addProfileDetail(this.candidate).subscribe(
-        user => {
-          if (type === 'next') {
-            this.onNext();
-          } else if (type === 'save') {
-            this.onSave();
-          }
-        });
-    }
-
-    if(academicsData.board != ""
-      || academicsData.specialization != "" || academicsData.yearOfPassing != "") {
-      this.submitStatus = true;
       return;
     }
+
+    let academics = this.academicDetail.value.academicDetails;
+    if(academics.length == 1){
+      if (academics[0].board == "" && academics[0].specialization == ""
+        && academics[0].yearOfPassing == "") {
+        if (type == 'next') {
+          this.onNext();
+        }
+        else if (type == 'save') {
+          this.onSave();
+        }
+        return;
+      }
+    }
+
+    for (let academicsData of this.academicDetail.value.academicDetails) {
+      if (academicsData.board != "" && academicsData.specialization != "" && academicsData.yearOfPassing != "") {
+          isDataValid = true;
+      } else if(academicsData.board != "" || academicsData.specialization != "" || academicsData.yearOfPassing != "") {
+        this.submitStatus = true;
+        return;
+      } else {
+        isDataValid = false;
+        this.submitStatus = true;
+        return;
+      }
+    }
+
+
+    if (isDataValid) {
+      this.candidate.academics = this.academicDetail.value.academicDetails;
+      this.profileCreatorService.addProfileDetail(this.candidate).subscribe(
+        user => {
+          if (type == 'next') {
+            this.onNext();
+          }
+          else if (type == 'save') {
+            this.onSave();
+          }
+        });
+      return;
+    }
+
 
     if (type === 'next') {
       this.onNext();

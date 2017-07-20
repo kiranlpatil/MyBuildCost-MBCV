@@ -1,31 +1,29 @@
 <div class="modal-bg" *ngIf="highlightedSection.name=='Awards'"></div>
 <div class="section-container clear"  *ngIf="highlightedSection.name =='Awards'">
   <div class="main-content edit-modal-content clearfix">
-    <div class="col-sm-9 no-padding">
-      <h4 class="heading">Awards</h4>
-      <div class="scrollable-content">
-        <form class="description-form" [formGroup]="awardDetail" novalidate>
-          <div class="row">
-            <div class="col-sm-8 no-padding" formArrayName="awards">
-              <div *ngFor="let history of awardDetail.controls.awards.controls; let i=index"
-                       class="panel panel-default">
-                <div>
-                  <span class="glyphicon glyphicon-trash pull-right"
-                        *ngIf="awardDetail.controls.awards.controls.length>0 && awardDetail.controls.awards.controls.length !==1 "
-                        (click)="removeAward(i)"></span>
-                </div>
-                <div class="panel-body" [formGroupName]="i">
-                  <cn-award [group]="awardDetail.controls.awards.controls[i]" [submitStatus] = "submitStatus"></cn-award>
-                </div>
+    <h4 class="heading">Awards</h4>
+    <div class="scrollable-content">
+      <form class="description-form" [formGroup]="awardDetail" novalidate>
+        <div class="row">
+          <div class="col-sm-8 no-padding" formArrayName="awards">
+            <div *ngFor="let history of awardDetail.controls.awards.controls; let i=index"
+                     class="panel panel-default">
+              <div>
+                <span class="glyphicon glyphicon-trash pull-right"
+                      *ngIf="awardDetail.controls.awards.controls.length>0 && awardDetail.controls.awards.controls.length !==1 "
+                      (click)="removeAward(i)"></span>
+              </div>
+              <div class="panel-body" [formGroupName]="i">
+                <cn-award [group]="awardDetail.controls.awards.controls[i]" [submitStatus] = "submitStatus"></cn-award>
               </div>
             </div>
           </div>
-        </form>
-      </div>
+        </div>
+      </form>
     </div>
-    <div class="col-sm-3 no-padding">
-      <cn-tool-tip [message]="tooltipMessage"></cn-tool-tip>
-    </div>
+
+    <cn-tool-tip [message]="tooltipMessage"></cn-tool-tip>
+
     <div class="button-group clearfix">
       <!--<div class="saving-loader">Saving...</div>-->
       <button type="submit" class="btn btn-primary" scrollTo scrollTargetSelector="#certification"
@@ -34,7 +32,7 @@
       <button type="submit" class="btn btn-primary" (click)="postData('save')"
               *ngIf="candidate.isSubmitted">Done
       </button>
-      <button (click)="addAward()" class="btn btn-add-another" [disabled]="!awardDetail.valid">
+      <button (click)="addAward('addAnother')" class="btn btn-add-another" [disabled]="!awardDetail.valid">
         Add another
       </button>
     </div>
@@ -71,7 +69,7 @@
             </div>
           </div>
         </ul>
-        <p class="more-elements" *ngIf="candidate.awards.length != 1">{{candidate.awards.length-1}} more</p>
+        <p class="more-elements" *ngIf="candidate.awards.length > 1">{{candidate.awards.length-1}} more</p>
       </div>
     </div>
   </div>

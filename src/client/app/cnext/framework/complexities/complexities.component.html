@@ -1,47 +1,45 @@
 <div class="modal-bg" *ngIf="highlightedSection.name=='Complexities'"></div>
 <div class="section-container clearfix" *ngIf="highlightedSection.name=='Complexities'">
   <div class="main-content clearfix edit-modal-content">
-    <div class="complexities col-sm-9 no-padding">
+    <div class="complexities">
       <h4 class="heading" *ngIf="isCandidate && currentComplexityDetails">Tell us about your experience in
         <span class="capability-name">{{currentComplexityDetails.capability_name}}</span></h4>
       <h4 class="heading" *ngIf="!isCandidate && currentCapability">Which is the most appropriate level that candidate
         is required to handle in <span class="capability-name">{{currentCapability.name}}</span>
       </h4>
-      <div class="error-messages" *ngIf="!isValid && isCandidate"><p>{{requiedValidationMessageCandidate}}</p></div>
-      <div class="error-messages" *ngIf="!isValid && !isCandidate"><p>{{requiedValidationMessageRecruiter}}</p></div>
-      <div class="complexity-container scrollable-content" *ngIf="isCandidate">
+      <div class="error-messages edit-error-msg" *ngIf="!isValid && isCandidate"><p>{{requiedValidationMessageCandidate}}</p></div>
+      <div class="error-messages edit-error-msg" *ngIf="!isValid && !isCandidate"><p>{{requiedValidationMessageRecruiter}}</p></div>
+      <div class="scrollable-content" *ngIf="isCandidate">
         <cn-question-answer [complexityDetails]="currentComplexityDetails" [slideQuestionToLeft]="slideToLeft"
                             [slideQuestionToRight]="slideToRight"
                             (onComplete)="onAnswered($event)"></cn-question-answer>
       </div>
-      <div class="complexity-container scrollable-content" *ngIf="!isCandidate">
+      <div class="scrollable-content" *ngIf="!isCandidate">
         <cn-multiple-question-answer [capabilityDetails]="currentCapability" [slideQuestionToLeft]="slideToLeft"
                                      [slideQuestionToRight]="slideToRight" (onComplete)="onCapabilityAnswered($event)"
                                      (onQuestionComplete)="oncurrentComplexityAnswered($event)"></cn-multiple-question-answer>
       </div>
-    </div>
-    <div class="col-sm-3 no-padding">
       <cn-tool-tip [message]="tooltipCandidateMessage" *ngIf="isCandidate"></cn-tool-tip>
       <cn-tool-tip [message]="tooltipRecruiterMessage" *ngIf="!isCandidate"></cn-tool-tip>
+      <div class="button-group clearfix clear">
+        <!--<div class="saving-loader">Saving...</div>-->
+        <button class="btn btn-primary" (click)="onNext()"
+                *ngIf="isCandidate">Next
+        </button>
+        <button class="btn btn-primary" (click)="onNextCapability()"
+                *ngIf="!isCandidate">Next
+        </button>
+      </div>
+      <span class="question-count" *ngIf="isCandidate">{{currentComplexity+1}} of {{complexityIds.length}}</span>
+      <span class="question-count" *ngIf="!isCandidate">{{currentCapabilityNumber+1}} of {{capabilities.length}}</span>
+      <!--
+          <span  class="question-count"> {{currentComplexityDetails.complexity_number}}</span><span *ngIf="currentComplexityDetails.total_complexity_in_capability"> of {{currentComplexityDetails.total_complexity_in_capability}}</span>
+      -->
+      <button class="btn-prev" (click)="onPrevious()"  *ngIf="isCandidate"><span class="glyphicon glyphicon-chevron-left"
+      ></span></button>
+      <button class="btn-prev" (click)="onPreviousCapability()" *ngIf="!isCandidate"><span class="glyphicon glyphicon-chevron-left"
+      ></span></button>
     </div>
-    <div class="button-group clearfix clear">
-      <!--<div class="saving-loader">Saving...</div>-->
-      <button class="btn btn-primary" (click)="onNext()"
-              *ngIf="isCandidate">Next
-      </button>
-      <button class="btn btn-primary" (click)="onNextCapability()"
-              *ngIf="!isCandidate">Next
-      </button>
-    </div>
-    <span class="question-count" *ngIf="isCandidate">{{currentComplexity+1}} of {{complexityIds.length}}</span>
-    <span class="question-count" *ngIf="!isCandidate">{{currentCapabilityNumber+1}} of {{capabilities.length}}</span>
-    <!--
-        <span  class="question-count"> {{currentComplexityDetails.complexity_number}}</span><span *ngIf="currentComplexityDetails.total_complexity_in_capability"> of {{currentComplexityDetails.total_complexity_in_capability}}</span>
-    -->
-    <button class="btn-prev" (click)="onPrevious()"  *ngIf="isCandidate"><span class="glyphicon glyphicon-chevron-left"
-                                                         ></span></button>
-    <button class="btn-prev" (click)="onPreviousCapability()" *ngIf="!isCandidate"><span class="glyphicon glyphicon-chevron-left"
-                                                                    ></span></button>
   </div>
 </div>
 <div class="section-container " *ngIf="highlightedSection.name!='Complexities'">

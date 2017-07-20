@@ -35,7 +35,7 @@ export class BasicJobInformationComponent implements OnInit,OnChanges {
   private submitStatus: boolean;
   private storedIndustry: Industry;
   private storedLocation: JobLocation = new JobLocation();
-  private requiredLocationValidationMessage = Messages.MSG_ERROR_VALIDATION_JOINING_PERIOD_REQUIRED;
+  private requiredLocationValidationMessage = Messages.MSG_ERROR_VALIDATION_LOCATION_REQUIRED;
 
   private requiredJoiningPeriodValidationMessage = Messages.MSG_ERROR_VALIDATION_JOINING_PERIOD_REQUIRED;
   private requiredMaxSalaryValidationMessage = Messages.MSG_ERROR_VALIDATION_MAX_SALARY_REQUIRED;

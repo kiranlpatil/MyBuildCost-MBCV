@@ -335,6 +335,7 @@ $white: #fff;
   height: 400px;
   position: relative;
   border-right: 1px solid $border-color;
+  z-index: 3;
 }
 
 .description-container {
