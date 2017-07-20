@@ -20,7 +20,7 @@
     </div>
     <!--<cn-tool-tip [message]="test"></cn-tool-tip>-->
     <div id="post_new_job" class="tab-pane fade clearfix" *ngIf="recruiterDashboard">
-      <cn-job-poster [noOfJobPosted]="recruiterDashboard.postedJobs.length"></cn-job-poster>
+      <cn-job-poster [noOfJobPosted]="recruiterDashboard.postedJobs.length" [currentjobId]="jobId"></cn-job-poster>
     </div>
   </div>
 </div>

@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from "@angular/core";
+import {Component, Input, OnChanges, OnInit} from "@angular/core";
 import {JobPosterModel} from "../model/jobPoster";
 import {JobPosterService} from "./job-poster.service";
 import {Role} from "../model/role";
@@ -10,8 +10,9 @@ import {Section} from "../model/candidate";
 import {LocalStorage} from "../../../framework/shared/constants";
 import {LocalStorageService} from "../../../framework/shared/localstorage.service";
 import {ShowQcardviewService} from "../showQCard.service";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {Industry} from "../model/industry";
+import {RecruiterDashboardService} from "../recruiter-dashboard/recruiter-dashboard.service";
 
 @Component({
   moduleId: module.id,
@@ -20,8 +21,9 @@ import {Industry} from "../model/industry";
   styleUrls: ['job-poster.component.css']
 })
 
-export class JobPosterComponent implements OnInit {
-  @Input() noOfJobPosted:number;
+export class JobPosterComponent implements OnInit, OnChanges {
+  @Input() noOfJobPosted: number;
+  @Input() currentjobId: string;
   private roleList: string[] = new Array(0);
   private primaryCapability: string[] = new Array(0);
   private proficiencies: Proficiences = new Proficiences();
@@ -44,26 +46,129 @@ export class JobPosterComponent implements OnInit {
   private isCapabilitypresent: boolean = false;
   private jobPosterModel = new JobPosterModel();
   private jobForComplexity: Role[] = new Array(0);
-  private jobForRole: Role[]= new Array(0);
-  private jobForCapability: Role[]= new Array(0);
-  private isShowReleventIndustryListStep :boolean = false;
-
+  private jobForRole: Role[] = new Array(0);
+  private jobForCapability: Role[] = new Array(0);
+  private jobId: string;
+  private isShowReleventIndustryListStep: boolean = false;
+  private isPresentCapability: boolean = false;
+  private isComplexityFilled: boolean = true;
+  private isPresentDefaultcomplexity: boolean = false;
   private flag: boolean = true;
   private highlightedSection: Section = new Section();
+
   constructor(private profileCreatorService: CandidateProfileService,
+              private recruiterDashboardService: RecruiterDashboardService,
               private messageService: MessageService,
+              private activatedRoute: ActivatedRoute,
               private showQCardView: ShowQcardviewService,
-              private jobPostService: JobPosterService, private _router: Router) {
-
-
+              private jobPostService: JobPosterService,
+              private _router: Router) {
   }
 
   ngOnInit() {
     if (LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE) === 'true') {
       this.isCandidate = true;
-     }
-    if (this.isCandidate !== true) {
+    }
+    /*this.activatedRoute.params.subscribe(params => {
+     this.jobId = params['jobId'];
+     });
+     if (this.jobId && !this.isCandidate) {
+     this.getJobProfile();
+     } else {
+     }*/
+  }
+
+  ngOnChanges(changes: any) {
+    if (changes.currentjobId !== undefined && changes.currentjobId.currentValue !== undefined) {
+      this.jobId = changes.currentjobId.currentValue;
+      this.getJobProfile();
+    } else {
       this.highlightedSection.name = 'JobProfile';
+    }
+  }
+
+  getJobProfile() {
+    this.recruiterDashboardService.getPostedJobDetails(this.jobId)
+      .subscribe(
+        data => {
+          // this.OnRecruiterDataSuccess(data.data.industry);
+          console.log(data.data.industry.postedJobs[0]);
+          this.jobPosterModel = data.data.industry.postedJobs[0];
+          console.log("job poster model", this.jobPosterModel);
+          this.onGetJobDetailsSuccess(this.jobPosterModel);
+
+        });
+  }
+
+  onGetJobDetailsSuccess(jobmodel: JobPosterModel) {
+    LocalStorageService.setLocalValue(LocalStorage.POSTED_JOB, jobmodel._id);
+    /*    if (jobmodel && jobmodel.jobTitle !== undefined && jobmodel.jobTitle !== '' && jobmodel.location.city &&
+     jobmodel.education !== undefined && jobmodel.education !== '' && jobmodel.experienceMinValue !== undefined &&
+     jobmodel.experienceMaxValue !== undefined && jobmodel.department !== undefined && jobmodel.hiringManager !== undefined &&
+     jobmodel.salaryMaxValue !== undefined && jobmodel.salaryMinValue && jobmodel.joiningPeriod !== undefined) {*/
+    this.isShowIndustryList = true;
+    if (jobmodel.industry && jobmodel.industry.name !== '') {
+      this.getRoles();
+      this.isShowRoleList = true;
+      this.jobForRole = this.jobPosterModel.industry.roles;
+      this.jobForCapability = this.jobPosterModel.industry.roles;
+      if (jobmodel.industry.roles && jobmodel.industry.roles.length > 0) {
+        this.jobForCapability = this.jobPosterModel.industry.roles;
+        this.jobForComplexity = this.jobPosterModel.industry.roles;
+        this.rolesForCapability = new Array(0);
+        if (this.flag) {
+          this.getCapability();
+          this.isShowCapability = true;
+          for (let role of jobmodel.industry.roles) {
+            if (role.default_complexities[0] !== undefined && role.default_complexities[0].complexities.length > 0) {
+              this.isPresentDefaultcomplexity = true;
+            }
+            if (role.capabilities !== undefined && role.capabilities.length > 0) {
+              this.isPresentCapability = true;
+            }
+          }
+        }
+        if (this.isPresentCapability || this.isPresentDefaultcomplexity) {
+          this.isShowComplexity = true;
+          this.jobForCapability = this.jobPosterModel.industry.roles;
+          this.jobForRole = this.jobPosterModel.industry.roles;
+          this.jobForComplexity = this.jobPosterModel.industry.roles;
+          this.getComplexity();
+          this.setCapabilityMatrix = true;
+          if (jobmodel.capability_matrix) {
+            var capbilityMatrix: any = Object.keys(jobmodel.capability_matrix);
+            for (let index of capbilityMatrix) {
+              if (jobmodel.capability_matrix[index] === -1) {
+                this.isComplexityFilled = false;
+              }
+            }
+          }
+          if (this.isComplexityFilled) {
+            this.getProficiency();
+            this.isShowProficiency = true;
+            if (jobmodel.proficiencies !== undefined && jobmodel.proficiencies.length > 0) {
+              this.showIndustryExposure = true;
+              if (jobmodel.interestedIndustries !== undefined && jobmodel.interestedIndustries.length > 0) {
+                this.showReleventIndustryList = true;
+                this.showCompentensies = true;
+                this.highlightedSection.name = 'None';
+              } else {
+                this.highlightedSection.name = 'IndustryExposure';
+              }
+            } else {
+              this.highlightedSection.name = 'Proficiencies';
+            }
+          } else {
+            this.highlightedSection.name = 'Complexities';
+          }
+        } else {
+          this.highlightedSection.name = 'Capabilities';
+        }
+      } else {
+        this.highlightedSection.name = 'Work-Area';
+      }
+    } else {
+      this.highlightedSection.name = 'Industry';
     }
   }
 
@@ -86,14 +191,15 @@ export class JobPosterComponent implements OnInit {
     this.jobPostService.postJob(this.jobPosterModel).subscribe(
       data => {
         this.jobPosterModel._id = data.data.postedJobs[0]._id;
-        LocalStorageService.setLocalValue(LocalStorage.POSTED_JOB,this.jobPosterModel._id);
+        LocalStorageService.setLocalValue(LocalStorage.POSTED_JOB, this.jobPosterModel._id);
         if (this.setCapabilityMatrix) {
           this.jobPosterModel.capability_matrix = data.data.postedJobs[0].capability_matrix;
-            this.setCapabilityMatrix = false;
+          this.setCapabilityMatrix = false;
         }
         console.log(this.jobPosterModel.capability_matrix);
       });
   }
+
   onSuccess(jobId: string) {
     if (jobId !== undefined) {
       LocalStorageService.setLocalValue(LocalStorage.CURRENT_JOB_POSTED_ID, jobId);
@@ -104,6 +210,7 @@ export class JobPosterComponent implements OnInit {
   showHideModal() {
     this.showModalStyle = !this.showModalStyle;
   }
+
   getStyleModal() {
     if (this.showModalStyle) {
       return 'block';
@@ -120,6 +227,7 @@ export class JobPosterComponent implements OnInit {
     this.isShowCandidateQCardView = true;
     this.showQCardView.change(this.jobPosterModel);
   }
+
   onBasicJobInformationComplete(jobModel: JobPosterModel) {
     this.jobPosterModel.department = jobModel.department;
     this.jobPosterModel.education = jobModel.education;
@@ -129,8 +237,8 @@ export class JobPosterComponent implements OnInit {
     this.jobPosterModel.jobTitle = jobModel.jobTitle;
     this.jobPosterModel.joiningPeriod = jobModel.joiningPeriod;
     this.jobPosterModel.location = jobModel.location;
-    this.jobPosterModel.salaryMaxValue= jobModel.salaryMaxValue;
-    this.jobPosterModel.salaryMinValue= jobModel.salaryMinValue;
+    this.jobPosterModel.salaryMaxValue = jobModel.salaryMaxValue;
+    this.jobPosterModel.salaryMinValue = jobModel.salaryMinValue;
     this.isShowIndustryList = true;
     this.updateJob();
   }
@@ -147,6 +255,7 @@ export class JobPosterComponent implements OnInit {
     this.jobForCapability = this.jobPosterModel.industry.roles;
     this.updateJob();
   }
+
   selectRole(roles: Role[]) {
     this.jobPosterModel.industry.roles = roles;
     this.jobForCapability = this.jobPosterModel.industry.roles;
@@ -170,9 +279,10 @@ export class JobPosterComponent implements OnInit {
   }
 
   onComplextyAnswered(capability_matrix: any) {
-    this.jobPosterModel.capability_matrix=capability_matrix;
+    this.jobPosterModel.capability_matrix = capability_matrix;
     this.updateJob();
   }
+
   selectRoleFromComplexity(roles: Role[]) {
     this.updateJob();
     this.getProficiency();
@@ -180,10 +290,10 @@ export class JobPosterComponent implements OnInit {
   }
 
   selectProficiency(jobModel: JobPosterModel) {
-    if (jobModel.proficiencies != undefined) {
+    if (jobModel.proficiencies !== undefined) {
       this.jobPosterModel.proficiencies = jobModel.proficiencies;
     }
-    if (jobModel.additionalProficiencies != undefined) {
+    if (jobModel.additionalProficiencies !== undefined) {
       this.jobPosterModel.additionalProficiencies = jobModel.additionalProficiencies;
     }
     this.updateJob();
@@ -198,16 +308,17 @@ export class JobPosterComponent implements OnInit {
     this.jobPosterModel.interestedIndustries = experiencedindustry;
     this.updateJob();
   }
+
   onIndustryExposureComplete(event: any) {
     //this.showCompentensies = true;
-    if(this.isShowReleventIndustryListStep) {
+    if (this.isShowReleventIndustryListStep) {
       this.highlightedSection.name = 'ReleventIndustry';
       this.showReleventIndustryList = true;
       /*var rolesForRelevent: Role[] = new Array(0);
-      rolesForRelevent = this.jobForRole;
-      this.rolesForRelevent = rolesForRelevent;*/
+       rolesForRelevent = this.jobForRole;
+       this.rolesForRelevent = rolesForRelevent;*/
     } else {
-      console.log('------going to Compentancies-------',this.isShowReleventIndustryListStep);
+      console.log('------going to Compentancies-------', this.isShowReleventIndustryListStep);
       this.highlightedSection.name = 'Compentancies';
       this.showCompentensies = true;
     }
@@ -216,7 +327,7 @@ export class JobPosterComponent implements OnInit {
 
   onCompentansiesandResponsibilitycomplete(data: any) {
     this.jobPosterModel = data;
-    if (this.jobPosterModel.competencies != undefined && this.jobPosterModel.competencies !== ''  ) {
+    if (this.jobPosterModel.competencies != undefined && this.jobPosterModel.competencies !== '') {
       this.disableButton = false;
     }
     this.updateJob();
@@ -240,8 +351,8 @@ export class JobPosterComponent implements OnInit {
 
   getCapability() {
     this.primaryCapability = [];
-   // this.flag = false;
-    this.roleList=new Array(0);
+    // this.flag = false;
+    this.roleList = new Array(0);
     for (let role of this.jobPosterModel.industry.roles) {
       this.roleList.push(role.name);
     }
@@ -270,8 +381,9 @@ export class JobPosterComponent implements OnInit {
   }
 
   getJobForCapability() {
-    this.jobForCapability=this.jobPosterModel.industry.roles;
+    this.jobForCapability = this.jobPosterModel.industry.roles;
   }
+
   getComplexity() {
     this.primaryCapability = [];
     for (let role of this.jobPosterModel.industry.roles) {
@@ -288,7 +400,7 @@ export class JobPosterComponent implements OnInit {
         .subscribe(
           rolelist => {
             this.rolesForComplexity = rolelist.data;
-            this.highlightedSection.name = 'Complexities';
+            //this.highlightedSection.name = 'Complexities';
             this.getJobForComplexity();
           });
     }
@@ -306,16 +418,18 @@ export class JobPosterComponent implements OnInit {
   getJobForComplexity() {
     this.isShowComplexity = true;
   }
-  onReleventIndustryComplete(value:any) {
-    console.log('----data------',value);
+
+  onReleventIndustryComplete(value: any) {
+    console.log('----data------', value);
     this.jobPosterModel.releventIndustries = value;
     console.log('---- this.jobPosterModel.releventIndustries------', this.jobPosterModel.releventIndustries);
     this.showCompentensies = true;
     this.updateJob();
   }
-  checkReleventIndustries(value:any) {
-    console.log('checkReleventIndustries couunt',value);
-    (value > 0)?this.isShowReleventIndustryListStep = true:this.isShowReleventIndustryListStep = false;
+
+  checkReleventIndustries(value: any) {
+    console.log('checkReleventIndustries couunt', value);
+    (value > 0) ? this.isShowReleventIndustryListStep = true : this.isShowReleventIndustryListStep = false;
   }
 
 }

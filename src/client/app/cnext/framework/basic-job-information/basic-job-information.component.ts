@@ -16,20 +16,20 @@ import {Messages} from "../../../framework/shared/constants";
   styleUrls: ['basic-job-information.component.css']
 })
 
-export class BasicJobInformationComponent implements OnInit,OnChanges {
+export class BasicJobInformationComponent implements OnInit, OnChanges {
   @Input() jobPosterModel: JobPosterModel = new JobPosterModel();
   @Input() highlightedSection: Section;
   @Output() onComplete = new EventEmitter();
   private savedjobPosterModel: JobPosterModel = new JobPosterModel();
   private jobPostForm: FormGroup;
-  private educationList:any = [];
+  private educationList: any = [];
   private experienceRangeList: string[] = new Array(0);
-  private fromYear:string = '';
-  private toYear:string = '';
+  private fromYear: string = '';
+  private toYear: string = '';
   private salaryRangeList: string[] = new Array(0);
-  private fromValue:string = '';
-  private toValue:string = '';
-  private noticePeriodList:any = [];
+  private fromValue: string = '';
+  private toValue: string = '';
+  private noticePeriodList: any = [];
   private address: string;
   private showButton: boolean = true;
   private submitStatus: boolean;
@@ -98,12 +98,13 @@ export class BasicJobInformationComponent implements OnInit,OnChanges {
         });
   }
 
-  ngOnChanges(changes:any) {
-    if(changes.jobPosterModel !== undefined && changes.jobPosterModel.currentValue !== undefined){
-      this.jobPosterModel=changes.jobPosterModel.currentValue;
-      this.savedjobPosterModel=Object.assign({},this.jobPosterModel);
+  ngOnChanges(changes: any) {
+    if (changes.jobPosterModel !== undefined && changes.jobPosterModel.currentValue !== undefined) {
+      this.jobPosterModel = changes.jobPosterModel.currentValue;
+      this.savedjobPosterModel = Object.assign({}, this.jobPosterModel);
     }
   }
+
   getAddress(address: MyGoogleAddress) {
     this.storedLocation.city = address.city;
     this.storedLocation.state = address.state;
@@ -141,35 +142,36 @@ export class BasicJobInformationComponent implements OnInit,OnChanges {
     }
     this.jobPosterModel.location = this.storedLocation;
     //if (this.jobPosterModel.industry) {
-    this.savedjobPosterModel=Object.assign({},this.jobPosterModel);
+    this.savedjobPosterModel = Object.assign({}, this.jobPosterModel);
     this.highlightedSection.name = 'Industry';
     this.onComplete.emit(this.jobPosterModel);
     /*} else {
      this.jobPosterModel.industry = new Industry();
      }*/
   }
+
   onCancel() {
-    this.jobPosterModel=Object.assign({},this.savedjobPosterModel);
-    this.highlightedSection.name='none';
+    this.jobPosterModel = Object.assign({}, this.savedjobPosterModel);
+    this.highlightedSection.name = 'none';
     //this.highlightedSection.name='none';
   }
 
   selectExperiencesMaxModel(value: any) {
-    this.toYear=value;
+    this.toYear = value;
 
   }
 
   selectExperiencesMinModel(value: any) {
-    this.fromYear=value;
+    this.fromYear = value;
   }
 
   selectSalaryMaxModel(value: any) {
-    this.toValue=value;
+    this.toValue = value;
 
   }
 
   selectSalaryMinModel(value: any) {
-    this.fromValue=value;
+    this.fromValue = value;
   }
 }
 
