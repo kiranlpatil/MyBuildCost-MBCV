@@ -28,7 +28,7 @@ export class CapabilitiesComponent {
   private disableButton: boolean = true;
   private isCandidate: boolean = false;
   private isValid: boolean = true;
-  private validationMessage = Messages.MSG_ERROR_VALIDATION_CAPABILITIES_REQUIRED;
+  private validationMessage = Messages.MSG_ERROR_VALIDATION_CAPABILITIES_REQUIRED_RECRUITER;
   private capabilitiesCodes : string[]= new Array(0);
   tooltipCandidateMessage: string =
 

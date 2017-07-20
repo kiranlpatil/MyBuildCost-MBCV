@@ -43,7 +43,7 @@
           <div class="form-group">
             <label>Current Location</label>
             <input type="text" class="form-control" placeholder="" (setAddress)="getAddress($event)" (city)="selectedCity($event)" mygoogleplace/>
-            <!--<div class="error-messages" *ngIf='locationErrorMessage !== undefined'>{{locationErrorMessage}}</div>-->
+            <div class="error-messages" *ngIf="storedLocation.city == undefined && !isValid">{{locationErrorMessage}}</div>
           </div>
 
 

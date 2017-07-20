@@ -92,7 +92,8 @@ export class Messages {
   public static MSG_ERROR_VALIDATION_INDUSTRY_REQUIRED = "You can't leave this empty.";
   public static MSG_ERROR_VALIDATION_AREAS_WORKED_REQUIRED = "Select areas you have worked.";
   public static MSG_ERROR_VALIDATION_MAX_AREAS_WORKED_CROSSED = "You have selected maximum work areas. To select a new work area, deselect any of the earlier ones.";
-  public static MSG_ERROR_VALIDATION_CAPABILITIES_REQUIRED = "Select your capabilities.";
+  public static MSG_ERROR_VALIDATION_CAPABILITIES_REQUIRED_CANDIDATE = "Select your capabilities.";
+  public static MSG_ERROR_VALIDATION_CAPABILITIES_REQUIRED_RECRUITER = "Select capabilities that are required in the candidate";
   public static MSG_ERROR_VALIDATION_MAX_CAPABILITIES_CROSSED = "You can select maximum 10 capabilities. To select a new capability, deselect any of the earlier selected capability.";
   public static MSG_ERROR_VALIDATION_COMPLEXITY_REQUIRED_CANDIDATE = "Answer this question";
   public static MSG_ERROR_VALIDATION_COMPLEXITY_REQUIRED_RECRUITER = "Answer all these questions.";
