@@ -45,25 +45,17 @@
 <div class="section-container " *ngIf="highlightedSection.name!='Complexities'">
   <div class="main-content clearfix">
     <div class="compact-view">
-      <a data-toggle="collapse" data-target="#demo">
+
         <h4 class="heading-compact">Capabilities
           <span class="add-more" (click)="highlightedSection.name='Capabilities'"><span class="glyphicon glyphicon-plus-sign"></span>Add More</span>
           <button class="btn-edit" (click)="edit()"
                   [hidden]="highlightedSection.isDisable" title="Edit Complexities"></button>
         </h4>
-      </a>
-      <div id="demo" class="collapse">
-        <div class="col-sm-12 no-padding" (click)="edit()">
+
+      <div>
+        <div class="col-sm-12 no-padding">
           <cn-capability-compare id="complexity-compact-view" [isCompact]="true" [rowsToShow]="5" [capabilities]="capabilities"></cn-capability-compare>
         </div>
-        <!--<div class="see-more" *ngIf="!showMore">
-          <p>Show more</p>
-          <span class="glyphicon glyphicon-chevron-down"></span>
-        </div>
-        <div class="see-more" *ngIf="showMore">
-          <span class="glyphicon glyphicon-chevron-up"></span>
-          <p>Show less</p>
-        </div>-->
       </div>
     </div>
   </div>

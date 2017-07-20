@@ -596,3 +596,45 @@ and (max-width: 840px) {
     }
   }
 }
+
+.capability-of-capabilities {
+  .content {
+    font-size: 14px;
+    padding: 10px 0;
+    border-top: 1px solid #E6E6E6;
+    display: inline-block;
+    width: 100%;
+    .capability-label-name {
+      font-size: 14px;
+      color: $theme-color;
+      font-family: 'gothamrnd-book';
+      font-weight: 600;
+    }
+    .complexity-name {
+      color: $text-color;
+      margin-bottom: 2px;
+      width: 100%;
+      display: inline-block;
+      font-size: 14px;
+      font-weight: 700;
+    }
+    .complexities-col {
+      display: block;
+      width: 100%;
+    }
+    .scenario-row {
+      margin-bottom: 10px;
+      display: inline-block;
+      span {
+        font-size: 12px;
+        color: $text-color;
+        font-family: 'gothamrnd-book';
+        font-weight: 600;
+      }
+    }
+  }
+}
+
+.hide-capability {
+  display: none !important;
+}
