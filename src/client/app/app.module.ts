@@ -165,6 +165,10 @@ import {ProfileDetailsService} from "./cnext/framework/profile-detail-service";
 import {ProfileDetailsDirective} from "./cnext/framework/shared-directives/profile-details.directive";
 import {ProficiencyDetailsDirective} from "./cnext/framework/shared-directives/proficiency-details.directive";
 import {ProficiencyDetailsService} from "./cnext/framework/proficiency-detail-service";
+import {IndustryDetailsService} from "./cnext/framework/industry-detail-service";
+import {IndustryDetailsDirective} from "./cnext/framework/shared-directives/industry-details.directive";
+import {IndustryDataDirective} from "./cnext/framework/shared-directives/industry-data.directive";
+import {IndustryDataService} from "./cnext/framework/industry-data-service";
 //C-NEXT IMPORTS
 
 
@@ -261,6 +265,8 @@ import {ProficiencyDetailsService} from "./cnext/framework/proficiency-detail-se
     ProgressBarComponent,
     CandidateViewComponent,
     WorkAreaComponent,
+    IndustryDetailsDirective,
+    IndustryDataDirective,
     JobViewComponent,
     JobCompareViewComponent,
     QcardListComponent,
@@ -344,8 +350,10 @@ import {ProficiencyDetailsService} from "./cnext/framework/proficiency-detail-se
     CandidateProfileService,
     RecruiterDashboardService,
     QCardViewService,
+    IndustryDetailsService,
     ProficiencyDetailsService,
     FilterService,
+    IndustryDataService,
     RecruiteQCardView2Service,
     RecruiterCandidatesListsService,
     CandidateInCartService,

@@ -4,6 +4,7 @@ import {CandidateProfileService} from "../candidate-profile/candidate-profile.se
 import {Section} from "../model/candidate";
 import {LocalStorageService} from "../../../framework/shared/localstorage.service";
 import {LocalStorage, Messages} from "../../../framework/shared/constants";
+import {IndustryDetailsService} from "../industry-detail-service";
 
 @Component({
   moduleId: module.id,
@@ -27,9 +28,16 @@ export class IndustryListComponent implements OnChanges {
   private choosedIndustry: Industry = new Industry();
   private isValid:boolean = true;
   private requiredFieldMessage = Messages.MSG_ERROR_VALIDATION_INDUSTRY_REQUIRED;
-  constructor(private candidateProfileService: CandidateProfileService) {
-    this.candidateProfileService.getIndustries()
-      .subscribe(industries => this.industries = industries.data);
+
+  constructor(private candidateProfileService: CandidateProfileService,
+              private industryDetailsService: IndustryDetailsService) {
+    this.industryDetailsService.makeCall$.subscribe(
+      data => {
+        if (data) {
+          this.getIndustry();
+        }
+      }
+    );
     if (LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE) === 'true') {
       this.isCandidate = true;
     }
@@ -54,8 +62,7 @@ export class IndustryListComponent implements OnChanges {
     }
     if (this.choosedIndustry.name === this.selectedIndustry.name) {
 
-    }
-    else {
+    } else {
       this.valueChange.emit(this.choosedIndustry);
     }
     this.highlightedSection.name = 'Work-Area';
@@ -71,6 +78,12 @@ export class IndustryListComponent implements OnChanges {
     } else {
       this.highlightedSection.name = 'JobProfile';
     }
+  }
+
+  getIndustry() {
+    console.log("called from industry list component");
+    this.candidateProfileService.getIndustries()
+      .subscribe(industries => this.industries = industries.data);
   }
 }
 
