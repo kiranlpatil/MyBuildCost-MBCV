@@ -121,7 +121,6 @@ export class CandidateProfileComponent implements OnInit {
     this.highlightedSection.date = date;
     this.saveCandidateDetails();
     this.showProficiency = true;
-    this.getProficiency();
   }
 
   onProficiencySelect(proficiency:string[]) {
@@ -253,15 +252,6 @@ export class CandidateProfileComponent implements OnInit {
           this.showComplexity = true;
         });
   }
-
-  getProficiency() {
-    this.profileCreatorService.getProficiency()
-      .subscribe(
-        data => {
-          this.proficiencies = data.data[0].proficiencies;
-        });
-  }
-
   OnCandidateDataSuccess(candidateData:any) {
     this.candidate = candidateData.data[0];
     this.candidate.basicInformation = candidateData.metadata;
@@ -295,7 +285,6 @@ export class CandidateProfileComponent implements OnInit {
           this.showCapability = true;
           this.getCapability();
           this.whichStepsVisible[1] = true;
-          this.getProficiency();
           for (let role of this.candidate.industry.roles) {
             if (role.default_complexities[0] !== undefined && role.default_complexities[0].complexities.length > 0) {
               this.isPresentDefaultcomplexity = true;

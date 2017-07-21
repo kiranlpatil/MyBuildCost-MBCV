@@ -163,6 +163,8 @@ import {ProfessionalDetailsService} from "./cnext/framework/professional-detail-
 import {ProfessionalDetailsDirective} from "./cnext/framework/shared-directives/professional-details.directive";
 import {ProfileDetailsService} from "./cnext/framework/profile-detail-service";
 import {ProfileDetailsDirective} from "./cnext/framework/shared-directives/profile-details.directive";
+import {ProficiencyDetailsDirective} from "./cnext/framework/shared-directives/proficiency-details.directive";
+import {ProficiencyDetailsService} from "./cnext/framework/proficiency-detail-service";
 //C-NEXT IMPORTS
 
 
@@ -240,6 +242,7 @@ import {ProfileDetailsDirective} from "./cnext/framework/shared-directives/profi
     CandidateJobListComponent,
     CandidateDashboardComponent,
     ProfessionalDataComponent,
+    ProficiencyDetailsDirective,
     EmploymentHistoryComponent,
     CandidateCompareViewComponent,
     ProficiencyCompareComponent,
@@ -341,6 +344,7 @@ import {ProfileDetailsDirective} from "./cnext/framework/shared-directives/profi
     CandidateProfileService,
     RecruiterDashboardService,
     QCardViewService,
+    ProficiencyDetailsService,
     FilterService,
     RecruiteQCardView2Service,
     RecruiterCandidatesListsService,

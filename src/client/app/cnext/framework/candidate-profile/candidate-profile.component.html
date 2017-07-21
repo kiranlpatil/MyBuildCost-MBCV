@@ -61,7 +61,7 @@
                          (onComplete)="onComplexityComplete($event)" [hidden]="!showComplexity"></cn-complexities>
       </div>
       <div class="wrapper">
-        <cn-proficiencies [proficiencies]="proficiencies" [choosedproficiencies]="candidate.proficiencies"
+        <cn-proficiencies [choosedproficiencies]="candidate.proficiencies"
                           [highlightedSection]="highlightedSection"
                           (onSelect)="onProficiencySelect($event)" (onComplete)="onProficiencyComplete($event)"
                           [hidden]="!showProficiency"></cn-proficiencies>

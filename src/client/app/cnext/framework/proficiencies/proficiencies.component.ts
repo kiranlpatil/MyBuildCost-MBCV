@@ -1,7 +1,8 @@
 import {Component, EventEmitter, Input, Output} from "@angular/core";
 import {Section} from "../model/candidate";
-import {ValueConstant} from "../../../framework/shared/constants";
-import {Messages} from "../../../framework/shared/constants";
+import {Messages, ValueConstant} from "../../../framework/shared/constants";
+import {ProficiencyDetailsService} from "../proficiency-detail-service";
+import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
 
 @Component({
   moduleId: module.id,
@@ -13,7 +14,7 @@ import {Messages} from "../../../framework/shared/constants";
 export class ProficienciesComponent {
   @Input() choosedproficiencies: string[];
   @Input() highlightedSection: Section;
-  @Input() proficiencies: string[];
+  private proficiencies: string[];
   @Output() onComplete = new EventEmitter();
   @Output() onSelect = new EventEmitter();
   tooltipMessage: string = "<ul><li><p>" +
@@ -24,10 +25,19 @@ export class ProficienciesComponent {
     "<li><p>3. Selecting too many Key Skills would dilute the matching and alignment with the " +
       "best job opportunity. Hence you should select maximum 25 Key Skills.</p></li></ul>";
   private maxProficiencies: number;
+
+  constructor(private proficiencyDetailService: ProficiencyDetailsService, private profileCreatorService: CandidateProfileService) {
+    this.proficiencyDetailService.makeCall$.subscribe(
+      data => {
+        if (data) {
+          this.getProficiency();
+        }
+      }
+    );
+  }
   ngOnInit() {
     this.maxProficiencies = ValueConstant.MAX_PROFECIENCES;
   }
-
   private showButton: boolean = true;
   private submitStatus: boolean;
   private requiredKeySkillsValidationMessage = Messages.MSG_ERROR_VALIDATION_KEYSKILLS_REQUIRED;
@@ -44,9 +54,9 @@ export class ProficienciesComponent {
   }
 
   onNext() {
-    if(this.choosedproficiencies.length == 0){
+    if (this.choosedproficiencies.length === 0) {
       this.submitStatus = true;
-      return
+      return;
     }
     this.onComplete.emit();
     this.highlightedSection.name = 'IndustryExposure';
@@ -54,13 +64,21 @@ export class ProficienciesComponent {
   }
 
   onSave() {
-    if(this.choosedproficiencies.length == 0){
+    if (this.choosedproficiencies.length === 0) {
       this.submitStatus = true;
-      return
+      return;
     }
     this.highlightedSection.name = 'none';
     this.highlightedSection.isDisable = false;
     this.onComplete.emit();
 
+  }
+
+  getProficiency() {
+    this.profileCreatorService.getProficiency()
+      .subscribe(
+        data => {
+          this.proficiencies = data.data[0].proficiencies;
+        });
   }
 }
