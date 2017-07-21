@@ -1,4 +1,4 @@
 class ProjectAsset {
-  public static APP_NAME: string = "Job Mosis";
+  public static APP_NAME: string = "JobMosis";
 }
 export=ProjectAsset;
