@@ -71,24 +71,11 @@ export function updateDetails(req: express.Request, res: express.Response, next:
     var userService = new UserService();
     var query = {"_id": userId};
     var updateData = {"location": updatedCandidate.professionalDetails.location};
-    userService.findOneAndUpdate(query, updateData, {new: true}, (error, result) => {
-      if (error) {
-        next(error);
-      }
-      else {
-        res.send({
-          "status": "Success",
-          "data": {"message": "Password changed successfully"}
-        });
-      }
-    });
-
     var candidateService = new CandidateService();
     candidateService.update(userId, updatedCandidate, (error, result) => {
       if (error) {
         next(error);
-      }
-      else {
+      } else {
         candidateService.retrieve(result._id, (error, result) => {
           if (error) {
             next({
@@ -96,18 +83,27 @@ export function updateDetails(req: express.Request, res: express.Response, next:
               message: Messages.MSG_ERROR_WRONG_TOKEN,
               code: 401
             });
-          }
-          else {
+          } else {
             var token = auth.issueTokenWithUid(updatedCandidate);
             res.send({
               'status': 'success',
-              'data': {},
+              'data': result,
               access_token: token
             });
           }
         });
       }
     });
+    /*userService.findOneAndUpdate(query, updateData, {new: true}, (error, result) => {
+     if (error) {
+     next(error);
+     } else {
+     res.send({
+     "status": "Success",
+     "data": {"data": result}
+     });
+     }
+     });*/
   }
   catch (e) {
     res.status(403).send({message: e.message});

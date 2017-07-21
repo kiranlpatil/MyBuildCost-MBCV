@@ -10,13 +10,11 @@
       <div class="error-messages edit-error-msg" *ngIf="!isValid && isCandidate"><p>{{requiedValidationMessageCandidate}}</p></div>
       <div class="error-messages edit-error-msg" *ngIf="!isValid && !isCandidate"><p>{{requiedValidationMessageRecruiter}}</p></div>
       <div class="scrollable-content" *ngIf="isCandidate">
-        <cn-question-answer [complexityDetails]="currentComplexityDetails" [slideQuestionToLeft]="slideToLeft"
-                            [slideQuestionToRight]="slideToRight"
+        <cn-question-answer [complexityDetails]="currentComplexityDetails"
                             (onComplete)="onAnswered($event)"></cn-question-answer>
       </div>
       <div class="scrollable-content" *ngIf="!isCandidate">
-        <cn-multiple-question-answer [capabilityDetails]="currentCapability" [slideQuestionToLeft]="slideToLeft"
-                                     [slideQuestionToRight]="slideToRight" (onComplete)="onCapabilityAnswered($event)"
+        <cn-multiple-question-answer [capabilityDetails]="currentCapability" (onComplete)="onCapabilityAnswered($event)"
                                      (onQuestionComplete)="oncurrentComplexityAnswered($event)"></cn-multiple-question-answer>
       </div>
       <cn-tool-tip [message]="tooltipCandidateMessage" *ngIf="isCandidate"></cn-tool-tip>

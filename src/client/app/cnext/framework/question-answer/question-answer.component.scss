@@ -3,10 +3,10 @@ $text-color: #333;
 
 .complexity-details {
   padding: 0;
-  transition: 2s;
+  // transition: 2s;
   width: 100%;
-  -webkit-transition: 2s;
-  -moz-transition: 2s;
+  //-webkit-transition: 2s;
+  // -moz-transition: 2s;
   opacity: 1;
 
   .breadcrumbs {
@@ -35,6 +35,7 @@ $text-color: #333;
   }
 }
 
+/*
 .slide-right {
   -webkit-animation: SlideTORight 2s ease-out 0s;
   animation: SlideTORight 2s ease-out 0s;
@@ -120,3 +121,4 @@ $text-color: #333;
     opacity: 1;
   }
 }
+*/

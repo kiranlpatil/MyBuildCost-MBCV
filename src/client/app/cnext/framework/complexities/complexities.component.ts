@@ -1,13 +1,13 @@
-import { Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, ViewChild } from '@angular/core';
-import { Role } from '../model/role';
-import { ComplexityService } from '../complexity.service';
-import { LocalStorageService } from '../../../framework/shared/localstorage.service';
-import { LocalStorage, Messages } from '../../../framework/shared/constants';
-import { Section } from '../model/candidate';
-import { ComplexityDetails } from '../model/complexity-detail';
-import { ComplexityComponentService } from './complexity.service';
-import { JobCompareService } from '../single-page-compare-view/job-compare-view/job-compare-view.service';
-import { Capability } from '../model/capability';
+import {Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, ViewChild} from "@angular/core";
+import {Role} from "../model/role";
+import {ComplexityService} from "../complexity.service";
+import {LocalStorageService} from "../../../framework/shared/localstorage.service";
+import {LocalStorage, Messages} from "../../../framework/shared/constants";
+import {Section} from "../model/candidate";
+import {ComplexityDetails} from "../model/complexity-detail";
+import {ComplexityComponentService} from "./complexity.service";
+import {JobCompareService} from "../single-page-compare-view/job-compare-view/job-compare-view.service";
+import {Capability} from "../model/capability";
 
 @Component({
   moduleId: module.id,
@@ -108,6 +108,7 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
     }
     this.getCapabilityDetail(this.currentCapabilityNumber);
     this.currentComplexity = this.getCurrentComplexityPosition();
+    console.log("NOW AT", this.currentComplexity);
     this.getComplexityDetails(this.complexityIds[this.currentComplexity]);
   }
 
