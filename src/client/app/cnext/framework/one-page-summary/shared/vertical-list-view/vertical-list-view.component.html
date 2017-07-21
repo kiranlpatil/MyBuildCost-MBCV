@@ -1,7 +1,8 @@
 <div class="vertical-view" *ngIf="data != undefined">
   <div *ngIf="type=='employment history'">
     <div>  <!--*ngIf="data[0].designation!=undefined && data[0].designation !=''"-->
-      <img src="assets/c-next/icons/employment-icon.png" alt="employment"/>
+      <!--<img src="assets/c-next/icons/employment-icon.png" alt="employment"/>-->
+      <div titile="employment" class="employment-icon"></div>
       <span>{{type}}</span>
       <ul *ngIf="calledFrom=='singlepageview'">
           <li *ngFor="let item of data;let i = index" >
