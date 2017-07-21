@@ -5,5 +5,6 @@ class DefaultComplexityModel {
   complexities: ComplexityModel[];
   name: string;
   code: string;
+  sort_order: number;
 }
 export = DefaultComplexityModel;

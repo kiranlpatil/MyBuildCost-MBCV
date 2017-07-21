@@ -346,8 +346,8 @@ $white: #ffffff;
     height: 60px;
     margin: 0 auto;
     word-wrap: break-word;
-    padding: 0px;
-    color: #B3B3B3;
+    padding: 0;
+    color: #777;
   }
 }
 
@@ -604,7 +604,7 @@ and (max-width: 840px) {
     }
 
     .capability-edit {
-      padding-right: 30px;
+      padding: 0 30px 0 0;
     }
 
     .btn-edit {
@@ -648,6 +648,9 @@ and (max-width: 840px) {
         font-family: 'gothamrnd-book';
         font-weight: 600;
       }
+    }
+    .capability-edit {
+      padding: 0 30px 0 0;
     }
   }
 }

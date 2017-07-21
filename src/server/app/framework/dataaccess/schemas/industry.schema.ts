@@ -38,8 +38,10 @@ class IndustrySchema {
           name: String
         }],
         default_complexities: [{
+          sort_order: Number,
           code: String,
           complexities: [{
+            sort_order: Number,
             code: String,
             questionForCandidate: String,
             questionForRecruiter: String,

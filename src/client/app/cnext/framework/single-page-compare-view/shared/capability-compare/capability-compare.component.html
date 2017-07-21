@@ -106,7 +106,8 @@
         <div class="col-sm-9">
           <div class="heading visible-xs"><h4>Complexities Handled</h4></div>
           <div class="complexities-col" *ngFor="let complexity of capability.complexities;let i=index">
-            <div class="col-sm-4 padding-right15">
+            <div class="col-sm-4 capability-edit" (click)="onComplexitySelect(complexity,capability)">
+              <button class="btn-edit" (click)="onComplexitySelect(complexity,capability)" title="Edit this Capability Detail"></button>
               <span class="complexity-name">{{complexity.name}}</span>
               <div class="scenario-row" *ngFor="let scenario of complexity.scenarios">
                 <span>{{scenario.name}}</span>
