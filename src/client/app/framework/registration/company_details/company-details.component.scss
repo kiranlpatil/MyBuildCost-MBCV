@@ -81,20 +81,20 @@ $border-color: #e8e8e8;
       margin: 9px 10px 0 0;
       height: 25px;
       padding: 0px;
-      background: url(../assets/c-next/card-view/sprite.png) no-repeat -8px -395px;
+      background: url(../assets/c-next/card-view/sprite.png) no-repeat -2px -395px;
       width: 26px;
     }
 
     .file-name {
       margin: 37px 7px 0;
-      font-size: 12px;
+      font-size: 10px;
       color: $btn-color;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
       height: 20px;
       position: absolute;
-      right: 41px;
+      right: 36px;
     }
   }
 
