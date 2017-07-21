@@ -186,6 +186,7 @@ export class LocalStorage {
 
 export class ValueConstant {
   public static MAX_CAPABILITIES: number = 10;
+  public static MAX_CAPABILITIES_TO_SHOW: number = 5;
   public static MATCHING_PERCENTAGE: number = 10;
   public static MAX_WORKAREA: number = 3;
   public static MAX_INTERESTEDINDUSTRY: number = 7;
