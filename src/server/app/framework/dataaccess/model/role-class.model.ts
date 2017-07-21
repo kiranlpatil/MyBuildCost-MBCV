@@ -1,6 +1,5 @@
-import ICapability = require("../mongoose/capability");
-import DefaultComplexityModel = require("./default-complexity.model");
-import CapabilityClassModel = require("./capability-class.model");
+import DefaultComplexityModel = require('./default-complexity.model');
+import CapabilityClassModel = require('./capability-class.model');
 
 class RoleClassModel {
   name: string;

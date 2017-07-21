@@ -1,5 +1,4 @@
-import IComplexity = require("../mongoose/complexity");
-import ComplexityClassModel = require("./complexity-class.model");
+import ComplexityClassModel = require('./complexity-class.model');
 
 class CapabilityClassModel {
   complexities: ComplexityClassModel[];
