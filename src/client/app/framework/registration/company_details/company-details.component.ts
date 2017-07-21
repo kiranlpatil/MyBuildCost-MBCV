@@ -44,6 +44,9 @@ export class CompanyDetailsComponent implements OnInit {
   private buttonId: string;
   private submitStatus: boolean;
 
+  tooltipMessage: string = '<ul><li>' +
+    '<p>1. Company Details Message</p></li></ul>';
+
   constructor(private commonService: CommonService, private _router: Router, private http: Http,
               private companyDetailsService: CompanyDetailsService, private profileService: ProfileService,
               private messageService: MessageService, private formBuilder: FormBuilder, private loaderService: LoaderService, private activatedRoute: ActivatedRoute) {

@@ -3,8 +3,8 @@ import { JobQcard } from '../../model/JobQcard';
 import { LocalStorage } from '../../../../framework/shared/constants';
 import { LocalStorageService } from '../../../../framework/shared/localstorage.service';
 import { CandidateDashboardService } from '../candidate-dashboard.service';
-import {Message} from "../../../../framework/shared/message";
-import {MessageService} from "../../../../framework/shared/message.service";
+import { Message } from '../../../../framework/shared/message';
+import { MessageService } from '../../../../framework/shared/message.service';
 
 
 @Component({
@@ -28,9 +28,9 @@ export class CandidateQCardComponent {
   }
 
   ngOnChanges(changes: any) {
-    if (changes.type != undefined) {
+    if (changes.type !== undefined) {
       this.type = changes.type.currentValue;
-      if (this.type == 'none') {
+      if (this.type === 'none') {
         this.hideButton = false;
       }
     }
@@ -38,7 +38,7 @@ export class CandidateQCardComponent {
 
   viewJob(jobId: string) {
 
-    if (jobId != undefined) {
+    if (jobId !== undefined) {
       LocalStorageService.setLocalValue(LocalStorage.CURRENT_JOB_POSTED_ID, jobId);
       this.jobId = jobId;
       this.candidateId = LocalStorageService.getLocalValue(LocalStorage.END_USER_ID);
@@ -52,7 +52,7 @@ export class CandidateQCardComponent {
     this.candidateDashboardService.blockJob().subscribe(
       data => {
         this.onAction.emit('block');
-        this.displayMsg("REJECT");
+        this.displayMsg('REJECT');
       });
   }
 
@@ -69,7 +69,7 @@ export class CandidateQCardComponent {
     this.candidateDashboardService.applyJob().subscribe(
       data => {
         this.onAction.emit('apply');
-        this.displayMsg("APPLY");
+        this.displayMsg('APPLY');
       },
       error => (console.log(error)));//TODO remove on error
   }
@@ -77,9 +77,9 @@ export class CandidateQCardComponent {
   displayMsg(condition: string){
     var message = new Message();
     message.isError = false;
-    if(condition=="APPLY"){message.custom_message = "You appiled for "+this.job.jobTitle+" at "+this.job.company_name+" this job.";}
-    if(condition=="REJECT"){message.custom_message = "You moved "+this.job.jobTitle+" at "+this.job.company_name+" this job to Not Intrested.";}
-    if(condition=="DELETE"){message.custom_message = "Removed "+this.job.jobTitle+" at "+this.job.company_name+" job from 'Not Interested' list. And added to Matching jobs";}
+    if(condition==='APPLY') {message.custom_message = 'You have applied for a job as '+this.job.jobTitle+' at '+this.job.company_name;}
+    if(condition==='REJECT') {message.custom_message = 'Your matching job as '+this.job.jobTitle+' at '+this.job.company_name+' is marked as Not interested.';}
+    if(condition==='DELETE') {message.custom_message = 'Job marked as not interested is moved back to matching section. ';}
     this.messageService.message(message);
   }
 
@@ -93,7 +93,7 @@ export class CandidateQCardComponent {
     this.candidateDashboardService.removeBlockJob().subscribe(
       data => {
         this.onAction.emit('delete');
-        this.displayMsg("DELETE");
+        this.displayMsg('DELETE');
       });
   }
 

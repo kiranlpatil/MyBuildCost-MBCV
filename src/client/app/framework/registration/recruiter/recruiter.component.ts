@@ -35,10 +35,9 @@ export class RecruiterComponent implements OnInit {
   private isShowMessage: boolean = false;
   private myPassword: string = '';
   private storedLocation: Location = new Location();
-  private mainHeaderMenuHideShow:string;
-  private address: any;
+  private mainHeaderMenuHideShow: string;
   private submitStatus: boolean;
-  private companySizeErrorMessage: string;
+  private companySizeErrorMessage = Messages.MSG_ERROR_VALIDATION_COMPANYSIZE_REQUIRED;
   private locationErrorMessage: string;
   private companyHQErrorMessage: string;
   private passwordMismatchMessage: string;
@@ -48,8 +47,8 @@ export class RecruiterComponent implements OnInit {
 
 
     this.recruiterForm = this.formBuilder.group({
-      'company_name': ['', ValidationService.requireCompanyNameValidator],
-      'company_size': [''],
+      'company_name': ['', [ValidationService.noWhiteSpaceValidator, ValidationService.requireCompanyNameValidator]],
+      'company_size': ['', Validators.required],
       'mobile_number': ['', [ValidationService.requireMobileNumberValidator, ValidationService.mobileNumberValidator]],
       'email': ['', [ValidationService.requireEmailValidator, ValidationService.emailValidator]],
       'password': ['', [ValidationService.requirePasswordValidator, ValidationService.passwordValidator]],
@@ -104,30 +103,25 @@ export class RecruiterComponent implements OnInit {
 
   onSubmit() {
     this.model = this.recruiterForm.value;
-    if (this.model.company_name === '' || this.storedcompanySize == undefined || this.model.mobile_number == '' ||
+    if (this.model.company_name === '' || this.model.company_size == '' || this.model.mobile_number == '' ||
       this.model.email == '' || this.model.password == '' || this.model.confirm_password == '' ||
       this.storedLocation == null || this.companyHeadquarter == undefined) {
-      if(this.storedcompanySize == undefined){
-        this.companySizeErrorMessage = Messages.MSG_ERROR_VALIDATION_COMPANYSIZE_REQUIRED;
-      }
-      if(this.storedLocation.city == undefined){
+      if (this.storedLocation.city == undefined) {
         this.locationErrorMessage = Messages.MSG_ERROR_VALIDATION_LOCATION_REQUIRED;
       }
-      if(this.companyHeadquarter == undefined){
+      if (this.companyHeadquarter == undefined) {
         this.companyHQErrorMessage = Messages.MSG_ERROR_VALIDATION_HEADQUARTER_REQUIRED;
       }
       this.submitStatus = true;
       return;
     }
 
-    if(!this.recruiterForm.valid){
+    if (!this.recruiterForm.valid) {
       return
     }
-
     this.model.current_theme = AppSettings.LIGHT_THEM;
     this.model.location = this.storedLocation;
     this.model.isCandidate = false;
-    this.model.company_size = this.storedcompanySize;
     this.model.company_headquarter_country = this.companyHeadquarter;
     this.model.isRecruitingForself = this.isRecruitingForself;
     this.model.email = this.model.email.toLowerCase();
@@ -188,9 +182,11 @@ export class RecruiterComponent implements OnInit {
       this.isShowMessage = false;
     }
   }
+
   recruitmentForOthers() {
     this.isRecruitingForself = false;
   }
+
   recruitmentForSelf() {
     this.isRecruitingForself = true;
   }

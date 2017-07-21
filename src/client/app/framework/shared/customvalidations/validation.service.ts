@@ -1,4 +1,5 @@
 import {Messages} from "../../shared/constants";
+import any = jasmine.any;
 
 export class ValidationService {
 
@@ -19,9 +20,8 @@ export class ValidationService {
       'requiredCompanyName': Messages.MSG_ERROR_VALIDATION_COMPANYNAME_REQUIRED,
       'requiredOtp': Messages.MSG_ERROR_VALIDATION_OTP_REQUIRED,
       'invalidEmailAddress': Messages.MSG_ERROR_VALIDATION_INVALID_EMAIL_REQUIRED,
-      /*
-       'invalidPassword': 'Passwords must contain at least 8 characters, including uppercase, lowercase letters, numbers and one special character($@_!%*?&).',
-       */
+      'invalidName': Messages.MSG_ERROR_VALIDATION_INVALID_NAME,
+      'containsWhiteSpace': Messages.MSG_ERROR_VALIDATION_INVALID_DATA,
       'invalidPassword': Messages.MSG_ERROR_VALIDATION_PASSWORD,
       'invalidMobile': Messages.MSG_ERROR_VALIDATION_OTP_MOBILE_NUMBER,
       'invalidBirthYear': Messages.MSG_ERROR_VALIDATION_BIRTH_YEAR,
@@ -58,9 +58,16 @@ export class ValidationService {
   static requireFirstNameValidator(control: any) {
     if (control.value == "" || control.value == undefined) {
       return {'requiredFirstName': true};
-    }
-    else {
+    } else {
       return null;
+    }
+  }
+
+  static nameValidator(control: any) {
+    if (control.value.match(/^[a-zA-Z]+$/)) {
+      return null;
+    } else {
+      return {'invalidName': true};
     }
   }
 
@@ -72,6 +79,17 @@ export class ValidationService {
       return null;
     }
   }
+
+  static noWhiteSpaceValidator(control: any) {
+    let isWhitespace = (control.value).trim().length === 0;
+    if (isWhitespace) {
+      return {'containsWhiteSpace': true};
+    }
+    else {
+      return null;
+    }
+  }
+
 
   static requireCompanyDescriptionValidator(control: any) {
     if (control.value == "" || control.value == undefined) {
@@ -104,14 +122,8 @@ export class ValidationService {
   static passwordValidator(control: any) {
 
     if (control.value.match(/(?=.*\d)(?=.*[a-zA-Z]).{8,}/)) {
-      /*
-       if (control.value.match(/(?=.*\d)(?=.*[a-z])(?=.*[$@_#!%*?&])(?=.*[A-Z]).{8,}/)) {
-       */
-
       return null;
-
     } else {
-
       return {'invalidPassword': true};
     }
   }

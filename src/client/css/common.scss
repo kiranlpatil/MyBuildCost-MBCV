@@ -258,10 +258,13 @@ select,
     color: #666;
     font-weight: 900;
     font-size: 13px;
+    padding: 2px 0;
   }
 }
 
 .form-group {
+  position: relative;
+
   label {
     color: $label;
     display: block;
@@ -602,14 +605,16 @@ control-messages {
     text-align: left;
     margin: 0;
 
+
+
     .avtar > img {
-      background: $white;
+      background: transparent;
     }
 
     form {
-      bottom: -2px;
+      bottom: -15px;
       position: absolute;
-      right: 0;
+      right: 39px;
       text-align: right;
       padding: 0;
     }

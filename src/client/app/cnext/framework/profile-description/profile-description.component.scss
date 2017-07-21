@@ -2,7 +2,9 @@ $light-blue: #0d75fa;
 $black: #333;
 
 .user-name {
-  margin-bottom: 10px;
+  float: left;
+  margin: 12px auto 0;
+  width: 130px;
 
   .profile-name-first,
   .profile-name-last {

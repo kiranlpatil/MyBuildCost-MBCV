@@ -1,111 +1,103 @@
-<!--<div class="alert alert-danger clearfix alert-fixed" [hidden]="isShowErrorMessage">
-  <div class="col-sm-1 hidden-xs"><span class="glyphicon glyphicon-warning-sign"></span></div>
-  <div class="col-sm-10 col-xs-11 error-msg"><b>{{ error_msg }}</b></div>
-  <div class="col-sm-1 col-xs-1 close-msg">
-    <button (click)="isShowErrorMessage = true" class="btn-close"><span class="glyphicon glyphicon-remove"></span>
-    </button>
-  </div>
-</div>-->
 <section class="main-form-wrapper registration">
   <main-header [MainHeaderMenuHideShow]="mainHeaderMenuHideShow"></main-header>
-  <!--<app-loader></app-loader>-->
   <div class="content">
 
     <h5>Register </h5>
-<form [formGroup]="recruiterForm" (submit)="onSubmit()" class="employer-form" novalidate>
-  <div class="radio-group text-left clearfix">
-  <div class="registration-btn-radio text-left clearfix">
-    <label class="lable-name">Recruiting for</label>
-    <div class="item-radio">
-      <label for="self" class="radio-inline">
-        <input type="radio" id="self" name="recruiting_for" value="self" (click)="recruitmentForSelf()" checked/>
-        <span>Own company</span>
-        <div class="check"></div>
-      </label>
-    </div>
-    <div class="item-radio">
-      <label for="others" class="radio-inline">
-        <input type="radio" id="others" name="recruiting_for" value="others" (click)="recruitmentForOthers()"/>
-        <span>Other company</span>
-        <div class="check"></div>
-      </label>
-    </div>
-  </div>
-  </div>
-  <div class="row clearfix">
-    <div class="form-group">
-      <control-messages [control]="recruiterForm.controls.company_name" [submitStatus] = "submitStatus"></control-messages>
-      <input type="text" formControlName="company_name" id="company_name" class="form-control" maxlength="40" autocomplete="off" required/>
-      <label>Company Name</label>
-    </div>
-
-    <div class="form-group list">
-      <div ng2-auto-complete  max-num-list="10" [source]="companySize" (ngModelChange)="selectCompanySizeModel($event)">
-        <input class="form-control" [ngModel]="storedcompanySize" [ngModelOptions]="{standalone: true}"
-               placeholder="" required/>
+    <form [formGroup]="recruiterForm" (submit)="onSubmit()" class="employer-form" novalidate>
+      <div class="radio-group text-left clearfix">
+        <div class="registration-btn-radio text-left clearfix">
+          <label class="lable-name">Recruiting for</label>
+          <div class="item-radio">
+            <label for="self" class="radio-inline">
+              <input type="radio" id="self" name="recruiting_for" value="self" (click)="recruitmentForSelf()" checked/>
+              <span>Own company</span>
+              <div class="check"></div>
+            </label>
+          </div>
+          <div class="item-radio">
+            <label for="others" class="radio-inline">
+              <input type="radio" id="others" name="recruiting_for" value="others" (click)="recruitmentForOthers()"/>
+              <span>Other company</span>
+              <div class="check"></div>
+            </label>
+          </div>
+        </div>
       </div>
-      <label>Company Size</label>
-      <div class="error-messages" *ngIf='companySizeErrorMessage != undefined'>{{companySizeErrorMessage}}</div>
-    </div>
+      <div class="row clearfix">
+        <div class="form-group">
+          <control-messages [control]="recruiterForm.controls.company_name" [submitStatus] = "submitStatus"></control-messages>
+          <input type="text" formControlName="company_name" id="company_name" class="form-control" maxlength="40" autocomplete="off" required/>
+          <label>Company Name</label>
+        </div>
 
-    <div class="form-group">
-      <control-messages [control]="recruiterForm.controls.email" [submitStatus] = "submitStatus"></control-messages>
-      <input type="email" formControlName="email" id="email" maxlength="40" class="form-control" autocomplete="off" required/>
-      <label>Email</label>
-    </div>
+        <div class="form-group list">
+          <select class="select" formControlName="company_size">
+            <option *ngFor="let c of companySize" [ngValue]="c">{{c}}</option>
+          </select>
+          <label>Company Size</label>
+          <div class="error-messages"
+               *ngIf="(recruiterForm.get('company_size').touched || submitStatus)&& recruiterForm.get('company_size').hasError('required')">
+            <p>{{companySizeErrorMessage}}</p>
+          </div>
+        </div>
 
-    <div class="input-group form-group">
-      <control-messages [control]="recruiterForm.controls.mobile_number" [submitStatus] = "submitStatus"></control-messages>
-      <span class="input-group-addon">+91</span>
-      <input type="number" formControlName="mobile_number" id="mobile_number" class="form-control" required/>
-      <label>Mobile</label>
-    </div>
+        <div class="form-group">
+          <control-messages [control]="recruiterForm.controls.email" [submitStatus] = "submitStatus"></control-messages>
+          <input type="email" formControlName="email" id="email" maxlength="40" class="form-control" autocomplete="off" required/>
+          <label>Email</label>
+        </div>
 
-
-    <div class="form-group">
-      <control-messages [control]="recruiterForm.controls.password" [submitStatus] = "submitStatus"></control-messages>
-      <input type="password" formControlName="password" id="password" [(ngModel)]="model.password"
-             class="form-control" (focus)="showMessage()" [(ngModel)]="myPassword" (ngModelChange)="selectPassword($event)" required/>
-      <label>Password</label>
-    </div>
-
-    <div class="form-group">
-      <control-messages [control]="recruiterForm.controls.confirm_password" [submitStatus] = "submitStatus"></control-messages>
-      <input type="password" formControlName="confirm_password" id="confirm_password" [(ngModel)]="model.confirm_password"
-             (blur)="makePasswordConfirm()" class="form-control" required/>
-      <label>Confirm Password</label>
-      <span class="error-messages" *ngIf="isPasswordConfirm == true">{{passwordMismatchMessage}}</span>
-    </div>
-
-    <div class="form-group">
-      <!--<control-messages [control]="recruiterForm.controls.location" [submitStatus] = "submitStatus"></control-messages>-->
-      <input type="text" formControlName="location" class="form-control" placeholder=""
-             (setAddress)="getAddress($event)" mygoogleplace/>
-      <label>Current Location</label>
-      <div class="error-messages" *ngIf='locationErrorMessage != undefined'>{{locationErrorMessage}}</div>
-    </div>
+        <div class="input-group form-group">
+          <control-messages [control]="recruiterForm.controls.mobile_number" [submitStatus] = "submitStatus"></control-messages>
+          <span class="input-group-addon">+91</span>
+          <!--<input type="text" formControlName="mobile_number" id="mobile_number" class="form-control" pattern="/[^0-9]/g" />-->
+          <input type="number" formControlName="mobile_number" id="mobile_number" class="form-control" />
+          <label>Mobile</label>
+        </div>
 
 
-    <div class="form-group">
-      <!--<control-messages [control]="recruiterForm.controls.company_headquarter_country" [submitStatus] = "submitStatus"></control-messages>-->
+        <div class="form-group">
+          <control-messages [control]="recruiterForm.controls.password" [submitStatus] = "submitStatus"></control-messages>
+          <input type="password" formControlName="password" id="password" [(ngModel)]="model.password"
+                 class="form-control" (focus)="showMessage()" [(ngModel)]="myPassword" (ngModelChange)="selectPassword($event)" required/>
+          <label>Password</label>
+        </div>
 
-      <input type="text" formControlName="company_headquarter_country" class="form-control"
-             placeholder="" (setAddress)="selectCompanyHeadquarterModel($event)" mygoogleplace/>
-      <label>Company Head Quarter</label>
-      <div class="error-messages" *ngIf='companyHQErrorMessage != undefined'>{{companyHQErrorMessage}}</div>
-    </div>
+        <div class="form-group">
+          <control-messages [control]="recruiterForm.controls.confirm_password" [submitStatus] = "submitStatus"></control-messages>
+          <input type="password" formControlName="confirm_password" id="confirm_password" [(ngModel)]="model.confirm_password"
+                 (blur)="makePasswordConfirm()" class="form-control" required/>
+          <label>Confirm Password</label>
+          <span class="error-messages" *ngIf="isPasswordConfirm == true">{{passwordMismatchMessage}}</span>
+        </div>
 
-    <!--<div class="form-group recaptcha">
-      <recaptcha
-        [(ngModel)]="recruiterForm.captcha"
-        formControlName="captcha"
-        siteKey="6LdEDRkUAAAAAKCCqc0EIlMY8FLxSdH4GxrYSI6A" required></recaptcha>
-    </div>-->
-  </div>
-  <div class="col-sm-10 col-xs-11 error-msg alert alert-danger form-alert" [hidden]="isShowErrorMessage"><b>{{ error_msg }}</b></div>
-  <div class="button-group">
-    <button type="submit" class="btn btn-success" >Create my account</button>
-  </div>
-</form>
+        <div class="form-group">
+          <input type="text" formControlName="location" class="form-control" placeholder=""
+                 (setAddress)="getAddress($event)" mygoogleplace/>
+          <label>Current Location</label>
+          <div class="error-messages" *ngIf='locationErrorMessage != undefined'>{{locationErrorMessage}}</div>
+        </div>
+
+
+        <div class="form-group">
+
+          <input type="text" formControlName="company_headquarter_country" class="form-control"
+                 placeholder="" (setAddress)="selectCompanyHeadquarterModel($event)" mygoogleplace/>
+          <label>Company Head Quarter</label>
+          <div class="error-messages" *ngIf='companyHQErrorMessage != undefined'>{{companyHQErrorMessage}}</div>
+        </div>
+
+        <!--<div class="form-group recaptcha">
+          <recaptcha
+            [(ngModel)]="recruiterForm.captcha"
+            formControlName="captcha"
+            siteKey="6LdEDRkUAAAAAKCCqc0EIlMY8FLxSdH4GxrYSI6A" required></recaptcha>
+        </div>-->
+      </div>
+      <div class="col-sm-10 col-xs-11 error-msg alert alert-danger form-alert" [hidden]="isShowErrorMessage"><b>{{ error_msg }}</b></div>
+      <div class="button-group">
+        <button type="submit" class="btn btn-success" >Create my account</button>
+      </div>
+    </form>
   </div>
 </section>

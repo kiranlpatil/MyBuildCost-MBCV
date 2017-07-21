@@ -11,8 +11,8 @@ import { RecruiterJobView } from '../../model/recruiter-job-view';
 import { Candidate } from '../../model/candidate';
 import { CandidateDetail } from '../../../../framework/registration/candidate/candidate';
 import { CandidateProfileService } from '../../candidate-profile/candidate-profile.service';
-import { Message } from "../../../../framework/shared/message";
-import { MessageService } from "../../../../framework/shared/message.service";
+import { Message } from '../../../../framework/shared/message';
+import { MessageService } from '../../../../framework/shared/message.service';
 /*import underline = Chalk.underline;*/
 
 
@@ -92,11 +92,11 @@ export class QCardviewComponent implements OnChanges {
         this.candidateQlist.rejectedCandidates.splice(this.candidateQlist.rejectedCandidates.indexOf(candidate), 1);
        isFound=false;
         for(let item of this.candidateQlist.matchedCandidates){
-          if(item._id == candidate._id) {
+          if(item._id === candidate._id) {
             isFound=true;
           }
         }
-        if(!isFound){
+        if(!isFound) {
           this.candidateQlist.matchedCandidates.push(candidate);
         }
         break;
@@ -104,11 +104,11 @@ export class QCardviewComponent implements OnChanges {
         this.candidateQlist.cartCandidates.splice(this.candidateQlist.cartCandidates.indexOf(candidate), 1);
         isFound=false;
         for(let item of this.candidateQlist.matchedCandidates){
-          if(item._id == candidate._id){
+          if(item._id === candidate._id) {
             isFound=true;
           }
         }
-        if(!isFound){
+        if(!isFound) {
           this.candidateQlist.matchedCandidates.push(candidate);
         }
         break;
@@ -121,13 +121,13 @@ export class QCardviewComponent implements OnChanges {
         isMatchList = true;
         break;
     }
-    if (action === "add" && !isMatchList && sourceListName != ValueConstant.APPLIED_CANDIDATE) {
-      this.qCardViewService.updateCandidateLists(this.jobId, candidate._id, sourceListName, "remove").subscribe(
+    if (action === 'add' && !isMatchList && sourceListName !== ValueConstant.APPLIED_CANDIDATE) {
+      this.qCardViewService.updateCandidateLists(this.jobId, candidate._id, sourceListName, 'remove').subscribe(
         data => {
           this.updateCountModel(data);
         }
       );
-    } else if (action === "remove") {
+    } else if (action === 'remove') {
       this.recuirterListCountModel.numberOfMatchedCandidates++;
     }
     this.qCardViewService.updateCandidateLists(this.jobId, candidate._id, destinationListName, action).subscribe(
@@ -157,25 +157,26 @@ export class QCardviewComponent implements OnChanges {
 
     if (sourceListName === ValueConstant.CART_LISTED_CANDIDATE && (destinationListName === ValueConstant.CART_LISTED_CANDIDATE || destinationListName === ValueConstant.REJECTED_LISTED_CANDIDATE))
       this.addedTocart.emit(false);
-    if(destinationListName=="cartListed"&& action=="add"){this.displayMsg("cartListed",candidate);}
-    if(destinationListName=="rejectedList"&& action=="add"){this.displayMsg("rejectedList",candidate);}
-    if(destinationListName=="cartListed"&& action=="remove"){this.displayMsg("removedcartListed",candidate);}
-    if(destinationListName=="rejectedList"&& action=="remove"){this.displayMsg("removedrejectedList",candidate);}
+    if(destinationListName==='cartListed'&& action==='add') {this.displayMsg('cartListed',candidate);}
+    if(destinationListName==='rejectedList'&& action==='add') {this.displayMsg('rejectedList',candidate);}
+    if(destinationListName==='cartListed'&& action==='remove') {this.displayMsg('removedcartListed',candidate);}
+    if(destinationListName==='rejectedList'&& action==='remove') {this.displayMsg('removedrejectedList',candidate);}
 
   }
-  displayMsg(condition:string,candidate: CandidateQCard){
+  displayMsg(condition:string,candidate: CandidateQCard) {
     var message = new Message();
     message.isError = false;
-    if(condition=="cartListed"){message.custom_message = "You added the candidate "+candidate.first_name+" "+candidate.last_name+" in Cart";}
-    if(condition=="rejectedList"){message.custom_message = "You moved "+candidate.first_name+" "+candidate.last_name+" this Candidate to Rejected list";}
-    if(condition=="removedcartListed"){message.custom_message = "Removed "+candidate.first_name+" "+candidate.last_name+" from cart. And added in Matching Jobs";}
-    if(condition=="removedrejectedList"){message.custom_message = "Removed "+candidate.first_name+" "+candidate.last_name+" from Rejected list. And added in Matching Jobs";}
+    if(condition==='cartListed') {message.custom_message = 'Candidate '+candidate.first_name+' is added to your cart.';}
+    if(condition==='rejectedList') {message.custom_message = 'Candidate '+candidate.first_name+' is rejected and moved to the rejected list.';}
+    if(condition==='removedcartListed') {message.custom_message = 'Candidate '+candidate.first_name+' moved back to candidate listing from cart.';}
+    if(condition==='removedrejectedList') {message.custom_message = 'Candidate '+candidate.first_name+' moved back to candidate listing from rejected section.';}
     this.messageService.message(message);
   }
+
   addRemoveToShortList(candidate: CandidateQCard) {
     this.isShortlistedclicked=true;
     let action: string;
-    (this.emailsOfShrortListedCandidates.indexOf(candidate.email) != -1) ? action = 'remove' : action = 'add';
+    (this.emailsOfShrortListedCandidates.indexOf(candidate.email) !== -1) ? action = 'remove' : action = 'add';
     if (action === 'add') {
       this.emailsOfShrortListedCandidates.push(candidate.email);
     } else {
@@ -192,16 +193,16 @@ export class QCardviewComponent implements OnChanges {
   updateCountModel(data: any) {
     var _jobId = this.jobId;
     var item = data.data.postedJobs.filter(function (item: any) {
-      return (item._id == _jobId);
+      return (item._id === _jobId);
     });
     for (let candidateItem of item[0].candidate_list) {
-      if (candidateItem.name == ValueConstant.APPLIED_CANDIDATE) {
+      if (candidateItem.name === ValueConstant.APPLIED_CANDIDATE) {
         this.recuirterListCountModel.numberOfCandidatesApplied = candidateItem.ids.length;
       }
-      if (candidateItem.name == ValueConstant.CART_LISTED_CANDIDATE) {
+      if (candidateItem.name === ValueConstant.CART_LISTED_CANDIDATE) {
         this.recuirterListCountModel.numberOfCandidatesInCart = candidateItem.ids.length;
       }
-      if (candidateItem.name == ValueConstant.REJECTED_LISTED_CANDIDATE) {
+      if (candidateItem.name === ValueConstant.REJECTED_LISTED_CANDIDATE) {
         this.recuirterListCountModel.numberOfCandidatesrejected = candidateItem.ids.length;
       }
     }
@@ -217,7 +218,7 @@ export class QCardviewComponent implements OnChanges {
   }
 
   changeSort() {
-    if (this.type != 'matchedList') {
+    if (this.type !== 'matchedList') {
       this.matchFormat = this.match.belowMatch;
     }
   }
@@ -252,7 +253,7 @@ export class QCardviewComponent implements OnChanges {
   }
 
   getImagePath(imagePath: string) {
-    if (imagePath != undefined) {
+    if (imagePath !== undefined) {
       return AppSettings.IP + imagePath.substring(4).replace('"', '');
     }
     return null;

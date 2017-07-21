@@ -63,10 +63,10 @@ $bg-color: #fff;
       &::after {
         background: $text-color;
         content: '';
-        height: 100%;
+        height: 80%;
         left: 10px;
         position: absolute;
-        top: 0;
+        top: 20%;
         width: 1px;
         z-index: 1;
       }

@@ -9,7 +9,6 @@ import {ImagePath, LocalStorage, Messages} from "../../shared/constants";
 import {LocalStorageService} from "../../shared/localstorage.service";
 import {DateService} from "../../../cnext/framework/date.service";
 import {Location} from "../location";
-import {MyGoogleAddress} from "./google-our-place/my-google-address";
 @Component({
   moduleId: module.id,
   selector: 'cn-candidate-registration',
@@ -28,27 +27,24 @@ export class CandidateComponent implements OnInit {
   private BODY_BACKGROUND: string;
   private passingYear: string;
   private validBirthYearList = new Array();
-  private mainHeaderMenuHideShow:string;
+  private mainHeaderMenuHideShow: string;
   private year: any;
   private currentDate: any;
   private submitStatus: boolean;
   private birthYearErrorMessage: string;
-  private locationErrorMessage: string;
   private passwordMismatchMessage: string;
 
   constructor(private commonService: CommonService, private _router: Router, private dateService: DateService,
               private candidateService: CandidateService, private messageService: MessageService, private formBuilder: FormBuilder) {
 
     this.userForm = this.formBuilder.group({
-      'first_name': ['', ValidationService.requireFirstNameValidator],
-      'last_name': ['', ValidationService.requireLastNameValidator],
+      'first_name': ['', [ValidationService.requireFirstNameValidator, ValidationService.noWhiteSpaceValidator, ValidationService.nameValidator]],
+      'last_name': ['', [ValidationService.requireLastNameValidator, ValidationService.noWhiteSpaceValidator, ValidationService.nameValidator]],
       'mobile_number': ['', [ValidationService.requireMobileNumberValidator, ValidationService.mobileNumberValidator]],
       'email': ['', [ValidationService.requireEmailValidator, ValidationService.emailValidator]],
       'password': ['', [ValidationService.requirePasswordValidator, ValidationService.passwordValidator]],
       'confirm_password': ['', ValidationService.requireConfirmPasswordValidator],
       'birth_year': ['', [Validators.required, ValidationService.birthYearValidator]],
-      //'location': [''],
-      //'captcha': ['', Validators.required]
     });
 
 
@@ -65,36 +61,26 @@ export class CandidateComponent implements OnInit {
 
   selectYearModel(year: any) {
     this.birthYearErrorMessage = undefined;
-    if(year == ""){
+    if (year == "") {
       this.userForm.controls['birth_year'].setValue(undefined);
     }
     this.passingYear = year;
     this.model.birth_year = year;
   }
 
-  /*getAddress(address: MyGoogleAddress) {
-    this.locationErrorMessage = undefined;
-    this.storedLocation.city = address.city;
-    this.storedLocation.state = address.state;
-    this.storedLocation.country = address.country;
-  }*/
-
   onSubmit() {
     this.model = this.userForm.value;
-    if(this.model.first_name == '' || this.model.last_name == '' || this.model.mobile_number == '' ||
+    if (this.model.first_name == '' || this.model.last_name == '' || this.model.mobile_number == '' ||
       this.model.email == '' || this.model.password == '' || this.model.confirm_password == '' ||
       this.model.birth_year == undefined) {
-      if(this.model.birth_year == undefined) {
+      if (this.model.birth_year == undefined) {
         this.birthYearErrorMessage = Messages.MSG_ERROR_VALIDATION_BIRTHYEAR_REQUIRED;
       }
-      /*if(this.storedLocation.city == undefined) {
-        this.locationErrorMessage = Messages.MSG_ERROR_VALIDATION_LOCATION_REQUIRED;
-      }*/
       this.submitStatus = true;
       return;
     }
 
-    if(!this.userForm.valid){
+    if (!this.userForm.valid) {
       return
     }
 
@@ -141,14 +127,14 @@ export class CandidateComponent implements OnInit {
   }
 
   makePasswordConfirm(): boolean {
-  if (this.model.confirm_password !== this.model.password && this.model.confirm_password !== "") {
-    this.isPasswordConfirm = true;
-    this.passwordMismatchMessage = Messages.MSG_ERROR_VALIDATION_PASSWORD_MISMATCHED;
-    return true;
-  } else {
-    this.isPasswordConfirm = false;
-    return false;
-  }
+    if (this.model.confirm_password !== this.model.password && this.model.confirm_password !== "") {
+      this.isPasswordConfirm = true;
+      this.passwordMismatchMessage = Messages.MSG_ERROR_VALIDATION_PASSWORD_MISMATCHED;
+      return true;
+    } else {
+      this.isPasswordConfirm = false;
+      return false;
+    }
   }
 
 }

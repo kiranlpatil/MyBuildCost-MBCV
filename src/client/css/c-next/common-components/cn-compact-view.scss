@@ -67,7 +67,6 @@ $white: #fff;
 
   .btn-edit {
     background: transparent url("../assets/c-next/compact-view/pencil.png") no-repeat 50% 50%;
-    background-size: cover;
     border: 0;
     display: inline-block;
     height: 20px;
@@ -78,25 +77,6 @@ $white: #fff;
     top: 5px;
     right: 5px;
     position: absolute;
-  }
-
-  .see-more {
-    clear: both;
-    position: relative;
-    top: -3px;
-
-    p {
-      color: $theme-color;
-      font-size: 10px;
-      text-align: center;
-    }
-
-    span {
-      color: $theme-color;
-      font-size: 8px;
-      text-align: center;
-      display: block;
-    }
   }
 
   .btn-edit[hidden] {
@@ -137,17 +117,17 @@ $white: #fff;
     position: relative;
     width: 85px;
 
-    img {
-      background: #e6e6e6;
-      left: 50%;
-      position: absolute;
-      transform: translate(-50%, -50%);
-      top: 50%;
-      width: 100%;
-    }
-
     form {
       display: none !important;
+    }
+
+    .avtar {
+      height: 85px !important;
+      width: 85px !important;
+    }
+
+    .avtar > img {
+      height: 85px !important;
     }
   }
 
@@ -232,6 +212,27 @@ $white: #fff;
   }
 
 }
+
+.see-more {
+  clear: both;
+  position: relative;
+  top: -3px;
+
+  p {
+    color: $theme-color;
+    font-size: 10px;
+    text-align: center;
+    margin: 0;
+  }
+
+  span {
+    color: $theme-color;
+    font-size: 8px;
+    text-align: center;
+    display: block;
+  }
+}
+
 
 .quarter-width {
   width: 25%;
