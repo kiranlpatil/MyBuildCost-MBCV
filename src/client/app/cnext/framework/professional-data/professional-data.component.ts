@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from "@angular/core";
+import {Component, EventEmitter, Input, OnChanges, Output} from "@angular/core";
 import {BaseService} from "../../../framework/shared/httpservices/base.service";
 import {ProfessionalData} from "../model/professional-data";
 import {ProfessionalDataService} from "./professional-data.service";
@@ -7,7 +7,8 @@ import {MessageService} from "../../../framework/shared/message.service";
 import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
 import {Candidate, Section} from "../model/candidate";
 import {FormBuilder} from "@angular/forms";
-import {Messages} from '../../../framework/shared/constants';
+import {Messages} from "../../../framework/shared/constants";
+import {ProfessionalDetailsService} from "../professional-detail-service";
 
 @Component({
   moduleId: module.id,
@@ -16,7 +17,7 @@ import {Messages} from '../../../framework/shared/constants';
   styleUrls: ['professional-data.component.css']
  })
 
-export class ProfessionalDataComponent extends BaseService implements OnInit,OnChanges {
+export class ProfessionalDataComponent extends BaseService implements OnChanges {
   @Input() candidate: Candidate;
   @Input() highlightedSection: Section;
   @Output() onComplete = new EventEmitter();
@@ -42,6 +43,7 @@ export class ProfessionalDataComponent extends BaseService implements OnInit,OnC
   private requiedNoticePeriodValidationMessage = Messages.MSG_ERROR_VALIDATION_NOTICEPERIOD_REQUIRED;
   /*private professionalDetails:ProfessionalData=new ProfessionalData();*/
   constructor(private professionalDataService: ProfessionalDataService,
+              private professionalDetailService: ProfessionalDetailsService,
               private messageService: MessageService,
               private formBuilder: FormBuilder,
               private profileCreatorService: CandidateProfileService) {
@@ -53,6 +55,14 @@ export class ProfessionalDataComponent extends BaseService implements OnInit,OnC
      'noticePeriod':['', Validators.required],
      'relocate': ['', Validators.required],
      });*/
+
+    this.professionalDetailService.makeCall$.subscribe(
+      data => {
+        if (data) {
+          this.getDetailedList();
+        }
+      }
+    );
   }
 
   ngOnChanges(changes: any) {
@@ -70,41 +80,6 @@ export class ProfessionalDataComponent extends BaseService implements OnInit,OnC
     }
   }
 
-  ngOnInit() {
-
-    this.professionalDataService.getRealocationList()
-      .subscribe(
-        data => {
-          this.onRealocationListSuccess(data);
-        },
-        error => {
-          this.onError(error);
-        });
-
-
-    this.professionalDataService.getNoticePeriodList()
-      .subscribe(
-        data => {
-          this.onGetNoticePeriodListSuccess(data);
-        },
-        error => {
-          this.onError(error);
-        });
-    this.professionalDataService.getIndustryExposureList()
-      .subscribe(
-        data => {
-          this.onGetIndustryExposureListSuccess(data);
-        },
-        error => {
-          this.onError(error);
-        });
-    this.professionalDataService.getCurrentSalaryList()
-      .subscribe(
-        data => {
-          this.onCurrentSalaryListSuccess(data);
-        });
-
-  }
 
 
   onGetNoticePeriodListSuccess(data: any) {
@@ -175,6 +150,40 @@ export class ProfessionalDataComponent extends BaseService implements OnInit,OnC
     this.highlightedSection.name = "none";
     this.highlightedSection.isDisable = false;
 
+  }
+
+  getDetailedList() {
+    this.professionalDataService.getRealocationList()
+      .subscribe(
+        data => {
+          this.onRealocationListSuccess(data);
+        },
+        error => {
+          this.onError(error);
+        });
+
+
+    this.professionalDataService.getNoticePeriodList()
+      .subscribe(
+        data => {
+          this.onGetNoticePeriodListSuccess(data);
+        },
+        error => {
+          this.onError(error);
+        });
+    this.professionalDataService.getIndustryExposureList()
+      .subscribe(
+        data => {
+          this.onGetIndustryExposureListSuccess(data);
+        },
+        error => {
+          this.onError(error);
+        });
+    this.professionalDataService.getCurrentSalaryList()
+      .subscribe(
+        data => {
+          this.onCurrentSalaryListSuccess(data);
+        });
   }
 }
 

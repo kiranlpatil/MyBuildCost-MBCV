@@ -324,7 +324,7 @@ export class CandidateProfileComponent implements OnInit {
                 this.whichStepsVisible[4] = true;
                 if (this.candidate.interestedIndustries !== undefined && this.candidate.interestedIndustries.length > 0) {
                   this.showIndustryExperience = true;
-                  if (this.candidate.professionalDetails !== undefined && this.candidate.professionalDetails.education !== '') {
+                  if (this.candidate.professionalDetails !== undefined && this.candidate.professionalDetails.noticePeriod !== '') {
                     this.showProfessionalData = true;
                     this.whichStepsVisible[5] = true;
                     this.candidate.isCompleted=true;

@@ -1,6 +1,6 @@
 <div class="modal-bg" *ngIf="highlightedSection.name=='Professional-Details'"></div>
 <div class="section-container" *ngIf="highlightedSection.name =='Professional-Details'">
-
+  <div professionaldetails></div>
   <div class="main-content edit-modal-content clearfix">
     <h4 class="heading">Professional Preferences (Mandatory)</h4>
     <!-- <form [formGroup]="professionalDetailForm" (ngSubmit)="onNext(jobPostForm.value)">-->
@@ -75,13 +75,13 @@
   </div>
 </div>
 <div class="section-container" *ngIf="highlightedSection.name !='Professional-Details'">
-  <div class="main-content" (click)="highlightedSection.name='Professional-Details';highlightedSection.isDisable=true;isValid=true;showButton=false">
+  <div class="main-content"
+       (click)="highlightedSection.name='Professional-Details';highlightedSection.isDisable=true;isValid=true;showButton=false;">
     <div class="compact-view clearfix">
       <h4 class="heading-compact">Professional Preferences
         <button class="btn-edit"
                 [hidden]="highlightedSection.isDisable" title="Edit Professional Preferences & Experience Summary"></button>
       </h4>
-
       <p><label>Current Salary</label> {{candidate.professionalDetails.currentSalary}}</p>
       <p><label>Ready To Relocate?</label> {{candidate.professionalDetails.relocate}}</p>
       <p><label>Company Culture</label> {{candidate.professionalDetails.industryExposure}}</p>

@@ -159,6 +159,8 @@ import {ComplexityComponentService} from "./cnext/framework/complexities/complex
 import {ReleventIndustryListComponent} from "./cnext/framework/relevent-industry-list/relevent-industry-list.component";
 import {ReleventIndustryListService} from "./cnext/framework/relevent-industry-list/relevent-industry-list.service";
 import {MultipleQuestionAnswerComponent} from "./cnext/framework/multiple-question-answer/multiple-question-answer.component";
+import {ProfessionalDetailsService} from "./cnext/framework/professional-detail-service";
+import {ProfessionalDetailsDirective} from "./cnext/framework/shared-directives/professional-details.directive";
 //C-NEXT IMPORTS
 
 
@@ -213,6 +215,7 @@ import {MultipleQuestionAnswerComponent} from "./cnext/framework/multiple-questi
     VericalListViewComponent,
     TabularListViewComponent,
     AcademicsComponent,
+    ProfessionalDetailsDirective,
     RecruiterSharedHeaderComponent,
     AdditionalDetailsComponent,
     HorizontalListViewComponent,
@@ -329,6 +332,7 @@ import {MultipleQuestionAnswerComponent} from "./cnext/framework/multiple-questi
     MultiSelectService,
     AboutCandidateService,
     JobPosterService,
+    ProfessionalDetailsService,
     CandidateAcademyDetailService,
     CandidateProfileService,
     RecruiterDashboardService,
