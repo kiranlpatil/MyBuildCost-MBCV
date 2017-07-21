@@ -1,6 +1,6 @@
 <div class="modal-bg" *ngIf="highlightedSection.name=='Profile'"></div>
 <div class="section-container" *ngIf="highlightedSection.name=='Profile'">
-  <div class="main-content clearfix edit-modal-content">
+  <div class="main-content clearfix edit-modal-content" profiledetails>
 
     <div class="col-sm-9 no-padding">
       <h4 class="heading">Enter your profile details</h4>
@@ -10,7 +10,8 @@
             <cn-profile-picture (onPictureUpload)="onPictureUpload($event)"></cn-profile-picture>
           </div>
           <div class="user-name">
-            <span class="profile-name-first">{{candidateDetails.first_name}}&nbsp;</span><span class="profile-name-last">{{candidateDetails.last_name}}</span>
+            <span class="profile-name-first">{{candidate.basicInformation.first_name}}&nbsp;</span><span
+            class="profile-name-last">{{candidate.basicInformation.last_name}}</span>
           </div>
         </div>
       </div>
@@ -102,8 +103,8 @@
 
       <div>
         <p class="user-name truncate-text">
-          <span class="profile-name-first">{{candidateDetails.first_name}}</span>&nbsp;
-          <span class="profile-name-last">{{candidateDetails.last_name}}</span>
+          <span class="profile-name-first">{{candidate.basicInformation.first_name}}</span>&nbsp;
+          <span class="profile-name-last">{{candidate.basicInformation.last_name}}</span>
           <span class="job-title" title="{{candidate.jobTitle}}">  {{candidate.jobTitle}}</span>
         </p>
 

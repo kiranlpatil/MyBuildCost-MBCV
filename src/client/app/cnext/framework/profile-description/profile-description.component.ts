@@ -2,11 +2,11 @@ import {Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
 import {Industry} from "../model/industry";
 import {Candidate, Section} from "../model/candidate";
 import {AppSettings, Messages} from "../../../framework/shared/constants";
-import {DashboardService} from "../../../framework/dashboard/dashboard.service";
 import {CandidateDetail} from "../../../framework/registration/candidate/candidate";
 import {ProfessionalDataService} from "../professional-data/professional-data.service";
 import {Location} from "../../../framework/registration/location";
 import {MyGoogleAddress} from "../../../framework/registration/candidate/google-our-place/my-google-address";
+import {ProfileDetailsService} from "../profile-detail-service";
 
 @Component({
   moduleId: module.id,
@@ -51,30 +51,19 @@ export class ProfileDescriptionComponent implements OnInit {
     '<li><p>3. Provide your current or latest company name.Freshers should enter "Fresher" as their company name.</p></li>' +
     '</ul>';
 
-  constructor(private userProfileService: DashboardService, private professionalDataService: ProfessionalDataService) {
+  constructor(private professionalDataService: ProfessionalDataService,
+              private profileDetailService: ProfileDetailsService) {
+    this.profileDetailService.makeCall$.subscribe(
+      data => {
+        if (data) {
+          this.getprofileDetails();
+        }
+      }
+    );
   }
 
   ngOnInit() {
-    this.userProfileService.getUserProfile()
-      .subscribe(
-        userprofile => {
-          this.candidateDetails = userprofile.data;
-          if (this.candidateDetails.picture != undefined) {
-            this.image_path = AppSettings.IP + this.candidateDetails.picture.substring(4).replace('"', '');
-          }
-        });
 
-    this.professionalDataService.getExperienceList()
-      .subscribe(
-        data => {
-          this.onExperienceListSuccess(data);
-        });
-
-    this.professionalDataService.getEducationList()
-      .subscribe(
-        data => {
-          this.onEducationListSuccess(data);
-        });
   }
 
 
@@ -213,6 +202,19 @@ export class ProfileDescriptionComponent implements OnInit {
     this.storedLocation.country = address.country;
   }
 
+  getprofileDetails() {
+    this.professionalDataService.getExperienceList()
+      .subscribe(
+        data => {
+          this.onExperienceListSuccess(data);
+        });
+
+    this.professionalDataService.getEducationList()
+      .subscribe(
+        data => {
+          this.onEducationListSuccess(data);
+        });
+  }
 
 
 

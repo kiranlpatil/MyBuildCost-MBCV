@@ -161,6 +161,8 @@ import {ReleventIndustryListService} from "./cnext/framework/relevent-industry-l
 import {MultipleQuestionAnswerComponent} from "./cnext/framework/multiple-question-answer/multiple-question-answer.component";
 import {ProfessionalDetailsService} from "./cnext/framework/professional-detail-service";
 import {ProfessionalDetailsDirective} from "./cnext/framework/shared-directives/professional-details.directive";
+import {ProfileDetailsService} from "./cnext/framework/profile-detail-service";
+import {ProfileDetailsDirective} from "./cnext/framework/shared-directives/profile-details.directive";
 //C-NEXT IMPORTS
 
 
@@ -215,6 +217,7 @@ import {ProfessionalDetailsDirective} from "./cnext/framework/shared-directives/
     VericalListViewComponent,
     TabularListViewComponent,
     AcademicsComponent,
+    ProfileDetailsDirective,
     ProfessionalDetailsDirective,
     RecruiterSharedHeaderComponent,
     AdditionalDetailsComponent,
@@ -330,6 +333,7 @@ import {ProfessionalDetailsDirective} from "./cnext/framework/shared-directives/
     ShowQcardviewService,
     CandidateAwardService,
     MultiSelectService,
+    ProfileDetailsService,
     AboutCandidateService,
     JobPosterService,
     ProfessionalDetailsService,
