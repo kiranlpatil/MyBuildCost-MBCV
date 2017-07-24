@@ -2,9 +2,9 @@
 <div class="section-container clear clearfix" *ngIf="highlightedSection.name=='Capabilities'">
 
   <div class="main-content clearfix edit-modal-content">
-    <h4 class="heading" *ngIf="isCandidate">Select those capabilities that describe your current strenght
+    <h4 class="heading" *ngIf="isCandidate">Select those capabilities that describe your current strength.
     </h4>
-    <h4 class="heading" *ngIf="!isCandidate">Capabilities that are required in the candidate
+    <h4 class="heading" *ngIf="!isCandidate">Capabilities that are required in the candidate?
     </h4>
     <div class="error-messages edit-error-msg" *ngIf="!isValid">{{validationMessage}}</div>
     <div class="scrollable-content capabilities">
@@ -37,8 +37,7 @@
       <button class="btn btn-primary" scrollTo scrollTargetSelector="#complexity-area"
               (click)="onNext()" [hidden]="!showButton">Next
       </button>
-      <button class="btn btn-primary" (click)="onCancel()" [hidden]="showButton">Cancel</button>
-      <button class="btn btn-primary"  (click)="onSave()"  [hidden]="showButton">Save</button>
+      <button class="btn btn-primary" (click)="onSave()" [hidden]="showButton">Next</button>
     </div>
   </div>
 </div>

@@ -1,8 +1,8 @@
 <div class="modal-bg" *ngIf="highlightedSection.name=='Work-Area'"></div>
 <div class="section-container" *ngIf="highlightedSection.name=='Work-Area'">
   <div class="main-content clearfix edit-modal-content">
-    <h4 class="heading" *ngIf="isCandidate">Select Area of Work That Describes Your Current Focus (Max 3)</h4>
-    <h4 class="heading" *ngIf="!isCandidate">In which Area Candidate Is Expected To Work </h4>
+    <h4 class="heading" *ngIf="isCandidate">Select area of work that describes your current focus.</h4>
+    <h4 class="heading" *ngIf="!isCandidate">In which area candidate is expected to work? </h4>
     <div class="error-messages edit-error-msg" *ngIf="!isValid">{{validationMessage}}</div>
     <div class="scrollable-content">
       <div class="select-option" *ngFor="let item of roles;let i = index">
@@ -23,7 +23,7 @@
       <!--<div class="saving-loader">Saving...</div>-->
       <button class="btn btn-primary" scrollTo scrollTargetSelector="#capability-area" (click)="onSave()"
               [hidden]="!showButton">Next</button>
-      <button class="btn btn-primary" (click)="onSave()" [hidden]="showButton">Save</button>
+      <button class="btn btn-primary" (click)="onSave()" [hidden]="showButton">Next</button>
     </div>
   </div>
 </div>
@@ -36,7 +36,7 @@
               (click)="highlightedSection.name='Work-Area';showButton=false;highlightedSection.sectionName='capability';highlightedSection.isDisable=true"
               [hidden]="highlightedSection.isDisable" title="Edit Work Area"></button>
       <div class="col-sm-3 padding-right15">
-        <h4 class="heading-compact">Area Of Work</h4>
+        <h4 class="heading-compact">Area of work</h4>
       </div>
       <div class="col-sm-9 padding-left15">
         <div class="option-list" *ngFor="let item of selectedRoles;let i = index">
