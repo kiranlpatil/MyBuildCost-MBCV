@@ -21,7 +21,7 @@
 
   <div class="card-view clearfix">
     <div class="col-md-3" *ngFor="let item of jobListInput | orderBy:format;let i = index"
-         (click)="onJobClicked(item._id)">
+         (click)="onJobClicked(item._id,item.isJobPosted)">
       <div class="panel clearfix">
        <!-- <span class="glyphicon glyphicon-trash"></span>-->
         <div class="job-posted clearfix">

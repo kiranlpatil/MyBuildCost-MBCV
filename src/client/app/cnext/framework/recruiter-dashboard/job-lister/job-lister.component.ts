@@ -1,9 +1,9 @@
-import {Component, EventEmitter, Input, OnChanges, OnDestroy, Output} from "@angular/core";
-import {QCardsortBy} from "../../model/q-cardview-sortby";
-import {Router} from "@angular/router";
-import {RecruiterHeaderDetails} from "../../model/recuirterheaderdetails";
-import {ReferenceService} from "../../model/newClass";
-import {RecruiterDashboard} from "../../model/recruiter-dashboard";
+import { Component, EventEmitter, Input, OnChanges, OnDestroy, Output } from '@angular/core';
+import { QCardsortBy } from '../../model/q-cardview-sortby';
+import { Router } from '@angular/router';
+import { RecruiterHeaderDetails } from '../../model/recuirterheaderdetails';
+import { ReferenceService } from '../../model/newClass';
+import { RecruiterDashboard } from '../../model/recruiter-dashboard';
 
 
 @Component({
@@ -57,11 +57,12 @@ export class JobListerComponent implements  OnDestroy, OnChanges {
     this.toggleFormat();
   }
 
-  onJobClicked(item: any) {
-    if (!this.isJobeditted) {
+  onJobClicked(item: any,isJobSubmit:boolean) {
+    if (!this.isJobeditted && isJobSubmit) {
       this._router.navigate(['jobdashboard/', item]);
     } else {
       this.isJobeditted = false;
+      this.onJobEdit(item);
     }
   }
 
