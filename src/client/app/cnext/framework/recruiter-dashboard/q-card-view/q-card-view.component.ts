@@ -166,10 +166,10 @@ export class QCardviewComponent implements OnChanges {
   displayMsg(condition:string,candidate: CandidateQCard) {
     var message = new Message();
     message.isError = false;
-    if(condition==='cartListed') {message.custom_message = 'Candidate '+candidate.first_name+''+candidate.last_name+' is added to your cart.';}
-    if(condition==='rejectedList') {message.custom_message = 'Candidate '+candidate.first_name+''+candidate.last_name+' is rejected and moved to the rejected list.';}
-    if(condition==='removedcartListed') {message.custom_message = 'Candidate '+candidate.first_name+''+candidate.last_name+' moved back to candidate listing from cart.';}
-    if(condition==='removedrejectedList') {message.custom_message = 'Candidate '+candidate.first_name+''+candidate.last_name+' moved back to candidate listing from rejected section.';}
+    if(condition==='cartListed') {message.custom_message = 'Candidate '+candidate.first_name+' '+candidate.last_name+' is added to your cart.';}
+    if(condition==='rejectedList') {message.custom_message = 'Candidate '+candidate.first_name+' '+candidate.last_name+' is rejected and moved to the rejected list.';}
+    if(condition==='removedcartListed') {message.custom_message = 'Candidate '+candidate.first_name+' '+candidate.last_name+' moved back to candidate listing from cart.';}
+    if(condition==='removedrejectedList') {message.custom_message = 'Candidate '+candidate.first_name+' '+candidate.last_name+' moved back to candidate listing from rejected section.';}
     this.messageService.message(message);
   }
 
