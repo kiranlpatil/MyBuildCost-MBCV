@@ -159,6 +159,8 @@ import {ComplexityComponentService} from "./cnext/framework/complexities/complex
 import {ReleventIndustryListComponent} from "./cnext/framework/relevent-industry-list/relevent-industry-list.component";
 import {ReleventIndustryListService} from "./cnext/framework/relevent-industry-list/relevent-industry-list.service";
 import {MultipleQuestionAnswerComponent} from "./cnext/framework/multiple-question-answer/multiple-question-answer.component";
+import {ProfileComparisonComponent} from "./cnext/framework/profile-comparison/profile-comparison.component";
+import {ProfileComparisonService} from "./cnext/framework/profile-comparison/profile-comparison.service";
 //C-NEXT IMPORTS
 
 
@@ -271,7 +273,8 @@ import {MultipleQuestionAnswerComponent} from "./cnext/framework/multiple-questi
     MinRangeValidation,
     MaxRangeValidation,
     JobDashboardComponent,
-    ReleventIndustryListComponent
+    ReleventIndustryListComponent,
+    ProfileComparisonComponent
 
   ],
   providers: [
@@ -342,7 +345,8 @@ import {MultipleQuestionAnswerComponent} from "./cnext/framework/multiple-questi
     JobDashboardService,
     ReferenceService,
     RedirectRecruiterDashboardService,
-    ReleventIndustryListService
+    ReleventIndustryListService,
+    ProfileComparisonService
 
   ],
   bootstrap: [AppComponent]

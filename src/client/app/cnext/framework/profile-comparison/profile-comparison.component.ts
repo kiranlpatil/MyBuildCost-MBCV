@@ -1,5 +1,7 @@
-import {Component} from "@angular/core";
-import {JobCompareService} from "../single-page-compare-view/job-compare-view/job-compare-view.service";
+import {Component, Input, OnChanges, Output} from "@angular/core";
+import {ProfileComparisonService} from "./profile-comparison.service";
+import {ProfileComparison} from "../model/profile-comparison";
+import {EventEmitter} from "@angular/common/src/facade/async";
 
 @Component({
   moduleId:module.id,
@@ -8,24 +10,20 @@ import {JobCompareService} from "../single-page-compare-view/job-compare-view/jo
   styleUrls:['profile-comparison.component.scss']
 })
 
-export class ProfileComparisonComponent {
+export class ProfileComparisonComponent implements OnChanges {
 
-  private data:any;
-  constructor(private jobCompareService:JobCompareService) {
+  @Input() profileComparison:ProfileComparison;
+  @Output() performActionOnComparisonList = new EventEmitter();
+
+  constructor(private profileComparisonService:ProfileComparisonService) {
 
   }
 
-  getCompareDetail(candidateId: string, recruiterId: string) {
-    this.jobCompareService.getCompareDetail('5969a7744265188020370e5e', '596f2ad12148a9441e647344')
-      .subscribe(
-        data => this.OnCompareSuccess(data),
-        error => console.log(error));
-  }
 
-  OnCompareSuccess(data: any) { debugger
-    this.data = data.data;
-    //this.capabilities= this.jobCompareService.getStandardMatrix(this.data.match_map);
-  }
+  ngOnChanges() {}
 
+  actionOnComparisonList(value:any) {
+  this.performActionOnComparisonList.emit();
+  }
 
 }

@@ -1,1 +1,5 @@
-<h1>Test</h1>
+
+
+<cn-profile-comparison-header [profileComparisionResult]="profileComparison.profileComparisonData" (actionOnComparisonList)="actionOnComparisonList($event)"></cn-profile-comparison-header>
+<cn-profile-capability-comparison [profileComparisionResult]="profileComparison.profileComparisonData"></cn-profile-capability-comparison>
+<cn-profile-attribute-comparison [profileComparisionResult]="profileComparison.profileComparisonData"></cn-profile-attribute-comparison>
