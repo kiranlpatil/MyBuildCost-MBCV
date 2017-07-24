@@ -56,7 +56,7 @@ class RecruiterRepository extends RepositoryBase<IRecruiter> {
           job_qcard.matching = 0;
           let count : number = 0;
           for (let cap in job.capability_matrix) {
-            if (job.capability_matrix[cap] === -1 || job.capability_matrix[cap] === 0 || job.capability_matrix[cap] === undefined) {
+            if (job.capability_matrix[cap] == -1 || job.capability_matrix[cap] == 0 || job.capability_matrix[cap] == undefined) {
             } else if (job.capability_matrix[cap] == candidate.capability_matrix[cap]) {
               job_qcard.exact_matching += 1;
               count++;
