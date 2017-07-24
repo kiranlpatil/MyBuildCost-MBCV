@@ -37,7 +37,7 @@
           <label>Company Size</label>
           <div class="error-messages"
                *ngIf="(recruiterForm.get('company_size').touched || submitStatus)&& recruiterForm.get('company_size').hasError('required')">
-            <p>{{companySizeErrorMessage}}</p>
+           {{companySizeErrorMessage}}
           </div>
         </div>
 

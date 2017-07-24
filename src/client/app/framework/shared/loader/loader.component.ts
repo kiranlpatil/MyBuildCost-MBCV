@@ -5,7 +5,7 @@ import {LoaderService} from "./loader.service";
   selector: 'app-loader',
   template: `
     <div *ngIf='status' class='loader-container'>
-      <div class='inner-loader'></div>
+      <img src="assets/c-next/loader/main-loading.svg" height="20" width="160" style="margin-top: 400px;"/>
     </div>`
 })
 export class LoaderComponent {

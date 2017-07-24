@@ -117,11 +117,14 @@ export class CompanyDetailsComponent implements OnInit {
       if (this.buttonId === 'file-upload1') {
         this.fileName1 = this.filesToUpload[0].name;
         this.isLoaderImages[0]=false;
+        this.isUploadedImages[0]=false;
       } else if (this.buttonId === 'file-upload2') {
         this.fileName2 = this.filesToUpload[0].name;
+        this.isUploadedImages[1]=false;
         this.isLoaderImages[1]=false;
       } else {
         this.fileName3 = this.filesToUpload[0].name;
+        this.isUploadedImages[2]=false;
         this.isLoaderImages[2]=false;
       }
       /*this.dashboardService.makeDocumentUpload(this.filesToUpload, []).then((result: any) => {
