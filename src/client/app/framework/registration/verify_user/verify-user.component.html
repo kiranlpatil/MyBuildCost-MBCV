@@ -23,8 +23,9 @@
       <p> We just need to verify your account before you can start using the system.</p>
       <p>One Time Password (OTP) will be sent on the following mobile number.</p>
 
-      <div class="form-group" id="inputMobile">
+      <div class="input-group form-group" id="inputMobile">
         <control-messages [control]="userForm.controls.mobile_number" [submitStatus]="submitMobileStatus"></control-messages>
+        <span class="input-group-addon">+91</span>
         <input type="number" [(ngModel)]="model.mobile_number" formControlName="mobile_number" id="mobile_number"
                class="form-control" required/>
          <label>Mobile Number</label>

@@ -38,6 +38,7 @@ $secondary-option: #0d75fa;
     }
 
     & ~ .check {
+      cursor: pointer;
       display: block;
       position: absolute;
       border: 2px solid $option-border-color;
