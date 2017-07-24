@@ -18,7 +18,7 @@
     <span>{{postedJob.department}}</span>
     <label>Industry</label>
     <span>{{postedJob.industry.name}}</span>
-    <label>Specialization area</label>
+    <label>Area of Work</label>
     <span *ngFor="let role of postedJob.industry.roles;let i = index">{{role.name}}
         <span *ngIf="postedJob.industry.roles.length>1 &&  i!=postedJob.industry.roles.length-1">,</span>
       </span>

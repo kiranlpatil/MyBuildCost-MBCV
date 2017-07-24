@@ -53,7 +53,7 @@ $white: #ffffff;
     box-shadow: 0px 0px 4px 0px #757575;
     color : white !important;
     font-size: 12px;
-    z-index: 99;
+    z-index: 999;
     top: 0;
     border: 1px solid $white;
     span {
@@ -91,7 +91,7 @@ $white: #ffffff;
     left: -37px;
     box-shadow: 0px 0px 4px 0px #757575;
     font-size: 12px;
-    z-index: 99;
+    z-index: 999;
     top: 0;
     border: 1px solid $white;
     span {
@@ -133,7 +133,7 @@ $white: #ffffff;
     left: -37px;
     box-shadow: 0px 0px 4px 0px #757575;
     font-size: 12px;
-    z-index: 99;
+    z-index: 999;
     top: 0;
     border: 1px solid $white;
     span {
@@ -177,7 +177,7 @@ $white: #ffffff;
     left: -37px;
     box-shadow: 0px 0px 4px 0px #757575;
     font-size: 12px;
-    z-index: 99;
+    z-index: 999;
     top: 0;
     border: 1px solid $white;
     span {
@@ -219,7 +219,7 @@ $white: #ffffff;
     left: -37px;
     box-shadow: 0px 0px 4px 0px #757575;
     font-size: 12px;
-    z-index: 99;
+    z-index: 999;
     top: 0;
     border: 1px solid $white;
     span {
@@ -267,7 +267,7 @@ $white: #ffffff;
     left: -37px;
     box-shadow: 0px 0px 4px 0px #757575;
     font-size: 12px;
-    z-index: 99;
+    z-index: 999;
     top: 0;
     border: 1px solid $white;
     span {
@@ -581,7 +581,7 @@ and (max-width: 840px) {
       font-weight: 600;
     }
     .complexity-name {
-      color: $text-color;
+      color: $theme-color;
       margin-bottom: 2px;
       width: 100%;
       display: inline-block;
