@@ -1,10 +1,10 @@
-#TPl Mobile Seed QICK START:
+#JobMosis job portal QUICK START:
 
-Steps for seed Inshort:-
+Steps for JobMosis Inshort:-
 
-TPL seed has both http and https configuration.In below context we discuss about how we can use that configuration.
+JobMosis has both http and https configuration.In below context we discuss about how we can use that configuration.
 
-pre for seed Requirements:-     1. latest node version
+pre for JobMosis Requirements:- 1. latest node version
                                 2. latest npm version
                                 3. mongodb
 
@@ -18,8 +18,15 @@ steps: 1.npm install    //npm install --unsafe -perm
                                                          OR 
                                                        for http2
                                 ~node app.server.dev.http2.js --NODE_ENV=development //Default. for backend configuration (ubuntu) which is using http2 protocol.
-                                 .
-       5.For Production Environment:
+                                 
+       5.For Staging Environment:
+                            1. ~npm start
+                            2. ~node app.server.dev.js --NODE_ENV=staging  //Default. for backend configuration (ubuntu) which is using http protocol. 
+                                                         OR 
+                                                       for http2
+                                ~node app.server.dev.http2.js --NODE_ENV=development //Default. for backend configuration (ubuntu) which is using http2 protocol.
+                                                                  
+       6.For Production Environment:
                             1. ~gulp build.prod or ~npm run build.prod
                             2. ~node app.server.prod.js --NODE_ENV=production //for backend configurations(ubuntu)which is using http protocol. 
                                                          OR
