@@ -58,19 +58,17 @@ export class JobListerComponent implements  OnDestroy, OnChanges {
   }
 
   onJobClicked(item: any,isJobSubmit:boolean) {
-    if (!this.isJobeditted && isJobSubmit) {
+    if (isJobSubmit) {
       this._router.navigate(['jobdashboard/', item]);
     } else {
-      this.isJobeditted = false;
-      this.onJobEdit(item);
+      this.jobEventEmitter.emit(item);
     }
   }
 
-  onJobEdit(item: any) {
-    this.jobEventEmitter.emit(item);
-    this.isJobeditted = true;
-
-    //this._router.navigate(['jobpost/', item]);
+  onJobEdit(item: any,isJobSubmit:boolean) {
+    if (isJobSubmit) {
+      this.jobEventEmitter.emit(item);
+    }
   }
   get format() {
     return this.toggle ? this.qCardModel.name : 'Date';
