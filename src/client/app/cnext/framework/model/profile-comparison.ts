@@ -1,15 +1,13 @@
+import {Certifications} from "./certification-accreditation";
+import {Award} from "./award";
+import {ProfessionalData} from "./professional-data";
+import {AcademicDetails} from "./academic-details";
+import {EmployementHistory} from "./employment-history";
+import {Industry} from "./industry";
+import {ProfileComparisonHeaderMeta} from "../profile-comparison/profile-comparison-header/profile-comparison-header-meta/profile-comparison-header-meta";
+import {ProfileCapabilityComparisonMeta} from "../profile-comparison/profile-capability-comparison/profile-capability-comparison-meta/profile-capability-compariosn-meta";
 
- import {Certifications} from "./certification-accreditation";
- import {Award} from "./award";
- import {ProfessionalData} from "./professional-data";
- import {AcademicDetails} from "./academic-details";
- import {EmployementHistory} from "./employment-history";
- import {CandidateDetail} from "../../../framework/registration/candidate/candidate";
- import {Industry} from "./industry";
- import {ProfileComparisonHeaderMeta} from "../profile-comparison/profile-comparison-header/profile-comparison-header-meta/profile-comparison-header-meta";
- import {ProfileCapabilityComparisonMeta} from "../profile-comparison/profile-capability-comparison/profile-capability-comparison-meta/profile-capability-compariosn-meta";
-
- export class ProfileComparison {
+export class ProfileComparison {
    jobTitle: string;
    profileComparisonData:ProfileComparisonData[] = new Array(0);
  }
@@ -47,7 +45,9 @@
 
    profileComparisonHeader:ProfileComparisonHeaderMeta = new ProfileComparisonHeaderMeta();
    capabilityMap:ProfileCapabilityComparisonMeta[] = new Array(0);
+   additionalCapabilites: string[] = new Array(0);
 
    matchingPercentage:number;
    status:string;
+   companyCulture: string;
  }

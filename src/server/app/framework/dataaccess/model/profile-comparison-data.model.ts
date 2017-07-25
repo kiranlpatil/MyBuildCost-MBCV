@@ -43,6 +43,8 @@ interface ProfileComparisonDataModel {
 
   matchingPercentage: number;
   status: string;
+  additionalCapabilites: string[];
+  companyCulture: string;
 
 }
 

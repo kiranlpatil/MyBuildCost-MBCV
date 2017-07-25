@@ -204,6 +204,67 @@ export class JobDashboardComponent implements OnInit {
 
   OnCompareSuccess(data: any) {
     this.profileComparison = data.data;
+    /*var profileComparison = {
+     jobTitle: 'Software Developer',
+     profileComparisonData:[{
+     //Comparison Header
+     matchingPercentage: 90,
+     status:'inCart',
+     profileComparisonHeader:{
+     id: '12345gfd',
+     isCandidate: true,
+     first_name: 'Rohit',
+     last_name: 'Sharma',
+     email: 'RH@gmail.com',
+     picture: '',
+     },
+
+     //capability comparison
+     capabilityMap:[{"capability_name":'',"capabilityPercentage":''}],
+
+     //attribute comparison
+     salaryMatch: '', //currentSalary matching
+     experienceMatch: '',//experienceMatch
+     educationMatch: '',
+     releaseMatch: '',
+     isCompleted:true,
+     secondaryCapability:[],
+     proficienciesMatch:['dsd','dsdsd'],// key skill matching
+     capability_matrix:{},
+     aboutMyself:'',
+     proficiencies:[ "Java", "Angular 2"],// key skill
+     professionalDetails: {
+     "currentCompany": "Techprimelab",
+     "industryExposure": "Regional / National",
+     "relocate": "Yes",
+     "noticePeriod": "2-3 Months",
+     "currentSalary": "5 Lacs",
+     "experience": "1 Year",
+     "education": "Graduate"
+     },
+     awards:[],
+     isVisible:true,
+     isSubmitted: true,
+     location: {},//current location
+     certifications:[],
+     industry:{},
+     interestedIndustryMatch:[],//Domain match
+     interestedIndustries:[],//Domain
+     roleType:'',
+     academics: [],
+     employmentHistory:[],
+     _id: '',
+     userId: '',
+     additionalCapabilites:[  //additionalCapabilites
+     "Account Management and Business Growth",
+     "Project Profitability",
+     "Onsite Coordination",
+     "Quality Documentation and Metrics",
+     "Project IT Setup and Ops",
+     "Client Contract Management",
+     "Vendor Contract Management"]
+     }]
+     }*/
   }
 
 }

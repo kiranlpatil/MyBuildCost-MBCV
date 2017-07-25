@@ -4,7 +4,7 @@ import ProjectAsset = require('../../shared/projectasset');
 import RecruiterRepository = require('../../dataaccess/repository/recruiter.repository');
 import CandidateModel = require('../../dataaccess/model/candidate.model');
 import JobProfileService = require('../../services/jobprofile.service');
-import {ConstVariables} from '../../shared/sharedconstants';
+import {ConstVariables} from "../../shared/sharedconstants";
 import MatchViewModel = require('../../dataaccess/model/match-view.model');
 import Match = require('../../dataaccess/model/match-enum');
 import IndustryRepository = require('../../dataaccess/repository/industry.repository');
@@ -28,7 +28,7 @@ class SearchService {
     console.time('getMatching Candidate');
     let data: any;
     let isFound: boolean = false;
-    let industries: string[] = new Array();
+    let industries: string[] = [];
     let isReleventIndustriesFound: boolean = false;
     if (jobProfile.interestedIndustries && jobProfile.interestedIndustries.length > 0) {
       /*isFound= jobProfile.interestedIndustries.filter((name : string)=> {
@@ -218,54 +218,61 @@ class SearchService {
       if (err) {
         callback(err, null);
       } else {
-        let newCandidate = candidate.toObject();
-        let jobMinExperience: number = Number(job.experienceMinValue);
-        let jobMaxExperience: number = Number(job.experienceMaxValue);
-        let jobMinSalary: number = Number(job.salaryMinValue);
-        let jobMaxSalary: number = Number(job.salaryMaxValue);
-        let candiExperience: string[] = newCandidate.professionalDetails.experience.split(' ');
-        let canSalary: string[] =  newCandidate.professionalDetails.currentSalary.split(' ');
-        if((jobMaxExperience >= Number(candiExperience[0])) && (jobMinExperience <= Number(candiExperience[0]))){
-          newCandidate.experienceMatch ='exact';
-        }else {
-          newCandidate.experienceMatch ='missing';
-        }
-        if((jobMaxSalary >= Number(canSalary[0])) && (jobMinSalary <= Number(canSalary[0]))){
-          newCandidate.salaryMatch ='exact';
-        }else {
-          newCandidate.salaryMatch ='missing';
-        }
-        let canEducation: number = this.getEductionSwitchCase(newCandidate.professionalDetails.education);
-        let jobEducation: number = this.getEductionSwitchCase(job.education);
-        newCandidate.educationMatch = this.compareTwoOptions(canEducation, jobEducation);
-        newCandidate.releaseMatch = this.compareTwoOptions(this.getPeriodSwitchCase(newCandidate.professionalDetails.noticePeriod), this.getPeriodSwitchCase(job.joiningPeriod));
-        newCandidate.interestedIndustryMatch = new Array(0);
-
-        for (let industry of job.interestedIndustries) {
-          if (newCandidate.interestedIndustries.indexOf(industry) !== -1) {
-            newCandidate.interestedIndustryMatch.push(industry);
-          }
-        }
-        newCandidate.proficienciesMatch = new Array(0);
-        for (let proficiency of job.proficiencies) {
-          if (newCandidate.proficiencies.indexOf(proficiency) !== -1) {
-            newCandidate.proficienciesMatch.push(proficiency);
-          }
-        }
-
-        newCandidate.proficienciesUnMatch = new Array(0);
-        for (let proficiency of job.proficiencies) {
-          if (newCandidate.proficienciesMatch.indexOf(proficiency) == -1) {
-            newCandidate.proficienciesUnMatch.push(proficiency);
-          }
-        }
-//        let match_map: Map<string,MatchViewModel> = new Map<string,MatchViewModel>();
-        newCandidate['match_map'] = {};
-        newCandidate = this.buildCompareView(job,newCandidate,industries,isCandidate);
-        newCandidate = this.getAdditionalCapabilities(job, newCandidate, industries);
+        var newCandidate = this.getCompareData(candidate, job, isCandidate, industries);
         callback(null, newCandidate);
       }
     });
+  }
+
+  getCompareData(candidate: any, job: any, isCandidate: boolean, industries: IndustryModel[]) {
+    console.log('-------------------ingetCompare----------------------------');
+    let newCandidate = candidate.toObject();
+    let jobMinExperience: number = Number(job.experienceMinValue);
+    let jobMaxExperience: number = Number(job.experienceMaxValue);
+    let jobMinSalary: number = Number(job.salaryMinValue);
+    let jobMaxSalary: number = Number(job.salaryMaxValue);
+    let candiExperience: string[] = newCandidate.professionalDetails.experience.split(' ');
+    let canSalary: string[] = newCandidate.professionalDetails.currentSalary.split(' ');
+    if ((jobMaxExperience >= Number(candiExperience[0])) && (jobMinExperience <= Number(candiExperience[0]))) {
+      newCandidate.experienceMatch = 'exact';
+    } else {
+      newCandidate.experienceMatch = 'missing';
+    }
+    if ((jobMaxSalary >= Number(canSalary[0])) && (jobMinSalary <= Number(canSalary[0]))) {
+      newCandidate.salaryMatch = 'exact';
+    } else {
+      newCandidate.salaryMatch = 'missing';
+    }
+    let canEducation: number = this.getEductionSwitchCase(newCandidate.professionalDetails.education);
+    let jobEducation: number = this.getEductionSwitchCase(job.education);
+    newCandidate.educationMatch = this.compareTwoOptions(canEducation, jobEducation);
+    newCandidate.releaseMatch = this.compareTwoOptions(this.getPeriodSwitchCase(newCandidate.professionalDetails.noticePeriod), this.getPeriodSwitchCase(job.joiningPeriod));
+    newCandidate.interestedIndustryMatch = new Array(0);
+
+    for (let industry of job.interestedIndustries) {
+      if (newCandidate.interestedIndustries.indexOf(industry) !== -1) {
+        newCandidate.interestedIndustryMatch.push(industry);
+      }
+    }
+    newCandidate.proficienciesMatch = new Array(0);
+    for (let proficiency of job.proficiencies) {
+      if (newCandidate.proficiencies.indexOf(proficiency) !== -1) {
+        newCandidate.proficienciesMatch.push(proficiency);
+      }
+    }
+
+    newCandidate.proficienciesUnMatch = new Array(0);
+    for (let proficiency of job.proficiencies) {
+      if (newCandidate.proficienciesMatch.indexOf(proficiency) == -1) {
+        newCandidate.proficienciesUnMatch.push(proficiency);
+      }
+    }
+//        let match_map: Map<string,MatchViewModel> = new Map<string,MatchViewModel>();
+    newCandidate['match_map'] = {};
+    newCandidate = this.buildCompareView(job, newCandidate, industries, isCandidate);
+    newCandidate = this.getAdditionalCapabilities(job, newCandidate, industries);
+
+    return newCandidate;
   }
 
   getAdditionalCapabilities(job : any, newCandidate : any , industries : any) : any {
@@ -413,6 +420,44 @@ class SearchService {
       newCandidate['match_map'][cap]= match_view;
     }
     return newCandidate;
+  }
+
+  getMultiCompareResult(candidate: any, jobId: string, isCandidate: boolean, callback: (error: any, result: any) => void) {
+
+    this.candidateRepository.retrieveByMultiIds(candidate, {'industry': 0}, (err: any, candidateRes: any) => {
+      if (err) {
+        callback(err, null);
+      } else {
+        if (candidateRes.length > 0) {
+          let data = {
+            'postedJob': jobId
+          };
+          let jobProfileService: JobProfileService = new JobProfileService();
+          jobProfileService.retrieve(data, (errInJob, resOfRecruiter) => {
+            if (errInJob) {
+              callback(errInJob, null);
+            } else {
+              var jobName = resOfRecruiter.postedJobs[0].industry.name;
+              var job = resOfRecruiter.postedJobs[0];
+              this.industryRepository.retrieve({'name': jobName}, (err: any, industries: IndustryModel[]) => {
+                if (err) {
+                  callback(err, null);
+                } else {
+                  var compareResult: any[] = new Array(0);
+                  for (let candidate of candidateRes) {
+                    var newCandidate = this.getCompareData(candidate, job, isCandidate, industries);
+                    compareResult.push(newCandidate);
+                  }
+                  callback(null, compareResult);
+                }
+              });
+            }
+          });
+        } else {
+          callback(null, 'No Candidate Profile Result Found');
+        }
+      }
+    });
   }
 
 }
