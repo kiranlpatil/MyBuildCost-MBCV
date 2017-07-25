@@ -14,8 +14,8 @@
                 <p>{{titleValidationMessage}}</p>
               </div>
               <div class="error-messages"
-                   *ngIf="(jobPostForm.get('jobTitle').touched || submitStatus) && jobPostForm.get('jobTitle').hasError('required')
-                   || ((jobPostForm.get('jobTitle').touched || submitStatus) && jobPostForm.get('jobTitle').hasError('containsWhiteSpace'))">
+                   *ngIf="((jobPostForm.get('jobTitle').touched || submitStatus) && jobPostForm.get('jobTitle').hasError('containsWhiteSpace')
+                   && !jobPostForm.get('jobTitle').hasError('required'))">
                 <p>{{titleSpaceValidationMessage}}</p>
               </div>
             </div>
