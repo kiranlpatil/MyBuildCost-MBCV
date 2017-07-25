@@ -12,7 +12,7 @@ import JobListModel = require("./job-list.model");
 import CapabilityMatrixModel = require("./capability-matrix.model");
 import ProfileComparisonHeaderModel = require("./profile-comparison-header.model");
 
-interface ProfileComparisonDataModel {
+export class ProfileComparisonDataModel {
   isVisible: boolean;
   isSubmitted: boolean;
   aboutMyself: string;
@@ -45,7 +45,9 @@ interface ProfileComparisonDataModel {
   status: string;
   additionalCapabilites: string[];
   companyCulture: string;
+  proficienciesUnMatch: string[];
+  match_map: any;
 
 }
 
-export = ProfileComparisonDataModel
+//export = ProfileComparisonDataModel

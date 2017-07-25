@@ -5,6 +5,7 @@ import RecruiterRepository = require('../../dataaccess/repository/recruiter.repo
 import CandidateModel = require('../../dataaccess/model/candidate.model');
 import JobProfileService = require('../../services/jobprofile.service');
 import {ConstVariables} from "../../shared/sharedconstants";
+import {ProfileComparisonDataModel} from "../../dataaccess/model/profile-comparison-data.model";
 import MatchViewModel = require('../../dataaccess/model/match-view.model');
 import Match = require('../../dataaccess/model/match-enum');
 import IndustryRepository = require('../../dataaccess/repository/industry.repository');
@@ -224,10 +225,9 @@ class SearchService {
     });
   }
 
-  getCompareData(candidate: any, job: any, isCandidate: boolean, industries: IndustryModel[]) {
-    console.log('-------------------ingetCompare----------------------------');
-    let newCandidate = candidate.toObject();
-    //let newCandiate = this.buildCandidateModel(candidate);
+  getCompareData(candidate: CandidateModel, job: any, isCandidate: boolean, industries: IndustryModel[]) {
+    //let newCandidate = candidate.toObject();
+    var newCandidate = this.buildCandidateModel(candidate);
     let jobMinExperience: number = Number(job.experienceMinValue);
     let jobMaxExperience: number = Number(job.experienceMaxValue);
     let jobMinSalary: number = Number(job.salaryMinValue);
@@ -269,7 +269,8 @@ class SearchService {
       }
     }
 //        let match_map: Map<string,MatchViewModel> = new Map<string,MatchViewModel>();
-    newCandidate['match_map'] = {};
+    //newCandidate.match_map = {};
+    //newCandidate = this.buildCompareCapability(job, newCandidate, industries, isCandidate);
     newCandidate = this.buildCompareView(job, newCandidate, industries, isCandidate);
     //newCandidate = this.buildCompareView(job, newCandidate, industries, isCandidate);
     newCandidate = this.getAdditionalCapabilities(job, newCandidate, industries);
@@ -277,9 +278,51 @@ class SearchService {
     return newCandidate;
   }
 
-  buildCandidateModel(candidate: any) {
+  buildCandidateModel(candidate: CandidateModel) {
+
+    let profileComparisonResult: ProfileComparisonDataModel = new ProfileComparisonDataModel();
+    profileComparisonResult.industry = candidate.industry;
+    profileComparisonResult.aboutMyself = candidate.aboutMyself;
+    profileComparisonResult.academics = candidate.academics;
+    profileComparisonResult.professionalDetails = candidate.professionalDetails;
+    //profileComparisonResult.additionalCapabilites = candidate.additionalCapabilites;
+    profileComparisonResult.awards = candidate.awards;
+    profileComparisonResult.capability_matrix = candidate.capability_matrix;
+    profileComparisonResult.capabilityMap = [];
+    profileComparisonResult.experienceMatch = '';
+    profileComparisonResult.certifications = candidate.certifications;
+    //profileComparisonResult.companyCulture = '';
+    profileComparisonResult.employmentHistory = candidate.employmentHistory;
+    profileComparisonResult.interestedIndustries = candidate.interestedIndustries;
+    profileComparisonResult.isSubmitted = candidate.isSubmitted;
+    profileComparisonResult.isVisible = candidate.isVisible;
+    profileComparisonResult.location = candidate.location;
+    profileComparisonResult.job_list = candidate.job_list;
+    //profileComparisonResult.matchingPercentage = 0;
+    profileComparisonResult.educationMatch = '';
+    profileComparisonResult.proficiencies = candidate.proficiencies;
+    //profileComparisonResult.proficienciesMatch = [];
+    //profileComparisonResult.profileComparisonHeader = candidate.;
+    profileComparisonResult.roleType = candidate.roleType;
+    profileComparisonResult.salaryMatch = '';
+    //profileComparisonResult.status = candidate.status;
+    profileComparisonResult.secondaryCapability = candidate.secondaryCapability;
+    profileComparisonResult.lockedOn = candidate.lockedOn;
+    profileComparisonResult.match_map = {};
+    //profileComparisonResult.proficienciesUnMatch = [];
+    //profileComparisonResult.interestedIndustryMatch = [];
+    //profileComparisonResult.releaseMatch = '';
+    return profileComparisonResult;
+    // {"match_map:{}","proficienciesUnMatch[]","proficienciesMatch[]","interestedIndustryMatch[[]","releaseMatch","educationMatch","salaryMatch","experienceMatch","isCompleted:boolean","isSubmitted:boolean","isVisible:boolean","certifications[]","interestedIndustries[]","awards[]", "academics[]","location{}","_id","userId","capability_matrix{}","jobTitle","aboutMyself","job_list[]","proficiencies[]","employmentHistory[]","professionalDetails{}"}
+    /*if(candidate.additionalCapabilites){
+
+     }*/
 
   }
+
+  /*buildCompareCapability(job : any, newCandidate : ProfileComparisonDataModel , industries : any) {
+
+   }*/
 
   getAdditionalCapabilities(job : any, newCandidate : any , industries : any) : any {
     newCandidate.additionalCapabilites = new Array(0);
