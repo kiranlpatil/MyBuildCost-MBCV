@@ -13,9 +13,6 @@ $text-color: #666;
 }
 
 .company-profile-picture-col {
-  .company-profile-picture {
-    float: left;
-  }
   div {
     float: left;
     width: calc(100% - 40px);
@@ -23,6 +20,16 @@ $text-color: #666;
   .company-name-label {
     color: $text-color;
     padding-top: 4px;
+  }
+}
+
+.company-profile-picture {
+  position: absolute;
+  right: 10px;
+  bottom: 15px;
+  text-align: right;
+  img {
+    width: 70px;
   }
 }
 
