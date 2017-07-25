@@ -227,6 +227,7 @@ class SearchService {
   getCompareData(candidate: any, job: any, isCandidate: boolean, industries: IndustryModel[]) {
     console.log('-------------------ingetCompare----------------------------');
     let newCandidate = candidate.toObject();
+    //let newCandiate = this.buildCandidateModel(candidate);
     let jobMinExperience: number = Number(job.experienceMinValue);
     let jobMaxExperience: number = Number(job.experienceMaxValue);
     let jobMinSalary: number = Number(job.salaryMinValue);
@@ -270,9 +271,14 @@ class SearchService {
 //        let match_map: Map<string,MatchViewModel> = new Map<string,MatchViewModel>();
     newCandidate['match_map'] = {};
     newCandidate = this.buildCompareView(job, newCandidate, industries, isCandidate);
+    //newCandidate = this.buildCompareView(job, newCandidate, industries, isCandidate);
     newCandidate = this.getAdditionalCapabilities(job, newCandidate, industries);
 
     return newCandidate;
+  }
+
+  buildCandidateModel(candidate: any) {
+
   }
 
   getAdditionalCapabilities(job : any, newCandidate : any , industries : any) : any {
