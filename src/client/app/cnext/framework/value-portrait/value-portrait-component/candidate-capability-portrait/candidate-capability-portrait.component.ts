@@ -110,6 +110,180 @@ export class CandidateCapabilityPortrait implements OnInit {
               },
               {
                 "isPrimary": true,
+                "code": "10032",
+                "name": "UI Development",
+                "_id": "5966102c137b03c8796c2bd7",
+                "complexities": [
+                  {
+                    "code": "110",
+                    "name": "Team Size",
+                    "_id": "5966102c137b03c8796c2dba",
+                    "questionForCandidate": "",
+                    "answer": ""
+                  },
+                  {
+                    "code": "120",
+                    "name": "Requirements and Scope",
+                    "_id": "5966102c137b03c8796c2db5",
+                    "questionForCandidate": "",
+                    "answer": ""
+                  },
+                  {
+                    "code": "130",
+                    "name": "Technology",
+                    "_id": "5966102c137b03c8796c2db0",
+                    "questionForCandidate": "",
+                    "answer": ""
+                  }
+                ]
+              },
+              {
+                "isPrimary": true,
+                "code": "10032",
+                "name": "UI Development",
+                "_id": "5966102c137b03c8796c2bd7",
+                "complexities": [
+                  {
+                    "code": "110",
+                    "name": "Team Size",
+                    "_id": "5966102c137b03c8796c2dba",
+                    "questionForCandidate": "",
+                    "answer": ""
+                  },
+                  {
+                    "code": "120",
+                    "name": "Requirements and Scope",
+                    "_id": "5966102c137b03c8796c2db5",
+                    "questionForCandidate": "",
+                    "answer": ""
+                  },
+                  {
+                    "code": "130",
+                    "name": "Technology",
+                    "_id": "5966102c137b03c8796c2db0",
+                    "questionForCandidate": "",
+                    "answer": ""
+                  }
+                ]
+              },
+              {
+                "isPrimary": true,
+                "code": "10032",
+                "name": "UI Development",
+                "_id": "5966102c137b03c8796c2bd7",
+                "complexities": [
+                  {
+                    "code": "110",
+                    "name": "Team Size",
+                    "_id": "5966102c137b03c8796c2dba",
+                    "questionForCandidate": "",
+                    "answer": ""
+                  },
+                  {
+                    "code": "120",
+                    "name": "Requirements and Scope",
+                    "_id": "5966102c137b03c8796c2db5",
+                    "questionForCandidate": "",
+                    "answer": ""
+                  },
+                  {
+                    "code": "130",
+                    "name": "Technology",
+                    "_id": "5966102c137b03c8796c2db0",
+                    "questionForCandidate": "",
+                    "answer": ""
+                  }
+                ]
+              },
+              {
+                "isPrimary": true,
+                "code": "10032",
+                "name": "UI Development",
+                "_id": "5966102c137b03c8796c2bd7",
+                "complexities": [
+                  {
+                    "code": "110",
+                    "name": "Team Size",
+                    "_id": "5966102c137b03c8796c2dba",
+                    "questionForCandidate": "",
+                    "answer": ""
+                  },
+                  {
+                    "code": "120",
+                    "name": "Requirements and Scope",
+                    "_id": "5966102c137b03c8796c2db5",
+                    "questionForCandidate": "",
+                    "answer": ""
+                  },
+                  {
+                    "code": "130",
+                    "name": "Technology",
+                    "_id": "5966102c137b03c8796c2db0",
+                    "questionForCandidate": "",
+                    "answer": ""
+                  }
+                ]
+              },
+              {
+                "isPrimary": true,
+                "code": "10032",
+                "name": "UI Development",
+                "_id": "5966102c137b03c8796c2bd7",
+                "complexities": [
+                  {
+                    "code": "110",
+                    "name": "Team Size",
+                    "_id": "5966102c137b03c8796c2dba",
+                    "questionForCandidate": "",
+                    "answer": ""
+                  },
+                  {
+                    "code": "120",
+                    "name": "Requirements and Scope",
+                    "_id": "5966102c137b03c8796c2db5",
+                    "questionForCandidate": "",
+                    "answer": ""
+                  },
+                  {
+                    "code": "130",
+                    "name": "Technology",
+                    "_id": "5966102c137b03c8796c2db0",
+                    "questionForCandidate": "",
+                    "answer": ""
+                  }
+                ]
+              },
+              {
+                "isPrimary": true,
+                "code": "10032",
+                "name": "UI Development",
+                "_id": "5966102c137b03c8796c2bd7",
+                "complexities": [
+                  {
+                    "code": "110",
+                    "name": "Team Size",
+                    "_id": "5966102c137b03c8796c2dba",
+                    "questionForCandidate": "",
+                    "answer": ""
+                  },
+                  {
+                    "code": "120",
+                    "name": "Requirements and Scope",
+                    "_id": "5966102c137b03c8796c2db5",
+                    "questionForCandidate": "",
+                    "answer": ""
+                  },
+                  {
+                    "code": "130",
+                    "name": "Technology",
+                    "_id": "5966102c137b03c8796c2db0",
+                    "questionForCandidate": "",
+                    "answer": ""
+                  }
+                ]
+              },
+              {
+                "isPrimary": true,
                 "code": "10033",
                 "name": "UX Consulting",
                 "_id": "5966102c137b03c8796c2bc7",
