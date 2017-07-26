@@ -358,8 +358,9 @@ header {
   border: 1px solid #e8e8e8;
   box-shadow: -1px 3px 10px rgba(0, 0, 0, 0.15);
   position: fixed;
-  left: 35%;
-  top: 45%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 
   h4 {
     color: $theme-color;
