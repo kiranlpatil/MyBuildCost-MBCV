@@ -1,10 +1,5 @@
 @import '../../../../../css/common';
-
-$purple: #7264b5;
-$highlight: #596c7d;
-$white: #fff;
-$text-color: #999;
-$theme-color: #0d75fa;
+@import '../../../../../css/variables';
 
 .welcome-text {
   height: 100vh;
@@ -12,7 +7,7 @@ $theme-color: #0d75fa;
   text-align: left;
 
   .content {
-    color: #666;
+    color: $name;
     width: 80%;
     top: 50%;
     -webkit-transform: translate(0, -50%) !important;
@@ -40,7 +35,7 @@ $theme-color: #0d75fa;
   margin-top: 70px;
 
   .card-view {
-    color: $text-color;
+    color: $text-color4;
     margin-top: 20px !important;
 
     .panel {
@@ -66,7 +61,7 @@ $theme-color: #0d75fa;
     }
 
     span {
-      color: $text-color;
+      color: $text-color4;
       display: block;
       font-size: 13px;
       padding: 0;
@@ -109,7 +104,7 @@ $theme-color: #0d75fa;
     }
 
     .contact-info {
-      border-top: 1px solid #f5f5f5;
+      border-top: 1px solid $contact-info;
       clear: both;
       margin-bottom: 5px;
 
@@ -118,7 +113,7 @@ $theme-color: #0d75fa;
         border: 0;
         padding-left: 5px;
         font-size: 13px;
-        color: #999;
+        color: $text-color4;
       }
 
       img {
@@ -142,7 +137,7 @@ $theme-color: #0d75fa;
     display: block;
     background: $theme-color;
     padding: 3px 10px;
-    color: #fff;
+    color: $white;
     border: 1px solid $theme-color;
     position: absolute;
     right: 5px;

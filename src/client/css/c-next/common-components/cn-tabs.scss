@@ -1,13 +1,4 @@
-$text-color: #666;
-$bg-tab-content: #fff;
-$nav-tab: #7264b3;
-$profile-section-shadow: rgba(204, 204, 204, 1);
-$border-color: #ddd;
-$border-light: #efefef;
-$white: #fff;
-$theme-color: #0d75fa;
-$active-tab: #edf1f5;
-$active-tab-border: #b2bcc3;
+@import '../../../css/variables';
 
 .nav-tabs {
   border-bottom: 1px solid $border-light;
@@ -85,10 +76,7 @@ $active-tab-border: #b2bcc3;
 }
 
 .tab-content {
-  //background: $bg-tab-content;
   border-top-color: transparent;
-  //padding: 15px 0;
-
 }
 
 @media only screen and (max-width: 1280px) {

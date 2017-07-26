@@ -1,9 +1,6 @@
 @import '../../common';
+@import '../../../css/variables';
 
-$bg-wrapper: #f8f8f8;
-$white: #fff;
-$text-color: #666;
-$heading-color: #333;
 
 .main-form-wrapper {
   height: 100vh;
@@ -22,7 +19,7 @@ $heading-color: #333;
     box-shadow: -1px 3px 10px rgba(0, 0, 0, 0.15);
 
     h5 {
-      color: $heading-color;
+      color: $name;
       font-family: 'helvlightregular';
       font-size: 20px;
       font-weight: bold;

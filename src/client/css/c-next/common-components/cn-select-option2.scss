@@ -1,8 +1,4 @@
-$text-color: #333;
-$white: #fff;
-$option-border-color: #666;
-$primary-option: #0d75fa;
-$secondary-option: #0d75fa;
+@import '../../../css/variables';
 
 .item-radio {
   display: block;
@@ -68,14 +64,14 @@ $secondary-option: #0d75fa;
 
     &:checked {
       & + span {
-        color: $primary-option;
+        color: $primary-option1;
       }
 
       & ~ .check {
-        border: 2px solid $primary-option;
+        border: 2px solid $primary-option1;
 
         &::before {
-          background: $primary-option;
+          background: $primary-option1;
         }
       }
     }
@@ -100,14 +96,14 @@ $secondary-option: #0d75fa;
 
       &:checked {
         & + span {
-          color: $primary-option;
+          color: $primary-option1;
         }
 
         & ~ .check {
-          border: 2px solid $primary-option;
+          border: 2px solid $primary-option1;
 
           &::before {
-            background: $primary-option;
+            background: $primary-option1;
           }
         }
       }

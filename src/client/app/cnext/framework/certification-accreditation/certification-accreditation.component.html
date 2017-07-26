@@ -31,7 +31,7 @@
       <button type="submit" class="btn btn-primary" scrollTo scrollTargetSelector="#certification"
               (click)="postData('next')" *ngIf="!candidate.isSubmitted">Next
       </button>
-      <button type="submit" class="btn btn-primary" (click)="postData('save')" *ngIf="candidate.isSubmitted">Save
+      <button type="submit" class="btn btn-primary" (click)="postData('save')" *ngIf="candidate.isSubmitted">Done
       </button>
       <button (click)="addCertification('addAnother')" class="btn btn-add-another" [disabled]="!certificationDetail.valid">
         Add another

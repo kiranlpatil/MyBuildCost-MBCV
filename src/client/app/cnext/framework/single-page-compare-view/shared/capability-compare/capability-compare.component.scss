@@ -1,20 +1,11 @@
-$theme-color: #0d75fa;
-$heading-color: #dbeef6;
-$border-color: #e8e8e8;
-$text-color: #333;
-$light-green: #B1D669;
-$orange: #EAA83D;
-$gray: #ccc;
-$green: #7E9B5D;
-$blue: #3694d1;
-$red: #EF5C48;
-$white: #ffffff;
+@import '../../../../../../css/variables';
 
 .exact {
-  background: $light-green !important;
+  background: $green !important;
   padding: 5px 5px 0px;
   height: 57px;
   line-height: 16px;
+  overflow: hidden;
 }
 
 .compact-view{
@@ -48,8 +39,8 @@ $white: #ffffff;
     padding: 5px;
     bottom: inherit;
     min-height: 59px;
-    wwidth: 160%;
-    left: -37px;
+    width: 194%;
+    left: -54px;
     box-shadow: 0px 0px 4px 0px #757575;
     color : white !important;
     font-size: 12px;
@@ -83,12 +74,12 @@ $white: #ffffff;
   .complexity-scenarios-description {
     white-space: inherit;
     position: absolute;
-    background: $light-green;
+    background: $green;
     padding: 5px;
     bottom: inherit;
     min-height: 59px;
-    width: 160%;
-    left: -37px;
+    width: 194%;
+    left: -54px;
     box-shadow: 0px 0px 4px 0px #757575;
     font-size: 12px;
     z-index: 999;
@@ -115,22 +106,23 @@ $white: #ffffff;
 }
 
 .above {
-  background: $green !important;
+  background: $green2 !important;
   padding: 5px 5px 0px;
   height: 57px;
   line-height: 16px;
+  overflow: hidden;
 }
 
 .above:hover {
   .complexity-scenarios-description {
     white-space: inherit;
     position: absolute;
-    background: $green;
+    background: $green2;
     padding: 5px;
     bottom: inherit;
     min-height: 59px;
-    width: 160%;
-    left: -37px;
+    width: 194%;
+    left: -54px;
     box-shadow: 0px 0px 4px 0px #757575;
     font-size: 12px;
     z-index: 999;
@@ -156,13 +148,12 @@ $white: #ffffff;
   }
 }
 
-
-
 .below {
   background: $orange !important;
   padding: 5px 5px 0px;
   height: 57px;
   line-height: 16px;
+  overflow: hidden;
 }
 
 .below:hover {
@@ -173,8 +164,8 @@ $white: #ffffff;
     padding: 5px;
     bottom: inherit;
     min-height: 59px;
-    width: 160%;
-    left: -37px;
+    width: 194%;
+    left: -54px;
     box-shadow: 0px 0px 4px 0px #757575;
     font-size: 12px;
     z-index: 999;
@@ -205,6 +196,7 @@ $white: #ffffff;
   padding: 5px 5px 0px;
   height: 57px;
   line-height: 16px;
+  overflow: hidden;
 }
 
 .missing:hover {
@@ -215,8 +207,8 @@ $white: #ffffff;
     padding: 5px;
     bottom: inherit;
     min-height: 59px;
-    width: 160%;
-    left: -37px;
+    width: 194%;
+    left: -54px;
     box-shadow: 0px 0px 4px 0px #757575;
     font-size: 12px;
     z-index: 999;
@@ -263,8 +255,8 @@ $white: #ffffff;
     padding: 5px;
     bottom: inherit;
     min-height: 59px;
-    width: 160%;
-    left: -37px;
+    width: 194%;
+    left: -54px;
     box-shadow: 0px 0px 4px 0px #757575;
     font-size: 12px;
     z-index: 999;
@@ -338,16 +330,18 @@ $white: #ffffff;
   width: 100%;
   height: 56px;
   overflow: hidden;
+  position: relative;
+  z-index: 9;
   span {
     font-size: 12px;
     text-align: center;
     display: table;
-    word-break: break-word;
+    word-break: keep-all;
     height: 60px;
     margin: 0 auto;
     word-wrap: break-word;
     padding: 0;
-    color: #777;
+    color: $capability-label;
   }
 }
 
@@ -399,27 +393,28 @@ $white: #ffffff;
     }
 
     span {
-      margin: 0 5px 0 5px;
-      width: 9px;
-      height: 9px;
+      margin: 2px 5px 0 5px;
+      width: 13px;
+      height: 13px;
       border-radius: 50%;
       display: inline-block;
+      float: left;
     }
 
     .legend-above {
-      background: $green;
+      background: $green2;
     }
 
     .legend-exact {
-      background: $light-green;
+      background: $light-green2;
     }
 
     .legend-below {
-      background: $orange;
+      background: $orange2;
     }
 
     .legend-missing {
-      background: $red;
+      background: $red2;
     }
 
     .legend-extra {
@@ -428,7 +423,7 @@ $white: #ffffff;
   }
 
   .heading {
-    border-bottom: 1px solid $border-color;
+    border-bottom: 1px solid $border-color1;
     border-radius: 0;
     margin: 0;
     width: 100%;
@@ -443,7 +438,7 @@ $white: #ffffff;
   }
 
   .content {
-    border-bottom: 1px solid $border-color;
+    border-bottom: 1px solid $border-color1;
     margin: 10px 0;
     padding-bottom: 10px;
 
@@ -628,7 +623,7 @@ and (max-width: 840px) {
       font-weight: 600;
     }
     .complexity-name {
-      color: $text-color;
+      color: $theme-color;
       margin-bottom: 2px;
       width: 100%;
       display: inline-block;

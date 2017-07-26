@@ -1,18 +1,4 @@
-$profile-background: #f2f2f2;
-$process-color: #224879;
-$active-color: #fff;
-$active-text-color: #000;
-$active-progress-line: #8eb4d9;
-$bubble-background: #35567e;
-$white: #fff;
-$border-color: #e8e8e8;
-$light-blue: #00aed5;
-$label: #888;
-$blue: #0d75fa;
-$current: #ff9700;
-$green-text: #42a948;
-$current-border: #888;
-$green: #8cc63f;
+@import '../../../../css/variables';
 
 .error-messages {
   color: #f66761;
@@ -174,7 +160,7 @@ $green: #8cc63f;
       padding: 15px;
 
       &:first-child {
-        border-right: 1px solid $border-color;
+        border-right: 1px solid $border-color1;
       }
     }
   }

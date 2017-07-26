@@ -1,6 +1,4 @@
-$text-color: #576b7c;
-$name: #666;
-$blue-color: #0d75fa;
+@import '../../../../../../css/variables';
 
 .basic-description {
   text-align: left;
@@ -8,7 +6,7 @@ $blue-color: #0d75fa;
   p,
   span,
   label {
-    color: $text-color;
+    color: $text-color2;
     font-size: 12px;
     word-break: keep-all;
   }
@@ -32,7 +30,7 @@ $blue-color: #0d75fa;
     }
 
     p {
-      color: $text-color;
+      color: $text-color2;
       margin: 0 0 5px;
       word-break: keep-all;
       float: right;
@@ -49,7 +47,7 @@ $blue-color: #0d75fa;
     }
 
     span {
-      color: $text-color;
+      color: $text-color2;
       width: 100%;
     }
 

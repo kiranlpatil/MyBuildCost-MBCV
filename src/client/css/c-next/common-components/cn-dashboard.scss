@@ -1,19 +1,5 @@
 @import '../../../css/common';
-
-$white: #fff;
-$border-color: #e8e8e8;
-$text-color: #666;
-$purple: #7366ad;
-$highlight: #596c7d;
-$theme-color: #0d75fa;
-$orange: #ff9700;
-$green: #8dc63f;
-$red: #e91d62;
-$border-light: #efefef;
-$active-color: #edf1f5;
-$border-blue: #d1dce4;
-$label-border: #a7a7a7;
-$bg-tabs: #edf1f5;
+@import '../../../css/variables';
 
 .profile-wrapper {
 

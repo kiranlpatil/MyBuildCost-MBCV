@@ -1,11 +1,4 @@
-$white: #fff;
-$border-color: #ddd;
-$text-color: #333;
-$bg-tab-content: #f9f9f9;
-$profile-section-shadow: rgba(204, 204, 204, 1);
-$border-color: #e8e8e8;
-$filter-bg: #edf1f5;
-$theme-color: #0d75fa;
+@import '../../../css/variables';
 
 .filter-container {
   padding-bottom: 60px;
@@ -16,7 +9,7 @@ $theme-color: #0d75fa;
   overflow: auto;
   border: 1px solid $border-color;
   //background: $bg-tab-content;
-  //box-shadow: 0 0 1px 0 $profile-section-shadow;
+  //box-shadow: 0 0 1px 0 $profile-section-shadow1;
   text-align: left;
   width: 200px;
   background: $white;

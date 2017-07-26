@@ -26,7 +26,7 @@
     <div
       *ngFor="let job of listOfJobs | qcardlistsort:[qCardModel.sortValue,'aboveMatch','candidate'] | qcardlistfilter:filterMeta:qCardCount;let i=index">
       <!--<p>{{qCardCount?.count}}</p>-->
-      <cn-candidate-q-card [progress_bar_color]="'#0d75fa'" [job]="job" [type]="type" (onAction)="onActionPerform($event)"></cn-candidate-q-card>
+      <cn-candidate-q-card [progress_bar_color]="'#29b6f6'" [job]="job" [type]="type" (onAction)="onActionPerform($event)"></cn-candidate-q-card>
     </div>
   </div>
 </div>

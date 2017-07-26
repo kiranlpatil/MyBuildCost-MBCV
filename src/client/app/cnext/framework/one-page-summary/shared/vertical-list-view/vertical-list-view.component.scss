@@ -1,8 +1,5 @@
 @import '../../../../../../css/common';
-
-$theme-color: #0d75fa;
-$text-color: #576b7c;
-$bg-color: #fff;
+@import '../../../../../../css/variables';
 
 .vertical-view {
   font-size: 14px;
@@ -48,8 +45,8 @@ $bg-color: #fff;
       width: 100%;
 
       &::before {
-        background-color: $text-color;
-        border: 5px solid $bg-color;
+        background-color: $text-color2;
+        border: 5px solid $white;
         border-radius: 50%;
         content: '';
         display: block;
@@ -77,7 +74,7 @@ $bg-color: #fff;
       }
 
       p {
-        color: $text-color;
+        color: $text-color2;
         margin: -4px 0 5px;
         padding: 0 0 5px 30px;
         word-break: keep-all;

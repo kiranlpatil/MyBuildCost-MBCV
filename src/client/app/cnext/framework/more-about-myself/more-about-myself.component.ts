@@ -78,5 +78,9 @@ export class MoreAboutMyselfComponent implements OnInit {
       });
     this.onComplete.emit(this.candidate.aboutMyself);
   }
-
+  onNext() {
+    this.highlightedSection.name='EmploymentHistory';
+    this.highlightedSection.isDisable=false;
+    this.onComplete.emit(this.candidate.aboutMyself);
+  }
 }

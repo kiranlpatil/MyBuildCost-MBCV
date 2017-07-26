@@ -1,12 +1,4 @@
-$border-color: #e8e8e8;
-$light-blue: #0d75fa;
-$primary-option: #0d75fa;
-$secondary-option: #81d4fa;
-$modal-bg: rgba(0, 0, 0, .5);
-$active-section: #a8de78;
-$theme-color: #0d75fa;
-$black: #333;
-$white: #fff;
+@import '../../../css/variables';
 
 .modal-bg {
   background: $modal-bg;

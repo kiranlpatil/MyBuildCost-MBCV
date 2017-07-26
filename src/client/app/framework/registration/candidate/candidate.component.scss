@@ -1,10 +1,9 @@
 @import '../../../../css/common';
+@import '../../../../css/variables';
 
-$border-gray: #ccc;
-$theme-color: #66afe9;
 
 .error-messages {
-  color: #f66761;
+  color: $red;
   font-size: 10px;
   font-style: italic;
   margin: 0;

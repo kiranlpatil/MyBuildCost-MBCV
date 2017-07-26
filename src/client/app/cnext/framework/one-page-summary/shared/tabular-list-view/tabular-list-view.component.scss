@@ -1,7 +1,4 @@
-$theme-color: #3694d1;
-$heading-color: #dbeef6;
-$border-color: #e8e8e8;
-$text-color: #666;
+@import '../../../../../../css/variables';
 
 .capability-complexity {
   .heading {
@@ -25,11 +22,11 @@ $text-color: #666;
 
     span {
       font-size: 13px;
-      color: $text-color;
+      color: $text-color2;
     }
 
     .complexity-name {
-      color: $theme-color;
+      color: $theme-color2;
     }
   }
 

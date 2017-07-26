@@ -1,18 +1,11 @@
-$text-color: #576b7c;
-$name: #666;
-$blue-color: #0d75fa;
-$light-green: #96e328;
-$orange: #fca338;
-$gray: #ccc;
-$green: #68ab26;
-$red: #e82c0c;
+@import '../../../../../css/variables';
 
 .basic-description {
   text-align: left;
   p,
   span,
   label {
-    color: $text-color;
+    color: $text-color2;
     font-size: 12px;
     word-break: keep-all;
   }
@@ -34,7 +27,7 @@ $red: #e82c0c;
     }
 
     p {
-      color: $text-color;
+      color: $text-color2;
       margin: 0 0 5px;
     }
   }
@@ -49,7 +42,7 @@ $red: #e82c0c;
     }
 
     span {
-      color: $text-color;
+      color: $text-color2;
       width: 100%;
       font-size: 12px;
     }
@@ -141,7 +134,7 @@ $red: #e82c0c;
 .info-description:hover .info-hover-section {
   display: block;
   position: absolute;
-  background: #fff;
+  background: $white;
   padding: 10px 15px;
   z-index: 9999;
   width: 200px;
@@ -163,11 +156,11 @@ $red: #e82c0c;
 }
 
 .about-company-label {
-  color: $text-color;
+  color: $text-color2;
   width: 100%;
   font-size: 12px;
   label {
-    color: #0d75fa;
+    color: $blue-color;
     font-weight: 500;
     font-family: 'gothamrnd-book';
     margin: 10px 0 0;
@@ -196,11 +189,11 @@ $red: #e82c0c;
 }
 
 .option.exact {
-  border: 1px solid $light-green;
+  border: 1px solid $green;
 }
 
 .option.missing {
-  border: 1px solid $red;
+  border: 1px solid $red1;
 }
 
 .additional-capabilities-lists {
@@ -214,7 +207,7 @@ $red: #e82c0c;
 .job-info-labal {
   div {
     padding: 6px 6px 0;
-    color: #fff;
+    color: $white;
   }
   .user-job-label {
     label,

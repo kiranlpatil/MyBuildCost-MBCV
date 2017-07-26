@@ -1,9 +1,7 @@
-$btn-color: #0d75fa;
-$text-color: #333;
-$border-color: #e8e8e8;
+@import '../../../../css/variables';
 
 .error-messages {
-  color: #f66761;
+  color: $red;
   font-size: 10px;
   font-style: italic;
   margin: 3px 0 0;

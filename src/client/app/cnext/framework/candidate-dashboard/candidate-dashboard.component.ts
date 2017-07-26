@@ -37,11 +37,6 @@ export class CandidateDashboardComponent {
         candidateData => {
           this.OnCandidateDataSuccess(candidateData);
         });
-
-
-    this.showMatchedJobs();
-    this.showAppliedJobs();
-    this.showRejectedJobs();
   }
 
   extractList(jobList: JobQcard[]) {
@@ -63,6 +58,9 @@ export class CandidateDashboardComponent {
     this.candidate = candidateData.data[0];
     this.candidate.basicInformation = candidateData.metadata;
     this.candidate.summary = new Summary();
+    this.getAppliedJobList();
+    this.getMatchedJobList();
+    this.getRejectedJobList();
   }
 
   onActionPerformOnExactList(action: string) {
@@ -88,21 +86,24 @@ export class CandidateDashboardComponent {
   onActionPerform(action: string) {
     if (action === 'block') {
       this.candidate.summary.numberJobsBlocked++;
+      this.getRejectedJobList();
     }
     else if (action === 'apply') {
       this.candidate.summary.numberOfJobApplied++;
+      this.getAppliedJobList();
     }
   }
 
   onActionOnApplyJob(action: string) {
     this.qcardFilterService.clearFilter();
+
   }
 
   onActionOnBlockJob(action: string) {
     if (action === 'delete') {
       this.candidate.summary.numberJobsBlocked--;
-      this.showRejectedJobs();
-      this.showMatchedJobs();
+      this.getRejectedJobList();
+      this.getMatchedJobList();
     }
   }
 
@@ -111,6 +112,10 @@ export class CandidateDashboardComponent {
     if(this.appliedJobs.length>0) {
       return;
     }
+   this.getAppliedJobList();
+  }
+
+  getAppliedJobList() {
     this.candidateJobListService.getAppliedJobList()
       .subscribe(
         data => {
@@ -121,12 +126,14 @@ export class CandidateDashboardComponent {
       this.candidate.summary.numberOfJobApplied=0;
     }
   }
-
   showRejectedJobs() {
    /* this.qcardFilterService.clearFilter();*/
     if(this.blockedJobs.length>0) {
       return;
     }
+    this.getRejectedJobList();
+  }
+  getRejectedJobList() {
     this.candidateJobListService.getBlockedJobList()
       .subscribe(
         data => {
@@ -139,10 +146,13 @@ export class CandidateDashboardComponent {
   }
 
   showMatchedJobs() {
-    if(this.jobList.length>0){
+    if(this.jobList.length>0) {
       return;
     }
     /*this.qcardFilterService.clearFilter();*/
+    this.getMatchedJobList();
+  }
+  getMatchedJobList(){
     this.candidateDashboardService.getJobList()
       .subscribe(
         data => {

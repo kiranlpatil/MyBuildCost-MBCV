@@ -1,5 +1,4 @@
-$modal-bg: #f2f2f2;
-$text-color: #666;
+@import '../../../css/variables';
 
 .modal-dialog {
   border-radius: 8px;
@@ -11,7 +10,7 @@ $text-color: #666;
   }
 
   .modal-content {
-    background: $modal-bg;
+    background: $modal-bg1;
     border-radius: 8px;
     user-select: none;
   }

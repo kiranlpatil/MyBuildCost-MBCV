@@ -1,7 +1,5 @@
 @import '../../../../css/common';
-
-$border-gray: #ccc;
-$theme-color: #66afe9;
+@import '../../../../css/variables';
 
 .error-messages {
   color: #f66761;

@@ -70,19 +70,6 @@ export class CandidateProfileComponent implements OnInit, DoCheck {
     this.whichStepsVisible[0] = true;
   }
 
-  /*ngOnChanges(changes:SimpleChanges) {
-   if(this.highlightedSection && this.highlightedSection.changes )
-   if(this.highlightedSection.name==='Work-Area'){
-   this.getRoles();
-   return;
-   } else if(this.highlightedSection.name==='Capabilities'){
-   this.getCapability();
-   return;
-   } else if(this.highlightedSection.name==='Complexities'){
-   this.getComplexity();
-   return;
-   }
-   }*/
   ngDoCheck() {
     let changes: any = this.differ.diff(this.highlightedSection);
 
@@ -91,15 +78,12 @@ export class CandidateProfileComponent implements OnInit, DoCheck {
         this.getRoles();
         return;
       } else if (this.highlightedSection.name === 'Capabilities') {
-        this.getRoles();
         this.getCapability();
         return;
       } else if (this.highlightedSection.name === 'Complexities') {
         this.getComplexity();
         return;
       }
-    } else {
-      console.log('nothing changed');
     }
   }
   onSkip() {
@@ -115,7 +99,6 @@ export class CandidateProfileComponent implements OnInit, DoCheck {
     if (newIndustry !== undefined && newIndustry.name !== '') {
       this.candidate.industry = newIndustry;
       this.saveCandidateDetails();
-      this.getRoles();
       this.isRolesShow = false;
       this.candidateForRole = this.candidate.industry.roles;
       this.candidateForCapability = this.candidate.industry.roles;
@@ -128,7 +111,6 @@ export class CandidateProfileComponent implements OnInit, DoCheck {
     this.candidateForCapability = this.candidate.industry.roles;
     this.candidateForComplexity = this.candidate.industry.roles;
     this.rolesForCapability = new Array(0);
-    this.getCapability();
     this.showCapability = true;
     this.whichStepsVisible[1] = true;
     this.whichStepsVisible[3] = false;
@@ -140,7 +122,6 @@ export class CandidateProfileComponent implements OnInit, DoCheck {
     this.candidateForRole = this.candidate.industry.roles;
     this.candidateForComplexity = this.candidate.industry.roles;
     this.saveCandidateDetails();
-    this.getComplexity();
     this.whichStepsVisible[2] = true;
   }
 
@@ -312,8 +293,9 @@ export class CandidateProfileComponent implements OnInit, DoCheck {
     }
 
     if (this.highlightedSection.name !== 'GuideTour') {
-      if (this.candidate.industry.name !== undefined) {
+      if (this.candidate.jobTitle !== undefined && this.candidate.jobTitle !== '') {
         this.isIndustryShow = false;
+        if (this.candidate.industry.name !== undefined && this.candidate.industry.name !== '') {
         this.isRolesShow = false;
         //this.getRoles();
         if (this.candidate.industry.roles.length > 0) {
@@ -332,7 +314,6 @@ export class CandidateProfileComponent implements OnInit, DoCheck {
             //this.getComplexity();
             this.showComplexity = true;
             this.whichStepsVisible[2] = true;
-            console.log('capability matrix',this.candidate.capability_matrix);
             if(this.candidate.capability_matrix){
               var capbilityMatrix:any = Object.keys(this.candidate.capability_matrix);
               for(let index of capbilityMatrix){
@@ -377,6 +358,9 @@ export class CandidateProfileComponent implements OnInit, DoCheck {
         } else {
           this.highlightedSection.name = 'Work-Area';
         }
+      } else {
+        this.highlightedSection.name = 'Industry';
+      }
       } else {
         this.highlightedSection.name = 'Profile';
       }

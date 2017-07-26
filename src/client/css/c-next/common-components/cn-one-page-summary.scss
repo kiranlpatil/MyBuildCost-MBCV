@@ -1,7 +1,4 @@
-$white: #fff;
-$theme-color: #3694d1;
-$border-color: #e8e8e8;
-$text-color: #333;
+@import '../../../css/variables';
 
 .page-header {
   background: $theme-color;
@@ -89,7 +86,7 @@ $text-color: #333;
     white-space: inherit;
     font-family: 'gothamrnd-book';
     font-weight: 600;
-    color: #0d75fa;
+    color: $theme-color;
   }
   span {
     color: $text-color;

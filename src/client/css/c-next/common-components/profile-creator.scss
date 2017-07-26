@@ -1,13 +1,4 @@
-$text-color: #666;
-$white: #fff;
-$instruction: #00aed5;
-$error: #e82c0c;
-$border-color: #e8e8e8;
-$info: #999;
-$theme-color: #0d75fa;
-$black: #333;
-$pink: #e91d62;
-$switch-shadow: rgba(0, 0, 0, 0.2);
+@import '../../../css/variables';
 
 .section-container {
   text-align: left;

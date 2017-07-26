@@ -36,7 +36,7 @@
                 </div>
               </div>
               <div id="applied" class="tab-pane fade"><!--[hidden]="!hideSection"-->
-                <cn-candidate-job-list [progress_bar_color]="'#ff9700'" [type]="'apply'" [listOfJobs]="appliedJobs"
+                <cn-candidate-job-list [progress_bar_color]="'#f7c72d'" [type]="'apply'" [listOfJobs]="appliedJobs"
                                        (onAction)="onActionOnApplyJob($event)"
                 ></cn-candidate-job-list><!--[hidden]="type !=='apply'"-->
                 <div class="empty-list-message" *ngIf="candidate.summary.numberOfJobApplied==0 ">

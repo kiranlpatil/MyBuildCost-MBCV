@@ -67,7 +67,7 @@
       </li>
     </ul>
     <div id="matched-job" class="tab-pane fade in active ">
-      <cn-q-card-view [progress_bar_color]="'#0d75fa'" (addedTocart)="AddedToCart($event)" *ngIf="whichListVisible[0]" [candidateQlist]="candidateQlist" [filterMeta]="filterMeta"
+      <cn-q-card-view [progress_bar_color]="'#29b6f6'" (addedTocart)="AddedToCart($event)" *ngIf="whichListVisible[0]" [candidateQlist]="candidateQlist" [filterMeta]="filterMeta"
                       [candidates]="candidateQlist.matchedCandidates" [type]="'matchedList'" [jobId]="jobId"
                       [recuirterListCountModel]="recruiterJobView"></cn-q-card-view>
       <p class="empty-list-message" *ngIf="recruiterJobView.numberOfMatchedCandidates==0">Currently there are no candidates matching to your job posting.
@@ -83,13 +83,13 @@
       <p class="empty-list-message" *ngIf="recruiterJobView.numberOfCandidatesInCart==0">You have not added any candidates to the Cart for this job posting.</p>
     </div>
     <div id="applied-job" class="tab-pane fade">
-      <cn-q-card-view (addedTocart)="AddedToCart($event)" [progress_bar_color]="'#ff9700'" *ngIf="whichListVisible[2]" [candidateQlist]="candidateQlist" [filterMeta]="filterMeta"
+      <cn-q-card-view (addedTocart)="AddedToCart($event)" [progress_bar_color]="'#f7c72d'" *ngIf="whichListVisible[2]" [candidateQlist]="candidateQlist" [filterMeta]="filterMeta"
                       [candidates]="candidateQlist.appliedCandidates" [type]="'applied'" [jobId]="jobId"
                       [recuirterListCountModel]="recruiterJobView"></cn-q-card-view>
       <p class="empty-list-message" *ngIf="recruiterJobView.numberOfCandidatesApplied==0">There are no pending applications from candidates for this job posting.</p>
     </div>
     <div id="rejected-job" class="tab-pane fade">
-      <cn-q-card-view (addedTocart)="AddedToCart($event)" [progress_bar_color]="'#e91d62'" *ngIf="whichListVisible[3]" [candidateQlist]="candidateQlist" [filterMeta]="filterMeta"
+      <cn-q-card-view (addedTocart)="AddedToCart($event)" [progress_bar_color]="'#ff5722'" *ngIf="whichListVisible[3]" [candidateQlist]="candidateQlist" [filterMeta]="filterMeta"
                       [candidates]="candidateQlist.rejectedCandidates" [type]="'rejectedList'" [jobId]="jobId"
                       [recuirterListCountModel]="recruiterJobView"></cn-q-card-view>
       <p class="empty-list-message" *ngIf="recruiterJobView.numberOfCandidatesrejected==0">There are no candidates Rejected by you for this job posting.</p>

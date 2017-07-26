@@ -1,11 +1,4 @@
-$theme-color: #0d75fa;
-$white: #fff;
-$gray: #ccc;
-$green: #7E9B5D;
-$red: #EF5C48;
-$light-green: #B1D669;
-$orange: #EAA83D;
-
+@import '../../../../../../css/variables';
 
 .option {
   border-radius: 28px;
@@ -28,19 +21,19 @@ $orange: #EAA83D;
 }
 
 .exact {
-  background: $green;
+  background: $green2;
 }
 
 .above {
-  background: $light-green !important;
+  background: $green !important;
 }
 
 .below {
-  background: $orange !important;
+  background: $orange2 !important;
 }
 
 .missing {
-  background: $red !important;
+  background: $red2 !important;
 }
 
 .extra {

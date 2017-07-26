@@ -1,8 +1,8 @@
-$text-color: #576b7c;
+@import '../../../../../../css/variables';
 
 .additional-details {
   p {
-    color: $text-color;
+    color: $text-color2;
     font-size: 13px;
     margin: 0;
   }
