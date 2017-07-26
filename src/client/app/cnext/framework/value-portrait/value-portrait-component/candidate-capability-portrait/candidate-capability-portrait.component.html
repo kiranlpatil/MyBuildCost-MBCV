@@ -1,10 +1,105 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+<div class="value-portraot-candidate-capability">
+  <h3> Core Capabilities </h3>
+  <div class="value-portraot-candidate-capability-circle">
+    <div class="circle" *ngFor="let capability of capabilities">
+      <div class="inner-circle">
+        <span>
+          {{capability.name}}
+        </span>
+      </div>
+      <div class="tooltip-content">
+        <div class="complexities-list" *ngFor="let complexity of capability.complexities"> {{complexity.name}}</div>
+      </div>
+    </div>
+    <!--<div class="circle">
+      <div class="inner-circle">
+        <span>
+          Common product Implementation
+        </span>
+      </div>
+      <div class="tooltip-content">
+        <h1> Leavel of Client Interactions </h1>
+      </div>
+    </div>
+    <div class="circle">
+      <div class="inner-circle">
+        <span>
+          Common product Implementation
+        </span>
+      </div>
+      <div class="tooltip-content">
+        <h1> Leavel of Client Interactions </h1>
+      </div>
+    </div>
+    <div class="circle">
+      <div class="inner-circle">
+        <span>
+          Common product Implementation
+        </span>
+      </div>
+      <div class="tooltip-content">
+        <h1> Leavel of Client Interactions </h1>
+      </div>
+    </div>
+    <div class="circle">
+      <div class="inner-circle">
+        <span>
+          Common product Implementation
+        </span>
+      </div>
+      <div class="tooltip-content">
+        <h1> Leavel of Client Interactions </h1>
+      </div>
+    </div>
+    <div class="circle">
+      <div class="inner-circle">
+        <span>
+          Common product Implementation
+        </span>
+      </div>
+      <div class="tooltip-content">
+        <h1> Leavel of Client Interactions </h1>
+      </div>
+    </div>
+    <div class="circle">
+      <div class="inner-circle">
+        <span>
+          Common product Implementation
+        </span>
+      </div>
+      <div class="tooltip-content">
+        <h1> Leavel of Client Interactions </h1>
+      </div>
+    </div>
+    <div class="circle">
+      <div class="inner-circle">
+        <span>
+          Common product Implementation
+        </span>
+      </div>
+      <div class="tooltip-content">
+        <h1> Leavel of Client Interactions </h1>
+      </div>
+    </div>
+    <div class="circle">
+      <div class="inner-circle">
+        <span>
+          Common product Implementation
+        </span>
+      </div>
+      <div class="tooltip-content">
+        <h1> Leavel of Client Interactions </h1>
+      </div>
+    </div>
+    <div class="circle">
+      <div class="inner-circle">
+        <span>
+          Common product Implementation
+        </span>
+      </div>
+      <div class="tooltip-content">
+        <h1> Leavel of Client Interactions </h1>
+      </div>
+    </div>-->
+  </div>
+</div>

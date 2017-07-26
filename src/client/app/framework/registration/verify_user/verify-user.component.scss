@@ -19,6 +19,12 @@
   }
 }
 
+.email-send-loader {
+  bottom: 25px;
+  left: 2%;
+  position: absolute;
+}
+
 @media only screen and (max-width: 1280px) {
   .main-form-wrapper {
     form {

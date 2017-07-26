@@ -8,6 +8,7 @@ import {VerifyUserService} from "./verify-user.service";
 import {LocalStorageService} from "../../shared/localstorage.service";
 import {Message} from "../../shared/message";
 import {MessageService} from "../../shared/message.service";
+import {LoaderService} from "../../shared/loader/loader.service";
 
 @Component({
   moduleId: module.id,
@@ -30,10 +31,12 @@ export class VerifyUserComponent implements OnInit {
   BODY_BACKGROUND: string;
   submitMobileStatus: boolean;
   submitEmailStatus: boolean;
+  private isShowLoader: boolean = false;
 
 
   constructor(private _router: Router, private formBuilder: FormBuilder,
-              private verifyUserService: VerifyUserService, private messageService: MessageService) {
+              private verifyUserService: VerifyUserService, private messageService: MessageService,
+              private loaderService: LoaderService) {
 
     this.userForm = this.formBuilder.group({
       'mobile_number': ['', [ValidationService.requireMobileNumberValidator, ValidationService.mobileNumberValidator]],
@@ -90,10 +93,15 @@ export class VerifyUserComponent implements OnInit {
           error => (this.verifyFail(error)));
     } else {
       this.model.email = LocalStorageService.getLocalValue(LocalStorage.EMAIL_ID);
+      this.isShowLoader = true;
       this.verifyUserService.verifyUserByMail(this.model)
         .subscribe(
-          res => (this.verifySuccess(res)),
-          error => (this.verifyFail(error)));
+          res => {
+            this.verifySuccess(res);
+            this.isShowLoader = false;
+          },
+          error => (this.verifyFail(error))
+        );
     }
   }
 

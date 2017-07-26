@@ -45,6 +45,10 @@
                class="form-control" readonly/>
       </div>
 
+      <div *ngIf='isShowLoader' class='email-send-loader'>
+        <img src="assets/c-next/loader/main-loading.svg" height="20" width="160"/>
+      </div>
+
       <div class="button-group">
         <button type="submit" class="btn btn-success" [hidden]="isMailSent" [disabled]="isMailSent ==true">Send</button>
         <button type="submit" class="btn btn-danger" [hidden]="chkEmail" *ngIf="isMailSent ==true">Resend Verification

@@ -126,6 +126,9 @@ import {CandidateJobListComponent} from "./cnext/framework/candidate-dashboard/c
 import {CandidateJobListService} from "./cnext/framework/candidate-dashboard/candidate-job-list/candidate-job-list.service";
 import {CandidateViewComponent} from "./cnext/framework/one-page-summary/candidate-summary/candidate-view/candidate-view.component";
 import {ValuePortraitContainerComponent} from "./cnext/framework/value-portrait/value-portrait-container.component";
+import {ValuePortraitComponent} from "./cnext/framework/value-portrait/value-portrait-component/value-portrait.component";
+import {ValuePortraitHeader} from "./cnext/framework/value-portrait/value-portrait-component/value-portrait-header/value-portrait-header.component";
+import {CandidateCapabilityPortrait} from "./cnext/framework/value-portrait/value-portrait-component/candidate-capability-portrait/candidate-capability-portrait.component";
 import {CandidateInCartService} from "./cnext/framework/candidate-in-cart.service";
 import {FilterService} from "./cnext/framework/filters/filter/filter.service";
 import {RecruiterSharedHeaderComponent} from "./cnext/framework/recruiter-dashboard/recruiter-shared-header/recruiter-shared-header.component";
@@ -264,6 +267,9 @@ import {IndustryDataService} from "./cnext/framework/industry-data-service";
     ProgressBarComponent,
     CandidateViewComponent,
     ValuePortraitContainerComponent,
+    ValuePortraitComponent,
+    ValuePortraitHeader,
+    CandidateCapabilityPortrait,
     WorkAreaComponent,
     IndustryDetailsDirective,
     IndustryDataDirective,
