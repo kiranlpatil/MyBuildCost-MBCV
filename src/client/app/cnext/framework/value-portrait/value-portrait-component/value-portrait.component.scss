@@ -1,0 +1,85 @@
+@import '../../../../../css/variables';
+
+.value-portraot-bottom-section {
+  padding-top: 50px;
+  .value-portraot-candidate-industry {
+    .icon {
+      background: url(../assets/c-next/card-view/sprite.png) no-repeat -40px -477px;
+      float: left;
+      height: 25px;
+      width: 50px;
+    }
+    label {
+      color: $black1;
+      float: left;
+      font-family: 'gothamrnd-book';
+      font-weight: bold;
+      margin: 3px 5px 25px 0;
+    }
+    span {
+      float: left;
+      padding-top: 3px;
+    }
+  }
+
+  .value-portraot-candidate-keyskills {
+    .icon {
+      background: url(../assets/c-next/card-view/sprite.png) no-repeat -91px -476px;
+      float: left;
+      height: 25px;
+      width: 50px;
+    }
+    label {
+      color: $black1;
+      float: left;
+      font-family: 'gothamrnd-book';
+      font-weight: bold;
+      margin: 3px 5px 25px 0;
+    }
+    span {
+      float: left;
+      padding-top: 3px;
+    }
+  }
+}
+
+.avout-myself-btn {
+  background: $gray;
+  border-radius: 7px;
+  box-shadow: 0 0 4px 2px rgba(125, 125, 125, 0.28), 0 0 1px 0 rgba(0, 0, 0, 0.16);
+  margin: 0 10px;
+  padding: 10px;
+  width: 50%;
+}
+
+.avout-myself-btn > .tooltip-content3 {
+  opacity: 0;
+  display: inline-block;
+  position: absolute;
+  width: 400px;
+  margin-left: -148px;
+  top: 52px;
+  background-color: $gray;
+  padding: 10px;
+  transition: all .5s linear;
+  box-shadow: 3px 3px 15px 1px #ccc;
+  border-radius: 4px;
+  visibility: hidden;
+  right: 10px;
+}
+
+.avout-myself-btn:hover > .tooltip-content3 {
+  opacity: 1;
+  visibility: visible;
+}
+
+.tooltip-content3:after {
+  content: "";
+  border-bottom: 10px solid $gray;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  position: absolute;
+  top: -10px;
+  left: 30px;
+  margin-left: -10px;
+}
