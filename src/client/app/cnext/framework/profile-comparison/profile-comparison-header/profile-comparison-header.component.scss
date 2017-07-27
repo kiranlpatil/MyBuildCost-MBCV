@@ -1,5 +1,6 @@
 .candidate-compare-header {
   position: relative;
+  clear: both;
 
   .matching-capabilities {
     background: #fff;
@@ -19,14 +20,14 @@
       width: 100%;
       font-weight: bold;
       text-align: left;
-      padding: 0 15px;
+      padding: 0 20px;
       margin: 5px 0;
     }
   }
 
   .matching-candidate-details {
     float: left;
-    width: 744px;
+    width: auto;
     padding-left: 272px;
 
     .candidate-details-container {
@@ -71,6 +72,7 @@
 
         &:hover {
           background: transparent;
+          color: #29b6f6;
         }
       }
 
