@@ -6,21 +6,21 @@
   <cn-candidate-header [candidate]="candidate" *ngIf="candidate != undefined"></cn-candidate-header>
   <div class="bar-container profile-header">
     <ul class="bar container" id="bar">
-      <li [class.active]="whichStepsVisible[0] && !candidate.isSubmitted" [class.current]="highlightedSection.name=='Profile'
+      <li [class.active]="whichStepsVisible[0] || candidate.isSubmitted" [class.current]="highlightedSection.name=='Profile'
       || highlightedSection.name=='Industry'" ><p>About Me</p>
       </li>
-      <li [class.active]="whichStepsVisible[1] && !candidate.isSubmitted " [class.current]="highlightedSection.name=='Work-Area'"><p>Area of
+      <li [class.active]="whichStepsVisible[1] || candidate.isSubmitted " [class.current]="highlightedSection.name=='Work-Area'"><p>Area of
         Work</p></li>
-      <li [class.active]="whichStepsVisible[2] && !candidate.isSubmitted " [class.current]="highlightedSection.name=='Capabilities' || highlightedSection.name=='Complexities' "><p>
+      <li [class.active]="whichStepsVisible[2] || candidate.isSubmitted " [class.current]="highlightedSection.name=='Capabilities' || highlightedSection.name=='Complexities' "><p>
         Capabilities</p></li>
       <!--<li [class.active]="whichStepsVisible[3]" [class.current]="highlightedSection.name=='Complexities'"><p>
         Complexities</p></li>-->
-      <li [class.active]="whichStepsVisible[4] && !candidate.isSubmitted "
+      <li [class.active]="whichStepsVisible[4] || candidate.isSubmitted "
           [class.current]="highlightedSection.name=='Proficiencies' || highlightedSection.name=='IndustryExposure'"><p>
         My Skills</p></li>
       <!--<li [class.active]="whichStepsVisible[5]" [class.current]="highlightedSection.name=='Professional-Details'"><p>
         Professional Data</p></li>-->
-      <li [class.active]="whichStepsVisible[6] && !candidate.isSubmitted "
+      <li [class.active]="whichStepsVisible[6]"
           [class.current]="highlightedSection.name=='Professional-Details' ||
           highlightedSection.name=='AboutMySelf' ||
           highlightedSection.name=='AcademicDetails' ||

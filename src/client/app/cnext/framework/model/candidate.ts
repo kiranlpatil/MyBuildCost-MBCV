@@ -35,6 +35,7 @@ export class Section {
   name: string = '';
   date: Date;
   isLocked: boolean;
+  iscompleted: boolean;
   isDisable: boolean;
   isProficiencyFilled: boolean = false;
 }

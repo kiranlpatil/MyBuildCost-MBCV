@@ -131,7 +131,6 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
     }
     this.getCapabilityDetail(this.currentCapabilityNumber);
     this.currentComplexity = this.getCurrentComplexityPosition();
-    console.log("NOW AT", this.currentComplexity);
     this.getComplexityDetails(this.complexityIds[this.currentComplexity]);
   }
 
@@ -151,7 +150,7 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
       this.highlightedSection.isLocked = true;
     }
     this.complexityService.change(true);
-    if (this.highlightedSection.isProficiencyFilled) {
+    if (this.highlightedSection.isProficiencyFilled && this.highlightedSection.iscompleted) {
       this.highlightedSection.name = 'none';
     } else {
       this.highlightedSection.name = 'Proficiencies';
@@ -161,23 +160,22 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
   }
 
   onAnswered(complexityDetail: ComplexityDetails) {
-
     this.isValid = true;
     this.complexities[this.complexityIds[this.currentComplexity]] = complexityDetail.userChoice;
     this.complexityData[this.complexityIds[this.currentComplexity]] = complexityDetail;
-    this.onNext();
+    //this.onNext();
   }
 
   onCapabilityAnswered(capability: Capability) {
     this.capabilities[this.currentCapabilityNumber] = capability;
-    let currentNumber = this.currentCapabilityNumber;
+    /*let currentNumber = this.currentCapabilityNumber;
     if (this.singleComplexity === false) {
       if (currentNumber + 1 === this.capabilities.length) {
         this.saveComplexity();
       } else if (this.currentCapabilityNumber < this.capabilities.length) {
         this.onNextCapability();
       }
-    }
+    }*/
   }
 
   oncurrentComplexityAnswered(complexityDetails: ComplexityDetails) {
@@ -205,6 +203,7 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
     let currentCapability = this.currentCapabilityNumber;
     if (currentCapability + 1 === this.capabilities.length) {
       this.isValid = true;
+      this.saveComplexity();
       this.highlightedSection.name = 'Proficiencies';
       return;
     }
