@@ -287,7 +287,7 @@ export class CandidateProfileComponent implements OnInit, DoCheck {
     this.candidateForRole = candidateData.data[0].industry.roles;
     this.candidateForCapability = candidateData.data[0].industry.roles;
     this.candidateForComplexity = candidateData.data[0].industry.roles;
-    if (this.candidate.jobTitle === undefined || this.candidate.industry.name == undefined) {
+    if (this.candidate.jobTitle === undefined) {
       //TODO: Shrikant write logic which should be the active section
       this.highlightedSection.name = 'GuideTour';
     }
