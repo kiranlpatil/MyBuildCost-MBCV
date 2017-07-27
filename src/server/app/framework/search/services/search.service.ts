@@ -302,7 +302,7 @@ class SearchService {
     profileComparisonResult.educationMatch = '';
     profileComparisonResult.proficiencies = candidate.proficiencies;
     //profileComparisonResult.proficienciesMatch = [];
-    //profileComparisonResult.profileComparisonHeader = candidate.;
+    profileComparisonResult.profileComparisonHeader = candidate.userId;
     profileComparisonResult.roleType = candidate.roleType;
     profileComparisonResult.salaryMatch = '';
     //profileComparisonResult.status = candidate.status;
@@ -314,11 +314,6 @@ class SearchService {
     //profileComparisonResult.interestedIndustryMatch = [];
     //profileComparisonResult.releaseMatch = '';
     return profileComparisonResult;
-    // {"match_map:{}","proficienciesUnMatch[]","proficienciesMatch[]","interestedIndustryMatch[[]","releaseMatch","educationMatch","salaryMatch","experienceMatch","isCompleted:boolean","isSubmitted:boolean","isVisible:boolean","certifications[]","interestedIndustries[]","awards[]", "academics[]","location{}","_id","userId","capability_matrix{}","jobTitle","aboutMyself","job_list[]","proficiencies[]","employmentHistory[]","professionalDetails{}"}
-    /*if(candidate.additionalCapabilites){
-
-     }*/
-
   }
 
   buildMultiCompareCapabilityView(job: any, newCandidate: ProfileComparisonDataModel, industries: any, isCandidate: any) {
@@ -533,7 +528,7 @@ class SearchService {
 
   getMultiCompareResult(candidate: any, jobId: string, isCandidate: boolean, callback: (error: any, result: any) => void) {
 
-    this.candidateRepository.retrieveByMultiIds(candidate, {'industry': 0}, (err: any, candidateRes: any) => {
+    this.candidateRepository.retrieveByMultiIdsAndPopulate(candidate, {'industry': 0}, (err: any, candidateRes: any) => {
       if (err) {
         callback(err, null);
       } else {

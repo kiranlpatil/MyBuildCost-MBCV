@@ -11,6 +11,7 @@ import CertificationModel = require("./certification.model");
 import AwardModel = require("./award.model");
 import IndustryModel = require("./industry.model");
 import JobListModel = require("./job-list.model");
+import UserModel = require("./user.model");
 
 
 interface CandidateModel {
@@ -21,7 +22,7 @@ interface CandidateModel {
   aboutMyself: string;
   certifications: CertificationModel[];
   awards: AwardModel[];
-  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' };
+  userId: UserModel;
   location: LocationModel;
   industry: IndustryModel;
   interestedIndustries: string[];

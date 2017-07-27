@@ -2,18 +2,14 @@ import User = require("../mongoose/user");
 import JobProfileModel = require("./jobprofile.model");
 
 interface ProfileComparisonHeaderModel {
-  id: any;
+ // _id: any;
   isCandidate: boolean;
   first_name: string;
   last_name: string;
-  birth_year: number;
+  //birth_year: number;
   email: string;
-  mobile_number: string;
-  pin: string;
+  mobile_number: number;
   picture: string;
-
-  matchingPercentage: number;
-  listStatus: string;
 }
 
 export = ProfileComparisonHeaderModel
