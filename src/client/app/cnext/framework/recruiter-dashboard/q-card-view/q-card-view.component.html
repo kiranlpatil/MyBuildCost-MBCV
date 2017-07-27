@@ -37,6 +37,9 @@
          *ngFor="let item of candidates | qcardmatching: matchFormat: totalQCardMatches :type | qcardlistfilter:filterMeta:qCardCount | qcardlistsort:[qCardModel.sortValue,matchFormat];let i=index;">
       <div class="panel clearfix" (click)="viewProfile(item)">
         <ul>
+          <li>
+            <span class="compare-candidate-icon" title="Compare the Candidates"></span>
+          </li>
           <li *ngIf="type=='matchedList'">
             <span class="glyphicon glyphicon-star" *ngIf="emailsOfShrortListedCandidates.indexOf(item.email)==-1"
                   (click)="addRemoveToShortList(item)" title="Shortlist the candidate"></span>

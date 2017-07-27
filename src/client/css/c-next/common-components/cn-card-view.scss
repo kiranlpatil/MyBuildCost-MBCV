@@ -41,6 +41,7 @@
 
       .glyphicon-star {
         font-size: 15px;
+        top: 3px;
       }
 
       .shortlisted {
@@ -441,6 +442,15 @@ header {
   height: 26px;
   position: absolute;
   left: 0;
+  cursor: pointer;
+}
+
+.compare-candidate-icon {
+  background: url(../assets/c-next/card-view/sprite.png) no-repeat -10px -566px;
+  width: 20px;
+  height: 20px;
+  display: block;
+  cursor: pointer;
 }
 
 #applied,
@@ -513,6 +523,10 @@ header {
     position: absolute;
     left: 0;
   }
+
+  .compare-candidate-icon {
+    background: url(../assets/c-next/card-view/sprite.png) no-repeat -54px -566px;
+  }
 }
 
 #rejected,
@@ -581,6 +595,9 @@ header {
   .company-date {
     right: 30px;
   }
+  .compare-candidate-icon {
+    background: url(../assets/c-next/card-view/sprite.png) no-repeat -106px -566px;
+  }
 }
 
 #cart-job {
@@ -623,6 +640,9 @@ header {
   .proficiencies-icon {
     background: url("../assets/c-next/card-view/purple-icons/proficiency.png") no-repeat 5px 2px;
     min-height: 53px !important;
+  }
+  .compare-candidate-icon {
+    background: url(../assets/c-next/card-view/sprite.png) no-repeat -156px -566px;
   }
 }
 
