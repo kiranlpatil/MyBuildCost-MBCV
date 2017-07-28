@@ -1,5 +1,4 @@
 import User = require("../mongoose/user");
-import * as mongoose from "mongoose";
 import LocationModel = require("./location.model");
 import AcademicModel = require("./academic.model");
 import ProfessionalDetailsModel = require("./professional-details.model");
@@ -23,7 +22,7 @@ interface CandidateModel {
   aboutMyself: string;
   certifications: CertificationModel[];
   awards: AwardModel[];
-  userId: UserModel;
+  userId: any;
   location: LocationModel;
   areaOfWork: string[];
   industry: IndustryModel;
