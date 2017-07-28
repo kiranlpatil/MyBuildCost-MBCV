@@ -62,18 +62,21 @@
     }
 
     .candidate-attribute-list p {
-      @extend %text-ellipsis;
-      width: auto !important;
-      display: inline-block;
       font-size: 12px;
       line-height: 14px;
       text-align: left;
-      position: relative;
-      max-width: calc(100% - 10px);
       margin: 12px 5px 0;
+      white-space: normal;
+      width: 100%;
+      max-width: 100%;
     }
 
     .candidate-attribute-list .matching-attribute {
+      @extend %text-ellipsis;
+      display: inline-block;
+      width: auto !important;
+      max-width: calc(100% - 10px);
+      position: relative;
       border: 1px solid #7ba015;
       border-radius: 25px;
       padding: 5px 10px 5px 25px;
@@ -81,6 +84,10 @@
     }
 
     .candidate-attribute-list .mismatch-attribute {
+      display: inline-block;
+      width: auto !important;
+      max-width: calc(100% - 10px);
+      position: relative;
       border: 1px solid #fe3d01;
       border-radius: 25px;
       padding: 5px 10px 5px 27px;
