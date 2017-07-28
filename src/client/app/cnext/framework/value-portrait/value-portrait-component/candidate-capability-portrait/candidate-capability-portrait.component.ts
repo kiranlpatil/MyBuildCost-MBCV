@@ -494,7 +494,7 @@ export class CandidateCapabilityPortrait implements OnInit {
         "temp_mobile": 0,
         "picture": "/assets/framework/images/dashboard/default-profile.png"
       }
-     };*/
+     };
 
     /*if(this.candidate.industry.name != ''){
      for (let role of this.candidate.industry.roles) {

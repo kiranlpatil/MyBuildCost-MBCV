@@ -1,19 +1,23 @@
 <div class="value-portraot-candidate-capability">
   <h3> Core Capabilities </h3>
   <div class="value-portraot-candidate-capability-circle">
-    <div class="circle" *ngFor="let capability of candidate.capabilities;let i=index;" [class.after-five]="i>4">
+    <div *ngFor="let capability of candidate.capabilities;let i=index;" [class.five-element]="i==4"
+         [class.six-element]="i==5" [class.fifteen-element]="i==14">
+      <div class="circle" [class.second-line]="i>4 && i < 10">
       <div class="inner-circle">
         <span>
           {{capability.name}}
         </span>
       </div>
       <div class="tooltip-content">
-        <div class="complexities-list" *ngFor="let complexity of capability.complexities">
-          {{complexity.name}}
+        <div class="complexities-list" *ngFor="let complexity of capability.complexities"> {{complexity.name}}
           <span class="tooltip-content1">
             {{complexity.answer}}
           </span>
         </div>
+      </div>
+    </div>
+      <div style="width: 100%;display: inline-block;" *ngIf="((i+1)%5==0)">
       </div>
     </div>
   </div>

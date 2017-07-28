@@ -6,26 +6,33 @@
   width: 100%;
   h3 {
     background: $theme-color;
+    border-radius: 7px;
+    box-shadow: -1px 2px 9px 1px rgba(0, 0, 0, 0.26), 0 2px 10px 0 rgba(0, 0, 0, 0.16);
     color: $white;
     display: inline-block;
-    font-size: 14px;
+    font-size: 18px;
     margin: 0;
-    padding: 10px;
+    padding: 15px 10px;
     width: 226px;
   }
 }
 
 .value-portraot-candidate-capability-circle {
-  display: table;
+  /*display: table;*/
   margin: 0 auto;
+  width: 1076px;
   .circle {
     border-radius: 50%;
     box-shadow: -1px 2px 9px 1px rgba(0, 0, 0, 0.26), 0 2px 10px 0 rgba(0, 0, 0, 0.16);
     display: inline-block;
     height: 175px;
     width: 175px;
-    margin: 25px;
+    margin: 20px 20px 0;
     position: relative;
+    float: left;
+  }
+  .second-line {
+    float: right;
   }
   .inner-circle {
     border-radius: 50%;
@@ -50,6 +57,22 @@
   .circle:nth-child(odd) {
     border: 2px solid #f48c37;
   }
+  .five-element,
+  .six-element,
+  .fifteen-element {
+    .circle {
+      .tooltip-content1 {
+        left: -212px;
+        right: inherit;
+        &:after {
+          border-bottom: 10px solid #fff;
+          right: -15px;
+          left: initial;
+          border-top: 0;
+        }
+      }
+    }
+  }
 }
 
 .circle > .tooltip-content {
@@ -61,7 +84,7 @@
   opacity: 0;
   padding: 10px;
   position: absolute;
-  transition: all .5s linear;
+  transition: all .1s linear;
   width: 280px;
   z-index: 99;
   margin-top: 188px;
@@ -104,7 +127,7 @@
   width: 200px;
   background-color: #fff;
   padding: 10px;
-  transition: all .5s linear;
+  transition: all .1s linear;
   box-shadow: 3px 3px 15px 1px #ccc;
   border-radius: 4px;
   right: -212px;
@@ -122,7 +145,7 @@
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
   position: absolute;
-  bottom: 15px;
+  top: 13px;
   left: -6px;
   margin-left: -8px;
   transform: rotate(90deg);
