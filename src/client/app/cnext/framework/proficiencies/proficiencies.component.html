@@ -9,7 +9,7 @@
           <label>Add Key Skills</label>
         </div>
         <cn-multi-select [data]="proficiencies" [selectedData]="choosedproficiencies" [maxLength]="maxProficiencies"
-                         (onComplete)="onProficiencyComplete($event)" [submitStatus] = "submitStatus"
+                         (onComplete)="onProficiencyComplete($event)" [submitStatus] = "submitStatus" [type]="'xyz'"
                          [requiredKeySkillsValidationMessage] = "requiredKeySkillsValidationMessage"
                          [maxKeySkillsValidationMessage] = "maxKeySkillsValidationMessage">
 

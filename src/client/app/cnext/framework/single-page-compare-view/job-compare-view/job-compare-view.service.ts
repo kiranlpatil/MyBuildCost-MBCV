@@ -57,6 +57,7 @@ export class JobCompareService extends BaseService {
       }else {
         cap = new Capability();
         cap.name= data[value1].capability_name;
+        cap.code= data[value1].capability_code;
         complexities  = new Array(0);
       }
       for(let value2 in data) {

@@ -30,7 +30,7 @@ export class MultiSelectComponent implements OnChanges {
   private showModalStyle: boolean = false;
   private otherProficiency: string = '';
   private disableTextField: boolean = false;
-  private noMatchFoundText = Messages.MSG_NO_MATCH_FOUND_TEXT;
+  private noMatchFoundText :string=Messages.MSG_NO_MATCH_FOUND_TEXT;
   @ViewChild('myInput')
   private _inputElement: ElementRef;
 
@@ -73,9 +73,9 @@ export class MultiSelectComponent implements OnChanges {
       this.submitStatus = false;
       if (this.selectedProficiencies.length < this.maxLength) {
         this.disableTextField=false;
-        if (this.selectedProficiencies.indexOf(newVal) === -1) {
-          this.selectedProficiencies.push(newVal);
-          this.deleteSelectedProfeciency(newVal);
+        if (this.selectedProficiencies.indexOf(newVal.trim()) === -1) {
+          this.selectedProficiencies.push(newVal.trim());
+          this.deleteSelectedProfeciency(newVal.trim());
           this.onComplete.emit(this.selectedProficiencies);
         }
         if(setOfCapabilityNumber.indexOf(this.selectedProficiencies.length) > -1) {
@@ -101,7 +101,7 @@ export class MultiSelectComponent implements OnChanges {
     let setOfCapabilityNumber=[4,3,2,1];
     this.showAlert = false;
     for (let i = 0; i < this.selectedProficiencies.length; i++) {
-      if (this.selectedProficiencies[i] === newVal.currentTarget.id.trim()) {
+      if (this.selectedProficiencies[i].trim() === newVal.currentTarget.id.trim()) {
         this.selectedProficiencies.splice(i, 1);
         if( newVal.currentTarget.id.trim().length>1) {
         this.Proficiencies.push(newVal.currentTarget.id.trim());}
@@ -138,7 +138,13 @@ export class MultiSelectComponent implements OnChanges {
       this.showModalStyle =false;
     }
   }
-
+  /*onSkillChange(skill:string) {debugger
+    let xyz:any=document.getElementById(this.type);
+  if( xyz !==null && xyz.value !== null){
+    this.noMatchFoundText=' \' '+xyz.value +' \' '+ Messages.MSG_NO_MATCH_FOUND_TEXT;
+  }
+    return this.noMatchFoundText;
+  }*/
   getStyleModal() {
     if (this.showModalStyle) {
       this._inputElement.nativeElement.focus();
@@ -157,7 +163,7 @@ export class MultiSelectComponent implements OnChanges {
     this.showModalStyle = false;    // popup box related.
     if (this.otherProficiency !== undefined && this.otherProficiency.trim() !== ' ') {
       for (let i = 0; i < this.masterDataProficiencies.length; i++) {
-        if (this.masterDataProficiencies[i].toUpperCase() === this.otherProficiency.toUpperCase()) {
+        if (this.masterDataProficiencies[i].toUpperCase().trim() === this.otherProficiency.toUpperCase().trim()) {
           this.alreadyPresent = true;
           if( this.otherProficiency.length===1) {
             this.selectedProficiencyModel(this.otherProficiency);

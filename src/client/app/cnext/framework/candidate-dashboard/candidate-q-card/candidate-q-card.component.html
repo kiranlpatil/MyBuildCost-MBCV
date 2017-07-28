@@ -24,7 +24,7 @@
           <br/><span *ngIf="job.proficiencies.length > 5">( {{job.proficiencies.length-5}} More )</span>
         </p>
       </div>
-      <div class="company-date">
+      <div class="company-date" title="Job Posting Date">
         {{job.postingDate| date:'mediumDate'}}
       </div>
       <div class="col-md-4 col-sm-5 col-xs-6 no-padding canvas-cricle" title="Matching Percentage">
@@ -70,7 +70,7 @@
         </p>-->
       </div>
     </div>
-    <div class="company-profile-picture">
+    <div class="company-profile-picture" title="Company Logo">
       <img src="assets/c-next/company-details/company-logo-default.png" />
     </div>
   </div>

@@ -83,7 +83,8 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
           this.complexityData = capa.data;
           let savedCapabilities:Capability[]=new Array(0);
           for( let i=0;i<this.capabilities.length;i++ ) {
-            savedCapabilities.push(this.capabilities[i]);
+            let originalcapability =Object.assign({}, this.capabilities[i]);
+            savedCapabilities.push(originalcapability);
           }
           this.capabilities = this.jobCompareService.getStandardMatrix(capa.data);
           if(!this.isEqualArrays(this.capabilities,savedCapabilities)) {
@@ -148,6 +149,7 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
     if (this.isCandidate) {
       // this.showModalStyle = !this.showModalStyle;
       this.highlightedSection.isLocked = true;
+
     }
     this.complexityService.change(true);
     if (this.highlightedSection.isProficiencyFilled && this.highlightedSection.iscompleted) {
@@ -240,14 +242,12 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
       }
     } else if (this.currentComplexity <= this.complexityIds.length - 1) {
       if (this.singleComplexity === false) {
-        setTimeout(() => {
           this.getComplexityDetails(this.complexityIds[++this.currentComplexity]);
-        }, 1002);
       }
     }
-    setTimeout(() => {
+   /* setTimeout(() => {
       this.slideToRight = false;
-    }, 3000);
+    }, 3000);*/
   }
 
   onPrevious() {
