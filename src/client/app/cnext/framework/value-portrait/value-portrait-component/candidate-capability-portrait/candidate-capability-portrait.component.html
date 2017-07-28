@@ -3,7 +3,7 @@
   <div class="value-portraot-candidate-capability-circle">
     <div class="circle-list" *ngFor="let capability of candidate.capabilities;let i=index;" [class.five-element]="i==4"
          [class.six-element]="i==5" [class.eleven-element]="i==10" [class.fifteen-element]="i==14">
-      <div class="circle" [class.second-line]="i>4 && i < 10">
+      <div *ngIf="i < 10 || showMore" class="circle" [class.second-line]="i>4 && i < 10">
       <div class="inner-circle">
         <span>
           {{capability.name}}
@@ -23,4 +23,5 @@
       </div>
     </div>
   </div>
+  <button *ngIf="showToggleButton" (click)="showMore = !showMore">Show More</button>
 </div>
