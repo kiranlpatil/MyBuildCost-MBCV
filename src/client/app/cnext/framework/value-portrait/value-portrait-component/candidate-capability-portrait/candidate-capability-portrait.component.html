@@ -1,8 +1,8 @@
 <div class="value-portraot-candidate-capability">
   <h3> Core Capabilities </h3>
   <div class="value-portraot-candidate-capability-circle">
-    <div *ngFor="let capability of candidate.capabilities;let i=index;" [class.five-element]="i==4"
-         [class.six-element]="i==5" [class.fifteen-element]="i==14">
+    <div class="circle-list" *ngFor="let capability of candidate.capabilities;let i=index;" [class.five-element]="i==4"
+         [class.six-element]="i==5" [class.eleven-element]="i==10" [class.fifteen-element]="i==14">
       <div class="circle" [class.second-line]="i>4 && i < 10">
       <div class="inner-circle">
         <span>
