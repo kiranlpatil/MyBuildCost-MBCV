@@ -11,14 +11,16 @@
   .capability-percentage {
     height: 40px;
     border-bottom: 1px solid #fff;
-    padding: 0 10px;
 
     p {
       margin: 0;
       color: #fff;
-      line-height: 40px;
+      line-height: 39px;
       font-size: 16px;
       text-align: right;
+      font-weight: 500;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+      padding: 0 10px;
     }
   }
 }
