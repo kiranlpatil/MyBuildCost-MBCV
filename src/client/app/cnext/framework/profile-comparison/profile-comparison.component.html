@@ -4,7 +4,7 @@
   [profileComparisonResult]="profileComparison.profileComparisonData"></cn-profile-capability-comparison>
 <cn-profile-attribute-comparison [profileComparisonResult]="profileComparison.profileComparisonData"></cn-profile-attribute-comparison>
 -->
-
+<div *ngIf="profileComparisonData.length">
 <div class="compare-candidate-view">
   <div class="compare-candidate-container">
     <cn-profile-comparison-header [profileComparisonResult]="profileComparisonData"
@@ -14,4 +14,5 @@
     <cn-profile-attribute-comparison
             [profileComparisonResult]="profileComparisonData"></cn-profile-attribute-comparison>
   </div>
+</div>
 </div>

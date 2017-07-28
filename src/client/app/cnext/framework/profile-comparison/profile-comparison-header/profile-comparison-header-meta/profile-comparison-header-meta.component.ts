@@ -1,4 +1,4 @@
-import {Component, Input, Output} from "@angular/core";
+import {Component, Input, OnChanges, OnInit, Output} from "@angular/core";
 import {EventEmitter} from "@angular/common/src/facade/async";
 import {ProfileComparisonHeaderMeta} from "./profile-comparison-header-meta";
 
@@ -10,13 +10,33 @@ import {ProfileComparisonHeaderMeta} from "./profile-comparison-header-meta";
 
 })
 
-export class ProfileComparisonHeaderMetaComponent {
+export class ProfileComparisonHeaderMetaComponent implements OnChanges, OnInit {
 
    @Input() profileMeta: ProfileComparisonHeaderMeta;
-    @Input() matchingPercentage: number;
+  @Input() matchingPercentage: number;
    @Output() actionOnComparisonList = new EventEmitter();
+  imagePath: string;
+
   constructor() {}
 
+  ngOnChanges(changes: any) {
+    if (changes.profileMeta.currentValue != undefined) {
+      this.assignProfile();
+    }
+  }
+
+  ngOnInit() {
+    this.assignProfile();
+  }
+
+  assignProfile() {
+    if (this.profileMeta.picture) {
+      //this.imagePath = AppSettings.IP +'/'+ this.profileMeta.picture.replace('"',' ');
+      this.imagePath = "assets/framework/images/dashboard/profile.png";
+    } else {
+      this.imagePath = "assets/framework/images/dashboard/profile.png";
+    }
+  }
   actionToPerformOnCompare() {
     this.actionOnComparisonList.emit();
   }

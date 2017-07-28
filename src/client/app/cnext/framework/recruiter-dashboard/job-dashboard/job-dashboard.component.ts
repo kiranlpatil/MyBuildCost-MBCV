@@ -194,9 +194,10 @@ export class JobDashboardComponent implements OnInit {
   }
 
   performActionOnComparisonList(data: any) {
-    if (data.action = 'Remove') {
+    /*if (data.action = 'Remove') {
       this.profileComparison.profileComparisonData.splice(data.value, 1);
-    }
+     this.recruiterJobView.numberOfCandidatesInCompare--;
+     }*/
   }
 
   getCompareDetail() {

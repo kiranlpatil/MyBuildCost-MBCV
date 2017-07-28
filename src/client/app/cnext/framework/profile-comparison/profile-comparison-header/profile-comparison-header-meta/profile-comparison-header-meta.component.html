@@ -3,8 +3,8 @@
 <div>{{profileMeta.picture}}</div>-->
 
 <div class="candidate-meta">
-  <p title="Matching Percentage">{{matchingPercentage}}</p>
-  <img src="assets/framework/images/dashboard/profile.png" alt="Candidate Profile Picture" title="Candidate Name">
+  <p title="Matching Percentage">{{matchingPercentage | number:'1.0-0'}}</p>
+  <img src="{{imagePath}}" alt="Candidate Profile Picture" title="Candidate Name">
   <h6 title="Candidate Name">{{profileMeta.first_name}}{{profileMeta.last_name}}</h6>
 </div>
 
