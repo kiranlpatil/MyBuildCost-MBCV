@@ -451,6 +451,10 @@ header {
   height: 20px;
   display: block;
   cursor: pointer;
+  position: absolute;
+  top: 15px;
+  right: 50px;
+  z-index: 20;
 }
 
 #applied,
@@ -526,6 +530,7 @@ header {
 
   .compare-candidate-icon {
     background: url(../assets/c-next/card-view/sprite.png) no-repeat -54px -566px;
+    right: 25px !important;
   }
 }
 
