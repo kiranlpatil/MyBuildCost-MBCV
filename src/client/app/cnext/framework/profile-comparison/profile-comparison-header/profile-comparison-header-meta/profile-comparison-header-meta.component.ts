@@ -1,6 +1,7 @@
 import {Component, Input, OnChanges, OnInit, Output} from "@angular/core";
 import {EventEmitter} from "@angular/common/src/facade/async";
 import {ProfileComparisonHeaderMeta} from "./profile-comparison-header-meta";
+import {AppSettings} from "../../../../../framework/shared/constants";
 
 @Component({
   moduleId:module.id,
@@ -32,7 +33,8 @@ export class ProfileComparisonHeaderMetaComponent implements OnChanges, OnInit {
   assignProfile() {
     if (this.profileMeta.picture) {
       //this.imagePath = AppSettings.IP +'/'+ this.profileMeta.picture.replace('"',' ');
-      this.imagePath = "assets/framework/images/dashboard/profile.png";
+      this.imagePath = AppSettings.IP + this.profileMeta.picture.substring(4).replace('"', '');
+      //this.imagePath = "assets/framework/images/dashboard/profile.png";
     } else {
       this.imagePath = "assets/framework/images/dashboard/profile.png";
     }
