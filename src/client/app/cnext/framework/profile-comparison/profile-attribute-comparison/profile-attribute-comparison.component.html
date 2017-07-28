@@ -7,8 +7,12 @@
       <!-- Start: repeat this div using for loop -->
       <div class="candidate-attribute-list" *ngFor="let item of profileComparisonResult">
         <div *ngFor="let value of item.proficiencies">
-          <p class="matching-attribute">
+          <p *ngIf="item.proficienciesMatch.indexOf(value) !== -1" class="matching-attribute">
             <span class="matching-attribute-icon"></span>
+            {{value}}
+          </p>
+          <p *ngIf="item.proficienciesMatch.indexOf(value) == -1" class="mismatch-attribute">
+            <span class="mismatch-attribute-icon"></span>
             {{value}}
           </p>
         </div>
@@ -23,8 +27,12 @@
       <!-- Start: repeat this div using for loop -->
       <div class="candidate-attribute-list" *ngFor="let item of profileComparisonResult">
         <div>
-          <p class="matching-attribute">
+          <p *ngIf="item.salaryMatch === 'exact'" class="matching-attribute">
             <span class="matching-attribute-icon"></span>
+            {{item?.professionalDetails.currentSalary}}
+          </p>
+          <p *ngIf="item.salaryMatch !== 'exact'" class="mismatch-attribute">
+            <span class="mismatch-attribute-icon"></span>
             {{item?.professionalDetails.currentSalary}}
           </p>
         </div>
@@ -39,8 +47,12 @@
     <!-- Start: repeat this div using for loop -->
       <div class="candidate-attribute-list" *ngFor="let item of profileComparisonResult">
         <div>
-          <p class="matching-attribute">
+          <p *ngIf="item?.experienceMatch == 'exact'" class="matching-attribute">
             <span class="matching-attribute-icon"></span>
+            {{item?.professionalDetails.experience}}
+          </p>
+          <p *ngIf="item?.experienceMatch !== 'exact'" class="mismatch-attribute">
+            <span class="mismatch-attribute-icon"></span>
             {{item?.professionalDetails.experience}}
           </p>
         </div>

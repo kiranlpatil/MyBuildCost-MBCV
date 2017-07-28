@@ -7,7 +7,7 @@
   </div>
   <div class="matching-candidate-details">
     <!-- Start: repeat this div using for loop -->
-    <div class="candidate-details-container" *ngFor="let item of profileComparisonResult">
+    <div class="candidate-details-container" *ngFor="let item of profileComparisonResult;let i = index">
       <div class="dropdown">
         <button class="btn dropdown-toggle" type="button" data-toggle="dropdown"><span
                 class="glyphicon glyphicon-option-vertical"></span></button>
@@ -15,7 +15,7 @@
           <li (click)="actionToPerformOnCompareList('AddToCart',item.profileComparisonHeader)"><a href="#">Add to
             Cart</a></li>
           <li (click)="actionToPerformOnCompareList('Reject',item.profileComparisonHeader)"><a href="#">Reject</a></li>
-          <li (click)="actionToPerformOnCompareList('Remove',item.profileComparisonHeader)"><a href="#">Remove</a></li>
+          <li (click)="actionToPerformOnCompareList('Remove',i)"><a href="#">Remove</a></li>
         </ul>
       </div>
       <cn-profile-comparison-header-meta [matchingPercentage]="item.matchingPercentage"

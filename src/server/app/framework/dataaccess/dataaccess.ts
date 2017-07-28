@@ -17,7 +17,8 @@ class DataAccess {
 
     //var host = config.get('TplSeed.database.host');
     var host = '52.89.221.23';
-    var name = config.get('TplSeed.database.name');
+    //var name = config.get('TplSeed.database.name');
+    var name = 'JobMosis-staging';
     Mongoose.set('debug',true);
     this.mongooseInstance = Mongoose.connect('mongodb://' + host + '/' + name);
     return this.mongooseInstance;

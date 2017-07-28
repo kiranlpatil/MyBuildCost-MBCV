@@ -42,7 +42,7 @@ export class ProfileComparison {
    releaseMatch: string;
    interestedIndustryMatch: string[] = new Array(0);
    proficienciesMatch: string[] = new Array(0);
-
+   proficienciesUnMatch: string[] = new Array(0);
    profileComparisonHeader:ProfileComparisonHeaderMeta = new ProfileComparisonHeaderMeta();
    capabilityMap:ProfileCapabilityComparisonMeta[] = new Array(0);
    additionalCapabilites: string[] = new Array(0);
