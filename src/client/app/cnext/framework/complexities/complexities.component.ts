@@ -81,13 +81,36 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
       this.complexityComponentService.getCapabilityMatrix(jobId).subscribe(
         capa => {
           this.complexityData = capa.data;
+          let savedCapabilities:Capability[]=new Array(0);
+          for( let i=0;i<this.capabilities.length;i++ ) {
+            savedCapabilities.push(this.capabilities[i]);
+          }
           this.capabilities = this.jobCompareService.getStandardMatrix(capa.data);
-          console.log(this.capabilities);
-          this.getComplexityIds(this.complexities);
+          if(!this.isEqualArrays(this.capabilities,savedCapabilities)) {
+            this.getComplexityIds(this.complexities);
+          }
         });
     }
   }
 
+
+  inArray(array:Capability[], el:Capability) {
+  for ( let i = array.length; i--; ) {
+    if ( array[i].code === el.code ) return true;
+  }
+  return false;
+}
+  isEqualArrays(arr1:Capability[], arr2:Capability[]) {
+  if ( arr1.length !== arr2.length ) {
+    return false;
+  }
+  for ( let i = arr1.length; i--; ) {
+    if ( !this.inArray( arr2, arr1[i] ) ) {
+      return false;
+    }
+  }
+  return true;
+}
   getCurrentComplexityPosition() {
     for (let i = 0; i < this.complexityIds.length; i++) {
       if (this.complexityList[i].userChoice === undefined || this.complexityList[i].userChoice === '') {
@@ -98,7 +121,6 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
   }
 
   getComplexityIds(complexities: any) {
-
     this.currentComplexity = 0;
     this.currentCapabilityNumber = 0;
     this.complexityIds = [];
@@ -109,7 +131,6 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
     }
     this.getCapabilityDetail(this.currentCapabilityNumber);
     this.currentComplexity = this.getCurrentComplexityPosition();
-    console.log("NOW AT", this.currentComplexity);
     this.getComplexityDetails(this.complexityIds[this.currentComplexity]);
   }
 
@@ -129,7 +150,7 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
       this.highlightedSection.isLocked = true;
     }
     this.complexityService.change(true);
-    if (this.highlightedSection.isProficiencyFilled) {
+    if (this.highlightedSection.isProficiencyFilled && this.highlightedSection.iscompleted) {
       this.highlightedSection.name = 'none';
     } else {
       this.highlightedSection.name = 'Proficiencies';
@@ -139,23 +160,22 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
   }
 
   onAnswered(complexityDetail: ComplexityDetails) {
-
     this.isValid = true;
     this.complexities[this.complexityIds[this.currentComplexity]] = complexityDetail.userChoice;
     this.complexityData[this.complexityIds[this.currentComplexity]] = complexityDetail;
-    this.onNext();
+    //this.onNext();
   }
 
   onCapabilityAnswered(capability: Capability) {
     this.capabilities[this.currentCapabilityNumber] = capability;
-    let currentNumber = this.currentCapabilityNumber;
+    /*let currentNumber = this.currentCapabilityNumber;
     if (this.singleComplexity === false) {
       if (currentNumber + 1 === this.capabilities.length) {
         this.saveComplexity();
       } else if (this.currentCapabilityNumber < this.capabilities.length) {
         this.onNextCapability();
       }
-    }
+    }*/
   }
 
   oncurrentComplexityAnswered(complexityDetails: ComplexityDetails) {
@@ -183,6 +203,7 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
     let currentCapability = this.currentCapabilityNumber;
     if (currentCapability + 1 === this.capabilities.length) {
       this.isValid = true;
+      this.saveComplexity();
       this.highlightedSection.name = 'Proficiencies';
       return;
     }

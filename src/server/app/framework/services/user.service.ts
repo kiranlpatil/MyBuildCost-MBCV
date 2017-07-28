@@ -301,7 +301,7 @@ class UserService {
   }
 
   retrieve(field: any, callback: (error: any, result: any) => void) {
-    this.userRepository.retrieve(field, callback);
+    this.userRepository.retrieveWithoutLean(field, callback);
   }
 
   update(_id: string, item: any, callback: (error: any, result: any) => void) {

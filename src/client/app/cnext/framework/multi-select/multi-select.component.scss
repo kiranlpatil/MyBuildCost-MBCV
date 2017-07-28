@@ -1,4 +1,11 @@
 @import '../../../../css/variables';
+$border-color: #e8e8e8;
+$bg-container: #f8f8f8;
+$text-color: #666;
+$new-skill: #333;
+$white: #fff;
+$theme-color: #0d75fa;
+$message: #0d75fa;
 
 .list {
   .btn-container {
@@ -58,13 +65,46 @@
     box-shadow: none;
     border-bottom: 1px solid #ccc;
     border-radius: 0;
-    padding: 6px 0 6px 0;
+    padding: 6px 200px 0 0;
     font-family: 'gothamrnd-book';
     font-weight: 600;
 
     &:focus,
     &:active {
       border-bottom: 1px solid $theme-color;
+    }
+  }
+
+  .add-keyskill {
+    width: 200px;
+    position: absolute;
+    right: 0;
+    top: 9px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+
+    button {
+      background: transparent;
+      border: 0;
+      color: $theme-color;
+      font-size: 11px;
+      font-weight: bold;
+      font-family: 'gothamrnd-book';
+      padding: 0;
+    }
+
+    button > span {
+      color: #0d75fa;
+      margin-right: 5px;
+      font-size: 12px;
+    }
+
+    .new-keyskill {
+      font-size: 12px;
+      font-weight: bold;
+      font-family: 'gothamrnd-book';
+      color: $new-skill;
     }
   }
 }

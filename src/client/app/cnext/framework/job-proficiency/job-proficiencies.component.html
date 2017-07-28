@@ -5,19 +5,19 @@
 
       <h4 class="heading">Keywords that describe candidate's area of expertise </h4>
       <div class="scrollable-content proficiency-container">
-        <div class="col-sm-12 no-padding">
-          <label>Mandatory Key Skills</label>
-        </div>
+          <div class="col-sm-12 no-padding">
+            <label>Mandatory Key Skills</label>
+          </div>
         <cn-multi-select [type]="'Mandatory'" [data]="proficiencies" [maxLength]="maxNumberOfMandatory"
                          [selectedData]="jobPosterModel.proficiencies"
-                         (onComplete)="onMandatoryProficiencyComplete($event)"></cn-multi-select>
+                         (onComplete)="onMandatoryProficiencyComplete($event)" [maxKeySkillsValidationMessage] = "maxKeySkillsValidationMessage"></cn-multi-select>
         <div class="clearfix">&nbsp;</div>
         <div class="col-sm-12 no-padding">
           <label>Additional Key Skills</label>
         </div>
         <cn-multi-select [type]="'Additional'" [data]="proficiencies" [maxLength]="maxNumberOfAdditional"
                          [selectedData]="jobPosterModel.additionalProficiencies"
-                         (onComplete)="onOptionalProficiencyComplete($event)"></cn-multi-select>
+                         (onComplete)="onOptionalProficiencyComplete($event)" [maxKeySkillsValidationMessage] = "maxKeySkillsValidationMessage"></cn-multi-select>
       </div>
 
       <cn-tool-tip [message]="tooltipMessage"></cn-tool-tip>

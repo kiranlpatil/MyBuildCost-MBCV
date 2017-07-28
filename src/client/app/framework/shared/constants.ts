@@ -1,8 +1,8 @@
 export class AppSettings {
-  public static IP = 'http://localhost:8080';
+  //public static IP = 'http://localhost:8080';
   // public static IP = 'http://ee802b7f.ngrok.io';
-//  public static IP = 'http://10.192.33.77:8080';
-  //public static IP = 'http://52.89.221.23:8080';
+  //public static IP = 'http://10.192.33.77:8080';
+  public static IP = 'http://52.89.221.23:8080';
   // public static IP = 'http://52.41.194.37:8080';
   //public static IP = '';
 
@@ -100,6 +100,7 @@ export class Messages {
   public static MSG_ERROR_VALIDATION_COMPLEXITY_REQUIRED_CANDIDATE = 'Answer this question';
   public static MSG_ERROR_VALIDATION_COMPLEXITY_REQUIRED_RECRUITER = 'Answer all these questions.';
   public static MSG_ERROR_VALIDATION_MAX_SKILLS_CROSSED = 'You can select maximum ';
+  public static MSG_NO_MATCH_FOUND_TEXT = 'No match found, Press enter or click Add, to add this key skill.';
   public static MSG_ERROR_VALIDATION_KEYSKILLS_REQUIRED = 'Select a value from drop down.';
   public static MSG_ERROR_VALIDATION_INDUSTRY_EXPOSURE_REQUIRED = "You can't leave this empty.";
   public static MSG_ERROR_VALIDATION_CURRENTSALARY_REQUIRED = "You can't leave this empty.";

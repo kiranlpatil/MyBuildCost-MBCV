@@ -1,4 +1,8 @@
 @import '../../../../css/variables';
+$border-color: #e8e8e8;
+$text-color: #333;
+$btn-color: #3694d1;
+$message: #00aed5;
 
 .proficiency-container {
 
@@ -16,7 +20,7 @@
   label {
     font-weight: bold;
     font-size: 13px;
-    color: $message;
+    color: $text-color;
   }
 }
 

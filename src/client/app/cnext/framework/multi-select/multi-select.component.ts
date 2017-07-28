@@ -1,6 +1,8 @@
 import { Component, ElementRef, EventEmitter, Input, OnChanges, Output, ViewChild } from '@angular/core';
 import { MultiSelectService } from './multi-select.service';
 import { CandidateProfileService } from '../candidate-profile/candidate-profile.service';
+import { Messages } from '../../../framework/shared/constants';
+
 
 @Component({
   moduleId: module.id,
@@ -22,11 +24,14 @@ export class MultiSelectComponent implements OnChanges {
   private selectedProficiencies = new Array();
   private masterDataProficiencies = new Array();
   private Proficiencies = new Array();
+  private validationMessage: string;
   private showAlert: boolean = false;
   private alreadyPresent: boolean = false;
   private showModalStyle: boolean = false;
   private otherProficiency: string = '';
-  @ViewChild("myInput")
+  private disableTextField: boolean = false;
+  private noMatchFoundText = Messages.MSG_NO_MATCH_FOUND_TEXT;
+  @ViewChild('myInput')
   private _inputElement: ElementRef;
 
   constructor(private proficiencydoaminService: MultiSelectService,private profileCreatorService: CandidateProfileService) {
@@ -40,17 +45,18 @@ export class MultiSelectComponent implements OnChanges {
    }
    */
   ngOnChanges(changes: any) {
-    if (this.data != undefined) {
+    if (this.data !== undefined) {
       if (this.data.length > 0) {
         this.Proficiencies = this.data;
         for(let item of this.Proficiencies) {
-          if(item.length==1){
-            this.Proficiencies.splice(this.Proficiencies.indexOf(item),1);}
+          if(item.length===1) {
+            this.Proficiencies.splice(this.Proficiencies.indexOf(item),1);
+          }
         }
         this.masterDataProficiencies = this.data;
       }
     }
-    if (this.selectedData != undefined) {
+    if (this.selectedData !== undefined) {
       if (this.selectedData.length > 0) {
         this.selectedProficiencies = this.selectedData;
         for (let proficiency of this.selectedData) {
@@ -61,15 +67,28 @@ export class MultiSelectComponent implements OnChanges {
   }
 
   selectedProficiencyModel(newVal: any) {
-    if (newVal !== '') {
+    this.validationMessage='';
+    let setOfCapabilityNumber=[4,3,2,1];
+    if (newVal.trim() !== '') {
       this.submitStatus = false;
       if (this.selectedProficiencies.length < this.maxLength) {
+        this.disableTextField=false;
         if (this.selectedProficiencies.indexOf(newVal) === -1) {
           this.selectedProficiencies.push(newVal);
           this.deleteSelectedProfeciency(newVal);
           this.onComplete.emit(this.selectedProficiencies);
         }
+        if(setOfCapabilityNumber.indexOf(this.selectedProficiencies.length) > -1) {
+          this.validationMessage = `You can add ${this.maxLength - this.selectedProficiencies.length} more key skills.`
+          this.showAlert = true;
+        }
+        if(this.selectedProficiencies.length === this.maxLength){
+          this.validationMessage = this.maxKeySkillsValidationMessage;
+          this.showAlert = true;
+        }
       } else {
+        this.disableTextField=true;
+        this.validationMessage=this.maxKeySkillsValidationMessage;
         this.showAlert = true;
       }
     }
@@ -79,34 +98,39 @@ export class MultiSelectComponent implements OnChanges {
   }
 
   deleteItem(newVal: any) {
-
+    let setOfCapabilityNumber=[4,3,2,1];
     this.showAlert = false;
     for (let i = 0; i < this.selectedProficiencies.length; i++) {
-      if (this.selectedProficiencies[i] === newVal.currentTarget.innerText.trim()) {
+      if (this.selectedProficiencies[i] === newVal.currentTarget.id.trim()) {
         this.selectedProficiencies.splice(i, 1);
-        if( newVal.currentTarget.innerText.trim().length>1){
-        this.Proficiencies.push(newVal.currentTarget.innerText.trim());}
+        if( newVal.currentTarget.id.trim().length>1) {
+        this.Proficiencies.push(newVal.currentTarget.id.trim());}
       }
+    }
+    if(setOfCapabilityNumber.indexOf(this.selectedProficiencies.length) > 0) {
+      this.disableTextField=false;
+      this.validationMessage = `You can add ${this.maxLength - this.selectedProficiencies.length} more key skills.`
+      this.showAlert = true;
     }
     this.onComplete.emit(this.selectedProficiencies);
   }
 
   deleteSelectedProfeciency(newVal: any) {
-    if (this.Proficiencies.indexOf(newVal) != -1) {
+    if (this.Proficiencies.indexOf(newVal) !== -1) {
       this.Proficiencies.splice(this.Proficiencies.indexOf(newVal), 1);
     }
   }
 
-  showHideModal(newVal: any) { //TODO
+  showHideModal(newVal: any) {//TODO
     this.otherProficiency = newVal;
 
     if(this.selectedProficiencies.indexOf(newVal) ===-1) {
-      if (newVal != '' && this.masterDataProficiencies.indexOf(newVal) === -1) {
+      if (newVal !== '' && this.masterDataProficiencies.indexOf(newVal) === -1) {
 
-        this.showModalStyle = true;
-       // this.addProficiencyToMasterData();
+       //this.showModalStyle = true;
+       this.addProficiencyToMasterData();
       } else {
-        if (this.masterDataProficiencies.indexOf(newVal) != -1) {
+        if (this.masterDataProficiencies.indexOf(newVal) !== -1) {
           this.addProficiencyToMasterData();
         }
       }
@@ -131,11 +155,11 @@ export class MultiSelectComponent implements OnChanges {
           this.masterDataProficiencies = data.data[0].proficiencies;
         });
     this.showModalStyle = false;    // popup box related.
-    if (this.otherProficiency !== '') {
+    if (this.otherProficiency !== undefined && this.otherProficiency.trim() !== ' ') {
       for (let i = 0; i < this.masterDataProficiencies.length; i++) {
         if (this.masterDataProficiencies[i].toUpperCase() === this.otherProficiency.toUpperCase()) {
           this.alreadyPresent = true;
-          if( this.otherProficiency.length==1){
+          if( this.otherProficiency.length===1) {
             this.selectedProficiencyModel(this.otherProficiency);
           }
         }

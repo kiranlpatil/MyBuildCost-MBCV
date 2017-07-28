@@ -1,27 +1,31 @@
 <div class="list clearfix">
   <div class="col-sm-12 no-padding">
     <div class="keyskill-form-group">
-      <label>Add your skills</label>
       <div ng2-auto-complete
            [source]="Proficiencies"
            min-chars="2"
            max-num-list="10"
            (ngModelChange)="selectedProficiencyModel($event)"
-           no-match-found-text="No Match Found, Press Enter to add this key skill.">
+           no-match-found-text={{noMatchFoundText}}
+           match-formatted="true">
         <input class="form-control" #elem [id]="type"
-               (keyup.enter)="showHideModal($event.target.value)" placeholder="E.g. for IT:- Java, C++. for Manufacturing:- Metal Cutting"/>
-        <div class="error-messages" *ngIf="showAlert"><p>{{maxKeySkillsValidationMessage}}</p></div>
+               (keyup.enter)="showHideModal($event.target.value)" [disabled]='selectedProficiencies.length == maxLength' placeholder="E.g. for IT:- Java, C++. for Manufacturing:- Metal Cutting"/>
+        <div class="error-messages" *ngIf="showAlert"><p>{{validationMessage}}</p></div>
         <div class="error-messages"
              *ngIf="submitStatus">
           <p>{{requiredKeySkillsValidationMessage}}</p>
         </div>
       </div>
+      <div class="add-keyskill">
+        <button (click)="showHideModal(elem.value)"><span class="glyphicon glyphicon-plus-sign"></span>Add</button>
+        <span class="new-keyskill">{{elem.value}}</span>
+      </div>
     </div>
 
     <div class="btn-container clearfix" [class.job-proficiency-container]="type==='Mandatory'||type==='Additional'">
       <div *ngFor="let item of selectedProficiencies; let i = index">
-        <button type="button" class="btn btn-create-profile" (click)="deleteItem($event)">
-          {{item}} <span class="glyphicon glyphicon-remove"></span>
+        <button type="button" class="btn btn-create-profile" id={{item}} (click)="deleteItem($event)">
+          {{item}} <span class="glyphicon glyphicon-remove" (click)="deleteItem($event)"></span>
         </button>
       </div>
     </div>
