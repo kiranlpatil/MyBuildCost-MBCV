@@ -100,11 +100,6 @@
           left: initial;
           border-top: 0;
         }
-        .complexities-list {
-          &:hover {
-            border-right: 5px solid $theme-color;
-          }
-        }
       }
       &:before {
         width: 37px;
@@ -112,6 +107,16 @@
         left: 41%;
         bottom: -22px;
         top: inherit;
+      }
+      .tooltip-content {
+        .complexities-list {
+          border-left: 5px solid transparent;
+          &:hover {
+            border-right: 5px solid $theme-color;
+            border-left: 0;
+            padding: 7px 0 7px 12px;
+          }
+        }
       }
     }
   }
@@ -126,14 +131,19 @@
           left: initial;
           border-top: 0;
         }
-        .complexities-list {
-          &:hover {
-            border-left: 5px solid $theme-color;
-          }
-        }
       }
       &:before {
         display: none;
+      }
+      .tooltip-content {
+        .complexities-list {
+          border-left: 5px solid transparent;
+          &:hover {
+            border-right: 5px solid $theme-color;
+            border-left: 0;
+            padding: 7px 0 7px 12px;
+          }
+        }
       }
     }
   }
@@ -151,6 +161,16 @@
       }
       &:before {
         display: none;
+      }
+      .tooltip-content {
+        .complexities-list {
+          border-left: 5px solid transparent;
+          &:hover {
+            border-right: 5px solid $theme-color;
+            border-left: 0;
+            padding: 7px 0 7px 12px;
+          }
+        }
       }
     }
   }
