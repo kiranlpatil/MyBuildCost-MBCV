@@ -10,10 +10,12 @@
         </span>
       </div>
       <div class="tooltip-content">
-        <div class="complexities-list" *ngFor="let complexity of capability.complexities"> {{complexity.name}}
-          <span class="tooltip-content1">
-            {{complexity.answer}}
-          </span>
+        <div *ngFor="let complexity of capability.complexities">
+          <div class="complexities-list" *ngIf="complexity.answer != 'Not Applicable'">{{complexity.name}}
+            <span class="tooltip-content1">
+              {{complexity.answer}}
+            </span>
+          </div>
         </div>
       </div>
     </div>

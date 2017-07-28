@@ -35,8 +35,8 @@
           <div *ngFor="let history of candidate.employmentHistory">
             <b>{{history.from.year}} - {{history.to.year}}</b>
             <b>{{history.designation}}</b>
-            <b>{{history.remarks}}</b>
             <b>{{history.companyName}}</b>
+            <b>{{history.remarks}}</b>
           </div>
         </div>
       </div>
@@ -48,8 +48,8 @@
           <div *ngFor="let certification of candidate.certifications">
             <b>{{certification.year}}</b>
             <b>{{certification.name}}</b>
-            <b>{{certification.remark}}</b>
             <b>{{certification.issuedBy}}</b>
+            <b>{{certification.remark}}</b>
           </div>
         </div>
       </div>
@@ -61,8 +61,8 @@
           <div *ngFor="let award of candidate.awards" class="tooltip-content2">
             <b>{{award.year}}</b>
             <b>{{award.name}}</b>
-            <b>{{award.remark}}</b>
             <b>{{award.issuedBy}}</b>
+            <b>{{award.remark}}</b>
           </div>
         </div>
       </div>

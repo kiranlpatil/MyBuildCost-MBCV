@@ -15,12 +15,15 @@
     <div class="col-xs-5">
       <div class="value-portraot-candidate-profile-img">
         <img [src]="getImagePath(candidate.personalDetails.picture)" alt="User Profile"
-             *ngIf="candidate.personalDetails.picture!=undefined"/>
+             *ngIf="candidate.personalDetails.picture != undefined"/>
+        <img *ngIf="candidate.personalDetails.picture == undefined"
+             src="assets/framework/images/dashboard/default-profile.png" height="160" width="160"/>
       </div>
-      <div class="value-portraot-candidate-name">
+      <div class="value-portraot-candidate-name"
+           title="{{candidate.personalDetails.first_name}} {{candidate.personalDetails.last_name}}">
         {{candidate.personalDetails.first_name}} {{candidate.personalDetails.last_name}}
       </div>
-      <div class="value-portraot-candidate-job-title">
+      <div class="value-portraot-candidate-job-title" title="{{candidate.jobTitle}}">
         {{candidate.jobTitle}}
       </div>
     </div>
@@ -39,7 +42,7 @@
         <div class="value-portraot-candidate-industry">
           <span class="industry-icon"></span>
           <label> Industry: </label>
-          <span>{{candidate.industry.name}}</span>
+          <span title="{{candidate.industry.name}}">{{candidate.industry.name}}</span>
         </div>
         <div class="value-portraot-candidate-area-work">
           <span class="area-work-icon"></span>

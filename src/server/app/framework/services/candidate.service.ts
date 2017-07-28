@@ -197,10 +197,14 @@ class CandidateService {
                 if (complexityCode === complexity.code) {
                   let newComplexity: ComplexitiesClassModel = new ComplexitiesClassModel();
                   newComplexity.name = complexity.name;
-                  newComplexity.questionForCandidate = complexity.questionForCandidate;
-
+                  newComplexity.sort_order = complexity.sort_order;
+                  if (complexity.questionForCandidate !== undefined && complexity.questionForCandidate !== null && complexity.questionForCandidate !== '') {
+                    newComplexity.questionForCandidate = complexity.questionForCandidate;
+                  } else {
+                    newComplexity.questionForCandidate = complexity.name;
+                  }
                   for (let scenario of complexity.scenarios) {
-                    if (capability_matrix[cap].toString() === scenario.code.split('.')[2].toString()) {
+                    if (capability_matrix[cap].toString() === scenario.code) {
                       newComplexity.answer = scenario.name;
                     }
                   }
@@ -228,9 +232,14 @@ class CandidateService {
                   if (complexityCode === complexity.code) {
                     let newComplexity: ComplexitiesClassModel = new ComplexitiesClassModel();
                     newComplexity.name = complexity.name;
-                    newComplexity.questionForCandidate = complexity.questionForCandidate;
+                    newComplexity.sort_order = complexity.sort_order;
+                    if (complexity.questionForCandidate !== undefined && complexity.questionForCandidate !== null && complexity.questionForCandidate !== '') {
+                      newComplexity.questionForCandidate = complexity.questionForCandidate;
+                    } else {
+                      newComplexity.questionForCandidate = complexity.name;
+                    }
                     for (let scenario of complexity.scenarios) {
-                      if (capability_matrix[cap].toString() === scenario.code.split('.')[2].toString()) {
+                      if (capability_matrix[cap].toString() === scenario.code) {
                         newComplexity.answer = scenario.name;
                       }
                     }
@@ -270,10 +279,14 @@ class CandidateService {
                 if (complexityCode === complexity.code) {
                   let newComplexity: ComplexitiesClassModel = new ComplexitiesClassModel();
                   newComplexity.name = complexity.name;
-                  newComplexity.questionForCandidate = complexity.questionForCandidate;
-
+                  newComplexity.sort_order = complexity.sort_order;
+                  if (complexity.questionForCandidate !== undefined && complexity.questionForCandidate !== null && complexity.questionForCandidate !== '') {
+                    newComplexity.questionForCandidate = complexity.questionForCandidate;
+                  } else {
+                    newComplexity.questionForCandidate = complexity.name;
+                  }
                   for (let scenario of complexity.scenarios) {
-                    if (capability_matrix[cap].toString() === scenario.code.split('.')[2].toString()) {
+                    if (capability_matrix[cap].toString() === scenario.code) {
                       newComplexity.answer = scenario.name;
                     }
                   }
@@ -301,9 +314,14 @@ class CandidateService {
                   if (complexityCode === complexity.code) {
                     let newComplexity: ComplexitiesClassModel = new ComplexitiesClassModel();
                     newComplexity.name = complexity.name;
-                    newComplexity.questionForCandidate = complexity.questionForCandidate;
+                    newComplexity.sort_order = complexity.sort_order;
+                    if (complexity.questionForCandidate !== undefined && complexity.questionForCandidate !== null && complexity.questionForCandidate !== '') {
+                      newComplexity.questionForCandidate = complexity.questionForCandidate;
+                    } else {
+                      newComplexity.questionForCandidate = complexity.name;
+                    }
                     for (let scenario of complexity.scenarios) {
-                      if (capability_matrix[cap].toString() === scenario.code.split('.')[2].toString()) {
+                      if (capability_matrix[cap].toString() === scenario.code) {
                         newComplexity.answer = scenario.name;
                       }
                     }
