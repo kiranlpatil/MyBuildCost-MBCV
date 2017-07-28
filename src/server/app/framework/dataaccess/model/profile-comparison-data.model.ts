@@ -21,6 +21,7 @@ export class ProfileComparisonDataModel {
   userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' };
   location: LocationModel;
   industry: IndustryModel;
+  industryName: string;
   interestedIndustries: string[];
   roleType: string;
   academics: AcademicModel[];

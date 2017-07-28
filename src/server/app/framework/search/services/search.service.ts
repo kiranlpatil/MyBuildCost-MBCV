@@ -7,12 +7,12 @@ import JobProfileService = require('../../services/jobprofile.service');
 import {ConstVariables} from "../../shared/sharedconstants";
 import {ProfileComparisonDataModel} from "../../dataaccess/model/profile-comparison-data.model";
 import {CapabilityMatrixModel} from "../../dataaccess/model/capability-matrix.model";
+import {ProfileComparisonModel} from "../../dataaccess/model/profile-comparison.model";
 import MatchViewModel = require('../../dataaccess/model/match-view.model');
 import Match = require('../../dataaccess/model/match-enum');
 import IndustryRepository = require('../../dataaccess/repository/industry.repository');
 import IndustryModel = require('../../dataaccess/model/industry.model');
 import ScenarioModel = require('../../dataaccess/model/scenario.model');
-import {ProfileComparisonModel} from "../../dataaccess/model/profile-comparison.model";
 
 class SearchService {
   APP_NAME: string;
@@ -280,9 +280,9 @@ class SearchService {
   }
 
   buildCandidateModel(candidate: CandidateModel) {
-
     let profileComparisonResult: ProfileComparisonDataModel = new ProfileComparisonDataModel();
-    profileComparisonResult.industry = candidate.industry;
+    //profileComparisonResult.industry = candidate.industry;
+    profileComparisonResult.industryName = candidate.industry.name;
     profileComparisonResult.aboutMyself = candidate.aboutMyself;
     profileComparisonResult.academics = candidate.academics;
     profileComparisonResult.professionalDetails = candidate.professionalDetails;
@@ -532,7 +532,7 @@ class SearchService {
 
   getMultiCompareResult(candidate: any, jobId: string, isCandidate: boolean, callback: (error: any, result: any) => void) {
 
-    this.candidateRepository.retrieveByMultiIdsAndPopulate(candidate, {'industry': 0}, (err: any, candidateRes: any) => {
+    this.candidateRepository.retrieveByMultiIdsAndPopulate(candidate, {}, (err: any, candidateRes: any) => {
       if (err) {
         callback(err, null);
       } else {

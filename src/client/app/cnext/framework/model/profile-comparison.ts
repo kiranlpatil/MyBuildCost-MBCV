@@ -16,6 +16,7 @@ export class ProfileComparison {
 
    _id: string;
    userId: any;
+   industryName: string;
    capability_matrix:any;
    aboutMyself: string = '';
    lockedOn: Date;
