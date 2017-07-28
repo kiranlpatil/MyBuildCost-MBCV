@@ -1,6 +1,7 @@
 import {Component, Input} from "@angular/core";
 import {Candidate} from "../../../model/candidate";
 import {AppSettings} from "../../../../../framework/shared/constants";
+import {Router} from "@angular/router";
 
 @Component({
   moduleId: module.id,
@@ -13,11 +14,21 @@ export class ValuePortraitHeader {
 
   @Input() private candidate: Candidate;
 
+  constructor(private _router: Router) {
+
+  }
+
   getImagePath(imagePath: string) {
     if (imagePath != undefined) {
       return AppSettings.IP + imagePath.substring(4).replace('"', '');
     }
     return null;
+  }
+
+  navigateTo(nav: string) {
+    if (nav !== undefined) {
+      this._router.navigate([nav]);
+    }
   }
 
 }

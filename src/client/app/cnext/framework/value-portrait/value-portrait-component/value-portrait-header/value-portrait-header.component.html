@@ -6,7 +6,7 @@
     </h1>
   </div>
   <div class="col-xs-7 no-padding">
-    <div class="job-mosis-white-logo">
+    <div class="job-mosis-white-logo" (click)="navigateTo('/create_profile');">
       <img src="/assets/c-next/header/job-mosis-logo-white.png"/>
     </div>
   </div>
@@ -35,7 +35,7 @@
         </div>
         <div class="value-portraot-candidate-email">
           <span class="email-icon"></span>
-          <span>{{candidate.personalDetails.email}}</span>
+          <span title="{{candidate.personalDetails.email}}">{{candidate.personalDetails.email}}</span>
         </div>
       </div>
       <div class="col-xs-8">
