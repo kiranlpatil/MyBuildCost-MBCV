@@ -4,7 +4,7 @@
   padding-bottom: 60px;
   position: fixed;
   top: 127px;
-  left: 0;
+  right: 0;
   height: 100vh;
   overflow: auto;
   border: 1px solid $border-color;
@@ -12,7 +12,7 @@
   //box-shadow: 0 0 1px 0 $profile-section-shadow1;
   text-align: left;
   width: 200px;
-  background: $white;
+  background: $filter-bg;
   z-index: 998;
 
   p {
@@ -27,15 +27,15 @@
     font-family: 'gothamrnd-book';
     position: fixed;
     top: 50px;
-    left: 0;
-    background-color: $white;
+    right: 0;
+    background-color: $filter-bg;
     width: 200px;
     z-index: 10;
-    border-right: 1px solid $border-color;
+    border-left: 1px solid $border-color;
   }
 
   .inner {
-    padding: 0 10px 69px;
+    padding: 0 15px 15px;
 
     h5 {
       margin: 20px 0 5px;

@@ -1,0 +1,162 @@
+<div class="attribute-container">
+  <div class="candidate-compare-attribute clearfix">
+    <div class="matching-attribute-name">
+      <h6>Key skills Matching</h6>
+    </div>
+    <div class="matching-candidate-attributes">
+      <!-- Start: repeat this div using for loop -->
+      <div class="candidate-attribute-list" *ngFor="let item of profileComparisonResult">
+        <div *ngFor="let value of item.proficienciesMatch">
+          <p class="matching-attribute">
+            <span class="matching-attribute-icon"></span>
+            {{value}}
+          </p>
+        </div>
+        <div *ngFor="let value of item.proficienciesUnMatch">
+          <p class="mismatch-attribute">
+            <span class="mismatch-attribute-icon"></span>
+            {{value}}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="candidate-compare-attribute clearfix">
+    <div class="matching-attribute-name">
+      <h6>Current Salary</h6>
+    </div>
+    <div class="matching-candidate-attributes">
+      <!-- Start: repeat this div using for loop -->
+      <div class="candidate-attribute-list" *ngFor="let item of profileComparisonResult">
+        <div>
+          <p *ngIf="item.salaryMatch === 'exact'" class="matching-attribute">
+            <span class="matching-attribute-icon"></span>
+            {{item?.professionalDetails.currentSalary}}
+          </p>
+          <p *ngIf="item.salaryMatch !== 'exact'" class="mismatch-attribute">
+            <span class="mismatch-attribute-icon"></span>
+            {{item?.professionalDetails.currentSalary}}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="candidate-compare-attribute clearfix">
+    <div class="matching-attribute-name">
+      <h6>Total Experience</h6>
+    </div>
+    <div class="matching-candidate-attributes">
+      <div class="candidate-attribute-list" *ngFor="let item of profileComparisonResult">
+        <div>
+          <p *ngIf="item?.experienceMatch == 'exact'" class="matching-attribute">
+            <span class="matching-attribute-icon"></span>
+            {{item?.professionalDetails.experience}}
+          </p>
+          <p *ngIf="item?.experienceMatch !== 'exact'" class="mismatch-attribute">
+            <span class="mismatch-attribute-icon"></span>
+            {{item?.professionalDetails.experience}}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="candidate-compare-attribute clearfix">
+    <div class="matching-attribute-name">
+      <h6>Notice Period</h6>
+    </div>
+    <div class="matching-candidate-attributes">
+      <div class="candidate-attribute-list" *ngFor="let item of profileComparisonResult">
+        <div>
+          <p class="matching-attribute">
+            <span class="matching-attribute-icon"></span>
+            {{item?.professionalDetails.noticePeriod}}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="candidate-compare-attribute clearfix">
+    <div class="matching-attribute-name">
+      <h6>Industry</h6>
+    </div>
+    <div class="matching-candidate-attributes">
+      <div class="candidate-attribute-list" *ngFor="let item of profileComparisonResult">
+        <div>
+          <p>
+            <span></span>
+            {{item?.industryName}}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="candidate-compare-attribute clearfix">
+    <div class="matching-attribute-name">
+      <h6>Current Location</h6>
+    </div>
+    <div class="matching-candidate-attributes">
+      <div class="candidate-attribute-list" *ngFor="let item of profileComparisonResult">
+        <div>
+          <p>
+            {{item?.location.city}}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="candidate-compare-attribute clearfix">
+    <div class="matching-attribute-name">
+      <h6>Extra Key Skills</h6>
+    </div>
+    <div class="matching-candidate-attributes">
+      <div class="candidate-attribute-list" *ngFor="let item of profileComparisonResult">
+        <p>
+          <span *ngFor="let value of item.proficiencies">
+            <span *ngIf="item.proficienciesMatch.indexOf(value) == -1">
+              {{value}}<span *ngIf="i != item.proficiencies.length-1">,</span>&nbsp;
+            </span>
+        </span>
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="candidate-compare-attribute clearfix">
+    <div class="matching-attribute-name">
+      <h6>Domain</h6>
+    </div>
+    <div class="matching-candidate-attributes">
+      <div class="candidate-attribute-list" *ngFor="let item of profileComparisonResult">
+        <!--<div *ngIf="item.proficienciesMatch.indexOf(value) !== -1">-->
+        <div *ngFor="let value of item.interestedIndustryMatch">
+          <p class="matching-attribute">
+            <span class="matching-attribute-icon"></span>
+            {{value}}
+          </p>
+        </div>
+        <!--</div>-->
+        <div *ngFor="let value of item.interestedIndustries">
+          <p *ngIf="item.interestedIndustryMatch.indexOf(value) == -1" class="mismatch-attribute">
+            <span class="mismatch-attribute-icon"></span>
+            {{value}}
+          </p>
+        </div>
+    </div>
+
+    </div>
+  </div>
+  <div class="candidate-compare-attribute clearfix">
+    <div class="matching-attribute-name">
+      <h6>Additional Capabilities</h6>
+    </div>
+    <div class="matching-candidate-attributes">
+      <div class="candidate-attribute-list" *ngFor="let item of profileComparisonResult">
+        <p>
+          <span *ngFor="let value of item.additionalCapabilites;let i = index">
+            {{value}}<span *ngIf="i != item.additionalCapabilites.length-1">,</span>&nbsp;
+          </span>
+        </p>
+      </div>
+    </div>
+  </div>
+
+</div>

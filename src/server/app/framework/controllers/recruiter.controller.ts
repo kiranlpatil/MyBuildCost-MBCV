@@ -8,6 +8,7 @@ import RecruiterModel = require('../dataaccess/model/recruiter.model');
 import RecruiterService = require('../services/recruiter.service');
 import JobProfileModel = require('../dataaccess/model/jobprofile.model');
 import CNextMessages = require('../shared/cnext-messages');
+import SearchService = require("../search/services/search.service");
 
 
 export function create(req: express.Request, res: express.Response, next: any) {
@@ -208,4 +209,35 @@ export function getList(req: express.Request, res: express.Response, next: any) 
   } catch (e) {
     res.status(403).send({message: e.message});
   }
+}
+
+export function getCompareDetailsOfCandidate(req: express.Request, res: express.Response, next: any) {
+
+  try {
+    var searchService = new SearchService();
+    var params = req.query;
+    let jobId = req.params.jobId;
+    let candidateId: string[] = JSON.parse(params.candidateId);
+    searchService.getMultiCompareResult(candidateId, jobId, false, (error: any, result: any) => {
+      if (error) {
+        next({
+          reason: "Problem in Search Matching Result",//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
+          message: 'Problem in Search Matching Result',//Messages.MSG_ERROR_WRONG_TOKEN,
+          code: 401
+        })
+      }
+      else {
+        res.send({
+          "status": "success",
+          "data": result,
+        });
+
+      }
+    });
+
+  }
+  catch (e) {
+    res.status(403).send({message: e.message});
+  }
+
 }

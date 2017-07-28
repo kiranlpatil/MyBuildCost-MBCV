@@ -1,0 +1,28 @@
+<!--<div *ngFor="let item of profileComparisonResult">
+  <cn-profile-comparison-header-meta [matchingPercentage]="item.matchingPercentage" [profileMeta]="item.profileComparisonHeader"></cn-profile-comparison-header-meta>
+</div>-->
+<div class="candidate-compare-header clearfix">
+  <div class="matching-capabilities">
+    <h6>Core Capabilities Matching</h6>
+  </div>
+  <div class="matching-candidate-details">
+    <!-- Start: repeat this div using for loop -->
+    <div class="candidate-details-container" *ngFor="let item of profileComparisonResult;let i = index">
+      <div class="dropdown">
+        <button class="btn dropdown-toggle" type="button" data-toggle="dropdown"><span
+                class="glyphicon glyphicon-option-vertical"></span></button>
+        <ul class="dropdown-menu">
+          <!--(click)="actionToPerformOnCompareList('AddToCart',item.profileComparisonHeader)"-->
+          <li><a>Add to
+            Cart</a></li>
+          <!--(click)="actionToPerformOnCompareList('Reject',item.profileComparisonHeader)"-->
+          <li><a>Reject</a></li>
+          <li (click)="actionToPerformOnCompareList('Remove',i)"><a>Remove</a></li>
+        </ul>
+      </div>
+      <cn-profile-comparison-header-meta [matchingPercentage]="item.matchingPercentage"
+                                         [profileMeta]="item.profileComparisonHeader"></cn-profile-comparison-header-meta>
+    </div>
+  </div>
+</div>
+

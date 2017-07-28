@@ -1,18 +1,18 @@
-import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
-import { CandidateQCard } from '../../model/candidateQcard';
-import { QCardsortBy } from '../../model/q-cardview-sortby';
-import { MatchCandidate } from '../../model/match-candidate';
-import { QCardViewService } from './q-card-view.service';
-import { QCardFilterService } from '../../filters/q-card-filter.service';
-import { AppSettings, ValueConstant } from '../../../../framework/shared/constants';
-import { QCardFilter } from '../../model/q-card-filter';
-import { CandidateQListModel } from '../job-dashboard/q-cards-candidates';
-import { RecruiterJobView } from '../../model/recruiter-job-view';
-import { Candidate } from '../../model/candidate';
-import { CandidateDetail } from '../../../../framework/registration/candidate/candidate';
-import { CandidateProfileService } from '../../candidate-profile/candidate-profile.service';
-import { Message } from '../../../../framework/shared/message';
-import { MessageService } from '../../../../framework/shared/message.service';
+import {Component, EventEmitter, Input, OnChanges, Output} from "@angular/core";
+import {CandidateQCard} from "../../model/candidateQcard";
+import {QCardsortBy} from "../../model/q-cardview-sortby";
+import {MatchCandidate} from "../../model/match-candidate";
+import {QCardViewService} from "./q-card-view.service";
+import {QCardFilterService} from "../../filters/q-card-filter.service";
+import {AppSettings, ValueConstant} from "../../../../framework/shared/constants";
+import {QCardFilter} from "../../model/q-card-filter";
+import {CandidateQListModel} from "../job-dashboard/q-cards-candidates";
+import {RecruiterJobView} from "../../model/recruiter-job-view";
+import {Candidate} from "../../model/candidate";
+import {CandidateDetail} from "../../../../framework/registration/candidate/candidate";
+import {CandidateProfileService} from "../../candidate-profile/candidate-profile.service";
+import {Message} from "../../../../framework/shared/message";
+import {MessageService} from "../../../../framework/shared/message.service";
 /*import underline = Chalk.underline;*/
 
 
@@ -33,6 +33,7 @@ export class QCardviewComponent implements OnChanges {
   @Input() filterMeta: QCardFilter;
   @Output() addedTocart: EventEmitter<any> = new EventEmitter<any>();
   @Input() progress_bar_color : string='#0d75fa';
+  @Output() addForCompare: EventEmitter<any> = new EventEmitter<any>();
   public qCardModel: QCardsortBy = new QCardsortBy();
   public totalQCardMatches = {count: 0};
   public qCardCount = {count: 0};
@@ -46,6 +47,7 @@ export class QCardviewComponent implements OnChanges {
   private showModalStyle: boolean = false;
   private isAlreadyPresentInCart: boolean = false;
   private isShortlistedclicked: boolean = false;
+
 
 
   constructor(private qCardFilterService: QCardFilterService,
@@ -256,5 +258,9 @@ export class QCardviewComponent implements OnChanges {
       return AppSettings.IP + imagePath.substring(4).replace('"', '');
     }
     return null;
+  }
+
+  addForCompareView(value: any) {
+    this.addForCompare.emit(value);
   }
 }

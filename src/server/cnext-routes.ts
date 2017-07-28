@@ -49,4 +49,5 @@ export function cnextInit(app: express.Application) { //todo add interceptor to 
 
   app.get('/api/filterlist', recruiterController.getFilterList);
   app.get('/api/releventindustries', industryController.getReleventIndustryList);
+  app.get('/api/recruiter/:id/jobprofile/:jobId', recruiterController.getCompareDetailsOfCandidate);
 }

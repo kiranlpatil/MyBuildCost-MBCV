@@ -6,4 +6,5 @@ export class RecruiterJobView {
   public numberOfCandidatesInCart: number = 0;
   public numberOfCandidatesApplied: number = 0;
   public numberOfCandidatesrejected: number = 0;
+  public numberOfCandidatesInCompare: number = 0;
 }

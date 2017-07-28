@@ -2,7 +2,7 @@
 <div class="section-container clear" *ngIf="highlightedSection.name =='EmploymentHistory'">
   <div class="main-content edit-modal-content clearfix" >
 
-    <h4 class="heading">Employment History</h4>
+    <h4 class="heading">Employment History (Optional)</h4>
     <div class="error-messages edit-error-msg" *ngIf="!isValidservicePeriod">
       <p>Please mentioned service period</p>
     </div>
@@ -53,7 +53,7 @@
       <div *ngIf="employeeHistory.controls.employeeHistories.controls.length==0">
         <h4 class="heading-compact icons-section">
           <span class="employment-history"></span>
-          Employment History
+          Employment History <span class="optional-field">(Optional)</span>
           <button class="btn-edit"
             (click)="highlightedSection.name='EmploymentHistory';highlightedSection.isDisable=true;showButton=false"
              title="Edit Employment History"></button>
@@ -62,7 +62,7 @@
       <div class="" *ngIf="employeeHistory.controls.employeeHistories.controls.length>0">
         <h4 class="heading-compact icons-section">
           <span class="employment-history"></span>
-          Employment History
+          Employment History <span class="optional-field">(Optional)</span>
           <button class="btn-edit"
             (click)="highlightedSection.name='EmploymentHistory';highlightedSection.isDisable=true;showButton=false"
             title="Edit Employment History"></button>

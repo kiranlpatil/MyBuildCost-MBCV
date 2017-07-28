@@ -59,6 +59,11 @@
   padding: 60px 235px !important;
 }
 
+.edit-modal-content {
+  .user-name {
+    margin-top: 30px;
+  }
+}
 @media only screen and (max-width: 767px) {
   .user-name {
     .profile-name-first, .profile-name-last {

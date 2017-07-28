@@ -1,0 +1,52 @@
+@import '../../../../../css/common';
+
+.candidate-compare-capability {
+  position: relative;
+  /* float: left; */
+  box-sizing: border-box;
+  /* overflow: hidden; */
+  width: auto;
+
+  .capability-compare-container {
+    display: inline-block;
+  }
+
+  .matching-capability-headings {
+    background: #fff;
+    width: 267px;
+    float: left;
+    margin-right: 4px;
+    position: absolute;
+    left: 0;
+    padding: 0 10px;
+    top: 0;
+    z-index: 20;
+
+    h6 {
+      @extend %text-ellipsis;
+      color: #333;
+      font-size: 12px;
+      line-height: 40px;
+      left: 0;
+      width: 100%;
+      font-weight: bold;
+      text-align: left;
+      padding: 0;
+      margin: 0;
+      height: 40px;
+      border-top: 1px solid #e8e8e8;
+    }
+  }
+
+  .matching-capability-details {
+    float: left;
+    width: auto;
+  }
+
+  .capability-compare-container:first-child {
+    .matching-capability-details {
+      padding-left: 272px;
+    }
+  }
+}
+

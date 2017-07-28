@@ -1,7 +1,7 @@
 <div class="modal-bg" *ngIf="highlightedSection.name=='AcademicDetails'"></div>
 <div class="section-container clear"  *ngIf="highlightedSection.name =='AcademicDetails'">
   <div class="main-content edit-modal-content clearfix">
-    <h4 class="heading">Academic Details</h4>
+    <h4 class="heading">Academic Details (Optional)</h4>
     <div class="scrollable-content">
       <form class="description-form" [formGroup]="academicDetail" novalidate>
         <div class="row">
@@ -49,7 +49,7 @@
         <h4 class="heading-compact icons-section">
           <!--<img src="assets/c-next/icons/education-icon.png" alt="employment"/>-->
           <span class="education-icon"></span>
-          Academic Details
+          Academic Details <span class="optional-field">(Optional)</span>
           <button class="btn-edit" (click)="highlightedSection.name='AcademicDetails';highlightedSection.isDisable=true;showButton=false" title="Edit Academic Details"></button>
         </h4>
       </div>
@@ -58,7 +58,7 @@
         <h4 class="heading-compact icons-section">
           <!--<img src="assets/c-next/icons/education-icon.png" alt="employment"/>-->
           <span class="education-icon"></span>
-          Academic Details
+          Academic Details <span class="optional-field">(Optional)</span>
           <button class="btn-edit" (click)="highlightedSection.name='AcademicDetails';highlightedSection.isDisable=true;showButton=false" title="Edit Academic Details"></button>
         </h4>
         <ul>

@@ -35,6 +35,8 @@
     <!--<div class="col-sm-4" *ngFor= "let item of candidates">&lt;!&ndash;| candidatematching: matchFormat&ndash;&gt;-->
     <div class="col-sm-4"
          *ngFor="let item of candidates | qcardmatching: matchFormat: totalQCardMatches :type | qcardlistfilter:filterMeta:qCardCount | qcardlistsort:[qCardModel.sortValue,matchFormat];let i=index;">
+      <span class="compare-candidate-icon" (click)="addForCompareView(item._id)"
+            title="Compare the Candidates"></span>
       <div class="panel clearfix" (click)="viewProfile(item)">
         <ul>
           <li *ngIf="type=='matchedList'">

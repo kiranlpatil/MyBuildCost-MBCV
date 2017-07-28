@@ -172,6 +172,17 @@ import {IndustryDetailsService} from "./cnext/framework/industry-detail-service"
 import {IndustryDetailsDirective} from "./cnext/framework/shared-directives/industry-details.directive";
 import {IndustryDataDirective} from "./cnext/framework/shared-directives/industry-data.directive";
 import {IndustryDataService} from "./cnext/framework/industry-data-service";
+
+import {ProfileComparisonComponent} from "./cnext/framework/profile-comparison/profile-comparison.component";
+import {ProfileComparisonService} from "./cnext/framework/profile-comparison/profile-comparison.service";
+import {ProfileComparisonHeaderComponent} from "./cnext/framework/profile-comparison/profile-comparison-header/profile-comparison-header.component";
+import {ProfileCapabilityComparisonComponent} from "./cnext/framework/profile-comparison/profile-capability-comparison/profile-capability-comparison.component";
+import {ProfileCapabilityComparisonMetaComponent} from "./cnext/framework/profile-comparison/profile-capability-comparison/profile-capability-comparison-meta/profile-capability-comparison-meta.component";
+import {ProfileComparisonHeaderMetaComponent} from "./cnext/framework/profile-comparison/profile-comparison-header/profile-comparison-header-meta/profile-comparison-header-meta.component";
+import {ProfileAttributeComparisonComponent} from "./cnext/framework/profile-comparison/profile-attribute-comparison/profile-attribute-comparison.component";
+import {ProfileComparisonPipe} from "./cnext/framework/profile-comparison/profile-capability-comparison/profile-comparison.pipe";
+import {ColorShadeDirective} from "./cnext/framework/profile-comparison/profile-capability-comparison/color-shade.directive";
+
 //C-NEXT IMPORTS
 
 
@@ -294,8 +305,15 @@ import {IndustryDataService} from "./cnext/framework/industry-data-service";
     MinRangeValidation,
     MaxRangeValidation,
     JobDashboardComponent,
-    ReleventIndustryListComponent
-
+    ReleventIndustryListComponent,
+    ProfileComparisonComponent,
+    ProfileComparisonHeaderComponent,
+    ProfileCapabilityComparisonComponent,
+    ProfileCapabilityComparisonMetaComponent,
+    ProfileComparisonHeaderMetaComponent,
+    ProfileAttributeComparisonComponent,
+    ProfileComparisonPipe,
+    ColorShadeDirective
   ],
   providers: [
     {
@@ -370,7 +388,8 @@ import {IndustryDataService} from "./cnext/framework/industry-data-service";
     JobDashboardService,
     ReferenceService,
     RedirectRecruiterDashboardService,
-    ReleventIndustryListService
+    ReleventIndustryListService,
+    ProfileComparisonService
 
   ],
   bootstrap: [AppComponent]

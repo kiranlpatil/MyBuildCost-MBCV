@@ -50,11 +50,15 @@
   }
 
   .candidate-listing {
-    padding: 0 0 0 200px;
+    padding: 0 200px 0 0;
 
     .matched {
       margin-top: 35px;
       //background: $active-color;
+    }
+
+    .candidate-tabs {
+      padding-left: 130px !important;
     }
   }
 }

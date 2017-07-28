@@ -1,32 +1,27 @@
-import User = require("../mongoose/user");
 import * as mongoose from "mongoose";
+import User = require("../mongoose/user");
+import JobProfileModel = require("./jobprofile.model");
+import CertificationModel = require("./certification.model");
+import AwardModel = require("./award.model");
 import LocationModel = require("./location.model");
+import IndustryModel = require("./industry.model");
 import AcademicModel = require("./academic.model");
 import ProfessionalDetailsModel = require("./professional-details.model");
 import EmployeeHistoryModel = require("./employee-history.model");
-import ProficiencyModel = require("./proficiency.model");
-import CapabilityModel = require("./capability.model");
-import RoleModel = require("./role.model");
-import CertificationModel = require("./certification.model");
-import AwardModel = require("./award.model");
-import IndustryModel = require("./industry.model");
 import JobListModel = require("./job-list.model");
-import UserModel = require("./user.model");
-import CapabilityClassModel = require("./capability-class.model");
+//import CapabilityMatrixModel = require("./capability-matrix.model");
+import ProfileComparisonHeaderModel = require("./profile-comparison-header.model");
 
-
-interface CandidateModel {
-
-  jobTitle: string;
+export class ProfileComparisonDataModel {
   isVisible: boolean;
   isSubmitted: boolean;
   aboutMyself: string;
   certifications: CertificationModel[];
   awards: AwardModel[];
-  userId: UserModel;
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' };
   location: LocationModel;
-  areaOfWork: string[];
   industry: IndustryModel;
+  industryName: string;
   interestedIndustries: string[];
   roleType: string;
   academics: AcademicModel[];
@@ -43,6 +38,17 @@ interface CandidateModel {
   releaseMatch: string;
   interestedIndustryMatch: string[];
   proficienciesMatch: string[];
-  personalDetails: User;
+
+  profileComparisonHeader: ProfileComparisonHeaderModel;
+  capabilityMap: any;
+
+  matchingPercentage: number;
+  status: string;
+  additionalCapabilites: string[];
+  companyCulture: string;
+  proficienciesUnMatch: string[];
+  match_map: any;
+
 }
-export = CandidateModel;
+
+//export = ProfileComparisonDataModel

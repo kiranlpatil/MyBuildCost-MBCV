@@ -1,0 +1,6 @@
+<div class="candidate-capability-container">
+  <div class="capability-percentage" *ngFor="let data of profileComparisonValue.capabilityMap | keys;let i = index">
+    <p [ColorShade]="profileComparisonValue.capabilityMap[data].capabilityPercentage">
+      {{profileComparisonValue.capabilityMap[data].capabilityPercentage}}%</p>
+  </div>
+</div>

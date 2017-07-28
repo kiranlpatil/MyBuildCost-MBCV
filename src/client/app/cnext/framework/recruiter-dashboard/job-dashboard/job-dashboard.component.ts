@@ -9,6 +9,8 @@ import {ReferenceService} from "../../model/newClass";
 import {QCardFilterService} from "../../filters/q-card-filter.service";
 import {QCardFilter} from "../../model/q-card-filter";
 import {LoaderService} from "../../../../framework/shared/loader/loader.service";
+import {ProfileComparisonService} from "../../profile-comparison/profile-comparison.service";
+import {ProfileComparison} from "../../model/profile-comparison";
 
 @Component({
   moduleId: module.id,
@@ -30,12 +32,14 @@ export class JobDashboardComponent implements OnInit {
   private selectedJobProfile: JobPosterModel = new JobPosterModel();
   private filterMeta: QCardFilter;
   private isRecruitingForSelf: boolean;
+  private profileComparison: ProfileComparison;
+  private listOfCandidateIdToCompare: string[] = new Array(0);
 
   constructor(public refrence: ReferenceService,
               private activatedRoute: ActivatedRoute,
               private jobDashboardService: JobDashboardService,
               private _router:Router,private qcardFilterService:QCardFilterService,
-              private loaderService: LoaderService) {
+              private loaderService: LoaderService,private profileComparisonService: ProfileComparisonService) {
     this.qcardFilterService.candidateFilterValue$.subscribe(
       (data: QCardFilter) => {
         this.filterMeta = data;
@@ -53,7 +57,7 @@ export class JobDashboardComponent implements OnInit {
     });
 
     this.getJobProfile();
-    this.whichListVisible = new Array(4);
+    this.whichListVisible = new Array(5);
     this.getMatchingProfiles();
 
   }
@@ -187,6 +191,34 @@ export class JobDashboardComponent implements OnInit {
 
   closeJob() {
     this.showModalStyle = !this.showModalStyle;
+  }
+
+  performActionOnComparisonList(data: any) {
+    /*if (data.action = 'Remove') {
+      this.profileComparison.profileComparisonData.splice(data.value, 1);
+     this.recruiterJobView.numberOfCandidatesInCompare--;
+     }*/
+  }
+
+  getCompareDetail() {
+    this.whichListVisible[4] = true;
+    if (this.listOfCandidateIdToCompare.length) {
+      this.profileComparisonService.getCompareDetail(this.listOfCandidateIdToCompare, this.jobId)
+        .subscribe(
+          data => this.OnCompareSuccess(data.data),
+          error => console.log(error));
+    }
+  }
+
+  OnCompareSuccess(data: ProfileComparison) {
+    this.profileComparison = data;
+  }
+
+  addForCompare(value: any) {
+    if (this.listOfCandidateIdToCompare.indexOf(value) == -1) {
+      this.recruiterJobView.numberOfCandidatesInCompare++;
+      this.listOfCandidateIdToCompare.push(value);
+    }
   }
 
 }

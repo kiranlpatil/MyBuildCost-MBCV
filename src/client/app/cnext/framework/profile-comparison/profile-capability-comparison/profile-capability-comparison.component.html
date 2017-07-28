@@ -1,0 +1,16 @@
+<div class="candidate-compare-capability clearfix">
+  <div class="pull-left">
+    <div class="capability-compare-container" *ngFor="let item of profileComparisonResult ;let i = index">
+      <div *ngIf="i == 0">
+        <div class="matching-capability-headings">
+          <h6 *ngFor="let data of item.capabilityMap | keys">{{item.capabilityMap[data].capabilityName}}</h6>
+        </div>
+      </div>
+
+      <div class="matching-capability-details">
+        <cn-profile-capability-comparison-meta
+                [profileComparisonValue]="item"></cn-profile-capability-comparison-meta>
+      </div>
+    </div>
+  </div>
+</div>

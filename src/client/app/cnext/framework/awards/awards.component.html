@@ -1,7 +1,7 @@
 <div class="modal-bg" *ngIf="highlightedSection.name=='Awards'"></div>
 <div class="section-container clear"  *ngIf="highlightedSection.name =='Awards'">
   <div class="main-content edit-modal-content clearfix">
-    <h4 class="heading">Awards</h4>
+    <h4 class="heading">Awards (Optional)</h4>
     <div class="scrollable-content">
       <form class="description-form" [formGroup]="awardDetail" novalidate>
         <div class="row">
@@ -50,14 +50,14 @@
 
         <h4 class="heading-compact icons-section">
           <span class="award"></span>
-          Awards
+          Awards <span class="optional-field">(Optional)</span>
           <button class="btn-edit" (click)="highlightedSection.name='Awards';highlightedSection.isDisable=true;showButton=false" title="Edit Awards"></button>
         </h4>
       </div>
       <div class="" *ngIf=" awardDetail.controls.awards.controls.length>0 ">
         <h4 class="heading-compact icons-section">
           <span class="award"></span>
-          Awards
+          Awards <span class="optional-field">(Optional)</span>
           <button class="btn-edit" (click)="highlightedSection.name='Awards';highlightedSection.isDisable=true;showButton=false" title="Edit Awards"></button>
         </h4>
         <ul>

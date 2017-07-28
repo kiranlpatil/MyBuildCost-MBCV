@@ -1,0 +1,26 @@
+.candidate-capability-container {
+  background: #fff;
+  display: inline-block;
+  margin: 0 3px;
+  width: 140px;
+  //height: 40px;
+  //float: left;
+  position: relative;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.08);
+
+  .capability-percentage {
+    height: 40px;
+    border-bottom: 1px solid #fff;
+
+    p {
+      margin: 0;
+      color: #fff;
+      line-height: 39px;
+      font-size: 16px;
+      text-align: right;
+      font-weight: 500;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+      padding: 0 10px;
+    }
+  }
+}

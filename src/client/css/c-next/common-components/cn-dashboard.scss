@@ -26,7 +26,7 @@
     color: $text-color;
     text-align: left;
     position: fixed;
-    top: 83px;
+    top: 91px;
     background: $active-color;
     width: 100%;
     z-index: 999;
@@ -73,7 +73,7 @@
       color: $text-color;
       @extend %text-ellipsis;
       font-size: 10px;
-      border-bottom: 1px solid $label-border;
+      //border-bottom: 1px solid $label-border;
     }
 
     .job-posted {
@@ -136,13 +136,15 @@
 
   .sub-tabs {
     border-top: 1px solid $border-blue;
-    background: $active-color;
-    height: 40px;
+    border-bottom: 1px solid $border-blue;
+    background: $white;
+    height: 39px;
     width: 100%;
     position: fixed;
-    top: 124px;
+    top: 132px;
     z-index: 999;
     padding: 0 15px;
+    left: 0;
 
     a {
       padding: 8px 15px 8px 45px;
@@ -199,15 +201,20 @@
     li > a > .rejected-count {
       background-color: $red;
     }
+
+    li > a > .compare-candidate-count {
+      background-color: $highlight;
+    }
   }
 
   .q-card-header {
     background: $active-color;
+    left: 0;
     position: fixed;
-    top: 163px;
+    top: 171px;
     z-index: 999;
-    padding: 4px 215px 4px 15px;
-    border-top: 1px solid $border-blue;
+    padding: 4px 15px;
+    width: calc(100% - 200px);
 
     ul {
       margin: 5px 0 !important;
@@ -252,7 +259,7 @@
   }
 
   .candidate-listing {
-    padding: 115px 0 15px 200px;
+    padding: 115px 200px 15px 0;
     background: $active-color;
     min-height: 100%;
   }
@@ -261,7 +268,7 @@
 .candidate-dashboard-wrapper {
 
   .q-card-header {
-    top: 90px;
+    top: 89px;
   }
 }
 
@@ -285,16 +292,10 @@
         }
       }
     }
-
-    .sub-tabs {
-      a {
-        padding: 10px 10px 10px 45px;
-      }
-    }
   }
 
   .candidate-listing {
-    padding: 55px 0 0 200px;
+    padding: 55px 200px 0 0;
   }
 }
 
