@@ -23,7 +23,8 @@
       </div>
     </div>
   </div>
-  <button *ngIf="showToggleButton" (click)="showMore = !showMore" class="show-more-btn">
+  <button *ngIf="showToggleButton" (click)="showMore = !showMore;showToggleButton=!showToggleButton"
+          class="show-more-btn">
     Show More <span class="glyphicon glyphicon-chevron-down"></span>
   </button>
 </div>

@@ -18,6 +18,7 @@ import CapabilitiesClassModel = require("../dataaccess/model/capabilities-class.
 import ComplexityClassModel = require("../dataaccess/model/complexity-class.model");
 import ComplexitiesClassModel = require("../dataaccess/model/complexities-class.model");
 import CapabilityModel = require("../dataaccess/model/capability.model");
+import RoleModel = require("../dataaccess/model/role.model");
 class CandidateService {
   private candidateRepository: CandidateRepository;
   private recruiterRepository: RecruiterRepository;
@@ -161,182 +162,187 @@ class CandidateService {
     customCandidate.capabilities = [];
     customCandidate.industry = candidate.industry;
 
-    customCandidate.capabilities = this.getCapabilitiesBuild(candidate.capability_matrix, industries);
+    customCandidate.capabilities = this.getCapabilitiesBuild(candidate.capability_matrix, candidate.industry.roles, industries);
 
     return customCandidate;
   }
 
-  getCapabilitiesBuild(capability_matrix: any, industries: IndustryModel[]): CapabilitiesClassModel[] {
+  getCapabilitiesBuild(capability_matrix: any, roles: RoleModel[], industries: IndustryModel[]): CapabilitiesClassModel[] {
     let capabilities: CapabilitiesClassModel[] = new Array(0);
 
     for (let cap in capability_matrix) {
 
       for (let role of industries[0].roles) {
 
-        let defaultComplexityCode = cap.split('_')[0];
+        for (let candidateRole of roles) {
+          if (candidateRole.code.toString() === role.code.toString()) {
+            let defaultComplexityCode = cap.split('_')[0];
 
-        if (role.default_complexities.length > 0) {
-          if (defaultComplexityCode.toString() === role.default_complexities[0].code.toString()) {
-            let isFound: boolean = false;
-            let foundedDefaultCapability: CapabilitiesClassModel;
-            for (let c of capabilities) {
-              if (c.code === defaultComplexityCode) {
-                foundedDefaultCapability = c;
-                isFound = true;
+            if (role.default_complexities.length > 0) {
+              if (defaultComplexityCode.toString() === role.default_complexities[0].code.toString()) {
+                let isFound: boolean = false;
+                let foundedDefaultCapability: CapabilitiesClassModel;
+                for (let c of capabilities) {
+                  if (c.code === defaultComplexityCode) {
+                    foundedDefaultCapability = c;
+                    isFound = true;
+                  }
+                }
+                if (!isFound) {
+                  let newCapability: CapabilitiesClassModel = new CapabilitiesClassModel();
+                  newCapability.name = role.default_complexities[0].name;
+                  newCapability.code = role.default_complexities[0].code;
+                  newCapability.sort_order = role.default_complexities[0].sort_order;
+                  let newComplexities: ComplexitiesClassModel[] = new Array(0);
+                  for (let complexity of role.default_complexities[0].complexities) {
+                    let complexityCode = cap.split('_')[1];
+
+                    if (complexityCode === complexity.code) {
+                      let newComplexity: ComplexitiesClassModel = new ComplexitiesClassModel();
+                      newComplexity.name = complexity.name;
+                      newComplexity.sort_order = complexity.sort_order;
+                      if (complexity.questionForCandidate !== undefined && complexity.questionForCandidate !== null && complexity.questionForCandidate !== '') {
+                        newComplexity.questionForCandidate = complexity.questionForCandidate;
+                      } else {
+                        newComplexity.questionForCandidate = complexity.name;
+                      }
+                      for (let scenario of complexity.scenarios) {
+                        if (capability_matrix[cap].toString() === scenario.code) {
+                          newComplexity.answer = scenario.name;
+                        }
+                      }
+
+                      newComplexities.push(newComplexity);
+                    }
+
+                  }
+                  newComplexities = this.getSortedList(newComplexities, "sort_order");
+                  newCapability.complexities = newComplexities;
+                  capabilities.push(newCapability);
+                } else {
+                  let isComFound: boolean = false;
+                  let FoundedComplexity: ComplexitiesClassModel;
+                  for (let complexity of foundedDefaultCapability.complexities) {
+                    if (complexity.code === cap.split('_')[1]) {
+                      FoundedComplexity = complexity;
+                      isComFound = true;
+                    }
+                  }
+                  if (!isComFound) {
+                    let newComplexity: ComplexitiesClassModel = new ComplexitiesClassModel();
+                    for (let complexity of role.default_complexities[0].complexities) {
+                      let complexityCode = cap.split('_')[1];
+
+                      if (complexityCode === complexity.code) {
+                        let newComplexity: ComplexitiesClassModel = new ComplexitiesClassModel();
+                        newComplexity.name = complexity.name;
+                        newComplexity.sort_order = complexity.sort_order;
+                        if (complexity.questionForCandidate !== undefined && complexity.questionForCandidate !== null && complexity.questionForCandidate !== '') {
+                          newComplexity.questionForCandidate = complexity.questionForCandidate;
+                        } else {
+                          newComplexity.questionForCandidate = complexity.name;
+                        }
+                        for (let scenario of complexity.scenarios) {
+                          if (capability_matrix[cap].toString() === scenario.code) {
+                            newComplexity.answer = scenario.name;
+                          }
+                        }
+                        foundedDefaultCapability.complexities = this.getSortedList(foundedDefaultCapability.complexities, "sort_order");
+                        foundedDefaultCapability.complexities.push(newComplexity);
+                      }
+
+                    }
+
+                  }
+
+                }
+                break;
               }
             }
-            if (!isFound) {
-              let newCapability: CapabilitiesClassModel = new CapabilitiesClassModel();
-              newCapability.name = role.default_complexities[0].name;
-              newCapability.code = role.default_complexities[0].code;
-              newCapability.sort_order = role.default_complexities[0].sort_order;
-              let newComplexities: ComplexitiesClassModel[] = new Array(0);
-              for (let complexity of role.default_complexities[0].complexities) {
-                let complexityCode = cap.split('_')[1];
 
-                if (complexityCode === complexity.code) {
-                  let newComplexity: ComplexitiesClassModel = new ComplexitiesClassModel();
-                  newComplexity.name = complexity.name;
-                  newComplexity.sort_order = complexity.sort_order;
-                  if (complexity.questionForCandidate !== undefined && complexity.questionForCandidate !== null && complexity.questionForCandidate !== '') {
-                    newComplexity.questionForCandidate = complexity.questionForCandidate;
-                  } else {
-                    newComplexity.questionForCandidate = complexity.name;
+            for (let capability of role.capabilities) {
+
+              let capCode = cap.split('_')[0];
+              if (capCode === capability.code) {
+                let isFound: boolean = false;
+                let foundedCapability: CapabilitiesClassModel;
+                for (let c of capabilities) {
+                  if (c.code === capCode) {
+                    foundedCapability = c;
+                    isFound = true;
                   }
-                  for (let scenario of complexity.scenarios) {
-                    if (capability_matrix[cap].toString() === scenario.code) {
-                      newComplexity.answer = scenario.name;
-                    }
-                  }
-
-                  newComplexities.push(newComplexity);
                 }
+                if (!isFound) {
+                  let newCapability: CapabilitiesClassModel = new CapabilitiesClassModel();
+                  newCapability.name = capability.name;
+                  newCapability.code = capability.code;
+                  newCapability.sort_order = capability.sort_order;
+                  let newComplexities: ComplexitiesClassModel[] = new Array(0);
+                  for (let complexity of capability.complexities) {
+                    let complexityCode = cap.split('_')[1];
 
-              }
-              newComplexities = this.getSortedList(newComplexities, "sort_order");
-              newCapability.complexities = newComplexities;
-              capabilities.push(newCapability);
-            } else {
-              let isComFound: boolean = false;
-              let FoundedComplexity: ComplexitiesClassModel;
-              for (let complexity of foundedDefaultCapability.complexities) {
-                if (complexity.code === cap.split('_')[1]) {
-                  FoundedComplexity = complexity;
-                  isComFound = true;
-                }
-              }
-              if (!isComFound) {
-                let newComplexity: ComplexitiesClassModel = new ComplexitiesClassModel();
-                for (let complexity of role.default_complexities[0].complexities) {
-                  let complexityCode = cap.split('_')[1];
-
-                  if (complexityCode === complexity.code) {
-                    let newComplexity: ComplexitiesClassModel = new ComplexitiesClassModel();
-                    newComplexity.name = complexity.name;
-                    newComplexity.sort_order = complexity.sort_order;
-                    if (complexity.questionForCandidate !== undefined && complexity.questionForCandidate !== null && complexity.questionForCandidate !== '') {
-                      newComplexity.questionForCandidate = complexity.questionForCandidate;
-                    } else {
-                      newComplexity.questionForCandidate = complexity.name;
-                    }
-                    for (let scenario of complexity.scenarios) {
-                      if (capability_matrix[cap].toString() === scenario.code) {
-                        newComplexity.answer = scenario.name;
+                    if (complexityCode === complexity.code) {
+                      let newComplexity: ComplexitiesClassModel = new ComplexitiesClassModel();
+                      newComplexity.name = complexity.name;
+                      newComplexity.sort_order = complexity.sort_order;
+                      if (complexity.questionForCandidate !== undefined && complexity.questionForCandidate !== null && complexity.questionForCandidate !== '') {
+                        newComplexity.questionForCandidate = complexity.questionForCandidate;
+                      } else {
+                        newComplexity.questionForCandidate = complexity.name;
                       }
+                      for (let scenario of complexity.scenarios) {
+                        if (capability_matrix[cap].toString() === scenario.code) {
+                          newComplexity.answer = scenario.name;
+                        }
+                      }
+
+                      newComplexities.push(newComplexity);
                     }
-                    foundedDefaultCapability.complexities = this.getSortedList(foundedDefaultCapability.complexities, "sort_order");
-                    foundedDefaultCapability.complexities.push(newComplexity);
+
+                  }
+                  newComplexities = this.getSortedList(newComplexities, "sort_order");
+                  newCapability.complexities = newComplexities;
+                  capabilities.push(newCapability);
+                } else {
+                  let isComFound: boolean = false;
+                  let FoundedComplexity: ComplexitiesClassModel;
+                  for (let complexity of foundedCapability.complexities) {
+                    if (complexity.code === cap.split('_')[1]) {
+                      FoundedComplexity = complexity;
+                      isComFound = true;
+                    }
+                  }
+                  if (!isComFound) {
+                    let newComplexity: ComplexitiesClassModel = new ComplexitiesClassModel();
+                    for (let complexity of capability.complexities) {
+                      let complexityCode = cap.split('_')[1];
+
+                      if (complexityCode === complexity.code) {
+                        let newComplexity: ComplexitiesClassModel = new ComplexitiesClassModel();
+                        newComplexity.name = complexity.name;
+                        newComplexity.sort_order = complexity.sort_order;
+                        if (complexity.questionForCandidate !== undefined && complexity.questionForCandidate !== null && complexity.questionForCandidate !== '') {
+                          newComplexity.questionForCandidate = complexity.questionForCandidate;
+                        } else {
+                          newComplexity.questionForCandidate = complexity.name;
+                        }
+                        for (let scenario of complexity.scenarios) {
+                          if (capability_matrix[cap].toString() === scenario.code) {
+                            newComplexity.answer = scenario.name;
+                          }
+                        }
+                        foundedCapability.complexities = this.getSortedList(foundedCapability.complexities, "sort_order");
+                        foundedCapability.complexities.push(newComplexity);
+                      }
+
+                    }
+
                   }
 
                 }
-
               }
-
             }
             break;
-          }
-        }
-
-        for (let capability of role.capabilities) {
-
-          let capCode = cap.split('_')[0];
-          if (capCode === capability.code) {
-            let isFound: boolean = false;
-            let foundedCapability: CapabilitiesClassModel;
-            for (let c of capabilities) {
-              if (c.code === capCode) {
-                foundedCapability = c;
-                isFound = true;
-              }
-            }
-            if (!isFound) {
-              let newCapability: CapabilitiesClassModel = new CapabilitiesClassModel();
-              newCapability.name = capability.name;
-              newCapability.code = capability.code;
-              newCapability.sort_order = capability.sort_order;
-              let newComplexities: ComplexitiesClassModel[] = new Array(0);
-              for (let complexity of capability.complexities) {
-                let complexityCode = cap.split('_')[1];
-
-                if (complexityCode === complexity.code) {
-                  let newComplexity: ComplexitiesClassModel = new ComplexitiesClassModel();
-                  newComplexity.name = complexity.name;
-                  newComplexity.sort_order = complexity.sort_order;
-                  if (complexity.questionForCandidate !== undefined && complexity.questionForCandidate !== null && complexity.questionForCandidate !== '') {
-                    newComplexity.questionForCandidate = complexity.questionForCandidate;
-                  } else {
-                    newComplexity.questionForCandidate = complexity.name;
-                  }
-                  for (let scenario of complexity.scenarios) {
-                    if (capability_matrix[cap].toString() === scenario.code) {
-                      newComplexity.answer = scenario.name;
-                    }
-                  }
-
-                  newComplexities.push(newComplexity);
-                }
-
-              }
-              newComplexities = this.getSortedList(newComplexities, "sort_order");
-              newCapability.complexities = newComplexities;
-              capabilities.push(newCapability);
-            } else {
-              let isComFound: boolean = false;
-              let FoundedComplexity: ComplexitiesClassModel;
-              for (let complexity of foundedCapability.complexities) {
-                if (complexity.code === cap.split('_')[1]) {
-                  FoundedComplexity = complexity;
-                  isComFound = true;
-                }
-              }
-              if (!isComFound) {
-                let newComplexity: ComplexitiesClassModel = new ComplexitiesClassModel();
-                for (let complexity of capability.complexities) {
-                  let complexityCode = cap.split('_')[1];
-
-                  if (complexityCode === complexity.code) {
-                    let newComplexity: ComplexitiesClassModel = new ComplexitiesClassModel();
-                    newComplexity.name = complexity.name;
-                    newComplexity.sort_order = complexity.sort_order;
-                    if (complexity.questionForCandidate !== undefined && complexity.questionForCandidate !== null && complexity.questionForCandidate !== '') {
-                      newComplexity.questionForCandidate = complexity.questionForCandidate;
-                    } else {
-                      newComplexity.questionForCandidate = complexity.name;
-                    }
-                    for (let scenario of complexity.scenarios) {
-                      if (capability_matrix[cap].toString() === scenario.code) {
-                        newComplexity.answer = scenario.name;
-                      }
-                    }
-                    foundedCapability.complexities = this.getSortedList(foundedCapability.complexities, "sort_order");
-                    foundedCapability.complexities.push(newComplexity);
-                  }
-
-                }
-
-              }
-
-            }
           }
         }
       }
