@@ -4,6 +4,7 @@
   background: $white;
   display: inline-block;
   padding-bottom: 20px;
+  position: relative;
   width: 100%;
   h3 {
     background: $theme-color;
@@ -20,12 +21,24 @@
       content: "";
       width: 316px;
       height: 1px;
-      background: #000;
+      background: $black1;
       position: absolute;
       z-index: 0;
       margin-left: -354px;
       margin-top: 9px;
     }
+  }
+  .show-more-btn {
+    background: $light-gray;
+    position: absolute;
+    right: 9px;
+    top: 48%;
+    padding: 10px;
+    width: 80px;
+    height: 80px;
+    color: $black1;
+    border-radius: 80px;
+    border: 0;
   }
 }
 
@@ -76,10 +89,15 @@
         left: -212px;
         right: inherit;
         &:after {
-          border-bottom: 10px solid #fff;
+          border-bottom: 10px solid $white;
           right: -15px;
           left: initial;
           border-top: 0;
+        }
+        .complexities-list {
+          &:hover {
+            border-right: 5px solid $theme-color;
+          }
         }
       }
       &:before {
@@ -102,6 +120,11 @@
           left: initial;
           border-top: 0;
         }
+        .complexities-list {
+          &:hover {
+            border-right: 5px solid $theme-color;
+          }
+        }
       }
       &:before {
         display: none;
@@ -114,7 +137,7 @@
         left: -212px;
         right: inherit;
         &:after {
-          border-bottom: 10px solid #fff;
+          border-bottom: 10px solid $white;
           right: -15px;
           left: initial;
           border-top: 0;
@@ -134,7 +157,7 @@
         left: 41%;
         top: -22px;
         position: absolute;
-        background: #000;
+        background: $black1;
         height: 1px;
       }
     }
@@ -143,12 +166,12 @@
 
 .circle > .tooltip-content {
   display: inline-block;
-  background-color: #eaeaea;
+  background-color: $light-gray;
   border-radius: 4px;
-  box-shadow: 3px 3px 15px 1px #ccc;
+  box-shadow: 3px 3px 15px 1px $gray;
   margin-left: -280px;
   opacity: 0;
-  padding: 10px;
+  padding: 0px;
   position: absolute;
   transition: all .1s linear;
   width: 280px;
@@ -156,15 +179,20 @@
   margin-top: 188px;
   visibility: hidden;
   .complexities-list {
-    border-bottom: 1px solid #ccc;
+    border-left: 5px solid transparent;
+    border-bottom: 1px solid $gray;
     color: #000;
     font-size: 14px;
     margin: 0;
-    padding: 7px 0;
+    padding: 7px 0 7px 7px;
     text-align: left;
     width: 100%;
     &:last-child {
       border-bottom: 0;
+    }
+    &:hover {
+      background: $white;
+      border-left: 5px solid $theme-color;
     }
   }
 }
@@ -176,7 +204,7 @@
 
 .circle .tooltip-content:after {
   content: "";
-  border-bottom: 10px solid #eaeaea;
+  border-bottom: 10px solid $light-gray;
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
   position: absolute;
@@ -191,13 +219,13 @@
   display: inline-block;
   position: absolute;
   width: 200px;
-  background-color: #fff;
+  background-color: $white;
   padding: 10px;
   transition: all .1s linear;
-  box-shadow: 3px 3px 15px 1px #ccc;
+  box-shadow: 3px 3px 15px 1px $gray;
   border-radius: 4px;
   right: -212px;
-  color: #29b6f6;
+  color: $theme-color;
   margin-top: -13px;
 }
 
@@ -207,7 +235,7 @@
 
 .complexities-list .tooltip-content1:after {
   content: "";
-  border-top: 10px solid #fff;
+  border-top: 10px solid $white;
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
   position: absolute;
@@ -222,7 +250,7 @@
   content: "";
   width: 39px;
   height: 1px;
-  background: #000;
+  background: $black1;
   position: absolute;
   top: 50%;
   left: 174px;
@@ -241,6 +269,6 @@
   left: 38%;
   top: -29px;
   position: absolute;
-  background: #000;
+  background: $black1;
   height: 1px;
 }

@@ -23,7 +23,10 @@
           <div *ngFor="let academic of candidate.academics">
             <b>{{academic.yearOfPassing}}</b>
             <b><label>{{academic.specialization}}</label>|<label>{{academic.board}}</label></b>
-            <b>{{academic.schoolName}}</b>
+            <b style="    white-space: nowrap;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;">{{academic.schoolName}}</b>
           </div>
         </div>
       </div>
@@ -36,7 +39,10 @@
             <b>{{history.from.year}} - {{history.to.year}}</b>
             <b>{{history.designation}}</b>
             <b>{{history.companyName}}</b>
-            <b>{{history.remarks}}</b>
+            <b style="    white-space: nowrap;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;">{{history.remarks}}</b>
           </div>
         </div>
       </div>
@@ -49,7 +55,10 @@
             <b>{{certification.year}}</b>
             <b>{{certification.name}}</b>
             <b>{{certification.issuedBy}}</b>
-            <b>{{certification.remark}}</b>
+            <b style="    white-space: nowrap;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;">{{certification.remark}}</b>
           </div>
         </div>
       </div>
@@ -62,7 +71,10 @@
             <b>{{award.year}}</b>
             <b>{{award.name}}</b>
             <b>{{award.issuedBy}}</b>
-            <b>{{award.remark}}</b>
+            <b style="    white-space: nowrap;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;">{{award.remark}}</b>
           </div>
         </div>
       </div>
