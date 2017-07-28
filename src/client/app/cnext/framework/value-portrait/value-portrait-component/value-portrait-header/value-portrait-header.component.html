@@ -14,7 +14,8 @@
   <div class="col-xs-12 no-padding value-portraot-candidate-profile-section">
     <div class="col-xs-5">
       <div class="value-portraot-candidate-profile-img">
-        <img src="assets/framework/images/dashboard/default-profile.png" height="160" width="160"/>
+        <img [src]="getImagePath(candidate.personalDetails.picture)" alt="User Profile"
+             *ngIf="candidate.personalDetails.picture!=undefined"/>
       </div>
       <div class="value-portraot-candidate-name">
         {{candidate.personalDetails.first_name}} {{candidate.personalDetails.last_name}}
