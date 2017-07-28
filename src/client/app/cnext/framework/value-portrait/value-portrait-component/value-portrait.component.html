@@ -17,12 +17,15 @@
     <label>
       Key Skills
     </label>
-    <span>
+    <span class="key-skill-block">
       <b *ngFor="let proficiency of candidate.proficiencies"> {{proficiency}} </b>
+      <div class="tooltip-content4">
+        <b *ngFor="let proficiency of candidate.proficiencies"> {{proficiency}} </b>
+      </div>
     </span>
   </div>
   <div class="col-xs-4">
-    <div class="avout-myself-btn">
+    <div class="about-myself-btn">
       About Myself
       <div class="tooltip-content3">
         {{candidate.aboutMyself}}
