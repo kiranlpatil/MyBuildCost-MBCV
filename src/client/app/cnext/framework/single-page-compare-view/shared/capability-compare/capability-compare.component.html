@@ -25,7 +25,7 @@
                 <div class="" [class.exact]="complexity.match==2 "
                      [class.above]="complexity.match==3"
                      [class.below]="complexity.match==1" [class.missing]="complexity.match == 0"
-                     [class.extra]="complexity.match==4" *ngIf="complexity.scenarios[0]&& complexity.scenarios[0].name != undefined && complexity.scenarios[0].name!='Not Applicable'">
+                     [class.extra]="complexity.match==4" *ngIf="complexity.scenarios[0]&& complexity.scenarios[0].name != undefined && complexity.scenarios[0].job_scenario_name!='Not Applicable'">
                   <span class="complexity-name">{{complexity.name}}</span>
                   <div *ngFor="let scenario of complexity.scenarios">
                     <div class="complexity-scenarios-description">

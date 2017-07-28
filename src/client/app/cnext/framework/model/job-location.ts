@@ -3,4 +3,6 @@ export class JobLocation {
   state: string;
   country: string;
   pin: string;
+  formatted_address : string;
+
 }

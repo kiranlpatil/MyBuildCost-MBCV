@@ -40,6 +40,7 @@ export class BasicJobInformationComponent implements OnInit, OnChanges {
   private storedLocation: JobLocation = new JobLocation();
   private isSalaryValid: boolean = true;
   private isExperienceValid: boolean = true;
+  private isLocationInvalid : boolean= false;
 
   private locationValidationMessage = Messages.MSG_ERROR_VALIDATION_LOCATION_REQUIRED;
   private joiningPeriodValidationMessage = Messages.MSG_ERROR_VALIDATION_JOINING_PERIOD_REQUIRED;
@@ -114,13 +115,18 @@ export class BasicJobInformationComponent implements OnInit, OnChanges {
           this.jobPostForm.controls[name].patchValue(valueToSet, {onlySelf: true});
         }
       });
+      if(this.jobPosterModel &&this.jobPosterModel.location &&this.jobPosterModel.location.city) {
+        this.storedLocation.formatted_address=this.jobPosterModel.location.city +', '+ this.jobPosterModel.location.state +', '+this.jobPosterModel.location.country;
+      }
     }
   }
 
   getAddress(address: MyGoogleAddress) {
+    this.isLocationInvalid=false;
     this.storedLocation.city = address.city;
     this.storedLocation.state = address.state;
     this.storedLocation.country = address.country;
+    this.storedLocation.formatted_address=address.formatted_address;
   }
 
   selectIndustry(industry: Industry) {
@@ -145,6 +151,10 @@ export class BasicJobInformationComponent implements OnInit, OnChanges {
     if (Number(this.jobPosterModel.salaryMaxValue) <= Number(this.jobPosterModel.salaryMinValue)) {
       this.minSalaryValidationMessage = Messages.MSG_ERROR_VALIDATION_SALARY;
       this.isSalaryValid = false;
+      return;
+    }
+    if(!(this.storedLocation.formatted_address.split(',').length > 2)){
+      this.isLocationInvalid=true;
       return;
     }
 

@@ -39,6 +39,8 @@ export class ProfileDescriptionComponent implements OnInit {
   private experienceValidationMessage= Messages.MSG_ERROR_VALIDATION_EXPERIENCE_REQUIRED;
   private locationErrorMessage = Messages.MSG_ERROR_VALIDATION_LOCATION_REQUIRED;
   private storedLocation: Location = new Location();
+  formatted_address : string = 'Aurangabad, Bihar, India';
+  private isLocationInvalid : boolean=false;
 
 
   tooltipMessage: string =
@@ -70,6 +72,10 @@ export class ProfileDescriptionComponent implements OnInit {
     }
     if (this.candidate.jobTitle !== undefined && this.candidate.jobTitle !== "") {
       this.savedJobTitle = this.candidate.jobTitle;
+    }
+    if(this.candidate.location) {
+      this.storedLocation=this.candidate.location;
+      this.storedLocation.formatted_address=this.candidate.location.city +', '+ this.candidate.location.state +', '+this.candidate.location.country;
     }
   }
 
@@ -105,11 +111,29 @@ export class ProfileDescriptionComponent implements OnInit {
       this.isValid = false;
       return;
     }
+    if(!(this.storedLocation.formatted_address.split(',').length > 2)){
+      this.isValid = false;
+      this.isLocationInvalid=true;
+      return;
+    }
     this.candidate.location = this.storedLocation;
     this.disableButton = false;
     this.highlightedSection.name = 'Industry';
     this.highlightedSection.isDisable = false;
     this.onComplete.emit(this.candidate);
+  }
+
+  keyDownCheck(e : any) { debugger
+    e.preventDefault();
+      if(e.key == ',') {
+         return;
+      }
+      if(e.keyCode >= 65 && e.keyCode <=90 ) {
+        this.storedLocation.formatted_address += e.key;
+      }
+      if(e.keyCode == 8){
+        this.storedLocation.formatted_address=this.storedLocation.formatted_address.substr(0,this.storedLocation.formatted_address.length-1);
+      }
   }
 
   onSave() {
@@ -126,6 +150,11 @@ export class ProfileDescriptionComponent implements OnInit {
       (this.candidate.professionalDetails.experience === '' ||
       this.candidate.professionalDetails.experience === undefined ) || this.storedLocation.city === undefined ){
       this.isValid = false;
+      return;
+    }
+    if(!(this.storedLocation.formatted_address.split(',').length > 2)){
+      this.isValid = false;
+      this.isLocationInvalid=true;
       return;
     }
     this.candidate.location = this.storedLocation;
@@ -169,9 +198,12 @@ export class ProfileDescriptionComponent implements OnInit {
   }
 
   getAddress(address: MyGoogleAddress) {
+   this.isLocationInvalid=false;
+   this.isValid=true;
     this.storedLocation.city = address.city;
     this.storedLocation.state = address.state;
     this.storedLocation.country = address.country;
+    this.storedLocation.formatted_address=address.formatted_address;
   }
 
   getprofileDetails() {

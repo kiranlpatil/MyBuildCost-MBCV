@@ -3,4 +3,5 @@ export class Location {
   state: string;
   country: string;
   pin: string;
+  formatted_address : string = 'Aurangabad, Bihar, India';
 }

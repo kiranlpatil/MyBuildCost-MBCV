@@ -131,9 +131,9 @@
             <div class="form-group">
               <label>Job Location</label>
               <input type="text" formControlName="location" class="form-control" placeholder=""
-                     (setAddress)="getAddress($event)" mygoogleplace/>
+                     (setAddress)="getAddress($event)"  [(ngModel)]="storedLocation.formatted_address" mygoogleplace/>
               <div class="error-messages"
-                   *ngIf="(jobPostForm.get('location').touched || submitStatus)&& jobPostForm.get('location').hasError('required')">
+                   *ngIf="isLocationInvalid">
                 <p>{{locationValidationMessage}}</p>
               </div>
             </div>

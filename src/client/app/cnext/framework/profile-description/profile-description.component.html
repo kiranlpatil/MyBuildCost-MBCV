@@ -43,8 +43,8 @@
           </div>-->
           <div class="form-group">
             <label>Current Location</label>
-            <input type="text" class="form-control" placeholder="" (setAddress)="getAddress($event)" (city)="selectedCity($event)" mygoogleplace/>
-            <div class="error-messages" *ngIf="storedLocation.city == undefined && !isValid">{{locationErrorMessage}}</div>
+            <input type="text" class="form-control" placeholder="" (keydown)="keyDownCheck($event)"   [(ngModel)]="storedLocation.formatted_address" (setAddress)="getAddress($event)"  (city)="selectedCity($event)" mygoogleplace pattern="/^[a-zA-Z]+$/"/>
+            <div class="error-messages" *ngIf="isLocationInvalid && !isValid">{{locationErrorMessage}}</div>
           </div>
 
 

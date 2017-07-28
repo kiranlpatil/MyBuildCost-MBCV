@@ -29,7 +29,7 @@ export class MyGoogleDirective {
       componentRestrictions: {country: 'in'}
     };
     this.autocomplete = new google.maps.places.Autocomplete(input, options);
-    google.maps.event.addListener(this.autocomplete, 'place_changed', () => {
+    google.maps.event.addListener(this.autocomplete, 'place_changed', () => {debugger
       this.place = this.autocomplete.getPlace();
       this.invokeEvent(this.place);
     });
@@ -72,6 +72,7 @@ export class MyGoogleDirective {
     myaddress.city = city;
     myaddress.state = state;
     myaddress.country = country;
+    myaddress.formatted_address=this.place.formatted_address;
     this.setAddress.emit(myaddress);
   }
 
