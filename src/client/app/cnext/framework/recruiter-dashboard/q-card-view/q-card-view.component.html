@@ -64,8 +64,8 @@
           </div>
           <div class="col-md-4 col-sm-5 col-xs-6 no-padding canvas-cricle">
             <div class="canvas-container" title="Matching Percentage">
-              <cn-progress-bar  [value]="item.matching" [color]="progress_bar_color" [rotation]="false"></cn-progress-bar>
-              <cn-progress-bar [value]="item.matching" [color]="progress_bar_color" [rotation]="true"></cn-progress-bar>
+              <cn-progress-bar  [value]="item.exact_matching + item.above_one_step_matching" [color]="progress_bar_color" [rotation]="false"></cn-progress-bar>
+              <cn-progress-bar [value]="item.exact_matching + item.above_one_step_matching" [color]="progress_bar_color" [rotation]="true"></cn-progress-bar>
               <span >{{item.exact_matching + item.above_one_step_matching | number : '1.0-0'}}%</span>
               <p>Match</p>
             </div>
