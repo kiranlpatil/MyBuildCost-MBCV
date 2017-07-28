@@ -201,12 +201,12 @@ export class JobDashboardComponent implements OnInit {
 
   getCompareDetail() {
     this.whichListVisible[4] = true;
-    //if (this.listOfCandidateIdToCompare.length) {
+    if (this.listOfCandidateIdToCompare.length) {
       this.profileComparisonService.getCompareDetail(this.listOfCandidateIdToCompare, this.jobId)
         .subscribe(
           data => this.OnCompareSuccess(data.data),
           error => console.log(error));
-    //}
+    }
   }
 
   OnCompareSuccess(data: ProfileComparison) {
@@ -215,6 +215,7 @@ export class JobDashboardComponent implements OnInit {
 
   addForCompare(value: any) {
     if (this.listOfCandidateIdToCompare.indexOf(value) == -1) {
+      this.recruiterJobView.numberOfCandidatesInCompare++;
       this.listOfCandidateIdToCompare.push(value);
     }
   }
