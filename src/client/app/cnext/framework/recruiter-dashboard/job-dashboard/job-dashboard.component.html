@@ -117,8 +117,9 @@
       *ngIf="whichListVisible[4]"
 
        uncomment below code -->
-      <!--<p class="empty-list-message"  *ngIf="recruiterJobView.numberOfCandidatesInCompare==0">There are no candidates to
-        compare.</p>-->
+      <p class="empty-list-message" *ngIf="recruiterJobView.numberOfCandidatesInCompare==0 && whichListVisible[4]">There
+        are no candidates to
+        compare.</p>
     </div>
 
   </div>
