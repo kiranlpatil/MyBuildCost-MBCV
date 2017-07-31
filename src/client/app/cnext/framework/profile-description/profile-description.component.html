@@ -23,6 +23,7 @@
             <input name="jobTitle" placeholder="e.g. Software Engineer" class="form-control"
                    [(ngModel)]="candidate.jobTitle" (ngModelChange)="onJobTitleChange()">
             <div class="error-messages" *ngIf="(candidate.jobTitle == '' || candidate.jobTitle == undefined) && !isValid">{{jobTitleValidationMessage}}</div>
+            <div class="error-messages" *ngIf="containsWhiteSpace">{{noWhiteSpaceAllowedMessage}}</div>
           </div>
 
 

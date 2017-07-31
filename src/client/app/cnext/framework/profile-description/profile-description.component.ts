@@ -41,7 +41,8 @@ export class ProfileDescriptionComponent implements OnInit {
   private storedLocation: Location = new Location();
   formatted_address : string = 'Aurangabad, Bihar, India';
   private isLocationInvalid : boolean=false;
-
+  private containsWhiteSpace: boolean = false;
+  private noWhiteSpaceAllowedMessage = Messages.MSG_ERROR_JOB_TITLE_INVALID_BLANK_SPACE;
 
   tooltipMessage: string =
     '<ul>' +
@@ -96,6 +97,8 @@ export class ProfileDescriptionComponent implements OnInit {
     }
   }
   onNext() {
+    this.containsWhiteSpace = false;
+    this.isValid = true;
     /*if (this.storedLocation.city == undefined) {
       this.storedLocation.city = 'pune';
       this.storedLocation.state = 'maharashtra';
@@ -111,6 +114,12 @@ export class ProfileDescriptionComponent implements OnInit {
       this.isValid = false;
       return;
     }
+
+    if ((this.candidate.jobTitle.trim() == '')) {
+      this.containsWhiteSpace = true;
+      return;
+    }
+
     if(!(this.storedLocation.formatted_address.split(',').length > 2)){
       this.isValid = false;
       this.isLocationInvalid=true;
@@ -123,7 +132,8 @@ export class ProfileDescriptionComponent implements OnInit {
     this.onComplete.emit(this.candidate);
   }
 
-  keyDownCheck(e : any) { debugger
+  keyDownCheck(e: any) {
+    debugger;;
     e.preventDefault();
       if(e.key == ',') {
          return;
@@ -137,6 +147,8 @@ export class ProfileDescriptionComponent implements OnInit {
   }
 
   onSave() {
+    this.containsWhiteSpace = false;
+    this.isValid = true;
     if (this.storedLocation.city === undefined) {
       this.storedLocation.city = 'pune';
       this.storedLocation.state = 'maharashtra';
@@ -152,6 +164,11 @@ export class ProfileDescriptionComponent implements OnInit {
       this.isValid = false;
       return;
     }
+
+    if (this.candidate.jobTitle.trim() == '') {
+      this.containsWhiteSpace = true;
+    }
+
     if(!(this.storedLocation.formatted_address.split(',').length > 2)){
       this.isValid = false;
       this.isLocationInvalid=true;
