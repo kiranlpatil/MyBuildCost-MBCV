@@ -3,8 +3,8 @@ export class AppSettings {
   // public static IP = 'http://ee802b7f.ngrok.io';
   //public static IP = 'http://10.192.33.77:8080';
   //public static IP = 'http://52.89.221.23';
-   public static IP = 'http://52.41.194.37';
-  //public static IP = '';
+  // public static IP = 'app.jobmosis.com';
+  public static IP = '';
 
 
   public static get API_ENDPOINT(): string {
