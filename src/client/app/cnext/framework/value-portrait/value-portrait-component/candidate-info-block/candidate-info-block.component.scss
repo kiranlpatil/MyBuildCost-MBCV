@@ -27,6 +27,12 @@
           padding: 10px;
           width: 100%;
         }
+        .tooltip-content2 {
+          width: 195px;
+          right: 0;
+          left: 5px;
+          margin: 0;
+        }
       }
       .experience-level-tabs {
         background: $light-orange;
@@ -39,6 +45,12 @@
           display: inline-block;
           padding: 10px;
           width: 100%;
+        }
+        .tooltip-content2 {
+          width: 195px;
+          right: 0;
+          left: 5px;
+          margin: 0;
         }
       }
       .education-tabs {
@@ -105,7 +117,7 @@
   /*opacity: 0;*/
   display: inline-block;
   position: absolute;
-  width: 240px;
+  width: 250px;
   margin-left: -48px;
   top: 52px;
   background-color: $light-gray;
@@ -120,6 +132,14 @@
     float: left;
     width: 100%;
     text-align: left;
+  }
+  strong {
+    font-weight: bold;
+    color: $black1;
+    font-family: 'gothamrnd-book';
+  }
+  label {
+    display: initial;
   }
   .line-block {
     margin-bottom: 7px;
