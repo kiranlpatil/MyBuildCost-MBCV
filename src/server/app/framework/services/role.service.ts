@@ -45,16 +45,15 @@ class RoleService {
   addRole(currentRow:any, roles:any) {
 
     if (roles.length != 0) {
+      let isRoleFound : boolean=false;
       for (let i = 0; i < roles.length; i++) {
         if (currentRow.area_of_work == roles[i].name) {
-          return roles;
+          isRoleFound = true;
         }
-        else {
-          if (i == (roles.length - 1)) {
-            let newRole = new RoleClassModel(currentRow.area_of_work, currentRow.area_of_work_code, currentRow.area_of_work_display_sequence);
-            roles.push(newRole);
-          }
-        }
+      }
+      if (!isRoleFound) {
+        let newRole = new RoleClassModel(currentRow.area_of_work, currentRow.area_of_work_code, currentRow.area_of_work_display_sequence);
+        roles.push(newRole);
       }
       return roles;
     }

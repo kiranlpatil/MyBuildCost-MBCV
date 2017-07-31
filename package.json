@@ -175,6 +175,7 @@
     "@types/passport": "^0.2.32",
     "@types/passport-http-bearer": "^1.0.30",
     "@types/winston": "0.0.28",
+    "bcrypt": "^1.0.2",
     "body-parser": "^1.15.2",
     "bootstrap": "^3.3.6",
     "compression": "^1.6.2",

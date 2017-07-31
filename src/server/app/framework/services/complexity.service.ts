@@ -40,41 +40,42 @@ class ComplexityService {
     this.industryRepository.findComplexities(field, callback);
   }
 
-  addComplexities(currentRow:any, complexities:any) {
+  addComplexities(currentRow: any, complexities: any) {
     if (complexities.length !== 0) {
+      let isComplexityFound: boolean = false;
       for (let i = 0; i < complexities.length; i++) {
         if (currentRow.complexity === complexities[i].name) {
+          isComplexityFound = true;
           //addScenario();
-        } else {
-          if (i === (complexities.length - 1)) {
-            var newComplexity = new ComplexityClassModel(currentRow.complexity, currentRow.complexity_code, currentRow.complexity_display_sequence, currentRow.complexity_question_for_participant, currentRow.complexity_question_for_recruiter);
-            let scenarios:ScenarioClassModel[] = new Array(0);
-            for (let sceIndex:number = 0; sceIndex < 5; sceIndex++) {
-              let sceName = 'Scenario' + (sceIndex + 1).toString();
-              let newScenario:ScenarioClassModel = new ScenarioClassModel(currentRow[sceName], ((sceIndex + 1) * 10).toString());
-              if (newScenario.name !== '') {
-                scenarios.push(newScenario);
-              }
-            }
-            let s:ScenarioClassModel = new ScenarioClassModel('Not Applicable', '' + 0);
-            scenarios.push(s);
-            newComplexity.scenarios = scenarios;
-            complexities.push(newComplexity);
-          }
         }
+      }
+      if (!isComplexityFound) {
+        let newComplexity = new ComplexityClassModel(currentRow.complexity, currentRow.complexity_code, currentRow.complexity_display_sequence, currentRow.complexity_question_for_participant, currentRow.complexity_question_for_recruiter);
+        let scenarios: ScenarioClassModel[] = new Array(0);
+          for (let sceIndex: number = 0; sceIndex < 5; sceIndex++) {
+            let sceName = 'Scenario' + (sceIndex + 1).toString();
+            let newScenario: ScenarioClassModel = new ScenarioClassModel(currentRow[sceName], ((sceIndex + 1) * 10).toString());
+            if (newScenario.name !== '') {
+              scenarios.push(newScenario);
+            }
+          }
+        let s: ScenarioClassModel = new ScenarioClassModel('Not Applicable', '' + 0);
+        scenarios.push(s);
+        newComplexity.scenarios = scenarios;
+        complexities.push(newComplexity);
       }
       return complexities;
     } else {
       var newComplexity = new ComplexityClassModel(currentRow.complexity, currentRow.complexity_code, currentRow.complexity_display_sequence, currentRow.complexity_question_for_participant, currentRow.complexity_question_for_recruiter);
-      let scenarios:ScenarioClassModel[] = new Array(0);
-      for (let sceIndex:number = 0; sceIndex < 5; sceIndex++) {
+      let scenarios: ScenarioClassModel[] = new Array(0);
+      for (let sceIndex: number = 0; sceIndex < 5; sceIndex++) {
         let sceName = 'Scenario' + (sceIndex + 1).toString();
-        let newScenario:ScenarioClassModel = new ScenarioClassModel(currentRow[sceName], ((sceIndex + 1) * 10).toString());
+        let newScenario: ScenarioClassModel = new ScenarioClassModel(currentRow[sceName], ((sceIndex + 1) * 10).toString());
         if (newScenario.name !== '') {
           scenarios.push(newScenario);
         }
       }
-      let s:ScenarioClassModel = new ScenarioClassModel('Not Applicable', '' + 0);
+      let s: ScenarioClassModel = new ScenarioClassModel('Not Applicable', '' + 0);
       scenarios.push(s);
       newComplexity.scenarios = scenarios;
       complexities.push(newComplexity);

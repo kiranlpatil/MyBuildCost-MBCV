@@ -15,6 +15,7 @@ import RecruiterModel = require('../dataaccess/model/recruiter.model');
 import CapabilityMatrixService = require('./capbility-matrix.builder');
 import IndustryModel = require('../dataaccess/model/industry.model');
 import IndustryRepository = require('../dataaccess/repository/industry.repository');
+var bcrypt = require('bcrypt');
 
 class RecruiterService {
   private recruiterRepository: RecruiterRepository;
@@ -35,7 +36,6 @@ class RecruiterService {
   }
 
   createUser(item: any, callback: (error: any, result: any) => void) {
-    console.log("in recruiter service" + JSON.stringify(item));
     this.userRepository.retrieve({"email": item.email}, (err, res) => {
       if (err) {
         callback(new Error(err), null);
@@ -49,23 +49,31 @@ class RecruiterService {
       }else {
             item.isActivated = false;
             item.isCandidate = false;
-            this.userRepository.create(item, (err, res) => {
-              if (err) {
-                callback(new Error(Messages.MSG_ERROR_REGISTRATION_MOBILE_NUMBER), null);
-              }else {
-                var userId1 = res._id;
-                var newItem: any = {
-                  isRecruitingForself: item.isRecruitingForself,
-                  company_name: item.company_name,
-                  company_size: item.company_size,
-                  company_logo: item.company_logo,
-                  userId: userId1
-                };
-                this.recruiterRepository.create(newItem, (err: any, res: any) => {
+            const saltRounds = 10;
+            bcrypt.hash(item.password, saltRounds, (err:any, hash:any) =>{
+              if(err) {
+                callback(new Error('Error in creating hash using bcrypt')
+              } else {
+                item.password = hash;
+                this.userRepository.create(item, (err, res) => {
                   if (err) {
-                    callback(err, null);
-                  } else {
-                    callback(null, res);
+                    callback(new Error(Messages.MSG_ERROR_REGISTRATION_MOBILE_NUMBER), null);
+                  }else {
+                    var userId1 = res._id;
+                    var newItem: any = {
+                      isRecruitingForself: item.isRecruitingForself,
+                      company_name: item.company_name,
+                      company_size: item.company_size,
+                      company_logo: item.company_logo,
+                      userId: userId1
+                    };
+                    this.recruiterRepository.create(newItem, (err: any, res: any) => {
+                      if (err) {
+                        callback(err, null);
+                      } else {
+                        callback(null, res);
+                      }
+                    });
                   }
                 });
               }

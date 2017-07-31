@@ -15,14 +15,14 @@ export function readXlsx(req: express.Request, res: express.Response) {
     if (error) {
       console.log('crt role error', error);
       res.send({
-        'error': error
+        'error': error.message
       });
     } else {
       importIndustriesService.create(result, (error, result) => {
         if (error) {
           console.log('crt role error', error);
           res.send({
-            'error': error
+            'error': error.message
           });
       } else {
           var auth:AuthInterceptor = new AuthInterceptor();

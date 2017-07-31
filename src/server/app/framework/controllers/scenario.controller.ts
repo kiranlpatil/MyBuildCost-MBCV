@@ -30,7 +30,6 @@ export function retrieve(req: express.Request, res: express.Response, next: any)
 
       }
       else {
-        console.log("Data " + JSON.stringify(result));
         //  var token = auth.issueTokenWithUid(user);
         res.send({
           "status": "success",
@@ -51,15 +50,10 @@ export function retrieve(req: express.Request, res: express.Response, next: any)
 export function create(req: express.Request, res: express.Response, next: any) {
   try {
     var newIndustry: IndustryModel = <IndustryModel>req.body;
-    console.log("Requested Industry" + JSON.stringify(newIndustry));
     var newRole: RoleModel = <RoleModel>req.body.roles;
-    console.log("Requested Role" + JSON.stringify(newRole));
     var newCapability: CapabilityModel = <CapabilityModel>req.body.roles[0].capabilities;
-    console.log("Requested Capability" + JSON.stringify(newCapability));
     var newComplexity: ComplexityModel = <ComplexityModel>req.body.roles[0].capabilities[0].complexities;
-    console.log("Requested Complexity" + JSON.stringify(newComplexity));
     var newScenario: ScenarioModel = <ScenarioModel>req.body.roles[0].capabilities[0].complexities[0].scenarios;
-    console.log("Requested Scenario" + JSON.stringify(newScenario));
 
     var industryService = new IndustryService();
     industryService.create(newIndustry, (error, result) => {

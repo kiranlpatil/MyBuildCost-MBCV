@@ -7,6 +7,7 @@ import * as fs from "fs";
 import * as mongoose from "mongoose";
 //import * as config from 'config';
 var config = require('config');
+var bcrypt = require('bcrypt');
 import Messages = require("../shared/messages");
 import AuthInterceptor = require("../../framework/interceptor/auth.interceptor");
 import ProjectAsset = require("../shared/projectasset");

@@ -116,7 +116,6 @@ export function updateDetails(req: express.Request, res: express.Response, next:
     var params = req.query;
     delete params.access_token;
     var userId: string = req.params.id;
-    console.log('updated recruiter' + JSON.stringify(newRecruiter));
     var auth: AuthInterceptor = new AuthInterceptor();
     var recruiterService = new RecruiterService();
     recruiterService.updateDetails(userId, newRecruiter, (error, result) => {

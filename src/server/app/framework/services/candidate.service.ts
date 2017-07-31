@@ -19,6 +19,7 @@ import ComplexityClassModel = require("../dataaccess/model/complexity-class.mode
 import ComplexitiesClassModel = require("../dataaccess/model/complexities-class.model");
 import CapabilityModel = require("../dataaccess/model/capability.model");
 import RoleModel = require("../dataaccess/model/role.model");
+var bcrypt = require('bcrypt');
 class CandidateService {
   private candidateRepository: CandidateRepository;
   private recruiterRepository: RecruiterRepository;
@@ -51,25 +52,35 @@ class CandidateService {
         }
       }
       else {
-        item.isCandidate = true;
-        this.userRepository.create(item, (err, res) => {
-          if (err) {
-            callback(new Error(Messages.MSG_ERROR_REGISTRATION_MOBILE_NUMBER), null);
-          } else {
-            var userId1 = res._id;
-            var newItem: any = {
-              userId: userId1,
-              location: item.location
-            };
-            this.candidateRepository.create(newItem, (err: any, res: any) => {
+        const saltRounds = 10;
+        bcrypt.hash(item.password, saltRounds, (err:any, hash:any) =>{
+          // Store hash in your password DB.
+          if(err) {
+            callback(new Error('Error in creating hash using bcrypt')
+          }else {
+            item.password= hash;
+            this.userRepository.create(item, (err, res) => {
               if (err) {
-                callback(err, null);
-              } else {
-                callback(null, res);
+                callback(new Error(Messages.MSG_ERROR_REGISTRATION_MOBILE_NUMBER), null);
+              }else {
+                var userId1 = res._id;
+                var newItem: any = {
+                  userId: userId1,
+                  location: item.location
+                };
+                this.candidateRepository.create(newItem, (err: any, res: any) => {
+                  if (err) {
+                    callback(err, null);
+                  } else {
+                    callback(null, res);
+                  }
+                });
               }
             });
           }
         });
+        item.isCandidate = true;
+
       }
     });
   }
