@@ -133,18 +133,17 @@
 .panel {
   position: relative;
 
-  .btn-edit-job {
+  .edit-job-notification {
     display: block;
-    background: $theme-color;
-    padding: 3px 10px;
-    color: $white;
-    border: 1px solid $theme-color;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 12px 12px 0;
+    border-color: transparent $theme-color transparent transparent;
     position: absolute;
-    right: 5px;
-    bottom: 5px;
+    right: -1px;
+    top: -1px;
     z-index: 10;
-    border-radius: 4px;
-    font-size: 12px;
   }
 
   &:hover {
