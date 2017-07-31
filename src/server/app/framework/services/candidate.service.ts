@@ -53,11 +53,11 @@ class CandidateService {
       }
       else {
         const saltRounds = 10;
-        bcrypt.hash(item.password, saltRounds, (err:any, hash:any) =>{
+        bcrypt.hash(item.password, saltRounds, (err:any, hash:any) => {
           // Store hash in your password DB.
           if(err) {
-            callback(new Error('Error in creating hash using bcrypt')
-          }else {
+            callback(new Error('Error in creating hash using bcrypt'),null);
+          } else {
             item.password= hash;
             this.userRepository.create(item, (err, res) => {
               if (err) {

@@ -50,9 +50,9 @@ class RecruiterService {
             item.isActivated = false;
             item.isCandidate = false;
             const saltRounds = 10;
-            bcrypt.hash(item.password, saltRounds, (err:any, hash:any) =>{
+            bcrypt.hash(item.password, saltRounds, (err:any, hash:any) => {
               if(err) {
-                callback(new Error('Error in creating hash using bcrypt')
+                callback(new Error('Error in creating hash using bcrypt'),null);
               } else {
                 item.password = hash;
                 this.userRepository.create(item, (err, res) => {
