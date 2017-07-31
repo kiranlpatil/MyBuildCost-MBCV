@@ -41,8 +41,10 @@ export class BasicJobInformationComponent implements OnInit, OnChanges {
   private isSalaryValid: boolean = true;
   private isExperienceValid: boolean = true;
   private isLocationInvalid : boolean= false;
+  formatted_address: string = 'Aurangabad, Bihar, India';
 
   private locationValidationMessage = Messages.MSG_ERROR_VALIDATION_LOCATION_REQUIRED;
+  private inValidLocationMessage = Messages.MSG_ERROR_VALIDATION_INVALID_LOCATION;
   private joiningPeriodValidationMessage = Messages.MSG_ERROR_VALIDATION_JOINING_PERIOD_REQUIRED;
   private maxSalaryValidationMessage = Messages.MSG_ERROR_VALIDATION_MAX_SALARY_REQUIRED;
   private minSalaryValidationMessage = Messages.MSG_ERROR_VALIDATION_MIN_SALARY_REQUIRED;
@@ -115,9 +117,26 @@ export class BasicJobInformationComponent implements OnInit, OnChanges {
           this.jobPostForm.controls[name].patchValue(valueToSet, {onlySelf: true});
         }
       });
-      if(this.jobPosterModel &&this.jobPosterModel.location &&this.jobPosterModel.location.city) {
-        this.storedLocation.formatted_address=this.jobPosterModel.location.city +', '+ this.jobPosterModel.location.state +', '+this.jobPosterModel.location.country;
+      if (this.jobPosterModel && this.jobPosterModel.location) {
+        if (this.jobPosterModel.location.city == undefined) {
+          this.storedLocation.formatted_address = '';
+        } else {
+          this.storedLocation.formatted_address = this.jobPosterModel.location.city + ', ' + this.jobPosterModel.location.state + ', ' + this.jobPosterModel.location.country;
+        }
       }
+    }
+  }
+
+  keyDownCheck(e: any) {
+    this.isLocationInvalid = false;
+    if (e.keyCode >= 65 && e.keyCode <= 90 || e.key == ',' || e.key == '13') {
+      e.preventDefault();
+      if (e.keyCode >= 65 && e.keyCode <= 90) {
+        this.storedLocation.formatted_address += e.key;
+      }
+    }
+    else {
+      return;
     }
   }
 
@@ -136,6 +155,7 @@ export class BasicJobInformationComponent implements OnInit, OnChanges {
   onNext() {
     this.isExperienceValid = true;
     this.isSalaryValid = true;
+    this.isLocationInvalid = false;
     this.jobPosterModel = this.jobPostForm.value;
     if (!this.jobPostForm.valid && this.storedIndustry == undefined) {
       this.submitStatus = true;
