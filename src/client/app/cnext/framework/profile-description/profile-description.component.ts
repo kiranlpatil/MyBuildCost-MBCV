@@ -38,9 +38,11 @@ export class ProfileDescriptionComponent implements OnInit {
   private educationValidationMessage= Messages.MSG_ERROR_VALIDATION_EDUCATION_REQUIRED;
   private experienceValidationMessage= Messages.MSG_ERROR_VALIDATION_EXPERIENCE_REQUIRED;
   private locationErrorMessage = Messages.MSG_ERROR_VALIDATION_LOCATION_REQUIRED;
+  private invalidLocationErrorMessage = Messages.MSG_ERROR_VALIDATION_INVALID_LOCATION;
   private storedLocation: Location = new Location();
   formatted_address : string = 'Aurangabad, Bihar, India';
   private isLocationInvalid : boolean=false;
+  private isLocationEmpty: boolean = false;
   private containsWhiteSpace: boolean = false;
   private noWhiteSpaceAllowedMessage = Messages.MSG_ERROR_JOB_TITLE_INVALID_BLANK_SPACE;
 
@@ -76,7 +78,12 @@ export class ProfileDescriptionComponent implements OnInit {
     }
     if(this.candidate.location) {
       this.storedLocation=this.candidate.location;
-      this.storedLocation.formatted_address=this.candidate.location.city +', '+ this.candidate.location.state +', '+this.candidate.location.country;
+      if (this.candidate.location.city == undefined) {
+        this.storedLocation.formatted_address = '';
+      } else {
+        this.storedLocation.formatted_address = this.candidate.location.city + ', ' + this.candidate.location.state + ', ' + this.candidate.location.country;
+      }
+
     }
   }
 
@@ -99,6 +106,8 @@ export class ProfileDescriptionComponent implements OnInit {
   onNext() {
     this.containsWhiteSpace = false;
     this.isValid = true;
+    this.isLocationInvalid = false;
+    this.isLocationEmpty = false;
     /*if (this.storedLocation.city == undefined) {
       this.storedLocation.city = 'pune';
       this.storedLocation.state = 'maharashtra';
@@ -110,7 +119,10 @@ export class ProfileDescriptionComponent implements OnInit {
       (this.candidate.professionalDetails.education == '' ||
       this.candidate.professionalDetails.education == undefined ) ||
       (this.candidate.professionalDetails.experience == '' ||
-      this.candidate.professionalDetails.experience == undefined )|| this.storedLocation.city == undefined){
+      this.candidate.professionalDetails.experience == undefined ) || this.storedLocation.city == undefined) {
+      if (this.storedLocation.formatted_address == '') {
+        this.isLocationEmpty = true;
+      }
       this.isValid = false;
       return;
     }
@@ -133,22 +145,22 @@ export class ProfileDescriptionComponent implements OnInit {
   }
 
   keyDownCheck(e: any) {
-    debugger;;
-    e.preventDefault();
-      if(e.key == ',') {
-         return;
-      }
-      if(e.keyCode >= 65 && e.keyCode <=90 ) {
+    if (e.keyCode >= 65 && e.keyCode <= 90 || e.key == ',' || e.key == '13') {
+      e.preventDefault();
+      if (e.keyCode >= 65 && e.keyCode <= 90) {
         this.storedLocation.formatted_address += e.key;
       }
-      if(e.keyCode == 8){
-        this.storedLocation.formatted_address=this.storedLocation.formatted_address.substr(0,this.storedLocation.formatted_address.length-1);
-      }
+    }
+    else {
+      return;
+    }
   }
 
   onSave() {
     this.containsWhiteSpace = false;
     this.isValid = true;
+    this.isLocationInvalid = false;
+    this.isLocationEmpty = false;
     if (this.storedLocation.city === undefined) {
       this.storedLocation.city = 'pune';
       this.storedLocation.state = 'maharashtra';
@@ -161,6 +173,9 @@ export class ProfileDescriptionComponent implements OnInit {
       this.candidate.professionalDetails.education === undefined ) ||
       (this.candidate.professionalDetails.experience === '' ||
       this.candidate.professionalDetails.experience === undefined ) || this.storedLocation.city === undefined ){
+      if (this.storedLocation.formatted_address == '') {
+        this.isLocationEmpty = true;
+      }
       this.isValid = false;
       return;
     }

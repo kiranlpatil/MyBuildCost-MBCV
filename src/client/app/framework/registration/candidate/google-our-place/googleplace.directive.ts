@@ -29,7 +29,7 @@ export class MyGoogleDirective {
       componentRestrictions: {country: 'in'}
     };
     this.autocomplete = new google.maps.places.Autocomplete(input, options);
-    google.maps.event.addListener(this.autocomplete, 'place_changed', () => {debugger
+    google.maps.event.addListener(this.autocomplete, 'place_changed', () => {
       this.place = this.autocomplete.getPlace();
       this.invokeEvent(this.place);
     });

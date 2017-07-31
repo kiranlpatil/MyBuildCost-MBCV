@@ -45,7 +45,8 @@
           <div class="form-group">
             <label>Current Location</label>
             <input type="text" class="form-control" placeholder="" (keydown)="keyDownCheck($event)"   [(ngModel)]="storedLocation.formatted_address" (setAddress)="getAddress($event)"  (city)="selectedCity($event)" mygoogleplace pattern="/^[a-zA-Z]+$/"/>
-            <div class="error-messages" *ngIf="isLocationInvalid && !isValid">{{locationErrorMessage}}</div>
+            <div class="error-messages" *ngIf="isLocationEmpty">{{locationErrorMessage}}</div>
+            <div class="error-messages" *ngIf="isLocationInvalid">{{invalidLocationErrorMessage}}</div>
           </div>
 
 
