@@ -20,10 +20,10 @@
              src="assets/framework/images/dashboard/default-profile.png" height="160" width="160"/>
       </div>
       <div class="value-portraot-candidate-name"
-           title="{{candidate.personalDetails.first_name}} {{candidate.personalDetails.last_name}}">
+           title="Name : {{candidate.personalDetails.first_name}} {{candidate.personalDetails.last_name}}">
         {{candidate.personalDetails.first_name}} {{candidate.personalDetails.last_name}}
       </div>
-      <div class="value-portraot-candidate-job-title" title="{{candidate.jobTitle}}">
+      <div class="value-portraot-candidate-job-title" title="Job Title : {{candidate.jobTitle}}">
         {{candidate.jobTitle}}
       </div>
     </div>
@@ -31,18 +31,18 @@
       <div class="col-xs-4">
         <div class="value-portraot-candidate-number">
           <span class="phone-icon"></span>
-          <span>{{candidate.personalDetails.mobile_number}}</span>
+          <span title="Mobile number : {{candidate.personalDetails.mobile_number}}">{{candidate.personalDetails.mobile_number}}</span>
         </div>
         <div class="value-portraot-candidate-email">
           <span class="email-icon"></span>
-          <span title="{{candidate.personalDetails.email}}">{{candidate.personalDetails.email}}</span>
+          <span title="Email : {{candidate.personalDetails.email}}">{{candidate.personalDetails.email}}</span>
         </div>
       </div>
       <div class="col-xs-8">
         <div class="value-portraot-candidate-industry">
           <span class="industry-icon"></span>
           <label> Industry : </label>
-          <span title="{{candidate.industry.name}}">{{candidate.industry.name}}</span>
+          <span title="Industry : {{candidate.industry.name}}">{{candidate.industry.name}}</span>
         </div>
         <div class="value-portraot-candidate-area-work">
           <span class="area-work-icon"></span>

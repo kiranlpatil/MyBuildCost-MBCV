@@ -28,6 +28,9 @@
     overflow: hidden;
     text-overflow: ellipsis;">{{academic.schoolName}}</b>
           </div>
+          <div *ngIf="candidate.academics.length == 0" class="line-block">
+            Not Available
+          </div>
         </div>
       </div>
     </li>
@@ -43,6 +46,9 @@
     width: 100%;
     overflow: hidden;
     text-overflow: ellipsis;">{{history.remarks}}</b>
+          </div>
+          <div *ngIf="candidate.employmentHistory.length == 0" class="line-block">
+            Not Available
           </div>
         </div>
       </div>
@@ -60,6 +66,9 @@
     overflow: hidden;
     text-overflow: ellipsis;">{{certification.remark}}</b>
           </div>
+          <div *ngIf="candidate.certifications.length == 0" class="line-block">
+            Not Available
+          </div>
         </div>
       </div>
     </li>
@@ -75,6 +84,9 @@
     width: 100%;
     overflow: hidden;
     text-overflow: ellipsis;">{{award.remark}}</b>
+          </div>
+          <div *ngIf="candidate.awards.length == 0" class="line-block">
+            Not Available
           </div>
         </div>
       </div>
