@@ -1,7 +1,7 @@
 @import '../../../../../../css/variables';
 
 .exact {
-  background: $green !important;
+  background: $light-green2 !important;
   padding: 5px 5px 0px;
   height: 57px;
   line-height: 16px;
@@ -39,8 +39,8 @@
     padding: 5px;
     bottom: inherit;
     min-height: 59px;
-    width: 194%;
-    left: -54px;
+    width: 220px;
+    left: 0px;
     box-shadow: 0px 0px 4px 0px #757575;
     color : white !important;
     font-size: 12px;
@@ -74,12 +74,12 @@
   .complexity-scenarios-description {
     white-space: inherit;
     position: absolute;
-    background: $green;
+    background: $light-green2;
     padding: 5px;
     bottom: inherit;
     min-height: 59px;
-    width: 194%;
-    left: -54px;
+    width: 220px;
+    left: 0px;
     box-shadow: 0px 0px 4px 0px #757575;
     font-size: 12px;
     z-index: 999;
@@ -121,8 +121,8 @@
     padding: 5px;
     bottom: inherit;
     min-height: 59px;
-    width: 194%;
-    left: -54px;
+    width: 220px;
+    left: 0px;
     box-shadow: 0px 0px 4px 0px #757575;
     font-size: 12px;
     z-index: 999;
@@ -164,8 +164,8 @@
     padding: 5px;
     bottom: inherit;
     min-height: 59px;
-    width: 194%;
-    left: -54px;
+    width: 220px;
+    left: 0px;
     box-shadow: 0px 0px 4px 0px #757575;
     font-size: 12px;
     z-index: 999;
@@ -192,7 +192,7 @@
 }
 
 .missing {
-  background: $red !important;
+  background: $red2 !important;
   padding: 5px 5px 0px;
   height: 57px;
   line-height: 16px;
@@ -203,12 +203,12 @@
   .complexity-scenarios-description {
     white-space: inherit;
     position: absolute;
-    background: $red;
+    background: $red2;
     padding: 5px;
     bottom: inherit;
     min-height: 59px;
-    width: 194%;
-    left: -54px;
+    width: 220px;
+    left: 0px;
     box-shadow: 0px 0px 4px 0px #757575;
     font-size: 12px;
     z-index: 999;
@@ -255,8 +255,8 @@
     padding: 5px;
     bottom: inherit;
     min-height: 59px;
-    width: 194%;
-    left: -54px;
+    width: 220px;
+    left: 0px;
     box-shadow: 0px 0px 4px 0px #757575;
     font-size: 12px;
     z-index: 999;
@@ -319,6 +319,34 @@
     .complexity-scenarios-description {
       right: 0;
       left: inherit;
+    }
+  }
+}
+
+.row-section .column1:nth-child(10),
+.row-section .column1:nth-child(11),
+.row-section .column1:nth-child(12) {
+  .above:hover,
+  .below:hover,
+  .missing:hover,
+  .extra:hover,
+  .exact:hover {
+    .complexity-scenarios-description {
+      right: 0;
+      left: inherit;
+    }
+  }
+}
+
+.row-section .column1:nth-child(2) {
+  .above:hover,
+  .below:hover,
+  .missing:hover,
+  .extra:hover,
+  .exact:hover {
+    .complexity-scenarios-description {
+      left: 0 !important;
+      right: inherit !important;
     }
   }
 }
