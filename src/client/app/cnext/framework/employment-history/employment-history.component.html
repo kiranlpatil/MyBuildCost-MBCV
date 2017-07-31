@@ -4,7 +4,7 @@
 
     <h4 class="heading">Employment History (Optional)</h4>
     <div class="error-messages edit-error-msg" *ngIf="!isValidservicePeriod">
-      <p>Please mentioned service period</p>
+      <p>{{serviceValidMessage}}</p>
     </div>
     <div class="scrollable-content">
       <form class="description-form" [formGroup]="employeeHistory" novalidate>
