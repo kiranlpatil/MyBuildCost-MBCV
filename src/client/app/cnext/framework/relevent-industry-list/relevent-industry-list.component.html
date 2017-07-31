@@ -8,10 +8,10 @@
     <h4 class="heading">Do you wish to see candidates with similar skills from other industries?</h4>
     <div class="scrollable-content">
       <p>{{suggestionMsgForReleventIndustry}}</p>
-      <input type="checkbox" name="relevent" value="relevent" (change)="getReleventIndustry($event)"
-             [checked]="showRleventindustry == true"> Relevent Industry
+      <!--<input type="checkbox" name="relevent" value="relevent" (change)="getReleventIndustry($event)"
+             [checked]="showRleventindustry == true"> Relevent Industry-->
       <div class="col-sm-12 no-padding select-industry">
-        <div *ngIf="showRleventindustry">
+        <div>
           <div class="select-option" *ngFor="let item of releventIndustries;let i = index">
             <label>
               <input type="checkbox" name="item.name" id="{{item.name}}" value="{{item.name}}"
@@ -30,7 +30,7 @@
     <div class="button-group clearfix">
       <!--<div class="saving-loader">Saving...</div>-->
       <button class="btn btn-primary"
-              (click)="onNext()" [hidden]="!showButton">Next
+              (click)="goNext()" [hidden]="!showButton">Next
       </button>
 
       <button class="btn btn-primary" (click)="onSave()" [hidden]="showButton">Done

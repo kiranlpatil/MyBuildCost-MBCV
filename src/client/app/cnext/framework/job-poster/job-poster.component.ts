@@ -423,15 +423,12 @@ export class JobPosterComponent implements OnInit, OnChanges {
   }
 
   onReleventIndustryComplete(value: any) {
-    console.log('----data------', value);
     this.jobPosterModel.releventIndustries = value;
-    console.log('---- this.jobPosterModel.releventIndustries------', this.jobPosterModel.releventIndustries);
     this.showCompentensies = true;
     this.updateJob();
   }
 
   checkReleventIndustries(value: any) {
-    console.log('checkReleventIndustries couunt', value);
     (value > 0) ? this.isShowReleventIndustryListStep = true : this.isShowReleventIndustryListStep = false;
   }
 

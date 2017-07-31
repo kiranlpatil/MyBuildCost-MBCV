@@ -15,16 +15,17 @@ import {Industry} from "../model/industry";
 })
 
 export class ReleventIndustryListComponent implements OnInit {
-  releventIndustries: ReleventIndustry[] = new Array();
-  workAreas: string[] = new Array();
-  workAreasToUpdate: string[] = new Array();
+  releventIndustries: ReleventIndustry[] = [];
+  workAreas: string[] = [];
+  workAreasToUpdate: string[] = [];
   @Output() onNextComplete = new EventEmitter();
   @Output() checkReleventIndustries = new EventEmitter();
   @Input() highlightedSection: Section;
   @Input() roles: Role[] = new Array(0);
   @Input() industry: Industry;
+  @Input() slectedReleventIndustry: string[] = new Array(0);
   suggestionMsgForReleventIndustry: string;
-  showRleventindustry: boolean = false;
+  //showRleventindustry: boolean = false;
   private showButton: boolean = true;
 
 
@@ -66,6 +67,7 @@ export class ReleventIndustryListComponent implements OnInit {
   onGetIndustriesSuccess(res: any) {
     this.releventIndustries = new Array(0);
     this.releventIndustries = <ReleventIndustry[]>res.data;
+    this.releventIndustries.forEach(x => x.isChecked = true);
     this.checkReleventIndustries.emit(res.data.length);
   }
 
@@ -74,6 +76,7 @@ export class ReleventIndustryListComponent implements OnInit {
   }
 
   goNext() {
+    this.onNext();
     this.highlightedSection.name = 'Compentancies';
     this.onNextComplete.emit(this.workAreasToUpdate);
   }
@@ -81,18 +84,19 @@ export class ReleventIndustryListComponent implements OnInit {
   onSave() {
     this.highlightedSection.name = 'none';
     this.highlightedSection.isDisable = false;
+    this.onNext();
     this.onNextComplete.emit(this.workAreasToUpdate);
   }
 
-  getReleventIndustry(event: any) {
+  /* getReleventIndustry(event: any) {
     this.showRleventindustry = event.target.checked;
     //this.showRleventindustry = true;
     //if(event.target.checked) {
-    this.releventIndustries.forEach(x => x.isChecked = event.target.checked);
-    /* } else {
-     this.releventIndustries.forEach(x => x.isChecked = event.target.checked);
-     }*/
-  }
+   //this.releventIndustries.forEach(x => x.isChecked = event.target.checked);
+   /!* } else {
+   this.releventIndustries.forEach(x => x.isChecked = event.target.checked);
+   }*!/
+   }*/
 
   onValueChange(event: any, index: number) {
     this.releventIndustries[index].isChecked = event.target.checked;
@@ -100,13 +104,14 @@ export class ReleventIndustryListComponent implements OnInit {
 
   onNext() {
     this.workAreasToUpdate = new Array(0);
+    this.slectedReleventIndustry = new Array(0);
     this.releventIndustries.forEach(item => {
       if (item.isChecked) {
         this.workAreasToUpdate.push(item.name);
+        this.slectedReleventIndustry.push(item.name);
       }
     });
-
-    this.goNext();
+    // this.goNext();
   }
 
 }
