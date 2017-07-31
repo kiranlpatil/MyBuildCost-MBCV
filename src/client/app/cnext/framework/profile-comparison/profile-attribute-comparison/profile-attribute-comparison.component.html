@@ -1,7 +1,7 @@
 <div class="attribute-container">
   <div class="candidate-compare-attribute clearfix">
     <div class="matching-attribute-name">
-      <h6>Key skills Matching</h6>
+      <h6>Key Skills</h6>
     </div>
     <div class="matching-candidate-attributes">
       <!-- Start: repeat this div using for loop -->
@@ -128,7 +128,7 @@
       <div class="candidate-attribute-list" *ngFor="let item of profileComparisonResult">
         <!--<div *ngIf="item.proficienciesMatch.indexOf(value) !== -1">-->
         <div *ngFor="let value of item.interestedIndustryMatch">
-          <p class="matching-attribute">
+          <p class="matching-attribute" *ngIf="item.interestedIndustryMatch.indexOf('None') == -1">
             <span class="matching-attribute-icon"></span>
             {{value}}
           </p>

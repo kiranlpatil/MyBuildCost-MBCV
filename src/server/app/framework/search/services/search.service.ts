@@ -365,6 +365,13 @@ class SearchService {
             break;
           }
         }
+        for (let capability of role.default_complexities) {
+          if (_cap == capability.code) {
+            capName = capability.name;
+            var complex = capability.complexities;
+            break;
+          }
+        }
       }
       if(capName) {
       var percentage: number = (matchCount / capabilityQuestionCount) * 100;
