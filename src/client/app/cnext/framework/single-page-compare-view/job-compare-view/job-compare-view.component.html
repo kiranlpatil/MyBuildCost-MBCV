@@ -205,10 +205,10 @@
   <div *ngIf="data && (typeOfView =='spa_job' || typeOfView =='spa_candidate')">
     <div class="spa-candidate-col">
       <div class="col-sm-12">
-        <div *ngIf="typeOfView =='spa_job' && recruiter != undefined" >
+        <div *ngIf="typeOfView =='spa_job' && recruiter != undefined && candidateDetails != undefined" >
           <cn-capability-compare [job_picture]="recruiter.company_logo" [candidate_picture]="candidateDetails.picture" [capabilities]="capabilities"></cn-capability-compare>
         </div>
-        <div *ngIf="typeOfView =='spa_candidate' && candidateDetails != undefined">
+        <div *ngIf="typeOfView =='spa_candidate' && candidateDetails != undefined && recruiter != undefined">
           <cn-capability-compare [candidate_picture]="candidateDetails.picture"  [job_picture]="recruiter.company_logo"  [capabilities]="capabilities"></cn-capability-compare>
         </div>
       </div>
