@@ -3,7 +3,7 @@
 .value-portraot-container {
   padding: 0 15px;
   margin: 0 auto;
-  width: 96%;
+  width: 92%;
 }
 
 .value-portraot-section {
@@ -11,4 +11,8 @@
   display: inline-block;
   padding-bottom: 50px;
   width: 100%;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  overflow: auto;
 }

@@ -20,9 +20,12 @@
         border-radius: 7px;
         box-shadow: 0 0 9px 3px rgba(0, 0, 0, 0.28), 0 0 1px 0 rgba(0, 0, 0, 0.16);
         margin: 0 5px;
-        padding: 10px;
         span {
           color: $white;
+          cursor: pointer;
+          display: inline-block;
+          padding: 10px;
+          width: 100%;
         }
       }
       .experience-level-tabs {
@@ -30,9 +33,12 @@
         border-radius: 7px;
         box-shadow: 0 0 9px 3px rgba(0, 0, 0, 0.28), 0 0 1px 0 rgba(0, 0, 0, 0.16);
         margin: 0 5px;
-        padding: 10px;
         span {
           color: $white;
+          cursor: pointer;
+          display: inline-block;
+          padding: 10px;
+          width: 100%;
         }
       }
       .education-tabs {
@@ -40,9 +46,12 @@
         border-radius: 7px;
         box-shadow: 0 0 9px 3px rgba(0, 0, 0, 0.28), 0 0 1px 0 rgba(0, 0, 0, 0.16);
         margin: 0 5px;
-        padding: 10px;
         span {
           color: $white;
+          cursor: pointer;
+          display: inline-block;
+          padding: 10px;
+          width: 100%;
         }
       }
       .employment-tabs {
@@ -50,9 +59,12 @@
         border-radius: 7px;
         box-shadow: 0 0 9px 3px rgba(0, 0, 0, 0.28), 0 0 1px 0 rgba(0, 0, 0, 0.16);
         margin: 0 5px;
-        padding: 10px;
         span {
           color: $white;
+          cursor: pointer;
+          display: inline-block;
+          padding: 10px;
+          width: 100%;
         }
       }
       .certification-tabs {
@@ -60,9 +72,12 @@
         border-radius: 7px;
         box-shadow: 0 0 9px 3px rgba(0, 0, 0, 0.28), 0 0 1px 0 rgba(0, 0, 0, 0.16);
         margin: 0 5px;
-        padding: 10px;
         span {
           color: $white;
+          cursor: pointer;
+          display: inline-block;
+          padding: 10px;
+          width: 100%;
         }
       }
       .awards-tabs {
@@ -70,9 +85,12 @@
         border-radius: 7px;
         box-shadow: 0 0 9px 3px rgba(0, 0, 0, 0.28), 0 0 1px 0 rgba(0, 0, 0, 0.16);
         margin: 0 5px;
-        padding: 10px;
         span {
           color: $white;
+          cursor: pointer;
+          display: inline-block;
+          padding: 10px;
+          width: 100%;
         }
       }
       &:first-child {
@@ -82,21 +100,22 @@
   }
 }
 
+
 .info-block-tabs > .tooltip-content2 {
-  opacity: 0;
+  /*opacity: 0;*/
   display: inline-block;
   position: absolute;
   width: 240px;
-  margin-left: -148px;
+  margin-left: -48px;
   top: 52px;
   background-color: $light-gray;
   padding: 10px;
   transition: all .1s linear;
   box-shadow: 3px 3px 15px 1px #ccc;
   border-radius: 4px;
-  visibility: hidden;
   right: 10px;
   z-index: 9;
+  display: none;
   b {
     float: left;
     width: 100%;
@@ -116,10 +135,16 @@
   }
 }
 
-.info-block-tabs:hover > .tooltip-content2 {
+.open {
+  .tooltip-content2 {
+    display: block !important;
+  }
+}
+
+/*.info-block-tabs:hover > .tooltip-content2 {
   opacity: 1;
   visibility: visible;
-}
+}*/
 
 .tooltip-content2:after {
   content: "";
