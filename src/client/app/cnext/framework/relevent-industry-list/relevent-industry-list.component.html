@@ -40,13 +40,13 @@
 </div>
 
 <div class="section-container" *ngIf="highlightedSection.name!='ReleventIndustry'">
-  <div class="main-content">
+  <div class="main-content" (click)="highlightedSection.name='ReleventIndustry';showButton=false;disableButton=false">
     <div class="compact-view clearfix">
+      <button class="btn-edit"
+              (click)="highlightedSection.name='ReleventIndustry';showButton=false;disableButton=false"
+              title="ReleventIndustry"></button>
       <div class="col-sm-3 padding-right15">
         <h4 class="heading-compact">Additional Industries
-          <button class="btn-edit"
-                  (click)="highlightedSection.name='ReleventIndustry';showButton=false;disableButton=false"
-                  title="ReleventIndustry"></button>
         </h4>
       </div>
       <div class="col-sm-9 padding-left15">
