@@ -21,7 +21,7 @@
       content: "";
       width: 262px;
       height: 1px;
-      background: $black1;
+      background: $gray-light1;
       position: absolute;
       z-index: 0;
       margin-left: -299px;
@@ -183,7 +183,7 @@
         left: 41%;
         top: -22px;
         position: absolute;
-        background: $black1;
+        background: $gray-light1;
         height: 1px;
       }
     }
@@ -195,12 +195,12 @@
   background-color: $light-gray;
   border-radius: 4px;
   box-shadow: 3px 3px 15px 1px $gray;
-  margin-left: -269px;
+  margin-left: -222px;
   opacity: 0;
   padding: 0px;
   position: absolute;
   transition: all .1s linear;
-  width: 280px;
+  width: 230px;
   z-index: 99;
   margin-top: 165px;
   visibility: hidden;
@@ -208,7 +208,7 @@
     border-left: 5px solid transparent;
     border-bottom: 1px solid $gray-border-bg;
     color: #000;
-    font-size: 14px;
+    font-size: 12px;
     margin: 0;
     padding: 7px 0 7px 7px;
     text-align: left;
@@ -216,6 +216,7 @@
     &:hover {
       background: $white;
       border-left: 5px solid $theme-color;
+      color: $theme-color;
     }
   }
 }
@@ -273,7 +274,7 @@
   content: "";
   width: 39px;
   height: 1px;
-  background: $black1;
+  background: $gray-light1;
   position: absolute;
   top: 50%;
   left: 148px;
@@ -292,6 +293,6 @@
   left: 38%;
   top: -29px;
   position: absolute;
-  background: $black1;
+  background: $gray-light1;
   height: 1px;
 }
