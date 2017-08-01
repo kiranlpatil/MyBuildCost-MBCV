@@ -14,15 +14,20 @@
                alt="User Profile"/>
           <div class="" title="Job Title: {{job.jobTitle}}">{{job.jobTitle}}</div>
         </h6>
-        <p class="proficiencies" title="Key Skills">
+        <div class="proficiencies proficiencies-key-skills" title="Key Skills">
           <span class="proficiencies-icon"></span>
-          <span *ngFor="let proficiency of job.proficiencies;let i=index">
-          <span *ngIf="i < 5">{{proficiency}}
-            <span *ngIf="i>=0 && i<4 &&  job.proficiencies.length-1 != i ">,&nbsp;</span>
+          <div class="skills-lists">
+            <b *ngFor="let proficiency of job.proficiencies;let i=index">
+              {{proficiency}}<b *ngIf="i>=0 && i<4 &&  job.proficiencies.length-1 != i ">,&nbsp;</b>
+            </b>
+          </div>
+          <span class="tooltip-content-new">
+             <span *ngFor="let proficiency of job.proficiencies;let i=index">
+                {{proficiency}}
+             <span *ngIf="i>=0 && i<4 &&  job.proficiencies.length-1 != i ">,&nbsp;</span>
           </span>
-        </span>
-          <br/><span *ngIf="job.proficiencies.length > 5">( {{job.proficiencies.length-5}} More )</span>
-        </p>
+          </span>
+        </div>
       </div>
       <div class="company-date" title="Job Posting Date">
         {{job.postingDate| date:'mediumDate'}}
