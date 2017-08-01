@@ -71,20 +71,34 @@
           <span class="error-messages" *ngIf="isPasswordConfirm == true">{{passwordMismatchMessage}}</span>
         </div>
 
+        <!--<div class="form-group">
+          <input type="text" formControlName="location" class="form-control" placeholder="" (keydown)="keyDownCheck($event)"
+                 pattern="/^[a-zA-Z]+$/" (setAddress)="getAddress($event)" mygoogleplace/>
+          <label>Current Location</label>
+          <div class="error-messages" *ngIf="(recruiterForm.get('location').touched || submitStatus)&&
+          recruiterForm.get('location').hasError('required')">{{locationValidationMessage}}</div>
+          <div class="error-messages" *ngIf="isLocationInvalid">{{locationValidationMessage}}</div>
+        </div>-->
+
         <div class="form-group">
           <input type="text" formControlName="location" class="form-control" placeholder=""
+                 [(ngModel)]="storedLocation.formatted_address" (keydown)="keyDownCheck($event)"
                  (setAddress)="getAddress($event)" mygoogleplace/>
           <label>Current Location</label>
-          <div class="error-messages" *ngIf='locationErrorMessage != undefined'>{{locationErrorMessage}}</div>
+          <div class="error-messages" *ngIf="isLocationEmpty">{{locationValidationMessage}}</div>
+          <div class="error-messages" *ngIf="isLocationInvalid">{{inValidLocationMessage}}</div>
         </div>
 
 
         <div class="form-group">
 
           <input type="text" formControlName="company_headquarter_country" class="form-control"
+                 [(ngModel)]="companyHQCountry"
+                 (keydown)="keyDownCheckCompanyHQ($event)"
                  placeholder="" (setAddress)="selectCompanyHeadquarterModel($event)" mygoogleplace/>
           <label>Company Head Quarter</label>
-          <div class="error-messages" *ngIf='companyHQErrorMessage != undefined'>{{companyHQErrorMessage}}</div>
+          <div class="error-messages" *ngIf='isCompanyHQEmpty'>{{locationValidationMessage}}</div>
+          <div class="error-messages" *ngIf='isCompanyHQInvalid'>{{inValidLocationMessage}}</div>
         </div>
 
         <!--<div class="form-group recaptcha">
