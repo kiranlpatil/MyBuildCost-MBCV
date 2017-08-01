@@ -1,3 +1,5 @@
+@import '../../../../../../css/variables';
+
 .candidate-meta {
   position: relative;
 
@@ -14,12 +16,12 @@
     left: 0;
     width: auto;
     font-size: 12px;
-    color: #ff5722;
+    color: $comparison-section-percentage;
     margin: 2px 6px;
   }
 
   h6 {
-    color: #333;
+    color: $text-color;
     font-size: 12px;
     font-weight: bold;
     width: 100%;
