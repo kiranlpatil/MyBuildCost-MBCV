@@ -34,10 +34,12 @@
                       <div *ngIf="complexity.match != 2" [class.unmatch-overlay-show]="complexity.match != 2">
                         <div class="col-xs-12 no-padding user-info-modal">
                           <div class="col-xs-2 no-padding ">
-                            <span> <img style="width: 24px;height: 24px;" src="/assets/framework/images/dashboard/profile.png" alt="User Profile"
+                            <span> <img style="width: 30px;height: 30px;"
+                                        src="/assets/framework/images/dashboard/profile.png" alt="User Profile"
                                         *ngIf="candidate_picture==undefined"/>
-                              <img style="width: 24px;height: 24px;" [src]="getImagePath(candidate_picture)" alt="User Profile"
-                                 *ngIf="candidate_picture!=undefined"/>
+                              <img style="width: 30px;height: 30px;" [src]="getImagePath(candidate_picture)"
+                                   alt="User Profile"
+                                   *ngIf="candidate_picture!=undefined"/>
                             </span>
                           </div>
                           <div class="col-xs-10 ">
@@ -45,9 +47,11 @@
                           </div>
                           <div class="clearfix bottom-div"></div>
                           <div class="col-xs-2 no-padding">
-                            <span> <img style="width: 24px;height: 24px;" src="/assets/c-next/company-details/company-logo-default.png" alt="User Profile"
-                                              *ngIf="job_picture==undefined"/>
-                              <img style="width: 24px;height: 24px;" [src]="getImagePath(job_picture)"  alt="User Profile"
+                            <span> <img style="width: 30px;height: 30px;"
+                                        src="/assets/c-next/company-details/company-logo-default.png" alt="User Profile"
+                                        *ngIf="job_picture==undefined"/>
+                              <img style="width: 30px;height: 30px;" [src]="getImagePath(job_picture)"
+                                   alt="User Profile"
                                    *ngIf="job_picture!=undefined"/>
                             </span>
                           </div>
