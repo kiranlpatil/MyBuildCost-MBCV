@@ -15,7 +15,10 @@
 .company-profile-picture-col {
   div {
     float: left;
-    width: calc(100% - 40px);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: calc(100% - 0px);
+    white-space: nowrap;
   }
   .company-name-label {
     color: $text-color;
