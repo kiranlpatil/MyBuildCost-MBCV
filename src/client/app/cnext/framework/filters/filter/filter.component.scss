@@ -1,6 +1,7 @@
 .recruiter-filter {
   top: 213px !important;
-  padding-bottom: 213px !important;
+  padding-bottom: 0 !important;
+  height: calc(100vh - 213px) !important;
 
   h4 {
     top: 170px !important;

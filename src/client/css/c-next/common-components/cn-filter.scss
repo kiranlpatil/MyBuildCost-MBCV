@@ -1,18 +1,16 @@
 @import '../../../css/variables';
 
 .filter-container {
-  padding-bottom: 60px;
+  padding: 0;
   position: fixed;
   top: 127px;
   right: 0;
-  height: 100vh;
+  height: calc(100vh - 127px);
   overflow: auto;
-  border: 1px solid $border-color;
-  //background: $bg-tab-content;
-  //box-shadow: 0 0 1px 0 $profile-section-shadow1;
+  border-left: 1px solid #ccc;
   text-align: left;
   width: 200px;
-  background: $filter-bg;
+  background: #edf1f5;
   z-index: 998;
 
   p {
@@ -22,7 +20,7 @@
   h4 {
     margin: 0;
     color: #666;
-    padding: 61px 15px 15px;
+    padding: 55px 15px 15px;
     font-size: 13px;
     font-family: 'gothamrnd-book';
     position: fixed;
