@@ -3,7 +3,14 @@
     <div class="capability-compare-container" *ngFor="let item of profileComparisonResult ;let i = index">
       <div *ngIf="i == 0">
         <div class="matching-capability-headings">
-          <h6 *ngFor="let data of item.capabilityMap | keys">{{item.capabilityMap[data].capabilityName}}</h6>
+          <div class="inner">
+            <h6 *ngFor="let data of item.capabilityMap | keys">
+              {{item.capabilityMap[data].capabilityName}}
+              <span class="tooltip-content-new">
+                <p>{{item.capabilityMap[data].capabilityName}}</p>
+              </span>
+            </h6>
+          </div>
         </div>
       </div>
 
