@@ -133,10 +133,13 @@
       border: 1px solid $theme-color;
       box-shadow: none;
       color: $white;
-      width: 160px;
+      width: 150px;
       margin: 0 auto;
       z-index: 2;
       position: relative;
+      padding: 6px 25px !important;
+      height: 32px !important;
+      font-size: 14px !important;
 
       &:hover,
       &:focus,
@@ -539,6 +542,18 @@ header {
     background: url(../assets/c-next/card-view/sprite.png) no-repeat -54px -566px;
     right: 25px !important;
   }
+
+  .btn-cart {
+    background: $orange;
+    border: 1px solid $orange;
+
+    &:hover,
+    &:focus,
+    &:active {
+      background: $orange;
+      border: 1px solid $orange;
+    }
+  }
 }
 
 #rejected,
@@ -610,6 +625,18 @@ header {
   .compare-candidate-icon {
     background: url(../assets/c-next/card-view/sprite.png) no-repeat -106px -566px;
   }
+
+  .btn-cart {
+    background: $pink;
+    border: 1px solid $pink;
+
+    &:hover,
+    &:focus,
+    &:active {
+      background: $pink;
+      border: 1px solid $pink;
+    }
+  }
 }
 
 #cart-job {
@@ -655,6 +682,18 @@ header {
   }
   .compare-candidate-icon {
     background: url(../assets/c-next/card-view/sprite.png) no-repeat -156px -566px;
+  }
+
+  .btn-cart {
+    background: $purple;
+    border: 1px solid $purple;
+
+    &:hover,
+    &:focus,
+    &:active {
+      background: $purple;
+      border: 1px solid $purple;
+    }
   }
 }
 

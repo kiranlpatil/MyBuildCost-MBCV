@@ -35,8 +35,8 @@
     <!--<div class="col-sm-4" *ngFor= "let item of candidates">&lt;!&ndash;| candidatematching: matchFormat&ndash;&gt;-->
     <div class="col-sm-4"
          *ngFor="let item of candidates | qcardmatching: matchFormat: totalQCardMatches :type | qcardlistfilter:filterMeta:qCardCount | qcardlistsort:[qCardModel.sortValue,matchFormat];let i=index;">
-      <span class="compare-candidate-icon" (click)="addForCompareView(item._id)"
-            title="Compare the Candidates"></span>
+      <!--<span class="compare-candidate-icon" (click)="addForCompareView(item._id)"
+            title="Compare the Candidates"></span>-->
       <div class="panel clearfix" (click)="viewProfile(item)">
         <ul>
           <li *ngIf="type=='matchedList'">
@@ -118,9 +118,12 @@
           <!--<div class="col-sm-6 padding-right5">
             <button class="btn btn-cart btn-block" type="button" >View</button>
           </div>-->
-          <div class="col-sm-12 no-padding">
-            <button class="btn btn-cart btn-block" type="button"
+          <div class="col-sm-12 no-padding text-center">
+            <button class="btn btn-cart" type="button"
                     (click)="actionOnQCard('add','matchedList','cartListed',item)">Add To Cart
+            </button>
+            <button class="btn btn-cart" type="button"
+                    (click)="addForCompareView(item._id)">Compare
             </button>
           </div>
         </div>
@@ -128,14 +131,22 @@
           <!-- <div class="col-sm-12 no-padding">
              <button class="btn btn-cart btn-block" type="button" (click)="viewProfile(item)">View</button>
            </div>-->
+          <div class="col-sm-12 no-padding text-center">
+            <button class="btn btn-cart" type="button"
+                    (click)="addForCompareView(item._id)">Compare
+            </button>
+          </div>
         </div>
         <div class="button-group" *ngIf="type=='applied'">
           <!--<div class="col-sm-6 padding-right5">
             <button class="btn btn-cart btn-block" type="button" (click)="viewProfile(item)">View</button>
           </div>-->
-          <div class="col-sm-12 no-padding">
-            <button class="btn btn-cart btn-block" type="button"
+          <div class="col-sm-12 no-padding text-center">
+            <button class="btn btn-cart" type="button"
                     (click)="actionOnQCard('add','applied','cartListed',item)">Add To Cart
+            </button>
+            <button class="btn btn-cart" type="button"
+                    (click)="addForCompareView(item._id)">Compare
             </button>
           </div>
         </div>
@@ -143,6 +154,11 @@
           <!-- <div class="col-sm-12 no-padding">
              <button class="btn btn-cart btn-block" type="button" (click)="viewProfile(item)">View</button>
            </div>-->
+          <div class="col-sm-12 no-padding text-center">
+            <button class="btn btn-cart" type="button"
+                    (click)="addForCompareView(item._id)">Compare
+            </button>
+          </div>
         </div>
       </div>
     </div>
