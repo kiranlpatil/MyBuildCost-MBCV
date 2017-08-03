@@ -53,11 +53,17 @@ class CapabilityService {
       }
       if (!isCapabilityFound) {
         var newCapability = new CapabilityClassModel(currentRow.capability, currentRow.capability_code, currentRow.capability_display_sequence);
+        if (currentRow['default_capability_for_aow'] == 'D') {
+          newCapability.code = 'd' + newCapability.code;
+        }
         capabilities.push(newCapability);
       }
       return capabilities;
     }else {
       var newCapability = new CapabilityClassModel(currentRow.capability, currentRow.capability_code, currentRow.capability_display_sequence);
+      if (currentRow['default_capability_for_aow'] == 'D') {
+        newCapability.code = 'd' + newCapability.code;
+      }
       capabilities.push(newCapability);
       return capabilities;
     }

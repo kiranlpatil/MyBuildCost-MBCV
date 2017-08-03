@@ -115,6 +115,30 @@ class ImportIndustryService {
 
         for (let i = 0; i < rolesArray.length; i++) {
           rolesArray[i].default_complexities = new Array(0);
+          let temp = new Array(0);
+          for (let c in rolesArray[i].capabilities) {
+            //if(rolesArray[i].name == 'IT Support'){
+            if (rolesArray[i].capabilities[c].code.startsWith('d')) {
+              rolesArray[i].default_complexities.push(rolesArray[i].capabilities[c]);
+              temp.push(c);
+            }
+            //}
+          }
+
+          if (temp.length > 0) {
+            for (let t = temp.length - 1; t >= 0; t--) {
+              rolesArray[i].capabilities.splice(temp[t], 1);
+            }
+          }
+
+
+          if (rolesArray[i].name === '') {
+            rolesArray.splice(i, 1);
+          }
+        }
+
+        /*for (let i = 0; i < rolesArray.length; i++) {
+         rolesArray[i].default_complexities = new Array(0);
           if (rolesArray[i].capabilities[0].name.startsWith('Default')) {
             rolesArray[i].default_complexities.push(rolesArray[i].capabilities[0]);
             rolesArray[i].capabilities.shift();
@@ -122,7 +146,7 @@ class ImportIndustryService {
           if (rolesArray[i].name === '') {
             rolesArray.splice(i, 1);
           }
-        }
+         }*/
 
         let industry = new ImportIndustriesModel(result[0].industry, result[0].code,result[0].sort_order,rolesArray);
         if(!isSend){
