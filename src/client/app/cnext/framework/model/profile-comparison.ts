@@ -8,7 +8,7 @@ import {ProfileComparisonHeaderMeta} from "../profile-comparison/profile-compari
 import {ProfileCapabilityComparisonMeta} from "../profile-comparison/profile-capability-comparison/profile-capability-comparison-meta/profile-capability-compariosn-meta";
 
 export class ProfileComparison {
-   jobTitle: string;
+   profileComparisonJobData:CompareEntityDetails = new CompareEntityDetails();
    profileComparisonData:ProfileComparisonData[] = new Array(0);
  }
 
@@ -52,3 +52,17 @@ export class ProfileComparison {
    status:string;
    companyCulture: string;
  }
+
+export class CompareEntityDetails {
+  joiningPeriod:string;
+  salaryMinValue:string;
+  salaryMaxValue:string;
+  experienceMinValue:string;
+  experienceMaxValue:string;
+  education:string;
+  jobTitle:string;
+  country:string;
+  state:string;
+  city:string;
+  industryName:string;
+}

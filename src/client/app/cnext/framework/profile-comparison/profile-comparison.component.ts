@@ -1,6 +1,6 @@
 import {Component, Input, OnChanges, Output} from "@angular/core";
 import {ProfileComparisonService} from "./profile-comparison.service";
-import {ProfileComparison, ProfileComparisonData} from "../model/profile-comparison";
+import {ProfileComparison, ProfileComparisonData, CompareEntityDetails} from "../model/profile-comparison";
 import {EventEmitter} from "@angular/common/src/facade/async";
 
 @Component({
@@ -15,6 +15,7 @@ export class ProfileComparisonComponent implements OnChanges {
   @Input() profileComparison:ProfileComparison;
   @Output() performActionOnComparisonList = new EventEmitter();
   private profileComparisonData: ProfileComparisonData[] = new Array(0);
+  private profileComparisonJobData: CompareEntityDetails = new CompareEntityDetails();
 
   constructor(private profileComparisonService:ProfileComparisonService) {
 
@@ -24,6 +25,7 @@ export class ProfileComparisonComponent implements OnChanges {
   ngOnChanges(changes: any) {
     if (changes.profileComparison.currentValue != undefined) {
       this.profileComparisonData = changes.profileComparison.currentValue.profileComparisonData;
+      this.profileComparisonJobData = changes.profileComparison.currentValue.profileComparisonJobData;
     }
   }
 

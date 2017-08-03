@@ -13,6 +13,7 @@ import Match = require('../../dataaccess/model/match-enum');
 import IndustryRepository = require('../../dataaccess/repository/industry.repository');
 import IndustryModel = require('../../dataaccess/model/industry.model');
 import ScenarioModel = require('../../dataaccess/model/scenario.model');
+import {ProfileComparisonJobModel} from "../../dataaccess/model/profile-comparison-job.model";
 
 class SearchService {
   APP_NAME: string;
@@ -280,6 +281,7 @@ class SearchService {
   }
 
   buildCandidateModel(candidate: CandidateModel) {
+    console.log('--------------------------salarymatch-------------------------------------------',candidate)
     let profileComparisonResult: ProfileComparisonDataModel = new ProfileComparisonDataModel();
     //profileComparisonResult.industry = candidate.industry;
     profileComparisonResult.industryName = candidate.industry.name;
@@ -318,7 +320,7 @@ class SearchService {
   }
 
   buildMultiCompareCapabilityView(job:any, newCandidate:ProfileComparisonDataModel, industries:any, isCandidate:any) {
-
+   console.log('--------------------------job-------------------------------------------',job)
     var capabilityPercentage:number[] = new Array(0);
     var capabilityKeys:string[] = new Array(0);
     var correctQestionCountForAvgPercentage:number = 0;
@@ -338,7 +340,6 @@ class SearchService {
         //calculate total number of questions in capability
 
         if (_cap == cap.split("_")[0]) {
-          console.log(cap + '=>' + job.capability_matrix[cap] + '==' + newCandidate.capability_matrix[cap]);
           if (job.capability_matrix[cap] == -1 || job.capability_matrix[cap] == 0 || job.capability_matrix[cap] == undefined) {
             //match_view.match = Match.MissMatch;
           } else if (job.capability_matrix[cap] == newCandidate.capability_matrix[cap]) {
@@ -563,8 +564,9 @@ class SearchService {
                     compareResult.push(newCandidate);
                   }
                   let profileComparisonModel:ProfileComparisonModel = new ProfileComparisonModel();
-                  profileComparisonModel.jobTitle = jobName;
                   profileComparisonModel.profileComparisonData = compareResult;
+                  var jobDetails:ProfileComparisonJobModel = this.getJobDetailsForComparison(job);
+                  profileComparisonModel.profileComparisonJobData = jobDetails;
                   callback(null, profileComparisonModel);
                 }
               });
@@ -575,6 +577,22 @@ class SearchService {
         }
       }
     });
+  }
+
+  getJobDetailsForComparison(job:JobProfileModel) {
+    var profileComparisonJobModel:ProfileComparisonJobModel = new ProfileComparisonJobModel();
+    profileComparisonJobModel.city = job.location.city;
+    profileComparisonJobModel.country = job.location.country
+    profileComparisonJobModel.state = job.location.state;
+    profileComparisonJobModel.education = job.education;
+    profileComparisonJobModel.experienceMaxValue = job.experienceMaxValue;
+    profileComparisonJobModel.experienceMinValue = job.experienceMinValue;
+    profileComparisonJobModel.industryName = job.industry.name;
+    profileComparisonJobModel.jobTitle = job.jobTitle;
+    profileComparisonJobModel.joiningPeriod = job.joiningPeriod;
+    profileComparisonJobModel.salaryMaxValue = job.salaryMaxValue;
+    profileComparisonJobModel.salaryMinValue = job.salaryMinValue;
+    return profileComparisonJobModel;
   }
 
 }

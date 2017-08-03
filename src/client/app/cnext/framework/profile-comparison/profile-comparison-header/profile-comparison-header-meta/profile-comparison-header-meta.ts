@@ -1,6 +1,6 @@
 
 export class ProfileComparisonHeaderMeta {
-  id: any;
+  _id: any;
   isCandidate: boolean;
   first_name: string;
   last_name: string;

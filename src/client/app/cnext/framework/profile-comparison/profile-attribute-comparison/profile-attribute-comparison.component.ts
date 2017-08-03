@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from "@angular/core";
-import {ProfileComparisonData} from "../../model/profile-comparison";
+import {ProfileComparisonData, CompareEntityDetails} from "../../model/profile-comparison";
 declare let $: any;
 
 @Component({
@@ -12,6 +12,7 @@ declare let $: any;
 
 export class ProfileAttributeComparisonComponent implements OnInit {
   @Input() profileComparisonResult: ProfileComparisonData[];
+  @Input() profileComparisonJobData:CompareEntityDetails;
  constructor() {}
 
     ngOnInit() {
