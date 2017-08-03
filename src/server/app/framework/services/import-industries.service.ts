@@ -119,6 +119,8 @@ class ImportIndustryService {
           for (let c in rolesArray[i].capabilities) {
             //if(rolesArray[i].name == 'IT Support'){
             if (rolesArray[i].capabilities[c].code.startsWith('d')) {
+              let tempCode = rolesArray[i].capabilities[c].code.split("d")[1];
+              rolesArray[i].capabilities[c].code = tempCode;
               rolesArray[i].default_complexities.push(rolesArray[i].capabilities[c]);
               temp.push(c);
             }

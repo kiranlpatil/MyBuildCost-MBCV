@@ -446,7 +446,7 @@ class CandidateService {
             }
           }
           if (isFound) {
-            break;
+            //break;
           }
         }
         if (role.default_complexities) {
@@ -494,12 +494,12 @@ class CandidateService {
               }
             }
             if (isFound) {
-              break;
+              //break;
             }
           }
         }
         if (isFound) {
-          break;
+          //break;
         }
       }
     }
@@ -542,14 +542,26 @@ class CandidateService {
                   if (capability.code.toString() === mainCap.code.toString()) {
                     for (let mainComp of mainCap.complexities) {
                       let itemcode = mainCap.code + '_' + mainComp.code;
+
+
                       if (item.capability_matrix[itemcode] === undefined) {
-                        new_capability_matrix[itemcode] = -1;
-                        item.capability_matrix[itemcode] = -1;
+                        if (new_capability_matrix != undefined && new_capability_matrix[itemcode] == undefined) {
+                          new_capability_matrix[itemcode] = -1;
+                          item.capability_matrix[itemcode] = -1;
+                        }
                       } else if (item.capability_matrix[itemcode] !== -1) {
-                        new_capability_matrix[itemcode] = item.capability_matrix[itemcode];
+                        if (new_capability_matrix != undefined && new_capability_matrix[itemcode] == undefined) {
+                          new_capability_matrix[itemcode] = item.capability_matrix[itemcode];
+                        }
                       } else {
-                        new_capability_matrix[itemcode] = -1;
+                        if (new_capability_matrix != undefined && new_capability_matrix[itemcode] == undefined) {
+                          new_capability_matrix[itemcode] = -1;
+                        }
                       }
+
+
+
+
                     }
                   }
                 }
