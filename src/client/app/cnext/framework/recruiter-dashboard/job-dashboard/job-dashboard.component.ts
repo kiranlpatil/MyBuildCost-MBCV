@@ -194,10 +194,11 @@ export class JobDashboardComponent implements OnInit {
   }
 
   performActionOnComparisonList(data: any) {
-    /*if (data.action = 'Remove') {
-      this.profileComparison.profileComparisonData.splice(data.value, 1);
-     this.recruiterJobView.numberOfCandidatesInCompare--;
-     }*/
+    if (data.action = 'Remove') {
+      this.profileComparison.profileComparisonData.splice(this.profileComparison.profileComparisonData.indexOf(data.value), 1);
+      this.listOfCandidateIdToCompare.splice(this.profileComparison.profileComparisonData.indexOf(data.value), 1);
+      this.recruiterJobView.numberOfCandidatesInCompare--;
+     }
   }
 
   getCompareDetail() {
@@ -216,8 +217,8 @@ export class JobDashboardComponent implements OnInit {
 
   addForCompare(value: any) {
     if (this.listOfCandidateIdToCompare.indexOf(value) == -1) {
-      this.recruiterJobView.numberOfCandidatesInCompare++;
       this.listOfCandidateIdToCompare.push(value);
+      this.recruiterJobView.numberOfCandidatesInCompare++;
     }
   }
 
