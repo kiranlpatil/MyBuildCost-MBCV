@@ -1,7 +1,9 @@
 <div class="attribute-container">
   <div class="candidate-compare-attribute clearfix">
     <div class="matching-attribute-name">
-      <h6>Key Skills</h6>
+      <div class="inner">
+        <h6>Key Skills</h6>
+      </div>
     </div>
     <div class="matching-candidate-attributes">
       <!-- Start: repeat this div using for loop -->
@@ -23,8 +25,10 @@
   </div>
   <div class="candidate-compare-attribute clearfix">
     <div class="matching-attribute-name">
-      <h6>Current Salary</h6>
-      <p>{{profileComparisonJobData.salaryMinValue}}</p>-<p>{{profileComparisonJobData.salaryMaxValue}}</p>
+      <div class="inner">
+        <h6>Current Salary</h6>
+        <p>{{profileComparisonJobData.salaryMinValue}} Lac - {{profileComparisonJobData.salaryMaxValue}} Lac</p>
+      </div>
     </div>
     <div class="matching-candidate-attributes">
       <!-- Start: repeat this div using for loop -->
@@ -44,8 +48,11 @@
   </div>
   <div class="candidate-compare-attribute clearfix">
     <div class="matching-attribute-name">
-      <h6>Total Experience</h6>
-      <p>{{profileComparisonJobData.experienceMinValue}}</p><p>{{profileComparisonJobData.experienceMinValue}}</p>
+      <div class="inner">
+        <h6>Total Experience</h6>
+        <p>{{profileComparisonJobData.experienceMinValue}} Year - {{profileComparisonJobData.experienceMaxValue}}
+          Year</p>
+      </div>
     </div>
     <div class="matching-candidate-attributes">
       <div class="candidate-attribute-list" *ngFor="let item of profileComparisonResult">
@@ -64,8 +71,10 @@
   </div>
   <div class="candidate-compare-attribute clearfix">
     <div class="matching-attribute-name">
-      <h6>Notice Period</h6>
-      <p>{{profileComparisonJobData.joiningPeriod}}</p>
+      <div class="inner">
+        <h6>Notice Period</h6>
+        <p>{{profileComparisonJobData.joiningPeriod}}</p>
+      </div>
     </div>
     <div class="matching-candidate-attributes">
       <div class="candidate-attribute-list" *ngFor="let item of profileComparisonResult">
@@ -80,8 +89,10 @@
   </div>
   <div class="candidate-compare-attribute clearfix">
     <div class="matching-attribute-name">
-      <h6>Industry</h6>
-      <p>{{profileComparisonJobData.industryName}}</p>
+      <div class="inner">
+        <h6>Industry</h6>
+        <p>{{profileComparisonJobData.industryName}}</p>
+      </div>
     </div>
     <div class="matching-candidate-attributes">
       <div class="candidate-attribute-list" *ngFor="let item of profileComparisonResult">
@@ -96,8 +107,10 @@
   </div>
   <div class="candidate-compare-attribute clearfix">
     <div class="matching-attribute-name">
-      <h6>Current Location</h6>
-      <p>{{profileComparisonJobData.city}}</p>
+      <div class="inner">
+        <h6>Current Location</h6>
+        <p>{{profileComparisonJobData.city}}</p>
+      </div>
     </div>
     <div class="matching-candidate-attributes">
       <div class="candidate-attribute-list" *ngFor="let item of profileComparisonResult">
@@ -111,7 +124,9 @@
   </div>
   <div class="candidate-compare-attribute clearfix">
     <div class="matching-attribute-name">
-      <h6>Extra Key Skills</h6>
+      <div class="inner">
+        <h6>Extra Key Skills</h6>
+      </div>
     </div>
     <div class="matching-candidate-attributes">
       <div class="candidate-attribute-list" *ngFor="let item of profileComparisonResult">
@@ -127,7 +142,9 @@
   </div>
   <div class="candidate-compare-attribute clearfix">
     <div class="matching-attribute-name">
-      <h6>Domain</h6>
+      <div class="inner">
+        <h6>Domain</h6>
+      </div>
     </div>
     <div class="matching-candidate-attributes">
       <div class="candidate-attribute-list" *ngFor="let item of profileComparisonResult">
@@ -151,7 +168,9 @@
   </div>
   <div class="candidate-compare-attribute clearfix">
     <div class="matching-attribute-name">
-      <h6>Additional Capabilities</h6>
+      <div class="inner">
+        <h6>Additional Capabilities</h6>
+      </div>
     </div>
     <div class="matching-candidate-attributes">
       <div class="candidate-attribute-list" *ngFor="let item of profileComparisonResult">
@@ -165,8 +184,10 @@
   </div>
   <div class="candidate-compare-attribute clearfix">
     <div class="matching-attribute-name">
-      <h6>Education</h6>
-      <p>{{profileComparisonJobData.education}}</p>
+      <div class="inner">
+        <h6>Education</h6>
+        <p>{{profileComparisonJobData.education}}</p>
+      </div>
     </div>
     <div class="matching-candidate-attributes">
       <div class="candidate-attribute-list" *ngFor="let item of profileComparisonResult">
@@ -180,7 +201,9 @@
   </div>
   <div class="candidate-compare-attribute clearfix">
     <div class="matching-attribute-name">
-      <h6>Company Culture</h6>
+      <div class="inner">
+        <h6>Company Culture</h6>
+      </div>
     </div>
     <div class="matching-candidate-attributes">
       <div class="candidate-attribute-list" *ngFor="let item of profileComparisonResult">

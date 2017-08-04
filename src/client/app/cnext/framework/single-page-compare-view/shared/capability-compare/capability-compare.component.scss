@@ -604,7 +604,7 @@ and (max-width: 840px) {
       font-weight: 600;
     }
     .complexity-name {
-      color: $theme-color;
+      color: $light-black;
       margin-bottom: 2px;
       width: 100%;
       display: inline-block;
@@ -616,22 +616,31 @@ and (max-width: 840px) {
       width: 100%;
     }
     .scenario-row {
-      margin-bottom: 10px;
+      //margin-bottom: 10px;
       display: inline-block;
       span {
         font-size: 12px;
-        color: $text-color;
+        color: $light-black1;
         font-family: 'gothamrnd-book';
         font-weight: 600;
       }
     }
 
     .capability-edit {
-      padding: 0 30px 0 0;
+      padding: 0 5px 5px 0;
+    }
+
+    .capability-edit > .inner {
+      padding: 5px 20px 5px 5px;
+      border: 1px solid $white;
+      &:hover {
+        border: 1px solid $border-color1;
+      }
     }
 
     .btn-edit {
-      top: 0 !important;
+      top: 5px !important;
+      right: 7px !important;
     }
 
   }
@@ -651,7 +660,7 @@ and (max-width: 840px) {
       font-weight: 600;
     }
     .complexity-name {
-      color: $theme-color;
+      color: $light-black;
       margin-bottom: 2px;
       width: 100%;
       display: inline-block;
@@ -663,17 +672,25 @@ and (max-width: 840px) {
       width: 100%;
     }
     .scenario-row {
-      margin-bottom: 10px;
+      //margin-bottom: 10px;
       display: inline-block;
       span {
         font-size: 12px;
-        color: $text-color;
+        color: $light-black1;
         font-family: 'gothamrnd-book';
         font-weight: 600;
       }
     }
     .capability-edit {
-      padding: 0 30px 0 0;
+      padding: 0 5px 5px 0;
+    }
+
+    .capability-edit > .inner {
+      padding: 5px 20px 5px 5px;
+      border: 1px solid $white;
+      &:hover {
+        border: 1px solid $border-color1;
+      }
     }
   }
 }

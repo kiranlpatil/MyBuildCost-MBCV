@@ -42,14 +42,14 @@
     }
 
     span {
-      color: $text-color2;
+      color: $light-black1;
       width: 100%;
       font-size: 12px;
     }
 
     label {
-      color: $blue-color;
-      font-weight: 500;
+      color: $light-black;
+      font-weight: 600;
       font-family: 'gothamrnd-book';
       margin: 10px 0 0;
       width: 100%;
@@ -68,7 +68,7 @@
     display: none;
   }
   strong {
-    font-weight: 500;
+    font-weight: 600;
   }
 }
 
@@ -156,12 +156,12 @@
 }
 
 .about-company-label {
-  color: $text-color2;
+  color: $light-black1;
   width: 100%;
   font-size: 12px;
   label {
-    color: $blue-color;
-    font-weight: 500;
+    color: $light-black;
+    font-weight: 600;
     font-family: 'gothamrnd-book';
     margin: 10px 0 0;
     width: 100%;

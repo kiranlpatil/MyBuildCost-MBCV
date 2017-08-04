@@ -261,6 +261,10 @@ export class QCardviewComponent implements OnChanges {
   }
 
   addForCompareView(value: any) {
-    this.addForCompare.emit(value);
+    this.addForCompare.emit(value._id);
+    var message = new Message();
+    message.isError = false;
+    message.custom_message = 'Candidate' + ' ' + value.first_name + ' ' + value.last_name + ' added to compare view.';
+    this.messageService.message(message);
   }
 }

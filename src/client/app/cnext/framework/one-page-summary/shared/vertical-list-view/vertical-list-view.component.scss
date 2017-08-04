@@ -24,10 +24,10 @@
   }
 
   span {
-    color: $theme-color;
+    color: $light-black;
     font-size: 14px;
     text-transform: capitalize;
-    font-weight: 500;
+    font-weight: 600;
     font-family: 'gothamrnd-book';
   }
 
@@ -74,7 +74,7 @@
       }
 
       p {
-        color: $text-color2;
+        color: $light-black1;
         margin: -4px 0 5px;
         padding: 0 0 5px 30px;
         word-break: keep-all;

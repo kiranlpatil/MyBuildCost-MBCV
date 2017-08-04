@@ -4,7 +4,8 @@
 
 <div class="candidate-meta">
   <p title="Matching Percentage">{{matchingPercentage | number:'1.0-0'}}%</p>
-  <img src="{{imagePath}}" alt="Candidate Profile Picture" title="Candidate Name">
-  <h6 title="Candidate Name">{{profileMeta.first_name}} {{profileMeta.last_name}}</h6>
+  <img src="{{imagePath}}" alt="Candidate Profile Picture" title="{{profileMeta.first_name}} {{profileMeta.last_name}}">
+  <h6 title="{{profileMeta.first_name}} {{profileMeta.last_name}}">{{profileMeta.first_name}}
+    {{profileMeta.last_name}}</h6>
 </div>
 

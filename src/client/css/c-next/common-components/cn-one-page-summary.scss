@@ -62,6 +62,11 @@
     .btn-edit {
       display: none !important;
     }
+    .capability-edit > .inner {
+      &:hover {
+        border: 1px solid $white !important;
+      }
+    }
   }
 }
 

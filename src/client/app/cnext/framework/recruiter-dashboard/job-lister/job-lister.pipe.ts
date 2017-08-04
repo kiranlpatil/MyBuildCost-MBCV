@@ -10,7 +10,7 @@ export class JobListerSortPipe implements PipeTransform {
     if (array == null) {
       return null;
     }
-    if (args === 'Date' && args !== "") {
+    if (args === 'Date') {
 
       array.sort((a: JobPosterModel, b: JobPosterModel) => {
         if (a.postingDate > b.postingDate) {
