@@ -3,7 +3,7 @@ import { MessageService } from '../../../framework/shared/message.service';
 import { CandidateProfileService } from '../candidate-profile/candidate-profile.service';
 import { Message} from '../../../framework/shared/message';
 import { Candidate, Section } from '../model/candidate';
-import {Messages} from '../../../framework/shared/constants';
+import {Messages, Tooltip} from '../../../framework/shared/constants';
 
 @Component({
   moduleId: module.id,
@@ -25,7 +25,7 @@ export class MoreAboutMyselfComponent implements OnInit {
   private remainingWords: number;
   private maxword: number;
   private showButton: boolean = true;
-  tooltipMessage: string = "<ul><li><p>1. Please mention additional details about your personal and professional journey that would help the recruiter to know you better.</p></li></ul>";
+  tooltipMessage: string = '<ul><li><p>1. '+ Tooltip.MORE_ABOUT_MYSELF_TOOLTIP+'</p></li></ul>';
   private remainingWordsMessage = Messages.MSG_ERROR_VALIDATION_MAX_WORD_ALLOWED;
 
   constructor(private messageService: MessageService,

@@ -7,7 +7,7 @@ import {MessageService} from "../../../framework/shared/message.service";
 import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
 import {Candidate, Section} from "../model/candidate";
 import {FormBuilder} from "@angular/forms";
-import {Messages} from "../../../framework/shared/constants";
+import {Messages, Tooltip} from "../../../framework/shared/constants";
 import {ProfessionalDetailsService} from "../professional-detail-service";
 
 @Component({
@@ -24,12 +24,12 @@ export class ProfessionalDataComponent extends BaseService implements OnChanges 
 
   tooltipMessage: string =
 
-    "<ul>" +
-    "<li><p>1. Please mention your current salary (CTC).</p></li>" +
-    "<li><p>2. Select if you are open to relocate from your current location as per job demand.</p></li>" +
-    "<li><p>3. Mention the notice period you have to serve before you can take up new job.</p></li>" +
+    '<ul>' +
+    '<li><p>1. '+ Tooltip.PROFESSIONAL_DATA_TOOLTIP_1+'</p></li>' +
+    '<li><p>2. '+ Tooltip.PROFESSIONAL_DATA_TOOLTIP_2+'</p></li>' +
+    '<li><p>3. '+ Tooltip.PROFESSIONAL_DATA_TOOLTIP_3+'</p></li>' +
 
-    "</ul>";
+    '</ul>';
   /* private professionalDetailForm : FormGroup;*/
   showButton: boolean = true;
   private realocationList:any = [];

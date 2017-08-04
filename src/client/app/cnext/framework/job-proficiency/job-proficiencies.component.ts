@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
 import {Section} from "../model/candidate";
 import {JobPosterModel} from "../model/jobPoster";
-import {ValueConstant, Messages} from "../../../framework/shared/constants";
+import {ValueConstant, Messages, Tooltip} from "../../../framework/shared/constants";
 
 
 @Component({
@@ -26,8 +26,8 @@ export class JobProficienciesComponent implements OnInit {
   private requiredKeySkillsValidationMessage = Messages.MSG_ERROR_VALIDATION_KEYSKILLS_REQUIRED;
   private maxKeySkillsValidationMessage = Messages.MSG_ERROR_VALIDATION_MAX_SKILLS_CROSSED + ValueConstant.MAX_MANDATORY_PROFECIENCES;
   tooltipMessage: string = '<ul><li>' +
-      '<p>1. Enter keywords for specialization in Technologies, Products, Tools, Domains etc. E.g Java, Oracle, SAP, Cognos, AWS, Agile, DevOps, CMM, Telecom Billing, Retail Banking etc.</p>' +
-      '<p>2.  Use the Top 5 "Must Have" keywords to describe the most important skills. You can provide additional 20 keywords that are "Nice to Have"</p></li></ul>';
+      '<p>1. '+ Tooltip.JOB_PROFICIENCIES_TOOLTIP_1+'</p>' +
+      '<p>2. '+Tooltip.JOB_PROFICIENCIES_TOOLTIP_2+'</p></li></ul>';
 
   ngOnInit() {
     this.maxNumberOfMandatory = ValueConstant.MAX_MANDATORY_PROFECIENCES;

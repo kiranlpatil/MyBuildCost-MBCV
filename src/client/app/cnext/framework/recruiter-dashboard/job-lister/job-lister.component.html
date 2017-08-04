@@ -1,11 +1,7 @@
 <div class="welcome-text" *ngIf="screenType=='welcomescreen'">
   <div class="content">
-   <h4>Welcome To Dashboard!</h4>
-      <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-      Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-      when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-      It has survived not only five centuries, but also the leap into electronic typesetting,
-      remaining essentially unchanged.</p>
+   <h4>{{dashboardWelcomeMessage}}</h4>
+      <p>{{initialMessageToDisplay}}</p>
       <img src="assets/c-next/recruiter-welcome-screen/post-new-job.png" alt="Post New Job"/>
       <p>Please click on "Post New Job" to proceed.</p>
   </div>

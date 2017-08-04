@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
+import {Tooltip} from "../../../framework/shared/constants";
 
 @Component({
   moduleId: module.id,
@@ -16,6 +17,7 @@ export class RoleTypeListComponent implements OnChanges {
   private showModalStyle: boolean = false;
   private disableRoletype: boolean = false;
   private disableButton: boolean = true;
+  private saveRolesMessage: string = Tooltip.SAVE_ROLES_MESSAGE;
 
   ngOnChanges(changes: any) {
     if (changes.roleTypes != undefined) {

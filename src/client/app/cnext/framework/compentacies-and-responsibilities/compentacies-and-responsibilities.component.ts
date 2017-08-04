@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Section } from '../model/candidate';
 import { JobPosterModel } from '../model/jobPoster';
+import { Tooltip } from '../../../framework/shared/constants';
 
 @Component({
   moduleId: module.id,
@@ -16,7 +17,7 @@ export class CompetenciesAndResponsibilitiesComponent {
   @Output() onComplete = new EventEmitter();
 
   tooltipMessage: string = '<ul><li>' +
-      '<p>Competencies Message</p></li></ul>';
+      '<p>'+ Tooltip.COMPETENCIES_AND_RESPONSIBILITIES_TOOLTIP+'</p></li></ul>';
 
   onCompetenciesComplete(data: string) {
     this.jobPosterModel.competencies = data;
