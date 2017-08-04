@@ -1,13 +1,13 @@
-import {Component} from "@angular/core";
-import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
-import {Candidate, Summary} from "../model/candidate";
-import {CandidateDashboardService} from "./candidate-dashboard.service";
-import {JobQcard} from "../model/JobQcard";
-import {LocalStorage, ValueConstant} from "../../../framework/shared/constants";
-import {LocalStorageService} from "../../../framework/shared/localstorage.service";
-import {CandidateJobListService} from "./candidate-job-list/candidate-job-list.service";
-import {QCardFilterService} from "../filters/q-card-filter.service";
-import {LoaderService} from "../../../framework/shared/loader/loader.service";
+import { Component } from '@angular/core';
+import { CandidateProfileService } from '../candidate-profile/candidate-profile.service';
+import { Candidate, Summary } from '../model/candidate';
+import { CandidateDashboardService } from './candidate-dashboard.service';
+import { JobQcard } from '../model/JobQcard';
+import { LocalStorage, ValueConstant, Tooltip } from '../../../framework/shared/constants';
+import { LocalStorageService } from '../../../framework/shared/localstorage.service';
+import { CandidateJobListService } from './candidate-job-list/candidate-job-list.service';
+import { QCardFilterService } from '../filters/q-card-filter.service';
+import { LoaderService } from '../../../framework/shared/loader/loader.service';
 
 
 @Component({
@@ -26,6 +26,9 @@ export class CandidateDashboardComponent {
   private locationList: string[] = new Array(0);
   private _locationList: string[] = new Array(0);
   private type: string;
+  private emptyDashboardMessage: string = Tooltip.EMPTY_CANDIDATE_DASHBOARD_MESSAGE;
+  private noAppliedJobMessage: string = Tooltip.APPLIED_JOB_MESSAGE;
+  private noNotIntrestedJobMessage: string = Tooltip.NOT_INTRESTED_JOB_MESSAGE;
 
   constructor(private candidateProfileService: CandidateProfileService,
               private candidateDashboardService: CandidateDashboardService,

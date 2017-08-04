@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, Output} from "@angular/core";
 import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
 import {Candidate, Section} from "../model/candidate";
 import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {Tooltip} from "../../../framework/shared/constants";
 
 @Component({
   moduleId: module.id,
@@ -15,7 +16,7 @@ export class CertificationAccreditationComponent {
   @Input() candidate: Candidate;
   @Input() highlightedSection: Section;
   @Output() onComplete = new EventEmitter();
-  tooltipMessage: string = "<ul><li><p>1. Certification/Accreditation Message</p></li></ul>";
+  tooltipMessage: string = '<ul><li><p>1. '+Tooltip.CERTIFICATE_TOOLTIP+'</p></li></ul>';
 
   public certificationDetail: FormGroup;
 

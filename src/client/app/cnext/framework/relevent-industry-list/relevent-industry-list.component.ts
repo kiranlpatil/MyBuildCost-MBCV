@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
 import {ReleventIndustryListService} from "./relevent-industry-list.service";
-import {Messages} from "../../../framework/shared/constants";
+import {Messages, Tooltip} from "../../../framework/shared/constants";
 import {Section} from "../model/candidate";
 import {ReleventIndustry} from "./relevent-industry";
 import {Role} from "../model/role";
@@ -31,7 +31,7 @@ export class ReleventIndustryListComponent implements OnInit {
 
   tooltipMessage: string =
     '<ul>' +
-    '<li><p>1. Relevant Industry Message.</p></li>' +
+    '<li><p>1. '+ Tooltip.RELEVENT_INDUSTRY_LIST_TOOLTIP+'</p></li>' +
     '</ul>';
 
   constructor(private releventIndustryService: ReleventIndustryListService) {

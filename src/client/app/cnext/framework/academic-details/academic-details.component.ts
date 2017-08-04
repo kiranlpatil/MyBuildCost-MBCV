@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angu
 import { CandidateProfileService } from '../candidate-profile/candidate-profile.service';
 import { Candidate, Section } from '../model/candidate';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {Tooltip} from "../../../framework/shared/constants";
 
 @Component({
   moduleId: module.id,
@@ -16,7 +17,7 @@ export class AcademicDetailComponent implements OnInit, OnChanges {
   @Output() onComplete = new EventEmitter();
 
   public academicDetail: FormGroup;
-  tooltipMessage: string = "<ul><li><p>1. An individual must provide latest qualification details first.</p></li></ul>";
+  tooltipMessage: string = '<ul><li><p>1. '+Tooltip.ACADEMIC_DETAIL_TOOLTIP+'</p></li></ul>';
   public showButton: boolean = true;
   private isButtonShow: boolean = false;
   private submitStatus: boolean;

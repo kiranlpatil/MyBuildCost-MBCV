@@ -7,7 +7,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {JobLocation} from "../model/job-location";
 import {MyGoogleAddress} from "../../../framework/registration/candidate/google-our-place/my-google-address";
 import {FilterService} from "../filters/filter/filter.service";
-import {Messages} from "../../../framework/shared/constants";
+import {Messages, Tooltip} from "../../../framework/shared/constants";
 import {RecruiterDashboard} from "../model/recruiter-dashboard";
 import {ValidationService} from "../../../framework/shared/customvalidations/validation.service";
 
@@ -60,14 +60,14 @@ export class BasicJobInformationComponent implements OnInit, OnChanges {
   private titleSpaceValidationMessage = Messages.MSG_ERROR_JOB_TITLE_INVALID_BLANK_SPACE;
 
   tooltipMessage: string = '<ul>' +
-    '<li><p>1. This job name would be displayed in the posting.</p></li>' +
-    '<li><p>2. Name of the manager who has given the requirement for this job.</p></li>' +
-    '<li><p>3. Name of the department for which the candidate is being hired.</p></li>' +
-    '<li><p>4. Choose from dropdown.</p></li>' +
-    '<li><p>5. The target salary that you wish to offer for the job. </p></li>' +
-    '<li><p>6. How much lead time are you willing to provide to the candidate for joining.</p></li>' +
-    '<li><p>7. The location where the candidate will be required to work.</p></li>' +
-    '<li><p>8. The industry for which you are hiring.</p></li>' +
+    '<li><p>1. '+Tooltip.BASIC_JOB_INFORMATION_TOOLTIP_1+'</p></li>' +
+    '<li><p>2. '+Tooltip.BASIC_JOB_INFORMATION_TOOLTIP_2+'</p></li>' +
+    '<li><p>3. '+Tooltip.BASIC_JOB_INFORMATION_TOOLTIP_3+'</p></li>' +
+    '<li><p>4. '+Tooltip.BASIC_JOB_INFORMATION_TOOLTIP_4+'</p></li>' +
+    '<li><p>5. '+Tooltip.BASIC_JOB_INFORMATION_TOOLTIP_5+'</p></li>' +
+    '<li><p>6. '+Tooltip.BASIC_JOB_INFORMATION_TOOLTIP_6+'</p></li>' +
+    '<li><p>7. '+Tooltip.BASIC_JOB_INFORMATION_TOOLTIP_7+'</p></li>' +
+    '<li><p>8. '+Tooltip.BASIC_JOB_INFORMATION_TOOLTIP_8+'</p></li>' +
     '</ul>';
 
   constructor(private professionalDataService: ProfessionalDataService,

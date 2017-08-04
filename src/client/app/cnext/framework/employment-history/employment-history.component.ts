@@ -2,7 +2,7 @@ import {Component, EventEmitter, Input, Output} from "@angular/core";
 import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
 import {Candidate, Section} from "../model/candidate";
 import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {Messages} from "../../../framework/shared/constants";
+import {Messages, Tooltip} from "../../../framework/shared/constants";
 
 @Component({
   moduleId: module.id,
@@ -24,7 +24,7 @@ export class EmploymentHistoryComponent {
   private isButtonShow: boolean = false;
   private showButton: boolean = true;
   private showAddButton: boolean = true;
-  tooltipMessage: string = "<ul><li><p>1. An individual may be exposed to multiple industries during his professional life.</p></li></ul>";
+  tooltipMessage: string = '<ul><li><p>1. '+ Tooltip.EMPLOYMENT_HISTORY_TOOLTIP+'</p></li></ul>';
   private submitStatus: boolean;
   private isValidservicePeriod: boolean = true;
   private serviceValidMessage: string = Messages.MSG_ERROR_VALIDATION_EMPLOYMENTHISTORY;

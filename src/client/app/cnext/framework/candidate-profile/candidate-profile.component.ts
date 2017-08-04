@@ -1,11 +1,12 @@
 import {Component, DoCheck, KeyValueDiffers, OnInit} from "@angular/core";
-import {NavigationRoutes} from "../../../framework/shared/constants";
+import {NavigationRoutes, Tooltip} from "../../../framework/shared/constants";
 import {Router} from "@angular/router";
 import {ComplexityService} from "../complexity.service";
 import {Candidate, Section} from "../model/candidate";
 import {CandidateProfileService} from "./candidate-profile.service";
 import {Role} from "../model/role";
 import {Industry} from "../model/industry";
+import {TooltipComponent} from "../tool-tip-component/tool-tip-component";
 
 @Component({
   moduleId: module.id,
@@ -49,6 +50,8 @@ export class CandidateProfileComponent implements OnInit, DoCheck {
   private isComplexityFilled: boolean = true;
   private isPresentDefaultcomplexity: boolean = false;
   private highlightedSection: Section = new Section();
+  private visiblitySetToYesMessage : string = Tooltip.PROFILE_INFO_VISIBILIT_SET_TO_YES;
+  private visiblitySetToNoMessage : string = Tooltip.PROFILE_INFO_VISIBILIT_SET_TO_NO;
   differ: any;
 
   constructor(private _router: Router,
