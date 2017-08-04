@@ -25,7 +25,7 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
   @Input() isComplexityPresent: boolean = true;
 
   private complexityIds: string[] = [];
-  private duplicateComplexityIds: string[] = [];
+  //private duplicateComplexityIds: string[] = [];
   private complexityList: any[] = new Array(0);
   private currentComplexityDetails: ComplexityDetails = new ComplexityDetails();
   private isComplexityButtonEnable: boolean = false;
@@ -127,7 +127,7 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
     this.currentCapabilityNumber = 0;
     this.complexityIds = [];
     this.complexityIds = Object.keys(complexities);
-    this.removeDuplicateIds();
+    //this.removeDuplicateIds();
     this.complexityList = [];
     for (let id in complexities) {
       this.complexityList.push(this.complexityData[id]);
@@ -137,8 +137,8 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
     this.getComplexityDetails(this.complexityIds[this.currentComplexity]);
   }
 
-  removeDuplicateIds() {
-    /* let copyOfcomplexityIds = this.complexityIds.slice();
+  /*removeDuplicateIds() {
+   /!* let copyOfcomplexityIds = this.complexityIds.slice();
      for(let copy of copyOfcomplexityIds){
      copy = copy.replace("d", "");
      }
@@ -148,7 +148,7 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
      if (sorted_arr[i + 1] == sorted_arr[i]) {
      this.duplicateComplexityIds.push(sorted_arr[i]);
      }
-     }*/
+   }*!/
 
     for (let id of this.complexityIds) {
       for (let index of this.complexityIds) {
@@ -160,7 +160,7 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
         }
       }
     }
-  }
+   }*/
 
   saveComplexity() {
     this.isValid = true;
@@ -191,10 +191,10 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
   onAnswered(complexityDetail: ComplexityDetails) {
     this.isValid = true;
     this.complexities[this.complexityIds[this.currentComplexity]] = complexityDetail.userChoice;
-    if (this.duplicateComplexityIds.indexOf("d" + this.complexityIds[this.currentComplexity]) > -1) {
+    /*if (this.duplicateComplexityIds.indexOf("d" + this.complexityIds[this.currentComplexity]) > -1) {
       let tempIndex = "d" + this.complexityIds[this.currentComplexity];
       this.complexities[tempIndex] = complexityDetail.userChoice;
-    }
+     }*/
     this.complexityData[this.complexityIds[this.currentComplexity]] = complexityDetail;
     //this.onNext();
   }
@@ -311,7 +311,8 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
   }
 
   getComplexityDetails(complexityId: string) {  //TODO remove after amits call of updated get API
-    if (this.complexityData !== undefined && this.duplicateComplexityIds.indexOf(complexityId) == -1) {
+    /*if (this.complexityData !== undefined && this.duplicateComplexityIds.indexOf(complexityId) == -1) {*/
+    if (this.complexityData !== undefined) {
       this.currentComplexityDetails = this.complexityData[complexityId];
     }
   }
