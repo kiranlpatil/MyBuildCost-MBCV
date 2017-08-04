@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, Output} from "@angular/core";
 import {Role} from "../model/role";
 import {Capability} from "../model/capability";
-import {LocalStorage, Messages, ValueConstant} from "../../../framework/shared/constants";
+import {LocalStorage, Messages, ValueConstant, Tooltip} from "../../../framework/shared/constants";
 import {Section} from "../model/candidate";
 import {LocalStorageService} from "../../../framework/shared/localstorage.service";
 
@@ -32,20 +32,18 @@ export class CapabilitiesComponent {
   private capabilitiesCodes : string[]= new Array(0);
   tooltipCandidateMessage: string =
 
-    "<ul>" +
-    "<li>" +
-    "<p>1. Select those capabilities that describe your current strength. These capabilities would define you in the eyes of the recruiter and help you align with the best suitable job. </p></li><li><p>2. If there are capabilities that you have developed in past but are no more relevent, you should not select such capabilites as this would dilute the matching and alignment with the best job opportunity.</p>" +
-    "</li>" +
-    "</ul>";
+    '<ul>' +
+    '<li>' +
+    '<p>1. '+ Tooltip.CANDIDATE_CAPABILITY_TOOLTIP_1 +'</p></li><li><p>2. '+Tooltip.CANDIDATE_CAPABILITY_TOOLTIP_2+'</p>'+'</li>' +
+    '</ul>';
 
   tooltipRecruiterMessage: string =
 
-    "<ul>" +
-    "<li>" +
-    "<p>1.These capabilities would form the core of the job profile." +
-    " In next section, you would get to define these capabilities in detail</p>" +
-    "</li>" +
-    "</ul>";
+    '<ul>' +
+    '<li>' +
+    '<p>1.'+ Tooltip.RECRUITER_CAPABILITY_TOOLTIP +'</p>' +
+    '</li>' +
+    '</ul>';
 
   ngOnInit() {
     if (LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE) === 'true') {

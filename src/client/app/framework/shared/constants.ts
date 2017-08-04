@@ -306,3 +306,67 @@ export class ProjectAsset {
   public static TAG_LINE = 'The Awesome Web Experience';
   public static UNDER_LICENECE = '&#169; 2017 Techprimelab Software Pvt. Ltd.';
 }
+
+export class Tooltip {
+  public static ACADEMIC_DETAIL_TOOLTIP: string = 'An individual must provide latest qualification details first.';
+  public static AWARDS_TOOLTIP: string = 'Award message.';
+  public static BASIC_JOB_INFORMATION_TOOLTIP_1: string = 'This job name would be displayed in the posting.';
+  public static BASIC_JOB_INFORMATION_TOOLTIP_2: string = 'Name of the manager who has given the requirement for this job.';
+  public static BASIC_JOB_INFORMATION_TOOLTIP_3: string = 'Name of the department for which the candidate is being hired.';
+  public static BASIC_JOB_INFORMATION_TOOLTIP_4: string = 'Choose from dropdown.';
+  public static BASIC_JOB_INFORMATION_TOOLTIP_5: string = 'The target salary that you wish to offer for the job.';
+  public static BASIC_JOB_INFORMATION_TOOLTIP_6: string = 'How much lead time are you willing to provide to the candidate for joining.';
+  public static BASIC_JOB_INFORMATION_TOOLTIP_7: string = 'The location where the candidate will be required to work.';
+  public static BASIC_JOB_INFORMATION_TOOLTIP_8: string = 'The industry for which you are hiring.';
+  public static EMPTY_CANDIDATE_DASHBOARD_MESSAGE: string = 'Currently there are no jobs matching to your profile.' +
+    'As the current jobs posted by recruiters demand a different set of capabilities than what you possess.' +
+    'This dashboard shows job postings that match your capability profile.' +
+    'It is recommended that you keep visiting this page frequently to see the best matching jobs.';
+  public static APPLIED_JOB_MESSAGE: string = 'Presently you have not applied for any job.';
+  public static NOT_INTRESTED_JOB_MESSAGE: string = 'Currently you have not marked any jobs as "Not Interested".';
+  public static PROFILE_INFO_VISIBILIT_SET_TO_NO: string = 'If "No", your profile will not be visible to recruiter.' +
+    'If you are on the lookout of job change, it is recommended to keep this setting to "Yes". You can change this setting later.';
+  public static PROFILE_INFO_VISIBILIT_SET_TO_YES: string = 'If "Yes", your profile will be available in employer search.';
+  public static CANDIDATE_CAPABILITY_TOOLTIP_1: string = 'Select those capabilities that describe your current strength. These capabilities would define you in the eyes of the recruiter and help you align with the best suitable job.';
+  public static CANDIDATE_CAPABILITY_TOOLTIP_2: string = 'If there are capabilities that you have developed in past but are no more relevent, you should not select such capabilites as this would dilute the matching and alignment with the best job opportunity.';
+  public static RECRUITER_CAPABILITY_TOOLTIP: string = 'These capabilities would form the core of the job profile.' +
+    'In next section, you would get to define these capabilities in detail';
+  public static CERTIFICATE_TOOLTIP: string = 'Certification/Accreditation Message';
+  public static COMPETENCIES_AND_RESPONSIBILITIES_TOOLTIP: string = 'Competencies Message';
+  public static COMPLEXITIES_CANDIDATE_TOOLTIP_1: string = 'This section provides a list of complexity scenarios for your selected capabilities.' +
+    'If more than one options are applicable to you, choose the option where you can demonstrate a higher level of expertise.';
+  public static COMPLEXITIES_CANDIDATE_TOOLTIP_2: string = 'If a scenario was applicable to you in past but is no more relevant to you, avoid choosing such scenarios.In such cases, choose "Not Applicable".';
+  public static COMPLEXITIES_RECRUITER_TOOLTIP_1: string = 'This section provides a list of complexity scenarios for selected capabilities.' +
+    'For each scenario, select the most appropriate level that candidate is required to handle.';
+  public static COMPLEXITIES_RECRUITER_TOOLTIP_2: string = 'For scenarios that are not relevant to your job profile, choose "Not Applicable".';
+  public static EMPLOYMENT_HISTORY_TOOLTIP: string = 'An individual may be exposed to multiple industries during his professional life.';
+  public static INDUSTRY_EXPERIENCE_CANDIDATE_TOOLTIP_1: string = 'An individual may be exposed to multiple industries during their professional life. ' +
+    'At times, organisations need individuals who have cross industry expertise.';
+  public static INDUSTRY_EXPERIENCE_CANDIDATE_TOOLTIP_2: string = 'Select such industries where you can claim a reasonable exposure.';
+  public static INDUSTRY_EXPERIENCE_RECRUITER_TOOLTIP: string = 'If you wish the candidate to have exposure to any industry besides his core industry, please select such additional industries.';
+  public static INDUSTRY_LIST_TOOLTIP_1: string = 'Enter the industry from which you wish to hire the candidate. This Industry forms the core of your Job Profile posting. In next sections, you shall be shown questions and parameters that are relevant to this Industry.';
+  public static INDUSTRY_LIST_TOOLTIP_2: string = 'If you wish the candidate to have worked in multiple Industries, choose the one that is most relevent as on date. You shall get option to include additional industries in later section.';
+  public static JOB_PROFICIENCIES_TOOLTIP_1: string = 'Enter keywords for specialization in Technologies, Products, Tools, Domains etc. E.g Java, Oracle, SAP, Cognos, AWS, Agile, DevOps, CMM, Telecom Billing, Retail Banking etc.';
+  public static JOB_PROFICIENCIES_TOOLTIP_2: string = 'Use the Top 5 "Must Have" keywords to describe the most important skills. You can provide additional 20 keywords that are "Nice to Have".';
+  public static MORE_ABOUT_MYSELF_TOOLTIP: string = 'Please mention additional details about your personal and professional journey that would help the recruiter to know you better.';
+  public static PROFESSIONAL_DATA_TOOLTIP_1: string = 'Please mention your current salary (CTC).';
+  public static PROFESSIONAL_DATA_TOOLTIP_2: string = 'Select if you are open to relocate from your current location as per job demand.';
+  public static PROFESSIONAL_DATA_TOOLTIP_3: string = 'Mention the notice period you have to serve before you can take up new job.';
+  public static PROFICIENCIES_TOOLTIP_1: string = 'Enter all key words that describe your area of expertise or specialization.';
+  public static PROFICIENCIES_TOOLTIP_2: string = 'Ensure that you cover all relevant aspects of Technologies, Products, Methodologies, Models,' +
+    'Processes, Tools, Domain expertise and any additional key words that describe your work.';
+  public static PROFICIENCIES_TOOLTIP_3: string = 'Selecting too many Key Skills would dilute the matching and alignment with the ' +
+    'best job opportunity. Hence you should select maximum 25 Key Skills.';
+  public static PROFILE_DESCRIPTION_TOOLTIP_1: string = 'Enter your current or latest job title.';
+  public static PROFILE_DESCRIPTION_TOOLTIP_2: string = 'A profile photo helps the recruiter to associate a face to the name.';
+  public static PROFILE_DESCRIPTION_TOOLTIP_3: string = 'Provide your current or latest company name.Freshers should mention "Fresher" as their company name.';
+  public static RECRUITER_ENTRY_MESSAGE: string = 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum has been the industrys' +
+    ' standard dummy text ever since the 1500s,when an unknown printer took a galley of type and scrambled it to make' +
+    ' a type specimen book.It has survived not only five centuries, but also the leap into electronic typesetting,' +
+    'remaining essentially unchanged.';
+  public static RECRUITER_DASHBOARD_MESSAGE: string = 'Welcome To Dashboard!';
+  public static RELEVENT_INDUSTRY_LIST_TOOLTIP: string = 'Relevant Industry Message.';
+  public static SAVE_ROLES_MESSAGE: string = 'Saving role details. Once saved, you cannot change it for 3 months.';
+  public static AREA_OF_WORK_TOOLTIP_1: string = 'Select those areas of work that best describe your current focus.';
+  public static AREA_OF_WORK_TOOLTIP_2: string = 'If there are areas that you have worked in past but are no more relevent, you should not select such areas as they may fetch jobs that are no more relevant to you.';
+}
