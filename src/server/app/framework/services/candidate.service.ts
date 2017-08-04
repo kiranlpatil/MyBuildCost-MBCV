@@ -212,6 +212,7 @@ class CandidateService {
                       let newComplexity: ComplexitiesClassModel = new ComplexitiesClassModel();
                       newComplexity.name = complexity.name;
                       newComplexity.sort_order = complexity.sort_order;
+                      newComplexity.code = complexity.code;
                       if (complexity.questionForCandidate !== undefined && complexity.questionForCandidate !== null && complexity.questionForCandidate !== '') {
                         newComplexity.questionForCandidate = complexity.questionForCandidate;
                       } else {
@@ -248,6 +249,7 @@ class CandidateService {
                         let newComplexity: ComplexitiesClassModel = new ComplexitiesClassModel();
                         newComplexity.name = complexity.name;
                         newComplexity.sort_order = complexity.sort_order;
+                        newComplexity.code = complexity.code;
                         if (complexity.questionForCandidate !== undefined && complexity.questionForCandidate !== null && complexity.questionForCandidate !== '') {
                           newComplexity.questionForCandidate = complexity.questionForCandidate;
                         } else {
@@ -296,6 +298,7 @@ class CandidateService {
                       let newComplexity: ComplexitiesClassModel = new ComplexitiesClassModel();
                       newComplexity.name = complexity.name;
                       newComplexity.sort_order = complexity.sort_order;
+                      newComplexity.code = complexity.code;
                       if (complexity.questionForCandidate !== undefined && complexity.questionForCandidate !== null && complexity.questionForCandidate !== '') {
                         newComplexity.questionForCandidate = complexity.questionForCandidate;
                       } else {
@@ -332,6 +335,7 @@ class CandidateService {
                         let newComplexity: ComplexitiesClassModel = new ComplexitiesClassModel();
                         newComplexity.name = complexity.name;
                         newComplexity.sort_order = complexity.sort_order;
+                        newComplexity.code = complexity.code;
                         if (complexity.questionForCandidate !== undefined && complexity.questionForCandidate !== null && complexity.questionForCandidate !== '') {
                           newComplexity.questionForCandidate = complexity.questionForCandidate;
                         } else {
