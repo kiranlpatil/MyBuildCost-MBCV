@@ -7,9 +7,9 @@
     "mail": {
       "host": "http://localhost:8080/",
       //"host":"http://7a4647ae.ngrok.io/"
-      "MAIL_SENDER": "cnext1@inunison.in",
-      "MAIL_SENDER_PASSWORD": "cnext123",
-      "ADMIN_MAIL": "cnext1@inunison.in"
+      "MAIL_SENDER": "notifications@jobmosis.com",
+      "MAIL_SENDER_PASSWORD": "notifications@123",
+      "ADMIN_MAIL": "notifications@jobmosis.com"
 
     },
     "facebookIds":{
