@@ -76,11 +76,7 @@
                       [filterMeta]="filterMeta"
                       [candidates]="candidateQlist.matchedCandidates" [type]="'matchedList'" [jobId]="jobId"
                       [recuirterListCountModel]="recruiterJobView"></cn-q-card-view>
-      <p class="empty-list-message" *ngIf="recruiterJobView.numberOfMatchedCandidates==0">Currently there are no candidates matching to your job posting.
-        This is because the currently available candidates possess different set of capabilities than
-        what your job expects. This dashboard shows candidates that have best matches with your desired
-        capability profile. It is recommended that you keep visiting this page frequently to see the best matching
-        candidates.</p>
+      <p class="empty-list-message" *ngIf="recruiterJobView.numberOfMatchedCandidates==0">{{emptyListMessage}}</p>
     </div>
     <div id="cart-job" class="tab-pane fade">
       <cn-q-card-view (addForCompare)="addForCompare($event)" [progress_bar_color]="'#7264b5'"
@@ -88,7 +84,7 @@
                       [filterMeta]="filterMeta"
                       [candidates]="candidateQlist.cartCandidates" [type]="'cartListed'" [jobId]="jobId"
                       [recuirterListCountModel]="recruiterJobView"></cn-q-card-view>
-      <p class="empty-list-message" *ngIf="recruiterJobView.numberOfCandidatesInCart==0">There are no pending applications from the candidate for this job posting.</p>
+      <p class="empty-list-message" *ngIf="recruiterJobView.numberOfCandidatesInCart==0">{{emptyCartMessage}}</p>
     </div>
     <div id="applied-job" class="tab-pane fade">
       <cn-q-card-view (addForCompare)="addForCompare($event)" (addedTocart)="AddedToCart($event)"
@@ -105,7 +101,7 @@
                       [candidates]="candidateQlist.rejectedCandidates" [type]="'rejectedList'" [jobId]="jobId"
                       [recuirterListCountModel]="recruiterJobView"></cn-q-card-view>
       <p class="empty-list-message" *ngIf="recruiterJobView.numberOfCandidatesrejected==0">
-        There are no candidates rejected by you for this job posting.</p>
+        {{emptyRejectedList}}</p>
     </div>
 
     <div id="compare-candidates" class="tab-pane fade">

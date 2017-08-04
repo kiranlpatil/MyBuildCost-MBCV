@@ -139,6 +139,7 @@ class UserService {
         if (res[0].isCandidate === true) {
           this.mid_content = content.replace('$link$', link).replace('$first_name$', res[0].first_name).replace('$app_name$', this.APP_NAME);
           var mailOptions = {
+            from:config.get('TplSeed.mail.MAIL_SENDER'),
             to: field.email,
             subject: Messages.EMAIL_SUBJECT_FORGOT_PASSWORD,
             html: header1 + this.mid_content + footer1
@@ -158,6 +159,7 @@ class UserService {
               this.mid_content = content.replace('$link$', link).replace('$first_name$', this.company_name).replace('$app_name$', this.APP_NAME);
 
               var mailOptions = {
+                from:config.get('TplSeed.mail.MAIL_SENDER'),
                 to: field.email,
                 subject: Messages.EMAIL_SUBJECT_FORGOT_PASSWORD,
                 html: header1 + this.mid_content + footer1
@@ -205,6 +207,7 @@ class UserService {
         var mid_content = content.replace('$link$', link);
 
         var mailOptions = {
+          from:config.get('TplSeed.mail.MAIL_SENDER'),
           to: field.new_email,
           subject: Messages.EMAIL_SUBJECT_CHANGE_EMAILID,
           html: header1 + mid_content + footer1
@@ -238,6 +241,7 @@ class UserService {
             var footer1 = fs.readFileSync("./src/server/app/framework/public/footer1.html").toString();
             var mid_content = content.replace('$link$', link);
             var mailOptions = {
+              from:config.get('TplSeed.mail.MAIL_SENDER'),
               to: field.email,
               subject: Messages.EMAIL_SUBJECT_REGISTRATION,
               html: header1 + mid_content + footer1
@@ -266,6 +270,7 @@ class UserService {
         var footer1 = fs.readFileSync("./src/server/app/framework/public/footer1.html").toString();
         var mid_content = content.replace('$link$', link);
         var mailOptions = {
+          from:config.get('TplSeed.mail.MAIL_SENDER'),
           to: field.email,
           subject: Messages.EMAIL_SUBJECT_REGISTRATION,
           html: header1 + mid_content + footer1
@@ -291,6 +296,7 @@ class UserService {
     var mid_content = content.replace('$first_name$', field.first_name).replace('$email$', field.email).replace('$message$', field.message);
     var to = config.get('TplSeed.mail.ADMIN_MAIL');
     var mailOptions = {
+      from:config.get('TplSeed.mail.MAIL_SENDER'),
       to: to,
       subject: Messages.EMAIL_SUBJECT_USER_CONTACTED_YOU,
       html: header1 + mid_content + footer1

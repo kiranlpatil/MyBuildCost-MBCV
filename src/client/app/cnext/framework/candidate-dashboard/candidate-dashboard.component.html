@@ -29,10 +29,7 @@
                 <cn-q-card-list [joblistCount]="jobList.length" [listOfJobs]="jobList" [type]="'none'"
                                 (onAction)="onActionPerformOnExactList($event)"></cn-q-card-list>
                 <div class="empty-list-message" *ngIf="candidate.summary.numberOfmatched==0">
-                  <p>Currently there are no jobs matching to your profile.
-                    As the current jobs posted by recruiters demand a different set of capabilities than what you possess.
-                    This dashboard shows job postings that match your capability profile.
-                    It is recommended that you keep visiting this page frequently to see the best matching jobs.</p>
+                  <p>{{emptyDashboardMessage}}</p>
                 </div>
               </div>
               <div id="applied" class="tab-pane fade"><!--[hidden]="!hideSection"-->
@@ -40,7 +37,7 @@
                                        (onAction)="onActionOnApplyJob($event)"
                 ></cn-candidate-job-list><!--[hidden]="type !=='apply'"-->
                 <div class="empty-list-message" *ngIf="candidate.summary.numberOfJobApplied==0 ">
-                  <p>Presently you have not applied for any job</p>
+                  <p>{{noAppliedJobMessage}}</p>
                 </div>
               </div>
               <div id="rejected" class="tab-pane fade"><!-- [hidden]="!hideSection" -->
@@ -48,7 +45,7 @@
                                        (onAction)="onActionOnBlockJob($event)"
                 ></cn-candidate-job-list><!-- [hidden]="type !=='block'" -->
                 <div class="empty-list-message"  *ngIf="candidate.summary.numberJobsBlocked==0 ">
-                  <p>Currently you have not marked any jobs as "Not Interested".</p>
+                  <p>{{noNotIntrestedJobMessage}}</p>
                 </div>
               </div>
             </div>

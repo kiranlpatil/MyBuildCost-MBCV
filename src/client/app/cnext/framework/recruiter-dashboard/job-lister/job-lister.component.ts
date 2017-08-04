@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { RecruiterHeaderDetails } from '../../model/recuirterheaderdetails';
 import { ReferenceService } from '../../model/newClass';
 import { RecruiterDashboard } from '../../model/recruiter-dashboard';
+import {Tooltip} from "../../../../framework/shared/constants";
 
 
 @Component({
@@ -23,6 +24,8 @@ export class JobListerComponent implements  OnDestroy, OnChanges {
   //public jobListToCheck:JobPosterModel[] = new Array(0);
   private toggle: boolean = false;
   private isJobeditted: boolean = false;
+  private initialMessageToDisplay: string= Tooltip.RECRUITER_ENTRY_MESSAGE;
+  private dashboardWelcomeMessage: string= Tooltip.RECRUITER_DASHBOARD_MESSAGE;
   private qCardModel: QCardsortBy = new QCardsortBy();
   // private candidatesInList : CandidateNumberDifferentList= new CandidateNumberDifferentList();
   //private candidatesInLists : RecruiterDashboard= new RecruiterDashboard();

@@ -2,7 +2,7 @@ import * as nodemailer from "nodemailer";
 import Messages=require("../shared/messages");
 var config = require('config');
 var smtpTransport = nodemailer.createTransport({
-  service: "Gmail",
+  service:"Zoho",
 
   auth: {
     user: config.get('TplSeed.mail.MAIL_SENDER'),
@@ -19,7 +19,6 @@ class SendMailService {
         callback(new Error(Messages.MSG_ERROR_EMAIL), response);
       }
       else {
-
         callback(null, response);
       }
     });

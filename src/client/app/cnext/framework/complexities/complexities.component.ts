@@ -2,7 +2,7 @@ import {Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, V
 import {Role} from "../model/role";
 import {ComplexityService} from "../complexity.service";
 import {LocalStorageService} from "../../../framework/shared/localstorage.service";
-import {LocalStorage, Messages, ValueConstant} from "../../../framework/shared/constants";
+import {LocalStorage, Messages, ValueConstant, Tooltip} from "../../../framework/shared/constants";
 import {Section} from "../model/candidate";
 import {ComplexityDetails} from "../model/complexity-detail";
 import {ComplexityComponentService} from "./complexity.service";
@@ -43,17 +43,14 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
   private singleComplexity: boolean = false;
   private requiedValidationMessageCandidate = Messages.MSG_ERROR_VALIDATION_COMPLEXITY_REQUIRED_CANDIDATE;
   private requiedValidationMessageRecruiter = Messages.MSG_ERROR_VALIDATION_COMPLEXITY_REQUIRED_RECRUITER;
-  tooltipCandidateMessage: string = "<ul><li>" +
-    "<p>1. This section provides a list of complexity scenarios for your selected capabilities." +
-    "If more than one options are applicable to you, choose the option where you can demonstrate a higher level of expertise.</p></li>" +
-    "<li><p>2. If a scenario was applicable to you in past but is no more relevant to you, avoid choosing such scenarios.In such cases, choose 'Not Applicable.</p>" +
-    "</li></ul>";
+  tooltipCandidateMessage: string = '<ul><li>' +
+    '<p>1. '+ Tooltip.COMPLEXITIES_CANDIDATE_TOOLTIP_1+'</p></li>'+
+    '<li><p>1. '+Tooltip.COMPLEXITIES_CANDIDATE_TOOLTIP_2+'</p></li></ul>';
   tooltipRecruiterMessage: string = '<ul><li>' +
-    '<p>1. This section provides a list of complexity scenarios for selected capabilities.' +
-    'For each scenario, select the most appropriate level that candidate is required to handle.</p></li>' +
-    '<li><p>2. For scenarios that are not relevant to your job profile, choose "Not Applicable".</p>' +
+    '<p>1. '+Tooltip.COMPLEXITIES_RECRUITER_TOOLTIP_1+'</p></li>' +
+    '<li><p>2. '+Tooltip.COMPLEXITIES_RECRUITER_TOOLTIP_2+'</p>' +
     '</li></ul>';
-  @ViewChild("save")
+  @ViewChild('save')
   private _inputElement1: ElementRef;
   private maxCapabilitiesToShow = ValueConstant.MAX_CAPABILITIES_TO_SHOW;
 

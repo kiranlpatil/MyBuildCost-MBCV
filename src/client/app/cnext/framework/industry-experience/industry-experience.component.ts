@@ -3,7 +3,7 @@ import {Industry} from "../model/industry";
 import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
 import {Section} from "../model/candidate";
 import {LocalStorageService} from "../../../framework/shared/localstorage.service";
-import {LocalStorage, Messages, ValueConstant} from "../../../framework/shared/constants";
+import {LocalStorage, Messages, ValueConstant, Tooltip} from "../../../framework/shared/constants";
 import {IndustryDataService} from "../industry-data-service";
 
 @Component({
@@ -20,13 +20,11 @@ export class IndustryExperienceListComponent implements OnInit,OnChanges {
   @Output() onComplete = new EventEmitter();
   @Output() onNextComplete = new EventEmitter();
   tooltipCandidateMessage: string = '<ul><li>' +
-    '<p>1. An individual may be exposed to multiple industries during their professional life. ' +
-  'At times, organisations need individuals who have cross industry expertise.</p></li>' +
-  '<li><p>2. Select such industries where you can claim a reasonable exposure.</p></li></ul>';
+    '<p>1. '+ Tooltip.INDUSTRY_EXPERIENCE_CANDIDATE_TOOLTIP_1+'</p></li>' +
+  '<li><p>2. '+Tooltip.INDUSTRY_EXPERIENCE_CANDIDATE_TOOLTIP_2+'</p></li></ul>';
 
   tooltipRecruiterMessage: string = '<ul><li>' +
-    '<p>1. If you wish the candidate to have exposure to any industry besides his core industry, please select such additional industries.' +
-  '</p></li>' +
+    '<p>1. '+ Tooltip.INDUSTRY_EXPERIENCE_RECRUITER_TOOLTIP+'</p></li>' +
   '</ul>';
   private showButton: boolean = true;
   private industries: Industry[] = new Array(0);

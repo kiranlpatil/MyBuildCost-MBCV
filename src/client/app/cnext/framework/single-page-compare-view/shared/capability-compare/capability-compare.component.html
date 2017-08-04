@@ -14,7 +14,9 @@
 <div class="capability-complexity-container">
   <div class="row-section">
     <div *ngIf="!isCompact">
-      <div  class="column1" *ngFor="let capability of capabilities; let i= index" [class.not-applicable]="!capability.isFound">
+      <div class="column1" *ngFor="let capability of capabilities; let i= index"
+           [class.not-applicable]="!capability.isFound" [class.eleventh-for-all]="capabilities.length == 11"
+           [class.twelve-for-all]="capabilities.length == 12" [class.thirteen-for-all]="capabilities.length == 13">
         <div  [class.more-capability]="i== capabilities.length-1 && capabilities.length >= 10">
           <div class="content clearfix">
             <div *ngFor="let item of maxArray;let x=index;">

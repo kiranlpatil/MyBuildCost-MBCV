@@ -698,3 +698,22 @@ and (max-width: 840px) {
 .hide-capability {
   display: none !important;
 }
+
+/* Desktops and laptops ----------- */
+@media screen and (min-width: 1020px) and (max-width: 1366px) {
+  .thirteen-for-all {
+    max-width: 80px !important;
+  }
+  .twelve-for-all {
+    max-width: 86px !important;
+  }
+  .eleventh-for-all {
+    max-width: 94px !important;
+  }
+}
+
+@media screen and (min-width: 1367px) and (max-width: 2080px) {
+  .thirteen-for-all {
+    max-width: 200px !important;
+  }
+}

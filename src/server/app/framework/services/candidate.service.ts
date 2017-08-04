@@ -40,13 +40,18 @@ class CandidateService {
 
   createUser(item: any, callback: (error: any, result: any) => void) {
     console.log('USer is', item);
-    this.userRepository.retrieve({'email': item.email}, (err, res) => {
+    this.userRepository.retrieve({ $or: [ { 'email': item.email }, {'mobile_number': item.mobile_number } ]}, (err, res) => {
       if (err) {
         callback(new Error(err), null);
       }
       else if (res.length > 0) {
         if (res[0].isActivated === true) {
-          callback(new Error(Messages.MSG_ERROR_REGISTRATION), null);
+          if(res[0].email===item.email) {
+            callback(new Error(Messages.MSG_ERROR_REGISTRATION), null);
+          }
+          if(res[0].mobile_number===item.mobile_number) {
+            callback(new Error(Messages.MSG_ERROR_REGISTRATION_MOBILE_NUMBER), null);
+          }
         } else if (res[0].isActivated === false) {
           callback(new Error(Messages.MSG_ERROR_VERIFY_ACCOUNT), null);
         }

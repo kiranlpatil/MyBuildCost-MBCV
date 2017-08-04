@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, Output} from "@angular/core";
 import {Section} from "../model/candidate";
-import {Messages, ValueConstant} from "../../../framework/shared/constants";
+import {Messages, ValueConstant, Tooltip} from "../../../framework/shared/constants";
 import {ProficiencyDetailsService} from "../proficiency-detail-service";
 import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
 
@@ -17,13 +17,10 @@ export class ProficienciesComponent {
   private proficiencies: string[];
   @Output() onComplete = new EventEmitter();
   @Output() onSelect = new EventEmitter();
-  tooltipMessage: string = "<ul><li><p>" +
-      "1. Enter all key words that describe your area of expertise or specialization.</p></li>" +
-    "<li><p>2. Ensure that you cover all relevant aspects of Technologies, Products, Methodologies, Models, " +
-      "Processes, Tools, Domain expertise and any additional key words that describe your work. " +
-      "These keywords will help the recruiter identify your specialties / proficiencies</p></li>" +
-    "<li><p>3. Selecting too many Key Skills would dilute the matching and alignment with the " +
-      "best job opportunity. Hence you should select maximum 25 Key Skills.</p></li></ul>";
+  tooltipMessage: string = '<ul><li><p>' +
+      '1. '+ Tooltip.PROFICIENCIES_TOOLTIP_1+'</p></li>' +
+    '<li><p>2. '+ Tooltip.PROFICIENCIES_TOOLTIP_2+'</p></li>' +
+    '<li><p>3. '+Tooltip.PROFICIENCIES_TOOLTIP_3+'</p></li></ul>';
   private maxProficiencies: number;
 
   constructor(private proficiencyDetailService: ProficiencyDetailsService, private profileCreatorService: CandidateProfileService) {

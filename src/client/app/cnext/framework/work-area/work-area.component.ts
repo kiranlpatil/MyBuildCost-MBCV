@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from "@angular/core";
 import {Role} from "../model/role";
 import {Section} from "../model/candidate";
-import {LocalStorage, Messages, ValueConstant} from "../../../framework/shared/constants";
+import {LocalStorage, Messages, ValueConstant, Tooltip} from "../../../framework/shared/constants";
 import {LocalStorageService} from "../../../framework/shared/localstorage.service";
 
 @Component({
@@ -18,8 +18,8 @@ export class WorkAreaComponent implements OnInit,OnChanges {
   @Output() onComplete = new EventEmitter();
   tooltipCandidateMessage: string =
     '<ul>' +
-    '<li><p>1. Select those areas of work that best describe your current focus. </p></li>' +
-    '<li><p>2. If there are areas that you have worked in past but are no more relevent, you should not select such areas as they may fetch jobs that are no more relevant to you.</p></li>' +
+    '<li><p>1. '+ Tooltip.AREA_OF_WORK_TOOLTIP_1+' </p></li>' +
+    '<li><p>2. '+ Tooltip.AREA_OF_WORK_TOOLTIP_2+'</p></li>' +
     '</ul>';
 
   tooltipRecruiterMessage: string =

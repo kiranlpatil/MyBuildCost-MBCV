@@ -3,7 +3,7 @@ import {Industry} from '../model/industry';
 import {CandidateProfileService} from '../candidate-profile/candidate-profile.service';
 import {Section} from '../model/candidate';
 import {LocalStorageService} from '../../../framework/shared/localstorage.service';
-import {LocalStorage, Messages} from '../../../framework/shared/constants';
+import {LocalStorage, Messages, Tooltip} from '../../../framework/shared/constants';
 import {IndustryDetailsService} from '../industry-detail-service';
 
 @Component({
@@ -21,7 +21,7 @@ export class IndustryListComponent implements OnChanges {
 
   tooltipMessage: string =
       '<ul>' +
-      '<li><p>1. Enter the industry from which you wish to hire the candidate. This Industry forms the core of your Job Profile posting. In next sections, you shall be shown questions and parameters that are relevant to this Industry.</p></li><li><p>2. If you wish the candidate to have worked in multiple Industries, choose the one that is most relevent as on date. You shall get option to include additional industries in later section.</p></li>' +
+      '<li><p>1. '+Tooltip.INDUSTRY_LIST_TOOLTIP_1+'</p></li><li><p>2. '+Tooltip.INDUSTRY_LIST_TOOLTIP_2+'</p></li>' +
       '</ul>';
 
   private industries: Industry[] = new Array(0);

@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
 import {Candidate, Section} from "../model/candidate";
-import {AppSettings, Messages} from "../../../framework/shared/constants";
+import {AppSettings, Messages, Tooltip} from "../../../framework/shared/constants";
 import {CandidateDetail} from "../../../framework/registration/candidate/candidate";
 import {ProfessionalDataService} from "../professional-data/professional-data.service";
 import {Location} from "../../../framework/registration/location";
@@ -48,9 +48,9 @@ export class ProfileDescriptionComponent implements OnInit {
 
   tooltipMessage: string =
     '<ul>' +
-    '<li><p>1. Enter your current or latest job title. </p></li>' +
-    '<li><p>2. A profile photo helps the recruiter to associate a face to the name.</p></li>' +
-    '<li><p>3. Provide your current or latest company name.Freshers should mention "Fresher" as their company name.</p></li>' +
+    '<li><p>1. '+ Tooltip.PROFILE_DESCRIPTION_TOOLTIP_1+'</p></li>' +
+    '<li><p>2. '+ Tooltip.PROFILE_DESCRIPTION_TOOLTIP_2+'</p></li>' +
+    '<li><p>3. '+ Tooltip.PROFILE_DESCRIPTION_TOOLTIP_3+'</p></li>' +
     '</ul>';
 
   constructor(private professionalDataService: ProfessionalDataService,
