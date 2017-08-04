@@ -369,4 +369,10 @@ export class Tooltip {
   public static SAVE_ROLES_MESSAGE: string = 'Saving role details. Once saved, you cannot change it for 3 months.';
   public static AREA_OF_WORK_TOOLTIP_1: string = 'Select those areas of work that best describe your current focus.';
   public static AREA_OF_WORK_TOOLTIP_2: string = 'If there are areas that you have worked in past but are no more relevent, you should not select such areas as they may fetch jobs that are no more relevant to you.';
+  public static EMPTY_LIST_MESSAGE: string = 'Currently there are no candidates matching to your job posting.' +
+    'This is because the currently available candidates possess different set of capabilities than' +
+    'what your job expects. This dashboard shows candidates that have best matches with your desired' +
+    'capability profile. It is recommended that you keep visiting this page frequently to see the best matching candidates.';
+  public static EMPTY_CART_MESSAGE: string = 'There are no pending applications from the candidate for this job posting.';
+  public static EMPTY_REJECTED_LIST_MESSAGE: string = 'There are no rejected candidates for this job posting.';
 }

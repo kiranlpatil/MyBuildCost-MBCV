@@ -2,7 +2,7 @@ import {Component, OnInit} from "@angular/core";
 import {ActivatedRoute, Router} from "@angular/router";
 import {JobDashboardService} from "./job-dashboard.service";
 import {RecruiterJobView} from "../../model/recruiter-job-view";
-import {ValueConstant} from "../../../../framework/shared/constants";
+import {ValueConstant, Tooltip} from "../../../../framework/shared/constants";
 import {CandidateQListModel} from "./q-cards-candidates";
 import {JobPosterModel} from "../../model/jobPoster";
 import {ReferenceService} from "../../model/newClass";
@@ -34,6 +34,9 @@ export class JobDashboardComponent implements OnInit {
   private isRecruitingForSelf: boolean;
   private profileComparison: ProfileComparison;
   private listOfCandidateIdToCompare: string[] = new Array(0);
+  private emptyListMessage: string = Tooltip.EMPTY_LIST_MESSAGE;
+  private emptyCartMessage: string = Tooltip.EMPTY_CART_MESSAGE;
+  private emptyRejectedList: string = Tooltip.EMPTY_REJECTED_LIST_MESSAGE;
 
   constructor(public refrence: ReferenceService,
               private activatedRoute: ActivatedRoute,

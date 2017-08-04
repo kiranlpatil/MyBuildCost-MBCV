@@ -252,8 +252,8 @@
           >Candidate's additional capabilities </h4>
           <div *ngIf="data != undefined">
             <div class="pull-left col-xs-8 no-padding text-left">
-              <div class="pull-left" *ngFor="let cap of data.additionalCapabilites" style="padding-top: 7px;padding-right: 7px;">
-                <span>{{cap}}</span>,
+              <div class="pull-left" *ngFor="let cap of data.additionalCapabilites;let j=index" style="padding-top: 7px;padding-right: 7px;">
+                <span>{{cap}}</span><span *ngIf="data.additionalCapabilites.length>1 &&  j!=data.additionalCapabilites.length-1">,</span>
               </div>
             </div>
           </div>
