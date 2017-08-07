@@ -5,7 +5,7 @@ import RecruiterRepository = require('../../dataaccess/repository/recruiter.repo
 import CandidateModel = require('../../dataaccess/model/candidate.model');
 import JobProfileService = require('../../services/jobprofile.service');
 import {ConstVariables} from "../../shared/sharedconstants";
-import {ProfileComparisonDataModel} from "../../dataaccess/model/profile-comparison-data.model";
+import {ProfileComparisonDataModel, SkillStatus} from "../../dataaccess/model/profile-comparison-data.model";
 import {CapabilityMatrixModel} from "../../dataaccess/model/capability-matrix.model";
 import {ProfileComparisonModel} from "../../dataaccess/model/profile-comparison.model";
 import MatchViewModel = require('../../dataaccess/model/match-view.model');
@@ -281,9 +281,9 @@ class SearchService {
   }
 
   buildCandidateModel(candidate: CandidateModel) {
-    console.log('--------------------------salarymatch-------------------------------------------',candidate)
+    //console.log('--------------------------salarymatch-------------------------------------------',candidate)
     let profileComparisonResult: ProfileComparisonDataModel = new ProfileComparisonDataModel();
-    //profileComparisonResult.industry = candidate.industry;
+    profileComparisonResult._id = candidate._id;
     profileComparisonResult.industryName = candidate.industry.name;
     profileComparisonResult.aboutMyself = candidate.aboutMyself;
     profileComparisonResult.academics = candidate.academics;
@@ -320,7 +320,7 @@ class SearchService {
   }
 
   buildMultiCompareCapabilityView(job:any, newCandidate:ProfileComparisonDataModel, industries:any, isCandidate:any) {
-   console.log('--------------------------job-------------------------------------------',job)
+   //console.log('--------------------------job-------------------------------------------',job)
     var capabilityPercentage:number[] = new Array(0);
     var capabilityKeys:string[] = new Array(0);
     var correctQestionCountForAvgPercentage:number = 0;
@@ -537,7 +537,7 @@ class SearchService {
     return newCandidate;
   }
 
-  getMultiCompareResult(candidate: any, jobId: string, isCandidate: boolean, callback: (error: any, result: any) => void) {
+  getMultiCompareResult(candidate: any, jobId: string, recruiterId:any, isCandidate: boolean, callback: (error: any, result: any) => void) {
 
     this.candidateRepository.retrieveByMultiIdsAndPopulate(candidate, {}, (err: any, candidateRes: any) => {
       if (err) {
@@ -561,11 +561,16 @@ class SearchService {
                   var compareResult: ProfileComparisonDataModel[] = new Array(0);
                   for (let candidate of candidateRes) {
                     var newCandidate = this.getCompareData(candidate, job, isCandidate, industries);
+                        newCandidate = this.getListStatusOfCandidate(newCandidate,job);
+                        newCandidate = this.sortCandidateSkills(newCandidate);
+                    //console.log('----------------data-status---------------',newCandidate);
                     compareResult.push(newCandidate);
                   }
                   let profileComparisonModel:ProfileComparisonModel = new ProfileComparisonModel();
                   profileComparisonModel.profileComparisonData = compareResult;
-                  var jobDetails:ProfileComparisonJobModel = this.getJobDetailsForComparison(job);
+                  var jobDetails:ProfileComparisonJobModel = this.getJobDetailsForComparison(job);    
+                  console.log('----------------------jobDetails-----------------------------------------',jobDetails);
+
                   profileComparisonModel.profileComparisonJobData = jobDetails;
                   callback(null, profileComparisonModel);
                 }
@@ -592,9 +597,44 @@ class SearchService {
     profileComparisonJobModel.joiningPeriod = job.joiningPeriod;
     profileComparisonJobModel.salaryMaxValue = job.salaryMaxValue;
     profileComparisonJobModel.salaryMinValue = job.salaryMinValue;
+    profileComparisonJobModel.proficiencies = job.proficiencies;
+    profileComparisonJobModel.interestedIndustries = job.interestedIndustries;
     return profileComparisonJobModel;
   }
+  getListStatusOfCandidate(newCandidate:ProfileComparisonDataModel,jobProfile:JobProfileModel) {
+    var candidateListStatus:string[] = new Array(0);
+    for(let list of jobProfile.candidate_list) {
+      for(let id of list.ids) {
+         if(newCandidate._id == id) {
+           candidateListStatus.push(list.name);
+         }
+      }
+    }
+    newCandidate.candidateListStatus = candidateListStatus;
+    return newCandidate;
+  }
 
+  sortCandidateSkills(newCandidate:ProfileComparisonDataModel) {
+
+    var skillStatusData:SkillStatus[] = new Array(0);
+    for(let value of newCandidate.proficienciesMatch) {
+      var skillStatus:SkillStatus = new SkillStatus();
+      skillStatus.name = value;
+      skillStatus.status = 'Match';
+      skillStatusData.push(skillStatus);
+      //newCandidate.candidateSkillStatus.push(skillStatus);
+    }
+    for(let value of newCandidate.proficienciesUnMatch) {
+      var skillStatus:SkillStatus = new SkillStatus();
+      skillStatus.name = value;
+      skillStatus.status = 'UnMatch';
+      skillStatusData.push(skillStatus);
+      //newCandidate.candidateSkillStatus.push(skillStatus);
+    }
+    newCandidate.candidateSkillStatus = skillStatusData;
+    console.log('----------------------newCandidate-----------------------------------------',newCandidate.candidateSkillStatus);
+    return newCandidate;
+  }
 }
 
 Object.seal(SearchService);

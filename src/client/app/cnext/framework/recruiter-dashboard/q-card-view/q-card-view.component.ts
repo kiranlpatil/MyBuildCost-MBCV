@@ -13,6 +13,7 @@ import {CandidateDetail} from "../../../../framework/registration/candidate/cand
 import {CandidateProfileService} from "../../candidate-profile/candidate-profile.service";
 import {Message} from "../../../../framework/shared/message";
 import {MessageService} from "../../../../framework/shared/message.service";
+import {ProfileCompareService} from "../../profile-compare.service";
 /*import underline = Chalk.underline;*/
 
 
@@ -51,13 +52,19 @@ export class QCardviewComponent implements OnChanges {
 
 
   constructor(private qCardFilterService: QCardFilterService,
-              private profileCreatorService: CandidateProfileService, private qCardViewService: QCardViewService, private messageService: MessageService) {
+              private profileCreatorService: CandidateProfileService, private qCardViewService: QCardViewService, private messageService: MessageService,private profileCompareService: ProfileCompareService) {
 
-   /* this.qCardFilterService.candidateFilterValue$.subscribe(
-      (data: QCardFilter) => {
-        this.filterMeta = data;
+    this.profileCompareService._compareAction$.subscribe(
+      (data: any) => { debugger
+        var candidate:CandidateQCard;
+        this.candidates.forEach(item=> {
+          if(data.id == item._id){
+            candidate = item;
+          }
+        })
+        this.actionOnQCard(data.action, data.source, data.destination, candidate);
       }
-    );*/
+    );
     this.qCardFilterService.aboveMatch$.subscribe(
       () => {
         this.matchFormat = this.match.aboveMatch;
@@ -80,7 +87,7 @@ export class QCardviewComponent implements OnChanges {
     }
   }
 
-  actionOnQCard(action: string, sourceListName: string, destinationListName: string, candidate: CandidateQCard) {
+  actionOnQCard(action: string, sourceListName: string, destinationListName: string, candidate: CandidateQCard) { debugger
     let isMatchList: boolean = false;
     let isFound : boolean=false;
     switch (sourceListName) {
@@ -260,8 +267,9 @@ export class QCardviewComponent implements OnChanges {
     return null;
   }
 
-  addForCompareView(value: any) {
-    this.addForCompare.emit(value._id);
+  addForCompareView(value: any,sorceName:string) {
+    var obj= {'id':value._id,'sorceName':sorceName};
+    this.addForCompare.emit(obj);
     var message = new Message();
     message.isError = false;
     message.custom_message = 'Candidate' + ' ' + value.first_name + ' ' + value.last_name + ' added to compare view.';

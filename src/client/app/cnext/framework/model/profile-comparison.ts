@@ -50,7 +50,8 @@ export class ProfileComparison {
 
    matchingPercentage:number;
    status:string;
-   companyCulture: string;
+   candidateListStatus:string[];
+   candidateSkillStatus:SkillStatus[];
  }
 
 export class CompareEntityDetails {
@@ -65,4 +66,11 @@ export class CompareEntityDetails {
   state:string;
   city:string;
   industryName:string;
+  interestedIndustries:string[];
+  proficiencies:string[];
+}
+
+export class SkillStatus {
+  name:string;
+  status:string;
 }
