@@ -374,5 +374,5 @@ export class Tooltip {
     'what your job expects. This dashboard shows candidates that have best matches with your desired' +
     'capability profile. It is recommended that you keep visiting this page frequently to see the best matching candidates.';
   public static EMPTY_CART_MESSAGE: string = 'There are no pending applications from the candidate for this job posting.';
-  public static EMPTY_REJECTED_LIST_MESSAGE: string = 'There are no rejected candidates for this job posting.';
+  public static EMPTY_REJECTED_LIST_MESSAGE: string = 'There are no candidates rejected by you for this job posting.';
 }
