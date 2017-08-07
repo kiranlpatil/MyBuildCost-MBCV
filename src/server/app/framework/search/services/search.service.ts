@@ -281,7 +281,7 @@ class SearchService {
   }
 
   buildCandidateModel(candidate: CandidateModel) {
-    //console.log('--------------------------salarymatch-------------------------------------------',candidate)
+    console.log('--------------------------candidate-------------------------------------------',candidate)
     let profileComparisonResult: ProfileComparisonDataModel = new ProfileComparisonDataModel();
     profileComparisonResult._id = candidate._id;
     profileComparisonResult.industryName = candidate.industry.name;
@@ -320,13 +320,12 @@ class SearchService {
   }
 
   buildMultiCompareCapabilityView(job:any, newCandidate:ProfileComparisonDataModel, industries:any, isCandidate:any) {
-   //console.log('--------------------------job-------------------------------------------',job)
     var capabilityPercentage:number[] = new Array(0);
     var capabilityKeys:string[] = new Array(0);
     var correctQestionCountForAvgPercentage:number = 0;
     var qestionCountForAvgPercentsge:number = 0;
     for (let cap in job.capability_matrix) {
-      qestionCountForAvgPercentsge++;
+
       var capabilityKey = cap.split("_");
       if (capabilityKeys.indexOf(capabilityKey[0]) == -1) {
         capabilityKeys.push(capabilityKey[0]);
@@ -346,17 +345,21 @@ class SearchService {
             matchCount++;
             capabilityQuestionCount++;
             correctQestionCountForAvgPercentage++;
+            qestionCountForAvgPercentsge++;
             //match_view.match = Match.Exact;
           } else if (job.capability_matrix[cap] == (Number(newCandidate.capability_matrix[cap]) - ConstVariables.DIFFERENCE_IN_COMPLEXITY_SCENARIO)) {
             matchCount++
             capabilityQuestionCount++;
             correctQestionCountForAvgPercentage++;
+            qestionCountForAvgPercentsge++;
             //match_view.match = Match.Above;
           } else if (job.capability_matrix[cap] == (Number(newCandidate.capability_matrix[cap]) + ConstVariables.DIFFERENCE_IN_COMPLEXITY_SCENARIO)) {
             //match_view.match = Match.Below;
             capabilityQuestionCount++;
+            qestionCountForAvgPercentsge++;
           } else {
             capabilityQuestionCount++;
+            qestionCountForAvgPercentsge++;
             //match_view.match = Match.MissMatch;
           }
         }
@@ -382,7 +385,7 @@ class SearchService {
       }
       var percentage:number = 0;
       if (capabilityQuestionCount) {
-        var percentage:number = (matchCount / capabilityQuestionCount) * 100;
+        percentage = (matchCount / capabilityQuestionCount) * 100;
       }
 
       capabilityModel.capabilityName = capName;
@@ -568,8 +571,8 @@ class SearchService {
                   }
                   let profileComparisonModel:ProfileComparisonModel = new ProfileComparisonModel();
                   profileComparisonModel.profileComparisonData = compareResult;
-                  var jobDetails:ProfileComparisonJobModel = this.getJobDetailsForComparison(job);    
-                  console.log('----------------------jobDetails-----------------------------------------',jobDetails);
+                  var jobDetails:ProfileComparisonJobModel = this.getJobDetailsForComparison(job);
+                  //console.log('----------------------jobDetails-----------------------------------------',jobDetails);
 
                   profileComparisonModel.profileComparisonJobData = jobDetails;
                   callback(null, profileComparisonModel);
@@ -632,7 +635,6 @@ class SearchService {
       //newCandidate.candidateSkillStatus.push(skillStatus);
     }
     newCandidate.candidateSkillStatus = skillStatusData;
-    console.log('----------------------newCandidate-----------------------------------------',newCandidate.candidateSkillStatus);
     return newCandidate;
   }
 }
