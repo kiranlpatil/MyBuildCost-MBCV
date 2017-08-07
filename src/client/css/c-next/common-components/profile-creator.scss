@@ -327,6 +327,8 @@
     box-shadow: none;
     padding: 0;
     position: relative;
+    margin-bottom: 0;
+    margin-top: 50px;
 
     .glyphicon-trash {
       background-color: transparent;
@@ -337,6 +339,10 @@
       top: 0;
       font-size: 12px;
       cursor: pointer;
+    }
+
+    &:first-child {
+      margin-top: 0 !important;
     }
   }
 
@@ -349,7 +355,7 @@
   }
 
   .panel-body {
-    padding: 15px;
+    padding: 0 15px;
   }
 
   select {
