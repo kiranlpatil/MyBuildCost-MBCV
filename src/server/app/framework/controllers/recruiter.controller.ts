@@ -216,8 +216,9 @@ export function getCompareDetailsOfCandidate(req: express.Request, res: express.
     var searchService = new SearchService();
     var params = req.query;
     let jobId = req.params.jobId;
+    let recruiterId = req.params.id;
     let candidateId: string[] = JSON.parse(params.candidateId);
-    searchService.getMultiCompareResult(candidateId, jobId, false, (error: any, result: any) => {
+    searchService.getMultiCompareResult(candidateId, jobId,recruiterId, false, (error: any, result: any) => {
       if (error) {
         next({
           reason: "Problem in Search Matching Result",//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,

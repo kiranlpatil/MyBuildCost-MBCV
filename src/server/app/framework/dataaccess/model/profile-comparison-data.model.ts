@@ -45,10 +45,16 @@ export class ProfileComparisonDataModel {
   matchingPercentage: number;
   status: string;
   additionalCapabilites: string[];
-  companyCulture: string;
   proficienciesUnMatch: string[];
   match_map: any;
+  candidateListStatus:string[];
+  _id:any;
+  candidateSkillStatus:SkillStatus[];
+}
 
+export class SkillStatus {
+  name:string;
+  status:string;
 }
 
 //export = ProfileComparisonDataModel

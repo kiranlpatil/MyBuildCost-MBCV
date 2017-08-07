@@ -11,6 +11,7 @@ import {QCardFilter} from "../../model/q-card-filter";
 import {LoaderService} from "../../../../framework/shared/loader/loader.service";
 import {ProfileComparisonService} from "../../profile-comparison/profile-comparison.service";
 import {ProfileComparison} from "../../model/profile-comparison";
+import {ProfileCompareService} from "../../profile-compare.service";
 
 @Component({
   moduleId: module.id,
@@ -42,7 +43,7 @@ export class JobDashboardComponent implements OnInit {
               private activatedRoute: ActivatedRoute,
               private jobDashboardService: JobDashboardService,
               private _router:Router,private qcardFilterService:QCardFilterService,
-              private loaderService: LoaderService,private profileComparisonService: ProfileComparisonService) {
+              private loaderService: LoaderService,private profileComparisonService: ProfileComparisonService, private profileCompareService: ProfileCompareService) {
     this.qcardFilterService.candidateFilterValue$.subscribe(
       (data: QCardFilter) => {
         this.filterMeta = data;
@@ -196,13 +197,59 @@ export class JobDashboardComponent implements OnInit {
     this.showModalStyle = !this.showModalStyle;
   }
 
-  performActionOnComparisonList(data: any) {
-    if (data.action = 'Remove') {
-      this.profileComparison.profileComparisonData.splice(this.profileComparison.profileComparisonData.indexOf(data.value), 1);
-      this.listOfCandidateIdToCompare.splice(this.profileComparison.profileComparisonData.indexOf(data.value), 1);
+  performActionOnComparisonList(data:any) {
+
+    /*if (data.action == 'Remove') {
+      this.profileComparison.profileComparisonData.splice(this.profileComparison.profileComparisonData.indexOf(data.item), 1);
+      this.listOfCandidateIdToCompare.splice(this.profileComparison.profileComparisonData.indexOf(data.item._id), 1);
       this.recruiterJobView.numberOfCandidatesInCompare--;
-     }
+    } else if (data.action == 'AddToCart') {
+      //matchedList cartListed applied rejectedList
+     /!* if (data.item.candidateListStatus.indexOf('rejectedList')) {
+        var compareAction:any = {'action': 'add', 'source': 'rejectedList', 'destination': 'matchedList', 'id': data.item._id};
+        this.profileCompareService.change(compareAction);
+      }*!/
+      var compareAction:any;
+      if (data.item.candidateListStatus.indexOf('matchedList') !== -1) {
+        compareAction = {'action': 'add', 'source': 'matchedList', 'destination': 'cartListed', 'id': data.item._id};
+        //this.profileCompareService.change(compareAction);
+      } else {
+        compareAction = {'action': 'add', 'source': 'applied', 'destination': 'cartListed', 'id': data.item._id};
+      }
+      /!*if (data.item.candidateListStatus.indexOf('applied') !== -1) {
+        compareAction = {'action': 'add', 'source': 'applied', 'destination': 'cartListed', 'id': data.item._id};
+      }*!/
+      this.profileCompareService.change(compareAction);
+      this.profileComparison.profileComparisonData.splice(this.profileComparison.profileComparisonData.indexOf(data.item), 1);
+      this.listOfCandidateIdToCompare.splice(this.profileComparison.profileComparisonData.indexOf(data.item._id), 1);
+      this.recruiterJobView.numberOfCandidatesInCompare--;
+
+    } else if (data.action == 'Reject') {
+      var compareAction:any;
+      if (data.item.candidateListStatus.indexOf('matchedList') !== -1) {
+        compareAction = {'action': 'add', 'source': 'matchedList', 'destination': 'rejectedList', 'id': data.item._id};
+        //this.profileCompareService.change(compareAction);
+      }
+      if ((data.item.candidateListStatus.indexOf('cartListed') !== -1) && (data.item.candidateListStatus.indexOf('applied') == -1)) {
+        compareAction = {'action': 'add', 'source': 'cartListed', 'destination': 'rejectedList', 'id': data.item._id};
+        //this.profileCompareService.change(compareAction);
+      }
+
+      if ((data.item.candidateListStatus.indexOf('applied') !== -1) && (data.item.candidateListStatus.indexOf('cartListed') == -1) ) {
+        var compareAction:any = {'action': 'add', 'source': 'applied', 'destination': 'rejectedList', 'id': data.item._id};
+        //this.profileCompareService.change(compareAction);
+      }
+      if ((data.item.candidateListStatus.indexOf('cartListed') !== -1) && (data.item.candidateListStatus.indexOf('applied') !== -1)) {
+        compareAction = {'action': 'add', 'source': 'cartListed', 'destination': 'rejectedList', 'id': data.item._id};
+        //this.profileCompareService.change(compareAction);
+      }
+      this.profileCompareService.change(compareAction);
+      this.profileComparison.profileComparisonData.splice(this.profileComparison.profileComparisonData.indexOf(data.item), 1);
+      this.listOfCandidateIdToCompare.splice(this.profileComparison.profileComparisonData.indexOf(data.item._id), 1);
+      this.recruiterJobView.numberOfCandidatesInCompare--;
+    }*/
   }
+
 
   getCompareDetail() {
     this.whichListVisible[4] = true;
@@ -218,9 +265,10 @@ export class JobDashboardComponent implements OnInit {
     this.profileComparison = data;
   }
 
-  addForCompare(value: any) {
-    if (this.listOfCandidateIdToCompare.indexOf(value) == -1) {
-      this.listOfCandidateIdToCompare.push(value);
+  addForCompare(obj: any) { debugger
+    if (this.listOfCandidateIdToCompare.indexOf(obj.id) == -1) {
+      //this.listOfCandidateStatus.push(obj);
+      this.listOfCandidateIdToCompare.push(obj.id);
       this.recruiterJobView.numberOfCandidatesInCompare++;
     }
   }

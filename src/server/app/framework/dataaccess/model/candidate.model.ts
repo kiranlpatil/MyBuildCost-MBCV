@@ -43,5 +43,6 @@ interface CandidateModel {
   interestedIndustryMatch: string[];
   proficienciesMatch: string[];
   personalDetails: User;
+  _id:any;
 }
 export = CandidateModel;

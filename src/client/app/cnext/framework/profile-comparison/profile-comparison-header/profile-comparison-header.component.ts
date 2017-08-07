@@ -12,6 +12,7 @@ declare let $: any;
 export class ProfileComparisonHeaderComponent implements OnInit {
 
   @Input() profileComparisonResult: ProfileComparisonData[];
+  @Input() listOfCandidateStatus: any[];
   @Output() actionOnComparisonList = new EventEmitter();
 
   constructor() {
@@ -23,8 +24,8 @@ export class ProfileComparisonHeaderComponent implements OnInit {
         });
     }
 
-  actionToPerformOnCompareList(action: string, value: any) {
-    var data = {'action': action, 'value': value};
+  actionToPerformOnCompareList(action: string, item: ProfileComparisonData) {
+    var data = {'action': action, 'item': item};
     this.actionOnComparisonList.emit(data);
    }
 }

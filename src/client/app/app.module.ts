@@ -182,6 +182,9 @@ import {ProfileComparisonHeaderMetaComponent} from "./cnext/framework/profile-co
 import {ProfileAttributeComparisonComponent} from "./cnext/framework/profile-comparison/profile-attribute-comparison/profile-attribute-comparison.component";
 import {ProfileComparisonPipe} from "./cnext/framework/profile-comparison/profile-capability-comparison/profile-comparison.pipe";
 import {ColorShadeDirective} from "./cnext/framework/profile-comparison/profile-capability-comparison/color-shade.directive";
+import {ProfileCompareService} from "./cnext/framework/profile-compare.service";
+import {AttributeFilterPipe} from "./cnext/framework/profile-comparison/profile-attribute-comparison/attribute-filter.pipe";
+import {ValueSortFilterPipe} from "./cnext/framework/profile-comparison/value-sort.pipe";
 
 //C-NEXT IMPORTS
 
@@ -313,7 +316,9 @@ import {ColorShadeDirective} from "./cnext/framework/profile-comparison/profile-
     ProfileComparisonHeaderMetaComponent,
     ProfileAttributeComparisonComponent,
     ProfileComparisonPipe,
-    ColorShadeDirective
+    ColorShadeDirective,
+    AttributeFilterPipe,
+    ValueSortFilterPipe
   ],
   providers: [
     {
@@ -389,7 +394,8 @@ import {ColorShadeDirective} from "./cnext/framework/profile-comparison/profile-
     ReferenceService,
     RedirectRecruiterDashboardService,
     ReleventIndustryListService,
-    ProfileComparisonService
+    ProfileComparisonService,
+    ProfileCompareService
 
   ],
   bootstrap: [AppComponent]

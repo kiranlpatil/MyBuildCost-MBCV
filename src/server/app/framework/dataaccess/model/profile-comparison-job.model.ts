@@ -1,4 +1,5 @@
 export class ProfileComparisonJobModel {
+  
   joiningPeriod:string;
   salaryMinValue: string;
   salaryMaxValue: string;
@@ -10,4 +11,6 @@ export class ProfileComparisonJobModel {
   state:string;
   city:string;
   industryName:string;
+  interestedIndustries:string[];
+  proficiencies:string[];
 }
