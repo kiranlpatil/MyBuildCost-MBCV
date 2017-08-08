@@ -18,20 +18,20 @@
               *ngIf="!candidate.isSubmitted" >
         Next
       </button>
-      <button class="btn btn-primary" (click)="highlightedSection.name='none'; highlightedSection.isDisable=false" *ngIf="candidate.isSubmitted">
+      <button class="btn btn-primary" (click)="onSave()" *ngIf="candidate.isSubmitted">
         Done
       </button>
     </div>
-    <button class="btn-prev" (click)="highlightedSection.name='Professional-Details'"><span
+    <button class="btn-prev" (click)="onPrevious()"><span
             class="glyphicon glyphicon-chevron-left"></span></button>
   </div>
 </div>
 <div class="section-container clear" *ngIf="highlightedSection.name !='AboutMySelf'">
-  <div class="main-content"  (click)="highlightedSection.name='AboutMySelf';highlightedSection.isDisable=true;showButton=false">
+  <div class="main-content" (click)="onEdit()">
     <div class="compact-view clearfix">
       <h4 class="heading-compact">About myself <span class="optional-field">(Optional)</span>
         <button class="btn-edit"
-                (click)="highlightedSection.name='AboutMySelf';highlightedSection.isDisable=true;showButton=false"
+                (click)="onEdit()"
                 [hidden]="highlightedSection.isDisable" title="Edit More About Self"></button>
         <!--<span class="glyphicon glyphicon-plus"></span>-->
       </h4>

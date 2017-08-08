@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
 import {Section} from "../model/candidate";
 import {JobPosterModel} from "../model/jobPoster";
-import {ValueConstant, Messages, Tooltip} from "../../../framework/shared/constants";
+import {Messages, Tooltip, ValueConstant} from "../../../framework/shared/constants";
 
 
 @Component({
@@ -53,22 +53,40 @@ export class JobProficienciesComponent implements OnInit {
 
   onNext() {
     if (this.jobPosterModel.proficiencies.length <= 0) {
-      this.submitStatus = true
+      this.submitStatus = true;
       return;
     }
     this.highlightedSection.name = 'IndustryExposure';
     this.highlightedSection.isDisable = false;
     this.onNextComplete.emit();
+    let _body: any = document.getElementsByTagName('BODY')[0];
+    _body.scrollTop = -1;
   }
 
   onSave() {
     if (this.jobPosterModel.proficiencies.length <= 0) {
-      this.submitStatus = true
+      this.submitStatus = true;
       return;
     }
     this.highlightedSection.name = 'none';
     this.highlightedSection.isDisable = false;
     this.onNextComplete.emit();
+    let _body: any = document.getElementsByTagName('BODY')[0];
+    _body.scrollTop = -1;
+  }
+
+  onPrevious() {
+    this.highlightedSection.name = 'Complexities';
+    let _body: any = document.getElementsByTagName('BODY')[0];
+    _body.scrollTop = -1;
+  }
+
+  onEdit() {
+    this.highlightedSection.name = 'Proficiencies';
+    this.disablebutton = false;
+    this.showButton = false;
+    let _body: any = document.getElementsByTagName('BODY')[0];
+    _body.scrollTop = -1;
   }
 }
 

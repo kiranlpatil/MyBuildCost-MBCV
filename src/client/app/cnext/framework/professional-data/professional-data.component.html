@@ -70,16 +70,16 @@
       <button class="btn btn-primary" (click)="onSave()" [hidden]="showButton">Done</button>
     </div>
 
-    <button class="btn-prev" (click)="highlightedSection.name='IndustryExposure'"><span
+    <button class="btn-prev" (click)="onPrevious()"><span
       class="glyphicon glyphicon-chevron-left"></span></button>
   </div>
 </div>
 <div class="section-container" *ngIf="highlightedSection.name !='Professional-Details'">
   <div class="main-content"
-       (click)="highlightedSection.name='Professional-Details';highlightedSection.isDisable=true;isValid=true;showButton=false;">
+       (click)="onEdit()">
     <div class="compact-view clearfix">
       <h4 class="heading-compact">Professional Preferences
-        <button class="btn-edit"
+        <button class="btn-edit" (click)="onEdit()"
                 [hidden]="highlightedSection.isDisable" title="Edit Professional Preferences & Experience Summary"></button>
       </h4>
       <p><label>Current Salary</label> {{candidate.professionalDetails.currentSalary}}</p>

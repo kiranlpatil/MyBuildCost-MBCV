@@ -179,6 +179,9 @@ export class AwardsComponent implements OnInit {
     } else if (type === 'save') {
       this.onSave();
     }
+
+    let _body: any = document.getElementsByTagName('BODY')[0];
+    _body.scrollTop = -1;
   }
 
   onNext() {
@@ -191,5 +194,19 @@ export class AwardsComponent implements OnInit {
     this.onComplete.emit();
     this.highlightedSection.name = 'none';
     this.highlightedSection.isDisable = false;
+  }
+
+  onPrevious() {
+    this.highlightedSection.name = 'AcademicDetails';
+    let _body: any = document.getElementsByTagName('BODY')[0];
+    _body.scrollTop = -1;
+  }
+
+  onEdit() {
+    this.highlightedSection.name = 'Awards';
+    this.highlightedSection.isDisable = true;
+    this.showButton = false;
+    let _body: any = document.getElementsByTagName('BODY')[0];
+    _body.scrollTop = -1;
   }
 }

@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from "@angular/core";
 import {Role} from "../model/role";
 import {Section} from "../model/candidate";
-import {LocalStorage, Messages, ValueConstant, Tooltip} from "../../../framework/shared/constants";
+import {LocalStorage, Messages, Tooltip, ValueConstant} from "../../../framework/shared/constants";
 import {LocalStorageService} from "../../../framework/shared/localstorage.service";
 
 @Component({
@@ -92,6 +92,9 @@ export class WorkAreaComponent implements OnInit,OnChanges {
       this.selectedRoles.push(savetempRole);
     }
     this.highlightedSection.name = 'Industry';
+
+    let _body: any = document.getElementsByTagName('BODY')[0];
+    _body.scrollTop = -1;
   }
 
   onNext() {
@@ -136,6 +139,8 @@ export class WorkAreaComponent implements OnInit,OnChanges {
       } else {
         this.onNext();
       }
+    let _body: any = document.getElementsByTagName('BODY')[0];
+    _body.scrollTop = -1;
   }
 onCancel() {
   this.highlightedSection.name='none';
@@ -173,5 +178,14 @@ onCancel() {
 
   showHideModal2() {
     this.showModalStyle2 = !this.showModalStyle2;
+  }
+
+  OnEdit() {
+    this.highlightedSection.name = 'Work-Area';
+    this.showButton = false;
+    this.highlightedSection.sectionName = 'capability';
+    this.highlightedSection.isDisable = true;
+    let _body: any = document.getElementsByTagName('BODY')[0];
+    _body.scrollTop = -1;
   }
 }

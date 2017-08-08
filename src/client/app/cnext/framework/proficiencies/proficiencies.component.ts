@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, Output} from "@angular/core";
 import {Section} from "../model/candidate";
-import {Messages, ValueConstant, Tooltip} from "../../../framework/shared/constants";
+import {Messages, Tooltip, ValueConstant} from "../../../framework/shared/constants";
 import {ProficiencyDetailsService} from "../proficiency-detail-service";
 import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
 
@@ -58,6 +58,9 @@ export class ProficienciesComponent {
     this.onComplete.emit();
     this.highlightedSection.name = 'IndustryExposure';
     this.highlightedSection.isDisable = false;
+
+      let _body: any = document.getElementsByTagName('BODY')[0];
+      _body.scrollTop = -1;
   }
 
   onSave() {
@@ -69,6 +72,8 @@ export class ProficienciesComponent {
     this.highlightedSection.isDisable = false;
     this.onComplete.emit();
 
+      let _body: any = document.getElementsByTagName('BODY')[0];
+      _body.scrollTop = -1;
   }
 
   getProficiency() {
@@ -78,4 +83,18 @@ export class ProficienciesComponent {
           this.proficiencies = data.data[0].proficiencies;
         });
   }
+
+    onPrevious() {
+        this.highlightedSection.name = 'Complexities';
+        let _body: any = document.getElementsByTagName('BODY')[0];
+        _body.scrollTop = -1;
+    }
+
+    onEdit() {
+        this.highlightedSection.name = 'Proficiencies';
+        this.highlightedSection.isDisable = true;
+        this.showButton = false;
+        let _body: any = document.getElementsByTagName('BODY')[0];
+        _body.scrollTop = -1;
+    }
 }

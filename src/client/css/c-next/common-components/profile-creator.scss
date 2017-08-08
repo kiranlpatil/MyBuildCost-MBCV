@@ -2,7 +2,7 @@
 
 .section-container {
   text-align: left;
-  position: relative;
+  //position: relative;
 
   .tooltip-message {
     background: $theme-color;
@@ -81,9 +81,9 @@
 
 .scrollable-content {
   overflow: auto;
-  height: 496px;
-  padding: 70px 250px 75px 70px;
-  position: fixed;
+  height: auto;
+  padding: 0px 250px 75px 70px;
+  position: relative;
   top: 0;
   left: 0;
   width: 100%;
@@ -242,7 +242,7 @@
   }
 
   textarea {
-    height: 100px;
+    height: 300px;
     resize: vertical;
     width: 100%;
     border-radius: 0;
@@ -327,6 +327,8 @@
     box-shadow: none;
     padding: 0;
     position: relative;
+    margin-bottom: 0;
+    margin-top: 50px;
 
     .glyphicon-trash {
       background-color: transparent;
@@ -337,6 +339,10 @@
       top: 0;
       font-size: 12px;
       cursor: pointer;
+    }
+
+    &:first-child {
+      margin-top: 0 !important;
     }
   }
 
@@ -349,7 +355,7 @@
   }
 
   .panel-body {
-    padding: 15px;
+    padding: 0 15px;
   }
 
   select {

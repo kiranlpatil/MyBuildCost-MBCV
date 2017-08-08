@@ -222,6 +222,9 @@ export class EmploymentHistoryComponent {
     else if (type == 'save') {
       this.onSave();
     }
+
+    let _body: any = document.getElementsByTagName('BODY')[0];
+    _body.scrollTop = -1;
   }
 
   onNext() {
@@ -236,6 +239,20 @@ export class EmploymentHistoryComponent {
     this.onComplete.emit();
     this.highlightedSection.name = 'none';
     this.highlightedSection.isDisable = false;
+  }
+
+  onPrevious() {
+    this.highlightedSection.name = 'AboutMySelf';
+    let _body: any = document.getElementsByTagName('BODY')[0];
+    _body.scrollTop = -1;
+  }
+
+  onEdit() {
+    this.highlightedSection.name = 'EmploymentHistory';
+    this.highlightedSection.isDisable = true;
+    this.showButton = false;
+    let _body: any = document.getElementsByTagName('BODY')[0];
+    _body.scrollTop = -1;
   }
 
 }

@@ -189,18 +189,35 @@ export class AcademicDetailComponent implements OnInit, OnChanges, AfterViewChec
     } else if (type === 'save') {
       this.onSave();
     }
+    let _body: any = document.getElementsByTagName('BODY')[0];
+    _body.scrollTop = -1;
   }
 
   onNext() {
     this.onComplete.emit();
     this.highlightedSection.name = 'Certification';
     this.highlightedSection.isDisable = false;
+    let _body: any = document.getElementsByTagName('BODY')[0];
+    _body.scrollTop = -1;
   }
 
   onSave() {
     this.onComplete.emit();
     this.highlightedSection.name = 'none';
     this.highlightedSection.isDisable = false;
+    let _body: any = document.getElementsByTagName('BODY')[0];
+    _body.scrollTop = -1;
   }
 
+  onPrevious() {
+    this.highlightedSection.name = 'EmploymentHistory';
+    let _body: any = document.getElementsByTagName('BODY')[0];
+    _body.scrollTop = -1;
+  }
+
+  onEdit() {
+    this.highlightedSection.name = 'AcademicDetails';
+    this.highlightedSection.isDisable = true;
+    this.showButton = false;
+  }
 }

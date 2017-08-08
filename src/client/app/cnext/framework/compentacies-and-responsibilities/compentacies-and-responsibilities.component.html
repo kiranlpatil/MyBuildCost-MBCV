@@ -15,18 +15,18 @@
     <button class="btn-prev" (click)="back()"><span
             class="glyphicon glyphicon-chevron-left"></span></button>
     <div class="button-group clearfix">
-      <button class="btn btn-primary" (click)="highlightedSection.name='None'">Review Your Job
+      <button class="btn btn-primary" (click)="onSave()">Review Your Job
       </button>
     </div>
 
   </div>
 </div>
 <div class="section-container clearfix" *ngIf="highlightedSection.name !='Compentancies'">
-  <div class="main-content" (click)="highlightedSection.name='Compentancies'" title="Edit Additional Information about the Job">
+  <div class="main-content" (click)="onEdit()" title="Edit Additional Information about the Job">
     <div class="compact-view clearfix">
       <div class="col-sm-12 no-padding">
         <h4 class="heading-compact">Additional Information about the Job <span class="optional-field">(Optional)</span>
-          <button class="btn-edit" (click)="highlightedSection.name='Compentancies'" title="Edit Additional Information about the Job"></button>
+          <button class="btn-edit" (click)="onEdit()" title="Edit Additional Information about the Job"></button>
         </h4>
         <p class="primary">{{jobPosterModel.competencies}}</p>
       </div>

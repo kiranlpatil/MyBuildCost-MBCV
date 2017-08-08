@@ -30,14 +30,13 @@
   </div>
 </div>
 <div class="section-container" *ngIf="highlightedSection && highlightedSection.name!='Industry'">
-  <div class="main-content"  (click)="highlightedSection.name='Industry';disableButton=false;showButton=false;highlightedSection.isDisable=true">
+  <div class="main-content" (click)="onEdit()">
     <div class="compact-view clearfix">
       <!--[hidden]="highlightedSection.isLocked"-->
       <!--
             <span class=" glyphicon glyphicon-lock" title="you can edit this field after {{highlightedSection.date| date:'mediumDate'}}" *ngIf="highlightedSection.isLocked"></span>
       -->
-      <button class="btn-edit"
-              (click)="highlightedSection.name='Industry';disableButton=false;showButton=false;highlightedSection.isDisable=true"
+      <button class="btn-edit" (click)="onEdit()"
               [hidden]="highlightedSection.isDisable" title="Edit My Profile"></button>
 
       <div class="col-sm-3 padding-right15">

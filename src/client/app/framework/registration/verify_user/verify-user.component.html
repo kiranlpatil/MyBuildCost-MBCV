@@ -37,7 +37,7 @@
 
     <form [formGroup]="userForm" (submit)="onSubmit()" [hidden]="chkEmail" novalidate>
       <p><b>You are almost done! We need to verify your email id before you can start using the system.</b></p>
-      <p> Verification link will be emailed to the registered email address.</p>
+      <!--<p> Verification link will be emailed to the registered email address.</p>-->
 
       <div class="form-group" id="inputEmail">
         <control-messages [control]="userForm.controls.email" [submitStatus]="submitEmailStatus"></control-messages>

@@ -25,7 +25,7 @@
 
     <cn-tool-tip [message]="tooltipMessage"></cn-tool-tip>
 
-    <button class="btn-prev" (click)="highlightedSection.name='IndustryExposure'"><span
+    <button class="btn-prev" (click)="onPrevious()"><span
       class="glyphicon glyphicon-chevron-left"></span></button>
     <div class="button-group clearfix">
       <!--<div class="saving-loader">Saving...</div>-->
@@ -40,10 +40,10 @@
 </div>
 
 <div class="section-container" *ngIf="highlightedSection.name!='ReleventIndustry'">
-  <div class="main-content" (click)="highlightedSection.name='ReleventIndustry';showButton=false;disableButton=false">
+  <div class="main-content" (click)="onEdit()">
     <div class="compact-view clearfix">
       <button class="btn-edit"
-              (click)="highlightedSection.name='ReleventIndustry';showButton=false;disableButton=false"
+              (click)="onEdit()"
               title="ReleventIndustry"></button>
       <div class="col-sm-3 padding-right15">
         <h4 class="heading-compact">Additional Industries

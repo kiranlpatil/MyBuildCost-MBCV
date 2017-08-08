@@ -142,6 +142,8 @@ export class ProfileDescriptionComponent implements OnInit {
     this.highlightedSection.name = 'Industry';
     this.highlightedSection.isDisable = false;
     this.onComplete.emit(this.candidate);
+    let _body: any = document.getElementsByTagName('BODY')[0];
+    _body.scrollTop = -1;
   }
 
   keyDownCheck(e: any) {
@@ -194,6 +196,8 @@ export class ProfileDescriptionComponent implements OnInit {
     this.highlightedSection.name = 'none';
     this.highlightedSection.isDisable = false;
     this.onComplete.emit(this.candidate);
+    let _body: any = document.getElementsByTagName('BODY')[0];
+    _body.scrollTop = -1;
   }
 
   onJobTitleChange() {
@@ -252,8 +256,14 @@ export class ProfileDescriptionComponent implements OnInit {
         });
   }
 
-
-
+  onEdit() {
+    this.highlightedSection.name = 'Profile';
+    this.disableButton = false;
+    this.showButton = false;
+    this.highlightedSection.isDisable = true;
+    let _body: any = document.getElementsByTagName('BODY')[0];
+    _body.scrollTop = -1;
+  }
 }
 
 

@@ -27,6 +27,7 @@ export class ReleventIndustryListComponent implements OnInit {
   suggestionMsgForReleventIndustry: string;
   //showRleventindustry: boolean = false;
   private showButton: boolean = true;
+  private disableButton: boolean = true;
 
 
   tooltipMessage: string =
@@ -79,6 +80,8 @@ export class ReleventIndustryListComponent implements OnInit {
     this.onNext();
     this.highlightedSection.name = 'Compentancies';
     this.onNextComplete.emit(this.workAreasToUpdate);
+    let _body: any = document.getElementsByTagName('BODY')[0];
+    _body.scrollTop = -1;
   }
 
   onSave() {
@@ -86,6 +89,8 @@ export class ReleventIndustryListComponent implements OnInit {
     this.highlightedSection.isDisable = false;
     this.onNext();
     this.onNextComplete.emit(this.workAreasToUpdate);
+    let _body: any = document.getElementsByTagName('BODY')[0];
+    _body.scrollTop = -1;
   }
 
   /* getReleventIndustry(event: any) {
@@ -114,4 +119,17 @@ export class ReleventIndustryListComponent implements OnInit {
     // this.goNext();
   }
 
+  onPrevious() {
+    this.highlightedSection.name = 'IndustryExposure';
+    let _body: any = document.getElementsByTagName('BODY')[0];
+    _body.scrollTop = -1;
+  }
+
+  onEdit() {
+    this.highlightedSection.name = 'ReleventIndustry';
+    this.showButton = false;
+    this.disableButton = false;
+    let _body: any = document.getElementsByTagName('BODY')[0];
+    _body.scrollTop = -1;
+  }
 }

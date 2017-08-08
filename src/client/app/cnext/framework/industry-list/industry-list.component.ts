@@ -1,10 +1,10 @@
-import {Component, EventEmitter, Input, OnChanges, Output} from '@angular/core';
-import {Industry} from '../model/industry';
-import {CandidateProfileService} from '../candidate-profile/candidate-profile.service';
-import {Section} from '../model/candidate';
-import {LocalStorageService} from '../../../framework/shared/localstorage.service';
-import {LocalStorage, Messages, Tooltip} from '../../../framework/shared/constants';
-import {IndustryDetailsService} from '../industry-detail-service';
+import {Component, EventEmitter, Input, OnChanges, Output} from "@angular/core";
+import {Industry} from "../model/industry";
+import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
+import {Section} from "../model/candidate";
+import {LocalStorageService} from "../../../framework/shared/localstorage.service";
+import {LocalStorage, Messages, Tooltip} from "../../../framework/shared/constants";
+import {IndustryDetailsService} from "../industry-detail-service";
 
 @Component({
   moduleId: module.id,
@@ -18,6 +18,8 @@ export class IndustryListComponent implements OnChanges {
   @Input() highlightedSection: Section;
   @Output() valueChange = new EventEmitter();
   private isCandidate: boolean = false;
+    private disableButton: boolean = true;
+    private showButton: boolean = true;
 
   tooltipMessage: string =
       '<ul>' +
@@ -67,6 +69,9 @@ export class IndustryListComponent implements OnChanges {
     }
     this.highlightedSection.name = 'Work-Area';
     this.highlightedSection.isDisable = false;
+
+      let _body: any = document.getElementsByTagName('BODY')[0];
+      _body.scrollTop = -1;
   }
 
   onPrevious() {
@@ -78,6 +83,9 @@ export class IndustryListComponent implements OnChanges {
     } else {
       this.highlightedSection.name = 'JobProfile';
     }
+
+      let _body: any = document.getElementsByTagName('BODY')[0];
+      _body.scrollTop = -1;
   }
 
   getIndustry() {
@@ -85,6 +93,16 @@ export class IndustryListComponent implements OnChanges {
     this.candidateProfileService.getIndustries()
       .subscribe(industries => this.industries = industries.data);
   }
+
+    onEdit() {
+        this.highlightedSection.name = 'Industry';
+        this.disableButton = false;
+        this.showButton = false;
+        this.highlightedSection.isDisable = true;
+        let _body: any = document.getElementsByTagName('BODY')[0];
+        _body.scrollTop = -1;
+    }
 }
+
 
 

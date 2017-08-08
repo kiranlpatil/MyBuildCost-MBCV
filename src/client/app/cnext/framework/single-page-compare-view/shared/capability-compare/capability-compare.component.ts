@@ -1,7 +1,7 @@
 import { Component, Input, Output, OnChanges, EventEmitter } from '@angular/core';
 import { Capability } from '../../../model/capability';
 import { Scenario } from '../../../model/scenario';
-import { AppSettings, LocalStorage } from '../../../../../framework/shared/constants';
+import { AppSettings, LocalStorage, Tooltip } from '../../../../../framework/shared/constants';
 import { LocalStorageService } from '../../../../../framework/shared/localstorage.service';
 import { Complexity } from '../../../model/complexity';
 
@@ -22,6 +22,10 @@ export class CapabilityCompareComponent  implements OnChanges {
   @Input() job_picture : string;
   isCandidate: boolean;
   showMore: boolean = false;
+  private capabilityCompareAboveMatch= Tooltip.CAPABILITY_COMPARE_ABOVE_MATCH;
+  private capabilityCompareBelowMatch= Tooltip.CAPABILITY_COMPARE_BELOW_MATCH;
+  private capabilityCompareExactMatch= Tooltip.CAPABILITY_COMPARE_EXACT_MATCH;
+  private capabilityCompareMissing= Tooltip.CAPABILITY_COMPARE_MISSING_MATCH;
   maxArray : number[]= new Array(0);
   ngOnChanges(changes : any) {
     if(changes.capabilities && changes.capabilities.currentValue) {

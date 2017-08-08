@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, Output} from "@angular/core";
 import {Role} from "../model/role";
 import {Capability} from "../model/capability";
-import {LocalStorage, Messages, ValueConstant, Tooltip} from "../../../framework/shared/constants";
+import {LocalStorage, Messages, Tooltip, ValueConstant} from "../../../framework/shared/constants";
 import {Section} from "../model/candidate";
 import {LocalStorageService} from "../../../framework/shared/localstorage.service";
 
@@ -15,7 +15,7 @@ import {LocalStorageService} from "../../../framework/shared/localstorage.servic
 export class CapabilitiesComponent {
 
   @Input() roles: Role[] = new Array(0);
-  @Input() candidateRoles: Role[] = new Array();
+    @Input() candidateRoles: Role[] = [];
   @Output() onComplete = new EventEmitter();
   @Input() highlightedSection: Section;
   private savedselectedRoles:Role[]= new Array(0);
@@ -137,6 +137,9 @@ export class CapabilitiesComponent {
       });
     }
     this.onComplete.emit(newselectedRoles);
+
+      let _body: any = document.getElementsByTagName('BODY')[0];
+      _body.scrollTop = -1;
   }
 
   onSave(){
@@ -172,6 +175,15 @@ export class CapabilitiesComponent {
     } else{
       this.onNext();
     }
+
+      let _body: any = document.getElementsByTagName('BODY')[0];
+      _body.scrollTop = -1;
+  }
+
+    onPrevious() {
+        this.highlightedSection.name = 'Work-Area';
+        let _body: any = document.getElementsByTagName('BODY')[0];
+        _body.scrollTop = -1;
   }
 
   onCancel(){

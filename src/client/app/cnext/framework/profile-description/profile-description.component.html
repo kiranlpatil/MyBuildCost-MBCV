@@ -90,13 +90,13 @@
 </div>
 <div class="section-container">
   <div class="main-content" *ngIf="highlightedSection.name!='Profile'">
-    <div class="compact-view clearfix" (click)="highlightedSection.name='Profile';disableButton=false;showButton=false;highlightedSection.isDisable=true">
+    <div class="compact-view clearfix" (click)="onEdit()">
       <!--[hidden]="highlightedSection.isLocked"-->
       <!--
             <span class=" glyphicon glyphicon-lock" title="you can edit this field after {{highlightedSection.date| date:'mediumDate'}}" *ngIf="highlightedSection.isLocked"></span>
       -->
       <button class="btn-edit"
-              (click)="highlightedSection.name='Profile';disableButton=false;showButton=false;highlightedSection.isDisable=true"
+              (click)="onEdit()"
               [hidden]="highlightedSection.isDisable" title="Edit My Profile"></button>
       <div class="img-container">
         <!--<img src="{{image_path}}" alt="Profile Picture"/>-->

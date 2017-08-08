@@ -35,6 +35,7 @@ export class BasicJobInformationComponent implements OnInit, OnChanges {
   private toValue: string = '';
   private noticePeriodList: any = [];
   private showButton: boolean = true;
+  private disableButton: boolean = true;
   private submitStatus: boolean;
   private storedIndustry: Industry;
   private storedLocation: JobLocation = new JobLocation();
@@ -194,6 +195,9 @@ export class BasicJobInformationComponent implements OnInit, OnChanges {
     /* } else {
      this.jobPosterModel.industry = new Industry();
      }*/
+
+    let _body: any = document.getElementsByTagName('BODY')[0];
+    _body.scrollTop = -1;
   }
 
   onCancel() {
@@ -218,6 +222,14 @@ export class BasicJobInformationComponent implements OnInit, OnChanges {
 
   selectSalaryMinModel(value: any) {
     this.fromValue = value;
+  }
+
+  onEdit() {
+    this.highlightedSection.name = 'JobProfile';
+    this.showButton = false;
+    this.disableButton = false;
+    let _body: any = document.getElementsByTagName('BODY')[0];
+    _body.scrollTop = -1;
   }
 }
 

@@ -34,17 +34,18 @@
 
 .edit-modal-content {
   z-index: 100;
-  position: fixed !important;
+  position: absolute !important;
   margin: 0 auto;
   box-shadow: 1px 1px 1px 0 $modal-bg;
   border: 2px solid $white;
   padding: 0;
   overflow: auto;
-  top: 50%;
+  top: 0;
   left: 50%;
   width: 950px;
-  height: 500px;
-  transform: translate(-50%, -50%) !important;
+  min-height: 500px;
+  height: auto;
+  transform: translate(-50%, 0) !important;
   border-radius: 10px;
 }
 

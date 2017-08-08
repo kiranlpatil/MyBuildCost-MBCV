@@ -41,7 +41,7 @@
         Add another
       </button>
     </div>
-    <button class="btn-prev" (click)="highlightedSection.name='AboutMySelf'"><span
+    <button class="btn-prev" (click)="onPrevious()"><span
       class="glyphicon glyphicon-chevron-left"></span></button>
   </div>
 </div>
@@ -49,14 +49,14 @@
 <div class="section-container"
      [ngClass]="(highlightedSection.name=='EmploymentHistory')?'full-width':'half-width'">
   <div class="main-content" *ngIf="highlightedSection.name !='EmploymentHistory'">
-    <div class="compact-view clearfix" (click)="highlightedSection.name='EmploymentHistory';highlightedSection.isDisable=true;showButton=false">
+    <div class="compact-view clearfix" (click)="onEdit()">
       <div *ngIf="employeeHistory.controls.employeeHistories.controls.length==0">
         <h4 class="heading-compact icons-section">
           <span class="employment-history"></span>
           Employment History <span class="optional-field">(Optional)</span>
           <button class="btn-edit"
-            (click)="highlightedSection.name='EmploymentHistory';highlightedSection.isDisable=true;showButton=false"
-             title="Edit Employment History"></button>
+                  (click)="onEdit()"
+                  title="Edit Employment History"></button>
         </h4>
       </div>
       <div class="" *ngIf="employeeHistory.controls.employeeHistories.controls.length>0">
@@ -64,8 +64,8 @@
           <span class="employment-history"></span>
           Employment History <span class="optional-field">(Optional)</span>
           <button class="btn-edit"
-            (click)="highlightedSection.name='EmploymentHistory';highlightedSection.isDisable=true;showButton=false"
-            title="Edit Employment History"></button>
+                  (click)="onEdit()"
+                  title="Edit Employment History"></button>
         </h4>
         <ul>
           <div *ngFor="let item of candidate.employmentHistory;let i = index">

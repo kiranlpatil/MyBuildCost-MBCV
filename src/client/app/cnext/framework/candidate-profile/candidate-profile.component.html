@@ -107,8 +107,8 @@
           <div class="main-content clearfix">
             <div class="compact-view clearfix profile-visibility">
               <h4 class="heading-compact">Profile Visibility for Recruiter</h4>
-              <div class="info profile-info" *ngIf="!candidate.isVisible">{{visiblitySetToYesMessage}}</div>
-              <div class="info profile-info" *ngIf="candidate.isVisible">{{visiblitySetToNoMessage}}
+              <div class="info profile-info" *ngIf="candidate.isVisible">{{visiblitySetToYesMessage}}</div>
+              <div class="info profile-info" *ngIf="!candidate.isVisible">{{visiblitySetToNoMessage}}
               </div>
               <div class="pull-right">
                 <span class="switch-label" *ngIf="candidate.isVisible == true">Yes</span>

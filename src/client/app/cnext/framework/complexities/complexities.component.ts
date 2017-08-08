@@ -2,7 +2,7 @@ import {Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, V
 import {Role} from "../model/role";
 import {ComplexityService} from "../complexity.service";
 import {LocalStorageService} from "../../../framework/shared/localstorage.service";
-import {LocalStorage, Messages, ValueConstant, Tooltip} from "../../../framework/shared/constants";
+import {LocalStorage, Messages, Tooltip, ValueConstant} from "../../../framework/shared/constants";
 import {Section} from "../model/candidate";
 import {ComplexityDetails} from "../model/complexity-detail";
 import {ComplexityComponentService} from "./complexity.service";
@@ -239,6 +239,8 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
     }
     this.isValid = true;
     this.getCapabilityDetail(++this.currentCapabilityNumber);
+      let _body: any = document.getElementsByTagName('BODY')[0];
+      _body.scrollTop = -1;
   }
 
   onPreviousCapability() {
@@ -248,6 +250,8 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
       return;
     }
     this.getCapabilityDetail(--this.currentCapabilityNumber);
+      let _body: any = document.getElementsByTagName('BODY')[0];
+      _body.scrollTop = -1;
   }
 
   onNext() {
@@ -276,6 +280,8 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
    /* setTimeout(() => {
       this.slideToRight = false;
     }, 3000);*/
+      let _body: any = document.getElementsByTagName('BODY')[0];
+      _body.scrollTop = -1;
   }
 
   onPrevious() {
@@ -295,6 +301,8 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
     setTimeout(() => {
       this.slideToLeft = false;
     }, 3000);
+      let _body: any = document.getElementsByTagName('BODY')[0];
+      _body.scrollTop = -1;
   }
 
   onDone() {
@@ -305,6 +313,8 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
       this.highlightedSection.name = 'None';
     }
     this.singleComplexity = false;
+      let _body: any = document.getElementsByTagName('BODY')[0];
+      _body.scrollTop = -1;
   }
 
   getComplexityDetails(complexityId: string) {  //TODO remove after amits call of updated get API
@@ -332,6 +342,8 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
     this.highlightedSection.name = 'Complexities';
     this.highlightedSection.isDisable = true;
     this.showMore = false;
+      let _body: any = document.getElementsByTagName('BODY')[0];
+      _body.scrollTop = -1;
   }
 
   SelectedComplexity(selectedComplexity: any) {

@@ -33,7 +33,7 @@
         Add another
       </button>
     </div>
-    <button class="btn-prev" (click)="highlightedSection.name='EmploymentHistory'"><span
+    <button class="btn-prev" (click)="onPrevious()"><span
       class="glyphicon glyphicon-chevron-left"></span></button>
   </div>
 </div>
@@ -42,7 +42,7 @@
 <div class="section-container"
      [ngClass]="(highlightedSection.name=='AcademicDetails')?'full-width':'half-width'"
      *ngIf="highlightedSection.name !='AcademicDetails'">
-  <div class="main-content" (click)="highlightedSection.name='AcademicDetails';highlightedSection.isDisable=true;showButton=false">
+  <div class="main-content" (click)="onEdit()">
     <div class="compact-view clearfix">
       <div *ngIf="academicDetail.controls.academicDetails.controls.length==0">
 
@@ -50,7 +50,7 @@
           <!--<img src="assets/c-next/icons/education-icon.png" alt="employment"/>-->
           <span class="education-icon"></span>
           Academic Details <span class="optional-field">(Optional)</span>
-          <button class="btn-edit" (click)="highlightedSection.name='AcademicDetails';highlightedSection.isDisable=true;showButton=false" title="Edit Academic Details"></button>
+          <button class="btn-edit" (click)="onEdit()"></button>
         </h4>
       </div>
 
@@ -59,7 +59,7 @@
           <!--<img src="assets/c-next/icons/education-icon.png" alt="employment"/>-->
           <span class="education-icon"></span>
           Academic Details <span class="optional-field">(Optional)</span>
-          <button class="btn-edit" (click)="highlightedSection.name='AcademicDetails';highlightedSection.isDisable=true;showButton=false" title="Edit Academic Details"></button>
+          <button class="btn-edit" (click)="onEdit()"></button>
         </h4>
         <ul>
           <div *ngFor="let item of candidate.academics;let i = index">

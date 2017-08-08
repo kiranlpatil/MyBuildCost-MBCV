@@ -22,7 +22,8 @@ export class Messages {
   public static MSG_SUCCESS_REGISTRATION: string = 'Kindly verify your account.';
   public static MSG_SUCCESS_CHANGE_MOBILE_NUMBER: string = 'Mobile number updated successfully.';
   public static MSG_SUCCESS_RESEND_VERIFICATION_CODE: string = 'New OTP (One Time Password) has been sent to your registered mobile number';
-  public static MSG_SUCCESS_MAIL_VERIFICATION: string = 'Verification e-mail sent successfully to your e-mail account. Kindly proceed by clicking on the link pProvided in your e-mail';
+  //public static MSG_SUCCESS_MAIL_VERIFICATION: string = 'Verification e-mail sent successfully to your e-mail account. Kindly proceed by clicking on the link pProvided in your e-mail';
+  public static MSG_SUCCESS_MAIL_VERIFICATION: string = 'Verification e-mail sent successfully to your e-mail account.';
   public static MSG_SUCCESS_NEWREGISTRATION: string = 'Registration successful. Mobile number verified. Kindly sign in.';
   public static MSG_SUCCESS_RESET_PASSWORD: string = 'Your password is reset successfully.';
   public static MSG_SUCCESS_CHANGE_PASSWORD: string = 'Your password has been changed successfully.';
@@ -332,7 +333,8 @@ export class Tooltip {
   public static RECRUITER_CAPABILITY_TOOLTIP: string = 'These capabilities would form the core of the job profile.' +
     'In next section, you would get to define these capabilities in detail';
   public static CERTIFICATE_TOOLTIP: string = 'Certification/Accreditation Message';
-  public static COMPETENCIES_AND_RESPONSIBILITIES_TOOLTIP: string = 'Competencies Message';
+  public static COMPETENCIES_AND_RESPONSIBILITIES_TOOLTIP_1: string = 'Additional Information';
+  public static COMPETENCIES_AND_RESPONSIBILITIES_TOOLTIP_2: string = 'You can use this field to describe specific aspects of the job profile that will help the candidate to understand your expectations better.';
   public static COMPLEXITIES_CANDIDATE_TOOLTIP_1: string = 'This section provides a list of complexity scenarios for your selected capabilities.' +
     'If more than one options are applicable to you, choose the option where you can demonstrate a higher level of expertise.';
   public static COMPLEXITIES_CANDIDATE_TOOLTIP_2: string = 'If a scenario was applicable to you in past but is no more relevant to you, avoid choosing such scenarios.In such cases, choose "Not Applicable".';
@@ -373,6 +375,10 @@ export class Tooltip {
     'This is because the currently available candidates possess different set of capabilities than' +
     'what your job expects. This dashboard shows candidates that have best matches with your desired' +
     'capability profile. It is recommended that you keep visiting this page frequently to see the best matching candidates.';
-  public static EMPTY_CART_MESSAGE: string = 'There are no pending applications from the candidate for this job posting.';
-  public static EMPTY_REJECTED_LIST_MESSAGE: string = 'There are no rejected candidates for this job posting.';
+  public static EMPTY_CART_MESSAGE: string = 'You have not added any candidates to the Cart for this job posting.';
+  public static EMPTY_REJECTED_LIST_MESSAGE: string = 'There are no candidates rejected by you for this job posting.';
+  public static CAPABILITY_COMPARE_ABOVE_MATCH: string = 'Candidate capabilities higher than desired';
+  public static CAPABILITY_COMPARE_EXACT_MATCH: string = 'Candidate capabilities with exact match';
+  public static CAPABILITY_COMPARE_BELOW_MATCH: string = 'Candidate capabilities slightly less than desired';
+  public static CAPABILITY_COMPARE_MISSING_MATCH: string = 'Large mismatch of capabilities';
 }

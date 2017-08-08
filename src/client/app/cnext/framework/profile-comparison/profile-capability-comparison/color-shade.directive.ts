@@ -20,60 +20,30 @@ export class ColorShadeDirective implements OnChanges {
   }
 
   _changeBackGround(colorValue: number) {
-    /*var value: string;
-    var r:number=0;
-    var g:number=0;
-    var b:number=0;
-    if (colorValue >= 0 && colorValue <= 25) {
-      //value = '#fe3d01';
-      r = 100-colorValue;
+    var value:string;
+    if (colorValue >= 91 && colorValue <= 100) {
+      value = '#196F3D';
+    } else if (colorValue >= 81 && colorValue <= 90) {
+      value = '#1E8449';
+    } else if (colorValue >= 71 && colorValue <= 80) {
+      value = '#229954';
+    } else if (colorValue >= 61 && colorValue <= 70) {
+      value = '#27AE60';
+    } else if (colorValue >= 51 && colorValue <= 60) {
+      value = '#52BE80';
+    } else if (colorValue >= 41 && colorValue <= 50) {
+      value = '#7DCEA0';
+    } else if (colorValue >= 31 && colorValue <= 40) {
+      value = '#EC7063';
+    } else if (colorValue >= 21 && colorValue <= 30) {
+      value = '#E74C3C';
+    } else if (colorValue >= 11 && colorValue <= 20) {
+      value = '#CB4335';
     } else {
-      g = 100-colorValue;
-    } *//*else if (colorValue >= 26 && colorValue <= 50) {
-      //value = '#7ba015';
-      g=colorValue;
+      value = '#B03A2E';
     }
-    else if (colorValue >= 51 && colorValue <= 75) {
-      //value = '#538216';
-      g=colorValue
-    }
-    else if (colorValue >= 76 && colorValue <= 100) {
-      value = '#33691e';
-    }*/
 
-    //var rgb = this.getColorForPercentage(15);
-    var r = Math.floor((255 * (100-colorValue)) / 100);
-    var g = Math.floor((255 * 100) / 100);
-    var b = 0;
-    this.el.nativeElement.style.backgroundColor = 'rgb('+r+","+g+","+b+')';
+    this.el.nativeElement.style.backgroundColor = value;
   }
-
-
-
-  getColorForPercentage (pct:any) {
-    var percentColors = [
-      { pct: 0.0, color: { r: 0xff, g: 0x00, b: 0 } },
-      { pct: 0.5, color: { r: 0xff, g: 0xff, b: 0 } },
-      { pct: 1.0, color: { r: 0x00, g: 0xff, b: 0 } } ];
-  for (var i = 1; i < percentColors.length - 1; i++) {
-    if (pct < percentColors[i].pct) {
-      break;
-    }
-  }
-  var lower = percentColors[i - 1];
-  var upper = percentColors[i];
-  var range = upper.pct - lower.pct;
-  var rangePct = (pct - lower.pct) / range;
-  var pctLower = 1 - rangePct;
-  var pctUpper = rangePct;
-  var color = {
-    r: Math.floor(lower.color.r * pctLower + upper.color.r * pctUpper),
-    g: Math.floor(lower.color.g * pctLower + upper.color.g * pctUpper),
-    b: Math.floor(lower.color.b * pctLower + upper.color.b * pctUpper)
-  };
-  return 'rgb(' + [color.r, color.g, color.b].join(',') + ')';
-  // or output as hex if preferred
-}
-
 
 }

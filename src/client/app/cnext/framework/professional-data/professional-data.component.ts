@@ -136,6 +136,8 @@ export class ProfessionalDataComponent extends BaseService implements OnChanges 
     this.onComplete.emit();
     this.highlightedSection.name = "AboutMySelf";
     this.highlightedSection.isDisable = false;
+    let _body: any = document.getElementsByTagName('BODY')[0];
+    _body.scrollTop = -1;
 
   }
 
@@ -149,6 +151,8 @@ export class ProfessionalDataComponent extends BaseService implements OnChanges 
     this.onComplete.emit();
     this.highlightedSection.name = "none";
     this.highlightedSection.isDisable = false;
+    let _body: any = document.getElementsByTagName('BODY')[0];
+    _body.scrollTop = -1;
 
   }
 
@@ -184,6 +188,21 @@ export class ProfessionalDataComponent extends BaseService implements OnChanges 
         data => {
           this.onCurrentSalaryListSuccess(data);
         });
+  }
+
+  onPrevious() {
+    this.highlightedSection.name = 'IndustryExposure';
+    let _body: any = document.getElementsByTagName('BODY')[0];
+    _body.scrollTop = -1;
+  }
+
+  onEdit() {
+    this.highlightedSection.name = 'Professional-Details';
+    this.highlightedSection.isDisable = true;
+    this.isValid = true;
+    this.showButton = false;
+    let _body: any = document.getElementsByTagName('BODY')[0];
+    _body.scrollTop = -1;
   }
 }
 

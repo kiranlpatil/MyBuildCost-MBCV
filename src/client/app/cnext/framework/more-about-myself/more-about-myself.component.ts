@@ -1,9 +1,9 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { MessageService } from '../../../framework/shared/message.service';
-import { CandidateProfileService } from '../candidate-profile/candidate-profile.service';
-import { Message} from '../../../framework/shared/message';
-import { Candidate, Section } from '../model/candidate';
-import {Messages, Tooltip} from '../../../framework/shared/constants';
+import {Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
+import {MessageService} from "../../../framework/shared/message.service";
+import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
+import {Message} from "../../../framework/shared/message";
+import {Candidate, Section} from "../model/candidate";
+import {Messages, Tooltip} from "../../../framework/shared/constants";
 
 @Component({
   moduleId: module.id,
@@ -82,5 +82,28 @@ export class MoreAboutMyselfComponent implements OnInit {
     this.highlightedSection.name='EmploymentHistory';
     this.highlightedSection.isDisable=false;
     this.onComplete.emit(this.candidate.aboutMyself);
+    let _body: any = document.getElementsByTagName('BODY')[0];
+    _body.scrollTop = -1;
+  }
+
+  onSave() {
+    this.highlightedSection.name = 'none';
+    this.highlightedSection.isDisable = false;
+    let _body: any = document.getElementsByTagName('BODY')[0];
+    _body.scrollTop = -1;
+  }
+
+  onPrevious() {
+    this.highlightedSection.name = 'Professional-Details';
+    let _body: any = document.getElementsByTagName('BODY')[0];
+    _body.scrollTop = -1;
+  }
+
+  onEdit() {
+    this.highlightedSection.name = 'AboutMySelf';
+    this.highlightedSection.isDisable = true;
+    this.showButton = false;
+    let _body: any = document.getElementsByTagName('BODY')[0];
+    _body.scrollTop = -1;
   }
 }

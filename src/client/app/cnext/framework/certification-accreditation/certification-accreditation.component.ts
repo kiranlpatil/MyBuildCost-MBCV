@@ -182,6 +182,9 @@ export class CertificationAccreditationComponent {
     else if (type == 'save') {
       this.onSave()
     }
+
+    let _body: any = document.getElementsByTagName('BODY')[0];
+    _body.scrollTop = -1;
   }
 
   onNext() {
@@ -196,4 +199,15 @@ export class CertificationAccreditationComponent {
     this.highlightedSection.isDisable = false;
   }
 
+  onPrevious() {
+    this.highlightedSection.name = 'Awards';
+    let _body: any = document.getElementsByTagName('BODY')[0];
+    _body.scrollTop = -1;
+  }
+
+  onEdit() {
+    this.highlightedSection.name = 'Certification';
+    this.highlightedSection.isDisable = true;
+    this.showButton = false;
+  }
 }

@@ -36,14 +36,14 @@
         Add another
       </button>
     </div>
-    <button class="btn-prev" (click)="highlightedSection.name='AcademicDetails'"><span
+    <button class="btn-prev" (click)="onPrevious()"><span
       class="glyphicon glyphicon-chevron-left"></span></button>
   </div>
 </div>
 
 <div class="section-container" *ngIf="highlightedSection.name !='Awards'"
      [ngClass]="(highlightedSection.name=='Awards' )?'full-width':'half-width'">
-  <div class="main-content" (click)="highlightedSection.name='Awards';highlightedSection.isDisable=true;showButton=false">
+  <div class="main-content" (click)="onEdit()">
     <div class="compact-view clearfix">
       <div *ngIf="awardDetail.controls.awards.controls.length==0">
         <!--*ngIf="candidate.awards != undefined && candidate.awards.length==1 && candidate.awards[0].name=='' && candidate.awards[0].issuedBy=='' "-->
@@ -51,14 +51,14 @@
         <h4 class="heading-compact icons-section">
           <span class="award"></span>
           Awards <span class="optional-field">(Optional)</span>
-          <button class="btn-edit" (click)="highlightedSection.name='Awards';highlightedSection.isDisable=true;showButton=false" title="Edit Awards"></button>
+          <button class="btn-edit" (click)="onEdit()"></button>
         </h4>
       </div>
       <div class="" *ngIf=" awardDetail.controls.awards.controls.length>0 ">
         <h4 class="heading-compact icons-section">
           <span class="award"></span>
           Awards <span class="optional-field">(Optional)</span>
-          <button class="btn-edit" (click)="highlightedSection.name='Awards';highlightedSection.isDisable=true;showButton=false" title="Edit Awards"></button>
+          <button class="btn-edit" (click)="onEdit()" title="Edit Awards"></button>
         </h4>
         <ul>
           <div *ngFor="let item of candidate.awards;let i = index">

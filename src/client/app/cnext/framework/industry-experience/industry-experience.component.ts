@@ -3,7 +3,7 @@ import {Industry} from "../model/industry";
 import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
 import {Section} from "../model/candidate";
 import {LocalStorageService} from "../../../framework/shared/localstorage.service";
-import {LocalStorage, Messages, ValueConstant, Tooltip} from "../../../framework/shared/constants";
+import {LocalStorage, Messages, Tooltip, ValueConstant} from "../../../framework/shared/constants";
 import {IndustryDataService} from "../industry-data-service";
 
 @Component({
@@ -116,6 +116,9 @@ export class IndustryExperienceListComponent implements OnInit,OnChanges {
       this.onNextComplete.emit();
 
     }
+
+      let _body: any = document.getElementsByTagName('BODY')[0];
+      _body.scrollTop = -1;
   }
 
   onSave() {
@@ -125,6 +128,9 @@ export class IndustryExperienceListComponent implements OnInit,OnChanges {
     }
     this.highlightedSection.name = 'none';
     this.highlightedSection.isDisable = false;
+
+      let _body: any = document.getElementsByTagName('BODY')[0];
+      _body.scrollTop = -1;
   }
 
   getIndustries() {
@@ -146,5 +152,20 @@ export class IndustryExperienceListComponent implements OnInit,OnChanges {
       this.candidateExperiencedIndustry.push(newIndustry.name);
     }
   }
+
+    onPrevious() {
+        this.highlightedSection.name = 'Proficiencies';
+        let _body: any = document.getElementsByTagName('BODY')[0];
+        _body.scrollTop = -1;
+    }
+
+    onEdit() {
+        this.highlightedSection.name = 'IndustryExposure';
+        this.disableButton = false;
+        this.highlightedSection.isDisable = true;
+        this.showButton = false;
+        let _body: any = document.getElementsByTagName('BODY')[0];
+        _body.scrollTop = -1;
+    }
 }
 
