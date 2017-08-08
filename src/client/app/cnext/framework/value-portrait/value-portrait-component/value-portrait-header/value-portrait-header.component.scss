@@ -1,35 +1,5 @@
 @import '../../../../../../css/variables';
 
-header {
-  h1 {
-    border-left: 6px solid $white;
-    color: $white;
-    float: left;
-    font-size: 26px;
-    font-family: 'gothamrnd-light';
-    font-weight: 600;
-    margin: 15px 0;
-    padding: 0 0 0 16px;
-
-    span {
-      float: left;
-      font-size: 18px;
-      padding: 5px 0 0 0;
-      width: 100%;
-    }
-  }
-  .job-mosis-white-logo {
-    float: right;
-    margin: 14px 0;
-    padding-top: 3px;
-    img {
-      height: 50px;
-      width: 50px;
-      cursor: pointer;
-    }
-  }
-}
-
 .value-portraot-candidate-profile-section {
   background: #ddd;
   display: inline-block;
@@ -41,7 +11,7 @@ header {
       box-shadow: 0 0 4px 2px rgba(125, 125, 125, 0.28), 0 0 1px 0 rgba(0, 0, 0, 0.16);
       float: left;
       height: 174px;
-      margin: 0px 0 -55px 0;
+      margin: 10px 0 -55px 0;
       position: relative;
       width: 174px;
       z-index: 9;
@@ -54,7 +24,7 @@ header {
     font-family: 'gothamrnd-book';
     width: calc(100% - 160px);
     padding: 10px 25px;
-    margin: 40px 0 0 -15px;
+    margin: 50px 0 0 -15px;
     text-transform: capitalize;
   }
   .value-portraot-candidate-job-title {
@@ -72,14 +42,15 @@ header {
   margin: 45px 0 10px 0;
   width: 100%;
   .phone-icon {
-    background: url(../assets/c-next/card-view/sprite.png) no-repeat -134px -439px;
+    background: url(../assets/c-next/card-view/sprite.png) no-repeat -135px -434px;
     float: left;
-    height: 25px;
+    height: 34px;
     margin: 0;
     width: 50px;
   }
   span {
     float: left;
+    font-size: 14px;
     margin-top: 5px;
   }
 }
@@ -88,14 +59,15 @@ header {
   display: inline-block;
   width: 100%;
   .email-icon {
-    background: url(../assets/c-next/card-view/sprite.png) no-repeat 6px -477px;
+    background: url(../assets/c-next/card-view/sprite.png) no-repeat 6px -474px;
     float: left;
-    height: 25px;
+    height: 34px;
     margin: 0;
     width: 50px;
   }
   span {
     float: left;
+    font-size: 14px;
     margin-top: 5px;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -109,21 +81,24 @@ header {
   margin: 45px 0 10px 0;
   width: 100%;
   .industry-icon {
-    background: url(../assets/c-next/card-view/sprite.png) no-repeat  -40px -475px;
+    background: url(../assets/c-next/card-view/sprite.png) no-repeat  -41px -471px;
     float: left;
-    height: 29px;
+    height: 34px;
     width: 50px;
   }
   label {
     color: $black1;
     float: left;
     font-family: 'gothamrnd-book';
+    font-size: 14px;
     font-weight: bold;
-    margin: 3px 5px 0 0;
+    margin: 10px 5px 0 0;
+    max-width: 103px;
   }
   span {
     display: block;
-    padding-top: 4px;
+    font-size: 14px;
+    padding-top: 10px;
   }
 }
 
@@ -131,21 +106,29 @@ header {
   display: inline-block;
   width: 100%;
   .area-work-icon {
-    background: url(../assets/c-next/card-view/sprite.png) no-repeat -91px -476px;
+    background: url(../assets/c-next/card-view/sprite.png) no-repeat -94px -469px;
     float: left;
-    height: 25px;
+    height: 37px;
     width: 50px;
   }
   label {
     color: $black1;
     float: left;
     font-family: 'gothamrnd-book';
+    font-size: 14px;
     font-weight: bold;
-    margin: 3px 5px 25px 0;
-    width: 95px;
+    margin: 10px 5px 25px 0;
+    width: 103px;
   }
   span {
     display: block;
-    padding-top: 4px;
+    float: left;
+    font-size: 14px;
+    padding-top: 10px;
+    width: calc(100% - 170px);
   }
+}
+
+.padding-left-0 {
+  padding-left: 0;
 }

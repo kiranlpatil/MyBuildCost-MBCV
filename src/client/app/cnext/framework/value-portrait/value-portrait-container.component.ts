@@ -1,4 +1,6 @@
 import {Component} from "@angular/core";
+import {Router} from "@angular/router";
+
 
 @Component({
   moduleId: module.id,
@@ -8,5 +10,12 @@ import {Component} from "@angular/core";
 })
 
 export class ValuePortraitContainerComponent {
+  constructor(private _router: Router) {
+  }
 
+  navigateTo(nav: string) {
+    if (nav !== undefined) {
+      this._router.navigate([nav]);
+    }
+  }
 }

@@ -25,10 +25,4 @@ export class ValuePortraitHeader {
     return null;
   }
 
-  navigateTo(nav: string) {
-    if (nav !== undefined) {
-      this._router.navigate([nav]);
-    }
-  }
-
 }
