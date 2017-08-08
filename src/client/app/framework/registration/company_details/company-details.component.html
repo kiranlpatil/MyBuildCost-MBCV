@@ -3,7 +3,7 @@
 
   <app-loader></app-loader>
 
-  <div class="content clearfix" style="width: 75%">
+  <div class="main-upload-container content clearfix">
 
     <div class="alert alert-danger clearfix" [hidden]="isShowErrorMessage">
       <div class="col-sm-1 hidden-xs"><span class="glyphicon glyphicon-warning-sign"></span></div>
@@ -34,7 +34,7 @@
           <label>Upload Document</label>
           <div class="col-sm-12 no-padding">
             <div [class.hide-list]="isSocialLogin">
-              <div class="col-sm-10 no-padding">
+              <div class="col-xs-10 no-padding">
                 <control-messages [control]="companyDetailsForm.controls.description1" [submitStatus]="submitStatus"></control-messages>
                 <input type="text" formControlName="description1" id="description1" maxlength="250"
                        placeholder="Company TAN" class="form-control" required/>
@@ -60,7 +60,7 @@
 
           <div class="col-sm-12 no-padding">
             <div [class.hide-list]="isSocialLogin">
-              <div class="col-sm-10 no-padding">
+              <div class="col-xs-10 no-padding">
                 <control-messages [control]="companyDetailsForm.controls.description2" [submitStatus]="submitStatus"></control-messages>
                 <input type="text" formControlName="description2" id="description2" maxlength="250"
                        placeholder="GST Certificate" class="form-control" value="description2" required/>
@@ -88,7 +88,7 @@
 
           <div class="col-sm-12 no-padding">
             <div [class.hide-list]="isSocialLogin">
-              <div class="col-sm-10 no-padding">
+              <div class="col-xs-10 no-padding">
                 <control-messages [control]="companyDetailsForm.controls.description3" [submitStatus]="submitStatus"></control-messages>
                 <input type="text" formControlName="description3" id="description3" maxlength="250"
                        placeholder="Shop Act" class="form-control" required/>
@@ -125,7 +125,7 @@
         </div>
 
         <div class="col-sm-3">
-          <div class="section-container">
+          <div class="section-container upload-section-container">
             <cn-tool-tip [message]="tooltipMessage"></cn-tool-tip>
           </div>
         </div>

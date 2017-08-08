@@ -30,10 +30,11 @@
 
 <div class="section-container"
      *ngIf="highlightedSection.name!='Work-Area'">
-  <div class="main-content" (click)="onEdit()">
+  <div class="main-content"
+       (click)="highlightedSection.name='Work-Area';showButton=false;highlightedSection.sectionName='capability';highlightedSection.isDisable=true">
     <div class="compact-view clearfix">
       <button class="btn-edit"
-              (click)="onEdit()"
+              (click)="highlightedSection.name='Work-Area';showButton=false;highlightedSection.sectionName='capability';highlightedSection.isDisable=true"
               [hidden]="highlightedSection.isDisable" title="Edit Work Area"></button>
       <div class="col-sm-3 padding-right15">
         <h4 class="heading-compact">Area of work</h4>

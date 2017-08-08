@@ -183,7 +183,6 @@ onCancel() {
   OnEdit() {
     this.highlightedSection.name = 'Work-Area';
     this.showButton = false;
-    this.highlightedSection.sectionName = 'capability';
     this.highlightedSection.isDisable = true;
     let _body: any = document.getElementsByTagName('BODY')[0];
     _body.scrollTop = -1;

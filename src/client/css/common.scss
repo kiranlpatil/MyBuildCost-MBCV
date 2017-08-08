@@ -788,3 +788,13 @@ control-messages {
   }
 }
 
+@media screen and (min-width: 300px) and (max-width: 766px) {
+  .employee-form,
+  .employer-form {
+    control-messages {
+      div {
+        padding: 0 !important;
+      }
+    }
+  }
+}

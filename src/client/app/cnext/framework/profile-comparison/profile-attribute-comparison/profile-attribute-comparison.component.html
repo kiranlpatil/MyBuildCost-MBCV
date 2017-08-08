@@ -89,8 +89,12 @@
     <div class="matching-candidate-attributes">
       <div class="candidate-attribute-list" *ngFor="let item of profileComparisonResult|valueSortFilter">
         <div>
-          <p class="matching-attribute">
+          <p *ngIf="profileComparisonJobData.joiningPeriod === item.professionalDetails.noticePeriod" class="matching-attribute">
             <span class="matching-attribute-icon"></span>
+            {{item?.professionalDetails.noticePeriod}}
+          </p>
+          <p *ngIf="profileComparisonJobData.joiningPeriod !== item.professionalDetails.noticePeriod" class="mismatch-attribute">
+            <span class="mismatch-attribute-icon"></span>
             {{item?.professionalDetails.noticePeriod}}
           </p>
         </div>

@@ -31,14 +31,50 @@
 
 @media screen and (max-width: 767px) {
   .page-header {
-    .cn-logo {
+    /*.cn-logo {
       top: 14px;
       left: 15px;
-      width: 90px;
-    }
+      width: 67px;
+    }*/
 
     ul > li {
       margin-right: 15px;
+    }
+  }
+}
+
+@media screen and (min-width: 375px) and (max-width: 766px) {
+  .page-header {
+    .cn-logo {
+      top: 0px;
+      left: 7px;
+      width: 67px;
+    }
+    ul {
+      li {
+        margin-right: 10px;
+        a {
+          font-size: 12px;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 320px) and (max-width: 374px) {
+  .page-header {
+    .cn-logo {
+      top: 0px;
+      left: 7px;
+      width: 67px;
+    }
+    ul {
+      li {
+        margin-right: 10px;
+        a {
+          font-size: 10px;
+        }
+      }
     }
   }
 }

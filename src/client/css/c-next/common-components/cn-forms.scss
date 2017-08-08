@@ -189,7 +189,7 @@
 
       .employee-form,
       .employer-form {
-        padding: 0;
+        padding: 0 15px;
       }
 
       .radio-group {
@@ -233,3 +233,40 @@
   }
 }
 
+@media screen and (min-width: 400px) and (max-width: 766px) {
+  .main-form-wrapper {
+    .button-group {
+      text-align: center;
+      .btn {
+        margin-bottom: 15px;
+      }
+    }
+    .mail-reset-password {
+      .form-group {
+        margin-bottom: 50px;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 320px) and (max-width: 399px) {
+  .main-form-wrapper {
+    .button-group {
+      text-align: center;
+      .btn {
+        margin-bottom: 15px;
+      }
+    }
+    .mail-reset-password {
+      .form-group {
+        margin-bottom: 50px;
+      }
+    }
+  }
+  .verify-user {
+    .btn {
+      width: 100%;
+      padding: 10px 0 !important;
+    }
+  }
+}

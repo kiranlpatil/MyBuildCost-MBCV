@@ -81,3 +81,25 @@
     }
   }
 }
+
+@media screen and (min-width: 400px) and (max-width: 766px) {
+  .registration {
+    .content {
+      top: 15% !important;
+      h5 {
+        padding: 10px 15px 25px;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 320px) and (max-width: 399px) {
+  .registration {
+    .content {
+      top: 15% !important;
+      h5 {
+        padding: 10px 15px 25px;
+      }
+    }
+  }
+}

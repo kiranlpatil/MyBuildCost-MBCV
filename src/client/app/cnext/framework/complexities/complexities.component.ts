@@ -223,6 +223,8 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
 
   onNextCapability() {
     //this.currentCapabilityNumber++;
+      let _body: any = document.getElementsByTagName('BODY')[0];
+      _body.scrollTop = -1;
     for (let complexity of this.capabilities[this.currentCapabilityNumber].complexities) {
       if (complexity.complexityDetails.userChoice === undefined) {
         this.isValid = false;
@@ -239,23 +241,23 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
     }
     this.isValid = true;
     this.getCapabilityDetail(++this.currentCapabilityNumber);
-      let _body: any = document.getElementsByTagName('BODY')[0];
-      _body.scrollTop = -1;
   }
 
   onPreviousCapability() {
     this.isValid = true;
+      let _body: any = document.getElementsByTagName('BODY')[0];
+      _body.scrollTop = -1;
     if (this.currentCapabilityNumber === 0) {
       this.highlightedSection.name = 'Capabilities';
       return;
     }
     this.getCapabilityDetail(--this.currentCapabilityNumber);
-      let _body: any = document.getElementsByTagName('BODY')[0];
-      _body.scrollTop = -1;
   }
 
   onNext() {
     this.isValid = true;
+      let _body: any = document.getElementsByTagName('BODY')[0];
+      _body.scrollTop = -1;
     if (this.complexities[this.complexityIds[this.currentComplexity]] === -1) {
       this.isValid = false;
       return;
@@ -280,12 +282,12 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
    /* setTimeout(() => {
       this.slideToRight = false;
     }, 3000);*/
-      let _body: any = document.getElementsByTagName('BODY')[0];
-      _body.scrollTop = -1;
   }
 
   onPrevious() {
     this.isValid = true;
+      let _body: any = document.getElementsByTagName('BODY')[0];
+      _body.scrollTop = -1;
     if (this.currentComplexity === 0) {
       this.highlightedSection.name = 'Capabilities';
       return;
@@ -301,11 +303,11 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
     setTimeout(() => {
       this.slideToLeft = false;
     }, 3000);
-      let _body: any = document.getElementsByTagName('BODY')[0];
-      _body.scrollTop = -1;
   }
 
   onDone() {
+      let _body: any = document.getElementsByTagName('BODY')[0];
+      _body.scrollTop = -1;
     if (this.isCandidate) {
       this.saveComplexity();
     } else {
@@ -313,8 +315,6 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
       this.highlightedSection.name = 'None';
     }
     this.singleComplexity = false;
-      let _body: any = document.getElementsByTagName('BODY')[0];
-      _body.scrollTop = -1;
   }
 
   getComplexityDetails(complexityId: string) {  //TODO remove after amits call of updated get API

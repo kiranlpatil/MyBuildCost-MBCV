@@ -201,3 +201,25 @@
     }
   }
 }
+
+@media only screen and (max-width: 767px) {
+  .loader-icon {
+    margin-right: -6px;
+  }
+  .company-image {
+    border: 0;
+    height: 250px;
+  }
+  .company-details {
+    .upload-documents {
+      .file-name {
+        overflow: visible;
+        white-space: normal;
+        width: 83%;
+        word-wrap: break-word;
+        word-break: keep-all;
+        text-align: right;
+      }
+    }
+  }
+}
