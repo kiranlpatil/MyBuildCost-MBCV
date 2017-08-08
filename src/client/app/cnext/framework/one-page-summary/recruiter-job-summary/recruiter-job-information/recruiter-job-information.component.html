@@ -40,7 +40,8 @@
     <span>{{postedJob.postingDate | date:'mediumDate'}}</span>
     <label>About Company</label>
     <span>{{recruiter.about_company}} </span>
-
+    <label *ngIf="postedJob.releventIndustries.length">Relevent Industries</label>
+    <span *ngFor="let value of postedJob.releventIndustries">{{value}}</span>
   </div>
 </div>
 
