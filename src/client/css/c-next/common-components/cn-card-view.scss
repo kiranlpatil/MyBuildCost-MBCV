@@ -782,6 +782,10 @@ header {
       margin-left: 0;
       margin-top: 0;
     }
+
+    .sort-by > select {
+      border-bottom: 0;
+    }
   }
 
   .empty-list-message {
@@ -793,5 +797,11 @@ header {
     .card-view {
       margin-top: 88px;
     }
+  }
+
+  .clear-filter {
+    position: fixed;
+    top: 155px;
+    left: 9px;
   }
 }
