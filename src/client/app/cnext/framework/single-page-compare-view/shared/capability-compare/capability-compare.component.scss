@@ -325,7 +325,8 @@
 
 .row-section .column1:nth-child(10),
 .row-section .column1:nth-child(11),
-.row-section .column1:nth-child(12) {
+.row-section .column1:nth-child(12),
+.row-section .column1:nth-child(13) {
   .above:hover,
   .below:hover,
   .missing:hover,
@@ -352,24 +353,24 @@
 }
 
 .capability-label {
-  padding: 5px 7px;
+  padding: 5px 5px;
   display: inline-block;
   text-align: center;
   width: 100%;
-  height: 56px;
+  height: 50px;
+  line-height: 14px;
   overflow: hidden;
   position: relative;
   z-index: 9;
   span {
     font-size: 12px;
     text-align: center;
-    display: table;
+    //display: table;
     word-break: keep-all;
     height: 60px;
     margin: 0 auto;
-    word-wrap: break-word;
     padding: 0;
-    color: $capability-label;
+    color: $black1;
   }
 }
 
@@ -416,7 +417,7 @@
     li {
       float: left;
       font-size: 12px;
-      margin-right: 15px;
+      margin-right: 9px;
       color: $text-color;
     }
 
@@ -709,6 +710,9 @@ and (max-width: 840px) {
   }
   .eleventh-for-all {
     max-width: 94px !important;
+  }
+  .fourteen-for-all {
+    max-width: 75px !important;
   }
 }
 

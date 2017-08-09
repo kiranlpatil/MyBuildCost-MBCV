@@ -125,7 +125,7 @@
                   <label *ngIf="candidate == undefined">Hiring Manager</label>
                   <span *ngIf="candidate == undefined">{{postedJob.hiringManager}}</span>
                   <label *ngIf="recruiter.isRecruitingForself">Department</label>
-                  <label *ngIf="!recruiter.isRecruitingForself">Company</label>
+                  <label *ngIf="!recruiter.isRecruitingForself">Company Name</label>
                   <span *ngIf="!postedJob.hideCompanyName">{{postedJob.department}}</span>
                   <span *ngIf="postedJob.hideCompanyName">Not Disclosed</span>
                   <label>Industry</label>
@@ -182,7 +182,7 @@
                          [class.below]="data.releaseMatch=='below'" [class.missing]="data.releaseMatch=='missing'">Joining
                     Period</label>
                   <span>{{postedJob.joiningPeriod}}</span>
-                  <label>Location</label>
+                  <label>Job Location</label>
                   <span>{{postedJob.location.city}}</span>
                   <label>About Job</label>
                   <span>
