@@ -151,7 +151,7 @@ class ImportIndustryService {
          }*/
 
         let industry = new ImportIndustriesModel(result[0].industry, result[0].code,result[0].sort_order,rolesArray);
-        if(!isSend){
+        if(!isSend) {
           callback(null, industry);
         }
       }

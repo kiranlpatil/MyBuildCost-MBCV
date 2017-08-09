@@ -41,6 +41,7 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
   private currentCapability: Capability = new Capability();
   private currentCapabilityNumber: number;
   private singleComplexity: boolean = false;
+  private currentRecruiterQuestion: string;
   private requiedValidationMessageCandidate = Messages.MSG_ERROR_VALIDATION_COMPLEXITY_REQUIRED_CANDIDATE;
   private requiedValidationMessageRecruiter = Messages.MSG_ERROR_VALIDATION_COMPLEXITY_REQUIRED_RECRUITER;
   tooltipCandidateMessage: string = '<ul><li>' +
@@ -217,8 +218,7 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
   getCapabilityDetail(currentCapability: number) {
 
     this.currentCapability = this.capabilities[this.currentCapabilityNumber];
-
-
+    this.currentRecruiterQuestion = this.currentCapability.complexities[0].complexityDetails.questionHeaderForRecruiter;
   }
 
   onNextCapability() {
@@ -354,6 +354,7 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
     } else {
       this.currentCapability = selectedComplexity;
     }
+    this.currentRecruiterQuestion = this.currentCapability.complexities[0].complexityDetails.questionHeaderForRecruiter;
     this.highlightedSection.name = 'Complexities';
   }
 }

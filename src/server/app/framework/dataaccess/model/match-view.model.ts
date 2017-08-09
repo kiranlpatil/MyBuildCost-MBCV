@@ -15,6 +15,8 @@ class MatchViewModel {
   isChecked: boolean = false; //TODO
   questionForCandidate: string;
   questionForRecruiter: string;
+  questionHeaderForCandidate: string;
+  questionHeaderForRecruiter: string;
   code: string;
   userChoice: string;
 }

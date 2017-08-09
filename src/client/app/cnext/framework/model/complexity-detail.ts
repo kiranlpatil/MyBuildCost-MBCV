@@ -5,6 +5,8 @@ export class ComplexityDetails {
   isChecked: boolean = false; //TODO
   questionForCandidate:string ='';
   questionForRecruiter:string ='';
+  questionHeaderForCandidate:string ='';
+  questionHeaderForRecruiter:string ='';
   userChoice:string='';
   role_name: string = '';
   capability_name: string;

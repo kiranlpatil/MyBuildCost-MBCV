@@ -2,10 +2,9 @@
 <div class="section-container clearfix" *ngIf="highlightedSection.name=='Complexities'">
   <div class="main-content clearfix edit-modal-content">
     <div class="complexities">
-      <h4 class="heading" *ngIf="isCandidate && currentComplexityDetails">Tell us about your experience in
+      <h4 class="heading" *ngIf="isCandidate && currentComplexityDetails">{{currentComplexityDetails.questionHeaderForCandidate}}
         <span class="capability-name">{{currentComplexityDetails.capability_name}}</span></h4>
-      <h4 class="heading" *ngIf="!isCandidate && currentCapability">Which is the most appropriate level that candidate
-        is required to handle as a part of <span class="capability-name">{{currentCapability.name}}</span>
+      <h4 class="heading" *ngIf="!isCandidate && currentCapability">{{currentRecruiterQuestion}}<span class="capability-name">{{currentCapability.name}}</span>
       </h4>
       <div class="error-messages edit-error-msg" *ngIf="!isValid && isCandidate"><p>{{requiedValidationMessageCandidate}}</p></div>
       <div class="error-messages edit-error-msg" *ngIf="!isValid && !isCandidate"><p>{{requiedValidationMessageRecruiter}}</p></div>

@@ -50,7 +50,7 @@ class ComplexityService {
         }
       }
       if (!isComplexityFound) {
-        let newComplexity = new ComplexityClassModel(currentRow.complexity, currentRow.complexity_code, currentRow.complexity_display_sequence, currentRow.complexity_question_for_participant, currentRow.complexity_question_for_recruiter);
+        let newComplexity = new ComplexityClassModel(currentRow.complexity, currentRow.complexity_code, currentRow.complexity_display_sequence, currentRow.complexity_question_for_participant, currentRow.complexity_question_for_recruiter, currentRow.header_question_for_capability_candidate, currentRow.header_question_for_capability_recruiter);
         let scenarios: ScenarioClassModel[] = new Array(0);
           for (let sceIndex: number = 0; sceIndex < 5; sceIndex++) {
             let sceName = 'Scenario' + (sceIndex + 1).toString();
@@ -66,7 +66,7 @@ class ComplexityService {
       }
       return complexities;
     } else {
-      var newComplexity = new ComplexityClassModel(currentRow.complexity, currentRow.complexity_code, currentRow.complexity_display_sequence, currentRow.complexity_question_for_participant, currentRow.complexity_question_for_recruiter);
+      var newComplexity = new ComplexityClassModel(currentRow.complexity, currentRow.complexity_code, currentRow.complexity_display_sequence, currentRow.complexity_question_for_participant, currentRow.complexity_question_for_recruiter, currentRow.header_question_for_capability_candidate, currentRow.header_question_for_capability_recruiter);
       let scenarios: ScenarioClassModel[] = new Array(0);
       for (let sceIndex: number = 0; sceIndex < 5; sceIndex++) {
         let sceName = 'Scenario' + (sceIndex + 1).toString();
