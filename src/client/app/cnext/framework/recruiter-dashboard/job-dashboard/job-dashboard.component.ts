@@ -1,4 +1,4 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, OnInit, ViewChild} from "@angular/core";
 import {ActivatedRoute, Router} from "@angular/router";
 import {JobDashboardService} from "./job-dashboard.service";
 import {RecruiterJobView} from "../../model/recruiter-job-view";
@@ -11,7 +11,7 @@ import {QCardFilter} from "../../model/q-card-filter";
 import {LoaderService} from "../../../../framework/shared/loader/loader.service";
 import {ProfileComparisonService} from "../../profile-comparison/profile-comparison.service";
 import {ProfileComparison} from "../../model/profile-comparison";
-import {ProfileCompareService} from "../../profile-compare.service";
+import {QCardviewComponent} from "../q-card-view/q-card-view.component";
 
 @Component({
   moduleId: module.id,
@@ -38,12 +38,14 @@ export class JobDashboardComponent implements OnInit {
   private emptyListMessage: string = Tooltip.EMPTY_LIST_MESSAGE;
   private emptyCartMessage: string = Tooltip.EMPTY_CART_MESSAGE;
   private emptyRejectedList: string = Tooltip.EMPTY_REJECTED_LIST_MESSAGE;
+  @ViewChild(QCardviewComponent) acaQcardClassObject: QCardviewComponent;
+
 
   constructor(public refrence: ReferenceService,
               private activatedRoute: ActivatedRoute,
               private jobDashboardService: JobDashboardService,
               private _router:Router,private qcardFilterService:QCardFilterService,
-              private loaderService: LoaderService,private profileComparisonService: ProfileComparisonService, private profileCompareService: ProfileCompareService) {
+              private loaderService: LoaderService,private profileComparisonService: ProfileComparisonService) {
     this.qcardFilterService.candidateFilterValue$.subscribe(
       (data: QCardFilter) => {
         this.filterMeta = data;
@@ -198,56 +200,58 @@ export class JobDashboardComponent implements OnInit {
   }
 
   performActionOnComparisonList(data:any) {
-
-    /*if (data.action == 'Remove') {
+    //console.log('---------------candidateQlistcandidateQlistcandidateQlist--------------------------',this.candidateQlist);
+    if (data.action == 'Remove') {
       this.profileComparison.profileComparisonData.splice(this.profileComparison.profileComparisonData.indexOf(data.item), 1);
       this.listOfCandidateIdToCompare.splice(this.profileComparison.profileComparisonData.indexOf(data.item._id), 1);
       this.recruiterJobView.numberOfCandidatesInCompare--;
     } else if (data.action == 'AddToCart') {
       //matchedList cartListed applied rejectedList
-     /!* if (data.item.candidateListStatus.indexOf('rejectedList')) {
-        var compareAction:any = {'action': 'add', 'source': 'rejectedList', 'destination': 'matchedList', 'id': data.item._id};
-        this.profileCompareService.change(compareAction);
-      }*!/
       var compareAction:any;
-      if (data.item.candidateListStatus.indexOf('matchedList') !== -1) {
+
+      if (this.candidateQlist.matchedCandidates.filter(function (obj) {
+          return data.item._id == obj._id
+        }).length && (data.item.candidateListStatus.indexOf('applied') !== -1)) {
         compareAction = {'action': 'add', 'source': 'matchedList', 'destination': 'cartListed', 'id': data.item._id};
-        //this.profileCompareService.change(compareAction);
-      } else {
+      } else if (this.candidateQlist.matchedCandidates.filter(function (obj) {
+          return data.item._id == obj._id
+        }).length) {
+        compareAction = {'action': 'add', 'source': 'matchedList', 'destination': 'cartListed', 'id': data.item._id};
+      } else if (this.candidateQlist.appliedCandidates.filter(function (obj) {
+          return data.item._id == obj._id
+        }).length) {
         compareAction = {'action': 'add', 'source': 'applied', 'destination': 'cartListed', 'id': data.item._id};
       }
-      /!*if (data.item.candidateListStatus.indexOf('applied') !== -1) {
-        compareAction = {'action': 'add', 'source': 'applied', 'destination': 'cartListed', 'id': data.item._id};
-      }*!/
-      this.profileCompareService.change(compareAction);
+
       this.profileComparison.profileComparisonData.splice(this.profileComparison.profileComparisonData.indexOf(data.item), 1);
       this.listOfCandidateIdToCompare.splice(this.profileComparison.profileComparisonData.indexOf(data.item._id), 1);
       this.recruiterJobView.numberOfCandidatesInCompare--;
+      //this.profileCompareService.change(compareAction);
+      this.acaQcardClassObject.actionOnQCardFromParent(compareAction);
 
     } else if (data.action == 'Reject') {
       var compareAction:any;
-      if (data.item.candidateListStatus.indexOf('matchedList') !== -1) {
+      if (this.candidateQlist.matchedCandidates.filter(function (obj) {
+          return data.item._id == obj._id
+        }).length && (data.item.candidateListStatus.indexOf('applied') !== -1)) {
         compareAction = {'action': 'add', 'source': 'matchedList', 'destination': 'rejectedList', 'id': data.item._id};
-        //this.profileCompareService.change(compareAction);
-      }
-      if ((data.item.candidateListStatus.indexOf('cartListed') !== -1) && (data.item.candidateListStatus.indexOf('applied') == -1)) {
+      } else if (this.candidateQlist.matchedCandidates.filter(function (obj) {
+          return data.item._id == obj._id
+        }).length) {
+        compareAction = {'action': 'add', 'source': 'matchedList', 'destination': 'rejectedList', 'id': data.item._id};
+      } else if ((data.item.candidateListStatus.indexOf('cartListed') !== -1) && (data.item.candidateListStatus.indexOf('applied') == -1)) {
         compareAction = {'action': 'add', 'source': 'cartListed', 'destination': 'rejectedList', 'id': data.item._id};
-        //this.profileCompareService.change(compareAction);
+      } else if ((data.item.candidateListStatus.indexOf('applied') !== -1) && (data.item.candidateListStatus.indexOf('cartListed') == -1)) {
+        compareAction = {'action': 'add', 'source': 'applied', 'destination': 'rejectedList', 'id': data.item._id};
+      } else if ((data.item.candidateListStatus.indexOf('cartListed') !== -1) && (data.item.candidateListStatus.indexOf('applied') !== -1)) {
+        compareAction = {'action': 'add', 'source': 'cartListed', 'destination': 'rejectedList', 'id': data.item._id};
       }
 
-      if ((data.item.candidateListStatus.indexOf('applied') !== -1) && (data.item.candidateListStatus.indexOf('cartListed') == -1) ) {
-        var compareAction:any = {'action': 'add', 'source': 'applied', 'destination': 'rejectedList', 'id': data.item._id};
-        //this.profileCompareService.change(compareAction);
-      }
-      if ((data.item.candidateListStatus.indexOf('cartListed') !== -1) && (data.item.candidateListStatus.indexOf('applied') !== -1)) {
-        compareAction = {'action': 'add', 'source': 'cartListed', 'destination': 'rejectedList', 'id': data.item._id};
-        //this.profileCompareService.change(compareAction);
-      }
-      this.profileCompareService.change(compareAction);
       this.profileComparison.profileComparisonData.splice(this.profileComparison.profileComparisonData.indexOf(data.item), 1);
       this.listOfCandidateIdToCompare.splice(this.profileComparison.profileComparisonData.indexOf(data.item._id), 1);
       this.recruiterJobView.numberOfCandidatesInCompare--;
-    }*/
+      this.acaQcardClassObject.actionOnQCardFromParent(compareAction);
+    }
   }
 
 
@@ -265,7 +269,7 @@ export class JobDashboardComponent implements OnInit {
     this.profileComparison = data;
   }
 
-  addForCompare(obj: any) { debugger
+  addForCompare(obj: any) {
     if (this.listOfCandidateIdToCompare.indexOf(obj.id) == -1) {
       //this.listOfCandidateStatus.push(obj);
       this.listOfCandidateIdToCompare.push(obj.id);

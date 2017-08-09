@@ -13,7 +13,6 @@ import {CandidateDetail} from "../../../../framework/registration/candidate/cand
 import {CandidateProfileService} from "../../candidate-profile/candidate-profile.service";
 import {Message} from "../../../../framework/shared/message";
 import {MessageService} from "../../../../framework/shared/message.service";
-import {ProfileCompareService} from "../../profile-compare.service";
 /*import underline = Chalk.underline;*/
 
 
@@ -52,19 +51,8 @@ export class QCardviewComponent implements OnChanges {
 
 
   constructor(private qCardFilterService: QCardFilterService,
-              private profileCreatorService: CandidateProfileService, private qCardViewService: QCardViewService, private messageService: MessageService,private profileCompareService: ProfileCompareService) {
+              private profileCreatorService: CandidateProfileService, private qCardViewService: QCardViewService, private messageService: MessageService) {
 
-    this.profileCompareService._compareAction$.subscribe(
-      (data: any) => { debugger
-        var candidate:CandidateQCard;
-        this.candidates.forEach(item=> {
-          if(data.id == item._id){
-            candidate = item;
-          }
-        })
-        this.actionOnQCard(data.action, data.source, data.destination, candidate);
-      }
-    );
     this.qCardFilterService.aboveMatch$.subscribe(
       () => {
         this.matchFormat = this.match.aboveMatch;
@@ -87,7 +75,44 @@ export class QCardviewComponent implements OnChanges {
     }
   }
 
-  actionOnQCard(action: string, sourceListName: string, destinationListName: string, candidate: CandidateQCard) { debugger
+  actionOnQCardFromParent(data:any) {
+    var candidate:CandidateQCard;
+    var isFound:boolean = false;
+    this.candidateQlist.rejectedCandidates.forEach(item=> {
+      if (data.id == item._id) {
+        candidate = item;
+        isFound = true;
+      }
+    })
+    if (!isFound) {
+      this.candidateQlist.appliedCandidates.forEach(item=> {
+        if (data.id == item._id) {
+          candidate = item;
+          isFound = true;
+        }
+      })
+    }
+    if (!isFound) {
+      this.candidateQlist.cartCandidates.forEach(item=> {
+        if (data.id == item._id) {
+          candidate = item;
+          isFound = true;
+        }
+      })
+    }
+    if (!isFound) {
+      this.candidateQlist.matchedCandidates.forEach(item=> {
+        if (data.id == item._id) {
+          candidate = item;
+          isFound = true;
+        }
+      })
+    }
+    this.actionOnQCard(data.action, data.source, data.destination, candidate);
+
+  }
+
+  actionOnQCard(action: string, sourceListName: string, destinationListName: string, candidate: CandidateQCard) {
     let isMatchList: boolean = false;
     let isFound : boolean=false;
     switch (sourceListName) {

@@ -188,6 +188,7 @@
             <span class="matching-attribute-icon"></span>
             {{value}}
           </p>
+          <p *ngIf="value == 'None'">---</p>
         </div>
         <!--</div>-->
         <div *ngFor="let value of item.interestedIndustries">
