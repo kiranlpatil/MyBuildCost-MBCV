@@ -18,7 +18,6 @@ import {FacebookService} from "./facebook.service";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {ValidationService} from "../shared/customvalidations/validation.service";
 import {ProjectAsset} from "../shared/constants";
-import {GuidedTour} from "../../cnext/framework/model/guided-tour";
 
 @Component({
   moduleId: module.id,

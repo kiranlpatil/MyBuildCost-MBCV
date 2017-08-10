@@ -1,9 +1,10 @@
 import {Component, EventEmitter, Input, Output} from "@angular/core";
 import {Role} from "../model/role";
 import {Capability} from "../model/capability";
-import {LocalStorage, Messages, Tooltip, ValueConstant} from "../../../framework/shared/constants";
+import {LocalStorage, Messages, Tooltip, ValueConstant, ImagePath} from "../../../framework/shared/constants";
 import {Section} from "../model/candidate";
 import {LocalStorageService} from "../../../framework/shared/localstorage.service";
+import {GuidedTourService} from "../guided-tour.service";
 
 @Component({
   moduleId: module.id,
@@ -30,6 +31,11 @@ export class CapabilitiesComponent {
   private isValid: boolean = true;
   private validationMessage = Messages.MSG_ERROR_VALIDATION_CAPABILITIES_REQUIRED_RECRUITER;
   private capabilitiesCodes : string[]= new Array(0);
+  private guidedTourStatus:string[] = new Array(0);
+  private guidedTourImgOverlayScreensComplexities:string;
+  private guidedTourImgOverlayScreensComplexitiesPath:string;
+  private isGuideImg:boolean = false;
+
   tooltipCandidateMessage: string =
 
     '<ul>' +
@@ -44,6 +50,10 @@ export class CapabilitiesComponent {
     '<p>1.'+ Tooltip.RECRUITER_CAPABILITY_TOOLTIP +'</p>' +
     '</li>' +
     '</ul>';
+
+  constructor(private guidedTourService:GuidedTourService) {
+
+  }
 
   ngOnInit() {
     if (LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE) === 'true') {
@@ -118,6 +128,27 @@ export class CapabilitiesComponent {
   }
 
   onNext() {
+    this.isGuidedTourImgRequire();
+  }
+
+  isGuidedTourImgRequire() {
+    this.isGuideImg = true;
+    this.guidedTourImgOverlayScreensComplexities = ImagePath.CANDIDATE_OERLAY_SCREENS_COMPLEXITIES;
+    this.guidedTourImgOverlayScreensComplexitiesPath = ImagePath.BASE_ASSETS_PATH_DESKTOP + ImagePath.CANDIDATE_OERLAY_SCREENS_COMPLEXITIES;
+    this.guidedTourStatus = this.guidedTourService.getTourStatus();
+    if(this.guidedTourStatus.indexOf(this.guidedTourImgOverlayScreensComplexities) !== -1 && this.isCandidate) {
+      this.onNextAction();
+    }
+    if(this.isCandidate == false) {
+      this.onNextAction();
+    }
+  }
+  onGotItGuideTour() {
+    this.guidedTourStatus = this.guidedTourService.updateTourStatus(ImagePath.CANDIDATE_OERLAY_SCREENS_COMPLEXITIES,true);
+    this.isGuidedTourImgRequire()
+  }
+
+  onNextAction() {
     this.isValid = true;
     this.validationMessage = '';
     if(this.primaryNames.length == 0){
@@ -138,8 +169,8 @@ export class CapabilitiesComponent {
     }
     this.onComplete.emit(newselectedRoles);
 
-      let _body: any = document.getElementsByTagName('BODY')[0];
-      _body.scrollTop = -1;
+    let _body: any = document.getElementsByTagName('BODY')[0];
+    _body.scrollTop = -1;
   }
 
   onSave(){

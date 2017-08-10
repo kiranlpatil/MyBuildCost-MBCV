@@ -31,9 +31,9 @@ export class AwardsComponent implements OnInit {
   private submitStatus: boolean;
   tooltipMessage: string = '<ul><li><p>1. '+Tooltip.AWARDS_TOOLTIP+'</p></li></ul>';
   private guidedTourStatus:string[] = new Array(0);
-  guidedTourImgOverlayScreensProfile:string;
-  guidedTourImgOverlayScreensProfilePath:string;
-  isGuideImg:boolean;
+  private guidedTourImgOverlayScreensProfile:string;
+  private guidedTourImgOverlayScreensProfilePath:string;
+  private isGuideImg:boolean;
   constructor(private _fb: FormBuilder, private profileCreatorService: CandidateProfileService,private guidedTourService:GuidedTourService) {
     this.awardDetail = this._fb.group({
       awards: this._fb.array([])

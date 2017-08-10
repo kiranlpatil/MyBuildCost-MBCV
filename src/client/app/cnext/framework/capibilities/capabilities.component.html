@@ -1,3 +1,8 @@
+<div *ngIf="guidedTourStatus.indexOf(guidedTourImgOverlayScreensComplexities) == -1 && isCandidate && isGuideImg == true" style="position: fixed;height: 100%;width: 100%;z-index: 9999999999;top: 0;left: 0;">
+  <img src={{guidedTourImgOverlayScreensComplexitiesPath}} alt="Profile Picture" style="width: 100%;margin-top: -35px;">
+  <div style="position: absolute;width: 118px;height: 32px;right: 82px;bottom: 25px;"(click)="onGotItGuideTour()">
+  </div>
+</div>
 <div class="modal-bg" *ngIf="highlightedSection.name=='Capabilities'"></div>
 <div class="section-container clear clearfix" *ngIf="highlightedSection.name=='Capabilities'">
 
