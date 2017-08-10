@@ -184,6 +184,7 @@ export class LocalStorage {
   public static TEMP_MOBILE = 'temp_mobile';
   public static TEMP_EMAIL = 'temp_email';
   public static EMAIL_ID = 'email_id';
+  public static PASSWORD = 'password';
   public static MY_THEME = 'my_theme';
   public static VERIFY_PHONE_VALUE = 'verify_phone_value';
   public static CHANGE_MAIL_VALUE = 'change_mail_value';

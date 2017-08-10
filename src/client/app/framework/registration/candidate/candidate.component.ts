@@ -103,6 +103,7 @@ export class CandidateComponent implements OnInit {
   onRegistrationSuccess(candidate: any) {
     LocalStorageService.setLocalValue(LocalStorage.USER_ID, candidate.data._id);
     LocalStorageService.setLocalValue(LocalStorage.EMAIL_ID, this.userForm.value.email);
+    LocalStorageService.setLocalValue(LocalStorage.PASSWORD, this.model.password);
     LocalStorageService.setLocalValue(LocalStorage.MOBILE_NUMBER, this.userForm.value.mobile_number);
     LocalStorageService.setLocalValue(LocalStorage.CHANGE_MAIL_VALUE, 'from_registration');
     LocalStorageService.setLocalValue(LocalStorage.FROM_CANDIDATE_REGISTRATION, 'true');
