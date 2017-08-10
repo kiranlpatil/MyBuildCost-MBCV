@@ -308,6 +308,7 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
   onDone() {
       let _body: any = document.getElementsByTagName('BODY')[0];
       _body.scrollTop = -1;
+    this.saveComplexity();
     if (this.isCandidate) {
       this.saveComplexity();
     } else {
