@@ -674,6 +674,24 @@ control-messages {
   margin-top: 30px;
 }
 
+.common-footer {
+  footer {
+    bottom: -28px !important;
+    background: transparent !important;
+    text-align: center;
+  }
+}
+
+.value-portraot-footer {
+  footer {
+    display: inline-block;
+    margin: 0 auto;
+    max-width: 1200px;
+    width: 100%;
+    position: relative !important;
+  }
+}
+
 // Media Queries
 @media only screen and (max-width: 1024px) {
   .logout-dropdown {

@@ -319,7 +319,7 @@ export class ImagePath {
 export class ProjectAsset {
   public static APP_NAME = 'JobMosis';
   public static TAG_LINE = 'The Awesome Web Experience';
-  public static UNDER_LICENECE = '&#169; 2017 www.jobmosis.com.';
+  public static UNDER_LICENECE = '© 2017 www.jobmosis.com.';
 }
 
 export class Tooltip {
