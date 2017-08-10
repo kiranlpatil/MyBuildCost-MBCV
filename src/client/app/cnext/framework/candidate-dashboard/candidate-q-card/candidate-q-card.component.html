@@ -76,7 +76,8 @@
       </div>
     </div>
     <div class="company-profile-picture" title="Company Logo">
-      <img src="assets/c-next/company-details/company-logo-default.png" />
+      <img *ngIf="job.company_logo" [src]="getImagePath(job.company_logo)" >
+      <img *ngIf="!job.company_logo" src="assets/c-next/company-details/company-logo-default.png" />
     </div>
   </div>
 </div>
