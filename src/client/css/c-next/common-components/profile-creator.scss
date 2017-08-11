@@ -486,6 +486,10 @@
     .instructions {
       margin-top: 10px;
     }
+
+    .edit-error-msg {
+      max-width: 350px;
+    }
   }
 
   .section-container {
@@ -521,6 +525,10 @@
     }
 
     .heading {
+      font-size: 18px;
+      width: 100% !important;
+      margin: 0;
+
       .close-dialog {
         visibility: hidden;
 
@@ -528,6 +536,15 @@
           visibility: visible;
         }
       }
+    }
+    .button-group {
+      width: 100%;
+      position: relative;
+    }
+
+    .btn-prev {
+      left: 9px;
+      padding: 7px 8px;
     }
   }
 
@@ -557,6 +574,17 @@
 
   .profile-visibility-wrapper {
     margin-bottom: 0;
+  }
+
+  .section-container {
+    .tooltip-message {
+      display: none;
+    }
+  }
+
+  .scrollable-content {
+    overflow: visible;
+    padding: 0 15px 0 30px;
   }
 }
 

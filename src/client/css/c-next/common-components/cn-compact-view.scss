@@ -370,21 +370,30 @@
 
     .img-container {
       border: 0;
-      height: 65px;
-      width: 65px;
+      height: 50px;
+      width: 50px;
 
       .avtar {
-        height: 63px !important;
-        width: 63px !important;
+        height: 48px !important;
+        width: 48px !important;
       }
 
       .avtar > img {
-        height: 63px !important;
+        height: 48px !important;
       }
     }
   }
 
   .half-width {
     width: 100%;
+  }
+
+  .my-info {
+    height: 200px;
+    border-right: 0;
+  }
+
+  .edit-modal-content {
+    min-height: inherit;
   }
 }

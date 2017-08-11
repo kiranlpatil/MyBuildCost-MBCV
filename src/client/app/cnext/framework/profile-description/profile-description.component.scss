@@ -41,7 +41,10 @@
 
   .profile-details {
     display: inline-block;
-    width: 43%;
+    width: 40%;
+    label {
+      min-width: 160px;
+    }
   }
 }
 
@@ -80,12 +83,41 @@
   .user-name {
     .profile-name-first,
     .profile-name-last {
-      font-size: 16px;
+      font-size: 14px;
+    }
+  }
+
+  .compact-view {
+    .user-name {
+      width: calc(100% - 80px);
+      overflow: auto;
+      text-overflow: clip;
+      white-space: normal;
+      text-align: left;
+
+      .profile-name-first,
+      .profile-name-last {
+        font-size: 14px;
+      }
+    }
+
+    .profile-details {
+      display: block;
+      width: 100%;
+    }
+
+    .job-title {
+      font-size: 14px;
+      display: block;
     }
   }
 
   .col-sm-3,
   .col-sm-9 {
     padding: 0;
+  }
+
+  .scrollable-content {
+    width: 100% !important;
   }
 }
