@@ -1,6 +1,9 @@
-<div *ngIf="guidedTourStatus.indexOf(guidedTourImgOverlayScreensStackView) == -1 && isCandidate" style="position: fixed;height: 100%;width: 100%;z-index: 9999999999;top: 0;left: 0;">
-  <img src={{guidedTourImgOverlayScreensStackViewPath}} alt="Profile Picture" style="width: 100%;margin-top: -35px;">
-  <div style="position: absolute;width: 118px;height: 32px;right: 82px;bottom: 25px;"(click)="onGotItGuideTour()">
+<div class="guided-tour-section"
+     *ngIf="guidedTourStatus.indexOf(guidedTourImgOverlayScreensStackView) == -1 && isCandidate"
+     style="top: -43px;height: 110%;">
+  <img src={{guidedTourImgOverlayScreensStackViewPath}} alt="Profile Picture">
+  <div class="got-it-btn" (click)="onGotItGuideTour()">
+    <span>OK, Got it</span>
   </div>
 </div>
 <div class="modal-header">

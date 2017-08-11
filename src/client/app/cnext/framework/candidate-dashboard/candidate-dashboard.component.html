@@ -1,9 +1,11 @@
-<div *ngIf="candidate != undefined">
-  <div *ngIf="guidedTourStatus.indexOf(overlayScreensDashboardImgName) == -1" style="position: fixed;height: 100%;width: 100%;z-index: 9999999999;top: 0;left: 0;">
-    <img src={{overlayScreensDashboardImgPath}} alt="Profile Picture" style="width: 100%;margin-top: -35px;">
-    <div style="position: absolute;width: 118px;height: 32px;right: 82px;bottom: 25px;"(click)="tourGuideGotIt()">
-    </div>
+<div class="guided-tour-section" *ngIf="guidedTourStatus.indexOf(overlayScreensDashboardImgName) == -1">
+  <img src={{overlayScreensDashboardImgPath}} alt="Profile Picture">
+  <div class="got-it-btn" (click)="tourGuideGotIt()">
+    <span>OK, Got it</span>
   </div>
+</div>
+<div *ngIf="candidate != undefined">
+
   <cn-candidate-dashboard-header [candidate]="candidate"></cn-candidate-dashboard-header>
 
 

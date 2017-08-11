@@ -84,7 +84,7 @@
 <div class="modal dashboard-modal" [style.display]="getStyleModal()">
   <div class="modal-bg">
     <div class="compare-modal-dialog modal-md">
-      <div class="modal-content">
+      <div class="modal-content" style="position: initial">
         <div class="modal-body">
           <cn-job-compare-view [typeOfView]="'spa_job'" [candiadteId]="candidateId" [jobId]="jobId" (close)="closeJob($event)" ></cn-job-compare-view>
           <div class="common-footer">
