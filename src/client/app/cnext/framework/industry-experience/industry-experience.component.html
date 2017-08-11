@@ -5,7 +5,7 @@
     <!--Additional domain Exposure-->
     <h4 class="heading">Additional domain exposure<!-- <span class="sub-heading">(In additional to your core industry, select Industries In which you have work exposure / experience)</span>-->
     </h4>
-    <div class="error-messages edit-error-msg" *ngIf="submitStatus"><p>{{requiedIndustryExposureValidationMessage}}</p> </div>
+
     <div class="scrollable-content">
       <p *ngIf="isCandidate">{{suggestionMessageAboutCandidateDomain}}</p>
       <p *ngIf="!isCandidate">{{suggestionMessageAboutDomain}}</p>
@@ -19,12 +19,13 @@
         </label>
       </div>
     </div>
-    <cn-tool-tip [message]="tooltipCandidateMessage" *ngIf="isCandidate"></cn-tool-tip>
-    <cn-tool-tip [message]="tooltipRecruiterMessage" *ngIf="!isCandidate"></cn-tool-tip>
+
     <button class="btn-prev" (click)="onPrevious()"><span
       class="glyphicon glyphicon-chevron-left"></span></button>
 
     <div class="button-group clearfix">
+      <div class="error-messages edit-error-msg" *ngIf="submitStatus"><p>
+        {{requiedIndustryExposureValidationMessage}}</p></div>
       <!--<div class="saving-loader">Saving...</div>-->
       <button class="btn btn-primary" scrollTo scrollTargetSelector="#professional-details"
               (click)="onNext()" [hidden]="!showButton">NEXT
@@ -32,6 +33,9 @@
       <button class="btn btn-primary" (click)="onSave()" [hidden]="showButton">DONE
       </button>
     </div>
+
+    <cn-tool-tip [message]="tooltipCandidateMessage" *ngIf="isCandidate"></cn-tool-tip>
+    <cn-tool-tip [message]="tooltipRecruiterMessage" *ngIf="!isCandidate"></cn-tool-tip>
   </div>
 </div>
 <div class="section-container profeiciency-domain" *ngIf="highlightedSection.name !='IndustryExposure'">

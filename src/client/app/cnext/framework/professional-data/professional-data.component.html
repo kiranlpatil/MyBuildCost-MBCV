@@ -57,8 +57,6 @@
       </div>
     </div>
 
-    <cn-tool-tip [message]="tooltipMessage"></cn-tool-tip>
-
     <div class="button-group clearfix">
       <!--
                 <button class="btn btn-default"  (click)="highlightedSection.name='none'; highlightedSection.isDisable=false" [hidden]="showButton" >Cancel</button>
@@ -72,6 +70,8 @@
 
     <button class="btn-prev" (click)="onPrevious()"><span
       class="glyphicon glyphicon-chevron-left"></span></button>
+
+    <cn-tool-tip [message]="tooltipMessage"></cn-tool-tip>
   </div>
 </div>
 <div class="section-container" *ngIf="highlightedSection.name !='Professional-Details'">

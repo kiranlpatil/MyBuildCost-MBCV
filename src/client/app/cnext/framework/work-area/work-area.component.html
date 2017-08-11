@@ -3,7 +3,6 @@
   <div class="main-content clearfix edit-modal-content">
     <h4 class="heading" *ngIf="isCandidate">Select area of work that describes your current focus.</h4>
     <h4 class="heading" *ngIf="!isCandidate">In which area(s) is the candidate expected to work? </h4>
-    <div class="error-messages edit-error-msg" *ngIf="!isValid">{{validationMessage}}</div>
     <div class="scrollable-content">
       <div class="select-option" *ngFor="let item of roles;let i = index">
         <label>
@@ -15,17 +14,20 @@
         </label>
       </div>
     </div>
-    <cn-tool-tip [message]="tooltipCandidateMessage" *ngIf="isCandidate"></cn-tool-tip>
-    <cn-tool-tip [message]="tooltipRecruiterMessage" *ngIf="!isCandidate"></cn-tool-tip>
+
     <button class="btn-prev" (click)="onPrevious()"><span
       class="glyphicon glyphicon-chevron-left"></span></button>
 
     <div class="button-group clearfix">
+      <div class="error-messages edit-error-msg" *ngIf="!isValid">{{validationMessage}}</div>
       <!--<div class="saving-loader">Saving...</div>-->
       <button class="btn btn-primary" scrollTo scrollTargetSelector="#capability-area" (click)="onSave()"
               [hidden]="!showButton">Next</button>
       <button class="btn btn-primary" (click)="onSave()" [hidden]="showButton">Next</button>
     </div>
+
+    <cn-tool-tip [message]="tooltipCandidateMessage" *ngIf="isCandidate"></cn-tool-tip>
+    <cn-tool-tip [message]="tooltipRecruiterMessage" *ngIf="!isCandidate"></cn-tool-tip>
   </div>
 </div>
 

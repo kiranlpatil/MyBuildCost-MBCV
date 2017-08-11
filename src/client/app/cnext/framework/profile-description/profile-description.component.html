@@ -72,10 +72,6 @@
       </div>
     </div>
 
-    <div class="col-sm-3 no-padding">
-      <cn-tool-tip [message]="tooltipMessage"></cn-tool-tip>
-    </div>
-
     <div class="button-group clearfix">
      <!-- <div class="saving-loader">Saving...</div>-->
       <!-- <button class="btn btn-default" (click)="onCancel()"
@@ -84,6 +80,8 @@
       <button class="btn btn-primary" (click)="onNext()" [hidden]="!showButton">Next</button>
       <button class="btn btn-primary" (click)="onSave()" [hidden]="showButton">Done</button>
     </div>
+
+    <cn-tool-tip [message]="tooltipMessage"></cn-tool-tip>
 
   </div>
 </div>
