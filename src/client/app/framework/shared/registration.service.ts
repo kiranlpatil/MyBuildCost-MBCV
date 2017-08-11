@@ -37,6 +37,8 @@ constructor(private _router: Router, private themeChangeService: ThemeChangeServ
 
     LocalStorageService.setLocalValue(LocalStorage.IS_LOGGED_IN, 1);
     LocalStorageService.setLocalValue(LocalStorage.PROFILE_PICTURE, res.data.picture);
+    LocalStorageService.setLocalValue(LocalStorage.AFTER_RECRUITER_REGISTRATION_FORM, null);
+    LocalStorageService.setLocalValue(LocalStorage.AFTER_CANDIDATE_REGISTRATION_FORM, null);
     if (res.data.isCandidate === true) {
       if (res.data.isCompleted === true) {
         this._router.navigate([NavigationRoutes.APP_CANDIDATE_DASHBOARD]);

@@ -54,6 +54,10 @@ export class CandidateComponent implements OnInit {
   }
 
   ngOnInit() {
+    let val = LocalStorageService.getLocalValue(LocalStorage.AFTER_CANDIDATE_REGISTRATION_FORM);
+    if(val!==null) {
+      this._router.navigate([NavigationRoutes.VERIFY_USER]);
+    }
     this.validBirthYearList = this.dateService.createBirthYearList(this.year);
     this.mainHeaderMenuHideShow = 'applicant';
   }
@@ -107,6 +111,7 @@ export class CandidateComponent implements OnInit {
     LocalStorageService.setLocalValue(LocalStorage.MOBILE_NUMBER, this.userForm.value.mobile_number);
     LocalStorageService.setLocalValue(LocalStorage.CHANGE_MAIL_VALUE, 'from_registration');
     LocalStorageService.setLocalValue(LocalStorage.FROM_CANDIDATE_REGISTRATION, 'true');
+    LocalStorageService.setLocalValue(LocalStorage.AFTER_CANDIDATE_REGISTRATION_FORM, 'true');
     this._router.navigate([NavigationRoutes.VERIFY_USER]);
   }
 
