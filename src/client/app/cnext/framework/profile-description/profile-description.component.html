@@ -43,8 +43,8 @@
             &lt;!&ndash;<div class="error-messages" *ngIf="islocationValid && !isValid">You can't leave this empty.</div>&ndash;&gt;
           </div>-->
           <div class="form-group">
-            <label>Current Location</label>
-            <input type="text" class="form-control" placeholder="" (keydown)="keyDownCheck($event)"   [(ngModel)]="storedLocation.formatted_address" (setAddress)="getAddress($event)"  (city)="selectedCity($event)" mygoogleplace pattern="/^[a-zA-Z]+$/"/>
+            <label>Current Location</label><!--(keydown)="keyDownCheck($event)"-->
+            <input type="text" class="form-control" placeholder=""    [(ngModel)]="storedLocation.formatted_address" (setAddress)="getAddress($event)"  (city)="selectedCity($event)" mygoogleplace pattern="/^[a-zA-Z]+$/"/>
             <div class="error-messages" *ngIf="isLocationEmpty">{{locationErrorMessage}}</div>
             <div class="error-messages" *ngIf="isLocationInvalid">{{invalidLocationErrorMessage}}</div>
           </div>

@@ -12,9 +12,9 @@ import {ProfileDetailsService} from "../profile-detail-service";
   selector: 'cn-profile-description',
   templateUrl: 'profile-description.component.html',
   styleUrls: ['profile-description.component.css'],
-   host: {
+   /*host: {
          '(document:keydown)': 'keyboardInput($event)'
-       }
+       }*/
 })
 
 export class ProfileDescriptionComponent implements OnInit {
@@ -146,7 +146,7 @@ export class ProfileDescriptionComponent implements OnInit {
     _body.scrollTop = -1;
   }
 
-  keyDownCheck(e: any) {
+  /*keyDownCheck(e: any) {
     if (e.keyCode >= 65 && e.keyCode <= 90 || e.key == ',' || e.key == '13') {
       e.preventDefault();
       if (e.keyCode >= 65 && e.keyCode <= 90) {
@@ -156,7 +156,7 @@ export class ProfileDescriptionComponent implements OnInit {
     else {
       return;
     }
-  }
+  }*/
 
   onSave() {
     this.containsWhiteSpace = false;

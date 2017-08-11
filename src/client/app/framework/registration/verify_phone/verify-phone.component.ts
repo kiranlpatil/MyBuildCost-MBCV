@@ -1,13 +1,16 @@
-import {Component} from "@angular/core";
-import {Router} from "@angular/router";
-import {FormBuilder, FormGroup} from "@angular/forms";
-import {ImagePath, LocalStorage, Messages, NavigationRoutes, ProjectAsset} from "../../shared/constants";
-import {VerifyUser} from "./verify_phone";
-import {VerifyPhoneService} from "./verify-phone.service";
-import {MessageService} from "../../shared/message.service";
-import {Message} from "../../shared/message";
-import {LocalStorageService} from "../../shared/localstorage.service";
-import {ValidationService} from "../../shared/customvalidations/validation.service";
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { ImagePath, LocalStorage, Messages, ProjectAsset } from '../../shared/constants';
+import { VerifyUser } from './verify_phone';
+import { VerifyPhoneService } from './verify-phone.service';
+import { MessageService } from '../../shared/message.service';
+import { Message } from '../../shared/message';
+import { LocalStorageService } from '../../shared/localstorage.service';
+import { ValidationService } from '../../shared/customvalidations/validation.service';
+import { Login } from '../../login/login';
+import { LoginService } from '../../login/login.service';
+import { RegistrationService } from '../../shared/registration.service';
 
 @Component({
   moduleId: module.id,
@@ -25,10 +28,11 @@ export class VerifyPhoneComponent {
   UNDER_LICENCE: string;
   BODY_BACKGROUND: string;
   showModalStyle: boolean = false;
+  private loginModel = new Login();
   private submitStatus: boolean;
 
-  constructor(private _router: Router, private formBuilder: FormBuilder,
-              private verifyPhoneService: VerifyPhoneService, private messageService: MessageService) {
+  constructor(private _router: Router, private formBuilder: FormBuilder,private loginService: LoginService,
+              private verifyPhoneService: VerifyPhoneService, private messageService: MessageService, private registrationService: RegistrationService) {
 
     this.userForm = this.formBuilder.group({
       'otp': ['', ValidationService.requireOtpValidator]
@@ -47,7 +51,7 @@ export class VerifyPhoneComponent {
       return;
     }
     if(!this.userForm.valid){
-      return
+      return;
     }
 
     if (LocalStorageService.getLocalValue(LocalStorage.VERIFY_PHONE_VALUE) === 'from_registration') {
@@ -140,7 +144,13 @@ export class VerifyPhoneComponent {
   }
 
   navigateTo() {
-    this._router.navigate([NavigationRoutes.APP_LOGIN]);
+    this.loginModel.email=LocalStorageService.getLocalValue(LocalStorage.EMAIL_ID);
+    this.loginModel.password=LocalStorageService.getLocalValue(LocalStorage.PASSWORD);
+    //this._router.navigate([NavigationRoutes.APP_LOGIN]);
+    this.loginService.userLogin(this.loginModel)
+      .subscribe(
+        res => (this.registrationService.onSuccess(res)),
+        error => (this.registrationService.loginFail(error)));
   }
 
   getStyleModal() {
