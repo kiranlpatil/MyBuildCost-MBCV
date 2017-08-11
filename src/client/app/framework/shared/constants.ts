@@ -189,6 +189,8 @@ export class LocalStorage {
   public static VERIFY_PHONE_VALUE = 'verify_phone_value';
   public static CHANGE_MAIL_VALUE = 'change_mail_value';
   public static FROM_CANDIDATE_REGISTRATION = 'from_candidate_registration';
+  public static AFTER_CANDIDATE_REGISTRATION_FORM = 'after_candidate_registration_form';
+  public static AFTER_RECRUITER_REGISTRATION_FORM = 'after_recruiter_registration_form';
   public static VERIFY_CHANGE_PHONE_VALUE = 'verify_change_phone_value';
   public static CURRENT_JOB_POSTED_ID = 'current_job_posted_job_id';
   public static POSTED_JOB = 'posted_job';

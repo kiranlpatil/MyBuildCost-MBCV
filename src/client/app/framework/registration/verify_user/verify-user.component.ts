@@ -106,6 +106,7 @@ export class VerifyUserComponent implements OnInit {
   }
 
   verifySuccess(res: any) {
+    LocalStorageService.setLocalValue(LocalStorage.AFTER_RECRUITER_REGISTRATION_FORM, '');
     if (!this.chkMobile) {
       LocalStorageService.setLocalValue(LocalStorage.VERIFY_PHONE_VALUE, 'from_registration');
       this._router.navigate([NavigationRoutes.VERIFY_PHONE]);
