@@ -25,9 +25,9 @@ export class CandidateProfileService extends BaseService {
 
   getCandidateDetails(): Observable<any> {
     let headers = new Headers({'Content-Type': 'application/json'});
-    let options = new RequestOptions({headers: headers});
+   // let options = new RequestOptions({headers: headers});
     let url: string = API.CANDIDATE_PROFILE + '/' + LocalStorageService.getLocalValue(LocalStorage.USER_ID);
-    return this.http.get(url, options)
+    return this.http.get(url)
       .map(this.extractData)
       .catch(this.handleError);
   }

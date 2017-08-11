@@ -30,7 +30,7 @@ class AuthInterceptor {
         err.message = Messages.MSG_ERROR_INVALID_TOKEN + e.message;
         return done(err, false);
       }
-
+      console.log('decoded token',JSON.stringify(decoded));
       if (decoded.exp === undefined) {
         console.log("its an unsub call in AuthInterceptor");
       }
@@ -39,7 +39,47 @@ class AuthInterceptor {
           message: Messages.MSG_ERROR_WRONG_TOKEN
         });
       }
-      return done(null, false);
+      //return done(null, false);
+
+      var userRepository: UserRepository = new UserRepository();
+      userRepository.findById(decoded.iss, function (err, user) {
+        if (err) {
+          /*   next({
+           reason: Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
+           message: Messages.MSG_ERROR_INVALID_ID,
+           code: 401
+           });*/
+         /* return res.status(401).send({
+            'error': {
+              reason: Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
+              message: Messages.MSG_ERROR_INVALID_ID,
+              code: 401
+            }
+          });*/
+          return done(err);
+        } /*else if (user) {
+          req.user = user;
+          next();
+        }*/
+        if (!user) {
+          return done(null, false);
+        }
+      /*    else {
+          /!* next({
+           reason: Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
+           message: Messages.MSG_ERROR_USER_NOT_FOUND,
+           code: 401
+           });*!/
+          return res.status(401).send({
+            'error': {
+              reason: Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
+              message: Messages.MSG_ERROR_USER_NOT_FOUND,
+              code: 401
+            }
+          });
+        }*/
+        return done(null, user);
+      });
     }));
 
     passport.use(new FacebookTokenStrategy({
@@ -152,11 +192,20 @@ class AuthInterceptor {
 
   issueTokenWithUid(user: any) {
    console.log("In issue token");
+   console.log('user',JSON.stringify(user));
+   console.log('user',user.isCandidate);
+   var issuer:string;
+   if(user.userId) {
+     issuer=user.userId;
+   } else {
+     issuer=user._id;
+   }
+   console.log('issuer',issuer);
     var curDate = new Date();
     // expires in 60 days
     var expires = new Date(curDate.getTime() + (60 * 24 * 60 * 60 * 1000)); //(day*hr*min*sec*milisec)
     var token = jwt.encode({
-      iss: user._id, // issue
+      iss: issuer, // issue
       exp: expires.getTime(), // expiration time
     }, "thisisjwtsecret#@$#&(*0)%");
     return token;
@@ -167,52 +216,59 @@ class AuthInterceptor {
     passport.authenticate('bearer', {session: false},
       function (err: any, myuser: any, info: any) {
         if (err) {
+/*
 
           next({
             reason: Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
             message: Messages.MSG_ERROR_INVALID_TOKEN,
             code: 401
           });
-
+*/
+          return res.status(401).send({
+            'error': { reason: Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
+            message: Messages.MSG_ERROR_INVALID_TOKEN,
+            code: 401
+            }
+          });
         } else {
 
           if (req.headers.authorization.split(' ')[0].toLowerCase() !== 'bearer' || req.headers.authorization.split(' ').length !== 2) {
-            next({
+           /* next({
               reason: Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
               message: Messages.MSG_ERROR_IS_BEARER,
               code: 401
+            });*/
+            return res.status(401).send({
+              'error': {
+                reason: Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
+                message: Messages.MSG_ERROR_IS_BEARER,
+                code: 401
+              }
             });
           } else {
-            if (!req.params.id) {
-              next({
+            if (!myuser) {
+             /* next({
                 reason: Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
                 message: Messages.MSG_ERROR_PROVIDE_ID,
                 code: 401
-              });
-
-            }
-            else {
-              var userRepository: UserRepository = new UserRepository();
-              userRepository.findById(req.params.id, function (err, user) {
-                if (err) {
-                  next({
-                    reason: Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
-                    message: Messages.MSG_ERROR_INVALID_ID,
-                    code: 401
-                  });
+              });*/
+              /*return res.status(401).send({
+                'error': {
+                  reason: Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
+                  message: Messages.MSG_ERROR_PROVIDE_ID,
+                  code: 401
                 }
-                else if (user) {
-                  req.user = user;
-                  next();
-                } else {
-                  next({
-                    reason: Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
-                    message: Messages.MSG_ERROR_USER_NOT_FOUND,
-                    code: 401
-                  });
-
+              });*/
+              return res.status(401).send({
+                'error': { reason: Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
+                  message: Messages.MSG_ERROR_INVALID_TOKEN_2,
+                  code: 401
                 }
               });
+
+            } else {
+              req.user = myuser;
+              next();
             }
           }
         }
@@ -333,7 +389,7 @@ class AuthInterceptor {
           });
         }
       }
-    })
+    });
   }
 }
 Object.seal(AuthInterceptor);

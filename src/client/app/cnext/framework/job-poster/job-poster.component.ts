@@ -393,7 +393,7 @@ export class JobPosterComponent implements OnInit, OnChanges {
       if (role.capabilities) {
         for (let capability of role.capabilities) {
           if (capability.isPrimary) {
-            this.primaryCapability.push(capability.name);
+            this.primaryCapability.push(capability.code);
           }
         }
       }
