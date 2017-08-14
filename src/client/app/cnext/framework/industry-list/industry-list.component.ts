@@ -58,7 +58,7 @@ export class IndustryListComponent implements OnChanges {
   }
 
   onNext() {
-    if(this.choosedIndustry.code == ''){
+    if (this.choosedIndustry.code == '' || this.choosedIndustry.code == undefined) {
       this.isValid = false;
       return;
     }

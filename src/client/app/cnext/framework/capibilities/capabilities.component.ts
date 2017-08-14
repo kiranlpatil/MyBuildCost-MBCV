@@ -117,7 +117,7 @@ export class CapabilitiesComponent {
           this.isValid = false;
           this.validationMessage = `You can select ${ValueConstant.MAX_CAPABILITIES - this.primaryCapabilitiesNumber} more capabilities.`
         }
-        this.primaryNames.splice(this.primaryNames.indexOf(selectedCapability.name), 1);
+        this.primaryNames.splice(this.primaryNames.indexOf(selectedCapability.code), 1);
         selectedCapability.isPrimary = false;
       } else if (selectedCapability.isSecondary) {
         /*this.secondaryNames.splice(this.secondaryNames.indexOf(selectedCapability.name), 1);
