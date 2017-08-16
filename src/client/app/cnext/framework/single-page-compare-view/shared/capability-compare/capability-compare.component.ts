@@ -22,6 +22,7 @@ export class CapabilityCompareComponent  implements OnChanges {
   @Input() job_picture : string;
   isCandidate: boolean;
   showMore: boolean = false;
+  showMoreUnable: boolean = false;
   private capabilityCompareAboveMatch= Tooltip.CAPABILITY_COMPARE_ABOVE_MATCH;
   private capabilityCompareBelowMatch= Tooltip.CAPABILITY_COMPARE_BELOW_MATCH;
   private capabilityCompareExactMatch= Tooltip.CAPABILITY_COMPARE_EXACT_MATCH;
@@ -60,6 +61,10 @@ export class CapabilityCompareComponent  implements OnChanges {
 
     if(changes.rowsToShow && changes.rowsToShow.currentValue) {
       this.rowsToShow = changes.rowsToShow.currentValue;
+    }
+
+    if(this.capabilities.length>this.rowsToShow) {
+      this.showMoreUnable=true;
     }
   }
 
