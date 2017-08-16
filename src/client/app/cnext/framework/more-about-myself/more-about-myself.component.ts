@@ -3,7 +3,8 @@ import {MessageService} from "../../../framework/shared/message.service";
 import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
 import {Message} from "../../../framework/shared/message";
 import {Candidate, Section} from "../model/candidate";
-import {Messages, Tooltip} from "../../../framework/shared/constants";
+import {Messages, Tooltip, ImagePath} from "../../../framework/shared/constants";
+import {GuidedTourService} from "../guided-tour.service";
 
 @Component({
   moduleId: module.id,
@@ -28,8 +29,13 @@ export class MoreAboutMyselfComponent implements OnInit {
   tooltipMessage: string = '<ul><li><p>1. '+ Tooltip.MORE_ABOUT_MYSELF_TOOLTIP+'</p></li></ul>';
   private remainingWordsMessage = Messages.MSG_ERROR_VALIDATION_MAX_WORD_ALLOWED;
 
+  private guidedTourStatus:string[] = new Array(0);
+  private guidedTourImgOverlayScreensEmploymentHistory:string;
+  private guidedTourImgOverlayScreensEmploymentHistoryPath:string;
+  private isGuideImg:boolean = false;
+
   constructor(private messageService: MessageService,
-              private profileCreatorService: CandidateProfileService) {
+              private profileCreatorService: CandidateProfileService,private guidedTourService:GuidedTourService) {
     this.reSize = new Array(1);
   }
 
@@ -79,11 +85,30 @@ export class MoreAboutMyselfComponent implements OnInit {
     this.onComplete.emit(this.candidate.aboutMyself);
   }
   onNext() {
+    this.isGuidedTourImgRequire();
+  }
+
+  isGuidedTourImgRequire() {
+    this.isGuideImg = true;
+    this.guidedTourImgOverlayScreensEmploymentHistory = ImagePath.CANDIDATE_OERLAY_SCREENS_EMPLOYMENT_HISTORY;
+    this.guidedTourImgOverlayScreensEmploymentHistoryPath = ImagePath.BASE_ASSETS_PATH_DESKTOP + ImagePath.CANDIDATE_OERLAY_SCREENS_EMPLOYMENT_HISTORY;
+    this.guidedTourStatus = this.guidedTourService.getTourStatus();
+    if(this.guidedTourStatus.indexOf(this.guidedTourImgOverlayScreensEmploymentHistory) !== -1) {
+     this.onNextAction();
+    }
+  }
+
+  onNextAction() {
     this.highlightedSection.name='EmploymentHistory';
     this.highlightedSection.isDisable=false;
     this.onComplete.emit(this.candidate.aboutMyself);
     let _body: any = document.getElementsByTagName('BODY')[0];
     _body.scrollTop = -1;
+  }
+
+  onGotItGuideTour() {
+    this.guidedTourStatus = this.guidedTourService.updateTourStatus(ImagePath.CANDIDATE_OERLAY_SCREENS_EMPLOYMENT_HISTORY,true);
+    this.isGuidedTourImgRequire();
   }
 
   onSave() {

@@ -3,13 +3,11 @@
   <div class="main-content edit-modal-content clearfix" >
 
     <h4 class="heading">Employment History (Optional)</h4>
-    <div class="error-messages edit-error-msg" *ngIf="!isValidservicePeriod">
-      <p>{{serviceValidMessage}}</p>
-    </div>
+
     <div class="scrollable-content" #EmloymentHostoryParent>
       <form class="description-form" [formGroup]="employeeHistory" novalidate>
         <div class="row">
-          <div class="col-sm-8 no-padding" formArrayName="employeeHistories" #EmloymentHostoryInner>
+          <div class="col-md-8 col-sm-10 no-padding" formArrayName="employeeHistories" #EmloymentHostoryInner>
             <div *ngFor="let history of employeeHistory.controls.employeeHistories.controls; let i=index"
                  class="panel panel-default">
               <div>
@@ -26,9 +24,10 @@
       </form>
     </div>
 
-    <cn-tool-tip [message]="tooltipMessage"></cn-tool-tip>
-
     <div class="button-group clearfix">
+      <div class="error-messages edit-error-msg" *ngIf="!isValidservicePeriod">
+        <p>{{serviceValidMessage}}</p>
+      </div>
       <!--<div class="saving-loader">Saving...</div>-->
       <button type="submit" class="btn btn-primary"
               (click)="postData('next')" *ngIf="!candidate.isSubmitted"
@@ -43,6 +42,8 @@
     </div>
     <button class="btn-prev" (click)="onPrevious()"><span
       class="glyphicon glyphicon-chevron-left"></span></button>
+
+    <cn-tool-tip [message]="tooltipMessage"></cn-tool-tip>
   </div>
 </div>
 
@@ -67,7 +68,7 @@
                   (click)="onEdit()"
                   title="Edit Employment History"></button>
         </h4>
-        <ul>
+        <ul class="clearfix">
           <div *ngFor="let item of candidate.employmentHistory;let i = index">
             <div *ngIf="i == 0">
               <li>

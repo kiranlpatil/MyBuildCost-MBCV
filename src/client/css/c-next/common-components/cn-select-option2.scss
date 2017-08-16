@@ -119,13 +119,27 @@
 }
 
 @media screen and (max-width: 767px) {
-  .select-option {
+  .item-radio {
     margin: 5px 10px 5px 0;
   }
-  .select-option > label {
+
+  .item-radio > label {
+    padding: 0 15px 0 22px;
+
     & > input {
       & + span {
-        font-size: 10px;
+        font-size: 12px;
+      }
+
+      & ~ .check {
+        height: 14px;
+        width: 14px;
+        top: 4px;
+
+        &::before {
+          height: 6px;
+          width: 6px;
+        }
       }
     }
   }

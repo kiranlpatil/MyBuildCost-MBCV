@@ -25,15 +25,15 @@
     <div class="col-sm-12 no-padding">
       <div class="worked-from col-sm-12 no-padding">
         <div formGroupName="from">
-          <div class="col-sm-3 no-padding">
+          <div class="col-md-3 col-sm-4 no-padding">
             <label>From Date</label>
           </div>
-          <div class="col-sm-5 padding-left5">
+          <div class="col-md-5 col-sm-4 padding-left5">
             <select class="select" formControlName="month" required>
               <option value ={{month}} *ngFor="let month of monthList">{{month}}</option>
             </select>
           </div>
-          <div class="col-sm-4 padding-left5">
+          <div class="col-md-4 col-sm-4 padding-left5">
             <select class="select" formControlName="year" (change)="onFromYear($event.target.value)" required>
               <option value="{{year}}" *ngFor="let year of yearList | minrange:toYear" >{{year}}</option>
             </select>
@@ -43,15 +43,15 @@
 
       <div class="worked-to col-sm-12 no-padding">
         <div formGroupName="to">
-          <div class="col-sm-3 no-padding">
+          <div class="col-md-3 col-sm-4 no-padding">
             <label>To Date</label>
           </div>
-          <div class="col-sm-5 padding-right5">
+          <div class="col-md-5 col-sm-4 padding-right5">
             <select class="select" formControlName="month" required>
               <option value ={{month}} *ngFor="let month of monthList" >{{month}}</option>
             </select>
           </div>
-          <div class="col-sm-4 padding-left5">
+          <div class="col-md-4 col-sm-4 padding-left5">
             <select class="select" formControlName="year" (change)="onToYear($event.target.value)" required>
               <option value="{{year}}" *ngFor="let year of yearList | maxrange:fromYear" >{{year}}</option>
             </select>

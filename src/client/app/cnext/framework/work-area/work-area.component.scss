@@ -13,3 +13,27 @@
     }
   }
 }
+
+@media only screen and (max-width: 767px) {
+  .compact-view {
+    .option-list {
+      position: relative;
+      margin-left: 17px;
+      display: block;
+      width: 100%;
+
+      &::before {
+        display: block;
+        position: absolute;
+        content: '';
+        border-radius: 100%;
+        height: 5px;
+        width: 5px;
+        top: 8px;
+        left: -18px;
+        margin: auto;
+        background: $name;
+      }
+    }
+  }
+}

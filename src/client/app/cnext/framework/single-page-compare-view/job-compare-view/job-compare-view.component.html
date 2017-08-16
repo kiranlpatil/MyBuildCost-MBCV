@@ -1,3 +1,11 @@
+<div class="guided-tour-section"
+     *ngIf="guidedTourStatus.indexOf(guidedTourImgOverlayScreensStackView) == -1 && isCandidate"
+     style="top: -43px;height: 110%;">
+  <img src={{guidedTourImgOverlayScreensStackViewPath}} alt="Profile Picture">
+  <div class="got-it-btn" (click)="onGotItGuideTour()">
+    <span>OK, Got it</span>
+  </div>
+</div>
 <div class="modal-header">
 
   <div *ngIf="typeOfView =='spa_job' && recruiter != undefined">

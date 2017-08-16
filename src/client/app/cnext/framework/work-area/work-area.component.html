@@ -1,9 +1,15 @@
+<div class="guided-tour-section"
+     *ngIf="guidedTourStatus.indexOf(guidedTourImgOverlayScreensCapabilities) == -1 && isCandidate && isGuideImg == true">
+  <img src={{guidedTourImgOverlayScreensCapabilitiesPath}} alt="Profile Picture">
+  <div class="got-it-btn" (click)="onGotItGuideTour()">
+    <span>OK, Got it</span>
+  </div>
+</div>
 <div class="modal-bg" *ngIf="highlightedSection.name=='Work-Area'"></div>
 <div class="section-container" *ngIf="highlightedSection.name=='Work-Area'">
   <div class="main-content clearfix edit-modal-content">
     <h4 class="heading" *ngIf="isCandidate">Select area of work that describes your current focus.</h4>
     <h4 class="heading" *ngIf="!isCandidate">In which area(s) is the candidate expected to work? </h4>
-    <div class="error-messages edit-error-msg" *ngIf="!isValid">{{validationMessage}}</div>
     <div class="scrollable-content">
       <div class="select-option" *ngFor="let item of roles;let i = index">
         <label>
@@ -11,13 +17,15 @@
                  value="{{item.name}}" (click)="selectOption(item,$event)"
                  [checked]="isSelected(item.code)"/>
           <span>{{item.name}}</span>
+          <div class="check"></div>
         </label>
       </div>
     </div>
-    <cn-tool-tip [message]="tooltipCandidateMessage" *ngIf="isCandidate"></cn-tool-tip>
-    <cn-tool-tip [message]="tooltipRecruiterMessage" *ngIf="!isCandidate"></cn-tool-tip>
+
     <button class="btn-prev" (click)="onPrevious()"><span
       class="glyphicon glyphicon-chevron-left"></span></button>
+
+    <div class="error-messages edit-error-msg" *ngIf="!isValid">{{validationMessage}}</div>
 
     <div class="button-group clearfix">
       <!--<div class="saving-loader">Saving...</div>-->
@@ -25,6 +33,9 @@
               [hidden]="!showButton">Next</button>
       <button class="btn btn-primary" (click)="onSave()" [hidden]="showButton">Next</button>
     </div>
+
+    <cn-tool-tip [message]="tooltipCandidateMessage" *ngIf="isCandidate"></cn-tool-tip>
+    <cn-tool-tip [message]="tooltipRecruiterMessage" *ngIf="!isCandidate"></cn-tool-tip>
   </div>
 </div>
 

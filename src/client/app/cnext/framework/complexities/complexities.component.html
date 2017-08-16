@@ -1,3 +1,10 @@
+<div class="guided-tour-section"
+     *ngIf="guidedTourStatus.indexOf(guidedTourImgOverlayScreensKeySkills) == -1 && isGuideImg == true && isCandidate">
+  <img src={{guidedTourImgOverlayScreensKeySkillsPath}} alt="Profile Picture">
+  <div class="got-it-btn" (click)="onGotItGuideTour()">
+    <span>OK, Got it</span>
+  </div>
+</div>
 <div class="modal-bg" *ngIf="highlightedSection.name=='Complexities'"></div>
 <div class="section-container clearfix" *ngIf="highlightedSection.name=='Complexities'">
   <div class="main-content clearfix edit-modal-content">
@@ -6,8 +13,7 @@
         <span class="capability-name">{{currentComplexityDetails.capability_name}}</span></h4>
       <h4 class="heading" *ngIf="!isCandidate && currentCapability">{{currentRecruiterQuestion}}<span class="capability-name">{{currentCapability.name}}</span>
       </h4>
-      <div class="error-messages edit-error-msg" *ngIf="!isValid && isCandidate"><p>{{requiedValidationMessageCandidate}}</p></div>
-      <div class="error-messages edit-error-msg" *ngIf="!isValid && !isCandidate"><p>{{requiedValidationMessageRecruiter}}</p></div>
+
       <div class="scrollable-content" *ngIf="isCandidate">
         <cn-question-answer [complexityDetails]="currentComplexityDetails"
                             (onComplete)="onAnswered($event)"></cn-question-answer>
@@ -16,9 +22,12 @@
         <cn-multiple-question-answer [capabilityDetails]="currentCapability" (onComplete)="onCapabilityAnswered($event)"
                                      (onQuestionComplete)="oncurrentComplexityAnswered($event)"></cn-multiple-question-answer>
       </div>
-      <cn-tool-tip [message]="tooltipCandidateMessage" *ngIf="isCandidate"></cn-tool-tip>
-      <cn-tool-tip [message]="tooltipRecruiterMessage" *ngIf="!isCandidate"></cn-tool-tip>
+
       <div class="button-group clearfix clear">
+        <div class="error-messages edit-error-msg" *ngIf="!isValid && isCandidate"><p>
+          {{requiedValidationMessageCandidate}}</p></div>
+        <div class="error-messages edit-error-msg" *ngIf="!isValid && !isCandidate"><p>
+          {{requiedValidationMessageRecruiter}}</p></div>
         <!--<div class="saving-loader">Saving...</div>-->
         <button class="btn btn-primary" [hidden]="singleComplexity" (click)="onNext()"
                 *ngIf="isCandidate">Next
@@ -32,9 +41,10 @@
         <button class="btn btn-primary" [hidden]="!singleComplexity" (click)="onDone()"
                 *ngIf="!isCandidate">Done
         </button>
+
+        <span class="question-count" [hidden]="singleComplexity" *ngIf="isCandidate">{{currentComplexity+1}} of {{complexityIds.length}}</span>
+        <span class="question-count" [hidden]="singleComplexity" *ngIf="!isCandidate">{{currentCapabilityNumber+1}} of {{capabilities.length}}</span>
       </div>
-      <span class="question-count" [hidden]="singleComplexity" *ngIf="isCandidate">{{currentComplexity+1}} of {{complexityIds.length}}</span>
-      <span class="question-count" [hidden]="singleComplexity" *ngIf="!isCandidate">{{currentCapabilityNumber+1}} of {{capabilities.length}}</span>
       <!--
           <span  class="question-count"> {{currentComplexityDetails.complexity_number}}</span><span *ngIf="currentComplexityDetails.total_complexity_in_capability"> of {{currentComplexityDetails.total_complexity_in_capability}}</span>
       -->
@@ -42,6 +52,9 @@
       ></span></button>
       <button class="btn-prev" (click)="onPreviousCapability()" *ngIf="!isCandidate"><span class="glyphicon glyphicon-chevron-left"
       ></span></button>
+
+      <cn-tool-tip [message]="tooltipCandidateMessage" *ngIf="isCandidate"></cn-tool-tip>
+      <cn-tool-tip [message]="tooltipRecruiterMessage" *ngIf="!isCandidate"></cn-tool-tip>
     </div>
   </div>
 </div>
@@ -51,7 +64,7 @@
 
         <h4 class="heading-compact">Capabilities
           <span class="add-more" (click)="highlightedSection.name='Capabilities'"><span class="glyphicon glyphicon-plus-sign"></span>Add More</span>
-          <button class="btn-edit" (click)="edit()"
+          <button class="btn-edit capability-edit" (click)="edit()"
                   [hidden]="highlightedSection.isDisable" title="Edit Capability Details"></button>
         </h4>
 

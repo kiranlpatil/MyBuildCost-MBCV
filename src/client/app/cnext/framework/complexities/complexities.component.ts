@@ -2,12 +2,13 @@ import {Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, V
 import {Role} from "../model/role";
 import {ComplexityService} from "../complexity.service";
 import {LocalStorageService} from "../../../framework/shared/localstorage.service";
-import {LocalStorage, Messages, Tooltip, ValueConstant} from "../../../framework/shared/constants";
+import {LocalStorage, Messages, Tooltip, ValueConstant, ImagePath} from "../../../framework/shared/constants";
 import {Section} from "../model/candidate";
 import {ComplexityDetails} from "../model/complexity-detail";
 import {ComplexityComponentService} from "./complexity.service";
 import {JobCompareService} from "../single-page-compare-view/job-compare-view/job-compare-view.service";
 import {Capability} from "../model/capability";
+import {GuidedTourService} from "../guided-tour.service";
 
 @Component({
   moduleId: module.id,
@@ -44,6 +45,7 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
   private currentRecruiterQuestion: string;
   private requiedValidationMessageCandidate = Messages.MSG_ERROR_VALIDATION_COMPLEXITY_REQUIRED_CANDIDATE;
   private requiedValidationMessageRecruiter = Messages.MSG_ERROR_VALIDATION_COMPLEXITY_REQUIRED_RECRUITER;
+
   tooltipCandidateMessage: string = '<ul><li>' +
     '<p>1. '+ Tooltip.COMPLEXITIES_CANDIDATE_TOOLTIP_1+'</p></li>'+
     '<li><p>1. '+Tooltip.COMPLEXITIES_CANDIDATE_TOOLTIP_2+'</p></li></ul>';
@@ -54,10 +56,15 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
   @ViewChild('save')
   private _inputElement1: ElementRef;
   private maxCapabilitiesToShow = ValueConstant.MAX_CAPABILITIES_TO_SHOW;
+  private guidedTourStatus:string[] = new Array(0);
+  private guidedTourImgOverlayScreensKeySkills:string;
+  private guidedTourImgOverlayScreensKeySkillsPath:string;
+  private isGuideImg:boolean = false;
 
   constructor(private complexityService: ComplexityService,
               private complexityComponentService: ComplexityComponentService,
-              private jobCompareService: JobCompareService) {
+              private jobCompareService: JobCompareService,
+              private guidedTourService:GuidedTourService) {
   }
 
   ngOnInit() {
@@ -160,7 +167,7 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
     }
    }*/
 
-  saveComplexity() {
+  onSaveComplexity() {
     this.isValid = true;
     let jobId: string;
     if (!this.isCandidate) {
@@ -184,6 +191,10 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
     }
     this.highlightedSection.isDisable = false;
     this.onComplete.emit();
+  }
+
+  saveComplexity() {
+    this.isGuidedTourImgRequire();
   }
 
   onAnswered(complexityDetail: ComplexityDetails) {
@@ -256,8 +267,8 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
 
   onNext() {
     this.isValid = true;
-      let _body: any = document.getElementsByTagName('BODY')[0];
-      _body.scrollTop = -1;
+    let _body: any = document.getElementsByTagName('BODY')[0];
+    _body.scrollTop = -1;
     if (this.complexities[this.complexityIds[this.currentComplexity]] === -1) {
       this.isValid = false;
       return;
@@ -276,12 +287,31 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
       }
     } else if (this.currentComplexity <= this.complexityIds.length - 1) {
       if (this.singleComplexity === false) {
-          this.getComplexityDetails(this.complexityIds[++this.currentComplexity]);
+        this.getComplexityDetails(this.complexityIds[++this.currentComplexity]);
       }
     }
-   /* setTimeout(() => {
-      this.slideToRight = false;
-    }, 3000);*/
+    /* setTimeout(() => {
+     this.slideToRight = false;
+     }, 3000);*/
+
+  }
+
+  isGuidedTourImgRequire() {
+    this.isGuideImg = true;
+    this.guidedTourImgOverlayScreensKeySkills = ImagePath.CANDIDATE_OERLAY_SCREENS_KEY_SKILLS;
+    this.guidedTourImgOverlayScreensKeySkillsPath = ImagePath.BASE_ASSETS_PATH_DESKTOP + ImagePath.CANDIDATE_OERLAY_SCREENS_KEY_SKILLS;
+    this.guidedTourStatus = this.guidedTourService.getTourStatus();
+    if(this.guidedTourStatus.indexOf(this.guidedTourImgOverlayScreensKeySkills) !== -1 && this.isCandidate) {
+      this.onSaveComplexity();
+    }
+    if(this.isCandidate == false){
+      this.onSaveComplexity();
+    }
+  }
+
+  onGotItGuideTour() {
+    this.guidedTourStatus = this.guidedTourService.updateTourStatus(ImagePath.CANDIDATE_OERLAY_SCREENS_KEY_SKILLS,true);
+    this.isGuidedTourImgRequire();
   }
 
   onPrevious() {

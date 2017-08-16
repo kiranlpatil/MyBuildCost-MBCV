@@ -1,8 +1,9 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from "@angular/core";
 import {Role} from "../model/role";
 import {Section} from "../model/candidate";
-import {LocalStorage, Messages, Tooltip, ValueConstant} from "../../../framework/shared/constants";
+import {LocalStorage, Messages, Tooltip, ValueConstant, ImagePath} from "../../../framework/shared/constants";
 import {LocalStorageService} from "../../../framework/shared/localstorage.service";
+import {GuidedTourService} from "../guided-tour.service";
 
 @Component({
   moduleId: module.id,
@@ -33,7 +34,14 @@ export class WorkAreaComponent implements OnInit,OnChanges {
   private showButton: boolean = true;
   private isValid:boolean = true;
   private validationMessage: string;
+  private guidedTourStatus:string[] = new Array(0);
+  private guidedTourImgOverlayScreensCapabilities:string;
+  private guidedTourImgOverlayScreensCapabilitiesPath:string;
+  private isGuideImg:boolean = false;
 
+  constructor(private guidedTourService:GuidedTourService) {
+
+  }
   ngOnInit() {
     if (LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE) === 'true') {
       this.isCandidate = true;
@@ -98,6 +106,26 @@ export class WorkAreaComponent implements OnInit,OnChanges {
   }
 
   onNext() {
+    this.isGuidedTourImgRequire();
+  }
+  isGuidedTourImgRequire() {
+    this.isGuideImg = true;
+    this.guidedTourImgOverlayScreensCapabilities = ImagePath.CANDIDATE_OERLAY_SCREENS_CAPABILITIES;
+    this.guidedTourImgOverlayScreensCapabilitiesPath = ImagePath.BASE_ASSETS_PATH_DESKTOP + ImagePath.CANDIDATE_OERLAY_SCREENS_CAPABILITIES;
+    this.guidedTourStatus = this.guidedTourService.getTourStatus();
+    if(this.guidedTourStatus.indexOf(this.guidedTourImgOverlayScreensCapabilities) !== -1 && this.isCandidate) {
+      this.onNextAction();
+    } 
+    if(this.isCandidate == false){
+      this.onNextAction();
+    }
+  }
+  onGotItGuideTour() {
+    this.guidedTourStatus = this.guidedTourService.updateTourStatus(ImagePath.CANDIDATE_OERLAY_SCREENS_CAPABILITIES,true);
+    this.isGuidedTourImgRequire()
+  }
+
+  onNextAction() {
     if(this.savedSelectedRoles.length === 0){
       this.validationMessage = Messages.MSG_ERROR_VALIDATION_AREAS_WORKED_REQUIRED;
       this.isValid = false;

@@ -1,10 +1,9 @@
 <div class="modal-bg" *ngIf="highlightedSection.name=='Profile'"></div>
 <div class="section-container" *ngIf="highlightedSection.name=='Profile'">
   <div class="main-content clearfix edit-modal-content" profiledetails>
-
+    <h4 class="heading">Enter your profile details</h4>
     <div class="col-sm-9 no-padding">
-      <h4 class="heading">Enter your profile details</h4>
-      <div class="col-sm-4 text-center my-info">
+      <div class="col-md-4 col-sm-5 text-center my-info">
         <div class="description-container">
           <div class="image-container">
             <cn-profile-picture (onPictureUpload)="onPictureUpload($event)"></cn-profile-picture>
@@ -15,7 +14,7 @@
           </div>
         </div>
       </div>
-        <div class="scrollable-content col-sm-8">
+      <div class="scrollable-content">
         <div class="form-container">
 
           <div class="form-group">
@@ -73,10 +72,6 @@
       </div>
     </div>
 
-    <div class="col-sm-3 no-padding">
-      <cn-tool-tip [message]="tooltipMessage"></cn-tool-tip>
-    </div>
-
     <div class="button-group clearfix">
      <!-- <div class="saving-loader">Saving...</div>-->
       <!-- <button class="btn btn-default" (click)="onCancel()"
@@ -85,6 +80,8 @@
       <button class="btn btn-primary" (click)="onNext()" [hidden]="!showButton">Next</button>
       <button class="btn btn-primary" (click)="onSave()" [hidden]="showButton">Done</button>
     </div>
+
+    <cn-tool-tip [message]="tooltipMessage"></cn-tool-tip>
 
   </div>
 </div>
@@ -109,7 +106,6 @@
           <span class="profile-name-last">{{candidate.basicInformation.last_name}}</span>
           <span class="job-title" title="{{candidate.jobTitle}}">  {{candidate.jobTitle}}</span>
         </p>
-
         <p class="profile-details truncate-text"><label>Current Company</label> {{candidate.professionalDetails.currentCompany}}</p>
         <p class="profile-details truncate-text" *ngIf="candidate.location && candidate.location.city"><label>Current
           Location</label> {{candidate.location.city}}</p>

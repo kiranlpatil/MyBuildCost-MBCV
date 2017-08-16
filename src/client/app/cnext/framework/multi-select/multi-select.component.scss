@@ -121,6 +121,17 @@ $message: #0d75fa;
   }
 }
 
+@media screen and (max-width: 768px) {
+  .keyskill-form-group {
+    .form-control {
+      padding: 6px 160px 0 0;
+    }
+    .add-keyskill {
+      width: 150px;
+    }
+  }
+}
+
 @media screen and (max-width: 767px) {
   .list {
     padding: 0;
@@ -130,7 +141,7 @@ $message: #0d75fa;
 
       .btn-create-profile {
         font-size: 10px;
-        padding: 4px 10px;
+        padding: 0 10px;
         text-align: left;
         white-space: normal;
 
@@ -146,6 +157,15 @@ $message: #0d75fa;
 
     .form-group {
       margin: 0 0 15px;
+    }
+  }
+
+  .keyskill-form-group {
+    .form-control {
+      padding: 6px 50px 0 0;
+    }
+    .add-keyskill {
+      width: 43px;
     }
   }
 }

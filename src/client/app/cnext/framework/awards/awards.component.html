@@ -1,13 +1,21 @@
+<div class="guided-tour-section"
+     *ngIf="guidedTourStatus.indexOf(guidedTourImgOverlayScreensProfile) == -1 && isGuideImg == true">
+  <img src={{guidedTourImgOverlayScreensProfilePath}} alt="Profile Picture">
+  <div class="got-it-btn" (click)="onGotItGuideTour()">
+    <span>OK, Got it</span>
+  </div>
+</div>
+<div class="clearfix divider clear visible-xs">&nbsp;</div>
 <div class="modal-bg" *ngIf="highlightedSection.name=='Awards'"></div>
-<div class="section-container clear"  *ngIf="highlightedSection.name =='Awards'">
+<div class="section-container clear" *ngIf="highlightedSection.name =='Awards'">
   <div class="main-content edit-modal-content clearfix">
     <h4 class="heading">Awards (Optional)</h4>
     <div class="scrollable-content" #awardParentDiv>
       <form class="description-form" [formGroup]="awardDetail" novalidate>
         <div class="row">
-          <div class="col-sm-8 no-padding" formArrayName="awards" #awardInnerDiv>
+          <div class="col-md-8 col-sm-10 no-padding" formArrayName="awards" #awardInnerDiv>
             <div *ngFor="let history of awardDetail.controls.awards.controls; let i=index"
-                     class="panel panel-default">
+                 class="panel panel-default">
               <div>
                 <span class="glyphicon glyphicon-trash pull-right"
                       *ngIf="awardDetail.controls.awards.controls.length>0 && awardDetail.controls.awards.controls.length !==1 "
@@ -22,8 +30,6 @@
       </form>
     </div>
 
-    <cn-tool-tip [message]="tooltipMessage"></cn-tool-tip>
-
     <div class="button-group clearfix">
       <!--<div class="saving-loader">Saving...</div>-->
       <button type="submit" class="btn btn-primary" scrollTo scrollTargetSelector="#certification"
@@ -37,7 +43,9 @@
       </button>
     </div>
     <button class="btn-prev" (click)="onPrevious()"><span
-      class="glyphicon glyphicon-chevron-left"></span></button>
+            class="glyphicon glyphicon-chevron-left"></span></button>
+
+    <cn-tool-tip [message]="tooltipMessage"></cn-tool-tip>
   </div>
 </div>
 
@@ -60,7 +68,7 @@
           Awards <span class="optional-field">(Optional)</span>
           <button class="btn-edit" (click)="onEdit()" title="Edit Awards"></button>
         </h4>
-        <ul>
+        <ul class="clearfix">
           <div *ngFor="let item of candidate.awards;let i = index">
             <div *ngIf="i == 0">
               <li>

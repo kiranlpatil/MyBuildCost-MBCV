@@ -88,6 +88,12 @@
   right: 70px;
 }
 
+@media only screen and (max-width: 1280px) {
+  .skills-lists {
+    width: 200px;
+  }
+}
+
 @media only screen and (max-width: 1023px) {
   .skills-lists {
     width: 160px;

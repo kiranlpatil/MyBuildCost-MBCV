@@ -70,6 +70,11 @@ export class RecruiterComponent implements OnInit {
   }
 
   ngOnInit() {
+    let val = LocalStorageService.getLocalValue(LocalStorage.AFTER_RECRUITER_REGISTRATION_FORM);
+    if(val!==null) {
+      if(val =="true") {
+      this._router.navigate([NavigationRoutes.VERIFY_USER]);}
+    }
     this.model = this.recruiterForm.value;
     this.mainHeaderMenuHideShow = 'recruiter';
     let headers = new Headers({'Content-Type': 'application/json'});
@@ -204,6 +209,7 @@ export class RecruiterComponent implements OnInit {
     LocalStorageService.setLocalValue(LocalStorage.COMPANY_NAME, this.recruiterForm.value.company_name);
     LocalStorageService.setLocalValue(LocalStorage.CHANGE_MAIL_VALUE, 'from_registration');
     LocalStorageService.setLocalValue(LocalStorage.FROM_CANDIDATE_REGISTRATION, 'false');
+    LocalStorageService.setLocalValue(LocalStorage.AFTER_RECRUITER_REGISTRATION_FORM, "true");
     this._router.navigate([NavigationRoutes.VERIFY_USER]);
   }
 

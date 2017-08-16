@@ -2,7 +2,8 @@ import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} f
 import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
 import {Candidate, Section} from "../model/candidate";
 import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {Tooltip} from "../../../framework/shared/constants";
+import {Tooltip, ImagePath} from "../../../framework/shared/constants";
+import {GuidedTourService} from "../guided-tour.service";
 
 
 @Component({
@@ -29,8 +30,11 @@ export class AwardsComponent implements OnInit {
   private showButton: boolean = true;
   private submitStatus: boolean;
   tooltipMessage: string = '<ul><li><p>1. '+Tooltip.AWARDS_TOOLTIP+'</p></li></ul>';
-
-  constructor(private _fb: FormBuilder, private profileCreatorService: CandidateProfileService) {
+  private guidedTourStatus:string[] = new Array(0);
+  private guidedTourImgOverlayScreensProfile:string;
+  private guidedTourImgOverlayScreensProfilePath:string;
+  private isGuideImg:boolean;
+  constructor(private _fb: FormBuilder, private profileCreatorService: CandidateProfileService,private guidedTourService:GuidedTourService) {
     this.awardDetail = this._fb.group({
       awards: this._fb.array([])
     });
@@ -41,6 +45,7 @@ export class AwardsComponent implements OnInit {
     this.awardDetail.controls['awards'].valueChanges.subscribe(x => {
       this.isButtonShow = true;
     });
+    this.isGuideImg = false;
   }
 
   ngAfterViewChecked() {
@@ -185,9 +190,24 @@ export class AwardsComponent implements OnInit {
   }
 
   onNext() {
-    this.onComplete.emit();
-    this.highlightedSection.name = 'none';
-    this.highlightedSection.isDisable = false;
+    this.isGuidedTourImgRequire();
+  }
+
+  isGuidedTourImgRequire() {
+    this.isGuideImg = true;
+    this.guidedTourImgOverlayScreensProfile = ImagePath.CANDIDATE_OERLAY_SCREENS_PROFILE;
+    this.guidedTourImgOverlayScreensProfilePath = ImagePath.BASE_ASSETS_PATH_DESKTOP + ImagePath.CANDIDATE_OERLAY_SCREENS_PROFILE;
+    this.guidedTourStatus = this.guidedTourService.getTourStatus();
+    if(this.guidedTourStatus.indexOf(this.guidedTourImgOverlayScreensProfile) !== -1) {
+      this.onComplete.emit();
+      this.highlightedSection.name = 'none';
+      this.highlightedSection.isDisable = false;
+    }
+  }
+
+  onGotItGuideTour() {
+    this.guidedTourStatus = this.guidedTourService.updateTourStatus(ImagePath.CANDIDATE_OERLAY_SCREENS_PROFILE,true);
+    this.isGuidedTourImgRequire()
   }
 
   onSave() {

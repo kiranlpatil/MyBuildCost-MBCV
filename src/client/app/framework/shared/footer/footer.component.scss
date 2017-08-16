@@ -3,16 +3,18 @@
 
 
 .home-page-footer {
-  background: $footer-bg;
-  border-top: $border-color 1px solid;
-  bottom: 0;
-  height: 140px;
-  padding: 15px 0;
-  position: absolute;
+  background: $black1;
+  padding: 0;
+  position: fixed;
   width: 100%;
+  z-index: 999;
+  bottom: 0;
+  height: 21px;
+  line-height: 0;
 
   p,
   a {
     font-size: 12px;
+    color: $white;
   }
 }

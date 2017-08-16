@@ -674,6 +674,55 @@ control-messages {
   margin-top: 30px;
 }
 
+.common-footer {
+  footer {
+    bottom: -28px !important;
+    background: transparent !important;
+    text-align: center;
+  }
+}
+
+.value-portraot-footer {
+  footer {
+    display: inline-block;
+    margin: 0 auto;
+    max-width: 1200px;
+    width: 100%;
+    position: relative !important;
+    z-index: 1 !important;
+  }
+}
+
+.guided-tour-section {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  z-index: 9999;
+  top: 0;
+  left: 0;
+  img {
+    height: 100%;
+    width: 100%;
+  }
+  .got-it-btn {
+    cursor: pointer;
+    position: absolute;
+    width: 118px;
+    height: 32px;
+    right: 82px;
+    bottom: 25px;
+    background: #fe5722;
+    span {
+      color: $white;
+      padding: 6px 9px;
+      display: inline-block;
+      font-size: 16px;
+      width: 100%;
+      text-align: center;
+    }
+  }
+}
+
 // Media Queries
 @media only screen and (max-width: 1024px) {
   .logout-dropdown {
@@ -796,6 +845,20 @@ control-messages {
     control-messages {
       div {
         padding: 0 !important;
+      }
+    }
+  }
+
+  .btn {
+    border-radius: 4px;
+    height: 35px;
+    padding: 5px 15px;
+    font-size: 14px;
+  }
+  #recruiter-form {
+    control-messages {
+      div {
+        padding: 0 0 0 15px !important;
       }
     }
   }

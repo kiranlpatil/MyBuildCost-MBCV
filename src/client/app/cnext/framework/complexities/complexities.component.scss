@@ -74,7 +74,7 @@
 .question-count {
   position: absolute;
   bottom: 15px;
-  right: 37%;
+  right: 360px;
   z-index: 3;
 }
 
@@ -82,4 +82,32 @@
   overflow: visible !important;
   text-overflow: clip !important;
   white-space: normal !important;
+}
+
+@media only screen and (max-width: 768px) {
+  .question-count {
+    right: 315px;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .capability-edit {
+    top: 2px !important;
+  }
+
+  .question-count {
+    right: 120px;
+    bottom: 15px;
+  }
+
+  .main-content {
+    .heading {
+      font-size: 18px !important;
+
+      .capability-name {
+        font-size: 18px !important;
+        line-height: 25px;
+      }
+    }
+  }
 }

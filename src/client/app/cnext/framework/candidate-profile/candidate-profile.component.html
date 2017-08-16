@@ -110,7 +110,7 @@
               <div class="info profile-info" *ngIf="candidate.isVisible">{{visiblitySetToYesMessage}}</div>
               <div class="info profile-info" *ngIf="!candidate.isVisible">{{visiblitySetToNoMessage}}
               </div>
-              <div class="pull-right">
+              <div class="toggle-switch-container">
                 <span class="switch-label" *ngIf="candidate.isVisible == true">Yes</span>
                 <span class="switch-label" *ngIf="candidate.isVisible == false">No</span>
                 <div class="toggle-switch">

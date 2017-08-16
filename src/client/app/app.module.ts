@@ -185,6 +185,7 @@ import {ColorShadeDirective} from "./cnext/framework/profile-comparison/profile-
 import {AttributeFilterPipe} from "./cnext/framework/profile-comparison/profile-attribute-comparison/attribute-filter.pipe";
 import {ValueSortFilterPipe} from "./cnext/framework/profile-comparison/value-sort.pipe";
 import {RegistrationService} from "./framework/shared/registration.service";
+import {GuidedTourService} from "./cnext/framework/guided-tour.service";
 
 //C-NEXT IMPORTS
 
@@ -395,7 +396,8 @@ import {RegistrationService} from "./framework/shared/registration.service";
     ReferenceService,
     RedirectRecruiterDashboardService,
     ReleventIndustryListService,
-    ProfileComparisonService
+    ProfileComparisonService,
+    GuidedTourService
 
   ],
   bootstrap: [AppComponent]
