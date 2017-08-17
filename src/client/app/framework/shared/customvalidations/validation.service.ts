@@ -64,7 +64,7 @@ export class ValidationService {
   }
 
   static nameValidator(control: any) {
-    if (control.value.match(/^[a-zA-Z]+$/)) {
+    if (control.value.match(/^[a-zA-Z](?:[a-zA-Z ]*[a-zA-Z])?$/)) {
       return null;
     } else {
       return {'invalidName': true};

@@ -28,5 +28,9 @@ export class MainHeaderComponent {
   onRecruiterSignUp() {
     this._router.navigate(['/recruiter-signup']);
   }
+
+    onHomePage() {
+        window.location.href = 'http://www.jobmosis.com';
+    }
 }
 
