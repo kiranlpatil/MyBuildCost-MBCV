@@ -23,6 +23,8 @@ class ImportIndustrySchema {
             sort_order: Number,
             questionForCandidate: String,
             questionForRecruiter: String,
+            questionHeaderForCandidate: String,
+            questionHeaderForRecruiter: String,
             scenarios: [{
               name: String,
               code: String
@@ -39,6 +41,8 @@ class ImportIndustrySchema {
             code: String,
             questionForCandidate: String,
             questionForRecruiter: String,
+            questionHeaderForCandidate: String,
+            questionHeaderForRecruiter: String,
             scenarios: [{
               name: String,
               isChecked: Boolean,

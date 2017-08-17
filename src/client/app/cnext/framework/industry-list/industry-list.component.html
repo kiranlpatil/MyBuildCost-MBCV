@@ -13,10 +13,10 @@
           <input type="radio" name="item.name" id="{{item.name}}" value="{{item.name}}"
                  (click)="onValueChange(item)" [checked]="item.code===selectedIndustry.code">
           <span>{{item.name}}</span>
+          <div class="check"></div>
         </label>
       </div>
     </div>
-    <cn-tool-tip [message]="tooltipMessage"></cn-tool-tip>
 
     <button class="btn-prev" (click)="onPrevious()">
       <span class="glyphicon glyphicon-chevron-left"></span>
@@ -26,6 +26,8 @@
       <!--<div class="saving-loader">Saving...</div>-->
       <button class="btn btn-primary" (click)="onNext()">Next</button>
     </div>
+
+    <cn-tool-tip [message]="tooltipMessage"></cn-tool-tip>
 
   </div>
 </div>
@@ -50,9 +52,9 @@
       </div>
     </div>
   </div>
-  <div class="divider clearfix">&nbsp;</div>
   <!-- <div [class.modal-bg]="highlightedSection.name!='Profile'"></div>-->
 </div>
+<div class="divider clearfix" *ngIf="highlightedSection && highlightedSection.name!='Industry'">&nbsp;</div>
 
 <!--
 <div class="modal popup" [style.display]="getStyleModal()">

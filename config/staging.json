@@ -5,7 +5,7 @@
       "name": "JobMosis-staging"
     },
     "mail": {
-      "host":"http://52.43.220.29:3000",
+      "host":"http://52.43.220.29:3000/",
       "MAIL_SENDER": "notifications@jobmosis.com",
       "MAIL_SENDER_PASSWORD": "notifications@123",
       "ADMIN_MAIL": "notifications@jobmosis.com"

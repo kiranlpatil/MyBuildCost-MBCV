@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnChanges, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, Output, OnInit} from '@angular/core';
 import { JobCompareService } from './job-compare-view.service';
 import {Capability} from '../../model/capability';
 import {Candidate} from '../../model/candidate';
@@ -6,7 +6,9 @@ import {CandidateDetail} from '../../../../framework/registration/candidate/cand
 import {CandidateProfileService} from '../../candidate-profile/candidate-profile.service';
 import {RecruiterDashboardService} from '../../recruiter-dashboard/recruiter-dashboard.service';
 import {Recruiter} from '../../../../framework/registration/recruiter/recruiter';
-import {AppSettings} from "../../../../framework/shared/constants";
+import {AppSettings, ImagePath, LocalStorage} from "../../../../framework/shared/constants";
+import {GuidedTourService} from "../../guided-tour.service";
+import {LocalStorageService} from "../../../../framework/shared/localstorage.service";
 
 @Component({
   moduleId: module.id,
@@ -15,7 +17,7 @@ import {AppSettings} from "../../../../framework/shared/constants";
   styleUrls: ['job-compare-view.component.css']
 })
 
-export class JobCompareViewComponent implements OnChanges {
+export class JobCompareViewComponent implements OnChanges,OnInit {
   @Input() candiadteId: string;
   @Input() jobId: string;
   capabilities: Capability[];
@@ -27,9 +29,14 @@ export class JobCompareViewComponent implements OnChanges {
   private data: any;
   private recruiter : Recruiter;
   private secondaryCapabilities: string[] = new Array(0);
+  private guidedTourImgOverlayScreensStackViewPath:string;
+  private guidedTourImgOverlayScreensStackView:string;
+  private guidedTourStatus:string[] = new Array(0);
+  private isCandidate: boolean = false;
   constructor(private jobCompareService: JobCompareService,
               private profileCreatorService : CandidateProfileService,
-              private recruiterDashboardService: RecruiterDashboardService) {
+              private recruiterDashboardService: RecruiterDashboardService,
+              private guidedTourService:GuidedTourService) {
   }
 
   ngOnChanges(changes: any) {
@@ -49,6 +56,23 @@ export class JobCompareViewComponent implements OnChanges {
             this.OnRecruiterDataSuccess(data.data.industry);
           });
     }
+  }
+
+  ngOnInit() {
+    this.guidedTourImgOverlayScreensStackViewPath = ImagePath.BASE_ASSETS_PATH_DESKTOP + ImagePath.CANDIDATE_OERLAY_SCREENS_STACK_VIEW;
+    this.guidedTourImgOverlayScreensStackView = ImagePath.CANDIDATE_OERLAY_SCREENS_STACK_VIEW;
+    if (LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE) === 'true') {
+      this.isCandidate = true;
+    }
+    this.isGuidedTourImgRequire();
+  }
+
+  isGuidedTourImgRequire() {
+    this.guidedTourStatus = this.guidedTourService.getTourStatus();
+  }
+
+  onGotItGuideTour() {
+    this.guidedTourStatus = this.guidedTourService.updateTourStatus(ImagePath.CANDIDATE_OERLAY_SCREENS_STACK_VIEW,true);
   }
 
   OnRecruiterDataSuccess(data: any) {

@@ -1,5 +1,8 @@
 @import '../../../css/variables';
 
+$shadow-color: rgba(0, 0, 0, .175);
+$overlay: rgba(0, 0, 0, .4);
+
 .page-header {
   border-bottom: 1px solid $black;
   box-shadow: 0 0 2px 1px $header-shadow;
@@ -26,6 +29,14 @@
   .user-info {
     margin: 12px 0 0;
     text-align: right;
+
+    img {
+      border-radius: 50%;
+      height: 35px;
+      margin: 7px 10px 0 15px;
+      width: 35px;
+      float: left;
+    }
 
     h4 {
       color: #666;
@@ -140,6 +151,15 @@
       }
     }
   }
+
+  .navbar-toggle {
+    float: left;
+    border: 0;
+    margin: 8px 0 0 5px;
+    .icon-bar {
+      background: $white;
+    }
+  }
 }
 
 .navbar-left {
@@ -201,6 +221,93 @@
       p {
         display: none;
       }
+    }
+
+    .navbar-brand {
+      padding: 0 15px 15px 0;
+
+      img {
+        margin-top: 2px;
+        width: 50px;
+      }
+    }
+
+    .bg-overlay {
+      background: $overlay;
+      height: 100%;
+      left: 0;
+      opacity: 0;
+      position: fixed;
+      top: 0;
+      transition: .5s ease;
+      visibility: hidden;
+      width: 100%;
+      z-index: 999;
+    }
+
+    .navbar-collapse {
+      background-color: $black;
+      box-shadow: 0 6px 12px $shadow-color;
+      height: 100vh;
+      left: 0;
+      max-height: 100vh;
+      overflow-x: hidden;
+      padding: 0;
+      position: fixed;
+      top: 0;
+      transition: .5s ease;
+      width: 0;
+      z-index: 1001;
+      display: block;
+    }
+
+    .last-child {
+      margin: 0;
+    }
+
+    .last-child .dropdown-menu {
+      display: block;
+      position: static;
+      background-color: transparent;
+      border: 0 none;
+      box-shadow: none;
+      margin-top: 0;
+      width: 100%;
+    }
+
+    .last-child .dropdown-menu .dropdown-item {
+      color: #a5a5a5;
+      padding: 15px;
+    }
+
+    .active .dropdown-item {
+      background-color: #000;
+      color: #fff !important;
+    }
+
+    .last-child .dropdown-toggle {
+      pointer-events: none;
+    }
+
+    .user-info {
+      width: 250px !important;
+      h4,
+      h5 {
+        color: #fff;
+      }
+    }
+
+    .divider {
+      border-bottom: 1px solid #666;
+    }
+
+    .open-nav {
+      width: 250px;
+    }
+
+    .show {
+      opacity: 1;
+      visibility: visible;
     }
   }
 }

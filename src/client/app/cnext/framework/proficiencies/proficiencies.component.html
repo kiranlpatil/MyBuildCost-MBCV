@@ -15,7 +15,7 @@
 
         </cn-multi-select>
       </div>
-      <cn-tool-tip [message]="tooltipMessage"></cn-tool-tip>
+
       <button class="btn-prev" (click)="onPrevious()"><span
         class="glyphicon glyphicon-chevron-left"></span></button>
 
@@ -30,6 +30,8 @@
                 (click)="onSave()" [hidden]="showButton">Done
         </button>
       </div>
+
+      <cn-tool-tip [message]="tooltipMessage"></cn-tool-tip>
     </div>
   </div>
 
@@ -45,14 +47,14 @@
         </div>
         <div class="col-sm-9 padding-left15">
           <span class="option-list" *ngFor="let item of choosedproficiencies;let i = index">
-            <span class="option">{{item}}</span>&nbsp;<!--<span
-            *ngIf="choosedproficiencies.length>1 && i!=choosedproficiencies.length -1">,</span>&nbsp;-->
+            <span class="option">{{item}}</span><span class="visible-xs"
+                                                      *ngIf="choosedproficiencies.length>1 && i!=choosedproficiencies.length -1">,&nbsp;</span>&nbsp;
           </span>
         </div>
       </div>
     </div>
-    <div class="divider clearfix">&nbsp;</div>
   </div>
+  <div class="divider clearfix" *ngIf="highlightedSection.name !='Proficiencies'">&nbsp;</div>
 </div>
 
 

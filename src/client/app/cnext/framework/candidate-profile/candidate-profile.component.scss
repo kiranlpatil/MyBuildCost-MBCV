@@ -12,7 +12,7 @@
 .create-profile {
   //background: $profile-background;
   clear: both;
-  padding-bottom: 15px;
+  padding-bottom: 0;
 }
 
 .bar-container {
@@ -254,6 +254,10 @@
   }
 }
 
+.toggle-switch-container {
+  float: right;
+}
+
 
 @media only screen and (max-width: 1280px) {
   .bar {
@@ -298,16 +302,29 @@
 
 @media only screen and (max-width: 767px) {
   .bar-container {
-    height: 50px;
-    padding-top: 16px;
+    height: 35px;
+    padding-top: 0;
+    margin-top: 0;
+    background: #383838;
+    top: 50px;
   }
 
   .bar {
-    display: none;
+    margin: 7px auto;
+    padding: 0;
+    width: 100%;
+
+    li,
+    .active,
+    .current {
+      p {
+        display: none;
+      }
+    }
   }
 
   .profile-wrapper {
-    margin: 70px auto 0;
+    margin: 100px auto 0;
 
     .col-sm-3 {
       margin: 0 auto;
@@ -338,5 +355,9 @@
     .social-links {
       text-align: left;
     }
+  }
+
+  .toggle-switch-container {
+    float: left;
   }
 }

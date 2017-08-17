@@ -1,13 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CandidateProfileService } from '../candidate-profile/candidate-profile.service';
 import { Candidate, Summary } from '../model/candidate';
 import { CandidateDashboardService } from './candidate-dashboard.service';
 import { JobQcard } from '../model/JobQcard';
-import { LocalStorage, ValueConstant, Tooltip } from '../../../framework/shared/constants';
+import {LocalStorage, ValueConstant, Tooltip, ImagePath} from '../../../framework/shared/constants';
 import { LocalStorageService } from '../../../framework/shared/localstorage.service';
 import { CandidateJobListService } from './candidate-job-list/candidate-job-list.service';
 import { QCardFilterService } from '../filters/q-card-filter.service';
 import { LoaderService } from '../../../framework/shared/loader/loader.service';
+import {GuidedTourService} from "../guided-tour.service";
 
 
 @Component({
@@ -17,7 +18,7 @@ import { LoaderService } from '../../../framework/shared/loader/loader.service';
   styleUrls: ['candidate-dashboard.component.css']
 })
 
-export class CandidateDashboardComponent {
+export class CandidateDashboardComponent implements OnInit{
   private candidate: Candidate = new Candidate();
   private jobList: JobQcard[] = new Array(0);
   private appliedJobs: JobQcard[] = new Array(0);
@@ -29,17 +30,49 @@ export class CandidateDashboardComponent {
   private emptyDashboardMessage: string = Tooltip.EMPTY_CANDIDATE_DASHBOARD_MESSAGE;
   private noAppliedJobMessage: string = Tooltip.APPLIED_JOB_MESSAGE;
   private noNotIntrestedJobMessage: string = Tooltip.NOT_INTRESTED_JOB_MESSAGE;
-
+  private overlayScreensDashboardImgPath:string;
+  private guidedTourStatus:string[] = new Array(0);
+  private overlayScreensDashboardImgName:string;
   constructor(private candidateProfileService: CandidateProfileService,
               private candidateDashboardService: CandidateDashboardService,
               private candidateJobListService: CandidateJobListService,
               private qcardFilterService:QCardFilterService,
-              private loaderService: LoaderService) {
+              private loaderService: LoaderService, private guidedTourService:GuidedTourService) {
     this.candidateProfileService.getCandidateDetails()
       .subscribe(
         candidateData => {
           this.OnCandidateDataSuccess(candidateData);
         });
+  }
+
+  ngOnInit() {
+    this.overlayScreensDashboardImgPath = ImagePath.BASE_ASSETS_PATH_DESKTOP + ImagePath.CANDIDATE_OERLAY_SCREENS_DASHBOARD;
+    this.overlayScreensDashboardImgName = ImagePath.CANDIDATE_OERLAY_SCREENS_DASHBOARD;
+    this.isRequireGuidedTourImg();
+  }
+
+  isRequireGuidedTourImg() {
+    /*this.guidedTourService.getTourStatus()
+      .subscribe(
+        (res:any) => { debugger
+
+        },
+        error => console.log(error)
+      );
+*/
+    this.guidedTourStatus = this.guidedTourService.getTourStatus();
+  }
+
+  tourGuideGotIt() {
+
+    /*this.guidedTourService.updateTourStatus(ImagePath.CANDIDATE_OERLAY_SCREENS_DASHBOARD,true)
+      .subscribe(
+        (res:any) => {
+
+        },
+        error => console.log(error)
+      );*/
+    this.guidedTourStatus = this.guidedTourService.updateTourStatus(ImagePath.CANDIDATE_OERLAY_SCREENS_DASHBOARD,true);
   }
 
   extractList(jobList: JobQcard[]) {

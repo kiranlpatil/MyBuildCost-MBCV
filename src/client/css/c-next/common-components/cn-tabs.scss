@@ -101,7 +101,7 @@
 @media only screen and (max-width: 767px) {
   .nav-tabs {
     li {
-      width: 50%;
+      width: 30%;
 
       a {
         font-size: 11px;
@@ -114,6 +114,10 @@
       a {
         margin-left: 0;
       }
+    }
+
+    li:last-child {
+      width: 40%;
     }
   }
 }

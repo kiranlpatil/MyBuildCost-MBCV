@@ -29,6 +29,8 @@ class IndustrySchema {
             question:String,
             questionForCandidate: String,
             questionForRecruiter: String,
+            questionHeaderForCandidate: String,
+            questionHeaderForRecruiter: String,
             scenarios: [{
               name: String,
               code: String
@@ -45,6 +47,8 @@ class IndustrySchema {
             code: String,
             questionForCandidate: String,
             questionForRecruiter: String,
+            questionHeaderForCandidate: String,
+            questionHeaderForRecruiter: String,
             scenarios: [{
               name: String,
               isChecked: Boolean,

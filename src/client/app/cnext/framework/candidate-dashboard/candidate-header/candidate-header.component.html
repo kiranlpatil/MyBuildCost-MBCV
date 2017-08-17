@@ -5,11 +5,9 @@
 
       <div class="navbar-header">
 
-        <button type="button" [class.collapsed]="!isClassVisible"
-                (click)="isClassVisible = !isClassVisible"
-                class="navbar-toggle collapsed" data-toggle="collapse"
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
                 data-target="#bs-example-navbar-collapse-1"
-                aria-expanded="false">
+                aria-expanded="false" (click)="isClassVisible = !isClassVisible;">
           <span class="sr-only">Toggle navigation</span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
@@ -22,13 +20,14 @@
       </div>
 
       <!-- Collect the nav links, forms, and other content for toggling -->
-      <div class="collapse navbar-collapse" [class.in]="isClassVisible" id="bs-example-navbar-collapse-1">
+      <div class="bg-overlay" [class.show]="isClassVisible" (click)="isClassVisible = false;"></div>
+      <div class="collapse navbar-collapse" [class.open-nav]="isClassVisible">
 
 
         <ul class="nav navbar-nav navbar-right">
           <li class="dropdown last-child">
             <div class="dropdown">
-              <a class="simple-dropdown dropdown-toggle" data-toggle="dropdown" href="#">
+              <a class="hidden-xs simple-dropdown dropdown-toggle" data-toggle="dropdown" href="#">
                 <img src="assets/framework/images/dashboard/profile.png" alt="User Profile"
                      *ngIf="candidate.basicInformation.picture==undefined"/>
                 <img [src]="getImagePath(candidate.basicInformation.picture)" alt="User Profile"
@@ -37,6 +36,10 @@
               </a>
               <ul class="dropdown-menu mobile-dropdown">
                 <li class="user-info user-info-ipad">
+                  <img class="visible-xs" src="assets/framework/images/dashboard/profile.png" alt="User Profile"
+                       *ngIf="candidate.basicInformation.picture==undefined"/>
+                  <img class="visible-xs" [src]="getImagePath(candidate.basicInformation.picture)" alt="User Profile"
+                       *ngIf="candidate.basicInformation.picture!=undefined"/>
                   <h4>{{candidate.basicInformation.first_name}} {{candidate.basicInformation.last_name}}</h4>
                   <h5 *ngIf="candidate.jobTitle != undefined">{{candidate.jobTitle}}</h5>
                 </li>
@@ -54,7 +57,7 @@
                   </a>
                 </li>
                 <li role="menuitem" [routerLinkActive]="['active']" *ngIf="candidate.isCompleted==true">
-                  <a class="dropdown-item" [routerLink]="['profile-summary']"
+                  <a class="dropdown-item" [routerLink]="['value-portrait']"
                      (click)="navigateTo('/value-portrait');">
                     <span class="glyphicon glyphicon-user"></span>Value Portrait
                   </a>
@@ -66,7 +69,7 @@
                   </a>
                 </li>
 
-                <li role="menuitem" *ngIf="candidate.isCompleted==true">
+                <li role="menuitem" [routerLinkActive]="['active']" *ngIf="candidate.isCompleted==true">
                   <a class="dropdown-item" [routerLink]="['candidate_dashboard']"
                      (click)="navigateTo('/candidate_dashboard');">
                     <span class="glyphicon glyphicon-th"></span>My Dashboard

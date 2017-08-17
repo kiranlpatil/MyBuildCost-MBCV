@@ -16,7 +16,7 @@
 }
 
 .recruiter-profile-wrapper {
-  margin: 95px auto 15px;
+  margin: 110px auto 15px;
   width: 850px;
 
   .hide-recruiter-info {
@@ -48,5 +48,12 @@
   .recruiter-profile-wrapper,
   .candidate-profile-wrapper {
     width: 90%;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .recruiter-profile-wrapper,
+  .candidate-profile-wrapper {
+    width: calc(100% - 20px);
   }
 }

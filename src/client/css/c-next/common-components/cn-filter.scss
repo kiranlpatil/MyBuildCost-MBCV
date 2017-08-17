@@ -104,9 +104,30 @@
 
 @media only screen and (max-width: 767px) {
   .filter-container {
-    border: 0;
-    background: $bg-tab-content;
+    border-left: 0;
     box-shadow: none;
+    left: 0;
+    right: inherit;
+    top: 163px;
+    border-right: 1px solid $filter-border;
+    width: 0;
+    transition: .5s ease;
+    visibility: hidden;
+    opacity: 0;
+    height: calc(100vh - 163px);
+
+    h4 {
+      left: 0;
+      right: inherit;
+      padding: 10px;
+      top: 129px;
+      border-left: 0;
+      border-right: 1px solid $filter-border;
+      width: 0;
+      transition: .5s ease;
+      visibility: hidden;
+      opacity: 0;
+    }
 
     p {
       margin: 0 10px;
@@ -117,11 +138,26 @@
     }
 
     .inner {
-      padding: 10px;
+      padding: 0 10px;
       border: 0;
       background: transparent;
       box-shadow: none;
     }
+  }
+
+  .open-filter {
+    opacity: 1 !important;
+    visibility: visible !important;
+    width: 200px !important;
+  }
+
+  .glyphicon-filter {
+    position: fixed;
+    top: 100px;
+    left: 9px;
+    font-size: 17px;
+    z-index: 1000;
+    color: $filter-icon;
   }
 
   button {

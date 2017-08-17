@@ -1,3 +1,10 @@
+<div class="guided-tour-section"
+     *ngIf="guidedTourStatus.indexOf(guidedTourImgOverlayScreensEmploymentHistory) == -1 && isGuideImg == true">
+  <img src={{guidedTourImgOverlayScreensEmploymentHistoryPath}} alt="Profile Picture">
+  <div class="got-it-btn" (click)="onGotItGuideTour()">
+    <span>OK, Got it</span>
+  </div>
+</div>
 <div class="modal-bg" *ngIf="highlightedSection.name=='AboutMySelf'"></div>
 <div class="section-container clear" *ngIf="highlightedSection.name =='AboutMySelf'">
 
@@ -10,7 +17,7 @@
         <p class="error-messages">{{remainingWords + remainingWordsMessage}}</p>
       </div>
     </div>
-    <cn-tool-tip [message]="tooltipMessage"></cn-tool-tip>
+
     <div class="button-group">
       <!--<div class="saving-loader">Saving...</div>-->
       <button class="btn btn-primary"
@@ -24,6 +31,8 @@
     </div>
     <button class="btn-prev" (click)="onPrevious()"><span
             class="glyphicon glyphicon-chevron-left"></span></button>
+
+    <cn-tool-tip [message]="tooltipMessage"></cn-tool-tip>
   </div>
 </div>
 <div class="section-container clear" *ngIf="highlightedSection.name !='AboutMySelf'">
@@ -38,8 +47,8 @@
       <p>{{candidate.aboutMyself}}</p>
     </div>
   </div>
-  <div class="divider clearfix">&nbsp;</div>
 </div>
+<div class="divider clearfix" *ngIf="highlightedSection.name !='AboutMySelf'">&nbsp;</div>
 
 
 

@@ -37,6 +37,10 @@
   }
 }
 
+.profile-picture {
+  display: none;
+}
+
 .company-date {
   position: absolute;
   right: 8px;
@@ -83,8 +87,19 @@
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
   position: absolute;
-  /*bottom:-10px;*/
   top: -10px;
   margin-left: -10px;
   right: 70px;
+}
+
+@media only screen and (max-width: 1280px) {
+  .skills-lists {
+    width: 200px;
+  }
+}
+
+@media only screen and (max-width: 1023px) {
+  .skills-lists {
+    width: 160px;
+  }
 }

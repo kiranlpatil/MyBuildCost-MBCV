@@ -172,7 +172,7 @@
     margin: 0;
 
     li {
-      color: #666;
+      color: $name;
       //float: left;
       //list-style-type: disc;
       list-style: none;
@@ -226,7 +226,6 @@
   }
 }
 
-
 .quarter-width {
   width: 25%;
   float: left;
@@ -239,6 +238,45 @@
 
 .full-width {
   width: 100%;
+}
+
+.my-info {
+  height: 400px;
+  position: relative;
+  border-right: 1px solid $border-color;
+  z-index: 3;
+}
+
+.description-container {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+
+  .image-container {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    margin: 0 auto 15px;
+    display: block;
+    position: relative;
+
+    .avtar {
+      border-radius: 50% !important;
+    }
+
+    .avtar > form {
+      bottom: -15px !important;
+      position: absolute !important;
+      right: 33% !important;
+    }
+  }
+}
+
+@media only screen and (max-width: 1366px) {
+  .edit-modal-content {
+    margin: 30px auto 0;
+  }
 }
 
 @media only screen and (max-width: 1024px) {
@@ -261,20 +299,25 @@
   }
 }
 
-@media only screen and (max-width: 1366px) {
-  .edit-modal-content {
-    margin: 30px auto 0;
-  }
-}
-
 @media only screen and (max-width: 980px) {
   .edit-modal-content {
-    width: 90%;
+    width: 100%;
   }
 }
 
-
 @media only screen and (max-width: 767px) {
+
+  .edit-modal-content {
+    max-height: 80%;
+    position: fixed !important;
+    width: calc(100% - 30px);
+    transform: translate(-50%, -50%) !important;
+    top: 50%;
+    margin: 40px auto 0;
+    overflow: auto;
+    height: auto;
+    min-height: inherit;
+  }
 
   .modal-content {
     margin: 5px;
@@ -318,38 +361,55 @@
         width: 100%;
       }
     }
+
+    .btn-edit {
+      top: 8px;
+    }
+
+    .option-list {
+      margin: 0;
+
+      .visible-xs {
+        display: inline-block !important;
+      }
+    }
+
+    .option {
+      background: transparent;
+      color: $text-color;
+      padding: 0;
+    }
+
+    .img-container {
+      border: 0;
+      height: 50px;
+      width: 50px;
+
+      .avtar {
+        height: 48px !important;
+        width: 48px !important;
+      }
+
+      .avtar > img {
+        height: 48px !important;
+      }
+    }
+
+    ul {
+      li {
+        &::before {
+          left: -13px;
+        }
+      }
+    }
   }
-}
 
-.my-info {
-  height: 400px;
-  position: relative;
-  border-right: 1px solid $border-color;
-  z-index: 3;
-}
+  .half-width {
+    width: 100%;
+  }
 
-.description-container {
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  position: absolute;
-
-  .image-container {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    margin: 0 auto 15px;
-    display: block;
-    position: relative;
-
-    .avtar {
-      border-radius: 50% !important;
-    }
-
-    .avtar > form {
-      bottom: -15px !important;
-      position: absolute !important;
-      right: 33% !important;
-    }
+  .my-info {
+    height: 200px;
+    border-right: 0;
   }
 }

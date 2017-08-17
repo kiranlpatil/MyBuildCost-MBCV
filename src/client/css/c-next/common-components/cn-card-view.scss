@@ -98,8 +98,8 @@
     }
 
     .profile-picture {
-      width: 30px;
-      height: 30px;
+      width: 40px;
+      height: 40px;
       border-radius: 50%;
       margin-right: 10px;
     }
@@ -115,6 +115,7 @@
       top: 0;
       left: 0;
       @extend %text-ellipsis;
+      min-height: 32px;
     }
 
     h5 {
@@ -714,6 +715,13 @@ header {
   }
 }
 
+@media only screen and (max-width: 1366px) {
+  .empty-list-message {
+    width: 600px;
+    left: calc(50% - 100px);
+  }
+}
+
 @media only screen and (max-width: 1024px) {
   .card-view {
     .col-sm-4 {
@@ -726,6 +734,10 @@ header {
       float: none;
       margin-top: 10px;
     }
+  }
+
+  .empty-list-message {
+    width: 400px;
   }
 }
 
@@ -757,5 +769,40 @@ header {
     .col-sm-4 {
       width: 100%;
     }
+
+    .panel {
+      margin: 10px 0;
+    }
+  }
+
+  header {
+    ul {
+      margin: 0 !important;
+    }
+    .sort-by {
+      margin-left: 0;
+      margin-top: 0;
+    }
+
+    .sort-by > select {
+      border-bottom: 0;
+    }
+  }
+
+  .empty-list-message {
+    width: 90%;
+    left: calc(50%);
+  }
+
+  #matched {
+    .card-view {
+      margin-top: 88px;
+    }
+  }
+
+  .clear-filter {
+    position: fixed;
+    top: 155px;
+    left: 9px;
   }
 }

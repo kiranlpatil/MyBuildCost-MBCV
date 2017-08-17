@@ -7,7 +7,7 @@
     <div class="scrollable-content" #certficationParentDiv>
       <form class="description-form" [formGroup]="certificationDetail" novalidate>
         <div class="row">
-          <div class="col-sm-8 no-padding" formArrayName="certifications" #certficationInnerDiv>
+          <div class="col-md-8 col-sm-10 no-padding" formArrayName="certifications" #certficationInnerDiv>
             <div *ngFor="let history of certificationDetail.controls.certifications.controls; let i=index"
                  class="panel panel-default">
               <div>
@@ -24,8 +24,6 @@
       </form>
     </div>
 
-    <cn-tool-tip [message]="tooltipMessage"></cn-tool-tip>
-
     <div class="button-group clearfix">
       <!--<div class="saving-loader">Saving...</div>-->
       <button type="submit" class="btn btn-primary" scrollTo scrollTargetSelector="#certification"
@@ -39,6 +37,7 @@
     </div>
     <button class="btn-prev" (click)="onPrevious()"><span
       class="glyphicon glyphicon-chevron-left"></span></button>
+    <cn-tool-tip [message]="tooltipMessage"></cn-tool-tip>
   </div>
 </div>
 
@@ -62,7 +61,7 @@
           Certifications <span class="optional-field">(Optional)</span>
           <button class="btn-edit" (click)="onEdit()" title="Edit Certifications"></button>
         </h4>
-        <ul>
+        <ul class="clearfix">
           <div *ngFor="let item of candidate.certifications;let i = index">
             <div *ngIf="i == 0">
               <li>

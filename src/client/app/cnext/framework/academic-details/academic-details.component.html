@@ -1,11 +1,12 @@
+<div class="clearfix divider clear visible-xs">&nbsp;</div>
 <div class="modal-bg" *ngIf="highlightedSection.name=='AcademicDetails'"></div>
-<div class="section-container clear"  *ngIf="highlightedSection.name =='AcademicDetails'">
+<div class="section-container clear" *ngIf="highlightedSection.name =='AcademicDetails'">
   <div class="main-content edit-modal-content clearfix">
     <h4 class="heading">Academic Details (Optional)</h4>
     <div class="scrollable-content" #parentDiv>
       <form class="description-form" [formGroup]="academicDetail" novalidate>
         <div class="row">
-          <div class="col-sm-8 no-padding" formArrayName="academicDetails" #innerDiv>
+          <div class="col-md-8 col-sm-10 no-padding" formArrayName="academicDetails" #innerDiv>
             <div *ngFor="let history of academicDetail.controls.academicDetails.controls; let i=index"
                  class="panel panel-default">
               <div>
@@ -21,7 +22,7 @@
         </div>
       </form>
     </div>
-    <cn-tool-tip [message]="tooltipMessage"></cn-tool-tip>
+
     <div class="button-group clearfix">
       <!--<div class="saving-loader">Saving...</div>-->
       <button type="submit" class="btn btn-primary" *ngIf="!candidate.isSubmitted"
@@ -34,7 +35,8 @@
       </button>
     </div>
     <button class="btn-prev" (click)="onPrevious()"><span
-      class="glyphicon glyphicon-chevron-left"></span></button>
+            class="glyphicon glyphicon-chevron-left"></span></button>
+    <cn-tool-tip [message]="tooltipMessage"></cn-tool-tip>
   </div>
 </div>
 
@@ -61,7 +63,7 @@
           Academic Details <span class="optional-field">(Optional)</span>
           <button class="btn-edit" (click)="onEdit()"></button>
         </h4>
-        <ul>
+        <ul class="">
           <div *ngFor="let item of candidate.academics;let i = index">
             <div *ngIf="i == 0">
               <li>

@@ -53,7 +53,7 @@
                        [highlightedSection]="highlightedSection"
                        (onComplete)="onCapabilityComplete($event)" [hidden]="!showCapability"></cn-capabilities>
 
-      <div class="wrapper complexity-wrapper">
+      <div class="wrapper">
         <cn-complexities [roles]="rolesForComplexity" [complexities]="candidate.capability_matrix"
                          [highlightedSection]="highlightedSection"
                          [isComplexityPresent]="isComplexityPresent"
@@ -110,7 +110,7 @@
               <div class="info profile-info" *ngIf="candidate.isVisible">{{visiblitySetToYesMessage}}</div>
               <div class="info profile-info" *ngIf="!candidate.isVisible">{{visiblitySetToNoMessage}}
               </div>
-              <div class="pull-right">
+              <div class="toggle-switch-container">
                 <span class="switch-label" *ngIf="candidate.isVisible == true">Yes</span>
                 <span class="switch-label" *ngIf="candidate.isVisible == false">No</span>
                 <div class="toggle-switch">

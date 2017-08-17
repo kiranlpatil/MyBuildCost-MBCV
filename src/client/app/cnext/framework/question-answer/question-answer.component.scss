@@ -34,6 +34,19 @@
   }
 }
 
+@media only screen and (max-width: 767px) {
+  .complexity-details {
+    .question > span {
+      font-size: 14px;
+    }
+
+    .scenarios {
+      padding-left: 0;
+    }
+
+  }
+}
+
 /*
 .slide-right {
   -webkit-animation: SlideTORight 2s ease-out 0s;

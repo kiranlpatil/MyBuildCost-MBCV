@@ -1,3 +1,11 @@
+<div class="guided-tour-section"
+     *ngIf="guidedTourStatus.indexOf(guidedTourImgOverlayScreensStackView) == -1 && isCandidate"
+     style="top: -43px;height: 110%;">
+  <img src={{guidedTourImgOverlayScreensStackViewPath}} alt="Profile Picture">
+  <div class="got-it-btn" (click)="onGotItGuideTour()">
+    <span>OK, Got it</span>
+  </div>
+</div>
 <div class="modal-header">
 
   <div *ngIf="typeOfView =='spa_job' && recruiter != undefined">
@@ -125,7 +133,7 @@
                   <label *ngIf="candidate == undefined">Hiring Manager</label>
                   <span *ngIf="candidate == undefined">{{postedJob.hiringManager}}</span>
                   <label *ngIf="recruiter.isRecruitingForself">Department</label>
-                  <label *ngIf="!recruiter.isRecruitingForself">Company</label>
+                  <label *ngIf="!recruiter.isRecruitingForself">Company Name</label>
                   <span *ngIf="!postedJob.hideCompanyName">{{postedJob.department}}</span>
                   <span *ngIf="postedJob.hideCompanyName">Not Disclosed</span>
                   <label>Industry</label>
@@ -182,7 +190,7 @@
                          [class.below]="data.releaseMatch=='below'" [class.missing]="data.releaseMatch=='missing'">Joining
                     Period</label>
                   <span>{{postedJob.joiningPeriod}}</span>
-                  <label>Location</label>
+                  <label>Job Location</label>
                   <span>{{postedJob.location.city}}</span>
                   <label>About Job</label>
                   <span>

@@ -1,9 +1,9 @@
-import { Component, Input, Output, OnChanges, EventEmitter } from '@angular/core';
-import { Capability } from '../../../model/capability';
-import { Scenario } from '../../../model/scenario';
-import { AppSettings, LocalStorage, Tooltip } from '../../../../../framework/shared/constants';
-import { LocalStorageService } from '../../../../../framework/shared/localstorage.service';
-import { Complexity } from '../../../model/complexity';
+import {Component, EventEmitter, Input, OnChanges, Output} from "@angular/core";
+import {Capability} from "../../../model/capability";
+import {Scenario} from "../../../model/scenario";
+import {AppSettings, LocalStorage, Tooltip} from "../../../../../framework/shared/constants";
+import {LocalStorageService} from "../../../../../framework/shared/localstorage.service";
+import {Complexity} from "../../../model/complexity";
 
 @Component({
   moduleId: module.id,
@@ -22,6 +22,7 @@ export class CapabilityCompareComponent  implements OnChanges {
   @Input() job_picture : string;
   isCandidate: boolean;
   showMore: boolean = false;
+  showMoreUnable: boolean = false;
   private capabilityCompareAboveMatch= Tooltip.CAPABILITY_COMPARE_ABOVE_MATCH;
   private capabilityCompareBelowMatch= Tooltip.CAPABILITY_COMPARE_BELOW_MATCH;
   private capabilityCompareExactMatch= Tooltip.CAPABILITY_COMPARE_EXACT_MATCH;
@@ -61,9 +62,15 @@ export class CapabilityCompareComponent  implements OnChanges {
     if(changes.rowsToShow && changes.rowsToShow.currentValue) {
       this.rowsToShow = changes.rowsToShow.currentValue;
     }
+
+    if(this.capabilities.length>this.rowsToShow) {
+      this.showMoreUnable=true;
+    }
   }
 
   onComplexitySelect(complexity:Complexity,capability:Capability) {
+    let _body: any = document.getElementsByTagName('BODY')[0];
+    _body.scrollTop = -1;
     if(this.isCandidate) {
     this.SelectedComplexity.emit(complexity);
     } else {

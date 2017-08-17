@@ -27,6 +27,10 @@
       font-size: 12px;
       display: block;
       color: $white;
+
+      &:last-child {
+        margin: 0;
+      }
     }
 
     h5 {
@@ -63,13 +67,13 @@
   //border: 1px solid $border-color;
   margin-bottom: 15px;
   box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
-  padding: 5px;
+  //padding: 5px;
   clear: both;
 }
 
-.complexity-wrapper {
+/*.complexity-wrapper {
   padding: 5px;
-}
+}*/
 
 .profile-visibility-wrapper {
   .main-content {
@@ -82,7 +86,7 @@
 .scrollable-content {
   overflow: auto;
   height: auto;
-  padding: 0px 250px 75px 70px;
+  padding: 0 250px 75px 70px;
   position: relative;
   top: 0;
   left: 0;
@@ -91,7 +95,7 @@
 }
 
 .main-content {
-  padding: 0;
+  padding: 5px;
   text-align: left;
   position: relative;
   background: $white;
@@ -395,7 +399,7 @@
   border-bottom: 1px solid $border-color;
   clear: both;
   height: 1px;
-  margin: 5px 0;
+  margin: 0 5px;
 }
 
 .toggle-switch {
@@ -470,6 +474,14 @@
 
 @media only screen and (max-width: 980px) {
   .main-content {
+    .heading {
+      font-size: 20px;
+      padding: 8px 15px;
+      width: calc(100% - 190px) !important;
+    }
+    .button-group {
+      width: calc(100% - 190px);
+    }
     .btn-default {
       float: none;
       margin: 0;
@@ -478,12 +490,27 @@
     .instructions {
       margin-top: 10px;
     }
+
+    .edit-error-msg {
+      max-width: 350px;
+    }
+  }
+
+  .section-container {
+    .tooltip-message {
+      width: 190px;
+      padding: 15px 10px;
+    }
+  }
+
+  .scrollable-content {
+    padding: 0 205px 75px 45px;
   }
 }
 
 @media only screen and (max-width: 767px) {
   .main-content {
-    padding: 5px;
+    padding: 0;
 
     .info {
       font-size: 10px;
@@ -502,12 +529,90 @@
     }
 
     .heading {
+      font-size: 16px;
+      width: 100% !important;
+      margin: 0;
+      padding: 7px 7px 7px 30px;
+
       .close-dialog {
         visibility: hidden;
 
         .glyphicon-remove {
           visibility: visible;
         }
+      }
+    }
+    .button-group {
+      width: 100%;
+      position: relative;
+      padding: 7px 7px 7px 15px;
+      float: left;
+    }
+
+    .btn-prev {
+      padding: 7px 8px;
+      left: 8px;
+      top: 11px;
+    }
+
+    .edit-error-msg {
+      position: relative !important;
+      bottom: 0 !important;
+      left: 0 !important;
+      max-width: calc(100% - 45px);
+      margin-left: 30px;
+      text-align: left;
+    }
+  }
+
+  .create-profile {
+    .page-header {
+      margin-top: 0 !important;
+      background: $black1 !important;
+
+      .last-child {
+        .dropdown-menu {
+          margin-top: 0 !important;
+        }
+      }
+    }
+    .navbar {
+      margin: 0 !important;
+    }
+  }
+
+  .profile-info {
+    width: 100%;
+  }
+
+  .wrapper {
+    margin-bottom: 10px;
+  }
+
+  .profile-visibility-wrapper {
+    margin-bottom: 0;
+  }
+
+  .section-container {
+    .tooltip-message {
+      display: block;
+      position: relative;
+      border-radius: 0;
+      width: 100%;
+    }
+  }
+
+  .scrollable-content {
+    overflow-x: hidden;
+    overflow-y: visible;
+    padding: 0 7px 0 30px;
+  }
+
+  .description-form {
+    .panel-default {
+      .glyphicon-trash {
+        right: 15px;
+        top: -25px;
       }
     }
   }
@@ -520,6 +625,7 @@
     height: 20px;
     position: absolute;
     left: 5px;
+    top: 8px;
   }
 
   .certification {
@@ -528,6 +634,7 @@
     height: 20px;
     position: absolute;
     left: 5px;
+    top: 8px;
   }
 
   .employment-history {
@@ -536,6 +643,7 @@
     height: 20px;
     position: absolute;
     left: 5px;
+
   }
 
   .award {

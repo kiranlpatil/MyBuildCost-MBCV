@@ -233,7 +233,7 @@ export class EmploymentHistoryComponent {
     this.highlightedSection.name = 'AcademicDetails';
     this.highlightedSection.isDisable = false;
   }
-
+  
   onSave() {
     this.submitStatus = false;
     this.onComplete.emit();

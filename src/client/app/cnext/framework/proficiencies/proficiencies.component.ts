@@ -22,7 +22,7 @@ export class ProficienciesComponent {
     '<li><p>2. '+ Tooltip.PROFICIENCIES_TOOLTIP_2+'</p></li>' +
     '<li><p>3. '+Tooltip.PROFICIENCIES_TOOLTIP_3+'</p></li></ul>';
   private maxProficiencies: number;
-
+  
   constructor(private proficiencyDetailService: ProficiencyDetailsService, private profileCreatorService: CandidateProfileService) {
     this.proficiencyDetailService.makeCall$.subscribe(
       data => {
@@ -59,8 +59,8 @@ export class ProficienciesComponent {
     this.highlightedSection.name = 'IndustryExposure';
     this.highlightedSection.isDisable = false;
 
-      let _body: any = document.getElementsByTagName('BODY')[0];
-      _body.scrollTop = -1;
+    let _body: any = document.getElementsByTagName('BODY')[0];
+    _body.scrollTop = -1;
   }
 
   onSave() {

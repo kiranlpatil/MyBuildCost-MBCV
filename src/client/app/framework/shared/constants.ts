@@ -4,7 +4,6 @@ export class AppSettings {
   //public static IP = 'http://10.192.33.77:8080';
   //public static IP = 'http://52.89.221.23';
   // public static IP = 'app.jobmosis.com';
- // public static IP = 'http://52.89.221.23:3000';
   public static IP = 'http://52.43.220.29:3000';
 
 
@@ -185,13 +184,17 @@ export class LocalStorage {
   public static TEMP_MOBILE = 'temp_mobile';
   public static TEMP_EMAIL = 'temp_email';
   public static EMAIL_ID = 'email_id';
+  public static PASSWORD = 'password';
   public static MY_THEME = 'my_theme';
   public static VERIFY_PHONE_VALUE = 'verify_phone_value';
   public static CHANGE_MAIL_VALUE = 'change_mail_value';
   public static FROM_CANDIDATE_REGISTRATION = 'from_candidate_registration';
+  public static AFTER_CANDIDATE_REGISTRATION_FORM = 'after_candidate_registration_form';
+  public static AFTER_RECRUITER_REGISTRATION_FORM = 'after_recruiter_registration_form';
   public static VERIFY_CHANGE_PHONE_VALUE = 'verify_change_phone_value';
   public static CURRENT_JOB_POSTED_ID = 'current_job_posted_job_id';
   public static POSTED_JOB = 'posted_job';
+  public static GUIDED_TOUR = 'guided_tour';
 }
 
 export class ValueConstant {
@@ -208,6 +211,7 @@ export class ValueConstant {
   public static SHORT_LISTED_CANDIDATE: string = 'shortListed';
   public static CART_LISTED_CANDIDATE: string = 'cartListed';
   public static REJECTED_LISTED_CANDIDATE: string = 'rejectedList';
+  public static PROFILE_COMPARISON_LIST: string = 'profile_comparison';
   public static APPLIED_CANDIDATE: string = 'applied';
   public static BLOCKED_CANDIDATE: string = 'blocked';
   public static MATCHED_CANDIDATE: string = 'matchedList';
@@ -301,12 +305,24 @@ export class ImagePath {
   public static FIRST_NAME_ICON_GREY = './assets/framework/images/icons/first-name-grey.svg';
   public static LAST_NAME_ICON = './assets/framework/images/icons/last-name.svg';
   public static LAST_NAME_ICON_GREY = './assets/framework/images/icons/last-name-grey.svg';
+
+  //guided tour images for desktop
+  public static BASE_ASSETS_PATH_DESKTOP = './assets/c-next/guided-tour/tour-for-desktop/';
+  public static CANDIDATE_OERLAY_SCREENS_CAPABILITIES ='candidate_overlay-screens-capabilities.jpg';
+  public static CANDIDATE_OERLAY_SCREENS_COMPLEXITIES='candidate_overlay-screens-complexities.jpg';
+  public static CANDIDATE_OERLAY_SCREENS_DASHBOARD='candidate_overlay-screens-dashboard.jpg';
+  public static CANDIDATE_OERLAY_SCREENS_EMPLOYMENT_HISTORY='candidate_overlay-screens-emloyment-history.jpg';
+  public static CANDIDATE_OERLAY_SCREENS_KEY_SKILLS='candidate_overlay-screens-key-skills.jpg';
+  public static CANDIDATE_OERLAY_SCREENS_PROFILE='candidate_overlay-screens-profile.jpg';
+  public static CANDIDATE_OERLAY_SCREENS_STACK_VIEW='candidate_overlay-screens-stack-view.jpg';
+
+
 }
 
 export class ProjectAsset {
   public static APP_NAME = 'JobMosis';
   public static TAG_LINE = 'The Awesome Web Experience';
-  public static UNDER_LICENECE = '&#169; 2017 Techprimelab Software Pvt. Ltd.';
+  public static UNDER_LICENECE = '© 2017 www.jobmosis.com.';
 }
 
 export class Tooltip {

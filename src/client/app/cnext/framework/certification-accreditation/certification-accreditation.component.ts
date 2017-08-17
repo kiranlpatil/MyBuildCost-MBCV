@@ -209,5 +209,7 @@ export class CertificationAccreditationComponent {
     this.highlightedSection.name = 'Certification';
     this.highlightedSection.isDisable = true;
     this.showButton = false;
+    let _body: any = document.getElementsByTagName('BODY')[0];
+    _body.scrollTop = -1;
   }
 }

@@ -184,6 +184,8 @@ import {ProfileComparisonPipe} from "./cnext/framework/profile-comparison/profil
 import {ColorShadeDirective} from "./cnext/framework/profile-comparison/profile-capability-comparison/color-shade.directive";
 import {AttributeFilterPipe} from "./cnext/framework/profile-comparison/profile-attribute-comparison/attribute-filter.pipe";
 import {ValueSortFilterPipe} from "./cnext/framework/profile-comparison/value-sort.pipe";
+import {RegistrationService} from "./framework/shared/registration.service";
+import {GuidedTourService} from "./cnext/framework/guided-tour.service";
 
 //C-NEXT IMPORTS
 
@@ -332,6 +334,7 @@ import {ValueSortFilterPipe} from "./cnext/framework/profile-comparison/value-so
       useValue: '<%= APP_BASE %>'
     },
     MessageService,
+    RegistrationService,
     ComplexityComponentService,
     FacebookService,
     LoginService,
@@ -393,7 +396,8 @@ import {ValueSortFilterPipe} from "./cnext/framework/profile-comparison/value-so
     ReferenceService,
     RedirectRecruiterDashboardService,
     ReleventIndustryListService,
-    ProfileComparisonService
+    ProfileComparisonService,
+    GuidedTourService
 
   ],
   bootstrap: [AppComponent]
