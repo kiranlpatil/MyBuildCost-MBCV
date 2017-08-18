@@ -3,6 +3,7 @@ import {Section} from "../model/candidate";
 import {Messages, Tooltip, ValueConstant} from "../../../framework/shared/constants";
 import {ProficiencyDetailsService} from "../proficiency-detail-service";
 import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
+import {ErrorService} from "../error.service";
 
 @Component({
   moduleId: module.id,
@@ -22,8 +23,10 @@ export class ProficienciesComponent {
     '<li><p>2. '+ Tooltip.PROFICIENCIES_TOOLTIP_2+'</p></li>' +
     '<li><p>3. '+Tooltip.PROFICIENCIES_TOOLTIP_3+'</p></li></ul>';
   private maxProficiencies: number;
-  
-  constructor(private proficiencyDetailService: ProficiencyDetailsService, private profileCreatorService: CandidateProfileService) {
+
+  constructor(private proficiencyDetailService: ProficiencyDetailsService,
+              private errorService:ErrorService,
+              private profileCreatorService: CandidateProfileService) {
     this.proficiencyDetailService.makeCall$.subscribe(
       data => {
         if (data) {
@@ -81,7 +84,7 @@ export class ProficienciesComponent {
       .subscribe(
         data => {
           this.proficiencies = data.data[0].proficiencies;
-        });
+        },error => this.errorService.onError(error));
   }
 
     onPrevious() {

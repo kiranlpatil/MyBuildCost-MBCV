@@ -4,6 +4,7 @@ import {RecruiterDashboard} from "../model/recruiter-dashboard";
 import {RecruiterHeaderDetails} from "../model/recuirterheaderdetails";
 import {ActivatedRoute, Router} from "@angular/router";
 import {RedirectRecruiterDashboardService} from "../redirect-dashboard.service";
+import {ErrorService} from "../error.service";
 
 @Component({
   moduleId: module.id,
@@ -22,6 +23,7 @@ export class RecruiterDashboardComponent implements OnInit, AfterViewInit {
  // private showTabsForJobPoster: boolean = false;
 
   constructor(private recruiterDashboardService: RecruiterDashboardService,
+              private errorService:ErrorService,
               private activatedRoute: ActivatedRoute,private _router: Router,
               private redirectRecruiterDashboard: RedirectRecruiterDashboardService) {
     redirectRecruiterDashboard.showTest$.subscribe(
@@ -43,7 +45,7 @@ export class RecruiterDashboardComponent implements OnInit, AfterViewInit {
           } else {
             this.screenType='welcomescreen';
           }
-        });
+        },error => this.errorService.onError(error));
   }
 
   ngOnInit() {

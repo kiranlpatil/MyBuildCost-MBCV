@@ -9,6 +9,7 @@ import { CandidateJobListService } from './candidate-job-list/candidate-job-list
 import { QCardFilterService } from '../filters/q-card-filter.service';
 import { LoaderService } from '../../../framework/shared/loader/loader.service';
 import {GuidedTourService} from "../guided-tour.service";
+import {ErrorService} from "../error.service";
 
 
 @Component({
@@ -35,14 +36,16 @@ export class CandidateDashboardComponent implements OnInit{
   private overlayScreensDashboardImgName:string;
   constructor(private candidateProfileService: CandidateProfileService,
               private candidateDashboardService: CandidateDashboardService,
+              private errorService: ErrorService,
               private candidateJobListService: CandidateJobListService,
               private qcardFilterService:QCardFilterService,
-              private loaderService: LoaderService, private guidedTourService:GuidedTourService) {
+              private loaderService: LoaderService,
+              private guidedTourService:GuidedTourService) {
     this.candidateProfileService.getCandidateDetails()
       .subscribe(
         candidateData => {
           this.OnCandidateDataSuccess(candidateData);
-        });
+        },error => this.errorService.onError(error));
   }
 
   ngOnInit() {
@@ -157,7 +160,7 @@ export class CandidateDashboardComponent implements OnInit{
         data => {
           this.appliedJobs = data.data;
           this.candidate.summary.numberOfJobApplied = this.appliedJobs.length;
-        });
+        },error => this.errorService.onError(error));
     if( this.candidate.summary.numberOfJobApplied===undefined){
       this.candidate.summary.numberOfJobApplied=0;
     }
@@ -175,7 +178,7 @@ export class CandidateDashboardComponent implements OnInit{
         data => {
           this.blockedJobs = data.data;
           this.candidate.summary.numberJobsBlocked = this.blockedJobs.length;
-        });
+        },error => this.errorService.onError(error));
     if( this.candidate.summary.numberJobsBlocked===undefined){
       this.candidate.summary.numberJobsBlocked=0;
     }
@@ -196,6 +199,6 @@ export class CandidateDashboardComponent implements OnInit{
           this.jobList = data;
           this.candidate.summary.numberOfmatched= this.jobList.length;
           this.extractList(this.jobList);
-        });
+        },error => this.errorService.onError(error));
   }
 }

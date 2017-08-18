@@ -9,6 +9,7 @@ import {ComplexityComponentService} from "./complexity.service";
 import {JobCompareService} from "../single-page-compare-view/job-compare-view/job-compare-view.service";
 import {Capability} from "../model/capability";
 import {GuidedTourService} from "../guided-tour.service";
+import {ErrorService} from "../error.service";
 
 @Component({
   moduleId: module.id,
@@ -64,6 +65,7 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
   constructor(private complexityService: ComplexityService,
               private complexityComponentService: ComplexityComponentService,
               private jobCompareService: JobCompareService,
+              private errorService: ErrorService,
               private guidedTourService:GuidedTourService) {
   }
 
@@ -96,7 +98,7 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
           if(!this.isEqualArrays(this.capabilities,savedCapabilities)) {
             this.getComplexityIds(this.complexities);
           }
-        });
+        },error => this.errorService.onError(error));
     }
   }
 
@@ -176,7 +178,7 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
     this.complexityComponentService.getCapabilityMatrix(jobId).subscribe(
       capa => {
         this.capabilities = this.jobCompareService.getStandardMatrix(capa.data);
-      });
+      },error => this.errorService.onError(error));
     this.isComplexityButtonEnable = false;
     if (this.isCandidate) {
       // this.showModalStyle = !this.showModalStyle;

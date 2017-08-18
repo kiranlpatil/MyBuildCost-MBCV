@@ -4,6 +4,7 @@ import { AppSettings, LocalStorage } from '../../../../framework/shared/constant
 import { LocalStorageService } from '../../../../framework/shared/localstorage.service';
 import { CandidateCompareService } from './candidate-compare-view.service';
 import { RecruiterDashboardService } from '../../recruiter-dashboard/recruiter-dashboard.service';
+import {ErrorService} from "../../error.service";
 
 
 @Component({
@@ -21,7 +22,10 @@ export class CandidateCompareViewComponent implements OnInit, OnChanges {
   private recruiter: any;
   private data: any;
 
-  constructor(private _router: Router, private candidateCompareService: CandidateCompareService, private recruiterDashboardService: RecruiterDashboardService) {
+  constructor(private _router: Router,
+              private errorService:ErrorService,
+              private candidateCompareService: CandidateCompareService,
+              private recruiterDashboardService: RecruiterDashboardService) {
   }
 
   ngOnInit() {
@@ -39,7 +43,8 @@ export class CandidateCompareViewComponent implements OnInit, OnChanges {
         .subscribe(
           data => {
             this.OnRecruiterDataSuccess(data.data.industry);
-          });
+          },
+          error => this.errorService.onError(error));
     }
   }
 
@@ -52,7 +57,7 @@ export class CandidateCompareViewComponent implements OnInit, OnChanges {
     this.candidateCompareService.getCompareDetail(candidateId, recruiterId)
       .subscribe(
         data => this.OnCompareSuccess(data),
-        error => console.log(error));
+        error => this.errorService.onError(error));
   }
 
   OnCompareSuccess(data: any) {

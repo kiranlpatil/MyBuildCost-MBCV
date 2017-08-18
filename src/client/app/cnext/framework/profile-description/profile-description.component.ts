@@ -6,6 +6,7 @@ import {ProfessionalDataService} from "../professional-data/professional-data.se
 import {Location} from "../../../framework/registration/location";
 import {MyGoogleAddress} from "../../../framework/registration/candidate/google-our-place/my-google-address";
 import {ProfileDetailsService} from "../profile-detail-service";
+import {ErrorService} from "../error.service";
 
 @Component({
   moduleId: module.id,
@@ -54,6 +55,7 @@ export class ProfileDescriptionComponent implements OnInit {
     '</ul>';
 
   constructor(private professionalDataService: ProfessionalDataService,
+              private errorService:ErrorService,
               private profileDetailService: ProfileDetailsService) {
     this.profileDetailService.makeCall$.subscribe(
       data => {
@@ -247,13 +249,13 @@ export class ProfileDescriptionComponent implements OnInit {
       .subscribe(
         data => {
           this.onExperienceListSuccess(data);
-        });
+        },error => this.errorService.onError(error));
 
     this.professionalDataService.getEducationList()
       .subscribe(
         data => {
           this.onEducationListSuccess(data);
-        });
+        },error => this.errorService.onError(error));
   }
 
   onEdit() {

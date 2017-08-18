@@ -1,6 +1,7 @@
 import {Component, OnInit} from "@angular/core";
 import {CandidateProfileService} from "../../candidate-profile/candidate-profile.service";
 import {Candidate} from "../../model/candidate";
+import {ErrorService} from "../../error.service";
 
 @Component({
   moduleId: module.id,
@@ -13,7 +14,7 @@ export class ValuePortraitComponent implements OnInit {
 
   private candidate: Candidate = new Candidate();
 
-  constructor(private candidateProfileService: CandidateProfileService) {
+  constructor(private candidateProfileService: CandidateProfileService,private errorService:ErrorService) {
 
   }
 
@@ -22,7 +23,7 @@ export class ValuePortraitComponent implements OnInit {
       .subscribe(
         candidateData => {
           this.candidate = candidateData.data;
-        });
+        },error => this.errorService.onError(error));
   }
 
 }

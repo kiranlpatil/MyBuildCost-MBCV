@@ -5,6 +5,7 @@ import {Section} from "../model/candidate";
 import {LocalStorageService} from "../../../framework/shared/localstorage.service";
 import {LocalStorage, Messages, Tooltip, ValueConstant} from "../../../framework/shared/constants";
 import {IndustryDataService} from "../industry-data-service";
+import {ErrorService} from "../error.service";
 
 @Component({
   moduleId: module.id,
@@ -37,6 +38,7 @@ export class IndustryExperienceListComponent implements OnInit,OnChanges {
   private suggestionMessageAboutCandidateDomain:string;
 
   constructor(private candidateProfileService: CandidateProfileService,
+              private errorService:ErrorService,
               private industryDetailsService: IndustryDataService) {
     this.industryDetailsService.makeCall$.subscribe(
       data => {
@@ -135,7 +137,8 @@ export class IndustryExperienceListComponent implements OnInit,OnChanges {
 
   getIndustries() {
     this.candidateProfileService.getIndustries()
-      .subscribe(industries => this.onIndustryListSuccess(industries.data));
+      .subscribe(industries => this.onIndustryListSuccess(industries.data),
+        error => this.errorService.onError(error));
   }
 
   onIndustryListSuccess(data: Industry[]) {

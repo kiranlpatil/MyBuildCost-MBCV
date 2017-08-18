@@ -4,6 +4,7 @@ import {LocalStorage, NavigationRoutes} from "../../../../framework/shared/const
 import {LocalStorageService} from "../../../../framework/shared/localstorage.service";
 import {Candidate} from "../../model/candidate";
 import {CandidateProfileService} from "../../candidate-profile/candidate-profile.service";
+import {ErrorService} from "../../error.service";
 
 
 @Component({
@@ -18,7 +19,9 @@ export class CandidateSummaryComponent implements OnInit {
   private candidateId: string;
   private candidate: Candidate = new Candidate();
 
-  constructor(private _router: Router, private profileCreatorService: CandidateProfileService) {
+  constructor(private _router: Router,
+              private errorService:ErrorService,
+              private profileCreatorService: CandidateProfileService) {
   }
 
   ngOnInit() {
@@ -29,7 +32,8 @@ export class CandidateSummaryComponent implements OnInit {
   getCandidateProfile(candidateId: string) {
     this.profileCreatorService.getCandidateDetailsOfParticularId(candidateId)
       .subscribe(
-        candidateData => this.OnCandidateDataSuccess(candidateData));
+        candidateData => this.OnCandidateDataSuccess(candidateData),
+        error => this.errorService.onError(error));
   }
 
   OnCandidateDataSuccess(candidateData: any) {

@@ -28,7 +28,7 @@ export function cnextInit(app: express.Application) { //todo add interceptor to 
   app.get('/api/candidate/:id',this.authInterceptor.requiresAuth, candidateController.retrieve);
   app.get('/api/industry/:id/roles/capability',this.authInterceptor.requiresAuth, capabilityController.retrieve);
   app.get('/api/industry/:id/roles/capability/complexity',this.authInterceptor.requiresAuth, complexityController.retrieve);
-  app.get('/api/companysize',this.authInterceptor.requiresAuth, userController.getCompanySize);
+  app.get('/api/companysize', userController.getCompanySize);
   app.get('/api/function', this.authInterceptor.requiresAuth,userController.getFunction);
   app.put('/api/recruiter/:id',this.authInterceptor.requiresAuth, recruiterController.updateDetails);
   app.get('/api/recruiter/:id',this.authInterceptor.requiresAuth, recruiterController.retrieve);
