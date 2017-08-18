@@ -208,7 +208,6 @@
     padding-left: 0;
     color: $error-messages;
     font-size: 11px;
-    padding-left: 0;
     position: absolute;
 
     p {
@@ -222,6 +221,13 @@
     z-index: 3;
     max-width: 500px;
     text-align: left;
+  }
+
+  .info-message {
+    color: $theme-color !important;
+    p {
+      color: $theme-color !important;
+    }
   }
 
   span {
@@ -506,6 +512,14 @@
 
   .scrollable-content {
     padding: 0 205px 75px 45px;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .main-content {
+    .edit-error-msg {
+      max-width: 300px;
+    }
   }
 }
 
