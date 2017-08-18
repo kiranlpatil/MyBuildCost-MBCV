@@ -221,12 +221,38 @@
     z-index: 3;
     max-width: 500px;
     text-align: left;
+    padding-left: 20px;
+
+    .glyphicon-warning-sign {
+      color: $error-messages;
+      font-size: 16px;
+      left: 0;
+      position: absolute;
+      top: 0;
+    }
+
   }
 
   .info-message {
-    color: $theme-color !important;
+    padding-left: 20px;
+    color: $info-message !important;
+
+    .glyphicon-info-sign {
+      color: $info-message;
+      font-size: 16px;
+      left: 0;
+      position: absolute;
+      top: 0;
+    }
+
+    .glyphicon-warning-sign {
+      display: none;
+    }
+  }
+
+  .proficiency-info-messages {
     p {
-      color: $theme-color !important;
+      color: $info-message !important;
     }
   }
 

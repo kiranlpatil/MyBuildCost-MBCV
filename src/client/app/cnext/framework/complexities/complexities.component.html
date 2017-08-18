@@ -24,10 +24,14 @@
       </div>
 
       <div class="button-group clearfix clear">
-        <div class="error-messages edit-error-msg" *ngIf="!isValid && isCandidate"><p>
-          {{requiedValidationMessageCandidate}}</p></div>
-        <div class="error-messages edit-error-msg" *ngIf="!isValid && !isCandidate"><p>
-          {{requiedValidationMessageRecruiter}}</p></div>
+        <div class="error-messages edit-error-msg" *ngIf="!isValid && isCandidate">
+          <span class="glyphicon glyphicon-warning-sign"></span>
+          {{requiedValidationMessageCandidate}}
+        </div>
+        <div class="error-messages edit-error-msg" *ngIf="!isValid && !isCandidate">
+          <span class="glyphicon glyphicon-warning-sign"></span>
+          {{requiedValidationMessageRecruiter}}
+        </div>
         <!--<div class="saving-loader">Saving...</div>-->
         <button class="btn btn-primary" [hidden]="singleComplexity" (click)="onNext()"
                 *ngIf="isCandidate">Next

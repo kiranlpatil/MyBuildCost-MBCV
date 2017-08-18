@@ -37,7 +37,12 @@
       class="glyphicon glyphicon-chevron-left"></span></button>
 
     <div class="button-group clearfix">
-      <div class="error-messages edit-error-msg" *ngIf="!isValid">{{validationMessage}}</div>
+      <div class="error-messages edit-error-msg" [class.info-message]="isInfoMessage"
+           *ngIf="!isValid && validationMessage != ''">
+        <span class="glyphicon glyphicon-warning-sign"></span>
+        <span *ngIf="isInfoMessage" class="glyphicon glyphicon-info-sign"></span>
+        {{validationMessage}}
+      </div>
       <!--<div class="saving-loader">Saving...</div>-->
       <button class="btn btn-primary" scrollTo scrollTargetSelector="#complexity-area"
               (click)="onNext()" [hidden]="!showButton">Next

@@ -26,7 +26,8 @@
 
     <div class="button-group clearfix">
       <div class="error-messages edit-error-msg" *ngIf="!isValidservicePeriod">
-        <p>{{serviceValidMessage}}</p>
+        <span class="glyphicon glyphicon-warning-sign"></span>
+        {{serviceValidMessage}}
       </div>
       <!--<div class="saving-loader">Saving...</div>-->
       <button type="submit" class="btn btn-primary"

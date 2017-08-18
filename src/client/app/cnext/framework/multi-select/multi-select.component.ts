@@ -1,7 +1,7 @@
-import { Component, ElementRef, EventEmitter, Input, OnChanges, Output, ViewChild } from '@angular/core';
-import { MultiSelectService } from './multi-select.service';
-import { CandidateProfileService } from '../candidate-profile/candidate-profile.service';
-import { Messages } from '../../../framework/shared/constants';
+import {Component, ElementRef, EventEmitter, Input, OnChanges, Output, ViewChild} from "@angular/core";
+import {MultiSelectService} from "./multi-select.service";
+import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
+import {Messages} from "../../../framework/shared/constants";
 
 
 @Component({
@@ -21,9 +21,9 @@ export class MultiSelectComponent implements OnChanges {
   @Input() requiredKeySkillsValidationMessage: string;
   @Input() maxKeySkillsValidationMessage: string;
 
-  private selectedProficiencies = new Array();
-  private masterDataProficiencies = new Array();
-  private Proficiencies = new Array();
+  private selectedProficiencies = [];
+  private masterDataProficiencies = [];
+  private Proficiencies = [];
   private validationMessage: string;
   private showAlert: boolean = false;
   private alreadyPresent: boolean = false;
@@ -31,6 +31,7 @@ export class MultiSelectComponent implements OnChanges {
   private showModalStyle: boolean = false;
   private otherProficiency: string = '';
   private disableTextField: boolean = false;
+  private isInfoMessage: boolean = false;
   private noMatchFoundText :string=Messages.MSG_NO_MATCH_FOUND_TEXT;
   @ViewChild('myInput')
   private _inputElement: ElementRef;
@@ -74,10 +75,12 @@ export class MultiSelectComponent implements OnChanges {
           this.onComplete.emit(this.selectedProficiencies);
         }
         if(setOfCapabilityNumber.indexOf(this.selectedProficiencies.length) > -1) {
-          this.validationMessage = `You can add ${this.maxLength - this.selectedProficiencies.length} more key skills.`
+          this.isInfoMessage = true;
+          this.validationMessage = `You can add ${this.maxLength - this.selectedProficiencies.length} more key skills.`;
           this.showAlert = true;
         }
         if(this.selectedProficiencies.length === this.maxLength){
+          this.isInfoMessage = true;
           this.validationMessage = this.maxKeySkillsValidationMessage;
           this.showAlert = true;
         }
@@ -85,6 +88,7 @@ export class MultiSelectComponent implements OnChanges {
         this.disableTextField=true;
         this.validationMessage=this.maxKeySkillsValidationMessage;
         this.showAlert = true;
+        this.isInfoMessage = true;
       }
     }
 
@@ -95,6 +99,7 @@ export class MultiSelectComponent implements OnChanges {
   deleteItem(newVal: any) {
     let setOfCapabilityNumber=[4,3,2,1];
     this.showAlert = false;
+    this.isInfoMessage = false;
     for (let i = 0; i < this.selectedProficiencies.length; i++) {
       if (this.selectedProficiencies[i].trim() === newVal.currentTarget.id.trim()) {
         this.selectedProficiencies.splice(i, 1);
@@ -104,7 +109,8 @@ export class MultiSelectComponent implements OnChanges {
     }
     if(setOfCapabilityNumber.indexOf(this.selectedProficiencies.length) > 0) {
       this.disableTextField=false;
-      this.validationMessage = `You can add ${this.maxLength - this.selectedProficiencies.length} more key skills.`
+      this.isInfoMessage = true;
+      this.validationMessage = `You can add ${this.maxLength - this.selectedProficiencies.length} more key skills.`;
       this.showAlert = true;
     }
     this.onComplete.emit(this.selectedProficiencies);

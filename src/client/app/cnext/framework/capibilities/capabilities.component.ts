@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, Output} from "@angular/core";
 import {Role} from "../model/role";
 import {Capability} from "../model/capability";
-import {LocalStorage, Messages, Tooltip, ValueConstant, ImagePath} from "../../../framework/shared/constants";
+import {ImagePath, LocalStorage, Messages, Tooltip, ValueConstant} from "../../../framework/shared/constants";
 import {Section} from "../model/candidate";
 import {LocalStorageService} from "../../../framework/shared/localstorage.service";
 import {GuidedTourService} from "../guided-tour.service";
@@ -35,6 +35,7 @@ export class CapabilitiesComponent {
   private guidedTourImgOverlayScreensComplexities:string;
   private guidedTourImgOverlayScreensComplexitiesPath:string;
   private isGuideImg:boolean = false;
+  private isInfoMessage: boolean = false;
 
   tooltipCandidateMessage: string =
 
@@ -88,16 +89,19 @@ export class CapabilitiesComponent {
 
   selectedCapability(selectedRole: Role, selectedCapability: Capability, event: any) {
     this.isValid = true;
+    this.isInfoMessage = false;
     this.validationMessage = '';
     this.disableButton = false;
     this.roles[0].isAPIForComplexity = true;
     let setOfCapabilityNumber = [7,8,9];
     if (event.target.checked) {
       this.isValid = false;
+      this.isInfoMessage = false;
       if (this.primaryCapabilitiesNumber < ValueConstant.MAX_CAPABILITIES) {
         this.primaryCapabilitiesNumber++;
         if(setOfCapabilityNumber.indexOf(this.primaryCapabilitiesNumber) > -1 && this.capabilitiesCodes.length >= ValueConstant.MAX_CAPABILITIES) {
           this.isValid = false;
+          this.isInfoMessage = true;
           this.validationMessage = `You can select ${ValueConstant.MAX_CAPABILITIES - this.primaryCapabilitiesNumber} more capabilities.`
         }
         selectedCapability.isPrimary = true;
@@ -106,6 +110,7 @@ export class CapabilitiesComponent {
       } else {
         event.target.checked=false;
         this.isValid = false;
+        this.isInfoMessage = true;
         this.validationMessage = Messages.MSG_ERROR_VALIDATION_MAX_CAPABILITIES_CROSSED;
         /*this.secondaryNames.push(selectedCapability.name);
         selectedCapability.isSecondary = true;*/
@@ -115,6 +120,7 @@ export class CapabilitiesComponent {
         this.primaryCapabilitiesNumber--;
         if(setOfCapabilityNumber.indexOf(this.primaryCapabilitiesNumber) > 0 && this.capabilitiesCodes.length >= ValueConstant.MAX_CAPABILITIES) {
           this.isValid = false;
+          this.isInfoMessage = true;
           this.validationMessage = `You can select ${ValueConstant.MAX_CAPABILITIES - this.primaryCapabilitiesNumber} more capabilities.`
         }
         this.primaryNames.splice(this.primaryNames.indexOf(selectedCapability.code), 1);
@@ -153,6 +159,7 @@ export class CapabilitiesComponent {
     this.validationMessage = '';
     if(this.primaryNames.length == 0){
       this.isValid = false;
+      this.isInfoMessage = false;
       this.validationMessage = this.isCandidate ? Messages.MSG_ERROR_VALIDATION_CAPABILITIES_REQUIRED_CANDIDATE : Messages.MSG_ERROR_VALIDATION_CAPABILITIES_REQUIRED_RECRUITER;
       return;
     }
@@ -178,6 +185,7 @@ export class CapabilitiesComponent {
     this.validationMessage = '';
     if(this.primaryNames.length == 0){
       this.isValid = false;
+      this.isInfoMessage = false;
       this.validationMessage = this.isCandidate ? Messages.MSG_ERROR_VALIDATION_CAPABILITIES_REQUIRED_CANDIDATE : Messages.MSG_ERROR_VALIDATION_CAPABILITIES_REQUIRED_RECRUITER;
       return;
     }
