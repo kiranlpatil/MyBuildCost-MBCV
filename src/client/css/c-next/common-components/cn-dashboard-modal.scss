@@ -3,9 +3,9 @@
 .dashboard-modal {
 
   .modal-dialog {
-    width: 83%;
-    height: 80%;
-    top: 50%;
+    width: 100%;
+    height: calc(99% - 70px);
+    top: 51%;
     -webkit-transform: translate(0, -50%) !important;
     transform: translate(-50%, -50%) !important;
     border-radius: 0 !important;
@@ -16,7 +16,7 @@
 
   .compare-modal-dialog {
     width: 100%;
-    height: calc(100% - 70px);
+    height: calc(98% - 70px);
     top: 50%;
     -webkit-transform: translate(0, -50%) !important;
     transform: translate(-50%, -50%) !important;
@@ -92,7 +92,7 @@
   .button-group {
     display: block;
     position: fixed;
-    bottom: -7px;
+    bottom: 4px;
     right: 10px;
     background: transparent;
     z-index: 100;

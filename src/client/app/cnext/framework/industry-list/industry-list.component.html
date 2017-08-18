@@ -6,7 +6,10 @@
   <div class="main-content clearfix edit-modal-content" industrydetails>
     <h4 class="heading" *ngIf="isCandidate">Select your Industry (Any One)</h4>
     <h4 class="heading" *ngIf="!isCandidate">Select industry in which candidate is expected to work (Any One)</h4>
-    <div class="error-messages edit-error-msg" *ngIf="!isValid"><p>{{requiredFieldMessage}}</p></div>
+    <div class="error-messages edit-error-msg" *ngIf="!isValid">
+      <span class="glyphicon glyphicon-warning-sign"></span>
+      {{requiredFieldMessage}}
+    </div>
     <div class="scrollable-content">
       <div class="select-option" *ngFor="let item of industries;let i = index">
         <label>

@@ -208,7 +208,6 @@
     padding-left: 0;
     color: $error-messages;
     font-size: 11px;
-    padding-left: 0;
     position: absolute;
 
     p {
@@ -222,6 +221,39 @@
     z-index: 3;
     max-width: 500px;
     text-align: left;
+    padding-left: 20px;
+
+    .glyphicon-warning-sign {
+      color: $error-messages;
+      font-size: 16px;
+      left: 0;
+      position: absolute;
+      top: 0;
+    }
+
+  }
+
+  .info-message {
+    padding-left: 20px;
+    color: $info-message !important;
+
+    .glyphicon-info-sign {
+      color: $info-message;
+      font-size: 16px;
+      left: 0;
+      position: absolute;
+      top: 0;
+    }
+
+    .glyphicon-warning-sign {
+      display: none;
+    }
+  }
+
+  .proficiency-info-messages {
+    p {
+      color: $info-message !important;
+    }
   }
 
   span {
@@ -506,6 +538,14 @@
 
   .scrollable-content {
     padding: 0 205px 75px 45px;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .main-content {
+    .edit-error-msg {
+      max-width: 300px;
+    }
   }
 }
 
