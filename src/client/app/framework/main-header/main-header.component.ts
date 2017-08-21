@@ -30,7 +30,8 @@ export class MainHeaderComponent {
   }
 
     onHomePage() {
-        window.location.href = 'http://www.jobmosis.com';
+      let host = 'http://' + window.location.hostname;
+      this._router.navigate([host]);
     }
 }
 
