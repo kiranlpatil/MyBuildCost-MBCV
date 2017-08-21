@@ -48,7 +48,7 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
 
   tooltipCandidateMessage: string = '<ul><li>' +
     '<p>1. '+ Tooltip.COMPLEXITIES_CANDIDATE_TOOLTIP_1+'</p></li>'+
-    '<li><p>1. '+Tooltip.COMPLEXITIES_CANDIDATE_TOOLTIP_2+'</p></li></ul>';
+    '<li><p>2. '+Tooltip.COMPLEXITIES_CANDIDATE_TOOLTIP_2+'</p></li></ul>';
   tooltipRecruiterMessage: string = '<ul><li>' +
     '<p>1. '+Tooltip.COMPLEXITIES_RECRUITER_TOOLTIP_1+'</p></li>' +
     '<li><p>2. '+Tooltip.COMPLEXITIES_RECRUITER_TOOLTIP_2+'</p>' +

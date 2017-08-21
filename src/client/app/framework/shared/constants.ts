@@ -93,7 +93,7 @@ export class Messages {
   public static MSG_ERROR_VALIDATION_CURRENTCOMPANY_REQUIRED = 'This field can\'t be left blank.';
   public static MSG_ERROR_VALIDATION_EDUCATION_REQUIRED = 'This field can\'t be left blank.';
   public static MSG_ERROR_VALIDATION_EXPERIENCE_REQUIRED = 'This field can\'t be left blank.';
-  public static MSG_ERROR_VALIDATION_INDUSTRY_REQUIRED = 'This field can\'t be left blank.';
+  public static MSG_ERROR_VALIDATION_INDUSTRY_REQUIRED = 'Please select an Industry';
   public static MSG_ERROR_VALIDATION_AREAS_WORKED_REQUIRED = 'Select areas you have worked.';
   public static MSG_ERROR_VALIDATION_FOR_RECRUITER_AREAS_WORKED_REQUIRED = 'Select areas in which the candidate is expected to work.';
   public static MSG_ERROR_VALIDATION_MAX_AREAS_WORKED_CROSSED = 'You have selected maximum work areas. To select a new work area, deselect any of the earlier ones.';

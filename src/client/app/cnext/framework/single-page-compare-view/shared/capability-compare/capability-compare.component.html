@@ -24,11 +24,13 @@
               <span class="empty-divs" *ngIf="x >= capability.complexities.length;"></span>
             </div>
             <div *ngFor="let complexity of capability.complexities;let i=index">
-              <div class="col-sm-12 no-padding row-background">
+              <div class="col-sm-12 no-padding row-background"
+                   *ngIf="complexity.scenarios[0].job_scenario_name != 'Not Applicable'">
                 <div class="" [class.exact]="complexity.match==2 "
                      [class.above]="complexity.match==3"
                      [class.below]="complexity.match==1" [class.missing]="complexity.match == 0"
-                     [class.extra]="complexity.match==4" *ngIf="complexity.scenarios[0]&& complexity.scenarios[0].name != undefined && complexity.scenarios[0].job_scenario_name!='Not Applicable'">
+                     [class.extra]="complexity.match==4"
+                     *ngIf="complexity.scenarios[0]&& complexity.scenarios[0].name != undefined">
                   <span class="complexity-name">{{complexity.name}}</span>
                   <div *ngFor="let scenario of complexity.scenarios">
                     <div class="complexity-scenarios-description">
@@ -46,6 +48,7 @@
                             </span>
                           </div>
                           <div class="col-xs-10 ">
+                            <span *ngIf="scenario.candidate_scenario_name == undefined"> NA </span>
                             <span>{{scenario.candidate_scenario_name}} </span>
                           </div>
                           <div class="clearfix bottom-div"></div>

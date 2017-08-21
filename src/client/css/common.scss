@@ -689,7 +689,8 @@ control-messages {
     max-width: 1200px;
     width: 100%;
     position: relative !important;
-    z-index: 1 !important;
+    z-index: 5 !important;
+    float: left;
   }
 }
 
@@ -697,7 +698,7 @@ control-messages {
   position: fixed;
   height: 100%;
   width: 100%;
-  z-index: 9999;
+  z-index: 99999;
   top: 0;
   left: 0;
   img {
@@ -721,6 +722,11 @@ control-messages {
       text-align: center;
     }
   }
+}
+
+.dashboard-view,
+.card-view {
+  margin-bottom: 20px;
 }
 
 // Media Queries

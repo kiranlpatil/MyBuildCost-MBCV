@@ -46,7 +46,8 @@ export class RecruiterSharedHeaderComponent implements OnInit {
 
   logOut() {
     window.localStorage.clear();
-    window.location.href='http://www.jobmosis.com';
+    let host='http://'+window.location.hostname;
+    this._router.navigate([host]);
     //this._router.navigate([NavigationRoutes.APP_START]);
   }
 

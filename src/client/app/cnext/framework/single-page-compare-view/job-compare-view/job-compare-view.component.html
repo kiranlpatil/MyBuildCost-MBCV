@@ -154,8 +154,8 @@
                     <div class="info-description">
                       <img class="missing-img" src="assets/framework/images/dashboard/info-red.svg"/>
                       <div class="info-hover-section">
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                        industry's standard dummy text ever since the 1500s,
+                        Job Education Required {{recruiter.postedJobs[0].education}}
+                        {{candidateDetails.first_name}} Education {{candidate.professionalDetails.education}}
                       </div>
                     </div>
                   </label>
@@ -167,8 +167,9 @@
                     <div class="info-description">
                       <img class="missing-img" src="assets/framework/images/dashboard/info-red.svg"/>
                       <div class="info-hover-section">
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                        industry's standard dummy text ever since the 1500s,
+                        Job Experience Band {{recruiter.postedJobs[0].experienceMinValue}} -
+                        {{recruiter.postedJobs[0].experienceMaxValue}}
+                        {{candidateDetails.first_name}} Experience {{candidate.professionalDetails.currentSalary}}
                       </div>
                     </div>
                   </label>
@@ -180,8 +181,9 @@
                     <div class="info-description">
                       <img class="missing-img" src="assets/framework/images/dashboard/info-red.svg"/>
                       <div class="info-hover-section">
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                        industry's standard dummy text ever since the 1500s,
+                        Job Salary Band {{recruiter.postedJobs[0].salaryMinValue}} -
+                        {{recruiter.postedJobs[0].salaryMaxValue}}
+                        {{candidateDetails.first_name}} Salary {{candidate.professionalDetails.currentSalary}}
                       </div>
                     </div>
                   </label>

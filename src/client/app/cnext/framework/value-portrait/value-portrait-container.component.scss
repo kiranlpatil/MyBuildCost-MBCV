@@ -27,6 +27,8 @@
     float: right;
     margin: 14px 0;
     padding-top: 3px;
+    position: relative;
+    z-index: 9999;
     img {
       height: 50px;
       width: 50px;

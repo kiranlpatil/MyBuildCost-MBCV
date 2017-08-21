@@ -2,9 +2,8 @@
 
 .error-messages {
   position: fixed;
-  margin: 5px 15px;
-  bottom: 0;
-  left: 0;
+  bottom: 15px;
+  left: 15px;
 }
 
 .compact-view {
@@ -75,7 +74,7 @@
 .question-count {
   position: absolute;
   bottom: 15px;
-  right: 360px;
+  right: 130px;
   z-index: 3;
 }
 
@@ -85,20 +84,9 @@
   white-space: normal !important;
 }
 
-@media only screen and (max-width: 768px) {
-  .question-count {
-    right: 315px;
-  }
-}
-
 @media only screen and (max-width: 767px) {
   .capability-edit {
     top: 2px !important;
-  }
-
-  .question-count {
-    right: 120px;
-    bottom: 15px;
   }
 
   .main-content {

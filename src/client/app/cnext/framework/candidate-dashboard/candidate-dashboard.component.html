@@ -33,14 +33,14 @@
             </ul>
             <div class="tab-content">
               <div id="matched" class="tab-pane fade in active matched">
-                <cn-q-card-list [joblistCount]="jobList.length" [listOfJobs]="jobList" [type]="'none'"
+                <cn-q-card-list *ngIf="typeOfListVisible=='matched'" [joblistCount]="jobList.length" [listOfJobs]="jobList" [type]="'none'"
                                 (onAction)="onActionPerformOnExactList($event)"></cn-q-card-list>
                 <div class="empty-list-message" *ngIf="candidate.summary.numberOfmatched==0">
                   <p>{{emptyDashboardMessage}}</p>
                 </div>
               </div>
               <div id="applied" class="tab-pane fade"><!--[hidden]="!hideSection"-->
-                <cn-candidate-job-list [progress_bar_color]="'#f7c72d'" [type]="'apply'" [listOfJobs]="appliedJobs"
+                <cn-candidate-job-list *ngIf="typeOfListVisible=='applied'"  [progress_bar_color]="'#f7c72d'" [type]="'apply'" [listOfJobs]="appliedJobs"
                                        (onAction)="onActionOnApplyJob($event)"
                 ></cn-candidate-job-list><!--[hidden]="type !=='apply'"-->
                 <div class="empty-list-message" *ngIf="candidate.summary.numberOfJobApplied==0 ">
@@ -48,7 +48,7 @@
                 </div>
               </div>
               <div id="rejected" class="tab-pane fade"><!-- [hidden]="!hideSection" -->
-                <cn-candidate-job-list [progress_bar_color]="'#e91d62'" [type]="'block'" [listOfJobs]="blockedJobs"
+                <cn-candidate-job-list *ngIf="typeOfListVisible=='rejected'"  [progress_bar_color]="'#e91d62'" [type]="'block'" [listOfJobs]="blockedJobs"
                                        (onAction)="onActionOnBlockJob($event)"
                 ></cn-candidate-job-list><!-- [hidden]="type !=='block'" -->
                 <div class="empty-list-message"  *ngIf="candidate.summary.numberJobsBlocked==0 ">
