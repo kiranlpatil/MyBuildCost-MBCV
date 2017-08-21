@@ -33,6 +33,8 @@ export class CandidateDashboardComponent implements OnInit{
   private overlayScreensDashboardImgPath:string;
   private guidedTourStatus:string[] = new Array(0);
   private overlayScreensDashboardImgName:string;
+  private typeOfListVisible : string ='matched';
+
   constructor(private candidateProfileService: CandidateProfileService,
               private candidateDashboardService: CandidateDashboardService,
               private candidateJobListService: CandidateJobListService,
@@ -145,6 +147,7 @@ export class CandidateDashboardComponent implements OnInit{
 
   showAppliedJobs() {
    /* this.qcardFilterService.clearFilter();*/
+   this.typeOfListVisible='applied';
     if(this.appliedJobs.length>0) {
       return;
     }
@@ -164,6 +167,7 @@ export class CandidateDashboardComponent implements OnInit{
   }
   showRejectedJobs() {
    /* this.qcardFilterService.clearFilter();*/
+    this.typeOfListVisible='rejected';
     if(this.blockedJobs.length>0) {
       return;
     }
@@ -182,6 +186,7 @@ export class CandidateDashboardComponent implements OnInit{
   }
 
   showMatchedJobs() {
+    this.typeOfListVisible='matched';
     if(this.jobList.length>0) {
       return;
     }

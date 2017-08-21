@@ -3,7 +3,7 @@
 </div>-->
 <div class="candidate-compare-header clearfix">
   <div class="matching-capabilities">
-    <h6>Core Capabilities Matching</h6>
+    <h6>Core Capabilities</h6>
   </div>
   <div class="matching-candidate-details">
     <!-- Start: repeat this div using for loop -->
@@ -12,7 +12,7 @@
         <button class="btn dropdown-toggle" type="button" data-toggle="dropdown"><span
                 class="glyphicon glyphicon-option-vertical"></span></button>
         <ul class="dropdown-menu">
-          <li *ngIf="item.candidateListStatus.indexOf('cartListed') == -1 && item.candidateListStatus.indexOf('rejectedList') == -1" (click)="actionToPerformOnCompareList('AddToCart',item)"><a>Add toCart</a></li>
+          <li *ngIf="item.candidateListStatus.indexOf('cartListed') == -1 && item.candidateListStatus.indexOf('rejectedList') == -1" (click)="actionToPerformOnCompareList('AddToCart',item)"><a>Add to Cart</a></li>
           <li *ngIf="item.candidateListStatus.indexOf('rejectedList') == -1" (click)="actionToPerformOnCompareList('Reject',item)"><a>Reject</a></li>
           <li (click)="actionToPerformOnCompareList('Remove',item)"><a>Remove</a></li>
         </ul>

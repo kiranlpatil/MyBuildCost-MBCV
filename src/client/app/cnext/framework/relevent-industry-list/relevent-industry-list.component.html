@@ -40,7 +40,7 @@
   </div>
 </div>
 
-<div class="section-container" *ngIf="highlightedSection.name!='ReleventIndustry'">
+<div class="section-container" *ngIf="highlightedSection.name!='ReleventIndustry' && releventIndustries.length">
   <div class="main-content" (click)="onEdit()">
     <div class="compact-view clearfix">
       <button class="btn-edit"
