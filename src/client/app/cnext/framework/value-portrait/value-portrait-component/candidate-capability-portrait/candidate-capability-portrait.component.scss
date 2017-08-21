@@ -300,3 +300,33 @@
   background: $gray-light1;
   height: 1px;
 }
+
+@media only screen and (max-width: 767px) {
+  .value-portraot-candidate-capability-circle {
+    width: 100%;
+    .circle {
+      float: none;
+      margin: 19px 20px;
+      &:before {
+        position: absolute;
+        top: inherit;
+        left: 52px !important;
+        z-index: 0;
+        bottom: -24px;
+        transform: rotate(90deg);
+      }
+    }
+    .second-line {
+      float: none;
+      margin: 0px 20px 19px 20px;
+    }
+  }
+  .value-portraot-candidate-capability {
+    h3 {
+      margin: 0 0 30px;
+      &:before {
+        display: none;
+      }
+    }
+  }
+}

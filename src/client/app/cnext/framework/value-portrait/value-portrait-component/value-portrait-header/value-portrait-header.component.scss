@@ -132,3 +132,45 @@
 .padding-left-0 {
   padding-left: 0;
 }
+
+@media only screen and (max-width: 767px) {
+  .value-portraot-candidate-profile-section {
+    .value-portraot-candidate-name {
+      width: 100%;
+      margin: 10px 0 0;
+    }
+    .value-portraot-candidate-job-title {
+      width: 100%;
+      margin: 0;
+    }
+    .value-portraot-candidate-profile-img {
+      img {
+        width: 100px;
+        height: 100px;
+        margin: 0 auto;
+        display: table;
+        float: none;
+      }
+    }
+    .value-portraot-candidate-number {
+      margin: 12px 0 10px 0;
+    }
+    .value-portraot-candidate-industry {
+      margin: 10px 0 10px 0;
+    }
+    .value-portraot-candidate-area-work {
+      label {
+        margin: 10px 5px 0px 0;
+        width: auto;
+      }
+      span {
+        padding: 0 0 0 50px;
+        width: auto;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 320px) and (max-width: 399px) {
+
+}

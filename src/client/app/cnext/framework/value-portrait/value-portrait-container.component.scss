@@ -55,3 +55,36 @@
   left: 0;
   overflow: auto;
 }
+
+@media only screen and (max-width: 767px) {
+  .top-header {
+    width: 100%;
+    padding: 0 10px;
+    h1 {
+      font-size: 14px;
+      span {
+        font-size: 12px;
+      }
+    }
+    .job-mosis-white-logo {
+      margin: 0;
+    }
+  }
+  .value-portraot-container {
+    width: 100%;
+  }
+  .value-portraot-candidate-capability-circle {
+    width: 100%;
+  }
+
+  .value-portraot-candidate-name {
+    width: 100%;
+  }
+  .value-portraot-candidate-job-title {
+    width: 100%;
+  }
+}
+
+@media screen and (min-width: 320px) and (max-width: 399px) {
+
+}
