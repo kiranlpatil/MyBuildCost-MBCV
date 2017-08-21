@@ -25,7 +25,8 @@
     <button class="btn-prev" (click)="onPrevious()"><span
       class="glyphicon glyphicon-chevron-left"></span></button>
 
-    <div class="error-messages edit-error-msg" *ngIf="!isValid">
+    <div class="error-messages edit-error-msg" [class.info-message]="isInfoMessage" *ngIf="!isValid">
+      <span class="glyphicon glyphicon-info-sign" *ngIf="isInfoMessage"></span>
       <span class="glyphicon glyphicon-warning-sign"></span>
       {{validationMessage}}
     </div>

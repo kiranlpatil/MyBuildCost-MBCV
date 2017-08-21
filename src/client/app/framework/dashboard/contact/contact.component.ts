@@ -19,6 +19,13 @@ export class ContactComponent implements OnInit, OnDestroy {
   userForm: FormGroup;
   error_msg: string;
   isShowErrorMessage: boolean = true;
+  contactUsText: string= Messages.MSG_CONTACT_US;
+  contactAddress: string= Messages.CONTACT_US_ADDRESS;
+  contactNumber1: string= Messages.CONTACT_US_CONTACT_NUMBER_1;
+  contactNumber2: string= Messages.CONTACT_US_CONTACT_NUMBER_2;
+  contactEmail1: string= Messages.CONTACT_US_EMAIL_1;
+  contactEmail2: string= Messages.CONTACT_US_EMAIL_2;
+
 
   constructor(private commonService: CommonService, private _router: Router, private loaderService: LoaderService,
               private contactService: ContactService, private messageService: MessageService, private formBuilder: FormBuilder) {

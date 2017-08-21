@@ -233,7 +233,7 @@ class UserService {
             this.company_name = recruiter[0].company_name;
 
             var auth = new AuthInterceptor();
-            var token = auth.issueTokenWithUid(field);
+            var token = auth.issueTokenWithUid(recruiter[0]);
             var host = config.get('TplSeed.mail.host');
             var link = host + "company_details?access_token=" + token + "&_id=" + res[0]._id+ "&companyName=" +this.company_name;
             var header1 = fs.readFileSync("./src/server/app/framework/public/header1.html").toString();

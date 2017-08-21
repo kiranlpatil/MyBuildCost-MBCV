@@ -6,7 +6,7 @@ import {CommonService, ImagePath, Message, MessageService, NavigationRoutes} fro
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ValidationService} from "../../../shared/customvalidations/validation.service";
 import {LocalStorageService} from "../../../shared/localstorage.service";
-import {LocalStorage} from "../../../shared/constants";
+import {LocalStorage, Messages} from "../../../shared/constants";
 import {LoaderService} from "../../../shared/loader/loader.service";
 
 
@@ -27,6 +27,8 @@ export class ChangeMobileComponent implements OnInit {
   MOBILE_ICON: string;
   NEW_MOBILE_ICON: string;
   CONFIRM_MOBILE_ICON: string;
+  mobileNumberNotMatch:string= Messages.MSG_MOBILE_NUMBER_NOT_MATCH;
+  mobileNumberChangeSucess:string =Messages.MSG_MOBILE_NUMBER_Change_SUCCESS;
 
   constructor(private commonService: CommonService, private _router: Router,
               private MobileService: ChangeMobileService, private messageService: MessageService, private formBuilder: FormBuilder, private loaderService: LoaderService) {

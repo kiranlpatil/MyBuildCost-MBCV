@@ -3,6 +3,7 @@ import {CandidateProfileService} from "../candidate-profile/candidate-profile.se
 import {Candidate, Section} from "../model/candidate";
 import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Tooltip} from "../../../framework/shared/constants";
+import {ErrorService} from "../error.service";
 
 @Component({
   moduleId: module.id,
@@ -30,7 +31,9 @@ export class CertificationAccreditationComponent {
   private showButton: boolean = true;
   private submitStatus: boolean;
 
-  constructor(private _fb: FormBuilder, private profileCreatorService: CandidateProfileService) {
+  constructor(private _fb: FormBuilder,
+              private errorService:ErrorService,
+              private profileCreatorService: CandidateProfileService) {
     this.certificationDetail = this._fb.group({
       certifications: this._fb.array([])
     });
@@ -131,7 +134,7 @@ export class CertificationAccreditationComponent {
     if (type == 'do_nothing') {
       this.profileCreatorService.addProfileDetail(this.candidate).subscribe(
         user => {
-        });
+        },error => this.errorService.onError(error));
       return;
     }
 
@@ -172,7 +175,7 @@ export class CertificationAccreditationComponent {
           else if (type == 'save') {
             this.onSave();
           }
-        });
+        },error => this.errorService.onError(error));
       return;
     }
 

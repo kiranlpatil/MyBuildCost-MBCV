@@ -14,6 +14,7 @@ import {Router} from "@angular/router";
 import {Industry} from "../model/industry";
 import {RecruiterDashboardService} from "../recruiter-dashboard/recruiter-dashboard.service";
 import {RecruiterDashboard} from "../model/recruiter-dashboard";
+import {ErrorService} from "../error.service";
 
 @Component({
   moduleId: module.id,
@@ -62,6 +63,7 @@ export class JobPosterComponent implements OnInit, OnChanges {
   constructor(private profileCreatorService: CandidateProfileService,
               private recruiterDashboardService: RecruiterDashboardService,
               private messageService: MessageService,
+              private errorService: ErrorService,
               private showQCardView: ShowQcardviewService,
               private jobPostService: JobPosterService,
               private _router: Router) {
@@ -98,8 +100,7 @@ export class JobPosterComponent implements OnInit, OnChanges {
           this.jobPosterModel = data.data.industry.postedJobs[0];
           console.log('job poster model', this.jobPosterModel);
           this.onGetJobDetailsSuccess(this.jobPosterModel);
-
-        });
+        },error => this.errorService.onError(error));
   }
 
   onGetJobDetailsSuccess(jobmodel: JobPosterModel) {
@@ -183,7 +184,7 @@ export class JobPosterComponent implements OnInit, OnChanges {
     this.jobPostService.postJob(this.jobPosterModel).subscribe(
       data => {
         this.onSuccess(data.data.postedJobs[0]._id);
-      });
+      },error => this.errorService.onError(error));
   }
 
   updateJob() {
@@ -199,7 +200,7 @@ export class JobPosterComponent implements OnInit, OnChanges {
           this.setCapabilityMatrix = false;
         }
         console.log(this.jobPosterModel.capability_matrix);
-      });
+      },error => this.errorService.onError(error));
   }
 
   onSuccess(jobId: string) {
@@ -348,7 +349,7 @@ export class JobPosterComponent implements OnInit, OnChanges {
       this.profileCreatorService.getRoles(this.jobPosterModel.industry.code)
         .subscribe(
           rolelist => this.rolesForMain = rolelist.data,
-          error => this.onError(error));
+          error => this.errorService.onError(error));
     }
   }
 
@@ -378,8 +379,7 @@ export class JobPosterComponent implements OnInit, OnChanges {
             }
             this.isCapabilitypresent = false;
             this.getJobForCapability();
-          },
-          error => this.onError(error));
+          },error => this.errorService.onError(error));
     }
   }
 
@@ -405,7 +405,7 @@ export class JobPosterComponent implements OnInit, OnChanges {
             this.rolesForComplexity = rolelist.data;
             //this.highlightedSection.name = 'Complexities';
             this.getJobForComplexity();
-          });
+          },error => this.errorService.onError(error));
     }
   }
 
@@ -414,8 +414,7 @@ export class JobPosterComponent implements OnInit, OnChanges {
       .subscribe(
         data => {
           this.proficiencies = data.data[0].proficiencies;
-        },
-        error => this.onError(error));
+        },error => this.errorService.onError(error));
   }
 
   getJobForComplexity() {

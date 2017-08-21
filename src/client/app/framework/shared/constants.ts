@@ -144,6 +144,52 @@ export class Messages {
   public static MSG_ERROR_VALIDATION_MAX_PROFICIENCIES =  ' Key skills. Click the cross sign to deselect existing one and add a new skill.';
   public static MSG_ERROR_VALIDATION_EMPLOYMENTHISTORY = 'Provide valid employment start and end date';
 
+
+  public static MSG_LANDING_PAGE = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' +
+    'Nullam sem turpis, sodales eu urna sed, posuere finibus leo finibus.' +
+    'Sed et lorem eu mi tincidunt fringilla at non odio.' +
+    'Vivamus auctor quam a lobortis tincidunt. Aliquam faucibus nulla lorem, sed imperdiet justo bibendum ac. In' +
+    'semper rutrum metus fringilla mollis.';
+  public static MSG_RESET_MOBILE_NUMBER = 'Enter your new mobile number and we will send you a verification code on mobile' +
+    'number you have entered.';
+  public static MSG_RESET_EMAIL_ADDRESS = 'Enter your new account email address and we will send you a link to reset your email' +
+    'address.';
+  public static MSG_EMAIL_ACTIVATION = 'You may start using your account with new email address' +
+    'immediately.';
+  public static MSG_CONTACT_US = 'Please provide the following details and we will get back to you soon.';
+  public static MSG_CONFIRM_PASSWORD = 'Confirm your password.';
+  public static MSG_CHANGE_PASSWORD_SUCCESS = 'Password changed successfully.You can Sign In again with new password by clicking on "yes" button, please' +
+    'click on "No" button to continue the session.';
+  public static MSG_VERIFY_USER_1 = 'You are almost done!';
+  public static MSG_VERIFY_USER_2 = 'We need to verify your mobile number before you can start using the system.';
+  public static MSG_VERIFY_USER_3 = 'One Time Password(OTP) will be sent on following mobile number.';
+  public static MSG_VERIFY_USER_4 = 'You are almost done! We need to verify your email id before you can start using the system.';
+  public static MSG_EMAIL_NOT_MATCH = 'E-mail does not match.';
+  public static MSG_CHANGE_PASSWORD = 'Your password protects your account so password must be strong.' +
+    'Changing your password will sign you out of all your devices, including your phone.' +
+    'You will need to enter your new password on all your devices.';
+  public static MSG_CHANGE_THEME = 'Please click on the below option to change the theme.';
+  public static MSG_MOBILE_NUMBER_NOT_MATCH = 'Mobile Number does not match.';
+  public static MSG_MOBILE_NUMBER_Change_SUCCESS = 'Mobile number changed successfully.You can Sign In again by clicking on "yes" button, please click on "No"' +
+    'button to continue the session.';
+  public static CONTACT_US_ADDRESS = 'Blog. No. 14, 1st Floor, Electronic Estate, Parvati, Pune-Satara Road, Pune 411009, MH, INDIA.';
+  public static CONTACT_US_CONTACT_NUMBER_1 = '+91 (20) 2421 8865';
+  public static CONTACT_US_CONTACT_NUMBER_2 = '+91 98233 18865';
+  public static CONTACT_US_EMAIL_1 = 'sales@techprimelab.com';
+  public static CONTACT_US_EMAIL_2 = 'careers@techprimelab.com';
+  public static MSG_ACTIVATE_USER_1 = 'Congratulations! Welcome To JobMosis.';
+  public static MSG_ACTIVATE_USER_2 = 'You can now find candidates using the highly accurate, simpler, faster and powerful solution.';
+  public static MSG_ACTIVATE_USER_3 = 'Your account has been created successfully. Kindly click Sign In.';
+  public static MSG_COMPANY_DOCUMENTS = 'Please upload relevant company documents to activate your account.';
+  public static MSG_UPLOAD_FILE = 'Please select a file to upload.';
+  public static MSG_ABOUT_US_DISCRIPTION = 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.' +
+    'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s' +
+  'when an unknown printer took a galley of type and scrambled it to make a type specimen book.' +
+  'It has survived not only five centuries, but also the leap into electronic typesetting,remaining essentially ' +
+  'unchanged. ' +
+  'It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,' +
+  'and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.';
+
 }
 
 export class NavigationRoutes {
@@ -400,4 +446,5 @@ export class Tooltip {
   public static CAPABILITY_COMPARE_EXACT_MATCH: string = 'Candidate capabilities with exact match';
   public static CAPABILITY_COMPARE_BELOW_MATCH: string = 'Candidate capabilities slightly less than desired';
   public static CAPABILITY_COMPARE_MISSING_MATCH: string = 'Large mismatch of capabilities';
+  public static COMPANY_DETAILS_TOOLTIP: string = 'Company Details Message';
 }

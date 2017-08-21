@@ -9,6 +9,7 @@ import {Candidate, Section} from "../model/candidate";
 import {FormBuilder} from "@angular/forms";
 import {Messages, Tooltip} from "../../../framework/shared/constants";
 import {ProfessionalDetailsService} from "../professional-detail-service";
+import {ErrorService} from "../error.service";
 
 @Component({
   moduleId: module.id,
@@ -45,6 +46,7 @@ export class ProfessionalDataComponent extends BaseService implements OnChanges 
   constructor(private professionalDataService: ProfessionalDataService,
               private professionalDetailService: ProfessionalDetailsService,
               private messageService: MessageService,
+              private errorService: ErrorService,
               private formBuilder: FormBuilder,
               private profileCreatorService: CandidateProfileService) {
     super();
@@ -123,7 +125,7 @@ export class ProfessionalDataComponent extends BaseService implements OnChanges 
     this.profileCreatorService.addProfileDetail(this.candidate).subscribe(
       user => {
         console.log(user);
-      });
+      },error => this.errorService.onError(error));
   }
 
   onNext() {
@@ -161,33 +163,22 @@ export class ProfessionalDataComponent extends BaseService implements OnChanges 
       .subscribe(
         data => {
           this.onRealocationListSuccess(data);
-        },
-        error => {
-          this.onError(error);
-        });
-
-
+        },error => this.errorService.onError(error));
     this.professionalDataService.getNoticePeriodList()
       .subscribe(
         data => {
           this.onGetNoticePeriodListSuccess(data);
-        },
-        error => {
-          this.onError(error);
-        });
+        },error => this.errorService.onError(error));
     this.professionalDataService.getIndustryExposureList()
       .subscribe(
         data => {
           this.onGetIndustryExposureListSuccess(data);
-        },
-        error => {
-          this.onError(error);
-        });
+        },error => this.errorService.onError(error));
     this.professionalDataService.getCurrentSalaryList()
       .subscribe(
         data => {
           this.onCurrentSalaryListSuccess(data);
-        });
+        },error => this.errorService.onError(error));
   }
 
   onPrevious() {

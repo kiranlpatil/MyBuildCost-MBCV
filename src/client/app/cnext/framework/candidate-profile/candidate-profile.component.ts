@@ -7,6 +7,9 @@ import {CandidateProfileService} from "./candidate-profile.service";
 import {Role} from "../model/role";
 import {Industry} from "../model/industry";
 import {TooltipComponent} from "../tool-tip-component/tool-tip-component";
+import {Message} from "../../../framework/shared/message";
+import {MessageService} from "../../../framework/shared/message.service";
+import {ErrorService} from "../error.service";
 
 @Component({
   moduleId: module.id,
@@ -57,6 +60,8 @@ export class CandidateProfileComponent implements OnInit, DoCheck {
   constructor(private _router: Router,
               private complexityService: ComplexityService,
               private differs: KeyValueDiffers,
+              private messageService: MessageService,
+              private errorService: ErrorService,
               private profileCreatorService: CandidateProfileService) {
 
     complexityService.showTest$.subscribe(
@@ -110,6 +115,13 @@ export class CandidateProfileComponent implements OnInit, DoCheck {
     }
   }
 
+  onError(error: any) {debugger
+    console.log(error);
+    var message = new Message();
+    message.error_msg = error.err_msg;
+    message.isError = true;
+    this.messageService.message(message);
+  }
   onWorkAreaComplete(roles: Role[]) {
     this.candidate.industry.roles = roles;
     this.saveCandidateDetails();
@@ -208,7 +220,8 @@ export class CandidateProfileComponent implements OnInit, DoCheck {
   getRoles() {
     this.profileCreatorService.getRoles(this.candidate.industry.code)
       .subscribe(
-        rolelist => this.rolesForMain = rolelist.data);
+        rolelist => this.rolesForMain = rolelist.data,
+        error => this.errorService.onError(error));
   }
 
   getCapability() {
@@ -236,7 +249,7 @@ export class CandidateProfileComponent implements OnInit, DoCheck {
             }
             this.goto = false;
             this.getCandidateForCapability();
-          });
+          },error => this.errorService.onError(error));
     }
   }
 
@@ -257,7 +270,7 @@ export class CandidateProfileComponent implements OnInit, DoCheck {
           rolelist => {
             this.rolesForComplexity = rolelist.data;
             this.getCandidateForComplexity();
-          });
+          },error => this.errorService.onError(error));
     }
   }
 
@@ -266,13 +279,15 @@ export class CandidateProfileComponent implements OnInit, DoCheck {
       .subscribe(
         candidateData => {
           this.OnCandidateDataSuccess(candidateData);
-        });
+        },
+        error => this.errorService.onError(error));
   }
 
   getCandidateForCapability() {
     this.profileCreatorService.getCandidateDetails()
       .subscribe(
-        candidateData => this.candidateForCapability = candidateData.data[0].industry.roles);
+        candidateData => this.candidateForCapability = candidateData.data[0].industry.roles,
+        error => this.errorService.onError(error));
   }
 
   getCandidateForComplexity() {
@@ -281,7 +296,8 @@ export class CandidateProfileComponent implements OnInit, DoCheck {
         candidateData => {
           this.candidate.capability_matrix = Object.assign({}, candidateData.data[0].capability_matrix);
           this.showComplexity = true;
-        });
+        },
+        error => this.errorService.onError(error));
   }
 
   OnCandidateDataSuccess(candidateData: any) {
@@ -435,8 +451,8 @@ export class CandidateProfileComponent implements OnInit, DoCheck {
 
   saveCandidateDetails() {
     this.profileCreatorService.addProfileDetail(this.candidate).subscribe(
-      user => {
-      });
+      user => console.log(user),
+      error => this.errorService.onError(error));
   }
 
   onSubmit() {

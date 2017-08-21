@@ -6,6 +6,7 @@ var FacebookTokenStrategy = require('passport-facebook-token');
 import UserRepository = require("../dataaccess/repository/user.repository");
 import Messages=require("../shared/messages");
 import UserModel = require("../dataaccess/model/user.model");
+import {ConstVariables} from "../shared/sharedconstants";
 
 var GooglePlusTokenStrategy = require('passport-google-plus-token');
 var config = require('config');
@@ -23,23 +24,31 @@ class AuthInterceptor {
     passport.use(new BearerStrategy(function (token: any, done: any) {
       var decoded: any = null;
       try {
-        decoded = jwt.decode(token, "thisisjwtsecret#@$#&(*0)%");
-      }
-      catch (e) {
+        decoded = jwt.decode(token, ConstVariables.AUTHENTICATION_JWT_KEY);
+      } catch (e) {
         var err = new Error();
-        err.message = Messages.MSG_ERROR_INVALID_TOKEN + e.message;
-        return done(err, false);
+        err.message = Messages.MSG_ERROR_INVALID_TOKEN;
+        return done(err, false, null);
       }
-
       if (decoded.exp === undefined) {
-        console.log("its an unsub call in AuthInterceptor");
+        console.log('its an unsubscribed call in AuthInterceptor');
+      } else if (decoded.exp <= Date.now()) {
+        var err = new Error();
+        err.message = Messages.MSG_ERROR_TOKEN_SESSION;
+        return done(err, false, null);
       }
-      else if (decoded.exp <= Date.now()) {
-        return done(null, false, {
-          message: Messages.MSG_ERROR_WRONG_TOKEN
+      if(decoded.iss !== undefined) {
+        var userRepository: UserRepository = new UserRepository();
+        userRepository.findById(decoded.iss, function (err, user) {
+          if (err) {
+            return done(err,null,null);
+          }
+          if (!user) {
+            return done(null, false,null);
+          }
+          return done(null, user,null);
         });
       }
-      return done(null, false);
     }));
 
     passport.use(new FacebookTokenStrategy({
@@ -151,68 +160,61 @@ class AuthInterceptor {
   }
 
   issueTokenWithUid(user: any) {
-   console.log("In issue token");
+    console.log("In issue token");
+    console.log('user', JSON.stringify(user));
+    console.log('user', user.isCandidate);
+    var issuer: string;
+    if (user.userId) {
+      issuer = user.userId;
+    } else {
+      issuer = user._id;
+    }
+    console.log('issuer', issuer);
     var curDate = new Date();
     // expires in 60 days
     var expires = new Date(curDate.getTime() + (60 * 24 * 60 * 60 * 1000)); //(day*hr*min*sec*milisec)
+    console.log('expires',expires);
+    console.log('expires11',expires.getTime());
     var token = jwt.encode({
-      iss: user._id, // issue
+      iss: issuer, // issue
       exp: expires.getTime(), // expiration time
-    }, "thisisjwtsecret#@$#&(*0)%");
+    }, ConstVariables.AUTHENTICATION_JWT_KEY);
     return token;
   }
 
-  // generic require signin middleware
   requiresAuth(req: any, res: any, next: any) {
     passport.authenticate('bearer', {session: false},
       function (err: any, myuser: any, info: any) {
         if (err) {
-
-          next({
-            reason: Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
-            message: Messages.MSG_ERROR_INVALID_TOKEN,
-            code: 401
-          });
-
-        } else {
-
-          if (req.headers.authorization.split(' ')[0].toLowerCase() !== 'bearer' || req.headers.authorization.split(' ').length !== 2) {
-            next({
-              reason: Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
-              message: Messages.MSG_ERROR_IS_BEARER,
+          console.log('errorr in error',JSON.stringify(err))
+          return res.status(401).send({
+            'error': {
+              reason: err.message,
+              message: err.message,
               code: 401
+            }
+          });
+        } else {
+          if (req.headers.authorization.split(' ')[0].toLowerCase() !== 'bearer' || req.headers.authorization.split(' ').length !== 2) {
+            return res.status(401).send({
+              'error': {
+                reason: Messages.MSG_ERROR_IS_BEARER,
+                message: Messages.MSG_ERROR_IS_BEARER,
+                code: 401
+              }
             });
           } else {
-            if (!req.params.id) {
-              next({
-                reason: Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
-                message: Messages.MSG_ERROR_PROVIDE_ID,
-                code: 401
-              });
-
-            }
-            else {
-              var userRepository: UserRepository = new UserRepository();
-              userRepository.findById(req.params.id, function (err, user) {
-                if (err) {
-                  next({
-                    reason: Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
-                    message: Messages.MSG_ERROR_INVALID_ID,
-                    code: 401
-                  });
-                }
-                else if (user) {
-                  req.user = user;
-                  next();
-                } else {
-                  next({
-                    reason: Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
-                    message: Messages.MSG_ERROR_USER_NOT_FOUND,
-                    code: 401
-                  });
-
+            if (!myuser) {
+              return res.status(401).send({
+                'error': {
+                  reason: Messages.MSG_ERROR_INVALID_TOKEN_2,
+                  message: Messages.MSG_ERROR_INVALID_TOKEN_2,
+                  code: 401
                 }
               });
+            } else {
+              req.user = myuser;
+              next();
             }
           }
         }
@@ -333,7 +335,7 @@ class AuthInterceptor {
           });
         }
       }
-    })
+    });
   }
 }
 Object.seal(AuthInterceptor);

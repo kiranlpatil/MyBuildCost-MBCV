@@ -44,6 +44,8 @@ export class DashboardProfileComponent implements OnInit, OnDestroy {
   LAST_NAME_ICON: string;
   MOBILE_ICON: string;
   EMAIL_ICON: string;
+  emailRestMessage:string= Messages.MSG_RESET_EMAIL_ADDRESS;
+  mobileNumberRestMessage:string= Messages.MSG_RESET_MOBILE_NUMBER;
 
   constructor(private commonService: CommonService, private dashboardService: DashboardService,
               private messageService: MessageService, private zone: NgZone, private profileService: ProfileService,

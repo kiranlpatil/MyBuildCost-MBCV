@@ -3,6 +3,7 @@ import {CandidateProfileService} from "../candidate-profile/candidate-profile.se
 import {Candidate, Section} from "../model/candidate";
 import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Messages, Tooltip} from "../../../framework/shared/constants";
+import {ErrorService} from "../error.service";
 
 @Component({
   moduleId: module.id,
@@ -33,7 +34,9 @@ export class EmploymentHistoryComponent {
   private isValidservicePeriod: boolean = true;
   private serviceValidMessage: string = Messages.MSG_ERROR_VALIDATION_EMPLOYMENTHISTORY;
 
-  constructor(private _fb: FormBuilder, private profileCreatorService: CandidateProfileService) {
+  constructor(private _fb: FormBuilder,
+              private errorService:ErrorService,
+              private profileCreatorService: CandidateProfileService) {
     this.employeeHistory = this._fb.group({
       employeeHistories: this._fb.array([])
     });
@@ -149,7 +152,7 @@ export class EmploymentHistoryComponent {
     if (type == 'delete') {
       this.profileCreatorService.addProfileDetail(this.candidate).subscribe(
         user => {
-        });
+        },error => this.errorService.onError(error));
       return;
     }
 
@@ -212,7 +215,7 @@ export class EmploymentHistoryComponent {
           else if (type == 'save') {
             this.onSave();
           }
-        });
+        },error => this.errorService.onError(error));
       return;
     }
 
@@ -233,7 +236,7 @@ export class EmploymentHistoryComponent {
     this.highlightedSection.name = 'AcademicDetails';
     this.highlightedSection.isDisable = false;
   }
-  
+
   onSave() {
     this.submitStatus = false;
     this.onComplete.emit();

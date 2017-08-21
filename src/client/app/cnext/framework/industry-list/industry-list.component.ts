@@ -5,6 +5,7 @@ import {Section} from "../model/candidate";
 import {LocalStorageService} from "../../../framework/shared/localstorage.service";
 import {LocalStorage, Messages, Tooltip} from "../../../framework/shared/constants";
 import {IndustryDetailsService} from "../industry-detail-service";
+import {ErrorService} from "../error.service";
 
 @Component({
   moduleId: module.id,
@@ -32,6 +33,7 @@ export class IndustryListComponent implements OnChanges {
   private requiredFieldMessage = Messages.MSG_ERROR_VALIDATION_INDUSTRY_REQUIRED;
 
   constructor(private candidateProfileService: CandidateProfileService,
+              private errorService: ErrorService,
               private industryDetailsService: IndustryDetailsService) {
     this.industryDetailsService.makeCall$.subscribe(
       data => {
@@ -91,7 +93,8 @@ export class IndustryListComponent implements OnChanges {
   getIndustry() {
     console.log('called from industry list component');
     this.candidateProfileService.getIndustries()
-      .subscribe(industries => this.industries = industries.data);
+      .subscribe(industries => this.industries = industries.data,
+        error => this.errorService.onError(error));
   }
 
     onEdit() {

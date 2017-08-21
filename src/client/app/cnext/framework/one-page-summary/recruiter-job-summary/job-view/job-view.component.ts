@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import {NavigationRoutes} from '../../../../../framework/shared/constants';
 import {ComplexityComponentService} from "../../../complexities/complexity.service";
 import {JobCompareService} from "../../../single-page-compare-view/job-compare-view/job-compare-view.service";
+import {ErrorService} from "../../../error.service";
 
 
 @Component({
@@ -22,7 +23,7 @@ export class JobViewComponent implements OnChanges ,OnInit {
 
   constructor(private recruiterDashboardService: RecruiterDashboardService,
               private complexityComponentService : ComplexityComponentService,
-              private _router: Router,
+              private _router: Router,private errorService:ErrorService,
               private jobCompareService : JobCompareService) {
   }
 
@@ -38,7 +39,7 @@ export class JobViewComponent implements OnChanges ,OnInit {
         .subscribe(
           data => {
             this.OnRecruiterDataSuccess(data.data.industry);
-          });
+          },error => this.errorService.onError(error));
     }
     if (changes.calledFrom !== undefined && changes.calledFrom.currentValue !== undefined) {
       this.calledFrom = changes.calledFrom.currentValue;
@@ -57,7 +58,7 @@ export class JobViewComponent implements OnChanges ,OnInit {
       this.complexityComponentService.getCapabilityMatrix(this.recruiter.postedJobs[0]._id).subscribe(
         capa => {
           this.capabilities= this.jobCompareService.getStandardMatrix(capa.data);
-        });
+        },error => this.errorService.onError(error));
     }
   }
 

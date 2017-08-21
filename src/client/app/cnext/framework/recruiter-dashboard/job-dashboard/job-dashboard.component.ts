@@ -12,6 +12,7 @@ import {LoaderService} from "../../../../framework/shared/loader/loader.service"
 import {ProfileComparisonService} from "../../profile-comparison/profile-comparison.service";
 import {ProfileComparison} from "../../model/profile-comparison";
 import {QCardviewComponent} from "../q-card-view/q-card-view.component";
+import {ErrorService} from "../../error.service";
 
 @Component({
   moduleId: module.id,
@@ -43,6 +44,7 @@ export class JobDashboardComponent implements OnInit {
 
   constructor(public refrence: ReferenceService,
               private activatedRoute: ActivatedRoute,
+              private errorService: ErrorService,
               private jobDashboardService: JobDashboardService,
               private _router:Router,private qcardFilterService:QCardFilterService,
               private loaderService: LoaderService,private profileComparisonService: ProfileComparisonService) {
@@ -76,14 +78,14 @@ export class JobDashboardComponent implements OnInit {
           this.selectedJobProfile = data.data.industry.postedJobs[0];
 
           for (let item of data.data.industry.postedJobs[0].candidate_list) {
-            if (item.name == ValueConstant.APPLIED_CANDIDATE)
+            if (item.name === ValueConstant.APPLIED_CANDIDATE)
               this.recruiterJobView.numberOfCandidatesApplied = item.ids.length;
-            if (item.name == ValueConstant.CART_LISTED_CANDIDATE)
+            if (item.name === ValueConstant.CART_LISTED_CANDIDATE)
               this.recruiterJobView.numberOfCandidatesInCart = item.ids.length;
-            if (item.name == ValueConstant.REJECTED_LISTED_CANDIDATE)
+            if (item.name === ValueConstant.REJECTED_LISTED_CANDIDATE)
               this.recruiterJobView.numberOfCandidatesrejected = item.ids.length;
           }
-        });
+        },error => this.errorService.onError(error));
   }
 
   getMatchingProfiles() {
@@ -107,8 +109,8 @@ export class JobDashboardComponent implements OnInit {
                 temp.shortListedCandidates = listdata.data;
                 temp.matchedCandidates = data;
                 this.candidateQlist = temp;
-              });
-        });
+              },error => this.errorService.onError(error));
+        },error => this.errorService.onError(error));
   }
 
   AddedToCart(event: any) {
@@ -170,7 +172,7 @@ export class JobDashboardComponent implements OnInit {
               this.whichListVisible[2] = true;
               break;
           }
-        });
+        },error => this.errorService.onError(error));
   }
 
   navigateTo(navigateTo: string, item: string) {
@@ -260,8 +262,8 @@ export class JobDashboardComponent implements OnInit {
     if (this.listOfCandidateIdToCompare.length) {
       this.profileComparisonService.getCompareDetail(this.listOfCandidateIdToCompare, this.jobId)
         .subscribe(
-          data => this.OnCompareSuccess(data.data),
-          error => console.log(error));
+          data => this.OnCompareSuccess(data.data)
+          ,error => this.errorService.onError(error));
     }
   }
 

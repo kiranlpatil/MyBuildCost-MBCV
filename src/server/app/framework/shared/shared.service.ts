@@ -35,9 +35,9 @@ export function errorHandler(err: any, req: any, res: any, next: any) {
 
     var responseObject = JSON.stringify(errObject);
     logger.info(responseObject);
+    console.log("responseObject in errorHandler:", responseObject);
     res.status(500).send(responseObject);
 
-    console.log("responseObject in errorHandler:", responseObject);
   }
 };
 
@@ -49,5 +49,6 @@ export function clientHandler(err: any, req: any, res: any, next: any) {
   };
   var responseObject = JSON.stringify(errObject);
   logger.info(responseObject);
+  console.log("responseObject in client errorHandler:", responseObject);
   res.status(err.code).send(responseObject);
 };

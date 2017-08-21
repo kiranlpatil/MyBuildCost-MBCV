@@ -4,6 +4,7 @@ import {Candidate, Section} from "../model/candidate";
 import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Tooltip, ImagePath} from "../../../framework/shared/constants";
 import {GuidedTourService} from "../guided-tour.service";
+import {ErrorService} from "../error.service";
 
 
 @Component({
@@ -34,7 +35,7 @@ export class AwardsComponent implements OnInit {
   private guidedTourImgOverlayScreensProfile:string;
   private guidedTourImgOverlayScreensProfilePath:string;
   private isGuideImg:boolean;
-  constructor(private _fb: FormBuilder, private profileCreatorService: CandidateProfileService,private guidedTourService:GuidedTourService) {
+  constructor(private _fb: FormBuilder,private errorService:ErrorService, private profileCreatorService: CandidateProfileService,private guidedTourService:GuidedTourService) {
     this.awardDetail = this._fb.group({
       awards: this._fb.array([])
     });
@@ -135,7 +136,7 @@ export class AwardsComponent implements OnInit {
     if (type == 'delete') {
       this.profileCreatorService.addProfileDetail(this.candidate).subscribe(
         user => {
-        });
+        },error => this.errorService.onError(error));
       return;
     }
 
@@ -176,7 +177,7 @@ export class AwardsComponent implements OnInit {
           else if (type == 'save') {
             this.onSave();
           }
-        });
+        },error => this.errorService.onError(error));
       return;
     }
     if (type === 'next') {
