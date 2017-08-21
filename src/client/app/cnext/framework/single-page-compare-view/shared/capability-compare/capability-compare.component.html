@@ -25,7 +25,7 @@
             </div>
             <div *ngFor="let complexity of capability.complexities;let i=index">
               <div class="col-sm-12 no-padding row-background"
-                   *ngIf="complexity.scenarios[0].job_scenario_name != 'Not Applicable'">
+                   *ngIf="complexity.scenarios[0].job_scenario_name != undefined && complexity.scenarios[0].job_scenario_name != 'Not Applicable'">
                 <div class="" [class.exact]="complexity.match==2 "
                      [class.above]="complexity.match==3"
                      [class.below]="complexity.match==1" [class.missing]="complexity.match == 0"

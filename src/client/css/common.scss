@@ -843,6 +843,10 @@ control-messages {
     overflow: visible;
     white-space: normal;
   }
+
+  .body-wrapper {
+    overflow: hidden;
+  }
 }
 
 @media screen and (min-width: 300px) and (max-width: 766px) {

@@ -8,12 +8,12 @@ import {ConstVariables} from "../../shared/sharedconstants";
 import {ProfileComparisonDataModel, SkillStatus} from "../../dataaccess/model/profile-comparison-data.model";
 import {CapabilityMatrixModel} from "../../dataaccess/model/capability-matrix.model";
 import {ProfileComparisonModel} from "../../dataaccess/model/profile-comparison.model";
+import {ProfileComparisonJobModel} from "../../dataaccess/model/profile-comparison-job.model";
 import MatchViewModel = require('../../dataaccess/model/match-view.model');
 import Match = require('../../dataaccess/model/match-enum');
 import IndustryRepository = require('../../dataaccess/repository/industry.repository');
 import IndustryModel = require('../../dataaccess/model/industry.model');
 import ScenarioModel = require('../../dataaccess/model/scenario.model');
-import {ProfileComparisonJobModel} from "../../dataaccess/model/profile-comparison-job.model";
 
 class SearchService {
   APP_NAME: string;
@@ -281,7 +281,7 @@ class SearchService {
   }
 
   buildCandidateModel(candidate: CandidateModel) {
-    console.log('--------------------------candidate-------------------------------------------',candidate)
+    console.log('--------------------------candidate-------------------------------------------', candidate);;;
     let profileComparisonResult: ProfileComparisonDataModel = new ProfileComparisonDataModel();
     profileComparisonResult._id = candidate._id;
     profileComparisonResult.industryName = candidate.industry.name;
@@ -348,7 +348,7 @@ class SearchService {
             qestionCountForAvgPercentsge++;
             //match_view.match = Match.Exact;
           } else if (job.capability_matrix[cap] == (Number(newCandidate.capability_matrix[cap]) - ConstVariables.DIFFERENCE_IN_COMPLEXITY_SCENARIO)) {
-            matchCount++
+            matchCount++;;;
             capabilityQuestionCount++;
             correctQestionCountForAvgPercentage++;
             qestionCountForAvgPercentsge++;
@@ -436,7 +436,8 @@ class SearchService {
 
     for (let cap in job.capability_matrix) {
       let match_view: MatchViewModel = new MatchViewModel();
-      if (job.capability_matrix[cap] == -1 || job.capability_matrix[cap] == 0 || job.capability_matrix[cap] == undefined) {
+      if (job.capability_matrix[cap] == -1 || job.capability_matrix[cap] == 0 || job.capability_matrix[cap] == undefined || newCandidate.capability_matrix[cap] == undefined ||
+        newCandidate.capability_matrix[cap] == 0 || newCandidate.capability_matrix[cap] == -1) {
         match_view.match = Match.MissMatch;
       } else if (job.capability_matrix[cap] == newCandidate.capability_matrix[cap]) {
         match_view.match = Match.Exact;
@@ -590,7 +591,7 @@ class SearchService {
   getJobDetailsForComparison(job:JobProfileModel) {
     var profileComparisonJobModel:ProfileComparisonJobModel = new ProfileComparisonJobModel();
     profileComparisonJobModel.city = job.location.city;
-    profileComparisonJobModel.country = job.location.country
+    profileComparisonJobModel.country = job.location.country;;;
     profileComparisonJobModel.state = job.location.state;
     profileComparisonJobModel.education = job.education;
     profileComparisonJobModel.experienceMaxValue = job.experienceMaxValue;
