@@ -6,6 +6,7 @@ import {Candidate} from "../../model/candidate";
 import {QCardFilterService} from "../q-card-filter.service";
 import {FilterService} from "./filter.service";
 import {QCardFilter} from "../../model/q-card-filter";
+import {ErrorService} from "../../error.service";
 
 @Component({
   moduleId: module.id,
@@ -39,7 +40,11 @@ export class FilterComponent {
   private isRecuirter: boolean;
   private showClearFilter: boolean;
 
-  constructor(private formBuilder: FormBuilder, private showQCardview: ShowQcardviewService, private _filterService: FilterService, private qCardFilterService: QCardFilterService) {
+  constructor(private formBuilder: FormBuilder,
+              private errorService:ErrorService,
+              private showQCardview: ShowQcardviewService,
+              private _filterService: FilterService,
+              private qCardFilterService: QCardFilterService) {
     this.showQCardview.showJobQCardView$.subscribe(
       data => {
         this.isShowJobFilter = true;
@@ -100,8 +105,7 @@ export class FilterComponent {
           this.jointimeList = list.joining_period;
           //this.industryList = list.industry_exposure;
           this.experienceRangeList = list.experienceRangeList;
-        },
-        (error: any) => this.onError(error));
+        },error => this.errorService.onError(error));
   }
 
   onError(err: any) {

@@ -14,6 +14,7 @@ import {CandidateProfileService} from "../candidate-profile/candidate-profile.se
 import {Candidate, Section} from "../model/candidate";
 import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Tooltip} from "../../../framework/shared/constants";
+import {ErrorService} from "../error.service";
 
 @Component({
   moduleId: module.id,
@@ -38,7 +39,10 @@ export class AcademicDetailComponent implements OnInit, OnChanges, AfterViewChec
   private isButtonShow: boolean = false;
   private submitStatus: boolean;
 
-  constructor(private _fb: FormBuilder, private profileCreatorService: CandidateProfileService, private renderer: Renderer) {
+  constructor(private _fb: FormBuilder,
+              private errorService:ErrorService,
+              private profileCreatorService: CandidateProfileService,
+              private renderer: Renderer) {
     this.academicDetail = this._fb.group({
       academicDetails: this._fb.array([])
     });
@@ -137,7 +141,7 @@ export class AcademicDetailComponent implements OnInit, OnChanges, AfterViewChec
     if (type == 'delete') {
       this.profileCreatorService.addProfileDetail(this.candidate).subscribe(
         user => {
-        });
+        },error => this.errorService.onError(error));
       return;
     }
 
@@ -179,7 +183,7 @@ export class AcademicDetailComponent implements OnInit, OnChanges, AfterViewChec
           else if (type == 'save') {
             this.onSave();
           }
-        });
+        },error => this.errorService.onError(error));
       return;
     }
 

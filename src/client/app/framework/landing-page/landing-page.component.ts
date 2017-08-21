@@ -1,5 +1,6 @@
 import {Component} from "@angular/core";
 import {ImagePath} from "../shared/index";
+import {Messages} from "../shared/constants";
 
 @Component({
   moduleId: module.id,
@@ -9,6 +10,7 @@ import {ImagePath} from "../shared/index";
 })
 export class LandingPageComponent {
   BODY_BACKGROUND: string;
+  landingPageText: string= Messages.MSG_LANDING_PAGE;
 
   constructor() {
     this.BODY_BACKGROUND = ImagePath.BODY_BACKGROUND;

@@ -25,6 +25,7 @@ export class ChangeEmailComponent implements OnInit {
   EMAIL_ICON: string;
   NEW_EMAIL_ICON: string;
   CONFIRM_EMAIL_ICON: string;
+  emailNotMatctMessage:string= Messages.MSG_EMAIL_NOT_MATCH;
 
   constructor(private commonService: CommonService, private _router: Router,
               private emailService: ChangeEmailService, private messageService: MessageService, private formBuilder: FormBuilder) {

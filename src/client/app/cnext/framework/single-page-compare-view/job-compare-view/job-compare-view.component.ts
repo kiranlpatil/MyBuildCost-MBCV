@@ -9,6 +9,7 @@ import {Recruiter} from '../../../../framework/registration/recruiter/recruiter'
 import {AppSettings, ImagePath, LocalStorage} from "../../../../framework/shared/constants";
 import {GuidedTourService} from "../../guided-tour.service";
 import {LocalStorageService} from "../../../../framework/shared/localstorage.service";
+import {ErrorService} from "../../error.service";
 
 @Component({
   moduleId: module.id,
@@ -34,6 +35,7 @@ export class JobCompareViewComponent implements OnChanges,OnInit {
   private guidedTourStatus:string[] = new Array(0);
   private isCandidate: boolean = false;
   constructor(private jobCompareService: JobCompareService,
+              private errorService: ErrorService,
               private profileCreatorService : CandidateProfileService,
               private recruiterDashboardService: RecruiterDashboardService,
               private guidedTourService:GuidedTourService) {
@@ -54,7 +56,7 @@ export class JobCompareViewComponent implements OnChanges,OnInit {
         .subscribe(
           data => {
             this.OnRecruiterDataSuccess(data.data.industry);
-          });
+          },error => this.errorService.onError(error));
     }
   }
 
@@ -82,7 +84,8 @@ export class JobCompareViewComponent implements OnChanges,OnInit {
   getCandidateProfile(candidateId: string) {
     this.profileCreatorService.getCandidateDetailsOfParticularId(candidateId)
       .subscribe(
-        candidateData => this.OnCandidateDataSuccess(candidateData));
+        candidateData => this.OnCandidateDataSuccess(candidateData),
+        error => this.errorService.onError(error));
   }
 
   OnCandidateDataSuccess(candidateData: any) {
@@ -104,8 +107,8 @@ export class JobCompareViewComponent implements OnChanges,OnInit {
   getCompareDetail(candidateId: string, recruiterId: string) {
     this.jobCompareService.getCompareDetail(candidateId, recruiterId)
       .subscribe(
-        data => this.OnCompareSuccess(data),
-        error => console.log(error));
+        data => this.OnCompareSuccess(data)
+        ,error => this.errorService.onError(error));
   }
 
   OnCompareSuccess(data: any) {

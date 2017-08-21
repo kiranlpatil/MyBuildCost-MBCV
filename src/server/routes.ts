@@ -30,13 +30,13 @@ export function init(app: express.Application) {
   app.put("/api/notification/:id", this.authInterceptor.requiresAuth, userController.pushNotifications);
   app.post("/api/industryprofile", userController.profilecreate);
   //api calling fo professional data-lucky
-  app.get("/api/realocation", userController.getRealocation);
-  app.get("/api/education", userController.getEducation);
-  app.get("/api/experience", userController.getExperience);
-  app.get("/api/currentsalary", userController.getCurrentSalary);
-  app.get("/api/noticeperiod", userController.getNoticePeriod);
-  app.get("/api/industryexposure", userController.getIndustryExposure);
-  app.get("/api/searchedcandidate/jobPosterModel", userController.getSearchedCandidate);
+  app.get("/api/realocation",this.authInterceptor.requiresAuth, userController.getRealocation);
+  app.get("/api/education", this.authInterceptor.requiresAuth,userController.getEducation);
+  app.get("/api/experience",this.authInterceptor.requiresAuth, userController.getExperience);
+  app.get("/api/currentsalary",this.authInterceptor.requiresAuth, userController.getCurrentSalary);
+  app.get("/api/noticeperiod",this.authInterceptor.requiresAuth, userController.getNoticePeriod);
+  app.get("/api/industryexposure",this.authInterceptor.requiresAuth, userController.getIndustryExposure);
+  app.get("/api/searchedcandidate/jobPosterModel",this.authInterceptor.requiresAuth, userController.getSearchedCandidate);
 
 
   app.get("/api/fblogin", this.authInterceptor.facebookAuth, userController.fblogin);

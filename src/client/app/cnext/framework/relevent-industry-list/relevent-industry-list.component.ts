@@ -5,6 +5,7 @@ import {Section} from "../model/candidate";
 import {ReleventIndustry} from "./relevent-industry";
 import {Role} from "../model/role";
 import {Industry} from "../model/industry";
+import {ErrorService} from "../error.service";
 
 
 @Component({
@@ -35,7 +36,7 @@ export class ReleventIndustryListComponent implements OnInit {
     '<li><p>1. '+ Tooltip.RELEVENT_INDUSTRY_LIST_TOOLTIP+'</p></li>' +
     '</ul>';
 
-  constructor(private releventIndustryService: ReleventIndustryListService) {
+  constructor(private releventIndustryService: ReleventIndustryListService,private errorService:ErrorService) {
 
   }
 
@@ -58,10 +59,7 @@ export class ReleventIndustryListComponent implements OnInit {
         .subscribe(
           res => {
             this.onGetIndustriesSuccess(res);
-          },
-          error => {
-            this.onError(error);
-          });
+          },error => this.errorService.onError(error));
     }
   }
 

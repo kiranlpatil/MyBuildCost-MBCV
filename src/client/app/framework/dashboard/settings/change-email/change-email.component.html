@@ -38,7 +38,7 @@
           <input [(ngModel)]="model.confirm_email" formControlName="confirm_email" id="confirm_email"
                  placeholder="Confirm Email"
                  (blur)="makeEmailConfirm()" class="form-control"/>
-          <div class="error-message" *ngIf="isEmailConfirm == true"><p>E-mail does not match.</p></div>
+          <div class="error-message" *ngIf="isEmailConfirm == true"><p>{{emailNotMatctMessage}}</p></div>
         </div>
 
         <div class="clearfix">&nbsp;</div>

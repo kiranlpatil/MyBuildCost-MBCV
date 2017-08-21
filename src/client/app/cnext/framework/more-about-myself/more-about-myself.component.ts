@@ -5,6 +5,7 @@ import {Message} from "../../../framework/shared/message";
 import {Candidate, Section} from "../model/candidate";
 import {Messages, Tooltip, ImagePath} from "../../../framework/shared/constants";
 import {GuidedTourService} from "../guided-tour.service";
+import {ErrorService} from "../error.service";
 
 @Component({
   moduleId: module.id,
@@ -34,7 +35,7 @@ export class MoreAboutMyselfComponent implements OnInit {
   private guidedTourImgOverlayScreensEmploymentHistoryPath:string;
   private isGuideImg:boolean = false;
 
-  constructor(private messageService: MessageService,
+  constructor(private messageService: MessageService,private errorService:ErrorService,
               private profileCreatorService: CandidateProfileService,private guidedTourService:GuidedTourService) {
     this.reSize = new Array(1);
   }
@@ -77,11 +78,7 @@ export class MoreAboutMyselfComponent implements OnInit {
     this.profileCreatorService.addProfileDetail(this.candidate).subscribe(
       user => {
         this.highlightedSection.isDisable = false;
-
-      },
-      error => {
-        console.log(error);
-      });
+      },error => this.errorService.onError(error));
     this.onComplete.emit(this.candidate.aboutMyself);
   }
   onNext() {

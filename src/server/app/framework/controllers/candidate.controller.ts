@@ -42,7 +42,7 @@ export function create(req: express.Request, res: express.Response, next: any) {
       }
       else {
         let auth: AuthInterceptor = new AuthInterceptor();
-        let token = auth.issueTokenWithUid(newUser);
+        let token = auth.issueTokenWithUid(result);
         res.status(200).send({
           'status': Messages.STATUS_SUCCESS,
           'data': {

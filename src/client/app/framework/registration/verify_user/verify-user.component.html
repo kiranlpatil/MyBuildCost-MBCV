@@ -19,9 +19,9 @@
     </div>
 
     <form [formGroup]="userForm" (submit)="onSubmit()" [hidden]="chkMobile" novalidate>
-      <p>You are almost done!</p>
-      <p> We need to verify your mobile number before you can start using the system.</p>
-      <p> One Time Password(OTP) will be sent on following mobile number.</p>
+      <p>{{verifyUserMessage_1}}</p>
+      <p>{{verifyUserMessage_2}}</p>
+      <p>{{verifyUserMessage_3}}</p>
 
       <div class="input-group form-group" id="inputMobile">
         <control-messages [control]="userForm.controls.mobile_number" [submitStatus]="submitMobileStatus"></control-messages>
@@ -36,7 +36,7 @@
     </form>
 
     <form [formGroup]="userForm" (submit)="onSubmit()" [hidden]="chkEmail" novalidate>
-      <p><b>You are almost done! We need to verify your email id before you can start using the system.</b></p>
+      <p><b>{{verifyUserMessage_4}}</b></p>
       <!--<p> Verification link will be emailed on the following email address.</p>-->
 
       <div class="form-group" id="inputEmail">

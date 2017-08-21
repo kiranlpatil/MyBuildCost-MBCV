@@ -5,9 +5,7 @@
     <li [class.hide-list]="isSocialLogin">
       <div class="col-xs-12">
         <h4 class="password-heading"><span class="glyphicon glyphicon-lock"></span>Change password</h4>
-        <p>Your password protects your account so password must be strong.
-          Changing your password will sign you out of all your devices, including your phone.
-          You will need to enter your new password on all your devices.</p>
+        <p>{{changePasswordMessage}}</p>
       </div>
       <tpl-change-password></tpl-change-password>
     </li>
@@ -15,6 +13,7 @@
     <li>
       <div class="col-xs-12">
         <h4><span class="glyphicon glyphicon-bell"></span>Notification</h4>
+
         <p>{{ APP_NAME }} notifies you about changes to your account and changes to things you are watching.
           Notifications appear in your {{ APP_NAME }} inbox and are sent via email to prajakta.pawar@techprimelab.com
           (Configure email)</p>
@@ -27,7 +26,7 @@
     <li>
       <div class="col-xs-12">
         <h4><span class="glyphicon glyphicon-picture"></span>Appearance</h4>
-        <p>Please click on the below option to change the theme. </p>
+        <p>{{changeThemeMessage}}</p>
         <label>Dark Theme
           <input type="radio" (click)="darkTheme()" name="theme" [checked]="themeIs == INITIAL_THEME">
         </label>

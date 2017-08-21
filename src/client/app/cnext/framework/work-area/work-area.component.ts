@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from "@angular/core";
 import {Role} from "../model/role";
 import {Section} from "../model/candidate";
-import {LocalStorage, Messages, Tooltip, ValueConstant, ImagePath} from "../../../framework/shared/constants";
+import {ImagePath, LocalStorage, Messages, Tooltip, ValueConstant} from "../../../framework/shared/constants";
 import {LocalStorageService} from "../../../framework/shared/localstorage.service";
 import {GuidedTourService} from "../guided-tour.service";
 
@@ -33,6 +33,7 @@ export class WorkAreaComponent implements OnInit,OnChanges {
   private showModalStyle2:boolean = false;
   private showButton: boolean = true;
   private isValid:boolean = true;
+  private isInfoMessage: boolean = false;
   private validationMessage: string;
   private guidedTourStatus:string[] = new Array(0);
   private guidedTourImgOverlayScreensCapabilities:string;
@@ -62,6 +63,7 @@ export class WorkAreaComponent implements OnInit,OnChanges {
   selectOption(role: Role, event: any) {
     this.validationMessage = '';
     this.isValid = true;
+    this.isInfoMessage = false;
     if (event.target.checked) {
       if (this.savedSelectedRoles.length < ValueConstant.MAX_WORKAREA) {
         let isFound: boolean = false;
@@ -75,6 +77,7 @@ export class WorkAreaComponent implements OnInit,OnChanges {
         }
       } else {
         event.target.checked = false;
+        this.isInfoMessage = true;
         this.validationMessage = Messages.MSG_ERROR_VALIDATION_MAX_AREAS_WORKED_CROSSED;
         this.isValid = false;
       }
@@ -94,6 +97,7 @@ export class WorkAreaComponent implements OnInit,OnChanges {
   onPrevious() {
     this.validationMessage = '';
     this.isValid = true;
+    this.isInfoMessage = false;
     this.selectedRoles = new Array(0);
     for (let role of this.savedSelectedRoles) {
       let savetempRole = Object.assign({}, role);
@@ -133,6 +137,7 @@ export class WorkAreaComponent implements OnInit,OnChanges {
         this.validationMessage = Messages.MSG_ERROR_VALIDATION_FOR_RECRUITER_AREAS_WORKED_REQUIRED;
       }
       this.isValid = false;
+      this.isInfoMessage = false;
       return;
     }
     this.selectedRoles=new Array(0);
@@ -147,6 +152,7 @@ export class WorkAreaComponent implements OnInit,OnChanges {
 
   onSave() {
     this.isValid = true;
+    this.isInfoMessage = false;
     if(this.savedSelectedRoles.length == 0) {
       if(this.isCandidate) {
         this.validationMessage = Messages.MSG_ERROR_VALIDATION_AREAS_WORKED_REQUIRED;

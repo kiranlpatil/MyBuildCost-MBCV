@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ImagePath, NavigationRoutes, ProjectAsset } from '../../../shared/constants';
+import { ImagePath, NavigationRoutes, ProjectAsset, Messages } from '../../../shared/constants';
 import { ActiveEmailService } from './activate-email.service';
 import { MessageService } from '../../../shared/message.service';
 
@@ -17,6 +17,7 @@ export class ActivateEmailComponent {
   MY_TAG_LINE: string;
   UNDER_LICENCE: string;
   BODY_BACKGROUND: string;
+  activationMessage:string = Messages.MSG_EMAIL_ACTIVATION;
 
   constructor(private _router: Router, private activatedRoute: ActivatedRoute,
               private activeService: ActiveEmailService, private messageService: MessageService) {

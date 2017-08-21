@@ -2,6 +2,7 @@ import {Component, ElementRef, EventEmitter, Input, OnChanges, Output, ViewChild
 import {MultiSelectService} from "./multi-select.service";
 import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
 import {Messages} from "../../../framework/shared/constants";
+import {ErrorService} from "../error.service";
 
 
 @Component({
@@ -36,7 +37,9 @@ export class MultiSelectComponent implements OnChanges {
   @ViewChild('myInput')
   private _inputElement: ElementRef;
 
-  constructor(private proficiencydoaminService: MultiSelectService,private profileCreatorService: CandidateProfileService) {
+  constructor(private proficiencydoaminService: MultiSelectService,
+              private errorService:ErrorService,
+              private profileCreatorService: CandidateProfileService) {
 
   }
 
@@ -180,7 +183,7 @@ export class MultiSelectComponent implements OnChanges {
         this.proficiencydoaminService.addProficiencyToMasterData(this.otherProficiency).subscribe(
           data => {
             console.log(data);
-          });
+          },error => this.errorService.onError(error));
         this.selectedProficiencyModel(this.otherProficiency);
       }
     }

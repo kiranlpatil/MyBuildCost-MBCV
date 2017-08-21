@@ -10,6 +10,7 @@ import {FilterService} from "../filters/filter/filter.service";
 import {Messages, Tooltip} from "../../../framework/shared/constants";
 import {RecruiterDashboard} from "../model/recruiter-dashboard";
 import {ValidationService} from "../../../framework/shared/customvalidations/validation.service";
+import {ErrorService} from "../error.service";
 
 @Component({
   moduleId: module.id,
@@ -71,7 +72,7 @@ export class BasicJobInformationComponent implements OnInit, OnChanges {
     '<li><p>8. '+Tooltip.BASIC_JOB_INFORMATION_TOOLTIP_8+'</p></li>' +
     '</ul>';
 
-  constructor(private professionalDataService: ProfessionalDataService,
+  constructor(private professionalDataService: ProfessionalDataService,private errorService:ErrorService,
               private formBuilder: FormBuilder, private _filterService: FilterService,) {
 
     this.jobPostForm = this.formBuilder.group({
@@ -94,18 +95,18 @@ export class BasicJobInformationComponent implements OnInit, OnChanges {
       .subscribe(
         data => {
           this.educationList = data.educated;
-        });
+        },error => this.errorService.onError(error));
     this._filterService.getListForFilter()
       .subscribe(
         (list: any) => {
           this.experienceRangeList = list.experienceRangeList;
           this.salaryRangeList = list.salaryRangeList;
-        });
+        },error => this.errorService.onError(error));
     this.professionalDataService.getNoticePeriodList()
       .subscribe(
         data => {
           this.noticePeriodList = data.noticeperiod;
-        });
+        },error => this.errorService.onError(error));
   }
 
   ngOnChanges(changes: any) {

@@ -38,7 +38,7 @@
           <input type="number" formControlName="confirm_mobile_number" id="confirm_mobile_number"
                  placeholder="Confirm Mobile"
                  (blur)="makeMobileConfirm()" class="form-control"/>
-          <div class="error-message" *ngIf="isMobileNoConfirm == true"><p>Mobile Number does not match.</p></div>
+          <div class="error-message" *ngIf="isMobileNoConfirm == true"><p>{{mobileNumberNotMatch}}</p></div>
         </div>
 
         <div class="clearfix">&nbsp;</div>
@@ -62,8 +62,7 @@
           <h5>Confirm your mobile </h5>
         </div>
         <div class="modal-body">
-          <p>mobile number changed successfully.You can Sign In again by clicking on "yes" button, please click on "No"
-            button to continue the session. </p>
+          <p>{{mobileNumberChangeSucess}}.</p>
           <div class="clearfix">&nbsp;</div>
           <button type="button" class="btn btn-default" (click)="logOut()">Yes</button>
           <button type="button" class="btn btn-default" (click)="showHideModal()">No</button>

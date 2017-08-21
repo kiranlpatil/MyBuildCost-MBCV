@@ -49,6 +49,7 @@ class Messages {
   public static MSG_ERROR_USER_WITH_EMAIL_PRESENT: string = 'You are already a registered user. Kindly click on Login.';
   public static MSG_ERROR_DIRECTORY_NOT_FOUND: string = 'Image directory not found.';
   public static MSG_ERROR_INVALID_TOKEN: string = 'Invalid access token';
+  public static MSG_ERROR_INVALID_TOKEN_2: string = 'Access token has expired or is invalid';
   public static MSG_ERROR_WRONG_OTP: string = 'The OTP entered is incorrect.';
   public static MSG_ERROR_WRONG_MOBILE_NUMBER: string = 'Please enter appropriate mobile number';
   public static MSG_ERROR_PROVIDE_EMAIL: string = 'Please provide email address';

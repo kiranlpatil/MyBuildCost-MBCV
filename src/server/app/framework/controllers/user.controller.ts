@@ -305,7 +305,8 @@ export function create(req: express.Request, res: express.Response, next: any) {
       }
       else {
         var auth: AuthInterceptor = new AuthInterceptor();
-        var token = auth.issueTokenWithUid(newUser);
+        console.log('result',JSON.stringify(result));
+        var token = auth.issueTokenWithUid(result);
         res.status(200).send({
           "status": Messages.STATUS_SUCCESS,
           "data": {

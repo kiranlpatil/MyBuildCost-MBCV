@@ -14,7 +14,7 @@
       </div>
     </div>
     <h5 class="col-xs-9 heading-text">
-      Please upload relevant company documents to activate your account  <!--<span class="glyphicon glyphicon-remove" (click)="goToLanding()"></span>-->
+      {{companyDocumentMessage}}  <!--<span class="glyphicon glyphicon-remove" (click)="goToLanding()"></span>-->
     </h5>
     <form [formGroup]="companyDetailsForm" (submit)="onSubmit()" novalidate>
       <div class="col-sm-12 no-padding">
@@ -40,7 +40,7 @@
                        placeholder="Company TAN" class="form-control" required/>
                 <span
                   *ngIf="!setOfDocuments[0] &&  companyDetailsForm.value.description1 != '' && isDocumentUploaded && submitStatus"
-                  class="error-messages">Please select a file to upload.</span>
+                  class="error-messages">{{uploadFileMessage}}</span>
               </div>
               <div class="col-sm-2 padding-left5">
                 <div class="clearfix">
@@ -66,7 +66,7 @@
                        placeholder="GST Certificate" class="form-control" value="description2" required/>
                 <span
                   *ngIf="!setOfDocuments[1] && companyDetailsForm.value.description2 != '' && isDocumentUploaded && submitStatus"
-                  class="error-messages">Please select a file to upload.</span>
+                  class="error-messages">{{uploadFileMessage}}</span>
               </div>
               <div class="col-sm-2 padding-left5">
                 <div class="clearfix">
@@ -93,7 +93,7 @@
                 <input type="text" formControlName="description3" id="description3" maxlength="250"
                        placeholder="Shop Act" class="form-control" required/>
                 <span *ngIf="!setOfDocuments[2] && companyDetailsForm.value.description3 != '' && isDocumentUploaded && submitStatus"
-                      class="error-messages">Please select a file to upload.</span>
+                      class="error-messages">{{uploadFileMessage}}</span>
               </div>
               <div class="col-sm-2 padding-left5">
                 <div class="clearfix">

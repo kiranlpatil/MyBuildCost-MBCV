@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonService } from '../../shared/index';
-import { ImagePath } from '../../shared/constants';
+import {ImagePath, Messages} from '../../shared/constants';
 import { LoaderService } from '../../shared/loader/loader.service';
 
 @Component({
@@ -11,6 +11,7 @@ import { LoaderService } from '../../shared/loader/loader.service';
 })
 export class AboutComponent implements OnInit, OnDestroy {
   MY_LOGO: string;
+  aboutUsDiscriptionText: string= Messages.MSG_ABOUT_US_DISCRIPTION;
 
   constructor(private commonService: CommonService, private loaderService: LoaderService) {
     this.MY_LOGO = ImagePath.MY_WHITE_LOGO;

@@ -4,6 +4,7 @@ import {Candidate} from '../../../model/candidate';
 import {CandidateProfileService} from '../../../candidate-profile/candidate-profile.service';
 import {ComplexityComponentService} from '../../../complexities/complexity.service';
 import {JobCompareService} from '../../../single-page-compare-view/job-compare-view/job-compare-view.service';
+import {ErrorService} from "../../../error.service";
 
 
 @Component({
@@ -21,6 +22,7 @@ export class CandidateViewComponent implements OnChanges{
   private secondaryCapabilities: string[] = new Array();
   private capabilities : any;
   constructor(private profileCreatorService: CandidateProfileService,
+              private errorService:ErrorService,
               private complexityComponentService: ComplexityComponentService,
               private jobCompareService : JobCompareService) {
   }
@@ -32,14 +34,15 @@ export class CandidateViewComponent implements OnChanges{
       this.complexityComponentService.getCapabilityMatrix(undefined).subscribe(
         capa => {
           this.capabilities= this.jobCompareService.getStandardMatrix(capa.data);
-        });
+        },error => this.errorService.onError(error));
     }
   }
 
   getCandidateProfile(candidateId: string) {
     this.profileCreatorService.getCandidateDetailsOfParticularId(candidateId)
       .subscribe(
-        candidateData => this.OnCandidateDataSuccess(candidateData));
+        candidateData => this.OnCandidateDataSuccess(candidateData),
+        error => this.errorService.onError(error));
   }
 
   OnCandidateDataSuccess(candidateData: any) {

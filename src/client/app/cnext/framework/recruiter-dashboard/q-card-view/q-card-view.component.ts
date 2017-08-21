@@ -13,6 +13,7 @@ import {CandidateDetail} from "../../../../framework/registration/candidate/cand
 import {CandidateProfileService} from "../../candidate-profile/candidate-profile.service";
 import {Message} from "../../../../framework/shared/message";
 import {MessageService} from "../../../../framework/shared/message.service";
+import {ErrorService} from "../../error.service";
 /*import underline = Chalk.underline;*/
 
 
@@ -50,7 +51,7 @@ export class QCardviewComponent implements OnChanges {
 
 
 
-  constructor(private qCardFilterService: QCardFilterService,
+  constructor(private qCardFilterService: QCardFilterService, private errorService:ErrorService,
               private profileCreatorService: CandidateProfileService, private qCardViewService: QCardViewService, private messageService: MessageService) {
 
     this.qCardFilterService.aboveMatch$.subscribe(
@@ -219,7 +220,7 @@ export class QCardviewComponent implements OnChanges {
     this.qCardViewService.updateCandidateLists(this.jobId, candidate._id, ValueConstant.SHORT_LISTED_CANDIDATE, action).subscribe(
       data => {
         this.updateCountModel(data);
-      }
+      },error => this.errorService.onError(error)
     );
   }
 
@@ -260,7 +261,8 @@ export class QCardviewComponent implements OnChanges {
     if(!this.isShortlistedclicked) {
       this.modelCandidate = candidate;
       this.profileCreatorService.getCandidateDetailsOfParticularId(candidate._id).subscribe(
-        candidateData => this.OnCandidateDataSuccess(candidateData));
+        candidateData => this.OnCandidateDataSuccess(candidateData),
+        error => this.errorService.onError(error));
     }
     this.isShortlistedclicked=false;
   }

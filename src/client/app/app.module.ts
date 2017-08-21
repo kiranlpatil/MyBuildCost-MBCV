@@ -186,6 +186,7 @@ import {AttributeFilterPipe} from "./cnext/framework/profile-comparison/profile-
 import {ValueSortFilterPipe} from "./cnext/framework/profile-comparison/value-sort.pipe";
 import {RegistrationService} from "./framework/shared/registration.service";
 import {GuidedTourService} from "./cnext/framework/guided-tour.service";
+import {ErrorService} from "./cnext/framework/error.service";
 
 //C-NEXT IMPORTS
 
@@ -361,6 +362,7 @@ import {GuidedTourService} from "./cnext/framework/guided-tour.service";
     VerifyUserService,
     BasicJobInformationService,
     VerifyPhoneService,
+    ErrorService,
     IndustryListService,
     CandidateJobListService,
     ProfessionalDataService,
