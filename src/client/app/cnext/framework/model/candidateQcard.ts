@@ -23,5 +23,5 @@ export class CandidateQCard {
   picture: string;
   isCandidateRead: boolean;
   isCandidateshortListed: boolean;
-
+  isVisible: boolean;
 }

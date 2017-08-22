@@ -84,7 +84,7 @@ export class QCardviewComponent implements OnChanges {
         candidate = item;
         isFound = true;
       }
-    })
+    });;;;;;;;;;;;;;;;;;;;;;
     if (!isFound) {
       this.candidateQlist.appliedCandidates.forEach(item=> {
         if (data.id == item._id) {
@@ -132,7 +132,9 @@ export class QCardviewComponent implements OnChanges {
           }
         }
         if(!isFound) {
-          this.candidateQlist.matchedCandidates.push(candidate);
+          if (candidate.isVisible == undefined || candidate.isVisible) {
+            this.candidateQlist.matchedCandidates.push(candidate);
+          }
         }
         break;
       case ValueConstant.CART_LISTED_CANDIDATE :
@@ -144,7 +146,9 @@ export class QCardviewComponent implements OnChanges {
           }
         }
         if(!isFound) {
-          this.candidateQlist.matchedCandidates.push(candidate);
+          if (candidate.isVisible == undefined || candidate.isVisible) {
+            this.candidateQlist.matchedCandidates.push(candidate);
+          }
         }
         break;
       case ValueConstant.SHORT_LISTED_CANDIDATE :
@@ -163,7 +167,12 @@ export class QCardviewComponent implements OnChanges {
         }
       );
     } else if (action === 'remove') {
-      this.recuirterListCountModel.numberOfMatchedCandidates++;
+      if ((candidate.isVisible == undefined || !candidate.isVisible) && (destinationListName === 'cartListed' ||
+        destinationListName === 'rejectedList')) {
+
+      } else {
+        this.recuirterListCountModel.numberOfMatchedCandidates++;
+      }
     }
     this.qCardViewService.updateCandidateLists(this.jobId, candidate._id, destinationListName, action).subscribe(
       data => {

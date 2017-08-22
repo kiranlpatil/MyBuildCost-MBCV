@@ -17,4 +17,5 @@ export class CandidateQCard {
   mobile_number: number;
   email: string;
   picture: string;
+  isVisible: boolean;
 }

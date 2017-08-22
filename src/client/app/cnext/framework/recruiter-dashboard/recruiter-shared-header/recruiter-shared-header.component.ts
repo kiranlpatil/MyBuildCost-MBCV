@@ -1,7 +1,7 @@
-import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { LocalStorageService } from '../../../../framework/shared/localstorage.service';
-import { AppSettings, ImagePath, LocalStorage, NavigationRoutes } from '../../../../framework/shared/constants';
+import {Component, ElementRef, HostListener, OnInit} from "@angular/core";
+import {Router} from "@angular/router";
+import {LocalStorageService} from "../../../../framework/shared/localstorage.service";
+import {AppSettings, ImagePath, LocalStorage} from "../../../../framework/shared/constants";
 import {RedirectRecruiterDashboardService} from "../../redirect-dashboard.service";
 
 @Component({
@@ -37,7 +37,7 @@ export class RecruiterSharedHeaderComponent implements OnInit {
     this.uploaded_image_path = LocalStorageService.getLocalValue(LocalStorage.PROFILE_PICTURE); //TODO:Get it from get user call.
 
     if (this.uploaded_image_path === 'undefined' || this.uploaded_image_path === null) {
-      this.uploaded_image_path = ImagePath.PROFILE_IMG_ICON;
+      this.uploaded_image_path = ImagePath.COMPANY_LOGO_IMG_ICON;
     } else {
       this.uploaded_image_path = this.uploaded_image_path.substring(4, this.uploaded_image_path.length - 1).replace('"', '');
       this.uploaded_image_path = AppSettings.IP + this.uploaded_image_path;
