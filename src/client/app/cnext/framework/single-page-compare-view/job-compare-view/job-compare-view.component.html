@@ -149,7 +149,7 @@
                   <label [class.exact]="data.educationMatch=='exact'" [class.above]="data.educationMatch=='above'"
                          [class.below]="data.educationMatch=='below'"
                          [class.missing]="data.educationMatch=='missing'">
-                    <strong class="pull-left">Education</strong>
+                    <strong class="title-name pull-left">Education</strong>
                     <img class="exact-img" src="assets/framework/images/dashboard/right-tick.svg"/>
                     <div class="info-description">
                       <img class="missing-img" src="assets/framework/images/dashboard/info-red.svg"/>
@@ -162,21 +162,21 @@
                   <span>{{postedJob.education}}</span>
                   <label [class.exact]="data.experienceMatch=='exact'" [class.above]="data.experienceMatch=='above'"
                          [class.below]="data.experienceMatch=='below'" [class.missing]="data.experienceMatch=='missing'">
-                    <strong class="pull-left"> Experience Band</strong>
+                    <strong class="title-name pull-left"> Experience Band</strong>
                     <img class="exact-img" src="assets/framework/images/dashboard/right-tick.svg"/>
                     <div class="info-description">
                       <img class="missing-img" src="assets/framework/images/dashboard/info-red.svg"/>
                       <div class="info-hover-section">
                         Job Experience Band {{recruiter.postedJobs[0].experienceMinValue}} -
                         {{recruiter.postedJobs[0].experienceMaxValue}}
-                        {{candidateDetails.first_name}} Experience {{candidate.professionalDetails.experience}}
+                        {{candidateDetails.first_name}} Experience {{candidate.professionalDetails.currentSalary}}
                       </div>
                     </div>
                   </label>
                   <span>{{postedJob.experienceMinValue}} - {{postedJob.experienceMaxValue}}</span>
                   <label [class.exact]="data.salaryMatch=='exact'" [class.above]="data.salaryMatch=='above'"
                          [class.below]="data.salaryMatch=='below'" [class.missing]="data.salaryMatch=='missing'">
-                    <strong class="pull-left"> Salary Band </strong>
+                    <strong class="title-name pull-left"> Salary Band </strong>
                     <img class="exact-img" src="assets/framework/images/dashboard/right-tick.svg"/>
                     <div class="info-description">
                       <img class="missing-img" src="assets/framework/images/dashboard/info-red.svg"/>
