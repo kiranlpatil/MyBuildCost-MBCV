@@ -1,7 +1,7 @@
 <div class="guided-tour-section" *ngIf="guidedTourStatus.indexOf(overlayScreensDashboardImgName) == -1">
   <img src={{overlayScreensDashboardImgPath}} alt="Profile Picture">
   <div class="got-it-btn" (click)="tourGuideGotIt()">
-    <span>OK, Got it</span>
+    <span>{{gotItMessage}}</span>
   </div>
 </div>
 <div *ngIf="candidate != undefined">

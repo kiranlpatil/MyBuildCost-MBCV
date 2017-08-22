@@ -3,7 +3,7 @@ import {MessageService} from "../../../framework/shared/message.service";
 import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
 import {Message} from "../../../framework/shared/message";
 import {Candidate, Section} from "../model/candidate";
-import {Messages, Tooltip, ImagePath} from "../../../framework/shared/constants";
+import {Messages, Tooltip, ImagePath, Headings} from "../../../framework/shared/constants";
 import {GuidedTourService} from "../guided-tour.service";
 import {ErrorService} from "../error.service";
 
@@ -18,6 +18,9 @@ export class MoreAboutMyselfComponent implements OnInit {
   @Input() candidate: Candidate;
   @Input() highlightedSection: Section;
   @Output() onComplete = new EventEmitter();
+  gotItMessage:string= Headings.GOT_IT;
+  aboutMyselfHeading:string= Headings.ABOUT_MYSELF;
+  optinalfield:string= Headings.OPTIONAL;
   private maxLength: number = 250;
   private reSize: string[];
   private spaceSplitedString: string[];

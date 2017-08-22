@@ -1,7 +1,7 @@
 <div class="modal-bg" *ngIf="highlightedSection.name=='JobProfile'"></div>
 <div class="section-container" *ngIf="highlightedSection.name=='JobProfile'">
   <div class="main-content clearfix edit-modal-content">
-    <h4 class="heading">Job Description</h4>
+    <h4 class="heading">{{jobDiscriptionHeading}}</h4>
     <div class="scrollable-content">
       <form [formGroup]="jobPostForm" novalidate>
         <div class="job-info section-container clearfix">
@@ -47,7 +47,7 @@
           </div>
 
           <div class="col-sm-8 no-padding" *ngIf="!recruiter.isRecruitingForself">
-            <h4>Hide company Name from applicant</h4>
+            <h4>{{hideCompanyNameHeading}}</h4>
             <div class="check-box">
               <label>
                 <input type="checkbox" name="hideCompanyName" formControlName="hideCompanyName">

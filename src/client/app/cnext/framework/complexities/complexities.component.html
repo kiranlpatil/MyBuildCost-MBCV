@@ -2,7 +2,7 @@
      *ngIf="guidedTourStatus.indexOf(guidedTourImgOverlayScreensKeySkills) == -1 && isGuideImg == true && isCandidate">
   <img src={{guidedTourImgOverlayScreensKeySkillsPath}} alt="Profile Picture">
   <div class="got-it-btn" (click)="onGotItGuideTour()">
-    <span>OK, Got it</span>
+    <span>{{gotItMessage}}</span>
   </div>
 </div>
 <div class="modal-bg" *ngIf="highlightedSection.name=='Complexities'"></div>
@@ -66,7 +66,7 @@
   <div class="main-content clearfix">
     <div class="compact-view">
 
-        <h4 class="heading-compact">Capabilities
+        <h4 class="heading-compact">{{capabilitiesHeading}}
           <span class="add-more" (click)="highlightedSection.name='Capabilities'"><span class="glyphicon glyphicon-plus-sign"></span>Add More</span>
           <button class="btn-edit capability-edit" (click)="edit()"
                   [hidden]="highlightedSection.isDisable" title="Edit Capability Details"></button>

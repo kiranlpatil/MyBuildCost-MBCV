@@ -1,10 +1,11 @@
 import {Component, EventEmitter, Input, Output} from "@angular/core";
 import {Role} from "../model/role";
 import {Capability} from "../model/capability";
-import {ImagePath, LocalStorage, Messages, Tooltip, ValueConstant} from "../../../framework/shared/constants";
+import {ImagePath, LocalStorage, Messages, Tooltip, ValueConstant, Headings} from "../../../framework/shared/constants";
 import {Section} from "../model/candidate";
 import {LocalStorageService} from "../../../framework/shared/localstorage.service";
 import {GuidedTourService} from "../guided-tour.service";
+import {Headers} from "@angular/http";
 
 @Component({
   moduleId: module.id,
@@ -19,6 +20,9 @@ export class CapabilitiesComponent {
     @Input() candidateRoles: Role[] = [];
   @Output() onComplete = new EventEmitter();
   @Input() highlightedSection: Section;
+  candidateCapabilityMessage:string = Headings.CAPABILITIES_FOR_CANDIDATE;
+  recruiterCapabilityMessage:string = Headings.CAPABILITIES_FOR_RECRUITER;
+  gotItMessage:string = Headings.GOT_IT;
   private savedselectedRoles:Role[]= new Array(0);
   private showButton: boolean = true;
   private primaryNames: string[] = new Array(0);

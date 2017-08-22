@@ -7,7 +7,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {JobLocation} from "../model/job-location";
 import {MyGoogleAddress} from "../../../framework/registration/candidate/google-our-place/my-google-address";
 import {FilterService} from "../filters/filter/filter.service";
-import {Messages, Tooltip} from "../../../framework/shared/constants";
+import {Messages, Tooltip, Headings} from "../../../framework/shared/constants";
 import {RecruiterDashboard} from "../model/recruiter-dashboard";
 import {ValidationService} from "../../../framework/shared/customvalidations/validation.service";
 import {ErrorService} from "../error.service";
@@ -25,6 +25,8 @@ export class BasicJobInformationComponent implements OnInit, OnChanges {
   @Input() recruiter: RecruiterDashboard;
 
   @Output() onComplete = new EventEmitter();
+  jobDiscriptionHeading:string = Headings.JOB_DISCRIPTION;
+  hideCompanyNameHeading:string = Headings.HIDE_COMPANY_NAME;
   private savedjobPosterModel: JobPosterModel = new JobPosterModel();
   private jobPostForm: FormGroup;
   private educationList: any = [];

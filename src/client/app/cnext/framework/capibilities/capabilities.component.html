@@ -2,16 +2,16 @@
      *ngIf="guidedTourStatus.indexOf(guidedTourImgOverlayScreensComplexities) == -1 && isCandidate && isGuideImg == true">
   <img src={{guidedTourImgOverlayScreensComplexitiesPath}} alt="Profile Picture">
   <div class="got-it-btn" (click)="onGotItGuideTour()">
-    <span>OK, Got it</span>
+    <span>{{gotItMessage}}</span>
   </div>
 </div>
 <div class="modal-bg" *ngIf="highlightedSection.name=='Capabilities'"></div>
 <div class="section-container clear clearfix" *ngIf="highlightedSection.name=='Capabilities'">
 
   <div class="main-content clearfix edit-modal-content">
-    <h4 class="heading" *ngIf="isCandidate">Select those capabilities that describe your current strength.
+    <h4 class="heading" *ngIf="isCandidate">{{candidateCapabilityMessage}}
     </h4>
-    <h4 class="heading" *ngIf="!isCandidate">Select core capabilities that are required in the candidate.
+    <h4 class="heading" *ngIf="!isCandidate">{{recruiterCapabilityMessage}}
     </h4>
     <div class="scrollable-content capabilities">
       <div class="capability-type">

@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
 import {Section} from "../model/candidate";
 import {JobPosterModel} from "../model/jobPoster";
-import {Messages, Tooltip, ValueConstant} from "../../../framework/shared/constants";
+import {Messages, Tooltip, ValueConstant, Headings} from "../../../framework/shared/constants";
 
 
 @Component({
@@ -17,6 +17,9 @@ export class JobProficienciesComponent implements OnInit {
   @Input() proficiencies: string[];
   @Output() onComplete = new EventEmitter();
   @Output() onNextComplete = new EventEmitter();
+  jobProficienciesHeading:string=Headings.JOB_PROFICIENCIES;
+  mandatorySkills:string=Headings.MANDATORY_PROFICIENCIES;
+  additionalSkills:string=Headings.ADDITIONAL_PROFICIENCIES;
   private showButton: boolean = true;
   private disablebutton: boolean = true;
   private submitStatus: boolean = false;

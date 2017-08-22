@@ -3,7 +3,7 @@ import { CandidateProfileService } from '../candidate-profile/candidate-profile.
 import { Candidate, Summary } from '../model/candidate';
 import { CandidateDashboardService } from './candidate-dashboard.service';
 import { JobQcard } from '../model/JobQcard';
-import {LocalStorage, ValueConstant, Tooltip, ImagePath} from '../../../framework/shared/constants';
+import {LocalStorage, ValueConstant, Tooltip, ImagePath, Headings} from '../../../framework/shared/constants';
 import { LocalStorageService } from '../../../framework/shared/localstorage.service';
 import { CandidateJobListService } from './candidate-job-list/candidate-job-list.service';
 import { QCardFilterService } from '../filters/q-card-filter.service';
@@ -20,6 +20,7 @@ import {ErrorService} from "../error.service";
 })
 
 export class CandidateDashboardComponent implements OnInit{
+  gotItMessage:string= Headings.GOT_IT;
   private candidate: Candidate = new Candidate();
   private jobList: JobQcard[] = new Array(0);
   private appliedJobs: JobQcard[] = new Array(0);

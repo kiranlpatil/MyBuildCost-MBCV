@@ -2,14 +2,14 @@
      *ngIf="guidedTourStatus.indexOf(guidedTourImgOverlayScreensEmploymentHistory) == -1 && isGuideImg == true">
   <img src={{guidedTourImgOverlayScreensEmploymentHistoryPath}} alt="Profile Picture">
   <div class="got-it-btn" (click)="onGotItGuideTour()">
-    <span>OK, Got it</span>
+    <span>{{gotItMessage}}</span>
   </div>
 </div>
 <div class="modal-bg" *ngIf="highlightedSection.name=='AboutMySelf'"></div>
 <div class="section-container clear" *ngIf="highlightedSection.name =='AboutMySelf'">
 
   <div class="main-content edit-modal-content clearfix">
-    <h4 class="heading">About Myself (Optional)</h4>
+    <h4 class="heading">{{aboutMyselfHeading}} {{optinalfield}}</h4>
     <div class="scrollable-content">
       <div class="col-sm-8 no-padding more-about-myself">
       <textarea class="form-control" [(ngModel)]="candidate.aboutMyself" (ngModelChange)="addAboutMyself()"
@@ -38,7 +38,7 @@
 <div class="section-container clear" *ngIf="highlightedSection.name !='AboutMySelf'">
   <div class="main-content" (click)="onEdit()">
     <div class="compact-view clearfix">
-      <h4 class="heading-compact">About myself <span class="optional-field">(Optional)</span>
+      <h4 class="heading-compact">{{aboutMyselfHeading}} <span class="optional-field">{{optinalfield}}</span>
         <button class="btn-edit"
                 (click)="onEdit()"
                 [hidden]="highlightedSection.isDisable" title="Edit More About Self"></button>

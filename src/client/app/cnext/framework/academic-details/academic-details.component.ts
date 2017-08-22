@@ -13,7 +13,7 @@ import {
 import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
 import {Candidate, Section} from "../model/candidate";
 import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {Tooltip} from "../../../framework/shared/constants";
+import {Tooltip, Headings} from "../../../framework/shared/constants";
 import {ErrorService} from "../error.service";
 
 @Component({
@@ -36,6 +36,7 @@ export class AcademicDetailComponent implements OnInit, OnChanges, AfterViewChec
   public academicDetail: FormGroup;
   tooltipMessage: string = '<ul><li><p>1. '+Tooltip.ACADEMIC_DETAIL_TOOLTIP+'</p></li></ul>';
   public showButton: boolean = true;
+  acadamicDetailsHeading: string= Headings.ACADAMIC_DETAILS;
   private isButtonShow: boolean = false;
   private submitStatus: boolean;
 

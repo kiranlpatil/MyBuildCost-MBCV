@@ -3,7 +3,7 @@ import {Industry} from "../model/industry";
 import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
 import {Section} from "../model/candidate";
 import {LocalStorageService} from "../../../framework/shared/localstorage.service";
-import {LocalStorage, Messages, Tooltip, ValueConstant} from "../../../framework/shared/constants";
+import {LocalStorage, Messages, Tooltip, ValueConstant, Headings} from "../../../framework/shared/constants";
 import {IndustryDataService} from "../industry-data-service";
 import {ErrorService} from "../error.service";
 
@@ -27,6 +27,7 @@ export class IndustryExperienceListComponent implements OnInit,OnChanges {
   tooltipRecruiterMessage: string = '<ul><li>' +
     '<p>1. '+ Tooltip.INDUSTRY_EXPERIENCE_RECRUITER_TOOLTIP+'</p></li>' +
   '</ul>';
+  additinaolDomainHeading:string= Headings.ADDITIONAL_DOMAIN_EXPOSURE;
   private showButton: boolean = true;
   private industries: Industry[] = new Array(0);
   private selectedIndustries: string[] = new Array(0);

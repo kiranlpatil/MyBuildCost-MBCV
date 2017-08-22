@@ -2,7 +2,7 @@ import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} f
 import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
 import {Candidate, Section} from "../model/candidate";
 import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {Tooltip, ImagePath} from "../../../framework/shared/constants";
+import {Tooltip, ImagePath, Headings} from "../../../framework/shared/constants";
 import {GuidedTourService} from "../guided-tour.service";
 import {ErrorService} from "../error.service";
 
@@ -27,6 +27,7 @@ export class AwardsComponent implements OnInit {
   public awardDetail: FormGroup;
 
 
+  awardsHeading:string = Headings.AWARDS;
   private isButtonShow: boolean = false;
   private showButton: boolean = true;
   private submitStatus: boolean;

@@ -9,7 +9,7 @@
 <div class="modal-bg" *ngIf="highlightedSection.name=='Awards'"></div>
 <div class="section-container clear" *ngIf="highlightedSection.name =='Awards'">
   <div class="main-content edit-modal-content clearfix">
-    <h4 class="heading">Awards (Optional)</h4>
+    <h4 class="heading">{{awardsHeading}}</h4>
     <div class="scrollable-content" #awardParentDiv>
       <form class="description-form" [formGroup]="awardDetail" novalidate>
         <div class="row">

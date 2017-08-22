@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, Output} from "@angular/core";
 import {Section} from "../model/candidate";
 import {JobPosterModel} from "../model/jobPoster";
-import {Tooltip} from "../../../framework/shared/constants";
+import {Tooltip, Headings} from "../../../framework/shared/constants";
 
 @Component({
   moduleId: module.id,
@@ -15,6 +15,8 @@ export class CompetenciesAndResponsibilitiesComponent {
   @Input() highlightedSection: Section;
   @Input() isShowReleventIndustryListStep: boolean;
   @Output() onComplete = new EventEmitter();
+  additionalInformatonHeaing:string=Headings.ADDITIONAL_INFORMATION;
+  optionalFieldMessage:string=Headings.OPTIONAL;
 
   tooltipMessage: string = '<ul><li>' +
       '<p>1. '+ Tooltip.COMPETENCIES_AND_RESPONSIBILITIES_TOOLTIP_1+'</p>' +
