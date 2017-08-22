@@ -212,15 +212,15 @@ export class JobDashboardComponent implements OnInit {
       var compareAction:any;
 
       if (this.candidateQlist.matchedCandidates.filter(function (obj) {
-          return data.item._id == obj._id
+          return data.item._id == obj._id;
         }).length && (data.item.candidateListStatus.indexOf('applied') !== -1)) {
         compareAction = {'action': 'add', 'source': 'matchedList', 'destination': 'cartListed', 'id': data.item._id};
       } else if (this.candidateQlist.matchedCandidates.filter(function (obj) {
-          return data.item._id == obj._id
+          return data.item._id == obj._id;
         }).length) {
         compareAction = {'action': 'add', 'source': 'matchedList', 'destination': 'cartListed', 'id': data.item._id};
       } else if (this.candidateQlist.appliedCandidates.filter(function (obj) {
-          return data.item._id == obj._id
+          return data.item._id == obj._id;
         }).length) {
         compareAction = {'action': 'add', 'source': 'applied', 'destination': 'cartListed', 'id': data.item._id};
       }

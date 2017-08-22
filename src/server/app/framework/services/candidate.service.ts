@@ -504,8 +504,16 @@ class CandidateService {
                 } else {
                   match_view.questionForRecruiter = complexity.name;
                 }
-                match_view.questionHeaderForCandidate = complexity.questionHeaderForCandidate;
-                match_view.questionHeaderForRecruiter = complexity.questionHeaderForRecruiter;
+                if (complexity.questionHeaderForCandidate !== undefined && complexity.questionHeaderForCandidate !== null && complexity.questionHeaderForCandidate !== '') {
+                  match_view.questionHeaderForCandidate = complexity.questionHeaderForCandidate;
+                } else {
+                  match_view.questionHeaderForCandidate = 'Tell us about your experience in';
+                }
+                if (complexity.questionHeaderForRecruiter !== undefined && complexity.questionHeaderForRecruiter !== null && complexity.questionHeaderForRecruiter !== '') {
+                  match_view.questionHeaderForRecruiter = complexity.questionHeaderForRecruiter;
+                } else {
+                  match_view.questionHeaderForRecruiter = 'Which is the most appropriate level that candidate is required to handle as a part of';
+                }
                 if (scenarios[0]) {
                   match_view.scenario_name = scenarios[0].name;
                   match_view.userChoice = scenarios[0].code;

@@ -187,8 +187,29 @@ export class QCardviewComponent implements OnChanges {
       this.isAlreadyPresentInCart = false;
     }
 
-    if (destinationListName === ValueConstant.CART_LISTED_CANDIDATE && sourceListName === ValueConstant.APPLIED_CANDIDATE)
-      this.candidateQlist.cartCandidates.push(candidate);
+    if (destinationListName === ValueConstant.CART_LISTED_CANDIDATE && sourceListName === ValueConstant.APPLIED_CANDIDATE) {
+      isFound=false;
+      for(let item of this.candidateQlist.cartCandidates){
+        if(item._id === candidate._id) {
+          isFound=true;
+        }
+      }
+      if(!isFound) {
+        this.candidateQlist.cartCandidates.push(candidate);
+      }
+    }
+
+    if (destinationListName === ValueConstant.REJECTED_LISTED_CANDIDATE && sourceListName === ValueConstant.APPLIED_CANDIDATE) {
+      isFound=false;
+      for(let item of this.candidateQlist.rejectedCandidates) {
+        if(item._id === candidate._id) {
+          isFound=true;
+        }
+      }
+      if(!isFound) {
+        this.candidateQlist.rejectedCandidates.push(candidate);
+      }
+    }
 
     if (sourceListName === ValueConstant.CART_LISTED_CANDIDATE && (destinationListName === ValueConstant.CART_LISTED_CANDIDATE || destinationListName === ValueConstant.REJECTED_LISTED_CANDIDATE))
       this.addedTocart.emit(false);
