@@ -66,7 +66,7 @@ export class JobCompareViewComponent implements OnChanges,OnInit {
     if (LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE) === 'true') {
       this.isCandidate = true;
     }
-    this.isGuidedTourImgRequire();
+    //this.isGuidedTourImgRequire();
   }
 
   isGuidedTourImgRequire() {
