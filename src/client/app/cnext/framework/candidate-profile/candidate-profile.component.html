@@ -152,10 +152,10 @@
           <div class="row">
             <div *ngIf="!candidate.isSubmitted" class="col-sm-12 get-set-go">
               <img src="assets/c-next/get-set-go/get_set_go.gif" alt="Get Set Go"/>
-              <p>You are now ready to find your dream job. In a few seconds you will be taken to the job matching dashboard</p>
+              <p>{{jobSearchForFirstTimeMessage}}</p>
             </div>
             <div *ngIf="candidate.isSubmitted" class="col-sm-12 get-set-go">
-              <p>Your profile edited successfully.You will be taken to the job matching dashboard</p>
+              <p>{{jobSearchMessage}}</p>
             </div>
           </div>
         </div>

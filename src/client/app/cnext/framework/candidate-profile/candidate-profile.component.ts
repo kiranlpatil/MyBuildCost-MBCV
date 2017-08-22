@@ -1,5 +1,5 @@
 import {Component, DoCheck, KeyValueDiffers, OnDestroy, OnInit} from "@angular/core";
-import {NavigationRoutes, Tooltip} from "../../../framework/shared/constants";
+import {NavigationRoutes, Tooltip, Messages} from "../../../framework/shared/constants";
 import {Router} from "@angular/router";
 import {ComplexityService} from "../complexity.service";
 import {Candidate, Section} from "../model/candidate";
@@ -19,6 +19,8 @@ import {ErrorService} from "../error.service";
 
 export class CandidateProfileComponent implements OnInit, DoCheck, OnDestroy {
   whichStepsVisible: boolean[] = new Array(7);
+  jobSearchForFirstTimeMessage:string = Messages.MSG_READY_FOR_JOB_SEARCH_FOR_FIRST_TIME;
+  jobSearchMessage:string = Messages.MSG_READY_FOR_JOB_SEARCH;
   private rolesForMain: Role[] = new Array(0);
   private rolesForCapability: Role[] = new Array(0);
   private rolesForComplexity: Role[] = new Array(0);

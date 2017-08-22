@@ -26,6 +26,7 @@ export class ForgotPasswordComponent {
   EMAIL_ICON: string;
   BODY_BACKGROUND: string;
   forgotPasswordButtonLabel: string;
+  forgotPasswordMessage:string= Messages.MSG_FORGOT_PASSWORD;
   private submitStatus: boolean;
   private isShowLoader: boolean = false;
 

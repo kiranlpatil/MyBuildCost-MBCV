@@ -53,7 +53,7 @@
              max-num-list="10"
              [accept-user-input]="false"
              (ngModelChange)="selectYearModel($event)"
-             no-match-found-text="The year doesn't look right. Be sure to use your actual year of birth.">
+             no-match-found-text="{{yearMatchNotFoundMessage}}">
           <input formControlName="birth_year" [ngModel]="passingYear" id="birth_year" class="form-control"
                  placeholder="" required autocomplete="off"/>
           <label class="select-label">Year of Birth</label>
