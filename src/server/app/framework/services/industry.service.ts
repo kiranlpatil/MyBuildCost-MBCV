@@ -52,7 +52,7 @@ class IndustryService {
   getReleventIndustryList(data: any,industryName: string, callback: (error: any, result: any) => void) {
 
     //let query = { roles: { $elemMatch: {"name":{$in: JSON.parse(data)}}}};
-    let query = { "roles.name": {$in :JSON.parse(data)}};
+    let query = { "roles.code": {$in :JSON.parse(data)}};
     this.industryRepository.retrieve(query, (err, res) => {
       if (err) {
         callback(err, null);

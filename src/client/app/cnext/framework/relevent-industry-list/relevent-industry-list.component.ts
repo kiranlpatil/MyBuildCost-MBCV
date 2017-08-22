@@ -54,7 +54,7 @@ export class ReleventIndustryListComponent implements OnInit {
 
   getReleventIndustries() {
     if (this.roles.length) {
-      this.roles.forEach(x => this.workAreas.push(x.name));
+      this.roles.forEach(x => this.workAreas.push(x.code));
       this.releventIndustryService.getReleventIndustries(this.workAreas, this.industry.name)
         .subscribe(
           res => {
