@@ -33,7 +33,7 @@ export class AcademicsComponent {
 
   createYearList(year: any) {
     for (let i = 0; i <= ValueConstant.MAX_YEAR_LIST; i++) {
-      this.yearList.push(year++);
+      this.yearList.unshift(year++);
     }
   }
 }
