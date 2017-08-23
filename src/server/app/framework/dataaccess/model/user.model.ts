@@ -11,5 +11,6 @@ interface UserModel {
   social_profile_picture: string;
   current_theme: string;
   notifications: Array<any>;
+  guide_tour:Array<string>;
 }
 export = UserModel;

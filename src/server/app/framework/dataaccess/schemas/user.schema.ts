@@ -72,7 +72,8 @@ class UserSchema {
         description: String,
         is_read: Boolean,
         notification_time: Date
-      }]
+      }],
+      guide_tour: [{type: String}]
     }, {versionKey: false});
     /*schema.plugin(encrypt, {
       encryptionKey: encKey,

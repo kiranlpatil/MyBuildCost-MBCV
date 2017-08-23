@@ -4,6 +4,7 @@ import {Section} from "../model/candidate";
 import {ImagePath, LocalStorage, Messages, Tooltip, ValueConstant} from "../../../framework/shared/constants";
 import {LocalStorageService} from "../../../framework/shared/localstorage.service";
 import {GuidedTourService} from "../guided-tour.service";
+import {ErrorService} from "../error.service";
 
 @Component({
   moduleId: module.id,
@@ -40,7 +41,7 @@ export class WorkAreaComponent implements OnInit,OnChanges {
   private guidedTourImgOverlayScreensCapabilitiesPath:string;
   private isGuideImg:boolean = false;
 
-  constructor(private guidedTourService:GuidedTourService) {
+  constructor(private guidedTourService:GuidedTourService, private errorService:ErrorService) {
 
   }
   ngOnInit() {
@@ -126,7 +127,15 @@ export class WorkAreaComponent implements OnInit,OnChanges {
   }
   onGotItGuideTour() {
     this.guidedTourStatus = this.guidedTourService.updateTourStatus(ImagePath.CANDIDATE_OERLAY_SCREENS_CAPABILITIES,true);
-    this.isGuidedTourImgRequire()
+    this.guidedTourStatus = this.guidedTourService.getTourStatus();
+    this.guidedTourService.updateProfileField(this.guidedTourStatus)
+      .subscribe(
+        (res:any) => {
+          LocalStorageService.setLocalValue(LocalStorage.GUIDED_TOUR, JSON.stringify(res.data.guide_tour));
+          this.isGuidedTourImgRequire()
+        },
+        error => this.errorService.onError(error)
+      );
   }
 
   onNextAction() {

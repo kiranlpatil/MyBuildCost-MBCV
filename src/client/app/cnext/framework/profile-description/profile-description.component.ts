@@ -1,12 +1,14 @@
 import {Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
 import {Candidate, Section} from "../model/candidate";
-import {AppSettings, Messages, Tooltip} from "../../../framework/shared/constants";
+import {AppSettings, Messages, Tooltip, LocalStorage} from "../../../framework/shared/constants";
 import {CandidateDetail} from "../../../framework/registration/candidate/candidate";
 import {ProfessionalDataService} from "../professional-data/professional-data.service";
 import {Location} from "../../../framework/registration/location";
 import {MyGoogleAddress} from "../../../framework/registration/candidate/google-our-place/my-google-address";
 import {ProfileDetailsService} from "../profile-detail-service";
 import {ErrorService} from "../error.service";
+import {LocalStorageService} from "../../../framework/shared/localstorage.service";
+import {GuidedTourService} from "../guided-tour.service";
 
 @Component({
   moduleId: module.id,
@@ -56,7 +58,8 @@ export class ProfileDescriptionComponent implements OnInit {
 
   constructor(private professionalDataService: ProfessionalDataService,
               private errorService:ErrorService,
-              private profileDetailService: ProfileDetailsService) {
+              private profileDetailService:ProfileDetailsService,
+              private guidedTourService:GuidedTourService) {
     this.profileDetailService.makeCall$.subscribe(
       data => {
         if (data && this.educationList.length === 0 && this.experienceList.length === 0) {
@@ -106,6 +109,8 @@ export class ProfileDescriptionComponent implements OnInit {
     }
   }
   onNext() {
+    var dataArray:string[] = new Array(0);
+    LocalStorageService.setLocalValue(LocalStorage.GUIDED_TOUR, JSON.stringify(dataArray));
     this.containsWhiteSpace = false;
     this.isValid = true;
     this.isLocationInvalid = false;

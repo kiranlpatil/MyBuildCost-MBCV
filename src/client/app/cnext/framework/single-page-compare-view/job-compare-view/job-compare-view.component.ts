@@ -1,11 +1,11 @@
-import {Component, EventEmitter, Input, OnChanges, Output, OnInit} from '@angular/core';
-import { JobCompareService } from './job-compare-view.service';
-import {Capability} from '../../model/capability';
-import {Candidate} from '../../model/candidate';
-import {CandidateDetail} from '../../../../framework/registration/candidate/candidate';
-import {CandidateProfileService} from '../../candidate-profile/candidate-profile.service';
-import {RecruiterDashboardService} from '../../recruiter-dashboard/recruiter-dashboard.service';
-import {Recruiter} from '../../../../framework/registration/recruiter/recruiter';
+import {Component, EventEmitter, Input, OnChanges, Output, OnInit} from "@angular/core";
+import {JobCompareService} from "./job-compare-view.service";
+import {Capability} from "../../model/capability";
+import {Candidate} from "../../model/candidate";
+import {CandidateDetail} from "../../../../framework/registration/candidate/candidate";
+import {CandidateProfileService} from "../../candidate-profile/candidate-profile.service";
+import {RecruiterDashboardService} from "../../recruiter-dashboard/recruiter-dashboard.service";
+import {Recruiter} from "../../../../framework/registration/recruiter/recruiter";
 import {AppSettings, ImagePath, LocalStorage} from "../../../../framework/shared/constants";
 import {GuidedTourService} from "../../guided-tour.service";
 import {LocalStorageService} from "../../../../framework/shared/localstorage.service";
@@ -75,6 +75,15 @@ export class JobCompareViewComponent implements OnChanges,OnInit {
 
   onGotItGuideTour() {
     this.guidedTourStatus = this.guidedTourService.updateTourStatus(ImagePath.CANDIDATE_OERLAY_SCREENS_STACK_VIEW,true);
+    this.guidedTourStatus = this.guidedTourService.getTourStatus();
+    this.guidedTourService.updateProfileField(this.guidedTourStatus)
+      .subscribe(
+        (res:any) => {
+          LocalStorageService.setLocalValue(LocalStorage.GUIDED_TOUR, JSON.stringify(res.data.guide_tour));
+          this.isGuidedTourImgRequire()
+        },
+        error => this.errorService.onError(error)
+      );
   }
 
   OnRecruiterDataSuccess(data: any) {
