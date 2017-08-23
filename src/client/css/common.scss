@@ -729,6 +729,10 @@ control-messages {
   margin-bottom: 20px;
 }
 
+.small-label {
+  font-size: 11px;
+}
+
 // Media Queries
 @media only screen and (max-width: 1024px) {
   .logout-dropdown {
