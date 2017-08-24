@@ -2,10 +2,10 @@
   "TplSeed": {
     "database": {
       "host":"127.0.0.1",
-      "name": "JobMosis-staging"
+      "name": "Jobmosis-staging"
     },
     "mail": {
-      "host":"http://52.43.220.29:3000/",
+      "host":"http://34.208.115.60:3000/",
       "MAIL_SENDER": "notifications@jobmosis.com",
       "MAIL_SENDER_PASSWORD": "notifications@123",
       "ADMIN_MAIL": "notifications@jobmosis.com"
