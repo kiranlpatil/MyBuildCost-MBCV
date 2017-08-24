@@ -104,6 +104,13 @@
   }
 }
 
+.description-container {
+  .image-container {
+    width: 130px !important;
+    height: 130px !important;
+  }
+}
+
 @media only screen and (max-width: 768px) {
   .dashboard-profile {
     padding-left: 0;

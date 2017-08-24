@@ -39,7 +39,7 @@
   box-shadow: 1px 1px 1px 0 $modal-bg;
   border: 2px solid $white;
   padding: 0 !important;
-  overflow: visible;
+  overflow: auto;
   top: 0;
   left: 50%;
   width: 950px;
@@ -254,8 +254,8 @@
   position: absolute;
 
   .image-container {
-    width: 130px;
-    height: 130px;
+    width: 120px;
+    height: 120px;
     border-radius: 50%;
     margin: 0 auto 15px;
     display: block;
