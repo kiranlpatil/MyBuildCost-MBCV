@@ -3,9 +3,10 @@ import {MessageService} from "../../../framework/shared/message.service";
 import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
 import {Message} from "../../../framework/shared/message";
 import {Candidate, Section} from "../model/candidate";
-import {Messages, Tooltip, ImagePath, Headings} from "../../../framework/shared/constants";
+import {Messages, Tooltip, ImagePath, Headings, LocalStorage} from "../../../framework/shared/constants";
 import {GuidedTourService} from "../guided-tour.service";
 import {ErrorService} from "../error.service";
+import {LocalStorageService} from "../../../framework/shared/localstorage.service";
 
 @Component({
   moduleId: module.id,
@@ -108,7 +109,16 @@ export class MoreAboutMyselfComponent implements OnInit {
 
   onGotItGuideTour() {
     this.guidedTourStatus = this.guidedTourService.updateTourStatus(ImagePath.CANDIDATE_OERLAY_SCREENS_EMPLOYMENT_HISTORY,true);
-    this.isGuidedTourImgRequire();
+    this.guidedTourStatus = this.guidedTourService.getTourStatus();
+    this.guidedTourService.updateProfileField(this.guidedTourStatus)
+      .subscribe(
+        (res:any) => {
+          LocalStorageService.setLocalValue(LocalStorage.GUIDED_TOUR, JSON.stringify(res.data.guide_tour));
+          this.isGuidedTourImgRequire()
+        },
+        error => this.errorService.onError(error)
+      );
+
   }
 
   onSave() {

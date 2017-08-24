@@ -5,7 +5,7 @@ import {ImagePath, LocalStorage, Messages, Tooltip, ValueConstant, Headings} fro
 import {Section} from "../model/candidate";
 import {LocalStorageService} from "../../../framework/shared/localstorage.service";
 import {GuidedTourService} from "../guided-tour.service";
-import {Headers} from "@angular/http";
+import {ErrorService} from "../error.service";
 
 @Component({
   moduleId: module.id,
@@ -56,7 +56,7 @@ export class CapabilitiesComponent {
     '</li>' +
     '</ul>';
 
-  constructor(private guidedTourService:GuidedTourService) {
+  constructor(private guidedTourService:GuidedTourService, private errorService:ErrorService) {
 
   }
 
@@ -155,7 +155,15 @@ export class CapabilitiesComponent {
   }
   onGotItGuideTour() {
     this.guidedTourStatus = this.guidedTourService.updateTourStatus(ImagePath.CANDIDATE_OERLAY_SCREENS_COMPLEXITIES,true);
-    this.isGuidedTourImgRequire()
+    this.guidedTourStatus = this.guidedTourService.getTourStatus();
+    this.guidedTourService.updateProfileField(this.guidedTourStatus)
+      .subscribe(
+        (res:any) => {
+          LocalStorageService.setLocalValue(LocalStorage.GUIDED_TOUR, JSON.stringify(res.data.guide_tour));
+          this.isGuidedTourImgRequire()
+        },
+        error => this.errorService.onError(error)
+      );
   }
 
   onNextAction() {

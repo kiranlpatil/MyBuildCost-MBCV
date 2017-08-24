@@ -14,4 +14,5 @@ export class CandidateDetail {
   current_theme: string;
   picture: string = "/assets/framework/images/dashboard/default-profile.png";
   social_profile_picture: string;
+  guided_tour:string[] = new Array(0);
 }
