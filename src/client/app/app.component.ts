@@ -38,15 +38,12 @@ export class AppComponent implements OnInit {
       if (LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE) === 'true') {
         if (LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE_FILLED) === 'true') {
           this._router.navigate([NavigationRoutes.APP_CANDIDATE_DASHBOARD]);
-        }
-        else {
+        } else {
           this._router.navigate([NavigationRoutes.APP_CREATEPROFILE]);
         }
-      }
-      else {
+      } else {
         this._router.navigate([NavigationRoutes.APP_RECRUITER_DASHBOARD]);
       }
-
     } else {
       LocalStorageService.setLocalValue(LocalStorage.IS_LOGGED_IN, 0);
     }
@@ -58,6 +55,7 @@ export class AppComponent implements OnInit {
     this.subscription = messageService.messageObservable$.subscribe(
       (message: Message) => {
         if (message.isError === true) {
+          console.log(message);
           let err = message.error_msg.error;
           if (err === 'Could not attach click handler to the element. Reason: element not found.') {
             message.isError = false;
@@ -95,6 +93,12 @@ export class AppComponent implements OnInit {
     this.isShowErrorMessage = false;
     this.errorMessage = message.error_msg;
     this.customMessage = message.custom_message;
+    if(message.error_code===401) {
+      setTimeout(function () {
+        this.closeErrorMessage();
+        this.logOut();
+      }.bind(this), 5555);
+    }
   };
 
   showSuccess(message: Message) {
@@ -112,5 +116,9 @@ export class AppComponent implements OnInit {
   closeSuccessMessage() {
     this.isShowSuccessMessage = true;
   }
-
+  logOut() {
+    window.localStorage.clear();
+    let host='http://'+window.location.hostname;
+    this._router.navigate([host]);
+  }
 }

@@ -28,7 +28,6 @@ export class AcademicsComponent {
     this.year = this.currentDate.getUTCFullYear();
     this.year = this.year - ValueConstant.MAX_YEAR_LIST;
     this.createYearList(this.year); //TODO use the service for date list
-
   }
 
   createYearList(year: any) {

@@ -42,8 +42,6 @@ export class ReleventIndustryListComponent implements OnInit {
 
   ngOnInit() {
     this.suggestionMsgForReleventIndustry = Messages.SUGGESTION_MSG_FOR_RELEVENT_INDUSTRY;
-    this.getReleventIndustries();
-
   }
 
   ngOnChanges(changes: any) {

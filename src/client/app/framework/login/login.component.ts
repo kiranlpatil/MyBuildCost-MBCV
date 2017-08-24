@@ -86,7 +86,6 @@ export class LoginComponent implements OnInit {
   }
 
   loginSuccess(res: any) {
-    var dataArray:string[] = new Array(0);
     LocalStorageService.setLocalValue(LocalStorage.IS_CANDIDATE, res.data.isCandidate);
     LocalStorageService.setLocalValue(LocalStorage.IS_CANDIDATE_FILLED, res.data.isCompleted);
     LocalStorageService.setLocalValue(LocalStorage.END_USER_ID, res.data.end_user_id);
@@ -94,7 +93,13 @@ export class LoginComponent implements OnInit {
     LocalStorageService.setLocalValue(LocalStorage.MOBILE_NUMBER, res.data.mobile_number);
     LocalStorageService.setLocalValue(LocalStorage.FIRST_NAME, res.data.first_name);
     LocalStorageService.setLocalValue(LocalStorage.LAST_NAME, res.data.last_name);
-    LocalStorageService.setLocalValue(LocalStorage.GUIDED_TOUR, JSON.stringify(dataArray));
+    if (res.data.guide_tour) {
+      LocalStorageService.setLocalValue(LocalStorage.GUIDED_TOUR, JSON.stringify(res.data.guide_tour));
+    } else {
+      var dataArray:string[] = new Array(0);
+      LocalStorageService.setLocalValue(LocalStorage.GUIDED_TOUR, JSON.stringify(dataArray));
+    }
+
     this.userForm.reset();
     if (res.data.current_theme) {
       LocalStorageService.setLocalValue(LocalStorage.MY_THEME, res.data.current_theme);
