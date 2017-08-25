@@ -1,12 +1,15 @@
 import CandidateModel = require("../dataaccess/model/candidate.model");
 import RecruiterRepository = require("../dataaccess/repository/recruiter.repository");
+import CandidateRepository = require("../dataaccess/repository/candidate.repository");
 
-export class CandidateSearchService {
+class CandidateSearchService {
 
-  recruiterRepository:RecruiterRepository;
+  private recruiterRepository:RecruiterRepository;
+  private candidateRepository:CandidateRepository;
 
   constructor() {
     this.recruiterRepository = new RecruiterRepository();
+    this.candidateRepository = new CandidateRepository();
   }
 
   searchMatchingJobProfile(candidate:CandidateModel, recruiterId:string, callback:(error:any, result:any) => void) {
@@ -26,6 +29,17 @@ export class CandidateSearchService {
         callback(err, null);
       } else {
         this.recruiterRepository.getJobProfileQCard(res, candidate, undefined, callback);
+      }
+    });
+  }
+
+  //in below method we use user ids for search in candidate repository
+  getCandidateInfo(userId:string[], callback:(error:any, result:any) => void) {
+    this.candidateRepository.retrieveByMultiRefrenceIdsAndPopulate(userId, {capability_matrix: 0}, (err, result) => {
+      if (err) {
+        callback(err, null);
+      } else {
+        callback(null, result);
       }
     });
   }

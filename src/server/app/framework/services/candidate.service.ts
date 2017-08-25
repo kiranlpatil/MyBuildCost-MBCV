@@ -624,17 +624,6 @@ class CandidateService {
     });
   }
 
-//in below method we use user ids for search in candidate repository
-  getCandidateInfo(userId:string[], callback:(error:any, result:any) => void) {
-    this.candidateRepository.retrieveByMultiRefrenceIdsAndPopulate(userId, {capability_matrix: 0}, (err, result) => {
-      if (err) {
-        callback(err, null);
-      } else {
-        callback(null, result);
-      }
-    });
-  }
-
   buidResultOnCandidateSearch(dataArray:CandidateModel[]) {
     var searchResult:CandidateInfoSearch[] = new Array(0);
     for (let obj of dataArray) {

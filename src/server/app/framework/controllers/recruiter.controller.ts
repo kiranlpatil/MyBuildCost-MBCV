@@ -12,6 +12,7 @@ import SearchService = require("../search/services/search.service");
 import CandidateInfoSearch = require("../dataaccess/model/candidate-info-search");
 import CandidateModel = require("../dataaccess/model/candidate.model");
 import UserService = require("../services/user.service");
+import CandidateSearchService = require("../services/candidate-search.service");
 
 
 export function create(req: express.Request, res: express.Response, next: any) {
@@ -249,6 +250,7 @@ export function getCandidatesByName(req:express.Request, res:express.Response, n
   try {
     let userService = new UserService();
     let candidateService = new CandidateService();
+    let candidateSearchService = new CandidateSearchService();
     //let jobId = req.params.jobId;
     //let candidateId = req.params.candidateId;
     var userName = req.params.searchvalue;
@@ -272,7 +274,7 @@ export function getCandidatesByName(req:express.Request, res:express.Response, n
           candidateId.push(obj._id);
         }
         console.log('---------------candidateIds---------------------------', candidateId);
-        candidateService.getCandidateInfo(candidateId, (error:any, candidateInfo:CandidateModel[]) => {
+        candidateSearchService.getCandidateInfo(candidateId, (error:any, candidateInfo:CandidateModel[]) => {
           if (error) {
             next({
               reason: 'Problem in Search user details',
