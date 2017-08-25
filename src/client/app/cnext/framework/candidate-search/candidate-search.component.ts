@@ -43,7 +43,7 @@ export class CandidateSearchComponent {
     this.candidateSearchService.getJobProfileMatching(candidateId)
       .subscribe(
         (res:any) => {
-          this.listOfJobs = res;
+          this.listOfJobs = res.jobData;
         },
         error => this.errorService.onError(error)
       );

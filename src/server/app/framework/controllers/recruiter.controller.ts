@@ -282,7 +282,7 @@ export function getCandidatesByName(req:express.Request, res:express.Response, n
               code: 401
             });
           } else {
-            var searchArray:CandidateInfoSearch[] = candidateService.buidResultOnCandidateSearch(candidateInfo);
+            var searchArray:CandidateInfoSearch[] = candidateSearchService.buidResultOnCandidateSearch(candidateInfo);
             res.send({
               'status': 'success',
               'data': searchArray,

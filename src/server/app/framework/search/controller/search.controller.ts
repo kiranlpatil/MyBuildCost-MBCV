@@ -53,7 +53,6 @@ export class SearchController {
     let candidateService = new CandidateService();
     let candidateId = req.params.candidateId;
     let recruiterId = req.params.recruiterId;
-    console.log('------------------------recruiter-ids-----------------------------', recruiterId);
     candidateService.findById(candidateId, (error:Error, candiRes:any) => {
       if (error) {
         res.status(304).send(error);
@@ -62,7 +61,17 @@ export class SearchController {
           if (error) {
             res.status(304).send(error);
           } else {
-            res.status(200).send(result);
+            let candidateIdarray:string[] = new Array(0);
+            candidateIdarray.push(candidateId);
+            console.log('------------------------candidateIdarray-ids-----------------------------', candidateIdarray);
+            candidateSearchService.getCandidateInfoById(candidateIdarray, (error:Error, candidateInfo:any) => {
+              if (error) {
+                res.status(304).send(error);
+              } else {
+                var data = {'jobData': result, 'candidateProfile': candidateInfo[0]};
+                res.status(200).send(data);
+              }
+            });
           }
         });
       }
