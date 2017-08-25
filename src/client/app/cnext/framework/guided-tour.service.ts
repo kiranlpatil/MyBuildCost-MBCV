@@ -29,15 +29,12 @@ export class GuidedTourService extends BaseService {
   }
 
   updateProfileField(model:string[]):Observable<any> {
-    if (model) {
       var url = API.USER_PROFILE + '/' + LocalStorageService.getLocalValue(LocalStorage.USER_ID) + '/' + 'fieldname' + '/' + 'guide_tour';
       let body = JSON.stringify(model);
       return this.http.put(url, body)
         .map(this.extractData)
         .catch(this.handleError);
-    } else {
-      console.log(' You break your flow. please logout yourself');
-    }
+    //console.log(' You break your flow. please logout yourself');
   }
 
 }

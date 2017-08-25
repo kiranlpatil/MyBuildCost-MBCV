@@ -22,15 +22,19 @@
       list-style: none;
     }
 
+    ul > li {
+      &:last-child {
+        p {
+          margin: 0;
+        }
+      }
+    }
+
     p {
       margin: 0 0 15px;
       font-size: 12px;
       display: block;
       color: $white;
-
-      &:last-child {
-        margin: 0;
-      }
     }
 
     h5 {
@@ -84,7 +88,7 @@
 }
 
 .scrollable-content {
-  overflow: auto;
+  overflow: visible;
   height: auto;
   padding: 0 250px 75px 70px;
   position: relative;

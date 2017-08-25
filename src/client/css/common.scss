@@ -733,6 +733,12 @@ control-messages {
   font-size: 11px;
 }
 
+.btn:focus {
+  box-shadow: inset 0 0 0 1px #fff;
+  border: 1px solid #fff;
+  outline: rgba(0, 0, 0, 0) 0;
+}
+
 // Media Queries
 @media only screen and (max-width: 1024px) {
   .logout-dropdown {
