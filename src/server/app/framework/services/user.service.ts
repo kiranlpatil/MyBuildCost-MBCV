@@ -8,11 +8,13 @@ import * as mongoose from "mongoose";
 //import * as config from 'config';
 var config = require('config');
 var bcrypt = require('bcrypt');
+var json2xls = require('json2xls');
 import Messages = require("../shared/messages");
 import AuthInterceptor = require("../../framework/interceptor/auth.interceptor");
 import ProjectAsset = require("../shared/projectasset");
 import MailAttachments = require("../shared/sharedarray");
 import RecruiterRepository = require("../dataaccess/repository/recruiter.repository");
+import UsersClassModel = require("../dataaccess/model/users");
 
 class UserService {
   private userRepository: UserRepository;
@@ -314,6 +316,45 @@ class UserService {
   retrieve(field: any, callback: (error: any, result: any) => void) {
     this.userRepository.retrieveWithoutLean(field, callback);
   }
+  retrieveAll(item: any, callback: (error: any, result: any) => void) {
+    this.userRepository.retrieve(item, (err, res) => {
+      if (err) {
+        callback(new Error(Messages.MSG_ERROR_REGISTRATION_MOBILE_NUMBER), null);
+      } else  {
+        callback(null, res);
+      }
+    });
+  };
+  seperateUsers(item: any, callback: (error: any, result: any) => void) {
+    /*this.userRepository.retrieve(item, (err, res) => {
+      if (err) {
+        callback(new Error(Messages.MSG_ERROR_REGISTRATION_MOBILE_NUMBER), null);
+      } else  {
+        callback(null, res);
+      }
+    });*/
+ var users:UsersClassModel=new UsersClassModel;
+    var candidates=[];
+    var recruiters=[];
+    for(let i=0;i<item.length;i++) {
+      if(item[i].isCandidate) {
+        candidates.push(item[i]);
+      } else if(!item[i].isCandidate) {
+        recruiters.push(item[i]);
+      }
+    }
+    users.candidate=candidates;
+    users.recruiter=recruiters;
+    console.log("call success");
+    callback(null, users);
+  };
+
+  createXlsx(result: any, callback: (err: any, res: any) => void){
+    var xls = json2xls(result);
+    fs.writeFileSync('E://data162.xlsx', xls, 'binary');
+    console.log("Success");
+    callback(null,result);
+  };
 
   update(_id: string, item: any, callback: (error: any, result: any) => void) {
 

@@ -52,8 +52,9 @@ export function init(app: express.Application) {
   app.post("/api/sendrecruitermail/:id", this.authInterceptor.requiresAuth, userController.recruiterVerificationMail);
   app.post("/api/companydetails/:id", this.authInterceptor.requiresAuth, userController.updateCompanyDetails);
   app.put("/api/uploaddocuments/:id", this.authInterceptor.requiresAuth, userController.uploaddocuments);
-
+  app.get('/api/alluser', userController.getAllUser);
   app.get("/api/readxlsx", importIndustriesController.readXlsx);
+  app.post("/api/writexlsx", importIndustriesController.writeXlsx);
   //app.post("/api/createImportIndusry", importIndustriesController.create);
 
   app.use(sharedService.logHandler);
