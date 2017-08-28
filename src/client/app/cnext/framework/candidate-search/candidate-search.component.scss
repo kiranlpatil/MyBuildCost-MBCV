@@ -26,8 +26,9 @@
   top: 90px;
   z-index: 99;
   input {
+    border: 1px solid $gray;
     float: left;
-    padding: 7px 7px 7px 10px;
+    padding: 9px 7px 7px 10px;
     width: 500px;
   }
   .search-btn {
