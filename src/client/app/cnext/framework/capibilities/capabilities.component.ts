@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, Output} from "@angular/core";
 import {Role} from "../model/role";
 import {Capability} from "../model/capability";
-import {ImagePath, LocalStorage, Messages, Tooltip, ValueConstant, Headings} from "../../../framework/shared/constants";
+import {Headings, ImagePath, LocalStorage, Messages, Tooltip, ValueConstant} from "../../../framework/shared/constants";
 import {Section} from "../model/candidate";
 import {LocalStorageService} from "../../../framework/shared/localstorage.service";
 import {GuidedTourService} from "../guided-tour.service";
@@ -52,7 +52,7 @@ export class CapabilitiesComponent {
 
     '<ul>' +
     '<li>' +
-    '<p>1.'+ Tooltip.RECRUITER_CAPABILITY_TOOLTIP +'</p>' +
+    '<p>1. ' + Tooltip.RECRUITER_CAPABILITY_TOOLTIP + '</p>' +
     '</li>' +
     '</ul>';
 
