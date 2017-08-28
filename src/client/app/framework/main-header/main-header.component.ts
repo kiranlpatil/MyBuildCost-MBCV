@@ -30,7 +30,8 @@ export class MainHeaderComponent {
   }
 
     onHomePage() {
-      let host = 'http://' + window.location.hostname;
+      window.localStorage.clear();
+      let host = 'http://' + window.location.hostname + ':80';
       this._router.navigate([host]);
     }
 }

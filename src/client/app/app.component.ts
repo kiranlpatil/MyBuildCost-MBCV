@@ -118,7 +118,7 @@ export class AppComponent implements OnInit {
   }
   logOut() {
     window.localStorage.clear();
-    let host='http://'+window.location.hostname;
+    let host = 'http://' + window.location.hostname + ':80';
     this._router.navigate([host]);
   }
 }
