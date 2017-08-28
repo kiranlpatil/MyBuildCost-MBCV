@@ -1,4 +1,4 @@
-<div class="guided-tour-section" *ngIf="guidedTourStatus.indexOf(overlayScreensDashboardImgName) == -1">
+<div class="guided-tour-section" *ngIf="guidedTourStatus?.indexOf(overlayScreensDashboardImgName) == -1">
   <img src={{overlayScreensDashboardImgPath}} alt="Profile Picture">
   <div class="got-it-btn" (click)="tourGuideGotIt()">
     <span>{{gotItMessage}}</span>
