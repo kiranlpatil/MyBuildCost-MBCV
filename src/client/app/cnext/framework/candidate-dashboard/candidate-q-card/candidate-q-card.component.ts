@@ -1,10 +1,10 @@
-import {Component, EventEmitter, Input, Output, ViewChild} from '@angular/core';
-import { JobQcard } from '../../model/JobQcard';
-import {AppSettings, LocalStorage} from '../../../../framework/shared/constants';
-import { LocalStorageService } from '../../../../framework/shared/localstorage.service';
-import { CandidateDashboardService } from '../candidate-dashboard.service';
-import { Message } from '../../../../framework/shared/message';
-import { MessageService } from '../../../../framework/shared/message.service';
+import {Component, EventEmitter, Input, Output, ViewChild} from "@angular/core";
+import {JobQcard} from "../../model/JobQcard";
+import {AppSettings, LocalStorage} from "../../../../framework/shared/constants";
+import {LocalStorageService} from "../../../../framework/shared/localstorage.service";
+import {CandidateDashboardService} from "../candidate-dashboard.service";
+import {Message} from "../../../../framework/shared/message";
+import {MessageService} from "../../../../framework/shared/message.service";
 import {JobCompareViewComponent} from "../../single-page-compare-view/job-compare-view/job-compare-view.component";
 
 
@@ -25,7 +25,7 @@ export class CandidateQCardComponent {
 
   private jobId: string;
   @ViewChild(JobCompareViewComponent) checkForGuidedTour: JobCompareViewComponent;
-  
+
   constructor(private candidateDashboardService: CandidateDashboardService,private messageService: MessageService) {
   }
 
@@ -39,14 +39,15 @@ export class CandidateQCardComponent {
   }
 
   viewJob(jobId: string) {
-    
-    if (jobId !== undefined) {
-      this.checkForGuidedTour.isGuidedTourImgRequire();
-      LocalStorageService.setLocalValue(LocalStorage.CURRENT_JOB_POSTED_ID, jobId);
-      this.jobId = jobId;
-      this.candidateId = LocalStorageService.getLocalValue(LocalStorage.END_USER_ID);
+    if (this.type !== 'searchView') {
+      if (jobId !== undefined) {
+        this.checkForGuidedTour.isGuidedTourImgRequire();
+        LocalStorageService.setLocalValue(LocalStorage.CURRENT_JOB_POSTED_ID, jobId);
+        this.jobId = jobId;
+        this.candidateId = LocalStorageService.getLocalValue(LocalStorage.END_USER_ID);
+      }
+      this.showModalStyle = !this.showModalStyle;
     }
-    this.showModalStyle = !this.showModalStyle;
   }
 
 
