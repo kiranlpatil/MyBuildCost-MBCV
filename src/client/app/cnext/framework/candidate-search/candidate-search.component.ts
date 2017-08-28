@@ -4,6 +4,9 @@ import {ErrorService} from "../error.service";
 import {CandidateSearch} from "../model/candidate-search";
 import {JobQcard} from "../model/JobQcard";
 import {CandidateProfileMeta} from "../model/candidate-profile-meta";
+import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
+import {Candidate} from "../model/candidate";
+import {CandidateDetail} from "../../../framework/registration/candidate/candidate";
 
 @Component({
   moduleId: module.id,
@@ -19,8 +22,10 @@ export class CandidateSearchComponent implements OnChanges {
   private candidateProfileMeta:CandidateProfileMeta = new CandidateProfileMeta();
   private listOfJobs:JobQcard[] = new Array(0);
   //private candidateDataList:string[] = new Array(0);
+  private candidateDetails:CandidateDetail = new CandidateDetail();
+  private candidate:Candidate = new Candidate();
 
-  constructor(private candidateSearchService:CandidateSearchService, private errorService:ErrorService) {
+  constructor(private candidateSearchService:CandidateSearchService, private errorService:ErrorService, private profileCreatorService:CandidateProfileService) {
 
   }
 
@@ -45,14 +50,32 @@ export class CandidateSearchComponent implements OnChanges {
   }
 
   getJobProfileMatching(candidateId:string) {
+    this.getJobProfiles(candidateId);
+    this.getCandidateProfile(candidateId)
+  }
+
+  getJobProfiles(candidateId:string) {
     this.candidateSearchService.getJobProfileMatching(candidateId)
       .subscribe(
         (res:any) => {
           this.listOfJobs = res.jobData;
-          this.candidateProfileMeta = res.candidateProfile;
+          //this.candidateProfileMeta = res.candidateProfile;
         },
         error => this.errorService.onError(error)
       );
+  }
+
+  getCandidateProfile(candidateId:string) {
+    this.profileCreatorService.getCandidateDetailsOfParticularId(candidateId)
+      .subscribe(
+        candidateData => this.OnCandidateDataSuccess(candidateData),
+        error => this.errorService.onError(error));
+  }
+
+  OnCandidateDataSuccess(candidateData:any) {
+    this.candidate = candidateData.data;
+    this.candidateDetails = candidateData.metadata;
+    //this.getSecondaryData();
   }
 
   viewProfile() {

@@ -4,6 +4,7 @@
     <input auto-complete (keypress)="searchCandidate()" [(ngModel)]="searchValue" [source]="candidateDataList" placeholder="select" class="search"/>
   -->
   <input (keyup)="searchCandidate($event.target.value)" value="searchValue">
+  <button>Search</button>
   <!--<form class="form-horizontal" [formGroup]="myForm" (ngSubmit)="onSubmit(myForm.value)">
     <div>
       <div class="col-sm-5">
@@ -19,7 +20,6 @@
     </div>
   </form>-->
   <div class="pull-left col-xs-3 no-padding clear-all-btn">
-    <button>Show</button>
   </div>
   <li *ngFor="let item of candidateDataList">
     <div (click)="getJobProfileMatching(item.id)">
@@ -29,8 +29,20 @@
   <div *ngFor="let job of listOfJobs">
     <cn-candidate-q-card [progress_bar_color]="'#29b6f6'" [job]="job" [type]="'matched'"></cn-candidate-q-card>
   </div>
-  <div *ngIf="candidateProfileMeta._id">
+  <!--<div *ngIf="candidateProfileMeta._id">
   <cn-candidate-profile-meta [candidateMetaData]="candidateProfileMeta"></cn-candidate-profile-meta>
+  </div>-->
+  <div>
+    <cn-candidate-description [candidateDetails]="candidateDetails"
+                              [candidate]="candidate"></cn-candidate-description>
+  </div>
+  <div *ngIf="candidate.employmentHistory.length>0">
+    <cn-vertical-list-view [data]="candidate.employmentHistory" [type]="'employment history'"
+                           [calledFrom]="'singlepageview'"></cn-vertical-list-view>
+  </div>
+  <div *ngIf="candidate.academics.length>0">
+    <cn-vertical-list-view [data]="candidate.academics" [type]="'academic details'"
+                           [calledFrom]="'singlepageview'"></cn-vertical-list-view>
   </div>
   <button (click)="viewProfile()">View Profile</button>
 </div>
