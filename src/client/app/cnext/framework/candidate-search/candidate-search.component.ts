@@ -59,6 +59,7 @@ export class CandidateSearchComponent implements OnChanges {
       .subscribe(
         (res:any) => {
           this.listOfJobs = res.jobData;
+          this.candidateDataList = new Array(0);
           //this.candidateProfileMeta = res.candidateProfile;
         },
         error => this.errorService.onError(error)
