@@ -1,5 +1,6 @@
 import * as express from "express";
 import * as userController from "./app/framework/controllers/user.controller";
+import * as adminController from "./app/framework/controllers/admin.controller";
 import * as candidateController from "./app/framework/controllers/candidate.controller";
 import * as recruiterController from "./app/framework/controllers/recruiter.controller";
 import * as importIndustriesController from "./app/framework/controllers/import-Industries.controller";
@@ -52,7 +53,7 @@ export function init(app: express.Application) {
   app.post("/api/sendrecruitermail/:id", this.authInterceptor.requiresAuth, userController.recruiterVerificationMail);
   app.post("/api/companydetails/:id", this.authInterceptor.requiresAuth, userController.updateCompanyDetails);
   app.put("/api/uploaddocuments/:id", this.authInterceptor.requiresAuth, userController.uploaddocuments);
-  app.get('/api/alluser', userController.getAllUser);
+  app.get('/api/alluser', adminController.getAllUser);
   app.get("/api/readxlsx", importIndustriesController.readXlsx);
   app.post("/api/writexlsx", importIndustriesController.writeXlsx);
   //app.post("/api/createImportIndusry", importIndustriesController.create);
