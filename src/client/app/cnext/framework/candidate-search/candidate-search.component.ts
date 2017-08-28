@@ -40,7 +40,7 @@ export class CandidateSearchComponent implements OnChanges {
         );
     } else {
       this.candidateDataList = new Array(0);
-      this.listOfJobs = new Array(0);
+      //this.listOfJobs = new Array(0);
     }
   }
 

@@ -26,9 +26,11 @@
       {{item.display_string}}
     </div>
   </li>
-  <!--<div *ngFor="let job of listOfJobs">
+  <div *ngFor="let job of listOfJobs">
     <cn-candidate-q-card [progress_bar_color]="'#29b6f6'" [job]="job" [type]="'matched'"></cn-candidate-q-card>
-  </div>-->
+  </div>
+  <div *ngIf="candidateProfileMeta._id">
   <cn-candidate-profile-meta [candidateMetaData]="candidateProfileMeta"></cn-candidate-profile-meta>
+  </div>
   <button (click)="viewProfile()">View Profile</button>
 </div>

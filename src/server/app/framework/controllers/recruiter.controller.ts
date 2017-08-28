@@ -258,7 +258,10 @@ export function getCandidatesByName(req:express.Request, res:express.Response, n
     //var eventstring = new String();
     var eventstring:string = exp.toString().replace(/'/g, "");
 
-    var query = {$or: [{'first_name': {$regex: eval(eventstring)}}, {'last_name': {$regex: eval(eventstring)}}]};
+    var query = {
+      'isCandidate': true,
+      $or: [{'first_name': {$regex: eval(eventstring)}}, {'last_name': {$regex: eval(eventstring)}}]
+    };
     //console.log('---------------data------------------',query);
     userService.retrieve(query, (error:any, result:any) => {
       if (error) {
