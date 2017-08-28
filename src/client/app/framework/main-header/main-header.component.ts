@@ -31,7 +31,7 @@ export class MainHeaderComponent {
 
     onHomePage() {
       window.localStorage.clear();
-      let host = 'http://' + window.location.host;
+      let host = 'http://' + window.location.hostname;
       window.location.href = host;
     }
 }

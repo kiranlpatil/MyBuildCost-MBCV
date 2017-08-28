@@ -40,7 +40,7 @@ export class CandidateHeaderComponent {
 
   logOut() {
     window.localStorage.clear();
-      let host = 'http://' + window.location.host;
+    let host = 'http://' + window.location.hostname;
       window.location.href = host;
   }
 
