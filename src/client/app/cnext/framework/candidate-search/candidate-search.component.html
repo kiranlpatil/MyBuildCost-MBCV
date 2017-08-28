@@ -3,7 +3,21 @@
   <!--
     <input auto-complete (keypress)="searchCandidate()" [(ngModel)]="searchValue" [source]="candidateDataList" placeholder="select" class="search"/>
   -->
-  <input (keyup)="searchCandidate($event.target.value)">
+  <input (keyup)="searchCandidate($event.target.value)" value="searchValue">
+  <!--<form class="form-horizontal" [formGroup]="myForm" (ngSubmit)="onSubmit(myForm.value)">
+    <div>
+      <div class="col-sm-5">
+        <input  ng2-auto-complete
+                [source]="candidateDataList"
+                [list-formatter]="autocompleListFormatter"
+                value-property-name="id"
+                display-property-name="first_name"
+                placeholder="Contients"
+                (keydown)="searchCandidate($event.target.value)">
+      </div><br/>
+      <button type="submit">Submit</button>
+    </div>
+  </form>-->
   <div class="pull-left col-xs-3 no-padding clear-all-btn">
     <button>Show</button>
   </div>
@@ -12,8 +26,9 @@
       {{item.display_string}}
     </div>
   </li>
-  <div *ngFor="let job of listOfJobs">
+  <!--<div *ngFor="let job of listOfJobs">
     <cn-candidate-q-card [progress_bar_color]="'#29b6f6'" [job]="job" [type]="'matched'"></cn-candidate-q-card>
-  </div>
+  </div>-->
+  <cn-candidate-profile-meta [candidateMetaData]="candidateProfileMeta"></cn-candidate-profile-meta>
   <button (click)="viewProfile()">View Profile</button>
 </div>

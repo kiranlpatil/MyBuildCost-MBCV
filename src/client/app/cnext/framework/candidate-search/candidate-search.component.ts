@@ -1,8 +1,9 @@
-import {Component} from "@angular/core";
+import {Component, OnChanges} from "@angular/core";
 import {CandidateSearchService} from "./candidate-search.service";
 import {ErrorService} from "../error.service";
 import {CandidateSearch} from "../model/candidate-search";
 import {JobQcard} from "../model/JobQcard";
+import {CandidateProfileMeta} from "../model/candidate-profile-meta";
 
 @Component({
   moduleId: module.id,
@@ -11,20 +12,24 @@ import {JobQcard} from "../model/JobQcard";
   styleUrls: ['candidate-search.component.css']
 })
 
-export class CandidateSearchComponent {
+export class CandidateSearchComponent implements OnChanges {
 
-  //private searchValue:string;
+  private searchValue:string;
   private candidateDataList:CandidateSearch[] = new Array(0);
+  private candidateProfileMeta:CandidateProfileMeta = new CandidateProfileMeta();
   private listOfJobs:JobQcard[] = new Array(0);
   //private candidateDataList:string[] = new Array(0);
 
-  constructor(private candidateSearchService:CandidateSearchService,
-              private errorService:ErrorService) {
+  constructor(private candidateSearchService:CandidateSearchService, private errorService:ErrorService) {
+
+  }
+
+  ngOnChanges(changes:any) {
 
   }
 
   searchCandidate(value:string) {
-    //this.searchValue = value;
+    this.searchValue = value;
     if (value !== '') {
       this.candidateSearchService.getCandidateByName(value)
         .subscribe(
@@ -44,6 +49,7 @@ export class CandidateSearchComponent {
       .subscribe(
         (res:any) => {
           this.listOfJobs = res.jobData;
+          this.candidateProfileMeta = res.candidateProfile;
         },
         error => this.errorService.onError(error)
       );

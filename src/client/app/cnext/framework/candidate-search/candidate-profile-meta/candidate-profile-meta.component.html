@@ -1,0 +1,34 @@
+<img src="{{imagePath}}" alt="Candidate Profile Picture"
+     title="{{candidateMetaData?.userId.first_name}} {{candidateMetaData?.userId.last_name}}">
+<div>{{candidateMetaData?.userId.first_name}}{{candidateMetaData.userId.last_name}}</div>
+<h5>Contact</h5>
+<div>{{candidateMetaData?.userId.mobile_number}}</div>
+<div>{{candidateMetaData?.userId.email}}</div>
+<h5>Industry</h5>
+<div>{{candidateMetaData?.industry.name}}</div>
+<h5>Current Company</h5>
+<div>{{candidateMetaData.professionalDetails.currentCompany}}</div>
+<h5>Experience</h5>
+<div>{{candidateMetaData.professionalDetails.experience}}</div>
+<h5>Current Company</h5>
+<div>{{candidateMetaData.professionalDetails.noticePeriod}}</div>
+<h5>Ready to Relocate</h5>
+<div>{{candidateMetaData.professionalDetails.relocate}}</div>
+<h5>Current Salary</h5>
+<div>{{candidateMetaData.professionalDetails.currentSalary}}</div>
+<h5>Education</h5>
+<div>{{candidateMetaData.professionalDetails.education}}</div>
+
+<h5>Current Location</h5>
+<div>{{candidateMetaData.location.city}}</div>
+
+<h5>Employment History</h5>
+<li *ngFor="let item of candidateMetaData.employmentHistory">
+  <div>{{item.companyName}}{{item.designation}}{{item.from?.year}}-{{item.to?.year}}</div>
+</li>
+
+<h5>Education</h5>
+<li *ngFor="let item of candidateMetaData.academics">
+  <div>{{item.specialization}}{{item.schoolName}}{{item.yearOfPassing}}</div>
+</li>
+
