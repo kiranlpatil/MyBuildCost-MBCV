@@ -1,5 +1,5 @@
 <div class="guided-tour-section"
-     *ngIf="guidedTourStatus.indexOf(guidedTourImgOverlayScreensComplexities) == -1 && isCandidate && isGuideImg == true">
+     *ngIf="guidedTourStatus?.indexOf(guidedTourImgOverlayScreensComplexities) == -1 && isCandidate && isGuideImg == true">
   <img src={{guidedTourImgOverlayScreensComplexitiesPath}} alt="Profile Picture">
   <div class="got-it-btn" (click)="onGotItGuideTour()">
     <span>{{gotItMessage}}</span>

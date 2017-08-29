@@ -1,5 +1,5 @@
 <div class="guided-tour-section"
-     *ngIf="guidedTourStatus.indexOf(guidedTourImgOverlayScreensStackView) == -1 && isCandidate"
+     *ngIf="guidedTourStatus?.indexOf(guidedTourImgOverlayScreensStackView) == -1 && isCandidate"
      style="top: -43px;height: 110%;">
   <img src={{guidedTourImgOverlayScreensStackViewPath}} alt="Profile Picture">
   <div class="got-it-btn" (click)="onGotItGuideTour()">

@@ -84,7 +84,6 @@ class UserService {
             callback(new Error(Messages.MSG_ERROR_REGISTRATION_MOBILE_NUMBER), null);
           }
           else {
-
             var Data = {
               mobileNo: field.new_mobile_number,
               otp: otp

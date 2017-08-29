@@ -1,4 +1,4 @@
-import {NgModule} from "@angular/core";
+import {ErrorHandler, NgModule} from "@angular/core";
 import {AppComponent} from "./app.component";
 import {BrowserModule} from "@angular/platform-browser";
 import {APP_BASE_HREF} from "@angular/common";
@@ -187,6 +187,7 @@ import {ValueSortFilterPipe} from "./cnext/framework/profile-comparison/value-so
 import {RegistrationService} from "./framework/shared/registration.service";
 import {GuidedTourService} from "./cnext/framework/guided-tour.service";
 import {ErrorService} from "./cnext/framework/error.service";
+import {LoggerService, MyErrorHandler} from "./cnext/framework/my-error-handler.service";
 
 //C-NEXT IMPORTS
 
@@ -330,6 +331,7 @@ import {ErrorService} from "./cnext/framework/error.service";
       deps: [XHRBackend, RequestOptions, MessageService, LoaderService]
     },
     {provide: RequestOptions, useClass: AppRequestOptions},
+    LoggerService,{provide: ErrorHandler, useClass: MyErrorHandler},
     {
       provide: APP_BASE_HREF,
       useValue: '<%= APP_BASE %>'

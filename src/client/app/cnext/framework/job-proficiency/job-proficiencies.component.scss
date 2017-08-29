@@ -33,6 +33,16 @@ $message: #00aed5;
   }
 }
 
+.scrollable-content {
+  z-index: inherit !important;
+  position: relative !important;
+  padding-bottom: 30px !important;
+}
+
+.button-group {
+  position: relative !important;
+}
+
 @media screen and (max-width: 767px) {
   .proficiency-container {
     padding: 0;

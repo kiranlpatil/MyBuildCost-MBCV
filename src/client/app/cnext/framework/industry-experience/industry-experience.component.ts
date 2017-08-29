@@ -3,7 +3,7 @@ import {Industry} from "../model/industry";
 import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
 import {Section} from "../model/candidate";
 import {LocalStorageService} from "../../../framework/shared/localstorage.service";
-import {LocalStorage, Messages, Tooltip, ValueConstant, Headings} from "../../../framework/shared/constants";
+import {Headings, LocalStorage, Messages, Tooltip, ValueConstant} from "../../../framework/shared/constants";
 import {IndustryDataService} from "../industry-data-service";
 import {ErrorService} from "../error.service";
 
@@ -84,7 +84,7 @@ export class IndustryExperienceListComponent implements OnInit,OnChanges {
       if (this.selectedIndustries.length < ValueConstant.MAX_INTERESTEDINDUSTRY) {
         this.selectedIndustries.push(industry);
       } else {
-        event.target.checked = false;0
+        event.target.checked = false;
       }
       if(industry==='None'){
         this.selectedIndustries=new Array(0);
