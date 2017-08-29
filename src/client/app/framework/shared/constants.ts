@@ -1,16 +1,15 @@
 export class AppSettings {
-  //public static IP = 'http://localhost:8080';
+  public static IP = 'http://localhost:8080';
   // public static IP = 'http://ee802b7f.ngrok.io';
-  public static IP = 'http://34.208.115.60:3000';
-  //public static IP = 'http://52.89.221.23:8080';
+  //public static IP = 'http://10.192.33.77:8080';
+  //public static IP = 'http://34.208.115.60:3000';
   // public static IP = 'app.jobmosis.com';
-  //public static IP = 'http://52.43.220.29:3000';
+  // public static IP = '';
 
 
   public static get API_ENDPOINT(): string {
     return this.IP + '/api/';
   }
-
   public static INITIAL_THEM = 'container-fluid dark-theme';
   public static LIGHT_THEM = 'container-fluid light-theme';
   public static IS_SOCIAL_LOGIN_YES = 'YES';
@@ -378,7 +377,7 @@ export class ImagePath {
 export class ProjectAsset {
   public static APP_NAME = 'JobMosis';
   public static TAG_LINE = 'The Awesome Web Experience';
-  public static UNDER_LICENECE = '© 2017 www.jobmosis.com.';
+  public static UNDER_LICENECE = '© 2017 www.jobmosis.com';
 }
 
 export class Tooltip {
