@@ -41,7 +41,7 @@
     <div class="auto-suggestion-list">
       <ul>
         <li *ngFor="let item of candidateDataList">
-          <div (click)="getJobProfileMatching(item.id,item.display_string)">
+          <div (click)="getJobProfileMatching(item)">
             {{item.first_name}}-{{item.last_name}}-{{item.designation}}-{{item.currentCompany}}
           </div>
         </li>
@@ -54,6 +54,10 @@
     <cn-candidate-profile-meta [candidateMetaData]="candidateProfileMeta"></cn-candidate-profile-meta>
     </div>-->
   </div>
-
-
+  <div class="empty-list-message" *ngIf="listOfJobs.length == 0 && candidate.isVisible == true">
+    {{msgSearchResultNotFound}}
+  </div>
+  <div class="empty-list-message" *ngIf="listOfJobs.length == 0 && candidate.isVisible == false">
+    {{msgCandidateVisibilityOff}}
+  </div>
 </div>

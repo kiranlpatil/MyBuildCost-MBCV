@@ -68,7 +68,11 @@ export class SearchController {
               if (error) {
                 res.status(304).send(error);
               } else {
-                var data = {'jobData': result, 'candidateProfile': candidateInfo[0]};
+                if (candidateInfo[0].isVisible == true) {
+                  var data = {'jobData': result};
+                } else {
+                  var data = {'jobData': []};
+                }
                 res.status(200).send(data);
               }
             });

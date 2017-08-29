@@ -8,6 +8,7 @@ import {CandidateProfileService} from "../candidate-profile/candidate-profile.se
 import {Candidate} from "../model/candidate";
 import {CandidateDetail} from "../../../framework/registration/candidate/candidate";
 import {Router} from "@angular/router";
+import {Messages} from "../../../framework/shared/constants";
 
 @Component({
   moduleId: module.id,
@@ -26,6 +27,8 @@ export class CandidateSearchComponent implements OnChanges {
   private candidateDetails:CandidateDetail = new CandidateDetail();
   private candidate:Candidate = new Candidate();
   private userId:string;
+  private msgSearchResultNotFound:string = Messages.MSG_CNADIDATE_SEARCH_NOT_FOUD;
+  private msgCandidateVisibilityOff:string = Messages.MSG_CNADIDATE_VISIBILITY_OFF;
 
   constructor(private _router:Router, private candidateSearchService:CandidateSearchService, private errorService:ErrorService, private profileCreatorService:CandidateProfileService) {
 
@@ -51,10 +54,10 @@ export class CandidateSearchComponent implements OnChanges {
     }
   }
 
-  getJobProfileMatching(candidateId:string, searchValue:string) {
-    this.searchValue = searchValue;
-    this.getJobProfiles(candidateId);
-    this.getCandidateProfile(candidateId)
+  getJobProfileMatching(item:CandidateSearch) {
+    this.searchValue = item.first_name + "" + item.last_name;
+    this.getJobProfiles(item.id);
+    this.getCandidateProfile(item.id)
   }
 
   getJobProfiles(candidateId:string) {
@@ -64,6 +67,9 @@ export class CandidateSearchComponent implements OnChanges {
           this.listOfJobs = res.jobData;
           this.candidateDataList = new Array(0);
           //this.candidateProfileMeta = res.candidateProfile;
+          /*if(this.listOfJobs.length == 0) {
+           this.msgSearchResultNotFound = Messages.MSG_CNADIDATE_SEARCH_NOT_FOUD;
+           }*/
         },
         error => this.errorService.onError(error)
       );

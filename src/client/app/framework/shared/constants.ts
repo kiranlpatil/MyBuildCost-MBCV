@@ -18,6 +18,8 @@ export class AppSettings {
 }
 
 export class Messages {
+  public static MSG_CNADIDATE_SEARCH_NOT_FOUD = "Applicants profile does not match with any of your open job profiles.";
+  public static MSG_CNADIDATE_VISIBILITY_OFF = "Applicant had marked his profile private.";
   public static MSG_SUCCESS_LOGIN: string = 'You are successfully signed in.';
   public static MSG_SUCCESS_REGISTRATION: string = 'Kindly verify your account.';
   public static MSG_SUCCESS_CHANGE_MOBILE_NUMBER: string = 'Mobile number updated successfully.';
