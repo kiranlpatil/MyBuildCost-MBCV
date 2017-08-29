@@ -19,7 +19,7 @@
       <input auto-complete (keypress)="searchCandidate()" [(ngModel)]="searchValue" [source]="candidateDataList" placeholder="select" class="search"/>
     -->
     <div class="col-xs-12 candidate-search-input">
-      <input (keyup)="searchCandidate($event.target.value)" value="">
+      <input (keyup)="searchCandidate($event.target.value)" [value]="searchValue">
       <button class="search-btn">Search</button>
     </div>
     <!--<form class="form-horizontal" [formGroup]="myForm" (ngSubmit)="onSubmit(myForm.value)">
@@ -41,7 +41,7 @@
     <div class="auto-suggestion-list">
       <ul>
         <li *ngFor="let item of candidateDataList">
-          <div (click)="getJobProfileMatching(item.id)">
+          <div (click)="getJobProfileMatching(item.id,item.display_string)">
             {{item.first_name}}-{{item.last_name}}-{{item.designation}}-{{item.currentCompany}}
           </div>
         </li>

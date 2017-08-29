@@ -18,7 +18,7 @@ import {Router} from "@angular/router";
 
 export class CandidateSearchComponent implements OnChanges {
 
-  private searchValue:string;
+  private searchValue:string = "";
   private candidateDataList:CandidateSearch[] = new Array(0);
   private candidateProfileMeta:CandidateProfileMeta = new CandidateProfileMeta();
   private listOfJobs:JobQcard[] = new Array(0);
@@ -51,7 +51,8 @@ export class CandidateSearchComponent implements OnChanges {
     }
   }
 
-  getJobProfileMatching(candidateId:string) {
+  getJobProfileMatching(candidateId:string, searchValue:string) {
+    this.searchValue = searchValue;
     this.getJobProfiles(candidateId);
     this.getCandidateProfile(candidateId)
   }

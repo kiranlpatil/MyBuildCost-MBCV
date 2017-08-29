@@ -65,7 +65,7 @@ class CandidateSearchService {
       data.id = obj._id;
       data.currentCompany = obj.professionalDetails.currentCompany;
       data.designation = obj.jobTitle;
-      data.display_string = data.first_name + " " + data.last_name + " " + data.designation + " " + obj.professionalDetails.currentCompany;
+      data.display_string = data.first_name + " " + data.last_name + " " + obj.jobTitle + " " + obj.professionalDetails.currentCompany;
       searchResult.push(data);
     }
     return searchResult;
