@@ -1,0 +1,31 @@
+import { ErrorHandler, Injectable } from '@angular/core';
+import { MessageService } from '../../framework/shared/message.service';
+import { Message } from '../../framework/shared/message';
+
+@Injectable()
+export class LoggerService {
+  constructor(private messageService: MessageService){}
+
+  log(error:any) {
+    console.log('Logger', error);
+    var message = new Message();
+    message.error_msg = error.message;
+    message.isError = true;
+    this.messageService.message(message);
+  }
+}
+
+@Injectable()
+export class MyErrorHandler extends ErrorHandler {
+
+  constructor(private logger: LoggerService) {
+    // We rethrow exceptions, so operations like 'bootstrap' will result in an error
+    // when an error happens. If we do not rethrow, bootstrap will always succeed.
+    super(true);
+  }
+
+  handleError(error:any) {
+    this.logger.log(error);
+    super.handleError(error);
+  }
+}

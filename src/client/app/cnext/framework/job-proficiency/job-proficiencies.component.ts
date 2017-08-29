@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
 import {Section} from "../model/candidate";
 import {JobPosterModel} from "../model/jobPoster";
-import {Messages, Tooltip, ValueConstant, Headings} from "../../../framework/shared/constants";
+import {Headings, Messages, Tooltip, ValueConstant} from "../../../framework/shared/constants";
 
 
 @Component({
@@ -27,10 +27,10 @@ export class JobProficienciesComponent implements OnInit {
   private maxNumberOfMandatory: number;
   private maxNumberOfAdditional: number;
   private requiredKeySkillsValidationMessage = Messages.MSG_ERROR_VALIDATION_KEYSKILLS_REQUIRED;
-  private maxKeySkillsValidationMessage = Messages.MSG_ERROR_VALIDATION_MAX_SKILLS_CROSSED + ValueConstant.MAX_MANDATORY_PROFECIENCES;
-  tooltipMessage: string = '<ul><li>' +
-      '<p>1. '+ Tooltip.JOB_PROFICIENCIES_TOOLTIP_1+'</p>' +
-      '<p>2. '+Tooltip.JOB_PROFICIENCIES_TOOLTIP_2+'</p></li></ul>';
+  private maxKeySkillsValidationMessage = Messages.MSG_ERROR_VALIDATION_MAX_SKILLS_CROSSED + ValueConstant.MAX_MANDATORY_PROFECIENCES + Messages.MSG_ERROR_VALIDATION_MAX_PROFICIENCIES;
+  tooltipMessage: string = '<ul>' +
+      '<li><p>1. ' + Tooltip.JOB_PROFICIENCIES_TOOLTIP_1 + '</p></li>' +
+      '<li><p>2. ' + Tooltip.JOB_PROFICIENCIES_TOOLTIP_2 + '</p></li></ul>';
 
   ngOnInit() {
     this.maxNumberOfMandatory = ValueConstant.MAX_MANDATORY_PROFECIENCES;

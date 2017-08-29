@@ -1,7 +1,7 @@
-import { Component, ElementRef, HostListener, Input } from '@angular/core';
-import { Router } from '@angular/router';
-import { Candidate, Section } from '../../model/candidate';
-import { AppSettings, ImagePath, NavigationRoutes } from '../../../../framework/shared/constants';
+import {Component, ElementRef, HostListener, Input} from "@angular/core";
+import {Router} from "@angular/router";
+import {Candidate, Section} from "../../model/candidate";
+import {AppSettings, ImagePath} from "../../../../framework/shared/constants";
 
 @Component({
   moduleId: module.id,
@@ -40,8 +40,8 @@ export class CandidateHeaderComponent {
 
   logOut() {
     window.localStorage.clear();
-    let host='http://'+window.location.hostname;
-    this._router.navigate([host]);
+    let host = 'http://' + window.location.hostname;
+      window.location.href = host;
   }
 
   navigateTo(nav: string) {
