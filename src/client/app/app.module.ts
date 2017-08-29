@@ -1,4 +1,4 @@
-import {NgModule} from "@angular/core";
+import {ErrorHandler, NgModule} from "@angular/core";
 import {AppComponent} from "./app.component";
 import {BrowserModule} from "@angular/platform-browser";
 import {APP_BASE_HREF} from "@angular/common";
@@ -172,6 +172,7 @@ import {IndustryDetailsService} from "./cnext/framework/industry-detail-service"
 import {IndustryDetailsDirective} from "./cnext/framework/shared-directives/industry-details.directive";
 import {IndustryDataDirective} from "./cnext/framework/shared-directives/industry-data.directive";
 import {IndustryDataService} from "./cnext/framework/industry-data-service";
+
 import {ProfileComparisonComponent} from "./cnext/framework/profile-comparison/profile-comparison.component";
 import {ProfileComparisonService} from "./cnext/framework/profile-comparison/profile-comparison.service";
 import {ProfileComparisonHeaderComponent} from "./cnext/framework/profile-comparison/profile-comparison-header/profile-comparison-header.component";
@@ -186,9 +187,9 @@ import {ValueSortFilterPipe} from "./cnext/framework/profile-comparison/value-so
 import {RegistrationService} from "./framework/shared/registration.service";
 import {GuidedTourService} from "./cnext/framework/guided-tour.service";
 import {ErrorService} from "./cnext/framework/error.service";
+import {LoggerService, MyErrorHandler} from "./cnext/framework/my-error-handler.service";
 import {CandidateSearchComponent} from "./cnext/framework/candidate-search/candidate-search.component";
 import {CandidateSearchService} from "./cnext/framework/candidate-search/candidate-search.service";
-//import { NguiAutoCompleteModule } from '@ngui/auto-complete';
 //C-NEXT IMPORTS
 
 
@@ -332,6 +333,7 @@ import {CandidateSearchService} from "./cnext/framework/candidate-search/candida
       deps: [XHRBackend, RequestOptions, MessageService, LoaderService]
     },
     {provide: RequestOptions, useClass: AppRequestOptions},
+    LoggerService,{provide: ErrorHandler, useClass: MyErrorHandler},
     {
       provide: APP_BASE_HREF,
       useValue: '<%= APP_BASE %>'

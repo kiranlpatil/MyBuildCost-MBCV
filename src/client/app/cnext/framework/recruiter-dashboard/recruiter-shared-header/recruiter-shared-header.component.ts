@@ -46,9 +46,9 @@ export class RecruiterSharedHeaderComponent implements OnInit {
 
   logOut() {
     window.localStorage.clear();
-    let host='http://'+window.location.hostname;
-    this._router.navigate([host]);
-    //this._router.navigate([NavigationRoutes.APP_START]);
+    //window.location.href = window.location.hostname;
+    let host = 'http://' + window.location.hostname;
+    window.location.href = host;
   }
 
   navigateTo(nav: string) {

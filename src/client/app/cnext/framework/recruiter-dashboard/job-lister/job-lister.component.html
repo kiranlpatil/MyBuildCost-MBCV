@@ -24,29 +24,30 @@
           <div class="col-xs-2 no-padding">
 
             <div *ngFor="let i of item.candidate_list">
-              <p *ngIf="i.name == 'cartListed'" title="Candidates In Cart"><span>{{i.ids.length}}</span></p>
+              <p *ngIf="i.name == 'cartListed'" title="{{i.ids.length}} Candidates In Cart">
+                <span>{{i.ids.length}}</span></p>
             </div>
             <p *ngIf="item.candidate_list.length == 0" title="Candidates In Cart"><span>0</span></p>
           </div>
           <div class="col-xs-10 padding-left15">
-            <h4 title="Job Title">{{item.jobTitle}}</h4>
-            <span title="Hiring Department" *ngIf="recruiter.isRecruitingForself">{{item.department}}</span>
-            <span title="Hiring Company" *ngIf="!recruiter.isRecruitingForself">{{item.department}}</span>
+            <h4 title="Job Title : {{item.jobTitle}}">{{item.jobTitle}}</h4>
+            <span title="Hiring Department : {{item.department}}" *ngIf="recruiter.isRecruitingForself">{{item.department}}</span>
+            <span title="Hiring Company : {{item.department}}" *ngIf="!recruiter.isRecruitingForself">{{item.department}}</span>
           </div>
           <div class="contact-info clearfix">
-            <div class="col-sm-12 no-padding" title="Date Posted">
+            <div class="col-sm-12 no-padding" title="Date Posted : {{item.postingDate | date:'mediumDate'}}">
               <div class="col-xs-2 no-padding">
                 <img src="../../../../assets/c-next/post-job/calendar.png" alt="calendar"/>
               </div>
-              <div class="col-xs-10 padding-left15">
+              <div class="col-xs-10 padding-left15" title="Date Posted : {{item.postingDate | date:'mediumDate'}}">
                 <p>{{item.postingDate | date:'mediumDate'}}</p>
               </div>
             </div>
-            <div class="col-sm-12 no-padding" title="Hiring Manager">
+            <div class="col-sm-12 no-padding" title="Hiring Manager : {{item.hiringManager}}">
               <div class="col-xs-2 no-padding">
                 <img src="../../../../assets/c-next/post-job/contact-person.png" alt="Hiring Manager"/>
               </div>
-              <div class="col-xs-10 padding-left15">
+              <div class="col-xs-10 padding-left15" title="Hiring Manager : {{item.hiringManager}}">
                 <p>{{item.hiringManager}}</p>
               </div>
             </div>
