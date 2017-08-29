@@ -188,7 +188,6 @@ import {GuidedTourService} from "./cnext/framework/guided-tour.service";
 import {ErrorService} from "./cnext/framework/error.service";
 import {CandidateSearchComponent} from "./cnext/framework/candidate-search/candidate-search.component";
 import {CandidateSearchService} from "./cnext/framework/candidate-search/candidate-search.service";
-import {CandidateProfileMetaComponent} from "./cnext/framework/candidate-search/candidate-profile-meta/candidate-profile-meta.component";
 //import { NguiAutoCompleteModule } from '@ngui/auto-complete';
 //C-NEXT IMPORTS
 
@@ -323,8 +322,7 @@ import {CandidateProfileMetaComponent} from "./cnext/framework/candidate-search/
     ColorShadeDirective,
     AttributeFilterPipe,
     ValueSortFilterPipe,
-    CandidateSearchComponent,
-    CandidateProfileMetaComponent
+    CandidateSearchComponent
   ],
   providers: [
     {

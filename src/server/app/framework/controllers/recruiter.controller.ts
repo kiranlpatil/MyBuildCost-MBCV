@@ -251,18 +251,14 @@ export function getCandidatesByName(req:express.Request, res:express.Response, n
     let userService = new UserService();
     let candidateService = new CandidateService();
     let candidateSearchService = new CandidateSearchService();
-    //let jobId = req.params.jobId;
-    //let candidateId = req.params.candidateId;
     var userName = req.params.searchvalue;
     var exp = eval('/^' + userName + '/i');
-    //var eventstring = new String();
     var eventstring:string = exp.toString().replace(/'/g, "");
 
     var query = {
       'isCandidate': true,
       $or: [{'first_name': {$regex: eval(eventstring)}}, {'last_name': {$regex: eval(eventstring)}}]
     };
-    //console.log('---------------data------------------',query);
     userService.retrieve(query, (error:any, result:any) => {
       if (error) {
         next({
@@ -276,7 +272,6 @@ export function getCandidatesByName(req:express.Request, res:express.Response, n
         for (let obj of result) {
           candidateId.push(obj._id);
         }
-        console.log('---------------candidateIds---------------------------', candidateId);
         candidateSearchService.getCandidateInfo(candidateId, (error:any, candidateInfo:CandidateModel[]) => {
           if (error) {
             next({

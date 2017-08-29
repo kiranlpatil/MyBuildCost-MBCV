@@ -63,7 +63,6 @@ export class SearchController {
           } else {
             let candidateIdarray:string[] = new Array(0);
             candidateIdarray.push(candidateId);
-            console.log('------------------------candidateIdarray-ids-----------------------------', candidateIdarray);
             candidateSearchService.getCandidateInfoById(candidateIdarray, (error:Error, candidateInfo:any) => {
               if (error) {
                 res.status(304).send(error);

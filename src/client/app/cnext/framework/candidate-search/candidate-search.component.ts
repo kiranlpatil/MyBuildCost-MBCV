@@ -66,10 +66,6 @@ export class CandidateSearchComponent implements OnChanges {
         (res:any) => {
           this.listOfJobs = res.jobData;
           this.candidateDataList = new Array(0);
-          //this.candidateProfileMeta = res.candidateProfile;
-          /*if(this.listOfJobs.length == 0) {
-           this.msgSearchResultNotFound = Messages.MSG_CNADIDATE_SEARCH_NOT_FOUD;
-           }*/
         },
         error => this.errorService.onError(error)
       );
