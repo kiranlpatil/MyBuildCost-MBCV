@@ -598,6 +598,24 @@ control-messages {
   }
 }
 
+.dashboard-profile,
+.settings,
+.change-email,
+.change-mobile {
+  label {
+    margin-bottom: 0;
+  }
+
+  control-messages {
+    div {
+      left: 0;
+      margin-top: 57px;
+      padding: 0;
+      text-align: left;
+    }
+  }
+}
+
 //company upload page
 #company-logo {
   .profile {
@@ -605,8 +623,6 @@ control-messages {
     padding: 0;
     text-align: left;
     margin: 0;
-
-
 
     .avtar > img {
       background: transparent;
@@ -801,21 +817,8 @@ control-messages {
   .settings,
   .change-email,
   .change-mobile {
-    label {
-      margin-bottom: 0;
-    }
-
     input {
       margin-bottom: 20px;
-    }
-
-    control-messages {
-      div {
-        left: 0;
-        margin-top: 53px;
-        padding: 0 0 0 15px;
-        text-align: left;
-      }
     }
   }
 
