@@ -1,4 +1,4 @@
-<cn-candidate-dashboard-header [candidate]="candidate" *ngIf="role==='candidate'"></cn-candidate-dashboard-header>
+<cn-candidate-dashboard-header [candidate]="candidate" ></cn-candidate-dashboard-header>
 
 <section class="dashboard-profile col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
   <div>
@@ -33,7 +33,7 @@
 
       <form [formGroup]="userForm" (submit)="onSubmit()" class="profile-form">
 
-        <div class="form-group" [class.fb-email-input]="isSocialLogin">
+        <div *ngIf="role==='candidate'" class="form-group" [class.fb-email-input]="isSocialLogin">
           <label><img src="{{FIRST_NAME_ICON}}"/> First Name </label>
           <input type="text" [(ngModel)]="model.first_name" formControlName="first_name" id="first_name "
                  class="form-control"/>
@@ -41,7 +41,7 @@
         </div>
 
 
-        <div class="form-group" [class.fb-email-input]="isSocialLogin">
+        <div *ngIf="role==='candidate'" class="form-group" [class.fb-email-input]="isSocialLogin">
           <label><img src="{{LAST_NAME_ICON}}"/> Last Name </label>
           <input type="text" [(ngModel)]="model.last_name" formControlName="last_name" id="last_name "
                  class="form-control"/>

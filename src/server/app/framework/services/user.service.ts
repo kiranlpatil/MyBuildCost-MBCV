@@ -187,37 +187,39 @@ class UserService {
   SendChangeMailVerification(field: any, callback: (error: any, result: any) => void) {
     var query = {"email": field.current_email, "isActivated": true};
     var updateData = {"temp_email": field.new_email};
-    this.userRepository.findOneAndUpdate(query, updateData, {new: true}, (error, result) => {
-      if (error) {
+    if (field.current_email) {
+      this.userRepository.findOneAndUpdate(query, updateData, {new: true}, (error, result) => {
+        if (error) {
 
-        callback(new Error(Messages.MSG_ERROR_EMAIL_ACTIVE_NOW), null);
+          callback(new Error(Messages.MSG_ERROR_EMAIL_ACTIVE_NOW), null);
 
-      }
+        }
 
-      else {
+        else {
 
-        var auth = new AuthInterceptor();
-        var token = auth.issueTokenWithUid(result);
-        var host = config.get('TplSeed.mail.host');
-        var link = host + "verifychangedemailid?access_token=" + token + "&_id=" + result._id;
-        var header1 = fs.readFileSync("./src/server/app/framework/public/header1.html").toString();
-        var content = fs.readFileSync("./src/server/app/framework/public/change.mail.html").toString();
-        var footer1 = fs.readFileSync("./src/server/app/framework/public/footer1.html").toString();
-        var mid_content = content.replace('$link$', link);
+          var auth = new AuthInterceptor();
+          var token = auth.issueTokenWithUid(result);
+          var host = config.get('TplSeed.mail.host');
+          var link = host + "activate_user?access_token=" + token + "&_id=" + result._id;
+          var header1 = fs.readFileSync("./src/server/app/framework/public/header1.html").toString();
+          var content = fs.readFileSync("./src/server/app/framework/public/change.mail.html").toString();
+          var footer1 = fs.readFileSync("./src/server/app/framework/public/footer1.html").toString();
+          var mid_content = content.replace('$link$', link);
 
-        var mailOptions = {
-          from:config.get('TplSeed.mail.MAIL_SENDER'),
-          to: field.new_email,
-          subject: Messages.EMAIL_SUBJECT_CHANGE_EMAILID,
-          html: header1 + mid_content + footer1
+          var mailOptions = {
+            from: config.get('TplSeed.mail.MAIL_SENDER'),
+            to: field.new_email,
+            subject: Messages.EMAIL_SUBJECT_CHANGE_EMAILID,
+            html: header1 + mid_content + footer1
 
-          , attachments: MailAttachments.AttachmentArray
-        };
-        var sendMailService = new SendMailService();
-        sendMailService.sendMail(mailOptions, callback);
+            , attachments: MailAttachments.AttachmentArray
+          };
+          var sendMailService = new SendMailService();
+          sendMailService.sendMail(mailOptions, callback);
 
-      }
-    });
+        }
+      });
+    }
   }
 
 
@@ -316,7 +318,7 @@ class UserService {
 
   update(_id: string, item: any, callback: (error: any, result: any) => void) {
 
-    this.userRepository.findById(_id, (err, res) => {
+    this.userRepository.findById(_id, (err: any, res: any) => {
 
       if (err) {
         callback(err, res);
