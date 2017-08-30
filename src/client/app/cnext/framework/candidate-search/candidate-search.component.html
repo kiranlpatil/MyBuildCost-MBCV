@@ -21,8 +21,10 @@
       <input auto-complete (keypress)="searchCandidate()" [(ngModel)]="searchValue" [source]="candidateDataList" placeholder="select" class="search"/>
     -->
     <div class="col-xs-12 candidate-search-input">
+      <form (submit)="showSearchResult()">
       <input (keyup)="searchCandidate($event.target.value)" [value]="searchValue">
-      <button class="search-btn">Search</button>
+      </form>
+      <!-- <button class="search-btn">Search</button>-->
     </div>
     <!--<form class="form-horizontal" [formGroup]="myForm" (ngSubmit)="onSubmit(myForm.value)">
       <div>

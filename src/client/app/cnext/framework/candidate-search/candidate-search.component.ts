@@ -90,4 +90,8 @@ export class CandidateSearchComponent implements OnChanges {
       this._router.navigate([nav, this.userId]);
     }
   }
+
+  showSearchResult() {
+    this.getJobProfileMatching(this.candidateDataList[0]);
+  }
 }
