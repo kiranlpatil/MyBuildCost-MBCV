@@ -57,7 +57,7 @@
       </ul>
     </div>
     <div class="card-view">
-      <div *ngFor="let job of listOfJobs">
+      <div *ngFor="let job of listOfJobs" (click)="showJobCompareView(job)">
         <cn-candidate-q-card [progress_bar_color]="'#29b6f6'" [job]="job" [type]="'searchView'"></cn-candidate-q-card>
       </div>
     </div>
@@ -70,5 +70,9 @@
   </div>
   <div class="empty-list-message" *ngIf="listOfJobs.length == 0 && candidate.isVisible == false">
     {{msgCandidateVisibilityOff}}
+  </div>
+
+  <div *ngIf="isShowJobCompareView">
+    <cn-job-compare-view [candiadteId]="candidateId" [jobId]="jobId"></cn-job-compare-view>
   </div>
 </div>
