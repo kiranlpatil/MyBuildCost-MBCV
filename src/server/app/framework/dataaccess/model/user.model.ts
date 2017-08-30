@@ -6,6 +6,7 @@ interface UserModel {
   isCandidate: boolean;
   password: string;
   isActivated: boolean;
+  isAdmin: boolean;
   opt: number;
   picture: string;
   social_profile_picture: string;

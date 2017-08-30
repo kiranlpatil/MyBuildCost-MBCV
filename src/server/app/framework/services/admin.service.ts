@@ -37,13 +37,6 @@ class AdminService {
   }
 
   seperateUsers(item: any, callback: (error: any, result: any) => void) {
-    /*this.userRepository.retrieve(item, (err, res) => {
-     if (err) {
-     callback(new Error(Messages.MSG_ERROR_REGISTRATION_MOBILE_NUMBER), null);
-     } else  {
-     callback(null, res);
-     }
-     });*/
     try {
       var users:UsersClassModel = new UsersClassModel;
 
@@ -60,8 +53,10 @@ class AdminService {
             }
             else {
               value++;
-              item[i].data = resu[0];
-              candidates.push(item[i]);
+              if(!item[i].isAdmin){
+                item[i].data = resu[0];
+                candidates.push(item[i]);
+              }
               if(value && item.length==value){
                 users.candidate=candidates;
                 users.recruiter=recruiters;
@@ -83,8 +78,10 @@ class AdminService {
               callback(error, null);
             } else {
               value++;
-              item[i].data = result[0]
-              recruiters.push(item[i]);
+              if(!item[i].isAdmin) {
+                item[i].data = result[0]
+                recruiters.push(item[i]);
+              }
               if(value && item.length==value){
                 users.candidate=candidates;
                 users.recruiter=recruiters;

@@ -35,14 +35,18 @@ export class AppComponent implements OnInit {
               protected loaderService: LoaderService) {
     this.appTheme = AppSettings.INITIAL_THEM;
     if (parseInt(LocalStorageService.getLocalValue(LocalStorage.IS_LOGGED_IN)) === 1) {
-      if (LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE) === 'true') {
-        if (LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE_FILLED) === 'true') {
-          this._router.navigate([NavigationRoutes.APP_CANDIDATE_DASHBOARD]);
+      if(LocalStorageService.getLocalValue(LocalStorage.ISADMIN) === 'true'){
+        this._router.navigate([NavigationRoutes.APP_ADMIN_DASHBOARD]);
+      }else {
+        if (LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE) === 'true') {
+          if (LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE_FILLED) === 'true') {
+            this._router.navigate([NavigationRoutes.APP_CANDIDATE_DASHBOARD]);
+          } else {
+            this._router.navigate([NavigationRoutes.APP_CREATEPROFILE]);
+          }
         } else {
-          this._router.navigate([NavigationRoutes.APP_CREATEPROFILE]);
+          this._router.navigate([NavigationRoutes.APP_RECRUITER_DASHBOARD]);
         }
-      } else {
-        this._router.navigate([NavigationRoutes.APP_RECRUITER_DASHBOARD]);
       }
     } else {
       LocalStorageService.setLocalValue(LocalStorage.IS_LOGGED_IN, 0);
@@ -59,12 +63,9 @@ export class AppComponent implements OnInit {
           let err = message.error_msg.error;
           if (err === 'Could not attach click handler to the element. Reason: element not found.') {
             message.isError = false;
-
           } else {
             this.showError(message);
-
           }
-
         } else {
           this.showSuccess(message);
         }

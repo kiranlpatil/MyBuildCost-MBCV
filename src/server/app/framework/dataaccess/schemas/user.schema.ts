@@ -58,6 +58,10 @@ class UserSchema {
       isCandidate: {
         type: Boolean
       },
+      isAdmin: {
+        type: Boolean,
+        default: false
+      },
       social_profile_picture: {
         type: String,
         required: false

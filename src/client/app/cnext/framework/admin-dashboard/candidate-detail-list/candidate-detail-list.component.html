@@ -1,0 +1,61 @@
+<div class="list-container" *ngIf="candidates && candidates.length>0">
+  <div class="header">
+    <a href="./src/server/app/framework/public/admin-data/candidate.csv" download="candiadte.csv" title="Export Candidate to CSV File"><i class="glyphicon glyphicon-export"></i>Export</a>
+  </div>
+  <div class="list-view">
+    <ul class="list-header">
+      <li>
+        <h5>Name</h5>
+      </li>
+      <li>
+        <h5>Job Title</h5>
+      </li>
+      <li>
+        <h5>Email address</h5>
+      </li>
+      <li>
+        <h5>Contact</h5>
+      </li>
+      <li>
+        <h5>Location</h5>
+      </li>
+      <li>
+        <h5>Profile status</h5>
+      </li>
+      <li>
+        <h5>Activation Status</h5>
+      </li>
+    </ul>
+    <div *ngFor="let candidate of candidates">
+      <ul>
+        <li>
+          <p>{{candidate.first_name}} {{candidate.last_name}}</p>
+        </li>
+        <li>
+          <p *ngIf="candidate.data.jobTitle">{{candidate.data.jobTitle}}</p>
+        </li>
+        <li>
+          <p>{{candidate.email}}</p>
+        </li>
+        <li>
+          <p>{{candidate.mobile_number}}</p>
+        </li>
+        <li>
+          <p *ngIf="candidate.data.location && candidate.data.location.city">{{candidate.data.location.city}}</p>
+        </li>
+        <li>
+          <span *ngIf="candidate.data.isSubmitted" class="completed">Completed</span>
+          <span *ngIf="!candidate.data.isCompleted" class ="incomplete">In-Complete</span>
+          <span *ngIf="candidate.data.isCompleted && !candidate.data.isSubmitted" class="partial">Partially Filled</span>
+        </li>
+        <li>
+          <button *ngIf="candidate.isActivated" class="btn-danger btn-custom">Deactivate</button>
+          <button *ngIf="!candidate.isActivated" class="btn-primary btn-custom">Activate</button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<!--
+<div *ngIf="candidates && candidates.length==0">There are no candidate in the Database </div>
+-->

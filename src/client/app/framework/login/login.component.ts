@@ -85,7 +85,7 @@ export class LoginComponent implements OnInit {
         error => (this.loginFail(error)));
   }
 
-  loginSuccess(res: any) {
+  loginSuccess(res: any) { debugger
     LocalStorageService.setLocalValue(LocalStorage.IS_CANDIDATE, res.data.isCandidate);
     LocalStorageService.setLocalValue(LocalStorage.IS_CANDIDATE_FILLED, res.data.isCompleted);
     LocalStorageService.setLocalValue(LocalStorage.END_USER_ID, res.data.end_user_id);
@@ -123,19 +123,20 @@ export class LoginComponent implements OnInit {
   successRedirect(res: any) {
     LocalStorageService.setLocalValue(LocalStorage.IS_LOGGED_IN, 1);
     LocalStorageService.setLocalValue(LocalStorage.PROFILE_PICTURE, res.data.picture);
-    if (res.data.isCandidate === true) {
+    LocalStorageService.setLocalValue(LocalStorage.ISADMIN, res.data.isAdmin);
+    if(res.data.isAdmin === true) {
+      this._router.navigate([NavigationRoutes.APP_ADMIN_DASHBOARD]);
+    }
+    else if (res.data.isCandidate === true) {
       if (res.data.isCompleted === true) {
         this._router.navigate([NavigationRoutes.APP_CANDIDATE_DASHBOARD]);
-      }
-      else {
+      } else {
         this._router.navigate([NavigationRoutes.APP_CREATEPROFILE]);
       }
     } else {
       LocalStorageService.setLocalValue(LocalStorage.COMPANY_NAME, res.data.company_name);
-
       this._router.navigate([NavigationRoutes.APP_RECRUITER_DASHBOARD]);
     }
-
   }
 
   loginFail(error: any) {
