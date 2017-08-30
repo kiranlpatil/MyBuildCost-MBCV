@@ -16,7 +16,7 @@
     <div class="job-info-labal pull-left">
       <div class="user-job-label">
         <label>Compatibility check for</label>
-        <span *ngIf="recruiter.postedJobs[0]">{{recruiter.postedJobs[0].jobTitle}}</span>
+        <span *ngIf="recruiter.postedJobs[0]">{{recruiter.postedJobs[0].jobTitle}}</span> -
         <label>Job Profile</label>
         <label *ngIf="!recruiter.postedJobs[0].hideCompanyName">at</label>
         <span *ngIf="!recruiter.postedJobs[0].hideCompanyName" class="company-name">{{recruiter.company_name}}</span>
@@ -35,7 +35,6 @@
         <span class="name">{{candidateDetails.first_name}} {{candidateDetails.last_name}}</span>
         <label>with</label>
         <span class="jobTitle-name">{{candidate.jobTitle}}</span>
-        <label>Job Profile</label>
       </div>
     </div>
 
