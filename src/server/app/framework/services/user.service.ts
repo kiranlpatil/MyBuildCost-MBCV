@@ -187,7 +187,6 @@ class UserService {
   SendChangeMailVerification(field: any, callback: (error: any, result: any) => void) {
     var query = {"email": field.current_email, "isActivated": true};
     var updateData = {"temp_email": field.new_email};
-    if (field.current_email) {
       this.userRepository.findOneAndUpdate(query, updateData, {new: true}, (error, result) => {
         if (error) {
 
@@ -219,7 +218,6 @@ class UserService {
 
         }
       });
-    }
   }
 
 
