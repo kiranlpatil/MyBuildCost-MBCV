@@ -1,6 +1,9 @@
 <div class="page-background" [ngStyle]="{'background-image': 'url(' + BODY_BACKGROUND + ')'}">
 
   <main-header></main-header>
+    <div *ngIf="!isChrome" id="snackbar">For better experience please use chrome
+    <button class="button-style" (click)="closeToaster()">x</button>
+    </div>
 
   <div class="inner-content clearfix">
     <h4>Get Aligned</h4>
