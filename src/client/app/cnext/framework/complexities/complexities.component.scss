@@ -51,11 +51,16 @@
 .main-content {
   .heading {
     font-size: 20px !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
+    white-space: normal !important;
+    color: $light-black1 !important;
 
     .capability-name {
       font-size: 20px !important;
       float: none !important;
-      color: $theme-color !important;
+      color: $text-color !important;
+      font-style: normal !important;
       line-height: 30px;
       font-family: 'gothamrnd-light';
       font-weight: 600;
@@ -75,11 +80,6 @@
   z-index: 3;
 }
 
-.heading {
-  overflow: visible !important;
-  text-overflow: clip !important;
-  white-space: normal !important;
-}
 
 @media only screen and (max-width: 767px) {
   .capability-edit {

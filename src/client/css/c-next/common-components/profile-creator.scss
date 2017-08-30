@@ -192,6 +192,11 @@
     margin: 0 5px 0 0;
     font-family: 'gothamrnd-book';
     text-transform: none !important;
+    word-wrap: break-word;
+    white-space: normal;
+    text-align: left;
+    position: relative;
+    min-width: 100px;
 
     &:focus,
     &:active,
