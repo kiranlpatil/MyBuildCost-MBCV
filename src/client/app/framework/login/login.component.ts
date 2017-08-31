@@ -161,7 +161,6 @@ export class LoginComponent implements OnInit {
   }
 
   onFailure(error: any) {
-    console.log(error);
   }
 
 }

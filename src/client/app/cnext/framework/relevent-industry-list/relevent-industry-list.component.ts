@@ -69,7 +69,6 @@ export class ReleventIndustryListComponent implements OnInit {
   }
 
   onError(error: any) {
-    console.log('----errorr------', error);
   }
 
   goNext() {

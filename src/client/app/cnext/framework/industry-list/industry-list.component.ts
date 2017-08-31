@@ -93,7 +93,6 @@ export class IndustryListComponent implements OnChanges {
   }
 
   getIndustry() {
-    console.log('called from industry list component');
     this.candidateProfileService.getIndustries()
       .subscribe(industries => this.industries = industries.data,
         error => this.errorService.onError(error));

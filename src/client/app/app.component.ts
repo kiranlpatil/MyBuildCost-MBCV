@@ -59,7 +59,6 @@ export class AppComponent implements OnInit {
     this.subscription = messageService.messageObservable$.subscribe(
       (message: Message) => {
         if (message.isError === true) {
-          console.log(message);
           let err = message.error_msg.error;
           if (err === 'Could not attach click handler to the element. Reason: element not found.') {
             message.isError = false;

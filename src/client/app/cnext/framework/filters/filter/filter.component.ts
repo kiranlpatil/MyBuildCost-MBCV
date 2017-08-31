@@ -109,7 +109,6 @@ export class FilterComponent {
   }
 
   onError(err: any) {
-    console.log('error on filter data load');
   }
 
   filterByProficiency(event: any) {

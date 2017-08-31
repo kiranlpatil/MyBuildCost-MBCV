@@ -61,7 +61,6 @@ export class CandidateCompareViewComponent implements OnInit, OnChanges {
   }
 
   OnCompareSuccess(data: any) {
-    console.log('data after compare  ', data);
     this.data = data.data;
   }
 

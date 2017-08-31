@@ -50,7 +50,6 @@ export class NotificationComponent implements OnInit {
           this.unreadNotifications++;
         }
       }
-      console.log('Unread : ' + this.unreadNotifications);
     }
   }
 
@@ -71,6 +70,5 @@ export class NotificationComponent implements OnInit {
   }
 
   readNotification(count: any) {
-    console.log('Notification count', count);
   }
 }
