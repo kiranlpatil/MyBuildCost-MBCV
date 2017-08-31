@@ -42,7 +42,6 @@ export class JobCompareViewComponent implements OnChanges,OnInit {
   }
 
   ngOnChanges(changes:any) {
-    debugger;
     if (changes.candiadteId != undefined && changes.candiadteId.currentValue != undefined) {
       this.candiadteId = changes.candiadteId.currentValue;
     }

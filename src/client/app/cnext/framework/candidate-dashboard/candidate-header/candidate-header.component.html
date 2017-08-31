@@ -58,7 +58,7 @@
                 </li>
                 <li role="menuitem" [routerLinkActive]="['active']" *ngIf="candidate.isCompleted==true">
                   <a class="dropdown-item" [routerLink]="['value-portrait']"
-                     (click)="navigateTo('/value-portrait');">
+                     (click)="navigateToWithId('/value-portrait');">
                     <span class="glyphicon glyphicon-user"></span>Value Portrait
                   </a>
                 </li>

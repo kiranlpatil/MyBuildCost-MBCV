@@ -45,10 +45,16 @@ export class CandidateHeaderComponent {
       window.location.href = host;
   }
 
-  navigateTo(nav: string) {
+  navigateToWithId(nav:string) {
     var userId = LocalStorageService.getLocalValue(LocalStorage.USER_ID);
     if (nav !== undefined) {
       this._router.navigate([nav, userId]);
+    }
+  }
+
+  navigateTo(nav:string) {
+    if (nav !== undefined) {
+      this._router.navigate([nav]);
     }
   }
   onSkip() {

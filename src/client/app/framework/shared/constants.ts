@@ -17,7 +17,8 @@ export class AppSettings {
 }
 
 export class Messages {
-  public static MSG_CNADIDATE_SEARCH_NOT_FOUD = "The profile details of selected applicant are not displayed, since this profile does not match with any of your open job profiles.";
+  public static MSG_CANDIDATE_NOT_FOUND = "Candidate Not Found";
+  public static MSG_CANDIDATE_SEARCH_NOT_FOUND = "The profile details of selected applicant are not displayed, since this profile does not match with any of your open job profiles.";
   public static MSG_CNADIDATE_VISIBILITY_OFF = "The selected applicant profile details are not displayed, since the applicant has marked it as private.";
   public static MSG_SUCCESS_LOGIN: string = 'You are successfully signed in.';
   public static MSG_SUCCESS_REGISTRATION: string = 'Kindly verify your account.';
