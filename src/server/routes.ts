@@ -56,7 +56,6 @@ export function init(app: express.Application) {
   app.put("/api/uploaddocuments/:id", this.authInterceptor.requiresAuth, userController.uploaddocuments);
   app.get('/api/alluser', this.authInterceptor.requiresAuth,adminController.getAllUser);
   app.get("/api/readxlsx", importIndustriesController.readXlsx);
-  app.post("/api/writexlsx", importIndustriesController.writeXlsx);
   //app.post("/api/createImportIndusry", importIndustriesController.create);
 
   app.use(sharedService.logHandler);
