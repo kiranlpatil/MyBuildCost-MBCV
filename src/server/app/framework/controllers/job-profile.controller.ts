@@ -1,21 +1,9 @@
-import * as express from "express";
-import AuthInterceptor = require("../interceptor/auth.interceptor");
-import SendMailService = require("../services/sendmail.service");
-import UserModel = require("../dataaccess/model/user.model");
-import Messages = require("../shared/messages");
-import ResponseService = require("../shared/response.service");
-import CandidateService = require("../services/candidate.service");
-import IndustryService = require("../services/industry.service");
-import IndustryModel = require("../dataaccess/model/industry.model");
-import RoleModel = require("../dataaccess/model/role.model");
-import CapabilityModel = require("../dataaccess/model/capability.model");
-import ComplexityModel = require("../dataaccess/model/complexity.model");
-import ScenarioModel = require("../dataaccess/model/scenario.model");
-import JobProfileModel = require("../dataaccess/model/jobprofile.model");
-import JobProfileService = require("../services/jobprofile.service");
-import RecruiterService = require("../services/recruiter.service");
-import CNextMessages = require("../shared/cnext-messages");
-import SearchService = require("../search/services/search.service");
+import * as express from 'express';
+import Messages = require('../shared/messages');
+import JobProfileModel = require('../dataaccess/model/jobprofile.model');
+import JobProfileService = require('../services/jobprofile.service');
+import CNextMessages = require('../shared/cnext-messages');
+import SearchService = require('../search/services/search.service');
 
 
 export function searchCandidatesByJobProfile(req: express.Request, res: express.Response, next: any) {
@@ -31,8 +19,8 @@ export function searchCandidatesByJobProfile(req: express.Request, res: express.
         });
       } else {
         res.send({
-          "status": "success",
-          "data": result
+          'status': 'success',
+          'data': result
         });
       }
     });
@@ -47,7 +35,7 @@ export function retrieve(req: express.Request, res: express.Response, next: any)
   try {
     var jobProfileService = new JobProfileService();
     let data = {
-      "postedJob": req.params.id
+      'postedJob': req.params.id
     };
     jobProfileService.retrieve(data, (error, result) => {
       if (error) {
@@ -58,8 +46,8 @@ export function retrieve(req: express.Request, res: express.Response, next: any)
         });
       } else {
         res.status(200).send({
-          "data": {
-            "industry": result
+          'data': {
+            'industry': result
           }
         });
       }
@@ -75,7 +63,7 @@ export function getCapabilityMatrix(req: express.Request, res: express.Response,
   try {
     var jobProfileService = new JobProfileService();
     let data = {
-      "postedJob": req.params.id
+      'postedJob': req.params.id
     };
     jobProfileService.getCapabilityValueKeyMatrix(req.params.id, (error, result) => {
       if (error) {
@@ -86,7 +74,7 @@ export function getCapabilityMatrix(req: express.Request, res: express.Response,
         });
       } else {
         res.status(200).send({
-          "data": result
+          'data': result
         });
       }
 
@@ -102,11 +90,11 @@ export function update(req: express.Request, res: express.Response, next: any) {
 
     var jobProfileService = new JobProfileService();
     let data = {
-      "recruiterId": req.params.recruiterId,
-      "profileId": req.params.profileId,
-      "listName": req.params.listName,
-      "candidateId": req.params.candidateId,
-      "action": req.params.action
+      'recruiterId': req.params.recruiterId,
+      'profileId': req.params.profileId,
+      'listName': req.params.listName,
+      'candidateId': req.params.candidateId,
+      'action': req.params.action
     };
 
     jobProfileService.update(data, (err, result) => {
@@ -118,8 +106,8 @@ export function update(req: express.Request, res: express.Response, next: any) {
         });
       } else {
         res.status(200).send({
-          "status": Messages.STATUS_SUCCESS,
-          "data": result
+          'status': Messages.STATUS_SUCCESS,
+          'data': result
         });
       }
     });
@@ -133,10 +121,10 @@ export function apply(req: express.Request, res: express.Response, next: any) {
   try {
     var jobProfileService = new JobProfileService();
     let data = {
-      "candidateId": req.params.id,
-      "profileId": req.params.profileId,
-      "action": req.params.action,
-      "listName": req.params.listName
+      'candidateId': req.params.id,
+      'profileId': req.params.profileId,
+      'action': req.params.action,
+      'listName': req.params.listName
     };
     jobProfileService.applyJob(data, (err, result) => {
       if (err) {
@@ -147,8 +135,8 @@ export function apply(req: express.Request, res: express.Response, next: any) {
         });
       } else {
         res.status(200).send({
-          "status": Messages.STATUS_SUCCESS,
-          "data": result
+          'status': Messages.STATUS_SUCCESS,
+          'data': result
         });
       }
     });
@@ -167,15 +155,15 @@ export function metchResultForJob(req: express.Request, res: express.Response, n
     searchService.getMatchingResult(candidateId, jobId, false,(error: any, result: any) => {
       if (error) {
         next({
-          reason: "Problem in Search Matching Result",//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
+          reason: 'Problem in Search Matching Result',//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
           message: 'Problem in Search Matching Result',//Messages.MSG_ERROR_WRONG_TOKEN,
           code: 401
-        })
+        });
       }
       else {
         res.send({
-          "status": "success",
-          "data": result,
+          'status': 'success',
+          'data': result,
         });
 
       }
@@ -192,8 +180,8 @@ export function getQCardDetails(req: express.Request, res: express.Response, nex
   try {
     var jobProfileService = new JobProfileService();
     let data = {
-      "jobId": req.params.id,
-      "candidateIds": req.body.candidateIds
+      'jobId': req.params.id,
+      'candidateIds': req.body.candidateIds
     };
     jobProfileService.getQCardDetails(data, (error: Error, result: any) => {
       if (error) {
