@@ -59,14 +59,16 @@ class CandidateSearchService {
   buidResultOnCandidateSearch(dataArray:CandidateModel[]) {
     var searchResult:CandidateInfoSearch[] = new Array(0);
     for (let obj of dataArray) {
-      var data:CandidateInfoSearch = new CandidateInfoSearch();
-      data.first_name = obj.userId.first_name;
-      data.last_name = obj.userId.last_name;
-      data.id = obj._id;
-      data.currentCompany = obj.professionalDetails.currentCompany;
-      data.designation = obj.jobTitle;
-      data.display_string = data.first_name + " " + data.last_name + " " + obj.jobTitle + " " + obj.professionalDetails.currentCompany;
-      searchResult.push(data);
+      if (obj.isCompleted) {
+        var data:CandidateInfoSearch = new CandidateInfoSearch();
+        data.first_name = obj.userId.first_name;
+        data.last_name = obj.userId.last_name;
+        data.id = obj._id;
+        data.currentCompany = obj.professionalDetails.currentCompany;
+        data.designation = obj.jobTitle;
+        data.display_string = data.first_name + " " + data.last_name + " " + obj.jobTitle + " " + obj.professionalDetails.currentCompany;
+        searchResult.push(data);
+      }
     }
     return searchResult;
   }
