@@ -26,7 +26,8 @@ export class CandidateSearchComponent implements OnChanges {
   private candidateDetails:CandidateDetail = new CandidateDetail();
   private candidate:Candidate = new Candidate();
   private userId:string;
-  private msgSearchResultNotFound:string = Messages.MSG_CNADIDATE_SEARCH_NOT_FOUD;
+  private msgSearchResultNotFound:string = Messages.MSG_CANDIDATE_SEARCH_NOT_FOUND;
+  private msgCandidateNotFound:string = Messages.MSG_CANDIDATE_NOT_FOUND;
   private msgCandidateVisibilityOff:string = Messages.MSG_CNADIDATE_VISIBILITY_OFF;
   private candidateId:string;
   private jobId:string;
@@ -94,7 +95,14 @@ export class CandidateSearchComponent implements OnChanges {
   }
 
   showSearchResult() {
-    this.getJobProfileMatching(this.candidateDataList[0]);
+    if (this.candidateDataList.length) {
+      this.getJobProfileMatching(this.candidateDataList[0]);
+    }
+    else {
+      this.candidateDetails = new CandidateDetail();
+      this.candidate = new Candidate();
+      this.listOfJobs = new Array(0);
+    }
   }
 
   showJobCompareView(job:JobQcard) {

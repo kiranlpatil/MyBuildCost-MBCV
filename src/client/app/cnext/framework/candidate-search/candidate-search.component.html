@@ -73,6 +73,9 @@
   <div class="empty-list-message" *ngIf="listOfJobs.length == 0 && candidate.isVisible == false">
     {{msgCandidateVisibilityOff}}
   </div>
+  <div class="empty-list-message" *ngIf="listOfJobs.length == 0 && candidateDataList.length == 0 && searchValue !== ''">
+    {{msgCandidateNotFound}}
+  </div>
 
 
 </div>
