@@ -81,6 +81,10 @@
       <img *ngIf="!job.company_logo" src="assets/c-next/company-details/company-logo-default.png" />
     </div>
   </div>
+  <div class="button-group" *ngIf="type == 'searchView'">
+    <button class="btn btn-primary" (click)="actionForSearchView('cartListed',job._id)">Add to cart</button>
+    <button class="btn btn-danger" (click)="actionForSearchView('rejectedList',job._id) ">Reject</button>
+  </div>
 </div>
 
 <div class="modal dashboard-modal" [style.display]="getStyleModal()">

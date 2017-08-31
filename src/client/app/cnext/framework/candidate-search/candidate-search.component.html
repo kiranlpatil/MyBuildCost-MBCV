@@ -58,8 +58,10 @@
     </div>
     <div class="card-view">
       <div *ngFor="let job of listOfJobs">
-        <div (click)="showJobCompareView(job)">
-          <cn-candidate-q-card [progress_bar_color]="'#29b6f6'" [job]="job" [type]="'searchView'"></cn-candidate-q-card>
+        <div>
+          <cn-candidate-q-card [progress_bar_color]="'#29b6f6'" [job]="job" [type]="'searchView'"
+                               (jobComapare)="showJobCompareView($event)"
+                               (searchViewAction)="workFlowAction($event)"></cn-candidate-q-card>
         </div>
       </div>
     </div>
@@ -87,6 +89,10 @@
       <div class="modal-content job-dashboard-modal-content">
         <div class="modal-body" *ngIf="isShowJobCompareView">
           <cn-job-compare-view [candiadteId]="candidateId" [jobId]="jobId" (close)="closeJob()"></cn-job-compare-view>
+        </div>
+        <div class="button-group">
+          <button class="btn btn-primary" (click)="applyJob()">Add to cart</button>
+          <button class="btn btn-danger" (click)="blockJob() ">Reject</button>
         </div>
       </div>
     </div>

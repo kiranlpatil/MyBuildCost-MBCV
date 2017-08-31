@@ -18,6 +18,8 @@ export class CandidateQCardComponent {
   @Input() job: JobQcard;
   @Input() type: string;
   @Output() onAction = new EventEmitter();
+  @Output() searchViewAction = new EventEmitter();
+  @Output() jobComapare = new EventEmitter();
   @Input() progress_bar_color : string='#0d75fa';
   candidateId: string;
   private showModalStyle: boolean = false;
@@ -47,6 +49,9 @@ export class CandidateQCardComponent {
         this.candidateId = LocalStorageService.getLocalValue(LocalStorage.END_USER_ID);
       }
       this.showModalStyle = !this.showModalStyle;
+    }
+    if (this.type == 'searchView') {
+      this.jobComapare.emit(jobId);
     }
   }
 
@@ -106,6 +111,11 @@ export class CandidateQCardComponent {
       return AppSettings.IP + imagePath.substring(4).replace('"', '');
     }
     return null;
+  }
+
+  actionForSearchView(value:string, jobId:string) {
+    var data = {'name': value, 'jobId': jobId};
+    this.searchViewAction.emit(data);
   }
 
 }
