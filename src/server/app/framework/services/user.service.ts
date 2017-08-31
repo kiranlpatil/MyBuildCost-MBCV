@@ -8,7 +8,6 @@ import * as mongoose from "mongoose";
 //import * as config from 'config';
 var config = require('config');
 var bcrypt = require('bcrypt');
-var json2xls = require('json2xls');
 import Messages = require("../shared/messages");
 import AuthInterceptor = require("../../framework/interceptor/auth.interceptor");
 import ProjectAsset = require("../shared/projectasset");
