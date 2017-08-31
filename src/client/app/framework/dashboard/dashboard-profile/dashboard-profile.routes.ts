@@ -3,7 +3,7 @@ import {DashboardProfileComponent} from "./index";
 
 export const DashboardProfileRoutes: Route[] = [
   {
-    path: 'profile',
+      path: 'profile/:role',
     component: DashboardProfileComponent
   }
 ];

@@ -1,4 +1,4 @@
-import {NgModule} from "@angular/core";
+import {ErrorHandler, NgModule} from "@angular/core";
 import {AppComponent} from "./app.component";
 import {BrowserModule} from "@angular/platform-browser";
 import {APP_BASE_HREF} from "@angular/common";
@@ -187,7 +187,16 @@ import {ValueSortFilterPipe} from "./cnext/framework/profile-comparison/value-so
 import {RegistrationService} from "./framework/shared/registration.service";
 import {GuidedTourService} from "./cnext/framework/guided-tour.service";
 import {ErrorService} from "./cnext/framework/error.service";
+import {LoggerService, MyErrorHandler} from "./cnext/framework/my-error-handler.service";
+import {AdminDashboardComponent} from "./cnext/framework/admin-dashboard/admin-dashboard.component";
+import {AdminDashboardHeaderComponent} from "./cnext/framework/admin-dashboard/admin-dashboard-header/admin-dashboard-header.component";
+import {RecruiterDetailListComponent} from "./cnext/framework/admin-dashboard/recruiter-detail-list/recruiter-detail-list.component";
+import {CandidateDetailListComponent} from "./cnext/framework/admin-dashboard/candidate-detail-list/candidate-detail-list.component";
+import {KeyskillsDetailListComponent} from "./cnext/framework/admin-dashboard/keyskills-detail-list/keyskills-detail-list.component";
+import {AdminDashboardService} from "./cnext/framework/admin-dashboard/admin-dashboard.service";
 
+import {CandidateSearchComponent} from "./cnext/framework/candidate-search/candidate-search.component";
+import {CandidateSearchService} from "./cnext/framework/candidate-search/candidate-search.service";
 //C-NEXT IMPORTS
 
 
@@ -246,11 +255,16 @@ import {ErrorService} from "./cnext/framework/error.service";
     ProfessionalDetailsDirective,
     RecruiterSharedHeaderComponent,
     AdditionalDetailsComponent,
+    RecruiterDetailListComponent,
+    CandidateDetailListComponent,
+    KeyskillsDetailListComponent,
     HorizontalListViewComponent,
     CandidateProfileComponent,
     ProfileDescriptionComponent,
     CapabilitiesComponent,
     GuidedTourComponent,
+    AdminDashboardComponent,
+    AdminDashboardHeaderComponent,
     MultipleQuestionAnswerComponent,
     JobProficienciesComponent,
     ProficienciesComponent,
@@ -320,7 +334,8 @@ import {ErrorService} from "./cnext/framework/error.service";
     ProfileComparisonPipe,
     ColorShadeDirective,
     AttributeFilterPipe,
-    ValueSortFilterPipe
+    ValueSortFilterPipe,
+    CandidateSearchComponent
   ],
   providers: [
     {
@@ -330,6 +345,7 @@ import {ErrorService} from "./cnext/framework/error.service";
       deps: [XHRBackend, RequestOptions, MessageService, LoaderService]
     },
     {provide: RequestOptions, useClass: AppRequestOptions},
+    LoggerService,{provide: ErrorHandler, useClass: MyErrorHandler},
     {
       provide: APP_BASE_HREF,
       useValue: '<%= APP_BASE %>'
@@ -387,6 +403,7 @@ import {ErrorService} from "./cnext/framework/error.service";
     QCardViewService,
     IndustryDetailsService,
     ProficiencyDetailsService,
+    AdminDashboardService,
     FilterService,
     IndustryDataService,
     RecruiteQCardView2Service,
@@ -399,7 +416,8 @@ import {ErrorService} from "./cnext/framework/error.service";
     RedirectRecruiterDashboardService,
     ReleventIndustryListService,
     ProfileComparisonService,
-    GuidedTourService
+    GuidedTourService,
+    CandidateSearchService
 
   ],
   bootstrap: [AppComponent]

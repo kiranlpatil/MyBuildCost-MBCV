@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, Output} from "@angular/core";
 import {Role} from "../model/role";
 import {Capability} from "../model/capability";
-import {ImagePath, LocalStorage, Messages, Tooltip, ValueConstant, Headings} from "../../../framework/shared/constants";
+import {Headings, ImagePath, LocalStorage, Messages, Tooltip, ValueConstant} from "../../../framework/shared/constants";
 import {Section} from "../model/candidate";
 import {LocalStorageService} from "../../../framework/shared/localstorage.service";
 import {GuidedTourService} from "../guided-tour.service";
@@ -44,16 +44,14 @@ export class CapabilitiesComponent {
   tooltipCandidateMessage: string =
 
     '<ul>' +
-    '<li>' +
-    '<p>1. '+ Tooltip.CANDIDATE_CAPABILITY_TOOLTIP_1 +'</p></li><li><p>2. '+Tooltip.CANDIDATE_CAPABILITY_TOOLTIP_2+'</p>'+'</li>' +
+    '<li><p>1. ' + Tooltip.CANDIDATE_CAPABILITY_TOOLTIP_1 + '</p></li>' +
+    '<li><p>2. ' + Tooltip.CANDIDATE_CAPABILITY_TOOLTIP_2 + '</p>' + '</li>' +
     '</ul>';
 
   tooltipRecruiterMessage: string =
 
     '<ul>' +
-    '<li>' +
-    '<p>1.'+ Tooltip.RECRUITER_CAPABILITY_TOOLTIP +'</p>' +
-    '</li>' +
+    '<li><p>1. ' + Tooltip.RECRUITER_CAPABILITY_TOOLTIP + '</p></li>' +
     '</ul>';
 
   constructor(private guidedTourService:GuidedTourService, private errorService:ErrorService) {

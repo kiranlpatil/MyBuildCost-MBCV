@@ -42,6 +42,18 @@
                     <span class="glyphicon glyphicon-th"></span>My Dashboard
                   </a>
                 </li>
+                <li role="menuitem" [routerLinkActive]="['active']">
+                  <a class="dropdown-item" [routerLink]="['settings']"
+                     (click)="navigateTo('/dashboard/settings'); toggleMenu();">
+                    <span class="glyphicon glyphicon-lock"></span>Change Password
+                  </a>
+                </li>
+                <li role="menuitem" [routerLinkActive]="['active']">
+                  <a class="dropdown-item" [routerLink]="['profile']"
+                     (click)="navigateTo('/dashboard/profile'); toggleMenu();">
+                    <span class="glyphicon glyphicon-user"></span>Personal Information
+                  </a>
+                </li>
 
                 <li role="menuitem">
                   <a class="dropdown-item" (click)="logOut()">

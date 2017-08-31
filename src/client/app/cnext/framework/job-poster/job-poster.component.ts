@@ -97,9 +97,7 @@ export class JobPosterComponent implements OnInit, OnChanges {
       .subscribe(
         data => {
           // this.OnRecruiterDataSuccess(data.data.industry);
-          console.log(data.data.industry.postedJobs[0]);
           this.jobPosterModel = data.data.industry.postedJobs[0];
-          console.log('job poster model', this.jobPosterModel);
           this.onGetJobDetailsSuccess(this.jobPosterModel);
         },error => this.errorService.onError(error));
   }
@@ -200,7 +198,6 @@ export class JobPosterComponent implements OnInit, OnChanges {
           this.jobPosterModel.capability_matrix = data.data.postedJobs[0].capability_matrix;
           this.setCapabilityMatrix = false;
         }
-        console.log(this.jobPosterModel.capability_matrix);
       },error => this.errorService.onError(error));
   }
 
@@ -323,7 +320,6 @@ export class JobPosterComponent implements OnInit, OnChanges {
        rolesForRelevent = this.jobForRole;
        this.rolesForRelevent = rolesForRelevent;*/
     } else {
-      console.log('------going to Compentancies-------', this.isShowReleventIndustryListStep);
       this.highlightedSection.name = 'Compentancies';
       this.showCompentensies = true;
     }

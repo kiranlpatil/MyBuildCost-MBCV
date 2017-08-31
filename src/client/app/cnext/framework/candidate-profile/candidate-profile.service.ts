@@ -32,10 +32,10 @@ export class CandidateProfileService extends BaseService {
       .catch(this.handleError);
   }
 
-  getCandidateAllDetails(): Observable<any> {
+  getCandidateAllDetails(userId:string):Observable<any> {
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({headers: headers});
-    let url: string = API.CANDIDATE_DETAIL_PROFILE + '/' + LocalStorageService.getLocalValue(LocalStorage.USER_ID);
+    let url:string = API.CANDIDATE_DETAIL_PROFILE + '/' + userId;
     return this.http.get(url, options)
       .map(this.extractData)
       .catch(this.handleError);

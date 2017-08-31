@@ -1,0 +1,50 @@
+<div class="list-container">
+  <div class="header">
+    <a href="./src/server/app/framework/public/admin-data/recruiter.csv" download="Recruiter.csv" title="Export recruiter to CSV File"><i class="glyphicon glyphicon-export"></i>Export</a>
+  </div>
+  <div class="list-view">
+    <ul class="list-header">
+      <li>
+        <h5>Company Name (size)</h5>
+      </li>
+      <li>
+        <h5>Email address</h5>
+      </li>
+      <li>
+        <h5>Contact</h5>
+      </li>
+      <li>
+        <h5>Location</h5>
+      </li>
+      <li>
+        <h5>No. of job posted</h5>
+      </li>
+      <li>
+        <h5>Activation Status</h5>
+      </li>
+    </ul>
+    <div *ngFor="let recruiter of recruiters">
+      <ul>
+        <li>
+          <p>{{recruiter.data.company_name}} ({{recruiter.data.company_size}})</p>
+        </li>
+        <li>
+          <p>{{recruiter.email}}</p>
+        </li>
+        <li>
+          <p>{{recruiter.mobile_number}}</p>
+        </li>
+        <li>
+          <p *ngIf="recruiter.location && recruiter.location.city">{{recruiter.location.city}}</p>
+        </li>
+        <li>
+          <span *ngIf="recruiter.data && recruiter.data.postedJobs">{{recruiter.data.postedJobs.length}}</span>
+        </li>
+        <li>
+          <button *ngIf="recruiter.isActivated" class="btn-danger btn-custom">Deactivate</button>
+          <button *ngIf="!recruiter.isActivated" class="btn-primary btn-custom">Activate</button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

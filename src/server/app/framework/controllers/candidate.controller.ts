@@ -7,6 +7,7 @@ import CandidateService = require('../services/candidate.service');
 import UserService = require('../services/user.service');
 import RecruiterService = require('../services/recruiter.service');
 import SearchService = require('../search/services/search.service');
+import CandidateInfoSearch = require("../dataaccess/model/candidate-info-search");
 
 
 export function create(req: express.Request, res: express.Response, next: any) {

@@ -1,16 +1,16 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { ImagePath, LocalStorage, Messages, ProjectAsset } from '../../shared/constants';
-import { VerifyUser } from './verify_phone';
-import { VerifyPhoneService } from './verify-phone.service';
-import { MessageService } from '../../shared/message.service';
-import { Message } from '../../shared/message';
-import { LocalStorageService } from '../../shared/localstorage.service';
-import { ValidationService } from '../../shared/customvalidations/validation.service';
-import { Login } from '../../login/login';
-import { LoginService } from '../../login/login.service';
-import { RegistrationService } from '../../shared/registration.service';
+import {Component} from "@angular/core";
+import {Router} from "@angular/router";
+import {FormBuilder, FormGroup} from "@angular/forms";
+import {ImagePath, LocalStorage, Messages, NavigationRoutes, ProjectAsset} from "../../shared/constants";
+import {VerifyUser} from "./verify_phone";
+import {VerifyPhoneService} from "./verify-phone.service";
+import {MessageService} from "../../shared/message.service";
+import {Message} from "../../shared/message";
+import {LocalStorageService} from "../../shared/localstorage.service";
+import {ValidationService} from "../../shared/customvalidations/validation.service";
+import {Login} from "../../login/login";
+import {LoginService} from "../../login/login.service";
+import {RegistrationService} from "../../shared/registration.service";
 
 @Component({
   moduleId: module.id,
@@ -148,13 +148,14 @@ export class VerifyPhoneComponent {
   }
 
   navigateTo() {
-    this.loginModel.email=LocalStorageService.getLocalValue(LocalStorage.EMAIL_ID);
-    this.loginModel.password=LocalStorageService.getLocalValue(LocalStorage.PASSWORD);
-    //this._router.navigate([NavigationRoutes.APP_LOGIN]);
-    this.loginService.userLogin(this.loginModel)
-      .subscribe(
-        res => (this.registrationService.onSuccess(res)),
-        error => (this.registrationService.loginFail(error)));
+      //this.loginModel.email=LocalStorageService.getLocalValue(LocalStorage.EMAIL_ID);
+      //this.loginModel.password=LocalStorageService.getLocalValue(LocalStorage.PASSWORD);
+      window.localStorage.clear();
+      this._router.navigate([NavigationRoutes.APP_LOGIN]);
+      //this.loginService.userLogin(this.loginModel)
+      //.subscribe(
+      // res => (this.registrationService.onSuccess(res)),
+      // error => (this.registrationService.loginFail(error)));
   }
 
   getStyleModal() {
