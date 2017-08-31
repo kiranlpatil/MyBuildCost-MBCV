@@ -14,18 +14,22 @@ import Match = require('../../dataaccess/model/match-enum');
 import IndustryRepository = require('../../dataaccess/repository/industry.repository');
 import IndustryModel = require('../../dataaccess/model/industry.model');
 import ScenarioModel = require('../../dataaccess/model/scenario.model');
+let usestracking = require('uses-tracking');
 
 class SearchService {
   APP_NAME: string;
   candidateRepository: CandidateRepository;
   recruiterRepository: RecruiterRepository;
   industryRepository: IndustryRepository;
+  private usesTrackingController: any;
 
   constructor() {
     this.APP_NAME = ProjectAsset.APP_NAME;
     this.candidateRepository = new CandidateRepository();
     this.recruiterRepository = new RecruiterRepository();
     this.industryRepository = new IndustryRepository();
+    let obj: any = new usestracking.MyController();
+    this.usesTrackingController = obj._controller;
   }
 
   getMatchingCandidates(jobProfile: JobProfileModel, callback: (error: any, result: any) => void) {
@@ -168,6 +172,7 @@ class SearchService {
     } else {
       uses_data.action = Actions.VIEWED_FULL_PROFILE_BY_RECRUITER;
     }
+    this.usesTrackingController.create(uses_data);
     this.candidateRepository.findByIdwithExclude(candidateId,{'industry':0}, (err: any, candidateRes: any) => {
       if (err) {
         callback(err, null);
