@@ -42,7 +42,6 @@ export function login(req: express.Request, res: express.Response, next: any) {
                     "_id": result[0]._id,
                     "current_theme": result[0].current_theme,
                     "end_user_id": result[0]._id,
-                    "current_theme": result[0].current_theme,
                     "picture": result[0].picture,
                     "mobile_number": result[0].mobile_number,
                     "isCandidate": result[0].isCandidate,
