@@ -1,5 +1,5 @@
 import {Component, NgZone, OnDestroy, OnInit} from "@angular/core";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {DashboardService} from "../dashboard.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ValidationService} from "../../shared/customvalidations/validation.service";
@@ -18,6 +18,9 @@ import {
 import {NavigationRoutes} from "../../shared/constants";
 import {LoaderService} from "../../shared/loader/loader.service";
 import {CandidateDetail} from "../../registration/candidate/candidate";
+import {Candidate, Summary} from "../../../cnext/framework/model/candidate";
+import {CandidateProfileService} from "../../../cnext/framework/candidate-profile/candidate-profile.service";
+import {ErrorService} from "../../../cnext/framework/error.service";
 
 
 @Component({
@@ -46,11 +49,16 @@ export class DashboardProfileComponent implements OnInit, OnDestroy {
   EMAIL_ICON: string;
   emailRestMessage:string= Messages.MSG_RESET_EMAIL_ADDRESS;
   mobileNumberRestMessage:string= Messages.MSG_RESET_MOBILE_NUMBER;
+  role: string;
+  private candidate: Candidate = new Candidate();
 
   constructor(private commonService: CommonService, private dashboardService: DashboardService,
               private messageService: MessageService, private zone: NgZone, private profileService: ProfileService,
               private _router: Router, private formBuilder: FormBuilder, private loaderService: LoaderService,
-              private themeChangeService: ThemeChangeService) {
+              private themeChangeService: ThemeChangeService,
+              private activatedRoute: ActivatedRoute,
+              private candidateProfileService: CandidateProfileService,
+              private errorService: ErrorService,) {
 
     this.userForm = this.formBuilder.group({
       'first_name': ['', Validators.required],
@@ -71,6 +79,17 @@ export class DashboardProfileComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.activatedRoute.params.subscribe(params => {
+      this.role = params['role'];
+      if (this.role) {
+        debugger;
+        if (this.role === 'candidate') {
+          this.getCandidate();
+        } else if (this.role === 'recruiter') {
+          this.getRecruiter();
+        }
+      }
+    });
     var socialLogin: string = LocalStorageService.getLocalValue(LocalStorage.IS_SOCIAL_LOGIN);
     if (socialLogin === AppSettings.IS_SOCIAL_LOGIN_YES) {
       this.isSocialLogin = true;
@@ -85,6 +104,25 @@ export class DashboardProfileComponent implements OnInit, OnDestroy {
       this.getUserProfile();
     }
     document.body.scrollTop = 0;
+  }
+
+  getCandidate() {
+    this.candidateProfileService.getCandidateDetails()
+        .subscribe(
+            candidateData => {
+              this.OnCandidateDataSuccess(candidateData);
+            }, error => this.errorService.onError(error));
+  }
+
+  OnCandidateDataSuccess(candidateData: any) {
+    this.candidate = candidateData.data[0];
+    this.candidate.basicInformation = candidateData.metadata;
+    this.candidate.summary = new Summary();
+    console.log(this.candidate);
+  }
+
+  getRecruiter() {
+
   }
 
   ngOnDestroy() {
@@ -165,68 +203,6 @@ export class DashboardProfileComponent implements OnInit, OnDestroy {
     this.commonService.goBack();
   }
 
-  fileChangeEvent(fileInput: any) {
-    //var inputValue = fileInput.target;
-    this.filesToUpload = <Array<File>> fileInput.target.files;
-    if (this.filesToUpload[0].type === 'image/jpeg' || this.filesToUpload[0].type === 'image/png'
-      || this.filesToUpload[0].type === 'image/jpg' || this.filesToUpload[0].type === 'image/gif') {
-      if (this.filesToUpload[0].size <= 5242880) {
-        this.dashboardService.makeDocumentUpload(this.filesToUpload, []).then((result: any) => {
-          if (result !== null) {
-            this.fileChangeSuccess(result);
-          }
-        }, (error: any) => {
-          this.fileChangeFail(error);
-        });
-      } else {
-        var message = new Message();
-        message.isError = true;
-        message.error_msg = Messages.MSG_ERROR_IMAGE_SIZE;
-        this.messageService.message(message);
-      }
-    } else {
-      var message = new Message();
-      message.isError = true;
-      message.error_msg = Messages.MSG_ERROR_IMAGE_TYPE;
-      this.messageService.message(message);
-    }
-  }
-
-  fileChangeSuccess(result: any) {
-    this.model = result.data;
-    var socialLogin: string = LocalStorageService.getLocalValue(LocalStorage.IS_SOCIAL_LOGIN);
-    if (!this.model.picture || this.model.picture === undefined) {
-      this.image_path = ImagePath.PROFILE_IMG_ICON;
-    } else if (socialLogin === AppSettings.IS_SOCIAL_LOGIN_YES) {
-      this.image_path = this.model.picture;
-    } else {
-      this.image_path = AppSettings.IP + this.model.picture.substring(4).replace('"', '');
-    }
-    //this.loaderService.stop();
-
-    var message = new Message();
-    message.isError = false;
-    message.custom_message = Messages.MSG_SUCCESS_DASHBOARD_PROFILE_PIC;
-    this.messageService.message(message);
-    this.profileService.onProfileUpdate(result);
-  }
-
-  fileChangeFail(error: any) {
-
-    var message = new Message();
-    message.isError = true;
-    if (error.err_code === 404 || error.err_code === 0) {
-
-      message.error_msg = error.err_msg;
-      this.messageService.message(message);
-    } else {
-
-      message.error_msg = Messages.MSG_ERROR_DASHBOARD_PROFILE_PIC;
-      this.messageService.message(message);
-    }
-
-  }
-
   showHideEmailModal() {
     this.showModalStyle = !this.showModalStyle;
   }
@@ -249,6 +225,11 @@ export class DashboardProfileComponent implements OnInit, OnDestroy {
     } else {
       return 'none';
     }
+  }
+
+  onPictureUpload(imagePath: string) {
+    this.candidate.basicInformation.picture = imagePath;
+    this.image_path = AppSettings.IP + imagePath.substring(4).replace('"', '');
   }
 
 }

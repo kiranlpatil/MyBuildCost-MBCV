@@ -4,7 +4,7 @@ import {SettingsComponent} from "./index";
 
 export const SettingsRoutes: Route[] = [
   {
-    path: 'settings',
+      path: 'settings/:role',
     component: SettingsComponent,
 
   }

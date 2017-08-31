@@ -44,16 +44,10 @@
                   <h5 *ngIf="candidate.jobTitle != undefined">{{candidate.jobTitle}}</h5>
                 </li>
                 <li class="divider"></li>
-                <li role="menuitem">
-                  <a class="dropdown-item"
-                     (click)="highlightedSection.name='GuideTour'">
-                    <span class="glyphicon glyphicon-road"></span>Guided Tour
-                  </a>
-                </li>
                 <li role="menuitem" [routerLinkActive]="['active']" *ngIf="candidate.isCompleted==true">
-                  <a class="dropdown-item" [routerLink]="['profile-summary']"
-                     (click)="navigateTo('/profile_summary');">
-                    <span class="glyphicon glyphicon-user"></span>View Profile
+                  <a class="dropdown-item" [routerLink]="['candidate_dashboard']"
+                     (click)="navigateTo('/candidate_dashboard');">
+                    <span class="glyphicon glyphicon-th"></span>My Dashboard
                   </a>
                 </li>
                 <li role="menuitem" [routerLinkActive]="['active']" *ngIf="candidate.isCompleted==true">
@@ -63,19 +57,35 @@
                   </a>
                 </li>
                 <li role="menuitem" [routerLinkActive]="['active']" *ngIf="candidate.isCompleted==true">
+                  <a class="dropdown-item" [routerLink]="['profile-summary']"
+                     (click)="navigateTo('/profile_summary');">
+                    <span class="glyphicon glyphicon-eye-open"></span>View Profile
+                  </a>
+                </li>
+                <li role="menuitem" [routerLinkActive]="['active']" *ngIf="candidate.isCompleted==true">
                   <a class="dropdown-item" [routerLink]="['profile-edit']"
                      (click)="navigateTo('/create_profile');">
                     <span class="	glyphicon glyphicon-edit"></span>Edit Profile
                   </a>
                 </li>
-
-                <li role="menuitem" [routerLinkActive]="['active']" *ngIf="candidate.isCompleted==true">
-                  <a class="dropdown-item" [routerLink]="['candidate_dashboard']"
-                     (click)="navigateTo('/candidate_dashboard');">
-                    <span class="glyphicon glyphicon-th"></span>My Dashboard
+                <li role="menuitem" [routerLinkActive]="['active']">
+                  <a class="dropdown-item" [routerLink]="['profile']"
+                     (click)="navigateTo('/profile/candidate'); toggleMenu();">
+                    <span class="glyphicon glyphicon-list-alt"></span>Personal Information
                   </a>
                 </li>
-
+                <li role="menuitem" [routerLinkActive]="['active']">
+                  <a class="dropdown-item" [routerLink]="['settings']"
+                     (click)="navigateTo('/settings/candidate'); toggleMenu();">
+                    <span class="glyphicon glyphicon-lock"></span>Change Password
+                  </a>
+                </li>
+                <li role="menuitem">
+                  <a class="dropdown-item"
+                     (click)="highlightedSection.name='GuideTour'">
+                    <span class="glyphicon glyphicon-road"></span>Guided Tour
+                  </a>
+                </li>
                 <li role="menuitem">
                   <a class="dropdown-item" (click)="logOut()">
                     <!--<a class="dropdown-item" (click)="navigateTo('/')">-->
