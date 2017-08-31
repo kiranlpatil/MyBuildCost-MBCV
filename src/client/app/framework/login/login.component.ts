@@ -69,12 +69,10 @@ export class LoginComponent implements OnInit {
     if (parseInt(LocalStorageService.getLocalValue(LocalStorage.IS_LOGGED_IN)) === 1) {
       this._router.navigate([NavigationRoutes.APP_CANDIDATE_DASHBOARD]);
     }
-    console.log('isChrome login = ', this.isChrome);
   }
 
   closeToaster() {
     this.toaster.nativeElement.style.visibility = "hidden";
-   // document.getElementById("snackbar").style.visibility = "hidden";
   }
 
   onSubmit() {

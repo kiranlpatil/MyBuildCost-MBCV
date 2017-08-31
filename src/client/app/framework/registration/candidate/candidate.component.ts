@@ -58,7 +58,6 @@ export class CandidateComponent implements OnInit {
     this.currentDate = new Date();
     this.year = this.currentDate.getUTCFullYear() - 18;
     this.isChrome = this.sharedService.getUserBrowser();
-    console.log('isChrome value in registration', this.isChrome);
   }
 
   ngOnInit() {

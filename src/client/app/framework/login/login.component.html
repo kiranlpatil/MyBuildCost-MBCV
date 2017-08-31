@@ -1,11 +1,11 @@
 <section class="main-form-wrapper login">
   <main-header [MainHeaderMenuHideShow]="mainHeaderMenuHideShow"></main-header>
 
-    <app-loader></app-loader>
-
     <div *ngIf="!isChrome" #toaster id="snackbar">This application is certified on Chrome for better experience we would recommend to use chrome
         <button class="button-style" (click)="closeToaster()">x</button>
     </div>
+
+    <app-loader></app-loader>
 
     <div class="col-lg-4 col-md-4 col-sm-6 col-xs-11 content">
 
