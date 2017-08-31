@@ -188,7 +188,8 @@ import {RegistrationService} from "./framework/shared/registration.service";
 import {GuidedTourService} from "./cnext/framework/guided-tour.service";
 import {ErrorService} from "./cnext/framework/error.service";
 import {LoggerService, MyErrorHandler} from "./cnext/framework/my-error-handler.service";
-
+import {CandidateSearchComponent} from "./cnext/framework/candidate-search/candidate-search.component";
+import {CandidateSearchService} from "./cnext/framework/candidate-search/candidate-search.service";
 //C-NEXT IMPORTS
 
 
@@ -321,7 +322,8 @@ import {LoggerService, MyErrorHandler} from "./cnext/framework/my-error-handler.
     ProfileComparisonPipe,
     ColorShadeDirective,
     AttributeFilterPipe,
-    ValueSortFilterPipe
+    ValueSortFilterPipe,
+    CandidateSearchComponent
   ],
   providers: [
     {
@@ -401,7 +403,8 @@ import {LoggerService, MyErrorHandler} from "./cnext/framework/my-error-handler.
     RedirectRecruiterDashboardService,
     ReleventIndustryListService,
     ProfileComparisonService,
-    GuidedTourService
+    GuidedTourService,
+    CandidateSearchService
 
   ],
   bootstrap: [AppComponent]

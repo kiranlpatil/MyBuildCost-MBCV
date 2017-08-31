@@ -55,7 +55,7 @@
         </ul>
         <header class="clearfix">
           <div class="col-md-8 col-sm-7 col-xs-6 no-padding">
-            <h6 class="username">
+            <h6 class="username" title="{{item.first_name}} {{item.last_name}}">
               <img src="assets/framework/images/dashboard/profile.png" class="profile-picture" alt="User Profile"
                    *ngIf="item.picture==undefined" title="{{item.first_name}} {{item.last_name}}"/>
               <img [src]="getImagePath(item.picture)" class="profile-picture" alt="User Profile"
@@ -65,7 +65,8 @@
 
           </div>
           <div class="col-md-4 col-sm-5 col-xs-6 no-padding canvas-cricle">
-            <div class="canvas-container" title="Matching Percentage">
+            <div class="canvas-container"
+                 title="Matching Percentage : {{item.exact_matching + item.above_one_step_matching | number : '1.0-0'}}%">
               <cn-progress-bar  [value]="item.exact_matching + item.above_one_step_matching" [color]="progress_bar_color" [rotation]="false"></cn-progress-bar>
               <cn-progress-bar [value]="item.exact_matching + item.above_one_step_matching" [color]="progress_bar_color" [rotation]="true"></cn-progress-bar>
               <span >{{item.exact_matching + item.above_one_step_matching | number : '1.0-0'}}%</span>
@@ -99,15 +100,15 @@
               </span>
             </div>
             <div class="icons-section">
-              <p class="border-bottom" title="Salary">
+              <p class="border-bottom" title="Salary : ₹ {{item.salary}}">
                 <span class="salary"></span>
                 ₹ {{item.salary}}
               </p>
-              <p class="border-bottom" title="Experience">
+              <p class="border-bottom" title="Experience : {{item.experience}}">
                 <span class="experience"></span>
                 {{item.experience}}
               </p>
-              <p title="Current Location">
+              <p title="Current Location : {{item.location}}">
                 <span class="current-location"></span>
                 {{item.location}}
               </p>

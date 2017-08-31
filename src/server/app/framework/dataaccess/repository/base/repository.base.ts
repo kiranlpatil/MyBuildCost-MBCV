@@ -112,6 +112,13 @@ class RepositoryBase<T extends mongoose.Document> implements IRead<T>, IWrite<T>
     this._model.update({$push: {"proficiencies": value}}, callback);
   }
 
+  //in below query we use userId for search as refrence id
+  retrieveByMultiRefrenceIdsAndPopulate(ids:string[], excluded:any, callback:(error:any, result:any) => void) {
+    this._model.find({'userId': {$in: ids}}, excluded).populate('userId').exec(function (err, items) {
+      callback(err, items);
+    });
+  }
+
 }
 
 export = RepositoryBase;

@@ -1,13 +1,15 @@
 <cn-recruiter-header [headerInfo]="headerInfo" [jobCount]="jobCount"></cn-recruiter-header>
 <div class="container-fluid profile-wrapper">
   <ul class="nav nav-tabs dashboard-tabs">
-    <li class="active"><a data-toggle="tab" href="#">My Job Posts</a></li>
-    <li><a data-toggle="tab" (click)="navigateTo('recruiterdashboard','post_new_job')">Post New Job</a></li>
+    <li class="active"><a data-toggle="tab" title="My Job Posts" href="#">My Job Posts</a></li>
+    <li><a data-toggle="tab" title="Post New Job" (click)="navigateTo('recruiterdashboard','post_new_job')">Post New
+      Job</a></li>
   </ul>
   <div class="candidate-listing">
     <cn-filter [hidden]="whichListVisible[4]" [selectedJob]="selectedJobProfile" [role]=true></cn-filter>
     <div class="col-sm-12 no-padding">
-      <button class="btn btn-back" (click)="navigateTo('recruiterdashboard',undefined)">All Jobs</button>
+      <button class="btn btn-back" title="All Jobs" (click)="navigateTo('recruiterdashboard',undefined)">All Jobs
+      </button>
       <div class="list-view" *ngIf="selectedJobProfile!=undefined">
         <div class="panel clearfix">
           <div class="col-md-7 col-sm-6 no-padding">
@@ -17,7 +19,7 @@
                 <h4 title="View Job Details" title="{{selectedJobProfile.jobTitle}}">{{selectedJobProfile.jobTitle}}</h4>
               </li>
               <li>
-                <a (click)="viewJobDetails()">view job</a>
+                <a title="view job" (click)="viewJobDetails()">view job</a>
               </li>
               <!--<li>
                 <a class="view-details" (click)="viewJobDetails()">view job details</a>
@@ -26,20 +28,25 @@
           </div>
           <div class="col-md-5 col-sm-6 no-padding">
             <ul class="pull-right job-info">
-              <li class="contact-info"><label>Industry</label><p>{{selectedJobProfile.industry.name}}</p></li>
-              <li *ngIf="isRecruitingForSelf" class="contact-info">
+              <li class="contact-info" title="Industry : {{selectedJobProfile.industry.name}}">
+                <label>Industry</label>
+                <p>{{selectedJobProfile.industry.name}}</p>
+              </li>
+              <li *ngIf="isRecruitingForSelf" class="contact-info"
+                  title="Hiring Manager: {selectedJobProfile.hiringManager}}">
                 <label>Hiring Manager</label>
                 <p>{{selectedJobProfile.hiringManager}}</p>
               </li>
-              <li *ngIf="!isRecruitingForSelf" class="contact-info">
+              <li *ngIf="!isRecruitingForSelf" class="contact-info"
+                  title=">Hiring Company : {{selectedJobProfile.department}}">
                 <label>Hiring Company</label>
                 <p>{{selectedJobProfile.department}}</p>
               </li>
-              <li class="contact-info">
+              <li class="contact-info" title="Date Posted : {{selectedJobProfile.postingDate | date :'dd MMM yyyy'}}">
                 <label>Date Posted</label>
                 <p>{{selectedJobProfile.postingDate | date :'dd MMM yyyy'}}</p>
               </li>
-              <li class="contact-info">
+              <li class="contact-info" title="Expiry Date : {{selectedJobProfile.expiringDate | date :'dd MMM yyyy'}}">
                 <label>Expiry Date</label>
                 <p>{{selectedJobProfile.expiringDate | date :'dd MMM yyyy'}}</p>
               </li>
@@ -50,23 +57,30 @@
     </div>
     <ul class="nav nav-tabs sub-tabs">
       <li class="active match-count-tabs">
-        <a (click)="getMatchingProfiles()" id="matched_anchor" data-toggle="tab" href="#matched-job"><span
+        <a (click)="getMatchingProfiles()" title="{{recruiterJobView.numberOfMatchedCandidates}} Matched"
+           id="matched_anchor" data-toggle="tab" href="#matched-job"><span
           class="match-count count"><span>{{recruiterJobView.numberOfMatchedCandidates}}</span></span> Matched</a>
       </li>
       <li class="cart-job-tabs">
-        <a (click)="getSelectedListData('cartListed')" data-toggle="tab" href="#cart-job"><span class="count"><span>{{recruiterJobView.numberOfCandidatesInCart}}</span></span>
+        <a (click)="getSelectedListData('cartListed')" title="{{recruiterJobView.numberOfCandidatesInCart}} In Cart"
+           data-toggle="tab" href="#cart-job"><span
+          class="count"><span>{{recruiterJobView.numberOfCandidatesInCart}}</span></span>
           In Cart</a>
       </li>
       <li class="applied-count-tabs">
-        <a (click)="getSelectedListData('applied')" data-toggle="tab" href="#applied-job"><span class="applied-count count"><span>{{recruiterJobView.numberOfCandidatesApplied}}</span></span>
+        <a (click)="getSelectedListData('applied')" title="{{recruiterJobView.numberOfCandidatesApplied}} Applied"
+           data-toggle="tab" href="#applied-job"><span class="applied-count count">
+          <span>{{recruiterJobView.numberOfCandidatesApplied}}</span></span>
           Applied</a>
       </li>
       <li class="rejected-job-tabs">
-        <a (click)="getSelectedListData('rejectedList')" data-toggle="tab" href="#rejected-job"><span
+        <a (click)="getSelectedListData('rejectedList')"
+           title="{{recruiterJobView.numberOfCandidatesrejected}} Rejected" data-toggle="tab" href="#rejected-job"><span
           class="rejected-count count"><span>{{recruiterJobView.numberOfCandidatesrejected}}</span></span> Rejected</a>
       </li>
       <li class="compare-candidate-tabs">
-        <a (click)="getCompareDetail()" data-toggle="tab" href="#compare-candidates"><span
+        <a (click)="getCompareDetail()" title="{{recruiterJobView.numberOfCandidatesInCompare}} Compare"
+           data-toggle="tab" href="#compare-candidates"><span
                 class="compare-candidate-count count"><span>{{recruiterJobView.numberOfCandidatesInCompare}}</span></span>Compare</a>
       </li>
     </ul>

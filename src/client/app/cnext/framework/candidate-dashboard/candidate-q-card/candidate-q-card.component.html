@@ -29,10 +29,11 @@
           </span>
         </div>
       </div>
-      <div class="company-date" title="Job Posting Date">
+      <div class="company-date" title="Job Posting Date : {{job.postingDate| date:'mediumDate'}}">
         {{job.postingDate| date:'mediumDate'}}
       </div>
-      <div class="col-md-4 col-sm-5 col-xs-5 no-padding canvas-cricle" title="Matching Percentage">
+      <div class="col-md-4 col-sm-5 col-xs-5 no-padding canvas-cricle"
+           title="Matching Percentage : {{job.above_one_step_matching+job.exact_matching | number : '1.0-0'}}%">
         <div class="canvas-container">
           <cn-progress-bar [value]="job.above_one_step_matching + job.exact_matching | number : '1.0-0'"
                            [color]="progress_bar_color" [rotation]="false"></cn-progress-bar>
@@ -45,15 +46,15 @@
     </header>
     <div class="col-sm-8 no-padding">
       <div class="col-md-12 col-sm-11 col-xs-7 details icons-section">
-        <p title="Industry">
+        <p title="Industry : {{job.industry}}">
           <span class="industry"></span>
           {{job.industry}}
         </p>
-        <p title="Salary">
+        <p title="Salary : ₹ {{job.salaryMinValue}} - {{job.salaryMaxValue}} lakh">
           <span class="salary"></span>
           ₹ {{job.salaryMinValue}} - {{job.salaryMaxValue}} lakh
         </p>
-        <p title="Experience">
+        <p title="Experience : {{job.experienceMinValue}} - {{job.experienceMaxValue}} year">
           <span class="experience"></span>
           {{job.experienceMinValue}} - {{job.experienceMaxValue}} year
         </p>
@@ -61,11 +62,11 @@
           <span class="current-location"></span>
           {{job.location}}
         </p>-->
-        <p title="Education">
+        <p title="Education : {{job.education}}">
           <span class="education"></span>
           {{job.education}}
         </p>
-        <p title="Company size">
+        <p title="Company size : {{job.company_size}}">
           <span class="company-size"></span>
           {{job.company_size}}
         </p>

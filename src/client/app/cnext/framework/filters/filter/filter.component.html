@@ -22,7 +22,7 @@
           <div class="col-sm-6 padding-right5">
             <label>Min</label>
             <select formControlName="experienceMin" (change)="selectExperiencesMinModel($event.target.value)">
-              <option value="" selected></option>
+              <option value="" selected>Min</option>
               <option value="{{itemList}}"
                       *ngFor="let itemList of experienceRangeList | minrange:qCardFilter.experienceMaxValue">
                 {{itemList}}
@@ -32,7 +32,7 @@
           <div class="col-sm-6 padding-left5">
             <label>Max</label>
             <select formControlName="experienceMax" (change)="selectExperiencesMaxModel($event.target.value)">
-              <option value="" selected></option>
+              <option value="" selected>Max</option>
               <option value="{{itemList}}"
                       *ngFor="let itemList of experienceRangeList | maxrange:qCardFilter.experienceMinValue">
                 {{itemList}}
@@ -47,7 +47,7 @@
           <div class="col-sm-6 padding-right5">
             <label>Min</label>
             <select formControlName="salaryMin" (change)="selectSalaryMinModel($event.target.value)">
-              <option value="" selected></option>
+              <option value="" selected>Min</option>
               <option value="{{itemList}}"
                       *ngFor="let itemList of salaryRangeList | minrange:qCardFilter.salaryMaxValue">{{itemList}}
               </option>
@@ -56,7 +56,7 @@
           <div class="col-sm-6 padding-left5">
             <label>Max</label>
             <select formControlName="salaryMax" (change)="selectSalaryMaxModel($event.target.value)">
-              <option value="" selected></option>
+              <option value="" selected>Max</option>
               <option value="{{itemList}}"
                       *ngFor="let itemList of salaryRangeList | maxrange:qCardFilter.salaryMinValue">{{itemList}}
               </option>

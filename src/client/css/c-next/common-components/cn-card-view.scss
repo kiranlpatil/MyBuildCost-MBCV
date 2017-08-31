@@ -304,11 +304,17 @@ header {
 }
 
 .clear-filter {
+  background: $theme-color;
+  color: $white;
+  padding: 7px 14px;
   position: fixed;
   top: 100px;
-  left: 215px;
+  left: 131px;
   z-index: 1000;
   font-size: 12px;
+  &:hover {
+    color: $white;
+  }
 }
 
 .recruiter-clear-filter {

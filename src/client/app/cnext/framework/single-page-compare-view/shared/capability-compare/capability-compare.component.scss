@@ -412,16 +412,18 @@
 .capability-complexity {
   padding-left: 10px;
   .legends {
+    background: $white;
     float: left;
     list-style: none;
     margin: 0 0 10px 0;
     padding: 4px 0;
+    position: fixed;
     z-index: 99;
     top: 8px;
 
     li {
       float: left;
-      font-size: 12px;
+      font-size: 11.6px;
       margin-right: 9px;
       color: $text-color;
     }
@@ -558,11 +560,10 @@
   }
 }
 
-
 .capability-complexity-container{
   min-width:320px;
   width: 100%;
-  margin: 0 auto;
+  margin: 30px auto;
   display: inline-block;
 }
 .row-section {

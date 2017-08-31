@@ -84,7 +84,7 @@ export class QCardviewComponent implements OnChanges {
         candidate = item;
         isFound = true;
       }
-    });;;;;;;;;;;;;;;;;;;;;;
+    });
     if (!isFound) {
       this.candidateQlist.appliedCandidates.forEach(item=> {
         if (data.id == item._id) {
@@ -224,8 +224,12 @@ export class QCardviewComponent implements OnChanges {
       this.addedTocart.emit(false);
     if(destinationListName==='cartListed'&& action==='add') {this.displayMsg('cartListed',candidate);}
     if(destinationListName==='rejectedList'&& action==='add') {this.displayMsg('rejectedList',candidate);}
-    if(destinationListName==='cartListed'&& action==='remove') {this.displayMsg('removedcartListed',candidate);}
-    if(destinationListName==='rejectedList'&& action==='remove') {this.displayMsg('removedrejectedList',candidate);}
+    if (destinationListName === 'cartListed' && action === 'remove' && (candidate.isVisible == undefined || candidate.isVisible)) {
+      this.displayMsg('removedcartListed', candidate);
+    }
+    if (destinationListName === 'rejectedList' && action === 'remove' && (candidate.isVisible == undefined || candidate.isVisible)) {
+      this.displayMsg('removedrejectedList', candidate);
+    }
 
   }
   displayMsg(condition:string,candidate: CandidateQCard) {
