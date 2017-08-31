@@ -81,6 +81,11 @@ class Messages {
   //Verify errors
   public static MSG_ERROR_CHECK_EMAIL_ACCOUNT: string = 'Error: User already has an account associated with this email address.'; //should be same to MSG_ERROR_EMAIL_ACTIVE_NOW
 
+
+  public static MSG_HEADER_QUESTION_CANDIDATE: string = 'Tell us about your experience in';
+  public static MSG_HEADER_QUESTION_RECRUITER: string = 'Which is the most appropriate level that candidate is required to handle as a part of';
+
+
   public static MSG_ERROR_CHECK_INACTIVE_ACCOUNT: string = 'Error: Your account is still inactive. Verify your account' +
     ' by clicking the verification link sent on your email.'; //should be same to MSG_ERROR_ACCOUNT_STATUS
   public static MSG_ERROR_CHECK_INVALID_ACCOUNT: string = 'Error: Sorry. There is no user registered with this email address.'; // should be same to MSG_ERROR_USER_NOT_FOUND

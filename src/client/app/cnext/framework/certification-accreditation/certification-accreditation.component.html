@@ -3,7 +3,7 @@
 <div class="section-container clear"  *ngIf="highlightedSection.name =='Certification'">
   <div class="main-content edit-modal-content clearfix">
 
-    <h4 class="heading">Certification/Accreditation (Optional)</h4>
+    <h4 class="heading">{{certificateAccrediation}}</h4>
     <div class="scrollable-content" #certficationParentDiv>
       <form class="description-form" [formGroup]="certificationDetail" novalidate>
         <div class="row">

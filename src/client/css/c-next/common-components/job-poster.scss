@@ -54,6 +54,12 @@
 @media only screen and (max-width: 767px) {
   .recruiter-profile-wrapper,
   .candidate-profile-wrapper {
-    width: calc(100% - 20px);
+    width: calc(100% - 25px);
+  }
+
+  .recruiter-profile-wrapper {
+    .edit-modal-content {
+      margin: 45px auto 0 !important;
+    }
   }
 }

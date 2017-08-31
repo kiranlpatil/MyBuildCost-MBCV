@@ -1,5 +1,5 @@
 <div class="guided-tour-section"
-     *ngIf="guidedTourStatus.indexOf(guidedTourImgOverlayScreensProfile) == -1 && isGuideImg == true">
+     *ngIf="guidedTourStatus?.indexOf(guidedTourImgOverlayScreensProfile) == -1 && isGuideImg == true">
   <img src={{guidedTourImgOverlayScreensProfilePath}} alt="Profile Picture">
   <div class="got-it-btn" (click)="onGotItGuideTour()">
     <span>OK, Got it</span>
@@ -9,7 +9,7 @@
 <div class="modal-bg" *ngIf="highlightedSection.name=='Awards'"></div>
 <div class="section-container clear" *ngIf="highlightedSection.name =='Awards'">
   <div class="main-content edit-modal-content clearfix">
-    <h4 class="heading">Awards (Optional)</h4>
+    <h4 class="heading">{{awardsHeading}}</h4>
     <div class="scrollable-content" #awardParentDiv>
       <form class="description-form" [formGroup]="awardDetail" novalidate>
         <div class="row">

@@ -17,6 +17,7 @@ import {Location} from "../location";
 })
 
 export class CandidateComponent implements OnInit {
+  yearMatchNotFoundMessage: string= Messages.MSG_YEAR_NO_MATCH_FOUND;
   private model = new CandidateDetail();
   private storedLocation: Location = new Location();
   private isPasswordConfirm: boolean;

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, Output} from '@angular/core';
 
 
 @Component({
@@ -8,7 +8,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   styleUrls: ['description-field.component.css']
 })
 
-export class DescriptionFieldComponent {
+export class DescriptionFieldComponent implements OnChanges {
   @Input('type') type: string;
   @Input('maxLength') maxLength: number;
   @Input() description: string;
@@ -28,7 +28,6 @@ export class DescriptionFieldComponent {
 
   ngOnChanges() {
     if (this.description != undefined && this.description !== '') {
-      this.description = this.description.toString().replace(/,/g, " ");
       this.wordCount();
     }
   }

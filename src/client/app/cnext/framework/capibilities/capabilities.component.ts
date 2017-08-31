@@ -1,10 +1,11 @@
 import {Component, EventEmitter, Input, Output} from "@angular/core";
 import {Role} from "../model/role";
 import {Capability} from "../model/capability";
-import {ImagePath, LocalStorage, Messages, Tooltip, ValueConstant} from "../../../framework/shared/constants";
+import {Headings, ImagePath, LocalStorage, Messages, Tooltip, ValueConstant} from "../../../framework/shared/constants";
 import {Section} from "../model/candidate";
 import {LocalStorageService} from "../../../framework/shared/localstorage.service";
 import {GuidedTourService} from "../guided-tour.service";
+import {ErrorService} from "../error.service";
 
 @Component({
   moduleId: module.id,
@@ -19,6 +20,9 @@ export class CapabilitiesComponent {
     @Input() candidateRoles: Role[] = [];
   @Output() onComplete = new EventEmitter();
   @Input() highlightedSection: Section;
+  candidateCapabilityMessage:string = Headings.CAPABILITIES_FOR_CANDIDATE;
+  recruiterCapabilityMessage:string = Headings.CAPABILITIES_FOR_RECRUITER;
+  gotItMessage:string = Headings.GOT_IT;
   private savedselectedRoles:Role[]= new Array(0);
   private showButton: boolean = true;
   private primaryNames: string[] = new Array(0);
@@ -40,19 +44,17 @@ export class CapabilitiesComponent {
   tooltipCandidateMessage: string =
 
     '<ul>' +
-    '<li>' +
-    '<p>1. '+ Tooltip.CANDIDATE_CAPABILITY_TOOLTIP_1 +'</p></li><li><p>2. '+Tooltip.CANDIDATE_CAPABILITY_TOOLTIP_2+'</p>'+'</li>' +
+    '<li><p>1. ' + Tooltip.CANDIDATE_CAPABILITY_TOOLTIP_1 + '</p></li>' +
+    '<li><p>2. ' + Tooltip.CANDIDATE_CAPABILITY_TOOLTIP_2 + '</p>' + '</li>' +
     '</ul>';
 
   tooltipRecruiterMessage: string =
 
     '<ul>' +
-    '<li>' +
-    '<p>1.'+ Tooltip.RECRUITER_CAPABILITY_TOOLTIP +'</p>' +
-    '</li>' +
+    '<li><p>1. ' + Tooltip.RECRUITER_CAPABILITY_TOOLTIP + '</p></li>' +
     '</ul>';
 
-  constructor(private guidedTourService:GuidedTourService) {
+  constructor(private guidedTourService:GuidedTourService, private errorService:ErrorService) {
 
   }
 
@@ -151,7 +153,15 @@ export class CapabilitiesComponent {
   }
   onGotItGuideTour() {
     this.guidedTourStatus = this.guidedTourService.updateTourStatus(ImagePath.CANDIDATE_OERLAY_SCREENS_COMPLEXITIES,true);
-    this.isGuidedTourImgRequire()
+    this.guidedTourStatus = this.guidedTourService.getTourStatus();
+    this.guidedTourService.updateProfileField(this.guidedTourStatus)
+      .subscribe(
+        (res:any) => {
+          LocalStorageService.setLocalValue(LocalStorage.GUIDED_TOUR, JSON.stringify(res.data.guide_tour));
+          this.isGuidedTourImgRequire()
+        },
+        error => this.errorService.onError(error)
+      );
   }
 
   onNextAction() {

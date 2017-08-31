@@ -3,7 +3,7 @@ import {ValuePortraitContainerComponent} from "./index";
 
 export const ValuePortrait: Route[] = [
   {
-    path: 'value-portrait',
+    path: 'value-portrait/:id',
     component: ValuePortraitContainerComponent
   }
 ];

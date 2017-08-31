@@ -3,7 +3,7 @@ import {Industry} from "../model/industry";
 import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
 import {Section} from "../model/candidate";
 import {LocalStorageService} from "../../../framework/shared/localstorage.service";
-import {LocalStorage, Messages, Tooltip} from "../../../framework/shared/constants";
+import {LocalStorage, Messages, Tooltip, Headings} from "../../../framework/shared/constants";
 import {IndustryDetailsService} from "../industry-detail-service";
 import {ErrorService} from "../error.service";
 
@@ -18,6 +18,8 @@ export class IndustryListComponent implements OnChanges {
   @Input() selectedIndustry: Industry = new Industry();
   @Input() highlightedSection: Section;
   @Output() valueChange = new EventEmitter();
+  industryForCandidateHeading:string = Headings.INDUSTRY_FOR_CANDIDATE;
+  industryForRecruiterHeading:string = Headings.INDUSTRY_FOR_RECRUITER;
   private isCandidate: boolean = false;
     private disableButton: boolean = true;
     private showButton: boolean = true;

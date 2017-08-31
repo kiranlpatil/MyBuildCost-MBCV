@@ -84,7 +84,7 @@ export class QCardviewComponent implements OnChanges {
         candidate = item;
         isFound = true;
       }
-    })
+    });
     if (!isFound) {
       this.candidateQlist.appliedCandidates.forEach(item=> {
         if (data.id == item._id) {
@@ -132,7 +132,9 @@ export class QCardviewComponent implements OnChanges {
           }
         }
         if(!isFound) {
-          this.candidateQlist.matchedCandidates.push(candidate);
+          if (candidate.isVisible == undefined || candidate.isVisible) {
+            this.candidateQlist.matchedCandidates.push(candidate);
+          }
         }
         break;
       case ValueConstant.CART_LISTED_CANDIDATE :
@@ -144,7 +146,9 @@ export class QCardviewComponent implements OnChanges {
           }
         }
         if(!isFound) {
-          this.candidateQlist.matchedCandidates.push(candidate);
+          if (candidate.isVisible == undefined || candidate.isVisible) {
+            this.candidateQlist.matchedCandidates.push(candidate);
+          }
         }
         break;
       case ValueConstant.SHORT_LISTED_CANDIDATE :
@@ -163,7 +167,12 @@ export class QCardviewComponent implements OnChanges {
         }
       );
     } else if (action === 'remove') {
-      this.recuirterListCountModel.numberOfMatchedCandidates++;
+      if ((candidate.isVisible == undefined || !candidate.isVisible) && (destinationListName === 'cartListed' ||
+        destinationListName === 'rejectedList')) {
+
+      } else {
+        this.recuirterListCountModel.numberOfMatchedCandidates++;
+      }
     }
     this.qCardViewService.updateCandidateLists(this.jobId, candidate._id, destinationListName, action).subscribe(
       data => {
@@ -187,15 +196,40 @@ export class QCardviewComponent implements OnChanges {
       this.isAlreadyPresentInCart = false;
     }
 
-    if (destinationListName === ValueConstant.CART_LISTED_CANDIDATE && sourceListName === ValueConstant.APPLIED_CANDIDATE)
-      this.candidateQlist.cartCandidates.push(candidate);
+    if (destinationListName === ValueConstant.CART_LISTED_CANDIDATE && sourceListName === ValueConstant.APPLIED_CANDIDATE) {
+      isFound=false;
+      for(let item of this.candidateQlist.cartCandidates){
+        if(item._id === candidate._id) {
+          isFound=true;
+        }
+      }
+      if(!isFound) {
+        this.candidateQlist.cartCandidates.push(candidate);
+      }
+    }
+
+    if (destinationListName === ValueConstant.REJECTED_LISTED_CANDIDATE && sourceListName === ValueConstant.APPLIED_CANDIDATE) {
+      isFound=false;
+      for(let item of this.candidateQlist.rejectedCandidates) {
+        if(item._id === candidate._id) {
+          isFound=true;
+        }
+      }
+      if(!isFound) {
+        this.candidateQlist.rejectedCandidates.push(candidate);
+      }
+    }
 
     if (sourceListName === ValueConstant.CART_LISTED_CANDIDATE && (destinationListName === ValueConstant.CART_LISTED_CANDIDATE || destinationListName === ValueConstant.REJECTED_LISTED_CANDIDATE))
       this.addedTocart.emit(false);
     if(destinationListName==='cartListed'&& action==='add') {this.displayMsg('cartListed',candidate);}
     if(destinationListName==='rejectedList'&& action==='add') {this.displayMsg('rejectedList',candidate);}
-    if(destinationListName==='cartListed'&& action==='remove') {this.displayMsg('removedcartListed',candidate);}
-    if(destinationListName==='rejectedList'&& action==='remove') {this.displayMsg('removedrejectedList',candidate);}
+    if (destinationListName === 'cartListed' && action === 'remove' && (candidate.isVisible == undefined || candidate.isVisible)) {
+      this.displayMsg('removedcartListed', candidate);
+    }
+    if (destinationListName === 'rejectedList' && action === 'remove' && (candidate.isVisible == undefined || candidate.isVisible)) {
+      this.displayMsg('removedrejectedList', candidate);
+    }
 
   }
   displayMsg(condition:string,candidate: CandidateQCard) {

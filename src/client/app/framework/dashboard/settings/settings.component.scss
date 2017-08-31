@@ -1,6 +1,9 @@
 @import '../../../../css/common';
 
 .settings {
+  text-align: left;
+  width: 25%;
+  margin: 100px auto 0;
 
   h4 {
     border-bottom: $border-color 1px solid;
@@ -9,6 +12,10 @@
     span {
       margin-right: 15px;
     }
+  }
+
+  ul {
+    padding: 0;
   }
 
   li {
@@ -46,10 +53,15 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1280px) {
   .settings {
-    padding-left: 0;
-    padding-right: 0;
+    width: 40%;
+  }
+}
+
+@media (max-width: 980px) {
+  .settings {
+    width: 70%;
 
     .password-heading {
       margin-top: 15px;
@@ -61,9 +73,15 @@
   }
 }
 
+@media (max-width: 767px) {
+  .settings {
+    width: 100%;
+    margin-top: 50px;
+  }
+}
+
 @media (max-width: 420px) {
   .settings {
-
     label {
       width: 100%;
     }

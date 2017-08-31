@@ -136,14 +136,10 @@
 
   .edit-job-notification {
     display: block;
-    width: 0;
-    height: 0;
-    border-style: solid;
-    border-width: 0 12px 12px 0;
-    border-color: transparent $theme-color transparent transparent;
+    bottom: 14px;
+    color: $theme-color;
     position: absolute;
-    right: -1px;
-    top: -1px;
+    right: 10px;
     z-index: 10;
   }
 
@@ -152,6 +148,10 @@
       display: block;
     }
   }
+}
+
+.hiring-manager {
+  width: calc(100% - 65px) !important;
 }
 
 @media only screen and (min-width: 1367px) {

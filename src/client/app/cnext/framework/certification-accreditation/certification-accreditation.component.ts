@@ -2,7 +2,7 @@ import {Component, ElementRef, EventEmitter, Input, Output, ViewChild} from "@an
 import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
 import {Candidate, Section} from "../model/candidate";
 import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {Tooltip} from "../../../framework/shared/constants";
+import {Tooltip, Headings} from "../../../framework/shared/constants";
 import {ErrorService} from "../error.service";
 
 @Component({
@@ -21,6 +21,7 @@ export class CertificationAccreditationComponent {
   @ViewChild('certificationInnerDiv') innerContainer: ElementRef;
   isScrollActive: boolean = false;
   temp: number = 20;
+  certificateAccrediation: string= Headings.CERTIFICATE_ACCREDITATION;
 
   tooltipMessage: string = '<ul><li><p>1. '+Tooltip.CERTIFICATE_TOOLTIP+'</p></li></ul>';
 

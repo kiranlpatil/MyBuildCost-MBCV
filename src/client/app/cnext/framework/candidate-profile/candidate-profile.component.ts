@@ -1,15 +1,15 @@
-import {Component, DoCheck, KeyValueDiffers, OnInit} from "@angular/core";
-import {NavigationRoutes, Tooltip} from "../../../framework/shared/constants";
+import {Component, DoCheck, KeyValueDiffers, OnDestroy, OnInit} from "@angular/core";
+import {LocalStorage,NavigationRoutes, Tooltip, Messages} from "../../../framework/shared/constants";
 import {Router} from "@angular/router";
 import {ComplexityService} from "../complexity.service";
 import {Candidate, Section} from "../model/candidate";
 import {CandidateProfileService} from "./candidate-profile.service";
 import {Role} from "../model/role";
 import {Industry} from "../model/industry";
-import {TooltipComponent} from "../tool-tip-component/tool-tip-component";
 import {Message} from "../../../framework/shared/message";
 import {MessageService} from "../../../framework/shared/message.service";
 import {ErrorService} from "../error.service";
+import {LocalStorageService} from "../../../framework/shared/localstorage.service";
 
 @Component({
   moduleId: module.id,
@@ -18,8 +18,10 @@ import {ErrorService} from "../error.service";
   styleUrls: ['candidate-profile.component.css']
 })
 
-export class CandidateProfileComponent implements OnInit, DoCheck {
+export class CandidateProfileComponent implements OnInit, DoCheck, OnDestroy {
   whichStepsVisible: boolean[] = new Array(7);
+  jobSearchForFirstTimeMessage:string = Messages.MSG_READY_FOR_JOB_SEARCH_FOR_FIRST_TIME;
+  jobSearchMessage:string = Messages.MSG_READY_FOR_JOB_SEARCH;
   private rolesForMain: Role[] = new Array(0);
   private rolesForCapability: Role[] = new Array(0);
   private rolesForComplexity: Role[] = new Array(0);
@@ -83,6 +85,13 @@ export class CandidateProfileComponent implements OnInit, DoCheck {
     let changes: any = this.differ.diff(this.highlightedSection);
 
     if (changes) {
+      if (this.highlightedSection.name === 'None' || this.highlightedSection.name === 'none') {
+        document.body.className = document.body.className.replace('body-wrapper', '');
+      } else {
+        var bodyclass = document.createAttribute('class');
+        bodyclass.value = 'body-wrapper';
+        document.getElementsByTagName('body')[0].setAttributeNode(bodyclass);
+      }
       if (this.highlightedSection.name === 'Work-Area') {
         this.getRoles();
         return;
@@ -94,6 +103,10 @@ export class CandidateProfileComponent implements OnInit, DoCheck {
         return;
       }
     }
+  }
+
+  ngOnDestroy() {
+    document.body.className = document.body.className.replace('body-wrapper', '');
   }
 
   onSkip() {
@@ -115,7 +128,8 @@ export class CandidateProfileComponent implements OnInit, DoCheck {
     }
   }
 
-  onError(error: any) {debugger
+  onError(error: any) {
+    debugger;
     console.log(error);
     var message = new Message();
     message.error_msg = error.err_msg;
@@ -467,6 +481,7 @@ export class CandidateProfileComponent implements OnInit, DoCheck {
 
 
   showHideModal() {
+    LocalStorageService.setLocalValue(LocalStorage.IS_CANDIDATE_FILLED, true);
     this.showModalStyle = !this.showModalStyle;
     this.setTimeoutId = setTimeout(() => {
       this.onSubmit();

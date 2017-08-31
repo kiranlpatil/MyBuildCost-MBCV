@@ -1,0 +1,92 @@
+@import '../../../../../css/variables';
+@import '../../../../../css/c-next/theme/cn-theme';
+
+.list-container {
+  text-align: left;
+  margin-top: 190px;
+
+  .header {
+    padding: 5px 15px;
+    background: #edf1f5;
+    position: fixed;
+    width: 100%;
+    top: 142px;
+    text-align: right;
+
+    a{
+      i{
+        font-size: 22px;
+        margin-right: 10px;
+      }
+    }
+  }
+
+  .list-view {
+    top: 190px !important;
+    padding: 0 15px;
+
+    .list-header {
+      background: $theme-color;
+
+      li > h5 {
+        color: #fff;
+        font-weight: 900;
+        font-size: 16px;
+        margin: 0;
+      }
+    }
+
+    ul {
+      width: 100%;
+      float: left;
+      border-bottom: 1px solid $border-color;
+    }
+
+    ul > li {
+      width: 14.2%;
+      padding: 5px 10px;
+
+    }
+
+    ul > li > p {
+      overflow: auto !important;
+      text-overflow: clip !important;
+      white-space: pre-wrap !important;
+      width: 100%;
+    }
+  }
+}
+
+
+.completed{
+  background: #14892c;
+  border-radius: 3px;
+  padding: 3px 5px;
+  color: white;
+
+}
+
+.incomplete{
+  background: #e3695f;
+  border-radius: 3px;
+  padding: 3px 5px;
+  color: white;
+
+}
+.partial{
+  background: #f6c342;
+  border-radius: 3px;
+  padding: 3px 5px;
+  color: white;
+
+}
+
+.btn-custom{
+  padding: 0px 5px !important;
+  height: auto;
+  width: 88px;
+  border-radius: 5px;
+  box-shadow: 2px 2px 5px 1px #a09c9c;
+}
+
+

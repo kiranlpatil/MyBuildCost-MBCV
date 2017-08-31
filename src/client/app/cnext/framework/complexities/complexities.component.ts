@@ -2,7 +2,7 @@ import {Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, V
 import {Role} from "../model/role";
 import {ComplexityService} from "../complexity.service";
 import {LocalStorageService} from "../../../framework/shared/localstorage.service";
-import {LocalStorage, Messages, Tooltip, ValueConstant, ImagePath} from "../../../framework/shared/constants";
+import {LocalStorage, Messages, Tooltip, ValueConstant, ImagePath, Headings} from "../../../framework/shared/constants";
 import {Section} from "../model/candidate";
 import {ComplexityDetails} from "../model/complexity-detail";
 import {ComplexityComponentService} from "./complexity.service";
@@ -26,6 +26,8 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
   @Input() highlightedSection: Section;
   @Input() isComplexityPresent: boolean = true;
 
+  gotItMessage: string= Headings.GOT_IT;
+  capabilitiesHeading: string= Headings.CAPABITITIES_HEADING;
   private complexityIds: string[] = [];
   //private duplicateComplexityIds: string[] = [];
   private complexityList: any[] = new Array(0);
@@ -223,7 +225,7 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
   }
 
   oncurrentComplexityAnswered(complexityDetails: ComplexityDetails) {
-
+    this.isValid=true;
     this.complexities[complexityDetails.code] = complexityDetails.userChoice;
     this.onComplextyAnswered.emit(this.complexities);
   }
@@ -313,7 +315,16 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
 
   onGotItGuideTour() {
     this.guidedTourStatus = this.guidedTourService.updateTourStatus(ImagePath.CANDIDATE_OERLAY_SCREENS_KEY_SKILLS,true);
-    this.isGuidedTourImgRequire();
+    this.guidedTourStatus = this.guidedTourService.getTourStatus();
+    this.guidedTourService.updateProfileField(this.guidedTourStatus)
+      .subscribe(
+        (res:any) => {
+          LocalStorageService.setLocalValue(LocalStorage.GUIDED_TOUR, JSON.stringify(res.data.guide_tour));
+          this.isGuidedTourImgRequire()
+        },
+        error => this.errorService.onError(error)
+      );
+
   }
 
   onPrevious() {
@@ -340,11 +351,10 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
   onDone() {
       let _body: any = document.getElementsByTagName('BODY')[0];
       _body.scrollTop = -1;
-    this.saveComplexity();
     if (this.isCandidate) {
-      this.saveComplexity();
+      this.onSaveComplexity();
     } else {
-      this.saveComplexity();
+      this.onSaveComplexity();
       this.highlightedSection.name = 'None';
     }
     this.singleComplexity = false;

@@ -41,11 +41,22 @@ export class ActivateUserComponent implements OnInit {
     this.token = this.token.substring(this.token.length - 29, 0);
     LocalStorageService.setLocalValue(LocalStorage.ACCESS_TOKEN, this.token);
     LocalStorageService.setLocalValue(LocalStorage.USER_ID, this.id);
+    /*this.activeService.getUser()
+      .subscribe(
+        res => (this.activateUser(res)),
+        error => (this.newRegistrationFail(error))
+      );*/
     this.activeService.activeUser()
       .subscribe(
         res => (this.newRegistrationSuccess(res)),
         error => (this.newRegistrationFail(error)));
   }
+  /*activateUser(user:any) { debugger
+    this.activeService.activeUser()
+      .subscribe(
+        res => (this.newRegistrationSuccess(res)),
+        error => (this.newRegistrationFail(error)));
+  }*/
 
   newRegistrationSuccess(res: any) {
     this.USER_ACTIVATION_STATUS = Messages.MSG_SUCCESS_MAIL_VERIFICATION_RESULT_STATUS;

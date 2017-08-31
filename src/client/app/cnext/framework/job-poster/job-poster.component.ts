@@ -7,7 +7,7 @@ import {Message} from "../../../framework/shared/message";
 import {MessageService} from "../../../framework/shared/message.service";
 import {Proficiences} from "../model/proficiency";
 import {Section} from "../model/candidate";
-import {LocalStorage} from "../../../framework/shared/constants";
+import {LocalStorage, Messages} from "../../../framework/shared/constants";
 import {LocalStorageService} from "../../../framework/shared/localstorage.service";
 import {ShowQcardviewService} from "../showQCard.service";
 import {Router} from "@angular/router";
@@ -28,6 +28,7 @@ export class JobPosterComponent implements OnInit, OnChanges {
   @Input() currentjobId: string;
   @Input() recruiter: RecruiterDashboard;
 
+  jobPostMessage:string = Messages.MSG_JOB_POST;
   private roleList: string[] = new Array(0);
   private primaryCapability: string[] = new Array(0);
   private proficiencies: Proficiences = new Proficiences();

@@ -1,5 +1,5 @@
 <div class="guided-tour-section"
-     *ngIf="guidedTourStatus.indexOf(guidedTourImgOverlayScreensStackView) == -1 && isCandidate"
+     *ngIf="guidedTourStatus?.indexOf(guidedTourImgOverlayScreensStackView) == -1 && isCandidate"
      style="top: -43px;height: 110%;">
   <img src={{guidedTourImgOverlayScreensStackViewPath}} alt="Profile Picture">
   <div class="got-it-btn" (click)="onGotItGuideTour()">
@@ -16,7 +16,7 @@
     <div class="job-info-labal pull-left">
       <div class="user-job-label">
         <label>Compatibility check for</label>
-        <span *ngIf="recruiter.postedJobs[0]">{{recruiter.postedJobs[0].jobTitle}}</span>
+        <span *ngIf="recruiter.postedJobs[0]">{{recruiter.postedJobs[0].jobTitle}}</span> -
         <label>Job Profile</label>
         <label *ngIf="!recruiter.postedJobs[0].hideCompanyName">at</label>
         <span *ngIf="!recruiter.postedJobs[0].hideCompanyName" class="company-name">{{recruiter.company_name}}</span>
@@ -35,7 +35,6 @@
         <span class="name">{{candidateDetails.first_name}} {{candidateDetails.last_name}}</span>
         <label>with</label>
         <span class="jobTitle-name">{{candidate.jobTitle}}</span>
-        <label>Job Profile</label>
       </div>
     </div>
 
@@ -149,41 +148,41 @@
                   <label [class.exact]="data.educationMatch=='exact'" [class.above]="data.educationMatch=='above'"
                          [class.below]="data.educationMatch=='below'"
                          [class.missing]="data.educationMatch=='missing'">
-                    <strong class="pull-left">Education</strong>
+                    <strong class="title-name pull-left">Education</strong>
                     <img class="exact-img" src="assets/framework/images/dashboard/right-tick.svg"/>
                     <div class="info-description">
                       <img class="missing-img" src="assets/framework/images/dashboard/info-red.svg"/>
                       <div class="info-hover-section">
-                        Job Education Required {{recruiter.postedJobs[0].education}}
-                        {{candidateDetails.first_name}} Education {{candidate.professionalDetails.education}}
+                        Job Education Required {{recruiter.postedJobs[0].education}}<br/>
+                        {{candidateDetails.first_name}}'s Education {{candidate.professionalDetails.education}}
                       </div>
                     </div>
                   </label>
                   <span>{{postedJob.education}}</span>
                   <label [class.exact]="data.experienceMatch=='exact'" [class.above]="data.experienceMatch=='above'"
                          [class.below]="data.experienceMatch=='below'" [class.missing]="data.experienceMatch=='missing'">
-                    <strong class="pull-left"> Experience Band</strong>
+                    <strong class="title-name pull-left"> Experience Band <b class="small-label">(In Years)</b></strong>
                     <img class="exact-img" src="assets/framework/images/dashboard/right-tick.svg"/>
                     <div class="info-description">
                       <img class="missing-img" src="assets/framework/images/dashboard/info-red.svg"/>
                       <div class="info-hover-section">
                         Job Experience Band {{recruiter.postedJobs[0].experienceMinValue}} -
-                        {{recruiter.postedJobs[0].experienceMaxValue}}
-                        {{candidateDetails.first_name}} Experience {{candidate.professionalDetails.currentSalary}}
+                        {{recruiter.postedJobs[0].experienceMaxValue}}<br/>
+                        {{candidateDetails.first_name}}'s Experience {{candidate.professionalDetails.experience}}
                       </div>
                     </div>
                   </label>
                   <span>{{postedJob.experienceMinValue}} - {{postedJob.experienceMaxValue}}</span>
                   <label [class.exact]="data.salaryMatch=='exact'" [class.above]="data.salaryMatch=='above'"
                          [class.below]="data.salaryMatch=='below'" [class.missing]="data.salaryMatch=='missing'">
-                    <strong class="pull-left"> Salary Band </strong>
+                    <strong class="title-name pull-left"> Salary Band <b class="small-label">(In Lacs)</b></strong>
                     <img class="exact-img" src="assets/framework/images/dashboard/right-tick.svg"/>
                     <div class="info-description">
                       <img class="missing-img" src="assets/framework/images/dashboard/info-red.svg"/>
                       <div class="info-hover-section">
                         Job Salary Band {{recruiter.postedJobs[0].salaryMinValue}} -
-                        {{recruiter.postedJobs[0].salaryMaxValue}}
-                        {{candidateDetails.first_name}} Salary {{candidate.professionalDetails.currentSalary}}
+                        {{recruiter.postedJobs[0].salaryMaxValue}}<br/>
+                        {{candidateDetails.first_name}}'s Salary {{candidate.professionalDetails.currentSalary}}
                       </div>
                     </div>
                   </label>

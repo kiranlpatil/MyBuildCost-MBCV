@@ -5,6 +5,7 @@ import {CandidateProfileService} from '../../../candidate-profile/candidate-prof
 import {ComplexityComponentService} from '../../../complexities/complexity.service';
 import {JobCompareService} from '../../../single-page-compare-view/job-compare-view/job-compare-view.service';
 import {ErrorService} from "../../../error.service";
+import {Headings} from "../../../../../framework/shared/constants";
 
 
 @Component({
@@ -15,8 +16,11 @@ import {ErrorService} from "../../../error.service";
 
 })
 
-export class CandidateViewComponent implements OnChanges{
+export class CandidateViewComponent implements OnChanges {
   @Input() candidateId: string;
+  keySkillsHeading:string=Headings.KEY_SKILLS;
+  supplimentaryCapabilitiesHeading:string=Headings.SUPPLIMENTARY_CAPABILITIES;
+  additionalInformationHeading:string=Headings.ADDITIONAL_INFORMATION_TEXT;
   private candidateDetails: CandidateDetail = new CandidateDetail();
   private candidate: Candidate = new Candidate();
   private secondaryCapabilities: string[] = new Array();

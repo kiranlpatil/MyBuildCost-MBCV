@@ -310,4 +310,10 @@ $overlay: rgba(0, 0, 0, .4);
       visibility: visible;
     }
   }
+
+  .navbar-left {
+    z-index: 1001;
+    left: inherit;
+    right: 15px;
+  }
 }

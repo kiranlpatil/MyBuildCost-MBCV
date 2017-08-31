@@ -1,9 +1,8 @@
-import * as gulp from 'gulp';
-import * as util from 'gulp-util';
-import * as runSequence from 'run-sequence';
-
-import Config from './tools/config';
-import { loadTasks } from './tools/utils';
+import * as gulp from "gulp";
+import * as util from "gulp-util";
+import * as runSequence from "run-sequence";
+import Config from "./tools/config";
+import {loadTasks} from "./tools/utils";
 
 
 loadTasks(Config.SEED_TASKS_DIR);
@@ -61,6 +60,8 @@ gulp.task('build.prod', (done: any) =>
               'minify.bundles',
               'build.index.prod',
               'copy.server.assets',
+    //'build.config.copy.prod',
+    //'build-root-json.copy.prod',
               done));
 
 // --------------
