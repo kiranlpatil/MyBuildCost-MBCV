@@ -70,7 +70,7 @@ class AdminService {
 
           var recruiterService = new RecruiterService();
           let data = {
-            'userId': new mongoose.Types.ObjectId(item[i]._id);
+            'userId': new mongoose.Types.ObjectId(item[i]._id)
         }
           ;
           recruiterService.retrieve(data, (error:any, result:Recruiter[]) => {
