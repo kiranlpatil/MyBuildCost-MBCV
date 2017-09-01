@@ -29,6 +29,7 @@ $blue-shadow: rgba(102, 175, 233, .6);
 $body-bg: #edf1f5;
 $required-field: #e82c0c;
 $optional-field: #29b6f6;
+$btn-focus: #009de4;
 
 .btn-logout {
   margin-top: 15px;
@@ -106,7 +107,7 @@ $optional-field: #29b6f6;
   padding: 6px 12px 6px 0;
   background-color: transparent;
   border: 1px solid transparent;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid $border-grey;
   border-radius: 4px;
   font-weight: bold;
 }
@@ -249,7 +250,7 @@ select,
   &:focus,
   &:active {
     border: 1px solid $white;
-    border-bottom: 1px solid $theme-color;
+    border-bottom: 2px solid $theme-color;
     //box-shadow: inset 0 1px 1px $gray-shadow, 0 0 8px $blue-shadow;
     outline: 0;
   }
@@ -339,11 +340,8 @@ select,
   text-transform: uppercase;
 
   &:focus,
-  &:active,
-  &:hover {
-    box-shadow: 0 0 1px 0 #fff inset, 0 0 1px 0 #fff;
-    outline: none;
-    border: 0;
+  &:active {
+    background: $btn-focus !important;
   }
 }
 
@@ -747,12 +745,6 @@ control-messages {
 
 .small-label {
   font-size: 11px;
-}
-
-.btn:focus {
-  box-shadow: inset 0 0 0 1px #fff;
-  border: 1px solid #fff;
-  outline: rgba(0, 0, 0, 0) 0;
 }
 
 // Media Queries

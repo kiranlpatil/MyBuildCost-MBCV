@@ -87,7 +87,6 @@ export class SettingsComponent implements OnInit, OnDestroy {
         this.candidate = candidateData.data[0];
         this.candidate.basicInformation = candidateData.metadata;
         this.candidate.summary = new Summary();
-        console.log(this.candidate);
     }
 
     getRecruiter() {

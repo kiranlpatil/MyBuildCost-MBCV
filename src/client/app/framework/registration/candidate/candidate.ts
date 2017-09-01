@@ -2,6 +2,8 @@ import {Location} from "../location";
 export class CandidateDetail {
   _id:any;
   isCandidate: boolean;
+  isActivated: boolean;
+  isAdmin: boolean;
   first_name: string = '';
   last_name: string = '';
   birth_year: number;

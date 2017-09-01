@@ -19,6 +19,7 @@ interface CandidateModel {
   jobTitle: string;
   isVisible: boolean;
   isSubmitted: boolean;
+  isCompleted:boolean;
   aboutMyself: string;
   certifications: CertificationModel[];
   awards: AwardModel[];

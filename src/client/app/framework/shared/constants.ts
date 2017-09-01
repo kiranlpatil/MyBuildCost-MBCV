@@ -209,6 +209,7 @@ export class NavigationRoutes {
   public static APP_FORGOTPASSWORD: string = '/forgotpassword';
   public static APP_DASHBOARD: string = '/dashboard';
   public static APP_CANDIDATE_DASHBOARD: string = '/candidate_dashboard';
+  public static APP_ADMIN_DASHBOARD: string = '/admin_dashboard';
   public static APP_RECRUITER_DASHBOARD: string = '/recruiterdashboard';
   public static APP_LOGIN: string = '/signin';
   public static APP_START: string = '/';
@@ -229,6 +230,7 @@ export class LocalStorage {
   public static IS_THEME_SELECTED = 'is_theme_selected';
   public static IS_SOCIAL_LOGIN = 'is_social_login';
   public static PROFILE_PICTURE = 'profile_picture';
+  public static ISADMIN = 'is_admin';
   public static IS_LOGGED_IN = 'is_user_logged_in';
   public static USER_ID = 'user_id';
   public static END_USER_ID = 'end_user_id';
@@ -282,6 +284,7 @@ export class API {
   public static NOTIFICATION = 'notification';
   public static SEND_MAIL = 'sendmail';
   public static USER_PROFILE = 'users';
+  public static ALL_USER_PROFILE = 'alluser';
   public static CANDIDATE_PROFILE = 'candidate';
   public static CANDIDATE_DETAIL_PROFILE = 'candidateDetails';
   public static RECRUITER_PROFILE = 'recruiter';

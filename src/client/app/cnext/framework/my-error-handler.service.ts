@@ -7,7 +7,6 @@ export class LoggerService {
   constructor(private messageService: MessageService){}
 
   log(error:any) {
-    console.log('Logger', error);
     var message = new Message();
     message.error_msg = error.message;
     message.isError = true;

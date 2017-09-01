@@ -33,7 +33,7 @@
                 <p>{{selectedJobProfile.industry.name}}</p>
               </li>
               <li *ngIf="isRecruitingForSelf" class="contact-info"
-                  title="Hiring Manager: {selectedJobProfile.hiringManager}}">
+                  title="Hiring Manager: {{selectedJobProfile.hiringManager}}">
                 <label>Hiring Manager</label>
                 <p>{{selectedJobProfile.hiringManager}}</p>
               </li>

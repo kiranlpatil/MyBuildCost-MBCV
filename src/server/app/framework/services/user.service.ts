@@ -13,6 +13,7 @@ import AuthInterceptor = require("../../framework/interceptor/auth.interceptor")
 import ProjectAsset = require("../shared/projectasset");
 import MailAttachments = require("../shared/sharedarray");
 import RecruiterRepository = require("../dataaccess/repository/recruiter.repository");
+import UsersClassModel = require("../dataaccess/model/users");
 
 class UserService {
   private userRepository: UserRepository;
@@ -313,6 +314,15 @@ class UserService {
   retrieve(field: any, callback: (error: any, result: any) => void) {
     this.userRepository.retrieveWithoutLean(field, callback);
   }
+  retrieveAll(item: any, callback: (error: any, result: any) => void) {
+    this.userRepository.retrieve(item, (err, res) => {
+      if (err) {
+        callback(new Error(Messages.MSG_ERROR_REGISTRATION_MOBILE_NUMBER), null);
+      } else  {
+        callback(null, res);
+      }
+    });
+  };
 
   update(_id: string, item: any, callback: (error: any, result: any) => void) {
 
