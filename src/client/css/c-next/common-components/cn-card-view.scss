@@ -482,7 +482,8 @@ header {
 }
 
 #applied,
-#applied-job {
+#applied-job,
+.inAppliedClass {
   .icons-section {
     .industry {
       background: url(../assets/c-next/card-view/sprite.png) no-repeat -57px -8px;
@@ -535,7 +536,8 @@ header {
     }
   }
   .card-view,
-  .dashboard-view h6 {
+  .dashboard-view h6,
+  .panel h6 {
     color: $orange;
     .canvas-container {
       color: $orange;
@@ -568,10 +570,15 @@ header {
       border: 1px solid $orange;
     }
   }
+  .canvas-container,
+  .canvas-container p {
+    color: $orange;
+  }
 }
 
 #rejected,
-#rejected-job {
+#rejected-job,
+.inRejectClass {
   .icons-section {
     .industry {
       background: url("../assets/c-next/card-view/pink-icons/industry.png") no-repeat 3px 1px;
@@ -620,7 +627,8 @@ header {
     }
   }
   .card-view,
-  .dashboard-view h6 {
+  .dashboard-view h6,
+  .panel h6 {
     color: $pink;
     .canvas-container {
       color: $pink;
@@ -651,9 +659,14 @@ header {
       border: 1px solid $pink;
     }
   }
+  .canvas-container,
+  .canvas-container p {
+    color: $pink;
+  }
 }
 
-#cart-job {
+#cart-job,
+.inCartClass {
   .icons-section {
     .industry {
       background: url("../assets/c-next/card-view/purple-icons/industry.png") no-repeat 3px 8px;
@@ -679,9 +692,24 @@ header {
       position: absolute;
       left: 0;
     }
+    .education {
+      background: url(../assets/c-next/card-view/sprite.png) no-repeat -149px -167px;
+      width: 30px !important;
+      height: 30px;
+      position: absolute;
+      left: 0;
+    }
+    .company-size {
+      background: url(../assets/c-next/card-view/sprite.png) no-repeat -149px -114px;
+      width: 30px !important;
+      height: 30px;
+      position: absolute;
+      left: 0;
+    }
   }
   .card-view,
-  .dashboard-view h6 {
+  .dashboard-view h6,
+  .panel h6 {
     color: $purple;
     .canvas-container {
       color: $purple;
@@ -708,6 +736,10 @@ header {
       background: $purple;
       border: 1px solid $purple;
     }
+  }
+  .canvas-container,
+  .canvas-container p {
+    color: $purple;
   }
 }
 

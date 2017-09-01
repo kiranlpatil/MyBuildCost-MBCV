@@ -195,6 +195,7 @@ import {CandidateDetailListComponent} from "./cnext/framework/admin-dashboard/ca
 import {KeyskillsDetailListComponent} from "./cnext/framework/admin-dashboard/keyskills-detail-list/keyskills-detail-list.component";
 import {AdminDashboardService} from "./cnext/framework/admin-dashboard/admin-dashboard.service";
 
+import {SharedService} from "./framework/shared/shared-service";
 import {CandidateSearchComponent} from "./cnext/framework/candidate-search/candidate-search.component";
 import {CandidateSearchService} from "./cnext/framework/candidate-search/candidate-search.service";
 //C-NEXT IMPORTS
@@ -417,7 +418,8 @@ import {CandidateSearchService} from "./cnext/framework/candidate-search/candida
     ReleventIndustryListService,
     ProfileComparisonService,
     GuidedTourService,
-    CandidateSearchService
+    CandidateSearchService,
+    SharedService
 
   ],
   bootstrap: [AppComponent]

@@ -57,7 +57,7 @@ export class SearchController {
       if (error) {
         res.status(304).send(error);
       } else {
-        candidateSearchService.searchMatchingJobProfile(candiRes, recruiterId, (error:Error, result:any) => {
+        candidateSearchService.searchMatchingJobProfile(candiRes, recruiterId, 'searchView', (error:Error, result:any) => {
           if (error) {
             res.status(304).send(error);
           } else {

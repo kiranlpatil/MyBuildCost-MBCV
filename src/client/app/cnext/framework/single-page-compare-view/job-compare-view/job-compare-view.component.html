@@ -159,7 +159,10 @@
                     </div>
                   </label>
                   <span>{{postedJob.education}}</span>
-                  <label [class.exact]="data.experienceMatch=='exact'" [class.above]="data.experienceMatch=='above'"
+
+                  <label
+                    *ngIf="recruiter.postedJobs[0].experienceMinValue != recruiter.postedJobs[0].experienceMaxValue"
+                    [class.exact]="data.experienceMatch=='exact'" [class.above]="data.experienceMatch=='above'"
                          [class.below]="data.experienceMatch=='below'" [class.missing]="data.experienceMatch=='missing'">
                     <strong class="title-name pull-left"> Experience Band <b class="small-label">(In Years)</b></strong>
                     <img class="exact-img" src="assets/framework/images/dashboard/right-tick.svg"/>
@@ -172,8 +175,29 @@
                       </div>
                     </div>
                   </label>
-                  <span>{{postedJob.experienceMinValue}} - {{postedJob.experienceMaxValue}}</span>
-                  <label [class.exact]="data.salaryMatch=='exact'" [class.above]="data.salaryMatch=='above'"
+                  <span
+                    *ngIf="recruiter.postedJobs[0].experienceMinValue != recruiter.postedJobs[0].experienceMaxValue">{{postedJob.experienceMinValue}} - {{postedJob.experienceMaxValue}}</span>
+
+
+                  <label
+                    *ngIf="recruiter.postedJobs[0].experienceMinValue == recruiter.postedJobs[0].experienceMaxValue"
+                    [class.exact]="data.experienceMatch=='exact'" [class.above]="data.experienceMatch=='above'"
+                    [class.below]="data.experienceMatch=='below'" [class.missing]="data.experienceMatch=='missing'">
+                    <strong class="title-name pull-left"> Experience <b class="small-label">(In Years)</b></strong>
+                    <img class="exact-img" src="assets/framework/images/dashboard/right-tick.svg"/>
+                    <div class="info-description">
+                      <img class="missing-img" src="assets/framework/images/dashboard/info-red.svg"/>
+                      <div class="info-hover-section">
+                        Job Experience {{recruiter.postedJobs[0].experienceMinValue}} <br/>
+                        {{candidateDetails.first_name}}'s Experience {{candidate.professionalDetails.experience}}
+                      </div>
+                    </div>
+                  </label>
+                  <span
+                    *ngIf="recruiter.postedJobs[0].experienceMinValue == recruiter.postedJobs[0].experienceMaxValue">{{postedJob.experienceMinValue}}</span>
+
+                  <label *ngIf="recruiter.postedJobs[0].salaryMinValue != recruiter.postedJobs[0].salaryMaxValue"
+                         [class.exact]="data.salaryMatch=='exact'" [class.above]="data.salaryMatch=='above'"
                          [class.below]="data.salaryMatch=='below'" [class.missing]="data.salaryMatch=='missing'">
                     <strong class="title-name pull-left"> Salary Band <b class="small-label">(In Lacs)</b></strong>
                     <img class="exact-img" src="assets/framework/images/dashboard/right-tick.svg"/>
@@ -186,7 +210,24 @@
                       </div>
                     </div>
                   </label>
-                  <span>{{postedJob.salaryMinValue}} - {{postedJob.salaryMaxValue}}</span>
+                  <span *ngIf="recruiter.postedJobs[0].salaryMinValue != recruiter.postedJobs[0].salaryMaxValue">{{postedJob.salaryMinValue}} - {{postedJob.salaryMaxValue}}</span>
+
+                  <label *ngIf="recruiter.postedJobs[0].salaryMinValue == recruiter.postedJobs[0].salaryMaxValue"
+                         [class.exact]="data.salaryMatch=='exact'" [class.above]="data.salaryMatch=='above'"
+                         [class.below]="data.salaryMatch=='below'" [class.missing]="data.salaryMatch=='missing'">
+                    <strong class="title-name pull-left"> Salary <b class="small-label">(In Lacs)</b></strong>
+                    <img class="exact-img" src="assets/framework/images/dashboard/right-tick.svg"/>
+                    <div class="info-description">
+                      <img class="missing-img" src="assets/framework/images/dashboard/info-red.svg"/>
+                      <div class="info-hover-section">
+                        Job Salary {{recruiter.postedJobs[0].salaryMinValue}}<br/>
+                        {{candidateDetails.first_name}}'s Salary {{candidate.professionalDetails.currentSalary}}
+                      </div>
+                    </div>
+                  </label>
+                  <span *ngIf="recruiter.postedJobs[0].salaryMinValue == recruiter.postedJobs[0].salaryMaxValue">{{postedJob.salaryMinValue}}</span>
+
+
                   <label [class.exact]="data.releaseMatch=='exact'" [class.above]="data.releaseMatch=='above'"
                          [class.below]="data.releaseMatch=='below'" [class.missing]="data.releaseMatch=='missing'">Joining
                     Period</label>

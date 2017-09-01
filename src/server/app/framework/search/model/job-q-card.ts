@@ -1,3 +1,4 @@
+import CandidateListModel = require("../../dataaccess/model/candidate-list.model");
 export class JobQCard {
 
   company_name: string;
@@ -21,4 +22,5 @@ export class JobQCard {
   jobTitle: string;
   _id: string;
   hideCompanyName: boolean;
+  candidate_list:CandidateListModel[];
 }

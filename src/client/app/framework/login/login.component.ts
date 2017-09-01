@@ -1,4 +1,4 @@
-import {Component, NgZone, OnInit} from "@angular/core";
+import {Component, NgZone, OnInit, ViewChild, ElementRef} from "@angular/core";
 import {Router} from "@angular/router";
 import {LoginService} from "./login.service";
 import {Login} from "./login";
@@ -18,6 +18,7 @@ import {FacebookService} from "./facebook.service";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {ValidationService} from "../shared/customvalidations/validation.service";
 import {ProjectAsset} from "../shared/constants";
+import {SharedService} from "../shared/shared-service";
 import {AdminLogin} from "./adminlogininfo";
 import {ErrorService} from "../../cnext/framework/error.service";
 
@@ -30,6 +31,7 @@ import {ErrorService} from "../../cnext/framework/error.service";
 
 
 export class LoginComponent implements OnInit {
+  @ViewChild('toaster') toaster: ElementRef;
   private model = new Login();
   private adminModel = new AdminLogin();
   private userForm: FormGroup;
@@ -44,11 +46,14 @@ export class LoginComponent implements OnInit {
   private BODY_BACKGROUND: string;
   private submitStatus: boolean;
   private mainHeaderMenuHideShow: string;
+  private isChrome: boolean;
+  private isToasterVisible: boolean = true;
 
   constructor(private _router: Router, private loginService: LoginService, private themeChangeService: ThemeChangeService,
               private messageService: MessageService, private _ngZone: NgZone,
               private formBuilder: FormBuilder, private commonService: CommonService, private loaderService: LoaderService,
-              private _facebookService: FacebookService,private errorService:ErrorService) {
+              private _facebookService: FacebookService, private sharedService: SharedService,
+              private errorService:ErrorService) {
     this.userForm = this.formBuilder.group({
       'email': ['', [ValidationService.requireEmailValidator, ValidationService.emailValidator]],
       'password': ['', [ValidationService.requirePasswordValidator]]
@@ -60,6 +65,8 @@ export class LoginComponent implements OnInit {
     this.EMAIL_ICON = ImagePath.EMAIL_ICON;
     this.PASSWORD_ICON = ImagePath.PASSWORD_ICON;
     this.BODY_BACKGROUND = ImagePath.BODY_BACKGROUND;
+    this.isChrome = this.sharedService.getUserBrowser();
+    this.isToasterVisible = this.sharedService.getToasterVisiblity();
   }
 
   ngOnInit() {
@@ -68,6 +75,12 @@ export class LoginComponent implements OnInit {
     if (parseInt(LocalStorageService.getLocalValue(LocalStorage.IS_LOGGED_IN)) === 1) {
       this._router.navigate([NavigationRoutes.APP_CANDIDATE_DASHBOARD]);
     }
+  }
+
+  closeToaster() {
+    //this.toaster.nativeElement.style.visibility = "hidden";
+    this.isToasterVisible = false;
+    this.sharedService.setToasterVisiblity(this.isToasterVisible);
   }
 
   onSubmit() {

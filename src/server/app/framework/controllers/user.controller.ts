@@ -657,31 +657,50 @@ export function changePassword(req: express.Request, res: express.Response, next
     delete params.access_token;
     var auth: AuthInterceptor = new AuthInterceptor();
     var userService = new UserService();
+    bcrypt.compare(req.body.current_password,user.password , (err : any, isSame : any)=> {
+      if(err) {
+        next({
+          reason: Messages.MSG_ERROR_RSN_INVALID_REGISTRATION_STATUS,
+          message: Messages.MSG_ERROR_VERIFY_CANDIDATE_ACCOUNT,
+          code: 403
+        });
+      }else {
+        if(isSame) {
 
-    if (user.password === req.body.current_password) {
-      var query = {"_id": req.user._id, "password": req.body.current_password};
-      var updateData = {"password": req.body.new_password};
-      userService.findOneAndUpdate(query, updateData, {new: true}, (error, result) => {
-        if (error) {
-          next(error);
-        }
-        else {
-          var token = auth.issueTokenWithUid(user);
-          res.send({
-            "status": "Success",
-            "data": {"message": "Password changed successfully"},
-            access_token: token
+          var new_password:any;
+          const saltRounds = 10;
+          bcrypt.hash(req.body.new_password, saltRounds, (err:any, hash:any) => {
+            // Store hash in your password DB.
+            if(err) {
+              console.log('Error in creating hash using bcrypt');
+          }
+          else {
+              new_password = hash;
+          var query = {"_id": req.user._id};
+          var updateData = {"password": new_password};
+          userService.findOneAndUpdate(query, updateData, {new: true}, (error, result) => {
+            if (error) {
+              next(error);
+            }
+            else {
+              var token = auth.issueTokenWithUid(user);
+              res.send({
+                "status": "Success",
+                "data": {"message": "Password changed successfully"},
+                access_token: token
+              });
+            }
+          });
+            }
+        });
+        } else {
+          next({
+            reason: Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
+            message: Messages.MSG_ERROR_WRONG_CURRENT_PASSWORD,
+            code: 401
           });
         }
-      });
-    }
-    else {
-      next({
-        reason: Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
-        message: Messages.MSG_ERROR_WRONG_CURRENT_PASSWORD,
-        code: 401
-      });
-    }
+      }});
   }
   catch (e) {
     res.status(403).send({message: e.message});

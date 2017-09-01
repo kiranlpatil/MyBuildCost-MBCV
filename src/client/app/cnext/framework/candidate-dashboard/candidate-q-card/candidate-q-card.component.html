@@ -1,4 +1,4 @@
-<div class="col-sm-4">
+<div class="col-sm-4 panel-container" [ngClass]="setClasses()">
   <div class="panel clearfix" (click)="viewJob(job._id)">
     <ul>
       <li *ngIf="type=='block'" (click)="deleteItem(job._id)" title='Remove job from "Not Interested" list' ><img src="assets/c-next/card-view/close-grey.png" /></li>
@@ -50,13 +50,24 @@
           <span class="industry"></span>
           {{job.industry}}
         </p>
-        <p title="Salary : ₹ {{job.salaryMinValue}} - {{job.salaryMaxValue}} lakh">
+        <p *ngIf="job.salaryMinValue !=job.salaryMaxValue"
+           title="Salary : ₹ {{job.salaryMinValue}} - {{job.salaryMaxValue}} lakh">
           <span class="salary"></span>
           ₹ {{job.salaryMinValue}} - {{job.salaryMaxValue}} lakh
         </p>
-        <p title="Experience : {{job.experienceMinValue}} - {{job.experienceMaxValue}} year">
+        <p *ngIf="job.salaryMinValue ==job.salaryMaxValue" title="Salary : ₹ {{job.salaryMinValue}} lakh">
+          <span class="salary"></span>
+          ₹ {{job.salaryMinValue}} lakh
+        </p>
+        <p *ngIf="job.experienceMinValue !=job.experienceMaxValue"
+           title="Experience : {{job.experienceMinValue}} - {{job.experienceMaxValue}} year(s)">
           <span class="experience"></span>
-          {{job.experienceMinValue}} - {{job.experienceMaxValue}} year
+          {{job.experienceMinValue}} - {{job.experienceMaxValue}} year(s)
+        </p>
+        <p *ngIf="job.experienceMinValue ==job.experienceMaxValue"
+           title="Experience : {{job.experienceMinValue}} year(s)">
+          <span class="experience"></span>
+          {{job.experienceMinValue}} year(s)
         </p>
         <!--<p title="Current Location">
           <span class="current-location"></span>
@@ -80,6 +91,14 @@
       <img *ngIf="job.company_logo" [src]="getImagePath(job.company_logo)" >
       <img *ngIf="!job.company_logo" src="assets/c-next/company-details/company-logo-default.png" />
     </div>
+  </div>
+  <div class="button-group btn-hover" *ngIf="type == 'searchView'">
+    <button *ngIf="inCartListedStatusForSearchView == false && inRejectListedStatusForSearchView == false"
+            class="btn btn-primary" (click)="actionForSearchView('cartListed',job._id)">Add to cart
+    </button>
+    <button *ngIf="inRejectListedStatusForSearchView == false" class="btn btn-danger"
+            (click)="actionForSearchView('rejectedList',job._id) ">Reject
+    </button>
   </div>
 </div>
 

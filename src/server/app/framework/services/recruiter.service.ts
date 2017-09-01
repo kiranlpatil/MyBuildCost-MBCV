@@ -1,7 +1,7 @@
-import * as mongoose from 'mongoose';
-import {Recruiter} from '../dataaccess/model/recruiter-final.model';
-import {ConstVariables} from '../shared/sharedconstants';
-import {JobCountModel} from '../dataaccess/model/job-count.model';
+import * as mongoose from "mongoose";
+import {Recruiter} from "../dataaccess/model/recruiter-final.model";
+import {ConstVariables} from "../shared/sharedconstants";
+import {JobCountModel} from "../dataaccess/model/job-count.model";
 var config = require('config');
 
 import Messages = require('../shared/messages');
@@ -260,7 +260,7 @@ class RecruiterService {
       if (err) {
         callback(err, null);
       } else {
-        this.recruiterRepository.getJobProfileQCard(res, item.candidate, item.ids, (canError, canResult) => {
+        this.recruiterRepository.getJobProfileQCard(res, item.candidate, item.ids, 'none', (canError, canResult) => {
           if (canError) {
             callback(canError, null);
           } else {

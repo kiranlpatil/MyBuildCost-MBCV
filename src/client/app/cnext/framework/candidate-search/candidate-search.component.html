@@ -56,10 +56,13 @@
         </li>
       </ul>
     </div>
-    <div class="card-view">
+    <div class="card-view" *ngIf="checkButttons">
       <div *ngFor="let job of listOfJobs">
-        <div (click)="showJobCompareView(job)">
-          <cn-candidate-q-card [progress_bar_color]="'#29b6f6'" [job]="job" [type]="'searchView'"></cn-candidate-q-card>
+        <div>
+          <cn-candidate-q-card [candidateIDFromSearchView]='candidateId' [progress_bar_color]="'#29b6f6'" [job]="job"
+                               [type]="'searchView'"
+                               (jobComapare)="showJobCompareView($event)"
+                               (searchViewAction)="workFlowAction($event)"></cn-candidate-q-card>
         </div>
       </div>
     </div>
@@ -87,6 +90,15 @@
       <div class="modal-content job-dashboard-modal-content">
         <div class="modal-body" *ngIf="isShowJobCompareView">
           <cn-job-compare-view [candiadteId]="candidateId" [jobId]="jobId" (close)="closeJob()"></cn-job-compare-view>
+        </div>
+        <div class="button-group">
+          <button class="btn btn-primary"
+                  *ngIf="inCartListedStatusForSearchView == false && inRejectListedStatusForSearchView == false"
+                  (click)="actionOnCard('cartListed')">Add to cart
+          </button>
+          <button class="btn btn-danger" *ngIf="inRejectListedStatusForSearchView == false"
+                  (click)="actionOnCard('rejectedList') ">Reject
+          </button>
         </div>
       </div>
     </div>

@@ -56,4 +56,8 @@ export function cnextInit(app: express.Application) { //todo add interceptor to 
   app.post("/api/sendmailtoadmin",adminController.adminLoginInfoMail);
 
 
+
+  // API for Uses Tracking
+  app.put('/api/usesTracking/:recruiterId/:jobProfileId/:candidateId/:action', jobProfileController.createUsesTracking);
+
 }

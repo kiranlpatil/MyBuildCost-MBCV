@@ -170,10 +170,16 @@
       <div class="clearfix">
         <p><label>Job Title</label> {{jobPosterModel.jobTitle}}</p>
         <p><label>Education</label> {{jobPosterModel.education}}</p>
-        <p><label>Experience Band</label> {{jobPosterModel.experienceMinValue}} Year(s) -
+        <p *ngIf="jobPosterModel.experienceMinValue !=jobPosterModel.experienceMaxValue"><label>Experience Band</label>
+          {{jobPosterModel.experienceMinValue}} -
           {{jobPosterModel.experienceMaxValue}} Year(s)</p>
-        <p><label>Salary Band</label> {{jobPosterModel.salaryMinValue}} Lac(s)- {{jobPosterModel.salaryMaxValue}} Lac(s)
+        <p *ngIf="jobPosterModel.experienceMinValue ==jobPosterModel.experienceMaxValue"><label>Experience</label>
+          {{jobPosterModel.experienceMinValue}} Year(s)</p>
+        <p *ngIf="jobPosterModel.salaryMinValue != jobPosterModel.salaryMaxValue"><label>Salary Band</label>
+          {{jobPosterModel.salaryMinValue}} - {{jobPosterModel.salaryMaxValue}} Lac(s)
         </p>
+        <p *ngIf="jobPosterModel.salaryMinValue == jobPosterModel.salaryMaxValue"><label>Salary</label>
+          {{jobPosterModel.salaryMinValue}} Lac(s)</p>
         <p><label>Notice Period</label> {{jobPosterModel.joiningPeriod}}</p>
         <p><label>Hiring Manager</label> {{jobPosterModel.hiringManager}}</p>
         <p *ngIf="recruiter.isRecruitingForself"><label>Hiring Department</label> {{jobPosterModel.department}}</p>

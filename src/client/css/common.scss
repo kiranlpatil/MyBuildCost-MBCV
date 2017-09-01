@@ -758,6 +758,29 @@ control-messages {
   }
 }
 
+#snackbar {
+  visibility: inherit;
+  width: 100%;
+  background: #ffd;
+  z-index: 9;
+  color: #000;
+  text-align: center;
+  border-radius: 2px;
+  padding: 16px;
+  position: fixed;
+  top: 51px;
+  font-size: 17px;
+}
+
+.button-style {
+  border: 0;
+  background: transparent;
+  color: black;
+  position: absolute;
+  right: 6px;
+  top: 15px;
+}
+
 @media only screen and (max-width: 768px) {
   .container-fluid > .navbar-collapse,
   .container-fluid > .navbar-header,

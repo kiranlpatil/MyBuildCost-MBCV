@@ -3,7 +3,7 @@ import {Router} from "@angular/router";
 import {ChangeEmailService} from "./change-email.service";
 import {ChangeEmail} from "./changeemail";
 import {LocalStorageService} from "../../../shared/localstorage.service";
-import {LocalStorage} from "../../../shared/constants";
+import {LocalStorage, AppSettings} from "../../../shared/constants";
 import {CommonService, ImagePath, Message, Messages, MessageService} from "../../../shared/index";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ValidationService} from "../../../shared/customvalidations/validation.service";
@@ -97,7 +97,7 @@ export class ChangeEmailComponent implements OnInit {
   logOut() {
     window.localStorage.clear();
     LocalStorageService.setLocalValue(LocalStorage.CHANGE_MAIL_VALUE, 'from_settings');
-    let host = 'http://' + window.location.hostname;
+    let host = AppSettings.HTTP_CLIENT + window.location.hostname;
     window.location.href = host;
   }
 }

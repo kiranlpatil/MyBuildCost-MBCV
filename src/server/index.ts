@@ -47,6 +47,7 @@ export function init(port: number, mode: string, protocol: string) {
     let clientRoot = path.resolve(process.cwd(), './dist/dev/client');
     app.use(express.static(root));
     app.use(express.static(clientRoot));
+    app.use('/public', express.static(path.resolve(__dirname+'/public')));
     var renderIndex = (req: express.Request, res: express.Response) => {
       res.sendFile(path.resolve(__dirname, _clientDir + '/index.html'));
     };
@@ -72,8 +73,7 @@ export function init(port: number, mode: string, protocol: string) {
     app.use('/js', express.static(path.resolve(__dirname, _clientDir + '/js')));
     app.use('/css', express.static(path.resolve(__dirname, _clientDir + '/css')));
     app.use('/assets', express.static(path.resolve(__dirname, _clientDir + '/assets')));
-    app.use('/public', express.static('public'));
-    app.use(express.static(__dirname,'src/server/app/framework/public/admin-data'));
+    app.use('/public', express.static(path.resolve(__dirname+'/public')));
 
     /**
      * Spa Res Sender.

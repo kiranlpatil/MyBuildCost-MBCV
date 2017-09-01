@@ -1,5 +1,9 @@
 <section class="main-form-wrapper registration">
   <main-header [MainHeaderMenuHideShow]="mainHeaderMenuHideShow"></main-header>
+
+    <div *ngIf="!isChrome && isToasterVisible" #toaster id="snackbar">This application is certified on Chrome for better experience we would recommend to use chrome
+        <button class="button-style" (click)="closeToaster()">x</button>
+    </div>
   <!--<app-loader></app-loader>-->
   <div class="content">
     <h5>Register </h5>
