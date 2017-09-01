@@ -72,6 +72,8 @@ export function init(port: number, mode: string, protocol: string) {
     app.use('/js', express.static(path.resolve(__dirname, _clientDir + '/js')));
     app.use('/css', express.static(path.resolve(__dirname, _clientDir + '/css')));
     app.use('/assets', express.static(path.resolve(__dirname, _clientDir + '/assets')));
+    app.use('/public', express.static('public'));
+    app.use(express.static(__dirname,'src/server/app/framework/public/admin-data'));
 
     /**
      * Spa Res Sender.

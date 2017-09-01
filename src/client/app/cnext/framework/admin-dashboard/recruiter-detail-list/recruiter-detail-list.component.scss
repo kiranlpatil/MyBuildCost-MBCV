@@ -23,6 +23,9 @@
   .list-view {
     top: 190px !important;
     padding: 0 15px;
+    overflow: auto;
+    position: absolute;
+    z-index: 9;
 
     .list-header {
       background: $theme-color;
