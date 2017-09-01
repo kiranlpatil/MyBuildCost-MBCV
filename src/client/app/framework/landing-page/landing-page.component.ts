@@ -11,8 +11,10 @@ import {Messages} from "../shared/constants";
 export class LandingPageComponent {
   BODY_BACKGROUND: string;
   landingPageText: string= Messages.MSG_LANDING_PAGE;
+  isChrome: boolean;
 
   constructor() {
     this.BODY_BACKGROUND = ImagePath.BODY_BACKGROUND;
   }
+
 }

@@ -155,7 +155,7 @@ class SearchService {
       if (err) {
         callback(err, null);
       } else {
-        this.recruiterRepository.getJobProfileQCard(res, candidate, undefined, callback);
+        this.recruiterRepository.getJobProfileQCard(res, candidate, undefined, 'none', callback);
       }
     });
   }
@@ -297,7 +297,7 @@ class SearchService {
   }
 
   buildCandidateModel(candidate: CandidateModel) {
-    console.log('--------------------------candidate-------------------------------------------', candidate);;;
+    console.log('--------------------------candidate-------------------------------------------', candidate);
     let profileComparisonResult: ProfileComparisonDataModel = new ProfileComparisonDataModel();
     profileComparisonResult._id = candidate._id;
     profileComparisonResult.industryName = candidate.industry.name;
@@ -364,7 +364,7 @@ class SearchService {
             qestionCountForAvgPercentsge++;
             //match_view.match = Match.Exact;
           } else if (job.capability_matrix[cap] == (Number(newCandidate.capability_matrix[cap]) - ConstVariables.DIFFERENCE_IN_COMPLEXITY_SCENARIO)) {
-            matchCount++;;;
+            matchCount++;
             capabilityQuestionCount++;
             correctQestionCountForAvgPercentage++;
             qestionCountForAvgPercentsge++;
@@ -607,7 +607,7 @@ class SearchService {
   getJobDetailsForComparison(job:JobProfileModel) {
     var profileComparisonJobModel:ProfileComparisonJobModel = new ProfileComparisonJobModel();
     profileComparisonJobModel.city = job.location.city;
-    profileComparisonJobModel.country = job.location.country;;;
+    profileComparisonJobModel.country = job.location.country;
     profileComparisonJobModel.state = job.location.state;
     profileComparisonJobModel.education = job.education;
     profileComparisonJobModel.experienceMaxValue = job.experienceMaxValue;

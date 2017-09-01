@@ -1,4 +1,4 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, OnInit, ViewChild, ElementRef} from "@angular/core";
 import {Router} from "@angular/router";
 import {RecruiterService} from "./recruiter.service";
 import {Recruiter} from "./recruiter";
@@ -10,6 +10,7 @@ import {LocalStorageService} from "../../shared/localstorage.service";
 import {Headers, Http, RequestOptions, Response} from "@angular/http";
 import {Location} from "../location";
 import {MyGoogleAddress} from "../candidate/google-our-place/my-google-address";
+import {SharedService} from "../../shared/shared-service";
 
 
 @Component({
@@ -20,6 +21,8 @@ import {MyGoogleAddress} from "../candidate/google-our-place/my-google-address";
 })
 
 export class RecruiterComponent implements OnInit {
+
+  @ViewChild('toaster') toaster: ElementRef;
   private model = new Recruiter();
   private storedcompanySize: any;
   private companySize: any;
@@ -48,9 +51,12 @@ export class RecruiterComponent implements OnInit {
   private isCompanyHQEmpty: boolean = false;
   private isCompanyHQInvalid: boolean = false;
   private isValid: boolean = true;
+  private isChrome: boolean;
+  private isToasterVisible: boolean = true;
 
   constructor(private commonService: CommonService, private _router: Router, private http: Http,
-              private recruiterService: RecruiterService, private messageService: MessageService, private formBuilder: FormBuilder) {
+              private recruiterService: RecruiterService, private messageService: MessageService,
+              private formBuilder: FormBuilder, private sharedService: SharedService) {
 
 
     this.recruiterForm = this.formBuilder.group({
@@ -67,6 +73,8 @@ export class RecruiterComponent implements OnInit {
     });
     this.BODY_BACKGROUND = ImagePath.BODY_BACKGROUND;
     this.image_path = ImagePath.PROFILE_IMG_ICON;
+    this.isChrome = this.sharedService.getUserBrowser();
+    this.isToasterVisible = this.sharedService.getToasterVisiblity();
   }
 
   ngOnInit() {
@@ -260,4 +268,11 @@ export class RecruiterComponent implements OnInit {
   recruitmentForSelf() {
     this.isRecruitingForself = true;
   }
+
+  closeToaster() {
+    //this.toaster.nativeElement.style.visibility = "hidden";
+    this.isToasterVisible = false;
+    this.sharedService.setToasterVisiblity(this.isToasterVisible);
+  }
+
 }

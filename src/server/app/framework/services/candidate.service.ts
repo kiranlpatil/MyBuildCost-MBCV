@@ -613,7 +613,7 @@ class CandidateService {
       if (err) {
         callback(err, null);
       } else {
-        this.recruiterRepository.getJobProfileQCard(res, item.candidate, item.ids, (canError, canResult) => {
+        this.recruiterRepository.getJobProfileQCard(res, item.candidate, item.ids, 'none', (canError, canResult) => {
           if (canError) {
             callback(canError, null);
           } else {

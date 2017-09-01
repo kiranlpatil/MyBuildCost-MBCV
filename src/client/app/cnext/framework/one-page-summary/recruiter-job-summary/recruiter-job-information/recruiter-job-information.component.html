@@ -30,10 +30,14 @@
     <span *ngFor="let value of postedJob.releventIndustries">{{value}}</span>
     <label>Education</label>
     <span>{{postedJob.education}}</span>
-    <label>Experience Band(In Years)</label>
-    <span>{{postedJob.experienceMinValue}} - {{postedJob.experienceMaxValue}}</span>
-    <label>Salary Band(In Lacs)</label>
-    <span>{{postedJob.salaryMinValue}} - {{postedJob.salaryMaxValue}}</span>
+    <label *ngIf="postedJob.experienceMinValue !=postedJob.experienceMaxValue">Experience Band(In Years)</label>
+    <span *ngIf="postedJob.experienceMinValue !=postedJob.experienceMaxValue">{{postedJob.experienceMinValue}} - {{postedJob.experienceMaxValue}}</span>
+    <label *ngIf="postedJob.experienceMinValue ==postedJob.experienceMaxValue">Experience(In Years)</label>
+    <span *ngIf="postedJob.experienceMinValue ==postedJob.experienceMaxValue">{{postedJob.experienceMinValue}}</span>
+    <label *ngIf="postedJob.salaryMinValue != postedJob.salaryMaxValue">Salary Band(In Lacs)</label>
+    <span *ngIf="postedJob.salaryMinValue != postedJob.salaryMaxValue">{{postedJob.salaryMinValue}} - {{postedJob.salaryMaxValue}}</span>
+    <label *ngIf="postedJob.salaryMinValue == postedJob.salaryMaxValue">Salary(In Lacs)</label>
+    <span *ngIf="postedJob.salaryMinValue == postedJob.salaryMaxValue">{{postedJob.salaryMinValue}}</span>
     <label>Joining Period</label>
     <span>{{postedJob.joiningPeriod}}</span>
     <label>Job Location</label>
