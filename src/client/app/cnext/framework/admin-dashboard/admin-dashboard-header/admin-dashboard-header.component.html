@@ -52,6 +52,12 @@
                     <span class="glyphicon glyphicon-th"></span>My Dashboard
                   </a>
                 </li>
+                <li role="menuitem" [routerLinkActive]="['active']">
+                  <a class="dropdown-item" [routerLink]="['settings']"
+                     (click)="navigateTo('/dashboard/settings'); toggleMenu();">
+                    <span class="glyphicon glyphicon-lock"></span>Change Password
+                  </a>
+                </li>
 
                 <!--<li role="menuitem" >
                   <a class="dropdown-item">
