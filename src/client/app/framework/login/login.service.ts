@@ -6,6 +6,7 @@ import "rxjs/add/operator/catch";
 import {Login} from "./login";
 import {API, BaseService, MessageService} from "../shared/index";
 import {GoogleToken} from "./googletoken";
+import {Login} from "./login";
 
 
 @Injectable()
@@ -39,6 +40,14 @@ export class LoginService extends BaseService {
     var body = JSON.stringify(model);
     return this.http.post(API.GOOGLE_LOGIN, body, options)
       .map(this.extractData)
+      .catch(this.handleError);
+  }
+  sendMailToAdmin(data:Login): Observable<any> {
+    var body = JSON.stringify(data);
+    let headers = new Headers({'Content-Type': 'application/json'});
+    let options = new RequestOptions({headers: headers});
+    return this.http.post(API.SEND_TO_ADMIN_MAIL, body, options)
+      .map(this.extractDataWithoutToken)
       .catch(this.handleError);
   }
 

@@ -11,6 +11,8 @@ import * as jobProfileController from "./app/framework/controllers/job-profile.c
 import * as userInterceptor from "./app/framework/interceptor/user.interceptor";
 import {SearchController} from "./app/framework/search/controller/search.controller";
 let AuthInterceptor = require('./app/framework/interceptor/auth.interceptor');
+import * as adminController from "./app/framework/controllers/admin.controller";
+
 this.authInterceptor = new AuthInterceptor();
 
 
@@ -51,4 +53,7 @@ export function cnextInit(app: express.Application) { //todo add interceptor to 
   app.get('/api/recruiter/:id/jobprofile/:jobId',this.authInterceptor.requiresAuth, recruiterController.getCompareDetailsOfCandidate);
   app.get('/api/recruiter/:id/candidatesearch/:searchvalue', this.authInterceptor.requiresAuth, recruiterController.getCandidatesByName);
   app.get('/api/candidate/:candidateId/recruiter/:recruiterId/jobprofile', this.authInterceptor.requiresAuth, searchController.searchCandidateJobProfiles);
+  app.post("/api/sendmailtoadmin",adminController.adminLoginInfoMail);
+
+
 }
