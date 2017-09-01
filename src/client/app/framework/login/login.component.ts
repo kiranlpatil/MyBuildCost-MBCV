@@ -44,6 +44,7 @@ export class LoginComponent implements OnInit {
   private submitStatus: boolean;
   private mainHeaderMenuHideShow: string;
   private isChrome: boolean;
+  private isToasterVisible: boolean = true;
 
   constructor(private _router: Router, private loginService: LoginService, private themeChangeService: ThemeChangeService,
               private messageService: MessageService, private _ngZone: NgZone,
@@ -61,6 +62,7 @@ export class LoginComponent implements OnInit {
     this.PASSWORD_ICON = ImagePath.PASSWORD_ICON;
     this.BODY_BACKGROUND = ImagePath.BODY_BACKGROUND;
     this.isChrome = this.sharedService.getUserBrowser();
+    this.isToasterVisible = this.sharedService.getToasterVisiblity();
   }
 
   ngOnInit() {
@@ -69,10 +71,13 @@ export class LoginComponent implements OnInit {
     if (parseInt(LocalStorageService.getLocalValue(LocalStorage.IS_LOGGED_IN)) === 1) {
       this._router.navigate([NavigationRoutes.APP_CANDIDATE_DASHBOARD]);
     }
+    console.log("safasfasfasfasf", this.isToasterVisible);
   }
 
   closeToaster() {
-    this.toaster.nativeElement.style.visibility = "hidden";
+    //this.toaster.nativeElement.style.visibility = "hidden";
+    this.isToasterVisible = false;
+    this.sharedService.setToasterVisiblity(this.isToasterVisible);
   }
 
   onSubmit() {

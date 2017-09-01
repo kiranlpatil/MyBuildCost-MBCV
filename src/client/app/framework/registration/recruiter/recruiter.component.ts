@@ -52,6 +52,7 @@ export class RecruiterComponent implements OnInit {
   private isCompanyHQInvalid: boolean = false;
   private isValid: boolean = true;
   private isChrome: boolean;
+  private isToasterVisible: boolean = true;
 
   constructor(private commonService: CommonService, private _router: Router, private http: Http,
               private recruiterService: RecruiterService, private messageService: MessageService,
@@ -73,6 +74,7 @@ export class RecruiterComponent implements OnInit {
     this.BODY_BACKGROUND = ImagePath.BODY_BACKGROUND;
     this.image_path = ImagePath.PROFILE_IMG_ICON;
     this.isChrome = this.sharedService.getUserBrowser();
+    this.isToasterVisible = this.sharedService.getToasterVisiblity();
   }
 
   ngOnInit() {
@@ -268,7 +270,9 @@ export class RecruiterComponent implements OnInit {
   }
 
   closeToaster() {
-    this.toaster.nativeElement.style.visibility = "hidden";
+    //this.toaster.nativeElement.style.visibility = "hidden";
+    this.isToasterVisible = false;
+    this.sharedService.setToasterVisiblity(this.isToasterVisible);
   }
 
 }

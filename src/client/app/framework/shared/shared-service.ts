@@ -5,6 +5,7 @@ import {Injectable} from "@angular/core";
 export class SharedService {
 
   public isChrome: boolean;
+  public isToasterVisible: boolean = true;
 
   constructor() {
     //this.isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
@@ -16,15 +17,19 @@ export class SharedService {
     else if(/Chrome/i.test(ua)) {
       this.isChrome = true;
     }
-    else{
+    else {
       console.log('other');
       this.isChrome = false;
     }
   }
 
- /* public setUserBrowser(isChrome:boolean) {
-    this.isChrome = isChrome;
-  }*/
+  public setToasterVisiblity(isToasterVisible:boolean) {
+    this.isToasterVisible = isToasterVisible;
+  }
+
+  public getToasterVisiblity():boolean {
+    return this.isToasterVisible;
+  }
 
   public getUserBrowser():boolean {
     return this.isChrome;

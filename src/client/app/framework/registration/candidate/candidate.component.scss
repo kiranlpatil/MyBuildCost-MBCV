@@ -66,28 +66,3 @@
     }
   }
 }
-
-#snackbar {
-  visibility: inherit;
-  min-width: 384px;
-  margin-left: -125px;
-  background-color: cadetblue;
-  color: #fff;
-  text-align: center;
-  border-radius: 2px;
-  padding: 16px;
-  position: fixed;
-  z-index: 1;
-  right: 1%;
-  top: 51px;
-  font-size: 17px;
-}
-
-.button-style {
-  border: 0;
-  background: transparent;
-  color: black;
-  position: absolute;
-  right: -3px;
-  top: -3px;
-}

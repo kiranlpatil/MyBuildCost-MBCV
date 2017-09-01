@@ -38,6 +38,7 @@ export class CandidateComponent implements OnInit {
   private birthYearErrorMessage: string;
   private passwordMismatchMessage: string;
   private isChrome: boolean;
+  private isToasterVisible: boolean = true;
 
   constructor(private commonService: CommonService, private _router: Router, private dateService: DateService,
               private candidateService: CandidateService, private messageService: MessageService, private formBuilder: FormBuilder,
@@ -58,6 +59,8 @@ export class CandidateComponent implements OnInit {
     this.currentDate = new Date();
     this.year = this.currentDate.getUTCFullYear() - 18;
     this.isChrome = this.sharedService.getUserBrowser();
+    this.isToasterVisible = this.sharedService.getToasterVisiblity();
+    console.log('isToasterVisible', this.isToasterVisible);
   }
 
   ngOnInit() {
@@ -67,10 +70,13 @@ export class CandidateComponent implements OnInit {
     }
     this.validBirthYearList = this.dateService.createBirthYearList(this.year);
     this.mainHeaderMenuHideShow = 'applicant';
+    //console.log("toaster visible", this.isToasterVisible);
   }
 
   closeToaster() {
-    this.toaster.nativeElement.style.visibility = "hidden";
+    //this.toaster.nativeElement.style.visibility = "hidden";
+    this.isToasterVisible = false;
+    this.sharedService.setToasterVisiblity(this.isToasterVisible);
   }
 
   selectYearModel(year: any) {
