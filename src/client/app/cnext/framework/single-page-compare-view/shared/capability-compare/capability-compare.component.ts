@@ -32,15 +32,16 @@ export class CapabilityCompareComponent  implements OnChanges {
     if(changes.capabilities && changes.capabilities.currentValue) {
 
       //Removed complexities with 'Not Applicable or NA'
-      /*for (let cap of changes.capabilities.currentValue) {
-        for (var i = cap.complexities.length - 1; i >= 0; i--) {
-          var com = cap.complexities[i];
-          if (com.scenarios[0].job_scenario_name == undefined || com.scenarios[0].job_scenario_name == 'Not Applicable') {
-            cap.complexities.splice(i, 1);
+      if (!this.isCompact) {
+        for (let cap of changes.capabilities.currentValue) {
+          for (var i = cap.complexities.length - 1; i >= 0; i--) {
+            var com = cap.complexities[i];
+            if (com.scenarios[0].job_scenario_name == undefined || com.scenarios[0].job_scenario_name == 'Not Applicable') {
+              cap.complexities.splice(i, 1);
+            }
           }
         }
-       }*/
-
+      }
 
       let max = 0;
       for(let cap of changes.capabilities.currentValue) {
