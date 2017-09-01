@@ -1,6 +1,54 @@
 <cn-value-portrait-header [candidate]="candidate"></cn-value-portrait-header>
-<cn-candidate-info-block [candidate]="candidate"></cn-candidate-info-block>
-<cn-candidate-capability-portrait [candidate]="candidate"></cn-candidate-capability-portrait>
+<cn-candidate-info-block [candidate]="candidate"
+                         class="visible-lg visible-md visible-sm hidden-xs"></cn-candidate-info-block>
+<cn-candidate-capability-portrait [candidate]="candidate"
+                                  class="visible-lg visible-md visible-sm hidden-xs"></cn-candidate-capability-portrait>
+
+<div class="value-portraot-tabs hidden-lg hidden-md hidden-sm visible-xs">
+  <ul class="nav nav-pills">
+    <li class="active">
+      <a href="#core-capabilities-tabs" data-toggle="tab">Core Capabilities</a>
+    </li>
+    <li><a href="#current-location-tabs" data-toggle="tab">Current Location</a></li>
+    <li><a href="#experience-level-tabs" data-toggle="tab">Experience Level</a></li>
+    <li><a href="#education-tabs" data-toggle="tab">Education</a></li>
+    <li><a href="#employment-tabs" data-toggle="tab">Employment</a></li>
+    <li><a href="#certification-tabs" data-toggle="tab">Certification</a></li>
+    <li><a href="#awards-tabs" data-toggle="tab">Awards</a></li>
+  </ul>
+
+  <div class="tab-content clearfix">
+    <div class="tab-pane active" id="core-capabilities-tabs">
+      <cn-candidate-capability-portrait [candidate]="candidate"
+                                        class="hidden-lg hidden-md hidden-sm visible-xs"></cn-candidate-capability-portrait>
+    </div>
+    <div class="tab-pane" id="current-location-tabs">
+      <cn-candidate-info-block [candidate]="candidate"
+                               class="hidden-lg hidden-md hidden-sm visible-xs "></cn-candidate-info-block>
+    </div>
+    <div class="tab-pane" id="experience-level-tabs">
+      <cn-candidate-info-block [candidate]="candidate"
+                               class="hidden-lg hidden-md hidden-sm visible-xs"></cn-candidate-info-block>
+    </div>
+    <div class="tab-pane" id="education-tabs">
+      <cn-candidate-info-block [candidate]="candidate"
+                               class="hidden-lg hidden-md hidden-sm visible-xs"></cn-candidate-info-block>
+    </div>
+    <div class="tab-pane" id="employment-tabs">
+      <cn-candidate-info-block [candidate]="candidate"
+                               class="hidden-lg hidden-md hidden-sm visible-xs"></cn-candidate-info-block>
+    </div>
+    <div class="tab-pane" id="certification-tabs">
+      <cn-candidate-info-block [candidate]="candidate"
+                               class="hidden-lg hidden-md hidden-sm visible-xs"></cn-candidate-info-block>
+    </div>
+    <div class="tab-pane" id="awards-tabs">
+      <cn-candidate-info-block [candidate]="candidate"
+                               class="hidden-lg hidden-md hidden-sm visible-xs"></cn-candidate-info-block>
+    </div>
+  </div>
+</div>
+
 
 <div class="col-xs-12 no-padding value-portraot-bottom-section">
   <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 value-portraot-candidate-industry">
@@ -40,9 +88,9 @@
       </div>
     </div>
   </div>
-  <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+  <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 value-portraot-about-myself">
     <div class="about-myself-btn">
-      About Myself
+      <label> About Myself </label>
       <div class="tooltip-content3">
         {{candidate.aboutMyself}}
       </div>

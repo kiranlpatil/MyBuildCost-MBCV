@@ -877,4 +877,205 @@ control-messages {
       }
     }
   }
+
+  /* value portrait css */
+  #core-capabilities-tabs {
+    h3,
+    .circle::after,
+    .circle::before {
+      display: none;
+    }
+    .value-portraot-candidate-capability-circle {
+      width: 100%;
+      overflow-x: scroll;
+      display: flex;
+      overflow-y: hidden;
+    }
+    .second-line {
+      margin: 19px 20px;
+    }
+    .circle {
+      background: #F7B82B;
+      width: 250px;
+      height: 250px;
+      span {
+        color: #fff;
+        font-size: 18px;
+        height: 250px;
+        width: 250px;
+      }
+    }
+    .inner-circle {
+      box-shadow: 0 0 0 transparent;
+      height: 225px;
+      width: 225px;
+    }
+  }
+  #current-location-tabs {
+    ul {
+      padding: 0;
+      li {
+        display: none;
+        .current-location-tabs {
+          box-shadow: 0 0 0 transparent;
+        }
+      }
+      li:nth-child(1) {
+        background: #f3f3f3;
+        display: block !important;
+        span {
+          display: none;
+        }
+        .tooltip-content2 {
+          display: block;
+          background: none;
+          border: 0;
+          box-shadow: 0 0 0 transparent;
+          &:after {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+
+  #experience-level-tabs {
+    ul {
+      padding: 0;
+      li {
+        display: none;
+        .current-location-tabs {
+          box-shadow: 0 0 0 transparent;
+        }
+      }
+      li:nth-child(2) {
+        background: #f3f3f3;
+        display: block !important;
+        span {
+          display: none;
+        }
+        .tooltip-content2 {
+          display: block;
+          background: none;
+          border: 0;
+          box-shadow: 0 0 0 transparent;
+          &:after {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+  #education-tabs {
+    ul {
+      padding: 0;
+      li {
+        display: none;
+        .current-location-tabs {
+          box-shadow: 0 0 0 transparent;
+        }
+      }
+      li:nth-child(3) {
+        background: #f3f3f3;
+        display: block !important;
+        span {
+          display: none;
+        }
+        .tooltip-content2 {
+          display: block;
+          background: none;
+          border: 0;
+          box-shadow: 0 0 0 transparent;
+          &:after {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+  #employment-tabs {
+    ul {
+      padding: 0;
+      li {
+        display: none;
+        .current-location-tabs {
+          box-shadow: 0 0 0 transparent;
+        }
+      }
+      li:nth-child(4) {
+        background: #f3f3f3;
+        display: block !important;
+        span {
+          display: none;
+        }
+        .tooltip-content2 {
+          display: block;
+          background: none;
+          border: 0;
+          box-shadow: 0 0 0 transparent;
+          &:after {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+  #certification-tabs {
+    ul {
+      padding: 0;
+      li {
+        display: none;
+        .current-location-tabs {
+          box-shadow: 0 0 0 transparent;
+        }
+      }
+      li:nth-child(5) {
+        background: #f3f3f3;
+        display: block !important;
+        span {
+          display: none;
+        }
+        .tooltip-content2 {
+          display: block;
+          background: none;
+          border: 0;
+          box-shadow: 0 0 0 transparent;
+          &:after {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+  #awards-tabs {
+    ul {
+      padding: 0;
+      li {
+        display: none;
+        .current-location-tabs {
+          box-shadow: 0 0 0 transparent;
+        }
+      }
+      li:nth-child(6) {
+        background: #f3f3f3;
+        display: block !important;
+        span {
+          display: none;
+        }
+        .tooltip-content2 {
+          display: block;
+          background: none;
+          border: 0;
+          box-shadow: 0 0 0 transparent;
+          &:after {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+  .value-portraot-about-myself {
+    background: #f3f3f3;
+  }
+  /* value portrait css */
 }

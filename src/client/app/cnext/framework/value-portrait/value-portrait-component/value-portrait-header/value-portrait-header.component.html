@@ -1,8 +1,6 @@
 <header>
-
-
   <div class="col-xs-12 no-padding value-portraot-candidate-profile-section">
-    <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
+    <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12 padding-0">
       <div class="value-portraot-candidate-profile-img">
         <img [src]="getImagePath(candidate.personalDetails.picture)" alt="User Profile"
              *ngIf="candidate.personalDetails.picture != undefined"/>
@@ -16,19 +14,27 @@
       <div class="value-portraot-candidate-job-title" title="Job Title: {{candidate.jobTitle}}">
         {{candidate.jobTitle}}
       </div>
-    </div>
-    <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
-      <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 padding-left-0">
+      <div class="value-portraot-candidate-job-title hidden-lg hidden-md hidden-sm visible-xs"
+           title="Job Title: {{candidate.jobTitle}}">
         <div class="value-portraot-candidate-number">
           <span class="phone-icon"></span>
           <span title="Mobile number: {{candidate.personalDetails.mobile_number}}">+91 {{candidate.personalDetails.mobile_number}}</span>
         </div>
+      </div>
+      <div class="value-portraot-candidate-job-title hidden-lg hidden-md hidden-sm visible-xs"
+           title="Job Title: {{candidate.jobTitle}}">
         <div class="value-portraot-candidate-email">
           <span class="email-icon"></span>
           <span title="Email: {{candidate.personalDetails.email}}">{{candidate.personalDetails.email}}</span>
         </div>
       </div>
-      <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 no-padding">
+    </div>
+    <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12 visible-lg visible-md visible-sm hidden-xs">
+      <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 padding-left-0">
+        <div class="value-portraot-candidate-number">
+          <span class="phone-icon"></span>
+          <span title="Mobile number: {{candidate.personalDetails.mobile_number}}">+91 {{candidate.personalDetails.mobile_number}}</span>
+        </div>
         <div class="value-portraot-candidate-industry">
           <span class="industry-icon"></span>
           <label> Industry: </label>
@@ -50,6 +56,21 @@
             </b>
           </span>
         </div>
+      </div>
+    </div>
+
+    <div class="col-xs-12 no-padding border-top hidden-lg hidden-md hidden-sm visible-xs">
+      <div class="value-portraot-candidate-industry">
+        <label> Industry: </label>
+        <span title="Industry: {{candidate.industry.name}}">{{candidate.industry.name}}</span>
+      </div>
+      <div class="value-portraot-candidate-area-work">
+        <label> Area of Work: </label>
+        <span>
+          <b *ngFor="let role of candidate.industry.roles;let i=index">
+            {{role.name}}<small *ngIf="candidate.industry.roles.length -1 != i">,</small>
+          </b>
+        </span>
       </div>
     </div>
   </div>

@@ -140,3 +140,112 @@
   left: 50%;
   margin-left: -10px;
 }
+
+@media only screen and (max-width: 767px) {
+
+  .value-portraot-tabs {
+    background: $white;
+    ul {
+      background: $theme-color;
+      display: inline-flex;
+      overflow-x: auto;
+      overflow-y: hidden;
+      width: 100%;
+      li {
+        min-width: 166px;
+        a {
+          color: #94dbfb;
+          font-family: 'gothamrnd-book';
+          font-weight: 700;
+          padding: 12px 10px;
+        }
+      }
+      li.active {
+        a {
+          background: transparent;
+          border-bottom: 4px solid #F7B82B;
+          color: $white;
+        }
+      }
+    }
+  }
+  .value-portraot-bottom-section {
+    padding: 0;
+  }
+  #current-location-tabs {
+    .value-portraot-candidate-info-block {
+      ul {
+        li {
+          display: block !important;
+        }
+      }
+    }
+  }
+
+  #experience-level-tabs {
+
+  }
+  #education-tabs {
+
+  }
+  #employment-tabs {
+
+  }
+  #certification-tabs {
+
+  }
+  #awards-tabs {
+
+  }
+  .value-portraot-candidate-industry,
+  .value-portraot-candidate-keyskills {
+    span {
+      display: none;
+    }
+    label {
+      margin: 7px 5px 0 0 !important;
+      font-size: 16px;
+    }
+    .tooltip-content4 {
+      opacity: 0.9;
+      visibility: visible;
+      box-shadow: 0 0 0 transparent;
+      padding: 0;
+      width: 100%;
+      margin: 0;
+      right: inherit;
+      top: inherit;
+      position: inherit;
+      &:after {
+        display: none;
+      }
+    }
+  }
+  .about-myself-btn {
+    box-shadow: 0 0 0 transparent;
+    border: 0;
+    text-align: left;
+    float: left;
+    margin: 10px 0;
+    color: #000;
+    padding: 0;
+    font-family: 'gothamrnd-book';
+    width: 100%;
+    label {
+      font-size: 16px;
+      padding-top: 10px;
+    }
+    .tooltip-content3 {
+      opacity: 0.9;
+      visibility: visible;
+      box-shadow: 0 0 0 transparent;
+      padding: 0;
+      width: 100%;
+      margin: 0;
+      right: inherit;
+      top: inherit;
+      position: inherit;
+      display: block;
+    }
+  }
+}
