@@ -1,6 +1,7 @@
 import {Component, Input} from "@angular/core";
 import {Router} from "@angular/router";
 import {ImagePath, LoaderService, NavigationRoutes} from "../shared/index";
+import {AppSettings} from "../shared/constants";
 
 @Component({
   moduleId: module.id,
@@ -31,7 +32,7 @@ export class MainHeaderComponent {
 
     onHomePage() {
       window.localStorage.clear();
-      let host = 'http://' + window.location.hostname;
+      let host = AppSettings.HTTP_CLIENT + window.location.hostname;
       window.location.href = host;
     }
 }
