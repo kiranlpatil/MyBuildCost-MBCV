@@ -6,7 +6,7 @@ import {CommonService, ImagePath, Message, MessageService, NavigationRoutes} fro
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {LoaderService} from "../../shared/loader/loader.service";
 import {ValidationService} from "../../shared/customvalidations/validation.service";
-import {Messages} from "../../shared/constants";
+import {Messages, AppSettings} from "../../shared/constants";
 
 
 @Component({
@@ -69,6 +69,7 @@ export class ChangePasswordComponent {
   }
 
   changePasswordSuccess(body: ChangePassword) {
+    this.loaderService.stop();
     this.showHideModal();
     this.userForm.reset();
   }
@@ -96,7 +97,7 @@ export class ChangePasswordComponent {
 
   logOut() {
     window.localStorage.clear();
-    let host = 'http://' + window.location.hostname;
+    let host = AppSettings.HTTP_CLIENT + window.location.hostname;
     window.location.href = host;
   }
 

@@ -47,7 +47,7 @@ export class RecruiterSharedHeaderComponent implements OnInit {
   logOut() {
     window.localStorage.clear();
     //window.location.href = window.location.hostname;
-    let host = 'http://' + window.location.hostname;
+    let host = AppSettings.HTTP_CLIENT + window.location.hostname;
     window.location.href = host;
   }
 
