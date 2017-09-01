@@ -135,7 +135,10 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
     this.currentComplexity = 0;
     this.currentCapabilityNumber = 0;
     this.complexityIds = [];
-    this.complexityIds = Object.keys(complexities);
+    //this.complexityIds = Object.keys(complexities);
+    for(let i in complexities){
+      this.complexityIds.unshift(i);
+    }
     //this.removeDuplicateIds();
     this.complexityList = [];
     for (let id in complexities) {
@@ -145,7 +148,6 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
     this.currentComplexity = this.getCurrentComplexityPosition();
     this.getComplexityDetails(this.complexityIds[this.currentComplexity]);
   }
-
   /*removeDuplicateIds() {
    /!* let copyOfcomplexityIds = this.complexityIds.slice();
      for(let copy of copyOfcomplexityIds){
