@@ -1,4 +1,4 @@
-<div class="col-sm-4">
+<div class="col-sm-4 panel-container" [ngClass]="setClasses()">
   <div class="panel clearfix" (click)="viewJob(job._id)">
     <ul>
       <li *ngIf="type=='block'" (click)="deleteItem(job._id)" title='Remove job from "Not Interested" list' ><img src="assets/c-next/card-view/close-grey.png" /></li>
@@ -81,7 +81,7 @@
       <img *ngIf="!job.company_logo" src="assets/c-next/company-details/company-logo-default.png" />
     </div>
   </div>
-  <div class="button-group" *ngIf="type == 'searchView'">
+  <div class="button-group btn-hover" *ngIf="type == 'searchView'">
     <button *ngIf="inCartListedStatusForSearchView == false && inRejectListedStatusForSearchView == false"
             class="btn btn-primary" (click)="actionForSearchView('cartListed',job._id)">Add to cart
     </button>

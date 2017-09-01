@@ -13,7 +13,7 @@ class CandidateSearchService {
     this.candidateRepository = new CandidateRepository();
   }
 
-  searchMatchingJobProfile(candidate:CandidateModel, recruiterId:string, callback:(error:any, result:any) => void) {
+  searchMatchingJobProfile(candidate:CandidateModel, recruiterId:string, searchView:string, callback:(error:any, result:any) => void) {
 
     let currentDate = new Date();
     let data = {
@@ -29,7 +29,7 @@ class CandidateSearchService {
       if (err) {
         callback(err, null);
       } else {
-        this.recruiterRepository.getJobProfileQCard(res, candidate, undefined, callback);
+        this.recruiterRepository.getJobProfileQCard(res, candidate, undefined, searchView, callback);
       }
     });
   }

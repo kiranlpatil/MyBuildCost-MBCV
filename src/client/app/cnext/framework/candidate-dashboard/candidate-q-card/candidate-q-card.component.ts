@@ -191,5 +191,26 @@ export class CandidateQCardComponent implements OnInit {
           break;
       }
     }
+    if (this.inCartListedStatusForSearchView && this.inRejectListedStatusForSearchView == false) {
+      this.progress_bar_color = "'#7264b5'";
+    }
+    if (this.inRejectListedStatusForSearchView) {
+      this.progress_bar_color = "''#ff5722'";
+    }
+    if (this.inShortListedStatusForSearchView) {
+      //this.progress_bar_color="'#7264b5'"
+    }
+    if (this.inAppliedListedStatusForSearchView && this.inCartListedStatusForSearchView == false) {
+      this.progress_bar_color = "'#f7c72d'";
+    }
+  }
+
+  setClasses() {
+    let classes = {
+      inCartClass: (this.inCartListedStatusForSearchView && this.inRejectListedStatusForSearchView == false),
+      inRejectClass: this.inRejectListedStatusForSearchView,
+      inAppliedClass: (this.inAppliedListedStatusForSearchView)
+    };
+    return classes;
   }
 }
