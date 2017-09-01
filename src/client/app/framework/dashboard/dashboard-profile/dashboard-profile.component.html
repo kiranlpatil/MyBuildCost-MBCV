@@ -1,32 +1,27 @@
-<section class="dashboard-profile col-sm-10 col-sm-offset-1">
+<cn-candidate-dashboard-header [candidate]="candidate" ></cn-candidate-dashboard-header>
+
+<section class="dashboard-profile col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
   <div>
 
     <!--<tpl-loader *ngSwitchCase="true"></tpl-loader>-->
     <app-loader></app-loader>
-    <div class="col-sm-12">
+    <div class="col-sm-7 col-sm-offset-4">
       <h4><span class="glyphicon glyphicon-user"></span>Personal information</h4>
     </div>
 
-    <div class="col-sm-3 profile">
-      <h5>{{model.first_name}}</h5>
-
-      <div class="avtar" [ngStyle]="{'background-image': 'url(' + image_path + ')'}">
-        <!--<img src={{image_path}} alt="Profile Picture">-->
+    <div class="col-sm-4 my-info">
+      <div class="description-container">
+        <div class="image-container">
+          <cn-profile-picture (onPictureUpload)="onPictureUpload($event)"></cn-profile-picture>
+        </div>
+        <div class="user-name">
+          <span class="profile-name-first">{{candidate.basicInformation.first_name}}&nbsp;</span><span
+                class="profile-name-last">{{candidate.basicInformation.last_name}}</span>
+        </div>
       </div>
-      <br>
-
-      <form [class.hide-list]="isSocialLogin">
-        <label for="file-upload" class="custom-file-upload">
-          Change Picture
-        </label>
-        <!--<input id="file-upload" type="file"/>-->
-        <input id="file-upload" type="file" (change)="fileChangeEvent($event)" placeholder="Upload file"/>
-      </form>
     </div>
 
-    <div class="col-sm-7  col-sm-offset-2">
-      <div class="clearfix">&nbsp;</div>
-
+    <div class="col-sm-7">
       <div class="alert alert-danger clearfix" [hidden]="isShowErrorMessage">
         <div class="col-sm-1 hidden-xs"><span class="glyphicon glyphicon-warning-sign"></span></div>
         <div class="col-sm-10 col-xs-11 error-msg"><b>{{ error_msg }}</b></div>
@@ -38,19 +33,19 @@
 
       <form [formGroup]="userForm" (submit)="onSubmit()" class="profile-form">
 
-        <div class="form-group" [class.fb-email-input]="isSocialLogin">
+        <div *ngIf="role==='candidate'" class="form-group" [class.fb-email-input]="isSocialLogin">
           <label><img src="{{FIRST_NAME_ICON}}"/> First Name </label>
-          <control-messages [control]="userForm.controls.first_name"></control-messages>
           <input type="text" [(ngModel)]="model.first_name" formControlName="first_name" id="first_name "
-                 placeholder="First Name" class="form-control"/>
+                 class="form-control"/>
+          <control-messages [control]="userForm.controls.first_name"></control-messages>
         </div>
 
 
-        <div class="form-group" [class.fb-email-input]="isSocialLogin">
+        <div *ngIf="role==='candidate'" class="form-group" [class.fb-email-input]="isSocialLogin">
           <label><img src="{{LAST_NAME_ICON}}"/> Last Name </label>
-          <control-messages [control]="userForm.controls.last_name"></control-messages>
           <input type="text" [(ngModel)]="model.last_name" formControlName="last_name" id="last_name "
-                 placeholder="Last Name" class="form-control"/>
+                 class="form-control"/>
+          <control-messages [control]="userForm.controls.last_name"></control-messages>
         </div>
 
 
@@ -59,9 +54,9 @@
             <span class="glyphicon glyphicon-pencil" [class.hide-list]="isSocialLogin"
                   (click)="showHideEmailModal()"></span>
           </label>
-          <control-messages [control]="userForm.controls.email"></control-messages>
-          <input [(ngModel)]="model.email" formControlName="email" id="email" placeholder="Email"
+          <input [(ngModel)]="model.email" formControlName="email" id="email"
                  class="form-control clear" readonly/>
+          <control-messages [control]="userForm.controls.email"></control-messages>
 
         </div>
 
@@ -69,14 +64,13 @@
           <label><img src="{{MOBILE_ICON}}"/> Contact
             <span class="glyphicon glyphicon-pencil" (click)="showHideMobileModal()"></span>
           </label>
-          <control-messages [control]="userForm.controls.mobile_number"></control-messages>
           <input type="number" [(ngModel)]="model.mobile_number" formControlName="mobile_number"
-                 id="mobile_number "
-                 placeholder="Mobile Number" class="form-control clear" readonly/>
+                 id="mobile_number" class="form-control clear" readonly/>
+          <control-messages [control]="userForm.controls.mobile_number"></control-messages>
         </div>
         <div class="clearfix">&nbsp;</div>
         <!--<button type="submit" class="btn btn-default">Edit Profile</button>-->
-        <button type="submit" class="btn btn-default" [disabled]="!userForm.valid">Save Profile</button>
+        <button type="submit" class="btn btn-primary" [disabled]="!userForm.valid">Save Profile</button>
       </form>
     </div>
 
@@ -95,11 +89,9 @@
           <h5><span class="glyphicon glyphicon-envelope"></span> Change your Email</h5>
         </div>
         <div class="modal-body">
-          <div class="row">
-            <div class="col-sm-12">
-              <p>{{emailRestMessage}}</p>
-              <tpl-change-email></tpl-change-email>
-            </div>
+          <div class="col-sm-12">
+            <p>{{emailRestMessage}}</p>
+            <tpl-change-email></tpl-change-email>
           </div>
         </div>
       </div>
@@ -118,11 +110,9 @@
           <h5><span class="glyphicon glyphicon-phone"></span> Change your Mobile</h5>
         </div>
         <div class="modal-body">
-          <div class="row">
-            <div class="col-sm-12">
-              <p>{{mobileNumberRestMessage}}</p>
-              <tpl-change-mobile></tpl-change-mobile>
-            </div>
+          <div class="col-sm-12">
+            <p>{{mobileNumberRestMessage}}</p>
+            <tpl-change-mobile></tpl-change-mobile>
           </div>
         </div>
       </div>

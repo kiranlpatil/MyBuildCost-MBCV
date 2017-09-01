@@ -1,4 +1,4 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, OnInit, Input} from "@angular/core";
 import {CandidateProfileService} from "../../candidate-profile/candidate-profile.service";
 import {Candidate} from "../../model/candidate";
 import {ErrorService} from "../../error.service";
@@ -13,13 +13,14 @@ import {ErrorService} from "../../error.service";
 export class ValuePortraitComponent implements OnInit {
 
   private candidate: Candidate = new Candidate();
+  @Input() userId:string;
 
   constructor(private candidateProfileService: CandidateProfileService,private errorService:ErrorService) {
 
   }
 
   ngOnInit(): void {
-    this.candidateProfileService.getCandidateAllDetails()
+    this.candidateProfileService.getCandidateAllDetails(this.userId)
       .subscribe(
         candidateData => {
           this.candidate = candidateData.data;

@@ -1,7 +1,8 @@
 import {Component, ElementRef, HostListener, Input} from "@angular/core";
 import {Router} from "@angular/router";
 import {Candidate, Section} from "../../model/candidate";
-import {AppSettings, ImagePath} from "../../../../framework/shared/constants";
+import {AppSettings, ImagePath, LocalStorage} from "../../../../framework/shared/constants";
+import {LocalStorageService} from "../../../../framework/shared/localstorage.service";
 
 @Component({
   moduleId: module.id,
@@ -40,11 +41,18 @@ export class CandidateHeaderComponent {
 
   logOut() {
     window.localStorage.clear();
-    let host = 'http://' + window.location.hostname;
+    let host = AppSettings.HTTP_CLIENT + window.location.hostname;
       window.location.href = host;
   }
 
-  navigateTo(nav: string) {
+  navigateToWithId(nav:string) {
+    var userId = LocalStorageService.getLocalValue(LocalStorage.USER_ID);
+    if (nav !== undefined) {
+      this._router.navigate([nav, userId]);
+    }
+  }
+
+  navigateTo(nav:string) {
     if (nav !== undefined) {
       this._router.navigate([nav]);
     }

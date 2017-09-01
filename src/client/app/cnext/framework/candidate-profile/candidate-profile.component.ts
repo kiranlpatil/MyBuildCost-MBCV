@@ -129,8 +129,6 @@ export class CandidateProfileComponent implements OnInit, DoCheck, OnDestroy {
   }
 
   onError(error: any) {
-    debugger;
-    console.log(error);
     var message = new Message();
     message.error_msg = error.err_msg;
     message.isError = true;

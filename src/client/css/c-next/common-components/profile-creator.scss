@@ -343,7 +343,7 @@
     border: 0;
     background: url('../../assets/c-next/profile-creator/previous.png') center center;
     padding: 12px 7px;
-    z-index: 2;
+    z-index: 9999;
 
     span {
       display: none;

@@ -33,61 +33,81 @@ export function login(req: express.Request, res: express.Response, next: any) {
             if(isSame){
               var auth = new AuthInterceptor();
               var token = auth.issueTokenWithUid(result[0]);
-              if (result[0].isCandidate === false) {
-                var recruiterService = new RecruiterService();
+              if(result[0].isAdmin){
+                res.status(200).send({
+                  "status": Messages.STATUS_SUCCESS,
+                  "data": {
+                    "email": result[0].email,
+                    "first_name": result[0].first_name,
+                    "_id": result[0]._id,
+                    "current_theme": result[0].current_theme,
+                    "end_user_id": result[0]._id,
+                    "picture": result[0].picture,
+                    "mobile_number": result[0].mobile_number,
+                    "isCandidate": result[0].isCandidate,
+                    "isAdmin": result[0].isAdmin
+                  },
+                  access_token: token
+                });
+              }else{
+                if (result[0].isCandidate === false) {
+                  var recruiterService = new RecruiterService();
 
-                recruiterService.retrieve({"userId": result[0]._id}, (error, recruiter) => {
-                  if (error) {
-                    next(error);
-                  }
-                  else {
-                    res.status(200).send({
-                      "status": Messages.STATUS_SUCCESS,
-                      "data": {
-                        "email": result[0].email,
-                        "_id": result[0]._id,
-                        "end_user_id": recruiter[0]._id,
-                        "current_theme": result[0].current_theme,
-                        "picture": result[0].picture,
-                        "company_headquarter_country": recruiter[0].company_headquarter_country,
-                        "company_name": recruiter[0].company_name,
-                        "setOfDocuments": recruiter[0].setOfDocuments,
-                        "company_size": recruiter[0].company_size,
-                        "isRecruitingForself": recruiter[0].isRecruitingForself,
-                        "mobile_number": result[0].mobile_number,
-                        "isCandidate": result[0].isCandidate
-                      },
-                      access_token: token
-                    });
-                  }
-                });
-              }
-              else {
-                var candidateService = new CandidateService();
-                candidateService.retrieve({"userId": result[0]._id}, (error, candidate) => {
-                  if (error) {
-                    next(error);
-                  }
-                  else {
-                    res.status(200).send({
-                      "status": Messages.STATUS_SUCCESS,
-                      "data": {
-                        "first_name": result[0].first_name,
-                        "last_name": result[0].last_name,
-                        "email": result[0].email,
-                        "_id": result[0]._id,
-                        "end_user_id": candidate[0]._id,
-                        "current_theme": result[0].current_theme,
-                        "picture": result[0].picture,
-                        "mobile_number": result[0].mobile_number,
-                        "isCandidate": result[0].isCandidate,
-                        "isCompleted": candidate[0].isCompleted,
-                        "guide_tour": result[0].guide_tour
-                      },
-                      access_token: token
-                    });
-                  }
-                });
+                  recruiterService.retrieve({"userId": result[0]._id}, (error, recruiter) => {
+                    if (error) {
+                      next(error);
+                    }
+                    else {
+                      res.status(200).send({
+                        "status": Messages.STATUS_SUCCESS,
+                        "data": {
+                          "email": result[0].email,
+                          "_id": result[0]._id,
+                          "end_user_id": recruiter[0]._id,
+                          "current_theme": result[0].current_theme,
+                          "picture": result[0].picture,
+                          "company_headquarter_country": recruiter[0].company_headquarter_country,
+                          "company_name": recruiter[0].company_name,
+                          "setOfDocuments": recruiter[0].setOfDocuments,
+                          "company_size": recruiter[0].company_size,
+                          "isRecruitingForself": recruiter[0].isRecruitingForself,
+                          "mobile_number": result[0].mobile_number,
+                          "isCandidate": result[0].isCandidate,
+                          "isAdmin": result[0].isAdmin
+                        },
+                        access_token: token
+                      });
+                    }
+                  });
+                }
+                else {
+                  var candidateService = new CandidateService();
+                  candidateService.retrieve({"userId": result[0]._id}, (error, candidate) => {
+                    if (error) {
+                      next(error);
+                    }
+                    else {
+                      res.status(200).send({
+                        "status": Messages.STATUS_SUCCESS,
+                        "data": {
+                          "first_name": result[0].first_name,
+                          "last_name": result[0].last_name,
+                          "email": result[0].email,
+                          "_id": result[0]._id,
+                          "end_user_id": candidate[0]._id,
+                          "current_theme": result[0].current_theme,
+                          "picture": result[0].picture,
+                          "mobile_number": result[0].mobile_number,
+                          "isCandidate": result[0].isCandidate,
+                          "isAdmin": result[0].isAdmin,
+                          "isCompleted": candidate[0].isCompleted,
+                          "guide_tour": result[0].guide_tour
+                        },
+                        access_token: token
+                      });
+                    }
+                  });
+                }
               }
             }else{
               next({
@@ -144,7 +164,8 @@ export function login(req: express.Request, res: express.Response, next: any) {
   catch (e) {
     res.status(403).send({message: e.message});
   }
-}
+};
+
 export function generateOtp(req: express.Request, res: express.Response, next: any) {
   try {
     var userService = new UserService();
@@ -636,31 +657,50 @@ export function changePassword(req: express.Request, res: express.Response, next
     delete params.access_token;
     var auth: AuthInterceptor = new AuthInterceptor();
     var userService = new UserService();
+    bcrypt.compare(req.body.current_password,user.password , (err : any, isSame : any)=> {
+      if(err) {
+        next({
+          reason: Messages.MSG_ERROR_RSN_INVALID_REGISTRATION_STATUS,
+          message: Messages.MSG_ERROR_VERIFY_CANDIDATE_ACCOUNT,
+          code: 403
+        });
+      }else {
+        if(isSame) {
 
-    if (user.password === req.body.current_password) {
-      var query = {"_id": req.user._id, "password": req.body.current_password};
-      var updateData = {"password": req.body.new_password};
-      userService.findOneAndUpdate(query, updateData, {new: true}, (error, result) => {
-        if (error) {
-          next(error);
-        }
-        else {
-          var token = auth.issueTokenWithUid(user);
-          res.send({
-            "status": "Success",
-            "data": {"message": "Password changed successfully"},
-            access_token: token
+          var new_password:any;
+          const saltRounds = 10;
+          bcrypt.hash(req.body.new_password, saltRounds, (err:any, hash:any) => {
+            // Store hash in your password DB.
+            if(err) {
+              console.log('Error in creating hash using bcrypt');
+          }
+          else {
+              new_password = hash;
+          var query = {"_id": req.user._id};
+          var updateData = {"password": new_password};
+          userService.findOneAndUpdate(query, updateData, {new: true}, (error, result) => {
+            if (error) {
+              next(error);
+            }
+            else {
+              var token = auth.issueTokenWithUid(user);
+              res.send({
+                "status": "Success",
+                "data": {"message": "Password changed successfully"},
+                access_token: token
+              });
+            }
+          });
+            }
+        });
+        } else {
+          next({
+            reason: Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
+            message: Messages.MSG_ERROR_WRONG_CURRENT_PASSWORD,
+            code: 401
           });
         }
-      });
-    }
-    else {
-      next({
-        reason: Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
-        message: Messages.MSG_ERROR_WRONG_CURRENT_PASSWORD,
-        code: 401
-      });
-    }
+      }});
   }
   catch (e) {
     res.status(403).send({message: e.message});
@@ -760,7 +800,7 @@ export function changeEmailId(req: express.Request, res: express.Response, next:
       else {
 
         var emailId = {
-          current_email: user.email,
+          current_email: req.body.current_email,
           new_email: req.body.new_email
         };
 
@@ -783,6 +823,7 @@ export function changeEmailId(req: express.Request, res: express.Response, next:
             }
           }
           else {
+            console.log("email change success");
             res.status(200).send({
               "status": Messages.STATUS_SUCCESS,
               "data": {"message": Messages.MSG_SUCCESS_EMAIL_CHANGE_EMAILID}

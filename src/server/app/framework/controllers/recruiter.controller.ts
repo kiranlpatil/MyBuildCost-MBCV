@@ -9,6 +9,10 @@ import RecruiterService = require('../services/recruiter.service');
 import JobProfileModel = require('../dataaccess/model/jobprofile.model');
 import CNextMessages = require('../shared/cnext-messages');
 import SearchService = require("../search/services/search.service");
+import CandidateInfoSearch = require("../dataaccess/model/candidate-info-search");
+import CandidateModel = require("../dataaccess/model/candidate.model");
+import UserService = require("../services/user.service");
+import CandidateSearchService = require("../services/candidate-search.service");
 
 
 export function create(req: express.Request, res: express.Response, next: any) {
@@ -232,6 +236,73 @@ export function getCompareDetailsOfCandidate(req: express.Request, res: express.
           "data": result,
         });
 
+      }
+    });
+
+  }
+  catch (e) {
+    res.status(403).send({message: e.message});
+  }
+
+}
+
+export function getCandidatesByName(req:express.Request, res:express.Response, next:any) {
+  try {
+    let userService = new UserService();
+    let candidateService = new CandidateService();
+    let candidateSearchService = new CandidateSearchService();
+    var userName = req.params.searchvalue;
+    var query:any;
+    var searchValueArray:string[] = userName.split(" ");
+    if (searchValueArray.length > 1) {
+      var exp1 = eval('/^' + searchValueArray[0] + '/i');
+      var exp2 = eval('/^' + searchValueArray[1] + '/i');
+      var searchString1:string = exp1.toString().replace(/'/g, "");
+      var searchString2:string = exp2.toString().replace(/'/g, "");
+      query = {
+        'isCandidate': true,
+        $or: [{
+          'first_name': {$regex: eval(searchString1)},
+          'last_name': {$regex: eval(searchString2)}
+        }, {'first_name': {$regex: eval(searchString2)}, 'last_name': {$regex: eval(searchString1)}}]
+      };
+    } else {
+      var exp = eval('/^' + searchValueArray[0] + '/i');
+      var searchString:string = exp.toString().replace(/'/g, "");
+
+      query = {
+        'isCandidate': true,
+        $or: [{'first_name': {$regex: eval(searchString)}}, {'last_name': {$regex: eval(searchString)}}]
+      };
+    }
+    userService.retrieve(query, (error:any, result:any) => {
+      if (error) {
+        next({
+          reason: 'Problem in Search user details',
+          message: 'Problem in Search user details',
+          code: 401
+        });
+      }
+      else {
+        var candidateId:string[] = new Array(0);
+        for (let obj of result) {
+          candidateId.push(obj._id);
+        }
+        candidateSearchService.getCandidateInfo(candidateId, (error:any, candidateInfo:CandidateModel[]) => {
+          if (error) {
+            next({
+              reason: 'Problem in Search user details',
+              message: 'Problem in Search user details',
+              code: 401
+            });
+          } else {
+            var searchArray:CandidateInfoSearch[] = candidateSearchService.buidResultOnCandidateSearch(candidateInfo);
+            res.send({
+              'status': 'success',
+              'data': searchArray,
+            });
+          }
+        });
       }
     });
 

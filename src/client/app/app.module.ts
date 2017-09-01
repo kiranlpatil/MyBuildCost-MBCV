@@ -188,8 +188,16 @@ import {RegistrationService} from "./framework/shared/registration.service";
 import {GuidedTourService} from "./cnext/framework/guided-tour.service";
 import {ErrorService} from "./cnext/framework/error.service";
 import {LoggerService, MyErrorHandler} from "./cnext/framework/my-error-handler.service";
-import {SharedService} from "./framework/shared/shared-service";
+import {AdminDashboardComponent} from "./cnext/framework/admin-dashboard/admin-dashboard.component";
+import {AdminDashboardHeaderComponent} from "./cnext/framework/admin-dashboard/admin-dashboard-header/admin-dashboard-header.component";
+import {RecruiterDetailListComponent} from "./cnext/framework/admin-dashboard/recruiter-detail-list/recruiter-detail-list.component";
+import {CandidateDetailListComponent} from "./cnext/framework/admin-dashboard/candidate-detail-list/candidate-detail-list.component";
+import {KeyskillsDetailListComponent} from "./cnext/framework/admin-dashboard/keyskills-detail-list/keyskills-detail-list.component";
+import {AdminDashboardService} from "./cnext/framework/admin-dashboard/admin-dashboard.service";
 
+import {SharedService} from "./framework/shared/shared-service";
+import {CandidateSearchComponent} from "./cnext/framework/candidate-search/candidate-search.component";
+import {CandidateSearchService} from "./cnext/framework/candidate-search/candidate-search.service";
 //C-NEXT IMPORTS
 
 
@@ -248,11 +256,16 @@ import {SharedService} from "./framework/shared/shared-service";
     ProfessionalDetailsDirective,
     RecruiterSharedHeaderComponent,
     AdditionalDetailsComponent,
+    RecruiterDetailListComponent,
+    CandidateDetailListComponent,
+    KeyskillsDetailListComponent,
     HorizontalListViewComponent,
     CandidateProfileComponent,
     ProfileDescriptionComponent,
     CapabilitiesComponent,
     GuidedTourComponent,
+    AdminDashboardComponent,
+    AdminDashboardHeaderComponent,
     MultipleQuestionAnswerComponent,
     JobProficienciesComponent,
     ProficienciesComponent,
@@ -322,7 +335,8 @@ import {SharedService} from "./framework/shared/shared-service";
     ProfileComparisonPipe,
     ColorShadeDirective,
     AttributeFilterPipe,
-    ValueSortFilterPipe
+    ValueSortFilterPipe,
+    CandidateSearchComponent
   ],
   providers: [
     {
@@ -390,6 +404,7 @@ import {SharedService} from "./framework/shared/shared-service";
     QCardViewService,
     IndustryDetailsService,
     ProficiencyDetailsService,
+    AdminDashboardService,
     FilterService,
     IndustryDataService,
     RecruiteQCardView2Service,
@@ -403,6 +418,7 @@ import {SharedService} from "./framework/shared/shared-service";
     ReleventIndustryListService,
     ProfileComparisonService,
     GuidedTourService,
+    CandidateSearchService,
     SharedService
 
   ],

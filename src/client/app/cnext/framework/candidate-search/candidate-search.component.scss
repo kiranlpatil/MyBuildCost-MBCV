@@ -1,0 +1,84 @@
+@import '../../../../css/variables';
+
+.auto-suggestion-list {
+  box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.08);
+  left: 31px;
+  position: absolute;
+  top: 37px;
+  width: 498px;
+  z-index: 99;
+  ul {
+    padding: 0;
+    margin: 0;
+    li {
+      background: $white;
+      display: block;
+      padding: 5px 10px 3px;
+      .suggestion-lists {
+        label {
+          font-family: 'gothamrnd-book';
+          font-weight: 600;
+          color: $black1;
+        }
+        span {
+          color: #989898;
+        }
+      }
+      &:hover {
+        background: #f2f2f2;
+      }
+      &:first-child {
+        background: #f2f2f2;
+      }
+    }
+  }
+}
+
+.candidate-search-input {
+  background: $active-color;
+  height: 50px;
+  padding-top: 10px;
+  position: fixed;
+  top: 90px;
+  z-index: 99;
+  input {
+    border: 1px solid $gray;
+    float: left;
+    padding: 9px 7px 7px 10px;
+    width: 500px;
+  }
+  .search-btn {
+    color: $white;
+    background: $theme-color;
+    border: 0;
+    float: left;
+    height: 38px;
+    margin: 0 0 0 0px;
+    padding: 8px 31px;
+  }
+}
+
+.search-left-content {
+  background: $white;
+}
+
+.search-container {
+  text-align: left;
+  margin-top: 100px;
+  .card-view {
+    margin-top: 40px;
+  }
+  .empty-list-message {
+    left: 53%;
+    text-align: center;
+  }
+  .view-profile-btn {
+    background: $theme-color;
+    border: 0;
+    clear: both;
+    color: $white;
+    display: table;
+    margin: 15px auto;
+    padding: 7px 25px;
+  }
+}

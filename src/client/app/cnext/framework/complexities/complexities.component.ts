@@ -225,7 +225,7 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
   }
 
   oncurrentComplexityAnswered(complexityDetails: ComplexityDetails) {
-
+    this.isValid=true;
     this.complexities[complexityDetails.code] = complexityDetails.userChoice;
     this.onComplextyAnswered.emit(this.complexities);
   }

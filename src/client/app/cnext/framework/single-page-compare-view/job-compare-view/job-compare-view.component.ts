@@ -41,7 +41,7 @@ export class JobCompareViewComponent implements OnChanges,OnInit {
               private guidedTourService:GuidedTourService) {
   }
 
-  ngOnChanges(changes: any) {
+  ngOnChanges(changes:any) {
     if (changes.candiadteId != undefined && changes.candiadteId.currentValue != undefined) {
       this.candiadteId = changes.candiadteId.currentValue;
     }

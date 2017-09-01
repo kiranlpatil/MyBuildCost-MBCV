@@ -142,8 +142,6 @@ export class EmploymentHistoryComponent {
   }
 
   save(model: any) {         //TODO Remove it
-    console.log(this.employeeHistory);
-    console.log(model);
   }
 
   postData(type: string) {

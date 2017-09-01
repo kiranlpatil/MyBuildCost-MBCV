@@ -2,6 +2,7 @@
  * Created by techprime002 on 7/11/2017.
  */
 import * as express from 'express';
+import fs = require('fs');
 import AuthInterceptor = require('../interceptor/auth.interceptor');
 import Messages = require('../shared/messages');
 import ImportIndustryService = require('../services/import-industries.service');

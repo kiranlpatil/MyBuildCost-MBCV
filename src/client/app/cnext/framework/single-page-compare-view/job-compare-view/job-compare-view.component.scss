@@ -204,14 +204,18 @@
 
 .job-info-labal {
   div {
-    padding: 6px 6px 0;
     color: $white;
+    font-family: gothamrnd-book;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 6px 8px 0;
+    letter-spacing: 0.5px;
   }
-  .user-job-label {
+  /*.user-job-label {
     label,
     .company-name,
     .jobTitle-name {
       font-size: 12px;
     }
-  }
+  }*/
 }

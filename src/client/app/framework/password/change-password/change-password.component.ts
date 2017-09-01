@@ -6,7 +6,7 @@ import {CommonService, ImagePath, Message, MessageService, NavigationRoutes} fro
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {LoaderService} from "../../shared/loader/loader.service";
 import {ValidationService} from "../../shared/customvalidations/validation.service";
-import {Messages} from "../../shared/constants";
+import {Messages, AppSettings} from "../../shared/constants";
 
 
 @Component({
@@ -36,9 +36,9 @@ export class ChangePasswordComponent {
               private formBuilder: FormBuilder, private loaderService: LoaderService) {
 
     this.userForm = this.formBuilder.group({
-      'new_password': ['', ValidationService.requireNewPasswordValidator, ValidationService.passwordValidator],
+      'new_password': ['', ValidationService.requireNewPasswordValidator],
       'confirm_password': ['', [ValidationService.requireConfirmPasswordValidator]],
-      'current_password': ['', [ValidationService.requireCurrentPasswordValidator, ValidationService.passwordValidator]]
+      'current_password': ['', [ValidationService.requireCurrentPasswordValidator]]
     });
 
     this.PASSWORD_ICON = ImagePath.PASSWORD_ICON_GREY;
@@ -69,6 +69,7 @@ export class ChangePasswordComponent {
   }
 
   changePasswordSuccess(body: ChangePassword) {
+    this.loaderService.stop();
     this.showHideModal();
     this.userForm.reset();
   }
@@ -96,7 +97,8 @@ export class ChangePasswordComponent {
 
   logOut() {
     window.localStorage.clear();
-    this._router.navigate([NavigationRoutes.APP_START]);
+    let host = AppSettings.HTTP_CLIENT + window.location.hostname;
+    window.location.href = host;
   }
 
   getStyle() {

@@ -48,4 +48,15 @@ export class JobDashboardService extends BaseService {
       .catch(this.handleError);
   }
 
+  addUsesTrackingData(recruiterId: string, candidateId: string, jobProfileId: string, action: string): Observable<any> {
+    var url = 'usesTracking/' + recruiterId + '/' + jobProfileId + '/' + candidateId + '/' + action;
+    let headers = new Headers({'Content-Type': 'application/json'});
+    let options = new RequestOptions({headers: headers});
+    let body = JSON.stringify({});
+    // /**//api/recruiter/:id/job/api/candidate/590bfa262f1dde6216f2d5b3/jobProfile/590c62a33c503b824603cef0/applied/add'
+    return this.http.put(url, body, options)
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
+
 }

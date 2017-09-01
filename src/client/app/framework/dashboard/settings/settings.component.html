@@ -1,4 +1,6 @@
-<section class="settings col-sm-10 col-sm-offset-1">
+<cn-candidate-dashboard-header [candidate]="candidate" *ngIf="role==='candidate'"></cn-candidate-dashboard-header>
+
+<section class="settings">
 
   <ul>
 
@@ -10,30 +12,30 @@
       <tpl-change-password></tpl-change-password>
     </li>
 
-    <li>
-      <div class="col-xs-12">
-        <h4><span class="glyphicon glyphicon-bell"></span>Notification</h4>
+    <!-- <li>
+       <div class="col-xs-12">
+         <h4><span class="glyphicon glyphicon-bell"></span>Notification</h4>
 
-        <p>{{ APP_NAME }} notifies you about changes to your account and changes to things you are watching.
-          Notifications appear in your {{ APP_NAME }} inbox and are sent via email to prajakta.pawar@techprimelab.com
-          (Configure email)</p>
-        <label>Notifications
-          <input type="checkbox">
-        </label>
-      </div>
-    </li>
-
-    <li>
-      <div class="col-xs-12">
-        <h4><span class="glyphicon glyphicon-picture"></span>Appearance</h4>
-        <p>{{changeThemeMessage}}</p>
-        <label>Dark Theme
-          <input type="radio" (click)="darkTheme()" name="theme" [checked]="themeIs == INITIAL_THEME">
-        </label>
-        <label>Light Theme
-          <input type="radio" (click)="lightTheme()" name="theme" [checked]="themeIs == LIGHT_THEME">
-        </label>
-      </div>
-    </li>
+         <p>{{ APP_NAME }} notifies you about changes to your account and changes to things you are watching.
+           Notifications appear in your {{ APP_NAME }} inbox and are sent via email to prajakta.pawar@techprimelab.com
+           (Configure email)</p>
+         <label>Notifications
+           <input type="checkbox">
+         </label>
+       </div>
+     </li>
+ -->
+    <!-- <li>
+       <div class="col-xs-12">
+         <h4><span class="glyphicon glyphicon-picture"></span>Appearance</h4>
+         <p>{{changeThemeMessage}}</p>
+         <label>Dark Theme
+           <input type="radio" (click)="darkTheme()" name="theme" [checked]="themeIs == INITIAL_THEME">
+         </label>
+         <label>Light Theme
+           <input type="radio" (click)="lightTheme()" name="theme" [checked]="themeIs == LIGHT_THEME">
+         </label>
+       </div>
+     </li>-->
   </ul>
 </section>

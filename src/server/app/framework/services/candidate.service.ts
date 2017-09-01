@@ -19,6 +19,7 @@ import ComplexityClassModel = require("../dataaccess/model/complexity-class.mode
 import ComplexitiesClassModel = require("../dataaccess/model/complexities-class.model");
 import CapabilityModel = require("../dataaccess/model/capability.model");
 import RoleModel = require("../dataaccess/model/role.model");
+import CandidateInfoSearch = require("../dataaccess/model/candidate-info-search");
 var bcrypt = require('bcrypt');
 class CandidateService {
   private candidateRepository: CandidateRepository;
@@ -612,7 +613,7 @@ class CandidateService {
       if (err) {
         callback(err, null);
       } else {
-        this.recruiterRepository.getJobProfileQCard(res, item.candidate, item.ids, (canError, canResult) => {
+        this.recruiterRepository.getJobProfileQCard(res, item.candidate, item.ids, 'none', (canError, canResult) => {
           if (canError) {
             callback(canError, null);
           } else {
@@ -622,7 +623,6 @@ class CandidateService {
       }
     });
   }
-
 }
 
 Object.seal(CandidateService);

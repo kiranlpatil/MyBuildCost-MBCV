@@ -4,7 +4,7 @@ import ProjectAsset = require('../../shared/projectasset');
 import RecruiterRepository = require('../../dataaccess/repository/recruiter.repository');
 import CandidateModel = require('../../dataaccess/model/candidate.model');
 import JobProfileService = require('../../services/jobprofile.service');
-import {ConstVariables} from "../../shared/sharedconstants";
+import {Actions, ConstVariables} from "../../shared/sharedconstants";
 import {ProfileComparisonDataModel, SkillStatus} from "../../dataaccess/model/profile-comparison-data.model";
 import {CapabilityMatrixModel} from "../../dataaccess/model/capability-matrix.model";
 import {ProfileComparisonModel} from "../../dataaccess/model/profile-comparison.model";
@@ -14,18 +14,22 @@ import Match = require('../../dataaccess/model/match-enum');
 import IndustryRepository = require('../../dataaccess/repository/industry.repository');
 import IndustryModel = require('../../dataaccess/model/industry.model');
 import ScenarioModel = require('../../dataaccess/model/scenario.model');
+let usestracking = require('uses-tracking');
 
 class SearchService {
   APP_NAME: string;
   candidateRepository: CandidateRepository;
   recruiterRepository: RecruiterRepository;
   industryRepository: IndustryRepository;
+  private usesTrackingController: any;
 
   constructor() {
     this.APP_NAME = ProjectAsset.APP_NAME;
     this.candidateRepository = new CandidateRepository();
     this.recruiterRepository = new RecruiterRepository();
     this.industryRepository = new IndustryRepository();
+    let obj: any = new usestracking.MyController();
+    this.usesTrackingController = obj._controller;
   }
 
   getMatchingCandidates(jobProfile: JobProfileModel, callback: (error: any, result: any) => void) {
@@ -151,12 +155,24 @@ class SearchService {
       if (err) {
         callback(err, null);
       } else {
-        this.recruiterRepository.getJobProfileQCard(res, candidate, undefined, callback);
+        this.recruiterRepository.getJobProfileQCard(res, candidate, undefined, 'none', callback);
       }
     });
   }
 
   getMatchingResult(candidateId: string, jobId: string, isCandidate : boolean,callback: (error: any, result: any) => void) {
+    let uses_data = {
+      candidateId: candidateId,
+      jobProfileId: jobId,
+      timestamp: new Date(),
+      action: Actions.DEFAULT_VALUE
+    };
+    if (isCandidate) {
+      uses_data.action = Actions.VIEWED_JOB_PROFILE_BY_CANDIDATE;
+    } else {
+      uses_data.action = Actions.VIEWED_FULL_PROFILE_BY_RECRUITER;
+    }
+    this.usesTrackingController.create(uses_data);
     this.candidateRepository.findByIdwithExclude(candidateId,{'industry':0}, (err: any, candidateRes: any) => {
       if (err) {
         callback(err, null);
@@ -281,7 +297,7 @@ class SearchService {
   }
 
   buildCandidateModel(candidate: CandidateModel) {
-    console.log('--------------------------candidate-------------------------------------------', candidate);;;
+    console.log('--------------------------candidate-------------------------------------------', candidate);
     let profileComparisonResult: ProfileComparisonDataModel = new ProfileComparisonDataModel();
     profileComparisonResult._id = candidate._id;
     profileComparisonResult.industryName = candidate.industry.name;
@@ -348,7 +364,7 @@ class SearchService {
             qestionCountForAvgPercentsge++;
             //match_view.match = Match.Exact;
           } else if (job.capability_matrix[cap] == (Number(newCandidate.capability_matrix[cap]) - ConstVariables.DIFFERENCE_IN_COMPLEXITY_SCENARIO)) {
-            matchCount++;;;
+            matchCount++;
             capabilityQuestionCount++;
             correctQestionCountForAvgPercentage++;
             qestionCountForAvgPercentsge++;
@@ -591,7 +607,7 @@ class SearchService {
   getJobDetailsForComparison(job:JobProfileModel) {
     var profileComparisonJobModel:ProfileComparisonJobModel = new ProfileComparisonJobModel();
     profileComparisonJobModel.city = job.location.city;
-    profileComparisonJobModel.country = job.location.country;;;
+    profileComparisonJobModel.country = job.location.country;
     profileComparisonJobModel.state = job.location.state;
     profileComparisonJobModel.education = job.education;
     profileComparisonJobModel.experienceMaxValue = job.experienceMaxValue;

@@ -35,7 +35,8 @@
   </div>
   <div class="candidate-compare-attribute clearfix">
     <div class="matching-attribute-name">
-      <div class="inner">
+      <div class="inner"
+           title="Current Salary : {{profileComparisonJobData.salaryMinValue}} Lac - {{profileComparisonJobData.salaryMaxValue}} Lac">
         <h6>Current Salary</h6>
         <p>{{profileComparisonJobData.salaryMinValue}} Lac - {{profileComparisonJobData.salaryMaxValue}} Lac</p>
       </div>
@@ -58,7 +59,8 @@
   </div>
   <div class="candidate-compare-attribute clearfix">
     <div class="matching-attribute-name">
-      <div class="inner">
+      <div class="inner"
+           title="Total Experience : {{profileComparisonJobData.experienceMinValue}} Year - {{profileComparisonJobData.experienceMaxValue}} Year">
         <h6>Total Experience</h6>
         <p>{{profileComparisonJobData.experienceMinValue}} Year - {{profileComparisonJobData.experienceMaxValue}}
           Year</p>
@@ -81,7 +83,7 @@
   </div>
   <div class="candidate-compare-attribute clearfix">
     <div class="matching-attribute-name">
-      <div class="inner">
+      <div class="inner" title="Notice Period : {{profileComparisonJobData.joiningPeriod}}">
         <h6>Notice Period</h6>
         <p>{{profileComparisonJobData.joiningPeriod}}</p>
       </div>
@@ -103,7 +105,7 @@
   </div>
   <div class="candidate-compare-attribute clearfix">
     <div class="matching-attribute-name">
-      <div class="inner">
+      <div class="inner" title="Education : {{profileComparisonJobData.education}}">
         <h6>Education</h6>
         <p>{{profileComparisonJobData.education}}</p>
       </div>
@@ -120,7 +122,7 @@
   </div>
   <div class="candidate-compare-attribute clearfix">
     <div class="matching-attribute-name">
-      <div class="inner">
+      <div class="inner" title="Industry : {{profileComparisonJobData.industryName}}">
         <h6>Industry</h6>
         <p>{{profileComparisonJobData.industryName}}</p>
       </div>
@@ -138,7 +140,7 @@
   </div>
   <div class="candidate-compare-attribute clearfix">
     <div class="matching-attribute-name">
-      <div class="inner">
+      <div class="inner" title="Location : {{profileComparisonJobData.city}}">
         <h6>Location</h6>
         <p>{{profileComparisonJobData.city}}</p>
       </div>
@@ -173,7 +175,7 @@
   </div>
   <div class="candidate-compare-attribute clearfix">
     <div class="matching-attribute-name">
-      <div class="inner">
+      <div class="inner" title="Domain : {{value}}">
         <h6>Domain</h6>
         <p *ngFor="let value of profileComparisonJobData.interestedIndustries">
           {{value}}

@@ -155,7 +155,8 @@
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
     "walk": "^2.3.9",
-    "yargs": "^6.0.0"
+    "yargs": "^6.0.0",
+    "uses-tracking": "^1.0.20"
   },
   "dependencies": {
     "@angular/common": "^2.1.2",
@@ -176,7 +177,7 @@
     "@types/passport": "^0.2.32",
     "@types/passport-http-bearer": "^1.0.30",
     "@types/winston": "0.0.28",
-    "bcrypt": "^1.0.2",
+    "bcrypt": "1.0.2",
     "body-parser": "^1.15.2",
     "bootstrap": "^3.3.6",
     "compression": "^1.6.2",
@@ -188,8 +189,8 @@
     "fs": "0.0.1-security",
     "intl": "^1.2.5",
     "jquery": "^3.2.1",
+    "json2csv": "^3.11.1",
     "minimatch": "^3.0.3",
-    "mongoose-encryption": "^1.5.0",
     "mongoose": "4.7",
     "morgan": "^1.7.0",
     "msg91": "0.0.6",

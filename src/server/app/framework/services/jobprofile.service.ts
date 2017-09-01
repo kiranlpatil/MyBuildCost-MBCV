@@ -1,20 +1,17 @@
-import * as mongoose from "mongoose";
-import {Recruiter} from "../dataaccess/model/recruiter-final.model";
-import {ConstVariables} from "../shared/sharedconstants";
-var config = require('config');
-import Messages = require("../shared/messages");
-import ProjectAsset = require("../shared/projectasset");
-import UserRepository = require("../dataaccess/repository/user.repository");
-import LocationRepository = require("../dataaccess/repository/location.repository");
-import RecruiterRepository = require("../dataaccess/repository/recruiter.repository");
-import JobProfileRepository = require("../dataaccess/repository/job-profile.repository");
-import CandidateRepository = require("../dataaccess/repository/candidate.repository");
-import JobProfileModel = require("../dataaccess/model/jobprofile.model");
-import CandidateSearchRepository = require("../search/candidate-search.repository");
-import RecruiterModel = require("../dataaccess/model/recruiter.model");
-import IndustryModel = require("../dataaccess/model/industry.model");
-import IndustryRepository = require("../dataaccess/repository/industry.repository");
-import CandidateService = require("./candidate.service");
+import * as mongoose from 'mongoose';
+import {Recruiter} from '../dataaccess/model/recruiter-final.model';
+import {Actions, ConstVariables} from '../shared/sharedconstants';
+import ProjectAsset = require('../shared/projectasset');
+import RecruiterRepository = require('../dataaccess/repository/recruiter.repository');
+import JobProfileRepository = require('../dataaccess/repository/job-profile.repository');
+import CandidateRepository = require('../dataaccess/repository/candidate.repository');
+import JobProfileModel = require('../dataaccess/model/jobprofile.model');
+import CandidateSearchRepository = require('../search/candidate-search.repository');
+import IndustryModel = require('../dataaccess/model/industry.model');
+import IndustryRepository = require('../dataaccess/repository/industry.repository');
+import CandidateService = require('./candidate.service');
+import {SharedService} from '../shared/services/shared-service';
+let usestracking = require('uses-tracking');
 
 
 class JobProfileService {
@@ -22,8 +19,9 @@ class JobProfileService {
   private candidateSearchRepository: CandidateSearchRepository;
   private industryRepository: IndustryRepository;
   private recruiterRepository: RecruiterRepository;
-  candidateRepository: CandidateRepository;
-  APP_NAME: string;
+  private candidateRepository: CandidateRepository;
+  private APP_NAME: string;
+  private usesTrackingController: any;
 
   constructor() {
     this.jobprofileRepository = new JobProfileRepository();
@@ -32,6 +30,8 @@ class JobProfileService {
     this.industryRepository = new IndustryRepository();
     this.candidateRepository = new CandidateRepository();
     this.APP_NAME = ProjectAsset.APP_NAME;
+    let obj: any = new usestracking.MyController();
+    this.usesTrackingController = obj._controller;
   }
 
   create(item: any, callback: (error: any, result: any) => void) {
@@ -57,13 +57,12 @@ class JobProfileService {
 
   retrieve(data: any, callback: (error: any, result: any) => void) {
     let query = {
-      "postedJobs": {$elemMatch: {"_id": new mongoose.Types.ObjectId(data.postedJob)}}
+      'postedJobs': {$elemMatch: {'_id': new mongoose.Types.ObjectId(data.postedJob)}}
     };
     this.recruiterRepository.retrieve(query, (err, res) => {
       if (err) {
-        callback(new Error("Not Found Any Job posted"), null);
-      }
-      else {
+        callback(new Error('Not Found Any Job posted'), null);
+      } else {
         if (res.length > 0) {
           let recruiter: Recruiter = new Recruiter();
           recruiter = res[0];
@@ -81,7 +80,7 @@ class JobProfileService {
 
   getCapabilityValueKeyMatrix(_id: string,  callback: (error: any, result: any) => void) {
     let data: any = {
-      "postedJob": _id
+      'postedJob': _id
     };
     this.retrieve(data, (err: any, res:Recruiter) => {
       if (err) {
@@ -103,21 +102,21 @@ class JobProfileService {
   update(item: any, callback: (error: any, result: any) => void) {
 
     let query = {
-      "postedJobs": {$elemMatch: {"_id": new mongoose.Types.ObjectId(item.profileId)}}
+      'postedJobs': {$elemMatch: {'_id': new mongoose.Types.ObjectId(item.profileId)}}
     };
 
     let updateFlag = false;
 
     let updatedQuery1 = {
-      "_id": item.recruiterId,
-      "postedJobs._id": item.profileId
+      '_id': item.recruiterId,
+      'postedJobs._id': item.profileId
     };
 
     let updatedQuery2 = {
       $push: {
-        "postedJobs.$.candidate_list": {
-          "name": item.listName,
-          "ids": item.candidateId
+        'postedJobs.$.candidate_list': {
+          'name': item.listName,
+          'ids': item.candidateId
         }
       }
     };
@@ -125,12 +124,12 @@ class JobProfileService {
     let updatedQuery3: any;
 
     let updatedQuery4 = {
-      "new": true, "upsert": true
+      'new': true, 'upsert': true
     };
 
     this.recruiterRepository.retrieve(query, (err, res) => {
       if (err) {
-        callback(new Error("Not Found Any Job posted"), null);
+        callback(new Error('Not Found Any Job posted'), null);
       }
       else {
         if (res.length > 0) {
@@ -140,12 +139,32 @@ class JobProfileService {
               for (let list of job.candidate_list) {
                 if (list.name == item.listName) {
                   updateFlag = true;
-                  if (item.action == "add") {
+                  if (item.action == 'add') {
+                    let uses_data = {
+                      recruiterId: res[0]._id,
+                      candidateId: item.candidateId,
+                      jobProfileId: job._id,
+                      timestamp: new Date(),
+                      action: Actions.DEFAULT_VALUE
+                    };
+                    let sharedService: SharedService = new SharedService();
+                    uses_data.action = sharedService.constructAddActionData(item.listName);
+                    this.usesTrackingController.create(uses_data);
                     let index = list.ids.indexOf(item.candidateId);    // <-- Not supported in <IE9
                     if (index == -1) {
                       list.ids.push(item.candidateId);
                     }
                   } else {
+                    let uses_data = {
+                      recruiterId: res[0]._id,
+                      candidateId: item.candidateId,
+                      jobProfileId: job._id,
+                      timestamp: new Date(),
+                      action: Actions.DEFAULT_VALUE
+                    };
+                    let sharedService: SharedService = new SharedService();
+                    uses_data.action = sharedService.constructRemoveActionData(item.listName);
+                    this.usesTrackingController.create(uses_data);
                     let index = list.ids.indexOf(item.candidateId);    // <-- Not supported in <IE9
                     if (index !== -1) {
                       list.ids.splice(index, 1);
@@ -153,7 +172,7 @@ class JobProfileService {
                   }
                   updatedQuery3 = {
                     $set: {
-                      "postedJobs.$.candidate_list": job.candidate_list
+                      'postedJobs.$.candidate_list': job.candidate_list
                     }
                   };
                   break;
@@ -169,7 +188,7 @@ class JobProfileService {
                 } else {
                   let error: any;
                   if (record === null) {
-                    error = new Error("Unable to add candidate.");
+                    error = new Error('Unable to add candidate.');
                     callback(error, null);
                   }
                   else {
@@ -182,17 +201,16 @@ class JobProfileService {
         }
       }
     });
-
   }
 
 
   applyJob(item: any, callback: (error: any, result: any) => void) {
 
 
-    this.candidateRepository.retrieve({"_id": new mongoose.Types.ObjectId(item.candidateId)}, (error, response) => {
+    this.candidateRepository.retrieve({'_id': new mongoose.Types.ObjectId(item.candidateId)}, (error, response) => {
 
       if (error) {
-        callback(new Error("No candidate Found"), null);
+        callback(new Error('No candidate Found'), null);
       } else {
         if (response.length > 0) {
           let updateExistingQueryForCandidate: any;
@@ -200,12 +218,30 @@ class JobProfileService {
           for (let list of response[0].job_list) {
             if (list.name == item.listName) {
               isJobFound = true;
-              if (item.action == "add") {
+              if (item.action == 'add') {
                 let index = list.ids.indexOf(item.profileId);
                 if (index == -1) {
+                  let uses_data = {
+                    candidateId: item.candidateId,
+                    jobProfileId: item.profileId,
+                    timestamp: new Date(),
+                    action: Actions.DEFAULT_VALUE
+                  };
+                  let sharedService: SharedService = new SharedService();
+                  uses_data.action = sharedService.constructAddActionData(item.listName);
+                  this.usesTrackingController.create(uses_data);
                   list.ids.push(item.profileId);
                 }
-              } else if (item.action == "remove" && item.listName != "applied") {
+              } else if (item.action == 'remove' && item.listName != 'applied') {
+                let uses_data = {
+                  candidateId: item.candidateId,
+                  jobProfileId: item.profileId,
+                  timestamp: new Date(),
+                  action: Actions.DEFAULT_VALUE
+                };
+                let sharedService: SharedService = new SharedService();
+                uses_data.action = sharedService.constructRemoveActionData(item.listName);
+                this.usesTrackingController.create(uses_data);
                 let index = list.ids.indexOf(item.profileId);
                 if (index !== -1) {
                   list.ids.splice(index, 1);
@@ -213,7 +249,7 @@ class JobProfileService {
               }
               updateExistingQueryForCandidate = {
                 $set: {
-                  "job_list": response[0].job_list
+                  'job_list': response[0].job_list
                 }
               };
               break;
@@ -221,39 +257,39 @@ class JobProfileService {
           }
           let newEntryQueryForCandidate = {
             $push: {
-              "job_list": {
-                "name": item.listName,
-                "ids": item.profileId
+              'job_list': {
+                'name': item.listName,
+                'ids': item.profileId
               }
             }
           };
           let options = {
-            "new": true, "upsert": true
+            'new': true, 'upsert': true
           };
           let latestQueryForCandidate: any;
           isJobFound ? latestQueryForCandidate = updateExistingQueryForCandidate : latestQueryForCandidate = newEntryQueryForCandidate;
           let candidateSearchQuery = {
-            "_id": item.candidateId
+            '_id': item.candidateId
           };
 
           this.candidateRepository.findOneAndUpdate(candidateSearchQuery, latestQueryForCandidate, options, (err, record) => {
             if (record) {
-              if (item.listName == "applied" && item.action == "add") {
+              if (item.listName == 'applied' && item.action == 'add') {
                 let query = {
-                  "postedJobs": {$elemMatch: {"_id": new mongoose.Types.ObjectId(item.profileId)}}
+                  'postedJobs': {$elemMatch: {'_id': new mongoose.Types.ObjectId(item.profileId)}}
                 };
                 let newEntryQuery = {
                   $push: {
-                    "postedJobs.$.candidate_list": {
-                      "name": ConstVariables.APPLIED_CANDIDATE,
-                      "ids": item.candidateId
+                    'postedJobs.$.candidate_list': {
+                      'name': ConstVariables.APPLIED_CANDIDATE,
+                      'ids': item.candidateId
                     }
                   }
                 };
                 let updateExistingQuery: any;
                 this.recruiterRepository.retrieve(query, (err, res) => {
                   if (err) {
-                    callback(new Error("Not Found Any Job posted"), null);
+                    callback(new Error('Not Found Any Job posted'), null);
                   }
                   else {
                     let isFound: boolean = false;
@@ -269,7 +305,7 @@ class JobProfileService {
                               }
                               updateExistingQuery = {
                                 $set: {
-                                  "postedJobs.$.candidate_list": job.candidate_list
+                                  'postedJobs.$.candidate_list': job.candidate_list
                                 }
                               };
                               break;
@@ -280,8 +316,8 @@ class JobProfileService {
                       let latestQuery: any;
                       isFound ? latestQuery = updateExistingQuery : latestQuery = newEntryQuery;
                       let recruiterSearchQuery = {
-                        "_id": res[0]._id,
-                        "postedJobs._id": item.profileId
+                        '_id': res[0]._id,
+                        'postedJobs._id': item.profileId
                       };
 
                       this.recruiterRepository.findOneAndUpdate(recruiterSearchQuery, latestQuery, options, (err, record) => {
@@ -290,7 +326,7 @@ class JobProfileService {
                         } else {
                           let error: any;
                           if (record === null) {
-                            error = new Error("Unable to add candidate.");
+                            error = new Error('Unable to add candidate.');
                             callback(error, null);
                           }
                           else {
@@ -308,7 +344,7 @@ class JobProfileService {
             } else {
               let error: any;
               if (record === null) {
-                error = new Error("Unable to add Job to List.");
+                error = new Error('Unable to add Job to List.');
                 callback(error, null);
               }
               else {
@@ -333,11 +369,11 @@ class JobProfileService {
       } else {
         candidateDetails = candidateDetailsRes;
         let query = {
-          "postedJobs": {$elemMatch: {"_id": new mongoose.Types.ObjectId(item.jobId)}}
+          'postedJobs': {$elemMatch: {'_id': new mongoose.Types.ObjectId(item.jobId)}}
         };
         this.recruiterRepository.retrieve(query, (err, res) => {
           if (err) {
-            callback(new Error("Not Found Any Job posted"), null);
+            callback(new Error('Not Found Any Job posted'), null);
           }
           else {
             if (res.length > 0) {

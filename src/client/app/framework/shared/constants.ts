@@ -14,9 +14,13 @@ export class AppSettings {
   public static LIGHT_THEM = 'container-fluid light-theme';
   public static IS_SOCIAL_LOGIN_YES = 'YES';
   public static IS_SOCIAL_LOGIN_NO = 'NO';
+  public static HTTP_CLIENT = 'http://';
 }
 
 export class Messages {
+  public static MSG_CANDIDATE_NOT_FOUND = "Candidate Not Found";
+  public static MSG_CANDIDATE_SEARCH_NOT_FOUND = "The profile details of selected applicant are not displayed, since this profile does not match with any of your open job profiles.";
+  public static MSG_CNADIDATE_VISIBILITY_OFF = "The selected applicant profile details are not displayed, since the applicant has marked it as private.";
   public static MSG_SUCCESS_LOGIN: string = 'You are successfully signed in.';
   public static MSG_SUCCESS_REGISTRATION: string = 'Kindly verify your account.';
   public static MSG_SUCCESS_CHANGE_MOBILE_NUMBER: string = 'Mobile number updated successfully.';
@@ -205,6 +209,7 @@ export class NavigationRoutes {
   public static APP_FORGOTPASSWORD: string = '/forgotpassword';
   public static APP_DASHBOARD: string = '/dashboard';
   public static APP_CANDIDATE_DASHBOARD: string = '/candidate_dashboard';
+  public static APP_ADMIN_DASHBOARD: string = '/admin_dashboard';
   public static APP_RECRUITER_DASHBOARD: string = '/recruiterdashboard';
   public static APP_LOGIN: string = '/signin';
   public static APP_START: string = '/';
@@ -225,6 +230,7 @@ export class LocalStorage {
   public static IS_THEME_SELECTED = 'is_theme_selected';
   public static IS_SOCIAL_LOGIN = 'is_social_login';
   public static PROFILE_PICTURE = 'profile_picture';
+  public static ISADMIN = 'is_admin';
   public static IS_LOGGED_IN = 'is_user_logged_in';
   public static USER_ID = 'user_id';
   public static END_USER_ID = 'end_user_id';
@@ -278,6 +284,7 @@ export class API {
   public static NOTIFICATION = 'notification';
   public static SEND_MAIL = 'sendmail';
   public static USER_PROFILE = 'users';
+  public static ALL_USER_PROFILE = 'alluser';
   public static CANDIDATE_PROFILE = 'candidate';
   public static CANDIDATE_DETAIL_PROFILE = 'candidateDetails';
   public static RECRUITER_PROFILE = 'recruiter';

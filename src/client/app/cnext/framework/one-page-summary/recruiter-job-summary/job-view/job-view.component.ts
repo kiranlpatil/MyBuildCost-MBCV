@@ -43,7 +43,6 @@ export class JobViewComponent implements OnChanges ,OnInit {
     }
     if (changes.calledFrom !== undefined && changes.calledFrom.currentValue !== undefined) {
       this.calledFrom = changes.calledFrom.currentValue;
-      console.log("In ngchange",this.calledFrom);
     }
   }
 
