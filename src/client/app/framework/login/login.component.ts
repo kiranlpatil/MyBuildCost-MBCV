@@ -129,10 +129,8 @@ export class LoginComponent implements OnInit {
     this.successRedirect(res);
   }
   currentPosition(position:any) {
-    let latitude = position.coords.latitude;
-    let longitude = position.coords.longitude;
-    this.adminModel.lattitude=latitude;
-    this.adminModel.longitude=longitude;
+    this.adminModel.lattitude=position.coords.latitude;;
+    this.adminModel.longitude=position.coords.longitude;
     this.adminModel.email=this.model.email;
     this.loginService.sendMailToAdmin( this.adminModel)
       .subscribe(
@@ -140,6 +138,11 @@ export class LoginComponent implements OnInit {
         error => this.errorService.onError(error));
   }
   locationError(error: any) {
+    this.adminModel.email=this.model.email;
+    this.loginService.sendMailToAdmin( this.adminModel)
+      .subscribe(
+        body => console.log("sending mail to admin"),
+        error => this.errorService.onError(error));
     console.log("location access is disable");
   }
 
