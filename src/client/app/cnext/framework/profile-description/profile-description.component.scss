@@ -27,9 +27,13 @@
 
   .user-name {
 
-    .profile-name-first,
+    .profile-name-first {
+      font-size: 21px;
+    }
+
     .profile-name-last {
       font-size: 21px;
+      margin: 0 8px 0 2px;
     }
   }
 

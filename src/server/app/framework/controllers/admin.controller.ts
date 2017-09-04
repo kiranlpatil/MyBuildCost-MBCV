@@ -1,21 +1,11 @@
-/**
- * Created by techprime002 on 8/28/2017.
- */
-/**
- * Created by techprime002 on 7/11/2017.
- */
 import * as express from 'express';
-import fs = require('fs');
 import AuthInterceptor = require('../interceptor/auth.interceptor');
 import Messages = require('../shared/messages');
-import ImportIndustryService = require('../services/import-industries.service');
-import UserService = require("../services/user.service");
-import AdminService = require("../services/admin.service");
-import CandidateModel = require("../dataaccess/model/candidate.model");
-import UserModel = require("../dataaccess/model/user.model");
+import UserService = require('../services/user.service');
+import AdminService = require('../services/admin.service');
+import UserModel = require('../dataaccess/model/user.model');
 var request = require('request');
 
-let importIndustriesService = new ImportIndustryService();
 
 
 export function create(req: express.Request, res: express.Response, next: any) {
@@ -28,54 +18,49 @@ export function create(req: express.Request, res: express.Response, next: any) {
     newUser.isActivated=true;
     newUser.password='$2a$10$5SBFt0BpQPp/15N5J38nZuh2zMSL1gbFmnEe4xRLIltlQn56bNcZq';
     var userService = new UserService();
-    // newUser.isActivated=true;
     userService.createUser(newUser, (error, result) => {
       if (error) {
-        console.log("crt user error", error);
+        console.log('crt user error', error);
 
-        if (error == Messages.MSG_ERROR_CHECK_EMAIL_PRESENT) {
+        if (error === Messages.MSG_ERROR_CHECK_EMAIL_PRESENT) {
           next({
             reason: Messages.MSG_ERROR_RSN_EXISTING_USER,
             message: Messages.MSG_ERROR_VERIFY_ACCOUNT,
             code: 403
           });
-        }
-        else if (error == Messages.MSG_ERROR_CHECK_MOBILE_PRESENT) {
+        } else if (error === Messages.MSG_ERROR_CHECK_MOBILE_PRESENT) {
           next({
             reason: Messages.MSG_ERROR_RSN_EXISTING_USER,
             message: Messages.MSG_ERROR_REGISTRATION_MOBILE_NUMBER,
             code: 403
           });
-        }
-        else {
+        } else {
           next({
             reason: Messages.MSG_ERROR_RSN_EXISTING_USER,
             message: Messages.MSG_ERROR_USER_WITH_EMAIL_PRESENT,
             code: 403
           });
         }
-      }
-      else {
+      } else {
         var auth: AuthInterceptor = new AuthInterceptor();
         console.log('result',JSON.stringify(result));
         var token = auth.issueTokenWithUid(result);
         res.status(200).send({
-          "status": Messages.STATUS_SUCCESS,
-          "data": {
-            "reason": Messages.MSG_SUCCESS_REGISTRATION,
-            "first_name": newUser.first_name,
-            "email": newUser.email,
-            "mobile_number": newUser.mobile_number,
-            "_id": result._id,
-            "picture": ""
+          'status': Messages.STATUS_SUCCESS,
+          'data': {
+            'reason': Messages.MSG_SUCCESS_REGISTRATION,
+            'first_name': newUser.first_name,
+            'email': newUser.email,
+            'mobile_number': newUser.mobile_number,
+            '_id': result._id,
+            'picture': ''
           },
           access_token: token
         });
       }
     });
-  }
-  catch (e) {
-    res.status(403).send({"status": Messages.STATUS_ERROR, "error_message": e.message});
+  } catch (e) {
+    res.status(403).send({'status': Messages.STATUS_ERROR, 'error_message': e.message});
   }
 }
 
@@ -89,7 +74,7 @@ export function getAllUser(req: express.Request, res: express.Response, next: an
       if (error) {
         next({
           reason: 'Error In Retrieving',//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
-          message: "error in create excel",
+          message: 'error in create excel',
           code: 403
         });
       } else {
@@ -97,7 +82,7 @@ export function getAllUser(req: express.Request, res: express.Response, next: an
           if (error) {
             next({
               reason: 'Error In Retrieving',//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
-              message: "error in create excel",
+              message: 'error in create excel',
               code: 403
             });
           }else {
@@ -105,11 +90,10 @@ export function getAllUser(req: express.Request, res: express.Response, next: an
               if (err) {
                 next({
                   reason: 'Error In Retrieving',//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
-                  message: "error in create excel",
+                  message: 'error in create excel',
                   code: 403
                 });
-              }
-              else {
+              } else {
                 res.status(200).send({
                   'status': 'success',
                   'data': resp
@@ -121,8 +105,51 @@ export function getAllUser(req: express.Request, res: express.Response, next: an
         });
       }
     });
+  } catch (e) {
+    res.status(403).send({message: e.message});
   }
-  catch (e) {
+}
+export function updateDetailOfUser(req: express.Request, res: express.Response, next: any) {
+  try {
+    var newUserData: UserModel = <UserModel>req.body;
+    var params = req.query;
+    delete params.access_token;
+    var user = req.user;
+    var _id: string = user._id;
+    var auth: AuthInterceptor = new AuthInterceptor();
+    var adminService = new AdminService();
+    var userService = new UserService();
+
+    adminService.updateUser(newUserData.user_id, newUserData, (error, result) => {
+      if (error) {
+        next(error);
+      } else {
+        userService.retrieve(_id, (error, resu) => {
+          if (error) {
+            next({
+              reason: Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
+              message: Messages.MSG_ERROR_WRONG_TOKEN,
+              code: 401
+            });
+          } else {
+            var token = auth.issueTokenWithUid(resu[0]);
+            res.send({
+              'status': 'success',
+              'data': {
+                'updateUser':result,
+                'first_name': resu[0].first_name,
+                'email': resu[0].email,
+                'mobile_number': resu[0].mobile_number,
+                '_id': resu[0].userId,
+                'current_theme': resu[0].current_theme
+              },
+              access_token: token
+            });
+          }
+        });
+      }
+    });
+  } catch (e) {
     res.status(403).send({message: e.message});
   }
 }
@@ -145,21 +172,16 @@ export function adminLoginInfoMail(req: express.Request, res: express.Response, 
               message: Messages.MSG_ERROR_WHILE_CONTACTING,
               code: 403
             });
-          }
-          else {
+          } else {
             res.status(200).send({
-              "status": Messages.STATUS_SUCCESS,
-              "data": {"message": Messages.MSG_SUCCESS_SUBMITTED}
+              'status': Messages.STATUS_SUCCESS,
+              'data': {'message': Messages.MSG_SUCCESS_SUBMITTED}
             });
           }
         });
       }
-
-    })
-
-  }
-  catch (e) {
+    });
+  } catch (e) {
     res.status(403).send({message: e.message});
-
   }
 }

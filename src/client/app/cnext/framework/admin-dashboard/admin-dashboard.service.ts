@@ -38,4 +38,12 @@ export class AdminDashboardService extends BaseService {
       .catch(this.handleError);
   }
 
+  updateUser(model: any): Observable<any> {
+    var url = API.UPDATE_USER + '/' + LocalStorageService.getLocalValue(LocalStorage.USER_ID);
+    let body = JSON.stringify(model);
+    return this.http.put(url, body)
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
+
 }

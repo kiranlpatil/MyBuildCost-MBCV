@@ -9,7 +9,7 @@ let lastObject: any = undefined;
 export class QCardListSortPipe implements PipeTransform {
 
 
-  transform(array: Array<CandidateQCard>, args: string[]): Array<CandidateQCard> {
+  transform(array: Array<CandidateQCard>, args: string[]): Array<CandidateQCard> { 
     if (array === null) {
       return null;
     }
@@ -76,10 +76,11 @@ export class QCardListSortPipe implements PipeTransform {
     }
 
     if(args[0] === 'Salary'  && args[2]==='candidate'){
+
       array.sort((a: CandidateQCard, b: CandidateQCard) => {
-        if (Number(a.salaryMinValue) > Number(b.salaryMinValue)) {
+        if (Number(a.salaryMaxValue) > Number(b.salaryMaxValue)) {
           return -1;
-        } else if (Number(a.salaryMinValue) < Number(b.salaryMinValue)) {
+        } else if (Number(a.salaryMaxValue) < Number(b.salaryMaxValue)) {
           return 1;
         } else {
           return 0;

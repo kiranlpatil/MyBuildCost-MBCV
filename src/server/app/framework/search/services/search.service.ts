@@ -552,7 +552,10 @@ class SearchService {
           break;
         }
       }
-      newCandidate['match_map'][cap]= match_view;
+      if (match_view.capability_name != undefined) {
+        newCandidate['match_map'][cap] = match_view;
+      }
+
     }
     return newCandidate;
   }
