@@ -1,23 +1,25 @@
 <div class="list-container">
   <div class="header">
-    <a href="./public/recruiter.csv" download="Recruiter.csv" title="Export recruiter to CSV File"><i class="glyphicon glyphicon-export"></i>Export</a>
+    <!--<a href="./public/recruiter.csv" download="Recruiter.csv" title="Export recruiter to CSV File"><i class="glyphicon glyphicon-export"></i>Export</a>-->
   </div>
+  <a href="./public/recruiter.csv" download="Recruiter.csv" title="Export recruiter to CSV File"
+     class="export-data-link"><i class="glyphicon glyphicon-export"></i>Export</a>
   <div class="list-view">
     <ul class="list-header">
       <li>
-        <h5>Company Name (size)</h5>
+        <h5>Company Name (Size)</h5>
       </li>
       <li>
-        <h5>Email address</h5>
+        <h5>Email Address</h5>
       </li>
       <li>
         <h5>Contact</h5>
       </li>
       <li>
-        <h5>Location</h5>
+        <h5>Current Location</h5>
       </li>
       <li>
-        <h5>No. of job posted</h5>
+        <h5>Total Posted Jobs</h5>
       </li>
       <li>
         <h5>Activation Status</h5>
@@ -32,7 +34,7 @@
           <p>{{recruiter.email}}</p>
         </li>
         <li>
-          <p>{{recruiter.mobile_number}}</p>
+          <p>+91-{{recruiter.mobile_number}}</p>
         </li>
         <li>
           <p *ngIf="recruiter.location && recruiter.location.city">{{recruiter.location.city}}</p>

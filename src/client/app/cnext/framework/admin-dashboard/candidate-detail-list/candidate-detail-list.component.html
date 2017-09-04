@@ -1,7 +1,9 @@
 <div class="list-container" *ngIf="candidates && candidates.length>0">
   <div class="header">
-    <a href="./public/candidate.csv" download="candiadte.csv" title="Export Candidate to CSV File"><i class="glyphicon glyphicon-export"></i>Export</a>
+    <!--<a href="./public/candidate.csv" download="candiadte.csv" title="Export Candidate to CSV File"><i class="glyphicon glyphicon-export"></i>Export</a>-->
   </div>
+  <a href="./public/candidate.csv" download="candiadte.csv" title="Export Candidate to CSV File"
+     class="export-data-link"><i class="glyphicon glyphicon-export"></i>Export</a>
   <div class="list-view">
     <ul class="list-header">
       <li>
@@ -11,16 +13,16 @@
         <h5>Job Title</h5>
       </li>
       <li>
-        <h5>Email address</h5>
+        <h5>Email Address</h5>
       </li>
       <li>
         <h5>Contact</h5>
       </li>
       <li>
-        <h5>Location</h5>
+        <h5>Current Location</h5>
       </li>
       <li>
-        <h5>Profile status</h5>
+        <h5>Profile Status</h5>
       </li>
       <li>
         <h5>Activation Status</h5>
@@ -38,7 +40,7 @@
           <p>{{candidate.email}}</p>
         </li>
         <li>
-          <p>{{candidate.mobile_number}}</p>
+          <p>+91-{{candidate.mobile_number}}</p>
         </li>
         <li>
           <p *ngIf="candidate.data.location && candidate.data.location.city">{{candidate.data.location.city}}</p>

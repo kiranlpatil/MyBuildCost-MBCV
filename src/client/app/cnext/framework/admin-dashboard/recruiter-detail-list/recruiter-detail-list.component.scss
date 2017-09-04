@@ -2,7 +2,7 @@
 
 .list-container {
   text-align: left;
-  margin-top: 190px;
+  margin-top: 155px;
 
   .header {
     padding: 5px 15px;
@@ -11,24 +11,44 @@
     width: 100%;
     top: 142px;
     text-align: right;
+    z-index: 999;
 
-    a{
-      i{
+    a {
+      i {
         font-size: 22px;
         margin-right: 10px;
       }
     }
   }
 
+  .export-data-link {
+    top: 108px;
+    position: fixed;
+    right: 15px;
+    z-index: 999;
+    font-size: 18px;
+
+    .glyphicon-export {
+      top: 3px;
+      padding-right: 5px;
+    }
+  }
+
   .list-view {
-    top: 190px !important;
-    padding: 0 15px;
+    margin-top: 25px;
+    top: 155px !important;
+    padding: 0;
     overflow: auto;
     position: absolute;
     z-index: 9;
 
     .list-header {
       background: $theme-color;
+      position: fixed;
+      left: 0;
+      top: 152px;
+      padding: 0;
+      z-index: 1000;
 
       li > h5 {
         color: #fff;
@@ -59,8 +79,8 @@
   }
 }
 
-.btn-custom{
-  padding: 0px 5px !important;
+.btn-custom {
+  padding: 0 5px !important;
   height: auto;
   width: 88px;
   border-radius: 5px;
