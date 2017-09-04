@@ -1,9 +1,13 @@
 <section class="main-form-wrapper login">
   <main-header [MainHeaderMenuHideShow]="mainHeaderMenuHideShow"></main-header>
 
-  <app-loader></app-loader>
+    <div *ngIf="!isChrome && isToasterVisible" #toaster id="snackbar">This application is certified on Chrome browser for better experience we would recommend to use it
+        <button class="button-style" (click)="closeToaster()">x</button>
+    </div>
 
-  <div class="col-lg-4 col-md-4 col-sm-6 col-xs-11 content">
+    <app-loader></app-loader>
+
+    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-11 content">
 
     <h5>Sign In <!--<span class="glyphicon glyphicon-remove" (click)="navigateTo('/landing')"></span>--></h5>
 

@@ -40,7 +40,6 @@ export class GuidedTourComponent implements OnInit {
     }
 
     onSkipClick() {
-        console.log('fromskip');
         this.onSkip.emit();
     }
 }

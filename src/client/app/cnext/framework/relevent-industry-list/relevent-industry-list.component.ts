@@ -42,8 +42,6 @@ export class ReleventIndustryListComponent implements OnInit {
 
   ngOnInit() {
     this.suggestionMsgForReleventIndustry = Messages.SUGGESTION_MSG_FOR_RELEVENT_INDUSTRY;
-    this.getReleventIndustries();
-
   }
 
   ngOnChanges(changes: any) {
@@ -54,7 +52,7 @@ export class ReleventIndustryListComponent implements OnInit {
 
   getReleventIndustries() {
     if (this.roles.length) {
-      this.roles.forEach(x => this.workAreas.push(x.name));
+      this.roles.forEach(x => this.workAreas.push(x.code));
       this.releventIndustryService.getReleventIndustries(this.workAreas, this.industry.name)
         .subscribe(
           res => {
@@ -71,7 +69,6 @@ export class ReleventIndustryListComponent implements OnInit {
   }
 
   onError(error: any) {
-    console.log('----errorr------', error);
   }
 
   goNext() {

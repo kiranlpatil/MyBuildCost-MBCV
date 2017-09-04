@@ -9,4 +9,5 @@ export class Complexity {
   questionForCandidate: string = '';
   questionForRecruiter: string = '';
   match: string;
+  answer: string;
 }

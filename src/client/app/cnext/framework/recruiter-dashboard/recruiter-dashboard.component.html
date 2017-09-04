@@ -7,8 +7,11 @@
 </div>
 <div class="container-fluid profile-wrapper">
   <ul class="nav nav-tabs dashboard-tabs" [class.move-left]="setValue">
-    <li class="active"><a data-toggle="tab" id="recr_job_dashboard" href="#posted-job">My Job Posts</a></li>
-    <li><a data-toggle="tab" id="post_job" href="#post_new_job">Post New Job</a></li>
+    <li class="active"><a data-toggle="tab" title="My Job Posts" id="recr_job_dashboard" href="#posted-job">My Job
+      Posts</a></li>
+    <li><a data-toggle="tab" title="Candidate Search" id="recr_candidae_search" href="#search-candidate">Applicant
+      Search</a></li>
+    <li><a data-toggle="tab" id="post_job" title="Post New Job" href="#post_new_job">Post New Job</a></li>
   </ul>
   <div class="tab-content">
 
@@ -23,6 +26,10 @@
     <div id="post_new_job" class="tab-pane fade clearfix" *ngIf="recruiterDashboard">
       <cn-job-poster [noOfJobPosted]="recruiterDashboard.postedJobs.length" [currentjobId]="jobId"
                      [recruiter]="recruiterDashboard"></cn-job-poster>
+    </div>
+
+    <div id="search-candidate" class="tab-pane fade clearfix" *ngIf="recruiterDashboard">
+      <cn-candidate-search></cn-candidate-search>
     </div>
   </div>
 </div>

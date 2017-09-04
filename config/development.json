@@ -24,6 +24,7 @@
       "authKey": "152516A0pwPFRp59198cd9",
       "senderId": "JOBMOS",
       "routerNumber": "4"
-    }
+    },
+    "folderPath":"./dist/dev/server/public"
   }
 }

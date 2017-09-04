@@ -1,4 +1,4 @@
-import {Component, NgZone, OnInit} from "@angular/core";
+import {Component, NgZone, OnInit, ViewChild, ElementRef} from "@angular/core";
 import {Router} from "@angular/router";
 import {LoginService} from "./login.service";
 import {Login} from "./login";
@@ -18,6 +18,9 @@ import {FacebookService} from "./facebook.service";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {ValidationService} from "../shared/customvalidations/validation.service";
 import {ProjectAsset} from "../shared/constants";
+import {SharedService} from "../shared/shared-service";
+import {AdminLogin} from "./adminlogininfo";
+import {ErrorService} from "../../cnext/framework/error.service";
 
 @Component({
   moduleId: module.id,
@@ -28,7 +31,9 @@ import {ProjectAsset} from "../shared/constants";
 
 
 export class LoginComponent implements OnInit {
+  @ViewChild('toaster') toaster: ElementRef;
   private model = new Login();
+  private adminModel = new AdminLogin();
   private userForm: FormGroup;
   private error_msg: string;
   private isShowErrorMessage: boolean = true;
@@ -41,11 +46,14 @@ export class LoginComponent implements OnInit {
   private BODY_BACKGROUND: string;
   private submitStatus: boolean;
   private mainHeaderMenuHideShow: string;
+  private isChrome: boolean;
+  private isToasterVisible: boolean = true;
 
   constructor(private _router: Router, private loginService: LoginService, private themeChangeService: ThemeChangeService,
               private messageService: MessageService, private _ngZone: NgZone,
               private formBuilder: FormBuilder, private commonService: CommonService, private loaderService: LoaderService,
-              private _facebookService: FacebookService) {
+              private _facebookService: FacebookService, private sharedService: SharedService,
+              private errorService:ErrorService) {
     this.userForm = this.formBuilder.group({
       'email': ['', [ValidationService.requireEmailValidator, ValidationService.emailValidator]],
       'password': ['', [ValidationService.requirePasswordValidator]]
@@ -57,6 +65,8 @@ export class LoginComponent implements OnInit {
     this.EMAIL_ICON = ImagePath.EMAIL_ICON;
     this.PASSWORD_ICON = ImagePath.PASSWORD_ICON;
     this.BODY_BACKGROUND = ImagePath.BODY_BACKGROUND;
+    this.isChrome = this.sharedService.getUserBrowser();
+    this.isToasterVisible = this.sharedService.getToasterVisiblity();
   }
 
   ngOnInit() {
@@ -65,6 +75,12 @@ export class LoginComponent implements OnInit {
     if (parseInt(LocalStorageService.getLocalValue(LocalStorage.IS_LOGGED_IN)) === 1) {
       this._router.navigate([NavigationRoutes.APP_CANDIDATE_DASHBOARD]);
     }
+  }
+
+  closeToaster() {
+    //this.toaster.nativeElement.style.visibility = "hidden";
+    this.isToasterVisible = false;
+    this.sharedService.setToasterVisiblity(this.isToasterVisible);
   }
 
   onSubmit() {
@@ -85,8 +101,7 @@ export class LoginComponent implements OnInit {
         error => (this.loginFail(error)));
   }
 
-  loginSuccess(res: any) {
-    var dataArray:string[] = new Array(0);
+  loginSuccess(res: any) { debugger
     LocalStorageService.setLocalValue(LocalStorage.IS_CANDIDATE, res.data.isCandidate);
     LocalStorageService.setLocalValue(LocalStorage.IS_CANDIDATE_FILLED, res.data.isCompleted);
     LocalStorageService.setLocalValue(LocalStorage.END_USER_ID, res.data.end_user_id);
@@ -94,7 +109,13 @@ export class LoginComponent implements OnInit {
     LocalStorageService.setLocalValue(LocalStorage.MOBILE_NUMBER, res.data.mobile_number);
     LocalStorageService.setLocalValue(LocalStorage.FIRST_NAME, res.data.first_name);
     LocalStorageService.setLocalValue(LocalStorage.LAST_NAME, res.data.last_name);
-    LocalStorageService.setLocalValue(LocalStorage.GUIDED_TOUR, JSON.stringify(dataArray));
+    if (res.data.guide_tour) {
+      LocalStorageService.setLocalValue(LocalStorage.GUIDED_TOUR, JSON.stringify(res.data.guide_tour));
+    } else {
+      var dataArray:string[] = new Array(0);
+      LocalStorageService.setLocalValue(LocalStorage.GUIDED_TOUR, JSON.stringify(dataArray));
+    }
+
     this.userForm.reset();
     if (res.data.current_theme) {
       LocalStorageService.setLocalValue(LocalStorage.MY_THEME, res.data.current_theme);
@@ -107,6 +128,23 @@ export class LoginComponent implements OnInit {
     }
     this.successRedirect(res);
   }
+  currentPosition(position:any) {
+    this.adminModel.lattitude=position.coords.latitude;;
+    this.adminModel.longitude=position.coords.longitude;
+    this.adminModel.email=this.model.email;
+    this.loginService.sendMailToAdmin( this.adminModel)
+      .subscribe(
+        body => console.log("sending mail to admin"),
+        error => this.errorService.onError(error));
+  }
+  locationError(error: any) {
+    this.adminModel.email=this.model.email;
+    this.loginService.sendMailToAdmin( this.adminModel)
+      .subscribe(
+        body => console.log("sending mail to admin"),
+        error => this.errorService.onError(error));
+    console.log("location access is disable");
+  }
 
   navigateTo(navigateTo: string) {
     if (navigateTo !== undefined) {
@@ -118,19 +156,23 @@ export class LoginComponent implements OnInit {
   successRedirect(res: any) {
     LocalStorageService.setLocalValue(LocalStorage.IS_LOGGED_IN, 1);
     LocalStorageService.setLocalValue(LocalStorage.PROFILE_PICTURE, res.data.picture);
-    if (res.data.isCandidate === true) {
+    LocalStorageService.setLocalValue(LocalStorage.ISADMIN, res.data.isAdmin);
+    if(res.data.isAdmin === true) {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(this.currentPosition.bind(this), this.locationError.bind(this));
+      }
+      this._router.navigate([NavigationRoutes.APP_ADMIN_DASHBOARD]);
+    }
+    else if (res.data.isCandidate === true) {
       if (res.data.isCompleted === true) {
         this._router.navigate([NavigationRoutes.APP_CANDIDATE_DASHBOARD]);
-      }
-      else {
+      } else {
         this._router.navigate([NavigationRoutes.APP_CREATEPROFILE]);
       }
     } else {
       LocalStorageService.setLocalValue(LocalStorage.COMPANY_NAME, res.data.company_name);
-
       this._router.navigate([NavigationRoutes.APP_RECRUITER_DASHBOARD]);
     }
-
   }
 
   loginFail(error: any) {
@@ -155,7 +197,6 @@ export class LoginComponent implements OnInit {
   }
 
   onFailure(error: any) {
-    console.log(error);
   }
 
 }

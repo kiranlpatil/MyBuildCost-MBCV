@@ -2,10 +2,10 @@
   "TplSeed": {
     "database": {
       "host":"127.0.0.1",
-      "name": "JobMosis-staging"
+      "name": "Jobmosis-staging"
     },
     "mail": {
-      "host":"http://52.89.221.23/",
+      "host":"http://34.208.115.60:3000/",
       "MAIL_SENDER": "notifications@jobmosis.com",
       "MAIL_SENDER_PASSWORD": "notifications@123",
       "ADMIN_MAIL": "notifications@jobmosis.com"
@@ -23,6 +23,7 @@
       "authKey": "152516A0pwPFRp59198cd9",
       "senderId": "JOBMOS",
       "routerNumber": "4"
-    }
+    },
+    "folderPath":"/home/bitnami/apps/jobmosis-staging/c-next/dist/prod/server/public/candidate.csv"
   }
 }

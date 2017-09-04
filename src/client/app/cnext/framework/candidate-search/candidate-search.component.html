@@ -1,0 +1,110 @@
+<div class="search-container">
+
+  <div class="col-sm-3 left-content">
+    <div *ngIf="candidate.isVisible == true">
+    <div *ngIf="candidateDetails._id" class="col-sm-3 left-content search-left-content">
+      <button class="view-profile-btn" (click)="viewProfile('/value-portrait')">View Profile</button>
+      <cn-candidate-description [candidateDetails]="candidateDetails"
+                                [candidate]="candidate"></cn-candidate-description>
+      <div *ngIf="candidate.employmentHistory.length>0">
+        <cn-vertical-list-view [data]="candidate.employmentHistory" [type]="'employment history'"
+                               [calledFrom]="'singlepageview'"></cn-vertical-list-view>
+      </div>
+      <div *ngIf="candidate.academics.length>0">
+        <cn-vertical-list-view [data]="candidate.academics" [type]="'academic details'"
+                               [calledFrom]="'singlepageview'"></cn-vertical-list-view>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <div class="col-sm-9 right-content candidate-search-section">
+    <!--
+      <input auto-complete (keypress)="searchCandidate()" [(ngModel)]="searchValue" [source]="candidateDataList" placeholder="select" class="search"/>
+    -->
+    <div class="col-xs-12 candidate-search-input">
+      <form (submit)="showSearchResult()">
+        <input (keyup)="searchCandidate($event.target.value)" placeholder="Type Applicant Name..."
+               [value]="searchValue">
+      </form>
+      <!-- <button class="search-btn">Search</button>-->
+    </div>
+    <!--<form class="form-horizontal" [formGroup]="myForm" (ngSubmit)="onSubmit(myForm.value)">
+      <div>
+        <div class="col-sm-5">
+          <input  ng2-auto-complete
+                  [source]="candidateDataList"
+                  [list-formatter]="autocompleListFormatter"
+                  value-property-name="id"
+                  display-property-name="first_name"
+                  placeholder="Contients"
+                  (keydown)="searchCandidate($event.target.value)">
+        </div><br/>
+        <button type="submit">Submit</button>
+      </div>
+    </form>-->
+    <div class="pull-left col-xs-3 no-padding clear-all-btn">
+    </div>
+    <div class="auto-suggestion-list">
+      <ul>
+        <li *ngFor="let item of candidateDataList">
+          <div (click)="getJobProfileMatching(item)" class="suggestion-lists">
+            <label>
+              {{item.first_name}} {{item.last_name}} -
+            </label>
+            <span>
+              {{item.designation}} at {{item.currentCompany}}
+            </span>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="card-view" *ngIf="checkButttons">
+      <div *ngFor="let job of listOfJobs">
+        <div>
+          <cn-candidate-q-card [candidateIDFromSearchView]='candidateId' [progress_bar_color]="'#29b6f6'" [job]="job"
+                               [type]="'searchView'"
+                               (jobComapare)="showJobCompareView($event)"
+                               (searchViewAction)="workFlowAction($event)"></cn-candidate-q-card>
+        </div>
+      </div>
+    </div>
+    <!--<div *ngIf="candidateProfileMeta._id">
+    <cn-candidate-profile-meta [candidateMetaData]="candidateProfileMeta"></cn-candidate-profile-meta>
+    </div>-->
+  </div>
+  <div class="empty-list-message" *ngIf="listOfJobs.length == 0 && candidate.isVisible == true">
+    {{msgSearchResultNotFound}}
+  </div>
+  <div class="empty-list-message" *ngIf="candidate.isVisible == false">
+    {{msgCandidateVisibilityOff}}
+  </div>
+  <div class="empty-list-message"
+       *ngIf="candidateDataList.length == 0 && searchValue !== '' && isCandidateFound == false">
+    {{msgCandidateNotFound}}
+  </div>
+
+
+</div>
+
+
+<div class="modal dashboard-modal" [style.display]="getModal()">
+  <div class="modal-bg">
+    <div class="modal-dialog modal-md">
+      <div class="modal-content job-dashboard-modal-content">
+        <div class="modal-body" *ngIf="isShowJobCompareView">
+          <cn-job-compare-view [candiadteId]="candidateId" [jobId]="jobId" (close)="closeJob()"></cn-job-compare-view>
+        </div>
+        <div class="button-group">
+          <button class="btn btn-primary"
+                  *ngIf="inCartListedStatusForSearchView == false && inRejectListedStatusForSearchView == false"
+                  (click)="actionOnCard('cartListed')">Add to cart
+          </button>
+          <button class="btn btn-danger" *ngIf="inRejectListedStatusForSearchView == false"
+                  (click)="actionOnCard('rejectedList') ">Reject
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

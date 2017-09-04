@@ -109,7 +109,6 @@ export class FilterComponent {
   }
 
   onError(err: any) {
-    console.log('error on filter data load');
   }
 
   filterByProficiency(event: any) {
@@ -166,9 +165,11 @@ export class FilterComponent {
       }
     }
     if (this.qCardFilter.industryExposureDataForFilter.length) {
-      this.queryListPush('(item.interestedIndustries.filter(function (obj) {return args.industryExposureDataForFilter.indexOf(obj.toLowerCase()) !== -1;}).length == args.industryExposureDataForFilter.length)');
+      //Below commented line for AND logic
+      //this.queryListPush('(item.interestedIndustries.filter(function (obj) {return args.industryExposureDataForFilter.indexOf(obj.toLowerCase()) !== -1;}).length == args.industryExposureDataForFilter.length)');
+      this.queryListPush('(item.interestedIndustries.filter(function (obj) {return args.industryExposureDataForFilter.indexOf(obj.toLowerCase()) !== -1;}).length > 0)');
     } else {
-      this.queryListRemove('(item.interestedIndustries.filter(function (obj) {return args.industryExposureDataForFilter.indexOf(obj.toLowerCase()) !== -1;}).length == args.industryExposureDataForFilter.length)');
+      this.queryListRemove('(item.interestedIndustries.filter(function (obj) {return args.industryExposureDataForFilter.indexOf(obj.toLowerCase()) !== -1;}).length > 0)');
     }
     this.showClearFilter = true;
     this.buildQuery();

@@ -1,11 +1,14 @@
 @import '../../../../css/common';
+@import '../../../../css/variables';
 
 .dashboard-profile {
   text-align: left;
+  margin-top: 100px;
 
   h4 {
     border-bottom: $border-color 1px solid;
     padding-bottom: 15px;
+    margin-bottom: 15px;
 
     span {
       margin-right: 15px;
@@ -21,46 +24,12 @@
     padding: 0;
   }
 
-  .profile {
-    padding: 30px 0 0;
-    text-align: center;
-
-    .avtar {
-      background: $white no-repeat center center;
-      background-size: cover;
-      border-radius: 50%;
-      //padding-bottom: 42%;
-      height: 120px;
-      margin: 0 auto;
-      width: 120px;
-
-    }
-
-    h5 {
-      color: $text-color;
-      margin: 0 auto 15px;
-    }
-
-    a {
-      color: $text-color;
-    }
-
-    [type='file'] {
-      display: none;
-    }
-
-    .custom-file-upload {
-
-      border: 1px solid $text-color;
-      border-radius: 4px;
-      cursor: pointer;
-      display: inline-block;
-      padding: 6px 12px;
-    }
-  }
-
   form {
     margin-bottom: 50px;
+  }
+
+  .form-group {
+    margin-bottom: 25px;
   }
 
   .profile-form {
@@ -79,28 +48,6 @@
     }
   }
 
-  //modal
-  .modal {
-    &::before {
-      content: '';
-      display: inline-block;
-      height: 100%;
-      margin-right: -4px;
-      vertical-align: middle;
-    }
-
-    .modal-dialog {
-      display: inline-block;
-      text-align: left;
-      vertical-align: middle;
-      width: 90%;
-
-      h5 {
-        width: 80%;
-      }
-    }
-  }
-
   .in {
     .modal-dialog {
       transform: translate(0, -25%);
@@ -113,6 +60,54 @@
 
   .hide-list {
     display: none;
+  }
+
+  .alert {
+    margin: 15px 0;
+  }
+}
+
+//modal
+.modal {
+  .modal-dialog {
+    h5 {
+      width: 80%;
+      font-weight: bold;
+    }
+  }
+
+  .modal-content {
+    border: 0;
+  }
+
+  .modal-body {
+    text-align: left;
+
+    p {
+      text-align: left;
+    }
+  }
+}
+
+.user-name {
+  margin-top: 20px;
+  text-align: center;
+
+  .profile-name-first,
+  .profile-name-last {
+    color: $light-blue;
+    font-family: 'gothamrnd-book';
+    font-size: 14px;
+    background: none;
+    padding: 0;
+    text-transform: capitalize;
+  }
+}
+
+.description-container {
+  .image-container {
+    width: 130px !important;
+    height: 130px !important;
   }
 }
 
@@ -136,3 +131,8 @@
   }
 }
 
+@media only screen and (max-width: 767px) {
+  .dashboard-profile {
+    margin-top: 70px;
+  }
+}

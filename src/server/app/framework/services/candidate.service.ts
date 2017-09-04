@@ -19,6 +19,7 @@ import ComplexityClassModel = require("../dataaccess/model/complexity-class.mode
 import ComplexitiesClassModel = require("../dataaccess/model/complexities-class.model");
 import CapabilityModel = require("../dataaccess/model/capability.model");
 import RoleModel = require("../dataaccess/model/role.model");
+import CandidateInfoSearch = require("../dataaccess/model/candidate-info-search");
 var bcrypt = require('bcrypt');
 class CandidateService {
   private candidateRepository: CandidateRepository;
@@ -448,12 +449,12 @@ class CandidateService {
               if (complexity.questionHeaderForCandidate !== undefined && complexity.questionHeaderForCandidate !== null && complexity.questionHeaderForCandidate !== '') {
                 match_view.questionHeaderForCandidate = complexity.questionHeaderForCandidate;
               } else {
-                match_view.questionHeaderForCandidate='Tell us about your experience in';
+                match_view.questionHeaderForCandidate= Messages.MSG_HEADER_QUESTION_CANDIDATE;
               }
               if (complexity.questionHeaderForRecruiter !== undefined && complexity.questionHeaderForRecruiter !== null && complexity.questionHeaderForRecruiter !== '') {
                 match_view.questionHeaderForRecruiter = complexity.questionHeaderForRecruiter;
               } else {
-                match_view.questionHeaderForRecruiter = 'Which is the most appropriate level that candidate is required to handle as a part of';
+                match_view.questionHeaderForRecruiter = Messages.MSG_HEADER_QUESTION_RECRUITER;
               }
               match_view.complexity_name = complexity.name;
               if (scenarios[0]) {
@@ -504,8 +505,16 @@ class CandidateService {
                 } else {
                   match_view.questionForRecruiter = complexity.name;
                 }
-                match_view.questionHeaderForCandidate = complexity.questionHeaderForCandidate;
-                match_view.questionHeaderForRecruiter = complexity.questionHeaderForRecruiter;
+                if (complexity.questionHeaderForCandidate !== undefined && complexity.questionHeaderForCandidate !== null && complexity.questionHeaderForCandidate !== '') {
+                  match_view.questionHeaderForCandidate = complexity.questionHeaderForCandidate;
+                } else {
+                  match_view.questionHeaderForCandidate = Messages.MSG_HEADER_QUESTION_CANDIDATE;
+                }
+                if (complexity.questionHeaderForRecruiter !== undefined && complexity.questionHeaderForRecruiter !== null && complexity.questionHeaderForRecruiter !== '') {
+                  match_view.questionHeaderForRecruiter = complexity.questionHeaderForRecruiter;
+                } else {
+                  match_view.questionHeaderForRecruiter = Messages.MSG_HEADER_QUESTION_RECRUITER;
+                }
                 if (scenarios[0]) {
                   match_view.scenario_name = scenarios[0].name;
                   match_view.userChoice = scenarios[0].code;
@@ -604,7 +613,7 @@ class CandidateService {
       if (err) {
         callback(err, null);
       } else {
-        this.recruiterRepository.getJobProfileQCard(res, item.candidate, item.ids, (canError, canResult) => {
+        this.recruiterRepository.getJobProfileQCard(res, item.candidate, item.ids, 'none', (canError, canResult) => {
           if (canError) {
             callback(canError, null);
           } else {
@@ -614,7 +623,6 @@ class CandidateService {
       }
     });
   }
-
 }
 
 Object.seal(CandidateService);

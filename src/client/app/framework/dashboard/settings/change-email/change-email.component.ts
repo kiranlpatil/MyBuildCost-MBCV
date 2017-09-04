@@ -3,8 +3,8 @@ import {Router} from "@angular/router";
 import {ChangeEmailService} from "./change-email.service";
 import {ChangeEmail} from "./changeemail";
 import {LocalStorageService} from "../../../shared/localstorage.service";
-import {LocalStorage} from "../../../shared/constants";
-import {CommonService, ImagePath, Message, Messages, MessageService, NavigationRoutes} from "../../../shared/index";
+import {LocalStorage, AppSettings} from "../../../shared/constants";
+import {CommonService, ImagePath, Message, Messages, MessageService} from "../../../shared/index";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ValidationService} from "../../../shared/customvalidations/validation.service";
 
@@ -25,6 +25,7 @@ export class ChangeEmailComponent implements OnInit {
   EMAIL_ICON: string;
   NEW_EMAIL_ICON: string;
   CONFIRM_EMAIL_ICON: string;
+  emailNotMatctMessage:string= Messages.MSG_EMAIL_NOT_MATCH;
 
   constructor(private commonService: CommonService, private _router: Router,
               private emailService: ChangeEmailService, private messageService: MessageService, private formBuilder: FormBuilder) {
@@ -57,6 +58,7 @@ export class ChangeEmailComponent implements OnInit {
   onSubmit() {
     this.model = this.userForm.value;
     this.model.current_email = LocalStorageService.getLocalValue(LocalStorage.EMAIL_ID);
+    LocalStorageService.setLocalValue(LocalStorage.CHANGE_MAIL_VALUE, 'from_settings');
     if (!this.makeEmailConfirm()) {
       this.emailService.changeEmail(this.model)
         .subscribe(
@@ -94,6 +96,8 @@ export class ChangeEmailComponent implements OnInit {
 
   logOut() {
     window.localStorage.clear();
-    this._router.navigate([NavigationRoutes.APP_START]);
+    LocalStorageService.setLocalValue(LocalStorage.CHANGE_MAIL_VALUE, 'from_settings');
+    let host = AppSettings.HTTP_CLIENT + window.location.hostname;
+    window.location.href = host;
   }
 }

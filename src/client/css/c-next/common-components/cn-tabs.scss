@@ -120,4 +120,12 @@
       width: 40%;
     }
   }
+
+  .dashboard-tabs {
+    li {
+      &:first-child {
+        margin-left: 0;
+      }
+    }
+  }
 }

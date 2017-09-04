@@ -23,7 +23,11 @@ $message: #0d75fa;
 
     .btn-create-profile {
       .glyphicon-remove {
-        top: 2px;
+        top: 50%;
+        position: absolute;
+        right: 0;
+        transform: translate(-50%, -50%);
+        padding: 0;
       }
     }
 
@@ -71,7 +75,7 @@ $message: #0d75fa;
 
     &:focus,
     &:active {
-      border-bottom: 1px solid $theme-color;
+      border-bottom: 2px solid $theme-color;
     }
   }
 

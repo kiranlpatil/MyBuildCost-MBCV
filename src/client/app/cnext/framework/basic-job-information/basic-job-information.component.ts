@@ -7,7 +7,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {JobLocation} from "../model/job-location";
 import {MyGoogleAddress} from "../../../framework/registration/candidate/google-our-place/my-google-address";
 import {FilterService} from "../filters/filter/filter.service";
-import {Messages, Tooltip} from "../../../framework/shared/constants";
+import {Headings, Messages, Tooltip} from "../../../framework/shared/constants";
 import {RecruiterDashboard} from "../model/recruiter-dashboard";
 import {ValidationService} from "../../../framework/shared/customvalidations/validation.service";
 import {ErrorService} from "../error.service";
@@ -25,6 +25,8 @@ export class BasicJobInformationComponent implements OnInit, OnChanges {
   @Input() recruiter: RecruiterDashboard;
 
   @Output() onComplete = new EventEmitter();
+  jobDiscriptionHeading:string = Headings.JOB_DISCRIPTION;
+  hideCompanyNameHeading:string = Headings.HIDE_COMPANY_NAME;
   private savedjobPosterModel: JobPosterModel = new JobPosterModel();
   private jobPostForm: FormGroup;
   private educationList: any = [];
@@ -69,7 +71,6 @@ export class BasicJobInformationComponent implements OnInit, OnChanges {
     '<li><p>5. '+Tooltip.BASIC_JOB_INFORMATION_TOOLTIP_5+'</p></li>' +
     '<li><p>6. '+Tooltip.BASIC_JOB_INFORMATION_TOOLTIP_6+'</p></li>' +
     '<li><p>7. '+Tooltip.BASIC_JOB_INFORMATION_TOOLTIP_7+'</p></li>' +
-    '<li><p>8. '+Tooltip.BASIC_JOB_INFORMATION_TOOLTIP_8+'</p></li>' +
     '</ul>';
 
   constructor(private professionalDataService: ProfessionalDataService,private errorService:ErrorService,
@@ -164,13 +165,13 @@ export class BasicJobInformationComponent implements OnInit, OnChanges {
       return;
     }
 
-    if (Number(this.jobPosterModel.experienceMaxValue) <= Number(this.jobPosterModel.experienceMinValue)) {
+    if (Number(this.jobPosterModel.experienceMaxValue) < Number(this.jobPosterModel.experienceMinValue)) {
       this.minExperienceValidationMessage = Messages.MSG_ERROR_VALIDATION_EXPERIENCE;
       this.isExperienceValid = false;
       return;
     }
 
-    if (Number(this.jobPosterModel.salaryMaxValue) <= Number(this.jobPosterModel.salaryMinValue)) {
+    if (Number(this.jobPosterModel.salaryMaxValue) < Number(this.jobPosterModel.salaryMinValue)) {
       this.minSalaryValidationMessage = Messages.MSG_ERROR_VALIDATION_SALARY;
       this.isSalaryValid = false;
       return;

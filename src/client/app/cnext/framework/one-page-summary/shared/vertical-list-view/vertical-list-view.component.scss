@@ -3,9 +3,9 @@
 
 .vertical-view {
   font-size: 14px;
-  margin-bottom: 15px;
+  margin-bottom: 0;
   text-align: left;
-  margin-top: 10px;
+  margin-top: 0;
 
   &::before {
     clear: both;
@@ -33,7 +33,7 @@
 
   ul {
 
-    margin: 10px auto;
+    margin: 10px auto 0;
     padding: 0;
 
     li {
@@ -92,6 +92,7 @@
         display: none;
         font-size: 13px;
         font-weight: bold;
+        padding-bottom: 0;
       }
 
       .text-ellipsis ~ .read-more {

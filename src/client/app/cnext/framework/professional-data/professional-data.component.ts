@@ -121,7 +121,6 @@ export class ProfessionalDataComponent extends BaseService implements OnChanges 
   }
 
   saveProfessionalData() {
-    console.log(this.candidate);
     this.profileCreatorService.addProfileDetail(this.candidate).subscribe(
       user => {
         console.log(user);

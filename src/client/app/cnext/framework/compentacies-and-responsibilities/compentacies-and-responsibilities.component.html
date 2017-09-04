@@ -2,7 +2,7 @@
 <div class="section-container clearfix" *ngIf="highlightedSection.name =='Compentancies'">
   <div class="main-content clearfix edit-modal-content">
 
-    <h4 class="heading">Additional information about the job (Optional)</h4>
+    <h4 class="heading">{{additionalInformatonHeaing}} {{optionalFieldMessage}}</h4>
 
     <div class="scrollable-content">
       <div class="col-sm-8 no-padding">
@@ -25,7 +25,7 @@
   <div class="main-content" (click)="onEdit()" title="Edit Additional Information about the Job">
     <div class="compact-view clearfix">
       <div class="col-sm-12 no-padding">
-        <h4 class="heading-compact">Additional Information about the Job <span class="optional-field">(Optional)</span>
+        <h4 class="heading-compact">{{additionalInformatonHeaing}} <span class="optional-field">{{optionalFieldMessage}}</span>
           <button class="btn-edit" (click)="onEdit()" title="Edit Additional Information about the Job"></button>
         </h4>
         <p class="primary">{{jobPosterModel.competencies}}</p>

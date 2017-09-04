@@ -7,7 +7,7 @@ import {Message} from "../../../framework/shared/message";
 import {MessageService} from "../../../framework/shared/message.service";
 import {Proficiences} from "../model/proficiency";
 import {Section} from "../model/candidate";
-import {LocalStorage} from "../../../framework/shared/constants";
+import {LocalStorage, Messages} from "../../../framework/shared/constants";
 import {LocalStorageService} from "../../../framework/shared/localstorage.service";
 import {ShowQcardviewService} from "../showQCard.service";
 import {Router} from "@angular/router";
@@ -28,6 +28,7 @@ export class JobPosterComponent implements OnInit, OnChanges {
   @Input() currentjobId: string;
   @Input() recruiter: RecruiterDashboard;
 
+  jobPostMessage:string = Messages.MSG_JOB_POST;
   private roleList: string[] = new Array(0);
   private primaryCapability: string[] = new Array(0);
   private proficiencies: Proficiences = new Proficiences();
@@ -96,9 +97,7 @@ export class JobPosterComponent implements OnInit, OnChanges {
       .subscribe(
         data => {
           // this.OnRecruiterDataSuccess(data.data.industry);
-          console.log(data.data.industry.postedJobs[0]);
           this.jobPosterModel = data.data.industry.postedJobs[0];
-          console.log('job poster model', this.jobPosterModel);
           this.onGetJobDetailsSuccess(this.jobPosterModel);
         },error => this.errorService.onError(error));
   }
@@ -199,7 +198,6 @@ export class JobPosterComponent implements OnInit, OnChanges {
           this.jobPosterModel.capability_matrix = data.data.postedJobs[0].capability_matrix;
           this.setCapabilityMatrix = false;
         }
-        console.log(this.jobPosterModel.capability_matrix);
       },error => this.errorService.onError(error));
   }
 
@@ -322,7 +320,6 @@ export class JobPosterComponent implements OnInit, OnChanges {
        rolesForRelevent = this.jobForRole;
        this.rolesForRelevent = rolesForRelevent;*/
     } else {
-      console.log('------going to Compentancies-------', this.isShowReleventIndustryListStep);
       this.highlightedSection.name = 'Compentancies';
       this.showCompentensies = true;
     }

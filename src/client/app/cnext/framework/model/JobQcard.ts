@@ -1,3 +1,4 @@
+import {CandidateList} from "./candidate-list";
 export class JobQcard {
   education: string;
   location: string;
@@ -20,4 +21,5 @@ export class JobQcard {
   exact_matching: number = 0;
   postingDate: Date;
   hideCompanyName: boolean;
+  candidate_list:CandidateList[];
 }

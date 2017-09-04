@@ -26,6 +26,7 @@ export class JobDashboardComponent implements OnInit {
 
   jobId: any;
   jobCount: any;
+  private recruiterId: string;
   private showModalStyle: boolean = false;
   private headerInfo: any;
   private recruiterJobView: RecruiterJobView = new RecruiterJobView();
@@ -76,7 +77,7 @@ export class JobDashboardComponent implements OnInit {
         (data: any) => {
           this.isRecruitingForSelf = data.data.industry.isRecruitingForself;
           this.selectedJobProfile = data.data.industry.postedJobs[0];
-
+          this.recruiterId = data.data.industry._id;
           for (let item of data.data.industry.postedJobs[0].candidate_list) {
             if (item.name === ValueConstant.APPLIED_CANDIDATE)
               this.recruiterJobView.numberOfCandidatesApplied = item.ids.length;
@@ -212,15 +213,15 @@ export class JobDashboardComponent implements OnInit {
       var compareAction:any;
 
       if (this.candidateQlist.matchedCandidates.filter(function (obj) {
-          return data.item._id == obj._id
+          return data.item._id == obj._id;
         }).length && (data.item.candidateListStatus.indexOf('applied') !== -1)) {
         compareAction = {'action': 'add', 'source': 'matchedList', 'destination': 'cartListed', 'id': data.item._id};
       } else if (this.candidateQlist.matchedCandidates.filter(function (obj) {
-          return data.item._id == obj._id
+          return data.item._id == obj._id;
         }).length) {
         compareAction = {'action': 'add', 'source': 'matchedList', 'destination': 'cartListed', 'id': data.item._id};
       } else if (this.candidateQlist.appliedCandidates.filter(function (obj) {
-          return data.item._id == obj._id
+          return data.item._id == obj._id;
         }).length) {
         compareAction = {'action': 'add', 'source': 'applied', 'destination': 'cartListed', 'id': data.item._id};
       }
@@ -272,6 +273,11 @@ export class JobDashboardComponent implements OnInit {
   }
 
   addForCompare(obj: any) {
+
+    this.jobDashboardService.addUsesTrackingData(this.recruiterId, this.jobId, obj.id, 'add').subscribe(
+      data => {
+      }
+      , error => this.errorService.onError(error));
     if (this.listOfCandidateIdToCompare.indexOf(obj.id) == -1) {
       //this.listOfCandidateStatus.push(obj);
       this.listOfCandidateIdToCompare.push(obj.id);

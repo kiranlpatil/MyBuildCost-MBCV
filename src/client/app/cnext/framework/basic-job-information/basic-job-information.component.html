@@ -1,7 +1,7 @@
 <div class="modal-bg" *ngIf="highlightedSection.name=='JobProfile'"></div>
 <div class="section-container" *ngIf="highlightedSection.name=='JobProfile'">
   <div class="main-content clearfix edit-modal-content">
-    <h4 class="heading">Job Description</h4>
+    <h4 class="heading">{{jobDiscriptionHeading}}</h4>
     <div class="scrollable-content">
       <form [formGroup]="jobPostForm" novalidate>
         <div class="job-info section-container clearfix">
@@ -47,9 +47,13 @@
           </div>
 
           <div class="col-sm-8 no-padding" *ngIf="!recruiter.isRecruitingForself">
-            <div class="form-group">
-              <h4>Hide company Name from applicant</h4>
-              <input type="checkbox" formControlName="hideCompanyName"> Hide company Name<br>
+            <h4>{{hideCompanyNameHeading}}</h4>
+            <div class="check-box">
+              <label>
+                <input type="checkbox" name="hideCompanyName" formControlName="hideCompanyName">
+                <span>Hide company Name</span>
+                <div class="check"></div>
+              </label>
             </div>
           </div>
 
@@ -68,7 +72,7 @@
 
           <div class="col-sm-8 no-padding">
             <div class="form-group clearfix">
-              <label>Experience Band</label>
+              <label>Experience Band (In Years)</label>
               <div class="col-sm-6 padding-right15 min-range">
                 <select class="select" formControlName="experienceMinValue">
                   <option *ngFor="let c of experienceRangeList" [ngValue]="c">{{c}}</option>
@@ -92,7 +96,7 @@
 
           <div class="col-sm-8 no-padding">
             <div class="form-group clearfix">
-              <label>Salary Band</label>
+              <label>Salary Band (In Lacs)</label>
               <div class="col-sm-6 padding-right15 min-range">
                 <select class="select" formControlName="salaryMinValue">
                   <option *ngFor="let c of salaryRangeList" [ngValue]="c">{{c}}</option>
@@ -166,8 +170,16 @@
       <div class="clearfix">
         <p><label>Job Title</label> {{jobPosterModel.jobTitle}}</p>
         <p><label>Education</label> {{jobPosterModel.education}}</p>
-        <p><label>Experience Band</label> {{jobPosterModel.experienceMinValue}} - {{jobPosterModel.experienceMaxValue}}</p>
-        <p><label>Salary Band</label> {{jobPosterModel.salaryMinValue}} - {{jobPosterModel.salaryMaxValue}}</p>
+        <p *ngIf="jobPosterModel.experienceMinValue !=jobPosterModel.experienceMaxValue"><label>Experience Band</label>
+          {{jobPosterModel.experienceMinValue}} -
+          {{jobPosterModel.experienceMaxValue}} Year(s)</p>
+        <p *ngIf="jobPosterModel.experienceMinValue ==jobPosterModel.experienceMaxValue"><label>Experience</label>
+          {{jobPosterModel.experienceMinValue}} Year(s)</p>
+        <p *ngIf="jobPosterModel.salaryMinValue != jobPosterModel.salaryMaxValue"><label>Salary Band</label>
+          {{jobPosterModel.salaryMinValue}} - {{jobPosterModel.salaryMaxValue}} Lac(s)
+        </p>
+        <p *ngIf="jobPosterModel.salaryMinValue == jobPosterModel.salaryMaxValue"><label>Salary</label>
+          {{jobPosterModel.salaryMinValue}} Lac(s)</p>
         <p><label>Notice Period</label> {{jobPosterModel.joiningPeriod}}</p>
         <p><label>Hiring Manager</label> {{jobPosterModel.hiringManager}}</p>
         <p *ngIf="recruiter.isRecruitingForself"><label>Hiring Department</label> {{jobPosterModel.department}}</p>

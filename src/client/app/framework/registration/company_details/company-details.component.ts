@@ -11,7 +11,7 @@ import {
   NavigationRoutes,
   ProfileService
 } from "../../shared/index";
-import {ImagePath, LocalStorage} from "../../shared/constants";
+import {ImagePath, LocalStorage, Tooltip} from "../../shared/constants";
 import {LocalStorageService} from "../../shared/localstorage.service";
 import {LoaderService} from "../../shared/loader/loader.service";
 import {Http} from "@angular/http";
@@ -27,6 +27,8 @@ import {ValidationService} from "../../shared/customvalidations/validation.servi
 
 export class CompanyDetailsComponent implements OnInit {
   company_name: any;
+  companyDocumentMessage: string= Messages.MSG_COMPANY_DOCUMENTS;
+  uploadFileMessage: string= Messages.MSG_UPLOAD_FILE;
   private model = new CompanyDetails();
   private companyDetailsForm: FormGroup;
   private filesToUpload: Array<File>;
@@ -46,7 +48,7 @@ export class CompanyDetailsComponent implements OnInit {
   private isUploadedImages : boolean[] = [false,false,false];
   private isLoaderImages : boolean[] = [true,true,true];
   tooltipMessage: string = '<ul><li>' +
-    '<p>1. Company Details Message</p></li></ul>';
+    '<p>1. '+Tooltip.COMPANY_DETAILS_TOOLTIP+'</p></li></ul>';
 
   constructor(private commonService: CommonService, private _router: Router, private http: Http,
               private companyDetailsService: CompanyDetailsService, private profileService: ProfileService,

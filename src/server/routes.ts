@@ -1,5 +1,6 @@
 import * as express from "express";
 import * as userController from "./app/framework/controllers/user.controller";
+import * as adminController from "./app/framework/controllers/admin.controller";
 import * as candidateController from "./app/framework/controllers/candidate.controller";
 import * as recruiterController from "./app/framework/controllers/recruiter.controller";
 import * as importIndustriesController from "./app/framework/controllers/import-Industries.controller";
@@ -15,8 +16,10 @@ export function init(app: express.Application) {
   app.post("/api/forgotpassword", userInterceptor.forgotPassword, userController.forgotPassword);
   app.put("/api/resetpassword/:id", this.authInterceptor.requiresAuth, userController.resetPassword);
   app.post("/api/candidate", candidateController.create);
+  app.post("/api/admin", adminController.create);
   app.post("/api/recruiter", recruiterController.create);
   app.put("/api/users/:id", this.authInterceptor.requiresAuth, userController.updateDetails);
+  app.put("/api/users/:id/fieldname/:fname", this.authInterceptor.requiresAuth, userController.updateProfileField);
   app.get("/api/users/:id", userInterceptor.retrieve, this.authInterceptor.requiresAuth, userController.retrieve);
   app.post("/api/sendverificationmail/:id", this.authInterceptor.requiresAuth, userController.verificationMail);
   app.put("/api/verifyAccount/:id", this.authInterceptor.requiresAuth, userController.verifyAccount);
@@ -51,7 +54,7 @@ export function init(app: express.Application) {
   app.post("/api/sendrecruitermail/:id", this.authInterceptor.requiresAuth, userController.recruiterVerificationMail);
   app.post("/api/companydetails/:id", this.authInterceptor.requiresAuth, userController.updateCompanyDetails);
   app.put("/api/uploaddocuments/:id", this.authInterceptor.requiresAuth, userController.uploaddocuments);
-
+  app.get('/api/alluser', this.authInterceptor.requiresAuth,adminController.getAllUser);
   app.get("/api/readxlsx", importIndustriesController.readXlsx);
   //app.post("/api/createImportIndusry", importIndustriesController.create);
 

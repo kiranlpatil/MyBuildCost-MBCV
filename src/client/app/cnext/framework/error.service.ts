@@ -13,6 +13,7 @@ constructor(private messageService: MessageService){}
     var message = new Message();
     message.error_msg = error.err_msg;
     message.isError = true;
+    message.error_code=error.err_code;
     this.messageService.message(message);
   }
 

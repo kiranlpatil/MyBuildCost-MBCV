@@ -22,6 +22,9 @@ export class ActivateUserComponent implements OnInit {
   MY_TAG_LINE: string;
   UNDER_LICENCE: string;
   BODY_BACKGROUND: string;
+  activationMessage_1: string= Messages.MSG_ACTIVATE_USER_1;
+  activationMessage_2: string= Messages.MSG_ACTIVATE_USER_2;
+  activationMessage_3: string= Messages.MSG_ACTIVATE_USER_3;
 
   constructor(private _router: Router, private activatedRoute: ActivatedRoute, private activeService: ActiveUserService,
               private messageService: MessageService) {
@@ -38,11 +41,22 @@ export class ActivateUserComponent implements OnInit {
     this.token = this.token.substring(this.token.length - 29, 0);
     LocalStorageService.setLocalValue(LocalStorage.ACCESS_TOKEN, this.token);
     LocalStorageService.setLocalValue(LocalStorage.USER_ID, this.id);
+    /*this.activeService.getUser()
+      .subscribe(
+        res => (this.activateUser(res)),
+        error => (this.newRegistrationFail(error))
+      );*/
     this.activeService.activeUser()
       .subscribe(
         res => (this.newRegistrationSuccess(res)),
         error => (this.newRegistrationFail(error)));
   }
+  /*activateUser(user:any) { debugger
+    this.activeService.activeUser()
+      .subscribe(
+        res => (this.newRegistrationSuccess(res)),
+        error => (this.newRegistrationFail(error)));
+  }*/
 
   newRegistrationSuccess(res: any) {
     this.USER_ACTIVATION_STATUS = Messages.MSG_SUCCESS_MAIL_VERIFICATION_RESULT_STATUS;

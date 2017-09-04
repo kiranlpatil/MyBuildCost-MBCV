@@ -1,11 +1,11 @@
-import {Component, EventEmitter, Input, OnChanges, Output, OnInit} from '@angular/core';
-import { JobCompareService } from './job-compare-view.service';
-import {Capability} from '../../model/capability';
-import {Candidate} from '../../model/candidate';
-import {CandidateDetail} from '../../../../framework/registration/candidate/candidate';
-import {CandidateProfileService} from '../../candidate-profile/candidate-profile.service';
-import {RecruiterDashboardService} from '../../recruiter-dashboard/recruiter-dashboard.service';
-import {Recruiter} from '../../../../framework/registration/recruiter/recruiter';
+import {Component, EventEmitter, Input, OnChanges, Output, OnInit} from "@angular/core";
+import {JobCompareService} from "./job-compare-view.service";
+import {Capability} from "../../model/capability";
+import {Candidate} from "../../model/candidate";
+import {CandidateDetail} from "../../../../framework/registration/candidate/candidate";
+import {CandidateProfileService} from "../../candidate-profile/candidate-profile.service";
+import {RecruiterDashboardService} from "../../recruiter-dashboard/recruiter-dashboard.service";
+import {Recruiter} from "../../../../framework/registration/recruiter/recruiter";
 import {AppSettings, ImagePath, LocalStorage} from "../../../../framework/shared/constants";
 import {GuidedTourService} from "../../guided-tour.service";
 import {LocalStorageService} from "../../../../framework/shared/localstorage.service";
@@ -24,6 +24,7 @@ export class JobCompareViewComponent implements OnChanges,OnInit {
   capabilities: Capability[];
   candidate : Candidate= new Candidate();
   candidateDetails : CandidateDetail = new CandidateDetail();
+  private isCandidateHaveExtraKeySkill: boolean
   @Input() typeOfView : string ='compact';
   @Output() close : EventEmitter<boolean> = new EventEmitter();
   private recruiterId: string;
@@ -41,7 +42,7 @@ export class JobCompareViewComponent implements OnChanges,OnInit {
               private guidedTourService:GuidedTourService) {
   }
 
-  ngOnChanges(changes: any) {
+  ngOnChanges(changes:any) {
     if (changes.candiadteId != undefined && changes.candiadteId.currentValue != undefined) {
       this.candiadteId = changes.candiadteId.currentValue;
     }
@@ -66,7 +67,7 @@ export class JobCompareViewComponent implements OnChanges,OnInit {
     if (LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE) === 'true') {
       this.isCandidate = true;
     }
-    this.isGuidedTourImgRequire();
+    //this.isGuidedTourImgRequire();
   }
 
   isGuidedTourImgRequire() {
@@ -75,6 +76,15 @@ export class JobCompareViewComponent implements OnChanges,OnInit {
 
   onGotItGuideTour() {
     this.guidedTourStatus = this.guidedTourService.updateTourStatus(ImagePath.CANDIDATE_OERLAY_SCREENS_STACK_VIEW,true);
+    this.guidedTourStatus = this.guidedTourService.getTourStatus();
+    this.guidedTourService.updateProfileField(this.guidedTourStatus)
+      .subscribe(
+        (res:any) => {
+          LocalStorageService.setLocalValue(LocalStorage.GUIDED_TOUR, JSON.stringify(res.data.guide_tour));
+          this.isGuidedTourImgRequire()
+        },
+        error => this.errorService.onError(error)
+      );
   }
 
   OnRecruiterDataSuccess(data: any) {
@@ -113,6 +123,12 @@ export class JobCompareViewComponent implements OnChanges,OnInit {
 
   OnCompareSuccess(data: any) {
     this.data = data.data;
+    this.isCandidateHaveExtraKeySkill = false;
+    for (let proficiency of this.data.proficiencies) {
+      if (this.data.proficienciesMatch.indexOf(proficiency) == -1) {
+        this.isCandidateHaveExtraKeySkill = true;
+      }
+    }
     this.capabilities= this.jobCompareService.getStandardMatrix(this.data.match_map);
   }
 

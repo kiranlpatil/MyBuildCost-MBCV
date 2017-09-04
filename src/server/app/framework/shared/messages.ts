@@ -11,6 +11,7 @@ class Messages {
   public static EMAIL_SUBJECT_CHANGE_EMAILID: string = 'Confirmation for change in email address.';
   public static EMAIL_SUBJECT_FORGOT_PASSWORD: string = 'Reset your password';
   public static EMAIL_SUBJECT_USER_CONTACTED_YOU: string = 'User Contacted you';
+  public static EMAIL_SUBJECT_ADMIN_LOGGED_ON: string = 'Admin Logged on';
   public static EMAIL_SUBJECT_SERVER_ERROR: string = 'Server Error Info';
 
   //Sendmail
@@ -81,6 +82,11 @@ class Messages {
 
   //Verify errors
   public static MSG_ERROR_CHECK_EMAIL_ACCOUNT: string = 'Error: User already has an account associated with this email address.'; //should be same to MSG_ERROR_EMAIL_ACTIVE_NOW
+
+
+  public static MSG_HEADER_QUESTION_CANDIDATE: string = 'Tell us about your experience in';
+  public static MSG_HEADER_QUESTION_RECRUITER: string = 'Which is the most appropriate level that candidate is required to handle as a part of';
+
 
   public static MSG_ERROR_CHECK_INACTIVE_ACCOUNT: string = 'Error: Your account is still inactive. Verify your account' +
     ' by clicking the verification link sent on your email.'; //should be same to MSG_ERROR_ACCOUNT_STATUS

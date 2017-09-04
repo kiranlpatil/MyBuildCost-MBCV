@@ -31,6 +31,10 @@ export class VerifyUserComponent implements OnInit {
   BODY_BACKGROUND: string;
   submitMobileStatus: boolean;
   submitEmailStatus: boolean;
+  verifyUserMessage_1: string= Messages.MSG_VERIFY_USER_1;
+  verifyUserMessage_2: string= Messages.MSG_VERIFY_USER_2;
+  verifyUserMessage_3: string= Messages.MSG_VERIFY_USER_3;
+  verifyUserMessage_4: string= Messages.MSG_VERIFY_USER_4;
   private isShowLoader: boolean = false;
 
 

@@ -10,7 +10,7 @@ class RecruiterRepository extends RepositoryBase<IRecruiter> {
     super(RecruiterSchema);
   }
 
-  getJobProfileQCard(recruiters: any[], candidate: CandidateModel, jobProfileIds: string[], callback: (error: any, result: any) => void) {
+  getJobProfileQCard(recruiters:any[], candidate:CandidateModel, jobProfileIds:string[], isSearchView:string, callback:(error:any, result:any) => void) {
     let isSend : boolean = false;
     let jobs_cards: JobQCard[] = new Array(0);
     if(recruiters.length === 0) {
@@ -42,10 +42,12 @@ class RecruiterRepository extends RepositoryBase<IRecruiter> {
             }
           } else {
             let isFound: boolean = false;
-            for (let list of candidate.job_list) {
-              if (list.ids.indexOf(job._id) != -1) {
-                isFound = true;
-                break;
+            if (isSearchView !== 'searchView') {
+              for (let list of candidate.job_list) {
+                if (list.ids.indexOf(job._id) != -1) {
+                  isFound = true;
+                  break;
+                }
               }
             }
             if (isFound) {
@@ -92,6 +94,7 @@ class RecruiterRepository extends RepositoryBase<IRecruiter> {
           job_qcard.joiningPeriod = job.joiningPeriod;
           job_qcard.postingDate = job.postingDate;
           job_qcard.hideCompanyName = job.hideCompanyName;
+          job_qcard.candidate_list = job.candidate_list;
           if ((job_qcard.above_one_step_matching + job_qcard.exact_matching) >= ConstVariables.LOWER_LIMIT_FOR_SEARCH_RESULT) {
             jobs_cards.push(job_qcard);
           }

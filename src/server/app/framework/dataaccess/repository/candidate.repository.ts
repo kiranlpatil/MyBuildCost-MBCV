@@ -72,6 +72,7 @@ class CandidateRepository extends RepositoryBase<ICandidate> {
       candidate_card_view.proficiencies = candidate.proficiencies;
       candidate_card_view.interestedIndustries = candidate.interestedIndustries;
       candidate_card_view._id = candidate._id;//todo solve the problem of location from front end
+      candidate_card_view.isVisible = candidate.isVisible;
       if(candidate.location) {
         candidate_card_view.location = candidate.location.city;
       }else {

@@ -6,7 +6,7 @@
 
   <div class="col-lg-4 col-md-4 col-sm-6 col-xs-11 content">
 
-    <h5>Verify Your Mobile Number
+    <h5>{{mobileverificationTitle}}
       <!--<span class="glyphicon glyphicon-remove" (click)="navigateTo('/landing')"></span>--></h5>
 
     <div class="alert alert-danger clearfix" [hidden]="isShowErrorMessage">
@@ -20,7 +20,7 @@
 
     <form [formGroup]="userForm" (submit)="onSubmit()" novalidate>
 
-      <p>Please enter the verification code sent to your phone number.</p>
+      <p>{{mobileverificationMessage}}</p>
 
       <div class="form-group">
         <control-messages [control]="userForm.controls.otp" [submitStatus] = "submitStatus"></control-messages>
@@ -43,11 +43,11 @@
         <div class="modal-body">
           <div class="row">
             <div class="col-sm-12">
-              <h5>Congratulations!</h5>
+              <h5>{{mobileverificationSuccess_1}}</h5>
 
               <div class="content">
 
-                <p>Registration successful. Kindly Sign In</p>
+                <p>{{mobileverificationSuccess_2}}</p>
 
                 <div class="button-group text-right">
                   <button class="btn btn-success" (click)="navigateTo()">Sign In</button>

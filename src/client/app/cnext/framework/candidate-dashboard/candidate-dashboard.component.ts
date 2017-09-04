@@ -1,13 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { CandidateProfileService } from '../candidate-profile/candidate-profile.service';
-import { Candidate, Summary } from '../model/candidate';
-import { CandidateDashboardService } from './candidate-dashboard.service';
-import { JobQcard } from '../model/JobQcard';
-import {LocalStorage, ValueConstant, Tooltip, ImagePath} from '../../../framework/shared/constants';
-import { LocalStorageService } from '../../../framework/shared/localstorage.service';
-import { CandidateJobListService } from './candidate-job-list/candidate-job-list.service';
-import { QCardFilterService } from '../filters/q-card-filter.service';
-import { LoaderService } from '../../../framework/shared/loader/loader.service';
+import {Component, OnInit} from "@angular/core";
+import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
+import {Candidate, Summary} from "../model/candidate";
+import {CandidateDashboardService} from "./candidate-dashboard.service";
+import {JobQcard} from "../model/JobQcard";
+import {LocalStorage, ValueConstant, Tooltip, ImagePath, Headings} from "../../../framework/shared/constants";
+import {LocalStorageService} from "../../../framework/shared/localstorage.service";
+import {CandidateJobListService} from "./candidate-job-list/candidate-job-list.service";
+import {QCardFilterService} from "../filters/q-card-filter.service";
+import {LoaderService} from "../../../framework/shared/loader/loader.service";
 import {GuidedTourService} from "../guided-tour.service";
 import {ErrorService} from "../error.service";
 
@@ -20,6 +20,7 @@ import {ErrorService} from "../error.service";
 })
 
 export class CandidateDashboardComponent implements OnInit{
+  gotItMessage:string= Headings.GOT_IT;
   private candidate: Candidate = new Candidate();
   private jobList: JobQcard[] = new Array(0);
   private appliedJobs: JobQcard[] = new Array(0);
@@ -57,27 +58,20 @@ export class CandidateDashboardComponent implements OnInit{
   }
 
   isRequireGuidedTourImg() {
-    /*this.guidedTourService.getTourStatus()
-      .subscribe(
-        (res:any) => { debugger
-
-        },
-        error => console.log(error)
-      );
-*/
     this.guidedTourStatus = this.guidedTourService.getTourStatus();
   }
 
   tourGuideGotIt() {
-
-    /*this.guidedTourService.updateTourStatus(ImagePath.CANDIDATE_OERLAY_SCREENS_DASHBOARD,true)
+    this.guidedTourStatus = this.guidedTourService.updateTourStatus(ImagePath.CANDIDATE_OERLAY_SCREENS_DASHBOARD, true);
+    this.guidedTourStatus = this.guidedTourService.getTourStatus();
+    this.guidedTourService.updateProfileField(this.guidedTourStatus)
       .subscribe(
         (res:any) => {
-
+          LocalStorageService.setLocalValue(LocalStorage.GUIDED_TOUR, JSON.stringify(res.data.guide_tour));
         },
-        error => console.log(error)
-      );*/
-    this.guidedTourStatus = this.guidedTourService.updateTourStatus(ImagePath.CANDIDATE_OERLAY_SCREENS_DASHBOARD,true);
+        error => this.errorService.onError(error)
+      );
+
   }
 
   extractList(jobList: JobQcard[]) {

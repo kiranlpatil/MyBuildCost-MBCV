@@ -173,8 +173,6 @@ class AuthInterceptor {
     var curDate = new Date();
     // expires in 60 days
     var expires = new Date(curDate.getTime() + (60 * 24 * 60 * 60 * 1000)); //(day*hr*min*sec*milisec)
-    console.log('expires',expires);
-    console.log('expires11',expires.getTime());
     var token = jwt.encode({
       iss: issuer, // issue
       exp: expires.getTime(), // expiration time

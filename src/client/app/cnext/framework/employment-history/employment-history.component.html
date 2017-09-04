@@ -2,7 +2,7 @@
 <div class="section-container clear" *ngIf="highlightedSection.name =='EmploymentHistory'">
   <div class="main-content edit-modal-content clearfix" >
 
-    <h4 class="heading">Employment History (Optional)</h4>
+    <h4 class="heading">{{employemntHistoryHeader}} {{OPTIONAL}}</h4>
 
     <div class="scrollable-content" #EmloymentHostoryParent>
       <form class="description-form" [formGroup]="employeeHistory" novalidate>
@@ -55,7 +55,7 @@
       <div *ngIf="employeeHistory.controls.employeeHistories.controls.length==0">
         <h4 class="heading-compact icons-section">
           <span class="employment-history"></span>
-          Employment History <span class="optional-field">(Optional)</span>
+          {{employemntHistoryHeader}} <span class="optional-field">{{OPTIONAL}}</span>
           <button class="btn-edit"
                   (click)="onEdit()"
                   title="Edit Employment History"></button>
