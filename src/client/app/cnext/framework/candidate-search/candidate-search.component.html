@@ -24,7 +24,8 @@
     -->
     <div class="col-xs-12 candidate-search-input">
       <form (submit)="showSearchResult()">
-        <input (keyup)="searchCandidate($event.target.value)" placeholder="Candidate Search" [value]="searchValue">
+        <input (keyup)="searchCandidate($event.target.value)" placeholder="type candidate name..."
+               [value]="searchValue">
       </form>
       <!-- <button class="search-btn">Search</button>-->
     </div>
