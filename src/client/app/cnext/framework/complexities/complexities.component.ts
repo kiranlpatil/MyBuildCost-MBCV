@@ -94,7 +94,7 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
           let savedCapabilities:Capability[]=new Array(0);
           for( let i=0;i<this.capabilities.length;i++ ) {
             let originalcapability =Object.assign({}, this.capabilities[i]);
-            savedCapabilities.push(originalcapability);
+            savedCapabilities.unshift(originalcapability);
           }
           this.capabilities = this.jobCompareService.getStandardMatrix(capa.data);
           if(!this.isEqualArrays(this.capabilities,savedCapabilities)) {
@@ -142,7 +142,7 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
     //this.removeDuplicateIds();
     this.complexityList = [];
     for (let id in complexities) {
-      this.complexityList.push(this.complexityData[id]);
+      this.complexityList.unshift(this.complexityData[id]);
     }
     this.getCapabilityDetail(this.currentCapabilityNumber);
     this.currentComplexity = this.getCurrentComplexityPosition();
@@ -157,7 +157,7 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
      var sorted_arr = copyOfcomplexityIds.slice().sort();
      for (var i = 0; i < this.complexityIds.length - 1; i++) {
      if (sorted_arr[i + 1] == sorted_arr[i]) {
-     this.duplicateComplexityIds.push(sorted_arr[i]);
+   this.duplicateComplexityIds.unshift(sorted_arr[i]);
      }
    }*!/
 
@@ -166,7 +166,7 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
         if (id.indexOf("d") == 0) {
           let temp = id.split("d")[1];
           if (temp == index) {
-            this.duplicateComplexityIds.push(id);
+   this.duplicateComplexityIds.unshift(id);
           }
         }
       }
@@ -227,6 +227,7 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
   }
 
   oncurrentComplexityAnswered(complexityDetails: ComplexityDetails) {
+    debugger
     this.isValid=true;
     this.complexities[complexityDetails.code] = complexityDetails.userChoice;
     this.onComplextyAnswered.emit(this.complexities);

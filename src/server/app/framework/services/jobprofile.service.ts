@@ -90,7 +90,7 @@ class JobProfileService {
           if (err) {
             callback(err, res);
           } else {
-            let candidateService: CandidateService = new CandidateService();
+            let candidateService: any = new CandidateService();
             let new_capability_matrix: any =  candidateService.getCapabilityValueKeyMatrixBuild(res.postedJobs[0].capability_matrix,industries);
             callback(null, new_capability_matrix);
           }

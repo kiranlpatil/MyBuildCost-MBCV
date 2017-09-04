@@ -19,6 +19,10 @@ class MatchViewModel {
   questionHeaderForRecruiter: string;
   code: string;
   userChoice: string;
+  role_sort_order: string;
+  capability_sort_order: string;
+  complexity_sort_order: string;
+  main_sort_order: number;
 }
 
 export = MatchViewModel;

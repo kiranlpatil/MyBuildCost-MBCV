@@ -70,7 +70,7 @@ export class JobCompareService extends BaseService {
           com.match= data[value2].match;
           com.name= data[value2].complexity_name;
           com.complexityDetails = data[value2];
-          com.scenarios.unshift(sce);
+          com.scenarios.push(sce);
           let isFound : boolean= false;
           for(let complex of cap.complexities){
             if(complex.name === com.name ) {
@@ -79,7 +79,7 @@ export class JobCompareService extends BaseService {
             }
           }
           if(!isFound) {
-            complexities.unshift(com);
+            complexities.push(com);
           }
         }
       }
@@ -88,7 +88,7 @@ export class JobCompareService extends BaseService {
       }else {
         cap.complexities=complexities;
         cap.complexities = this.sortComplexities(cap.complexities);
-        capabilities.unshift(cap);
+        capabilities.push(cap);
       }
       /*}
     for(let i=0 ;i<8;i++){

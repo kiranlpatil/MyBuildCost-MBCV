@@ -436,6 +436,55 @@ class CandidateService {
               match_view.complexity_number = count_of_complexity;
               match_view.role_name = role.name;
               match_view.code = custom_code;
+              switch (role.sort_order.toString().length.toString()) {
+                case '1' :
+                  match_view.role_sort_order = '000' + role.sort_order;
+                  break;
+                case '2' :
+                  match_view.role_sort_order = '00' + role.sort_order;
+                  break;
+                case '3' :
+                  match_view.role_sort_order = '0' + role.sort_order;
+                  break;
+                case '4' :
+                  match_view.role_sort_order = role.sort_order;
+                  break;
+                default :
+                  match_view.role_sort_order = '0000';
+              }
+              switch (capability.sort_order.toString().length.toString()) {
+                case '1' :
+                  match_view.capability_sort_order = '000' + capability.sort_order;
+                  break;
+                case '2' :
+                  match_view.capability_sort_order = '00' + capability.sort_order;
+                  break;
+                case '3' :
+                  match_view.capability_sort_order = '0' + capability.sort_order;
+                  break;
+                case '4' :
+                  match_view.capability_sort_order = capability.sort_order;
+                  break;
+                default :
+                  match_view.capability_sort_order = '0000';
+              }
+              switch (complexity.sort_order.toString().length.toString()) {
+                case '1' :
+                  match_view.complexity_sort_order = '000' + complexity.sort_order;
+                  break;
+                case '2' :
+                  match_view.complexity_sort_order = '00' + complexity.sort_order;
+                  break;
+                case '3' :
+                  match_view.complexity_sort_order = '0' + complexity.sort_order;
+                  break;
+                case '4' :
+                  match_view.complexity_sort_order = complexity.sort_order;
+                  break;
+                default :
+                  match_view.complexity_sort_order = '0000';
+              }
+              match_view.main_sort_order = Number(match_view.role_sort_order + match_view.capability_sort_order + match_view.complexity_sort_order);
               if (complexity.questionForCandidate !== undefined && complexity.questionForCandidate !== null && complexity.questionForCandidate !== '') {
                 match_view.questionForCandidate = complexity.questionForCandidate;
               } else {
@@ -495,6 +544,55 @@ class CandidateService {
                 match_view.complexity_name = complexity.name;
                 match_view.role_name = role.name;
                 match_view.code = custom_code;
+                switch (role.sort_order.toString().length.toString()) {
+                  case '1' :
+                    match_view.role_sort_order = '000' + role.sort_order;
+                    break;
+                  case '2' :
+                    match_view.role_sort_order = '00' + role.sort_order;
+                    break;
+                  case '3' :
+                    match_view.role_sort_order = '0' + role.sort_order;
+                    break;
+                  case '4' :
+                    match_view.role_sort_order = role.sort_order;
+                    break;
+                  default :
+                    match_view.role_sort_order = '0000';
+                }
+                switch (capability.sort_order.toString().length.toString()) {
+                  case '1' :
+                    match_view.capability_sort_order = '000' + capability.sort_order;
+                    break;
+                  case '2' :
+                    match_view.capability_sort_order = '00' + capability.sort_order;
+                    break;
+                  case '3' :
+                    match_view.capability_sort_order = '0' + capability.sort_order;
+                    break;
+                  case '4' :
+                    match_view.capability_sort_order = capability.sort_order;
+                    break;
+                  default :
+                    match_view.capability_sort_order = '0000';
+                }
+                switch (complexity.sort_order.toString().length.toString()) {
+                  case '1' :
+                    match_view.complexity_sort_order = '000' + complexity.sort_order;
+                    break;
+                  case '2' :
+                    match_view.complexity_sort_order = '00' + complexity.sort_order;
+                    break;
+                  case '3' :
+                    match_view.complexity_sort_order = '0' + complexity.sort_order;
+                    break;
+                  case '4' :
+                    match_view.complexity_sort_order = complexity.sort_order;
+                    break;
+                  default :
+                    match_view.complexity_sort_order = '0000';
+                }
+                match_view.main_sort_order = Number(match_view.role_sort_order + match_view.capability_sort_order + match_view.complexity_sort_order);
                 if (complexity.questionForCandidate !== undefined && complexity.questionForCandidate !== null && complexity.questionForCandidate !== '') {
                   match_view.questionForCandidate = complexity.questionForCandidate;
                 } else {
@@ -533,12 +631,66 @@ class CandidateService {
         }
       }
     }
-    return keyValueCapability;
+    var orderKeys = function (o: any, f: any) {
+      let os: any = [], ks: any = [], i;
+      for (let i in o) {
+        os.push([i, o[i]]);
+      }
+      os.sort(function (a: any, b: any) {
+        return f(a[1], b[1]);
+      });
+      for (i = 0; i < os.length; i++) {
+        ks.push(os[i][0]);
+      }
+      return ks;
+    };
+
+    var result = orderKeys(keyValueCapability, function (a: any, b: any) {
+      return a.main_sort_order - b.main_sort_order;
+    }); // => ["Elem4", "Elem2", "Elem1", "Elem3"]
+    // console.log("sample result"+ result);
+    let responseToReturn: any = {};
+    for (let i of result) {
+      responseToReturn[i] = keyValueCapability[i];
+    }
+    return responseToReturn;
   }
 
   getCapabilityMatrix(item: any, industries: IndustryModel[], new_capability_matrix: any): any {
     if (item.industry.roles && item.industry.roles.length > 0) {
       for (let role of item.industry.roles) {
+        if (role.default_complexities) {
+          for (let capability of  role.default_complexities) {
+            if (capability.code) {
+              for (let mainRole of industries[0].roles) {
+                if (role.code.toString() === mainRole.code.toString()) {
+                  for (let mainCap of mainRole.default_complexities) {
+                    if (capability.code.toString() === mainCap.code.toString()) {
+                      for (let mainComp of mainCap.complexities) {
+                        let itemcode = mainCap.code + '_' + mainComp.code;
+                        if (item.capability_matrix[itemcode] === undefined) {
+                          if (new_capability_matrix != undefined && new_capability_matrix[itemcode] == undefined) {
+                            new_capability_matrix[itemcode] = -1;
+                            item.capability_matrix[itemcode] = -1;
+                          }
+                        } else if (item.capability_matrix[itemcode] !== -1) {
+                          if (new_capability_matrix != undefined && new_capability_matrix[itemcode] == undefined) {
+                            new_capability_matrix[itemcode] = item.capability_matrix[itemcode];
+                          }
+                        } else {
+                          if (new_capability_matrix != undefined && new_capability_matrix[itemcode] == undefined) {
+                            new_capability_matrix[itemcode] = -1;
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+
         if (role.capabilities && role.capabilities.length > 0) {
           for (let capability of role.capabilities) {
             if (capability.code) {
@@ -557,41 +709,6 @@ class CandidateService {
                           new_capability_matrix[itemcode] = -1;
                         }
                       }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-        for (let capability of  role.default_complexities) {
-          if (capability.code) {
-            for (let mainRole of industries[0].roles) {
-              if (role.code.toString() === mainRole.code.toString()) {
-                for (let mainCap of mainRole.default_complexities) {
-                  if (capability.code.toString() === mainCap.code.toString()) {
-                    for (let mainComp of mainCap.complexities) {
-                      let itemcode = mainCap.code + '_' + mainComp.code;
-
-
-                      if (item.capability_matrix[itemcode] === undefined) {
-                        if (new_capability_matrix != undefined && new_capability_matrix[itemcode] == undefined) {
-                          new_capability_matrix[itemcode] = -1;
-                          item.capability_matrix[itemcode] = -1;
-                        }
-                      } else if (item.capability_matrix[itemcode] !== -1) {
-                        if (new_capability_matrix != undefined && new_capability_matrix[itemcode] == undefined) {
-                          new_capability_matrix[itemcode] = item.capability_matrix[itemcode];
-                        }
-                      } else {
-                        if (new_capability_matrix != undefined && new_capability_matrix[itemcode] == undefined) {
-                          new_capability_matrix[itemcode] = -1;
-                        }
-                      }
-
-
-
-
                     }
                   }
                 }

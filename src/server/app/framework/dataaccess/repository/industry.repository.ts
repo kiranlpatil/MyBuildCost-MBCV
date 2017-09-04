@@ -87,6 +87,7 @@ class IndustryRepository extends RepositoryBase<IIndustry> {
                   name: role.name,
                   code: role.code,
                   capabilities: [],
+                  sort_order: role.sort_order,
                   default_complexities: role.default_complexities
                 };
                 role_object.capabilities = new Array(0);
@@ -111,7 +112,8 @@ class IndustryRepository extends RepositoryBase<IIndustry> {
                     'roleName': role.name,
                     '_id': capability._id,
                     'name': capability.name,
-                    'code': capability.code
+                    'code': capability.code,
+                    sort_order: capability.sort_order,
                   };
                   role_object.capabilities.push(obj);
                 }
@@ -158,6 +160,7 @@ class IndustryRepository extends RepositoryBase<IIndustry> {
                   name: role.name,
                   code: role.code,
                   capabilities: [],
+                  sort_order: role.sort_order,
                   default_complexities: role.default_complexities
                 };
                 role.capabilities.sort((r1 : CapabilityModel, r2 : CapabilityModel) : number => {
@@ -181,6 +184,7 @@ class IndustryRepository extends RepositoryBase<IIndustry> {
                       let capability_object: any = {
                         name: capability.name,
                         code: capability.code,
+                        sort_order: capability.sort_order,
                         complexities: []
                       };
                       capability.complexities.sort((r1 : ComplexityModel, r2 : ComplexityModel) : number => {
@@ -202,6 +206,7 @@ class IndustryRepository extends RepositoryBase<IIndustry> {
                         let complexity_object: any = {
                           name: complexity.name,
                           code: complexity.code,
+                          sort_order: complexity.sort_order,
                           questionForCandidate: complexity.questionForCandidate,
                           questionForRecruiter: complexity.questionForRecruiter,
                           scenarios: complexity.scenarios
@@ -220,11 +225,27 @@ class IndustryRepository extends RepositoryBase<IIndustry> {
           callback(null, this.items);
         }
       }
+
     });
   }
 
   retriveIndustriesWithSortedOrder(excluded: any, callback: (error: any, result: any) => void) {
-    IndustrySchema.find({},excluded).lean().sort({'sort_order': -1, 'name': 1}).exec(function (err: any, items: any) {
+    IndustrySchema.find({}, excluded).lean().exec(function (err: any, items: any) {
+      items.sort((r1: any, r2: any): number => {
+        if (!r1.sort_order) {
+          r1.sort_order = 999;
+        }
+        if (!r2.sort_order) {
+          r2.sort_order = 999;
+        }
+        if (Number(r1.sort_order) < Number(r2.sort_order)) {
+          return -1;
+        }
+        if (Number(r1.sort_order) > Number(r2.sort_order)) {
+          return 1;
+        }
+        return -1;
+      });
       callback(err, items);
     });
   }
