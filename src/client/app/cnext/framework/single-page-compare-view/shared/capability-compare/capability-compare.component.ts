@@ -76,9 +76,12 @@ export class CapabilityCompareComponent  implements OnChanges {
       this.rowsToShow = changes.rowsToShow.currentValue;
     }
 
-    if(this.capabilities.length>this.rowsToShow) {
-      this.showMoreUnable=true;
+    if (this.capabilities != undefined) {
+      if (this.capabilities.length > this.rowsToShow) {
+        this.showMoreUnable = true;
+      }
     }
+
   }
 
   onComplexitySelect(complexity:Complexity,capability:Capability) {
