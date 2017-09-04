@@ -3,7 +3,10 @@
   <a *ngIf="showClearFilter" class="clear-filter" [class.recruiter-clear-filter]="isRecuirter" (click)="clearFilter()" >Clear all filters</a>
   <form [formGroup]="userForm" (submit)="clearFilter()">
     <div class="filter-container" [class.open-filter]="isFilterVisible" [class.recruiter-filter]="isRecuirter">
-      <h4 [class.open-filter]="isFilterVisible"><span *ngIf="isRecuirter">Candidate</span> Filters</h4>
+      <h4 class="candidate-filters-label" [class.open-filter]="isFilterVisible">
+        <span class="glyphicon glyphicon-filter filter-icons"></span>
+        <span *ngIf="isRecuirter">Candidate</span> Filters
+      </h4>
       <div class="inner col-sm-12">
         <h5 data-toggle="collapse" href="#education"
             [class.panel-up]="arrow" [class.panel-down]="!arrow" (click)="arrow=!arrow">Education</h5>
@@ -67,7 +70,8 @@
         </div>
         <div *ngIf="!isRecuirter">
           <h5 data-toggle="collapse" href="#company-size"
-              [class.panel-up]="arrow8" [class.panel-down]="!arrow8" (click)="arrow8=!arrow8">Company Size</h5>
+              [class.panel-up]="arrow8" [class.panel-down]="!arrow8" (click)="arrow8=!arrow8"
+              class="company-size-label">Company Size</h5>
           <div id="company-size" class="collapse">
             <select formControlName="companysize" (change)="filterByCompanySize($event.target.value)">
               <option value="" selected></option>
@@ -77,7 +81,8 @@
         </div>
         <div *ngIf="!isRecuirter">
           <h5 data-toggle="collapse" href="#joblocation"
-              [class.panel-up]="arrow7" [class.panel-down]="!arrow7" (click)="arrow7=!arrow7">Location</h5>
+              [class.panel-up]="arrow7" [class.panel-down]="!arrow7" (click)="arrow7=!arrow7" class="location-label">
+            Location</h5>
           <div id="joblocation" class="collapse">
             <select formControlName="location" (change)="jobsFilterByLocation($event.target.value)">
               <option value="" selected></option>
@@ -88,7 +93,8 @@
 
         <div *ngIf="isRecuirter">
           <h5 data-toggle="collapse" href="#location"
-              [class.panel-up]="arrow3" [class.panel-down]="!arrow3" (click)="arrow3=!arrow3">Current Location</h5>
+              [class.panel-up]="arrow3" [class.panel-down]="!arrow3" (click)="arrow3=!arrow3"
+              class="current-location-label">Current Location</h5>
           <div id="location" class="collapse">
             <label class="radio">
               <input type="radio" [attr.id]="'radio-button-1'" name="radiogroup" value="{{location}}"

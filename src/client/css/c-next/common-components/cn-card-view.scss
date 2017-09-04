@@ -304,21 +304,21 @@ header {
 }
 
 .clear-filter {
-  background: $theme-color;
-  color: $white;
-  padding: 7px 14px;
+  border: 1px solid $clear-filter-border;
+  color: $clear-filter-color;
+  padding: 2px 10px;
   position: fixed;
-  top: 100px;
-  left: 131px;
+  top: 96px;
+  right: 425px;
   z-index: 1000;
-  font-size: 12px;
+  font-size: 14px;
   &:hover {
-    color: $white;
+    color: $clear-filter-color;
   }
 }
 
 .recruiter-clear-filter {
-  top: 175px !important;
+  top: 183px !important;
 }
 
 #matched-job,
