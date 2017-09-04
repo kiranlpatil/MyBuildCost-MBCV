@@ -7,14 +7,14 @@ export function logHandler(err: any, req: any, res: any, next: any) {
     logger.info(err);
     console.log("***Client error = ", err);
     console.log(err.stack);
-    mailToAdmin(err);
+    mailToAdmin(err.reason);
 
   }
   else {
     console.log("***Server error = ", err);
     logger.info(err);
     console.log(err.stack);
-    mailToAdmin(err);
+    mailToAdmin(err.reason);
 
   }
   next(err);
@@ -25,14 +25,14 @@ export function errorHandler(err: any, req: any, res: any, next: any) {
   if (err.code) {
     logger.info(err);
     console.log("Error Handler");
-    mailToAdmin(err);
+    mailToAdmin(err.reason);
     next(err);
   } else {
     var errObject = {
       "status": Messages.STATUS_ERROR,
       "error": {
-        "reason": "Internal Server Error",
-        "message": "Internal Server Error",
+        "reason": "Internal Server ",
+        "message": "Internal Server ",
         "code": 500
       }
     };
@@ -41,6 +41,7 @@ export function errorHandler(err: any, req: any, res: any, next: any) {
     logger.info(responseObject);
     console.log("responseObject in errorHandler:", responseObject);
     mailToAdmin("Internal Server Error");
+    console.log("cdfidfnn the code");
     res.status(500).send(responseObject);
 
   }
@@ -56,7 +57,7 @@ export function clientHandler(err: any, req: any, res: any, next: any) {
   logger.info(responseObject);
   console.log("responseObject in client errorHandler:", responseObject);
   res.status(err.code).send(responseObject);
-  mailToAdmin(err);
+  mailToAdmin(err.reason);
 };
 
 function mailToAdmin(errorInfo:any) {
