@@ -18,20 +18,20 @@
       <form [formGroup]="userForm" (submit)="onSubmit()">
 
         <div class="form-group" [class.fb-email-input]="isSocialLogin">
-          <label><img src="{{MOBILE_ICON}}"/> Current Mobile</label>
+          <label><img src="{{MOBILE_ICON}}"/> Current Mobile Number</label>
           <control-messages [control]="userForm.controls.current_mobile_number"></control-messages>
           <input type="number" [(ngModel)]="model.current_mobile_number" formControlName="current_mobile_number"
                  id="current_mobile_number" class="form-control" readonly/>
         </div>
 
         <div class="form-group" [class.fb-email-input]="isSocialLogin">
-          <label><img src="{{NEW_MOBILE_ICON}}"/> New Mobile</label>
+          <label><img src="{{NEW_MOBILE_ICON}}"/> New Mobile Number</label>
           <control-messages [control]="userForm.controls.new_mobile_number"></control-messages>
           <input type="number" formControlName="new_mobile_number" id="new_mobile_number" class="form-control"/>
         </div>
 
         <div class="form-group" [class.fb-email-input]="isSocialLogin">
-          <label><img src="{{CONFIRM_MOBILE_ICON}}"/> Confirm Mobile</label>
+          <label><img src="{{CONFIRM_MOBILE_ICON}}"/> Confirm Mobile Number</label>
           <control-messages [control]="userForm.controls.confirm_mobile_number"></control-messages>
           <input type="number" formControlName="confirm_mobile_number" id="confirm_mobile_number"
                  (blur)="makeMobileConfirm()" class="form-control"/>
@@ -39,7 +39,7 @@
         </div>
 
         <div class="clearfix">&nbsp;</div>
-        <button type="submit" class="btn btn-primary" [disabled]="!userForm.valid">Change Mobile</button>
+        <button type="submit" class="btn btn-primary" [disabled]="!userForm.valid">Change Mobile Number</button>
 
       </form>
 
@@ -56,7 +56,7 @@
           <button type="button" class="close" aria-label="Close" (click)="showHideModal()">
             <span aria-hidden="true">&times;</span>
           </button>
-          <h5>Confirm your mobile </h5>
+          <h5>Mobile Number Changed successfully</h5>
         </div>
         <div class="modal-body">
           <p>{{mobileNumberChangeSucess}}.</p>

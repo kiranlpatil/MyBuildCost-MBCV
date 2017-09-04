@@ -4,10 +4,12 @@
       <li *ngIf="type=='block'" (click)="deleteItem(job._id)" title='Remove job from "Not Interested" list' ><img src="assets/c-next/card-view/close-grey.png" /></li>
     </ul>
     <header class="clearfix">
-      <div class="col-md-8 col-sm-7 col-xs-5 no-padding">
+      <div class="col-md-8 col-sm-7 col-xs-7 no-padding">
         <h6 *ngIf="!job.hideCompanyName" class="username company-profile-picture-col">
           <div class="" title="Job Title: {{job.jobTitle}}">{{job.jobTitle}}</div>
-          <div class="company-name-label" title="Company Name: {{job.company_name}}">{{job.company_name}}, {{job.location}}</div>
+          <div class="company-name-label" title="Company Name: {{job.company_name}}">{{job.company_name}}<span
+                  *ngIf="job.location != ''">,</span> {{job.location}}
+          </div>
         </h6>
         <h6 *ngIf="job.hideCompanyName" class="username company-profile-picture-col">
           <img src="assets/framework/images/dashboard/profile.png" class="profile-picture"
@@ -30,7 +32,7 @@
         </div>
       </div>
       <div class="company-date" title="Job Posting Date : {{job.postingDate| date:'mediumDate'}}">
-        {{job.postingDate| date:'mediumDate'}}
+        <span class="visible-xs">Job Posting Date</span>{{job.postingDate| date:'mediumDate'}}
       </div>
       <div class="col-md-4 col-sm-5 col-xs-5 no-padding canvas-cricle"
            title="Matching Percentage : {{job.above_one_step_matching+job.exact_matching | number : '1.0-0'}}%">

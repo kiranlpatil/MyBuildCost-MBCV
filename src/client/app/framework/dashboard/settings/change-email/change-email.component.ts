@@ -69,6 +69,7 @@ export class ChangeEmailComponent implements OnInit {
   }
 
   changeEmailSuccess(body: ChangeEmail) {
+    window.localStorage.clear();
     LocalStorageService.setLocalValue(LocalStorage.CHANGE_MAIL_VALUE, 'from_settings');
     this.userForm.reset();
     var message = new Message();

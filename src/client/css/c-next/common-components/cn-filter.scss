@@ -5,7 +5,7 @@
   position: fixed;
   top: 127px;
   right: 0;
-  height: calc(100vh - 127px);
+  height: calc(100vh - 150px);
   overflow: auto;
   border-left: 1px solid #ccc;
   text-align: left;
@@ -19,12 +19,12 @@
 
   h4 {
     margin: 0;
-    color: $text-color;
+    color: $name;
     padding: 55px 15px 15px;
-    font-size: 14px;
+    font-size: 13px;
     font-family: 'gothamrnd-book';
     position: fixed;
-    top: 50px;
+    top: 43px;
     right: 0;
     background-color: $filter-bg;
     width: 200px;
@@ -36,7 +36,7 @@
     padding: 0 15px 15px;
 
     h5 {
-      margin: 18px 0 5px;
+      margin: 20px 0 5px;
       font-weight: 600;
       color: $theme-color;
       position: relative;
@@ -50,16 +50,6 @@
       font-size: 12px;
       margin: 0;
       width: 100%;
-    }
-
-    h5:first-child {
-      margin: 0 0 5px;
-    }
-
-    .current-location-label,
-    .company-size-label,
-    .location-label {
-      margin: 18px 0 5px !important;
     }
 
     .radio,
@@ -118,19 +108,19 @@
     box-shadow: none;
     left: 0;
     right: inherit;
-    top: 163px;
+    top: 162px;
     border-right: 1px solid $filter-border;
     width: 0;
     transition: .5s ease;
     visibility: hidden;
     opacity: 0;
-    height: calc(100vh - 163px);
+    height: calc(100vh - 185px);
 
     h4 {
       left: 0;
       right: inherit;
       padding: 10px;
-      top: 129px;
+      top: 128px;
       border-left: 0;
       border-right: 1px solid $filter-border;
       width: 0;

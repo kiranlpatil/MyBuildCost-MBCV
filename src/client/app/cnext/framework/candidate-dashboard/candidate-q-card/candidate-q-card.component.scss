@@ -118,3 +118,22 @@
     width: 160px;
   }
 }
+
+@media only screen and (max-width: 767px) {
+  .company-profile-picture-col {
+    div {
+      white-space: normal;
+      text-overflow: clip;
+      overflow: visible;
+      word-break: keep-all;
+    }
+  }
+
+  .skills-lists {
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+    padding: 2px 0 2px 27px;
+    width: 100%;
+  }
+}

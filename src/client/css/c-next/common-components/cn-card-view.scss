@@ -304,21 +304,21 @@ header {
 }
 
 .clear-filter {
-  border: 1px solid $clear-filter-border;
-  color: $clear-filter-color;
-  padding: 2px 10px;
+  background: $theme-color;
+  color: $white;
+  padding: 7px 14px;
   position: fixed;
-  top: 96px;
-  right: 425px;
+  top: 100px;
+  left: 131px;
   z-index: 1000;
-  font-size: 14px;
+  font-size: 12px;
   &:hover {
-    color: $clear-filter-color;
+    color: $white;
   }
 }
 
 .recruiter-clear-filter {
-  top: 183px !important;
+  top: 175px !important;
 }
 
 #matched-job,
@@ -401,58 +401,58 @@ header {
 .icons-section {
   .industry {
     background: url(../assets/c-next/card-view/sprite.png) no-repeat -10px -8px;
-    width: 30px !important;
-    height: 30px;
+    width: 20px !important;
+    height: 20px;
     position: absolute;
     left: 0;
   }
   .salary {
     background: url(../assets/c-next/card-view/sprite.png) no-repeat -10px -60px;
-    width: 30px !important;
-    height: 30px;
+    width: 20px !important;
+    height: 20px;
     position: absolute;
     left: 0;
   }
   .experience {
     background: url(../assets/c-next/card-view/sprite.png) no-repeat -9px -87px;
-    width: 30px !important;
-    height: 30px;
+    width: 20px !important;
+    height: 20px;
     position: absolute;
     left: 0;
   }
   .current-location {
     background: url(../assets/c-next/card-view/sprite.png) no-repeat -9px -34px;
-    width: 30px !important;
-    height: 30px;
+    width: 20px !important;
+    height: 20px;
     position: absolute;
     left: 0;
   }
   .education {
     background: url(../assets/c-next/card-view/sprite.png) no-repeat -10px -167px;
-    width: 30px !important;
-    height: 30px;
+    width: 20px !important;
+    height: 20px;
     position: absolute;
     left: 0;
   }
   .company-size {
     background: url(../assets/c-next/card-view/sprite.png) no-repeat -10px -114px;
-    width: 30px !important;
-    height: 30px;
+    width: 20px !important;
+    height: 20px;
     position: absolute;
     left: 0;
   }
   .date-posted {
     background: url(../assets/c-next/card-view/sprite.png) no-repeat -10px -222px;
-    width: 30px !important;
-    height: 30px;
+    width: 20px !important;
+    height: 20px;
     position: absolute;
     left: 0;
   }
 
   .edit-profile-pic {
     background: url(../assets/c-next/card-view/sprite.png) no-repeat -9px -304px;
-    width: 30px !important;
-    height: 30px;
+    width: 20px !important;
+    height: 20px;
     display: block;
   }
   p:last-child {
@@ -487,50 +487,50 @@ header {
   .icons-section {
     .industry {
       background: url(../assets/c-next/card-view/sprite.png) no-repeat -57px -8px;
-      width: 30px !important;
-      height: 30px;
+      width: 20px !important;
+      height: 20px;
       position: absolute;
       left: 0;
     }
     .salary {
       background: url(../assets/c-next/card-view/sprite.png) no-repeat -57px -60px;
-      width: 30px !important;
-      height: 30px;
+      width: 20px !important;
+      height: 20px;
       position: absolute;
       left: 0;
     }
     .experience {
       background: url(../assets/c-next/card-view/sprite.png) no-repeat -57px -87px;
-      width: 30px !important;
-      height: 30px;
+      width: 20px !important;
+      height: 20px;
       position: absolute;
       left: 0;
     }
     .current-location {
       background: url(../assets/c-next/card-view/sprite.png) no-repeat -57px -34px;
-      width: 30px !important;
-      height: 30px;
+      width: 20px !important;
+      height: 20px;
       position: absolute;
       left: 0;
     }
     .education {
       background: url(../assets/c-next/card-view/sprite.png) no-repeat -57px -168px;
-      width: 30px !important;
-      height: 30px;
+      width: 20px !important;
+      height: 20px;
       position: absolute;
       left: 0;
     }
     .company-size {
       background: url(../assets/c-next/card-view/sprite.png) no-repeat -57px -114px;
-      width: 30px !important;
-      height: 30px;
+      width: 20px !important;
+      height: 20px;
       position: absolute;
       left: 0;
     }
     .date-posted {
       background: url(../assets/c-next/card-view/sprite.png) no-repeat -57px -221px;
-      width: 30px !important;
-      height: 30px;
+      width: 20px !important;
+      height: 20px;
       position: absolute;
       left: 0;
     }
@@ -585,43 +585,43 @@ header {
     }
     .salary {
       background: url(../assets/c-next/card-view/sprite.png) no-repeat -103px -60px;
-      width: 30px !important;
-      height: 30px;
+      width: 20px !important;
+      height: 20px;
       position: absolute;
       left: 0;
     }
     .experience {
       background: url(../assets/c-next/card-view/sprite.png) no-repeat -103px -87px;
-      width: 30px !important;
-      height: 30px;
+      width: 20px !important;
+      height: 20px;
       position: absolute;
       left: 0;
     }
     .current-location {
       background: url(../assets/c-next/card-view/sprite.png) no-repeat -103px -34px;
-      width: 30px !important;
-      height: 30px;
+      width: 20px !important;
+      height: 20px;
       position: absolute;
       left: 0;
     }
     .education {
       background: url(../assets/c-next/card-view/sprite.png) no-repeat -103px -168px;
-      width: 30px !important;
-      height: 30px;
+      width: 20px !important;
+      height: 20px;
       position: absolute;
       left: 0;
     }
     .company-size {
       background: url(../assets/c-next/card-view/sprite.png) no-repeat -103px -114px;
-      width: 30px !important;
-      height: 30px;
+      width: 20px !important;
+      height: 20px;
       position: absolute;
       left: 0;
     }
     .date-posted {
       background: url(../assets/c-next/card-view/sprite.png) no-repeat -104px -222px;
-      width: 30px !important;
-      height: 30px;
+      width: 20px !important;
+      height: 20px;
       position: absolute;
       left: 0;
     }
@@ -673,36 +673,36 @@ header {
     }
     .salary {
       background: url(../assets/c-next/card-view/sprite.png) no-repeat -149px -60px;
-      width: 30px !important;
-      height: 30px;
+      width: 20px !important;
+      height: 20px;
       position: absolute;
       left: 0;
     }
     .experience {
       background: url(../assets/c-next/card-view/sprite.png) no-repeat -149px -87px;
-      width: 30px !important;
-      height: 30px;
+      width: 20px !important;
+      height: 20px;
       position: absolute;
       left: 0;
     }
     .current-location {
       background: url(../assets/c-next/card-view/sprite.png) no-repeat -149px -34px;
-      width: 30px !important;
-      height: 30px;
+      width: 20px !important;
+      height: 20px;
       position: absolute;
       left: 0;
     }
     .education {
       background: url(../assets/c-next/card-view/sprite.png) no-repeat -149px -167px;
-      width: 30px !important;
-      height: 30px;
+      width: 20px !important;
+      height: 20px;
       position: absolute;
       left: 0;
     }
     .company-size {
       background: url(../assets/c-next/card-view/sprite.png) no-repeat -149px -114px;
-      width: 30px !important;
-      height: 30px;
+      width: 20px !important;
+      height: 20px;
       position: absolute;
       left: 0;
     }
@@ -809,6 +809,11 @@ header {
 
     .panel {
       margin: 10px 0;
+
+      h6 {
+        overflow: visible;
+        text-overflow: clip;
+      }
     }
   }
 
@@ -844,13 +849,9 @@ header {
   }
 }
 
-.candidate-search-section .card-view .panel-container .button-group {
-  width: 90%;
-}
-
 .candidate-search-section .card-view .panel-container .button-group .btn {
   border-radius: 0;
-  width: 48.5%;
+  width: 43.8%;
   text-align: center;
   padding: 0 !important;
   margin: 0 4px 0 0;

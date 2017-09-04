@@ -61,8 +61,7 @@ export class ChangeMobileComponent implements OnInit {
   onSubmit() {
     this.model = this.userForm.value;
     if (!this.makeMobileConfirm()) {
-      LocalStorageService.setLocalValue(LocalStorage.MOBILE_NUMBER, this.model.new_mobile_number);
-      this._router.navigate([NavigationRoutes.VERIFY_PHONE]);
+      //this._router.navigate([NavigationRoutes.VERIFY_PHONE]);
       this.MobileService.changeMobile(this.model)
         .subscribe(
           body => this.changeMobileSuccess(body),
@@ -72,13 +71,14 @@ export class ChangeMobileComponent implements OnInit {
   }
 
   changeMobileSuccess(body: ChangeMobile) {
+    LocalStorageService.setLocalValue(LocalStorage.MOBILE_NUMBER, this.model.new_mobile_number);
     this.userForm.reset();
     LocalStorageService.setLocalValue(LocalStorage.VERIFY_PHONE_VALUE, 'from_settings');
     this._router.navigate([NavigationRoutes.VERIFY_PHONE]);
   }
 
   changeMobileFail(error: any) {
-    if (error.err_code === 404 || error.err_code === 0) {
+    if (error.err_code === 404 || error.err_code === 0 || error.err_code===401) {
       var message = new Message();
       message.error_msg = error.err_msg;
       message.isError = true;

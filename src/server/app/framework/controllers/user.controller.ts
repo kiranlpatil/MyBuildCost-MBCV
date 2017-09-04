@@ -726,7 +726,7 @@ export function changeMobileNumber(req: express.Request, res: express.Response, 
         next({
           reason: Messages.MSG_ERROR_RSN_EXISTING_USER,
           message: Messages.MSG_ERROR_REGISTRATION_MOBILE_NUMBER,
-          code: 403
+          code: 401
         });
 
       }
