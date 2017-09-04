@@ -169,11 +169,11 @@ export class CandidateSearchComponent implements OnChanges {
 
   actionOnCard(value:string) {
     //var data = {'name': value, 'jobId': jobId};
-    if ('cartListed' == ValueConstant.CART_LISTED_CANDIDATE) {
+    if (value == ValueConstant.CART_LISTED_CANDIDATE) {
       var data = {'name': 'cartListed', 'jobId': this.jobId};
       this.workFlowAction(data);
     }
-    if ('rejectedList' == ValueConstant.REJECTED_LISTED_CANDIDATE) {
+    if (value == ValueConstant.REJECTED_LISTED_CANDIDATE) {
       var data = {'name': 'rejectedList', 'jobId': this.jobId};
       this.workFlowAction(data);
     }

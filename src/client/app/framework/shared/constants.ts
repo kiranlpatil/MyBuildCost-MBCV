@@ -18,7 +18,7 @@ export class AppSettings {
 }
 
 export class Messages {
-  public static MSG_CANDIDATE_NOT_FOUND = "Applicant not found with this name.";
+  public static MSG_CANDIDATE_NOT_FOUND = "No registered applicant with this name. Avoid using multiple spaces while searching with complete names.";
   public static MSG_CANDIDATE_SEARCH_NOT_FOUND = "Applicant's profile does not match with any of your open job profiles.";
   public static MSG_CNADIDATE_VISIBILITY_OFF = "The selected applicant profile details are not displayed, since the applicant has marked it as private.";
   public static MSG_SUCCESS_LOGIN: string = 'You are successfully signed in.';
@@ -276,7 +276,7 @@ export class ValueConstant {
   public static APPLIED_CANDIDATE: string = 'applied';
   public static BLOCKED_CANDIDATE: string = 'blocked';
   public static MATCHED_CANDIDATE: string = 'matchedList';
-  public static VALUE_FOR_CNDIDATES_PERCENT_MATCHING_LOWER_BOUND = 40;
+  public static VALUE_FOR_CNDIDATES_PERCENT_MATCHING_LOWER_BOUND = 10;
 }
 
 
