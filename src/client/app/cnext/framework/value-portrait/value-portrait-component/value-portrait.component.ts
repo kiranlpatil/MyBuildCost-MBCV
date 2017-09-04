@@ -23,8 +23,23 @@ export class ValuePortraitComponent implements OnInit {
     this.candidateProfileService.getCandidateAllDetails(this.userId)
       .subscribe(
         candidateData => {
-          this.candidate = candidateData.data;
+          this.candidate = this.updateCapabilityData(candidateData.data);
         },error => this.errorService.onError(error));
+  }
+
+  updateCapabilityData(candidate: Candidate) {
+    for (var i = candidate.capabilities.length - 1; i >= 0; i--) {
+      for (var j = candidate.capabilities[i].complexities.length - 1; j >= 0; j--) {
+        if (candidate.capabilities[i].complexities[j].answer == undefined || candidate.capabilities[i].complexities[j].answer == 'Not Applicable') {
+          candidate.capabilities[i].complexities.splice(j, 1);
+        }
+      }
+      if (candidate.capabilities[i].complexities.length == 0) {
+        candidate.capabilities.splice(i, 1);
+      }
+    }
+
+    return candidate;
   }
 
 }
