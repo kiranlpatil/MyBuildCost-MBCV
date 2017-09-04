@@ -285,6 +285,7 @@ export class API {
   public static SEND_MAIL = 'sendmail';
   public static SEND_TO_ADMIN_MAIL = 'sendmailtoadmin';
   public static USER_PROFILE = 'users';
+  public static UPDATE_USER = 'updateUser';
   public static ALL_USER_PROFILE = 'alluser';
   public static CANDIDATE_PROFILE = 'candidate';
   public static CANDIDATE_DETAIL_PROFILE = 'candidateDetails';

@@ -65,7 +65,7 @@
     }
 
     ul > li {
-      width: 16.66%;
+      width: 14%;
       padding: 5px 10px;
 
     }
@@ -85,4 +85,23 @@
   width: 88px;
   border-radius: 5px;
   box-shadow: 2px 2px 5px 1px #a09c9c;
+  border: 0;
+}
+
+.activated {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+  background: #14892c;
+  margin: 0 5px 0 0;
+}
+
+.not-activated {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+  background: #e3695f;
+  margin: 0 5px 0 0;
 }

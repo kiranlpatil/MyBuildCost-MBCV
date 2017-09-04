@@ -19,6 +19,7 @@ this.authInterceptor = new AuthInterceptor();
 export function cnextInit(app: express.Application) { //todo add interceptor to authenticate
   let searchController = new SearchController();
   app.get('/api/industry',this.authInterceptor.requiresAuth, industryController.retrieve);
+  app.put('/api/updateUser/:id', this.authInterceptor.requiresAuth, adminController.updateDetailOfUser);
   app.post('/api/proficiency',this.authInterceptor.requiresAuth, proficienciesController.create);
   app.get('/api/proficiency', this.authInterceptor.requiresAuth,proficienciesController.retrieve);
   app.put('/api/proficiency',this.authInterceptor.requiresAuth, proficienciesController.update);

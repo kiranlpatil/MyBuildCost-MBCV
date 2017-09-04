@@ -121,7 +121,6 @@ class AdminService {
         console.log('recuiter file saved');
       });
     }
-
     console.log("Success");
     callback(null,result);
   };
@@ -143,6 +142,16 @@ class AdminService {
     var sendMailService = new SendMailService();
     sendMailService.sendMail(mailOptions, callback);
 
+  };
+
+  updateUser(_id: string, item: any, callback: (error: any, result: any) => void) {
+    this.userRepository.findById(_id, (err: any, res: any) => {
+      if (err) {
+        callback(err, res);
+      } else {
+        this.userRepository.update(res._id, item, callback);
+      }
+    });
   }
 }
 
