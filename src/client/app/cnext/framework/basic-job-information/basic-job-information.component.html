@@ -173,18 +173,22 @@
         <p *ngIf="jobPosterModel.experienceMinValue !=jobPosterModel.experienceMaxValue"><label>Experience Band</label>
           {{jobPosterModel.experienceMinValue}} -
           {{jobPosterModel.experienceMaxValue}} Year(s)</p>
-        <p *ngIf="jobPosterModel.experienceMinValue ==jobPosterModel.experienceMaxValue"><label>Experience</label>
+        <p *ngIf="jobPosterModel.experienceMinValue == jobPosterModel.experienceMaxValue"><label>Experience</label>
           {{jobPosterModel.experienceMinValue}} Year(s)</p>
         <p *ngIf="jobPosterModel.salaryMinValue != jobPosterModel.salaryMaxValue"><label>Salary Band</label>
           {{jobPosterModel.salaryMinValue}} - {{jobPosterModel.salaryMaxValue}} Lac(s)
         </p>
         <p *ngIf="jobPosterModel.salaryMinValue == jobPosterModel.salaryMaxValue"><label>Salary</label>
           {{jobPosterModel.salaryMinValue}} Lac(s)</p>
+      </div>
+      <div class="clearfix">
         <p><label>Notice Period</label> {{jobPosterModel.joiningPeriod}}</p>
         <p><label>Hiring Manager</label> {{jobPosterModel.hiringManager}}</p>
         <p *ngIf="recruiter.isRecruitingForself"><label>Hiring Department</label> {{jobPosterModel.department}}</p>
         <p *ngIf="!recruiter.isRecruitingForself"><label>Hiring Company</label> {{jobPosterModel.department}}</p>
         <p><label>Country</label> {{jobPosterModel.location.country}}</p>
+      </div>
+      <div class="clearfix">
         <p><label>State</label> {{jobPosterModel.location.state}}</p>
         <p><label>City</label> {{jobPosterModel.location.city}}</p>
       </div>
