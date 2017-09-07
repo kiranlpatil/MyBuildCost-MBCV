@@ -384,9 +384,11 @@ export class ImagePath {
 }
 
 export class ProjectAsset {
+  static _year:Date = new Date();
+  static currentYear = ProjectAsset._year.getFullYear();
   public static APP_NAME = 'JobMosis';
   public static TAG_LINE = 'The Awesome Web Experience';
-  public static UNDER_LICENECE = '© 2017 www.jobmosis.com';
+  public static UNDER_LICENECE = '© ' + ProjectAsset.currentYear + ' www.jobmosis.com';
 }
 
 export class Tooltip {
