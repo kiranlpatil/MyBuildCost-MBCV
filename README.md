@@ -343,7 +343,12 @@ server {
  1. Functional testing is completed.
  2. All tests are written in Test Suite.
  3. Change is verified on staging.
- 4. Sanity test on demo is completed.  
+ 4. Sanity test on demo is completed.
+ 
+ # Service Level Agreement (SLA):
+ 1. SLA for ShowStopper: Item should be fixed and solution should be deployed on production server within 24 hours.
+ 2. SLA for HighPriority: Item should be fixed and solution should be deployed on production server within 48 hours. 
+ Deployment on production server could be differed on case by case but fix need to be made available within 48 hours so that it is ready to deploy on production server/branch.
   
  # Contributors
 
