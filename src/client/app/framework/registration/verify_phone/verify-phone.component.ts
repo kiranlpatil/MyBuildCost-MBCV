@@ -1,7 +1,7 @@
 import {Component} from "@angular/core";
 import {Router} from "@angular/router";
 import {FormBuilder, FormGroup} from "@angular/forms";
-import {ImagePath, LocalStorage, Messages, NavigationRoutes, ProjectAsset} from "../../shared/constants";
+import {ImagePath, LocalStorage, Messages, NavigationRoutes, ProjectAsset, AppSettings} from "../../shared/constants";
 import {VerifyUser} from "./verify_phone";
 import {VerifyPhoneService} from "./verify-phone.service";
 import {MessageService} from "../../shared/message.service";
@@ -50,11 +50,11 @@ export class VerifyPhoneComponent {
 
   onSubmit() {
     this.model = this.userForm.value;
-    if(this.model.otp == '') {
+    if(this.model.otp === '') {
       this.submitStatus = true;
       return;
     }
-    if(!this.userForm.valid){
+    if(!this.userForm.valid) {
       return;
     }
 
@@ -94,12 +94,17 @@ export class VerifyPhoneComponent {
   }
 
   mobileVerificationSuccess(res: any) {
-    this.showModalStyle = !this.showModalStyle;
+    //this.showModalStyle = !this.showModalStyle;
     var message = new Message();
     message.isError = false;
     message.custom_message = Messages.MSG_SUCCESS_CHANGE_MOBILE_NUMBER;
     this.messageService.message(message);
-    this.navigateTo();
+    setTimeout(() => {
+      window.localStorage.clear();
+      let host = AppSettings.HTTP_CLIENT + window.location.hostname;
+      window.location.href = host;
+    }, 2000);
+
   }
 
   verifyFail(error: any) {
