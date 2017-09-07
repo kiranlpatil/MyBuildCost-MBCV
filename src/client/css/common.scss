@@ -927,19 +927,19 @@ control-messages {
     }
     .circle {
       background: #F7B82B;
-      width: 250px;
-      height: 250px;
+      width: 175px;
+      height: 175px;
       span {
         color: #fff;
-        font-size: 18px;
-        height: 250px;
-        width: 250px;
+        font-size: 14px;
+        height: 150px;
+        width: 150px;
       }
     }
     .inner-circle {
       box-shadow: 0 0 0 transparent;
-      height: 225px;
-      width: 225px;
+      height: 150px;
+      width: 150px;
     }
   }
   #current-location-tabs {
