@@ -166,7 +166,7 @@ export class Messages {
   public static MSG_READY_FOR_JOB_SEARCH = 'Your profile edited successfully.You will be taken to the job matching dashboard.';
   public static MSG_JOB_POST = 'This job post will now be published. You can see matching candidates for this job in your dashboard view. Proceed?';
   public static MSG_CONFIRM_PASSWORD = ' Passwords do not match.';
-  public static MSG_CHANGE_PASSWORD_SUCCESS = 'Password changed successfully.You can Sign In again with new password by clicking on "yes" button, Please' +
+  public static MSG_CHANGE_PASSWORD_SUCCESS = 'Password changed successfully. You can Sign In again with new password by clicking on "YES" button, Please' +
       ' click on "No" button to continue the session.';
   public static MSG_VERIFY_USER_1 = 'You are almost done!';
   public static MSG_VERIFY_USER_2 = 'We need to verify your mobile number before you can start using the system.';

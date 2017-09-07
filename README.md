@@ -324,8 +324,33 @@ server {
  - we have used msg91 to send sms for otp verification.[https://msg91.com/].Purchase sms on this site and enter the Auth key in the file(/home/nilesh/Projects/tpl-web-fullstack-seed/src/server/app/services/user.service.ts) as follows,
  var msg91 = require("msg91")("AUTHKEY", "TPLSID", "4");//(4 -Transactional route,1-Promotional route)[https://www.npmjs.com/package/msg91]
   
-
-# Contributors
+# Definition of DONE for developers:
+ 
+ 1. Every story should have acceptance criteria.
+ 2. When all the conditions mentioned in "Acceptance Criteria" is satisfied.
+ 3. Must follow best practices for coding.
+ 4. Must follow UI/UX best practices.
+ 5. Had done code review.
+ 6. Unit tests are written.
+ 7. Static code analysis.
+ 8. There should be zero code duplication.
+ 9. Time complexity should be minimum.
+ 10. Performance testing must be completed.
+ 11. Solution approach must be discussed before development.
+ 
+ # Definition of DONE for QA:
+ 
+ 1. Functional testing is completed.
+ 2. All tests are written in Test Suite.
+ 3. Change is verified on staging.
+ 4. Sanity test on demo is completed.
+ 
+ # Service Level Agreement (SLA):
+ 1. SLA for ShowStopper: Item should be fixed and solution should be deployed on production server within 24 hours.
+ 2. SLA for HighPriority: Item should be fixed and solution should be deployed on production server within 48 hours. 
+ Deployment on production server could be differed on case by case but fix need to be made available within 48 hours so that it is ready to deploy on production server/branch.
+  
+ # Contributors
 
 [<img alt="mgechev" src="https://avatars.githubusercontent.com/u/455023?v=3&s=117" width="117">](https://github.com/mgechev) |[<img alt="ludohenin" src="https://avatars.githubusercontent.com/u/1011516?v=3&s=117" width="117">](https://github.com/ludohenin) |[<img alt="d3viant0ne" src="https://avatars.githubusercontent.com/u/8420490?v=3&s=117" width="117">](https://github.com/d3viant0ne) |[<img alt="Shyam-Chen" src="https://avatars.githubusercontent.com/u/13535256?v=3&s=117" width="117">](https://github.com/Shyam-Chen) |[<img alt="tarlepp" src="https://avatars.githubusercontent.com/u/595561?v=3&s=117" width="117">](https://github.com/tarlepp) |[<img alt="NathanWalker" src="https://avatars.githubusercontent.com/u/457187?v=3&s=117" width="117">](https://github.com/NathanWalker) |
 :---: |:---: |:---: |:---: |:---: |:---: |
