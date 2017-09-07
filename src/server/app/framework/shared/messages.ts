@@ -39,6 +39,7 @@ class Messages {
   public static MSG_ERROR_WRONG_TOKEN: string = 'Invalid access token';
   public static MSG_ERROR_INACTIVE_USER: string = 'Inactive user. Kindly click on Register Now!!!.';
   public static MSG_ERROR_WRONG_CURRENT_PASSWORD: string = 'Incorrect current password entered.';
+  public static MSG_ERROR_SAME_NEW_PASSWORD: string = 'Current and new passwords cant be same.';
   public static MSG_ERROR_WRONG_CURRENT_EMAIL: string = 'Incorrect current email address entered.';
   public static MSG_ERROR_PROVIDE_TOKEN: string = 'Provide access token';
   public static MSG_ERROR_IS_BEARER: string = 'Invalid token strategy';

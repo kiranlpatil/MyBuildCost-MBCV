@@ -667,6 +667,15 @@ export function changePassword(req: express.Request, res: express.Response, next
       }else {
         if(isSame) {
 
+          if(req.body.current_password===req.body.new_password){
+            next({
+              reason: Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
+              message: Messages.MSG_ERROR_SAME_NEW_PASSWORD,
+              code: 401
+            });
+          }
+          else {
+
           var new_password:any;
           const saltRounds = 10;
           bcrypt.hash(req.body.new_password, saltRounds, (err:any, hash:any) => {
@@ -693,7 +702,7 @@ export function changePassword(req: express.Request, res: express.Response, next
           });
             }
         });
-        } else {
+        }} else {
           next({
             reason: Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
             message: Messages.MSG_ERROR_WRONG_CURRENT_PASSWORD,
