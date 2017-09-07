@@ -64,6 +64,7 @@ class CandidateSearchService {
         data.first_name = obj.userId.first_name;
         data.last_name = obj.userId.last_name;
         data.id = obj._id;
+        data.location = obj.location;
         data.currentCompany = obj.professionalDetails.currentCompany;
         data.designation = obj.jobTitle;
         data.display_string = data.first_name + " " + data.last_name + " " + obj.jobTitle + " " + obj.professionalDetails.currentCompany;

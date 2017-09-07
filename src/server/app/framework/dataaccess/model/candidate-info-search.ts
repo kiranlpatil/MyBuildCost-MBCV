@@ -1,3 +1,4 @@
+import LocationModel = require("./location.model");
 class CandidateInfoSearch {
   id:string;
   first_name:string;
@@ -5,5 +6,6 @@ class CandidateInfoSearch {
   display_string:string;
   currentCompany:string;
   designation:string;
+  location:LocationModel;
 }
 export = CandidateInfoSearch;
