@@ -73,6 +73,10 @@
         </span>
                 <label [class.exact]="data.experienceMatch=='exact'" [class.missing]="data.experienceMatch=='missing'">Experience</label>
                 <span>{{candidate.professionalDetails.experience}}</span>
+                <label [class.exact]="data.salaryMatch=='exact'" [class.above]="data.salaryMatch=='above'"
+                       [class.below]="data.salaryMatch=='below'" [class.missing]="data.salaryMatch=='missing'">Current
+                  Salary</label>
+                <span>{{candidate.professionalDetails.currentSalary}}</span>
                 <label>Current Company</label>
                 <span>{{candidate.professionalDetails.currentCompany}}</span>
                 <label>Current Location</label>
@@ -82,10 +86,6 @@
                        [class.below]="data.releaseMatch=='below'" [class.missing]="data.releaseMatch=='missing'">
                   Ready to Relocate</label>
                 <span>{{candidate.professionalDetails.relocate}}</span>
-                <label [class.exact]="data.salaryMatch=='exact'" [class.above]="data.salaryMatch=='above'"
-                       [class.below]="data.salaryMatch=='below'" [class.missing]="data.salaryMatch=='missing'">Current
-                  Salary</label>
-                <span>{{candidate.professionalDetails.currentSalary}}</span>
               </div>
             </div>
           </div>
