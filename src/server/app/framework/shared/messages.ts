@@ -24,6 +24,7 @@ class Messages {
   public static MSG_SUCCESS_REGISTRATION: string = 'Registration successful';
   public static MSG_SUCCESS_CHANGE_PASSWORD: string = 'Your password has been changed successfully';
   public static MSG_SUCCESS_SUBMITTED: string = 'Form submitted successfully';
+  public static MSG_SUCCESS_PASSWORD_CHANGE: string = 'Password changed successfully.';
   public static MSG_SUCCESS_OTP: string = 'OTP has been sent on your verified mobile number.';
   public static MSG_SUCCESS_OTP_CHANGE_MOBILE_NUMBER: string = 'OTP has been sent on your new mobile number';
 
@@ -39,7 +40,7 @@ class Messages {
   public static MSG_ERROR_WRONG_TOKEN: string = 'Invalid access token';
   public static MSG_ERROR_INACTIVE_USER: string = 'Inactive user. Kindly click on Register Now!!!.';
   public static MSG_ERROR_WRONG_CURRENT_PASSWORD: string = 'Incorrect current password entered.';
-  public static MSG_ERROR_SAME_NEW_PASSWORD: string = 'Current and new passwords cant be same.';
+  public static MSG_ERROR_SAME_NEW_PASSWORD: string = 'Current and new passwords can\'t be same.';
   public static MSG_ERROR_WRONG_CURRENT_EMAIL: string = 'Incorrect current email address entered.';
   public static MSG_ERROR_PROVIDE_TOKEN: string = 'Provide access token';
   public static MSG_ERROR_IS_BEARER: string = 'Invalid token strategy';
@@ -47,6 +48,7 @@ class Messages {
   public static MSG_ERROR_ACCOUNT_STATUS: string = 'Your account is still inactive. Verify your account by clicking the verification link sent on your email.';//dont change It
   public static MSG_ERROR_VERIFY_ACCOUNT: string = 'Please click on the link sent to your email in order to activate your account.';//Dont CHange It
   public static MSG_ERROR_VERIFY_CANDIDATE_ACCOUNT: string = 'Please contact the administrator to activate your account.';//Dont CHange It
+  public static MSG_ERROR_BCRYPT_CREATION: string = 'Error in creating hash using bcrypt.';//Dont CHange It
   public static MSG_ERROR_INVALID_ID: string = 'Invalid Userid';
   public static MSG_ERROR_USER_NOT_PRESENT: string = 'Enter a valid login ID / password.';
   public static MSG_ERROR_USER_WITH_EMAIL_PRESENT: string = 'You are already a registered user. Kindly click on Login.';

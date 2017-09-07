@@ -667,21 +667,24 @@ export function changePassword(req: express.Request, res: express.Response, next
       }else {
         if(isSame) {
 
-          if(req.body.current_password===req.body.new_password){
+          if(req.body.current_password===req.body.new_password) {
             next({
               reason: Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
               message: Messages.MSG_ERROR_SAME_NEW_PASSWORD,
               code: 401
             });
-          }
-          else {
+          } else {
 
           var new_password:any;
           const saltRounds = 10;
           bcrypt.hash(req.body.new_password, saltRounds, (err:any, hash:any) => {
             // Store hash in your password DB.
             if(err) {
-              console.log('Error in creating hash using bcrypt');
+              next({
+                reason: Messages.MSG_ERROR_RSN_INVALID_REGISTRATION_STATUS,
+                message: Messages.MSG_ERROR_BCRYPT_CREATION,
+                code: 403
+              });
           }
           else {
               new_password = hash;
@@ -695,7 +698,7 @@ export function changePassword(req: express.Request, res: express.Response, next
               var token = auth.issueTokenWithUid(user);
               res.send({
                 "status": "Success",
-                "data": {"message": "Password changed successfully"},
+                "data": {"message": Messages.MSG_SUCCESS_PASSWORD_CHANGE},
                 access_token: token
               });
             }
