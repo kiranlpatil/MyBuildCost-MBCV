@@ -156,6 +156,12 @@ export class QCardviewComponent implements OnChanges {
         break;
       case ValueConstant.MATCHED_CANDIDATE :
         this.candidateQlist.matchedCandidates.splice(this.candidateQlist.matchedCandidates.indexOf(candidate), 1);
+        if (destinationListName == ValueConstant.CART_LISTED_CANDIDATE) {
+          this.candidateQlist.cartCandidates.push(candidate);
+        }
+        if (destinationListName == ValueConstant.REJECTED_LISTED_CANDIDATE) {
+          this.candidateQlist.rejectedCandidates.push(candidate);
+        }
         this.recuirterListCountModel.numberOfMatchedCandidates = this.candidateQlist.matchedCandidates.length;
         isMatchList = true;
         break;
