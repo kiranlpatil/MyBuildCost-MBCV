@@ -8,19 +8,47 @@ export class SharedService {
   public isToasterVisible: boolean = true;
 
   constructor() {
-    //this.isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
     let ua = navigator.userAgent;
 
-    if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|Mobile|mobile|CriOS/i.test(ua)){
+    if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|Opera Mini|Mobile|mobile|Chrome|CriOS/i.test(ua)){
       this.isChrome = true;
     }
-    else if(/Chrome/i.test(ua)) {
-      this.isChrome = true;
-    }
+
     else {
-      console.log('other');
       this.isChrome = false;
     }
+
+    this.detectIE();
+
+  }
+
+  detectIE () {
+    let ua = window.navigator.userAgent;
+
+    let msie = ua.indexOf('MSIE ');
+    if (msie > 0) {
+      this.isChrome = false;
+      // IE 10 or older => return version number
+      return parseInt(ua.substring(msie + 5, ua.indexOf('.', msie)), 10);
+    }
+
+    let trident = ua.indexOf('Trident/');
+    if (trident > 0) {
+      this.isChrome = false;
+      // IE 11 => return version number
+      var rv = ua.indexOf('rv:');
+      return parseInt(ua.substring(rv + 3, ua.indexOf('.', rv)), 10);
+    }
+
+    let edge = ua.indexOf('Edge/');
+    if (edge > 0) {
+      this.isChrome = false;
+      // Edge (IE 12+) => return version number
+      return parseInt(ua.substring(edge + 5, ua.indexOf('.', edge)), 10);
+    }
+
+    // other browser
+    return false;
   }
 
   public setToasterVisiblity(isToasterVisible:boolean) {
