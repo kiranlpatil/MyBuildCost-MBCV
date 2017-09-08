@@ -97,9 +97,19 @@
     }
   }
   select {
-    padding: 4px 2px 4px;
+    padding: 4px 2px;
     font-size: 14px;
   }
+}
+
+h5:first-child {
+  margin: 0 0 5px !important;
+}
+
+.current-location-label,
+.company-size-label,
+.location-label {
+  margin: 18px 0 5px !important;
 }
 
 @media only screen and (max-width: 767px) {
