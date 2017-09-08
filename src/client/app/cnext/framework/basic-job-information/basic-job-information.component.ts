@@ -1,16 +1,16 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from "@angular/core";
-import {Industry} from "../model/industry";
-import {Section} from "../model/candidate";
-import {JobPosterModel} from "../model/jobPoster";
-import {ProfessionalDataService} from "../professional-data/professional-data.service";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {JobLocation} from "../model/job-location";
-import {MyGoogleAddress} from "../../../framework/registration/candidate/google-our-place/my-google-address";
-import {FilterService} from "../filters/filter/filter.service";
-import {Headings, Messages, Tooltip} from "../../../framework/shared/constants";
-import {RecruiterDashboard} from "../model/recruiter-dashboard";
-import {ValidationService} from "../../../framework/shared/customvalidations/validation.service";
-import {ErrorService} from "../error.service";
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angular/core';
+import {Industry} from '../model/industry';
+import {Section} from '../model/candidate';
+import {JobPosterModel} from '../model/jobPoster';
+import {ProfessionalDataService} from '../professional-data/professional-data.service';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {JobLocation} from '../model/job-location';
+import {MyGoogleAddress} from '../../../framework/registration/candidate/google-our-place/my-google-address';
+import { FilterService} from '../filters/filter/filter.service';
+import { Headings, Messages, Tooltip} from '../../../framework/shared/constants';
+import { RecruiterDashboard} from '../model/recruiter-dashboard';
+import {ValidationService} from '../../../framework/shared/customvalidations/validation.service';
+import {ErrorService} from '../error.service';
 
 @Component({
   moduleId: module.id,
@@ -176,7 +176,7 @@ export class BasicJobInformationComponent implements OnInit, OnChanges {
       this.isSalaryValid = false;
       return;
     }
-    if(!(this.storedLocation.formatted_address.split(',').length > 2)){
+    if(!(this.storedLocation.formatted_address.split(',').length > 2)) {
       this.isLocationInvalid=true;
       return;
     }
@@ -185,7 +185,17 @@ export class BasicJobInformationComponent implements OnInit, OnChanges {
     if (this.storedIndustry) {
       this.jobPosterModel.industry = this.storedIndustry;
     }
-    this.jobPosterModel.location = this.storedLocation;
+    if(this.storedLocation.city) {
+      this.jobPosterModel.location = this.storedLocation;
+    }else {
+      if(typeof this.jobPosterModel.location == 'string') {
+        let address: string = this.jobPosterModel.location;
+        this.jobPosterModel.location ={};
+        this.jobPosterModel.location.city = address.split(',')[0];
+        this.jobPosterModel.location.state = address.split(',')[1];
+        this.jobPosterModel.location.country = address.split(',')[2];
+      }
+    }
     //if (this.jobPosterModel.industry) {
     this.savedjobPosterModel = Object.assign({}, this.jobPosterModel);
     if(this.showButton) {
