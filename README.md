@@ -314,6 +314,28 @@ server {
 # MongoDB
 
  - In progress
+ 
+# MongoDB update scripts
+
+ - Version : 1.1.1
+ - Date : 7 Sept 2017
+ - Scenario : Industry code for 'IT' updated in master data so that need to update for candidates and recruiters who are consuming it.
+ - Update Script :
+ db.candidates.update({"industry.code" : "4"},
+   {$set:{"industry.code" : "1000"}},
+   { multi: true }
+ );
+ 
+ db.recruiters.find({}).forEach(function(recruiter) {
+       recruiter.postedJobs.forEach(function(job){
+           if(job.industry.code=="4"){
+               job.industry.code = "1000"
+           }
+       })
+ 	db.recruiters.save(recruiter);
+ })
+ 
+ 
 
 # MySQL
 
