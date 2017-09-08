@@ -381,6 +381,24 @@ now select file from left side(your local PC files) and right click on the file 
 replace the ServerAddress with address you wish to work on(stagging IP address)
 
 
+# Data recovery plan :
+ We are defining the backup plan in AWS server, By using AWS Images we can create backup of all the things
+ like database, application settings and other code .
+ In AWS there is another facility of auto backup but now we are not using it because of it require script 
+ In Future will give a automation for backup of AWS Server
+  
+ Follow below step's to create backup and recovery for Jobmosis Application 
+ 1. Goto  all Services and select EC2 menu
+ 2. Click on "Running Instances" option from "Resources".
+ 3. It will give you list of instances running
+ 4. right click on the instance which you want to backup 
+ 5. select option Image then select "Create Image"
+ 6. It will prompt for enter details like Image name, Image Description 
+ 7. Select No reboot option check
+ 8. Click on "Create Image"
+ 
+ II) Go To left side option Snapshots 
+  1. check whether the Image is created or not.
   
 # Definition of DONE for developers:
  
