@@ -1,7 +1,7 @@
 <section class="main-form-wrapper registration">
   <main-header [MainHeaderMenuHideShow]="mainHeaderMenuHideShow"></main-header>
 
-    <div *ngIf="!isChrome && isToasterVisible" #toaster id="snackbar">This application is certified on Google chrome browser. Switch to chrome for better experience.
+    <div *ngIf="!isChrome && isToasterVisible" #toaster id="snackbar">{{getMessages().BROWSER_ALERT_MSG}}
         <button class="button-style" (click)="closeToaster()">x</button>
     </div>
 

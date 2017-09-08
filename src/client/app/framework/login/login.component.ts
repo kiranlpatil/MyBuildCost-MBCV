@@ -17,10 +17,11 @@ import {
 import {FacebookService} from "./facebook.service";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {ValidationService} from "../shared/customvalidations/validation.service";
-import {ProjectAsset} from "../shared/constants";
+import {ProjectAsset, Messages} from "../shared/constants";
 import {SharedService} from "../shared/shared-service";
 import {AdminLogin} from "./adminlogininfo";
 import {ErrorService} from "../../cnext/framework/error.service";
+
 
 @Component({
   moduleId: module.id,
@@ -192,6 +193,10 @@ export class LoginComponent implements OnInit {
   }
 
   onFailure(error: any) {
+  }
+
+  getMessages() {
+    return Messages;
   }
 
 }

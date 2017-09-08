@@ -270,9 +270,12 @@ export class RecruiterComponent implements OnInit {
   }
 
   closeToaster() {
-    //this.toaster.nativeElement.style.visibility = "hidden";
     this.isToasterVisible = false;
     this.sharedService.setToasterVisiblity(this.isToasterVisible);
+  }
+
+  getMessages() {
+    return Messages;
   }
 
 }

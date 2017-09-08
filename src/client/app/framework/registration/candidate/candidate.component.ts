@@ -159,4 +159,8 @@ export class CandidateComponent implements OnInit {
     }
   }
 
+  getMessages() {
+    return Messages;
+  }
+
 }
