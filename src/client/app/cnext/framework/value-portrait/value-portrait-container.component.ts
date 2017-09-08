@@ -22,7 +22,7 @@ export class ValuePortraitContainerComponent implements OnInit {
     if (role == 'true') {
       this._router.navigate(['/candidate_dashboard']);
     } else {
-      this._router.navigate(['/recruiterdashboard']);
+      this._router.navigate(['/recruiterdashboard', 'applicant_search']);
     }
   }
 

@@ -61,6 +61,10 @@ export class RecruiterDashboardComponent implements OnInit, AfterViewInit {
           let matchElement: any = document.getElementById('post_job');
           matchElement.click();
       }
+      if (this.tabName === 'applicant_search') {
+        let matchElement:any = document.getElementById('applicant_search');
+        matchElement.click();
+      }
     });
 
   }
