@@ -5,8 +5,7 @@ import UserService = require('../services/user.service');
 import AdminService = require('../services/admin.service');
 import UserModel = require('../dataaccess/model/user.model');
 var request = require('request');
-var satelize = require('satelize');
-var iplocation = require('iplocation')
+
 
 
 
