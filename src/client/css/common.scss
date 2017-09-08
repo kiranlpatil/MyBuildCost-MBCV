@@ -906,3 +906,8 @@ control-messages {
     }
   }
 }
+
+select:focus {
+  border-bottom: 2px solid $theme-color !important;
+}
+

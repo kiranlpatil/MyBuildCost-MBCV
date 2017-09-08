@@ -6,6 +6,12 @@
   text-align: left;
 }
 
+.select-option {
+  label:focus {
+    border: 1px solid $theme-color !important;
+  }
+}
+
 .select-option > label {
   margin: 0;
   padding: 0;
