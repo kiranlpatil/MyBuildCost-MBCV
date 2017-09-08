@@ -15,20 +15,24 @@ export class RecruiterDetailListComponent {
 
   }
   updateDetail(index:number,recruiter:any,activated:boolean) {
-    console.log('can',recruiter);
-    console.log(activated);
     recruiter.isActivated=!activated;
     recruiter.user_id=recruiter._id;
-    console.log('candi',recruiter);
     this.adminDashboardService.updateUser(recruiter).subscribe(
       data => {
         this.onUpdateComplete(index,data.data,activated);
       }, error => this.errorService.onError(error));
   }
   onUpdateComplete(index:number,recruiter:any,activated:boolean) {
-    console.log('recruiter',recruiter);
     this.recruiters[index].isActivated=!activated;
+    this.getAllUser()
   }
+  getAllUser() {
+    this.adminDashboardService.getAllUsers()
+      .subscribe(
+        userprofile => this.onSuccess(),
+        error => this.errorService.onError(error));
+  }
+  onSuccess(){}
 }
 
 

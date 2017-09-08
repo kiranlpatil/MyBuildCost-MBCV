@@ -15,20 +15,25 @@ export class CandidateDetailListComponent {
 
   }
   updateDetail(index:number,candidate:any,activated:boolean) {
-    console.log('can',candidate);
-    console.log(activated);
     candidate.isActivated=!activated;
     candidate.user_id=candidate._id;
-    console.log('candi',candidate);
     this.adminDashboardService.updateUser(candidate).subscribe(
       data => {
         this.onUpdateComplete(index,data.data,activated);
       }, error => this.errorService.onError(error));
   }
   onUpdateComplete(index:number,candidate:any,activated:boolean) {
-    console.log('candidate',candidate);
     this.candidates[index].isActivated=!activated;
+    this.getAllUser();
   }
+  getAllUser() {
+    this.adminDashboardService.getAllUsers()
+      .subscribe(
+        userprofile => this.onSuccess(),
+        error => this.errorService.onError(error));
+  }
+  onSuccess(){}
+
 }
 
 

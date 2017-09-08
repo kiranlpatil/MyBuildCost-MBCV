@@ -40,6 +40,7 @@ export class Messages {
   public static MSG_SUCCESS_CONTACT: string = 'Email sent successfully.';
   public static MSG_SUCCESS_CHANGE_THEME: string = 'Theme changed successfully.';
   public static MSG_SUCCESS_MAIL_VERIFICATION_RESULT_STATUS: string = 'Congratulations!';
+  public static MSG_CHANGE_PASSWORD_SUCCESS_HEADER: string = 'Password changed successfully';
   public static MSG_SUCCESS_MAIL_VERIFICATION_BODY: string = 'Your account verified successfully.' +
     'You may start using it immediately by clicking on Sign In!';
 
@@ -491,4 +492,14 @@ export class Headings {
   public static SUPPLIMENTARY_CAPABILITIES: string = 'Supplimentary Capabilities';
   public static ADDITIONAL_INFORMATION_TEXT: string = 'Additional Information';
   public static KEY_SKILLS: string = 'Key Skills';
+}
+
+export class Label {
+  public static CURRENT_PASSWORD_LABEL: string = 'Current Password';
+  public static NEW_PASSWORD_LABEL: string = 'New Password';
+  public static CONFIRM_PASSWORD_LABEL: string = 'Confirm Password';
+}
+
+export class Button {
+  public static CHANGE_PASSWORD_BUTTON: string = 'Change Password';
 }

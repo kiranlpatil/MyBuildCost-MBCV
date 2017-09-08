@@ -3,9 +3,12 @@
 
 .change-mobile {
   .error-message {
-    p {
-      color: $error-messages;
-    }
+    color: $error-messages;
+    font-size: 10px;
+    font-style: italic;
+    margin: 1px 0 0;
+    position: absolute;
+    line-height: 12px;
   }
 
   form {
@@ -16,10 +19,32 @@
   }
 
   .form-group {
-    margin-bottom: 25px;
+    margin-bottom: 20px;
+  }
+}
+
+//modal
+.modal {
+  .modal-dialog {
+    h5 {
+      font-weight: bold;
+      color: $cn-theme-color;
+      padding: 0;
+      font-size: 16px;
+      background: $modal-bg1 !important;
+    }
   }
 
-  .alert {
-    margin: 15px 0;
+  .modal-content {
+    border: 0;
+  }
+
+  .modal-body {
+    text-align: left;
+    padding: 15px 15px 0;
+
+    p {
+      text-align: left;
+    }
   }
 }

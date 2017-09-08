@@ -632,7 +632,7 @@ class CandidateService {
       }
     }
     var orderKeys = function (o: any, f: any) {
-      let os: any = [], ks: any = [], i;
+      let os: any = [], ks: any = [], i:any;
       for (let i in o) {
         os.push([i, o[i]]);
       }

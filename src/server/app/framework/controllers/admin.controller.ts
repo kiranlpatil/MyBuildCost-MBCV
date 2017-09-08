@@ -70,41 +70,51 @@ export function getAllUser(req: express.Request, res: express.Response, next: an
     var userService = new UserService();
     var adminService = new AdminService();
     var params = {};
-    userService.retrieveAll(params, (error, result) => {
-      if (error) {
-        next({
-          reason: 'Error In Retrieving',//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
-          message: 'error in create excel',
-          code: 403
-        });
-      } else {
-        adminService.seperateUsers(result,(error, resp) => {
-          if (error) {
-            next({
-              reason: 'Error In Retrieving',//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
-              message: 'error in create excel',
-              code: 403
-            });
-          }else {
-            adminService.createXlsx(resp, (err, respo)=> {
-              if (err) {
-                next({
-                  reason: 'Error In Retrieving',//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
-                  message: 'error in create excel',
-                  code: 403
-                });
-              } else {
-                res.status(200).send({
-                  'status': 'success',
-                  'data': resp
-                });
-              }
-            });
-          }
+    if(req.user.isAdmin){
+      userService.retrieveAll(params, (error, result) => {
+        if (error) {
+          next({
+            reason: 'Error In Retrieving',//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
+            message: 'error in create excel',
+            code: 403
+          });
+        } else {
+          adminService.seperateUsers(result,(error, resp) => {
+            if (error) {
+              next({
+                reason: 'Error In Retrieving',//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
+                message: 'error in create excel',
+                code: 403
+              });
+            }else {
+              adminService.createXlsx(resp, (err, respo)=> {
+                if (err) {
+                  next({
+                    reason: 'Error In Retrieving',//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
+                    message: 'error in create excel',
+                    code: 403
+                  });
+                } else {
+                  res.status(200).send({
+                    'status': 'success',
+                    'data': resp
+                  });
+                }
+              });
+            }
 
-        });
-      }
-    });
+          });
+        }
+      });
+    }else{
+      res.status(401).send({
+        'error': {
+          reason: 'Unauthorized User',
+          message:'You are unauthorized user',
+          code: 401
+        }
+      });
+    }
   } catch (e) {
     res.status(403).send({message: e.message});
   }

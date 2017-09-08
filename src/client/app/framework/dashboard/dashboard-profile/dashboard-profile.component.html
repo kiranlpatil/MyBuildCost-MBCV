@@ -1,13 +1,12 @@
 <cn-candidate-dashboard-header *ngIf="role==='candidate'" [candidate]="candidate" ></cn-candidate-dashboard-header>
 <cn-recruiter-shared-header *ngIf="role==='recruiter'"></cn-recruiter-shared-header>
-<section class="dashboard-profile col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
-  <div>
+<section class="main-form-wrapper dashboard-profile">
+  <div class="dashboard-profile-content clearfix" [class.candidate-profile-content]="role==='candidate'">
 
     <!--<tpl-loader *ngSwitchCase="true"></tpl-loader>-->
     <app-loader></app-loader>
-    <div class="col-sm-7 col-sm-offset-4">
-      <h4><span class="glyphicon glyphicon-user"></span>Personal information</h4>
-    </div>
+
+    <h5>Personal information</h5>
 
     <div class="col-sm-4 my-info">
       <div class="description-container">
@@ -21,56 +20,49 @@
       </div>
     </div>
 
-    <div class="col-sm-7">
-      <div class="alert alert-danger clearfix" [hidden]="isShowErrorMessage">
-        <div class="col-sm-1 hidden-xs"><span class="glyphicon glyphicon-warning-sign"></span></div>
-        <div class="col-sm-10 col-xs-11 error-msg"><b>{{ error_msg }}</b></div>
-        <div class="col-sm-1 col-xs-1 close-msg">
-          <button (click)="isShowErrorMessage = true" class="btn-close"><span
-            class="glyphicon glyphicon-remove"></span></button>
-        </div>
-      </div>
+    <div class="col-sm-8">
 
-      <form [formGroup]="userForm" (submit)="onSubmit()" class="profile-form">
+      <form [formGroup]="userForm" (submit)="onSubmit()" class="profile-form clearfix">
 
         <div *ngIf="role==='candidate'" class="form-group" [class.fb-email-input]="isSocialLogin">
-          <label><img src="{{FIRST_NAME_ICON}}"/> First Name </label>
+          <control-messages [control]="userForm.controls.first_name"></control-messages>
+          <label>First Name </label>
           <input type="text" [(ngModel)]="model.first_name" formControlName="first_name" id="first_name "
                  class="form-control"/>
-          <control-messages [control]="userForm.controls.first_name"></control-messages>
         </div>
 
 
         <div *ngIf="role==='candidate'" class="form-group" [class.fb-email-input]="isSocialLogin">
-          <label><img src="{{LAST_NAME_ICON}}"/> Last Name </label>
+          <control-messages [control]="userForm.controls.last_name"></control-messages>
+          <label>Last Name </label>
           <input type="text" [(ngModel)]="model.last_name" formControlName="last_name" id="last_name "
                  class="form-control"/>
-          <control-messages [control]="userForm.controls.last_name"></control-messages>
         </div>
 
 
         <div class="form-group" [class.fb-email-input]="isSocialLogin">
-          <label><img src="{{EMAIL_ICON}}"/> Email
+          <control-messages [control]="userForm.controls.email"></control-messages>
+          <label>Email
             <span class="glyphicon glyphicon-pencil" [class.hide-list]="isSocialLogin"
                   (click)="showHideEmailModal()"></span>
           </label>
           <input [(ngModel)]="model.email" formControlName="email" id="email"
                  class="form-control clear" readonly/>
-          <control-messages [control]="userForm.controls.email"></control-messages>
-
         </div>
 
         <div class="form-group" [class.hide-list]="isSocialLogin">
-          <label><img src="{{MOBILE_ICON}}"/> Contact
+          <control-messages [control]="userForm.controls.mobile_number"></control-messages>
+          <label>Contact
             <span class="glyphicon glyphicon-pencil" (click)="showHideMobileModal()"></span>
           </label>
           <input type="number" [(ngModel)]="model.mobile_number" formControlName="mobile_number"
                  id="mobile_number" class="form-control clear" readonly/>
-          <control-messages [control]="userForm.controls.mobile_number"></control-messages>
         </div>
-        <div class="clearfix">&nbsp;</div>
+
+        <div class="col-xs-12 error-msg alert alert-danger form-alert" [hidden]="isShowErrorMessage"><b>{{
+          error_msg }}</b></div>
         <!--<button type="submit" class="btn btn-default">Edit Profile</button>-->
-        <button type="submit" class="btn btn-primary" [disabled]="!userForm.valid">Save Profile</button>
+        <button type="submit" class="btn btn-primary pull-right" [disabled]="!userForm.valid">Save Profile</button>
       </form>
     </div>
 
@@ -86,7 +78,7 @@
           <button type="button" class="close" aria-label="Close" (click)="showHideEmailModal()">
             <span aria-hidden="true">&times;</span>
           </button>
-          <h5><span class="glyphicon glyphicon-envelope"></span> Change your Email</h5>
+          <h5>Change your Email</h5>
         </div>
         <div class="modal-body">
           <div class="col-sm-12">
@@ -107,7 +99,7 @@
           <button type="button" class="close" aria-label="Close" (click)="showHideMobileModal()">
             <span aria-hidden="true">&times;</span>
           </button>
-          <h5><span class="glyphicon glyphicon-phone"></span> Change your Mobile</h5>
+          <h5>Change your Mobile</h5>
         </div>
         <div class="modal-body">
           <div class="col-sm-12">

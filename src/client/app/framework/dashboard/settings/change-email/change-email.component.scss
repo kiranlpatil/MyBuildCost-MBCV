@@ -3,9 +3,12 @@
 
 .change-email {
   .error-message {
-    p {
-      color: $error-messages;
-    }
+    color: $error-messages;
+    font-size: 10px;
+    font-style: italic;
+    margin: 1px 0 0;
+    position: absolute;
+    line-height: 12px;
   }
 
   form {
@@ -16,10 +19,6 @@
   }
 
   .form-group {
-    margin-bottom: 25px;
-  }
-
-  .alert {
-    margin: 15px 0;
+    margin-bottom: 20px;
   }
 }

@@ -104,6 +104,15 @@ class CandidateRepository extends RepositoryBase<ICandidate> {
             candidateQcard.picture=user.picture;
             candidates_q_cards_send.push(candidateQcard);
           }
+          candidates_q_cards_send.sort((first: CandidateQCard,second : CandidateQCard):number=> {
+            if((first.above_one_step_matching+first.exact_matching) >(second.above_one_step_matching+second.exact_matching) ){
+              return -1;
+            }
+            if((first.above_one_step_matching+first.exact_matching) < (second.above_one_step_matching+second.exact_matching) ) {
+              return 1;
+            }
+            return 0;
+          });
           console.timeEnd('retrieveByMultiIds');
           callback(null,candidates_q_cards_send);
         }else {

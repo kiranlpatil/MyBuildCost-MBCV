@@ -6,7 +6,7 @@ import {CommonService, ImagePath, Message, MessageService} from "../../shared/in
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {LoaderService} from "../../shared/loader/loader.service";
 import {ValidationService} from "../../shared/customvalidations/validation.service";
-import {AppSettings, Messages} from "../../shared/constants";
+import {AppSettings, Messages, Label, Button} from "../../shared/constants";
 
 
 @Component({
@@ -29,6 +29,11 @@ export class ChangePasswordComponent {
   confirmPassword: string= Messages.MSG_CONFIRM_PASSWORD;
   changePasswordSuccessMessage: string= Messages.MSG_CHANGE_PASSWORD_SUCCESS;
   changePasswordMessage: string = Messages.MSG_CHANGE_PASSWORD;
+  passwordChangeSuccessHeader: string = Messages.MSG_CHANGE_PASSWORD_SUCCESS_HEADER;
+  currentPasswordLabel: string= Label.CURRENT_PASSWORD_LABEL;
+  confirmPasswordLabel: string= Label.CONFIRM_PASSWORD_LABEL;
+  newPasswordLabel: string= Label.NEW_PASSWORD_LABEL;
+  changePasswordButton: string= Button.CHANGE_PASSWORD_BUTTON;
 
   constructor(private commonService: CommonService,
               private _router: Router,
