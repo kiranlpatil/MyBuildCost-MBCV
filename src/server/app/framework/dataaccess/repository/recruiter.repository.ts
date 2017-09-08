@@ -102,6 +102,15 @@ class RecruiterRepository extends RepositoryBase<IRecruiter> {
       }
       if(recruiters.indexOf(recruiter) == recruiters.length - 1) {
           isSend= true;
+          jobs_cards.sort((first: JobQCard,second : JobQCard):number=> {
+            if((first.above_one_step_matching+first.exact_matching) >(second.above_one_step_matching+second.exact_matching) ){
+              return -1;
+            }
+            if((first.above_one_step_matching+first.exact_matching) < (second.above_one_step_matching+second.exact_matching) ) {
+              return 1;
+            }
+            return 0;
+          });
           callback(null, jobs_cards);
         }
     }
