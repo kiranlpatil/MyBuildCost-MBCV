@@ -420,6 +420,13 @@ replace the ServerAddress with address you wish to work on(stagging IP address)
   6. then select free tier and continue
   ![Alt text](readme-images/15.jpg? "Optional Title")
   
+ # Deployment process of Code on Various Server :
+  Go To left side option Snapshots 
+  1. See Image for branches and commit directions :
+    ![Alt text](readme-images/16.jpg? "Optional Title")
+    
+
+  
 # Definition of DONE for developers:
  
  1. Every story should have acceptance criteria.
