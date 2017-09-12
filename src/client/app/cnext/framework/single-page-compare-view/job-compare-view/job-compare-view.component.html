@@ -63,6 +63,8 @@
                 <span>+91 {{candidateDetails.mobile_number}}</span>
                 <label>Email Id</label>
                 <span>{{candidateDetails.email}}</span>
+                <label>Industry</label>
+                <span>{{candidate.industry.name}}</span>
                 <label>Area of Work</label>
                 <span *ngFor="let role of candidate.industry.roles;let i = index">{{role.name}}
           <span *ngIf="candidate.industry.roles.length>1 &&  i!=candidate.industry.roles.length-1">,</span>

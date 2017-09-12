@@ -1,12 +1,12 @@
-import {Component} from "@angular/core";
-import {Router} from "@angular/router";
-import {ChangePasswordService} from "./change-password.service";
-import {ChangePassword} from "./changepassword";
-import {CommonService, ImagePath, Message, MessageService} from "../../shared/index";
-import {FormBuilder, FormGroup} from "@angular/forms";
-import {LoaderService} from "../../shared/loader/loader.service";
-import {ValidationService} from "../../shared/customvalidations/validation.service";
-import {AppSettings, Messages, Label, Button} from "../../shared/constants";
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { ChangePasswordService } from './change-password.service';
+import { ChangePassword } from './changepassword';
+import { CommonService, ImagePath, Message, MessageService } from '../../shared/index';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { LoaderService } from '../../shared/loader/loader.service';
+import { ValidationService } from '../../shared/customvalidations/validation.service';
+import { AppSettings, Messages, Label, Button } from '../../shared/constants';
 
 
 @Component({
@@ -42,9 +42,9 @@ export class ChangePasswordComponent {
               private formBuilder: FormBuilder, private loaderService: LoaderService) {
 
     this.userForm = this.formBuilder.group({
-      'new_password': ['', ValidationService.requireNewPasswordValidator],
-      'confirm_password': ['', [ValidationService.requireConfirmPasswordValidator]],
-      'current_password': ['', [ValidationService.requireCurrentPasswordValidator]]
+      'new_password': ['', [ValidationService.requireNewPasswordValidator, ValidationService.passwordValidator]],
+      'confirm_password': ['', [ValidationService.requireConfirmPasswordValidator, ValidationService.passwordValidator]],
+      'current_password': ['', [ValidationService.requireCurrentPasswordValidator, ValidationService.passwordValidator]]
     });
 
     this.PASSWORD_ICON = ImagePath.PASSWORD_ICON_GREY;
@@ -64,6 +64,9 @@ export class ChangePasswordComponent {
 
   onSubmit() {
     this.model = this.userForm.value;
+    if (!this.userForm.valid) {
+      return;
+    }
     if (!this.makePasswordConfirm()) {
       this.loaderService.start();
       this.passwordService.changePassword(this.model)
@@ -77,6 +80,7 @@ export class ChangePasswordComponent {
   changePasswordSuccess(body: ChangePassword) {
     this.loaderService.stop();
     this.showHideModal();
+    this.error_msg = '';
   }
 
   changePasswordFail(error: any) {

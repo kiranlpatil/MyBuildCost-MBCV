@@ -64,7 +64,7 @@ class Messages {
   public static MSG_ERROR_FIELD_VERIFICATION: string = 'Fields Verification Failed';
   public static MSG_ERROR_FACEBOOK_AUTH: string = 'Facebook Authentication Failed';
   public static MSG_ERROR_GOOGLE_AUTH: string = 'Google plus Authentication Failed';
-  public static MSG_ERROR_EMPTY_FIELD: string = 'Fields cannot be empty';
+  public static MSG_ERROR_EMPTY_FIELD: string = 'Fields can\'t be empty';
   public static MSG_ERROR_WHILE_CONTACTING: string = 'Something went wrong. Try again.';
   public static MSG_ERROR_CONNECTION_TIMEOUT: string = 'Connection timeout. Try again.';
 

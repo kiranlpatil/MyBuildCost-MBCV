@@ -1,4 +1,4 @@
-import {Messages} from "../../shared/constants";
+import { Messages } from '../../shared/constants';
 import any = jasmine.any;
 
 export class ValidationService {
@@ -47,16 +47,15 @@ export class ValidationService {
   }
 
   static requireEmailValidator(control: any) {
-    if (control.value == "" || control.value == undefined) {
+    if (control.value === '' || control.value === undefined) {
       return {'requiredEmail': true};
-    }
-    else {
+    } else {
       return null;
     }
   }
 
   static requireFirstNameValidator(control: any) {
-    if (control.value == "" || control.value == undefined) {
+    if (control.value === '' || control.value === undefined) {
       return {'requiredFirstName': true};
     } else {
       return null;
@@ -72,10 +71,9 @@ export class ValidationService {
   }
 
   static requireCompanyNameValidator(control: any) {
-    if (control.value == "" || control.value == undefined) {
+    if (control.value === '' || control.value === undefined) {
       return {'requiredCompanyName': true};
-    }
-    else {
+    } else {
       return null;
     }
   }
@@ -84,36 +82,32 @@ export class ValidationService {
     let isWhitespace = (control.value).trim().length === 0;
     if (isWhitespace) {
       return {'containsWhiteSpace': true};
-    }
-    else {
+    } else {
       return null;
     }
   }
 
 
   static requireCompanyDescriptionValidator(control: any) {
-    if (control.value == "" || control.value == undefined) {
+    if (control.value === '' || control.value === undefined) {
       return {'requiredCompanyDescription': true};
-    }
-    else {
+    } else {
       return null;
     }
   }
 
   static requireLastNameValidator(control: any) {
-    if (control.value == "" || control.value == undefined) {
+    if (control.value === '' || control.value === undefined) {
       return {'requiredLastName': true};
-    }
-    else {
+    } else {
       return null;
     }
   }
 
   static requireMobileNumberValidator(control: any) {
-    if (control.value == "" || control.value == undefined) {
+    if (control.value === '' || control.value === undefined) {
       return {'requiredMobileNumber': true};
-    }
-    else {
+    } else {
       return null;
     }
   }
@@ -129,7 +123,7 @@ export class ValidationService {
   }
 
   static requirePasswordValidator(control: any) {
-    if (control.value == "" || control.value == undefined) {
+    if (control.value === '' || control.value === undefined) {
       return {'requiredPassword': true};
     } else {
       return null;
@@ -137,7 +131,7 @@ export class ValidationService {
   }
 
   static requireNewPasswordValidator(control: any) {
-    if (control.value == "" || control.value == undefined) {
+    if (control.value === '' || control.value === undefined) {
       return {'requiredNewPassword': true};
     } else {
       return null;
@@ -145,7 +139,7 @@ export class ValidationService {
   }
 
   static requireCurrentPasswordValidator(control: any) {
-    if (control.value == "" || control.value == undefined) {
+    if (control.value === '' || control.value === undefined) {
       return {'requiredCurrentPassword': true};
     } else {
       return null;
@@ -153,7 +147,7 @@ export class ValidationService {
   }
 
   static requireOtpValidator(control: any) {
-    if (control.value == "" || control.value == undefined) {
+    if (control.value === '' || control.value === undefined) {
       return {'requiredOtp': true};
     } else {
       return null;
@@ -161,7 +155,7 @@ export class ValidationService {
   }
 
   static requireConfirmPasswordValidator(control: any) {
-    if (control.value == "" || control.value == undefined) {
+    if (control.value === '' || control.value === undefined) {
       return {'requiredConfirmPassword': true};
     } else {
       return null;
@@ -169,7 +163,7 @@ export class ValidationService {
   }
 
   static requirePinValidator(control: any) {
-    if (control.value == "" || control.value == undefined) {
+    if (control.value === '' || control.value === undefined) {
       return {'requiredPin': true};
     } else {
       return null;
@@ -177,7 +171,7 @@ export class ValidationService {
   }
 
   static requireDescriptionValidator(control: any) {
-    if (control.value == "" || control.value == undefined) {
+    if (control.value === '' || control.value === undefined) {
       return {'requiredDescription': true};
     } else {
       return null;

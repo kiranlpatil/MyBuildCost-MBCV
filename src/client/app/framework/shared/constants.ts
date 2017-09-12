@@ -493,6 +493,8 @@ export class Headings {
   public static SUPPLIMENTARY_CAPABILITIES: string = 'Supplimentary Capabilities';
   public static ADDITIONAL_INFORMATION_TEXT: string = 'Additional Information';
   public static KEY_SKILLS: string = 'Key Skills';
+  public static CHANGE_PASSWORD: string = 'Change Password';
+
 }
 
 export class Label {

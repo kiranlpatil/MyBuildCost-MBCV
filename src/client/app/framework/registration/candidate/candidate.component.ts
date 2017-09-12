@@ -1,15 +1,15 @@
-import {Component, OnInit, ViewChild, ElementRef} from "@angular/core";
-import {Router} from "@angular/router";
-import {CandidateService} from "./candidate.service";
-import {CandidateDetail} from "./candidate";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {ValidationService} from "../../shared/customvalidations/validation.service";
-import {AppSettings, CommonService, Message, MessageService, NavigationRoutes} from "../../shared/index";
-import {ImagePath, LocalStorage, Messages} from "../../shared/constants";
-import {LocalStorageService} from "../../shared/localstorage.service";
-import {DateService} from "../../../cnext/framework/date.service";
-import {Location} from "../location";
-import {SharedService} from "../../shared/shared-service";
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Router } from '@angular/router';
+import { CandidateService } from './candidate.service';
+import { CandidateDetail } from './candidate';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ValidationService } from '../../shared/customvalidations/validation.service';
+import { AppSettings, CommonService, Message, MessageService, NavigationRoutes } from '../../shared/index';
+import { ImagePath, LocalStorage, Messages } from '../../shared/constants';
+import { LocalStorageService } from '../../shared/localstorage.service';
+import { DateService } from '../../../cnext/framework/date.service';
+import { Location } from '../location';
+import { SharedService } from '../../shared/shared-service';
 @Component({
   moduleId: module.id,
   selector: 'cn-candidate-registration',
@@ -81,7 +81,7 @@ export class CandidateComponent implements OnInit {
 
   selectYearModel(year: any) {
     this.birthYearErrorMessage = undefined;
-    if (year == "") {
+    if (year === '') {
       this.userForm.controls['birth_year'].setValue(undefined);
     }
     this.passingYear = year;
@@ -90,10 +90,10 @@ export class CandidateComponent implements OnInit {
 
   onSubmit() {
     this.model = this.userForm.value;
-    if (this.model.first_name == '' || this.model.last_name == '' || this.model.mobile_number == '' ||
-      this.model.email == '' || this.model.password == '' || this.model.confirm_password == '' ||
-      this.model.birth_year == undefined) {
-      if (this.model.birth_year == undefined) {
+    if (this.model.first_name === '' || this.model.last_name === '' || this.model.mobile_number === '' ||
+      this.model.email === '' || this.model.password === '' || this.model.confirm_password === '' ||
+      this.model.birth_year === undefined) {
+      if (this.model.birth_year === undefined) {
         this.birthYearErrorMessage = Messages.MSG_ERROR_VALIDATION_BIRTHYEAR_REQUIRED;
       }
       this.submitStatus = true;
@@ -101,7 +101,7 @@ export class CandidateComponent implements OnInit {
     }
 
     if (!this.userForm.valid) {
-      return
+      return;
     }
 
     this.model = this.userForm.value;
@@ -149,7 +149,7 @@ export class CandidateComponent implements OnInit {
   }
 
   makePasswordConfirm(): boolean {
-    if (this.model.confirm_password !== this.model.password && this.model.confirm_password !== "") {
+    if (this.model.confirm_password !== this.model.password && this.model.confirm_password !== '') {
       this.isPasswordConfirm = true;
       this.passwordMismatchMessage = Messages.MSG_ERROR_VALIDATION_PASSWORD_MISMATCHED;
       return true;
