@@ -1,14 +1,14 @@
 <cn-value-portrait-header [candidate]="candidate"></cn-value-portrait-header>
 <cn-candidate-info-block [candidate]="candidate"
-                         class="visible-lg visible-md visible-sm hidden-xs"></cn-candidate-info-block>
-<cn-candidate-capability-portrait [candidate]="candidate"
-                                  class="visible-lg visible-md visible-sm hidden-xs"></cn-candidate-capability-portrait>
+                         class="visible-lg visible-md hidden-sm hidden-xs"></cn-candidate-info-block>
+<!--<cn-candidate-capability-portrait [candidate]="candidate"
+                                  class="hidden-xs"></cn-candidate-capability-portrait>-->
 
-<div class="value-portrait-tabs hidden-lg hidden-md hidden-sm visible-xs">
+<div class="value-portrait-tabs">
   <div class="tab-content clearfix">
     <div class="tab-pane active" id="core-capabilities-tabs">
-      <cn-candidate-capability-portrait [candidate]="candidate"
-                                        class="hidden-lg hidden-md hidden-sm visible-xs"></cn-candidate-capability-portrait>
+      <cn-candidate-capability-portrait [candidate]="candidate" class="">
+      </cn-candidate-capability-portrait>
     </div>
   </div>
 </div>
@@ -139,4 +139,6 @@
     <tpl-footer></tpl-footer>
   </div>
 </div>
+
+
 

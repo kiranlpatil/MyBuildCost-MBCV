@@ -38,7 +38,7 @@
 }
 
 .value-portrait-candidate-number {
-  display: inline-block;
+  display: inline-block !important;
   margin: 45px 0 10px 0;
   width: 100%;
   .phone-icon {
@@ -59,7 +59,7 @@
 }
 
 .value-portrait-candidate-email {
-  display: inline-block;
+  display: inline-block !important;
   margin: 45px 0 10px 0;
   width: 100%;
   .email-icon {
@@ -84,7 +84,7 @@
 }
 
 .value-portrait-candidate-industry {
-  display: inline-block;
+  display: inline-block !important;
   width: 100%;
   .industry-icon {
     background: url(../assets/c-next/card-view/sprite.png) no-repeat  -41px -471px;
@@ -139,7 +139,7 @@
   padding-left: 0;
 }
 
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 768px) {
   .value-portrait-candidate-profile-section {
     background: $white;
     padding: 10px 15px;
@@ -194,15 +194,19 @@
     }
     .value-portrait-candidate-industry {
       margin: 10px 0;
+      display: none !important;
       span, label {
+        display: inline-block;
         padding: 0;
         margin: 0 5px 0 0;
+        width: 100%;
       }
     }
     .value-portrait-candidate-area-work {
       label {
+        display: inline-block;
         margin: 0;
-        width: auto;
+        width: 100%;
       }
       span {
         padding: 0;

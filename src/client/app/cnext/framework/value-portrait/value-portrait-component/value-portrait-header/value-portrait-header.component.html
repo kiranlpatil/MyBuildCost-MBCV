@@ -37,9 +37,10 @@
         </div>
       </div>
     </div>
-    <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12 visible-lg visible-md visible-sm hidden-xs">
-      <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 padding-left-0">
-        <div class="value-portrait-candidate-number">
+    <div
+      class="col-lg-7 col-md-7 col-sm-8 col-xs-12 value-portrait-user-info visible-lg visible-md hidden-sm hidden-xs">
+      <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 padding-left-0 ">
+        <div class="value-portrait-candidate-number visible-lg visible-md visible-sm visible-xs">
           <span class="phone-icon"></span>
           <span title="Mobile number: {{candidate.personalDetails.mobile_number}}">
             <a href="tel:{{candidate.personalDetails.mobile_number}}">
@@ -47,14 +48,14 @@
             </a>
           </span>
         </div>
-        <div class="value-portrait-candidate-industry">
+        <div class="value-portrait-candidate-industry visible-lg visible-md hidden-sm hidden-xs">
           <span class="industry-icon"></span>
           <label> Industry: </label>
           <span title="Industry: {{candidate.industry.name}}">{{candidate.industry.name}}</span>
         </div>
       </div>
       <div class="col-xs-8 no-padding">
-        <div class="value-portrait-candidate-email">
+        <div class="value-portrait-candidate-email visible-lg visible-md visible-sm visible-xs">
           <span class="email-icon"></span>
           <span title="Email: {{candidate.personalDetails.email}}">
             <a href="mailto:{{candidate.personalDetails.email}}">
@@ -63,7 +64,7 @@
           </span>
         </div>
 
-        <div class="value-portrait-candidate-area-work">
+        <div class="value-portrait-candidate-area-work visible-lg visible-md hidden-sm hidden-xs">
           <span class="area-work-icon"></span>
           <label> Area of Work: </label>
           <span>
@@ -75,7 +76,7 @@
       </div>
     </div>
 
-    <div class="col-xs-12 no-padding border-top hidden-lg hidden-md hidden-sm visible-xs">
+    <div class="col-xs-12 no-padding border-top hidden-lg hidden-md visible-sm visible-xs">
       <div class="value-portrait-candidate-industry">
         <label> Industry: </label>
         <span title="Industry: {{candidate.industry.name}}">{{candidate.industry.name}}</span>
