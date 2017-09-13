@@ -13,7 +13,7 @@ import {
 } from "../../shared/index";
 import {ImagePath, LocalStorage, Tooltip} from "../../shared/constants";
 import {LocalStorageService} from "../../shared/localstorage.service";
-import {LoaderService} from "../../shared/loader/loader.service";
+import {LoaderService} from "../../../shared-module/loader/loaders.service";
 import {Http} from "@angular/http";
 import {ActivatedRoute, Params, Router} from "@angular/router";
 import {ValidationService} from "../../shared/customvalidations/validation.service";

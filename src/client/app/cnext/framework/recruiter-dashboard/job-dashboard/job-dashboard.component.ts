@@ -8,7 +8,7 @@ import {JobPosterModel} from "../../model/jobPoster";
 import {ReferenceService} from "../../model/newClass";
 import {QCardFilterService} from "../../filters/q-card-filter.service";
 import {QCardFilter} from "../../model/q-card-filter";
-import {LoaderService} from "../../../../framework/shared/loader/loader.service";
+import {LoaderService} from "../../../../shared-module/loader/loaders.service";
 import {ProfileComparisonService} from "../../profile-comparison/profile-comparison.service";
 import {ProfileComparison} from "../../model/profile-comparison";
 import {QCardviewComponent} from "../q-card-view/q-card-view.component";

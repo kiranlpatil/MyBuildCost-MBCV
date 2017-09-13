@@ -6,7 +6,7 @@ import {CommonService, Message, MessageService} from "../../shared/index";
 import {Subscription} from "rxjs/Subscription";
 import {LocalStorage, NavigationRoutes} from "../../shared/constants";
 import {LocalStorageService} from "../../shared/localstorage.service";
-import {LoaderService} from "../loader/loader.service";
+import {LoaderService} from "../../../shared-module/loader/loaders.service";
 
 @Component({
   moduleId: module.id,

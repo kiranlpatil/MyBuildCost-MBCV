@@ -4,7 +4,7 @@ import {Observable} from "rxjs/Observable";
 import {API, LocalStorage, ValueConstant} from "../../../framework/shared/constants";
 import {BaseService} from "../../../framework/shared/httpservices/base.service";
 import {LocalStorageService} from "../../../framework/shared/localstorage.service";
-import {LoaderService} from "../../../framework/shared/loader/loader.service";
+import {LoaderService} from "../../../shared-module/loader/loaders.service";
 
 @Injectable()
 export class CandidateDashboardService extends BaseService {//todo THIS CODE SHOULD FIT IN 30 LINE:SHRIKANT

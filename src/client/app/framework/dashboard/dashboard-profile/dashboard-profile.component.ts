@@ -16,7 +16,7 @@ import {
   ThemeChangeService
 } from "../../shared/index";
 import {NavigationRoutes} from "../../shared/constants";
-import {LoaderService} from "../../shared/loader/loader.service";
+import {LoaderService} from "../../../shared-module/loader/loaders.service";
 import {CandidateDetail} from "../../registration/candidate/candidate";
 import {Candidate, Summary} from "../../../cnext/framework/model/candidate";
 import {CandidateProfileService} from "../../../cnext/framework/candidate-profile/candidate-profile.service";

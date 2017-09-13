@@ -3,7 +3,7 @@ import {Observable} from "rxjs/Observable";
 import {Headers, Http, RequestOptions} from "@angular/http";
 import {API} from "../../../../framework/shared/constants";
 import {BaseService} from "../../../../framework/shared/httpservices/base.service";
-import {LoaderService} from "../../../../framework/shared/loader/loader.service";
+import {LoaderService} from "../../../../shared-module/loader/loaders.service";
 
 @Injectable()
 

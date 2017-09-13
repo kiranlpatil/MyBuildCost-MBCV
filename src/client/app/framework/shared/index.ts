@@ -3,8 +3,8 @@ export {ImagePath, API, AppSettings, Messages, LocalStorage, NavigationRoutes} f
 export {MessageService} from './message.service';
 export {CommonService} from './common.service';
 export {ThemeChangeService} from './themechange.service';
-export {LoaderComponent} from './loader/loader.component';
-export {LoaderService} from './loader/loader.service';
+export {LoaderComponent} from '../../shared-module/loader/loader.component';
+export {LoaderService} from '../../shared-module/loader/loaders.service';
 export {BaseService} from './httpservices/base.service';
 export {LocalStorageService} from './localstorage.service';
 export {ProfileService} from './profileservice/profile.service';

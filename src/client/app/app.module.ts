@@ -28,7 +28,7 @@ import {NotificationService} from "./framework/shared/notification/notification.
 import {NotificationComponent} from "./framework/shared/notification/notification.component";
 import {ForgotPasswordService} from "./framework/password/forgot-password/forgot-password.service";
 import {SocialIconComponent} from "./framework/shared/footer/social-icon/social-icon.component";
-import {LoaderComponent} from "./framework/shared/loader/loader.component";
+import {LoaderComponent} from "./shared-module/loader/loader.component";
 import {ThemeChangeService} from "./framework/shared/themechange.service";
 import {LoginService} from "./framework/login/login.service";
 import {DashboardService} from "./framework/dashboard/dashboard.service";
@@ -172,7 +172,6 @@ import {IndustryDetailsService} from "./cnext/framework/industry-detail-service"
 import {IndustryDetailsDirective} from "./cnext/framework/shared-directives/industry-details.directive";
 import {IndustryDataDirective} from "./cnext/framework/shared-directives/industry-data.directive";
 import {IndustryDataService} from "./cnext/framework/industry-data-service";
-
 import {ProfileComparisonComponent} from "./cnext/framework/profile-comparison/profile-comparison.component";
 import {ProfileComparisonService} from "./cnext/framework/profile-comparison/profile-comparison.service";
 import {ProfileComparisonHeaderComponent} from "./cnext/framework/profile-comparison/profile-comparison-header/profile-comparison-header.component";
@@ -194,10 +193,11 @@ import {RecruiterDetailListComponent} from "./cnext/framework/admin-dashboard/re
 import {CandidateDetailListComponent} from "./cnext/framework/admin-dashboard/candidate-detail-list/candidate-detail-list.component";
 import {KeyskillsDetailListComponent} from "./cnext/framework/admin-dashboard/keyskills-detail-list/keyskills-detail-list.component";
 import {AdminDashboardService} from "./cnext/framework/admin-dashboard/admin-dashboard.service";
-
 import {SharedService} from "./framework/shared/shared-service";
 import {CandidateSearchComponent} from "./cnext/framework/candidate-search/candidate-search.component";
 import {CandidateSearchService} from "./cnext/framework/candidate-search/candidate-search.service";
+import {AuthenticationModule} from "./authentication/authentication.module";
+import {SharedModule} from "./shared-module/shared.module";
 //C-NEXT IMPORTS
 
 
@@ -210,7 +210,9 @@ import {CandidateSearchService} from "./cnext/framework/candidate-search/candida
     ReactiveFormsModule,
     RecaptchaModule.forRoot(), // Keep in mind the 'forRoot'-magic nuances!
     Ng2AutoCompleteModule,
-    ScrollToModule.forRoot()
+    ScrollToModule.forRoot(),
+    AuthenticationModule,
+    SharedModule
   ],
   declarations: [
     AppComponent,

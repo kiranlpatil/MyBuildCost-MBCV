@@ -7,7 +7,7 @@ import {LocalStorage, ValueConstant, Tooltip, ImagePath, Headings} from "../../.
 import {LocalStorageService} from "../../../framework/shared/localstorage.service";
 import {CandidateJobListService} from "./candidate-job-list/candidate-job-list.service";
 import {QCardFilterService} from "../filters/q-card-filter.service";
-import {LoaderService} from "../../../framework/shared/loader/loader.service";
+import {LoaderService} from "../../../shared-module/loader/loaders.service";
 import {GuidedTourService} from "../guided-tour.service";
 import {ErrorService} from "../error.service";
 

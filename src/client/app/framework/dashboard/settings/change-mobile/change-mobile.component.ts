@@ -7,7 +7,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ValidationService} from "../../../shared/customvalidations/validation.service";
 import {LocalStorageService} from "../../../shared/localstorage.service";
 import {LocalStorage, Messages} from "../../../shared/constants";
-import {LoaderService} from "../../../shared/loader/loader.service";
+import {LoaderService} from "../../../../shared-module/loader/loaders.service";
 
 
 @Component({

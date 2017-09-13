@@ -1,5 +1,5 @@
 import {Component} from "@angular/core";
-import {LoaderService} from "./loader.service";
+import {LoaderService} from "./loaders.service";
 
 @Component({
   selector: 'app-loader',
@@ -16,6 +16,7 @@ export class LoaderComponent {
     loaderService.status.subscribe((status: boolean) => {
       this.status = status;
     });
+
   }
 
 }

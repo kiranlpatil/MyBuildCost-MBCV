@@ -8,7 +8,7 @@ import {VerifyUserService} from "./verify-user.service";
 import {LocalStorageService} from "../../shared/localstorage.service";
 import {Message} from "../../shared/message";
 import {MessageService} from "../../shared/message.service";
-import {LoaderService} from "../../shared/loader/loader.service";
+import {LoaderService} from "../../../shared-module/loader/loaders.service";
 
 @Component({
   moduleId: module.id,
