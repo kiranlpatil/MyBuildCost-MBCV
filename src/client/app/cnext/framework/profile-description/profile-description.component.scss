@@ -74,6 +74,10 @@
   }
 }
 
+.btn-prev {
+  opacity: 0.5;
+}
+
 @media only screen and (max-width: 980px) {
   .scrollable-content {
     padding: 0 !important;
@@ -133,6 +137,12 @@
 
   .scrollable-content {
     width: 100% !important;
+  }
+
+  .scrollable-content-mobile {
+    clear: both;
+    height: calc(100vh - 80px);
+    overflow: auto;
   }
 
   .divider {

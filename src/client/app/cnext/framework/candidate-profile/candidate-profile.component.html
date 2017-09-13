@@ -4,7 +4,7 @@
 
 <div class="create-profile clearfix" [hidden]="highlightedSection.name=='GuideTour' || highlightedSection.name==''">
   <cn-candidate-header [candidate]="candidate" *ngIf="candidate != undefined"></cn-candidate-header>
-  <div class="bar-container profile-header">
+  <div class="bar-container profile-header" [class.fixed-bar-container]="navIsFixed">
     <ul class="bar container" id="bar">
       <li [class.active]="whichStepsVisible[0] || candidate.isSubmitted" [class.current]="highlightedSection.name=='Profile'
       || highlightedSection.name=='Industry'" ><p>About Me</p>
@@ -108,8 +108,7 @@
             <div class="compact-view clearfix profile-visibility">
               <h4 class="heading-compact">Profile Visibility for Recruiter</h4>
               <div class="info profile-info" *ngIf="candidate.isVisible">{{visiblitySetToYesMessage}}</div>
-              <div class="info profile-info" *ngIf="!candidate.isVisible">{{visiblitySetToNoMessage}}
-              </div>
+              <div class="info profile-info" *ngIf="!candidate.isVisible">{{visiblitySetToNoMessage}}</div>
               <div class="toggle-switch-container">
                 <span class="switch-label" *ngIf="candidate.isVisible == true">Yes</span>
                 <span class="switch-label" *ngIf="candidate.isVisible == false">No</span>

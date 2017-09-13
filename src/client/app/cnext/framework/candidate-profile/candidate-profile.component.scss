@@ -305,11 +305,19 @@
   }
 
   .bar-container {
-    height: 35px;
-    padding-top: 0;
-    margin-top: 0;
     background: #383838;
-    top: 50px;
+    float: left;
+    height: 35px;
+    margin-top: 0;
+    padding-top: 0;
+    position: relative;
+    top: 0;
+    transition: all 1s linear;
+  }
+
+  .fixed-bar-container {
+    position: fixed !important;
+    top: 0;
   }
 
   .bar {
@@ -327,7 +335,7 @@
   }
 
   .profile-wrapper {
-    margin: 100px auto 0;
+    margin: 40px auto 0;
 
     .col-sm-3 {
       margin: 0 auto;
@@ -366,7 +374,7 @@
 
   .profile-visibility {
     .profile-info {
-      min-height: 60px;
+      min-height: initial;
       float: left;
     }
   }

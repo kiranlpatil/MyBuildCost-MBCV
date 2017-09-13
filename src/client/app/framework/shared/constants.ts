@@ -203,7 +203,8 @@ export class Messages {
   'It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,' +
   'and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.';
   public static BROWSER_ALERT_MSG = 'This application is certified on Google chrome browser. Switch to chrome for better experience.';
-
+  public static KEYSKILLS_PLACEHOLDER_DESKTOP = 'E.g. for IT:- Java, C++. for Manufacturing:- Metal Cutting';
+  public static KEYSKILLS_PLACEHOLDER_MOBILE = 'E.g. for IT:- Java, C++';
 }
 
 export class NavigationRoutes {
@@ -344,6 +345,7 @@ export class ImagePath {
   public static BODY_BACKGROUND = './assets/framework/images/page_background/page-bg.png';
   public static MY_COLOR_LOGO = './assets/framework/images/logo/logo-color.png';
   public static MY_WHITE_LOGO = './assets/framework/images/logo/job-mosis-logo.png';
+  public static MOBILE_WHITE_LOGO = './assets/framework/images/logo/jobmosis-mobile-logo.png';
   public static FACEBOOK_ICON = './assets/framework/images/footer/fb.svg';
   public static GOOGLE_ICON = './assets/framework/images/footer/google-plus.svg';
   public static LINKEDIN_ICON = './assets/framework/images/footer/linked-in.svg';

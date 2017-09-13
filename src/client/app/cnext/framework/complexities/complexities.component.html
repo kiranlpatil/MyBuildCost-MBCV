@@ -67,7 +67,7 @@
     <div class="compact-view">
 
         <h4 class="heading-compact">{{capabilitiesHeading}}
-          <span class="add-more" (click)="highlightedSection.name='Capabilities'"><span class="glyphicon glyphicon-plus-sign"></span>Add More</span>
+          <span class="add-more" (click)="editCapabilities()"><span class="glyphicon glyphicon-plus-sign"></span>Add More</span>
           <button class="btn-edit capability-edit" (click)="edit()"
                   [hidden]="highlightedSection.isDisable" title="Edit Capability Details"></button>
         </h4>
@@ -80,6 +80,7 @@
     </div>
   </div>
 </div>
+<div class="divider clearfix visible-xs" *ngIf="highlightedSection.name !='Complexities'">&nbsp;</div>
 <!--<div [class.modal-bg]="highlightedSection.name!='Complexities'"></div>-->
 <!--
 

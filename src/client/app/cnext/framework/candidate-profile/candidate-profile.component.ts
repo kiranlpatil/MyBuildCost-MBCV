@@ -1,5 +1,5 @@
-import {Component, DoCheck, KeyValueDiffers, OnDestroy, OnInit} from "@angular/core";
-import {LocalStorage,NavigationRoutes, Tooltip, Messages} from "../../../framework/shared/constants";
+import {Component, DoCheck, HostListener, KeyValueDiffers, OnDestroy, OnInit} from "@angular/core";
+import {LocalStorage, Messages, NavigationRoutes, Tooltip} from "../../../framework/shared/constants";
 import {Router} from "@angular/router";
 import {ComplexityService} from "../complexity.service";
 import {Candidate, Section} from "../model/candidate";
@@ -58,6 +58,7 @@ export class CandidateProfileComponent implements OnInit, DoCheck, OnDestroy {
   private visiblitySetToYesMessage : string = Tooltip.PROFILE_INFO_VISIBILIT_SET_TO_YES;
   private visiblitySetToNoMessage : string = Tooltip.PROFILE_INFO_VISIBILIT_SET_TO_NO;
   differ: any;
+  public navIsFixed: boolean = false;
 
   constructor(private _router: Router,
               private complexityService: ComplexityService,
@@ -75,6 +76,15 @@ export class CandidateProfileComponent implements OnInit, DoCheck, OnDestroy {
     this.getCandidateProfile();
     this.differ = differs.find({}).create(null);
 
+  }
+
+  @HostListener('window:scroll', []) onWindowScroll() {
+    let bodyOffset = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+    if (bodyOffset > 50) {
+      this.navIsFixed = true;
+    } else if (this.navIsFixed && bodyOffset < 10) {
+      this.navIsFixed = false;
+    }
   }
 
   ngOnInit() {
