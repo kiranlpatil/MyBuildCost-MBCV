@@ -5,8 +5,8 @@ var smtpTransport = nodemailer.createTransport({
   service:"Zoho",
 
   auth: {
-    user: config.get('TplSeed.mail.MAIL_SENDER'),
-    pass: config.get('TplSeed.mail.MAIL_SENDER_PASSWORD')
+    user:'amit', //config.get('TplSeed.mail.MAIL_SENDER'),
+    pass: 'alsllsdd'//config.get('TplSeed.mail.MAIL_SENDER_PASSWORD')
   }
 });
 

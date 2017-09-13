@@ -1,29 +1,22 @@
 {
   "TplSeed": {
     "database": {
-      "host":"127.0.0.1",
-      "name": "JobMosis-production"
+      "host": "127.0.0.1",
+      "name": "c-next-backend"
     },
     "mail": {
-      "host":"http://52.41.194.37/",
+      "host": "http://localhost:8080/",
+      //"host":"http://7a4647ae.ngrok.io/"
       "MAIL_SENDER": "notifications@jobmosis.com",
       "MAIL_SENDER_PASSWORD": "notifications@123",
-      "ADMIN_MAIL": "notifications@jobmosis.com"
-
-    },
-    "facebookIds":{
-      "clientId" : "1000308350087499",
-      "clientSecretId" : "fdd2b77c78273fc8f7dd6b2dd2dcdac9"
-    },
-    "googlePlusIds":{
-      "clientId" : "391892261476-q9crj1efbg4fvgovklkffrimtdva9baf.apps.googleusercontent.com",
-      "clientSecretId" : "R1u0P7kDcUy2zeWQJVuN4j03"
+      "ADMIN_MAIL": "notifications@jobmosis.com",
+      "SUPPORT_MAIL": "Jobmosis_TPL@techprimelab.com"
     },
     "messaging": {
       "authKey": "152516A0pwPFRp59198cd9",
       "senderId": "JOBMOS",
       "routerNumber": "4"
-    },
-    "folderPath":"/home/bitnami/apps/jobmosis-staging/c-next/dist/prod/server/public/candidate.csv"
+    }
+
   }
 }
