@@ -7,7 +7,7 @@ import {CandidateProfileService} from "../candidate-profile/candidate-profile.se
 import {Candidate} from "../model/candidate";
 import {CandidateDetail} from "../../../framework/registration/candidate/candidate";
 import {Router} from "@angular/router";
-import {Messages, ValueConstant} from "../../../framework/shared/constants";
+import {Messages, ValueConstant} from "../../../shared/constants";
 import {QCardViewService} from "../recruiter-dashboard/q-card-view/q-card-view.service";
 
 @Component({

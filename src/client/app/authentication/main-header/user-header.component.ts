@@ -1,15 +1,15 @@
 import {Component, Input} from "@angular/core";
 import {Router} from "@angular/router";
-import {ImagePath, LoaderService, NavigationRoutes} from "../shared/index";
-import {AppSettings} from "../shared/constants";
+import {ImagePath, LoaderService, NavigationRoutes} from "../../shared/index";
+import {AppSettings} from "../../shared/constants";
 
 @Component({
   moduleId: module.id,
-  selector: 'main-header',
-  templateUrl: 'main-header.component.html',
-  styleUrls: ['main-header.component.css'],
+  selector: 'user-header',
+  templateUrl: 'user-header.component.html',
+  styleUrls: ['user-header.component.css'],
 })
-export class MainHeaderComponent {
+export class UserHeaderComponent {
   BODY_BACKGROUND: string;
   @Input() MainHeaderMenuHideShow:string;
   constructor(private loaderService: LoaderService, private _router: Router) {

@@ -3,13 +3,13 @@ import { Router } from '@angular/router';
 import { CandidateService } from './candidate.service';
 import { CandidateDetail } from './candidate';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ValidationService } from '../../shared/customvalidations/validation.service';
-import { AppSettings, CommonService, Message, MessageService, NavigationRoutes } from '../../shared/index';
-import { ImagePath, LocalStorage, Messages } from '../../shared/constants';
-import { LocalStorageService } from '../../shared/localstorage.service';
+import { ValidationService } from '../../../shared/customvalidations/validation.service';
+import { AppSettings, CommonService, Message, MessageService, NavigationRoutes } from '../../../shared/index';
+import { ImagePath, LocalStorage, Messages } from '../../../shared/constants';
+import { LocalStorageService } from '../../../shared/services/localstorage.service';
 import { DateService } from '../../../cnext/framework/date.service';
 import { Location } from '../location';
-import { SharedService } from '../../shared/shared-service';
+import { SharedService } from '../../../shared/services/shared-service';
 @Component({
   moduleId: module.id,
   selector: 'cn-candidate-registration',

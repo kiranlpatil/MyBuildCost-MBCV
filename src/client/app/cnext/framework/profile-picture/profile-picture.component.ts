@@ -10,7 +10,7 @@ import {
   Messages,
   MessageService,
   ProfileService
-} from "../../../framework/shared/index";
+} from "../../../shared/index";
 
 
 @Component({

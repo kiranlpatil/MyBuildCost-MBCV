@@ -8,12 +8,12 @@ import {
   Messages,
   MessageService,
   ThemeChangeService
-} from "../../shared/index";
+} from "../../../shared/index";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {SettingsService} from "./settings.service";
 import {UserProfile} from "./../user";
-import {ProjectAsset, Headings} from "../../shared/constants";
-import {LoaderService} from "../../../shared-module/loader/loaders.service";
+import {ProjectAsset, Headings} from "../../../shared/constants";
+import {LoaderService} from "../../../shared/loader/loaders.service";
 import {ActivatedRoute} from "@angular/router";
 import {Candidate, Summary} from "../../../cnext/framework/model/candidate";
 import {CandidateProfileService} from "../../../cnext/framework/candidate-profile/candidate-profile.service";

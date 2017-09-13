@@ -1,7 +1,7 @@
 import {Component, OnInit} from "@angular/core";
 import {Router} from "@angular/router";
 import {Subscription} from "rxjs/Subscription";
-import {ThemeChangeService} from "./framework/shared/themechange.service";
+import {ThemeChangeService} from "./shared/services/themechange.service";
 import {
   AppSettings,
   CommonService,
@@ -11,7 +11,7 @@ import {
   Message,
   MessageService,
   NavigationRoutes
-} from "./framework/shared/index";
+} from "./shared/index";
 
 
 @Component({

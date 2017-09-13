@@ -3,14 +3,14 @@ import {Router} from "@angular/router";
 import {RecruiterService} from "./recruiter.service";
 import {Recruiter} from "./recruiter";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {ValidationService} from "../../shared/customvalidations/validation.service";
-import {AppSettings, CommonService, Message, MessageService, NavigationRoutes} from "../../shared/index";
-import {ImagePath, LocalStorage, Messages} from "../../shared/constants";
-import {LocalStorageService} from "../../shared/localstorage.service";
+import {ValidationService} from "../../../shared/customvalidations/validation.service";
+import {AppSettings, CommonService, Message, MessageService, NavigationRoutes} from "../../../shared/index";
+import {ImagePath, LocalStorage, Messages} from "../../../shared/constants";
+import {LocalStorageService} from "../../../shared/services/localstorage.service";
 import {Headers, Http, RequestOptions, Response} from "@angular/http";
 import {Location} from "../location";
-import {MyGoogleAddress} from "../candidate/google-our-place/my-google-address";
-import {SharedService} from "../../shared/shared-service";
+import {MyGoogleAddress} from "../../../shared/location/my-google-address";
+import {SharedService} from "../../../shared/services/shared-service";
 
 
 @Component({

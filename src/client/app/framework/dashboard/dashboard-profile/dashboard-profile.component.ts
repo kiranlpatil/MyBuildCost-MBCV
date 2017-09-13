@@ -2,7 +2,7 @@ import {Component, NgZone, OnDestroy, OnInit} from "@angular/core";
 import {ActivatedRoute, Router} from "@angular/router";
 import {DashboardService} from "../dashboard.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {ValidationService} from "../../shared/customvalidations/validation.service";
+import {ValidationService} from "../../../shared/customvalidations/validation.service";
 import {
   AppSettings,
   CommonService,
@@ -14,9 +14,9 @@ import {
   MessageService,
   ProfileService,
   ThemeChangeService
-} from "../../shared/index";
-import {NavigationRoutes} from "../../shared/constants";
-import {LoaderService} from "../../../shared-module/loader/loaders.service";
+} from "../../../shared/index";
+import {NavigationRoutes} from "../../../shared/constants";
+import {LoaderService} from "../../../shared/loader/loaders.service";
 import {CandidateDetail} from "../../registration/candidate/candidate";
 import {Candidate, Summary} from "../../../cnext/framework/model/candidate";
 import {CandidateProfileService} from "../../../cnext/framework/candidate-profile/candidate-profile.service";

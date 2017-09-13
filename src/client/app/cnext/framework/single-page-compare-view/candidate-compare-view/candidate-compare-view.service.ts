@@ -1,8 +1,8 @@
 import {Injectable} from "@angular/core";
 import {Headers, Http, RequestOptions} from "@angular/http";
 import {Observable} from "rxjs/Observable";
-import {BaseService} from "../../../../framework/shared/httpservices/base.service";
-import {API} from "../../../../framework/shared/constants";
+import {BaseService} from "../../../../shared/services/httpservices/base.service";
+import {API} from "../../../../shared/constants";
 
 @Injectable()
 export class CandidateCompareService extends BaseService {

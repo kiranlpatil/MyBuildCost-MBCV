@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
 import {Headers, Http, RequestOptions} from "@angular/http";
 import {Observable} from "rxjs/Observable";
-import {API, AppSettings, BaseService, LocalStorage, LocalStorageService, MessageService} from "../shared/index";
+import {API, AppSettings, BaseService, LocalStorage, LocalStorageService, MessageService} from "../../shared/index";
 import {CandidateDetail} from "../registration/candidate/candidate";
 
 @Injectable()

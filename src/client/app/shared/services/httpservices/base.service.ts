@@ -1,6 +1,6 @@
 import {Response} from "@angular/http";
 import {Observable} from "rxjs/Observable";
-import {LocalStorage, LocalStorageService} from "../../shared/index";
+import {LocalStorage, LocalStorageService} from "../../index";
 
 
 export class BaseService {

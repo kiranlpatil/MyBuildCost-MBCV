@@ -1,6 +1,6 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
-import { LocalStorageService } from '../../../../../framework/shared/localstorage.service';
-import { LocalStorage } from '../../../../../framework/shared/constants';
+import { LocalStorageService } from '../../../../../shared/services/localstorage.service';
+import { LocalStorage } from '../../../../../shared/constants';
 
 @Component({
   moduleId: module.id,

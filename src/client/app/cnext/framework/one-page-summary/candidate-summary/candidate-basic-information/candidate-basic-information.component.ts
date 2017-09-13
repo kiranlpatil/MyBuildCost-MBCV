@@ -2,7 +2,7 @@ import {Component, Input} from "@angular/core";
 
 import {CandidateDetail} from "../../../../../framework/registration/candidate/candidate";
 import {Candidate} from "../../../model/candidate";
-import {AppSettings, ImagePath} from "../../../../../framework/shared/constants";
+import {AppSettings, ImagePath} from "../../../../../shared/constants";
 
 
 @Component({

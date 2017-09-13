@@ -1,10 +1,10 @@
 import {Component, EventEmitter, Input, Output, ViewChild, OnInit} from "@angular/core";
 import {JobQcard} from "../../model/JobQcard";
-import {AppSettings, LocalStorage, ValueConstant} from "../../../../framework/shared/constants";
-import {LocalStorageService} from "../../../../framework/shared/localstorage.service";
+import {AppSettings, LocalStorage, ValueConstant} from "../../../../shared/constants";
+import {LocalStorageService} from "../../../../shared/services/localstorage.service";
 import {CandidateDashboardService} from "../candidate-dashboard.service";
-import {Message} from "../../../../framework/shared/message";
-import {MessageService} from "../../../../framework/shared/message.service";
+import {Message} from "../../../../shared/models/message";
+import {MessageService} from "../../../../shared/services/message.service";
 import {JobCompareViewComponent} from "../../single-page-compare-view/job-compare-view/job-compare-view.component";
 import {CandidateList} from "../../model/candidate-list";
 import {ErrorService} from "../../error.service";

@@ -1,8 +1,8 @@
 import {Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, ViewChild} from "@angular/core";
 import {Role} from "../model/role";
 import {ComplexityService} from "../complexity.service";
-import {LocalStorageService} from "../../../framework/shared/localstorage.service";
-import {LocalStorage, Messages, Tooltip, ValueConstant, ImagePath, Headings} from "../../../framework/shared/constants";
+import {LocalStorageService} from "../../../shared/services/localstorage.service";
+import {LocalStorage, Messages, Tooltip, ValueConstant, ImagePath, Headings} from "../../../shared/constants";
 import {Section} from "../model/candidate";
 import {ComplexityDetails} from "../model/complexity-detail";
 import {ComplexityComponentService} from "./complexity.service";

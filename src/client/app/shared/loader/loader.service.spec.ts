@@ -1,6 +1,6 @@
 /* tslint:disable:no-unused-variable */
 import {inject, TestBed} from "@angular/core/testing";
-import {LoaderService} from "../../../shared-module/loader/loaders.service";
+import {LoaderService} from "./loaders.service";
 
 describe('LoaderService', () => {
   beforeEach(() => {

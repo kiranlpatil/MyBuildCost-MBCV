@@ -1,7 +1,7 @@
 import {Component, ElementRef, EventEmitter, Input, OnChanges, Output, ViewChild} from "@angular/core";
 import {MultiSelectService} from "./multi-select.service";
 import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
-import {Messages} from "../../../framework/shared/constants";
+import {Messages} from "../../../shared/constants";
 import {ErrorService} from "../error.service";
 
 
@@ -22,9 +22,9 @@ export class MultiSelectComponent implements OnChanges {
   @Input() requiredKeySkillsValidationMessage: string;
   @Input() maxKeySkillsValidationMessage: string;
 
-  private selectedProficiencies = new Array();
-  private masterDataProficiencies = new Array();
-  private Proficiencies = new Array();
+  private selectedProficiencies = [];
+  private masterDataProficiencies = [];
+  private Proficiencies = [];
   private validationMessage: string;
   private showAlert: boolean = false;
   private alreadyPresent: boolean = false;

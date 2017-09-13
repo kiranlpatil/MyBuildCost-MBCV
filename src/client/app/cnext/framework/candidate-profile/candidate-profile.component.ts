@@ -1,15 +1,15 @@
 import {Component, DoCheck, KeyValueDiffers, OnDestroy, OnInit} from "@angular/core";
-import {LocalStorage,NavigationRoutes, Tooltip, Messages} from "../../../framework/shared/constants";
+import {LocalStorage,NavigationRoutes, Tooltip, Messages} from "../../../shared/constants";
 import {Router} from "@angular/router";
 import {ComplexityService} from "../complexity.service";
 import {Candidate, Section} from "../model/candidate";
 import {CandidateProfileService} from "./candidate-profile.service";
 import {Role} from "../model/role";
 import {Industry} from "../model/industry";
-import {Message} from "../../../framework/shared/message";
-import {MessageService} from "../../../framework/shared/message.service";
+import {Message} from "../../../shared/models/message";
+import {MessageService} from "../../../shared/services/message.service";
 import {ErrorService} from "../error.service";
-import {LocalStorageService} from "../../../framework/shared/localstorage.service";
+import {LocalStorageService} from "../../../shared/services/localstorage.service";
 
 @Component({
   moduleId: module.id,

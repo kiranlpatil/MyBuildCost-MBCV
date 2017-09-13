@@ -1,10 +1,10 @@
 import {Injectable} from "@angular/core";
 import {Http} from "@angular/http";
 import {Observable} from "rxjs/Observable";
-import {MessageService} from "../../../shared/message.service";
-import {LocalStorageService} from "../../../shared/localstorage.service";
-import {BaseService} from "../../../shared/httpservices/base.service";
-import {API, LocalStorage} from "../../../shared/index";
+import {MessageService} from "../../../../shared/services/message.service";
+import {LocalStorageService} from "../../../../shared/services/localstorage.service";
+import {BaseService} from "../../../../shared/services/httpservices/base.service";
+import {API, LocalStorage} from "../../../../shared/index";
 import {ResetPassword} from "./reset-password";
 
 
