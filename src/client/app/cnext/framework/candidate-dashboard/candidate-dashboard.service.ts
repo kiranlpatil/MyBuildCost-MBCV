@@ -1,10 +1,10 @@
 import {Injectable} from "@angular/core";
 import {Headers, Http, RequestOptions} from "@angular/http";
 import {Observable} from "rxjs/Observable";
-import {API, LocalStorage, ValueConstant} from "../../../framework/shared/constants";
-import {BaseService} from "../../../framework/shared/httpservices/base.service";
-import {LocalStorageService} from "../../../framework/shared/localstorage.service";
-import {LoaderService} from "../../../framework/shared/loader/loader.service";
+import {API, LocalStorage, ValueConstant} from "../../../shared/constants";
+import {BaseService} from "../../../shared/services/httpservices/base.service";
+import {LocalStorageService} from "../../../shared/services/localstorage.service";
+import {LoaderService} from "../../../shared/loader/loaders.service";
 
 @Injectable()
 export class CandidateDashboardService extends BaseService {//todo THIS CODE SHOULD FIT IN 30 LINE:SHRIKANT

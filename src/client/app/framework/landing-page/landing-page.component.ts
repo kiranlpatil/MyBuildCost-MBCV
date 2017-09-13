@@ -1,6 +1,6 @@
 import {Component} from "@angular/core";
-import {ImagePath} from "../shared/index";
-import {Messages} from "../shared/constants";
+import {ImagePath} from "../../shared/index";
+import {Messages} from "../../shared/constants";
 
 @Component({
   moduleId: module.id,

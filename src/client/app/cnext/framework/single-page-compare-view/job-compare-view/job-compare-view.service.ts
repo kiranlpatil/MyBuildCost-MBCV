@@ -1,12 +1,12 @@
 import {Injectable} from "@angular/core";
 import {Headers, Http, RequestOptions} from "@angular/http";
 import {Observable} from "rxjs/Observable";
-import {BaseService} from "../../../../framework/shared/httpservices/base.service";
-import {API, LocalStorage} from "../../../../framework/shared/constants";
+import {BaseService} from "../../../../shared/services/httpservices/base.service";
+import {API, LocalStorage} from "../../../../shared/constants";
 import {Capability} from "../../model/capability";
 import {Complexity} from "../../model/complexity";
 import {Scenario} from "../../model/scenario";
-import {LocalStorageService} from "../../../../framework/shared/localstorage.service";
+import {LocalStorageService} from "../../../../shared/services/localstorage.service";
 
 @Injectable()
 export class JobCompareService extends BaseService {

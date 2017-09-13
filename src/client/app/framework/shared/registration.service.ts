@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { LocalStorageService } from './localstorage.service';
-import { LocalStorage, AppSettings, NavigationRoutes } from './constants';
-import { ThemeChangeService } from './themechange.service';
-import { Message } from './message';
-import { MessageService } from './message.service';
+import { LocalStorageService } from '../../shared/services/localstorage.service';
+import { LocalStorage, AppSettings, NavigationRoutes } from '../../shared/constants';
+import { ThemeChangeService } from '../../shared/services/themechange.service';
+import { Message } from '../../shared/models/message';
+import { MessageService } from '../../shared/services/message.service';
 
 @Injectable()
 export class RegistrationService {

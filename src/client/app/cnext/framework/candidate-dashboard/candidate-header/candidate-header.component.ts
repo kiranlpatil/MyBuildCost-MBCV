@@ -1,8 +1,8 @@
 import {Component, ElementRef, HostListener, Input} from "@angular/core";
 import {Router} from "@angular/router";
 import {Candidate, Section} from "../../model/candidate";
-import {AppSettings, ImagePath, LocalStorage} from "../../../../framework/shared/constants";
-import {LocalStorageService} from "../../../../framework/shared/localstorage.service";
+import {AppSettings, ImagePath, LocalStorage} from "../../../../shared/constants";
+import {LocalStorageService} from "../../../../shared/services/localstorage.service";
 
 @Component({
   moduleId: module.id,

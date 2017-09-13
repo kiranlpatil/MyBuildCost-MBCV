@@ -1,6 +1,6 @@
 import {Pipe, PipeTransform} from "@angular/core";
 import {CandidateQCard} from "../model/candidateQcard";
-import {ValueConstant} from "../../../framework/shared/constants";
+import {ValueConstant} from "../../../shared/constants";
 
 @Pipe({name: 'qcardmatching', pure: false})
 

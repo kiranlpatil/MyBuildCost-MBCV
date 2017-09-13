@@ -1,8 +1,8 @@
 import {Injectable} from "@angular/core";
 import {Headers, Http, RequestOptions} from "@angular/http";
-import {BaseService} from "../../../../framework/shared/httpservices/base.service";
-import {API, LocalStorage, ValueConstant} from "../../../../framework/shared/constants";
-import {LocalStorageService} from "../../../../framework/shared/localstorage.service";
+import {BaseService} from "../../../../shared/services/httpservices/base.service";
+import {API, LocalStorage, ValueConstant} from "../../../../shared/constants";
+import {LocalStorageService} from "../../../../shared/services/localstorage.service";
 
 @Injectable()
 export class CandidateJobListService extends BaseService {

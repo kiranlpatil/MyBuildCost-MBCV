@@ -1,7 +1,7 @@
 import {Component, ElementRef, HostListener, OnInit} from "@angular/core";
 import {Router} from "@angular/router";
-import {LocalStorageService} from "../../../../framework/shared/localstorage.service";
-import {AppSettings, ImagePath, LocalStorage} from "../../../../framework/shared/constants";
+import {LocalStorageService} from "../../../../shared/services/localstorage.service";
+import {AppSettings, ImagePath, LocalStorage} from "../../../../shared/constants";
 import {RedirectRecruiterDashboardService} from "../../redirect-dashboard.service";
 
 @Component({

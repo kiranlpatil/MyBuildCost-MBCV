@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
-import {Tooltip} from "../../../framework/shared/constants";
+import {Tooltip} from "../../../shared/constants";
 
 @Component({
   moduleId: module.id,

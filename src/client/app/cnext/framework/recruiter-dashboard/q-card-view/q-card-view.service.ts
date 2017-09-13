@@ -1,9 +1,9 @@
 import {Injectable} from "@angular/core";
 import {Observable} from "rxjs";
-import {BaseService} from "../../../../framework/shared/httpservices/base.service";
+import {BaseService} from "../../../../shared/services/httpservices/base.service";
 import {Headers, Http, RequestOptions} from "@angular/http";
-import {LocalStorage} from "../../../../framework/shared/constants";
-import {LocalStorageService} from "../../../../framework/shared/localstorage.service";
+import {LocalStorage} from "../../../../shared/constants";
+import {LocalStorageService} from "../../../../shared/services/localstorage.service";
 
 @Injectable()
 export class QCardViewService extends BaseService {

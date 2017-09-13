@@ -13,7 +13,7 @@ import {
 import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
 import {Candidate, Section} from "../model/candidate";
 import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {Tooltip, Headings} from "../../../framework/shared/constants";
+import {Tooltip, Headings} from "../../../shared/constants";
 import {ErrorService} from "../error.service";
 
 @Component({

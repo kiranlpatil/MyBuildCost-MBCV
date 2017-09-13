@@ -5,11 +5,11 @@ import {JobPosterModel} from '../model/jobPoster';
 import {ProfessionalDataService} from '../professional-data/professional-data.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {JobLocation} from '../model/job-location';
-import {MyGoogleAddress} from '../../../framework/registration/candidate/google-our-place/my-google-address';
+import {MyGoogleAddress} from '../../../shared/location/my-google-address';
 import { FilterService} from '../filters/filter/filter.service';
-import { Headings, Messages, Tooltip} from '../../../framework/shared/constants';
+import { Headings, Messages, Tooltip} from '../../../shared/constants';
 import { RecruiterDashboard} from '../model/recruiter-dashboard';
-import {ValidationService} from '../../../framework/shared/customvalidations/validation.service';
+import {ValidationService} from '../../../shared/customvalidations/validation.service';
 import {ErrorService} from '../error.service';
 
 @Component({

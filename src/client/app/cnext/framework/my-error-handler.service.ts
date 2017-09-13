@@ -1,6 +1,6 @@
 import { ErrorHandler, Injectable } from '@angular/core';
-import { MessageService } from '../../framework/shared/message.service';
-import { Message } from '../../framework/shared/message';
+import { MessageService } from '../../shared/services/message.service';
+import { Message } from '../../shared/models/message';
 
 @Injectable()
 export class LoggerService {

@@ -4,15 +4,15 @@ import {QCardsortBy} from "../../model/q-cardview-sortby";
 import {MatchCandidate} from "../../model/match-candidate";
 import {QCardViewService} from "./q-card-view.service";
 import {QCardFilterService} from "../../filters/q-card-filter.service";
-import {AppSettings, ValueConstant} from "../../../../framework/shared/constants";
+import {AppSettings, ValueConstant} from "../../../../shared/constants";
 import {QCardFilter} from "../../model/q-card-filter";
 import {CandidateQListModel} from "../job-dashboard/q-cards-candidates";
 import {RecruiterJobView} from "../../model/recruiter-job-view";
 import {Candidate} from "../../model/candidate";
 import {CandidateDetail} from "../../../../framework/registration/candidate/candidate";
 import {CandidateProfileService} from "../../candidate-profile/candidate-profile.service";
-import {Message} from "../../../../framework/shared/message";
-import {MessageService} from "../../../../framework/shared/message.service";
+import {Message} from "../../../../shared/models/message";
+import {MessageService} from "../../../../shared/services/message.service";
 import {ErrorService} from "../../error.service";
 /*import underline = Chalk.underline;*/
 

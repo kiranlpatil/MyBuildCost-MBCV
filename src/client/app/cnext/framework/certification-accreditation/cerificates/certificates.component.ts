@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 
 import { FormGroup } from '@angular/forms';
-import { ValueConstant, Messages } from '../../../../framework/shared/constants';
+import { ValueConstant, Messages } from '../../../../shared/constants';
 
 
 @Component({

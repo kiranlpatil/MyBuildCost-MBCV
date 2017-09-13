@@ -1,5 +1,5 @@
 <section class="main-form-wrapper login">
-  <main-header [MainHeaderMenuHideShow]="mainHeaderMenuHideShow"></main-header>
+  <user-header [MainHeaderMenuHideShow]="mainHeaderMenuHideShow"></user-header>
 
     <div *ngIf="!isChrome && isToasterVisible" #toaster id="snackbar">{{getMessages().BROWSER_ALERT_MSG}}
         <button class="button-style" (click)="closeToaster()">x</button>
