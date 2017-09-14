@@ -6,10 +6,11 @@
     },
     "mail": {
       "host":"http://34.208.115.60:3000/",
-      "MAIL_SENDER": "notifications@jobmosis.com",
-      "MAIL_SENDER_PASSWORD": "notifications@123",
-      "ADMIN_MAIL": "notifications@jobmosis.com",
-      "SUPPORT_MAIL": "Jobmosis_TPL@techprimelab.com"
+      "MAIL_SENDER": "redminestatus@techprimelab.com",
+      "MAIL_SENDER_PASSWORD": "Contactu$@tpl",
+      "ADMIN_MAIL": "Jobmosis_TPL@techprimelab.com",
+      "TPLGROUP_MAIL":"Jobmosis_TPL@techprimelab.com",
+      "MAIL_SERVICE": "Gmail"
 
     },
     "facebookIds":{

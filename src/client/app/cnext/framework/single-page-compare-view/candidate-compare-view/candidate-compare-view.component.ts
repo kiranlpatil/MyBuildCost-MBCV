@@ -1,7 +1,7 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AppSettings, LocalStorage } from '../../../../framework/shared/constants';
-import { LocalStorageService } from '../../../../framework/shared/localstorage.service';
+import { AppSettings, LocalStorage } from '../../../../shared/constants';
+import { LocalStorageService } from '../../../../shared/services/localstorage.service';
 import { CandidateCompareService } from './candidate-compare-view.service';
 import { RecruiterDashboardService } from '../../recruiter-dashboard/recruiter-dashboard.service';
 import {ErrorService} from "../../error.service";

@@ -7,9 +7,10 @@
     "mail": {
       "host":"http://52.41.194.37/",
       "MAIL_SENDER": "notifications@jobmosis.com",
-      "MAIL_SENDER_PASSWORD": "notifications@123",
-      "ADMIN_MAIL": "notifications@jobmosis.com",
-      "SUPPORT_MAIL": "Jobmosis_TPL@techprimelab.com"
+      "MAIL_SENDER_PASSWORD": "notify123+",
+      "ADMIN_MAIL": "support@jobmosis.com",
+      "TPLGROUP_MAIL": "Jobmosis_TPL@techprimelab.com",
+      "MAIL_SERVICE": "Zoho"
 
     },
     "facebookIds":{

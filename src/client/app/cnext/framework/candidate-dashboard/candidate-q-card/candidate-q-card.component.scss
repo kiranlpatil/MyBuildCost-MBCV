@@ -17,7 +17,7 @@
     float: left;
     overflow: hidden;
     text-overflow: ellipsis;
-    width: calc(100% - 0px);
+    width: calc(100% - 0);
     white-space: nowrap;
   }
   .company-name-label {
@@ -45,7 +45,7 @@
   position: absolute;
   right: 8px;
   font-size: 10px;
-  color: #b7b7b7;
+  color: $company-date-label;
 }
 
 .skills-lists {
@@ -64,7 +64,7 @@
   opacity: 0;
   padding: 10px;
   position: absolute;
-  transition: all .1s linear;
+  transition: all 0.1s linear;
   width: 230px;
   z-index: 99;
   margin-top: 9px;
@@ -81,7 +81,7 @@
   visibility: visible;
 }
 
-.proficiencies-key-skills .tooltip-content-new:after {
+.proficiencies-key-skills .tooltip-content-new::after {
   content: "";
   border-bottom: 10px solid $light-gray;
   border-left: 10px solid transparent;

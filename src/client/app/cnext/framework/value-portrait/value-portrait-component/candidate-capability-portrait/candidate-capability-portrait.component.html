@@ -1,10 +1,11 @@
-<div class="value-portraot-candidate-capability">
+<div class="value-portrait-candidate-capability">
   <h3> Core Capabilities </h3>
-  <div class="value-portraot-candidate-capability-circle">
+  <div class="value-portrait-candidate-capability-circle">
     <div class="circle-list" *ngFor="let capability of candidate.capabilities;let i=index;" [class.five-element]="i==4"
-         [class.six-element]="i==5" [class.eleven-element]="i==10" [class.fifteen-element]="i==14">
+         [class.six-element]="i==5" [class.ten-element]="i==8" [class.eleven-element]="i==10"
+         [class.fifteen-element]="i==14">
       <div *ngIf="i < 10 || showMore" class="circle" [class.second-line]="i>4 && i < 10">
-      <div class="inner-circle">
+        <div class="inner-circle" data-toggle="modal" [attr.data-target]="'#'+'capability-modal'+i">
         <span>
           {{capability.name}}
         </span>
@@ -19,13 +20,44 @@
           </div>
         </div>
       </div>
-    </div>
+        <div class="modal fade" id="{{'capability-modal'+i}}" tabindex="-1" role="dialog"
+             aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title text-center" id="exampleModalLabel">{{capability.name}}</h5>
+              </div>
+              <div class="modal-body">
+                <div class="">
+                  <div *ngFor="let complexity of capability.complexities">
+                    <div class="complexities-list"
+                         *ngIf="complexity.answer != 'Not Applicable' && complexity.answer != undefined">
+                      <label>{{complexity.name}}</label>
+                      <span class="">{{complexity.answer}}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="close-modal" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <div style="width: 100%;display: inline-block;" *ngIf="((i+1)%5==0)">
       </div>
     </div>
+
   </div>
   <button *ngIf="showToggleButton" (click)="showMore = !showMore;showToggleButton=!showToggleButton"
           class="show-more-btn">
     Show More <span class="glyphicon glyphicon-chevron-down"></span>
   </button>
 </div>
+
+
+
+

@@ -491,7 +491,7 @@ class CandidateService {
                 match_view.questionForCandidate = complexity.name;
               }
               if (complexity.questionForRecruiter !== undefined && complexity.questionForRecruiter !== null && complexity.questionForRecruiter !== '') {
-                match_view.questionForRecruiter = complexity.questionForCandidate;
+                match_view.questionForRecruiter = complexity.questionForRecruiter;
               } else {
                 match_view.questionForRecruiter = complexity.name;
               }
@@ -599,7 +599,7 @@ class CandidateService {
                   match_view.questionForCandidate = complexity.name;
                 }
                 if (complexity.questionForRecruiter !== undefined && complexity.questionForRecruiter !== null && complexity.questionForRecruiter !== '') {
-                  match_view.questionForRecruiter = complexity.questionForCandidate;
+                  match_view.questionForRecruiter = complexity.questionForRecruiter;
                 } else {
                   match_view.questionForRecruiter = complexity.name;
                 }

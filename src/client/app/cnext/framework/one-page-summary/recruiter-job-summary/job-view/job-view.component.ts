@@ -2,7 +2,7 @@ import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angula
 import { RecruiterDashboardService } from '../../../recruiter-dashboard/recruiter-dashboard.service';
 import { JobSummary } from '../../../model/jobSummary';
 import { Router } from '@angular/router';
-import {NavigationRoutes} from '../../../../../framework/shared/constants';
+import {NavigationRoutes} from '../../../../../shared/constants';
 import {ComplexityComponentService} from "../../../complexities/complexity.service";
 import {JobCompareService} from "../../../single-page-compare-view/job-compare-view/job-compare-view.service";
 import {ErrorService} from "../../../error.service";

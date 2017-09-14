@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { RecruiterHeaderDetails } from '../../model/recuirterheaderdetails';
 import { ReferenceService } from '../../model/newClass';
 import { RecruiterDashboard } from '../../model/recruiter-dashboard';
-import { Tooltip } from '../../../../framework/shared/constants';
+import { Tooltip } from '../../../../shared/constants';
 
 
 @Component({

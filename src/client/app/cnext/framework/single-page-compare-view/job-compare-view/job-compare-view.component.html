@@ -342,7 +342,7 @@
       </div>
       <div class="col-sm-12 no-padding">
         <h4 class="pull-left col-xs-3 no-padding text-left"
-            *ngIf="( data && data.proficiencies && data.proficiencies.length>0)">
+            *ngIf="( data && data.proficiencies && isCandidateHaveExtraKeySkill)">
           These are candidate's extra key skills
         </h4>
         <div class="pull-left col-xs-8 no-padding text-left">

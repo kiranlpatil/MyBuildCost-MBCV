@@ -11,11 +11,13 @@
                  class="panel panel-default">
               <div>
               <span class="glyphicon glyphicon-trash pull-right"
-                    *ngIf="academicDetail.controls.academicDetails.controls.length>0 && academicDetail.controls.academicDetails.controls.length !==1 "
+                    *ngIf="academicDetail.controls.academicDetails.controls.length>0 &&
+                     academicDetail.controls.academicDetails.controls.length !==1 "
                     (click)="removeAcademicDetail(i)"></span>
               </div>
               <div class="panel-body" [formGroupName]="i">
-                <cn-academics [group]="academicDetail.controls.academicDetails.controls[i]" [submitStatus] = "submitStatus"></cn-academics>
+                <cn-academics [group]="academicDetail.controls.academicDetails.controls[i]"
+                              [submitStatus]="submitStatus"></cn-academics>
               </div>
             </div>
           </div>
@@ -50,7 +52,7 @@
 
         <h4 class="heading-compact icons-section">
           <!--<img src="assets/c-next/icons/education-icon.png" alt="employment"/>-->
-          <span class="education-icon"></span>
+          <span class="icons icon-education"></span>
           Academic Details <span class="optional-field">(Optional)</span>
           <button class="btn-edit" (click)="onEdit()"></button>
         </h4>
@@ -59,7 +61,7 @@
       <div class="" *ngIf="academicDetail.controls.academicDetails.controls.length>0">
         <h4 class="heading-compact icons-section">
           <!--<img src="assets/c-next/icons/education-icon.png" alt="employment"/>-->
-          <span class="education-icon"></span>
+          <span class="icons icon-education"></span>
           Academic Details <span class="optional-field">(Optional)</span>
           <button class="btn-edit" (click)="onEdit()"></button>
         </h4>

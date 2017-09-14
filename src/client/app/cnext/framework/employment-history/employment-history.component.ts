@@ -2,7 +2,7 @@ import {Component, ElementRef, EventEmitter, Input, Output, ViewChild} from "@an
 import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
 import {Candidate, Section} from "../model/candidate";
 import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {Messages, Tooltip, Headings} from "../../../framework/shared/constants";
+import {Messages, Tooltip, Headings} from "../../../shared/constants";
 import {ErrorService} from "../error.service";
 
 @Component({

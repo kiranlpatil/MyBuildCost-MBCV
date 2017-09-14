@@ -67,6 +67,7 @@ class Messages {
   public static MSG_ERROR_EMPTY_FIELD: string = 'Fields can\'t be empty';
   public static MSG_ERROR_WHILE_CONTACTING: string = 'Something went wrong. Try again.';
   public static MSG_ERROR_CONNECTION_TIMEOUT: string = 'Connection timeout. Try again.';
+  public static MSG_ERROR_INCORRECT_INDUSTRY_NAME: string = 'Excel With this name is not present.Excel name must be NewIndustryDataExcel.xlsx';
 
   //
 

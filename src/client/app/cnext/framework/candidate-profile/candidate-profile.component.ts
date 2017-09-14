@@ -1,15 +1,15 @@
-import {Component, DoCheck, KeyValueDiffers, OnDestroy, OnInit} from "@angular/core";
-import {LocalStorage,NavigationRoutes, Tooltip, Messages} from "../../../framework/shared/constants";
+import {Component, DoCheck, HostListener, KeyValueDiffers, OnDestroy, OnInit} from "@angular/core";
+import {LocalStorage,NavigationRoutes, Tooltip, Messages} from "../../../shared/constants";
 import {Router} from "@angular/router";
 import {ComplexityService} from "../complexity.service";
 import {Candidate, Section} from "../model/candidate";
 import {CandidateProfileService} from "./candidate-profile.service";
 import {Role} from "../model/role";
 import {Industry} from "../model/industry";
-import {Message} from "../../../framework/shared/message";
-import {MessageService} from "../../../framework/shared/message.service";
+import {Message} from "../../../shared/models/message";
+import {MessageService} from "../../../shared/services/message.service";
 import {ErrorService} from "../error.service";
-import {LocalStorageService} from "../../../framework/shared/localstorage.service";
+import {LocalStorageService} from "../../../shared/services/localstorage.service";
 
 @Component({
   moduleId: module.id,
@@ -58,6 +58,7 @@ export class CandidateProfileComponent implements OnInit, DoCheck, OnDestroy {
   private visiblitySetToYesMessage : string = Tooltip.PROFILE_INFO_VISIBILIT_SET_TO_YES;
   private visiblitySetToNoMessage : string = Tooltip.PROFILE_INFO_VISIBILIT_SET_TO_NO;
   differ: any;
+  public navIsFixed: boolean = false;
 
   constructor(private _router: Router,
               private complexityService: ComplexityService,
@@ -75,6 +76,15 @@ export class CandidateProfileComponent implements OnInit, DoCheck, OnDestroy {
     this.getCandidateProfile();
     this.differ = differs.find({}).create(null);
 
+  }
+
+  @HostListener('window:scroll', []) onWindowScroll() {
+    let bodyOffset = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+    if (bodyOffset > 50) {
+      this.navIsFixed = true;
+    } else if (this.navIsFixed && bodyOffset < 10) {
+      this.navIsFixed = false;
+    }
   }
 
   ngOnInit() {

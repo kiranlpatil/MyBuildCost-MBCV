@@ -6,7 +6,7 @@
     <!--<tpl-loader *ngSwitchCase="true"></tpl-loader>-->
     <app-loader></app-loader>
 
-    <h5>Personal information</h5>
+    <h5>{{getHeadings().ACCOUNT_DETAILS_HEADING}}</h5>
 
     <div class="col-sm-4 my-info">
       <div class="description-container">
@@ -26,7 +26,7 @@
 
         <div *ngIf="role==='candidate'" class="form-group" [class.fb-email-input]="isSocialLogin">
           <control-messages [control]="userForm.controls.first_name"></control-messages>
-          <label>First Name </label>
+          <label>{{getLabels().FIRST_NAME_LABEL}} </label>
           <input type="text" [(ngModel)]="model.first_name" formControlName="first_name" id="first_name "
                  class="form-control"/>
         </div>
@@ -34,7 +34,7 @@
 
         <div *ngIf="role==='candidate'" class="form-group" [class.fb-email-input]="isSocialLogin">
           <control-messages [control]="userForm.controls.last_name"></control-messages>
-          <label>Last Name </label>
+          <label>{{getLabels().LAST_NAME_LABEL}}</label>
           <input type="text" [(ngModel)]="model.last_name" formControlName="last_name" id="last_name "
                  class="form-control"/>
         </div>
@@ -42,7 +42,7 @@
 
         <div class="form-group" [class.fb-email-input]="isSocialLogin">
           <control-messages [control]="userForm.controls.email"></control-messages>
-          <label>Email
+          <label>{{getLabels().EMAIL_FIELD_LABEL}}
             <span class="glyphicon glyphicon-pencil" [class.hide-list]="isSocialLogin"
                   (click)="showHideEmailModal()"></span>
           </label>
@@ -52,7 +52,7 @@
 
         <div class="form-group" [class.hide-list]="isSocialLogin">
           <control-messages [control]="userForm.controls.mobile_number"></control-messages>
-          <label>Contact
+          <label>{{getLabels().CONTACT_FIELD_LABEL}}
             <span class="glyphicon glyphicon-pencil" (click)="showHideMobileModal()"></span>
           </label>
           <input type="number" [(ngModel)]="model.mobile_number" formControlName="mobile_number"
@@ -62,7 +62,7 @@
         <div class="col-xs-12 error-msg alert alert-danger form-alert" [hidden]="isShowErrorMessage"><b>{{
           error_msg }}</b></div>
         <!--<button type="submit" class="btn btn-default">Edit Profile</button>-->
-        <button type="submit" class="btn btn-primary pull-right" [disabled]="!userForm.valid">Save Profile</button>
+        <button type="submit" class="btn btn-primary pull-right" [disabled]="!userForm.valid">{{getLabels().SAVE_PROFILE_LABEL}}</button>
       </form>
     </div>
 
@@ -78,11 +78,11 @@
           <button type="button" class="close" aria-label="Close" (click)="showHideEmailModal()">
             <span aria-hidden="true">&times;</span>
           </button>
-          <h5>Change your Email</h5>
+          <h5>{{getHeadings().CHANGE_EMAIL_HEADING}}</h5>
         </div>
         <div class="modal-body">
           <div class="col-sm-12">
-            <p>{{emailRestMessage}}</p>
+            <p>{{getMessages().MSG_RESET_EMAIL_ADDRESS}}</p>
             <tpl-change-email></tpl-change-email>
           </div>
         </div>
@@ -99,11 +99,11 @@
           <button type="button" class="close" aria-label="Close" (click)="showHideMobileModal()">
             <span aria-hidden="true">&times;</span>
           </button>
-          <h5>Change your Mobile</h5>
+          <h5>{{getHeadings().CHANGE_MOBILE_NUMBER_HEADING}}</h5>
         </div>
         <div class="modal-body">
           <div class="col-sm-12">
-            <p>{{mobileNumberRestMessage}}</p>
+            <p>{{getMessages().MSG_RESET_MOBILE_NUMBER}}</p>
             <tpl-change-mobile></tpl-change-mobile>
           </div>
         </div>

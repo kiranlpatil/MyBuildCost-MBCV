@@ -1,7 +1,7 @@
 import {Component, Input, OnChanges, OnInit, Output} from "@angular/core";
 import {EventEmitter} from "@angular/common/src/facade/async";
 import {ProfileComparisonHeaderMeta} from "./profile-comparison-header-meta";
-import {AppSettings} from "../../../../../framework/shared/constants";
+import {AppSettings} from "../../../../../shared/constants";
 
 @Component({
   moduleId:module.id,

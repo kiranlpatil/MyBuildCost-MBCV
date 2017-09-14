@@ -4,11 +4,11 @@ import ProjectAsset = require('../../shared/projectasset');
 import RecruiterRepository = require('../../dataaccess/repository/recruiter.repository');
 import CandidateModel = require('../../dataaccess/model/candidate.model');
 import JobProfileService = require('../../services/jobprofile.service');
-import {Actions, ConstVariables} from "../../shared/sharedconstants";
-import {ProfileComparisonDataModel, SkillStatus} from "../../dataaccess/model/profile-comparison-data.model";
-import {CapabilityMatrixModel} from "../../dataaccess/model/capability-matrix.model";
-import {ProfileComparisonModel} from "../../dataaccess/model/profile-comparison.model";
-import {ProfileComparisonJobModel} from "../../dataaccess/model/profile-comparison-job.model";
+import { Actions, ConstVariables } from '../../shared/sharedconstants';
+import { ProfileComparisonDataModel, SkillStatus } from '../../dataaccess/model/profile-comparison-data.model';
+import { CapabilityMatrixModel } from '../../dataaccess/model/capability-matrix.model';
+import { ProfileComparisonModel } from '../../dataaccess/model/profile-comparison.model';
+import { ProfileComparisonJobModel } from '../../dataaccess/model/profile-comparison-job.model';
 import MatchViewModel = require('../../dataaccess/model/match-view.model');
 import Match = require('../../dataaccess/model/match-enum');
 import IndustryRepository = require('../../dataaccess/repository/industry.repository');
@@ -297,7 +297,6 @@ class SearchService {
   }
 
   buildCandidateModel(candidate: CandidateModel) {
-    console.log('--------------------------candidate-------------------------------------------', candidate);
     let profileComparisonResult: ProfileComparisonDataModel = new ProfileComparisonDataModel();
     profileComparisonResult._id = candidate._id;
     profileComparisonResult.industryName = candidate.industry.name;
@@ -342,19 +341,20 @@ class SearchService {
     var qestionCountForAvgPercentsge:number = 0;
     for (let cap in job.capability_matrix) {
 
-      var capabilityKey = cap.split("_");
+      var capabilityKey = cap.split('_');
       if (capabilityKeys.indexOf(capabilityKey[0]) == -1) {
         capabilityKeys.push(capabilityKey[0]);
       }
     }
     //for(let _cap in capbilityKeys) {
     for (let _cap of capabilityKeys) {
+      let isCapabilityFound : boolean = false;
       var capabilityQuestionCount:number = 0;
       var matchCount:number = 0;
       for (let cap in job.capability_matrix) {
         //calculate total number of questions in capability
 
-        if (_cap == cap.split("_")[0]) {
+        if (_cap == cap.split('_')[0]) {
           if (job.capability_matrix[cap] == -1 || job.capability_matrix[cap] == 0 || job.capability_matrix[cap] == undefined) {
             //match_view.match = Match.MissMatch;
           } else if (job.capability_matrix[cap] == newCandidate.capability_matrix[cap]) {
@@ -386,6 +386,7 @@ class SearchService {
       for (let role of industries[0].roles) {
         for (let capability of role.capabilities) {
           if (_cap == capability.code) {
+            isCapabilityFound=true;
             capName = capability.name;
             complexity = capability.complexities;
             break;
@@ -393,6 +394,7 @@ class SearchService {
         }
         for (let capability of role.default_complexities) {
           if (_cap == capability.code) {
+            isCapabilityFound=true;
             capName = capability.name;
             complexity = capability.complexities;
             break;
@@ -408,7 +410,9 @@ class SearchService {
       capabilityModel.capabilityPercentage = percentage;
       capabilityModel.complexities = complexity;
       capabilityPercentage.push(percentage);
-      newCandidate['capabilityMap'][_cap] = capabilityModel;
+      if(isCapabilityFound){
+        newCandidate['capabilityMap'][_cap] = capabilityModel;
+      }
       //}
     }
     var avgPercentage:number = 0;
@@ -424,7 +428,7 @@ class SearchService {
     for (let cap in newCandidate.capability_matrix) {
         let isFound: boolean= false;
         for(let jobCap in job.capability_matrix) {
-            if(cap.substr(0,cap.indexOf('_')) === jobCap.substr(0,jobCap.indexOf('_'))){
+            if(cap.substr(0,cap.indexOf('_')) === jobCap.substr(0,jobCap.indexOf('_'))) {
               isFound=true;
               break;
             }

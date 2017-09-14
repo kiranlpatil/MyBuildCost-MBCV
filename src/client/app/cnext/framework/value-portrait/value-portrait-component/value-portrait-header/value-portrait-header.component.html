@@ -1,41 +1,70 @@
 <header>
-
-
-  <div class="col-xs-12 no-padding value-portraot-candidate-profile-section">
-    <div class="col-xs-5">
-      <div class="value-portraot-candidate-profile-img">
+  <div class="col-xs-12 no-padding value-portrait-candidate-profile-section">
+    <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12 padding-0">
+      <div class="value-portrait-candidate-profile-img">
         <img [src]="getImagePath(candidate.personalDetails.picture)" alt="User Profile"
              *ngIf="candidate.personalDetails.picture != undefined"/>
         <img *ngIf="candidate.personalDetails.picture == undefined"
              src="assets/framework/images/dashboard/default-profile.png" height="160" width="160"/>
       </div>
-      <div class="value-portraot-candidate-name"
+      <div class="value-portrait-candidate-name"
            title="Name: {{candidate.personalDetails.first_name}} {{candidate.personalDetails.last_name}}">
         {{candidate.personalDetails.first_name}} {{candidate.personalDetails.last_name}}
       </div>
-      <div class="value-portraot-candidate-job-title" title="Job Title: {{candidate.jobTitle}}">
+      <div class="value-portrait-candidate-job-title" title="Job Title: {{candidate.jobTitle}}">
         {{candidate.jobTitle}}
       </div>
-    </div>
-    <div class="col-xs-7">
-      <div class="col-xs-4 padding-left-0">
-        <div class="value-portraot-candidate-number">
+      <div class="value-portrait-candidate-job-title hidden-lg hidden-md hidden-sm visible-xs"
+           title="Job Title: {{candidate.jobTitle}}">
+        <div class="value-portrait-candidate-number">
           <span class="phone-icon"></span>
-          <span title="Mobile number: {{candidate.personalDetails.mobile_number}}">+91 {{candidate.personalDetails.mobile_number}}</span>
+          <span title="Mobile number: {{candidate.personalDetails.mobile_number}}">
+            <a href="tel:{{candidate.personalDetails.mobile_number}}">
+              +91 {{candidate.personalDetails.mobile_number}}
+            </a>
+          </span>
         </div>
-        <div class="value-portraot-candidate-industry">
+      </div>
+      <div class="value-portrait-candidate-job-title hidden-lg hidden-md hidden-sm visible-xs"
+           title="Job Title: {{candidate.jobTitle}}">
+        <div class="value-portrait-candidate-email">
+          <span class="email-icon"></span>
+          <span title="Email: {{candidate.personalDetails.email}}">
+            <a href="mailto:{{candidate.personalDetails.email}}">
+              {{candidate.personalDetails.email}}
+            </a>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div
+      class="col-lg-7 col-md-7 col-sm-8 col-xs-12 value-portrait-user-info visible-lg visible-md hidden-sm hidden-xs">
+      <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 padding-left-0 ">
+        <div class="value-portrait-candidate-number visible-lg visible-md visible-sm visible-xs">
+          <span class="phone-icon"></span>
+          <span title="Mobile number: {{candidate.personalDetails.mobile_number}}">
+            <a href="tel:{{candidate.personalDetails.mobile_number}}">
+              +91 {{candidate.personalDetails.mobile_number}}
+            </a>
+          </span>
+        </div>
+        <div class="value-portrait-candidate-industry visible-lg visible-md hidden-sm hidden-xs">
           <span class="industry-icon"></span>
           <label> Industry: </label>
           <span title="Industry: {{candidate.industry.name}}">{{candidate.industry.name}}</span>
         </div>
       </div>
       <div class="col-xs-8 no-padding">
-        <div class="value-portraot-candidate-email">
+        <div class="value-portrait-candidate-email visible-lg visible-md visible-sm visible-xs">
           <span class="email-icon"></span>
-          <span title="Email: {{candidate.personalDetails.email}}">{{candidate.personalDetails.email}}</span>
+          <span title="Email: {{candidate.personalDetails.email}}">
+            <a href="mailto:{{candidate.personalDetails.email}}">
+              {{candidate.personalDetails.email}}
+            </a>
+          </span>
         </div>
 
-        <div class="value-portraot-candidate-area-work">
+        <div class="value-portrait-candidate-area-work visible-lg visible-md hidden-sm hidden-xs">
           <span class="area-work-icon"></span>
           <label> Area of Work: </label>
           <span>
@@ -44,6 +73,21 @@
             </b>
           </span>
         </div>
+      </div>
+    </div>
+
+    <div class="col-xs-12 no-padding border-top hidden-lg hidden-md visible-sm visible-xs">
+      <div class="value-portrait-candidate-industry">
+        <label> Industry: </label>
+        <span title="Industry: {{candidate.industry.name}}">{{candidate.industry.name}}</span>
+      </div>
+      <div class="value-portrait-candidate-area-work">
+        <label> Area of Work: </label>
+        <span>
+          <b *ngFor="let role of candidate.industry.roles;let i=index">
+            {{role.name}}<small *ngIf="candidate.industry.roles.length -1 != i">,</small>
+          </b>
+        </span>
       </div>
     </div>
   </div>

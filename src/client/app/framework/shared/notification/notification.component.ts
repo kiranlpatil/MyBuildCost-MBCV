@@ -2,11 +2,11 @@ import {Component, OnInit} from "@angular/core";
 import {Router} from "@angular/router";
 import {NotificationService} from "./notification.service";
 import {Notification} from "./notification";
-import {CommonService, Message, MessageService} from "../../shared/index";
+import {CommonService, Message, MessageService} from "../../../shared/index";
 import {Subscription} from "rxjs/Subscription";
-import {LocalStorage, NavigationRoutes} from "../../shared/constants";
-import {LocalStorageService} from "../../shared/localstorage.service";
-import {LoaderService} from "../loader/loader.service";
+import {LocalStorage, NavigationRoutes} from "../../../shared/constants";
+import {LocalStorageService} from "../../../shared/services/localstorage.service";
+import {LoaderService} from "../../../shared/loader/loaders.service";
 
 @Component({
   moduleId: module.id,

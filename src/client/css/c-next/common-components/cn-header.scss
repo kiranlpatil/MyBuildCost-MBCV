@@ -1,7 +1,7 @@
 @import '../../../css/variables';
 
-$shadow-color: rgba(0, 0, 0, .175);
-$overlay: rgba(0, 0, 0, .4);
+$shadow-color: rgba(0, 0, 0, 0.175);
+$overlay: rgba(0, 0, 0, 0.4);
 
 .page-header {
   border-bottom: 1px solid $black;
@@ -211,6 +211,12 @@ $overlay: rgba(0, 0, 0, .4);
 
 @media only screen and (max-width: 767px) {
   .page-header {
+    padding-top: 0;
+
+    .navbar-fixed-top {
+      position: relative;
+    }
+
     .list-counts > li {
       margin-top: 7px;
       padding-right: 10px;
@@ -229,8 +235,8 @@ $overlay: rgba(0, 0, 0, .4);
       padding: 0 15px 15px 0;
 
       img {
-        margin-top: 2px;
-        width: 50px;
+        margin-top: 10px;
+        width: 40px;
       }
     }
 
@@ -241,7 +247,7 @@ $overlay: rgba(0, 0, 0, .4);
       opacity: 0;
       position: fixed;
       top: 0;
-      transition: .5s ease;
+      transition: 0.5s ease;
       visibility: hidden;
       width: 100%;
       z-index: 999;
@@ -257,7 +263,7 @@ $overlay: rgba(0, 0, 0, .4);
       padding: 0;
       position: fixed;
       top: 0;
-      transition: .5s ease;
+      transition: 0.5s ease;
       width: 0;
       z-index: 1001;
       display: block;

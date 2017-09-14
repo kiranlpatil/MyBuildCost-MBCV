@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, Output} from "@angular/core";
 import {Section} from "../model/candidate";
-import {Messages, Tooltip, ValueConstant} from "../../../framework/shared/constants";
+import {Messages, Tooltip, ValueConstant} from "../../../shared/constants";
 import {ProficiencyDetailsService} from "../proficiency-detail-service";
 import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
 import {ErrorService} from "../error.service";

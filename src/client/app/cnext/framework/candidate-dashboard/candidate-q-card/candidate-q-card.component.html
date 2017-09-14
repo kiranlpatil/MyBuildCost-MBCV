@@ -32,7 +32,7 @@
         </div>
       </div>
       <div class="company-date" title="Job Posting Date : {{job.postingDate| date:'mediumDate'}}">
-        <span class="visible-xs">Job Posting Date</span>{{job.postingDate| date:'mediumDate'}}
+        {{job.postingDate| date:'mediumDate'}}
       </div>
       <div class="col-md-4 col-sm-5 col-xs-5 no-padding canvas-cricle"
            title="Matching Percentage : {{job.above_one_step_matching+job.exact_matching | number : '1.0-0'}}%">

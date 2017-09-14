@@ -1,14 +1,14 @@
 import {Component, OnInit} from "@angular/core";
 import {Router} from "@angular/router";
 import {FormBuilder, FormGroup} from "@angular/forms";
-import {ImagePath, LocalStorage, Messages, NavigationRoutes, ProjectAsset} from "../../shared/constants";
-import {ValidationService} from "../../shared/customvalidations/validation.service";
+import {ImagePath, LocalStorage, Messages, NavigationRoutes, ProjectAsset} from "../../../shared/constants";
+import {ValidationService} from "../../../shared/customvalidations/validation.service";
 import {VerifyUser} from "./verify_user";
 import {VerifyUserService} from "./verify-user.service";
-import {LocalStorageService} from "../../shared/localstorage.service";
-import {Message} from "../../shared/message";
-import {MessageService} from "../../shared/message.service";
-import {LoaderService} from "../../shared/loader/loader.service";
+import {LocalStorageService} from "../../../shared/services/localstorage.service";
+import {Message} from "../../../shared/models/message";
+import {MessageService} from "../../../shared/services/message.service";
+import {LoaderService} from "../../../shared/loader/loaders.service";
 
 @Component({
   moduleId: module.id,

@@ -1,18 +1,18 @@
 import * as nodemailer from "nodemailer";
 import Messages=require("../shared/messages");
 var config = require('config');
-var smtpTransport = nodemailer.createTransport({
-  service:"Zoho",
-
-  auth: {
-    user: config.get('TplSeed.mail.MAIL_SENDER'),
-    pass: config.get('TplSeed.mail.MAIL_SENDER_PASSWORD')
-  }
-});
 
 class SendMailService {
 
   sendMail(mailOptions: any, callback: any) {
+    let smtpTransport = nodemailer.createTransport({
+      service:config.get('TplSeed.mail.MAIL_SERVICE'),
+
+      auth: {
+        user: config.get('TplSeed.mail.MAIL_SENDER'),
+        pass: config.get('TplSeed.mail.MAIL_SENDER_PASSWORD')
+      }
+    });
 
     smtpTransport.sendMail(mailOptions, function (error: any, response: any) {
       if (error) {

@@ -12,6 +12,12 @@ let importIndustriesService = new ImportIndustryService();
 
 export function readXlsx(req: express.Request, res: express.Response) {
   var filepath = './src/server/app/framework/public/config/NewIndustryDataExcel.xlsx';
+  var isFileExist=fs.existsSync(filepath);
+  if(!isFileExist) {
+    res.send({
+      'error': Messages.MSG_ERROR_INCORRECT_INDUSTRY_NAME
+    });
+  } else {
   importIndustriesService.readXlsx(filepath, (error, result) => {
     if (error) {
       console.log('crt role error', error);
@@ -41,4 +47,5 @@ export function readXlsx(req: express.Request, res: express.Response) {
       });
     }
   });
+  }
 }

@@ -3,15 +3,15 @@
 .filter-container {
   padding: 0;
   position: fixed;
-  top: 127px;
+  top: 94px;
   right: 0;
-  height: calc(100vh - 150px);
+  height: calc(100vh - 115px);
   overflow: auto;
-  border-left: 1px solid #ccc;
+  border-left: 1px solid $gray;
   text-align: left;
   width: 200px;
-  background: #edf1f5;
-  z-index: 998;
+  background: $filter-bg;
+  z-index: 1000;
 
   p {
     color: $text-color;
@@ -20,11 +20,11 @@
   h4 {
     margin: 0;
     color: $name;
-    padding: 55px 15px 15px;
+    padding: 15px;
     font-size: 13px;
     font-family: 'gothamrnd-book';
     position: fixed;
-    top: 43px;
+    top: 50px;
     right: 0;
     background-color: $filter-bg;
     width: 200px;
@@ -46,7 +46,7 @@
     }
 
     label {
-      color: #999;
+      color: $text-color4;
       font-size: 12px;
       margin: 0;
       width: 100%;
@@ -113,30 +113,38 @@
 }
 
 @media only screen and (max-width: 767px) {
+  .filter-bg {
+    background: $modal-bg;
+    height: 100%;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 99;
+    animation: fadein 0.5s;
+  }
+
   .filter-container {
     border-left: 0;
     box-shadow: none;
     left: 0;
     right: inherit;
-    top: 162px;
+    top: 128px;
     border-right: 1px solid $filter-border;
     width: 0;
-    transition: .5s ease;
+    transition: 0.5s ease;
     visibility: hidden;
-    opacity: 0;
-    height: calc(100vh - 185px);
+    opacity: 1;
+    height: calc(100vh - 148px);
 
     h4 {
-      left: 0;
+      left: 30px;
       right: inherit;
       padding: 10px;
-      top: 128px;
+      top: 90px;
       border-left: 0;
-      border-right: 1px solid $filter-border;
-      width: 0;
-      transition: .5s ease;
-      visibility: hidden;
-      opacity: 0;
+      background-color: transparent;
+      width: 80px;
     }
 
     p {
@@ -148,15 +156,15 @@
     }
 
     .inner {
-      padding: 0 10px;
+      padding: 10px;
       border: 0;
       background: transparent;
       box-shadow: none;
+      width: 200px;
     }
   }
 
   .open-filter {
-    opacity: 1 !important;
     visibility: visible !important;
     width: 200px !important;
   }
@@ -164,7 +172,7 @@
   .glyphicon-filter {
     position: fixed;
     top: 100px;
-    left: 9px;
+    right: 9px;
     font-size: 17px;
     z-index: 1000;
     color: $filter-icon;
