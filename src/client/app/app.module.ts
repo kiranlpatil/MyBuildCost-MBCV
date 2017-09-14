@@ -172,7 +172,6 @@ import {IndustryDetailsService} from "./cnext/framework/industry-detail-service"
 import {IndustryDetailsDirective} from "./cnext/framework/shared-directives/industry-details.directive";
 import {IndustryDataDirective} from "./cnext/framework/shared-directives/industry-data.directive";
 import {IndustryDataService} from "./cnext/framework/industry-data-service";
-
 import {ProfileComparisonComponent} from "./cnext/framework/profile-comparison/profile-comparison.component";
 import {ProfileComparisonService} from "./cnext/framework/profile-comparison/profile-comparison.service";
 import {ProfileComparisonHeaderComponent} from "./cnext/framework/profile-comparison/profile-comparison-header/profile-comparison-header.component";
@@ -194,12 +193,12 @@ import {RecruiterDetailListComponent} from "./cnext/framework/admin-dashboard/re
 import {CandidateDetailListComponent} from "./cnext/framework/admin-dashboard/candidate-detail-list/candidate-detail-list.component";
 import {KeyskillsDetailListComponent} from "./cnext/framework/admin-dashboard/keyskills-detail-list/keyskills-detail-list.component";
 import {AdminDashboardService} from "./cnext/framework/admin-dashboard/admin-dashboard.service";
-
 import {SharedService} from "./framework/shared/shared-service";
 import {CandidateSearchComponent} from "./cnext/framework/candidate-search/candidate-search.component";
 import {CandidateSearchService} from "./cnext/framework/candidate-search/candidate-search.service";
-import { CeiboShare } from 'ng2-social-share';
+import {CeiboShare} from "ng2-social-share";
 import {ShareComponent} from "./cnext/framework/share/share.component";
+import {ShareService} from "./cnext/framework/share/share.service";
 
 //C-NEXT IMPORTS
 
@@ -424,7 +423,8 @@ import {ShareComponent} from "./cnext/framework/share/share.component";
     ProfileComparisonService,
     GuidedTourService,
     CandidateSearchService,
-    SharedService
+    SharedService,
+    ShareService
 
   ],
   bootstrap: [AppComponent]

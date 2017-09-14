@@ -1,20 +1,30 @@
 import {Component} from "@angular/core";
-import {CeiboShare} from "ng2-social-share/src/ng2-social-share";
+import {ShareService} from "./share.service";
 
 @Component({
-  moduleId:module.id,
+  moduleId: module.id,
   selector: 'cn-share',
   templateUrl: 'share.component.html',
   styleUrls: ['share.component.css'],
-  directives: [CeiboShare]
 })
 
 export class ShareComponent {
 
   public repoUrl = 'https://github.com/Epotignano/ng2-social-share';
 
-  constructor() {
+  constructor(private shareService:ShareService) {
+  }
 
+  buildValuePortraitUrl() {
+    this.shareService.buildValuePortraitUrl()
+      .subscribe(
+        user=> {
+          console.log('------', user);
+        },
+        error=> {
+          console.log('------', error);
+        }
+      );
   }
 
 }
