@@ -1,20 +1,20 @@
 import {Component} from "@angular/core";
 import {Router} from "@angular/router";
-import {ForgotPassword} from "./forgotpassword";
+import {ForgotPassword} from "../models/forgotpassword";
 import {ForgotPasswordService} from "./forgot-password.service";
-import {CommonService, Message, Messages, MessageService, NavigationRoutes} from "../../../shared/index";
+import {Message, Messages, MessageService, NavigationRoutes} from "../../shared/index";
 import {FormBuilder, FormGroup} from "@angular/forms";
-import {ValidationService} from "../../../shared/customvalidations/validation.service";
-import {ImagePath, ProjectAsset} from "../../../shared/constants";
-import {LoaderService} from "../../../shared/loader/loaders.service";
+import {ValidationService} from "../../shared/customvalidations/validation.service";
+import {ImagePath, ProjectAsset} from "../../shared/constants";
 
 
 @Component({
   moduleId: module.id,
-  selector: 'tpl-forgotpassword',
+  selector: 'forgot-password',
   templateUrl: 'forgot-password.component.html',
   styleUrls: ['forgot-password.component.css'],
 })
+
 export class ForgotPasswordComponent {
   model = new ForgotPassword();
   userForm: FormGroup;
@@ -26,14 +26,14 @@ export class ForgotPasswordComponent {
   EMAIL_ICON: string;
   BODY_BACKGROUND: string;
   forgotPasswordButtonLabel: string;
-  forgotPasswordMessage:string= Messages.MSG_FORGOT_PASSWORD;
+  forgotPasswordMessage: string = Messages.MSG_FORGOT_PASSWORD;
   private submitStatus: boolean;
   private isShowLoader: boolean = false;
 
 
-  constructor(private commonService: CommonService, private _router: Router,
+  constructor(private _router: Router,
               private forgotPasswordService: ForgotPasswordService, private messageService: MessageService,
-              private formBuilder: FormBuilder, private loaderService: LoaderService) {
+              private formBuilder: FormBuilder) {
     this.userForm = this.formBuilder.group({
       'email': ['', [ValidationService.requireEmailValidator, ValidationService.emailValidator]]
     });
@@ -48,11 +48,11 @@ export class ForgotPasswordComponent {
 
   onSubmit() {
     this.model = this.userForm.value;
-    if(this.model.email == '') {
+    if (this.model.email == '') {
       this.submitStatus = true;
       return;
     }
-    if(!this.userForm.valid) {
+    if (!this.userForm.valid) {
       this.submitStatus = true;
       return;
     }
@@ -97,7 +97,6 @@ export class ForgotPasswordComponent {
   }
 
   goBack() {
-    //this.commonService.goBack();
     this._router.navigate([NavigationRoutes.APP_LOGIN]);
   }
 

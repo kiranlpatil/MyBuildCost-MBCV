@@ -10,7 +10,6 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {AppRequestOptions, LoaderService, MessageService} from "./shared/index";
 import {DashboardComponent} from "./framework/dashboard/dashboard.component";
 import {ChangePasswordComponent} from "./framework/password/change-password/change-password.component";
-import {ForgotPasswordComponent} from "./framework/password/forgot-password/forgot-password.component";
 import {DashboardProfileComponent} from "./framework/dashboard/dashboard-profile/dashboard-profile.component";
 import {AboutComponent} from "./framework/dashboard/about/about.component";
 import {ContactComponent} from "./framework/dashboard/contact/contact.component";
@@ -21,14 +20,11 @@ import {HeaderComponent} from "./framework/shared/header/header.component";
 import {ChangePasswordService} from "./framework/password/change-password/change-password.service";
 import {NotificationService} from "./framework/shared/notification/notification.service";
 import {NotificationComponent} from "./framework/shared/notification/notification.component";
-import {ForgotPasswordService} from "./framework/password/forgot-password/forgot-password.service";
 import {SocialIconComponent} from "./framework/shared/footer/social-icon/social-icon.component";
 import {DashboardService} from "./framework/dashboard/dashboard.service";
 import {ContactService} from "./framework/dashboard/contact/contact.service";
 import {ActivateUserComponent} from "./framework/registration/activate-user/activate-user.component";
-import {ResetPasswordComponent} from "./framework/password/forgot-password/reset-password/reset-password.component";
 import {ActiveUserService} from "./framework/registration/activate-user/activate-user.service";
-import {ResetPasswordService} from "./framework/password/forgot-password/reset-password/reset-password.service";
 import {VerifyUserComponent} from "./framework/registration/verify_user/verify-user.component";
 import {VerifyUserService} from "./framework/registration/verify_user/verify-user.service";
 import {VerifyPhoneComponent} from "./framework/registration/verify_phone/verify-phone.component";
@@ -182,7 +178,7 @@ import {KeyskillsDetailListComponent} from "./cnext/framework/admin-dashboard/ke
 import {AdminDashboardService} from "./cnext/framework/admin-dashboard/admin-dashboard.service";
 import {CandidateSearchComponent} from "./cnext/framework/candidate-search/candidate-search.component";
 import {CandidateSearchService} from "./cnext/framework/candidate-search/candidate-search.service";
-import {user} from "./authentication/user.module";
+import {user} from "./user/user.module";
 import {SharedModule} from "./shared/shared.module";
 import {CustomHttp} from "./shared/services/httpservices/custom.http";
 import {ProfilePictureComponent} from "./cnext/framework/profile-picture/profile-picture.component";
@@ -219,8 +215,6 @@ import {LandingPageComponent} from "./framework/landing-page/landing-page.compon
     ChangePasswordComponent,
     ChangeEmailComponent,
     ChangeMobileComponent,
-    ForgotPasswordComponent,
-    ResetPasswordComponent,
     DashboardProfileComponent,
     AboutComponent,
     ContactComponent,
@@ -346,14 +340,12 @@ import {LandingPageComponent} from "./framework/landing-page/landing-page.compon
     ChangeEmailService,
     ChangeMobileService,
     NotificationService,
-    ForgotPasswordService,
     CandidateService,
     RecruiterService,
     DashboardService,
     ProfileService,
     ContactService,
     CandidateCompareService,
-    ResetPasswordService,
     ActiveUserService,
     ActiveEmailService,
     VerifyUserService,

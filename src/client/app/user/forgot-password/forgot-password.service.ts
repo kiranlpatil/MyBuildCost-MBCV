@@ -1,10 +1,10 @@
 import {Injectable} from "@angular/core";
 import {Observable} from "rxjs/Observable";
-import {ForgotPassword} from "./forgotpassword";
-import {API, BaseService} from "../../../shared/index";
+import {ForgotPassword} from "../models/forgotpassword";
+import {API, BaseService} from "../../shared/index";
 import {Headers, Http, RequestOptions} from "@angular/http";
-@Injectable()
 
+@Injectable()
 export class ForgotPasswordService extends BaseService {
   constructor(private http: Http) {
     super();
