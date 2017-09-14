@@ -2,22 +2,28 @@ import express= require('express');
 import ShareService = require('../services/share.service');
 import AuthInterceptor = require('../../interceptor/auth.interceptor');
 import config = require('config');
-import UserModel = require('../../dataaccess/model/user.model');
 
 class ShareController {
 
   buildValuePortraitUrl(req:express.Request, res:express.Response) {
     try {
-      var user:UserModel = req.user;
+      var user:any = req.user;
       var _host = config.get('TplSeed.mail.host');
       var shareService:ShareService = new ShareService();
       var auth:AuthInterceptor = new AuthInterceptor();
       var _token = auth.issueTokenWithUidForShare(user);
-      shareService.buildValuePortraitUrl(_host, _token, user, (error, result)=> {
-        if (error) {
-          res.status(304).send(error);
+      var query = {'userId': user._id};
+      shareService.retrieve(query, (err, response) => {
+        if (err) {
+          res.status(304).send(err);
         } else {
-          res.status(200).send(result);
+          shareService.buildValuePortraitUrl(_host, _token, user, response, (error, result)=> {
+            if (error) {
+              res.status(304).send(error);
+            } else {
+              res.status(200).send(result);
+            }
+          });
         }
       });
 

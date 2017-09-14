@@ -31,7 +31,7 @@ export function cnextInit(app: express.Application) { //todo add interceptor to 
   app.get('/api/industry/:id/role', this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, roleController.retrieve);
   app.post('/api/candidate', this.authInterceptor.requiresAuth, userInterceptor.create, this.authInterceptor.secureApiCheck, candidateController.create);
   app.put('/api/candidate/:id', this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, candidateController.updateDetails);
-  app.get('/api/candidate/:id', this.authInterceptor.requiresAuth, candidateController.retrieve);
+  app.get('/api/candidate/:id', this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, candidateController.retrieve);
   app.get('/api/industry/:id/roles/capability', this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, capabilityController.retrieve);
   app.get('/api/industry/:id/roles/capability/complexity', this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, complexityController.retrieve);
   app.get('/api/companysize', userController.getCompanySize);
@@ -44,7 +44,7 @@ export function cnextInit(app: express.Application) { //todo add interceptor to 
   app.get('/api/recruiter/jobProfile/:id', this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, jobProfileController.retrieve);
   app.get('/api/candidate/:id/jobProfile', this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, searchController.getMatchingJobProfiles);
   app.get('/api/candidate/:id/:candidateId', this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, candidateController.retrieve);
-  app.get('/api/candidateDetails/:id', this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, candidateController.get);
+  app.get('/api/candidateDetails/:id', this.authInterceptor.requiresAuth, candidateController.get);
   app.get('/api/candidate/:candidateId/matchresult/:jobId', this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, candidateController.metchResult);
   app.get('/api/recruiter/jobProfile/:jobId/matchresult/:candidateId', this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, jobProfileController.metchResultForJob);
   app.get('/api/candidate/:id/list/:listName', this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, candidateController.getList);

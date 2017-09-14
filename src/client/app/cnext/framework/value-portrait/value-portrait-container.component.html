@@ -1,5 +1,6 @@
 
 <div class="value-portraot-section">
+  <cn-share></cn-share>
   <div class="top-header">
     <div class="col-xs-5 no-padding">
       <h1>
@@ -7,16 +8,21 @@
         <span> Experience is what it's all about</span>
       </h1>
     </div>
-    <div class="col-xs-7 no-padding">
+    <div *ngIf="!isShareView" class="col-xs-7 no-padding">
       <div class="job-mosis-white-logo" (click)="navigateTo();">
         <img src="/assets/c-next/header/job-mosis-logo-white.png"/>
       </div>
     </div>
   </div>
-  <div class="value-portraot-container">
+  <div *ngIf="!isShareView" class="value-portraot-container">
     <cn-value-portrait [userId]="_userId"></cn-value-portrait>
     <!--<cn-value-portrait-header ></cn-value-portrait-header>
     <cn-candidate-capability-portrait ></cn-candidate-capability-portrait>-->
 
+  </div>
+  <div *ngIf="isShareView" class="value-portraot-container">
+    <cn-value-portrait [userId]="_userId"></cn-value-portrait>
+    <!--<cn-value-portrait-header ></cn-value-portrait-header>
+    <cn-candidate-capability-portrait ></cn-candidate-capability-portrait>-->
   </div>
 </div>
