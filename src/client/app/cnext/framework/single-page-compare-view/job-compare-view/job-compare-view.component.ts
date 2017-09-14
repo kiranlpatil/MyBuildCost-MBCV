@@ -1,15 +1,15 @@
-import {Component, EventEmitter, Input, OnChanges, Output, OnInit} from "@angular/core";
-import {JobCompareService} from "./job-compare-view.service";
-import {Capability} from "../../model/capability";
-import {Candidate} from "../../model/candidate";
-import {CandidateDetail} from "../../../../framework/registration/candidate/candidate";
-import {CandidateProfileService} from "../../candidate-profile/candidate-profile.service";
-import {RecruiterDashboardService} from "../../recruiter-dashboard/recruiter-dashboard.service";
-import {Recruiter} from "../../../../framework/registration/recruiter/recruiter";
-import {AppSettings, ImagePath, LocalStorage} from "../../../../shared/constants";
-import {GuidedTourService} from "../../guided-tour.service";
-import {LocalStorageService} from "../../../../shared/services/localstorage.service";
-import {ErrorService} from "../../error.service";
+import {Component, EventEmitter, Input, OnChanges, Output, OnInit} from '@angular/core';
+import {JobCompareService} from './job-compare-view.service';
+import {Capability} from '../../model/capability';
+import {Candidate} from '../../model/candidate';
+import {CandidateDetail} from '../../../../framework/registration/candidate/candidate';
+import {CandidateProfileService} from '../../candidate-profile/candidate-profile.service';
+import {RecruiterDashboardService} from '../../recruiter-dashboard/recruiter-dashboard.service';
+import {Recruiter} from '../../../../framework/registration/recruiter/recruiter';
+import {AppSettings, ImagePath, LocalStorage} from '../../../../shared/constants';
+import {GuidedTourService} from '../../guided-tour.service';
+import {LocalStorageService} from '../../../../shared/services/localstorage.service';
+import {ErrorService} from '../../error.service';
 
 @Component({
   moduleId: module.id,
@@ -24,7 +24,7 @@ export class JobCompareViewComponent implements OnChanges,OnInit {
   capabilities: Capability[];
   candidate : Candidate= new Candidate();
   candidateDetails : CandidateDetail = new CandidateDetail();
-  private isCandidateHaveExtraKeySkill: boolean
+  private isCandidateHaveExtraKeySkill: boolean=false;
   @Input() typeOfView : string ='compact';
   @Output() close : EventEmitter<boolean> = new EventEmitter();
   private recruiterId: string;
