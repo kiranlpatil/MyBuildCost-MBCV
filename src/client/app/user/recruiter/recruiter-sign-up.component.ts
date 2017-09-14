@@ -1,26 +1,26 @@
 import {Component, OnInit, ViewChild, ElementRef} from "@angular/core";
 import {Router} from "@angular/router";
-import {RecruiterService} from "./recruiter.service";
-import {Recruiter} from "./recruiter";
+import {RecruiterSignUpService} from "./recruiter-sign-up.service";
+import {Recruiter} from "../models/recruiter";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {ValidationService} from "../../../shared/customvalidations/validation.service";
-import {AppSettings, CommonService, Message, MessageService, NavigationRoutes} from "../../../shared/index";
-import {ImagePath, LocalStorage, Messages} from "../../../shared/constants";
-import {LocalStorageService} from "../../../shared/services/localstorage.service";
+import {ValidationService} from "../../shared/customvalidations/validation.service";
+import {AppSettings, CommonService, Message, MessageService, NavigationRoutes} from "../../shared/index";
+import {ImagePath, LocalStorage, Messages} from "../../shared/constants";
+import {LocalStorageService} from "../../shared/services/localstorage.service";
 import {Headers, Http, RequestOptions, Response} from "@angular/http";
-import {Location} from "../../../user/models/location";
-import {MyGoogleAddress} from "../../../shared/models/my-google-address";
-import {SharedService} from "../../../shared/services/shared-service";
+import {Location} from "../../user/models/location";
+import {MyGoogleAddress} from "../../shared/models/my-google-address";
+import {SharedService} from "../../shared/services/shared-service";
 
 
 @Component({
   moduleId: module.id,
   selector: 'cn-recruiter-registration',
-  templateUrl: 'recruiter.component.html',
-  styleUrls: ['recruiter.component.css'],
+  templateUrl: 'recruiter-sign-up.component.html',
+  styleUrls: ['recruiter-sign-up.component.css'],
 })
 
-export class RecruiterComponent implements OnInit {
+export class RecruiterSignUpComponent implements OnInit {
 
   @ViewChild('toaster') toaster: ElementRef;
   private model = new Recruiter();
@@ -55,7 +55,7 @@ export class RecruiterComponent implements OnInit {
   private isToasterVisible: boolean = true;
 
   constructor(private commonService: CommonService, private _router: Router, private http: Http,
-              private recruiterService: RecruiterService, private messageService: MessageService,
+              private recruiterService: RecruiterSignUpService, private messageService: MessageService,
               private formBuilder: FormBuilder, private sharedService: SharedService) {
 
 
@@ -68,7 +68,6 @@ export class RecruiterComponent implements OnInit {
       'confirm_password': ['', [ValidationService.requireConfirmPasswordValidator]],
       'location': ['', Validators.required],
       'company_headquarter_country': [''],
-      //'captcha': ['', Validators.required]
 
     });
     this.BODY_BACKGROUND = ImagePath.BODY_BACKGROUND;
@@ -79,9 +78,10 @@ export class RecruiterComponent implements OnInit {
 
   ngOnInit() {
     let val = LocalStorageService.getLocalValue(LocalStorage.AFTER_RECRUITER_REGISTRATION_FORM);
-    if(val!==null) {
-      if(val =="true") {
-      this._router.navigate([NavigationRoutes.VERIFY_USER]);}
+    if (val !== null) {
+      if (val == "true") {
+        this._router.navigate([NavigationRoutes.VERIFY_USER]);
+      }
     }
     this.model = this.recruiterForm.value;
     this.mainHeaderMenuHideShow = 'recruiter';
@@ -191,7 +191,6 @@ export class RecruiterComponent implements OnInit {
     }
 
     if (!this.recruiterForm.valid) {
-      //this.submitStatus = true;
       return
     }
 

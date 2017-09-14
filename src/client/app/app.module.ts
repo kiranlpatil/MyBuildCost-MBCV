@@ -32,8 +32,7 @@ import {ActiveEmailService} from "./framework/dashboard/settings/activate-email/
 import {ChangeMobileComponent} from "./framework/dashboard/settings/change-mobile/change-mobile.component";
 import {ChangeMobileService} from "./framework/dashboard/settings/change-mobile/change-mobile.service";
 import {Ng2AutoCompleteModule} from "ng2-auto-complete/dist/ng2-auto-complete.module";
-import {RecruiterComponent} from "./framework/registration/recruiter/recruiter.component";
-import {RecruiterService} from "./framework/registration/recruiter/recruiter.service";
+import {RecruiterSignUpService} from "./user/recruiter/recruiter-sign-up.service";
 import {ScrollToModule} from "ng2-scroll-to";
 import {ComplexityService} from "./cnext/framework/complexity.service";
 import {ProfessionalDataComponent} from "./cnext/framework/professional-data/professional-data.component";
@@ -197,7 +196,6 @@ import {LandingPageComponent} from "./framework/landing-page/landing-page.compon
     AppComponent,
     LandingPageComponent,
     TooltipComponent,
-    RecruiterComponent,
     CandidateDashboardHeaderComponent,
     ActivateUserComponent,
     ActivateEmailComponent,
@@ -329,7 +327,6 @@ import {LandingPageComponent} from "./framework/landing-page/landing-page.compon
     ChangeEmailService,
     ChangeMobileService,
     NotificationService,
-    RecruiterService,
     DashboardService,
     ProfileService,
     ContactService,

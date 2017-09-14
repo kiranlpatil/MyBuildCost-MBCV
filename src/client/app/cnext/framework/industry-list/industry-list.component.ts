@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnChanges, Output} from "@angular/core";
-import {Industry} from "../model/industry";
+import {Industry} from "../../../user/models/industry";
 import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
 import {Section} from "../model/candidate";
 import {LocalStorageService} from "../../../shared/services/localstorage.service";

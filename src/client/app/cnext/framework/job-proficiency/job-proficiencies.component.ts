@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
 import {Section} from "../model/candidate";
-import {JobPosterModel} from "../model/jobPoster";
+import {JobPosterModel} from "../../../user/models/jobPoster";
 import {Headings, Messages, Tooltip, ValueConstant} from "../../../shared/constants";
 
 

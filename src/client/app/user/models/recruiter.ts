@@ -1,6 +1,6 @@
-import {Location} from "../../../user/models/location";
-import {CompanyDetails} from "../company_details/company-details";
-import {JobPosterModel} from "../../../cnext/framework/model/jobPoster";
+import {Location} from "./location";
+import {CompanyDetails} from "./company-details";
+import {JobPosterModel} from "./jobPoster";
 
 export class Recruiter {
   id: any;

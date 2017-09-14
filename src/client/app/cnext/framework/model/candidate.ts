@@ -1,4 +1,4 @@
-import {Industry} from "./industry";
+import {Industry} from "../../../user/models/industry";
 import {Award} from "./award";
 import {AcademicDetails} from "./academic-details";
 import {Certifications} from "./certification-accreditation";

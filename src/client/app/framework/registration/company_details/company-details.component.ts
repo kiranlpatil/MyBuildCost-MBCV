@@ -1,6 +1,6 @@
 import {Component, OnInit} from "@angular/core";
 import {CompanyDetailsService} from "./company-details.service";
-import {CompanyDetails} from "./company-details";
+import {CompanyDetails} from "../../../user/models/company-details";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {
   AppSettings,

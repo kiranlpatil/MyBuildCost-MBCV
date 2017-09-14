@@ -5,7 +5,7 @@ import {ComplexityService} from "../complexity.service";
 import {Candidate, Section} from "../model/candidate";
 import {CandidateProfileService} from "./candidate-profile.service";
 import {Role} from "../model/role";
-import {Industry} from "../model/industry";
+import {Industry} from "../../../user/models/industry";
 import {Message} from "../../../shared/models/message";
 import {MessageService} from "../../../shared/services/message.service";
 import {ErrorService} from "../error.service";
