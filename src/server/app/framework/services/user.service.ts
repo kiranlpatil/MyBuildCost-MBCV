@@ -132,7 +132,7 @@ class UserService {
         let  footer1 = fs.readFileSync("./src/server/app/framework/public/footer1.html").toString();
 
         let  auth = new AuthInterceptor();
-        let  token = auth.issueTokenWithUid(field);
+        let  token = auth.issueTokenWithUid(res[0]);
         let host = config.get('TplSeed.mail.host');
         console.log("frgt pwd host", host);
         let link = host + "reset_password?access_token=" + token + "&_id=" + res[0]._id;

@@ -48,6 +48,10 @@ class AuthInterceptor {
           }
           return done(null, user,null);
         });
+      } else {
+        var err = new Error();
+        err.message = 'Issuer in token is not available';
+        return done(err, false, null);
       }
     }));
 
