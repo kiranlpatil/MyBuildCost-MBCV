@@ -2,10 +2,10 @@ import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} f
 import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
 import {Candidate, Section} from "../model/candidate";
 import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {Tooltip, ImagePath, Headings, LocalStorage} from "../../../framework/shared/constants";
+import {Tooltip, ImagePath, Headings, LocalStorage} from "../../../shared/constants";
 import {GuidedTourService} from "../guided-tour.service";
 import {ErrorService} from "../error.service";
-import {LocalStorageService} from "../../../framework/shared/localstorage.service";
+import {LocalStorageService} from "../../../shared/services/localstorage.service";
 
 
 @Component({

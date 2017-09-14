@@ -1,24 +1,24 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from "@angular/core";
 import {
-    AppSettings,
-    CommonService,
-    LocalStorage,
-    LocalStorageService,
-    Message,
-    Messages,
-    MessageService,
-    ThemeChangeService
-} from '../../shared/index';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { SettingsService } from './settings.service';
-import { UserProfile } from './../user';
-import { ProjectAsset, Headings } from '../../shared/constants';
-import { LoaderService } from '../../shared/loader/loader.service';
-import { ActivatedRoute } from '@angular/router';
-import { Candidate, Summary } from '../../../cnext/framework/model/candidate';
-import { CandidateProfileService } from '../../../cnext/framework/candidate-profile/candidate-profile.service';
-import { ErrorService } from '../../../cnext/framework/error.service';
-import { AdminDashboardService } from '../../../cnext/framework/admin-dashboard/admin-dashboard.service';
+  AppSettings,
+  CommonService,
+  LocalStorage,
+  LocalStorageService,
+  Message,
+  Messages,
+  MessageService,
+  ThemeChangeService
+} from "../../../shared/index";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {SettingsService} from "./settings.service";
+import {UserProfile} from "./../user";
+import {ProjectAsset, Headings} from "../../../shared/constants";
+import {LoaderService} from "../../../shared/loader/loaders.service";
+import {ActivatedRoute} from "@angular/router";
+import {Candidate, Summary} from "../../../cnext/framework/model/candidate";
+import {CandidateProfileService} from "../../../cnext/framework/candidate-profile/candidate-profile.service";
+import {ErrorService} from "../../../cnext/framework/error.service";
+import {AdminDashboardService} from "../../../cnext/framework/admin-dashboard/admin-dashboard.service";
 
 @Component({
   moduleId: module.id,

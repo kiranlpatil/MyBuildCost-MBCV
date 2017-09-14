@@ -18,7 +18,7 @@
   .compact-view {
     .option-list {
       position: relative;
-      margin-left: 17px;
+      padding-left: 17px;
       display: block;
       width: 100%;
 
@@ -30,7 +30,7 @@
         height: 5px;
         width: 5px;
         top: 8px;
-        left: -18px;
+        left: 0;
         margin: auto;
         background: $name;
       }

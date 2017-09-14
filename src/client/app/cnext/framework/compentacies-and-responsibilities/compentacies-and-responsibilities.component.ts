@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, Output} from "@angular/core";
 import {Section} from "../model/candidate";
 import {JobPosterModel} from "../model/jobPoster";
-import {Tooltip, Headings} from "../../../framework/shared/constants";
+import {Tooltip, Headings} from "../../../shared/constants";
 
 @Component({
   moduleId: module.id,

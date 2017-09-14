@@ -12,7 +12,7 @@
     border-radius: 0;
     box-shadow: 2px 2px 2px $profile-section-shadow;
     margin: 13px 0;
-    padding: 45px 15px 10px 15px;
+    padding: 45px 15px 10px;
     position: relative;
     cursor: pointer;
 
@@ -33,8 +33,8 @@
       }
 
       .glyphicon {
-        background: #fff;
-        color: #999;
+        background: $white;
+        color: $text-color4;
         cursor: pointer;
         font-size: 12px;
       }
@@ -74,10 +74,6 @@
         position: absolute;
         top: 5px;
       }
-
-      /*&:last-child {
-        border-bottom: 0 solid $border-color;
-      }*/
 
       &:first-child {
         border-top: 1px solid $border-color;
@@ -169,7 +165,7 @@
       width: 100%;
       bottom: 13px;
       left: 0;
-      padding: 5px 5px;
+      padding: 5px;
       display: none;
 
       .btn {
@@ -295,7 +291,7 @@ header {
     .btn-search {
       background: transparent;
       border-radius: 0;
-      color: #fff;
+      color: $white;
       padding: 0;
       margin: -3px 0 0 -37px;
     }
@@ -343,12 +339,6 @@ header {
   }
 }
 
-/*#matched-job {
-  .empty-list-message {
-    margin-top: 120px !important;
-  }
-}
-
 #cart-job {
   .empty-list-message {
     margin-top: 90px !important;
@@ -365,8 +355,7 @@ header {
   .empty-list-message {
     margin-top: 120px !important;
   }
-}*/
-
+}
 
 #matched {
   .card-view {
@@ -377,9 +366,9 @@ header {
 .empty-list-message {
   width: 600px;
   margin: 0 auto;
-  background: #fff;
+  background: $white;
   padding: 20px;
-  border: 1px solid #e8e8e8;
+  border: 1px solid $border-color1;
   box-shadow: -1px 3px 10px rgba(0, 0, 0, 0.15);
   position: fixed;
   left: 50%;
@@ -465,7 +454,6 @@ header {
   width: 30px !important;
   height: 26px;
   position: absolute;
-  /*left: 0;*/
   cursor: pointer;
 }
 
@@ -802,6 +790,7 @@ header {
   .card-view {
     max-height: inherit;
     overflow: auto;
+    margin-bottom: 0;
 
     .col-sm-4 {
       width: 100%;
@@ -815,6 +804,10 @@ header {
         text-overflow: clip;
       }
     }
+
+    .panel-container {
+      padding: 0 5px;
+    }
   }
 
   header {
@@ -822,12 +815,12 @@ header {
       margin: 0 !important;
     }
     .sort-by {
-      margin-left: 0;
-      margin-top: 0;
+      margin: 0 20px 0 0;
     }
 
     .sort-by > select {
       border-bottom: 0;
+      width: 100px;
     }
   }
 
@@ -839,13 +832,17 @@ header {
   #matched {
     .card-view {
       margin-top: 88px;
+      margin-bottom: 0;
     }
   }
 
   .clear-filter {
+    background: transparent;
+    color: $theme-color;
+    left: 0;
+    padding: 7px;
     position: fixed;
-    top: 155px;
-    left: 9px;
+    top: 92px;
   }
 }
 

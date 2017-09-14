@@ -1,9 +1,9 @@
 import {Injectable} from "@angular/core";
 import {Observable} from "rxjs/Observable";
 import {Headers, Http, RequestOptions} from "@angular/http";
-import {API} from "../../../../framework/shared/constants";
-import {BaseService} from "../../../../framework/shared/httpservices/base.service";
-import {LoaderService} from "../../../../framework/shared/loader/loader.service";
+import {API} from "../../../../shared/constants";
+import {BaseService} from "../../../../shared/services/httpservices/base.service";
+import {LoaderService} from "../../../../shared/loader/loaders.service";
 
 @Injectable()
 

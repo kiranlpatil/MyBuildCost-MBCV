@@ -1,5 +1,5 @@
 import {Routes} from "@angular/router";
-import {LoginRoutes} from "./framework/login/index";
+import {LoginRoutes} from "./authentication/login/index";
 import {DashboardRoutes} from "./framework/dashboard/index";
 import {ForgotPasswordRoutes} from "./framework/password/forgot-password/index";
 import {StartRoutes} from "./framework/start/start.routes";
@@ -14,7 +14,6 @@ import {VerifyPhoneRoutes} from "./framework/registration/verify_phone/verify-ph
 import {ChangeEmailRoutes} from "./framework/dashboard/settings/change-email/change-email.routes";
 import {ActivateEmailRoutes} from "./framework/dashboard/settings/activate-email/activate-email.routes";
 import {ChangeMobileRoutes} from "./framework/dashboard/settings/change-mobile/change-mobile.routes";
-import {LandingPageRoutes} from "./framework/landing-page/landing-page.routes";
 import {CandidateRoutes} from "./framework/registration/candidate/candidate.routes";
 import {RecruiterRoutes} from "./framework/registration/recruiter/recruiter.routes";
 import {CompanyDetailsRoutes} from "./framework/registration/company_details/company-details.routes";
@@ -29,6 +28,7 @@ import {JobCompare} from "./cnext/framework/single-page-compare-view/job-compare
 import {JobPosterRoutes} from "./cnext/framework/job-poster/job-poster.routes";
 import {ValuePortrait} from "./cnext/framework/value-portrait/value-portrait-container.routes";
 import {AdminDashboard} from "./cnext/framework/admin-dashboard/admin-dashboard.routes";
+import {LandingPageRoutes} from "./framework/landing-page/landing-page.routes";
 
 
 export const routes: Routes = [

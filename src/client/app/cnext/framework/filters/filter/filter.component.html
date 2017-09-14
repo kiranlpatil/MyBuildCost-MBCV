@@ -2,8 +2,9 @@
   <span class="glyphicon glyphicon-filter visible-xs" (click)="isFilterVisible = !isFilterVisible"></span>
   <a *ngIf="showClearFilter" class="clear-filter" [class.recruiter-clear-filter]="isRecuirter" (click)="clearFilter()" >Clear all filters</a>
   <form [formGroup]="userForm" (submit)="clearFilter()">
+    <div [class.filter-bg]="isFilterVisible" (click)="isFilterVisible = false"></div>
     <div class="filter-container" [class.open-filter]="isFilterVisible" [class.recruiter-filter]="isRecuirter">
-      <h4 class="candidate-filters-label" [class.open-filter]="isFilterVisible">
+      <h4 class="candidate-filters-label hidden-xs" [class.open-filter]="isFilterVisible">
         <span class="glyphicon glyphicon-filter filter-icons"></span>
         <span *ngIf="isRecuirter">Candidate</span> Filters
       </h4>

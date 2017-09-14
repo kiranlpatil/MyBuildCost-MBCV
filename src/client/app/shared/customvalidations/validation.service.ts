@@ -1,4 +1,4 @@
-import { Messages } from '../../shared/constants';
+import { Messages } from '../constants';
 import any = jasmine.any;
 
 export class ValidationService {

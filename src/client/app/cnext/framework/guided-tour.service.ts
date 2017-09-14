@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
-import {BaseService} from "../../framework/shared/httpservices/base.service";
-import {LocalStorage, API} from "../../framework/shared/constants";
-import {LocalStorageService} from "../../framework/shared/localstorage.service";
+import {BaseService} from "../../shared/services/httpservices/base.service";
+import {LocalStorage, API} from "../../shared/constants";
+import {LocalStorageService} from "../../shared/services/localstorage.service";
 import {Observable} from "rxjs/Observable";
 import {Http} from "@angular/http";
 

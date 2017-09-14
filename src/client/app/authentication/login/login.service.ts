@@ -3,8 +3,8 @@ import {Headers, Http, RequestOptions} from "@angular/http";
 import {Observable} from "rxjs/Observable";
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/catch";
-import {API, BaseService, MessageService} from "../shared/index";
-import {GoogleToken} from "./googletoken";
+import {API, BaseService, MessageService} from "../../shared/index";
+import {GoogleToken} from "./models/googletoken";
 import {Login} from "./login";
 
 

@@ -10,13 +10,13 @@ import {
   MessageService,
   NavigationRoutes,
   ProfileService
-} from "../../shared/index";
-import {ImagePath, LocalStorage, Tooltip} from "../../shared/constants";
-import {LocalStorageService} from "../../shared/localstorage.service";
-import {LoaderService} from "../../shared/loader/loader.service";
+} from "../../../shared/index";
+import {ImagePath, LocalStorage, Tooltip} from "../../../shared/constants";
+import {LocalStorageService} from "../../../shared/services/localstorage.service";
+import {LoaderService} from "../../../shared/loader/loaders.service";
 import {Http} from "@angular/http";
 import {ActivatedRoute, Params, Router} from "@angular/router";
-import {ValidationService} from "../../shared/customvalidations/validation.service";
+import {ValidationService} from "../../../shared/customvalidations/validation.service";
 
 @Component({
   moduleId: module.id,

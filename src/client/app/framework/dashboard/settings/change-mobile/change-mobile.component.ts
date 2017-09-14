@@ -2,12 +2,12 @@ import {Component, OnInit} from "@angular/core";
 import {Router} from "@angular/router";
 import {ChangeMobileService} from "./change-mobile.service";
 import {ChangeMobile} from "./changemobile";
-import {CommonService, ImagePath, Message, MessageService, NavigationRoutes} from "../../../shared/index";
+import {CommonService, ImagePath, Message, MessageService, NavigationRoutes} from "../../../../shared/index";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {ValidationService} from "../../../shared/customvalidations/validation.service";
-import {LocalStorageService} from "../../../shared/localstorage.service";
-import {LocalStorage, Messages} from "../../../shared/constants";
-import {LoaderService} from "../../../shared/loader/loader.service";
+import {ValidationService} from "../../../../shared/customvalidations/validation.service";
+import {LocalStorageService} from "../../../../shared/services/localstorage.service";
+import {LocalStorage, Messages} from "../../../../shared/constants";
+import {LoaderService} from "../../../../shared/loader/loaders.service";
 
 
 @Component({

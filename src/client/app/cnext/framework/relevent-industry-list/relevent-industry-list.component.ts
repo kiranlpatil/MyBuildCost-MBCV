@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
 import {ReleventIndustryListService} from "./relevent-industry-list.service";
-import {Messages, Tooltip} from "../../../framework/shared/constants";
+import {Messages, Tooltip} from "../../../shared/constants";
 import {Section} from "../model/candidate";
 import {ReleventIndustry} from "./relevent-industry";
 import {Role} from "../model/role";

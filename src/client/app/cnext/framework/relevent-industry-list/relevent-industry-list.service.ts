@@ -1,8 +1,8 @@
 import {Injectable} from "@angular/core";
 import {Observable} from "rxjs/Observable";
-import {API} from "../../../framework/shared/constants";
+import {API} from "../../../shared/constants";
 import {Headers, Http, RequestOptions} from "@angular/http";
-import {BaseService} from "../../../framework/shared/httpservices/base.service";
+import {BaseService} from "../../../shared/services/httpservices/base.service";
 
 @Injectable()
 

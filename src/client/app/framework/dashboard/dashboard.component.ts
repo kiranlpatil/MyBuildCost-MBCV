@@ -9,8 +9,8 @@ import {
   MessageService,
   NavigationRoutes,
   ProfileService
-} from "../shared/index";
-import {LoaderService} from "../shared/loader/loader.service";
+} from "../../shared/index";
+import {LoaderService} from "../../shared/loader/loaders.service";
 
 
 @Component({

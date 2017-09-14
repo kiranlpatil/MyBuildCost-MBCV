@@ -1,12 +1,12 @@
 import {Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
-import {MessageService} from "../../../framework/shared/message.service";
+import {MessageService} from "../../../shared/services/message.service";
 import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
-import {Message} from "../../../framework/shared/message";
+import {Message} from "../../../shared/models/message";
 import {Candidate, Section} from "../model/candidate";
-import {Messages, Tooltip, ImagePath, Headings, LocalStorage} from "../../../framework/shared/constants";
+import {Messages, Tooltip, ImagePath, Headings, LocalStorage} from "../../../shared/constants";
 import {GuidedTourService} from "../guided-tour.service";
 import {ErrorService} from "../error.service";
-import {LocalStorageService} from "../../../framework/shared/localstorage.service";
+import {LocalStorageService} from "../../../shared/services/localstorage.service";
 
 @Component({
   moduleId: module.id,
