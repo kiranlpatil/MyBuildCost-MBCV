@@ -14,15 +14,18 @@ import {CandidateSignUpComponent} from "./candidate-sign-up/candidate-sign-up.co
 import {CandidateSignUpService} from "./candidate-sign-up/candidate-sign-up.service";
 import {CandidateSignUpVerificationComponent} from "./candidate-sign-up-verification/candidate-sign-up-verification.component";
 import {CandidateSignUpVerificationService} from "./candidate-sign-up-verification/candidate-sign-up-verification.service";
+import {RegistrationService} from "./registration.service";
+import {UserVerificationComponent} from "./user-verification/user-verification.component";
+import {UserVerificationService} from "./user-verification/user-verification.service";
 
 @NgModule({
   imports: [CommonModule, FormsModule, ReactiveFormsModule, SharedModule],
   declarations: [UserHeaderComponent, LoginComponent, ResetPasswordComponent, ForgotPasswordComponent,
-    CandidateSignUpComponent, CandidateSignUpVerificationComponent],
+    CandidateSignUpComponent, CandidateSignUpVerificationComponent, UserVerificationComponent],
   exports: [UserHeaderComponent, LoginComponent, ResetPasswordComponent, ForgotPasswordComponent,
-    CandidateSignUpComponent, CandidateSignUpVerificationComponent],
+    CandidateSignUpComponent, CandidateSignUpVerificationComponent, UserVerificationComponent],
   providers: [LoginService, FacebookService, ForgotPasswordService, ResetPasswordService, CandidateSignUpService,
-    CandidateSignUpVerificationService]
+    CandidateSignUpVerificationService, RegistrationService, UserVerificationService]
 })
 
 export class user {

@@ -1,12 +1,12 @@
 import {Injectable} from "@angular/core";
 import {Http} from "@angular/http";
 import {Observable} from "rxjs/Observable";
-import {API, BaseService, LocalStorage, LocalStorageService, MessageService} from "../../../shared/index";
-import {VerifyUser} from "./verify_user";
+import {API, BaseService, LocalStorage, LocalStorageService, MessageService} from "../../shared/index";
+import {VerifyUser} from "../models/verify_user";
 
 
 @Injectable()
-export class VerifyUserService extends BaseService {
+export class UserVerificationService extends BaseService {
 
   constructor(protected http: Http, protected messageService: MessageService) {
     super();

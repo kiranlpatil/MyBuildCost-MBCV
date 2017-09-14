@@ -1,22 +1,21 @@
 import {Component, OnInit} from "@angular/core";
 import {Router} from "@angular/router";
 import {FormBuilder, FormGroup} from "@angular/forms";
-import {ImagePath, LocalStorage, Messages, NavigationRoutes, ProjectAsset} from "../../../shared/constants";
-import {ValidationService} from "../../../shared/customvalidations/validation.service";
-import {VerifyUser} from "./verify_user";
-import {VerifyUserService} from "./verify-user.service";
-import {LocalStorageService} from "../../../shared/services/localstorage.service";
-import {Message} from "../../../shared/models/message";
-import {MessageService} from "../../../shared/services/message.service";
-import {LoaderService} from "../../../shared/loader/loaders.service";
+import {ImagePath, LocalStorage, Messages, NavigationRoutes, ProjectAsset} from "../../shared/constants";
+import {ValidationService} from "../../shared/customvalidations/validation.service";
+import {VerifyUser} from "../models/verify_user";
+import {UserVerificationService} from "./user-verification.service";
+import {LocalStorageService} from "../../shared/services/localstorage.service";
+import {Message} from "../../shared/models/message";
+import {MessageService} from "../../shared/services/message.service";
 
 @Component({
   moduleId: module.id,
-  selector: 'tpl-activate-user',
-  templateUrl: 'verify-user.component.html',
-  styleUrls: ['verify-user.component.css'],
+  selector: 'cn-user-verification',
+  templateUrl: 'user-verification.component.html',
+  styleUrls: ['user-verification.component.css'],
 })
-export class VerifyUserComponent implements OnInit {
+export class UserVerificationComponent implements OnInit {
   model = new VerifyUser();
   userForm: FormGroup;
   error_msg: string;
@@ -39,8 +38,7 @@ export class VerifyUserComponent implements OnInit {
 
 
   constructor(private _router: Router, private formBuilder: FormBuilder,
-              private verifyUserService: VerifyUserService, private messageService: MessageService,
-              private loaderService: LoaderService) {
+              private verifyUserService: UserVerificationService, private messageService: MessageService) {
 
     this.userForm = this.formBuilder.group({
       'mobile_number': ['', [ValidationService.requireMobileNumberValidator, ValidationService.mobileNumberValidator]],

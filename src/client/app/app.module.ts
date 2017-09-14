@@ -25,8 +25,6 @@ import {DashboardService} from "./framework/dashboard/dashboard.service";
 import {ContactService} from "./framework/dashboard/contact/contact.service";
 import {ActivateUserComponent} from "./framework/registration/activate-user/activate-user.component";
 import {ActiveUserService} from "./framework/registration/activate-user/activate-user.service";
-import {VerifyUserComponent} from "./framework/registration/verify_user/verify-user.component";
-import {VerifyUserService} from "./framework/registration/verify_user/verify-user.service";
 import {ChangeEmailComponent} from "./framework/dashboard/settings/change-email/change-email.component";
 import {ChangeEmailService} from "./framework/dashboard/settings/change-email/change-email.service";
 import {ActivateEmailComponent} from "./framework/dashboard/settings/activate-email/activate-email.component";
@@ -162,7 +160,6 @@ import {ProfileComparisonPipe} from "./cnext/framework/profile-comparison/profil
 import {ColorShadeDirective} from "./cnext/framework/profile-comparison/profile-capability-comparison/color-shade.directive";
 import {AttributeFilterPipe} from "./cnext/framework/profile-comparison/profile-attribute-comparison/attribute-filter.pipe";
 import {ValueSortFilterPipe} from "./cnext/framework/profile-comparison/value-sort.pipe";
-import {RegistrationService} from "./user/registration.service";
 import {GuidedTourService} from "./cnext/framework/guided-tour.service";
 import {ErrorService} from "./cnext/framework/error.service";
 import {LoggerService, MyErrorHandler} from "./cnext/framework/my-error-handler.service";
@@ -204,7 +201,6 @@ import {LandingPageComponent} from "./framework/landing-page/landing-page.compon
     CandidateDashboardHeaderComponent,
     ActivateUserComponent,
     ActivateEmailComponent,
-    VerifyUserComponent,
     DashboardComponent,
     ChangePasswordComponent,
     ChangeEmailComponent,
@@ -326,7 +322,6 @@ import {LandingPageComponent} from "./framework/landing-page/landing-page.compon
       provide: APP_BASE_HREF,
       useValue: '<%= APP_BASE %>'
     },
-    RegistrationService,
     ComplexityComponentService,
     ComplexityService,
     JobCompareService,
@@ -341,7 +336,6 @@ import {LandingPageComponent} from "./framework/landing-page/landing-page.compon
     CandidateCompareService,
     ActiveUserService,
     ActiveEmailService,
-    VerifyUserService,
     BasicJobInformationService,
     ErrorService,
     IndustryListService,
