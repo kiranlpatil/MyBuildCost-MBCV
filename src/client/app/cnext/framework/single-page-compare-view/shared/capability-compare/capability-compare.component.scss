@@ -3,15 +3,15 @@
 .exact {
   background: $bg-container !important;
   border-left: 4px solid $light-green2 !important;
-  padding: 5px 5px 0px;
+  padding: 5px 5px 0;
   height: 57px;
   line-height: 16px;
   overflow: hidden;
 }
 
-.compact-view{
-  background: #64a1ca !important;
-  padding: 5px 5px 0px;
+.compact-view {
+  background: $background-color !important;
+  padding: 5px 5px 0;
   height: 57px;
   line-height: 16px;
 }
@@ -41,15 +41,15 @@
     bottom: inherit;
     min-height: 59px;
     width: 280px;
-    left: 0px;
-    box-shadow: 0px 0px 4px 0px $hover-shadow;
-    color : white !important;
+    left: 0;
+    box-shadow: 0 0 4px 0 $hover-shadow;
+    color: white !important;
     font-size: 12px;
     z-index: 999;
     top: 0;
     border: 1px solid $white;
     span {
-      max-width: auto;
+      max-width: initial;
       overflow: inherit;
       white-space: normal;
       display: block;
@@ -81,14 +81,14 @@
     bottom: inherit;
     min-height: 59px;
     width: 280px;
-    left: 0px;
-    box-shadow: 0px 0px 4px 0px $hover-shadow;
+    left: 0;
+    box-shadow: 0 0 4px 0 $hover-shadow;
     font-size: 12px;
     z-index: 999;
     top: 0;
     border: 1px solid $white;
     span {
-      max-width: auto;
+      max-width: initial;
       overflow: inherit;
       white-space: normal;
       display: block;
@@ -110,7 +110,7 @@
 .above {
   background: $bg-container !important;
   border-left: 4px solid $green2 !important;
-  padding: 5px 5px 0px;
+  padding: 5px 5px 0;
   height: 57px;
   line-height: 16px;
   overflow: hidden;
@@ -126,14 +126,14 @@
     bottom: inherit;
     min-height: 59px;
     width: 280px;
-    left: 0px;
-    box-shadow: 0px 0px 4px 0px $hover-shadow;
+    left: 0;
+    box-shadow: 0 0 4px 0 $hover-shadow;
     font-size: 12px;
     z-index: 999;
     top: 0;
     border: 1px solid $white;
     span {
-      max-width: auto;
+      max-width: initial;
       overflow: inherit;
       white-space: normal;
       display: block;
@@ -155,7 +155,7 @@
 .below {
   background: $bg-container !important;
   border-left: 4px solid $orange !important;
-  padding: 5px 5px 0px;
+  padding: 5px 5px 0;
   height: 57px;
   line-height: 16px;
   overflow: hidden;
@@ -171,20 +171,20 @@
     bottom: inherit;
     min-height: 59px;
     width: 280px;
-    left: 0px;
-    box-shadow: 0px 0px 4px 0px $hover-shadow;
+    left: 0;
+    box-shadow: 0 0 4px 0 $hover-shadow;
     font-size: 12px;
     z-index: 999;
     top: 0;
     border: 1px solid $white;
     span {
-      max-width: auto;
+      max-width: initial;
       overflow: inherit;
       white-space: normal;
       display: block;
       position: relative;
       word-break: keep-all;
-      color: #262626;
+      color: $text-color3;
       font-size: 12px;
     }
     .not-match-overlay {
@@ -202,7 +202,7 @@
 .missing {
   background: $bg-container !important;
   border-left: 4px solid $red2 !important;
-  padding: 5px 5px 0px;
+  padding: 5px 5px 0;
   height: 57px;
   line-height: 16px;
   overflow: hidden;
@@ -218,14 +218,14 @@
     bottom: inherit;
     min-height: 59px;
     width: 280px;
-    left: 0px;
-    box-shadow: 0px 0px 4px 0px $hover-shadow;
+    left: 0;
+    box-shadow: 0 0 4px 0 $hover-shadow;
     font-size: 12px;
     z-index: 999;
     top: 0;
     border: 1px solid $white;
     span {
-      max-width: auto;
+      max-width: initial;
       overflow: inherit;
       white-space: normal;
       display: block;
@@ -257,7 +257,7 @@
 
 .extra {
   background: $gray !important;
-  padding: 5px 5px 0px;
+  padding: 5px 5px 0;
   height: 57px;
   line-height: 16px;
 }
@@ -271,18 +271,18 @@
     bottom: inherit;
     min-height: 59px;
     width: 220px;
-    left: 0px;
-    box-shadow: 0px 0px 4px 0px $hover-shadow;
+    left: 0;
+    box-shadow: 0 0 4px 0 $hover-shadow;
     font-size: 12px;
     z-index: 999;
     top: 0;
     border: 1px solid $white;
     span {
-      max-width: auto;
-       overflow: inherit;
-       white-space: normal;
-       display: block;
-       position: relative;
+      max-width: initial;
+      overflow: inherit;
+      white-space: normal;
+      display: block;
+      position: relative;
       word-break: keep-all;
     }
     .not-match-overlay {
@@ -301,7 +301,7 @@
   color: $white;
   font-size: 11px;
   text-align: left;
-  border-bottom: 1px solid #dbdbdb;
+  border-bottom: 1px solid $border-color3;
   height: 58px;
   overflow: hidden;
 }
@@ -309,12 +309,6 @@
 .row-background:hover {
   overflow: inherit;
 }
-
-/*.complexity-scenarios-description {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}*/
 
 .row-section .column1:first-child {
   .above:hover,
@@ -327,7 +321,6 @@
     }
   }
 }
-
 
 .more-capability:last-child,
 .row-section .column1:last-child {
@@ -373,7 +366,7 @@
 }
 
 .capability-label {
-  padding: 5px 5px;
+  padding: 5px;
   display: inline-block;
   text-align: center;
   width: 100%;
@@ -395,9 +388,6 @@
 }
 
 .complexity-scenarios-description {
- /* white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;*/
   .complexity-name {
     display: none;
   }
@@ -409,10 +399,10 @@
     display: table-cell;
     position: absolute;
     font-size: 12px;
-    color: #262626;
+    color: $text-color3;
     img {
       border-radius: 30px;
-      border: 2px solid #e6e6e6;
+      border: 2px solid $border-color1;
       width: 34px !important;
       height: 34px !important;
     }
@@ -420,7 +410,7 @@
 }
 
 .empty-divs {
-  border: 1px solid #E6E6E6;
+  border: 1px solid $border-color1;
   height: 58px;
   width: 100%;
   float: left;
@@ -436,7 +426,7 @@
     background: $white;
     float: left;
     list-style: none;
-    margin: 0 0 10px 0;
+    margin: 0 0 10px;
     padding: 4px 0;
     position: fixed;
     z-index: 99;
@@ -450,7 +440,7 @@
     }
 
     span {
-      margin: 2px 5px 0 5px;
+      margin: 2px 5px 0;
       width: 13px;
       height: 13px;
       border-radius: 50%;
@@ -529,7 +519,6 @@
   }
 }
 
-
 .user-info-modal {
   margin-top: 5px;
   .clearfix {
@@ -585,41 +574,34 @@
   }
 }
 
-.capability-complexity-container{
-  min-width:320px;
+.capability-complexity-container {
+  min-width: 320px;
   width: 100%;
   margin: 30px auto;
   display: inline-block;
 }
 .row-section {
-  display:table;
+  display: table;
   margin: 0;
-  border-collapse:separate;
-  border: 1px solid #E6E6E6;
-  /*border-right: 0;*/
+  border-collapse: separate;
+  border: 1px solid $border-color1;
   padding-right: 20px;
   width: 100%;
 }
-.column1{
-  /*width: 10%;*/
+
+.column1 {
   max-width: 263px;
   display: table-cell;
-  padding: 0px;
-  background: #fff;
-  border-right: 2px solid #fff;
+  padding: 0;
+  background: $white;
+  border-right: 2px solid $white;
   vertical-align: bottom;
   word-break: break-all;
 }
-.not-applicable{
-  display:  none !important;
+
+.not-applicable {
+  display: none !important;
 }
-/*@media only screen
-and (max-width: 840px) {
-  .column1{
-    display: table-row;
-    width: 100%;
-  }
-}*/
 
 .capability-of-capabilities-section {
   width: 100%;
@@ -627,7 +609,7 @@ and (max-width: 840px) {
   .content {
     font-size: 14px;
     padding: 10px 0;
-    border-top: 1px solid #E6E6E6;
+    border-top: 1px solid $border-color1;
     display: inline-block;
     width: 100%;
     .capability-label-name {
@@ -683,7 +665,7 @@ and (max-width: 840px) {
   .content {
     font-size: 14px;
     padding: 10px 0;
-    border-top: 1px solid #E6E6E6;
+    border-top: 1px solid $border-color1;
     display: inline-block;
     width: 100%;
     .capability-label-name {
@@ -732,22 +714,6 @@ and (max-width: 840px) {
   display: none !important;
 }
 
-/* Desktops and laptops ----------- */
-/*@media screen and (min-width: 1020px) and (max-width: 1366px) {
-  .thirteen-for-all {
-    max-width: 80px !important;
-  }
-  .twelve-for-all {
-    max-width: 86px !important;
-  }
-  .eleventh-for-all {
-    max-width: 94px !important;
-  }
-  .fourteen-for-all {
-    max-width: 75px !important;
-  }
-}*/
-
 @media screen and (min-width: 1367px) and (max-width: 2080px) {
   .thirteen-for-all {
     max-width: 200px !important;
@@ -757,6 +723,7 @@ and (max-width: 840px) {
 @media screen and (max-width: 767px) {
   .capability-complexity-container {
     min-width: 100%;
+    margin: 0 auto;
   }
 
   .complexities-handled {
@@ -767,18 +734,43 @@ and (max-width: 840px) {
     padding: 0;
   }
 
-  .capability-label-name {
-    margin-left: 5px;
-    display: block;
-  }
-
   .capability-of-capabilities-section {
     .content {
       .btn-edit {
         top: 6px !important;
-        right: 5px !important;
+        right: 0 !important;
+      }
+
+      .capability-edit > .inner {
+        padding: 5px 25px 5px 0;
+
+        &:hover {
+          border: 0;
+        }
+      }
+
+      .capability-label-name {
+        display: block;
+        margin-left: 0;
+        padding: 0;
+        font-size: 14px;
+      }
+
+      .capability-edit {
+        padding: 0;
       }
     }
+  }
+
+  .capability-label-name {
+    display: block;
+    margin-left: 0;
+    padding: 0 10px;
+    font-size: 14px;
+  }
+
+  .row-section {
+    padding-right: 0;
   }
 }
 

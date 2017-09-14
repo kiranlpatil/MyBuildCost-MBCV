@@ -1,13 +1,13 @@
 import {Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
 import {Candidate, Section} from "../model/candidate";
-import {AppSettings, Messages, Tooltip, LocalStorage} from "../../../framework/shared/constants";
+import {AppSettings, Messages, Tooltip, LocalStorage} from "../../../shared/constants";
 import {CandidateDetail} from "../../../framework/registration/candidate/candidate";
 import {ProfessionalDataService} from "../professional-data/professional-data.service";
 import {Location} from "../../../framework/registration/location";
-import {MyGoogleAddress} from "../../../framework/registration/candidate/google-our-place/my-google-address";
+import {MyGoogleAddress} from "../../../shared/location/my-google-address";
 import {ProfileDetailsService} from "../profile-detail-service";
 import {ErrorService} from "../error.service";
-import {LocalStorageService} from "../../../framework/shared/localstorage.service";
+import {LocalStorageService} from "../../../shared/services/localstorage.service";
 import {GuidedTourService} from "../guided-tour.service";
 
 @Component({

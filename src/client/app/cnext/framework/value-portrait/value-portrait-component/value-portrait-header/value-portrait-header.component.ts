@@ -1,6 +1,6 @@
 import {Component, Input} from "@angular/core";
 import {Candidate} from "../../../model/candidate";
-import {AppSettings} from "../../../../../framework/shared/constants";
+import {AppSettings} from "../../../../../shared/constants";
 import {Router} from "@angular/router";
 
 @Component({

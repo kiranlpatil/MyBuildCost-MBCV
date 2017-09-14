@@ -231,7 +231,7 @@
 }
 
 .glyphicon-info-sign {
-  color: #ccc;
+  color: $gray;
 }
 
 .get-set-go {
@@ -300,12 +300,24 @@
 }
 
 @media only screen and (max-width: 767px) {
+  .create-profile {
+    background: $white;
+  }
+
   .bar-container {
+    background: $bg-bar-container;
+    float: left;
     height: 35px;
-    padding-top: 0;
     margin-top: 0;
-    background: #383838;
-    top: 50px;
+    padding-top: 0;
+    position: relative;
+    top: 0;
+    transition: all 1s linear;
+  }
+
+  .fixed-bar-container {
+    position: fixed !important;
+    top: 0;
   }
 
   .bar {
@@ -323,7 +335,7 @@
   }
 
   .profile-wrapper {
-    margin: 100px auto 0;
+    margin: 40px auto 0;
 
     .col-sm-3 {
       margin: 0 auto;
@@ -357,13 +369,19 @@
   }
 
   .toggle-switch-container {
-    float: left;
+    position: absolute;
+    top: 13px;
+    right: 10px;
   }
 
   .profile-visibility {
+    padding: 15px 15px 0;
+
     .profile-info {
-      min-height: 60px;
       float: left;
+      margin: 0;
+      min-height: 60px;
+      padding: 15px 0 0;
     }
   }
 }

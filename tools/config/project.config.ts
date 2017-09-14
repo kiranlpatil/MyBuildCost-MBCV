@@ -2,7 +2,7 @@ import { join } from 'path';
 
 import { SeedConfig } from './seed.config';
 // import { ExtendPackages } from './seed.config.interfaces';
-import { ImagePath } from '../../src/client/app/framework/shared/constants';
+import { ImagePath } from '../../src/client/app/shared/constants';
 
 /**
  * This class extends the basic seed configuration, allowing for project specific overrides. A few examples can be found

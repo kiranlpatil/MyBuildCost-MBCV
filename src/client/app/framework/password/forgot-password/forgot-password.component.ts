@@ -2,11 +2,11 @@ import {Component} from "@angular/core";
 import {Router} from "@angular/router";
 import {ForgotPassword} from "./forgotpassword";
 import {ForgotPasswordService} from "./forgot-password.service";
-import {CommonService, Message, Messages, MessageService, NavigationRoutes} from "../../shared/index";
+import {CommonService, Message, Messages, MessageService, NavigationRoutes} from "../../../shared/index";
 import {FormBuilder, FormGroup} from "@angular/forms";
-import {ValidationService} from "../../shared/customvalidations/validation.service";
-import {ImagePath, ProjectAsset} from "../../shared/constants";
-import {LoaderService} from "../../shared/loader/loader.service";
+import {ValidationService} from "../../../shared/customvalidations/validation.service";
+import {ImagePath, ProjectAsset} from "../../../shared/constants";
+import {LoaderService} from "../../../shared/loader/loaders.service";
 
 
 @Component({

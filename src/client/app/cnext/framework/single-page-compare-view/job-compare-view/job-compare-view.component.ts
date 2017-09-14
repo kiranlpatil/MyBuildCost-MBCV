@@ -6,9 +6,9 @@ import {CandidateDetail} from "../../../../framework/registration/candidate/cand
 import {CandidateProfileService} from "../../candidate-profile/candidate-profile.service";
 import {RecruiterDashboardService} from "../../recruiter-dashboard/recruiter-dashboard.service";
 import {Recruiter} from "../../../../framework/registration/recruiter/recruiter";
-import {AppSettings, ImagePath, LocalStorage} from "../../../../framework/shared/constants";
+import {AppSettings, ImagePath, LocalStorage} from "../../../../shared/constants";
 import {GuidedTourService} from "../../guided-tour.service";
-import {LocalStorageService} from "../../../../framework/shared/localstorage.service";
+import {LocalStorageService} from "../../../../shared/services/localstorage.service";
 import {ErrorService} from "../../error.service";
 
 @Component({

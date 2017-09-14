@@ -1,7 +1,7 @@
-import {Component, ElementRef, EventEmitter, Input, OnChanges, Output, ViewChild} from "@angular/core";
+import {Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, ViewChild} from "@angular/core";
 import {MultiSelectService} from "./multi-select.service";
 import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
-import {Messages} from "../../../framework/shared/constants";
+import {Messages} from "../../../shared/constants";
 import {ErrorService} from "../error.service";
 
 
@@ -12,7 +12,7 @@ import {ErrorService} from "../error.service";
   styleUrls: ['multi-select.component.css']
 })
 
-export class MultiSelectComponent implements OnChanges {
+export class MultiSelectComponent implements OnChanges, OnInit {
   @Input() selectedData: string[];
   @Input() maxLength: number;
   @Input() type: string;
@@ -22,25 +22,34 @@ export class MultiSelectComponent implements OnChanges {
   @Input() requiredKeySkillsValidationMessage: string;
   @Input() maxKeySkillsValidationMessage: string;
 
-  private selectedProficiencies = new Array();
-  private masterDataProficiencies = new Array();
-  private Proficiencies = new Array();
+  private selectedProficiencies = [];
+  private masterDataProficiencies = [];
+  private Proficiencies = [];
   private validationMessage: string;
   private showAlert: boolean = false;
   private alreadyPresent: boolean = false;
   private alreadyPresentinselected: boolean = false;
   private showModalStyle: boolean = false;
   private otherProficiency: string = '';
+    private proficienciesPlaceholder: string = '';
   private disableTextField: boolean = false;
   private isInfoMessage: boolean = false;
   private noMatchFoundText :string=Messages.MSG_NO_MATCH_FOUND_TEXT;
+
   @ViewChild('myInput')
   private _inputElement: ElementRef;
 
   constructor(private proficiencydoaminService: MultiSelectService,
               private errorService:ErrorService,
               private profileCreatorService: CandidateProfileService) {
+  }
 
+    ngOnInit() {
+        if (window.innerWidth < 1024) {
+            this.proficienciesPlaceholder = Messages.KEYSKILLS_PLACEHOLDER_MOBILE;
+        } else {
+            this.proficienciesPlaceholder = Messages.KEYSKILLS_PLACEHOLDER_DESKTOP;
+        }
   }
 
   ngOnChanges(changes: any) {

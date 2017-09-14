@@ -54,7 +54,7 @@
     <div class="compact-view clearfix" (click)="onEdit()">
       <div *ngIf="employeeHistory.controls.employeeHistories.controls.length==0">
         <h4 class="heading-compact icons-section">
-          <span class="employment-history"></span>
+          <span class="icons icon-employment-history"></span>
           {{employemntHistoryHeader}} <span class="optional-field">{{OPTIONAL}}</span>
           <button class="btn-edit"
                   (click)="onEdit()"
@@ -63,7 +63,7 @@
       </div>
       <div class="" *ngIf="employeeHistory.controls.employeeHistories.controls.length>0">
         <h4 class="heading-compact icons-section">
-          <span class="employment-history"></span>
+          <span class="icons icon-employment-history"></span>
           Employment History <span class="optional-field">(Optional)</span>
           <button class="btn-edit"
                   (click)="onEdit()"

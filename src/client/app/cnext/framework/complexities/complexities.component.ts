@@ -1,8 +1,8 @@
 import {Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, ViewChild} from "@angular/core";
 import {Role} from "../model/role";
 import {ComplexityService} from "../complexity.service";
-import {LocalStorageService} from "../../../framework/shared/localstorage.service";
-import {LocalStorage, Messages, Tooltip, ValueConstant, ImagePath, Headings} from "../../../framework/shared/constants";
+import {LocalStorageService} from "../../../shared/services/localstorage.service";
+import {LocalStorage, Messages, Tooltip, ValueConstant, ImagePath, Headings} from "../../../shared/constants";
 import {Section} from "../model/candidate";
 import {ComplexityDetails} from "../model/complexity-detail";
 import {ComplexityComponentService} from "./complexity.service";
@@ -227,7 +227,7 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
   }
 
   oncurrentComplexityAnswered(complexityDetails: ComplexityDetails) {
-    debugger
+      debugger;
     this.isValid=true;
     this.complexities[complexityDetails.code] = complexityDetails.userChoice;
     this.onComplextyAnswered.emit(this.complexities);
@@ -391,6 +391,14 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
       let _body: any = document.getElementsByTagName('BODY')[0];
       _body.scrollTop = -1;
   }
+
+    editCapabilities() {
+        this.highlightedSection.name = 'Capabilities';
+        this.highlightedSection.isDisable = true;
+        this.showMore = false;
+        let _body: any = document.getElementsByTagName('BODY')[0];
+        _body.scrollTop = -1;
+    }
 
   SelectedComplexity(selectedComplexity: any) {
     this.singleComplexity = true;

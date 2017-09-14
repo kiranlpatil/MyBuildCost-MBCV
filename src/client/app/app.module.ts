@@ -7,10 +7,7 @@ import {RecaptchaModule} from "ng2-recaptcha";
 import {routes} from "./app.routes";
 import {Http, HttpModule, RequestOptions, XHRBackend} from "@angular/http";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {ValidationService} from "./framework/shared/customvalidations/validation.service";
-import {ControlMessagesComponent} from "./framework/shared/customvalidations/controlmessages.component";
-import {AppRequestOptions, CustomHttp, LoaderService, MessageService} from "./framework/shared/index";
-import {LoginComponent} from "./framework/login/login.component";
+import {AppRequestOptions, LoaderService, MessageService} from "./shared/index";
 import {DashboardComponent} from "./framework/dashboard/dashboard.component";
 import {ChangePasswordComponent} from "./framework/password/change-password/change-password.component";
 import {ForgotPasswordComponent} from "./framework/password/forgot-password/forgot-password.component";
@@ -19,8 +16,6 @@ import {AboutComponent} from "./framework/dashboard/about/about.component";
 import {ContactComponent} from "./framework/dashboard/contact/contact.component";
 import {SettingsComponent} from "./framework/dashboard/settings/settings.component";
 import {DashboardHomeComponent} from "./framework/dashboard/dashboard-home/dashboard-home.component";
-import {FacebookService} from "./framework/login/facebook.service";
-import {CommonService} from "./framework/shared/common.service";
 import {FooterComponent} from "./framework/shared/footer/footer.component";
 import {HeaderComponent} from "./framework/shared/header/header.component";
 import {ChangePasswordService} from "./framework/password/change-password/change-password.service";
@@ -28,11 +23,7 @@ import {NotificationService} from "./framework/shared/notification/notification.
 import {NotificationComponent} from "./framework/shared/notification/notification.component";
 import {ForgotPasswordService} from "./framework/password/forgot-password/forgot-password.service";
 import {SocialIconComponent} from "./framework/shared/footer/social-icon/social-icon.component";
-import {LoaderComponent} from "./framework/shared/loader/loader.component";
-import {ThemeChangeService} from "./framework/shared/themechange.service";
-import {LoginService} from "./framework/login/login.service";
 import {DashboardService} from "./framework/dashboard/dashboard.service";
-import {ProfileService} from "./framework/shared/profileservice/profile.service";
 import {ContactService} from "./framework/dashboard/contact/contact.service";
 import {ActivateUserComponent} from "./framework/registration/activate-user/activate-user.component";
 import {ResetPasswordComponent} from "./framework/password/forgot-password/reset-password/reset-password.component";
@@ -48,15 +39,12 @@ import {ActivateEmailComponent} from "./framework/dashboard/settings/activate-em
 import {ActiveEmailService} from "./framework/dashboard/settings/activate-email/activate-email.service";
 import {ChangeMobileComponent} from "./framework/dashboard/settings/change-mobile/change-mobile.component";
 import {ChangeMobileService} from "./framework/dashboard/settings/change-mobile/change-mobile.service";
-import {LandingPageComponent} from "./framework/landing-page/landing-page.component";
 import {Ng2AutoCompleteModule} from "ng2-auto-complete/dist/ng2-auto-complete.module";
 import {CandidateComponent} from "./framework/registration/candidate/candidate.component";
 import {RecruiterComponent} from "./framework/registration/recruiter/recruiter.component";
 import {CandidateService} from "./framework/registration/candidate/candidate.service";
 import {RecruiterService} from "./framework/registration/recruiter/recruiter.service";
 import {ScrollToModule} from "ng2-scroll-to";
-import {ProfilePictureComponent} from "./cnext/framework/profile-picture/profile-picture.component";
-import {MainHeaderComponent} from "./framework/main-header/main-header.component";
 import {ComplexityService} from "./cnext/framework/complexity.service";
 import {ProfessionalDataComponent} from "./cnext/framework/professional-data/professional-data.component";
 import {ProfessionalDataService} from "./cnext/framework/professional-data/professional-data.service";
@@ -140,7 +128,6 @@ import {MaxRangeValidation} from "./cnext/framework/filters/max-range-validation
 import {RecuirterQCardMatchingPipe} from "./cnext/framework/filters/recuirter-q-card-matching.pipe";
 import {EmployeeHistoryComponent} from "./cnext/framework/employment-history/employee-history/employee-history.component";
 import {QCardListFilterPipe} from "./cnext/framework/filters/q-card-list-filter.pipe";
-import {MyGoogleDirective} from "./framework/registration/candidate/google-our-place/googleplace.directive";
 import {CandidateDashboardHeaderComponent} from "./cnext/framework/candidate-dashboard/candidate-dashboard-header/candidate-dashboard-header.component";
 import {JobDashboardComponent} from "./cnext/framework/recruiter-dashboard/job-dashboard/job-dashboard.component";
 import {JobDashboardService} from "./cnext/framework/recruiter-dashboard/job-dashboard/job-dashboard.service";
@@ -172,7 +159,6 @@ import {IndustryDetailsService} from "./cnext/framework/industry-detail-service"
 import {IndustryDetailsDirective} from "./cnext/framework/shared-directives/industry-details.directive";
 import {IndustryDataDirective} from "./cnext/framework/shared-directives/industry-data.directive";
 import {IndustryDataService} from "./cnext/framework/industry-data-service";
-
 import {ProfileComparisonComponent} from "./cnext/framework/profile-comparison/profile-comparison.component";
 import {ProfileComparisonService} from "./cnext/framework/profile-comparison/profile-comparison.service";
 import {ProfileComparisonHeaderComponent} from "./cnext/framework/profile-comparison/profile-comparison-header/profile-comparison-header.component";
@@ -194,10 +180,14 @@ import {RecruiterDetailListComponent} from "./cnext/framework/admin-dashboard/re
 import {CandidateDetailListComponent} from "./cnext/framework/admin-dashboard/candidate-detail-list/candidate-detail-list.component";
 import {KeyskillsDetailListComponent} from "./cnext/framework/admin-dashboard/keyskills-detail-list/keyskills-detail-list.component";
 import {AdminDashboardService} from "./cnext/framework/admin-dashboard/admin-dashboard.service";
-
-import {SharedService} from "./framework/shared/shared-service";
 import {CandidateSearchComponent} from "./cnext/framework/candidate-search/candidate-search.component";
 import {CandidateSearchService} from "./cnext/framework/candidate-search/candidate-search.service";
+import {user} from "./authentication/user.module";
+import {SharedModule} from "./shared/shared.module";
+import {CustomHttp} from "./shared/services/httpservices/custom.http";
+import {ProfilePictureComponent} from "./cnext/framework/profile-picture/profile-picture.component";
+import {ProfileService} from "./framework/shared/profileservice/profile.service";
+import {LandingPageComponent} from "./framework/landing-page/landing-page.component";
 //C-NEXT IMPORTS
 
 
@@ -210,17 +200,14 @@ import {CandidateSearchService} from "./cnext/framework/candidate-search/candida
     ReactiveFormsModule,
     RecaptchaModule.forRoot(), // Keep in mind the 'forRoot'-magic nuances!
     Ng2AutoCompleteModule,
-    ScrollToModule.forRoot()
+    ScrollToModule.forRoot(),
+    SharedModule,
+    user,
   ],
   declarations: [
     AppComponent,
-    ControlMessagesComponent,
-    MyGoogleDirective,
-    LoaderComponent,
     LandingPageComponent,
-    MainHeaderComponent,
     TooltipComponent,
-    LoginComponent,
     CandidateComponent,
     RecruiterComponent,
     CandidateDashboardHeaderComponent,
@@ -346,19 +333,13 @@ import {CandidateSearchService} from "./cnext/framework/candidate-search/candida
       deps: [XHRBackend, RequestOptions, MessageService, LoaderService]
     },
     {provide: RequestOptions, useClass: AppRequestOptions},
-    LoggerService,{provide: ErrorHandler, useClass: MyErrorHandler},
+    LoggerService, {provide: ErrorHandler, useClass: MyErrorHandler},
     {
       provide: APP_BASE_HREF,
       useValue: '<%= APP_BASE %>'
     },
-    MessageService,
     RegistrationService,
     ComplexityComponentService,
-    FacebookService,
-    LoginService,
-    LoaderService,
-    CommonService,
-    ValidationService,
     ComplexityService,
     JobCompareService,
     ChangePasswordService,
@@ -366,7 +347,6 @@ import {CandidateSearchService} from "./cnext/framework/candidate-search/candida
     ChangeMobileService,
     NotificationService,
     ForgotPasswordService,
-    ThemeChangeService,
     CandidateService,
     RecruiterService,
     DashboardService,
@@ -419,7 +399,6 @@ import {CandidateSearchService} from "./cnext/framework/candidate-search/candida
     ProfileComparisonService,
     GuidedTourService,
     CandidateSearchService,
-    SharedService
 
   ],
   bootstrap: [AppComponent]

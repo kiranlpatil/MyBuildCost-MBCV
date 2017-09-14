@@ -381,6 +381,51 @@ now select file from left side(your local PC files) and right click on the file 
 replace the ServerAddress with address you wish to work on(stagging IP address)
 
 
+# Data recovery plan :
+ We are defining the backup plan in AWS server, By using AWS Images we can create backup of all the things
+ like database, application settings and other code .
+ In AWS there is another facility of auto backup but now we are not using it because of it require script 
+ In Future will give a automation for backup of AWS Server
+  
+ Follow below step's to create backup and recovery for Jobmosis Application 
+ 1. Goto  all Services and select EC2 menu
+  ![Alt text](readme-images/1.jpg? "Optional Title")
+  ![Alt text](readme-images/2.jpg? "Optional Title")
+   2. Click on "Running Instances" option from "Resources".
+  ![Alt text](readme-images/3.jpg? "Optional Title")
+   3. It will give you list of instances running
+  4. right click on the instance which you want to backup 
+  ![Alt text](readme-images/4.jpg? "Optional Title")
+  5. select option Image then select "Create Image"
+ ![Alt text](readme-images/5.jpg? "Optional Title")
+  6. It will prompt for enter details like Image name, Image Description 
+  ![Alt text](readme-images/6.jpg? "Optional Title")
+   7. Select No reboot option check
+![Alt text](readme-images/8.jpg? "Optional Title")
+   8. Click on "Create Image"
+  ![Alt text](readme-images/7.jpg? "Optional Title")
+ 
+ II) Restore Steps :
+  Go To left side option Snapshots 
+  1. check whether the Image is created or not.
+  ![Alt text](readme-images/11.jpg? "Optional Title")
+  2. click on the EC2 again
+  ![Alt text](readme-images/12.jpg? "Optional Title")
+  3. Click on the create Instance
+  ![Alt text](readme-images/12.jpg? "Optional Title")
+  4. Click on the My AMI's
+  ![Alt text](readme-images/13.jpg? "Optional Title")
+  5. select which backup image is restore
+  ![Alt text](readme-images/14.jpg? "Optional Title")
+  6. then select free tier and continue
+  ![Alt text](readme-images/15.jpg? "Optional Title")
+  
+ # Deployment process of Code on Various Server :
+  Go To left side option Snapshots 
+  1. See Image for branches and commit directions :
+    ![Alt text](readme-images/16.jpg? "Optional Title")
+    
+
   
 # Definition of DONE for developers:
  
