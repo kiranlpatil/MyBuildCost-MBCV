@@ -1,8 +1,8 @@
 export class AppSettings {
-  public static IP = 'http://localhost:8080';
+  //public static IP = 'http://localhost:8080';
   // public static IP = 'http://ee802b7f.ngrok.io';
   //public static IP = 'http://10.192.33.77:8080';
-  //public static IP = 'http://34.208.115.60:3000';
+  public static IP = 'http://34.208.115.60:3000';
   // public static IP = 'app.jobmosis.com';
   // public static IP = '';
 
