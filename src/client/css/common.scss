@@ -30,6 +30,12 @@ $body-bg: #edf1f5;
 $required-field: #e82c0c;
 $optional-field: #29b6f6;
 $btn-focus: #009de4;
+$value-portrait-bg: #f3f3f3;
+$circle-bg: #F7B82B;
+$modal-border: #ff927f;
+$modal-content-bg: #EB6B56;
+$got-it-btn-bg: #fe5722;
+$black: #000000;
 
 .btn-logout {
   margin-top: 15px;
@@ -330,7 +336,7 @@ select,
   height: 38px;
   padding: 9px 25px;
   font-weight: bold;
-  box-shadow: 0 0 1px 0 #fff inset, 0 0 1px 0 #fff;
+  box-shadow: 0 0 1px 0 $white inset, 0 0 1px 0 $white;
   border: 0;
   font-size: 16px;
   line-height: 20px;
@@ -412,7 +418,7 @@ h3 {
 }
 
 h4 {
-  color: #333;
+  color: $text-color;
   font-weight: 600;
   margin: 30px auto 0;
 }
@@ -453,7 +459,7 @@ h4 {
 
   p,
   span {
-    color: #000;
+    color: $black;
     margin: 0;
   }
 }
@@ -462,14 +468,14 @@ h4 {
   background: $toaster-error;
   z-index: 10000;
   p {
-    color: #000;
+    color: $black;
   }
 }
 
 .toaster-success {
   background: $toaster-success;
   z-index: 10001;
-  color: #000;
+  color: $black;
 }
 
 .alert {
@@ -690,7 +696,7 @@ control-messages {
   }
 }
 
-.value-portraot-footer {
+.value-portrait-footer {
   footer {
     display: inline-block;
     margin: 0 auto;
@@ -720,7 +726,7 @@ control-messages {
     height: 32px;
     right: 82px;
     bottom: 50px;
-    background: #fe5722;
+    background: $got-it-btn-bg;
     span {
       color: $white;
       padding: 6px 9px;
@@ -755,9 +761,9 @@ control-messages {
 #snackbar {
   visibility: inherit;
   width: 100%;
-  background: #ffd;
+  background: $white;
   z-index: 9;
-  color: #000;
+  color: $black;
   text-align: center;
   border-radius: 2px;
   padding: 16px;
@@ -885,7 +891,7 @@ control-messages {
   }
 }
 
-@media screen and (min-width: 300px) and (max-width: 766px) {
+@media screen and (min-width: 300px) and (max-width: 768px) {
   .employee-form,
   .employer-form {
     control-messages {
@@ -908,9 +914,271 @@ control-messages {
       }
     }
   }
+
+  /* value portrait css */
+  #core-capabilities-tabs {
+    h3 {
+      display: block;
+      background: transparent;
+      color: $black;
+      box-shadow: 0 0 0;
+      text-align: left;
+      font-size: 16px;
+      font-weight: 600;
+      margin: 0;
+      width: 100%;
+      padding-left: 15px;
+    }
+    .circle::after,
+    .circle::before {
+      display: none;
+    }
+    .value-portrait-candidate-capability-circle {
+      width: auto;
+      overflow-x: scroll;
+      display: block;
+      overflow-y: hidden;
+      .circle-list {
+        display: inline-flex;
+      }
+      .six-element,
+      .ten-element {
+        .circle {
+          margin: 19px 10px 16px;
+        }
+      }
+      .tooltip-content {
+        display: none;
+      }
+    }
+    .second-line {
+      margin: 19px 10px 10px;
+    }
+    .circle {
+      background: $circle-bg;
+      float: left;
+      height: 160px;
+      margin: 19px 9px 0;
+      width: 160px;
+      span {
+        color: $white;
+        font-size: 14px;
+        height: 160px;
+        width: 160px;
+      }
+      &:hover {
+        border: 0 !important;
+      }
+    }
+    .inner-circle {
+      box-shadow: 0 0 0 transparent;
+      height: 130px;
+      margin: 0;
+      width: 130px;
+    }
+  }
+  .value-portrait-about-myself {
+    background: $value-portrait-bg;
+  }
+  .show-more-btn {
+    display: none;
+  }
+  /* value portrait css */
 }
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+  .value-portrait-user-info {
+    display: block !important;
+    margin-top: -78px;
+    margin-left: 100px;
+  }
+  #core-capabilities-tabs {
+    .circle {
+      margin: 19px 7px 6px !important;
+      .inner-circle {
+        height: 152px;
+        width: 152px;
+        span {
+          height: 152px;
+          width: 152px;
+        }
+      }
+    }
+  }
+}
+
 
 select:focus {
   border-bottom: 2px solid $theme-color !important;
 }
 
+@media (min-width: 361px) and (max-width: 375px) {
+  .value-portrait-candidate-capability-circle {
+    width: 96%;
+  }
+}
+
+@media (min-width: 361px) and (max-width: 418px) {
+  .value-portrait-candidate-capability-circle {
+    width: 100% !important;
+  }
+  #core-capabilities-tabs .circle {
+    height: 140px;
+    width: 140px;
+    #core-capabilities-tabs .inner-circle {
+      height: 130px;
+      width: 130px;
+    }
+    span {
+      height: 130px;
+      width: 130px;
+    }
+  }
+}
+
+@media (min-width: 321px) and (max-width: 360px) {
+  .value-portrait-candidate-capability-circle {
+    width: 100% !important;
+  }
+  #core-capabilities-tabs .circle {
+    height: 160px;
+    width: 160px;
+    #core-capabilities-tabs .inner-circle {
+      height: 150px;
+      width: 150px;
+    }
+    span {
+      height: 150px;
+      width: 150px;
+    }
+  }
+}
+
+@media only screen and (width: 1024px) {
+  .value-portrait-container {
+    width: 1010px !important;
+  }
+  #core-capabilities-tabs {
+    .value-portrait-candidate-capability-circle {
+      .circle {
+        margin: 20px 20px 0 !important;
+        .inner-circle {
+          margin: -5px;
+        }
+      }
+    }
+    .show-more-btn {
+      font-size: 12px;
+      padding: 7px 5px;
+      width: 65px;
+      height: 65px;
+    }
+    .tooltip-content {
+      display: none;
+    }
+  }
+  .value-portrait-user-info {
+    margin: 0 !important;
+  }
+  .top-header {
+    width: 1010px !important;
+  }
+}
+
+@media (min-width: 240px) and (max-width: 320px) {
+  .value-portrait-candidate-capability-circle {
+    width: 100% !important;
+  }
+  #core-capabilities-tabs .circle {
+    height: 130px;
+    width: 130px;
+    #core-capabilities-tabs .inner-circle {
+      height: 115px;
+      width: 115px;
+    }
+    span {
+      height: 115px;
+      width: 115px;
+    }
+  }
+}
+
+#core-capabilities-tabs {
+  .value-portrait-candidate-capability-circle {
+    .modal-dialog {
+      padding: 0 15px;
+      margin: 0;
+      width: 100%;
+      top: 15px;
+      height: calc(100% - 30px);
+      .modal-header {
+        border-bottom: 1px solid $modal-border;
+      }
+      .modal-content {
+        border: 1px solid $modal-content-bg;
+        border-radius: 6px;
+        background-color: $modal-content-bg;
+        height: 100%;
+        margin: 0;
+        width: 100%;
+        h5 {
+          color: $white;
+          font-size: 16px;
+          font-weight: bold;
+          font-family: 'gothamrnd-book';
+          width: 100%;
+          text-align: center;
+        }
+      }
+      .modal-body {
+        padding: 0;
+        color: $white;
+        height: calc(100% - 110px);
+        overflow-y: auto;
+        overflow-x: hidden;
+        .complexities-list {
+          border-bottom: 1px solid $modal-border;
+          text-align: left;
+          padding: 15px;
+          label {
+            font-size: 14px;
+            font-weight: bold;
+            font-family: 'gothamrnd-book';
+            width: 100%;
+          }
+          span {
+            display: inline-block;
+            width: 100%;
+            font-weight: normal;
+            height: auto;
+          }
+        }
+      }
+
+      .close-modal {
+        background: $white;
+        border: 0;
+        width: 49px;
+        height: 49px;
+        border-radius: 49px;
+        font-size: 34px;
+        margin: 0 0 0 -23px;
+        text-align: center;
+        padding: 0;
+        position: fixed;
+        bottom: 15px;
+        span {
+          color: $modal-content-bg;
+          font-family: 'gothamrnd-book';
+          font-size: 31px;
+        }
+      }
+
+      .modal-footer {
+        border: 0;
+        margin: 0 auto;
+        display: table;
+      }
+    }
+  }
+}

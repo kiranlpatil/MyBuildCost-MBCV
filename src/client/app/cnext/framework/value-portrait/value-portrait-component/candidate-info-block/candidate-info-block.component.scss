@@ -1,6 +1,6 @@
 @import '../../../../../../css/variables';
 
-.value-portraot-candidate-info-block {
+.value-portrait-candidate-info-block {
   ul {
     background: $white;
     float: left;
@@ -175,4 +175,36 @@
   top: -10px;
   right: 30px;
   margin-left: -10px;
+}
+
+@media only screen and (max-width: 767px) {
+  .value-portrait-candidate-info-block {
+    padding: 0px;
+    width: 100%;
+    ul {
+      padding: 20px 10px;
+      li {
+        width: 100%;
+        .info-block-tabs {
+          .tooltip-content2 {
+            position: relative;
+            width: 100%;
+            left: inherit;
+            right: inherit;
+            top: 0;
+            box-shadow: 0 0 0 transparent;
+            margin: 0;
+            &:after {
+              left: 50%;
+              right: inherit;
+              margin: 0;
+            }
+          }
+        }
+        &:first-child {
+          width: 100%;
+        }
+      }
+    }
+  }
 }

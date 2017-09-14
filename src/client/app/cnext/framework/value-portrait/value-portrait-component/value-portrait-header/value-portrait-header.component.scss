@@ -1,11 +1,11 @@
 @import '../../../../../../css/variables';
 
-.value-portraot-candidate-profile-section {
-  background: #ddd;
+.value-portrait-candidate-profile-section {
+  background: $filter-border;
   display: inline-block;
   min-height: 166px;
   padding: 10px 20px;
-  .value-portraot-candidate-profile-img {
+  .value-portrait-candidate-profile-img {
     img {
       border-radius: 50%;
       box-shadow: 0 0 4px 2px rgba(125, 125, 125, 0.28), 0 0 1px 0 rgba(0, 0, 0, 0.16);
@@ -17,7 +17,7 @@
       z-index: 9;
     }
   }
-  .value-portraot-candidate-name {
+  .value-portrait-candidate-name {
     background: $orange3;
     display: inline-block;
     font-size: 20px;
@@ -27,7 +27,7 @@
     margin: 50px 0 0 -15px;
     text-transform: capitalize;
   }
-  .value-portraot-candidate-job-title {
+  .value-portrait-candidate-job-title {
     background: $orange4;
     display: inline-block;
     width: calc(100% - 160px);
@@ -37,8 +37,8 @@
   }
 }
 
-.value-portraot-candidate-number {
-  display: inline-block;
+.value-portrait-candidate-number {
+  display: inline-block !important;
   margin: 45px 0 10px 0;
   width: 100%;
   .phone-icon {
@@ -52,11 +52,14 @@
     float: left;
     font-size: 14px;
     margin-top: 5px;
+    a {
+      color: $black1;
+    }
   }
 }
 
-.value-portraot-candidate-email {
-  display: inline-block;
+.value-portrait-candidate-email {
+  display: inline-block !important;
   margin: 45px 0 10px 0;
   width: 100%;
   .email-icon {
@@ -74,11 +77,14 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     width: calc(100% - 50px);
+    a {
+      color: $black1;
+    }
   }
 }
 
-.value-portraot-candidate-industry {
-  display: inline-block;
+.value-portrait-candidate-industry {
+  display: inline-block !important;
   width: 100%;
   .industry-icon {
     background: url(../assets/c-next/card-view/sprite.png) no-repeat  -41px -471px;
@@ -102,7 +108,7 @@
   }
 }
 
-.value-portraot-candidate-area-work {
+.value-portrait-candidate-area-work {
   display: inline-block;
   width: 100%;
   .area-work-icon {
@@ -131,4 +137,92 @@
 
 .padding-left-0 {
   padding-left: 0;
+}
+
+@media only screen and (max-width: 768px) {
+  .value-portrait-candidate-profile-section {
+    background: $white;
+    padding: 10px 15px;
+    .value-portrait-candidate-name {
+      background: transparent;
+      margin: 0;
+      padding: 0 15px;
+      width: calc(100% - 100px);
+    }
+    .value-portrait-candidate-job-title {
+      background: transparent;
+      float: left;
+      margin: 0;
+      padding: 0 0 0 15px;
+      width: calc(100% - 100px);
+    }
+    .value-portrait-candidate-profile-img {
+      float: left;
+      img {
+        width: 100px;
+        height: 100px;
+        margin: 0 auto 20px;
+        display: table;
+        float: none;
+      }
+    }
+    .value-portrait-candidate-number {
+      margin: 12px 0 0 0;
+      .phone-icon {
+        height: 24px;
+        width: 40px;
+        float: left;
+        margin-left: -9px;
+        background: url(../assets/c-next/card-view/sprite.png) no-repeat -2px -615px;
+      }
+      span {
+        margin: 0;
+      }
+    }
+    .value-portrait-candidate-email {
+      margin: 0;
+      .email-icon {
+        height: 24px;
+        width: 40px;
+        float: left;
+        margin-left: -9px;
+        background: url(../assets/c-next/card-view/sprite.png) no-repeat -45px -615px;
+      }
+      span {
+        margin: 0;
+      }
+    }
+    .value-portrait-candidate-industry {
+      margin: 10px 0;
+      display: none !important;
+      span, label {
+        display: inline-block;
+        padding: 0;
+        margin: 0 5px 0 0;
+        width: 100%;
+      }
+    }
+    .value-portrait-candidate-area-work {
+      label {
+        display: inline-block;
+        margin: 0;
+        width: 100%;
+      }
+      span {
+        padding: 0;
+        width: auto;
+      }
+    }
+    .padding-0 {
+      padding: 0;
+    }
+    .border-top {
+      border-top: 1px solid $gray;
+      margin: 10px 0 0;
+    }
+  }
+}
+
+@media screen and (min-width: 320px) and (max-width: 399px) {
+
 }

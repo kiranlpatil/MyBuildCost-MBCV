@@ -1,9 +1,9 @@
 @import '../../../../../css/variables';
 
-.value-portraot-bottom-section {
+.value-portrait-bottom-section {
   background: $white;
   padding: 50px 0 0;
-  .value-portraot-candidate-industry {
+  .value-portrait-candidate-industry {
     padding-top: 10px;
     .icon {
       background: url(../assets/c-next/card-view/sprite.png) no-repeat -42px -472px;
@@ -29,7 +29,7 @@
     }
   }
 
-  .value-portraot-candidate-keyskills {
+  .value-portrait-candidate-keyskills {
     padding-top: 10px;
     .icon {
       background: url(../assets/c-next/card-view/sprite.png) no-repeat -91px -472px;
@@ -114,7 +114,7 @@
   background-color: $white;
   padding: 10px;
   transition: all .1s linear;
-  box-shadow: 3px 3px 15px 1px #ccc;
+  box-shadow: 3px 3px 15px 1px $gray;
   border-radius: 4px;
   visibility: hidden;
   right: 10px;
@@ -139,4 +139,137 @@
   top: -10px;
   left: 50%;
   margin-left: -10px;
+}
+
+.user-info-black,
+.user-bottom-section {
+  display: none;
+}
+
+.remark {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+}
+
+@media only screen and (max-width: 768px) {
+
+  .value-portrait-bottom-section {
+    background: $value-portrait-bg;
+    padding: 0;
+    color: $black;
+    .tooltip-content3,
+    .tooltip-content4 {
+      background: transparent;
+      &:after {
+        display: none;
+      }
+      b {
+        color: $black;
+      }
+    }
+  }
+
+  .value-portrait-tabs {
+    background: $white;
+  }
+  .user-bottom-section {
+    background: $white;
+    padding: 7px 0 7px 15px;
+    .info-block-tabs {
+      display: inline-block;
+      text-align: left;
+      margin: 0 0 10px;
+      width: 100%;
+      span {
+        color: $black1;
+        float: left;
+        font-size: 16px;
+        font-family: 'gothamrnd-book';
+        font-weight: bold;
+        margin: 7px 5px 0 0;
+        width: 100%;
+      }
+    }
+  }
+  .about-myself-btn > .tooltip-content3 {
+    background: transparent;
+    color: $black;
+  }
+  .value-portrait-candidate-industry,
+  .value-portrait-candidate-keyskills {
+    span {
+      display: none;
+    }
+    label {
+      margin: 7px 5px 0 0 !important;
+      font-size: 16px;
+    }
+    .tooltip-content4 {
+      opacity: 0.9;
+      visibility: visible;
+      box-shadow: 0 0 0 transparent;
+      padding: 0;
+      width: 100%;
+      margin: 0;
+      right: inherit;
+      top: inherit;
+      position: inherit;
+      &:after {
+        display: none;
+      }
+    }
+  }
+  .about-myself-btn {
+    box-shadow: 0 0 0 transparent;
+    border: 0;
+    text-align: left;
+    float: left;
+    margin: 10px 0;
+    color: $black1;
+    padding: 0;
+    font-family: 'gothamrnd-book';
+    width: 100%;
+    label {
+      font-size: 16px;
+      padding-top: 10px;
+    }
+    .tooltip-content3 {
+      opacity: 0.9;
+      visibility: visible;
+      box-shadow: 0 0 0 transparent;
+      padding: 0;
+      width: 100%;
+      margin: 0;
+      right: inherit;
+      top: inherit;
+      position: inherit;
+      display: block;
+    }
+  }
+  .user-bottom-section {
+    display: block;
+  }
+  .user-info-black {
+    display: block;
+    background: $value-portrait-bg;
+    padding: 15px;
+    width: 100%;
+    .info-block-tabs {
+      display: inline-block;
+      text-align: left;
+      margin: 0 0 10px;
+      width: 100%;
+      span {
+        color: $black1;
+        float: left;
+        font-size: 16px;
+        font-family: 'gothamrnd-book';
+        font-weight: bold;
+        margin: 7px 5px 0 0;
+        width: 100%;
+      }
+    }
+  }
 }
