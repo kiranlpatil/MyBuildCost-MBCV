@@ -103,14 +103,14 @@ class AdminService {
 
   };
 
+/*
   createXlsx(result: any, callback: (err: any, res: any) => void){
     if(result.candidate && result.candidate.length>0) {
-      var fields = ['first_name', 'last_name','mobile_number','email','isActivated','data.location.city','data.professionalDetails.education','data.professionalDetails.experience','data.professionalDetails.currentSalary','data.professionalDetails.noticePeriod','data.professionalDetails.relocate','data.professionalDetails.industryExposure','data.professionalDetails.currentCompany','data.isCompleted','data.isSubmitted'];
-      var fieldNames = ['First Name', 'Last Name','Mobile Number','Email','Is Activated','Location','Education','Experience','Current Salary','Notice Period','Relocate','Industry Exposure','Current Company','IsCompleted','IsSubmitted'];
-
+      var fields = ['first_name', 'last_name','mobile_number','email','isActivated','data.location.city','data.professionalDetails.education','data.professionalDetails.experience','data.professionalDetails.currentSalary','data.professionalDetails.noticePeriod','data.professionalDetails.relocate','data.professionalDetails.industryExposure','data.professionalDetails.currentCompany','data.isCompleted','data.isSubmitted','data.isVisible'];
+      var fieldNames = ['First Name', 'Last Name','Mobile Number','Email','Is Activated','Location','Education','Experience','Current Salary','Notice Period','Relocate','Industry Exposure','Current Company','IsCompleted','IsSubmitted','IsVisible'];
       var csv = json2csv({ data: result.candidate, fields: fields, fieldNames: fieldNames});
       //unwindPath: ['roles', 'roles.default_complexities','roles.default_complexities.complexities','roles.default_complexities.complexities.scenarios']
-      fs.writeFile('/home/bitnami/apps/jobmosis-staging/c-next/dist/prod/server/public/candidate.csv', csv, function(err:any) {
+      fs.writeFile('./src/server/public/candidate.csv', csv, function(err:any) {
         if (err) throw err;
         console.log('candidate file saved');
       });
@@ -120,7 +120,7 @@ class AdminService {
       var fields = ['data.company_name','data.company_size','data.isRecruitingForself','data.jobCountModel.numberOfJobposted','mobile_number','email','isActivated','data.postedJobs.isJobPosted','data.postedJobs.jobTitle','data.postedJobs.hiringManager','data.postedJobs.department','data.postedJobs.education','data.postedJobs.experienceMinValue','data.postedJobs.experienceMaxValue','data.postedJobs.salaryMinValue','data.postedJobs.salaryMaxValue','data.postedJobs.joiningPeriod','data.postedJobs.postingDate','data.postedJobs.expiringDate'];
       var fieldNames = ['Company Name','company size','Recruiting For Self','Number of Job Posted','Mobile Number','Email','Is Activated','Job Posted','Job Title','Hiring Manager','Department','Education','Minimum Experience','Maximum Experience','Minimum Salary','Maximum Salary','Joining Period','Job Posting Date','Job Expiry Date'];
       var csv = json2csv({ data: result.recruiter, fields: fields, fieldNames: fieldNames, unwindPath: ['data.postedJobs']});
-      fs.writeFile('/home/bitnami/apps/jobmosis-staging/c-next/dist/prod/server/public/recruiter.csv', csv, function(err:any){
+      fs.writeFile('./src/server/public/recruiter.csv', csv, function(err:any){
         if (err) throw err;
         console.log('recuiter file saved');
       });
@@ -128,14 +128,14 @@ class AdminService {
     console.log("Success");
     callback(null,result);
   };
+*/
   generateUsageDetailFile(result: any, callback: (err: any, res: any) => void) {
-    console.log(result);
     if(result && result.length>0) {
       var fields = ['candidateId', 'recruiterId','jobProfileId','action','timestamp'];
       var fieldNames = ['Candidate Id', 'RecruiterId','Job Profile Id','Action','TimeStamp'];
 
       var csv = json2csv({ data: result, fields: fields, fieldNames: fieldNames});
-      fs.writeFile('/home/bitnami/apps/jobmosis-staging/c-next/dist/prod/server/public/usagedetail.csv', csv, function(err:any) {
+      fs.writeFile('./src/server/public/usagedetail.csv', csv, function(err:any) {
         if (err) throw err;
         console.log('usagedetail file saved');
         console.log('Success');
@@ -143,6 +143,39 @@ class AdminService {
         console.log('after callback');
       });
     }else{
+      callback(null,result);
+    }
+  };
+
+  generateCandidateDetailFile(result: any, callback: (err: any, res: any) => void) {
+    if(result.candidate && result.candidate.length>0) {
+      var fields = ['first_name', 'last_name','mobile_number','email','isActivated','data.location.city','data.professionalDetails.education','data.professionalDetails.experience','data.professionalDetails.currentSalary','data.professionalDetails.noticePeriod','data.professionalDetails.relocate','data.professionalDetails.industryExposure','data.professionalDetails.currentCompany','data.isCompleted','data.isSubmitted','data.isVisible'];
+      var fieldNames = ['First Name', 'Last Name','Mobile Number','Email','Is Activated','Location','Education','Experience','Current Salary','Notice Period','Relocate','Industry Exposure','Current Company','IsCompleted','IsSubmitted','IsVisible'];
+      var csv = json2csv({ data: result.candidate, fields: fields, fieldNames: fieldNames});
+      fs.writeFile('./src/server/public/candidate.csv', csv, function(err:any) {
+        if (err) throw err;
+        console.log('candidate csv file saved');
+        console.log('Success');
+        callback(null,result);
+        console.log('after callback candidate.csv');
+      });
+    }else {
+      callback(null,result);
+    }
+  };
+  generateRecruiterDetailFile(result: any, callback: (err: any, res: any) => void) {
+    if(result.recruiter && result.recruiter.length>0) {
+      var fields = ['data.company_name','data.company_size','data.isRecruitingForself','data.jobCountModel.numberOfJobposted','mobile_number','email','isActivated','data.postedJobs.isJobPosted','data.postedJobs.jobTitle','data.postedJobs.hiringManager','data.postedJobs.department','data.postedJobs.education','data.postedJobs.experienceMinValue','data.postedJobs.experienceMaxValue','data.postedJobs.salaryMinValue','data.postedJobs.salaryMaxValue','data.postedJobs.joiningPeriod','data.postedJobs.postingDate','data.postedJobs.expiringDate'];
+      var fieldNames = ['Company Name','company size','Recruiting For Self','Number of Job Posted','Mobile Number','Email','Is Activated','Job Posted','Job Title','Hiring Manager','Department','Education','Minimum Experience','Maximum Experience','Minimum Salary','Maximum Salary','Joining Period','Job Posting Date','Job Expiry Date'];
+      var csv = json2csv({ data: result.recruiter, fields: fields, fieldNames: fieldNames, unwindPath: ['data.postedJobs']});
+      fs.writeFile('./src/server/public/recruiter.csv', csv, function(err:any) {
+        if (err) throw err;
+        console.log('recruiter csv file saved');
+        console.log('Success');
+        callback(null,result);
+        console.log('after callback recruiter.csv');
+      });
+    }else {
       callback(null,result);
     }
   };

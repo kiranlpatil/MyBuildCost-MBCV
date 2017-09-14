@@ -22,9 +22,9 @@ export class MultiSelectComponent implements OnChanges, OnInit {
   @Input() requiredKeySkillsValidationMessage: string;
   @Input() maxKeySkillsValidationMessage: string;
 
-  private selectedProficiencies = [];
-  private masterDataProficiencies = [];
-  private Proficiencies = [];
+  private selectedProficiencies: string[] = [];
+  private masterDataProficiencies : string[]= [];
+  private Proficiencies: string[] = [];
   private validationMessage: string;
   private showAlert: boolean = false;
   private alreadyPresent: boolean = false;

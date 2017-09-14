@@ -5,14 +5,14 @@ import { Role } from '../model/role';
 import { CandidateProfileService } from '../candidate-profile/candidate-profile.service';
 import { Proficiences } from '../model/proficiency';
 import { Section } from '../model/candidate';
-import { LocalStorage, Messages } from '../../../framework/shared/constants';
-import { LocalStorageService } from '../../../framework/shared/localstorage.service';
 import { ShowQcardviewService } from '../showQCard.service';
 import { Router } from '@angular/router';
 import { Industry } from '../model/industry';
 import { RecruiterDashboardService } from '../recruiter-dashboard/recruiter-dashboard.service';
 import { RecruiterDashboard } from '../model/recruiter-dashboard';
 import { ErrorService } from '../error.service';
+import {LocalStorage, Messages} from "../../../shared/constants";
+import {LocalStorageService} from "../../../shared/services/localstorage.service";
 
 @Component({
   moduleId: module.id,

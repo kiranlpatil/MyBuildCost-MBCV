@@ -88,18 +88,111 @@ export function getAllUser(req: express.Request, res: express.Response, next: an
                 code: 403
               });
             }else {
-              adminService.createXlsx(resp, (err, respo)=> {
+              res.status(200).send({
+                'status': 'success',
+                'data': resp
+              });
+            }
+          });
+        }
+      });
+    }else{
+      res.status(401).send({
+        'error': {
+          reason: 'Unauthorized User',
+          message:'You are unauthorized user',
+          code: 401
+        }
+      });
+    }
+  } catch (e) {
+    res.status(403).send({message: e.message});
+  }
+}
+export function getCandidateDetails(req: express.Request, res: express.Response, next: any) {
+  try {
+    var userService = new UserService();
+    var adminService = new AdminService();
+    var params = {};
+    if(req.user.isAdmin){
+      userService.retrieveAll(params, (error, result) => {
+        if (error) {
+          next({
+            reason: 'Error In Retrieving',//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
+            message: 'error in create excel',
+            code: 403
+          });
+        } else {
+          adminService.seperateUsers(result,(error, resp) => {
+            if (error) {
+              next({
+                reason: 'Error In Retrieving',//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
+                message: 'error in create excel',
+                code: 403
+              });
+            }else {
+              adminService.generateCandidateDetailFile(resp, (err, respo)=> {
                 if (err) {
                   next({
-                    reason: 'Error In Retrieving',//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
+                    reason: 'Error In Generating csv',//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
                     message: 'error in create excel',
                     code: 403
                   });
                 } else {
-                  res.status(200).send({
-                    'status': 'success',
-                    'data': resp
+                  var file = './src/server/public/candidate.csv';
+                  res.download(file);
+                }
+              });
+            }
+
+          });
+        }
+      });
+    }else{
+      res.status(401).send({
+        'error': {
+          reason: 'Unauthorized User',
+          message:'You are unauthorized user',
+          code: 401
+        }
+      });
+    }
+  } catch (e) {
+    res.status(403).send({message: e.message});
+  }
+}
+export function getRecruiterDetails(req: express.Request, res: express.Response, next: any) {
+  try {
+    var userService = new UserService();
+    var adminService = new AdminService();
+    var params = {};
+    if(req.user.isAdmin){
+      userService.retrieveAll(params, (error, result) => {
+        if (error) {
+          next({
+            reason: 'Error In Retrieving',//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
+            message: 'error in create excel',
+            code: 403
+          });
+        } else {
+          adminService.seperateUsers(result,(error, resp) => {
+            if (error) {
+              next({
+                reason: 'Error In Retrieving',//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
+                message: 'error in create excel',
+                code: 403
+              });
+            }else {
+              adminService.generateRecruiterDetailFile(resp, (err, respo)=> {
+                if (err) {
+                  next({
+                    reason: 'Error In Generating csv',//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
+                    message: 'error in create excel',
+                    code: 403
                   });
+                } else {
+                  var file = './src/server/public/recruiter.csv';
+                  res.download(file);
                 }
               });
             }
@@ -137,7 +230,7 @@ export function getUsageDetails(req: express.Request, res: express.Response, nex
           adminService.generateUsageDetailFile(result, (err, respo)=> {
             if (err) {
               next({
-                reason: 'Error In Retrieving',//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
+                reason: 'Error In generating csv',//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
                 message: 'error in create excel',
                 code: 403
               });
