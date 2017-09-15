@@ -7,7 +7,7 @@ import {ProfileService} from "../../framework/shared/profileservice/profile.serv
 import {HeaderComponent} from "../shared/header/header.component";
 import {FooterComponent} from "../shared/footer/footer.component";
 import {AppModule} from "../../app.module";
-import {DashboardService} from "./dashboard.service";
+import {DashboardService} from "../../user/dashboard.service";
 
 @NgModule({
   imports: [AppModule],

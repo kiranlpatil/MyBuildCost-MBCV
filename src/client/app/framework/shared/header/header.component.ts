@@ -4,8 +4,8 @@ import {Router} from "@angular/router";
 import {Subscription} from "rxjs/Subscription";
 //noinspection TypeScriptPreferShortImport
 import {ProfileService} from "../../shared/profileservice/profile.service";
-import {UserProfile} from "../../dashboard/user";
-import {DashboardService} from "../../dashboard/dashboard.service";
+import {UserProfile} from "../../../user/models/user";
+import {DashboardService} from "../../../user/dashboard.service";
 //noinspection TypeScriptPreferShortImport
 import {AppSettings, ImagePath, LocalStorage, NavigationRoutes} from "../../../shared/constants";
 //noinspection TypeScriptPreferShortImport

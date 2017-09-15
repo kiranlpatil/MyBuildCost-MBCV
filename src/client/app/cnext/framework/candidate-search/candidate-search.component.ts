@@ -5,7 +5,7 @@ import {CandidateSearch} from "../model/candidate-search";
 import {JobQcard} from "../model/JobQcard";
 import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
 import {Candidate} from "../model/candidate";
-import {CandidateDetail} from "../../../framework/registration/candidate/candidate";
+import {CandidateDetail} from "../../../user/models/candidate";
 import {Router} from "@angular/router";
 import {Messages, ValueConstant} from "../../../shared/constants";
 import {QCardViewService} from "../recruiter-dashboard/q-card-view/q-card-view.service";

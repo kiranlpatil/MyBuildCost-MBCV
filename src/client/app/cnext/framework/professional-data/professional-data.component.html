@@ -8,7 +8,7 @@
       <div class="col-md-8 col-sm-10 no-padding">
         <div class="form-group">
           <label>Current Salary</label>
-          <!-- <control-messages [control]="professionalDetailForm.controls.currentSalary"></control-messages>-->
+          <!-- <cn-control-messages [control]="professionalDetailForm.controls.currentSalary"></cn-control-messages>-->
           <select [(ngModel)]="candidate.professionalDetails.currentSalary" (change)="saveProfessionalData()">
             <option *ngFor="let c of salaryList" [ngValue]="c">{{c}}</option>
           </select>
@@ -21,7 +21,7 @@
 
         <div class="form-group">
           <label>Ready To Relocate?</label>
-          <!--  <control-messages [control]="professionalDetailForm.controls.relocate"></control-messages>-->
+          <!--  <cn-control-messages [control]="professionalDetailForm.controls.relocate"></cn-control-messages>-->
           <select [(ngModel)]="candidate.professionalDetails.relocate" (change)="saveProfessionalData()">
             <option *ngFor="let c of realocationList" [ngValue]="c">{{c}}</option>
           </select>
@@ -33,7 +33,7 @@
 
         <div class="form-group">
           <label>Company Culture</label>
-          <!-- <control-messages [control]="professionalDetailForm.controls.noticePeriod"></control-messages>-->
+          <!-- <cn-control-messages [control]="professionalDetailForm.controls.noticePeriod"></cn-control-messages>-->
           <select [(ngModel)]="candidate.professionalDetails.industryExposure" (change)="saveProfessionalData()">
             <option *ngFor="let c of industryExposureList" [ngValue]="c">{{c}}</option>
           </select>
@@ -45,7 +45,7 @@
 
         <div class="form-group">
           <label>Notice Period</label>
-          <!-- <control-messages [control]="professionalDetailForm.controls.noticePeriod"></control-messages>-->
+          <!-- <cn-control-messages [control]="professionalDetailForm.controls.noticePeriod"></cn-control-messages>-->
           <select [(ngModel)]="candidate.professionalDetails.noticePeriod" (change)="saveProfessionalData()">
             <option *ngFor="let c of noticePeriodList" [ngValue]="c">{{c}}</option>
           </select>

@@ -5,7 +5,7 @@ import {BaseService} from "../../../shared/services/httpservices/base.service";
 import {API, LocalStorage} from "../../../shared/constants";
 import {MessageService} from "../../../shared/services/message.service";
 import {LocalStorageService} from "../../../shared/services/localstorage.service";
-import {UserProfile} from "../../dashboard/user";
+import {UserProfile} from "../../../user/models/user";
 
 
 @Injectable()

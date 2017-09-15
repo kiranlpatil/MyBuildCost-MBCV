@@ -4,7 +4,7 @@
   <div class="dashboard-profile-content clearfix" [class.candidate-profile-content]="role==='candidate'">
 
     <!--<tpl-loader *ngSwitchCase="true"></tpl-loader>-->
-    <app-loader></app-loader>
+    <cn-app-loader></cn-app-loader>
 
     <h5>{{getHeadings().ACCOUNT_DETAILS_HEADING}}</h5>
 
@@ -25,7 +25,7 @@
       <form [formGroup]="userForm" (submit)="onSubmit()" class="profile-form clearfix">
 
         <div *ngIf="role==='candidate'" class="form-group" [class.fb-email-input]="isSocialLogin">
-          <control-messages [control]="userForm.controls.first_name"></control-messages>
+          <cn-control-messages [control]="userForm.controls.first_name"></cn-control-messages>
           <label>{{getLabels().FIRST_NAME_LABEL}} </label>
           <input type="text" [(ngModel)]="model.first_name" formControlName="first_name" id="first_name "
                  class="form-control"/>
@@ -33,7 +33,7 @@
 
 
         <div *ngIf="role==='candidate'" class="form-group" [class.fb-email-input]="isSocialLogin">
-          <control-messages [control]="userForm.controls.last_name"></control-messages>
+          <cn-control-messages [control]="userForm.controls.last_name"></cn-control-messages>
           <label>{{getLabels().LAST_NAME_LABEL}}</label>
           <input type="text" [(ngModel)]="model.last_name" formControlName="last_name" id="last_name "
                  class="form-control"/>
@@ -41,7 +41,7 @@
 
 
         <div class="form-group" [class.fb-email-input]="isSocialLogin">
-          <control-messages [control]="userForm.controls.email"></control-messages>
+          <cn-control-messages [control]="userForm.controls.email"></cn-control-messages>
           <label>{{getLabels().EMAIL_FIELD_LABEL}}
             <span class="glyphicon glyphicon-pencil" [class.hide-list]="isSocialLogin"
                   (click)="showHideEmailModal()"></span>
@@ -51,7 +51,7 @@
         </div>
 
         <div class="form-group" [class.hide-list]="isSocialLogin">
-          <control-messages [control]="userForm.controls.mobile_number"></control-messages>
+          <cn-control-messages [control]="userForm.controls.mobile_number"></cn-control-messages>
           <label>{{getLabels().CONTACT_FIELD_LABEL}}
             <span class="glyphicon glyphicon-pencil" (click)="showHideMobileModal()"></span>
           </label>

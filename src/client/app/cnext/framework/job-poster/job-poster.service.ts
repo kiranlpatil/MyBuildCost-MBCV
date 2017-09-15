@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { BaseService } from '../../../shared/services/httpservices/base.service';
 import { API, LocalStorage } from '../../../shared/constants';
 import { LocalStorageService } from '../../../shared/services/localstorage.service';
-import { JobPosterModel } from '../model/jobPoster';
+import { JobPosterModel } from '../../../user/models/jobPoster';
 
 @Injectable()
 

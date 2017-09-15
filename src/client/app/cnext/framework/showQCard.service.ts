@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
-import { JobPosterModel } from './model/jobPoster';
+import { JobPosterModel } from '../../user/models/jobPoster';
 
 @Injectable()
 export class ShowQcardviewService {

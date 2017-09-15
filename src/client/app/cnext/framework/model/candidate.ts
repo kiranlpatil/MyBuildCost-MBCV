@@ -1,11 +1,11 @@
-import {Industry} from "./industry";
+import {Industry} from "../../../user/models/industry";
 import {Award} from "./award";
 import {AcademicDetails} from "./academic-details";
 import {Certifications} from "./certification-accreditation";
 import {ProfessionalData} from "./professional-data";
 import {EmployementHistory} from "./employment-history";
-import {CandidateDetail} from "../../../framework/registration/candidate/candidate";
-import {Location} from "../../../framework/registration/location";
+import {CandidateDetail} from "../../../user/models/candidate";
+import {Location} from "../../../user/models/location";
 import {Capability} from "./capability";
 export class Candidate {
   personalDetails: CandidateDetail = new CandidateDetail();

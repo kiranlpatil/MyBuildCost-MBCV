@@ -5,7 +5,7 @@ import {AppSettings} from "../../shared/constants";
 
 @Component({
   moduleId: module.id,
-  selector: 'user-header',
+  selector: 'cn-user-header',
   templateUrl: 'user-header.component.html',
   styleUrls: ['user-header.component.css'],
 })

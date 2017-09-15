@@ -27,7 +27,7 @@
       <form [formGroup]="userForm" (submit)="onSubmit()">
 
         <div class="form-group input-group">
-          <control-messages [control]="userForm.controls.first_name"></control-messages>
+          <cn-control-messages [control]="userForm.controls.first_name"></cn-control-messages>
           <span class="input-group-addon glyphicon glyphicon-user"></span>
           <input type="text" formControlName="first_name" id="first_name " placeholder="Name"
                  class="form-control"/>
@@ -35,13 +35,13 @@
 
 
         <div class="form-group input-group">
-          <control-messages [control]="userForm.controls.email"></control-messages>
+          <cn-control-messages [control]="userForm.controls.email"></cn-control-messages>
           <span class="input-group-addon glyphicon glyphicon-envelope"></span>
           <input formControlName="email" id="email" placeholder="Email" class="form-control"/>
         </div>
 
         <div class="form-group input-group">
-          <control-messages [control]="userForm.controls.message"></control-messages>
+          <cn-control-messages [control]="userForm.controls.message"></cn-control-messages>
           <span class="input-group-addon glyphicon glyphicon-comment"></span>
           <textarea formControlName="message" id="message" placeholder="Message" class="form-control"
                     rows="4"></textarea>

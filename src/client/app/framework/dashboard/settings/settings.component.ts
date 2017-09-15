@@ -11,7 +11,7 @@ import {
 } from '../../../shared/index';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SettingsService } from './settings.service';
-import { UserProfile } from './../user';
+import { UserProfile } from "../../../user/models/user";
 import { ProjectAsset, Headings } from '../../../shared/constants';
 import { LoaderService } from '../../../shared/loader/loaders.service';
 import { ActivatedRoute } from '@angular/router';

@@ -10,7 +10,7 @@ import {ImagePath, ProjectAsset} from "../../shared/constants";
 
 @Component({
   moduleId: module.id,
-  selector: 'forgot-password',
+  selector: 'cn-forgot-password',
   templateUrl: 'forgot-password.component.html',
   styleUrls: ['forgot-password.component.css'],
 })

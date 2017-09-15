@@ -9,7 +9,7 @@ import {QCardFilter} from "../../model/q-card-filter";
 import {CandidateQListModel} from "../job-dashboard/q-cards-candidates";
 import {RecruiterJobView} from "../../model/recruiter-job-view";
 import {Candidate} from "../../model/candidate";
-import {CandidateDetail} from "../../../../framework/registration/candidate/candidate";
+import {CandidateDetail} from "../../../../user/models/candidate";
 import {CandidateProfileService} from "../../candidate-profile/candidate-profile.service";
 import {Message} from "../../../../shared/models/message";
 import {MessageService} from "../../../../shared/services/message.service";

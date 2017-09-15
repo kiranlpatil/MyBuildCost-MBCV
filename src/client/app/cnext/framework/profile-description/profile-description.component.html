@@ -28,7 +28,7 @@
 
           <div class="form-group">
             <label>Current Company</label>
-            <!--<control-messages [control]="professionalDetailForm.controls.education"></control-messages>-->
+            <!--<cn-control-messages [control]="professionalDetailForm.controls.education"></cn-control-messages>-->
             <input name="currentcompany" class="form-control" placeholder=""
                    [(ngModel)]="candidate.professionalDetails.currentCompany">
             <div class="error-messages" *ngIf="(candidate.professionalDetails.currentCompany == '' || candidate.professionalDetails.currentCompany == undefined) && !isValid">{{currentCompanyValidationMessage}}</div>
@@ -36,7 +36,7 @@
 
           <!--<div class="form-group">
             <label>Current Location</label>
-            &lt;!&ndash;<control-messages [control]="professionalDetailForm.controls.education"></control-messages>&ndash;&gt;
+            &lt;!&ndash;<cn-control-messages [control]="professionalDetailForm.controls.education"></cn-control-messages>&ndash;&gt;
             <input name="location" class="form-control" placeholder=""
                    [(ngModel)]="candidate.professionalDetails.location">
             &lt;!&ndash;<div class="error-messages" *ngIf="islocationValid && !isValid">You can't leave this empty.</div>&ndash;&gt;
@@ -52,7 +52,7 @@
 
           <div class="form-group">
             <label>Highest Qualification</label>
-            <!--<control-messages [control]="professionalDetailForm.controls.education"></control-messages>-->
+            <!--<cn-control-messages [control]="professionalDetailForm.controls.education"></cn-control-messages>-->
             <select [(ngModel)]="candidate.professionalDetails.education">
               <option *ngFor="let c of educationList" [ngValue]="c">{{c}}</option>
             </select>
@@ -61,7 +61,7 @@
 
           <div class="form-group">
             <label>Total Experience</label>
-            <!--<control-messages [control]="professionalDetailForm.controls.experience"></control-messages>-->
+            <!--<cn-control-messages [control]="professionalDetailForm.controls.experience"></cn-control-messages>-->
             <select [(ngModel)]="candidate.professionalDetails.experience">
               <option *ngFor="let c of experienceList" [ngValue]="c">{{c}}</option>
             </select>

@@ -9,14 +9,14 @@ import {AboutRoutes} from "./framework/dashboard/about/index";
 import {SettingsRoutes} from "./framework/dashboard/settings/index";
 import {ActivateUserRoutes} from "./framework/registration/activate-user/activate-user.routes";
 import {ResetPasswordRoutes} from "./user/forgot-password/reset-password/index";
-import {VerifyUserRoutes} from "./framework/registration/verify_user/index";
-import {VerifyPhoneRoutes} from "./framework/registration/verify_phone/verify-phone.routes";
+import {UserVerificationRoutes} from "./user/user-verification/index";
+import {CandidateSignUpVerificationRoutes} from "./user/candidate-sign-up-verification/candidate-sign-up-verification.routes";
 import {ChangeEmailRoutes} from "./framework/dashboard/settings/change-email/change-email.routes";
 import {ActivateEmailRoutes} from "./framework/dashboard/settings/activate-email/activate-email.routes";
 import {ChangeMobileRoutes} from "./framework/dashboard/settings/change-mobile/change-mobile.routes";
-import {CandidateRoutes} from "./framework/registration/candidate/candidate.routes";
-import {RecruiterRoutes} from "./framework/registration/recruiter/recruiter.routes";
-import {CompanyDetailsRoutes} from "./framework/registration/company_details/company-details.routes";
+import {CandidateSignUpRoutes} from "./user/candidate-sign-up/candidate-sign-up.routes";
+import {RecruiterSignUpRoutes} from "./user/recruiter-sign-up/recruiter.routes";
+import {CompanyDetailsRoutes} from "./user/company-details/company-details.routes";
 import {RecruiterDashboard} from "./cnext/framework/recruiter-dashboard/recruiter-dashboard.routes";
 import {CandidateSummary} from "./cnext/framework/one-page-summary/candidate-summary/candidate-summary.routes";
 import {ProfileCreator} from "./cnext/framework/candidate-profile/candidate-profile.routes";
@@ -34,12 +34,12 @@ import {LandingPageRoutes} from "./framework/landing-page/landing-page.routes";
 export const routes: Routes = [
   ...LandingPageRoutes,
   ...LoginRoutes,
-  ...CandidateRoutes,
-  ...RecruiterRoutes,
+  ...CandidateSignUpRoutes,
+  ...RecruiterSignUpRoutes,
   ...ActivateUserRoutes,
   ...ActivateEmailRoutes,
-  ...VerifyUserRoutes,
-  ...VerifyPhoneRoutes,
+  ...UserVerificationRoutes,
+  ...CandidateSignUpVerificationRoutes,
   ...DashboardRoutes,
   ...AdminDashboard,
   ...CandidateDashboard,

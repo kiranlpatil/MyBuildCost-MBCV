@@ -4,7 +4,7 @@ import {JobDashboardService} from "./job-dashboard.service";
 import {RecruiterJobView} from "../../model/recruiter-job-view";
 import {ValueConstant, Tooltip} from "../../../../shared/constants";
 import {CandidateQListModel} from "./q-cards-candidates";
-import {JobPosterModel} from "../../model/jobPoster";
+import {JobPosterModel} from "../../../../user/models/jobPoster";
 import {ReferenceService} from "../../model/newClass";
 import {QCardFilterService} from "../../filters/q-card-filter.service";
 import {QCardFilter} from "../../model/q-card-filter";

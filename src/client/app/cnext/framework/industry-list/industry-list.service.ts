@@ -4,7 +4,7 @@ import {Observable} from "rxjs/Observable";
 import {BaseService} from "../../../shared/services/httpservices/base.service";
 import {API, LocalStorage} from "../../../shared/constants";
 import {LocalStorageService} from "../../../shared/services/localstorage.service";
-import {Industry} from "../model/industry";
+import {Industry} from "../../../user/models/industry";
 
 @Injectable()
 

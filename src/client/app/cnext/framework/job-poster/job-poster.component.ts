@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
-import { JobPosterModel } from '../model/jobPoster';
+import { JobPosterModel } from "../../../user/models/jobPoster";
 import { JobPosterService } from './job-poster.service';
 import { Role } from '../model/role';
 import { CandidateProfileService } from '../candidate-profile/candidate-profile.service';
@@ -7,7 +7,7 @@ import { Proficiences } from '../model/proficiency';
 import { Section } from '../model/candidate';
 import { ShowQcardviewService } from '../showQCard.service';
 import { Router } from '@angular/router';
-import { Industry } from '../model/industry';
+import { Industry } from "../../../user/models/industry";
 import { RecruiterDashboardService } from '../recruiter-dashboard/recruiter-dashboard.service';
 import { RecruiterDashboard } from '../model/recruiter-dashboard';
 import { ErrorService } from '../error.service';

@@ -2,10 +2,10 @@ import {Component, EventEmitter, Input, OnChanges, Output, OnInit} from '@angula
 import {JobCompareService} from './job-compare-view.service';
 import {Capability} from '../../model/capability';
 import {Candidate} from '../../model/candidate';
-import {CandidateDetail} from '../../../../framework/registration/candidate/candidate';
+import {CandidateDetail} from "../../../../user/models/candidate";
 import {CandidateProfileService} from '../../candidate-profile/candidate-profile.service';
 import {RecruiterDashboardService} from '../../recruiter-dashboard/recruiter-dashboard.service';
-import {Recruiter} from '../../../../framework/registration/recruiter/recruiter';
+import {Recruiter} from "../../../../user/models/recruiter";
 import {AppSettings, ImagePath, LocalStorage} from '../../../../shared/constants';
 import {GuidedTourService} from '../../guided-tour.service';
 import {LocalStorageService} from '../../../../shared/services/localstorage.service';

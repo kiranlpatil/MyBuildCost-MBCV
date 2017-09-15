@@ -13,7 +13,7 @@ import {ValidationService} from "../../../shared/customvalidations/validation.se
 
 @Component({
   moduleId: module.id,
-  selector: 'reset-password',
+  selector: 'cn-reset-password',
   templateUrl: 'reset-password.component.html',
   styleUrls: ['reset-password.component.css'],
 })

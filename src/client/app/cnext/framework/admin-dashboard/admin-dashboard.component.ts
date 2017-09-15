@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Candidate } from '../model/candidate';
 import {ErrorService} from "../error.service";
-import {DashboardService} from "../../../framework/dashboard/dashboard.service";
+import {DashboardService} from "../../../user/dashboard.service";
 import {UserData} from "../model/userData";
 import {AdminDashboardService} from "./admin-dashboard.service";
 
