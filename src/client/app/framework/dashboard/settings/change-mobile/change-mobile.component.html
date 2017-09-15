@@ -2,27 +2,27 @@
   <div>
 
     <!--<tpl-loader *ngSwitchCase="true"></tpl-loader>-->
-    <app-loader></app-loader>
+    <cn-app-loader></cn-app-loader>
 
     <div class="col-sm-12 no-padding">
 
       <form [formGroup]="userForm" (submit)="onSubmit()">
 
         <div class="form-group" [class.fb-email-input]="isSocialLogin">
-          <control-messages [control]="userForm.controls.current_mobile_number"></control-messages>
+          <cn-control-messages [control]="userForm.controls.current_mobile_number"></cn-control-messages>
           <label>Current Mobile Number</label>
           <input type="number" [(ngModel)]="model.current_mobile_number" formControlName="current_mobile_number"
                  id="current_mobile_number" class="form-control" readonly/>
         </div>
 
         <div class="form-group" [class.fb-email-input]="isSocialLogin">
-          <control-messages [control]="userForm.controls.new_mobile_number"></control-messages>
+          <cn-control-messages [control]="userForm.controls.new_mobile_number"></cn-control-messages>
           <label>New Mobile Number</label>
           <input type="number" formControlName="new_mobile_number" id="new_mobile_number" class="form-control"/>
         </div>
 
         <div class="form-group" [class.fb-email-input]="isSocialLogin">
-          <control-messages [control]="userForm.controls.confirm_mobile_number"></control-messages>
+          <cn-control-messages [control]="userForm.controls.confirm_mobile_number"></cn-control-messages>
           <label>Confirm Mobile Number</label>
           <input type="number" formControlName="confirm_mobile_number" id="confirm_mobile_number"
                  (blur)="makeMobileConfirm()" class="form-control"/>

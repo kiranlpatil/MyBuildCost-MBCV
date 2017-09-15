@@ -3,11 +3,11 @@
  */
 import {NgModule} from "@angular/core";
 import {DashboardComponent} from "./dashboard.component";
-import {ProfileService} from "../shared/profileservice/profile.service";
+import {ProfileService} from "../../framework/shared/profileservice/profile.service";
 import {HeaderComponent} from "../shared/header/header.component";
 import {FooterComponent} from "../shared/footer/footer.component";
 import {AppModule} from "../../app.module";
-import {DashboardService} from "./dashboard.service";
+import {DashboardService} from "../../user/dashboard.service";
 
 @NgModule({
   imports: [AppModule],

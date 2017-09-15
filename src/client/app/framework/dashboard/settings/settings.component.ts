@@ -1,24 +1,24 @@
-import {Component, OnDestroy, OnInit} from "@angular/core";
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import {
-    AppSettings,
-    CommonService,
-    LocalStorage,
-    LocalStorageService,
-    Message,
-    Messages,
-    MessageService,
-    ThemeChangeService
-} from "../../shared/index";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {SettingsService} from "./settings.service";
-import {UserProfile} from "./../user";
-import {ProjectAsset} from "../../shared/constants";
-import {LoaderService} from "../../shared/loader/loader.service";
-import {ActivatedRoute} from "@angular/router";
-import {Candidate, Summary} from "../../../cnext/framework/model/candidate";
-import {CandidateProfileService} from "../../../cnext/framework/candidate-profile/candidate-profile.service";
-import {ErrorService} from "../../../cnext/framework/error.service";
-import {AdminDashboardService} from "../../../cnext/framework/admin-dashboard/admin-dashboard.service";
+  AppSettings,
+  CommonService,
+  LocalStorage,
+  LocalStorageService,
+  Message,
+  Messages,
+  MessageService,
+  ThemeChangeService
+} from '../../../shared/index';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { SettingsService } from './settings.service';
+import { UserProfile } from "../../../user/models/user";
+import { ProjectAsset, Headings } from '../../../shared/constants';
+import { LoaderService } from '../../../shared/loader/loaders.service';
+import { ActivatedRoute } from '@angular/router';
+import { Candidate, Summary } from '../../../cnext/framework/model/candidate';
+import { CandidateProfileService } from '../../../cnext/framework/candidate-profile/candidate-profile.service';
+import { ErrorService } from '../../../cnext/framework/error.service';
+import { AdminDashboardService } from '../../../cnext/framework/admin-dashboard/admin-dashboard.service';
 
 @Component({
   moduleId: module.id,
@@ -35,9 +35,8 @@ export class SettingsComponent implements OnInit, OnDestroy {
   INITIAL_THEME = AppSettings.INITIAL_THEM;
   LIGHT_THEME = AppSettings.LIGHT_THEM;
   APP_NAME: string;
-  changeThemeMessage:string= Messages.MSG_CHANGE_THEME;
-    role: string;
-    private candidate: Candidate = new Candidate();
+  role: string;
+  private candidate: Candidate = new Candidate();
 
     constructor(private commonService: CommonService, private activatedRoute: ActivatedRoute,
                 private candidateProfileService: CandidateProfileService,
@@ -151,5 +150,8 @@ export class SettingsComponent implements OnInit, OnDestroy {
     message.isError = false;
     message.custom_message = Messages.MSG_ERROR_CHANGE_THEME;
     this.messageService.message(message);
+  }
+  getHeadings() {
+    return Headings;
   }
 }

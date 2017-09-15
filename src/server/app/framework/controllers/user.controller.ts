@@ -8,6 +8,8 @@ import RecruiterService = require("../services/recruiter.service");
 import Messages = require("../shared/messages");
 import ResponseService = require("../shared/response.service");
 import CandidateService = require("../services/candidate.service");
+import adminController= require("./admin.controller");
+
 var bcrypt = require('bcrypt');
 
 export function login(req: express.Request, res: express.Response, next: any) {
@@ -34,6 +36,7 @@ export function login(req: express.Request, res: express.Response, next: any) {
               var auth = new AuthInterceptor();
               var token = auth.issueTokenWithUid(result[0]);
               if(result[0].isAdmin){
+                adminController.sendLoginInfoToAdmin(result[0].email,req.connection.remoteAddress,params.latitude,params.longitude);
                 res.status(200).send({
                   "status": Messages.STATUS_SUCCESS,
                   "data": {
@@ -1334,7 +1337,7 @@ export function updatePicture(req: express.Request, res: express.Response, next:
                         }
                         else {
                           var auth: AuthInterceptor = new AuthInterceptor();
-                          var token = auth.issueTokenWithUid(response);
+                          var token = auth.issueTokenWithUid(result);
                           res.status(200).send({access_token: token, data: response});
                         }
                       });
@@ -1349,7 +1352,7 @@ export function updatePicture(req: express.Request, res: express.Response, next:
                     }
                     else {
                       var auth: AuthInterceptor = new AuthInterceptor();
-                      var token = auth.issueTokenWithUid(response);
+                      var token = auth.issueTokenWithUid(result);
                       res.status(200).send({access_token: token, data: response});
                     }
                   });

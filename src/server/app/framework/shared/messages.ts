@@ -1,6 +1,6 @@
 class Messages {
   //Image Paths
-  public static EMAIL_TEMPLATE_LOGO: string = './src/server/app/framework/public/images/logo/job-mosis-logo.png'
+  public static EMAIL_TEMPLATE_LOGO:string = './src/server/app/framework/public/images/logo/job-mosis-logo.png';
 
   //status
   public static STATUS_SUCCESS: string = 'Success';
@@ -64,9 +64,10 @@ class Messages {
   public static MSG_ERROR_FIELD_VERIFICATION: string = 'Fields Verification Failed';
   public static MSG_ERROR_FACEBOOK_AUTH: string = 'Facebook Authentication Failed';
   public static MSG_ERROR_GOOGLE_AUTH: string = 'Google plus Authentication Failed';
-  public static MSG_ERROR_EMPTY_FIELD: string = 'Fields cannot be empty';
+  public static MSG_ERROR_EMPTY_FIELD: string = 'Fields can\'t be empty';
   public static MSG_ERROR_WHILE_CONTACTING: string = 'Something went wrong. Try again.';
   public static MSG_ERROR_CONNECTION_TIMEOUT: string = 'Connection timeout. Try again.';
+  public static MSG_ERROR_INCORRECT_INDUSTRY_NAME: string = 'Excel With this name is not present.Excel name must be NewIndustryDataExcel.xlsx';
 
   //
 
@@ -96,6 +97,8 @@ class Messages {
   public static MSG_ERROR_CHECK_INVALID_ACCOUNT: string = 'Error: Sorry. There is no user registered with this email address.'; // should be same to MSG_ERROR_USER_NOT_FOUND
   public static MSG_ERROR_CHECK_MOBILE_PRESENT: string = 'Error: This mobile number is already in use by an existing user. Please enter another mobile number.'; //should be same to MSG_ERROR_REGISTRATION_MOBILE_NUMBER
   public static MSG_ERROR_CHECK_EMAIL_PRESENT: string = 'Error: Please click on the link sent to your email in order to activate your account. ';
+
+  public static MSG_ERROR_API_CHECK = 'Invalid access token';
 }
 export=Messages;
 

@@ -1,61 +1,38 @@
 import {ErrorHandler, NgModule} from "@angular/core";
 import {AppComponent} from "./app.component";
-import {BrowserModule} from "@angular/platform-browser";
+import {BrowserModule, Title} from "@angular/platform-browser";
 import {APP_BASE_HREF} from "@angular/common";
 import {RouterModule} from "@angular/router";
-import {RecaptchaModule} from "ng-recaptcha";
+import {RecaptchaModule} from "ng2-recaptcha";
 import {routes} from "./app.routes";
 import {Http, HttpModule, RequestOptions, XHRBackend} from "@angular/http";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {ValidationService} from "./framework/shared/customvalidations/validation.service";
-import {ControlMessagesComponent} from "./framework/shared/customvalidations/controlmessages.component";
-import {AppRequestOptions, CustomHttp, LoaderService, MessageService} from "./framework/shared/index";
-import {LoginComponent} from "./framework/login/login.component";
+import {AppRequestOptions, LoaderService, MessageService} from "./shared/index";
 import {DashboardComponent} from "./framework/dashboard/dashboard.component";
 import {ChangePasswordComponent} from "./framework/password/change-password/change-password.component";
-import {ForgotPasswordComponent} from "./framework/password/forgot-password/forgot-password.component";
 import {DashboardProfileComponent} from "./framework/dashboard/dashboard-profile/dashboard-profile.component";
 import {AboutComponent} from "./framework/dashboard/about/about.component";
 import {ContactComponent} from "./framework/dashboard/contact/contact.component";
 import {SettingsComponent} from "./framework/dashboard/settings/settings.component";
 import {DashboardHomeComponent} from "./framework/dashboard/dashboard-home/dashboard-home.component";
-import {FacebookService} from "./framework/login/facebook.service";
-import {CommonService} from "./framework/shared/common.service";
 import {FooterComponent} from "./framework/shared/footer/footer.component";
 import {HeaderComponent} from "./framework/shared/header/header.component";
 import {ChangePasswordService} from "./framework/password/change-password/change-password.service";
 import {NotificationService} from "./framework/shared/notification/notification.service";
 import {NotificationComponent} from "./framework/shared/notification/notification.component";
-import {ForgotPasswordService} from "./framework/password/forgot-password/forgot-password.service";
 import {SocialIconComponent} from "./framework/shared/footer/social-icon/social-icon.component";
-import {LoaderComponent} from "./framework/shared/loader/loader.component";
-import {ThemeChangeService} from "./framework/shared/themechange.service";
-import {LoginService} from "./framework/login/login.service";
-import {DashboardService} from "./framework/dashboard/dashboard.service";
-import {ProfileService} from "./framework/shared/profileservice/profile.service";
+import {DashboardService} from "./user/dashboard.service";
 import {ContactService} from "./framework/dashboard/contact/contact.service";
 import {ActivateUserComponent} from "./framework/registration/activate-user/activate-user.component";
-import {ResetPasswordComponent} from "./framework/password/forgot-password/reset-password/reset-password.component";
 import {ActiveUserService} from "./framework/registration/activate-user/activate-user.service";
-import {ResetPasswordService} from "./framework/password/forgot-password/reset-password/reset-password.service";
-import {VerifyUserComponent} from "./framework/registration/verify_user/verify-user.component";
-import {VerifyUserService} from "./framework/registration/verify_user/verify-user.service";
-import {VerifyPhoneComponent} from "./framework/registration/verify_phone/verify-phone.component";
-import {VerifyPhoneService} from "./framework/registration/verify_phone/verify-phone.service";
 import {ChangeEmailComponent} from "./framework/dashboard/settings/change-email/change-email.component";
 import {ChangeEmailService} from "./framework/dashboard/settings/change-email/change-email.service";
 import {ActivateEmailComponent} from "./framework/dashboard/settings/activate-email/activate-email.component";
 import {ActiveEmailService} from "./framework/dashboard/settings/activate-email/activate-email.service";
 import {ChangeMobileComponent} from "./framework/dashboard/settings/change-mobile/change-mobile.component";
 import {ChangeMobileService} from "./framework/dashboard/settings/change-mobile/change-mobile.service";
-import {LandingPageComponent} from "./framework/landing-page/landing-page.component";
-import {NgAutoCompleteModule} from "ng-auto-complete/ng-autocomplete.module";
-import {CandidateComponent} from "./framework/registration/candidate/candidate.component";
-import {RecruiterComponent} from "./framework/registration/recruiter/recruiter.component";
-import {CandidateService} from "./framework/registration/candidate/candidate.service";
-import {RecruiterService} from "./framework/registration/recruiter/recruiter.service";
+import {Ng2AutoCompleteModule} from "ng2-auto-complete/dist/ng2-auto-complete.module";
 import {ScrollToModule} from "ng2-scroll-to";
-import {ProfilePictureComponent} from "./cnext/framework/profile-picture/profile-picture.component";
 import {ComplexityService} from "./cnext/framework/complexity.service";
 import {ProfessionalDataComponent} from "./cnext/framework/professional-data/professional-data.component";
 import {ProfessionalDataService} from "./cnext/framework/professional-data/professional-data.service";
@@ -67,8 +44,6 @@ import {AwardsComponent} from "./cnext/framework/awards/awards.component";
 import {MoreAboutMyselfComponent} from "./cnext/framework/more-about-myself/more-about-myself.component";
 import {JobPosterComponent} from "./cnext/framework/job-poster/job-poster.component";
 import {DescriptionFieldComponent} from "./cnext/framework/description-field/description-field.component";
-import {CompanyDetailsComponent} from "./framework/registration/company_details/company-details.component";
-import {CompanyDetailsService} from "./framework/registration/company_details/company-details.service";
 import {RecruiterDashboardComponent} from "./cnext/framework/recruiter-dashboard/recruiter-dashboard.component";
 import {IndustryListComponent} from "./cnext/framework/industry-list/industry-list.component";
 import {IndustryListService} from "./cnext/framework/industry-list/industry-list.service";
@@ -139,7 +114,6 @@ import {MaxRangeValidation} from "./cnext/framework/filters/max-range-validation
 import {RecuirterQCardMatchingPipe} from "./cnext/framework/filters/recuirter-q-card-matching.pipe";
 import {EmployeeHistoryComponent} from "./cnext/framework/employment-history/employee-history/employee-history.component";
 import {QCardListFilterPipe} from "./cnext/framework/filters/q-card-list-filter.pipe";
-import {MyGoogleDirective} from "./framework/registration/candidate/google-our-place/googleplace.directive";
 import {CandidateDashboardHeaderComponent} from "./cnext/framework/candidate-dashboard/candidate-dashboard-header/candidate-dashboard-header.component";
 import {JobDashboardComponent} from "./cnext/framework/recruiter-dashboard/job-dashboard/job-dashboard.component";
 import {JobDashboardService} from "./cnext/framework/recruiter-dashboard/job-dashboard/job-dashboard.service";
@@ -151,7 +125,6 @@ import {CertificatesComponent} from "./cnext/framework/certification-accreditati
 import {AwardComponent} from "./cnext/framework/awards/award/award.component";
 import {ProficiencyCompareComponent} from "./cnext/framework/single-page-compare-view/shared/proficiency-compare/proficiency-compare.component";
 import {CandidateCompareService} from "./cnext/framework/single-page-compare-view/candidate-compare-view/candidate-compare-view.service";
-import {TooltipComponent} from "./cnext/framework/tool-tip-component/tool-tip-component";
 import {JobCompareService} from "./cnext/framework/single-page-compare-view/job-compare-view/job-compare-view.service";
 import {JobCompareViewComponent} from "./cnext/framework/single-page-compare-view/job-compare-view/job-compare-view.component";
 import {GuidedTourComponent} from "./cnext/framework/guided-tour/guided-tour.component";
@@ -171,7 +144,6 @@ import {IndustryDetailsService} from "./cnext/framework/industry-detail-service"
 import {IndustryDetailsDirective} from "./cnext/framework/shared-directives/industry-details.directive";
 import {IndustryDataDirective} from "./cnext/framework/shared-directives/industry-data.directive";
 import {IndustryDataService} from "./cnext/framework/industry-data-service";
-
 import {ProfileComparisonComponent} from "./cnext/framework/profile-comparison/profile-comparison.component";
 import {ProfileComparisonService} from "./cnext/framework/profile-comparison/profile-comparison.service";
 import {ProfileComparisonHeaderComponent} from "./cnext/framework/profile-comparison/profile-comparison-header/profile-comparison-header.component";
@@ -183,7 +155,6 @@ import {ProfileComparisonPipe} from "./cnext/framework/profile-comparison/profil
 import {ColorShadeDirective} from "./cnext/framework/profile-comparison/profile-capability-comparison/color-shade.directive";
 import {AttributeFilterPipe} from "./cnext/framework/profile-comparison/profile-attribute-comparison/attribute-filter.pipe";
 import {ValueSortFilterPipe} from "./cnext/framework/profile-comparison/value-sort.pipe";
-import {RegistrationService} from "./framework/shared/registration.service";
 import {GuidedTourService} from "./cnext/framework/guided-tour.service";
 import {ErrorService} from "./cnext/framework/error.service";
 import {LoggerService, MyErrorHandler} from "./cnext/framework/my-error-handler.service";
@@ -193,13 +164,20 @@ import {RecruiterDetailListComponent} from "./cnext/framework/admin-dashboard/re
 import {CandidateDetailListComponent} from "./cnext/framework/admin-dashboard/candidate-detail-list/candidate-detail-list.component";
 import {KeyskillsDetailListComponent} from "./cnext/framework/admin-dashboard/keyskills-detail-list/keyskills-detail-list.component";
 import {AdminDashboardService} from "./cnext/framework/admin-dashboard/admin-dashboard.service";
-
-import {SharedService} from "./framework/shared/shared-service";
 import {CandidateSearchComponent} from "./cnext/framework/candidate-search/candidate-search.component";
 import {CandidateSearchService} from "./cnext/framework/candidate-search/candidate-search.service";
-import {MainHeaderComponent} from "./framework/main-header/main-header.component";
-import {Ng2AutoCompleteModule} from "ng2-auto-complete";
+import {user} from "./user/user.module";
+import {SharedModule} from "./shared/shared.module";
+import {CustomHttp} from "./shared/services/httpservices/custom.http";
+import {ProfileService} from "./framework/shared/profileservice/profile.service";
+import {LandingPageComponent} from "./framework/landing-page/landing-page.component";
+import {ShareComponent} from "./cnext/framework/share/share.component";
+import {ShareService} from "./cnext/framework/share/share.service";
+import {SeoService} from "./cnext/framework/share/seo.service";
+import {SharedService} from "./shared/services/shared-service";
+
 //C-NEXT IMPORTS
+
 
 @NgModule({
   imports: [
@@ -208,32 +186,22 @@ import {Ng2AutoCompleteModule} from "ng2-auto-complete";
     RouterModule.forRoot(routes),
     HttpModule,
     ReactiveFormsModule,
-    //RecaptchaModule.forRoot(), // Keep in mind the 'forRoot'-magic nuances!
-    //Ng2AutoCompleteModule,
-    //ScrollToModule.forRoot()
+    RecaptchaModule.forRoot(), // Keep in mind the 'forRoot'-magic nuances!
+    Ng2AutoCompleteModule,
+    ScrollToModule.forRoot(),
+    SharedModule,
+    user,
   ],
   declarations: [
     AppComponent,
-    ControlMessagesComponent,
-    MyGoogleDirective,
-    LoaderComponent,
     LandingPageComponent,
-    TooltipComponent,
-    LoginComponent,
-    MainHeaderComponent,
-    CandidateComponent,
-    RecruiterComponent,
     CandidateDashboardHeaderComponent,
     ActivateUserComponent,
     ActivateEmailComponent,
-    VerifyUserComponent,
-    VerifyPhoneComponent,
     DashboardComponent,
     ChangePasswordComponent,
     ChangeEmailComponent,
     ChangeMobileComponent,
-    ForgotPasswordComponent,
-    ResetPasswordComponent,
     DashboardProfileComponent,
     AboutComponent,
     ContactComponent,
@@ -246,7 +214,6 @@ import {Ng2AutoCompleteModule} from "ng2-auto-complete";
 
     //C-NEXT COMPONENT
 
-    ProfilePictureComponent,
     CandidateSummaryComponent,
     CandidateBasicInformationComponent,
     VericalListViewComponent,
@@ -289,7 +256,6 @@ import {Ng2AutoCompleteModule} from "ng2-auto-complete";
     CertificationAccreditationComponent,
     AwardsComponent,
     DescriptionFieldComponent,
-    CompanyDetailsComponent,
     MoreAboutMyselfComponent,
     CandidateHeaderComponent,
     FilterComponent,
@@ -336,7 +302,8 @@ import {Ng2AutoCompleteModule} from "ng2-auto-complete";
     ColorShadeDirective,
     AttributeFilterPipe,
     ValueSortFilterPipe,
-    CandidateSearchComponent
+    CandidateSearchComponent,
+    ShareComponent
   ],
   providers: [
     {
@@ -346,46 +313,31 @@ import {Ng2AutoCompleteModule} from "ng2-auto-complete";
       deps: [XHRBackend, RequestOptions, MessageService, LoaderService]
     },
     {provide: RequestOptions, useClass: AppRequestOptions},
-    LoggerService,{provide: ErrorHandler, useClass: MyErrorHandler},
+    LoggerService, {provide: ErrorHandler, useClass: MyErrorHandler},
     {
       provide: APP_BASE_HREF,
       useValue: '<%= APP_BASE %>'
     },
-    MessageService,
-    RegistrationService,
     ComplexityComponentService,
-    FacebookService,
-    LoginService,
-    LoaderService,
-    CommonService,
-    ValidationService,
     ComplexityService,
     JobCompareService,
     ChangePasswordService,
     ChangeEmailService,
     ChangeMobileService,
     NotificationService,
-    ForgotPasswordService,
-    ThemeChangeService,
-    CandidateService,
-    RecruiterService,
     DashboardService,
     ProfileService,
     ContactService,
     CandidateCompareService,
-    ResetPasswordService,
     ActiveUserService,
     ActiveEmailService,
-    VerifyUserService,
     BasicJobInformationService,
-    VerifyPhoneService,
     ErrorService,
     IndustryListService,
     CandidateJobListService,
     ProfessionalDataService,
     EmploymentHistoryService,
     ProficiencyDomainService,
-    CompanyDetailsService,
     EmploymentHistoryService,
     DateService,
     CandidateDashboardService,
@@ -419,7 +371,10 @@ import {Ng2AutoCompleteModule} from "ng2-auto-complete";
     ProfileComparisonService,
     GuidedTourService,
     CandidateSearchService,
-    SharedService
+    SharedService,
+    ShareService,
+    SeoService,
+    Title
   ],
   bootstrap: [AppComponent]
 })

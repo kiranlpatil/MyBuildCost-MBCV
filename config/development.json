@@ -7,9 +7,11 @@
     "mail": {
       "host": "http://localhost:8080/",
       //"host":"http://7a4647ae.ngrok.io/"
-      "MAIL_SENDER": "notifications@jobmosis.com",
-      "MAIL_SENDER_PASSWORD": "notifications@123",
-      "ADMIN_MAIL": "notifications@jobmosis.com"
+      "MAIL_SENDER": "redminestatus@techprimelab.com",
+      "MAIL_SENDER_PASSWORD": "Contactu$@tpl",
+      "ADMIN_MAIL": "lucky.vaishnav@techprimelab.com",
+      "TPLGROUP_MAIL":"luckyvaishnav55@gmail.com",
+      "MAIL_SERVICE": "Gmail"
 
     },
     "facebookIds":{

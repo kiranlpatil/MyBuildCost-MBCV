@@ -1,11 +1,11 @@
 import {Component, Input, OnChanges} from '@angular/core';
-import {CandidateDetail} from '../../../../../framework/registration/candidate/candidate';
+import {CandidateDetail} from '../../../../../user/models/candidate';
 import {Candidate} from '../../../model/candidate';
 import {CandidateProfileService} from '../../../candidate-profile/candidate-profile.service';
 import {ComplexityComponentService} from '../../../complexities/complexity.service';
 import {JobCompareService} from '../../../single-page-compare-view/job-compare-view/job-compare-view.service';
 import {ErrorService} from "../../../error.service";
-import {Headings} from "../../../../../framework/shared/constants";
+import {Headings} from "../../../../../shared/constants";
 
 
 @Component({

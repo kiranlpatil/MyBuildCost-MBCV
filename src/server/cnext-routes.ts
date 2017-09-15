@@ -10,55 +10,59 @@ import * as recruiterController from "./app/framework/controllers/recruiter.cont
 import * as jobProfileController from "./app/framework/controllers/job-profile.controller";
 import * as userInterceptor from "./app/framework/interceptor/user.interceptor";
 import {SearchController} from "./app/framework/search/controller/search.controller";
-let AuthInterceptor = require('./app/framework/interceptor/auth.interceptor');
 import * as adminController from "./app/framework/controllers/admin.controller";
+let AuthInterceptor = require('./app/framework/interceptor/auth.interceptor');
+import ShareController = require("./app/framework/share/controller/share.controller");
+//import * as shareController from "./app/framework/share/controller/share.controller";
 
 this.authInterceptor = new AuthInterceptor();
 
 
 export function cnextInit(app: express.Application) { //todo add interceptor to authenticate
   let searchController = new SearchController();
-  app.get('/api/industry',this.authInterceptor.requiresAuth, industryController.retrieve);
-  app.put('/api/updateUser/:id', this.authInterceptor.requiresAuth, adminController.updateDetailOfUser);
-  app.post('/api/proficiency',this.authInterceptor.requiresAuth, proficienciesController.create);
-  app.get('/api/proficiency', this.authInterceptor.requiresAuth,proficienciesController.retrieve);
-  app.put('/api/proficiency',this.authInterceptor.requiresAuth, proficienciesController.update);
-  app.post('/api/industry',this.authInterceptor.requiresAuth, industryController.create);
-  app.put('/api/recruiter/:id/job', this.authInterceptor.requiresAuth,recruiterController.postJob);
-  app.get('/api/industry/:id/role',this.authInterceptor.requiresAuth, roleController.retrieve);
-  app.post('/api/candidate',this.authInterceptor.requiresAuth, userInterceptor.create, candidateController.create);
-  app.put('/api/candidate/:id',this.authInterceptor.requiresAuth, candidateController.updateDetails);
-  app.get('/api/candidate/:id',this.authInterceptor.requiresAuth, candidateController.retrieve);
-  app.get('/api/industry/:id/roles/capability',this.authInterceptor.requiresAuth, capabilityController.retrieve);
-  app.get('/api/industry/:id/roles/capability/complexity',this.authInterceptor.requiresAuth, complexityController.retrieve);
+  let shareController = new ShareController();
+  app.get('/api/industry', this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, industryController.retrieve);
+  app.put('/api/updateUser/:id', this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, adminController.updateDetailOfUser);
+  app.post('/api/proficiency', this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, proficienciesController.create);
+  app.get('/api/proficiency', this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, proficienciesController.retrieve);
+  app.put('/api/proficiency', this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, proficienciesController.update);
+  app.post('/api/industry', this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, industryController.create);
+  app.put('/api/recruiter/:id/job', this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, recruiterController.postJob);
+  app.get('/api/industry/:id/role', this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, roleController.retrieve);
+  app.post('/api/candidate', this.authInterceptor.requiresAuth, userInterceptor.create, this.authInterceptor.secureApiCheck, candidateController.create);
+  app.put('/api/candidate/:id', this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, candidateController.updateDetails);
+  app.get('/api/candidate/:id', this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, candidateController.retrieve);
+  app.get('/api/industry/:id/roles/capability', this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, capabilityController.retrieve);
+  app.get('/api/industry/:id/roles/capability/complexity', this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, complexityController.retrieve);
   app.get('/api/companysize', userController.getCompanySize);
-  app.get('/api/function', this.authInterceptor.requiresAuth,userController.getFunction);
-  app.put('/api/recruiter/:id',this.authInterceptor.requiresAuth, recruiterController.updateDetails);
-  app.get('/api/recruiter/:id',this.authInterceptor.requiresAuth, recruiterController.retrieve);
-  app.get('/api/capabilitymatrix/candidate/:id',this.authInterceptor.requiresAuth, candidateController.getCapabilityMatrix);
-  app.get('/api/capabilitymatrix/recruiter/jobProfile/:id/',this.authInterceptor.requiresAuth, jobProfileController.getCapabilityMatrix);
-  app.get('/api/recruiter/jobProfile/:id/candidates',this.authInterceptor.requiresAuth, searchController.getMatchingCandidates);
-  app.get('/api/recruiter/jobProfile/:id',this.authInterceptor.requiresAuth, jobProfileController.retrieve);
-  app.get('/api/candidate/:id/jobProfile',this.authInterceptor.requiresAuth, searchController.getMatchingJobProfiles);
-  app.get('/api/candidate/:id/:candidateId',this.authInterceptor.requiresAuth, candidateController.retrieve);
-  app.get('/api/candidateDetails/:id',this.authInterceptor.requiresAuth, candidateController.get);
-  app.get('/api/candidate/:candidateId/matchresult/:jobId',this.authInterceptor.requiresAuth, candidateController.metchResult);
-  app.get('/api/recruiter/jobProfile/:jobId/matchresult/:candidateId',this.authInterceptor.requiresAuth, jobProfileController.metchResultForJob);
-  app.get('/api/candidate/:id/list/:listName',this.authInterceptor.requiresAuth, candidateController.getList);
-  app.get('/api/recruiter/jobProfile/:id/list/:listName',this.authInterceptor.requiresAuth, recruiterController.getList);
-  app.put('/api/candidate/:id/jobProfile/:profileId/:listName/:action',this.authInterceptor.requiresAuth, jobProfileController.apply);
-  app.post('/api/recruiter/jobProfile/:id/candidates',this.authInterceptor.requiresAuth, jobProfileController.getQCardDetails);
-  app.put('/api/recruiter/:recruiterId/jobProfile/:profileId/:listName/:candidateId/:action',this.authInterceptor.requiresAuth, jobProfileController.update);
-  app.get('/api/filterlist',this.authInterceptor.requiresAuth, recruiterController.getFilterList);
-  app.get('/api/releventindustries',this.authInterceptor.requiresAuth, industryController.getReleventIndustryList);
-  app.get('/api/recruiter/:id/jobprofile/:jobId',this.authInterceptor.requiresAuth, recruiterController.getCompareDetailsOfCandidate);
-  app.get('/api/recruiter/:id/candidatesearch/:searchvalue', this.authInterceptor.requiresAuth, recruiterController.getCandidatesByName);
-  app.get('/api/candidate/:candidateId/recruiter/:recruiterId/jobprofile', this.authInterceptor.requiresAuth, searchController.searchCandidateJobProfiles);
-  app.post("/api/sendmailtoadmin",adminController.adminLoginInfoMail);
-
-
+  app.get('/api/function', this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, userController.getFunction);
+  app.put('/api/recruiter/:id', this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, recruiterController.updateDetails);
+  app.get('/api/recruiter/:id', this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, recruiterController.retrieve);
+  app.get('/api/capabilitymatrix/candidate/:id', this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, candidateController.getCapabilityMatrix);
+  app.get('/api/capabilitymatrix/recruiter/jobProfile/:id/', this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, jobProfileController.getCapabilityMatrix);
+  app.get('/api/recruiter/jobProfile/:id/candidates', this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, searchController.getMatchingCandidates);
+  app.get('/api/recruiter/jobProfile/:id', this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, jobProfileController.retrieve);
+  app.get('/api/candidate/:id/jobProfile', this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, searchController.getMatchingJobProfiles);
+  app.get('/api/candidate/:id/:candidateId', this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, candidateController.retrieve);
+  app.get('/api/candidateDetails/:id', this.authInterceptor.requiresAuth, candidateController.get);
+  app.get('/api/candidate/:candidateId/matchresult/:jobId', this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, candidateController.metchResult);
+  app.get('/api/recruiter/jobProfile/:jobId/matchresult/:candidateId', this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, jobProfileController.metchResultForJob);
+  app.get('/api/candidate/:id/list/:listName', this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, candidateController.getList);
+  app.get('/api/recruiter/jobProfile/:id/list/:listName', this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, recruiterController.getList);
+  app.put('/api/candidate/:id/jobProfile/:profileId/:listName/:action', this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, jobProfileController.apply);
+  app.post('/api/recruiter/jobProfile/:id/candidates', this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, jobProfileController.getQCardDetails);
+  app.put('/api/recruiter/:recruiterId/jobProfile/:profileId/:listName/:candidateId/:action', this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, jobProfileController.update);
+  app.get('/api/filterlist', this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, recruiterController.getFilterList);
+  app.get('/api/releventindustries', this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, industryController.getReleventIndustryList);
+  app.get('/api/recruiter/:id/jobprofile/:jobId', this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, recruiterController.getCompareDetailsOfCandidate);
+  app.get('/api/recruiter/:id/candidatesearch/:searchvalue', this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, recruiterController.getCandidatesByName);
+  app.get('/api/candidate/:candidateId/recruiter/:recruiterId/jobprofile', this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, searchController.searchCandidateJobProfiles);
+  app.get('/api/candidateDetails', this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, adminController.getCandidateDetails);
+  app.get('/api/recruiterDetails', this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, adminController.getRecruiterDetails);
+  //Share api
+  app.get('/api/buildValuePortraitUrl', this.authInterceptor.requiresAuth, shareController.buildValuePortraitUrl);
 
   // API for Uses Tracking
   app.put('/api/usesTracking/:recruiterId/:jobProfileId/:candidateId/:action', jobProfileController.createUsesTracking);
-
+  app.get('/api/usageDetails', this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, adminController.getUsageDetails);
 }

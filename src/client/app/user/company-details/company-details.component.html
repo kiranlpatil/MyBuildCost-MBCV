@@ -1,0 +1,147 @@
+<section class="main-form-wrapper company-details">
+  <cn-user-header></cn-user-header>
+
+  <cn-app-loader></cn-app-loader>
+
+  <div class="main-upload-container content clearfix">
+
+    <div class="alert alert-danger clearfix" [hidden]="isShowErrorMessage">
+      <div class="col-sm-1 hidden-xs"><span class="glyphicon glyphicon-warning-sign"></span></div>
+      <div class="col-sm-10 col-xs-11 error-msg"><b>{{ error_msg }}</b></div>
+      <div class="col-sm-1 col-xs-1 close-msg">
+        <button (click)="isShowErrorMessage = true" class="btn-close"><span class="glyphicon glyphicon-remove"></span>
+        </button>
+      </div>
+    </div>
+    <h5 class="col-xs-9 heading-text">
+      {{companyDocumentMessage}}  <!--<span class="glyphicon glyphicon-remove" (click)="goToLanding()"></span>-->
+    </h5>
+    <form [formGroup]="companyDetailsForm" (submit)="onSubmit()" novalidate>
+      <div class="col-sm-12 no-padding">
+        <div class="col-sm-3 text-center company-image">
+          <div class="company-description-container">
+            <div id="company-logo">
+              <div class="company-details-form">
+                <cn-profile-picture></cn-profile-picture>
+              </div>
+              <span class="company-name">{{company_name}}</span>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="col-sm-6 upload-documents">
+          <label>Upload Document</label>
+          <div class="col-sm-12 no-padding">
+            <div [class.hide-list]="isSocialLogin">
+              <div class="col-xs-10 no-padding">
+                <cn-control-messages [control]="companyDetailsForm.controls.description1"
+                                     [submitStatus]="submitStatus"></cn-control-messages>
+                <input type="text" formControlName="description1" id="description1" maxlength="250"
+                       placeholder="Company TAN" class="form-control" required/>
+                <span
+                  *ngIf="!setOfDocuments[0] &&  companyDetailsForm.value.description1 != '' && isDocumentUploaded && submitStatus"
+                  class="error-messages">{{uploadFileMessage}}</span>
+              </div>
+              <div class="col-sm-2 padding-left5">
+                <div class="clearfix">
+                  <label for="file-upload1" class="custom-file-upload"></label>
+                  <p class="file-name">{{fileName1}}</p>
+                  <input id="file-upload1" type="file" (change)="fileChangeEvent($event)" placeholder="Upload file"/>
+                </div>
+                <div *ngIf="isUploadedImages[0]" class="pull-right file-uploaded-icon">
+
+                </div>
+                <div *ngIf="!isLoaderImages[0]" class="pull-right loader-icon">
+                  <img src="assets/c-next/loader/loader.gif" height="17" width="16"/>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-12 no-padding">
+            <div [class.hide-list]="isSocialLogin">
+              <div class="col-xs-10 no-padding">
+                <cn-control-messages [control]="companyDetailsForm.controls.description2"
+                                     [submitStatus]="submitStatus"></cn-control-messages>
+                <input type="text" formControlName="description2" id="description2" maxlength="250"
+                       placeholder="GST Certificate" class="form-control" value="description2" required/>
+                <span
+                  *ngIf="!setOfDocuments[1] && companyDetailsForm.value.description2 != '' && isDocumentUploaded && submitStatus"
+                  class="error-messages">{{uploadFileMessage}}</span>
+              </div>
+              <div class="col-sm-2 padding-left5">
+                <div class="clearfix">
+                  <label for="file-upload2" class="custom-file-upload">
+                    <!--<img src="assets/c-next/company-details/upload2.png" alt="Upload File"/>-->
+                  </label>
+                  <p class="file-name">{{fileName2}}</p>
+                  <input id="file-upload2" type="file" (change)="fileChangeEvent($event)" placeholder="Upload file"/>
+                </div>
+                <div *ngIf="isUploadedImages[1]" class="pull-right file-uploaded-icon">
+
+                </div>
+                <div *ngIf="!isLoaderImages[1]" class="pull-right loader-icon">
+                  <img src="assets/c-next/loader/loader.gif" height="17" width="16"/>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-12 no-padding">
+            <div [class.hide-list]="isSocialLogin">
+              <div class="col-xs-10 no-padding">
+                <cn-control-messages [control]="companyDetailsForm.controls.description3"
+                                     [submitStatus]="submitStatus"></cn-control-messages>
+                <input type="text" formControlName="description3" id="description3" maxlength="250"
+                       placeholder="Shop Act" class="form-control" required/>
+                <span
+                  *ngIf="!setOfDocuments[2] && companyDetailsForm.value.description3 != '' && isDocumentUploaded && submitStatus"
+                  class="error-messages">{{uploadFileMessage}}</span>
+              </div>
+              <div class="col-sm-2 padding-left5">
+                <div class="clearfix">
+                  <label for="file-upload3" class="custom-file-upload"> </label>
+                  <p class="file-name">{{fileName3}}</p>
+                  <input id="file-upload3" type="file" (change)="fileChangeEvent($event)" placeholder="Upload file"/>
+                </div>
+                <div *ngIf="isUploadedImages[2]" class="pull-right file-uploaded-icon">
+
+                </div>
+                <div *ngIf="!isLoaderImages[2]" class="pull-right loader-icon">
+                  <img src="assets/c-next/loader/loader.gif" height="17" width="16"/>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12 no-padding">
+            <div>
+              <label for="about_company">About Company<!-- <span class="required-field">*</span>--></label>
+            </div>
+            <div class="about-company">
+              <div class="describe-error-message">
+                <cn-control-messages [control]="companyDetailsForm.controls.about_company"
+                                     [submitStatus]="submitStatus"></cn-control-messages>
+              </div>
+              <textarea formControlName="about_company" id="about_company" placeholder="Describe your company"
+                        class="form-control about-company" required></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-3">
+          <div class="section-container upload-section-container">
+            <cn-tool-tip [message]="tooltipMessage"></cn-tool-tip>
+          </div>
+        </div>
+        <div class="button-group">
+          <button type="submit" class="btn btn-success">Submit for activation</button>
+          <!--<button type="submit" class="btn btn-success" >Submit Documents</button>-->
+        </div>
+      </div>
+
+    </form>
+  </div>
+</section>
+
+

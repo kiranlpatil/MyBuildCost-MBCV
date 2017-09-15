@@ -1,8 +1,10 @@
 <div class="list-container">
   <div class="header">
-    <button class="btn btn-primary" disabled>Export Data</button>
+    <button class="btn btn-primary" (click)="getUsageDetails()">Export Data</button>
   </div>
   <div class="list-view">
-    <h5>we'll soon be updating this page. </h5>
+    <h5>Download Details by clicking on export Detail  </h5>
+    <button class="btn btn-primary" (click)="getUsageDetails()">Export Usage Detail</button>
+    <a id="link" href="./public/usagedetail.csv" download hidden></a>
   </div>
 </div>

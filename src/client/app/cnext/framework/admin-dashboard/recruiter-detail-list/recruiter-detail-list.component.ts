@@ -24,15 +24,16 @@ export class RecruiterDetailListComponent {
   }
   onUpdateComplete(index:number,recruiter:any,activated:boolean) {
     this.recruiters[index].isActivated=!activated;
-    this.getAllUser()
   }
-  getAllUser() {
-    this.adminDashboardService.getAllUsers()
+  generateRecruiterDetailFile() {
+    this.adminDashboardService.generateRecruiterDetailFile()
       .subscribe(
-        userprofile => this.onSuccess(),
+        UsageDetails => this.onSuccess(UsageDetails),
         error => this.errorService.onError(error));
   }
-  onSuccess(){}
+  onSuccess(UsageDetails:any) {
+    document.getElementById('link_recruiter').click();
+  }
 }
 
 

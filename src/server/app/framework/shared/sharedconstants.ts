@@ -7,6 +7,7 @@ export class ConstVariables {
   public static APPLIED_CANDIDATE: string = 'applied';
   public static BLOCKED_CANDIDATE: string = 'blocked';
   public static AUTHENTICATION_JWT_KEY: string = 'thisisjwtsecret#@$#&(*0)%';
+  public static AUTHENTICATION_ENCODED_SHARE_KEY:string = '$$$socialShare@$#*';
 
 }
 export enum Actions  {

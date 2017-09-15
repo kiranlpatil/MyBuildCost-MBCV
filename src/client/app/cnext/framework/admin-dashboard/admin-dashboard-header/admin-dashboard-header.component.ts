@@ -2,7 +2,7 @@
 import { Component,ElementRef, HostListener, Input } from '@angular/core';
 import {Candidate, Section} from '../../model/candidate';
 import {Router} from "@angular/router";
-import {AppSettings, ImagePath} from "../../../../framework/shared/constants";
+import {AppSettings, ImagePath} from "../../../../shared/constants";
 
 @Component({
   moduleId: module.id,

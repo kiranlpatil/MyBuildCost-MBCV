@@ -1,3 +1,7 @@
+import {join} from "path";
+import * as slash from "slash";
+import {argv} from "yargs";
+import {BuildType, ExtendPackages, InjectableDependency} from "./seed.config.interfaces";
 import { join } from 'path';
 import * as slash from 'slash';
 import { argv } from 'yargs';
@@ -132,7 +136,21 @@ export class SeedConfig {
    * The base path of node modules.
    * @type {string}
    */
-  NPM_BASE = slash(join('.', this.APP_BASE, 'node_modules/'));
+  NPM_BASE = slash(join(this.APP_BASE, 'node_modules/'));
+
+  /**
+   * The flag for the hot-loader option of the application.
+   * Per default the option is not set, but can be set by the `--hot-loader` flag when running `npm start`.
+   * @type {boolean}
+   */
+  ENABLE_HOT_LOADING = argv['hot-loader'];
+
+  /**
+   * The port where the application will run, if the `hot-loader` option mode is used.
+   * The default hot-loader port is `5578`.
+   * @type {number}
+   */
+  HOT_LOADER_PORT = 5578;
 
   /**
    * The build interval which will force the TypeScript compiler to perform a typed compile run.
@@ -167,7 +185,10 @@ export class SeedConfig {
   APP_SERVER = argv['server'] || 'server';
 
   /**
-   * The bootstrap file to be used to boot the application.
+   * The bootstrap file to be used to boot the application. The file to be used is dependent if the hot-loader option is
+   * used or not.
+   * Per default (non hot-loader mode) the `main.ts` file will be used, with the hot-loader option enabled, the
+   * `hot_loader_main.ts` file will be used.
    * @type {string}
    */
   BOOTSTRAP_MODULE = `${this.BOOTSTRAP_DIR}/main`;
@@ -183,10 +204,10 @@ export class SeedConfig {
    * `index.html`.
    * @type {string}
    */
-  APP_TITLE = 'JobMosis-Job-Portal';
+  APP_TITLE = 'Welcome to angular2-seed!';
 
   /**
-   * Tracking ID.
+   * The base folder of the client source files.
    * @type {string}
    */
   GOOGLE_ANALYTICS_ID = 'UA-XXXXXXXX-X';
@@ -237,6 +258,7 @@ export class SeedConfig {
    * @type {string}
    */
   TOOLS_DIR = 'tools';
+  TYPINGS_DIR = 'typings';
 
   /**
    * The directory of the tasks provided by the seed.
@@ -385,6 +407,7 @@ export class SeedConfig {
    * Set ENABLE_SCSS environment variable to 'true' or '1'
    * @type {boolean}
    */
+  //ENABLE_SCSS = ['true', '1'].indexOf(`${process.env.ENABLE_SCSS}`.toLowerCase()) !== -1 || argv['scss'] || false;
   ENABLE_SCSS = true;
   /*ENABLE_SCSS = ['true', '1'].indexOf(
     `${process.env.ENABLE_SCSS}`.toLowerCase()
@@ -786,7 +809,7 @@ export class SeedConfig {
         }
       }
     };
-  }
+  };
 
   /**
    * Recursively merge source onto target.

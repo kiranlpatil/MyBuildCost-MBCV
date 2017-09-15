@@ -1,6 +1,6 @@
 import {Component, Input, OnChanges, OnInit, Output, EventEmitter} from "@angular/core";
 import {ProfileComparisonHeaderMeta} from "./profile-comparison-header-meta";
-import {AppSettings} from "../../../../../framework/shared/constants";
+import {AppSettings} from "../../../../../shared/constants";
 
 @Component({
   moduleId:module.id,

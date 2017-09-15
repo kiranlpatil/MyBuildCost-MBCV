@@ -1,9 +1,9 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from "@angular/core";
-import {Industry} from "../model/industry";
+import {Industry} from "../../../user/models/industry";
 import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
 import {Section} from "../model/candidate";
-import {LocalStorageService} from "../../../framework/shared/localstorage.service";
-import {Headings, LocalStorage, Messages, Tooltip, ValueConstant} from "../../../framework/shared/constants";
+import {LocalStorageService} from "../../../shared/services/localstorage.service";
+import {Headings, LocalStorage, Messages, Tooltip, ValueConstant} from "../../../shared/constants";
 import {IndustryDataService} from "../industry-data-service";
 import {ErrorService} from "../error.service";
 

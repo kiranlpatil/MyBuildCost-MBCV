@@ -1,7 +1,7 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, OnInit, OnDestroy} from "@angular/core";
 import {Router, ActivatedRoute} from "@angular/router";
-import {LocalStorage} from "../../../framework/shared/constants";
-import {LocalStorageService} from "../../../framework/shared/localstorage.service";
+import {LocalStorage} from "../../../shared/constants";
+import {LocalStorageService} from "../../../shared/services/localstorage.service";
 
 
 @Component({
@@ -11,8 +11,10 @@ import {LocalStorageService} from "../../../framework/shared/localstorage.servic
   styleUrls: ['value-portrait-container.component.css'],
 })
 
-export class ValuePortraitContainerComponent implements OnInit {
+export class ValuePortraitContainerComponent implements OnInit,OnDestroy {
+
   _userId:string;
+  isShareView:boolean = false;
 
   constructor(private _router:Router, private activatedRoute:ActivatedRoute) {
   }
@@ -26,9 +28,23 @@ export class ValuePortraitContainerComponent implements OnInit {
     }
   }
 
+  ngOnDestroy() {
+    if (this.isShareView) {
+      LocalStorageService.removeLocalValue(LocalStorage.ACCESS_TOKEN);
+    }
+  }
+
   ngOnInit() {
     this.activatedRoute.params.subscribe(params => {
       this._userId = params['id'];
+    });
+
+    this.activatedRoute.queryParams.subscribe(params => {
+      var token = params['access_token'];
+      if (token) {
+        this.isShareView = true;
+        LocalStorageService.setLocalValue(LocalStorage.ACCESS_TOKEN, token);
+      }
     });
   }
 }

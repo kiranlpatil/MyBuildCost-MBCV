@@ -2,8 +2,8 @@
 <div class="container-fluid profile-wrapper">
   <h4>Site Administration</h4>
   <ul class="nav nav-tabs dashboard-tabs" [class.move-left]="setValue">
-    <li class="active"><a data-toggle="tab" id="candidate-list" href="#candidate-list-view">Candidates</a></li>
-    <li><a data-toggle="tab" id="recruiter-list" href="#recruiter-list-view">Recruiters</a></li>
+    <li class="active"><a data-toggle="tab" id="candidate-list" href="#candidate-list-view">Candidates ({{numberOfCandidates}})</a></li>
+    <li><a data-toggle="tab" id="recruiter-list" href="#recruiter-list-view">Recruiters ({{numberOfRecruiters}})</a></li>
     <li><a data-toggle="tab" id="key-skills" href="#keyskills-list-view">Key Skills</a></li>
     <li><a data-toggle="tab" id="usage-details" href="#usage-details-view">Usage Details</a></li>
   </ul>
@@ -16,7 +16,7 @@
       <cn-recruiter-detail-list [recruiters]="userData.recruiter"></cn-recruiter-detail-list>
     </div>
     <div id="keyskills-list-view" class="tab-pane fade clearfix">
-      <cn-keyskills-detail-list></cn-keyskills-detail-list>
+      <p>This functionality will come soon. </p>
     </div>
     <div id="usage-details-view" class="tab-pane fade clearfix">
       <cn-keyskills-detail-list></cn-keyskills-detail-list>

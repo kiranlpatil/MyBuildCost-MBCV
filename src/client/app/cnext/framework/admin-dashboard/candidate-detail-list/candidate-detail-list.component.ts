@@ -24,15 +24,16 @@ export class CandidateDetailListComponent {
   }
   onUpdateComplete(index:number,candidate:any,activated:boolean) {
     this.candidates[index].isActivated=!activated;
-    this.getAllUser();
   }
-  getAllUser() {
-    this.adminDashboardService.getAllUsers()
+  generateCandidateDetailFile() {
+    this.adminDashboardService.generateCandidateDetailFile()
       .subscribe(
-        userprofile => this.onSuccess(),
+        UsageDetails => this.onSuccess(UsageDetails),
         error => this.errorService.onError(error));
   }
-  onSuccess(){}
+  onSuccess(UsageDetails:any) {
+    document.getElementById('link_candidate').click();
+  }
 
 }
 

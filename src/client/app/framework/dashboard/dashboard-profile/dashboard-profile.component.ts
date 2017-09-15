@@ -1,8 +1,8 @@
-import {Component, NgZone, OnDestroy, OnInit} from "@angular/core";
-import {ActivatedRoute, Router} from "@angular/router";
-import {DashboardService} from "../dashboard.service";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {ValidationService} from "../../shared/customvalidations/validation.service";
+import { Component, NgZone, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { DashboardService } from "../../../user/dashboard.service";
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ValidationService } from "../../../shared/customvalidations/validation.service";
 import {
   AppSettings,
   CommonService,
@@ -14,13 +14,13 @@ import {
   MessageService,
   ProfileService,
   ThemeChangeService
-} from "../../shared/index";
-import {NavigationRoutes} from "../../shared/constants";
-import {LoaderService} from "../../shared/loader/loader.service";
-import {CandidateDetail} from "../../registration/candidate/candidate";
-import {Candidate, Summary} from "../../../cnext/framework/model/candidate";
-import {CandidateProfileService} from "../../../cnext/framework/candidate-profile/candidate-profile.service";
-import {ErrorService} from "../../../cnext/framework/error.service";
+} from '../../../shared/index';
+import { NavigationRoutes, Label, Button, Headings } from "../../../shared/constants";
+import { LoaderService } from '../../../shared/loader/loaders.service';
+import { CandidateDetail } from "../../../user/models/candidate";
+import { Candidate, Summary } from '../../../cnext/framework/model/candidate';
+import { CandidateProfileService } from '../../../cnext/framework/candidate-profile/candidate-profile.service';
+import { ErrorService } from '../../../cnext/framework/error.service';
 
 
 @Component({
@@ -47,8 +47,6 @@ export class DashboardProfileComponent implements OnInit, OnDestroy {
   LAST_NAME_ICON: string;
   MOBILE_ICON: string;
   EMAIL_ICON: string;
-  emailRestMessage:string= Messages.MSG_RESET_EMAIL_ADDRESS;
-  mobileNumberRestMessage:string= Messages.MSG_RESET_MOBILE_NUMBER;
   role: string;
   private candidate: Candidate = new Candidate();
 
@@ -82,7 +80,6 @@ export class DashboardProfileComponent implements OnInit, OnDestroy {
     this.activatedRoute.params.subscribe(params => {
       this.role = params['role'];
       if (this.role) {
-        debugger;
         if (this.role === 'candidate') {
           this.getCandidate();
         } else if (this.role === 'recruiter') {
@@ -244,6 +241,18 @@ export class DashboardProfileComponent implements OnInit, OnDestroy {
         this.candidate.basicInformation.picture = AppSettings.IP + this.candidate.basicInformation.picture;
       }
     }
+  }
+  getLabels() {
+    return Label;
+  }
+  getButtons() {
+    return Button;
+  }
+  getHeadings() {
+    return Headings;
+  }
+  getMessages() {
+    return Messages;
   }
 
 }

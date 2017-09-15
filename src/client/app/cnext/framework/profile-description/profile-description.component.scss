@@ -74,6 +74,10 @@
   }
 }
 
+.btn-prev {
+  opacity: 0.5;
+}
+
 @media only screen and (max-width: 980px) {
   .scrollable-content {
     padding: 0 !important;
@@ -109,10 +113,19 @@
     .profile-details {
       display: block;
       width: 100%;
+      margin-bottom: 5px;
+      font-size: 12px;
+
+      label {
+        min-width: 100%;
+        display: block;
+        color: $theme-color;
+        font-size: 12px;
+      }
     }
 
     .job-title {
-      font-size: 14px;
+      font-size: 12px;
       display: block;
     }
   }
@@ -124,5 +137,15 @@
 
   .scrollable-content {
     width: 100% !important;
+  }
+
+  .scrollable-content-mobile {
+    clear: both;
+    height: calc(100vh - 80px);
+    overflow: auto;
+  }
+
+  .divider {
+    margin: 0 0 10px;
   }
 }

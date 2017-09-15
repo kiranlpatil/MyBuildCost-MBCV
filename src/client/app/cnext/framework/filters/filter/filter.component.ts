@@ -1,6 +1,6 @@
 import {Component, Input} from "@angular/core";
 import {FormBuilder, FormGroup} from "@angular/forms";
-import {JobPosterModel} from "../../model/jobPoster";
+import {JobPosterModel} from "../../../../user/models/jobPoster";
 import {ShowQcardviewService} from "../../showQCard.service";
 import {Candidate} from "../../model/candidate";
 import {QCardFilterService} from "../q-card-filter.service";

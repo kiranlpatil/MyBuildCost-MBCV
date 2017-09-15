@@ -2,8 +2,8 @@
   <div class="header">
     <!--<a href="./public/recruiter.csv" download="Recruiter.csv" title="Export recruiter to CSV File"><i class="glyphicon glyphicon-export"></i>Export</a>-->
   </div>
-  <a href="./public/recruiter.csv" download="recruiter.csv" title="Export recruiter to CSV File"
-     class="export-data-link" (click)="getAllUser()"><i class="glyphicon glyphicon-export"></i>Export</a>
+  <div title="Export recruiter to CSV File" class="export-data-link" (click)="generateRecruiterDetailFile()"><span class="glyphicon glyphicon-export" ></span>Export</div>
+  <a href="./public/recruiter.csv" download="recruiter.csv"  id="link_recruiter" hidden></a>
   <div class="list-view">
     <ul class="list-header">
       <li>

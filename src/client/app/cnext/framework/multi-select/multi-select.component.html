@@ -9,7 +9,8 @@
            no-match-found-text={{noMatchFoundText}}
            match-formatted="true">
         <input class="form-control" #elem [id]="type"
-               (keyup.enter)="showHideModal($event.target.value)" [disabled]='selectedProficiencies.length == maxLength' placeholder="E.g. for IT:- Java, C++. for Manufacturing:- Metal Cutting"/>
+               (keyup.enter)="showHideModal($event.target.value)" [disabled]='selectedProficiencies.length == maxLength'
+               placeholder="{{proficienciesPlaceholder}}"/>
         <div class="error-messages" [class.proficiency-info-messages]="isInfoMessage" *ngIf="showAlert"><p>
           {{validationMessage}}</p></div>
         <div class="error-messages"

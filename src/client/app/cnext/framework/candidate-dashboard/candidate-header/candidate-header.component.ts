@@ -1,8 +1,8 @@
 import {Component, ElementRef, HostListener, Input} from "@angular/core";
 import {Router} from "@angular/router";
 import {Candidate, Section} from "../../model/candidate";
-import {AppSettings, ImagePath, LocalStorage} from "../../../../framework/shared/constants";
-import {LocalStorageService} from "../../../../framework/shared/localstorage.service";
+import {AppSettings, ImagePath, LocalStorage} from "../../../../shared/constants";
+import {LocalStorageService} from "../../../../shared/services/localstorage.service";
 
 @Component({
   moduleId: module.id,
@@ -17,6 +17,7 @@ export class CandidateHeaderComponent {
   public isOpenProfile: boolean = false;
   PROFILE_IMG_PATH: string;
   MY_LOGO: string;
+  MOBILE_LOGO: string;
   newUser: number;
   private highlightedSection: Section = new Section();
 
@@ -29,13 +30,13 @@ export class CandidateHeaderComponent {
 
   constructor(private _router: Router, private _eref: ElementRef) {
     this.MY_LOGO = ImagePath.MY_WHITE_LOGO;
+    this.MOBILE_LOGO = ImagePath.MOBILE_WHITE_LOGO;
   }
 
   getImagePath(imagePath: string) {
     if (imagePath !== undefined) {
       return AppSettings.IP + imagePath.substring(4).replace('"', '');
     }
-
     return null;
   }
 
@@ -56,6 +57,7 @@ export class CandidateHeaderComponent {
     if (nav !== undefined) {
       this._router.navigate([nav]);
     }
+    this.closeMenu();
   }
   onSkip() {
     this.highlightedSection.name='none';
@@ -71,6 +73,11 @@ export class CandidateHeaderComponent {
 
   closeMenu() {
     this.isClassVisible = false;
+  }
+
+  goToGuidedTour() {
+    this.highlightedSection.name = 'GuideTour';
+    this.closeMenu();
   }
 
 }

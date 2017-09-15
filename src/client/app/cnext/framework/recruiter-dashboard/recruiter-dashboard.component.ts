@@ -20,7 +20,6 @@ export class RecruiterDashboardComponent implements OnInit, AfterViewInit {
   private tabName: string;
   private jobId: string;
   private screenType: string='';
- // private showTabsForJobPoster: boolean = false;
 
   constructor(private recruiterDashboardService: RecruiterDashboardService,
               private errorService:ErrorService,
@@ -40,7 +39,7 @@ export class RecruiterDashboardComponent implements OnInit, AfterViewInit {
         (data: any) => {
           this.recruiterDashboard = <RecruiterDashboard>data.data[0];
           this.recruiterHeaderDetails = <RecruiterHeaderDetails>data.jobCountModel;
-          if(this.recruiterDashboard != undefined && this.recruiterDashboard.postedJobs != undefined && this.recruiterDashboard.postedJobs.length>0){
+          if(this.recruiterDashboard !== undefined && this.recruiterDashboard.postedJobs !== undefined && this.recruiterDashboard.postedJobs.length>0) {
             this.screenType='jobList';
           } else {
             this.screenType='welcomescreen';
@@ -54,8 +53,6 @@ export class RecruiterDashboardComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     this.activatedRoute.params.subscribe(params => {
-      /*let param:string = this._router.parseUrl(this._router.url).queryParams["auth"];
-       console.log(param);*/
       this.tabName = params['id'];
       if (this.tabName === 'post_new_job') {
           let matchElement: any = document.getElementById('post_job');

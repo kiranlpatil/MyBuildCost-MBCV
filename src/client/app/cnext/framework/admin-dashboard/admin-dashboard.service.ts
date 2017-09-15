@@ -1,11 +1,11 @@
 import {Injectable} from "@angular/core";
 import {Headers, Http, RequestOptions} from "@angular/http";
 import {Observable} from "rxjs/Observable";
-import {BaseService} from "../../../framework/shared/httpservices/base.service";
-import {MessageService} from "../../../framework/shared/message.service";
-import {API, LocalStorage} from "../../../framework/shared/constants";
-import {LocalStorageService} from "../../../framework/shared/localstorage.service";
-import {CandidateDetail} from "../../../framework/registration/candidate/candidate";
+import {BaseService} from "../../../shared/services/httpservices/base.service";
+import {MessageService} from "../../../shared/services/message.service";
+import {API, LocalStorage} from "../../../shared/constants";
+import {LocalStorageService} from "../../../shared/services/localstorage.service";
+import {CandidateDetail} from "../../../user/models/candidate";
 
 
 @Injectable()
@@ -28,6 +28,18 @@ export class AdminDashboardService extends BaseService {
     return this.http.get(url)
       .map(this.extractData)
       .catch(this.handleError);
+  }
+  getUsageDetails(): Observable<any> {
+    var url = API.USAGE_DETAIL;
+    return this.http.get(url);
+  }
+  generateCandidateDetailFile(): Observable<any> {
+    var url = API.CANDIDATE_DETAIL_PROFILE;
+    return this.http.get(url);
+  }
+  generateRecruiterDetailFile(): Observable<any> {
+    var url = API.RECRUITER_DETAIL_PROFILE;
+    return this.http.get(url);
   }
 
   updateProfile(model: CandidateDetail): Observable<CandidateDetail> {

@@ -2,10 +2,10 @@ import {Component, OnDestroy, OnInit} from "@angular/core";
 import {Router} from "@angular/router";
 import {Contact} from "./contact";
 import {ContactService} from "./contact.service";
-import {CommonService, Message, Messages, MessageService} from "../../shared/index";
+import {CommonService, Message, Messages, MessageService} from "../../../shared/index";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {ValidationService} from "../../shared/customvalidations/validation.service";
-import {LoaderService} from "../../shared/loader/loader.service";
+import {ValidationService} from "../../../shared/customvalidations/validation.service";
+import {LoaderService} from "../../../shared/loader/loaders.service";
 
 @Component({
   moduleId: module.id,

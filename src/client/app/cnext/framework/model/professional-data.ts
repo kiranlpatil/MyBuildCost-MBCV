@@ -1,4 +1,4 @@
-import {Location} from "../../../framework/registration/location";
+import {Location} from "../../../user/models/location";
 
 export class ProfessionalData {
   education: string = '';

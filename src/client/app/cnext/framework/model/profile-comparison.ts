@@ -3,7 +3,7 @@ import {Award} from "./award";
 import {ProfessionalData} from "./professional-data";
 import {AcademicDetails} from "./academic-details";
 import {EmployementHistory} from "./employment-history";
-import {Industry} from "./industry";
+import {Industry} from "../../../user/models/industry";
 import {ProfileComparisonHeaderMeta} from "../profile-comparison/profile-comparison-header/profile-comparison-header-meta/profile-comparison-header-meta";
 import {ProfileCapabilityComparisonMeta} from "../profile-comparison/profile-capability-comparison/profile-capability-comparison-meta/profile-capability-compariosn-meta";
 

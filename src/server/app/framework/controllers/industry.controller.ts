@@ -52,8 +52,6 @@ export function create(req: express.Request, res: express.Response, next: any) {
         console.log("crt role error", error);
       }
       else {
-        var auth: AuthInterceptor = new AuthInterceptor();
-        var token = auth.issueTokenWithUid(newIndustry);
         res.status(200).send({
           "status": Messages.STATUS_SUCCESS,
           "data": {
@@ -62,8 +60,7 @@ export function create(req: express.Request, res: express.Response, next: any) {
             "name": newIndustry.name,
             "roles": newIndustry.roles,
             "_id": result._id,
-          },
-          access_token: token
+          }
         });
       }
     });

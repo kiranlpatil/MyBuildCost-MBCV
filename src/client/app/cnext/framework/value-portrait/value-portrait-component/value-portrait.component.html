@@ -1,9 +1,92 @@
 <cn-value-portrait-header [candidate]="candidate"></cn-value-portrait-header>
-<cn-candidate-info-block [candidate]="candidate"></cn-candidate-info-block>
-<cn-candidate-capability-portrait [candidate]="candidate"></cn-candidate-capability-portrait>
+<cn-candidate-info-block [candidate]="candidate"
+                         class="visible-lg visible-md hidden-sm hidden-xs"></cn-candidate-info-block>
+<!--<cn-candidate-capability-portrait [candidate]="candidate"
+                                  class="hidden-xs"></cn-candidate-capability-portrait>-->
 
-<div class="col-xs-12 no-padding value-portraot-bottom-section">
-  <div class="col-xs-4 value-portraot-candidate-industry">
+<div class="value-portrait-tabs">
+  <div class="tab-content clearfix">
+    <div class="tab-pane active" id="core-capabilities-tabs">
+      <cn-candidate-capability-portrait [candidate]="candidate" class="">
+      </cn-candidate-capability-portrait>
+    </div>
+  </div>
+</div>
+
+<div class="user-info-black">
+  <div class="current-location-tabs info-block-tabs">
+    <span id="currentlocation"> Current Location </span>
+    <div class="" role="currentlocation" aria-labelledby="currentlocation">
+      {{candidate.location.city}}
+    </div>
+  </div>
+  <div class="experience-level-tabs info-block-tabs">
+    <span id="experience" data-toggle="dropdown"> Experience Level </span>
+    <div class="" role="experience" aria-labelledby="experience">
+      {{candidate.professionalDetails.experience}}
+    </div>
+  </div>
+  <div class="education-tabs info-block-tabs">
+    <span id="education"> Education </span>
+    <div class="" role="education" aria-labelledby="education">
+      <div *ngFor="let academic of candidate.academics" class="line-block">
+        <b>{{academic.yearOfPassing}}</b>
+        <b><label><strong>{{academic.specialization}}</strong></label> | <label>{{academic.board}}</label></b>
+        <b class="remark">{{academic.schoolName}}</b>
+      </div>
+      <div *ngIf="candidate.academics.length == 0" class="line-block">
+        Not Available
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="col-xs-12 no-padding user-bottom-section">
+  <div class="employment-tabs info-block-tabs">
+    <span id="employment"> Employment </span>
+    <div class="" role="employment" aria-labelledby="employment">
+      <div *ngFor="let history of candidate.employmentHistory" class="line-block">
+        <b>{{history.from.year}} - {{history.to.year}}</b>
+        <b><label><strong>{{history.designation}}</strong></label> | <label>{{history.companyName}}</label></b>
+        <b class="remark">{{history.remarks}}</b>
+      </div>
+      <div *ngIf="candidate.employmentHistory.length == 0" class="line-block">
+        Not Available
+      </div>
+    </div>
+  </div>
+
+  <div class="certification-tabs info-block-tabs">
+    <span id="certification"> Certification </span>
+    <div class="" role="certification" aria-labelledby="certification">
+      <div *ngFor="let certification of candidate.certifications" class="line-block">
+        <b>{{certification.year}}</b>
+        <b><label><strong>{{certification.name}}</strong></label> | {{certification.issuedBy}} </b>
+        <b class="remark">{{certification.remark}}</b>
+      </div>
+      <div *ngIf="candidate.certifications.length == 0" class="line-block">
+        Not Available
+      </div>
+    </div>
+  </div>
+
+  <div class="awards-tabs info-block-tabs">
+    <span id="awards"> Awards </span>
+    <div class="" role="awards" aria-labelledby="awards">
+      <div *ngFor="let award of candidate.awards" class="line-block">
+        <b>{{award.year}}</b>
+        <b><label><strong>{{award.name}}</strong></label> | {{award.issuedBy}} </b>
+        <b class="remark">{{award.remark}}</b>
+      </div>
+      <div *ngIf="candidate.awards.length == 0" class="line-block">
+        Not Available
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="col-xs-12 no-padding value-portrait-bottom-section">
+  <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 value-portrait-candidate-industry">
     <div class="hover-block">
       <span class="icon"> </span>
       <label>
@@ -21,7 +104,7 @@
       </div>
     </div>
   </div>
-  <div class="col-xs-4 value-portraot-candidate-keyskills">
+  <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 value-portrait-candidate-keyskills">
     <div class="hover-block">
       <span class="icon"> </span>
       <label>
@@ -40,9 +123,9 @@
       </div>
     </div>
   </div>
-  <div class="col-xs-4">
+  <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 value-portrait-about-myself">
     <div class="about-myself-btn">
-      About Myself
+      <label> About Myself </label>
       <div class="tooltip-content3">
         {{candidate.aboutMyself}}
       </div>
@@ -52,8 +135,10 @@
     </div>
 
   </div>
-  <div class="value-portraot-footer">
+  <div class="value-portrait-footer">
     <tpl-footer></tpl-footer>
   </div>
 </div>
+
+
 

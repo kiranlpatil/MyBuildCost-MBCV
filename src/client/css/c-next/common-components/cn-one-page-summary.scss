@@ -108,6 +108,12 @@
   width: calc(100% - 250px);
 }
 
+.job-description-modal {
+  .complexity-name {
+    max-height: inherit !important;
+  }
+}
+
 @media only screen and (max-width: 1366px) {
   .one-page-summary {
     width: 100%;

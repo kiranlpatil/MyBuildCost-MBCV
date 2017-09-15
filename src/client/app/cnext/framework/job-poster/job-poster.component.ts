@@ -1,20 +1,18 @@
-import {Component, Input, OnChanges, OnInit} from "@angular/core";
-import {JobPosterModel} from "../model/jobPoster";
-import {JobPosterService} from "./job-poster.service";
-import {Role} from "../model/role";
-import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
-import {Message} from "../../../framework/shared/message";
-import {MessageService} from "../../../framework/shared/message.service";
-import {Proficiences} from "../model/proficiency";
-import {Section} from "../model/candidate";
-import {LocalStorage, Messages} from "../../../framework/shared/constants";
-import {LocalStorageService} from "../../../framework/shared/localstorage.service";
-import {ShowQcardviewService} from "../showQCard.service";
-import {Router} from "@angular/router";
-import {Industry} from "../model/industry";
-import {RecruiterDashboardService} from "../recruiter-dashboard/recruiter-dashboard.service";
-import {RecruiterDashboard} from "../model/recruiter-dashboard";
-import {ErrorService} from "../error.service";
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { JobPosterModel } from "../../../user/models/jobPoster";
+import { JobPosterService } from './job-poster.service';
+import { Role } from '../model/role';
+import { CandidateProfileService } from '../candidate-profile/candidate-profile.service';
+import { Proficiences } from '../model/proficiency';
+import { Section } from '../model/candidate';
+import { ShowQcardviewService } from '../showQCard.service';
+import { Router } from '@angular/router';
+import { Industry } from "../../../user/models/industry";
+import { RecruiterDashboardService } from '../recruiter-dashboard/recruiter-dashboard.service';
+import { RecruiterDashboard } from '../model/recruiter-dashboard';
+import { ErrorService } from '../error.service';
+import {LocalStorage, Messages} from "../../../shared/constants";
+import {LocalStorageService} from "../../../shared/services/localstorage.service";
 
 @Component({
   moduleId: module.id,
@@ -28,7 +26,7 @@ export class JobPosterComponent implements OnInit, OnChanges {
   @Input() currentjobId: string;
   @Input() recruiter: RecruiterDashboard;
 
-  jobPostMessage:string = Messages.MSG_JOB_POST;
+  jobPostMessage: string = Messages.MSG_JOB_POST;
   private roleList: string[] = new Array(0);
   private primaryCapability: string[] = new Array(0);
   private proficiencies: Proficiences = new Proficiences();
@@ -63,7 +61,6 @@ export class JobPosterComponent implements OnInit, OnChanges {
 
   constructor(private profileCreatorService: CandidateProfileService,
               private recruiterDashboardService: RecruiterDashboardService,
-              private messageService: MessageService,
               private errorService: ErrorService,
               private showQCardView: ShowQcardviewService,
               private jobPostService: JobPosterService,
@@ -74,13 +71,6 @@ export class JobPosterComponent implements OnInit, OnChanges {
     if (LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE) === 'true') {
       this.isCandidate = true;
     }
-    /*this.activatedRoute.params.subscribe(params => {
-     this.jobId = params['jobId'];
-     });
-     if (this.jobId && !this.isCandidate) {
-     this.getJobProfile();
-     } else {
-     }*/
   }
 
   ngOnChanges(changes: any) {
@@ -88,6 +78,7 @@ export class JobPosterComponent implements OnInit, OnChanges {
       this.jobId = changes.currentjobId.currentValue;
       this.getJobProfile();
     } else {
+      this.jobPosterModel = new JobPosterModel();
       this.highlightedSection.name = 'JobProfile';
     }
   }
@@ -96,18 +87,13 @@ export class JobPosterComponent implements OnInit, OnChanges {
     this.recruiterDashboardService.getPostedJobDetails(this.jobId)
       .subscribe(
         data => {
-          // this.OnRecruiterDataSuccess(data.data.industry);
           this.jobPosterModel = data.data.industry.postedJobs[0];
           this.onGetJobDetailsSuccess(this.jobPosterModel);
-        },error => this.errorService.onError(error));
+        }, error => this.errorService.onError(error));
   }
 
   onGetJobDetailsSuccess(jobmodel: JobPosterModel) {
     LocalStorageService.setLocalValue(LocalStorage.POSTED_JOB, jobmodel._id);
-    /*    if (jobmodel && jobmodel.jobTitle !== undefined && jobmodel.jobTitle !== '' && jobmodel.location.city &&
-     jobmodel.education !== undefined && jobmodel.education !== '' && jobmodel.experienceMinValue !== undefined &&
-     jobmodel.experienceMaxValue !== undefined && jobmodel.department !== undefined && jobmodel.hiringManager !== undefined &&
-     jobmodel.salaryMaxValue !== undefined && jobmodel.salaryMinValue && jobmodel.joiningPeriod !== undefined) {*/
     this.isShowIndustryList = true;
     if (jobmodel.industry && jobmodel.industry.name !== '') {
       this.getRoles();
@@ -183,7 +169,7 @@ export class JobPosterComponent implements OnInit, OnChanges {
     this.jobPostService.postJob(this.jobPosterModel).subscribe(
       data => {
         this.onSuccess(data.data.postedJobs[0]._id);
-      },error => this.errorService.onError(error));
+      }, error => this.errorService.onError(error));
   }
 
   updateJob() {
@@ -198,7 +184,7 @@ export class JobPosterComponent implements OnInit, OnChanges {
           this.jobPosterModel.capability_matrix = data.data.postedJobs[0].capability_matrix;
           this.setCapabilityMatrix = false;
         }
-      },error => this.errorService.onError(error));
+      }, error => this.errorService.onError(error));
   }
 
   onSuccess(jobId: string) {
@@ -249,7 +235,6 @@ export class JobPosterComponent implements OnInit, OnChanges {
     if (this.jobPosterModel.industry.name !== industry.name) {
       this.jobPosterModel.industry = industry;
       this.jobPosterModel.industry.roles = [];
-      //this.highlightedSection.name = 'Industry';
     }
     this.getRoles();
     this.isShowRoleList = true;
@@ -306,39 +291,26 @@ export class JobPosterComponent implements OnInit, OnChanges {
   }
 
   selectExperiencedIndustry(experiencedindustry: string[]) {
-    //this.showCompentensies = true;
     this.jobPosterModel.interestedIndustries = experiencedindustry;
     this.updateJob();
   }
 
   onIndustryExposureComplete() {
-    //this.showCompentensies = true;
     if (this.isShowReleventIndustryListStep) {
       this.highlightedSection.name = 'ReleventIndustry';
       this.showReleventIndustryList = true;
-      /*var rolesForRelevent: Role[] = new Array(0);
-       rolesForRelevent = this.jobForRole;
-       this.rolesForRelevent = rolesForRelevent;*/
     } else {
       this.highlightedSection.name = 'Compentancies';
       this.showCompentensies = true;
     }
-
   }
 
   onCompentansiesandResponsibilitycomplete(data: any) {
     this.jobPosterModel = data;
-    if (this.jobPosterModel.competencies != undefined && this.jobPosterModel.competencies !== '') {
+    if (this.jobPosterModel.competencies !== undefined && this.jobPosterModel.competencies !== '') {
       this.disableButton = false;
     }
     this.updateJob();
-  }
-
-  onError(error: any) {
-    let message = new Message();
-    message.error_msg = error.err_msg;
-    message.isError = true;
-    this.messageService.message(message);
   }
 
   getRoles() {
@@ -352,18 +324,17 @@ export class JobPosterComponent implements OnInit, OnChanges {
 
   getCapability() {
     this.primaryCapability = [];
-    // this.flag = false;
     this.roleList = new Array(0);
     for (let role of this.jobPosterModel.industry.roles) {
       this.roleList.push(role.code);
     }
-    if (this.jobPosterModel.industry.name != undefined && this.roleList != undefined) {
+    if (this.jobPosterModel.industry.name !== undefined && this.roleList !== undefined) {
       this.profileCreatorService.getCapability(this.jobPosterModel.industry.code, this.roleList)
         .subscribe(
           rolelist => {
             this.rolesForCapability = rolelist.data;
             for (let role of this.rolesForCapability) {
-              if (role.capabilities != undefined) {
+              if (role.capabilities !== undefined) {
                 if (role.capabilities.length > 0) {
                   this.isCapabilitypresent = true;
                 }
@@ -376,7 +347,7 @@ export class JobPosterComponent implements OnInit, OnChanges {
             }
             this.isCapabilitypresent = false;
             this.getJobForCapability();
-          },error => this.errorService.onError(error));
+          }, error => this.errorService.onError(error));
     }
   }
 
@@ -395,14 +366,14 @@ export class JobPosterComponent implements OnInit, OnChanges {
         }
       }
     }
-    if (this.jobPosterModel.industry.name != undefined && this.roleList != undefined) {
+    if (this.jobPosterModel.industry.name !== undefined && this.roleList !== undefined) {
       this.profileCreatorService.getComplexity(this.jobPosterModel.industry.code, this.roleList, this.primaryCapability)
         .subscribe(
           rolelist => {
             this.rolesForComplexity = rolelist.data;
             //this.highlightedSection.name = 'Complexities';
             this.getJobForComplexity();
-          },error => this.errorService.onError(error));
+          }, error => this.errorService.onError(error));
     }
   }
 
@@ -411,7 +382,7 @@ export class JobPosterComponent implements OnInit, OnChanges {
       .subscribe(
         data => {
           this.proficiencies = data.data[0].proficiencies;
-        },error => this.errorService.onError(error));
+        }, error => this.errorService.onError(error));
   }
 
   getJobForComplexity() {
@@ -427,5 +398,4 @@ export class JobPosterComponent implements OnInit, OnChanges {
   checkReleventIndustries(value: any) {
     (value > 0) ? this.isShowReleventIndustryListStep = true : this.isShowReleventIndustryListStep = false;
   }
-
 }

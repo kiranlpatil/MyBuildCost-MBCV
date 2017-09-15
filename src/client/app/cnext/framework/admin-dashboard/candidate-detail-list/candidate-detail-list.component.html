@@ -2,8 +2,8 @@
   <div class="header">
     <!--<a href="./public/candidate.csv" download="candiadte.csv" title="Export Candidate to CSV File"><i class="glyphicon glyphicon-export"></i>Export</a>-->
   </div>
-  <a href="./public/candidate.csv" download="candidate.csv" title="Export Candidate to CSV File"
-     class="export-data-link" (click)="getAllUser()"><i class="glyphicon glyphicon-export"></i>Export</a>
+  <div title="Export Candidate to CSV File" class="export-data-link" (click)="generateCandidateDetailFile()"><span class="glyphicon glyphicon-export" ></span>Export</div>
+  <a href="./public/candidate.csv" download="candidate.csv" id="link_candidate"  hidden></a>
   <div class="list-view">
     <ul class="list-header">
       <li>
@@ -34,7 +34,10 @@
     <div *ngFor="let candidate of candidates;let i = index">
       <ul>
         <li>
-          <p>{{candidate.first_name}} {{candidate.last_name}}</p>
+          <p class="username">{{candidate.first_name}} {{candidate.last_name}}
+            <span class="glyphicon glyphicon-eye-open" *ngIf="candidate.data && candidate.data.isVisible" title="Public Profile"></span>
+            <span class="glyphicon glyphicon-eye-close" *ngIf="candidate.data && !candidate.data.isVisible" title="Private Profile"></span>
+          </p>
         </li>
         <li>
           <p *ngIf="candidate.data.jobTitle">{{candidate.data.jobTitle}}</p>

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Candidate } from '../model/candidate';
 import {ErrorService} from "../error.service";
-import {DashboardService} from "../../../framework/dashboard/dashboard.service";
+import {DashboardService} from "../../../user/dashboard.service";
 import {UserData} from "../model/userData";
 import {AdminDashboardService} from "./admin-dashboard.service";
 
@@ -16,6 +16,8 @@ import {AdminDashboardService} from "./admin-dashboard.service";
 export class AdminDashboardComponent {
   private candidate: Candidate = new Candidate();
   private userData: UserData = new UserData();
+  private numberOfCandidates:number=0;
+  private numberOfRecruiters:number=0;
   constructor( private errorService: ErrorService,private adminDashboardService: AdminDashboardService,) {
       this.getUserProfile();
       this.getAllUser();
@@ -23,7 +25,7 @@ export class AdminDashboardComponent {
 getAllUser() {
   this.adminDashboardService.getAllUsers()
     .subscribe(
-      userprofile => this.userData=userprofile.data,
+      userprofile => this.onGetAllUsersSuccess(userprofile),
       error => this.errorService.onError(error));
 }
   getUserProfile() {
@@ -34,5 +36,10 @@ getAllUser() {
   }
   onUserProfileSuccess(candidateData: any) {
     this.candidate.basicInformation = candidateData.data;
+  }
+  onGetAllUsersSuccess(userprofile:any) {
+    this.userData=userprofile.data;
+    this.numberOfCandidates=this.userData.candidate.length;
+    this.numberOfRecruiters=this.userData.recruiter.length;
   }
 }

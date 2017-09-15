@@ -154,6 +154,9 @@ class ImportIndustryService {
 
         let industry = new ImportIndustriesModel(result[0].industry, result[0].code,result[0].sort_order,rolesArray);
         if(!isSend) {
+          if(result[0].code===''||result[0].sort_order===''||result[0].code===undefined||result[0].sort_order===undefined) {
+            callback(new Error('Industry Code and sort order is must for industry - ' + result[0].industry), null);
+          }
           callback(null, industry);
         }
       }

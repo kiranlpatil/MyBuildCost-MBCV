@@ -7,7 +7,7 @@
 
   </div>
 
-  <div class="col-sm-9 right-content" *ngFor="let postedJob of recruiter.postedJobs">
+  <div class="col-sm-9 right-content job-description-modal" *ngFor="let postedJob of recruiter.postedJobs">
     <div class="col-sm-12">
       <cn-capability-compare [isCompact]="true" [rowsToShow]="capabilities.length" [capabilities]="capabilities" *ngIf="capabilities && capabilities.length >0" > </cn-capability-compare>
     </div>
