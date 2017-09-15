@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Output} from "@angular/core";
 import {UserProfile} from "../models/user";
-import {DashboardService} from "../dashboard.service";
+import {DashboardService} from "../services/dashboard.service";
 import {
   AppSettings,
   ImagePath,

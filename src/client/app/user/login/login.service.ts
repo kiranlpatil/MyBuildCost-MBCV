@@ -5,7 +5,7 @@ import "rxjs/add/operator/map";
 import "rxjs/add/operator/catch";
 import {API, BaseService, MessageService} from "../../shared/index";
 import {GoogleToken} from "../models/googletoken";
-import {Login} from "./login";
+import {Login} from "../models/login";
 
 
 @Injectable()

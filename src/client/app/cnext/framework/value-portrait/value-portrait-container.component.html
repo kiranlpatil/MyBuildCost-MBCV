@@ -10,6 +10,9 @@
         <span> Experience is what it's all about</span>
       </h1>
     </div>
+      <div *ngIf="isShareView">
+      <button class="btn btn-get-portrait" (click)="routeToSignUpPage()">Create your Own Value Portrait</button>
+      </div>
     <div *ngIf="!isShareView" class="col-md-7 col-xs-2 no-padding">
       <div class="job-mosis-white-logo" (click)="navigateTo();">
         <img src="/assets/c-next/header/job-mosis-logo-white.png"/>
@@ -19,4 +22,5 @@
     <div class="value-portrait-container">
     <cn-value-portrait [userId]="_userId"></cn-value-portrait>
     </div>
+
 </div>

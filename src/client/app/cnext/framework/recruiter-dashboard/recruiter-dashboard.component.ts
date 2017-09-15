@@ -3,7 +3,7 @@ import {RecruiterDashboardService} from "./recruiter-dashboard.service";
 import {RecruiterDashboard} from "../model/recruiter-dashboard";
 import {RecruiterHeaderDetails} from "../model/recuirterheaderdetails";
 import {ActivatedRoute, Router} from "@angular/router";
-import {RedirectRecruiterDashboardService} from "../redirect-dashboard.service";
+import {RedirectRecruiterDashboardService} from "../../../user/services/redirect-dashboard.service";
 import {ErrorService} from "../error.service";
 
 @Component({

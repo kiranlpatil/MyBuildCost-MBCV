@@ -1,22 +1,8 @@
 import {Routes} from "@angular/router";
-import {LoginRoutes} from "./user/login/index";
 import {DashboardRoutes} from "./framework/dashboard/index";
-import {ForgotPasswordRoutes} from "./user/forgot-password/index";
 import {StartRoutes} from "./framework/start/start.routes";
-import {DashboardProfileRoutes} from "./framework/dashboard/dashboard-profile/index";
-import {ChangePasswordRoutes} from "./framework/password/change-password/index";
 import {AboutRoutes} from "./framework/dashboard/about/index";
-import {SettingsRoutes} from "./framework/dashboard/settings/index";
 import {ActivateUserRoutes} from "./framework/registration/activate-user/activate-user.routes";
-import {ResetPasswordRoutes} from "./user/forgot-password/reset-password/index";
-import {UserVerificationRoutes} from "./user/user-verification/index";
-import {CandidateSignUpVerificationRoutes} from "./user/candidate-sign-up-verification/candidate-sign-up-verification.routes";
-import {ChangeEmailRoutes} from "./framework/dashboard/settings/change-email/change-email.routes";
-import {ActivateEmailRoutes} from "./framework/dashboard/settings/activate-email/activate-email.routes";
-import {ChangeMobileRoutes} from "./framework/dashboard/settings/change-mobile/change-mobile.routes";
-import {CandidateSignUpRoutes} from "./user/candidate-sign-up/candidate-sign-up.routes";
-import {RecruiterSignUpRoutes} from "./user/recruiter-sign-up/recruiter.routes";
-import {CompanyDetailsRoutes} from "./user/company-details/company-details.routes";
 import {RecruiterDashboard} from "./cnext/framework/recruiter-dashboard/recruiter-dashboard.routes";
 import {CandidateSummary} from "./cnext/framework/one-page-summary/candidate-summary/candidate-summary.routes";
 import {ProfileCreator} from "./cnext/framework/candidate-profile/candidate-profile.routes";
@@ -32,35 +18,24 @@ import {LandingPageRoutes} from "./framework/landing-page/landing-page.routes";
 
 
 export const routes: Routes = [
+  {
+    path: 'signin',
+    loadChildren: '/app/user/user.module#UserModule'
+  },
   ...LandingPageRoutes,
-  ...LoginRoutes,
-  ...CandidateSignUpRoutes,
-  ...RecruiterSignUpRoutes,
   ...ActivateUserRoutes,
-  ...ActivateEmailRoutes,
-  ...UserVerificationRoutes,
-  ...CandidateSignUpVerificationRoutes,
   ...DashboardRoutes,
   ...AdminDashboard,
   ...CandidateDashboard,
   ...RecruiterDashboard,
   ...RecruiterSummary,
-  ...ForgotPasswordRoutes,
   ...CandidateCompare,
   ...JobCompare,
-  ...ResetPasswordRoutes,
-  ...DashboardProfileRoutes,
-  ...ChangePasswordRoutes,
-  ...ChangeEmailRoutes,
-  ...ChangeMobileRoutes,
   ...AboutRoutes,
-  ...SettingsRoutes,
   ...ProfileCreator,
   ...CandidateSummary,
   ...ValuePortrait,
-  ...CompanyDetailsRoutes,
   ...JobDashboardRoutes,
   ...JobPosterRoutes,
-  ...StartRoutes,
-
+  ...StartRoutes
 ];

@@ -1,5 +1,5 @@
 import {Route} from "@angular/router";
-import {RecruiterSignUpComponent} from "./index";
+import {RecruiterSignUpComponent} from "./recruiter-sign-up.component";
 
 export const RecruiterSignUpRoutes: Route[] = [
   {

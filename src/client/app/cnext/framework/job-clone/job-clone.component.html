@@ -1,0 +1,20 @@
+
+<div class="modal popup" [style.display]="setStyleForDialogueBox()">
+  <div class="modal-bg">
+    <div class="modal-dialog modal-md">
+      <div class="modal-content">
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="button-group">
+            Job Title:<input type="text"  maxlength="40" [(ngModel)]="selectedJobTitle"/>
+                <button (click)="onCancel()">Cancel</button>
+                <button (click)="onClone()">Clone</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -5,6 +5,7 @@ import JobProfileService = require('../services/jobprofile.service');
 import CNextMessages = require('../shared/cnext-messages');
 import SearchService = require('../search/services/search.service');
 import {Actions} from "../shared/sharedconstants";
+import RecruiterService = require("../services/recruiter.service");
 let usestracking = require('uses-tracking');
 
 
@@ -213,6 +214,54 @@ export function getQCardDetails(req: express.Request, res: express.Response, nex
       } else {
         res.status(200).send(result);
       }
+    });
+  }
+  catch (e) {
+    res.status(403).send({message: e.message});
+  }
+}
+export function cloneJob(req: express.Request, res: express.Response, next: any) {
+  try {
+    var newJobTitle = req.query.newJobTitle;
+    var jobProfileService = new JobProfileService();
+    let data = {
+      'postedJob':req.params.id
+    };
+    jobProfileService.retrieve(data, (error, result) => {
+      if (error) {
+        next({
+          reason: CNextMessages.PROBLEM_IN_RETRIEVE_JOB_PROFILE,
+          message: CNextMessages.PROBLEM_IN_RETRIEVE_JOB_PROFILE,
+          code: 401
+        });
+      } else {
+        var newJob:any=result.postedJobs[0];
+
+        delete newJob._id;
+        newJob.jobTitle=newJobTitle;
+        newJob. isJobPosted=false;
+        newJob.postingDate = new Date();
+        newJob.candidate_list=[];
+
+        let expiringDateInSeconds = new Date().getTime() + 2592000000;
+        newJob.expiringDate = new Date(expiringDateInSeconds);
+        var recruiterService = new RecruiterService();
+        recruiterService.addCloneJob( result.userId, newJob, (err, result) => {
+            if (err) {
+              next({
+                reason: Messages.MSG_ERROR_RSN_USER_NOT_FOUND,
+                message: Messages.MSG_ERROR_RSN_USER_NOT_FOUND,
+                code: 403
+              });
+            } else {
+              res.status(200).send({
+                'status': Messages.STATUS_SUCCESS,
+                'data': result.postedJobs[0]._id
+              });
+            }
+          });
+      }
+
     });
   }
   catch (e) {

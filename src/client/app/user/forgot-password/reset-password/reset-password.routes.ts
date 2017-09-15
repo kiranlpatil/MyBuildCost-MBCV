@@ -1,5 +1,5 @@
 import {Route} from "@angular/router";
-import {ResetPasswordComponent} from "./index";
+import {ResetPasswordComponent} from "./reset-password.component";
 
 
 export const ResetPasswordRoutes: Route[] = [

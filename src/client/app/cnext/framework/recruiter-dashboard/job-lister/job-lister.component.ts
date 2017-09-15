@@ -22,6 +22,9 @@ export class JobListerComponent implements  OnDestroy, OnChanges {
   @Output() jobEventEmitter: EventEmitter<any> = new EventEmitter();
   //public jobList:JobPosterModel[] = new Array(0);
   //public jobListToCheck:JobPosterModel[] = new Array(0);
+  private selectedJobId:string;
+  private selectedJobTitle:string;
+  private clone:boolean;
   private toggle: boolean = false;
   private isJobeditted: boolean = false;
   private initialMessageToDisplay: string= Tooltip.RECRUITER_ENTRY_MESSAGE;
@@ -60,6 +63,11 @@ export class JobListerComponent implements  OnDestroy, OnChanges {
     this.toggleFormat();
   }
 
+  getIdToCloneJob(item:any) {
+    this.selectedJobId=item._id;
+    this.selectedJobTitle=item.jobTitle;
+    this.clone=!this.clone;
+  }
   onJobClicked(item: any,isJobSubmit:boolean) {
     if (isJobSubmit) {
       this._router.navigate(['jobdashboard/', item]);
@@ -72,6 +80,10 @@ export class JobListerComponent implements  OnDestroy, OnChanges {
     if (isJobSubmit) {
       this.jobEventEmitter.emit(item);
     }
+  }
+
+  jobCloned(event:any) {
+    this.jobEventEmitter.emit(event);
   }
   get format() {
     return this.toggle ? this.qCardModel.name : 'Date';

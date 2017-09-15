@@ -46,5 +46,11 @@ export class ValuePortraitContainerComponent implements OnInit,OnDestroy {
         LocalStorageService.setLocalValue(LocalStorage.ACCESS_TOKEN, token);
       }
     });
+
   }
+
+  routeToSignUpPage() {
+    this._router.navigate(['/applicant-signup']);
+  }
+  
 }

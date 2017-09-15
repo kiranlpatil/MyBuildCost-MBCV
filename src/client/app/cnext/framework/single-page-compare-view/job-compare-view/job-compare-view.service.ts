@@ -1,11 +1,11 @@
 import {Injectable} from "@angular/core";
 import {Headers, Http, RequestOptions} from "@angular/http";
 import {Observable} from "rxjs/Observable";
-import {BaseService} from "../../../../shared/services/httpservices/base.service";
+import {BaseService} from "../../../../shared/services/http/base.service";
 import {API, LocalStorage} from "../../../../shared/constants";
-import {Capability} from "../../model/capability";
-import {Complexity} from "../../model/complexity";
-import {Scenario} from "../../model/scenario";
+import {Capability} from "../../../../user/models/capability";
+import {Complexity} from "../../../../user/models/complexity";
+import {Scenario} from "../../../../user/models/scenario";
 import {LocalStorageService} from "../../../../shared/services/localstorage.service";
 
 @Injectable()

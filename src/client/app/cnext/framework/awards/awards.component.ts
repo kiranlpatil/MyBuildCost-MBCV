@@ -1,6 +1,6 @@
 import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from "@angular/core";
 import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
-import {Candidate, Section} from "../model/candidate";
+import {Candidate, Section} from "../../../user/models/candidate";
 import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Tooltip, ImagePath, Headings, LocalStorage} from "../../../shared/constants";
 import {GuidedTourService} from "../guided-tour.service";

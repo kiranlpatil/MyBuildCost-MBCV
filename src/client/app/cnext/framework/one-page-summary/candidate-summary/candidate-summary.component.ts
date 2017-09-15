@@ -2,7 +2,7 @@ import {Component, OnInit} from "@angular/core";
 import {Router} from "@angular/router";
 import {LocalStorage, NavigationRoutes} from "../../../../shared/constants";
 import {LocalStorageService} from "../../../../shared/services/localstorage.service";
-import {Candidate} from "../../model/candidate";
+import {Candidate} from "../../../../user/models/candidate";
 import {CandidateProfileService} from "../../candidate-profile/candidate-profile.service";
 import {ErrorService} from "../../error.service";
 

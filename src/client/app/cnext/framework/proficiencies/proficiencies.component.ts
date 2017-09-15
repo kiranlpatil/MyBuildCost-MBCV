@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, Output} from "@angular/core";
-import {Section} from "../model/candidate";
-import {ImagePath, LocalStorage, Messages, Tooltip, ValueConstant} from "../../../shared/constants";
+import {Section} from "../../../user/models/candidate";
+import {Messages, Tooltip, LocalStorage, ValueConstant} from "../../../shared/constants";
 import {ProficiencyDetailsService} from "../proficiency-detail-service";
 import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
 import {ErrorService} from "../error.service";
@@ -44,7 +44,6 @@ export class ProficienciesComponent {
   }
 
   ngOnChanges(value: any) {
-    debugger;
     if (LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE) === 'true') {
       this.isCandidate = true;
     }

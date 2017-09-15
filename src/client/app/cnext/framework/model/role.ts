@@ -1,4 +1,4 @@
-import {Capability, SecondaryCapability} from "./capability";
+import {Capability, SecondaryCapability} from "../../../user/models/capability";
 export class Role {
   name: string = '';
   code: string ='';

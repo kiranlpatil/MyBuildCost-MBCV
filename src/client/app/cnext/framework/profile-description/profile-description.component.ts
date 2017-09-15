@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
-import {Candidate, Section} from "../model/candidate";
+import {Candidate, Section} from "../../../user/models/candidate";
 import {AppSettings, Headings, ImagePath, LocalStorage, Messages, Tooltip} from "../../../shared/constants";
 import {CandidateDetail} from "../../../user/models/candidate";
 import {ProfessionalDataService} from "../professional-data/professional-data.service";

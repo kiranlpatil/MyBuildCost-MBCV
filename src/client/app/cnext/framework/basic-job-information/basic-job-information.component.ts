@@ -1,16 +1,16 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angular/core';
-import {Industry} from '../../../user/models/industry';
-import {Section} from '../model/candidate';
-import {JobPosterModel} from '../../../user/models/jobPoster';
-import {ProfessionalDataService} from '../professional-data/professional-data.service';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {JobLocation} from '../../../user/models/job-location';
-import {MyGoogleAddress} from '../../../shared/models/my-google-address';
-import { FilterService} from '../filters/filter/filter.service';
-import { Headings, Messages, Tooltip} from '../../../shared/constants';
-import { RecruiterDashboard} from '../model/recruiter-dashboard';
-import {ValidationService} from '../../../shared/customvalidations/validation.service';
-import {ErrorService} from '../error.service';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from "@angular/core";
+import {Industry} from "../../../user/models/industry";
+import {Section} from "../../../user/models/candidate";
+import {JobPosterModel} from "../../../user/models/jobPoster";
+import {ProfessionalDataService} from "../professional-data/professional-data.service";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {JobLocation} from "../../../user/models/job-location";
+import {MyGoogleAddress} from "../../../shared/models/my-google-address";
+import {FilterService} from "../filters/filter/filter.service";
+import {Headings, Messages, Tooltip} from "../../../shared/constants";
+import {RecruiterDashboard} from "../model/recruiter-dashboard";
+import {ValidationService} from "../../../shared/customvalidations/validation.service";
+import {ErrorService} from "../error.service";
 
 @Component({
   moduleId: module.id,

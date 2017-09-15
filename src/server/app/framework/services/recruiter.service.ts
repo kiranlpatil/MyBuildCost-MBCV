@@ -149,6 +149,31 @@ class RecruiterService {
         }
       });
   }
+  addCloneJob(_id: string, item: any, callback: (error: any, result: any) => void) { //Todo change with candidate_id now it is a user_id operation
+    this.recruiterRepository.findOneAndUpdate({"userId": new mongoose.Types.ObjectId(_id)},
+      {$push: {postedJobs: item}},
+      {
+        "new": true, select: {
+        postedJobs: {
+          $elemMatch: {"postingDate": item.postingDate}
+        }
+      }
+      },
+      function (err, record) {
+        if (record) {
+          callback(null, record);
+        } else {
+          let error: any;
+          if (record === null) {
+            error = new Error("Unable to update posted job maybe recruiter not found. ");
+            callback(error, null);
+          }
+          else {
+            callback(err, null);
+          }
+        }
+      });
+  }
 
   updateJob(_id: string, item: any, callback: (error: any, result: any) => void) { //Todo change with candidate_id now it is a user_id operation
 

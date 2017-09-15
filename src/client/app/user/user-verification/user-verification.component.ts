@@ -3,7 +3,7 @@ import {Router} from "@angular/router";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {ImagePath, LocalStorage, Messages, NavigationRoutes, ProjectAsset} from "../../shared/constants";
 import {ValidationService} from "../../shared/customvalidations/validation.service";
-import {VerifyUser} from "../models/verify_user";
+import {VerifyUser} from "../models/verify-user";
 import {UserVerificationService} from "./user-verification.service";
 import {LocalStorageService} from "../../shared/services/localstorage.service";
 import {Message} from "../../shared/models/message";

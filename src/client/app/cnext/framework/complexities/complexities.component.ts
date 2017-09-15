@@ -2,12 +2,12 @@ import {Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, V
 import {Role} from "../model/role";
 import {ComplexityService} from "../complexity.service";
 import {LocalStorageService} from "../../../shared/services/localstorage.service";
-import {Headings, ImagePath, LocalStorage, Messages, Tooltip, ValueConstant} from "../../../shared/constants";
-import {Section} from "../model/candidate";
-import {ComplexityDetails} from "../model/complexity-detail";
+import {LocalStorage, Messages, Tooltip, ValueConstant, ImagePath, Headings} from "../../../shared/constants";
+import {Section} from "../../../user/models/candidate";
+import {ComplexityDetails} from "../../../user/models/complexity-detail";
 import {ComplexityComponentService} from "./complexity.service";
 import {JobCompareService} from "../single-page-compare-view/job-compare-view/job-compare-view.service";
-import {Capability} from "../model/capability";
+import {Capability} from "../../../user/models/capability";
 import {GuidedTourService} from "../guided-tour.service";
 import {ErrorService} from "../error.service";
 

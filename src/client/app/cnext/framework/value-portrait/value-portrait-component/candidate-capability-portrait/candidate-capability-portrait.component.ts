@@ -1,6 +1,6 @@
 import {Component, Input, OnChanges} from "@angular/core";
-import {Candidate} from "../../../model/candidate";
-import {Capability} from "../../../model/capability";
+import {Candidate} from "../../../../../user/models/candidate";
+import {Capability} from "../../../../../user/models/capability";
 
 @Component({
   moduleId: module.id,
