@@ -36,6 +36,7 @@ $modal-border: #ff927f;
 $modal-content-bg: #EB6B56;
 $got-it-btn-bg: #fe5722;
 $black: #000000;
+$facebook-share: #3b5998;
 
 .btn-logout {
   margin-top: 15px;
@@ -1180,5 +1181,21 @@ select:focus {
         display: table;
       }
     }
+  }
+}
+
+.btn-facebook {
+  background: url(../assets/c-next/card-view/sprite.png) no-repeat 0px -697px;
+  position: fixed;
+  right: 18px;
+  top: 88px;
+  background-color: $facebook-share;
+  border: 1px solid $facebook-share;
+  border-radius: 0;
+  padding: 20px;
+
+  &:hover, &:active, &:focus {
+    background-color: $facebook-share;
+    border: 1px solid $facebook-share;
   }
 }

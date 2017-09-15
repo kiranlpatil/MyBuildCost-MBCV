@@ -1,6 +1,6 @@
 import {ErrorHandler, NgModule} from "@angular/core";
 import {AppComponent} from "./app.component";
-import {BrowserModule} from "@angular/platform-browser";
+import {BrowserModule, Title} from "@angular/platform-browser";
 import {APP_BASE_HREF} from "@angular/common";
 import {RouterModule} from "@angular/router";
 import {RecaptchaModule} from "ng2-recaptcha";
@@ -125,7 +125,6 @@ import {CertificatesComponent} from "./cnext/framework/certification-accreditati
 import {AwardComponent} from "./cnext/framework/awards/award/award.component";
 import {ProficiencyCompareComponent} from "./cnext/framework/single-page-compare-view/shared/proficiency-compare/proficiency-compare.component";
 import {CandidateCompareService} from "./cnext/framework/single-page-compare-view/candidate-compare-view/candidate-compare-view.service";
-import {TooltipComponent} from "./shared/tool-tip-component/tool-tip-component";
 import {JobCompareService} from "./cnext/framework/single-page-compare-view/job-compare-view/job-compare-view.service";
 import {JobCompareViewComponent} from "./cnext/framework/single-page-compare-view/job-compare-view/job-compare-view.component";
 import {GuidedTourComponent} from "./cnext/framework/guided-tour/guided-tour.component";
@@ -170,9 +169,13 @@ import {CandidateSearchService} from "./cnext/framework/candidate-search/candida
 import {user} from "./user/user.module";
 import {SharedModule} from "./shared/shared.module";
 import {CustomHttp} from "./shared/services/httpservices/custom.http";
-import {ProfilePictureComponent} from "./user/profile-picture/profile-picture.component";
 import {ProfileService} from "./framework/shared/profileservice/profile.service";
 import {LandingPageComponent} from "./framework/landing-page/landing-page.component";
+import {ShareComponent} from "./cnext/framework/share/share.component";
+import {ShareService} from "./cnext/framework/share/share.service";
+import {SeoService} from "./cnext/framework/share/seo.service";
+import {SharedService} from "./shared/services/shared-service";
+
 //C-NEXT IMPORTS
 
 
@@ -299,7 +302,8 @@ import {LandingPageComponent} from "./framework/landing-page/landing-page.compon
     ColorShadeDirective,
     AttributeFilterPipe,
     ValueSortFilterPipe,
-    CandidateSearchComponent
+    CandidateSearchComponent,
+    ShareComponent
   ],
   providers: [
     {
@@ -367,7 +371,10 @@ import {LandingPageComponent} from "./framework/landing-page/landing-page.compon
     ProfileComparisonService,
     GuidedTourService,
     CandidateSearchService,
-
+    SharedService,
+    ShareService,
+    SeoService,
+    Title
   ],
   bootstrap: [AppComponent]
 })

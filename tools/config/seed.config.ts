@@ -1,8 +1,7 @@
-import { join } from 'path';
-import * as slash from 'slash';
-import { argv } from 'yargs';
-
-import { BuildType, ExtendPackages, InjectableDependency } from './seed.config.interfaces';
+import {join} from "path";
+import * as slash from "slash";
+import {argv} from "yargs";
+import {BuildType, ExtendPackages, InjectableDependency} from "./seed.config.interfaces";
 
 /************************* DO NOT CHANGE ************************
  *
@@ -400,6 +399,7 @@ export class SeedConfig {
       'ng2-recaptcha': 'node_modules/ng2-recaptcha/ng2-recaptcha.js',
       'ng2-scroll-to': 'node_modules/ng2-scroll-to/index.js',
       'ng2-google-place-autocomplete': 'node_modules/ng2-google-place-autocomplete/src/',
+      //'ng2-social-share': 'node_modules/ng2-social-share/src/',
       'app/*': '/app/*',
       // For test config
       'dist/dev/*': '/base/dist/dev/*',
@@ -484,10 +484,6 @@ export class SeedConfig {
       },
       'rxjs': {
         main: 'Rx.js',
-        defaultExtension: 'js'
-      },
-      'ng2-scroll-to': {
-        main: 'index.js',
         defaultExtension: 'js'
       }
     }

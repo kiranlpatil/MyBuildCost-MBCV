@@ -1,12 +1,12 @@
 import * as passport from "passport";
 import * as jwt from "jwt-simple";
 import * as Bearer from "passport-http-bearer";
+import {ConstVariables} from "../shared/sharedconstants";
 var BearerStrategy: any = Bearer.Strategy;
 var FacebookTokenStrategy = require('passport-facebook-token');
 import UserRepository = require("../dataaccess/repository/user.repository");
 import Messages=require("../shared/messages");
 import UserModel = require("../dataaccess/model/user.model");
-import {ConstVariables} from "../shared/sharedconstants";
 
 var GooglePlusTokenStrategy = require('passport-google-plus-token');
 var config = require('config');
@@ -23,6 +23,7 @@ class AuthInterceptor {
 
     passport.use(new BearerStrategy(function (token: any, done: any) {
       var decoded: any = null;
+      var isShareApi:boolean = false;
       try {
         decoded = jwt.decode(token, ConstVariables.AUTHENTICATION_JWT_KEY);
       } catch (e) {
@@ -30,13 +31,18 @@ class AuthInterceptor {
         err.message = Messages.MSG_ERROR_INVALID_TOKEN;
         return done(err, false, null);
       }
-      if (decoded.exp === undefined) {
-        console.log('its an unsubscribed call in AuthInterceptor');
-      } else if (decoded.exp <= Date.now()) {
-        var err = new Error();
-        err.message = Messages.MSG_ERROR_TOKEN_SESSION;
-        return done(err, false, null);
+      if (decoded.shareKey === ConstVariables.AUTHENTICATION_ENCODED_SHARE_KEY) {
+        isShareApi = true;
+      } else {
+        if (decoded.exp === undefined) {
+          console.log('its an unsubscribed call in AuthInterceptor');
+        } else if (decoded.exp <= Date.now()) {
+          var err = new Error();
+          err.message = Messages.MSG_ERROR_TOKEN_SESSION;
+          return done(err, false, null);
+        }
       }
+
       if(decoded.iss !== undefined) {
         var userRepository: UserRepository = new UserRepository();
         userRepository.findById(decoded.iss, function (err, user) {
@@ -46,13 +52,13 @@ class AuthInterceptor {
           if (!user) {
             return done(null, false,null);
           }
-          return done(null, user,null);
+          return done(null, user, isShareApi);
         });
-      } else {
+      } /*else {
         var err = new Error();
         err.message = 'Issuer in token is not available';
         return done(err, false, null);
-      }
+      }*/
     }));
 
     passport.use(new FacebookTokenStrategy({
@@ -184,11 +190,27 @@ class AuthInterceptor {
     return token;
   }
 
+  issueTokenWithUidForShare(user:any) {
+    //Token with no expiry date
+    var issuer:string;
+    var customKey:string = ConstVariables.AUTHENTICATION_ENCODED_SHARE_KEY;
+    if (user.userId) {
+      issuer = user.userId;
+    } else {
+      issuer = user._id;
+    }
+    var token = jwt.encode({
+      iss: issuer, // issue
+      shareKey: customKey
+    }, ConstVariables.AUTHENTICATION_JWT_KEY);
+    return token;
+  }
+
   requiresAuth(req: any, res: any, next: any) {
     passport.authenticate('bearer', {session: false},
-      function (err: any, myuser: any, info: any) {
+      function (err:any, myuser:any, isShareApi:boolean) {
         if (err) {
-          console.log('errorr in error',JSON.stringify(err))
+          console.log('errorr in error', JSON.stringify(err));
           return res.status(401).send({
             'error': {
               reason: err.message,
@@ -216,6 +238,7 @@ class AuthInterceptor {
               });
             } else {
               req.user = myuser;
+              (isShareApi) ? req.isShareApi = true : req.isShareApi = false;
               next();
             }
           }
@@ -338,6 +361,20 @@ class AuthInterceptor {
         }
       }
     });
+  }
+
+  secureApiCheck(req:any, res:any, next:any) {
+    if (req.isShareApi) {
+      return res.status(401).send({
+        'error': {
+          reason: Messages.MSG_ERROR_API_CHECK,
+          message: Messages.MSG_ERROR_API_CHECK,
+          code: 401
+        }
+      })
+    } else {
+      next();
+    }
   }
 }
 Object.seal(AuthInterceptor);

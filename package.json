@@ -199,6 +199,7 @@
     "ng2-google-place-autocomplete": "^1.4.2",
     "ng2-recaptcha": "^1.7.0",
     "ng2-scroll-to": "^1.0.7",
+    "ng2-social-share": "0.0.10",
     "passport": "^0.3.0",
     "passport-facebook-token": "^3.3.0",
     "passport-google-oauth2": "^0.1.6",
