@@ -173,7 +173,6 @@ import {ProfileService} from "./framework/shared/profileservice/profile.service"
 import {LandingPageComponent} from "./framework/landing-page/landing-page.component";
 import {ShareComponent} from "./cnext/framework/share/share.component";
 import {ShareService} from "./cnext/framework/share/share.service";
-import {SeoService} from "./cnext/framework/share/seo.service";
 import {SharedService} from "./shared/services/shared-service";
 
 //C-NEXT IMPORTS
@@ -373,7 +372,6 @@ import {SharedService} from "./shared/services/shared-service";
     CandidateSearchService,
     SharedService,
     ShareService,
-    SeoService,
     Title
   ],
   bootstrap: [AppComponent]
