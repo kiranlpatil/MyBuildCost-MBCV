@@ -25,9 +25,10 @@ import {Ng2AutoCompleteModule} from "ng2-auto-complete";
 import {ProfilePictureComponent} from "./profile-picture/profile-picture.component";
 import {ChangePasswordComponent} from "./change-password/change-password.component";
 import {ChangePasswordService} from "./change-password/change-password.service";
+import {UserRoutingModule} from "./user.routing.module";
 
 @NgModule({
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, SharedModule, Ng2AutoCompleteModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, SharedModule, Ng2AutoCompleteModule, UserRoutingModule],
   declarations: [UserHeaderComponent, LoginComponent, ResetPasswordComponent, ForgotPasswordComponent,
     CandidateSignUpComponent, CandidateSignUpVerificationComponent, UserVerificationComponent, RecruiterSignUpComponent,
     CompanyDetailsComponent, ProfilePictureComponent, ChangePasswordComponent],
@@ -39,6 +40,6 @@ import {ChangePasswordService} from "./change-password/change-password.service";
     CompanyDetailsService, ChangePasswordService]
 })
 
-export class user {
+export class UserModule {
 
 }

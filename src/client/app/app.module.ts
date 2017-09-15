@@ -164,7 +164,7 @@ import {KeyskillsDetailListComponent} from "./cnext/framework/admin-dashboard/ke
 import {AdminDashboardService} from "./cnext/framework/admin-dashboard/admin-dashboard.service";
 import {CandidateSearchComponent} from "./cnext/framework/candidate-search/candidate-search.component";
 import {CandidateSearchService} from "./cnext/framework/candidate-search/candidate-search.service";
-import {user} from "./user/user.module";
+import {UserModule} from "./user/user.module";
 import {SharedModule} from "./shared/shared.module";
 import {CustomHttp} from "./shared/services/httpservices/custom.http";
 import {ProfileService} from "./framework/shared/profileservice/profile.service";
@@ -183,7 +183,7 @@ import {LandingPageComponent} from "./framework/landing-page/landing-page.compon
     Ng2AutoCompleteModule,
     ScrollToModule.forRoot(),
     SharedModule,
-    user,
+    UserModule
   ],
   declarations: [
     AppComponent,
