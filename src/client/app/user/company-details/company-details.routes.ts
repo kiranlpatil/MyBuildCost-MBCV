@@ -1,5 +1,5 @@
 import {Route} from "@angular/router";
-import {CompanyDetailsComponent} from "./index";
+import {CompanyDetailsComponent} from "./company-details.component";
 
 export const CompanyDetailsRoutes: Route[] = [
   {

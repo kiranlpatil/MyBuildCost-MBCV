@@ -7,9 +7,9 @@ import {MessageService} from "../../shared/services/message.service";
 import {Message} from "../../shared/models/message";
 import {LocalStorageService} from "../../shared/services/localstorage.service";
 import {ValidationService} from "../../shared/customvalidations/validation.service";
-import {Login} from "../../user/login/login";
+import {Login} from "../models/login";
 import {LoginService} from "../../user/login/login.service";
-import {RegistrationService} from "../registration.service";
+import {RegistrationService} from "../services/registration.service";
 
 @Component({
   moduleId: module.id,

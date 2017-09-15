@@ -17,7 +17,7 @@ import {HeaderComponent} from "./framework/shared/header/header.component";
 import {NotificationService} from "./framework/shared/notification/notification.service";
 import {NotificationComponent} from "./framework/shared/notification/notification.component";
 import {SocialIconComponent} from "./framework/shared/footer/social-icon/social-icon.component";
-import {DashboardService} from "./user/dashboard.service";
+import {DashboardService} from "./user/services/dashboard.service";
 import {ContactService} from "./framework/dashboard/contact/contact.service";
 import {ActivateUserComponent} from "./framework/registration/activate-user/activate-user.component";
 import {ActiveUserService} from "./framework/registration/activate-user/activate-user.service";
@@ -115,7 +115,7 @@ import {CandidateCompareService} from "./cnext/framework/single-page-compare-vie
 import {JobCompareService} from "./cnext/framework/single-page-compare-view/job-compare-view/job-compare-view.service";
 import {JobCompareViewComponent} from "./cnext/framework/single-page-compare-view/job-compare-view/job-compare-view.component";
 import {GuidedTourComponent} from "./cnext/framework/guided-tour/guided-tour.component";
-import {RedirectRecruiterDashboardService} from "./user/redirect-dashboard.service";
+import {RedirectRecruiterDashboardService} from "./user/services/redirect-dashboard.service";
 import {QuestionAnswerComponent} from "./cnext/framework/question-answer/question-answer.component";
 import {ComplexityComponentService} from "./cnext/framework/complexities/complexity.service";
 import {ReleventIndustryListComponent} from "./cnext/framework/relevent-industry-list/relevent-industry-list.component";
@@ -155,7 +155,7 @@ import {CandidateSearchComponent} from "./cnext/framework/candidate-search/candi
 import {CandidateSearchService} from "./cnext/framework/candidate-search/candidate-search.service";
 import {UserModule} from "./user/user.module";
 import {SharedModule} from "./shared/shared.module";
-import {CustomHttp} from "./shared/services/httpservices/custom.http";
+import {CustomHttp} from "./shared/services/http/custom.http";
 import {ProfileService} from "./framework/shared/profileservice/profile.service";
 import {LandingPageComponent} from "./framework/landing-page/landing-page.component";
 import {SettingsComponent} from "./framework/dashboard/settings/settings.component";

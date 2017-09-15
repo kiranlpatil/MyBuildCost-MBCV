@@ -14,7 +14,7 @@ import {CandidateSignUpComponent} from "./candidate-sign-up/candidate-sign-up.co
 import {CandidateSignUpService} from "./candidate-sign-up/candidate-sign-up.service";
 import {CandidateSignUpVerificationComponent} from "./candidate-sign-up-verification/candidate-sign-up-verification.component";
 import {CandidateSignUpVerificationService} from "./candidate-sign-up-verification/candidate-sign-up-verification.service";
-import {RegistrationService} from "./registration.service";
+import {RegistrationService} from "./services/registration.service";
 import {UserVerificationComponent} from "./user-verification/user-verification.component";
 import {UserVerificationService} from "./user-verification/user-verification.service";
 import {RecruiterSignUpComponent} from "./recruiter-sign-up/recruiter-sign-up.component";

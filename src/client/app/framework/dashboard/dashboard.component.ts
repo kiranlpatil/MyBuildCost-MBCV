@@ -1,6 +1,6 @@
 import {Component, NgZone, OnDestroy, OnInit} from "@angular/core";
 import {Router} from "@angular/router";
-import {DashboardService} from "../../user/dashboard.service";
+import {DashboardService} from "../../user/services/dashboard.service";
 import {UserProfile} from "../../user/models/user";
 import {
   LocalStorage,

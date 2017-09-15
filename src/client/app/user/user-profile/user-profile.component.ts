@@ -1,6 +1,6 @@
 import {Component, NgZone, OnDestroy, OnInit} from "@angular/core";
 import {ActivatedRoute, Router} from "@angular/router";
-import {DashboardService} from "../../user/dashboard.service";
+import {DashboardService} from "../services/dashboard.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ValidationService} from "../../shared/customvalidations/validation.service";
 import {

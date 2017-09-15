@@ -1,5 +1,5 @@
 import {Route} from "@angular/router";
-import {CandidateSignUpVerificationComponent} from "./index";
+import {CandidateSignUpVerificationComponent} from "./candidate-sign-up-verification.component";
 
 export const CandidateSignUpVerificationRoutes: Route[] = [
   {

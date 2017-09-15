@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnChanges, Output} from "@angular/core";
-import {BaseService} from "../../../shared/services/httpservices/base.service";
+import {BaseService} from "../../../shared/services/http/base.service";
 import {ProfessionalData} from "../../../user/models/professional-data";
 import {ProfessionalDataService} from "./professional-data.service";
 import {Message} from "../../../shared/models/message";

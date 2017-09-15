@@ -1,10 +1,10 @@
 import {Injectable} from "@angular/core";
-import {BaseService} from "../../shared/services/httpservices/base.service";
+import {BaseService} from "../../shared/services/http/base.service";
 import {ValueConstant} from "../../shared/constants";
 @Injectable()
 export class DateService extends BaseService {
-  monthList = new Array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December');
-  yearList = new Array();
+  monthList = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  yearList = [];
   error_msg: string;
   private year: any;
   private currentDate: any;
@@ -23,7 +23,7 @@ export class DateService extends BaseService {
   }
 
   createBirthYearList(year: any) {
-    let validbirthYearList = new Array();
+    let validbirthYearList = [];
     for (let i = 0; i < ValueConstant.MAX_YEAR_LIST; i++) {
       validbirthYearList.push(year--);
     }

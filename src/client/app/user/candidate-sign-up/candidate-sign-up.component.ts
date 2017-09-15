@@ -8,7 +8,6 @@ import {AppSettings, CommonService, Message, MessageService, NavigationRoutes} f
 import {ImagePath, LocalStorage, Messages} from "../../shared/constants";
 import {LocalStorageService} from "../../shared/services/localstorage.service";
 import {DateService} from "../../cnext/framework/date.service";
-import {Location} from "../models/location";
 import {SharedService} from "../../shared/services/shared-service";
 @Component({
   moduleId: module.id,
@@ -22,7 +21,6 @@ export class CandidateSignUpComponent implements OnInit {
   @ViewChild('toaster') toaster: ElementRef;
   yearMatchNotFoundMessage: string = Messages.MSG_YEAR_NO_MATCH_FOUND;
   private model = new CandidateDetail();
-  private storedLocation: Location = new Location();
   private isPasswordConfirm: boolean;
   private isFormSubmitted = false;
   private userForm: FormGroup;
@@ -105,7 +103,6 @@ export class CandidateSignUpComponent implements OnInit {
     this.model = this.userForm.value;
     this.model.current_theme = AppSettings.LIGHT_THEM;
     this.model.isCandidate = true;
-    //this.model.location = this.storedLocation;
     this.model.email = this.model.email.toLowerCase();
 
     if (!this.makePasswordConfirm()) {

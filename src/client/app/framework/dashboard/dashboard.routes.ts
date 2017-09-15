@@ -1,12 +1,12 @@
 import {Route} from "@angular/router";
 import {DashboardComponent} from "./dashboard.component";
-import {ChangePasswordComponent} from "../../user/change-password/index";
 import {DashboardHomeComponent} from "./dashboard-home/index";
 import {AboutComponent} from "./about/index";
 import {ContactComponent} from "./contact/contact.component";
 import {ChangeEmailComponent} from "../../user/settings/change-email/change-email.component";
 import {UserProfileComponent} from "../../user/user-profile/user-profile.component";
 import {SettingsComponent} from "./settings/settings.component";
+import {ChangePasswordComponent} from "../../user/change-password/change-password.component";
 
 export const DashboardRoutes: Route[] = [
   {

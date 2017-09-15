@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
 import {Observable} from "rxjs/Observable";
 import {Headers, Http, RequestOptions} from "@angular/http";
-import {BaseService} from "../../../shared/services/httpservices/base.service";
+import {BaseService} from "../../../shared/services/http/base.service";
 import {API, LocalStorage} from "../../../shared/constants";
 import {LocalStorageService} from "../../../shared/services/localstorage.service";
 import {EmployementHistory} from "../../../user/models/employment-history";
