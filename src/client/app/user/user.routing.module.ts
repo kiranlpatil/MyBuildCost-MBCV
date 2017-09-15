@@ -13,6 +13,7 @@ import {ActivateEmailRoutes} from "./settings/activate-email/activate-email.rout
 import {ChangeEmailRoutes} from "./settings/change-email/change-email.routes";
 import {ChangeMobileRoutes} from "./settings/change-mobile/change-mobile.routes";
 import {UserProfileRoutes} from "./user-profile/user-profile.routes";
+import {SettingsRoutes} from "./settings/settings.routes";
 
 @NgModule({
   imports: [
@@ -29,7 +30,8 @@ import {UserProfileRoutes} from "./user-profile/user-profile.routes";
       ...ActivateEmailRoutes,
       ...ChangeEmailRoutes,
       ...ChangeMobileRoutes,
-      ...UserProfileRoutes
+      ...UserProfileRoutes,
+      ...SettingsRoutes
     ])
   ],
   exports: [

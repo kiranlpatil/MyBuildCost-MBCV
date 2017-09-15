@@ -15,7 +15,6 @@ import {JobPosterRoutes} from "./cnext/framework/job-poster/job-poster.routes";
 import {ValuePortrait} from "./cnext/framework/value-portrait/value-portrait-container.routes";
 import {AdminDashboard} from "./cnext/framework/admin-dashboard/admin-dashboard.routes";
 import {LandingPageRoutes} from "./framework/landing-page/landing-page.routes";
-import {SettingsRoutes} from "./framework/dashboard/settings/settings.routes";
 
 
 export const routes: Routes = [
@@ -38,6 +37,5 @@ export const routes: Routes = [
   ...ValuePortrait,
   ...JobDashboardRoutes,
   ...JobPosterRoutes,
-  ...StartRoutes,
-  ...SettingsRoutes
+  ...StartRoutes
 ];

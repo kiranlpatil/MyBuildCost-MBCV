@@ -36,6 +36,9 @@ import {UserProfileComponent} from "./user-profile/user-profile.component";
 import {CandidateDashboardHeaderComponent} from "./candidate-dashboard-header/candidate-dashboard-header.component";
 import {CandidateHeaderComponent} from "./candidate-header/candidate-header.component";
 import {RecruiterSharedHeaderComponent} from "./recruiter-shared-header/recruiter-shared-header.component";
+import {SettingsComponent} from "./settings/settings.component";
+import {SettingsService} from "./settings/settings.service";
+import {AdminDashboardHeaderComponent} from "./admin-dashboard-header/admin-dashboard-header.component";
 
 @NgModule({
   imports: [CommonModule, FormsModule, ReactiveFormsModule, SharedModule, Ng2AutoCompleteModule, UserRoutingModule],
@@ -43,16 +46,16 @@ import {RecruiterSharedHeaderComponent} from "./recruiter-shared-header/recruite
     CandidateSignUpComponent, CandidateSignUpVerificationComponent, UserVerificationComponent, RecruiterSignUpComponent,
     CompanyDetailsComponent, ProfilePictureComponent, ChangePasswordComponent, ActivateEmailComponent,
     ChangeEmailComponent, ChangeMobileComponent, UserProfileComponent, CandidateDashboardHeaderComponent,
-    CandidateHeaderComponent, RecruiterSharedHeaderComponent],
+    CandidateHeaderComponent, RecruiterSharedHeaderComponent, SettingsComponent, AdminDashboardHeaderComponent],
   exports: [UserHeaderComponent, LoginComponent, ResetPasswordComponent, ForgotPasswordComponent,
     CandidateSignUpComponent, CandidateSignUpVerificationComponent, UserVerificationComponent, RecruiterSignUpComponent,
     CompanyDetailsComponent, ProfilePictureComponent, ChangePasswordComponent, ActivateEmailComponent,
     ChangeEmailComponent, ChangeMobileComponent, UserProfileComponent, CandidateDashboardHeaderComponent,
-    CandidateHeaderComponent, RecruiterSharedHeaderComponent],
+    CandidateHeaderComponent, RecruiterSharedHeaderComponent, SettingsComponent, AdminDashboardHeaderComponent],
   providers: [LoginService, FacebookService, ForgotPasswordService, ResetPasswordService, CandidateSignUpService,
     CandidateSignUpVerificationService, RegistrationService, UserVerificationService, RecruiterSignUpService,
     CompanyDetailsService, ChangePasswordService, ActiveEmailService, ChangeEmailService, ChangeMobileService,
-    RegistrationService]
+    RegistrationService, SettingsService]
 })
 
 export class UserModule {

@@ -8,17 +8,17 @@ import {
   Messages,
   MessageService,
   ThemeChangeService
-} from "../../../shared/index";
+} from "../../shared/index";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {SettingsService} from "./settings.service";
-import {UserProfile} from "../../../user/models/user";
-import {ProjectAsset, Headings} from "../../../shared/constants";
-import {LoaderService} from "../../../shared/loader/loaders.service";
+import {UserProfile} from "../models/user";
+import {ProjectAsset, Headings} from "../../shared/constants";
+import {LoaderService} from "../../shared/loader/loaders.service";
 import {ActivatedRoute} from "@angular/router";
-import {Candidate, Summary} from "../../../user/models/candidate";
-import {CandidateProfileService} from "../../../cnext/framework/candidate-profile/candidate-profile.service";
-import {ErrorService} from "../../../cnext/framework/error.service";
-import {AdminDashboardService} from "../../../cnext/framework/admin-dashboard/admin-dashboard.service";
+import {Candidate, Summary} from "../models/candidate";
+import {CandidateProfileService} from "../../cnext/framework/candidate-profile/candidate-profile.service";
+import {ErrorService} from "../../cnext/framework/error.service";
+import {AdminDashboardService} from "../../cnext/framework/admin-dashboard/admin-dashboard.service";
 
 @Component({
   moduleId: module.id,

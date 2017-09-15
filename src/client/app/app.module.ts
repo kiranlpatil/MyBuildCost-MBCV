@@ -146,7 +146,6 @@ import {GuidedTourService} from "./cnext/framework/guided-tour.service";
 import {ErrorService} from "./cnext/framework/error.service";
 import {LoggerService, MyErrorHandler} from "./cnext/framework/my-error-handler.service";
 import {AdminDashboardComponent} from "./cnext/framework/admin-dashboard/admin-dashboard.component";
-import {AdminDashboardHeaderComponent} from "./cnext/framework/admin-dashboard/admin-dashboard-header/admin-dashboard-header.component";
 import {RecruiterDetailListComponent} from "./cnext/framework/admin-dashboard/recruiter-detail-list/recruiter-detail-list.component";
 import {CandidateDetailListComponent} from "./cnext/framework/admin-dashboard/candidate-detail-list/candidate-detail-list.component";
 import {KeyskillsDetailListComponent} from "./cnext/framework/admin-dashboard/keyskills-detail-list/keyskills-detail-list.component";
@@ -161,8 +160,6 @@ import {LandingPageComponent} from "./framework/landing-page/landing-page.compon
 import {ShareComponent} from "./cnext/framework/share/share.component";
 import {ShareService} from "./cnext/framework/share/share.service";
 import {SharedService} from "./shared/services/shared-service";
-
-import {SettingsComponent} from "./framework/dashboard/settings/settings.component";
 //C-NEXT IMPORTS
 
 
@@ -186,7 +183,6 @@ import {SettingsComponent} from "./framework/dashboard/settings/settings.compone
     DashboardComponent,
     AboutComponent,
     ContactComponent,
-    SettingsComponent,
     DashboardHomeComponent,
     HeaderComponent,
     FooterComponent,
@@ -212,7 +208,6 @@ import {SettingsComponent} from "./framework/dashboard/settings/settings.compone
     CapabilitiesComponent,
     GuidedTourComponent,
     AdminDashboardComponent,
-    AdminDashboardHeaderComponent,
     MultipleQuestionAnswerComponent,
     JobProficienciesComponent,
     ProficienciesComponent,
