@@ -9,6 +9,10 @@ import {ResetPasswordRoutes} from "./forgot-password/reset-password/reset-passwo
 import {ForgotPasswordRoutes} from "./forgot-password/forgot-password.routes";
 import {CompanyDetailsRoutes} from "./company-details/company-details.routes";
 import {ChangePasswordRoutes} from "./change-password/change-password.routes";
+import {ActivateEmailRoutes} from "./settings/activate-email/activate-email.routes";
+import {ChangeEmailRoutes} from "./settings/change-email/change-email.routes";
+import {ChangeMobileRoutes} from "./settings/change-mobile/change-mobile.routes";
+import {UserProfileRoutes} from "./user-profile/user-profile.routes";
 
 @NgModule({
   imports: [
@@ -21,7 +25,11 @@ import {ChangePasswordRoutes} from "./change-password/change-password.routes";
       ...ForgotPasswordRoutes,
       ...ResetPasswordRoutes,
       ...RecruiterSignUpRoutes,
-      ...UserVerificationRoutes
+      ...UserVerificationRoutes,
+      ...ActivateEmailRoutes,
+      ...ChangeEmailRoutes,
+      ...ChangeMobileRoutes,
+      ...UserProfileRoutes
     ])
   ],
   exports: [

@@ -1,13 +1,8 @@
 import {Routes} from "@angular/router";
 import {DashboardRoutes} from "./framework/dashboard/index";
 import {StartRoutes} from "./framework/start/start.routes";
-import {DashboardProfileRoutes} from "./framework/dashboard/dashboard-profile/index";
 import {AboutRoutes} from "./framework/dashboard/about/index";
-import {SettingsRoutes} from "./framework/dashboard/settings/index";
 import {ActivateUserRoutes} from "./framework/registration/activate-user/activate-user.routes";
-import {ChangeEmailRoutes} from "./framework/dashboard/settings/change-email/change-email.routes";
-import {ActivateEmailRoutes} from "./framework/dashboard/settings/activate-email/activate-email.routes";
-import {ChangeMobileRoutes} from "./framework/dashboard/settings/change-mobile/change-mobile.routes";
 import {RecruiterDashboard} from "./cnext/framework/recruiter-dashboard/recruiter-dashboard.routes";
 import {CandidateSummary} from "./cnext/framework/one-page-summary/candidate-summary/candidate-summary.routes";
 import {ProfileCreator} from "./cnext/framework/candidate-profile/candidate-profile.routes";
@@ -20,6 +15,7 @@ import {JobPosterRoutes} from "./cnext/framework/job-poster/job-poster.routes";
 import {ValuePortrait} from "./cnext/framework/value-portrait/value-portrait-container.routes";
 import {AdminDashboard} from "./cnext/framework/admin-dashboard/admin-dashboard.routes";
 import {LandingPageRoutes} from "./framework/landing-page/landing-page.routes";
+import {SettingsRoutes} from "./framework/dashboard/settings/settings.routes";
 
 
 export const routes: Routes = [
@@ -29,7 +25,6 @@ export const routes: Routes = [
   },
   ...LandingPageRoutes,
   ...ActivateUserRoutes,
-  ...ActivateEmailRoutes,
   ...DashboardRoutes,
   ...AdminDashboard,
   ...CandidateDashboard,
@@ -37,15 +32,12 @@ export const routes: Routes = [
   ...RecruiterSummary,
   ...CandidateCompare,
   ...JobCompare,
-  ...DashboardProfileRoutes,
-  ...ChangeEmailRoutes,
-  ...ChangeMobileRoutes,
   ...AboutRoutes,
-  ...SettingsRoutes,
   ...ProfileCreator,
   ...CandidateSummary,
   ...ValuePortrait,
   ...JobDashboardRoutes,
   ...JobPosterRoutes,
-  ...StartRoutes
+  ...StartRoutes,
+  ...SettingsRoutes
 ];

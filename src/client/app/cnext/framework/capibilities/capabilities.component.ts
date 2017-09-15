@@ -1,8 +1,8 @@
 import {Component, EventEmitter, Input, Output} from "@angular/core";
 import {Role} from "../model/role";
-import {Capability} from "../model/capability";
+import {Capability} from "../../../user/models/capability";
 import {Headings, ImagePath, LocalStorage, Messages, Tooltip, ValueConstant} from "../../../shared/constants";
-import {Section} from "../model/candidate";
+import {Section} from "../../../user/models/candidate";
 import {LocalStorageService} from "../../../shared/services/localstorage.service";
 import {GuidedTourService} from "../guided-tour.service";
 import {ErrorService} from "../error.service";

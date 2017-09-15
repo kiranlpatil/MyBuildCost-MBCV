@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild, ElementRef} from "@angular/core";
 import {Router} from "@angular/router";
 import {CandidateSignUpService} from "./candidate-sign-up.service";
-import {CandidateDetail} from "../models/candidate";
+import {CandidateDetail} from "../models/candidate-details";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ValidationService} from "../../shared/customvalidations/validation.service";
 import {AppSettings, CommonService, Message, MessageService, NavigationRoutes} from "../../shared/index";
@@ -30,7 +30,7 @@ export class CandidateSignUpComponent implements OnInit {
   private isShowErrorMessage: boolean = true;
   private BODY_BACKGROUND: string;
   private passingYear: string;
-  private validBirthYearList = new Array();
+  private validBirthYearList = [];
   private mainHeaderMenuHideShow: string;
   private year: any;
   private currentDate: any;

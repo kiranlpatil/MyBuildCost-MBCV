@@ -5,7 +5,7 @@ import {BaseService} from "../../../shared/services/httpservices/base.service";
 import {MessageService} from "../../../shared/services/message.service";
 import {API, LocalStorage} from "../../../shared/constants";
 import {LocalStorageService} from "../../../shared/services/localstorage.service";
-import {CandidateDetail} from "../../../user/models/candidate";
+import {CandidateDetail} from "../../../user/models/candidate-details";
 
 
 @Injectable()

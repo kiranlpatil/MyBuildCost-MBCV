@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from "@angular/core";
 import {Role} from "../model/role";
-import {Section} from "../model/candidate";
+import {Section} from "../../../user/models/candidate";
 import {ImagePath, LocalStorage, Messages, Tooltip, ValueConstant} from "../../../shared/constants";
 import {LocalStorageService} from "../../../shared/services/localstorage.service";
 import {GuidedTourService} from "../guided-tour.service";

@@ -1,6 +1,5 @@
-
-import { Component,ElementRef, HostListener, Input } from '@angular/core';
-import {Candidate, Section} from '../../model/candidate';
+import {Component, ElementRef, HostListener, Input} from "@angular/core";
+import {Candidate, Section} from "../../../../user/models/candidate";
 import {Router} from "@angular/router";
 import {AppSettings, ImagePath} from "../../../../shared/constants";
 

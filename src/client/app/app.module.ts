@@ -9,10 +9,8 @@ import {Http, HttpModule, RequestOptions, XHRBackend} from "@angular/http";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {AppRequestOptions, LoaderService, MessageService} from "./shared/index";
 import {DashboardComponent} from "./framework/dashboard/dashboard.component";
-import {DashboardProfileComponent} from "./framework/dashboard/dashboard-profile/dashboard-profile.component";
 import {AboutComponent} from "./framework/dashboard/about/about.component";
 import {ContactComponent} from "./framework/dashboard/contact/contact.component";
-import {SettingsComponent} from "./framework/dashboard/settings/settings.component";
 import {DashboardHomeComponent} from "./framework/dashboard/dashboard-home/dashboard-home.component";
 import {FooterComponent} from "./framework/shared/footer/footer.component";
 import {HeaderComponent} from "./framework/shared/header/header.component";
@@ -23,12 +21,6 @@ import {DashboardService} from "./user/dashboard.service";
 import {ContactService} from "./framework/dashboard/contact/contact.service";
 import {ActivateUserComponent} from "./framework/registration/activate-user/activate-user.component";
 import {ActiveUserService} from "./framework/registration/activate-user/activate-user.service";
-import {ChangeEmailComponent} from "./framework/dashboard/settings/change-email/change-email.component";
-import {ChangeEmailService} from "./framework/dashboard/settings/change-email/change-email.service";
-import {ActivateEmailComponent} from "./framework/dashboard/settings/activate-email/activate-email.component";
-import {ActiveEmailService} from "./framework/dashboard/settings/activate-email/activate-email.service";
-import {ChangeMobileComponent} from "./framework/dashboard/settings/change-mobile/change-mobile.component";
-import {ChangeMobileService} from "./framework/dashboard/settings/change-mobile/change-mobile.service";
 import {Ng2AutoCompleteModule} from "ng2-auto-complete/dist/ng2-auto-complete.module";
 import {ScrollToModule} from "ng2-scroll-to";
 import {ComplexityService} from "./cnext/framework/complexity.service";
@@ -91,7 +83,6 @@ import {CandidateDashboardComponent} from "./cnext/framework/candidate-dashboard
 import {CandidateDashboardService} from "./cnext/framework/candidate-dashboard/candidate-dashboard.service";
 import {QcardListComponent} from "./cnext/framework/candidate-dashboard/candidate-q-card-list/q-card-list.component";
 import {CandidateQCardComponent} from "./cnext/framework/candidate-dashboard/candidate-q-card/candidate-q-card.component";
-import {CandidateHeaderComponent} from "./cnext/framework/candidate-dashboard/candidate-header/candidate-header.component";
 import {FilterComponent} from "./cnext/framework/filters/filter/filter.component";
 import {JobViewComponent} from "./cnext/framework/one-page-summary/recruiter-job-summary/job-view/job-view.component";
 import {CandidateJobListComponent} from "./cnext/framework/candidate-dashboard/candidate-job-list/candidate-job-list.component";
@@ -104,7 +95,6 @@ import {CandidateInfoBlock} from "./cnext/framework/value-portrait/value-portrai
 import {CandidateCapabilityPortrait} from "./cnext/framework/value-portrait/value-portrait-component/candidate-capability-portrait/candidate-capability-portrait.component";
 import {CandidateInCartService} from "./cnext/framework/candidate-in-cart.service";
 import {FilterService} from "./cnext/framework/filters/filter/filter.service";
-import {RecruiterSharedHeaderComponent} from "./cnext/framework/recruiter-dashboard/recruiter-shared-header/recruiter-shared-header.component";
 import {QCardFilterService} from "./cnext/framework/filters/q-card-filter.service";
 import {QCardListSortPipe} from "./cnext/framework/filters/q-card-list-sort.pipe";
 import {MinRangeValidation} from "./cnext/framework/filters/min-range-validation.pipe";
@@ -112,7 +102,6 @@ import {MaxRangeValidation} from "./cnext/framework/filters/max-range-validation
 import {RecuirterQCardMatchingPipe} from "./cnext/framework/filters/recuirter-q-card-matching.pipe";
 import {EmployeeHistoryComponent} from "./cnext/framework/employment-history/employee-history/employee-history.component";
 import {QCardListFilterPipe} from "./cnext/framework/filters/q-card-list-filter.pipe";
-import {CandidateDashboardHeaderComponent} from "./cnext/framework/candidate-dashboard/candidate-dashboard-header/candidate-dashboard-header.component";
 import {JobDashboardComponent} from "./cnext/framework/recruiter-dashboard/job-dashboard/job-dashboard.component";
 import {JobDashboardService} from "./cnext/framework/recruiter-dashboard/job-dashboard/job-dashboard.service";
 import {ReferenceService} from "./cnext/framework/model/newClass";
@@ -126,7 +115,7 @@ import {CandidateCompareService} from "./cnext/framework/single-page-compare-vie
 import {JobCompareService} from "./cnext/framework/single-page-compare-view/job-compare-view/job-compare-view.service";
 import {JobCompareViewComponent} from "./cnext/framework/single-page-compare-view/job-compare-view/job-compare-view.component";
 import {GuidedTourComponent} from "./cnext/framework/guided-tour/guided-tour.component";
-import {RedirectRecruiterDashboardService} from "./cnext/framework/redirect-dashboard.service";
+import {RedirectRecruiterDashboardService} from "./user/redirect-dashboard.service";
 import {QuestionAnswerComponent} from "./cnext/framework/question-answer/question-answer.component";
 import {ComplexityComponentService} from "./cnext/framework/complexities/complexity.service";
 import {ReleventIndustryListComponent} from "./cnext/framework/relevent-industry-list/relevent-industry-list.component";
@@ -169,6 +158,7 @@ import {SharedModule} from "./shared/shared.module";
 import {CustomHttp} from "./shared/services/httpservices/custom.http";
 import {ProfileService} from "./framework/shared/profileservice/profile.service";
 import {LandingPageComponent} from "./framework/landing-page/landing-page.component";
+import {SettingsComponent} from "./framework/dashboard/settings/settings.component";
 //C-NEXT IMPORTS
 
 
@@ -188,13 +178,8 @@ import {LandingPageComponent} from "./framework/landing-page/landing-page.compon
   declarations: [
     AppComponent,
     LandingPageComponent,
-    CandidateDashboardHeaderComponent,
     ActivateUserComponent,
-    ActivateEmailComponent,
     DashboardComponent,
-    ChangeEmailComponent,
-    ChangeMobileComponent,
-    DashboardProfileComponent,
     AboutComponent,
     ContactComponent,
     SettingsComponent,
@@ -213,7 +198,6 @@ import {LandingPageComponent} from "./framework/landing-page/landing-page.compon
     AcademicsComponent,
     ProfileDetailsDirective,
     ProfessionalDetailsDirective,
-    RecruiterSharedHeaderComponent,
     AdditionalDetailsComponent,
     RecruiterDetailListComponent,
     CandidateDetailListComponent,
@@ -249,7 +233,6 @@ import {LandingPageComponent} from "./framework/landing-page/landing-page.compon
     AwardsComponent,
     DescriptionFieldComponent,
     MoreAboutMyselfComponent,
-    CandidateHeaderComponent,
     FilterComponent,
     CertificatesComponent,
     AwardComponent,
@@ -312,15 +295,12 @@ import {LandingPageComponent} from "./framework/landing-page/landing-page.compon
     ComplexityComponentService,
     ComplexityService,
     JobCompareService,
-    ChangeEmailService,
-    ChangeMobileService,
     NotificationService,
     DashboardService,
     ProfileService,
     ContactService,
     CandidateCompareService,
     ActiveUserService,
-    ActiveEmailService,
     BasicJobInformationService,
     ErrorService,
     IndustryListService,

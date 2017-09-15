@@ -1,15 +1,15 @@
-import {Component, EventEmitter, Input, OnChanges, Output, OnInit} from '@angular/core';
-import {JobCompareService} from './job-compare-view.service';
-import {Capability} from '../../model/capability';
-import {Candidate} from '../../model/candidate';
-import {CandidateDetail} from "../../../../user/models/candidate";
-import {CandidateProfileService} from '../../candidate-profile/candidate-profile.service';
-import {RecruiterDashboardService} from '../../recruiter-dashboard/recruiter-dashboard.service';
+import {Component, EventEmitter, Input, OnChanges, Output, OnInit} from "@angular/core";
+import {JobCompareService} from "./job-compare-view.service";
+import {Capability} from "../../../../user/models/capability";
+import {Candidate} from "../../../../user/models/candidate";
+import {CandidateDetail} from "../../../../user/models/candidate-details";
+import {CandidateProfileService} from "../../candidate-profile/candidate-profile.service";
+import {RecruiterDashboardService} from "../../recruiter-dashboard/recruiter-dashboard.service";
 import {Recruiter} from "../../../../user/models/recruiter";
-import {AppSettings, ImagePath, LocalStorage} from '../../../../shared/constants';
-import {GuidedTourService} from '../../guided-tour.service';
-import {LocalStorageService} from '../../../../shared/services/localstorage.service';
-import {ErrorService} from '../../error.service';
+import {AppSettings, ImagePath, LocalStorage} from "../../../../shared/constants";
+import {GuidedTourService} from "../../guided-tour.service";
+import {LocalStorageService} from "../../../../shared/services/localstorage.service";
+import {ErrorService} from "../../error.service";
 
 @Component({
   moduleId: module.id,

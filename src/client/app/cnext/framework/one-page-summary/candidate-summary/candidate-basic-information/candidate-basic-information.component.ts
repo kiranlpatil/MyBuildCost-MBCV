@@ -1,7 +1,6 @@
 import {Component, Input} from "@angular/core";
-
-import {CandidateDetail} from "../../../../../user/models/candidate";
-import {Candidate} from "../../../model/candidate";
+import {CandidateDetail} from "../../../../../user/models/candidate-details";
+import {Candidate} from "../../../../../user/models/candidate";
 import {AppSettings, ImagePath} from "../../../../../shared/constants";
 
 

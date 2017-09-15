@@ -1,8 +1,8 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from "@angular/core";
-import {ComplexityDetails} from "../model/complexity-detail";
+import {ComplexityDetails} from "../../../user/models/complexity-detail";
 import {LocalStorage} from "../../../shared/constants";
 import {LocalStorageService} from "../../../shared/services/localstorage.service";
-import {Scenario} from "../model/scenario";
+import {Scenario} from "../../../user/models/scenario";
 
 @Component({
   moduleId: module.id,
