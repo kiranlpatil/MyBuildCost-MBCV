@@ -85,7 +85,7 @@ export function updateDetails(req: express.Request, res: express.Response, next:
               code: 401
             });
           } else {
-            let token = auth.issueTokenWithUid(result);
+            let token = auth.issueTokenWithUid(result[0]);
             res.send({
               'status': 'success',
               'data': result,

@@ -1,6 +1,6 @@
 import {ErrorHandler, NgModule} from "@angular/core";
 import {AppComponent} from "./app.component";
-import {BrowserModule} from "@angular/platform-browser";
+import {BrowserModule, Title} from "@angular/platform-browser";
 import {APP_BASE_HREF} from "@angular/common";
 import {RouterModule} from "@angular/router";
 import {RecaptchaModule} from "ng2-recaptcha";
@@ -158,6 +158,10 @@ import {SharedModule} from "./shared/shared.module";
 import {CustomHttp} from "./shared/services/http/custom.http";
 import {ProfileService} from "./framework/shared/profileservice/profile.service";
 import {LandingPageComponent} from "./framework/landing-page/landing-page.component";
+import {ShareComponent} from "./cnext/framework/share/share.component";
+import {ShareService} from "./cnext/framework/share/share.service";
+import {SharedService} from "./shared/services/shared-service";
+
 import {SettingsComponent} from "./framework/dashboard/settings/settings.component";
 //C-NEXT IMPORTS
 
@@ -277,7 +281,8 @@ import {SettingsComponent} from "./framework/dashboard/settings/settings.compone
     ColorShadeDirective,
     AttributeFilterPipe,
     ValueSortFilterPipe,
-    CandidateSearchComponent
+    CandidateSearchComponent,
+    ShareComponent
   ],
   providers: [
     {
@@ -341,7 +346,9 @@ import {SettingsComponent} from "./framework/dashboard/settings/settings.compone
     ProfileComparisonService,
     GuidedTourService,
     CandidateSearchService,
-
+    SharedService,
+    ShareService,
+    Title
   ],
   bootstrap: [AppComponent]
 })
