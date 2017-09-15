@@ -340,6 +340,7 @@ export class API {
   public static CANDIDATE_DETAILS = 'recruiter/jobProfile';
   public static CANDIDATESFROMLISTS = 'recruiter/jobProfile';
   public static RElEVENT_INDUSTRIES = 'releventindustries';
+  public static CLONE_JOB = 'job';
 }
 
 export class ImagePath {
