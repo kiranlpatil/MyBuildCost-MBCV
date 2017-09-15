@@ -3,8 +3,8 @@ import {BaseService} from "../../shared/services/http/base.service";
 import {ValueConstant} from "../../shared/constants";
 @Injectable()
 export class DateService extends BaseService {
-  monthList = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-  yearList = [];
+  monthList = new Array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December');
+  yearList = new Array();
   error_msg: string;
   private year: any;
   private currentDate: any;
@@ -23,7 +23,7 @@ export class DateService extends BaseService {
   }
 
   createBirthYearList(year: any) {
-    let validbirthYearList = [];
+    let validbirthYearList = new Array(0);
     for (let i = 0; i < ValueConstant.MAX_YEAR_LIST; i++) {
       validbirthYearList.push(year--);
     }

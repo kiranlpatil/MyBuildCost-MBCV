@@ -28,7 +28,7 @@ export class CandidateSignUpComponent implements OnInit {
   private isShowErrorMessage: boolean = true;
   private BODY_BACKGROUND: string;
   private passingYear: string;
-  private validBirthYearList = [];
+  private validBirthYearList = new Array(0);
   private mainHeaderMenuHideShow: string;
   private year: any;
   private currentDate: any;
