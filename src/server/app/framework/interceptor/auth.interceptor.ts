@@ -54,11 +54,11 @@ class AuthInterceptor {
           }
           return done(null, user, isShareApi);
         });
-      } else {
+      } /*else {
         var err = new Error();
         err.message = 'Issuer in token is not available';
         return done(err, false, null);
-      }
+      }*/
     }));
 
     passport.use(new FacebookTokenStrategy({
