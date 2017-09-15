@@ -2,7 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
 import {MessageService} from "../../../shared/services/message.service";
 import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
 import {Message} from "../../../shared/models/message";
-import {Candidate, Section} from "../model/candidate";
+import {Candidate, Section} from "../../../user/models/candidate";
 import {Messages, Tooltip, ImagePath, Headings, LocalStorage} from "../../../shared/constants";
 import {GuidedTourService} from "../guided-tour.service";
 import {ErrorService} from "../error.service";

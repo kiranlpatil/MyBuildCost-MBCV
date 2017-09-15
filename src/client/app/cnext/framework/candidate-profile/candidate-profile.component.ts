@@ -1,8 +1,8 @@
 import {Component, DoCheck, HostListener, KeyValueDiffers, OnDestroy, OnInit} from "@angular/core";
-import {LocalStorage,NavigationRoutes, Tooltip, Messages} from "../../../shared/constants";
+import {LocalStorage, NavigationRoutes, Tooltip, Messages} from "../../../shared/constants";
 import {Router} from "@angular/router";
 import {ComplexityService} from "../complexity.service";
-import {Candidate, Section} from "../model/candidate";
+import {Candidate, Section} from "../../../user/models/candidate";
 import {CandidateProfileService} from "./candidate-profile.service";
 import {Role} from "../model/role";
 import {Industry} from "../../../user/models/industry";
@@ -110,6 +110,11 @@ export class CandidateProfileComponent implements OnInit, DoCheck, OnDestroy {
         return;
       } else if (this.highlightedSection.name === 'Complexities') {
         this.getComplexity();
+        return;
+      } else if (this.highlightedSection.name === 'Proficiencies') {
+        if (this.candidate.proficiencies == undefined || this.candidate.proficiencies == null || this.candidate.proficiencies.length == 0) {
+          this.candidate.proficiencies = [];
+        }
         return;
       }
     }

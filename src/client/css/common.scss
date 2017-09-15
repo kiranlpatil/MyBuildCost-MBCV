@@ -34,7 +34,6 @@ $value-portrait-bg: #f3f3f3;
 $circle-bg: #F7B82B;
 $modal-border: #ff927f;
 $modal-content-bg: #EB6B56;
-$got-it-btn-bg: #fe5722;
 $black: #000000;
 $facebook-share: #3b5998;
 $twitter-share: #55acee;
@@ -708,36 +707,6 @@ cn-control-messages {
     position: relative !important;
     z-index: 5 !important;
     float: left;
-  }
-}
-
-.guided-tour-section {
-  position: fixed;
-  height: 100%;
-  width: 100%;
-  z-index: 99999;
-  top: 0;
-  left: 0;
-  img {
-    height: 100%;
-    width: 100%;
-  }
-  .got-it-btn {
-    cursor: pointer;
-    position: absolute;
-    width: 118px;
-    height: 32px;
-    right: 82px;
-    bottom: 50px;
-    background: $got-it-btn-bg;
-    span {
-      color: $white;
-      padding: 6px 9px;
-      display: inline-block;
-      font-size: 16px;
-      width: 100%;
-      text-align: center;
-    }
   }
 }
 

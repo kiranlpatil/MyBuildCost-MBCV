@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from "@angular/core";
 import {Role} from "../model/role";
-import {Section} from "../model/candidate";
+import {Section} from "../../../user/models/candidate";
 import {ImagePath, LocalStorage, Messages, Tooltip, ValueConstant} from "../../../shared/constants";
 import {LocalStorageService} from "../../../shared/services/localstorage.service";
 import {GuidedTourService} from "../guided-tour.service";
@@ -111,7 +111,8 @@ export class WorkAreaComponent implements OnInit,OnChanges {
   }
 
   onNext() {
-    this.isGuidedTourImgRequire();
+    this.onNextAction();
+    //this.isGuidedTourImgRequire();
   }
   isGuidedTourImgRequire() {
     this.isGuideImg = true;
@@ -171,8 +172,8 @@ export class WorkAreaComponent implements OnInit,OnChanges {
       this.isValid = false;
       return;
     }
-      var roleId:any[]=new Array(0);
-      var goNext:boolean;
+      let roleId:any[]=new Array(0);
+      let goNext:boolean;
       if(this.selectedRoles.length === this.savedSelectedRoles.length ) {
         for (let role of this.selectedRoles) {
           roleId.push(role.code);

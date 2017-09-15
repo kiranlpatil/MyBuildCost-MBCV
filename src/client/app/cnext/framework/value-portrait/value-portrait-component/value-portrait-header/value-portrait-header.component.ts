@@ -1,5 +1,5 @@
 import {Component, Input} from "@angular/core";
-import {Candidate} from "../../../model/candidate";
+import {Candidate} from "../../../../../user/models/candidate";
 import {AppSettings} from "../../../../../shared/constants";
 import {Router} from "@angular/router";
 

@@ -1,5 +1,5 @@
 import {NgModule} from "@angular/core";
-import {CommonModule}       from '@angular/common';
+import {CommonModule} from "@angular/common";
 import {LoaderComponent} from "./loader/loader.component";
 import {LoaderService} from "./loader/loaders.service";
 import {MyGoogleDirective} from "./location/googleplace.directive";
@@ -10,8 +10,8 @@ import {MessageService} from "./services/message.service";
 import {SharedService} from "./services/shared-service";
 import {ThemeChangeService} from "./services/themechange.service";
 import {CommonService} from "./services/common.service";
-import {BaseService} from "./services/httpservices/base.service";
-import {CustomHttp} from "./services/httpservices/custom.http";
+import {BaseService} from "./services/http/base.service";
+import {CustomHttp} from "./services/http/custom.http";
 import {TooltipComponent} from "./tool-tip-component/tool-tip-component";
 
 @NgModule({

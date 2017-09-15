@@ -1,6 +1,6 @@
 import {Component, OnInit} from "@angular/core";
 import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
-import {Candidate, Summary} from "../model/candidate";
+import {Candidate, Summary} from "../../../user/models/candidate";
 import {CandidateDashboardService} from "./candidate-dashboard.service";
 import {JobQcard} from "../model/JobQcard";
 import {LocalStorage, ValueConstant, Tooltip, ImagePath, Headings} from "../../../shared/constants";

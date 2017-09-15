@@ -3,7 +3,7 @@ import {LoaderService} from "../../../shared/loader/loaders.service";
 
 @Component({
   moduleId: module.id,
-  selector: 'tpl-dashboard-home',
+  selector: 'cn-dashboard-home',
   templateUrl: 'dashboard-home.component.html',
   styleUrls: ['dashboard-home.component.css'],
 })

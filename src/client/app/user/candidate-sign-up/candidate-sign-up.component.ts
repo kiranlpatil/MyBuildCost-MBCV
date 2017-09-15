@@ -1,14 +1,13 @@
 import {Component, OnInit, ViewChild, ElementRef} from "@angular/core";
 import {Router} from "@angular/router";
 import {CandidateSignUpService} from "./candidate-sign-up.service";
-import {CandidateDetail} from "../models/candidate";
+import {CandidateDetail} from "../models/candidate-details";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ValidationService} from "../../shared/customvalidations/validation.service";
 import {AppSettings, CommonService, Message, MessageService, NavigationRoutes} from "../../shared/index";
 import {ImagePath, LocalStorage, Messages} from "../../shared/constants";
 import {LocalStorageService} from "../../shared/services/localstorage.service";
 import {DateService} from "../../cnext/framework/date.service";
-import {Location} from "../models/location";
 import {SharedService} from "../../shared/services/shared-service";
 @Component({
   moduleId: module.id,
@@ -22,7 +21,6 @@ export class CandidateSignUpComponent implements OnInit {
   @ViewChild('toaster') toaster: ElementRef;
   yearMatchNotFoundMessage: string = Messages.MSG_YEAR_NO_MATCH_FOUND;
   private model = new CandidateDetail();
-  private storedLocation: Location = new Location();
   private isPasswordConfirm: boolean;
   private isFormSubmitted = false;
   private userForm: FormGroup;
@@ -30,7 +28,7 @@ export class CandidateSignUpComponent implements OnInit {
   private isShowErrorMessage: boolean = true;
   private BODY_BACKGROUND: string;
   private passingYear: string;
-  private validBirthYearList = new Array();
+  private validBirthYearList = new Array(0);
   private mainHeaderMenuHideShow: string;
   private year: any;
   private currentDate: any;
@@ -105,7 +103,6 @@ export class CandidateSignUpComponent implements OnInit {
     this.model = this.userForm.value;
     this.model.current_theme = AppSettings.LIGHT_THEM;
     this.model.isCandidate = true;
-    //this.model.location = this.storedLocation;
     this.model.email = this.model.email.toLowerCase();
 
     if (!this.makePasswordConfirm()) {

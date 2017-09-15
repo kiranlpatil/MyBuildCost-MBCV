@@ -1,9 +1,11 @@
 import {Component, EventEmitter, Input, Output} from "@angular/core";
-import {Section} from "../model/candidate";
-import {Messages, Tooltip, ValueConstant} from "../../../shared/constants";
+import {Section} from "../../../user/models/candidate";
+import {Messages, Tooltip, LocalStorage, ValueConstant, ImagePath} from "../../../shared/constants";
 import {ProficiencyDetailsService} from "../proficiency-detail-service";
 import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
 import {ErrorService} from "../error.service";
+import {GuidedTourService} from "../guided-tour.service";
+import {LocalStorageService} from "../../../shared/services/localstorage.service";
 
 @Component({
   moduleId: module.id,
@@ -23,9 +25,14 @@ export class ProficienciesComponent {
     '<li><p>2. '+ Tooltip.PROFICIENCIES_TOOLTIP_2+'</p></li>' +
     '<li><p>3. '+Tooltip.PROFICIENCIES_TOOLTIP_3+'</p></li></ul>';
   private maxProficiencies: number;
-
+  private guidedTourStatus: string[] = new Array(0);
+  private isGuideImg: boolean = false;
+  private guidedTourImgOverlayScreensKeySkills: string;
+  private guidedTourImgOverlayScreensKeySkillsPath: string;
+  private isCandidate: boolean = false;
   constructor(private proficiencyDetailService: ProficiencyDetailsService,
               private errorService:ErrorService,
+              private guidedTourService: GuidedTourService,
               private profileCreatorService: CandidateProfileService) {
     this.proficiencyDetailService.makeCall$.subscribe(
       data => {
@@ -35,6 +42,20 @@ export class ProficienciesComponent {
       }
     );
   }
+
+  ngOnChanges(value: any) {
+    if (LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE) === 'true') {
+      this.isCandidate = true;
+    }
+    if (value && value.choosedproficiencies && value.choosedproficiencies.currentValue) {
+      let guidedTourImages = LocalStorageService.getLocalValue(LocalStorage.GUIDED_TOUR);
+      let newArray = JSON.parse(guidedTourImages);
+      if (newArray && newArray.indexOf(ImagePath.CANDIDATE_OERLAY_SCREENS_KEY_SKILLS) == -1) {
+        this.isGuidedTourImgRequire();
+      }
+    }
+  }
+
   ngOnInit() {
     this.maxProficiencies = ValueConstant.MAX_PROFECIENCES;
   }
@@ -51,6 +72,25 @@ export class ProficienciesComponent {
      }*/
     this.submitStatus = false;
     this.onSelect.emit(proficiency);
+  }
+
+  isGuidedTourImgRequire() {
+    this.isGuideImg = true;
+    this.guidedTourImgOverlayScreensKeySkills = ImagePath.CANDIDATE_OERLAY_SCREENS_KEY_SKILLS;
+    this.guidedTourImgOverlayScreensKeySkillsPath = ImagePath.BASE_ASSETS_PATH_DESKTOP + ImagePath.CANDIDATE_OERLAY_SCREENS_KEY_SKILLS;
+  }
+
+  onGotItGuideTour() {
+    this.guidedTourStatus = this.guidedTourService.updateTourStatus(ImagePath.CANDIDATE_OERLAY_SCREENS_KEY_SKILLS, true);
+    this.guidedTourStatus = this.guidedTourService.getTourStatus();
+    this.isGuideImg = false;
+    this.guidedTourService.updateProfileField(this.guidedTourStatus)
+      .subscribe(
+        (res: any) => {
+          LocalStorageService.setLocalValue(LocalStorage.GUIDED_TOUR, JSON.stringify(res.data.guide_tour));
+        },
+        error => this.errorService.onError(error)
+      );
   }
 
   onNext() {

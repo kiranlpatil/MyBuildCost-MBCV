@@ -1,11 +1,11 @@
 import {Component, EventEmitter, Input, OnChanges, Output} from "@angular/core";
-import {BaseService} from "../../../shared/services/httpservices/base.service";
-import {ProfessionalData} from "../model/professional-data";
+import {BaseService} from "../../../shared/services/http/base.service";
+import {ProfessionalData} from "../../../user/models/professional-data";
 import {ProfessionalDataService} from "./professional-data.service";
 import {Message} from "../../../shared/models/message";
 import {MessageService} from "../../../shared/services/message.service";
 import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
-import {Candidate, Section} from "../model/candidate";
+import {Candidate, Section} from "../../../user/models/candidate";
 import {FormBuilder} from "@angular/forms";
 import {Messages, Tooltip} from "../../../shared/constants";
 import {ProfessionalDetailsService} from "../professional-detail-service";
