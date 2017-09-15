@@ -1,3 +1,21 @@
+<div class="guided-tour-section guided-tour-overlay"
+     *ngIf="guidedTourStatus?.indexOf(guidedTourImgOverlayScreenBasicInfo) == -1 && isGuideImg">
+  <div class="guided-tour-overlay-bg">
+    <div class="got-it-btn" (click)="onGotItGuideTour()">
+      <span>{{gotItMessage}}</span>
+    </div>
+    <div class="welcome-guided-tour">
+      <h1> Welcome to JobMosis!</h1>
+      <p>
+        You are taking your first step to<br>
+        Add Job to Life!
+      </p>
+      <p>
+        “Let’s start by capturing your basic profile details and the industry in which you work”
+      </p>
+    </div>
+  </div>
+</div>
 <div class="modal-bg" *ngIf="highlightedSection.name=='Profile'"></div>
 <div class="section-container" *ngIf="highlightedSection.name=='Profile'">
   <div class="main-content clearfix edit-modal-content" profiledetails>
@@ -43,11 +61,10 @@
           </div>-->
           <div class="form-group">
             <label>Current Location</label><!--(keydown)="keyDownCheck($event)"-->
-            <input type="text" class="form-control" placeholder=""    [(ngModel)]="storedLocation.formatted_address" (setAddress)="getAddress($event)"  (city)="selectedCity($event)" mygoogleplace pattern="/^[a-zA-Z]+$/"/>
+            <input type="text" class="form-control" placeholder="" [(ngModel)]="storedLocation.formatted_address" (setAddress)="getAddress($event)" (city)="selectedCity($event)" mygoogleplace pattern="/^[a-zA-Z]+$/"/>
             <div class="error-messages" *ngIf="isLocationEmpty">{{locationErrorMessage}}</div>
             <div class="error-messages" *ngIf="isLocationInvalid">{{invalidLocationErrorMessage}}</div>
           </div>
-
 
 
           <div class="form-group">
@@ -73,7 +90,7 @@
     </div>
 
     <div class="button-group clearfix">
-     <!-- <div class="saving-loader">Saving...</div>-->
+      <!-- <div class="saving-loader">Saving...</div>-->
       <!-- <button class="btn btn-default" (click)="onCancel()"
                [hidden]="showButton">Cancel
        </button>-->

@@ -111,7 +111,8 @@ export class WorkAreaComponent implements OnInit,OnChanges {
   }
 
   onNext() {
-    this.isGuidedTourImgRequire();
+    this.onNextAction();
+    //this.isGuidedTourImgRequire();
   }
   isGuidedTourImgRequire() {
     this.isGuideImg = true;
@@ -171,8 +172,8 @@ export class WorkAreaComponent implements OnInit,OnChanges {
       this.isValid = false;
       return;
     }
-      var roleId:any[]=new Array(0);
-      var goNext:boolean;
+      let roleId:any[]=new Array(0);
+      let goNext:boolean;
       if(this.selectedRoles.length === this.savedSelectedRoles.length ) {
         for (let role of this.selectedRoles) {
           roleId.push(role.code);

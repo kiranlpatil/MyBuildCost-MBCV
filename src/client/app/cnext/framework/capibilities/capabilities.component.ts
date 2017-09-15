@@ -36,8 +36,8 @@ export class CapabilitiesComponent {
   private validationMessage = Messages.MSG_ERROR_VALIDATION_CAPABILITIES_REQUIRED_RECRUITER;
   private capabilitiesCodes : string[]= new Array(0);
   private guidedTourStatus:string[] = new Array(0);
-  private guidedTourImgOverlayScreensComplexities:string;
-  private guidedTourImgOverlayScreensComplexitiesPath:string;
+  private guidedTourImgOverlayScreensCapabilities: string;
+  //private guidedTourImgOverlayScreensComplexitiesPath:string;
   private isGuideImg:boolean = false;
   private isInfoMessage: boolean = false;
 
@@ -84,6 +84,11 @@ export class CapabilitiesComponent {
           if(duplicateCapabilityIndex != undefined) {
             role.capabilities.splice(duplicateCapabilityIndex,1);
           }
+      }
+      let guidedTourImages = LocalStorageService.getLocalValue(LocalStorage.GUIDED_TOUR);
+      let newArray = JSON.parse(guidedTourImages);
+      if (newArray == undefined || newArray == null || (newArray && newArray.indexOf(ImagePath.CANDIDATE_OERLAY_SCREENS_CAPABILITIES) == -1)) {
+        this.isGuidedTourImgRequire();
       }
     }
     this.primaryCapabilitiesNumber = this.primaryNames.length;
@@ -136,29 +141,22 @@ export class CapabilitiesComponent {
   }
 
   onNext() {
-    this.isGuidedTourImgRequire();
+    this.onNextAction();
   }
 
   isGuidedTourImgRequire() {
     this.isGuideImg = true;
-    this.guidedTourImgOverlayScreensComplexities = ImagePath.CANDIDATE_OERLAY_SCREENS_COMPLEXITIES;
-    this.guidedTourImgOverlayScreensComplexitiesPath = ImagePath.BASE_ASSETS_PATH_DESKTOP + ImagePath.CANDIDATE_OERLAY_SCREENS_COMPLEXITIES;
-    this.guidedTourStatus = this.guidedTourService.getTourStatus();
-    if(this.guidedTourStatus.indexOf(this.guidedTourImgOverlayScreensComplexities) !== -1 && this.isCandidate) {
-      this.onNextAction();
-    }
-    if(this.isCandidate == false) {
-      this.onNextAction();
-    }
+    this.guidedTourImgOverlayScreensCapabilities = ImagePath.CANDIDATE_OERLAY_SCREENS_CAPABILITIES;
+    //this.guidedTourImgOverlayScreensComplexitiesPath = ImagePath.BASE_ASSETS_PATH_DESKTOP + ImagePath.CANDIDATE_OERLAY_SCREENS_COMPLEXITIES;
   }
   onGotItGuideTour() {
-    this.guidedTourStatus = this.guidedTourService.updateTourStatus(ImagePath.CANDIDATE_OERLAY_SCREENS_COMPLEXITIES,true);
+    this.guidedTourStatus = this.guidedTourService.updateTourStatus(ImagePath.CANDIDATE_OERLAY_SCREENS_CAPABILITIES, true);
     this.guidedTourStatus = this.guidedTourService.getTourStatus();
+    this.isGuideImg = false;
     this.guidedTourService.updateProfileField(this.guidedTourStatus)
       .subscribe(
         (res:any) => {
           LocalStorageService.setLocalValue(LocalStorage.GUIDED_TOUR, JSON.stringify(res.data.guide_tour));
-          this.isGuidedTourImgRequire()
         },
         error => this.errorService.onError(error)
       );

@@ -1,3 +1,32 @@
+<div class="guided-tour-section guided-tour-overlay"
+     *ngIf="guidedTourStatus?.indexOf(guidedTourImgOverlayScreensKeySkills) == -1 && isGuideImg && isCandidate">
+  &lt;!&ndash;<!--<img src={{guidedTourImgOverlayScreensKeySkillsPath}} alt="Profile Picture">-->&ndash;&gt;
+  <div class="guided-tour-overlay-bg">
+    <div class="got-it-btn" (click)="onGotItGuideTour()">
+      <span>OK, Got it</span>
+    </div>
+  </div>
+</div>
+
+<div class="guided-tour-description"
+     *ngIf="guidedTourStatus?.indexOf(guidedTourImgOverlayScreensKeySkills) == -1 && isGuideImg == true && isCandidate">
+  <div class="key-skills-guided-tour">
+    <span class="up-arrow"></span>
+    <p>
+      Select Key Skills, maximum 25. <br clear="all"/><br clear="all"/>
+      Selecting too many Key Skills dilutes the matching and alignment with the best Job Opportunity.
+    </p>
+  </div>
+</div>
+<div class="guided-tour-description"
+     *ngIf="guidedTourStatus?.indexOf(guidedTourImgOverlayScreensKeySkills) == -1 && isGuideImg == true && isCandidate">
+  <div class="guided-tour-notes">
+    <p>
+      <span>Note:</span> Ensure that you cover all relevant aspects of Technologies, Products,
+      Methodologies, Models,Processes, Tools, Domain expertise and any additional key words that describe your work.
+    </p>
+  </div>
+</div>
 <div class="modal-bg" *ngIf="highlightedSection.name=='Proficiencies'"></div>
 <div class="clearfix">
   <div class="section-container clearfix profeiciency-domain" *ngIf="highlightedSection.name=='Proficiencies'">
@@ -20,7 +49,7 @@
         class="glyphicon glyphicon-chevron-left"></span></button>
 
       <div class="button-group clearfix">
-       <!-- <div class="saving-loader">Saving...</div>-->
+        <!-- <div class="saving-loader">Saving...</div>-->
         <!--         <button class="btn btn-default" [disabled]="choosedproficiencies.length<=0"
                          (click)="highlightedSection.name='none'; highlightedSection.isDisable=false"  [hidden]="showButton">Cancel</button>-->
         <button class="btn btn-primary" scrollTo scrollTargetSelector="#industry-experience"
@@ -38,9 +67,9 @@
   <div class="section-container clearfix profeiciency-domain" *ngIf="highlightedSection.name !='Proficiencies'">
     <div class="main-content" (click)="onEdit()">
       <div class="compact-view clearfix">
-          <button class="btn-edit"
-                  (click)="onEdit()"
-                  [hidden]="highlightedSection.isDisable" title="Edit Key Skills"></button>
+        <button class="btn-edit"
+                (click)="onEdit()"
+                [hidden]="highlightedSection.isDisable" title="Edit Key Skills"></button>
         <div class="col-sm-3 padding-right15">
           <h4 class="heading-compact">Key Skills
           </h4>
