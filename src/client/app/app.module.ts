@@ -158,7 +158,7 @@ import {SharedModule} from "./shared/shared.module";
 import {CustomHttp} from "./shared/services/http/custom.http";
 import {ProfileService} from "./framework/shared/profileservice/profile.service";
 import {LandingPageComponent} from "./framework/landing-page/landing-page.component";
-import {ShareComponent} from "./cnext/framework/share/share.component";
+//import {ShareComponent} from "./cnext/framework/share/share.component";
 import {ShareService} from "./cnext/framework/share/share.service";
 import {SharedService} from "./shared/services/shared-service";
 //C-NEXT IMPORTS
@@ -279,7 +279,7 @@ import {SharedService} from "./shared/services/shared-service";
     AttributeFilterPipe,
     ValueSortFilterPipe,
     CandidateSearchComponent,
-    ShareComponent,
+    //ShareComponent,
     JobCloneComponent
   ],
   providers: [
@@ -344,8 +344,8 @@ import {SharedService} from "./shared/services/shared-service";
     ProfileComparisonService,
     GuidedTourService,
     CandidateSearchService,
-    SharedService,
-    ShareService,
+    //SharedService,
+    //ShareService,
     Title
   ],
   bootstrap: [AppComponent]

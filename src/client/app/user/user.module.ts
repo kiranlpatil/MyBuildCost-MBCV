@@ -41,7 +41,7 @@ import {SettingsService} from "./settings/settings.service";
 import {AdminDashboardHeaderComponent} from "./admin-dashboard-header/admin-dashboard-header.component";
 
 @NgModule({
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, SharedModule, Ng2AutoCompleteModule, UserRoutingModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, SharedModule, /*TODO Abhijeet Ng2AutoCompleteModule,*/ UserRoutingModule],
   declarations: [UserHeaderComponent, LoginComponent, ResetPasswordComponent, ForgotPasswordComponent,
     CandidateSignUpComponent, CandidateSignUpVerificationComponent, UserVerificationComponent, RecruiterSignUpComponent,
     CompanyDetailsComponent, ProfilePictureComponent, ChangePasswordComponent, ActivateEmailComponent,
