@@ -2,7 +2,7 @@ import {Injectable} from "@angular/core";
 import {Http} from "@angular/http";
 import {Observable} from "rxjs/Observable";
 import {API, BaseService, LocalStorage, LocalStorageService, MessageService} from "../../shared/index";
-import {VerifyUser} from "../models/verify_user";
+import {VerifyUser} from "../models/verify-user";
 
 
 @Injectable()

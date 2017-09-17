@@ -1,0 +1,62 @@
+<div class="change-mobile col-sm-12 no-padding">
+  <div>
+
+    <cn-app-loader></cn-app-loader>
+
+    <div class="col-sm-12 no-padding">
+
+      <form [formGroup]="userForm" (submit)="onSubmit()">
+
+        <div class="form-group" [class.fb-email-input]="isSocialLogin">
+          <cn-control-messages [control]="userForm.controls.current_mobile_number"></cn-control-messages>
+          <label>Current Mobile Number</label>
+          <input type="number" [(ngModel)]="model.current_mobile_number" formControlName="current_mobile_number"
+                 id="current_mobile_number" class="form-control" readonly/>
+        </div>
+
+        <div class="form-group" [class.fb-email-input]="isSocialLogin">
+          <cn-control-messages [control]="userForm.controls.new_mobile_number"></cn-control-messages>
+          <label>New Mobile Number</label>
+          <input type="number" formControlName="new_mobile_number" id="new_mobile_number" class="form-control"/>
+        </div>
+
+        <div class="form-group" [class.fb-email-input]="isSocialLogin">
+          <cn-control-messages [control]="userForm.controls.confirm_mobile_number"></cn-control-messages>
+          <label>Confirm Mobile Number</label>
+          <input type="number" formControlName="confirm_mobile_number" id="confirm_mobile_number"
+                 (blur)="makeMobileConfirm()" class="form-control"/>
+          <div class="error-message" *ngIf="isMobileNoConfirm == true">{{mobileNumberNotMatch}}</div>
+        </div>
+
+        <div class="col-xs-12 error-msg alert alert-danger form-alert" [hidden]="isShowErrorMessage"><b>{{
+          error_msg }}</b></div>
+        <button type="submit" class="btn btn-primary" [disabled]="!userForm.valid">Change Mobile Number</button>
+
+      </form>
+
+    </div>
+  </div>
+</div>
+
+
+<div class="modal" [style.display]="getStyle()">
+  <div class="modal-bg">
+    <div class="modal-dialog modal-md">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" aria-label="Close" (click)="showHideModal()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h5>Mobile Number Changed successfully</h5>
+        </div>
+        <div class="modal-body">
+          <p>{{mobileNumberChangeSucess}}.</p>
+          <div class="clearfix">&nbsp;</div>
+          <button type="button" class="btn btn-primary" (click)="logOut()">Yes</button>
+          <button type="button" class="btn btn-danger" (click)="showHideModal()">No</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

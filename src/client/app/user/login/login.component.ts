@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild, ElementRef} from "@angular/core";
 import {Router} from "@angular/router";
 import {LoginService} from "./login.service";
-import {Login} from "./login";
+import {Login} from "../models/login";
 import {
   AppSettings,
   ImagePath,

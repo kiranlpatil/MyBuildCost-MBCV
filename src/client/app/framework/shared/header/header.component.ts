@@ -5,7 +5,7 @@ import {Subscription} from "rxjs/Subscription";
 //noinspection TypeScriptPreferShortImport
 import {ProfileService} from "../../shared/profileservice/profile.service";
 import {UserProfile} from "../../../user/models/user";
-import {DashboardService} from "../../../user/dashboard.service";
+import {DashboardService} from "../../../user/services/dashboard.service";
 //noinspection TypeScriptPreferShortImport
 import {AppSettings, ImagePath, LocalStorage, NavigationRoutes} from "../../../shared/constants";
 //noinspection TypeScriptPreferShortImport

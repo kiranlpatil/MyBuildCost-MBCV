@@ -1,0 +1,252 @@
+@import '../../../css/variables';
+
+.guided-tour-overlay-bg {
+  background: rgba(0, 0, 0, 0.7);
+  height: 110%;
+  position: fixed;
+  top: -43px;
+  width: 100%;
+}
+
+.guided-tour-overlay {
+  position: fixed;
+  top: 100px;
+  left: 413px;
+  p {
+    color: $white;
+    font-size: 18px;
+    float: left;
+    font-weight: normal;
+    padding-left: 54px;
+  }
+}
+
+.down-arrow {
+  background: url(../assets/c-next/card-view/sprite.png) no-repeat -65px -648px;
+  height: 50px;
+  left: 0;
+  position: absolute;
+  top: 17px;
+  width: 50px;
+  z-index: 9999;
+}
+
+.guided-tour-containt {
+  color: $white;
+  font-size: 18px;
+  font-weight: normal;
+  padding: 0px 0 0 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.cn-work-area-guided-tour {
+  color: $white;
+  font-size: 18px;
+  padding: 22px 0 0 52px;
+  position: fixed;
+  top: 15px;
+  width: auto;
+  p {
+    color: $white;
+    font-weight: normal;
+    text-align: left;
+  }
+  .down-arrow {
+    top: 75px;
+  }
+}
+
+.capabilities-guided-tour {
+  color: $white;
+  font-size: 18px;
+  padding: 0 0 0 70px;
+  position: absolute;
+  top: 15px;
+  width: auto;
+  p {
+    color: $white;
+    font-weight: normal;
+    text-align: left;
+  }
+  .up-arrow {
+    background: url(../assets/c-next/card-view/sprite.png) no-repeat -124px -657px;
+    left: 26px;
+    position: absolute;
+    transform: rotate(191deg);
+    top: 4px;
+  }
+}
+
+.capability-guided-tour {
+  color: $white;
+  font-size: 18px;
+  padding: 0 0 0 70px;
+  position: fixed;
+  top: 71px;
+  width: auto;
+  p {
+    color: $white;
+    font-weight: normal;
+    padding: 21px 0;
+    text-align: left;
+  }
+  .down-arrow {
+    background: url(../assets/c-next/card-view/sprite.png) no-repeat -65px -648px;
+    height: 50px;
+    left: 23px;
+    position: absolute;
+    top: 30px;
+    transform: rotate(-15deg);
+    width: 50px;
+    z-index: 9999;
+  }
+}
+
+.guided-tour-notes {
+  bottom: 46px;
+  color: $white;
+  font-size: 18px;
+  padding: 0;
+  position: fixed;
+  left: 31px;
+  width: 79%;
+  p {
+    color: $white;
+    font-weight: normal;
+    text-align: left;
+    span {
+      font-weight: bold;
+    }
+  }
+}
+
+.key-skills-guided-tour {
+  color: $white;
+  font-size: 18px;
+  padding: 0;
+  position: fixed;
+  top: 286px;
+  width: auto;
+  p {
+    color: $white;
+    font-weight: normal;
+    text-align: left;
+  }
+  .up-arrow {
+    background: url(../assets/c-next/card-view/sprite.png) no-repeat -124px -657px;
+    position: absolute;
+    transform: rotate(-352deg);
+    top: -33px;
+    left: 37px;
+  }
+}
+
+.more-about-myself-guided-tour {
+  bottom: 122px;
+  color: $white;
+  font-size: 18px;
+  padding: 0;
+  position: fixed;
+  width: auto;
+  p {
+    color: $white;
+    font-weight: normal;
+    text-align: left;
+  }
+  .up-arrow {
+    background: url(../assets/c-next/card-view/sprite.png) no-repeat -124px -657px;
+    left: 37px;
+    position: absolute;
+    top: -33px;
+    transform: rotate(-352deg);
+  }
+}
+
+.guided-tour-description {
+  position: relative;
+  z-index: 99999;
+}
+
+.guided-tour-overlay-key-skills {
+  margin-left: 276px;
+  p {
+    color: $white;
+    font-weight: normal;
+    font-size: 18px;
+    float: left;
+    margin: 3px;
+  }
+  .down-arrow {
+    float: left;
+    position: relative;
+  }
+}
+
+.up-arrow {
+  background: url(../assets/c-next/card-view/sprite.png) no-repeat -5px -648px;
+  height: 50px;
+  left: 0;
+  position: relative;
+  width: 50px;
+  z-index: 999999;
+  float: left;
+}
+
+.guided-tour-section {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  z-index: 99999;
+  top: 0;
+  left: 0;
+  img {
+    height: 100%;
+    width: 100%;
+  }
+  .got-it-btn {
+    cursor: pointer;
+    position: absolute;
+    width: 150px;
+    height: 40px;
+    right: 40px;
+    bottom: 95px;
+    background: $got-it-btn-bg;
+    span {
+      color: $white;
+      padding: 6px 9px;
+      display: inline-block;
+      font-size: 20px;
+      width: 100%;
+      text-align: center;
+    }
+  }
+}
+
+.welcome-guided-tour {
+  display: table;
+  margin: 0 auto;
+  position: absolute;
+  text-align: center;
+  top: 41%;
+  width: 100%;
+  h1 {
+    color: $white;
+    font-weight: normal;
+    text-align: center;
+    width: auto;
+    float: none;
+    font-size: 30px;
+    margin: 0 0 19px;
+  }
+  p {
+    color: $white;
+    font-weight: normal;
+    font-size: 19px;
+    float: none;
+    margin: 0 auto 20px;
+    padding: 0;
+    width: 600px;
+  }
+}

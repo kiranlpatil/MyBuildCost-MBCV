@@ -1,7 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
-import {Candidate, Section} from "../model/candidate";
-import {AppSettings, Messages, Tooltip, LocalStorage} from "../../../shared/constants";
-import {CandidateDetail} from "../../../user/models/candidate";
+import {Candidate, Section} from "../../../user/models/candidate";
+import {AppSettings, Headings, ImagePath, LocalStorage, Messages, Tooltip} from "../../../shared/constants";
 import {ProfessionalDataService} from "../professional-data/professional-data.service";
 import {Location} from "../../../user/models/location";
 import {MyGoogleAddress} from "../../../shared/models/my-google-address";
@@ -9,6 +8,7 @@ import {ProfileDetailsService} from "../profile-detail-service";
 import {ErrorService} from "../error.service";
 import {LocalStorageService} from "../../../shared/services/localstorage.service";
 import {GuidedTourService} from "../guided-tour.service";
+import {CandidateDetail} from "../../../user/models/candidate-details";
 
 @Component({
   moduleId: module.id,
@@ -42,12 +42,16 @@ export class ProfileDescriptionComponent implements OnInit {
   private experienceValidationMessage= Messages.MSG_ERROR_VALIDATION_EXPERIENCE_REQUIRED;
   private locationErrorMessage = Messages.MSG_ERROR_VALIDATION_LOCATION_REQUIRED;
   private invalidLocationErrorMessage = Messages.MSG_ERROR_VALIDATION_INVALID_LOCATION;
+  private guidedTourStatus: string[] = new Array(0);
+  private guidedTourImgOverlayScreenBasicInfo: string;
   private storedLocation: Location = new Location();
   formatted_address : string = 'Aurangabad, Bihar, India';
   private isLocationInvalid : boolean=false;
   private isLocationEmpty: boolean = false;
   private containsWhiteSpace: boolean = false;
   private noWhiteSpaceAllowedMessage = Messages.MSG_ERROR_JOB_TITLE_INVALID_BLANK_SPACE;
+  private isGuideImg: boolean;
+  gotItMessage: string = Headings.GOT_IT;
 
   tooltipMessage: string =
     '<ul>' +
@@ -70,9 +74,31 @@ export class ProfileDescriptionComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    let guidedTourImages = LocalStorageService.getLocalValue(LocalStorage.GUIDED_TOUR);
+    let newArray = JSON.parse(guidedTourImages);
+    if (newArray == undefined || newArray == null || (newArray && newArray.indexOf(ImagePath.CANDIDATE_OVERLAY_SCREENS_BASIC_INFO) == -1)) {
+      this.isGuidedTourImgRequire();
+    }
   }
 
+  onGotItGuideTour() {
+    debugger;
+    this.guidedTourStatus = this.guidedTourService.updateTourStatus(ImagePath.CANDIDATE_OVERLAY_SCREENS_BASIC_INFO, true);
+    this.guidedTourStatus = this.guidedTourService.getTourStatus();
+    this.guidedTourService.updateProfileField(this.guidedTourStatus)
+      .subscribe(
+        (res: any) => {
+          LocalStorageService.setLocalValue(LocalStorage.GUIDED_TOUR, JSON.stringify(res.data.guide_tour));
+          this.isGuideImg = false;
+        },
+        error => this.errorService.onError(error)
+      );
+  }
+
+  isGuidedTourImgRequire() {
+    this.isGuideImg = true;
+    this.guidedTourImgOverlayScreenBasicInfo = ImagePath.CANDIDATE_OVERLAY_SCREENS_BASIC_INFO;
+  }
 
   ngOnChanges(changes: any) {
     if (changes.candidate !== undefined && changes.candidate.currentValue !== undefined) {

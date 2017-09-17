@@ -340,6 +340,7 @@ export class API {
   public static CANDIDATE_DETAILS = 'recruiter/jobProfile';
   public static CANDIDATESFROMLISTS = 'recruiter/jobProfile';
   public static RElEVENT_INDUSTRIES = 'releventindustries';
+  public static CLONE_JOB = 'job';
 }
 
 export class ImagePath {
@@ -384,6 +385,7 @@ export class ImagePath {
   public static CANDIDATE_OERLAY_SCREENS_EMPLOYMENT_HISTORY='candidate_overlay-screens-emloyment-history.jpg';
   public static CANDIDATE_OERLAY_SCREENS_KEY_SKILLS='candidate_overlay-screens-key-skills.jpg';
   public static CANDIDATE_OERLAY_SCREENS_PROFILE='candidate_overlay-screens-profile.jpg';
+  public static CANDIDATE_OVERLAY_SCREENS_BASIC_INFO = 'candidate_overlay-screens-basic-info.jpg';
   public static CANDIDATE_OERLAY_SCREENS_STACK_VIEW='candidate_overlay-screens-stack-view.jpg';
 
 

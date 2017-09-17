@@ -135,7 +135,10 @@
     </div>
 
   </div>
-  <div class="value-portrait-footer">
+    <div *ngIf="!isShareView">
+        <cn-share></cn-share>
+    </div>
+    <div class="value-portrait-footer">
     <tpl-footer></tpl-footer>
   </div>
 </div>

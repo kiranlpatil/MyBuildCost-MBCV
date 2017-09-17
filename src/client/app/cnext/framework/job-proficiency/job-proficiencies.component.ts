@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
-import {Section} from "../model/candidate";
+import {Section} from "../../../user/models/candidate";
 import {JobPosterModel} from "../../../user/models/jobPoster";
 import {Headings, Messages, Tooltip, ValueConstant} from "../../../shared/constants";
 

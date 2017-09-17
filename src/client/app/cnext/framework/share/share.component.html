@@ -1,4 +1,8 @@
 <!--
 <button ceiboShare [facebook]="{u: repoUrl}" class="btn-facebook"></button>
 -->
-<a [href]="repoUrl" target="_blank" class="btn-facebook"> </a>
+<div class="share-button-container">
+  <a [href]="repoUrlFacebook" target="_blank" class="btn-facebook" alt="Facebook"> </a>
+  <a [href]="repoUrlLinkedin" target="_blank" class="btn-linkedin" alt="Linkedin"> </a>
+  <a [href]="repoUrlTwitter" target="_blank" class="btn-twitter" alt="Twitter"> </a>
+</div>

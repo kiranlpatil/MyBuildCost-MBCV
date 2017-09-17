@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import {Observable} from "rxjs";
-import {BaseService} from "../../../../shared/services/httpservices/base.service";
+import {BaseService} from "../../../../shared/services/http/base.service";
 import {Headers, Http, RequestOptions} from "@angular/http";
 import {LocalStorage} from "../../../../shared/constants";
 import {LocalStorageService} from "../../../../shared/services/localstorage.service";

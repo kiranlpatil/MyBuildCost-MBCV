@@ -3,11 +3,11 @@ import {Role} from "../model/role";
 import {ComplexityService} from "../complexity.service";
 import {LocalStorageService} from "../../../shared/services/localstorage.service";
 import {LocalStorage, Messages, Tooltip, ValueConstant, ImagePath, Headings} from "../../../shared/constants";
-import {Section} from "../model/candidate";
-import {ComplexityDetails} from "../model/complexity-detail";
+import {Section} from "../../../user/models/candidate";
+import {ComplexityDetails} from "../../../user/models/complexity-detail";
 import {ComplexityComponentService} from "./complexity.service";
 import {JobCompareService} from "../single-page-compare-view/job-compare-view/job-compare-view.service";
-import {Capability} from "../model/capability";
+import {Capability} from "../../../user/models/capability";
 import {GuidedTourService} from "../guided-tour.service";
 import {ErrorService} from "../error.service";
 
@@ -60,7 +60,7 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
   private _inputElement1: ElementRef;
   private maxCapabilitiesToShow = ValueConstant.MAX_CAPABILITIES_TO_SHOW;
   private guidedTourStatus:string[] = new Array(0);
-  private guidedTourImgOverlayScreensKeySkills:string;
+  private guidedTourImgOverlayScreensComplexities: string;
   private guidedTourImgOverlayScreensKeySkillsPath:string;
   private isGuideImg:boolean = false;
 
@@ -101,6 +101,11 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
             this.getComplexityIds(this.complexities);
           }
         },error => this.errorService.onError(error));
+      let guidedTourImages = LocalStorageService.getLocalValue(LocalStorage.GUIDED_TOUR);
+      let newArray = JSON.parse(guidedTourImages);
+      if (newArray && newArray.indexOf(ImagePath.CANDIDATE_OERLAY_SCREENS_COMPLEXITIES) == -1) {
+        this.isGuidedTourImgRequire();
+      }
     }
   }
 
@@ -288,9 +293,9 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
     this.slideToRight = !this.slideToRight;
     if (this.currentComplexity === this.complexityIds.length - 1) {
       if (this.isCandidate) {
-        this.saveComplexity();
+        this.onSaveComplexity();
       } else {
-        this.saveComplexity();
+        this.onSaveComplexity();
       }
     } else if (this.currentComplexity <= this.complexityIds.length - 1) {
       if (this.singleComplexity === false) {
@@ -305,25 +310,18 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
 
   isGuidedTourImgRequire() {
     this.isGuideImg = true;
-    this.guidedTourImgOverlayScreensKeySkills = ImagePath.CANDIDATE_OERLAY_SCREENS_KEY_SKILLS;
-    this.guidedTourImgOverlayScreensKeySkillsPath = ImagePath.BASE_ASSETS_PATH_DESKTOP + ImagePath.CANDIDATE_OERLAY_SCREENS_KEY_SKILLS;
-    this.guidedTourStatus = this.guidedTourService.getTourStatus();
-    if(this.guidedTourStatus.indexOf(this.guidedTourImgOverlayScreensKeySkills) !== -1 && this.isCandidate) {
-      this.onSaveComplexity();
-    }
-    if(this.isCandidate == false){
-      this.onSaveComplexity();
-    }
+    this.guidedTourImgOverlayScreensComplexities = ImagePath.CANDIDATE_OERLAY_SCREENS_COMPLEXITIES;
+    // this.guidedTourImgOverlayScreensKeySkillsPath = ImagePath.BASE_ASSETS_PATH_DESKTOP + ImagePath.CANDIDATE_OERLAY_SCREENS_KEY_SKILLS;
   }
 
   onGotItGuideTour() {
-    this.guidedTourStatus = this.guidedTourService.updateTourStatus(ImagePath.CANDIDATE_OERLAY_SCREENS_KEY_SKILLS,true);
+    this.guidedTourStatus = this.guidedTourService.updateTourStatus(ImagePath.CANDIDATE_OERLAY_SCREENS_COMPLEXITIES, true);
     this.guidedTourStatus = this.guidedTourService.getTourStatus();
+    this.isGuideImg = false;
     this.guidedTourService.updateProfileField(this.guidedTourStatus)
       .subscribe(
         (res:any) => {
           LocalStorageService.setLocalValue(LocalStorage.GUIDED_TOUR, JSON.stringify(res.data.guide_tour));
-          this.isGuidedTourImgRequire()
         },
         error => this.errorService.onError(error)
       );

@@ -14,8 +14,8 @@ class ShareService {
     var urlForShare = host + 'value-portrait' + '/' + user._id + '?access_token=' + access_token;
     this.shareDetails.first_name = user.first_name;
     this.shareDetails.last_name = user.last_name;
+    this.shareDetails.isVisible = res[0].isVisible;
     this.shareDetails.shareUrl = urlForShare;
-    //this.shareDetails._id = res._id;
     callback(null, this.shareDetails);
   }
 

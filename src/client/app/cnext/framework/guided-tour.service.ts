@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {BaseService} from "../../shared/services/httpservices/base.service";
+import {BaseService} from "../../shared/services/http/base.service";
 import {LocalStorage, API} from "../../shared/constants";
 import {LocalStorageService} from "../../shared/services/localstorage.service";
 import {Observable} from "rxjs/Observable";
@@ -21,6 +21,9 @@ export class GuidedTourService extends BaseService {
     var dataString = LocalStorageService.getLocalValue(LocalStorage.GUIDED_TOUR);
     var dataArray:string[] = new Array(0);
     dataArray = JSON.parse(dataString);
+    if (dataArray == null) {
+      dataArray = new Array(0);
+    }
     if(dataArray.indexOf(imgName) == -1) {
       dataArray.push(imgName);
     }

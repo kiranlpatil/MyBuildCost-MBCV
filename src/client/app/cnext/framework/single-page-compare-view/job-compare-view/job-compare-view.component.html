@@ -1,13 +1,13 @@
-<div class="guided-tour-section"
-     *ngIf="guidedTourStatus?.indexOf(guidedTourImgOverlayScreensStackView) == -1 && isCandidate"
-     style="top: -43px;height: 110%;">
-  <img src={{guidedTourImgOverlayScreensStackViewPath}} alt="Profile Picture">
-  <div class="got-it-btn" (click)="onGotItGuideTour()">
-    <span>OK, Got it</span>
+<div class="guided-tour-section guided-tour-overlay"
+     *ngIf="guidedTourStatus?.indexOf(guidedTourImgOverlayScreensStackView) == -1 && isCandidate">
+  <!--<img src={{guidedTourImgOverlayScreensStackViewPath}} alt="Profile Picture">-->
+  <div class="guided-tour-overlay-bg">
+    <div class="got-it-btn" (click)="onGotItGuideTour()">
+      <span>OK, Got it</span>
+    </div>
   </div>
 </div>
 <div class="modal-header">
-
   <div *ngIf="typeOfView =='spa_job' && recruiter != undefined">
     <img src="/assets/framework/images/dashboard/profile.png" alt="User Profile"
          *ngIf="recruiter.company_logo==undefined"/>
@@ -43,6 +43,13 @@
 </div>
 
 <div class="col-sm-12 no-padding">
+  <div class="guided-tour-description"
+       *ngIf="guidedTourStatus?.indexOf(guidedTourImgOverlayScreensStackView) == -1 && isCandidate">
+    <div class="guided-tour-containt text-center">
+      This view shows you the precise degree of matches and <br/>
+      mismatches between the capabilities and job expectations.
+    </div>
+  </div>
   <section class="container-fluid one-page-summary" *ngIf="data != undefined && typeOfView =='spa_candidate'">
     <div class="left-container">
       <section *ngIf="candidate != undefined && candidateDetails != undefined" >
@@ -261,11 +268,31 @@
   <div *ngIf="data && (typeOfView =='spa_job' || typeOfView =='spa_candidate')">
     <div class="spa-candidate-col">
       <div class="col-sm-12">
+        <div class="guided-tour-description"
+             *ngIf="guidedTourStatus?.indexOf(guidedTourImgOverlayScreensStackView) == -1 && isCandidate">
+          <div class="guided-tour-overlay">
+            <span class="down-arrow"></span>
+            <p>
+              Each tile within a tower represents a scenario and how you <br/>
+              compare against it as specified in the job profile
+            </p>
+          </div>
+        </div>
         <div *ngIf="typeOfView =='spa_job' && recruiter != undefined && candidateDetails != undefined" >
           <cn-capability-compare [job_picture]="recruiter.company_logo" [candidate_picture]="candidateDetails.picture" [capabilities]="capabilities"></cn-capability-compare>
         </div>
         <div *ngIf="typeOfView =='spa_candidate' && candidateDetails != undefined && recruiter != undefined">
           <cn-capability-compare [candidate_picture]="candidateDetails.picture"  [job_picture]="recruiter.company_logo"  [capabilities]="capabilities"></cn-capability-compare>
+        </div>
+      </div>
+      <div class="guided-tour-description"
+           *ngIf="guidedTourStatus?.indexOf(guidedTourImgOverlayScreensStackView) == -1 && isCandidate">
+        <!--<img src={{guidedTourImgOverlayScreensStackViewPath}} alt="Profile Picture">-->
+        <div class="guided-tour-overlay-key-skills">
+          <span class="down-arrow"></span>
+          <p>
+            Shows matching of your key-skills with that required for the job
+          </p>
         </div>
       </div>
       <div class="col-sm-12 proficiency-compare-section-area">

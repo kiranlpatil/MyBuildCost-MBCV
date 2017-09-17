@@ -16,9 +16,13 @@
   </header>
 
   <div class="card-view clearfix">
-    <div class="col-md-3" *ngFor="let item of jobListInput | orderBy:format;let i = index"
-         (click)="onJobClicked(item._id,item.isJobPosted)">
-      <div class="panel clearfix">
+
+    <cn-job-clone [selectedJobId]="selectedJobId"  [selectedJobTitle]="selectedJobTitle"
+                  [clone]="clone"  (jobEventEmitter)="jobCloned($event)" ></cn-job-clone>
+
+    <div  class="col-md-3" *ngFor="let item of jobListInput | orderBy:format;let i = index">
+      <button (click)="getIdToCloneJob(item)" >clone</button>
+      <div class="panel clearfix" (click)="onJobClicked(item._id,item.isJobPosted)">
        <!-- <span class="glyphicon glyphicon-trash"></span>-->
         <div class="job-posted clearfix">
           <div class="col-xs-2 no-padding">

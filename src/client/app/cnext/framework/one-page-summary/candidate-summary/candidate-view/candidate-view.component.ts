@@ -1,9 +1,9 @@
-import {Component, Input, OnChanges} from '@angular/core';
-import {CandidateDetail} from '../../../../../user/models/candidate';
-import {Candidate} from '../../../model/candidate';
-import {CandidateProfileService} from '../../../candidate-profile/candidate-profile.service';
-import {ComplexityComponentService} from '../../../complexities/complexity.service';
-import {JobCompareService} from '../../../single-page-compare-view/job-compare-view/job-compare-view.service';
+import {Component, Input, OnChanges} from "@angular/core";
+import {CandidateDetail} from "../../../../../user/models/candidate-details";
+import {Candidate} from "../../../../../user/models/candidate";
+import {CandidateProfileService} from "../../../candidate-profile/candidate-profile.service";
+import {ComplexityComponentService} from "../../../complexities/complexity.service";
+import {JobCompareService} from "../../../single-page-compare-view/job-compare-view/job-compare-view.service";
 import {ErrorService} from "../../../error.service";
 import {Headings} from "../../../../../shared/constants";
 
@@ -23,7 +23,7 @@ export class CandidateViewComponent implements OnChanges {
   additionalInformationHeading:string=Headings.ADDITIONAL_INFORMATION_TEXT;
   private candidateDetails: CandidateDetail = new CandidateDetail();
   private candidate: Candidate = new Candidate();
-  private secondaryCapabilities: string[] = new Array();
+  private secondaryCapabilities: string[] = [];
   private capabilities : any;
   constructor(private profileCreatorService: CandidateProfileService,
               private errorService:ErrorService,

@@ -1,9 +1,9 @@
 import {Component, EventEmitter, Input, OnChanges, Output} from "@angular/core";
-import {Capability} from "../../../model/capability";
-import {Scenario} from "../../../model/scenario";
+import {Capability} from "../../../../../user/models/capability";
+import {Scenario} from "../../../../../user/models/scenario";
 import {AppSettings, LocalStorage, Tooltip} from "../../../../../shared/constants";
 import {LocalStorageService} from "../../../../../shared/services/localstorage.service";
-import {Complexity} from "../../../model/complexity";
+import {Complexity} from "../../../../../user/models/complexity";
 
 @Component({
   moduleId: module.id,
