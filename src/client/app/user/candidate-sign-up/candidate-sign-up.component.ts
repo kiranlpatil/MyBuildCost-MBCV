@@ -2,7 +2,7 @@ import {Component, OnInit, ViewChild, ElementRef} from "@angular/core";
 import {Router} from "@angular/router";
 import {CandidateSignUpService} from "./candidate-sign-up.service";
 import {CandidateDetail} from "../models/candidate-details";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {ValidationService} from "../../shared/customvalidations/validation.service";
 import {AppSettings, CommonService, Message, MessageService, NavigationRoutes} from "../../shared/index";
 import {ImagePath, LocalStorage, Messages} from "../../shared/constants";
@@ -29,6 +29,7 @@ export class CandidateSignUpComponent implements OnInit {
   private BODY_BACKGROUND: string;
   private passingYear: string;
   private validBirthYearList = new Array(0);
+  private validBirthYear = FormControl;
   private mainHeaderMenuHideShow: string;
   private year: any;
   private currentDate: any;
@@ -81,7 +82,9 @@ export class CandidateSignUpComponent implements OnInit {
       this.userForm.controls['birth_year'].setValue(undefined);
     }
     this.passingYear = year;
+    console.log("passingYear", this.passingYear);
     this.model.birth_year = year;
+    console.log("birth_year", this.model.birth_year);
   }
 
   onSubmit() {
@@ -158,4 +161,18 @@ export class CandidateSignUpComponent implements OnInit {
     return Messages;
   }
 
+  /*filterList(itemList: number[]): number[] {
+    const result: number[] = [];
+    if(result.length !== 1) {
+      for(let i = 0; i < itemList.length; i++) {
+        result.push(itemList[i]);
+        //console.log('found1');
+      }
+    } else {
+      console.log('found2');
+    }
+    //console.log('result2:', result);
+    return result;
+}
+*/
 }

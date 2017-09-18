@@ -18,6 +18,21 @@
           <p>{{requiredKeySkillsValidationMessage}}</p>
         </div>
       </div>-->
+      <div>
+        <div>
+          <input class="form-control" #elem [id]="type" (change)='selectedProficiencyModel("Proficiency")'
+                 (keyup.enter)="showHideModal($event.target.value)" [disabled]='selectedProficiencies.length == maxLength'
+                 placeholder="{{proficienciesPlaceholder}}" list="Proficiencies"/>
+          <datalist id="Proficiencies" >
+            <option *ngFor="let Proficiency of Proficiencies" value="{{Proficiency}}">
+            </option>
+          </datalist>
+        </div>
+        <div class="error-messages"
+             *ngIf="submitStatus">
+          <p>{{requiredKeySkillsValidationMessage}}</p>
+        </div>
+      </div>
       <div class="add-keyskill">
         <button (click)="showHideModal(elem.value)"><span class="glyphicon glyphicon-plus-sign"></span>Add</button>
         <span class="new-keyskill">{{elem.value}}</span>
