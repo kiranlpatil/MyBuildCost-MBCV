@@ -29,10 +29,7 @@
           <li class="dropdown last-child">
             <div class="dropdown">
               <a class="hidden-xs simple-dropdown dropdown-toggle" data-toggle="dropdown" href="#">
-                <img src="assets/framework/images/dashboard/admin-profile.png" alt="User Profile"
-                     *ngIf="candidate.basicInformation.picture==undefined"/>
-                <img [src]="getImagePath(candidate.basicInformation.picture)" alt="User Profile"
-                     *ngIf="candidate.basicInformation.picture!=undefined"/>
+                <img src="assets/framework/images/dashboard/profile.png" alt="User Profile"/>
                 <span class="caret"></span>
               </a>
               <ul class="dropdown-menu mobile-dropdown">

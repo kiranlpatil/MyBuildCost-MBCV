@@ -6,10 +6,12 @@ import * as recruiterController from "./app/framework/controllers/recruiter.cont
 import * as importIndustriesController from "./app/framework/controllers/import-Industries.controller";
 import * as sharedService from "./app/framework/shared/shared.service";
 import * as userInterceptor from "./app/framework/interceptor/user.interceptor";
+import { ImportIndustryController } from "./app/framework/controllers/import-Industries.controller";
 var AuthInterceptor = require("./app/framework/interceptor/auth.interceptor");
 this.authInterceptor = new AuthInterceptor();
 
 export function init(app: express.Application) {
+  let importIndustryController= new ImportIndustryController();
   app.post("/api/generateotp/:id", this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, userController.generateOtp);
   app.put("/api/verifyotp/:id", this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, userController.verifyOtp);
   app.post("/api/login", userInterceptor.login, userController.login);
@@ -55,7 +57,7 @@ export function init(app: express.Application) {
   app.post("/api/companydetails/:id", this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, userController.updateCompanyDetails);
   app.put("/api/uploaddocuments/:id", this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, userController.uploaddocuments);
   app.get('/api/alluser', this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, adminController.getAllUser);
-  app.get("/api/readxlsx", importIndustriesController.readXlsx);
+  app.get("/api/readxlsx", importIndustryController.readXlsx);
   //app.post("/api/createImportIndusry", importIndustriesController.create);
 
   app.use(sharedService.logHandler);

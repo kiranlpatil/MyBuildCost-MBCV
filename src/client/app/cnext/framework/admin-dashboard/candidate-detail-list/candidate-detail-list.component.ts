@@ -1,6 +1,7 @@
-import {Component, Input} from "@angular/core";
-import {AdminDashboardService} from "../admin-dashboard.service";
-import {ErrorService} from "../../error.service";
+import { Component, Input } from '@angular/core';
+import { AdminDashboardService } from '../admin-dashboard.service';
+import { ErrorService } from '../../error.service';
+import { Router } from '@angular/router';
 
 @Component({
   moduleId: module.id,
@@ -11,7 +12,7 @@ import {ErrorService} from "../../error.service";
 
 export class CandidateDetailListComponent {
   @Input() candidates:any[]=new Array(0);
-  constructor(private adminDashboardService:AdminDashboardService, private errorService:ErrorService) {
+  constructor(private adminDashboardService:AdminDashboardService, private errorService:ErrorService, private _router:Router) {
 
   }
   updateDetail(index:number,candidate:any,activated:boolean) {
@@ -34,7 +35,11 @@ export class CandidateDetailListComponent {
   onSuccess(UsageDetails:any) {
     document.getElementById('link_candidate').click();
   }
-
+  viewProfile(candidate:any,nav:string) {
+    if (nav !== undefined) {
+      this._router.navigate([nav, candidate._id]);
+    }
+  }
 }
 
 

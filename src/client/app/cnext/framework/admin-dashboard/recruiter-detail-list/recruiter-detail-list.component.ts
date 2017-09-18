@@ -1,6 +1,7 @@
-import {Component, Input} from "@angular/core";
-import {ErrorService} from "../../error.service";
-import {AdminDashboardService} from "../admin-dashboard.service";
+import { Component, Input } from '@angular/core';
+import { ErrorService } from '../../error.service';
+import { AdminDashboardService } from '../admin-dashboard.service';
+import { Router } from '@angular/router';
 
 @Component({
   moduleId: module.id,
@@ -11,7 +12,7 @@ import {AdminDashboardService} from "../admin-dashboard.service";
 
 export class RecruiterDetailListComponent {
   @Input() recruiters:any[]=new Array(0);
-  constructor(private adminDashboardService:AdminDashboardService, private errorService:ErrorService) {
+  constructor(private adminDashboardService:AdminDashboardService, private errorService:ErrorService,private _router:Router) {
 
   }
   updateDetail(index:number,recruiter:any,activated:boolean) {
@@ -33,6 +34,11 @@ export class RecruiterDetailListComponent {
   }
   onSuccess(UsageDetails:any) {
     document.getElementById('link_recruiter').click();
+  }
+  viewProfile(recruiter:any,nav:string) {
+    if (nav !== undefined) {
+      this._router.navigate([nav, recruiter._id]);
+    }
   }
 }
 

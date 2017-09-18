@@ -63,6 +63,7 @@
         <li>
           <button *ngIf="candidate.isActivated" class="btn-danger btn-custom" (click)="updateDetail(i,candidate,candidate.isActivated)">Deactivate</button>
           <button *ngIf="!candidate.isActivated" class="btn-primary btn-custom" (click)="updateDetail(i,candidate,candidate.isActivated)">Activate</button>
+          <button class="btn-danger btn-custom" (click)="viewProfile(candidate,'/value-portrait')">View Profile</button>
         </li>
       </ul>
     </div>

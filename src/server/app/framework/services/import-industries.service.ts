@@ -10,6 +10,7 @@ import IndustryService = require('./industry.service');
 import RoleService = require('./role.service');
 import CapabilityService = require('./capability.service');
 import ComplexityService = require('./complexity.service');
+import Messages = require('../shared/messages');
 
 let RolesService = new RoleService();
 let CapabilitiesService = new CapabilityService();
@@ -55,13 +56,12 @@ class ImportIndustryService {
         var rolesArray:any = [];
 
         for (let i = 0; i < result.length-1; i++) {
-          if(result[i].area_of_work_code == ''){
-            if(result[i].area_of_work_code == '' && result[i].capability =='' && result[i].complexity=='') {
+          if(result[i].area_of_work_code === '') {
+            if(result[i].area_of_work_code === '' && result[i].capability ==='' && result[i].complexity==='') {
             }else {
-              console.log(' role name '+i+result[i].area_of_work);
               if(!isSend) {
                 isSend=true;
-                callback(new Error('Code is not given for area of work - '+result[i].area_of_work),null);
+                callback(new Error(Messages.MSG_ERROR_AREA_OF_WORK_CODE_MISSING+' - '+result[i].area_of_work),null);
               }
             }
           }
@@ -73,13 +73,13 @@ class ImportIndustryService {
           for (let j = 1; j < result.length; j++) {
             var currentRow = result[j];
             if (rolesArray[i].name === currentRow.area_of_work) {
-              if(result[j].capability_code == '') {
-                if(result[j].area_of_work == '' && result[j].capability =='' && result[j].complexity=='') {
+              if(result[j].capability_code === '') {
+                if(result[j].area_of_work === '' && result[j].capability ==='' && result[j].complexity==='') {
                 }else {
                   console.log(' role name '+i+result[i].area_of_work);
                   if(!isSend) {
                     isSend=true;
-                    callback(new Error('Code is not given for capability - '+result[j].capability),null);
+                    callback(new Error(Messages.MSG_ERROR_CAPABILITY_CODE_MISSING+' - '+result[j].capability),null);
                   }
                 }
               }
@@ -97,13 +97,13 @@ class ImportIndustryService {
               let currentRow = result[j];
               if (rolesArray[i].name === currentRow.area_of_work) {
               if (rolesArray[i].capabilities[capIndex].name === currentRow.capability) {
-                if (result[j].complexity_code == '') {
-                  if (result[j].area_of_work == '' && result[j].capability == '' && result[j].complexity == '') {
+                if (result[j].complexity_code === '') {
+                  if (result[j].area_of_work === '' && result[j].capability === '' && result[j].complexity === '') {
                   } else {
                     console.log(' role name ' + i + result[i].area_of_work);
                     if (!isSend) {
                       isSend = true;
-                      callback(new Error('Code is not given for complexity - ' + result[j].complexity), null);
+                      callback(new Error(Messages.MSG_ERROR_COMPLEXITY_CODE_MISSING+' - ' + result[j].complexity), null);
                     }
                   }
                 }
@@ -155,7 +155,7 @@ class ImportIndustryService {
         let industry = new ImportIndustriesModel(result[0].industry, result[0].code,result[0].sort_order,rolesArray);
         if(!isSend) {
           if(result[0].code===''||result[0].sort_order===''||result[0].code===undefined||result[0].sort_order===undefined) {
-            callback(new Error('Industry Code and sort order is must for industry - ' + result[0].industry), null);
+            callback(new Error(Messages.MSG_ERROR_INDUSTRY_CODE_OR_SORT_NUMBER_MISSING+' - ' + result[0].industry), null);
           }
           callback(null, industry);
         }

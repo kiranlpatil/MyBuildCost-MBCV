@@ -1,7 +1,7 @@
-import {Component, OnInit, OnDestroy} from "@angular/core";
-import {Router, ActivatedRoute} from "@angular/router";
-import {LocalStorage} from "../../../shared/constants";
-import {LocalStorageService} from "../../../shared/services/localstorage.service";
+import { Component, OnInit,OnDestroy } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { LocalStorage } from '../../../shared/constants';
+import { LocalStorageService } from '../../../shared/services/localstorage.service';
 
 
 @Component({
@@ -21,11 +21,17 @@ export class ValuePortraitContainerComponent implements OnInit,OnDestroy {
 
   navigateTo() {
     var role = LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE);
-    if (role == 'true') {
+    var isAdmin = LocalStorageService.getLocalValue(LocalStorage.ISADMIN);
+    if(isAdmin) {
+      this._router.navigate(['/admin_dashboard']);
+    }
+    if (role === 'true') {
       this._router.navigate(['/candidate_dashboard']);
-    } else {
+    }
+    if (role === 'false') {
       this._router.navigate(['/recruiterdashboard', 'applicant_search']);
     }
+
   }
 
   ngOnDestroy() {

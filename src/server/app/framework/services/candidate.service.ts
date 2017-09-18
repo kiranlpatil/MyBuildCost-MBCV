@@ -396,9 +396,7 @@ class CandidateService {
             callback(err, null);
           } else {
             console.timeEnd('-------get candidateRepository-----');
-
             let new_capability_matrix: any = this.getCapabilityValueKeyMatrixBuild(res.capability_matrix, industries);
-
             callback(null, new_capability_matrix);
           }
         });
