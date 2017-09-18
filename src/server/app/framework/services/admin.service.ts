@@ -21,10 +21,13 @@ import UsersClassModel = require("../dataaccess/model/users");
 import CandidateService = require("./candidate.service");
 import RecruiterService = require("./recruiter.service");
 import CNextMessages = require("../shared/cnext-messages");
+import IndustryModel = require("../dataaccess/model/industry.model");
+import IndustryRepository = require("../dataaccess/repository/industry.repository");
 let usestracking = require('uses-tracking');
 
 class AdminService {
   private userRepository: UserRepository;
+  private industryRepositiry: IndustryRepository;
   private recruiterRepository: RecruiterRepository;
   APP_NAME: string;
   company_name: string;
@@ -34,13 +37,14 @@ class AdminService {
 
   constructor() {
     this.userRepository = new UserRepository();
+     this.industryRepositiry= new IndustryRepository();
     this.recruiterRepository = new RecruiterRepository();
     this.APP_NAME = ProjectAsset.APP_NAME;
     let obj: any = new usestracking.MyController();
     this.usesTrackingController = obj._controller;
   }
 
-  seperateUsers(item: any, callback: (error: any, result: any) => void) {
+  seperateUsers(item: any, callback: (error: any, result: any) => any) {
     try {
       let users: UsersClassModel = new UsersClassModel;
 
@@ -54,10 +58,19 @@ class AdminService {
             if (error) {
               callback(error, null);
             } else {
-              value++;
               if (!item[i].isAdmin) {
-                item[i].data = resu[0];
-                candidates.push(item[i]);
+
+                this.industryRepositiry.retrieve({'code': resu[0].industry.code}, (error: any, industries: IndustryModel[]) => {
+                  if (error) {
+                    callback(error, null);
+                  } else {
+                    let candidateService = new CandidateService();
+                    let response: any = candidateService.getCandidateDetail(resu[0], item[i], industries);
+                    item[i].data = response;
+                    value++;
+                    candidates.push(item[i]);
+                  }
+                });
               }
               if (value && item.length === value) {
                 users.candidate = candidates;
@@ -78,6 +91,7 @@ class AdminService {
             if (error) {
               callback(error, null);
             } else {
+
               value++;
               if (!item[i].isAdmin) {
                 item[i].data = result[0]
@@ -118,7 +132,7 @@ class AdminService {
       let fields = ['first_name', 'last_name', 'mobile_number', 'email', 'isActivated', 'data.location.city', 'data.professionalDetails.education', 'data.professionalDetails.experience', 'data.professionalDetails.currentSalary', 'data.professionalDetails.noticePeriod', 'data.professionalDetails.relocate', 'data.professionalDetails.industryExposure', 'data.professionalDetails.currentCompany', 'data.isCompleted', 'data.isSubmitted', 'data.isVisible','data.proficiencies','data.industry.name','data.industry.roles.name','data.industry.roles.default_complexities.name','data.industry.roles.default_complexities.complexities.name','data.industry.roles.default_complexities.complexities.scenarios.name','data.industry.roles.capabilities.name','data.industry.roles.capabilities.complexities.name','data.industry.roles.capabilities.complexities.scenarios.name'];
       let fieldNames = ['First Name', 'Last Name', 'Mobile Number', 'Email', 'Is Activated', 'Location', 'Education', 'Experience', 'Current Salary', 'Notice Period', 'Relocate', 'Industry Exposure', 'Current Company', 'Is Completed', 'Is Submitted', 'Is Visible','Key Skills','Industry','Area of work','Default Complexity','Scenarios','Complexities','Capabilities','Complexity','Scenario'];//
       let csv = json2csv({data: result.candidate, fields: fields, fieldNames: fieldNames, unwindPath: ['data.proficiencies','data.industry.roles','data.industry.roles.default_complexities','data.industry.roles.default_complexities.complexities','data.industry.roles.default_complexities.complexities.scenarios','data.industry.roles.capabilities','data.industry.roles.capabilities.complexities','data.industry.roles.capabilities.complexities.scenarios']});
-    //fs.writeFile('./src/server/public/candidate.csv', csv, function (err: any) {
+      //fs.writeFile('./src/server/public/candidate.csv', csv, function (err: any) {
       fs.writeFile('/home/bitnami/apps/jobmosis-staging/c-next/dist/prod/server/public/candidate.csv', csv, function (err: any) {
         if (err) throw err;
         callback(null, result);
