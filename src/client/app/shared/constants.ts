@@ -205,6 +205,8 @@ export class Messages {
   public static BROWSER_ALERT_MSG = 'This application is certified on Google chrome browser. Switch to chrome for better experience.';
   public static KEYSKILLS_PLACEHOLDER_DESKTOP = 'E.g. for IT:- Java, C++. for Manufacturing:- Metal Cutting';
   public static KEYSKILLS_PLACEHOLDER_MOBILE = 'E.g. for IT:- Java, C++';
+  public static FAQ_CONTACT_NUMBER = '+91-8669601612';
+  public static FAQ_MESSAGE = 'Have any questions?';
 }
 
 export class NavigationRoutes {
@@ -341,6 +343,7 @@ export class API {
   public static CANDIDATESFROMLISTS = 'recruiter/jobProfile';
   public static RElEVENT_INDUSTRIES = 'releventindustries';
   public static CLONE_JOB = 'job';
+  public static FAQ = '/blog/index.php/faq/';
 }
 
 export class ImagePath {
@@ -376,6 +379,7 @@ export class ImagePath {
   public static FIRST_NAME_ICON_GREY = './assets/framework/images/icons/first-name-grey.svg';
   public static LAST_NAME_ICON = './assets/framework/images/icons/last-name.svg';
   public static LAST_NAME_ICON_GREY = './assets/framework/images/icons/last-name-grey.svg';
+  public static GET_SET_GO = './assets/c-next/get-set-go/get_set_go.gif';
 
   //guided tour images for desktop
   public static BASE_ASSETS_PATH_DESKTOP = './assets/c-next/guided-tour/tour-for-desktop/';

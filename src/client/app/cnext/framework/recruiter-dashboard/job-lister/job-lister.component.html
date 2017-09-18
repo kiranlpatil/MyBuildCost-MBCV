@@ -9,10 +9,6 @@
 
 <div class="job-list clearfix" *ngIf="screenType=='jobList'">
   <header class="col-sm-12">
-    <!-- <div class="search">
-       <input class="form-control" type="text" />
-       <button class="btn btn-search" type="button"><img src="./assets/framework/images/dashboard/search.png"></button>
-     </div>-->
   </header>
 
   <div class="card-view clearfix">
@@ -21,7 +17,13 @@
                   [clone]="clone"  (jobEventEmitter)="jobCloned($event)" ></cn-job-clone>
 
     <div  class="col-md-3" *ngFor="let item of jobListInput | orderBy:format;let i = index">
-      <button (click)="getIdToCloneJob(item)" >clone</button>
+      <div class="dropdown">
+        <button class="btn dropdown-toggle btn-menu" type="button" data-toggle="dropdown"><span
+                class="glyphicon glyphicon-option-vertical"></span></button>
+        <ul class="dropdown-menu">
+          <li (click)="getIdToCloneJob(item)"><a>Clone Job</a></li>
+        </ul>
+      </div>
       <div class="panel clearfix" (click)="onJobClicked(item._id,item.isJobPosted)">
        <!-- <span class="glyphicon glyphicon-trash"></span>-->
         <div class="job-posted clearfix">
@@ -57,13 +59,10 @@
             </div>
           </div>
         </div>
-        <!--<button class="btn-edit-job" title="Post Job" (click)="onJobEdit(item._id,item.isJobPosted)" *ngIf="!item.isJobPosted">Post Job
-        </button>-->
         <div class="edit-job-notification" title="Post this job" *ngIf="!item.isJobPosted">POST JOB</div>
       </div>
     </div>
   </div>
-  <!--div class="col-sm-12 text-center" *ngIf="jobListInput.length==0">You havn't posted any job yet</div>-->
 </div>
 
 

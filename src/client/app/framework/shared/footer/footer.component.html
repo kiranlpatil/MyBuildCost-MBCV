@@ -1,6 +1,14 @@
 <footer class="footer home-page-footer">
-  <!--<tpl-social-icon></tpl-social-icon>-->
-  <p>{{ APP_NAME }} {{UNDER_LICENCE}}</p>
-  <!--<a href="http://www.techprimelab.com/terms-conditions/" target="_blank">Terms Of services</a> |
-  <a href="http://www.techprimelab.com/privacy-policy/" target="_blank">Privacy Policy</a>-->
+  <p class="copyright-statement">{{ APP_NAME }} {{UNDER_LICENCE}}</p>
+  <p class="faq hidden-xs"> <span class="faq-statement">{{getMessage().FAQ_MESSAGE}}
+    <span class="glyphicon glyphicon-phone"></span>
+    {{getMessage().FAQ_CONTACT_NUMBER}}<span class="glyphicon glyphicon-question-sign" (click)="goToFaq()"></span>
+    <span class="faq-link" (click)="goToFaq()">FAQ</span></span>
+  </p>
+  <p class="faq visible-xs">
+    <span class="faq-statement">
+    <span class="glyphicon glyphicon-phone"></span>{{getMessage().FAQ_CONTACT_NUMBER}}
+    <span class="glyphicon glyphicon-question-sign" (click)="goToFaq()"></span>
+    </span>
+  </p>
 </footer>

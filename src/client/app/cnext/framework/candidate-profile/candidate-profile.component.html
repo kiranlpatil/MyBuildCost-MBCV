@@ -129,17 +129,15 @@
         <div class="text-right">
           <div class="button-group" *ngIf="!candidate.isSubmitted">
             <button class="btn btn-success" tabindex="1" (click)="showHideModal()">Submit</button>
-            <!--<button class="btn btn-default">Cancel</button>-->
           </div>
           <div class="button-group" *ngIf="candidate.isSubmitted">
-           <!-- <button class="btn btn-success" tabindex="1" (click)="goToDashboard()">My Dashboard</button>-->
-            <!--<button class="btn btn-default">Cancel</button>-->
           </div>
         </div>
       </div>
 
     </div>
   </div>
+  <tpl-footer></tpl-footer>
 </div>
 
 
@@ -150,7 +148,7 @@
         <div class="modal-body">
           <div class="row">
             <div *ngIf="!candidate.isSubmitted" class="col-sm-12 get-set-go">
-              <img src="assets/c-next/get-set-go/get_set_go.gif" alt="Get Set Go"/>
+              <img src="{{getImagePath().GET_SET_GO}}" alt="Get Set Go"/>
               <p>{{jobSearchForFirstTimeMessage}}</p>
             </div>
             <div *ngIf="candidate.isSubmitted" class="col-sm-12 get-set-go">

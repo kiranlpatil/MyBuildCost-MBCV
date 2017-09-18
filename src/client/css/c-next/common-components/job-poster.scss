@@ -3,8 +3,7 @@
 .info {
   font-size: 11px;
   font-style: italic;
-  //background: url('../../../assets/c-next/profile-creator/info-orange.png')  no-repeat  0 0;
-  padding: 2px 0 2px;
+  padding: 2px 0;
   display: block;
   margin: 0 0 10px;
   color: $info;
@@ -16,7 +15,7 @@
 }
 
 .recruiter-profile-wrapper {
-  margin: 110px auto 15px;
+  margin: 110px auto 30px;
   width: 850px;
 
   .hide-recruiter-info {
@@ -30,7 +29,7 @@
 
 .candidate-profile-wrapper {
   width: 850px;
-  margin: 100px auto 15px;
+  margin: 100px auto 30px;
 
   .hide-candidate-info {
     display: none;

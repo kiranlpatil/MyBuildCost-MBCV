@@ -62,12 +62,12 @@
     &:hover,
     &:active,
     &:focus {
-      background: $cn-theme-btn-danger;
-      color: $white;
+      background: $cn-theme-btn-danger !important;
+      color: $white !important;
     }
 
     &:disabled {
-      background: $cn-theme-btn-danger;
+      background: $cn-theme-btn-danger !important;
     }
   }
 
@@ -90,9 +90,6 @@
       }
     }
   }
-
-  // Header
-  /*header {  @extend %cn-theme-gradient; }*/
 
   // Side Menu Bar
   .dashboard {
@@ -186,7 +183,7 @@
     // Buttons
     .btn-default {
       &:disabled {
-        opacity: .3;
+        opacity: 0.3;
       }
     }
   }

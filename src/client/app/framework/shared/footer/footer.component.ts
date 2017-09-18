@@ -1,5 +1,5 @@
 import {Component} from "@angular/core";
-import {ProjectAsset} from "../../../shared/constants";
+import {API, AppSettings, Messages, ProjectAsset} from "../../../shared/constants";
 
 @Component({
   moduleId: module.id,
@@ -14,5 +14,14 @@ export class FooterComponent {
   constructor() {
     this.APP_NAME = ProjectAsset.APP_NAME;
     this.UNDER_LICENCE = ProjectAsset.UNDER_LICENECE;
+  }
+
+  goToFaq() {
+    let host = AppSettings.HTTP_CLIENT + window.location.hostname + API.FAQ;
+    window.open(host, '_blank');
+  }
+
+  getMessage() {
+    return Messages;
   }
 }

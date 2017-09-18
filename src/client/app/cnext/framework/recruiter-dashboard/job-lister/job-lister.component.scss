@@ -125,10 +125,6 @@
       }
     }
   }
-
-  /*.search {
-    float: right;
-  }*/
 }
 
 .panel {
@@ -156,6 +152,66 @@
 
 .hiring-manager {
   width: calc(100% - 70px) !important;
+}
+
+.btn-menu {
+  background: transparent;
+  cursor: pointer;
+  color: $gray-light2;
+  font-size: 12px;
+  height: auto;
+  padding: 2px 0 0 2px;
+  position: absolute;
+  right: 0;
+  top: 15px;
+  z-index: 1;
+
+  &:active,
+  &:hover,
+  &:focus {
+    background: transparent !important;
+    box-shadow: none !important;
+    outline: none;
+  }
+}
+
+.dropdown-menu {
+  background: $border-color1;
+  border: 0;
+  border-radius: 0;
+  box-shadow: 0 1px 2px $menu-box-shadow;
+  display: none;
+  min-width: 84px;
+  left: inherit;
+  padding: 0 3px;
+  right: 5px;
+  top: 15px;
+
+  li {
+    a {
+      border-bottom: 1px solid $border-color1;
+      font-size: 12px;
+      font-weight: bold;
+      padding: 3px;
+
+      &:hover {
+        background: transparent;
+        color: $text-color;
+      }
+    }
+
+    &:last-child > a {
+      border-bottom: 0;
+    }
+  }
+}
+
+.dropdown {
+  &:hover {
+    .dropdown-menu {
+      display: block;
+    }
+  }
 }
 
 @media only screen and (min-width: 1367px) {
