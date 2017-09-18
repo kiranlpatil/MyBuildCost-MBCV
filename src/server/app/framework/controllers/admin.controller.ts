@@ -71,7 +71,7 @@ export function getAllUser(req: express.Request, res: express.Response, next: an
     var userService = new UserService();
     var adminService = new AdminService();
     var params = {};
-    if(req.user.isAdmin){
+    if(req.user.isAdmin) {
       userService.retrieveAll(params, (error, result) => {
         if (error) {
           next({
@@ -96,7 +96,7 @@ export function getAllUser(req: express.Request, res: express.Response, next: an
           });
         }
       });
-    }else{
+    }else {
       res.status(401).send({
         'error': {
           reason: 'Unauthorized User',
@@ -114,7 +114,7 @@ export function getCandidateDetails(req: express.Request, res: express.Response,
     var userService = new UserService();
     var adminService = new AdminService();
     var params = {};
-    if(req.user.isAdmin){
+    if(req.user.isAdmin) {
       userService.retrieveAll(params, (error, result) => {
         if (error) {
           next({
@@ -139,6 +139,7 @@ export function getCandidateDetails(req: express.Request, res: express.Response,
                     code: 403
                   });
                 } else {
+                  //var file = './src/server/public/candidate.csv';
                   var file = '/home/bitnami/apps/jobmosis-staging/c-next/dist/prod/server/public/candidate.csv';
                   res.download(file);
                 }
@@ -191,6 +192,7 @@ export function getRecruiterDetails(req: express.Request, res: express.Response,
                     code: 403
                   });
                 } else {
+                  //var file = './src/server/public/recruiter.csv';
                   var file = '/home/bitnami/apps/jobmosis-staging/c-next/dist/prod/server/public/recruiter.csv';
                   res.download(file);
                 }
@@ -235,6 +237,7 @@ export function getUsageDetails(req: express.Request, res: express.Response, nex
                 code: 403
               });
             } else {
+              //var file = './src/server/public/usagedetail.csv';
               var file = '/home/bitnami/apps/jobmosis-staging/c-next/dist/prod/server/public/usagedetail.csv';
              res.download(file); // Set disposition and send it.
             }

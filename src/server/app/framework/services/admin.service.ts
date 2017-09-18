@@ -21,10 +21,13 @@ import UsersClassModel = require("../dataaccess/model/users");
 import CandidateService = require("./candidate.service");
 import RecruiterService = require("./recruiter.service");
 import CNextMessages = require("../shared/cnext-messages");
+import IndustryModel = require("../dataaccess/model/industry.model");
+import IndustryRepository = require("../dataaccess/repository/industry.repository");
 let usestracking = require('uses-tracking');
 
 class AdminService {
   private userRepository: UserRepository;
+  private industryRepositiry: IndustryRepository;
   private recruiterRepository: RecruiterRepository;
   APP_NAME: string;
   company_name: string;
@@ -34,6 +37,7 @@ class AdminService {
 
   constructor() {
     this.userRepository = new UserRepository();
+     this.industryRepositiry= new IndustryRepository();
     this.recruiterRepository = new RecruiterRepository();
     this.APP_NAME = ProjectAsset.APP_NAME;
     let obj: any = new usestracking.MyController();
@@ -53,8 +57,7 @@ class AdminService {
           candidateService.retrieve({'userId': new mongoose.Types.ObjectId(item[i]._id)}, (error, resu) => {
             if (error) {
               callback(error, null);
-            }
-            else {
+            } else {
               value++;
               if (!item[i].isAdmin) {
                 item[i].data = resu[0];
@@ -79,12 +82,13 @@ class AdminService {
             if (error) {
               callback(error, null);
             } else {
+
               value++;
               if (!item[i].isAdmin) {
                 item[i].data = result[0]
                 recruiters.push(item[i]);
               }
-              if (value && item.length == value) {
+              if (value && item.length === value) {
                 users.candidate = candidates;
                 users.recruiter = recruiters;
                 callback(null, users);
@@ -104,6 +108,7 @@ class AdminService {
       let fields = ['candidateId', 'recruiterId', 'jobProfileId', 'action', 'timestamp'];
       let fieldNames = ['Candidate Id', 'RecruiterId', 'Job Profile Id', 'Action', 'TimeStamp'];
       let csv = json2csv({data: result, fields: fields, fieldNames: fieldNames});
+      //fs.writeFile('./src/server/public/usagedetail.csv', csv, function (err: any) {
       fs.writeFile('/home/bitnami/apps/jobmosis-staging/c-next/dist/prod/server/public/usagedetail.csv', csv, function (err: any) {
         if (err) throw err;
         callback(null, result);
@@ -115,9 +120,10 @@ class AdminService {
 
   generateCandidateDetailFile(result: any, callback: (err: any, res: any) => void) {
     if (result.candidate && result.candidate.length > 0) {
-      let fields = ['first_name', 'last_name', 'mobile_number', 'email', 'isActivated', 'data.location.city', 'data.professionalDetails.education', 'data.professionalDetails.experience', 'data.professionalDetails.currentSalary', 'data.professionalDetails.noticePeriod', 'data.professionalDetails.relocate', 'data.professionalDetails.industryExposure', 'data.professionalDetails.currentCompany', 'data.isCompleted', 'data.isSubmitted', 'data.isVisible'];
-      let fieldNames = ['First Name', 'Last Name', 'Mobile Number', 'Email', 'Is Activated', 'Location', 'Education', 'Experience', 'Current Salary', 'Notice Period', 'Relocate', 'Industry Exposure', 'Current Company', 'IsCompleted', 'IsSubmitted', 'IsVisible'];
-      let csv = json2csv({data: result.candidate, fields: fields, fieldNames: fieldNames});
+      let fields = ['first_name', 'last_name', 'mobile_number', 'email', 'isActivated', 'data.location.city', 'data.professionalDetails.education', 'data.professionalDetails.experience', 'data.professionalDetails.currentSalary', 'data.professionalDetails.noticePeriod', 'data.professionalDetails.relocate', 'data.professionalDetails.industryExposure', 'data.professionalDetails.currentCompany', 'data.isCompleted', 'data.isSubmitted', 'data.isVisible','data.proficiencies','data.industry.name','data.industry.roles.name','data.industry.roles.default_complexities.name','data.industry.roles.default_complexities.complexities.name','data.industry.roles.default_complexities.complexities.scenarios.name','data.industry.roles.capabilities.name','data.industry.roles.capabilities.complexities.name','data.industry.roles.capabilities.complexities.scenarios.name'];
+      let fieldNames = ['First Name', 'Last Name', 'Mobile Number', 'Email', 'Is Activated', 'Location', 'Education', 'Experience', 'Current Salary', 'Notice Period', 'Relocate', 'Industry Exposure', 'Current Company', 'Is Completed', 'Is Submitted', 'Is Visible','Key Skills','Industry','Area of work','Default Complexity','Scenarios','Complexities','Capabilities','Complexity','Scenario'];//
+      let csv = json2csv({data: result.candidate, fields: fields, fieldNames: fieldNames, unwindPath: ['data.proficiencies','data.industry.roles','data.industry.roles.default_complexities','data.industry.roles.default_complexities.complexities','data.industry.roles.default_complexities.complexities.scenarios','data.industry.roles.capabilities','data.industry.roles.capabilities.complexities','data.industry.roles.capabilities.complexities.scenarios']});
+      //fs.writeFile('./src/server/public/candidate.csv', csv, function (err: any) {
       fs.writeFile('/home/bitnami/apps/jobmosis-staging/c-next/dist/prod/server/public/candidate.csv', csv, function (err: any) {
         if (err) throw err;
         callback(null, result);
@@ -129,14 +135,15 @@ class AdminService {
 
   generateRecruiterDetailFile(result: any, callback: (err: any, res: any) => void) {
     if (result.recruiter && result.recruiter.length > 0) {
-      let fields = ['data.company_name', 'data.company_size', 'data.isRecruitingForself', 'data.jobCountModel.numberOfJobposted', 'mobile_number', 'email', 'isActivated', 'data.postedJobs.isJobPosted', 'data.postedJobs.jobTitle', 'data.postedJobs.hiringManager', 'data.postedJobs.department', 'data.postedJobs.education', 'data.postedJobs.experienceMinValue', 'data.postedJobs.experienceMaxValue', 'data.postedJobs.salaryMinValue', 'data.postedJobs.salaryMaxValue', 'data.postedJobs.joiningPeriod', 'data.postedJobs.postingDate', 'data.postedJobs.expiringDate'];
-      let fieldNames = ['Company Name', 'company size', 'Recruiting For Self', 'Number of Job Posted', 'Mobile Number', 'Email', 'Is Activated', 'Job Posted', 'Job Title', 'Hiring Manager', 'Department', 'Education', 'Minimum Experience', 'Maximum Experience', 'Minimum Salary', 'Maximum Salary', 'Joining Period', 'Job Posting Date', 'Job Expiry Date'];
+      let fields = ['data.company_name', 'data.company_size', 'data.isRecruitingForself', 'data.jobCountModel.numberOfJobposted', 'mobile_number', 'email', 'isActivated', 'data.postedJobs.isJobPosted', 'data.postedJobs.jobTitle', 'data.postedJobs.hiringManager', 'data.postedJobs.department', 'data.postedJobs.education', 'data.postedJobs.experienceMinValue', 'data.postedJobs.experienceMaxValue', 'data.postedJobs.salaryMinValue', 'data.postedJobs.salaryMaxValue', 'data.postedJobs.joiningPeriod', 'data.postedJobs.postingDate', 'data.postedJobs.expiringDate','data.postedJobs.proficiencies','data.postedJobs.industry.name','data.postedJobs.industry.roles.name','data.postedJobs.industry.roles.postedJobs.default_complexities.name','data.postedJobs.industry.roles.default_complexities.complexities.name','data.postedJobs.industry.roles.default_complexities.complexities.scenarios.name','data.postedJobs.industry.roles.capabilities.name','data.postedJobs.industry.roles.capabilities.complexities.name','data.postedJobs.industry.roles.capabilities.complexities.scenarios.name'];
+      let fieldNames = ['Company Name', 'company size', 'Recruiting For Self', 'Number of Job Posted', 'Mobile Number', 'Email', 'Is Activated', 'Job Posted', 'Job Title', 'Hiring Manager', 'Department', 'Education', 'Minimum Experience', 'Maximum Experience', 'Minimum Salary', 'Maximum Salary', 'Joining Period', 'Job Posting Date', 'Job Expiry Date','Key Skills','Industry','Area of work','Default Complexity','Scenarios','Complexities','Capabilities','Complexity','Scenario'];
       let csv = json2csv({
         data: result.recruiter,
         fields: fields,
         fieldNames: fieldNames,
-        unwindPath: ['data.postedJobs']
+        unwindPath: ['data.postedJobs','data.postedJobs.proficiencies','data.postedJobs.industry.roles','data.postedJobs.industry.roles.default_complexities','data.postedJobs.industry.roles.default_complexities.complexities','data.postedJobs.industry.roles.default_complexities.complexities.scenarios','data.postedJobs.industry.roles.capabilities','data.postedJobs.industry.roles.capabilities.complexities','data.postedJobs.industry.roles.capabilities.complexities.scenarios']
       });
+      //fs.writeFile('./src/server/public/recruiter.csv', csv, function (err: any) {
       fs.writeFile('/home/bitnami/apps/jobmosis-staging/c-next/dist/prod/server/public/recruiter.csv', csv, function (err: any) {
         if (err) throw err;
         callback(null, result);

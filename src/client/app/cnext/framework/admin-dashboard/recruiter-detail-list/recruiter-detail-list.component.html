@@ -52,6 +52,7 @@
         <li>
           <button *ngIf="recruiter.isActivated" class="btn-danger btn-custom" (click)="updateDetail(i,recruiter,recruiter.isActivated)">Deactivate</button>
           <button *ngIf="!recruiter.isActivated" class="btn-primary btn-custom" (click)="updateDetail(i,recruiter,recruiter.isActivated)">Activate</button>
+          <button class="btn-danger btn-custom" (click)="viewProfile(recruiter,'/value-portrait')">View Profile</button>
         </li>
       </ul>
     </div>

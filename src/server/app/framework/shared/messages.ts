@@ -27,6 +27,7 @@ class Messages {
   public static MSG_SUCCESS_PASSWORD_CHANGE: string = 'Password changed successfully.';
   public static MSG_SUCCESS_OTP: string = 'OTP has been sent on your verified mobile number.';
   public static MSG_SUCCESS_OTP_CHANGE_MOBILE_NUMBER: string = 'OTP has been sent on your new mobile number';
+  public static MSG_SUCCESS_INDUSTRY_DATA_INSERTION: string = 'Data inserted Successfully in Industry';
 
   //Error Message
   public static MSG_ERROR_MESSAGE_SENDING: string = 'Message sending failed by server';
@@ -68,7 +69,10 @@ class Messages {
   public static MSG_ERROR_WHILE_CONTACTING: string = 'Something went wrong. Try again.';
   public static MSG_ERROR_CONNECTION_TIMEOUT: string = 'Connection timeout. Try again.';
   public static MSG_ERROR_INCORRECT_INDUSTRY_NAME: string = 'Excel With this name is not present.Excel name must be NewIndustryDataExcel.xlsx';
-
+  public static MSG_ERROR_INDUSTRY_CODE_OR_SORT_NUMBER_MISSING: string = 'Industry Code and sort order is must for industry.';
+  public static MSG_ERROR_COMPLEXITY_CODE_MISSING: string = 'Code is not given for complexity.';
+  public static MSG_ERROR_CAPABILITY_CODE_MISSING: string = 'Code is not given for capability.';
+  public static MSG_ERROR_AREA_OF_WORK_CODE_MISSING: string = 'Code is not given for area of work.';
   //
 
   // Error Reason
