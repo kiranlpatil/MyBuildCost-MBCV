@@ -13,11 +13,12 @@ import {CommonService} from "./services/common.service";
 import {BaseService} from "./services/http/base.service";
 import {CustomHttp} from "./services/http/custom.http";
 import {TooltipComponent} from "./tool-tip-component/tool-tip-component";
+import {FooterComponent} from "../framework/shared/footer/footer.component";
 
 @NgModule({
   imports: [CommonModule],
-  declarations: [LoaderComponent, MyGoogleDirective, ControlMessagesComponent, MyGoogleDirective, TooltipComponent],
-  exports: [LoaderComponent, MyGoogleDirective, ControlMessagesComponent, MyGoogleDirective, TooltipComponent],
+  declarations: [LoaderComponent, MyGoogleDirective, ControlMessagesComponent, MyGoogleDirective, TooltipComponent, FooterComponent],
+  exports: [LoaderComponent, MyGoogleDirective, ControlMessagesComponent, MyGoogleDirective, TooltipComponent, FooterComponent],
   providers: [LoaderService, ValidationService, LocalStorageService, MessageService, SharedService,
     ThemeChangeService, CommonService, BaseService, CustomHttp]
 })

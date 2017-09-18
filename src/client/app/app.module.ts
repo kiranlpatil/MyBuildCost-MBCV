@@ -12,7 +12,6 @@ import {DashboardComponent} from "./framework/dashboard/dashboard.component";
 import {AboutComponent} from "./framework/dashboard/about/about.component";
 import {ContactComponent} from "./framework/dashboard/contact/contact.component";
 import {DashboardHomeComponent} from "./framework/dashboard/dashboard-home/dashboard-home.component";
-import {FooterComponent} from "./framework/shared/footer/footer.component";
 import {HeaderComponent} from "./framework/shared/header/header.component";
 import {NotificationService} from "./framework/shared/notification/notification.service";
 import {NotificationComponent} from "./framework/shared/notification/notification.component";
@@ -186,7 +185,6 @@ import {SharedService} from "./shared/services/shared-service";
     ContactComponent,
     DashboardHomeComponent,
     HeaderComponent,
-    FooterComponent,
     NotificationComponent,
     SocialIconComponent,
 

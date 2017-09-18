@@ -3,17 +3,75 @@
 
 .home-page-footer {
   background: $black1;
-  padding: 0;
-  position: fixed;
-  width: 100%;
-  z-index: 9999;
   bottom: 0;
   height: 21px;
   line-height: 0;
+  padding: 0 15px;
+  position: fixed;
+  width: 100%;
+  z-index: 9999;
 
   p,
   a {
+    color: $footer-color;
     font-size: 12px;
-    color: $white;
+  }
+
+  .copyright-statement {
+    float: left;
+    text-align: left;
+    width: 50%;
+  }
+
+  .faq {
+    color: $footer-color;
+    float: right;
+    margin-top: 4px;
+    text-align: right;
+    width: 50%;
+  }
+
+  .faq-statement {
+    color: $theme-orange;
+
+    .faq-link {
+      color: $theme-orange;
+      cursor: pointer;
+      font-size: 12px;
+    }
+
+    .glyphicon {
+      color: $footer-color;
+      margin: 0 5px 0 15px;
+    }
   }
 }
+
+@media only screen and (max-width: 767px) {
+  .home-page-footer {
+    padding: 0 5px;
+
+    p,
+    a {
+      font-size: 9px;
+    }
+
+    .copyright-statement {
+      text-align: left;
+      width: 60%;
+    }
+
+    .faq {
+      margin-top: 3px;
+      width: 40%;
+    }
+
+    .faq-statement {
+      .glyphicon {
+        font-size: 12px;
+        margin: 0 0 0 10px;
+      }
+    }
+  }
+}
+

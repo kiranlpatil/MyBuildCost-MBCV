@@ -31,6 +31,7 @@
                      [class.below]="complexity.match==1" [class.missing]="complexity.match == 0"
                      [class.extra]="complexity.match==4"
                      *ngIf="complexity.scenarios[0]&& complexity.scenarios[0].name != undefined">
+                  <div class="match-icon"></div>
                   <span class="complexity-name">{{complexity.name}}</span>
                   <div *ngFor="let scenario of complexity.scenarios">
                     <div class="complexity-scenarios-description">

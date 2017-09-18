@@ -1,12 +1,20 @@
 @import '../../../../../../css/variables';
 
 .exact {
-  background: $bg-container !important;
-  border-left: 4px solid $light-green2 !important;
+  background: $exact-bg !important;
   padding: 5px 5px 0;
   height: 57px;
   line-height: 16px;
   overflow: hidden;
+  padding-left: 30px;
+  .match-icon {
+    background: url(../assets/c-next/card-view/sprite.png) no-repeat -33px -735px;
+    float: left;
+    height: 32px;
+    width: 19px;
+    position: absolute;
+    left: 4px;
+  }
 }
 
 .compact-view {
@@ -75,8 +83,7 @@
   .complexity-scenarios-description {
     white-space: inherit;
     position: absolute;
-    background: $bg-container;
-    border-left: 4px solid $light-green2 !important;
+    background: $exact-bg;
     padding: 5px;
     bottom: inherit;
     min-height: 59px;
@@ -108,20 +115,27 @@
 }
 
 .above {
-  background: $bg-container !important;
-  border-left: 4px solid $green2 !important;
+  background: $higher-bg !important;
   padding: 5px 5px 0;
   height: 57px;
   line-height: 16px;
   overflow: hidden;
+  padding-left: 30px;
+  .match-icon {
+    background: url(../assets/c-next/card-view/sprite.png) no-repeat -8px -735px;
+    float: left;
+    height: 32px;
+    width: 19px;
+    position: absolute;
+    left: 4px;
+  }
 }
 
 .above:hover {
   .complexity-scenarios-description {
     white-space: inherit;
     position: absolute;
-    background: $bg-container;
-    border-left: 4px solid $green2 !important;
+    background: $higher-bg;
     padding: 5px;
     bottom: inherit;
     min-height: 59px;
@@ -153,20 +167,27 @@
 }
 
 .below {
-  background: $bg-container !important;
-  border-left: 4px solid $orange !important;
+  background: $less-bg !important;
   padding: 5px 5px 0;
   height: 57px;
   line-height: 16px;
   overflow: hidden;
+  padding-left: 30px;
+  .match-icon {
+    background: url(../assets/c-next/card-view/sprite.png) no-repeat -58px -735px;
+    float: left;
+    height: 32px;
+    width: 19px;
+    position: absolute;
+    left: 4px;
+  }
 }
 
 .below:hover {
   .complexity-scenarios-description {
     white-space: inherit;
     position: absolute;
-    background: $bg-container;
-    border-left: 4px solid $orange !important;
+    background: $less-bg;
     padding: 5px;
     bottom: inherit;
     min-height: 59px;
@@ -200,20 +221,27 @@
 }
 
 .missing {
-  background: $bg-container !important;
-  border-left: 4px solid $red2 !important;
+  background: $missmatch-bg !important;
   padding: 5px 5px 0;
   height: 57px;
   line-height: 16px;
   overflow: hidden;
+  padding-left: 30px;
+  .match-icon {
+    background: url(../assets/c-next/card-view/sprite.png) no-repeat -83px -735px;
+    float: left;
+    height: 32px;
+    width: 19px;
+    position: absolute;
+    left: 4px;
+  }
 }
 
 .missing:hover {
   .complexity-scenarios-description {
     white-space: inherit;
     position: absolute;
-    background: $bg-container;
-    border-left: 4px solid $red2 !important;
+    background: $missmatch-bg;
     padding: 5px;
     bottom: inherit;
     min-height: 59px;
@@ -301,7 +329,7 @@
   color: $white;
   font-size: 11px;
   text-align: left;
-  border-bottom: 1px solid $border-color3;
+  border-bottom: 1px solid $row-border;
   height: 58px;
   overflow: hidden;
 }
@@ -392,7 +420,7 @@
     display: none;
   }
   span {
-    max-width: 92%;
+    max-width: 74%;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -449,19 +477,35 @@
     }
 
     .legend-above {
-      background: $green2;
+      background: url(../assets/c-next/card-view/sprite.png) no-repeat -9px -748px;
+      height: 18px;
+      width: 17px;
+      border-radius: 0;
+      margin: 0px 3px;
     }
 
     .legend-exact {
-      background: $light-green2;
+      background: url(../assets/c-next/card-view/sprite.png) no-repeat -34px -748px;
+      height: 18px;
+      width: 17px;
+      border-radius: 0;
+      margin: 0px 3px;
     }
 
     .legend-below {
-      background: $orange2;
+      background: url(../assets/c-next/card-view/sprite.png) no-repeat -59px -748px;
+      height: 18px;
+      width: 17px;
+      border-radius: 0;
+      margin: 0px 3px;
     }
 
     .legend-missing {
-      background: $red2;
+      background: url(../assets/c-next/card-view/sprite.png) no-repeat -85px -748px;
+      height: 18px;
+      width: 17px;
+      border-radius: 0;
+      margin: 0px 3px;
     }
 
     .legend-extra {
@@ -773,4 +817,3 @@
     padding-right: 0;
   }
 }
-
