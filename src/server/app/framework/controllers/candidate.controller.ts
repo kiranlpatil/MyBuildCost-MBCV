@@ -215,7 +215,7 @@ export function get(req: express.Request, res: express.Response, next: any) { //
   try {
     let candidateService = new CandidateService();
     let candidateId = req.params.id;
-    if (String(req.user._id) === String(candidateId)) {
+    /* if (String(req.user._id) === String(candidateId)) {*/
       candidateService.get(candidateId, (error, result) => {
         if (error) {
           next(error);
@@ -227,13 +227,13 @@ export function get(req: express.Request, res: express.Response, next: any) { //
           });
         }
       });
-    } else {
+    /* } else {
       next({
         reason: Messages.MSG_ERROR_IF_USER_ID_INVALID_FROM_URL_PARAMETER,
         message: Messages.MSG_ERROR_IF_USER_ID_INVALID_FROM_URL_PARAMETER,
         code: 401
       });
-    }
+     }*/
   }
   catch (e) {
     res.status(403).send({message: e.message});
