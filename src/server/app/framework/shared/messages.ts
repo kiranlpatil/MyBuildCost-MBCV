@@ -99,6 +99,7 @@ class Messages {
   public static MSG_ERROR_CHECK_EMAIL_PRESENT: string = 'Error: Please click on the link sent to your email in order to activate your account. ';
 
   public static MSG_ERROR_API_CHECK = 'Invalid access token';
+  public static MSG_ERROR_IF_USER_ID_INVALID_FROM_URL_PARAMETER = 'Problem with id which you provided';
 }
 export=Messages;
 
