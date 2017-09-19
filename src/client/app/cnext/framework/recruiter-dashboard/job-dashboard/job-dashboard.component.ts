@@ -13,6 +13,7 @@ import {ProfileComparisonService} from "../../profile-comparison/profile-compari
 import {ProfileComparison} from "../../model/profile-comparison";
 import {QCardviewComponent} from "../q-card-view/q-card-view.component";
 import {ErrorService} from "../../error.service";
+import {Label} from "../../../../shared/constants";
 
 @Component({
   moduleId: module.id,
@@ -37,6 +38,9 @@ export class JobDashboardComponent implements OnInit {
   private isRecruitingForSelf: boolean;
   private profileComparison: ProfileComparison;
   private listOfCandidateIdToCompare: string[] = new Array(0);
+  private selectedJobId:string;
+  private selectedJobTitle:string;
+  private isCloneButtonClicked:boolean;
   private emptyListMessage: string = Tooltip.EMPTY_LIST_MESSAGE;
   private emptyCartMessage: string = Tooltip.EMPTY_CART_MESSAGE;
   private emptyRejectedList: string = Tooltip.EMPTY_REJECTED_LIST_MESSAGE;
@@ -284,5 +288,19 @@ export class JobDashboardComponent implements OnInit {
       this.recruiterJobView.numberOfCandidatesInCompare++;
     }
   }
+  raiseCloneEvent(){
+    this.selectedJobId= this.selectedJobProfile._id;
+    this.selectedJobTitle=this.selectedJobProfile.jobTitle;
+    this.isCloneButtonClicked=!this.isCloneButtonClicked;
+  }
 
+  jobcloned(event:any) {
+
+    this.navigateTo('recruiterdashboardedit',event);
+
+  }
+
+  getLabel() {
+    return Label;
+  }
 }

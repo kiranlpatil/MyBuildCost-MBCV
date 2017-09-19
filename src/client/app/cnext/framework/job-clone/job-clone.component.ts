@@ -1,6 +1,8 @@
 import {Component, EventEmitter, Input, OnChanges, Output} from "@angular/core";
 import {JobPosterService} from "../job-poster/job-poster.service";
 import {Button, Headings, Label} from "../../../shared/constants";
+import {ValidationService} from "../../../shared/customvalidations/validation.service";
+
 
 @Component({
   moduleId: module.id,
@@ -11,20 +13,21 @@ import {Button, Headings, Label} from "../../../shared/constants";
 export class JobCloneComponent implements OnChanges {
   @Input() selectedJobId:string;
   @Input() selectedJobTitle:string;
-  @Input() clone:boolean;
-  @Output() jobEventEmitter:EventEmitter<any> = new EventEmitter();
+  @Input() isCloneButtonClicked:boolean;
+  @Output() raiseJobEditViewEventEmitter:EventEmitter<string> = new EventEmitter();
 
   private showCloneDialogue:boolean = false;
+  private isShowEmptyTitleError:boolean=false;
 
-  constructor(private jobPosterService:JobPosterService) {
-  }
+
+  constructor(private jobPosterService:JobPosterService) {}
 
   ngOnChanges(changes:any) {
     if (changes.selectedJobId!== undefined
       && changes.selectedJobId.currentValue !== undefined){
       this.showCloneDialogue=true;
     }
-    if(changes.clone.currentValue!==undefined) {
+    if(changes.isCloneButtonClicked.currentValue!==undefined) {
       this.showCloneDialogue = true;
     }
   }
@@ -38,16 +41,22 @@ export class JobCloneComponent implements OnChanges {
   }
 
   onClone() {
-    this.jobPosterService.cloneJob(this.selectedJobId,this.selectedJobTitle).subscribe(
-      data => {
-        this.jobEventEmitter.emit(data.data);
-      });
-    this.showCloneDialogue = false;
+    if(this.selectedJobTitle.length>0) {
+      this.isShowEmptyTitleError=false;
+      this.jobPosterService.cloneJob(this.selectedJobId, this.selectedJobTitle).subscribe(
+        data => {
+          this.raiseJobEditViewEventEmitter.emit(data.data);
+        });
+      this.showCloneDialogue = false;
+    }else{
+      this.isShowEmptyTitleError=true;
+    }
 
   }
-
   onCancel() {
     this.showCloneDialogue = false;
+
+
   }
 
   getHeading() {

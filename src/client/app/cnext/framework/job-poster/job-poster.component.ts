@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, OnInit} from "@angular/core";
+import {Component,EventEmitter, Input,Output, OnChanges, OnInit} from "@angular/core";
 import {JobPosterModel} from "../../../user/models/jobPoster";
 import {JobPosterService} from "./job-poster.service";
 import {Role} from "../model/role";
@@ -25,6 +25,9 @@ export class JobPosterComponent implements OnInit, OnChanges {
   @Input() noOfJobPosted: number;
   @Input() currentjobId: string;
   @Input() recruiter: RecruiterDashboard;
+  @Output() jobPostEventEmitter: EventEmitter<string> = new EventEmitter();
+  @Output() jobPostCloneSuccessEmitter: EventEmitter<boolean> = new EventEmitter();
+
 
   jobPostMessage: string = Messages.MSG_JOB_POST;
   private roleList: string[] = new Array(0);
@@ -58,7 +61,9 @@ export class JobPosterComponent implements OnInit, OnChanges {
   private isPresentDefaultcomplexity: boolean = false;
   private flag: boolean = true;
   private highlightedSection: Section = new Section();
-
+  private selectedJobTitle:string;
+  private selectedJobId:string;
+  private isCloneButtonClicked:boolean;
   constructor(private profileCreatorService: CandidateProfileService,
               private recruiterDashboardService: RecruiterDashboardService,
               private errorService: ErrorService,
@@ -77,7 +82,7 @@ export class JobPosterComponent implements OnInit, OnChanges {
     if (changes.currentjobId !== undefined && changes.currentjobId.currentValue !== undefined) {
       this.jobId = changes.currentjobId.currentValue;
       this.getJobProfile();
-    } else {
+    } else if((changes.recruiter==undefined )|| (changes.currentjobId !== undefined )) {
       this.jobPosterModel = new JobPosterModel();
       this.highlightedSection.name = 'JobProfile';
     }
@@ -397,5 +402,17 @@ export class JobPosterComponent implements OnInit, OnChanges {
 
   checkReleventIndustries(value: any) {
     (value > 0) ? this.isShowReleventIndustryListStep = true : this.isShowReleventIndustryListStep = false;
+  }
+
+  raiseCloneEvent(){
+    this.selectedJobTitle= this.jobPosterModel.jobTitle;
+    this.selectedJobId= this.jobPosterModel._id;
+    this.isCloneButtonClicked=!this.isCloneButtonClicked;
+
+  }
+
+  onJobCloned(event:any){
+    this.jobPostEventEmitter.emit(event);
+    this.jobPostCloneSuccessEmitter.emit();
   }
 }

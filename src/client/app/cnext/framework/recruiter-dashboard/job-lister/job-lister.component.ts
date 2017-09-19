@@ -19,12 +19,13 @@ export class JobListerComponent implements  OnDestroy, OnChanges {
   @Input() headerInfoForJob: RecruiterHeaderDetails;
   @Input() screenType:string;
   @Input() recruiter: RecruiterDashboard;
-  @Output() jobEventEmitter: EventEmitter<any> = new EventEmitter();
+  @Output() jobPostEventEmitter: EventEmitter<string> = new EventEmitter();
+  @Output() jobListCloneSuccessEmitter: EventEmitter<boolean> = new EventEmitter();
   //public jobList:JobPosterModel[] = new Array(0);
   //public jobListToCheck:JobPosterModel[] = new Array(0);
   private selectedJobId:string;
   private selectedJobTitle:string;
-  private clone:boolean;
+  private isCloneButtonClicked:boolean;
   private toggle: boolean = false;
   private isJobeditted: boolean = false;
   private initialMessageToDisplay: string= Tooltip.RECRUITER_ENTRY_MESSAGE;
@@ -44,27 +45,28 @@ export class JobListerComponent implements  OnDestroy, OnChanges {
     this.toggleFormat();
   }
 
-  getIdToCloneJob(item:any) {
+  raiseCloneEvent(item:any) {
     this.selectedJobId=item._id;
     this.selectedJobTitle=item.jobTitle;
-    this.clone=!this.clone;
+    this.isCloneButtonClicked=!this.isCloneButtonClicked;
   }
   onJobClicked(item: any,isJobSubmit:boolean) {
     if (isJobSubmit) {
       this._router.navigate(['jobdashboard/', item]);
     } else {
-      this.jobEventEmitter.emit(item);
+      this.jobPostEventEmitter.emit(item);
     }
   }
 
   onJobEdit(item: any,isJobSubmit:boolean) {
     if (isJobSubmit) {
-      this.jobEventEmitter.emit(item);
+      this.jobPostEventEmitter.emit(item);
     }
   }
 
-  jobCloned(event:any) {
-    this.jobEventEmitter.emit(event);
+  onJobCloned(event:any) {
+    this.jobPostEventEmitter.emit(event);
+    this.jobListCloneSuccessEmitter.emit();
   }
   get format() {
     return this.toggle ? this.qCardModel.name : 'Date';

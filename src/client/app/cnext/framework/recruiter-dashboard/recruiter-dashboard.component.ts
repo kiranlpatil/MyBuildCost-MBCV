@@ -5,6 +5,7 @@ import {RecruiterHeaderDetails} from "../model/recuirterheaderdetails";
 import {ActivatedRoute, Router} from "@angular/router";
 import {RedirectRecruiterDashboardService} from "../../../user/services/redirect-dashboard.service";
 import {ErrorService} from "../error.service";
+import {Messages} from "../../../shared/constants";
 
 @Component({
   moduleId: module.id,
@@ -20,6 +21,8 @@ export class RecruiterDashboardComponent implements OnInit, AfterViewInit {
   private tabName: string;
   private jobId: string;
   private screenType: string='';
+  private isHideCloneSuccessMessage:boolean=true;
+
 
   constructor(private recruiterDashboardService: RecruiterDashboardService,
               private errorService:ErrorService,
@@ -47,7 +50,7 @@ export class RecruiterDashboardComponent implements OnInit, AfterViewInit {
         },error => this.errorService.onError(error));
   }
 
-  ngOnInit() {
+  ngOnInit() {debugger
     this.getRecruiterData();
   }
 
@@ -62,10 +65,15 @@ export class RecruiterDashboardComponent implements OnInit, AfterViewInit {
         let matchElement:any = document.getElementById('applicant_search');
         matchElement.click();
       }
+      if( params['jobid']){
+        this.jobId = params['jobid'];
+        this.jobSelected( params['jobid']);
+        this.isHideCloneSuccessMessage=false;
+        let matchElement: any = document.getElementById('post_job');
+        matchElement.click();
+      }
     });
-
   }
-
   navigateTo(nav: string) {
     if (nav !== undefined) {
       this._router.navigate([nav]);
@@ -76,5 +84,14 @@ export class RecruiterDashboardComponent implements OnInit, AfterViewInit {
     this.jobId = jobId;
     let matchElement: any = document.getElementById('post_job');
     matchElement.click();
+  }
+  onCloseMessage(){
+    this.isHideCloneSuccessMessage=true;
+  }
+  getCloneSuccessMessage(){
+    this.isHideCloneSuccessMessage=false;
+  }
+  getMessage() {
+    return Messages;
   }
 }

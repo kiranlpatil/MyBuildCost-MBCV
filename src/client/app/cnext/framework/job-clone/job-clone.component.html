@@ -13,6 +13,7 @@
               <div class="form-group">
                 <label>{{getLabel().JOB_TITLE}}</label>
                 <input class="form-control" type="text" maxlength="40" [(ngModel)]="selectedJobTitle"/>
+                <p class="error-messages" *ngIf="isShowEmptyTitleError">Job Title can not be Empty</p>
               </div>
               <div class="button-group">
                 <button (click)="onClone()" class="btn btn-primary">{{getButtonLabel().CLONE_BUTTON}}</button>

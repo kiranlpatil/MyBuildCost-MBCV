@@ -14,15 +14,15 @@
   <div class="card-view clearfix">
 
     <cn-job-clone [selectedJobId]="selectedJobId"  [selectedJobTitle]="selectedJobTitle"
-                  [clone]="clone"  (jobEventEmitter)="jobCloned($event)" ></cn-job-clone>
+                  [isCloneButtonClicked]="isCloneButtonClicked"
+                  (raiseJobEditViewEventEmitter)="onJobCloned($event)" ></cn-job-clone>
 
     <div  class="col-md-3" *ngFor="let item of jobListInput | orderBy:format;let i = index">
       <div class="dropdown">
         <button class="btn dropdown-toggle btn-menu" type="button" data-toggle="dropdown"><span
                 class="glyphicon glyphicon-option-vertical"></span></button>
         <ul class="dropdown-menu">
-          <li (click)="getIdToCloneJob(item)"><a>{{getLabel().CLONE_JOB}}</a></li>
-          <li><a>{{getLabel().CLOSE_JOB}}</a></li>
+          <li (click)="raiseCloneEvent(item)"><a>{{getLabel().CLONE_JOB}}</a></li>
         </ul>
       </div>
       <div class="panel clearfix" (click)="onJobClicked(item._id,item.isJobPosted)">

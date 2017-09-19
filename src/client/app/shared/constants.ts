@@ -18,6 +18,7 @@ export class AppSettings {
 }
 
 export class Messages {
+  public static  MSG_MSG_CLONED_SUCCESSFULLY="New Job is been added successfully";
   public static MSG_CANDIDATE_NOT_FOUND = 'No registered applicant with this name. Avoid using multiple spaces while searching with complete names.';
   public static MSG_CANDIDATE_SEARCH_NOT_FOUND = "Applicant's profile does not match with any of your open job profiles.";
   public static MSG_CNADIDATE_VISIBILITY_OFF = 'The selected applicant profile details are not displayed, since the applicant has marked it as private.';
@@ -527,7 +528,7 @@ export class Label {
   public static CONTACT_FIELD_LABEL: string = 'Contact';
   public static SAVE_PROFILE_LABEL: string = 'Save Profile';
   public static RESET_PASSWORD_MESSAGE: string = 'Please set new password for your';
-  public static JOB_TITLE: string = 'Job Title';
+  public static JOB_TITLE: string = 'New Job Title';
   public static CLONE_JOB: string = 'Clone Job';
   public static CLOSE_JOB: string = 'Close Job';
 }
