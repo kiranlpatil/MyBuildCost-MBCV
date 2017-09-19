@@ -719,6 +719,28 @@ cn-control-messages {
   font-size: 11px;
 }
 
+
+.welcome-message {
+  text-align: center;
+  padding: 15px;
+  position: relative;
+  bottom: 100%;
+  margin: -70px -10px 0;
+  background: #edf1f5;
+  top: 0;
+
+  h3 {
+    margin-top: 0;
+    font-size: 42px;
+  }
+
+  p {
+    text-align: center;
+    margin: 15px 0;
+  }
+
+}
+
 // Media Queries
 @media only screen and (max-width: 1024px) {
   .logout-dropdown {
@@ -852,6 +874,10 @@ cn-control-messages {
     text-overflow: clip;
     white-space: normal;
     width: 100%;
+  }
+
+  .welcome-message {
+    margin: -30px -10px 0;
   }
 }
 
@@ -1216,3 +1242,5 @@ select:focus {
   margin: 30px auto;
   display: inline-block;
 }
+
+

@@ -1,5 +1,5 @@
-import {Component, OnInit, ViewChild, ElementRef} from "@angular/core";
-import {Router} from "@angular/router";
+import {Component, OnInit, ViewChild, ElementRef, AfterViewInit} from "@angular/core";
+import {Router, ActivatedRoute} from "@angular/router";
 import {CandidateSignUpService} from "./candidate-sign-up.service";
 import {CandidateDetail} from "../models/candidate-details";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
@@ -16,7 +16,7 @@ import {SharedService} from "../../shared/services/shared-service";
   styleUrls: ['candidate-sign-up.component.css'],
 })
 
-export class CandidateSignUpComponent implements OnInit {
+export class CandidateSignUpComponent implements OnInit, AfterViewInit {
 
   @ViewChild('toaster') toaster: ElementRef;
   yearMatchNotFoundMessage: string = Messages.MSG_YEAR_NO_MATCH_FOUND;
@@ -37,10 +37,11 @@ export class CandidateSignUpComponent implements OnInit {
   private passwordMismatchMessage: string;
   private isChrome: boolean;
   private isToasterVisible: boolean = true;
+  private isGuideMessageVisible: boolean = false;
 
   constructor(private commonService: CommonService, private _router: Router, private dateService: DateService,
               private candidateService: CandidateSignUpService, private messageService: MessageService, private formBuilder: FormBuilder,
-              private sharedService: SharedService) {
+              private sharedService: SharedService, private activatedRoute: ActivatedRoute) {
 
     this.userForm = this.formBuilder.group({
       'first_name': ['', [ValidationService.requireFirstNameValidator, ValidationService.noWhiteSpaceValidator, ValidationService.nameValidator]],
@@ -68,6 +69,12 @@ export class CandidateSignUpComponent implements OnInit {
     }
     this.validBirthYearList = this.dateService.createBirthYearList(this.year);
     this.mainHeaderMenuHideShow = 'applicant';
+  }
+
+  ngAfterViewInit() {
+    this.activatedRoute.params.subscribe(params => {
+      this.isGuideMessageVisible = params['id'] === 'new_user' ? true : false;
+    });
   }
 
   closeToaster() {

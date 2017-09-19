@@ -5,6 +5,10 @@
     <button class="button-style" (click)="closeToaster()">x</button>
   </div>
   <div class="content">
+      <div *ngIf="isGuideMessageVisible" class="welcome-message">
+          <h3>Welcome !</h3>
+          <p>{{getMessages().GUIDE_MESSAGE_FOR_NEW_VIEWER}}</p>
+      </div>
     <h5>Register </h5>
     <form [formGroup]="userForm" (submit)="onSubmit()" class="employee-form" novalidate>
 
