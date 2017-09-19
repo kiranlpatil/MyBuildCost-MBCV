@@ -30,7 +30,11 @@ export class ShareContainerComponent implements OnInit {
       .subscribe(
         (data:ShareLink[]) => {
           if (data.length > 0) {
-            this._router.navigate([data[0].longUrl]);
+            let url = new URL('localhost:8080/' + data[0].longUrl);
+            let newUrl = data[0].longUrl.split('/')[1];
+            let id = newUrl.split('?')[0];
+            let access = url.searchParams.get('access_token');
+            this._router.navigate(['/value-portrait', id], {queryParams: {access_token: access}});
           } else {
             this._router.navigate(['/landing']);
           }

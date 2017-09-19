@@ -46,17 +46,17 @@ export class ShareComponent implements OnInit {
       this.buildValuePortraitUrl();
     }
     if (this.getUrlCount !== 0 && this.socialActionValue) {
-      this.bootTabAction(his.socialActionValue);
+      this.bootTabAction(this.socialActionValue);
     }
   }
 
   bootTabAction(socialActionValue:string) {
     if (socialActionValue === 'facebook') {
-      window.open(this.repoUrlFacebook, 'popupwindow', 'width=800,height=500,left=200,top=5,scrollbars,toolbar=0,resizable');
+      window.open(unescape(encodeURIComponent(this.repoUrlFacebook)), 'popupwindow', 'width=800,height=500,left=200,top=5,scrollbars,toolbar=0,resizable');
     } else if (socialActionValue === 'linkedin') {
-      window.open(this.repoUrlLinkedin, 'popupwindow', 'width=800,height=500,left=200,top=5,scrollbars,toolbar=0,resizable');
+      window.open(unescape(encodeURIComponent(this.repoUrlLinkedin)), 'popupwindow', 'width=800,height=500,left=200,top=5,scrollbars,toolbar=0,resizable');
     } else if (socialActionValue === 'twitter') {
-      window.open(this.repoUrlTwitter, 'popupwindow', 'width=800,height=500,left=200,top=5,scrollbars,toolbar=0,resizable');
+      window.open(unescape(encodeURIComponent(this.repoUrlTwitter)), 'popupwindow', 'width=800,height=500,left=200,top=5,scrollbars,toolbar=0,resizable');
     }
   }
 }
