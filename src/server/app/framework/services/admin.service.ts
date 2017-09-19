@@ -23,6 +23,7 @@ import RecruiterService = require("./recruiter.service");
 import CNextMessages = require("../shared/cnext-messages");
 import IndustryModel = require("../dataaccess/model/industry.model");
 import IndustryRepository = require("../dataaccess/repository/industry.repository");
+import {Actions, ConstVariables} from "../shared/sharedconstants";
 let usestracking = require('uses-tracking');
 
 class AdminService {
@@ -102,6 +103,20 @@ class AdminService {
     }
 
   };
+  addUsageDetailsValue(item: any, callback: (error: any, result: any) => void) {
+    try {
+      let value:number=0;
+      for (let i = 0; i < item.length; i++) {
+          value++;
+          item[i].action=ConstVariables.ActionsArray[item[i].action];
+          if(item.length===value) {
+            callback(null, item);
+          }
+      }
+    } catch (e) {
+      callback(e, null);
+    }
+  };
 
   generateUsageDetailFile(result: any, callback: (err: any, res: any) => void) {
     if (result && result.length > 0) {
@@ -111,6 +126,7 @@ class AdminService {
       //fs.writeFile('./src/server/public/usagedetail.csv', csv, function (err: any) {
       fs.writeFile('/home/bitnami/apps/jobmosis-staging/c-next/dist/prod/server/public/usagedetail.csv', csv, function (err: any) {
         if (err) throw err;
+        console.log('file written');
         callback(null, result);
       });
     } else {

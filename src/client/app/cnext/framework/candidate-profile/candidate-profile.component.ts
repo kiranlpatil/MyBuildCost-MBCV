@@ -495,10 +495,7 @@ export class CandidateProfileComponent implements OnInit, DoCheck, OnDestroy {
 
   showHideModal() {
     LocalStorageService.setLocalValue(LocalStorage.IS_CANDIDATE_FILLED, true);
-    this.showModalStyle = !this.showModalStyle;
-    this.setTimeoutId = setTimeout(() => {
-      this.onSubmit();
-    }, 1000 * 11);
+    this.onSubmit();
   }
 
   goToDashboard() {

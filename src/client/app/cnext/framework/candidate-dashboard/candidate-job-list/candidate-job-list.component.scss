@@ -20,5 +20,6 @@
 @media only screen and (max-width: 768px) {
   .card-view {
     margin-top: 123px;
+    min-height: calc(100vh - 123px);
   }
 }

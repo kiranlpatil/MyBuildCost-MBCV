@@ -300,21 +300,24 @@ header {
 }
 
 .clear-filter {
-  background: $theme-color;
-  color: $white;
+  border: 1px solid $theme-color;
+  color: $theme-color;
+  font-size: 12px;
   padding: 7px 14px;
   position: fixed;
-  top: 100px;
-  left: 131px;
+  top: 95px;
+  right: 420px;
   z-index: 1000;
-  font-size: 12px;
-  &:hover {
-    color: $white;
+  &:hover,
+  &:focus,
+  &:active {
+    border: 1px solid $theme-color;
+    color: $theme-color;
   }
 }
 
 .recruiter-clear-filter {
-  top: 175px !important;
+  top: 178px !important;
 }
 
 #matched-job,
@@ -781,7 +784,7 @@ header {
 
   header {
     .sort-by {
-      margin-top: 10px;
+      margin-top: 4px;
     }
   }
 }
@@ -791,6 +794,7 @@ header {
     max-height: inherit;
     overflow: auto;
     margin-bottom: 0;
+    padding-bottom: 45px;
 
     .col-sm-4 {
       width: 100%;
@@ -837,12 +841,17 @@ header {
   }
 
   .clear-filter {
-    background: transparent;
-    color: $theme-color;
-    left: 0;
+    left: 5px;
     padding: 7px;
     position: fixed;
-    top: 92px;
+    right: inherit;
+    top: 91px;
+  }
+
+  #candidate-dashboard-cards {
+    .home-page-footer {
+      position: absolute;
+    }
   }
 }
 

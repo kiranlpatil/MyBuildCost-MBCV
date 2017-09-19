@@ -82,7 +82,6 @@ export class ProfileDescriptionComponent implements OnInit {
   }
 
   onGotItGuideTour() {
-    debugger;
     this.guidedTourStatus = this.guidedTourService.updateTourStatus(ImagePath.CANDIDATE_OVERLAY_SCREENS_BASIC_INFO, true);
     this.guidedTourStatus = this.guidedTourService.getTourStatus();
     this.guidedTourService.updateProfileField(this.guidedTourStatus)
@@ -135,8 +134,6 @@ export class ProfileDescriptionComponent implements OnInit {
     }
   }
   onNext() {
-    var dataArray:string[] = new Array(0);
-    LocalStorageService.setLocalValue(LocalStorage.GUIDED_TOUR, JSON.stringify(dataArray));
     this.containsWhiteSpace = false;
     this.isValid = true;
     this.isLocationInvalid = false;

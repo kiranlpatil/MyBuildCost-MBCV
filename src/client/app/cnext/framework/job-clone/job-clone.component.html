@@ -1,20 +1,24 @@
-
 <div class="modal popup" [style.display]="setStyleForDialogueBox()">
   <div class="modal-bg">
     <div class="modal-dialog modal-md">
       <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" (click)="onCancel()">
+            <span>&times;</span>
+          </button>
+          <h5 class="modal-title text-center">{{getHeading().CLONE_JOB}}</h5>
+        </div>
         <div class="modal-body">
-          <div class="row">
             <div class="col-sm-12">
-              Job Title
-              <input type="text" maxlength="40" [(ngModel)]="selectedJobTitle"/>
-
+              <div class="form-group">
+                <label>{{getLabel().JOB_TITLE}}</label>
+                <input class="form-control" type="text" maxlength="40" [(ngModel)]="selectedJobTitle"/>
+              </div>
               <div class="button-group">
-                <button (click)="onClone()">Clone</button>
-                <button (click)="onCancel()">Cancel</button>
+                <button (click)="onClone()" class="btn btn-primary">{{getButtonLabel().CLONE_BUTTON}}</button>
+                <button (click)="onCancel()" class="btn btn-default">{{getButtonLabel().CANCEL_BUTTON}}</button>
               </div>
             </div>
-          </div>
         </div>
       </div>
     </div>

@@ -229,19 +229,31 @@ export function getUsageDetails(req: express.Request, res: express.Response, nex
             code: 403
           });
         } else {
-          adminService.generateUsageDetailFile(result, (err, respo)=> {
-            if (err) {
+          adminService.addUsageDetailsValue(result,(error, resp) => {
+            if (error) {
               next({
-                reason: 'Error In generating csv',//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
+                reason: 'Error In Retrieving',//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
                 message: 'error in create excel',
                 code: 403
               });
-            } else {
-              //var file = './src/server/public/usagedetail.csv';
-              var file = '/home/bitnami/apps/jobmosis-staging/c-next/dist/prod/server/public/usagedetail.csv';
-             res.download(file); // Set disposition and send it.
+            }else {
+              adminService.generateUsageDetailFile(resp, (err, respo)=> {
+                if (err) {
+                  next({
+                    reason: 'Error In generating csv',//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
+                    message: 'error in create excel',
+                    code: 403
+                  });
+                } else {
+                  //var file = './src/server/public/usagedetail.csv';
+                  var file = '/home/bitnami/apps/jobmosis-staging/c-next/dist/prod/server/public/usagedetail.csv';
+                  res.download(file); // Set disposition and send it.
+                }
+              });
             }
+
           });
+
         }
       });
     } else {

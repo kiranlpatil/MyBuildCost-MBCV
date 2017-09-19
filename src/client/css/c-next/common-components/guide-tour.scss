@@ -144,11 +144,12 @@
 }
 
 .more-about-myself-guided-tour {
-  bottom: 122px;
   color: $white;
   font-size: 18px;
+  left: 382px;
   padding: 0;
   position: fixed;
+  top: 144px;
   width: auto;
   p {
     color: $white;
@@ -248,5 +249,129 @@
     margin: 0 auto 20px;
     padding: 0;
     width: 600px;
+  }
+}
+
+.dashboard-job-posting-guided-tour {
+  color: $white;
+  font-size: 18px;
+  left: 240px;
+  padding: 61px 0 0 52px;
+  position: fixed;
+  top: 45px;
+  width: auto;
+  p {
+    color: $white;
+    font-weight: normal;
+    text-align: left;
+  }
+  .down-arrow {
+    top: 75px;
+  }
+}
+
+.dashboard-matching-degree-guided-tour {
+  color: $white;
+  font-size: 18px;
+  left: 131px;
+  padding: 22px 0 0 0;
+  position: fixed;
+  top: 412px;
+  width: auto;
+  p {
+    color: $white;
+    font-weight: normal;
+    text-align: left;
+  }
+  .down-arrow {
+    background: url(../assets/c-next/card-view/sprite.png) no-repeat -125px -648px;
+    left: -29px;
+    top: -21px;
+  }
+}
+
+.dashboard-menu-guided-tour {
+  color: $white;
+  font-size: 18px;
+  right: 63px;
+  padding: 22px 0 0 52px;
+  position: fixed;
+  top: 14px;
+  width: auto;
+  p {
+    color: $white;
+    font-weight: normal;
+    text-align: left;
+  }
+  .up-arrow {
+    left: inherit;
+    position: absolute;
+    right: -42px;
+    top: -1px;
+  }
+}
+
+.dashboard-filter-guided-tour {
+  color: $white;
+  font-size: 18px;
+  right: 100px;
+  padding: 22px 0 0 52px;
+  position: fixed;
+  top: 290px;
+  width: 390px;
+  p {
+    color: $white;
+    font-weight: normal;
+    text-align: left;
+  }
+  .up-arrow {
+    left: inherit;
+    position: absolute;
+    right: -42px;
+    top: -1px;
+  }
+}
+
+.profile-submission-guided-tour {
+  bottom: 153px;
+  color: $white;
+  font-size: 18px;
+  left: inherit;
+  padding: 0;
+  position: fixed;
+  right: 48px;
+  top: inherit;
+  width: auto;
+  p {
+    color: $white;
+    font-weight: normal;
+    text-align: left;
+  }
+  .down-arrow {
+    background: url(../assets/c-next/card-view/sprite.png) no-repeat -124px -657px;
+    bottom: -54px;
+    left: 167px;
+    position: absolute;
+    top: inherit;
+    transform: rotate(-115deg);
+  }
+}
+
+
+@media screen and (min-width: 1367px) and (max-width: 1920px) {
+  .dashboard-job-posting-guided-tour {
+    left: 345px;
+    top: 103px;
+  }
+  .dashboard-matching-degree-guided-tour {
+    left: 231px;
+    top: 576px;
+  }
+  .more-about-myself-guided-tour {
+    left: 582px;
+    top: 171px;
+  }
+  .profile-submission-guided-tour {
+    right: 211px;
   }
 }

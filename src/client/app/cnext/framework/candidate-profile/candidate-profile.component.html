@@ -128,9 +128,37 @@
       <div class="profile-configurations" [hidden]="!showAboutMySelf" >
         <div class="text-right">
           <div class="button-group" *ngIf="!candidate.isSubmitted">
-            <button class="btn btn-success" tabindex="1" (click)="showHideModal()">Submit</button>
+            <button class="btn btn-success" tabindex="1" data-toggle="modal" data-target="#note-modal">Submit</button>
           </div>
           <div class="button-group" *ngIf="candidate.isSubmitted">
+
+          </div>
+
+          <div id="note-modal" class="modal fade note-modal" role="dialog">
+            <div class="modal-dialog">
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">Note of Trust</h4>
+                </div>
+                <div class="modal-body">
+                  <p>
+                    JobMosis believes in building a sustainable ecosystem for candidates and recruiters that is based
+                    on trust and transparency. We strive to reduce the inconvenience caused to all parties due to
+                    false / incorrect information provided in the individual and job profiles. We believe that
+                    individual acts of trust and faith add up to make the world a better place. We appeal to each
+                    user to uphold the sanctity of the JobMosis platform by providing truthful information about
+                    their profiles.
+                  </p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn btn-info" (click)="showHideModal()" data-dismiss="modal">Proceed</button>
+                  <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                </div>
+              </div>
+
+            </div>
           </div>
         </div>
       </div>
@@ -139,27 +167,3 @@
   </div>
   <tpl-footer></tpl-footer>
 </div>
-
-
-<div class="modal popup get-set-go" [style.display]="getStyleModal()">
-  <div class="modal-bg">
-    <div class="modal-dialog modal-md">
-      <div class="modal-content">
-        <div class="modal-body">
-          <div class="row">
-            <div *ngIf="!candidate.isSubmitted" class="col-sm-12 get-set-go">
-              <img src="{{getImagePath().GET_SET_GO}}" alt="Get Set Go"/>
-              <p>{{jobSearchForFirstTimeMessage}}</p>
-            </div>
-            <div *ngIf="candidate.isSubmitted" class="col-sm-12 get-set-go">
-              <p>{{jobSearchMessage}}</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-

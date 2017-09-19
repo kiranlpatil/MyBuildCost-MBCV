@@ -62,12 +62,12 @@
     &:hover,
     &:active,
     &:focus {
-      background: $cn-theme-btn-danger !important;
+      background: $cn-theme-btn-danger;
       color: $white !important;
     }
 
     &:disabled {
-      background: $cn-theme-btn-danger !important;
+      background: $cn-theme-btn-danger;
     }
   }
 

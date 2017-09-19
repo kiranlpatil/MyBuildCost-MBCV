@@ -1,7 +1,7 @@
 
 <div class="value-portrait-section">
   <div class="top-header">
-    <div class="col-md-5 col-xs-10 no-padding">
+    <div class="col-sm-5 col-xs-10 no-padding">
       <h1>
         Value Portrait
         <span> Experience is what it's all about</span>
@@ -10,9 +10,12 @@
       <div *ngIf="isShareView">
       <button class="btn btn-get-portrait" (click)="routeToSignUpPage()">Create your Own Value Portrait</button>
       </div>
-    <div *ngIf="!isShareView" class="col-md-7 col-xs-2 no-padding">
+    <div *ngIf="!isShareView" class="col-sm-7 col-xs-2 no-padding">
       <div class="job-mosis-white-logo" (click)="navigateTo();">
         <img src="/assets/c-next/header/job-mosis-logo-white.png"/>
+        <div class="hidden-xs pull-left" *ngIf="!isShareView && isCandidate">
+          <cn-share></cn-share>
+        </div>
       </div>
     </div>
   </div>

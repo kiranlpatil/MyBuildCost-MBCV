@@ -1,8 +1,34 @@
-<div class="guided-tour-section"
+<div class="guided-tour-section guided-tour-overlay"
      *ngIf="guidedTourStatus?.indexOf(guidedTourImgOverlayScreensProfile) == -1 && isGuideImg == true">
   <img src={{guidedTourImgOverlayScreensProfilePath}} alt="Profile Picture">
-  <div class="got-it-btn" (click)="onGotItGuideTour()">
-    <span>OK, Got it</span>
+  <div class="guided-tour-overlay-bg">
+    <div class="got-it-btn" (click)="onGotItGuideTour()">
+      <span>OK, Got it</span>
+    </div>
+  </div>
+</div>
+<div class="guided-tour-description"
+     *ngIf="guidedTourStatus?.indexOf(guidedTourImgOverlayScreensProfile) == -1 && isGuideImg == true">
+  <div class="profile-submission-guided-tour">
+    <p>
+      Now you have reached the final step of Profile Submission.<br/><br/>
+      Here you will select your Profile Visibility to the Recruiter.<br/><br/>
+      If Yes: If "Yes", your profile will be available for Recruiter.<br/>
+      If No: If "No", your profile will not be visible to any Recruiter.
+    </p>
+    <span class="down-arrow"></span>
+  </div>
+</div>
+<div class="guided-tour-description"
+     *ngIf="guidedTourStatus?.indexOf(guidedTourImgOverlayScreensProfile) == -1 && isGuideImg == true">
+  <div class="guided-tour-notes">
+    <p>
+      <span>Note:</span><br/>
+      If you will edit your profile before submitting, you can edit by clicking on
+      relevent section <br/>
+      It is recommended that you keep the settings to 'Yes' if you wish a job change, You can <br/>
+      change this setting later.
+    </p>
   </div>
 </div>
 <div class="clearfix divider clear visible-xs">&nbsp;</div>
