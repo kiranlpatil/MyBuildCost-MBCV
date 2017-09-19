@@ -2,7 +2,7 @@
 <button ceiboShare [facebook]="{u: repoUrl}" class="btn-facebook"></button>
 -->
 <div class="share-button-container">
-  <a [href]="repoUrlFacebook" target="_blank" class="btn-share btn-facebook" alt="Facebook"> </a>
-  <a [href]="repoUrlLinkedin" target="_blank" class="btn-share btn-linkedin" alt="Linkedin"> </a>
-  <a [href]="repoUrlTwitter" target="_blank" class="btn-share btn-twitter" alt="Twitter"> </a>
+  <a (click)="openTab('facebook')" class="btn-share btn-facebook" alt="Facebook"> </a>
+  <a (click)="openTab('linkedin')" class="btn-share btn-linkedin" alt="Linkedin"> </a>
+  <a (click)="openTab('twitter')" class="btn-share btn-twitter" alt="Twitter"> </a>
 </div>

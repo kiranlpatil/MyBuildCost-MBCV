@@ -203,6 +203,7 @@ class AuthInterceptor {
       iss: issuer, // issue
       shareKey: customKey
     }, ConstVariables.AUTHENTICATION_JWT_KEY);
+
     return token;
   }
 

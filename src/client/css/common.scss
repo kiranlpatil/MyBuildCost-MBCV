@@ -719,6 +719,27 @@ cn-control-messages {
   font-size: 11px;
 }
 
+.welcome-message {
+  text-align: center;
+  padding: 15px;
+  position: relative;
+  bottom: 100%;
+  margin: -70px -10px 0;
+  background: #edf1f5;
+  top: 0;
+
+  h3 {
+    margin-top: 0;
+    font-size: 42px;
+  }
+
+  p {
+    text-align: center;
+    margin: 15px 0;
+  }
+
+}
+
 .share-button-container {
   width: 100%;
   text-align: center;
@@ -889,6 +910,10 @@ cn-control-messages {
     text-overflow: clip;
     white-space: normal;
     width: 100%;
+  }
+
+  .welcome-message {
+    margin: -30px -10px 0;
   }
 
   .dashboard-view {
@@ -1241,4 +1266,67 @@ select:focus {
     }
   }
 }
+
+.btn-facebook {
+  background: url(../assets/c-next/card-view/sprite.png) no-repeat 0px -697px;
+  /*position: fixed;
+  right: 24px;
+  top: 88px;*/
+  background-color: $facebook-share;
+  border: 1px solid $facebook-share;
+  border-radius: 0;
+  padding: 22px 20px 8px;
+  z-index: 1000;
+  margin: 0 4px;
+
+  &:hover, &:active, &:focus {
+    background-color: $facebook-share;
+    border: 1px solid $facebook-share;
+  }
+}
+
+.btn-linkedin {
+  background: url(../assets/c-next/card-view/sprite.png) no-repeat -41px -697px;
+  /*position: fixed;
+  right: 24px;
+  top: 137px;*/
+  background-color: $linkedin-share;
+  border: 1px solid $linkedin-share;
+  border-radius: 0;
+  padding: 22px 20px 8px;
+  z-index: 1000;
+  margin: 0 4px;
+
+  &:hover, &:active, &:focus {
+    background-color: $linkedin-share;
+    border: 1px solid $linkedin-share;
+  }
+}
+
+.btn-twitter {
+  background: url(../assets/c-next/card-view/sprite.png) no-repeat -79px -697px;
+  /*position: fixed;
+  right: 24px;
+  top: 185px;*/
+  background-color: $twitter-share;
+  border: 1px solid $twitter-share;
+  border-radius: 0;
+  padding: 22px 20px 8px;
+  z-index: 1000;
+  margin: 0 4px;
+
+  &:hover, &:active, &:focus {
+    background-color: $twitter-share;
+    border: 1px solid $twitter-share;
+  }
+}
+
+.share-button-container {
+  width: 100%;
+  text-align: center;
+  height: auto;
+  margin: 30px auto;
+  display: inline-block;
+}
+
 

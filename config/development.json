@@ -2,7 +2,7 @@
   "TplSeed": {
     "database": {
       "host": "127.0.0.1",
-      "name": "c-next-backend"
+      "name": "c-next-backend2"
     },
     "mail": {
       "host": "http://localhost:8080/",
