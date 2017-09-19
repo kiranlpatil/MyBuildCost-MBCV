@@ -34,6 +34,23 @@ class ShareController {
 
   }
 
+  getActualUrlForShare(req:express.Request, res:express.Response) {
+    try {
+      var shareService:ShareService = new ShareService();
+      let shortUrl = req.params.shortUrl;
+      var query:any = {'shortUrl': shortUrl.toString()};
+      shareService.retrieveUrl(query, (err, response) => {
+        if (err) {
+          res.status(304).send(err);
+        } else {
+          res.status(200).send(response);
+        }
+      });
+    } catch (e) {
+      res.status(403).send({message: e.message});
+    }
+  }
+
 }
 
 export = ShareController;

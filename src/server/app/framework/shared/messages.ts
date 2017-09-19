@@ -104,6 +104,8 @@ class Messages {
 
   public static MSG_ERROR_API_CHECK = 'Invalid access token';
   public static MSG_ERROR_IF_USER_ID_INVALID_FROM_URL_PARAMETER = 'Problem with id which you provided';
+  public static MSG_ERROR_FETCH_SHARE_URL_FAILED = 'Fetch to share link url failed';
+  public static MSG_ERROR_IF_STORE_TO_SHARE_LINK_FAILED = 'Share link failed when going to store';
 }
 export=Messages;
 

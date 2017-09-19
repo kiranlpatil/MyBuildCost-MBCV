@@ -22,10 +22,12 @@ class AuthInterceptor {
 
 
     passport.use(new BearerStrategy(function (token: any, done: any) {
+      console.log('----------------------token---------------------', token);
       var decoded: any = null;
       var isShareApi:boolean = false;
       try {
         decoded = jwt.decode(token, ConstVariables.AUTHENTICATION_JWT_KEY);
+        console.log('----------------------decoded---------------------', decoded);
       } catch (e) {
         var err = new Error();
         err.message = Messages.MSG_ERROR_INVALID_TOKEN;
@@ -199,10 +201,12 @@ class AuthInterceptor {
     } else {
       issuer = user._id;
     }
+    console.log('------------in issue token---------------------------------', issuer, user);
     var token = jwt.encode({
       iss: issuer, // issue
       shareKey: customKey
     }, ConstVariables.AUTHENTICATION_JWT_KEY);
+
     return token;
   }
 
