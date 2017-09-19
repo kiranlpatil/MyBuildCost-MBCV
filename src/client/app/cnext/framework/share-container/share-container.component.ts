@@ -30,7 +30,7 @@ export class ShareContainerComponent implements OnInit {
       .subscribe(
         (data:ShareLink[]) => {
           if (data.length > 0) { //TODO:Find proper solution ->krishna
-            let url:any = new URL('localhost:8080/' + data[0].longUrl);
+            let url:any = new URL('localhost:8080/' + data[0].shortUrl);
             let newUrl = data[0].longUrl.split('/')[1];
             let id = newUrl.split('?')[0];
             let access = url.searchParams.get('access_token');
