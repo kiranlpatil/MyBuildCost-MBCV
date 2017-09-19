@@ -853,6 +853,10 @@ cn-control-messages {
     white-space: normal;
     width: 100%;
   }
+
+  .dashboard-view {
+    margin-bottom: 0;
+  }
 }
 
 @media only screen and (max-width: 480px) {
@@ -1157,13 +1161,10 @@ select:focus {
 
 .btn-facebook {
   background: url(../assets/c-next/card-view/sprite.png) no-repeat 0px -697px;
-  /*position: fixed;
-  right: 24px;
-  top: 88px;*/
   background-color: $facebook-share;
   border: 1px solid $facebook-share;
   border-radius: 0;
-  padding: 22px 20px 8px;
+  padding: 22px 20px 0;
   z-index: 1000;
   margin: 0 4px;
 
@@ -1175,13 +1176,10 @@ select:focus {
 
 .btn-linkedin {
   background: url(../assets/c-next/card-view/sprite.png) no-repeat -41px -697px;
-  /*position: fixed;
-  right: 24px;
-  top: 137px;*/
   background-color: $linkedin-share;
   border: 1px solid $linkedin-share;
   border-radius: 0;
-  padding: 22px 20px 8px;
+  padding: 22px 20px 0;
   z-index: 1000;
   margin: 0 4px;
 
@@ -1193,13 +1191,10 @@ select:focus {
 
 .btn-twitter {
   background: url(../assets/c-next/card-view/sprite.png) no-repeat -79px -697px;
-  /*position: fixed;
-  right: 24px;
-  top: 185px;*/
   background-color: $twitter-share;
   border: 1px solid $twitter-share;
   border-radius: 0;
-  padding: 22px 20px 8px;
+  padding: 22px 20px 0;
   z-index: 1000;
   margin: 0 4px;
 
@@ -1215,18 +1210,5 @@ select:focus {
   height: auto;
   margin: 30px auto;
   display: inline-block;
-}
-
-.note-modal {
-  .modal-dialog {
-    min-width: 800px;
-    top: 10%;
-  }
-  .modal-body {
-    padding: 20px;
-    p {
-      font-size: 14px;
-      text-align: left;
-    }
-  }
+  padding: 0 20px;
 }

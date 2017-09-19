@@ -791,6 +791,7 @@ header {
     max-height: inherit;
     overflow: auto;
     margin-bottom: 0;
+    padding-bottom: 45px;
 
     .col-sm-4 {
       width: 100%;
@@ -843,6 +844,12 @@ header {
     padding: 7px;
     position: fixed;
     top: 92px;
+  }
+
+  #candidate-dashboard-cards {
+    .home-page-footer {
+      position: absolute;
+    }
   }
 }
 

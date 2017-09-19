@@ -2,8 +2,8 @@
   <div class="content">
    <h4>{{dashboardWelcomeMessage}}</h4>
       <p>{{initialMessageToDisplay}}</p>
-      <img src="assets/c-next/recruiter-welcome-screen/post-new-job.png" alt="Post New Job"/>
-      <p>Please click on "Post New Job" to proceed.</p>
+    <img src="{{getImagePath().POST_NEW_JOB}}" alt="Post New Job"/>
+    <p>{{getMessage().POST_NEW_JOB_MESSAGE}}</p>
   </div>
 </div>
 
@@ -21,11 +21,11 @@
         <button class="btn dropdown-toggle btn-menu" type="button" data-toggle="dropdown"><span
                 class="glyphicon glyphicon-option-vertical"></span></button>
         <ul class="dropdown-menu">
-          <li (click)="getIdToCloneJob(item)"><a>Clone Job</a></li>
+          <li (click)="getIdToCloneJob(item)"><a>{{getLabel().CLONE_JOB}}</a></li>
+          <li><a>{{getLabel().CLOSE_JOB}}</a></li>
         </ul>
       </div>
       <div class="panel clearfix" (click)="onJobClicked(item._id,item.isJobPosted)">
-       <!-- <span class="glyphicon glyphicon-trash"></span>-->
         <div class="job-posted clearfix">
           <div class="col-xs-2 no-padding">
 
@@ -43,7 +43,7 @@
           <div class="contact-info clearfix">
             <div class="col-sm-12 no-padding" title="Date Posted : {{item.postingDate | date:'mediumDate'}}">
               <div class="col-xs-2 no-padding">
-                <img src="../../../../assets/c-next/post-job/calendar.png" alt="calendar"/>
+                <img src="{{getImagePath().CALENDAR}}" alt="calendar"/>
               </div>
               <div class="col-xs-10 padding-left15" title="Date Posted : {{item.postingDate | date:'mediumDate'}}">
                 <p>{{item.postingDate | date:'mediumDate'}}</p>
@@ -51,7 +51,7 @@
             </div>
             <div class="col-sm-12 no-padding" title="Hiring Manager : {{item.hiringManager}}">
               <div class="col-xs-2 no-padding">
-                <img src="../../../../assets/c-next/post-job/contact-person.png" alt="Hiring Manager"/>
+                <img src="{{getImagePath().CONTACT_PERSON}}" alt="Hiring Manager"/>
               </div>
               <div class="col-xs-10 padding-left15" title="Hiring Manager : {{item.hiringManager}}">
                 <p class="hiring-manager">{{item.hiringManager}}</p>

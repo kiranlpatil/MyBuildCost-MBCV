@@ -20,7 +20,7 @@
   .copyright-statement {
     float: left;
     text-align: left;
-    width: 50%;
+    width: 30%;
   }
 
   .faq {
@@ -28,7 +28,7 @@
     float: right;
     margin-top: 4px;
     text-align: right;
-    width: 50%;
+    width: 70%;
   }
 
   .faq-statement {
@@ -50,6 +50,8 @@
 @media only screen and (max-width: 767px) {
   .home-page-footer {
     padding: 0 5px;
+    height: 45px;
+    position: relative;
 
     p,
     a {
@@ -57,19 +59,20 @@
     }
 
     .copyright-statement {
-      text-align: left;
-      width: 60%;
+      text-align: center;
+      width: 100%;
     }
 
     .faq {
+      text-align: center;
       margin-top: 3px;
-      width: 40%;
+      width: 100%;
     }
 
     .faq-statement {
       .glyphicon {
         font-size: 12px;
-        margin: 0 0 0 10px;
+        margin: 0 5px 0 10px;
       }
     }
   }

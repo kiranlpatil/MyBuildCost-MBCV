@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnChanges, Output} from "@angular/core";
 import {JobPosterService} from "../job-poster/job-poster.service";
+import {Button, Headings, Label} from "../../../shared/constants";
 
 @Component({
   moduleId: module.id,
@@ -47,5 +48,17 @@ export class JobCloneComponent implements OnChanges {
 
   onCancel() {
     this.showCloneDialogue = false;
+  }
+
+  getHeading() {
+    return Headings;
+  }
+
+  getLabel() {
+    return Label;
+  }
+
+  getButtonLabel() {
+    return Button;
   }
 }

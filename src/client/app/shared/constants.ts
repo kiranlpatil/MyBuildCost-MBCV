@@ -18,9 +18,9 @@ export class AppSettings {
 }
 
 export class Messages {
-  public static MSG_CANDIDATE_NOT_FOUND = "No registered applicant with this name. Avoid using multiple spaces while searching with complete names.";
+  public static MSG_CANDIDATE_NOT_FOUND = 'No registered applicant with this name. Avoid using multiple spaces while searching with complete names.';
   public static MSG_CANDIDATE_SEARCH_NOT_FOUND = "Applicant's profile does not match with any of your open job profiles.";
-  public static MSG_CNADIDATE_VISIBILITY_OFF = "The selected applicant profile details are not displayed, since the applicant has marked it as private.";
+  public static MSG_CNADIDATE_VISIBILITY_OFF = 'The selected applicant profile details are not displayed, since the applicant has marked it as private.';
   public static MSG_SUCCESS_LOGIN: string = 'You are successfully signed in.';
   public static MSG_SUCCESS_REGISTRATION: string = 'Kindly verify your account.';
   public static MSG_SUCCESS_CHANGE_MOBILE_NUMBER: string = 'Mobile number updated successfully.Kindly sign in';
@@ -206,7 +206,9 @@ export class Messages {
   public static KEYSKILLS_PLACEHOLDER_DESKTOP = 'E.g. for IT:- Java, C++. for Manufacturing:- Metal Cutting';
   public static KEYSKILLS_PLACEHOLDER_MOBILE = 'E.g. for IT:- Java, C++';
   public static FAQ_CONTACT_NUMBER = '+91-8669601612';
+  public static FAQ_CONTACT_EMAIL = 'support@jobmosis.com';
   public static FAQ_MESSAGE = 'Have any questions?';
+  public static POST_NEW_JOB_MESSAGE = 'Please click on "Post New Job" to proceed.';
 }
 
 export class NavigationRoutes {
@@ -380,6 +382,9 @@ export class ImagePath {
   public static LAST_NAME_ICON = './assets/framework/images/icons/last-name.svg';
   public static LAST_NAME_ICON_GREY = './assets/framework/images/icons/last-name-grey.svg';
   public static GET_SET_GO = './assets/c-next/get-set-go/get_set_go.gif';
+  public static CALENDAR = './assets/c-next/post-job/calendar.png';
+  public static CONTACT_PERSON = './assets/c-next/post-job/contact-person.png';
+  public static POST_NEW_JOB = './assets/c-next/recruiter-welcome-screen/post-new-job.png';
 
   //guided tour images for desktop
   public static BASE_ASSETS_PATH_DESKTOP = './assets/c-next/guided-tour/tour-for-desktop/';
@@ -508,7 +513,7 @@ export class Headings {
   public static CHANGE_EMAIL_HEADING: string = 'Change your Email';
   public static CHANGE_MOBILE_NUMBER_HEADING: string = 'Change Your Mobile Number';
   public static RESET_PASSWORD_HEADING: string = 'RESET PASSWORD';
-
+  public static CLONE_JOB: string = 'Clone Job';
 }
 
 export class Label {
@@ -521,9 +526,14 @@ export class Label {
   public static CONTACT_FIELD_LABEL: string = 'Contact';
   public static SAVE_PROFILE_LABEL: string = 'Save Profile';
   public static RESET_PASSWORD_MESSAGE: string = 'Please set new password for your';
+  public static JOB_TITLE: string = 'Job Title';
+  public static CLONE_JOB: string = 'Clone Job';
+  public static CLOSE_JOB: string = 'Close Job';
 }
 
 export class Button {
   public static CHANGE_PASSWORD_BUTTON: string = 'Change Password';
   public static RESET_PASSWORD_BUTTON: string = 'RESET PASSWORD';
+  public static CLONE_BUTTON: string = 'CLONE';
+  public static CANCEL_BUTTON: string = 'CANCEL';
 }

@@ -1,7 +1,7 @@
-import { Component, OnInit,OnDestroy } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { LocalStorage } from '../../../shared/constants';
-import { LocalStorageService } from '../../../shared/services/localstorage.service';
+import {Component, OnDestroy, OnInit} from "@angular/core";
+import {ActivatedRoute, Router} from "@angular/router";
+import {LocalStorage} from "../../../shared/constants";
+import {LocalStorageService} from "../../../shared/services/localstorage.service";
 
 
 @Component({
@@ -15,8 +15,12 @@ export class ValuePortraitContainerComponent implements OnInit,OnDestroy {
 
   _userId:string;
   isShareView:boolean = false;
+  private isCandidate: boolean;
 
   constructor(private _router:Router, private activatedRoute:ActivatedRoute) {
+    if (LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE) === 'true') {
+      this.isCandidate = true;
+    }
   }
 
   navigateTo() {
@@ -58,5 +62,4 @@ export class ValuePortraitContainerComponent implements OnInit,OnDestroy {
   routeToSignUpPage() {
     this._router.navigate(['/applicant-signup']);
   }
-  
 }
