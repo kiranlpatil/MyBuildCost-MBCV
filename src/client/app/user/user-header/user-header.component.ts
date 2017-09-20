@@ -35,5 +35,9 @@ export class UserHeaderComponent {
       let host = AppSettings.HTTP_CLIENT + window.location.hostname;
       window.location.href = host;
     }
+
+  getImagePath() {
+    return ImagePath;
+  }
 }
 

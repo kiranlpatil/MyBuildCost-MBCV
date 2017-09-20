@@ -72,13 +72,13 @@
     }
 
     .custom-file-upload {
-      border-radius: 0px;
+      border-radius: 0;
       cursor: pointer;
       display: inline-block;
       float: left;
       margin: 9px 10px 0 0;
       height: 25px;
-      padding: 0px;
+      padding: 0;
       background: url(../assets/c-next/card-view/sprite.png) no-repeat -2px -395px;
       width: 26px;
     }
@@ -97,7 +97,7 @@
   }
 
   .describe-error-message {
-    left: 0px;
+    left: 0;
     position: absolute;
     top: 118px;
     width: 100%;
@@ -121,7 +121,7 @@
     border-left: 0;
     border-right: 0;
     box-shadow: 0 0 0;
-    padding: 6px 12px 6px 0px;
+    padding: 6px 12px 6px 0;
   }
 
   label {
@@ -169,7 +169,7 @@
   width: 24px;
   height: 23px;
   margin-top: -22px;
-  margin-right: 0px;
+  margin-right: 0;
   background: url(../assets/c-next/card-view/sprite.png) no-repeat -106px -399px;
 }
 
@@ -208,9 +208,16 @@
   }
   .company-image {
     border: 0;
-    height: 250px;
+    height: 160px;
   }
   .company-details {
+
+    .content {
+      margin: 0;
+      position: relative;
+      width: calc(100% - 30px);
+    }
+
     .upload-documents {
       .file-name {
         overflow: visible;
@@ -220,6 +227,17 @@
         word-break: keep-all;
         text-align: right;
       }
+    }
+
+    .button-group {
+      width: 100%;
+    }
+  }
+
+  .main-form-wrapper {
+    h5.heading-text {
+      font-size: 20px;
+      margin-top: 80px;
     }
   }
 }
