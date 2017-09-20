@@ -9,6 +9,14 @@
     padding: 0;
   }
 
+  .modal-title {
+    background: $modal-bg1;
+    color: $theme-color;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 0;
+  }
+
   .modal-content {
     background: $modal-bg1;
     border-radius: 0;
@@ -18,14 +26,23 @@
   p {
     color: $text-color;
     font-size: 13px;
-    text-align: center;
+    padding: 0 15px;
+    text-align: left;
   }
 
   .close {
+    clear: both;
     position: absolute;
-    top: 15px;
     right: 15px;
+    top: 15px;
     z-index: 15;
+  }
+
+  .button-group {
+    margin: 0;
+    padding: 0 15px;
+    text-align: left;
+    clear: both;
   }
 }
 

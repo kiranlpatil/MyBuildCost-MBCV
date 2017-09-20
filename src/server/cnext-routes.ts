@@ -14,6 +14,7 @@ import * as adminController from "./app/framework/controllers/admin.controller";
 let AuthInterceptor = require('./app/framework/interceptor/auth.interceptor');
 import ShareController = require("./app/framework/share/controller/share.controller");
 //import * as shareController from "./app/framework/share/controller/share.controller";
+import * as sharedService from "./app/framework/shared/shared.service";
 
 this.authInterceptor = new AuthInterceptor();
 
@@ -67,4 +68,8 @@ export function cnextInit(app: express.Application) { //todo add interceptor to 
   // API for Uses Tracking
   app.put('/api/usesTracking/:recruiterId/:jobProfileId/:candidateId/:action', jobProfileController.createUsesTracking);
   app.get('/api/usageDetails', this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, adminController.getUsageDetails);
+
+  app.use(sharedService.logHandler);
+  app.use(sharedService.errorHandler);
+  app.use(sharedService.clientHandler);
 }

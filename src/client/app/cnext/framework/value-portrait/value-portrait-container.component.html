@@ -1,26 +1,25 @@
-
 <div class="value-portrait-section">
   <div class="top-header">
     <div class="col-sm-5 col-xs-10 no-padding">
+      <div class="back-btn" (click)="navigateTo();"></div>
       <h1>
-        Value Portrait
-        <span> Experience is what it's all about</span>
+        {{getLabel().VALUE_PORTRAIT_HEADER}}
+        <span> {{getLabel().VALUE_PORTRAIT_TITLE}}  </span>
       </h1>
     </div>
       <div *ngIf="isShareView">
-      <button class="btn btn-get-portrait" (click)="routeToSignUpPage()">Create your Own Value Portrait</button>
+      <button class="btn btn-get-portrait" (click)="routeToSignUpPage()">{{getButtons().VALUE_PORTRAIT_BUTTON}}</button>
       </div>
     <div *ngIf="!isShareView" class="col-sm-7 col-xs-2 no-padding">
-      <div class="job-mosis-white-logo" (click)="navigateTo();">
-        <img src="/assets/c-next/header/job-mosis-logo-white.png"/>
+      <div class="job-mosis-white-logo">
+        <img (click)="navigateTo();" src="/assets/c-next/header/job-mosis-logo-white.png"/>
         <div class="hidden-xs pull-left" *ngIf="!isShareView && isCandidate">
           <cn-share></cn-share>
         </div>
       </div>
     </div>
   </div>
-    <div class="value-portrait-container">
-        <cn-value-portrait [isShareView]="isShareView" [userId]="_userId"></cn-value-portrait>
-    </div>
-
+  <div class="value-portrait-container">
+    <cn-value-portrait [isShareView]="isShareView" [userId]="_userId"></cn-value-portrait>
+  </div>
 </div>

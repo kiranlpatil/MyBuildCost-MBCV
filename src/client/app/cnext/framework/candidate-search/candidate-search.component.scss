@@ -52,7 +52,7 @@
     border: 0;
     float: left;
     height: 38px;
-    margin: 0 0 0 0px;
+    margin: 0;
     padding: 8px 31px;
   }
 }
@@ -65,7 +65,9 @@
   text-align: left;
   margin-top: 100px;
   .card-view {
+    float: left;
     margin-top: 40px;
+    width: 100%;
   }
   .empty-list-message {
     left: 53%;
@@ -81,5 +83,3 @@
     padding: 7px 25px;
   }
 }
-
-

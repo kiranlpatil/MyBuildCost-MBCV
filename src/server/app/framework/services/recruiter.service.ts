@@ -158,7 +158,7 @@ class RecruiterService {
         } else {
           let error:any;
           if (record === null) {
-            error = new Error('Unable to update posted job maybe recruiter not found. ');
+            error = new Error( 'Job cloning is failed' );
             callback(error, null);
           } else {
             callback(err, null);

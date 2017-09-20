@@ -23,28 +23,3 @@
   }
 }
 
-//modal
-.modal {
-  .modal-dialog {
-    h5 {
-      font-weight: bold;
-      color: $cn-theme-color;
-      padding: 0;
-      font-size: 16px;
-      background: $modal-bg1 !important;
-    }
-  }
-
-  .modal-content {
-    border: 0;
-  }
-
-  .modal-body {
-    text-align: left;
-    padding: 15px 15px 0;
-
-    p {
-      text-align: left;
-    }
-  }
-}

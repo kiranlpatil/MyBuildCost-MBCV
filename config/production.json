@@ -26,6 +26,7 @@
       "senderId": "JOBMOS",
       "routerNumber": "4"
     },
+    "filePathForMasterDataExcel" : "./src/server/app/framework/public/config/NewIndustryDataExcel.xlsx",
     "folderPath":"/home/bitnami/apps/jobmosis-staging/c-next/dist/prod/server/public/candidate.csv"
   }
 }

@@ -18,7 +18,7 @@
                   (raiseJobEditViewEventEmitter)="onJobCloned($event)" ></cn-job-clone>
 
     <div  class="col-md-3" *ngFor="let item of jobListInput | orderBy:format;let i = index">
-      <div class="dropdown">
+      <div class="dropdown clone-job-menu">
         <button class="btn dropdown-toggle btn-menu" type="button" data-toggle="dropdown"><span
                 class="glyphicon glyphicon-option-vertical"></span></button>
         <ul class="dropdown-menu">

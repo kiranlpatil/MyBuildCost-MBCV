@@ -76,6 +76,18 @@
     color: $light-black1;
     padding: 10px 5px;
 
+    span {
+      border: 1px solid transparent;
+      float: right;
+      height: 26px;
+      margin: -6px 0 0;
+      padding: 5px 2px !important;
+      width: 24px !important;
+      &:hover {
+        background: $border-color1;
+      }
+    }
+
     &:active,
     &:hover,
     &:focus {
@@ -86,20 +98,21 @@
   }
 
   .dropdown-menu {
-    right: 0;
     left: inherit;
+    padding: 0;
+    right: 0;
 
     li {
-      float:none;
+      float: none;
     }
 
     li > a {
-      padding: 5px 15px 0;
+      padding: 5px 15px;
 
       &:active,
       &:hover,
       &:focus {
-        color: $theme-color;
+        background: $contact-info;
       }
     }
   }

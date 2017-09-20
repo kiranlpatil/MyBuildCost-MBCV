@@ -27,6 +27,7 @@
       "senderId": "JOBMOS",
       "routerNumber": "4"
     },
+    "filePathForMasterDataExcel" : "./src/server/app/framework/public/config/NewIndustryDataExcel.xlsx",
     "folderPath":"./dist/dev/server/public"
   }
 }

@@ -1,7 +1,8 @@
-import {Component, EventEmitter, Input, OnChanges, Output} from "@angular/core";
-import {JobPosterService} from "../job-poster/job-poster.service";
-import {Button, Headings, Label} from "../../../shared/constants";
-import {ValidationService} from "../../../shared/customvalidations/validation.service";
+import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
+import { JobPosterService } from '../job-poster/job-poster.service';
+import { Button, Headings, Label } from '../../../shared/constants';
+import { Message } from '../../../shared/models/message';
+import { MessageService } from '../../../shared/services/message.service';
 
 
 @Component({
@@ -20,11 +21,11 @@ export class JobCloneComponent implements OnChanges {
   private isShowEmptyTitleError:boolean=false;
 
 
-  constructor(private jobPosterService:JobPosterService) {}
+  constructor(private jobPosterService:JobPosterService, private messageService: MessageService) {}
 
   ngOnChanges(changes:any) {
     if (changes.selectedJobId!== undefined
-      && changes.selectedJobId.currentValue !== undefined){
+      && changes.selectedJobId.currentValue !== undefined) {
       this.showCloneDialogue=true;
     }
     if(changes.isCloneButtonClicked.currentValue!==undefined) {
@@ -46,9 +47,9 @@ export class JobCloneComponent implements OnChanges {
       this.jobPosterService.cloneJob(this.selectedJobId, this.selectedJobTitle).subscribe(
         data => {
           this.raiseJobEditViewEventEmitter.emit(data.data);
-        });
+        },error => this.onCloneFail(error));
       this.showCloneDialogue = false;
-    }else{
+    }else {
       this.isShowEmptyTitleError=true;
     }
 
@@ -57,6 +58,14 @@ export class JobCloneComponent implements OnChanges {
     this.showCloneDialogue = false;
 
 
+  }
+  onCloneFail(error: any) {
+    if (error.err_code === 403 || error.err_code === 0) {
+      var message = new Message();
+      message.error_msg =error.err_msg ;
+      message.isError = true;
+      this.messageService.message(message);
+    }
   }
 
   getHeading() {

@@ -1,18 +1,20 @@
-import {Component,EventEmitter, Input,Output, OnChanges, OnInit} from "@angular/core";
-import {JobPosterModel} from "../../../user/models/jobPoster";
-import {JobPosterService} from "./job-poster.service";
-import {Role} from "../model/role";
-import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
-import {Proficiences} from "../model/proficiency";
-import {Section} from "../../../user/models/candidate";
-import {ShowQcardviewService} from "../showQCard.service";
-import {Router} from "@angular/router";
-import {Industry} from "../../../user/models/industry";
-import {RecruiterDashboardService} from "../recruiter-dashboard/recruiter-dashboard.service";
-import {RecruiterDashboard} from "../model/recruiter-dashboard";
-import {ErrorService} from "../error.service";
-import {LocalStorage, Messages} from "../../../shared/constants";
-import {LocalStorageService} from "../../../shared/services/localstorage.service";
+import { Component,EventEmitter, Input,Output, OnChanges, OnInit } from '@angular/core';
+import { JobPosterModel } from '../../../user/models/jobPoster';
+import { JobPosterService } from './job-poster.service';
+import { Role } from '../model/role';
+import { CandidateProfileService } from '../candidate-profile/candidate-profile.service';
+import { Proficiences } from '../model/proficiency';
+import { Section } from '../../../user/models/candidate';
+import { ShowQcardviewService } from '../showQCard.service';
+import { Router } from '@angular/router';
+import { Industry } from '../../../user/models/industry';
+import { RecruiterDashboardService } from '../recruiter-dashboard/recruiter-dashboard.service';
+import { RecruiterDashboard } from '../model/recruiter-dashboard';
+import { ErrorService } from '../error.service';
+import { LocalStorage, Messages } from '../../../shared/constants';
+import { LocalStorageService } from '../../../shared/services/localstorage.service';
+import { ValueConstant } from '../../../shared/constants';
+import {Headings} from "../../../shared/constants";
 
 @Component({
   moduleId: module.id,
@@ -169,8 +171,7 @@ export class JobPosterComponent implements OnInit, OnChanges {
     this.showModalStyle = !this.showModalStyle;
     this.jobPosterModel.isJobPosted = true;
     this.jobPosterModel.postingDate = new Date();
-    let expiringDateInSeconds = new Date().getTime() + 2592000000;
-    this.jobPosterModel.expiringDate = new Date(expiringDateInSeconds);
+    this.jobPosterModel.expiringDate = new Date((new Date().getTime() + ValueConstant.JOB__EXPIRIY_PERIOD));
     this.jobPostService.postJob(this.jobPosterModel).subscribe(
       data => {
         this.onSuccess(data.data.postedJobs[0]._id);
@@ -179,8 +180,7 @@ export class JobPosterComponent implements OnInit, OnChanges {
 
   updateJob() {
     this.jobPosterModel.postingDate = new Date();
-    let expiringDateInSeconds = new Date().getTime() + 2592000000;
-    this.jobPosterModel.expiringDate = new Date(expiringDateInSeconds);
+    this.jobPosterModel.expiringDate = new Date((new Date().getTime() + ValueConstant.JOB__EXPIRIY_PERIOD));
     this.jobPostService.postJob(this.jobPosterModel).subscribe(
       data => {
         this.jobPosterModel._id = data.data.postedJobs[0]._id;
@@ -404,15 +404,19 @@ export class JobPosterComponent implements OnInit, OnChanges {
     (value > 0) ? this.isShowReleventIndustryListStep = true : this.isShowReleventIndustryListStep = false;
   }
 
-  raiseCloneEvent(){
+  raiseCloneEvent() {
     this.selectedJobTitle= this.jobPosterModel.jobTitle;
     this.selectedJobId= this.jobPosterModel._id;
     this.isCloneButtonClicked=!this.isCloneButtonClicked;
 
   }
 
-  onJobCloned(event:any){
+  onJobCloned(event:any) {
     this.jobPostEventEmitter.emit(event);
     this.jobPostCloneSuccessEmitter.emit();
   }
+
+    getHeading() {
+        return Headings;
+    }
 }

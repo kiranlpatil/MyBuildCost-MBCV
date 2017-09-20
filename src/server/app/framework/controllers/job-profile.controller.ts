@@ -4,8 +4,9 @@ import JobProfileModel = require('../dataaccess/model/jobprofile.model');
 import JobProfileService = require('../services/jobprofile.service');
 import CNextMessages = require('../shared/cnext-messages');
 import SearchService = require('../search/services/search.service');
-import {Actions} from "../shared/sharedconstants";
-import RecruiterService = require("../services/recruiter.service");
+import { Actions } from '../shared/sharedconstants';
+import RecruiterService = require('../services/recruiter.service');
+import { ValueConstant } from '../../../../client/app/shared/constants';
 let usestracking = require('uses-tracking');
 
 
@@ -29,7 +30,7 @@ export function searchCandidatesByJobProfile(req: express.Request, res: express.
     });
 
   } catch (e) {
-
+    res.status(403).send({message: e.message});
   }
 
 }
@@ -56,8 +57,7 @@ export function retrieve(req: express.Request, res: express.Response, next: any)
       }
 
     });
-  }
-  catch (e) {
+  } catch (e) {
     res.status(403).send({message: e.message});
   }
 }
@@ -114,8 +114,7 @@ export function update(req: express.Request, res: express.Response, next: any) {
         });
       }
     });
-  }
-  catch (e) {
+  } catch (e) {
     res.status(403).send({message: e.message});
   }
 }
@@ -162,8 +161,7 @@ export function metchResultForJob(req: express.Request, res: express.Response, n
           message: 'Problem in Search Matching Result',//Messages.MSG_ERROR_WRONG_TOKEN,
           code: 401
         });
-      }
-      else {
+      } else {
         res.send({
           'status': 'success',
           'data': result,
@@ -172,8 +170,7 @@ export function metchResultForJob(req: express.Request, res: express.Response, n
       }
     });
 
-  }
-  catch (e) {
+  } catch (e) {
     res.status(403).send({message: e.message});
   }
 }
@@ -215,8 +212,7 @@ export function getQCardDetails(req: express.Request, res: express.Response, nex
         res.status(200).send(result);
       }
     });
-  }
-  catch (e) {
+  } catch (e) {
     res.status(403).send({message: e.message});
   }
 }
@@ -243,14 +239,13 @@ export function cloneJob(req: express.Request, res: express.Response, next: any)
         newJob.postingDate = new Date();
         newJob.candidate_list=[];
 
-        let expiringDateInSeconds = new Date().getTime() + 2592000000;
-        newJob.expiringDate = new Date(expiringDateInSeconds);
+        newJob.expiringDate = new Date((new Date().getTime() + ValueConstant.JOB__EXPIRIY_PERIOD));
         var recruiterService = new RecruiterService();
         recruiterService.addCloneJob( result.userId, newJob, (err, result) => {
             if (err) {
               next({
-                reason: Messages.MSG_ERROR_RSN_USER_NOT_FOUND,
-                message: Messages.MSG_ERROR_RSN_USER_NOT_FOUND,
+                reason:err,
+                message: err.message,
                 code: 403
               });
             } else {
@@ -263,8 +258,7 @@ export function cloneJob(req: express.Request, res: express.Response, next: any)
       }
 
     });
-  }
-  catch (e) {
+  } catch (e) {
     res.status(403).send({message: e.message});
   }
 }
