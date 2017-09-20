@@ -153,7 +153,7 @@ class CandidateService {
     });
   }
 
-  getCandidateDetail(candidate: ICandidate, user: User, industries: IndustryModel[]): any {
+  getCandidateDetail(candidate: ICandidate, user: User, industries: IndustryModel[]): CandidateClassModel {
     let customCandidate: CandidateClassModel = new CandidateClassModel();
     customCandidate.personalDetails = user;
     customCandidate.jobTitle = candidate.jobTitle;
@@ -168,7 +168,10 @@ class CandidateService {
     customCandidate.aboutMyself = candidate.aboutMyself;
     customCandidate.capabilities = [];
     customCandidate.industry = candidate.industry;
-
+    customCandidate.isSubmitted= candidate.isSubmitted;
+    customCandidate.isVisible= candidate.isVisible;
+    customCandidate.isCompleted= candidate.isCompleted;
+    customCandidate.keySkills=candidate.proficiencies.toString().replace(/,/g, ' $');
     customCandidate.capabilities = this.getCapabilitiesBuild(candidate.capability_matrix, candidate.industry.roles, industries);
 
     return customCandidate;

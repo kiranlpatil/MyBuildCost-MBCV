@@ -2,6 +2,7 @@ import LocationModel = require('./location.model');
 import IndustryModel = require('./industry.model');
 import CandidateListModel = require('./candidate-list.model');
 import * as mongoose from 'mongoose';
+import CapabilityModel = require("./capability.model");
 
 interface JobProfileModel extends mongoose.Document {
   jobTitle: string;
@@ -29,5 +30,8 @@ interface JobProfileModel extends mongoose.Document {
   postedJobs: any;
   releventIndustries: string[];
   hideCompanyName: boolean;
+  capability:CapabilityModel[];
+  keySkills:string;
+  additionalKeySkills:string;
 }
 export = JobProfileModel;
