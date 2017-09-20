@@ -1,4 +1,4 @@
-import {Component,EventEmitter, Input,Output, OnChanges, OnInit} from "@angular/core";
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from "@angular/core";
 import {JobPosterModel} from "../../../user/models/jobPoster";
 import {JobPosterService} from "./job-poster.service";
 import {Role} from "../model/role";
@@ -11,7 +11,7 @@ import {Industry} from "../../../user/models/industry";
 import {RecruiterDashboardService} from "../recruiter-dashboard/recruiter-dashboard.service";
 import {RecruiterDashboard} from "../model/recruiter-dashboard";
 import {ErrorService} from "../error.service";
-import {LocalStorage, Messages} from "../../../shared/constants";
+import {Headings, LocalStorage, Messages} from "../../../shared/constants";
 import {LocalStorageService} from "../../../shared/services/localstorage.service";
 
 @Component({
@@ -415,4 +415,8 @@ export class JobPosterComponent implements OnInit, OnChanges {
     this.jobPostEventEmitter.emit(event);
     this.jobPostCloneSuccessEmitter.emit();
   }
+
+    getHeading() {
+        return Headings;
+    }
 }
