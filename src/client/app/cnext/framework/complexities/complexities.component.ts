@@ -258,7 +258,7 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
     let currentCapability = this.currentCapabilityNumber;
     if (currentCapability + 1 === this.capabilities.length) {
       this.isValid = true;
-      this.saveComplexity();
+      this.onSaveComplexity();
       this.highlightedSection.name = 'Proficiencies';
       return;
     }
