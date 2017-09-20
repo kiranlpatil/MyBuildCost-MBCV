@@ -5,7 +5,6 @@ import UserRepository = require('../dataaccess/repository/user.repository');
 import SendMailService = require('./sendmail.service');
 import * as mongoose from "mongoose";
 import {Recruiter} from "../dataaccess/model/recruiter-final.model";
-import {ProjectAsset} from "../../../../client/app/shared/constants";
 import {ConstVariables} from "../shared/sharedconstants";
 let config = require('config');
 let json2csv = require('json2csv');
