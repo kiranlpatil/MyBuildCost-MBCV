@@ -1,6 +1,7 @@
 <header class="page-header">
   <div class="cn-logo" (click)="onHomePage()">
-    <img src="assets/c-next/header/job-mosis-logo.png"/>
+    <img src="{{getImagePath().MY_WHITE_LOGO}}" class="hidden-xs"/>
+    <img src="{{getImagePath().MOBILE_WHITE_LOGO}}" class="visible-xs"/>
   </div>
   <nav>
     <ul>

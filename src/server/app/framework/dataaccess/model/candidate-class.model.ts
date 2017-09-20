@@ -41,5 +41,7 @@ class CandidateClassModel {
   interestedIndustryMatch: string[];
   proficienciesMatch: string[];
   personalDetails: User;
+  isCompleted: boolean;
+  keySkills: string;
 }
 export = CandidateClassModel;

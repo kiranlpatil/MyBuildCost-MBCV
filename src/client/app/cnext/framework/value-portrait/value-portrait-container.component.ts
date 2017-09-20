@@ -1,6 +1,6 @@
-import {Component, OnDestroy, OnInit} from "@angular/core";
+import {Component, OnInit} from "@angular/core";
 import {ActivatedRoute, Router} from "@angular/router";
-import {LocalStorage} from "../../../shared/constants";
+import {Button, Label, LocalStorage} from "../../../shared/constants";
 import {LocalStorageService} from "../../../shared/services/localstorage.service";
 
 
@@ -11,7 +11,7 @@ import {LocalStorageService} from "../../../shared/services/localstorage.service
   styleUrls: ['value-portrait-container.component.css'],
 })
 
-export class ValuePortraitContainerComponent implements OnInit,OnDestroy {
+export class ValuePortraitContainerComponent implements OnInit {
 
   _userId:string;
   isShareView:boolean = false;
@@ -38,12 +38,6 @@ export class ValuePortraitContainerComponent implements OnInit,OnDestroy {
 
   }
 
-  ngOnDestroy() {
-    if (this.isShareView) {
-      LocalStorageService.removeLocalValue(LocalStorage.ACCESS_TOKEN);
-    }
-  }
-
   ngOnInit() {
     this.activatedRoute.params.subscribe(params => {
       this._userId = params['id'];
@@ -53,7 +47,6 @@ export class ValuePortraitContainerComponent implements OnInit,OnDestroy {
       var token = params['access_token'];
       if (token) {
         this.isShareView = true;
-        LocalStorageService.setLocalValue(LocalStorage.ACCESS_TOKEN, token);
       }
     });
 
@@ -63,4 +56,11 @@ export class ValuePortraitContainerComponent implements OnInit,OnDestroy {
     this._router.navigate(['/applicant-signup','new_user']);
   }
 
+  getLabel() {
+    return Label;
+  }
+
+  getButtons() {
+    return Button;
+  }
 }

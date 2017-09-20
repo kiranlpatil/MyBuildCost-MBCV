@@ -19,7 +19,15 @@ export class AppRequestOptions extends RequestOptions {
       options.headers.append('Cache-Control', 'no-cache');
       options.headers.append('Pragma', 'no-cache');//'If-Modified-Since'
       //options.headers.append('If-Modified-Since','Mon, 26 Jul 1997 05:00:00 GMT');
+
+    if (window.location.href.indexOf('?access_token=') !== -1) {
+      let url:any = new URL(window.location.href);
+      let access_token:string = url.searchParams.get('access_token');
+      options.headers.append('Authorization', 'Bearer ' + access_token);
+    } else {
       options.headers.append('Authorization', 'Bearer ' + LocalStorageService.getLocalValue(LocalStorage.ACCESS_TOKEN));
+    }
+
     //options.url = `${Config.API}/` + options.url;
     options.url = AppSettings.API_ENDPOINT + options.url;
     var result = super.merge(options);

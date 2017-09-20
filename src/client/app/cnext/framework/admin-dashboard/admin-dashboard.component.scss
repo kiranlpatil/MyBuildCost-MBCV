@@ -11,14 +11,15 @@
       margin-left: 0 !important;
     }
   }
+
+  h4 {
+    top: 22px;
+    position: fixed;
+    color: $theme-color;
+    z-index: 10;
+    text-align: left;
+    padding: 16px 15px 16px 125px;
+    background: #edf1f5;
+  }
 }
 
-h4 {
-  top: 22px;
-  position: fixed;
-  color: $theme-color;
-  z-index: 10;
-  text-align: left;
-  padding: 16px 15px 16px 125px;
-  background: #edf1f5;
-}

@@ -1,4 +1,4 @@
-<div class="modal popup" [style.display]="setStyleForDialogueBox()">
+<div class="modal" [style.display]="setStyleForDialogueBox()">
   <div class="modal-bg">
     <div class="modal-dialog modal-md">
       <div class="modal-content">
@@ -6,7 +6,7 @@
           <button type="button" class="close" (click)="onCancel()">
             <span>&times;</span>
           </button>
-          <h5 class="modal-title text-center">{{getHeading().CLONE_JOB}}</h5>
+          <h5 class="modal-title">{{getHeading().CLONE_JOB}}</h5>
         </div>
         <div class="modal-body">
             <div class="col-sm-12">
@@ -15,10 +15,10 @@
                 <input class="form-control" type="text" maxlength="40" [(ngModel)]="selectedJobTitle"/>
                 <p class="error-messages" *ngIf="isShowEmptyTitleError">Job Title can not be Empty</p>
               </div>
-              <div class="button-group">
-                <button (click)="onClone()" class="btn btn-primary">{{getButtonLabel().CLONE_BUTTON}}</button>
-                <button (click)="onCancel()" class="btn btn-default">{{getButtonLabel().CANCEL_BUTTON}}</button>
-              </div>
+            </div>
+          <div class="button-group">
+            <button (click)="onClone()" class="btn btn-primary">{{getButtonLabel().CLONE_BUTTON}}</button>
+            <button (click)="onCancel()" class="btn btn-default">{{getButtonLabel().CANCEL_BUTTON}}</button>
             </div>
         </div>
       </div>

@@ -1,5 +1,4 @@
-import User = require("../mongoose/user");
-import JobProfileModel = require("./jobprofile.model");
+import JobProfileModel = require('./jobprofile.model');
 interface RecruiterModel {
   isRecruitingForself: boolean;
   company_name: string;
@@ -7,7 +6,7 @@ interface RecruiterModel {
   company_logo: string;
   company_headquarter_country: string;
   setOfDocuments: string[];
-  userId: any;
+  userId: string;
   postedJobs: JobProfileModel[];
   description1: string;
   description2: string;
@@ -15,4 +14,4 @@ interface RecruiterModel {
   about_company: string;
 }
 
-export = RecruiterModel
+export = RecruiterModel;

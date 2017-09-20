@@ -1,6 +1,6 @@
 class Messages {
   //Image Paths
-  public static EMAIL_TEMPLATE_LOGO:string = './src/server/app/framework/public/images/logo/job-mosis-logo.png';
+  public static EMAIL_TEMPLATE_LOGO: string = './src/server/app/framework/public/images/logo/job-mosis-logo.png';
 
   //status
   public static STATUS_SUCCESS: string = 'Success';
@@ -17,7 +17,8 @@ class Messages {
   //Sendmail
   public static MSG_SUCCESS_EMAIL_REGISTRATION: string = 'Email sent on registered email address.';
   public static MSG_SUCCESS_EMAIL_CHANGE_EMAILID: string = 'Email sent on new email address.';
-  public static MSG_SUCCESS_EMAIL_FORGOT_PASSWORD: string = 'E-mail has been sent successfully on your registered email to reset password.';
+  public static MSG_SUCCESS_EMAIL_FORGOT_PASSWORD: string = 'E-mail has been sent successfully on your registered email ' +
+    'to reset password.';
   public static MSG_ERROR_EMAIL: string = 'Email could not be sent.';
   public static MSG_SUCCESS_EMAIL: string = 'Email has been sent successfully';
   public static MSG_SUCCESS_LOGIN: string = 'You are successfully logged in';
@@ -33,7 +34,8 @@ class Messages {
   public static MSG_ERROR_MESSAGE_SENDING: string = 'Message sending failed by server';
   public static MSG_ERROR_CREATING_USER: string = 'User registration failed';
   public static MSG_ERROR_REGISTRATION: string = 'User already present with this email address ';
-  public static MSG_ERROR_REGISTRATION_MOBILE_NUMBER: string = 'This mobile number is already in use by an existing user. Please enter another mobile number.';//Dont Change It
+  public static MSG_ERROR_REGISTRATION_MOBILE_NUMBER: string = 'This mobile number is already in use by an existing ' +
+    'user. Please enter another mobile number.';//Dont Change It
   public static MSG_ERROR_USER_NOT_FOUND: string = 'Sorry. There is no user registered with this email address.';//Dont Change it
   public static MSG_ERROR_USER_NOT_FOUND_Mail_SEND: string = 'E-mail has been sent successfully on your registered email to reset password.';//Dont Change it
   public static MSG_ERROR_EMAIL_ACTIVE_NOW: string = 'User already has an account associated with this email address.';//DontChnge It
@@ -69,7 +71,8 @@ class Messages {
   public static MSG_ERROR_WHILE_CONTACTING: string = 'Something went wrong. Try again.';
   public static MSG_ERROR_CONNECTION_TIMEOUT: string = 'Connection timeout. Try again.';
   public static MSG_ERROR_INCORRECT_INDUSTRY_NAME: string = 'Excel With this name is not present.Excel name must be NewIndustryDataExcel.xlsx';
-  public static MSG_ERROR_INDUSTRY_CODE_OR_SORT_NUMBER_MISSING: string = 'Industry Code and sort order is must for industry.';
+  public static MSG_ERROR_IN_READING: string = 'Error In excel reading';
+  public static MSG_ERROR_INDUSTRY_CODE_OR_SORT_NUMBER_MISSING: string = 'code or sort order is must for industry.';
   public static MSG_ERROR_COMPLEXITY_CODE_MISSING: string = 'Code is not given for complexity.';
   public static MSG_ERROR_CAPABILITY_CODE_MISSING: string = 'Code is not given for capability.';
   public static MSG_ERROR_AREA_OF_WORK_CODE_MISSING: string = 'Code is not given for area of work.';
@@ -106,6 +109,14 @@ class Messages {
   public static MSG_ERROR_IF_USER_ID_INVALID_FROM_URL_PARAMETER = 'Problem with id which you provided';
   public static MSG_ERROR_FETCH_SHARE_URL_FAILED = 'Fetch to share link url failed';
   public static MSG_ERROR_IF_STORE_TO_SHARE_LINK_FAILED = 'Share link failed when going to store';
+
+  //admin module
+  public static MSG_ERROR_UNAUTHORIZED_USER = 'You are unauthorized user';
+  public static MSG_ERROR_RETRIEVING_USER = 'Error In Retrieving the Users';
+  public static MSG_ERROR_RETRIEVING_USAGE_DETAIL = 'Error In Retrieving the Usage Detail';
+  public static MSG_ERROR_ADDING_USAGE_DETAIL = 'Error In editing the Usage Detail';
+  public static MSG_ERROR_SEPERATING_USER = 'Error In Seperating the Users';
+  public static MSG_ERROR_CREATING_EXCEL = 'Error In creating csv file';
 }
 export=Messages;
 

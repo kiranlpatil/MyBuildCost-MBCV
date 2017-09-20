@@ -8,12 +8,12 @@ import { MessageService } from '../../../../shared/services/message.service';
 
 @Component({
   moduleId: module.id,
-  selector: 'cn-keyskills-detail-list',
-  templateUrl: 'keyskills-detail-list.component.html',
-  styleUrls: ['keyskills-detail-list.component.css'],
+  selector: 'cn-usage-details',
+  templateUrl: 'usage-details.component.html',
+  styleUrls: ['usage-details.component.css'],
 })
 
-export class KeyskillsDetailListComponent {
+export class UsageDetailsComponent {
   constructor(private adminDashboardService: AdminDashboardService,
               private loaderService: LoaderService,
               private errorService: ErrorService,

@@ -6,7 +6,7 @@
 
   .content {
     left: 50%;
-    margin: 0px 0 20px;
+    margin: 0 0 20px;
     position: absolute;
     top: 22% !important;
     transform: translate(-50%, 0);
@@ -70,6 +70,8 @@
 
 @media only screen and (max-width: 767px) {
   .registration {
+    display: block;
+    overflow: auto;
     .content {
       .radio-group {
         padding: 0 0 15px;

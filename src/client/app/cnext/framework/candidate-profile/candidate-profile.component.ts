@@ -1,5 +1,5 @@
 import {Component, DoCheck, HostListener, KeyValueDiffers, OnDestroy, OnInit} from "@angular/core";
-import {ImagePath, LocalStorage, Messages, NavigationRoutes, Tooltip} from "../../../shared/constants";
+import {ImagePath, Label, LocalStorage, Messages, NavigationRoutes, Tooltip} from "../../../shared/constants";
 import {Router} from "@angular/router";
 import {ComplexityService} from "../complexity.service";
 import {Candidate, Section} from "../../../user/models/candidate";
@@ -112,7 +112,7 @@ export class CandidateProfileComponent implements OnInit, DoCheck, OnDestroy {
         this.getComplexity();
         return;
       } else if (this.highlightedSection.name === 'Proficiencies') {
-        if (this.candidate.proficiencies == undefined || this.candidate.proficiencies == null || this.candidate.proficiencies.length == 0) {
+        if (this.candidate.proficiencies === undefined || this.candidate.proficiencies === null || this.candidate.proficiencies.length === 0) {
           this.candidate.proficiencies = [];
         }
         return;
@@ -233,7 +233,8 @@ export class CandidateProfileComponent implements OnInit, DoCheck, OnDestroy {
   }
 
   checkdataFilled() {
-    if (this.candidate.employmentHistory && this.candidate.employmentHistory.length > 0 && this.candidate.academics && this.candidate.academics.length > 0 && this.candidate.aboutMyself && this.candidate.aboutMyself !== ''){
+    if (this.candidate.employmentHistory && this.candidate.employmentHistory.length > 0 && this.candidate.academics &&
+        this.candidate.academics.length > 0 && this.candidate.aboutMyself && this.candidate.aboutMyself !== '') {
       this.whichStepsVisible[6]=true;
     }else {
       this.whichStepsVisible[6]=false;
@@ -512,5 +513,13 @@ export class CandidateProfileComponent implements OnInit, DoCheck, OnDestroy {
 
   getImagePath() {
     return ImagePath;
+  }
+
+  getMessages() {
+    return Messages;
+  }
+
+  getLabel() {
+    return Label;
   }
 }

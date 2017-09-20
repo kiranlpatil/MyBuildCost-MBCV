@@ -2,7 +2,7 @@
   <div class="header">
     <!--<a href="./public/recruiter.csv" download="Recruiter.csv" title="Export recruiter to CSV File"><i class="glyphicon glyphicon-export"></i>Export</a>-->
   </div>
-  <div title="Export recruiter to CSV File" class="export-data-link" (click)="generateRecruiterDetailFile()"><span class="glyphicon glyphicon-export" ></span>Export</div>
+  <div title="Export recruiters list to CSV file" class="export-data-link" (click)="generateRecruiterDetailFile()"><span class="glyphicon glyphicon-export" ></span>Export</div>
   <a href="./public/recruiter.csv" download="recruiter.csv"  id="link_recruiter" hidden></a>
   <div class="list-view">
     <ul class="list-header">
@@ -52,7 +52,6 @@
         <li>
           <button *ngIf="recruiter.isActivated" class="btn-danger btn-custom" (click)="updateDetail(i,recruiter,recruiter.isActivated)">Deactivate</button>
           <button *ngIf="!recruiter.isActivated" class="btn-primary btn-custom" (click)="updateDetail(i,recruiter,recruiter.isActivated)">Activate</button>
-          <button class="btn-danger btn-custom" (click)="viewProfile(recruiter,'/value-portrait')">View Profile</button>
         </li>
       </ul>
     </div>

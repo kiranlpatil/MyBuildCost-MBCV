@@ -1,5 +1,5 @@
 export class AppSettings {
-  //public static IP = 'http://localhost:8080';
+  // public static IP = 'http://localhost:8080';
   // public static IP = 'http://ee802b7f.ngrok.io';
   //public static IP = 'http://10.192.33.77:8080';
   public static IP = 'http://34.208.115.60:3000';
@@ -18,7 +18,7 @@ export class AppSettings {
 }
 
 export class Messages {
-  public static  MSG_MSG_CLONED_SUCCESSFULLY="New Job is been added successfully";
+  public static MSG_MSG_CLONED_SUCCESSFULLY = 'New Job is been added successfully';
   public static MSG_CANDIDATE_NOT_FOUND = 'No registered applicant with this name. Avoid using multiple spaces while searching with complete names.';
   public static MSG_CANDIDATE_SEARCH_NOT_FOUND = "Applicant's profile does not match with any of your open job profiles.";
   public static MSG_CNADIDATE_VISIBILITY_OFF = 'The selected applicant profile details are not displayed, since the applicant has marked it as private.';
@@ -29,7 +29,7 @@ export class Messages {
   //public static MSG_SUCCESS_MAIL_VERIFICATION: string = 'Verification e-mail sent successfully to your e-mail account. Kindly proceed by clicking on the link pProvided in your e-mail';
   public static MSG_SUCCESS_MAIL_VERIFICATION: string = 'Verification e-mail sent successfully to your e-mail account.';
   public static MSG_SUCCESS_NEWREGISTRATION: string = 'Registration successful. Mobile number verified. Kindly sign in.';
-  public static MSG_SUCCESS_RESET_PASSWORD: string = 'Your password is reset successfully.';
+  public static MSG_SUCCESS_RESET_PASSWORD: string = 'Your password is reset successfully.Kindly login';
   public static MSG_SUCCESS_CHANGE_PASSWORD: string = 'Your password has been changed successfully.';
   public static MSG_SUCCESS_CHANGE_EMAIL: string = 'Kindly click on the link sent to your new email for email verification.';
   public static MSG_SUCCESS_CHANGE_MOBILE: string = 'Verify your new mobile number by entering OTP sent on your mobile number.';
@@ -47,6 +47,8 @@ export class Messages {
 
   public static MSG_SUCCESS_FOR_PROFILE_CREATION_STATUS: string = 'Your profile created successfully.';
   public static MSG_SUCCESS_FOR_JOB_POST_STATUS: string = 'You have successfully posted the new job. You can search for matching candidates for this job through your dashboard.';
+  public static MSG_SUCCESS_FOR_FILE_DOWNLOAD: string = 'File has been downloaded successfully.';
+  public static MSG_FOR_FILE_DOWNLOAD: string = 'Generating the file this may take few minutes.';
 
   public static MSG_ERROR_MAIL_VERIFICATION_BODY: string = 'Your account verification failed due to invalid access token!';
   public static MSG_ERROR_MAIL_VERIFICATION_RESULT_STATUS: string = 'Sorry.';
@@ -210,7 +212,19 @@ export class Messages {
   public static FAQ_CONTACT_EMAIL = 'support@jobmosis.com';
   public static FAQ_MESSAGE = 'Have any questions?';
   public static POST_NEW_JOB_MESSAGE = 'Please click on "Post New Job" to proceed.';
-  public static GUIDE_MESSAGE_FOR_NEW_VIEWER = 'Thank you for showing interest, we will need your basic information to create your value portrait on JobMosis. Go ahead, fill the form and get your value portrait!'
+  public static NOTE_OF_TRUST = 'JobMosis believes in building a sustainable ecosystem for candidates and ' +
+      'recruiters that is based on trust and transparency. We strive to reduce the inconvenience caused to all ' +
+      'parties due to false / incorrect information provided in the individual and job profiles. We believe that ' +
+      'individual acts of trust and faith add up to make the world a better place. We appeal to each user to uphold ' +
+      'the sanctity of the JobMosis platform by providing truthful information about their profiles.';
+  public static GUIDE_MESSAGE_FOR_NEW_VIEWER = 'Thank you for showing interest, ' +
+      'we will need your basic information to create your value portrait on JobMosis. Go ahead, ' +
+      'fill the form and get your value portrait!';
+
+}
+export class AdminPanel {
+  public static PUBLIC_PROFILE='Profile is public';
+  public static PRIVATE_PROFILE='Profile is private';
 }
 
 export class NavigationRoutes {
@@ -286,6 +300,7 @@ export class ValueConstant {
   public static BLOCKED_CANDIDATE: string = 'blocked';
   public static MATCHED_CANDIDATE: string = 'matchedList';
   public static VALUE_FOR_CANDIDATES_PERCENT_MATCHING_LOWER_BOUND = 10;
+  public static JOB__EXPIRIY_PERIOD= 2592000000;
 }
 
 
@@ -430,16 +445,22 @@ export class Tooltip {
   public static PROFILE_INFO_VISIBILIT_SET_TO_NO: string = 'If "No", your profile will not be visible to recruiter.' +
     'If you are on the lookout of job change, it is recommended to keep this setting to "Yes". You can change this setting later.';
   public static PROFILE_INFO_VISIBILIT_SET_TO_YES: string = 'If "Yes", your profile will be available in employer search.';
-  public static CANDIDATE_CAPABILITY_TOOLTIP_1: string = 'Select those capabilities that describe your current strength. These capabilities would define you in the eyes of the recruiter and help you align with the best suitable job.';
-  public static CANDIDATE_CAPABILITY_TOOLTIP_2: string = 'If there are capabilities that you have developed in past but are no more relevent, you should not select such capabilites as this would dilute the matching and alignment with the best job opportunity.';
+  public static CANDIDATE_CAPABILITY_TOOLTIP_1: string = 'Select those capabilities that describe your current ' +
+      'strength. These capabilities would define you in the eyes of the recruiter and help you align with the best ' +
+      'suitable job.';
+  public static CANDIDATE_CAPABILITY_TOOLTIP_2: string = 'If there are capabilities that you have developed in past ' +
+      'but are no more relevent, you should not select such capabilites as this would dilute the matching ' +
+      'and alignment with the best job opportunity.';
   public static RECRUITER_CAPABILITY_TOOLTIP: string = 'These capabilities would form the core of the job profile. ' +
       'In next section, you would get to define these capabilities in detail.';
   public static CERTIFICATE_TOOLTIP: string = 'Certification/Accreditation Message';
   public static COMPETENCIES_AND_RESPONSIBILITIES_TOOLTIP_1: string = 'Additional Information';
-  public static COMPETENCIES_AND_RESPONSIBILITIES_TOOLTIP_2: string = 'You can use this field to describe specific aspects of the job profile that will help the candidate to understand your expectations better.';
+  public static COMPETENCIES_AND_RESPONSIBILITIES_TOOLTIP_2: string = 'You can use this field to describe specific ' +
+      'aspects of the job profile that will help the candidate to understand your expectations better.';
   public static COMPLEXITIES_CANDIDATE_TOOLTIP_1: string = 'This section provides a list of complexity scenarios for your selected capabilities.' +
     'If more than one options are applicable to you, choose the option where you can demonstrate a higher level of expertise.';
-  public static COMPLEXITIES_CANDIDATE_TOOLTIP_2: string = 'If a scenario was applicable to you in past but is no more relevant to you, avoid choosing such scenarios.In such cases, choose "Not Applicable".';
+  public static COMPLEXITIES_CANDIDATE_TOOLTIP_2: string = 'If a scenario was applicable to you in past but is no ' +
+      'more relevant to you, avoid choosing such scenarios.In such cases, choose "Not Applicable".';
   public static COMPLEXITIES_RECRUITER_TOOLTIP_1: string = 'This section provides a list of complexity scenarios for selected capabilities.' +
     'For each scenario, select the most appropriate level that candidate is required to handle.';
   public static COMPLEXITIES_RECRUITER_TOOLTIP_2: string = 'For scenarios that are not relevant to your job profile, choose "Not Applicable".';
@@ -448,9 +469,14 @@ export class Tooltip {
     'At times, organisations need individuals who have cross industry expertise.';
   public static INDUSTRY_EXPERIENCE_CANDIDATE_TOOLTIP_2: string = 'Select such industries where you can claim a reasonable exposure.';
   public static INDUSTRY_EXPERIENCE_RECRUITER_TOOLTIP: string = 'If you wish the candidate to have exposure to any industry besides his core industry, please select such additional industries.';
-  public static INDUSTRY_LIST_TOOLTIP_1: string = 'Enter the industry from which you wish to hire the candidate. This Industry forms the core of your Job Profile posting. In next sections, you shall be shown questions and parameters that are relevant to this Industry.';
-  public static INDUSTRY_LIST_TOOLTIP_2: string = 'If you wish the candidate to have worked in multiple Industries, choose the one that is most relevent as on date. You shall get option to include additional industries in Relevant Industry section.';
-  public static JOB_PROFICIENCIES_TOOLTIP_1: string = 'Enter keywords for specialization in Technologies, Products, Tools, Domains etc. E.g Java, Oracle, SAP, Cognos, AWS, Agile, DevOps, CMM, Telecom Billing, Retail Banking etc.';
+  public static INDUSTRY_LIST_TOOLTIP_1: string = 'Enter the industry from which you wish to hire the candidate. ' +
+      'This Industry forms the core of your Job Profile posting. In next sections, you shall be shown questions and ' +
+      'parameters that are relevant to this Industry.';
+  public static INDUSTRY_LIST_TOOLTIP_2: string = 'If you wish the candidate to have worked in multiple Industries, ' +
+      'choose the one that is most relevent as on date. You shall get option to include additional industries ' +
+      'in Relevant Industry section.';
+  public static JOB_PROFICIENCIES_TOOLTIP_1: string = 'Enter keywords for specialization in Technologies, ' +
+      'Products, Tools, Domains etc. E.g Java, Oracle, SAP, Cognos, AWS, Agile, DevOps, CMM, Telecom Billing, Retail Banking etc.';
   public static JOB_PROFICIENCIES_TOOLTIP_2: string = 'Use the Top 5 "Must Have" keywords to describe the mandatory skills. You can provide additional 5 keywords that are "Nice to Have".';
   public static MORE_ABOUT_MYSELF_TOOLTIP: string = 'Please mention additional details about your personal and professional journey that would help the recruiter to know you better.';
   public static PROFESSIONAL_DATA_TOOLTIP_1: string = 'Please mention your current salary (CTC).';
@@ -472,8 +498,10 @@ export class Tooltip {
   public static RELEVENT_INDUSTRY_LIST_TOOLTIP: string = 'Based on the profile you have selected, You can select industries to get more candidates with matching profiles.';
   public static SAVE_ROLES_MESSAGE: string = 'Saving role details. Once saved, you cannot change it for 3 months.';
   public static AREA_OF_WORK_TOOLTIP_1: string = 'Select those areas of work that best describe your current focus.';
-  public static AREA_OF_WORK_TOOLTIP_2: string = 'If there are areas that you have worked in past but are no more relevent, you should not select such areas as they may fetch jobs that are no more relevant to you.';
-  public static RECRUITER_AREA_OF_WORK_TOOLTIP: string = 'Select those areas in which the candidate is expected to work. You can select maximum 3 areas of work for a job profile in order to make your search more relevant.';
+  public static AREA_OF_WORK_TOOLTIP_2: string = 'If there are areas that you have worked in past but are no more ' +
+      'relevent, you should not select such areas as they may fetch jobs that are no more relevant to you.';
+  public static RECRUITER_AREA_OF_WORK_TOOLTIP: string = 'Select those areas in which the candidate is expected ' +
+      'to work. You can select maximum 3 areas of work for a job profile in order to make your search more relevant.';
   public static EMPTY_LIST_MESSAGE: string = 'Currently there are no candidates matching to your job posting.' +
     'This is because the currently available candidates possess different set of capabilities than' +
     'what your job expects. This dashboard shows candidates that have best matches with your desired' +
@@ -516,6 +544,7 @@ export class Headings {
   public static CHANGE_MOBILE_NUMBER_HEADING: string = 'Change Your Mobile Number';
   public static RESET_PASSWORD_HEADING: string = 'RESET PASSWORD';
   public static CLONE_JOB: string = 'Clone Job';
+  public static POST_JOB: string = 'Post New Job';
 }
 
 export class Label {
@@ -531,6 +560,10 @@ export class Label {
   public static JOB_TITLE: string = 'New Job Title';
   public static CLONE_JOB: string = 'Clone Job';
   public static CLOSE_JOB: string = 'Close Job';
+  public static VALUE_PORTRAIT_HEADER: string = 'Value Portrait';
+  public static VALUE_PORTRAIT_TITLE: string = 'Experience is what it\'s all about';
+  public static CORE_CAPABILITIES_TITLE: string = 'Core Capabilities';
+  public static NOTE_OF_TRUST: string = 'Note of Trust';
 }
 
 export class Button {
@@ -538,4 +571,5 @@ export class Button {
   public static RESET_PASSWORD_BUTTON: string = 'RESET PASSWORD';
   public static CLONE_BUTTON: string = 'CLONE';
   public static CANCEL_BUTTON: string = 'CANCEL';
+  public static VALUE_PORTRAIT_BUTTON: string = 'Create your Own Value Portrait';
 }

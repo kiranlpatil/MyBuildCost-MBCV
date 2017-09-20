@@ -1,8 +1,9 @@
-import {Component} from "@angular/core";
-import {Candidate} from "../../../user/models/candidate";
-import {ErrorService} from "../error.service";
-import {UserData} from "../model/userData";
-import {AdminDashboardService} from "./admin-dashboard.service";
+import {Component} from '@angular/core';
+import {Candidate} from '../../../user/models/candidate';
+import {ErrorService} from '../error.service';
+import {UserData} from '../model/userData';
+import {AdminDashboardService} from './admin-dashboard.service';
+import {LoaderService} from '../../../shared/loader/loaders.service';
 
 
 @Component({
@@ -17,7 +18,8 @@ export class AdminDashboardComponent {
   private userData: UserData = new UserData();
   private numberOfCandidates:number=0;
   private numberOfRecruiters:number=0;
-  constructor( private errorService: ErrorService,private adminDashboardService: AdminDashboardService,) {
+  constructor( private errorService: ErrorService, private loaderService: LoaderService,private adminDashboardService: AdminDashboardService,) {
+      this.loaderService.start();
       this.getUserProfile();
       this.getAllUser();
   }
@@ -40,5 +42,6 @@ getAllUser() {
     this.userData=userprofile.data;
     this.numberOfCandidates=this.userData.candidate.length;
     this.numberOfRecruiters=this.userData.recruiter.length;
+    this.loaderService.stop();
   }
 }

@@ -73,10 +73,22 @@
     }
 
     ul > li > p {
-      overflow: auto !important;
+      overflow: hidden !important;
       text-overflow: clip !important;
       white-space: pre-wrap !important;
       width: 100%;
+    }
+
+    ul > li > .username {
+      position: relative;
+      padding: 0 18px 0 0;
+
+      .glyphicon-eye-open,
+      .glyphicon-eye-close {
+        position: absolute;
+        top: 2px;
+        right: 0;
+      }
     }
   }
 }
@@ -132,17 +144,3 @@
   background: #e3695f;
   margin: 0 5px 0 0;
 }
-
-.username {
-  position: relative;
-  padding: 0 30px 0 0;
-
-  .glyphicon-eye-open,
-  .glyphicon-eye-close {
-    position: absolute;
-    top: 2px;
-    right: 13px;
-  }
-}
-
-

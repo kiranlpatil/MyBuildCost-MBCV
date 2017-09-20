@@ -2,7 +2,7 @@
   "TplSeed": {
     "database": {
       "host": "127.0.0.1",
-      "name": "c-next-backend2"
+      "name": "c-next-backend"
     },
     "mail": {
       "host": "http://localhost:8080/",
@@ -27,6 +27,7 @@
       "senderId": "JOBMOS",
       "routerNumber": "4"
     },
+    "filePathForMasterDataExcel" : "./src/server/app/framework/public/config/NewIndustryDataExcel.xlsx",
     "folderPath":"./dist/dev/server/public"
   }
 }

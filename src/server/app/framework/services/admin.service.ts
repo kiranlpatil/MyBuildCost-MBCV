@@ -1,57 +1,52 @@
 /**
  * Created by techprime002 on 8/28/2017.
  */
-import UserRepository = require("../dataaccess/repository/user.repository");
-import UserModel = require("../dataaccess/model/user.model");
-import IUserService = require("./user.service");
-import SendMailService = require("./sendmail.service");
-import SendMessageService = require("./sendmessage.service");
+import UserRepository = require('../dataaccess/repository/user.repository');
+import SendMailService = require('./sendmail.service');
 import * as mongoose from "mongoose";
 import {Recruiter} from "../dataaccess/model/recruiter-final.model";
-//import * as config from 'config';
+import {ProjectAsset} from "../../../../client/app/shared/constants";
+import {ConstVariables} from "../shared/sharedconstants";
 let config = require('config');
-let json2csv = require("json2csv");
+let json2csv = require('json2csv');
 let fs = require('fs');
-import Messages = require("../shared/messages");
-import AuthInterceptor = require("../../framework/interceptor/auth.interceptor");
-import ProjectAsset = require("../shared/projectasset");
-import MailAttachments = require("../shared/sharedarray");
-import RecruiterRepository = require("../dataaccess/repository/recruiter.repository");
-import UsersClassModel = require("../dataaccess/model/users");
-import CandidateService = require("./candidate.service");
-import RecruiterService = require("./recruiter.service");
-import CNextMessages = require("../shared/cnext-messages");
-import IndustryModel = require("../dataaccess/model/industry.model");
-import IndustryRepository = require("../dataaccess/repository/industry.repository");
-import {Actions, ConstVariables} from "../shared/sharedconstants";
+import Messages = require('../shared/messages');
+import MailAttachments = require('../shared/sharedarray');
+import RecruiterRepository = require('../dataaccess/repository/recruiter.repository');
+import UsersClassModel = require('../dataaccess/model/users');
+import CandidateService = require('./candidate.service');
+import RecruiterService = require('./recruiter.service');
+import IndustryModel = require('../dataaccess/model/industry.model');
+import IndustryRepository = require('../dataaccess/repository/industry.repository');
+import CandidateModelClass = require('../dataaccess/model/candidateClass.model');
+import RecruiterClassModel = require('../dataaccess/model/recruiterClass.model');
+import CandidateClassModel = require('../dataaccess/model/candidate-class.model');
 let usestracking = require('uses-tracking');
 
 class AdminService {
-  private userRepository: UserRepository;
-  private industryRepositiry: IndustryRepository;
-  private recruiterRepository: RecruiterRepository;
-  APP_NAME: string;
-  company_name: string;
-  mid_content: any;
-  private usesTrackingController: any;
+  APP_NAME:string;
+  company_name:string;
+  private userRepository:UserRepository;
+  private industryRepositiry:IndustryRepository;
+  private recruiterRepository:RecruiterRepository;
+  private usesTrackingController:any;
 
 
   constructor() {
     this.userRepository = new UserRepository();
-     this.industryRepositiry= new IndustryRepository();
+    this.industryRepositiry = new IndustryRepository();
     this.recruiterRepository = new RecruiterRepository();
     this.APP_NAME = ProjectAsset.APP_NAME;
-    let obj: any = new usestracking.MyController();
+    let obj:any = new usestracking.MyController();
     this.usesTrackingController = obj._controller;
   }
 
-  seperateUsers(item: any, callback: (error: any, result: any) => void) {
+  seperateUsers(item:any, callback:(error:any, result:UsersClassModel) => void) {
     try {
-      let users: UsersClassModel = new UsersClassModel;
-
+      let users:UsersClassModel = new UsersClassModel();
       let candidateService = new CandidateService();
-      let candidates: any = [];
-      let recruiters: any = [];
+      let candidates:CandidateModelClass[] = new Array(0);
+      let recruiters:RecruiterClassModel[] = new Array(0);
       let value = 0;
       for (let i = 0; i < item.length; i++) {
         if (item[i].isCandidate) {
@@ -59,26 +54,26 @@ class AdminService {
             if (error) {
               callback(error, null);
             } else {
-              value++;
               if (!item[i].isAdmin) {
-                item[i].data = resu[0];
-                candidates.push(item[i]);
-              }
-              if (value && item.length === value) {
-                users.candidate = candidates;
-                users.recruiter = recruiters;
-                callback(null, users);
+                this.industryRepositiry.retrieve({'code': resu[0].industry.code}, (error:any, industries:IndustryModel[]) => {
+                  if (error) {
+                    callback(error, null);
+                  } else {
+                    value = this.getCandidateDetails(resu, item, i, industries, value, candidates);
+                    this.extractedForValueIncrement(value, item, users, candidates, recruiters, callback);
+                  }
+                });
               }
             }
           });
-
-        } else if (!item[i].isCandidate) {
+        }
+        else if (!item[i].isCandidate) {
 
           let recruiterService = new RecruiterService();
           let data = {
               'userId': new mongoose.Types.ObjectId(item[i]._id)
             }
-          ;
+            ;
           recruiterService.retrieve(data, (error: any, result: Recruiter[]) => {
             if (error) {
               callback(error, null);
@@ -101,32 +96,56 @@ class AdminService {
     } catch (e) {
       callback(e, null);
     }
-
   };
-  addUsageDetailsValue(item: any, callback: (error: any, result: any) => void) {
+
+  private extractedForValueIncrement(value:number, item:any, users:UsersClassModel, candidates:CandidateModelClass[], recruiters:RecruiterClassModel[], callback:(error:any, result:any)=>void) {
+    if (value && item.length === value) {
+      users.candidate = candidates;
+      users.recruiter = recruiters;
+      callback(null, users);
+    }
+  }
+
+  private getRecruiterDetails(result:Recruiter[], industries:IndustryModel[], item:any, i:number, recruiters:RecruiterClassModel[]) {
+    let recruiterService = new RecruiterService();
+    recruiterService.loadCapbilityAndKeySkills(result[0].postedJobs, industries);
+    item[i].data = result[0].postedJobs;
+    recruiters.push(item[i]);
+  }
+
+  private getCandidateDetails(resu:any, item:any, i:number, industries:IndustryModel[], value:number, candidates:CandidateModelClass[]) {
+    let candidateService = new CandidateService();
+    let response:any = candidateService.getCandidateDetail(resu[0], item[i], industries);
+    response.personalDetails = {};
+    item[i].data = response;
+    value++;
+    candidates.push(item[i]);
+    return value;
+  }
+
+  addUsageDetailsValue(item:any, callback:(error:any, result:any) => void) {
     try {
-      let value:number=0;
+      let value:number = 0;
       for (let i = 0; i < item.length; i++) {
-          value++;
-          item[i].action=ConstVariables.ActionsArray[item[i].action];
-          if(item.length===value) {
-            callback(null, item);
-          }
+        value++;
+        item[i].action = ConstVariables.ActionsArray[item[i].action];
+        if (item.length === value) {
+          callback(null, item);
+        }
       }
     } catch (e) {
       callback(e, null);
     }
   };
 
-  generateUsageDetailFile(result: any, callback: (err: any, res: any) => void) {
+  generateUsageDetailFile(result:any, callback:(err:any, res:any) => void) {
     if (result && result.length > 0) {
       let fields = ['candidateId', 'recruiterId', 'jobProfileId', 'action', 'timestamp'];
       let fieldNames = ['Candidate Id', 'RecruiterId', 'Job Profile Id', 'Action', 'TimeStamp'];
       let csv = json2csv({data: result, fields: fields, fieldNames: fieldNames});
-      //fs.writeFile('./src/server/public/usagedetail.csv', csv, function (err: any) {
-      fs.writeFile('/home/bitnami/apps/jobmosis-staging/c-next/dist/prod/server/public/usagedetail.csv', csv, function (err: any) {
+      //fs.writeFile('./src/server/public/usagedetail.csv', csv, function (err:any) {
+        fs.writeFile('/home/bitnami/apps/jobmosis-staging/c-next/dist/prod/server/public/usagedetail.csv', csv, function (err: any) {
         if (err) throw err;
-        console.log('file written');
         callback(null, result);
       });
     } else {
@@ -134,13 +153,24 @@ class AdminService {
     }
   };
 
-  generateCandidateDetailFile(result: any, callback: (err: any, res: any) => void) {
+  generateCandidateDetailFile(result:any, callback:(err:any, res:any) => void) {
     if (result.candidate && result.candidate.length > 0) {
-      let fields = ['first_name', 'last_name', 'mobile_number', 'email', 'isActivated', 'data.location.city', 'data.professionalDetails.education', 'data.professionalDetails.experience', 'data.professionalDetails.currentSalary', 'data.professionalDetails.noticePeriod', 'data.professionalDetails.relocate', 'data.professionalDetails.industryExposure', 'data.professionalDetails.currentCompany', 'data.isCompleted', 'data.isSubmitted', 'data.isVisible','data.proficiencies','data.industry.name','data.industry.roles.name','data.industry.roles.default_complexities.name','data.industry.roles.default_complexities.complexities.name','data.industry.roles.default_complexities.complexities.scenarios.name','data.industry.roles.capabilities.name','data.industry.roles.capabilities.complexities.name','data.industry.roles.capabilities.complexities.scenarios.name'];
-      let fieldNames = ['First Name', 'Last Name', 'Mobile Number', 'Email', 'Is Activated', 'Location', 'Education', 'Experience', 'Current Salary', 'Notice Period', 'Relocate', 'Industry Exposure', 'Current Company', 'Is Completed', 'Is Submitted', 'Is Visible','Key Skills','Industry','Area of work','Default Complexity','Scenarios','Complexities','Capabilities','Complexity','Scenario'];//
-      let csv = json2csv({data: result.candidate, fields: fields, fieldNames: fieldNames, unwindPath: ['data.proficiencies','data.industry.roles','data.industry.roles.default_complexities','data.industry.roles.default_complexities.complexities','data.industry.roles.default_complexities.complexities.scenarios','data.industry.roles.capabilities','data.industry.roles.capabilities.complexities','data.industry.roles.capabilities.complexities.scenarios']});
-      //fs.writeFile('./src/server/public/candidate.csv', csv, function (err: any) {
-      fs.writeFile('/home/bitnami/apps/jobmosis-staging/c-next/dist/prod/server/public/candidate.csv', csv, function (err: any) {
+      let fields = ['first_name', 'last_name', 'mobile_number', 'email', 'isActivated', 'data.location.city', 'data.professionalDetails.education',
+        'data.professionalDetails.experience', 'data.professionalDetails.currentSalary', 'data.professionalDetails.noticePeriod',
+        'data.professionalDetails.relocate', 'data.professionalDetails.industryExposure', 'data.professionalDetails.currentCompany',
+        'data.isCompleted', 'data.isSubmitted', 'data.isVisible', 'data.keySkills', 'data.industry.name', 'data.industry.roles.name',
+        'data.capabilities.name', 'data.capabilities.complexities.name', 'data.capabilities.complexities.answer', 'data.industry.roles.default_complexities.name',
+        'data.industry.roles.default_complexities.complexities.name', 'data.industry.roles.default_complexities.complexities.scenarios.name'];
+      let fieldNames = ['First Name', 'Last Name', 'Mobile Number', 'Email', 'Is Activated', 'Location', 'Education', 'Experience',
+        'Current Salary', 'Notice Period', 'Relocate', 'Industry Exposure', 'Current Company', 'Is Completed', 'Is Submitted',
+        'Is Visible', 'Key Skills', 'Industry', 'Area of work', 'Capabilities', 'Complexity', 'Scenario', 'Default Complexity', 'Complexities', 'Scenarios'];//
+      let csv = json2csv({
+        data: result.candidate, fields: fields, fieldNames: fieldNames,
+        unwindPath: ['data.industry.roles', 'data.industry.roles.default_complexities', 'data.industry.roles.default_complexities.complexities',
+          'data.industry.roles.default_complexities.complexities.scenarios', 'data.capabilities', 'data.capabilities.complexities']
+      });
+      //fs.writeFile('./src/server/public/candidate.csv', csv, function (err:any) {
+        fs.writeFile('/home/bitnami/apps/jobmosis-staging/c-next/dist/prod/server/public/candidate.csv', csv, function (err: any) {
         if (err) throw err;
         callback(null, result);
       });
@@ -169,19 +199,19 @@ class AdminService {
     }
   };
 
-  sendAdminLoginInfoMail(field: any, callback: (error: any, result: any) => void) {
-    let  header1 = fs.readFileSync("./src/server/app/framework/public/header1.html").toString();
-    let  content = fs.readFileSync("./src/server/app/framework/public/adminlogininfo.mail.html").toString();
-    let footer1 = fs.readFileSync("./src/server/app/framework/public/footer1.html").toString();
-    let mid_content = content.replace('$email$', field.email).replace('$address$', (field.location== undefined)?"Not Found":field.location)
-                      .replace('$ip$', field.ip).replace('$host$',config.get('TplSeed.mail.host') );
+  sendAdminLoginInfoMail(field:any, callback:(error:any, result:any) => void) {
+    let header1 = fs.readFileSync('./src/server/app/framework/public/header1.html').toString();
+    let content = fs.readFileSync('./src/server/app/framework/public/adminlogininfo.mail.html').toString();
+    let footer1 = fs.readFileSync('./src/server/app/framework/public/footer1.html').toString();
+    let mid_content = content.replace('$email$', field.email).replace('$address$', (field.location === undefined) ? 'Not Found' : field.location)
+      .replace('$ip$', field.ip).replace('$host$', config.get('TplSeed.mail.host'));
 
 
     let mailOptions = {
-      from:config.get('TplSeed.mail.MAIL_SENDER'),
+      from: config.get('TplSeed.mail.MAIL_SENDER'),
       to: config.get('TplSeed.mail.ADMIN_MAIL'),
       cc: config.get('TplSeed.mail.TPLGROUP_MAIL'),
-      subject: Messages.EMAIL_SUBJECT_ADMIN_LOGGED_ON+" "+config.get('TplSeed.mail.host'),
+      subject: Messages.EMAIL_SUBJECT_ADMIN_LOGGED_ON + " " + config.get('TplSeed.mail.host'),
       html: header1 + mid_content + footer1
       , attachments: MailAttachments.AttachmentArray
     }
@@ -190,8 +220,8 @@ class AdminService {
 
   };
 
-  updateUser(_id: string, item: any, callback: (error: any, result: any) => void) {
-    this.userRepository.findById(_id, (err: any, res: any) => {
+  updateUser(_id:string, item:any, callback:(error:any, result:any) => void) {
+    this.userRepository.findById(_id, (err:any, res:any) => {
       if (err) {
         callback(err, res);
       } else {
@@ -200,8 +230,8 @@ class AdminService {
     });
   };
 
-  getUsageDetails(field: any, callback: (error: any, result: any) => void) {
-    this.usesTrackingController.retrieveAll((err: any, res: any) => {
+  getUsageDetails(field:any, callback:(error:any, result:any) => void) {
+    this.usesTrackingController.retrieveAll((err:any, res:any) => {
       if (err) {
         callback(err, null);
       } else {

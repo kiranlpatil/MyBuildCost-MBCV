@@ -1,24 +1,2 @@
 @import '../../../../../css/variables';
-
-.list-container {
-  text-align: left;
-  margin-top: 190px;
-
-  .header {
-    padding: 5px 15px;
-    background: #edf1f5;
-    position: fixed;
-    width: 100%;
-    top: 142px;
-    text-align: right;
-  }
-
-  .list-view {
-    top: 190px !important;
-    padding: 0 15px;
-
-    h5 {
-      text-align: center;
-    }
-  }
-}
+@import '../candidate-detail-list/candidate-detail-list.component';

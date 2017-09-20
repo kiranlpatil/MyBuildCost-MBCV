@@ -837,6 +837,7 @@ header {
     .card-view {
       margin-top: 88px;
       margin-bottom: 0;
+      min-height: calc(100vh - 123px);
     }
   }
 

@@ -1,28 +1,23 @@
-import * as express from "express";
-//import AuthInterceptor = require("");
-import JobProfileModel = require("../../dataaccess/model/jobprofile.model");
-import SearchService = require("../services/search.service");
-import CandidateService = require("../../services/candidate.service");
-import RecruiterService = require("../../services/recruiter.service");
-import CandidateSearchService = require("../../services/candidate-search.service");
+import * as express from 'express';
+import JobProfileModel = require('../../dataaccess/model/jobprofile.model');
+import SearchService = require('../services/search.service');
+import CandidateService = require('../../services/candidate.service');
+import RecruiterService = require('../../services/recruiter.service');
+import CandidateSearchService = require('../../services/candidate-search.service');
 
 export class SearchController {
-  //searchService : SearchService;
-  constructor() {
-
-  }
 
   getMatchingCandidates(req: express.Request, res: express.Response) {
-    console.time("getMatchingCandidatesController");
+    console.time('getMatchingCandidatesController');
     let searchService = new SearchService();
     let profileId = req.params.id;
     let recruiterService = new RecruiterService();
-    recruiterService.getJobById(profileId, (err: any, jobres: any) => {
-      searchService.getMatchingCandidates(jobres, (error: Error, result: any) => {
+    recruiterService.getJobById(profileId, (err: any, jobRes: JobProfileModel) => {
+      searchService.getMatchingCandidates(jobRes, (error: Error, result: any) => {
         if (error) {
           res.status(304).send(error);
         } else {
-          console.timeEnd("getMatchingCandidatesController");
+          console.timeEnd('getMatchingCandidatesController');
           res.status(200).send(result);
         }
       });
@@ -67,10 +62,11 @@ export class SearchController {
               if (error) {
                 res.status(304).send(error);
               } else {
-                if (candidateInfo[0].isVisible == true) {
-                  var data:any = {'jobData': result};
+                let data: any;
+                if (candidateInfo[0].isVisible === true) {
+                  data = {'jobData': result};
                 } else {
-                  var data:any = {'jobData': []};
+                  data = {'jobData': []};
                 }
                 res.status(200).send(data);
               }

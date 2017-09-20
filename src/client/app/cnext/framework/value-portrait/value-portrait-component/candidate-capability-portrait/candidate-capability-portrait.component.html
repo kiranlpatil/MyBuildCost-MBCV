@@ -1,10 +1,10 @@
 <div class="value-portrait-candidate-capability">
-  <h3> Core Capabilities </h3>
+  <h3> {{getLabel().CORE_CAPABILITIES_TITLE}} </h3>
   <div class="value-portrait-candidate-capability-circle">
     <div class="circle-list" *ngFor="let capability of candidate.capabilities;let i=index;" [class.five-element]="i==4"
          [class.six-element]="i==5" [class.ten-element]="i==8" [class.eleven-element]="i==10"
          [class.fifteen-element]="i==14">
-      <div *ngIf="i < 10 || showMore" class="circle" [class.second-line]="i>4 && i < 10">
+      <div *ngIf="i < 10 || showMore || isClickEnable" class="circle" [class.second-line]="i>4 && i < 10">
         <div class="inner-circle" data-toggle="modal" [attr.data-target]="'#'+'capability-modal'+i">
         <span>
           {{capability.name}}
@@ -20,7 +20,7 @@
           </div>
         </div>
       </div>
-        <div class="modal fade" id="{{'capability-modal'+i}}" tabindex="-1" role="dialog"
+        <div *ngIf="isClickEnable" class="modal fade" id="{{'capability-modal'+i}}" tabindex="-1" role="dialog"
              aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog" role="document">
             <div class="modal-content">

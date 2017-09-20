@@ -47,13 +47,14 @@
           <button type="button" class="close" aria-label="Close" (click)="showHideModal()">
             <span aria-hidden="true">&times;</span>
           </button>
-          <h5>Mobile Number Changed successfully</h5>
+          <h5 class="modal-title">Mobile Number Changed successfully</h5>
         </div>
         <div class="modal-body">
           <p>{{mobileNumberChangeSucess}}.</p>
-          <div class="clearfix">&nbsp;</div>
-          <button type="button" class="btn btn-primary" (click)="logOut()">Yes</button>
-          <button type="button" class="btn btn-danger" (click)="showHideModal()">No</button>
+          <div class="button-group">
+            <button type="button" class="btn btn-primary" (click)="logOut()">Yes</button>
+            <button type="button" class="btn btn-default" (click)="showHideModal()">No</button>
+          </div>
         </div>
       </div>
     </div>

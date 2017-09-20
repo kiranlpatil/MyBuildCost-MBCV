@@ -1,23 +1,19 @@
-import IProficiency = require("../mongoose/proficiency");
-import IDomain = require("../mongoose/domain");
-import ILocation = require("../mongoose/location");
-import LocationModel = require("./location.model");
-import ProficiencyModel = require("./proficiency.model");
-import IndustryModel = require("./industry.model");
-import CandidateListModel = require("./candidate-list.model");
+import LocationModel = require('./location.model');
+import IndustryModel = require('./industry.model');
+import CandidateListModel = require('./candidate-list.model');
+import * as mongoose from 'mongoose';
+import CapabilityModel = require("./capability.model");
 
-interface JobProfileModel {
+interface JobProfileModel extends mongoose.Document {
   jobTitle: string;
   isJobPosted: boolean;
   hiringManager: string;
   department: string;
   education: string;
-  //experience: string;
   experienceMaxValue: string;
   experienceMinValue: string;
   salaryMaxValue: string;
   salaryMinValue: string;
-  //salary: string;
   joiningPeriod: string;
   proficiencies: string[];
   additionalProficiencies: string[];
@@ -34,5 +30,8 @@ interface JobProfileModel {
   postedJobs: any;
   releventIndustries: string[];
   hideCompanyName: boolean;
+  capability:CapabilityModel[];
+  keySkills:string;
+  additionalKeySkills:string;
 }
 export = JobProfileModel;

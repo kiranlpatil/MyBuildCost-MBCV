@@ -2,7 +2,7 @@
   <div class="header">
     <!--<a href="./public/candidate.csv" download="candiadte.csv" title="Export Candidate to CSV File"><i class="glyphicon glyphicon-export"></i>Export</a>-->
   </div>
-  <div title="Export Candidate to CSV File" class="export-data-link" (click)="generateCandidateDetailFile()"><span class="glyphicon glyphicon-export" ></span>Export</div>
+  <div title="Export candidates list to CSV file" class="export-data-link" (click)="generateCandidateDetailFile()"><span class="glyphicon glyphicon-export" ></span>Export</div>
   <a href="./public/candidate.csv" download="candidate.csv" id="link_candidate"  hidden></a>
   <div class="list-view">
     <ul class="list-header">
@@ -35,8 +35,8 @@
       <ul>
         <li>
           <p class="username">{{candidate.first_name}} {{candidate.last_name}}
-            <span class="glyphicon glyphicon-eye-open" *ngIf="candidate.data && candidate.data.isVisible" title="Public Profile"></span>
-            <span class="glyphicon glyphicon-eye-close" *ngIf="candidate.data && !candidate.data.isVisible" title="Private Profile"></span>
+            <span class="glyphicon glyphicon-eye-open" *ngIf="candidate.data && candidate.data.isVisible" title="Profile is Public"></span>
+            <span class="glyphicon glyphicon-eye-close" *ngIf="candidate.data && !candidate.data.isVisible" title="Profile is Private"></span>
           </p>
         </li>
         <li>
@@ -52,18 +52,18 @@
           <p *ngIf="candidate.data.location && candidate.data.location.city">{{candidate.data.location.city}}</p>
         </li>
         <li>
-          <span *ngIf="candidate.data.isSubmitted" class="completed">Created</span>
-          <span *ngIf="!candidate.data.isCompleted" class ="incomplete">Partially created</span>
-          <span *ngIf="candidate.data.isCompleted && !candidate.data.isSubmitted" class="partial">Created but not submitted</span>
+          <span *ngIf="candidate.data.isSubmitted" class="completed" title="Profile is completed.">Created</span>
+          <span *ngIf="!candidate.data.isCompleted" class ="incomplete" title="Profile is partially filled hence will not be available in search results.">Partially created</span>
+          <span *ngIf="candidate.data.isCompleted && !candidate.data.isSubmitted" class="partial" title="Profile is completed but user has not visited dashboard.">Created but not submitted</span>
         </li>
         <li>
-          <div *ngIf="candidate.isActivated"><span class="activated" title="Activated"></span><span>Active</span></div>
-          <div *ngIf="!candidate.isActivated"><span class="not-activated" title="Deactivated"></span><span>Deactive</span></div>
+          <div *ngIf="candidate.isActivated"><span class="activated" title="Profile is active"></span><span>Active</span></div>
+          <div *ngIf="!candidate.isActivated"><span class="not-activated" title="Profile is deactivated"></span><span>Deactive</span></div>
         </li>
         <li>
-          <button *ngIf="candidate.isActivated" class="btn-danger btn-custom" (click)="updateDetail(i,candidate,candidate.isActivated)">Deactivate</button>
-          <button *ngIf="!candidate.isActivated" class="btn-primary btn-custom" (click)="updateDetail(i,candidate,candidate.isActivated)">Activate</button>
-          <button class="btn-danger btn-custom" (click)="viewProfile(candidate,'/value-portrait')">View Profile</button>
+          <button *ngIf="candidate.isActivated" class="btn-danger btn-custom" (click)="updateDetail(i,candidate,candidate.isActivated)" title="Click to deactivate this profile.">Deactivate</button>
+          <button *ngIf="!candidate.isActivated" class="btn-primary btn-custom" (click)="updateDetail(i,candidate,candidate.isActivated)" title="Click to activate this profile.">Activate</button>
+          <button class="btn-danger btn-custom" (click)="viewProfile(candidate,'/value-portrait')" *ngIf="candidate.data.isCompleted" title="Click to view value portrait of this candidate">View Profile</button>
         </li>
       </ul>
     </div>
