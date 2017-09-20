@@ -75,16 +75,16 @@ export function getAllUser(req: express.Request, res: express.Response, next: an
       userService.retrieveAll(params, (error, result) => {
         if (error) {
           next({
-            reason: 'Error In Retrieving',//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
-            message: 'error in create excel',
+            reason: Messages.MSG_ERROR_RETRIEVING_USER,//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
+            message: Messages.MSG_ERROR_RETRIEVING_USER,
             code: 403
           });
         } else {
           adminService.seperateUsers(result,(error, resp) => {
             if (error) {
               next({
-                reason: 'Error In Retrieving',//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
-                message: 'error in create excel',
+                reason: Messages.MSG_ERROR_SEPERATING_USER,//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
+                message: Messages.MSG_ERROR_SEPERATING_USER,
                 code: 403
               });
             }else {
@@ -99,8 +99,8 @@ export function getAllUser(req: express.Request, res: express.Response, next: an
     }else {
       res.status(401).send({
         'error': {
-          reason: 'Unauthorized User',
-          message:'You are unauthorized user',
+          reason: Messages.MSG_ERROR_UNAUTHORIZED_USER,
+          message:Messages.MSG_ERROR_UNAUTHORIZED_USER,
           code: 401
         }
       });
@@ -118,24 +118,24 @@ export function getCandidateDetails(req: express.Request, res: express.Response,
       userService.retrieveAll(params, (error, result) => {
         if (error) {
           next({
-            reason: 'Error In Retrieving',//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
-            message: 'error in create excel',
+            reason: Messages.MSG_ERROR_RETRIEVING_USER,//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
+            message: Messages.MSG_ERROR_RETRIEVING_USER,
             code: 403
           });
         } else {
           adminService.seperateUsers(result,(error, resp) => {
             if (error) {
               next({
-                reason: 'Error In Retrieving',//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
-                message: 'error in create excel',
+                reason:  Messages.MSG_ERROR_SEPERATING_USER,//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
+                message:  Messages.MSG_ERROR_SEPERATING_USER,
                 code: 403
               });
             }else {
               adminService.generateCandidateDetailFile(resp, (err, respo)=> {
                 if (err) {
                   next({
-                    reason: 'Error In Generating csv',//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
-                    message: 'error in create excel',
+                    reason: Messages.MSG_ERROR_CREATING_EXCEL,//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
+                    message: Messages.MSG_ERROR_CREATING_EXCEL,
                     code: 403
                   });
                 } else {
@@ -152,8 +152,8 @@ export function getCandidateDetails(req: express.Request, res: express.Response,
     }else{
       res.status(401).send({
         'error': {
-          reason: 'Unauthorized User',
-          message:'You are unauthorized user',
+          reason: Messages.MSG_ERROR_UNAUTHORIZED_USER,
+          message:Messages.MSG_ERROR_UNAUTHORIZED_USER,
           code: 401
         }
       });
@@ -171,24 +171,24 @@ export function getRecruiterDetails(req: express.Request, res: express.Response,
       userService.retrieveAll(params, (error, result) => {
         if (error) {
           next({
-            reason: 'Error In Retrieving',//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
-            message: 'error in create excel',
+            reason: Messages.MSG_ERROR_RETRIEVING_USER,//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
+            message: Messages.MSG_ERROR_RETRIEVING_USER,
             code: 403
           });
         } else {
           adminService.seperateUsers(result,(error, resp) => {
             if (error) {
               next({
-                reason: 'Error In Retrieving',//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
-                message: 'error in create excel',
+                reason:  Messages.MSG_ERROR_SEPERATING_USER,//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
+                message:  Messages.MSG_ERROR_SEPERATING_USER,
                 code: 403
               });
             }else {
               adminService.generateRecruiterDetailFile(resp, (err, respo)=> {
                 if (err) {
                   next({
-                    reason: 'Error In Generating csv',//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
-                    message: 'error in create excel',
+                    reason: Messages.MSG_ERROR_CREATING_EXCEL,//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
+                    message: Messages.MSG_ERROR_CREATING_EXCEL,
                     code: 403
                   });
                 } else {
@@ -205,8 +205,8 @@ export function getRecruiterDetails(req: express.Request, res: express.Response,
     }else{
       res.status(401).send({
         'error': {
-          reason: 'Unauthorized User',
-          message:'You are unauthorized user',
+          reason: Messages.MSG_ERROR_UNAUTHORIZED_USER,
+          message:Messages.MSG_ERROR_UNAUTHORIZED_USER,
           code: 401
         }
       });
@@ -224,24 +224,24 @@ export function getUsageDetails(req: express.Request, res: express.Response, nex
       adminService.getUsageDetails(params, (error, result) => {
         if (error) {
           next({
-            reason: 'Error In Retrieving',//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
-            message: 'error in create excel',
+            reason: Messages.MSG_ERROR_RETRIEVING_USAGE_DETAIL,//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
+            message: Messages.MSG_ERROR_RETRIEVING_USAGE_DETAIL,
             code: 403
           });
         } else {
           adminService.addUsageDetailsValue(result,(error, resp) => {
             if (error) {
               next({
-                reason: 'Error In Retrieving',//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
-                message: 'error in create excel',
+                reason: Messages.MSG_ERROR_ADDING_USAGE_DETAIL,//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
+                message: Messages.MSG_ERROR_ADDING_USAGE_DETAIL,
                 code: 403
               });
             }else {
               adminService.generateUsageDetailFile(resp, (err, respo)=> {
                 if (err) {
                   next({
-                    reason: 'Error In generating csv',//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
-                    message: 'error in create excel',
+                    reason: Messages.MSG_ERROR_CREATING_EXCEL,//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
+                    message: Messages.MSG_ERROR_CREATING_EXCEL,
                     code: 403
                   });
                 } else {
@@ -259,8 +259,8 @@ export function getUsageDetails(req: express.Request, res: express.Response, nex
     } else {
       res.status(401).send({
         'error': {
-          reason: 'Unauthorized User',
-          message:'You are unauthorized user',
+          reason: Messages.MSG_ERROR_UNAUTHORIZED_USER,
+          message:Messages.MSG_ERROR_UNAUTHORIZED_USER,
           code: 401
         }
       });

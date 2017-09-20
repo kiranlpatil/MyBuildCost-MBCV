@@ -2,6 +2,10 @@ import { Component, Input } from '@angular/core';
 import { ErrorService } from '../../error.service';
 import { AdminDashboardService } from '../admin-dashboard.service';
 import { Router } from '@angular/router';
+import { LoaderService} from '../../../../shared/loader/loaders.service';
+import { MessageService } from '../../../../shared/services/message.service';
+import { Message } from '../../../../shared/models/message';
+import { Messages } from '../../../../shared/constants';
 
 @Component({
   moduleId: module.id,
@@ -12,28 +16,47 @@ import { Router } from '@angular/router';
 
 export class RecruiterDetailListComponent {
   @Input() recruiters:any[]=new Array(0);
-  constructor(private adminDashboardService:AdminDashboardService, private errorService:ErrorService,private _router:Router) {
+  private successMessage:string;
+  constructor(private adminDashboardService:AdminDashboardService,
+              private loaderService: LoaderService,
+              private errorService: ErrorService,
+              private messageService: MessageService,
+              private _router:Router) {
 
   }
   updateDetail(index:number,recruiter:any,activated:boolean) {
+    this.loaderService.start();
     recruiter.isActivated=!activated;
     recruiter.user_id=recruiter._id;
     this.adminDashboardService.updateUser(recruiter).subscribe(
       data => {
         this.onUpdateComplete(index,data.data,activated);
-      }, error => this.errorService.onError(error));
+      }, error => {
+        this.loaderService.stop();
+        this.errorService.onError(error);
+      });
   }
   onUpdateComplete(index:number,recruiter:any,activated:boolean) {
+    if(this.recruiters[index].isActivated) {
+      this.successMessage=' activated.';
+    } else {
+      this.successMessage=' deactivated.';
+    }
+    this.messageService.message(new Message(this.recruiters[index].data.company_name+' is now'+this.successMessage));
     this.recruiters[index].isActivated=!activated;
+    this.loaderService.stop();
   }
   generateRecruiterDetailFile() {
+    this.loaderService.start();
+    this.messageService.message(new Message(Messages.MSG_FOR_FILE_DOWNLOAD));
     this.adminDashboardService.generateRecruiterDetailFile()
       .subscribe(
-        UsageDetails => this.onSuccess(UsageDetails),
+        UsageDetails => {
+          this.loaderService.stop();
+          document.getElementById('link_recruiter').click();
+          this.messageService.message(new Message(Messages.MSG_SUCCESS_FOR_FILE_DOWNLOAD));
+        },
         error => this.errorService.onError(error));
-  }
-  onSuccess(UsageDetails:any) {
-    document.getElementById('link_recruiter').click();
   }
   viewProfile(recruiter:any,nav:string) {
     if (nav !== undefined) {

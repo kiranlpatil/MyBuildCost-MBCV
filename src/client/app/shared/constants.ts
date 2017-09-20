@@ -47,6 +47,8 @@ export class Messages {
 
   public static MSG_SUCCESS_FOR_PROFILE_CREATION_STATUS: string = 'Your profile created successfully.';
   public static MSG_SUCCESS_FOR_JOB_POST_STATUS: string = 'You have successfully posted the new job. You can search for matching candidates for this job through your dashboard.';
+  public static MSG_SUCCESS_FOR_FILE_DOWNLOAD: string = 'File has been downloaded successfully.';
+  public static MSG_FOR_FILE_DOWNLOAD: string = 'Generating the file this may take few minutes.';
 
   public static MSG_ERROR_MAIL_VERIFICATION_BODY: string = 'Your account verification failed due to invalid access token!';
   public static MSG_ERROR_MAIL_VERIFICATION_RESULT_STATUS: string = 'Sorry.';
@@ -210,7 +212,12 @@ export class Messages {
   public static FAQ_CONTACT_EMAIL = 'support@jobmosis.com';
   public static FAQ_MESSAGE = 'Have any questions?';
   public static POST_NEW_JOB_MESSAGE = 'Please click on "Post New Job" to proceed.';
-  public static GUIDE_MESSAGE_FOR_NEW_VIEWER = 'Thank you for showing interest, we will need your basic information to create your value portrait on JobMosis. Go ahead, fill the form and get your value portrait!'
+  public static GUIDE_MESSAGE_FOR_NEW_VIEWER = 'Thank you for showing interest, we will need your basic information to'+
+    'create your value portrait on JobMosis. Go ahead, fill the form and get your value portrait!';
+}
+export class AdminPanel {
+  public static PUBLIC_PROFILE='Profile is public';
+  public static PRIVATE_PROFILE='Profile is private';
 }
 
 export class NavigationRoutes {

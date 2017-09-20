@@ -106,6 +106,14 @@ class Messages {
   public static MSG_ERROR_IF_USER_ID_INVALID_FROM_URL_PARAMETER = 'Problem with id which you provided';
   public static MSG_ERROR_FETCH_SHARE_URL_FAILED = 'Fetch to share link url failed';
   public static MSG_ERROR_IF_STORE_TO_SHARE_LINK_FAILED = 'Share link failed when going to store';
+
+  //admin module
+  public static MSG_ERROR_UNAUTHORIZED_USER = 'You are unauthorized user';
+  public static MSG_ERROR_RETRIEVING_USER = 'Error In Retrieving the Users';
+  public static MSG_ERROR_RETRIEVING_USAGE_DETAIL = 'Error In Retrieving the Usage Detail';
+  public static MSG_ERROR_ADDING_USAGE_DETAIL = 'Error In editing the Usage Detail';
+  public static MSG_ERROR_SEPERATING_USER = 'Error In Seperating the Users';
+  public static MSG_ERROR_CREATING_EXCEL = 'Error In creating csv file';
 }
 export=Messages;
 
