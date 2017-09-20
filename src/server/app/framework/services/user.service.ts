@@ -1,26 +1,22 @@
-import UserRepository = require("../dataaccess/repository/user.repository");
-import UserModel = require("../dataaccess/model/user.model");
-import IUserService = require("./user.service");
-import SendMailService = require("./sendmail.service");
-import SendMessageService = require("./sendmessage.service");
-import * as fs from "fs";
-import * as mongoose from "mongoose";
-//import * as config from 'config';
+import UserRepository = require('../dataaccess/repository/user.repository');
+import SendMailService = require('./sendmail.service');
+import SendMessageService = require('./sendmessage.service');
+import * as fs from 'fs';
+import * as mongoose from 'mongoose';
 var config = require('config');
-var bcrypt = require('bcrypt');
-import Messages = require("../shared/messages");
-import AuthInterceptor = require("../../framework/interceptor/auth.interceptor");
-import ProjectAsset = require("../shared/projectasset");
-import MailAttachments = require("../shared/sharedarray");
-import RecruiterRepository = require("../dataaccess/repository/recruiter.repository");
-import UsersClassModel = require("../dataaccess/model/users");
+import Messages = require('../shared/messages');
+import AuthInterceptor = require('../../framework/interceptor/auth.interceptor');
+import ProjectAsset = require('../shared/projectasset');
+import MailAttachments = require('../shared/sharedarray');
+import RecruiterRepository = require('../dataaccess/repository/recruiter.repository');
 
 class UserService {
-  private userRepository: UserRepository;
-  private recruiterRepository: RecruiterRepository;
   APP_NAME: string;
   company_name: string;
   mid_content: any;
+  private userRepository: UserRepository;
+  private recruiterRepository: RecruiterRepository;
+
 
   constructor() {
     this.userRepository = new UserRepository();
@@ -29,16 +25,14 @@ class UserService {
   }
 
   createUser(item: any, callback: (error: any, result: any) => void) {
-    this.userRepository.retrieve({"email": item.email}, (err, res) => {
+    this.userRepository.retrieve({'email': item.email}, (err, res) => {
       if (err) {
         callback(new Error(err), null);
-      }
-      else if (res.length > 0) {
+      }else if (res.length > 0) {
 
         if (res[0].isActivated === true) {
           callback(new Error(Messages.MSG_ERROR_REGISTRATION), null);
-        }
-        else if (res[0].isActivated === false) {
+        }else if (res[0].isActivated === false) {
           callback(new Error(Messages.MSG_ERROR_VERIFY_ACCOUNT), null);
         }
 
@@ -46,8 +40,7 @@ class UserService {
         this.userRepository.create(item, (err, res) => {
           if (err) {
             callback(new Error(Messages.MSG_ERROR_REGISTRATION_MOBILE_NUMBER), null);
-          }
-          else {
+          }else {
             callback(null, res);
           }
         });
@@ -59,25 +52,22 @@ class UserService {
 
 
   generateOtp(field: any, callback: (error: any, result: any) => void) {
-    this.userRepository.retrieve({"mobile_number": field.new_mobile_number, "isActivated": true}, (err, res) => {
+    this.userRepository.retrieve({'mobile_number': field.new_mobile_number, 'isActivated': true}, (err, res) => {
 
       if (err) {
-        console.log("err genrtotp retriv", err);
-      }
-      else if (res.length > 0 && (res[0]._id) !== field._id) {
+        console.log('err genrtotp retriv', err);
+      }else if (res.length > 0 && (res[0]._id) !== field._id) {
         callback(new Error(Messages.MSG_ERROR_REGISTRATION_MOBILE_NUMBER), null);
-      }
-      else if (res.length === 0) {
+      }else if (res.length === 0) {
 
-        let query = {"_id": field._id};
+        let query = {'_id': field._id};
         let otp = Math.floor((Math.random() * 99999) + 100000);
         // var otp = Math.floor(Math.random() * (10000 - 1000) + 1000);
-        let  updateData = {"mobile_number": field.new_mobile_number, "otp": otp};
+        let  updateData = {'mobile_number': field.new_mobile_number, 'otp': otp};
         this.userRepository.findOneAndUpdate(query, updateData, {new: true}, (error, result) => {
           if (error) {
             callback(new Error(Messages.MSG_ERROR_REGISTRATION_MOBILE_NUMBER), null);
-          }
-          else {
+          }else {
             let  Data = {
               mobileNo: field.new_mobile_number,
               otp: otp
@@ -86,8 +76,7 @@ class UserService {
             sendMessageService.sendMessageDirect(Data, callback);
           }
         });
-      }
-      else {
+      }else {
         callback(new Error(Messages.MSG_ERROR_REGISTRATION_MOBILE_NUMBER), null);
       }
     });
@@ -95,16 +84,15 @@ class UserService {
 
   changeMobileNumber(field: any, callback: (error: any, result: any) => void) {
 
-    let query = {"_id": field._id};
+    let query = {'_id': field._id};
     // var otp = Math.floor(Math.random() * (10000 - 1000) + 1000);
     let  otp = Math.floor((Math.random() * 99999) + 100000);
-    let updateData = {"otp": otp, "temp_mobile": field.new_mobile_number};
+    let updateData = {'otp': otp, 'temp_mobile': field.new_mobile_number};
 
     this.userRepository.findOneAndUpdate(query, updateData, {new: true}, (error, result) => {
       if (error) {
         callback(new Error(Messages.MSG_ERROR_REGISTRATION), null);
-      }
-      else {
+      }else {
         let Data = {
           current_mobile_number: field.current_mobile_number,
           mobileNo: field.new_mobile_number,
@@ -120,17 +108,17 @@ class UserService {
 
   forgotPassword(field: any, callback: (error: any, result: any) => void) {
 
-    this.userRepository.retrieve({"email": field.email}, (err, res) => {
+    this.userRepository.retrieve({'email': field.email}, (err, res) => {
       if (res.length > 0 && res[0].isActivated === true) {
-        let  header1 = fs.readFileSync("./src/server/app/framework/public/header1.html").toString();
-        let  content = fs.readFileSync("./src/server/app/framework/public/forgotpassword.html").toString();
-        let  footer1 = fs.readFileSync("./src/server/app/framework/public/footer1.html").toString();
+        let  header1 = fs.readFileSync('./src/server/app/framework/public/header1.html').toString();
+        let  content = fs.readFileSync('./src/server/app/framework/public/forgotpassword.html').toString();
+        let  footer1 = fs.readFileSync('./src/server/app/framework/public/footer1.html').toString();
 
         let  auth = new AuthInterceptor();
         let  token = auth.issueTokenWithUid(res[0]);
         let host = config.get('TplSeed.mail.host');
-        console.log("frgt pwd host", host);
-        let link = host + "reset_password?access_token=" + token + "&_id=" + res[0]._id;
+        console.log('frgt pwd host', host);
+        let link = host + 'reset_password?access_token=' + token + '&_id=' + res[0]._id;
         if (res[0].isCandidate === true) {
           this.mid_content = content.replace('$link$', link).replace('$first_name$', res[0].first_name).replace('$app_name$', this.APP_NAME);
           let  mailOptions = {
@@ -144,11 +132,10 @@ class UserService {
           sendMailService.sendMail(mailOptions, callback);
 
         } else {
-          this.recruiterRepository.retrieve({"userId": new mongoose.Types.ObjectId(res[0]._id)}, (err, recruiter) => {
+          this.recruiterRepository.retrieve({'userId': new mongoose.Types.ObjectId(res[0]._id)}, (err, recruiter) => {
             if (err) {
               callback(err, null);
-            }
-            else {
+            }else {
               this.company_name = recruiter[0].company_name;
 
               this.mid_content = content.replace('$link$', link).replace('$first_name$', this.company_name).replace('$app_name$', this.APP_NAME);
@@ -166,12 +153,9 @@ class UserService {
             }
           });
         }
-      }
-
-      else if (res.length > 0 && res[0].isActivated === false) {
+      }else if (res.length > 0 && res[0].isActivated === false) {
         callback(new Error(Messages.MSG_ERROR_ACCOUNT_STATUS), res);
-      }
-      else {
+      }else {
 
         callback(new Error(Messages.MSG_ERROR_USER_NOT_FOUND), res);
       }
@@ -181,24 +165,22 @@ class UserService {
 
 
   SendChangeMailVerification(field: any, callback: (error: any, result: any) => void) {
-    let  query = {"email": field.current_email, "isActivated": true};
-    let  updateData = {"temp_email": field.new_email};
+    let  query = {'email': field.current_email, 'isActivated': true};
+    let  updateData = {'temp_email': field.new_email};
       this.userRepository.findOneAndUpdate(query, updateData, {new: true}, (error, result) => {
         if (error) {
 
           callback(new Error(Messages.MSG_ERROR_EMAIL_ACTIVE_NOW), null);
 
-        }
-
-        else {
+        }else {
 
           let auth = new AuthInterceptor();
           let  token = auth.issueTokenWithUid(result);
           let  host = config.get('TplSeed.mail.host');
-          let  link = host + "activate_user?access_token=" + token + "&_id=" + result._id;
-          let header1 = fs.readFileSync("./src/server/app/framework/public/header1.html").toString();
-          let content = fs.readFileSync("./src/server/app/framework/public/change.mail.html").toString();
-          let  footer1 = fs.readFileSync("./src/server/app/framework/public/footer1.html").toString();
+          let  link = host + 'activate_user?access_token=' + token + '&_id=' + result._id;
+          let header1 = fs.readFileSync('./src/server/app/framework/public/header1.html').toString();
+          let content = fs.readFileSync('./src/server/app/framework/public/change.mail.html').toString();
+          let  footer1 = fs.readFileSync('./src/server/app/framework/public/footer1.html').toString();
           let mid_content = content.replace('$link$', link);
 
           let  mailOptions = {
@@ -219,9 +201,9 @@ class UserService {
 
   sendVerificationMail(field: any, callback: (error: any, result: any) => void) {
 
-    this.userRepository.retrieve({"email": field.email}, (err, res) => {
+    this.userRepository.retrieve({'email': field.email}, (err, res) => {
       if (res.length > 0) {
-        this.recruiterRepository.retrieve({"userId": new mongoose.Types.ObjectId(res[0]._id)}, (err, recruiter) => {
+        this.recruiterRepository.retrieve({'userId': new mongoose.Types.ObjectId(res[0]._id)}, (err, recruiter) => {
           if (err) {
             callback(err, null);
           } else {
@@ -230,10 +212,10 @@ class UserService {
             let  auth = new AuthInterceptor();
             let  token = auth.issueTokenWithUid(recruiter[0]);
             let host = config.get('TplSeed.mail.host');
-            let  link = host + "company_details?access_token=" + token + "&_id=" + res[0]._id+ "&companyName=" +this.company_name;
-            let  header1 = fs.readFileSync("./src/server/app/framework/public/header1.html").toString();
-            let  content = fs.readFileSync("./src/server/app/framework/public/recruiter.mail.html").toString();
-            let footer1 = fs.readFileSync("./src/server/app/framework/public/footer1.html").toString();
+            let  link = host + 'company_details?access_token=' + token + '&_id=' + res[0]._id+ '&companyName=' +this.company_name;
+            let  header1 = fs.readFileSync('./src/server/app/framework/public/header1.html').toString();
+            let  content = fs.readFileSync('./src/server/app/framework/public/recruiter.mail.html').toString();
+            let footer1 = fs.readFileSync('./src/server/app/framework/public/footer1.html').toString();
             let  mid_content = content.replace('$link$', link);
             let mailOptions = {
               from:config.get('TplSeed.mail.MAIL_SENDER'),
@@ -254,15 +236,15 @@ class UserService {
 
   sendRecruiterVerificationMail(field: any, callback: (error: any, result: any) => void) {
 
-    this.userRepository.retrieve({"email": field.email}, (err, res) => {
+    this.userRepository.retrieve({'email': field.email}, (err, res) => {
       if (res.length > 0) {
         let  auth = new AuthInterceptor();
         let token = auth.issueTokenWithUid(res[0]);
         let  host = config.get('TplSeed.mail.host');
-        let  link = host + "activate_user?access_token=" + token + "&_id=" + res[0]._id;
-        let  header1 = fs.readFileSync("./src/server/app/framework/public/header1.html").toString();
-        let content = fs.readFileSync("./src/server/app/framework/public/recruiter.mail.html").toString();
-        let footer1 = fs.readFileSync("./src/server/app/framework/public/footer1.html").toString();
+        let  link = host + 'activate_user?access_token=' + token + '&_id=' + res[0]._id;
+        let  header1 = fs.readFileSync('./src/server/app/framework/public/header1.html').toString();
+        let content = fs.readFileSync('./src/server/app/framework/public/recruiter.mail.html').toString();
+        let footer1 = fs.readFileSync('./src/server/app/framework/public/footer1.html').toString();
         let mid_content = content.replace('$link$', link);
         let mailOptions = {
           from:config.get('TplSeed.mail.MAIL_SENDER'),
@@ -274,9 +256,7 @@ class UserService {
         let sendMailService = new SendMailService();
         sendMailService.sendMail(mailOptions, callback);
 
-      }
-
-      else {
+      }else {
 
         callback(new Error(Messages.MSG_ERROR_USER_NOT_FOUND), res);
       }
@@ -285,9 +265,9 @@ class UserService {
 
 
   sendMail(field: any, callback: (error: any, result: any) => void) {
-    let  header1 = fs.readFileSync("./src/server/app/framework/public/header1.html").toString();
-    let  content = fs.readFileSync("./src/server/app/framework/public/contactus.mail.html").toString();
-    let  footer1 = fs.readFileSync("./src/server/app/framework/public/footer1.html").toString();
+    let  header1 = fs.readFileSync('./src/server/app/framework/public/header1.html').toString();
+    let  content = fs.readFileSync('./src/server/app/framework/public/contactus.mail.html').toString();
+    let  footer1 = fs.readFileSync('./src/server/app/framework/public/footer1.html').toString();
     let mid_content = content.replace('$first_name$', field.first_name).replace('$email$', field.email).replace('$message$', field.message);
     let  to = config.get('TplSeed.mail.ADMIN_MAIL');
     let mailOptions = {
@@ -302,18 +282,18 @@ class UserService {
 
   }
   sendMailOnError(errorInfo: any, callback: (error: any, result: any) => void) {
-    let date = new Date();
-    let current_Time=new Date().toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})
-    let header1 = fs.readFileSync("./src/server/app/framework/public/header1.html").toString();
-    let content = fs.readFileSync("./src/server/app/framework/public/error.mail.html").toString();
-    let footer1 = fs.readFileSync("./src/server/app/framework/public/footer1.html").toString();
-    let mid_content = content.replace('$time$',current_Time).replace('$host$',config.get('TplSeed.mail.host')).replace('$reason$', errorInfo.reason).replace('$code$', errorInfo.code).replace('$message$', errorInfo.message);
+    let current_Time=new Date().toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'});
+    let header1 = fs.readFileSync('./src/server/app/framework/public/header1.html').toString();
+    let content = fs.readFileSync('./src/server/app/framework/public/error.mail.html').toString();
+    let footer1 = fs.readFileSync('./src/server/app/framework/public/footer1.html').toString();
+    let mid_content = content.replace('$time$',current_Time).
+    replace('$host$',config.get('TplSeed.mail.host')).replace('$reason$', errorInfo.reason).replace('$code$', errorInfo.code).replace('$message$', errorInfo.message);
 
     let mailOptions = {
       from:config.get('TplSeed.mail.MAIL_SENDER'),
       to: config.get('TplSeed.mail.ADMIN_MAIL'),
       cc: config.get('TplSeed.mail.TPLGROUP_MAIL'),
-      subject: Messages.EMAIL_SUBJECT_SERVER_ERROR+" on " +config.get('TplSeed.mail.host'),
+      subject: Messages.EMAIL_SUBJECT_SERVER_ERROR+' on ' +config.get('TplSeed.mail.host'),
       html: header1 + mid_content + footer1
       , attachments: MailAttachments.AttachmentArray
     }
@@ -361,14 +341,14 @@ class UserService {
   }
 
   UploadImage(tempPath: any, fileName: any, cb: any) {
-    var targetpath = fileName;
+    let targetpath = fileName;
     fs.rename(tempPath, targetpath, function (err) {
       cb(null, tempPath);
     });
   }
 
   UploadDocuments(tempPath: any, fileName: any, cb: any) {
-    var targetpath = fileName;
+    let targetpath = fileName;
     fs.rename(tempPath, targetpath, function (err: any) {
       cb(null, tempPath);
     });

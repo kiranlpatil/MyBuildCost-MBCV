@@ -1,11 +1,9 @@
-import DataAccess = require("../dataaccess");
-import User = require("../mongoose/user");
+import DataAccess = require('../dataaccess');
+import User = require('../mongoose/user');
 
 var mongoose = DataAccess.mongooseInstance;
 var mongooseConnection = DataAccess.mongooseConnection;
-//var encrypt = require('mongoose-encryption');
-//var encKey = 'RGV2ZWxvcGVyIGNob2ljZSB0byB1c2Ugd2hpY2ggYmq';
-//var sigKey ='RGV2ZWxvcGVyIGNob2ljZSB0byB1c2Ugd2hpY2ggYmqRGV2ZWxvcGVyIGNob2ljZSB0byB1c2Ugd2hpY2ggYmq';
+
 
 class UserSchema {
   static get schema() {
@@ -79,13 +77,8 @@ class UserSchema {
       }],
       guide_tour: [{type: String}]
     }, {versionKey: false});
-    /*schema.plugin(encrypt, {
-      encryptionKey: encKey,
-      signingKey: sigKey,
-      encryptedFields: ['password']
-    });*/
     return schema;
   }
 }
-var schema = mongooseConnection.model<User>("User", UserSchema.schema);
+var schema = mongooseConnection.model<User>('User', UserSchema.schema);
 export = schema;

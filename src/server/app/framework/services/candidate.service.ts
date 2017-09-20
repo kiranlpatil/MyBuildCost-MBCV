@@ -1,26 +1,20 @@
-import * as mongoose from "mongoose";
+import * as mongoose from 'mongoose';
 import Messages = require('../shared/messages');
-import ProjectAsset = require('../shared/projectasset');
 import CandidateRepository = require('../dataaccess/repository/candidate.repository');
 import UserRepository = require('../dataaccess/repository/user.repository');
 import LocationRepository = require('../dataaccess/repository/location.repository');
 import RecruiterRepository = require('../dataaccess/repository/recruiter.repository');
 import IndustryRepository = require('../dataaccess/repository/industry.repository');
-import IndustryModel = require("../dataaccess/model/industry.model");
-import ScenarioModel = require("../dataaccess/model/scenario.model");
-import MatchViewModel = require("../dataaccess/model/match-view.model");
-import CandidateModel = require("../dataaccess/model/candidate.model");
-import CandidateClassModel = require("../dataaccess/model/candidate-class.model");
-import ICandidate = require("../dataaccess/mongoose/candidate");
-import User = require("../dataaccess/mongoose/user");
-import CapabilityClassModel = require("../dataaccess/model/capability-class.model");
-import CapabilitiesClassModel = require("../dataaccess/model/capabilities-class.model");
-import ComplexityClassModel = require("../dataaccess/model/complexity-class.model");
-import ComplexitiesClassModel = require("../dataaccess/model/complexities-class.model");
-import CapabilityModel = require("../dataaccess/model/capability.model");
-import RoleModel = require("../dataaccess/model/role.model");
-import CandidateInfoSearch = require("../dataaccess/model/candidate-info-search");
-var bcrypt = require('bcrypt');
+import IndustryModel = require('../dataaccess/model/industry.model');
+import ScenarioModel = require('../dataaccess/model/scenario.model');
+import MatchViewModel = require('../dataaccess/model/match-view.model');
+import CandidateClassModel = require('../dataaccess/model/candidate-class.model');
+import ICandidate = require('../dataaccess/mongoose/candidate');
+import User = require('../dataaccess/mongoose/user');
+import CapabilitiesClassModel = require('../dataaccess/model/capabilities-class.model');
+import ComplexitiesClassModel = require('../dataaccess/model/complexities-class.model');
+import RoleModel = require('../dataaccess/model/role.model');
+let bcrypt = require('bcrypt');
 class CandidateService {
   private candidateRepository: CandidateRepository;
   private recruiterRepository: RecruiterRepository;
@@ -28,7 +22,6 @@ class CandidateService {
   private userRepository: UserRepository;
   private locationRepository: LocationRepository;
 
-  APP_NAME: string;
 
   constructor() {
     this.candidateRepository = new CandidateRepository();
@@ -36,7 +29,6 @@ class CandidateService {
     this.recruiterRepository = new RecruiterRepository();
     this.locationRepository = new LocationRepository();
     this.industryRepositiry = new IndustryRepository();
-    this.APP_NAME = ProjectAsset.APP_NAME;
   }
 
   createUser(item: any, callback: (error: any, result: any) => void) {
@@ -44,8 +36,7 @@ class CandidateService {
     this.userRepository.retrieve({ $or: [ { 'email': item.email }, {'mobile_number': item.mobile_number } ]}, (err, res) => {
       if (err) {
         callback(new Error(err), null);
-      }
-      else if (res.length > 0) {
+      }else if (res.length > 0) {
         if (res[0].isActivated === true) {
           if(res[0].email===item.email) {
             callback(new Error(Messages.MSG_ERROR_REGISTRATION), null);
@@ -56,21 +47,20 @@ class CandidateService {
         } else if (res[0].isActivated === false) {
           callback(new Error(Messages.MSG_ERROR_VERIFY_ACCOUNT), null);
         }
-      }
-      else {
+      }else {
         const saltRounds = 10;
         bcrypt.hash(item.password, saltRounds, (err:any, hash:any) => {
           // Store hash in your password DB.
           if(err) {
-            callback(new Error('Error in creating hash using bcrypt'),null);
+            callback(new Error(Messages.MSG_ERROR_BCRYPT_CREATION),null);
           } else {
             item.password= hash;
             this.userRepository.create(item, (err, res) => {
               if (err) {
                 callback(new Error(Messages.MSG_ERROR_REGISTRATION_MOBILE_NUMBER), null);
               }else {
-                var userId1 = res._id;
-                var newItem: any = {
+                let userId1 = res._id;
+                let newItem: any = {
                   userId: userId1,
                   location: item.location
                 };
@@ -411,7 +401,7 @@ class CandidateService {
       let match_view: MatchViewModel = new MatchViewModel();
       for (let role of industries[0].roles) {
         for (let capability of role.capabilities) {
-          var count_of_complexity = 0;
+          let count_of_complexity = 0;
           for (let complexity of capability.complexities) {
             ++count_of_complexity;
             let custom_code = capability.code + '_' + complexity.code;
@@ -518,7 +508,7 @@ class CandidateService {
         }
         if (role.default_complexities) {
           for (let capability of role.default_complexities) {
-            var count_of_default_complexity = 0;
+            let count_of_default_complexity = 0;
             for (let complexity of capability.complexities) {
               ++count_of_default_complexity;
               let custom_code = capability.code + '_' + complexity.code;
