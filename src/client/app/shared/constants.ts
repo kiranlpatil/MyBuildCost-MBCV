@@ -220,8 +220,7 @@ export class Messages {
   public static GUIDE_MESSAGE_FOR_NEW_VIEWER = 'Thank you for showing interest, ' +
       'we will need your basic information to create your value portrait on JobMosis. Go ahead, ' +
       'fill the form and get your value portrait!';
-  public static GUIDE_MESSAGE_FOR_NEW_VIEWER = 'Thank you for showing interest, we will need your basic information to'+
-    'create your value portrait on JobMosis. Go ahead, fill the form and get your value portrait!';
+
 }
 export class AdminPanel {
   public static PUBLIC_PROFILE='Profile is public';
