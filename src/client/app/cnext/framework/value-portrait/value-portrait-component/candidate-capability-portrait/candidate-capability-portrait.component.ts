@@ -1,6 +1,7 @@
 import {Component, Input, OnChanges} from "@angular/core";
 import {Candidate} from "../../../../../user/models/candidate";
 import {Capability} from "../../../../../user/models/capability";
+import {Label} from "../../../../../shared/constants";
 
 @Component({
   moduleId: module.id,
@@ -26,10 +27,14 @@ export class CandidateCapabilityPortrait implements OnChanges {
       this.isClickEnable = true;
     }
 
-    if (this.candidate.capabilities.length > 10) {
+    if (this.candidate.capabilities.length > 10 && this.innerWidth >= 768) {
       this.capabilities = this.candidate.capabilities.slice(0, 10);
       this.showToggleButton = true;
     }
+  }
+
+  getLabel() {
+    return Label;
   }
 
 }

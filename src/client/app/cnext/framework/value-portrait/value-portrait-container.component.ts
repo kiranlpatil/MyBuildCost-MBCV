@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from "@angular/core";
 import {ActivatedRoute, Router} from "@angular/router";
-import {LocalStorage} from "../../../shared/constants";
+import {Button, Label, LocalStorage} from "../../../shared/constants";
 import {LocalStorageService} from "../../../shared/services/localstorage.service";
 
 
@@ -63,4 +63,11 @@ export class ValuePortraitContainerComponent implements OnInit,OnDestroy {
     this._router.navigate(['/applicant-signup','new_user']);
   }
 
+  getLabel() {
+    return Label;
+  }
+
+  getButtons() {
+    return Button;
+  }
 }

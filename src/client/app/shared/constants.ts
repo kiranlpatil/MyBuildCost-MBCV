@@ -531,6 +531,9 @@ export class Label {
   public static JOB_TITLE: string = 'New Job Title';
   public static CLONE_JOB: string = 'Clone Job';
   public static CLOSE_JOB: string = 'Close Job';
+  public static VALUE_PORTRAIT_HEADER: string = 'Value Portrait';
+  public static VALUE_PORTRAIT_TITLE: string = 'Experience is what it\'s all about';
+  public static CORE_CAPABILITIES_TITLE: string = 'Core Capabilities';
 }
 
 export class Button {
@@ -538,4 +541,5 @@ export class Button {
   public static RESET_PASSWORD_BUTTON: string = 'RESET PASSWORD';
   public static CLONE_BUTTON: string = 'CLONE';
   public static CANCEL_BUTTON: string = 'CANCEL';
+  public static VALUE_PORTRAIT_BUTTON: string = 'Create your Own Value Portrait';
 }
