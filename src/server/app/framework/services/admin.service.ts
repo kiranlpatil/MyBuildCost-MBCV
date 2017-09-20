@@ -5,7 +5,6 @@ import UserRepository = require('../dataaccess/repository/user.repository');
 import SendMailService = require('./sendmail.service');
 import * as mongoose from "mongoose";
 import {Recruiter} from "../dataaccess/model/recruiter-final.model";
-import {ProjectAsset} from "../../../../client/app/shared/constants";
 import {ConstVariables} from "../shared/sharedconstants";
 let config = require('config');
 let json2csv = require('json2csv');
@@ -24,7 +23,6 @@ import CandidateClassModel = require('../dataaccess/model/candidate-class.model'
 let usestracking = require('uses-tracking');
 
 class AdminService {
-  APP_NAME:string;
   company_name:string;
   private userRepository:UserRepository;
   private industryRepositiry:IndustryRepository;
@@ -36,7 +34,6 @@ class AdminService {
     this.userRepository = new UserRepository();
     this.industryRepositiry = new IndustryRepository();
     this.recruiterRepository = new RecruiterRepository();
-    this.APP_NAME = ProjectAsset.APP_NAME;
     let obj:any = new usestracking.MyController();
     this.usesTrackingController = obj._controller;
   }

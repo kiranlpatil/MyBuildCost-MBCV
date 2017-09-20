@@ -4,9 +4,8 @@ import JobProfileModel = require('../dataaccess/model/jobprofile.model');
 import JobProfileService = require('../services/jobprofile.service');
 import CNextMessages = require('../shared/cnext-messages');
 import SearchService = require('../search/services/search.service');
-import { Actions } from '../shared/sharedconstants';
+import {Actions, ConstVariables} from '../shared/sharedconstants';
 import RecruiterService = require('../services/recruiter.service');
-import { ValueConstant } from '../../../../client/app/shared/constants';
 let usestracking = require('uses-tracking');
 
 
@@ -239,7 +238,7 @@ export function cloneJob(req: express.Request, res: express.Response, next: any)
         newJob.postingDate = new Date();
         newJob.candidate_list=[];
 
-        newJob.expiringDate = new Date((new Date().getTime() + ValueConstant.JOB__EXPIRIY_PERIOD));
+        newJob.expiringDate = new Date((new Date().getTime() + ConstVariables.JOB__EXPIRIY_PERIOD));
         var recruiterService = new RecruiterService();
         recruiterService.addCloneJob( result.userId, newJob, (err, result) => {
             if (err) {
