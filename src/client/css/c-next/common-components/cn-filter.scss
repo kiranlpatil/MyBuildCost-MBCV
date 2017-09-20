@@ -127,15 +127,15 @@
   .filter-container {
     border-left: 0;
     box-shadow: none;
-    left: 0;
-    right: inherit;
+    right: 0;
+    left: inherit;
     top: 128px;
-    border-right: 1px solid $filter-border;
+    border-left: 1px solid $filter-border;
     width: 0;
     transition: 0.5s ease;
     visibility: hidden;
     opacity: 1;
-    height: calc(100vh - 148px);
+    height: calc(100vh - 128px);
 
     h4 {
       left: 30px;
@@ -167,6 +167,7 @@
   .open-filter {
     visibility: visible !important;
     width: 200px !important;
+    overflow-x: hidden;
   }
 
   .glyphicon-filter {
