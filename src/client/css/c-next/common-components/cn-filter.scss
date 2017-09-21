@@ -3,15 +3,15 @@
 .filter-container {
   padding: 0;
   position: fixed;
-  top: 94px;
+  top: 96px;
   right: 0;
-  height: calc(100vh - 115px);
+  height: calc(100vh - 117px);
   overflow: auto;
   border-left: 1px solid $gray;
   text-align: left;
   width: 200px;
   background: $filter-bg;
-  z-index: 1001;
+  z-index: 1002;
 
   p {
     color: $text-color;
