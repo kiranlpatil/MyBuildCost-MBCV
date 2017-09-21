@@ -37,7 +37,7 @@ export class ResetPasswordComponent implements OnInit {
 
     this.userForm = this.formBuilder.group({
       'new_password': ['', [ValidationService.requirePasswordValidator, ValidationService.passwordValidator]],
-      'confirm_password': ['', [ValidationService.requirePasswordValidator, ValidationService.passwordValidator]]
+      'confirm_password': ['', [ValidationService.requirePasswordValidator]]
     });
 
     this.MY_LOGO_PATH = ImagePath.MY_WHITE_LOGO;
