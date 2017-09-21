@@ -46,6 +46,20 @@
   padding: 0;
   margin: 90px auto 0;
   width: 1200px;
+  position: relative;
+
+  .btn-close {
+    color: #999;
+    cursor: pointer;
+    font-size: 18px;
+    float: none;
+    height: 20px;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    width: 20px;
+    z-index: 10;
+  }
 }
 
 .value-portrait-section {
@@ -102,6 +116,10 @@
   .value-portrait-container {
     margin: 65px auto 0;
     width: 100%;
+
+    .btn-close {
+      display: none;
+    }
   }
   .value-portrait-candidate-capability-circle {
     width: 100%;

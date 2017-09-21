@@ -20,7 +20,9 @@
     </div>
   </div>
   <div class="value-portrait-container">
-    <div class="close-btn" (click)="navigateTo();"><span class="glyphicon glyphicon-remove"></span></div>
+    <div class="btn-close" (click)="navigateTo();" *ngIf="!isShareView">
+      <span class="glyphicon glyphicon-remove"></span>
+    </div>
     <cn-value-portrait [isShareView]="isShareView" [userId]="_userId"></cn-value-portrait>
   </div>
 </div>
