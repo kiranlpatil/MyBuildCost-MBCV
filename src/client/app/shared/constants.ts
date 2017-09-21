@@ -42,7 +42,7 @@ export class Messages {
   public static MSG_SUCCESS_CONTACT: string = 'Email sent successfully.';
   public static MSG_SUCCESS_CHANGE_THEME: string = 'Theme changed successfully.';
   public static MSG_SUCCESS_MAIL_VERIFICATION_RESULT_STATUS: string = 'Congratulations!';
-  public static MSG_CHANGE_PASSWORD_SUCCESS_HEADER: string = 'Password changed successfully';
+  public static MSG_CHANGE_PASSWORD_SUCCESS_HEADER: string = 'Password Changed Successfully';
   public static MSG_SUCCESS_MAIL_VERIFICATION_BODY: string = 'Your account verified successfully.' +
     'You may start using it immediately by clicking on Sign In!';
 
