@@ -409,4 +409,11 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
     this.currentRecruiterQuestion = this.currentCapability.complexities[0].complexityDetails.questionHeaderForRecruiter;
     this.highlightedSection.name = 'Complexities';
   }
+  isNumber(number:number):boolean {
+    if(isNaN(number)) {
+      return false;
+    }else {
+      return true;
+    }
+  }
 }
