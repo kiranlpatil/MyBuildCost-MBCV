@@ -375,3 +375,28 @@
     right: 211px;
   }
 }
+
+@media screen and (max-width: 767px) {
+  .guided-tour-overlay-bg,
+  .guided-tour-overlay,
+  .down-arrow,
+  .guided-tour-containt,
+  .cn-work-area-guided-tour,
+  .capabilities-guided-tour,
+  .capability-guided-tour,
+  .guided-tour-notes,
+  .key-skills-guided-tour,
+  .more-about-myself-guided-tour,
+  .guided-tour-description,
+  .guided-tour-overlay-key-skills,
+  .up-arrow,
+  .guided-tour-section,
+  .welcome-guided-tour,
+  .dashboard-job-posting-guided-tour,
+  .dashboard-matching-degree-guided-tour,
+  .dashboard-menu-guided-tour,
+  .dashboard-filter-guided-tour,
+  .profile-submission-guided-tour {
+    display: none;
+  }
+}
