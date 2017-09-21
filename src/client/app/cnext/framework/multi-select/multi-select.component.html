@@ -1,24 +1,6 @@
 <div class="list clearfix">
   <div class="col-sm-12 no-padding">
     <div class="keyskill-form-group">
-     <!-- TODO Abhijeet
-     <div ng2-auto-complete
-           [source]="Proficiencies"
-           min-chars="2"
-           max-num-list="10"
-           (ngModelChange)="selectedProficiencyModel($event)"
-           no-match-found-text={{noMatchFoundText}}
-           match-formatted="true">
-        <input class="form-control" #elem [id]="type"
-               (keyup.enter)="showHideModal($event.target.value)" [disabled]='selectedProficiencies.length == maxLength'
-               placeholder="{{proficienciesPlaceholder}}"/>
-        <div class="error-messages" [class.proficiency-info-messages]="isInfoMessage" *ngIf="showAlert"><p>
-          {{validationMessage}}</p></div>
-        <div class="error-messages"
-             *ngIf="submitStatus">
-          <p>{{requiredKeySkillsValidationMessage}}</p>
-        </div>
-      </div>-->
       <div>
           <input class="form-control" #elem [id]="type" (change)='selectedProficiencyModel($event.target.value)'
                  (keyup.enter)="showHideModal($event.target.value)" [disabled]='selectedProficiencies.length == maxLength'

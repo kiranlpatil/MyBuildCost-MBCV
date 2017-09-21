@@ -61,20 +61,6 @@
       </div>
 
       <div class="form-group">
-       <!-- TODO Abhijeet
-       <div id="yearf" ng2-auto-complete
-             [source]="validBirthYearList"
-             min-chars="2"
-             max-num-list="10"
-             [accept-user-input]="false"
-             (ngModelChange)="selectYearModel($event)"
-             no-match-found-text="{{yearMatchNotFoundMessage}}">
-          <input formControlName="birth_year" [ngModel]="passingYear" id="birth_year" class="form-control"
-                 placeholder="" required autocomplete="off"/>
-          <label class="select-label">Year of Birth</label>
-          <div class="error-messages" *ngIf='userForm.get("birth_year").value == undefined'>{{birthYearErrorMessage}}
-          </div>
-       </div>-->
         <div id="yearf">
           <input type="number" formControlName="birth_year" (change)='selectYearModel($event.target.value)' [ngModel]="passingYear"
                  id="birth_year" class="form-control" placeholder="" list="validBirthYearList"
