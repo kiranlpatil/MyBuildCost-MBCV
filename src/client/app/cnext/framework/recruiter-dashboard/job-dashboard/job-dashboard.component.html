@@ -88,11 +88,12 @@
       <li>
 
       <!--<button type="submit" (click)="getIdToClone()">Clone Job</button>-->
-        <div class="dropdown">
+        <div class="dropdown clone-job-menu">
           <button class="btn dropdown-toggle btn-menu" type="button" data-toggle="dropdown"><span
             class="glyphicon glyphicon-option-horizontal"></span></button>
           <ul class="dropdown-menu">
             <li (click)="raiseCloneEvent()"><a>{{getLabel().CLONE_JOB}}</a></li>
+            <li><a disabled>{{getLabel().CLOSE_JOB}}</a></li>
           </ul>
         </div>
       </li>
