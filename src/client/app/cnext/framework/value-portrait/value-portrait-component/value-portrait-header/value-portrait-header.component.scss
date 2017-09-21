@@ -79,6 +79,7 @@
     width: calc(100% - 50px);
     a {
       color: $black1;
+      text-transform: lowercase;
     }
   }
 }

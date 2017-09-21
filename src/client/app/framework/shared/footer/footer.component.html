@@ -3,7 +3,8 @@
   <p class="faq">
     <span class="hidden-xs">{{getMessage().FAQ_MESSAGE}}</span>
     <span class="faq-statement">
-      <span class="glyphicon glyphicon-envelope"></span>{{getMessage().FAQ_CONTACT_EMAIL}}
+      <span class="glyphicon glyphicon-envelope"></span><a href="mailto:{{getMessage().FAQ_CONTACT_EMAIL}}"
+                                                           class="faq-link">{{getMessage().FAQ_CONTACT_EMAIL}}</a>
       <span class="glyphicon glyphicon-phone"></span>{{getMessage().FAQ_CONTACT_NUMBER}}
       <span class="glyphicon glyphicon-question-sign" (click)="goToFaq()"></span>
       <span class="faq-link" (click)="goToFaq()">FAQ</span>

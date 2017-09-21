@@ -135,7 +135,9 @@
     transition: 0.5s ease;
     visibility: hidden;
     opacity: 1;
+    overflow-x: hidden;
     height: calc(100vh - 128px);
+    z-index: 1051;
 
     h4 {
       left: 30px;
@@ -167,7 +169,6 @@
   .open-filter {
     visibility: visible !important;
     width: 200px !important;
-    overflow-x: hidden;
   }
 
   .glyphicon-filter {

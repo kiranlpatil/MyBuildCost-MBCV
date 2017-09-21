@@ -2,10 +2,6 @@
 
 .page-header {
   background: $theme-color;
-  /*border-bottom: 1px solid $theme-color;
-  -webkit-box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.4);
-  -moz-box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.4);
-  box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.4);*/
   height: 50px;
   left: 0;
   margin: 0 auto;
@@ -146,6 +142,9 @@
 }
 
 @media only screen and (max-width: 767px) {
+  .page-header {
+    z-index: 1051;
+  }
   .one-page-summary {
     margin-bottom: 20px;
 
