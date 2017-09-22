@@ -2,13 +2,10 @@ import {Component, ElementRef, HostListener, OnInit} from "@angular/core";
 import {CommonService, Message, MessageService} from "../../../shared/index";
 import {Router} from "@angular/router";
 import {Subscription} from "rxjs/Subscription";
-//noinspection TypeScriptPreferShortImport
 import {ProfileService} from "../../shared/profileservice/profile.service";
 import {UserProfile} from "../../../user/models/user";
 import {DashboardService} from "../../../user/services/dashboard.service";
-//noinspection TypeScriptPreferShortImport
 import {AppSettings, ImagePath, LocalStorage, NavigationRoutes} from "../../../shared/constants";
-//noinspection TypeScriptPreferShortImport
 import {LocalStorageService} from "../../../shared/services/localstorage.service";
 
 @Component({
@@ -44,7 +41,7 @@ export class HeaderComponent implements OnInit {
       });
 
     this.PROFILE_IMG_PATH = ImagePath.PROFILE_IMG_ICON;
-    this.MY_LOGO = ImagePath.MY_COLOR_LOGO;
+      this.MY_LOGO = ImagePath.MY_WHITE_LOGO;
   }
 
   ngOnInit() {
