@@ -25,5 +25,5 @@ export = () => {
     return '!' + p;
   })))
     .pipe(onlyDirs(es))
-    .pipe(gulp.dest('dist/prod/config'));
+    .pipe(gulp.dest('dist/config'));
 };
