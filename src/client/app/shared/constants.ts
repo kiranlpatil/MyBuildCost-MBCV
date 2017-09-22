@@ -17,6 +17,25 @@ export class AppSettings {
   public static HTTP_CLIENT = 'http://';
 }
 
+export enum UsageActions  {
+  ADDED_IN_TO_CART_BY_RECRUITER,
+  ADDED_IN_TO_REJECT_BY_RECRUITER,
+  ADDED_IN_TO_COMPARE_VIEW_BY_RECRUITER,
+  VIEWED_HALF_PROFILE_BY_RECRUITER,
+  VIEWED_FULL_PROFILE_BY_RECRUITER,
+  VIEWED_VALUE_PORTRAIT_BY_RECRUITER,
+  VIEWED_JOB_PROFILE_BY_CANDIDATE,
+  APPLIED_FOR_JOB_PROFILE_BY_CANDIDATE,
+  ADDED_INTO_NOT_INTERESTED,
+  REMOVED_FROM_CART_BY_RECRUITER,
+  REMOVED_FROM_REJECT_BY_RECRUITER,
+  REMOVED_FROM_COMPARE_VIEW_BY_RECRUITER,
+  REMOVED_FROM_NOT_INTERESTED,
+  DEFAULT_VALUE = 999
+  //append your new enum value at the end of the list DON'T MODIFY THE LIST
+}
+
+
 export class Messages {
   public static MSG_MSG_CLONED_SUCCESSFULLY = 'New Job is been added successfully';
   public static MSG_CANDIDATE_NOT_FOUND = 'No registered applicant with this name. Avoid using multiple spaces while searching with complete names.';
@@ -308,6 +327,7 @@ export class ValueConstant {
 
 export class API {
   public static NOTIFICATION = 'notification';
+  public static USAGETRACKING = 'usagetracking';
   public static SEND_MAIL = 'sendmail';
   public static SEND_TO_ADMIN_MAIL = 'sendmailtoadmin';
   public static USER_PROFILE = 'users';

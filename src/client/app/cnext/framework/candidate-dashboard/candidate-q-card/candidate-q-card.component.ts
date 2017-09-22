@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, Output, ViewChild, OnInit} from "@angular/core";
 import {JobQcard} from "../../model/JobQcard";
-import {AppSettings, LocalStorage, ValueConstant} from "../../../../shared/constants";
+import {AppSettings, LocalStorage, UsageActions, ValueConstant} from "../../../../shared/constants";
 import {LocalStorageService} from "../../../../shared/services/localstorage.service";
 import {CandidateDashboardService} from "../candidate-dashboard.service";
 import {Message} from "../../../../shared/models/message";
@@ -8,6 +8,7 @@ import {MessageService} from "../../../../shared/services/message.service";
 import {JobCompareViewComponent} from "../../single-page-compare-view/job-compare-view/job-compare-view.component";
 import {CandidateList} from "../../model/candidate-list";
 import {ErrorService} from "../../error.service";
+import {UsageTrackingService} from "../../usage-tracking.service";
 
 
 @Component({
@@ -36,7 +37,10 @@ export class CandidateQCardComponent implements OnInit {
   private jobId: string;
   @ViewChild(JobCompareViewComponent) checkForGuidedTour: JobCompareViewComponent;
 
-  constructor(private candidateDashboardService: CandidateDashboardService,private messageService: MessageService,private errorService:ErrorService) {
+  constructor(private candidateDashboardService: CandidateDashboardService,
+              private messageService: MessageService,
+              private usageTrackingService: UsageTrackingService,
+              private errorService:ErrorService) {
   }
 
   ngOnChanges(changes: any) {
@@ -59,6 +63,11 @@ export class CandidateQCardComponent implements OnInit {
 
   viewJob(jobId: string) {
     if (this.type !== 'searchView') {
+      this.usageTrackingService.addUsesTrackingData(UsageActions.VIEWED_JOB_PROFILE_BY_CANDIDATE,
+        undefined, this.jobId,LocalStorageService.getLocalValue(LocalStorage.END_USER_ID) ).subscribe(
+        data  => {
+          console.log(''+data);
+        }, error => this.errorService.onError(error));
       if (jobId !== undefined) {
         this.checkForGuidedTour.isGuidedTourImgRequire();
         LocalStorageService.setLocalValue(LocalStorage.CURRENT_JOB_POSTED_ID, jobId);
@@ -68,6 +77,11 @@ export class CandidateQCardComponent implements OnInit {
       this.showModalStyle = !this.showModalStyle;
     }
     if (this.type == 'searchView') {
+      this.usageTrackingService.addUsesTrackingData(UsageActions.VIEWED_JOB_PROFILE_BY_CANDIDATE,
+        LocalStorageService.getLocalValue(LocalStorage.END_USER_ID), this.jobId,this.candidateIDFromSearchView ).subscribe(
+        data  => {
+          console.log(''+data);
+        }, error => this.errorService.onError(error));
       var data = {
         'jobId': jobId,
         'inCartStatus': this.inCartListedStatusForSearchView,
@@ -141,8 +155,6 @@ export class CandidateQCardComponent implements OnInit {
   }
 
   findOutQCardStatus() {
-    this.candidateIDFromSearchView;
-    this.job.candidate_list;
     this.calculateQCardStatus(this.candidateIDFromSearchView, this.job.candidate_list);
   }
 

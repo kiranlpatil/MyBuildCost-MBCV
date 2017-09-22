@@ -4,7 +4,7 @@ import {QCardsortBy} from "../../model/q-cardview-sortby";
 import {MatchCandidate} from "../../model/match-candidate";
 import {QCardViewService} from "./q-card-view.service";
 import {QCardFilterService} from "../../filters/q-card-filter.service";
-import {AppSettings, ValueConstant} from "../../../../shared/constants";
+import {AppSettings, LocalStorage, UsageActions, ValueConstant} from "../../../../shared/constants";
 import {QCardFilter} from "../../model/q-card-filter";
 import {CandidateQListModel} from "../job-dashboard/q-cards-candidates";
 import {RecruiterJobView} from "../../model/recruiter-job-view";
@@ -14,6 +14,8 @@ import {CandidateProfileService} from "../../candidate-profile/candidate-profile
 import {Message} from "../../../../shared/models/message";
 import {MessageService} from "../../../../shared/services/message.service";
 import {ErrorService} from "../../error.service";
+import {UsageTrackingService} from "../../usage-tracking.service";
+import {LocalStorageService} from "../../../../shared/services/localstorage.service";
 /*import underline = Chalk.underline;*/
 
 
@@ -51,8 +53,12 @@ export class QCardviewComponent implements OnChanges {
 
 
 
-  constructor(private qCardFilterService: QCardFilterService, private errorService:ErrorService,
-              private profileCreatorService: CandidateProfileService, private qCardViewService: QCardViewService, private messageService: MessageService) {
+  constructor(private qCardFilterService: QCardFilterService,
+              private usageTrackingService : UsageTrackingService,
+              private errorService:ErrorService,
+              private profileCreatorService: CandidateProfileService,
+              private qCardViewService: QCardViewService,
+              private messageService: MessageService) {
 
     this.qCardFilterService.aboveMatch$.subscribe(
       () => {
@@ -300,6 +306,27 @@ export class QCardviewComponent implements OnChanges {
   viewProfile(candidate: CandidateQCard) {
     if(!this.isShortlistedclicked) {
       this.modelCandidate = candidate;
+      if (this.type !== ValueConstant.CART_LISTED_CANDIDATE ) {
+        this.usageTrackingService.addUsesTrackingData(UsageActions.VIEWED_HALF_PROFILE_BY_RECRUITER,
+          LocalStorageService.getLocalValue(LocalStorage.END_USER_ID),this.jobId,this.modelCandidate._id).subscribe(
+            data=> {
+              console.log('');
+            },
+            err=> {
+              this.errorService.onError(err);
+            }
+          );
+      }else {
+        this.usageTrackingService.addUsesTrackingData(UsageActions.VIEWED_FULL_PROFILE_BY_RECRUITER,
+          LocalStorageService.getLocalValue(LocalStorage.END_USER_ID),this.jobId,this.modelCandidate._id).subscribe(
+          data=> {
+            console.log('');
+          },
+          err=> {
+            this.errorService.onError(err);
+          }
+        );
+      }
       this.profileCreatorService.getCandidateDetailsOfParticularId(candidate._id).subscribe(
         candidateData => this.OnCandidateDataSuccess(candidateData),
         error => this.errorService.onError(error));
