@@ -9,7 +9,7 @@
   padding: 0 15px;
   position: fixed;
   width: 100%;
-  z-index: 999;
+  z-index: 1050;
 
   p,
   a {
@@ -65,14 +65,14 @@
 
     .faq {
       text-align: center;
-      margin-top: 3px;
+      margin: 7px 0 0;
       width: 100%;
     }
 
     .faq-statement {
       .glyphicon {
-        font-size: 12px;
-        margin: 0 5px 0 10px;
+        font-size: 16px;
+        margin: 0 10px;
       }
     }
   }

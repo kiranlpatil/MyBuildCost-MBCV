@@ -1,8 +1,8 @@
 export class AppSettings {
-  // public static IP = 'http://localhost:8080';
+  //public static IP = 'http://localhost:8080';
   // public static IP = 'http://ee802b7f.ngrok.io';
   //public static IP = 'http://10.192.33.77:8080';
-  // public static IP = 'http://34.208.115.60:3000';
+  //public static IP = 'http://52.10.145.87:3000';
   // public static IP = 'app.jobmosis.com';
    public static IP = '';
 
@@ -42,7 +42,7 @@ export class Messages {
   public static MSG_SUCCESS_CONTACT: string = 'Email sent successfully.';
   public static MSG_SUCCESS_CHANGE_THEME: string = 'Theme changed successfully.';
   public static MSG_SUCCESS_MAIL_VERIFICATION_RESULT_STATUS: string = 'Congratulations!';
-  public static MSG_CHANGE_PASSWORD_SUCCESS_HEADER: string = 'Password changed successfully';
+  public static MSG_CHANGE_PASSWORD_SUCCESS_HEADER: string = 'Password Changed Successfully';
   public static MSG_SUCCESS_MAIL_VERIFICATION_BODY: string = 'Your account verified successfully.' +
     'You may start using it immediately by clicking on Sign In!';
 
@@ -262,6 +262,7 @@ export class LocalStorage {
   public static IS_CANDIDATE = 'is_candidate';
   public static IS_CANDIDATE_FILLED = 'is_candidate_filled';
   public static MOBILE_NUMBER = 'mobile_number';
+  public static VERIFIED_MOBILE_NUMBER = 'verified_mobile_number';
   public static COMPANY_NAME = 'company_name';
   public static COMPANY_SIZE = 'company_size';
   public static FIRST_NAME = 'first_name';

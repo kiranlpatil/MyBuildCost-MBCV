@@ -375,6 +375,10 @@
 
       & > input[type='checkbox'] {
         &:checked {
+          & + span {
+            color: $primary-option1;
+          }
+
           & ~ .check {
             &::before {
               background: transparent;

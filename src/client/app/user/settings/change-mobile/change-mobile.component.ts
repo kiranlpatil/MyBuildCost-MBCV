@@ -71,7 +71,7 @@ export class ChangeMobileComponent implements OnInit {
   }
 
   changeMobileSuccess(body: ChangeMobile) {
-    LocalStorageService.setLocalValue(LocalStorage.MOBILE_NUMBER, this.model.new_mobile_number);
+    LocalStorageService.setLocalValue(LocalStorage.VERIFIED_MOBILE_NUMBER, this.model.new_mobile_number);
     this.userForm.reset();
     LocalStorageService.setLocalValue(LocalStorage.VERIFY_PHONE_VALUE, 'from_settings');
     this._router.navigate([NavigationRoutes.VERIFY_PHONE]);

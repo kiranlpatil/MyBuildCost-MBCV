@@ -1,20 +1,18 @@
-import { Component,EventEmitter, Input,Output, OnChanges, OnInit } from '@angular/core';
-import { JobPosterModel } from '../../../user/models/jobPoster';
-import { JobPosterService } from './job-poster.service';
-import { Role } from '../model/role';
-import { CandidateProfileService } from '../candidate-profile/candidate-profile.service';
-import { Proficiences } from '../model/proficiency';
-import { Section } from '../../../user/models/candidate';
-import { ShowQcardviewService } from '../showQCard.service';
-import { Router } from '@angular/router';
-import { Industry } from '../../../user/models/industry';
-import { RecruiterDashboardService } from '../recruiter-dashboard/recruiter-dashboard.service';
-import { RecruiterDashboard } from '../model/recruiter-dashboard';
-import { ErrorService } from '../error.service';
-import { LocalStorage, Messages } from '../../../shared/constants';
-import { LocalStorageService } from '../../../shared/services/localstorage.service';
-import { ValueConstant } from '../../../shared/constants';
-import {Headings} from "../../../shared/constants";
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from "@angular/core";
+import {JobPosterModel} from "../../../user/models/jobPoster";
+import {JobPosterService} from "./job-poster.service";
+import {Role} from "../model/role";
+import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
+import {Proficiences} from "../model/proficiency";
+import {Section} from "../../../user/models/candidate";
+import {ShowQcardviewService} from "../showQCard.service";
+import {Router} from "@angular/router";
+import {Industry} from "../../../user/models/industry";
+import {RecruiterDashboardService} from "../recruiter-dashboard/recruiter-dashboard.service";
+import {RecruiterDashboard} from "../model/recruiter-dashboard";
+import {ErrorService} from "../error.service";
+import {Headings, Label, LocalStorage, Messages, ValueConstant} from "../../../shared/constants";
+import {LocalStorageService} from "../../../shared/services/localstorage.service";
 
 @Component({
   moduleId: module.id,
@@ -416,7 +414,11 @@ export class JobPosterComponent implements OnInit, OnChanges {
     this.jobPostCloneSuccessEmitter.emit();
   }
 
-    getHeading() {
-        return Headings;
-    }
+  getHeading() {
+    return Headings;
+  }
+
+  getLabel() {
+    return Label;
+  }
 }

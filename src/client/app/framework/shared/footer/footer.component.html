@@ -1,12 +1,21 @@
 <footer class="footer home-page-footer">
-  <p class="copyright-statement">{{ APP_NAME }} {{UNDER_LICENCE}}</p>
   <p class="faq">
     <span class="hidden-xs">{{getMessage().FAQ_MESSAGE}}</span>
-    <span class="faq-statement">
-      <span class="glyphicon glyphicon-envelope"></span>{{getMessage().FAQ_CONTACT_EMAIL}}
-      <span class="glyphicon glyphicon-phone"></span>{{getMessage().FAQ_CONTACT_NUMBER}}
+    <span class="faq-statement hidden-xs">
+      <span class="glyphicon glyphicon-envelope"></span>
+      <a href="mailto:{{getMessage().FAQ_CONTACT_EMAIL}}" class="faq-link">{{getMessage().FAQ_CONTACT_EMAIL}}</a>
+      <span class="glyphicon glyphicon-phone"></span><a href="tel{{getMessage().FAQ_CONTACT_NUMBER}}" class="faq-link">{{getMessage().FAQ_CONTACT_NUMBER}}</a>
       <span class="glyphicon glyphicon-question-sign" (click)="goToFaq()"></span>
       <span class="faq-link" (click)="goToFaq()">FAQ</span>
     </span>
+
+    <span class="faq-statement visible-xs">
+      <a href="mailto:{{getMessage().FAQ_CONTACT_EMAIL}}" class="faq-link"><span
+              class="glyphicon glyphicon-envelope"></span></a>
+      <a href="tel{{getMessage().FAQ_CONTACT_NUMBER}}" class="faq-link"><span class="glyphicon glyphicon-phone"></span></a>
+      <span class="faq-link" (click)="goToFaq()"><span class="glyphicon glyphicon-question-sign"
+                                                       (click)="goToFaq()"></span></span>
+    </span>
   </p>
+  <p class="copyright-statement">{{ APP_NAME }} {{UNDER_LICENCE}}</p>
 </footer>

@@ -23,6 +23,7 @@
                 class="glyphicon glyphicon-option-vertical"></span></button>
         <ul class="dropdown-menu">
           <li (click)="raiseCloneEvent(item)"><a>{{getLabel().CLONE_JOB}}</a></li>
+          <li><a disabled>{{getLabel().CLOSE_JOB}}</a></li>
         </ul>
       </div>
       <div class="panel clearfix" (click)="onJobClicked(item._id,item.isJobPosted)">

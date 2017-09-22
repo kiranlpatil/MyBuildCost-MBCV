@@ -152,8 +152,8 @@
     padding-bottom: 65px;
 
     .dashboard-profile-content {
-      top: 65px;
-      margin-bottom: 15px;
+      top: 50px;
+      margin-bottom: 0;
       padding: 15px 0 0;
       width: calc(100% - 30px);
       border: 0;
@@ -161,7 +161,7 @@
     }
 
     form {
-      padding: 15px 0;
+      padding: 15px 0 0;
     }
   }
 }
