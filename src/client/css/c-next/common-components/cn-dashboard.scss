@@ -272,6 +272,17 @@
   }
 }
 
+#candidate-list-view,
+#recruiter-list-view {
+  .list-header {
+    li > h5 {
+      overflow: visible;
+      white-space: normal;
+      text-overflow: clip;
+    }
+  }
+}
+
 @media only screen and (max-width: 1024px) {
   .profile-wrapper {
     .col-sm-3 {

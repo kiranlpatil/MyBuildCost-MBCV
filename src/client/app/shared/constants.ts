@@ -635,6 +635,14 @@ export class Label {
   public static VALUE_PORTRAIT_TITLE: string = 'Experience is what it\'s all about';
   public static CORE_CAPABILITIES_TITLE: string = 'Core Capabilities';
   public static NOTE_OF_TRUST: string = 'Note of Trust';
+  public static JOB_TITLE_LABEL: string = 'Job Title';
+  public static CURRENT_LOCATION: string = 'Current Location';
+  public static PROFILE_STATUS: string = 'Profile Status';
+  public static ACTIVATION_STATUS: string = 'Activation Status';
+  public static NAME: string = 'Name';
+  public static ACTIONS: string = 'Actions';
+  public static TOTAL_POSTED_JOB: string = 'Total Posted Jobs';
+  public static COMPANY_NAME: string = 'Company Name (Size)';
 }
 
 export class Button {
