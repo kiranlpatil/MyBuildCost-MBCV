@@ -22,7 +22,7 @@ $overlay: rgba(0, 0, 0, 0.4);
 
     img {
       margin-top: 6px;
-      width: 100px;
+      width: 84px;
     }
   }
 
@@ -198,6 +198,14 @@ $overlay: rgba(0, 0, 0, 0.4);
 
   .dropdown > a {
     color: $white;
+  }
+}
+
+#candidate-header {
+  .navbar-brand {
+    img {
+      width: 82px;
+    }
   }
 }
 
