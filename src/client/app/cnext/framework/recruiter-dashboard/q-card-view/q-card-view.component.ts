@@ -32,6 +32,7 @@ export class QCardviewComponent implements OnChanges {
   @Input() jobId: string;
   @Input() type: string;
   @Input() filterMeta: QCardFilter;
+  @Input() isJobPostExpired : boolean;
   @Output() addedTocart: EventEmitter<any> = new EventEmitter<any>();
   @Input() progress_bar_color : string='#0d75fa';
   @Output() addForCompare: EventEmitter<any> = new EventEmitter<any>();
@@ -59,6 +60,7 @@ export class QCardviewComponent implements OnChanges {
         this.matchFormat = this.match.aboveMatch;
       }
     );
+
   }
 
   ngOnInlit() {
@@ -73,6 +75,10 @@ export class QCardviewComponent implements OnChanges {
           this.emailsOfShrortListedCandidates.push(candidate.email);
         }
       }
+    }
+    if (changes.isJobPostExpired && changes.isJobPostExpired.currentValue) {debugger
+    this.isJobPostExpired=changes.isJobPostExpired.currentValue;
+      console.log('changes.isJobPostExpired.currentValue',this.isJobPostExpired);
     }
   }
 

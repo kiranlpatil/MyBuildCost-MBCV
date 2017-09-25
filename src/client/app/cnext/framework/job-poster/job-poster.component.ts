@@ -165,7 +165,7 @@ export class JobPosterComponent implements OnInit, OnChanges {
     }
   }
 
-  postjob() {
+  postjob() { debugger
     this.showModalStyle = !this.showModalStyle;
     this.jobPosterModel.isJobPosted = true;
     this.jobPosterModel.postingDate = new Date();
@@ -176,7 +176,7 @@ export class JobPosterComponent implements OnInit, OnChanges {
       }, error => this.errorService.onError(error));
   }
 
-  updateJob() {
+  updateJob() { debugger
     this.jobPosterModel.postingDate = new Date();
     this.jobPosterModel.expiringDate = new Date((new Date().getTime() + ValueConstant.JOB__EXPIRIY_PERIOD));
     this.jobPostService.postJob(this.jobPosterModel).subscribe(

@@ -63,6 +63,10 @@ class JobProfileSchema {
         type: Boolean,
         default: false
       },
+      isJobPostExpired: {
+        type: Boolean,
+        default: false
+      },
       responsibility: {
         type: String
       },
