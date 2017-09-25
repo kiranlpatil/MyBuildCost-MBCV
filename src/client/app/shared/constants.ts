@@ -329,6 +329,7 @@ export class LocalStorage {
   public static _ID = '_id';
   public static IS_CANDIDATE = 'is_candidate';
   public static IS_CANDIDATE_FILLED = 'is_candidate_filled';
+  public static IS_CANDIDATE_SUBMITTED = 'is_candidate_submitted';
   public static MOBILE_NUMBER = 'mobile_number';
   public static VERIFIED_MOBILE_NUMBER = 'verified_mobile_number';
   public static COMPANY_NAME = 'company_name';

@@ -42,7 +42,7 @@ export class AppComponent implements OnInit {
           this._router.navigate([NavigationRoutes.APP_ADMIN_DASHBOARD]);
         } else {
           if (LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE) === 'true') {
-            if (LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE_FILLED) === 'true') {
+            if (LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE_SUBMITTED) === 'true') {
               this._router.navigate([NavigationRoutes.APP_CANDIDATE_DASHBOARD]);
             } else {
               this._router.navigate([NavigationRoutes.APP_CREATEPROFILE]);
