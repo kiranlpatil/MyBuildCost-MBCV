@@ -76,6 +76,7 @@ export class Messages {
   public static MSG_WARNING_ON_EDIT_CANDIDATE: string = 'This section can be updated only after.';
 
   public static MSG_ERROR_VALIDATION_EMAIL_REQUIRED = 'Enter your e-mail address.';
+  public static MSG_ERROR_VALIDATION_WEBSITE_REQUIRED = 'Enter company website.';
   public static MSG_ERROR_VALIDATION_PASSWORD_REQUIRED = 'Enter your password.';
   public static MSG_ERROR_VALIDATION_NEWPASSWORD_REQUIRED = 'Enter a new password';
   public static MSG_ERROR_VALIDATION_CONFIRMPASSWORD_REQUIRED = 'Confirm your password';
@@ -89,6 +90,7 @@ export class Messages {
   public static MSG_ERROR_VALIDATION_COMPANYNAME_REQUIRED = 'This field can\'t be left blank.';
   public static MSG_ERROR_VALIDATION_OTP_REQUIRED = 'Enter received OTP.';
   public static MSG_ERROR_VALIDATION_INVALID_EMAIL_REQUIRED = 'Enter a valid email address.';
+  public static MSG_ERROR_VALIDATION_INVALID_URL_REQUIRED = 'Enter a valid company website.';
   public static MSG_ERROR_VALIDATION_INVALID_NAME = 'Enter valid name.';
   public static MSG_ERROR_VALIDATION_INVALID_DATA = 'Enter valid data.';
   public static MSG_ERROR_VALIDATION_PASSWORD_MISMATCHED = 'Passwords do not match.';
@@ -125,6 +127,7 @@ export class Messages {
   public static MSG_ERROR_VALIDATION_CERTIFICATION_NAME_REQUIRED = 'Certification name is required.';
   public static MSG_ERROR_VALIDATION_CERTIFICATION_AUTHORITY_REQUIRED = 'Authority name is required.';
   public static MSG_ERROR_VALIDATION_CERTIFICATION_YEAR_REQUIRED = 'Year Of passing is required.';
+  public static MSG_ERROR_VALIDATION_CERTIFICATE_CODE_REQUIRED = 'Number/code of certificate is required.';
   public static MSG_ERROR_VALIDATION_AWARD_NAME_REQUIRED = 'Award name is required.';
   public static MSG_ERROR_VALIDATION_AWARD_AUTHORITY_REQUIRED = 'Authority name is required.';
   public static MSG_ERROR_VALIDATION_AWARD_YEAR_REQUIRED = 'Issued year is required.';
@@ -544,6 +547,7 @@ export class Headings {
   public static ACCOUNT_DETAILS_HEADING: string = 'Account Details';
   public static CHANGE_EMAIL_HEADING: string = 'Change your Email';
   public static CHANGE_MOBILE_NUMBER_HEADING: string = 'Change Your Mobile Number';
+  public static CHANGE_COMPANY_WEBSITE_HEADING: string = 'Change Your Company Website';
   public static RESET_PASSWORD_HEADING: string = 'RESET PASSWORD';
   public static CLONE_JOB: string = 'Clone Job';
   public static POST_JOB: string = 'Post New Job';
@@ -556,6 +560,7 @@ export class Label {
   public static FIRST_NAME_LABEL: string = 'First Name';
   public static LAST_NAME_LABEL: string = 'Last Name';
   public static EMAIL_FIELD_LABEL: string = 'Email';
+  public static COMPANY_WEBSITE_FIELD_LABEL: string = 'Company Website';
   public static CONTACT_FIELD_LABEL: string = 'Contact';
   public static SAVE_PROFILE_LABEL: string = 'Save Profile';
   public static RESET_PASSWORD_MESSAGE: string = 'Please set new password for your';
