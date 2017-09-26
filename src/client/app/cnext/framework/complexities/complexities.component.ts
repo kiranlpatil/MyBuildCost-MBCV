@@ -416,4 +416,7 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
       return true;
     }
   }
+  getMessage() {
+    return Messages;
+  }
 }

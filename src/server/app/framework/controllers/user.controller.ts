@@ -104,6 +104,7 @@ export function login(req: express.Request, res: express.Response, next: any) {
                           "isCandidate": result[0].isCandidate,
                           "isAdmin": result[0].isAdmin,
                           "isCompleted": candidate[0].isCompleted,
+                          "isSubmitted": candidate[0].isSubmitted,
                           "guide_tour": result[0].guide_tour
                         },
                         access_token: token
@@ -167,8 +168,7 @@ export function login(req: express.Request, res: express.Response, next: any) {
   catch (e) {
     res.status(403).send({message: e.message});
   }
-};
-
+}
 export function generateOtp(req: express.Request, res: express.Response, next: any) {
   try {
     var userService = new UserService();

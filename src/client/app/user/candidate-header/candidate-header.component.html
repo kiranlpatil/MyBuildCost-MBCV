@@ -1,4 +1,4 @@
-<header class="page-header">
+<header class="page-header" id="candidate-header">
   <nav class="navbar navbar-fixed-top">
     <div class="container-fluid">
       <div class="navbar-header">
@@ -61,19 +61,19 @@
                   <h5 *ngIf="candidate.jobTitle != undefined">{{candidate.jobTitle}}</h5>
                 </li>
                 <li class="divider"></li>
-                <li role="menuitem" [routerLinkActive]="['active']" *ngIf="candidate.isCompleted==true">
+                <li role="menuitem" [routerLinkActive]="['active']" *ngIf="candidate.isSubmitted">
                   <a class="dropdown-item" [routerLink]="['candidate_dashboard']"
                      (click)="navigateTo('/candidate_dashboard');">
                     <span class="glyphicon glyphicon-th"></span>My Dashboard
                   </a>
                 </li>
-                <li role="menuitem" [routerLinkActive]="['active']" *ngIf="candidate.isCompleted==true">
+                <li role="menuitem" [routerLinkActive]="['active']" *ngIf="candidate.isSubmitted">
                   <a class="dropdown-item" [routerLink]="['value-portrait']"
                      (click)="navigateToWithId('/value-portrait');">
                     <span class="glyphicon glyphicon-user"></span>Value Portrait
                   </a>
                 </li>
-                <li role="menuitem" [routerLinkActive]="['active']" *ngIf="candidate.isCompleted==true">
+                <li role="menuitem" [routerLinkActive]="['active']" *ngIf="candidate.isCompleted">
                   <a class="dropdown-item" [routerLink]="['profile-edit']"
                      (click)="navigateTo('/create_profile');">
                     <span class="	glyphicon glyphicon-edit"></span>Edit Profile

@@ -93,6 +93,7 @@ export class LoginComponent implements OnInit {
   loginSuccess(res: any) {
     LocalStorageService.setLocalValue(LocalStorage.IS_CANDIDATE, res.data.isCandidate);
     LocalStorageService.setLocalValue(LocalStorage.IS_CANDIDATE_FILLED, res.data.isCompleted);
+    LocalStorageService.setLocalValue(LocalStorage.IS_CANDIDATE_SUBMITTED,  res.data.isSubmitted);
     LocalStorageService.setLocalValue(LocalStorage.END_USER_ID, res.data.end_user_id);
     LocalStorageService.setLocalValue(LocalStorage.EMAIL_ID, res.data.email);
     LocalStorageService.setLocalValue(LocalStorage.MOBILE_NUMBER, res.data.mobile_number);
@@ -150,7 +151,7 @@ export class LoginComponent implements OnInit {
       this._router.navigate([NavigationRoutes.APP_ADMIN_DASHBOARD]);
     }
     else if (res.data.isCandidate === true) {
-      if (res.data.isCompleted === true) {
+      if (res.data.isSubmitted === true) {
         this._router.navigate([NavigationRoutes.APP_CANDIDATE_DASHBOARD]);
       } else {
         this._router.navigate([NavigationRoutes.APP_CREATEPROFILE]);

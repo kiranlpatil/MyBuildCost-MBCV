@@ -3,7 +3,7 @@ import {CandidateProfileService} from "../candidate-profile/candidate-profile.se
 import {Candidate, Summary} from "../../../user/models/candidate";
 import {CandidateDashboardService} from "./candidate-dashboard.service";
 import {JobQcard} from "../model/JobQcard";
-import {LocalStorage, ValueConstant, Tooltip, ImagePath, Headings} from "../../../shared/constants";
+import {LocalStorage, ValueConstant, Tooltip, ImagePath, Headings, Messages} from "../../../shared/constants";
 import {LocalStorageService} from "../../../shared/services/localstorage.service";
 import {CandidateJobListService} from "./candidate-job-list/candidate-job-list.service";
 import {QCardFilterService} from "../filters/q-card-filter.service";
@@ -199,5 +199,8 @@ export class CandidateDashboardComponent implements OnInit{
           this.candidate.summary.numberOfmatched= this.jobList.length;
           this.extractList(this.jobList);
         },error => this.errorService.onError(error));
+  }
+  getMessage() {
+    return Messages;
   }
 }

@@ -51,6 +51,7 @@ class CandidateSchema {
         name: String,
         year: Number,
         issuedBy: String,
+        code: String,
         remark: String
       }],
       interestedIndustries: {

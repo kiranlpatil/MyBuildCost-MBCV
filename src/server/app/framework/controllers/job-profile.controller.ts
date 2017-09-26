@@ -4,6 +4,7 @@ import JobProfileModel = require('../dataaccess/model/jobprofile.model');
 import JobProfileService = require('../services/jobprofile.service');
 import CNextMessages = require('../shared/cnext-messages');
 import SearchService = require('../search/services/search.service');
+import { UsageTracking } from '../dataaccess/model/usage-tracking';
 import {Actions, ConstVariables} from '../shared/sharedconstants';
 import RecruiterService = require('../services/recruiter.service');
 let usestracking = require('uses-tracking');
@@ -175,20 +176,11 @@ export function metchResultForJob(req: express.Request, res: express.Response, n
 }
 export function createUsesTracking(req: express.Request, res: express.Response) {
   try {
-    let uses_data = {
-      recruiterId: req.params.recruiterId,
-      candidateId: req.params.candidateId,
-      jobProfileId: req.params.jobProfileId,
-      timestamp: new Date(),
-      action: Actions.DEFAULT_VALUE
-    };
-    if (req.params.action.toString() === 'add') {
-      uses_data.action = Actions.ADDED_IN_TO_COMPARE_VIEW_BY_RECRUITER;
-    } else {
-      uses_data.action = Actions.REMOVED_FROM_COMPARE_VIEW_BY_RECRUITER;
-    }
+    let data : UsageTracking;
+    data = req.body;
+    data.timestamp = new Date();
     let obj: any = new usestracking.MyController();
-    obj._controller.create(uses_data);
+    obj._controller.create(data);
     res.send({
       'status': 'success',
     });

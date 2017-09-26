@@ -2,7 +2,7 @@ import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} f
 import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
 import {Candidate, Section} from "../../../user/models/candidate";
 import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {Tooltip, ImagePath, Headings, LocalStorage} from "../../../shared/constants";
+import {Tooltip, ImagePath, Headings, LocalStorage, Messages} from "../../../shared/constants";
 import {GuidedTourService} from "../guided-tour.service";
 import {ErrorService} from "../error.service";
 import {LocalStorageService} from "../../../shared/services/localstorage.service";
@@ -29,6 +29,7 @@ export class AwardsComponent implements OnInit {
 
 
   awardsHeading:string = Headings.AWARDS;
+  gotItMessage: string= Headings.GOT_IT;
   private isButtonShow: boolean = false;
   private showButton: boolean = true;
   private submitStatus: boolean;
@@ -239,5 +240,9 @@ export class AwardsComponent implements OnInit {
     this.showButton = false;
     let _body: any = document.getElementsByTagName('BODY')[0];
     _body.scrollTop = -1;
+  }
+
+  getMessage() {
+    return Messages;
   }
 }

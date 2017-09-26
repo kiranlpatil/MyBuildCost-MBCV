@@ -1,11 +1,11 @@
-import { Component, Input } from '@angular/core';
-import { AdminDashboardService } from '../admin-dashboard.service';
-import { ErrorService } from '../../error.service';
-import { Router } from '@angular/router';
-import { Messages } from '../../../../shared/constants';
-import { Message } from '../../../../shared/models/message';
-import { MessageService } from '../../../../shared/services/message.service';
-import { LoaderService } from '../../../../shared/loader/loaders.service';
+import {Component, Input} from "@angular/core";
+import {AdminDashboardService} from "../admin-dashboard.service";
+import {ErrorService} from "../../error.service";
+import {Router} from "@angular/router";
+import {Label, Messages} from "../../../../shared/constants";
+import {Message} from "../../../../shared/models/message";
+import {MessageService} from "../../../../shared/services/message.service";
+import {LoaderService} from "../../../../shared/loader/loaders.service";
 
 @Component({
   moduleId: module.id,
@@ -65,6 +65,10 @@ export class CandidateDetailListComponent {
     if (nav !== undefined) {
       this._router.navigate([nav, candidate._id]);
     }
+  }
+
+  getLabel() {
+    return Label;
   }
 }
 

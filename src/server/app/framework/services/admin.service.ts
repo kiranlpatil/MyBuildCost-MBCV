@@ -51,15 +51,15 @@ class AdminService {
             if (error) {
               callback(error, null);
             } else {
+              value++;
               if (!item[i].isAdmin) {
-                this.industryRepositiry.retrieve({'code': resu[0].industry.code}, (error:any, industries:IndustryModel[]) => {
-                  if (error) {
-                    callback(error, null);
-                  } else {
-                    value = this.getCandidateDetails(resu, item, i, industries, value, candidates);
-                    this.extractedForValueIncrement(value, item, users, candidates, recruiters, callback);
-                  }
-                });
+                  item[i].data = resu[0];
+                  candidates.push(item[i]);
+                if (value && item.length === value) {
+                  users.candidate = candidates;
+                  users.recruiter = recruiters;
+                  callback(null, users);
+                }
               }
             }
           });
@@ -75,7 +75,6 @@ class AdminService {
             if (error) {
               callback(error, null);
             } else {
-
               value++;
               if (!item[i].isAdmin) {
                 item[i].data = result[0]
@@ -156,16 +155,13 @@ class AdminService {
       let fields = ['first_name', 'last_name', 'mobile_number', 'email', 'isActivated', 'data.location.city', 'data.professionalDetails.education',
         'data.professionalDetails.experience', 'data.professionalDetails.currentSalary', 'data.professionalDetails.noticePeriod',
         'data.professionalDetails.relocate', 'data.professionalDetails.industryExposure', 'data.professionalDetails.currentCompany',
-        'data.isCompleted', 'data.isSubmitted', 'data.isVisible', 'data.keySkills', 'data.industry.name', 'data.industry.roles.name',
-        'data.capabilities.name', 'data.capabilities.complexities.name', 'data.capabilities.complexities.answer', 'data.industry.roles.default_complexities.name',
-        'data.industry.roles.default_complexities.complexities.name', 'data.industry.roles.default_complexities.complexities.scenarios.name'];
+        'data.isCompleted', 'data.isSubmitted', 'data.isVisible'];
       let fieldNames = ['First Name', 'Last Name', 'Mobile Number', 'Email', 'Is Activated', 'Location', 'Education', 'Experience',
         'Current Salary', 'Notice Period', 'Relocate', 'Industry Exposure', 'Current Company', 'Is Completed', 'Is Submitted',
-        'Is Visible', 'Key Skills', 'Industry', 'Area of work', 'Capabilities', 'Complexity', 'Scenario', 'Default Complexity', 'Complexities', 'Scenarios'];//
+        'Is Visible'];//
       let csv = json2csv({
         data: result.candidate, fields: fields, fieldNames: fieldNames,
-        unwindPath: ['data.industry.roles', 'data.industry.roles.default_complexities', 'data.industry.roles.default_complexities.complexities',
-          'data.industry.roles.default_complexities.complexities.scenarios', 'data.capabilities', 'data.capabilities.complexities']
+        unwindPath: []
       });
       //fs.writeFile('./src/server/public/candidate.csv', csv, function (err:any) {
       fs.writeFile('/home/bitnami/apps/jobmosis-staging/c-next/dist/prod/server/public/candidate.csv', csv, function (err: any) {

@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, Output} from "@angular/core";
 import {Section} from "../../../user/models/candidate";
-import {Messages, Tooltip, LocalStorage, ValueConstant, ImagePath} from "../../../shared/constants";
+import {Messages, Tooltip, LocalStorage, ValueConstant, ImagePath, Headings} from "../../../shared/constants";
 import {ProficiencyDetailsService} from "../proficiency-detail-service";
 import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
 import {ErrorService} from "../error.service";
@@ -17,6 +17,7 @@ import {LocalStorageService} from "../../../shared/services/localstorage.service
 export class ProficienciesComponent {
   @Input() choosedproficiencies: string[];
   @Input() highlightedSection: Section;
+  gotItMessage: string= Headings.GOT_IT;
   private proficiencies: string[];
   @Output() onComplete = new EventEmitter();
   @Output() onSelect = new EventEmitter();
@@ -140,4 +141,8 @@ export class ProficienciesComponent {
         let _body: any = document.getElementsByTagName('BODY')[0];
         _body.scrollTop = -1;
     }
+
+  getMessage() {
+    return Messages;
+  }
 }

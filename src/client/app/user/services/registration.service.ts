@@ -15,6 +15,7 @@ constructor(private _router: Router, private themeChangeService: ThemeChangeServ
   onSuccess(res: any) {
     LocalStorageService.setLocalValue(LocalStorage.IS_CANDIDATE, res.data.isCandidate);
     LocalStorageService.setLocalValue(LocalStorage.IS_CANDIDATE_FILLED, res.data.isCompleted);
+    LocalStorageService.setLocalValue(LocalStorage.IS_CANDIDATE_SUBMITTED, res.data.isSubmitted);
     LocalStorageService.setLocalValue(LocalStorage.END_USER_ID, res.data.end_user_id);
     LocalStorageService.setLocalValue(LocalStorage.EMAIL_ID, res.data.email);
     LocalStorageService.setLocalValue(LocalStorage.MOBILE_NUMBER, res.data.mobile_number);

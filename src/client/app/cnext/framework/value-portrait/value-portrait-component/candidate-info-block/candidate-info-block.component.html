@@ -59,6 +59,7 @@
           <div *ngFor="let certification of candidate.certifications" class="line-block">
             <b>{{certification.year}}</b>
             <b><label><strong>{{certification.name}}</strong></label> | {{certification.issuedBy}} </b>
+            <b *ngIf="certification.code!=''">({{certification.code}})</b>
             <b style="    white-space: nowrap;
     width: 100%;
     overflow: hidden;

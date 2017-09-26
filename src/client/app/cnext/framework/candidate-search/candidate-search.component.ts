@@ -1,14 +1,16 @@
-import {Component, OnChanges} from "@angular/core";
-import {CandidateSearchService} from "./candidate-search.service";
-import {ErrorService} from "../error.service";
-import {CandidateSearch} from "../model/candidate-search";
-import {JobQcard} from "../model/JobQcard";
-import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
-import {Candidate} from "../../../user/models/candidate";
-import {CandidateDetail} from "../../../user/models/candidate-details";
-import {Router} from "@angular/router";
-import {Messages, ValueConstant} from "../../../shared/constants";
-import {QCardViewService} from "../recruiter-dashboard/q-card-view/q-card-view.service";
+import { Component, OnChanges} from '@angular/core';
+import { CandidateSearchService} from './candidate-search.service';
+import { ErrorService} from '../error.service';
+import { CandidateSearch} from '../model/candidate-search';
+import {JobQcard} from '../model/JobQcard';
+import {CandidateProfileService} from '../candidate-profile/candidate-profile.service';
+import {Candidate} from '../../../user/models/candidate';
+import {CandidateDetail} from '../../../user/models/candidate-details';
+import {Router} from '@angular/router';
+import {LocalStorage, Messages, UsageActions, ValueConstant} from '../../../shared/constants';
+import {QCardViewService} from '../recruiter-dashboard/q-card-view/q-card-view.service';
+import {LocalStorageService} from '../../../shared/services/localstorage.service';
+import {UsageTrackingService} from '../usage-tracking.service';
 
 @Component({
   moduleId: module.id,
@@ -40,7 +42,9 @@ export class CandidateSearchComponent implements OnChanges {
   isCandidateFound:boolean;
 
   constructor(private _router:Router, private candidateSearchService:CandidateSearchService,
-              private errorService:ErrorService, private profileCreatorService:CandidateProfileService, private qCardViewService:QCardViewService) {
+              private usageTrackingService : UsageTrackingService,
+              private errorService:ErrorService, private profileCreatorService:CandidateProfileService,
+              private qCardViewService:QCardViewService) {
 
   }
 
@@ -107,6 +111,11 @@ export class CandidateSearchComponent implements OnChanges {
 
   viewProfile(nav:string) {
     if (nav !== undefined) {
+      this.usageTrackingService.addUsesTrackingData(UsageActions.VIEWED_VALUE_PORTRAIT_BY_RECRUITER,
+        LocalStorageService.getLocalValue(LocalStorage.END_USER_ID), this.jobId, this.candidateId).subscribe(
+        data  => {
+          console.log(''+data);
+        }, error => this.errorService.onError(error));
       this._router.navigate([nav, this.userId]);
     }
   }
@@ -125,11 +134,6 @@ export class CandidateSearchComponent implements OnChanges {
   }
 
   showJobCompareView(data:any) {
-    /*var data = {
-     'jobId': jobId,
-     'inCartStatus': this.inCartListedStatusForSearchView,
-     'inRejectedStatus': this.inRejectListedStatusForSearchView
-     };*/
     this.jobId = data.jobId;
     this.inCartListedStatusForSearchView = data.inCartStatus;
     this.inRejectListedStatusForSearchView = data.inRejectedStatus;

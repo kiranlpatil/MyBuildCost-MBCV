@@ -3,7 +3,7 @@
   <!--<img src={{guidedTourImgOverlayScreensStackViewPath}} alt="Profile Picture">-->
   <div class="guided-tour-overlay-bg">
     <div class="got-it-btn" (click)="onGotItGuideTour()">
-      <span>OK, Got it</span>
+      <span>{{gotItMessage}}</span>
     </div>
   </div>
 </div>
@@ -45,10 +45,7 @@
 <div class="col-sm-12 no-padding">
   <div class="guided-tour-description"
        *ngIf="guidedTourStatus?.indexOf(guidedTourImgOverlayScreensStackView) == -1 && isCandidate">
-    <div class="guided-tour-containt text-center">
-      This view shows you the precise degree of matches and <br/>
-      mismatches between the capabilities and job expectations.
-    </div>
+    <div class="guided-tour-containt text-center" [innerHTML]="getMessage().GUIDED_TOUR_MISMATCHES_COMPATIBILITY_MESSAGE"></div>
   </div>
   <section class="container-fluid one-page-summary" *ngIf="data != undefined && typeOfView =='spa_candidate'">
     <div class="left-container">
@@ -272,10 +269,7 @@
              *ngIf="guidedTourStatus?.indexOf(guidedTourImgOverlayScreensStackView) == -1 && isCandidate">
           <div class="guided-tour-overlay">
             <span class="down-arrow"></span>
-            <p>
-              Each tile within a tower represents a scenario and how you <br/>
-              compare against it as specified in the job profile
-            </p>
+            <p [innerHTML]="getMessage().GUIDED_TOUR_JOB_PROFILE_SCENARIO_HELP_MESSAGE"></p>
           </div>
         </div>
         <div *ngIf="typeOfView =='spa_job' && recruiter != undefined && candidateDetails != undefined" >
@@ -290,9 +284,7 @@
         <!--<img src={{guidedTourImgOverlayScreensStackViewPath}} alt="Profile Picture">-->
         <div class="guided-tour-overlay-key-skills">
           <span class="down-arrow"></span>
-          <p>
-            Shows matching of your key-skills with that required for the job
-          </p>
+          <p [innerHTML]="getMessage().GUIDED_TOUR_MATCHING_KEY_SKILLS_MESSAGE"></p>
         </div>
       </div>
       <div class="col-sm-12 proficiency-compare-section-area">

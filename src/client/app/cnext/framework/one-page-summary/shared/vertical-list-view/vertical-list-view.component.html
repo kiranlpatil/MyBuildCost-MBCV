@@ -69,6 +69,7 @@
             <p>{{item.year}}</p>
             <p>{{item.name}}</p>
             <p>{{item.issuedBy}}</p>
+            <p *ngIf="item.code!=''">{{item.code}}</p>
             <p [class.text-ellipsis]="!readMore[i]" [class.text-wrap]="readMore[i]">{{item.remark}}</p>
             <p class="read-more" (click)="readMore[i] = !readMore[i]" *ngIf="item.remark.length>20  ">Read More</p>
               <p class="read-less" (click)="readMore[i] = !readMore[i]">Read Less</p>
@@ -80,6 +81,7 @@
           <p>{{item.year}}</p>
           <p>{{item.name}}</p>
           <p>{{item.issuedBy}}</p>
+          <p *ngIf="item.code!=''">{{item.code}}</p>
           <p [class.text-ellipsis]="!readMore[i]" [class.text-wrap]="readMore[i]">{{item.remark}}</p>
           <p class="read-more" (click)="readMore[i] = !readMore[i]" *ngIf="item.remark.length>20  ">Read More</p>
           <p class="read-less" (click)="readMore[i] = !readMore[i]">Read Less</p>

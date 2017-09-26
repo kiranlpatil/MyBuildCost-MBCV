@@ -6,7 +6,7 @@ import {CandidateDetail} from "../../../../user/models/candidate-details";
 import {CandidateProfileService} from "../../candidate-profile/candidate-profile.service";
 import {RecruiterDashboardService} from "../../recruiter-dashboard/recruiter-dashboard.service";
 import {Recruiter} from "../../../../user/models/recruiter";
-import {AppSettings, ImagePath, LocalStorage} from "../../../../shared/constants";
+import {AppSettings, Headings, ImagePath, LocalStorage, Messages} from "../../../../shared/constants";
 import {GuidedTourService} from "../../guided-tour.service";
 import {LocalStorageService} from "../../../../shared/services/localstorage.service";
 import {ErrorService} from "../../error.service";
@@ -22,6 +22,7 @@ export class JobCompareViewComponent implements OnChanges,OnInit {
   @Input() candiadteId: string;
   @Input() jobId: string;
   capabilities: Capability[];
+  gotItMessage:string= Headings.GOT_IT;
   candidate : Candidate= new Candidate();
   candidateDetails : CandidateDetail = new CandidateDetail();
   private isCandidateHaveExtraKeySkill: boolean=false;
@@ -140,6 +141,10 @@ export class JobCompareViewComponent implements OnChanges,OnInit {
   }
   closeThis() {
     this.close.emit(true);
+  }
+
+  getMessage() {
+    return Messages;
   }
 
 }

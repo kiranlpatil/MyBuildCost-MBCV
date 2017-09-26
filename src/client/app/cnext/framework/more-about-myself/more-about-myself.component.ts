@@ -141,4 +141,8 @@ export class MoreAboutMyselfComponent implements OnInit {
     let _body: any = document.getElementsByTagName('BODY')[0];
     _body.scrollTop = -1;
   }
+
+  getMessage() {
+    return Messages;
+  }
 }

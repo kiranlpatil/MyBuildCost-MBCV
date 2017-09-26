@@ -1,4 +1,4 @@
-<div class="list-container" *ngIf="candidates && candidates.length>0">
+<div class="list-container" *ngIf="candidates && candidates.length>0" id="candidate-list-view">
   <div class="header">
     <!--<a href="./public/candidate.csv" download="candiadte.csv" title="Export Candidate to CSV File"><i class="glyphicon glyphicon-export"></i>Export</a>-->
   </div>
@@ -7,28 +7,28 @@
   <div class="list-view">
     <ul class="list-header">
       <li>
-        <h5>Name</h5>
+        <h5>{{getLabel().NAME}}</h5>
       </li>
       <li>
-        <h5>Job Title</h5>
+        <h5>{{getLabel().JOB_TITLE_LABEL}}</h5>
       </li>
       <li>
-        <h5>Email Address</h5>
+        <h5>{{getLabel().EMAIL_FIELD_LABEL}}</h5>
       </li>
       <li>
-        <h5>Contact</h5>
+        <h5>{{getLabel().CONTACT_FIELD_LABEL}}</h5>
       </li>
       <li>
-        <h5>Current Location</h5>
+        <h5>{{getLabel().CURRENT_LOCATION}}</h5>
       </li>
       <li>
-        <h5>Profile Status</h5>
+        <h5>{{getLabel().PROFILE_STATUS}}</h5>
       </li>
       <li>
-        <h5>Activation Status</h5>
+        <h5>{{getLabel().ACTIVATION_STATUS}}</h5>
       </li>
       <li>
-        <h5>Actions</h5>
+        <h5>{{getLabel().ACTIONS}}</h5>
       </li>
     </ul>
     <div *ngFor="let candidate of candidates;let i = index">
