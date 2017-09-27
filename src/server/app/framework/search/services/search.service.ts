@@ -11,7 +11,7 @@ import {ProfileComparisonModel} from "../../dataaccess/model/profile-comparison.
 import {ProfileComparisonJobModel} from "../../dataaccess/model/profile-comparison-job.model";
 import * as mongoose from "mongoose";
 import {CandidateDetailsWithJobMatching} from "../../dataaccess/model/candidatedetailswithjobmatching";
-import {UtilityFunctions} from "../../uitility/utility-functions";
+import {UtilityFunction} from "../../uitility/utility-function";
 import MatchViewModel = require('../../dataaccess/model/match-view.model');
 import Match = require('../../dataaccess/model/match-enum');
 import IndustryRepository = require('../../dataaccess/repository/industry.repository');
@@ -672,20 +672,20 @@ class SearchService {
     }
 
     if (isGotIt) {
-      candidateDetails.userId.mobile_number = UtilityFunctions.mobileNumberHider(candidateDetails.userId.mobile_number);
-      candidateDetails.userId.email = UtilityFunctions.emailValueHider(candidateDetails.userId.email);
+      candidateDetails.userId.mobile_number = UtilityFunction.mobileNumberHider(candidateDetails.userId.mobile_number);
+      candidateDetails.userId.email = UtilityFunction.emailValueHider(candidateDetails.userId.email);
       candidateDetails.academics = [];
       candidateDetails.employmentHistory = [];
       candidateDetails.areaOfWork = [];
       candidateDetails.proficiencies = [];
       candidateDetails.awards = [];
       candidateDetails.proficiencies = [];
-      candidateDetails.professionalDetails.education = UtilityFunctions.valueHide(candidateDetails.professionalDetails.education)
-      candidateDetails.professionalDetails.experience = UtilityFunctions.valueHide(candidateDetails.professionalDetails.experience)
-      candidateDetails.professionalDetails.industryExposure = UtilityFunctions.valueHide(candidateDetails.professionalDetails.industryExposure);
-      candidateDetails.professionalDetails.currentSalary = UtilityFunctions.valueHide(candidateDetails.professionalDetails.currentSalary);
-      candidateDetails.professionalDetails.noticePeriod = UtilityFunctions.valueHide(candidateDetails.professionalDetails.noticePeriod);
-      candidateDetails.professionalDetails.relocate = UtilityFunctions.valueHide(candidateDetails.professionalDetails.relocate);
+      candidateDetails.professionalDetails.education = UtilityFunction.valueHide(candidateDetails.professionalDetails.education)
+      candidateDetails.professionalDetails.experience = UtilityFunction.valueHide(candidateDetails.professionalDetails.experience)
+      candidateDetails.professionalDetails.industryExposure = UtilityFunction.valueHide(candidateDetails.professionalDetails.industryExposure);
+      candidateDetails.professionalDetails.currentSalary = UtilityFunction.valueHide(candidateDetails.professionalDetails.currentSalary);
+      candidateDetails.professionalDetails.noticePeriod = UtilityFunction.valueHide(candidateDetails.professionalDetails.noticePeriod);
+      candidateDetails.professionalDetails.relocate = UtilityFunction.valueHide(candidateDetails.professionalDetails.relocate);
     }
     candidateDetails.userId.password = '';
     _canDetailsWithJobMatching.candidateDetails = candidateDetails;

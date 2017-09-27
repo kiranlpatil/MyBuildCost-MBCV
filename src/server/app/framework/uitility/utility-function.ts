@@ -1,4 +1,4 @@
-export class UtilityFunctions {
+export class UtilityFunction {
 
     public static valueHide(value:string) {
         var result = new Array(value.length).join('X');
@@ -14,7 +14,7 @@ export class UtilityFunctions {
         }
     }
 
-    public static mobileNumberHider(_mobileNumber:number) { //TODO: move to utiltiy class
+  public static mobileNumberHider(_mobileNumber:number) {
         var hideMobileNumber = _mobileNumber.toString()[0] + _mobileNumber.toString().substr(_mobileNumber.toString().length - 4);
         return Number(hideMobileNumber);
     }
