@@ -73,6 +73,9 @@ class JobProfileSchema {
       postingDate: {
         type: Date
       },
+      daysRemainingForExpiring: {
+        type: Number
+      },
       interestedIndustries: [{type: String}]
 
     }, {versionKey: false});

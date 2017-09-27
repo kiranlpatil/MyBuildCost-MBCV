@@ -8,6 +8,7 @@ import { ErrorService } from '../error.service';
 import { Messages } from '../../../shared/constants';
 import { MessageService } from '../../../shared/services/message.service';
 import { Message } from '../../../shared/models/message';
+import {RenewJobPostService} from "../../../user/services/renew-jobpost.service";
 
 @Component({
   moduleId: module.id,
@@ -29,12 +30,14 @@ export class RecruiterDashboardComponent implements OnInit, AfterViewInit {
               private errorService:ErrorService,
               private activatedRoute: ActivatedRoute,private _router: Router,
               private redirectRecruiterDashboard: RedirectRecruiterDashboardService,
-              private messageService: MessageService) {
+              private messageService: MessageService,
+              private renewJobPostService: RenewJobPostService) {
     redirectRecruiterDashboard.showTest$.subscribe(
       isShow=> {
         let matchElement: any = document.getElementById('recr_job_dashboard');
         matchElement.click();
     });
+
   }
 
 
@@ -98,4 +101,9 @@ export class RecruiterDashboardComponent implements OnInit, AfterViewInit {
   getMessage() {
     return Messages;
   }
+
+  checkJobPostExpiryDate(selectedJobProfile: string) {
+    this.renewJobPostService.checkJobPostExpiryDate(selectedJobProfile);
+  }
+
 }

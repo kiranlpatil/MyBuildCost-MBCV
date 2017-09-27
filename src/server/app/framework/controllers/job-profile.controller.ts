@@ -48,16 +48,15 @@ export function retrieve(req: express.Request, res: express.Response, next: any)
           code: 401
         });
       } else {
-        let currentDate = new Date();
-        let expiringDate = new Date(result.postedJobs[0].expiringDate);
-        let daysRemainingForExpiring = Math.round(new Date(expiringDate - currentDate)/(1000*60*60*24));
+        let currentDate = <any>new Date();
+        let expiringDate = <any>new Date(result.postedJobs[0].expiringDate);
+        let daysRemainingForExpiring = Math.round(<any>new Date(expiringDate - currentDate)/(1000*60*60*24));
         result.postedJobs[0].daysRemainingForExpiring=daysRemainingForExpiring;
         if (daysRemainingForExpiring <= 0) {
           result.postedJobs[0].isJobPostExpired=true;
 
         } else{
           result.postedJobs[0].isJobPostExpired=false;
-
 
         }
         res.status(200).send({

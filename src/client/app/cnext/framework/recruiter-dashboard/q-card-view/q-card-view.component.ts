@@ -76,9 +76,8 @@ export class QCardviewComponent implements OnChanges {
         }
       }
     }
-    if (changes.isJobPostExpired && changes.isJobPostExpired.currentValue) {debugger
+    if (changes.isJobPostExpired && changes.isJobPostExpired.currentValue) {
     this.isJobPostExpired=changes.isJobPostExpired.currentValue;
-      console.log('changes.isJobPostExpired.currentValue',this.isJobPostExpired);
     }
   }
 

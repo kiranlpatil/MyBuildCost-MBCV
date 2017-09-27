@@ -16,7 +16,7 @@ import {ErrorService} from "../../error.service";
 import {Label} from "../../../../shared/constants";
 import {JobPosterService} from "../../job-poster/job-poster.service";
 import {MessageService} from "../../../../shared/services/message.service";
-import {Message} from "../../../../shared/models/message";
+import {RenewJobPostService} from "../../../../user/services/renew-jobpost.service";
 
 @Component({
   moduleId: module.id,
@@ -48,8 +48,6 @@ export class JobDashboardComponent implements OnInit {
   private emptyCartMessage: string = Tooltip.EMPTY_CART_MESSAGE;
   private emptyRejectedList: string = Tooltip.EMPTY_REJECTED_LIST_MESSAGE;
   @ViewChild(QCardviewComponent) acaQcardClassObject: QCardviewComponent;
-  @ViewChild('renewJob')
-  private renewJob: ElementRef;
 
   constructor(public refrence: ReferenceService,
               private activatedRoute: ActivatedRoute,
@@ -57,7 +55,7 @@ export class JobDashboardComponent implements OnInit {
               private jobDashboardService: JobDashboardService,
               private _router:Router,private qcardFilterService:QCardFilterService,
               private loaderService: LoaderService,private profileComparisonService: ProfileComparisonService,
-              private jobPostService: JobPosterService, private messageService: MessageService) {
+              private renewJobPostService: RenewJobPostService) {
     this.qcardFilterService.candidateFilterValue$.subscribe(
       (data: QCardFilter) => {
         this.filterMeta = data;
@@ -87,7 +85,7 @@ export class JobDashboardComponent implements OnInit {
           this.isRecruitingForSelf = data.data.industry.isRecruitingForself;
           this.selectedJobProfile = data.data.industry.postedJobs[0];
           this.recruiterId = data.data.industry._id;
-          this.checkJobPostExpiryDate(this.selectedJobProfile);
+          this.renewJobPostService.checkJobPostExpiryDate(this.selectedJobProfile);
           for (let item of data.data.industry.postedJobs[0].candidate_list) {
             if (item.name === ValueConstant.APPLIED_CANDIDATE)
               this.recruiterJobView.numberOfCandidatesApplied = item.ids.length;
@@ -310,32 +308,13 @@ export class JobDashboardComponent implements OnInit {
     return Label;
   }
 
-  checkJobPostExpiryDate(selectedJobProfile: JobPosterModel) {
-    if (selectedJobProfile.daysRemainingForExpiring <= 0) {
-      this.messageService.message(new Message('Your job post has been expired to renew your job click on "Renew Job Post" button'));
-    }
-  }
 
   onRenewJob() {
-    if (this.selectedJobProfile.daysRemainingForExpiring > -31) {
-      this.selectedJobProfile.expiringDate = new Date(this.selectedJobProfile.expiringDate);
-      this.selectedJobProfile.expiringDate.setDate(this.selectedJobProfile.expiringDate.getDate() + 30);
-      console.log(this.selectedJobProfile);
-      this.updateJob();
-    }else {
-      this.renewJob.nativeElement.disabled = true;
-      this.messageService.message(new Message('Cannot renew your job post kindly click on "Clone" button to clone the same job'));
-    }
-
-    //Todo increment by 30 days
+    this.renewJobPostService.onRenewJob(this.selectedJobProfile);
   }
 
   updateJob() {
-    this.jobPostService.postJob(this.selectedJobProfile).subscribe(
-      data => {
-        this.selectedJobProfile = data.data.postedJobs[0];
-        this.messageService.message(new Message('You have successfully renewed ' + this.selectedJobProfile.jobTitle + 'Job by'+ '30 days'));
-      }, error => this.errorService.onError(error));
+    this.renewJobPostService.updateJob();
   }
 
 }

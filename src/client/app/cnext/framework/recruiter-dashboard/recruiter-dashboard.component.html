@@ -19,7 +19,8 @@
       <div *ngIf="recruiterDashboard && screenType != ''">
         <cn-job-lister [headerInfoForJob]="recruiterHeaderDetails" [jobListInput]="recruiterDashboard.postedJobs"
                        (jobPostEventEmitter)="jobSelected($event)" [screenType]="screenType"
-                       [recruiter]="recruiterDashboard" (jobListCloneSuccessEmitter)="OnCloneSuccessMessage()"></cn-job-lister>
+                       [recruiter]="recruiterDashboard" (jobListCloneSuccessEmitter)="OnCloneSuccessMessage()"
+        (selectedJobProfileEmitter)="checkJobPostExpiryDate($event)"></cn-job-lister>
       </div>
     </div>
     <!--<cn-tool-tip [message]="test"></cn-tool-tip>-->

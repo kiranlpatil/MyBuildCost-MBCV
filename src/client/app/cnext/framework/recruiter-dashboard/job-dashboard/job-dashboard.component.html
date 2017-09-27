@@ -52,9 +52,6 @@
                 <label>Expiry Date</label>
                 <p>{{selectedJobProfile.expiringDate | date :'dd MMM yyyy'}}</p>
               </li>
-                <li class="btn btn-primary">
-                        <button #renewJob (click)="onRenewJob()"></button>
-                </li>
             </ul>
           </div>
         </div>
@@ -96,6 +93,7 @@
             class="glyphicon glyphicon-option-horizontal"></span></button>
           <ul class="dropdown-menu">
             <li (click)="raiseCloneEvent()"><a>{{getLabel().CLONE_JOB}}</a></li>
+            <li (click)="onRenewJob()"><a>Renew Job Post</a></li>
             <li><a disabled>{{getLabel().CLOSE_JOB}}</a></li>
           </ul>
         </div>

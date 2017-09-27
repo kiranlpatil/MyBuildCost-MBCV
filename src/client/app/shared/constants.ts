@@ -1,10 +1,10 @@
 export class AppSettings {
-  //public static IP = 'http://localhost:8080';
+  public static IP = 'http://localhost:8080';
   // public static IP = 'http://ee802b7f.ngrok.io';
   //public static IP = 'http://10.192.33.77:8080';
   //public static IP = 'http://52.10.145.87:3000';
   // public static IP = 'app.jobmosis.com';
-   public static IP = '';
+  // public static IP = '';
 
 
   public static get API_ENDPOINT(): string {
@@ -221,6 +221,9 @@ export class Messages {
   public static GUIDE_MESSAGE_FOR_NEW_VIEWER = 'Thank you for showing interest, ' +
       'we will need your basic information to create your value portrait on JobMosis. Go ahead, ' +
       'fill the form and get your value portrait!';
+
+  public static UNABLE_TO_RENEW_JOB_POST_MSG = 'Cannot renew your job post kindly click on "Clone" button to clone the same job';
+  public static RENEW_JOB_POST_MSG = 'Your job post has been expired to renew your job click on "Renew Job Post" button';
 
 }
 export class AdminPanel {
