@@ -1,6 +1,6 @@
 #JobMosis job portal QUICK START:
 
-Steps for JobMosis Inshort:-
+Steps for JobMosis In Short:-
 
 JobMosis has both http and https configuration.In below context we discuss about how we can use that configuration.
 
@@ -121,7 +121,7 @@ cordova run device
 
     Step 5. openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt
 
-3) To run the site on https,Follow the steps mentioned in #TPl Mobile Seed QICK START:
+3) To run the site on https,Follow the steps mentioned in #TPl Mobile Seed QUICK START:
  
 
 #Backend Debugging
