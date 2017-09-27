@@ -3,15 +3,15 @@
 .filter-container {
   padding: 0;
   position: fixed;
-  top: 94px;
+  top: 96px;
   right: 0;
-  height: calc(100vh - 115px);
+  height: calc(100vh - 117px);
   overflow: auto;
   border-left: 1px solid $gray;
   text-align: left;
   width: 200px;
   background: $filter-bg;
-  z-index: 1000;
+  z-index: 1002;
 
   p {
     color: $text-color;
@@ -135,7 +135,9 @@
     transition: 0.5s ease;
     visibility: hidden;
     opacity: 1;
+    overflow-x: hidden;
     height: calc(100vh - 128px);
+    z-index: 1051;
 
     h4 {
       left: 30px;
@@ -167,7 +169,6 @@
   .open-filter {
     visibility: visible !important;
     width: 200px !important;
-    overflow-x: hidden;
   }
 
   .glyphicon-filter {

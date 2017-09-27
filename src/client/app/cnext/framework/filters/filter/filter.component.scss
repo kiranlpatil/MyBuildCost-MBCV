@@ -1,7 +1,8 @@
 .recruiter-filter {
-  top: 213px !important;
+  top: 216px !important;
   padding-bottom: 0 !important;
-  height: calc(100vh - 235px) !important;
+  height: calc(100vh - 238px) !important;
+  z-index: 1001 !important;
 
   h4 {
     top: 170px !important;

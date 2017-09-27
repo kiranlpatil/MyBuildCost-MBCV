@@ -65,7 +65,8 @@
           <div *ngFor="let item of candidate.certifications;let i = index">
             <div *ngIf="i == 0">
               <li>
-                <p>{{item.name}} at {{item.issuedBy}} in {{item.year}}</p>
+                <p *ngIf="item.code==''">{{item.name}} at {{item.issuedBy}} in {{item.year}}</p>
+                <p *ngIf="item.code!=''">{{item.name}} at {{item.issuedBy}}, ({{item.code}}) in {{item.year}}</p>
               </li>
             </div>
           </div>

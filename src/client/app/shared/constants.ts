@@ -1,8 +1,8 @@
 export class AppSettings {
-  // public static IP = 'http://localhost:8080';
+  public static IP = 'http://localhost:8080';
   // public static IP = 'http://ee802b7f.ngrok.io';
   //public static IP = 'http://10.192.33.77:8080';
-  public static IP = 'http://34.208.115.60:3000';
+  //public static IP = 'http://52.10.145.87:3000';
   // public static IP = 'app.jobmosis.com';
   // public static IP = '';
 
@@ -16,6 +16,25 @@ export class AppSettings {
   public static IS_SOCIAL_LOGIN_NO = 'NO';
   public static HTTP_CLIENT = 'http://';
 }
+
+export enum UsageActions  {
+  ADDED_IN_TO_CART_BY_RECRUITER,
+  ADDED_IN_TO_REJECT_BY_RECRUITER,
+  ADDED_IN_TO_COMPARE_VIEW_BY_RECRUITER,
+  VIEWED_HALF_PROFILE_BY_RECRUITER,
+  VIEWED_FULL_PROFILE_BY_RECRUITER,
+  VIEWED_VALUE_PORTRAIT_BY_RECRUITER,
+  VIEWED_JOB_PROFILE_BY_CANDIDATE,
+  APPLIED_FOR_JOB_PROFILE_BY_CANDIDATE,
+  ADDED_INTO_NOT_INTERESTED,
+  REMOVED_FROM_CART_BY_RECRUITER,
+  REMOVED_FROM_REJECT_BY_RECRUITER,
+  REMOVED_FROM_COMPARE_VIEW_BY_RECRUITER,
+  REMOVED_FROM_NOT_INTERESTED,
+  DEFAULT_VALUE = 999
+  //append your new enum value at the end of the list DON'T MODIFY THE LIST
+}
+
 
 export class Messages {
   public static MSG_MSG_CLONED_SUCCESSFULLY = 'New Job is been added successfully';
@@ -42,7 +61,7 @@ export class Messages {
   public static MSG_SUCCESS_CONTACT: string = 'Email sent successfully.';
   public static MSG_SUCCESS_CHANGE_THEME: string = 'Theme changed successfully.';
   public static MSG_SUCCESS_MAIL_VERIFICATION_RESULT_STATUS: string = 'Congratulations!';
-  public static MSG_CHANGE_PASSWORD_SUCCESS_HEADER: string = 'Password changed successfully';
+  public static MSG_CHANGE_PASSWORD_SUCCESS_HEADER: string = 'Password Changed Successfully';
   public static MSG_SUCCESS_MAIL_VERIFICATION_BODY: string = 'Your account verified successfully.' +
     'You may start using it immediately by clicking on Sign In!';
 
@@ -76,6 +95,7 @@ export class Messages {
   public static MSG_WARNING_ON_EDIT_CANDIDATE: string = 'This section can be updated only after.';
 
   public static MSG_ERROR_VALIDATION_EMAIL_REQUIRED = 'Enter your e-mail address.';
+  public static MSG_ERROR_VALIDATION_WEBSITE_REQUIRED = 'Enter company website.';
   public static MSG_ERROR_VALIDATION_PASSWORD_REQUIRED = 'Enter your password.';
   public static MSG_ERROR_VALIDATION_NEWPASSWORD_REQUIRED = 'Enter a new password';
   public static MSG_ERROR_VALIDATION_CONFIRMPASSWORD_REQUIRED = 'Confirm your password';
@@ -89,6 +109,7 @@ export class Messages {
   public static MSG_ERROR_VALIDATION_COMPANYNAME_REQUIRED = 'This field can\'t be left blank.';
   public static MSG_ERROR_VALIDATION_OTP_REQUIRED = 'Enter received OTP.';
   public static MSG_ERROR_VALIDATION_INVALID_EMAIL_REQUIRED = 'Enter a valid email address.';
+  public static MSG_ERROR_VALIDATION_INVALID_URL_REQUIRED = 'Enter a valid company website.';
   public static MSG_ERROR_VALIDATION_INVALID_NAME = 'Enter valid name.';
   public static MSG_ERROR_VALIDATION_INVALID_DATA = 'Enter valid data.';
   public static MSG_ERROR_VALIDATION_PASSWORD_MISMATCHED = 'Passwords do not match.';
@@ -125,6 +146,7 @@ export class Messages {
   public static MSG_ERROR_VALIDATION_CERTIFICATION_NAME_REQUIRED = 'Certification name is required.';
   public static MSG_ERROR_VALIDATION_CERTIFICATION_AUTHORITY_REQUIRED = 'Authority name is required.';
   public static MSG_ERROR_VALIDATION_CERTIFICATION_YEAR_REQUIRED = 'Year Of passing is required.';
+  public static MSG_ERROR_VALIDATION_CERTIFICATE_CODE_REQUIRED = 'Number/code of certificate is required.';
   public static MSG_ERROR_VALIDATION_AWARD_NAME_REQUIRED = 'Award name is required.';
   public static MSG_ERROR_VALIDATION_AWARD_AUTHORITY_REQUIRED = 'Authority name is required.';
   public static MSG_ERROR_VALIDATION_AWARD_YEAR_REQUIRED = 'Issued year is required.';
@@ -221,6 +243,55 @@ export class Messages {
   public static GUIDE_MESSAGE_FOR_NEW_VIEWER = 'Thank you for showing interest, ' +
       'we will need your basic information to create your value portrait on JobMosis. Go ahead, ' +
       'fill the form and get your value portrait!';
+  public static GUIDED_TOUR_COMPATIBILITY_SCORES_MESSAGE = 'The Dashboard shows Job Postings based on Compatibility Scores.';
+  public static GUIDED_TOUR_MATCHING_EXPERTISE_MESSAGE = 'Click on a job and see its degree of matching to your expertise.' +
+    '<br/> Using that, helps you understand the profile better.';
+  public static GUIDED_TOUR_MATCHING_MENU_HELP_MESSAGE = 'The Dropdown Menu will help you to ' +
+    '<br/> view & edit your profile, view your ' +
+    '<br/> Value Portrait or go to Dashboard.';
+  public static GUIDED_TOUR_COMPATIBILITY_FILTERS_MESSAGE = 'You can adjust the filters here.' +
+    '<br /><br /> The professional parameters will help you sort/filter through jobs.';
+  public static GUIDED_TOUR_MISMATCHES_COMPATIBILITY_MESSAGE = 'This view shows you the precise degree of matches and ' +
+    '<br/> mismatches between the capabilities and job expectations.';
+  public static GUIDED_TOUR_JOB_PROFILE_SCENARIO_HELP_MESSAGE ='Each tile within a tower represents a scenario and how you' +
+    '<br/> compare against it as specified in the job profile';
+  public static GUIDED_TOUR_MATCHING_KEY_SKILLS_MESSAGE ='Shows matching of your key-skills with that required for the job';
+  public static GUIDED_TOUR_WELCOME_MESSAGE ='<h1> Welcome to JobMosis!</h1>' +
+    '<p> You are taking your first step to<br>Add Job to Life! </p>' +
+    '<p>Let\'s start by capturing your basic profile details and the industry in which you work.</p>';
+  public static GUIDED_TOUR_DESCRIBE_CAPABILITIES_MESSAGE ='Select the different Capabilities that describe your Current Strength.' +
+    '<br/>These Capabilities would define you in the best' +
+    '<br/> way and align you with the best suitable job.';
+  public static GUIDED_TOUR_SELECTED_CAPABILITY_MESSAGE ='You can select maximum 10 Capabilities. To select a new ' +
+    '<br/> Capability, deselect any of the earlier selected Capability.';
+  public static GUIDED_TOUR_CAPABILITY_NOTE_MESSAGE ='<span>Note:</span> If there are Capabilities that you have ' +
+    'developed in past but are no longer relevent, you should not select such Capabilities as this would dilute the ' +
+    'matching and alignment with the best job Opportunity.';
+  public static GUIDED_TOUR_COMPLEXITY_SCENARIOS_MESSAGE ='This section provides a list of Complexity Scenarios for' +
+    ' your selected Capabilities';
+  public static GUIDED_TOUR_COMPLEXITY_SCENARIO_NOTE_MESSAGE ='<span>Note:</span> If a scenario was applicable to you in past but ' +
+    'is no more relevant to you, avoid choosing such scenarios. In such cases, choose' +
+    ' "Not Applicable".';
+  public static GUIDED_TOUR_KEY_SKILLS_NOTE_MESSAGE ='<span>Note:</span> Selecting too many Key Skills dilutes the' +
+    ' matching and alignment with the best Job Opportunity.';
+  public static GUIDED_TOUR_DESCRIBE_YOUR_WORK_MESSAGE ='Select Key Skills, maximum 25.<br clear="all"/>' +
+    '<br clear="all"/>' +
+    'Enter all key words that describe your area of expertise or specialization.<br />' +
+    'Ensure that you cover all relevant aspects of Technologies, Products, <br /> Methodologies, Models, Processes, ' +
+    'Tools, Domain expertise and any <br />' +
+    'additional keywords that describe your work.';
+  public static GUIDED_TOUR_ABOUT_MYSELF_MESSAGE ='In next 4 subsections, tell us more about your Educational and ' +
+    '<br/> Professional milestones, Certifications and Awards.';
+  public static GUIDED_TOUR_ABOUT_MYSELF_NOTE_MESSAGE ='<span>Note:</span> You can add multiple number of companies, ' +
+    'qualifications, certifications and awards';
+  public static GUIDED_TOUR_PROFILE_SUBMISSION_MESSAGE ='Now you have reached the final step of Profile Submission.' +
+    '<br/><br/> Here you will select your Profile Visibility for the Recruiter.<br/><br/>' +
+    'On selecting "Yes", your profile will be available for Recruiter.<br/> ' +
+    'On selecting "No", your profile will not be visible to any Recruiter.';
+  public static GUIDED_TOUR_PROFILE_SUBMISSION_NOTE_MESSAGE ='<span>Note:</span> If you wish to edit your profile before ' +
+    'submitting, you can edit by clicking on relevant section ' +
+    '<br/> It is recommended that you keep the settings to "Yes". If you wish a job change, You can <br/>' +
+  'change this setting later.';
 
 }
 export class AdminPanel {
@@ -261,7 +332,9 @@ export class LocalStorage {
   public static _ID = '_id';
   public static IS_CANDIDATE = 'is_candidate';
   public static IS_CANDIDATE_FILLED = 'is_candidate_filled';
+  public static IS_CANDIDATE_SUBMITTED = 'is_candidate_submitted';
   public static MOBILE_NUMBER = 'mobile_number';
+  public static VERIFIED_MOBILE_NUMBER = 'verified_mobile_number';
   public static COMPANY_NAME = 'company_name';
   public static COMPANY_SIZE = 'company_size';
   public static FIRST_NAME = 'first_name';
@@ -307,6 +380,7 @@ export class ValueConstant {
 
 export class API {
   public static NOTIFICATION = 'notification';
+  public static USAGETRACKING = 'usagetracking';
   public static SEND_MAIL = 'sendmail';
   public static SEND_TO_ADMIN_MAIL = 'sendmailtoadmin';
   public static USER_PROFILE = 'users';
@@ -369,9 +443,8 @@ export class API {
 export class ImagePath {
   public static FAV_ICON = './assets/framework/images/logo/favicon.ico';
   public static BODY_BACKGROUND = './assets/framework/images/page_background/page-bg.png';
-  public static MY_COLOR_LOGO = './assets/framework/images/logo/logo-color.png';
-  public static MY_WHITE_LOGO = './assets/framework/images/logo/job-mosis-logo.png';
-  public static MOBILE_WHITE_LOGO = './assets/framework/images/logo/jobmosis-mobile-logo.png';
+  public static MY_WHITE_LOGO = './assets/c-next/header/job-mosis-logo.png';
+  public static MOBILE_WHITE_LOGO = './assets/c-next/header/jobmosis-mobile-logo.png';
   public static FACEBOOK_ICON = './assets/framework/images/footer/fb.svg';
   public static GOOGLE_ICON = './assets/framework/images/footer/google-plus.svg';
   public static LINKEDIN_ICON = './assets/framework/images/footer/linked-in.svg';
@@ -543,6 +616,7 @@ export class Headings {
   public static ACCOUNT_DETAILS_HEADING: string = 'Account Details';
   public static CHANGE_EMAIL_HEADING: string = 'Change your Email';
   public static CHANGE_MOBILE_NUMBER_HEADING: string = 'Change Your Mobile Number';
+  public static CHANGE_COMPANY_WEBSITE_HEADING: string = 'Change Your Company Website';
   public static RESET_PASSWORD_HEADING: string = 'RESET PASSWORD';
   public static CLONE_JOB: string = 'Clone Job';
   public static POST_JOB: string = 'Post New Job';
@@ -555,6 +629,7 @@ export class Label {
   public static FIRST_NAME_LABEL: string = 'First Name';
   public static LAST_NAME_LABEL: string = 'Last Name';
   public static EMAIL_FIELD_LABEL: string = 'Email';
+  public static COMPANY_WEBSITE_FIELD_LABEL: string = 'Company Website';
   public static CONTACT_FIELD_LABEL: string = 'Contact';
   public static SAVE_PROFILE_LABEL: string = 'Save Profile';
   public static RESET_PASSWORD_MESSAGE: string = 'Please set new password for your';
@@ -565,6 +640,14 @@ export class Label {
   public static VALUE_PORTRAIT_TITLE: string = 'Experience is what it\'s all about';
   public static CORE_CAPABILITIES_TITLE: string = 'Core Capabilities';
   public static NOTE_OF_TRUST: string = 'Note of Trust';
+  public static JOB_TITLE_LABEL: string = 'Job Title';
+  public static CURRENT_LOCATION: string = 'Current Location';
+  public static PROFILE_STATUS: string = 'Profile Status';
+  public static ACTIVATION_STATUS: string = 'Activation Status';
+  public static NAME: string = 'Name';
+  public static ACTIONS: string = 'Actions';
+  public static TOTAL_POSTED_JOB: string = 'Total Posted Jobs';
+  public static COMPANY_NAME: string = 'Company Name (Size)';
 }
 
 export class Button {

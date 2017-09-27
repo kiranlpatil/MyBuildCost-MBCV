@@ -11,7 +11,7 @@ export const RecruiterDashboard: Route[] = [
     component: RecruiterDashboardComponent
   },
   {
-    path: 'recruiterdashboardedit/:jobid',
+    path: 'recruiterdashboard/edit/:jobid',
     component: RecruiterDashboardComponent
   }
 ];

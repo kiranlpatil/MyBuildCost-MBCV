@@ -107,3 +107,25 @@
   background: #e3695f;
   margin: 0 5px 0 0;
 }
+
+@media only screen and (max-width: 1570px) {
+  .list-container {
+    .list-view {
+      margin-top: 45px;
+    }
+    .list-header {
+      height: 50px;
+    }
+  }
+}
+
+@media only screen and (max-width: 935px) {
+  .list-container {
+    .list-view {
+      margin-top: 60px;
+      .list-header {
+        height: 65px;
+      }
+    }
+  }
+}

@@ -89,6 +89,7 @@ export class CandidateSignUpVerificationComponent {
   }
 
   mobileVerificationSuccess(res: any) {
+    LocalStorageService.setLocalValue(LocalStorage.MOBILE_NUMBER, LocalStorage.VERIFIED_MOBILE_NUMBER);
     var message = new Message();
     message.isError = false;
     message.custom_message = Messages.MSG_SUCCESS_CHANGE_MOBILE_NUMBER;

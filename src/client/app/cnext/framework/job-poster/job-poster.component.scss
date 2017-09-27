@@ -41,6 +41,54 @@
   position: relative;
 }
 
+.clone-job-menu {
+  float: right;
+}
+
+.btn-menu {
+  padding: 9px;
+  margin-left: 15px;
+
+  span {
+    border: 1px solid transparent;
+    float: right;
+    height: 26px;
+    margin: -4px 0;
+    padding: 5px 2px !important;
+    width: 24px !important;
+  }
+}
+
+.dropdown-menu {
+  background: $white;
+  border: 1px solid $border-color1;
+  border-radius: 0;
+  box-shadow: 0 1px 2px $menu-box-shadow;
+  left: inherit;
+  padding: 0;
+  z-index: 997;
+  right: 0;
+  margin-bottom: 6px;
+
+  li {
+    text-align: left;
+
+    a {
+      font-weight: bold;
+      padding: 10px;
+
+      &:hover {
+        background: $contact-info;
+      }
+    }
+
+    &:last-child > a {
+      background: #d0d0d0;
+      opacity: 0.3;
+    }
+  }
+}
+
 @media only screen and (max-width: 980px) {
   .job-info {
     margin: 15px 15px 0;

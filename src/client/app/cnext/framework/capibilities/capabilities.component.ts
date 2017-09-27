@@ -281,7 +281,8 @@ export class CapabilitiesComponent {
     }
     this.savedprimaryNames=this.primaryNames.slice();
     this.savedsecondaryNames=this.secondaryNames.slice();
-
-
+  }
+  getMessage() {
+    return Messages;
   }
 }

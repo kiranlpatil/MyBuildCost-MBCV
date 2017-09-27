@@ -71,6 +71,10 @@ export class CandidateDetailListComponent {
       this._router.navigate([nav, candidate._id]);
     }
   }
+
+  getLabel() {
+    return Label;
+  }
 }
 
 

@@ -61,9 +61,9 @@
 .capabilities-guided-tour {
   color: $white;
   font-size: 18px;
-  padding: 0 0 0 70px;
+  padding: 0 0 0 40px;
   position: absolute;
-  top: 15px;
+  top: 18px;
   width: auto;
   p {
     color: $white;
@@ -72,10 +72,9 @@
   }
   .up-arrow {
     background: url(../assets/c-next/card-view/sprite.png) no-repeat -124px -657px;
-    left: 26px;
+    left: 85px;
     position: absolute;
-    transform: rotate(191deg);
-    top: 4px;
+    top: -26px;
   }
 }
 
@@ -127,7 +126,7 @@
   font-size: 18px;
   padding: 0;
   position: fixed;
-  top: 286px;
+  top: 274px;
   width: auto;
   p {
     color: $white;
@@ -230,7 +229,7 @@
   margin: 0 auto;
   position: absolute;
   text-align: center;
-  top: 41%;
+  top: 33%;
   width: 100%;
   h1 {
     color: $white;
@@ -357,7 +356,6 @@
   }
 }
 
-
 @media screen and (min-width: 1367px) and (max-width: 1920px) {
   .dashboard-job-posting-guided-tour {
     left: 345px;
@@ -373,5 +371,33 @@
   }
   .profile-submission-guided-tour {
     right: 211px;
+  }
+  .key-skills-guided-tour {
+    top: 249px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .guided-tour-overlay-bg,
+  .guided-tour-overlay,
+  .down-arrow,
+  .guided-tour-containt,
+  .cn-work-area-guided-tour,
+  .capabilities-guided-tour,
+  .capability-guided-tour,
+  .guided-tour-notes,
+  .key-skills-guided-tour,
+  .more-about-myself-guided-tour,
+  .guided-tour-description,
+  .guided-tour-overlay-key-skills,
+  .up-arrow,
+  .guided-tour-section,
+  .welcome-guided-tour,
+  .dashboard-job-posting-guided-tour,
+  .dashboard-matching-degree-guided-tour,
+  .dashboard-menu-guided-tour,
+  .dashboard-filter-guided-tour,
+  .profile-submission-guided-tour {
+    display: none;
   }
 }

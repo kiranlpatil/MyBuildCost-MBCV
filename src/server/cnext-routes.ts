@@ -66,7 +66,7 @@ export function cnextInit(app: express.Application) { //todo add interceptor to 
   app.put('/api/job/:id/clone', this.authInterceptor.requiresAuth, jobProfileController.cloneJob);
 
   // API for Uses Tracking
-  app.put('/api/usesTracking/:recruiterId/:jobProfileId/:candidateId/:action', jobProfileController.createUsesTracking);
+  app.put('/api/usageTracking', jobProfileController.createUsesTracking);
   app.get('/api/usageDetails', this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, adminController.getUsageDetails);
 
   app.use(sharedService.logHandler);

@@ -485,6 +485,7 @@ export class CandidateProfileComponent implements OnInit, DoCheck, OnDestroy {
 
   onSubmit() {
     this.candidate.isSubmitted = true;
+    LocalStorageService.setLocalValue(LocalStorage.IS_CANDIDATE_SUBMITTED, true);
     this.saveCandidateDetails();
     this.showModalStyle = !this.showModalStyle;
     if (this.setTimeoutId !== undefined) {

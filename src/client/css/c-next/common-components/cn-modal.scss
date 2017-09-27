@@ -44,6 +44,26 @@
     text-align: left;
     clear: both;
   }
+
+  .btn-default {
+    background: transparent !important;
+    border: 0 !important;
+    color: $name !important;
+    box-shadow: none !important;
+    text-transform: capitalize !important;
+    padding: 9px 10px !important;
+
+    &:focus,
+    &:active,
+    &:hover {
+      background: transparent !important;
+      border: 0 !important;
+      color: $text-color !important;
+      box-shadow: none !important;
+      text-transform: capitalize !important;
+      padding: 9px 10px !important;
+    }
+  }
 }
 
 .popup {

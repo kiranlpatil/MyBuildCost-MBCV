@@ -4,16 +4,7 @@
     <div class="got-it-btn" (click)="onGotItGuideTour()">
       <span>{{gotItMessage}}</span>
     </div>
-    <div class="welcome-guided-tour">
-      <h1> Welcome to JobMosis!</h1>
-      <p>
-        You are taking your first step to<br>
-        Add Job to Life!
-      </p>
-      <p>
-        “Let’s start by capturing your basic profile details and the industry in which you work”
-      </p>
-    </div>
+    <div class="welcome-guided-tour" [innerHTML]="getMessage().GUIDED_TOUR_WELCOME_MESSAGE"></div>
   </div>
 </div>
 <div class="modal-bg" *ngIf="highlightedSection.name=='Profile'"></div>

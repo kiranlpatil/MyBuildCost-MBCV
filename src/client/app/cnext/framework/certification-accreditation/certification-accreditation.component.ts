@@ -78,7 +78,8 @@ export class CertificationAccreditationComponent {
       remark: [''],
       name: ['', Validators.required],
       issuedBy: ['', Validators.required],
-      year: ['', Validators.required]
+      year: ['', Validators.required],
+      code:['']
     });
   }
 
