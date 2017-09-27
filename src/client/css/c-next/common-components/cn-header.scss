@@ -333,4 +333,12 @@ $overlay: rgba(0, 0, 0, 0.4);
     left: inherit;
     right: 15px;
   }
+
+  #candidate-header {
+    .navbar-brand {
+      img {
+        width: 40px;
+      }
+    }
+  }
 }

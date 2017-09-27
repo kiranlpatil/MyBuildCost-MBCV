@@ -14,7 +14,7 @@ var spdy = require('spdy');
 var _clientDir = '/dist/client/dev';
 var app = express();
 
-export function init(port: number, mode: string, protocol: string) {
+export function init(port: number, mode: string, protocol: string, dist_runner: string) {
 
   app.use(bodyParser.urlencoded({extended: false}));
   app.use(bodyParser.json({limit: '40mb'}));
@@ -35,70 +35,142 @@ export function init(port: number, mode: string, protocol: string) {
    * @note Dev server will only give for you middleware.
    */
   if (mode == 'dev') {
-    app.all('/*', function (req, res, next) {
-      res.header('Access-Control-Allow-Origin', '*');
-      res.header('Access-Control-Allow-Headers', 'X-Requested-With');
-      next();
-    });
+    if (dist_runner == 'dist') {
+      app.all('/*', function (req, res, next) {
+        res.header('Access-Control-Allow-Origin', '*');
+        res.header('Access-Control-Allow-Headers', 'X-Requested-With');
+        next();
+      });
 
-    routes.init(app);
-    cnextRoutes.cnextInit(app);
+      routes.init(app);
+      cnextRoutes.cnextInit(app);
 
-    let root = path.resolve(process.cwd());
-    let clientRoot = path.resolve(process.cwd(), './dist/client/dev');
-    app.use(express.static(root));
-    app.use(express.static(clientRoot));
-    app.use('/public', express.static(path.resolve(__dirname+'/public')));
-    var renderIndex = (req: express.Request, res: express.Response) => {
-      res.sendFile(path.resolve(__dirname + _clientDir + '/index.html'));
-    };
-    app.get('/*', renderIndex);
-    /**
-     * Api Routes for `Development`.
-     */
+      let root = path.resolve(process.cwd());
+      let clientRoot = path.resolve(process.cwd(), './client/dev');
+      app.use(express.static(root));
+      app.use(express.static(clientRoot));
+      app.use('/public', express.static(path.resolve(__dirname + '/public')));
+      var renderIndex = (req: express.Request, res: express.Response) => {
+        _clientDir = '/client/dev';
+        res.sendFile(path.resolve(__dirname + _clientDir + '/index.html'));
+      };
+      app.get('/*', renderIndex);
+      /**
+       * Api Routes for `Development`.
+       */
+    }
+    else {
+      app.all('/*', function (req, res, next) {
+        res.header('Access-Control-Allow-Origin', '*');
+        res.header('Access-Control-Allow-Headers', 'X-Requested-With');
+        next();
+      });
+
+      routes.init(app);
+      cnextRoutes.cnextInit(app);
+
+      let root = path.resolve(process.cwd());
+      let clientRoot = path.resolve(process.cwd(), './dist/client/dev');
+      app.use(express.static(root));
+      app.use(express.static(clientRoot));
+      app.use('/public', express.static(path.resolve(__dirname+'/public')));
+      var renderIndex = (req: express.Request, res: express.Response) => {
+        _clientDir = '/dist/client/dev';
+        res.sendFile(path.resolve(__dirname + _clientDir + '/index.html'));
+      };
+      app.get('/*', renderIndex);
+      /**
+       * Api Routes for `Development`.
+       */
+    }
   }
   else {
-    /**
-     * Prod Mode.
-     * @note Prod mod will give you static + middleware.
-     */
+    if(dist_runner == 'dist') {
+      /**
+       * Prod Mode.
+       * @note Prod mod will give you static + middleware.
+       */
 
-    /**
-     * Api Routes for `Production`.
-     */
-    routes.init(app);
-    cnextRoutes.cnextInit(app);
-    /**
-     * Client Dir
-     */
-    _clientDir = './dist/client/prod';
+      /**
+       * Api Routes for `Production`.
+       */
+      routes.init(app);
+      cnextRoutes.cnextInit(app);
+      /**
+       * Client Dir
+       */
+      _clientDir = './client/prod';
 
-    /**
-     * Static.
-     */
-    app.use('/js', express.static(path.resolve(__dirname, _clientDir + '/js')));
-    app.use('/css', express.static(path.resolve(__dirname, _clientDir + '/css')));
-    app.use('/assets', express.static(path.resolve(__dirname, _clientDir + '/assets')));
-    app.use('/public', express.static(path.resolve(__dirname+'/public')));
+      /**
+       * Static.
+       */
+      app.use('/js', express.static(path.resolve(__dirname, _clientDir + '/js')));
+      app.use('/css', express.static(path.resolve(__dirname, _clientDir + '/css')));
+      app.use('/assets', express.static(path.resolve(__dirname, _clientDir + '/assets')));
+      app.use('/public', express.static(path.resolve(__dirname+'/public')));
 
-    /**
-     * Spa Res Sender.
-     * @param req {any}
-     * @param res {any}
-     */
-     var renderIndex = function (req: express.Request, res: express.Response) {
-      _clientDir = '/dist/client/prod';
-       res.sendFile(path.resolve(__dirname + _clientDir + '/index.html'));
-     };
+      /**
+       * Spa Res Sender.
+       * @param req {any}
+       * @param res {any}
+       */
+      var renderIndex = function (req: express.Request, res: express.Response) {
+        _clientDir = '/client/prod';
+        res.sendFile(path.resolve(__dirname + _clientDir + '/index.html'));
+      };
 
-    //app.get('*', function(req,res) {
-    //  res.sendFile(process.cwd() + '/dist/prod/client/index.html');
-    //});
+      //app.get('*', function(req,res) {
+      //  res.sendFile(process.cwd() + '/dist/prod/client/index.html');
+      //});
 
-    /**
-     * Prevent server routing and use @ng2-router.
-     */
-    app.get('/*', renderIndex);
+      /**
+       * Prevent server routing and use @ng2-router.
+       */
+      app.get('/*', renderIndex);
+    }
+    else {
+      /**
+       * Prod Mode.
+       * @note Prod mod will give you static + middleware.
+       */
+
+      /**
+       * Api Routes for `Production`.
+       */
+      routes.init(app);
+      cnextRoutes.cnextInit(app);
+      /**
+       * Client Dir
+       */
+      _clientDir = './dist/client/prod';
+
+      /**
+       * Static.
+       */
+      app.use('/js', express.static(path.resolve(__dirname, _clientDir + '/js')));
+      app.use('/css', express.static(path.resolve(__dirname, _clientDir + '/css')));
+      app.use('/assets', express.static(path.resolve(__dirname, _clientDir + '/assets')));
+      app.use('/public', express.static(path.resolve(__dirname+'/public')));
+
+      /**
+       * Spa Res Sender.
+       * @param req {any}
+       * @param res {any}
+       */
+      var renderIndex = function (req: express.Request, res: express.Response) {
+        _clientDir = '/dist/client/prod';
+        res.sendFile(path.resolve(__dirname + _clientDir + '/index.html'));
+      };
+
+      //app.get('*', function(req,res) {
+      //  res.sendFile(process.cwd() + '/dist/prod/client/index.html');
+      //});
+
+      /**
+       * Prevent server routing and use @ng2-router.
+       */
+      app.get('/*', renderIndex);
+    }
   }
 
   /**

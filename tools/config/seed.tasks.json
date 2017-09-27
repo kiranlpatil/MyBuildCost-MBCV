@@ -14,8 +14,7 @@
     "build.js.dev",
     "build.index.dev",
     "build.bundle.rxjs",
-    "sw.manifest.static",
-    "webdriver"
+    "sw.manifest.static"
   ],
 
   "build.dev.watch": [
@@ -50,8 +49,7 @@
     "sw.manifest.static",
     "minify.index",
     "build.config.copy.prod",
-    "build-root-json.copy.prod",
-    "webdriver"
+    "build-root-json.copy.prod"
   ],
 
   "build.prod.aot": [
