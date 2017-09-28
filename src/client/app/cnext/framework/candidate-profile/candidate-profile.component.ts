@@ -28,7 +28,7 @@ export class CandidateProfileComponent implements OnInit, DoCheck, OnDestroy {
   private roleList: string[] = [];
   private primaryCapability: string[] = [];
   private proficiencies: string[] = [];
-  private isComplexityPresent: boolean = false;
+  isComplexityPresent: boolean = false;
   private isShowNext: boolean = true;
   private isShowPrev: boolean = false;
   showCapability: boolean = false;

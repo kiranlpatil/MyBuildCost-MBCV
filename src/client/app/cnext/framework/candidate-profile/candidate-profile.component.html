@@ -36,8 +36,10 @@
     <div class="col-sm-12 no-padding">
       <div class="wrapper">
 
+       <!--TODO Abhijeet <cn-profile-description [candidate]="candidate" [highlightedSection]="highlightedSection"
+                                (onComplete)="onProfileDescriptionComplete($event)"></cn-profile-description>-->
         <cn-profile-description [candidate]="candidate" [highlightedSection]="highlightedSection"
-                                (onComplete)="onProfileDescriptionComplete($event)"></cn-profile-description>
+                                (onComplete)="onProfileDescriptionComplete()"></cn-profile-description>
       </div>
       <div class="wrapper">
         <cn-industry-list [selectedIndustry]="candidate.industry" [highlightedSection]="highlightedSection"
@@ -76,8 +78,11 @@
 
       </div>
       <div class="wrapper">
-        <cn-professional-data [candidate]="candidate" [highlightedSection]="highlightedSection"
+        <!--TODO Abhijeet <cn-professional-data [candidate]="candidate" [highlightedSection]="highlightedSection"
                               (onComplete)="onProfessionalDataComplete($event)"
+                              [hidden]="!showProfessionalData"></cn-professional-data>-->
+        <cn-professional-data [candidate]="candidate" [highlightedSection]="highlightedSection"
+                              (onComplete)="onProfessionalDataComplete()"
                               [hidden]="!showProfessionalData"></cn-professional-data>
       </div>
       <div class="wrapper clearfix">
@@ -85,20 +90,32 @@
                               (onComplete)="onMoreAboutMySelfComplete($event)"
                               [hidden]="!showAboutMySelf"></cn-more-about-myself>
 
-        <cn-employment-history [candidate]="candidate" [highlightedSection]="highlightedSection"
+        <!--TODO Abhijeet <cn-employment-history [candidate]="candidate" [highlightedSection]="highlightedSection"
                                (onComplete)="onEmploymentHistoryComplete($event)"
+                               [hidden]="!showEmploymentHistory"></cn-employment-history>-->
+        <cn-employment-history [candidate]="candidate" [highlightedSection]="highlightedSection"
+                               (onComplete)="onEmploymentHistoryComplete()"
                                [hidden]="!showEmploymentHistory"></cn-employment-history>
 
-        <cn-academic-details [candidate]="candidate" [highlightedSection]="highlightedSection"
+        <!--TODO Abhijeet <cn-academic-details [candidate]="candidate" [highlightedSection]="highlightedSection"
                              (onComplete)="onAcademicDetailsComplete($event)"
+                             [hidden]="!showEmploymentHistory"></cn-academic-details>-->
+        <cn-academic-details [candidate]="candidate" [highlightedSection]="highlightedSection"
+                             (onComplete)="onAcademicDetailsComplete()"
                              [hidden]="!showEmploymentHistory"></cn-academic-details>
 
-        <cn-certification-accreditation [candidate]="candidate" [highlightedSection]="highlightedSection"
+        <!--TODO Abhijeet <cn-certification-accreditation [candidate]="candidate" [highlightedSection]="highlightedSection"
                                         (onComplete)="onCertificationsComplete($event)"
+                                        [hidden]="!showCertificationDetails"></cn-certification-accreditation>-->
+        <cn-certification-accreditation [candidate]="candidate" [highlightedSection]="highlightedSection"
+                                        (onComplete)="onCertificationsComplete()"
                                         [hidden]="!showCertificationDetails"></cn-certification-accreditation>
 
-        <cn-awards [candidate]="candidate" [highlightedSection]="highlightedSection"
+        <!--TODO Abhijeet <cn-awards [candidate]="candidate" [highlightedSection]="highlightedSection"
                    (onComplete)="onAwardsComplete($event)"
+                   [hidden]="!showAwards"></cn-awards>-->
+        <cn-awards [candidate]="candidate" [highlightedSection]="highlightedSection"
+                   (onComplete)="onAwardsComplete()"
                    [hidden]="!showAwards"></cn-awards>
 
       </div>

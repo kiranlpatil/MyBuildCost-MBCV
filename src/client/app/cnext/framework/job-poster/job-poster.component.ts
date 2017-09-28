@@ -46,8 +46,8 @@ export class JobPosterComponent implements OnInit, OnChanges {
   isShowCapability: boolean = false;
   isShowProficiency: boolean = false;
   private showIndustryExposure: boolean = false;
-  private showCompentensies: boolean = false;
-  private showReleventIndustryList: boolean = false;
+  showCompentensies: boolean = false;
+  showReleventIndustryList: boolean = false;
   private showModalStyle: boolean = false;
   private isCapabilitypresent: boolean = false;
   jobPosterModel = new JobPosterModel();
