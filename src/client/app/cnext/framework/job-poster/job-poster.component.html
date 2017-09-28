@@ -69,6 +69,22 @@
       </div>
     </div>
   </div>
+  <div class="dropup ask-expert">
+    <button class="btn dropdown-toggle" type="button" (click)="buildJobShareUrl()" >Ask Expert</button>
+    <a id="mail_link" href="mailto:example@domain.com?subject={{getLabel().CLOSE_JOB}}&body={{sharedLink}}" hidden></a>
+    <!--<ul class="dropdown-menu">
+      <li>href="mailto:{{getMessage().FAQ_CONTACT_EMAIL}}?subject=Call me&body=dummy mail:"
+        <p>Ask expert</p>
+        <input class="form-control" type="email" />
+        <button>Send</button>
+      </li>
+      <li>
+        <p>Are you sure</p>
+        <button>Yes</button>
+        <button>No</button>
+      </li>
+    </ul-->
+  </div>
 </div>
 
 

@@ -13,6 +13,8 @@ import {RecruiterDashboard} from "../model/recruiter-dashboard";
 import {ErrorService} from "../error.service";
 import {Headings, Label, LocalStorage, Messages, ValueConstant} from "../../../shared/constants";
 import {LocalStorageService} from "../../../shared/services/localstorage.service";
+import {Share} from "../model/share";
+import {ShareService} from "../share/share.service";
 
 @Component({
   moduleId: module.id,
@@ -42,6 +44,7 @@ export class JobPosterComponent implements OnInit, OnChanges {
   private setCapabilityMatrix: boolean = true;
   private isShowComplexity: boolean = false;
   private isShowRoleList: boolean = false;
+  private isshow: boolean = false;
   private isShowIndustryList: boolean = false;
   private isShowCapability: boolean = false;
   private isShowProficiency: boolean = false;
@@ -63,8 +66,10 @@ export class JobPosterComponent implements OnInit, OnChanges {
   private highlightedSection: Section = new Section();
   private selectedJobTitle:string;
   private selectedJobId:string;
+  private sharedLink:string='gffgfffgdfgdgfdfgd';
   private isCloneButtonClicked:boolean;
   constructor(private profileCreatorService: CandidateProfileService,
+              private shareService:ShareService,
               private recruiterDashboardService: RecruiterDashboardService,
               private errorService: ErrorService,
               private showQCardView: ShowQcardviewService,
@@ -93,6 +98,7 @@ export class JobPosterComponent implements OnInit, OnChanges {
       .subscribe(
         data => {
           this.jobPosterModel = data.data.industry.postedJobs[0];
+          console.log('job poster model', this.jobPosterModel);
           this.onGetJobDetailsSuccess(this.jobPosterModel);
         }, error => this.errorService.onError(error));
   }
@@ -213,6 +219,33 @@ export class JobPosterComponent implements OnInit, OnChanges {
     this.showModalStyle = !this.showModalStyle;
   }
 
+
+  buildJobShareUrl() {
+   if(this.jobPosterModel && this.jobPosterModel._id) {
+     this.shareService.buildJobShareUrl(this.jobPosterModel._id)
+       .subscribe(
+         (data:Share) => {
+           this.sharedLink=data.shareUrl;
+           this.isshow=true;
+           this.jobPosterModel.isJobShared=true;
+           this.updateJob();
+           if(this.sharedLink) {
+             //document.getElementById('mail_link').click();
+            // let link='<a href='+this.sharedLink+'>JOB EDIT</a>';
+             window.location.href = 'mailto:user@example.com?subject=Subject&body='+this.sharedLink;
+
+             console.log('linkclicked',this.sharedLink);
+           }
+           console.log('data',data);
+         },
+         error=> {
+           this.errorService.onError(error);
+         }
+       );
+   }else {
+     console.log('You havent created job yet');
+   }
+  }
   mockupSearch() {
     this.isShowCandidateQCardView = true;
     this.showQCardView.change(this.jobPosterModel);
