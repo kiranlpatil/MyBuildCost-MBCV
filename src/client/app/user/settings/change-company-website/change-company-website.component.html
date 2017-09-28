@@ -18,6 +18,8 @@
           <label>New Website</label>
           <input [(ngModel)]="model.new_company_website" formControlName="new_company_website" id="new_company_website"
                  class="form-control"/>
+          <div class="error-message" *ngIf="isWebsiteSame== true">{{getMessages().MSG_WEBSITE_SAME}}</div>
+
         </div>
 
 
