@@ -27,14 +27,14 @@ export class CandidateQCardComponent implements OnInit {
   @Input() candidateIDFromSearchView:string;
   candidateId: string;
   private showModalStyle: boolean = false;
-  private hideButton: boolean = true;
+  hideButton: boolean = true;
 
   inCartListedStatusForSearchView:boolean = false;
   inRejectListedStatusForSearchView:boolean = false;
   inShortListedStatusForSearchView:boolean = false;
   inAppliedListedStatusForSearchView:boolean = false;
 
-  private jobId: string;
+  jobId: string;
   @ViewChild(JobCompareViewComponent) checkForGuidedTour: JobCompareViewComponent;
 
   constructor(private candidateDashboardService: CandidateDashboardService,

@@ -14,10 +14,10 @@ import {LoaderService} from '../../../shared/loader/loaders.service';
 })
 
 export class AdminDashboardComponent {
-  private candidate: Candidate = new Candidate();
-  private userData: UserData = new UserData();
-  private numberOfCandidates:number=0;
-  private numberOfRecruiters:number=0;
+  candidate: Candidate = new Candidate();
+  userData: UserData = new UserData();
+  numberOfCandidates:number=0;
+  numberOfRecruiters:number=0;
   constructor( private errorService: ErrorService, private loaderService: LoaderService,private adminDashboardService: AdminDashboardService,) {
       this.loaderService.start();
       this.getUserProfile();

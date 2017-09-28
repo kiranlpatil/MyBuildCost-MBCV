@@ -17,10 +17,10 @@ export class EmployeeHistoryComponent {
   @Input() submitStatus: boolean;
   private year: any;
   private currentDate: any;
-  private yearList = new Array();
+  yearList = new Array();
   public monthList: string[] = new Array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December');
-private fromYear:number;
-private toYear:number;
+fromYear:number;
+toYear:number;
 private requiredCompanyNameValidationMessage = Messages.MSG_ERROR_VALIDATION_COMPANYNAME_REQUIRED;
 private requiredDesignationValidationMessage = Messages.MSG_ERROR_VALIDATION_DESIGNATION_REQUIRED;
 

@@ -34,7 +34,7 @@ export class UserVerificationComponent implements OnInit {
   verifyUserMessage_2: string= Messages.MSG_VERIFY_USER_2;
   verifyUserMessage_3: string= Messages.MSG_VERIFY_USER_3;
   verifyUserMessage_4: string= Messages.MSG_VERIFY_USER_4;
-  private isShowLoader: boolean = false;
+  isShowLoader: boolean = false;
 
 
   constructor(private _router: Router, private formBuilder: FormBuilder,

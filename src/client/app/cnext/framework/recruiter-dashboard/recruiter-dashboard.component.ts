@@ -18,11 +18,11 @@ import { Message } from '../../../shared/models/message';
 
 export class RecruiterDashboardComponent implements OnInit, AfterViewInit {
   company_name: string;
-  private recruiterDashboard: RecruiterDashboard = new RecruiterDashboard();
+  recruiterDashboard: RecruiterDashboard = new RecruiterDashboard();
   private recruiterHeaderDetails: RecruiterHeaderDetails = new RecruiterHeaderDetails();
   private tabName: string;
   private jobId: string;
-  private screenType: string='';
+  screenType: string='';
 
 
   constructor(private recruiterDashboardService: RecruiterDashboardService,

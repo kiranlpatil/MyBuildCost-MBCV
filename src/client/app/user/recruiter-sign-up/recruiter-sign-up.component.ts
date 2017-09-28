@@ -23,36 +23,36 @@ import {SharedService} from "../../shared/services/shared-service";
 export class RecruiterSignUpComponent implements OnInit {
 
   @ViewChild('toaster') toaster: ElementRef;
-  private model = new Recruiter();
+  model = new Recruiter();
   private storedcompanySize: any;
-  private companySize: any;
+  companySize: any;
   private companyHeadquarter: any;
-  private isPasswordConfirm: boolean;
+  isPasswordConfirm: boolean;
   private isFormSubmitted = false;
-  private recruiterForm: FormGroup;
-  private error_msg: string;
-  private isShowErrorMessage: boolean = true;
+  recruiterForm: FormGroup;
+  error_msg: string;
+  isShowErrorMessage: boolean = true;
   private BODY_BACKGROUND: string;
   private image_path: string;
   private isRecruitingForself: boolean = true;
   private isShowMessage: boolean = false;
-  private myPassword: string = '';
-  private storedLocation: Location = new Location();
-  private mainHeaderMenuHideShow: string;
-  private submitStatus: boolean;
-  private companySizeErrorMessage = Messages.MSG_ERROR_VALIDATION_COMPANYSIZE_REQUIRED;
+  myPassword: string = '';
+  storedLocation: Location = new Location();
+  mainHeaderMenuHideShow: string;
+  submitStatus: boolean;
+  companySizeErrorMessage = Messages.MSG_ERROR_VALIDATION_COMPANYSIZE_REQUIRED;
   private locationValidationMessage: string = Messages.MSG_ERROR_VALIDATION_LOCATION_REQUIRED;
   private inValidLocationMessage: string = Messages.MSG_ERROR_VALIDATION_INVALID_LOCATION;
   private passwordMismatchMessage: string;
   formatted_address: string = 'Aurangabad, Bihar, India';
   companyHQCountry: string = '';
-  private isLocationInvalid: boolean = false;
-  private isLocationEmpty: boolean = false;
-  private isCompanyHQEmpty: boolean = false;
-  private isCompanyHQInvalid: boolean = false;
+  isLocationInvalid: boolean = false;
+  isLocationEmpty: boolean = false;
+  isCompanyHQEmpty: boolean = false;
+  isCompanyHQInvalid: boolean = false;
   private isValid: boolean = true;
-  private isChrome: boolean;
-  private isToasterVisible: boolean = true;
+  isChrome: boolean;
+  isToasterVisible: boolean = true;
 
   constructor(private commonService: CommonService, private _router: Router, private http: Http,
               private recruiterService: RecruiterSignUpService, private messageService: MessageService,

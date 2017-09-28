@@ -18,7 +18,7 @@ export class JobCloneComponent implements OnChanges {
   @Output() raiseJobEditViewEventEmitter:EventEmitter<string> = new EventEmitter();
 
   private showCloneDialogue:boolean = false;
-  private isShowEmptyTitleError:boolean=false;
+  isShowEmptyTitleError:boolean=false;
 
 
   constructor(private jobPosterService:JobPosterService, private messageService: MessageService) {}

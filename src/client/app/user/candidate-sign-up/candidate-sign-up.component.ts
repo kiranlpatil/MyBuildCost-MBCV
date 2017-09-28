@@ -20,24 +20,24 @@ export class CandidateSignUpComponent implements OnInit, AfterViewInit {
 
   @ViewChild('toaster') toaster: ElementRef;
   yearMatchNotFoundMessage: string = Messages.MSG_YEAR_NO_MATCH_FOUND;
-  private model = new CandidateDetail();
-  private isPasswordConfirm: boolean;
+  model = new CandidateDetail();
+  isPasswordConfirm: boolean;
   private isFormSubmitted = false;
-  private userForm: FormGroup;
-  private error_msg: string;
-  private isShowErrorMessage: boolean = true;
+  userForm: FormGroup;
+  error_msg: string;
+  isShowErrorMessage: boolean = true;
   private BODY_BACKGROUND: string;
-  private passingYear: string;
-  private validBirthYearList = new Array(0);
-  private mainHeaderMenuHideShow: string;
+  passingYear: string;
+  validBirthYearList = new Array(0);
+  mainHeaderMenuHideShow: string;
   private year: any;
   private currentDate: any;
-  private submitStatus: boolean;
+  submitStatus: boolean;
   private birthYearErrorMessage: string;
   private passwordMismatchMessage: string;
-  private isChrome: boolean;
-  private isToasterVisible: boolean = true;
-  private isGuideMessageVisible: boolean = false;
+  isChrome: boolean;
+  isToasterVisible: boolean = true;
+  isGuideMessageVisible: boolean = false;
 
   constructor(private commonService: CommonService, private _router: Router, private dateService: DateService,
               private candidateService: CandidateSignUpService, private messageService: MessageService, private formBuilder: FormBuilder,

@@ -12,7 +12,7 @@ import {LocalStorageService} from "../../../../shared/services/localstorage.serv
 })
 
 export class RecruiterJobSummaryComponent {
-  private jobId: string;
+  jobId: string;
 
   constructor(private _router: Router) {
     this.jobId = LocalStorageService.getLocalValue(LocalStorage.CURRENT_JOB_POSTED_ID);

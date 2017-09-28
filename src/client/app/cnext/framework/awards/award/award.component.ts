@@ -18,7 +18,7 @@ export class AwardComponent {
   @Input() submitStatus: boolean;
   private year: any;
   private currentDate: any;
-  private yearList = new Array();
+  yearList = new Array();
   private requiredNameValidationMessage = Messages.MSG_ERROR_VALIDATION_AWARD_NAME_REQUIRED
   private requiredAuthorityValidationMessage = Messages.MSG_ERROR_VALIDATION_AWARD_AUTHORITY_REQUIRED;
   private requiredYearValidationMessage = Messages.MSG_ERROR_VALIDATION_AWARD_YEAR_REQUIRED;

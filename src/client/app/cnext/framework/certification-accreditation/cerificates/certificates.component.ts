@@ -19,7 +19,7 @@ export class CertificatesComponent {
 
   private year: any;
   private currentDate: any;
-  private yearList = new Array();
+  yearList = new Array();
   private requiredNameValidationMessage = Messages.MSG_ERROR_VALIDATION_CERTIFICATION_NAME_REQUIRED
   private requiredAuthorityValidationMessage = Messages.MSG_ERROR_VALIDATION_CERTIFICATION_AUTHORITY_REQUIRED;
   private requiredYearValidationMessage = Messages.MSG_ERROR_VALIDATION_CERTIFICATION_YEAR_REQUIRED;

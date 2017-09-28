@@ -27,8 +27,8 @@ export class ForgotPasswordComponent {
   BODY_BACKGROUND: string;
   forgotPasswordButtonLabel: string;
   forgotPasswordMessage: string = Messages.MSG_FORGOT_PASSWORD;
-  private submitStatus: boolean;
-  private isShowLoader: boolean = false;
+  submitStatus: boolean;
+  isShowLoader: boolean = false;
 
 
   constructor(private _router: Router,

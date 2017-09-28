@@ -12,10 +12,10 @@ import {Label} from "../../../../../shared/constants";
 
 export class CandidateCapabilityPortrait implements OnChanges {
 
-  @Input() private candidate: Candidate;
+  @Input() candidate: Candidate;
 
   private showMore: boolean = false;
-  private showToggleButton: boolean = false;
+  showToggleButton: boolean = false;
   private capabilities: Capability[] = new Array(0);
   innerWidth: Number;
   isClickEnable: boolean = false;

@@ -27,7 +27,7 @@ export class ProfilePictureComponent {
   private image_path: string;
   private uploaded_image_path: string;
   private isShowErrorMessage: boolean = true;
-  private isLoading: boolean = false;
+  isLoading: boolean = false;
   private isCandidate: string;
 
 

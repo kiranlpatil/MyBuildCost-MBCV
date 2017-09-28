@@ -28,7 +28,7 @@ export class CandidateSignUpVerificationComponent {
   BODY_BACKGROUND: string;
   showModalStyle: boolean = false;
   private loginModel = new Login();
-  private submitStatus: boolean;
+  submitStatus: boolean;
 
   constructor(private formBuilder: FormBuilder, private loginService: LoginService,
               private verifyPhoneService: CandidateSignUpVerificationService, private messageService: MessageService,

@@ -22,16 +22,16 @@ export class MultiSelectComponent implements OnChanges, OnInit {
   @Input() requiredKeySkillsValidationMessage: string;
   @Input() maxKeySkillsValidationMessage: string;
 
-  private selectedProficiencies: string[] = [];
+  selectedProficiencies: string[] = [];
   private masterDataProficiencies : string[]= [];
-  private Proficiencies: string[] = [];
+  Proficiencies: string[] = [];
   private validationMessage: string;
-  private showAlert: boolean = false;
+  showAlert: boolean = false;
   private alreadyPresent: boolean = false;
   private alreadyPresentinselected: boolean = false;
   private showModalStyle: boolean = false;
   private otherProficiency: string = '';
-    private proficienciesPlaceholder: string = '';
+    proficienciesPlaceholder: string = '';
   private disableTextField: boolean = false;
   private isInfoMessage: boolean = false;
   private noMatchFoundText :string=Messages.MSG_NO_MATCH_FOUND_TEXT;

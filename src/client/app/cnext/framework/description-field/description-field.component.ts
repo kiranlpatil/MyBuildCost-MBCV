@@ -18,8 +18,8 @@ export class DescriptionFieldComponent implements OnChanges {
   private newstringTwo: string[];
   private newstringThree: string[];
   private condition: number;
-  private maxword: number;
-  private remainingWords: number;
+  maxword: number;
+  remainingWords: number;
 
   constructor() {
     this.remainingWords = this.maxLength;

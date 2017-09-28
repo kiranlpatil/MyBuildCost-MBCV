@@ -43,7 +43,7 @@ export class QCardviewComponent implements OnChanges {
   private emailsOfShrortListedCandidates: string[] = new Array(0);
   private match: MatchCandidate = new MatchCandidate();
   /*private filterMeta: QCardFilter;*/
-  private matchFormat: string = 'aboveMatch';
+  matchFormat: string = 'aboveMatch';
   private selectedCandidate: Candidate = new Candidate();
   private modelCandidate: CandidateQCard = new CandidateQCard();
   private candidateDetails: CandidateDetail = new CandidateDetail();

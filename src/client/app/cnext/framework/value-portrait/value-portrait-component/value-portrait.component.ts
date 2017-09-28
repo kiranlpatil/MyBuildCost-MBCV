@@ -14,10 +14,10 @@ import {LocalStorageService} from "../../../../shared/services/localstorage.serv
 
 export class ValuePortraitComponent implements OnInit {
 
-  private candidate: Candidate = new Candidate();
+  candidate: Candidate = new Candidate();
   @Input() userId:string;
   @Input() isShareView:boolean;
-private isCandidate:boolean;
+ isCandidate:boolean;
   constructor(private candidateProfileService: CandidateProfileService,private errorService:ErrorService) {
     if (LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE) === 'true') {
       this.isCandidate = true;

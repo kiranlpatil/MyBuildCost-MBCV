@@ -34,7 +34,7 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
   private currentComplexityDetails: ComplexityDetails = new ComplexityDetails();
   private isComplexityButtonEnable: boolean = false;
   private showModalStyle: boolean = false;
-  private isCandidate: boolean = false;
+  isCandidate: boolean = false;
   private currentComplexity: number;
   private showMore: boolean = false;
   private slideToRight: boolean = false;
@@ -59,10 +59,10 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
   @ViewChild('save')
   private _inputElement1: ElementRef;
   private maxCapabilitiesToShow = ValueConstant.MAX_CAPABILITIES_TO_SHOW;
-  private guidedTourStatus:string[] = new Array(0);
-  private guidedTourImgOverlayScreensComplexities: string;
+  guidedTourStatus:string[] = new Array(0);
+  guidedTourImgOverlayScreensComplexities: string;
   private guidedTourImgOverlayScreensKeySkillsPath:string;
-  private isGuideImg:boolean = false;
+  isGuideImg:boolean = false;
 
   constructor(private complexityService: ComplexityService,
               private complexityComponentService: ComplexityComponentService,

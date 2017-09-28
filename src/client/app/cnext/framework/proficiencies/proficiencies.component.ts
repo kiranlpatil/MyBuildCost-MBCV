@@ -26,11 +26,11 @@ export class ProficienciesComponent {
     '<li><p>2. '+ Tooltip.PROFICIENCIES_TOOLTIP_2+'</p></li>' +
     '<li><p>3. '+Tooltip.PROFICIENCIES_TOOLTIP_3+'</p></li></ul>';
   private maxProficiencies: number;
-  private guidedTourStatus: string[] = new Array(0);
-  private isGuideImg: boolean = false;
-  private guidedTourImgOverlayScreensKeySkills: string;
+  guidedTourStatus: string[] = new Array(0);
+  isGuideImg: boolean = false;
+  guidedTourImgOverlayScreensKeySkills: string;
   private guidedTourImgOverlayScreensKeySkillsPath: string;
-  private isCandidate: boolean = false;
+  isCandidate: boolean = false;
   constructor(private proficiencyDetailService: ProficiencyDetailsService,
               private errorService:ErrorService,
               private guidedTourService: GuidedTourService,

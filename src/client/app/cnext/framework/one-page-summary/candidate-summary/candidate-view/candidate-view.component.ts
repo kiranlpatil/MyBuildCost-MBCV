@@ -21,8 +21,8 @@ export class CandidateViewComponent implements OnChanges {
   keySkillsHeading:string=Headings.KEY_SKILLS;
   supplimentaryCapabilitiesHeading:string=Headings.SUPPLIMENTARY_CAPABILITIES;
   additionalInformationHeading:string=Headings.ADDITIONAL_INFORMATION_TEXT;
-  private candidateDetails: CandidateDetail = new CandidateDetail();
-  private candidate: Candidate = new Candidate();
+  candidateDetails: CandidateDetail = new CandidateDetail();
+  candidate: Candidate = new Candidate();
   private secondaryCapabilities: string[] = [];
   private capabilities : any;
   constructor(private profileCreatorService: CandidateProfileService,

@@ -18,7 +18,7 @@ export class AcademicsComponent {
   @Input() submitStatus: boolean;
   private year: any;
   private currentDate: any;
-  private yearList = new Array();
+  yearList = new Array();
   private requiredDegreeValidationMessage = Messages.MSG_ERROR_VALIDATION_DEGREE_NAME_REQUIRED;
   private requiredUniversityValidationMessage = Messages.MSG_ERROR_VALIDATION_UNIVERSITY_NAME_REQUIRED;
   private requiredYearOfPassingValidationMessage = Messages.MSG_ERROR_VALIDATION_YEAR_OF_PASSING_REQUIRED;

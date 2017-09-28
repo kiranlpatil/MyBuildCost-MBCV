@@ -9,8 +9,8 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 export class GuidedTourComponent implements OnInit {
     @Output() onSkip = new EventEmitter();
-    private isShowNext: boolean = true;
-    private isShowPrev: boolean = false;
+    isShowNext: boolean = true;
+    isShowPrev: boolean = false;
 
     ngOnInit() {
         /*TODO Abhijeet let item: any = $('#myCarousel');
