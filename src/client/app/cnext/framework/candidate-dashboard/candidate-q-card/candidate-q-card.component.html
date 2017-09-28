@@ -89,10 +89,12 @@
         </p>-->
       </div>
     </div>
-    <div class="company-profile-picture" title="Company Logo">
-      <img *ngIf="job.company_logo" [src]="getImagePath(job.company_logo)" >
-      <img *ngIf="!job.company_logo" src="assets/c-next/company-details/company-logo-default.png" />
-    </div>
+  </div>
+  <div class="company-profile-picture" title={{job.company_website}}>
+    <span  (click)="onCompanyWebsiteClick(job.company_website)">
+      <img *ngIf="job.company_logo" [src]="getImagePath(job.company_logo)" ></span>
+    <span  (click)="onCompanyWebsiteClick(job.company_website)">
+      <img *ngIf="!job.company_logo" src="assets/c-next/company-details/company-logo-default.png" /></span>
   </div>
   <div *ngIf="type == 'searchView'" class="current-user-staus">
     <span *ngIf="inCartListedStatusForSearchView && !inRejectListedStatusForSearchView">Added In Cart</span>

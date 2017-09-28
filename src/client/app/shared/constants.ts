@@ -1,5 +1,5 @@
 export class AppSettings {
-  public static IP = 'http://localhost:8080';
+  //public static IP = 'http://localhost:8080';
   // public static IP = 'http://ee802b7f.ngrok.io';
   //public static IP = 'http://10.192.33.77:8080';
   //public static IP = 'http://52.10.145.87:3000';
@@ -53,6 +53,7 @@ export class Messages {
   public static MSG_SUCCESS_RESET_PASSWORD: string = 'Your password is reset successfully.Kindly login';
   public static MSG_SUCCESS_CHANGE_PASSWORD: string = 'Your password has been changed successfully.';
   public static MSG_SUCCESS_CHANGE_EMAIL: string = 'Kindly click on the link sent to your new email for email verification.';
+  public static MSG_SUCCESS_COMPANY_WEBSITE: string = 'Company website updated successfully';
   public static MSG_SUCCESS_CHANGE_MOBILE: string = 'Verify your new mobile number by entering OTP sent on your mobile number.';
   public static MSG_SUCCESS_FORGOT_PASSWORD: string = 'Email for password reset has been sent successfully on your registered email id.';
   public static MSG_SUCCESS_DASHBOARD_PROFILE: string = 'Your profile updated successfully.';
@@ -110,7 +111,7 @@ export class Messages {
   public static MSG_ERROR_VALIDATION_COMPANYNAME_REQUIRED = 'This field can\'t be left blank.';
   public static MSG_ERROR_VALIDATION_OTP_REQUIRED = 'Enter received OTP.';
   public static MSG_ERROR_VALIDATION_INVALID_EMAIL_REQUIRED = 'Enter a valid email address.';
-  public static MSG_ERROR_VALIDATION_INVALID_URL_REQUIRED = 'Enter a valid company website.';
+  public static MSG_ERROR_VALIDATION_INVALID_URL_REQUIRED = 'Website should be start with www';
   public static MSG_ERROR_VALIDATION_INVALID_NAME = 'Enter valid name.';
   public static MSG_ERROR_VALIDATION_INVALID_DATA = 'Enter valid data.';
   public static MSG_ERROR_VALIDATION_PASSWORD_MISMATCHED = 'Passwords do not match.';
@@ -401,6 +402,7 @@ export class API {
   public static CHANGE_PASSWORD = 'changepassword';
   public static CHANGE_MOBILE = 'changemobilenumber';
   public static CHANGE_EMAIL = 'changeemailid';
+  public static CHANGE_COMPANY_WEBSITE = 'changecompanywebsite';
   public static VERIFY_CHANGED_EMAIL = 'verifychangedemailid';
   public static VERIFY_USER = 'verifyAccount';
   public static VERIFY_EMAIL = 'verifyEmail';
@@ -630,7 +632,7 @@ export class Label {
   public static FIRST_NAME_LABEL: string = 'First Name';
   public static LAST_NAME_LABEL: string = 'Last Name';
   public static EMAIL_FIELD_LABEL: string = 'Email';
-  public static COMPANY_WEBSITE_FIELD_LABEL: string = 'Company Website';
+  public static COMPANY_WEBSITE_FIELD_LABEL: string = 'Website';
   public static CONTACT_FIELD_LABEL: string = 'Contact';
   public static SAVE_PROFILE_LABEL: string = 'Save Profile';
   public static RESET_PASSWORD_MESSAGE: string = 'Please set new password for your';

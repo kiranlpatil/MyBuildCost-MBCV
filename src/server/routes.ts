@@ -26,6 +26,7 @@ export function init(app: express.Application) {
   app.post("/api/sendverificationmail/:id", this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, userController.verificationMail);
   app.put("/api/verifyAccount/:id", this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, userController.verifyAccount);
   app.put("/api/changeemailid/:id", this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, userController.changeEmailId);
+  app.put("/api/changecompanywebsite/:id", this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, userController.changeCompanyWebsite);
   app.put("/api/verifychangedemailid/:id", this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, userController.verifyChangedEmailId);
   app.put("/api/changemobilenumber/:id", this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, userController.changeMobileNumber);
   app.put("/api/verifymobilenumber/:id", this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, userController.verifyMobileNumber);

@@ -49,22 +49,20 @@
         </div>
 
         <div class="form-group">
+          <cn-control-messages [control]="recruiterForm.controls.company_website"
+                               [submitStatus]="submitStatus"></cn-control-messages>
+          <input type="text" formControlName="company_website" id="company_website" class="form-control" maxlength="40"
+                 autocomplete="off" required/>
+          <label>Website</label>
+        </div>
+
+        <div class="form-group">
           <cn-control-messages [control]="recruiterForm.controls.email"
                                [submitStatus]="submitStatus"></cn-control-messages>
           <input type="email" formControlName="email" id="email" maxlength="40" class="form-control" autocomplete="off"
                  required/>
           <label>Email</label>
         </div>
-
-        <div class="input-group form-group">
-          <cn-control-messages [control]="recruiterForm.controls.mobile_number"
-                               [submitStatus]="submitStatus"></cn-control-messages>
-          <span class="input-group-addon">+91</span>
-          <!--<input type="text" formControlName="mobile_number" id="mobile_number" class="form-control" pattern="/[^0-9]/g" />-->
-          <input type="number" formControlName="mobile_number" id="mobile_number" class="form-control"/>
-          <label>Mobile</label>
-        </div>
-
 
         <div class="form-group">
           <cn-control-messages [control]="recruiterForm.controls.password"
@@ -83,6 +81,15 @@
                  (blur)="makePasswordConfirm()" class="form-control" required/>
           <label>Confirm Password</label>
           <span class="error-messages" *ngIf="isPasswordConfirm == true">{{passwordMismatchMessage}}</span>
+        </div>
+
+        <div class="input-group form-group">
+          <cn-control-messages [control]="recruiterForm.controls.mobile_number"
+                               [submitStatus]="submitStatus"></cn-control-messages>
+          <span class="input-group-addon">+91</span>
+          <!--<input type="text" formControlName="mobile_number" id="mobile_number" class="form-control" pattern="/[^0-9]/g" />-->
+          <input type="number" formControlName="mobile_number" id="mobile_number" class="form-control"/>
+          <label>Mobile</label>
         </div>
 
         <!--<div class="form-group">

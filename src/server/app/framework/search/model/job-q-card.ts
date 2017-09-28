@@ -16,6 +16,7 @@ export class JobQCard {
   interestedIndustries: string[];
   proficiencies: string[];
   company_logo: string;
+  company_website: string;
   joiningPeriod: string;
   postingDate: Date;
   industry: string;

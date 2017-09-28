@@ -7,6 +7,7 @@ export class ValidationService {
     let config: any = {
       'required': 'Required',
       'requiredEmail': Messages.MSG_ERROR_VALIDATION_EMAIL_REQUIRED,
+      'requiredWebsite': Messages.MSG_ERROR_VALIDATION_WEBSITE_REQUIRED,
       'requiredPassword': Messages.MSG_ERROR_VALIDATION_PASSWORD_REQUIRED,
       'requiredNewPassword': Messages.MSG_ERROR_VALIDATION_NEWPASSWORD_REQUIRED,
       'requiredConfirmPassword': Messages.MSG_ERROR_VALIDATION_CONFIRMPASSWORD_REQUIRED,
@@ -20,6 +21,7 @@ export class ValidationService {
       'requiredCompanyName': Messages.MSG_ERROR_VALIDATION_COMPANYNAME_REQUIRED,
       'requiredOtp': Messages.MSG_ERROR_VALIDATION_OTP_REQUIRED,
       'invalidEmailAddress': Messages.MSG_ERROR_VALIDATION_INVALID_EMAIL_REQUIRED,
+      'invalidUrlAddress': Messages.MSG_ERROR_VALIDATION_INVALID_URL_REQUIRED,
       'invalidName': Messages.MSG_ERROR_VALIDATION_INVALID_NAME,
       'containsWhiteSpace': Messages.MSG_ERROR_VALIDATION_INVALID_DATA,
       'invalidPassword': Messages.MSG_ERROR_VALIDATION_PASSWORD,
@@ -111,7 +113,13 @@ export class ValidationService {
       return null;
     }
   }
-
+  static requireWebsiteValidator(control: any) {
+    if (control.value === '' || control.value === undefined) {
+      return {'requiredWebsite': true};
+    } else {
+      return null;
+    }
+  }
 
   static passwordValidator(control: any) {
 
@@ -192,6 +200,19 @@ export class ValidationService {
       return {'invalidMobile': true};
     }
   }
+  static urlValidator(control: any) {
+    if (control.value) {
+      if (control.value.match(
+         /(((?:(www|WWW)\.|[\-;:&=\+\$,\w]+@)[A-Za-z0-9\.\-]+)((?:\/[\+~%\/\.\w\-_]*)?\??(?:[\-\+=&;%@\.\w_]*)#?(?:[\.\!\/\\\w]*))?)/))
+      {
+        return null;
+      } else {
+        return {'invalidUrlAddress': true};
+      }
+    }
+    return null;
+  }
+
 
   static birthYearValidator(control: any) {
     var birthYear = control.value;

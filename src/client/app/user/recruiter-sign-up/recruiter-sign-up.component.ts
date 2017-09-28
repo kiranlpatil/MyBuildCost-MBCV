@@ -62,6 +62,7 @@ export class RecruiterSignUpComponent implements OnInit {
     this.recruiterForm = this.formBuilder.group({
       'company_name': ['', [ValidationService.noWhiteSpaceValidator, ValidationService.requireCompanyNameValidator, ValidationService.nameValidator]],
       'company_size': ['', Validators.required],
+      'company_website': ['',[ValidationService.requireWebsiteValidator,ValidationService.urlValidator]],
       'mobile_number': ['', [ValidationService.requireMobileNumberValidator, ValidationService.mobileNumberValidator]],
       'email': ['', [ValidationService.requireEmailValidator, ValidationService.emailValidator]],
       'password': ['', [ValidationService.requirePasswordValidator, ValidationService.passwordValidator]],

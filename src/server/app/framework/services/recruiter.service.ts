@@ -58,6 +58,7 @@ class RecruiterService {
                   company_name: item.company_name,
                   company_size: item.company_size,
                   company_logo: item.company_logo,
+                  company_website: item.company_website,
                   userId: userId1
                 };
                 this.recruiterRepository.create(newItem, (err:any, res:any) => {

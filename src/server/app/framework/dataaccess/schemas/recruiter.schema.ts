@@ -17,6 +17,9 @@ class RecruiterSchema {
       company_size: {
         type: String
       },
+      company_website: {
+        type: String
+      },
       company_logo: {
         type: String
       },

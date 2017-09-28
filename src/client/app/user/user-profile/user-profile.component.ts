@@ -39,10 +39,12 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   filesToUpload: Array<File>;
   image_path: any;
   error_msg: string;
+  company_website:string;
   isShowErrorMessage: boolean = true;
   newUser: number;
   showModalStyle: boolean = false;
   showStyleMobile: boolean = false;
+  showStyleCompanyWebsite: boolean = false;
   FIRST_NAME_ICON: string;
   LAST_NAME_ICON: string;
   MOBILE_ICON: string;
@@ -62,7 +64,9 @@ export class UserProfileComponent implements OnInit, OnDestroy {
       'first_name': ['', Validators.required],
       'last_name': ['', Validators.required],
       'email': ['', [Validators.required, ValidationService.emailValidator]],
-      'mobile_number': ['', [Validators.required, ValidationService.mobileNumberValidator]]
+      'mobile_number': ['', [Validators.required, ValidationService.mobileNumberValidator]],
+      'company_website': ['',[ValidationService.requireWebsiteValidator,ValidationService.urlValidator]],
+
 
     });
     this.filesToUpload = [];
@@ -115,6 +119,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     this.candidateProfileService.getRecruiterDetails()
       .subscribe(
         recruiterData => {
+          this.company_website=recruiterData.data[0].company_website;
           this.OnCandidateDataSuccess(recruiterData);
         }, error => this.errorService.onError(error));
   }
@@ -207,8 +212,18 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     this.showModalStyle = !this.showModalStyle;
   }
 
+  showHideCompanyWebsiteModal() {
+    this.showStyleCompanyWebsite = !this.showStyleCompanyWebsite;
+  }
   showHideMobileModal() {
     this.showStyleMobile = !this.showStyleMobile;
+  }
+  getStyleCompanyWebsite() {
+    if (this.showStyleCompanyWebsite) {
+      return 'block';
+    } else {
+      return 'none';
+    }
   }
 
   getStyleEmail() {
@@ -241,6 +256,11 @@ export class UserProfileComponent implements OnInit, OnDestroy {
         this.candidate.basicInformation.picture = AppSettings.IP + this.candidate.basicInformation.picture;
       }
     }
+  }
+  onCompanyWebsiteUpdate(event:any){
+    this.showStyleCompanyWebsite=false;
+    this.company_website=event;
+
   }
   getLabels() {
     return Label;

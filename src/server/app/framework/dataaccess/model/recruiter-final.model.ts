@@ -5,6 +5,7 @@ export class Recruiter { // todo replace all the interface to class
   company_name: string;
   company_size: string;
   company_logo: string;
+  company_website: string;
   company_headquarter_country: string;
   setOfDocuments: string[];
   userId: any;

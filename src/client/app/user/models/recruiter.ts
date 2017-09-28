@@ -8,6 +8,7 @@ export class Recruiter {
   isRecruitingForself: boolean;
   company_name: string;
   company_size: string;
+  company_website: string;
   email: string;
   mobile_number: string;
   password: string;

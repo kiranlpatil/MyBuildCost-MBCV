@@ -26,6 +26,7 @@ class Messages {
   public static MSG_SUCCESS_CHANGE_PASSWORD: string = 'Your password has been changed successfully';
   public static MSG_SUCCESS_SUBMITTED: string = 'Form submitted successfully';
   public static MSG_SUCCESS_PASSWORD_CHANGE: string = 'Password changed successfully.';
+  public static MSG_SUCCESS_COMPANY_WEBSITE_CHANGE: string = 'Company website changed successfully.';
   public static MSG_SUCCESS_OTP: string = 'OTP has been sent on your verified mobile number.';
   public static MSG_SUCCESS_OTP_CHANGE_MOBILE_NUMBER: string = 'OTP has been sent on your new mobile number';
   public static MSG_SUCCESS_INDUSTRY_DATA_INSERTION: string = 'Data inserted Successfully in Industry';

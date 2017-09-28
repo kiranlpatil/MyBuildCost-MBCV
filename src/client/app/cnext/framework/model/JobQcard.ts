@@ -8,6 +8,7 @@ export class JobQcard {
   experienceMinValue: string;
   experienceMaxValue: string;
   company_logo : string;
+  company_website : string;
   matching: number;
   company_name: string;
   industry: string;

@@ -226,4 +226,11 @@ export class CandidateQCardComponent implements OnInit {
     };
     return classes;
   }
+  onCompanyWebsiteClick(websiteLink:string) {
+    if( websiteLink!=undefined) {
+      let host = AppSettings.HTTP_CLIENT + websiteLink;
+      window.open(host, '_blank');
+    }
+  }
+
 }
