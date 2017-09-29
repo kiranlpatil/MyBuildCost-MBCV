@@ -7,7 +7,7 @@ import {CandidateProfileService} from '../candidate-profile/candidate-profile.se
 import {Candidate} from '../../../user/models/candidate';
 import {CandidateDetail} from '../../../user/models/candidate-details';
 import {Router} from '@angular/router';
-import {LocalStorage, Messages, UsageActions, ValueConstant} from '../../../shared/constants';
+import {ImagePath, LocalStorage, Messages, UsageActions, ValueConstant} from '../../../shared/constants';
 import {QCardViewService} from '../recruiter-dashboard/q-card-view/q-card-view.service';
 import {LocalStorageService} from '../../../shared/services/localstorage.service';
 import {UsageTrackingService} from '../usage-tracking.service';
@@ -157,6 +157,10 @@ export class CandidateSearchComponent implements OnChanges {
   actionOnCard(value:string) {
     var data = {'name': value, 'jobId': this.jobId};
     this.workFlowAction(data);
+  }
+
+  getImagePath() {
+    return ImagePath;
   }
 
 }

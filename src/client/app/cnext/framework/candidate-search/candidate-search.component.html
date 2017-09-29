@@ -2,17 +2,6 @@
   <div class="col-sm-3 left-content">
     <div *ngIf="candidate.isVisible == true">
     <div *ngIf="candidateDetails._id" class="col-sm-3 left-content search-left-content">
-      <div class="profile-visibility-message">
-        <button class="btn view-profile-btn" (click)="viewProfile('/value-portrait')">View Profile</button>
-        <div *ngIf="candidateDetailsJobMatching.isShowCandidateDetails && isShowSuggestionTosterMsg"
-             class="message-content" [class.display-message]="true">
-          <div class="col-xs-1"><img src="../../asstes/framework/images/dashboard/info-red.svg"></div>
-          <div class="col-xs-8 padding-left15">{{msgCandidateIfNotInCart}}</div>
-          <div class="col-xs-2 padding-left5">
-            <button (click)="viewProfile('/value-portrait')" type="button" class="close">&times;</button>
-          </div>
-        </div>
-      </div>
       <cn-candidate-description [isShowCandidateDetails]="candidateDetailsJobMatching.isShowCandidateDetails"
                                 [viewType]="'OnSearchView'" [candidateDetails]="candidateDetails"
                                 [candidate]="candidate"></cn-candidate-description>
@@ -38,6 +27,19 @@
                [value]="searchValue">
       </form>
       <!-- <button class="search-btn">Search</button>-->
+      <div *ngIf="candidate.isVisible == true">
+        <div class="profile-visibility-message" *ngIf="candidateDetails._id">
+          <button class="btn view-profile-btn" (click)="viewProfile('/value-portrait')">View Profile</button>
+          <div *ngIf="candidateDetailsJobMatching.isShowCandidateDetails && isShowSuggestionTosterMsg"
+               class="message-content" [class.display-message]="true">
+            <div class="col-xs-1 padding-left5"><img src="{{getImagePath().INFO_RED}}"></div>
+            <div class="col-xs-10 no-padding padding-left15">{{msgCandidateIfNotInCart}}</div>
+            <div class="col-xs-1 padding-right5">
+              <button (click)="viewProfile('/value-portrait')" type="button" class="close">&times;</button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <!--<form class="form-horizontal" [formGroup]="myForm" (ngSubmit)="onSubmit(myForm.value)">
       <div>

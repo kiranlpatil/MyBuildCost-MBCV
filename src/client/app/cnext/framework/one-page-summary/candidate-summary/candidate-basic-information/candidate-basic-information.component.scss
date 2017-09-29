@@ -2,13 +2,14 @@
 
 .basic-description {
   text-align: left;
+  margin-top: 15px;
 
   p,
   span,
   label {
     color: $text-color2;
     font-size: 12px;
-    word-break: keep-all;
+    word-break: break-all;
   }
 
   .basic-info {

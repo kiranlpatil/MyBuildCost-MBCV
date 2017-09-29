@@ -4,7 +4,7 @@ export class AppSettings {
   //public static IP = 'http://10.192.33.77:8080';
   public static IP = 'http://52.10.145.87:3000';
   // public static IP = 'app.jobmosis.com';
-  // public static IP = '';
+   //public static IP = '';
 
 
   public static get API_ENDPOINT(): string {
@@ -496,6 +496,7 @@ export class ImagePath {
   public static CALENDAR = './assets/c-next/post-job/calendar.png';
   public static CONTACT_PERSON = './assets/c-next/post-job/contact-person.png';
   public static POST_NEW_JOB = './assets/c-next/recruiter-welcome-screen/post-new-job.png';
+  public static INFO_RED = './assets/framework/images/dashboard/info-red.svg';
 
   //guided tour images for desktop
   public static BASE_ASSETS_PATH_DESKTOP = './assets/c-next/guided-tour/tour-for-desktop/';
