@@ -310,6 +310,10 @@ class UserService {
     this.userRepository.retrieveWithoutLean(field, callback);
   }
 
+  retrieveWithLean(field: any, callback: (error: any, result: any) => void) {
+    this.userRepository.retrieve(field, callback);
+  }
+
   retrieveAll(item: any, callback: (error: any, result: any) => void) {
     this.userRepository.retrieve(item, (err, res) => {
       if (err) {
@@ -360,8 +364,8 @@ class UserService {
     this.userRepository.findOneAndUpdate(query, newData, options, callback);
   }
 
-  retrieveBySortedOrder(query: any, sortingQuery: any, callback: (error: any, result: any) => void) {
-    this.userRepository.retrieveBySortedOrder(query, sortingQuery, callback);
+  retrieveBySortedOrder(query: any, projection:any, sortingQuery: any, callback: (error: any, result: any) => void) {
+    this.userRepository.retrieveBySortedOrder(query, projection, sortingQuery, callback);
   }
 
 }

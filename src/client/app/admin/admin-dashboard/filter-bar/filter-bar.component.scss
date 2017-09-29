@@ -1,0 +1,29 @@
+@import '../../../../css/variables';
+@import '../../../../css/c-next/theme/cn-theme';
+
+.filter-bar {
+  background: $white;
+  bottom: 0;
+  clear: both;
+  height: 30px;
+  left: 0;
+  padding: 5px 0;
+  position: fixed;
+  width: 100%;
+  z-index: 999;
+  .filter-item {
+    display: inline-block;
+    margin: 0 auto;
+    button {
+      background: transparent;
+      border: 0;
+      color: $black;
+      &:hover {
+        color: $blue;
+      }
+    }
+    .select-item {
+      color: $blue;
+    }
+  }
+}

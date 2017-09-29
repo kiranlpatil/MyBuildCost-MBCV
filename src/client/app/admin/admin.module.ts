@@ -8,6 +8,7 @@ import {CandidateDetailListComponent} from "./admin-dashboard/candidate-detail-l
 import {RecruiterDetailListComponent} from "./admin-dashboard/recruiter-detail-list/recruiter-detail-list.component";
 import {KeyskillsDetailListComponent} from "./admin-dashboard/keyskills-detail-list/keyskills-detail-list.component";
 import {UsageDetailsComponent} from "./admin-dashboard/usage-details/usage-details.component";
+import {FilterBarComponent} from "./admin-dashboard/filter-bar/filter-bar.component";
 
 @NgModule({
   imports : [CommonModule, SharedModule, UserModule, AdminModuleRoutes],
@@ -15,7 +16,7 @@ import {UsageDetailsComponent} from "./admin-dashboard/usage-details/usage-detai
     CandidateDetailListComponent,
     RecruiterDetailListComponent,
     KeyskillsDetailListComponent,
-    UsageDetailsComponent],
+    UsageDetailsComponent, FilterBarComponent],
   exports : [],
   providers : []
 })

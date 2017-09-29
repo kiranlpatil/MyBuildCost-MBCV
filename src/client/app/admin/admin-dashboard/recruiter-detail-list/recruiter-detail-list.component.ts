@@ -67,6 +67,10 @@ export class RecruiterDetailListComponent {
   getLabel() {
     return Label;
   }
+
+  getMessages() {
+    return Messages;
+  }
 }
 
 

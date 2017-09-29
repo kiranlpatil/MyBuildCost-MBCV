@@ -75,6 +75,10 @@ export class CandidateDetailListComponent {
   getLabel() {
     return Label;
   }
+
+  getMessages() {
+    return Messages;
+  }
 }
 
 

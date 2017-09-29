@@ -1,0 +1,6 @@
+<div class="filter-bar">
+  <div class="filter-item" *ngFor="let item of filterData">
+    <button (click)="onFilterSelect(item)">{{item}}</button>
+  </div>
+</div>
+

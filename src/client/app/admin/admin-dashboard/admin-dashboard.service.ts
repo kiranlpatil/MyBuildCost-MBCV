@@ -23,22 +23,40 @@ export class AdminDashboardService extends BaseService {
       .map(this.extractData)
       .catch(this.handleError);
   }
-  getAllUsers(): Observable<any> {
-    var url = API.ALL_USER_PROFILE + '/' + "b";
+
+  getAllUsers(letter: string): Observable<any> {
+    var url = API.ALL_USER_PROFILE + '/' + letter;
     return this.http.get(url)
       .map(this.extractData)
       .catch(this.handleError);
   }
+
+  getAllCandidates(letter: string): Observable<any> {
+    var url = API.GET_CANDIDATE_DETAILS + '/' + letter;
+    return this.http.get(url)
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
+
+  getAllRecruiters(letter: string): Observable<any> {
+    var url = API.GET_RECRUITER_DETAILS + '/' + letter;
+    return this.http.get(url)
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
+
   getUsageDetails(): Observable<any> {
     var url = API.USAGE_DETAIL;
     return this.http.get(url);
   }
+
   generateCandidateDetailFile(): Observable<any> {
-    var url = API.CANDIDATE_DETAIL_PROFILE;
+    var url = API.EXPORT_CANDIDATE_DETAIL_PROFILE;
     return this.http.get(url);
   }
+
   generateRecruiterDetailFile(): Observable<any> {
-    var url = API.RECRUITER_DETAIL_PROFILE;
+    var url = API.EXPORT_RECRUITER_DETAIL_PROFILE;
     return this.http.get(url);
   }
 

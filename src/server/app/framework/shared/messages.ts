@@ -31,6 +31,8 @@ class Messages {
   public static MSG_SUCCESS_OTP_CHANGE_MOBILE_NUMBER: string = 'OTP has been sent on your new mobile number';
   public static MSG_SUCCESS_INDUSTRY_DATA_INSERTION: string = 'Data inserted Successfully in Industry';
 
+  public static MSG_NO_RECORDS_FOUND: string = 'No records found';
+
   //Error Message
   public static MSG_ERROR_MESSAGE_SENDING: string = 'Message sending failed by server';
   public static MSG_ERROR_CREATING_USER: string = 'User registration failed';

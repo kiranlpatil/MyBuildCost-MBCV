@@ -122,8 +122,8 @@ class RepositoryBase<T extends mongoose.Document> implements IRead<T>, IWrite<T>
     });
   }
 
-  retrieveBySortedOrder(query: any, sortingQuery: any, callback: (error: any, result: any) => void) {
-    this._model.find(query).sort(sortingQuery).lean().exec(function (err, items) {
+  retrieveBySortedOrder(query: any, projection: any, sortingQuery: any, callback: (error: any, result: any) => void) {
+    this._model.find(query, projection).sort(sortingQuery).lean().exec(function (err, items) {
       callback(err, items);
     });
   }

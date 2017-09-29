@@ -103,6 +103,20 @@ class CandidateService {
     });
   }
 
+  retrieveAll(item: any, callback: (error: any, result: any) => void) {
+    this.candidateRepository.retrieve(item, (err, res) => {
+      if (err) {
+        callback(new Error(Messages.MSG_NO_RECORDS_FOUND), null);
+      } else {
+        callback(null, res);
+      }
+    });
+  };
+
+  retrieveWithLean(field: any, projection: any, callback: (error: any, result: any) => void) {
+    this.candidateRepository.retrieveWithLean(field, projection, callback);
+  }
+
   findById(id: any, callback: (error: any, result: any) => void) {
     this.candidateRepository.findById(id, callback);
   }
@@ -171,7 +185,6 @@ class CandidateService {
     customCandidate.isSubmitted= candidate.isSubmitted;
     customCandidate.isVisible= candidate.isVisible;
     customCandidate.isCompleted= candidate.isCompleted;
-    customCandidate.keySkills=candidate.proficiencies.toString().replace(/,/g, ' $');
     customCandidate.capabilities = this.getCapabilitiesBuild(candidate.capability_matrix, candidate.industry.roles, industries);
 
     return customCandidate;
@@ -712,7 +725,6 @@ class CandidateService {
     return new_capability_matrix;
   }
 
-
   getList(item: any, callback: (error: any, result: any) => void) {
     let query = {
       'postedJobs._id': {$in: item.ids},
@@ -730,6 +742,20 @@ class CandidateService {
         });
       }
     });
+  }
+
+  loadCapabilitiDetails(capabilityMatrix : any) {
+    let capabilityMatrixKeys: string [] = Object.keys(capabilityMatrix);
+    let capabilitiesArray: any [] = new Array();
+    for(let keys of capabilityMatrixKeys) {
+      let capabilityObject = {
+        'capabilityCode' : keys.split('_')[0],
+        'complexityCode' : keys.split('_')[1],
+        'scenerioCode' : capabilityMatrix[keys]
+      }
+      capabilitiesArray.push(capabilityObject);
+    }
+    return capabilitiesArray;
   }
 }
 
