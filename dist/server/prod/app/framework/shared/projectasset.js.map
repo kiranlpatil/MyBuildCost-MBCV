@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "projectasset.js",
+  "sourceRoot": "",
+  "sources": [
+    "projectasset.ts"
+  ],
+  "names": [],
+  "mappings": ";AAAA;;GAEG;AACH;IAAA;IAEA,CAAC;IADiB,qBAAQ,GAAY,SAAS,CAAC;IAChD,mBAAC;AAAD,CAAC,AAFD,IAEC;AACD,iBAAO,YAAY,CAAC"
+}
