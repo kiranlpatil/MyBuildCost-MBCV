@@ -19,8 +19,6 @@ pipelines:
           #- npm test
 
     - step:
-        caches:
-          - node
         image: python:3.5.1
         script: # Modify the commands below to build your repository.
           - apt-get update # required to install zip
