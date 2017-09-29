@@ -1,10 +1,10 @@
-<div class="list-container" *ngIf="candidates && candidates.length>0" id="candidate-list-view">
+<div class="list-container" id="candidate-list-view">
   <div class="header">
     <!--<a href="./public/candidate.csv" download="candiadte.csv" title="Export Candidate to CSV File"><i class="glyphicon glyphicon-export"></i>Export</a>-->
   </div>
   <div title="Export candidates list to CSV file" class="export-data-link" (click)="generateCandidateDetailFile()"><span class="glyphicon glyphicon-export" ></span>Export</div>
   <a href="./public/candidate.csv" download="candidate.csv" id="link_candidate"  hidden></a>
-  <div class="list-view">
+  <div class="list-view" *ngIf="candidates && candidates.length > 0">
     <ul class="list-header">
       <li>
         <h5>{{getLabel().NAME}}</h5>
@@ -69,6 +69,4 @@
     </div>
   </div>
 </div>
-<!--
-<div *ngIf="candidates && candidates.length==0">There are no candidate in the Database </div>
--->
+<div *ngIf="candidates == undefined || candidates && candidates.length==0"> {{getMessages().NO_CANDIDATES_AVAILABLE}} </div>

@@ -1,6 +1,6 @@
 import { Component, OnChanges} from '@angular/core';
 import { CandidateSearchService} from './candidate-search.service';
-import { ErrorService} from '../error.service';
+import {ErrorService} from "../../../shared/services/error.service";
 import { CandidateSearch} from '../model/candidate-search';
 import {JobQcard} from '../model/JobQcard';
 import {CandidateProfileService} from '../candidate-profile/candidate-profile.service';

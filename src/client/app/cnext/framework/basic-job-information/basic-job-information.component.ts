@@ -10,7 +10,7 @@ import {FilterService} from "../filters/filter/filter.service";
 import {Headings, Messages, Tooltip} from "../../../shared/constants";
 import {RecruiterDashboard} from "../model/recruiter-dashboard";
 import {ValidationService} from "../../../shared/customvalidations/validation.service";
-import {ErrorService} from "../error.service";
+import {ErrorService} from "../../../shared/services/error.service";
 
 @Component({
   moduleId: module.id,

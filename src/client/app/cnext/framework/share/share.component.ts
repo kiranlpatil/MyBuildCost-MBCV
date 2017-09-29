@@ -1,6 +1,6 @@
 import {Component, OnInit} from "@angular/core";
 import {ShareService} from "./share.service";
-import {ErrorService} from "../error.service";
+import {ErrorService} from "../../../shared/services/error.service";
 import {Share} from "../model/share";
 
 @Component({

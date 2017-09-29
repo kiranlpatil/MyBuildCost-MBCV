@@ -5,7 +5,7 @@ import {Message} from "../../../shared/models/message";
 import {Candidate, Section} from "../../../user/models/candidate";
 import {Headings, ImagePath, LocalStorage, Messages, Tooltip} from "../../../shared/constants";
 import {GuidedTourService} from "../guided-tour.service";
-import {ErrorService} from "../error.service";
+import {ErrorService} from "../../../shared/services/error.service";
 import {LocalStorageService} from "../../../shared/services/localstorage.service";
 
 @Component({

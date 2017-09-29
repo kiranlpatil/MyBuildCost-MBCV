@@ -10,7 +10,7 @@ import {Router} from "@angular/router";
 import {Industry} from "../../../user/models/industry";
 import {RecruiterDashboardService} from "../recruiter-dashboard/recruiter-dashboard.service";
 import {RecruiterDashboard} from "../model/recruiter-dashboard";
-import {ErrorService} from "../error.service";
+import { ErrorService } from '../../../shared/services/error.service';
 import {Headings, Label, LocalStorage, Messages, ValueConstant} from "../../../shared/constants";
 import {LocalStorageService} from "../../../shared/services/localstorage.service";
 

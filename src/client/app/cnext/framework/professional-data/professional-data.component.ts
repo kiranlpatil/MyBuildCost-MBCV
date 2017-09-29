@@ -9,7 +9,7 @@ import {Candidate, Section} from "../../../user/models/candidate";
 import {FormBuilder} from "@angular/forms";
 import {Messages, Tooltip} from "../../../shared/constants";
 import {ProfessionalDetailsService} from "../professional-detail-service";
-import {ErrorService} from "../error.service";
+import {ErrorService} from "../../../shared/services/error.service";
 
 @Component({
   moduleId: module.id,

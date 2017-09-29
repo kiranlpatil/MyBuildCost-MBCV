@@ -5,7 +5,7 @@ import {Section} from "../../../user/models/candidate";
 import {ReleventIndustry} from "./relevent-industry";
 import {Role} from "../model/role";
 import {Industry} from "../../../user/models/industry";
-import {ErrorService} from "../error.service";
+import {ErrorService} from "../../../shared/services/error.service";
 
 
 @Component({

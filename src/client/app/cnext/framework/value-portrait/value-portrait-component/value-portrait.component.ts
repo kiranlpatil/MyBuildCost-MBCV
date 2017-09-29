@@ -1,7 +1,7 @@
 import {Component, OnInit, Input} from "@angular/core";
 import {CandidateProfileService} from "../../candidate-profile/candidate-profile.service";
 import {Candidate} from "../../../../user/models/candidate";
-import {ErrorService} from "../../error.service";
+import {ErrorService} from "../../../../shared/services/error.service";
 import {LocalStorage} from "../../../../shared/constants";
 import {LocalStorageService} from "../../../../shared/services/localstorage.service";
 

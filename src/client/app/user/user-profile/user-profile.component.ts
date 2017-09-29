@@ -20,7 +20,7 @@ import {LoaderService} from "../../shared/loader/loaders.service";
 import {CandidateDetail} from "../models/candidate-details";
 import {Candidate, Summary} from "../models/candidate";
 import {CandidateProfileService} from "../../cnext/framework/candidate-profile/candidate-profile.service";
-import {ErrorService} from "../../cnext/framework/error.service";
+import {ErrorService} from "../../shared/services/error.service";
 
 
 @Component({

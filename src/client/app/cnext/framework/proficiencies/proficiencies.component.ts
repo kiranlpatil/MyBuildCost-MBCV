@@ -3,7 +3,7 @@ import {Section} from "../../../user/models/candidate";
 import {Headings, ImagePath, LocalStorage, Messages, Tooltip, ValueConstant} from "../../../shared/constants";
 import {ProficiencyDetailsService} from "../proficiency-detail-service";
 import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
-import {ErrorService} from "../error.service";
+import {ErrorService} from "../../../shared/services/error.service";
 import {GuidedTourService} from "../guided-tour.service";
 import {LocalStorageService} from "../../../shared/services/localstorage.service";
 

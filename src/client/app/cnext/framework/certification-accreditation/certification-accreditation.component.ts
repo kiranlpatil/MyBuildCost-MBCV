@@ -3,7 +3,7 @@ import {CandidateProfileService} from "../candidate-profile/candidate-profile.se
 import {Candidate, Section} from "../../../user/models/candidate";
 import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Headings, Tooltip} from "../../../shared/constants";
-import {ErrorService} from "../error.service";
+import {ErrorService} from "../../../shared/services/error.service";
 
 @Component({
   moduleId: module.id,

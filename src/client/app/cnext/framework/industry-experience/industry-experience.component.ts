@@ -5,7 +5,7 @@ import {Section} from "../../../user/models/candidate";
 import {LocalStorageService} from "../../../shared/services/localstorage.service";
 import {Headings, LocalStorage, Messages, Tooltip, ValueConstant} from "../../../shared/constants";
 import {IndustryDataService} from "../industry-data-service";
-import {ErrorService} from "../error.service";
+import {ErrorService} from "../../../shared/services/error.service";
 
 @Component({
   moduleId: module.id,

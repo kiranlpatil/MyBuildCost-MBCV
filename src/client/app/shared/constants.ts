@@ -304,6 +304,9 @@ export class Messages {
   public static UNABLE_TO_RENEW_JOB_POST_MSG = 'Cannot renew your job post kindly click on "Clone" button to clone the same job';
   public static RENEW_JOB_POST_MSG = 'Your job post has been expired to renew your job click on "Renew Job Post" button';
 
+  public static NO_CANDIDATES_AVAILABLE = 'No candidates available.';
+  public static NO_RECRUITERS_AVAILABLE = 'No recruiters available.'
+
 }
 export class AdminPanel {
   public static PUBLIC_PROFILE='Profile is public';
@@ -401,6 +404,10 @@ export class API {
   public static CANDIDATE_PROFILE = 'candidate';
   public static CANDIDATE_DETAIL_PROFILE = 'candidateDetails';
   public static RECRUITER_DETAIL_PROFILE = 'recruiterDetails';
+  public static GET_CANDIDATE_DETAILS = 'getCandidateDetails';
+  public static GET_RECRUITER_DETAILS = 'getRecruiterDetails';
+  public static EXPORT_CANDIDATE_DETAIL_PROFILE = 'exportCandidateDetails';
+  public static EXPORT_RECRUITER_DETAIL_PROFILE = 'exportRecruiterDetails';
   public static RECRUITER_PROFILE = 'recruiter';
   public static PROFESSIONAL_DATA = 'professionaldata';
   public static EMPLOYMENTHISTORY = 'employmentdata';

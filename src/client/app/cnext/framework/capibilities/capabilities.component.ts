@@ -5,7 +5,7 @@ import {Headings, ImagePath, LocalStorage, Messages, Tooltip, ValueConstant} fro
 import {Section} from "../../../user/models/candidate";
 import {LocalStorageService} from "../../../shared/services/localstorage.service";
 import {GuidedTourService} from "../guided-tour.service";
-import {ErrorService} from "../error.service";
+import {ErrorService} from "../../../shared/services/error.service";
 
 @Component({
   moduleId: module.id,

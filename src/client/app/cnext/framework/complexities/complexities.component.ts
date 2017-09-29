@@ -9,7 +9,7 @@ import {ComplexityComponentService} from "./complexity.service";
 import {JobCompareService} from "../single-page-compare-view/job-compare-view/job-compare-view.service";
 import {Capability} from "../../../user/models/capability";
 import {GuidedTourService} from "../guided-tour.service";
-import {ErrorService} from "../error.service";
+import {ErrorService} from "../../../shared/services/error.service";
 
 @Component({
   moduleId: module.id,

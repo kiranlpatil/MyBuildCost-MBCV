@@ -5,7 +5,7 @@ import {ProfessionalDataService} from "../professional-data/professional-data.se
 import {Location} from "../../../user/models/location";
 import {MyGoogleAddress} from "../../../shared/models/my-google-address";
 import {ProfileDetailsService} from "../profile-detail-service";
-import {ErrorService} from "../error.service";
+import {ErrorService} from "../../../shared/services/error.service";
 import {LocalStorageService} from "../../../shared/services/localstorage.service";
 import {GuidedTourService} from "../guided-tour.service";
 import {CandidateDetail} from "../../../user/models/candidate-details";

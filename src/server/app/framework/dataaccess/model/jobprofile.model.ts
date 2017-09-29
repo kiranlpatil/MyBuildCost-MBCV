@@ -34,6 +34,7 @@ interface JobProfileModel extends mongoose.Document {
   capability:CapabilityModel[];
   keySkills:string;
   additionalKeySkills:string;
+  capabilityMatrix: any[];
   daysRemainingForExpiring: number;
 }
 export = JobProfileModel;

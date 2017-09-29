@@ -12,7 +12,7 @@ import {LoaderService} from '../../../../shared/loader/loaders.service';
 import {ProfileComparisonService} from '../../profile-comparison/profile-comparison.service';
 import {ProfileComparison} from '../../model/profile-comparison';
 import {QCardviewComponent} from '../q-card-view/q-card-view.component';
-import {ErrorService} from '../../error.service';
+import {ErrorService} from "../../../../shared/services/error.service";
 import {Label} from '../../../../shared/constants';
 import {UsageTrackingService} from '../../usage-tracking.service';
 import {JobPosterService} from '../../job-poster/job-poster.service';

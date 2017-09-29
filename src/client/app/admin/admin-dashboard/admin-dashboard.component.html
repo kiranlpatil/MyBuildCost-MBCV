@@ -19,7 +19,10 @@
       <p>This functionality will come soon. </p>
     </div>
     <div id="usage-details-view" class="tab-pane fade clearfix">
-      <cn-keyskills-detail-list></cn-keyskills-detail-list>
+      <cn-usage-details></cn-usage-details>
+    </div>
+    <div>
+      <cn-filter-bar [filterData] = filterData (onItemSelect)="loadUser($event)"></cn-filter-bar>
     </div>
   </div>
 </div>

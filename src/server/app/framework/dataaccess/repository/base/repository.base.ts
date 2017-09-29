@@ -15,22 +15,22 @@ class RepositoryBase<T extends mongoose.Document> implements IRead<T>, IWrite<T>
   }
 
   retrieve(field: any, callback: (error: any, result: any) => void) {
-    this._model.find(field,{}).lean().exec((err, res)=> {
-      callback(err,res);
+    this._model.find(field, {}).lean().exec((err, res) => {
+      callback(err, res);
     });
   }
 
   retrieveWithoutLean(field: any, callback: (error: any, result: any) => void) {
-    this._model.find(field,{}).exec((err, res)=> {
-      callback(err,res);
+    this._model.find(field, {}).exec((err, res) => {
+      callback(err, res);
     });
   }
 
-  retrieveWithLean(field: any, projection :any, callback: (error: any, result: any) => void) {
+  retrieveWithLean(field: any, projection: any, callback: (error: any, result: any) => void) {
     console.time('repo2 time');
-    this._model.find(field,projection).lean().exec((err, res)=> {
+    this._model.find(field, projection).lean().exec((err, res) => {
       console.timeEnd('repo2 time');
-      callback(err,res);
+      callback(err, res);
     });
   }
 
@@ -41,8 +41,8 @@ class RepositoryBase<T extends mongoose.Document> implements IRead<T>, IWrite<T>
   }
 
   retrieveAll(excluded: any, callback: (error: any, result: any) => void) {
-    this._model.find({}, excluded).lean().exec((err, res)=> {
-      callback(err,res);
+    this._model.find({}, excluded).lean().exec((err, res) => {
+      callback(err, res);
     });
   }
 
@@ -67,12 +67,14 @@ class RepositoryBase<T extends mongoose.Document> implements IRead<T>, IWrite<T>
   }
 
   findByIdwithExclude(_id: string, exclude: any, callback: (error: any, result: T) => void) {
-    this._model.findById(_id,exclude, callback);
+    this._model.findById(_id, exclude, callback);
   }
+
   findByName(name: string, callback: (error: any, result: T) => void) {
     this._model.find({"name": name}, callback);
   }
-;
+  ;
+
   toObjectId(_id: string): mongoose.Types.ObjectId {
     return mongoose.Types.ObjectId.createFromHexString(_id)
   }
@@ -82,11 +84,13 @@ class RepositoryBase<T extends mongoose.Document> implements IRead<T>, IWrite<T>
       callback(err, items);
     });
   }
+
   retrieveByMultiIdsAndPopulate(ids: string[], excluded: any, callback: (error: any, result: any) => void) {
-    this._model.find({_id: {$in: ids}}, excluded).populate('userId').exec(function(err, items){
+    this._model.find({_id: {$in: ids}}, excluded).populate('userId').exec(function (err, items) {
       callback(err, items);
     });
   }
+
   findOneAndUpdate(query: any, newData: any, options: any, callback: (err: any, result: any) => void) {
     this._model.findOneAndUpdate(query, newData, options, function (err, result) {
       callback(err, result);
@@ -112,8 +116,14 @@ class RepositoryBase<T extends mongoose.Document> implements IRead<T>, IWrite<T>
   }
 
   //in below query we use userId for search as refrence id
-  retrieveByMultiRefrenceIdsAndPopulate(ids:string[], excluded:any, callback:(error:any, result:any) => void) {
+  retrieveByMultiRefrenceIdsAndPopulate(ids: string[], excluded: any, callback: (error: any, result: any) => void) {
     this._model.find({'userId': {$in: ids}}, excluded).populate('userId').exec(function (err, items) {
+      callback(err, items);
+    });
+  }
+
+  retrieveBySortedOrder(query: any, projection: any, sortingQuery: any, callback: (error: any, result: any) => void) {
+    this._model.find(query, projection).sort(sortingQuery).lean().exec(function (err, items) {
       callback(err, items);
     });
   }

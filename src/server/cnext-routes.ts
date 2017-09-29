@@ -58,8 +58,12 @@ export function cnextInit(app: express.Application) { //todo add interceptor to 
   app.get('/api/recruiter/:id/jobprofile/:jobId', this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, recruiterController.getCompareDetailsOfCandidate);
   app.get('/api/recruiter/:id/candidatesearch/:searchvalue', this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, recruiterController.getCandidatesByName);
   app.get('/api/candidate/:candidateId/recruiter/:recruiterId/jobprofile', this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, searchController.searchCandidateJobProfiles);
-  app.get('/api/candidateDetails', this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, adminController.getCandidateDetails);
-  app.get('/api/recruiterDetails', this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, adminController.getRecruiterDetails);
+  app.get('/api/candidateDetails', this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, adminController.exportCandidateDetails);
+  app.get('/api/recruiterDetails', this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, adminController.exportRecruiterDetails);
+  app.get('/api/exportCandidateDetails', this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, adminController.exportCandidateDetails);
+  app.get('/api/exportRecruiterDetails', this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, adminController.exportRecruiterDetails);
+  app.get('/api/getCandidateDetails/:initial', this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, adminController.getCandidateDetailsByInitial);
+  app.get('/api/getRecruiterDetails/:initial', this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, adminController.getRecruiterDetailsByInitial);
   //Share api
   app.get('/api/buildValuePortraitUrl', this.authInterceptor.requiresAuth, shareController.buildValuePortraitUrl);
   app.get('/api/share/:shortUrl', shareController.getActualUrlForShare);
