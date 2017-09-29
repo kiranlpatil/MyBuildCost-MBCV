@@ -48,7 +48,7 @@
                 <label>Date Posted</label>
                 <p>{{selectedJobProfile.postingDate | date :'dd MMM yyyy'}}</p>
               </li>
-              <li class="contact-info" title="Expiry Date : {{selectedJobProfile.expiringDate | date :'dd MMM yyyy'}}">
+              <li [class.job-expired]="selectedJobProfile.isJobPostExpired" class="contact-info" title="Expiry Date : {{selectedJobProfile.expiringDate | date :'dd MMM yyyy'}}">
                 <label>Expiry Date</label>
                 <p>{{selectedJobProfile.expiringDate | date :'dd MMM yyyy'}}</p>
               </li>
