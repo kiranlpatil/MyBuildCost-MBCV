@@ -269,6 +269,98 @@
   }
 }
 
+
+
+.default-checkbox {
+  display: block;
+  float: left;
+  margin: 5px 10px 5px -15px;
+  width: auto;
+  a {
+    text-decoration: underline !important;
+  }
+  .error-messages {
+    padding-left: 12px;
+  }
+}
+#recruiter-form {
+  .default-checkbox {
+    margin: 5px 10px 5px 0;
+    label {
+      padding: 2px 0 6px 20px;
+    }
+    .error-messages {
+      margin-left: -2px !important;
+      padding-left: 0;
+    }
+  }
+}
+.default-checkbox > label {
+  min-height: 17px;
+  padding: 2px 0 6px 36px;
+  position: relative;
+
+  & > input {
+    & + span {
+      background: $white;
+      border: 0;
+      box-shadow: none;
+      color: $text-color;
+      font-size: 12px;
+      padding: 0;
+      text-align: left;
+
+      &:hover {
+        border: 0;
+        box-shadow: none;
+      }
+    }
+
+    &:checked {
+      & + span {
+        background-color: $white;
+        border: 0;
+        box-shadow: none;
+        color: $primary-option1;
+      }
+    }
+  }
+
+  & > input[type='checkbox'] {
+
+    & ~ .check {
+      display: block;
+    }
+  }
+
+  &:hover {
+    & > input {
+      &:checked {
+        & + span {
+          background-color: $white;
+          border: 0;
+          box-shadow: none;
+          color: $primary-option1;
+        }
+      }
+    }
+
+    & > input[type='checkbox'] {
+      &:checked {
+        & + span {
+          color: $primary-option1;
+        }
+
+        & ~ .check {
+          &::before {
+            background: transparent;
+          }
+        }
+      }
+    }
+  }
+}
+
 @media screen and (max-width: 1280px) {
   .primary > label {
     & > input {
@@ -386,6 +478,16 @@
           }
         }
       }
+    }
+  }
+  .default-checkbox {
+    margin: 5px 10px 15px 0 !important;
+    label {
+      min-height: 17px;
+      padding: 0 2px 0 22px;
+    }
+    .error-messages {
+      padding-left: 0;
     }
   }
 }

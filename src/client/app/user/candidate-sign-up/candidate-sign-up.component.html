@@ -76,9 +76,20 @@
         </div>
       </div>
 
+
+
       <div class="col-sm-10 col-xs-11 error-msg alert alert-danger form-alert" [hidden]="isShowErrorMessage"><b>{{
         error_msg }}</b></div>
       <div class="button-group">
+        <div class="select-option default-checkbox">
+          <label>
+            <input type="checkbox" name="choices" formControlName="accept_terms"   required/>
+            <div class="check"></div>
+          </label>
+          <span>{{getLabel().ACCEPT_NAME}} <a (click)="goToAcceptTerms()"> {{getLabel().TERMS_AND_CONDITIONS_NAME}}.</a></span>
+          <div class="error-messages" *ngIf='!userForm.get("accept_terms").value && submitStatus'>{{getMessages().MSG_ERROR_VALIDATION_TERMS_AND_CONDITIONS_REQUIRED}}
+          </div>
+        </div>
         <button type="submit" class="btn btn-success">Create my account</button>
       </div>
     </form>
