@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, Output} from "@angular/core";
 import {Section} from "../../../user/models/candidate";
 import {JobPosterModel} from "../../../user/models/jobPoster";
-import {Tooltip, Headings} from "../../../shared/constants";
+import {Headings, Tooltip} from "../../../shared/constants";
 
 @Component({
   moduleId: module.id,
@@ -33,19 +33,16 @@ export class CompetenciesAndResponsibilitiesComponent {
   }
   back() {
     (this.isShowReleventIndustryListStep)?this.highlightedSection.name='ReleventIndustry':this.highlightedSection.name='IndustryExposure';
-    let _body: any = document.getElementsByTagName('BODY')[0];
-    _body.scrollTop = -1;
+    window.scrollTo(0, 0);
   }
 
   onEdit() {
     this.highlightedSection.name = 'Compentancies';
-    let _body: any = document.getElementsByTagName('BODY')[0];
-    _body.scrollTop = -1;
+    window.scrollTo(0, 0);
   }
 
   onSave() {
     this.highlightedSection.name = 'None';
-    let _body: any = document.getElementsByTagName('BODY')[0];
-    _body.scrollTop = -1;
+    window.scrollTo(0, 0);
   }
 }

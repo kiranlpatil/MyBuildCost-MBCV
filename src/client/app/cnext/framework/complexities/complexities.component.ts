@@ -2,7 +2,7 @@ import {Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, V
 import {Role} from "../model/role";
 import {ComplexityService} from "../complexity.service";
 import {LocalStorageService} from "../../../shared/services/localstorage.service";
-import {LocalStorage, Messages, Tooltip, ValueConstant, ImagePath, Headings} from "../../../shared/constants";
+import {Headings, ImagePath, LocalStorage, Messages, Tooltip, ValueConstant} from "../../../shared/constants";
 import {Section} from "../../../user/models/candidate";
 import {ComplexityDetails} from "../../../user/models/complexity-detail";
 import {ComplexityComponentService} from "./complexity.service";
@@ -246,8 +246,7 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
 
   onNextCapability() {
     //this.currentCapabilityNumber++;
-      let _body: any = document.getElementsByTagName('BODY')[0];
-      _body.scrollTop = -1;
+    window.scrollTo(0, 0);
     for (let complexity of this.capabilities[this.currentCapabilityNumber].complexities) {
       if (complexity.complexityDetails.userChoice === undefined) {
         this.isValid = false;
@@ -268,8 +267,7 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
 
   onPreviousCapability() {
     this.isValid = true;
-      let _body: any = document.getElementsByTagName('BODY')[0];
-      _body.scrollTop = -1;
+    window.scrollTo(0, 0);
     if (this.currentCapabilityNumber === 0) {
       this.highlightedSection.name = 'Capabilities';
       return;
@@ -279,8 +277,7 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
 
   onNext() {
     this.isValid = true;
-    let _body: any = document.getElementsByTagName('BODY')[0];
-    _body.scrollTop = -1;
+    window.scrollTo(0, 0);
     if (this.complexities[this.complexityIds[this.currentComplexity]] === -1) {
       this.isValid = false;
       return;
@@ -330,8 +327,7 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
 
   onPrevious() {
     this.isValid = true;
-      let _body: any = document.getElementsByTagName('BODY')[0];
-      _body.scrollTop = -1;
+    window.scrollTo(0, 0);
     if (this.currentComplexity === 0) {
       this.highlightedSection.name = 'Capabilities';
       return;
@@ -350,8 +346,7 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
   }
 
   onDone() {
-      let _body: any = document.getElementsByTagName('BODY')[0];
-      _body.scrollTop = -1;
+    window.scrollTo(0, 0);
     if (this.isCandidate) {
       this.onSaveComplexity();
     } else {
@@ -386,16 +381,14 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
     this.highlightedSection.name = 'Complexities';
     this.highlightedSection.isDisable = true;
     this.showMore = false;
-      let _body: any = document.getElementsByTagName('BODY')[0];
-      _body.scrollTop = -1;
+    window.scrollTo(0, 0);
   }
 
     editCapabilities() {
         this.highlightedSection.name = 'Capabilities';
         this.highlightedSection.isDisable = true;
         this.showMore = false;
-        let _body: any = document.getElementsByTagName('BODY')[0];
-        _body.scrollTop = -1;
+      window.scrollTo(0, 0);
     }
 
   SelectedComplexity(selectedComplexity: any) {

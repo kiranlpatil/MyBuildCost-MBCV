@@ -339,7 +339,7 @@
 
       &:checked {
         & + span {
-          color: $primary-option1;
+          color: $primary-option1 !important;
           background-color: $white;
           border: 0;
           box-shadow: none;

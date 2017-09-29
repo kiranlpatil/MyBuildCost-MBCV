@@ -2,7 +2,7 @@ import {Component, ElementRef, EventEmitter, Input, Output, ViewChild} from "@an
 import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
 import {Candidate, Section} from "../../../user/models/candidate";
 import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {Tooltip, Headings} from "../../../shared/constants";
+import {Headings, Tooltip} from "../../../shared/constants";
 import {ErrorService} from "../error.service";
 
 @Component({
@@ -68,7 +68,7 @@ export class CertificationAccreditationComponent {
         });
       }
       if (this.candidate.certifications.length == 0) {
-        this.addCertification("fromNgOnChanges");
+          this.addCertification('fromNgOnChanges');
       }
     }
   }
@@ -84,7 +84,7 @@ export class CertificationAccreditationComponent {
   }
 
   addCertification(calledFrom: string) {
-    if ((calledFrom == "fromNgOnChanges" && this.certificationDetail.controls["certifications"].value.length == 0) || calledFrom == "addAnother") {
+      if ((calledFrom == 'fromNgOnChanges' && this.certificationDetail.controls['certifications'].value.length == 0) || calledFrom == 'addAnother') {
       this.submitStatus = false;
       const control = <FormArray>this.certificationDetail.controls['certifications'];
       const addrCtrl = this.initCertificateDetails();
@@ -142,8 +142,8 @@ export class CertificationAccreditationComponent {
 
     let certifications = this.certificationDetail.value.certifications;
     if(certifications.length == 1){
-      if (certifications[0].issuedBy == "" && certifications[0].name == ""
-        && certifications[0].year == "") {
+        if (certifications[0].issuedBy == '' && certifications[0].name == ''
+            && certifications[0].year == '') {
         if (type == 'next') {
           this.onNext();
         }
@@ -155,9 +155,9 @@ export class CertificationAccreditationComponent {
     }
 
     for (let certificationsData of this.certificationDetail.value.certifications) {
-      if (certificationsData.issuedBy != "" && certificationsData.name != "" && certificationsData.year != "") {
+        if (certificationsData.issuedBy != '' && certificationsData.name != '' && certificationsData.year != '') {
         isDataValid = true;
-      } else if(certificationsData.issuedBy != "" || certificationsData.name != "" || certificationsData.year != "") {
+        } else if (certificationsData.issuedBy != '' || certificationsData.name != '' || certificationsData.year != '') {
         this.submitStatus = true;
         return;
       } else {
@@ -188,33 +188,32 @@ export class CertificationAccreditationComponent {
       this.onSave()
     }
 
-    let _body: any = document.getElementsByTagName('BODY')[0];
-    _body.scrollTop = -1;
+      window.scrollTo(0, 0);
   }
 
   onNext() {
     this.onComplete.emit();
     this.highlightedSection.name = 'Awards';
     this.highlightedSection.isDisable = false;
+      window.scrollTo(0, 0);
   }
 
   onSave() {
     this.onComplete.emit();
     this.highlightedSection.name = 'none';
     this.highlightedSection.isDisable = false;
+      window.scrollTo(0, 0);
   }
 
   onPrevious() {
-    this.highlightedSection.name = 'Awards';
-    let _body: any = document.getElementsByTagName('BODY')[0];
-    _body.scrollTop = -1;
+      this.highlightedSection.name = 'AcademicDetails';
+      window.scrollTo(0, 0);
   }
 
   onEdit() {
     this.highlightedSection.name = 'Certification';
     this.highlightedSection.isDisable = true;
     this.showButton = false;
-    let _body: any = document.getElementsByTagName('BODY')[0];
-    _body.scrollTop = -1;
+      window.scrollTo(0, 0);
   }
 }

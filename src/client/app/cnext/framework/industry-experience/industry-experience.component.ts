@@ -66,8 +66,8 @@ export class IndustryExperienceListComponent implements OnInit,OnChanges {
 
     if (changes.choosedIndustry !== undefined && changes.choosedIndustry.currentValue !== undefined) {
       this.choosedIndustry = changes.choosedIndustry.currentValue;
-      this.suggestionMessageAboutDomain = "In addition to "+ this.choosedIndustry + " industry, do you want the candidate to have mandatory experience in any specific domain? If yes, select such must have domains from below.";
-      this.suggestionMessageAboutCandidateDomain = "In addition to "+ this.choosedIndustry + " industry, do you have exposure to any of the domains mentioned below? If yes, select relevant domains.";
+        this.suggestionMessageAboutDomain = 'In addition to ' + this.choosedIndustry + ' industry, do you want the candidate to have mandatory experience in any specific domain? If yes, select such must have domains from below.';
+        this.suggestionMessageAboutCandidateDomain = 'In addition to ' + this.choosedIndustry + ' industry, do you have exposure to any of the domains mentioned below? If yes, select relevant domains.';
     }
     if (this.candidateExperiencedIndustry === undefined) {
       this.candidateExperiencedIndustry = new Array(0);
@@ -119,9 +119,7 @@ export class IndustryExperienceListComponent implements OnInit,OnChanges {
       this.onNextComplete.emit();
 
     }
-
-      let _body: any = document.getElementsByTagName('BODY')[0];
-      _body.scrollTop = -1;
+      window.scrollTo(0, 0);
   }
 
   onSave() {
@@ -131,9 +129,7 @@ export class IndustryExperienceListComponent implements OnInit,OnChanges {
     }
     this.highlightedSection.name = 'none';
     this.highlightedSection.isDisable = false;
-
-      let _body: any = document.getElementsByTagName('BODY')[0];
-      _body.scrollTop = -1;
+      window.scrollTo(0, 0);
   }
 
   getIndustries() {
@@ -159,8 +155,7 @@ export class IndustryExperienceListComponent implements OnInit,OnChanges {
 
     onPrevious() {
         this.highlightedSection.name = 'Proficiencies';
-        let _body: any = document.getElementsByTagName('BODY')[0];
-        _body.scrollTop = -1;
+        window.scrollTo(0, 0);
     }
 
     onEdit() {
@@ -168,8 +163,7 @@ export class IndustryExperienceListComponent implements OnInit,OnChanges {
         this.disableButton = false;
         this.highlightedSection.isDisable = true;
         this.showButton = false;
-        let _body: any = document.getElementsByTagName('BODY')[0];
-        _body.scrollTop = -1;
+        window.scrollTo(0, 0);
     }
 }
 

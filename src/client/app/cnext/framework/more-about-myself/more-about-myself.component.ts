@@ -3,7 +3,7 @@ import {MessageService} from "../../../shared/services/message.service";
 import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
 import {Message} from "../../../shared/models/message";
 import {Candidate, Section} from "../../../user/models/candidate";
-import {Messages, Tooltip, ImagePath, Headings, LocalStorage} from "../../../shared/constants";
+import {Headings, ImagePath, LocalStorage, Messages, Tooltip} from "../../../shared/constants";
 import {GuidedTourService} from "../guided-tour.service";
 import {ErrorService} from "../error.service";
 import {LocalStorageService} from "../../../shared/services/localstorage.service";
@@ -103,8 +103,7 @@ export class MoreAboutMyselfComponent implements OnInit {
     this.highlightedSection.name='EmploymentHistory';
     this.highlightedSection.isDisable=false;
     this.onComplete.emit(this.candidate.aboutMyself);
-    let _body: any = document.getElementsByTagName('BODY')[0];
-    _body.scrollTop = -1;
+    window.scrollTo(0, 0);
   }
 
   onGotItGuideTour() {
@@ -124,22 +123,19 @@ export class MoreAboutMyselfComponent implements OnInit {
   onSave() {
     this.highlightedSection.name = 'none';
     this.highlightedSection.isDisable = false;
-    let _body: any = document.getElementsByTagName('BODY')[0];
-    _body.scrollTop = -1;
+    window.scrollTo(0, 0);
   }
 
   onPrevious() {
     this.highlightedSection.name = 'Professional-Details';
-    let _body: any = document.getElementsByTagName('BODY')[0];
-    _body.scrollTop = -1;
+    window.scrollTo(0, 0);
   }
 
   onEdit() {
     this.highlightedSection.name = 'AboutMySelf';
     this.highlightedSection.isDisable = true;
     this.showButton = false;
-    let _body: any = document.getElementsByTagName('BODY')[0];
-    _body.scrollTop = -1;
+    window.scrollTo(0, 0);
   }
 
   getMessage() {

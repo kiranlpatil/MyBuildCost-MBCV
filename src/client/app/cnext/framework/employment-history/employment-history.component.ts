@@ -2,7 +2,7 @@ import {Component, ElementRef, EventEmitter, Input, Output, ViewChild} from "@an
 import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
 import {Candidate, Section} from "../../../user/models/candidate";
 import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {Messages, Tooltip, Headings} from "../../../shared/constants";
+import {Headings, Messages, Tooltip} from "../../../shared/constants";
 import {ErrorService} from "../error.service";
 
 @Component({
@@ -73,7 +73,7 @@ export class EmploymentHistoryComponent {
         });
       }
       if (this.candidate.employmentHistory.length == 0) {
-        this.addEmployeeHistory("fromNgOnChanges");
+        this.addEmployeeHistory('fromNgOnChanges');
       }
     }
   }
@@ -95,7 +95,7 @@ export class EmploymentHistoryComponent {
   }
 
   addEmployeeHistory(calledFrom: string) {
-    if ((calledFrom == "fromNgOnChanges" && this.employeeHistory.controls["employeeHistories"].value.length == 0) || calledFrom == "addAnother") {
+    if ((calledFrom == 'fromNgOnChanges' && this.employeeHistory.controls['employeeHistories'].value.length == 0) || calledFrom == 'addAnother') {
       const control = <FormArray>this.employeeHistory.controls['employeeHistories'];
       const addrCtrl = this.initEmployeeHistory();
       control.push(addrCtrl);
@@ -157,9 +157,9 @@ export class EmploymentHistoryComponent {
 
     let empHistory = this.employeeHistory.value.employeeHistories;
     if(empHistory.length == 1){
-      if (empHistory[0].companyName == "" && empHistory[0].designation == ""
-        && empHistory[0].from.month == "" && empHistory[0].from.year == ""
-        && empHistory[0].to.month == "" && empHistory[0].to.year == "") {
+      if (empHistory[0].companyName == '' && empHistory[0].designation == ''
+          && empHistory[0].from.month == '' && empHistory[0].from.year == ''
+          && empHistory[0].to.month == '' && empHistory[0].to.year == '') {
         if (type == 'next') {
           this.onNext();
         }
@@ -171,11 +171,11 @@ export class EmploymentHistoryComponent {
     }
 
     for (let history of this.employeeHistory.value.employeeHistories) {
-      if (history.companyName != "" && history.designation != ""
-        && history.from.month != "" && history.from.year != ""
-        && history.to.month != "" && history.to.year != "") {
+      if (history.companyName != '' && history.designation != ''
+          && history.from.month != '' && history.from.year != ''
+          && history.to.month != '' && history.to.year != '') {
 
-        if((new Date(history.from.month +"-"+history.from.year) > new Date(history.to.month+"-"+history.to.year))) {
+        if ((new Date(history.from.month + '-' + history.from.year) > new Date(history.to.month + '-' + history.to.year))) {
           this.isValidservicePeriod = false;
           return;
         }else{
@@ -183,13 +183,13 @@ export class EmploymentHistoryComponent {
         }
 
 
-      } else if (history.companyName != "" || history.designation != ""
-        || history.from.month != "" || history.from.year != ""
-        || history.to.month != "" || history.to.year != "") {
+      } else if (history.companyName != '' || history.designation != ''
+          || history.from.month != '' || history.from.year != ''
+          || history.to.month != '' || history.to.year != '') {
 
-        if (history.from.month == "" || history.from.year == ""
-          || history.to.month == "" || history.to.year == "" ||
-          (new Date(history.from.month +"-"+history.from.year) > new Date(history.to.month+"-"+history.to.year))) {
+        if (history.from.month == '' || history.from.year == ''
+            || history.to.month == '' || history.to.year == '' ||
+            (new Date(history.from.month + '-' + history.from.year) > new Date(history.to.month + '-' + history.to.year))) {
           this.isValidservicePeriod = false;
         }
 
@@ -225,8 +225,7 @@ export class EmploymentHistoryComponent {
       this.onSave();
     }
 
-    let _body: any = document.getElementsByTagName('BODY')[0];
-    _body.scrollTop = -1;
+    window.scrollTo(0, 0);
   }
 
   onNext() {
@@ -234,6 +233,7 @@ export class EmploymentHistoryComponent {
     this.onComplete.emit();
     this.highlightedSection.name = 'AcademicDetails';
     this.highlightedSection.isDisable = false;
+    window.scrollTo(0, 0);
   }
 
   onSave() {
@@ -241,20 +241,19 @@ export class EmploymentHistoryComponent {
     this.onComplete.emit();
     this.highlightedSection.name = 'none';
     this.highlightedSection.isDisable = false;
+    window.scrollTo(0, 0);
   }
 
   onPrevious() {
     this.highlightedSection.name = 'AboutMySelf';
-    let _body: any = document.getElementsByTagName('BODY')[0];
-    _body.scrollTop = -1;
+    window.scrollTo(0, 0);
   }
 
   onEdit() {
     this.highlightedSection.name = 'EmploymentHistory';
     this.highlightedSection.isDisable = true;
     this.showButton = false;
-    let _body: any = document.getElementsByTagName('BODY')[0];
-    _body.scrollTop = -1;
+    window.scrollTo(0, 0);
   }
 
 }

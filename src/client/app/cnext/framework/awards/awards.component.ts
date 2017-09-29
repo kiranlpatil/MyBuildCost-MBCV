@@ -2,7 +2,7 @@ import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} f
 import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
 import {Candidate, Section} from "../../../user/models/candidate";
 import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {Tooltip, ImagePath, Headings, LocalStorage, Messages} from "../../../shared/constants";
+import {Headings, ImagePath, LocalStorage, Messages, Tooltip} from "../../../shared/constants";
 import {GuidedTourService} from "../guided-tour.service";
 import {ErrorService} from "../error.service";
 import {LocalStorageService} from "../../../shared/services/localstorage.service";
@@ -73,7 +73,7 @@ export class AwardsComponent implements OnInit {
         });
       }
       if (this.candidate.awards.length == 0) {
-        this.addAward("fromNgOnChanges");
+        this.addAward('fromNgOnChanges');
       }
     }
   }
@@ -88,7 +88,7 @@ export class AwardsComponent implements OnInit {
   }
 
   addAward(calledFrom: string) {
-    if ((calledFrom == "fromNgOnChanges" && this.awardDetail.controls["awards"].value.length == 0) || calledFrom == "addAnother") {
+    if ((calledFrom == 'fromNgOnChanges' && this.awardDetail.controls['awards'].value.length == 0) || calledFrom == 'addAnother') {
       this.submitStatus = false;
       const control = <FormArray>this.awardDetail.controls['awards'];
       const addrCtrl = this.initAwardDetails();
@@ -144,9 +144,9 @@ export class AwardsComponent implements OnInit {
     }
 
     let awards = this.awardDetail.value.awards;
-    if(awards.length == 1){
-      if (awards[0].issuedBy == "" && awards[0].name == ""
-        && awards[0].year == "") {
+    if (awards.length == 1) {
+      if (awards[0].issuedBy == '' && awards[0].name == ''
+          && awards[0].year == '') {
         if (type == 'next') {
           this.onNext();
         }
@@ -158,9 +158,9 @@ export class AwardsComponent implements OnInit {
     }
 
     for (let awardsData of this.awardDetail.value.awards) {
-      if (awardsData.issuedBy != "" && awardsData.name != "" && awardsData.year != "") {
+      if (awardsData.issuedBy != '' && awardsData.name != '' && awardsData.year != '') {
         isDataValid = true;
-      } else if(awardsData.issuedBy != "" || awardsData.name != "" || awardsData.year != "") {
+      } else if (awardsData.issuedBy != '' || awardsData.name != '' || awardsData.year != '') {
         this.submitStatus = true;
         return;
       } else {
@@ -188,13 +188,12 @@ export class AwardsComponent implements OnInit {
     } else if (type === 'save') {
       this.onSave();
     }
-
-    let _body: any = document.getElementsByTagName('BODY')[0];
-    _body.scrollTop = -1;
+    window.scrollTo(0, 0);
   }
 
   onNext() {
     this.isGuidedTourImgRequire();
+    window.scrollTo(0, 0);
   }
 
   isGuidedTourImgRequire() {
@@ -226,20 +225,19 @@ export class AwardsComponent implements OnInit {
     this.onComplete.emit();
     this.highlightedSection.name = 'none';
     this.highlightedSection.isDisable = false;
+    window.scrollTo(0, 0);
   }
 
   onPrevious() {
-    this.highlightedSection.name = 'AcademicDetails';
-    let _body: any = document.getElementsByTagName('BODY')[0];
-    _body.scrollTop = -1;
+    this.highlightedSection.name = 'Certification';
+    window.scrollTo(0, 0);
   }
 
   onEdit() {
     this.highlightedSection.name = 'Awards';
     this.highlightedSection.isDisable = true;
     this.showButton = false;
-    let _body: any = document.getElementsByTagName('BODY')[0];
-    _body.scrollTop = -1;
+    window.scrollTo(0, 0);
   }
 
   getMessage() {

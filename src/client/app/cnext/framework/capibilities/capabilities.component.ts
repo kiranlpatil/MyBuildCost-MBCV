@@ -171,7 +171,7 @@ export class CapabilitiesComponent {
       this.validationMessage = this.isCandidate ? Messages.MSG_ERROR_VALIDATION_CAPABILITIES_REQUIRED_CANDIDATE : Messages.MSG_ERROR_VALIDATION_CAPABILITIES_REQUIRED_RECRUITER;
       return;
     }
-    this.highlightedSection.name = "Complexities";
+      this.highlightedSection.name = 'Complexities';
     this.highlightedSection.isDisable = false;
     this.disableButton = true;
     var newselectedRoles:Role[]= new Array(0);
@@ -183,9 +183,7 @@ export class CapabilitiesComponent {
       });
     }
     this.onComplete.emit(newselectedRoles);
-
-    let _body: any = document.getElementsByTagName('BODY')[0];
-    _body.scrollTop = -1;
+      window.scrollTo(0, 0);
   }
 
   onSave(){
@@ -223,14 +221,12 @@ export class CapabilitiesComponent {
       this.onNext();
     }
 
-      let _body: any = document.getElementsByTagName('BODY')[0];
-      _body.scrollTop = -1;
+      window.scrollTo(0, 0);
   }
 
     onPrevious() {
         this.highlightedSection.name = 'Work-Area';
-        let _body: any = document.getElementsByTagName('BODY')[0];
-        _body.scrollTop = -1;
+        window.scrollTo(0, 0);
   }
 
   onCancel(){
@@ -257,7 +253,7 @@ export class CapabilitiesComponent {
               if (mainRole.capabilities) {
                 for (let mainCap of mainRole.capabilities) {
                   if (cap.code === mainCap.code) {
-                    cap.isPrimary ? this.primaryNames.push(cap.code) : (cap.isSecondary ? this.secondaryNames.push(cap.code) : console.log(""));
+                      cap.isPrimary ? this.primaryNames.push(cap.code) : (cap.isSecondary ? this.secondaryNames.push(cap.code) : console.log(''));
                     mainCap.isPrimary = cap.isPrimary;
                     mainCap.isSecondary = cap.isSecondary;
                     if (cap.complexities && cap.complexities.length > 0) {

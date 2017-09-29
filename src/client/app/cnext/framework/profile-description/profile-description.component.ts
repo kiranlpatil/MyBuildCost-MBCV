@@ -103,7 +103,7 @@ export class ProfileDescriptionComponent implements OnInit {
     if (changes.candidate !== undefined && changes.candidate.currentValue !== undefined) {
       this.candidate = changes.candidate.currentValue;
     }
-    if (this.candidate.jobTitle !== undefined && this.candidate.jobTitle !== "") {
+    if (this.candidate.jobTitle !== undefined && this.candidate.jobTitle !== '') {
       this.savedJobTitle = this.candidate.jobTitle;
     }
     if(this.candidate.location) {
@@ -172,8 +172,7 @@ export class ProfileDescriptionComponent implements OnInit {
     this.highlightedSection.name = 'Industry';
     this.highlightedSection.isDisable = false;
     this.onComplete.emit(this.candidate);
-    let _body: any = document.getElementsByTagName('BODY')[0];
-    _body.scrollTop = -1;
+    window.scrollTo(0, 0);
   }
 
   /*keyDownCheck(e: any) {
@@ -226,8 +225,7 @@ export class ProfileDescriptionComponent implements OnInit {
     this.highlightedSection.name = 'none';
     this.highlightedSection.isDisable = false;
     this.onComplete.emit(this.candidate);
-    let _body: any = document.getElementsByTagName('BODY')[0];
-    _body.scrollTop = -1;
+    window.scrollTo(0, 0);
   }
 
   onJobTitleChange() {
@@ -291,8 +289,7 @@ export class ProfileDescriptionComponent implements OnInit {
     this.disableButton = false;
     this.showButton = false;
     this.highlightedSection.isDisable = true;
-    let _body: any = document.getElementsByTagName('BODY')[0];
-    _body.scrollTop = -1;
+    window.scrollTo(0, 0);
   }
 
   getMessage() {

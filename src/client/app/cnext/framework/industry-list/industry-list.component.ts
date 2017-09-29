@@ -3,7 +3,7 @@ import {Industry} from "../../../user/models/industry";
 import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
 import {Section} from "../../../user/models/candidate";
 import {LocalStorageService} from "../../../shared/services/localstorage.service";
-import {LocalStorage, Messages, Tooltip, Headings} from "../../../shared/constants";
+import {Headings, LocalStorage, Messages, Tooltip} from "../../../shared/constants";
 import {IndustryDetailsService} from "../industry-detail-service";
 import {ErrorService} from "../error.service";
 
@@ -20,15 +20,14 @@ export class IndustryListComponent implements OnChanges {
   @Output() valueChange = new EventEmitter();
   industryForCandidateHeading:string = Headings.INDUSTRY_FOR_CANDIDATE;
   industryForRecruiterHeading:string = Headings.INDUSTRY_FOR_RECRUITER;
-  private isCandidate: boolean = false;
-    private disableButton: boolean = true;
-    private showButton: boolean = true;
-
   tooltipMessage: string =
       '<ul>' +
       '<li><p>1. '+Tooltip.INDUSTRY_LIST_TOOLTIP_1+'</p></li><li><p>2. '+Tooltip.INDUSTRY_LIST_TOOLTIP_2+'</p></li>' +
       '</ul>';
 
+  private isCandidate: boolean = false;
+  private disableButton: boolean = true;
+  private showButton: boolean = true;
   private industries: Industry[] = new Array(0);
   private choosedIndustry: Industry = new Industry();
   private isValid:boolean = true;
@@ -73,9 +72,7 @@ export class IndustryListComponent implements OnChanges {
     }
     this.highlightedSection.name = 'Work-Area';
     this.highlightedSection.isDisable = false;
-
-      let _body: any = document.getElementsByTagName('BODY')[0];
-      _body.scrollTop = -1;
+    window.scrollTo(0, 0);
   }
 
   onPrevious() {
@@ -87,9 +84,7 @@ export class IndustryListComponent implements OnChanges {
     } else {
       this.highlightedSection.name = 'JobProfile';
     }
-
-      let _body: any = document.getElementsByTagName('BODY')[0];
-      _body.scrollTop = -1;
+    window.scrollTo(0, 0);
   }
 
   getIndustry() {
@@ -103,8 +98,7 @@ export class IndustryListComponent implements OnChanges {
         this.disableButton = false;
         this.showButton = false;
         this.highlightedSection.isDisable = true;
-        let _body: any = document.getElementsByTagName('BODY')[0];
-        _body.scrollTop = -1;
+      window.scrollTo(0, 0);
     }
 }
 

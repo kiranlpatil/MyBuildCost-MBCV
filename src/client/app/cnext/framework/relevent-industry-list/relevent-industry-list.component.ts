@@ -75,8 +75,7 @@ export class ReleventIndustryListComponent implements OnInit {
     this.onNext();
     this.highlightedSection.name = 'Compentancies';
     this.onNextComplete.emit(this.workAreasToUpdate);
-    let _body: any = document.getElementsByTagName('BODY')[0];
-    _body.scrollTop = -1;
+    window.scrollTo(0, 0);
   }
 
   onSave() {
@@ -84,8 +83,7 @@ export class ReleventIndustryListComponent implements OnInit {
     this.highlightedSection.isDisable = false;
     this.onNext();
     this.onNextComplete.emit(this.workAreasToUpdate);
-    let _body: any = document.getElementsByTagName('BODY')[0];
-    _body.scrollTop = -1;
+    window.scrollTo(0, 0);
   }
 
   /* getReleventIndustry(event: any) {
@@ -116,15 +114,13 @@ export class ReleventIndustryListComponent implements OnInit {
 
   onPrevious() {
     this.highlightedSection.name = 'IndustryExposure';
-    let _body: any = document.getElementsByTagName('BODY')[0];
-    _body.scrollTop = -1;
+    window.scrollTo(0, 0);
   }
 
   onEdit() {
     this.highlightedSection.name = 'ReleventIndustry';
     this.showButton = false;
     this.disableButton = false;
-    let _body: any = document.getElementsByTagName('BODY')[0];
-    _body.scrollTop = -1;
+    window.scrollTo(0, 0);
   }
 }

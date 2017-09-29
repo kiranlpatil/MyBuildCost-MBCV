@@ -135,10 +135,9 @@ export class ProfessionalDataComponent extends BaseService implements OnChanges 
       return;
     }
     this.onComplete.emit();
-    this.highlightedSection.name = "AboutMySelf";
+    this.highlightedSection.name = 'AboutMySelf';
     this.highlightedSection.isDisable = false;
-    let _body: any = document.getElementsByTagName('BODY')[0];
-    _body.scrollTop = -1;
+    window.scrollTo(0, 0);
 
   }
 
@@ -150,10 +149,9 @@ export class ProfessionalDataComponent extends BaseService implements OnChanges 
       return;
     }
     this.onComplete.emit();
-    this.highlightedSection.name = "none";
+    this.highlightedSection.name = 'none';
     this.highlightedSection.isDisable = false;
-    let _body: any = document.getElementsByTagName('BODY')[0];
-    _body.scrollTop = -1;
+    window.scrollTo(0, 0);
 
   }
 
@@ -182,8 +180,7 @@ export class ProfessionalDataComponent extends BaseService implements OnChanges 
 
   onPrevious() {
     this.highlightedSection.name = 'IndustryExposure';
-    let _body: any = document.getElementsByTagName('BODY')[0];
-    _body.scrollTop = -1;
+    window.scrollTo(0, 0);
   }
 
   onEdit() {
@@ -191,8 +188,7 @@ export class ProfessionalDataComponent extends BaseService implements OnChanges 
     this.highlightedSection.isDisable = true;
     this.isValid = true;
     this.showButton = false;
-    let _body: any = document.getElementsByTagName('BODY')[0];
-    _body.scrollTop = -1;
+    window.scrollTo(0, 0);
   }
 }
 

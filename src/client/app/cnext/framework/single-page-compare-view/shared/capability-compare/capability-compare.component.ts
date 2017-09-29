@@ -85,8 +85,7 @@ export class CapabilityCompareComponent  implements OnChanges {
   }
 
   onComplexitySelect(complexity:Complexity,capability:Capability) {
-    let _body: any = document.getElementsByTagName('BODY')[0];
-    _body.scrollTop = -1;
+    window.scrollTo(0, 0);
     if(this.isCandidate) {
     this.SelectedComplexity.emit(complexity);
     } else {

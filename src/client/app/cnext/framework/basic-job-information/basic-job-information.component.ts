@@ -208,8 +208,7 @@ export class BasicJobInformationComponent implements OnInit, OnChanges {
      this.jobPosterModel.industry = new Industry();
      }*/
 
-    let _body: any = document.getElementsByTagName('BODY')[0];
-    _body.scrollTop = -1;
+    window.scrollTo(0, 0);
   }
 
   onCancel() {
@@ -240,8 +239,7 @@ export class BasicJobInformationComponent implements OnInit, OnChanges {
     this.highlightedSection.name = 'JobProfile';
     this.showButton = false;
     this.disableButton = false;
-    let _body: any = document.getElementsByTagName('BODY')[0];
-    _body.scrollTop = -1;
+    window.scrollTo(0, 0);
   }
 }
 
