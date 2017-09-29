@@ -202,6 +202,7 @@ export class Messages {
   public static MSG_VERIFY_USER_3 = 'One Time Password(OTP) will be sent on following mobile number.';
   public static MSG_VERIFY_USER_4 = 'You are almost done! We need to verify your email id before you can start using the system.';
   public static MSG_EMAIL_NOT_MATCH = 'E-mail does not match.';
+  public static MSG_WEBSITE_SAME = 'Website is same as current website.';
   public static MSG_CHANGE_PASSWORD = 'Your password protects your account so password must be strong.' +
     'Changing your password will sign you out of all your devices, including your phone.' +
     'You will need to enter your new password on all your devices.';

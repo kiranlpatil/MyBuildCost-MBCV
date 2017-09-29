@@ -4,6 +4,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ValidationService} from "../../../shared/customvalidations/validation.service";
 import {ChangeCompanyWebsiteService} from "./change-company-website.service";
 import {ChangeCompanyWebsite} from "../../models/change-company-website";
+import {Messages} from "../../../shared/constants";
 
 
 @Component({
@@ -22,6 +23,7 @@ export class ChangeCompanyWebsiteComponent  {
   userForm: FormGroup;
   error_msg: string;
   isShowErrorMessage: boolean = true;
+  isWebsiteSame: boolean;
 
   constructor(private commonService: CommonService, private changeCompanyWebsiteService: ChangeCompanyWebsiteService,
               private messageService: MessageService, private formBuilder: FormBuilder) {
@@ -37,17 +39,19 @@ export class ChangeCompanyWebsiteComponent  {
       this.model.current_website = changes.companyWebsite.currentValue;
     }
   }
-  isWebsiteSame(): boolean {
+  OnWebsiteSame(): boolean {
     return (this.model.current_website === this.model.new_company_website);
   }
 
   onSubmit() {
     this.model = this.userForm.value;
-    if (!this.isWebsiteSame()) {
+    if (!this.OnWebsiteSame()) {
       this.changeCompanyWebsiteService.changeCompanyWebsite(this.model)
         .subscribe(
           data => this.changeCompanyWebsiteSuccess(data),
           error => this.changeCompanyWebsiteFail(error));
+    }else {
+      this.isWebsiteSame=true;
     }
     document.body.scrollTop = 0;
   }
@@ -74,9 +78,9 @@ export class ChangeCompanyWebsiteComponent  {
       this.error_msg = error.err_msg;
     }
   }
-
-  goBack() {
-    this.commonService.goBack();
+  getMessages() {
+    return Messages;
   }
+
 
 }
