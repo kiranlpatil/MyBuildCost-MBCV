@@ -8,7 +8,7 @@
   </div>
 </div>
 <div class="modal-header">
-  <cn-print-screen [screenIdForPrint]="'printOverlayCompact'" [fileName]="'overlayview'"></cn-print-screen>
+  <cn-print-screen [screenIdForPrint]="'printOverlayCompact'" [fileName]="'overlayview'" [candidateId]="candiadteId" [jobId]="recruiterId"></cn-print-screen>
   <div *ngIf="typeOfView =='spa_job' && recruiter != undefined">
     <img src="/assets/framework/images/dashboard/profile.png" alt="User Profile"
          *ngIf="recruiter.company_logo==undefined"/>

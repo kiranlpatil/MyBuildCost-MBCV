@@ -1,9 +1,12 @@
 import {Component, Input, ViewChild, ElementRef} from "@angular/core";
 import * as html2canvas from "html2canvas";
 import {Message} from "../../../shared/models/message";
-import {Messages} from "../../../shared/constants";
+import {Messages, UsageActions, LocalStorage} from "../../../shared/constants";
 import {MessageService} from "../../../shared/services/message.service";
-//import * as jsPDF from "jspdf";
+import {UsageTrackingService} from "../usage-tracking.service";
+import {LocalStorageService} from "../../../shared/services/localstorage.service";
+import {ErrorService} from "../error.service";
+//import * as jsPDF from 'jspdf';
 
 @Component({
   moduleId: module.id,
@@ -16,19 +19,28 @@ export class PrintScreenComponent {
   @ViewChild('fileToDownload') fileToDownload:ElementRef;
   @Input() screenIdForPrint:string;
   @Input() fileName:string;
+  @Input() candidateId:string;
+  @Input() jobId:string;
 
-  constructor(private messageService: MessageService) {
+  constructor(private errorService:ErrorService, private messageService: MessageService,
+              private usageTrackingService:UsageTrackingService) {
 
   }
 
   createFile(_value:string) {
       html2canvas(document.getElementById(this.screenIdForPrint))
         .then((canvas:any) => {
-          let dataURL = canvas.toDataURL("image/jpeg");
+          let dataURL = canvas.toDataURL('image/jpeg');
           if (_value == 'img') {
             this.fileToDownload.nativeElement.href = dataURL;
             this.fileToDownload.nativeElement.download = this.fileName;
             this.fileToDownload.nativeElement.click();
+            if(this.screenIdForPrint == 'printProfileComparison') {
+              this.trackUsage(UsageActions.PRINT_COMPARISON_VIEW_BY_RECRUITER,undefined,undefined);
+            } else {
+              this.trackUsage(UsageActions.PRINT_OVERLAY_VIEW_BY_RECRUITER,this.candidateId,this.jobId);
+            }
+            //window.location.href = 'mailto:user@example.com?subject=Subject&body=Hi&Attach='+this.fileToDownload.nativeElement.download;
           } else {
             //doc.setFontSize(40);
             //doc.text(35, 25, "Octonyan loves jsPDF");
@@ -38,11 +50,18 @@ export class PrintScreenComponent {
           }
         })
         .catch((err:any) => {
-          var message = new Message();
+          let message = new Message();
           message.custom_message = Messages.MSG_ON_FILE_CREATION_FAILED;
           message.isError = true;
           this.messageService.message(message);
         });
   }
+  trackUsage(action:number,candidateId:string,jobId:string) {
+      let rcruiterId =  LocalStorageService.getLocalValue(LocalStorage.END_USER_ID);
+      this.usageTrackingService.addUsesTrackingData(action,rcruiterId, jobId, candidateId).subscribe(
+        data  => {
+          console.log(''+data);
+        }, error => this.errorService.onError(error));
+   }
 
 }
