@@ -66,6 +66,7 @@ export class Messages {
     'You may start using it immediately by clicking on Sign In!';
 
   public static MSG_SUCCESS_FOR_PROFILE_CREATION_STATUS: string = 'Your profile created successfully.';
+  public static MSG_SUCCESS_FOR_HIRING_MANAGER_JOB_CREATION_STATUS: string = 'Your changes are sent to recruiter now you will be notified by recruiter when job will be posted.';
   public static MSG_SUCCESS_FOR_JOB_POST_STATUS: string = 'You have successfully posted the new job. You can search for matching candidates for this job through your dashboard.';
   public static MSG_SUCCESS_FOR_FILE_DOWNLOAD: string = 'File has been downloaded successfully.';
   public static MSG_FOR_FILE_DOWNLOAD: string = 'Generating the file this may take few minutes.';
@@ -380,6 +381,7 @@ export class ValueConstant {
 
 export class API {
   public static NOTIFICATION = 'notification';
+  public static SEND_CONFIRMATION_MAIL_TO_RECRUITER = 'response_to_recruiter';
   public static USAGETRACKING = 'usagetracking';
   public static SEND_MAIL = 'sendmail';
   public static SEND_TO_ADMIN_MAIL = 'sendmailtoadmin';

@@ -43,6 +43,15 @@
       padding: 10px 10px 0;
       position: relative;
 
+      .glyphicon-share {
+        color: $theme-color;
+        position: absolute;
+        right: 32px;
+        top: 9px;
+        width: auto;
+        z-index: 1;
+      }
+
       &:hover {
         .glyphicon-trash {
           display: block;
@@ -100,7 +109,7 @@
       font-weight: bold;
       margin: 0 0 5px;
       text-transform: capitalize;
-      width: 90%;
+      width: calc(100% - 50px);
     }
 
     .contact-info {

@@ -1,5 +1,5 @@
-import JobProfileModel = require("./jobprofile.model");
-import {JobCountModel} from "./job-count.model";
+import JobProfileModel = require('./jobprofile.model');
+import {JobCountModel} from './job-count.model';
 export class Recruiter { // todo replace all the interface to class
   isRecruitingForself: boolean;
   company_name: string;

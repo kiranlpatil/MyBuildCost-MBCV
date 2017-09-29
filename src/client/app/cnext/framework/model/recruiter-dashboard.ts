@@ -1,6 +1,5 @@
-import {JobPosterModel} from "../../../user/models/jobPoster";
+import {JobPosterModel} from '../../../user/models/jobPoster';
 export class RecruiterDashboard {
-
   //public candidateCountModel:RecruiterHeaderDetails;
   isRecruitingForself: boolean;
   about_company: string;
@@ -9,5 +8,4 @@ export class RecruiterDashboard {
   userId: string;
   _id: string;
   public postedJobs: JobPosterModel[] = new Array(0);
-
 }

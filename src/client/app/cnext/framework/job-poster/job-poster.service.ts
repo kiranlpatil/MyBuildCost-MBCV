@@ -34,4 +34,12 @@ export class JobPosterService extends BaseService {
       .catch(this.handleError);
   }
 
+  sendMailToRecruiter(job: JobPosterModel): Observable<any> {
+    var url = API.SEND_CONFIRMATION_MAIL_TO_RECRUITER + '/' + LocalStorageService.getLocalValue(LocalStorage.USER_ID);
+    var body = JSON.stringify(job);
+    debugger
+    return this.http.post(url, body)
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
 }

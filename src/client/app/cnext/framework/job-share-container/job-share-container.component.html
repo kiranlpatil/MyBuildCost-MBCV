@@ -1,0 +1,8 @@
+<cn-user-header [MainHeaderMenuHideShow]="'hiringManger'"></cn-user-header>
+
+<div  *ngIf="!isJobPosted">
+  <cn-job-poster [noOfJobPosted]="0" [currentjobId]="jobId" [role]="'hiringManger'"></cn-job-poster>
+</div>
+<div  *ngIf="isJobPosted">
+  <p>Currently this job is posted so now you are unable to edit this job.</p>
+</div>

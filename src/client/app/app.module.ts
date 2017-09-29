@@ -163,6 +163,8 @@ import {SharedService} from "./shared/services/shared-service";
 import {ShareContainerComponent} from "./cnext/framework/share-container/share-container.component";
 import {ShareContainerService} from "./cnext/framework/share-container/share-container.service";
 import {UsageDetailsComponent} from "./cnext/framework/admin-dashboard/usage-details/usage-details.component";
+import {JobShareContainerComponent} from "./cnext/framework/job-share-container/job-share-container.component";
+import {JobShareContainerService} from "./cnext/framework/job-share-container/job-share-container.service";
 //C-NEXT IMPORTS
 
 
@@ -232,6 +234,7 @@ import {UsageDetailsComponent} from "./cnext/framework/admin-dashboard/usage-det
     AcademicDetailComponent,
     CertificationAccreditationComponent,
     AwardsComponent,
+    JobShareContainerComponent,
     DescriptionFieldComponent,
     MoreAboutMyselfComponent,
     FilterComponent,
@@ -324,6 +327,7 @@ import {UsageDetailsComponent} from "./cnext/framework/admin-dashboard/usage-det
     ProfileDetailsService,
     AboutCandidateService,
     JobPosterService,
+    JobShareContainerService,
     ProfessionalDetailsService,
     CandidateAcademyDetailService,
     CandidateProfileService,

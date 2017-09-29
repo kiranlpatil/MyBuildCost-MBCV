@@ -169,8 +169,8 @@ class AuthInterceptor {
       }));
   }
 
-  issueTokenWithUid(user: any) {
-    console.log("In issue token");
+  issueTokenWithUid(user: any,role?:string) {
+    console.log("In issue token",role);
     console.log('user', JSON.stringify(user));
     console.log('user', user.isCandidate);
     var issuer: string;
@@ -186,6 +186,7 @@ class AuthInterceptor {
     var token = jwt.encode({
       iss: issuer, // issue
       exp: expires.getTime(), // expiration time
+      role: role
     }, ConstVariables.AUTHENTICATION_JWT_KEY);
     return token;
   }

@@ -7,9 +7,12 @@ import UserRepository = require('../dataaccess/repository/user.repository');
 import RecruiterRepository = require('../dataaccess/repository/recruiter.repository');
 import JobProfileModel = require('../dataaccess/model/jobprofile.model');
 import CandidateRepository = require('../dataaccess/repository/candidate.repository');
+import * as fs from 'fs';
 import CapabilityMatrixService = require('./capbility-matrix.builder');
 import IndustryModel = require('../dataaccess/model/industry.model');
 import IndustryRepository = require('../dataaccess/repository/industry.repository');
+import MailAttachments = require("../shared/sharedarray");
+import SendMailService = require("./sendmail.service");
 import RecruiterModel = require('../dataaccess/model/recruiter.model');
 import RecruiterClassModel = require('../dataaccess/model/recruiterClass.model');
 import CandidateService = require('./candidate.service');
@@ -309,6 +312,33 @@ class RecruiterService {
       postedJob[i].additionalKeySkills = postedJob[i].additionalProficiencies.toString().replace(/,/g, ' $');
     }
   }
+  sendMailToAdvisor(field: any, callback: (error: any, result: any) => void) {
+    var header1 = fs.readFileSync('./src/server/public/header1.html').toString();
+    var footer1 = fs.readFileSync('./src/server/public/footer1.html').toString();
+    var mailOptions = {
+      to: field.email_id,
+      subject: Messages.EMAIL_SUBJECT_RECRUITER_CONTACTED_YOU,
+      html: header1  + footer1, attachments: MailAttachments.AttachmentArray
+    }
+    var sendMailService = new SendMailService();
+    sendMailService.sendMail(mailOptions, callback);
+
+  }
+
+  sendMailToRecruiter(user:any,field: any, callback: (error: any, result: any) => void) {
+    var header1 = fs.readFileSync('./src/server/app/framework/public/header1.html').toString();
+    var content = fs.readFileSync('./src/server/app/framework/public/confirmation.mail.html').toString();
+    var footer1 = fs.readFileSync('./src/server/app/framework/public/footer1.html').toString();
+    content=content.replace('$job_title$', field.jobTitle);
+    var mailOptions = {
+      to: user.email,
+      subject: Messages.EMAIL_SUBJECT_RECRUITER_CONTACTED_YOU+field.jobTitle,
+      html: header1+content+ footer1, attachments: MailAttachments.AttachmentArray
+    }
+    var sendMailService = new SendMailService();
+    sendMailService.sendMail(mailOptions, callback);
+  }
+
 }
 
 Object.seal(RecruiterService);

@@ -37,6 +37,10 @@ class RecruiterSchema {
           type: Boolean,
           default: false
         },
+        isJobShared: {
+          type: Boolean,
+          default: false
+        },
         hideCompanyName: {
           type: Boolean,
           default: false

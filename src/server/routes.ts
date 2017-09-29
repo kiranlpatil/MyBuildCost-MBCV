@@ -36,10 +36,10 @@ export function init(app: express.Application) {
   app.post("/api/industryprofile", userController.profilecreate);
   //api calling fo professional data-lucky
   app.get("/api/realocation", this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, userController.getRealocation);
-  app.get("/api/education", this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, userController.getEducation);
+  app.get("/api/education", userController.getEducation);
   app.get("/api/experience", this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, userController.getExperience);
   app.get("/api/currentsalary", this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, userController.getCurrentSalary);
-  app.get("/api/noticeperiod", this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, userController.getNoticePeriod);
+  app.get("/api/noticeperiod",  userController.getNoticePeriod);
   app.get("/api/industryexposure", this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, userController.getIndustryExposure);
   app.get("/api/searchedcandidate/jobPosterModel", this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, userController.getSearchedCandidate);
 

@@ -27,6 +27,7 @@
         </ul>
       </div>
       <div class="panel clearfix" (click)="onJobClicked(item._id,item.isJobPosted)">
+        <span class="glyphicon glyphicon-share" title="This job is shared with hiring manager." *ngIf="item.isJobShared && !item.isJobPosted"></span>
         <div class="job-posted clearfix">
           <div class="col-xs-2 no-padding">
 

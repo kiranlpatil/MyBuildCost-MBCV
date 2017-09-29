@@ -63,6 +63,10 @@ class JobProfileSchema {
         type: Boolean,
         default: false
       },
+      isJobShared: {
+        type: Boolean,
+        default: false
+      },
       responsibility: {
         type: String
       },

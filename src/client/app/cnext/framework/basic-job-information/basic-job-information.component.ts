@@ -22,7 +22,7 @@ import {ErrorService} from "../error.service";
 export class BasicJobInformationComponent implements OnInit, OnChanges {
   @Input() jobPosterModel: any;
   @Input() highlightedSection: Section;
-  @Input() recruiter: RecruiterDashboard;
+  @Input() isRecruitingForSelf: boolean;
 
   @Output() onComplete = new EventEmitter();
   jobDiscriptionHeading:string = Headings.JOB_DISCRIPTION;

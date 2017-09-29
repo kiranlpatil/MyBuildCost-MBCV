@@ -28,6 +28,15 @@
   ul > li > a {
     color: $white;
   }
+
+  .glyphicon-log-out {
+    color: #fff;
+    cursor: pointer;
+    font-size: 24px;
+    position: fixed;
+    right: 25px;
+    top: 12px;
+  }
 }
 
 @media screen and (max-width: 767px) {
@@ -39,6 +48,10 @@
     }
     ul > li {
       margin-right: 15px;
+    }
+
+    .glyphicon-log-out {
+      right: 10px;
     }
   }
 }

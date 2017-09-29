@@ -15,20 +15,38 @@ class ShareService {
   }
 
   buildValuePortraitUrl(host:string, access_token:string, user:any, res:CandidateClassModel[], callback:(error:any, result:Share) => void) {
-    var actualUrl:string = 'value-portrait' + '/' + user._id + '?access_token=' + access_token;
-    //var urlForShare = host + 'value-portrait' + '/' + user._id + '?access_token=' + access_token;
+    let actualUrl:string = 'value-portrait' + '/' + user._id + '?access_token=' + access_token;
+    //let urlForShare = host + 'value-portrait' + '/' + user._id + '?access_token=' + access_token;
 
-    var _date = new Date();
-    var _miliSeconds:string = _date.getTime().toString();
+    let _date = new Date();
+    let _miliSeconds:string = _date.getTime().toString();
 
     this.shareDetails.first_name = user.first_name;
     this.shareDetails.last_name = user.last_name;
     this.shareDetails.isVisible = res[0].isVisible;
-    var _shortString:string = _miliSeconds;
+    let _shortString:string = _miliSeconds;
     this.shareDetails.shareUrl = host + 'share' + '/' + _shortString;
-    var _item:any = {
+    let _item:any = {
       shortUrl: _shortString,
       longUrl: actualUrl
+    };
+    this.shareLinkRepository.create(_item, (err, res) => {
+      if (err) {
+        callback(new Error(Messages.MSG_ERROR_IF_STORE_TO_SHARE_LINK_FAILED), null);
+      } else {
+        callback(null, this.shareDetails);
+      }
+    });
+  }
+  buildShareJobUrl(host:string, access_token:string, user:any,jobId:string ,callback:(error:any, result:Share) => void) {
+    let actualUrl:string = 'jobPost' + '/' + user._id +'/' + jobId + '?access_token=' + access_token;
+    let _date = new Date();
+    let _miliSeconds:string = _date.getTime().toString();
+    let _shortString:string = _miliSeconds+user._id;
+    this.shareDetails.shareUrl = host + 'editJob' + '/' + _shortString;
+    let _item:any = {
+      shortUrl: _shortString,
+      longUrl: actualUrl,
     };
     this.shareLinkRepository.create(_item, (err, res) => {
       if (err) {
