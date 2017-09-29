@@ -43,7 +43,6 @@ ts-node
 *.iml
 
 /tools/**/*.js
-dist
 dev
 docs
 lib

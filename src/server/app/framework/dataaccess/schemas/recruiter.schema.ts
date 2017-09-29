@@ -40,6 +40,13 @@ class RecruiterSchema {
           type: Boolean,
           default: false
         },
+        daysRemainingForExpiring: {
+          type: Number
+        },
+        isJobPostExpired: {
+          type: Boolean,
+          default: false
+        },
         hideCompanyName: {
           type: Boolean,
           default: false

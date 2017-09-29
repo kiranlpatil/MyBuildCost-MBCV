@@ -67,6 +67,27 @@
       @extend %text-ellipsis;
     }
 
+    .renew-job {
+      p > span {
+        padding: 0 32px 0 8px;
+        display: inline;
+      }
+
+      .expired,
+      .expired > span {
+        color: $light-red1;
+      }
+
+      .about-to-expire,
+      .about-to-expire > span {
+        color: $dark-orange;
+      }
+
+      .active > span {
+        color: $highlight;
+      }
+    }
+
     .job-posted > .col-xs-2 {
       font-size: 10px;
       margin-bottom: 10px;
@@ -214,6 +235,7 @@
     }
   }
 }
+
 
 @media only screen and (min-width: 1367px) {
   .job-list {

@@ -7,6 +7,7 @@ import CapabilityModel = require("./capability.model");
 interface JobProfileModel extends mongoose.Document {
   jobTitle: string;
   isJobPosted: boolean;
+  isJobPostExpired: boolean;
   hiringManager: string;
   department: string;
   education: string;
@@ -33,5 +34,6 @@ interface JobProfileModel extends mongoose.Document {
   capability:CapabilityModel[];
   keySkills:string;
   additionalKeySkills:string;
+  daysRemainingForExpiring: number;
 }
 export = JobProfileModel;

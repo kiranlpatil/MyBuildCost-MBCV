@@ -3,8 +3,9 @@ export class AppSettings {
   // public static IP = 'http://ee802b7f.ngrok.io';
   //public static IP = 'http://10.192.33.77:8080';
   //public static IP = 'http://52.10.145.87:3000';
+  public static IP = 'http://34.213.102.202:3000';
   // public static IP = 'app.jobmosis.com';
-   public static IP = '';
+  // public static IP = '';
 
 
   public static get API_ENDPOINT(): string {
@@ -33,6 +34,7 @@ export enum UsageActions  {
   REMOVED_FROM_NOT_INTERESTED,
   PRINT_COMPARISON_VIEW_BY_RECRUITER,
   PRINT_OVERLAY_VIEW_BY_RECRUITER,
+  RENEWED_JOB_POST_BY_RECRUITER,
   DEFAULT_VALUE = 999
   //append your new enum value at the end of the list DON'T MODIFY THE LIST
 }
@@ -298,6 +300,9 @@ export class Messages {
     'submitting, you can edit by clicking on relevant section ' +
     '<br/> It is recommended that you keep the settings to "Yes". If you wish a job change, You can <br/>' +
   'change this setting later.';
+
+  public static UNABLE_TO_RENEW_JOB_POST_MSG = 'Cannot renew your job post kindly click on "Clone" button to clone the same job';
+  public static RENEW_JOB_POST_MSG = 'Your job post has been expired to renew your job click on "Renew Job Post" button';
 
 }
 export class AdminPanel {

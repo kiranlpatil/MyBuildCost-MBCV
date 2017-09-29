@@ -165,7 +165,7 @@ export class JobPosterComponent implements OnInit, OnChanges {
     }
   }
 
-  postjob() {
+  postjob() { 
     this.showModalStyle = !this.showModalStyle;
     this.jobPosterModel.isJobPosted = true;
     this.jobPosterModel.postingDate = new Date();
@@ -176,9 +176,11 @@ export class JobPosterComponent implements OnInit, OnChanges {
       }, error => this.errorService.onError(error));
   }
 
-  updateJob() {
+  updateJob() { 
     this.jobPosterModel.postingDate = new Date();
     this.jobPosterModel.expiringDate = new Date((new Date().getTime() + ValueConstant.JOB__EXPIRIY_PERIOD));
+    this.jobPosterModel.daysRemainingForExpiring = ValueConstant.JOB__EXPIRIY_PERIOD;
+    this.jobPosterModel.isJobPostExpired = false;
     this.jobPostService.postJob(this.jobPosterModel).subscribe(
       data => {
         this.jobPosterModel._id = data.data.postedJobs[0]._id;

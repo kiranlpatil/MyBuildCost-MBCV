@@ -30,4 +30,6 @@ export class JobPosterModel {
   numberOfCandidatesInList: CandidatesInDiffList = new CandidatesInDiffList();
   releventIndustries: string[] = new Array(0);
   hideCompanyName: boolean;
+  daysRemainingForExpiring: number;
+  isJobPostExpired: boolean;
 }

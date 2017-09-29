@@ -1,10 +1,11 @@
-import {Component, EventEmitter, Input, OnChanges, OnDestroy, Output} from "@angular/core";
+import {Component, EventEmitter, Input, OnChanges, OnDestroy, Output, ElementRef, ViewChild} from "@angular/core";
 import {QCardsortBy} from "../../model/q-cardview-sortby";
 import {Router} from "@angular/router";
 import {RecruiterHeaderDetails} from "../../model/recuirterheaderdetails";
 import {ReferenceService} from "../../model/newClass";
 import {RecruiterDashboard} from "../../model/recruiter-dashboard";
 import {Button, Headings, ImagePath, Label, Messages, Tooltip} from "../../../../shared/constants";
+import {RenewJobPostService} from "../../../../user/services/renew-jobpost.service";
 
 
 @Component({
@@ -21,6 +22,7 @@ export class JobListerComponent implements  OnDestroy, OnChanges {
   @Input() recruiter: RecruiterDashboard;
   @Output() jobPostEventEmitter: EventEmitter<string> = new EventEmitter();
   @Output() jobListCloneSuccessEmitter: EventEmitter<boolean> = new EventEmitter();
+  @Output() selectedJobProfileEmitter: EventEmitter<string> = new EventEmitter();
   //public jobList:JobPosterModel[] = new Array(0);
   //public jobListToCheck:JobPosterModel[] = new Array(0);
   private selectedJobId:string;
@@ -31,7 +33,8 @@ export class JobListerComponent implements  OnDestroy, OnChanges {
   private initialMessageToDisplay: string= Tooltip.RECRUITER_ENTRY_MESSAGE;
   private dashboardWelcomeMessage: string= Tooltip.RECRUITER_DASHBOARD_MESSAGE;
   private qCardModel: QCardsortBy = new QCardsortBy();
-  constructor(private _router: Router, public refrence: ReferenceService) {
+
+  constructor(private _router: Router, public refrence: ReferenceService, private renewJobPostService: RenewJobPostService) {
     this.qCardModel.name = 'Date';
   }
 
@@ -94,6 +97,11 @@ export class JobListerComponent implements  OnDestroy, OnChanges {
 
   getImagePath() {
     return ImagePath;
+  }
+
+  renewJobPost(selectedJobProfile: any) {
+    this.renewJobPostService.onRenewJob(selectedJobProfile);
+    this.selectedJobProfileEmitter.emit(selectedJobProfile);
   }
 
 }

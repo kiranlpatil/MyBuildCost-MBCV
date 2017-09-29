@@ -5,7 +5,7 @@
       "name": "Jobmosis-staging"
     },
     "mail": {
-      "host":"http://52.10.145.87:3000/",
+      "host":"http://34.213.102.202:3000/",
       "MAIL_SENDER": "redminestatus@techprimelab.com",
       "MAIL_SENDER_PASSWORD": "Contactu$@tpl",
       "ADMIN_MAIL": "Jobmosis_TPL@techprimelab.com",

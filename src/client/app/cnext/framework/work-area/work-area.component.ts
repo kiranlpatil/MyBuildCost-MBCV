@@ -5,6 +5,8 @@ import {ImagePath, LocalStorage, Messages, Tooltip, ValueConstant} from "../../.
 import {LocalStorageService} from "../../../shared/services/localstorage.service";
 import {GuidedTourService} from "../guided-tour.service";
 import {ErrorService} from "../error.service";
+import {MessageService} from "../../../shared/services/message.service";
+import {Message} from "../../../shared/models/message";
 
 @Component({
   moduleId: module.id,
@@ -41,7 +43,8 @@ export class WorkAreaComponent implements OnInit,OnChanges {
   private guidedTourImgOverlayScreensCapabilitiesPath:string;
   private isGuideImg:boolean = false;
 
-  constructor(private guidedTourService:GuidedTourService, private errorService:ErrorService) {
+  constructor(private guidedTourService:GuidedTourService, private errorService:ErrorService,
+              private messageService: MessageService) {
 
   }
   ngOnInit() {
@@ -140,6 +143,7 @@ export class WorkAreaComponent implements OnInit,OnChanges {
   }
 
   onNextAction() {
+    let roleId:any[]=new Array(0);
     if(this.savedSelectedRoles.length === 0){
       if(this.isCandidate) {
         this.validationMessage = Messages.MSG_ERROR_VALIDATION_AREAS_WORKED_REQUIRED;
@@ -149,18 +153,30 @@ export class WorkAreaComponent implements OnInit,OnChanges {
       this.isValid = false;
       this.isInfoMessage = false;
       return;
+    } else {
+      this.selectedRoles =new Array(0);
+      for(let role of this.savedSelectedRoles){
+        let savetempRole =Object.assign({}, role);
+        this.selectedRoles.push(savetempRole);
+        roleId.push(savetempRole.code);
     }
-    this.selectedRoles=new Array(0);
-    for(let role of this.savedSelectedRoles){
-      let savetempRole =Object.assign({}, role);
-      this.selectedRoles.push(savetempRole);
+      if (roleId.indexOf("99999") != -1 && roleId.length === 1) {
+        this.messageService.message(new Message('Thank you for your interest in our Job post but currently we do not have your Area of Work, we will get back to you after building your Area of Work'));
+        return;
+      } /*else if (roleId.indexOf("10002") != -1 && roleId.length > 1) {
+        this.highlightedSection.name = 'Capabilities';
+        this.highlightedSection.isDisable = false;
+        this.onComplete.emit(this.selectedRoles);
+      }*/ else {
+        this.highlightedSection.name = 'Capabilities';
+        this.highlightedSection.isDisable = false;
+        this.onComplete.emit(this.selectedRoles);
+      }
     }
-    this.highlightedSection.name = 'Capabilities';
-    this.highlightedSection.isDisable = false;
-    this.onComplete.emit(this.selectedRoles);
+
   }
 
-  onSave() {
+  onSave() { 
     this.isValid = true;
     this.isInfoMessage = false;
     if(this.savedSelectedRoles.length == 0) {
@@ -185,7 +201,10 @@ export class WorkAreaComponent implements OnInit,OnChanges {
         }
         if(goNext) {
           this.onNext();
-        } else {
+        } else if (roleId.indexOf("99999") != -1 && roleId.length === 1) {
+          this.messageService.message(new Message('Thank you for your interest in our Job post but currently we do not have your Area of Work, we will get back to you after building your Area of Work'));
+          return;
+          } else {
           this.onNext();
         }
       } else {
