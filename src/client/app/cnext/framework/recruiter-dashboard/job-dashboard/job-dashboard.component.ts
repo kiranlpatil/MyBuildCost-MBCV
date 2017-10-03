@@ -212,7 +212,7 @@ export class JobDashboardComponent implements OnInit {
   closeJob() {
     this.showModalStyle = !this.showModalStyle;
   }
-//TODO: move this (performActionOnComparisonList) code to comaprison compoent  ->krishna code refactor
+//TODO: move this (performActionOnComparisonList) code to comaprison compoent  ->by krishna ghatul code refactor
   performActionOnComparisonList(data:any) {
     //console.log('---------------candidateQlistcandidateQlistcandidateQlist--------------------------',this.candidateQlist);
     if (data.action == 'Remove') {

@@ -86,7 +86,7 @@ export class QCardviewComponent implements OnChanges {
     this.isJobPostExpired=changes.isJobPostExpired.currentValue;
     }
   }
-
+//TODO: refactor below code proper ->use service for logic ->by krishna ghatul
   actionOnQCardFromParent(data:any) {
     var candidate:CandidateQCard;
     var isFound:boolean = false;

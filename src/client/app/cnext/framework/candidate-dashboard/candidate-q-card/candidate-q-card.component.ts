@@ -9,6 +9,8 @@ import {JobCompareViewComponent} from "../../single-page-compare-view/job-compar
 import {CandidateList} from "../../model/candidate-list";
 import {UsageTrackingService} from "../../usage-tracking.service";
 import {ErrorService} from "../../../../shared/services/error.service";
+import {SearchEvent} from "../../model/search-event";
+import {SearchEventCompare} from "../../model/search-event-compare";
 
 
 @Component({
@@ -61,19 +63,17 @@ export class CandidateQCardComponent implements OnInit {
 
   }
 
-  viewJob(jobId: string) {
+  viewJob(job: JobQcard) {
     if (this.type !== 'searchView') {
       this.usageTrackingService.addUsesTrackingData(UsageActions.VIEWED_JOB_PROFILE_BY_CANDIDATE,
         undefined, this.jobId,LocalStorageService.getLocalValue(LocalStorage.END_USER_ID) ).subscribe(
         data  => {
           console.log(''+data);
         }, error => this.errorService.onError(error));
-      if (jobId !== undefined) {
         this.checkForGuidedTour.isGuidedTourImgRequire();
-        LocalStorageService.setLocalValue(LocalStorage.CURRENT_JOB_POSTED_ID, jobId);
-        this.jobId = jobId;
+        LocalStorageService.setLocalValue(LocalStorage.CURRENT_JOB_POSTED_ID, job._id);
+        this.jobId = job._id;
         this.candidateId = LocalStorageService.getLocalValue(LocalStorage.END_USER_ID);
-      }
       this.showModalStyle = !this.showModalStyle;
     }
     if (this.type == 'searchView') {
@@ -82,12 +82,11 @@ export class CandidateQCardComponent implements OnInit {
         data  => {
           console.log(''+data);
         }, error => this.errorService.onError(error));
-      var data = {
-        'jobId': jobId,
-        'inCartStatus': this.inCartListedStatusForSearchView,
-        'inRejectedStatus': this.inRejectListedStatusForSearchView
-      };
-      this.jobComapare.emit(data);
+      let searchEventCompare:SearchEventCompare = new SearchEventCompare();
+      searchEventCompare.job = job;
+      searchEventCompare.inCartStatus = this.inCartListedStatusForSearchView;
+      searchEventCompare.inRejectedStatus = this.inRejectListedStatusForSearchView;
+      this.jobComapare.emit(searchEventCompare);
     }
   }
 
@@ -149,9 +148,11 @@ export class CandidateQCardComponent implements OnInit {
     return null;
   }
 
-  actionForSearchView(value:string, jobId:string) {
-    var data = {'name': value, 'jobId': jobId};
-    this.searchViewAction.emit(data);
+  actionForSearchView(value:string, job:JobQcard) {
+    let searchEvent:SearchEvent = new SearchEvent();
+    searchEvent.actionName = value;
+    searchEvent.job = job;
+    this.searchViewAction.emit(searchEvent);
   }
 
   findOutQCardStatus() {
