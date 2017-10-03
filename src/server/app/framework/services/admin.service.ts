@@ -95,8 +95,14 @@ class AdminService {
                     } else {
                       value++;
                       if (!result[i].isAdmin) {
-                        resu[0].keySkills = resu[0].proficiencies.toString().replace(/,/g, ' $');
-                        resu[0].capabilityMatrix = candidateService.loadCapabilitiDetails(resu[0].capability_matrix);
+                        if(resu[0].proficiencies.length > 0) {
+                          resu[0].keySkills = resu[0].proficiencies.toString().replace(/,/g, ' $');
+                        }
+
+                        if(resu[0].capability_matrix) {
+                          resu[0].capabilityMatrix = candidateService.loadCapabilitiDetails(resu[0].capability_matrix);
+                        }
+
                         result[i].data = resu[0];
                         candidates.push(result[i]);
                         if (value && result.length === value) {
@@ -230,7 +236,8 @@ class AdminService {
       let users: UsersClassModel = new UsersClassModel();
       let candidates: CandidateModelClass[] = new Array(0);
 
-      let regEx = new RegExp('^' + initial);
+      let regEx = new RegExp('^[' + initial.toLowerCase() + initial.toUpperCase() + ']');
+
       let findQuery = {
         'first_name': {
           $regex: regEx

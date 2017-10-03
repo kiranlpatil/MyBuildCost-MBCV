@@ -190,21 +190,21 @@ export function exportCandidateDetails(req: express.Request, res: express.Respon
             message: Messages.MSG_ERROR_SEPERATING_USER,
             code: 403
           });
-        } else {
-          adminService.generateCandidateDetailFile(resp, (err, respo) => {
-            if (err) {
-              next({
-                reason: Messages.MSG_ERROR_CREATING_EXCEL,//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
-                message: Messages.MSG_ERROR_CREATING_EXCEL,
-                code: 403
-              });
-            } else {
+          } else {
+            adminService.generateCandidateDetailFile(resp, (err, respo) => {
+              if (err) {
+                next({
+                  reason: Messages.MSG_ERROR_CREATING_EXCEL,//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
+                  message: Messages.MSG_ERROR_CREATING_EXCEL,
+                  code: 403
+                });
+              } else {
               //var file = './src/server/public/candidate.csv';
               var file = '/home/bitnami/apps/jobmosis-staging/c-next/dist/prod/server/public/candidate.csv';
-              res.download(file);
-            }
-          });
-        }
+                res.download(file);
+              }
+            });
+          }
       });
     } else {
       res.status(401).send({
@@ -235,19 +235,19 @@ export function exportRecruiterDetails(req: express.Request, res: express.Respon
             code: 403
           });
         } else {
-          adminService.generateRecruiterDetailFile(resp, (err, respo) => {
-            if (err) {
-              next({
-                reason: Messages.MSG_ERROR_CREATING_EXCEL,//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
-                message: Messages.MSG_ERROR_CREATING_EXCEL,
-                code: 403
-              });
-            } else {
+            adminService.generateRecruiterDetailFile(resp, (err, respo) => {
+              if (err) {
+                next({
+                  reason: Messages.MSG_ERROR_CREATING_EXCEL,//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
+                  message: Messages.MSG_ERROR_CREATING_EXCEL,
+                  code: 403
+                });
+              } else {
               //var file = './src/server/public/recruiter.csv';
               var file = '/home/bitnami/apps/jobmosis-staging/c-next/dist/prod/server/public/recruiter.csv';
-              res.download(file);
-            }
-          });
+                res.download(file);
+              }
+            });
         }
       });
     }
