@@ -60,9 +60,16 @@
               </div>
             </div>
             <div class="col-sm-12 no-padding renew-job">
-              <p class="active" *ngIf="item.daysRemainingForExpiring > 7" title="{{item.daysRemainingForExpiring}} days remaining for expiry"><span class="glyphicon glyphicon-refresh"></span>{{item.daysRemainingForExpiring}} days remaining for expiry</p>
-              <p class="about-to-expire" *ngIf="item.daysRemainingForExpiring <= 7 && item.daysRemainingForExpiring >= 1" title="{{item.daysRemainingForExpiring}} days remaining for expiry"><span class="glyphicon glyphicon-refresh"></span>{{item.daysRemainingForExpiring}} days remaining for expiry</p>
-              <p class="expired" *ngIf="item.daysRemainingForExpiring <= 0"><span class="glyphicon glyphicon-refresh" title="Expired"></span>Expired</p>
+              <div class="col-xs-2 no-padding">
+                <span *ngIf="item.daysRemainingForExpiring > 7" title="{{item.daysRemainingForExpiring}} days remaining for expiry" class="glyphicon glyphicon-refresh active" ></span>
+                <span class="glyphicon glyphicon-refresh about-to-expire" *ngIf="item.daysRemainingForExpiring <= 7 && item.daysRemainingForExpiring >= 1" title="{{item.daysRemainingForExpiring}} days remaining for expiry"></span>
+                <span class="glyphicon glyphicon-refresh expired" *ngIf="item.daysRemainingForExpiring <= 0" title="Expired"></span>
+              </div>
+              <div class="col-xs-10 padding-left15" [class.posted-job]="!item.isJobPosted">
+                <p class="active" *ngIf="item.daysRemainingForExpiring > 7" title="{{item.daysRemainingForExpiring}} days remaining for expiry">{{item.daysRemainingForExpiring}} days remaining for expiry</p>
+                <p class="about-to-expire" *ngIf="item.daysRemainingForExpiring <= 7 && item.daysRemainingForExpiring >= 1" title="{{item.daysRemainingForExpiring}} days remaining for expiry">{{item.daysRemainingForExpiring}} days remaining for expiry</p>
+                <p class="expired" *ngIf="item.daysRemainingForExpiring <= 0"><span class="glyphicon glyphicon-refresh" title="Expired"></span>Expired</p>
+              </div>
             </div>
           </div>
         </div>
