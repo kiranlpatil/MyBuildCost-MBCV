@@ -35,11 +35,20 @@
           </div>
           <div class="col-md-4 col-sm-4 padding-left5">
             <select class="select" formControlName="year" (change)="onFromYear($event.target.value)" required>
-              <option value="{{year}}" *ngFor="let year of yearList | minrange:toYear" >{{year}}</option>
+              <option value="{{year}}" *ngFor="let year of yearList | minrange:toYear">{{year}}</option>
             </select>
           </div>
         </div>
       </div>
+
+      <div class="col-sm-12 no-padding">
+        <div class="form-group">
+          <label>Presently Working</label>
+          <input type="checkbox" class="form-control" formControlName="isPresentlyWorking"
+                 (click)="onCheckClick($event.target.checked)"/>
+        </div>
+      </div>
+
 
       <div class="worked-to col-sm-12 no-padding">
         <div formGroupName="to">
@@ -47,19 +56,23 @@
             <label>To Date</label>
           </div>
           <div class="col-md-5 col-sm-4 padding-right5">
-            <select class="select" formControlName="month" required>
-              <option value ={{month}} *ngFor="let month of monthList" >{{month}}</option>
+            <select class="select" formControlName="month">
+              <option value={{month}} *ngFor="let month of monthList" [disabled]="isDisableToDate">{{month}}</option>
             </select>
           </div>
           <div class="col-md-4 col-sm-4 padding-left5">
-            <select class="select" formControlName="year" (change)="onToYear($event.target.value)" required>
-              <option value="{{year}}" *ngFor="let year of yearList | maxrange:fromYear" >{{year}}</option>
+            <select class="select" formControlName="year" (change)="onToYear($event.target.value)">
+              <option value="{{year}}" *ngFor="let year of yearList | maxrange:fromYear" [disabled]="isDisableToDate">
+                {{year}}
+              </option>
             </select>
           </div>
 
         </div>
       </div>
     </div>
+
+
   </div>
   <div class="right-content">
     <div>

@@ -87,10 +87,11 @@ export class EmploymentHistoryComponent {
         year: ['', Validators.required],
       }),
       to: this._fb.group({
-        month: ['', Validators.required],
-        year: ['', Validators.required],
+        month: [''],
+        year: [''],
       }),
-      remarks: ['']
+      remarks: [''],
+      isPresentlyWorking: ['']
     });
   }
 
@@ -158,8 +159,7 @@ export class EmploymentHistoryComponent {
     let empHistory = this.employeeHistory.value.employeeHistories;
     if(empHistory.length == 1){
       if (empHistory[0].companyName == '' && empHistory[0].designation == ''
-          && empHistory[0].from.month == '' && empHistory[0].from.year == ''
-          && empHistory[0].to.month == '' && empHistory[0].to.year == '') {
+        && empHistory[0].from.month == '' && empHistory[0].from.year == '') {  //ToDate Validation is removed when presently working selected
         if (type == 'next') {
           this.onNext();
         }
@@ -172,24 +172,22 @@ export class EmploymentHistoryComponent {
 
     for (let history of this.employeeHistory.value.employeeHistories) {
       if (history.companyName != '' && history.designation != ''
-          && history.from.month != '' && history.from.year != ''
-          && history.to.month != '' && history.to.year != '') {
+        && history.from.month != '' && history.from.year != '') {    //ToDate Validation is removed when presently working selected
 
-        if ((new Date(history.from.month + '-' + history.from.year) > new Date(history.to.month + '-' + history.to.year))) {
-          this.isValidservicePeriod = false;
-          return;
-        }else{
-          isDataValid = true;
-        }
-
+        isDataValid = true;
+        /* if((new Date(history.from.month +"-"+history.from.year) > new Date(history.to.month+"-"+history.to.year))) {
+           this.isValidservicePeriod = false;
+           return;
+         }else{
+           isDataValid = true;
+         }
+ */
 
       } else if (history.companyName != '' || history.designation != ''
-          || history.from.month != '' || history.from.year != ''
-          || history.to.month != '' || history.to.year != '') {
+        || history.from.month != '' || history.from.year != '') {     //ToDate Validation is removed when presently working selected
 
-        if (history.from.month == '' || history.from.year == ''
-            || history.to.month == '' || history.to.year == '' ||
-            (new Date(history.from.month + '-' + history.from.year) > new Date(history.to.month + '-' + history.to.year))) {
+        if (history.from.month == '' || history.from.year == '') {
+
           this.isValidservicePeriod = false;
         }
 
@@ -256,6 +254,9 @@ export class EmploymentHistoryComponent {
     window.scrollTo(0, 0);
   }
 
+  getMessages() {
+    return Messages;
+  }
 }
 
 export class EmpHis {
