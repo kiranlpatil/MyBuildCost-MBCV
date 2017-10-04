@@ -2,7 +2,7 @@
   "TplSeed": {
     "database": {
       "host":"127.0.0.1",
-      "name": "Jobmosis-staging"
+      "name": "c-next-backend"
     },
     "mail": {
       "host":"http://52.43.220.29:3000/",
