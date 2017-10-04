@@ -1,12 +1,12 @@
 {
   "static": {
     "urls": {
-      "/index.html": "4b569e1c5bc989b830b8a435e1d95db967141c5f",
+      "/index.html": "b8f752ef9a4c33c4d3f1e1f94427520aec9729cb",
       "/manifest.json": "c48a13fd12025ee09de4a6c086bfd562c37a7e14",
       "/service-worker.js": "13a16a93bb5f4c6649a4e926d4411493c51765fa",
-      "/js\\shims.js": "78cecb41e4c69801a2ca6f58b149f391f1b6401c",
-      "/js\\app.js": "b9612247da813731592308a5b312a882fcad9ee8",
       "/css\\main.css": "0d1c2bf8688371c9e34fa9b2bda55e290f71b7d7",
+      "/js\\app.js": "b9612247da813731592308a5b312a882fcad9ee8",
+      "/js\\shims.js": "78cecb41e4c69801a2ca6f58b149f391f1b6401c",
       "/assets\\c-next\\card-view\\close-grey.png": "5bf602ee74c0ce5d4ba559e313bb24b8ecd2d8e6",
       "/assets\\c-next\\card-view\\close-red.png": "a17ba7ae0e51da6518389d56c5ae88c0d1f7da6f",
       "/assets\\c-next\\card-view\\close-white.png": "939679ff267abca129a082ceeeb337745a240488",
@@ -157,6 +157,8 @@
       "/assets\\c-next\\guided-tour\\tour-for-desktop\\candidate_overlay-screens-key-skills.jpg": "28528911dd98ff9cdea9b78f659f9167b1492ba0",
       "/assets\\c-next\\guided-tour\\tour-for-desktop\\candidate_overlay-screens-profile.jpg": "6040e35e1a0c51b78df298a7a76cac843f99587e",
       "/assets\\c-next\\guided-tour\\tour-for-desktop\\candidate_overlay-screens-stack-view.jpg": "609ff98287a9beb285319aae0774c9d7ba2c780c",
+      "/assets\\framework\\images\\close\\close-black.svg": "208a38534329c519265c642652695aa009b6ffe3",
+      "/assets\\framework\\images\\close\\close.svg": "e53e91fdcd2dbd7c4c29714d4aaf1b1a1ec8cd99",
       "/assets\\framework\\images\\dashboard\\3dots.png": "e6f9b49808fc453a51f2e182c7c113bfe345dc93",
       "/assets\\framework\\images\\dashboard\\admin-profile.png": "acc217158433794df628175f1b58ca7b836b014d",
       "/assets\\framework\\images\\dashboard\\bg.png": "4a82a31935ca49d2f8fc881c753058382e69301e",
@@ -178,11 +180,10 @@
       "/assets\\framework\\images\\dashboard\\search.png": "c70feb48c36c822a93dfc78395a792704d9f5e9a",
       "/assets\\framework\\images\\dashboard\\shortlist.png": "11778b3119ca37ece8988b7a6e82b07c8afd36ba",
       "/assets\\framework\\images\\dashboard\\up-arrow.png": "44a2065e841c3dc96ec931db59753bb3df64ebf6",
-      "/assets\\framework\\images\\close\\close-black.svg": "208a38534329c519265c642652695aa009b6ffe3",
-      "/assets\\framework\\images\\close\\close.svg": "e53e91fdcd2dbd7c4c29714d4aaf1b1a1ec8cd99",
       "/assets\\framework\\images\\footer\\fb.svg": "894f29c4cc0c7623dca80e7def7c3b55b1c5cd6c",
       "/assets\\framework\\images\\footer\\google-plus.svg": "0dc7788db6bc7a66a3373f5fee24bf6bbfec65ae",
       "/assets\\framework\\images\\footer\\linked-in.svg": "556f9a947a4a2e263f863e9f91c919b478eb120f",
+      "/assets\\framework\\images\\form\\drop-down.png": "a0e51294d082f8eccf10c2d1d6c843cfb862f55c",
       "/assets\\framework\\images\\header\\back-arrow.svg": "77b78706a63a85250fd378eb2ad00c834b0b138f",
       "/assets\\framework\\images\\header\\notification-color.svg": "05b4ee04bf21035e573adf4bc06204745cbf2d49",
       "/assets\\framework\\images\\header\\notification.svg": "ca6acf86e3ebab0fd6361e1a87d1e35d62cc628a",
@@ -216,7 +217,6 @@
       "/assets\\framework\\images\\navbar\\logout.svg": "2433b5a41f310a1d4453ae5c0bbc1b1c5224c5d2",
       "/assets\\framework\\images\\navbar\\profile.svg": "4e1120c0af37240726c93e936531993234d546f2",
       "/assets\\framework\\images\\navbar\\settings.svg": "4f294f31679d683dd980f29e7ab9b90a747d3312",
-      "/assets\\framework\\images\\form\\drop-down.png": "a0e51294d082f8eccf10c2d1d6c843cfb862f55c",
       "/assets\\framework\\images\\notification\\notification.svg": "0edaeed1560612b6f06030bf18c53fb7ac9201c6",
       "/assets\\framework\\images\\page_background\\page-bg.png": "e5edac6bd81edfb74c880503133558481f89a03d"
     }
