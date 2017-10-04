@@ -8,7 +8,6 @@
   </div>
 </div>
 <div class="modal-header">
-  <cn-print-screen [screenIdForPrint]="'printOverlayCompact'" [fileName]="'overlayview'" [candidateId]="candiadteId" [jobId]="recruiterId"></cn-print-screen>
   <div *ngIf="typeOfView =='spa_job' && recruiter != undefined">
     <img src="/assets/framework/images/dashboard/profile.png" alt="User Profile"
          *ngIf="recruiter.company_logo==undefined"/>
@@ -119,8 +118,7 @@
   <div class="col-sm-12 no-padding">
     <section class="container-fluid one-page-summary" *ngIf="data != undefined && typeOfView =='spa_job'">
     <div class="left-container">
-        <section class=" ">
-          <div class="col-sm-3 left-content">
+      <div class="col-sm-3 left-content">
             <div>
               <div class="basic-description" *ngIf="recruiter != undefined">
 
@@ -261,8 +259,7 @@
                <cn-contact-details [recruiter]="recruiter"></cn-contact-details>
              </div>&ndash;&gt;-->
           </div>
-        </section>
-      </div>
+    </div>
     </section>
   </div>
   <div *ngIf="data && (typeOfView =='spa_job' || typeOfView =='spa_candidate')">

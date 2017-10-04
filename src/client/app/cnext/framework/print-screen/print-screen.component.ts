@@ -1,11 +1,11 @@
-import {Component, Input, ViewChild, ElementRef} from "@angular/core";
-import * as html2canvas from "html2canvas";
-import {Message} from "../../../shared/models/message";
-import {Messages, UsageActions, LocalStorage} from "../../../shared/constants";
-import {MessageService} from "../../../shared/services/message.service";
-import {UsageTrackingService} from "../usage-tracking.service";
-import {LocalStorageService} from "../../../shared/services/localstorage.service";
-import {ErrorService} from "../../../shared/services/error.service";
+import {Component, Input, ViewChild, ElementRef} from '@angular/core';
+import * as html2canvas from 'html2canvas';
+import {Message} from '../../../shared/models/message';
+import {Messages, UsageActions, LocalStorage} from '../../../shared/constants';
+import {MessageService} from '../../../shared/services/message.service';
+import {UsageTrackingService} from '../usage-tracking.service';
+import {LocalStorageService} from '../../../shared/services/localstorage.service';
+import {ErrorService} from '../../../shared/services/error.service';
 //import * as jsPDF from 'jspdf';
 
 @Component({
@@ -28,14 +28,15 @@ export class PrintScreenComponent {
   }
 
   createFile(_value:string) {
+      window.scrollTo(0,0);
       html2canvas(document.getElementById(this.screenIdForPrint))
         .then((canvas:any) => {
           let dataURL = canvas.toDataURL('image/jpeg');
-          if (_value == 'img') {
+          if (_value === 'img') {
             this.fileToDownload.nativeElement.href = dataURL;
             this.fileToDownload.nativeElement.download = this.fileName;
             this.fileToDownload.nativeElement.click();
-            if(this.screenIdForPrint == 'printProfileComparison') {
+            if(this.screenIdForPrint === 'Candidate-Profile-Comparision') {
               this.trackUsage(UsageActions.PRINT_COMPARISON_VIEW_BY_RECRUITER,undefined,undefined);
             } else {
               this.trackUsage(UsageActions.PRINT_OVERLAY_VIEW_BY_RECRUITER,this.candidateId,this.jobId);

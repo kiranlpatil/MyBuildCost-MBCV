@@ -293,6 +293,13 @@
     right: 53px;
     top: 142px;
     z-index: 99;
+    span {
+      background: url(../assets/c-next/card-view/sprite.png) no-repeat -148px -613px;
+      width: 32px !important;
+      height: 32px;
+      position: absolute;
+      margin: -3px -25px;
+    }
   }
 }
 
