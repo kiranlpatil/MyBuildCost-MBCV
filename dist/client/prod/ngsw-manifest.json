@@ -1,11 +1,11 @@
 {
   "static": {
     "urls": {
-      "/index.html": "43405f8e1aee182416e30b4e3f2522ce6fcb408d",
+      "/index.html": "367cc34192578817e424fdbe5a62763d396c585d",
       "/manifest.json": "c48a13fd12025ee09de4a6c086bfd562c37a7e14",
       "/service-worker.js": "13a16a93bb5f4c6649a4e926d4411493c51765fa",
-      "/css\\main.css": "0d1c2bf8688371c9e34fa9b2bda55e290f71b7d7",
-      "/js\\app.js": "e31787fd4c6ef232b88d4c20084e28e85bdb3d83",
+      "/css\\main.css": "220ea4bf8c45a892d0689957219527ee484511ff",
+      "/js\\app.js": "9c49227cc310c2954e3bbe890afdc82528900cf9",
       "/js\\shims.js": "78cecb41e4c69801a2ca6f58b149f391f1b6401c",
       "/assets\\c-next\\card-view\\close-grey.png": "5bf602ee74c0ce5d4ba559e313bb24b8ecd2d8e6",
       "/assets\\c-next\\card-view\\close-red.png": "a17ba7ae0e51da6518389d56c5ae88c0d1f7da6f",
