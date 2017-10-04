@@ -42,6 +42,8 @@ ts-node
 dist
 .idea
 *.iml
+clientErrorLogs
+package-lock.json
 
 /tools/**/*.js
 dev
