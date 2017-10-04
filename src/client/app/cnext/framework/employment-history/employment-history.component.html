@@ -16,7 +16,8 @@
                     (click)="removeEmployeeHistory(i)"></span>
               </div>
               <div class="panel-body" [formGroupName]="i">
-                <cn-employee-history [group]="employeeHistory.controls.employeeHistories.controls[i]" [submitStatus] = "submitStatus"></cn-employee-history>
+                <cn-employee-history [group]="employeeHistory.controls.employeeHistories.controls[i]"
+                                     [submitStatus]="submitStatus"></cn-employee-history>
               </div>
             </div>
           </div>
@@ -74,7 +75,10 @@
             <div *ngIf="i == 0">
               <li>
                 <p>{{item.designation}} at {{item.companyName}} </p>
-                <p>From {{item.from.month}} {{item.from.year}} to {{item.to.month}} {{item.to.year}}</p>
+                <p *ngIf="!item.isPresentlyWorking">From {{item.from.month}} {{item.from.year}} to {{item.to.month}}
+                  {{item.to.year}}</p>
+                <p *ngIf="item.isPresentlyWorking">From {{item.from.month}} {{item.from.year}} |
+                  {{getMessages().MSG_PRESENTLY_WORKING}}</p>
               </li>
             </div>
           </div>

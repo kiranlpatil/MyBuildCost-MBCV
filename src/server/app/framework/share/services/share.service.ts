@@ -64,6 +64,9 @@ class ShareService {
   retrieveUrl(field:any, callback:(error:any, result:any) => void) {
     this.shareLinkRepository.retrieveWithoutLean(field, callback);
   }
+  findOneAndUpdate(field:any, callback:(error:any, result:any) => void) {
+    this.shareLinkRepository.findOneAndUpdate(field,{'isJobPosted':true},{new: true} ,callback);
+  }
 
 }
 //Object.seal(ShareService);

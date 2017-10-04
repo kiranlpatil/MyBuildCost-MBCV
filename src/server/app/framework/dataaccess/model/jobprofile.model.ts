@@ -6,6 +6,7 @@ import CapabilityModel = require("./capability.model");
 
 interface JobProfileModel extends mongoose.Document {
   jobTitle: string;
+  sharedLink: string;
   isJobPosted: boolean;
   isJobPostExpired: boolean;
   isJobShared: boolean;

@@ -17,6 +17,7 @@ import {Share} from "../model/share";
 import {ShareService} from "../share/share.service";
 import {Message} from "../../../shared/models/message";
 import {MessageService} from "../../../shared/services/message.service";
+import {JobShareContainerService} from "../job-share-container/job-share-container.service";
 
 @Component({
   moduleId: module.id,
@@ -46,7 +47,6 @@ export class JobPosterComponent implements OnInit, OnChanges {
   private setCapabilityMatrix: boolean = true;
   private isShowComplexity: boolean = false;
   private isShowRoleList: boolean = false;
-  private isshow: boolean = false;
   private isShowIndustryList: boolean = false;
   private isShowCapability: boolean = false;
   private isShowProficiency: boolean = false;
@@ -69,11 +69,11 @@ export class JobPosterComponent implements OnInit, OnChanges {
   private highlightedSection: Section = new Section();
   private selectedJobTitle:string;
   private selectedJobId:string;
-  private sharedLink:string;
   private isCloneButtonClicked:boolean;
   private share=new Share();
   constructor(private profileCreatorService: CandidateProfileService,
               private shareService:ShareService,
+              private jobshareContainerService:JobShareContainerService,
               private messageService: MessageService,
               private recruiterDashboardService: RecruiterDashboardService,
               private errorService: ErrorService,
@@ -183,7 +183,7 @@ export class JobPosterComponent implements OnInit, OnChanges {
     this.jobPosterModel.expiringDate = new Date((new Date().getTime() + ValueConstant.JOB__EXPIRIY_PERIOD));
     this.jobPostService.postJob(this.jobPosterModel).subscribe(
       data => {
-        this.onSuccess(data.data.postedJobs[0]._id);
+        this.onSuccess(data.data.postedJobs[0]);
       }, error => this.errorService.onError(error));
   }
 
@@ -203,10 +203,16 @@ export class JobPosterComponent implements OnInit, OnChanges {
       }, error => this.errorService.onError(error));
   }
 
-  onSuccess(jobId: string) {
-    if (jobId !== undefined) {
-      LocalStorageService.setLocalValue(LocalStorage.CURRENT_JOB_POSTED_ID, jobId);
-      this._router.navigate(['jobdashboard/', jobId]);
+  onSuccess(jobModel: JobPosterModel) {
+    if (jobModel._id !== undefined) {
+      if(jobModel.isJobShared) {
+        this.jobshareContainerService.updateUrl(jobModel.sharedLink.split('/')[4]).subscribe(
+          data => {
+            console.log('data',data);
+          }, error => this.errorService.onError(error));
+      }
+      LocalStorageService.setLocalValue(LocalStorage.CURRENT_JOB_POSTED_ID, jobModel._id);
+      this._router.navigate(['jobdashboard/', jobModel._id]);
     }
   }
 
@@ -239,27 +245,26 @@ export class JobPosterComponent implements OnInit, OnChanges {
 
   buildJobShareUrl() {
    if(this.jobPosterModel && this.jobPosterModel._id) {
-     this.shareService.buildJobShareUrl(this.jobPosterModel._id)
-       .subscribe(
-         (data:Share) => {
-           this.share=data;
-           this.sharedLink=data.shareUrl;
-           this.isshow=true;
-           this.jobPosterModel.isJobShared=true;
-           this.updateJob();
-           if(this.sharedLink) {
-             //document.getElementById('mail_link').click();
-            // let link='<a href='+this.sharedLink+'>JOB EDIT</a>';
-             window.location.href = 'mailto:user@example.com?subject=Subject&body='+this.sharedLink;
-
-             console.log('linkclicked',this.sharedLink);
+     if(!this.jobPosterModel.isJobShared) {
+       this.shareService.buildJobShareUrl(this.jobPosterModel._id)
+         .subscribe(
+           (data: Share) => {
+             this.share = data;
+             this.jobPosterModel.sharedLink = data.shareUrl;
+             this.jobPosterModel.isJobShared = true;
+             this.updateJob();
+             if (this.jobPosterModel.sharedLink) {
+               //document.getElementById('mail_link').click();
+               // let link='<a href='+this.sharedLink+'>JOB EDIT</a>';
+               window.location.href = 'mailto:user@example.com?subject=Subject&body=' + this.jobPosterModel.sharedLink;
+             }
+             console.log('data', data);
+           },
+           error => {
+             this.errorService.onError(error);
            }
-           console.log('data',data);
-         },
-         error=> {
-           this.errorService.onError(error);
-         }
-       );
+         );
+     }
    }else {
      console.log('You havent created job yet');
    }

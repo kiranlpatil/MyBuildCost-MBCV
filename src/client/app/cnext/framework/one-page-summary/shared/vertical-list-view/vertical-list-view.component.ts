@@ -1,4 +1,5 @@
-import { Component, Input } from "@angular/core";
+import {Component, Input} from "@angular/core";
+import {Messages} from "../../../../../shared/constants";
 
 @Component({
   moduleId: module.id,
@@ -14,4 +15,8 @@ export class VericalListViewComponent {
   @Input() calledFrom: string = '';
    readMore: boolean[] = new Array();
   isReadMore: boolean[] = new Array();
+
+  getMessages() {
+    return Messages;
+  }
 }

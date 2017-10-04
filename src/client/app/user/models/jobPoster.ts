@@ -4,6 +4,7 @@ import {CandidatesInDiffList} from "./candidatesinDiffList";
 export class JobPosterModel {
   _id: string;
   recruiterId: string;
+  sharedLink: string;
   jobTitle: string = '';
   hiringManager: string = '';
   department: string = '';

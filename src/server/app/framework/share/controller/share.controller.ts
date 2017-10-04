@@ -70,6 +70,23 @@ class ShareController {
     }
   }
 
+  resetActualUrlForShare(req:express.Request, res:express.Response) {
+    try {
+      let shareService:ShareService = new ShareService();
+      let shortUrl = req.params.shortUrl;
+      let query:any = {'shortUrl': shortUrl.toString()};
+      shareService.findOneAndUpdate(query, (err, response) => {
+        if (err) {
+          res.status(500).send(err);
+        } else {
+          res.status(200).send(response);
+        }
+      });
+    } catch (e) {
+      res.status(500).send({message: e.message});
+    }
+  }
+
 }
 
 export = ShareController;

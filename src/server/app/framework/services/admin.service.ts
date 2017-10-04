@@ -204,7 +204,7 @@ class AdminService {
                   value++;
                   resu[0].data = result[i];
                   recruiters.push(resu[0]);
-                  if (value && result.length == value) {
+                  if (value && result.length === value) {
                     users.recruiter = recruiters;
                     callback(null, users);
                   }

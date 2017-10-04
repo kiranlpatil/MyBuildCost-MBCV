@@ -1,8 +1,8 @@
-import {Component, OnInit, Input} from "@angular/core";
+import {Component, Input, OnInit} from "@angular/core";
 import {CandidateProfileService} from "../../candidate-profile/candidate-profile.service";
 import {Candidate} from "../../../../user/models/candidate";
 import {ErrorService} from "../../../../shared/services/error.service";
-import {LocalStorage} from "../../../../shared/constants";
+import {LocalStorage, Messages} from "../../../../shared/constants";
 import {LocalStorageService} from "../../../../shared/services/localstorage.service";
 
 @Component({
@@ -45,6 +45,10 @@ private isCandidate:boolean;
     }
 
     return candidate;
+  }
+
+  getMessages() {
+    return Messages;
   }
 
 }

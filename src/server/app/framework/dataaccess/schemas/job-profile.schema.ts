@@ -18,6 +18,9 @@ class JobProfileSchema {
       jobTitle: {
         type: String
       },
+      sharedLink: {
+        type: String
+      },
       hiringManager: {
         type: String
       },
