@@ -305,9 +305,16 @@ class RecruiterService {
   loadCapbilityAndKeySkills(postedJob: JobProfileModel[]) {
     let candidateService = new CandidateService();
     for (let i = 0; i < postedJob.length; i++) {
-      postedJob[i].keySkills = postedJob[i].proficiencies.toString().replace(/,/g, ' $');
-      postedJob[i].additionalKeySkills = postedJob[i].additionalProficiencies.toString().replace(/,/g, ' $');
-      postedJob[i].capabilityMatrix = candidateService.loadCapabilitiDetails(postedJob[i].capability_matrix);
+      if(postedJob[i].proficiencies.length > 0){
+        postedJob[i].keySkills = postedJob[i].proficiencies.toString().replace(/,/g, ' $');
+      }
+      if(postedJob[i].additionalProficiencies.length > 0) {
+        postedJob[i].additionalKeySkills = postedJob[i].additionalProficiencies.toString().replace(/,/g, ' $');
+      }
+      if(postedJob[i].capability_matrix) {
+        postedJob[i].capabilityMatrix = candidateService.loadCapabilitiDetails(postedJob[i].capability_matrix);
+      }
+
     }
     return postedJob;
   }

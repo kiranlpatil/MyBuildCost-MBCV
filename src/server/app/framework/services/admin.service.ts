@@ -123,7 +123,6 @@ class AdminService {
               };
 
               for (let i = 0; i < result.length; i++) {
-                if (!result[i].isCandidate) {
                   recruiterService.retrieveWithLean({'userId': new mongoose.Types.ObjectId(result[i]._id)}, recruiterFields, (error, resu) => {
                     if (error) {
                       callback(error, null);
@@ -140,7 +139,6 @@ class AdminService {
                       }
                     }
                   });
-                }
               }
             }
           }
