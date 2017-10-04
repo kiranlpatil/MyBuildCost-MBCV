@@ -46,12 +46,12 @@
           <span *ngIf="recruiter.data && recruiter.data.postedJobs">{{recruiter.data.postedJobs.length}}</span>
         </li>
         <li>
-          <div *ngIf="recruiter.isActivated"><span class="activated" title="Activated"></span><span>Active</span></div>
-          <div *ngIf="!recruiter.isActivated"><span class="not-activated" title="Deactivated"></span><span>Deactivated</span></div>
+          <div *ngIf="recruiter.isActivated"><span class="activated" title="User account is active."></span><span>Active</span></div>
+          <div *ngIf="!recruiter.isActivated"><span class="not-activated" title="User account is inactive."></span><span>Deactivated</span></div>
         </li>
         <li>
-          <button *ngIf="recruiter.isActivated" class="btn-danger btn-custom" (click)="updateDetail(i,recruiter,recruiter.isActivated)">Deactivate</button>
-          <button *ngIf="!recruiter.isActivated" class="btn-primary btn-custom" (click)="updateDetail(i,recruiter,recruiter.isActivated)">Activate</button>
+          <button *ngIf="recruiter.isActivated" class="btn-danger btn-custom" (click)="updateDetail(i,recruiter,recruiter.isActivated)" title="Click to deactivate this account.">Deactivate</button>
+          <button *ngIf="!recruiter.isActivated" class="btn-primary btn-custom" (click)="updateDetail(i,recruiter,recruiter.isActivated)" title="Click to activate this account">Activate</button>
         </li>
       </ul>
     </div>

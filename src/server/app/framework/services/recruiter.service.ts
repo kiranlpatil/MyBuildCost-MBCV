@@ -315,6 +315,10 @@ class RecruiterService {
         postedJob[i].capabilityMatrix = candidateService.loadCapabilitiDetails(postedJob[i].capability_matrix);
       }
 
+      if(postedJob[i].industry.roles.length > 0) {
+        postedJob[i].roles = candidateService.loadRoles(postedJob[i].industry.roles);
+      }
+
     }
     return postedJob;
   }

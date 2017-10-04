@@ -758,6 +758,14 @@ class CandidateService {
     return capabilitiesArray;
   }
 
+  loadRoles(roles: any[]) {
+    let selectedRoles : string[] = new Array();
+    for(let role of roles) {
+      selectedRoles.push(role.name);
+    }
+    return selectedRoles;
+  }
+
   getTotalCandidateCount(callback: (error: any, result: any) => void) {
     let query = {};
     this.candidateRepository.getCount(query, (err, result) => {
