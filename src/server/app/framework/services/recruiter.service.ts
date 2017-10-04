@@ -347,6 +347,17 @@ class RecruiterService {
     sendMailService.sendMail(mailOptions, callback);
   }
 
+  getTotalRecruiterCount(callback: (error: any, result: any) => void) {
+    let query = {};
+    this.recruiterRepository.getCount(query, (err, result) => {
+      if (err) {
+        callback(err, null);
+      } else {
+        callback(err, result);
+      }
+    });
+  }
+
 }
 
 Object.seal(RecruiterService);

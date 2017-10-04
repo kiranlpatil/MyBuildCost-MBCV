@@ -47,9 +47,9 @@ class AdminService {
       let findQuery = new Object();
 
       if (userType == 'candidate') {
-        findQuery = {'isCandidate': true};
+        findQuery = {'isCandidate': true, 'isAdmin': false};
       } else {
-        findQuery = {'isCandidate': false};
+        findQuery = {'isCandidate': false, 'isAdmin': false};
       }
 
       let included_fields = {
@@ -59,7 +59,6 @@ class AdminService {
         'mobile_number': 1,
         'email': 1,
         'isCandidate': 1,
-        'isAdmin': 1,
         'isActivated': 1
       };
       let sortingQuery = {'first_name': 1, 'last_name': 1};
@@ -88,37 +87,33 @@ class AdminService {
                 'industry.name': 1
               };
               for (let i = 0; i < result.length; i++) {
-                if (result[i].isCandidate) {
-                  candidateService.retrieveWithLean({'userId': new mongoose.Types.ObjectId(result[i]._id)}, candidateFields, (error, resu) => {
-                    if (error) {
-                      callback(error, null);
-                    } else {
-                      value++;
-                      if (!result[i].isAdmin) {
-                        if(resu[0].proficiencies.length > 0) {
-                          resu[0].keySkills = resu[0].proficiencies.toString().replace(/,/g, ' $');
-                        }
-
-                        if(resu[0].capability_matrix) {
-                          resu[0].capabilityMatrix = candidateService.loadCapabilitiDetails(resu[0].capability_matrix);
-                        }
-
-                        result[i].data = resu[0];
-                        candidates.push(result[i]);
-                        if (value && result.length === value) {
-                          users.candidate = candidates;
-                          console.log("fetch all records" + value);
-                          callback(null, users);
-                        }
-                      }
+                candidateService.retrieveWithLean({'userId': new mongoose.Types.ObjectId(result[i]._id)}, candidateFields, (error, resu) => {
+                  if (error) {
+                    callback(error, null);
+                  } else {
+                    value++;
+                    if (resu[0].proficiencies.length > 0) {
+                      resu[0].keySkills = resu[0].proficiencies.toString().replace(/,/g, ' $');
                     }
-                  });
-                }
+
+                    if (resu[0].capability_matrix) {
+                      resu[0].capabilityMatrix = candidateService.loadCapabilitiDetails(resu[0].capability_matrix);
+                    }
+
+                    result[i].data = resu[0];
+                    candidates.push(result[i]);
+                    if (value && result.length === value) {
+                      users.candidate = candidates;
+                      console.log("fetch all records" + value);
+                      callback(null, users);
+                    }
+                  }
+                });
               }
-            } else {
+            }
+            else {
               console.log("inside recruiter fetch");
               let recruiters: RecruiterClassModel[] = new Array(0);
-              let findQuery = {};
               let recruiterFields = {
                 '_id': 1,
                 'company_name': 1,
@@ -126,7 +121,6 @@ class AdminService {
                 'isRecruitingForself': 1,
                 'postedJobs': 1
               };
-              let sortingQuery = {'company_name': 1, 'company_size': 1};
 
               for (let i = 0; i < result.length; i++) {
                 if (!result[i].isCandidate) {
@@ -135,17 +129,14 @@ class AdminService {
                       callback(error, null);
                     } else {
                       value++;
-                      if (!result[i].isAdmin) {
-                        resu[0].numberOfJobsPosted = resu[0].postedJobs.length;
-                        //resu[0].posted_jobs = recruiterService.loadCapbilityAndKeySkills(resu[0].postedJobs);
-                        recruiterService.loadCapbilityAndKeySkills(resu[0].postedJobs);
-                        result[i].data = resu[0];
-                        recruiters.push(result[i]);
-                        if (value && result.length === value) {
-                          users.recruiter = recruiters;
-                          console.log("fetch all records" + value);
-                          callback(null, users);
-                        }
+                      resu[0].numberOfJobsPosted = resu[0].postedJobs.length;
+                      recruiterService.loadCapbilityAndKeySkills(resu[0].postedJobs);
+                      result[i].data = resu[0];
+                      recruiters.push(result[i]);
+                      if (value && result.length === value) {
+                        users.recruiter = recruiters;
+                        console.log("fetch all records" + value);
+                        callback(null, users);
                       }
                     }
                   });
@@ -161,6 +152,35 @@ class AdminService {
       callback(e, null);
     }
   };
+
+  getCountOfUsers(item: any, callback: (error: any, result: any) => void) {
+    try {
+      let candidateService = new CandidateService();
+      let recruiterService = new RecruiterService();
+      let users: UsersClassModel = new UsersClassModel();
+      let findQuery = new Object();
+
+      candidateService.getTotalCandidateCount((error, candidateCount) => {
+        if (error) {
+          callback(error, null);
+        } else {
+          users.totalNumberOfCandidates = candidateCount;
+          recruiterService.getTotalRecruiterCount((error, recruiterCount) => {
+            if (error) {
+              callback(error, null);
+            } else {
+              users.totalNumberOfRecruiters = recruiterCount;
+              callback(null, users);
+            }
+          });
+        }
+      });
+    }
+    catch
+      (e) {
+      callback(e, null);
+    }
+  }
 
   getRecruiterDetails(initial: string, callback: (error: any, result: any) => void) {
     try {
@@ -190,6 +210,7 @@ class AdminService {
         if (error) {
           callback(error, null);
         } else {
+          users.totalNumberOfRecruiters = result.length;
           if (result.length == 0) {
             callback(null, users);
           }
@@ -200,7 +221,6 @@ class AdminService {
                 if (error) {
                   callback(error, null);
                 } else {
-                  console.log("inside else");
                   value++;
                   resu[0].data = result[i];
                   recruiters.push(resu[0]);
@@ -221,14 +241,6 @@ class AdminService {
     }
   }
 
-  /*private getRecruiterDetails(result: Recruiter[], industries: IndustryModel[], item: any, i: number, recruiters: RecruiterClassModel[]) {
-   let recruiterService = new RecruiterService();
-   recruiterService.loadCapbilityAndKeySkills(result[0].postedJobs, industries);
-   item[i].data = result[0];
-   item[i].data.jobCountModel = result[0].jobCountModel;
-   recruiters.push(item[i]);
-   }*/
-
   getCandidateDetails(initial: string, callback: (error: any, result: any) => void) {
     try {
       let userService = new UserService();
@@ -241,7 +253,9 @@ class AdminService {
       let findQuery = {
         'first_name': {
           $regex: regEx
-        }
+        },
+        'isAdmin': false,
+        'isCandidate': true
       };
 
       let included_fields = {
@@ -250,8 +264,6 @@ class AdminService {
         'last_name': 1,
         'mobile_number': 1,
         'email': 1,
-        'isCandidate': 1,
-        'isAdmin': 1,
         'isActivated': 1
       };
       let sortingQuery = {'first_name': 1, 'last_name': 1};
@@ -260,6 +272,7 @@ class AdminService {
         if (error) {
           callback(error, null);
         } else {
+          users.totalNumberOfCandidates = result.length;
           if (result.length == 0) {
             callback(null, users);
           }
@@ -273,23 +286,19 @@ class AdminService {
               'location': 1
             };
             for (let i = 0; i < result.length; i++) {
-              if (result[i].isCandidate) {
-                candidateService.retrieveWithLean({'userId': new mongoose.Types.ObjectId(result[i]._id)}, candidateFields, (error, resu) => {
-                  if (error) {
-                    callback(error, null);
-                  } else {
-                    value++;
-                    if (!result[i].isAdmin) {
-                      result[i].data = resu[0];
-                      candidates.push(result[i]);
-                      if (value && result.length === value) {
-                        users.candidate = candidates;
-                        callback(null, users);
-                      }
-                    }
+              candidateService.retrieveWithLean({'userId': new mongoose.Types.ObjectId(result[i]._id)}, candidateFields, (error, resu) => {
+                if (error) {
+                  callback(error, null);
+                } else {
+                  value++;
+                  result[i].data = resu[0];
+                  candidates.push(result[i]);
+                  if (value && result.length === value) {
+                    users.candidate = candidates;
+                    callback(null, users);
                   }
-                });
-              }
+                }
+              });
             }
           }
 
@@ -321,7 +330,7 @@ class AdminService {
       let fieldNames = ['Candidate Id', 'RecruiterId', 'Job Profile Id', 'Action', 'TimeStamp'];
       let csv = json2csv({data: result, fields: fields, fieldNames: fieldNames});
       //fs.writeFile('./src/server/public/usagedetail.csv', csv, function (err: any) {
-      fs.writeFile('/home/bitnami/apps/jobmosis-staging/c-next/dist/prod/server/public/usagedetail.csv', csv, function (err: any) {
+      fs.writeFile('/home/bitnami/apps/jobmosis-staging/c-next/dist/server/prod/public/usagedetail.csv', csv, function (err: any) {
         if (err) throw err;
         callback(null, result);
       });
@@ -343,7 +352,7 @@ class AdminService {
       let fieldNames = ['First Name', 'Last Name', 'Mobile Number', 'Email', 'Is Activated', 'City', 'Education',
         'Experience', 'Current Salary', 'Notice Period', 'Ready To Relocate', 'Industry Exposure', 'Current Company',
         'Is Completed', 'Is Submitted', 'Is Visible', 'Industry Name', 'Key Skills', 'Capability Code',
-        'Complexity Code', 'Scenario Code'];//
+        'Complexity Code', 'Scenario Code'];
 
       let csv = json2csv({
         data: result.candidate, fields: fields, fieldNames: fieldNames,
@@ -351,7 +360,7 @@ class AdminService {
       });
       console.log("writing into file file");
       //fs.writeFile('./src/server/public/candidate.csv', csv, function (err: any) {
-       fs.writeFile('/home/bitnami/apps/jobmosis-staging/c-next/dist/prod/server/public/candidate.csv', csv, function (err: any) {
+      fs.writeFile('/home/bitnami/apps/jobmosis-staging/c-next/dist/server/prod/public/candidate.csv', csv, function (err: any) {
         if (err) throw err;
         callback(null, result);
       });
@@ -384,7 +393,7 @@ class AdminService {
         unwindPath: ['data.postedJobs', 'data.postedJobs.capabilityMatrix']
       });
       //fs.writeFile('./src/server/public/recruiter.csv', csv, function (err: any) {
-        fs.writeFile('/home/bitnami/apps/jobmosis-staging/c-next/dist/prod/server/public/recruiter.csv', csv, function (err: any) {
+      fs.writeFile('/home/bitnami/apps/jobmosis-staging/c-next/dist/server/prod/public/recruiter.csv', csv, function (err: any) {
         if (err) throw err;
         callback(null, result);
       });

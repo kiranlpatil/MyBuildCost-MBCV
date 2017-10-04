@@ -108,6 +108,39 @@ export function getAllUser(req: express.Request, res: express.Response, next: an
   }
 }
 
+export function getCountOfUsers(req: express.Request, res: express.Response, next: any) {
+  try {
+    var adminService = new AdminService();
+    var params = {};
+    if (req.user.isAdmin) {
+      adminService.getCountOfUsers(params, (error, result) => {
+        if (error) {
+          next({
+            reason: Messages.MSG_ERROR_RETRIEVING_USER,//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
+            message: Messages.MSG_ERROR_RETRIEVING_USER,
+            code: 403
+          });
+        } else {
+          res.status(200).send({
+            'status': 'success',
+            'data': result
+          });
+        }
+      });
+    } else {
+      res.status(401).send({
+        'error': {
+          reason: Messages.MSG_ERROR_UNAUTHORIZED_USER,
+          message: Messages.MSG_ERROR_UNAUTHORIZED_USER,
+          code: 401
+        }
+      });
+    }
+  } catch (e) {
+    res.status(403).send({message: e.message});
+  }
+}
+
 export function getCandidateDetailsByInitial(req: express.Request, res: express.Response, next: any) {
   try {
     let adminService = new AdminService();
@@ -190,21 +223,21 @@ export function exportCandidateDetails(req: express.Request, res: express.Respon
             message: Messages.MSG_ERROR_SEPERATING_USER,
             code: 403
           });
-          } else {
-            adminService.generateCandidateDetailFile(resp, (err, respo) => {
-              if (err) {
-                next({
-                  reason: Messages.MSG_ERROR_CREATING_EXCEL,//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
-                  message: Messages.MSG_ERROR_CREATING_EXCEL,
-                  code: 403
-                });
-              } else {
+        } else {
+          adminService.generateCandidateDetailFile(resp, (err, respo) => {
+            if (err) {
+              next({
+                reason: Messages.MSG_ERROR_CREATING_EXCEL,//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
+                message: Messages.MSG_ERROR_CREATING_EXCEL,
+                code: 403
+              });
+            } else {
               //var file = './src/server/public/candidate.csv';
-              var file = '/home/bitnami/apps/jobmosis-staging/c-next/dist/prod/server/public/candidate.csv';
-                res.download(file);
-              }
-            });
-          }
+              var file = '/home/bitnami/apps/jobmosis-staging/c-next/dist/server/prod/public/candidate.csv';
+              res.download(file);
+            }
+          });
+        }
       });
     } else {
       res.status(401).send({
@@ -235,19 +268,19 @@ export function exportRecruiterDetails(req: express.Request, res: express.Respon
             code: 403
           });
         } else {
-            adminService.generateRecruiterDetailFile(resp, (err, respo) => {
-              if (err) {
-                next({
-                  reason: Messages.MSG_ERROR_CREATING_EXCEL,//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
-                  message: Messages.MSG_ERROR_CREATING_EXCEL,
-                  code: 403
-                });
-              } else {
+          adminService.generateRecruiterDetailFile(resp, (err, respo) => {
+            if (err) {
+              next({
+                reason: Messages.MSG_ERROR_CREATING_EXCEL,//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
+                message: Messages.MSG_ERROR_CREATING_EXCEL,
+                code: 403
+              });
+            } else {
               //var file = './src/server/public/recruiter.csv';
-              var file = '/home/bitnami/apps/jobmosis-staging/c-next/dist/prod/server/public/recruiter.csv';
-                res.download(file);
-              }
-            });
+              var file = '/home/bitnami/apps/jobmosis-staging/c-next/dist/server/prod/public/recruiter.csv';
+              res.download(file);
+            }
+          });
         }
       });
     }
@@ -286,7 +319,7 @@ export function getUsageDetails(req: express.Request, res: express.Response, nex
                   });
                 } else {
                   //var file = './src/server/public/usagedetail.csv';
-                  var file = '/home/bitnami/apps/jobmosis-staging/c-next/dist/prod/server/public/usagedetail.csv';
+                  var file = '/home/bitnami/apps/jobmosis-staging/c-next/dist/server/prod/public/usagedetail.csv';
                   res.download(file); // Set disposition and send it.
                 }
               });

@@ -31,6 +31,13 @@ export class AdminDashboardService extends BaseService {
       .catch(this.handleError);
   }
 
+  getCountOfUsers(): Observable<any> {
+    var url = API.COUNT_OF_USERS;
+    return this.http.get(url)
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
+
   getAllCandidates(letter: string): Observable<any> {
     var url = API.GET_CANDIDATE_DETAILS + '/' + letter;
     return this.http.get(url)

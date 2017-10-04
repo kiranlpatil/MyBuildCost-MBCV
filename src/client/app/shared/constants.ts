@@ -308,8 +308,8 @@ export class Messages {
   public static UNABLE_TO_RENEW_JOB_POST_MSG = 'Cannot renew your job post kindly click on "Clone" button to clone the same job';
   public static RENEW_JOB_POST_MSG = 'Your job post has been expired to renew your job click on "Renew Job Post" button';
 
-  public static NO_CANDIDATES_AVAILABLE = 'No candidates available.';
-  public static NO_RECRUITERS_AVAILABLE = 'No recruiters available.'
+  public static NO_CANDIDATES_AVAILABLE = 'No candidates available for selected alphabet.';
+  public static NO_RECRUITERS_AVAILABLE = 'No recruiters available for selected alphabet.'
 
 }
 export class AdminPanel {
@@ -463,6 +463,7 @@ export class API {
   public static CLONE_JOB = 'job';
   public static FAQ = '/blog/index.php/faq/';
   public static ACCEPT_TERMS = '/terms-and-conditions.php';
+  public static COUNT_OF_USERS = 'countofusers'
 }
 
 export class ImagePath {

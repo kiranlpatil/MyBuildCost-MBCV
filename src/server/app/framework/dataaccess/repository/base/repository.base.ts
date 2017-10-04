@@ -128,6 +128,12 @@ class RepositoryBase<T extends mongoose.Document> implements IRead<T>, IWrite<T>
     });
   }
 
+  getCount(query: any, callback: (error: any, result: any) => void) {
+    this._model.find(query).count().lean().exec(function (err, items) {
+      callback(err, items);
+    });
+  }
+
 }
 
 export = RepositoryBase;

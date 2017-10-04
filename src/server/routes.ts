@@ -58,6 +58,7 @@ export function init(app: express.Application) {
   app.post("/api/companydetails/:id", this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, userController.updateCompanyDetails);
   app.put("/api/uploaddocuments/:id", this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, userController.uploaddocuments);
   app.get('/api/alluser', this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, adminController.getAllUser);
+  app.get('/api/countofusers', this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, adminController.getCountOfUsers);
   app.get("/api/readxlsx", importIndustryController.readXlsx);
   //app.post("/api/createImportIndusry", importIndustriesController.create);
 

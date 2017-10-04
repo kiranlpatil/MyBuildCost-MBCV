@@ -1,4 +1,4 @@
-import * as mongoose from 'mongoose';
+import * as mongoose from "mongoose";
 import Messages = require('../shared/messages');
 import CandidateRepository = require('../dataaccess/repository/candidate.repository');
 import UserRepository = require('../dataaccess/repository/user.repository');
@@ -33,32 +33,32 @@ class CandidateService {
 
   createUser(item: any, callback: (error: any, result: any) => void) {
     console.log('USer is', item);
-    this.userRepository.retrieve({ $or: [ { 'email': item.email }, {'mobile_number': item.mobile_number } ]}, (err, res) => {
+    this.userRepository.retrieve({$or: [{'email': item.email}, {'mobile_number': item.mobile_number}]}, (err, res) => {
       if (err) {
         callback(new Error(err), null);
-      }else if (res.length > 0) {
+      } else if (res.length > 0) {
         if (res[0].isActivated === true) {
-          if(res[0].email===item.email) {
+          if (res[0].email === item.email) {
             callback(new Error(Messages.MSG_ERROR_REGISTRATION), null);
           }
-          if(res[0].mobile_number===item.mobile_number) {
+          if (res[0].mobile_number === item.mobile_number) {
             callback(new Error(Messages.MSG_ERROR_REGISTRATION_MOBILE_NUMBER), null);
           }
         } else if (res[0].isActivated === false) {
           callback(new Error(Messages.MSG_ERROR_VERIFY_ACCOUNT), null);
         }
-      }else {
+      } else {
         const saltRounds = 10;
-        bcrypt.hash(item.password, saltRounds, (err:any, hash:any) => {
+        bcrypt.hash(item.password, saltRounds, (err: any, hash: any) => {
           // Store hash in your password DB.
-          if(err) {
-            callback(new Error(Messages.MSG_ERROR_BCRYPT_CREATION),null);
+          if (err) {
+            callback(new Error(Messages.MSG_ERROR_BCRYPT_CREATION), null);
           } else {
-            item.password= hash;
+            item.password = hash;
             this.userRepository.create(item, (err, res) => {
               if (err) {
                 callback(new Error(Messages.MSG_ERROR_REGISTRATION_MOBILE_NUMBER), null);
-              }else {
+              } else {
                 let userId1 = res._id;
                 let newItem: any = {
                   userId: userId1,
@@ -182,9 +182,9 @@ class CandidateService {
     customCandidate.aboutMyself = candidate.aboutMyself;
     customCandidate.capabilities = [];
     customCandidate.industry = candidate.industry;
-    customCandidate.isSubmitted= candidate.isSubmitted;
-    customCandidate.isVisible= candidate.isVisible;
-    customCandidate.isCompleted= candidate.isCompleted;
+    customCandidate.isSubmitted = candidate.isSubmitted;
+    customCandidate.isVisible = candidate.isVisible;
+    customCandidate.isCompleted = candidate.isCompleted;
     customCandidate.capabilities = this.getCapabilitiesBuild(candidate.capability_matrix, candidate.industry.roles, industries);
 
     return customCandidate;
@@ -502,7 +502,7 @@ class CandidateService {
               if (complexity.questionHeaderForCandidate !== undefined && complexity.questionHeaderForCandidate !== null && complexity.questionHeaderForCandidate !== '') {
                 match_view.questionHeaderForCandidate = complexity.questionHeaderForCandidate;
               } else {
-                match_view.questionHeaderForCandidate= Messages.MSG_HEADER_QUESTION_CANDIDATE;
+                match_view.questionHeaderForCandidate = Messages.MSG_HEADER_QUESTION_CANDIDATE;
               }
               if (complexity.questionHeaderForRecruiter !== undefined && complexity.questionHeaderForRecruiter !== null && complexity.questionHeaderForRecruiter !== '') {
                 match_view.questionHeaderForRecruiter = complexity.questionHeaderForRecruiter;
@@ -636,7 +636,7 @@ class CandidateService {
       }
     }
     var orderKeys = function (o: any, f: any) {
-      let os: any = [], ks: any = [], i:any;
+      let os: any = [], ks: any = [], i: any;
       for (let i in o) {
         os.push([i, o[i]]);
       }
@@ -744,19 +744,31 @@ class CandidateService {
     });
   }
 
-  loadCapabilitiDetails(capabilityMatrix : any) {
+  loadCapabilitiDetails(capabilityMatrix: any) {
     let capabilityMatrixKeys: string [] = Object.keys(capabilityMatrix);
     let capabilitiesArray: any [] = new Array();
-    for(let keys of capabilityMatrixKeys) {
+    for (let keys of capabilityMatrixKeys) {
       let capabilityObject = {
-        'capabilityCode' : keys.split('_')[0],
-        'complexityCode' : keys.split('_')[1],
-        'scenerioCode' : capabilityMatrix[keys]
+        'capabilityCode': keys.split('_')[0],
+        'complexityCode': keys.split('_')[1],
+        'scenerioCode': capabilityMatrix[keys]
       }
       capabilitiesArray.push(capabilityObject);
     }
     return capabilitiesArray;
   }
+
+  getTotalCandidateCount(callback: (error: any, result: any) => void) {
+    let query = {};
+    this.candidateRepository.getCount(query, (err, result) => {
+      if (err) {
+        callback(err, null);
+      } else {
+        callback(err, result);
+      }
+    });
+  }
+
 }
 
 Object.seal(CandidateService);

@@ -27,12 +27,20 @@ export class AdminDashboardComponent {
     this.getUserProfile();
     this.getAllCandidates();
     this.getAllRecruiters();
+    this.getCountOfAllUsers();
   }
 
   getAllCandidates() {
     this.adminDashboardService.getAllCandidates("a")
       .subscribe(
         candidateProfile => this.onGetAllCandidateSuccess(candidateProfile),
+        error => this.errorService.onError(error));
+  }
+
+  getCountOfAllUsers() {
+    this.adminDashboardService.getCountOfUsers()
+      .subscribe(
+        result => this.onGetCountOfUsersSuccess(result.data),
         error => this.errorService.onError(error));
   }
 
@@ -54,27 +62,24 @@ export class AdminDashboardComponent {
     this.candidate.basicInformation = candidateData.data;
   }
 
+  onGetCountOfUsersSuccess(data: any) {
+    this.numberOfCandidates = data.totalNumberOfCandidates;
+    this.numberOfRecruiters = data.totalNumberOfRecruiters;
+  }
+
+
   onGetAllCandidateSuccess(candidateProfile: any) {
     this.userData.candidate = candidateProfile.data.candidate;
-    if (Object.keys(candidateProfile.data).length === 0) {
-      this.numberOfCandidates = 0;
-    } else {
-      this.numberOfCandidates = this.userData.candidate.length;
-    }
     this.loaderService.stop();
   }
 
   onGetAllRecruiterSuccess(recruiterProfile: any) {
     this.userData.recruiter = recruiterProfile.data.recruiter;
-    if (Object.keys(recruiterProfile.data).length === 0) {
-      this.numberOfRecruiters = 0;
-    } else {
-      this.numberOfRecruiters = this.userData.recruiter.length;
-    }
     this.loaderService.stop();
   }
 
   loadUser(letter: string) {
+    this.loaderService.start();
     this.adminDashboardService.getAllCandidates(letter)
       .subscribe(
         candidateProfile => this.onGetAllCandidateSuccess(candidateProfile),
