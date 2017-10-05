@@ -8,6 +8,7 @@ import RecruiterRepository = require('../dataaccess/repository/recruiter.reposit
 import JobProfileModel = require('../dataaccess/model/jobprofile.model');
 import CandidateRepository = require('../dataaccess/repository/candidate.repository');
 import * as fs from 'fs';
+var config = require('config');
 import CapabilityMatrixService = require('./capbility-matrix.builder');
 import IndustryModel = require('../dataaccess/model/industry.model');
 import IndustryRepository = require('../dataaccess/repository/industry.repository');
@@ -349,6 +350,9 @@ class RecruiterService {
     var content = fs.readFileSync('./src/server/app/framework/public/confirmation.mail.html').toString();
     var footer1 = fs.readFileSync('./src/server/app/framework/public/footer1.html').toString();
     content=content.replace('$job_title$', field.jobTitle);
+    let host = config.get('TplSeed.mail.host');
+    let link = host + 'signin';
+    content=content.replace('$link$', link);
     var mailOptions = {
       to: user.email,
       subject: Messages.EMAIL_SUBJECT_RECRUITER_CONTACTED_YOU+field.jobTitle,

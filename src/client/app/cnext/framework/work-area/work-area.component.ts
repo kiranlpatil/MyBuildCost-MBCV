@@ -42,6 +42,7 @@ export class WorkAreaComponent implements OnInit,OnChanges {
   private guidedTourImgOverlayScreensCapabilities:string;
   private guidedTourImgOverlayScreensCapabilitiesPath:string;
   private isGuideImg:boolean = false;
+  private isOthers:boolean = false;
 
   constructor(private guidedTourService:GuidedTourService, private errorService:ErrorService,
               private messageService: MessageService) {
@@ -159,7 +160,8 @@ export class WorkAreaComponent implements OnInit,OnChanges {
         roleId.push(savetempRole.code);
       }
       if (roleId.indexOf("99999") != -1 && roleId.length === 1) {
-        this.messageService.message(new Message('Thank you for your interest in our Job post but currently we do not have your Area of Work, we will get back to you after building your Area of Work'));
+          this.isInfoMessage = true;
+          this.isOthers = true;
         return;
       }  else {
         this.highlightedSection.name = 'Capabilities';
@@ -196,7 +198,8 @@ export class WorkAreaComponent implements OnInit,OnChanges {
       if(goNext) {
         this.onNext();
       } else if (roleId.indexOf("99999") != -1 && roleId.length === 1) {
-        this.messageService.message(new Message('Thank you for your interest in our Job post but currently we do not have your Area of Work, we will get back to you after building your Area of Work'));
+          this.isInfoMessage = true;
+          this.isOthers = true;
         return;
       } else {
         this.onNext();
@@ -249,5 +252,8 @@ export class WorkAreaComponent implements OnInit,OnChanges {
     this.showButton = false;
     this.highlightedSection.isDisable = true;
     window.scrollTo(0, 0);
+  }
+  getMessage() {
+    return Messages;
   }
 }
