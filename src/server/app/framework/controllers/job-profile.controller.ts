@@ -238,7 +238,9 @@ export function cloneJob(req: express.Request, res: express.Response, next: any)
 
         delete newJob._id;
         newJob.jobTitle=newJobTitle;
-        newJob. isJobPosted=false;
+        newJob.isJobPosted=false;
+        newJob.isJobShared=false;
+        newJob.sharedLink='';
         newJob.postingDate = new Date();
         newJob.candidate_list=[];
 
