@@ -1,5 +1,5 @@
-import {Component,EventEmitter, Input , Output} from "@angular/core";
-import {CommonService,Message,MessageService} from "../../../shared/index";
+import {Component, EventEmitter, Input, Output} from "@angular/core";
+import {CommonService, Message, MessageService} from "../../../shared/index";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ValidationService} from "../../../shared/customvalidations/validation.service";
 import {ChangeCompanyWebsiteService} from "./change-company-website.service";
@@ -27,20 +27,25 @@ export class ChangeCompanyWebsiteComponent  {
 
   constructor(private commonService: CommonService, private changeCompanyWebsiteService: ChangeCompanyWebsiteService,
               private messageService: MessageService, private formBuilder: FormBuilder) {
-
+    console.log(this.model.current_website === undefined);
     this.userForm = this.formBuilder.group({
       'new_company_website': ['', [Validators.required, ValidationService.urlValidator]],
-      'current_website': ['', [Validators.required, ValidationService.urlValidator]]
+      'current_website': ['']
     });
 
   }
   ngOnChanges(changes: any) {
     if(changes.companyWebsite.currentValue!=undefined) {
       this.model.current_website = changes.companyWebsite.currentValue;
+      console.log(this.model.current_website);
     }
   }
   OnWebsiteSame(): boolean {
-    return (this.model.current_website === this.model.new_company_website);
+    if (this.model.current_website === '') {
+      return true;
+    } else {
+      return (this.model.current_website === this.model.new_company_website);
+    }
   }
 
   onSubmit() {

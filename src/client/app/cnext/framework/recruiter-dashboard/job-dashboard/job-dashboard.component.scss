@@ -67,19 +67,18 @@
   margin-top: 1px;
 }
 
-.sub-tabs {
-  li {
-    &:last-child {
-      position: relative;
-      float:right;
-    }
-  }
+.clone-job-menu {
+  position: fixed;
+  top: 135px;
+  right: 15px;
+  z-index: 1001;
 
   .btn-menu {
     background: transparent;
     cursor: pointer;
     color: $light-black1;
-    padding: 10px 5px;
+    height: 34px;
+    padding: 9px 5px;
 
     span {
       border: 1px solid transparent;

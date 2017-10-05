@@ -4,6 +4,7 @@ import {CandidatesInDiffList} from "./candidatesinDiffList";
 export class JobPosterModel {
   _id: string;
   recruiterId: string;
+  sharedLink: string;
   jobTitle: string = '';
   hiringManager: string = '';
   department: string = '';
@@ -32,4 +33,5 @@ export class JobPosterModel {
   hideCompanyName: boolean;
   daysRemainingForExpiring: number;
   isJobPostExpired: boolean;
+  isJobShared: boolean;
 }

@@ -9,7 +9,7 @@ import {CandidateJobListService} from "./candidate-job-list/candidate-job-list.s
 import {QCardFilterService} from "../filters/q-card-filter.service";
 import {LoaderService} from "../../../shared/loader/loaders.service";
 import {GuidedTourService} from "../guided-tour.service";
-import {ErrorService} from "../error.service";
+import {ErrorService} from "../../../shared/services/error.service";
 
 
 @Component({

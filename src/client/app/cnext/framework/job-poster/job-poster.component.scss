@@ -40,6 +40,52 @@
   z-index: 10;
   position: relative;
 }
+.ask-expert {
+  bottom: 15px;
+  position: fixed;
+  right: 15px;
+  z-index: 999;
+
+  .btn-primary {
+    &.active,
+    &:active,
+    &:focus,
+    &.focus,
+    &:hover,
+    .open > .dropdown-toggle {
+      background-color: $theme-color;
+      border-color: $theme-color;
+      color: $white;
+    }
+  }
+
+  h4 {
+    color: $theme-color;
+    float: left;
+    font-size: 16px;
+    margin: 0;
+    padding-bottom: 10px;
+    width: auto;
+  }
+
+  p {
+    clear: both;
+    font-size: 12px;
+  }
+
+  .form-control {
+    font-size: 12px;
+  }
+
+  .glyphicon-send {
+    margin-right: 15px;
+  }
+
+  .ask-expert-dropdown {
+    padding: 10px;
+    min-width: 480px;
+  }
+}
 
 .clone-job-menu {
   float: right;
@@ -85,6 +131,25 @@
     &:last-child > a {
       background: #d0d0d0;
       opacity: 0.3;
+    }
+  }
+}
+
+.empty-list-message {
+  text-align: center;
+  left: 50% !important;
+}
+
+@media only screen and (max-width: 1024px) {
+  .ask-expert {
+    right: 5px;
+    .btn-primary {
+      padding: 9px 15px !important;
+      width: 45px;
+
+      .label {
+        display: none;
+      }
     }
   }
 }

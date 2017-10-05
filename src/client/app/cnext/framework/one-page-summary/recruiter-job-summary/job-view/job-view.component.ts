@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import {NavigationRoutes} from '../../../../../shared/constants';
 import {ComplexityComponentService} from "../../../complexities/complexity.service";
 import {JobCompareService} from "../../../single-page-compare-view/job-compare-view/job-compare-view.service";
-import {ErrorService} from "../../../error.service";
+import {ErrorService} from "../../../../../shared/services/error.service";
 
 
 @Component({

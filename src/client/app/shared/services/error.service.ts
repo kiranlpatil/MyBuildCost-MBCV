@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { MessageService } from '../../shared/services/message.service';
-import { Message } from '../../shared/models/message';
+import { MessageService } from './message.service';
+import { Message } from '../models/message';
 
 
 

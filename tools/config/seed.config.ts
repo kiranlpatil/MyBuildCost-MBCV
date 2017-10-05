@@ -1,13 +1,7 @@
 import {join} from "path";
 import * as slash from "slash";
 import {argv} from "yargs";
-
-import {
-  BuildType,
-  ExtendPackages,
-  InjectableDependency,
-  SourceMapExplorerOutputFormat
-} from './seed.config.interfaces';
+import {BuildType, ExtendPackages, InjectableDependency, SourceMapExplorerOutputFormat} from "./seed.config.interfaces";
 
 /************************* DO NOT CHANGE ************************
  *
@@ -562,7 +556,8 @@ export class SeedConfig {
         'node_modules/@angular/platform-browser-dynamic/bundles/platform-browser-dynamic-testing.umd.js',
       '@angular/router/testing':
         'node_modules/@angular/router/bundles/router-testing.umd.js',
-
+      'html2canvas': 'node_modules/html2canvas/dist/html2canvas.min.js',
+      //'jspdf': 'node_modules/jspdf/dist/jspdf.min.js',
       'app/': `${this.APP_BASE}app/`,
       // For test config
       'dist/dev/': '/base/dist/dev/',
@@ -658,7 +653,15 @@ export class SeedConfig {
       rxjs: {
         main: 'Rx.js',
         defaultExtension: 'js'
-      }
+      },
+      html2canvas: {
+        main: 'dist/html2canvas.min.js',
+        defaultExtension: 'js'
+      }/*,
+      jspdf: {
+        main: 'dist/jspdf.min.js',
+        defaultExtension: 'js'
+      }*/
     }
   };
 

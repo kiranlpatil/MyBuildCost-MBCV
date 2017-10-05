@@ -11,6 +11,7 @@ class Messages {
   public static EMAIL_SUBJECT_CHANGE_EMAILID: string = 'Confirmation for change in email address.';
   public static EMAIL_SUBJECT_FORGOT_PASSWORD: string = 'Reset your password';
   public static EMAIL_SUBJECT_USER_CONTACTED_YOU: string = 'User Contacted you';
+  public static EMAIL_SUBJECT_RECRUITER_CONTACTED_YOU: string = 'Urgent attention required on Jobmosis with jobtitle ';
   public static EMAIL_SUBJECT_ADMIN_LOGGED_ON: string = 'Admin Logged on';
   public static EMAIL_SUBJECT_SERVER_ERROR: string = 'Server Error Info';
 
@@ -30,6 +31,8 @@ class Messages {
   public static MSG_SUCCESS_OTP: string = 'OTP has been sent on your verified mobile number.';
   public static MSG_SUCCESS_OTP_CHANGE_MOBILE_NUMBER: string = 'OTP has been sent on your new mobile number';
   public static MSG_SUCCESS_INDUSTRY_DATA_INSERTION: string = 'Data inserted Successfully in Industry';
+
+  public static MSG_NO_RECORDS_FOUND: string = 'No records found';
 
   //Error Message
   public static MSG_ERROR_MESSAGE_SENDING: string = 'Message sending failed by server';

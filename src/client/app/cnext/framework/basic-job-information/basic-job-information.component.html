@@ -35,18 +35,18 @@
 
           <div class="col-sm-8 no-padding">
             <div class="form-group">
-              <label *ngIf="recruiter.isRecruitingForself">Hiring Department</label>
-              <label *ngIf="!recruiter.isRecruitingForself">Hiring Company</label>
+              <label *ngIf="isRecruitingForSelf">Hiring Department</label>
+              <label *ngIf="!isRecruitingForSelf">Hiring Company</label>
               <input class="form-control" type="text" formControlName="department" required>
               <div class="error-messages"
                    *ngIf="(jobPostForm.get('department').touched || submitStatus)&& jobPostForm.get('department').hasError('required')">
-                <p *ngIf="recruiter.isRecruitingForself">{{hiringDepartmentValidationMessage}}</p>
-                <p *ngIf="!recruiter.isRecruitingForself">{{hiringCompanyValidationMessage}}</p>
+                <p *ngIf="isRecruitingForSelf">{{hiringDepartmentValidationMessage}}</p>
+                <p *ngIf="!isRecruitingForSelf">{{hiringCompanyValidationMessage}}</p>
               </div>
             </div>
           </div>
 
-          <div class="col-sm-8 no-padding" *ngIf="!recruiter.isRecruitingForself">
+          <div class="col-sm-8 no-padding" *ngIf="!isRecruitingForSelf">
             <h4>{{hideCompanyNameHeading}}</h4>
             <div class="check-box">
               <label>
@@ -184,8 +184,8 @@
       <div class="clearfix">
         <p><label>Notice Period</label> {{jobPosterModel.joiningPeriod}}</p>
         <p><label>Hiring Manager</label> {{jobPosterModel.hiringManager}}</p>
-        <p *ngIf="recruiter.isRecruitingForself"><label>Hiring Department</label> {{jobPosterModel.department}}</p>
-        <p *ngIf="!recruiter.isRecruitingForself"><label>Hiring Company</label> {{jobPosterModel.department}}</p>
+        <p *ngIf="isRecruitingForSelf"><label>Hiring Department</label> {{jobPosterModel.department}}</p>
+        <p *ngIf="!isRecruitingForSelf"><label>Hiring Company</label> {{jobPosterModel.department}}</p>
         <p><label>Country</label> {{jobPosterModel.location.country}}</p>
       </div>
       <div class="clearfix">

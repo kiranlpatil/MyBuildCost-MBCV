@@ -39,9 +39,18 @@
 
     .panel {
       cursor: pointer;
-      min-height: 138px;
+      min-height: 175px;
       padding: 10px 10px 0;
       position: relative;
+
+      .glyphicon-share {
+        color: $theme-color;
+        position: absolute;
+        right: 32px;
+        top: 9px;
+        width: auto;
+        z-index: 1;
+      }
 
       &:hover {
         .glyphicon-trash {
@@ -68,22 +77,26 @@
     }
 
     .renew-job {
-      p > span {
-        padding: 0 32px 0 8px;
-        display: inline;
+
+      .posted-job > p {
+        width: calc(100% - 70px);
       }
 
-      .expired,
-      .expired > span {
+      .glyphicon-refresh {
+        display: table;
+        margin: 10px auto;
+        width: auto;
+      }
+
+      .expired {
         color: $light-red1;
       }
 
-      .about-to-expire,
-      .about-to-expire > span {
+      .about-to-expire {
         color: $dark-orange;
       }
 
-      .active > span {
+      span.active {
         color: $highlight;
       }
     }
@@ -121,7 +134,7 @@
       font-weight: bold;
       margin: 0 0 5px;
       text-transform: capitalize;
-      width: 90%;
+      width: calc(100% - 50px);
     }
 
     .contact-info {

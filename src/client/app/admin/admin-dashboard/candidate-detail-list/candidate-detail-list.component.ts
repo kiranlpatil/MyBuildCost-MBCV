@@ -1,11 +1,11 @@
 import {Component, Input} from "@angular/core";
 import {AdminDashboardService} from "../admin-dashboard.service";
-import {ErrorService} from "../../error.service";
 import {Router} from "@angular/router";
-import {Label, Messages} from "../../../../shared/constants";
-import {Message} from "../../../../shared/models/message";
-import {MessageService} from "../../../../shared/services/message.service";
-import {LoaderService} from "../../../../shared/loader/loaders.service";
+import {Messages, Label} from "../../../shared/constants";
+import {Message} from "../../../shared/models/message";
+import {MessageService} from "../../../shared/services/message.service";
+import {LoaderService} from "../../../shared/loader/loaders.service";
+import {ErrorService} from "../../../shared/services/error.service";
 
 @Component({
   moduleId: module.id,
@@ -15,37 +15,41 @@ import {LoaderService} from "../../../../shared/loader/loaders.service";
 })
 
 export class CandidateDetailListComponent {
-  @Input() candidates:any[]=new Array(0);
-  private successMessage:string;
-  constructor(private adminDashboardService:AdminDashboardService,
+  @Input() candidates: any[] = new Array(0);
+  private successMessage: string;
+
+  constructor(private adminDashboardService: AdminDashboardService,
               private loaderService: LoaderService,
               private errorService: ErrorService,
               private messageService: MessageService,
-              private _router:Router) {
+              private _router: Router) {
 
   }
-  updateDetail(index:number,candidate:any,activated:boolean) {
+
+  updateDetail(index: number, candidate: any, activated: boolean) {
     this.loaderService.start();
-    candidate.isActivated=!activated;
-    candidate.user_id=candidate._id;
+    candidate.isActivated = !activated;
+    candidate.user_id = candidate._id;
     this.adminDashboardService.updateUser(candidate).subscribe(
       data => {
-        this.onUpdateComplete(index,data.data,activated);
+        this.onUpdateComplete(index, data.data, activated);
       }, error => {
         this.loaderService.stop();
         this.errorService.onError(error);
       });
   }
-  onUpdateComplete(index:number,candidate:any,activated:boolean) {
-    if(this.candidates[index].isActivated) {
-      this.successMessage=' activated.';
-    }else {
-      this.successMessage=' deactivated.';
+
+  onUpdateComplete(index: number, candidate: any, activated: boolean) {
+    if (this.candidates[index].isActivated) {
+      this.successMessage = ' activated.';
+    } else {
+      this.successMessage = ' deactivated.';
     }
-    this.messageService.message(new Message(this.candidates[index].first_name +' '+this.candidates[index].last_name+' is now'+this.successMessage));
-    this.candidates[index].isActivated=!activated;
+    this.messageService.message(new Message(this.candidates[index].first_name + ' ' + this.candidates[index].last_name + ' is now' + this.successMessage));
+    this.candidates[index].isActivated = !activated;
     this.loaderService.stop();
   }
+
   generateCandidateDetailFile() {
     this.messageService.message(new Message(Messages.MSG_FOR_FILE_DOWNLOAD));
     this.loaderService.start();
@@ -61,7 +65,8 @@ export class CandidateDetailListComponent {
           this.errorService.onError(error);
         });
   }
-  viewProfile(candidate:any,nav:string) {
+
+  viewProfile(candidate: any, nav: string) {
     if (nav !== undefined) {
       this._router.navigate([nav, candidate._id]);
     }
@@ -69,6 +74,10 @@ export class CandidateDetailListComponent {
 
   getLabel() {
     return Label;
+  }
+
+  getMessages() {
+    return Messages;
   }
 }
 

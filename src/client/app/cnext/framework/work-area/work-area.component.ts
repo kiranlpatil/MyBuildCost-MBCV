@@ -4,9 +4,9 @@ import {Section} from "../../../user/models/candidate";
 import {ImagePath, LocalStorage, Messages, Tooltip, ValueConstant} from "../../../shared/constants";
 import {LocalStorageService} from "../../../shared/services/localstorage.service";
 import {GuidedTourService} from "../guided-tour.service";
-import {ErrorService} from "../error.service";
 import {MessageService} from "../../../shared/services/message.service";
 import {Message} from "../../../shared/models/message";
+import {ErrorService} from "../../../shared/services/error.service";
 
 @Component({
   moduleId: module.id,
@@ -42,6 +42,7 @@ export class WorkAreaComponent implements OnInit,OnChanges {
   private guidedTourImgOverlayScreensCapabilities:string;
   private guidedTourImgOverlayScreensCapabilitiesPath:string;
   private isGuideImg:boolean = false;
+  private isOthers:boolean = false;
 
   constructor(private guidedTourService:GuidedTourService, private errorService:ErrorService,
               private messageService: MessageService) {
@@ -53,16 +54,16 @@ export class WorkAreaComponent implements OnInit,OnChanges {
     }
   }
 
-    ngOnChanges(changes:any) {
-      if(changes.selectedRoles !== undefined && changes.selectedRoles.currentValue !== undefined) {
-        this.selectedRoles=changes.selectedRoles.currentValue;
-        this.savedSelectedRoles=new Array(0);
-        for(let role of this.selectedRoles){
-          let savetempRole =Object.assign({}, role);
-          this.savedSelectedRoles.push(savetempRole);
-        }
+  ngOnChanges(changes:any) {
+    if(changes.selectedRoles !== undefined && changes.selectedRoles.currentValue !== undefined) {
+      this.selectedRoles=changes.selectedRoles.currentValue;
+      this.savedSelectedRoles=new Array(0);
+      for(let role of this.selectedRoles){
+        let savetempRole =Object.assign({}, role);
+        this.savedSelectedRoles.push(savetempRole);
       }
-   }
+    }
+  }
 
   selectOption(role: Role, event: any) {
     this.validationMessage = '';
@@ -108,9 +109,7 @@ export class WorkAreaComponent implements OnInit,OnChanges {
       this.selectedRoles.push(savetempRole);
     }
     this.highlightedSection.name = 'Industry';
-
-    let _body: any = document.getElementsByTagName('BODY')[0];
-    _body.scrollTop = -1;
+    window.scrollTo(0, 0);
   }
 
   onNext() {
@@ -159,15 +158,12 @@ export class WorkAreaComponent implements OnInit,OnChanges {
         let savetempRole =Object.assign({}, role);
         this.selectedRoles.push(savetempRole);
         roleId.push(savetempRole.code);
-    }
+      }
       if (roleId.indexOf("99999") != -1 && roleId.length === 1) {
-        this.messageService.message(new Message('Thank you for your interest in our Job post but currently we do not have your Area of Work, we will get back to you after building your Area of Work'));
+          this.isInfoMessage = true;
+          this.isOthers = true;
         return;
-      } /*else if (roleId.indexOf("10002") != -1 && roleId.length > 1) {
-        this.highlightedSection.name = 'Capabilities';
-        this.highlightedSection.isDisable = false;
-        this.onComplete.emit(this.selectedRoles);
-      }*/ else {
+      }  else {
         this.highlightedSection.name = 'Capabilities';
         this.highlightedSection.isDisable = false;
         this.onComplete.emit(this.selectedRoles);
@@ -176,7 +172,7 @@ export class WorkAreaComponent implements OnInit,OnChanges {
 
   }
 
-  onSave() { 
+  onSave() {
     this.isValid = true;
     this.isInfoMessage = false;
     if(this.savedSelectedRoles.length == 0) {
@@ -188,40 +184,40 @@ export class WorkAreaComponent implements OnInit,OnChanges {
       this.isValid = false;
       return;
     }
-      let roleId:any[]=new Array(0);
-      let goNext:boolean;
-      if(this.selectedRoles.length === this.savedSelectedRoles.length ) {
-        for (let role of this.selectedRoles) {
-          roleId.push(role.code);
+    let roleId:any[]=new Array(0);
+    let goNext:boolean;
+    if(this.selectedRoles.length === this.savedSelectedRoles.length ) {
+      for (let role of this.selectedRoles) {
+        roleId.push(role.code);
       }
-        for(let selectedRole of this.savedSelectedRoles){
-          if(roleId.indexOf(selectedRole.code)=== -1) {
-            goNext=true;
-          }
+      for(let selectedRole of this.savedSelectedRoles){
+        if(roleId.indexOf(selectedRole.code)=== -1) {
+          goNext=true;
         }
-        if(goNext) {
-          this.onNext();
-        } else if (roleId.indexOf("99999") != -1 && roleId.length === 1) {
-          this.messageService.message(new Message('Thank you for your interest in our Job post but currently we do not have your Area of Work, we will get back to you after building your Area of Work'));
-          return;
-          } else {
-          this.onNext();
-        }
+      }
+      if(goNext) {
+        this.onNext();
+      } else if (roleId.indexOf("99999") != -1 && roleId.length === 1) {
+          this.isInfoMessage = true;
+          this.isOthers = true;
+        return;
       } else {
         this.onNext();
       }
-    let _body: any = document.getElementsByTagName('BODY')[0];
-    _body.scrollTop = -1;
+    } else {
+      this.onNext();
+    }
+    window.scrollTo(0, 0);
   }
-onCancel() {
-  this.highlightedSection.name='none';
-  this.highlightedSection.isDisable=false;
-  this.savedSelectedRoles=new Array(0);
-  for(let role of this.selectedRoles){
-    let savetempRole =Object.assign({}, role);
-    this.savedSelectedRoles.push(savetempRole);
+  onCancel() {
+    this.highlightedSection.name='none';
+    this.highlightedSection.isDisable=false;
+    this.savedSelectedRoles=new Array(0);
+    for(let role of this.selectedRoles){
+      let savetempRole =Object.assign({}, role);
+      this.savedSelectedRoles.push(savetempRole);
+    }
   }
-}
   isSelected(value: string) {
     return this.selectedRoles.filter(function (el: Role) {
         return el.code === value;
@@ -255,7 +251,9 @@ onCancel() {
     this.highlightedSection.name = 'Work-Area';
     this.showButton = false;
     this.highlightedSection.isDisable = true;
-    let _body: any = document.getElementsByTagName('BODY')[0];
-    _body.scrollTop = -1;
+    window.scrollTo(0, 0);
+  }
+  getMessage() {
+    return Messages;
   }
 }

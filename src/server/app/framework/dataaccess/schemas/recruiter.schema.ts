@@ -47,6 +47,10 @@ class RecruiterSchema {
           type: Boolean,
           default: false
         },
+        isJobShared: {
+          type: Boolean,
+          default: false
+        },
         hideCompanyName: {
           type: Boolean,
           default: false
@@ -70,6 +74,9 @@ class RecruiterSchema {
           type: String
         },
         jobTitle: {
+          type: String
+        },
+        sharedLink: {
           type: String
         },
         hiringManager: {

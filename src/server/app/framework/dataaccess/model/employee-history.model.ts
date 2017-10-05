@@ -3,6 +3,7 @@ interface EmployeeHistoryModel {
   designation: string;
   from: string;
   to: string;
+  isPresentlyWorking: boolean;
   remarks: string;
 }
 export = EmployeeHistoryModel;

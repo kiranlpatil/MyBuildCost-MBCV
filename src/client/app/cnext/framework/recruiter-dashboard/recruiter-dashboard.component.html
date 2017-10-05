@@ -25,9 +25,8 @@
     </div>
     <!--<cn-tool-tip [message]="test"></cn-tool-tip>-->
     <div id="post_new_job" class="tab-pane fade clearfix" *ngIf="recruiterDashboard">
-      <cn-job-poster [noOfJobPosted]="recruiterDashboard.postedJobs.length" [currentjobId]="jobId"
-                     (jobPostEventEmitter)="jobSelected($event)"
-                     (jobPostCloneSuccessEmitter)="OnCloneSuccessMessage()"[recruiter]="recruiterDashboard"></cn-job-poster>
+      <cn-job-poster [noOfJobPosted]="recruiterDashboard.postedJobs.length" [currentjobId]="jobId" [role]="'recruiter'"
+                     (jobPostEventEmitter)="jobSelected($event)" (jobPostCloneSuccessEmitter)="OnCloneSuccessMessage()"></cn-job-poster>
     </div>
 
     <div id="search-candidate" class="tab-pane fade clearfix" *ngIf="recruiterDashboard">

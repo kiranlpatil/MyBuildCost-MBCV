@@ -124,7 +124,7 @@
           <button class="btn btn-cart" type="button" [class.hidden]="isJobPostExpired"
                   (click)="actionOnQCard('add','matchedList','cartListed',item)">Add To Cart
           </button>
-          <button class="btn btn-cart" type="button" [class.hidden]="isJobPostExpired"
+          <button *ngIf="!candidates.isVisible" class="btn btn-cart" type="button" [class.hidden]="isJobPostExpired"
                   (click)="addForCompareView(item,type)">Compare
           </button>
         </div>
@@ -134,7 +134,7 @@
            <button class="btn btn-cart btn-block" type="button" (click)="viewProfile(item)">View</button>
          </div>-->
         <div class="col-sm-12 text-right">
-          <button *ngIf="!isJobPostExpired" class="btn btn-cart" type="button"
+          <button *ngIf="!isJobPostExpired || !candidates.isVisible" class="btn btn-cart" type="button"
                   [class.hidden]="isJobPostExpired" (click)="addForCompareView(item,type)">Compare
           </button>
         </div>
@@ -147,7 +147,7 @@
           <button class="btn btn-cart" type="button" [class.hidden]="isJobPostExpired"
                   (click)="actionOnQCard('add','applied','cartListed',item)">Add To Cart
           </button>
-          <button class="btn btn-cart" type="button" [class.hidden]="isJobPostExpired"
+          <button *ngIf="!candidates.isVisible" class="btn btn-cart" type="button" [class.hidden]="isJobPostExpired"
                   (click)="addForCompareView(item,type)">Compare
           </button>
         </div>
@@ -156,7 +156,7 @@
         <!-- <div class="col-sm-12 no-padding">
            <button class="btn btn-cart btn-block" type="button" (click)="viewProfile(item)">View</button>
          </div>-->
-        <div *ngIf="!isJobPostExpired" class="col-sm-12 text-right">
+        <div *ngIf="!isJobPostExpired || !candidates.isVisible" class="col-sm-12 text-right">
           <button class="btn btn-cart" type="button" [class.hidden]="isJobPostExpired"
                   (click)="addForCompareView(item,type)">Compare
           </button>

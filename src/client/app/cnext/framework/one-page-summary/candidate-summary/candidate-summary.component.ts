@@ -4,7 +4,7 @@ import {LocalStorage, NavigationRoutes} from "../../../../shared/constants";
 import {LocalStorageService} from "../../../../shared/services/localstorage.service";
 import {Candidate} from "../../../../user/models/candidate";
 import {CandidateProfileService} from "../../candidate-profile/candidate-profile.service";
-import {ErrorService} from "../../error.service";
+import {ErrorService} from "../../../../shared/services/error.service";
 
 
 @Component({

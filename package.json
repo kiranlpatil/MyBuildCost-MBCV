@@ -21,7 +21,6 @@
     "lint": "gulp tslint",
     "karma": "karma",
     "karma.start": "karma start",
-
     "reinstall": "npm cache clean && npm install",
     "serve.coverage": "gulp serve.coverage --color",
     "serve.dev": "gulp serve.dev --color --env-config dev",
@@ -171,6 +170,7 @@
     "@angular/router": "^4.2.3",
     "@angular/service-worker": "^1.0.0-beta.16",
     "@types/cors": "^2.8.1",
+    "@types/html2canvas": "^0.5.35",
     "@types/jwt-simple": "^0.5.33",
     "@types/method-override": "0.0.30",
     "@types/multiparty": "0.0.31",
@@ -189,6 +189,7 @@
     "es-module-loader": "^1.0.0",
     "es6-module-loader": "^0.17.8",
     "express": "^4.14.0",
+    "html2canvas": "^0.5.0-beta4",
     "intl": "^1.2.5",
     "jquery": "^3.2.1",
     "json2csv": "^3.11.1",

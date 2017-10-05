@@ -10,7 +10,7 @@ import {FilterService} from "../filters/filter/filter.service";
 import {Headings, Messages, Tooltip} from "../../../shared/constants";
 import {RecruiterDashboard} from "../model/recruiter-dashboard";
 import {ValidationService} from "../../../shared/customvalidations/validation.service";
-import {ErrorService} from "../error.service";
+import {ErrorService} from "../../../shared/services/error.service";
 
 @Component({
   moduleId: module.id,
@@ -22,7 +22,7 @@ import {ErrorService} from "../error.service";
 export class BasicJobInformationComponent implements OnInit, OnChanges {
   @Input() jobPosterModel: any;
   @Input() highlightedSection: Section;
-  @Input() recruiter: RecruiterDashboard;
+  @Input() isRecruitingForSelf: boolean;
 
   @Output() onComplete = new EventEmitter();
   jobDiscriptionHeading:string = Headings.JOB_DISCRIPTION;
@@ -208,8 +208,7 @@ export class BasicJobInformationComponent implements OnInit, OnChanges {
      this.jobPosterModel.industry = new Industry();
      }*/
 
-    let _body: any = document.getElementsByTagName('BODY')[0];
-    _body.scrollTop = -1;
+    window.scrollTo(0, 0);
   }
 
   onCancel() {
@@ -240,8 +239,7 @@ export class BasicJobInformationComponent implements OnInit, OnChanges {
     this.highlightedSection.name = 'JobProfile';
     this.showButton = false;
     this.disableButton = false;
-    let _body: any = document.getElementsByTagName('BODY')[0];
-    _body.scrollTop = -1;
+    window.scrollTo(0, 0);
   }
 }
 

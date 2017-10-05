@@ -12,14 +12,16 @@ class CandidateSearchService {
     this.recruiterRepository = new RecruiterRepository();
     this.candidateRepository = new CandidateRepository();
   }
-
+//TODO: use getMatchingJobProfile from search.service instead of searchMatchingJobProfile both function has same code only parameter change
+// TODO: redundant code if and also dependent. If going to cahnge in query in one code need to change in another also -> krishna ghatul
   searchMatchingJobProfile(candidate:CandidateModel, recruiterId:string, searchView:string, callback:(error:any, result:any) => void) {
 
     let currentDate = new Date();
     let data = {
       '_id': recruiterId,
       'postedJobs.industry.name': candidate.industry.name,
-      'postedJobs.proficiencies': {$in: candidate.proficiencies}
+      'postedJobs.proficiencies': {$in: candidate.proficiencies},
+      'postedJobs.expiringDate': {$gte: currentDate}
     };
     let excluded_fields = {
       'postedJobs.industry.roles': 0,

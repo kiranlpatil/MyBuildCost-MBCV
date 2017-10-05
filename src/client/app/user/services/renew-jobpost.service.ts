@@ -3,10 +3,10 @@ import {JobPosterModel} from "../models/jobPoster";
 import {MessageService} from "../../shared/services/message.service";
 import {Message} from "../../shared/models/message";
 import {JobPosterService} from "../../cnext/framework/job-poster/job-poster.service";
-import {ErrorService} from "../../cnext/framework/error.service";
 import {Messages, UsageActions, LocalStorage} from "../../shared/constants";
 import {UsageTrackingService} from "../../cnext/framework/usage-tracking.service";
 import {LocalStorageService} from "../../shared/services/localstorage.service";
+import {ErrorService} from "../../shared/services/error.service";
 
 
 @Injectable()

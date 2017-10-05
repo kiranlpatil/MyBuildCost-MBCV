@@ -15,13 +15,14 @@ import {CustomHttp} from './services/http/custom.http';
 import {TooltipComponent} from './tool-tip-component/tool-tip-component';
 import {FooterComponent} from '../framework/shared/footer/footer.component';
 import {UsageTrackingService} from '../cnext/framework/usage-tracking.service';
+import {ErrorService} from "./services/error.service";
 
 @NgModule({
   imports: [CommonModule],
   declarations: [LoaderComponent, MyGoogleDirective, ControlMessagesComponent, MyGoogleDirective, TooltipComponent, FooterComponent],
   exports: [LoaderComponent, MyGoogleDirective, ControlMessagesComponent, MyGoogleDirective, TooltipComponent, FooterComponent],
   providers: [LoaderService, UsageTrackingService,ValidationService, LocalStorageService, MessageService, SharedService,
-    ThemeChangeService, CommonService, BaseService, CustomHttp]
+    ThemeChangeService, CommonService, BaseService, CustomHttp, ErrorService]
 })
 
 export class SharedModule {

@@ -5,7 +5,7 @@ import {CandidateDetail} from "../models/candidate-details";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {ValidationService} from "../../shared/customvalidations/validation.service";
 import {AppSettings, CommonService, Message, MessageService, NavigationRoutes} from "../../shared/index";
-import {ImagePath, LocalStorage, Messages} from "../../shared/constants";
+import {API, ImagePath, Label, LocalStorage, Messages} from "../../shared/constants";
 import {LocalStorageService} from "../../shared/services/localstorage.service";
 import {DateService} from "../../cnext/framework/date.service";
 import {SharedService} from "../../shared/services/shared-service";
@@ -51,6 +51,7 @@ export class CandidateSignUpComponent implements OnInit, AfterViewInit {
       'password': ['', [ValidationService.requirePasswordValidator, ValidationService.passwordValidator]],
       'confirm_password': ['', ValidationService.requireConfirmPasswordValidator],
       'birth_year': ['', [Validators.required, ValidationService.birthYearValidator]],
+      'accept_terms': ['', [Validators.required]],
     });
 
 
@@ -60,6 +61,7 @@ export class CandidateSignUpComponent implements OnInit, AfterViewInit {
     this.isChrome = this.sharedService.getUserBrowser();
     this.isToasterVisible = this.sharedService.getToasterVisiblity();
     console.log('isToasterVisible', this.isToasterVisible);
+    this.userForm.controls['accept_terms'].setValue(false);
   }
 
   ngOnInit() {
@@ -82,7 +84,7 @@ export class CandidateSignUpComponent implements OnInit, AfterViewInit {
     this.sharedService.setToasterVisiblity(this.isToasterVisible);
   }
 
-  selectYearModel(year: any) { debugger
+  selectYearModel(year: any) {
     this.birthYearErrorMessage = undefined;
     if (year === '') {
       this.userForm.controls['birth_year'].setValue(undefined);
@@ -95,7 +97,7 @@ export class CandidateSignUpComponent implements OnInit, AfterViewInit {
     this.model = this.userForm.value;
     if (this.model.first_name === '' || this.model.last_name === '' || this.model.mobile_number === '' ||
       this.model.email === '' || this.model.password === '' || this.model.confirm_password === '' ||
-      this.model.birth_year === undefined) {
+      this.model.birth_year === undefined || !this.userForm.controls['accept_terms'].value) {
       if (this.model.birth_year === undefined) {
         this.birthYearErrorMessage = Messages.MSG_ERROR_VALIDATION_BIRTHYEAR_REQUIRED;
       }
@@ -164,19 +166,12 @@ export class CandidateSignUpComponent implements OnInit, AfterViewInit {
   getMessages() {
     return Messages;
   }
+  getLabel() {
+    return Label;
+  }
 
-  /*filterList(itemList: number[]): number[] {
-    const result: number[] = [];
-    if(result.length !== 1) {
-      for(let i = 0; i < itemList.length; i++) {
-        result.push(itemList[i]);
-        //console.log('found1');
-      }
-    } else {
-      console.log('found2');
-    }
-    //console.log('result2:', result);
-    return result;
-}
-*/
+  goToAcceptTerms() {
+    let host = AppSettings.HTTP_CLIENT + window.location.hostname + API.ACCEPT_TERMS;
+    window.open(host, '_blank');
+  }
 }

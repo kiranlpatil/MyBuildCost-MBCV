@@ -1,6 +1,6 @@
-import { Component, Input } from '@angular/core';
-import { FormGroup } from '@angular/forms';
-import { ValueConstant, Messages } from '../../../../shared/constants';
+import {Component, Input} from '@angular/core';
+import {FormGroup} from '@angular/forms';
+import {Messages, ValueConstant} from '../../../../shared/constants';
 
 
 @Component({
@@ -15,22 +15,30 @@ export class EmployeeHistoryComponent {
   public employeeForm: FormGroup;
 
   @Input() submitStatus: boolean;
+
   private year: any;
+  private isDisableToDate: boolean;
   private currentDate: any;
   private yearList = new Array();
   public monthList: string[] = new Array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December');
-private fromYear:number;
-private toYear:number;
-private requiredCompanyNameValidationMessage = Messages.MSG_ERROR_VALIDATION_COMPANYNAME_REQUIRED;
-private requiredDesignationValidationMessage = Messages.MSG_ERROR_VALIDATION_DESIGNATION_REQUIRED;
+  private fromYear: number;
+  private toYear: number;
+  private requiredCompanyNameValidationMessage = Messages.MSG_ERROR_VALIDATION_COMPANYNAME_REQUIRED;
+  private requiredDesignationValidationMessage = Messages.MSG_ERROR_VALIDATION_DESIGNATION_REQUIRED;
 
-constructor() {
+  constructor() {
     this.currentDate = new Date();
     this.year = this.currentDate.getUTCFullYear();
     this.year = this.year - ValueConstant.MAX_YEAR_LIST;
     this.createYearList(this.year); //TODO use the service for date list
   }
 
+  ngOnChanges(changes: any) {
+    if (changes.employeeForm.currentValue != undefined &&
+      changes.employeeForm.currentValue.controls.isPresentlyWorking._value === true) {
+      this.isDisableToDate = true;
+    }
+  }
   createYearList(year: any) {
 
     for (let i = 0; i <= ValueConstant.MAX_YEAR_LIST; i++) {
@@ -38,16 +46,18 @@ constructor() {
     }
   }
 
-  setCurrentDate() {                        //TODO remove it.
+  onFromYear(value: any) {
+    this.fromYear = value;
   }
 
-onFromYear(value:any) {
-    this.fromYear=value;
-}
-onToYear(value:any) {
-  this.toYear=value;
-}
-}
+  onToYear(value: any) {
+    this.toYear = value;
+  }
 
+  onCheckClick(value: any) {
+    this.employeeForm.controls["to"].reset();
+    this.isDisableToDate = value;
+  }
 
+}
 

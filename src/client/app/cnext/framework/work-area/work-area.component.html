@@ -23,6 +23,10 @@
       <span class="glyphicon glyphicon-warning-sign"></span>
       {{validationMessage}}
     </div>
+    <div class="error-messages edit-error-msg info-message" *ngIf="isOthers">
+      <span class="glyphicon glyphicon-info-sign" *ngIf="isOthers"></span>
+      {{getMessage().OTHERS_AOW_MESSAGE}}
+    </div>
 
     <div class="button-group clearfix">
       <!--<div class="saving-loader">Saving...</div>-->

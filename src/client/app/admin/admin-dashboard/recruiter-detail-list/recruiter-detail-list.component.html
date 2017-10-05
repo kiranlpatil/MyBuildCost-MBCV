@@ -4,7 +4,7 @@
   </div>
   <div title="Export recruiters list to CSV file" class="export-data-link" (click)="generateRecruiterDetailFile()"><span class="glyphicon glyphicon-export" ></span>Export</div>
   <a href="./public/recruiter.csv" download="recruiter.csv"  id="link_recruiter" hidden></a>
-  <div class="list-view">
+  <div *ngIf="recruiters && recruiters.length > 0" class="list-view">
     <ul class="list-header">
       <li>
         <h5>{{getLabel().COMPANY_NAME}}</h5>
@@ -46,14 +46,15 @@
           <span *ngIf="recruiter.data && recruiter.data.postedJobs">{{recruiter.data.postedJobs.length}}</span>
         </li>
         <li>
-          <div *ngIf="recruiter.isActivated"><span class="activated" title="Activated"></span><span>Active</span></div>
-          <div *ngIf="!recruiter.isActivated"><span class="not-activated" title="Deactivated"></span><span>Deactivated</span></div>
+          <div *ngIf="recruiter.isActivated"><span class="activated" title="User account is active."></span><span>Active</span></div>
+          <div *ngIf="!recruiter.isActivated"><span class="not-activated" title="User account is inactive."></span><span>Deactivated</span></div>
         </li>
         <li>
-          <button *ngIf="recruiter.isActivated" class="btn-danger btn-custom" (click)="updateDetail(i,recruiter,recruiter.isActivated)">Deactivate</button>
-          <button *ngIf="!recruiter.isActivated" class="btn-primary btn-custom" (click)="updateDetail(i,recruiter,recruiter.isActivated)">Activate</button>
+          <button *ngIf="recruiter.isActivated" class="btn-danger btn-custom" (click)="updateDetail(i,recruiter,recruiter.isActivated)" title="Click to deactivate this account.">Deactivate</button>
+          <button *ngIf="!recruiter.isActivated" class="btn-primary btn-custom" (click)="updateDetail(i,recruiter,recruiter.isActivated)" title="Click to activate this account">Activate</button>
         </li>
       </ul>
     </div>
   </div>
 </div>
+<div *ngIf="recruiters == undefined || recruiters && recruiters.length==0"> {{getMessages().NO_RECRUITERS_AVAILABLE}} </div>

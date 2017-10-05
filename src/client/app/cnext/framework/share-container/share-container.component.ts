@@ -1,5 +1,5 @@
 import {Component, OnInit} from "@angular/core";
-import {ErrorService} from "../error.service";
+import {ErrorService} from "../../../shared/services/error.service";
 import {ShareContainerService} from "./share-container.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ShareLink} from "../model/share-link";

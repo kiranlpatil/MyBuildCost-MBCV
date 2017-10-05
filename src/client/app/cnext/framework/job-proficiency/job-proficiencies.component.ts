@@ -62,8 +62,7 @@ export class JobProficienciesComponent implements OnInit {
     this.highlightedSection.name = 'IndustryExposure';
     this.highlightedSection.isDisable = false;
     this.onNextComplete.emit();
-    let _body: any = document.getElementsByTagName('BODY')[0];
-    _body.scrollTop = -1;
+    window.scrollTo(0, 0);
   }
 
   onSave() {
@@ -74,22 +73,19 @@ export class JobProficienciesComponent implements OnInit {
     this.highlightedSection.name = 'none';
     this.highlightedSection.isDisable = false;
     this.onNextComplete.emit();
-    let _body: any = document.getElementsByTagName('BODY')[0];
-    _body.scrollTop = -1;
+    window.scrollTo(0, 0);
   }
 
   onPrevious() {
     this.highlightedSection.name = 'Complexities';
-    let _body: any = document.getElementsByTagName('BODY')[0];
-    _body.scrollTop = -1;
+    window.scrollTo(0, 0);
   }
 
   onEdit() {
     this.highlightedSection.name = 'Proficiencies';
     this.disablebutton = false;
     this.showButton = false;
-    let _body: any = document.getElementsByTagName('BODY')[0];
-    _body.scrollTop = -1;
+    window.scrollTo(0, 0);
   }
 }
 

@@ -224,6 +224,19 @@
   }
 }
 
+@media only screen and (max-width: 767px) {
+  .value-portrait-candidate-profile-section {
+    .value-portrait-candidate-email {
+      span {
+        overflow: visible;
+        text-overflow: clip;
+        white-space: normal;
+        word-break: break-all;
+      }
+    }
+  }
+}
+
 @media screen and (min-width: 320px) and (max-width: 399px) {
 
 }

@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { AdminDashboardService } from '../admin-dashboard.service';
-import { ErrorService } from '../../error.service';
-import { LoaderService } from '../../../../shared/loader/loaders.service';
-import { Messages } from  '../../../../shared/constants';
-import { Message } from '../../../../shared/models/message';
-import { MessageService } from '../../../../shared/services/message.service';
+import { ErrorService } from '../../../shared/services/error.service';
+import { LoaderService } from '../../../shared/loader/loaders.service';
+import { Messages } from  '../../../shared/constants';
+import { Message } from '../../../shared/models/message';
+import { MessageService } from '../../../shared/services/message.service';
 
 @Component({
   moduleId: module.id,

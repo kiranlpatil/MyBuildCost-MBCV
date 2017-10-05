@@ -4,7 +4,7 @@ import { RecruiterDashboard } from '../model/recruiter-dashboard';
 import { RecruiterHeaderDetails } from '../model/recuirterheaderdetails';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RedirectRecruiterDashboardService } from '../../../user/services/redirect-dashboard.service';
-import { ErrorService } from '../error.service';
+import { ErrorService } from '../../../shared/services/error.service';
 import { Messages } from '../../../shared/constants';
 import { MessageService } from '../../../shared/services/message.service';
 import { Message } from '../../../shared/models/message';
@@ -24,6 +24,7 @@ export class RecruiterDashboardComponent implements OnInit, AfterViewInit {
   private tabName: string;
   private jobId: string;
   private screenType: string='';
+  private selectedJobProfile: string;
 
 
   constructor(private recruiterDashboardService: RecruiterDashboardService,

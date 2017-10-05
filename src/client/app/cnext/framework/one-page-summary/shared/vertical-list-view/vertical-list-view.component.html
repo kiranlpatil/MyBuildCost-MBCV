@@ -5,7 +5,8 @@
       <span>{{type}}</span>
       <ul *ngIf="calledFrom=='singlepageview'">
           <li *ngFor="let item of data;let i = index" >
-            <p>{{item.from.year}} - {{item.to.year}}</p>
+            <p *ngIf="item.isPresentlyWorking!=true">{{item.from.year}} - {{item.to.year}}</p>
+            <p *ngIf="item.isPresentlyWorking===true">{{item.from.year}} - {{getMessages().MSG_PRESENTLY_WORKING}}</p>
             <p>{{item.designation}}</p>
             <p>{{item.companyName}}</p>
             <p [class.text-ellipsis]="!readMore[i]" [class.text-wrap]="readMore[i]">{{item.remarks}}</p>
@@ -16,7 +17,8 @@
       <ul class="candidate-vertical-view" *ngIf="calledFrom=='candidateview'">
           <li *ngFor="let item of data;let i = index" >
             <div *ngIf="i == 0">
-              <p>{{item.from.year}} - {{item.to.year}}</p>
+              <p *ngIf="item.isPresentlyWorking!=true">{{item.from.year}} - {{item.to.year}}</p>
+              <p *ngIf="item.isPresentlyWorking===true">{{item.from.year}} - {{getMessages().MSG_PRESENTLY_WORKING}}</p>
               <p>{{item.designation}}</p>
               <p>{{item.companyName}}</p>
               <p [class.text-ellipsis]="!readMore[i]" [class.text-wrap]="readMore[i]">{{item.remarks}}</p>

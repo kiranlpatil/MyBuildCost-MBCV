@@ -2,7 +2,7 @@
 <div class="section-container clear" *ngIf="highlightedSection.name =='EmploymentHistory'">
   <div class="main-content edit-modal-content clearfix" >
 
-    <h4 class="heading">{{employemntHistoryHeader}} {{OPTIONAL}}</h4>
+    <h4 class="heading">{{employemntHistoryHeader}}</h4>
 
     <div class="scrollable-content" #EmloymentHostoryParent>
       <form class="description-form" [formGroup]="employeeHistory" novalidate>
@@ -16,7 +16,8 @@
                     (click)="removeEmployeeHistory(i)"></span>
               </div>
               <div class="panel-body" [formGroupName]="i">
-                <cn-employee-history [group]="employeeHistory.controls.employeeHistories.controls[i]" [submitStatus] = "submitStatus"></cn-employee-history>
+                <cn-employee-history [group]="employeeHistory.controls.employeeHistories.controls[i]"
+                                     [submitStatus]="submitStatus"></cn-employee-history>
               </div>
             </div>
           </div>
@@ -55,7 +56,7 @@
       <div *ngIf="employeeHistory.controls.employeeHistories.controls.length==0">
         <h4 class="heading-compact icons-section">
           <span class="icons icon-employment-history"></span>
-          {{employemntHistoryHeader}} <span class="optional-field">{{OPTIONAL}}</span>
+          {{employemntHistoryHeader}}
           <button class="btn-edit"
                   (click)="onEdit()"
                   title="Edit Employment History"></button>
@@ -64,7 +65,7 @@
       <div class="" *ngIf="employeeHistory.controls.employeeHistories.controls.length>0">
         <h4 class="heading-compact icons-section">
           <span class="icons icon-employment-history"></span>
-          Employment History <span class="optional-field">(Optional)</span>
+          {{employemntHistoryHeader}}
           <button class="btn-edit"
                   (click)="onEdit()"
                   title="Edit Employment History"></button>
@@ -74,7 +75,10 @@
             <div *ngIf="i == 0">
               <li>
                 <p>{{item.designation}} at {{item.companyName}} </p>
-                <p>From {{item.from.month}} {{item.from.year}} to {{item.to.month}} {{item.to.year}}</p>
+                <p *ngIf="!item.isPresentlyWorking">From {{item.from.month}} {{item.from.year}} to {{item.to.month}}
+                  {{item.to.year}}</p>
+                <p *ngIf="item.isPresentlyWorking">From {{item.from.month}} {{item.from.year}} |
+                  {{getMessages().MSG_PRESENTLY_WORKING}}</p>
               </li>
             </div>
           </div>

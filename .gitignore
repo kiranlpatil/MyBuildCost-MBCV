@@ -39,11 +39,13 @@ ts-node
 .typingsrc
 
 #IDE configuration files
+dist
 .idea
 *.iml
+clientErrorLogs
+package-lock.json
 
 /tools/**/*.js
-dist
 dev
 docs
 lib
