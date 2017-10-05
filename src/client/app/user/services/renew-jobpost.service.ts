@@ -29,31 +29,13 @@ export class RenewJobPostService {
   onRenewJob(selectedJobProfile: JobPosterModel) {
     this.selectedJobProfile = selectedJobProfile;
     if (this.selectedJobProfile.daysRemainingForExpiring > -31 && this.selectedJobProfile.daysRemainingForExpiring < 1) {
-       this.selectedJobProfile.expiringDate = new Date();
+      this.selectedJobProfile.expiringDate = new Date();
       this.selectedJobProfile.expiringDate.setDate(this.selectedJobProfile.expiringDate.getDate() + 30);
       this.updateJob();
-      this.usageTrackingService.addUsesTrackingData(UsageActions.RENEWED_JOB_POST_BY_RECRUITER,
-        LocalStorageService.getLocalValue(LocalStorage.END_USER_ID),LocalStorageService.getLocalValue(LocalStorage.CURRENT_JOB_POSTED_ID), undefined).subscribe(
-        data=> {
-          console.log('');
-        },
-        err=> {
-          this.errorService.onError(err);
-        }
-      );
     }else if(this.selectedJobProfile.daysRemainingForExpiring > 0 && this.selectedJobProfile.daysRemainingForExpiring < 31){
       this.selectedJobProfile.expiringDate = new Date(this.selectedJobProfile.expiringDate);
       this.selectedJobProfile.expiringDate.setDate(this.selectedJobProfile.expiringDate.getDate() + 30);
       this.updateJob();
-      this.usageTrackingService.addUsesTrackingData(UsageActions.RENEWED_JOB_POST_BY_RECRUITER,
-        LocalStorageService.getLocalValue(LocalStorage.END_USER_ID),LocalStorageService.getLocalValue(LocalStorage.CURRENT_JOB_POSTED_ID), undefined).subscribe(
-        data=> {
-          console.log('');
-        },
-        err=> {
-          this.errorService.onError(err);
-        }
-      );
     }else {
       this.messageService.message(new Message(Messages.UNABLE_TO_RENEW_JOB_POST_MSG));
     }
@@ -66,6 +48,15 @@ export class RenewJobPostService {
         this.selectedJobProfile = data.data.postedJobs[0];
         this.messageService.message(new Message('You have successfully renewed ' + this.selectedJobProfile.jobTitle + 'Job by '+ '30 days'));
       }, error => this.errorService.onError(error));
+    this.usageTrackingService.addUsesTrackingData(UsageActions.RENEWED_JOB_POST_BY_RECRUITER,
+      LocalStorageService.getLocalValue(LocalStorage.END_USER_ID),LocalStorageService.getLocalValue(LocalStorage.CURRENT_JOB_POSTED_ID), undefined).subscribe(
+      data=> {
+        console.log('');
+      },
+      err=> {
+        this.errorService.onError(err);
+      }
+    );
   }
 
 }
