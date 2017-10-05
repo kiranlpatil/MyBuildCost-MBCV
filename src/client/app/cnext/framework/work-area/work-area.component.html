@@ -23,9 +23,8 @@
       <span class="glyphicon glyphicon-warning-sign"></span>
       {{validationMessage}}
     </div>
-    <div class="error-messages edit-error-msg" [class.info-message]="isInfoMessage" *ngIf="isOthers">
-      <span class="glyphicon glyphicon-info-sign" *ngIf="isInfoMessage"></span>
-      <span class="glyphicon glyphicon-warning-sign"></span>
+    <div class="error-messages edit-error-msg info-message" *ngIf="isOthers">
+      <span class="glyphicon glyphicon-info-sign" *ngIf="isOthers"></span>
       {{getMessage().OTHERS_AOW_MESSAGE}}
     </div>
 
