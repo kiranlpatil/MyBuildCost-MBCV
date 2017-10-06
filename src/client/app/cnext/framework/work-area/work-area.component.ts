@@ -141,7 +141,7 @@ export class WorkAreaComponent implements OnInit,OnChanges {
       );
   }
 
-  onNextAction() {
+  onNextAction() { debugger
     let roleId:any[]=new Array(0);
     if(this.savedSelectedRoles.length === 0){
       if(this.isCandidate) {
@@ -162,6 +162,9 @@ export class WorkAreaComponent implements OnInit,OnChanges {
       if (roleId.indexOf("99999") != -1 && roleId.length === 1) {
           this.isInfoMessage = true;
           this.isOthers = true;
+        this.highlightedSection.name = 'Work-Area';
+        //this.highlightedSection.isDisable = true;
+          this.onComplete.emit(this.selectedRoles);
         return;
       }  else {
         this.highlightedSection.name = 'Capabilities';
@@ -172,7 +175,7 @@ export class WorkAreaComponent implements OnInit,OnChanges {
 
   }
 
-  onSave() {
+  onSave() { debugger
     this.isValid = true;
     this.isInfoMessage = false;
     if(this.savedSelectedRoles.length == 0) {
@@ -197,11 +200,11 @@ export class WorkAreaComponent implements OnInit,OnChanges {
       }
       if(goNext) {
         this.onNext();
-      } else if (roleId.indexOf("99999") != -1 && roleId.length === 1) {
+      } /*else if (roleId.indexOf("99999") != -1 && roleId.length === 1) {
           this.isInfoMessage = true;
           this.isOthers = true;
         return;
-      } else {
+      } */else {
         this.onNext();
       }
     } else {
@@ -247,7 +250,8 @@ export class WorkAreaComponent implements OnInit,OnChanges {
     this.showModalStyle2 = !this.showModalStyle2;
   }
 
-  OnEdit() {
+  OnEdit() { debugger
+    this.isOthers = false;
     this.highlightedSection.name = 'Work-Area';
     this.showButton = false;
     this.highlightedSection.isDisable = true;
@@ -255,5 +259,10 @@ export class WorkAreaComponent implements OnInit,OnChanges {
   }
   getMessage() {
     return Messages;
+  }
+
+  onClose() {
+    this.highlightedSection.name = 'None';
+    //this.showIndustryExperience = false;
   }
 }

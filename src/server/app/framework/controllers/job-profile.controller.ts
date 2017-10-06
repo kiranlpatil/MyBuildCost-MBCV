@@ -52,7 +52,7 @@ export function retrieve(req: express.Request, res: express.Response, next: any)
         let currentDate = Number(new Date());
         let expiringDate = Number(new Date(result.postedJobs[0].expiringDate));
         let daysRemainingForExpiring = Math.round(Number(new Date(expiringDate - currentDate))/(1000*60*60*24));
-        result.postedJobs[0].daysRemainingForExpiring=daysRemainingForExpiring;
+        result.postedJobs[0].daysRemainingForExpiring = daysRemainingForExpiring;
         if (daysRemainingForExpiring <= 0) {
           result.postedJobs[0].isJobPostExpired=true;
 

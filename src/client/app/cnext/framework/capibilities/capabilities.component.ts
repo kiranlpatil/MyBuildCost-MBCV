@@ -162,7 +162,7 @@ export class CapabilitiesComponent {
       );
   }
 
-  onNextAction() {
+  onNextAction() { debugger
     this.isValid = true;
     this.validationMessage = '';
     if(this.primaryNames.length == 0){
