@@ -21,12 +21,12 @@ export function init(app: express.Application) {
   app.post("/api/admin", adminController.create);
   app.post("/api/recruiter", recruiterController.create);
   app.put("/api/users/:id", this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, userController.updateDetails);
+  app.put("/api/changerecruiteraccountdetails/:id", this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, userController.updateRecruiterAccountDetails);
   app.put("/api/users/:id/fieldname/:fname", this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, userController.updateProfileField);
   app.get("/api/users/:id", userInterceptor.retrieve, this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, userController.retrieve);
   app.post("/api/sendverificationmail/:id", this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, userController.verificationMail);
   app.put("/api/verifyAccount/:id", this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, userController.verifyAccount);
   app.put("/api/changeemailid/:id", this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, userController.changeEmailId);
-  app.put("/api/changecompanywebsite/:id", this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, userController.changeCompanyWebsite);
   app.put("/api/verifychangedemailid/:id", this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, userController.verifyChangedEmailId);
   app.put("/api/changemobilenumber/:id", this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, userController.changeMobileNumber);
   app.put("/api/verifymobilenumber/:id", this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, userController.verifyMobileNumber);

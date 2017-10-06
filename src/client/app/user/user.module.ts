@@ -38,8 +38,6 @@ import {RecruiterSharedHeaderComponent} from "./recruiter-shared-header/recruite
 import {SettingsComponent} from "./settings/settings.component";
 import {SettingsService} from "./settings/settings.service";
 import {AdminDashboardHeaderComponent} from "./admin-dashboard-header/admin-dashboard-header.component";
-import {ChangeCompanyWebsiteService} from "./settings/change-company-website/change-company-website.service";
-import {ChangeCompanyWebsiteComponent} from "./settings/change-company-website/change-company-website.component";
 
 @NgModule({
   imports: [CommonModule, FormsModule, ReactiveFormsModule, SharedModule, /*TODO Abhijeet Ng2AutoCompleteModule,*/ UserRoutingModule],
@@ -47,16 +45,16 @@ import {ChangeCompanyWebsiteComponent} from "./settings/change-company-website/c
     CandidateSignUpComponent, CandidateSignUpVerificationComponent, UserVerificationComponent, RecruiterSignUpComponent,
     CompanyDetailsComponent, ProfilePictureComponent, ChangePasswordComponent, ActivateEmailComponent,
     ChangeEmailComponent, ChangeMobileComponent, UserProfileComponent, CandidateDashboardHeaderComponent,
-    CandidateHeaderComponent, RecruiterSharedHeaderComponent, SettingsComponent, AdminDashboardHeaderComponent,ChangeCompanyWebsiteComponent],
+    CandidateHeaderComponent, RecruiterSharedHeaderComponent, SettingsComponent, AdminDashboardHeaderComponent],
   exports: [UserHeaderComponent, LoginComponent, ResetPasswordComponent, ForgotPasswordComponent,
     CandidateSignUpComponent, CandidateSignUpVerificationComponent, UserVerificationComponent, RecruiterSignUpComponent,
     CompanyDetailsComponent, ProfilePictureComponent, ChangePasswordComponent, ActivateEmailComponent,
     ChangeEmailComponent, ChangeMobileComponent, UserProfileComponent, CandidateDashboardHeaderComponent,
-    CandidateHeaderComponent, RecruiterSharedHeaderComponent, SettingsComponent, AdminDashboardHeaderComponent,ChangeCompanyWebsiteComponent],
+    CandidateHeaderComponent, RecruiterSharedHeaderComponent, SettingsComponent, AdminDashboardHeaderComponent],
   providers: [LoginService, FacebookService, ForgotPasswordService, ResetPasswordService, CandidateSignUpService,
     CandidateSignUpVerificationService, RegistrationService, UserVerificationService, RecruiterSignUpService,
     CompanyDetailsService, ChangePasswordService, ActiveEmailService, ChangeEmailService, ChangeMobileService,
-    RegistrationService, SettingsService,ChangeCompanyWebsiteService]
+    RegistrationService, SettingsService]
 })
 
 export class UserModule {

@@ -9,6 +9,7 @@ export class CandidateDetail {
   birth_year: number;
   email: string = '';
   company_website: string = '';
+  company_name: string = '';
   mobile_number: string = '';
   password: string = '';
   confirm_password: string = '';

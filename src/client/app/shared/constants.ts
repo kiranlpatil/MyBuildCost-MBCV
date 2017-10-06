@@ -1,9 +1,9 @@
 export class AppSettings {
-  //public static IP = 'http://localhost:8080';
+  public static IP = 'http://localhost:8080';
   // public static IP = 'http://ee802b7f.ngrok.io';
   //public static IP = 'http://10.192.33.77:8080';
   //public static IP = 'http://52.10.145.87:3000';
-  public static IP = 'https://34.215.90.153:3000';
+  //public static IP = 'https://34.215.90.153:3000';
   // public static IP = 'app.jobmosis.com';
   // public static IP = '';
 
@@ -423,7 +423,7 @@ export class API {
   public static CHANGE_PASSWORD = 'changepassword';
   public static CHANGE_MOBILE = 'changemobilenumber';
   public static CHANGE_EMAIL = 'changeemailid';
-  public static CHANGE_COMPANY_WEBSITE = 'changecompanywebsite';
+  public static CHANGE_COMPANY_ACCOUNT_DETAILS = 'changerecruiteraccountdetails';
   public static VERIFY_CHANGED_EMAIL = 'verifychangedemailid';
   public static VERIFY_USER = 'verifyAccount';
   public static VERIFY_EMAIL = 'verifyEmail';
@@ -654,6 +654,7 @@ export class Label {
   public static NEW_PASSWORD_LABEL: string = 'New Password';
   public static CONFIRM_PASSWORD_LABEL: string = 'Confirm Password';
   public static FIRST_NAME_LABEL: string = 'First Name';
+  public static COMPANY_NAME_LABEL: string = 'Company Name';
   public static LAST_NAME_LABEL: string = 'Last Name';
   public static EMAIL_FIELD_LABEL: string = 'Email';
   public static COMPANY_WEBSITE_FIELD_LABEL: string = 'Website';
