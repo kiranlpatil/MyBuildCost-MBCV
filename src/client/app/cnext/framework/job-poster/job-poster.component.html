@@ -75,16 +75,17 @@
   </div>
   <div class="dropup ask-expert" *ngIf="role==='recruiter' && jobPosterModel && jobPosterModel._id !==''">
     <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown" type="button" (click)="buildJobShareUrl()" >
-      <span class="glyphicon glyphicon-send"></span><span class="label">{{getLabel().ASK_EXPERT}}</span>
+      <span class="label">{{getLabel().ASK_EXPERT}}</span>
     </button>
     <a id="mail_link" href="mailto:example@domain.com?subject={{getLabel().CLOSE_JOB}}&body={{jobPosterModel.sharedLink}}" hidden></a>
     <ul class="dropdown-menu ask-expert-dropdown">
       <li>
           <button type="button" class="close" data-toggle="dropdown" >&times;</button>
-          <h4>Copy and Send link</h4>
-          <p>Copy and send this link to hiring manager</p>
+          <h4>{{getHeading().ASK_EXPERT}}</h4>
+          <p>{{getMessage().ASK_EXPERT_MESSAGE}}
+          </p>
           <div class="form-group">
-            <input class="form-control" type="text" [value]="jobPosterModel.sharedLink"/>
+            <input class="form-control" type="text" [value]="jobPosterModel.sharedLink" readonly/>
           </div>
       </li>
     </ul>

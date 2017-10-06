@@ -21,6 +21,7 @@ import {ErrorService} from "../../../../shared/services/error.service";
 export class JobCompareViewComponent implements OnChanges,OnInit {
   @Input() candiadteId: string;
   @Input() jobId: string;
+  @Input() jobCompareIdForPrint: string;
   capabilities: Capability[];
   gotItMessage:string= Headings.GOT_IT;
   candidate : Candidate= new Candidate();

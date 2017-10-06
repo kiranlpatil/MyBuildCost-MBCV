@@ -306,10 +306,20 @@
 .print-btn {
   background: transparent;
   border: 0;
-  color: $white;
-  float: right;
-  font-weight: normal;
-  margin: 4px 13px 0 0;
+  color: $black1;
+  margin: 0;
+  padding: 1px;
+  position: fixed;
+  right: 53px;
+  top: -20px;
+  z-index: 99;
+  span {
+    background: url(../assets/c-next/card-view/sprite.png) no-repeat -108px -712px;
+    height: 32px;
+    margin: -4px -25px;
+    position: absolute;
+    width: 32px !important;
+  }
 }
 
 @media only screen and (max-width: 1024px) {

@@ -7,7 +7,11 @@
     </div>
   </div>
 </div>
+
+
+<div id="{{jobCompareIdForPrint}}">
 <div class="modal-header">
+  <cn-print-screen *ngIf="typeOfView == 'spa_candidate'" [screenIdForPrint]="'print-job-compare-view'" [fileName]="'Candidate-Overlay-View'" [candidateId]="candiadteId" [jobId]="recruiterId"></cn-print-screen>
   <div *ngIf="typeOfView =='spa_job' && recruiter != undefined">
     <img src="/assets/framework/images/dashboard/profile.png" alt="User Profile"
          *ngIf="recruiter.company_logo==undefined"/>
@@ -25,9 +29,9 @@
     <img src="/assets/c-next/card-view/close-white.png" (click)="closeThis()" class="close"/>
   </div>
   <div *ngIf="((typeOfView =='spa_candidate' || typeOfView =='compact') && candidateDetails != undefined)">
-    <img src="/assets/framework/images/dashboard/profile.png" alt="User Profile"
+    <img src="/assets/framework/images/dashboard/profile.png" alt="User Profile" class="profile-avatar"
          *ngIf="candidateDetails.picture==undefined"/>
-    <img [src]="getImagePath(candidateDetails.picture)" alt="User Profile"
+    <img [src]="getImagePath(candidateDetails.picture)" alt="User Profile" class="profile-avatar"
          *ngIf="candidateDetails.picture!=undefined"/>
     <div class="job-info-labal">
       <div class="user-job-label pull-left">
@@ -291,10 +295,12 @@
         <h4 class="pull-left col-xs-3 no-padding text-left">Key Skills</h4>
         <div class="pull-left col-xs-8 no-padding text-left">
           <div class="option exact" *ngFor="let item of data.proficienciesMatch;let i = index">
-            <span>{{item}}</span> <img class="" src="assets/framework/images/dashboard/right-tick.svg"/>
+            <span>{{item}}</span>
+            <div class="right-tick"></div>
           </div>
           <div class="option missing" *ngFor="let item of data.proficienciesUnMatch;let i = index">
-            <span>{{item}}</span><img class="" src="assets/framework/images/dashboard/missing.svg"/>
+            <span>{{item}}</span>
+            <div class="missing-icon"></div>
           </div>
         </div>
       </div>
@@ -387,3 +393,4 @@
     </div>
   </div>
 </section>
+</div>

@@ -477,4 +477,8 @@ export class JobPosterComponent implements OnInit, OnChanges {
   getLabel() {
     return Label;
   }
+
+  getMessage() {
+      return Messages;
+  }
 }

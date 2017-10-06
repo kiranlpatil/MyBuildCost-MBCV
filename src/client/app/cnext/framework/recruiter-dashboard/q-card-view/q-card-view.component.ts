@@ -51,6 +51,7 @@ export class QCardviewComponent implements OnChanges {
   private showModalStyle: boolean = false;
   private isAlreadyPresentInCart: boolean = false;
   private isShortlistedclicked: boolean = false;
+  private isShowPrintView: boolean = false;
 
 
 
@@ -149,6 +150,7 @@ export class QCardviewComponent implements OnChanges {
         }
         break;
       case ValueConstant.CART_LISTED_CANDIDATE :
+        this.isShowPrintView = false;
         this.candidateQlist.cartCandidates.splice(this.candidateQlist.cartCandidates.indexOf(candidate), 1);
         isFound=false;
         for(let item of this.candidateQlist.matchedCandidates){
@@ -322,6 +324,7 @@ export class QCardviewComponent implements OnChanges {
             }
           );
       }else {
+        this.isShowPrintView = true;
         this.usageTrackingService.addUsesTrackingData(UsageActions.VIEWED_FULL_PROFILE_BY_RECRUITER,
           LocalStorageService.getLocalValue(LocalStorage.END_USER_ID),this.jobId,this.modelCandidate._id).subscribe(
           data=> {
@@ -356,6 +359,7 @@ export class QCardviewComponent implements OnChanges {
   }
 
   closeJob() {
+    this.isShowPrintView = false;
     this.showModalStyle = !this.showModalStyle;
   }
 

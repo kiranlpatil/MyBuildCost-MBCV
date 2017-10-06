@@ -1,7 +1,10 @@
+@import '../../../../css/common';
+
 .compare-candidate-container {
+  background: $body-bg;
   padding: 0;
   height: auto;
   overflow-x: auto;
   white-space: nowrap;
-  margin-bottom: 50px;
+  margin-bottom: 30px;
 }
