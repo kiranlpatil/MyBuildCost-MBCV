@@ -217,7 +217,7 @@
 
 </div>
 
-<div *ngIf="type=='cartListed'" class="modal dashboard-modal" [style.display]="getStyleModal()">
+<div  *ngIf="type=='cartListed'" class="modal dashboard-modal" [style.display]="getStyleModal()">
   <div class="modal-bg">
     <div class="compare-modal-dialog modal-md">
       <div class="modal-content">
@@ -249,3 +249,14 @@
   </div>
 </div>
 
+<div *ngIf="isShowPrintView && type=='cartListed'">
+  <div class="row capability-complexity">
+    <ul class="legends">
+      <li ><span class="legend-above"></span>Candidate capabilities higher than desired</li>
+      <li ><span class="legend-exact"></span>Candidate capabilities with exact match</li>
+      <li ><span class="legend-below"></span>Candidate capabilities slightly less than desired</li>
+      <li ><span class="legend-missing"></span>Large mismatch of capabilities</li>
+    </ul>
+  </div>
+  <cn-job-compare-view [jobCompareIdForPrint]="'print-job-compare-view'" [typeOfView]="'spa_candidate'" (close)="closeJob()" [candiadteId]="selectedCandidate._id" [jobId]="jobId"></cn-job-compare-view>
+</div>

@@ -676,7 +676,7 @@ export class Label {
   public static ACTIONS: string = 'Actions';
   public static TOTAL_POSTED_JOB: string = 'Total Posted Jobs';
   public static COMPANY_NAME: string = 'Company Name (Size)';
-  public static ACCEPT_NAME: string = 'I Accept';
+  public static ACCEPT_NAME: string = 'I accept the';
   public static TERMS_AND_CONDITIONS_NAME: string = 'Terms and Conditions.';
   public static REGISTER_AS_APPLICANT: string = 'Register as an applicant';
   public static REGISTER_AS_RECRUITER: string = 'Register as a recruiter';

@@ -41,7 +41,6 @@ export class PrintScreenComponent {
             } else {
               this.trackUsage(UsageActions.PRINT_OVERLAY_VIEW_BY_RECRUITER,this.candidateId,this.jobId);
             }
-            //window.location.href = 'mailto:user@example.com?subject=Subject&body=Hi&Attach='+this.fileToDownload.nativeElement.download;
           } else {
             //doc.setFontSize(40);
             //doc.text(35, 25, "Octonyan loves jsPDF");
@@ -52,7 +51,7 @@ export class PrintScreenComponent {
         })
         .catch((err:any) => {
           let message = new Message();
-          message.custom_message = Messages.MSG_ON_FILE_CREATION_FAILED;
+          message.custom_message = err.message;//Messages.MSG_ON_FILE_CREATION_FAILED;
           message.isError = true;
           this.messageService.message(message);
         });

@@ -94,8 +94,23 @@
     font-size: 14px;
     font-family: 'gothamrnd-book';
   }
+  .exact {
+    .right-tick {
+      background: url(../assets/c-next/card-view/sprite.png) no-repeat -49px -404px;
+      float: right;
+      height: 22px;
+      width: 26px;
+    }
+  }
+  .missing {
+    .missing-icon {
+      background: url(../assets/c-next/card-view/sprite.png) no-repeat -145px -404px;
+      float: right;
+      height: 22px;
+      width: 26px;
+    }
+  }
 }
-
 .left-content {
   width: 250px;
 }

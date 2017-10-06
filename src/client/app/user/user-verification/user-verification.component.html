@@ -4,7 +4,7 @@
 
   <cn-app-loader></cn-app-loader>
 
-  <div class="col-lg-4 col-md-4 col-sm-6 col-xs-11 content">
+  <div class="col-lg-4 col-md-4 col-sm-6 col-xs-11 content user-verification-container">
 
     <h5>Verify Your Account
       <!--<span class="glyphicon glyphicon-remove" (click)="navigateTo('/landing')"></span>--></h5>
@@ -50,7 +50,7 @@
       </div>
 
       <div class="button-group">
-        <button type="submit" class="btn btn-success" *ngIf="!isMailSent">Send</button>
+        <button type="submit" class="btn btn-success" *ngIf="!isMailSent">Send Email</button>
         <button type="submit" class="btn btn-danger"  *ngIf="isMailSent">Resend Verification
           Email
         </button>

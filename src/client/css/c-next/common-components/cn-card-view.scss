@@ -134,18 +134,18 @@
   }
 
   .btn-cart {
-    border-radius: 0;
     background-color: $theme-color;
     border: 1px solid $theme-color;
+    border-radius: 0;
     box-shadow: none;
     color: $white;
-    width: 150px;
-    margin: 0 auto;
-    z-index: 2;
-    position: relative;
-    padding: 6px 25px !important;
-    height: 32px !important;
     font-size: 14px !important;
+    height: 32px !important;
+    margin: 0 3px 0 -3px;
+    padding: 6px 25px !important;
+    position: relative;
+    width: 48.5%;
+    z-index: 2;
 
     &:hover,
     &:focus,
@@ -159,6 +159,7 @@
 
   .panel-container {
     position: relative;
+    z-index: 9;
 
     .button-group {
       position: absolute;
@@ -338,13 +339,18 @@ header {
     position: absolute;
     top: 190px;
     left: 15px;
-    max-width: calc(100% - 30px);
+    /*max-width: calc(100% - 30px);*/
   }
 }
 
 #cart-job {
   .empty-list-message {
     margin-top: 90px !important;
+  }
+  .card-view {
+    .panel {
+      margin: 6px 0 12px;
+    }
   }
 }
 
