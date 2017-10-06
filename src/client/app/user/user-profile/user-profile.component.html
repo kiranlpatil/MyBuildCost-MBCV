@@ -13,19 +13,22 @@
           <cn-profile-picture (onPictureUpload)="onPictureUpload($event)"></cn-profile-picture>
         </div>
         <div *ngIf="role==='candidate'" class="user-name">
-         <!-- <span class="profile-name-first">{{candidate.basicInformation.first_name}}&nbsp;</span> -->
           <span class="profile-name-first">{{model.first_name}}&nbsp;</span>
-          <!--<span class="profile-name-last">{{candidate.basicInformation.last_name}}</span>-->
           <span class="profile-name-last">{{model.last_name}}</span>
         </div>
+
+        <div *ngIf="role!='candidate'" class="user-name">
+          <span class="profile-name-first">{{company_name}}&nbsp;</span>
+        </div>
+
       </div>
     </div>
 
-    <div class="col-sm-8">
+    <div class="col-sm-8" *ngIf="role==='candidate'">
 
       <form [formGroup]="userForm" (submit)="onSubmit()" class="profile-form clearfix">
 
-        <div *ngIf="role==='candidate'" class="form-group" [class.fb-email-input]="isSocialLogin">
+        <div  class="form-group" [class.fb-email-input]="isSocialLogin">
           <cn-control-messages [control]="userForm.controls.first_name"></cn-control-messages>
           <label>{{getLabels().FIRST_NAME_LABEL}} </label>
           <input type="text" [(ngModel)]="model.first_name" formControlName="first_name" id="first_name "
@@ -33,7 +36,7 @@
         </div>
 
 
-        <div *ngIf="role==='candidate'" class="form-group" [class.fb-email-input]="isSocialLogin">
+        <div  class="form-group" [class.fb-email-input]="isSocialLogin">
           <cn-control-messages [control]="userForm.controls.last_name"></cn-control-messages>
           <label>{{getLabels().LAST_NAME_LABEL}}</label>
           <input type="text" [(ngModel)]="model.last_name" formControlName="last_name" id="last_name "
@@ -61,16 +64,6 @@
                  id="mobile_number" class="form-control clear" readonly/>
         </div>
 
-        <div *ngIf="role!=='candidate'"class="form-group" [class.fb-email-input]="isSocialLogin">
-          <cn-control-messages [control]="userForm.controls.company_website"></cn-control-messages>
-          <label>{{getLabels().COMPANY_WEBSITE_FIELD_LABEL}}
-            <span class="glyphicon glyphicon-pencil" (click)="showHideCompanyWebsiteModal()"></span>
-          </label>
-          <input [(ngModel)]="company_website" formControlName="company_website" id="company_website"
-                 class="form-control clear" readonly/>
-        </div>
-
-
         <div class="col-xs-12 error-msg alert alert-danger form-alert" [hidden]="isShowErrorMessage"><b>{{
           error_msg }}</b></div>
         <button type="submit" class="btn btn-primary pull-right" [disabled]="!userForm.valid">
@@ -78,6 +71,57 @@
         </button>
       </form>
     </div>
+
+
+
+
+    <div class="col-sm-8"  *ngIf="role!='candidate'">
+
+      <form [formGroup]="recruiterForm" (submit)="onSubmit()" class="profile-form clearfix">
+
+        <div  class="form-group" [class.fb-email-input]="isSocialLogin">
+          <cn-control-messages [control]="recruiterForm.controls.company_name"></cn-control-messages>
+          <label>{{getLabels().COMPANY_NAME_LABEL}} </label>
+          <input type="text" [(ngModel)]="company_name" formControlName="company_name" id="company_name "
+                 class="form-control"/>
+        </div>
+
+        <div class="form-group" [class.fb-email-input]="isSocialLogin">
+          <cn-control-messages [control]="recruiterForm.controls.email"></cn-control-messages>
+          <label>{{getLabels().EMAIL_FIELD_LABEL}}
+            <span class="glyphicon glyphicon-pencil" [class.hide-list]="isSocialLogin"
+                  (click)="showHideEmailModal()"></span>
+          </label>
+          <input [(ngModel)]="model.email" formControlName="email" id="recruiter_email"
+                 class="form-control clear" readonly/>
+        </div>
+
+
+        <div class="form-group" [class.hide-list]="isSocialLogin">
+          <cn-control-messages [control]="recruiterForm.controls.mobile_number"></cn-control-messages>
+          <label>{{getLabels().CONTACT_FIELD_LABEL}}
+            <span class="glyphicon glyphicon-pencil" (click)="showHideMobileModal()"></span>
+          </label>
+          <input type="number" [(ngModel)]="model.mobile_number" formControlName="mobile_number"
+                 id="recruiter_mobile_number" class="form-control clear" readonly/>
+        </div>
+
+        <div *ngIf="role!=='candidate'"class="form-group" [class.fb-email-input]="isSocialLogin">
+          <cn-control-messages [control]="recruiterForm.controls.company_website"></cn-control-messages>
+          <label>{{getLabels().COMPANY_WEBSITE_FIELD_LABEL}}</label>
+          <input type="text" [(ngModel)]="company_website" formControlName="company_website" id="recruiter_company_website"
+                 placeholder="www.example.com" class="form-control clear"/>
+        </div>
+
+
+        <div class="col-xs-12 error-msg alert alert-danger form-alert" [hidden]="isShowErrorMessage"><b>{{
+          error_msg }}</b></div>
+        <button type="submit" class="btn btn-primary pull-right" [disabled]="!recruiterForm.valid">
+          {{getLabels().SAVE_PROFILE_LABEL}}
+        </button>
+      </form>
+    </div>
+
 
   </div>
 </section>
@@ -125,22 +169,4 @@
   </div>
 </div>
 
-<div class="modal " [style.display]="getStyleCompanyWebsite()">
-  <div class="modal-bg">
-    <div class="modal-dialog modal-md">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" (click)="showHideCompanyWebsiteModal()">
-            <span aria-hidden="true">&times;</span>
-          </button>
-          <h5 class="modal-title">{{getHeadings().CHANGE_COMPANY_WEBSITE_HEADING}}</h5>
-        </div>
-        <div class="modal-body">
-          <div class="col-sm-12">
-            <cn-change-company-website [companyWebsite]="company_website"  (onCompanyWebsiteUpdate)="onCompanyWebsiteUpdate($event)"></cn-change-company-website>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+

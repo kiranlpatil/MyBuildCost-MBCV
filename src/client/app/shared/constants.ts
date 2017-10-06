@@ -310,8 +310,8 @@ export class Messages {
   public static RENEW_JOB_POST_MSG = 'Your job post has been expired to renew your job click on "Renew Job Post" button';
 
   public static NO_CANDIDATES_AVAILABLE = 'No candidates available for selected alphabet.';
-  public static NO_RECRUITERS_AVAILABLE = 'No recruiters available for selected alphabet.'
-
+  public static NO_RECRUITERS_AVAILABLE = 'No recruiters available for selected alphabet.';
+  public static OTHERS_AOW_MESSAGE = 'Thank you for your interest in our Job post but currently we do not have your Area of Work, we will get back to you after building your Area of Work';
 }
 export class AdminPanel {
   public static PUBLIC_PROFILE='Profile is public';
@@ -424,7 +424,7 @@ export class API {
   public static CHANGE_PASSWORD = 'changepassword';
   public static CHANGE_MOBILE = 'changemobilenumber';
   public static CHANGE_EMAIL = 'changeemailid';
-  public static CHANGE_COMPANY_WEBSITE = 'changecompanywebsite';
+  public static CHANGE_COMPANY_ACCOUNT_DETAILS = 'changerecruiteraccountdetails';
   public static VERIFY_CHANGED_EMAIL = 'verifychangedemailid';
   public static VERIFY_USER = 'verifyAccount';
   public static VERIFY_EMAIL = 'verifyEmail';
@@ -655,6 +655,7 @@ export class Label {
   public static NEW_PASSWORD_LABEL: string = 'New Password';
   public static CONFIRM_PASSWORD_LABEL: string = 'Confirm Password';
   public static FIRST_NAME_LABEL: string = 'First Name';
+  public static COMPANY_NAME_LABEL: string = 'Company Name';
   public static LAST_NAME_LABEL: string = 'Last Name';
   public static EMAIL_FIELD_LABEL: string = 'Email';
   public static COMPANY_WEBSITE_FIELD_LABEL: string = 'Website';

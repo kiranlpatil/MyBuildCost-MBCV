@@ -34,8 +34,6 @@ export class AppComponent implements OnInit {
               private commonService: CommonService,
               protected loaderService: LoaderService) {
     this.appTheme = AppSettings.INITIAL_THEM;
-
-debugger
     if (window.location.href.indexOf('/share/') === -1) {
     if (window.location.href.indexOf('/editJob/') === -1) {
       if (parseInt(LocalStorageService.getLocalValue(LocalStorage.IS_LOGGED_IN)) === 1) {

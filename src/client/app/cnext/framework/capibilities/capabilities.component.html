@@ -49,7 +49,7 @@
               <input type="checkbox" name="checkbox" (click)="selectedCapability(role,item,$event)" id="{{item.name}}"
                      value="{{item.name}}"
                      [checked]="secondaryNames.indexOf(item.code)!=-1||primaryNames.indexOf(item.code)!=-1">
-              <span>{{item.name}}</span>
+              <span *ngIf="item.name != ''">{{item.name}}</span>
               <div class="check"></div>
             </label>
           </div>

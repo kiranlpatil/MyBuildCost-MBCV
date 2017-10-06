@@ -1,6 +1,6 @@
 <div class="filter-bar">
-  <div class="filter-item" *ngFor="let item of filterData">
-    <button (click)="onFilterSelect(item)">{{item}}</button>
+  <div class="filter-item" *ngFor="let item of filterData;let i=index;">
+    <button id="button{{item}}" (click)="onFilterSelect(item)" [class.select-filter-bar-item] = "i==0">{{item}}</button>
   </div>
 </div>
 

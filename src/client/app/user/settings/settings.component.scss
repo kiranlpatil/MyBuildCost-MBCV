@@ -88,10 +88,10 @@
 
 @media (max-width: 767px) {
   .settings {
-    vertical-align: top;
-    padding-bottom: 54px;
-    height: calc(100% - 45px);
+    height: calc(100vh - 45px);
     overflow: auto;
+    padding-bottom: 54px;
+    vertical-align: top;
 
     .settings-content {
       top: 50px;

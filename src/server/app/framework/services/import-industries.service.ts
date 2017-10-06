@@ -64,6 +64,8 @@ class ImportIndustryService {
                 callback(new Error(Messages.MSG_ERROR_AREA_OF_WORK_CODE_MISSING+' - '+result[i].area_of_work),null);
               }
             }
+          } if (result[i].area_of_work_code === '99999' && result[i].capability ==='' && result[i].complexity==='') {
+            rolesArray = RolesService.addRole(result[i], rolesArray);
           }
           rolesArray = RolesService.addRole(result[i], rolesArray);
         }
@@ -75,6 +77,9 @@ class ImportIndustryService {
             if (rolesArray[i].name === currentRow.area_of_work) {
               if(result[j].capability_code === '') {
                 if(result[j].area_of_work === '' && result[j].capability ==='' && result[j].complexity==='') {
+                }
+                else if(result[j].area_of_work === 'Others' && result[j].capability ==='' && result[j].complexity==='') {
+                 // capabilities = CapabilitiesService.addCapabilities(result[j],capabilities);
                 }else {
                   console.log(' role name '+i+result[i].area_of_work);
                   if(!isSend) {
@@ -99,7 +104,10 @@ class ImportIndustryService {
               if (rolesArray[i].capabilities[capIndex].name === currentRow.capability) {
                 if (result[j].complexity_code === '') {
                   if (result[j].area_of_work === '' && result[j].capability === '' && result[j].complexity === '') {
-                  } else {
+                  }
+                  else if(result[j].area_of_work === 'Others' && result[j].capability === '' && result[j].complexity === '') {
+                    //complexities = ComplexitiesService.addComplexities(result[j], complexities);
+                  }else {
                     console.log(' role name ' + i + result[i].area_of_work);
                     if (!isSend) {
                       isSend = true;

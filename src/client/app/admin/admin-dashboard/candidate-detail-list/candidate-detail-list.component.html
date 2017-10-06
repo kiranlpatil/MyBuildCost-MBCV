@@ -35,8 +35,8 @@
       <ul>
         <li>
           <p class="username">{{candidate.first_name}} {{candidate.last_name}}
-            <span class="glyphicon glyphicon-eye-open" *ngIf="candidate.data && candidate.data.isVisible" title="Profile is Public"></span>
-            <span class="glyphicon glyphicon-eye-close" *ngIf="candidate.data && !candidate.data.isVisible" title="Profile is Private"></span>
+            <span class="glyphicon glyphicon-eye-open" *ngIf="candidate.data && candidate.data.isVisible" title="Profile is public and available in recruiter search"></span>
+            <span class="glyphicon glyphicon-eye-close" *ngIf="candidate.data && !candidate.data.isVisible" title="Profile is private hence it will not be visible to recruiter"></span>
           </p>
         </li>
         <li>
@@ -52,18 +52,18 @@
           <p *ngIf="candidate.data.location && candidate.data.location.city">{{candidate.data.location.city}}</p>
         </li>
         <li>
-          <span *ngIf="candidate.data.isSubmitted" class="completed" title="Profile is completed.">Created</span>
-          <span *ngIf="!candidate.data.isCompleted" class ="incomplete" title="Profile is partially filled hence will not be available in search results.">Partially created</span>
-          <span *ngIf="candidate.data.isCompleted && !candidate.data.isSubmitted" class="partial" title="Profile is completed but user has not visited dashboard.">Created but not submitted</span>
+          <span *ngIf="candidate.data.isSubmitted" class="completed" title="User has successfully created profile and published it.">Created</span>
+          <span *ngIf="!candidate.data.isCompleted" class ="incomplete" title="Profile is partially filled hence will not be available in recruiter search results.">Partially created</span>
+          <span *ngIf="candidate.data.isCompleted && !candidate.data.isSubmitted" class="partial" title="User has successfully created profile but not published(submitted) it.">Created but not submitted</span>
         </li>
         <li>
-          <div *ngIf="candidate.isActivated"><span class="activated" title="Profile is active"></span><span>Active</span></div>
-          <div *ngIf="!candidate.isActivated"><span class="not-activated" title="Profile is deactivated"></span><span>Deactive</span></div>
+          <div *ngIf="candidate.isActivated"><span class="activated" title="User account is active."></span><span>Active</span></div>
+          <div *ngIf="!candidate.isActivated"><span class="not-activated" title="User account is inactive."></span><span>Deactive</span></div>
         </li>
         <li>
-          <button *ngIf="candidate.isActivated" class="btn-danger btn-custom" (click)="updateDetail(i,candidate,candidate.isActivated)" title="Click to deactivate this profile.">Deactivate</button>
-          <button *ngIf="!candidate.isActivated" class="btn-primary btn-custom" (click)="updateDetail(i,candidate,candidate.isActivated)" title="Click to activate this profile.">Activate</button>
-          <button class="btn-danger btn-custom" (click)="viewProfile(candidate,'/value-portrait')" *ngIf="candidate.data.isCompleted" title="Click to view value portrait of this candidate">View Profile</button>
+          <button *ngIf="candidate.isActivated" class="btn-danger btn-custom" (click)="updateDetail(i,candidate,candidate.isActivated)" title="Click to deactivate this account.">Deactivate</button>
+          <button *ngIf="!candidate.isActivated" class="btn-primary btn-custom" (click)="updateDetail(i,candidate,candidate.isActivated)" title="Click to activate this account">Activate</button>
+          <button class="btn-danger btn-custom btn-view-profile" (click)="viewProfile(candidate,'/value-portrait')" *ngIf="candidate.data.isCompleted" title="Click to view value portrait of this candidate.">View Profile</button>
         </li>
       </ul>
     </div>

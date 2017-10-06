@@ -58,12 +58,11 @@
 
 @media screen and (min-width: 375px) and (max-width: 766px) {
   .page-header {
-    ul {
-      li {
-        margin: 5px 10px 0 0;
-        a {
-          font-size: 12px;
-        }
+    ul > li {
+      margin: 5px 10px 0 0;
+      padding: 11px 0;
+      a {
+        font-size: 12px;
       }
     }
   }
@@ -71,12 +70,11 @@
 
 @media screen and (min-width: 320px) and (max-width: 374px) {
   .page-header {
-    ul {
-      li {
-        margin-right: 10px;
-        a {
-          font-size: 10px;
-        }
+    ul > li {
+      margin-right: 10px;
+      padding: 17px 0;
+      a {
+        font-size: 10px;
       }
     }
   }

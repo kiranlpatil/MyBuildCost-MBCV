@@ -88,6 +88,7 @@ export class LoginComponent implements OnInit {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(this.currentPosition.bind(this), this.locationError.bind(this));
     }
+    window.scrollTo(0,0);
   }
 
   loginSuccess(res: any) {

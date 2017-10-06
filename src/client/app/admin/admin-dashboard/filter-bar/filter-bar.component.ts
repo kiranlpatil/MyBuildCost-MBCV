@@ -12,7 +12,11 @@ export class FilterBarComponent {
   @Output() onItemSelect = new EventEmitter();
 
 
-  onFilterSelect(item: any) {
+  onFilterSelect(item: any,event:any) {
+    if(document.getElementsByClassName('select-filter-bar-item').length){
+      document.getElementsByClassName('select-filter-bar-item')[0].className = '';
+    }
+    document.getElementById("button"+item).className = 'select-filter-bar-item';
     this.onItemSelect.emit(item);
   }
 

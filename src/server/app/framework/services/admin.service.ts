@@ -84,7 +84,7 @@ class AdminService {
                 'professionalDetails': 1,
                 'capability_matrix': 1,
                 'isVisible': 1,
-                'industry.name': 1
+                'industry': 1
               };
               for (let i = 0; i < result.length; i++) {
                 candidateService.retrieveWithLean({'userId': new mongoose.Types.ObjectId(result[i]._id)}, candidateFields, (error, resu) => {
@@ -94,6 +94,10 @@ class AdminService {
                     value++;
                     if (resu[0].proficiencies.length > 0) {
                       resu[0].keySkills = resu[0].proficiencies.toString().replace(/,/g, ' $');
+                    }
+
+                    if (resu[0].industry) {
+                      resu[0].roles = candidateService.loadRoles(resu[0].industry.roles);
                     }
 
                     if (resu[0].capability_matrix) {
@@ -345,16 +349,16 @@ class AdminService {
         'data.professionalDetails.currentSalary', 'data.professionalDetails.noticePeriod',
         'data.professionalDetails.relocate', 'data.professionalDetails.industryExposure',
         'data.professionalDetails.currentCompany', 'data.isCompleted', 'data.isSubmitted', 'data.isVisible',
-        'data.industry.name', 'data.keySkills', 'data.capabilityMatrix.capabilityCode',
+        'data.keySkills', 'data.industry.name', 'data.roles', 'data.capabilityMatrix.capabilityCode',
         'data.capabilityMatrix.complexityCode', 'data.capabilityMatrix.scenerioCode'];
       let fieldNames = ['First Name', 'Last Name', 'Mobile Number', 'Email', 'Is Activated', 'City', 'Education',
         'Experience', 'Current Salary', 'Notice Period', 'Ready To Relocate', 'Industry Exposure', 'Current Company',
-        'Is Completed', 'Is Submitted', 'Is Visible', 'Industry Name', 'Key Skills', 'Capability Code',
+        'Is Completed', 'Is Submitted', 'Is Visible', 'Key Skills', 'Industry', 'Role', 'Capability Code',
         'Complexity Code', 'Scenario Code'];
 
       let csv = json2csv({
         data: result.candidate, fields: fields, fieldNames: fieldNames,
-        unwindPath: ['data.capabilityMatrix']
+        unwindPath: ['data.roles','data.capabilityMatrix']
       });
       console.log("writing into file file");
       //fs.writeFile('./src/server/public/candidate.csv', csv, function (err: any) {
@@ -375,20 +379,21 @@ class AdminService {
         'data.postedJobs.jobTitle', 'data.postedJobs.hiringManager', 'data.postedJobs.department',
         'data.postedJobs.education', 'data.postedJobs.experienceMinValue', 'data.postedJobs.experienceMaxValue',
         'data.postedJobs.salaryMinValue', 'data.postedJobs.salaryMaxValue', 'data.postedJobs.joiningPeriod',
-        'data.postedJobs.keySkills', 'data.postedJobs.additionalKeySkills', 'data.postedJobs.capabilityMatrix.capabilityCode',
+        'data.postedJobs.keySkills', 'data.postedJobs.additionalKeySkills', 'data.postedJobs.industry.name',
+        'data.postedJobs.roles', 'data.postedJobs.capabilityMatrix.capabilityCode',
         'data.postedJobs.capabilityMatrix.complexityCode', 'data.postedJobs.capabilityMatrix.scenerioCode',
         'data.postedJobs.postingDate', 'data.postedJobs.expiringDate'];
 
       let fieldNames = ['Company Name', 'company size', 'Recruiting For Self', 'Number of Job Posted', 'Mobile Number',
         'Email', 'Is Activated', 'Is Job Posted', 'Job Title', 'Hiring Manager', 'Department', 'Education',
         'Experience MinValue', 'Experience MaxValue', 'Salary MinValue', 'Salary MaxValue', 'Joining Period',
-        'Key Skills', 'Additional Key Skills', 'Capability Code',
+        'Key Skills', 'Additional Key Skills', 'Industry', 'Role', 'Capability Code',
         'Complexity Code', 'Scenario Code', 'Posting Date', 'Expiring Date'];
       let csv = json2csv({
         data: result.recruiter,
         fields: fields,
         fieldNames: fieldNames,
-        unwindPath: ['data.postedJobs', 'data.postedJobs.capabilityMatrix']
+        unwindPath: ['data.postedJobs', 'data.postedJobs.roles', 'data.postedJobs.capabilityMatrix']
       });
       //fs.writeFile('./src/server/public/recruiter.csv', csv, function (err: any) {
       fs.writeFile('/home/bitnami/apps/jobmosis-staging/c-next/dist/server/prod/public/recruiter.csv', csv, function (err: any) {
