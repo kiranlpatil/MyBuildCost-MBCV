@@ -13,7 +13,7 @@ import {CandidateDetail} from "../../../../user/models/candidate-details";
 import {CandidateProfileService} from "../../candidate-profile/candidate-profile.service";
 import {Message} from "../../../../shared/models/message";
 import {MessageService} from "../../../../shared/services/message.service";
-import {ErrorService} from "../../error.service";
+import {ErrorService} from "../../../../shared/services/error.service";
 import {UsageTrackingService} from "../../usage-tracking.service";
 import {LocalStorageService} from "../../../../shared/services/localstorage.service";
 /*import underline = Chalk.underline;*/
@@ -34,6 +34,7 @@ export class QCardviewComponent implements OnChanges {
   @Input() jobId: string;
   @Input() type: string;
   @Input() filterMeta: QCardFilter;
+  @Input() isJobPostExpired : boolean;
   @Output() addedTocart: EventEmitter<any> = new EventEmitter<any>();
   @Input() progress_bar_color : string='#0d75fa';
   @Output() addForCompare: EventEmitter<any> = new EventEmitter<any>();
@@ -65,6 +66,7 @@ export class QCardviewComponent implements OnChanges {
         this.matchFormat = this.match.aboveMatch;
       }
     );
+
   }
 
   ngOnInlit() {
@@ -80,8 +82,11 @@ export class QCardviewComponent implements OnChanges {
         }
       }
     }
+    if (changes.isJobPostExpired && changes.isJobPostExpired.currentValue) {
+    this.isJobPostExpired=changes.isJobPostExpired.currentValue;
+    }
   }
-
+//TODO: refactor below code proper ->use service for logic ->by krishna ghatul
   actionOnQCardFromParent(data:any) {
     var candidate:CandidateQCard;
     var isFound:boolean = false;

@@ -1,5 +1,5 @@
 <div class="col-sm-4 panel-container" [ngClass]="setClasses()">
-  <div class="panel clearfix" (click)="viewJob(job._id)">
+  <div class="panel clearfix" (click)="viewJob(job)">
     <ul>
       <li *ngIf="type=='block'" (click)="deleteItem(job._id)" title='Remove job from "Not Interested" list' ><img src="assets/c-next/card-view/close-grey.png" /></li>
     </ul>
@@ -89,10 +89,12 @@
         </p>-->
       </div>
     </div>
-    <div class="company-profile-picture" title="Company Logo">
-      <img *ngIf="job.company_logo" [src]="getImagePath(job.company_logo)" >
-      <img *ngIf="!job.company_logo" src="assets/c-next/company-details/company-logo-default.png" />
-    </div>
+  </div>
+  <div class="company-profile-picture" title={{job.company_website}}>
+    <span  (click)="onCompanyWebsiteClick(job.company_website)">
+      <img *ngIf="job.company_logo" [src]="getImagePath(job.company_logo)" ></span>
+    <span  (click)="onCompanyWebsiteClick(job.company_website)">
+      <img *ngIf="!job.company_logo" src="assets/c-next/company-details/company-logo-default.png" /></span>
   </div>
   <div *ngIf="type == 'searchView'" class="current-user-staus">
     <span *ngIf="inCartListedStatusForSearchView && !inRejectListedStatusForSearchView">Added In Cart</span>
@@ -103,10 +105,10 @@
 
   <div class="button-group btn-hover" *ngIf="type == 'searchView'">
     <button *ngIf="inCartListedStatusForSearchView == false && inRejectListedStatusForSearchView == false"
-            class="btn btn-primary" (click)="actionForSearchView('cartListed',job._id)">Add to cart
+            class="btn btn-primary" (click)="actionForSearchView('cartListed',job)">Add to cart
     </button>
     <button *ngIf="inRejectListedStatusForSearchView == false" class="btn btn-danger"
-            (click)="actionForSearchView('rejectedList',job._id) ">Reject
+            (click)="actionForSearchView('rejectedList',job) ">Reject
     </button>
   </div>
 </div>

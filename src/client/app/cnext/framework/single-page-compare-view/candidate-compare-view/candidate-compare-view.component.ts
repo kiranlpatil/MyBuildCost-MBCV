@@ -4,7 +4,7 @@ import { AppSettings, LocalStorage } from '../../../../shared/constants';
 import { LocalStorageService } from '../../../../shared/services/localstorage.service';
 import { CandidateCompareService } from './candidate-compare-view.service';
 import { RecruiterDashboardService } from '../../recruiter-dashboard/recruiter-dashboard.service';
-import {ErrorService} from "../../error.service";
+import {ErrorService} from "../../../../shared/services/error.service";
 
 
 @Component({

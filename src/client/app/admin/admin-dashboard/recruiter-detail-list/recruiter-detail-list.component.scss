@@ -1,5 +1,4 @@
-@import '../../../../../css/variables';
-@import '../../../../../css/c-next/theme/cn-theme';
+@import '../../../../css/variables';
 
 .list-container {
   text-align: left;
@@ -67,54 +66,18 @@
     }
 
     ul > li {
-      width: 12.5%;
+      width: 14%;
       padding: 5px 10px;
 
     }
 
     ul > li > p {
-      overflow: hidden !important;
+      overflow: auto !important;
       text-overflow: clip !important;
       white-space: pre-wrap !important;
       width: 100%;
     }
-
-    ul > li > .username {
-      position: relative;
-      padding: 0 18px 0 0;
-
-      .glyphicon-eye-open,
-      .glyphicon-eye-close {
-        position: absolute;
-        top: 2px;
-        right: 0;
-      }
-    }
   }
-}
-
-.completed {
-  background: #14892c;
-  border-radius: 3px;
-  padding: 3px 5px;
-  color: white;
-  font-size: 12px;
-}
-
-.incomplete {
-  background: #e3695f;
-  border-radius: 3px;
-  padding: 3px 5px;
-  color: white;
-  font-size: 12px;
-}
-
-.partial {
-  background: #f6c342;
-  border-radius: 3px;
-  padding: 3px 5px;
-  color: white;
-  font-size: 12px;
 }
 
 .btn-custom {
@@ -156,16 +119,12 @@
   }
 }
 
-@media only screen and (max-width: 980px) {
+@media only screen and (max-width: 935px) {
   .list-container {
     .list-view {
-      margin-top: 45px;
+      margin-top: 60px;
       .list-header {
-        height: 50px;
-      }
-      ul > li {
-        padding: 5px 10px;
-        width: 12%;
+        height: 65px;
       }
     }
   }

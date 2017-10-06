@@ -3,6 +3,7 @@ import {ProfileComparisonService} from "./profile-comparison.service";
 import {ProfileComparison, ProfileComparisonData, CompareEntityDetails} from "../model/profile-comparison";
 //TODO Abhijeet import {EventEmitter} from "@angular/common/src/facade/async";
 
+
 @Component({
   moduleId:module.id,
   selector:'cn-profile-comparison',
@@ -35,5 +36,4 @@ export class ProfileComparisonComponent implements OnChanges {
      this.profileComparisonData.splice(data.value,1);
      }*/
   }
-
 }

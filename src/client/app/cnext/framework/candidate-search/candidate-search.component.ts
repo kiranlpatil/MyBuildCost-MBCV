@@ -1,17 +1,21 @@
 import { Component, OnChanges} from '@angular/core';
 import { CandidateSearchService} from './candidate-search.service';
-import { ErrorService} from '../error.service';
+import { ErrorService } from '../../../shared/services/error.service';
 import { CandidateSearch} from '../model/candidate-search';
-import {JobQcard} from '../model/JobQcard';
-import {CandidateProfileService} from '../candidate-profile/candidate-profile.service';
-import {Candidate} from '../../../user/models/candidate';
-import {CandidateDetail} from '../../../user/models/candidate-details';
-import {Router} from '@angular/router';
-import {LocalStorage, Messages, UsageActions, ValueConstant} from '../../../shared/constants';
-import {QCardViewService} from '../recruiter-dashboard/q-card-view/q-card-view.service';
-import {LocalStorageService} from '../../../shared/services/localstorage.service';
-import {UsageTrackingService} from '../usage-tracking.service';
-import {CandidateDetailsJobMatching} from "../model/candidate-details-jobmatching";
+import { JobQcard } from '../model/JobQcard';
+import { CandidateProfileService } from '../candidate-profile/candidate-profile.service';
+import { Candidate } from '../../../user/models/candidate';
+import { CandidateDetail } from '../../../user/models/candidate-details';
+import { Router } from '@angular/router';
+import { ImagePath, LocalStorage, Messages, UsageActions, ValueConstant } from '../../../shared/constants';
+import { QCardViewService } from '../recruiter-dashboard/q-card-view/q-card-view.service';
+import { LocalStorageService } from '../../../shared/services/localstorage.service';
+import { UsageTrackingService } from '../usage-tracking.service';
+import { CandidateDetailsJobMatching } from '../model/candidate-details-jobmatching';
+import { MessageService } from '../../../shared/services/message.service';
+import { Message } from '../../../shared/models/message';
+import { SearchEvent } from '../model/search-event';
+import { SearchEventCompare } from '../model/search-event-compare';
 
 @Component({
   moduleId: module.id,
@@ -22,12 +26,12 @@ import {CandidateDetailsJobMatching} from "../model/candidate-details-jobmatchin
 
 export class CandidateSearchComponent implements OnChanges {
 
-  searchValue:string = "";
+  private searchValue:string = '';
   private showModalStyle: boolean = false;
-  candidateDataList:CandidateSearch[] = new Array(0);
-  listOfJobs:JobQcard[] = new Array(0);
+  private candidateDataList:CandidateSearch[] = new Array(0);
+  private listOfJobs:JobQcard[] = new Array(0);
   private candidateDetails:CandidateDetail = new CandidateDetail();
-  candidate:Candidate = new Candidate();
+  private candidate:Candidate = new Candidate();
   private userId:string;
   private msgSearchResultNotFound:string = Messages.MSG_CANDIDATE_SEARCH_NOT_FOUND;
   private msgCandidateNotFound:string = Messages.MSG_CANDIDATE_NOT_FOUND;
@@ -35,18 +39,20 @@ export class CandidateSearchComponent implements OnChanges {
   private msgCandidateIfNotInCart:string = Messages.MSG_CNADIDATE_IF_NOT_IN_CART;
   private candidateId:string;
   private jobId:string;
-  isShowJobCompareView:boolean = false;
-  checkButttons:boolean;
+  private job:JobQcard;
+  private isShowJobCompareView:boolean = false;
+  private checkButttons:boolean;
   private candidateDetailsJobMatching:CandidateDetailsJobMatching = new CandidateDetailsJobMatching();
-  inCartListedStatusForSearchView:boolean = false;
-  inRejectListedStatusForSearchView:boolean = false;
-  isCandidateFound:boolean;
-  private isShowSuggestionTosterMsg:boolean = false;
+  private inCartListedStatusForSearchView:boolean = false;
+  private inRejectListedStatusForSearchView:boolean = false;
+  private isCandidateFound:boolean;
+  private isShowSuggestionToasterMsg:boolean = false;
+
 
   constructor(private _router:Router, private candidateSearchService:CandidateSearchService,
               private usageTrackingService : UsageTrackingService,
               private errorService:ErrorService, private profileCreatorService:CandidateProfileService,
-              private qCardViewService:QCardViewService) {
+              private qCardViewService:QCardViewService,private messageService: MessageService) {
 
   }
 
@@ -70,7 +76,7 @@ export class CandidateSearchComponent implements OnChanges {
   }
 
   getJobProfileMatching(item:CandidateSearch) {
-    this.searchValue = item.first_name + " " + item.last_name;
+    this.searchValue = item.first_name + ' ' + item.last_name;
     this.isCandidateFound = true;
     this.getJobProfiles(item.id);
   }
@@ -107,7 +113,7 @@ export class CandidateSearchComponent implements OnChanges {
         }, error => this.errorService.onError(error));
       this._router.navigate([nav, this.userId]);
     } else {
-      this.isShowSuggestionTosterMsg = !this.isShowSuggestionTosterMsg;
+      this.isShowSuggestionToasterMsg = !this.isShowSuggestionToasterMsg;
     }
   }
 
@@ -124,8 +130,9 @@ export class CandidateSearchComponent implements OnChanges {
     }
   }
 
-  showJobCompareView(data:any) {
-    this.jobId = data.jobId;
+  showJobCompareView(data:SearchEventCompare) {
+    this.jobId = data.job._id;
+    this.job = data.job;
     this.inCartListedStatusForSearchView = data.inCartStatus;
     this.inRejectListedStatusForSearchView = data.inRejectedStatus;
     this.candidateId = this.candidate._id;
@@ -146,17 +153,31 @@ export class CandidateSearchComponent implements OnChanges {
     this.showModalStyle = !this.showModalStyle;
   }
 
-  workFlowAction(actionData:any) {
-    this.qCardViewService.updateCandidateLists(actionData.jobId, this.candidateId, actionData.name, 'add').subscribe(
+  workFlowAction(actionData:SearchEvent) {
+    this.qCardViewService.updateCandidateLists(actionData.job._id, this.candidateId, actionData.actionName, 'add').subscribe(
       data => {
+        let message = new Message();
+        message.isError = false;
+        if(actionData.actionName == ValueConstant.CART_LISTED_CANDIDATE) {
+          message.custom_message = 'Candidate ' + this.candidateDetails.first_name + ' ' + this.candidateDetails.last_name + ' is added to your cart for job ' + actionData.job.jobTitle+'.';
+        } else {
+          message.custom_message = 'Candidate '+this.candidateDetails.first_name+' '+this.candidateDetails.last_name+' is rejected  for job '+actionData.job.jobTitle+' and moved to the rejected list.';
+        }
+        this.messageService.message(message);
         this.getJobProfiles(this.candidateId);
       }, error => this.errorService.onError(error)
     );
   }
 
   actionOnCard(value:string) {
-    var data = {'name': value, 'jobId': this.jobId};
-    this.workFlowAction(data);
+    let searchEvent:SearchEvent = new SearchEvent();
+    searchEvent.actionName = value;
+    searchEvent.job = this.job;
+    this.workFlowAction(searchEvent);
+  }
+
+  getImagePath() {
+    return ImagePath;
   }
 
 }

@@ -5,7 +5,7 @@ import {Recruiter} from "../models/recruiter";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ValidationService} from "../../shared/customvalidations/validation.service";
 import {AppSettings, CommonService, Message, MessageService, NavigationRoutes} from "../../shared/index";
-import {ImagePath, LocalStorage, Messages} from "../../shared/constants";
+import {API, ImagePath, Label, LocalStorage, Messages} from "../../shared/constants";
 import {LocalStorageService} from "../../shared/services/localstorage.service";
 import {Headers, Http, RequestOptions, Response} from "@angular/http";
 import {Location} from "../../user/models/location";
@@ -62,18 +62,21 @@ export class RecruiterSignUpComponent implements OnInit {
     this.recruiterForm = this.formBuilder.group({
       'company_name': ['', [ValidationService.noWhiteSpaceValidator, ValidationService.requireCompanyNameValidator, ValidationService.nameValidator]],
       'company_size': ['', Validators.required],
+      'company_website': ['',[ValidationService.requireWebsiteValidator,ValidationService.urlValidator]],
       'mobile_number': ['', [ValidationService.requireMobileNumberValidator, ValidationService.mobileNumberValidator]],
       'email': ['', [ValidationService.requireEmailValidator, ValidationService.emailValidator]],
       'password': ['', [ValidationService.requirePasswordValidator, ValidationService.passwordValidator]],
       'confirm_password': ['', [ValidationService.requireConfirmPasswordValidator]],
       'location': ['', Validators.required],
       'company_headquarter_country': [''],
+      'accept_terms': ['', Validators.required],
 
     });
     this.BODY_BACKGROUND = ImagePath.BODY_BACKGROUND;
     this.image_path = ImagePath.PROFILE_IMG_ICON;
     this.isChrome = this.sharedService.getUserBrowser();
     this.isToasterVisible = this.sharedService.getToasterVisiblity();
+    this.recruiterForm.controls['accept_terms'].setValue(false);
   }
 
   ngOnInit() {
@@ -169,7 +172,7 @@ export class RecruiterSignUpComponent implements OnInit {
     this.model = this.recruiterForm.value;
     if (this.model.company_name === '' || this.model.company_size == '' || this.model.mobile_number == '' ||
       this.model.email == '' || this.model.password == '' || this.model.confirm_password == '' ||
-      this.storedLocation.formatted_address == '' || this.companyHQCountry == '') {
+      this.storedLocation.formatted_address == '' || this.companyHQCountry == '' || !this.recruiterForm.controls['accept_terms'].value) {
       if (this.storedLocation.formatted_address == '') {
         this.isLocationEmpty = true;
       }
@@ -191,7 +194,7 @@ export class RecruiterSignUpComponent implements OnInit {
     }
 
     if (!this.recruiterForm.valid) {
-      return
+      return;
     }
 
 
@@ -275,6 +278,15 @@ export class RecruiterSignUpComponent implements OnInit {
 
   getMessages() {
     return Messages;
+  }
+
+  getLabel() {
+    return Label;
+  }
+
+  goToAcceptTerms() {
+    let host = AppSettings.HTTP_CLIENT + window.location.hostname + API.ACCEPT_TERMS;
+    window.open(host, '_blank');
   }
 
 }

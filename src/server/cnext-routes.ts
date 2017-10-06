@@ -53,17 +53,26 @@ export function cnextInit(app: express.Application) { //todo add interceptor to 
   app.put('/api/candidate/:id/jobProfile/:profileId/:listName/:action', this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, jobProfileController.apply);
   app.post('/api/recruiter/jobProfile/:id/candidates', this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, jobProfileController.getQCardDetails);
   app.put('/api/recruiter/:recruiterId/jobProfile/:profileId/:listName/:candidateId/:action', this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, jobProfileController.update);
-  app.get('/api/filterlist', this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, recruiterController.getFilterList);
+  app.get('/api/filterlist',  recruiterController.getFilterList);
   app.get('/api/releventindustries', this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, industryController.getReleventIndustryList);
   app.get('/api/recruiter/:id/jobprofile/:jobId', this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, recruiterController.getCompareDetailsOfCandidate);
   app.get('/api/recruiter/:id/candidatesearch/:searchvalue', this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, recruiterController.getCandidatesByName);
   app.get('/api/candidate/:candidateId/recruiter/:recruiterId/jobprofile', this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, searchController.searchCandidateJobProfiles);
-  app.get('/api/candidateDetails', this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, adminController.getCandidateDetails);
-  app.get('/api/recruiterDetails', this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, adminController.getRecruiterDetails);
+  app.get('/api/candidateDetails', this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, adminController.exportCandidateDetails);
+  app.get('/api/recruiterDetails', this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, adminController.exportRecruiterDetails);
+  app.get('/api/exportCandidateDetails', this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, adminController.exportCandidateDetails);
+  app.get('/api/exportRecruiterDetails', this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, adminController.exportRecruiterDetails);
+  app.get('/api/getCandidateDetails/:initial', this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, adminController.getCandidateDetailsByInitial);
+  app.get('/api/getRecruiterDetails/:initial', this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, adminController.getRecruiterDetailsByInitial);
+  app.post('/api/request_to_advisor',recruiterController.requestToAdvisor);
+  app.post('/api/response_to_recruiter/:id',this.authInterceptor.requiresAuth,recruiterController.responseToRecruiter);
+  app.put('/api/job/:id/clone', this.authInterceptor.requiresAuth, jobProfileController.cloneJob);
+
   //Share api
   app.get('/api/buildValuePortraitUrl', this.authInterceptor.requiresAuth, shareController.buildValuePortraitUrl);
+  app.get('/api/buildShareJobUrl/:jobId', this.authInterceptor.requiresAuth, shareController.buildShareJobUrl);
   app.get('/api/share/:shortUrl', shareController.getActualUrlForShare);
-  app.put('/api/job/:id/clone', this.authInterceptor.requiresAuth, jobProfileController.cloneJob);
+  app.put('/api/share/:shortUrl', this.authInterceptor.requiresAuth,shareController.resetActualUrlForShare);
 
   // API for Uses Tracking
   app.put('/api/usageTracking', jobProfileController.createUsesTracking);

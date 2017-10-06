@@ -49,12 +49,24 @@ export function retrieve(req: express.Request, res: express.Response, next: any)
           code: 401
         });
       } else {
+        let currentDate = Number(new Date());
+        let expiringDate = Number(new Date(result.postedJobs[0].expiringDate));
+        let daysRemainingForExpiring = Math.round(Number(new Date(expiringDate - currentDate))/(1000*60*60*24));
+        result.postedJobs[0].daysRemainingForExpiring=daysRemainingForExpiring;
+        if (daysRemainingForExpiring <= 0) {
+          result.postedJobs[0].isJobPostExpired=true;
+
+        } else{
+          result.postedJobs[0].isJobPostExpired=false;
+
+        }
         res.status(200).send({
           'data': {
             'industry': result
           }
         });
       }
+
 
     });
   } catch (e) {
@@ -226,7 +238,9 @@ export function cloneJob(req: express.Request, res: express.Response, next: any)
 
         delete newJob._id;
         newJob.jobTitle=newJobTitle;
-        newJob. isJobPosted=false;
+        newJob.isJobPosted=false;
+        newJob.isJobShared=false;
+        newJob.sharedLink='';
         newJob.postingDate = new Date();
         newJob.candidate_list=[];
 

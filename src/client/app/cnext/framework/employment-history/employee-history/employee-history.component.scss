@@ -48,6 +48,19 @@
   margin-bottom: 20px;
 }
 
+.default-checkbox {
+  margin: 0 10px 15px 0 !important;
+}
+
+.default-checkbox > label {
+  min-height: 17px;
+  padding: 2px 0 6px 20px !important;
+}
+
+.disable-select {
+  pointer-events: none;
+  background-color: $bg-disable-input;
+}
 
 @media only screen and (max-width: 980px) {
   .left-content,

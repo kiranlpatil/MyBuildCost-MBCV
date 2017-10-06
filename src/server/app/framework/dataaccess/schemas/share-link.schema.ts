@@ -12,10 +12,14 @@ class ShareLinkSchema {
       },
       longUrl: {
         type: String
-      }
+      },
+      isJobPosted: {
+        type: Boolean,
+        default: false
+      },
     }, {versionKey: false});
     return schema;
   }
 }
-var schema = mongooseConnection.model<ShareLink>("ShareLink", ShareLinkSchema.schema);
+var schema = mongooseConnection.model<ShareLink>('ShareLink', ShareLinkSchema.schema);
 export = schema;

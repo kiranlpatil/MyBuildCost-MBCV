@@ -80,6 +80,7 @@ class RecruiterRepository extends RepositoryBase<IRecruiter> {
           job_qcard.company_name = recruiter.company_name;
           job_qcard.company_size = recruiter.company_size;
           job_qcard.company_logo = recruiter.company_logo;
+          job_qcard.company_website= recruiter.company_website;
           job_qcard.salaryMinValue = job.salaryMinValue;
           job_qcard.salaryMaxValue = job.salaryMaxValue;
           job_qcard.experienceMinValue = job.experienceMinValue;

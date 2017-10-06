@@ -59,6 +59,7 @@
 
 .search-left-content {
   background: $white;
+  margin-bottom: 30px;
 }
 
 .search-container {
@@ -66,7 +67,7 @@
   margin-top: 100px;
   .card-view {
     float: left;
-    margin-top: 40px;
+    margin-top: 10px;
     width: 100%;
   }
   .empty-list-message {
@@ -79,29 +80,29 @@
     clear: both;
     color: $white;
     display: table;
-    margin: 15px auto;
+    margin: 0;
     padding: 7px 25px;
   }
 }
 
 .profile-visibility-message {
   position: relative;
+  width: auto;
+  float: right;
 
   .message-content {
-    position: absolute;
-    top: 40px;
-    left: 50%;
     background: $white;
     border: 1px solid $border-color1;
-    box-shadow: 1px 1px;
-    width: 200px;
-    display: none;
-    color: $light-black;
     box-shadow: 0 2px 4px 0 $gray-light1;
-    padding: 10px 0;
-    z-index: 998;
+    color: $light-black;
+    display: none;
+    font-size: 12px;
+    padding: 5px 0;
+    position: absolute;
+    right: 0;
+    top: 44px;
     width: 230px;
-    transform: translate(-50%, 0);
+    z-index: 998;
 
     img {
       display: block;
@@ -111,5 +112,44 @@
 
   .display-message {
     display: block !important;
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .search-left-content {
+    width: 100%;
+  }
+  .candidate-search-input {
+    input {
+      width: 400px;
+    }
+  }
+
+  .auto-suggestion-list {
+    width: 400px;
+  }
+}
+
+@media only screen and (max-width: 980px) {
+  .search-left-content {
+    width: 100%;
+  }
+  .candidate-search-input {
+    padding: 10px 0;
+    input {
+      width: 300px;
+    }
+  }
+
+  .auto-suggestion-list {
+    width: 300px;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .search-left-content {
+    width: calc(100% - 30px);
+    margin: 0 auto;
+    padding: 15px;
   }
 }

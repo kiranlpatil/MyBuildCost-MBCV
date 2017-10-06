@@ -6,7 +6,7 @@ import {Candidate} from "../../../../user/models/candidate";
 import {QCardFilterService} from "../q-card-filter.service";
 import {FilterService} from "./filter.service";
 import {QCardFilter} from "../../model/q-card-filter";
-import {ErrorService} from "../../error.service";
+import {ErrorService} from "../../../../shared/services/error.service";
 
 @Component({
   moduleId: module.id,

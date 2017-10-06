@@ -3,4 +3,5 @@ export class Share {
   last_name:string;
   shareUrl:string;
   isVisible:boolean;
+  isJobPosted:boolean;
 }

@@ -9,7 +9,7 @@ import {Recruiter} from "../../../../user/models/recruiter";
 import {AppSettings, Headings, ImagePath, LocalStorage, Messages} from "../../../../shared/constants";
 import {GuidedTourService} from "../../guided-tour.service";
 import {LocalStorageService} from "../../../../shared/services/localstorage.service";
-import {ErrorService} from "../../error.service";
+import {ErrorService} from "../../../../shared/services/error.service";
 
 @Component({
   moduleId: module.id,

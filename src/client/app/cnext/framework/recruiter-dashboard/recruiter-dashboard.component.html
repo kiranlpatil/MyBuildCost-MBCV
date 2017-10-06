@@ -20,14 +20,14 @@
       <div *ngIf="recruiterDashboard && screenType != ''">
         <cn-job-lister [headerInfoForJob]="recruiterHeaderDetails" [jobListInput]="recruiterDashboard.postedJobs"
                        (jobPostEventEmitter)="jobSelected($event)" [screenType]="screenType"
-                       [recruiter]="recruiterDashboard" (jobListCloneSuccessEmitter)="OnCloneSuccessMessage()"></cn-job-lister>
+                       [recruiter]="recruiterDashboard" (jobListCloneSuccessEmitter)="OnCloneSuccessMessage()"
+        (selectedJobProfileEmitter)="checkJobPostExpiryDate($event)"></cn-job-lister>
       </div>
     </div>
     <!--<cn-tool-tip [message]="test"></cn-tool-tip>-->
     <div id="post_new_job" class="tab-pane fade clearfix" *ngIf="recruiterDashboard">
-      <cn-job-poster [noOfJobPosted]="recruiterDashboard.postedJobs.length" [currentjobId]="jobId"
-                     (jobPostEventEmitter)="jobSelected($event)"
-                     (jobPostCloneSuccessEmitter)="OnCloneSuccessMessage()"[recruiter]="recruiterDashboard"></cn-job-poster>
+      <cn-job-poster [noOfJobPosted]="recruiterDashboard.postedJobs.length" [currentjobId]="jobId" [role]="'recruiter'"
+                     (jobPostEventEmitter)="jobSelected($event)" (jobPostCloneSuccessEmitter)="OnCloneSuccessMessage()"></cn-job-poster>
     </div>
 
     <div id="search-candidate" class="tab-pane fade clearfix" *ngIf="recruiterDashboard">

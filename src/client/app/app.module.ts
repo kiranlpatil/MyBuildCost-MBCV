@@ -139,13 +139,8 @@ import {ColorShadeDirective} from "./cnext/framework/profile-comparison/profile-
 import {AttributeFilterPipe} from "./cnext/framework/profile-comparison/profile-attribute-comparison/attribute-filter.pipe";
 import {ValueSortFilterPipe} from "./cnext/framework/profile-comparison/value-sort.pipe";
 import {GuidedTourService} from "./cnext/framework/guided-tour.service";
-import {ErrorService} from "./cnext/framework/error.service";
 import {LoggerService, MyErrorHandler} from "./cnext/framework/my-error-handler.service";
-import {AdminDashboardComponent} from "./cnext/framework/admin-dashboard/admin-dashboard.component";
-import {RecruiterDetailListComponent} from "./cnext/framework/admin-dashboard/recruiter-detail-list/recruiter-detail-list.component";
-import {CandidateDetailListComponent} from "./cnext/framework/admin-dashboard/candidate-detail-list/candidate-detail-list.component";
-import {KeyskillsDetailListComponent} from "./cnext/framework/admin-dashboard/keyskills-detail-list/keyskills-detail-list.component";
-import {AdminDashboardService} from "./cnext/framework/admin-dashboard/admin-dashboard.service";
+import {AdminDashboardService} from "./admin/admin-dashboard/admin-dashboard.service";
 import {CandidateSearchComponent} from "./cnext/framework/candidate-search/candidate-search.component";
 import {CandidateSearchService} from "./cnext/framework/candidate-search/candidate-search.service";
 import {UserModule} from "./user/user.module";
@@ -159,7 +154,12 @@ import {ShareService} from "./cnext/framework/share/share.service";
 import {SharedService} from "./shared/services/shared-service";
 import {ShareContainerComponent} from "./cnext/framework/share-container/share-container.component";
 import {ShareContainerService} from "./cnext/framework/share-container/share-container.service";
-import {UsageDetailsComponent} from "./cnext/framework/admin-dashboard/usage-details/usage-details.component";
+import {RenewJobPostService} from "./user/services/renew-jobpost.service";
+import {PrintScreenComponent} from "./cnext/framework/print-screen/print-screen.component";
+import {AdminModule} from "./admin/admin.module";
+import {JobShareContainerComponent} from "./cnext/framework/job-share-container/job-share-container.component";
+import {JobShareContainerService} from "./cnext/framework/job-share-container/job-share-container.service";
+
 //C-NEXT IMPORTS
 
 
@@ -172,7 +172,8 @@ import {UsageDetailsComponent} from "./cnext/framework/admin-dashboard/usage-det
     ReactiveFormsModule,
 
     SharedModule,
-    UserModule
+    UserModule,
+    AdminModule
   ],
   declarations: [
     AppComponent,
@@ -196,15 +197,11 @@ import {UsageDetailsComponent} from "./cnext/framework/admin-dashboard/usage-det
     ProfileDetailsDirective,
     ProfessionalDetailsDirective,
     AdditionalDetailsComponent,
-    RecruiterDetailListComponent,
-    CandidateDetailListComponent,
-    KeyskillsDetailListComponent,
     HorizontalListViewComponent,
     CandidateProfileComponent,
     ProfileDescriptionComponent,
     CapabilitiesComponent,
     GuidedTourComponent,
-    AdminDashboardComponent,
     MultipleQuestionAnswerComponent,
     JobProficienciesComponent,
     ProficienciesComponent,
@@ -227,6 +224,7 @@ import {UsageDetailsComponent} from "./cnext/framework/admin-dashboard/usage-det
     AcademicDetailComponent,
     CertificationAccreditationComponent,
     AwardsComponent,
+    JobShareContainerComponent,
     DescriptionFieldComponent,
     MoreAboutMyselfComponent,
     FilterComponent,
@@ -261,7 +259,6 @@ import {UsageDetailsComponent} from "./cnext/framework/admin-dashboard/usage-det
     RecuirterQCardMatchingPipe,
     MinRangeValidation,
     MaxRangeValidation,
-    UsageDetailsComponent,
     JobDashboardComponent,
     ReleventIndustryListComponent,
     ProfileComparisonComponent,
@@ -277,7 +274,8 @@ import {UsageDetailsComponent} from "./cnext/framework/admin-dashboard/usage-det
     CandidateSearchComponent,
     ShareComponent,
     JobCloneComponent,
-    ShareContainerComponent
+    ShareContainerComponent,
+    PrintScreenComponent
   ],
   providers: [
     {
@@ -302,7 +300,6 @@ import {UsageDetailsComponent} from "./cnext/framework/admin-dashboard/usage-det
     CandidateCompareService,
     ActiveUserService,
     BasicJobInformationService,
-    ErrorService,
     IndustryListService,
     CandidateJobListService,
     ProfessionalDataService,
@@ -312,6 +309,7 @@ import {UsageDetailsComponent} from "./cnext/framework/admin-dashboard/usage-det
     DateService,
     CandidateDashboardService,
     RoleTypeService,
+    RenewJobPostService,
     IndustryExperienceService,
     ShowQcardviewService,
     CandidateAwardService,
@@ -319,6 +317,7 @@ import {UsageDetailsComponent} from "./cnext/framework/admin-dashboard/usage-det
     ProfileDetailsService,
     AboutCandidateService,
     JobPosterService,
+    JobShareContainerService,
     ProfessionalDetailsService,
     CandidateAcademyDetailService,
     CandidateProfileService,

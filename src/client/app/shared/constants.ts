@@ -3,8 +3,9 @@ export class AppSettings {
   // public static IP = 'http://ee802b7f.ngrok.io';
   //public static IP = 'http://10.192.33.77:8080';
   //public static IP = 'http://52.10.145.87:3000';
+  //public static IP = 'https://34.215.90.153:3000';
   // public static IP = 'app.jobmosis.com';
-   public static IP = '';
+  // public static IP = '';
 
 
   public static get API_ENDPOINT(): string {
@@ -31,13 +32,19 @@ export enum UsageActions  {
   REMOVED_FROM_REJECT_BY_RECRUITER,
   REMOVED_FROM_COMPARE_VIEW_BY_RECRUITER,
   REMOVED_FROM_NOT_INTERESTED,
+  PRINT_COMPARISON_VIEW_BY_RECRUITER,
+  PRINT_OVERLAY_VIEW_BY_RECRUITER,
+  RENEWED_JOB_POST_BY_RECRUITER,
   DEFAULT_VALUE = 999
   //append your new enum value at the end of the list DON'T MODIFY THE LIST
 }
 
 
 export class Messages {
+  public static MSG_ON_FILE_CREATION_FAILED: string = 'Failed to create image of this page';
   public static MSG_MSG_CLONED_SUCCESSFULLY = 'New Job is been added successfully';
+  public static MSG_PRESENTLY_WORKING = 'Presently Working';
+
   public static MSG_CANDIDATE_NOT_FOUND = 'No registered applicant with this name. Avoid using multiple spaces while searching with complete names.';
   public static MSG_CANDIDATE_SEARCH_NOT_FOUND = "Applicant's profile does not match with any of your open job profiles.";
   public static MSG_CNADIDATE_VISIBILITY_OFF = 'The selected applicant profile details are not displayed, since the applicant has marked it as private.';
@@ -53,6 +60,7 @@ export class Messages {
   public static MSG_SUCCESS_RESET_PASSWORD: string = 'Your password is reset successfully.Kindly login';
   public static MSG_SUCCESS_CHANGE_PASSWORD: string = 'Your password has been changed successfully.';
   public static MSG_SUCCESS_CHANGE_EMAIL: string = 'Kindly click on the link sent to your new email for email verification.';
+  public static MSG_SUCCESS_COMPANY_WEBSITE: string = 'Company website updated successfully';
   public static MSG_SUCCESS_CHANGE_MOBILE: string = 'Verify your new mobile number by entering OTP sent on your mobile number.';
   public static MSG_SUCCESS_FORGOT_PASSWORD: string = 'Email for password reset has been sent successfully on your registered email id.';
   public static MSG_SUCCESS_DASHBOARD_PROFILE: string = 'Your profile updated successfully.';
@@ -67,6 +75,7 @@ export class Messages {
     'You may start using it immediately by clicking on Sign In!';
 
   public static MSG_SUCCESS_FOR_PROFILE_CREATION_STATUS: string = 'Your profile created successfully.';
+  public static MSG_SUCCESS_FOR_HIRING_MANAGER_JOB_CREATION_STATUS: string = 'Your changes are sent to recruiter now you will be notified by recruiter when job will be posted.';
   public static MSG_SUCCESS_FOR_JOB_POST_STATUS: string = 'You have successfully posted the new job. You can search for matching candidates for this job through your dashboard.';
   public static MSG_SUCCESS_FOR_FILE_DOWNLOAD: string = 'File has been downloaded successfully.';
   public static MSG_FOR_FILE_DOWNLOAD: string = 'Generating the file this may take few minutes.';
@@ -110,7 +119,7 @@ export class Messages {
   public static MSG_ERROR_VALIDATION_COMPANYNAME_REQUIRED = 'This field can\'t be left blank.';
   public static MSG_ERROR_VALIDATION_OTP_REQUIRED = 'Enter received OTP.';
   public static MSG_ERROR_VALIDATION_INVALID_EMAIL_REQUIRED = 'Enter a valid email address.';
-  public static MSG_ERROR_VALIDATION_INVALID_URL_REQUIRED = 'Enter a valid company website.';
+  public static MSG_ERROR_VALIDATION_INVALID_URL_REQUIRED = 'Website should be start with www';
   public static MSG_ERROR_VALIDATION_INVALID_NAME = 'Enter valid name.';
   public static MSG_ERROR_VALIDATION_INVALID_DATA = 'Enter valid data.';
   public static MSG_ERROR_VALIDATION_PASSWORD_MISMATCHED = 'Passwords do not match.';
@@ -174,6 +183,7 @@ export class Messages {
     'candidate to have mandatory experience in any specific Domain? If yes, select such MUST HAVE DOMAINS from below.';
   public static MSG_ERROR_VALIDATION_MAX_PROFICIENCIES =  ' Key skills. Click the cross sign to deselect existing one and add a new skill.';
   public static MSG_ERROR_VALIDATION_EMPLOYMENTHISTORY = 'Provide valid employment start and end date';
+  public static MSG_ERROR_VALIDATION_TERMS_AND_CONDITIONS_REQUIRED = 'Please accept the terms and conditions.';
 
 
   public static MSG_LANDING_PAGE = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' +
@@ -201,6 +211,7 @@ export class Messages {
   public static MSG_VERIFY_USER_3 = 'One Time Password(OTP) will be sent on following mobile number.';
   public static MSG_VERIFY_USER_4 = 'You are almost done! We need to verify your email id before you can start using the system.';
   public static MSG_EMAIL_NOT_MATCH = 'E-mail does not match.';
+  public static MSG_WEBSITE_SAME = 'Website is same as current website.';
   public static MSG_CHANGE_PASSWORD = 'Your password protects your account so password must be strong.' +
     'Changing your password will sign you out of all your devices, including your phone.' +
     'You will need to enter your new password on all your devices.';
@@ -294,6 +305,12 @@ export class Messages {
     '<br/> It is recommended that you keep the settings to "Yes". If you wish a job change, You can <br/>' +
   'change this setting later.';
 
+  public static UNABLE_TO_RENEW_JOB_POST_MSG = 'Cannot renew your job post kindly click on "Clone" button to clone the same job';
+  public static RENEW_JOB_POST_MSG = 'Your job post has been expired to renew your job click on "Renew Job Post" button';
+
+  public static NO_CANDIDATES_AVAILABLE = 'No candidates available for selected alphabet.';
+  public static NO_RECRUITERS_AVAILABLE = 'No recruiters available for selected alphabet.';
+  public static OTHERS_AOW_MESSAGE = 'Thank you for your interest in our Job post but currently we do not have your Area of Work, we will get back to you after building your Area of Work';
 }
 export class AdminPanel {
   public static PUBLIC_PROFILE='Profile is public';
@@ -381,6 +398,7 @@ export class ValueConstant {
 
 export class API {
   public static NOTIFICATION = 'notification';
+  public static SEND_CONFIRMATION_MAIL_TO_RECRUITER = 'response_to_recruiter';
   public static USAGETRACKING = 'usagetracking';
   public static SEND_MAIL = 'sendmail';
   public static SEND_TO_ADMIN_MAIL = 'sendmailtoadmin';
@@ -391,6 +409,10 @@ export class API {
   public static CANDIDATE_PROFILE = 'candidate';
   public static CANDIDATE_DETAIL_PROFILE = 'candidateDetails';
   public static RECRUITER_DETAIL_PROFILE = 'recruiterDetails';
+  public static GET_CANDIDATE_DETAILS = 'getCandidateDetails';
+  public static GET_RECRUITER_DETAILS = 'getRecruiterDetails';
+  public static EXPORT_CANDIDATE_DETAIL_PROFILE = 'exportCandidateDetails';
+  public static EXPORT_RECRUITER_DETAIL_PROFILE = 'exportRecruiterDetails';
   public static RECRUITER_PROFILE = 'recruiter';
   public static PROFESSIONAL_DATA = 'professionaldata';
   public static EMPLOYMENTHISTORY = 'employmentdata';
@@ -401,6 +423,7 @@ export class API {
   public static CHANGE_PASSWORD = 'changepassword';
   public static CHANGE_MOBILE = 'changemobilenumber';
   public static CHANGE_EMAIL = 'changeemailid';
+  public static CHANGE_COMPANY_ACCOUNT_DETAILS = 'changerecruiteraccountdetails';
   public static VERIFY_CHANGED_EMAIL = 'verifychangedemailid';
   public static VERIFY_USER = 'verifyAccount';
   public static VERIFY_EMAIL = 'verifyEmail';
@@ -439,6 +462,8 @@ export class API {
   public static RElEVENT_INDUSTRIES = 'releventindustries';
   public static CLONE_JOB = 'job';
   public static FAQ = '/blog/index.php/faq/';
+  public static ACCEPT_TERMS = '/terms-and-conditions.php';
+  public static COUNT_OF_USERS = 'countofusers'
 }
 
 export class ImagePath {
@@ -477,6 +502,7 @@ export class ImagePath {
   public static CALENDAR = './assets/c-next/post-job/calendar.png';
   public static CONTACT_PERSON = './assets/c-next/post-job/contact-person.png';
   public static POST_NEW_JOB = './assets/c-next/recruiter-welcome-screen/post-new-job.png';
+  public static INFO_RED = './assets/framework/images/dashboard/info-red.svg';
 
   //guided tour images for desktop
   public static BASE_ASSETS_PATH_DESKTOP = './assets/c-next/guided-tour/tour-for-desktop/';
@@ -602,7 +628,7 @@ export class Headings {
   public static ADDITIONAL_INFORMATION: string = 'Additional information about the job';
   public static OPTIONAL: string = '(Optional)';
   public static CAPABITITIES_HEADING: string = 'Capabilities';
-  public static EMPLOYMENT_HISTORY: string = 'Employment History';
+  public static EMPLOYMENT_HISTORY: string = 'Employment History (Optional)';
   public static ADDITIONAL_DOMAIN_EXPOSURE: string = 'Additional domain exposure';
   public static INDUSTRY_FOR_CANDIDATE: string = 'Select your Industry (Any One)';
   public static INDUSTRY_FOR_RECRUITER: string = 'Select industry in which candidate is expected to work (Any One)';
@@ -628,9 +654,10 @@ export class Label {
   public static NEW_PASSWORD_LABEL: string = 'New Password';
   public static CONFIRM_PASSWORD_LABEL: string = 'Confirm Password';
   public static FIRST_NAME_LABEL: string = 'First Name';
+  public static COMPANY_NAME_LABEL: string = 'Company Name';
   public static LAST_NAME_LABEL: string = 'Last Name';
   public static EMAIL_FIELD_LABEL: string = 'Email';
-  public static COMPANY_WEBSITE_FIELD_LABEL: string = 'Company Website';
+  public static COMPANY_WEBSITE_FIELD_LABEL: string = 'Website';
   public static CONTACT_FIELD_LABEL: string = 'Contact';
   public static SAVE_PROFILE_LABEL: string = 'Save Profile';
   public static RESET_PASSWORD_MESSAGE: string = 'Please set new password for your';
@@ -649,6 +676,11 @@ export class Label {
   public static ACTIONS: string = 'Actions';
   public static TOTAL_POSTED_JOB: string = 'Total Posted Jobs';
   public static COMPANY_NAME: string = 'Company Name (Size)';
+  public static ACCEPT_NAME: string = 'I Accept';
+  public static TERMS_AND_CONDITIONS_NAME: string = 'Terms and Conditions.';
+  public static REGISTER_AS_APPLICANT: string = 'Register as an applicant';
+  public static REGISTER_AS_RECRUITER: string = 'Register as a recruiter';
+  public static ASK_EXPERT: string = 'Ask Expert';
 }
 
 export class Button {

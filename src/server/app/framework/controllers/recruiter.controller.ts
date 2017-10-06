@@ -76,6 +76,17 @@ export function postJob(req: express.Request, res: express.Response, next: any) 
     var recruiterService = new RecruiterService();
     var userId = req.params.id;
     if (newJob.postedJobs._id !== undefined && newJob.postedJobs._id !== null && newJob.postedJobs._id !== '') {
+
+      let currentDate  = Number(new Date());
+      let expiringDate  = Number(new Date(newJob.postedJobs.expiringDate));
+      let daysRemainingForExpiring = Math.round(Number(new Date(expiringDate - currentDate))/(1000*60*60*24));
+      newJob.postedJobs.daysRemainingForExpiring=daysRemainingForExpiring;
+      if (daysRemainingForExpiring <= 0) {
+        newJob.postedJobs.isJobPostExpired=true;
+
+      } else {
+        newJob.postedJobs.isJobPostExpired = false;
+      }
       recruiterService.updateJob(userId, newJob, (err, result) => {
         if (err) {
           next({
@@ -161,6 +172,19 @@ export function retrieve(req: express.Request, res: express.Response, next: any)
             'jobCountModel': result[0].jobCountModel
           });
         } else {
+
+          let currentDate = Number(new Date());
+          let expiringDate = Number(new Date(result[0].postedJobs[0].expiringDate));
+          let daysRemainingForExpiring = Math.round(Number(new Date(expiringDate - currentDate))/(1000*60*60*24));
+          result[0].postedJobs[0].daysRemainingForExpiring=daysRemainingForExpiring;
+          if (daysRemainingForExpiring <= 0) {
+            result[0].postedJobs[0].isJobPostExpired=true;
+
+          } else{
+            result[0].postedJobs[0].isJobPostExpired=false;
+
+          }
+
           res.status(200).send({
             'status': Messages.STATUS_SUCCESS,
             'data': result
@@ -312,3 +336,61 @@ export function getCandidatesByName(req:express.Request, res:express.Response, n
   }
 
 }
+
+export function requestToAdvisor(req:express.Request, res:express.Response, next:any) {
+  try {
+
+    let recruiterService = new RecruiterService();
+    var params = req.body;
+    recruiterService.sendMailToAdvisor(params, (error, result) => {
+      if (error) {
+        console.log("Error : " + error);
+        next({
+          reason: Messages.MSG_ERROR_RSN_WHILE_CONTACTING,
+          message: Messages.MSG_ERROR_WHILE_CONTACTING,
+          code: 403
+        });
+      }
+      else {
+        res.status(200).send({
+          "status": Messages.STATUS_SUCCESS,
+          "data": {"message": Messages.MSG_SUCCESS_EMAIL}
+        });
+      }
+    });
+  }
+  catch (e) {
+    res.status(403).send({message: e.message});
+
+  }
+};
+
+export function responseToRecruiter(req:express.Request, res:express.Response, next:any) {
+  try {
+    let recruiterService = new RecruiterService();
+    let user=req.user;
+    var params = req.body;
+    recruiterService.sendMailToRecruiter(user,params, (error, result) => {
+      if (error) {
+        console.log("Error : " + error);
+        next({
+          reason: Messages.MSG_ERROR_RSN_WHILE_CONTACTING,
+          message: Messages.MSG_ERROR_WHILE_CONTACTING,
+          code: 403
+        });
+      }
+      else {
+        res.status(200).send({
+          "status": Messages.STATUS_SUCCESS,
+          "data": {"message": Messages.MSG_SUCCESS_EMAIL}
+        });
+      }
+    });
+  }
+  catch (e) {
+    res.status(403).send({message: e.message});
+
+  }
+};
+
+

@@ -18,6 +18,9 @@ class JobProfileSchema {
       jobTitle: {
         type: String
       },
+      sharedLink: {
+        type: String
+      },
       hiringManager: {
         type: String
       },
@@ -63,11 +66,22 @@ class JobProfileSchema {
         type: Boolean,
         default: false
       },
+      isJobPostExpired: {
+        type: Boolean,
+        default: false
+      },
+      isJobShared: {
+        type: Boolean,
+        default: false
+      },
       responsibility: {
         type: String
       },
       postingDate: {
         type: Date
+      },
+      daysRemainingForExpiring: {
+        type: Number
       },
       interestedIndustries: [{type: String}]
 

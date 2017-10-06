@@ -1,17 +1,5 @@
 import DataAccess = require('../dataaccess');
-import User = require('../mongoose/user');
 import ICandidate = require('../mongoose/candidate');
-import ICapability = require('../mongoose/capability');
-import IComplexity = require('../mongoose/complexity');
-import IAcademic = require('../mongoose/academics');
-import IProficiency = require('../mongoose/proficiency');
-import IProfessionalDetails = require('../mongoose/professional-details');
-import IEmploymentHistory = require('../mongoose/employment-history');
-import IJobProfile = require('../mongoose/job-profile');
-import ILocation = require('../mongoose/location');
-import IRole = require('../mongoose/role');
-import IIndustry = require('../mongoose/industry');
-import CapabilityModel = require('../model/capability.model');
 var mongoose1 = DataAccess.mongooseInstance;
 var mongooseConnection = DataAccess.mongooseConnection;
 var mongoose = require('mongoose');
@@ -132,6 +120,7 @@ class CandidateSchema {
       employmentHistory: [{
         companyName: String,
         designation: String,
+        isPresentlyWorking: Boolean,
         from: {
           month: String,
           year: Number

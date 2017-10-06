@@ -20,7 +20,7 @@ import {LoaderService} from "../../shared/loader/loaders.service";
 import {CandidateDetail} from "../models/candidate-details";
 import {Candidate, Summary} from "../models/candidate";
 import {CandidateProfileService} from "../../cnext/framework/candidate-profile/candidate-profile.service";
-import {ErrorService} from "../../cnext/framework/error.service";
+import {ErrorService} from "../../shared/services/error.service";
 
 
 @Component({
@@ -36,13 +36,17 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   submitted = false;
   isSocialLogin: boolean;
   userForm: FormGroup;
+  recruiterForm: FormGroup;
   filesToUpload: Array<File>;
   image_path: any;
   error_msg: string;
+  company_website:string;
+  company_name:string;
   isShowErrorMessage: boolean = true;
   newUser: number;
   showModalStyle: boolean = false;
   showStyleMobile: boolean = false;
+  showStyleCompanyWebsite: boolean = false;
   FIRST_NAME_ICON: string;
   LAST_NAME_ICON: string;
   MOBILE_ICON: string;
@@ -56,13 +60,22 @@ export class UserProfileComponent implements OnInit, OnDestroy {
               private themeChangeService: ThemeChangeService,
               private activatedRoute: ActivatedRoute,
               private candidateProfileService: CandidateProfileService,
-              private errorService: ErrorService,) {
+              private errorService: ErrorService) {
 
     this.userForm = this.formBuilder.group({
       'first_name': ['', Validators.required],
       'last_name': ['', Validators.required],
       'email': ['', [Validators.required, ValidationService.emailValidator]],
       'mobile_number': ['', [Validators.required, ValidationService.mobileNumberValidator]]
+
+
+    });
+    this.recruiterForm = this.formBuilder.group({
+      'company_name': ['', Validators.required],
+      'email': ['', [Validators.required, ValidationService.emailValidator]],
+      'mobile_number': ['', [Validators.required, ValidationService.mobileNumberValidator]],
+      'company_website': ['', [Validators.required, ValidationService.urlValidator]]
+
 
     });
     this.filesToUpload = [];
@@ -115,6 +128,8 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     this.candidateProfileService.getRecruiterDetails()
       .subscribe(
         recruiterData => {
+          this.company_website=recruiterData.data[0].company_website;
+          this.company_name=recruiterData.data[0].company_name;
           this.OnCandidateDataSuccess(recruiterData);
         }, error => this.errorService.onError(error));
   }
@@ -124,7 +139,6 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     this.candidate.basicInformation = candidateData.metadata;
     this.candidate.summary = new Summary();
   }
-
   ngOnDestroy() {
     //this.loaderService.stop();
   }
@@ -164,11 +178,20 @@ export class UserProfileComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     this.submitted = true;
-    this.model = this.userForm.value;
-    this.dashboardService.updateProfile(this.model)
-      .subscribe(
-        user => this.onProfileUpdateSuccess(user),
-        error => this.onProfileUpdateError(error));
+    if(this.role === 'candidate') {
+      this.model = this.userForm.value;
+      this.dashboardService.updateProfile(this.model)
+        .subscribe(
+          user => this.onProfileUpdateSuccess(user),
+          error => this.onProfileUpdateError(error));
+    }else {
+      this.model = this.recruiterForm.value;
+      console.log(this.model );
+      this.dashboardService.changeRecruiterAccountDetails(this.model)
+        .subscribe(
+          user => this.onProfileUpdateSuccess(user),
+          error => this.onProfileUpdateError(error));
+    }
   }
 
   onProfileUpdateSuccess(result: any) {
@@ -207,8 +230,18 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     this.showModalStyle = !this.showModalStyle;
   }
 
+  showHideCompanyWebsiteModal() {
+    this.showStyleCompanyWebsite = !this.showStyleCompanyWebsite;
+  }
   showHideMobileModal() {
     this.showStyleMobile = !this.showStyleMobile;
+  }
+  getStyleCompanyWebsite() {
+    if (this.showStyleCompanyWebsite) {
+      return 'block';
+    } else {
+      return 'none';
+    }
   }
 
   getStyleEmail() {
@@ -241,6 +274,11 @@ export class UserProfileComponent implements OnInit, OnDestroy {
         this.candidate.basicInformation.picture = AppSettings.IP + this.candidate.basicInformation.picture;
       }
     }
+  }
+  onCompanyWebsiteUpdate(event:any) {
+    this.showStyleCompanyWebsite=false;
+    this.company_website=event;
+
   }
   getLabels() {
     return Label;

@@ -4,7 +4,7 @@ import {Candidate} from "../../../../../user/models/candidate";
 import {CandidateProfileService} from "../../../candidate-profile/candidate-profile.service";
 import {ComplexityComponentService} from "../../../complexities/complexity.service";
 import {JobCompareService} from "../../../single-page-compare-view/job-compare-view/job-compare-view.service";
-import {ErrorService} from "../../../error.service";
+import {ErrorService} from "../../../../../shared/services/error.service";
 import {Headings} from "../../../../../shared/constants";
 
 

@@ -4,10 +4,11 @@ import { RecruiterDashboard } from '../model/recruiter-dashboard';
 import { RecruiterHeaderDetails } from '../model/recuirterheaderdetails';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RedirectRecruiterDashboardService } from '../../../user/services/redirect-dashboard.service';
-import { ErrorService } from '../error.service';
+import { ErrorService } from '../../../shared/services/error.service';
 import { Messages } from '../../../shared/constants';
 import { MessageService } from '../../../shared/services/message.service';
 import { Message } from '../../../shared/models/message';
+import {RenewJobPostService} from "../../../user/services/renew-jobpost.service";
 
 @Component({
   moduleId: module.id,
@@ -18,23 +19,26 @@ import { Message } from '../../../shared/models/message';
 
 export class RecruiterDashboardComponent implements OnInit, AfterViewInit {
   company_name: string;
-  recruiterDashboard: RecruiterDashboard = new RecruiterDashboard();
+  private recruiterDashboard: RecruiterDashboard = new RecruiterDashboard();
   private recruiterHeaderDetails: RecruiterHeaderDetails = new RecruiterHeaderDetails();
   private tabName: string;
   private jobId: string;
-  screenType: string='';
+  private screenType: string='';
+  private selectedJobProfile: string;
 
 
   constructor(private recruiterDashboardService: RecruiterDashboardService,
               private errorService:ErrorService,
               private activatedRoute: ActivatedRoute,private _router: Router,
               private redirectRecruiterDashboard: RedirectRecruiterDashboardService,
-              private messageService: MessageService) {
+              private messageService: MessageService,
+              private renewJobPostService: RenewJobPostService) {
     redirectRecruiterDashboard.showTest$.subscribe(
       isShow=> {
         let matchElement: any = document.getElementById('recr_job_dashboard');
         matchElement.click();
     });
+
   }
 
 
@@ -44,6 +48,13 @@ export class RecruiterDashboardComponent implements OnInit, AfterViewInit {
         (data: any) => {
           this.recruiterDashboard = <RecruiterDashboard>data.data[0];
           this.recruiterHeaderDetails = <RecruiterHeaderDetails>data.jobCountModel;
+          for(let postedJob of this.recruiterDashboard.postedJobs) {
+            let currentDate = Number(new Date());
+            let expiringDate = Number(new Date(postedJob.expiringDate));
+            let daysRemainingForExpiring = Math.round(Number(new Date(expiringDate - currentDate))/(1000*60*60*24));
+            postedJob.daysRemainingForExpiring = daysRemainingForExpiring;
+            console.log('daysRemaining',postedJob._id + this.recruiterDashboard.postedJobs);
+          }
           if(this.recruiterDashboard !== undefined && this.recruiterDashboard.postedJobs !== undefined && this.recruiterDashboard.postedJobs.length>0) {
             this.screenType='jobList';
           } else {
@@ -98,4 +109,9 @@ export class RecruiterDashboardComponent implements OnInit, AfterViewInit {
   getMessage() {
     return Messages;
   }
+
+  checkJobPostExpiryDate(selectedJobProfile: string) {
+    this.renewJobPostService.checkJobPostExpiryDate(selectedJobProfile);
+  }
+
 }

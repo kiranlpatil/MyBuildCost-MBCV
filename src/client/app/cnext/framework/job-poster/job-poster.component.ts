@@ -10,9 +10,14 @@ import {Router} from "@angular/router";
 import {Industry} from "../../../user/models/industry";
 import {RecruiterDashboardService} from "../recruiter-dashboard/recruiter-dashboard.service";
 import {RecruiterDashboard} from "../model/recruiter-dashboard";
-import {ErrorService} from "../error.service";
-import {Headings, Label, LocalStorage, Messages, ValueConstant} from "../../../shared/constants";
+import { ErrorService } from '../../../shared/services/error.service';
+import {AppSettings,Headings, Label, LocalStorage, Messages, ValueConstant} from "../../../shared/constants";
 import {LocalStorageService} from "../../../shared/services/localstorage.service";
+import {Share} from "../model/share";
+import {ShareService} from "../share/share.service";
+import {Message} from "../../../shared/models/message";
+import {MessageService} from "../../../shared/services/message.service";
+import {JobShareContainerService} from "../job-share-container/job-share-container.service";
 
 @Component({
   moduleId: module.id,
@@ -24,7 +29,7 @@ import {LocalStorageService} from "../../../shared/services/localstorage.service
 export class JobPosterComponent implements OnInit, OnChanges {
   @Input() noOfJobPosted: number;
   @Input() currentjobId: string;
-  @Input() recruiter: RecruiterDashboard;
+  @Input() role: string;
   @Output() jobPostEventEmitter: EventEmitter<string> = new EventEmitter();
   @Output() jobPostCloneSuccessEmitter: EventEmitter<boolean> = new EventEmitter();
 
@@ -32,39 +37,44 @@ export class JobPosterComponent implements OnInit, OnChanges {
   jobPostMessage: string = Messages.MSG_JOB_POST;
   private roleList: string[] = new Array(0);
   private primaryCapability: string[] = new Array(0);
-  proficiencies: Proficiences = new Proficiences();
-  rolesForMain: Role[] = new Array(0);
-  rolesForCapability: Role[] = new Array(0);
-  rolesForComplexity: Role[] = new Array(0);
+  private proficiencies: Proficiences = new Proficiences();
+  private rolesForMain: Role[] = new Array(0);
+  private rolesForCapability: Role[] = new Array(0);
+  private rolesForComplexity: Role[] = new Array(0);
   private isCandidate: boolean = false;
   private disableButton: boolean = true;
   private isShowCandidateQCardView: boolean = false;
   private setCapabilityMatrix: boolean = true;
-  isShowComplexity: boolean = false;
-  isShowRoleList: boolean = false;
-  isShowIndustryList: boolean = false;
-  isShowCapability: boolean = false;
-  isShowProficiency: boolean = false;
+  private isShowComplexity: boolean = false;
+  private isShowRoleList: boolean = false;
+  private isShowIndustryList: boolean = false;
+  private isShowCapability: boolean = false;
+  private isShowProficiency: boolean = false;
   private showIndustryExposure: boolean = false;
-  showCompentensies: boolean = false;
-  showReleventIndustryList: boolean = false;
+  private showCompentensies: boolean = false;
+  private showReleventIndustryList: boolean = false;
   private showModalStyle: boolean = false;
   private isCapabilitypresent: boolean = false;
-  jobPosterModel = new JobPosterModel();
+  private jobPosterModel = new JobPosterModel();
   private jobForComplexity: Role[] = new Array(0);
-  jobForRole: Role[] = new Array(0);
-  jobForCapability: Role[] = new Array(0);
+  private jobForRole: Role[] = new Array(0);
+  private jobForCapability: Role[] = new Array(0);
   private jobId: string;
-  isShowReleventIndustryListStep: boolean = false;
+  private isShowReleventIndustryListStep: boolean = false;
   private isPresentCapability: boolean = false;
   private isComplexityFilled: boolean = true;
   private isPresentDefaultcomplexity: boolean = false;
   private flag: boolean = true;
-  highlightedSection: Section = new Section();
-  selectedJobTitle:string;
-  selectedJobId:string;
-  isCloneButtonClicked:boolean;
+  private isRecruitingForSelf: boolean=true;
+  private highlightedSection: Section = new Section();
+  private selectedJobTitle:string;
+  private selectedJobId:string;
+  private isCloneButtonClicked:boolean;
+  private share=new Share();
   constructor(private profileCreatorService: CandidateProfileService,
+              private shareService:ShareService,
+              private jobshareContainerService:JobShareContainerService,
+              private messageService: MessageService,
               private recruiterDashboardService: RecruiterDashboardService,
               private errorService: ErrorService,
               private showQCardView: ShowQcardviewService,
@@ -82,7 +92,7 @@ export class JobPosterComponent implements OnInit, OnChanges {
     if (changes.currentjobId !== undefined && changes.currentjobId.currentValue !== undefined) {
       this.jobId = changes.currentjobId.currentValue;
       this.getJobProfile();
-    } else if((changes.recruiter==undefined )|| (changes.currentjobId !== undefined )) {
+    } else if(changes.currentjobId !== undefined ) {
       this.jobPosterModel = new JobPosterModel();
       this.highlightedSection.name = 'JobProfile';
     }
@@ -92,6 +102,7 @@ export class JobPosterComponent implements OnInit, OnChanges {
     this.recruiterDashboardService.getPostedJobDetails(this.jobId)
       .subscribe(
         data => {
+          this.isRecruitingForSelf=data.data.industry.isRecruitingForself;
           this.jobPosterModel = data.data.industry.postedJobs[0];
           this.onGetJobDetailsSuccess(this.jobPosterModel);
         }, error => this.errorService.onError(error));
@@ -165,20 +176,22 @@ export class JobPosterComponent implements OnInit, OnChanges {
     }
   }
 
-  postjob() {
+  postjob() { 
     this.showModalStyle = !this.showModalStyle;
     this.jobPosterModel.isJobPosted = true;
     this.jobPosterModel.postingDate = new Date();
     this.jobPosterModel.expiringDate = new Date((new Date().getTime() + ValueConstant.JOB__EXPIRIY_PERIOD));
     this.jobPostService.postJob(this.jobPosterModel).subscribe(
       data => {
-        this.onSuccess(data.data.postedJobs[0]._id);
+        this.onSuccess(data.data.postedJobs[0]);
       }, error => this.errorService.onError(error));
   }
 
-  updateJob() {
+  updateJob() { 
     this.jobPosterModel.postingDate = new Date();
     this.jobPosterModel.expiringDate = new Date((new Date().getTime() + ValueConstant.JOB__EXPIRIY_PERIOD));
+    this.jobPosterModel.daysRemainingForExpiring = ValueConstant.JOB__EXPIRIY_PERIOD;
+    this.jobPosterModel.isJobPostExpired = false;
     this.jobPostService.postJob(this.jobPosterModel).subscribe(
       data => {
         this.jobPosterModel._id = data.data.postedJobs[0]._id;
@@ -190,10 +203,16 @@ export class JobPosterComponent implements OnInit, OnChanges {
       }, error => this.errorService.onError(error));
   }
 
-  onSuccess(jobId: string) {
-    if (jobId !== undefined) {
-      LocalStorageService.setLocalValue(LocalStorage.CURRENT_JOB_POSTED_ID, jobId);
-      this._router.navigate(['jobdashboard/', jobId]);
+  onSuccess(jobModel: JobPosterModel) {
+    if (jobModel._id !== undefined) {
+      if(jobModel.isJobShared) {
+        this.jobshareContainerService.updateUrl(jobModel.sharedLink.split('/')[4]).subscribe(
+          data => {
+            console.log('data',data);
+          }, error => this.errorService.onError(error));
+      }
+      LocalStorageService.setLocalValue(LocalStorage.CURRENT_JOB_POSTED_ID, jobModel._id);
+      this._router.navigate(['jobdashboard/', jobModel._id]);
     }
   }
 
@@ -212,7 +231,44 @@ export class JobPosterComponent implements OnInit, OnChanges {
   closeJob() {
     this.showModalStyle = !this.showModalStyle;
   }
+  sendMailToRecruiter() {
+    this.jobPostService.sendMailToRecruiter(this.jobPosterModel)
+      .subscribe(
+        res => {
+          this.messageService.message(new Message(Messages.MSG_SUCCESS_FOR_HIRING_MANAGER_JOB_CREATION_STATUS));
+          window.localStorage.clear();
+          let host = AppSettings.HTTP_CLIENT + window.location.hostname;
+          window.location.href = host;
+        },
+        error => (this.errorService.onError(error)));
+  }
 
+  buildJobShareUrl() {
+   if(this.jobPosterModel && this.jobPosterModel._id) {
+     if(!this.jobPosterModel.isJobShared) {
+       this.shareService.buildJobShareUrl(this.jobPosterModel._id)
+         .subscribe(
+           (data: Share) => {
+             this.share = data;
+             this.jobPosterModel.sharedLink = data.shareUrl;
+             this.jobPosterModel.isJobShared = true;
+             this.updateJob();
+             if (this.jobPosterModel.sharedLink) {
+               //document.getElementById('mail_link').click();
+               // let link='<a href='+this.sharedLink+'>JOB EDIT</a>';
+               window.location.href = 'mailto:user@example.com?subject=Subject&body=' + this.jobPosterModel.sharedLink;
+             }
+             console.log('data', data);
+           },
+           error => {
+             this.errorService.onError(error);
+           }
+         );
+     }
+   }else {
+     console.log('You havent created job yet');
+   }
+  }
   mockupSearch() {
     this.isShowCandidateQCardView = true;
     this.showQCardView.change(this.jobPosterModel);

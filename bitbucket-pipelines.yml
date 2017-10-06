@@ -16,4 +16,4 @@ pipelines:
           - npm install typings -g
           - typings install
           - gulp build.prod
-          # npm test
+          #- npm test

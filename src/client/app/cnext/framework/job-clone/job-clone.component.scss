@@ -3,6 +3,9 @@
 .modal-content {
   .form-group {
     margin-top: 15px;
+    .form-control {
+      text-transform: capitalize;
+    }
   }
 
   .button-group {

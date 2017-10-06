@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild, ElementRef} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {JobDashboardService} from './job-dashboard.service';
 import {RecruiterJobView} from '../../model/recruiter-job-view';
@@ -12,9 +12,12 @@ import {LoaderService} from '../../../../shared/loader/loaders.service';
 import {ProfileComparisonService} from '../../profile-comparison/profile-comparison.service';
 import {ProfileComparison} from '../../model/profile-comparison';
 import {QCardviewComponent} from '../q-card-view/q-card-view.component';
-import {ErrorService} from '../../error.service';
+import {ErrorService} from "../../../../shared/services/error.service";
 import {Label} from '../../../../shared/constants';
 import {UsageTrackingService} from '../../usage-tracking.service';
+import {JobPosterService} from '../../job-poster/job-poster.service';
+import {MessageService} from '../../../../shared/services/message.service';
+import {RenewJobPostService} from '../../../../user/services/renew-jobpost.service';
 
 @Component({
   moduleId: module.id,
@@ -54,7 +57,8 @@ export class JobDashboardComponent implements OnInit {
               private jobDashboardService: JobDashboardService,
               private usageTracking : UsageTrackingService,
               private _router:Router,private qcardFilterService:QCardFilterService,
-              private loaderService: LoaderService,private profileComparisonService: ProfileComparisonService) {
+              private loaderService: LoaderService,private profileComparisonService: ProfileComparisonService,
+              private renewJobPostService: RenewJobPostService) {
     this.qcardFilterService.candidateFilterValue$.subscribe(
       (data: QCardFilter) => {
         this.filterMeta = data;
@@ -84,6 +88,7 @@ export class JobDashboardComponent implements OnInit {
           this.isRecruitingForSelf = data.data.industry.isRecruitingForself;
           this.selectedJobProfile = data.data.industry.postedJobs[0];
           this.recruiterId = data.data.industry._id;
+          this.renewJobPostService.checkJobPostExpiryDate(this.selectedJobProfile);
           for (let item of data.data.industry.postedJobs[0].candidate_list) {
             if (item.name === ValueConstant.APPLIED_CANDIDATE)
               this.recruiterJobView.numberOfCandidatesApplied = item.ids.length;
@@ -207,7 +212,7 @@ export class JobDashboardComponent implements OnInit {
   closeJob() {
     this.showModalStyle = !this.showModalStyle;
   }
-
+//TODO: move this (performActionOnComparisonList) code to comaprison compoent  ->by krishna ghatul code refactor
   performActionOnComparisonList(data:any) {
     //console.log('---------------candidateQlistcandidateQlistcandidateQlist--------------------------',this.candidateQlist);
     if (data.action == 'Remove') {
@@ -311,4 +316,14 @@ export class JobDashboardComponent implements OnInit {
   getLabel() {
     return Label;
   }
+
+
+  onRenewJob() {
+    this.renewJobPostService.onRenewJob(this.selectedJobProfile);
+  }
+
+  updateJob() {
+    this.renewJobPostService.updateJob();
+  }
+
 }

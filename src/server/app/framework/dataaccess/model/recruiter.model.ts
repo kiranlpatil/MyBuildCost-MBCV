@@ -3,6 +3,7 @@ interface RecruiterModel {
   isRecruitingForself: boolean;
   company_name: string;
   company_size: string;
+  company_website: string;
   company_logo: string;
   company_headquarter_country: string;
   setOfDocuments: string[];

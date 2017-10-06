@@ -41,7 +41,6 @@
     <img src="/assets/c-next/card-view/close-white.png" (click)="closeThis()" class="close"/>
   </div>
 </div>
-
 <div class="col-sm-12 no-padding">
   <div class="guided-tour-description"
        *ngIf="guidedTourStatus?.indexOf(guidedTourImgOverlayScreensStackView) == -1 && isCandidate">
@@ -119,8 +118,7 @@
   <div class="col-sm-12 no-padding">
     <section class="container-fluid one-page-summary" *ngIf="data != undefined && typeOfView =='spa_job'">
     <div class="left-container">
-        <section class=" ">
-          <div class="col-sm-3 left-content">
+      <div class="col-sm-3 left-content">
             <div>
               <div class="basic-description" *ngIf="recruiter != undefined">
 
@@ -246,6 +244,9 @@
                   </span>
                   <label>Date Posted</label>
                   <span>{{postedJob.postingDate | date:'mediumDate'}}</span>
+                  <div *ngIf="recruiter.company_website!=undefined||''">
+                    <label>Website</label>
+                    <span>{{recruiter.company_website}}</span></div>
                 </div>
               </div>
             </div>
@@ -258,8 +259,7 @@
                <cn-contact-details [recruiter]="recruiter"></cn-contact-details>
              </div>&ndash;&gt;-->
           </div>
-        </section>
-      </div>
+    </div>
     </section>
   </div>
   <div *ngIf="data && (typeOfView =='spa_job' || typeOfView =='spa_candidate')">
@@ -338,7 +338,6 @@
   </div>
 
 </div>
-
 <section *ngIf="data != undefined && typeOfView=='compact'">
   <div class="one-page-summary">
     <div class="col-xs-12">

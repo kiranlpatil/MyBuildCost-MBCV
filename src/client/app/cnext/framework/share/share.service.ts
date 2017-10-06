@@ -18,5 +18,11 @@ export class ShareService extends BaseService {
       .map(this.extractData)
       .catch(this.handleError);
   }
+  buildJobShareUrl(jobId:string):Observable<any> {
+    var url = 'buildShareJobUrl/'+jobId;
+    return this.http.get(url)
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
 
 }

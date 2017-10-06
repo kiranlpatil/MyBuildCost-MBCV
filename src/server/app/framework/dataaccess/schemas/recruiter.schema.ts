@@ -17,6 +17,9 @@ class RecruiterSchema {
       company_size: {
         type: String
       },
+      company_website: {
+        type: String
+      },
       company_logo: {
         type: String
       },
@@ -34,6 +37,17 @@ class RecruiterSchema {
       },
       postedJobs: [{
         isJobPosted: {
+          type: Boolean,
+          default: false
+        },
+        daysRemainingForExpiring: {
+          type: Number
+        },
+        isJobPostExpired: {
+          type: Boolean,
+          default: false
+        },
+        isJobShared: {
           type: Boolean,
           default: false
         },
@@ -60,6 +74,9 @@ class RecruiterSchema {
           type: String
         },
         jobTitle: {
+          type: String
+        },
+        sharedLink: {
           type: String
         },
         hiringManager: {

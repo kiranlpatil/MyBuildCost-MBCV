@@ -44,6 +44,8 @@
     <span>{{postedJob.location.city}}</span>
     <label>Date Posted</label>
     <span>{{postedJob.postingDate | date:'mediumDate'}}</span>
+    <div *ngIf="recruiter.company_website!=undefined||''"><label>Website</label>
+    <span>{{recruiter.company_website}} </span></div>
     <label>About Company</label>
     <span>{{recruiter.about_company}} </span>
   </div>

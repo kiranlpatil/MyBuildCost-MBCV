@@ -6,5 +6,7 @@ import RecruiterClassModel = require('./recruiterClass.model');
 class UsersClassModel {
   candidate: CandidateModelClass[];
   recruiter: RecruiterClassModel[];
+  totalNumberOfCandidates : number;
+  totalNumberOfRecruiters : number;
 }
 export = UsersClassModel;

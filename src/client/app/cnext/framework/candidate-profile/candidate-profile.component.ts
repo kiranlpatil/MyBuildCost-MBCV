@@ -8,7 +8,7 @@ import {Role} from "../model/role";
 import {Industry} from "../../../user/models/industry";
 import {Message} from "../../../shared/models/message";
 import {MessageService} from "../../../shared/services/message.service";
-import {ErrorService} from "../error.service";
+import {ErrorService} from "../../../shared/services/error.service";
 import {LocalStorageService} from "../../../shared/services/localstorage.service";
 
 @Component({

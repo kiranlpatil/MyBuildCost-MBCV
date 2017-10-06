@@ -21,6 +21,7 @@ export function init(app: express.Application) {
   app.post("/api/admin", adminController.create);
   app.post("/api/recruiter", recruiterController.create);
   app.put("/api/users/:id", this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, userController.updateDetails);
+  app.put("/api/changerecruiteraccountdetails/:id", this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, userController.updateRecruiterAccountDetails);
   app.put("/api/users/:id/fieldname/:fname", this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, userController.updateProfileField);
   app.get("/api/users/:id", userInterceptor.retrieve, this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, userController.retrieve);
   app.post("/api/sendverificationmail/:id", this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, userController.verificationMail);
@@ -36,10 +37,10 @@ export function init(app: express.Application) {
   app.post("/api/industryprofile", userController.profilecreate);
   //api calling fo professional data-lucky
   app.get("/api/realocation", this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, userController.getRealocation);
-  app.get("/api/education", this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, userController.getEducation);
+  app.get("/api/education", userController.getEducation);
   app.get("/api/experience", this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, userController.getExperience);
   app.get("/api/currentsalary", this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, userController.getCurrentSalary);
-  app.get("/api/noticeperiod", this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, userController.getNoticePeriod);
+  app.get("/api/noticeperiod",  userController.getNoticePeriod);
   app.get("/api/industryexposure", this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, userController.getIndustryExposure);
   app.get("/api/searchedcandidate/jobPosterModel", this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, userController.getSearchedCandidate);
 
@@ -57,6 +58,7 @@ export function init(app: express.Application) {
   app.post("/api/companydetails/:id", this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, userController.updateCompanyDetails);
   app.put("/api/uploaddocuments/:id", this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, userController.uploaddocuments);
   app.get('/api/alluser', this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, adminController.getAllUser);
+  app.get('/api/countofusers', this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, adminController.getCountOfUsers);
   app.get("/api/readxlsx", importIndustryController.readXlsx);
   //app.post("/api/createImportIndusry", importIndustriesController.create);
 

@@ -49,4 +49,12 @@ export class DashboardService extends BaseService {
       xhr.send(formData);
     });
   }
+  changeRecruiterAccountDetails(model:any): Observable<any> {
+    var url = API.CHANGE_COMPANY_ACCOUNT_DETAILS + '/' + LocalStorageService.getLocalValue(LocalStorage.USER_ID);
+    var body = JSON.stringify(model);
+    return this.http.put(url, body)
+      .map(this.extractData)
+      .catch(this.handleError);
+
+  }
 }

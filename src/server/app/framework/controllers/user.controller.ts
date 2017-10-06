@@ -9,6 +9,7 @@ import Messages = require("../shared/messages");
 import ResponseService = require("../shared/response.service");
 import CandidateService = require("../services/candidate.service");
 import adminController= require("./admin.controller");
+import RecruiterModel = require("../dataaccess/model/recruiter.model");
 
 var bcrypt = require('bcrypt');
 
@@ -529,7 +530,26 @@ export function updateDetails(req: express.Request, res: express.Response, next:
     res.status(403).send({message: e.message});
   }
 }
-
+export function updateRecruiterAccountDetails(req: express.Request, res: express.Response, next: any) {
+  try {
+    var newUserData: RecruiterModel = <RecruiterModel>req.body;
+    var user = req.user;
+    var _id: string = user._id;
+    var auth: AuthInterceptor = new AuthInterceptor();
+    var recruiterService = new RecruiterService();
+    recruiterService.updateDetails(_id, newUserData,  (error, result) => {
+      if (error) {
+        next(error);
+      } else {
+        res.send({
+          'status': 'Success'
+        });
+      }
+    });
+  } catch (e) {
+    res.status(403).send({message: e.message});
+  }
+}
 export function updateProfileField(req:express.Request, res:express.Response, next:any) {
   try {
     //var newUserData: UserModel = <UserModel>req.body;
@@ -770,13 +790,10 @@ export function changeMobileNumber(req: express.Request, res: express.Response, 
         });
       }
     });
-  }
-
-  catch (e) {
+  } catch (e) {
     res.status(403).send({message: e.message});
   }
 }
-
 
 export function changeEmailId(req: express.Request, res: express.Response, next: any) {
 
