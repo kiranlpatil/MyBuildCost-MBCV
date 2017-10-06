@@ -37,36 +37,36 @@ export class JobPosterComponent implements OnInit, OnChanges {
   jobPostMessage: string = Messages.MSG_JOB_POST;
   private roleList: string[] = new Array(0);
   private primaryCapability: string[] = new Array(0);
-  private proficiencies: Proficiences = new Proficiences();
-  private rolesForMain: Role[] = new Array(0);
-  private rolesForCapability: Role[] = new Array(0);
-  private rolesForComplexity: Role[] = new Array(0);
+  proficiencies: Proficiences = new Proficiences();
+  rolesForMain: Role[] = new Array(0);
+  rolesForCapability: Role[] = new Array(0);
+  rolesForComplexity: Role[] = new Array(0);
   private isCandidate: boolean = false;
   private disableButton: boolean = true;
   private isShowCandidateQCardView: boolean = false;
   private setCapabilityMatrix: boolean = true;
-  private isShowComplexity: boolean = false;
-  private isShowRoleList: boolean = false;
-  private isShowIndustryList: boolean = false;
-  private isShowCapability: boolean = false;
-  private isShowProficiency: boolean = false;
+  isShowComplexity: boolean = false;
+  isShowRoleList: boolean = false;
+  isShowIndustryList: boolean = false;
+  isShowCapability: boolean = false;
+  isShowProficiency: boolean = false;
   private showIndustryExposure: boolean = false;
-  private showCompentensies: boolean = false;
-  private showReleventIndustryList: boolean = false;
+  showCompentensies: boolean = false;
+  showReleventIndustryList: boolean = false;
   private showModalStyle: boolean = false;
   private isCapabilitypresent: boolean = false;
-  private jobPosterModel = new JobPosterModel();
+  jobPosterModel = new JobPosterModel();
   private jobForComplexity: Role[] = new Array(0);
-  private jobForRole: Role[] = new Array(0);
-  private jobForCapability: Role[] = new Array(0);
+  jobForRole: Role[] = new Array(0);
+  jobForCapability: Role[] = new Array(0);
   private jobId: string;
-  private isShowReleventIndustryListStep: boolean = false;
+  isShowReleventIndustryListStep: boolean = false;
   private isPresentCapability: boolean = false;
   private isComplexityFilled: boolean = true;
   private isPresentDefaultcomplexity: boolean = false;
   private flag: boolean = true;
-  private isRecruitingForSelf: boolean=true;
-  private highlightedSection: Section = new Section();
+  isRecruitingForSelf: boolean=true;
+  highlightedSection: Section = new Section();
   private selectedJobTitle:string;
   private selectedJobId:string;
   private isCloneButtonClicked:boolean;
@@ -176,7 +176,7 @@ export class JobPosterComponent implements OnInit, OnChanges {
     }
   }
 
-  postjob() { 
+  postjob() {
     this.showModalStyle = !this.showModalStyle;
     this.jobPosterModel.isJobPosted = true;
     this.jobPosterModel.postingDate = new Date();
@@ -187,7 +187,7 @@ export class JobPosterComponent implements OnInit, OnChanges {
       }, error => this.errorService.onError(error));
   }
 
-  updateJob() { 
+  updateJob() {
     this.jobPosterModel.postingDate = new Date();
     this.jobPosterModel.expiringDate = new Date((new Date().getTime() + ValueConstant.JOB__EXPIRIY_PERIOD));
     this.jobPosterModel.daysRemainingForExpiring = ValueConstant.JOB__EXPIRIY_PERIOD;

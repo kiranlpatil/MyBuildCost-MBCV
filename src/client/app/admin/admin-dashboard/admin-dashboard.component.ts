@@ -14,10 +14,10 @@ import {LoaderService} from "../../shared/loader/loaders.service";
 })
 
 export class AdminDashboardComponent {
-  private candidate: Candidate = new Candidate();
-  private userData: UserData = new UserData();
-  private numberOfCandidates: number = 0;
-  private numberOfRecruiters: number = 0;
+  candidate: Candidate = new Candidate();
+  userData: UserData = new UserData();
+  numberOfCandidates: number = 0;
+  numberOfRecruiters: number = 0;
   public filterData: string[] = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q",
     "r", "s", "t", "u", "v", "w", "x", "y", "z"]
 

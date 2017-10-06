@@ -1,5 +1,5 @@
 export class AppSettings {
-  //public static IP = 'http://localhost:8080';
+  public static IP = 'http://localhost:3000';
   // public static IP = 'http://ee802b7f.ngrok.io';
   //public static IP = 'http://10.192.33.77:8080';
   //public static IP = 'http://52.10.145.87:3000';

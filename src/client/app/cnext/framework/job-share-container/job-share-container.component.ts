@@ -17,7 +17,7 @@ import {ErrorService} from "../../../shared/services/error.service";
 export class JobShareContainerComponent implements OnInit {
 private jobId:string;
 private recruiterId:string;
-private isJobPosted:boolean=true;
+isJobPosted:boolean=true;
   constructor(private _router:Router,
               private activatedRoute:ActivatedRoute,
               private jobshareContainerService:JobShareContainerService,
