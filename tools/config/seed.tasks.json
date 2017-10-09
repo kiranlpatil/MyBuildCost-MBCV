@@ -5,7 +5,6 @@
 
   "build.dev": [
     "initialize",
-    "check.versions",
     "clean.once",
     "build.server",
     "copy.server.assets",
@@ -13,7 +12,6 @@
     "build.html_css",
     "build.js.dev",
     "build.index.dev",
-    "build.bundle.rxjs",
     "sw.manifest.static"
   ],
 
@@ -76,7 +74,7 @@
     "initialize",
     "check.tools",
     "clean.prod",
-    "tslint",
+
     "build.server",
     "copy.server.assets",
     "build.assets.prod",
