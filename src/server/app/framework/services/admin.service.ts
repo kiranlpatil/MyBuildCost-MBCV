@@ -358,7 +358,7 @@ class AdminService {
 
       let csv = json2csv({
         data: result.candidate, fields: fields, fieldNames: fieldNames,
-        unwindPath: ['data.roles','data.capabilityMatrix']
+        unwindPath: ['data.capabilityMatrix']
       });
       console.log("writing into file file");
       //fs.writeFile('./src/server/public/candidate.csv', csv, function (err: any) {
@@ -393,7 +393,7 @@ class AdminService {
         data: result.recruiter,
         fields: fields,
         fieldNames: fieldNames,
-        unwindPath: ['data.postedJobs', 'data.postedJobs.roles', 'data.postedJobs.capabilityMatrix']
+        unwindPath: ['data.postedJobs', 'data.postedJobs.capabilityMatrix']
       });
       //fs.writeFile('./src/server/public/recruiter.csv', csv, function (err: any) {
       fs.writeFile('/home/bitnami/apps/jobmosis-staging/c-next/dist/server/prod/public/recruiter.csv', csv, function (err: any) {
