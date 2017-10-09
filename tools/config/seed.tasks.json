@@ -67,7 +67,9 @@
     "minify.bundles",
     "build.index.prod",
     "sw.manifest.static",
-    "minify.index"
+    "minify.index",
+    "build.config.copy.prod",
+    "build-root-json.copy.prod"
   ],
 
   "build.prod.rollup.aot": [

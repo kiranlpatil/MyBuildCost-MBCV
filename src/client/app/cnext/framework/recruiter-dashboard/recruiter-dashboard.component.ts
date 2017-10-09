@@ -112,6 +112,7 @@ export class RecruiterDashboardComponent implements OnInit, AfterViewInit {
 
   checkJobPostExpiryDate(selectedJobProfile: string) {
     this.renewJobPostService.checkJobPostExpiryDate(selectedJobProfile);
+    this.getRecruiterData();
   }
 
 }
