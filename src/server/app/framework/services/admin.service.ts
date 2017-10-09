@@ -285,6 +285,7 @@ class AdminService {
               'jobTitle': 1,
               'isCompleted': 1,
               'isSubmitted': 1,
+              'isVisible': 1,
               'location': 1
             };
             for (let i = 0; i < result.length; i++) {
