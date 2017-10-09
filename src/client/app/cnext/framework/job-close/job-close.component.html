@@ -1,0 +1,27 @@
+<div class="modal" [style.display]="setStyleForDialogueBox()">
+    <div class="modal-bg">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" (click)="onCancel()">
+                        <span>&times;</span>
+                    </button>
+                    <h5 class="modal-title">{{getHeading().CLOSE_JOB}}</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <!--<label>{{getLabel().CLOSE_JOB}}</label>
+                            <input class="form-control" type="text" maxlength="40" [(ngModel)]="selectedJobTitle"/>
+                            <p class="error-messages" *ngIf="isShowNoSelectionError">Select any one of these options</p>-->
+                        </div>
+                    </div>
+                    <div class="button-group">
+                        <button (click)="onCloseJob()" class="btn btn-primary">{{getButtonLabel().CLOSE_BUTTON}}</button>
+                        <button (click)="onCancel()" class="btn btn-default">{{getButtonLabel().CANCEL_BUTTON}}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

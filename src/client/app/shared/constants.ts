@@ -462,10 +462,11 @@ export class API {
   public static CANDIDATE_DETAILS = 'recruiter/jobProfile';
   public static CANDIDATESFROMLISTS = 'recruiter/jobProfile';
   public static RElEVENT_INDUSTRIES = 'releventindustries';
-  public static CLONE_JOB = 'job';
+  public static JOB = 'job';
   public static FAQ = '/blog/index.php/faq/';
   public static ACCEPT_TERMS = '/terms-and-conditions.php';
-  public static COUNT_OF_USERS = 'countofusers'
+  public static COUNT_OF_USERS = 'countofusers';
+
 }
 
 export class ImagePath {
@@ -650,6 +651,7 @@ export class Headings {
   public static CLONE_JOB: string = 'Clone Job';
   public static POST_JOB: string = 'Post New Job';
   public static ASK_EXPERT: string = 'Copy and Send Link';
+  public static CLOSE_JOB: string = 'Why you want to close this job?';
 }
 
 export class Label {
@@ -690,6 +692,7 @@ export class Button {
   public static CHANGE_PASSWORD_BUTTON: string = 'Change Password';
   public static RESET_PASSWORD_BUTTON: string = 'RESET PASSWORD';
   public static CLONE_BUTTON: string = 'CLONE';
+  public static CLOSE_BUTTON: string = 'CLOSE';
   public static CANCEL_BUTTON: string = 'CANCEL';
   public static VALUE_PORTRAIT_BUTTON: string = 'Create your Own Value Portrait';
 }

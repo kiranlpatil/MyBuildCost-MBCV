@@ -27,7 +27,9 @@ export class JobListerComponent implements  OnDestroy, OnChanges {
   //public jobListToCheck:JobPosterModel[] = new Array(0);
   private selectedJobId:string;
   private selectedJobTitle:string;
+  private selectedJobProfile: any;
   private isCloneButtonClicked:boolean;
+  private isJobCloseButtonClicked:boolean;
   private toggle: boolean = false;
   private isJobeditted: boolean = false;
   private initialMessageToDisplay: string= Tooltip.RECRUITER_ENTRY_MESSAGE;
@@ -102,6 +104,13 @@ export class JobListerComponent implements  OnDestroy, OnChanges {
   renewJobPost(selectedJobProfile: any) {
     this.renewJobPostService.onRenewJob(selectedJobProfile);
     this.selectedJobProfileEmitter.emit(selectedJobProfile);
+  }
+
+  closeJobPost(selectedJobProfile: any) {
+    this.selectedJobProfile = selectedJobProfile;
+   /* this.selectedJobId=selectedJobProfile._id;
+    this.selectedJobTitle=selectedJobProfile.jobTitle;*/
+    this.isJobCloseButtonClicked=!this.isJobCloseButtonClicked;
   }
 
 }

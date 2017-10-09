@@ -267,3 +267,48 @@ export function cloneJob(req: express.Request, res: express.Response, next: any)
     res.status(403).send({message: e.message});
   }
 }
+
+export function closeJob(req : express.Request, res: express.Response, next: any) {
+
+  try {
+    var jobProfileService = new JobProfileService();
+    let data = {
+      'postedJob': req.params.id
+    };
+    jobProfileService.retrieve(data, (error, result) => {
+      if (error) {
+        next({
+          reason: CNextMessages.PROBLEM_IN_RETRIEVE_JOB_PROFILE,
+          message: CNextMessages.PROBLEM_IN_RETRIEVE_JOB_PROFILE,
+          code: 401
+        });
+      } else {
+        var jobPosts:any = result.postedJobs[0];
+
+        console.log('After retrive isJobclosed');
+
+        jobPosts.isJobPostClosed = true;
+        var recruiterService = new RecruiterService();
+        recruiterService.updateJob(req.params.id, jobPosts, (err, result) => {
+          console.log('-------------------------Update--------------');
+          if (err) {
+            next({
+              reason: Messages.MSG_ERROR_RSN_USER_NOT_FOUND,
+              message: Messages.MSG_ERROR_RSN_USER_NOT_FOUND,
+              code: 403
+            });
+          } else {
+            res.status(200).send({
+              'status': Messages.STATUS_SUCCESS,
+              'data': result
+            });
+            console.log('--------------After updated response of closeJobPost-------', result.postedJobs[0].isJobPostClosed);
+          }
+        });
+      }
+    });
+  } catch (e) {
+    res.status(403).send({message: e.message});
+  }
+}
+

@@ -47,6 +47,10 @@ class RecruiterSchema {
           type: Boolean,
           default: false
         },
+        isJobPostClosed: {
+          type: Boolean,
+          default: false
+        },
         isJobShared: {
           type: Boolean,
           default: false

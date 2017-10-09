@@ -159,7 +159,7 @@ import {PrintScreenComponent} from "./cnext/framework/print-screen/print-screen.
 import {AdminModule} from "./admin/admin.module";
 import {JobShareContainerComponent} from "./cnext/framework/job-share-container/job-share-container.component";
 import {JobShareContainerService} from "./cnext/framework/job-share-container/job-share-container.service";
-
+import {JobCloseComponent} from "./cnext/framework/job-close/job-close.component";
 //C-NEXT IMPORTS
 
 
@@ -275,7 +275,8 @@ import {JobShareContainerService} from "./cnext/framework/job-share-container/jo
     ShareComponent,
     JobCloneComponent,
     ShareContainerComponent,
-    PrintScreenComponent
+    PrintScreenComponent,
+    JobCloseComponent
   ],
   providers: [
     {
