@@ -735,6 +735,25 @@ header {
   }
 }
 
+.candidate-search-section .card-view .panel-container .button-group {
+  float: right;
+  margin: -47px 0 0 0;
+  position: relative;
+  padding: 0 10px;
+  text-align: right;
+  width: 100%;
+  z-index: 99;
+}
+
+.candidate-search-section .card-view .panel-container .button-group .btn {
+  border-radius: 0;
+  margin: 0 auto;
+  padding: 0 !important;
+  text-align: center;
+  width: 49%;
+}
+
+
 @media only screen and (min-width: 1367px) {
   .card-view {
     .col-sm-4 {
@@ -781,12 +800,24 @@ header {
       float: left;
       width: 100%;
     }
+
+    .btn-cart {
+      padding: 6px !important;
+    }
   }
 
   header {
     .sort-by {
       margin-top: 4px;
     }
+  }
+
+  .candidate-search-section .card-view .panel-container .button-group {
+    padding: 0 6px;
+  }
+
+  .candidate-search-section .card-view .panel-container .button-group .btn {
+    font-size: 12px;
   }
 }
 
@@ -857,18 +888,3 @@ header {
   }
 }
 
-.candidate-search-section .card-view .panel-container .button-group {
-  float: right;
-  margin: -47px 0 0 0;
-  z-index: 99;
-  position: relative;
-  padding: 0;
-}
-
-.candidate-search-section .card-view .panel-container .button-group .btn {
-  border-radius: 0;
-  width: 48%;
-  text-align: center;
-  padding: 0 !important;
-  margin: 0 -11px 0 7px;
-}
