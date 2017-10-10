@@ -18,7 +18,11 @@ class RecruiterRepository extends RepositoryBase<IRecruiter> {
     }
     for (let recruiter of recruiters) {
       for (let job of recruiter.postedJobs) {
-        if(!job.isJobPosted) {
+        let isreleventIndustryMatch=false
+          if(job.releventIndustries.indexOf(candidate.industry.name)!==-1) {
+            isreleventIndustryMatch=true;
+          }
+          if(!job.isJobPosted || (candidate.industry.code!==job.industry.code && !isreleventIndustryMatch)) {
           continue;
         }
         let isPresent: boolean = false;
