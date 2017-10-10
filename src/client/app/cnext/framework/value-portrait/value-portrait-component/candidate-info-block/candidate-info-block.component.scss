@@ -115,19 +115,18 @@
 
 .info-block-tabs > .tooltip-content2 {
   /*opacity: 0;*/
-  display: inline-block;
-  position: absolute;
-  width: 250px;
-  margin-left: -48px;
-  top: 52px;
   background-color: $light-gray;
-  padding: 10px;
-  transition: all .1s linear;
-  box-shadow: 3px 3px 15px 1px #ccc;
+  box-shadow: 3px 3px 15px 1px $gray;
   border-radius: 4px;
-  right: 10px;
-  z-index: 9;
   display: none;
+  margin-left: -48px;
+  padding: 10px;
+  position: absolute;
+  right: 10px;
+  transition: all .1s linear;
+  top: 52px;
+  width: 240px;
+  z-index: 9;
   b {
     float: left;
     width: 100%;
@@ -171,15 +170,15 @@
   border-bottom: 10px solid $light-gray;
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
-  position: absolute;
-  top: -10px;
-  right: 30px;
   margin-left: -10px;
+  position: absolute;
+  right: 40%;
+  top: -10px;
 }
 
 @media only screen and (max-width: 767px) {
   .value-portrait-candidate-info-block {
-    padding: 0px;
+    padding: 0;
     width: 100%;
     ul {
       padding: 20px 10px;

@@ -75,7 +75,9 @@
   position: absolute;
   width: 600px;
   margin-left: -148px;
-  top: 52px;
+  max-height: 200px;
+  overflow: auto;
+  bottom: 69px;
   background-color: $white;
   padding: 10px;
   transition: all .1s linear;
@@ -94,23 +96,25 @@
 
 .tooltip-content3:after {
   content: "";
-  border-bottom: 10px solid $white;
+  border-top: 10px solid $white;
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
-  position: absolute;
-  top: -10px;
-  left: 50%;
-  margin-left: -10px;
+  position: fixed;
+  margin-left: 300px;
+  margin-top: 30px;
 }
 
-.hover-block > .tooltip-content4 {
+.hover-block > .tooltip-content4,
+.hover-block > .domain-exposure-tooltip-content{
   color: $theme-color;
   opacity: 0;
   display: inline-block;
   position: absolute;
   width: 370px;
+  max-height: 140px;
   margin-left: -148px;
-  top: 47px;
+  overflow: auto;
+  bottom: 69px;
   background-color: $white;
   padding: 10px;
   transition: all .1s linear;
@@ -125,20 +129,30 @@
   }
 }
 
-.hover-block:hover > .tooltip-content4 {
+.hover-block:hover > .tooltip-content4,
+.hover-block:hover > .domain-exposure-tooltip-content{
   opacity: 1;
   visibility: visible;
 }
 
 .tooltip-content4:after {
   content: "";
-  border-bottom: 10px solid $white;
+  border-top: 10px solid $white;
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
-  position: absolute;
-  top: -10px;
-  left: 50%;
-  margin-left: -10px;
+  position: fixed;
+  margin-left: 120px;
+  margin-top: 30px;
+}
+
+.domain-exposure-tooltip-content:after {
+  content: "";
+  border-top: 10px solid $white;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  position: fixed;
+  margin-left: 120px;
+  margin-top: 30px;
 }
 
 .user-info-black,
@@ -160,7 +174,8 @@
     padding: 0;
     color: $black;
     .tooltip-content3,
-    .tooltip-content4 {
+    .tooltip-content4,
+    .domain-exposure-tooltip-content{
       background: transparent;
       &:after {
         display: none;
@@ -206,7 +221,8 @@
       margin: 7px 5px 0 0 !important;
       font-size: 16px;
     }
-    .tooltip-content4 {
+    .tooltip-content4,
+    .domain-exposure-tooltip-content{
       opacity: 0.9;
       visibility: visible;
       box-shadow: 0 0 0 transparent;

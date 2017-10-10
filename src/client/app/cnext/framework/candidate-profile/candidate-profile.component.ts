@@ -1,5 +1,5 @@
 import {Component, DoCheck, HostListener, KeyValueDiffers, OnDestroy, OnInit} from "@angular/core";
-import {ImagePath, Label, LocalStorage, Messages, NavigationRoutes, Tooltip} from "../../../shared/constants";
+import {Button, ImagePath, Label, LocalStorage, Messages, NavigationRoutes, Tooltip} from "../../../shared/constants";
 import {Router} from "@angular/router";
 import {ComplexityService} from "../complexity.service";
 import {Candidate, Section} from "../../../user/models/candidate";
@@ -522,5 +522,9 @@ export class CandidateProfileComponent implements OnInit, DoCheck, OnDestroy {
 
   getLabel() {
     return Label;
+  }
+
+  getButton() {
+    return Button;
   }
 }
