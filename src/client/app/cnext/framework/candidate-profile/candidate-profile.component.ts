@@ -330,6 +330,9 @@ export class CandidateProfileComponent implements OnInit, DoCheck, OnDestroy {
 
   OnCandidateDataSuccess(candidateData: any) {
     this.candidate = candidateData.data[0];
+    if(this.candidate.complexity_note_matrix == undefined) {
+      this.candidate.complexity_note_matrix = {};
+    }
     this.candidate.basicInformation = candidateData.metadata;
     this.candidateForRole = candidateData.data[0].industry.roles;
     this.candidateForCapability = candidateData.data[0].industry.roles;
