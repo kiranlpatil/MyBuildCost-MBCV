@@ -17,7 +17,6 @@ export class RecruiterSharedHeaderComponent implements OnInit {
   public isClassVisible: boolean = false;
   public isOpenProfile: boolean = false;
   PROFILE_IMG_PATH: string;
-  MY_LOGO: string;
   newUser: number;
 
   @HostListener('document:click', ['$event']) onClick(event: any) {
@@ -29,7 +28,6 @@ export class RecruiterSharedHeaderComponent implements OnInit {
 
   constructor(private _router: Router, private _eref: ElementRef,
               private redirectRecruiterDashboard: RedirectRecruiterDashboardService) {
-    this.MY_LOGO = ImagePath.MY_WHITE_LOGO;
   }
 
   ngOnInit() {
@@ -77,6 +75,10 @@ export class RecruiterSharedHeaderComponent implements OnInit {
 
   closeMenu() {
     this.isClassVisible = false;
+  }
+
+  getImagePath() {
+    return ImagePath;
   }
 }
 

@@ -3,11 +3,12 @@
 .page-header {
 
   .cn-logo {
-    position: fixed;
-    top: 8px;
-    left: 30px;
-    width: 120px;
     cursor: pointer;
+    left: 30px;
+    position: fixed;
+    top: 10px;
+    width: 40px;
+
 
     img {
       width: 100%;
@@ -42,9 +43,7 @@
 @media screen and (max-width: 767px) {
   .page-header {
     .cn-logo {
-      top: 10px;
       left: 7px;
-      width: 40px;
     }
     ul > li {
       margin-right: 15px;

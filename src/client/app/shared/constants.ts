@@ -1,5 +1,5 @@
 export class AppSettings {
-  public static IP = 'http://localhost:3000';
+  public static IP = 'http://localhost:8080';
   // public static IP = 'http://ee802b7f.ngrok.io';
   //public static IP = 'http://10.192.33.77:8080';
   //public static IP = 'http://52.10.145.87:3000';
@@ -312,7 +312,7 @@ export class Messages {
   public static NO_RECRUITERS_AVAILABLE = 'No recruiters available for selected alphabet.';
   public static OTHERS_AOW_MESSAGE = 'Thank you for your interest in our Job post but currently we do not have your Area of Work, we will get back to you after building your Area of Work';
   public static ASK_EXPERT_MESSAGE = 'You can copy and share this link to hiring manager to independently define the job description.\n' +
-      'On his completion you will receive an email.';
+      'On completion by hiring manager you will receive an email.';
 }
 export class AdminPanel {
   public static PUBLIC_PROFILE='Profile is public';

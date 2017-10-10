@@ -1,11 +1,13 @@
 <cn-recruiter-header [headerInfo]="headerInfo" [jobCount]="jobCount"></cn-recruiter-header>
 <div class="container-fluid profile-wrapper">
-  <ul class="nav nav-tabs dashboard-tabs">
-    <li class="active"><a data-toggle="tab" title="My Job Posts" href="#">My Job Posts</a></li>
-    <li><a data-toggle="tab" title="My Job Posts" (click)="navigateTo('recruiterdashboard','applicant_search')">Applicant
-      Search</a></li>
-    <li><a data-toggle="tab" title="Post New Job" (click)="navigateTo('recruiterdashboard','post_new_job')">Post New
-      Job</a></li>
+  <ul id="recruiter-job-dashboard-tabs" class="nav nav-tabs dashboard-tabs">
+    <li class="active"><a data-toggle="tab" title="My Job Posts" href="#">
+      <span class="icon-dashboard"></span>My Job Posts</a></li>
+    <li><a data-toggle="tab" title="My Job Posts" (click)="navigateTo('recruiterdashboard','applicant_search')">
+      <span class="icon-candidate-search"></span>Applicant Search</a></li>
+    <li><a class="btn-new-job" data-toggle="tab" title="Post New Job"
+           (click)="navigateTo('recruiterdashboard','post_new_job')">Post New Job</a>
+    </li>
   </ul>
   <div class="candidate-listing">
     <cn-filter [hidden]="whichListVisible[4]" [selectedJob]="selectedJobProfile" [role]=true></cn-filter>
