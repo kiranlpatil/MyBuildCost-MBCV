@@ -1,5 +1,5 @@
 export class AppSettings {
-  public static IP = 'http://localhost:3000';
+  public static IP = 'http://localhost:8080';
   // public static IP = 'http://ee802b7f.ngrok.io';
   //public static IP = 'http://10.192.33.77:8080';
   //public static IP = 'http://52.10.145.87:3000';
@@ -364,6 +364,7 @@ export class LocalStorage {
   public static EMAIL_ID = 'email_id';
   public static PASSWORD = 'password';
   public static MY_THEME = 'my_theme';
+  public static ROLE_NAME = 'role';
   public static VERIFY_PHONE_VALUE = 'verify_phone_value';
   public static CHANGE_MAIL_VALUE = 'change_mail_value';
   public static FROM_CANDIDATE_REGISTRATION = 'from_candidate_registration';
@@ -692,4 +693,5 @@ export class Button {
   public static CLONE_BUTTON: string = 'CLONE';
   public static CANCEL_BUTTON: string = 'CANCEL';
   public static VALUE_PORTRAIT_BUTTON: string = 'Create your Own Value Portrait';
+  public static SUBMIT_VIEW_JOB: string = 'Submit & View Job';
 }

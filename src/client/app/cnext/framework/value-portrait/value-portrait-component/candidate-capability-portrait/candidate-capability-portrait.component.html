@@ -1,9 +1,10 @@
 <div class="value-portrait-candidate-capability">
   <h3> {{getLabel().CORE_CAPABILITIES_TITLE}} </h3>
   <div class="value-portrait-candidate-capability-circle">
-    <div class="circle-list" *ngFor="let capability of candidate.capabilities;let i=index;" [class.five-element]="i==4"
-         [class.six-element]="i==5" [class.ten-element]="i==8" [class.eleven-element]="i==10"
-         [class.fifteen-element]="i==14">
+    <div class="circle-list" *ngFor="let capability of candidate.capabilities;let i=index;"[class.first-element]="i==0"
+         [class.four-element]="i==3" [class.five-element]="i==4"
+         [class.six-element]="i==5" [class.seven-element]="i==6" [class.ten-element]="i==8" [class.eleven-element]="i==10"
+         [class.fourteen-element]="i==13" [class.fifteen-element]="i==14">
       <div *ngIf="i < 10 || showMore || isClickEnable" class="circle" [class.second-line]="i>4 && i < 10">
         <div class="inner-circle" data-toggle="modal" [attr.data-target]="'#'+'capability-modal'+i">
         <span>

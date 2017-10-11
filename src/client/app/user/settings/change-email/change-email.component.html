@@ -28,10 +28,10 @@
           <label>Confirm Email</label>
           <input [(ngModel)]="model.confirm_email" formControlName="confirm_email" id="confirm_email"
                  (blur)="makeEmailConfirm()" class="form-control"/>
-          <div class="error-message" *ngIf="isEmailConfirm == true">{{emailNotMatctMessage}}</div>
+          <div class="error-message" *ngIf="isEmailConfirm && userForm.valid">{{emailNotMatctMessage}}</div>
         </div>
 
-        <div class="col-xs-12 error-msg alert alert-danger form-alert" [hidden]="isShowErrorMessage"><b>{{
+        <div  class="col-xs-12 error-msg alert alert-danger form-alert" [hidden]="isShowErrorMessage"><b>{{
           error_msg }}</b></div>
         <button type="submit" class="btn btn-primary" [disabled]="!userForm.valid">Change Email</button>
       </form>

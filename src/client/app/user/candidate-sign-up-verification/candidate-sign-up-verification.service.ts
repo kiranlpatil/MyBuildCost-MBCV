@@ -31,7 +31,7 @@ export class CandidateSignUpVerificationService extends BaseService {
 
   resendChangeMobileVerificationCode() {
     var url = API.CHANGE_MOBILE + '/' + LocalStorageService.getLocalValue(LocalStorage.USER_ID);
-    var mobile = LocalStorageService.getLocalValue(LocalStorage.MOBILE_NUMBER);
+    var mobile = LocalStorageService.getLocalValue(LocalStorage.VERIFIED_MOBILE_NUMBER);
     var body = {'new_mobile_number': mobile};
     return this.http.put(url, body)
       .map(this.extractData)

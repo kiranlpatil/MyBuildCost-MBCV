@@ -236,7 +236,6 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
   }
 
   oncurrentComplexityAnswered(complexityDetails: ComplexityDetails) {
-      debugger;
     this.isValid=true;
     this.complexities[complexityDetails.code] = complexityDetails.userChoice;
     this.onComplextyAnswered.emit(this.complexities);
@@ -250,7 +249,6 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
 
   onNextCapability() {
     //this.currentCapabilityNumber++;
-    window.scrollTo(0, 0);
     for (let complexity of this.capabilities[this.currentCapabilityNumber].complexities) {
       if (complexity.complexityDetails.userChoice === undefined) {
         this.isValid = false;
@@ -263,8 +261,10 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
       this.isValid = true;
       this.onSaveComplexity();
       this.highlightedSection.name = 'Proficiencies';
+      window.scrollTo(0, 0);
       return;
     }
+    window.scrollTo(0, 0);
     this.isValid = true;
     this.getCapabilityDetail(++this.currentCapabilityNumber);
   }
@@ -281,12 +281,11 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
 
   onNext() {
     this.isValid = true;
-    window.scrollTo(0, 0);
     if (this.complexities[this.complexityIds[this.currentComplexity]] === -1) {
       this.isValid = false;
       return;
     }
-
+    window.scrollTo(0, 0);
     this.onComplextyAnswered.emit(this.complexities);
     if (this.slideToLeft === true) {
       this.slideToLeft = !this.slideToLeft;

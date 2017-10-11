@@ -57,14 +57,13 @@ class SendMessageService {
 
   sendChangeMobileMessage(Data: any, callback: any) {
 
-    console.log("Send sms on", Data.mobileNo);
-    var message = "The One Time Password(OTP) to change your number from" + " " + Data.current_mobile_number + " " + "to" + " " + Data.mobileNo + " " + "of" + " " + this.app_name + " " + "account is" + " " + Data.otp + " " + ".Use this OTP to complete verification.";
-    console.log("msg sent to user:", message);
+    console.log('Send sms on', Data.mobileNo);
+    let message = 'The One Time Password(OTP) to change your number from '+ Data.current_mobile_number +' to '+ Data.mobileNo +' of your ' + this.app_name +' account is '+ Data.otp + '.Use this OTP to complete verification.';
+    console.log('msg sent to user:', message);
     msg91.send(Data.mobileNo, message, function (err: any, response: any) {
       if (err) {
         callback(new Error(Messages.MSG_ERROR_MESSAGE_SENDING), null);
-      }
-      else {
+      }else {
         callback(null, response);
       }
     });

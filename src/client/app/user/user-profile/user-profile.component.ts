@@ -99,6 +99,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
           this.getRecruiter();
         }
       }
+      LocalStorageService.setLocalValue(LocalStorage.ROLE_NAME, this.role);
     });
     var socialLogin: string = LocalStorageService.getLocalValue(LocalStorage.IS_SOCIAL_LOGIN);
     if (socialLogin === AppSettings.IS_SOCIAL_LOGIN_YES) {
