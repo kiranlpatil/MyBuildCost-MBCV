@@ -601,10 +601,11 @@
       }
     }
     .button-group {
-      width: 100%;
-      position: fixed;
-      padding: 7px;
+      border-radius: 0;
       float: left;
+      padding: 7px;
+      position: fixed;
+      width: 100%;
     }
 
     .btn-prev {
