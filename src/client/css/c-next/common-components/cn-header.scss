@@ -345,6 +345,13 @@ $overlay: rgba(0, 0, 0, 0.4);
 
     .last-child {
       margin: 0;
+
+      .active {
+        a {
+          background: #000;
+          color: #fff !important;
+        }
+      }
     }
 
     .last-child .dropdown-menu {
@@ -360,11 +367,6 @@ $overlay: rgba(0, 0, 0, 0.4);
     .last-child .dropdown-menu .dropdown-item {
       color: #a5a5a5;
       padding: 15px;
-    }
-
-    .active .dropdown-item {
-      background-color: #000;
-      color: #fff !important;
     }
 
     .last-child .dropdown-toggle {

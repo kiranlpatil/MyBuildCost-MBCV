@@ -25,11 +25,13 @@
       box-shadow: 0 0 1px 0 $primary-option1 inset, 0 0 1px 0 $primary-option1;
       color: $primary-option1;
       cursor: pointer;
+      display: inline-block;
+      float: left;
       font-size: 13px;
       font-weight: 600;
       padding: 4px 10px;
       min-width: 100px;
-      display: inline-block;
+      min-height: 28px;
       text-align: center;
       user-select: none;
 
@@ -407,19 +409,20 @@
     display: block;
   }
   .select-option > label {
-    min-height: 22px;
+    min-height: 20px;
     padding: 0 15px 0 22px;
     position: relative;
 
     & > input {
       & + span {
-        font-size: 12px;
         background: $white;
-        color: $text-color;
         border: 0;
         box-shadow: none;
-        text-align: left;
+        color: $text-color;
+        font-size: 12px;
+        min-height: 20px;
         padding: 0;
+        text-align: left;
 
         &:hover {
           border: 0;
@@ -441,6 +444,7 @@
 
       & ~ .check {
         display: block;
+        top: 1px;
       }
     }
 
@@ -448,6 +452,7 @@
 
       & ~ .check {
         display: block;
+        top: 1px;
       }
     }
 
