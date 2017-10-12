@@ -78,7 +78,10 @@ $overlay: rgba(0, 0, 0, 0.4);
       user-select: none;
 
       img {
+        background-color: $white;
+        border: 1px solid $border-color1;
         border-radius: 50%;
+        display: inline-block;
         height: 35px;
         margin: 8px 0 0;
         width: 35px;
