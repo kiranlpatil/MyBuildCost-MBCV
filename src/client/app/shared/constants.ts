@@ -693,5 +693,5 @@ export class Button {
   public static CLONE_BUTTON: string = 'CLONE';
   public static CANCEL_BUTTON: string = 'CANCEL';
   public static VALUE_PORTRAIT_BUTTON: string = 'Create your Own Value Portrait';
-  public static SUBMIT_VIEW_JOB: string = 'Submit & View Job';
+  public static SUBMIT_PROFILE: string = 'Submit Profile';
 }
