@@ -80,7 +80,7 @@
                 <span *ngFor="let industry of candidate.interestedIndustries;let i = index">{{industry}}
           <span *ngIf="candidate.interestedIndustries.length>1 && i<candidate.interestedIndustries.length-1">,</span>
         </span>
-                <label [class.exact]="data.experienceMatch=='exact'" [class.missing]="data.experienceMatch=='missing'">
+                <label  *ngIf="recruiter != undefined" [class.exact]="data.experienceMatch=='exact'" [class.missing]="data.experienceMatch=='missing'">
                   <strong class="title-name pull-left"> Experience <b class="small-label"></b></strong>
                   <img class="exact-img" src="assets/framework/images/dashboard/right-tick.svg"/>
                   <div class="info-description">
@@ -97,7 +97,7 @@
                        [class.below]="data.salaryMatch=='below'" [class.missing]="data.salaryMatch=='missing'">
                   <strong class="title-name pull-left"> Current Salary <b class="small-label"></b></strong>
                   <img class="exact-img" src="assets/framework/images/dashboard/right-tick.svg"/>
-                  <div class="info-description">
+                  <div  *ngIf="recruiter != undefined" class="info-description">
                     <img class="missing-img" src="assets/framework/images/dashboard/info-red.svg"/>
                     <div class="info-hover-section">
                       Job Salary Band {{recruiter.postedJobs[0].salaryMinValue}} -

@@ -6,14 +6,9 @@
   .btn-back {
     border: 0;
     margin: 0;
-    padding: 5px;
+    padding: 7px 0;
     color: $text-color;
     width: auto;
-    position: fixed;
-    top: 50px;
-    right: 10px;
-    z-index: 999;
-    box-shadow: none;
 
     &:focus,
     &:hover {
@@ -48,7 +43,7 @@
 
     ul > li {
       float: left;
-      padding: 0 25px;
+      padding: 0 20px;
       width: auto;
 
       &:first-child {
