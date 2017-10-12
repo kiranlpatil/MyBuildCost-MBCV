@@ -76,7 +76,9 @@ export class ChangeEmailComponent implements OnInit {
     message.isError = false;
     message.custom_message = Messages.MSG_SUCCESS_CHANGE_EMAIL;
     this.messageService.message(message);
-    this.logOut();
+    setTimeout(() => {
+      this.logOut();
+    },10000);
   }
 
   changeEmailFail(error: any) {

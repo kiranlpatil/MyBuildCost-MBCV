@@ -22,7 +22,7 @@
                 class="glyphicon glyphicon-option-vertical"></span></button>
         <ul class="dropdown-menu">
           <li (click)="raiseCloneEvent(item)"><a>{{getLabel().CLONE_JOB}}</a></li>
-          <li (click)="renewJobPost(item)"><a>Renew Job Post</a></li>
+          <li  [class.disable-option]="!item.isJobPosted" (click)="renewJobPost(item)"><a>Renew Job Post</a></li>
           <li><a disabled>{{getLabel().CLOSE_JOB}}</a></li>
         </ul>
       </div>
@@ -60,12 +60,12 @@
               </div>
             </div>
             <div class="col-sm-12 no-padding renew-job">
-              <div class="col-xs-2 no-padding">
+              <div class="col-xs-2 no-padding" *ngIf="item.isJobPosted">
                 <span *ngIf="item.daysRemainingForExpiring > 7" title="{{item.daysRemainingForExpiring}} days remaining for expiry" class="glyphicon glyphicon-refresh active" ></span>
                 <span class="glyphicon glyphicon-refresh about-to-expire" *ngIf="item.daysRemainingForExpiring <= 7 && item.daysRemainingForExpiring >= 1" title="{{item.daysRemainingForExpiring}} days remaining for expiry"></span>
                 <span class="glyphicon glyphicon-refresh expired" *ngIf="item.daysRemainingForExpiring <= 0" title="Expired"></span>
               </div>
-              <div class="col-xs-10 padding-left15" [class.posted-job]="!item.isJobPosted">
+              <div class="col-xs-10 padding-left15" *ngIf="item.isJobPosted" [class.posted-job]="!item.isJobPosted">
                 <p class="active" *ngIf="item.daysRemainingForExpiring > 7" title="{{item.daysRemainingForExpiring}} days remaining for expiry">{{item.daysRemainingForExpiring}} days remaining for expiry</p>
                 <p class="about-to-expire" *ngIf="item.daysRemainingForExpiring <= 7 && item.daysRemainingForExpiring >= 1" title="{{item.daysRemainingForExpiring}} days remaining for expiry">{{item.daysRemainingForExpiring}} days remaining for expiry</p>
                 <p class="expired" *ngIf="item.daysRemainingForExpiring <= 0">Expired</p>
