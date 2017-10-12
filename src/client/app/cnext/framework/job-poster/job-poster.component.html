@@ -89,7 +89,8 @@
     </div>
 
   </div>
-  <div class="dropup ask-expert" *ngIf="role==='recruiter' && jobPosterModel && jobPosterModel._id !==''">
+  <div class="dropup ask-expert" *ngIf="role==='recruiter' && jobId !== undefined && jobId !==''">
+
     <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown" type="button" (click)="buildJobShareUrl()" >
       <span class="label">{{getLabel().ASK_EXPERT}}</span>
     </button>

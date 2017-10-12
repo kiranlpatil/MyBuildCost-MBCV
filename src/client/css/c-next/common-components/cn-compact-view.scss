@@ -33,20 +33,20 @@
 }
 
 .edit-modal-content {
-  z-index: 100;
-  position: absolute !important;
-  margin: 0 auto;
-  box-shadow: 1px 1px 1px 0 $modal-bg;
-  border: 2px solid $white;
-  padding: 0 !important;
-  overflow: visible;
-  top: 0;
-  left: 50%;
-  width: 950px;
-  min-height: 465px;
-  height: auto;
-  transform: translate(-50%, 0) !important;
   border-radius: 10px;
+  border: 2px solid $white;
+  box-shadow: 1px 1px 1px 0 $modal-bg;
+  height: auto;
+  left: 50%;
+  margin: 30px auto 60px;
+  min-height: 465px;
+  overflow: visible;
+  padding: 0 !important;
+  position: absolute !important;
+  top: 0;
+  transform: translate(-50%, 0) !important;
+  width: 950px;
+  z-index: 100;
 }
 
 .compact-view {
@@ -277,12 +277,6 @@
   }
 }
 
-@media only screen and (max-width: 1366px) {
-  .edit-modal-content {
-    margin: 30px auto 60px;
-  }
-}
-
 @media only screen and (max-width: 1024px) {
   .compact-view {
     .btn-edit {
@@ -318,7 +312,7 @@
     max-height: 100vh;
     min-height: 100vh;
     margin: 0 auto;
-    overflow: auto;
+    overflow: hidden;
     padding-top: 90px !important;
     position: fixed !important;
     width: 100%;

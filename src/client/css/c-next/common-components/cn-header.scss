@@ -21,8 +21,8 @@ $overlay: rgba(0, 0, 0, 0.4);
     margin-left: 0 !important;
 
     img {
-      margin-top: 6px;
-      width: 84px;
+      margin-top: 10px;
+      width: 40px;
     }
   }
 
@@ -79,12 +79,11 @@ $overlay: rgba(0, 0, 0, 0.4);
 
       img {
         border-radius: 50%;
-        height: 40px;
-        margin: 6px 0 0;
-        width: 40px;
-        //border: 2px solid $theme-color;
-        z-index: -1;
+        height: 35px;
+        margin: 8px 0 0;
+        width: 35px;
         position: relative;
+        z-index: -1;
 
         &:hover,
         &:focus {
@@ -97,6 +96,12 @@ $overlay: rgba(0, 0, 0, 0.4);
         border-right: 5px solid transparent;
         border-top: 5px dashed $white;
         margin: 8px 0 0;
+      }
+    }
+
+    .active {
+      a {
+        background: $bg-container;
       }
     }
 
@@ -164,11 +169,56 @@ $overlay: rgba(0, 0, 0, 0.4);
   }
 }
 
-.navbar-left {
-  top: 0;
+.navbar-links {
+  left: 100px;
   position: fixed;
-  left: 200px;
+  top: 0;
   z-index: 1000;
+
+  li {
+    a {
+      border-bottom: 4px solid transparent;
+      color: $page-header-text;
+      font-size: 12px;
+      padding: 13px 5px 13px 30px;
+      text-transform: uppercase;
+      transition: color 0.25s ease-out, border 0.25s ease-out;
+
+      &:hover,
+      &:focus,
+      &:active {
+        background-color: transparent;
+      }
+    }
+  }
+
+  .active {
+    a {
+      border-bottom: 4px solid $theme-color;
+      color: $white;
+
+      .icon-dashboard {
+        background: url('../../assets/c-next/card-view/sprite.png') no-repeat -5px -770px;
+      }
+
+      .icon-value-portrait {
+        background: url('../../assets/c-next/card-view/sprite.png') no-repeat -30px -770px;
+      }
+
+      .icon-edit-profile {
+        background: url('../../assets/c-next/card-view/sprite.png') no-repeat -56px -770px;
+      }
+    }
+  }
+
+  a > span  {
+    margin-right: 15px;
+    height: 20px;
+    left: 0;
+    position: absolute;
+    top: 14px;
+    width: 20px;
+  }
 }
 
 .list-counts > li {
@@ -201,10 +251,26 @@ $overlay: rgba(0, 0, 0, 0.4);
   }
 }
 
+.icon-dashboard {
+  background: url('../../assets/c-next/card-view/sprite.png') no-repeat -108px -770px;
+}
+
+.icon-value-portrait {
+  background: url('../../assets/c-next/card-view/sprite.png') no-repeat -133px -770px;
+}
+
+.icon-edit-profile {
+  background: url('../../assets/c-next/card-view/sprite.png') no-repeat -159px -770px;
+}
+
+.icon-candidate-search {
+  background: url('../../assets/c-next/card-view/sprite.png') no-repeat -5px -789px;
+}
+
 #candidate-header {
   .navbar-brand {
     img {
-      width: 82px;
+      width: 36px;
     }
   }
 }
@@ -279,6 +345,13 @@ $overlay: rgba(0, 0, 0, 0.4);
 
     .last-child {
       margin: 0;
+
+      .active {
+        a {
+          background: #000;
+          color: #fff !important;
+        }
+      }
     }
 
     .last-child .dropdown-menu {
@@ -294,11 +367,6 @@ $overlay: rgba(0, 0, 0, 0.4);
     .last-child .dropdown-menu .dropdown-item {
       color: #a5a5a5;
       padding: 15px;
-    }
-
-    .active .dropdown-item {
-      background-color: #000;
-      color: #fff !important;
     }
 
     .last-child .dropdown-toggle {

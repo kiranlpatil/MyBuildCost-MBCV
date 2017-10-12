@@ -94,10 +94,12 @@
     }
 
     .profile-picture {
-      width: 40px;
-      height: 40px;
+      border: 1px solid $border-color1;
       border-radius: 50%;
+      display: inline-block;
+      height: 40px;
       margin-right: 10px;
+      width: 40px;
     }
 
     h6 {
@@ -328,18 +330,21 @@ header {
   .card-view {
     margin-top: 0;
     position: absolute;
-    top: 220px;
+    top: 185px;
     width: calc(100% - 200px);
   }
 }
 
 #compare-candidates {
   .compare-candidate-view {
+    left: 15px;
     margin-bottom: 0;
     position: absolute;
-    top: 190px;
-    left: 15px;
-    /*max-width: calc(100% - 30px);*/
+    top: 150px;
+  }
+
+  .empty-list-message {
+    left: 50%;
   }
 }
 

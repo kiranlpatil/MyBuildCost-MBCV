@@ -1,23 +1,23 @@
-import {Component, OnInit, ViewChild, ElementRef} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {JobDashboardService} from './job-dashboard.service';
-import {RecruiterJobView} from '../../model/recruiter-job-view';
-import {ValueConstant, Tooltip, UsageActions} from '../../../../shared/constants';
-import {CandidateQListModel} from './q-cards-candidates';
-import {JobPosterModel} from '../../../../user/models/jobPoster';
-import {ReferenceService} from '../../model/newClass';
-import {QCardFilterService} from '../../filters/q-card-filter.service';
-import {QCardFilter} from '../../model/q-card-filter';
-import {LoaderService} from '../../../../shared/loader/loaders.service';
-import {ProfileComparisonService} from '../../profile-comparison/profile-comparison.service';
-import {ProfileComparison} from '../../model/profile-comparison';
-import {QCardviewComponent} from '../q-card-view/q-card-view.component';
-import {ErrorService} from "../../../../shared/services/error.service";
-import {Label} from '../../../../shared/constants';
-import {UsageTrackingService} from '../../usage-tracking.service';
-import {JobPosterService} from '../../job-poster/job-poster.service';
-import {MessageService} from '../../../../shared/services/message.service';
-import {RenewJobPostService} from '../../../../user/services/renew-jobpost.service';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { JobDashboardService } from './job-dashboard.service';
+import { RecruiterJobView } from '../../model/recruiter-job-view';
+import { ValueConstant, Tooltip, UsageActions } from '../../../../shared/constants';
+import { CandidateQListModel } from './q-cards-candidates';
+import { JobPosterModel } from '../../../../user/models/jobPoster';
+import { ReferenceService } from '../../model/newClass';
+import { QCardFilterService } from '../../filters/q-card-filter.service';
+import { QCardFilter } from '../../model/q-card-filter';
+import { LoaderService } from '../../../../shared/loader/loaders.service';
+import { ProfileComparisonService } from '../../profile-comparison/profile-comparison.service';
+import { ProfileComparison } from '../../model/profile-comparison';
+import { QCardviewComponent } from '../q-card-view/q-card-view.component';
+import { ErrorService } from '../../../../shared/services/error.service';
+import { Label } from '../../../../shared/constants';
+import { UsageTrackingService } from '../../usage-tracking.service';
+import { JobPosterService } from '../../job-poster/job-poster.service';
+import { MessageService } from '../../../../shared/services/message.service';
+import { RenewJobPostService } from '../../../../user/services/renew-jobpost.service';
 
 @Component({
   moduleId: module.id,
@@ -31,24 +31,24 @@ export class JobDashboardComponent implements OnInit {
 
   jobId: any;
   jobCount: any;
-  private recruiterId: string;
-  private showModalStyle: boolean = false;
   headerInfo: any;
   recruiterJobView: RecruiterJobView = new RecruiterJobView();
   whichListVisible: boolean[] = new Array(4);
-  private candidateQlist: CandidateQListModel = new CandidateQListModel();
+  selectedJobId:string;
+  selectedJobTitle:string;
+  isCloneButtonClicked:boolean;
   selectedJobProfile: JobPosterModel = new JobPosterModel();
+  @ViewChild(QCardviewComponent) acaQcardClassObject: QCardviewComponent;
+  private candidateQlist: CandidateQListModel = new CandidateQListModel();
+  private recruiterId: string;
+  private showModalStyle: boolean = false;
   private filterMeta: QCardFilter;
   private isRecruitingForSelf: boolean;
   private profileComparison: ProfileComparison;
   private listOfCandidateIdToCompare: string[] = new Array(0);
-  selectedJobId:string;
-  selectedJobTitle:string;
-  isCloneButtonClicked:boolean;
   private emptyListMessage: string = Tooltip.EMPTY_LIST_MESSAGE;
   private emptyCartMessage: string = Tooltip.EMPTY_CART_MESSAGE;
   private emptyRejectedList: string = Tooltip.EMPTY_REJECTED_LIST_MESSAGE;
-  @ViewChild(QCardviewComponent) acaQcardClassObject: QCardviewComponent;
 
 
   constructor(public refrence: ReferenceService,
@@ -106,7 +106,7 @@ export class JobDashboardComponent implements OnInit {
       this.whichListVisible[i] = false;
     }
     this.whichListVisible[0] = true;
-    if(this.candidateQlist.matchedCandidates.length>0){
+    if(this.candidateQlist.matchedCandidates.length>0) {
       return;
     }
     this.jobDashboardService.getSearchedcandidate(this.jobId)
@@ -123,6 +123,7 @@ export class JobDashboardComponent implements OnInit {
                 this.candidateQlist = temp;
               },error => this.errorService.onError(error));
         },error => this.errorService.onError(error));
+    window.scrollTo(0,0);
   }
 
   AddedToCart(event: any) {
@@ -185,6 +186,7 @@ export class JobDashboardComponent implements OnInit {
               break;
           }
         },error => this.errorService.onError(error));
+      window.scrollTo(0,0);
   }
 
   navigateTo(navigateTo: string, item: string) {
@@ -251,11 +253,11 @@ export class JobDashboardComponent implements OnInit {
     } else if (data.action == 'Reject') {
       var compareAction:any;
       if (this.candidateQlist.matchedCandidates.filter(function (obj) {
-          return data.item._id == obj._id
+          return data.item._id == obj._id;
         }).length && (data.item.candidateListStatus.indexOf('applied') !== -1)) {
         compareAction = {'action': 'add', 'source': 'matchedList', 'destination': 'rejectedList', 'id': data.item._id};
       } else if (this.candidateQlist.matchedCandidates.filter(function (obj) {
-          return data.item._id == obj._id
+          return data.item._id == obj._id;
         }).length) {
         compareAction = {'action': 'add', 'source': 'matchedList', 'destination': 'rejectedList', 'id': data.item._id};
       } else if ((data.item.candidateListStatus.indexOf('cartListed') !== -1) && (data.item.candidateListStatus.indexOf('applied') == -1)) {
@@ -282,6 +284,7 @@ export class JobDashboardComponent implements OnInit {
           data => this.OnCompareSuccess(data.data)
           ,error => this.errorService.onError(error));
     }
+    window.scrollTo(0,0);
   }
 
   OnCompareSuccess(data: ProfileComparison) {

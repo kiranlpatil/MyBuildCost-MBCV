@@ -12,16 +12,10 @@
           <span class="icon-bar"></span>
         </button>
 
-        <a class="navbar-brand hidden-xs" (click)="navigateTo('/create_profile'); closeMenu($event);" *ngIf="!candidate.isSubmitted">
-          <img src={{MY_LOGO}}/>
-        </a>
-        <a class="navbar-brand hidden-xs" (click)="navigateTo('/candidate_dashboard'); closeMenu($event);" *ngIf="candidate.isSubmitted">
-          <img src={{MY_LOGO}}/>
-        </a>
-        <a class="navbar-brand visible-xs" (click)="navigateTo('/create_profile'); closeMenu($event);"  *ngIf="!candidate.isSubmitted">
+        <a class="navbar-brand" (click)="navigateTo('/create_profile'); closeMenu($event);" *ngIf="!candidate.isSubmitted">
           <img src={{MOBILE_LOGO}}/>
         </a>
-        <a class="navbar-brand visible-xs" (click)="navigateTo('/candidate_dashboard'); closeMenu($event);" *ngIf="candidate.isSubmitted">
+        <a class="navbar-brand" (click)="navigateTo('/candidate_dashboard'); closeMenu($event);" *ngIf="candidate.isSubmitted">
           <img src={{MOBILE_LOGO}}/>
         </a>
       </div>
@@ -41,6 +35,23 @@
       </ul>
       <div class="bg-overlay" [class.show]="isClassVisible" (click)="isClassVisible = false;"></div>
       <div class="collapse navbar-collapse" [class.open-nav]="isClassVisible">
+        <ul class="nav navbar-nav navbar-left hidden-xs navbar-links">
+          <li role="menuitem" *ngIf="candidate.isSubmitted" [routerLinkActive]="['active']">
+            <a class="dropdown-item"  [routerLink]="['/candidate_dashboard']" (click)="navigateTo('/candidate_dashboard');">
+              <span class="icon-dashboard"></span>My Dashboard
+            </a>
+          </li>
+          <li role="menuitem" *ngIf="candidate.isSubmitted" [routerLinkActive]="['active']">
+            <a class="dropdown-item" [routerLink]="['/value-portrait']" (click)="navigateToWithId('/value-portrait');">
+              <span class="icon-value-portrait"></span>Value Portrait
+            </a>
+          </li>
+          <li role="menuitem" *ngIf="candidate.isCompleted" [routerLinkActive]="['active']">
+            <a class="dropdown-item" [routerLink]="['/create_profile']" (click)="navigateTo('/create_profile');">
+              <span class="icon-edit-profile"></span>Edit Profile
+            </a>
+          </li>
+        </ul>
         <ul class="nav navbar-nav navbar-right">
           <li class="dropdown last-child">
             <div class="dropdown">
@@ -61,32 +72,32 @@
                   <h5 *ngIf="candidate.jobTitle != undefined">{{candidate.jobTitle}}</h5>
                 </li>
                 <li class="divider"></li>
-                <li role="menuitem" [routerLinkActive]="['active']" *ngIf="candidate.isSubmitted">
-                  <a class="dropdown-item" [routerLink]="['candidate_dashboard']"
+                <li class="visible-xs" role="menuitem" [routerLinkActive]="['active']" *ngIf="candidate.isSubmitted">
+                  <a class="dropdown-item" [routerLink]="['/candidate_dashboard']"
                      (click)="navigateTo('/candidate_dashboard');">
                     <span class="glyphicon glyphicon-th"></span>My Dashboard
                   </a>
                 </li>
-                <li role="menuitem" [routerLinkActive]="['active']" *ngIf="candidate.isSubmitted">
-                  <a class="dropdown-item" [routerLink]="['value-portrait']"
+                <li class="visible-xs" role="menuitem" [routerLinkActive]="['active']" *ngIf="candidate.isSubmitted">
+                  <a class="dropdown-item" [routerLink]="['/value-portrait']"
                      (click)="navigateToWithId('/value-portrait');">
                     <span class="glyphicon glyphicon-user"></span>Value Portrait
                   </a>
                 </li>
-                <li role="menuitem" [routerLinkActive]="['active']" *ngIf="candidate.isCompleted">
-                  <a class="dropdown-item" [routerLink]="['profile-edit']"
+                <li class="visible-xs" role="menuitem" [routerLinkActive]="['active']" *ngIf="candidate.isCompleted">
+                  <a class="dropdown-item" [routerLink]="['/create_profile']"
                      (click)="navigateTo('/create_profile');">
                     <span class="	glyphicon glyphicon-edit"></span>Edit Profile
                   </a>
                 </li>
                 <li role="menuitem" [routerLinkActive]="['active']">
-                  <a class="dropdown-item" [routerLink]="['profile']"
+                  <a class="dropdown-item" [routerLink]="['/profile/candidate']"
                      (click)="navigateTo('/profile/candidate');">
                     <span class="glyphicon glyphicon-list-alt"></span>Account Details
                   </a>
                 </li>
                 <li role="menuitem" [routerLinkActive]="['active']">
-                  <a class="dropdown-item" [routerLink]="['settings']"
+                  <a class="dropdown-item" [routerLink]="['/settings/candidate']"
                      (click)="navigateTo('/settings/candidate');">
                     <span class="glyphicon glyphicon-lock"></span>Change Password
                   </a>

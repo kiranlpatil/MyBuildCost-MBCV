@@ -1,12 +1,12 @@
 .recruiter-filter {
-  top: 216px !important;
+  height: calc(100vh - 182px) !important;
   padding-bottom: 0 !important;
-  height: calc(100vh - 238px) !important;
+  top: 182px !important;
   z-index: 1001 !important;
 
   h4 {
-    top: 170px !important;
     padding: 15px !important;
+    top: 138px !important;
   }
 }
 
