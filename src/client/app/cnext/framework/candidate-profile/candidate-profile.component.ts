@@ -501,7 +501,7 @@ export class CandidateProfileComponent implements OnInit, DoCheck, OnDestroy {
   }
 
   goToDashboard() {
-    this._router.navigate([NavigationRoutes.APP_CANDIDATE_DASHBOARD]);
+    this._router.navigate([NavigationRoutes.APP_VLAUEPORTRAIT, LocalStorageService.getLocalValue(LocalStorage.USER_ID)]);
   }
 
   getStyleModal() {
