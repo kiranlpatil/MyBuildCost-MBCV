@@ -13,7 +13,7 @@
                         <div class="scenarios">
                             <div class="item-radio" *ngFor="let answer of reasonForClosingJob[0].answers">
                                 <label>
-                                    <input type="radio" name="ccc" value="{{answer}}"
+                                    <input type="radio" name="reasons" value="{{answer}}"
                                            (change)="onJobCloseReason(answer)">
                                     <span>{{answer}}</span>
                                     <div class="check"></div>

@@ -114,8 +114,7 @@ export class JobListerComponent implements  OnDestroy {
     this.selectedJobProfileEmitter.emit(selectedJobProfile);
   }
 
-  closeJobPost(selectedJobProfile: any) { 
-    console.log('isJob posted = ',selectedJobProfile.isJobPosted);
+  closeJobPost(selectedJobProfile: any) {
     this.selectedJobProfile = selectedJobProfile;
     this.selectedJobTitle = selectedJobProfile.jobTitle;
     this.isJobCloseButtonClicked=!this.isJobCloseButtonClicked;

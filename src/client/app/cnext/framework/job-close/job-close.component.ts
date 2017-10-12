@@ -52,14 +52,19 @@ export class JobCloseComponent implements OnChanges, OnInit {
 
 
   onCloseJob() {
-    this.showCloseDialogue = false;
-    this.selectedJobProfile.isJobPostClosed = true;
-    this.selectedJobProfile.jobCloseReason = this.selectedJobCloseReason;
-    this.jobPosterService.postJob(this.selectedJobProfile).subscribe(
-      data => {
-        this.selectedJobProfile = data.data.postedJobs[0];
-      }, error => this.errorService.onError(error));
-    this.messageService.message(new Message(this.selectedJobTitleForClose+ " Job Post is closed"));
+    if(this.selectedJobCloseReason === undefined || this.selectedJobCloseReason === '' || this.selectedJobCloseReason === null) {
+      //this.showCloseDialogue = false;
+      return;
+    } else {
+      this.showCloseDialogue = false;
+      this.selectedJobProfile.isJobPostClosed = true;
+      this.selectedJobProfile.jobCloseReason = this.selectedJobCloseReason;
+      this.jobPosterService.postJob(this.selectedJobProfile).subscribe(
+        data => {
+          this.selectedJobProfile = data.data.postedJobs[0];
+        }, error => this.errorService.onError(error));
+      this.messageService.message(new Message(this.selectedJobTitleForClose+ " Job Post is closed"));
+    }
   }
 
   setStyleForDialogueBox() {

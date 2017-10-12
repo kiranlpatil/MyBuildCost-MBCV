@@ -11,5 +11,6 @@ export class ClosedJobFilter implements PipeTransform {
     }else if (args) {
       return array;
     }
+    return array;
   }
 }
