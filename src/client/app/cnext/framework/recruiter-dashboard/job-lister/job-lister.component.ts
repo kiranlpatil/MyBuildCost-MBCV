@@ -6,6 +6,8 @@ import {ReferenceService} from "../../model/newClass";
 import {RecruiterDashboard} from "../../model/recruiter-dashboard";
 import {Button, Headings, ImagePath, Label, Messages, Tooltip} from "../../../../shared/constants";
 import {RenewJobPostService} from "../../../../user/services/renew-jobpost.service";
+import {Message} from "../../../../shared/models/message";
+import {MessageService} from "../../../../shared/services/message.service";
 
 
 @Component({
@@ -40,30 +42,11 @@ export class JobListerComponent implements  OnDestroy {
   private showClosedJobs: boolean = true;
 
   constructor(private _router: Router, public refrence: ReferenceService,
-              private renewJobPostService: RenewJobPostService) {
+              private renewJobPostService: RenewJobPostService, private messageService: MessageService) {
     this.qCardModel.name = 'Date';
 
   }
 
-  /*ngOnChanges() {
-    if(!this.showClosedJobs) {
-      for (let job of this.jobListInput) {
-        if(job.isJobPostClosed) {
-          const index: number = this.jobListInput.indexOf(job);
-          if(index !== -1) {
-            this.closedJobs.push(job);
-            this.jobListInput.splice(index, 1);
-          }
-        }
-      }
-    } else {
-      for(let jobClosed of this.closedJobs) {
-        if (this.jobListInput.indexOf(jobClosed) === -1) {
-          this.jobListInput.push(jobClosed);
-        }
-      }
-    }
-  }*/
 
 
   ngOnDestroy() {
@@ -130,12 +113,11 @@ export class JobListerComponent implements  OnDestroy {
     this.selectedJobProfileEmitter.emit(selectedJobProfile);
   }
 
-  closeJobPost(selectedJobProfile: any) { debugger
+  closeJobPost(selectedJobProfile: any) { 
+    console.log('isJob posted = ',selectedJobProfile.isJobPosted);
     this.selectedJobProfile = selectedJobProfile;
-    /*this.selectedJobId = selectedJobProfile._id;
-    this.selectedJobTitle = selectedJobProfile.jobTitle;*/
+    this.selectedJobTitle = selectedJobProfile.jobTitle;
     this.isJobCloseButtonClicked=!this.isJobCloseButtonClicked;
-    //this.isJobCloseButtonClicked = true;
   }
 
   displayClosedJobs() {

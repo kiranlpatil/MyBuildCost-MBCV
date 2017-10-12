@@ -91,8 +91,8 @@
               class="glyphicon glyphicon-option-horizontal"></span></button>
       <ul class="dropdown-menu">
         <li (click)="raiseCloneEvent()"><a>{{getLabel().CLONE_JOB}}</a></li>
-        <li (click)="onRenewJob()"><a>Renew Job Post</a></li>
-        <li (click)="closeJobPost()"><a>{{getLabel().CLOSE_JOB}}</a></li>
+        <li  *ngIf="!selectedJobProfile.isJobPostClosed" (click)="onRenewJob()"><a>Renew Job Post</a></li>
+        <li *ngIf="selectedJobProfile.isJobPosted" (click)="closeJobPost(selectedJobProfile)"><a>{{getLabel().CLOSE_JOB}}</a></li>
       </ul>
     </div>
     <div id="matched-job" class="tab-pane fade in active "  *ngIf="selectedJobProfile!=undefined">
@@ -150,7 +150,7 @@
     <cn-job-clone [selectedJobId]="selectedJobId"  [selectedJobTitle]="selectedJobTitle"
                   [isCloneButtonClicked]="isCloneButtonClicked"  (raiseJobEditViewEventEmitter)="jobcloned($event)" ></cn-job-clone>
 
-      <cn-job-close [isJobCloseButtonClicked]="isJobCloseButtonClicked"  [selectedJobProfile]="selectedJobProfile"></cn-job-close>
+      <cn-job-close [selectedJobTitleForClose]="selectedJobTitle" [isJobCloseButtonClicked]="isJobCloseButtonClicked"  [selectedJobProfile]="selectedJobProfile"></cn-job-close>
   </div>
   <tpl-footer></tpl-footer>
 </div>

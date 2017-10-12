@@ -16,15 +16,15 @@ import {JobCloseComponentService} from "./job-close.component.service";
 
 export class JobCloseComponent implements OnChanges, OnInit {
 
- /* @Input() selectedJobIdForClose: string;
-  @Input() selectedJobTitleForClose: string;*/
+  //@Input() selectedJobIdForClose: string;
+  @Input() selectedJobTitleForClose: string;
   @Input() selectedJobProfile: any;
   @Input() isJobCloseButtonClicked:boolean;
 
 
   private showCloseDialogue:boolean = false;
   private selectedJobCloseReason: string;
-  private reasonForClosingJob: any[];
+  private reasonForClosingJob: any = new Array(0);
   private isShowNoSelectionError: boolean = false;
 
   constructor(private errorService: ErrorService, private jobPosterService: JobPosterService,
@@ -41,8 +41,8 @@ export class JobCloseComponent implements OnChanges, OnInit {
   }
 
   ngOnChanges(changes:any) {
-    /*if (changes.selectedJobIdForClose!== undefined
-      && changes.selectedJobIdForClose.currentValue !== undefined) {
+    /*if (changes.selectedJobTitleForClose!== undefined
+      && changes.selectedJobTitleForClose.currentValue !== undefined) {
       this.showCloseDialogue=true;
     }*/
     if(changes.isJobCloseButtonClicked !== undefined && changes.isJobCloseButtonClicked.currentValue !== undefined) {
@@ -58,8 +58,8 @@ export class JobCloseComponent implements OnChanges, OnInit {
     this.jobPosterService.postJob(this.selectedJobProfile).subscribe(
       data => {
         this.selectedJobProfile = data.data.postedJobs[0];
-      }, error => this.errorService.onError(error))
-    this.messageService.message(new Message("This Job Post is closed"));
+      }, error => this.errorService.onError(error));
+    this.messageService.message(new Message(this.selectedJobTitleForClose+ " Job Post is closed"));
   }
 
   setStyleForDialogueBox() {
