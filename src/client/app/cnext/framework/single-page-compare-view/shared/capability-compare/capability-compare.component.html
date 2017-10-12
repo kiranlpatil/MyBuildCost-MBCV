@@ -23,7 +23,7 @@
             <div *ngFor="let item of maxArray;let x=index;">
               <span class="empty-divs" *ngIf="x >= capability.complexities.length;"></span>
             </div>
-            <div *ngFor="let complexity of capability.complexities;let i=index">
+            <div *ngFor="let complexity of capability.complexities;let j=index">
               <div class="col-sm-12 no-padding row-background"
                    *ngIf="complexity.scenarios[0].job_scenario_name != undefined && complexity.scenarios[0].job_scenario_name != 'Not Applicable'">
                 <div class="" [class.exact]="complexity.match==2 "
@@ -68,7 +68,15 @@
                         </div>
 
                       </div>
-                      <span *ngIf="complexity.complexityNote" class="complexity-name">{{complexity?.complexityNote}}</span>
+                      <div *ngIf="complexity.complexityNote" class="notes-section">
+                        <div title="View Complexity Notes"class="notes-triangle"></div>
+                        <div title="View Complexity Notes" data-toggle="modal" [attr.data-target]="'#'+'complexity-notes'+i+j" class="notes-icons"></div>
+                        <div data-dismiss="modal" id="{{'complexity-notes'+i+j}}" class="collapse complexity-notes-description">
+                          {{complexity?.complexityNote}}
+                          <span data-dismiss="modal">&times;</span>
+                        </div>
+                      </div>
+
                     </div>
                   </div>
                 </div>

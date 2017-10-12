@@ -1501,3 +1501,88 @@ select:focus {
   }
 }
 
+.notes-section {
+  height: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 0;
+}
+
+.notes-triangle {
+  border-top: 10px solid $theme-color;
+  border-left: 10px solid transparent;
+  height: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 0;
+}
+.complexity-notes-description {
+  background: #fffcdc;
+  color: $black;
+  font-size: 12px;
+  max-height: 150px;
+  overflow-y: auto;
+  position: relative;
+  padding: 15px;
+  right: 115px;
+  top: 20px;
+  width: 200px;
+  word-break: keep-all;
+  z-index: 999;
+  span {
+    cursor: pointer;
+    display: table !important;
+    font-size: 20px !important;
+    position: absolute !important;;
+    right: 5px;
+    top: 3px;
+  }
+}
+
+.complexity-notes-description {
+  display: none !important;
+}
+
+.notes-icons {
+  background: url(../assets/c-next/card-view/sprite.png) no-repeat -32px -785px;
+  cursor: pointer;
+  display: none;
+  height: 34px;
+  left: -19px;
+  position: absolute;
+  top: -4px;
+  width: 28px;
+  z-index: 99;
+}
+
+.below,
+.exact,
+.missing,
+.above {
+  &:hover {
+    .collapse.complexity-notes-description.in {
+      display: block !important;
+    }
+    .notes-icons {
+      display: block;
+    }
+    .notes-triangle {
+      display: none;
+    }
+  }
+}
+
+.add-complexity-notes {
+  label {
+    float: left;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    width: 100%;
+  }
+  textarea {
+    height: 80px;
+    max-width: 60%;
+  }
+}

@@ -21,6 +21,9 @@
         <div class="check"></div>
       </label>
     </div>
-   <div><input type="text" (change)="onNoteChange()" [(ngModel)]="complexityDetails.complexityNote"></div>
+   <div class="add-complexity-notes">
+     <label> Notes (if any) </label>
+     <textarea type="text" (change)="onNoteChange()" [(ngModel)]="complexityDetails.complexityNote"> </textarea>
+   </div>
   </div>
 </div>
