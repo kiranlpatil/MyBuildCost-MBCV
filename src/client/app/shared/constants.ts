@@ -687,6 +687,7 @@ export class Label {
   public static REGISTER_AS_APPLICANT: string = 'Register as an applicant';
   public static REGISTER_AS_RECRUITER: string = 'Register as a recruiter';
   public static ASK_EXPERT: string = 'Share job with hiring manager for edit';
+  public static SHOW_CLOSED_JOBS: string = 'Show Closed Jobs';
 }
 
 export class Button {
@@ -694,7 +695,7 @@ export class Button {
   public static RESET_PASSWORD_BUTTON: string = 'RESET PASSWORD';
   public static CLONE_BUTTON: string = 'CLONE';
   public static CLOSE_BUTTON: string = 'CLOSE';
-  public static CANCEL_BUTTON: string = 'CANCEL';
+  public static CANCEL_BUTTON: string = 'Cancel';
   public static VALUE_PORTRAIT_BUTTON: string = 'Create your Own Value Portrait';
   public static SUBMIT_PROFILE: string = 'Submit Profile';
 }

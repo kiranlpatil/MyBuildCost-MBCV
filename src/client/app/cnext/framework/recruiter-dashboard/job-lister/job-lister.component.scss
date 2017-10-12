@@ -30,12 +30,32 @@
 }
 
 .job-list {
-  margin-top: 30px;
+  margin-top: 70px;
   text-align: left;
+
+  header {
+    background: $header-bg;
+    height: 30px;
+    left: 0;
+    position: fixed;
+    top: 50px;
+    width: 100%;
+    z-index: 1000;
+
+    .select-option {
+      float: right !important;
+      margin: 5px 0 !important;
+    }
+
+    .select-option > label {
+      min-height: 15px !important;
+      padding: 0 0 0 20px !important;
+    }
+  }
 
   .card-view {
     color: $text-color4;
-    margin-top: 20px !important;
+    margin-top: 0 !important;
 
     .panel {
       cursor: pointer;
@@ -189,6 +209,7 @@
 
 .btn-menu {
   background: transparent;
+  box-shadow: none;
   cursor: pointer;
   color: $gray-light2;
   font-size: 12px;
@@ -241,12 +262,12 @@
         background: $contact-info;
       }
     }
-
-    &:last-child > a {
-      background: #d0d0d0;
-      opacity: 0.3;
-    }
   }
+}
+
+.closed_post_job {
+  background: $bg-container !important;
+  border: 1px solid $border-color1 !important;
 }
 
 
@@ -300,11 +321,4 @@
       width: 100%;
     }
   }
-}
-
-.checkbox {
-  position: absolute;
-  right: 10px;
-  z-index: 1000;
-  top: -16px;
 }

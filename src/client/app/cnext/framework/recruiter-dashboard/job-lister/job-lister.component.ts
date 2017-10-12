@@ -36,6 +36,7 @@ export class JobListerComponent implements  OnDestroy {
   private toggle: boolean = false;
   private closedJobs: any[] = new Array(0);
   private isJobeditted: boolean = false;
+  private isJobPostClosed: boolean;
   private initialMessageToDisplay: string= Tooltip.RECRUITER_ENTRY_MESSAGE;
   private dashboardWelcomeMessage: string= Tooltip.RECRUITER_DASHBOARD_MESSAGE;
   private qCardModel: QCardsortBy = new QCardsortBy();
@@ -123,5 +124,4 @@ export class JobListerComponent implements  OnDestroy {
   displayClosedJobs() {
     this.showClosedJobs = !this.showClosedJobs;
   }
-
 }

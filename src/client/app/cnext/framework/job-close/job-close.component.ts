@@ -11,7 +11,7 @@ import {JobCloseComponentService} from "./job-close.component.service";
   moduleId: module.id,
   selector: 'cn-job-close',
   templateUrl: 'job-close.component.html',
-  styleUrls: ['job-close.component.scss']
+  styleUrls: ['job-close.component.css']
 })
 
 export class JobCloseComponent implements OnChanges, OnInit {
