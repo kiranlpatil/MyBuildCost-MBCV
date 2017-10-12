@@ -5,6 +5,7 @@
   border-bottom: 1px solid #d1dce4;
 
   .panel {
+    cursor: default !important;
     padding: 2px 15px !important;
   }
 }
@@ -34,10 +35,6 @@
   }
 }
 
-.panel {
-  cursor: default;
-}
-
 .job-details {
   width: 100%;
 
@@ -55,11 +52,12 @@
   }
 
   li > a {
-    font-size: 9px;
-    //text-decoration: underline;
-    margin-top: 17px;
-    display: block;
     color: $theme-color;
+    display: block;
+    font-weight: 900;
+    font-family: 'gothamrnd-book';
+    font-size: 12px;
+    margin: 14px 0 0 7px;
   }
 }
 
@@ -125,10 +123,6 @@
       }
     }
   }
-}
-
-.btn-back {
-  display: none;
 }
 
 @media only screen and (max-width: 1024px) {

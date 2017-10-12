@@ -12,25 +12,19 @@
   <div class="candidate-listing">
     <cn-filter [hidden]="whichListVisible[4]" [selectedJob]="selectedJobProfile" [role]=true></cn-filter>
     <div class="col-sm-12 no-padding">
-      <button class="btn btn-back" title="All Jobs" (click)="navigateTo('recruiterdashboard',undefined)">All Jobs
-      </button>
       <div class="list-view" *ngIf="selectedJobProfile!=undefined">
         <div class="panel clearfix">
-          <div class="col-md-7 col-sm-6 no-padding">
+          <div class="col-sm-5 no-padding">
             <ul class="pull-left job-details">
-              <!--<li class="job-posted"><p><span>{{recruiterJobView.numberOfCandidatesInCart}}</span></p></li>-->
               <li>
                 <h4 title="View Job Details" title="{{selectedJobProfile.jobTitle}}">{{selectedJobProfile.jobTitle}}</h4>
               </li>
               <li>
                 <a title="view job" (click)="viewJobDetails()">view job</a>
               </li>
-              <!--<li>
-                <a class="view-details" (click)="viewJobDetails()">view job details</a>
-              </li>-->
             </ul>
           </div>
-          <div class="col-md-5 col-sm-6 no-padding">
+          <div class="col-sm-7 no-padding">
             <ul class="pull-right job-info">
               <li class="contact-info" title="Industry : {{selectedJobProfile.industry.name}}">
                 <label>Industry</label>
@@ -53,6 +47,10 @@
               <li [class.job-expired]="selectedJobProfile.isJobPostExpired" class="contact-info" title="Expiry Date : {{selectedJobProfile.expiringDate | date :'dd MMM yyyy'}}">
                 <label>Expiry Date</label>
                 <p>{{selectedJobProfile.expiringDate | date :'dd MMM yyyy'}}</p>
+              </li>
+              <li>
+                <button class="btn-back" title="All Jobs" (click)="navigateTo('recruiterdashboard',undefined)">All Jobs
+                </button>
               </li>
             </ul>
           </div>
