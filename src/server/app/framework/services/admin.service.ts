@@ -252,8 +252,10 @@ class AdminService {
               } else {
                 console.log("Fetched all recruiters from users:" + recruiterResult.length);
                 for (let user of result) {
-                  user.data = usersMap.get(user._id.toString());
-                  recruiters.push(user);
+                  if(usersMap.get(user._id.toString())){
+                    user.data = usersMap.get(user._id.toString());
+                    recruiters.push(user);
+                  }
                 }
 
                 users.recruiter = recruiters;
