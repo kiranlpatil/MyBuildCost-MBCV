@@ -59,7 +59,7 @@ export class JobPosterComponent implements OnInit, OnChanges {
   private jobForComplexity: Role[] = new Array(0);
   jobForRole: Role[] = new Array(0);
   jobForCapability: Role[] = new Array(0);
-  private jobId: string;
+  jobId: string;
   isShowReleventIndustryListStep: boolean = false;
   private isPresentCapability: boolean = false;
   private isComplexityFilled: boolean = true;
