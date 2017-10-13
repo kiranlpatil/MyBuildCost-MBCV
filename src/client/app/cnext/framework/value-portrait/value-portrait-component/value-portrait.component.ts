@@ -29,14 +29,14 @@ export class ValuePortraitComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.valuePortraitImgName = ImagePath.CANDIDATE_VALUE_PORTRAIT_VIEW;
+    if(this.isCandidate) {
+      this.isRequireGuidedTourImg();
+    }
     this.candidateProfileService.getCandidateAllDetails(this.userId)
       .subscribe(
         candidateData => {
           this.candidate = this.updateCapabilityData(candidateData.data);
-          this.valuePortraitImgName = ImagePath.CANDIDATE_VALUE_PORTRAIT_VIEW;
-          if(this.isCandidate) {
-            this.isRequireGuidedTourImg();
-          }
         },error => this.errorService.onError(error));
   }
 
