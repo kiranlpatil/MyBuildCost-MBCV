@@ -6,6 +6,8 @@ import {ReferenceService} from "../../model/newClass";
 import {RecruiterDashboard} from "../../model/recruiter-dashboard";
 import {Button, Headings, ImagePath, Label, Messages, Tooltip} from "../../../../shared/constants";
 import {RenewJobPostService} from "../../../../user/services/renew-jobpost.service";
+import {Message} from "../../../../shared/models/message";
+import {MessageService} from "../../../../shared/services/message.service";
 
 
 @Component({
@@ -15,11 +17,12 @@ import {RenewJobPostService} from "../../../../user/services/renew-jobpost.servi
   styleUrls: ['job-lister.component.css'],
  })
 
-export class JobListerComponent implements  OnDestroy, OnChanges {
+export class JobListerComponent implements  OnDestroy {
   @Input() jobListInput: any[] = new Array(0);
   @Input() headerInfoForJob: RecruiterHeaderDetails;
   @Input() screenType:string;
   @Input() recruiter: RecruiterDashboard;
+//  @Input() showClosedJobs: boolean;
   @Output() jobPostEventEmitter: EventEmitter<string> = new EventEmitter();
   @Output() jobListCloneSuccessEmitter: EventEmitter<boolean> = new EventEmitter();
   @Output() selectedJobProfileEmitter: EventEmitter<string> = new EventEmitter();
@@ -27,19 +30,26 @@ export class JobListerComponent implements  OnDestroy, OnChanges {
   //public jobListToCheck:JobPosterModel[] = new Array(0);
   private selectedJobId:string;
   private selectedJobTitle:string;
+  private selectedJobProfile: any;
   private isCloneButtonClicked:boolean;
+  private isJobCloseButtonClicked:boolean;
   private toggle: boolean = false;
+  private closedJobs: any[] = new Array(0);
   private isJobeditted: boolean = false;
+  private isJobPostClosed: boolean;
   private initialMessageToDisplay: string= Tooltip.RECRUITER_ENTRY_MESSAGE;
   private dashboardWelcomeMessage: string= Tooltip.RECRUITER_DASHBOARD_MESSAGE;
   private qCardModel: QCardsortBy = new QCardsortBy();
+  private showClosedJobs: boolean = true;
 
-  constructor(private _router: Router, public refrence: ReferenceService, private renewJobPostService: RenewJobPostService) {
+  constructor(private _router: Router, public refrence: ReferenceService,
+              private renewJobPostService: RenewJobPostService, private messageService: MessageService) {
     this.qCardModel.name = 'Date';
+
   }
 
-  ngOnChanges(changes: any) {
-  }
+
+
   ngOnDestroy() {
     this.refrence.data = this.headerInfoForJob;
   }
@@ -104,4 +114,13 @@ export class JobListerComponent implements  OnDestroy, OnChanges {
     this.selectedJobProfileEmitter.emit(selectedJobProfile);
   }
 
+  closeJobPost(selectedJobProfile: any) {
+    this.selectedJobProfile = selectedJobProfile;
+    this.selectedJobTitle = selectedJobProfile.jobTitle;
+    this.isJobCloseButtonClicked=!this.isJobCloseButtonClicked;
+  }
+
+  displayClosedJobs() {
+    this.showClosedJobs = !this.showClosedJobs;
+  }
 }

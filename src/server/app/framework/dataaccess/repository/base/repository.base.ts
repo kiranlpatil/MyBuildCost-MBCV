@@ -73,10 +73,9 @@ class RepositoryBase<T extends mongoose.Document> implements IRead<T>, IWrite<T>
   findByName(name: string, callback: (error: any, result: T) => void) {
     this._model.find({"name": name}, callback);
   }
-  ;
 
   toObjectId(_id: string): mongoose.Types.ObjectId {
-    return mongoose.Types.ObjectId.createFromHexString(_id)
+    return mongoose.Types.ObjectId.createFromHexString(_id);
   }
 
   findAndPopulate(searchField: any, populateField: any, callback: (err: any, result: any) => void) {

@@ -28,7 +28,7 @@ export class JobCloneComponent implements OnChanges {
       && changes.selectedJobId.currentValue !== undefined) {
       this.showCloneDialogue=true;
     }
-    if(changes.isCloneButtonClicked.currentValue!==undefined) {
+    if(changes.isCloneButtonClicked !== undefined && changes.isCloneButtonClicked.currentValue !== undefined) {
       this.showCloneDialogue = true;
     }
   }

@@ -108,18 +108,18 @@
       -webkit-transition: border 0.25s linear;
 
       &::before {
-        display: block;
-        position: absolute;
-        content: "\2713";
+        background: transparent;
         border-radius: 100%;
-        top: 50%;
+        color: transparent;
+        content: "\2713";
+        display: block;
         left: 50%;
         margin: auto;
+        position: absolute;
+        top: 50%;
         transform: translate(-50%, -50%);
         transition: background 0.25s linear;
         -webkit-transition: background 0.25s linear;
-        color: $white;
-        background: transparent;
       }
     }
 

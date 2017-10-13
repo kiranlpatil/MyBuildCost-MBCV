@@ -231,6 +231,7 @@ export class Messages {
   public static MSG_ACTIVATE_USER_1 = 'Congratulations! Welcome To JobMosis.';
   public static MSG_ACTIVATE_USER_2 = 'You can now find candidates using the highly accurate, simpler, faster and powerful solution.';
   public static MSG_ACTIVATE_USER_3 = 'Your account has been created successfully. Kindly click Sign In.';
+  public static MSG_VERIFICATION_EMAIL= 'Your account has been created successfully. Kindly click Sign In.';
   public static MSG_COMPANY_DOCUMENTS = 'Please upload relevant company documents to activate your account.';
   public static MSG_UPLOAD_FILE = 'Please select a file to upload.';
   public static MSG_ABOUT_US_DISCRIPTION = 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.' +
@@ -311,6 +312,7 @@ export class Messages {
   public static NO_CANDIDATES_AVAILABLE = 'No candidates available for selected alphabet.';
   public static NO_RECRUITERS_AVAILABLE = 'No recruiters available for selected alphabet.';
   public static OTHERS_AOW_MESSAGE = 'Thank you for your interest in our Job post but currently we do not have your Area of Work, we will get back to you after building your Area of Work';
+  public static SELECT_REASON_FOR_JOB_CLOSE = 'Please select a reason.';
   public static ASK_EXPERT_MESSAGE = 'You can copy and share this link to hiring manager to independently define the job description.\n' +
       'On completion by hiring manager you will receive an email.';
 }
@@ -463,10 +465,11 @@ export class API {
   public static CANDIDATE_DETAILS = 'recruiter/jobProfile';
   public static CANDIDATESFROMLISTS = 'recruiter/jobProfile';
   public static RElEVENT_INDUSTRIES = 'releventindustries';
-  public static CLONE_JOB = 'job';
+  public static JOB = 'job';
   public static FAQ = '/blog/index.php/faq/';
   public static ACCEPT_TERMS = '/terms-and-conditions.php';
-  public static COUNT_OF_USERS = 'countofusers'
+  public static COUNT_OF_USERS = 'countofusers';
+
 }
 
 export class ImagePath {
@@ -652,6 +655,7 @@ export class Headings {
   public static CLONE_JOB: string = 'Clone Job';
   public static POST_JOB: string = 'Post New Job';
   public static ASK_EXPERT: string = 'Copy and Send Link';
+  public static CLOSE_JOB: string = 'Why you want to close this job?';
 }
 
 export class Label {
@@ -686,13 +690,17 @@ export class Label {
   public static REGISTER_AS_APPLICANT: string = 'Register as an applicant';
   public static REGISTER_AS_RECRUITER: string = 'Register as a recruiter';
   public static ASK_EXPERT: string = 'Share job with hiring manager for edit';
+  public static SHOW_CLOSED_JOBS: string = 'Show Closed Jobs';
+  public static POST_JOB: string = 'POST JOB';
+  public static CLOSED_JOB: string = 'CLOSED JOB';
 }
 
 export class Button {
   public static CHANGE_PASSWORD_BUTTON: string = 'Change Password';
   public static RESET_PASSWORD_BUTTON: string = 'RESET PASSWORD';
   public static CLONE_BUTTON: string = 'CLONE';
-  public static CANCEL_BUTTON: string = 'CANCEL';
+  public static CLOSE_BUTTON: string = 'CLOSE';
+  public static CANCEL_BUTTON: string = 'Cancel';
   public static VALUE_PORTRAIT_BUTTON: string = 'Create your Own Value Portrait';
   public static SUBMIT_PROFILE: string = 'Submit Profile';
 }

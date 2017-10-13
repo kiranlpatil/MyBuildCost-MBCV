@@ -18,7 +18,7 @@ import { UsageTrackingService } from '../../usage-tracking.service';
 import { JobPosterService } from '../../job-poster/job-poster.service';
 import { MessageService } from '../../../../shared/services/message.service';
 import { RenewJobPostService } from '../../../../user/services/renew-jobpost.service';
-
+import { Message } from '../../../../shared/models/message';
 @Component({
   moduleId: module.id,
   selector: 'cn-job-dashboard',
@@ -49,6 +49,7 @@ export class JobDashboardComponent implements OnInit {
   private emptyListMessage: string = Tooltip.EMPTY_LIST_MESSAGE;
   private emptyCartMessage: string = Tooltip.EMPTY_CART_MESSAGE;
   private emptyRejectedList: string = Tooltip.EMPTY_REJECTED_LIST_MESSAGE;
+  isJobCloseButtonClicked:boolean;
 
 
   constructor(public refrence: ReferenceService,
@@ -58,7 +59,7 @@ export class JobDashboardComponent implements OnInit {
               private usageTracking : UsageTrackingService,
               private _router:Router,private qcardFilterService:QCardFilterService,
               private loaderService: LoaderService,private profileComparisonService: ProfileComparisonService,
-              private renewJobPostService: RenewJobPostService) {
+              private renewJobPostService: RenewJobPostService, private messageService: MessageService) {
     this.qcardFilterService.candidateFilterValue$.subscribe(
       (data: QCardFilter) => {
         this.filterMeta = data;
@@ -327,6 +328,13 @@ export class JobDashboardComponent implements OnInit {
 
   updateJob() {
     this.renewJobPostService.updateJob();
+  }
+
+  closeJobPost(selectedJobProfile: any) {
+    console.log('isJob posted = ',selectedJobProfile.isJobPosted);
+      this.selectedJobProfile = selectedJobProfile;
+      this.selectedJobTitle = selectedJobProfile.jobTitle;
+      this.isJobCloseButtonClicked=!this.isJobCloseButtonClicked;
   }
 
 }

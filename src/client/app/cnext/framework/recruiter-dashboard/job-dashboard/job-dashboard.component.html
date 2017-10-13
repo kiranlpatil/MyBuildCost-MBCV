@@ -91,8 +91,8 @@
               class="glyphicon glyphicon-option-horizontal"></span></button>
       <ul class="dropdown-menu">
         <li (click)="raiseCloneEvent()"><a>{{getLabel().CLONE_JOB}}</a></li>
-        <li (click)="onRenewJob()"><a>Renew Job Post</a></li>
-        <li><a disabled>{{getLabel().CLOSE_JOB}}</a></li>
+        <li  *ngIf="!selectedJobProfile.isJobPostClosed" (click)="onRenewJob()"><a>Renew Job Post</a></li>
+        <li *ngIf="selectedJobProfile.isJobPosted && !selectedJobProfile.isJobPostClosed" (click)="closeJobPost(selectedJobProfile)"><a>{{getLabel().CLOSE_JOB}}</a></li>
       </ul>
     </div>
     <div id="matched-job" class="tab-pane fade in active "  *ngIf="selectedJobProfile!=undefined">
@@ -100,7 +100,9 @@
                       (addedTocart)="AddedToCart($event)" *ngIf="whichListVisible[0]" [candidateQlist]="candidateQlist"
                       [filterMeta]="filterMeta"
                       [candidates]="candidateQlist.matchedCandidates" [type]="'matchedList'" [jobId]="jobId"
-                      [recuirterListCountModel]="recruiterJobView" [isJobPostExpired]="selectedJobProfile.isJobPostExpired"></cn-q-card-view>
+                      [recuirterListCountModel]="recruiterJobView"
+                      [isJobPostExpired]="selectedJobProfile.isJobPostExpired"
+      [isJobPostClosed]="selectedJobProfile.isJobPostClosed"></cn-q-card-view>
       <p class="empty-list-message" *ngIf="recruiterJobView.numberOfMatchedCandidates==0">{{emptyListMessage}}</p>
 
     </div>
@@ -148,6 +150,7 @@
     <cn-job-clone [selectedJobId]="selectedJobId"  [selectedJobTitle]="selectedJobTitle"
                   [isCloneButtonClicked]="isCloneButtonClicked"  (raiseJobEditViewEventEmitter)="jobcloned($event)" ></cn-job-clone>
 
+      <cn-job-close [selectedJobTitleForClose]="selectedJobTitle" [isJobCloseButtonClicked]="isJobCloseButtonClicked"  [selectedJobProfile]="selectedJobProfile"></cn-job-close>
   </div>
   <tpl-footer></tpl-footer>
 </div>

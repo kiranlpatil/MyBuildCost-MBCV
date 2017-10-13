@@ -47,6 +47,10 @@ class RecruiterSchema {
           type: Boolean,
           default: false
         },
+        isJobPostClosed: {
+          type: Boolean,
+          default: false
+        },
         isJobShared: {
           type: Boolean,
           default: false
@@ -57,6 +61,9 @@ class RecruiterSchema {
         },
         capability_matrix: {
           type: Object
+        },
+        jobCloseReason:{
+          type: String
         },
         candidate_list: [{
           name: String,

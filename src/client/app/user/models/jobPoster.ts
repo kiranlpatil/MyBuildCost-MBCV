@@ -34,4 +34,6 @@ export class JobPosterModel {
   daysRemainingForExpiring: number;
   isJobPostExpired: boolean;
   isJobShared: boolean;
+  isJobPostClosed: boolean;
+  jobCloseReason: string;
 }

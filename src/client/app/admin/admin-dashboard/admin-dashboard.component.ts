@@ -1,4 +1,4 @@
-import {Component} from "@angular/core";
+import {Component, OnInit} from "@angular/core";
 import {Candidate} from "../../user/models/candidate";
 import {ErrorService} from "../../shared/services/error.service";
 import {UserData} from "../models/userData";
@@ -13,7 +13,7 @@ import {LoaderService} from "../../shared/loader/loaders.service";
   styleUrls: ['admin-dashboard.component.css']
 })
 
-export class AdminDashboardComponent {
+export class AdminDashboardComponent implements OnInit{
   candidate: Candidate = new Candidate();
   userData: UserData = new UserData();
   numberOfCandidates: number = 0;
@@ -23,6 +23,10 @@ export class AdminDashboardComponent {
 
   constructor(private errorService: ErrorService, private loaderService: LoaderService,
               private adminDashboardService: AdminDashboardService,) {
+
+  }
+
+  ngOnInit(): void {
     this.loaderService.start();
     this.getUserProfile();
     this.getAllCandidates();

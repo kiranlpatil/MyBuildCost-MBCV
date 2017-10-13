@@ -3,7 +3,6 @@
  */
 import UserRepository = require('../dataaccess/repository/user.repository');
 import SendMailService = require('./sendmail.service');
-import * as mongoose from "mongoose";
 import {ConstVariables} from "../shared/sharedconstants";
 let config = require('config');
 let json2csv = require('json2csv');
@@ -41,9 +40,8 @@ class AdminService {
   getUserDetails(userType: string, callback: (error: any, result: UsersClassModel) => void) {
     try {
       let userService = new UserService();
-      let candidateService = new CandidateService();
-      let recruiterService = new RecruiterService();
       let users: UsersClassModel = new UsersClassModel();
+      let usersMap: Map<any, any> = new Map();
       let findQuery = new Object();
 
       if (userType == 'candidate') {
@@ -58,9 +56,9 @@ class AdminService {
         'last_name': 1,
         'mobile_number': 1,
         'email': 1,
-        'isCandidate': 1,
         'isActivated': 1
       };
+
       let sortingQuery = {'first_name': 1, 'last_name': 1};
 
       userService.retrieveBySortedOrder(findQuery, included_fields, sortingQuery, (error, result) => {
@@ -71,79 +69,100 @@ class AdminService {
             callback(null, users);
           }
           else {
-            let value = 0;
             if (userType == 'candidate') {
+              let candidateService = new CandidateService();
               let candidates: CandidateModelClass[] = new Array(0);
               let candidateFields = {
-                '_id': 1,
+                'userId': 1,
                 'jobTitle': 1,
                 'isCompleted': 1,
                 'isSubmitted': 1,
-                'location': 1,
+                'location.city': 1,
                 'proficiencies': 1,
                 'professionalDetails': 1,
                 'capability_matrix': 1,
                 'isVisible': 1,
-                'industry': 1
+                'industry.roles.name': 1
               };
-              for (let i = 0; i < result.length; i++) {
-                candidateService.retrieveWithLean({'userId': new mongoose.Types.ObjectId(result[i]._id)}, candidateFields, (error, resu) => {
-                  if (error) {
-                    callback(error, null);
-                  } else {
-                    value++;
-                    if (resu[0].proficiencies.length > 0) {
-                      resu[0].keySkills = resu[0].proficiencies.toString().replace(/,/g, ' $');
+              candidateService.retrieveWithLean({}, candidateFields, (error, candidatesResult) => {
+                if (error) {
+                  callback(error, null);
+                } else {
+                  console.log("Fetched all candidates:" + candidatesResult.length);
+                  for (let candidate of candidatesResult) {
+                    if (candidate.proficiencies.length > 0) {
+                      candidate.keySkills = candidate.proficiencies.toString().replace(/,/g, ' $');
                     }
 
-                    if (resu[0].industry) {
-                      resu[0].roles = candidateService.loadRoles(resu[0].industry.roles);
+                    if (candidate.industry) {
+                      candidate.roles = candidateService.loadRoles(candidate.industry.roles);
                     }
 
-                    if (resu[0].capability_matrix) {
-                      resu[0].capabilityMatrix = candidateService.loadCapabilitiDetails(resu[0].capability_matrix);
+                    if (candidate.capability_matrix) {
+                      candidate.capabilityMatrix = candidateService.loadCapabilitiDetails(candidate.capability_matrix);
                     }
-
-                    result[i].data = resu[0];
-                    candidates.push(result[i]);
-                    if (value && result.length === value) {
-                      users.candidate = candidates;
-                      console.log("fetch all records" + value);
-                      callback(null, users);
-                    }
+                    usersMap.set(candidate.userId.toString(), candidate);
                   }
-                });
-              }
+
+                  for (let user of result) {
+                    user.data = usersMap.get(user._id.toString());
+                    candidates.push(user);
+                  }
+
+                  users.candidate = candidates;
+                  callback(null, users);
+                }
+              });
             }
             else {
               console.log("inside recruiter fetch");
+              let recruiterService = new RecruiterService();
               let recruiters: RecruiterClassModel[] = new Array(0);
               let recruiterFields = {
-                '_id': 1,
+                'userId': 1,
                 'company_name': 1,
                 'company_size': 1,
                 'isRecruitingForself': 1,
-                'postedJobs': 1
+                'postedJobs.isJobPosted': 1,
+                'postedJobs.capability_matrix': 1,
+                'postedJobs.expiringDate': 1,
+                'postedJobs.postingDate': 1,
+                'postedJobs.jobTitle': 1,
+                'postedJobs.hiringManager': 1,
+                'postedJobs.department': 1,
+                'postedJobs.education': 1,
+                'postedJobs.experienceMinValue': 1,
+                'postedJobs.experienceMaxValue': 1,
+                'postedJobs.salaryMinValue': 1,
+                'postedJobs.salaryMaxValue': 1,
+                'postedJobs.joiningPeriod': 1,
+                'postedJobs.proficiencies': 1,
+                'postedJobs.additionalProficiencies': 1,
+                'postedJobs.industry.name': 1,
+                'postedJobs.industry.roles.name': 1,
               };
 
-              for (let i = 0; i < result.length; i++) {
-                  recruiterService.retrieveWithLean({'userId': new mongoose.Types.ObjectId(result[i]._id)}, recruiterFields, (error, resu) => {
-                    if (error) {
-                      callback(error, null);
-                    } else {
-                      value++;
-                      resu[0].numberOfJobsPosted = resu[0].postedJobs.length;
-                      recruiterService.loadCapbilityAndKeySkills(resu[0].postedJobs);
-                      result[i].data = resu[0];
-                      recruiters.push(result[i]);
-                      if (value && result.length === value) {
-                        users.recruiter = recruiters;
-                        console.log("fetch all records" + value);
-                        callback(null, users);
-                      }
-                    }
-                  });
-              }
+              recruiterService.retrieveWithLean({}, recruiterFields, (error, recruiterResult) => {
+                if (error) {
+                  callback(error, null);
+                } else {
+                  console.log("Fetched all recruiters:" + recruiterResult.length);
+                  for (let recruiter of recruiterResult) {
+                    recruiter.numberOfJobsPosted = recruiter.postedJobs.length;
+                    recruiterService.loadCapbilityAndKeySkills(recruiter.postedJobs);
+                    usersMap.set(recruiter.userId.toString(), recruiter);
+                  }
+
+                  for (let user of result) {
+                    user.data = usersMap.get(user._id.toString());
+                    recruiters.push(user);
+                  }
+
+                  users.recruiter = recruiters;
+                  callback(null, users);
+
+                }
+              });
             }
           }
 
@@ -187,8 +206,10 @@ class AdminService {
   getRecruiterDetails(initial: string, callback: (error: any, result: any) => void) {
     try {
       let userService = new UserService();
-      let recruiterService = new RecruiterService();
       let users: UsersClassModel = new UsersClassModel();
+      let usersMap: Map<any, any> = new Map();
+
+      let recruiterService = new RecruiterService();
       let recruiters: RecruiterClassModel[] = new Array(0);
 
       let regEx = new RegExp('^[' + initial.toLowerCase() + initial.toUpperCase() + ']');
@@ -200,39 +221,46 @@ class AdminService {
       let sortingQuery = {'company_name': 1, 'company_size': 1};
 
       let recruiterFields = {
-        '_id': 1,
         'userId': 1,
         'company_name': 1,
         'company_size': 1,
-        'isRecruitingForself': 1,
-        'postedJobs': 1
+        'postedJobs.isJobPosted': 1
       };
 
-      recruiterService.retrieveBySortedOrder(findQuery, recruiterFields, sortingQuery, (error, result) => {
+      recruiterService.retrieveBySortedOrder(findQuery, recruiterFields, sortingQuery, (error, recruiterResult) => {
         if (error) {
           callback(error, null);
         } else {
-          users.totalNumberOfRecruiters = result.length;
-          if (result.length == 0) {
+          users.totalNumberOfRecruiters = recruiterResult.length;
+          if (recruiterResult.length == 0) {
             callback(null, users);
           }
           else {
-            let value = 0;
-            for (let i = 0; i < result.length; i++) {
-              userService.retrieveWithLean({'_id': new mongoose.Types.ObjectId(result[i].userId)}, (error, resu) => {
-                if (error) {
-                  callback(error, null);
-                } else {
-                  value++;
-                  resu[0].data = result[i];
-                  recruiters.push(resu[0]);
-                  if (value && result.length === value) {
-                    users.recruiter = recruiters;
-                    callback(null, users);
-                  }
-                }
-              });
+            let userFields = {
+              '_id': 1,
+              'mobile_number': 1,
+              'email': 1,
+              'isActivated': 1
+            };
+
+            for (let recruiter of recruiterResult) {
+              usersMap.set(recruiter.userId.toString(), recruiter);
             }
+            userService.retrieveWithLean({'isCandidate': false}, (error, result) => {
+              if (error) {
+                callback(error, null);
+              } else {
+                console.log("Fetched all recruiters from users:" + recruiterResult.length);
+                for (let user of result) {
+                  user.data = usersMap.get(user._id.toString());
+                  recruiters.push(user);
+                }
+
+                users.recruiter = recruiters;
+                callback(null, users);
+              }
+
+            });
           }
         }
       });
@@ -246,12 +274,13 @@ class AdminService {
   getCandidateDetails(initial: string, callback: (error: any, result: any) => void) {
     try {
       let userService = new UserService();
-      let candidateService = new CandidateService();
       let users: UsersClassModel = new UsersClassModel();
+      let usersMap: Map<any, any> = new Map();
+
       let candidates: CandidateModelClass[] = new Array(0);
+      let candidateService = new CandidateService();
 
       let regEx = new RegExp('^[' + initial.toLowerCase() + initial.toUpperCase() + ']');
-
       let findQuery = {
         'first_name': {
           $regex: regEx
@@ -259,7 +288,6 @@ class AdminService {
         'isAdmin': false,
         'isCandidate': true
       };
-
       let included_fields = {
         '_id': 1,
         'first_name': 1,
@@ -281,28 +309,32 @@ class AdminService {
           else {
             let value = 0;
             let candidateFields = {
-              '_id': 1,
+              'userId': 1,
               'jobTitle': 1,
               'isCompleted': 1,
               'isSubmitted': 1,
               'isVisible': 1,
-              'location': 1
+              'location.city': 1
             };
-            for (let i = 0; i < result.length; i++) {
-              candidateService.retrieveWithLean({'userId': new mongoose.Types.ObjectId(result[i]._id)}, candidateFields, (error, resu) => {
-                if (error) {
-                  callback(error, null);
-                } else {
-                  value++;
-                  result[i].data = resu[0];
-                  candidates.push(result[i]);
-                  if (value && result.length === value) {
-                    users.candidate = candidates;
-                    callback(null, users);
-                  }
+            candidateService.retrieveWithLean({}, candidateFields, (error, candidatesResult) => {
+              if (error) {
+                callback(error, null);
+              } else {
+                console.log("Fetched all candidates:" + candidatesResult.length);
+                for (let candidate of candidatesResult) {
+                  usersMap.set(candidate.userId.toString(), candidate);
                 }
-              });
-            }
+
+                for (let user of result) {
+                  user.data = usersMap.get(user._id.toString());
+                  candidates.push(user);
+                }
+
+                users.candidate = candidates;
+                callback(null, users);
+
+              }
+            });
           }
 
         }
@@ -357,16 +389,65 @@ class AdminService {
         'Is Completed', 'Is Submitted', 'Is Visible', 'Key Skills', 'Industry', 'Role', 'Capability Code',
         'Complexity Code', 'Scenario Code'];
 
-      let csv = json2csv({
-        data: result.candidate, fields: fields, fieldNames: fieldNames,
-        unwindPath: ['data.capabilityMatrix']
-      });
-      console.log("writing into file file");
-      //fs.writeFile('./src/server/public/candidate.csv', csv, function (err: any) {
-      fs.writeFile('/home/bitnami/apps/jobmosis-staging/c-next/dist/server/prod/public/candidate.csv', csv, function (err: any) {
-        if (err) throw err;
-        callback(null, result);
-      });
+      /*let csv = json2csv({
+       data: result.candidate, fields: fields, fieldNames: fieldNames,
+       unwindPath: ['data.capabilityMatrix']
+       });
+       console.log("writing into file file");
+       //fs.writeFile('./src/server/public/candidate.csv', csv, function (err: any) {
+       fs.writeFile('/home/bitnami/apps/jobmosis-staging/c-next/dist/server/prod/public/candidate.csv', csv, function (err: any) {
+       if (err) throw err;
+       callback(null, result);
+       });*/
+
+      let tempString: string = '';
+      let count = 0;
+      let candidateLength = result.candidate.length;
+      for (let candidate of result.candidate) {
+        tempString = json2csv({
+          data: candidate, fields: fields, fieldNames: fieldNames,
+          unwindPath: ['data.capabilityMatrix']
+        }, (err: any, result: any) => {
+          count++;
+          tempString += result;
+          if (count == candidateLength) {
+            console.log("writing into file file");
+            //fs.writeFile('./src/server/public/candidate.csv', tempString, (err: any) => {
+              fs.writeFile('/home/bitnami/apps/jobmosis-staging/c-next/dist/server/prod/public/candidate.csv', tempString, function (err: any) {
+              if (err) throw err;
+              callback(null, result);
+            });
+          }
+        })
+      }
+
+
+      /*let tempString: string = '';
+       let count = 0;
+       let candidateLength = result.candidate.length;
+       for(var i=0; i<=candidateLength;) {
+       console.log("Enter count:" + i);
+       let tempCandidate = result.candidate.splice(i,100);
+       tempString = json2csv({
+       data: tempCandidate, fields: fields, fieldNames: fieldNames,
+       unwindPath: ['data.capabilityMatrix']
+       }, (err: any,result: any) => {
+       console.log("CSV count:" + count);
+       count = count + 100;
+       tempString += result;
+       if(count == candidateLength) {
+       console.log("writing into file file");
+       fs.writeFile('./src/server/public/candidate.csv', tempString, (err: any) => {
+       //fs.writeFile('/home/bitnami/apps/jobmosis-staging/c-next/dist/server/prod/public/candidate.csv', csv, function (err: any) {
+       if (err) throw err;
+       callback(null, result);
+       });
+       }
+       })
+       i=i+100;
+       }*/
+
+
     } else {
       callback(null, result);
     }
@@ -390,17 +471,41 @@ class AdminService {
         'Experience MinValue', 'Experience MaxValue', 'Salary MinValue', 'Salary MaxValue', 'Joining Period',
         'Key Skills', 'Additional Key Skills', 'Industry', 'Role', 'Capability Code',
         'Complexity Code', 'Scenario Code', 'Posting Date', 'Expiring Date'];
-      let csv = json2csv({
-        data: result.recruiter,
-        fields: fields,
-        fieldNames: fieldNames,
-        unwindPath: ['data.postedJobs', 'data.postedJobs.capabilityMatrix']
-      });
-      //fs.writeFile('./src/server/public/recruiter.csv', csv, function (err: any) {
-      fs.writeFile('/home/bitnami/apps/jobmosis-staging/c-next/dist/server/prod/public/recruiter.csv', csv, function (err: any) {
-        if (err) throw err;
-        callback(null, result);
-      });
+      /*let csv = json2csv({
+       data: result.recruiter,
+       fields: fields,
+       fieldNames: fieldNames,
+       unwindPath: ['data.postedJobs', 'data.postedJobs.capabilityMatrix']
+       });
+       fs.writeFile('./src/server/public/recruiter.csv', csv, function (err: any) {
+       //fs.writeFile('/home/bitnami/apps/jobmosis-staging/c-next/dist/server/prod/public/recruiter.csv', csv, function (err: any) {
+       if (err) throw err;
+       callback(null, result);
+       });*/
+
+
+      let tempString: string = '';
+      let count = 0;
+      let recruiterLength = result.recruiter.length;
+      for (let recruiter of result.recruiter) {
+        tempString = json2csv({
+          data: recruiter, fields: fields, fieldNames: fieldNames,
+          unwindPath: ['data.postedJobs', 'data.postedJobs.capabilityMatrix']
+        }, (err: any, result: any) => {
+          count++;
+          tempString += result;
+          if (count == recruiterLength) {
+            console.log("writing into file file");
+            //fs.writeFile('./src/server/public/recruiter.csv', tempString, function (err: any) {
+              fs.writeFile('/home/bitnami/apps/jobmosis-staging/c-next/dist/server/prod/public/recruiter.csv', tempString, function (err: any) {
+              if (err) throw err;
+              callback(null, result);
+            });
+          }
+        })
+      }
+
+
     } else {
       callback(null, result);
     }

@@ -66,7 +66,7 @@
 
         <div class="col-xs-12 error-msg alert alert-danger form-alert" [hidden]="isShowErrorMessage"><b>{{
           error_msg }}</b></div>
-        <button type="submit" class="btn btn-primary pull-right" [disabled]="!userForm.valid">
+        <button type="submit" class="btn btn-primary pull-right">
           {{getLabels().SAVE_PROFILE_LABEL}}
         </button>
       </form>
@@ -108,15 +108,17 @@
 
         <div *ngIf="role!=='candidate'"class="form-group" [class.fb-email-input]="isSocialLogin">
           <cn-control-messages [control]="recruiterForm.controls.company_website"></cn-control-messages>
-          <label>{{getLabels().COMPANY_WEBSITE_FIELD_LABEL}}</label>
-          <input type="text" [(ngModel)]="company_website" formControlName="company_website" id="recruiter_company_website"
+          <label>{{getLabels().COMPANY_WEBSITE_FIELD_LABEL}}(Optional)</label>
+          <input type="text" [(ngModel)]="company_website" (keydown)="onCompnayWebsite()" formControlName="company_website" id="recruiter_company_website"
                  placeholder="www.example.com" class="form-control clear"/>
+          <span class="error-messages" *ngIf="!isCompanyWebsiteValid">{{getMessages().MSG_ERROR_VALIDATION_INVALID_URL_REQUIRED}}</span>
+
         </div>
 
 
         <div class="col-xs-12 error-msg alert alert-danger form-alert" [hidden]="isShowErrorMessage"><b>{{
           error_msg }}</b></div>
-        <button type="submit" class="btn btn-primary pull-right" [disabled]="!recruiterForm.valid">
+        <button type="submit" class="btn btn-primary pull-right">
           {{getLabels().SAVE_PROFILE_LABEL}}
         </button>
       </form>

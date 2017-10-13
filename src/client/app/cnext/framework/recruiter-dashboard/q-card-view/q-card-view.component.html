@@ -121,10 +121,10 @@
           <button class="btn btn-cart btn-block" type="button" >View</button>
         </div>-->
         <div class="col-sm-12 text-right">
-          <button class="btn btn-cart" type="button" [class.hidden]="isJobPostExpired"
+          <button class="btn btn-cart" type="button" [class.hidden]="(isJobPostExpired || isJobPostClosed) || (isJobPostExpired && isJobPostClosed)"
                   (click)="actionOnQCard('add','matchedList','cartListed',item)">Add To Cart
           </button>
-          <button *ngIf="!candidates.isVisible" class="btn btn-cart" type="button" [class.hidden]="isJobPostExpired"
+          <button *ngIf="!candidates.isVisible" class="btn btn-cart" type="button" [class.hidden]="(isJobPostExpired || isJobPostClosed) || (isJobPostExpired && isJobPostClosed)"
                   (click)="addForCompareView(item,type)">Compare
           </button>
         </div>
@@ -134,8 +134,8 @@
            <button class="btn btn-cart btn-block" type="button" (click)="viewProfile(item)">View</button>
          </div>-->
         <div class="col-sm-12 text-right">
-          <button *ngIf="!isJobPostExpired || !candidates.isVisible" class="btn btn-cart" type="button"
-                  [class.hidden]="isJobPostExpired" (click)="addForCompareView(item,type)">Compare
+          <button *ngIf="!isJobPostExpired || !candidates.isVisible || !isJobPostClosed" class="btn btn-cart" type="button"
+                  [class.hidden]="isJobPostExpired || isJobPostClosed" (click)="addForCompareView(item,type)">Compare
           </button>
         </div>
       </div>
@@ -143,11 +143,11 @@
         <!--<div class="col-sm-6 padding-right5">
           <button class="btn btn-cart btn-block" type="button" (click)="viewProfile(item)">View</button>
         </div>-->
-        <div *ngIf="!isJobPostExpired" class="col-sm-12 text-right">
-          <button class="btn btn-cart" type="button" [class.hidden]="isJobPostExpired"
+        <div *ngIf="!isJobPostExpired || !isJobPostClosed" class="col-sm-12 text-right">
+          <button class="btn btn-cart" type="button" [class.hidden]="(isJobPostExpired || isJobPostClosed) || (isJobPostExpired && isJobPostClosed)"
                   (click)="actionOnQCard('add','applied','cartListed',item)">Add To Cart
           </button>
-          <button *ngIf="!candidates.isVisible" class="btn btn-cart" type="button" [class.hidden]="isJobPostExpired"
+          <button *ngIf="!candidates.isVisible" class="btn btn-cart" type="button" [class.hidden]="(isJobPostExpired || isJobPostClosed) || (isJobPostExpired && isJobPostClosed)"
                   (click)="addForCompareView(item,type)">Compare
           </button>
         </div>
@@ -156,8 +156,8 @@
         <!-- <div class="col-sm-12 no-padding">
            <button class="btn btn-cart btn-block" type="button" (click)="viewProfile(item)">View</button>
          </div>-->
-        <div *ngIf="!isJobPostExpired || !candidates.isVisible" class="col-sm-12 text-right">
-          <button class="btn btn-cart" type="button" [class.hidden]="isJobPostExpired"
+        <div *ngIf="!isJobPostExpired || !isJobPostClosed || !candidates.isVisible" class="col-sm-12 text-right">
+          <button class="btn btn-cart" type="button" [class.hidden]="(isJobPostExpired || isJobPostClosed) || (isJobPostExpired && isJobPostClosed)"
                   (click)="addForCompareView(item,type)">Compare
           </button>
         </div>
@@ -194,18 +194,18 @@
             </div>
           </div>-->
           <div class="button-group" *ngIf="type=='applied'">
-            <button class="btn btn-primary" [class.hidden]="isJobPostExpired" (click)="actionOnQCard('add','applied','cartListed',modelCandidate)">Add To
+            <button class="btn btn-primary" [class.hidden]="(isJobPostExpired || isJobPostClosed) || (isJobPostExpired && isJobPostClosed)" (click)="actionOnQCard('add','applied','cartListed',modelCandidate)">Add To
               Cart
             </button>
-            <button class="btn btn-danger" [class.hidden]="isJobPostExpired" (click)="actionOnQCard('add','applied','rejectedList', modelCandidate)">
+            <button class="btn btn-danger" [class.hidden]="(isJobPostExpired || isJobPostClosed) || (isJobPostExpired && isJobPostClosed)" (click)="actionOnQCard('add','applied','rejectedList', modelCandidate)">
               Reject
             </button>
           </div>
           <div class="button-group" *ngIf="type=='matchedList'">
             <button  class="btn btn-primary" type="button"
-                     [class.hidden]="isJobPostExpired" (click)="actionOnQCard('add','matchedList','cartListed',modelCandidate)">Add To Cart
+                     [class.hidden]="(isJobPostExpired || isJobPostClosed) || (isJobPostExpired && isJobPostClosed)" (click)="actionOnQCard('add','matchedList','cartListed',modelCandidate)">Add To Cart
             </button>
-            <button class="btn btn-danger" [class.hidden]="isJobPostExpired" (click)="actionOnQCard('add','matchedList','rejectedList', modelCandidate)">
+            <button class="btn btn-danger" [class.hidden]="(isJobPostExpired || isJobPostClosed) || (isJobPostExpired && isJobPostClosed)" (click)="actionOnQCard('add','matchedList','rejectedList', modelCandidate)">
               Reject
             </button>
           </div>
@@ -234,7 +234,7 @@
           </div>
 -->
           <div class="button-group">
-            <button class="btn btn-danger" [class.hidden]="isJobPostExpired" (click)="actionOnQCard('add','cartListed','rejectedList', modelCandidate)">
+            <button class="btn btn-danger" [class.hidden]="(isJobPostExpired || isJobPostClosed) || (isJobPostExpired && isJobPostClosed)" (click)="actionOnQCard('add','cartListed','rejectedList', modelCandidate)">
               Reject
             </button>
 

@@ -73,7 +73,7 @@ export function cnextInit(app: express.Application) { //todo add interceptor to 
   app.get('/api/buildShareJobUrl/:jobId', this.authInterceptor.requiresAuth, shareController.buildShareJobUrl);
   app.get('/api/share/:shortUrl', shareController.getActualUrlForShare);
   app.put('/api/share/:shortUrl', this.authInterceptor.requiresAuth,shareController.resetActualUrlForShare);
-
+  app.get("/api/closeJob",this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, userController.getCloseJobReasons);
   // API for Uses Tracking
   app.put('/api/usageTracking', jobProfileController.createUsesTracking);
   app.get('/api/usageDetails', this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, adminController.getUsageDetails);

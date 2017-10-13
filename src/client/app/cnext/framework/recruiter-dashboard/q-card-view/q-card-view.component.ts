@@ -35,6 +35,7 @@ export class QCardviewComponent implements OnChanges {
   @Input() type: string;
   @Input() filterMeta: QCardFilter;
   @Input() isJobPostExpired : boolean;
+  @Input() isJobPostClosed : boolean;
   @Output() addedTocart: EventEmitter<any> = new EventEmitter<any>();
   @Input() progress_bar_color : string='#0d75fa';
   @Output() addForCompare: EventEmitter<any> = new EventEmitter<any>();
@@ -70,7 +71,7 @@ export class QCardviewComponent implements OnChanges {
 
   }
 
-  ngOnInlit() {
+  ngOnInit() {
     this.matchFormat = 'aboveMatch';
   }
 

@@ -9,6 +9,13 @@
 
 <div class="job-list clearfix" *ngIf="screenType=='jobList'">
   <header class="col-sm-12">
+    <div class="select-option default-checkbox">
+      <label>
+        <input  type="checkbox" [checked]="showClosedJobs" (change)="displayClosedJobs()" />
+        <div class="check"></div>
+      </label>
+      <span>{{getLabel().SHOW_CLOSED_JOBS}}</span>
+    </div>
   </header>
 
   <div class="card-view clearfix">
@@ -16,14 +23,16 @@
     <cn-job-clone [selectedJobId]="selectedJobId"  [selectedJobTitle]="selectedJobTitle"
                   [isCloneButtonClicked]="isCloneButtonClicked"
                   (raiseJobEditViewEventEmitter)="onJobCloned($event)" ></cn-job-clone>
-    <div  class="col-md-3" *ngFor="let item of jobListInput | orderBy:format;let i = index">
+      <cn-job-close [selectedJobTitleForClose]="selectedJobTitle" [selectedJobProfile]="selectedJobProfile"
+      [isJobCloseButtonClicked]="isJobCloseButtonClicked"></cn-job-close>
+    <div  class="col-md-3" *ngFor="let item of jobListInput | orderBy:format | closedJobFilter : showClosedJobs;let i = index">
       <div class="dropdown clone-job-menu">
         <button class="btn dropdown-toggle btn-menu" type="button" data-toggle="dropdown"><span
                 class="glyphicon glyphicon-option-vertical"></span></button>
         <ul class="dropdown-menu">
           <li (click)="raiseCloneEvent(item)"><a>{{getLabel().CLONE_JOB}}</a></li>
-          <li  [class.disable-option]="!item.isJobPosted" (click)="renewJobPost(item)"><a>Renew Job Post</a></li>
-          <li><a disabled>{{getLabel().CLOSE_JOB}}</a></li>
+          <li  *ngIf="(item.isJobPosted && !item.isJobPostClosed)" (click)="renewJobPost(item)"><a>Renew Job Post</a></li>
+          <li *ngIf="item.isJobPosted && !item.isJobPostClosed" (click)="closeJobPost(item)"><a>{{getLabel().CLOSE_JOB}}</a></li>
         </ul>
       </div>
       <div class="panel clearfix" (click)="onJobClicked(item._id,item.isJobPosted)">
@@ -32,10 +41,11 @@
           <div class="col-xs-2 no-padding">
 
             <div *ngFor="let i of item.candidate_list">
-              <p *ngIf="i.name == 'cartListed'" title="{{i.ids.length}} Candidates In Cart">
-                <span>{{i.ids.length}}</span></p>
+              <p [class.closed]="item.isJobPostClosed" *ngIf="i.name == 'cartListed'" title="{{i.ids.length}} Candidates In Cart">
+                <span>{{i.ids.length}}</span>
+              </p>
             </div>
-            <p *ngIf="item.candidate_list.length == 0" title="Candidates In Cart"><span>0</span></p>
+            <p [class.closed]="item.isJobPostClosed" *ngIf="item.candidate_list.length == 0" title="Candidates In Cart"><span>0</span></p>
           </div>
           <div class="col-xs-10 padding-left15">
             <h4 title="Job Title : {{item.jobTitle}}">{{item.jobTitle}}</h4>
@@ -59,13 +69,8 @@
                 <p class="hiring-manager">{{item.hiringManager}}</p>
               </div>
             </div>
-            <div class="col-sm-12 no-padding renew-job">
-              <div class="col-xs-2 no-padding" *ngIf="item.isJobPosted">
-                <span *ngIf="item.daysRemainingForExpiring > 7" title="{{item.daysRemainingForExpiring}} days remaining for expiry" class="glyphicon glyphicon-refresh active" ></span>
-                <span class="glyphicon glyphicon-refresh about-to-expire" *ngIf="item.daysRemainingForExpiring <= 7 && item.daysRemainingForExpiring >= 1" title="{{item.daysRemainingForExpiring}} days remaining for expiry"></span>
-                <span class="glyphicon glyphicon-refresh expired" *ngIf="item.daysRemainingForExpiring <= 0" title="Expired"></span>
-              </div>
-              <div class="col-xs-10 padding-left15" *ngIf="item.isJobPosted" [class.posted-job]="!item.isJobPosted">
+            <div class="col-sm-12 no-padding renew-job" *ngIf="item.isJobPosted && !item.isJobPostClosed ">
+              <div class="col-xs-12" [class.posted-job]="!item.isJobPosted" [class.closed-job]="item.isJobPostClosed">
                 <p class="active" *ngIf="item.daysRemainingForExpiring > 7" title="{{item.daysRemainingForExpiring}} days remaining for expiry">{{item.daysRemainingForExpiring}} days remaining for expiry</p>
                 <p class="about-to-expire" *ngIf="item.daysRemainingForExpiring <= 7 && item.daysRemainingForExpiring >= 1" title="{{item.daysRemainingForExpiring}} days remaining for expiry">{{item.daysRemainingForExpiring}} days remaining for expiry</p>
                 <p class="expired" *ngIf="item.daysRemainingForExpiring <= 0">Expired</p>
@@ -73,7 +78,8 @@
             </div>
           </div>
         </div>
-        <div class="edit-job-notification" title="Post this job" *ngIf="!item.isJobPosted">POST JOB</div>
+        <div class="edit-job-notification" title="Post this job" *ngIf="!item.isJobPosted">{{getLabel().POST_JOB}}</div>
+        <div class="closed-post-job" title="Post this job" *ngIf="item.isJobPostClosed">{{getLabel().CLOSED_JOB}}</div>
       </div>
     </div>
   </div>

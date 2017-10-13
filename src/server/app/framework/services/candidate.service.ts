@@ -761,11 +761,12 @@ class CandidateService {
     let capabilityMatrixKeys: string [] = Object.keys(capabilityMatrix);
     let capabilitiesArray: any [] = new Array();
     for (let keys of capabilityMatrixKeys) {
+      let keyArray = keys.split('_');
       let capabilityObject = {
-        'capabilityCode': keys.split('_')[0],
-        'complexityCode': keys.split('_')[1],
+        'capabilityCode': keyArray[0],
+        'complexityCode': keyArray[1],
         'scenerioCode': capabilityMatrix[keys]
-      }
+      };
       capabilitiesArray.push(capabilityObject);
     }
     return capabilitiesArray;

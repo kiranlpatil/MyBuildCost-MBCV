@@ -159,7 +159,9 @@ import {PrintScreenComponent} from "./cnext/framework/print-screen/print-screen.
 import {AdminModule} from "./admin/admin.module";
 import {JobShareContainerComponent} from "./cnext/framework/job-share-container/job-share-container.component";
 import {JobShareContainerService} from "./cnext/framework/job-share-container/job-share-container.service";
-
+import {JobCloseComponent} from "./cnext/framework/job-close/job-close.component";
+import {ClosedJobFilter} from "./cnext/framework/filters/closed-job-filter.pipe";
+import {JobCloseComponentService} from "./cnext/framework/job-close/job-close.component.service";
 //C-NEXT IMPORTS
 
 
@@ -256,6 +258,7 @@ import {JobShareContainerService} from "./cnext/framework/job-share-container/jo
     RecruiterJobInformation,
     RecruiterQCardview2Component,
     QCardListFilterPipe,
+    ClosedJobFilter,
     RecuirterQCardMatchingPipe,
     MinRangeValidation,
     MaxRangeValidation,
@@ -275,7 +278,8 @@ import {JobShareContainerService} from "./cnext/framework/job-share-container/jo
     ShareComponent,
     JobCloneComponent,
     ShareContainerComponent,
-    PrintScreenComponent
+    PrintScreenComponent,
+    JobCloseComponent
   ],
 
   providers: [
@@ -343,7 +347,8 @@ import {JobShareContainerService} from "./cnext/framework/job-share-container/jo
     SharedService,
     ShareService,
     Title,
-    ShareContainerService
+    ShareContainerService,
+    JobCloseComponentService
   ],
   bootstrap: [AppComponent]
 })
