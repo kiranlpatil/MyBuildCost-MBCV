@@ -1,9 +1,10 @@
-import {Component, Input, OnInit} from "@angular/core";
+import {AfterViewChecked, Component, Input, OnInit} from "@angular/core";
 import {CandidateProfileService} from "../../candidate-profile/candidate-profile.service";
 import {Candidate} from "../../../../user/models/candidate";
 import {ErrorService} from "../../../../shared/services/error.service";
-import {LocalStorage, Messages} from "../../../../shared/constants";
+import {Headings, ImagePath, LocalStorage, Messages} from "../../../../shared/constants";
 import {LocalStorageService} from "../../../../shared/services/localstorage.service";
+import {GuidedTourService} from "../../guided-tour.service";
 
 @Component({
   moduleId: module.id,
@@ -17,8 +18,11 @@ export class ValuePortraitComponent implements OnInit {
   candidate: Candidate = new Candidate();
   @Input() userId:string;
   @Input() isShareView:boolean;
- isCandidate:boolean;
-  constructor(private candidateProfileService: CandidateProfileService,private errorService:ErrorService) {
+  gotItMessage: string= Headings.GOT_IT;
+  isCandidate:boolean;
+  valuePortraitImgName:string;
+  guidedTourStatus:string[] = new Array(0);
+  constructor(private guidedTourService:GuidedTourService,private candidateProfileService: CandidateProfileService,private errorService:ErrorService) {
     if (LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE) === 'true') {
       this.isCandidate = true;
     }
@@ -29,7 +33,28 @@ export class ValuePortraitComponent implements OnInit {
       .subscribe(
         candidateData => {
           this.candidate = this.updateCapabilityData(candidateData.data);
+          this.valuePortraitImgName = ImagePath.CANDIDATE_VALUE_PORTRAIT_VIEW;
+          if(this.isCandidate) {
+            this.isRequireGuidedTourImg();
+          }
         },error => this.errorService.onError(error));
+  }
+
+  isRequireGuidedTourImg() {
+    this.guidedTourStatus = this.guidedTourService.getTourStatus();
+  }
+
+  tourGuideGotIt() {
+    this.guidedTourStatus = this.guidedTourService.updateTourStatus(ImagePath.CANDIDATE_VALUE_PORTRAIT_VIEW, true);
+    this.guidedTourStatus = this.guidedTourService.getTourStatus();
+    this.guidedTourService.updateProfileField(this.guidedTourStatus)
+      .subscribe(
+        (res:any) => {
+          LocalStorageService.setLocalValue(LocalStorage.GUIDED_TOUR, JSON.stringify(res.data.guide_tour));
+        },
+        error => this.errorService.onError(error)
+      );
+
   }
 
   updateCapabilityData(candidate: Candidate) {
@@ -47,8 +72,12 @@ export class ValuePortraitComponent implements OnInit {
     return candidate;
   }
 
-  getMessages() {
+  getMessage() {
     return Messages;
+  }
+
+  getHeadings() {
+    return Headings;
   }
 
 }

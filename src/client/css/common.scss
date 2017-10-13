@@ -761,7 +761,7 @@ cn-control-messages {
   height: auto;
   margin: 30px auto;
   display: inline-block;
-  padding: 0 20px;
+  padding: 0;
 
   .btn-share {
     background-color: transparent;
@@ -780,15 +780,15 @@ cn-control-messages {
   }
 
   .btn-facebook {
-    background: url(../assets/c-next/card-view/sprite.png) no-repeat 0 -697px;
+    background: url(../assets/c-next/card-view/sprite.png) no-repeat 0 -806px;
   }
 
   .btn-linkedin {
-    background: url(../assets/c-next/card-view/sprite.png) no-repeat -38px -697px;
+    background: url(../assets/c-next/card-view/sprite.png) no-repeat -38px -806px;
   }
 
   .btn-twitter {
-    background: url(../assets/c-next/card-view/sprite.png) no-repeat -75px -697px;
+    background: url(../assets/c-next/card-view/sprite.png) no-repeat -75px -804px;
   }
 }
 
