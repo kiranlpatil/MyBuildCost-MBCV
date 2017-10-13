@@ -1,0 +1,18 @@
+"use strict";
+var MailAttachments = (function () {
+    function MailAttachments() {
+    }
+    MailAttachments.AttachmentArray = [
+        {
+            path: './src/server/app/framework/public/images/logo/job-mosis-logo.png',
+            cid: 'unique@company-logo'
+        }, {
+            path: './src/server/app/framework/public/images/banner/banner.png',
+            cid: 'unique@banner'
+        }
+    ];
+    return MailAttachments;
+}());
+module.exports = MailAttachments;
+
+//# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFwcC9mcmFtZXdvcmsvc2hhcmVkL3NoYXJlZGFycmF5LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFLQTtJQUFBO0lBbUJBLENBQUM7SUFsQmUsK0JBQWUsR0FBZTtRQUMxQztZQUNFLElBQUksRUFBRSxrRUFBa0U7WUFDeEUsR0FBRyxFQUFFLHFCQUFxQjtTQUMzQixFQUFFO1lBQ0QsSUFBSSxFQUFFLDREQUE0RDtZQUNsRSxHQUFHLEVBQUUsZUFBZTtTQUNyQjtLQVVGLENBQUM7SUFDSixzQkFBQztDQW5CRCxBQW1CQyxJQUFBO0FBQ0QsaUJBQU8sZUFBZSxDQUFDIiwiZmlsZSI6ImFwcC9mcmFtZXdvcmsvc2hhcmVkL3NoYXJlZGFycmF5LmpzIiwic291cmNlc0NvbnRlbnQiOlsiLyoqXHJcbiAqIENyZWF0ZWQgYnkgYWRtaW4gb24gMTAvNS8xNi5cclxuICovXHJcbi8vaW1wb3J0IE1lc3NhZ2VzID0gcmVxdWlyZShcIi4uL3NoYXJlZC9tZXNzYWdlc1wiKTtcclxuXHJcbmNsYXNzIE1haWxBdHRhY2htZW50cyB7XHJcbiAgcHVibGljIHN0YXRpYyBBdHRhY2htZW50QXJyYXk6IEFycmF5PGFueT4gPSBbXHJcbiAgICB7XHJcbiAgICAgIHBhdGg6ICcuL3NyYy9zZXJ2ZXIvYXBwL2ZyYW1ld29yay9wdWJsaWMvaW1hZ2VzL2xvZ28vam9iLW1vc2lzLWxvZ28ucG5nJyxcclxuICAgICAgY2lkOiAndW5pcXVlQGNvbXBhbnktbG9nbydcclxuICAgIH0sIHtcclxuICAgICAgcGF0aDogJy4vc3JjL3NlcnZlci9hcHAvZnJhbWV3b3JrL3B1YmxpYy9pbWFnZXMvYmFubmVyL2Jhbm5lci5wbmcnLFxyXG4gICAgICBjaWQ6ICd1bmlxdWVAYmFubmVyJ1xyXG4gICAgfS8qLCB7XHJcbiAgICAgIHBhdGg6ICcuL3NyYy9zZXJ2ZXIvYXBwL2ZyYW1ld29yay9wdWJsaWMvaW1hZ2VzL2Zvb3Rlci9mYi5wbmcnLFxyXG4gICAgICBjaWQ6ICd1bmlxdWVAZmJmb290ZXInXHJcbiAgICB9LCB7XHJcbiAgICAgIHBhdGg6ICcuL3NyYy9zZXJ2ZXIvYXBwL2ZyYW1ld29yay9wdWJsaWMvaW1hZ2VzL2Zvb3Rlci9nb29nbGUtcGx1cy5wbmcnLFxyXG4gICAgICBjaWQ6ICd1bmlxdWVAZ29vZ2xlcGx1cydcclxuICAgIH0sIHtcclxuICAgICAgcGF0aDogJy4vc3JjL3NlcnZlci9hcHAvZnJhbWV3b3JrL3B1YmxpYy9pbWFnZXMvZm9vdGVyL2xpbmtlZC1pbi5wbmcnLFxyXG4gICAgICBjaWQ6ICd1bmlxdWVAbGlua2VkaW4nXHJcbiAgICB9Ki9cclxuICBdO1xyXG59XHJcbmV4cG9ydD1NYWlsQXR0YWNobWVudHM7XHJcbiJdfQ==
