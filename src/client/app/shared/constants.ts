@@ -231,6 +231,7 @@ export class Messages {
   public static MSG_ACTIVATE_USER_1 = 'Congratulations! Welcome To JobMosis.';
   public static MSG_ACTIVATE_USER_2 = 'You can now find candidates using the highly accurate, simpler, faster and powerful solution.';
   public static MSG_ACTIVATE_USER_3 = 'Your account has been created successfully. Kindly click Sign In.';
+  public static MSG_VERIFICATION_EMAIL= 'Your account has been created successfully. Kindly click Sign In.';
   public static MSG_COMPANY_DOCUMENTS = 'Please upload relevant company documents to activate your account.';
   public static MSG_UPLOAD_FILE = 'Please select a file to upload.';
   public static MSG_ABOUT_US_DISCRIPTION = 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.' +
