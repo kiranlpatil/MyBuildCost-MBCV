@@ -181,7 +181,7 @@ $overlay: rgba(0, 0, 0, 0.4);
   li {
     a {
       border-bottom: 4px solid transparent;
-      color: $page-header-text;
+      color: $white;
       font-size: 12px;
       padding: 13px 5px 13px 30px;
       text-transform: uppercase;
@@ -192,13 +192,6 @@ $overlay: rgba(0, 0, 0, 0.4);
       &:active {
         background-color: transparent;
       }
-    }
-  }
-
-  .active {
-    a {
-      border-bottom: 4px solid $theme-color;
-      color: $white;
 
       .icon-dashboard {
         background: url('../../assets/c-next/card-view/sprite.png') no-repeat -5px -770px;
@@ -211,6 +204,12 @@ $overlay: rgba(0, 0, 0, 0.4);
       .icon-edit-profile {
         background: url('../../assets/c-next/card-view/sprite.png') no-repeat -56px -770px;
       }
+    }
+  }
+
+  .active {
+    a {
+      border-bottom: 4px solid $theme-color;
     }
   }
 
