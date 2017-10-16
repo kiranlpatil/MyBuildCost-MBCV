@@ -69,14 +69,12 @@
 
                       </div>
                       <div *ngIf="complexity.complexityNote" class="notes-section">
-                        <div title="View Complexity Notes"class="notes-triangle"></div>
-                        <div title="View Complexity Notes" data-toggle="modal" [attr.data-target]="'#'+'complexity-notes'+i+j" class="notes-icons"></div>
-                        <div data-dismiss="modal" id="{{'complexity-notes'+i+j}}" class="collapse complexity-notes-description">
+                        <div title="View Complexity Notes" class="notes-triangle"></div>
+                        <div class="complexity-notes-description">
+                          <h4>Notes</h4>
                           {{complexity?.complexityNote}}
-                          <span data-dismiss="modal">&times;</span>
                         </div>
                       </div>
-
                     </div>
                   </div>
                 </div>

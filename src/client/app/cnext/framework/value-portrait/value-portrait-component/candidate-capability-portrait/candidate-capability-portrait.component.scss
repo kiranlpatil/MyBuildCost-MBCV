@@ -325,18 +325,19 @@
 }
 
 .complexities-list > .tooltip-content1 {
-  opacity: 0;
-  display: inline-block;
-  position: absolute;
-  width: 200px;
   background-color: $white;
-  padding: 10px;
-  transition: all .1s linear;
   box-shadow: 3px 3px 15px 1px $gray;
   border-radius: 4px;
-  right: -212px;
   color: $portrait-theme;
-  margin-top: -13px;
+  display: inline-block;
+  min-height: 56px;
+  margin-top: -28px;
+  opacity: 0;
+  padding: 10px;
+  position: absolute;
+  right: -212px;
+  transition: all .1s linear;
+  width: 200px;
 }
 
 .complexities-list:hover > .tooltip-content1 {
@@ -345,13 +346,13 @@
 
 .complexities-list .tooltip-content1:after {
   content: "";
-  border-top: 10px solid $white;
+  border-top: 10px solid $portrait-theme;
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
-  position: absolute;
-  top: 13px;
-  left: -6px;
+  left: -8px;
   margin-left: -8px;
+  position: absolute;
+  top: 34px;
   transform: rotate(90deg);
   z-index: 99;
 }
@@ -381,6 +382,25 @@
   position: absolute;
   background: $gray-light1;
   height: 1px;
+}
+
+.value-portrait-notes {
+  color: $black1;
+  background: $notes-bg;
+  display: inline-block;
+  float: left;
+  font-size: 12px;
+  margin: 10px 0;
+  padding: 5px;
+  position: relative;
+  width: 100%;
+  z-index: 99999;
+  h4 {
+    font-size: 12px;
+    font-weight: bold !important;
+    font-family: 'gothamrnd-book';
+    margin: 0 0 5px;
+  }
 }
 
 @media only screen and (max-width: 767px) {
