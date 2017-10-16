@@ -38,10 +38,10 @@
 
   .list-view {
     margin-top: 25px;
-    top: 155px !important;
-    padding: 0;
     overflow: auto;
+    padding: 0 0 30px;
     position: absolute;
+    top: 155px !important;
     z-index: 9;
 
     .list-header {
@@ -75,7 +75,7 @@
     ul > li > p {
       overflow: hidden !important;
       text-overflow: clip !important;
-      white-space: pre-wrap !important;
+      white-space: normal !important;
       width: 100%;
     }
 
