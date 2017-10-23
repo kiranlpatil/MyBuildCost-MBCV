@@ -35,6 +35,7 @@ export class QCardviewComponent implements OnChanges {
   @Input() type: string;
   @Input() filterMeta: QCardFilter;
   @Input() isJobPostExpired : boolean;
+  @Input() isJobPostClosed : boolean;
   @Output() addedTocart: EventEmitter<any> = new EventEmitter<any>();
   @Input() progress_bar_color : string='#0d75fa';
   @Output() addForCompare: EventEmitter<any> = new EventEmitter<any>();
@@ -44,14 +45,14 @@ export class QCardviewComponent implements OnChanges {
   private emailsOfShrortListedCandidates: string[] = new Array(0);
   private match: MatchCandidate = new MatchCandidate();
   /*private filterMeta: QCardFilter;*/
-  private matchFormat: string = 'aboveMatch';
+  matchFormat: string = 'aboveMatch';
   private selectedCandidate: Candidate = new Candidate();
   private modelCandidate: CandidateQCard = new CandidateQCard();
   private candidateDetails: CandidateDetail = new CandidateDetail();
   private showModalStyle: boolean = false;
   private isAlreadyPresentInCart: boolean = false;
   private isShortlistedclicked: boolean = false;
-  private isShowPrintView: boolean = false;
+  isShowPrintView: boolean = false;
 
 
 
@@ -70,7 +71,7 @@ export class QCardviewComponent implements OnChanges {
 
   }
 
-  ngOnInlit() {
+  ngOnInit() {
     this.matchFormat = 'aboveMatch';
   }
 

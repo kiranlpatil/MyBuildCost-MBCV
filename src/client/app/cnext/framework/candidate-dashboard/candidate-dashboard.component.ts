@@ -21,7 +21,7 @@ import {ErrorService} from "../../../shared/services/error.service";
 
 export class CandidateDashboardComponent implements OnInit{
   gotItMessage:string= Headings.GOT_IT;
-  private candidate: Candidate = new Candidate();
+  candidate: Candidate = new Candidate();
   private jobList: JobQcard[] = new Array(0);
   private appliedJobs: JobQcard[] = new Array(0);
   private blockedJobs: JobQcard[] = new Array(0);
@@ -33,8 +33,8 @@ export class CandidateDashboardComponent implements OnInit{
   private noAppliedJobMessage: string = Tooltip.APPLIED_JOB_MESSAGE;
   private noNotIntrestedJobMessage: string = Tooltip.NOT_INTRESTED_JOB_MESSAGE;
   private overlayScreensDashboardImgPath:string;
-  private guidedTourStatus:string[] = new Array(0);
-  private overlayScreensDashboardImgName:string;
+  guidedTourStatus:string[] = new Array(0);
+  overlayScreensDashboardImgName:string;
   private typeOfListVisible : string ='matched';
 
   constructor(private candidateProfileService: CandidateProfileService,

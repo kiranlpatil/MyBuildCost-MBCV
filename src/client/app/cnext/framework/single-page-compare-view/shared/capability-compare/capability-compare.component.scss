@@ -574,6 +574,16 @@
   padding-left: 20px;
 }
 
+@media only screen and (max-width: 1366px) {
+  .capability-complexity {
+    .legends {
+      li {
+        font-size: 10px;
+      }
+    }
+  }
+}
+
 @media only screen and (max-width: 767px) {
   .capability-complexity {
     border-top: 1px solid $theme-color;

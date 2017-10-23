@@ -1,6 +1,11 @@
 @import '../../../../../css/common';
 @import '../../../../../css/variables';
 
+.disable-option {
+  pointer-events: none;
+  background-color: #d0d0d0;
+  opacity: 0.3;
+}
 .welcome-text {
   height: 100vh;
   text-align: left;
@@ -33,9 +38,29 @@
   margin-top: 70px;
   text-align: left;
 
+  header {
+    background: $header-bg;
+    height: 30px;
+    left: 0;
+    position: fixed;
+    top: 50px;
+    width: 100%;
+    z-index: 1000;
+
+    .select-option {
+      float: right !important;
+      margin: 5px 0 !important;
+    }
+
+    .select-option > label {
+      min-height: 15px !important;
+      padding: 0 0 0 20px !important;
+    }
+  }
+
   .card-view {
     color: $text-color4;
-    margin-top: 20px !important;
+    margin-top: 0 !important;
 
     .panel {
       cursor: pointer;
@@ -79,7 +104,13 @@
     .renew-job {
 
       .posted-job > p {
+        padding-left: 0;
         width: calc(100% - 70px);
+      }
+
+      .closed-job > p {
+        padding-left: 0;
+        width: calc(100% - 90px);
       }
 
       .glyphicon-refresh {
@@ -115,6 +146,10 @@
         margin: 0 auto 5px;
         position: relative;
         width: 30px;
+      }
+
+      .closed {
+        background: $closed_job !important;
       }
 
       span {
@@ -176,10 +211,17 @@
     z-index: 10;
   }
 
-  &:hover {
-    .btn-edit-job {
-      display: block;
-    }
+  .closed-post-job {
+    background: $closed_job;
+    bottom: 5px;
+    border-radius: 2px;
+    color: $white;
+    display: block;
+    font-size: 11px;
+    padding: 2px 8px;
+    position: absolute;
+    right: 5px;
+    z-index: 10;
   }
 }
 
@@ -189,6 +231,7 @@
 
 .btn-menu {
   background: transparent;
+  box-shadow: none;
   cursor: pointer;
   color: $gray-light2;
   font-size: 12px;
@@ -241,11 +284,6 @@
         background: $contact-info;
       }
     }
-
-    &:last-child > a {
-      background: #d0d0d0;
-      opacity: 0.3;
-    }
   }
 }
 
@@ -271,6 +309,19 @@
     .card-view > .col-md-3 {
       width: 50%;
       float: left;
+    }
+
+    .card-view {
+      .renew-job {
+
+        .posted-job > p {
+          padding-left: 5px;
+        }
+
+        .closed-job > p {
+          padding-left: 5px;
+        }
+      }
     }
   }
 }

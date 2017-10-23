@@ -27,9 +27,9 @@ import {SharedService} from "../../shared/services/shared-service";
 export class LoginComponent implements OnInit {
   @ViewChild('toaster') toaster: ElementRef;
   private model = new Login();
-  private userForm: FormGroup;
-  private error_msg: string;
-  private isShowErrorMessage: boolean = true;
+  userForm: FormGroup;
+  error_msg: string;
+  isShowErrorMessage: boolean = true;
   private MY_LOGO_PATH: string;
   private EMAIL_ICON: string;
   private PASSWORD_ICON: string;
@@ -37,10 +37,10 @@ export class LoginComponent implements OnInit {
   private MY_TAG_LINE: string;
   private UNDER_LICENCE: string;
   private BODY_BACKGROUND: string;
-  private submitStatus: boolean;
-  private mainHeaderMenuHideShow: string;
-  private isChrome: boolean;
-  private isToasterVisible: boolean = true;
+  submitStatus: boolean;
+  mainHeaderMenuHideShow: string;
+  isChrome: boolean;
+  isToasterVisible: boolean = true;
 
   constructor(private _router: Router, private loginService: LoginService, private themeChangeService: ThemeChangeService,
               private messageService: MessageService, private formBuilder: FormBuilder, private sharedService: SharedService) {

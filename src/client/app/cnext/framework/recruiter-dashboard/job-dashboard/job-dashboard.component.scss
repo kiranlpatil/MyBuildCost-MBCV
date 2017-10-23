@@ -5,6 +5,7 @@
   border-bottom: 1px solid #d1dce4;
 
   .panel {
+    cursor: default !important;
     padding: 2px 15px !important;
   }
 }
@@ -19,8 +20,8 @@
   margin-top: -4px !important;
 
   li {
+    margin: 9px 0 5px !important;
     text-align: center;
-    margin-top: 5px !important;
   }
 
   li > p {
@@ -32,10 +33,6 @@
   .job-expired > label {
     color: $error;
   }
-}
-
-.panel {
-  cursor: default;
 }
 
 .job-details {
@@ -51,15 +48,16 @@
 
   li > h4 {
     display: inline-block;
-    cursor: default;
+    cursor: pointer;
   }
 
   li > a {
-    font-size: 9px;
-    //text-decoration: underline;
-    margin-top: 17px;
-    display: block;
     color: $theme-color;
+    display: block;
+    font-weight: 900;
+    font-family: 'gothamrnd-book';
+    font-size: 12px;
+    margin: 14px 0 0 7px;
   }
 }
 
@@ -69,7 +67,7 @@
 
 .clone-job-menu {
   position: fixed;
-  top: 135px;
+  top: 102px;
   right: 15px;
   z-index: 1001;
 
@@ -108,11 +106,6 @@
 
     li {
       float: none;
-
-      &:last-child > a {
-        background: #d0d0d0;
-        opacity: 0.3;
-      }
     }
 
     li > a {

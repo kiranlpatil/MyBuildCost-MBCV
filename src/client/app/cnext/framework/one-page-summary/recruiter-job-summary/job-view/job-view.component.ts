@@ -18,7 +18,7 @@ import {ErrorService} from "../../../../../shared/services/error.service";
 export class JobViewComponent implements OnChanges ,OnInit {
   @Input() jobId: string;
   @Input() calledFrom: string;
-  private recruiter: JobSummary = new JobSummary();
+  recruiter: JobSummary = new JobSummary();
   private capabilities : any;
 
   constructor(private recruiterDashboardService: RecruiterDashboardService,

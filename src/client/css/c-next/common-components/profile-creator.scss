@@ -48,20 +48,8 @@
 
 .create-profile {
   .page-header {
-    background: transparent !important;
-    border-bottom: 1px solid transparent !important;
-    margin-top: 10px !important;
+    border-bottom: 1px solid $edit-profile-header-border !important;
     box-shadow: none !important;
-
-    .last-child {
-      .dropdown-menu {
-        margin-top: 25px !important;
-      }
-    }
-  }
-
-  .navbar {
-    margin: 13px 0 0 !important;
   }
 }
 
@@ -613,10 +601,11 @@
       }
     }
     .button-group {
-      width: 100%;
-      position: fixed;
-      padding: 7px;
+      border-radius: 0;
       float: left;
+      padding: 7px;
+      position: fixed;
+      width: 100%;
     }
 
     .btn-prev {

@@ -57,7 +57,7 @@
           <div>
             <div class="basic-description" *ngIf="candidateDetails != undefined">
               <div class="basic-info clearfix">
-                <!-- <img src="assets/framework/images/dashboard/profile.png" alt="User Profile"
+                 <!-- <img src="assets/framework/images/dashboard/profile.png" alt="User Profile"
                       *ngIf="candidateDetails.picture==undefined"/>
                  <img [src]="getImagePath(candidateDetails.picture)" alt="User Profile"
                       *ngIf="candidateDetails.picture!=undefined"/>
@@ -80,11 +80,32 @@
                 <span *ngFor="let industry of candidate.interestedIndustries;let i = index">{{industry}}
           <span *ngIf="candidate.interestedIndustries.length>1 && i<candidate.interestedIndustries.length-1">,</span>
         </span>
-                <label [class.exact]="data.experienceMatch=='exact'" [class.missing]="data.experienceMatch=='missing'">Experience</label>
+                <label  *ngIf="recruiter != undefined" [class.exact]="data.experienceMatch=='exact'" [class.missing]="data.experienceMatch=='missing'">
+                  <strong class="title-name pull-left"> Experience <b class="small-label"></b></strong>
+                  <img class="exact-img" src="assets/framework/images/dashboard/right-tick.svg"/>
+                  <div class="info-description">
+                    <img class="missing-img" src="assets/framework/images/dashboard/info-red.svg"/>
+                    <div class="info-hover-section">
+                      Job Experience Band {{recruiter.postedJobs[0].experienceMinValue}} -
+                      {{recruiter.postedJobs[0].experienceMaxValue}}<br/>
+                      {{candidateDetails.first_name}}'s Experience {{candidate.professionalDetails.experience}}
+                    </div>
+                  </div>
+                </label>
                 <span>{{candidate.professionalDetails.experience}}</span>
                 <label [class.exact]="data.salaryMatch=='exact'" [class.above]="data.salaryMatch=='above'"
-                       [class.below]="data.salaryMatch=='below'" [class.missing]="data.salaryMatch=='missing'">Current
-                  Salary</label>
+                       [class.below]="data.salaryMatch=='below'" [class.missing]="data.salaryMatch=='missing'">
+                  <strong class="title-name pull-left"> Current Salary <b class="small-label"></b></strong>
+                  <img class="exact-img" src="assets/framework/images/dashboard/right-tick.svg"/>
+                  <div  *ngIf="recruiter != undefined" class="info-description">
+                    <img class="missing-img" src="assets/framework/images/dashboard/info-red.svg"/>
+                    <div class="info-hover-section">
+                      Job Salary Band {{recruiter.postedJobs[0].salaryMinValue}} -
+                      {{recruiter.postedJobs[0].salaryMaxValue}}<br/>
+                      {{candidateDetails.first_name}}'s Salary {{candidate.professionalDetails.currentSalary}}
+                    </div>
+                  </div>
+                </label>
                 <span>{{candidate.professionalDetails.currentSalary}}</span>
                 <label>Current Company</label>
                 <span>{{candidate.professionalDetails.currentCompany}}</span>

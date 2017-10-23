@@ -28,7 +28,7 @@ export class JobPosterService extends BaseService {
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({headers: headers});
     let body = JSON.stringify({'postedJobs': jobId});
-    let url: string = API.CLONE_JOB + '/' +jobId+ '/clone'+'?newJobTitle=' + title;
+    let url: string = API.JOB + '/' +jobId+ '/clone'+'?newJobTitle=' + title;
     return this.http.put(url, body, options)
       .map(this.extractData)
       .catch(this.handleError);
@@ -37,9 +37,18 @@ export class JobPosterService extends BaseService {
   sendMailToRecruiter(job: JobPosterModel): Observable<any> {
     var url = API.SEND_CONFIRMATION_MAIL_TO_RECRUITER + '/' + LocalStorageService.getLocalValue(LocalStorage.USER_ID);
     var body = JSON.stringify(job);
-    debugger
     return this.http.post(url, body)
       .map(this.extractData)
       .catch(this.handleError);
   }
+
+  /*closeJob(jobId: JobPosterModel): Observable<any> {
+    let headers = new Headers({'Content-Type': 'application/json'});
+    let options = new RequestOptions({headers: headers});
+    let body = JSON.stringify({'postedJobs': jobId});
+    let url: string = API.JOB + '/' +jobId+ '/close';
+    return this.http.put(url, body, options)
+      .map(this.extractData)
+      .catch(this.handleError);
+  }*/
 }

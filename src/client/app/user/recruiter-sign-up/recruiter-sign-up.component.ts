@@ -23,36 +23,37 @@ import {SharedService} from "../../shared/services/shared-service";
 export class RecruiterSignUpComponent implements OnInit {
 
   @ViewChild('toaster') toaster: ElementRef;
-  private model = new Recruiter();
+  model = new Recruiter();
   private storedcompanySize: any;
-  private companySize: any;
+  companySize: any;
   private companyHeadquarter: any;
-  private isPasswordConfirm: boolean;
+  isPasswordConfirm: boolean;
+  isCompanyWebsiteValid:boolean=true;
   private isFormSubmitted = false;
-  private recruiterForm: FormGroup;
-  private error_msg: string;
-  private isShowErrorMessage: boolean = true;
+  recruiterForm: FormGroup;
+  error_msg: string;
+  isShowErrorMessage: boolean = true;
   private BODY_BACKGROUND: string;
   private image_path: string;
   private isRecruitingForself: boolean = true;
   private isShowMessage: boolean = false;
-  private myPassword: string = '';
-  private storedLocation: Location = new Location();
-  private mainHeaderMenuHideShow: string;
-  private submitStatus: boolean;
-  private companySizeErrorMessage = Messages.MSG_ERROR_VALIDATION_COMPANYSIZE_REQUIRED;
+  myPassword: string = '';
+  storedLocation: Location = new Location();
+  mainHeaderMenuHideShow: string;
+  submitStatus: boolean;
+  companySizeErrorMessage = Messages.MSG_ERROR_VALIDATION_COMPANYSIZE_REQUIRED;
   private locationValidationMessage: string = Messages.MSG_ERROR_VALIDATION_LOCATION_REQUIRED;
   private inValidLocationMessage: string = Messages.MSG_ERROR_VALIDATION_INVALID_LOCATION;
   private passwordMismatchMessage: string;
   formatted_address: string = 'Aurangabad, Bihar, India';
   companyHQCountry: string = '';
-  private isLocationInvalid: boolean = false;
-  private isLocationEmpty: boolean = false;
-  private isCompanyHQEmpty: boolean = false;
-  private isCompanyHQInvalid: boolean = false;
+  isLocationInvalid: boolean = false;
+  isLocationEmpty: boolean = false;
+  isCompanyHQEmpty: boolean = false;
+  isCompanyHQInvalid: boolean = false;
   private isValid: boolean = true;
-  private isChrome: boolean;
-  private isToasterVisible: boolean = true;
+  isChrome: boolean;
+  isToasterVisible: boolean = true;
 
   constructor(private commonService: CommonService, private _router: Router, private http: Http,
               private recruiterService: RecruiterSignUpService, private messageService: MessageService,
@@ -62,7 +63,7 @@ export class RecruiterSignUpComponent implements OnInit {
     this.recruiterForm = this.formBuilder.group({
       'company_name': ['', [ValidationService.noWhiteSpaceValidator, ValidationService.requireCompanyNameValidator, ValidationService.nameValidator]],
       'company_size': ['', Validators.required],
-      'company_website': ['',[ValidationService.requireWebsiteValidator,ValidationService.urlValidator]],
+      'company_website': [''],
       'mobile_number': ['', [ValidationService.requireMobileNumberValidator, ValidationService.mobileNumberValidator]],
       'email': ['', [ValidationService.requireEmailValidator, ValidationService.emailValidator]],
       'password': ['', [ValidationService.requirePasswordValidator, ValidationService.passwordValidator]],
@@ -163,54 +164,64 @@ export class RecruiterSignUpComponent implements OnInit {
       return;
     }
   }
-
-  onSubmit() {
+  onCompanyWebsiteType() {
+    this.isCompanyWebsiteValid=true;
+  }
+  onSubmit() {debugger
     this.isLocationInvalid = false;
     this.isLocationEmpty = false;
     this.isCompanyHQInvalid = false;
     this.isCompanyHQEmpty = false;
     this.model = this.recruiterForm.value;
-    if (this.model.company_name === '' || this.model.company_size == '' || this.model.mobile_number == '' ||
-      this.model.email == '' || this.model.password == '' || this.model.confirm_password == '' ||
-      this.storedLocation.formatted_address == '' || this.companyHQCountry == '' || !this.recruiterForm.controls['accept_terms'].value) {
-      if (this.storedLocation.formatted_address == '') {
-        this.isLocationEmpty = true;
+
+        if( this.model.company_website===''||
+      (this.model.company_website!=='' && this.model.company_website.match('[a-zA-Z0-9_\\-]+\\.[a-zA-Z0-9_\\-]+\\.[a-zA-Z0-9_\\-]'))) {
+      this.isCompanyWebsiteValid = true;
+    }else {
+      this.isCompanyWebsiteValid=false;
+    }
+      if (this.model.company_name === '' || this.model.company_size == '' || this.model.mobile_number == '' ||
+        this.model.email == '' || this.model.password == '' || this.model.confirm_password == '' ||
+        this.storedLocation.formatted_address == '' || this.companyHQCountry == '' || !this.recruiterForm.controls['accept_terms'].value) {
+        if (this.storedLocation.formatted_address == '') {
+          this.isLocationEmpty = true;
+        }
+        if (this.companyHeadquarter == undefined || this.companyHQCountry == '') {
+          this.isCompanyHQEmpty = true;
+        }
+        this.submitStatus = true;
+        return;
       }
-      if (this.companyHeadquarter == undefined || this.companyHQCountry == '') {
-        this.isCompanyHQEmpty = true;
+
+      if (!(this.storedLocation.formatted_address.split(',').length > 2)) {
+        this.isLocationInvalid = true;
+        return;
       }
-      this.submitStatus = true;
-      return;
-    }
 
-    if (!(this.storedLocation.formatted_address.split(',').length > 2)) {
-      this.isLocationInvalid = true;
-      return;
-    }
+      if (!(this.companyHQCountry.split(',').length > 2)) {
+        this.isCompanyHQInvalid = true;
+        return;
+      }
 
-    if (!(this.companyHQCountry.split(',').length > 2)) {
-      this.isCompanyHQInvalid = true;
-      return;
-    }
-
-    if (!this.recruiterForm.valid) {
-      return;
-    }
+      if (!this.recruiterForm.valid && this.isCompanyWebsiteValid) {
+        return;
+      }
 
 
-    this.model.current_theme = AppSettings.LIGHT_THEM;
-    this.model.location = this.storedLocation;
-    this.model.isCandidate = false;
-    this.model.company_headquarter_country = this.companyHeadquarter;
-    this.model.isRecruitingForself = this.isRecruitingForself;
-    this.model.email = this.model.email.toLowerCase();
-    if (!this.makePasswordConfirm()) {
-      this.isFormSubmitted = true;
-      this.recruiterService.addRecruiter(this.model)
-        .subscribe(
-          user => this.onRegistrationSuccess(user),
-          error => this.onRegistrationError(error));
-    }
+      this.model.current_theme = AppSettings.LIGHT_THEM;
+      this.model.location = this.storedLocation;
+      this.model.isCandidate = false;
+      this.model.company_headquarter_country = this.companyHeadquarter;
+      this.model.isRecruitingForself = this.isRecruitingForself;
+      this.model.email = this.model.email.toLowerCase();
+      if (!this.makePasswordConfirm()) {
+        this.isFormSubmitted = true;
+        this.recruiterService.addRecruiter(this.model)
+          .subscribe(
+            user => this.onRegistrationSuccess(user),
+            error => this.onRegistrationError(error));
+      }
+
   }
 
   onRegistrationSuccess(user: any) {

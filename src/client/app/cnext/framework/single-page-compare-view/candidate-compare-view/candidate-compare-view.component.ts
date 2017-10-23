@@ -19,8 +19,8 @@ export class CandidateCompareViewComponent implements OnInit, OnChanges {
   private candidateId: string;
   private recruiterId: string;
   /*private candidate:Candidate = new Candidate();*/
-  private recruiter: any;
-  private data: any;
+  recruiter: any;
+  data: any;
 
   constructor(private _router: Router,
               private errorService:ErrorService,

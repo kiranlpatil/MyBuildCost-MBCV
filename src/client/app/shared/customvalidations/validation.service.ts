@@ -203,7 +203,7 @@ export class ValidationService {
   static urlValidator(control: any) {
     if (control.value) {
       if (control.value.match(
-         /(((?:(www|WWW)\.|[\-;:&=\+\$,\w]+@)[A-Za-z0-9\.\-]+)((?:\/[\+~%\/\.\w\-_]*)?\??(?:[\-\+=&;%@\.\w_]*)#?(?:[\.\!\/\\\w]*))?)/))
+         /([a-z]|[A-z]|[0-9])(\.([a-z]|[A-Z]))/))
       {
         return null;
       } else {

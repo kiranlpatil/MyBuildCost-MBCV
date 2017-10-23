@@ -1,0 +1,15 @@
+@import '../../../../css/variables';
+
+.button-group {
+  float: left;
+  margin-top:30px;
+}
+
+.error-messages {
+  color: $error-messages;
+  font-size: 10px;
+  font-style: italic;
+  margin: 0;
+  position: absolute;
+  line-height: 16px;
+}

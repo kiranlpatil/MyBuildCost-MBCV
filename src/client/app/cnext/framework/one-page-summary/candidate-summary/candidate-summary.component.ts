@@ -16,8 +16,8 @@ import {ErrorService} from "../../../../shared/services/error.service";
 
 export class CandidateSummaryComponent implements OnInit {
 
-  private candidateId: string;
-  private candidate: Candidate = new Candidate();
+  candidateId: string;
+  candidate: Candidate = new Candidate();
 
   constructor(private _router: Router,
               private errorService:ErrorService,

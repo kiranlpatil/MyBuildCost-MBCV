@@ -6,14 +6,9 @@
   .btn-back {
     border: 0;
     margin: 0;
-    padding: 5px;
+    padding: 7px 0;
     color: $text-color;
     width: auto;
-    position: fixed;
-    top: 50px;
-    right: 10px;
-    z-index: 999;
-    box-shadow: none;
 
     &:focus,
     &:hover {
@@ -23,14 +18,14 @@
   }
 
   .list-view {
-    color: $text-color;
-    text-align: left;
-    position: fixed;
-    top: 91px;
     background: $active-color;
+    color: $text-color;
+    padding: 0;
+    position: fixed;
+    text-align: left;
+    top: 50px;
     width: 100%;
     z-index: 999;
-    padding: 0;
 
     .panel {
       padding: 5px 15px;
@@ -48,7 +43,7 @@
 
     ul > li {
       float: left;
-      padding: 0 25px;
+      padding: 0 20px;
       width: auto;
 
       &:first-child {
@@ -139,12 +134,12 @@
     border-bottom: 1px solid $border-blue;
     background: $white;
     height: 39px;
-    width: 100%;
-    position: fixed;
-    top: 132px;
-    z-index: 99;
-    padding: 0 15px;
     left: 0;
+    padding: 0 15px;
+    position: fixed;
+    top: 99px;
+    width: 100%;
+    z-index: 99;
 
     a {
       padding: 8px 15px 8px 45px;
@@ -210,11 +205,11 @@
   .q-card-header {
     background: $active-color;
     left: 0;
-    position: fixed;
-    top: 171px;
-    z-index: 999;
     padding: 4px 15px;
+    position: fixed;
+    top: 138px;
     width: calc(100% - 200px);
+    z-index: 999;
 
     ul {
       margin: 5px 0 !important;
@@ -291,7 +286,7 @@
     padding: 1px;
     position: fixed;
     right: 53px;
-    top: 142px;
+    top: 110px;
     z-index: 99;
     span {
       background: url(../assets/c-next/card-view/sprite.png) no-repeat -148px -613px;

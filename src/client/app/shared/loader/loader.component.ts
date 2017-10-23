@@ -10,7 +10,7 @@ import {LoaderService} from "./loaders.service";
 })
 export class LoaderComponent {
 
-  private status: boolean;
+  status: boolean;
 
   public constructor(private loaderService: LoaderService) {
     loaderService.status.subscribe((status: boolean) => {

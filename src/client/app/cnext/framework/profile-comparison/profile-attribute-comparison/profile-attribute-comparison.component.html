@@ -175,7 +175,13 @@
   </div>
   <div class="candidate-compare-attribute clearfix">
     <div class="matching-attribute-name">
-      <div class="inner" title="Domain : {{value}}">
+      <!--TODO Abhijeet <div class="inner" title="Domain : {{value}}">
+        <h6>Domain</h6>
+        <p *ngFor="let value of profileComparisonJobData.interestedIndustries">
+          {{value}}
+        </p>
+      </div>-->
+      <div class="inner">
         <h6>Domain</h6>
         <p *ngFor="let value of profileComparisonJobData.interestedIndustries">
           {{value}}

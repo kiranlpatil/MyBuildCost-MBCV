@@ -1,34 +1,30 @@
 <cn-recruiter-header [headerInfo]="headerInfo" [jobCount]="jobCount"></cn-recruiter-header>
 <div class="container-fluid profile-wrapper">
-  <ul class="nav nav-tabs dashboard-tabs">
-    <li class="active"><a data-toggle="tab" title="My Job Posts" href="#">My Job Posts</a></li>
-    <li><a data-toggle="tab" title="My Job Posts" (click)="navigateTo('recruiterdashboard','applicant_search')">Applicant
-      Search</a></li>
-    <li><a data-toggle="tab" title="Post New Job" (click)="navigateTo('recruiterdashboard','post_new_job')">Post New
-      Job</a></li>
+  <ul id="recruiter-job-dashboard-tabs" class="nav nav-tabs dashboard-tabs">
+    <li class="active"><a data-toggle="tab" title="My Job Posts" href="#">
+      <span class="icon-dashboard"></span>My Job Posts</a></li>
+    <li><a data-toggle="tab" title="My Job Posts" (click)="navigateTo('recruiterdashboard','applicant_search')">
+      <span class="icon-candidate-search"></span>Applicant Search</a></li>
+    <li><a class="btn-new-job" data-toggle="tab" title="Post New Job"
+           (click)="navigateTo('recruiterdashboard','post_new_job')">Post New Job</a>
+    </li>
   </ul>
   <div class="candidate-listing">
     <cn-filter [hidden]="whichListVisible[4]" [selectedJob]="selectedJobProfile" [role]=true></cn-filter>
     <div class="col-sm-12 no-padding">
-      <button class="btn btn-back" title="All Jobs" (click)="navigateTo('recruiterdashboard',undefined)">All Jobs
-      </button>
       <div class="list-view" *ngIf="selectedJobProfile!=undefined">
         <div class="panel clearfix">
-          <div class="col-md-7 col-sm-6 no-padding">
+          <div class="col-sm-5 no-padding">
             <ul class="pull-left job-details">
-              <!--<li class="job-posted"><p><span>{{recruiterJobView.numberOfCandidatesInCart}}</span></p></li>-->
               <li>
-                <h4 title="View Job Details" title="{{selectedJobProfile.jobTitle}}">{{selectedJobProfile.jobTitle}}</h4>
+                <h4 title="View job details" (click)="viewJobDetails()" >{{selectedJobProfile.jobTitle}}</h4>
               </li>
               <li>
-                <a title="view job" (click)="viewJobDetails()">view job</a>
+                <a title="View job details" (click)="viewJobDetails()">view job</a>
               </li>
-              <!--<li>
-                <a class="view-details" (click)="viewJobDetails()">view job details</a>
-              </li>-->
             </ul>
           </div>
-          <div class="col-md-5 col-sm-6 no-padding">
+          <div class="col-sm-7 no-padding">
             <ul class="pull-right job-info">
               <li class="contact-info" title="Industry : {{selectedJobProfile.industry.name}}">
                 <label>Industry</label>
@@ -51,6 +47,10 @@
               <li [class.job-expired]="selectedJobProfile.isJobPostExpired" class="contact-info" title="Expiry Date : {{selectedJobProfile.expiringDate | date :'dd MMM yyyy'}}">
                 <label>Expiry Date</label>
                 <p>{{selectedJobProfile.expiringDate | date :'dd MMM yyyy'}}</p>
+              </li>
+              <li>
+                <button class="btn-back" title="All Jobs" (click)="navigateTo('recruiterdashboard',undefined)">All Jobs
+                </button>
               </li>
             </ul>
           </div>
@@ -91,8 +91,8 @@
               class="glyphicon glyphicon-option-horizontal"></span></button>
       <ul class="dropdown-menu">
         <li (click)="raiseCloneEvent()"><a>{{getLabel().CLONE_JOB}}</a></li>
-        <li (click)="onRenewJob()"><a>Renew Job Post</a></li>
-        <li><a disabled>{{getLabel().CLOSE_JOB}}</a></li>
+        <li  *ngIf="!selectedJobProfile.isJobPostClosed" (click)="onRenewJob()"><a>Renew Job Post</a></li>
+        <li *ngIf="selectedJobProfile.isJobPosted && !selectedJobProfile.isJobPostClosed" (click)="closeJobPost(selectedJobProfile)"><a>{{getLabel().CLOSE_JOB}}</a></li>
       </ul>
     </div>
     <div id="matched-job" class="tab-pane fade in active "  *ngIf="selectedJobProfile!=undefined">
@@ -100,7 +100,9 @@
                       (addedTocart)="AddedToCart($event)" *ngIf="whichListVisible[0]" [candidateQlist]="candidateQlist"
                       [filterMeta]="filterMeta"
                       [candidates]="candidateQlist.matchedCandidates" [type]="'matchedList'" [jobId]="jobId"
-                      [recuirterListCountModel]="recruiterJobView" [isJobPostExpired]="selectedJobProfile.isJobPostExpired"></cn-q-card-view>
+                      [recuirterListCountModel]="recruiterJobView"
+                      [isJobPostExpired]="selectedJobProfile.isJobPostExpired"
+      [isJobPostClosed]="selectedJobProfile.isJobPostClosed"></cn-q-card-view>
       <p class="empty-list-message" *ngIf="recruiterJobView.numberOfMatchedCandidates==0">{{emptyListMessage}}</p>
 
     </div>
@@ -148,6 +150,7 @@
     <cn-job-clone [selectedJobId]="selectedJobId"  [selectedJobTitle]="selectedJobTitle"
                   [isCloneButtonClicked]="isCloneButtonClicked"  (raiseJobEditViewEventEmitter)="jobcloned($event)" ></cn-job-clone>
 
+      <cn-job-close [selectedJobTitleForClose]="selectedJobTitle" [isJobCloseButtonClicked]="isJobCloseButtonClicked"  [selectedJobProfile]="selectedJobProfile"></cn-job-close>
   </div>
   <tpl-footer></tpl-footer>
 </div>

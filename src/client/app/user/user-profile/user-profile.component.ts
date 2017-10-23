@@ -35,6 +35,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   model = new CandidateDetail();
   submitted = false;
   isSocialLogin: boolean;
+  isCompanyWebsiteValid: boolean=true;
   userForm: FormGroup;
   recruiterForm: FormGroup;
   filesToUpload: Array<File>;
@@ -74,7 +75,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
       'company_name': ['', Validators.required],
       'email': ['', [Validators.required, ValidationService.emailValidator]],
       'mobile_number': ['', [Validators.required, ValidationService.mobileNumberValidator]],
-      'company_website': ['', [Validators.required, ValidationService.urlValidator]]
+      'company_website': ['']
 
 
     });
@@ -99,6 +100,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
           this.getRecruiter();
         }
       }
+      LocalStorageService.setLocalValue(LocalStorage.ROLE_NAME, this.role);
     });
     var socialLogin: string = LocalStorageService.getLocalValue(LocalStorage.IS_SOCIAL_LOGIN);
     if (socialLogin === AppSettings.IS_SOCIAL_LOGIN_YES) {
@@ -178,22 +180,29 @@ export class UserProfileComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     this.submitted = true;
-    if(this.role === 'candidate') {
+    if(this.role === 'candidate' && this.userForm.valid) {
       this.model = this.userForm.value;
       this.dashboardService.updateProfile(this.model)
         .subscribe(
           user => this.onProfileUpdateSuccess(user),
           error => this.onProfileUpdateError(error));
-    }else {
+    }else if(this.recruiterForm.valid) {
       this.model = this.recruiterForm.value;
-      console.log(this.model );
+     if( this.model.company_website===''||
+       (this.model.company_website!=='' && this.model.company_website.match('[a-zA-Z0-9_\\-]+\\.[a-zA-Z0-9_\\-]+\\.[a-zA-Z0-9_\\-]'))) {
+       this.isCompanyWebsiteValid=true;
       this.dashboardService.changeRecruiterAccountDetails(this.model)
         .subscribe(
           user => this.onProfileUpdateSuccess(user),
           error => this.onProfileUpdateError(error));
+    }else {
+       this.isCompanyWebsiteValid=false;
+     }
     }
   }
-
+  onCompnayWebsite() {
+    this.isCompanyWebsiteValid=true;
+  }
   onProfileUpdateSuccess(result: any) {
 
     if (result !== null) {

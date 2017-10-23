@@ -10,6 +10,7 @@ import {ValidationService} from "../../shared/customvalidations/validation.servi
 import {Login} from "../models/login";
 import {LoginService} from "../../user/login/login.service";
 import {RegistrationService} from "../services/registration.service";
+import {Router} from "@angular/router";
 
 @Component({
   moduleId: module.id,
@@ -28,9 +29,9 @@ export class CandidateSignUpVerificationComponent {
   BODY_BACKGROUND: string;
   showModalStyle: boolean = false;
   private loginModel = new Login();
-  private submitStatus: boolean;
+  submitStatus: boolean;
 
-  constructor(private formBuilder: FormBuilder, private loginService: LoginService,
+  constructor(private formBuilder: FormBuilder, private loginService: LoginService, private _router: Router,
               private verifyPhoneService: CandidateSignUpVerificationService, private messageService: MessageService,
               private registrationService: RegistrationService) {
 
@@ -94,12 +95,13 @@ export class CandidateSignUpVerificationComponent {
     message.isError = false;
     message.custom_message = Messages.MSG_SUCCESS_CHANGE_MOBILE_NUMBER;
     this.messageService.message(message);
-    setTimeout(() => {
+    this._router.navigate(['/profile/'+LocalStorageService.getLocalValue(LocalStorage.ROLE_NAME)]);
+    /*setTimeout(() => {
       window.localStorage.clear();
       let host = AppSettings.HTTP_CLIENT + window.location.hostname;
       window.location.href = host;
     }, 2000);
-
+*/
   }
 
   verifyFail(error: any) {

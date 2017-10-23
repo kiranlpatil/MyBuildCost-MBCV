@@ -30,23 +30,23 @@ export class CompanyDetailsComponent implements OnInit {
   companyDocumentMessage: string= Messages.MSG_COMPANY_DOCUMENTS;
   uploadFileMessage: string= Messages.MSG_UPLOAD_FILE;
   private model = new CompanyDetails();
-  private companyDetailsForm: FormGroup;
+  companyDetailsForm: FormGroup;
   private filesToUpload: Array<File>;
-  private setOfDocuments: string[] = new Array(3);
+  setOfDocuments: string[] = new Array(3);
   private image_path: any;
-  private error_msg: string;
-  private isShowErrorMessage: boolean = true;
+  error_msg: string;
+  isShowErrorMessage: boolean = true;
   private isDescriptionEntered: boolean = false;
-  private isDocumentUploaded: boolean = true;
+  isDocumentUploaded: boolean = true;
   private BODY_BACKGROUND: string;
   private submitted = false;
-  private fileName1: string;
-  private fileName2: string;
-  private fileName3: string;
+  fileName1: string;
+  fileName2: string;
+  fileName3: string;
   private buttonId: string;
-  private submitStatus: boolean;
-  private isUploadedImages : boolean[] = [false,false,false];
-  private isLoaderImages : boolean[] = [true,true,true];
+  submitStatus: boolean;
+  isUploadedImages : boolean[] = [false,false,false];
+  isLoaderImages : boolean[] = [true,true,true];
   tooltipMessage: string = '<ul><li>' +
     '<p>1. '+Tooltip.COMPANY_DETAILS_TOOLTIP+'</p></li></ul>';
 

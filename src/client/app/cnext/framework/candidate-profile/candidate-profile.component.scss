@@ -19,19 +19,19 @@
   -webkit-box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.4);
   -moz-box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.4);
   box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.4);
-  height: 80px;
+  height: 60px;
   left: 0;
   margin: 0 auto;
-  padding-top: 6px;
+  padding-top: 12px;
   position: fixed;
-  top: 0;
+  top: 50px;
   width: 100%;
   z-index: 999;
 }
 
 .bar {
   counter-reset: step;
-  margin: 13px auto;
+  margin: 0 auto;
   padding: 0 10px 0 0;
   width: 975px;
 
@@ -54,11 +54,12 @@
     width: 20%;
 
     p {
+      color: $page-header-text;
+      font-size: 10px;
       margin: -5px 0;
-      color: $white;
       opacity: 1;
-      font-size: 12px;
       padding: 0 0 3px;
+      text-transform: uppercase;
     }
 
     &::before {
@@ -133,12 +134,12 @@
     }
 
     p {
-      top: -9px;
-      border-bottom: 2px solid $current-border;
-      width: auto;
+      border-bottom: 2px solid transparent;
       display: inline-block;
-      position: relative;
       opacity: 1;
+      position: relative;
+      top: -9px;
+      width: auto;
     }
   }
 }
@@ -256,6 +257,22 @@
 
 .toggle-switch-container {
   float: right;
+}
+
+.submit-view-profile-btn {
+  background: $bg-tabs;
+  bottom: 5px;
+  display: table;
+  left: 0;
+  margin: 7px auto;
+  padding: 10px;
+  position: fixed;
+  text-align: center;
+  width: 100%;
+}
+
+.profile-visibility-wrapper {
+  margin-bottom: 50px;
 }
 
 @media only screen and (max-width: 1280px) {
@@ -384,6 +401,10 @@
       min-height: 60px;
       padding: 15px 0 0;
     }
+  }
+  .submit-view-profile-btn {
+    bottom: -15px;
+    z-index: 9999;
   }
 }
 

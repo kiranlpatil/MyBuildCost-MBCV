@@ -16,14 +16,14 @@
           <span class="icon-bar"></span>
         </button>
 
-        <a class="navbar-brand" (click)="redirectToRecruiterDashboard(); closeMenu($event);"><img
-          src={{MY_LOGO}}></a>
+        <!--TODO Abhijeet <a class="navbar-brand" (click)="redirectToRecruiterDashboard(); closeMenu($event);"><img
+          src={{MY_LOGO}}></a>-->
+        <a class="navbar-brand" (click)="redirectToRecruiterDashboard(); closeMenu();"><img
+          src={{getImagePath().MOBILE_WHITE_LOGO}}></a>
       </div>
 
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" [class.in]="isClassVisible" id="bs-example-navbar-collapse-1">
-
-
         <ul class="nav navbar-nav navbar-right">
           <li class="dropdown last-child">
             <div class="dropdown">
@@ -36,20 +36,20 @@
                   <h4>{{company_name}}</h4>
                 </li>
                 <li class="divider"></li>
-                <li role="menuitem">
-                  <a class="dropdown-item"
+                <li role="menuitem" [routerLinkActive]="['active']">
+                  <a class="dropdown-item" [routerLink]="['/recruiterdashboard']"
                      (click)="redirectToRecruiterDashboard(); toggleMenu();">
                     <span class="glyphicon glyphicon-th"></span>My Dashboard
                   </a>
                 </li>
                 <li role="menuitem" [routerLinkActive]="['active']">
-                  <a class="dropdown-item" [routerLink]="['settings']"
+                  <a class="dropdown-item" [routerLink]="['/settings/recruiter']"
                      (click)="navigateTo('/settings/recruiter'); toggleMenu();">
                     <span class="glyphicon glyphicon-lock"></span>Change Password
                   </a>
                 </li>
                 <li role="menuitem" [routerLinkActive]="['active']">
-                  <a class="dropdown-item" [routerLink]="['profile']"
+                  <a class="dropdown-item" [routerLink]="['/profile/recruiter']"
                      (click)="navigateTo('/profile/recruiter'); toggleMenu();">
                     <span class="glyphicon glyphicon-list-alt"></span>Account Details
                   </a>

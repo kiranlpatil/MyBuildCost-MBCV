@@ -5,7 +5,6 @@
 
   "build.dev": [
     "initialize",
-    "check.versions",
     "clean.once",
     "build.server",
     "copy.server.assets",
@@ -13,7 +12,6 @@
     "build.html_css",
     "build.js.dev",
     "build.index.dev",
-    "build.bundle.rxjs",
     "sw.manifest.static"
   ],
 
@@ -69,14 +67,16 @@
     "minify.bundles",
     "build.index.prod",
     "sw.manifest.static",
-    "minify.index"
+    "minify.index",
+    "build.config.copy.prod",
+    "build-root-json.copy.prod"
   ],
 
   "build.prod.rollup.aot": [
     "initialize",
     "check.tools",
     "clean.prod",
-    "tslint",
+
     "build.server",
     "copy.server.assets",
     "build.assets.prod",

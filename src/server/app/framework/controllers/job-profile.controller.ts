@@ -243,6 +243,8 @@ export function cloneJob(req: express.Request, res: express.Response, next: any)
         newJob.sharedLink='';
         newJob.postingDate = new Date();
         newJob.candidate_list=[];
+        newJob.isJobPostClosed = false;
+        newJob.jobCloseReason = null;
 
         newJob.expiringDate = new Date((new Date().getTime() + ConstVariables.JOB__EXPIRIY_PERIOD));
         var recruiterService = new RecruiterService();
@@ -267,3 +269,4 @@ export function cloneJob(req: express.Request, res: express.Response, next: any)
     res.status(403).send({message: e.message});
   }
 }
+

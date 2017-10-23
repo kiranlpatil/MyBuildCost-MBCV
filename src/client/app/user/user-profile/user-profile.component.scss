@@ -1,6 +1,14 @@
 @import '../../../css/common';
 @import '../../../css/variables';
 
+.error-messages {
+  color: $error-messages;
+  font-size: 10px;
+  font-style: italic;
+  margin: 0;
+  position: absolute;
+  line-height: 15px;
+}
 .dashboard-profile {
   text-align: left;
   display: table-cell;

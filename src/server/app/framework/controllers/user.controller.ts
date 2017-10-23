@@ -1061,6 +1061,20 @@ export function getEducation(req: express.Request, res: express.Response) {
   }
 }
 
+
+export function getCloseJobReasons(req: express.Request, res: express.Response) {
+  __dirname = './';
+  var filepath = "closeJob.json";
+  try {
+    res.sendFile(filepath, {root: __dirname});
+  }
+  catch (e) {
+    res.status(403).send({message: e.message});
+  }
+}
+
+
+
 export function getExperience(req: express.Request, res: express.Response) {
   __dirname = './';
   var filepath = "experienceList.json";

@@ -10,21 +10,25 @@ class RecruiterRepository extends RepositoryBase<IRecruiter> {
     super(RecruiterSchema);
   }
 
-  getJobProfileQCard(recruiters:any[], candidate:CandidateModel, jobProfileIds:string[], isSearchView:string, callback:(error:any, result:any) => void) {
-    let isSend : boolean = false;
+  getJobProfileQCard(recruiters: any[], candidate: CandidateModel, jobProfileIds: string[], isSearchView: string, callback: (error: any, result: any) => void) {
+    let isSend: boolean = false;
     let jobs_cards: JobQCard[] = new Array(0);
-    if(recruiters.length === 0) {
+    if (recruiters.length === 0) {
       callback(null, jobs_cards);
     }
     for (let recruiter of recruiters) {
       for (let job of recruiter.postedJobs) {
-        if(!job.isJobPosted) {
+        let isreleventIndustryMatch = false
+        if (job.releventIndustries.indexOf(candidate.industry.name) !== -1) {
+          isreleventIndustryMatch = true;
+        }
+        if (!job.isJobPosted || (candidate.industry.code !== job.industry.code && !isreleventIndustryMatch) || job.isJobPostExpired) {
           continue;
         }
         let isPresent: boolean = false;
         for (let proficiency of candidate.proficiencies) {
           if (job.proficiencies.indexOf(proficiency) !== -1) {
-            if(job.interestedIndustries.indexOf('None') !== -1) {
+            if (job.interestedIndustries.indexOf('None') !== -1) {
               isPresent = true;
               break;
             }
@@ -56,7 +60,7 @@ class RecruiterRepository extends RepositoryBase<IRecruiter> {
           }
           let job_qcard: JobQCard = new JobQCard();
           job_qcard.matching = 0;
-          let count : number = 0;
+          let count: number = 0;
           for (let cap in job.capability_matrix) {
             if (job.capability_matrix[cap] == -1 || job.capability_matrix[cap] == 0 || job.capability_matrix[cap] == undefined) {
             } else if (job.capability_matrix[cap] == candidate.capability_matrix[cap]) {
@@ -80,7 +84,7 @@ class RecruiterRepository extends RepositoryBase<IRecruiter> {
           job_qcard.company_name = recruiter.company_name;
           job_qcard.company_size = recruiter.company_size;
           job_qcard.company_logo = recruiter.company_logo;
-          job_qcard.company_website= recruiter.company_website;
+          job_qcard.company_website = recruiter.company_website;
           job_qcard.salaryMinValue = job.salaryMinValue;
           job_qcard.salaryMaxValue = job.salaryMaxValue;
           job_qcard.experienceMinValue = job.experienceMinValue;
@@ -101,19 +105,19 @@ class RecruiterRepository extends RepositoryBase<IRecruiter> {
           }
         }
       }
-      if(recruiters.indexOf(recruiter) == recruiters.length - 1) {
-          isSend= true;
-          jobs_cards.sort((first: JobQCard,second : JobQCard):number=> {
-            if((first.above_one_step_matching+first.exact_matching) >(second.above_one_step_matching+second.exact_matching) ){
-              return -1;
-            }
-            if((first.above_one_step_matching+first.exact_matching) < (second.above_one_step_matching+second.exact_matching) ) {
-              return 1;
-            }
-            return 0;
-          });
-          callback(null, jobs_cards);
-        }
+      if (recruiters.indexOf(recruiter) == recruiters.length - 1) {
+        isSend = true;
+        jobs_cards.sort((first: JobQCard, second: JobQCard): number => {
+          if ((first.above_one_step_matching + first.exact_matching) > (second.above_one_step_matching + second.exact_matching)) {
+            return -1;
+          }
+          if ((first.above_one_step_matching + first.exact_matching) < (second.above_one_step_matching + second.exact_matching)) {
+            return 1;
+          }
+          return 0;
+        });
+        callback(null, jobs_cards);
+      }
     }
 
   }

@@ -1,4 +1,4 @@
-import {Component} from "@angular/core";
+import {Component, OnInit} from "@angular/core";
 import {Candidate} from "../../user/models/candidate";
 import {ErrorService} from "../../shared/services/error.service";
 import {UserData} from "../models/userData";
@@ -13,16 +13,20 @@ import {LoaderService} from "../../shared/loader/loaders.service";
   styleUrls: ['admin-dashboard.component.css']
 })
 
-export class AdminDashboardComponent {
-  private candidate: Candidate = new Candidate();
-  private userData: UserData = new UserData();
-  private numberOfCandidates: number = 0;
-  private numberOfRecruiters: number = 0;
+export class AdminDashboardComponent implements OnInit{
+  candidate: Candidate = new Candidate();
+  userData: UserData = new UserData();
+  numberOfCandidates: number = 0;
+  numberOfRecruiters: number = 0;
   public filterData: string[] = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q",
     "r", "s", "t", "u", "v", "w", "x", "y", "z"]
 
   constructor(private errorService: ErrorService, private loaderService: LoaderService,
               private adminDashboardService: AdminDashboardService,) {
+
+  }
+
+  ngOnInit(): void {
     this.loaderService.start();
     this.getUserProfile();
     this.getAllCandidates();

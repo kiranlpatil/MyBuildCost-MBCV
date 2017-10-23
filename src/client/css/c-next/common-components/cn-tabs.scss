@@ -73,6 +73,81 @@
   }
 }
 
+#recruiter-dashboard-tabs,
+#recruiter-job-dashboard-tabs {
+  border-bottom: 0;
+  background: $page-header-bg;
+  left: 100px;
+  position: fixed;
+  top: 0;
+  width: auto;
+  z-index: 1004;
+
+   li {
+     margin-left: 15px;
+     width: auto;
+
+     a {
+       background-color: transparent !important;
+       border: 0 solid transparent;
+       border-bottom: 4px solid transparent;
+       border-radius: 0;
+       color: $white;
+       font-family: 'gothamrnd-light';
+       font-size: 12px;
+       padding: 15px 5px 14px 30px;
+       top: 0;
+       text-transform: uppercase;
+
+       &:focus,
+       &:hover {
+         color: $white;
+       }
+     }
+
+     a > .icon-dashboard {
+       background: url('../../assets/c-next/card-view/sprite.png') no-repeat -5px -770px;
+     }
+
+     a > .icon-candidate-search {
+       background: url('../../assets/c-next/card-view/sprite.png') no-repeat -82px -770px;
+     }
+
+     a > span {
+       height: 20px;
+       left: 0;
+       position: absolute;
+       top: 15px;
+       width: 20px;
+       z-index: 1056;
+     }
+
+     .btn-new-job {
+       background-color: $theme-color !important;
+       border: 0 !important;
+       border-radius: 4px;
+       color: $white !important;
+       height: 30px;
+       margin-top: 10px;
+       padding: 7px 10px;
+     }
+   }
+
+   .active {
+     a {
+       background: transparent !important;
+       border-bottom: 4px solid $theme-color !important;
+       color: $white !important;
+     }
+
+     .btn-new-job {
+       background-color: $theme-color !important;
+       border: 0 !important;
+       color: $white !important;
+     }
+   }
+ }
+
 .tab-content {
   border-top-color: transparent;
 }

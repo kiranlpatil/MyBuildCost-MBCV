@@ -79,5 +79,4 @@ export class CandidateHeaderComponent {
     this.highlightedSection.name = 'GuideTour';
     this.closeMenu();
   }
-
 }

@@ -30,13 +30,13 @@ export class JobCompareViewComponent implements OnChanges,OnInit {
   @Input() typeOfView : string ='compact';
   @Output() close : EventEmitter<boolean> = new EventEmitter();
   private recruiterId: string;
-  private data: any;
-  private recruiter : Recruiter;
+  data: any;
+  recruiter : Recruiter;
   private secondaryCapabilities: string[] = new Array(0);
   private guidedTourImgOverlayScreensStackViewPath:string;
-  private guidedTourImgOverlayScreensStackView:string;
-  private guidedTourStatus:string[] = new Array(0);
-  private isCandidate: boolean = false;
+  guidedTourImgOverlayScreensStackView:string;
+  guidedTourStatus:string[] = new Array(0);
+  isCandidate: boolean = false;
   constructor(private jobCompareService: JobCompareService,
               private errorService: ErrorService,
               private profileCreatorService : CandidateProfileService,

@@ -16,16 +16,31 @@
                        [highlightedSection]="highlightedSection"
                        (onComplete)="selectCapability($event)" [hidden]="!isShowCapability"></cn-capabilities>
     <div class="wrapper" [hidden]="!isShowComplexity">
-      <cn-complexities [roles]="rolesForComplexity" [complexities]="jobPosterModel.capability_matrix"
+      <!--<cn-complexities [roles]="rolesForComplexity" [complexities]="jobPosterModel.capability_matrix"
                        [highlightedSection]="highlightedSection"
                        [isComplexityPresent]="isComplexityPresent"
                        (onComplextyAnswered)="onComplextyAnswered($event)"
-                       (onComplete)="selectRoleFromComplexity($event)" [hidden]="!isShowComplexity"></cn-complexities>
+                       (onComplete)="selectRoleFromComplexity($event)" [hidden]="!isShowComplexity"></cn-complexities>-->
+      <!--<cn-complexities [roles]="rolesForComplexity" [complexities]="jobPosterModel.capability_matrix"
+                       [highlightedSection]="highlightedSection"
+
+                       (onComplextyAnswered)="onComplextyAnswered($event)"
+                       (onComplete)="selectRoleFromComplexity($event)" [hidden]="!isShowComplexity"></cn-complexities>-->
+      <cn-complexities [roles]="rolesForComplexity" [complexities]="jobPosterModel.capability_matrix"
+                       [highlightedSection]="highlightedSection"
+
+                       (onComplextyAnswered)="onComplextyAnswered($event)"
+                       (onComplete)="selectRoleFromComplexity()" [hidden]="!isShowComplexity"></cn-complexities>
     </div>
     <div class="wrapper" [hidden]="!isShowProficiency">
-      <cn-job-proficiencies [proficiencies]="proficiencies" [jobPosterModel]="jobPosterModel"
+      <!--TODO Abhijeet <cn-job-proficiencies [proficiencies]="proficiencies" [jobPosterModel]="jobPosterModel"
                             [highlightedSection]="highlightedSection"
                             (onComplete)="selectProficiency($event)" (onNextComplete)="onProficiencyComplete($event)"
+                            [hidden]="!isShowProficiency">
+      </cn-job-proficiencies>-->
+      <cn-job-proficiencies [proficiencies]="proficiencies" [jobPosterModel]="jobPosterModel"
+                            [highlightedSection]="highlightedSection"
+                            (onComplete)="selectProficiency($event)" (onNextComplete)="onProficiencyComplete()"
                             [hidden]="!isShowProficiency">
       </cn-job-proficiencies>
 
@@ -63,8 +78,8 @@
         <button class="btn btn-default dropdown-toggle btn-menu" type="button" data-toggle="dropdown"><span
                 class="glyphicon glyphicon-option-horizontal"></span></button>
         <ul class="dropdown-menu">
-          <li (click)="raiseCloneEvent(item)"><a>{{getLabel().CLONE_JOB}}</a></li>
-          <li><a disabled>{{getLabel().CLOSE_JOB}}</a></li>
+          <!--<li (click)="raiseCloneEvent(item)"><a>{{getLabel().CLONE_JOB}}</a></li>-->
+          <li><a>{{getLabel().CLONE_JOB}}</a></li>
         </ul>
       </div>
     </div>
@@ -73,7 +88,8 @@
     </div>
 
   </div>
-  <div class="dropup ask-expert" *ngIf="role==='recruiter' && jobPosterModel && jobPosterModel._id !==''">
+  <div class="dropup ask-expert" *ngIf="role==='recruiter' && jobId !== undefined && jobId !==''">
+
     <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown" type="button" (click)="buildJobShareUrl()" >
       <span class="label">{{getLabel().ASK_EXPERT}}</span>
     </button>
@@ -98,7 +114,8 @@
     <div class="modal-dialog modal-md">
       <div class="modal-content">
         <div class="modal-header">
-          <button type="button" class="close" (click)="onCancel()">
+          <!--<button type="button" class="close" (click)="onCancel()">-->
+          <button type="button" class="close">
             <span>&times;</span>
           </button>
           <h5 class="modal-title">{{getHeading().POST_JOB}}</h5>

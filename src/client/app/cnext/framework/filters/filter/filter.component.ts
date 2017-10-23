@@ -23,22 +23,31 @@ export class FilterComponent {
 
 
   private isShowJobFilter: boolean = false;
-  private isFilterVisible: boolean = false;
-  private proficiencyList: string[] = new Array(0);
+  isFilterVisible: boolean = false;
+  proficiencyList: string[] = new Array(0);
   private locationList: string[] = new Array(0);
-  private experienceRangeList: string[] = new Array(0);
-  private educationList: string[] = new Array(0);
-  private jointimeList: string[] = new Array(0);
-  private industryList: string[] = new Array(0);
-  private salaryRangeList: string[] = new Array(0);
+  experienceRangeList: string[] = new Array(0);
+  educationList: string[] = new Array(0);
+  jointimeList: string[] = new Array(0);
+  industryList: string[] = new Array(0);
+  salaryRangeList: string[] = new Array(0);
   private companySizeList: string[] = new Array(0);
   private queryList: string[] = new Array(0);
-  private qCardFilter: QCardFilter = new QCardFilter();
+  qCardFilter: QCardFilter = new QCardFilter();
   private location: string[] = new Array(0);
   private All = 'All';
-  private userForm: FormGroup;
-  private isRecuirter: boolean;
-  private showClearFilter: boolean;
+  userForm: FormGroup;
+  isRecuirter: boolean;
+  showClearFilter: boolean;
+  openEducationPanel: boolean = false;
+  openExperiencePanel: boolean = false;
+  openSalaryPanel: boolean = false;
+  openCompanySizePanel: boolean = false;
+  openLocationPanel: boolean = false;
+  openCurrentLocationPanel: boolean = false;
+  openKeyskillsPanel: boolean = false;
+  openJoiningPeriodPanel: boolean = false;
+  openDomainPanel: boolean = false;
 
   constructor(private formBuilder: FormBuilder,
               private errorService:ErrorService,

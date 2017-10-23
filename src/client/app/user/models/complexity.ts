@@ -10,4 +10,5 @@ export class Complexity {
   questionForRecruiter: string = '';
   match: string;
   answer: string;
+  complexityNote:string;
 }

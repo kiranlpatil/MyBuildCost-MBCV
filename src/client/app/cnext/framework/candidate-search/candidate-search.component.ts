@@ -26,12 +26,12 @@ import { SearchEventCompare } from '../model/search-event-compare';
 
 export class CandidateSearchComponent implements OnChanges {
 
-  private searchValue:string = '';
+  searchValue:string = '';
   private showModalStyle: boolean = false;
-  private candidateDataList:CandidateSearch[] = new Array(0);
-  private listOfJobs:JobQcard[] = new Array(0);
+  candidateDataList:CandidateSearch[] = new Array(0);
+  listOfJobs:JobQcard[] = new Array(0);
   private candidateDetails:CandidateDetail = new CandidateDetail();
-  private candidate:Candidate = new Candidate();
+  candidate:Candidate = new Candidate();
   private userId:string;
   private msgSearchResultNotFound:string = Messages.MSG_CANDIDATE_SEARCH_NOT_FOUND;
   private msgCandidateNotFound:string = Messages.MSG_CANDIDATE_NOT_FOUND;
@@ -40,12 +40,12 @@ export class CandidateSearchComponent implements OnChanges {
   private candidateId:string;
   private jobId:string;
   private job:JobQcard;
-  private isShowJobCompareView:boolean = false;
-  private checkButttons:boolean;
+  isShowJobCompareView:boolean = false;
+  checkButttons:boolean;
   private candidateDetailsJobMatching:CandidateDetailsJobMatching = new CandidateDetailsJobMatching();
-  private inCartListedStatusForSearchView:boolean = false;
-  private inRejectListedStatusForSearchView:boolean = false;
-  private isCandidateFound:boolean;
+  inCartListedStatusForSearchView:boolean = false;
+  inRejectListedStatusForSearchView:boolean = false;
+  isCandidateFound:boolean;
   private isShowSuggestionToasterMsg:boolean = false;
 
 

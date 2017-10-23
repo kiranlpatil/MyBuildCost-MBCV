@@ -325,6 +325,7 @@ class SearchService {
     profileComparisonResult.lockedOn = candidate.lockedOn;
     profileComparisonResult.match_map = {};
     profileComparisonResult.capabilityMap = {};
+    profileComparisonResult.complexity_note_matrix = candidate.complexity_note_matrix;
     return profileComparisonResult;
   }
 
@@ -491,6 +492,9 @@ class SearchService {
               });
               match_view.capability_name = capability.name;
               match_view.complexity_name = complexity.name;
+              if(newCandidate.complexity_note_matrix && newCandidate.complexity_note_matrix[cap]) {
+                match_view.complexityNote = newCandidate.complexity_note_matrix[cap];
+              }
               if(job_scenarios[0]) {
                 match_view.job_scenario_name= job_scenarios[0].name;
               }
@@ -532,6 +536,9 @@ class SearchService {
               });
               match_view.capability_name = capability.name;
               match_view.complexity_name = complexity.name;
+              if(newCandidate.complexity_note_matrix && newCandidate.complexity_note_matrix[cap]) {
+                match_view.complexityNote = newCandidate.complexity_note_matrix[cap];
+              }
               if(job_scenarios[0]){
                 match_view.job_scenario_name=job_scenarios[0].name;
               }

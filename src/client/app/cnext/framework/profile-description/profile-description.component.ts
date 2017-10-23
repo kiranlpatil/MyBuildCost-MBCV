@@ -42,15 +42,15 @@ export class ProfileDescriptionComponent implements OnInit {
   private experienceValidationMessage= Messages.MSG_ERROR_VALIDATION_EXPERIENCE_REQUIRED;
   private locationErrorMessage = Messages.MSG_ERROR_VALIDATION_LOCATION_REQUIRED;
   private invalidLocationErrorMessage = Messages.MSG_ERROR_VALIDATION_INVALID_LOCATION;
-  private guidedTourStatus: string[] = new Array(0);
-  private guidedTourImgOverlayScreenBasicInfo: string;
+  guidedTourStatus: string[] = new Array(0);
+  guidedTourImgOverlayScreenBasicInfo: string;
   private storedLocation: Location = new Location();
   formatted_address : string = 'Aurangabad, Bihar, India';
   private isLocationInvalid : boolean=false;
   private isLocationEmpty: boolean = false;
   private containsWhiteSpace: boolean = false;
   private noWhiteSpaceAllowedMessage = Messages.MSG_ERROR_JOB_TITLE_INVALID_BLANK_SPACE;
-  private isGuideImg: boolean;
+  isGuideImg: boolean;
   gotItMessage: string = Headings.GOT_IT;
 
   tooltipMessage: string =

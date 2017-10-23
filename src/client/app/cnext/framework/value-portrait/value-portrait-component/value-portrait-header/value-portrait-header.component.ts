@@ -12,7 +12,7 @@ import {Router} from "@angular/router";
 
 export class ValuePortraitHeader {
 
-  @Input() private candidate: Candidate;
+  @Input() candidate: Candidate;
 
   constructor(private _router: Router) {
 

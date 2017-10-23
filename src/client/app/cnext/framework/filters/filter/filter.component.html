@@ -9,8 +9,8 @@
         <span *ngIf="isRecuirter">Candidate</span> Filters
       </h4>
       <div class="inner col-sm-12">
-        <h5 data-toggle="collapse" href="#education"
-            [class.panel-up]="arrow" [class.panel-down]="!arrow" (click)="arrow=!arrow">Education</h5>
+        <h5 data-toggle="collapse" href="#education" (click)="openEducationPanel=!openEducationPanel"
+            [ngClass]="{'panel-up': openEducationPanel , 'panel-down': !openEducationPanel }">Education</h5>
         <div id="education" class="collapse">
           <div *ngFor="let itemList of educationList">
             <label class="checkbox">
@@ -20,8 +20,9 @@
           </div>
         </div>
 
-        <h5 data-toggle="collapse" href="#experience"
-            [class.panel-up]="arrow1" [class.panel-down]="!arrow1" (click)="arrow1=!arrow1">Experience <b
+        <h5 data-toggle="collapse" href="#experience" (click)="openExperiencePanel=!openExperiencePanel"
+            [ngClass]="{'panel-up': openExperiencePanel , 'panel-down': !openExperiencePanel }"
+            >Experience <b
           class="small-label">(In Year)</b></h5>
         <div id="experience" class="min-max-values clearfix  collapse">
           <div class="col-sm-6 padding-right5">
@@ -46,8 +47,9 @@
           </div>
         </div>
 
-        <h5 data-toggle="collapse" href="#salary"
-            [class.panel-up]="arrow2" [class.panel-down]="!arrow2" (click)="arrow2=!arrow2">Salary Range <b
+        <h5 data-toggle="collapse" href="#salary" (click)="openSalaryPanel=!openSalaryPanel"
+            [ngClass]="{'panel-up': openSalaryPanel , 'panel-down': !openSalaryPanel }"
+            >Salary Range <b
           class="small-label">(In Lacs)</b></h5>
         <div id="salary" class="min-max-values clearfix collapse">
           <div class="col-sm-6 padding-right5">
@@ -70,8 +72,8 @@
           </div>
         </div>
         <div *ngIf="!isRecuirter">
-          <h5 data-toggle="collapse" href="#company-size"
-              [class.panel-up]="arrow8" [class.panel-down]="!arrow8" (click)="arrow8=!arrow8"
+          <h5 data-toggle="collapse" href="#company-size" (click)="openCompanySizePanel=!openCompanySizePanel"
+              [ngClass]="{'panel-up': openCompanySizePanel , 'panel-down': !openCompanySizePanel }"
               class="company-size-label">Company Size</h5>
           <div id="company-size" class="collapse">
             <select formControlName="companysize" (change)="filterByCompanySize($event.target.value)">
@@ -81,8 +83,9 @@
           </div>
         </div>
         <div *ngIf="!isRecuirter">
-          <h5 data-toggle="collapse" href="#joblocation"
-              [class.panel-up]="arrow7" [class.panel-down]="!arrow7" (click)="arrow7=!arrow7" class="location-label">
+          <h5 data-toggle="collapse" href="#joblocation" (click)="openLocationPanel=!openLocationPanel"
+              [ngClass]="{'panel-up': openLocationPanel , 'panel-down': !openLocationPanel }"
+               class="location-label">
             Location</h5>
           <div id="joblocation" class="collapse">
             <select formControlName="location" (change)="jobsFilterByLocation($event.target.value)">
@@ -93,8 +96,8 @@
         </div>
 
         <div *ngIf="isRecuirter">
-          <h5 data-toggle="collapse" href="#location"
-              [class.panel-up]="arrow3" [class.panel-down]="!arrow3" (click)="arrow3=!arrow3"
+          <h5 data-toggle="collapse" href="#location" (click)="openCurrentLocationPanel=!openCurrentLocationPanel"
+              [ngClass]="{'panel-up': openCurrentLocationPanel , 'panel-down': !openCurrentLocationPanel }"
               class="current-location-label">Current Location</h5>
           <div id="location" class="collapse">
             <label class="radio">
@@ -109,8 +112,9 @@
           </div>
         </div>
 
-        <h5 data-toggle="collapse" href="#proficiencies"
-            [class.panel-up]="arrow4" [class.panel-down]="!arrow4" (click)="arrow4=!arrow4">Key Skills</h5>
+        <h5 data-toggle="collapse" href="#proficiencies" (click)="openKeyskillsPanel=!openKeyskillsPanel"
+            [ngClass]="{'panel-up': openKeyskillsPanel , 'panel-down': !openKeyskillsPanel }"
+            >Key Skills</h5>
         <div id="proficiencies" class="collapse">
           <div *ngFor="let itemList of proficiencyList">
             <label class="checkbox">
@@ -120,8 +124,9 @@
           </div>
         </div>
 
-        <h5 data-toggle="collapse" href="#lead-time"
-            [class.panel-up]="arrow5" [class.panel-down]="!arrow5" (click)="arrow5=!arrow5">Lead Time to Join</h5>
+        <h5 data-toggle="collapse" href="#lead-time" (click)="openJoiningPeriodPanel=!openJoiningPeriodPanel"
+            [ngClass]="{'panel-up': openJoiningPeriodPanel , 'panel-down': !openJoiningPeriodPanel }"
+            >Lead Time to Join</h5>
         <div id="lead-time" class="collapse">
           <select formControlName="timetojoin" (change)="filterByJoinTime($event.target.value)">
             <option value="" selected></option>
@@ -129,8 +134,9 @@
           </select>
         </div>
 
-        <h5 data-toggle="collapse" href="#industry-exposure"
-            [class.panel-up]="arrow6" [class.panel-down]="!arrow6" (click)="arrow6=!arrow6">Domain Exposure</h5>
+        <h5 data-toggle="collapse" href="#industry-exposure" (click)="openDomainPanel=!openDomainPanel"
+            [ngClass]="{'panel-up': openDomainPanel , 'panel-down': !openDomainPanel }"
+            >Domain Exposure</h5>
         <div id="industry-exposure" class="collapse">
           <div *ngFor="let itemList of industryList">
             <label class="checkbox">

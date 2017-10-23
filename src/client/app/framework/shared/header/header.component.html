@@ -16,7 +16,9 @@
           <span class="icon-bar"></span>
         </button>
 
-        <a class="navbar-brand" (click)="navigateTo('/dashboard'); closeMenu($event);"><img
+        <!--TODO Abhijeet <a class="navbar-brand" (click)="navigateTo('/dashboard'); closeMenu($event);"><img
+          src={{MY_LOGO}}></a>-->
+        <a class="navbar-brand" (click)="navigateTo('/dashboard'); closeMenu();"><img
           src={{MY_LOGO}}></a>
         <span class="visible-xs mobile-notification">
                   <div class="dropdown" [class.open]="isOpenNotification">

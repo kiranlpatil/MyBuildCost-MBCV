@@ -36,7 +36,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
   LIGHT_THEME = AppSettings.LIGHT_THEM;
   APP_NAME: string;
   role: string;
-  private candidate: Candidate = new Candidate();
+  candidate: Candidate = new Candidate();
 
     constructor(private commonService: CommonService, private activatedRoute: ActivatedRoute,
                 private candidateProfileService: CandidateProfileService,

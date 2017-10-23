@@ -119,7 +119,7 @@ export class Messages {
   public static MSG_ERROR_VALIDATION_COMPANYNAME_REQUIRED = 'This field can\'t be left blank.';
   public static MSG_ERROR_VALIDATION_OTP_REQUIRED = 'Enter received OTP.';
   public static MSG_ERROR_VALIDATION_INVALID_EMAIL_REQUIRED = 'Enter a valid email address.';
-  public static MSG_ERROR_VALIDATION_INVALID_URL_REQUIRED = 'Website should be start with www';
+  public static MSG_ERROR_VALIDATION_INVALID_URL_REQUIRED = 'Website is not valid';
   public static MSG_ERROR_VALIDATION_INVALID_NAME = 'Enter valid name.';
   public static MSG_ERROR_VALIDATION_INVALID_DATA = 'Enter valid data.';
   public static MSG_ERROR_VALIDATION_PASSWORD_MISMATCHED = 'Passwords do not match.';
@@ -231,6 +231,7 @@ export class Messages {
   public static MSG_ACTIVATE_USER_1 = 'Congratulations! Welcome To JobMosis.';
   public static MSG_ACTIVATE_USER_2 = 'You can now find candidates using the highly accurate, simpler, faster and powerful solution.';
   public static MSG_ACTIVATE_USER_3 = 'Your account has been created successfully. Kindly click Sign In.';
+  public static MSG_VERIFICATION_EMAIL= 'Your account has been created successfully. Kindly click Sign In.';
   public static MSG_COMPANY_DOCUMENTS = 'Please upload relevant company documents to activate your account.';
   public static MSG_UPLOAD_FILE = 'Please select a file to upload.';
   public static MSG_ABOUT_US_DISCRIPTION = 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.' +
@@ -304,6 +305,8 @@ export class Messages {
     'submitting, you can edit by clicking on relevant section ' +
     '<br/> It is recommended that you keep the settings to "Yes". If you wish a job change, You can <br/>' +
   'change this setting later.';
+  public static GUIDED_TOUR_VALUE_PORTRAIT_MWSSAGE = 'You can share your value portrait on Social Media.';
+  public static GUIDED_TOUR_VALUE_PORTRAIT_GO_TO_DASHBOARD = 'Proceed to Job Matching Dashboard.';
 
   public static UNABLE_TO_RENEW_JOB_POST_MSG = 'Cannot renew your job post kindly click on "Clone" button to clone the same job';
   public static RENEW_JOB_POST_MSG = 'Your job post has been expired to renew your job click on "Renew Job Post" button';
@@ -311,8 +314,9 @@ export class Messages {
   public static NO_CANDIDATES_AVAILABLE = 'No candidates available for selected alphabet.';
   public static NO_RECRUITERS_AVAILABLE = 'No recruiters available for selected alphabet.';
   public static OTHERS_AOW_MESSAGE = 'Thank you for your interest in our Job post but currently we do not have your Area of Work, we will get back to you after building your Area of Work. For any query mail us on support@jobmosis.com or contact us on +91-8669601612 .';
+  public static SELECT_REASON_FOR_JOB_CLOSE = 'Please select a reason.';
   public static ASK_EXPERT_MESSAGE = 'You can copy and share this link to hiring manager to independently define the job description.\n' +
-      'On his completion you will receive an email.';
+      'On completion by hiring manager you will receive an email.';
 }
 export class AdminPanel {
   public static PUBLIC_PROFILE='Profile is public';
@@ -337,7 +341,7 @@ export class NavigationRoutes {
   public static APP_PROFILESUMMURY: string = '/profile_summary';
   public static APP_JOB_SUMMURY: string = '/job_summary';
   public static APP_COMPANYDETAILS: string = '/company_details';
-
+  public static APP_VLAUEPORTRAIT: string = '/value-portrait';
 }
 
 export class LocalStorage {
@@ -364,6 +368,7 @@ export class LocalStorage {
   public static EMAIL_ID = 'email_id';
   public static PASSWORD = 'password';
   public static MY_THEME = 'my_theme';
+  public static ROLE_NAME = 'role';
   public static VERIFY_PHONE_VALUE = 'verify_phone_value';
   public static CHANGE_MAIL_VALUE = 'change_mail_value';
   public static FROM_CANDIDATE_REGISTRATION = 'from_candidate_registration';
@@ -462,10 +467,11 @@ export class API {
   public static CANDIDATE_DETAILS = 'recruiter/jobProfile';
   public static CANDIDATESFROMLISTS = 'recruiter/jobProfile';
   public static RElEVENT_INDUSTRIES = 'releventindustries';
-  public static CLONE_JOB = 'job';
+  public static JOB = 'job';
   public static FAQ = '/blog/index.php/faq/';
   public static ACCEPT_TERMS = '/terms-and-conditions.php';
-  public static COUNT_OF_USERS = 'countofusers'
+  public static COUNT_OF_USERS = 'countofusers';
+
 }
 
 export class ImagePath {
@@ -516,6 +522,7 @@ export class ImagePath {
   public static CANDIDATE_OERLAY_SCREENS_PROFILE='candidate_overlay-screens-profile.jpg';
   public static CANDIDATE_OVERLAY_SCREENS_BASIC_INFO = 'candidate_overlay-screens-basic-info.jpg';
   public static CANDIDATE_OERLAY_SCREENS_STACK_VIEW='candidate_overlay-screens-stack-view.jpg';
+  public static CANDIDATE_VALUE_PORTRAIT_VIEW='candidate_value_portrait_view.jpg';
 
 
 }
@@ -650,6 +657,7 @@ export class Headings {
   public static CLONE_JOB: string = 'Clone Job';
   public static POST_JOB: string = 'Post New Job';
   public static ASK_EXPERT: string = 'Copy and Send Link';
+  public static CLOSE_JOB: string = 'Why you want to close this job?';
 }
 
 export class Label {
@@ -668,7 +676,7 @@ export class Label {
   public static CLONE_JOB: string = 'Clone Job';
   public static CLOSE_JOB: string = 'Close Job';
   public static VALUE_PORTRAIT_HEADER: string = 'Value Portrait';
-  public static VALUE_PORTRAIT_TITLE: string = 'Experience is what it\'s all about';
+  public static VALUE_PORTRAIT_TITLE: string = 'Bring Value to Work Add Job to Life';
   public static CORE_CAPABILITIES_TITLE: string = 'Core Capabilities';
   public static NOTE_OF_TRUST: string = 'Note of Trust';
   public static JOB_TITLE_LABEL: string = 'Job Title';
@@ -684,12 +692,17 @@ export class Label {
   public static REGISTER_AS_APPLICANT: string = 'Register as an applicant';
   public static REGISTER_AS_RECRUITER: string = 'Register as a recruiter';
   public static ASK_EXPERT: string = 'Share job with hiring manager for edit';
+  public static SHOW_CLOSED_JOBS: string = 'Show Closed Jobs';
+  public static POST_JOB: string = 'POST JOB';
+  public static CLOSED_JOB: string = 'CLOSED JOB';
 }
 
 export class Button {
   public static CHANGE_PASSWORD_BUTTON: string = 'Change Password';
   public static RESET_PASSWORD_BUTTON: string = 'RESET PASSWORD';
   public static CLONE_BUTTON: string = 'CLONE';
-  public static CANCEL_BUTTON: string = 'CANCEL';
+  public static CLOSE_BUTTON: string = 'CLOSE';
+  public static CANCEL_BUTTON: string = 'Cancel';
   public static VALUE_PORTRAIT_BUTTON: string = 'Create your Own Value Portrait';
+  public static SUBMIT_PROFILE: string = 'Submit Profile';
 }

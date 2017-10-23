@@ -34,10 +34,10 @@ export class MoreAboutMyselfComponent implements OnInit {
   tooltipMessage: string = '<ul><li><p>1. '+ Tooltip.MORE_ABOUT_MYSELF_TOOLTIP+'</p></li></ul>';
   private remainingWordsMessage = Messages.MSG_ERROR_VALIDATION_MAX_WORD_ALLOWED;
 
-  private guidedTourStatus:string[] = new Array(0);
-  private guidedTourImgOverlayScreensEmploymentHistory:string;
+  guidedTourStatus:string[] = new Array(0);
+  guidedTourImgOverlayScreensEmploymentHistory:string;
   private guidedTourImgOverlayScreensEmploymentHistoryPath:string;
-  private isGuideImg:boolean = false;
+  isGuideImg:boolean = false;
 
   constructor(private messageService: MessageService,private errorService:ErrorService,
               private profileCreatorService: CandidateProfileService,private guidedTourService:GuidedTourService) {

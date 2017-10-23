@@ -31,14 +31,14 @@ export class CapabilitiesComponent {
   private savedsecondaryNames: string[] = new Array(0);
   private primaryCapabilitiesNumber: number = 0;
   private disableButton: boolean = true;
-  private isCandidate: boolean = false;
+  isCandidate: boolean = false;
   private isValid: boolean = true;
   private validationMessage = Messages.MSG_ERROR_VALIDATION_CAPABILITIES_REQUIRED_RECRUITER;
   private capabilitiesCodes : string[]= new Array(0);
-  private guidedTourStatus:string[] = new Array(0);
-  private guidedTourImgOverlayScreensCapabilities: string;
+  guidedTourStatus:string[] = new Array(0);
+  guidedTourImgOverlayScreensCapabilities: string;
   //private guidedTourImgOverlayScreensComplexitiesPath:string;
-  private isGuideImg:boolean = false;
+  isGuideImg:boolean = false;
   private isInfoMessage: boolean = false;
 
   tooltipCandidateMessage: string =

@@ -15,7 +15,7 @@ export class ProfileComparisonComponent implements OnChanges {
 
   @Input() profileComparison:ProfileComparison;
   @Output() performActionOnComparisonList = new EventEmitter();
-  private profileComparisonData: ProfileComparisonData[] = new Array(0);
+  profileComparisonData: ProfileComparisonData[] = new Array(0);
   private profileComparisonJobData: CompareEntityDetails = new CompareEntityDetails();
 
   constructor(private profileComparisonService:ProfileComparisonService) {

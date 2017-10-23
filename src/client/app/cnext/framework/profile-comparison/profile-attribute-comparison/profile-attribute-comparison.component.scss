@@ -84,25 +84,29 @@
 
     .candidate-attribute-list .matching-attribute {
       @extend %text-ellipsis;
-      display: inline-block;
-      width: auto !important;
-      max-width: calc(100% - 10px);
-      position: relative;
       border: 1px solid $comparision-matching-attribute;
       border-radius: 25px;
-      padding: 5px 10px 5px 25px;
+      display: inline-block;
       margin: 5px;
+      max-width: calc(100% - 10px);
+      min-width: 100px;
+      min-height: 26px;
+      position: relative;
+      padding: 5px 10px 5px 25px;
+      width: auto !important;
     }
 
     .candidate-attribute-list .mismatch-attribute {
-      display: inline-block;
-      width: auto !important;
-      max-width: calc(100% - 10px);
-      position: relative;
       border: 1px solid $comparision-mismatch-attribute;
       border-radius: 25px;
-      padding: 5px 10px 5px 27px;
+      display: inline-block;
       margin: 5px;
+      max-width: calc(100% - 10px);
+      min-width: 100px;
+      min-height: 26px;
+      padding: 5px 10px 5px 27px;
+      position: relative;
+      width: auto !important;
     }
 
     .mismatch-attribute-icon {
