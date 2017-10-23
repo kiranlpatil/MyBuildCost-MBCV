@@ -39,7 +39,7 @@
         </cn-multi-select>
       </div>
 
-      <button class="btn-prev" (click)="onPrevious()"><span
+      <button *ngIf="!isOthers" class="btn-prev" (click)="onPrevious()"><span
         class="glyphicon glyphicon-chevron-left"></span></button>
 
       <div class="button-group clearfix">

@@ -59,6 +59,7 @@ export class CandidateProfileComponent implements OnInit, DoCheck, OnDestroy {
   private visiblitySetToNoMessage : string = Tooltip.PROFILE_INFO_VISIBILIT_SET_TO_NO;
   differ: any;
   public navIsFixed: boolean = false;
+  public isOthers: boolean;
 
   constructor(private _router: Router,
               private complexityService: ComplexityService,
@@ -165,6 +166,10 @@ export class CandidateProfileComponent implements OnInit, DoCheck, OnDestroy {
     }
   }
 
+  onOthers(isOthers: boolean) {
+    this.isOthers = isOthers;
+  }
+
   onCapabilityComplete(roles: Role[]) {
     this.candidate.industry.roles = roles;
     this.candidateForCapability = this.candidate.industry.roles;
@@ -257,7 +262,7 @@ export class CandidateProfileComponent implements OnInit, DoCheck, OnDestroy {
         error => this.errorService.onError(error));
   }
 
-  getCapability() { debugger
+  getCapability() {
     this.roleList = new Array(0);
     for (let role of this.candidate.industry.roles) {
       this.roleList.push(role.code);
@@ -368,8 +373,10 @@ export class CandidateProfileComponent implements OnInit, DoCheck, OnDestroy {
           if (this.candidate.industry.roles.length > 0) {
               if (this.candidate.industry.roles.length === 1 && this.candidate.industry.roles[0].code === '99999') {
                 this.highlightedSection.name = 'None';
+                this.isOthers = true;
               }
               else {
+                this.isOthers = false;
                 this.showCapability = true;
                 //this.getCapability();
                 this.whichStepsVisible[1] = true;

@@ -17,6 +17,7 @@ import {LocalStorageService} from "../../../shared/services/localstorage.service
 export class ProficienciesComponent {
   @Input() choosedproficiencies: string[];
   @Input() highlightedSection: Section;
+  @Input() isOthers: boolean;
   gotItMessage: string= Headings.GOT_IT;
   private proficiencies: string[];
   @Output() onComplete = new EventEmitter();
