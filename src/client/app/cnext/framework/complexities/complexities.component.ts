@@ -21,6 +21,7 @@ import {ErrorService} from "../../../shared/services/error.service";
 export class ComplexitiesComponent implements OnInit, OnChanges {
   @Input() roles: Role[] = new Array(0); //TODO remove this
   @Input() complexities: any; //TODO why this is of type of ANY
+  @Input() complexityNotes: any; //TODO why this is of type of ANY
   @Output() onComplete = new EventEmitter();
   @Output() onComplextyAnswered = new EventEmitter();
   @Input() highlightedSection: Section;
@@ -215,6 +216,9 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
       let tempIndex = "d" + this.complexityIds[this.currentComplexity];
       this.complexities[tempIndex] = complexityDetail.userChoice;
      }*/
+    if(this.isCandidate && complexityDetail.complexityNote !== undefined) {
+      this.complexityNotes[this.complexityIds[this.currentComplexity]] = complexityDetail.complexityNote.substring(0,2000);
+    }
     this.complexityData[this.complexityIds[this.currentComplexity]] = complexityDetail;
     //this.onNext();
   }

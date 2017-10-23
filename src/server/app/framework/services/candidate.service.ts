@@ -185,12 +185,12 @@ class CandidateService {
     customCandidate.isSubmitted = candidate.isSubmitted;
     customCandidate.isVisible = candidate.isVisible;
     customCandidate.isCompleted = candidate.isCompleted;
-    customCandidate.capabilities = this.getCapabilitiesBuild(candidate.capability_matrix, candidate.industry.roles, industries);
+    customCandidate.capabilities = this.getCapabilitiesBuild(candidate.capability_matrix,candidate.complexity_note_matrix, candidate.industry.roles, industries);
 
     return customCandidate;
   }
 
-  getCapabilitiesBuild(capability_matrix: any, roles: RoleModel[], industries: IndustryModel[]): CapabilitiesClassModel[] {
+  getCapabilitiesBuild(capability_matrix: any,complexity_note_matrix:any, roles: RoleModel[], industries: IndustryModel[]): CapabilitiesClassModel[] {
     let capabilities: CapabilitiesClassModel[] = new Array(0);
 
     for (let cap in capability_matrix) {
@@ -225,6 +225,9 @@ class CandidateService {
                       newComplexity.name = complexity.name;
                       newComplexity.sort_order = complexity.sort_order;
                       newComplexity.code = complexity.code;
+                      if(complexity_note_matrix[cap] !== undefined) {
+                        newComplexity.note = complexity_note_matrix[cap];
+                      }
                       if (complexity.questionForCandidate !== undefined && complexity.questionForCandidate !== null && complexity.questionForCandidate !== '') {
                         newComplexity.questionForCandidate = complexity.questionForCandidate;
                       } else {
@@ -262,6 +265,9 @@ class CandidateService {
                         newComplexity.name = complexity.name;
                         newComplexity.sort_order = complexity.sort_order;
                         newComplexity.code = complexity.code;
+                        if(complexity_note_matrix[cap] !== undefined) {
+                          newComplexity.note = complexity_note_matrix[cap];
+                        }
                         if (complexity.questionForCandidate !== undefined && complexity.questionForCandidate !== null && complexity.questionForCandidate !== '') {
                           newComplexity.questionForCandidate = complexity.questionForCandidate;
                         } else {
@@ -311,6 +317,9 @@ class CandidateService {
                       newComplexity.name = complexity.name;
                       newComplexity.sort_order = complexity.sort_order;
                       newComplexity.code = complexity.code;
+                      if(complexity_note_matrix[cap] !== undefined) {
+                        newComplexity.note = complexity_note_matrix[cap];
+                      }
                       if (complexity.questionForCandidate !== undefined && complexity.questionForCandidate !== null && complexity.questionForCandidate !== '') {
                         newComplexity.questionForCandidate = complexity.questionForCandidate;
                       } else {
@@ -348,6 +357,9 @@ class CandidateService {
                         newComplexity.name = complexity.name;
                         newComplexity.sort_order = complexity.sort_order;
                         newComplexity.code = complexity.code;
+                        if(complexity_note_matrix[cap] !== undefined) {
+                          newComplexity.note = complexity_note_matrix[cap];
+                        }
                         if (complexity.questionForCandidate !== undefined && complexity.questionForCandidate !== null && complexity.questionForCandidate !== '') {
                           newComplexity.questionForCandidate = complexity.questionForCandidate;
                         } else {
@@ -392,7 +404,7 @@ class CandidateService {
   }
 
   getCapabilityValueKeyMatrix(_id: string, callback: (error: any, result: any) => void) {
-    this.candidateRepository.findByIdwithExclude(_id, {capability_matrix: 1, 'industry.name': 1}, (err, res) => {
+    this.candidateRepository.findByIdwithExclude(_id, {complexity_note_matrix:1, capability_matrix: 1, 'industry.name': 1}, (err, res) => {
       if (err) {
         callback(err, null);
       } else {
@@ -403,6 +415,7 @@ class CandidateService {
           } else {
             console.timeEnd('-------get candidateRepository-----');
             let new_capability_matrix: any = this.getCapabilityValueKeyMatrixBuild(res.capability_matrix, industries);
+            let capabilityMatrrixWithNotes: any = this.getCapabilityMatrixWithNotes(new_capability_matrix,res.complexity_note_matrix);
             callback(null, new_capability_matrix);
           }
         });
@@ -778,6 +791,15 @@ class CandidateService {
         callback(err, result);
       }
     });
+  }
+
+  getCapabilityMatrixWithNotes(capability_matrix: any,complexity_note_matrix:any) {
+    for (let cap in complexity_note_matrix) {
+      if(capability_matrix[cap]) {
+        capability_matrix[cap].complexityNote = complexity_note_matrix[cap];
+      }
+    }
+  return capability_matrix;
   }
 
 }

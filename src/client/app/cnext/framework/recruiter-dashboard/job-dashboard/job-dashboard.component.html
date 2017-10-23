@@ -17,10 +17,10 @@
           <div class="col-sm-5 no-padding">
             <ul class="pull-left job-details">
               <li>
-                <h4 title="View Job Details" title="{{selectedJobProfile.jobTitle}}">{{selectedJobProfile.jobTitle}}</h4>
+                <h4 title="View job details" (click)="viewJobDetails()" >{{selectedJobProfile.jobTitle}}</h4>
               </li>
               <li>
-                <a title="view job" (click)="viewJobDetails()">view job</a>
+                <a title="View job details" (click)="viewJobDetails()">view job</a>
               </li>
             </ul>
           </div>

@@ -17,6 +17,10 @@
                *ngIf="complexity.answer != 'Not Applicable' && complexity.answer != undefined">{{complexity.name}}
             <span class="tooltip-content1">
               {{complexity.answer}}
+              <div *ngIf="complexity?.note" class="value-portrait-notes">
+                <h4>Notes</h4>
+                {{complexity?.note}}
+              </div>
             </span>
           </div>
         </div>

@@ -1,3 +1,30 @@
+<div *ngIf="isCandidate">
+<div class="guided-tour-section guided-tour-overlay value-portrait-tour-section" *ngIf="guidedTourStatus?.indexOf(valuePortraitImgName) == -1">
+    <img src={{valuePortraitImgName}} alt="Profile Picture">
+    <div class="guided-tour-overlay-bg">
+      <div class="got-it-btn" (click)="tourGuideGotIt()">
+        <span>{{getHeadings().GOT_IT}}</span>
+      </div>
+    </div>
+</div>
+
+<div class="guided-tour-description value-portrait-tour" *ngIf="guidedTourStatus?.indexOf(valuePortraitImgName) == -1">
+    <div class="value-portrait-social-guided-tour">
+      <p>
+        {{getMessage().GUIDED_TOUR_VALUE_PORTRAIT_GO_TO_DASHBOARD}}
+      </p>
+      <span class="up-arrow"></span>
+    </div>
+</div>
+<div class="guided-tour-description value-portrait-tour" *ngIf="guidedTourStatus?.indexOf(valuePortraitImgName) == -1">
+    <div class="value-portrait-proceed-to-dashboard-guided-tour">
+      <p>
+  {{getMessage().GUIDED_TOUR_VALUE_PORTRAIT_MWSSAGE}}
+      </p>
+      <span class="up-arrow"></span>
+    </div>
+</div>
+</div>
 <cn-value-portrait-header [candidate]="candidate"></cn-value-portrait-header>
 <cn-candidate-info-block [candidate]="candidate"
                          class="visible-lg visible-md hidden-sm hidden-xs"></cn-candidate-info-block>

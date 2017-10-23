@@ -15,4 +15,5 @@ export class ComplexityDetails {
   total_complexity_in_capability: number;
   defaultComplexityName:string='';
   code:string='';
+  complexityNote:string='';
 }

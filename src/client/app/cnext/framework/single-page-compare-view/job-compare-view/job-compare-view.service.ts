@@ -71,6 +71,8 @@ export class JobCompareService extends BaseService {
           com.name= data[value2].complexity_name;
           com.complexityDetails = data[value2];
           com.scenarios.push(sce);
+          com.complexityNote = data[value2].complexityNote;
+          
           let isFound : boolean= false;
           for(let complex of cap.complexities){
             if(complex.name === com.name ) {

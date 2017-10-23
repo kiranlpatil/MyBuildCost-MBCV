@@ -92,7 +92,7 @@
        border: 0 solid transparent;
        border-bottom: 4px solid transparent;
        border-radius: 0;
-       color: $page-header-text;
+       color: $white;
        font-family: 'gothamrnd-light';
        font-size: 12px;
        padding: 15px 5px 14px 30px;
@@ -101,8 +101,16 @@
 
        &:focus,
        &:hover {
-         color: $page-header-text;
+         color: $white;
        }
+     }
+
+     a > .icon-dashboard {
+       background: url('../../assets/c-next/card-view/sprite.png') no-repeat -5px -770px;
+     }
+
+     a > .icon-candidate-search {
+       background: url('../../assets/c-next/card-view/sprite.png') no-repeat -82px -770px;
      }
 
      a > span {
@@ -130,14 +138,6 @@
        background: transparent !important;
        border-bottom: 4px solid $theme-color !important;
        color: $white !important;
-     }
-
-     a > .icon-dashboard {
-       background: url('../../assets/c-next/card-view/sprite.png') no-repeat -5px -770px;
-     }
-
-     a > .icon-candidate-search {
-       background: url('../../assets/c-next/card-view/sprite.png') no-repeat -82px -770px;
      }
 
      .btn-new-job {

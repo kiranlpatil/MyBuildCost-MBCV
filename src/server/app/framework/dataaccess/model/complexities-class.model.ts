@@ -9,5 +9,6 @@ class ComplexitiesClassModel {
   scenarios: ScenarioClassModel[];
   match: string;
   answer: string;
+  note:string;
 }
 export = ComplexitiesClassModel;

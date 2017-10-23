@@ -269,6 +269,65 @@
   }
 }
 
+.value-portrait-tour-section {
+  .got-it-btn {
+    span {
+      left: 0;
+      position: absolute;
+    }
+  }
+}
+
+
+.value-portrait-tour {
+  margin: 0 auto;
+  min-width: 1200px;
+  position: absolute;
+  text-align: center;
+}
+
+.value-portrait-social-guided-tour {
+  color: $white;
+  font-size: 18px;
+  padding: 20px 0 0 50px;
+  position: absolute;
+  right: 20px;
+  top: 0;
+  width: auto;
+  p {
+    color: $white;
+    font-weight: normal;
+    text-align: right;
+  }
+  .up-arrow {
+    float: right;
+    left: inherit;
+    right: -7px;
+    top: -63px;
+  }
+}
+
+.value-portrait-proceed-to-dashboard-guided-tour {
+  color: $white;
+  font-size: 18px;
+  padding: 20px 0 0 50px;
+  position: absolute;
+  right: 136px;
+  top: -70px;
+  width: auto;
+  p {
+    color: $white;
+    font-weight: normal;
+    text-align: right;
+  }
+  .up-arrow {
+    float: right;
+    left: inherit;
+    right: -7px;
+    top: -63px;
+  }
+}
+
 .dashboard-matching-degree-guided-tour {
   color: $white;
   font-size: 18px;

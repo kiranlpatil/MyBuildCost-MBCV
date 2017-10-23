@@ -40,6 +40,7 @@ $twitter-share: #55acee;
 $linkedin-share: #0077b5;
 $circle-border: #f7b82b;
 $placeholder-color: #dedede;
+$notes-description-color: #262626;
 
 .btn-logout {
   margin-top: 15px;
@@ -761,7 +762,7 @@ cn-control-messages {
   height: auto;
   margin: 30px auto;
   display: inline-block;
-  padding: 0 20px;
+  padding: 0;
 
   .btn-share {
     background-color: transparent;
@@ -780,15 +781,15 @@ cn-control-messages {
   }
 
   .btn-facebook {
-    background: url(../assets/c-next/card-view/sprite.png) no-repeat 0 -697px;
+    background: url(../assets/c-next/card-view/sprite.png) no-repeat 0 -806px;
   }
 
   .btn-linkedin {
-    background: url(../assets/c-next/card-view/sprite.png) no-repeat -38px -697px;
+    background: url(../assets/c-next/card-view/sprite.png) no-repeat -38px -806px;
   }
 
   .btn-twitter {
-    background: url(../assets/c-next/card-view/sprite.png) no-repeat -75px -697px;
+    background: url(../assets/c-next/card-view/sprite.png) no-repeat -75px -804px;
   }
 }
 
@@ -1507,3 +1508,59 @@ select:focus {
   }
 }
 
+.notes-section {
+  h4 {
+    font-size: 12px;
+    font-weight: bold !important;
+    font-family: 'gothamrnd-book';
+    margin: 8px 0 0;
+  }
+}
+
+.notes-triangle {
+  border-top: 14px solid $theme-color;
+  border-left: 14px solid transparent;
+  height: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 0;
+}
+.complexity-notes-description {
+  color: $notes-description-color;
+  display: none;
+  float: left;
+  font-size: 12px;
+  padding: 5px 0 15px 0;
+  word-break: keep-all;
+}
+
+.below,
+.exact,
+.missing,
+.above {
+  &:hover {
+    .complexity-notes-description {
+      display: block !important;
+    }
+    .notes-triangle {
+      display: none;
+    }
+  }
+}
+
+.add-complexity-notes {
+  label {
+    float: left;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    width: 100%;
+  }
+  textarea {
+    height: 80px;
+    max-width: 60%;
+  }
+  .notes-max-charcter {
+    font-size: 12px;
+  }
+}

@@ -35,6 +35,9 @@ class CandidateSchema {
       capability_matrix : {
         type : Object
       },
+      complexity_note_matrix : {
+        type : Object
+      },
       certifications: [{
         name: String,
         year: Number,
