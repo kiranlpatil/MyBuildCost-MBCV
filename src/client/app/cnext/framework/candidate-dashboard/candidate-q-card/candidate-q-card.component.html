@@ -83,7 +83,7 @@
           <span class="company-size"></span>
           {{job.company_size}}
         </p>
-          <p *ngIf="job.isJobPostClosed" class="job-closed" title="{{job.jobTitle }} is no longer valid">
+          <p *ngIf="job.isJobPostClosed && type =='apply'" class="job-closed" title="{{job.jobTitle }} is no longer valid">
               {{job.jobTitle }} is no longer valid
           </p>
         <!--<p title="Date Posted">
