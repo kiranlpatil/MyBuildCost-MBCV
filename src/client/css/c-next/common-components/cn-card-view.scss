@@ -531,14 +531,6 @@ header {
       position: absolute;
       left: 0;
     }
-    .job-closed {
-     // background: url(../assets/c-next/card-view/sprite.png) no-repeat -57px -221px;
-      width: 20px !important;
-      height: 20px;
-      position: absolute;
-      left: 0;
-      color: red;
-    }
   }
   .card-view,
   .dashboard-view h6,
@@ -578,6 +570,22 @@ header {
   .canvas-container,
   .canvas-container p {
     color: $orange;
+  }
+
+  .job-unavailable {
+    filter: grayscale(1);
+
+    .company-name-label {
+      color: $gray !important;
+    }
+    .company-date {
+      text-align: right !important;
+    }
+    .job-unavailable-message {
+      color: $text-color;
+      display: block;
+      font-size: 12px;
+    }
   }
 }
 
