@@ -37,7 +37,7 @@ export function login(req: express.Request, res: express.Response, next: any) {
               var auth = new AuthInterceptor();
               var token = auth.issueTokenWithUid(result[0]);
               if (result[0].isAdmin) {
-                adminController.sendLoginInfoToAdmin(result[0].email, req.connection.remoteAddress, params.latitude, params.longitude);
+                adminController.sendLoginInfoToAdmin(result[0].email, req.connection.remoteAddress, params.latitude, params.longitude,next);
                 res.status(200).send({
                   "status": Messages.STATUS_SUCCESS,
                   "data": {
@@ -171,8 +171,7 @@ export function login(req: express.Request, res: express.Response, next: any) {
         });
       }
     });
-  }
-  catch (e) {
+  } catch (e) {
     next({
       reason: e.message,
       message: e.message,
@@ -591,6 +590,7 @@ export function updateDetails(req: express.Request, res: express.Response, next:
     });
   }
 }
+
 export function updateRecruiterAccountDetails(req: express.Request, res: express.Response, next: any) {
   try {
     var newUserData: RecruiterModel = <RecruiterModel>req.body;
@@ -729,7 +729,7 @@ export function resetPassword(req: express.Request, res: express.Response, next:
     bcrypt.hash(req.body.new_password, saltRounds, (err: any, hash: any) => {
       if (err) {
         next({
-          reason:'Error in creating hash using bcrypt',
+          reason: 'Error in creating hash using bcrypt',
           message: 'Error in creating hash using bcrypt',
           stackTrace: new Error(),
           code: 403
@@ -1141,7 +1141,7 @@ export function verifyChangedEmailId(req: express.Request, res: express.Response
   }
 }
 
-export function getIndustry(req: express.Request, res: express.Response) {
+export function getIndustry(req: express.Request, res: express.Response, next: any) {
   __dirname = './';
   var filepath = "industry.json";
   try {
@@ -1157,7 +1157,7 @@ export function getIndustry(req: express.Request, res: express.Response) {
   }
 }
 
-export function getCompanySize(req: express.Request, res: express.Response) {
+export function getCompanySize(req: express.Request, res: express.Response, next: any) {
   __dirname = './';
   var filepath = "company-size.json";
   try {
@@ -1173,7 +1173,7 @@ export function getCompanySize(req: express.Request, res: express.Response) {
   }
 }
 
-export function getAddress(req: express.Request, res: express.Response) {
+export function getAddress(req: express.Request, res: express.Response, next: any) {
   __dirname = './';
   var filepath = "address.json";
   try {
@@ -1188,7 +1188,7 @@ export function getAddress(req: express.Request, res: express.Response) {
     });
   }
 }
-export function getRealocation(req: express.Request, res: express.Response) {
+export function getRealocation(req: express.Request, res: express.Response, next: any) {
 
   __dirname = './';
   var filepath = "realocation.json";
@@ -1204,7 +1204,7 @@ export function getRealocation(req: express.Request, res: express.Response) {
     });
   }
 }
-export function getEducation(req: express.Request, res: express.Response) {
+export function getEducation(req: express.Request, res: express.Response, next: any) {
   __dirname = './';
   var filepath = "education.json";
   try {
@@ -1221,7 +1221,7 @@ export function getEducation(req: express.Request, res: express.Response) {
 }
 
 
-export function getCloseJobReasons(req: express.Request, res: express.Response) {
+export function getCloseJobReasons(req: express.Request, res: express.Response, next: any) {
   __dirname = './';
   var filepath = "closeJob.json";
   try {
@@ -1238,7 +1238,7 @@ export function getCloseJobReasons(req: express.Request, res: express.Response) 
 }
 
 
-export function getExperience(req: express.Request, res: express.Response) {
+export function getExperience(req: express.Request, res: express.Response, next: any) {
   __dirname = './';
   var filepath = "experienceList.json";
   try {
@@ -1253,7 +1253,7 @@ export function getExperience(req: express.Request, res: express.Response) {
     });
   }
 }
-export function getCurrentSalary(req: express.Request, res: express.Response) {
+export function getCurrentSalary(req: express.Request, res: express.Response, next: any) {
   __dirname = './';
   var filepath = "currentsalaryList.json";
   try {
@@ -1269,7 +1269,7 @@ export function getCurrentSalary(req: express.Request, res: express.Response) {
   }
 }
 
-export function getNoticePeriod(req: express.Request, res: express.Response) {
+export function getNoticePeriod(req: express.Request, res: express.Response, next: any) {
   __dirname = './';
   var filepath = "noticeperiodList.json";
   try {
@@ -1285,7 +1285,7 @@ export function getNoticePeriod(req: express.Request, res: express.Response) {
   }
 }
 
-export function getIndustryExposure(req: express.Request, res: express.Response) {
+export function getIndustryExposure(req: express.Request, res: express.Response, next: any) {
   __dirname = './';
   var filepath = "industryexposureList.json";
   try {
@@ -1301,7 +1301,7 @@ export function getIndustryExposure(req: express.Request, res: express.Response)
   }
 }
 
-export function getSearchedCandidate(req: express.Request, res: express.Response) {
+export function getSearchedCandidate(req: express.Request, res: express.Response, next: any) {
   __dirname = './';
   var filepath = "candidate.json";
   try {
@@ -1319,7 +1319,7 @@ export function getSearchedCandidate(req: express.Request, res: express.Response
 }
 
 
-export function getCountries(req: express.Request, res: express.Response) {
+export function getCountries(req: express.Request, res: express.Response, next: any) {
   __dirname = './';
   var filepath = "country.json";
   try {
@@ -1334,7 +1334,7 @@ export function getCountries(req: express.Request, res: express.Response) {
     });
   }
 }
-export function getIndiaStates(req: express.Request, res: express.Response) {
+export function getIndiaStates(req: express.Request, res: express.Response, next: any) {
   __dirname = './';
   var filepath = "indiaStates.json";
   try {
@@ -1351,7 +1351,7 @@ export function getIndiaStates(req: express.Request, res: express.Response) {
 }
 
 
-export function getFunction(req: express.Request, res: express.Response) {
+export function getFunction(req: express.Request, res: express.Response, next: any) {
   __dirname = './';
   var filepath = "function.json";
   try {
@@ -1366,7 +1366,7 @@ export function getFunction(req: express.Request, res: express.Response) {
     });
   }
 }
-export function getRole(req: express.Request, res: express.Response) {
+export function getRole(req: express.Request, res: express.Response, next: any) {
   __dirname = './';
   var filepath = "roles.json";
   try {
@@ -1381,7 +1381,7 @@ export function getRole(req: express.Request, res: express.Response) {
     });
   }
 }
-export function getProficiency(req: express.Request, res: express.Response) {
+export function getProficiency(req: express.Request, res: express.Response, next: any) {
   __dirname = './';
   var filepath = "proficiency.json";
   try {
@@ -1397,7 +1397,7 @@ export function getProficiency(req: express.Request, res: express.Response) {
   }
 }
 
-export function getDomain(req: express.Request, res: express.Response) {
+export function getDomain(req: express.Request, res: express.Response, next: any) {
   __dirname = './';
   var filepath = "domain.json";
   try {
@@ -1414,7 +1414,7 @@ export function getDomain(req: express.Request, res: express.Response) {
 }
 
 
-export function getCapability(req: express.Request, res: express.Response) {
+export function getCapability(req: express.Request, res: express.Response, next: any) {
   __dirname = './';
   var filepath = "capability.json";
   try {
@@ -1430,7 +1430,7 @@ export function getCapability(req: express.Request, res: express.Response) {
   }
 }
 
-export function getComplexity(req: express.Request, res: express.Response) {
+export function getComplexity(req: express.Request, res: express.Response, next: any) {
   __dirname = './';
   var filepath = "complexity.json";
   try {
@@ -1724,7 +1724,7 @@ export function uploaddocuments(req: express.Request, res: express.Response, nex
 
 }
 
-export function profilecreate(req: express.Request, res: express.Response) {
+export function profilecreate(req: express.Request, res: express.Response, next: any) {
   try {
 
   } catch (e) {
@@ -1738,7 +1738,7 @@ export function profilecreate(req: express.Request, res: express.Response) {
 }
 
 
-export function professionaldata(req: express.Request, res: express.Response) {
+export function professionaldata(req: express.Request, res: express.Response, next: any) {
   try {
 
     var newUser = req.body;
@@ -1754,7 +1754,7 @@ export function professionaldata(req: express.Request, res: express.Response) {
 
 }
 
-export function employmentdata(req: express.Request, res: express.Response) {
+export function employmentdata(req: express.Request, res: express.Response, next: any) {
   try {
 
     var newUser = req.body;

@@ -193,7 +193,6 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
     if (this.isCandidate) {
       // this.showModalStyle = !this.showModalStyle;
       this.highlightedSection.isLocked = true;
-
     }
     this.complexityService.change(true);
     if (this.highlightedSection.isProficiencyFilled && this.highlightedSection.iscompleted) {

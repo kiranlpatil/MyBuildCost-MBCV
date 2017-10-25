@@ -54,7 +54,6 @@ export class ValuePortraitComponent implements OnInit {
         },
         error => this.errorService.onError(error)
       );
-
   }
 
   updateCapabilityData(candidate: Candidate) {
@@ -68,7 +67,6 @@ export class ValuePortraitComponent implements OnInit {
         candidate.capabilities.splice(i, 1);
       }
     }
-
     return candidate;
   }
 

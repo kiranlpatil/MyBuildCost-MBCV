@@ -17,7 +17,7 @@ export function errorHandler(err: any, req: any, res: any, next: any) {
     console.log('responseObject in client errorHandler:', responseObject);
     res.status(err.code).send(responseObject);
   } else {
-    var errObject = {
+    var errorObject:any = {
       'status': Messages.STATUS_ERROR,
       'error': {
         'reason': 'Internal Server ',
@@ -25,15 +25,14 @@ export function errorHandler(err: any, req: any, res: any, next: any) {
         'code': 500
       }
     };
-    var responseObject = JSON.stringify(errObject);
+    var responseObject = JSON.stringify(errorObject);
     _loggerService.logError(err);
     res.status(500).send(responseObject);
   }
 }
 
 
-function mailToAdmin(errorInfo:any) {
-  console.log('mail the errorrs Handler');
+export function mailToAdmin(errorInfo:any) {
   var userService = new UserService();
   userService.sendMailOnError(errorInfo, (error:any, result:any) => {
     if (error) {
