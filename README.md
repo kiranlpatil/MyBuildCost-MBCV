@@ -354,6 +354,27 @@ $ src/redis-server
  	db.recruiters.save(recruiter);
  })
  
+ - Version : 1.1.2
+ - Date : 25 Oct 2017
+ - Scenario : Added new filed 'isJobPostClosed' into recruiter job post (Run command using mongo shell instead of 
+ robomongo)
+ - Update Script : 
+ db.getCollection('recruiters').find({}).forEach(function(recruiter) {
+ for(var i = 0;i <= recruiter.postedJobs.length-1; i++){
+     if(recruiter.postedJobs[i].isJobPostClosed == true || 
+     recruiter.postedJobs[i].isJobPostClosed == false){
+ print("skip");
+         
+ }else{
+ 	recruiter.postedJobs[i].isJobPostClosed = false;
+     db.getCollection('recruiters').update(
+     {"postedJobs._id":recruiter.postedJobs[i]._id},recruiter)
+     print("success:" + recruiter.postedJobs[i]._id);
+ }
+ }
+ 
+ })
+ 
  
 
 # MySQL

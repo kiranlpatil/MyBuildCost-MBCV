@@ -63,7 +63,7 @@
                 *ngIf="!isCandidate">Done
         </button>
 
-        <span class="question-count" [hidden]="singleComplexity" *ngIf="isCandidate && isNumber(currentComplexity) && complexityIds.length>0">{{currentComplexity+1}} of {{complexityIds.length}}</span>
+        <!--<span class="question-count" [hidden]="singleComplexity" *ngIf="isCandidate && isNumber(currentComplexity) && complexityIds.length>0">{{currentComplexity+1}} of {{complexityIds.length}}</span>-->
         <span class="question-count" [hidden]="singleComplexity" *ngIf="!isCandidate && isNumber(currentCapabilityNumber) && capabilities.length>0">{{currentCapabilityNumber+1}} of {{capabilities.length}}</span>
       </div>
       <!--

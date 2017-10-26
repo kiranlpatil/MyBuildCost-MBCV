@@ -1,11 +1,11 @@
-import {Component, EventEmitter, Input, Output} from "@angular/core";
-import {Role} from "../model/role";
-import {Capability} from "../../../user/models/capability";
-import {Headings, ImagePath, LocalStorage, Messages, Tooltip, ValueConstant} from "../../../shared/constants";
-import {Section} from "../../../user/models/candidate";
-import {LocalStorageService} from "../../../shared/services/localstorage.service";
-import {GuidedTourService} from "../guided-tour.service";
-import {ErrorService} from "../../../shared/services/error.service";
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Role } from '../model/role';
+import { Capability } from '../../../user/models/capability';
+import { Headings, ImagePath, LocalStorage, Messages, Tooltip, ValueConstant } from '../../../shared/constants';
+import { Section } from '../../../user/models/candidate';
+import { LocalStorageService } from '../../../shared/services/localstorage.service';
+import { GuidedTourService } from '../guided-tour.service';
+import { ErrorService } from '../../../shared/services/error.service';
 
 @Component({
   moduleId: module.id,
@@ -162,7 +162,7 @@ export class CapabilitiesComponent {
       );
   }
 
-  onNextAction() { debugger
+  onNextAction() {
     this.isValid = true;
     this.validationMessage = '';
     if(this.primaryNames.length == 0){
