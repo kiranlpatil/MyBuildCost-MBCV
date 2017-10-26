@@ -1,6 +1,6 @@
 import * as express from "express";
 import * as mongoose from "mongoose";
-import {Recruiter} from "../dataaccess/model/recruiter-final.model";
+import { Recruiter } from "../dataaccess/model/recruiter-final.model";
 import AuthInterceptor = require('../interceptor/auth.interceptor');
 import Messages = require('../shared/messages');
 import CandidateService = require('../services/candidate.service');
@@ -284,8 +284,11 @@ export function getCandidatesByName(req: express.Request, res: express.Response,
     let candidateService = new CandidateService();
     let candidateSearchService = new CandidateSearchService();
     var userName = req.params.searchvalue;
-    var query: any;
-    var searchValueArray: string[] = userName.split(" ");
+    var query:any;
+    var searchValueArray:string[] = userName.split(" ");
+    let included : any = {
+      '_id':1
+    };
     if (searchValueArray.length > 1) {
       var exp1 = eval('/^' + searchValueArray[0] + '/i');
       var exp2 = eval('/^' + searchValueArray[1] + '/i');
@@ -307,7 +310,7 @@ export function getCandidatesByName(req: express.Request, res: express.Response,
         $or: [{'first_name': {$regex: eval(searchString)}}, {'last_name': {$regex: eval(searchString)}}]
       };
     }
-    userService.retrieve(query, (error: any, result: any) => {
+    userService.retrieveWithLimit(query,included, (error:any, result:any) => {
       if (error) {
         next({
           reason: 'Problem in Search user details',

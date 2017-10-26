@@ -571,6 +571,22 @@ header {
   .canvas-container p {
     color: $orange;
   }
+
+  .job-unavailable {
+    filter: grayscale(1);
+
+    .company-name-label {
+      color: $gray !important;
+    }
+    .company-date {
+      text-align: right !important;
+    }
+    .job-unavailable-message {
+      color: $text-color;
+      display: block;
+      font-size: 12px;
+    }
+  }
 }
 
 #rejected,

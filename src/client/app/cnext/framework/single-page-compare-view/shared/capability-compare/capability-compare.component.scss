@@ -457,7 +457,7 @@
     margin: 0 0 10px;
     padding: 4px 0;
     position: fixed;
-    z-index: 99;
+    z-index: 1000;
     top: 8px;
 
     li {
@@ -481,7 +481,7 @@
       height: 18px;
       width: 17px;
       border-radius: 0;
-      margin: 0px 3px;
+      margin: 0 3px;
     }
 
     .legend-exact {
@@ -489,7 +489,7 @@
       height: 18px;
       width: 17px;
       border-radius: 0;
-      margin: 0px 3px;
+      margin: 0 3px;
     }
 
     .legend-below {
@@ -497,7 +497,7 @@
       height: 18px;
       width: 17px;
       border-radius: 0;
-      margin: 0px 3px;
+      margin: 0 3px;
     }
 
     .legend-missing {
@@ -505,7 +505,7 @@
       height: 18px;
       width: 17px;
       border-radius: 0;
-      margin: 0px 3px;
+      margin: 0 3px;
     }
 
     .legend-extra {

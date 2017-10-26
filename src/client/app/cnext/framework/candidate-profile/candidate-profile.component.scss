@@ -413,3 +413,47 @@
     transform: translate(0, -50%);
   }
 }
+
+#right-fit-modal {
+  .modal-dialog {
+    transform: translate(0, -50%);
+  }
+
+  .modal-body {
+    padding: 15px 15px 0;
+  }
+
+  .profile-info {
+    color: $text-color;
+    display: block !important;
+    float: left;
+    min-height: 50px;
+    padding: 0;
+    width: 100%;
+    text-align: left;
+  }
+
+  p {
+    background: #ececec;
+    border: 1px dashed #8c8c8c;
+    color: #8c8c8c;
+    font-size: 10px;
+    padding: 10px;
+
+    span {
+      color: #666;
+      display: block;
+      font-family: 'gothamrnd-book';
+      font-weight: 900;
+    }
+  }
+
+  .toggle-switch-container {
+    float: left;
+  }
+
+  .button-group {
+    margin-bottom: 0;
+    padding-left: 0;
+  }
+}

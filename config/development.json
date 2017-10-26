@@ -4,6 +4,7 @@
       "host": "127.0.0.1",
       "name": "c-next-backend"
     },
+    "limitForQuery" : 10,
     "mail": {
       "host": "http://localhost:8080/",
       //"host":"http://7a4647ae.ngrok.io/"

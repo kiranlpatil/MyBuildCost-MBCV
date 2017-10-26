@@ -288,7 +288,6 @@ class UserService {
     let content = fs.readFileSync('./src/server/app/framework/public/error.mail.html').toString();
     let footer1 = fs.readFileSync('./src/server/app/framework/public/footer1.html').toString();
     let mid_content = content.replace('$time$', current_Time).replace('$host$', config.get('TplSeed.mail.host')).replace('$reason$', errorInfo.reason).replace('$code$', errorInfo.code).replace('$message$', errorInfo.message);
-
     let mailOptions = {
       from: config.get('TplSeed.mail.MAIL_SENDER'),
       to: config.get('TplSeed.mail.ADMIN_MAIL'),
@@ -296,7 +295,7 @@ class UserService {
       subject: Messages.EMAIL_SUBJECT_SERVER_ERROR + ' on ' + config.get('TplSeed.mail.host'),
       html: header1 + mid_content + footer1
       , attachments: MailAttachments.AttachmentArray
-    }
+    };
     let sendMailService = new SendMailService();
     sendMailService.sendMail(mailOptions, callback);
 
@@ -307,7 +306,12 @@ class UserService {
   }
 
   retrieve(field: any, callback: (error: any, result: any) => void) {
-    this.userRepository.retrieveWithoutLean(field, callback);
+    this.userRepository.retrieveWithLean(field,{}, callback);
+  }
+
+  retrieveWithLimit(field: any, included : any, callback: (error: any, result: any) => void) {
+    let limit = config.get('TplSeed.limitForQuery');
+    this.userRepository.retrieveWithLimit(field, included, limit, callback);
   }
 
   retrieveWithLean(field: any, callback: (error: any, result: any) => void) {
@@ -330,8 +334,7 @@ class UserService {
 
       if (err) {
         callback(err, res);
-      }
-      else {
+      }else {
         this.userRepository.update(res._id, item, callback);
       }
     });

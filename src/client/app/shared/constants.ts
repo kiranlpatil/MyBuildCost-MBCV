@@ -1,8 +1,8 @@
 export class AppSettings {
-  public static IP = 'http://localhost:8080';
+  // public static IP = 'http://localhost:8080';
   // public static IP = 'http://ee802b7f.ngrok.io';
-  //public static IP = 'http://10.192.33.77:8080';
-  //public static IP = 'http://52.10.145.87:3000';
+  // public static IP = 'http://10.192.33.77:8080';
+  public static IP = 'http://52.10.145.87:3000';
  // public static IP = 'https://34.215.90.153:3000';
   // public static IP = 'app.jobmosis.com';
   // public static IP = '';
@@ -695,6 +695,7 @@ export class Label {
   public static SHOW_CLOSED_JOBS: string = 'Show Closed Jobs';
   public static POST_JOB: string = 'POST JOB';
   public static CLOSED_JOB: string = 'CLOSED JOB';
+  public static PROFILE_VISIBILITY: string = 'Profile Visibility for Recruiter';
 }
 
 export class Button {
@@ -705,4 +706,6 @@ export class Button {
   public static CANCEL_BUTTON: string = 'Cancel';
   public static VALUE_PORTRAIT_BUTTON: string = 'Create your Own Value Portrait';
   public static SUBMIT_PROFILE: string = 'Submit Profile';
+  public static VIEW_AND_EDIT: string = 'View and Edit';
+  public static PROCEED: string = 'Proceed';
 }

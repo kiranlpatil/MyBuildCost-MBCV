@@ -2,7 +2,7 @@ import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} f
 import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
 import {Candidate, Section} from "../../../user/models/candidate";
 import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {Headings, ImagePath, LocalStorage, Messages, Tooltip} from "../../../shared/constants";
+import {Button, Headings, ImagePath, LocalStorage, Messages, Tooltip} from "../../../shared/constants";
 import {GuidedTourService} from "../guided-tour.service";
 import {ErrorService} from "../../../shared/services/error.service";
 import {LocalStorageService} from "../../../shared/services/localstorage.service";
@@ -242,5 +242,9 @@ export class AwardsComponent implements OnInit {
 
   getMessage() {
     return Messages;
+  }
+
+  getButton() {
+    return Button;
   }
 }
