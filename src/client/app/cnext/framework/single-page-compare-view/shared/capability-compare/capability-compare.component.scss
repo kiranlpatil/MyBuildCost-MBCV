@@ -702,9 +702,16 @@
     .capability-edit > .inner {
       padding: 5px 20px 5px 5px;
       border: 1px solid $white;
+      position: relative;
       &:hover {
         border: 1px solid $border-color1;
       }
+    }
+
+    .capability-edit > .inner > .filled-star {
+      position: absolute;
+      top: 4px;
+      left: -17px;
     }
 
     .btn-edit {
