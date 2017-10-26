@@ -20,6 +20,7 @@ export class WorkAreaComponent implements OnInit,OnChanges {
   @Input() selectedRoles: Role[] = new Array(0);
   @Input() highlightedSection: Section;
   @Output() onComplete = new EventEmitter();
+  @Output() others = new EventEmitter();
   tooltipCandidateMessage: string =
     '<ul>' +
     '<li><p>1. '+ Tooltip.AREA_OF_WORK_TOOLTIP_1+' </p></li>' +
@@ -141,7 +142,7 @@ export class WorkAreaComponent implements OnInit,OnChanges {
       );
   }
 
-  onNextAction() {
+  onNextAction() { debugger
     let roleId:any[]=new Array(0);
     if(this.savedSelectedRoles.length === 0){
       if(this.isCandidate) {
@@ -162,8 +163,14 @@ export class WorkAreaComponent implements OnInit,OnChanges {
       if (roleId.indexOf("99999") != -1 && roleId.length === 1) {
           this.isInfoMessage = true;
           this.isOthers = true;
+        this.others.emit(this.isOthers);
+        this.highlightedSection.name = 'Work-Area';
+        //this.highlightedSection.isDisable = true;
+          this.onComplete.emit(this.selectedRoles);
         return;
       }  else {
+        this.isOthers = false;
+        this.others.emit(this.isOthers);
         this.highlightedSection.name = 'Capabilities';
         this.highlightedSection.isDisable = false;
         this.onComplete.emit(this.selectedRoles);
@@ -197,11 +204,11 @@ export class WorkAreaComponent implements OnInit,OnChanges {
       }
       if(goNext) {
         this.onNext();
-      } else if (roleId.indexOf("99999") != -1 && roleId.length === 1) {
+      } /*else if (roleId.indexOf("99999") != -1 && roleId.length === 1) {
           this.isInfoMessage = true;
           this.isOthers = true;
         return;
-      } else {
+      } */else {
         this.onNext();
       }
     } else {
@@ -247,7 +254,8 @@ export class WorkAreaComponent implements OnInit,OnChanges {
     this.showModalStyle2 = !this.showModalStyle2;
   }
 
-  OnEdit() {
+  OnEdit() { debugger
+    this.isOthers = false;
     this.highlightedSection.name = 'Work-Area';
     this.showButton = false;
     this.highlightedSection.isDisable = true;
@@ -255,5 +263,10 @@ export class WorkAreaComponent implements OnInit,OnChanges {
   }
   getMessage() {
     return Messages;
+  }
+
+  onClose() {
+    this.highlightedSection.name = 'None';
+    //this.showIndustryExperience = false;
   }
 }

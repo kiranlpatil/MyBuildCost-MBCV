@@ -41,6 +41,10 @@ $linkedin-share: #0077b5;
 $circle-border: #f7b82b;
 $placeholder-color: #dedede;
 $notes-description-color: #262626;
+$exact-bg: #edf7c4;
+$higher-bg: #b1d669;
+$less-bg: #ffe180;
+$missmatch-bg: #ffc3bb;
 
 .btn-logout {
   margin-top: 15px;
@@ -138,6 +142,33 @@ $notes-description-color: #262626;
   white-space: nowrap;
   width: 100%;
 }
+
+
+@mixin multiLineEllipsis($lineHeight: 1.2em, $lineCount: 1, $bgColor: white){
+  line-height: $lineHeight;
+  margin-right: -1em;
+  max-height: $lineHeight * $lineCount;
+  overflow: hidden;
+  padding-right: 1em;
+  position: relative;
+  text-align: justify;
+  &:before {
+    bottom: 0;
+    content: '...';
+    position: absolute;
+    right: 0;
+  }
+  &:after {
+    background: $bgColor;
+    content: '';
+    height: 1em;
+    margin-top: 0.2em;
+    position: absolute;
+    right: 0;
+    width: 1em;
+  }
+}
+
 
 //Common Css
 //Body
@@ -1382,16 +1413,16 @@ select:focus {
     min-width: 380px !important;
   }
   .row-background {
-    height: 150px !important;
+    height: 215px !important;
     .exact,
     .missing,
     .below,
     .above {
-      height: 150px !important;
+      height: 215px !important;
     }
   }
   .empty-divs {
-    height: 150px !important;
+    height: 215px !important;
   }
   .match-icon {
     top: -6px;
@@ -1506,6 +1537,63 @@ select:focus {
     margin-bottom: 30px;
     overflow: hidden;
   }
+
+  .notes-section {
+    bottom: 0;
+    padding-bottom: 0;
+    position: absolute;
+    width: 100%;
+
+    .complexity-notes-description {
+      display: block !important;
+      padding: 5px 0 0 0;
+
+      p {
+        max-width: 100%;
+        max-height: inherit;
+        overflow: visible;
+        text-overflow: inherit !important;
+        white-space: unset !important;
+        width: 90% !important;
+        word-break: keep-all !important;
+      }
+    }
+    .notes-triangle {
+      display: none !important;
+    }
+  }
+
+  .exact {
+    .notes-section {
+      .complexity-notes-description > p {
+        @include multiLineEllipsis($lineHeight: 1.3em, $lineCount: 3, $bgColor: $exact-bg);
+      }
+    }
+  }
+
+  .below {
+    .notes-section {
+      .complexity-notes-description > p {
+        @include multiLineEllipsis($lineHeight: 1.3em, $lineCount: 3, $bgColor: $less-bg);
+      }
+    }
+  }
+
+  .above {
+    .notes-section {
+      .complexity-notes-description > p {
+        @include multiLineEllipsis($lineHeight: 1.3em, $lineCount: 3, $bgColor: $higher-bg);
+      }
+    }
+  }
+
+  .missing {
+    .notes-section {
+      .complexity-notes-description > p {
+        @include multiLineEllipsis($lineHeight: 1.3em, $lineCount: 3, $bgColor: $missmatch-bg);
+      }
+    }
+  }
 }
 
 .notes-section {
@@ -1533,6 +1621,12 @@ select:focus {
   font-size: 12px;
   padding: 5px 0 15px 0;
   word-break: keep-all;
+  p {
+    max-height: 155px;
+    overflow: auto;
+    word-break: keep-all;
+    word-wrap: break-word;
+  }
 }
 
 .below,

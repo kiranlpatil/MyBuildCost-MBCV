@@ -391,6 +391,8 @@
   float: left;
   font-size: 12px;
   margin: 10px 0;
+  max-height: 190px;
+  overflow: auto;
   padding: 5px;
   position: relative;
   width: 100%;
@@ -431,5 +433,9 @@
         display: none;
       }
     }
+  }
+  .value-portrait-notes {
+    max-height: inherit;
+    overflow: visible;
   }
 }

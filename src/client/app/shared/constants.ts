@@ -3,7 +3,7 @@ export class AppSettings {
   // public static IP = 'http://ee802b7f.ngrok.io';
   //public static IP = 'http://10.192.33.77:8080';
   //public static IP = 'http://52.10.145.87:3000';
-  //public static IP = 'https://34.215.90.153:3000';
+ // public static IP = 'https://34.215.90.153:3000';
   // public static IP = 'app.jobmosis.com';
   // public static IP = '';
 
@@ -313,7 +313,7 @@ export class Messages {
 
   public static NO_CANDIDATES_AVAILABLE = 'No candidates available for selected alphabet.';
   public static NO_RECRUITERS_AVAILABLE = 'No recruiters available for selected alphabet.';
-  public static OTHERS_AOW_MESSAGE = 'Thank you for your interest in our Job post but currently we do not have your Area of Work, we will get back to you after building your Area of Work';
+  public static OTHERS_AOW_MESSAGE = 'Thank you for your interest in our Job post but currently we do not have your Area of Work, we will get back to you after building your Area of Work. For any query mail us on support@jobmosis.com or contact us on +91-8669601612 .';
   public static SELECT_REASON_FOR_JOB_CLOSE = 'Please select a reason.';
   public static ASK_EXPERT_MESSAGE = 'You can copy and share this link to hiring manager to independently define the job description.\n' +
       'On completion by hiring manager you will receive an email.';

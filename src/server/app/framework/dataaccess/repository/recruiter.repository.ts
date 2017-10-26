@@ -22,7 +22,10 @@ class RecruiterRepository extends RepositoryBase<IRecruiter> {
         if (job.releventIndustries.indexOf(candidate.industry.name) !== -1) {
           isreleventIndustryMatch = true;
         }
-        if (!job.isJobPosted || (candidate.industry.code !== job.industry.code && !isreleventIndustryMatch) || job.isJobPostExpired) {
+        if ( !job.isJobPosted
+          || (candidate.industry.code !== job.industry.code && !isreleventIndustryMatch)
+          || job.isJobPostExpired
+          || (job.expiringDate < new Date())) {
           continue;
         }
         let isPresent: boolean = false;

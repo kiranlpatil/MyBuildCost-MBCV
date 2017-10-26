@@ -28,12 +28,16 @@
       {{getMessage().OTHERS_AOW_MESSAGE}}
     </div>
 
-    <div class="button-group clearfix">
+    <div *ngIf="!isOthers" class="button-group clearfix">
       <!--<div class="saving-loader">Saving...</div>-->
       <button class="btn btn-primary" scrollTo scrollTargetSelector="#capability-area" (click)="onSave()"
               [hidden]="!showButton">Next</button>
       <button class="btn btn-primary" (click)="onSave()" [hidden]="showButton">Next</button>
     </div>
+
+      <div *ngIf="isOthers" class="button-group clearfix">
+          <button class="btn btn-primary" scrollTo scrollTargetSelector="#capability-area" (click)="onClose()">Close</button>
+      </div>
 
     <cn-tool-tip [message]="tooltipCandidateMessage" *ngIf="isCandidate"></cn-tool-tip>
     <cn-tool-tip [message]="tooltipRecruiterMessage" *ngIf="!isCandidate"></cn-tool-tip>

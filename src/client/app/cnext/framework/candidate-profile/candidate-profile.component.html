@@ -47,7 +47,7 @@
 
         <cn-work-area [roles]="rolesForMain" [selectedRoles]="candidateForRole"
                       [highlightedSection]="highlightedSection"
-                      (onComplete)="onWorkAreaComplete($event)" [hidden]="isRolesShow"></cn-work-area>
+                      (onComplete)="onWorkAreaComplete($event)" (others)="onOthers($event)" [hidden]="isRolesShow"></cn-work-area>
 
       </div>
 
@@ -66,7 +66,7 @@
         <cn-proficiencies [choosedproficiencies]="candidate.proficiencies"
                           [highlightedSection]="highlightedSection"
                           (onSelect)="onProficiencySelect($event)" (onComplete)="onProficiencyComplete($event)"
-                          [hidden]="!showProficiency"></cn-proficiencies>
+                          [hidden]="!showProficiency" [isOthers]="isOthers"></cn-proficiencies>
 
         <cn-industry-experience [candidateExperiencedIndustry]="candidate.interestedIndustries"
                                 [choosedIndustry]="candidate.industry.name"

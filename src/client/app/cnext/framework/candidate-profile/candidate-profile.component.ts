@@ -59,6 +59,7 @@ export class CandidateProfileComponent implements OnInit, DoCheck, OnDestroy {
   private visiblitySetToNoMessage : string = Tooltip.PROFILE_INFO_VISIBILIT_SET_TO_NO;
   differ: any;
   public navIsFixed: boolean = false;
+  public isOthers: boolean;
 
   constructor(private _router: Router,
               private complexityService: ComplexityService,
@@ -152,12 +153,21 @@ export class CandidateProfileComponent implements OnInit, DoCheck, OnDestroy {
   onWorkAreaComplete(roles: Role[]) {
     this.candidate.industry.roles = roles;
     this.saveCandidateDetails();
-    this.candidateForCapability = this.candidate.industry.roles;
-    this.candidateForComplexity = this.candidate.industry.roles;
-    this.rolesForCapability = new Array(0);
-    this.showCapability = true;
-    this.whichStepsVisible[1] = true;
-    this.whichStepsVisible[3] = false;
+    if (roles.length===1 && roles[0].code === '99999') {
+      this.showCapability = false;
+      this.showComplexity=false;
+    }else{
+      this.candidateForCapability = this.candidate.industry.roles;
+      this.candidateForComplexity = this.candidate.industry.roles;
+      this.rolesForCapability = new Array(0);
+      this.showCapability = true;
+      this.whichStepsVisible[1] = true;
+      this.whichStepsVisible[3] = false;
+    }
+  }
+
+  onOthers(isOthers: boolean) {
+    this.isOthers = isOthers;
   }
 
   onCapabilityComplete(roles: Role[]) {
@@ -323,6 +333,7 @@ export class CandidateProfileComponent implements OnInit, DoCheck, OnDestroy {
       .subscribe(
         candidateData => {
           this.candidate.capability_matrix = Object.assign({}, candidateData.data[0].capability_matrix);
+          console.log('from getCandidateForComplexity');
           this.showComplexity = true;
         },
         error => this.errorService.onError(error));
@@ -363,65 +374,73 @@ export class CandidateProfileComponent implements OnInit, DoCheck, OnDestroy {
           this.isRolesShow = false;
           //this.getRoles();
           if (this.candidate.industry.roles.length > 0) {
-            this.showCapability = true;
-            //this.getCapability();
-            this.whichStepsVisible[1] = true;
-            for (let role of this.candidate.industry.roles) {
-              if (role.default_complexities[0] !== undefined && role.default_complexities[0].complexities.length > 0) {
-                this.isPresentDefaultcomplexity = true;
+              if (this.candidate.industry.roles.length === 1 && this.candidate.industry.roles[0].code === '99999') {
+                this.highlightedSection.name = 'None';
+                this.isOthers = true;
               }
-              if (role.capabilities !== undefined && role.capabilities.length > 0) {
-                this.isPresentCapability = true;
-              }
-            }
-            if (this.isPresentCapability || this.isPresentDefaultcomplexity) {
-              //this.getComplexity();
-              this.showComplexity = true;
-              this.whichStepsVisible[2] = true;
-              if (this.candidate.capability_matrix) {
-                var capbilityMatrix: any = Object.keys(this.candidate.capability_matrix);
-                for (let index of capbilityMatrix) {
-                  if (this.candidate.capability_matrix[index] === -1) {
-                    this.isComplexityFilled = false;
+              else {
+                this.isOthers = false;
+                this.showCapability = true;
+                //this.getCapability();
+                this.whichStepsVisible[1] = true;
+                for (let role of this.candidate.industry.roles) {
+                  if (role.default_complexities[0] !== undefined && role.default_complexities[0].complexities.length > 0) {
+                    this.isPresentDefaultcomplexity = true;
+                  }
+                  if (role.capabilities !== undefined && role.capabilities.length > 0) {
+                    this.isPresentCapability = true;
                   }
                 }
-              }
-              if (this.isComplexityFilled) {
-                this.whichStepsVisible[3] = true;
-                if (this.candidate.proficiencies !== undefined && this.candidate.proficiencies.length > 0) {
-                  this.highlightedSection.isProficiencyFilled = true;
-                  this.showProficiency = true;
-                  this.whichStepsVisible[4] = true;
-                  if (this.candidate.interestedIndustries !== undefined && this.candidate.interestedIndustries.length > 0) {
-                    this.showIndustryExperience = true;
-                    if (this.candidate.professionalDetails !== undefined && this.candidate.professionalDetails.noticePeriod !== '') {
-                      this.showProfessionalData = true;
-                      this.whichStepsVisible[5] = true;
-                      this.candidate.isCompleted = true;
-                      this.highlightedSection.iscompleted = true;
-                      this.checkdataFilled();
-                      this.highlightedSection.name = 'None';
+                if (this.isPresentCapability || this.isPresentDefaultcomplexity) {
+                  //this.getComplexity();
+                  this.showComplexity = true;
+                  this.whichStepsVisible[2] = true;
+                  if (this.candidate.capability_matrix) {
+                    var capbilityMatrix:any = Object.keys(this.candidate.capability_matrix);
+                    for (let index of capbilityMatrix) {
+                      if (this.candidate.capability_matrix[index] === -1) {
+                        this.isComplexityFilled = false;
+                      }
+                    }
+                  }
+                  if (this.isComplexityFilled) {
+                    this.whichStepsVisible[3] = true;
+                    if (this.candidate.proficiencies !== undefined && this.candidate.proficiencies.length > 0) {
+                      this.highlightedSection.isProficiencyFilled = true;
+                      this.showProficiency = true;
+                      this.whichStepsVisible[4] = true;
+                      if (this.candidate.interestedIndustries !== undefined && this.candidate.interestedIndustries.length > 0) {
+                        this.showIndustryExperience = true;
+                        if (this.candidate.professionalDetails !== undefined && this.candidate.professionalDetails.noticePeriod !== '') {
+                          this.showProfessionalData = true;
+                          this.whichStepsVisible[5] = true;
+                          this.candidate.isCompleted = true;
+                          this.highlightedSection.iscompleted = true;
+                          this.checkdataFilled();
+                          this.highlightedSection.name = 'None';
+                        } else {
+                          this.showProfessionalData = true;
+                          this.whichStepsVisible[5] = true;
+                          this.highlightedSection.name = 'Professional-Details';
+                        }
+                      } else {
+                        this.showIndustryExperience = true;
+                        this.highlightedSection.name = 'IndustryExposure';
+                      }
                     } else {
-                      this.showProfessionalData = true;
-                      this.whichStepsVisible[5] = true;
-                      this.highlightedSection.name = 'Professional-Details';
+                      this.showProficiency = true;
+                      this.whichStepsVisible[4] = true;
+                      this.highlightedSection.name = 'Proficiencies';
                     }
                   } else {
-                    this.showIndustryExperience = true;
-                    this.highlightedSection.name = 'IndustryExposure';
+                    this.highlightedSection.name = 'Complexities';
                   }
                 } else {
-                  this.showProficiency = true;
-                  this.whichStepsVisible[4] = true;
-                  this.highlightedSection.name = 'Proficiencies';
+                  this.highlightedSection.name = 'Capabilities';
                 }
-              } else {
-                this.highlightedSection.name = 'Complexities';
               }
-            } else {
-              this.highlightedSection.name = 'Capabilities';
-            }
-          } else {
+
+          }else {
             this.highlightedSection.name = 'Work-Area';
           }
         } else {
@@ -438,10 +457,10 @@ export class CandidateProfileComponent implements OnInit, DoCheck, OnDestroy {
       this.whichStepsVisible[4] = true;
     }
 
-    if (this.candidate.professionalDetails !== undefined && this.candidate.professionalDetails.education !== '') {
+    /*if (this.candidate.professionalDetails !== undefined && this.candidate.professionalDetails.education !== '') {
       this.showProfessionalData = true;
       this.whichStepsVisible[5] = true;
-    }
+    }*/
 
     if (candidateData.data[0].isCompleted === true) {
       this.showIndustryExperience = true;
