@@ -32,7 +32,7 @@
   },
   "logger" : {
     "levels": {
-      "[all]":"OFF"
+      "[all]":"DEBUG"
     },
     "appenders": [
       {
