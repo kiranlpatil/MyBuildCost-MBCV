@@ -144,19 +144,16 @@
                      (change)="filterByIndustryExposure($event)">{{itemList}}
             </label>
           </div>
-        </div><br>
+        </div>
 
         <div *ngIf="isRecuirter">
-          <h5 data-toggle="collapse" href="#mustHave" (click)="mustHaveComplexityPanel=!mustHaveComplexityPanel"
-            [ngClass]="{'panel-up': mustHaveComplexityPanel , 'panel-down': !mustHaveComplexityPanel }"
-          >Must Have Capabilities</h5>
-          <div id="mustHave" class="collapse">
-            <div>
-              <label class="checkbox">
-                <input formControlName="mustHaveComplexity" type="checkbox" value="{{itemList}}"
-                       (change)="filterByMustHaveComplexity($event)">Apply{{itemList}}
-              </label>
-            </div>
+          <div class="select-option default-checkbox">
+            <label>
+              <input formControlName="mustHaveComplexity" type="checkbox" value="{{itemList}}"
+                     (change)="filterByMustHaveComplexity($event)">
+              <div class="check"></div>
+            </label>
+            <span>{{getLabel().MUST_TO_HAVE_FILTER_LABEL}}</span>
           </div>
         </div>
       </div>

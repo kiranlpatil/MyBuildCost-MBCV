@@ -7,6 +7,7 @@ import {QCardFilterService} from "../q-card-filter.service";
 import {FilterService} from "./filter.service";
 import {QCardFilter} from "../../model/q-card-filter";
 import {ErrorService} from "../../../../shared/services/error.service";
+import {Label} from "../../../../shared/constants";
 
 @Component({
   moduleId: module.id,
@@ -382,5 +383,9 @@ export class FilterComponent {
     }
     this.buildQuery();
     this.qCardFilterService.filterby(this.qCardFilter);
+  }
+
+  getLabel() {
+    return Label;
   }
 }

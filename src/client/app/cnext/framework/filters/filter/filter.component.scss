@@ -14,3 +14,16 @@
   font-size: 12px;
   margin-right: 4px;
 }
+
+.default-checkbox {
+  margin: 15px 10px 5px 0;
+  width: 100%;
+  position: relative;
+
+  span {
+    position: absolute;
+    top: 0;
+    left: 22px;
+    font-size: 12px;
+  }
+}
