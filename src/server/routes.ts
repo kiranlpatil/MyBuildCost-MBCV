@@ -4,7 +4,7 @@ import * as adminController from "./app/framework/controllers/admin.controller";
 import * as candidateController from "./app/framework/controllers/candidate.controller";
 import * as recruiterController from "./app/framework/controllers/recruiter.controller";
 import * as importIndustriesController from "./app/framework/controllers/import-Industries.controller";
-import * as sharedService from "./app/framework/shared/shared.service";
+import * as sharedService from "./app/framework/shared/logger/shared.service";
 import * as userInterceptor from "./app/framework/interceptor/user.interceptor";
 import { ImportIndustryController } from "./app/framework/controllers/import-Industries.controller";
 import * as loggerInterceptor from "./app/framework/interceptor/logger.interceptor";

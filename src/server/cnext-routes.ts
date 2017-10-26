@@ -14,7 +14,7 @@ import * as adminController from "./app/framework/controllers/admin.controller";
 let AuthInterceptor = require('./app/framework/interceptor/auth.interceptor');
 import ShareController = require("./app/framework/share/controller/share.controller");
 //import * as shareController from "./app/framework/share/controller/share.controller";
-import * as sharedService from "./app/framework/shared/shared.service";
+import * as sharedService from "./app/framework/shared/logger/shared.service";
 import * as loggerInterceptor from "./app/framework/interceptor/logger.interceptor";
 this.authInterceptor = new AuthInterceptor();
 

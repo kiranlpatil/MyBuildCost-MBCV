@@ -1,7 +1,8 @@
-import LoggerService = require("./logger/LoggerService");
-var Messages = require('./messages');
-var logger = require('./logger/logger');
-import UserService = require('../services/user.service');
+import LoggerService = require("./LoggerService");
+
+var Messages = require('../messages');
+var logger = require('./logger');
+import UserService = require('../../services/user.service');
 
 
 export function errorHandler(err: any, req: any, res: any, next: any) {
@@ -25,6 +26,7 @@ export function errorHandler(err: any, req: any, res: any, next: any) {
         'code': 500
       }
     };
+    mailToAdmin(err);
     var responseObject = JSON.stringify(errorObject);
     _loggerService.logError(err);
     res.status(500).send(responseObject);

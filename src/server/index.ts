@@ -9,7 +9,7 @@ import * as methodOverride from "method-override";
 import * as cors from "cors";
 import * as fs from "fs";
 import LoggerService = require("./app/framework/shared/logger/LoggerService");
-import * as sharedService from "./app/framework/shared/shared.service";
+import * as sharedService from "./app/framework/shared/logger/shared.service";
 
 var spdy = require('spdy');
 
@@ -34,7 +34,7 @@ export function init(port: number, mode: string, protocol: string, dist_runner: 
   app.use(express.static('src/'));
   process.on('uncaughtException', function (err:any) {
     let _loggerService: LoggerService = new LoggerService('uncaught exception Handler');
-    console.log(err);
+     console.error(err);
     _loggerService.logError("Catching uncaught Exceptions. : " +err);
     _loggerService.logError("Catching uncaught Exceptions stack : " +err.stack);
     sharedService.mailToAdmin(err);
