@@ -10,11 +10,10 @@
     <p class="question">
       <span *ngIf="isCandidate && complexity.complexityDetails.questionForCandidate">{{complexity.complexityDetails.questionForCandidate}}</span>
       <span *ngIf="!isCandidate && complexity.complexityDetails.questionForRecruiter">{{complexity.complexityDetails.questionForRecruiter}}
-        <div class="select-option default-checkbox">
-          <input  type="checkbox" (click)="onSelectMustHaveComplexities(complexity.complexityDetails, $event)"
+        <div class="star-checkbox" title="{{getTooltip().MUST_TO_HAVE_TOOLTIP}}">
+          <input  class="star" type="checkbox" (click)="onSelectMustHaveComplexities(complexity.complexityDetails, $event)"
                  [checked]="complexity?.complexityDetails?.complexityIsMustHave">
         </div>
-        <!--class="star"-->
       </span>
     </p>
 

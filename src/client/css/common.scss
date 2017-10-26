@@ -45,6 +45,7 @@ $exact-bg: #edf7c4;
 $higher-bg: #b1d669;
 $less-bg: #ffe180;
 $missmatch-bg: #ffc3bb;
+$golden-star: #e2c702;
 
 .btn-logout {
   margin-top: 15px;
@@ -104,6 +105,47 @@ $missmatch-bg: #ffc3bb;
 .padding-right15 {
   padding-left: 0;
   padding-right: 15px;
+}
+
+//checkbox as star
+.star-checkbox {
+  display: inline-block;
+  position: relative;
+
+  .star {
+    color: #999;
+    cursor: pointer;
+    font-size: 22px;
+    margin: 0;
+    visibility: hidden;
+  }
+  .star:before {
+    content: "\2606";
+    left: 0;
+    position: absolute;
+    top: -5px;
+    visibility: visible;
+  }
+  .star:checked:before {
+    color: $golden-star;
+    content: "\2605";
+    left: 0;
+    position: absolute;
+    top: -5px;
+  }
+}
+
+.filled-star {
+  color: $golden-star;
+  font-size: 20px;
+  margin: 0;
+
+  &:before {
+    content: "\2605";
+    left: 0;
+    position: absolute;
+    top: -5px;
+  }
 }
 
 .required-field {

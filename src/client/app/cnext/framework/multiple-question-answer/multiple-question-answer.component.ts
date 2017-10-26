@@ -1,9 +1,9 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from "@angular/core";
-import {ComplexityDetails} from "../../../user/models/complexity-detail";
-import {LocalStorage} from "../../../shared/constants";
-import {LocalStorageService} from "../../../shared/services/localstorage.service";
-import {Scenario} from "../../../user/models/scenario";
-import {Capability} from "../../../user/models/capability";
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from "@angular/core";
+import { ComplexityDetails } from "../../../user/models/complexity-detail";
+import { LocalStorage, Tooltip } from "../../../shared/constants";
+import { LocalStorageService } from "../../../shared/services/localstorage.service";
+import { Scenario } from "../../../user/models/scenario";
+import { Capability } from "../../../user/models/capability";
 
 @Component({
   moduleId: module.id,
@@ -67,6 +67,10 @@ export class MultipleQuestionAnswerComponent implements OnInit, OnChanges {
     }
     complexityDetails.complexityIsMustHave = event.toElement.checked;
     this.onMustHaveSelect.emit(complexityDetails);
+  }
+
+  getTooltip() {
+    return Tooltip;
   }
 
 }
