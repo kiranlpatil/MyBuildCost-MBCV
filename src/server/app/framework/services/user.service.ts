@@ -287,7 +287,10 @@ class UserService {
     let header1 = fs.readFileSync('./src/server/app/framework/public/header1.html').toString();
     let content = fs.readFileSync('./src/server/app/framework/public/error.mail.html').toString();
     let footer1 = fs.readFileSync('./src/server/app/framework/public/footer1.html').toString();
-    let mid_content = content.replace('$time$', current_Time).replace('$host$', config.get('TplSeed.mail.host')).replace('$reason$', errorInfo.reason).replace('$code$', errorInfo.code).replace('$message$', errorInfo.message).replace('$error$',errorInfo.stackTrace.stack);
+    let mid_content = content.replace('$time$', current_Time).replace('$host$', config.get('TplSeed.mail.host')).replace('$reason$', errorInfo.reason).replace('$code$', errorInfo.code).replace('$message$', errorInfo.message);
+    if(errorInfo.stackTrace) {
+      mid_content=mid_content.replace('$error$',errorInfo.stackTrace.stack);
+    }
     let mailOptions = {
       from: config.get('TplSeed.mail.MAIL_SENDER'),
       to: config.get('TplSeed.mail.ADMIN_MAIL'),
