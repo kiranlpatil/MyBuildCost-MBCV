@@ -1,15 +1,15 @@
-import * as express from "express";
-import * as multiparty from "multiparty";
-import AuthInterceptor = require("../interceptor/auth.interceptor");
-import SendMailService = require("../services/sendmail.service");
-import UserModel = require("../dataaccess/model/user.model");
-import UserService = require("../services/user.service");
-import RecruiterService = require("../services/recruiter.service");
-import Messages = require("../shared/messages");
-import ResponseService = require("../shared/response.service");
-import CandidateService = require("../services/candidate.service");
-import adminController= require("./admin.controller");
-import RecruiterModel = require("../dataaccess/model/recruiter.model");
+import * as express from 'express';
+import * as multiparty from 'multiparty';
+import AuthInterceptor = require('../interceptor/auth.interceptor');
+import SendMailService = require('../services/sendmail.service');
+import UserModel = require('../dataaccess/model/user.model');
+import UserService = require('../services/user.service');
+import RecruiterService = require('../services/recruiter.service');
+import Messages = require('../shared/messages');
+import ResponseService = require('../shared/response.service');
+import CandidateService = require('../services/candidate.service');
+import adminController= require('./admin.controller');
+import RecruiterModel = require('../dataaccess/model/recruiter.model');
 
 var bcrypt = require('bcrypt');
 
@@ -603,22 +603,12 @@ export function updateProfileField(req:express.Request, res:express.Response, ne
 export function retrieve(req: express.Request, res: express.Response, next: any) {
   try {
     var userService = new UserService();
-    var params = req.query;
+    var params = req.params.id;
     delete params.access_token;
     var user = req.user;
     var auth: AuthInterceptor = new AuthInterceptor();
 
-    userService.retrieve(params, (error, result) => {
-      if (error) {
-        next({
-          reason: Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
-          message: Messages.MSG_ERROR_WRONG_TOKEN,
-          code: 401
-        });
-
-      }
-      else {
-        var token = auth.issueTokenWithUid(user);
+    var token = auth.issueTokenWithUid(user);
         res.send({
           "status": "success",
           "data": {
@@ -633,11 +623,7 @@ export function retrieve(req: express.Request, res: express.Response, next: any)
           },
           access_token: token
         });
-
-      }
-    });
-  }
-  catch (e) {
+  }catch (e) {
     res.status(403).send({message: e.message});
   }
 }

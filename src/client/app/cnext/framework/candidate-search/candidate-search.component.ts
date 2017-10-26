@@ -62,7 +62,7 @@ export class CandidateSearchComponent implements OnChanges {
 
   searchCandidate(value:string) {
     this.searchValue = value;
-    if (value !== '') {
+    if (value !== '' && value.length >= 3) {
       this.candidateSearchService.getCandidateByName(value)
         .subscribe(
           (res:any) => {

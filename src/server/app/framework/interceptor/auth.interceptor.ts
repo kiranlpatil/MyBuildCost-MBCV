@@ -1,7 +1,7 @@
 import * as passport from "passport";
 import * as jwt from "jwt-simple";
 import * as Bearer from "passport-http-bearer";
-import {ConstVariables} from "../shared/sharedconstants";
+import { ConstVariables } from "../shared/sharedconstants";
 var BearerStrategy: any = Bearer.Strategy;
 var FacebookTokenStrategy = require('passport-facebook-token');
 import UserRepository = require("../dataaccess/repository/user.repository");
@@ -170,16 +170,12 @@ class AuthInterceptor {
   }
 
   issueTokenWithUid(user: any,role?:string) {
-    console.log("In issue token",role);
-    console.log('user', JSON.stringify(user));
-    console.log('user', user.isCandidate);
     var issuer: string;
     if (user.userId) {
       issuer = user.userId;
     } else {
       issuer = user._id;
     }
-    console.log('issuer', issuer);
     var curDate = new Date();
     // expires in 60 days
     var expires = new Date(curDate.getTime() + (60 * 24 * 60 * 60 * 1000)); //(day*hr*min*sec*milisec)
@@ -212,7 +208,6 @@ class AuthInterceptor {
     passport.authenticate('bearer', {session: false},
       function (err:any, myuser:any, isShareApi:boolean) {
         if (err) {
-          console.log('errorr in error', JSON.stringify(err));
           return res.status(401).send({
             'error': {
               reason: err.message,
@@ -279,11 +274,9 @@ class AuthInterceptor {
 
   googleAuth(req: any, res: any, next: any) {
     var request = require('request');
-    console.log('got token from g+ in body  ');
     request('https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=' + req.body.googleToken, (error: any, response: any, body: any) => {
       if (error) {
         if (error.code == "ETIMEDOUT") {
-          console.log('Error ETIMEDOUT:' + JSON.stringify(error));
           next({
             reason: Messages.MSG_ERROR_RSN_WHILE_CONTACTING,
             message: Messages.MSG_ERROR_CONNECTION_TIMEOUT,
@@ -291,15 +284,10 @@ class AuthInterceptor {
           });
 
         }
-        else {
-          console.log('Errormsg googleAuth :' + JSON.stringify(error));
-
-        }
       }
       else if (response) {
         if (!error && response.statusCode == 200) {
           var goolePlusObject = JSON.parse(body);
-          console.log("goolePlusObject is as flw", goolePlusObject);
           var userRepository: UserRepository = new UserRepository();
           var query = {"email": goolePlusObject.email};
           userRepository.retrieve(query, (err, user) => {
@@ -309,23 +297,19 @@ class AuthInterceptor {
             // if the user is found, then log them in
             else if (user.length > 0) {
               if (user[0].social_profile_picture) {
-                console.log('User has social pic :' + JSON.stringify(user[0]));
                 req.user = {'email': user[0].email, 'password': user[0].password};
                 next();
               }
               else {
-                console.log("user in query is", user[0]);
                 var query = {"email": user[0].email};
                 var updateData = {"social_profile_picture": goolePlusObject.picture};
                 var userRepository: UserRepository = new UserRepository();
                 userRepository.findOneAndUpdate(query, updateData, {new: true}, (error, result) => {
                   if (error) {
-                    console.log("failure in social_profile_picture update");
                     next(error);
                     // callback(new Error(Messages.MSG_ERROR_EMAIL_ACTIVE_NOW), null);
                   }
                   else {
-                    console.log("success in social_profile_picture update result", result);
                     req.user = {'email': user[0].email, 'password': user[0].password};
                     next();
                   }
@@ -349,12 +333,10 @@ class AuthInterceptor {
               var userRepository: UserRepository = new UserRepository();
               userRepository.create(newUser, (err: any, res: any) => {
                 if (err) {
-                  console.log('Err creating user ' + err);
                   next(err);
                 }
                 else if (res) {
                   req.user = {'email': res.email, 'password': res.password};
-                  console.log('REquest :' + JSON.stringify(req.user));
                   next();
                 }
               });

@@ -4,6 +4,7 @@
       "host":"127.0.0.1",
       "name": "JobMosis-production"
     },
+    "limitForQuery" : 10,
     "mail": {
       "host":"http://52.41.194.37/",
       "MAIL_SENDER": "notifications@jobmosis.com",

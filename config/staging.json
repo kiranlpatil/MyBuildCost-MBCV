@@ -4,6 +4,7 @@
       "host":"127.0.0.1",
       "name": "Jobmosis-staging"
     },
+    "limitForQuery" : 10,
     "mail": {
       "host":"https://34.215.90.153:3000/",
       "MAIL_SENDER": "redminestatus@techprimelab.com",
