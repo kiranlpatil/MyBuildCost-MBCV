@@ -75,7 +75,7 @@
       <div *ngFor="let history of candidate.employmentHistory" class="line-block">
         <b *ngIf="history.isPresentlyWorking!=true">{{history.from.year}} - {{history.to.year}}</b> //To do lucky-add if
         else instead of using two ngIf
-        <b *ngIf="history.isPresentlyWorking===true">{{history.from.year}} - {{getMessages().MSG_PRESENTLY_WORKING}}</b>
+        <b *ngIf="history.isPresentlyWorking===true">{{history.from.year}} - {{getMessage().MSG_PRESENTLY_WORKING}}</b>
         <b><label><strong>{{history.designation}}</strong></label> | <label>{{history.companyName}}</label></b>
         <b class="remark">{{history.remarks}}</b>
       </div>
