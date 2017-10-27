@@ -103,6 +103,24 @@
   }
 }
 
+.capability-right-fit-guided-tour {
+  border-radius: 5px;
+  font-size: 18px;
+  left: 50%;
+  min-height: 106px;
+  padding: 5px 15px;
+  position: fixed;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 680px;
+
+  p {
+    color: $white;
+    font-weight: normal;
+    text-align: left;
+  }
+}
+
 .guided-tour-notes {
   bottom: 46px;
   color: $white;
@@ -456,7 +474,8 @@
   .dashboard-matching-degree-guided-tour,
   .dashboard-menu-guided-tour,
   .dashboard-filter-guided-tour,
-  .profile-submission-guided-tour {
+  .profile-submission-guided-tour,
+  .capability-right-fit-guided-tour {
     display: none;
   }
 }

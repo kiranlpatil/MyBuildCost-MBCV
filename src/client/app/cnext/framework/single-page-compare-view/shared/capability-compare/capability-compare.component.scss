@@ -11,9 +11,10 @@
     background: url(../assets/c-next/card-view/sprite.png) no-repeat -33px -735px;
     float: left;
     height: 32px;
-    width: 19px;
-    position: absolute;
     left: 4px;
+    position: absolute;
+    top: -7px;
+    width: 19px;
   }
 }
 
@@ -124,10 +125,11 @@
   .match-icon {
     background: url(../assets/c-next/card-view/sprite.png) no-repeat -8px -735px;
     float: left;
-    height: 32px;
-    width: 19px;
-    position: absolute;
     left: 4px;
+    height: 32px;
+    position: absolute;
+    top: -7px;
+    width: 19px;
   }
 }
 
@@ -177,9 +179,10 @@
     background: url(../assets/c-next/card-view/sprite.png) no-repeat -58px -735px;
     float: left;
     height: 32px;
-    width: 19px;
-    position: absolute;
     left: 4px;
+    position: absolute;
+    top: -7px;
+    width: 19px;
   }
 }
 
@@ -231,9 +234,10 @@
     background: url(../assets/c-next/card-view/sprite.png) no-repeat -83px -735px;
     float: left;
     height: 32px;
-    width: 19px;
-    position: absolute;
     left: 4px;
+    position: absolute;
+    top: -7px;
+    width: 19px;
   }
 }
 
@@ -434,6 +438,12 @@
       width: 34px !important;
       height: 34px !important;
     }
+  }
+
+  .filled-star {
+    position: absolute;
+    top: 35px;
+    left: 5px;
   }
 }
 
@@ -702,9 +712,14 @@
     .capability-edit > .inner {
       padding: 5px 20px 5px 5px;
       border: 1px solid $white;
+      position: relative;
       &:hover {
         border: 1px solid $border-color1;
       }
+    }
+
+    .capability-edit > .inner > .filled-star {
+      display: none;
     }
 
     .btn-edit {

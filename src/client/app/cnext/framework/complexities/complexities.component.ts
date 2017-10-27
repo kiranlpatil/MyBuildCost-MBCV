@@ -22,7 +22,9 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
   @Input() roles: Role[] = new Array(0); //TODO remove this
   @Input() complexities: any; //TODO why this is of type of ANY
   @Input() complexityNotes: any; //TODO why this is of type of ANY
+  @Input() complexitiesIsMustHave: any; //TODO why this is of type of ANY
   @Output() onComplete = new EventEmitter();
+  @Output() onMustHave = new EventEmitter();
   @Output() onComplextyAnswered = new EventEmitter();
   @Input() highlightedSection: Section;
   @Input() isComplexityPresent: boolean = true;
@@ -55,7 +57,8 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
     '<li><p>2. '+Tooltip.COMPLEXITIES_CANDIDATE_TOOLTIP_2+'</p></li></ul>';
   tooltipRecruiterMessage: string = '<ul><li>' +
     '<p>1. '+Tooltip.COMPLEXITIES_RECRUITER_TOOLTIP_1+'</p></li>' +
-    '<li><p>2. '+Tooltip.COMPLEXITIES_RECRUITER_TOOLTIP_2+'</p>' +
+    '<li><p>2. '+Tooltip.COMPLEXITIES_RECRUITER_TOOLTIP_2+'</p></li>' +
+      '<li><p>3. '+Tooltip.COMPLEXITIES_RECRUITER_TOOLTIP_3+'</p>' +
     '</li></ul>';
   @ViewChild('save')
   private _inputElement1: ElementRef;
@@ -238,6 +241,13 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
     this.isValid=true;
     this.complexities[complexityDetails.code] = complexityDetails.userChoice;
     this.onComplextyAnswered.emit(this.complexities);
+  }
+
+  onMustHaveSelect(complexityDetails: ComplexityDetails) {
+    if(this.complexitiesIsMustHave) {
+      this.complexitiesIsMustHave[complexityDetails.code] = complexityDetails.complexityIsMustHave;
+      this.onMustHave.emit(this.complexitiesIsMustHave);
+  }
   }
 
   getCapabilityDetail(currentCapability: number) {

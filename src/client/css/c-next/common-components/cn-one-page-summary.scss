@@ -63,6 +63,13 @@
         border: 1px solid $white !important;
       }
     }
+
+    .capability-edit > .inner > .filled-star {
+      display: block !important;
+      left: -17px;
+      position: absolute;
+      top: 4px;
+    }
   }
 }
 

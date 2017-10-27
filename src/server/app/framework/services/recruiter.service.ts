@@ -183,7 +183,9 @@ class RecruiterService {
           item.postedJobs.capability_matrix = {};
         }
         let new_capability_matrix: any = {};
+        let new_complexity_musthave_matrix: any = {};
         item.postedJobs.capability_matrix = capabilityMatrixService.getCapabilityMatrix(item.postedJobs, industries, new_capability_matrix);
+        item.postedJobs.complexity_musthave_matrix = capabilityMatrixService.getComplexityMustHaveMatrix(item.postedJobs, industries, new_complexity_musthave_matrix);
         this.recruiterRepository.findOneAndUpdate(
           {
             'userId': new mongoose.Types.ObjectId(_id),

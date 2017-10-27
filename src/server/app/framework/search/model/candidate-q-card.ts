@@ -18,4 +18,5 @@ export class CandidateQCard {
   email: string;
   picture: string;
   isVisible: boolean;
+  complexityIsMustHave: boolean = false;
 }

@@ -33,6 +33,7 @@ export class ProfileComparisonDataModel {
   job_list: JobListModel[];
   capability_matrix: any;
   complexity_note_matrix:any;
+  complexity_musthave_matrix: any;
   salaryMatch: string;
   experienceMatch: string;
   educationMatch: string;

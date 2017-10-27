@@ -1,5 +1,15 @@
 <a #fileToDownload hidden></a>
 <!--<button (click)="createFile('pdf')">Generate Pdf</button>-->
-<button title="Download page" class="print-btn" (click)="createFile('img')">
-  <span></span>
-</button>
+<div class="print-message">
+  <button title="Download page" class="print-btn" (click)="createFile('img')">
+    <span></span>
+  </button>
+
+  <div *ngIf="isShowSuggestionToasterMsg" class="message-content">
+    <div class="col-xs-1 padding-left5"><img src="{{getImagePath().INFO_RED}}"></div>
+    <div class="col-xs-10 no-padding padding-left15"><p>{{msgCandidateIfNotInCartForPrint}}</p></div>
+    <div class="col-xs-1 padding-right5">
+      <button type="button" class="close" (click)="closeMessage()">&times;</button>
+    </div>
+  </div>
+</div>

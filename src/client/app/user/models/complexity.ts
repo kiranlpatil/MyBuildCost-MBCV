@@ -10,5 +10,6 @@ export class Complexity {
   questionForRecruiter: string = '';
   match: string;
   answer: string;
+  isMustHave: boolean;
   complexityNote:string;
 }

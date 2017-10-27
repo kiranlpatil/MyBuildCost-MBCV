@@ -14,6 +14,7 @@ import User = require('../dataaccess/mongoose/user');
 import CapabilitiesClassModel = require('../dataaccess/model/capabilities-class.model');
 import ComplexitiesClassModel = require('../dataaccess/model/complexities-class.model');
 import RoleModel = require('../dataaccess/model/role.model');
+import {underline} from "chalk";
 let bcrypt = require('bcrypt');
 class CandidateService {
   private candidateRepository: CandidateRepository;
@@ -423,7 +424,7 @@ class CandidateService {
     });
   }
 
-  getCapabilityValueKeyMatrixBuild(capability_matrix: any, industries: any): any {
+  getCapabilityValueKeyMatrixBuild(capability_matrix: any, industries: any, complexity_musthave_matrix?: any): any {
     let keyValueCapability: any = {};
     for (let cap in capability_matrix) {
       let isFound: boolean = false;
@@ -526,6 +527,9 @@ class CandidateService {
               if (scenarios[0]) {
                 match_view.scenario_name = scenarios[0].name;
                 match_view.userChoice = scenarios[0].code;
+              }
+              if(complexity_musthave_matrix && complexity_musthave_matrix[cap] !== undefined) {
+                match_view.complexityIsMustHave = complexity_musthave_matrix[cap];
               }
               keyValueCapability[cap] = match_view;
               break;
@@ -633,6 +637,9 @@ class CandidateService {
                 if (scenarios[0]) {
                   match_view.scenario_name = scenarios[0].name;
                   match_view.userChoice = scenarios[0].code;
+                }
+                if(complexity_musthave_matrix && complexity_musthave_matrix[cap] !== undefined ) {
+                  match_view.complexityIsMustHave = complexity_musthave_matrix[cap];
                 }
                 keyValueCapability[cap] = match_view;
                 break;

@@ -11,7 +11,7 @@
 
 <div id="{{jobCompareIdForPrint}}">
 <div class="modal-header">
-  <cn-print-screen *ngIf="typeOfView == 'spa_candidate'" [screenIdForPrint]="'print-job-compare-view'" [fileName]="'Candidate-Overlay-View'" [candidateId]="candiadteId" [jobId]="recruiterId"></cn-print-screen>
+  <cn-print-screen *ngIf="!isCandidate" [typeOfView]="typeOfView" [screenIdForPrint]="'print-job-compare-view'" [fileName]="'Candidate-Overlay-View'" [candidateId]="candiadteId" [jobId]="recruiterId"></cn-print-screen>
   <div *ngIf="typeOfView =='spa_job' && recruiter != undefined">
     <img src="/assets/framework/images/dashboard/profile.png" alt="User Profile"
          *ngIf="recruiter.company_logo==undefined"/>

@@ -23,7 +23,7 @@
     </ul>
     <div class="sort-by">
       <div class="form-group">
-        <label>Sort by</label>
+      <label>Sort by</label>
         <select id="menu" [(ngModel)]="qCardModel.sortValue" (change)="changeSort()" >
           <option value="{{itemList}}" *ngFor="let itemList of qCardModel.listOfMatchings">{{itemList}}</option>
         </select>
