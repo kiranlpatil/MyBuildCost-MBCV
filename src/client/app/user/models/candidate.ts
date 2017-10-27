@@ -31,6 +31,7 @@ export class Candidate {
   isCompleted: boolean;
   summary: Summary = new Summary();
   basicInformation: CandidateDetail = new CandidateDetail();
+  profile_update_tracking:number;
   _id: string;
 }
 

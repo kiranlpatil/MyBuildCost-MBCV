@@ -62,6 +62,9 @@ class RecruiterSchema {
         capability_matrix: {
           type: Object
         },
+        complexity_musthave_matrix: {
+          type: Object
+        },
         jobCloseReason:{
           type: Number
         },

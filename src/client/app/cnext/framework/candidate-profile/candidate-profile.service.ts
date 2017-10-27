@@ -23,6 +23,16 @@ export class CandidateProfileService extends BaseService {
       .catch(this.handleError);
   }
 
+  updateCandidateField(item:any): Observable<any> {
+    let headers = new Headers({'Content-Type': 'application/json'});
+    let options = new RequestOptions({headers: headers});
+    let body = JSON.stringify(item);
+    let url: string = API.CANDIDATE_PROFILE + '/' +'fieldUpdate'+'/'+ LocalStorageService.getLocalValue(LocalStorage.USER_ID);
+    return this.http.put(url, body, options)
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
+
   getCandidateDetails(): Observable<any> {
     let headers = new Headers({'Content-Type': 'application/json'});
    // let options = new RequestOptions({headers: headers});

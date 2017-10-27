@@ -9,7 +9,12 @@
   <div class="question-container" *ngFor="let complexity of capabilityDetails.complexities">
     <p class="question">
       <span *ngIf="isCandidate && complexity.complexityDetails.questionForCandidate">{{complexity.complexityDetails.questionForCandidate}}</span>
-      <span *ngIf="!isCandidate && complexity.complexityDetails.questionForRecruiter">{{complexity.complexityDetails.questionForRecruiter}}</span>
+      <span *ngIf="!isCandidate && complexity.complexityDetails.questionForRecruiter">{{complexity.complexityDetails.questionForRecruiter}}
+        <div class="star-checkbox" title="{{getTooltip().MUST_TO_HAVE_TOOLTIP}}">
+          <input  class="star" type="checkbox" (click)="onSelectMustHaveComplexities(complexity.complexityDetails, $event)"
+                 [checked]="complexity?.complexityDetails?.complexityIsMustHave">
+        </div>
+      </span>
     </p>
 
     <div class="scenarios">

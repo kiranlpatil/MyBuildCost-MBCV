@@ -108,4 +108,8 @@ export class CapabilityCompareComponent  implements OnChanges {
     this.showMore = false;
   }
 
+    getTooltip() {
+    return Tooltip;
+  }
+
 }

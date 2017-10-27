@@ -18,6 +18,14 @@
 
   .question {
     margin: 0 0 10px;
+    padding-right: 20px;
+    position: relative;
+
+    .star-checkbox {
+      position: absolute !important;
+      right: 0;
+      top: 0;
+    }
   }
 
   .question-container {
@@ -121,4 +129,3 @@
     opacity: 1;
   }
 }
-

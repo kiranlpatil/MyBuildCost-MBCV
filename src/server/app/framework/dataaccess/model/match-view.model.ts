@@ -23,6 +23,7 @@ class MatchViewModel {
   capability_sort_order: string;
   complexity_sort_order: string;
   main_sort_order: number;
+  complexityIsMustHave: boolean = false;
   complexityNote:string;
 }
 

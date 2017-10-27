@@ -38,6 +38,7 @@
       </div>
       <div class="scrollable-content" *ngIf="!isCandidate">
         <cn-multiple-question-answer [capabilityDetails]="currentCapability" (onComplete)="onCapabilityAnswered($event)"
+                                     (onMustHaveSelect)="onMustHaveSelect($event)"
                                      (onQuestionComplete)="oncurrentComplexityAnswered($event)"></cn-multiple-question-answer>
       </div>
       </div>

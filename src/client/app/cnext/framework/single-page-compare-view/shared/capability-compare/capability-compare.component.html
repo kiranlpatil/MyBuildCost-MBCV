@@ -32,10 +32,19 @@
                      [class.extra]="complexity.match==4"
                      *ngIf="complexity.scenarios[0]&& complexity.scenarios[0].name != undefined">
                   <div class="match-icon"></div>
-                  <span class="complexity-name">{{complexity.name}}</span>
+                  <span class="complexity-name">
+                    <span class="complexity-star" *ngIf="complexity.complexityDetails.complexityIsMustHave"
+                          title="{{getTooltip().MUST_TO_HAVE_CAPABILITY_COMPARE_MESSAGE}}">&#9733;
+                    </span>
+                    {{complexity.name}}
+                  </span>
                   <div *ngFor="let scenario of complexity.scenarios">
                     <div class="complexity-scenarios-description">
-                      <span class="complexity-name">{{complexity.name}}</span>
+                      <span class="complexity-name">
+                        <span class="complexity-star" *ngIf="complexity.complexityDetails.complexityIsMustHave"
+                              title="{{getTooltip().MUST_TO_HAVE_CAPABILITY_COMPARE_MESSAGE}}">&#9733;</span>
+                        {{complexity.name}}
+                      </span>
                       <span class="scenario-name-top" [class.not-match-overlay]="complexity.match != 2">{{scenario.name }}</span>
                       <div *ngIf="complexity.match != 2" [class.unmatch-overlay-show]="complexity.match != 2">
                         <div class="col-xs-12 no-padding user-info-modal">
@@ -101,6 +110,7 @@
                   <button class="btn-edit" (click)="onComplexitySelect(complexity,capability)" title="Edit this Capability Detail"></button>
                   <div class="inner">
                     <span class="complexity-name">{{complexity.name}}</span>
+                    <div class="filled-star" title="{{getTooltip().MUST_TO_HAVE_CAPABILITY_COMPARE_MESSAGE}}" *ngIf="complexity.complexityDetails.complexityIsMustHave"></div>
                     <div class="scenario-row" *ngFor="let scenario of complexity.scenarios">
                       <span>{{scenario.name}}</span>
                     </div>

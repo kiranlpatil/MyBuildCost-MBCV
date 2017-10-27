@@ -104,11 +104,11 @@ export function getAllUser(req: express.Request, res: express.Response, next: an
       });
     } else {
       next({
-          reason: Messages.MSG_ERROR_UNAUTHORIZED_USER,
-          message: Messages.MSG_ERROR_UNAUTHORIZED_USER,
-          stackTrace: new Error(),
-          code: 401
-        });
+        reason: Messages.MSG_ERROR_UNAUTHORIZED_USER,
+        message: Messages.MSG_ERROR_UNAUTHORIZED_USER,
+        stackTrace: new Error(),
+        code: 401
+      });
     }
   } catch (e) {
     next({
@@ -141,7 +141,7 @@ export function getCountOfUsers(req: express.Request, res: express.Response, nex
         }
       });
     } else {
-     next({
+      next({
           reason: Messages.MSG_ERROR_UNAUTHORIZED_USER,
           message: Messages.MSG_ERROR_UNAUTHORIZED_USER,
           stackTrace: new Error(),
@@ -182,11 +182,11 @@ export function getCandidateDetailsByInitial(req: express.Request, res: express.
       });
     } else {
       next({
-          reason: Messages.MSG_ERROR_UNAUTHORIZED_USER,
-          message: Messages.MSG_ERROR_UNAUTHORIZED_USER,
-          stackTrace: new Error(),
-          code: 401
-        });
+        reason: Messages.MSG_ERROR_UNAUTHORIZED_USER,
+        message: Messages.MSG_ERROR_UNAUTHORIZED_USER,
+        stackTrace: new Error(),
+        code: 401
+      });
     }
   } catch (e) {
     next({
@@ -220,11 +220,11 @@ export function getRecruiterDetailsByInitial(req: express.Request, res: express.
         }
       });
     } else {
-      next( {
-          reason: Messages.MSG_ERROR_UNAUTHORIZED_USER,
-          message: Messages.MSG_ERROR_UNAUTHORIZED_USER,
-          stackTrace: new Error(),
-          code: 401
+      next({
+        reason: Messages.MSG_ERROR_UNAUTHORIZED_USER,
+        message: Messages.MSG_ERROR_UNAUTHORIZED_USER,
+        stackTrace: new Error(),
+        code: 401
       });
     }
   } catch (e) {
@@ -244,16 +244,16 @@ export function exportCandidateDetails(req: express.Request, res: express.Respon
     var params = {};
     let userType = 'candidate';
     if (req.user.isAdmin) {
-      adminService.getUserDetails(userType, (error, resp) => {
-        if (error) {
+      adminService.exportCandidateCollection((err, respo) => {
+        if (err) {
           next({
-            reason: Messages.MSG_ERROR_SEPERATING_USER,//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
-            message: Messages.MSG_ERROR_SEPERATING_USER,
+            reason: Messages.MSG_ERROR_CREATING_EXCEL,//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
+            message: Messages.MSG_ERROR_CREATING_EXCEL,
             stackTrace: new Error(),
             code: 403
           });
         } else {
-          adminService.generateCandidateDetailFile(resp, (err, respo) => {
+          adminService.exportCandidateOtherDetailsCollection((err, respo) => {
             if (err) {
               next({
                 reason: Messages.MSG_ERROR_CREATING_EXCEL,//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
@@ -262,19 +262,32 @@ export function exportCandidateDetails(req: express.Request, res: express.Respon
                 code: 403
               });
             } else {
-              //var file = './src/server/public/candidate.csv';
-              var file = '/home/bitnami/apps/jobmosis-staging/c-next/dist/server/prod/public/candidate.csv';
-              res.download(file);
+              adminService.exportUserCollection(userType, (err, respo) => {
+                if (err) {
+                  next({
+                    reason: Messages.MSG_ERROR_CREATING_EXCEL,//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
+                    message: Messages.MSG_ERROR_CREATING_EXCEL,
+                    stackTrace: new Error(),
+                    code: 403
+                  });
+                } else {
+                  console.log("success");
+                  res.status(200).send({
+                    'status': 'success'
+                  });
+                }
+              });
             }
           });
         }
       });
-    } else {
-      next( {
-          reason: Messages.MSG_ERROR_UNAUTHORIZED_USER,
-          message: Messages.MSG_ERROR_UNAUTHORIZED_USER,
-          stackTrace: new Error(),
-          code: 401
+    }
+    else {
+      next({
+        reason: Messages.MSG_ERROR_UNAUTHORIZED_USER,
+        message: Messages.MSG_ERROR_UNAUTHORIZED_USER,
+        stackTrace: new Error(),
+        code: 401
       });
     }
   } catch (e) {
@@ -294,16 +307,16 @@ export function exportRecruiterDetails(req: express.Request, res: express.Respon
     var params = {};
     let userType = 'recruiter';
     if (req.user.isAdmin) {
-      adminService.getUserDetails(userType, (error, resp) => {
-        if (error) {
+      adminService.exportRecruiterCollection((err, respo) => {
+        if (err) {
           next({
-            reason: Messages.MSG_ERROR_SEPERATING_USER,//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
-            message: Messages.MSG_ERROR_SEPERATING_USER,
+            reason: Messages.MSG_ERROR_CREATING_EXCEL,//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
+            message: Messages.MSG_ERROR_CREATING_EXCEL,
             stackTrace: new Error(),
             code: 403
           });
         } else {
-          adminService.generateRecruiterDetailFile(resp, (err, respo) => {
+          adminService.exportUserCollection(userType, (err, respo) => {
             if (err) {
               next({
                 reason: Messages.MSG_ERROR_CREATING_EXCEL,//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
@@ -312,9 +325,10 @@ export function exportRecruiterDetails(req: express.Request, res: express.Respon
                 code: 403
               });
             } else {
-              //var file = './src/server/public/recruiter.csv';
-              var file = '/home/bitnami/apps/jobmosis-staging/c-next/dist/server/prod/public/recruiter.csv';
-              res.download(file);
+              console.log("success");
+              res.status(200).send({
+                'status': 'success'
+              });
             }
           });
         }
@@ -443,7 +457,7 @@ export function updateDetailOfUser(req: express.Request, res: express.Response, 
   }
 }
 
-export function sendLoginInfoToAdmin(email: any, ip: any, latitude: any, longitude: any,next: any) {
+export function sendLoginInfoToAdmin(email: any, ip: any, latitude: any, longitude: any, next: any) {
   try {
     var params: any = {email: undefined, ip: undefined, location: undefined};
     var address: any;

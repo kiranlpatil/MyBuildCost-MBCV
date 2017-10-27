@@ -7,7 +7,7 @@ import {MessageService} from "../../../shared/services/message.service";
 import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
 import {Candidate, Section} from "../../../user/models/candidate";
 import {FormBuilder} from "@angular/forms";
-import {Messages, Tooltip} from "../../../shared/constants";
+import {Messages, Tooltip, CandidateProfileUpdateTrack} from "../../../shared/constants";
 import {ProfessionalDetailsService} from "../professional-detail-service";
 import {ErrorService} from "../../../shared/services/error.service";
 
@@ -121,6 +121,9 @@ export class ProfessionalDataComponent extends BaseService implements OnChanges 
   }
 
   saveProfessionalData() {
+    if(this.candidate.profile_update_tracking < CandidateProfileUpdateTrack.STEP_IS_ENTER_PROFESSIONAL_PREFERENCES) {
+      this.candidate.profile_update_tracking = CandidateProfileUpdateTrack.STEP_IS_ENTER_PROFESSIONAL_PREFERENCES;
+    }
     this.profileCreatorService.addProfileDetail(this.candidate).subscribe(
       user => {
         console.log(user);

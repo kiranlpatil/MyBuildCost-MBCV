@@ -354,9 +354,10 @@ $ src/redis-server
  	db.recruiters.save(recruiter);
  })
  
+ 
  - Version : 1.1.2
  - Date : 25 Oct 2017
- - Scenario : Added new filed 'isJobPostClosed' into recruiter job post (Run command using mongo shell instead of 
+ - Scenario : Added new field 'isJobPostClosed' into recruiter job post (Run command using mongo shell instead of 
  robomongo)
  - Update Script : 
  db.getCollection('recruiters').find({}).forEach(function(recruiter) {

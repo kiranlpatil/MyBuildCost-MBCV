@@ -31,6 +31,7 @@ interface JobProfileModel extends mongoose.Document {
   interestedIndustries: string[];
   candidate_list: CandidateListModel[];
   capability_matrix: any;
+  complexity_musthave_matrix: any;
   postedJobs: any;
   releventIndustries: string[];
   hideCompanyName: boolean;

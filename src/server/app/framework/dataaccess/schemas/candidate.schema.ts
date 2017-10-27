@@ -38,6 +38,10 @@ class CandidateSchema {
       complexity_note_matrix : {
         type : Object
       },
+      profile_update_tracking : {
+        type: Number,
+        default:-1
+      },
       certifications: [{
         name: String,
         year: Number,

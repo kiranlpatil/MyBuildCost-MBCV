@@ -20,7 +20,19 @@
                 <h4 title="View job details" (click)="viewJobDetails()" >{{selectedJobProfile.jobTitle}}</h4>
               </li>
               <li>
-                <a title="View job details" (click)="viewJobDetails()">view job</a>
+                <a title="View job details" (click)="viewJobDetails()" class="view-job">View Job</a>
+              </li>
+              <li>
+                <div class="dropdown clone-job-menu">
+                  <a class="dropdown-toggle btn-menu" type="button" data-toggle="dropdown"
+                     title="Update job"><span>Update Job</span><span class="caret"></span></a>
+                  <ul class="dropdown-menu">
+                    <li (click)="raiseCloneEvent()"><a>{{getLabel().CLONE_JOB}}</a></li>
+                    <li  *ngIf="!selectedJobProfile.isJobPostClosed" (click)="onRenewJob()"><a>Renew Job Post</a></li>
+                    <li *ngIf="selectedJobProfile.isJobPosted && !selectedJobProfile.isJobPostClosed"
+                        (click)="closeJobPost(selectedJobProfile)"><a>{{getLabel().CLOSE_JOB}}</a></li>
+                  </ul>
+                </div>
               </li>
             </ul>
           </div>
@@ -86,15 +98,6 @@
                 class="compare-candidate-count count"><span>{{recruiterJobView.numberOfCandidatesInCompare}}</span></span>Compare</a>
       </li>
     </ul>
-    <div class="dropdown clone-job-menu">
-      <button class="btn dropdown-toggle btn-menu" type="button" data-toggle="dropdown"><span
-              class="glyphicon glyphicon-option-horizontal"></span></button>
-      <ul class="dropdown-menu">
-        <li (click)="raiseCloneEvent()"><a>{{getLabel().CLONE_JOB}}</a></li>
-        <li  *ngIf="!selectedJobProfile.isJobPostClosed" (click)="onRenewJob()"><a>Renew Job Post</a></li>
-        <li *ngIf="selectedJobProfile.isJobPosted && !selectedJobProfile.isJobPostClosed" (click)="closeJobPost(selectedJobProfile)"><a>{{getLabel().CLOSE_JOB}}</a></li>
-      </ul>
-    </div>
     <div id="matched-job" class="tab-pane fade in active "  *ngIf="selectedJobProfile!=undefined">
       <cn-q-card-view (addForCompare)="addForCompare($event)" [progress_bar_color]="'#29b6f6'"
                       (addedTocart)="AddedToCart($event)" *ngIf="whichListVisible[0]" [candidateQlist]="candidateQlist"

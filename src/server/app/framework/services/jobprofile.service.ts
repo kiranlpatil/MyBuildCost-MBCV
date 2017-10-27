@@ -91,7 +91,7 @@ class JobProfileService {
             callback(err, res);
           } else {
             let candidateService: any = new CandidateService();
-            let new_capability_matrix: any =  candidateService.getCapabilityValueKeyMatrixBuild(res.postedJobs[0].capability_matrix,industries);
+            let new_capability_matrix: any =  candidateService.getCapabilityValueKeyMatrixBuild(res.postedJobs[0].capability_matrix, industries, res.postedJobs[0].complexity_musthave_matrix);
             callback(null, new_capability_matrix);
           }
         });

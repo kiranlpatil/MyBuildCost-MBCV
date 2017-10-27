@@ -145,6 +145,19 @@
             </label>
           </div>
         </div>
+
+        <div *ngIf="isRecuirter">
+          <div *ngIf="isComplexityMustHaveMatrixPresent">
+          <div class="select-option default-checkbox">
+            <label>
+              <input formControlName="mustHaveComplexity" type="checkbox" value="{{itemList}}"
+                     (change)="filterByMustHaveComplexity($event)">
+              <div class="check"></div>
+            </label>
+            <span>{{getLabel().MUST_TO_HAVE_FILTER_LABEL}}</span>
+          </div>
+          </div>
+        </div>
       </div>
     </div>
   </form>

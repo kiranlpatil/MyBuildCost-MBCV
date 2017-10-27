@@ -7,6 +7,7 @@ import {QCardFilterService} from "../q-card-filter.service";
 import {FilterService} from "./filter.service";
 import {QCardFilter} from "../../model/q-card-filter";
 import {ErrorService} from "../../../../shared/services/error.service";
+import {Label} from "../../../../shared/constants";
 
 @Component({
   moduleId: module.id,
@@ -48,6 +49,8 @@ export class FilterComponent {
   openKeyskillsPanel: boolean = false;
   openJoiningPeriodPanel: boolean = false;
   openDomainPanel: boolean = false;
+  mustHaveComplexityPanel: boolean = false;
+  isComplexityMustHaveMatrixPresent : boolean;
 
   constructor(private formBuilder: FormBuilder,
               private errorService:ErrorService,
@@ -65,11 +68,24 @@ export class FilterComponent {
 
     this.userForm = this.formBuilder.group({
       eduction: '', experienceMin: '', experienceMax: '', salaryMin: '', salaryMax: '', location: '',
-      proficiencies: '', timetojoin: '', industry: '', companysize: ''
+      proficiencies: '', timetojoin: '', industry: '', companysize: '', mustHaveComplexity: ''
     });
   }
 
   ngOnChanges(changes: any) {
+    if((changes.selectedJob && changes.selectedJob.currentValue)) {
+      this.selectedJob = changes.selectedJob.currentValue;
+      if(this.selectedJob.complexity_musthave_matrix) {
+        for(let cap in this.selectedJob.complexity_musthave_matrix) {
+          if(this.selectedJob.complexity_musthave_matrix[cap]) {
+            this.isComplexityMustHaveMatrixPresent = true;
+            break;
+          } else {
+            this.isComplexityMustHaveMatrixPresent = false;
+          }
+        }
+      }
+    }
     if (changes.candidate) {
       if (changes.candidate.currentValue) {
         this.proficiencyList = changes.candidate.currentValue.proficiencies;
@@ -367,5 +383,23 @@ export class FilterComponent {
       }
     }
     this.qCardFilterService.filterby(this.qCardFilter);
+  }
+
+  filterByMustHaveComplexity(event: any) {
+    console.log('filterByMustHaveComplexity called1');
+    let value = event.target.checked;
+    if(value){
+      this.qCardFilter.filterByMustHaveComplexity = value;
+      this.queryListPush('((args.filterByMustHaveComplexity && item.complexityIsMustHave) && (args.filterByMustHaveComplexity === item.complexityIsMustHave))');
+      this.showClearFilter = true;
+    } else {
+      this.queryListRemove('((args.filterByMustHaveComplexity && item.complexityIsMustHave) && (args.filterByMustHaveComplexity === item.complexityIsMustHave))');
+    }
+    this.buildQuery();
+    this.qCardFilterService.filterby(this.qCardFilter);
+  }
+
+  getLabel() {
+    return Label;
   }
 }

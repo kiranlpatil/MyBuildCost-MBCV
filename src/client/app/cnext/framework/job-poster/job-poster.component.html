@@ -29,8 +29,9 @@
       <cn-complexities [roles]="rolesForComplexity" [complexities]="jobPosterModel.capability_matrix"
                        [highlightedSection]="highlightedSection"
 
-                       (onComplextyAnswered)="onComplextyAnswered($event)"
-                       (onComplete)="selectRoleFromComplexity()" [hidden]="!isShowComplexity"></cn-complexities>
+                       (onComplextyAnswered)="onComplextyAnswered($event)" (onMustHave)="onMustHave($event)"
+                       (onComplete)="selectRoleFromComplexity()" [hidden]="!isShowComplexity"
+      [complexitiesIsMustHave]="jobPosterModel.complexity_musthave_matrix"></cn-complexities>
     </div>
     <div class="wrapper" [hidden]="!isShowProficiency">
       <!--TODO Abhijeet <cn-job-proficiencies [proficiencies]="proficiencies" [jobPosterModel]="jobPosterModel"
