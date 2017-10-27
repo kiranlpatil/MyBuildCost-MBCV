@@ -283,6 +283,9 @@ export class Messages {
     'matching and alignment with the best job Opportunity.';
   public static GUIDED_TOUR_COMPLEXITY_SCENARIOS_MESSAGE ='This section provides a list of Complexity Scenarios for' +
     ' your selected Capabilities';
+    public static GUIDED_TOUR_COMPLEXITY_RIGHT_FIT_MESSAGE ='This section has questions designed by industry ' +
+        'stalwarts and experts by investing more than <b>10,000</b> person hours with a view to help the candidates and ' +
+        'recruiters get the 100% right fit.';
   public static GUIDED_TOUR_COMPLEXITY_SCENARIO_NOTE_MESSAGE ='<span>Note:</span> If a scenario was applicable to you in past but ' +
     'is no more relevant to you, avoid choosing such scenarios. In such cases, choose' +
     ' "Not Applicable".';
