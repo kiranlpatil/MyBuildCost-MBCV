@@ -58,7 +58,12 @@ class CandidateRepository extends RepositoryBase<ICandidate> {
         } else if (jobProfile.capability_matrix[cap] == (Number(candidate.capability_matrix[cap]) + ConstVariables.DIFFERENCE_IN_COMPLEXITY_SCENARIO)) {
           candidate_card_view.below_one_step_matching += 1;
           count++;
-        } else if (jobProfile.complexity_musthave_matrix == -1 || jobProfile.complexity_musthave_matrix == undefined) {
+        }  else {
+          count++;
+        }
+      }
+      for(let cap in jobProfile.capability_matrix) {
+        if (jobProfile.complexity_musthave_matrix == -1 || jobProfile.complexity_musthave_matrix == undefined) {
           candidate_card_view.complexityIsMustHave = false;
         } else if(jobProfile.complexity_musthave_matrix[cap]) {
           if(jobProfile.capability_matrix[cap] == candidate.capability_matrix[cap]) {
@@ -66,8 +71,6 @@ class CandidateRepository extends RepositoryBase<ICandidate> {
           } else {
             candidate_card_view.complexityIsMustHave = false;
           }
-        } else {
-          count++;
         }
       }
       candidate_card_view.above_one_step_matching = (candidate_card_view.above_one_step_matching / count) * 100;
