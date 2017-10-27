@@ -45,6 +45,7 @@ interface CandidateModel {
   interestedIndustryMatch: string[];
   proficienciesMatch: string[];
   personalDetails: User;
+  profile_update_tracking:number;
   _id:any;
 }
 export = CandidateModel;

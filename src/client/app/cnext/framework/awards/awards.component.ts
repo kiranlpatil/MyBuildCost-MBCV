@@ -2,7 +2,10 @@ import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} f
 import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
 import {Candidate, Section} from "../../../user/models/candidate";
 import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {Button, Headings, ImagePath, LocalStorage, Messages, Tooltip} from "../../../shared/constants";
+import {Button,
+  Headings, ImagePath, LocalStorage, Messages, Tooltip,
+  CandidateProfileUpdateTrack
+} from "../../../shared/constants";
 import {GuidedTourService} from "../guided-tour.service";
 import {ErrorService} from "../../../shared/services/error.service";
 import {LocalStorageService} from "../../../shared/services/localstorage.service";
@@ -135,7 +138,9 @@ export class AwardsComponent implements OnInit {
 
   postData(type: string) {
     let isDataValid = false;
-
+    if(this.candidate.profile_update_tracking < CandidateProfileUpdateTrack.STEP_IS_ENTER_AWARDS_DETAILS) {
+      this.candidate.profile_update_tracking = CandidateProfileUpdateTrack.STEP_IS_ENTER_AWARDS_DETAILS;
+    }
     if (type == 'delete') {
       this.profileCreatorService.addProfileDetail(this.candidate).subscribe(
         user => {
@@ -194,6 +199,11 @@ export class AwardsComponent implements OnInit {
   onNext() {
     this.isGuidedTourImgRequire();
     window.scrollTo(0, 0);
+      let item:any = {'profile_update_tracking':CandidateProfileUpdateTrack.STEP_IS_ENTER_AWARDS_DETAILS};
+      this.profileCreatorService.updateCandidateField(item).subscribe(
+        res => {
+          console.log('success');
+        }, error => this.errorService.onError(error));
   }
 
   isGuidedTourImgRequire() {

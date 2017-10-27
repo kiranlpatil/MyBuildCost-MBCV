@@ -362,3 +362,25 @@ export function getList(req: express.Request, res: express.Response, next: any) 
     });
   }
 }
+
+export function updateField(req:express.Request, res:express.Response, next:any) {
+  let candidateService = new CandidateService();
+  try {
+    let data:any = {$max: {'profile_update_tracking': Number(req.body.profile_update_tracking)}};
+    let userId:string = req.params.id;
+    candidateService.updateField(userId, data, (error:any, result:any) => {
+      if (error) {
+        next(error);
+      } else {
+        res.send({
+          'status': 'success',
+          'data': result,
+        });
+      }
+    });
+  }
+  catch (e) {
+    res.status(403).send({message: e.message});
+  }
+
+}
