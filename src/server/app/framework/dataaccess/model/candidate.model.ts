@@ -18,6 +18,7 @@ interface CandidateModel {
 
   jobTitle: string;
   isVisible: boolean;
+  lastUpdateAt:any;
   isSubmitted: boolean;
   isCompleted:boolean;
   aboutMyself: string;

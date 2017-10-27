@@ -238,6 +238,7 @@ export class CandidateProfileComponent implements OnInit, DoCheck, OnDestroy {
   }
 
   onProfessionalDataComplete() {
+    this.saveCandidateDetails();
     this.candidate.isCompleted = true;
     this.highlightedSection.iscompleted = true;
     this.whichStepsVisible[5] = true;

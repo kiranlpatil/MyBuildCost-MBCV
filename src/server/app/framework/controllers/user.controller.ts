@@ -10,6 +10,7 @@ import ResponseService = require('../shared/response.service');
 import CandidateService = require('../services/candidate.service');
 import adminController= require('./admin.controller');
 import RecruiterModel = require('../dataaccess/model/recruiter.model');
+import { MailChimpMailerService } from '../services/mailchimp-mailer.service';
 
 var bcrypt = require('bcrypt');
 
@@ -1022,6 +1023,8 @@ export function verifyOtp(req: express.Request, res: express.Response, next: any
     var params = req.body; //OTP
     //  delete params.access_token;
     var userService = new UserService();
+    let mailChimpMailerService = new MailChimpMailerService();
+
     var query = {"_id": user._id, "isActivated": false};
     var updateData = {"isActivated": true};
     if (user.otp === params.otp) {
@@ -1034,6 +1037,8 @@ export function verifyOtp(req: express.Request, res: express.Response, next: any
             "status": "Success",
             "data": {"message": "User Account verified successfully"}
           });
+          mailChimpMailerService.onCandidateSignSuccess(result);
+
         }
       });
     }

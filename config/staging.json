@@ -11,7 +11,12 @@
       "MAIL_SENDER_PASSWORD": "Contactu$@tpl",
       "ADMIN_MAIL": "Jobmosis_TPL@techprimelab.com",
       "TPLGROUP_MAIL":"",
-      "MAIL_SERVICE": "Gmail"
+      "MAIL_SERVICE": "Gmail",
+      "CANDIDATE_SIGN_IN_SUCCESS_LISTID": "222f48cf9a",
+      "CANDIDATE_PROFILE_SUBMIT_SUCCESS_LISTID": "a1b8d070ce",
+      "CANDIDATE_PROFILE_SUBMIT_50%_LISTID": "9856839bad",
+      "CANDIDATE_PROFILE_SUBMIT_25%_LISTID": "bd22dce604",
+      "MAIL_CHIMP_SERVICE_KEY": "7ed37fe28217d97fe5785a01207a494e-us16"
 
     },
     "facebookIds":{

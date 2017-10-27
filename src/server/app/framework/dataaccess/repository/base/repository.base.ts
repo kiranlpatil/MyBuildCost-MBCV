@@ -20,6 +20,12 @@ class RepositoryBase<T extends mongoose.Document> implements IRead<T>, IWrite<T>
     });
   }
 
+  retrieveWithIncluded(field: any,included: any, callback: (error: any, result: any) => void) {
+    this._model.find(field, included).lean().exec((err, res) => {
+      callback(err, res);
+    });
+  }
+
   retrieveWithoutLean(field: any, callback: (error: any, result: any) => void) {
     this._model.find(field, {}).exec((err, res) => {
       callback(err, res);

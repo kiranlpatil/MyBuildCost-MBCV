@@ -10,16 +10,17 @@ import * as cors from "cors";
 import * as fs from "fs";
 import LoggerService = require("./app/framework/shared/logger/LoggerService");
 import * as sharedService from "./app/framework/shared/logger/shared.service";
+import { CronJobService } from './app/framework/services/cron-job.service';
 
 var spdy = require('spdy');
-
+var cronJobService=new CronJobService();
  __dirname = './';
 var _clientDir = '/dist/client/dev';
 var _serverDir = '/dist/server/dev';
 var app = express();
 
 export function init(port: number, mode: string, protocol: string, dist_runner: string) {
-
+  cronJobService.OnCronJobStart();
   app.use(bodyParser.urlencoded({extended: false}));
   app.use(bodyParser.json({limit: '40mb'}));
   app.use(bodyParser.urlencoded({limit: '40mb', extended: true}));

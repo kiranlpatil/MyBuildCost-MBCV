@@ -7,7 +7,8 @@ import CandidateService = require('../services/candidate.service');
 import UserService = require('../services/user.service');
 import RecruiterService = require('../services/recruiter.service');
 import SearchService = require('../search/services/search.service');
-import CandidateInfoSearch = require("../dataaccess/model/candidate-info-search");
+import CandidateInfoSearch = require('../dataaccess/model/candidate-info-search');
+import { MailChimpMailerService } from '../services/mailchimp-mailer.service';
 
 
 export function create(req: express.Request, res: express.Response, next: any) {
@@ -72,11 +73,32 @@ export function updateDetails(req: express.Request, res: express.Response, next:
     delete params.access_token;
     let userId: string = req.params.id;
     let auth: AuthInterceptor = new AuthInterceptor();
+    let isEditingProfile: boolean=false;
 
     /*let userService = new UserService();
      let query = {"_id": userId};
      let updateData = {"location": updatedCandidate.professionalDetails.location};*/
     let candidateService = new CandidateService();
+    let mailChimpMailerService = new MailChimpMailerService();
+
+
+    candidateService.get(userId, (error, result) => {
+      if (error) {
+        next(error);
+      } else {
+        updatedCandidate.lastUpdateAt=new Date().toISOString();
+        /*if(result.profileCompleted && result.profileCompleted >= updatedCandidate.profileCompleted) {
+          updatedCandidate.profileCompleted=result.profileCompleted;
+        }*/
+        if (result && result.isSubmitted) {
+          isEditingProfile = true;
+/*
+          updatedCandidate.profileCompleted=100;
+*/
+        }
+        /*if(updatedCandidate.isSubmitted) {
+          updatedCandidate.profileCompleted=100;
+        }*/
     candidateService.update(userId, updatedCandidate, (error, result) => {
       if (error) {
         next(error);
@@ -91,6 +113,7 @@ export function updateDetails(req: express.Request, res: express.Response, next:
             });
           } else {
             let token = auth.issueTokenWithUid(result[0]);
+                mailChimpMailerService.onCandidatePofileSubmitted(req.body.basicInformation,updatedCandidate.isSubmitted, isEditingProfile);
             res.send({
               'status': 'success',
               'data': result,
@@ -110,8 +133,12 @@ export function updateDetails(req: express.Request, res: express.Response, next:
      });
      }
      });*/
-  } catch (e) {
-   next({
+
+      }
+    });
+  }
+  catch (e) {
+    next({
       reason: e.message,
       message: e.message,
       stackTrace: new Error(),
