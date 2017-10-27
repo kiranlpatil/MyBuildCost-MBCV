@@ -54,6 +54,7 @@ export class RecruiterDetailListComponent {
         UsageDetails => {
           this.loaderService.stop();
           document.getElementById('link_recruiter').click();
+          document.getElementById('link_recruiter1').click();
           this.messageService.message(new Message(Messages.MSG_SUCCESS_FOR_FILE_DOWNLOAD));
         },
         error => this.errorService.onError(error));
