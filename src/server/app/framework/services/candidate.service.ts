@@ -809,6 +809,11 @@ class CandidateService {
   return capability_matrix;
   }
 
+
+  updateField(_id:string, item:any, callback:(error:any, result:any) => void) {
+    this.candidateRepository.updateByUserId( new mongoose.Types.ObjectId(_id), item, callback);
+  }
+
 }
 
 Object.seal(CandidateService);

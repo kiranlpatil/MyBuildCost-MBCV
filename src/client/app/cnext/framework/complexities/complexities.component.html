@@ -17,13 +17,6 @@
 
 <div class="guided-tour-description"
      *ngIf="guidedTourStatus?.indexOf(guidedTourImgOverlayScreensComplexities) == -1 && isCandidate && isGuideImg == true">
-  <div class="capability-right-fit-guided-tour">
-    <p [innerHTML]="getMessage().GUIDED_TOUR_COMPLEXITY_RIGHT_FIT_MESSAGE"></p>
-  </div>
-</div>
-
-<div class="guided-tour-description"
-     *ngIf="guidedTourStatus?.indexOf(guidedTourImgOverlayScreensComplexities) == -1 && isCandidate && isGuideImg == true">
   <div class="guided-tour-notes">
     <p [innerHTML]="getMessage().GUIDED_TOUR_COMPLEXITY_SCENARIO_NOTE_MESSAGE"> </p>
   </div>
@@ -33,6 +26,7 @@
 <div class="section-container clearfix" *ngIf="highlightedSection.name=='Complexities'">
   <div class="main-content clearfix edit-modal-content">
     <div class="complexities">
+      <div class="complexities-section col-xs-7">
       <h4 class="heading" *ngIf="isCandidate && currentComplexityDetails">{{currentComplexityDetails.questionHeaderForCandidate}}
         <span class="capability-name">{{currentComplexityDetails.capability_name}}</span></h4>
       <h4 class="heading" *ngIf="!isCandidate && currentCapability">{{currentRecruiterQuestion}}<span class="capability-name">{{currentCapability.name}}</span>
@@ -46,6 +40,7 @@
         <cn-multiple-question-answer [capabilityDetails]="currentCapability" (onComplete)="onCapabilityAnswered($event)"
                                      (onMustHaveSelect)="onMustHaveSelect($event)"
                                      (onQuestionComplete)="oncurrentComplexityAnswered($event)"></cn-multiple-question-answer>
+      </div>
       </div>
 
       <div class="button-group clearfix clear">
@@ -71,7 +66,7 @@
                 *ngIf="!isCandidate">Done
         </button>
 
-        <!--<span class="question-count" [hidden]="singleComplexity" *ngIf="isCandidate && isNumber(currentComplexity) && complexityIds.length>0">{{currentComplexity+1}} of {{complexityIds.length}}</span>-->
+        <span class="question-count" [hidden]="singleComplexity" *ngIf="isCandidate && isNumber(currentComplexity) && complexityIds.length>0">{{currentComplexity+1}} of {{complexityIds.length}}</span>
         <span class="question-count" [hidden]="singleComplexity" *ngIf="!isCandidate && isNumber(currentCapabilityNumber) && capabilities.length>0">{{currentCapabilityNumber+1}} of {{capabilities.length}}</span>
       </div>
       <!--
@@ -82,8 +77,20 @@
       <button class="btn-prev" (click)="onPreviousCapability()" *ngIf="!isCandidate"><span class="glyphicon glyphicon-chevron-left"
       ></span></button>
 
-      <cn-tool-tip [message]="tooltipCandidateMessage" *ngIf="isCandidate"></cn-tool-tip>
-      <cn-tool-tip [message]="tooltipRecruiterMessage" *ngIf="!isCandidate"></cn-tool-tip>
+      <div class="col-xs-5 complexities-help-section">
+        <div class="bg-empty-class col-xs-5"></div>
+        <div class="mini-value-portrait-section" *ngIf="highlightedSection.name=='Complexities'">
+          <h3>
+            Your Value Portrait is getting ready <br/>
+            Click here to Preview
+          </h3>
+          <cn-value-portrait (click)="navigateToWithId('/value-portrait');" [isShareView]="false" [isMiniView]="true" [userId]="userId" *ngIf="isCandidate"></cn-value-portrait>
+        </div>
+        <cn-tool-tip id="candidate-tooltip" [message]="tooltipCandidateMessage" *ngIf="isCandidate"></cn-tool-tip>
+
+
+        <cn-tool-tip [message]="tooltipRecruiterMessage" *ngIf="!isCandidate"></cn-tool-tip>
+      </div>
     </div>
   </div>
 </div>

@@ -50,3 +50,31 @@
   padding: 0;
 }
 
+.main-content {
+  .mini-value-portrait-section {
+    zoom: 0.3;
+    z-index: 999;
+  }
+  .button-group {
+    width: calc(100% - 400px);
+  }
+}
+
+.capabilities {
+  padding: 0 0 75px 50px;
+  width: 58.33333333%;
+  h4 {
+    padding: 8px 15px 8px 0;
+    width: 100% !important;
+  }
+}
+
+.capabilities-help-section {
+  background: $theme-color;
+}
+.bg-empty-class {
+  background: $theme-color;
+  height: 100%;
+  position: fixed;
+  right: 0;
+}

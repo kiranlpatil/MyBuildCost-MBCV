@@ -142,7 +142,7 @@ export class WorkAreaComponent implements OnInit,OnChanges {
       );
   }
 
-  onNextAction() { debugger
+  onNextAction() {
     let roleId:any[]=new Array(0);
     if(this.savedSelectedRoles.length === 0){
       if(this.isCandidate) {

@@ -1717,3 +1717,74 @@ select:focus {
     font-size: 12px;
   }
 }
+
+#candidate-tooltip {
+  .tooltip-message {
+    height: auto;
+    position: relative;
+    width: auto;
+  }
+}
+
+.mini-value-portrait-section {
+  h3 {
+    color: $white;
+    font-size: 50px;
+    font-weight: bold;
+    margin: 20px 0 26px;
+    position: relative;
+    text-align: center;
+    z-index: 9;
+  }
+  .value-portrait-candidate-capability-circle {
+    .inner-circle {
+      span {
+        line-height: 21px;
+        letter-spacing: -2px;
+        text-align: center;
+      }
+    }
+  }
+  .value-portrait-candidate-capability {
+    h3 {
+      display: table !important;
+      margin: 0 auto !important;
+      text-align: center !important;
+    }
+  }
+  .value-portrait-footer {
+    display: none;
+  }
+  .value-portrait-candidate-info-block {
+    ul {
+      li {
+        width: 14.6% !important;
+      }
+      li:first-child {
+        width: 19% !important;
+      }
+      li:nth-child(2) {
+        width: 21.6% !important;
+      }
+    }
+  }
+  .value-portrait-bottom-section {
+    .value-portrait-candidate-industry,
+    .value-portrait-candidate-keyskills {
+      span {
+        b {
+          display: none !important;
+        }
+      }
+      .icon {
+        width: 26px !important;
+        margin-right: 8px;
+      }
+    }
+  }
+  .value-portrait-candidate-number {
+    .phone-icon {
+      width: 40px !important;
+    }
+  }
+}

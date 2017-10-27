@@ -1,8 +1,9 @@
 @import '../../../../../css/variables';
 
 .list-view {
+  border-bottom: 1px solid $border-blue;
   left: 0 !important;
-  border-bottom: 1px solid #d1dce4;
+  z-index: 1001 !important;
 
   .panel {
     cursor: default !important;
@@ -20,7 +21,7 @@
   margin-top: -4px !important;
 
   li {
-    margin: 9px 0 5px !important;
+    margin: 7px 0 0 !important;
     text-align: center;
   }
 
@@ -39,7 +40,7 @@
   width: 100%;
 
   li {
-    padding: 0 5px 0 0;
+    padding: 0 10px 0 0;
   }
 
   li:first-child {
@@ -51,13 +52,13 @@
     cursor: pointer;
   }
 
-  li > a {
+  li > .view-job {
     color: $theme-color;
     display: block;
     font-weight: 900;
     font-family: 'gothamrnd-book';
     font-size: 12px;
-    margin: 14px 0 0 7px;
+    margin: 12px 0 0 7px;
   }
 }
 
@@ -66,28 +67,23 @@
 }
 
 .clone-job-menu {
-  position: fixed;
-  top: 102px;
-  right: 15px;
-  z-index: 1001;
-
+  margin-top: 10px;
   .btn-menu {
     background: transparent;
+    border: 1px solid transparent;
     cursor: pointer;
-    color: $light-black1;
-    height: 34px;
     padding: 9px 5px;
 
     span {
-      border: 1px solid transparent;
-      float: right;
-      height: 26px;
-      margin: -6px 0 0;
-      padding: 5px 2px !important;
-      width: 24px !important;
-      &:hover {
-        background: $border-color1;
-      }
+      color: $theme-color;
+      font-family: 'gothamrnd-book';
+      font-size: 12px;
+      font-weight: 900;
+      padding: 5px !important;
+    }
+
+    .caret {
+      padding: 0 !important;
     }
 
     &:active,
@@ -100,12 +96,12 @@
   }
 
   .dropdown-menu {
-    left: inherit;
-    padding: 0;
-    right: 0;
+    margin: 10px 0 0 0;
 
     li {
       float: none;
+      max-width: 100%;
+      padding: 0;
     }
 
     li > a {

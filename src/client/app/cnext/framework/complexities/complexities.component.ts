@@ -10,6 +10,8 @@ import {JobCompareService} from "../single-page-compare-view/job-compare-view/jo
 import {Capability} from "../../../user/models/capability";
 import {GuidedTourService} from "../guided-tour.service";
 import {ErrorService} from "../../../shared/services/error.service";
+import {ComplexityAnsweredService} from "../complexity-answered.service";
+import {Router} from "@angular/router";
 
 @Component({
   moduleId: module.id,
@@ -40,6 +42,7 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
   isCandidate: boolean = false;
   private currentComplexity: number;
   private showMore: boolean = false;
+  private isAnswerComplete: boolean = false;
   private slideToRight: boolean = false;
   private slideToLeft: boolean = false;
   private capabilities: Capability[] = [];
@@ -67,17 +70,20 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
   guidedTourImgOverlayScreensComplexities: string;
   private guidedTourImgOverlayScreensKeySkillsPath:string;
   isGuideImg:boolean = false;
-
+  userId:string;
   constructor(private complexityService: ComplexityService,
               private complexityComponentService: ComplexityComponentService,
               private jobCompareService: JobCompareService,
               private errorService: ErrorService,
-              private guidedTourService:GuidedTourService) {
+              private guidedTourService:GuidedTourService,
+              private complexityAnsweredService: ComplexityAnsweredService,
+              private _router: Router) {
   }
 
   ngOnInit() {
     if (LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE) === 'true') {
       this.isCandidate = true;
+      this.userId=LocalStorageService.getLocalValue(LocalStorage.USER_ID);
     }
   }
 
@@ -141,6 +147,7 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
   }
 
   getComplexityIds(complexities: any) {
+   // this.complexityAnsweredService.change(true);
     this.currentComplexity = 0;
     this.currentCapabilityNumber = 0;
     this.complexityIds = [];
@@ -212,6 +219,7 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
   }
 
   onAnswered(complexityDetail: ComplexityDetails) {
+    this.complexityAnsweredService.change(true);
     this.isValid = true;
     this.complexities[this.complexityIds[this.currentComplexity]] = complexityDetail.userChoice;
     /*if (this.duplicateComplexityIds.indexOf("d" + this.complexityIds[this.currentComplexity]) > -1) {
@@ -227,6 +235,7 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
 
   onCapabilityAnswered(capability: Capability) {
     this.capabilities[this.currentCapabilityNumber] = capability;
+
     /*let currentNumber = this.currentCapabilityNumber;
     if (this.singleComplexity === false) {
       if (currentNumber + 1 === this.capabilities.length) {
@@ -251,7 +260,6 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
   }
 
   getCapabilityDetail(currentCapability: number) {
-
     this.currentCapability = this.capabilities[this.currentCapabilityNumber];
     this.currentRecruiterQuestion = this.currentCapability.complexities[0].complexityDetails.questionHeaderForRecruiter;
   }
@@ -424,4 +432,14 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
   getMessage() {
     return Messages;
   }
+
+  navigateToWithId(nav:string) {
+    var userId = LocalStorageService.getLocalValue(LocalStorage.USER_ID);
+    if (nav !== undefined) {
+      let x = nav+'/'+ userId + '/create';
+     // this._router.navigate([nav, userId]);
+      this._router.navigate([x]);
+    }
+  }
+
 }

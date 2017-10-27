@@ -20,7 +20,8 @@ export class CandidateCapabilityPortrait implements OnChanges {
   innerWidth: Number;
   isClickEnable: boolean = false;
 
-  ngOnChanges(): void {
+  ngOnChanges(): void {debugger
+    console.log("candidate = ", this.candidate);
     this.innerWidth = window.screen.width;
 
     if (this.innerWidth <= 768) {

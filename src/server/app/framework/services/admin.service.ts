@@ -19,8 +19,17 @@ import CandidateModelClass = require('../dataaccess/model/candidateClass.model')
 import RecruiterClassModel = require('../dataaccess/model/recruiterClass.model');
 import CandidateClassModel = require('../dataaccess/model/candidate-class.model');
 import UserService = require("./user.service");
-let usestracking = require('uses-tracking');
 
+let usestracking = require('uses-tracking');
+let spawn = require('child_process').spawn;
+
+let mongoExport = '/usr/bin/mongoexport';
+//let db = config.get('TplSeed.database.name');
+let username = 'admin';
+let password = 'jobmosisadmin123';
+
+let db = 'Jobmosis-staging';
+//let db = 'c-next-backend';
 class AdminService {
   company_name: string;
   private userRepository: UserRepository;
@@ -59,117 +68,130 @@ class AdminService {
         'isActivated': 1
       };
 
-      let sortingQuery = {'first_name': 1, 'last_name': 1};
-
+      //let sortingQuery = {'first_name': 1, 'last_name': 1};
+      let sortingQuery = {};
+      console.log("before users fetch call");
       userService.retrieveBySortedOrder(findQuery, included_fields, sortingQuery, (error, result) => {
-        if (error) {
-          callback(error, null);
-        } else {
-          if (result.length == 0) {
-            callback(null, users);
-          }
-          else {
-            if (userType == 'candidate') {
-              let candidateService = new CandidateService();
-              let candidates: CandidateModelClass[] = new Array(0);
-              let candidateFields = {
-                'userId': 1,
-                'jobTitle': 1,
-                'isCompleted': 1,
-                'isSubmitted': 1,
-                'location.city': 1,
-                'proficiencies': 1,
-                'professionalDetails': 1,
-                'capability_matrix': 1,
-                'isVisible': 1,
-                'industry.name': 1,
-                'industry.roles.name': 1
-              };
-              candidateService.retrieveWithLean({}, candidateFields, (error, candidatesResult) => {
-                if (error) {
-                  callback(error, null);
-                } else {
-                  console.log("Fetched all candidates:" + candidatesResult.length);
-                  for (let candidate of candidatesResult) {
-                    if (candidate.proficiencies.length > 0) {
-                      candidate.keySkills = candidate.proficiencies.toString().replace(/,/g, ' $');
-                    }
-
-                    if (candidate.industry) {
-                      candidate.roles = candidateService.loadRoles(candidate.industry.roles);
-                    }
-
-                    if (candidate.capability_matrix) {
-                      candidate.capabilityMatrix = candidateService.loadCapabilitiDetails(candidate.capability_matrix);
-                    }
-                    usersMap.set(candidate.userId.toString(), candidate);
-                  }
-
-                  for (let user of result) {
-                    user.data = usersMap.get(user._id.toString());
-                    candidates.push(user);
-                  }
-
-                  users.candidate = candidates;
-                  callback(null, users);
-                }
-              });
+          if (error) {
+            callback(error, null);
+          } else {
+            console.log("after users fetch call");
+            if (result.length == 0) {
+              callback(null, users);
             }
             else {
-              console.log("inside recruiter fetch");
-              let recruiterService = new RecruiterService();
-              let recruiters: RecruiterClassModel[] = new Array(0);
-              let recruiterFields = {
-                'userId': 1,
-                'company_name': 1,
-                'company_size': 1,
-                'isRecruitingForself': 1,
-                'postedJobs.isJobPosted': 1,
-                'postedJobs.capability_matrix': 1,
-                'postedJobs.expiringDate': 1,
-                'postedJobs.postingDate': 1,
-                'postedJobs.jobTitle': 1,
-                'postedJobs.hiringManager': 1,
-                'postedJobs.department': 1,
-                'postedJobs.education': 1,
-                'postedJobs.experienceMinValue': 1,
-                'postedJobs.experienceMaxValue': 1,
-                'postedJobs.salaryMinValue': 1,
-                'postedJobs.salaryMaxValue': 1,
-                'postedJobs.joiningPeriod': 1,
-                'postedJobs.proficiencies': 1,
-                'postedJobs.additionalProficiencies': 1,
-                'postedJobs.industry.name': 1,
-                'postedJobs.industry.roles.name': 1,
-              };
-
-              recruiterService.retrieveWithLean({}, recruiterFields, (error, recruiterResult) => {
-                if (error) {
-                  callback(error, null);
-                } else {
-                  console.log("Fetched all recruiters:" + recruiterResult.length);
-                  for (let recruiter of recruiterResult) {
-                    recruiter.numberOfJobsPosted = recruiter.postedJobs.length;
-                    recruiterService.loadCapbilityAndKeySkills(recruiter.postedJobs);
-                    usersMap.set(recruiter.userId.toString(), recruiter);
-                  }
-
-                  for (let user of result) {
-                    user.data = usersMap.get(user._id.toString());
-                    recruiters.push(user);
-                  }
-
-                  users.recruiter = recruiters;
-                  callback(null, users);
-
+              if (userType == 'candidate') {
+                let candidateService = new CandidateService();
+                let candidates: CandidateModelClass[] = new Array(0);
+                let candidateIds: string[] = [];
+                for (let candidate of result) {
+                  candidateIds.push(candidate._id);
                 }
-              });
-            }
-          }
 
+
+                let candidateFields = {
+                  'userId': 1,
+                  'jobTitle': 1,
+                  'isCompleted': 1,
+                  'isSubmitted': 1,
+                  'location.city': 1,
+                  'proficiencies': 1,
+                  'professionalDetails': 1,
+                  'capability_matrix': 1,
+                  'isVisible': 1,
+                  'industry.name': 1,
+                  'industry.roles.name': 1
+                };
+                console.log("before candiates fetch call");
+                candidateService.retrieveWithLean({}, candidateFields, (error, candidatesResult) => {
+                  //candidateService.retrieveWithLean({'userId': {$in: candidateIds}}, {}, (error, candidatesResult) => {
+                  if (error) {
+                    callback(error, null);
+                  } else {
+                    console.log("Fetched all candidates:" + candidatesResult.length);
+                    /*                  for (let candidate of candidatesResult) {
+                     if (candidate.proficiencies.length > 0) {
+                     candidate.keySkills = candidate.proficiencies.toString().replace(/,/g, ' $');
+                     }
+
+                     if (candidate.industry) {
+                     candidate.roles = candidateService.loadRoles(candidate.industry.roles);
+                     }
+
+                     if (candidate.capability_matrix) {
+                     candidate.capabilityMatrix = candidateService.loadCapabilitiDetails(candidate.capability_matrix);
+                     }
+                     usersMap.set(candidate.userId.toString(), candidate);
+                     }
+
+                     for (let user of result) {
+                     user.data = usersMap.get(user._id.toString());
+                     candidates.push(user);
+                     }*/
+
+                    users.candidate = candidates;
+
+                    callback(null, users);
+                  }
+                });
+              }
+              else {
+                console.log("inside recruiter fetch");
+                let recruiterService = new RecruiterService();
+                let recruiters: RecruiterClassModel[] = new Array(0);
+                let recruiterFields = {
+                  'userId': 1,
+                  'company_name': 1,
+                  'company_size': 1,
+                  'isRecruitingForself': 1,
+                  'postedJobs.isJobPosted': 1,
+                  'postedJobs.capability_matrix': 1,
+                  'postedJobs.expiringDate': 1,
+                  'postedJobs.postingDate': 1,
+                  'postedJobs.jobTitle': 1,
+                  'postedJobs.hiringManager': 1,
+                  'postedJobs.department': 1,
+                  'postedJobs.education': 1,
+                  'postedJobs.experienceMinValue': 1,
+                  'postedJobs.experienceMaxValue': 1,
+                  'postedJobs.salaryMinValue': 1,
+                  'postedJobs.salaryMaxValue': 1,
+                  'postedJobs.joiningPeriod': 1,
+                  'postedJobs.proficiencies': 1,
+                  'postedJobs.additionalProficiencies': 1,
+                  'postedJobs.industry.name': 1,
+                  'postedJobs.industry.roles.name': 1,
+                };
+
+                recruiterService.retrieveWithLean({}, recruiterFields, (error, recruiterResult) => {
+                  if (error) {
+                    callback(error, null);
+                  } else {
+                    console.log("Fetched all recruiters:" + recruiterResult.length);
+                    for (let recruiter of recruiterResult) {
+                      recruiter.numberOfJobsPosted = recruiter.postedJobs.length;
+                      recruiterService.loadCapbilityAndKeySkills(recruiter.postedJobs);
+                      usersMap.set(recruiter.userId.toString(), recruiter);
+                    }
+
+                    for (let user of result) {
+                      user.data = usersMap.get(user._id.toString());
+                      recruiters.push(user);
+                    }
+
+                    users.recruiter = recruiters;
+                    callback(null, users);
+
+                  }
+                });
+              }
+            }
+
+          }
         }
-      });
-    } catch
+      );
+    }
+    catch
       (e) {
       callback(e, null);
     }
@@ -202,7 +224,7 @@ class AdminService {
       (e) {
       callback(e, null);
     }
-  }
+  };
 
   getRecruiterDetails(initial: string, callback: (error: any, result: any) => void) {
     try {
@@ -253,7 +275,7 @@ class AdminService {
               } else {
                 console.log("Fetched all recruiters from users:" + recruiterResult.length);
                 for (let user of result) {
-                  if(usersMap.get(user._id.toString())){
+                  if (usersMap.get(user._id.toString())) {
                     user.data = usersMap.get(user._id.toString());
                     recruiters.push(user);
                   }
@@ -272,7 +294,7 @@ class AdminService {
       (e) {
       callback(e, null);
     }
-  }
+  };
 
   getCandidateDetails(initial: string, callback: (error: any, result: any) => void) {
     try {
@@ -345,7 +367,7 @@ class AdminService {
     } catch (e) {
       callback(e, null);
     }
-  }
+  };
 
   addUsageDetailsValue(item: any, callback: (error: any, result: any) => void) {
     try {
@@ -372,153 +394,6 @@ class AdminService {
         if (err) throw err;
         callback(null, result);
       });
-    } else {
-      callback(null, result);
-    }
-  };
-
-  generateCandidateDetailFile(result: any, callback: (err: any, res: any) => void) {
-    console.log("inside generate file");
-    if (result.candidate && result.candidate.length > 0) {
-      let fields = ['first_name', 'last_name', 'mobile_number', 'email', 'isActivated', 'data.location.city',
-        'data.professionalDetails.education', 'data.professionalDetails.experience',
-        'data.professionalDetails.currentSalary', 'data.professionalDetails.noticePeriod',
-        'data.professionalDetails.relocate', 'data.professionalDetails.industryExposure',
-        'data.professionalDetails.currentCompany', 'data.isCompleted', 'data.isSubmitted', 'data.isVisible',
-        'data.keySkills', 'data.industry.name', 'data.roles', 'data.capabilityMatrix.capabilityCode',
-        'data.capabilityMatrix.complexityCode', 'data.capabilityMatrix.scenerioCode'];
-      let fieldNames = ['First Name', 'Last Name', 'Mobile Number', 'Email', 'Is Activated', 'City', 'Education',
-        'Experience', 'Current Salary', 'Notice Period', 'Ready To Relocate', 'Industry Exposure', 'Current Company',
-        'Is Completed', 'Is Submitted', 'Is Visible', 'Key Skills', 'Industry', 'Role', 'Capability Code',
-        'Complexity Code', 'Scenario Code'];
-
-      /*let csv = json2csv({
-       data: result.candidate, fields: fields, fieldNames: fieldNames,
-       unwindPath: ['data.capabilityMatrix']
-       });
-       console.log("writing into file file");
-       //fs.writeFile('./src/server/public/candidate.csv', csv, function (err: any) {
-       fs.writeFile('/home/bitnami/apps/jobmosis-staging/c-next/dist/server/prod/public/candidate.csv', csv, function (err: any) {
-       if (err) throw err;
-       callback(null, result);
-       });*/
-
-      let tempString: string = '';
-      let count = 0;
-      let candidateLength = result.candidate.length;
-      for (let candidate of result.candidate) {
-        tempString = json2csv({
-          data: candidate, fields: fields, fieldNames: fieldNames,
-          unwindPath: ['data.capabilityMatrix']
-        }, (err: any, result: any) => {
-          count++;
-          if(count == 1){
-            tempString += result;
-          }else{
-            /*Always check for this last column for spliting the records*/
-            tempString += result.split('Scenario Code"')[1];
-          }
-          if (count == candidateLength) {
-            console.log("writing into file file");
-            //fs.writeFile('./src/server/public/candidate.csv', tempString, (err: any) => {
-              fs.writeFile('/home/bitnami/apps/jobmosis-staging/c-next/dist/server/prod/public/candidate.csv', tempString, function (err: any) {
-              if (err) throw err;
-              callback(null, result);
-            });
-          }
-        })
-      }
-
-
-      /*let tempString: string = '';
-       let count = 0;
-       let candidateLength = result.candidate.length;
-       for(var i=0; i<=candidateLength;) {
-       console.log("Enter count:" + i);
-       let tempCandidate = result.candidate.splice(i,100);
-       tempString = json2csv({
-       data: tempCandidate, fields: fields, fieldNames: fieldNames,
-       unwindPath: ['data.capabilityMatrix']
-       }, (err: any,result: any) => {
-       console.log("CSV count:" + count);
-       count = count + 100;
-       tempString += result;
-       if(count == candidateLength) {
-       console.log("writing into file file");
-       fs.writeFile('./src/server/public/candidate.csv', tempString, (err: any) => {
-       //fs.writeFile('/home/bitnami/apps/jobmosis-staging/c-next/dist/server/prod/public/candidate.csv', csv, function (err: any) {
-       if (err) throw err;
-       callback(null, result);
-       });
-       }
-       })
-       i=i+100;
-       }*/
-
-
-    } else {
-      callback(null, result);
-    }
-  };
-
-  generateRecruiterDetailFile(result: any, callback: (err: any, res: any) => void) {
-    console.log("inside generate file");
-    if (result.recruiter && result.recruiter.length > 0) {
-      let fields = ['data.company_name', 'data.company_size', 'data.isRecruitingForself',
-        'data.numberOfJobsPosted', 'mobile_number', 'email', 'isActivated', 'data.postedJobs.isJobPosted',
-        'data.postedJobs.jobTitle', 'data.postedJobs.hiringManager', 'data.postedJobs.department',
-        'data.postedJobs.education', 'data.postedJobs.experienceMinValue', 'data.postedJobs.experienceMaxValue',
-        'data.postedJobs.salaryMinValue', 'data.postedJobs.salaryMaxValue', 'data.postedJobs.joiningPeriod',
-        'data.postedJobs.keySkills', 'data.postedJobs.additionalKeySkills', 'data.postedJobs.industry.name',
-        'data.postedJobs.roles', 'data.postedJobs.capabilityMatrix.capabilityCode',
-        'data.postedJobs.capabilityMatrix.complexityCode', 'data.postedJobs.capabilityMatrix.scenerioCode',
-        'data.postedJobs.postingDate', 'data.postedJobs.expiringDate'];
-
-      let fieldNames = ['Company Name', 'company size', 'Recruiting For Self', 'Number of Job Posted', 'Mobile Number',
-        'Email', 'Is Activated', 'Is Job Posted', 'Job Title', 'Hiring Manager', 'Department', 'Education',
-        'Experience MinValue', 'Experience MaxValue', 'Salary MinValue', 'Salary MaxValue', 'Joining Period',
-        'Key Skills', 'Additional Key Skills', 'Industry', 'Role', 'Capability Code',
-        'Complexity Code', 'Scenario Code', 'Posting Date', 'Expiring Date'];
-      /*let csv = json2csv({
-       data: result.recruiter,
-       fields: fields,
-       fieldNames: fieldNames,
-       unwindPath: ['data.postedJobs', 'data.postedJobs.capabilityMatrix']
-       });
-       fs.writeFile('./src/server/public/recruiter.csv', csv, function (err: any) {
-       //fs.writeFile('/home/bitnami/apps/jobmosis-staging/c-next/dist/server/prod/public/recruiter.csv', csv, function (err: any) {
-       if (err) throw err;
-       callback(null, result);
-       });*/
-
-
-      let tempString: string = '';
-      let count = 0;
-      let recruiterLength = result.recruiter.length;
-      for (let recruiter of result.recruiter) {
-        tempString = json2csv({
-          data: recruiter, fields: fields, fieldNames: fieldNames,
-          unwindPath: ['data.postedJobs', 'data.postedJobs.capabilityMatrix']
-        }, (err: any, result: any) => {
-          count++;
-          if(count == 1){
-            tempString += result;
-          }else{
-            /*Always check for this last column for spliting the records*/
-            tempString += result.split('Expiring Date"')[1];
-          }
-          if (count == recruiterLength) {
-            console.log("writing into file file");
-            //fs.writeFile('./src/server/public/recruiter.csv', tempString, function (err: any) {
-              fs.writeFile('/home/bitnami/apps/jobmosis-staging/c-next/dist/server/prod/public/recruiter.csv', tempString, function (err: any) {
-              if (err) throw err;
-              callback(null, result);
-            });
-          }
-        });
-      }
-
-
     } else {
       callback(null, result);
     }
@@ -565,6 +440,99 @@ class AdminService {
     });
 
   }
+
+  exportCandidateCollection(callback: (err: any, res: any) => void) {
+    console.log("inside exportCandidateCollection");
+    /*let candidateChild = spawn('mongoexport', ['--db', db, '--collection', 'candidates', '--type', 'csv', '--fields',
+      'userId,jobTitle,isCompleted,isSubmitted,location.city,proficiencies,professionalDetails,isVisible',
+      '--out', '/home/shrikant/JavaProject/ng4-cnext/c-next/dist/server/prod/public/candidates.csv']);*/
+
+    let candidateChild = spawn('mongoexport', ['--username', username, '--password', password,'--db', db, '--collection',
+      'candidates', '--type', 'csv', '--fields',
+      'userId,jobTitle,isCompleted,isSubmitted,location.city,proficiencies,professionalDetails,isVisible',
+      '--out', '/home/bitnami/apps/jobmosis-staging/c-next/dist/server/prod/public/candidates.csv']);
+
+    candidateChild.on('exit', function (code: any) {
+      console.log('candidateChild process closed with code ' + code);
+      candidateChild.kill();
+      callback(null, 'success');
+    });
+  }
+
+  exportCandidateOtherDetailsCollection(callback: (err: any, res: any) => void) {
+    console.log("inside exportCandidateDetailsCollection");
+    /*let candidateOtherDetailsChild = spawn('mongoexport', ['--db', db, '--collection', 'candidates',
+      '--type', 'csv', '--fields', 'userId,capability_matrix', '--out',
+      '/home/kapil/JavaProject/ng4-cnext/c-next/dist/server/prod/public/candidates-other-details.csv']);
+*/
+    let candidateOtherDetailsChild = spawn('mongoexport', ['--username', username, '--password', password, '--db', db, '--collection', 'candidates',
+      '--type', 'csv', '--fields', 'userId,capability_matrix', '--out',
+      '/home/bitnami/apps/jobmosis-staging/c-next/dist/server/prod/public/candidates-other-details.csv']);
+
+    candidateOtherDetailsChild.on('exit', function (code: any) {
+      console.log('candidateOtherDetailsChild process closed with code ' + code);
+      candidateOtherDetailsChild.kill();
+      callback(null, 'success');
+    });
+
+  }
+
+  exportUserCollection(userType: string, callback: (err: any, res: any) => void) {
+    console.log("inside exportUserCollection");
+    let userChild: any;
+
+/*
+    if (userType == 'candidate') {
+      userChild = spawn('mongoexport', ['--db', db, '--collection', 'users', '--type', 'csv', '--fields',
+        '_id,first_name,last_name,email,location.city,isActivated',
+        '--out', '/home/kapil/JavaProject/ng4-cnext/c-next/dist/server/prod/public/users.csv', '--query',
+        '{"isCandidate": true}']);
+    } else {
+      userChild = spawn('mongoexport', ['--db', db, '--collection', 'users', '--type', 'csv', '--fields',
+        '_id,mobile_number,email,location.city,isActivated', '--out',
+        '/home/kapil/JavaProject/ng4-cnext/c-next/dist/server/prod/public/users.csv',
+        '--query', '{"isCandidate": false}']);
+    }
+*/
+
+    if (userType == 'candidate') {
+      userChild = spawn('mongoexport', ['--username', username, 'password', password, '--db', db, '--collection', 'users', '--type', 'csv', '--fields',
+        '_id,first_name,last_name,email,location.city,isActivated',
+        '--out', '/home/bitnami/apps/jobmosis-staging/c-next/dist/server/prod/public/users.csv', '--query',
+        '{"isCandidate": true}']);
+    } else {
+      userChild = spawn('mongoexport', ['--username', username, 'password', password, '--db', db, '--collection', 'users', '--type', 'csv', '--fields',
+        '_id,mobile_number,email,location.city,isActivated', '--out',
+        '/home/bitnami/apps/jobmosis-staging/c-next/dist/server/prod/public/users.csv',
+        '--query', '{"isCandidate": false}']);
+    }
+
+    userChild.on('close', function (code: any) {
+      console.log('userChild process closed with code ' + code);
+      userChild.kill();
+      callback(null, 'success');
+    });
+  }
+
+  exportRecruiterCollection(callback: (err: any, res: any) => void) {
+    console.log("inside exportRecruiterCollection");
+/*
+    let recruiterChild = spawn('mongoexport', ['--db', db, '--collection', 'recruiters', '--type', 'csv',
+      '--fields','userId,isRecruitingForself,company_name,company_size,company_website,postedJobs', '--out',
+      '/home/kapil/JavaProject/ng4-cnext/c-next/dist/server/prod/public/recruiters.csv']);
+*/
+
+    let recruiterChild = spawn('mongoexport', ['--username', username, 'password', password, '--db', db, '--collection', 'recruiters', '--type', 'csv',
+      '--fields','userId,isRecruitingForself,company_name,company_size,company_website,postedJobs', '--out',
+      '/home/bitnami/apps/jobmosis-staging/c-next/dist/server/prod/public/recruiters.csv']);
+
+    recruiterChild.on('exit', function (code: any) {
+      console.log('recruiterChild process closed with code ' + code);
+      callback(null, 'success');
+    });
+  }
+
+
 }
 
 Object.seal(AdminService);

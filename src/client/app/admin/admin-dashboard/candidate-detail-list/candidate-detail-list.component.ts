@@ -58,6 +58,8 @@ export class CandidateDetailListComponent {
         UsageDetails => {
           this.loaderService.stop();
           document.getElementById('link_candidate').click();
+          document.getElementById('link_candidate1').click();
+          document.getElementById('link_candidate2').click();
           this.messageService.message(new Message(Messages.MSG_SUCCESS_FOR_FILE_DOWNLOAD));
         },
         error => {

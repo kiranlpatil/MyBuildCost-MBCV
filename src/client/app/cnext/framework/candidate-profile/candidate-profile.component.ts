@@ -1,5 +1,8 @@
 import {Component, DoCheck, HostListener, KeyValueDiffers, OnDestroy, OnInit} from "@angular/core";
-import {Button, ImagePath, Label, LocalStorage, Messages, NavigationRoutes, Tooltip} from "../../../shared/constants";
+import {
+  Button, ImagePath, Label, LocalStorage, Messages, NavigationRoutes, Tooltip,
+  CandidateProfileUpdateTrack
+} from "../../../shared/constants";
 import {Router} from "@angular/router";
 import {ComplexityService} from "../complexity.service";
 import {Candidate, Section} from "../../../user/models/candidate";
@@ -130,12 +133,18 @@ export class CandidateProfileComponent implements OnInit, DoCheck, OnDestroy {
   }
 
   onProfileDescriptionComplete() {
+    if(this.candidate.profile_update_tracking < CandidateProfileUpdateTrack.STEP_IS_ENTER_PROFILE_DETAILS) {
+      this.candidate.profile_update_tracking = CandidateProfileUpdateTrack.STEP_IS_ENTER_PROFILE_DETAILS;
+    }
     this.saveCandidateDetails();
     this.isIndustryShow = false;
   }
 
   onIndustryChange(newIndustry: Industry) {
     if (newIndustry !== undefined && newIndustry.name !== '') {
+      if(this.candidate.profile_update_tracking < CandidateProfileUpdateTrack.STEP_IS_SELECT_INDUSTRY_DETAILS) {
+        this.candidate.profile_update_tracking = CandidateProfileUpdateTrack.STEP_IS_SELECT_INDUSTRY_DETAILS;
+      }
       this.candidate.industry = newIndustry;
       this.saveCandidateDetails();
       this.isRolesShow = false;
@@ -151,6 +160,9 @@ export class CandidateProfileComponent implements OnInit, DoCheck, OnDestroy {
     this.messageService.message(message);
   }
   onWorkAreaComplete(roles: Role[]) {
+    if(this.candidate.profile_update_tracking < CandidateProfileUpdateTrack.STEP_IS_SELECT_AREA_OF_WORK) {
+      this.candidate.profile_update_tracking = CandidateProfileUpdateTrack.STEP_IS_SELECT_AREA_OF_WORK;
+    }
     this.candidate.industry.roles = roles;
     this.saveCandidateDetails();
     if (roles.length===1 && roles[0].code === '99999') {
@@ -171,6 +183,9 @@ export class CandidateProfileComponent implements OnInit, DoCheck, OnDestroy {
   }
 
   onCapabilityComplete(roles: Role[]) {
+    if(this.candidate.profile_update_tracking < CandidateProfileUpdateTrack.STEP_IS_SELECT_CAPABILITIES) {
+      this.candidate.profile_update_tracking = CandidateProfileUpdateTrack.STEP_IS_SELECT_CAPABILITIES;
+    }
     this.candidate.industry.roles = roles;
     this.candidateForCapability = this.candidate.industry.roles;
     this.candidateForRole = this.candidate.industry.roles;
@@ -185,6 +200,9 @@ export class CandidateProfileComponent implements OnInit, DoCheck, OnDestroy {
   }
 
   onComplexityComplete(roles: Role[]) {
+    if(this.candidate.profile_update_tracking < CandidateProfileUpdateTrack.STEP_IS_SELECT_COMPLEXITIES) {
+      this.candidate.profile_update_tracking = CandidateProfileUpdateTrack.STEP_IS_SELECT_COMPLEXITIES;
+    }
     var date = new Date();
     date.setDate(date.getDate() + 90);
     this.candidate.lockedOn = date;
@@ -194,6 +212,9 @@ export class CandidateProfileComponent implements OnInit, DoCheck, OnDestroy {
   }
 
   onProficiencySelect(proficiency: string[]) {
+    if(this.candidate.profile_update_tracking < CandidateProfileUpdateTrack.STEP_IS_ENTER_KEY_SKILLS) {
+      this.candidate.profile_update_tracking = CandidateProfileUpdateTrack.STEP_IS_ENTER_KEY_SKILLS;
+    }
     this.candidate.proficiencies = proficiency;
     this.highlightedSection.isProficiencyFilled = true;
     this.saveCandidateDetails();
@@ -205,6 +226,9 @@ export class CandidateProfileComponent implements OnInit, DoCheck, OnDestroy {
   }
 
   onExperienceIndustrySelect(experiencedindustry: string[]) {
+    if(this.candidate.profile_update_tracking < CandidateProfileUpdateTrack.STEP_IS_SELECT_ADDITIONAL_DOMAIN_EXPOSURE) {
+      this.candidate.profile_update_tracking = CandidateProfileUpdateTrack.STEP_IS_SELECT_ADDITIONAL_DOMAIN_EXPOSURE;
+    }
     this.candidate.interestedIndustries = experiencedindustry;
     this.saveCandidateDetails();
   }
@@ -518,6 +542,9 @@ export class CandidateProfileComponent implements OnInit, DoCheck, OnDestroy {
 
 
   showHideModal() {
+    if(this.candidate.profile_update_tracking < CandidateProfileUpdateTrack.STEP_IS_SUBMIT_DETAILS) {
+      this.candidate.profile_update_tracking = CandidateProfileUpdateTrack.STEP_IS_SUBMIT_DETAILS;
+    }
     LocalStorageService.setLocalValue(LocalStorage.IS_CANDIDATE_FILLED, true);
     this.onSubmit();
   }

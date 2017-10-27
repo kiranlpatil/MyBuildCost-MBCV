@@ -2,7 +2,7 @@ import {Component, ElementRef, EventEmitter, Input, Output, ViewChild} from "@an
 import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
 import {Candidate, Section} from "../../../user/models/candidate";
 import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {Headings, Tooltip} from "../../../shared/constants";
+import {Headings, Tooltip, CandidateProfileUpdateTrack} from "../../../shared/constants";
 import {ErrorService} from "../../../shared/services/error.service";
 
 @Component({
@@ -132,7 +132,9 @@ export class CertificationAccreditationComponent {
 
   postData(type: string) {
     let isDataValid = false;
-
+    if(this.candidate.profile_update_tracking < CandidateProfileUpdateTrack.STEP_IS_ENTER_CERTIFICATION_DETAILS) {
+      this.candidate.profile_update_tracking = CandidateProfileUpdateTrack.STEP_IS_ENTER_CERTIFICATION_DETAILS;
+    }
     if (type == 'do_nothing') {
       this.profileCreatorService.addProfileDetail(this.candidate).subscribe(
         user => {
@@ -195,7 +197,13 @@ export class CertificationAccreditationComponent {
     this.onComplete.emit();
     this.highlightedSection.name = 'Awards';
     this.highlightedSection.isDisable = false;
-      window.scrollTo(0, 0);
+    window.scrollTo(0, 0);
+
+      let item:any = {'profile_update_tracking':CandidateProfileUpdateTrack.STEP_IS_ENTER_CERTIFICATION_DETAILS};
+      this.profileCreatorService.updateCandidateField(item).subscribe(
+        res => {
+          console.log('success');
+        }, error => this.errorService.onError(error));
   }
 
   onSave() {
