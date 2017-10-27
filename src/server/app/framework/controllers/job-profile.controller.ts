@@ -1,11 +1,11 @@
-import * as express from 'express';
+import * as express from "express";
+import {UsageTracking} from "../dataaccess/model/usage-tracking";
+import {ConstVariables} from "../shared/sharedconstants";
 import Messages = require('../shared/messages');
 import JobProfileModel = require('../dataaccess/model/jobprofile.model');
 import JobProfileService = require('../services/jobprofile.service');
 import CNextMessages = require('../shared/cnext-messages');
 import SearchService = require('../search/services/search.service');
-import { UsageTracking } from '../dataaccess/model/usage-tracking';
-import {Actions, ConstVariables} from '../shared/sharedconstants';
 import RecruiterService = require('../services/recruiter.service');
 let usestracking = require('uses-tracking');
 
@@ -18,7 +18,8 @@ export function searchCandidatesByJobProfile(req: express.Request, res: express.
       if (error) {
         next({
           reason: 'No candidates are present for this Job Profile',//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
-          message: Messages.MSG_ERROR_WRONG_TOKEN,
+          message: 'No candidates are present for this Job Profile',
+          stackTrace: new Error(),
           code: 401
         });
       } else {
@@ -30,7 +31,12 @@ export function searchCandidatesByJobProfile(req: express.Request, res: express.
     });
 
   } catch (e) {
-    res.status(403).send({message: e.message});
+    next({
+      reason: e.message,
+      message: e.message,
+      stackTrace: new Error(),
+      code: 500
+    });
   }
 
 }
@@ -46,18 +52,19 @@ export function retrieve(req: express.Request, res: express.Response, next: any)
         next({
           reason: CNextMessages.PROBLEM_IN_RETRIEVE_JOB_PROFILE,
           message: CNextMessages.PROBLEM_IN_RETRIEVE_JOB_PROFILE,
+          stackTrace: new Error(),
           code: 401
         });
       } else {
         let currentDate = Number(new Date());
         let expiringDate = Number(new Date(result.postedJobs[0].expiringDate));
-        let daysRemainingForExpiring = Math.round(Number(new Date(expiringDate - currentDate))/(1000*60*60*24));
+        let daysRemainingForExpiring = Math.round(Number(new Date(expiringDate - currentDate)) / (1000 * 60 * 60 * 24));
         result.postedJobs[0].daysRemainingForExpiring = daysRemainingForExpiring;
         if (daysRemainingForExpiring <= 0) {
-          result.postedJobs[0].isJobPostExpired=true;
+          result.postedJobs[0].isJobPostExpired = true;
 
-        } else{
-          result.postedJobs[0].isJobPostExpired=false;
+        } else {
+          result.postedJobs[0].isJobPostExpired = false;
 
         }
         res.status(200).send({
@@ -70,7 +77,12 @@ export function retrieve(req: express.Request, res: express.Response, next: any)
 
     });
   } catch (e) {
-    res.status(403).send({message: e.message});
+    next({
+      reason: e.message,
+      message: e.message,
+      stackTrace: new Error(),
+      code: 500
+    });
   }
 }
 
@@ -85,6 +97,7 @@ export function getCapabilityMatrix(req: express.Request, res: express.Response,
         next({
           reason: CNextMessages.PROBLEM_IN_RETRIEVE_JOB_PROFILE,
           message: CNextMessages.PROBLEM_IN_RETRIEVE_JOB_PROFILE,
+          stackTrace: new Error(),
           code: 401
         });
       } else {
@@ -95,7 +108,12 @@ export function getCapabilityMatrix(req: express.Request, res: express.Response,
 
     });
   } catch (e) {
-    res.status(403).send({message: e.message});
+    next({
+      reason: e.message,
+      message: e.message,
+      stackTrace: new Error(),
+      code: 500
+    });
   }
 }
 
@@ -117,6 +135,7 @@ export function update(req: express.Request, res: express.Response, next: any) {
         next({
           reason: Messages.MSG_ERROR_RSN_USER_NOT_FOUND,
           message: Messages.MSG_ERROR_RSN_USER_NOT_FOUND,
+          stackTrace: new Error(),
           code: 403
         });
       } else {
@@ -127,7 +146,12 @@ export function update(req: express.Request, res: express.Response, next: any) {
       }
     });
   } catch (e) {
-    res.status(403).send({message: e.message});
+    next({
+      reason: e.message,
+      message: e.message,
+      stackTrace: new Error(),
+      code: 500
+    });
   }
 }
 
@@ -145,6 +169,7 @@ export function apply(req: express.Request, res: express.Response, next: any) {
         next({
           reason: Messages.MSG_ERROR_RSN_USER_NOT_FOUND,
           message: Messages.MSG_ERROR_RSN_USER_NOT_FOUND,
+          stackTrace: new Error(),
           code: 403
         });
       } else {
@@ -156,7 +181,12 @@ export function apply(req: express.Request, res: express.Response, next: any) {
     });
 
   } catch (e) {
-    res.status(403).send({message: e.message});
+    next({
+      reason: e.message,
+      message: e.message,
+      stackTrace: new Error(),
+      code: 500
+    });
   }
 
 }
@@ -166,11 +196,12 @@ export function metchResultForJob(req: express.Request, res: express.Response, n
     var searchService = new SearchService();
     let jobId = req.params.jobId;
     let candidateId = req.params.candidateId;
-    searchService.getMatchingResult(candidateId, jobId, false,(error: any, result: any) => {
+    searchService.getMatchingResult(candidateId, jobId, false, (error: any, result: any) => {
       if (error) {
         next({
           reason: 'Problem in Search Matching Result',//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
           message: 'Problem in Search Matching Result',//Messages.MSG_ERROR_WRONG_TOKEN,
+          stackTrace: new Error(),
           code: 401
         });
       } else {
@@ -183,12 +214,17 @@ export function metchResultForJob(req: express.Request, res: express.Response, n
     });
 
   } catch (e) {
-    res.status(403).send({message: e.message});
+    next({
+      reason: e.message,
+      message: e.message,
+      stackTrace: new Error(),
+      code: 500
+    });
   }
 }
-export function createUsesTracking(req: express.Request, res: express.Response) {
+export function createUsesTracking(req: express.Request, res: express.Response, next: any) {
   try {
-    let data : UsageTracking;
+    let data: UsageTracking;
     data = req.body;
     data.timestamp = new Date();
     let obj: any = new usestracking.MyController();
@@ -197,7 +233,12 @@ export function createUsesTracking(req: express.Request, res: express.Response) 
       'status': 'success',
     });
   } catch (e) {
-    res.status(403).send({message: e.message});
+    next({
+      reason: e.message,
+      message: e.message,
+      stackTrace: new Error(),
+      code: 500
+    });
   }
 }
 
@@ -210,13 +251,18 @@ export function getQCardDetails(req: express.Request, res: express.Response, nex
     };
     jobProfileService.getQCardDetails(data, (error: Error, result: any) => {
       if (error) {
-        res.status(304).send(error);
+        next(error);
       } else {
         res.status(200).send(result);
       }
     });
   } catch (e) {
-    res.status(403).send({message: e.message});
+    next({
+      reason: e.message,
+      message: e.message,
+      stackTrace: new Error(),
+      code: 500
+    });
   }
 }
 export function cloneJob(req: express.Request, res: express.Response, next: any) {
@@ -224,49 +270,56 @@ export function cloneJob(req: express.Request, res: express.Response, next: any)
     var newJobTitle = req.query.newJobTitle;
     var jobProfileService = new JobProfileService();
     let data = {
-      'postedJob':req.params.id
+      'postedJob': req.params.id
     };
     jobProfileService.retrieve(data, (error, result) => {
       if (error) {
         next({
           reason: CNextMessages.PROBLEM_IN_RETRIEVE_JOB_PROFILE,
           message: CNextMessages.PROBLEM_IN_RETRIEVE_JOB_PROFILE,
+          stackTrace: new Error(),
           code: 401
         });
       } else {
-        var newJob:any=result.postedJobs[0];
+        var newJob: any = result.postedJobs[0];
 
         delete newJob._id;
-        newJob.jobTitle=newJobTitle;
-        newJob.isJobPosted=false;
-        newJob.isJobShared=false;
-        newJob.sharedLink='';
+        newJob.jobTitle = newJobTitle;
+        newJob.isJobPosted = false;
+        newJob.isJobShared = false;
+        newJob.sharedLink = '';
         newJob.postingDate = new Date();
-        newJob.candidate_list=[];
+        newJob.candidate_list = [];
         newJob.isJobPostClosed = false;
         newJob.jobCloseReason = null;
 
         newJob.expiringDate = new Date((new Date().getTime() + ConstVariables.JOB__EXPIRIY_PERIOD));
         var recruiterService = new RecruiterService();
-        recruiterService.addCloneJob( result.userId, newJob, (err, result) => {
-            if (err) {
-              next({
-                reason:err,
-                message: err.message,
-                code: 403
-              });
-            } else {
-              res.status(200).send({
-                'status': Messages.STATUS_SUCCESS,
-                'data': result.postedJobs[0]._id
-              });
-            }
-          });
+        recruiterService.addCloneJob(result.userId, newJob, (err, result) => {
+          if (err) {
+            next({
+              reason: err,
+              message: err.message,
+              stackTrace: new Error(),
+              code: 403
+            });
+          } else {
+            res.status(200).send({
+              'status': Messages.STATUS_SUCCESS,
+              'data': result.postedJobs[0]._id
+            });
+          }
+        });
       }
 
     });
   } catch (e) {
-    res.status(403).send({message: e.message});
+    next({
+      reason: e.message,
+      message: e.message,
+      stackTrace: new Error(),
+      code: 500
+    });
   }
 }
 

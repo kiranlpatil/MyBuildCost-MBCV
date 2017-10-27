@@ -16,7 +16,7 @@ class DataAccess {
 
     let host = config.get('TplSeed.database.host');
     let name = config.get('TplSeed.database.name');
-    Mongoose.set('debug',true);
+   // Mongoose.set('debug',true);
     //this.mongooseInstance = Mongoose.connect('mongodb://admin:jobmosisadmin123@' + host + '/' + name+'');
     this.mongooseInstance = Mongoose.connect('mongodb://' + host + '/' + name+'');
     return this.mongooseInstance;

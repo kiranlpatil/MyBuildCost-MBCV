@@ -20,24 +20,25 @@ export function create(req: express.Request, res: express.Response, next: any) {
     var userService = new UserService();
     userService.createUser(newUser, (error, result) => {
       if (error) {
-        console.log('crt user error', error);
-
         if (error === Messages.MSG_ERROR_CHECK_EMAIL_PRESENT) {
           next({
             reason: Messages.MSG_ERROR_RSN_EXISTING_USER,
             message: Messages.MSG_ERROR_VERIFY_ACCOUNT,
+            stackTrace: new Error(),
             code: 403
           });
         } else if (error === Messages.MSG_ERROR_CHECK_MOBILE_PRESENT) {
           next({
             reason: Messages.MSG_ERROR_RSN_EXISTING_USER,
             message: Messages.MSG_ERROR_REGISTRATION_MOBILE_NUMBER,
+            stackTrace: new Error(),
             code: 403
           });
         } else {
           next({
             reason: Messages.MSG_ERROR_RSN_EXISTING_USER,
             message: Messages.MSG_ERROR_USER_WITH_EMAIL_PRESENT,
+            stackTrace: new Error(),
             code: 403
           });
         }
@@ -60,7 +61,12 @@ export function create(req: express.Request, res: express.Response, next: any) {
       }
     });
   } catch (e) {
-    res.status(403).send({'status': Messages.STATUS_ERROR, 'error_message': e.message});
+    next({
+      reason: e.message,
+      message: e.message,
+      stackTrace: new Error(),
+      code: 403
+    });
   }
 }
 
@@ -75,6 +81,7 @@ export function getAllUser(req: express.Request, res: express.Response, next: an
           next({
             reason: Messages.MSG_ERROR_RETRIEVING_USER,//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
             message: Messages.MSG_ERROR_RETRIEVING_USER,
+            stackTrace: new Error(),
             code: 403
           });
         } else {
@@ -83,6 +90,7 @@ export function getAllUser(req: express.Request, res: express.Response, next: an
               next({
                 reason: Messages.MSG_ERROR_SEPERATING_USER,//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
                 message: Messages.MSG_ERROR_SEPERATING_USER,
+                stackTrace: new Error(),
                 code: 403
               });
             } else {
@@ -95,16 +103,20 @@ export function getAllUser(req: express.Request, res: express.Response, next: an
         }
       });
     } else {
-      res.status(401).send({
-        'error': {
+      next({
           reason: Messages.MSG_ERROR_UNAUTHORIZED_USER,
           message: Messages.MSG_ERROR_UNAUTHORIZED_USER,
+          stackTrace: new Error(),
           code: 401
-        }
-      });
+        });
     }
   } catch (e) {
-    res.status(403).send({message: e.message});
+    next({
+      reason: e.message,
+      message: e.message,
+      stackTrace: new Error(),
+      code: 403
+    });
   }
 }
 
@@ -118,6 +130,7 @@ export function getCountOfUsers(req: express.Request, res: express.Response, nex
           next({
             reason: Messages.MSG_ERROR_RETRIEVING_USER,//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
             message: Messages.MSG_ERROR_RETRIEVING_USER,
+            stackTrace: new Error(),
             code: 403
           });
         } else {
@@ -128,16 +141,21 @@ export function getCountOfUsers(req: express.Request, res: express.Response, nex
         }
       });
     } else {
-      res.status(401).send({
-        'error': {
+     next({
           reason: Messages.MSG_ERROR_UNAUTHORIZED_USER,
           message: Messages.MSG_ERROR_UNAUTHORIZED_USER,
+          stackTrace: new Error(),
           code: 401
         }
-      });
+      );
     }
   } catch (e) {
-    res.status(403).send({message: e.message});
+    next({
+      reason: e.message,
+      message: e.message,
+      stackTrace: new Error(),
+      code: 403
+    });
   }
 }
 
@@ -152,6 +170,7 @@ export function getCandidateDetailsByInitial(req: express.Request, res: express.
           next({
             reason: Messages.MSG_ERROR_RETRIEVING_USER,//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
             message: Messages.MSG_ERROR_RETRIEVING_USER,
+            stackTrace: new Error(),
             code: 403
           });
         } else {
@@ -162,16 +181,20 @@ export function getCandidateDetailsByInitial(req: express.Request, res: express.
         }
       });
     } else {
-      res.status(401).send({
-        'error': {
+      next({
           reason: Messages.MSG_ERROR_UNAUTHORIZED_USER,
           message: Messages.MSG_ERROR_UNAUTHORIZED_USER,
+          stackTrace: new Error(),
           code: 401
-        }
-      });
+        });
     }
   } catch (e) {
-    res.status(403).send({message: e.message});
+    next({
+      reason: e.message,
+      message: e.message,
+      stackTrace: new Error(),
+      code: 403
+    });
   }
 }
 
@@ -186,6 +209,7 @@ export function getRecruiterDetailsByInitial(req: express.Request, res: express.
           next({
             reason: Messages.MSG_ERROR_RETRIEVING_USER,//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
             message: Messages.MSG_ERROR_RETRIEVING_USER,
+            stackTrace: new Error(),
             code: 403
           });
         } else {
@@ -196,16 +220,20 @@ export function getRecruiterDetailsByInitial(req: express.Request, res: express.
         }
       });
     } else {
-      res.status(401).send({
-        'error': {
+      next( {
           reason: Messages.MSG_ERROR_UNAUTHORIZED_USER,
           message: Messages.MSG_ERROR_UNAUTHORIZED_USER,
+          stackTrace: new Error(),
           code: 401
-        }
       });
     }
   } catch (e) {
-    res.status(403).send({message: e.message});
+    next({
+      reason: e.message,
+      message: e.message,
+      stackTrace: new Error(),
+      code: 403
+    });
   }
 }
 
@@ -221,6 +249,7 @@ export function exportCandidateDetails(req: express.Request, res: express.Respon
           next({
             reason: Messages.MSG_ERROR_SEPERATING_USER,//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
             message: Messages.MSG_ERROR_SEPERATING_USER,
+            stackTrace: new Error(),
             code: 403
           });
         } else {
@@ -229,6 +258,7 @@ export function exportCandidateDetails(req: express.Request, res: express.Respon
               next({
                 reason: Messages.MSG_ERROR_CREATING_EXCEL,//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
                 message: Messages.MSG_ERROR_CREATING_EXCEL,
+                stackTrace: new Error(),
                 code: 403
               });
             } else {
@@ -240,16 +270,20 @@ export function exportCandidateDetails(req: express.Request, res: express.Respon
         }
       });
     } else {
-      res.status(401).send({
-        'error': {
+      next( {
           reason: Messages.MSG_ERROR_UNAUTHORIZED_USER,
           message: Messages.MSG_ERROR_UNAUTHORIZED_USER,
+          stackTrace: new Error(),
           code: 401
-        }
       });
     }
   } catch (e) {
-    res.status(403).send({message: e.message});
+    next({
+      reason: e.message,
+      message: e.message,
+      stackTrace: new Error(),
+      code: 403
+    });
   }
 }
 
@@ -265,6 +299,7 @@ export function exportRecruiterDetails(req: express.Request, res: express.Respon
           next({
             reason: Messages.MSG_ERROR_SEPERATING_USER,//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
             message: Messages.MSG_ERROR_SEPERATING_USER,
+            stackTrace: new Error(),
             code: 403
           });
         } else {
@@ -273,6 +308,7 @@ export function exportRecruiterDetails(req: express.Request, res: express.Respon
               next({
                 reason: Messages.MSG_ERROR_CREATING_EXCEL,//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
                 message: Messages.MSG_ERROR_CREATING_EXCEL,
+                stackTrace: new Error(),
                 code: 403
               });
             } else {
@@ -285,7 +321,12 @@ export function exportRecruiterDetails(req: express.Request, res: express.Respon
       });
     }
   } catch (e) {
-    res.status(403).send({message: e.message});
+    next({
+      reason: e.message,
+      message: e.message,
+      stackTrace: new Error(),
+      code: 403
+    });
   }
 }
 
@@ -299,6 +340,7 @@ export function getUsageDetails(req: express.Request, res: express.Response, nex
           next({
             reason: Messages.MSG_ERROR_RETRIEVING_USAGE_DETAIL,//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
             message: Messages.MSG_ERROR_RETRIEVING_USAGE_DETAIL,
+            stackTrace: new Error(),
             code: 403
           });
         } else {
@@ -307,6 +349,7 @@ export function getUsageDetails(req: express.Request, res: express.Response, nex
               next({
                 reason: Messages.MSG_ERROR_ADDING_USAGE_DETAIL,//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
                 message: Messages.MSG_ERROR_ADDING_USAGE_DETAIL,
+                stackTrace: new Error(),
                 code: 403
               });
             } else {
@@ -315,6 +358,7 @@ export function getUsageDetails(req: express.Request, res: express.Response, nex
                   next({
                     reason: Messages.MSG_ERROR_CREATING_EXCEL,//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
                     message: Messages.MSG_ERROR_CREATING_EXCEL,
+                    stackTrace: new Error(),
                     code: 403
                   });
                 } else {
@@ -330,16 +374,21 @@ export function getUsageDetails(req: express.Request, res: express.Response, nex
         }
       });
     } else {
-      res.status(401).send({
-        'error': {
+      next({
           reason: Messages.MSG_ERROR_UNAUTHORIZED_USER,
           message: Messages.MSG_ERROR_UNAUTHORIZED_USER,
+          stackTrace: new Error(),
           code: 401
         }
-      });
+      );
     }
   } catch (e) {
-    res.status(403).send({message: e.message});
+    next({
+      reason: e.message,
+      message: e.message,
+      stackTrace: new Error(),
+      code: 403
+    });
   }
 }
 
@@ -363,6 +412,7 @@ export function updateDetailOfUser(req: express.Request, res: express.Response, 
             next({
               reason: Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
               message: Messages.MSG_ERROR_WRONG_TOKEN,
+              stackTrace: new Error(),
               code: 401
             });
           } else {
@@ -384,11 +434,16 @@ export function updateDetailOfUser(req: express.Request, res: express.Response, 
       }
     });
   } catch (e) {
-    res.status(403).send({message: e.message});
+    next({
+      reason: e.message,
+      message: e.message,
+      stackTrace: new Error(),
+      code: 403
+    });
   }
 }
 
-export function sendLoginInfoToAdmin(email: any, ip: any, latitude: any, longitude: any) {
+export function sendLoginInfoToAdmin(email: any, ip: any, latitude: any, longitude: any,next: any) {
   try {
     var params: any = {email: undefined, ip: undefined, location: undefined};
     var address: any;
@@ -403,12 +458,17 @@ export function sendLoginInfoToAdmin(email: any, ip: any, latitude: any, longitu
         }
         adminService.sendAdminLoginInfoMail(params, (error, result) => {
           if (error) {
-            console.log(error);
+            next(error);
           }
         });
       }
     });
   } catch (e) {
-    console.log(e);
+    next({
+      reason: e.message,
+      message: e.message,
+      stackTrace: new Error(),
+      code: 403
+    });
   }
 }

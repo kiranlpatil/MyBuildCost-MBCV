@@ -4,6 +4,7 @@
       "host":"127.0.0.1",
       "name": "Jobmosis-staging"
     },
+    "limitForQuery" : 10,
     "mail": {
       "host":"https://34.215.90.153:3000/",
       "MAIL_SENDER": "redminestatus@techprimelab.com",
@@ -28,5 +29,22 @@
     },
     "filePathForMasterDataExcel" : "./src/server/app/framework/public/config/NewIndustryDataExcel.xlsx",
     "folderPath":"/home/bitnami/apps/jobmosis-staging/c-next/dist/prod/server/public/candidate.csv"
+  },
+  "logger" : {
+    "levels": {
+      "[all]":"DEBUG"
+    },
+    "appenders": [
+      {
+        "type": "console"
+      },
+      {
+        "type": "dateFile",
+        "filename": "logs/application",
+        "pattern": "-yyyy-MM-dd.log",
+        "alwaysIncludePattern": true
+      }
+    ],
+    "replaceConsole": true
   }
 }

@@ -1,4 +1,4 @@
-import * as express from 'express';
+import * as express from "express";
 import AuthInterceptor = require('../interceptor/auth.interceptor');
 import Messages = require('../shared/messages');
 import ResponseService = require('../shared/response.service');
@@ -22,6 +22,7 @@ export function retrieve(req: express.Request, res: express.Response, next: any)
         next({
           reason: 'Error In Retriving',//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
           message: Messages.MSG_ERROR_WRONG_TOKEN,
+          stackTrace: new Error(),
           code: 401
         });
       }
@@ -36,7 +37,12 @@ export function retrieve(req: express.Request, res: express.Response, next: any)
 
   }
   catch (e) {
-    res.status(403).send({message: e.message});
+    next({
+      reason: e.message,
+      message: e.message,
+      stackTrace: new Error(),
+      code: 403
+    });
   }
 }
 

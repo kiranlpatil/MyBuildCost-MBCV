@@ -8,7 +8,7 @@ class UsesTrackingController {
   constructor() {
   }
 
-  create(req: express.Request, res: express.Response) {
+  create(req: express.Request, res: express.Response,next:any) {
     try {
       let uses_data = {
         recruiterId: req.params.recruiterId,
@@ -29,7 +29,12 @@ class UsesTrackingController {
         'status': 'success',
       });
     } catch (e) {
-      res.status(403).send({message: e.message});
+      next({
+        reason: e.message,
+        message: e.message,
+        stackTrace: new Error(),
+        code: 500
+      });
     }
   }
 

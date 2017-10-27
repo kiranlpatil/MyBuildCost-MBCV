@@ -18,6 +18,7 @@ export function retrieve(req: express.Request, res: express.Response, next: any)
         next({
           reason: 'Error In Retriving',//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
           message: "Error in Retriving",
+          stackTrace: new Error(),
           code: 403
         });
       }
@@ -34,7 +35,7 @@ export function retrieve(req: express.Request, res: express.Response, next: any)
     });
   }
   catch (e) {
-    res.status(403).send({message: e.message});
+    next({reason: e.message, message: e.message, stackTrace: new Error(), code: 500});
   }
 }
 

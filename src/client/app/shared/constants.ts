@@ -119,7 +119,7 @@ export class Messages {
   public static MSG_ERROR_VALIDATION_COMPANYNAME_REQUIRED = 'This field can\'t be left blank.';
   public static MSG_ERROR_VALIDATION_OTP_REQUIRED = 'Enter received OTP.';
   public static MSG_ERROR_VALIDATION_INVALID_EMAIL_REQUIRED = 'Enter a valid email address.';
-  public static MSG_ERROR_VALIDATION_INVALID_URL_REQUIRED = 'Website is not valid';
+  public static MSG_ERROR_VALIDATION_INVALID_URL_REQUIRED = 'Website should be start with www';
   public static MSG_ERROR_VALIDATION_INVALID_NAME = 'Enter valid name.';
   public static MSG_ERROR_VALIDATION_INVALID_DATA = 'Enter valid data.';
   public static MSG_ERROR_VALIDATION_PASSWORD_MISMATCHED = 'Passwords do not match.';
@@ -698,6 +698,7 @@ export class Label {
   public static POST_JOB: string = 'POST JOB';
   public static CLOSED_JOB: string = 'CLOSED JOB';
   public static MUST_TO_HAVE_FILTER_LABEL: string = 'Hide candidates missing must to have capabilities';
+  public static PROFILE_VISIBILITY: string = 'Profile Visibility for Recruiter';
 }
 
 export class Button {
@@ -708,4 +709,6 @@ export class Button {
   public static CANCEL_BUTTON: string = 'Cancel';
   public static VALUE_PORTRAIT_BUTTON: string = 'Create your Own Value Portrait';
   public static SUBMIT_PROFILE: string = 'Submit Profile';
+  public static VIEW_AND_EDIT: string = 'View and Edit';
+  public static PROCEED: string = 'Proceed';
 }

@@ -4,6 +4,7 @@
       "host":"127.0.0.1",
       "name": "JobMosis-production"
     },
+    "limitForQuery" : 10,
     "mail": {
       "host":"http://52.41.194.37/",
       "MAIL_SENDER": "notifications@jobmosis.com",
@@ -28,5 +29,22 @@
     },
     "filePathForMasterDataExcel" : "./src/server/app/framework/public/config/NewIndustryDataExcel.xlsx",
     "folderPath":"/home/bitnami/apps/jobmosis-staging/c-next/dist/prod/server/public/candidate.csv"
+  },
+  "logger" : {
+    "levels": {
+      "[all]":"DEBUG"
+    },
+    "appenders": [
+      {
+        "type": "console"
+      },
+      {
+        "type": "dateFile",
+        "filename": "logs/application",
+        "pattern": "-yyyy-MM-dd.log",
+        "alwaysIncludePattern": true
+      }
+    ],
+    "replaceConsole": true
   }
 }

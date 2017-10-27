@@ -515,7 +515,7 @@ class AdminService {
               callback(null, result);
             });
           }
-        })
+        });
       }
 
 

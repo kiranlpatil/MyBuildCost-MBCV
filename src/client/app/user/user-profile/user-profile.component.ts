@@ -30,7 +30,7 @@ import {ErrorService} from "../../shared/services/error.service";
   styleUrls: ['user-profile.component.css'],
 })
 
-export class UserProfileComponent implements OnInit, OnDestroy {
+export class UserProfileComponent implements OnInit {
 
   model = new CandidateDetail();
   submitted = false;
@@ -113,7 +113,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
       this._router.navigate([NavigationRoutes.APP_START]);
     } else {
       //  this.loaderService.start();
-      this.getUserProfile();
+      //this.getUserProfile();
     }
     document.body.scrollTop = 0;
   }
@@ -140,25 +140,14 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     this.candidate = candidateData.data[0];
     this.candidate.basicInformation = candidateData.metadata;
     this.candidate.summary = new Summary();
-  }
-  ngOnDestroy() {
-    //this.loaderService.stop();
-  }
-
-  getUserProfile() {
-    this.dashboardService.getUserProfile()
-      .subscribe(
-        userprofile => this.onUserProfileSuccess(userprofile),
-        error => this.onUserProfileError(error));
-  }
-
-  onUserProfileSuccess(result: any) {
-    if (result.data.current_theme) {
-      LocalStorageService.setLocalValue(LocalStorage.MY_THEME, result.data.current_theme);
-      this.themeChangeService.change(result.data.current_theme);
-    }
-    if (result !== null) {
-      this.model = result.data;
+    this.model.email= LocalStorageService.getLocalValue(LocalStorage.EMAIL_ID);
+    this.model.mobile_number = LocalStorageService.getLocalValue(LocalStorage.MOBILE_NUMBER);
+    if (candidateData.metadata != undefined && candidateData.metadata != null) {
+      if (candidateData.metadata.current_theme) {
+        LocalStorageService.setLocalValue(LocalStorage.MY_THEME, candidateData.metadata.current_theme);
+        this.themeChangeService.change(candidateData.metadata.current_theme);
+      }
+      this.model = candidateData.metadata;
       var socialLogin: string = LocalStorageService.getLocalValue(LocalStorage.IS_SOCIAL_LOGIN);
       if (socialLogin === AppSettings.IS_SOCIAL_LOGIN_YES) {
         this.image_path = this.model.social_profile_picture;
@@ -169,13 +158,6 @@ export class UserProfileComponent implements OnInit, OnDestroy {
         this.image_path = AppSettings.IP + this.model.picture.substring(4).replace('"', '');
       }
     }
-  }
-
-  onUserProfileError(error: any) {
-    var message = new Message();
-    message.isError = true;
-    message.error_msg = error.err.msg;
-    this.messageService.message(message);
   }
 
   onSubmit() {

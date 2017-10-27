@@ -28,6 +28,8 @@ export function retrieve(req: express.Request, res: express.Response, next: any)
         next({
           reason: 'Error In Retriving',//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
           message: CNextMessages.MSG_NOT_FOUND_ANY_RECORD_OF_INDUSTRY,
+          actual_error: error,
+          stackTrace: new Error(),
           code: 401
         });
       }
@@ -38,9 +40,13 @@ export function retrieve(req: express.Request, res: express.Response, next: any)
         });
       }
     });
-  }
-  catch (e) {
-    res.status(403).send({message: e.message});
+  } catch (e) {
+    next({
+      reason: e.message,
+      message: e.message,
+      stackTrace: new Error(),
+      code: 500
+    });
   }
 }
 export function create(req: express.Request, res: express.Response, next: any) { //todo code should be review be Sudhakar
@@ -49,7 +55,7 @@ export function create(req: express.Request, res: express.Response, next: any) {
     let industryService = new IndustryService();
     industryService.create(newIndustry, (error, result) => {
       if (error) {
-        console.log("crt role error", error);
+        next(error);
       }
       else {
         res.status(200).send({
@@ -64,9 +70,13 @@ export function create(req: express.Request, res: express.Response, next: any) {
         });
       }
     });
-  }
-  catch (e) {
-    res.status(403).send({"status": Messages.STATUS_ERROR, "error_message": e.message});
+  } catch (e) {
+    next({
+      reason: e.message,
+      message: e.message,
+      stackTrace: new Error(),
+      code: 500
+    });
   }
 }
 
@@ -75,13 +85,9 @@ export function getReleventIndustryList(req: express.Request, res: express.Respo
     var rolesparam = req.query.roles;
     var industryName = req.query.industryName;
     let industryService = new IndustryService();
-    industryService.getReleventIndustryList(rolesparam,industryName, (error: any, response: any) => {
+    industryService.getReleventIndustryList(rolesparam, industryName, (error: any, response: any) => {
       if (error) {
-        next({
-          reason: Messages.MSG_ERROR_RSN_EXISTING_USER,
-          message: Messages.MSG_ERROR_VERIFY_ACCOUNT,
-          code: 403
-        });
+        next(error);
       } else {
         res.send({
           'status': 'success',
@@ -90,17 +96,11 @@ export function getReleventIndustryList(req: express.Request, res: express.Respo
       }
     });
   } catch (e) {
-    res.status(403).send({message: e.message});
+    next({
+      reason: e.message,
+      message: e.message,
+      stackTrace: new Error(),
+      code: 500
+    });
   }
-
-  /*console.log('----------------rolesparma----------------------------',JSON.parse(rolesparam));
-   console.log('----------------rolesparma----------------------------',JSON.parse(rolesparam)[0]);
-   __dirname = './';
-   var filepath = 'relevent-industries.json';
-   try {
-   res.sendFile(filepath, {root: __dirname});
-   }
-   catch (e) {
-   res.status(403).send({message: e.message});
-   }*/
 }

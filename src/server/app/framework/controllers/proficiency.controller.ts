@@ -11,10 +11,8 @@ export function create(req: express.Request, res: express.Response, next: any) {
   var proficiencyService = new ProficiencyService();
   proficiencyService.create(proficiencyModel, (error, result) => {
     if (error) {
-      console.log("Error in posting proficiency ", error);
-
-    }
-    else {
+     next(error);
+    } else {
       res.status(200).send({
         "status": "success",
       });
@@ -34,6 +32,7 @@ export function retrieve(req: express.Request, res: express.Response, next: any)
         next({
           reason: 'Error In Proficiency  Retriving',
           message: CNextMessages.PROFICIENCY_NOT_RETRIVED,
+          stackTrace: new Error(),
           code: 401
         });
       }
@@ -46,7 +45,12 @@ export function retrieve(req: express.Request, res: express.Response, next: any)
     });
   }
   catch (e) {
-    res.status(403).send({message: e.message});
+    next({
+      reason: e.message,
+      message: e.message,
+      stackTrace: new Error(),
+      code: 500
+    });
   }
 }
 
@@ -61,6 +65,7 @@ export function update(req: express.Request, res: express.Response, next: any) {
         next({
           reason: 'Error In Proficiency Updation',
           message: CNextMessages.PROFICIENCY_NOT_UPDATED,
+          stackTrace: new Error(),
           code: 401
         });
       }
@@ -75,6 +80,11 @@ export function update(req: express.Request, res: express.Response, next: any) {
     });
   }
   catch (e) {
-    res.status(403).send({message: e.message});
+    next({
+      reason: e.message,
+      message: e.message,
+      stackTrace: new Error(),
+      code: 500
+    });
   }
 }
