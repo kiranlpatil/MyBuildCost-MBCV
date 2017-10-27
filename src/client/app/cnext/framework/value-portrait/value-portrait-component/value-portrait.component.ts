@@ -48,7 +48,7 @@ export class ValuePortraitComponent implements OnInit {
     this.getCandidateAllDetails();
   }
 
-  getCandidateAllDetails() { debugger
+  getCandidateAllDetails() {
     this.candidateProfileService.getCandidateAllDetails(this.userId)
       .subscribe(
         candidateData => {
@@ -73,13 +73,11 @@ export class ValuePortraitComponent implements OnInit {
       );
   }
 
-  updateCapabilityData(candidate: Candidate) { debugger
+  updateCapabilityData(candidate: Candidate) {
     for (var i = candidate.capabilities.length - 1; i >= 0; i--) {
-      /////////////////
-        if(candidate.capabilities.length > 0 && this.isMiniView) { debugger
+        if(candidate.capabilities.length > 0) {
           return candidate;
         }
-      ////////////////////
       for (var j = candidate.capabilities[i].complexities.length - 1; j >= 0; j--) {
         if (candidate.capabilities[i].complexities[j].answer == undefined || candidate.capabilities[i].complexities[j].answer == 'Not Applicable') {
           candidate.capabilities[i].complexities.splice(j, 1);

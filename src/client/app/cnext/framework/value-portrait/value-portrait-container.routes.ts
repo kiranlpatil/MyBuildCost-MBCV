@@ -5,5 +5,9 @@ export const ValuePortrait: Route[] = [
   {
     path: 'value-portrait/:id',
     component: ValuePortraitContainerComponent
+  },
+  {
+    path: 'value-portrait/:userId/create',
+    component: ValuePortraitContainerComponent
   }
 ];

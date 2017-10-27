@@ -118,6 +118,7 @@ export class CapabilitiesComponent {
         selectedCapability.isPrimary = true;
         this.primaryNames.push(selectedCapability.name);
         this.complexityAnsweredService.change(true);
+        this.saveOnSelect();
 
       } else {
         event.target.checked=false;
@@ -137,6 +138,8 @@ export class CapabilitiesComponent {
         }
         this.primaryNames.splice(this.primaryNames.indexOf(selectedCapability.code), 1);
         selectedCapability.isPrimary = false;
+        this.complexityAnsweredService.change(true);
+        this.saveOnSelect();
       } else if (selectedCapability.isSecondary) {
         /*this.secondaryNames.splice(this.secondaryNames.indexOf(selectedCapability.name), 1);
         selectedCapability.isSecondary = false;*/
@@ -179,7 +182,7 @@ export class CapabilitiesComponent {
       this.highlightedSection.name = 'Complexities';
     this.highlightedSection.isDisable = false;
     this.disableButton = true;
-    var newselectedRoles:Role[]= new Array(0);
+   /* var newselectedRoles:Role[]= new Array(0);
     for(let role of this.roles){
       let tempRole =Object.assign({}, role);
       newselectedRoles.push(tempRole);
@@ -187,13 +190,13 @@ export class CapabilitiesComponent {
         return cap.isPrimary;
       });
     }
-    this.onComplete.emit(newselectedRoles);
+    this.onComplete.emit(newselectedRoles);*/
     this.complexityAnsweredService.change(true);
 
       window.scrollTo(0, 0);
   }
 
-  onSave(){
+  onSave(){ debugger
     this.isValid = true;
     this.validationMessage = '';
     if(this.primaryNames.length == 0){
@@ -287,5 +290,18 @@ export class CapabilitiesComponent {
   }
   getMessage() {
     return Messages;
+  }
+
+  saveOnSelect() {
+    var newselectedRoles:Role[]= new Array(0);
+    for(let role of this.roles){
+      let tempRole =Object.assign({}, role);
+      newselectedRoles.push(tempRole);
+      tempRole.capabilities= tempRole.capabilities.filter((cap : Capability)=> {
+        return cap.isPrimary;
+      });
+    }
+    this.onComplete.emit(newselectedRoles);
+    this.complexityAnsweredService.change(true);
   }
 }

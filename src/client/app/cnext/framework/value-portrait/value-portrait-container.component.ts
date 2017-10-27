@@ -16,6 +16,7 @@ export class ValuePortraitContainerComponent implements OnInit {
   _userId:string;
   isShareView:boolean = false;
   private isCandidate: boolean;
+  private isFromCreate: boolean = false;
 
   constructor(private _router:Router, private activatedRoute:ActivatedRoute) {
     if (LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE) === 'true') {
@@ -30,7 +31,12 @@ export class ValuePortraitContainerComponent implements OnInit {
       this._router.navigate(['/admin_dashboard']);
     }
     if (role === 'true') {
-      this._router.navigate(['/candidate_dashboard']);
+      if(this.isFromCreate) {
+        this._router.navigate(['/create_profile']);
+      }
+      else {
+        this._router.navigate(['/candidate_dashboard']);
+      }
     }
     if (role === 'false') {
       this._router.navigate(['/recruiterdashboard', 'applicant_search']);
@@ -38,9 +44,13 @@ export class ValuePortraitContainerComponent implements OnInit {
 
   }
 
-  ngOnInit() {
+  ngOnInit() { debugger
     this.activatedRoute.params.subscribe(params => {
       this._userId = params['id'];
+    });
+    this.activatedRoute.params.subscribe(params => {
+      this._userId = params['userId'];
+      this.isFromCreate = true;
     });
 
     this.activatedRoute.queryParams.subscribe(params => {
