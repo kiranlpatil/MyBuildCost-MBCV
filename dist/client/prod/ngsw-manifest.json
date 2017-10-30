@@ -1,11 +1,11 @@
 {
   "static": {
     "urls": {
-      "/index.html": "54e23ed1d431e764dfca6fb18ab5b615b890ab56",
+      "/index.html": "3acfbf78d3c0b33729f08c113012e281d08739b8",
       "/manifest.json": "c48a13fd12025ee09de4a6c086bfd562c37a7e14",
       "/service-worker.js": "13a16a93bb5f4c6649a4e926d4411493c51765fa",
-      "/css\\main.css": "41c4e750e5be16aadc6ec8fb3b8feda5a84c315b",
-      "/js\\app.js": "dc146d76c6f8afee132eaf5a89f1e379bfc5da03",
+      "/css\\main.css": "e95e3285660271d6baf04c6bd55294c250219a26",
+      "/js\\app.js": "df1791f12c85b0f90f4538f91e19c7accd2ef0db",
       "/js\\shims.js": "78cecb41e4c69801a2ca6f58b149f391f1b6401c",
       "/assets\\c-next\\card-view\\close-grey.png": "5bf602ee74c0ce5d4ba559e313bb24b8ecd2d8e6",
       "/assets\\c-next\\card-view\\close-red.png": "a17ba7ae0e51da6518389d56c5ae88c0d1f7da6f",
@@ -113,8 +113,8 @@
       "/assets\\c-next\\card-view\\orange-icons\\proficiency.png": "aa9f242a8d0e84213d3d667e29c6c2a13f857dce",
       "/assets\\c-next\\card-view\\orange-icons\\relocation.png": "28df81b0a21c3bdc2b65ae8a3567e666a167ec5d",
       "/assets\\c-next\\card-view\\orange-icons\\salary.png": "0853f6170f080cc1400115db393f5184e64377c2",
-      "/assets\\c-next\\card-view\\pink-icons\\company-size-pink.png": "8cda08c5954dc8e208c6c2966977734836d003cd",
       "/assets\\c-next\\card-view\\pink-icons\\company-size.png": "8cda08c5954dc8e208c6c2966977734836d003cd",
+      "/assets\\c-next\\card-view\\pink-icons\\company-size-pink.png": "8cda08c5954dc8e208c6c2966977734836d003cd",
       "/assets\\c-next\\card-view\\pink-icons\\education.png": "ffe822dc8bcd419cfb1ce6224a760b0528c463c9",
       "/assets\\c-next\\card-view\\pink-icons\\experience-pink.png": "3028edf54b8ec946e7b2f3538554d069f3c05cb1",
       "/assets\\c-next\\card-view\\pink-icons\\experience.png": "3028edf54b8ec946e7b2f3538554d069f3c05cb1",
