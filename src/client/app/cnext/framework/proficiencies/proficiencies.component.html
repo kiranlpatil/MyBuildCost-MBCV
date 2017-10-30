@@ -56,6 +56,7 @@
 
       <cn-tool-tip [message]="tooltipMessage"></cn-tool-tip>
     </div>
+      <cn-value-portrait (click)="navigateToWithId('/value-portrait');" [isShareView]="false" [isMiniView]="true" [userId]="userId" *ngIf="isCandidate"></cn-value-portrait>
   </div>
 
   <div class="section-container clearfix profeiciency-domain" *ngIf="highlightedSection.name !='Proficiencies'">

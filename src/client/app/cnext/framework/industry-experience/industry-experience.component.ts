@@ -6,6 +6,8 @@ import {LocalStorageService} from "../../../shared/services/localstorage.service
 import {Headings, LocalStorage, Messages, Tooltip, ValueConstant} from "../../../shared/constants";
 import {IndustryDataService} from "../industry-data-service";
 import {ErrorService} from "../../../shared/services/error.service";
+import {Router} from "@angular/router";
+import {ComplexityAnsweredService} from "../complexity-answered.service";
 
 @Component({
   moduleId: module.id,
@@ -37,10 +39,12 @@ export class IndustryExperienceListComponent implements OnInit,OnChanges {
   private requiedIndustryExposureValidationMessage = Messages.MSG_ERROR_VALIDATION_INDUSTRY_EXPOSURE_REQUIRED;
   private suggestionMessageAboutDomain:string;
   private suggestionMessageAboutCandidateDomain:string;
+  userId : string;
 
   constructor(private candidateProfileService: CandidateProfileService,
               private errorService:ErrorService,
-              private industryDetailsService: IndustryDataService) {
+              private industryDetailsService: IndustryDataService,
+              private _router: Router, private complexityAnsweredService: ComplexityAnsweredService) {
     this.industryDetailsService.makeCall$.subscribe(
       data => {
         if (data && this.industries.length === 0) {
@@ -53,6 +57,7 @@ export class IndustryExperienceListComponent implements OnInit,OnChanges {
     if (LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE) === 'true') {
       this.isCandidate = true;
     }
+    this.userId=LocalStorageService.getLocalValue(LocalStorage.USER_ID);
   }
   ngOnChanges(changes: any) {
 
@@ -103,15 +108,16 @@ export class IndustryExperienceListComponent implements OnInit,OnChanges {
     this.onComplete.emit(this.selectedIndustries);
   }
 
-  onNext() {
+  onNext() { debugger
     if(this.selectedIndustries.length==0) {
       this.submitStatus = true;
       return;
     }
     if (LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE) === 'true') {
+      this.onNextComplete.emit();
+      this.complexityAnsweredService.change(true);
       this.highlightedSection.name = 'Professional-Details';
       this.highlightedSection.isDisable = false;
-      this.onNextComplete.emit();
     } else {
       this.onNextComplete.emit();
       this.highlightedSection.name = 'ReleventIndustry';
@@ -165,5 +171,15 @@ export class IndustryExperienceListComponent implements OnInit,OnChanges {
         this.showButton = false;
         window.scrollTo(0, 0);
     }
+
+  navigateToWithId(nav:string) {
+    var userId = LocalStorageService.getLocalValue(LocalStorage.USER_ID);
+    if (nav !== undefined) {
+      let x = nav+'/'+ userId + '/create';
+      // this._router.navigate([nav, userId]);
+      this._router.navigate([x]);
+    }
+  }
+
 }
 
