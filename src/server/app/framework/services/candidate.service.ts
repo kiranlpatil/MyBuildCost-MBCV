@@ -226,7 +226,7 @@ class CandidateService {
                       newComplexity.name = complexity.name;
                       newComplexity.sort_order = complexity.sort_order;
                       newComplexity.code = complexity.code;
-                      if(complexity_note_matrix[cap] !== undefined) {
+                      if(complexity_note_matrix && complexity_note_matrix[cap] !== undefined) {
                         newComplexity.note = complexity_note_matrix[cap];
                       }
                       if (complexity.questionForCandidate !== undefined && complexity.questionForCandidate !== null && complexity.questionForCandidate !== '') {
