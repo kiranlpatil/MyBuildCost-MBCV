@@ -30,7 +30,7 @@
       <div class="col-sm-8 no-padding more-about-myself">
       <textarea class="form-control" [(ngModel)]="candidate.aboutMyself" (ngModelChange)="addAboutMyself()"
                 [maxlength]="maxword" Placeholder="Enter About Yourself"></textarea>
-        <p class="error-messages">{{remainingWords + remainingWordsMessage}}</p>
+        <p [ngClass]="remainingWords >= 1 ? 'info-messages':'error-messages'">{{remainingWords + remainingWordsMessage}}</p>
       </div>
     </div>
 

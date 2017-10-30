@@ -73,7 +73,8 @@
       </button>
       <button class="btn btn-primary" (click)="onSave()" [hidden]="showButton">Next</button>
     </div>
-    <div class="col-xs-5 capabilities-help-section">
+    <cn-tool-tip [message]="tooltipRecruiterMessage" *ngIf="!isCandidate"></cn-tool-tip>
+    <div class="col-xs-5 capabilities-help-section" *ngIf="isCandidate">
       <div class="bg-empty-class col-xs-5"></div>
       <div class="mini-value-portrait-section">
         <h3>
@@ -83,10 +84,7 @@
         <cn-value-portrait [isShareView]="false" [isMiniView]="true" [userId]="userId" *ngIf="isCandidate"></cn-value-portrait>
       </div>
       <cn-tool-tip id="candidate-tooltip" [message]="tooltipCandidateMessage" *ngIf="isCandidate"></cn-tool-tip>
-
-
-    <cn-tool-tip [message]="tooltipRecruiterMessage" *ngIf="!isCandidate"></cn-tool-tip>
-  </div>
+    </div>
 
     </div>
 </div>

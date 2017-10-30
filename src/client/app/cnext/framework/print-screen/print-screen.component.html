@@ -2,7 +2,7 @@
 <!--<button (click)="createFile('pdf')">Generate Pdf</button>-->
 <div class="print-message">
   <button title="Download page" class="print-btn" (click)="createFile('img')">
-    <span></span>
+    {{getButton().DOWNLOAD}}
   </button>
 
   <div *ngIf="isShowSuggestionToasterMsg" class="message-content">

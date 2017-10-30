@@ -1,7 +1,7 @@
 import {Component, Input, ViewChild, ElementRef} from '@angular/core';
 import * as html2canvas from 'html2canvas';
 import {Message} from '../../../shared/models/message';
-import {Messages, UsageActions, LocalStorage, ImagePath} from '../../../shared/constants';
+import {Messages, UsageActions, LocalStorage, ImagePath, Button} from '../../../shared/constants';
 import {MessageService} from '../../../shared/services/message.service';
 import {UsageTrackingService} from '../usage-tracking.service';
 import {LocalStorageService} from '../../../shared/services/localstorage.service';
@@ -79,4 +79,7 @@ export class PrintScreenComponent {
     this.isShowSuggestionToasterMsg = false;
   }
 
+  getButton() {
+    return Button;
+  }
 }

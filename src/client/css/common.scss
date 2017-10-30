@@ -153,11 +153,11 @@ $print-golden-star: #927b01;
 }
 
 .complexity-star {
-  color: #e2c702 !important;
-  font-size: 17px !important;
+  color: $golden-star !important;
   display: inline-block !important;
-  padding-right: 5px;
+  font-size: 17px !important;
   margin: 0;
+  padding-right: 3px;
   text-shadow: 0 0 1px #42441d;
 }
 
@@ -1660,7 +1660,8 @@ select:focus {
     font-size: 12px;
     font-weight: bold !important;
     font-family: 'gothamrnd-book';
-    margin: 8px 0 0;
+    margin: 8px 0 5px;
+    padding: 0;
   }
 }
 
@@ -1678,11 +1679,13 @@ select:focus {
   display: none;
   float: left;
   font-size: 12px;
-  padding: 5px 0 15px 0;
+  padding: 5px 0;
   word-break: keep-all;
   p {
+    margin: 0 !important;
     max-height: 155px;
     overflow: auto;
+    padding-left: 0 !important;
     word-break: keep-all;
     word-wrap: break-word;
   }
@@ -1710,7 +1713,7 @@ select:focus {
     width: 100%;
   }
   textarea {
-    height: 40px;
+    height: 40px !important;
     max-width: 60%;
   }
   .notes-max-charcter {
@@ -1785,6 +1788,15 @@ select:focus {
   .value-portrait-candidate-number {
     .phone-icon {
       width: 40px !important;
+    }
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .add-complexity-notes {
+    textarea {
+      height: 80px !important;
+      max-width: 100%;
     }
   }
 }

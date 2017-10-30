@@ -46,12 +46,8 @@
     </div>
 
     <div class="button-group clearfix">
-      <!--<div class="saving-loader">Saving...</div>-->
-      <button type="submit" class="btn btn-primary" scrollTo scrollTargetSelector="#certification"
-              (click)="postData('next')" *ngIf="!candidate.isSubmitted">{{getButton().VIEW_AND_EDIT}}
-      </button>
       <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#right-fit-modal"
-              (click)="this.highlightedSection.name = 'none';postData('next')" *ngIf="!candidate.isSubmitted" tabindex="1">{{getButton().SUBMIT_PROFILE}}</button>
+              (click)="this.highlightedSection.name = 'none';postData('next')" *ngIf="!candidate.isSubmitted" tabindex="1">{{getButton().NEXT}}</button>
       <button type="submit" class="btn btn-primary" (click)="postData('save')"
               *ngIf="candidate.isSubmitted">Done
       </button>

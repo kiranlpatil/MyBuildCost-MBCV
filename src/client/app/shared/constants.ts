@@ -149,7 +149,7 @@ export class Messages {
   public static MSG_ERROR_VALIDATION_CURRENTSALARY_REQUIRED = 'This field can\'t be left blank.';
   public static MSG_ERROR_VALIDATION_RELOCATE_REQUIRED = 'This field can\'t be left blank.';
   public static MSG_ERROR_VALIDATION_NOTICEPERIOD_REQUIRED = 'This field can\'t be left blank.';
-  public static MSG_ERROR_VALIDATION_MAX_WORD_ALLOWED = 'words remaining';
+  public static MSG_ERROR_VALIDATION_MAX_WORD_ALLOWED = ' words remaining';
   public static MSG_ERROR_VALIDATION_DESIGNATION_REQUIRED = 'This field can\'t be left blank.';
   public static MSG_ERROR_VALIDATION_DEGREE_NAME_REQUIRED = 'Degree Name is required.';
   public static MSG_ERROR_VALIDATION_UNIVERSITY_NAME_REQUIRED = 'Board/University name is required.';
@@ -704,6 +704,7 @@ export class Label {
   public static CLOSED_JOB: string = 'CLOSED JOB';
   public static MUST_TO_HAVE_FILTER_LABEL: string = 'Hide candidates missing must to have capabilities';
   public static PROFILE_VISIBILITY: string = 'Profile Visibility for Recruiter';
+  public static SUBMIT_PROFILE: string = 'Submit Your Profile';
 }
 
 export class Button {
@@ -716,6 +717,9 @@ export class Button {
   public static SUBMIT_PROFILE: string = 'Submit Profile';
   public static VIEW_AND_EDIT: string = 'View and Edit';
   public static PROCEED: string = 'Proceed';
+  public static NEXT: string = 'Next';
+  public static SUBMIT: string = 'Submit';
+  public static DOWNLOAD: string = 'Download';
 }
 //These constant is used to track profile completion of candiate.(Having total 14 steps to complete)
 export enum CandidateProfileUpdateTrack {

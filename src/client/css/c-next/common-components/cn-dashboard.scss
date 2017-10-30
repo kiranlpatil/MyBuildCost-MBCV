@@ -281,40 +281,26 @@
   .print-btn {
     background: transparent;
     border: 0;
-    color: $black1;
+    color: $theme-color;
     margin: 0;
     padding: 1px;
     position: fixed;
-    right: 53px;
-    top: 110px;
+    right: 15px;
+    top: 101px;
     z-index: 99;
-    span {
-      background: url(../assets/c-next/card-view/sprite.png) no-repeat -148px -613px;
-      width: 32px !important;
-      height: 32px;
-      position: absolute;
-      margin: -3px -25px;
-    }
   }
 }
 
 .print-btn {
   background: transparent;
   border: 0;
-  color: $black1;
+  color: $white;
   margin: 0;
   padding: 1px;
   position: fixed;
   right: 53px;
-  top: -20px;
+  top: -24px;
   z-index: 99;
-  span {
-    background: url(../assets/c-next/card-view/sprite.png) no-repeat -108px -712px;
-    height: 32px;
-    margin: -4px -25px;
-    position: absolute;
-    width: 32px !important;
-  }
 }
 
 @media only screen and (max-width: 1024px) {

@@ -386,14 +386,13 @@
 
 .value-portrait-notes {
   color: $black1;
-  background: $notes-bg;
   display: inline-block;
   float: left;
   font-size: 12px;
-  margin: 10px 0;
+  margin: 10px 0 0;
   max-height: 190px;
   overflow: auto;
-  padding: 5px;
+  padding: 0;
   position: relative;
   width: 100%;
   z-index: 99999;
