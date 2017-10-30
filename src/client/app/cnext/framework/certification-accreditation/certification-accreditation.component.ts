@@ -198,12 +198,8 @@ export class CertificationAccreditationComponent {
     this.highlightedSection.name = 'Awards';
     this.highlightedSection.isDisable = false;
     window.scrollTo(0, 0);
+    this.profileCreatorService.updateStepTracking(CandidateProfileUpdateTrack.STEP_IS_ENTER_CERTIFICATION_DETAILS);
 
-      let item:any = {'profile_update_tracking':CandidateProfileUpdateTrack.STEP_IS_ENTER_CERTIFICATION_DETAILS};
-      this.profileCreatorService.updateCandidateField(item).subscribe(
-        res => {
-          console.log('success');
-        }, error => this.errorService.onError(error));
   }
 
   onSave() {

@@ -31,7 +31,7 @@ class RepositoryBase<T extends mongoose.Document> implements IRead<T>, IWrite<T>
       callback(err, res);
     });
   }
-
+//TODO: REMOVE CONSOLE LOG 
   retrieveWithLean(field: any, projection: any, callback: (error: any, result: any) => void) {
     console.time('repo2 time');
     this._model.find(field, projection).lean().exec((err, res) => {
@@ -44,7 +44,7 @@ class RepositoryBase<T extends mongoose.Document> implements IRead<T>, IWrite<T>
   update(_id: mongoose.Types.ObjectId, item: T, callback: (error: any, result: any) => void) {
     this._model.update({_id: _id}, item, callback);
   }
-  
+//TODO:CODE MOVE TO CANDIDATE REPOSITEORY
   updateByUserId(_id: mongoose.Types.ObjectId, item: T, callback: (error: any, result: any) => void) {
     this._model.update({'userId': _id}, item, callback);
 
@@ -79,7 +79,7 @@ class RepositoryBase<T extends mongoose.Document> implements IRead<T>, IWrite<T>
   findByIdwithExclude(_id: string, exclude: any, callback: (error: any, result: T) => void) {
     this._model.findById(_id, exclude, callback);
   }
-
+//TODO: MOVE CODE TO ITS RELEATED REPOSITEORY
   findByName(name: string, callback: (error: any, result: T) => void) {
     this._model.find({"name": name}, callback);
   }
@@ -93,7 +93,7 @@ class RepositoryBase<T extends mongoose.Document> implements IRead<T>, IWrite<T>
       callback(err, items);
     });
   }
-
+//TODO: MOVE CODE TO ITS RELEATED REPOSITEORY
   retrieveByMultiIdsAndPopulate(ids: string[], excluded: any, callback: (error: any, result: any) => void) {
     this._model.find({_id: {$in: ids}}, excluded).populate('userId').exec(function (err, items) {
       callback(err, items);
@@ -115,15 +115,15 @@ class RepositoryBase<T extends mongoose.Document> implements IRead<T>, IWrite<T>
   //custom API created for C-next Roles capabilities and complexities
 
   //change the any data type to model
-
+//TODO: MOVE CODE TO ITS RELEATED REPOSITEORY
   pushInJobpost(id: string, value: any, callback: (error: any, result: any) => void) {
     this._model.update({_id: id}, {$push: {"postedJobs": value.postedJobs}}, callback);
   }
-
+//TODO: MOVE CODE TO ITS RELEATED REPOSITEORY
   pushElementInArray(value: string, callback: (error: any, result: any) => void) {
     this._model.update({$push: {"proficiencies": value}}, callback);
   }
-
+//TODO: MOVE CODE TO ITS RELEATED REPOSITEORY
   //in below query we use userId for search as refrence id
   retrieveByMultiRefrenceIdsAndPopulate(ids: string[], excluded: any, callback: (error: any, result: any) => void) {
     this._model.find({'userId': {$in: ids}}, excluded).populate('userId').exec(function (err, items) {

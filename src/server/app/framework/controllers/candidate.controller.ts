@@ -393,7 +393,8 @@ export function getList(req: express.Request, res: express.Response, next: any) 
 export function updateField(req:express.Request, res:express.Response, next:any) {
   let candidateService = new CandidateService();
   try {
-    let data:any = {$max: {'profile_update_tracking': Number(req.body.profile_update_tracking)}};
+    let value: number = req.query.value;
+    let data:any = {$max: {'profile_update_tracking': Number(value)}};
     let userId:string = req.params.id;
     candidateService.updateField(userId, data, (error:any, result:any) => {
       if (error) {

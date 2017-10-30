@@ -199,11 +199,7 @@ export class AwardsComponent implements OnInit {
   onNext() {
     this.isGuidedTourImgRequire();
     window.scrollTo(0, 0);
-      let item:any = {'profile_update_tracking':CandidateProfileUpdateTrack.STEP_IS_ENTER_AWARDS_DETAILS};
-      this.profileCreatorService.updateCandidateField(item).subscribe(
-        res => {
-          console.log('success');
-        }, error => this.errorService.onError(error));
+    this.profileCreatorService.updateStepTracking(CandidateProfileUpdateTrack.STEP_IS_ENTER_AWARDS_DETAILS);
   }
 
   isGuidedTourImgRequire() {
