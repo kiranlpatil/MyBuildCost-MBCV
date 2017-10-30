@@ -94,6 +94,8 @@ class Messages {
   public static MSG_ERROR_RSN_NOT_ALLOW: string = 'Insufficient user permission to access public profile';
   public static MSG_ERROR_RSN_EXISTING_USER: string = 'User already exists.';
   public static MSG_ERROR_RSN_WHILE_CONTACTING: string = 'There may be a network problem.';
+  
+  public static MSG_ERROR_FAILED_TO_UPDATE_CANDIDATE_FIELD: string = 'Failed to update candidate field';
 
   //Verify errors
   public static MSG_ERROR_CHECK_EMAIL_ACCOUNT: string = 'Error: User already has an account associated with this email address.'; //should be same to MSG_ERROR_EMAIL_ACTIVE_NOW

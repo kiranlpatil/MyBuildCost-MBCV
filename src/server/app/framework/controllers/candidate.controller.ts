@@ -397,7 +397,12 @@ export function updateField(req:express.Request, res:express.Response, next:any)
     let userId:string = req.params.id;
     candidateService.updateField(userId, data, (error:any, result:any) => {
       if (error) {
-        next(error);
+        next({
+          reason: Messages.MSG_ERROR_FAILED_TO_UPDATE_CANDIDATE_FIELD,
+          message: Messages.MSG_ERROR_FAILED_TO_UPDATE_CANDIDATE_FIELD,
+          stackTrace: new Error(),
+          code: 403
+        });
       } else {
         res.send({
           'status': 'success',
@@ -407,7 +412,12 @@ export function updateField(req:express.Request, res:express.Response, next:any)
     });
   }
   catch (e) {
-    res.status(403).send({message: e.message});
+    next({
+      reason: e.message,
+      message: e.message,
+      stackTrace: new Error(),
+      code: 500
+    });
   }
 
 }
