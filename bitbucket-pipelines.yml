@@ -6,14 +6,15 @@
 image: node:6.9.4
 
 pipelines:
-  default:
+  branches:
+    development-ng4-aot-compilation:
     - step:
         caches:
           - node
         script: # Modify the commands below to build your repository.
           - npm install
-          - npm install gulp -g
-          - npm install typings -g
-          - typings install
-          - gulp build.prod
+          #- npm install gulp -g
+          #- npm install typings -g
+          #- typings install
+          #- gulp build.prod
           #- npm test
