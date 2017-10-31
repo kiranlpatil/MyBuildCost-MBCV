@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges} from "@angular/core";
+import {Component, Input, OnChanges, OnInit} from "@angular/core";
 import {Candidate} from "../../../../../user/models/candidate";
 import {Capability} from "../../../../../user/models/capability";
 import {Label} from "../../../../../shared/constants";
@@ -20,8 +20,8 @@ export class CandidateCapabilityPortrait implements OnChanges {
   innerWidth: Number;
   isClickEnable: boolean = false;
 
-  ngOnChanges(): void {debugger
-    console.log("candidate = ", this.candidate);
+  ngOnChanges(changes: any): void {
+    console.log("candidate---- = ", this.candidate);
     this.innerWidth = window.screen.width;
 
     if (this.innerWidth <= 768) {
