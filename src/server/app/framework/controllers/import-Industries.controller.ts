@@ -10,7 +10,6 @@ export class ImportIndustryController {
   readXlsx(req: express.Request, res: express.Response, next: any) {
     try {
       let filePath = config.get('TplSeed.filePathForMasterDataExcel');
-      console.log(filePath);
       let isFileExist = fs.existsSync(filePath);
       if (!isFileExist) {
         next({

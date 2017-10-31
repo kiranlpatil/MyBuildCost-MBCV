@@ -37,7 +37,7 @@ export function init(port: number, mode: string, protocol: string, dist_runner: 
     let _loggerService: LoggerService = new LoggerService('uncaught exception Handler');
     let error= {
       reason: 'uncaught exception',
-        message: err,
+      message: err,
       stack: err.stack,
       code: 500
     };

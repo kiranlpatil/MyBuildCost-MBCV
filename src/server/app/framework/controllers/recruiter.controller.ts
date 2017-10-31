@@ -27,7 +27,7 @@ export function create(req: express.Request, res: express.Response, next: any) {
             reason: Messages.MSG_ERROR_RSN_EXISTING_USER,
             message: Messages.MSG_ERROR_VERIFY_ACCOUNT,
             stackTrace: new Error(),
-            code: 403
+            code: 400
           });
         }
         else if (error == Messages.MSG_ERROR_CHECK_MOBILE_PRESENT) {
@@ -35,7 +35,7 @@ export function create(req: express.Request, res: express.Response, next: any) {
             reason: Messages.MSG_ERROR_RSN_EXISTING_USER,
             message: Messages.MSG_ERROR_REGISTRATION_MOBILE_NUMBER,
             stackTrace: new Error(),
-            code: 403
+            code: 400
           });
         }
         else {
@@ -43,7 +43,7 @@ export function create(req: express.Request, res: express.Response, next: any) {
             reason: Messages.MSG_ERROR_RSN_EXISTING_USER,
             message: Messages.MSG_ERROR_USER_WITH_EMAIL_PRESENT,
             stackTrace: new Error(),
-            code: 403
+            code: 400
           });
         }
       }
@@ -68,7 +68,7 @@ export function create(req: express.Request, res: express.Response, next: any) {
     });
   }
   catch (e) {
-    res.status(403).send({'status': Messages.STATUS_ERROR, 'error_message': e.message});
+    next({reason: e.message, message: e.message, stackTrace: new Error(), code: 500});
   }
 }
 

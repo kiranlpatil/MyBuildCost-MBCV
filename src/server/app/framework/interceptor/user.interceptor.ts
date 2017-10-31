@@ -40,8 +40,6 @@ export function create(req: any, res: any, next: any) {
 };
 
 export function createRecruiter(req: any, res: any, next: any) {
-  console.log("req.body of reqrtr", req.body);
-  console.log("req.body of reqrtr city", req.body.location.city);
   if ((req.body.company_name === undefined) || (req.body.company_size === undefined) || (req.body.email === undefined) ||
     (req.body.password === undefined) || (req.body.location.country === undefined) || (req.body.location.state === undefined) ||
     (req.body.location.city === undefined) || (req.body.location.pin === undefined) || (req.body.mobile_number === undefined)) {
