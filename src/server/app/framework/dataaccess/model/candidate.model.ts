@@ -18,6 +18,7 @@ interface CandidateModel {
 
   jobTitle: string;
   isVisible: boolean;
+  lastUpdateAt:any;
   isSubmitted: boolean;
   isCompleted:boolean;
   aboutMyself: string;
@@ -37,6 +38,7 @@ interface CandidateModel {
   lockedOn: Date;
   job_list: JobListModel[];
   capability_matrix: any;
+  complexity_note_matrix:any;
   salaryMatch: string;
   experienceMatch: string;
   educationMatch: string;
@@ -44,6 +46,7 @@ interface CandidateModel {
   interestedIndustryMatch: string[];
   proficienciesMatch: string[];
   personalDetails: User;
+  profile_update_tracking:number;
   _id:any;
 }
 export = CandidateModel;

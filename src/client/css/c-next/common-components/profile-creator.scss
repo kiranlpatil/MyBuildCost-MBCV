@@ -9,11 +9,14 @@
     clear: both;
     font-size: 13px;
     height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
     padding: 15px;
     position: fixed;
-    width: 235px;
     right: 0;
     top: 0;
+    width: 370px;
+    z-index: 9;
 
     ul {
       padding: 0 5px;
@@ -69,12 +72,12 @@
 }
 
 .scrollable-content {
-  overflow: visible;
   height: auto;
-  padding: 0 250px 75px 70px;
+  left: 0;
+  overflow: visible;
+  padding: 0 370px 75px 70px;
   position: relative;
   top: 0;
-  left: 0;
   width: 100%;
   z-index: 1;
 }
@@ -86,19 +89,19 @@
   background: $white;
 
   .heading {
+    background: $white;
+    border-radius: 5px;
     color: $black !important;
     font-size: 24px;
+    font-family: 'gothamrnd-light';
     margin: 0 0 10px;
+    overflow: visible !important;
     padding: 8px 15px 8px 30px;
     position: relative;
     text-align: left;
-    font-family: 'gothamrnd-light';
-    border-radius: 5px;
-    overflow: visible !important;
     text-overflow: clip !important;
     white-space: normal !important;
-    width: calc(100% - 235px) !important;
-    background: $white;
+    width: calc(100% - 370px) !important;
     z-index: 2;
 
     span {
@@ -285,14 +288,14 @@
   }
 
   .button-group {
+    background: $white;
     border-radius: 7px;
-    text-align: right;
-    position: absolute;
     bottom: 0;
     padding: 7px 15px;
-    width: calc(100% - 235px);
+    position: absolute;
+    text-align: right;
+    width: calc(100% - 370px);
     z-index: 2;
-    background: $white;
 
     button[hidden] {
       display: none;
@@ -483,8 +486,10 @@
   }
 }
 .switch-label {
-  padding-right: 15px;
+  display: inline-block;
   line-height: 26px;
+  min-width: 40px;
+  padding-right: 15px;
 }
 
 .profile-info {

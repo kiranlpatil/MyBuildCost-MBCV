@@ -38,6 +38,12 @@ let code:any[] =scenario.code.split('.');
   this.onComplete.emit(this.complexityDetails);
 }
 
+  onNoteChange() {
+    if(this.complexityDetails.userChoice) {
+      this.onComplete.emit(this.complexityDetails);
+    }
+  }
+
 isChecked(code:string) {
   /*let splitCode:string[]=this.complexityDetails.code.split('_');
     let usercode:string =splitCode[0]+'.'+splitCode[1]+'.'+this.complexityDetails.userChoice;

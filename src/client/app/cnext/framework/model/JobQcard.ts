@@ -23,4 +23,6 @@ export class JobQcard {
   postingDate: Date;
   hideCompanyName: boolean;
   candidate_list:CandidateList[];
+  isJobPostClosed: boolean;
+
 }

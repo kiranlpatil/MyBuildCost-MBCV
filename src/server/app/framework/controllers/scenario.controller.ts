@@ -16,11 +16,9 @@ import ScenarioModel = require("../dataaccess/model/scenario.model");
 
 export function retrieve(req: express.Request, res: express.Response, next: any) {
   try {
-    console.log("In retrive");
     var industryService = new IndustryService();
     var params = {};
     industryService.retrieve(params, (error, result) => {
-      console.log("In retrive of industry");
       if (error) {
         next({
           reason: 'Error In Retriving',//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
@@ -44,7 +42,7 @@ export function retrieve(req: express.Request, res: express.Response, next: any)
 
   }
   catch (e) {
-    res.status(403).send({message: e.message});
+    next({reason: e.message, message: e.message, stackTrace: new Error(), code: 500});
   }
 }
 export function create(req: express.Request, res: express.Response, next: any) {
@@ -58,7 +56,7 @@ export function create(req: express.Request, res: express.Response, next: any) {
     var industryService = new IndustryService();
     industryService.create(newIndustry, (error, result) => {
       if (error) {
-        console.log("crt industry error", error);
+        next(error);
       }
       else {
         var auth: AuthInterceptor = new AuthInterceptor();
@@ -76,6 +74,6 @@ export function create(req: express.Request, res: express.Response, next: any) {
     });
   }
   catch (e) {
-    res.status(403).send({"status": Messages.STATUS_ERROR, "error_message": e.message});
+    next({reason: e.message, message: e.message, stackTrace: new Error(), code: 500});
   }
 }

@@ -6,7 +6,7 @@
 class MailAttachments {
   public static AttachmentArray: Array<any> = [
     {
-      path: './src/server/app/framework/public/images/logo/job-mosis-logo.png',
+      path: './src/server/app/framework/public/images/logo/jobmosis-mobile-logo.png',
       cid: 'unique@company-logo'
     }, {
       path: './src/server/app/framework/public/images/banner/banner.png',

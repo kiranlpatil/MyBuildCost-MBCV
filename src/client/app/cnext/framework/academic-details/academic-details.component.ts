@@ -13,7 +13,7 @@ import {
 import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
 import {Candidate, Section} from "../../../user/models/candidate";
 import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {Headings, Tooltip} from "../../../shared/constants";
+import {Headings, Tooltip, CandidateProfileUpdateTrack} from "../../../shared/constants";
 import {ErrorService} from "../../../shared/services/error.service";
 
 @Component({
@@ -138,7 +138,9 @@ export class AcademicDetailComponent implements OnInit, OnChanges, AfterViewChec
 
   postData(type: string) {
     let isDataValid = false;
-
+    if(this.candidate.profile_update_tracking < CandidateProfileUpdateTrack.STEP_IS_ENTER_ACADEMIC_DETAILS) {
+      this.candidate.profile_update_tracking = CandidateProfileUpdateTrack.STEP_IS_ENTER_ACADEMIC_DETAILS;
+    }
     if (type == 'delete') {
       this.profileCreatorService.addProfileDetail(this.candidate).subscribe(
         user => {
@@ -199,6 +201,7 @@ export class AcademicDetailComponent implements OnInit, OnChanges, AfterViewChec
   }
 
   onNext() {
+    this.profileCreatorService.updateStepTracking(CandidateProfileUpdateTrack.STEP_IS_ENTER_ACADEMIC_DETAILS);
     this.onComplete.emit();
     this.highlightedSection.name = 'Certification';
     this.highlightedSection.isDisable = false;

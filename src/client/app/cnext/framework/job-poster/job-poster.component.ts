@@ -45,6 +45,7 @@ export class JobPosterComponent implements OnInit, OnChanges {
   private disableButton: boolean = true;
   private isShowCandidateQCardView: boolean = false;
   private setCapabilityMatrix: boolean = true;
+  private setComplexityMustHaveMatrix: boolean = true;
   isShowComplexity: boolean = false;
   isShowRoleList: boolean = false;
   isShowIndustryList: boolean = false;
@@ -104,6 +105,9 @@ export class JobPosterComponent implements OnInit, OnChanges {
         data => {
           this.isRecruitingForSelf=data.data.industry.isRecruitingForself;
           this.jobPosterModel = data.data.industry.postedJobs[0];
+          if(this.jobPosterModel.complexity_musthave_matrix == undefined) {
+            this.jobPosterModel.complexity_musthave_matrix = {};
+          }
           this.onGetJobDetailsSuccess(this.jobPosterModel);
         }, error => this.errorService.onError(error));
   }
@@ -143,6 +147,15 @@ export class JobPosterComponent implements OnInit, OnChanges {
             let capbilityMatrix: any = Object.keys(jobmodel.capability_matrix);
             for (let index of capbilityMatrix) {
               if (jobmodel.capability_matrix[index] === -1) {
+                this.isComplexityFilled = false;
+              }
+            }
+          }
+          this.setComplexityMustHaveMatrix = true;
+          if (jobmodel.complexity_musthave_matrix) {
+            let complexityMustHaveMatrix: any = Object.keys(jobmodel.complexity_musthave_matrix);
+            for (let index of complexityMustHaveMatrix) {
+              if (jobmodel.complexity_musthave_matrix[index] === -1) {
                 this.isComplexityFilled = false;
               }
             }
@@ -201,6 +214,10 @@ export class JobPosterComponent implements OnInit, OnChanges {
           this.jobPosterModel.capability_matrix = data.data.postedJobs[0].capability_matrix;
           this.setCapabilityMatrix = false;
         }
+        if (this.setComplexityMustHaveMatrix) {
+          this.jobPosterModel.complexity_musthave_matrix = data.data.postedJobs[0].complexity_musthave_matrix;
+          this.setComplexityMustHaveMatrix = false;
+        }
       }, error => this.errorService.onError(error));
   }
 
@@ -238,8 +255,10 @@ export class JobPosterComponent implements OnInit, OnChanges {
         res => {
           this.messageService.message(new Message(Messages.MSG_SUCCESS_FOR_HIRING_MANAGER_JOB_CREATION_STATUS));
           window.localStorage.clear();
-          let host = AppSettings.HTTP_CLIENT + window.location.hostname;
-          window.location.href = host;
+          setTimeout(() => {
+            let host = AppSettings.HTTP_CLIENT + window.location.hostname;
+            window.location.href = host;
+            }, 5002);
         },
         error => (this.errorService.onError(error)));
   }
@@ -323,10 +342,16 @@ export class JobPosterComponent implements OnInit, OnChanges {
     this.updateJob();
     this.getComplexity();
     this.setCapabilityMatrix = true;
+    this.setComplexityMustHaveMatrix = true;
   }
 
   onComplextyAnswered(capability_matrix: any) {
     this.jobPosterModel.capability_matrix = capability_matrix;
+    this.updateJob();
+  }
+
+  onMustHave(mustHaveMatrix: any) {
+    this.jobPosterModel.complexity_musthave_matrix = mustHaveMatrix;
     this.updateJob();
   }
 

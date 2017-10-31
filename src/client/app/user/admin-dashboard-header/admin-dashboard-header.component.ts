@@ -26,7 +26,7 @@ export class AdminDashboardHeaderComponent {
   }
 
   constructor(private _router: Router, private _eref: ElementRef) {
-    this.MY_LOGO = ImagePath.MY_WHITE_LOGO;
+    this.MY_LOGO = ImagePath.MOBILE_WHITE_LOGO;
   }
 
   getImagePath(imagePath: string) {

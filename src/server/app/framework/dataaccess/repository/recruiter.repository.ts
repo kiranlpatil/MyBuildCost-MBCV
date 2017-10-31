@@ -18,11 +18,14 @@ class RecruiterRepository extends RepositoryBase<IRecruiter> {
     }
     for (let recruiter of recruiters) {
       for (let job of recruiter.postedJobs) {
-        let isreleventIndustryMatch = false
+        let isreleventIndustryMatch = false;
         if (job.releventIndustries.indexOf(candidate.industry.name) !== -1) {
           isreleventIndustryMatch = true;
         }
-        if (!job.isJobPosted || (candidate.industry.code !== job.industry.code && !isreleventIndustryMatch) || job.isJobPostExpired) {
+        if ( !job.isJobPosted
+          || (candidate.industry.code !== job.industry.code && !isreleventIndustryMatch)
+          || job.isJobPostExpired
+          || (job.expiringDate < new Date())) {
           continue;
         }
         let isPresent: boolean = false;
@@ -100,6 +103,9 @@ class RecruiterRepository extends RepositoryBase<IRecruiter> {
           job_qcard.postingDate = job.postingDate;
           job_qcard.hideCompanyName = job.hideCompanyName;
           job_qcard.candidate_list = job.candidate_list;
+          job_qcard.isJobPostClosed = job.isJobPostClosed;
+
+
           if ((job_qcard.above_one_step_matching + job_qcard.exact_matching) >= ConstVariables.LOWER_LIMIT_FOR_SEARCH_RESULT) {
             jobs_cards.push(job_qcard);
           }

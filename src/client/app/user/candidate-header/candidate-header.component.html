@@ -41,7 +41,7 @@
               <span class="icon-dashboard"></span>My Dashboard
             </a>
           </li>
-          <li role="menuitem" *ngIf="candidate.isSubmitted" [routerLinkActive]="['active']">
+          <li role="menuitem"  [routerLinkActive]="['active']">
             <a class="dropdown-item" [routerLink]="['/value-portrait']" (click)="navigateToWithId('/value-portrait');">
               <span class="icon-value-portrait"></span>Value Portrait
             </a>

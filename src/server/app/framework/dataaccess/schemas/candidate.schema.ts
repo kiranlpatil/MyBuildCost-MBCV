@@ -29,11 +29,21 @@ class CandidateSchema {
         type: Boolean,
         default: true
       },
+      lastUpdateAt: {
+        type:Date
+      },
       aboutMyself: {
         type: String
       },
       capability_matrix : {
         type : Object
+      },
+      complexity_note_matrix : {
+        type : Object
+      },
+      profile_update_tracking : {
+        type: Number,
+        default:-1
       },
       certifications: [{
         name: String,

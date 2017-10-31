@@ -2,7 +2,7 @@ import {Component, ElementRef, EventEmitter, Input, Output, ViewChild} from "@an
 import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
 import {Candidate, Section} from "../../../user/models/candidate";
 import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {Headings, Messages, Tooltip} from "../../../shared/constants";
+import {Headings, Messages, Tooltip, CandidateProfileUpdateTrack} from "../../../shared/constants";
 import {ErrorService} from "../../../shared/services/error.service";
 
 @Component({
@@ -148,7 +148,9 @@ export class EmploymentHistoryComponent {
   postData(type: string) {
     let isDataValid = false;
     this.isValidservicePeriod = true;
-
+    if(this.candidate.profile_update_tracking < CandidateProfileUpdateTrack.STEP_IS_ENTER_EMPLOYMENT_HISTORY) {
+      this.candidate.profile_update_tracking = CandidateProfileUpdateTrack.STEP_IS_ENTER_EMPLOYMENT_HISTORY;
+    }
     if (type == 'delete') {
       this.profileCreatorService.addProfileDetail(this.candidate).subscribe(
         user => {
@@ -232,6 +234,7 @@ export class EmploymentHistoryComponent {
     this.highlightedSection.name = 'AcademicDetails';
     this.highlightedSection.isDisable = false;
     window.scrollTo(0, 0);
+    this.profileCreatorService.updateStepTracking(CandidateProfileUpdateTrack.STEP_IS_ENTER_EMPLOYMENT_HISTORY);
   }
 
   onSave() {

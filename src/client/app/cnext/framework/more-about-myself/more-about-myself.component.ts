@@ -3,7 +3,10 @@ import {MessageService} from "../../../shared/services/message.service";
 import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
 import {Message} from "../../../shared/models/message";
 import {Candidate, Section} from "../../../user/models/candidate";
-import {Headings, ImagePath, LocalStorage, Messages, Tooltip} from "../../../shared/constants";
+import {
+  Headings, ImagePath, LocalStorage, Messages, Tooltip,
+  CandidateProfileUpdateTrack
+} from "../../../shared/constants";
 import {GuidedTourService} from "../guided-tour.service";
 import {ErrorService} from "../../../shared/services/error.service";
 import {LocalStorageService} from "../../../shared/services/localstorage.service";
@@ -79,6 +82,9 @@ export class MoreAboutMyselfComponent implements OnInit {
     if (this.wordsTillNow - 3 >= this.maxLength) {
       this.maxword = this.candidate.aboutMyself.length;
     }
+    if(this.candidate.profile_update_tracking < CandidateProfileUpdateTrack.STEP_IS_ENTER_ABOUT_MYSELF) {
+      this.candidate.profile_update_tracking = CandidateProfileUpdateTrack.STEP_IS_ENTER_ABOUT_MYSELF;
+    }
     this.profileCreatorService.addProfileDetail(this.candidate).subscribe(
       user => {
         this.highlightedSection.isDisable = false;
@@ -86,6 +92,7 @@ export class MoreAboutMyselfComponent implements OnInit {
     this.onComplete.emit(this.candidate.aboutMyself);
   }
   onNext() {
+    this.profileCreatorService.updateStepTracking(CandidateProfileUpdateTrack.STEP_IS_ENTER_ABOUT_MYSELF);
     this.isGuidedTourImgRequire();
   }
 

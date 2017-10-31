@@ -1,5 +1,5 @@
-<div class="col-sm-4 panel-container" [ngClass]="setClasses()">
-  <div class="panel clearfix" (click)="viewJob(job)">
+<div class="col-sm-4 panel-container" [ngClass]="setClasses()" [class.job-unavailable]="job.isJobPostClosed && type =='apply'">
+  <div class="panel clearfix" (click)="viewJob(job)" >
     <ul>
       <li *ngIf="type=='block'" (click)="deleteItem(job._id)" title='Remove job from "Not Interested" list' ><img src="assets/c-next/card-view/close-grey.png" /></li>
     </ul>
@@ -33,6 +33,9 @@
       </div>
       <div class="company-date" title="Job Posting Date : {{job.postingDate| date:'mediumDate'}}">
         {{job.postingDate| date:'mediumDate'}}
+        <span *ngIf="job.isJobPostClosed && type =='apply'" class="job-unavailable-message" title="{{job.jobTitle }} is unavailable to apply.">
+          Job Unavailable
+        </span>
       </div>
       <div class="col-md-4 col-sm-5 col-xs-5 no-padding canvas-cricle"
            title="Matching Percentage : {{job.above_one_step_matching+job.exact_matching | number : '1.0-0'}}%">

@@ -196,6 +196,7 @@ export class CandidateDashboardComponent implements OnInit{
         data => {
           this.loaderService.stop();
           this.jobList = data;
+          console.log("Candidate matched job list", this.jobList);
           this.candidate.summary.numberOfmatched= this.jobList.length;
           this.extractList(this.jobList);
         },error => this.errorService.onError(error));

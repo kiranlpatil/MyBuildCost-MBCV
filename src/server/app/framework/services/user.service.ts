@@ -55,7 +55,6 @@ class UserService {
     this.userRepository.retrieve({'mobile_number': field.new_mobile_number, 'isActivated': true}, (err, res) => {
 
       if (err) {
-        console.log('err genrtotp retriv', err);
       } else if (res.length > 0 && (res[0]._id) !== field._id) {
         callback(new Error(Messages.MSG_ERROR_REGISTRATION_MOBILE_NUMBER), null);
       } else if (res.length === 0) {
@@ -117,7 +116,6 @@ class UserService {
         let auth = new AuthInterceptor();
         let token = auth.issueTokenWithUid(res[0]);
         let host = config.get('TplSeed.mail.host');
-        console.log('frgt pwd host', host);
         let link = host + 'reset_password?access_token=' + token + '&_id=' + res[0]._id;
         if (res[0].isCandidate === true) {
           this.mid_content = content.replace('$link$', link).replace('$first_name$', res[0].first_name).replace('$app_name$', this.APP_NAME);
@@ -288,7 +286,11 @@ class UserService {
     let content = fs.readFileSync('./src/server/app/framework/public/error.mail.html').toString();
     let footer1 = fs.readFileSync('./src/server/app/framework/public/footer1.html').toString();
     let mid_content = content.replace('$time$', current_Time).replace('$host$', config.get('TplSeed.mail.host')).replace('$reason$', errorInfo.reason).replace('$code$', errorInfo.code).replace('$message$', errorInfo.message);
-
+    if(errorInfo.stackTrace) {
+      mid_content=mid_content.replace('$error$',errorInfo.stackTrace.stack);
+    } else if(errorInfo.stack){
+      mid_content=mid_content.replace('$error$',errorInfo.stack);
+    }
     let mailOptions = {
       from: config.get('TplSeed.mail.MAIL_SENDER'),
       to: config.get('TplSeed.mail.ADMIN_MAIL'),
@@ -296,7 +298,7 @@ class UserService {
       subject: Messages.EMAIL_SUBJECT_SERVER_ERROR + ' on ' + config.get('TplSeed.mail.host'),
       html: header1 + mid_content + footer1
       , attachments: MailAttachments.AttachmentArray
-    }
+    };
     let sendMailService = new SendMailService();
     sendMailService.sendMail(mailOptions, callback);
 
@@ -307,7 +309,12 @@ class UserService {
   }
 
   retrieve(field: any, callback: (error: any, result: any) => void) {
-    this.userRepository.retrieveWithoutLean(field, callback);
+    this.userRepository.retrieveWithLean(field,{}, callback);
+  }
+
+  retrieveWithLimit(field: any, included : any, callback: (error: any, result: any) => void) {
+    let limit = config.get('TplSeed.limitForQuery');
+    this.userRepository.retrieveWithLimit(field, included, limit, callback);
   }
 
   retrieveWithLean(field: any, callback: (error: any, result: any) => void) {
@@ -330,8 +337,7 @@ class UserService {
 
       if (err) {
         callback(err, res);
-      }
-      else {
+      }else {
         this.userRepository.update(res._id, item, callback);
       }
     });

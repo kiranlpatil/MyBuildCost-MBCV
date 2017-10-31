@@ -5,11 +5,12 @@ import {BaseService} from "../../../shared/services/http/base.service";
 import {API, LocalStorage} from "../../../shared/constants";
 import {LocalStorageService} from "../../../shared/services/localstorage.service";
 import {Candidate} from "../../../user/models/candidate";
+import {ErrorService} from "../../../shared/services/error.service";
 
 @Injectable()
 export class CandidateProfileService extends BaseService {
 
-  constructor(private http: Http) {
+  constructor(private errorService:ErrorService,private http: Http) {
     super();
   }
 
@@ -21,6 +22,19 @@ export class CandidateProfileService extends BaseService {
     return this.http.put(url, body, options)
       .map(this.extractData)
       .catch(this.handleError);
+  }
+
+  updateStepTracking(value:number) {
+    let headers = new Headers({'Content-Type': 'application/json'});
+    let options = new RequestOptions({headers: headers});
+    //let body = JSON.stringify(item);
+    let url: string = API.CANDIDATE_PROFILE + '/' +'fieldUpdate'+'/'+LocalStorageService.getLocalValue(LocalStorage.USER_ID)+'?value='+value;
+    this.http.put(url, {}, options)
+      .map(this.extractData)
+      .catch(this.handleError)
+      .subscribe(
+      res => {
+      }, error => this.errorService.onError(error));
   }
 
   getCandidateDetails(): Observable<any> {

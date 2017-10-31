@@ -64,7 +64,7 @@ export function create(req: express.Request, res: express.Response, next: any) {
    });
    }
    catch (e) {
-   res.status(403).send({"status": Messages.STATUS_ERROR, "error_message": e.message});
+  next({      reason: e.message,      message: e.message,      stackTrace: new Error(),      code: 500    });
    }*/
 }
 

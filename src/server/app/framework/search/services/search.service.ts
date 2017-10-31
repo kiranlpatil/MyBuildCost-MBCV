@@ -131,7 +131,8 @@ class SearchService {
       'location': 1,
       'interestedIndustries': 1,
       'professionalDetails': 1,
-      'capability_matrix':1
+      'capability_matrix':1,
+      'complexity_musthave_matrix': 1
     };
     this.candidateRepository.retrieveWithLean(data, included_fields, (err, res) => {
       if (err) {
@@ -272,6 +273,13 @@ class SearchService {
     newCandidate.releaseMatch = this.compareTwoOptions(this.getPeriodSwitchCase(newCandidate.professionalDetails.noticePeriod), this.getPeriodSwitchCase(job.joiningPeriod));
     newCandidate.interestedIndustryMatch = new Array(0);
 
+    if(job.complexity_musthave_matrix && job.complexity_musthave_matrix.length > 0) {
+    for (let isComplexity of job.complexity_musthave_matrix) {
+      if (newCandidate.complexity_musthave_matrix.indexOf(isComplexity) !== -1) {
+        newCandidate.complexity_musthave_matrix.push(isComplexity);
+      }
+    }
+    }
     for (let industry of job.interestedIndustries) {
       if (newCandidate.interestedIndustries.indexOf(industry) !== -1) {
         newCandidate.interestedIndustryMatch.push(industry);
@@ -325,6 +333,7 @@ class SearchService {
     profileComparisonResult.lockedOn = candidate.lockedOn;
     profileComparisonResult.match_map = {};
     profileComparisonResult.capabilityMap = {};
+    profileComparisonResult.complexity_note_matrix = candidate.complexity_note_matrix;
     return profileComparisonResult;
   }
 
@@ -491,6 +500,9 @@ class SearchService {
               });
               match_view.capability_name = capability.name;
               match_view.complexity_name = complexity.name;
+              if(newCandidate.complexity_note_matrix && newCandidate.complexity_note_matrix[cap]) {
+                match_view.complexityNote = newCandidate.complexity_note_matrix[cap];
+              }
               if(job_scenarios[0]) {
                 match_view.job_scenario_name= job_scenarios[0].name;
               }
@@ -532,6 +544,12 @@ class SearchService {
               });
               match_view.capability_name = capability.name;
               match_view.complexity_name = complexity.name;
+              if(newCandidate.complexity_note_matrix && newCandidate.complexity_note_matrix[cap]) {
+                match_view.complexityNote = newCandidate.complexity_note_matrix[cap];
+              }
+              if(job.complexity_musthave_matrix && job.complexity_musthave_matrix[cap]) {
+                match_view.complexityIsMustHave = job.complexity_musthave_matrix[cap];
+              }
               if(job_scenarios[0]){
                 match_view.job_scenario_name=job_scenarios[0].name;
               }

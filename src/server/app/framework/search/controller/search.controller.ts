@@ -8,7 +8,7 @@ import CandidateSearchService = require('../../services/candidate-search.service
 
 export class SearchController {
 
-  getMatchingCandidates(req: express.Request, res: express.Response) {
+  getMatchingCandidates(req: express.Request, res: express.Response,next:any) {
     console.time('getMatchingCandidatesController');
     let searchService = new SearchService();
     let profileId = req.params.id;
@@ -16,7 +16,7 @@ export class SearchController {
     recruiterService.getJobById(profileId, (err: any, jobRes: JobProfileModel) => {
       searchService.getMatchingCandidates(jobRes, (error: Error, result: any) => {
         if (error) {
-          res.status(304).send(error);
+         next(error);
         } else {
           console.timeEnd('getMatchingCandidatesController');
           res.status(200).send(result);
@@ -25,17 +25,17 @@ export class SearchController {
     });
   }
 
-  getMatchingJobProfiles(req: express.Request, res: express.Response) {
+  getMatchingJobProfiles(req: express.Request, res: express.Response,next:any) {
     let searchService = new SearchService();
     let candidateService = new CandidateService();
     let candidateId = req.params.id;
     candidateService.findById(candidateId, (error: Error, candiRes: any) => {
       if (error) {
-        res.status(304).send(error);
+        next(error);
       } else {
         searchService.getMatchingJobProfile(candiRes, (error: Error, result: any) => {
           if (error) {
-            res.status(304).send(error);
+           next(error);
           } else {
             res.status(200).send(result);
           }
@@ -44,7 +44,7 @@ export class SearchController {
     });
   }
 
-  searchCandidateJobProfiles(req:express.Request, res:express.Response) {
+  searchCandidateJobProfiles(req:express.Request, res:express.Response,next:any) {
     let candidateSearchService = new CandidateSearchService();
     let candidateService = new CandidateService();
     let candidateId = req.params.candidateId;
@@ -52,15 +52,15 @@ export class SearchController {
     let recruiterId = req.params.recruiterId;
     candidateService.findById(candidateId, (error:Error, candiRes:any) => {
       if (error) {
-        res.status(304).send(error);
+       next(error);
       } else {
         candidateSearchService.searchMatchingJobProfile(candiRes, recruiterId, 'searchView', (error:Error, result:any) => {
           if (error) {
-            res.status(304).send(error);
+            next(error);
           } else {
             candidateSearchService.getCandidateInfoById([candidateId], (error, candidateDetails) => {
               if (error) {
-                res.status(304).send(error);
+                next(error);
               }
               else {
                 let _candidateDetails:CandidateDetailsWithJobMatching = searchService.getCandidateVisibilityAgainstRecruiter(candidateDetails[0], result);

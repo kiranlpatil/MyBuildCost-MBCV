@@ -40,6 +40,14 @@ $twitter-share: #55acee;
 $linkedin-share: #0077b5;
 $circle-border: #f7b82b;
 $placeholder-color: #dedede;
+$notes-description-color: #262626;
+$exact-bg: #edf7c4;
+$higher-bg: #b1d669;
+$less-bg: #ffe180;
+$missmatch-bg: #ffc3bb;
+$golden-star: #e2c702;
+$golden-star-shadow: #42441d;
+$print-golden-star: #927b01;
 
 .btn-logout {
   margin-top: 15px;
@@ -101,6 +109,58 @@ $placeholder-color: #dedede;
   padding-right: 15px;
 }
 
+//checkbox as star
+.star-checkbox {
+  display: inline-block;
+  position: relative;
+
+  .star {
+    color: #999;
+    cursor: pointer;
+    font-size: 22px;
+    margin: 0;
+    visibility: hidden;
+  }
+  .star:before {
+    content: "\2606";
+    left: 0;
+    position: absolute;
+    top: -5px;
+    visibility: visible;
+  }
+  .star:checked:before {
+    color: $golden-star;
+    content: "\2605";
+    left: 0;
+    position: absolute;
+    text-shadow: 0 0 1px $golden-star-shadow;
+    top: -5px;
+  }
+}
+
+.filled-star {
+  color: $golden-star;
+  font-size: 20px;
+  margin: 0;
+  text-shadow: 0 0 1px $golden-star-shadow;
+
+  &:before {
+    content: "\2605";
+    left: 0;
+    position: absolute;
+    top: -5px;
+  }
+}
+
+.complexity-star {
+  color: $golden-star !important;
+  display: inline-block !important;
+  font-size: 17px !important;
+  margin: 0;
+  padding-right: 3px;
+  text-shadow: 0 0 1px #42441d;
+}
+
 .required-field {
   color: $required-field;
   font-size: 14px;
@@ -137,6 +197,33 @@ $placeholder-color: #dedede;
   white-space: nowrap;
   width: 100%;
 }
+
+
+@mixin multiLineEllipsis($lineHeight: 1.2em, $lineCount: 1, $bgColor: white){
+  line-height: $lineHeight;
+  margin-right: -1em;
+  max-height: $lineHeight * $lineCount;
+  overflow: hidden;
+  padding-right: 1em;
+  position: relative;
+  text-align: justify;
+  &:before {
+    bottom: 0;
+    content: '...';
+    position: absolute;
+    right: 0;
+  }
+  &:after {
+    background: $bgColor;
+    content: '';
+    height: 1em;
+    margin-top: 0.2em;
+    position: absolute;
+    right: 0;
+    width: 1em;
+  }
+}
+
 
 //Common Css
 //Body
@@ -1381,16 +1468,16 @@ select:focus {
     min-width: 380px !important;
   }
   .row-background {
-    height: 150px !important;
+    height: 215px !important;
     .exact,
     .missing,
     .below,
     .above {
-      height: 150px !important;
+      height: 215px !important;
     }
   }
   .empty-divs {
-    height: 150px !important;
+    height: 215px !important;
   }
   .match-icon {
     top: -6px;
@@ -1505,5 +1592,211 @@ select:focus {
     margin-bottom: 30px;
     overflow: hidden;
   }
+
+  .notes-section {
+    bottom: 0;
+    padding-bottom: 0;
+    position: absolute;
+    width: 100%;
+
+    .complexity-notes-description {
+      display: block !important;
+      padding: 5px 0 0 0;
+
+      p {
+        max-width: 100%;
+        max-height: inherit;
+        overflow: visible;
+        text-overflow: inherit !important;
+        white-space: unset !important;
+        width: 90% !important;
+        word-break: keep-all !important;
+      }
+    }
+    .notes-triangle {
+      display: none !important;
+    }
+  }
+
+  .exact {
+    .notes-section {
+      .complexity-notes-description > p {
+        @include multiLineEllipsis($lineHeight: 1.3em, $lineCount: 3, $bgColor: $exact-bg);
+      }
+    }
+  }
+
+  .below {
+    .notes-section {
+      .complexity-notes-description > p {
+        @include multiLineEllipsis($lineHeight: 1.3em, $lineCount: 3, $bgColor: $less-bg);
+      }
+    }
+  }
+
+  .above {
+    .notes-section {
+      .complexity-notes-description > p {
+        @include multiLineEllipsis($lineHeight: 1.3em, $lineCount: 3, $bgColor: $higher-bg);
+      }
+    }
+  }
+
+  .missing {
+    .notes-section {
+      .complexity-notes-description > p {
+        @include multiLineEllipsis($lineHeight: 1.3em, $lineCount: 3, $bgColor: $missmatch-bg);
+      }
+    }
+  }
+
+  .complexity-star {
+    text-shadow: none;
+  }
 }
 
+.notes-section {
+  h4 {
+    font-size: 12px;
+    font-weight: bold !important;
+    font-family: 'gothamrnd-book';
+    margin: 8px 0 5px;
+    padding: 0;
+  }
+}
+
+.notes-triangle {
+  border-top: 14px solid $theme-color;
+  border-left: 14px solid transparent;
+  height: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 0;
+}
+.complexity-notes-description {
+  color: $notes-description-color;
+  display: none;
+  float: left;
+  font-size: 12px;
+  padding: 5px 0;
+  word-break: keep-all;
+  p {
+    margin: 0 !important;
+    max-height: 155px;
+    overflow: auto;
+    padding-left: 0 !important;
+    word-break: keep-all;
+    word-wrap: break-word;
+  }
+}
+
+.below,
+.exact,
+.missing,
+.above {
+  &:hover {
+    .complexity-notes-description {
+      display: block !important;
+    }
+    .notes-triangle {
+      display: none;
+    }
+  }
+}
+
+.add-complexity-notes {
+  label {
+    float: left;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    width: 100%;
+  }
+  textarea {
+    height: 40px !important;
+    max-width: 60%;
+  }
+  .notes-max-charcter {
+    font-size: 12px;
+  }
+}
+
+#candidate-tooltip {
+  .tooltip-message {
+    height: auto;
+    position: relative;
+    width: auto;
+  }
+}
+
+.mini-value-portrait-section {
+  h3 {
+    color: $white;
+    font-size: 50px;
+    font-weight: bold;
+    margin: 20px 0 26px;
+    position: relative;
+    text-align: center;
+    z-index: 9;
+  }
+  .value-portrait-candidate-capability-circle {
+    .inner-circle {
+      span {
+        line-height: 21px;
+        letter-spacing: -2px;
+        text-align: center;
+      }
+    }
+  }
+  .value-portrait-candidate-capability {
+    h3 {
+      display: table !important;
+      margin: 0 auto !important;
+      text-align: center !important;
+    }
+  }
+  .value-portrait-footer {
+    display: none;
+  }
+  .value-portrait-candidate-info-block {
+    ul {
+      li {
+        width: 14.6% !important;
+      }
+      li:first-child {
+        width: 19% !important;
+      }
+      li:nth-child(2) {
+        width: 21.6% !important;
+      }
+    }
+  }
+  .value-portrait-bottom-section {
+    .value-portrait-candidate-industry,
+    .value-portrait-candidate-keyskills {
+      span {
+        b {
+          display: none !important;
+        }
+      }
+      .icon {
+        width: 26px !important;
+        margin-right: 8px;
+      }
+    }
+  }
+  .value-portrait-candidate-number {
+    .phone-icon {
+      width: 40px !important;
+    }
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .add-complexity-notes {
+    textarea {
+      height: 80px !important;
+      max-width: 100%;
+    }
+  }
+}

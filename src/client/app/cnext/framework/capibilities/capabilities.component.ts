@@ -1,11 +1,12 @@
-import {Component, EventEmitter, Input, Output} from "@angular/core";
-import {Role} from "../model/role";
-import {Capability} from "../../../user/models/capability";
-import {Headings, ImagePath, LocalStorage, Messages, Tooltip, ValueConstant} from "../../../shared/constants";
-import {Section} from "../../../user/models/candidate";
-import {LocalStorageService} from "../../../shared/services/localstorage.service";
-import {GuidedTourService} from "../guided-tour.service";
-import {ErrorService} from "../../../shared/services/error.service";
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Role } from '../model/role';
+import { Capability } from '../../../user/models/capability';
+import { Headings, ImagePath, LocalStorage, Messages, Tooltip, ValueConstant } from '../../../shared/constants';
+import { Section } from '../../../user/models/candidate';
+import { LocalStorageService } from '../../../shared/services/localstorage.service';
+import { GuidedTourService } from '../guided-tour.service';
+import { ErrorService } from '../../../shared/services/error.service';
+import {ComplexityAnsweredService} from "../complexity-answered.service";
 
 @Component({
   moduleId: module.id,
@@ -40,6 +41,7 @@ export class CapabilitiesComponent {
   //private guidedTourImgOverlayScreensComplexitiesPath:string;
   isGuideImg:boolean = false;
   private isInfoMessage: boolean = false;
+  userId: string;
 
   tooltipCandidateMessage: string =
 
@@ -54,13 +56,15 @@ export class CapabilitiesComponent {
     '<li><p>1. ' + Tooltip.RECRUITER_CAPABILITY_TOOLTIP + '</p></li>' +
     '</ul>';
 
-  constructor(private guidedTourService:GuidedTourService, private errorService:ErrorService) {
+  constructor(private guidedTourService:GuidedTourService, private errorService:ErrorService,
+              private complexityAnsweredService: ComplexityAnsweredService) {
 
   }
 
   ngOnInit() {
     if (LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE) === 'true') {
       this.isCandidate = true;
+      this.userId=LocalStorageService.getLocalValue(LocalStorage.USER_ID);
     }
   }
 
@@ -94,7 +98,7 @@ export class CapabilitiesComponent {
     this.primaryCapabilitiesNumber = this.primaryNames.length;
   }
 
-  selectedCapability(selectedRole: Role, selectedCapability: Capability, event: any) {
+  selectedCapability(selectedRole: Role, selectedCapability: Capability, event: any) { debugger
     this.isValid = true;
     this.isInfoMessage = false;
     this.validationMessage = '';
@@ -113,6 +117,8 @@ export class CapabilitiesComponent {
         }
         selectedCapability.isPrimary = true;
         this.primaryNames.push(selectedCapability.name);
+        this.complexityAnsweredService.change(true);
+        this.saveOnSelect();
 
       } else {
         event.target.checked=false;
@@ -132,6 +138,8 @@ export class CapabilitiesComponent {
         }
         this.primaryNames.splice(this.primaryNames.indexOf(selectedCapability.code), 1);
         selectedCapability.isPrimary = false;
+        this.complexityAnsweredService.change(true);
+        this.saveOnSelect();
       } else if (selectedCapability.isSecondary) {
         /*this.secondaryNames.splice(this.secondaryNames.indexOf(selectedCapability.name), 1);
         selectedCapability.isSecondary = false;*/
@@ -162,7 +170,7 @@ export class CapabilitiesComponent {
       );
   }
 
-  onNextAction() {
+  onNextAction() { debugger
     this.isValid = true;
     this.validationMessage = '';
     if(this.primaryNames.length == 0){
@@ -174,7 +182,7 @@ export class CapabilitiesComponent {
       this.highlightedSection.name = 'Complexities';
     this.highlightedSection.isDisable = false;
     this.disableButton = true;
-    var newselectedRoles:Role[]= new Array(0);
+   /* var newselectedRoles:Role[]= new Array(0);
     for(let role of this.roles){
       let tempRole =Object.assign({}, role);
       newselectedRoles.push(tempRole);
@@ -182,11 +190,13 @@ export class CapabilitiesComponent {
         return cap.isPrimary;
       });
     }
-    this.onComplete.emit(newselectedRoles);
+    this.onComplete.emit(newselectedRoles);*/
+    this.complexityAnsweredService.change(true);
+
       window.scrollTo(0, 0);
   }
 
-  onSave(){
+  onSave(){ debugger
     this.isValid = true;
     this.validationMessage = '';
     if(this.primaryNames.length == 0){
@@ -280,5 +290,18 @@ export class CapabilitiesComponent {
   }
   getMessage() {
     return Messages;
+  }
+
+  saveOnSelect() {
+    var newselectedRoles:Role[]= new Array(0);
+    for(let role of this.roles){
+      let tempRole =Object.assign({}, role);
+      newselectedRoles.push(tempRole);
+      tempRole.capabilities= tempRole.capabilities.filter((cap : Capability)=> {
+        return cap.isPrimary;
+      });
+    }
+    this.onComplete.emit(newselectedRoles);
+    this.complexityAnsweredService.change(true);
   }
 }

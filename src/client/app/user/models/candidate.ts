@@ -18,6 +18,7 @@ export class Candidate {
   awards: Award[] = [];
   industry: Industry = new Industry();
   capability_matrix:any;
+  complexity_note_matrix:any;
   capabilities: Capability[] = new Array(0);
   interestedIndustries: string[] = new Array(0);
   roleType: string = '';
@@ -30,6 +31,7 @@ export class Candidate {
   isCompleted: boolean;
   summary: Summary = new Summary();
   basicInformation: CandidateDetail = new CandidateDetail();
+  profile_update_tracking:number;
   _id: string;
 }
 

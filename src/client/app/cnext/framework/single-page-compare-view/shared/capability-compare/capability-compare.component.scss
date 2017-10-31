@@ -11,9 +11,10 @@
     background: url(../assets/c-next/card-view/sprite.png) no-repeat -33px -735px;
     float: left;
     height: 32px;
-    width: 19px;
-    position: absolute;
     left: 4px;
+    position: absolute;
+    top: -7px;
+    width: 19px;
   }
 }
 
@@ -76,24 +77,25 @@
   }
   .complexity-name {
     display: block;
+    margin-bottom: 3px;
   }
 }
 
 .exact:hover {
   .complexity-scenarios-description {
-    white-space: inherit;
-    position: absolute;
     background: $exact-bg;
-    padding: 5px;
+    border: 1px solid $white;
     bottom: inherit;
-    min-height: 59px;
-    width: 280px;
-    left: 0;
     box-shadow: 0 0 4px 0 $hover-shadow;
     font-size: 12px;
-    z-index: 999;
+    left: 0;
+    min-height: 59px;
+    padding: 5px 5px 5px 30px;
+    position: absolute;
     top: 0;
-    border: 1px solid $white;
+    white-space: inherit;
+    width: 280px;
+    z-index: 999;
     span {
       max-width: initial;
       overflow: inherit;
@@ -111,6 +113,7 @@
   }
   .complexity-name {
     display: block;
+    margin-bottom: 3px;
   }
 }
 
@@ -124,28 +127,29 @@
   .match-icon {
     background: url(../assets/c-next/card-view/sprite.png) no-repeat -8px -735px;
     float: left;
-    height: 32px;
-    width: 19px;
-    position: absolute;
     left: 4px;
+    height: 32px;
+    position: absolute;
+    top: -7px;
+    width: 19px;
   }
 }
 
 .above:hover {
   .complexity-scenarios-description {
-    white-space: inherit;
-    position: absolute;
     background: $higher-bg;
-    padding: 5px;
+    border: 1px solid $white;
     bottom: inherit;
-    min-height: 59px;
-    width: 280px;
-    left: 0;
     box-shadow: 0 0 4px 0 $hover-shadow;
     font-size: 12px;
-    z-index: 999;
+    left: 0;
+    min-height: 59px;
+    padding: 5px 5px 5px 30px;
+    position: absolute;
     top: 0;
-    border: 1px solid $white;
+    white-space: inherit;
+    width: 280px;
+    z-index: 999;
     span {
       max-width: initial;
       overflow: inherit;
@@ -163,6 +167,7 @@
   }
   .complexity-name {
     display: block;
+    margin-bottom: 3px;
   }
 }
 
@@ -177,27 +182,28 @@
     background: url(../assets/c-next/card-view/sprite.png) no-repeat -58px -735px;
     float: left;
     height: 32px;
-    width: 19px;
-    position: absolute;
     left: 4px;
+    position: absolute;
+    top: -7px;
+    width: 19px;
   }
 }
 
 .below:hover {
   .complexity-scenarios-description {
-    white-space: inherit;
-    position: absolute;
     background: $less-bg;
-    padding: 5px;
+    border: 1px solid $white;
     bottom: inherit;
-    min-height: 59px;
-    width: 280px;
-    left: 0;
     box-shadow: 0 0 4px 0 $hover-shadow;
     font-size: 12px;
-    z-index: 999;
+    left: 0;
+    min-height: 59px;
+    padding: 5px 5px 5px 30px;
+    position: absolute;
     top: 0;
-    border: 1px solid $white;
+    white-space: inherit;
+    width: 280px;
+    z-index: 999;
     span {
       max-width: initial;
       overflow: inherit;
@@ -217,6 +223,7 @@
   }
   .complexity-name {
     display: block;
+    margin-bottom: 3px;
   }
 }
 
@@ -231,27 +238,28 @@
     background: url(../assets/c-next/card-view/sprite.png) no-repeat -83px -735px;
     float: left;
     height: 32px;
-    width: 19px;
-    position: absolute;
     left: 4px;
+    position: absolute;
+    top: -7px;
+    width: 19px;
   }
 }
 
 .missing:hover {
   .complexity-scenarios-description {
-    white-space: inherit;
-    position: absolute;
     background: $missmatch-bg;
-    padding: 5px;
-    bottom: inherit;
-    min-height: 59px;
-    width: 280px;
-    left: 0;
-    box-shadow: 0 0 4px 0 $hover-shadow;
-    font-size: 12px;
-    z-index: 999;
-    top: 0;
     border: 1px solid $white;
+    box-shadow: 0 0 4px 0 $hover-shadow;
+    bottom: inherit;
+    font-size: 12px;
+    left: 0;
+    min-height: 59px;
+    padding: 5px 5px 5px 30px;
+    position: absolute;
+    top: 0;
+    white-space: inherit;
+    width: 280px;
+    z-index: 999;
     span {
       max-width: initial;
       overflow: inherit;
@@ -269,6 +277,7 @@
   }
   .complexity-name {
     display: block;
+    margin-bottom: 3px;
   }
 }
 
@@ -435,6 +444,12 @@
       height: 34px !important;
     }
   }
+
+  .filled-star {
+    position: absolute;
+    top: 35px;
+    left: 5px;
+  }
 }
 
 .empty-divs {
@@ -457,7 +472,7 @@
     margin: 0 0 10px;
     padding: 4px 0;
     position: fixed;
-    z-index: 99;
+    z-index: 1000;
     top: 8px;
 
     li {
@@ -481,7 +496,7 @@
       height: 18px;
       width: 17px;
       border-radius: 0;
-      margin: 0px 3px;
+      margin: 0 3px;
     }
 
     .legend-exact {
@@ -489,7 +504,7 @@
       height: 18px;
       width: 17px;
       border-radius: 0;
-      margin: 0px 3px;
+      margin: 0 3px;
     }
 
     .legend-below {
@@ -497,7 +512,7 @@
       height: 18px;
       width: 17px;
       border-radius: 0;
-      margin: 0px 3px;
+      margin: 0 3px;
     }
 
     .legend-missing {
@@ -505,7 +520,7 @@
       height: 18px;
       width: 17px;
       border-radius: 0;
-      margin: 0px 3px;
+      margin: 0 3px;
     }
 
     .legend-extra {
@@ -702,9 +717,14 @@
     .capability-edit > .inner {
       padding: 5px 20px 5px 5px;
       border: 1px solid $white;
+      position: relative;
       &:hover {
         border: 1px solid $border-color1;
       }
+    }
+
+    .capability-edit > .inner > .filled-star {
+      display: none;
     }
 
     .btn-edit {

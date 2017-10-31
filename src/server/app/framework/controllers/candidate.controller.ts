@@ -7,37 +7,38 @@ import CandidateService = require('../services/candidate.service');
 import UserService = require('../services/user.service');
 import RecruiterService = require('../services/recruiter.service');
 import SearchService = require('../search/services/search.service');
-import CandidateInfoSearch = require("../dataaccess/model/candidate-info-search");
+import CandidateInfoSearch = require('../dataaccess/model/candidate-info-search');
+import { MailChimpMailerService } from '../services/mailchimp-mailer.service';
 
 
 export function create(req: express.Request, res: express.Response, next: any) {
   try {
-    console.log('USer is', req.body);
     let newUser: CandidateModel = <CandidateModel>req.body;
-    console.log('USer is', newUser);
     let candidateService = new CandidateService();
     candidateService.createUser(newUser, (error, result) => {
       if (error) {
-        console.log('crt user error', error);
         if (error == Messages.MSG_ERROR_CHECK_EMAIL_PRESENT) {
           next({
             reason: Messages.MSG_ERROR_RSN_EXISTING_USER,
             message: Messages.MSG_ERROR_VERIFY_ACCOUNT,
-            code: 403
+            stackTrace: new Error(),
+            code: 400
           });
         }
         else if (error == Messages.MSG_ERROR_CHECK_MOBILE_PRESENT) {
           next({
             reason: Messages.MSG_ERROR_RSN_EXISTING_USER,
             message: Messages.MSG_ERROR_REGISTRATION_MOBILE_NUMBER,
-            code: 403
+            stackTrace: new Error(),
+            code: 400
           });
         }
         else {
           next({
             reason: Messages.MSG_ERROR_RSN_EXISTING_USER,
             message: Messages.MSG_ERROR_USER_WITH_EMAIL_PRESENT,
-            code: 403
+            stackTrace: new Error(),
+            code: 400
           });
         }
       }
@@ -54,9 +55,13 @@ export function create(req: express.Request, res: express.Response, next: any) {
         });
       }
     });
-  }
-  catch (e) {
-    res.status(403).send({'status': Messages.STATUS_ERROR, 'error_message': e.message});
+  } catch (e) {
+   next({
+      reason: e.message,
+      message: e.message,
+      stackTrace: new Error(),
+      code: 500
+    });
   }
 }
 
@@ -68,11 +73,23 @@ export function updateDetails(req: express.Request, res: express.Response, next:
     delete params.access_token;
     let userId: string = req.params.id;
     let auth: AuthInterceptor = new AuthInterceptor();
+    let isEditingProfile: boolean=false;
 
     /*let userService = new UserService();
      let query = {"_id": userId};
      let updateData = {"location": updatedCandidate.professionalDetails.location};*/
     let candidateService = new CandidateService();
+    let mailChimpMailerService = new MailChimpMailerService();
+
+
+    candidateService.get(userId, (error, result) => {
+      if (error) {
+        next(error);
+      } else {
+        updatedCandidate.lastUpdateAt=new Date().toISOString();
+        if (result && result.isSubmitted) {
+          isEditingProfile = true;
+        }
     candidateService.update(userId, updatedCandidate, (error, result) => {
       if (error) {
         next(error);
@@ -82,10 +99,12 @@ export function updateDetails(req: express.Request, res: express.Response, next:
             next({
               reason: Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
               message: Messages.MSG_ERROR_WRONG_TOKEN,
-              code: 401
+              stackTrace: new Error(),
+              code: 400
             });
           } else {
             let token = auth.issueTokenWithUid(result[0]);
+                mailChimpMailerService.onCandidatePofileSubmitted(req.body.basicInformation,updatedCandidate.isSubmitted, isEditingProfile);
             res.send({
               'status': 'success',
               'data': result,
@@ -105,9 +124,17 @@ export function updateDetails(req: express.Request, res: express.Response, next:
      });
      }
      });*/
+
+      }
+    });
   }
   catch (e) {
-    res.status(403).send({message: e.message});
+    next({
+      reason: e.message,
+      message: e.message,
+      stackTrace: new Error(),
+      code: 500
+    });
   }
 }
 
@@ -128,7 +155,12 @@ export function getCapabilityMatrix(req: express.Request, res: express.Response,
     });
   }
   catch (e) {
-    res.status(403).send({message: e.message});
+   next({
+      reason: e.message,
+      message: e.message,
+      stackTrace: new Error(),
+      code: 500
+    });
   }
 }
 
@@ -145,8 +177,9 @@ export function retrieve(req: express.Request, res: express.Response, next: any)
           next({
             reason: 'User Not Available',//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
             message: 'User is not available',//Messages.MSG_ERROR_WRONG_TOKEN,
+            stackTrace: new Error(),
             code: 401
-          })
+          });
         }
         else {
           userService.findById(resu.userId, (error, result) => {
@@ -154,6 +187,7 @@ export function retrieve(req: express.Request, res: express.Response, next: any)
               next({
                 reason: 'User Not Available',//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
                 message: 'User is not available',//Messages.MSG_ERROR_WRONG_TOKEN,
+                stackTrace: new Error(),
                 code: 401
               })
             } else {
@@ -173,6 +207,7 @@ export function retrieve(req: express.Request, res: express.Response, next: any)
           next({
             reason: Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
             message: Messages.MSG_ERROR_WRONG_TOKEN,
+            stackTrace: new Error(),
             code: 401
           });
         }
@@ -181,6 +216,7 @@ export function retrieve(req: express.Request, res: express.Response, next: any)
             next({
               reason: 'User Not Available',//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
               message: 'User is not available',//Messages.MSG_ERROR_WRONG_TOKEN,
+              stackTrace: new Error(),
               code: 401
             });
           } else {
@@ -189,8 +225,9 @@ export function retrieve(req: express.Request, res: express.Response, next: any)
                 next({
                   reason: 'User Not Available',//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
                   message: 'User is not available',//Messages.MSG_ERROR_WRONG_TOKEN,
+                  stackTrace: new Error(),
                   code: 401
-                })
+                });
               }
               else {
                 res.send({
@@ -207,7 +244,12 @@ export function retrieve(req: express.Request, res: express.Response, next: any)
 
   }
   catch (e) {
-    res.status(403).send({message: e.message});
+   next({
+      reason: e.message,
+      message: e.message,
+      stackTrace: new Error(),
+      code: 403
+    });
   }
 }
 
@@ -236,7 +278,12 @@ export function get(req: express.Request, res: express.Response, next: any) { //
      }*/
   }
   catch (e) {
-    res.status(403).send({message: e.message});
+   next({
+      reason: e.message,
+      message: e.message,
+      stackTrace: new Error(),
+      code: 403
+    });
   }
 }
 
@@ -250,6 +297,7 @@ export function metchResult(req: express.Request, res: express.Response, next: a
         next({
           reason: 'Problem in Search Matching Result',//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
           message: 'Problem in Search Matching Result',//Messages.MSG_ERROR_WRONG_TOKEN,
+          stackTrace: new Error(),
           code: 401
         });
       }
@@ -264,7 +312,12 @@ export function metchResult(req: express.Request, res: express.Response, next: a
 
   }
   catch (e) {
-    res.status(403).send({message: e.message});
+   next({
+      reason: e.message,
+      message: e.message,
+      stackTrace: new Error(),
+      code: 403
+    });
   }
 }
 
@@ -296,6 +349,7 @@ export function getList(req: express.Request, res: express.Response, next: any) 
                 next({
                   reason: Messages.MSG_ERROR_RSN_EXISTING_USER,
                   message: Messages.MSG_ERROR_VERIFY_ACCOUNT,
+                  stackTrace: new Error(),
                   code: 403
                 });
               } else {
@@ -318,6 +372,44 @@ export function getList(req: express.Request, res: express.Response, next: any) 
       }
     });
   } catch (e) {
-    res.status(403).send({message: e.message});
+   next({
+      reason: e.message,
+      message: e.message,
+      stackTrace: new Error(),
+      code: 403
+    });
   }
+}
+
+export function updateField(req:express.Request, res:express.Response, next:any) {
+  let candidateService = new CandidateService();
+  try {
+    let value: number = req.query.value;
+    let data:any = {$max: {'profile_update_tracking': Number(value)}};
+    let userId:string = req.params.id;
+    candidateService.updateField(userId, data, (error:any, result:any) => {
+      if (error) {
+        next({
+          reason: Messages.MSG_ERROR_FAILED_TO_UPDATE_CANDIDATE_FIELD,
+          message: Messages.MSG_ERROR_FAILED_TO_UPDATE_CANDIDATE_FIELD,
+          stackTrace: new Error(),
+          code: 403
+        });
+      } else {
+        res.send({
+          'status': 'success',
+          'data': result,
+        });
+      }
+    });
+  }
+  catch (e) {
+    next({
+      reason: e.message,
+      message: e.message,
+      stackTrace: new Error(),
+      code: 500
+    });
+  }
+
 }

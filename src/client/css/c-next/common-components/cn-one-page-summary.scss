@@ -63,6 +63,17 @@
         border: 1px solid $white !important;
       }
     }
+
+    .capability-edit > .inner > .filled-star {
+      display: block !important;
+      left: -17px;
+      position: absolute;
+      top: 5px;
+    }
+
+    .capability-edit > .inner > .complexity-name > .complexity-star {
+      display: none !important;
+    }
   }
 }
 

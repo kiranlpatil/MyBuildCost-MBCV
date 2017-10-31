@@ -1,3 +1,4 @@
+<!--
 <div *ngIf="isCandidate">
 <div class="guided-tour-section guided-tour-overlay value-portrait-tour-section" *ngIf="guidedTourStatus?.indexOf(valuePortraitImgName) == -1">
     <img src={{valuePortraitImgName}} alt="Profile Picture">
@@ -25,6 +26,7 @@
     </div>
 </div>
 </div>
+-->
 <cn-value-portrait-header [candidate]="candidate"></cn-value-portrait-header>
 <cn-candidate-info-block [candidate]="candidate"
                          class="visible-lg visible-md hidden-sm hidden-xs"></cn-candidate-info-block>
@@ -75,7 +77,7 @@
       <div *ngFor="let history of candidate.employmentHistory" class="line-block">
         <b *ngIf="history.isPresentlyWorking!=true">{{history.from.year}} - {{history.to.year}}</b> //To do lucky-add if
         else instead of using two ngIf
-        <b *ngIf="history.isPresentlyWorking===true">{{history.from.year}} - {{getMessages().MSG_PRESENTLY_WORKING}}</b>
+        <b *ngIf="history.isPresentlyWorking===true">{{history.from.year}} - {{getMessage().MSG_PRESENTLY_WORKING}}</b>
         <b><label><strong>{{history.designation}}</strong></label> | <label>{{history.companyName}}</label></b>
         <b class="remark">{{history.remarks}}</b>
       </div>

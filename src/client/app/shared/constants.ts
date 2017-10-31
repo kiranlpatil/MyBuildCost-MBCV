@@ -1,5 +1,5 @@
 export class AppSettings {
-  //public static IP = 'http://localhost:8080';
+  // public static IP = 'http://localhost:8080';
   // public static IP = 'http://ee802b7f.ngrok.io';
   //public static IP = 'http://10.192.33.77:8080';
   //public static IP = 'http://52.10.145.87:3000';
@@ -50,6 +50,7 @@ export class Messages {
   public static MSG_CANDIDATE_SEARCH_NOT_FOUND = "Applicant's profile does not match with any of your open job profiles.";
   public static MSG_CNADIDATE_VISIBILITY_OFF = 'The selected applicant profile details are not displayed, since the applicant has marked it as private.';
   public static MSG_CNADIDATE_IF_NOT_IN_CART = 'To view profile details of this candidate you need to add this candidate in cart of at least one job post..';
+  public static MSG_ABOUT_SCREEN_PRINT_IF_NOT_IN_CART = 'Add this candidate to cart to enable profile download.';
   public static MSG_SUCCESS_LOGIN: string = 'You are successfully signed in.';
   public static MSG_SUCCESS_REGISTRATION: string = 'Kindly verify your account.';
   public static MSG_SUCCESS_CHANGE_MOBILE_NUMBER: string = 'Mobile number updated successfully.Kindly sign in';
@@ -120,7 +121,7 @@ export class Messages {
   public static MSG_ERROR_VALIDATION_COMPANYNAME_REQUIRED = 'This field can\'t be left blank.';
   public static MSG_ERROR_VALIDATION_OTP_REQUIRED = 'Enter received OTP.';
   public static MSG_ERROR_VALIDATION_INVALID_EMAIL_REQUIRED = 'Enter a valid email address.';
-  public static MSG_ERROR_VALIDATION_INVALID_URL_REQUIRED = 'Website is not valid';
+  public static MSG_ERROR_VALIDATION_INVALID_URL_REQUIRED = 'Website should be start with www';
   public static MSG_ERROR_VALIDATION_INVALID_NAME = 'Enter valid name.';
   public static MSG_ERROR_VALIDATION_INVALID_DATA = 'Enter valid data.';
   public static MSG_ERROR_VALIDATION_PASSWORD_MISMATCHED = 'Passwords do not match.';
@@ -149,7 +150,7 @@ export class Messages {
   public static MSG_ERROR_VALIDATION_CURRENTSALARY_REQUIRED = 'This field can\'t be left blank.';
   public static MSG_ERROR_VALIDATION_RELOCATE_REQUIRED = 'This field can\'t be left blank.';
   public static MSG_ERROR_VALIDATION_NOTICEPERIOD_REQUIRED = 'This field can\'t be left blank.';
-  public static MSG_ERROR_VALIDATION_MAX_WORD_ALLOWED = 'words remaining';
+  public static MSG_ERROR_VALIDATION_MAX_WORD_ALLOWED = ' words remaining';
   public static MSG_ERROR_VALIDATION_DESIGNATION_REQUIRED = 'This field can\'t be left blank.';
   public static MSG_ERROR_VALIDATION_DEGREE_NAME_REQUIRED = 'Degree Name is required.';
   public static MSG_ERROR_VALIDATION_UNIVERSITY_NAME_REQUIRED = 'Board/University name is required.';
@@ -283,6 +284,9 @@ export class Messages {
     'matching and alignment with the best job Opportunity.';
   public static GUIDED_TOUR_COMPLEXITY_SCENARIOS_MESSAGE ='This section provides a list of Complexity Scenarios for' +
     ' your selected Capabilities';
+    public static GUIDED_TOUR_COMPLEXITY_RIGHT_FIT_MESSAGE ='This section has questions designed by industry ' +
+        'stalwarts and experts by investing more than <b>10,000</b> person hours with a view to help the candidates and ' +
+        'recruiters get the 100% right fit.';
   public static GUIDED_TOUR_COMPLEXITY_SCENARIO_NOTE_MESSAGE ='<span>Note:</span> If a scenario was applicable to you in past but ' +
     'is no more relevant to you, avoid choosing such scenarios. In such cases, choose' +
     ' "Not Applicable".';
@@ -314,7 +318,7 @@ export class Messages {
 
   public static NO_CANDIDATES_AVAILABLE = 'No candidates available for selected alphabet.';
   public static NO_RECRUITERS_AVAILABLE = 'No recruiters available for selected alphabet.';
-  public static OTHERS_AOW_MESSAGE = 'Thank you for your interest in our Job post but currently we do not have your Area of Work, we will get back to you after building your Area of Work';
+  public static OTHERS_AOW_MESSAGE = 'Thank you for your interest in our Job post but currently we do not have your Area of Work, we will get back to you after building your Area of Work. For any query mail us on support@jobmosis.com or contact us on +91-8669601612 .';
   public static SELECT_REASON_FOR_JOB_CLOSE = 'Please select a reason.';
   public static ASK_EXPERT_MESSAGE = 'You can copy and share this link to hiring manager to independently define the job description.\n' +
       'On completion by hiring manager you will receive an email.';
@@ -575,6 +579,7 @@ export class Tooltip {
   public static COMPLEXITIES_RECRUITER_TOOLTIP_1: string = 'This section provides a list of complexity scenarios for selected capabilities.' +
     'For each scenario, select the most appropriate level that candidate is required to handle.';
   public static COMPLEXITIES_RECRUITER_TOOLTIP_2: string = 'For scenarios that are not relevant to your job profile, choose "Not Applicable".';
+  public static COMPLEXITIES_RECRUITER_TOOLTIP_3: string = 'Please click on &#9733; to select a must have capability for candidate to fulfilled this job.';
   public static EMPLOYMENT_HISTORY_TOOLTIP: string = 'An individual may be exposed to multiple industries during his professional life.';
   public static INDUSTRY_EXPERIENCE_CANDIDATE_TOOLTIP_1: string = 'An individual may be exposed to multiple industries during their professional life. ' +
     'At times, organisations need individuals who have cross industry expertise.';
@@ -624,6 +629,8 @@ export class Tooltip {
   public static CAPABILITY_COMPARE_BELOW_MATCH: string = 'Candidate capabilities slightly less than desired';
   public static CAPABILITY_COMPARE_MISSING_MATCH: string = 'Large mismatch of capabilities';
   public static COMPANY_DETAILS_TOOLTIP: string = 'Company Details Message';
+    public static MUST_TO_HAVE_TOOLTIP: string = 'Is this a must have capability for candidate to fulfilled this job?';
+    public static MUST_TO_HAVE_CAPABILITY_COMPARE_MESSAGE: string = 'This is a capability that a candidate must have to perform this job.';
 }
 
 export class Headings {
@@ -696,6 +703,9 @@ export class Label {
   public static SHOW_CLOSED_JOBS: string = 'Show Closed Jobs';
   public static POST_JOB: string = 'POST JOB';
   public static CLOSED_JOB: string = 'CLOSED JOB';
+  public static MUST_TO_HAVE_FILTER_LABEL: string = 'Hide candidates missing must to have capabilities';
+  public static PROFILE_VISIBILITY: string = 'Profile Visibility for Recruiter';
+  public static SUBMIT_PROFILE: string = 'Submit Your Profile';
 }
 
 export class Button {
@@ -706,4 +716,27 @@ export class Button {
   public static CANCEL_BUTTON: string = 'Cancel';
   public static VALUE_PORTRAIT_BUTTON: string = 'Create your Own Value Portrait';
   public static SUBMIT_PROFILE: string = 'Submit Profile';
+  public static VIEW_AND_EDIT: string = 'View and Edit';
+  public static PROCEED: string = 'Proceed';
+  public static NEXT: string = 'Next';
+  public static SUBMIT: string = 'Submit';
+  public static DOWNLOAD: string = 'Download';
 }
+//These constant is used to track profile completion of candiate.(Having total 14 steps to complete)
+export enum CandidateProfileUpdateTrack {
+  STEP_IS_ENTER_PROFILE_DETAILS,
+  STEP_IS_SELECT_INDUSTRY_DETAILS,
+  STEP_IS_SELECT_AREA_OF_WORK,
+  STEP_IS_SELECT_CAPABILITIES,
+  STEP_IS_SELECT_COMPLEXITIES,
+  STEP_IS_ENTER_KEY_SKILLS,
+  STEP_IS_SELECT_ADDITIONAL_DOMAIN_EXPOSURE,
+  STEP_IS_ENTER_PROFESSIONAL_PREFERENCES,
+  STEP_IS_ENTER_ABOUT_MYSELF,
+  STEP_IS_ENTER_EMPLOYMENT_HISTORY,
+  STEP_IS_ENTER_ACADEMIC_DETAILS,
+  STEP_IS_ENTER_CERTIFICATION_DETAILS,
+  STEP_IS_ENTER_AWARDS_DETAILS,
+  STEP_IS_SUBMIT_DETAILS
+}
+

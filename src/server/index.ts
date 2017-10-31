@@ -8,15 +8,19 @@ import * as cnextRoutes from "./cnext-routes";
 import * as methodOverride from "method-override";
 import * as cors from "cors";
 import * as fs from "fs";
-var spdy = require('spdy');
+import LoggerService = require("./app/framework/shared/logger/LoggerService");
+import * as sharedService from "./app/framework/shared/logger/shared.service";
+import { CronJobService } from './app/framework/services/cron-job.service';
 
+var spdy = require('spdy');
+var cronJobService=new CronJobService();
  __dirname = './';
 var _clientDir = '/dist/client/dev';
 var _serverDir = '/dist/server/dev';
 var app = express();
 
 export function init(port: number, mode: string, protocol: string, dist_runner: string) {
-
+  cronJobService.OnCronJobStart();
   app.use(bodyParser.urlencoded({extended: false}));
   app.use(bodyParser.json({limit: '40mb'}));
   app.use(bodyParser.urlencoded({limit: '40mb', extended: true}));
@@ -29,7 +33,19 @@ export function init(port: number, mode: string, protocol: string, dist_runner: 
   app.use(methodOverride("X-Method-Override"));
   app.use(methodOverride("_method"));
   app.use(express.static('src/'));
-
+  process.on('uncaughtException', function (err:any) {
+    let _loggerService: LoggerService = new LoggerService('uncaught exception Handler');
+    let error= {
+      reason: 'uncaught exception',
+      message: err,
+      stack: err.stack,
+      code: 500
+    };
+    console.error(error);
+    _loggerService.logError("Catching uncaught Exceptions. : " +err);
+    _loggerService.logError("Catching uncaught Exceptions stack : " +err.stack);
+    sharedService.mailToAdmin(error);
+  });
 
   /**
    * Dev Mode.
@@ -189,13 +205,14 @@ export function init(port: number, mode: string, protocol: string, dist_runner: 
         console.log('App is listening on port:' + port);
         resolve(server);
       });
+      server.timeout = 600000; //by default timeout set to 10 min for export functionality
     });
   } else {
     const options = {
       key: fs.readFileSync("./staging.jobmosis.com.key"),
       cert: fs.readFileSync("./staging.jobmosis.com.crt"),
+      handshakeTimeout: 600000, //by default timeout set to 10 min for export functionality, Need to test this
       passphrase: 'tpl123',
-
       spdy: {
         protocols: ['h2']
       }

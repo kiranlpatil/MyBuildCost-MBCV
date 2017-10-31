@@ -1,10 +1,11 @@
-import {AfterViewChecked, Component, Input, OnInit} from "@angular/core";
+import {AfterViewChecked, Component, Input, OnInit, OnChanges} from "@angular/core";
 import {CandidateProfileService} from "../../candidate-profile/candidate-profile.service";
 import {Candidate} from "../../../../user/models/candidate";
 import {ErrorService} from "../../../../shared/services/error.service";
 import {Headings, ImagePath, LocalStorage, Messages} from "../../../../shared/constants";
 import {LocalStorageService} from "../../../../shared/services/localstorage.service";
 import {GuidedTourService} from "../../guided-tour.service";
+import {ComplexityAnsweredService} from "../../complexity-answered.service";
 
 @Component({
   moduleId: module.id,
@@ -18,11 +19,14 @@ export class ValuePortraitComponent implements OnInit {
   candidate: Candidate = new Candidate();
   @Input() userId:string;
   @Input() isShareView:boolean;
+  @Input() isMiniView:boolean;
   gotItMessage: string= Headings.GOT_IT;
   isCandidate:boolean;
+  isAnswered: boolean;
   valuePortraitImgName:string;
   guidedTourStatus:string[] = new Array(0);
-  constructor(private guidedTourService:GuidedTourService,private candidateProfileService: CandidateProfileService,private errorService:ErrorService) {
+  constructor(private guidedTourService:GuidedTourService,private candidateProfileService: CandidateProfileService,
+              private errorService:ErrorService,private complexityAnsweredService: ComplexityAnsweredService) {
     if (LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE) === 'true') {
       this.isCandidate = true;
     }
@@ -33,10 +37,23 @@ export class ValuePortraitComponent implements OnInit {
     if(this.isCandidate) {
       this.isRequireGuidedTourImg();
     }
+   // this.getCandidateAllDetails();
+    if(this.isMiniView) {
+      this.complexityAnsweredService.makeCall()
+        .subscribe(isAnswered => {
+          this.isAnswered = isAnswered;
+          this.getCandidateAllDetails();
+        });
+    }
+    this.getCandidateAllDetails();
+  }
+
+  getCandidateAllDetails() {
     this.candidateProfileService.getCandidateAllDetails(this.userId)
       .subscribe(
         candidateData => {
           this.candidate = this.updateCapabilityData(candidateData.data);
+          console.log("capability details = ",this.candidate );
         },error => this.errorService.onError(error));
   }
 
@@ -54,11 +71,13 @@ export class ValuePortraitComponent implements OnInit {
         },
         error => this.errorService.onError(error)
       );
-
   }
 
   updateCapabilityData(candidate: Candidate) {
     for (var i = candidate.capabilities.length - 1; i >= 0; i--) {
+        if(candidate.capabilities.length > 0) {
+          return candidate;
+        }
       for (var j = candidate.capabilities[i].complexities.length - 1; j >= 0; j--) {
         if (candidate.capabilities[i].complexities[j].answer == undefined || candidate.capabilities[i].complexities[j].answer == 'Not Applicable') {
           candidate.capabilities[i].complexities.splice(j, 1);
@@ -68,7 +87,6 @@ export class ValuePortraitComponent implements OnInit {
         candidate.capabilities.splice(i, 1);
       }
     }
-
     return candidate;
   }
 

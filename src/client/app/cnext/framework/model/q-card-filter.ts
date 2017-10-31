@@ -10,5 +10,6 @@ export class QCardFilter {
   filterByJoinTime: string;
   filterByLocation: string;
   filterByCompanySize: string;
+  filterByMustHaveComplexity: boolean = false;
   query: any;
 }
