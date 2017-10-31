@@ -31,7 +31,7 @@ export function login(req: express.Request, res: express.Response, next: any) {
               reason: Messages.MSG_ERROR_RSN_INVALID_REGISTRATION_STATUS,
               message: Messages.MSG_ERROR_VERIFY_CANDIDATE_ACCOUNT,
               stackTrace: new Error(),
-              code: 403
+              code: 400
             });
           } else {
             if (isSame) {
@@ -120,7 +120,7 @@ export function login(req: express.Request, res: express.Response, next: any) {
                 reason: Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
                 message: Messages.MSG_ERROR_WRONG_PASSWORD,
                 stackTrace: new Error(),
-                code: 403
+                code: 400
               });
             }
           }
@@ -133,7 +133,7 @@ export function login(req: express.Request, res: express.Response, next: any) {
               reason: Messages.MSG_ERROR_RSN_INVALID_REGISTRATION_STATUS,
               message: Messages.MSG_ERROR_VERIFY_CANDIDATE_ACCOUNT,
               stackTrace: new Error(),
-              code: 403
+              code: 400
             });
           } else {
             if (isPassSame) {
@@ -142,14 +142,14 @@ export function login(req: express.Request, res: express.Response, next: any) {
                   reason: Messages.MSG_ERROR_RSN_INVALID_REGISTRATION_STATUS,
                   message: Messages.MSG_ERROR_VERIFY_CANDIDATE_ACCOUNT,
                   stackTrace: new Error(),
-                  code: 403
+                  code: 400
                 });
               } else {
                 next({
                   reason: Messages.MSG_ERROR_RSN_INVALID_REGISTRATION_STATUS,
                   message: Messages.MSG_ERROR_VERIFY_ACCOUNT,
                   stackTrace: new Error(),
-                  code: 403
+                  code: 400
                 });
               }
             } else {
@@ -157,7 +157,7 @@ export function login(req: express.Request, res: express.Response, next: any) {
                 reason: Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
                 message: Messages.MSG_ERROR_WRONG_PASSWORD,
                 stackTrace: new Error(),
-                code: 403
+                code: 400
               });
             }
           }
@@ -168,7 +168,7 @@ export function login(req: express.Request, res: express.Response, next: any) {
           reason: Messages.MSG_ERROR_RSN_USER_NOT_FOUND,
           message: Messages.MSG_ERROR_USER_NOT_PRESENT,
           stackTrace: new Error(),
-          code: 403
+          code: 400
         });
       }
     });
@@ -177,7 +177,7 @@ export function login(req: express.Request, res: express.Response, next: any) {
       reason: e.message,
       message: e.message,
       stackTrace: new Error(),
-      code: 403
+      code: 500
     });
   }
 }

@@ -43,7 +43,6 @@ export function create(req: express.Request, res: express.Response, next: any) {
         }
       } else {
         var auth: AuthInterceptor = new AuthInterceptor();
-        console.log('result', JSON.stringify(result));
         var token = auth.issueTokenWithUid(result);
         res.status(200).send({
           'status': Messages.STATUS_SUCCESS,
@@ -219,7 +218,6 @@ export function exportCandidateDetails(req: express.Request, res: express.Respon
                     code: 500
                   });
                 } else {
-                  console.log("success");
                   res.status(200).send({
                     'status': 'success'
                   });
@@ -272,7 +270,6 @@ export function exportRecruiterDetails(req: express.Request, res: express.Respon
                 code: 500
               });
             } else {
-              console.log("success");
               res.status(200).send({
                 'status': 'success'
               });
@@ -311,7 +308,6 @@ export function exportUsageDetails(req: express.Request, res: express.Response, 
             code: 500
           });
         } else {
-          console.log("success");
           res.status(200).send({
             'status': 'success'
           });

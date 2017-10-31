@@ -1,8 +1,0 @@
-#allow twitter card
-User-agent: Twitterbot
-Allow: /
-
-#allow twitter card
-User-agent:LinkedInBot
-Allow:/
-

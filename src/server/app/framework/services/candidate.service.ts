@@ -33,7 +33,6 @@ class CandidateService {
   }
 
   createUser(item: any, callback: (error: any, result: any) => void) {
-    console.log('USer is', item);
     this.userRepository.retrieve({$or: [{'email': item.email}, {'mobile_number': item.mobile_number}]}, (err, res) => {
       if (err) {
         callback(new Error(err), null);
@@ -672,7 +671,6 @@ class CandidateService {
     var result = orderKeys(keyValueCapability, function (a: any, b: any) {
       return a.main_sort_order - b.main_sort_order;
     }); // => ["Elem4", "Elem2", "Elem1", "Elem3"]
-    // console.log("sample result"+ result);
     let responseToReturn: any = {};
     for (let i of result) {
       responseToReturn[i] = keyValueCapability[i];

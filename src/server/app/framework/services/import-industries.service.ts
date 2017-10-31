@@ -81,7 +81,6 @@ class ImportIndustryService {
                 else if(result[j].area_of_work === 'Others' && result[j].capability ==='' && result[j].complexity==='') {
                  // capabilities = CapabilitiesService.addCapabilities(result[j],capabilities);
                 }else {
-                  console.log(' role name '+i+result[i].area_of_work);
                   if(!isSend) {
                     isSend=true;
                     callback(new Error(Messages.MSG_ERROR_CAPABILITY_CODE_MISSING+' - '+result[j].capability),null);
@@ -108,7 +107,6 @@ class ImportIndustryService {
                   else if(result[j].area_of_work === 'Others' && result[j].capability === '' && result[j].complexity === '') {
                     //complexities = ComplexitiesService.addComplexities(result[j], complexities);
                   }else {
-                    console.log(' role name ' + i + result[i].area_of_work);
                     if (!isSend) {
                       isSend = true;
                       callback(new Error(Messages.MSG_ERROR_COMPLEXITY_CODE_MISSING+' - ' + result[j].complexity), null);

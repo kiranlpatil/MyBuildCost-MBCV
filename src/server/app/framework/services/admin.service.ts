@@ -118,7 +118,6 @@ class AdminService {
               if (error) {
                 callback(error, null);
               } else {
-                console.log("Fetched all recruiters from users:" + recruiterResult.length);
                 for (let user of result) {
                   if (usersMap.get(user._id.toString())) {
                     user.data = usersMap.get(user._id.toString());
@@ -190,7 +189,6 @@ class AdminService {
               if (error) {
                 callback(error, null);
               } else {
-                console.log("Fetched all candidates:" + candidatesResult.length);
                 for (let candidate of candidatesResult) {
                   usersMap.set(candidate.userId.toString(), candidate);
                 }
@@ -246,7 +244,6 @@ class AdminService {
   };
 
   exportCandidateCollection(callback: (err: any, res: any) => void) {
-    console.log("inside exportCandidateCollection");
     let candidateChild = spawn('mongoexport', ['--host', '52.10.145.87', '--db', db, '--collection', 'candidates', '--type', 'csv', '--fields',
       '_id,userId,job_list,proficiencies,employmentHistory,academics,industry,awards,interestedIndustries,certifications,profile_update_tracking,isVisible,isSubmitted,isCompleted,complexity_note_matrix,professionalDetails,aboutMyself,jobTitle,location,lastUpdateAt',
       '--out', '/home/kapil/JavaProject/ng4-cnext/c-next/dist/server/prod/public/candidates.csv']);
@@ -261,7 +258,6 @@ class AdminService {
         candidateChild.kill();
         callback(new Error(), null);
       } else {
-        console.log('candidateChild process closed with code ' + code);
         candidateChild.kill();
         callback(null, 'success');
       }
@@ -270,7 +266,6 @@ class AdminService {
   }
 
   exportCandidateOtherDetailsCollection(callback: (err: any, res: any) => void) {
-    console.log("inside exportCandidateDetailsCollection");
     let candidateOtherDetailsChild = spawn('mongoexport', ['--db', db, '--collection', 'candidates',
       '--type', 'csv', '--fields', 'userId,capability_matrix', '--out',
       '/home/kapil/JavaProject/ng4-cnext/c-next/dist/server/prod/public/candidates-other-details.csv']);
@@ -283,7 +278,6 @@ class AdminService {
         candidateOtherDetailsChild.kill();
         callback(new Error(), null);
       } else {
-        console.log('candidateOtherDetailsChild process closed with code ' + code);
         candidateOtherDetailsChild.kill();
         callback(null, 'success');
       }
@@ -292,7 +286,6 @@ class AdminService {
   }
 
   exportUserCollection(userType: string, callback: (err: any, res: any) => void) {
-    console.log("inside exportUserCollection");
     let userChild: any;
 
     if (userType == 'candidate') {
@@ -325,7 +318,6 @@ class AdminService {
         userChild.kill();
         callback(new Error(), null);
       } else {
-        console.log('userChild process closed with code ' + code);
         userChild.kill();
         callback(null, 'success');
       }
@@ -333,7 +325,6 @@ class AdminService {
   }
 
   exportRecruiterCollection(callback: (err: any, res: any) => void) {
-    console.log("inside exportRecruiterCollection");
     /*let recruiterChild = spawn('mongoexport',['--host','52.10.145.87','--db',db,'--collection','recruiters','--type','csv','--fields','_id,userId,isRecruitingForself,company_name,company_size,company_website,postedJobs,setOfDocuments,company_logo','--out','/home/kapil/JavaProject/ng4-cnext/c-next/dist/server/prod/public/recruiters.csv']);*/
 
     let recruiterChild = spawn('mongoexport',['--username',username,'password',password,'--db',db,'--collection','recruiters','--type','csv','--fields','_id','--out','/home/bitnami/apps/jobmosis-staging/c-next/dist/server/prod/public/recruiters.csv']);
@@ -342,7 +333,6 @@ class AdminService {
         recruiterChild.kill();
         callback(new Error(), null);
       } else {
-        console.log('recruiterChild process closed with code ' + code);
         recruiterChild.kill();
         callback(null, 'success');
       }
@@ -351,7 +341,6 @@ class AdminService {
   }
 
   exportUsageDetailsCollection(callback: (err: any, res: any) => void) {
-    console.log("inside exportUsageDetailsCollection");
     let usageDetailsChild = spawn('mongoexport', ['--db', db, '--collection', 'usestrackings', '--type', 'csv',
       '--fields', '_id,candidateId,jobProfileId,timestamp,action,__v', '--out',
       '/home/kapil/JavaProject/ng4-cnext/c-next/dist/server/prod/public/usagedetail.csv']);
@@ -365,7 +354,6 @@ class AdminService {
         usageDetailsChild.kill();
         callback(new Error(), null);
       } else {
-        console.log('usageDetailsChild process closed with code ' + code);
         usageDetailsChild.kill();
         callback(null, 'success');
       }
