@@ -75,14 +75,7 @@
                     [isCloneButtonClicked]="isCloneButtonClicked"  (raiseJobEditViewEventEmitter)="onJobCloned($event)" ></cn-job-clone>
 
       <button type="submit" class="btn btn-primary btn-post-job" (click)="showHideModal()">Post Job</button>
-      <div class="dropup clone-job-menu">
-        <button class="btn btn-default dropdown-toggle btn-menu" type="button" data-toggle="dropdown"><span
-                class="glyphicon glyphicon-option-horizontal"></span></button>
-        <ul class="dropdown-menu">
-          <!--<li (click)="raiseCloneEvent(item)"><a>{{getLabel().CLONE_JOB}}</a></li>-->
-          <li><a>{{getLabel().CLONE_JOB}}</a></li>
-        </ul>
-      </div>
+      <a class="clone-job-link" (click)="raiseCloneEvent(item)">{{getLabel().CLONE_JOB}}</a>
     </div>
     <div class="button-group text-right" [hidden]="!isShowProficiency" *ngIf="role==='hiringManger'">
       <button type="submit" class="btn btn-primary btn-post-job" (click)="sendMailToRecruiter()" >Done</button>
@@ -116,7 +109,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <!--<button type="button" class="close" (click)="onCancel()">-->
-          <button type="button" class="close">
+          <button type="button" class="close" (click)="closeJob()">
             <span>&times;</span>
           </button>
           <h5 class="modal-title">{{getHeading().POST_JOB}}</h5>

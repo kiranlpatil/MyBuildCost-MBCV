@@ -131,8 +131,16 @@
   }
 }
 
-.clone-job-menu {
+.clone-job-link {
+  color: $text-color;
   float: left;
+  padding: 8px 20px;
+
+  &:hover,
+  &:focus,
+  &:active {
+    color: $theme-color;
+  }
 }
 
 .btn-menu {
