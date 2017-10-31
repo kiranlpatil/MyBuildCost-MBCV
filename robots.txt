@@ -1,10 +1,10 @@
 #allow twitter card
 User-agent: Twitterbot
-Allow: *
+Allow: /
 
 #allow twitter card
 User-agent:LinkedInBot
-Allow:*
+Allow:/
 
 # disallow all
 User-agent: *
