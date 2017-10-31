@@ -29,6 +29,9 @@ class CandidateSchema {
         type: Boolean,
         default: true
       },
+      lastUpdateAt: {
+        type:Date
+      },
       aboutMyself: {
         type: String
       },

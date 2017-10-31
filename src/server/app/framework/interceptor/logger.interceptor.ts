@@ -1,17 +1,21 @@
-import LoggerService = require("../shared/logger/LoggerService");
+import LoggerService = require('../shared/logger/LoggerService');
 var logger = require('../shared/logger/logger');
 
 export function logDetail(req: any, res: any, next: any) {
   let _loggerService: LoggerService = new LoggerService("API ENTRY");//TODO remove password from parm
-    var loggerObject = {
+  let tempBody = Object.assign({}, req.body);
+  if(tempBody && tempBody.password) {
+    tempBody.password='XXX';
+   }
+    let loggerObject = {
       'method': req.originalMethod,
       'url':req.originalUrl,
-      'body':req.body,
+      'body':tempBody,
       'params':req.params,
       'query':req.query,
       'inTime':new Date()
     };
-    var responseObject = JSON.stringify(loggerObject);
+    let responseObject = JSON.stringify(loggerObject);
   _loggerService.logInfo(responseObject);
   next();
 }

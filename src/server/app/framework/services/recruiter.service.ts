@@ -331,7 +331,6 @@ class RecruiterService {
   }
 
   retrieveWithLean(field: any, projection: any, callback: (error: any, result: any) => void) {
-    console.log("inside recruiter service");
     this.recruiterRepository.retrieveWithLean(field, projection, callback);
   }
   sendMailToAdvisor(field: any, callback: (error: any, result: any) => void) {

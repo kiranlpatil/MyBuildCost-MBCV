@@ -55,7 +55,6 @@ class UserService {
     this.userRepository.retrieve({'mobile_number': field.new_mobile_number, 'isActivated': true}, (err, res) => {
 
       if (err) {
-        console.log('err genrtotp retriv', err);
       } else if (res.length > 0 && (res[0]._id) !== field._id) {
         callback(new Error(Messages.MSG_ERROR_REGISTRATION_MOBILE_NUMBER), null);
       } else if (res.length === 0) {
@@ -117,7 +116,6 @@ class UserService {
         let auth = new AuthInterceptor();
         let token = auth.issueTokenWithUid(res[0]);
         let host = config.get('TplSeed.mail.host');
-        console.log('frgt pwd host', host);
         let link = host + 'reset_password?access_token=' + token + '&_id=' + res[0]._id;
         if (res[0].isCandidate === true) {
           this.mid_content = content.replace('$link$', link).replace('$first_name$', res[0].first_name).replace('$app_name$', this.APP_NAME);
@@ -290,6 +288,8 @@ class UserService {
     let mid_content = content.replace('$time$', current_Time).replace('$host$', config.get('TplSeed.mail.host')).replace('$reason$', errorInfo.reason).replace('$code$', errorInfo.code).replace('$message$', errorInfo.message);
     if(errorInfo.stackTrace) {
       mid_content=mid_content.replace('$error$',errorInfo.stackTrace.stack);
+    } else if(errorInfo.stack){
+      mid_content=mid_content.replace('$error$',errorInfo.stack);
     }
     let mailOptions = {
       from: config.get('TplSeed.mail.MAIL_SENDER'),

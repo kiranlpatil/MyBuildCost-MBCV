@@ -234,12 +234,7 @@ export class EmploymentHistoryComponent {
     this.highlightedSection.name = 'AcademicDetails';
     this.highlightedSection.isDisable = false;
     window.scrollTo(0, 0);
-      
-    let item:any = {'profile_update_tracking':CandidateProfileUpdateTrack.STEP_IS_ENTER_EMPLOYMENT_HISTORY};
-      this.profileCreatorService.updateCandidateField(item).subscribe(
-        res => {
-          console.log('success');
-        }, error => this.errorService.onError(error));
+    this.profileCreatorService.updateStepTracking(CandidateProfileUpdateTrack.STEP_IS_ENTER_EMPLOYMENT_HISTORY);
   }
 
   onSave() {

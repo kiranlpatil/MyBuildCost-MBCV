@@ -78,10 +78,10 @@ export function cnextInit(app: express.Application) {
 
   // API for Uses Tracking
   app.put('/api/usageTracking',loggerInterceptor.logDetail, jobProfileController.createUsesTracking);
-  app.get('/api/usageDetails',loggerInterceptor.logDetail, this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, adminController.getUsageDetails);
-  
+  app.get('/api/usageDetails',loggerInterceptor.logDetail, this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, adminController.exportUsageDetails);
+
   //Api for update candidate field
-  app.put('/api/candidate/fieldUpdate/:id', this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, candidateController.updateField);
+  app.put('/api/candidate/fieldUpdate/:id',loggerInterceptor.logDetail, this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, candidateController.updateField);
 
   app.use(sharedService.errorHandler);
 }

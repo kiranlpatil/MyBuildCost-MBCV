@@ -20,6 +20,10 @@ export function create(req: express.Request, res: express.Response, next: any) {
 
     var newUser: RecruiterModel = <RecruiterModel>req.body;
     var recruiterService = new RecruiterService();
+/*
+    let mailChimpMailerService = new MailChimpMailerService();
+*/
+
     recruiterService.createUser(newUser, (error, result) => {
       if (error) {
         if (error == Messages.MSG_ERROR_CHECK_EMAIL_PRESENT) {
@@ -27,7 +31,7 @@ export function create(req: express.Request, res: express.Response, next: any) {
             reason: Messages.MSG_ERROR_RSN_EXISTING_USER,
             message: Messages.MSG_ERROR_VERIFY_ACCOUNT,
             stackTrace: new Error(),
-            code: 403
+            code: 400
           });
         }
         else if (error == Messages.MSG_ERROR_CHECK_MOBILE_PRESENT) {
@@ -35,7 +39,7 @@ export function create(req: express.Request, res: express.Response, next: any) {
             reason: Messages.MSG_ERROR_RSN_EXISTING_USER,
             message: Messages.MSG_ERROR_REGISTRATION_MOBILE_NUMBER,
             stackTrace: new Error(),
-            code: 403
+            code: 400
           });
         }
         else {
@@ -43,13 +47,17 @@ export function create(req: express.Request, res: express.Response, next: any) {
             reason: Messages.MSG_ERROR_RSN_EXISTING_USER,
             message: Messages.MSG_ERROR_USER_WITH_EMAIL_PRESENT,
             stackTrace: new Error(),
-            code: 403
+            code: 400
           });
         }
       }
       else {
         var auth: AuthInterceptor = new AuthInterceptor();
         var token = auth.issueTokenWithUid(result);
+/*
+        mailChimpMailerService.onRecruiterSignUpSuccess(newUser);
+*/
+
         res.status(200).send({
           'status': Messages.STATUS_SUCCESS,
           'data': {
@@ -68,7 +76,7 @@ export function create(req: express.Request, res: express.Response, next: any) {
     });
   }
   catch (e) {
-    res.status(403).send({'status': Messages.STATUS_ERROR, 'error_message': e.message});
+    next({reason: e.message, message: e.message, stackTrace: new Error(), code: 500});
   }
 }
 

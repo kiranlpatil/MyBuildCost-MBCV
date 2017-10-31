@@ -19,21 +19,14 @@ class SendMessageService {
   }
 
   sendMessage(mobileNo: any, callback: any) {
-
-    console.log("Send sms on", mobileNo);
     var otp = Math.floor((Math.random() * 99999) + 100000);
-    console.log("otp is", otp);
-    console.log('sender id', senderId);
-
     var message = "The One Time Password(OTP) for " + " " + this.app_name + " " + "account is" + " " + otp + " " + ".Use this OTP to verify your account. ";
-    console.log("msg sent to user:", message);
     msg91.send(mobileNo, message, function (err: any, response: any) {
       if (err) {
         callback(new Error(Messages.MSG_ERROR_MESSAGE_SENDING), null);
       }
       else {
         callback(null, response);
-        console.log(response);
       }
     });
   }
@@ -46,7 +39,6 @@ class SendMessageService {
     console.log("msg sent to user:", message);
     msg91.send(Data.mobileNo, message, function (err: any, response: any) {
       if (err) {
-        console.log("message sent error", err);
         callback(new Error(Messages.MSG_ERROR_MESSAGE_SENDING), null);
       }
       else {
@@ -57,9 +49,7 @@ class SendMessageService {
 
   sendChangeMobileMessage(Data: any, callback: any) {
 
-    console.log('Send sms on', Data.mobileNo);
     let message = 'The One Time Password(OTP) to change your number from '+ Data.current_mobile_number +' to '+ Data.mobileNo +' of your ' + this.app_name +' account is '+ Data.otp + '.Use this OTP to complete verification.';
-    console.log('msg sent to user:', message);
     msg91.send(Data.mobileNo, message, function (err: any, response: any) {
       if (err) {
         callback(new Error(Messages.MSG_ERROR_MESSAGE_SENDING), null);

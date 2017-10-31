@@ -92,11 +92,7 @@ export class MoreAboutMyselfComponent implements OnInit {
     this.onComplete.emit(this.candidate.aboutMyself);
   }
   onNext() {
-      let item:any = {'profile_update_tracking':CandidateProfileUpdateTrack.STEP_IS_ENTER_ABOUT_MYSELF};
-      this.profileCreatorService.updateCandidateField(item).subscribe(
-        res => {
-          console.log('success');
-        }, error => this.errorService.onError(error));
+    this.profileCreatorService.updateStepTracking(CandidateProfileUpdateTrack.STEP_IS_ENTER_ABOUT_MYSELF);
     this.isGuidedTourImgRequire();
   }
 

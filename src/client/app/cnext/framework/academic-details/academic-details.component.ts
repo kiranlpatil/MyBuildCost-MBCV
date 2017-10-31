@@ -201,12 +201,7 @@ export class AcademicDetailComponent implements OnInit, OnChanges, AfterViewChec
   }
 
   onNext() {
-      let item:any = {'profile_update_tracking':CandidateProfileUpdateTrack.STEP_IS_ENTER_ACADEMIC_DETAILS};
-      this.profileCreatorService.updateCandidateField(item).subscribe(
-        res => {
-          console.log('success');
-        }, error => this.errorService.onError(error));
-    
+    this.profileCreatorService.updateStepTracking(CandidateProfileUpdateTrack.STEP_IS_ENTER_ACADEMIC_DETAILS);
     this.onComplete.emit();
     this.highlightedSection.name = 'Certification';
     this.highlightedSection.isDisable = false;

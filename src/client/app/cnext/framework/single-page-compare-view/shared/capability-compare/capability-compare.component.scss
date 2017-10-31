@@ -77,24 +77,25 @@
   }
   .complexity-name {
     display: block;
+    margin-bottom: 3px;
   }
 }
 
 .exact:hover {
   .complexity-scenarios-description {
-    white-space: inherit;
-    position: absolute;
     background: $exact-bg;
-    padding: 5px;
+    border: 1px solid $white;
     bottom: inherit;
-    min-height: 59px;
-    width: 280px;
-    left: 0;
     box-shadow: 0 0 4px 0 $hover-shadow;
     font-size: 12px;
-    z-index: 999;
+    left: 0;
+    min-height: 59px;
+    padding: 5px 5px 5px 30px;
+    position: absolute;
     top: 0;
-    border: 1px solid $white;
+    white-space: inherit;
+    width: 280px;
+    z-index: 999;
     span {
       max-width: initial;
       overflow: inherit;
@@ -112,6 +113,7 @@
   }
   .complexity-name {
     display: block;
+    margin-bottom: 3px;
   }
 }
 
@@ -135,19 +137,19 @@
 
 .above:hover {
   .complexity-scenarios-description {
-    white-space: inherit;
-    position: absolute;
     background: $higher-bg;
-    padding: 5px;
+    border: 1px solid $white;
     bottom: inherit;
-    min-height: 59px;
-    width: 280px;
-    left: 0;
     box-shadow: 0 0 4px 0 $hover-shadow;
     font-size: 12px;
-    z-index: 999;
+    left: 0;
+    min-height: 59px;
+    padding: 5px 5px 5px 30px;
+    position: absolute;
     top: 0;
-    border: 1px solid $white;
+    white-space: inherit;
+    width: 280px;
+    z-index: 999;
     span {
       max-width: initial;
       overflow: inherit;
@@ -165,6 +167,7 @@
   }
   .complexity-name {
     display: block;
+    margin-bottom: 3px;
   }
 }
 
@@ -188,19 +191,19 @@
 
 .below:hover {
   .complexity-scenarios-description {
-    white-space: inherit;
-    position: absolute;
     background: $less-bg;
-    padding: 5px;
+    border: 1px solid $white;
     bottom: inherit;
-    min-height: 59px;
-    width: 280px;
-    left: 0;
     box-shadow: 0 0 4px 0 $hover-shadow;
     font-size: 12px;
-    z-index: 999;
+    left: 0;
+    min-height: 59px;
+    padding: 5px 5px 5px 30px;
+    position: absolute;
     top: 0;
-    border: 1px solid $white;
+    white-space: inherit;
+    width: 280px;
+    z-index: 999;
     span {
       max-width: initial;
       overflow: inherit;
@@ -220,6 +223,7 @@
   }
   .complexity-name {
     display: block;
+    margin-bottom: 3px;
   }
 }
 
@@ -243,19 +247,19 @@
 
 .missing:hover {
   .complexity-scenarios-description {
-    white-space: inherit;
-    position: absolute;
     background: $missmatch-bg;
-    padding: 5px;
-    bottom: inherit;
-    min-height: 59px;
-    width: 280px;
-    left: 0;
-    box-shadow: 0 0 4px 0 $hover-shadow;
-    font-size: 12px;
-    z-index: 999;
-    top: 0;
     border: 1px solid $white;
+    box-shadow: 0 0 4px 0 $hover-shadow;
+    bottom: inherit;
+    font-size: 12px;
+    left: 0;
+    min-height: 59px;
+    padding: 5px 5px 5px 30px;
+    position: absolute;
+    top: 0;
+    white-space: inherit;
+    width: 280px;
+    z-index: 999;
     span {
       max-width: initial;
       overflow: inherit;
@@ -273,6 +277,7 @@
   }
   .complexity-name {
     display: block;
+    margin-bottom: 3px;
   }
 }
 

@@ -255,8 +255,10 @@ export class JobPosterComponent implements OnInit, OnChanges {
         res => {
           this.messageService.message(new Message(Messages.MSG_SUCCESS_FOR_HIRING_MANAGER_JOB_CREATION_STATUS));
           window.localStorage.clear();
-          let host = AppSettings.HTTP_CLIENT + window.location.hostname;
-          window.location.href = host;
+          setTimeout(() => {
+            let host = AppSettings.HTTP_CLIENT + window.location.hostname;
+            window.location.href = host;
+            }, 5002);
         },
         error => (this.errorService.onError(error)));
   }

@@ -10,6 +10,7 @@ import ResponseService = require('../shared/response.service');
 import CandidateService = require('../services/candidate.service');
 import adminController= require('./admin.controller');
 import RecruiterModel = require('../dataaccess/model/recruiter.model');
+import { MailChimpMailerService } from '../services/mailchimp-mailer.service';
 
 var bcrypt = require('bcrypt');
 
@@ -30,7 +31,7 @@ export function login(req: express.Request, res: express.Response, next: any) {
               reason: Messages.MSG_ERROR_RSN_INVALID_REGISTRATION_STATUS,
               message: Messages.MSG_ERROR_VERIFY_CANDIDATE_ACCOUNT,
               stackTrace: new Error(),
-              code: 403
+              code: 400
             });
           } else {
             if (isSame) {
@@ -119,7 +120,7 @@ export function login(req: express.Request, res: express.Response, next: any) {
                 reason: Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
                 message: Messages.MSG_ERROR_WRONG_PASSWORD,
                 stackTrace: new Error(),
-                code: 403
+                code: 400
               });
             }
           }
@@ -132,7 +133,7 @@ export function login(req: express.Request, res: express.Response, next: any) {
               reason: Messages.MSG_ERROR_RSN_INVALID_REGISTRATION_STATUS,
               message: Messages.MSG_ERROR_VERIFY_CANDIDATE_ACCOUNT,
               stackTrace: new Error(),
-              code: 403
+              code: 400
             });
           } else {
             if (isPassSame) {
@@ -141,14 +142,14 @@ export function login(req: express.Request, res: express.Response, next: any) {
                   reason: Messages.MSG_ERROR_RSN_INVALID_REGISTRATION_STATUS,
                   message: Messages.MSG_ERROR_VERIFY_CANDIDATE_ACCOUNT,
                   stackTrace: new Error(),
-                  code: 403
+                  code: 400
                 });
               } else {
                 next({
                   reason: Messages.MSG_ERROR_RSN_INVALID_REGISTRATION_STATUS,
                   message: Messages.MSG_ERROR_VERIFY_ACCOUNT,
                   stackTrace: new Error(),
-                  code: 403
+                  code: 400
                 });
               }
             } else {
@@ -156,7 +157,7 @@ export function login(req: express.Request, res: express.Response, next: any) {
                 reason: Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
                 message: Messages.MSG_ERROR_WRONG_PASSWORD,
                 stackTrace: new Error(),
-                code: 403
+                code: 400
               });
             }
           }
@@ -167,7 +168,7 @@ export function login(req: express.Request, res: express.Response, next: any) {
           reason: Messages.MSG_ERROR_RSN_USER_NOT_FOUND,
           message: Messages.MSG_ERROR_USER_NOT_PRESENT,
           stackTrace: new Error(),
-          code: 403
+          code: 400
         });
       }
     });
@@ -176,7 +177,7 @@ export function login(req: express.Request, res: express.Response, next: any) {
       reason: e.message,
       message: e.message,
       stackTrace: new Error(),
-      code: 403
+      code: 500
     });
   }
 }
@@ -1022,6 +1023,8 @@ export function verifyOtp(req: express.Request, res: express.Response, next: any
     var params = req.body; //OTP
     //  delete params.access_token;
     var userService = new UserService();
+    let mailChimpMailerService = new MailChimpMailerService();
+
     var query = {"_id": user._id, "isActivated": false};
     var updateData = {"isActivated": true};
     if (user.otp === params.otp) {
@@ -1034,6 +1037,8 @@ export function verifyOtp(req: express.Request, res: express.Response, next: any
             "status": "Success",
             "data": {"message": "User Account verified successfully"}
           });
+          mailChimpMailerService.onCandidateSignSuccess(result);
+
         }
       });
     }

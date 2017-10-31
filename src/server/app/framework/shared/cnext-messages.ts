@@ -1,5 +1,4 @@
 class CNextMessages {
-
   public static MSG_NOT_FOUND_ANY_RECORD_OF_INDUSTRY: string = 'Industries are not found';
   public static INDUSTRY_CANDIDATE_MESSAGE: string = "Saving industry details. Once saved, you cannot change it for 3 months.";
   public static INDUSTRY_RECRUITER_MESSAGE: string = "Saving industry details. Once saved, you cannot change it for 3 months.";
@@ -7,7 +6,6 @@ class CNextMessages {
   public static PROFICIENCY_NOT_RETRIVED: string = "Retriving proficiency is failed";
   public static PROBLEM_IN_CREATING_INDUSTRY: string = "Industry is not inserted in to Database";
   public static PROBLEM_IN_RETRIEVE_JOB_PROFILE: string = "Problem in retrieving the job profile";
-
 }
 export=CNextMessages;
 

@@ -33,7 +33,6 @@ class CandidateService {
   }
 
   createUser(item: any, callback: (error: any, result: any) => void) {
-    console.log('USer is', item);
     this.userRepository.retrieve({$or: [{'email': item.email}, {'mobile_number': item.mobile_number}]}, (err, res) => {
       if (err) {
         callback(new Error(err), null);
@@ -226,7 +225,7 @@ class CandidateService {
                       newComplexity.name = complexity.name;
                       newComplexity.sort_order = complexity.sort_order;
                       newComplexity.code = complexity.code;
-                      if(complexity_note_matrix[cap] !== undefined) {
+                      if(complexity_note_matrix && complexity_note_matrix[cap] !== undefined) {
                         newComplexity.note = complexity_note_matrix[cap];
                       }
                       if (complexity.questionForCandidate !== undefined && complexity.questionForCandidate !== null && complexity.questionForCandidate !== '') {
@@ -266,7 +265,7 @@ class CandidateService {
                         newComplexity.name = complexity.name;
                         newComplexity.sort_order = complexity.sort_order;
                         newComplexity.code = complexity.code;
-                        if(complexity_note_matrix[cap] !== undefined) {
+                        if(complexity_note_matrix && complexity_note_matrix[cap] !== undefined) {
                           newComplexity.note = complexity_note_matrix[cap];
                         }
                         if (complexity.questionForCandidate !== undefined && complexity.questionForCandidate !== null && complexity.questionForCandidate !== '') {
@@ -318,7 +317,7 @@ class CandidateService {
                       newComplexity.name = complexity.name;
                       newComplexity.sort_order = complexity.sort_order;
                       newComplexity.code = complexity.code;
-                      if(complexity_note_matrix[cap] !== undefined) {
+                      if(complexity_note_matrix && complexity_note_matrix[cap] !== undefined) {
                         newComplexity.note = complexity_note_matrix[cap];
                       }
                       if (complexity.questionForCandidate !== undefined && complexity.questionForCandidate !== null && complexity.questionForCandidate !== '') {
@@ -358,7 +357,7 @@ class CandidateService {
                         newComplexity.name = complexity.name;
                         newComplexity.sort_order = complexity.sort_order;
                         newComplexity.code = complexity.code;
-                        if(complexity_note_matrix[cap] !== undefined) {
+                        if(complexity_note_matrix && complexity_note_matrix[cap] !== undefined) {
                           newComplexity.note = complexity_note_matrix[cap];
                         }
                         if (complexity.questionForCandidate !== undefined && complexity.questionForCandidate !== null && complexity.questionForCandidate !== '') {
@@ -672,7 +671,6 @@ class CandidateService {
     var result = orderKeys(keyValueCapability, function (a: any, b: any) {
       return a.main_sort_order - b.main_sort_order;
     }); // => ["Elem4", "Elem2", "Elem1", "Elem3"]
-    // console.log("sample result"+ result);
     let responseToReturn: any = {};
     for (let i of result) {
       responseToReturn[i] = keyValueCapability[i];
@@ -801,9 +799,11 @@ class CandidateService {
   }
 
   getCapabilityMatrixWithNotes(capability_matrix: any,complexity_note_matrix:any) {
-    for (let cap in complexity_note_matrix) {
-      if(capability_matrix[cap]) {
-        capability_matrix[cap].complexityNote = complexity_note_matrix[cap];
+    if(complexity_note_matrix) {
+      for (let cap in complexity_note_matrix) {
+        if(capability_matrix[cap]) {
+          capability_matrix[cap].complexityNote = complexity_note_matrix[cap];
+        }
       }
     }
   return capability_matrix;

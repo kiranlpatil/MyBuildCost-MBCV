@@ -14,8 +14,9 @@ export function errorHandler(err: any, req: any, res: any, next: any) {
     };
     var responseObject = JSON.stringify(errObject);
     _loggerService.logError(err);
-    mailToAdmin(err);
-    console.log('responseObject in client errorHandler:', responseObject);
+    if(err.code !== 400) {
+      mailToAdmin(err);
+    }
     res.status(err.code).send(responseObject);
   } else {
     var errorObject:any = {
