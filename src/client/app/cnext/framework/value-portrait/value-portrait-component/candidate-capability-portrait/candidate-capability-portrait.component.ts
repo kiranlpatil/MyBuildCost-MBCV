@@ -13,6 +13,7 @@ import {Label} from "../../../../../shared/constants";
 export class CandidateCapabilityPortrait implements OnChanges {
 
   @Input() candidate: Candidate;
+  @Input() isMiniView: boolean;
 
   private showMore: boolean = false;
   showToggleButton: boolean = false;
