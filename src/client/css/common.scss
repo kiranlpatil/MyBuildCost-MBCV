@@ -48,6 +48,13 @@ $missmatch-bg: #ffc3bb;
 $golden-star: #e2c702;
 $golden-star-shadow: #42441d;
 $print-golden-star: #927b01;
+$orange3: #fac51c;
+$light-orange: #fba026;
+$dark-orange: #f48c37;
+$light-red: #eb6b56;
+$light-red1: #e14938;
+$dark-red1: #b8312f;
+$light-gray-bg: #d1d1d1;
 
 .btn-logout {
   margin-top: 15px;
@@ -876,6 +883,87 @@ cn-control-messages {
 
   .btn-twitter {
     background: url(../assets/c-next/card-view/sprite.png) no-repeat -75px -804px;
+  }
+}
+
+.mini-value-portrait-section {
+  .greenCircle {
+    background: #419441;
+    .inner-circle {
+      span {
+        color: $white;
+      }
+    }
+  }
+  .grayBox {
+    background: $light-gray-bg;
+    text-align: center;
+  }
+  .about-myself-btn {
+    text-align: center;
+  }
+  .value-portrait-candidate-info-block {
+    ul {
+      li {
+        div {
+          background: $light-gray-bg !important;
+        }
+      }
+    }
+  }
+  .value-portrait-candidate-info-block {
+    ul {
+      li {
+        div.current-location-tabs.grayBox {
+          background: $orange3 !important;
+        }
+      }
+    }
+  }
+  .value-portrait-candidate-info-block {
+    ul {
+      li {
+        div.experience-level-tabs.grayBox {
+          background: $light-orange !important;
+        }
+      }
+    }
+  }
+  .value-portrait-candidate-info-block {
+    ul {
+      li {
+        div.education-tabs.grayBox {
+          background: $dark-orange !important;
+        }
+      }
+    }
+  }
+  .value-portrait-candidate-info-block {
+    ul {
+      li {
+        div.employment-tabs.grayBox {
+          background: $light-red !important;
+        }
+      }
+    }
+  }
+  .value-portrait-candidate-info-block {
+    ul {
+      li {
+        div.certification-tabs.grayBox {
+          background: $light-red1 !important;
+        }
+      }
+    }
+  }
+  .value-portrait-candidate-info-block {
+    ul {
+      li {
+        div.awards-tabs.grayBox {
+          background: $dark-red1 !important;
+        }
+      }
+    }
   }
 }
 
