@@ -479,6 +479,7 @@ export class API {
   public static FAQ = '/blog/index.php/faq/';
   public static ACCEPT_TERMS = '/terms-and-conditions.php';
   public static COUNT_OF_USERS = 'countofusers';
+  public static FEEDBACK_QUESTIONS = 'feedbackQuestions';
 
 }
 

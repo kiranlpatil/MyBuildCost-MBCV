@@ -163,7 +163,8 @@ import {JobCloseComponent} from "./cnext/framework/job-close/job-close.component
 import {ClosedJobFilter} from "./cnext/framework/filters/closed-job-filter.pipe";
 import {JobCloseComponentService} from "./cnext/framework/job-close/job-close.component.service";
 import {ComplexityAnsweredService} from "./cnext/framework/complexity-answered.service";
-import {CandidateFeedbackComponent} from "./cnext/framework/candidate-feedback/candidate-feedback.component";
+import {UserFeedbackComponent} from "./cnext/framework/user-feedback/user-feedback.component";
+import {UserFeedbackComponentService} from "./cnext/framework/user-feedback/user-feedback.component.service";
 //C-NEXT IMPORTS
 
 
@@ -282,7 +283,7 @@ import {CandidateFeedbackComponent} from "./cnext/framework/candidate-feedback/c
     ShareContainerComponent,
     PrintScreenComponent,
     JobCloseComponent,
-    CandidateFeedbackComponent
+    UserFeedbackComponent
   ],
 
   providers: [
@@ -352,7 +353,8 @@ import {CandidateFeedbackComponent} from "./cnext/framework/candidate-feedback/c
     Title,
     ShareContainerService,
     JobCloseComponentService,
-    ComplexityAnsweredService
+    ComplexityAnsweredService,
+    UserFeedbackComponentService
   ],
   bootstrap: [AppComponent]
 })
