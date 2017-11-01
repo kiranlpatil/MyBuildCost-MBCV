@@ -37,3 +37,14 @@
     }
   }
 }
+
+.candidate-work-area {
+  h4.title {
+    padding-left: 0;
+    width: 100% !important;
+  }
+}
+
+.candidate-work-area-btn {
+  width: calc(100% - 395px) !important;
+}

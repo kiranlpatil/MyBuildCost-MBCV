@@ -324,6 +324,7 @@ export class Messages {
 
   public static CLICK_BELOW_FOR_PREVIEW_MSG = 'Your Value Portrait is getting ready<br/>' +
   'Click below to Preview';
+  public static JOBS_AVALLABLE_MESSAGE = 'Jobs are avallable in your industry.';
 }
 export class AdminPanel {
   public static PUBLIC_PROFILE='Profile is public';
