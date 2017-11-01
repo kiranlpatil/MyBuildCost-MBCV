@@ -6,6 +6,8 @@ import {CandidateProfileService} from "../candidate-profile/candidate-profile.se
 import {ErrorService} from "../../../shared/services/error.service";
 import {GuidedTourService} from "../guided-tour.service";
 import {LocalStorageService} from "../../../shared/services/localstorage.service";
+import {Router} from "@angular/router";
+import {ComplexityAnsweredService} from "../complexity-answered.service";
 
 @Component({
   moduleId: module.id,
@@ -32,10 +34,13 @@ export class ProficienciesComponent {
   guidedTourImgOverlayScreensKeySkills: string;
   private guidedTourImgOverlayScreensKeySkillsPath: string;
   isCandidate: boolean = false;
+  userId: string;
+
   constructor(private proficiencyDetailService: ProficiencyDetailsService,
               private errorService:ErrorService,
               private guidedTourService: GuidedTourService,
-              private profileCreatorService: CandidateProfileService) {
+              private profileCreatorService: CandidateProfileService,
+              private _router: Router, private complexityAnsweredService: ComplexityAnsweredService) {
     this.proficiencyDetailService.makeCall$.subscribe(
       data => {
         if (data) {
@@ -60,13 +65,14 @@ export class ProficienciesComponent {
 
   ngOnInit() {
     this.maxProficiencies = ValueConstant.MAX_PROFECIENCES;
+    this.userId=LocalStorageService.getLocalValue(LocalStorage.USER_ID);
   }
   private showButton: boolean = true;
   private submitStatus: boolean;
   private requiredKeySkillsValidationMessage = Messages.MSG_ERROR_VALIDATION_KEYSKILLS_REQUIRED;
   private maxKeySkillsValidationMessage = Messages.MSG_ERROR_VALIDATION_MAX_SKILLS_CROSSED + ValueConstant.MAX_PROFECIENCES + Messages.MSG_ERROR_VALIDATION_MAX_PROFICIENCIES;
 
-  onProficiencyComplete(proficiency: string[]) {
+  onProficiencyComplete(proficiency: string[]) { debugger
     /*if (proficiency.length > 0) {
      this.disablebutton = false;
      } else {
@@ -74,6 +80,7 @@ export class ProficienciesComponent {
      }*/
     this.submitStatus = false;
     this.onSelect.emit(proficiency);
+    this.complexityAnsweredService.change(true);
   }
 
   isGuidedTourImgRequire() {
@@ -95,12 +102,13 @@ export class ProficienciesComponent {
       );
   }
 
-  onNext() {
+  onNext() { 
     if (this.choosedproficiencies.length === 0) {
       this.submitStatus = true;
       return;
     }
     this.onComplete.emit();
+    this.complexityAnsweredService.change(true);
     this.highlightedSection.name = 'IndustryExposure';
     this.highlightedSection.isDisable = false;
     window.scrollTo(0, 0);
@@ -139,5 +147,14 @@ export class ProficienciesComponent {
 
   getMessage() {
     return Messages;
+  }
+
+  navigateToWithId(nav:string) {
+    var userId = LocalStorageService.getLocalValue(LocalStorage.USER_ID);
+    if (nav !== undefined) {
+      let x = nav+'/'+ userId + '/create';
+      // this._router.navigate([nav, userId]);
+      this._router.navigate([x]);
+    }
   }
 }

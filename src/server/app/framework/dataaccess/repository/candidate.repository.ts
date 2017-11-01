@@ -63,7 +63,7 @@ class CandidateRepository extends RepositoryBase<ICandidate> {
         }
       }
       for(let cap in jobProfile.capability_matrix) {
-        if (jobProfile.complexity_musthave_matrix == -1 || jobProfile.complexity_musthave_matrix == undefined) {
+        if (jobProfile.complexity_musthave_matrix == -1 || jobProfile.complexity_musthave_matrix == undefined || jobProfile.capability_matrix[cap] == 0) {
           candidate_card_view.complexityIsMustHave = false;
         } else if(jobProfile.complexity_musthave_matrix[cap]) {
           if(jobProfile.capability_matrix[cap] == candidate.capability_matrix[cap]) {

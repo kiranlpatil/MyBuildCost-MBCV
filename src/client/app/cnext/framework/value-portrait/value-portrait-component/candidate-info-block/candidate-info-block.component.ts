@@ -11,5 +11,7 @@ import {Candidate} from "../../../../../user/models/candidate";
 export class CandidateInfoBlock {
 
   @Input() candidate: Candidate;
+  @Input() isMiniView: Candidate;
+  
 
 }

@@ -26,8 +26,8 @@
   <div class="section-container clearfix profeiciency-domain" *ngIf="highlightedSection.name=='Proficiencies'">
 
     <div class="main-content  edit-modal-content clearfix edit-keyskill" proficiencydetails>
-      <h4 class="heading">Keywords that describes your area of expertise</h4>
-      <div class="scrollable-content">
+      <div class="scrollable-content proficiencies-left-section col-md-7 col-xs-12">
+        <h4 class="heading">Keywords that describes your area of expertise</h4>
         <div class="col-sm-12 no-padding">
           <label>Add Key Skills</label>
         </div>
@@ -54,8 +54,14 @@
         </button>
       </div>
 
-      <cn-tool-tip [message]="tooltipMessage"></cn-tool-tip>
-    </div>
+      <div class="col-xs-5">
+        <div class="bg-empty-class col-xs-5"></div>
+        <div class="mini-value-portrait-section" *ngIf="isCandidate">
+          <h3 [innerHTML]="getMessage().CLICK_BELOW_FOR_PREVIEW_MSG"></h3>
+          <cn-value-portrait (click)="navigateToWithId('/value-portrait');" [isShareView]="false" [isMiniView]="true" [userId]="userId" *ngIf="isCandidate"></cn-value-portrait>
+        </div>
+        <cn-tool-tip id="candidate-tooltip" [message]="tooltipMessage"></cn-tool-tip>
+      </div>
   </div>
 
   <div class="section-container clearfix profeiciency-domain" *ngIf="highlightedSection.name !='Proficiencies'">
