@@ -101,6 +101,7 @@ export class CapabilitiesComponent {
   }
 
   selectedCapability(selectedRole: Role, selectedCapability: Capability, event: any) {
+    selectedCapability.complexities=[];
     this.isValid = true;
     this.isInfoMessage = false;
     this.validationMessage = '';
