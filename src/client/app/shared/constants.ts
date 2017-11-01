@@ -705,7 +705,7 @@ export class Label {
   public static SHOW_CLOSED_JOBS: string = 'Show Closed Jobs';
   public static POST_JOB: string = 'POST JOB';
   public static CLOSED_JOB: string = 'CLOSED JOB';
-  public static MUST_TO_HAVE_FILTER_LABEL: string = 'Hide candidates missing must to have capabilities';
+  public static MUST_TO_HAVE_FILTER_LABEL: string = 'Show candidate with must have complexity';
   public static PROFILE_VISIBILITY: string = 'Profile Visibility for Recruiter';
   public static SUBMIT_PROFILE: string = 'Submit Your Profile';
 }

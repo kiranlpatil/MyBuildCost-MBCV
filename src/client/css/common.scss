@@ -45,9 +45,7 @@ $exact-bg: #edf7c4;
 $higher-bg: #b1d669;
 $less-bg: #ffe180;
 $missmatch-bg: #ffc3bb;
-$golden-star: #e2c702;
-$golden-star-shadow: #42441d;
-$print-golden-star: #927b01;
+$golden-star: #9a8a17;
 $orange3: #fac51c;
 $light-orange: #fba026;
 $dark-orange: #f48c37;
@@ -141,7 +139,6 @@ $active-green: #419441;
     content: "\2605";
     left: 0;
     position: absolute;
-    text-shadow: 0 0 1px $golden-star-shadow;
     top: -5px;
   }
 }
@@ -150,7 +147,6 @@ $active-green: #419441;
   color: $golden-star;
   font-size: 20px;
   margin: 0;
-  text-shadow: 0 0 1px $golden-star-shadow;
 
   &:before {
     content: "\2605";
@@ -166,7 +162,6 @@ $active-green: #419441;
   font-size: 17px !important;
   margin: 0;
   padding-right: 3px;
-  text-shadow: 0 0 1px #42441d;
 }
 
 .required-field {
