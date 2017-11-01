@@ -561,8 +561,8 @@ export class Tooltip {
   public static APPLIED_JOB_MESSAGE: string = 'Presently you have not applied for any job.';
   public static NOT_INTRESTED_JOB_MESSAGE: string = 'Currently you have not marked any jobs as "Not Interested".';
   public static PROFILE_INFO_VISIBILIT_SET_TO_NO: string = 'If "No", your profile will not be visible to recruiter.' +
-    'If you are on the lookout of job change, it is recommended to keep this setting to "Yes". You can change this setting later.';
-  public static PROFILE_INFO_VISIBILIT_SET_TO_YES: string = 'If "Yes", your profile will be available in employer search.';
+    'If you are on the lookout of job change, it is recommended to keep this setting to "Yes". You can change this settings at anytime.';
+  public static PROFILE_INFO_VISIBILIT_SET_TO_YES: string = 'If "Yes", your profile will be available in employer search. You can change this settings at anytime.';
   public static CANDIDATE_CAPABILITY_TOOLTIP_1: string = 'Select those capabilities that describe your current ' +
       'strength. These capabilities would define you in the eyes of the recruiter and help you align with the best ' +
       'suitable job.';
@@ -706,7 +706,7 @@ export class Label {
   public static SHOW_CLOSED_JOBS: string = 'Show Closed Jobs';
   public static POST_JOB: string = 'POST JOB';
   public static CLOSED_JOB: string = 'CLOSED JOB';
-  public static MUST_TO_HAVE_FILTER_LABEL: string = 'Hide candidates missing must to have capabilities';
+  public static MUST_TO_HAVE_FILTER_LABEL: string = 'Show candidate with must have complexity';
   public static PROFILE_VISIBILITY: string = 'Profile Visibility for Recruiter';
   public static SUBMIT_PROFILE: string = 'Submit Your Profile';
 }

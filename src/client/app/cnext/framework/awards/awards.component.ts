@@ -197,6 +197,7 @@ export class AwardsComponent implements OnInit {
   }
 
   onNext() {
+    this.guidedTourStatus = this.guidedTourService.updateTourStatus(ImagePath.CANDIDATE_OERLAY_SCREENS_PROFILE,true);
     this.isGuidedTourImgRequire();
     window.scrollTo(0, 0);
     this.profileCreatorService.updateStepTracking(CandidateProfileUpdateTrack.STEP_IS_ENTER_AWARDS_DETAILS);

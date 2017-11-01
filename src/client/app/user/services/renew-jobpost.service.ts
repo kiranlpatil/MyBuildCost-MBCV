@@ -37,7 +37,10 @@ export class RenewJobPostService {
       this.selectedJobProfile.expiringDate.setDate(this.selectedJobProfile.expiringDate.getDate() + 30);
       this.updateJob();
     }else {
-      this.messageService.message(new Message(Messages.UNABLE_TO_RENEW_JOB_POST_MSG));
+      let message = new Message();
+      message.isError=true;
+      message.error_msg=Messages.UNABLE_TO_RENEW_JOB_POST_MSG;
+      this.messageService.message(message);
     }
 
   }
