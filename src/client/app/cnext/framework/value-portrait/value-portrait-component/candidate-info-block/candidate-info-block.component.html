@@ -17,7 +17,7 @@
       </div>
     </li>
     <li>
-      <div class="education-tabs info-block-tabs dropdown-toggle" [class.grayBox]="!candidate.academics.length == 0 && isMiniView">
+      <div class="education-tabs info-block-tabs dropdown-toggle" [class.grayBox]="candidate.academics.length != 0 && isMiniView">
         <span id="education" data-toggle="dropdown"> Education </span>
         <div class="dropdown-menu tooltip-content2" role="education" aria-labelledby="education">
           <div *ngFor="let academic of candidate.academics" class="line-block">
@@ -35,7 +35,7 @@
       </div>
     </li>
     <li>
-      <div class="employment-tabs info-block-tabs dropdown-toggle" [class.grayBox]="!candidate.employmentHistory.length == 0 && isMiniView">
+      <div class="employment-tabs info-block-tabs dropdown-toggle" [class.grayBox]="candidate.employmentHistory.length != 0 && isMiniView">
         <span id="employment" data-toggle="dropdown"> Employment </span>
         <div class="dropdown-menu tooltip-content2" role="employment" aria-labelledby="employment">
           <div *ngFor="let history of candidate.employmentHistory" class="line-block">
@@ -54,7 +54,7 @@
       </div>
     </li>
     <li>
-      <div class="certification-tabs info-block-tabs dropdown-toggle" [class.grayBox]="!candidate.certifications.length == 0 && isMiniView">
+      <div class="certification-tabs info-block-tabs dropdown-toggle" [class.grayBox]="candidate.certifications.length != 0 && isMiniView">
         <span id="certification" data-toggle="dropdown"> Certification </span>
         <div class="dropdown-menu tooltip-content2" role="certification" aria-labelledby="certification">
           <div *ngFor="let certification of candidate.certifications" class="line-block">
@@ -73,7 +73,7 @@
       </div>
     </li>
     <li>
-      <div class="awards-tabs info-block-tabs dropdown-toggle" [class.grayBox]="!candidate.awards.length == 0 && isMiniView">
+      <div class="awards-tabs info-block-tabs dropdown-toggle" [class.grayBox]="candidate.awards.length != 0 && isMiniView">
         <span id="awards" data-toggle="dropdown"> Awards </span>
         <div class="dropdown-menu tooltip-content2" role="awards" aria-labelledby="awards">
           <div *ngFor="let award of candidate.awards" class="line-block">
