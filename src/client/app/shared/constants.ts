@@ -544,7 +544,7 @@ export class ProjectAsset {
 
 export class Tooltip {
   public static ACADEMIC_DETAIL_TOOLTIP: string = 'An individual must provide latest qualification details first.';
-  public static AWARDS_TOOLTIP: string = 'Award message.';
+  public static AWARDS_TOOLTIP: string = 'Please provide Award details.';
   public static BASIC_JOB_INFORMATION_TOOLTIP_1: string = 'This job name would be displayed in the posting.';
   public static BASIC_JOB_INFORMATION_TOOLTIP_2: string = 'Name of the manager who has given the requirement for this job.';
   public static BASIC_JOB_INFORMATION_TOOLTIP_3: string = 'Name of the department for which the candidate is being hired.';
@@ -570,7 +570,7 @@ export class Tooltip {
       'and alignment with the best job opportunity.';
   public static RECRUITER_CAPABILITY_TOOLTIP: string = 'These capabilities would form the core of the job profile. ' +
       'In next section, you would get to define these capabilities in detail.';
-  public static CERTIFICATE_TOOLTIP: string = 'Certification/Accreditation Message';
+  public static CERTIFICATE_TOOLTIP: string = 'Please provide Certification/Accreditation details.';
   public static COMPETENCIES_AND_RESPONSIBILITIES_TOOLTIP_1: string = 'Additional Information';
   public static COMPETENCIES_AND_RESPONSIBILITIES_TOOLTIP_2: string = 'You can use this field to describe specific ' +
       'aspects of the job profile that will help the candidate to understand your expectations better.';
@@ -631,7 +631,7 @@ export class Tooltip {
   public static CAPABILITY_COMPARE_BELOW_MATCH: string = 'Candidate capabilities slightly less than desired';
   public static CAPABILITY_COMPARE_MISSING_MATCH: string = 'Large mismatch of capabilities';
   public static COMPANY_DETAILS_TOOLTIP: string = 'Company Details Message';
-    public static MUST_TO_HAVE_TOOLTIP: string = 'Is this a must have capability for candidate to fulfilled this job?';
+    public static MUST_TO_HAVE_TOOLTIP: string = 'Mark this complexity as "must have" for candidate to fulfil your job.';
     public static MUST_TO_HAVE_CAPABILITY_COMPARE_MESSAGE: string = 'This is a capability that a candidate must have to perform this job.';
 }
 
