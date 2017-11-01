@@ -68,10 +68,6 @@ class UserSchema {
         type: String,
         required: false
       },
-      complexityIsMustHave: {
-        type: Boolean,
-        default: false
-      },
       notifications: [{
         image: String,
         title: String,
