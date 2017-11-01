@@ -4,7 +4,7 @@
 
   <cn-app-loader></cn-app-loader>
 
-  <div class="col-md-8 col-xs-10 content">
+  <div class="col-md-8 col-xs-10 content" *ngIf="!isEmailVerification;else other_content">
 
     <h5>{{activationMessage_1}}</h5>
 
@@ -19,6 +19,18 @@
     </div>
 
   </div>
+  <ng-template #other_content>
+  <div class="col-md-8 col-xs-10 content" >
+      <h5>{{emailVerificationMessage_1}}</h5>
+
+      <div class="inner-content">
+        <p>{{emailVerificationMessage_2}}<br /></p>
+      <div class="btn-group">
+        <a class="btn btn-success" (click)="navigateTo();">Sign In</a>
+      </div>
+    </div>
+  </div>
+  </ng-template>
 </section>
 
 

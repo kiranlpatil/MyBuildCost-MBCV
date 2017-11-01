@@ -18,6 +18,7 @@ export class ActivateUserComponent implements OnInit {
   token: string;
   idPosition: number;
   id: string;
+  isEmailVerification:boolean=false;
   MY_LOGO_PATH: string;
   MY_TAG_LINE: string;
   UNDER_LICENCE: string;
@@ -25,6 +26,8 @@ export class ActivateUserComponent implements OnInit {
   activationMessage_1: string= Messages.MSG_ACTIVATE_USER_1;
   activationMessage_2: string= Messages.MSG_ACTIVATE_USER_2;
   activationMessage_3: string= Messages.MSG_ACTIVATE_USER_3;
+  emailVerificationMessage_1: string= Messages.MSG_EMAIL_VERIFICATION_1;
+  emailVerificationMessage_2: string= Messages.MSG_EMAIL_VERIFICATION_2;
 
   constructor(private _router: Router, private activatedRoute: ActivatedRoute, private activeService: ActiveUserService,
               private messageService: MessageService) {
@@ -36,6 +39,9 @@ export class ActivateUserComponent implements OnInit {
 
   ngOnInit() {
     this.token = this._router.url.substr('activate_user?access_token'.length + 2);
+    if(this._router.url.indexOf('isEmailVerification')!==-1) {
+      this.isEmailVerification=true;
+    }
     this.idPosition = this.token.indexOf('&') + 1;
     this.id = this.token.substring(this.idPosition + 28, this.idPosition + 4);
     this.token = this.token.substring(this.token.length - 29, 0);
