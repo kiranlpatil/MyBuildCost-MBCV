@@ -279,28 +279,35 @@
 }
 .compare-candidate-container {
   .print-btn {
-    background: transparent;
-    border: 0;
-    color: $theme-color;
-    margin: 0;
-    padding: 1px;
-    position: fixed;
+    background: $theme-color;
+    color: $white;
     right: 15px;
     top: 101px;
-    z-index: 99;
+  }
+
+  .message-content {
+    position: fixed !important;
+    right: 15px !important;
+    top: 133px !important;
   }
 }
 
 .print-btn {
-  background: transparent;
+  background: $white;
   border: 0;
-  color: $white;
+  border-radius: 4px;
+  color: $theme-color;
   margin: 0;
-  padding: 1px;
+  padding: 2px 10px;
   position: fixed;
-  right: 53px;
-  top: -24px;
+  right: 80px;
+  text-transform: uppercase;
+  top: -25px;
   z-index: 99;
+  span {
+    margin: 0 5px 0 0;
+    top: 2px;
+  }
 }
 
 @media only screen and (max-width: 1024px) {

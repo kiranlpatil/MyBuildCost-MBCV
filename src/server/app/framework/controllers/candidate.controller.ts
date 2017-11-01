@@ -22,7 +22,7 @@ export function create(req: express.Request, res: express.Response, next: any) {
             reason: Messages.MSG_ERROR_RSN_EXISTING_USER,
             message: Messages.MSG_ERROR_VERIFY_ACCOUNT,
             stackTrace: new Error(),
-            code: 403
+            code: 400
           });
         }
         else if (error == Messages.MSG_ERROR_CHECK_MOBILE_PRESENT) {
@@ -30,7 +30,7 @@ export function create(req: express.Request, res: express.Response, next: any) {
             reason: Messages.MSG_ERROR_RSN_EXISTING_USER,
             message: Messages.MSG_ERROR_REGISTRATION_MOBILE_NUMBER,
             stackTrace: new Error(),
-            code: 403
+            code: 400
           });
         }
         else {
@@ -38,7 +38,7 @@ export function create(req: express.Request, res: express.Response, next: any) {
             reason: Messages.MSG_ERROR_RSN_EXISTING_USER,
             message: Messages.MSG_ERROR_USER_WITH_EMAIL_PRESENT,
             stackTrace: new Error(),
-            code: 403
+            code: 400
           });
         }
       }
@@ -60,7 +60,7 @@ export function create(req: express.Request, res: express.Response, next: any) {
       reason: e.message,
       message: e.message,
       stackTrace: new Error(),
-      code: 403
+      code: 500
     });
   }
 }
@@ -87,18 +87,9 @@ export function updateDetails(req: express.Request, res: express.Response, next:
         next(error);
       } else {
         updatedCandidate.lastUpdateAt=new Date().toISOString();
-        /*if(result.profileCompleted && result.profileCompleted >= updatedCandidate.profileCompleted) {
-          updatedCandidate.profileCompleted=result.profileCompleted;
-        }*/
         if (result && result.isSubmitted) {
           isEditingProfile = true;
-/*
-          updatedCandidate.profileCompleted=100;
-*/
         }
-        /*if(updatedCandidate.isSubmitted) {
-          updatedCandidate.profileCompleted=100;
-        }*/
     candidateService.update(userId, updatedCandidate, (error, result) => {
       if (error) {
         next(error);
@@ -109,7 +100,7 @@ export function updateDetails(req: express.Request, res: express.Response, next:
               reason: Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
               message: Messages.MSG_ERROR_WRONG_TOKEN,
               stackTrace: new Error(),
-              code: 401
+              code: 400
             });
           } else {
             let token = auth.issueTokenWithUid(result[0]);
@@ -142,7 +133,7 @@ export function updateDetails(req: express.Request, res: express.Response, next:
       reason: e.message,
       message: e.message,
       stackTrace: new Error(),
-      code: 403
+      code: 500
     });
   }
 }
@@ -168,7 +159,7 @@ export function getCapabilityMatrix(req: express.Request, res: express.Response,
       reason: e.message,
       message: e.message,
       stackTrace: new Error(),
-      code: 403
+      code: 500
     });
   }
 }

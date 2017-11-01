@@ -68,7 +68,11 @@
       display: block !important;
       left: -17px;
       position: absolute;
-      top: 4px;
+      top: 5px;
+    }
+
+    .capability-edit > .inner > .complexity-name > .complexity-star {
+      display: none !important;
     }
   }
 }

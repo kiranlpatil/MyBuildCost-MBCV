@@ -37,7 +37,7 @@ export function init(port: number, mode: string, protocol: string, dist_runner: 
     let _loggerService: LoggerService = new LoggerService('uncaught exception Handler');
     let error= {
       reason: 'uncaught exception',
-        message: err,
+      message: err,
       stack: err.stack,
       code: 500
     };
@@ -205,13 +205,14 @@ export function init(port: number, mode: string, protocol: string, dist_runner: 
         console.log('App is listening on port:' + port);
         resolve(server);
       });
+      server.timeout = 600000; //by default timeout set to 10 min for export functionality
     });
   } else {
     const options = {
       key: fs.readFileSync("./staging.jobmosis.com.key"),
       cert: fs.readFileSync("./staging.jobmosis.com.crt"),
+      handshakeTimeout: 600000, //by default timeout set to 10 min for export functionality, Need to test this
       passphrase: 'tpl123',
-
       spdy: {
         protocols: ['h2']
       }

@@ -503,6 +503,9 @@ class SearchService {
               if(newCandidate.complexity_note_matrix && newCandidate.complexity_note_matrix[cap]) {
                 match_view.complexityNote = newCandidate.complexity_note_matrix[cap];
               }
+              if(job.complexity_musthave_matrix && job.complexity_musthave_matrix[cap]) {
+                match_view.complexityIsMustHave = job.complexity_musthave_matrix[cap];
+              }
               if(job_scenarios[0]) {
                 match_view.job_scenario_name= job_scenarios[0].name;
               }

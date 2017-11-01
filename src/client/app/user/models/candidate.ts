@@ -11,7 +11,6 @@ export class Candidate {
   personalDetails: CandidateDetail = new CandidateDetail();
   jobTitle: string;
   isVisible: boolean;
-  profileCompleted:number;
   location: Location = new Location();
   isSubmitted: boolean;
   aboutMyself: string = '';

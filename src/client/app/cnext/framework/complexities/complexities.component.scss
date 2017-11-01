@@ -130,3 +130,13 @@
   position: fixed;
   right: 0;
 }
+
+@media only screen and (max-width: 767px) {
+  .complexities-section {
+    padding: 0 0 75px 30px;
+    width: 94%;
+  }
+  .button-group  {
+    width: 100% !important;
+  }
+}

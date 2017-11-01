@@ -31,7 +31,7 @@ export class PrintScreenComponent {
   }
 
   createFile(_value:string) {
-    if(this.typeOfView == 'spa_candidate') {
+    if(this.typeOfView == 'spa_candidate' || this.screenIdForPrint === 'printProfileComparison') {
       window.scrollTo(0, 0);
       html2canvas(document.getElementById(this.screenIdForPrint))
         .then((canvas:any) => {

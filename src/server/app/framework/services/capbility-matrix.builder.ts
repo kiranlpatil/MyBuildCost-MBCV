@@ -25,8 +25,7 @@ class CapabilityMatrixService {
   }
 
   getCapabilityMatrix(item: any, industries: IndustryModel[], new_capability_matrix: any): any {
-    console.log(item);
-    console.log(industries);
+
     if (item.industry.roles && item.industry.roles.length > 0) {
       for (let role of item.industry.roles) {
         if (role.capabilities && role.capabilities.length > 0) {
@@ -86,8 +85,6 @@ class CapabilityMatrixService {
 
   //getComplexityMustHaveMatrix
   getComplexityMustHaveMatrix(item: any, industries: IndustryModel[], new_complexity_musthave_matrix: any): any {
-    console.log(item);
-    console.log(industries);
     if (item.industry.roles && item.industry.roles.length > 0) {
       for (let role of item.industry.roles) {
         if (role.capabilities && role.capabilities.length > 0) {
