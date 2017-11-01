@@ -38,6 +38,7 @@ export class JobDashboardComponent implements OnInit {
   selectedJobTitle:string;
   isCloneButtonClicked:boolean;
   selectedJobProfile: JobPosterModel = new JobPosterModel();
+  sortBy : string = 'Best match';
   @ViewChild(QCardviewComponent) acaQcardClassObject: QCardviewComponent;
   private candidateQlist: CandidateQListModel = new CandidateQListModel();
   private recruiterId: string;
@@ -110,7 +111,7 @@ export class JobDashboardComponent implements OnInit {
     if(this.candidateQlist.matchedCandidates.length>0) {
       return;
     }
-    this.jobDashboardService.getSearchedcandidate(this.jobId)
+    this.jobDashboardService.getSearchedcandidate(this.jobId,this.sortBy)
       .subscribe(
         (data: any) => {
           this.jobDashboardService.getSelectedListData(this.jobId, ValueConstant.SHORT_LISTED_CANDIDATE)
@@ -276,6 +277,24 @@ export class JobDashboardComponent implements OnInit {
     }
   }
 
+  changeSorting(sortBy : string) {
+    this.sortBy= sortBy;
+    this.jobDashboardService.getSearchedcandidate(this.jobId,this.sortBy)
+      .subscribe(
+        (data: any) => {
+          this.jobDashboardService.getSelectedListData(this.jobId, ValueConstant.SHORT_LISTED_CANDIDATE)
+            .subscribe(
+              (listdata: any) => {
+                this.loaderService.stop();
+                this.recruiterJobView.numberOfMatchedCandidates = data.length;
+                let temp = new CandidateQListModel();
+                temp.shortListedCandidates = listdata.data;
+                temp.matchedCandidates = data;
+                this.candidateQlist = temp;
+              },error => this.errorService.onError(error));
+        },error => this.errorService.onError(error));
+    window.scrollTo(0,0);
+  }
 
   getCompareDetail() {
     this.whichListVisible[4] = true;

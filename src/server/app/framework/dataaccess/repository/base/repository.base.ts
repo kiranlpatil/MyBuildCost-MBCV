@@ -31,11 +31,9 @@ class RepositoryBase<T extends mongoose.Document> implements IRead<T>, IWrite<T>
       callback(err, res);
     });
   }
-//TODO: REMOVE CONSOLE LOG 
+
   retrieveWithLean(field: any, projection: any, callback: (error: any, result: any) => void) {
-    console.time('repo2 time');
     this._model.find(field, projection).lean().exec((err, res) => {
-      console.timeEnd('repo2 time');
       callback(err, res);
     });
   }
@@ -44,6 +42,7 @@ class RepositoryBase<T extends mongoose.Document> implements IRead<T>, IWrite<T>
   update(_id: mongoose.Types.ObjectId, item: T, callback: (error: any, result: any) => void) {
     this._model.update({_id: _id}, item, callback);
   }
+
 //TODO:CODE MOVE TO CANDIDATE REPOSITEORY
   updateByUserId(_id: mongoose.Types.ObjectId, item: T, callback: (error: any, result: any) => void) {
     this._model.update({'userId': _id}, item, callback);
@@ -96,6 +95,12 @@ class RepositoryBase<T extends mongoose.Document> implements IRead<T>, IWrite<T>
 //TODO: MOVE CODE TO ITS RELEATED REPOSITEORY
   retrieveByMultiIdsAndPopulate(ids: string[], excluded: any, callback: (error: any, result: any) => void) {
     this._model.find({_id: {$in: ids}}, excluded).populate('userId').exec(function (err, items) {
+      callback(err, items);
+    });
+  }
+
+  retrieveAndPopulate(query : Object,included : Object, callback:(error : any, result : any) => void) {
+    this._model.find(query, included).populate('userId').lean().exec(function (err, items) {
       callback(err, items);
     });
   }

@@ -35,7 +35,7 @@ class SearchService {
     this.usesTrackingController = obj._controller;
   }
 
-  getMatchingCandidates(jobProfile: JobProfileModel, callback: (error: any, result: any) => void) {
+  getMatchingCandidates(jobProfile: JobProfileModel, sortBy: string, filterBy : Object,callback: (error: any, result: any) => void) {
     console.time('getMatching Candidate');
     let data: any;
     let isFound: boolean = false;
@@ -134,12 +134,23 @@ class SearchService {
       'capability_matrix':1,
       'complexity_musthave_matrix': 1
     };
-    this.candidateRepository.retrieveWithLean(data, included_fields, (err, res) => {
+    let query: Object;
+    switch (sortBy) {
+      case 'Salary':
+        query = {'$query':data,'$orderby':{'professionalDetails.currentSalary':-1}};
+        break;
+      case 'Experience':
+        query = {'$query':data,'$orderby':{'professionalDetails.experience':-1}};
+        break;
+      default :
+        query= data;
+        break;
+    }
+    this.candidateRepository.retrieveAndPopulate(query, included_fields, (err, res) => {
       if (err) {
         callback(err, null);
       } else {
-        // callback(null, res);
-        this.candidateRepository.getCandidateQCard(res, jobProfile, undefined, callback);
+        this.candidateRepository.getCandidateQCard(res, jobProfile, undefined, sortBy, callback);
       }
     });
   }

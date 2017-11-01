@@ -12,9 +12,10 @@ export class SearchController {
     console.time('getMatchingCandidatesController');
     let searchService = new SearchService();
     let profileId = req.params.id;
+    let sortBy = req.query.sortBy;
     let recruiterService = new RecruiterService();
     recruiterService.getJobById(profileId, (err: any, jobRes: JobProfileModel) => {
-      searchService.getMatchingCandidates(jobRes, (error: Error, result: any) => {
+      searchService.getMatchingCandidates(jobRes, sortBy, {}, (error: Error, result: any) => {
         if (error) {
          next(error);
         } else {
@@ -61,9 +62,9 @@ export class SearchController {
             candidateSearchService.getCandidateInfoById([candidateId], (error, candidateDetails) => {
               if (error) {
                 next(error);
-              }
-              else {
-                let _candidateDetails:CandidateDetailsWithJobMatching = searchService.getCandidateVisibilityAgainstRecruiter(candidateDetails[0], result);
+              }else {
+                let _candidateDetails : CandidateDetailsWithJobMatching;
+                _candidateDetails = searchService.getCandidateVisibilityAgainstRecruiter(candidateDetails[0], result);
                 _candidateDetails.jobQCardMatching = candidateDetails[0].isVisible ? result : [];
                 res.send({
                   'status': 'success',

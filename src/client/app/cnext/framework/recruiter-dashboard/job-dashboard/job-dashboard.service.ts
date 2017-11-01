@@ -25,10 +25,10 @@ export class JobDashboardService extends BaseService {
       .catch(this.handleError);
   }
 
-  getSearchedcandidate(jobId: string) {
+  getSearchedcandidate(jobId: string, sortBy : string) {
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({headers: headers});
-    var url = 'recruiter/jobProfile/' + jobId + '/candidates';
+    var url = 'recruiter/jobProfile/' + jobId + '/candidates?sortBy='+sortBy;
     this.loaderService.start();
     return this.http.get(url, options)
       .map(this.extractData)

@@ -23,10 +23,10 @@ class IndustryRepository extends RepositoryBase<IIndustry> {
             callback(new Error('Records are not found'), null);
           } else {
             industry[0].roles.sort((r1 : RoleModel, r2 : RoleModel) : number => {
-              if(!r1.sort_order){
+              if(!r1.sort_order) {
                 r1.sort_order=999;
               }
-              if(!r2.sort_order){
+              if(!r2.sort_order) {
                 r2.sort_order=999;
               }
               if(r1.sort_order < r2.sort_order) {

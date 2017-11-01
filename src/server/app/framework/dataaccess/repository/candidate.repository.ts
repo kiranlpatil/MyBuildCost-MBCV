@@ -17,9 +17,9 @@ class CandidateRepository extends RepositoryBase<ICandidate> {
     super(CandidateSchema);
   }
 
-
-  getCandidateQCard(candidates: any[], jobProfile: JobProfileModel, candidatesIds: string[], callback: (err: any, res: any) => void) {
+  getCandidateQCard(candidates: any[], jobProfile: JobProfileModel, candidatesIds: string[], sortBy: string, callback: (err: any, res: any) => void) {
     console.time('getCandidateQCardForLoop');
+    let candidates_q_cards_send : CandidateQCard[] = new Array(0);
     let candidate_q_card_map :any = { };
     let idsOfSelectedCandidates : string[]= new Array(0);
     for (let candidate of candidates) {
@@ -82,57 +82,49 @@ class CandidateRepository extends RepositoryBase<ICandidate> {
       candidate_card_view.education = candidate.professionalDetails.education;
       candidate_card_view.proficiencies = candidate.proficiencies;
       candidate_card_view.interestedIndustries = candidate.interestedIndustries;
-      candidate_card_view._id = candidate._id;//todo solve the problem of location from front end
+      candidate_card_view._id = candidate._id;
       candidate_card_view.isVisible = candidate.isVisible;
+      candidate_card_view.email = candidate.userId.email;
+      candidate_card_view.first_name = candidate.userId.first_name;
+      candidate_card_view.last_name = candidate.userId.last_name;
+      candidate_card_view.mobile_number = candidate.userId.mobile_number;
+      candidate_card_view.picture = candidate.userId.picture;
+      //todo solve the problem of location from front end
       if(candidate.location) {
         candidate_card_view.location = candidate.location.city;
       }else {
         candidate_card_view.location = 'Pune';
       }
       candidate_card_view.noticePeriod = candidate.professionalDetails.noticePeriod;
-      if ((candidate_card_view.above_one_step_matching + candidate_card_view.exact_matching) >= ConstVariables.LOWER_LIMIT_FOR_SEARCH_RESULT) {
-        candidate_q_card_map[candidate.userId]=candidate_card_view;
-        idsOfSelectedCandidates.push(candidate.userId);
-      }
-
-    }
-    let candidates_q_cards_send : CandidateQCard[] = new Array(0);
-    let userRepository: UserRepository = new UserRepository();
-    console.timeEnd('getCandidateQCardForLoop');
-    userRepository.retrieveByMultiIds(idsOfSelectedCandidates,{}, (error: any, res: any) => {
-      if (error) {
-        callback(error, null);
-      }
-       else {
-        if(res.length>0) {
-          console.time('retrieveByMultiIds');
-          for(let user of res){
-            let candidateQcard : CandidateQCard= candidate_q_card_map[user._id];
-            candidateQcard.email=user.email;
-            candidateQcard.first_name=user.first_name;
-            candidateQcard.last_name=user.last_name;
-            candidateQcard.mobile_number=user.mobile_number;
-            candidateQcard.picture=user.picture;
-            candidates_q_cards_send.push(candidateQcard);
+      if ((candidate_card_view.above_one_step_matching + candidate_card_view.exact_matching) >=
+        ConstVariables.LOWER_LIMIT_FOR_SEARCH_RESULT) {
+        candidate_q_card_map[candidate.userId._id]=candidate_card_view;
+        if('Best match' != sortBy.toString()) {
+          if(candidates_q_cards_send.length < 100) {
+            candidates_q_cards_send.push(candidate_card_view);
+          }else {
+            break;
           }
-          candidates_q_cards_send.sort((first: CandidateQCard,second : CandidateQCard):number=> {
-            if((first.above_one_step_matching+first.exact_matching) >(second.above_one_step_matching+second.exact_matching) ){
-              return -1;
-            }
-            if((first.above_one_step_matching+first.exact_matching) < (second.above_one_step_matching+second.exact_matching) ) {
-              return 1;
-            }
-            return 0;
-          });
-          console.timeEnd('retrieveByMultiIds');
-          callback(null,candidates_q_cards_send);
         }else {
-          callback(null,candidates_q_cards_send);
+          candidates_q_cards_send.push(candidate_card_view);
         }
       }
-    });
-
-
+    }
+    if ('Best match' != sortBy.toString()) {
+      callback(null,candidates_q_cards_send);
+    }else {
+      candidates_q_cards_send.sort((first: CandidateQCard,second : CandidateQCard):number=> {
+        if((first.above_one_step_matching+first.exact_matching) >(second.above_one_step_matching+second.exact_matching) ){
+          return -1;
+        }
+        if((first.above_one_step_matching+first.exact_matching) < (second.above_one_step_matching+second.exact_matching) ) {
+          return 1;
+        }
+        return 0;
+      });
+      let q_cards = candidates_q_cards_send.slice(0,100);
+      callback(null,q_cards);
+    }
   }
 
   getCodesFromindustry(industry: IndustryModel): string[] {

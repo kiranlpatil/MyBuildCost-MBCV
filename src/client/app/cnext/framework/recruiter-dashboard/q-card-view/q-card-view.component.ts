@@ -37,6 +37,7 @@ export class QCardviewComponent implements OnChanges {
   @Input() isJobPostExpired : boolean;
   @Input() isJobPostClosed : boolean;
   @Output() addedTocart: EventEmitter<any> = new EventEmitter<any>();
+  @Output() changeSorting: EventEmitter<string> = new EventEmitter<string>();
   @Input() progress_bar_color : string='#0d75fa';
   @Output() addForCompare: EventEmitter<any> = new EventEmitter<any>();
   public qCardModel: QCardsortBy = new QCardsortBy();
@@ -294,7 +295,6 @@ export class QCardviewComponent implements OnChanges {
         this.recuirterListCountModel.numberOfCandidatesrejected = candidateItem.ids.length;
       }
     }
-    //this.recuirterListCountModel.numberOfMatchedCandidates -= (this.recuirterListCountModel.numberOfCandidatesrejected + this.recuirterListCountModel.numberOfCandidatesInCart);
   }
 
   clearFilter() {
@@ -306,6 +306,7 @@ export class QCardviewComponent implements OnChanges {
   }
 
   changeSort() {
+    this.changeSorting.emit(this.qCardModel.sortValue);
     if (this.type !== 'matchedList') {
       this.matchFormat = this.match.belowMatch;
     }

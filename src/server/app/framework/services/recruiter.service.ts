@@ -276,7 +276,8 @@ class RecruiterService {
             if (err) {
               callback(new Error('Candidates are not founds'), null);
             } else {
-              this.candidateRepository.getCandidateQCard(res, jobProfile, candidateIds, callback);
+              let sortBy = 'Experience';
+              this.candidateRepository.getCandidateQCard(res, jobProfile, candidateIds, sortBy, callback);
             }
           });
         }

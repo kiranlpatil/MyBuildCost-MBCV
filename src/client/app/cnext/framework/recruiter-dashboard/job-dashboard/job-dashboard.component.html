@@ -100,7 +100,9 @@
     </ul>
     <div id="matched-job" class="tab-pane fade in active "  *ngIf="selectedJobProfile!=undefined">
       <cn-q-card-view (addForCompare)="addForCompare($event)" [progress_bar_color]="'#29b6f6'"
-                      (addedTocart)="AddedToCart($event)" *ngIf="whichListVisible[0]" [candidateQlist]="candidateQlist"
+                      (addedTocart)="AddedToCart($event)"
+                      (changeSorting)="changeSorting($event)"
+                      *ngIf="whichListVisible[0]" [candidateQlist]="candidateQlist"
                       [filterMeta]="filterMeta"
                       [candidates]="candidateQlist.matchedCandidates" [type]="'matchedList'" [jobId]="jobId"
                       [recuirterListCountModel]="recruiterJobView"
