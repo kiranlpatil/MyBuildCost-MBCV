@@ -12,16 +12,16 @@
     border-left: 6px solid $white;
     color: $white;
     float: left;
-    font-size: 26px;
+    font-size: 22px;
     font-family: 'gothamrnd-light';
     font-weight: 600;
-    margin: 15px 0;
+    margin: 8px 0;
     padding: 0 0 0 16px;
     text-align: left;
 
     span {
       float: left;
-      font-size: 18px;
+      font-size: 16px;
       padding: 5px 0 0 0;
       width: 100%;
     }
@@ -43,10 +43,10 @@
 .value-portrait-container {
   box-shadow: 0 0 27px 0 rgba(76, 76, 76, 0.26), 0 2px 10px 0 rgba(0, 0, 0, 0.16);
   display: inline-block;
+  margin: 65px auto 0;
   padding: 0;
-  margin: 90px auto 0;
-  width: 1200px;
   position: relative;
+  width: 1200px;
 
   .btn-close {
     color: #999;
