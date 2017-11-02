@@ -21,8 +21,7 @@ export class FilterComponent {
   @Input() private locations: any[];
   @Input() private role: boolean;
   @Input() private selectedJob: JobPosterModel;
-  @Output() private changeFilter: EventEmitter = new EventEmitter(QCardFilter);
-
+  @Output() changeFilter: EventEmitter<QCardFilter> = new EventEmitter<QCardFilter>();
   private isShowJobFilter: boolean = false;
   isFilterVisible: boolean = false;
   proficiencyList: string[] = new Array(0);
