@@ -113,7 +113,7 @@ class CandidateRepository extends RepositoryBase<ICandidate> {
     if ('Best match' != sortBy.toString()) {
       callback(null,candidates_q_cards_send);
     }else {
-      candidates_q_cards_send.sort((first: CandidateQCard,second : CandidateQCard):number=> {
+      /*candidates_q_cards_send.sort((first: CandidateQCard,second : CandidateQCard):number=> {
         if((first.above_one_step_matching+first.exact_matching) >(second.above_one_step_matching+second.exact_matching) ){
           return -1;
         }
@@ -121,7 +121,7 @@ class CandidateRepository extends RepositoryBase<ICandidate> {
           return 1;
         }
         return 0;
-      });
+      });*/
       let q_cards = candidates_q_cards_send.slice(0,100);
       callback(null,q_cards);
     }
