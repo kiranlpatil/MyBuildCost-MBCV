@@ -8,7 +8,7 @@ import {UserFeedbackComponentService} from "./user-feedback.component.service";
   moduleId: module.id,
   selector: 'cn-user-feedback',
   templateUrl: 'user-feedback.component.html',
-  styleUrls: ['user-feedback.component.scss']
+  styleUrls: ['user-feedback.component.css']
 })
 
 export class UserFeedbackComponent {
