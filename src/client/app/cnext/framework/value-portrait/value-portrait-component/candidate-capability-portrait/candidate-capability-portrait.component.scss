@@ -7,10 +7,9 @@
   position: relative;
   width: 100%;
   h3 {
-    background: $theme-color;
+    border: 1px solid $gray-light1;
     border-radius: 7px;
-    box-shadow: -1px 2px 9px 1px rgba(0, 0, 0, 0.26), 0 2px 10px 0 rgba(0, 0, 0, 0.16);
-    color: $white;
+    color: $theme-color;
     display: inline-block;
     font-family: 'gothamrnd-book';
     font-size: 18px;

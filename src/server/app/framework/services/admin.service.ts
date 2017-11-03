@@ -20,11 +20,10 @@ let fs = require('fs');
 let usestracking = require('uses-tracking');
 let spawn = require('child_process').spawn;
 
-let mongoExport = '/usr/bin/mongoexport';
-///let db = config.get('TplSeed.database.name');
-let db = 'Jobmosis-staging';
-let username = 'admin';
-let password = 'jobmosisadmin123';
+let mongoExport = config.get('TplSeed.database.mongoExport');
+let db = config.get('TplSeed.database.name');
+let username = config.get('TplSeed.database.username');
+let password = config.get('TplSeed.database.password');
 
 class AdminService {
   company_name: string;
@@ -244,165 +243,135 @@ class AdminService {
     });
   };
 
-  exportCandidateCollection(callback: (err: any, res: any) => void) {
-    console.log("inside exportCandidateCollection");
+  exportCollection(collectionType: string, fields: string, downloadLocation: string, query: string,
+                   callback: (err: any, res: any) => void) {
+    console.log("inside " + collectionType + "collection");
     let stderr: any = '';
+    let childProcess: any;
 
-    /*let candidateChild = spawn('mongoexport',['--db',db,'--collection','candidates','--type','csv','--fields','_id,userId,job_list,proficiencies,employmentHistory,academics,industry,awards,interestedIndustries,certifications,profile_update_tracking,isVisible,isSubmitted,isCompleted,complexity_note_matrix,professionalDetails,aboutMyself,jobTitle,location,lastUpdateAt','--out','/home/kapil/JavaProject/ng4-cnext/c-next/dist/server/prod/public/candidates.csv']);*/
+    if (username == "") {
+      childProcess = spawn('mongoexport', ['--db', db, '--collection', collectionType, '--type', 'csv', '--fields', fields,
+        '--out', downloadLocation, '--query', query]);
+    } else {
+      childProcess = spawn('mongoexport', ['--username', username, '--password', password, '--db', db, '--collection',
+        collectionType, '--type', 'csv', '--fields', fields, '--out', downloadLocation, '--query', query]);
+    }
 
-    let candidateChild = spawn('mongoexport', ['--username', username, '--password', password, '--db', db, '--collection', 'candidates', '--type', 'csv', '--fields', '_id,userId,job_list,proficiencies,employmentHistory,academics,industry,awards,interestedIndustries,certifications,profile_update_tracking,isVisible,isSubmitted,isCompleted,complexity_note_matrix,professionalDetails,aboutMyself,jobTitle,location,lastUpdateAt', '--out', '/home/bitnami/apps/jobmosis-staging/c-next/dist/server/prod/public/candidates.csv']);
 
-    candidateChild.on('exit', function (code: any) {
+    childProcess.on('exit', function (code: any) {
       if (code != 0) {
-        candidateChild.kill();
+        childProcess.kill();
         callback(new Error(), null);
       } else {
-        console.log('candidateChild process closed with code ' + code);
-        candidateChild.kill();
+        console.log(collectionType + ' process closed with code ' + code);
+        childProcess.kill();
         callback(null, 'success');
       }
     });
 
-    candidateChild.stderr.on('data', function (buf: any) {
+    childProcess.stderr.on('data', function (buf: any) {
       console.log('[STR] stderr "%s"', String(buf));
       stderr += buf;
+    });
+  }
+
+  exportCandidateCollection(callback: (err: any, res: any) => void) {
+    let fields = '_id,userId,job_list,proficiencies,employmentHistory,academics,industry,awards,interestedIndustries,' +
+      'certifications,profile_update_tracking,isVisible,isSubmitted,isCompleted,complexity_note_matrix,' +
+      'professionalDetails,aboutMyself,jobTitle,location,lastUpdateAt';
+
+    let downloadLocation = config.get('TplSeed.adminExportFilePath.candidatesCSV');
+
+    this.exportCollection("candidates", fields, downloadLocation, '{}', (error: any, result: any) => {
+      if (error) {
+        callback(error, null);
+      } else {
+        callback(null, 'success');
+      }
     });
 
   }
 
   exportCandidateOtherDetailsCollection(callback: (err: any, res: any) => void) {
-    console.log("inside exportCandidateDetailsCollection");
-    let stderr: any = '';
-    /*let candidateOtherDetailsChild = spawn('mongoexport',['--db',db,'--collection','candidates','--type','csv','--fields','userId,capability_matrix','--out','/home/kapil/JavaProject/ng4-cnext/c-next/dist/server/prod/public/candidates-other-details.csv']);*/
-    let candidateOtherDetailsChild = spawn('mongoexport', ['--username', username, '--password', password, '--db', db, '--collection', 'candidates', '--type', 'csv', '--fields', 'userId,capability_matrix', '--out', '/home/bitnami/apps/jobmosis-staging/c-next/dist/server/prod/public/candidates-other-details.csv']);
+    let fields = 'userId,capability_matrix';
 
-    candidateOtherDetailsChild.on('exit', function (code: any) {
-      if (code != 0) {
-        candidateOtherDetailsChild.kill();
-        callback(new Error(), null);
+    let downloadLocation = config.get('TplSeed.adminExportFilePath.candidateOtherDetailsCSV');
+
+    this.exportCollection("candidates", fields, downloadLocation, '{}', (error: any, result: any) => {
+      if (error) {
+        callback(error, null);
       } else {
-        console.log('candidateOtherDetailsChild process closed with code ' + code);
-        candidateOtherDetailsChild.kill();
         callback(null, 'success');
       }
     });
-
-    candidateOtherDetailsChild.stderr.on('data', function (buf: any) {
-      console.log('[STR] stderr "%s"', String(buf));
-      stderr += buf;
-    });
-
   }
 
   exportUserCollection(userType: string, callback: (err: any, res: any) => void) {
-    console.log("inside exportUserCollection");
-    let userChild: any;
-    let stderr: any = '';
-
-    /*if (userType == 'candidate') {
-     userChild = spawn('mongoexport', ['--db',db,'--collection','users','--type','csv','--fields','_id,first_name,last_name,mobile_number,email,current_theme,isCandidate,guide_tour,notifications,complexityIsMustHave,isAdmin,otp,isActivated,temp_mobile','--out','/home/kapil/JavaProject/ng4-cnext/c-next/dist/server/prod/public/users.csv','--query','{"isCandidate":true}']);
-     } else {
-     userChild = spawn('mongoexport', ['--db',db,'--collection','users','--type','csv','--fields','_id,mobile_number,email,current_theme,isCandidate,guide_tour,notifications,isAdmin,otp,isActivated,temp_mobile,location,picture','--out','/home/kapil/JavaProject/ng4-cnext/c-next/dist/server/prod/public/users.csv','--query','{"isCandidate":false}']);
-     }*/
+    let fields: string;
+    let query: string;
+    let downloadLocation = config.get('TplSeed.adminExportFilePath.usersCSV');
 
     if (userType == 'candidate') {
-      userChild = spawn('mongoexport', ['--username', username, '--password', password, '--db', db, '--collection', 'users', '--type', 'csv', '--fields', '_id,first_name,last_name,mobile_number,email,current_theme,isCandidate,guide_tour,notifications,complexityIsMustHave,isAdmin,otp,isActivated,temp_mobile', '--out', '/home/bitnami/apps/jobmosis-staging/c-next/dist/server/prod/public/users.csv', '--query', '{"isCandidate":true}']);
+      fields = '_id,first_name,last_name,mobile_number,email,current_theme,isCandidate,guide_tour,notifications,' +
+        'isAdmin,otp,isActivated,temp_mobile'
+      query = '{"isCandidate":true}';
     } else {
-      userChild = spawn('mongoexport', ['--username', username, '--password', password, '--db', db, '--collection', 'users', '--type', 'csv', '--fields', '_id,mobile_number,email,current_theme,isCandidate,guide_tour,notifications,isAdmin,otp,isActivated,temp_mobile,location,picture', '--out', '/home/bitnami/apps/jobmosis-staging/c-next/dist/server/prod/public/users.csv', '--query', '{"isCandidate":false}']);
+      fields = '_id,mobile_number,email,current_theme,isCandidate,guide_tour,notifications,isAdmin,otp,isActivated,' +
+        'temp_mobile,location,picture',
+        query = '{"isCandidate":false}';
     }
 
-
-    userChild.on('exit', function (code: any) {
-      if (code != 0) {
-        userChild.kill();
-        callback(new Error(), null);
+    this.exportCollection("users", fields, downloadLocation, query, (error: any, result: any) => {
+      if (error) {
+        callback(error, null);
       } else {
-        console.log('userChild process closed with code ' + code);
-        userChild.kill();
         callback(null, 'success');
       }
     });
 
-    userChild.stderr.on('data', function (buf: any) {
-      console.log('[STR] stderr "%s"', String(buf));
-      stderr += buf;
-    });
 
   }
 
   exportRecruiterCollection(callback: (err: any, res: any) => void) {
-    console.log("inside exportRecruiterCollection");
-    let stderr: any = '';
+    let fields = '_id,userId,isRecruitingForself,company_name,company_size,company_website,postedJobs,setOfDocuments,' +
+      'company_logo'
 
-    /*let recruiterChild = spawn('mongoexport', ['--db',db,'--collection','recruiters','--type','csv','--fields','_id,userId,isRecruitingForself,company_name,company_size,company_website,postedJobs,setOfDocuments,company_logo','--out','/home/kapil/JavaProject/ng4-cnext/c-next/dist/server/prod/public/recruiters.csv']);*/
+    let downloadLocation = config.get('TplSeed.adminExportFilePath.recruitersCSV');
 
-    let recruiterChild = spawn('mongoexport', ['--username', username, '--password', password, '--db', db, '--collection', 'recruiters', '--type', 'csv', '--fields', '_id,userId,isRecruitingForself,company_name,company_size,company_website,postedJobs,setOfDocuments,company_logo', '--out', '/home/bitnami/apps/jobmosis-staging/c-next/dist/server/prod/public/recruiters.csv']);
-
-    recruiterChild.on('exit', function (code: any) {
-      if (code != 0) {
-        recruiterChild.kill();
-        callback(new Error(), null);
+    this.exportCollection("recruiters", fields, downloadLocation, '{}', (error: any, result: any) => {
+      if (error) {
+        callback(error, null);
       } else {
-        console.log('recruiterChild process closed with code ' + code);
-        recruiterChild.kill();
         callback(null, 'success');
       }
-    })
-
-    recruiterChild.stderr.on('data', function (buf: any) {
-      console.log('[STR] stderr "%s"', String(buf));
-      stderr += buf;
     });
-
 
   }
 
   exportUsageDetailsCollection(callback: (err: any, res: any) => void) {
-    console.log("inside exportUsageDetailsCollection");
-    let stderr: any = '';
-    /*let usageDetailsChild = spawn('mongoexport',['--db',db,'--collection','usestrackings','--type','csv','--fields','_id,candidateId,jobProfileId,timestamp,action,__v','--out','/home/kapil/JavaProject/ng4-cnext/c-next/dist/server/prod/public/usagedetail.csv']);*/
+    let fields = '_id,candidateId,jobProfileId,timestamp,action,__v';
+    let downloadLocation = config.get('TplSeed.adminExportFilePath.usageDetailsCSV');
 
-    let usageDetailsChild = spawn('mongoexport', ['--username', username, '--password', password, '--db', db, '--collection', 'usestrackings', '--type', 'csv', '--fields', '_id,candidateId,jobProfileId,timestamp,action,__v', '--out', '/home/bitnami/apps/jobmosis-staging/c-next/dist/server/prod/public/usagedetail.csv']);
-
-    usageDetailsChild.on('exit', function (code: any) {
-      if (code != 0) {
-        usageDetailsChild.kill();
-        callback(new Error(), null);
+    this.exportCollection("usestrackings", fields, downloadLocation, '{}', (error: any, result: any) => {
+      if (error) {
+        callback(error, null);
       } else {
-        console.log('usageDetailsChild process closed with code ' + code);
-        usageDetailsChild.kill();
         callback(null, 'success');
       }
-    });
-
-    usageDetailsChild.stderr.on('data', function (buf: any) {
-      console.log('[STR] stderr "%s"', String(buf));
-      stderr += buf;
     });
 
   }
 
   exportKeySkillsCollection(callback: (err: any, res: any) => void) {
-    console.log("inside exportKeyskillsCollection");
-    let stderr: any = '';
-    /*let keySkillsChild = spawn('mongoexport',['--db',db,'--collection','proficiencies','--type','csv','--fields','_id,proficiencies','--out','/home/kapil/JavaProject/ng4-cnext/c-next/dist/server/prod/public/key-skills.csv']);*/
+    let fields = '_id,proficiencies';
+    let downloadLocation = config.get('TplSeed.adminExportFilePath.keySkillsCSV');
 
-    let keySkillsChild = spawn('mongoexport', ['--username', username, '--password', password, '--db', db, '--collection', 'proficiencies', '--type', 'csv', '--fields', '_id,proficiencies', '--out', '/home/bitnami/apps/jobmosis-staging/c-next/dist/server/prod/public/key-skills.csv']);
-
-    keySkillsChild.on('exit', function (code: any) {
-      if (code != 0) {
-        keySkillsChild.kill();
-        callback(new Error(), null);
+    this.exportCollection("proficiencies", fields, downloadLocation, '{}', (error: any, result: any) => {
+      if (error) {
+        callback(error, null);
       } else {
-        console.log('keySkillsChild process closed with code ' + code);
-        keySkillsChild.kill();
         callback(null, 'success');
       }
-    });
-
-    keySkillsChild.stderr.on('data', function (buf: any) {
-      console.log('[STR] stderr "%s"', String(buf));
-      stderr += buf;
     });
 
   }

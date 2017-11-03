@@ -1,7 +1,10 @@
 <div class="value-portrait-section">
   <div class="top-header">
-    <div class="col-sm-5 col-xs-10 no-padding">
+    <div class="col-sm-6 col-xs-10 no-padding">
       <div class="back-btn" (click)="navigateTo();"></div>
+      <div class="back-button" (click)="navigateTo();" *ngIf="!isShareView">
+        <div class="back-button-arrow"></div>
+      </div>
       <h1>
         {{getLabel().VALUE_PORTRAIT_HEADER}}
         <span> {{getLabel().VALUE_PORTRAIT_TITLE}}  </span>
@@ -12,7 +15,7 @@
         <span class="hidden-xs">{{getButtons().VALUE_PORTRAIT_BUTTON}}</span>
       </button>
       </div>
-    <div *ngIf="!isShareView" class="col-sm-7 col-xs-2 no-padding">
+    <div *ngIf="!isShareView" class="col-sm-6 col-xs-2 no-padding">
       <div class="job-mosis-white-logo">
         <!--<img (click)="navigateTo();" src="/assets/c-next/header/job-mosis-logo-white.png"/>-->
         <div class="hidden-xs pull-left" *ngIf="!isShareView && isCandidate && isCandidateSubmitted">
@@ -22,9 +25,9 @@
     </div>
   </div>
   <div class="value-portrait-container">
-    <div class="btn-close" (click)="navigateTo();" *ngIf="!isShareView">
+    <!--<div class="btn-close" (click)="navigateTo();" *ngIf="!isShareView">
       <span class="glyphicon glyphicon-remove"></span>
-    </div>
+    </div>-->
     <cn-value-portrait [isShareView]="isShareView" [isMiniView]="false" [userId]="_userId"></cn-value-portrait>
   </div>
 </div>

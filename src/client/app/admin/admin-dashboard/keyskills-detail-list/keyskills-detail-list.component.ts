@@ -27,7 +27,7 @@ export class KeySkillsDetailListComponent {
       .subscribe(
         data => {
           this.loaderService.stop();
-          document.getElementById('link').click();
+          document.getElementById('link-keySkills').click();
           this.messageService.message(new Message(Messages.MSG_SUCCESS_FOR_FILE_DOWNLOAD));
           },
         error => {

@@ -60,7 +60,7 @@ export class Messages {
   public static MSG_SUCCESS_NEWREGISTRATION: string = 'Registration successful. Mobile number verified. Kindly sign in.';
   public static MSG_SUCCESS_RESET_PASSWORD: string = 'Your password is reset successfully.Kindly login';
   public static MSG_SUCCESS_CHANGE_PASSWORD: string = 'Your password has been changed successfully.';
-  public static MSG_SUCCESS_CHANGE_EMAIL: string = 'A verification email is sent to your new email id.Current email id will be active untill you verify new email id.';
+  public static MSG_SUCCESS_CHANGE_EMAIL: string = 'A verification email is sent to your new email id. Current email id will be active till you verify new email id.';
   public static MSG_SUCCESS_COMPANY_WEBSITE: string = 'Company website updated successfully';
   public static MSG_SUCCESS_CHANGE_MOBILE: string = 'Verify your new mobile number by entering OTP sent on your mobile number.';
   public static MSG_SUCCESS_FORGOT_PASSWORD: string = 'Email for password reset has been sent successfully on your registered email id.';
