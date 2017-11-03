@@ -57,6 +57,9 @@ $active-green: #419441;
 $red-gradient-light: rgba(255,0,0,0);
 $red-gradient-dark: rgb(235, 107, 86);
 $close-button-shadow: rgba(0,0,0,0.3);
+$hover-bg: #f2f2f2;
+$blue: #29b6f6;
+$hover-list-bg: #dbdbdb;
 
 .btn-logout {
   margin-top: 15px;
@@ -1413,7 +1416,7 @@ select:focus {
         height: 100%;
         overflow-y: auto;
         overflow-x: hidden;
-        padding: 0;
+        padding: 0 0 110px 0;
         .complexities-list {
           border-bottom: 1px solid $modal-border;
           padding: 15px;
@@ -1839,6 +1842,9 @@ select:focus {
 }
 
 .mini-value-portrait-section {
+  cursor: pointer;
+  display: inline-block;
+  height: 100%;
   h3 {
     color: $white;
     font-size: 50px;
@@ -1897,6 +1903,57 @@ select:focus {
   .value-portrait-candidate-number {
     .phone-icon {
       width: 40px !important;
+    }
+  }
+}
+
+.select-option {
+  .hover-list {
+    background: $hover-bg;
+    border: 1px solid #e4e4e4;
+    box-shadow: 1px 1px 4px #9c9c9c;
+    display: none;
+    min-width: 415px;
+    margin: 5px 373px 0 0;
+    padding: 10px;
+    position: fixed;
+    z-index: 999;
+    &:after {
+      content: "";
+      border-bottom: 10px solid $hover-bg;
+      border-left: 10px solid transparent;
+      border-right: 10px solid transparent;
+      left: 10%;
+      margin-left: -10px;
+      position: absolute;
+      top: -10px;
+    }
+    h2 {
+      color: $blue;
+      font-family: 'gothamrnd-book';
+      font-size: 14px;
+      font-weight: 600;
+      margin: 0 0 10px;
+    }
+  }
+  &:hover {
+    span {
+      background: $blue;
+      color: $white;
+    }
+    .hover-list {
+      display: block;
+      .lists-item {
+        float: left;
+        margin: 0 0 5px 5px;
+        span {
+          background: $hover-list-bg;
+          color: $black;
+          float: left;
+          font-size: 12px;
+          padding: 4px 5px;
+        }
+      }
     }
   }
 }

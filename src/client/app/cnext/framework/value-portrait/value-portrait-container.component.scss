@@ -9,7 +9,6 @@
   z-index: 999;
   width: 1200px;
   h1 {
-    border-left: 6px solid $white;
     color: $white;
     float: left;
     font-size: 22px;
@@ -96,6 +95,30 @@
   }
 }
 
+.back-button {
+  border: 2px solid $white;
+  border-radius: 50%;
+  cursor: pointer;
+  float: left;
+  height: 46px;
+  margin: 8px 0 0 0;
+  width: 48px;
+  span {
+    color: $white;
+    float: left;
+    font-size: 14px;
+    margin: 12px 0;
+  }
+}
+
+.back-button-arrow {
+  background: url(../assets/c-next/card-view/sprite.png) no-repeat -112px -742px;
+  float: left;
+  height: 30px;
+  margin: 7px 5px 9px 13px;
+  width: 18px;
+}
+
 @media only screen and (max-width: 980px) {
   .btn-get-portrait {
     bottom: 15px;
@@ -111,6 +134,7 @@
     h1 {
       border: 0;
       font-size: 14px;
+      margin: 14px 0;
       padding: 0;
       width: 87%;
       span {
@@ -148,6 +172,9 @@
     height: 30px;
     margin: 17px 0;
     width: 27px;
+  }
+  .back-button {
+    display: none;
   }
 }
 

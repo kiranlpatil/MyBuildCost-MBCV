@@ -34,10 +34,10 @@
 
   <div class="main-content clearfix edit-modal-content">
     <div class="scrollable-content capabilities col-xs-7">
-    <h4 class="heading" *ngIf="isCandidate">{{candidateCapabilityMessage}}
-    </h4>
-    <h4 class="heading" *ngIf="!isCandidate">{{recruiterCapabilityMessage}}
-    </h4>
+      <h4 class="heading" *ngIf="isCandidate">{{candidateCapabilityMessage}}
+      </h4>
+      <h4 class="heading" *ngIf="!isCandidate">{{recruiterCapabilityMessage}}
+      </h4>
       <div class="capability-type">
         <span class="capability-option" *ngFor="let role of roles">
           <!--<h5 class="sub-areas">Area Of Work - {{role.name}}</h5>-->
@@ -52,6 +52,12 @@
               <span *ngIf="item.name != ''">{{item.name}}</span>
               <div class="check"></div>
             </label>
+            <div class="hover-list">
+              <h2>Complexities under {{item.name}}</h2>
+              <div class="lists-item" *ngFor="let complexity of item.allcomplexities">
+                  <span>{{complexity}}</span>
+               </div>
+            </div>
           </div>
         </span>
       </div>
@@ -79,12 +85,14 @@
       <div class="mini-value-portrait-section">
         <h3 [innerHTML]="getMessage().CLICK_BELOW_FOR_PREVIEW_MSG">
         </h3>
-        <cn-value-portrait (click)="navigateToWithId('/value-portrait');" [isShareView]="false" [isMiniView]="true" [userId]="userId" *ngIf="isCandidate"></cn-value-portrait>
+        <cn-value-portrait (click)="navigateToWithId('/value-portrait');" [isShareView]="false" [isMiniView]="true"
+                           [userId]="userId" *ngIf="isCandidate"></cn-value-portrait>
       </div>
       <cn-tool-tip id="candidate-tooltip" [message]="tooltipCandidateMessage" *ngIf="isCandidate"></cn-tool-tip>
     </div>
 
-    </div>
+  </div>
 </div>
+
 
 

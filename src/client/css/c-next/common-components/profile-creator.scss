@@ -16,7 +16,7 @@
     right: 0;
     top: 0;
     width: 370px;
-    z-index: 9;
+    /*z-index: 9;*/
 
     ul {
       padding: 0 5px;
@@ -79,7 +79,6 @@
   position: relative;
   top: 0;
   width: 100%;
-  z-index: 1;
 }
 
 .main-content {
@@ -295,7 +294,7 @@
     position: absolute;
     text-align: right;
     width: calc(100% - 370px);
-    z-index: 2;
+    /*z-index: 2;*/
 
     button[hidden] {
       display: none;
