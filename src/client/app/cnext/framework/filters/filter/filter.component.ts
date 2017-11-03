@@ -1,13 +1,13 @@
-import {Component, Input, EventEmitter,Output} from "@angular/core";
-import {FormBuilder, FormGroup} from "@angular/forms";
-import {JobPosterModel} from "../../../../user/models/jobPoster";
-import {ShowQcardviewService} from "../../showQCard.service";
-import {Candidate} from "../../../../user/models/candidate";
-import {QCardFilterService} from "../q-card-filter.service";
-import {FilterService} from "./filter.service";
-import {QCardFilter} from "../../model/q-card-filter";
-import {ErrorService} from "../../../../shared/services/error.service";
-import {Label} from "../../../../shared/constants";
+import {Component, Input, EventEmitter, Output, OnChanges, OnInit} from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { JobPosterModel } from '../../../../user/models/jobPoster';
+import { ShowQcardviewService } from '../../showQCard.service';
+import { Candidate } from '../../../../user/models/candidate';
+import { QCardFilterService } from '../q-card-filter.service';
+import { FilterService } from './filter.service';
+import { QCardFilter } from '../../model/q-card-filter';
+import { ErrorService } from '../../../../shared/services/error.service';
+import { Label } from '../../../../shared/constants';
 
 @Component({
   moduleId: module.id,
@@ -16,26 +16,7 @@ import {Label} from "../../../../shared/constants";
   styleUrls: ['filter.component.css']
 })
 
-export class FilterComponent {
-  @Input() private candidate: Candidate;
-  @Input() private locations: any[];
-  @Input() private role: boolean;
-  @Input() private selectedJob: JobPosterModel;
-  @Output() changeFilter: EventEmitter<QCardFilter> = new EventEmitter<QCardFilter>();
-  private isShowJobFilter: boolean = false;
-  isFilterVisible: boolean = false;
-  proficiencyList: string[] = new Array(0);
-  private locationList: string[] = new Array(0);
-  experienceRangeList: string[] = new Array(0);
-  educationList: string[] = new Array(0);
-  jointimeList: string[] = new Array(0);
-  industryList: string[] = new Array(0);
-  salaryRangeList: string[] = new Array(0);
-  private companySizeList: string[] = new Array(0);
-  private queryList: string[] = new Array(0);
-  qCardFilter: QCardFilter = new QCardFilter();
-  private location: string[] = new Array(0);
-  private All = 'All';
+export class FilterComponent implements OnChanges, OnInit {
   userForm: FormGroup;
   isRecuirter: boolean;
   showClearFilter: boolean;
@@ -50,6 +31,27 @@ export class FilterComponent {
   openDomainPanel: boolean = false;
   mustHaveComplexityPanel: boolean = false;
   isComplexityMustHaveMatrixPresent : boolean;
+  isFilterVisible: boolean = false;
+  proficiencyList: string[] = new Array(0);
+  experienceRangeList: string[] = new Array(0);
+  educationList: string[] = new Array(0);
+  jointimeList: string[] = new Array(0);
+  industryList: string[] = new Array(0);
+  salaryRangeList: string[] = new Array(0);
+  qCardFilter: QCardFilter = new QCardFilter();
+  @Output() changeFilter: EventEmitter<QCardFilter> = new EventEmitter<QCardFilter>();
+
+  @Input() private candidate: Candidate;
+  @Input() private locations: any[];
+  @Input() private role: boolean;
+  @Input() private selectedJob: JobPosterModel;
+  private isShowJobFilter: boolean = false;
+  private locationList: string[] = new Array(0);
+  private companySizeList: string[] = new Array(0);
+  private queryList: string[] = new Array(0);
+  private location: string[] = new Array(0);
+  private All = 'All';
+
 
   constructor(private formBuilder: FormBuilder,
               private errorService:ErrorService,
@@ -88,7 +90,7 @@ export class FilterComponent {
     if (changes.candidate) {
       if (changes.candidate.currentValue) {
         this.proficiencyList = changes.candidate.currentValue.proficiencies;
-        if(changes.candidate && changes.candidate.currentValue && changes.candidate.currentValue.interestedIndustries[0]!='None') {
+        if(changes.candidate && changes.candidate.currentValue && changes.candidate.currentValue.interestedIndustries[0] !== 'None') {
           this.industryList = changes.candidate.currentValue.interestedIndustries;
         }
         //this.location = changes.candidate.locations;
@@ -104,7 +106,7 @@ export class FilterComponent {
     if (changes.selectedJob) {
       if (changes.selectedJob.currentValue) {
         this.proficiencyList = changes.selectedJob.currentValue.proficiencies;
-        if(changes.candidate && changes.candidate.currentValue.interestedIndustries[0] != 'None') {
+        if(changes.candidate && changes.candidate.currentValue.interestedIndustries[0] !== 'None') {
           this.industryList = changes.selectedJob.currentValue.interestedIndustries;
         }
         this.location = changes.selectedJob.currentValue.location.city;
@@ -138,9 +140,9 @@ export class FilterComponent {
   filterByProficiency(event: any) {
     var value = event.target.value;
     if (event.target.checked) {
-      this.qCardFilter.proficiencyDataForFilter.push(value.toLowerCase());
+      this.qCardFilter.proficiencyDataForFilter.push(value);
     } else {
-      var index = this.qCardFilter.proficiencyDataForFilter.indexOf(value.toLowerCase());
+      var index = this.qCardFilter.proficiencyDataForFilter.indexOf(value);
       if (index > -1) {
         this.qCardFilter.proficiencyDataForFilter.splice(index, 1);
       }
@@ -148,6 +150,9 @@ export class FilterComponent {
     this.showClearFilter = true;
     this.buildQuery();
     this.qCardFilterService.filterby(this.qCardFilter);
+    if(this.isRecuirter) {
+      this.changeFilter.emit(this.qCardFilter);
+    }
   }
 
   filterByEducation(event: any) {
@@ -156,9 +161,9 @@ export class FilterComponent {
       this.queryListRemove('(args.educationDataForFilter.indexOf(item.education.toLowerCase()) !== -1)');
     }
     if (event.target.checked) {
-      this.qCardFilter.educationDataForFilter.push(value.toLowerCase())
+      this.qCardFilter.educationDataForFilter.push(value);
     } else {
-      var index = this.qCardFilter.educationDataForFilter.indexOf(value.toLowerCase());
+      var index = this.qCardFilter.educationDataForFilter.indexOf(value);
       if (index > -1) {
         this.qCardFilter.educationDataForFilter.splice(index, 1);
       }
@@ -171,14 +176,17 @@ export class FilterComponent {
     this.showClearFilter = true;
     this.buildQuery();
     this.qCardFilterService.filterby(this.qCardFilter);
+    if(this.isRecuirter) {
+      this.changeFilter.emit(this.qCardFilter);
+    }
   }
 
   filterByIndustryExposure(event: any) {
     var value = event.target.value;
     if (event.target.checked) {
-      this.qCardFilter.industryExposureDataForFilter.push(value.toLowerCase())
+      this.qCardFilter.industryExposureDataForFilter.push(value)
     } else {
-      var index = this.qCardFilter.industryExposureDataForFilter.indexOf(value.toLowerCase());
+      var index = this.qCardFilter.industryExposureDataForFilter.indexOf(value);
       if (index > -1) {
         this.qCardFilter.industryExposureDataForFilter.splice(index, 1);
       }
@@ -193,6 +201,9 @@ export class FilterComponent {
     this.showClearFilter = true;
     this.buildQuery();
     this.qCardFilterService.filterby(this.qCardFilter);
+    if(this.isRecuirter) {
+      this.changeFilter.emit(this.qCardFilter);
+    }
   }
 
   filterByJoinTime(value: any) {
@@ -205,10 +216,10 @@ export class FilterComponent {
       }
     } else if (value) {
       this.qCardFilter.filterByJoinTime = value;
-      if (this.isRecuirter === true) {
-        this.queryListPush('((args.filterByJoinTime && item.noticePeriod) && (args.filterByJoinTime.toLowerCase() === item.noticePeriod.toLowerCase()))');
+      if (this.isRecuirter) {
+          this.changeFilter.emit(this.qCardFilter);
       }
-      if (this.isRecuirter === false) {
+      if (!this.isRecuirter) {
         this.queryListPush('((args.filterByJoinTime && item.joiningPeriod) && (args.filterByJoinTime.toLowerCase() === item.joiningPeriod.toLowerCase()))');
       }
       this.showClearFilter = true;
@@ -220,35 +231,38 @@ export class FilterComponent {
   selectSalaryMinModel(value: any) {
     if(value == ''){
       this.qCardFilter.salaryMinValue = this.salaryRangeList[0];
-      return
+      return;
     }
     this.qCardFilter.salaryMinValue = value;
+    if(this.isRecuirter) {
+      this.qCardFilter.salaryMinValue = Number(this.qCardFilter.salaryMinValue) * 100000;
+    }
     this.salaryFilterBy();
   }
 
   selectSalaryMaxModel(value: any) {
     if(value == ''){
-      if (this.isRecuirter === true) {
+      if (this.isRecuirter) {
         this.queryListRemove('((Number(item.salary.split(" ")[0]) >= Number(args.salaryMinValue)) && ' +
           '(Number(item.salary.split(" ")[0]) <= Number(args.salaryMaxValue)))');
-      }else if(this.isRecuirter === false) {
+      }else if(!this.isRecuirter) {
         this.queryListRemove('((Number(args.salaryMinValue) <= Number(item.salaryMinValue)  && ' +
           'Number(item.salaryMinValue) <= Number(args.salaryMaxValue)) || (Number(args.salaryMinValue) ' +
           '<= Number(item.salaryMaxValue)  && Number(item.salaryMaxValue) <= Number(args.salaryMaxValue)))');
       }
       this.qCardFilter.salaryMaxValue = this.salaryRangeList[this.salaryRangeList.length -1];
-      return
+      return;
     }
     this.qCardFilter.salaryMaxValue = value;
+    if(this.isRecuirter) {
+      this.qCardFilter.salaryMaxValue = Number(this.qCardFilter.salaryMaxValue) * 100000;
+    }
     this.salaryFilterBy();
   }
 
-  salaryFilterBy() {
+  salaryFilterBy() {debugger
     if (Number(this.qCardFilter.salaryMaxValue) && Number(this.qCardFilter.salaryMinValue)) {
-      if (this.isRecuirter === true) {
-        this.queryListPush('((Number(item.salary.split(" ")[0]) >= Number(args.salaryMinValue)) && ' +
-          '(Number(item.salary.split(" ")[0]) <= Number(args.salaryMaxValue)))');
-      }else if(this.isRecuirter === false) {
+      if(!this.isRecuirter) {
         this.queryListPush('((Number(args.salaryMinValue) <= Number(item.salaryMinValue)  && ' +
           'Number(item.salaryMinValue) <= Number(args.salaryMaxValue)) || (Number(args.salaryMinValue) ' +
           '<= Number(item.salaryMaxValue)  && Number(item.salaryMaxValue) <= Number(args.salaryMaxValue)))');
@@ -256,21 +270,24 @@ export class FilterComponent {
       this.showClearFilter = true;
       this.buildQuery();
       this.qCardFilterService.filterby(this.qCardFilter);
+      if(this.isRecuirter) {
+        this.changeFilter.emit(this.qCardFilter);
+      }
     }
   }
 
   selectExperiencesMaxModel(value: any) {
     if(value == ''){
-      if (this.isRecuirter === true) {
+      if (this.isRecuirter) {
         this.queryListRemove('((Number(item.experience.split(" ")[0]) >= Number(args.experienceMinValue)) && ' +
           '(Number(item.experience.split(" ")[0]) <= Number(args.experienceMaxValue)))');
-      }else if(this.isRecuirter === false) {
+      }else if(!this.isRecuirter) {
         this.queryListRemove('((Number(args.experienceMinValue) <= Number(item.experienceMinValue)  && ' +
           'Number(item.experienceMinValue) <= Number(args.experienceMaxValue)) || (Number(args.experienceMinValue) ' +
           '<= Number(item.experienceMaxValue)  && Number(item.experienceMaxValue) <= Number(args.experienceMaxValue)))');
       }
       this.qCardFilter.experienceMaxValue = this.experienceRangeList[this.experienceRangeList.length -1];
-      return
+      return;
     }
     this.qCardFilter.experienceMaxValue = value;
     this.experienceFilterBy();
@@ -288,10 +305,7 @@ export class FilterComponent {
 
   experienceFilterBy() {
     if (Number(this.qCardFilter.experienceMinValue) != undefined && Number(this.qCardFilter.experienceMaxValue) != undefined) {
-      if (this.isRecuirter === true) {
-        this.queryListPush('((Number(item.experience.split(" ")[0]) >= Number(args.experienceMinValue)) && ' +
-          '(Number(item.experience.split(" ")[0]) <= Number(args.experienceMaxValue)))');
-      }else if(this.isRecuirter === false) {
+      if(this.isRecuirter === false) {
         this.queryListPush('((Number(args.experienceMinValue) <= Number(item.experienceMinValue)  && ' +
           'Number(item.experienceMinValue) <= Number(args.experienceMaxValue)) || (Number(args.experienceMinValue) ' +
           '<= Number(item.experienceMaxValue)  && Number(item.experienceMaxValue) <= Number(args.experienceMaxValue)))');
@@ -299,10 +313,13 @@ export class FilterComponent {
       this.showClearFilter = true;
       this.buildQuery();
       this.qCardFilterService.filterby(this.qCardFilter);
+      if(this.isRecuirter) {
+        this.changeFilter.emit(this.qCardFilter);
+      }
     }
   }
 
-  jobsFilterByLocation(value: any) {debugger
+  jobsFilterByLocation(value: any) {
     if(value == ''){
       this.queryListRemove('(((args.filterByLocation && item.location))&&(args.filterByLocation.toLowerCase() === item.location.toLowerCase()))');
     }else if (value) {
@@ -314,7 +331,7 @@ export class FilterComponent {
     this.qCardFilterService.filterby(this.qCardFilter);
   }
 
-  candidatesFilterByLocation(value: any) {debugger
+  candidatesFilterByLocation(value: any) {
     this.qCardFilter.filterByLocation = value;
     if (value == 'All') {
       this.queryListPush('((args.filterByLocation && item.location) && ((args.filterByLocation.toLowerCase() === item.location.toLowerCase()) || (args.filterByLocation.toLowerCase() !== item.location.toLowerCase())))');
@@ -327,7 +344,6 @@ export class FilterComponent {
     this.buildQuery();
     this.changeFilter.emit(this.qCardFilter);
     this.qCardFilterService.filterby(this.qCardFilter);
-
   }
 
   filterByCompanySize(value: any) {

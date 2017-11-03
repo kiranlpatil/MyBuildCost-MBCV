@@ -6,7 +6,7 @@ export class MaxRangeValidation implements PipeTransform {
 
   transform(array: Array<any>, args: string) {
 
-    if (args) {
+    if (args) {debugger
       return array.filter(item => (Number(item) >= Number(args)));
     }
 

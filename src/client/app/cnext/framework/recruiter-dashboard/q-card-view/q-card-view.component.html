@@ -34,7 +34,7 @@
   <div class="card-view clearfix">
     <!--<div class="col-sm-4" *ngFor= "let item of candidates">&lt;!&ndash;| candidatematching: matchFormat&ndash;&gt;-->
     <div class="col-sm-4 panel-container"
-         *ngFor="let item of candidates | qcardlistfilter : filterMeta : qCardCount ; let i=index;">
+         *ngFor="let item of candidates ; let i=index;">
       <!--<span class="compare-candidate-icon" (click)="addForCompareView(item._id)"
             title="Compare the Candidates"></span>-->
       <div class="panel clearfix" (click)="viewProfile(item)">

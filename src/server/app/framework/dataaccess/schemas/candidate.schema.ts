@@ -114,8 +114,8 @@ class CandidateSchema {
       }],
       professionalDetails: {
         education: String,
-        experience: String,
-        currentSalary: String,
+        experience: Number,
+        currentSalary: Number,
         noticePeriod: String,
         relocate: String,
         industryExposure: String,

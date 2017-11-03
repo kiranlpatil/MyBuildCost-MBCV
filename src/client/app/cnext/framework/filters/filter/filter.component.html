@@ -57,7 +57,7 @@
             <select formControlName="salaryMin" (change)="selectSalaryMinModel($event.target.value)">
               <option value="" selected></option>
               <option value="{{itemList}}"
-                      *ngFor="let itemList of salaryRangeList | minrange:qCardFilter.salaryMaxValue">{{itemList}}
+                      *ngFor="let itemList of salaryRangeList ">{{itemList}}
               </option>
             </select>
           </div>
@@ -66,7 +66,7 @@
             <select formControlName="salaryMax" (change)="selectSalaryMaxModel($event.target.value)">
               <option value="" selected></option>
               <option value="{{itemList}}"
-                      *ngFor="let itemList of salaryRangeList | maxrange:qCardFilter.salaryMinValue">{{itemList}}
+                      *ngFor="let itemList of salaryRangeList ">{{itemList}}
               </option>
             </select>
           </div>

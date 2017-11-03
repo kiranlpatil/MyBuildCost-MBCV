@@ -17,7 +17,7 @@ import Match = require('../../dataaccess/model/match-enum');
 import IndustryRepository = require('../../dataaccess/repository/industry.repository');
 import IndustryModel = require('../../dataaccess/model/industry.model');
 import ScenarioModel = require('../../dataaccess/model/scenario.model');
-import { FilterSort} from "../../dataaccess/model/filter";
+import { FilterSort } from "../../dataaccess/model/filter";
 let usestracking = require('uses-tracking');
 
 class SearchService {
@@ -43,12 +43,6 @@ class SearchService {
     let industries: string[] = [];
     let isReleventIndustriesFound: boolean = false;
     if (jobProfile.interestedIndustries && jobProfile.interestedIndustries.length > 0) {
-      /*isFound= jobProfile.interestedIndustries.filter((name : string)=> {
-       if(name === 'None'){
-       return name;
-       }
-       });*/
-      //jobProfile.releventIndustries = ['Textile'];
       for (let name of jobProfile.interestedIndustries) {
         if (name === 'None') {
           isFound = true;
@@ -123,6 +117,28 @@ class SearchService {
         {'professionalDetails.relocate': 'Yes'},
         {'location.city': jobProfile.location.city}
       ];
+    }
+    if(appliedFilters.educationDataForFilter && appliedFilters.educationDataForFilter.length > 0 ) {
+        data['professionalDetails.education'] = {$in: appliedFilters.educationDataForFilter};
+    }
+    if(appliedFilters.proficiencyDataForFilter && appliedFilters.proficiencyDataForFilter.length > 0 ) {
+      data['proficiencies'] = {$in: appliedFilters.proficiencyDataForFilter};
+    }
+    if(appliedFilters.industryExposureDataForFilter && appliedFilters.industryExposureDataForFilter.length > 0 ) {
+      data['interestedIndustries'] = {$in: appliedFilters.industryExposureDataForFilter};
+    }
+    if(appliedFilters.filterByJoinTime !== undefined  && appliedFilters.filterByJoinTime !== '') {
+        data['professionalDetails.noticePeriod'] = appliedFilters.filterByJoinTime;
+    }
+    if(appliedFilters.salaryMinValue !== undefined  && appliedFilters.salaryMinValue !== '' &&
+      appliedFilters.salaryMaxValue !== undefined  && appliedFilters.salaryMaxValue !== '') {
+      data['professionalDetails.currentSalary'] = {$gte:Number(appliedFilters.salaryMinValue),
+        $lte:Number(appliedFilters.salaryMaxValue)};
+    }
+    if(appliedFilters.experienceMinValue !== undefined  && appliedFilters.experienceMinValue !== '' &&
+      appliedFilters.experienceMaxValue !== undefined  && appliedFilters.experienceMaxValue !== '') {
+      data['professionalDetails.experience'] = {$gte:Number(appliedFilters.experienceMinValue),
+        $lte:Number(appliedFilters.experienceMaxValue)};
     }
     switch (appliedFilters.sortBy) {
       case 'Salary':
@@ -249,14 +265,13 @@ class SearchService {
   }
 
   getCompareData(candidate: CandidateModel, job: any, isCandidate: boolean, industries: IndustryModel[]) {
-    //let newCandidate = candidate.toObject();
     var newCandidate = this.buildCandidateModel(candidate);
     let jobMinExperience: number = Number(job.experienceMinValue);
     let jobMaxExperience: number = Number(job.experienceMaxValue);
     let jobMinSalary: number = Number(job.salaryMinValue);
     let jobMaxSalary: number = Number(job.salaryMaxValue);
-    let candiExperience: string[] = newCandidate.professionalDetails.experience.split(' ');
-    let canSalary: string[] = newCandidate.professionalDetails.currentSalary.split(' ');
+    let candiExperience: string[] = newCandidate.professionalDetails.experience;
+    let canSalary: string[] = newCandidate.professionalDetails.currentSalary;
     if ((jobMaxExperience >= Number(candiExperience[0])) && (jobMinExperience <= Number(candiExperience[0]))) {
       newCandidate.experienceMatch = 'exact';
     } else {
