@@ -2,7 +2,18 @@
   "TplSeed": {
     "database": {
       "host":"127.0.0.1",
-      "name": "Jobmosis-staging"
+      "name": "Jobmosis-staging",
+      "username": "admin",
+      "password": "jobmosisadmin123",
+      "mongoExport": "/usr/bin/mongoexport"
+    },
+    "adminExportFilePath": {
+      "candidatesCSV": "/home/bitnami/apps/jobmosis-staging/c-next/dist/server/prod/public/candidates.csv",
+      "candidateOtherDetailsCSV": "/home/bitnami/apps/jobmosis-staging/c-next/dist/server/prod/public/candidates-other-details.csv",
+      "recruitersCSV": "/home/bitnami/apps/jobmosis-staging/c-next/dist/server/prod/public/recruiters.csv",
+      "usersCSV": "/home/bitnami/apps/jobmosis-staging/c-next/dist/server/prod/public/users.csv",
+      "usageDetailsCSV": "/home/bitnami/apps/jobmosis-staging/c-next/dist/server/prod/public/usagedetail.csv",
+      "keySkillsCSV": "/home/bitnami/apps/jobmosis-staging/c-next/dist/server/prod/public/key-skills.csv"
     },
     "limitForQuery" : 10,
     "mail": {

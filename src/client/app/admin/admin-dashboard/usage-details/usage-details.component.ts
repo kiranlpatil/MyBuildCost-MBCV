@@ -27,7 +27,7 @@ export class UsageDetailsComponent {
       .subscribe(
         UsageDetails => {
           this.loaderService.stop();
-          document.getElementById('link').click();
+          document.getElementById('link_usage').click();
           this.messageService.message(new Message(Messages.MSG_SUCCESS_FOR_FILE_DOWNLOAD));
           },
         error => {
