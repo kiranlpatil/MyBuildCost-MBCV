@@ -40,6 +40,7 @@ class IndustryRepository extends RepositoryBase<IIndustry> {
             for (let role of industry[0].roles) {
               let obj: any = {
                 'industryName': industry[0].name,
+                'industryCode': code,
                 '_id': role._id,
                 'sort_order': role.sort_order,
                 'name': role.name,

@@ -432,6 +432,7 @@ export class API {
   public static EXPORT_CANDIDATE_DETAIL_PROFILE = 'exportCandidateDetails';
   public static EXPORT_RECRUITER_DETAIL_PROFILE = 'exportRecruiterDetails';
   public static RECRUITER_PROFILE = 'recruiter';
+  public static JOBS = 'jobs';
   public static PROFESSIONAL_DATA = 'professionaldata';
   public static EMPLOYMENTHISTORY = 'employmentdata';
   public static LOGIN = 'login';

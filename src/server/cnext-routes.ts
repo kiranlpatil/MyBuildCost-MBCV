@@ -45,6 +45,7 @@ export function cnextInit(app: express.Application) {
   app.get('/api/recruiter/jobProfile/:id/candidates',loggerInterceptor.logDetail, this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, searchController.getMatchingCandidates);
   app.get('/api/recruiter/jobProfile/:id',loggerInterceptor.logDetail, this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, jobProfileController.retrieve);
   app.get('/api/candidate/:id/jobProfile',loggerInterceptor.logDetail, this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, searchController.getMatchingJobProfiles);
+  app.get('/api/jobs/:id',loggerInterceptor.logDetail, this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, searchController.getJobsInIndustry);
   app.get('/api/candidate/:id/:candidateId',loggerInterceptor.logDetail, this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, candidateController.retrieve);
   app.get('/api/candidateDetails/:id',loggerInterceptor.logDetail, this.authInterceptor.requiresAuth, candidateController.get);
   app.get('/api/candidate/:candidateId/matchresult/:jobId',loggerInterceptor.logDetail, this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, candidateController.metchResult);

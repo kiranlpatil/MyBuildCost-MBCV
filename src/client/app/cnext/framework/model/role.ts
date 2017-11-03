@@ -7,4 +7,5 @@ export class Role {
   secondaryCapabilities: SecondaryCapability[] = new Array(0);
   isAPIForComplexity: boolean = false;
   isForTest: boolean = false;
+  industryCode:string;
 }

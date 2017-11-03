@@ -163,6 +163,39 @@ class SearchService {
       }
     });
   }
+  getJobsInIndustry(industryCode: string, callback: (error: any, result: any) => void) {
+    let data = {
+      'postedJobs.industry.code': industryCode,
+      'postedJobs.isJobPosted':true
+    };
+    let excluded_fields = {
+      'postedJobs.industry.roles': 0,
+    };
+      this.recruiterRepository.countWithLean(data,excluded_fields, (err, res) => {
+      if (err) {
+        callback(err, null);
+      } else {
+        console.log(res);
+        callback(null,this.countJobs(res,industryCode));
+      }
+    });
+  }
+
+  countJobs(recruiters:any[],industryCode:string):number {
+    let count:number=0;
+    if (recruiters.length === 0) {
+      return count;
+    }
+    for (let recruiter of recruiters) {
+      for (let job of recruiter.postedJobs){
+        if (job.isJobPosted && !job.isJobPostClosed && (industryCode === job.industry.code) && !job.isJobPostExpired && (job.expiringDate > new Date())) {
+          count++;
+        }
+      }
+    }
+    return count;
+  }
+
 
   getMatchingResult(candidateId: string, jobId: string, isCandidate : boolean,callback: (error: any, result: any) => void) {
     let uses_data = {
