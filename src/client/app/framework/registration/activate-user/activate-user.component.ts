@@ -26,8 +26,8 @@ export class ActivateUserComponent implements OnInit {
   activationMessage_1: string= Messages.MSG_ACTIVATE_USER_1;
   activationMessage_2: string= Messages.MSG_ACTIVATE_USER_2;
   activationMessage_3: string= Messages.MSG_ACTIVATE_USER_3;
-  emailVerificationMessage_1: string= Messages.MSG_EMAIL_VERIFICATION_1;
-  emailVerificationMessage_2: string= Messages.MSG_EMAIL_VERIFICATION_2;
+  emailVerificationMessageHeading: string= Messages.MSG_EMAIL_VERIFICATION_1;
+  emailVerificationMessage: string= Messages.MSG_EMAIL_VERIFICATION_2;
 
   constructor(private _router: Router, private activatedRoute: ActivatedRoute, private activeService: ActiveUserService,
               private messageService: MessageService) {
