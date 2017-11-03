@@ -14,6 +14,7 @@ import {
 } from "./shared/index";
 
 
+
 @Component({
   moduleId: module.id,
   selector: 'tpl-app',

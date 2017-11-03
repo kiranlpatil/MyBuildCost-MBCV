@@ -11,7 +11,7 @@
       box-shadow: 0 0 4px 2px rgba(125, 125, 125, 0.28), 0 0 1px 0 rgba(0, 0, 0, 0.16);
       float: left;
       height: 174px;
-      margin: 10px 0 -55px 0;
+      margin: 0 0 -55px 0;
       position: relative;
       width: 174px;
       z-index: 9;
@@ -39,7 +39,7 @@
 
 .value-portrait-candidate-number {
   display: inline-block !important;
-  margin: 45px 0 10px 0;
+  margin: 40px 0 10px 0;
   width: 100%;
   .phone-icon {
     background: url(../assets/c-next/card-view/sprite.png) no-repeat -135px -434px;
@@ -60,7 +60,7 @@
 
 .value-portrait-candidate-email {
   display: inline-block !important;
-  margin: 45px 0 10px 0;
+  margin: 40px 0 10px 0;
   width: 100%;
   .email-icon {
     background: url(../assets/c-next/card-view/sprite.png) no-repeat 6px -474px;

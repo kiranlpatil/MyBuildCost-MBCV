@@ -21,7 +21,7 @@ export class JobCloseComponent implements OnChanges, OnInit {
   @Input() isJobCloseButtonClicked:boolean;
 
 
-  private showCloseDialogue:boolean = false;
+  showCloseDialogue:boolean = false;
   private selectedJobCloseReason: number;
   reasonForClosingJob: any = new Array(0);
   private isShowNoSelectionError: boolean = false;

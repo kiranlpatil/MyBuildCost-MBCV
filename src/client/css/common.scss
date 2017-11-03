@@ -1416,7 +1416,7 @@ select:focus {
         height: 100%;
         overflow-y: auto;
         overflow-x: hidden;
-        padding: 0;
+        padding: 0 0 110px 0;
         .complexities-list {
           border-bottom: 1px solid $modal-border;
           padding: 15px;
@@ -1531,11 +1531,11 @@ select:focus {
 }
 
 .share-button-container {
-  width: 100%;
-  text-align: center;
-  height: auto;
-  margin: 30px auto;
   display: inline-block;
+  height: auto;
+  margin: 18px auto;
+  text-align: center;
+  width: 100%;
 }
 
 #print-job-compare-view {
@@ -1842,6 +1842,9 @@ select:focus {
 }
 
 .mini-value-portrait-section {
+  cursor: pointer;
+  display: inline-block;
+  height: 100%;
   h3 {
     color: $white;
     font-size: 50px;

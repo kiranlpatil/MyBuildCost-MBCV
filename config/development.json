@@ -2,7 +2,18 @@
   "TplSeed": {
     "database": {
       "host": "127.0.0.1",
-      "name": "c-next-backend"
+      "name": "c-next-backend",
+      "username": "",
+      "password": "",
+      "mongoExport": "/usr/bin/mongoexport"
+    },
+    "adminExportFilePath": {
+      "candidatesCSV": "/home/kapil/JavaProject/ng4-cnext/c-next/dist/server/dev/public/candidates.csv",
+      "candidateOtherDetailsCSV": "/home/kapil/JavaProject/ng4-cnext/c-next/dist/server/dev/public/candidates-other-details.csv",
+      "recruitersCSV": "/home/kapil/JavaProject/ng4-cnext/c-next/dist/server/dev/public/recruiters.csv",
+      "usersCSV": "/home/kapil/JavaProject/ng4-cnext/c-next/dist/server/dev/public/users.csv",
+      "usageDetailsCSV": "/home/kapil/JavaProject/ng4-cnext/c-next/dist/server/dev/public/usagedetail.csv",
+      "keySkillsCSV": "/home/kapil/JavaProject/ng4-cnext/c-next/dist/server/dev/public/key-skills.csv"
     },
     "limitForQuery" : 10,
     "mail": {
