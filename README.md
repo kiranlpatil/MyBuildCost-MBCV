@@ -377,6 +377,24 @@ $ src/redis-server
  })
  
  
+ - Version : 1.1.3
+ - Date : 3 Nov 2017
+ - Extend job expiry date for all current jobs in production to 30th April 2018 [CN-1806]
+ - Update Script
+ db.getCollection('recruiters').find({}).forEach(function(recruiter) {
+  for(var i = 0;i <= recruiter.postedJobs.length-1; i++){
+      if(recruiter.postedJobs[i].isJobPostClosed == true){
+  		print("skip");
+  	}else {
+ 	 	recruiter.postedJobs[i].expiringDate = ISODate("2018-04-30T18:29:59.414Z");
+ 		 db.getCollection('recruiters').update(
+ 		 {"postedJobs._id":recruiter.postedJobs[i]._id},recruiter)
+ 		 print("success:" + recruiter.postedJobs[i]._id);
+ 	}
+  }
+ })
+ 
+ 
 
 # MySQL
 
