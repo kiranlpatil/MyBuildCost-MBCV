@@ -17,7 +17,7 @@
     },
     "limitForQuery" : 10,
     "mail": {
-      "host":"http://34.215.90.153:3000/",
+      "host":"http://34.214.128.209:3000/",
       "MAIL_SENDER": "redminestatus@techprimelab.com",
       "MAIL_SENDER_PASSWORD": "Contactu$@tpl",
       "ADMIN_MAIL": "Jobmosis_TPL@techprimelab.com",

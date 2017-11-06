@@ -19,12 +19,12 @@ os: linux
 #   to "destination" on the Amazon EC2 instance.
 # Specify multiple "source" and "destination" pairs if you want to copy
 #   from multiple sources or to multiple destinations.
-# If you are not copying any files to the Amazon EC2 instance, then remove the
+# If you are not copying any files to the Amazon EC2 instance,then remove the
 #   "files" section altogether. A blank or incomplete "files" section
 #   may cause associated deployments to fail.
 files:
   - source: ./
-    destination: /home/ec2-user/apps/myApp
+    destination: /home/bitnami/apps/jobmosis-staging/myApp
 # For deployments to Amazon Linux, Ubuntu Server, or RHEL instances,
 #   you can specify a "permissions"
 #   section here that describes special permissions to apply to the files
@@ -53,7 +53,7 @@ files:
 # If you are not running any commands on the Amazon EC2 instance, then remove
 #   the "hooks" section altogether. A blank or incomplete "hooks" section
 #   may cause associated deployments to fail.
-#hooks:
+hooks:
 # For each deployment lifecycle event, specify multiple "location" entries
 #   if you want to run multiple scripts during that event.
 # You can specify "timeout" as the number of seconds to wait until failing the deployment
@@ -93,16 +93,16 @@ files:
 #    - location:
 #      timeout:
 #      runas:
-# During the AfterInstall deployment lifecycle event, run the commands
+# During the AfterInstall deployment lifecycle event,run the commands
 #   in the script specified in "location".
-#  AfterInstall:
-#    - location:
-#      timeout:
+  AfterInstall:
+    - location: scripts/startApp.sh
+      timeout: 600
 #      runas:
 #    - location:
 #      timeout:
-#      runas:
-# During the ApplicationInstall deployment lifecycle event, run the commands
+      runas: root
+# During the ApplicationInstall deployment lifecycle event,run the commands
 #   in the script specified in "location".
 #  ApplicationStart:
 #    - location:
