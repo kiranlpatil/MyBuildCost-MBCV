@@ -14,7 +14,6 @@ import User = require('../dataaccess/mongoose/user');
 import CapabilitiesClassModel = require('../dataaccess/model/capabilities-class.model');
 import ComplexitiesClassModel = require('../dataaccess/model/complexities-class.model');
 import RoleModel = require('../dataaccess/model/role.model');
-import {underline} from "chalk";
 let bcrypt = require('bcrypt');
 class CandidateService {
   private candidateRepository: CandidateRepository;

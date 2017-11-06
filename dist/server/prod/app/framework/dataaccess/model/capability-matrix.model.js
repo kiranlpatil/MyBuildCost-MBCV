@@ -1,0 +1,16 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var CapabilityMatrixModel = (function () {
+    function CapabilityMatrixModel() {
+    }
+    return CapabilityMatrixModel;
+}());
+exports.CapabilityMatrixModel = CapabilityMatrixModel;
+var ComplexitesDataModel = (function () {
+    function ComplexitesDataModel() {
+    }
+    return ComplexitesDataModel;
+}());
+exports.ComplexitesDataModel = ComplexitesDataModel;
+
+//# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFwcC9mcmFtZXdvcmsvZGF0YWFjY2Vzcy9tb2RlbC9jYXBhYmlsaXR5LW1hdHJpeC5tb2RlbC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUFBO0lBQUE7SUFLQSxDQUFDO0lBQUQsNEJBQUM7QUFBRCxDQUxBLEFBS0MsSUFBQTtBQUxZLHNEQUFxQjtBQU9sQztJQUFBO0lBSUEsQ0FBQztJQUFELDJCQUFDO0FBQUQsQ0FKQSxBQUlDLElBQUE7QUFKWSxvREFBb0IiLCJmaWxlIjoiYXBwL2ZyYW1ld29yay9kYXRhYWNjZXNzL21vZGVsL2NhcGFiaWxpdHktbWF0cml4Lm1vZGVsLmpzIiwic291cmNlc0NvbnRlbnQiOlsiZXhwb3J0IGNsYXNzIENhcGFiaWxpdHlNYXRyaXhNb2RlbCB7XG5cbiAgY2FwYWJpbGl0eU5hbWU6IHN0cmluZztcbiAgY2FwYWJpbGl0eVBlcmNlbnRhZ2U6IG51bWJlcjtcbiAgY29tcGxleGl0aWVzOiBDb21wbGV4aXRlc0RhdGFNb2RlbFtdO1xufVxuXG5leHBvcnQgY2xhc3MgQ29tcGxleGl0ZXNEYXRhTW9kZWwge1xuICBjb21wbGV4aXR5TmFtZTogc3RyaW5nO1xuICBzY2VuYXJpbzogc3RyaW5nO1xuICBzdGF0dXM6IHN0cmluZztcbn1cbi8vZXhwb3J0ID0gQ2FwYWJpbGl0eU1hdHJpeE1vZGVsO1xuIl19

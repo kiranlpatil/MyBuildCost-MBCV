@@ -1,0 +1,69 @@
+{
+  "TplSeed": {
+    "database": {
+      "host": "127.0.0.1",
+      "name": "c-next-backend",
+      "username": "",
+      "password": "",
+      "mongoExport": "/usr/bin/mongoexport"
+    },
+    "adminExportFilePath": {
+      "candidatesCSV": "/home/kapil/JavaProject/ng4-cnext/c-next/dist/server/dev/public/candidates.csv",
+      "candidateOtherDetailsCSV": "/home/kapil/JavaProject/ng4-cnext/c-next/dist/server/dev/public/candidates-other-details.csv",
+      "recruitersCSV": "/home/kapil/JavaProject/ng4-cnext/c-next/dist/server/dev/public/recruiters.csv",
+      "usersCSV": "/home/kapil/JavaProject/ng4-cnext/c-next/dist/server/dev/public/users.csv",
+      "usageDetailsCSV": "/home/kapil/JavaProject/ng4-cnext/c-next/dist/server/dev/public/usagedetail.csv",
+      "keySkillsCSV": "/home/kapil/JavaProject/ng4-cnext/c-next/dist/server/dev/public/key-skills.csv"
+    },
+    "limitForQuery" : 10,
+    "mail": {
+      "host": "http://localhost:8080/",
+      //"host":"http://7a4647ae.ngrok.io/"
+      "MAIL_SENDER": "redminestatus@techprimelab.com",
+      "MAIL_SENDER_PASSWORD": "Contactu$@tpl",
+      "ADMIN_MAIL": "shrikant.patki@techprimelab.com",
+      "TPLGROUP_MAIL":"",
+      "MAIL_SERVICE": "Gmail",
+      "MAILCHIMP_CANDIDATE_SIGN_IN_SUCCESS_LISTID": "222f48cf9a",
+      "MAILCHIMP_RECRUITER_SIGN_IN_SUCCESS_LISTID": "222f48cf94",
+      "MAILCHIMP_CANDIDATE_PROFILE_SUBMIT_SUCCESS_LISTID": "a1b8d070ce",
+      "MAILCHIMP_CANDIDATE_PROFILE_SUBMIT_25%_LISTID": "bd22dce604",
+      "MAILCHIMP_CANDIDATE_PROFILE_SUBMIT_50%_LISTID": "9856839bad",
+      "MAILCHIMP_CANDIDATE_PROFILE_SUBMIT_75%_LISTID": "a82db1bff5",
+      "MAILCHIMP_CANDIDATE_PROFILE_SUBMIT_95%_LISTID": "24cd79227b",
+      "MAIL_CHIMP_SERVICE_KEY": "7ed37fe28217d97fe5785a01207a494e-us16"
+    },
+    "facebookIds":{
+      "clientId" : "1802774049959105",
+      "clientSecretId" : "5bc0ff0093f79d67fcdf02d87a219206"
+    },
+    "googlePlusIds":{
+      "clientId" : " 377995296702-0tr9nbma4lgekn5690r1f4bn3q1in5mm.apps.googleusercontent.com",
+      "clientSecretId" : "-EHuNLqtYrRuwS_ZZ48PGHJC"
+    },
+    "messaging": {
+      "authKey": "152516A0pwPFRp59198cd9",
+      "senderId": "JOBMOS",
+      "routerNumber": "4"
+    },
+    "filePathForMasterDataExcel" : "./src/server/app/framework/public/config/NewIndustryDataExcel.xlsx",
+    "folderPath":"./dist/dev/server/public"
+  },
+  "logger" : {
+    "levels": {
+      "[all]":"DEBUG"
+    },
+    "appenders": [
+      {
+        "type": "console"
+      },
+      {
+        "type": "dateFile",
+        "filename": "logs/application",
+        "pattern": "-yyyy-MM-dd.log",
+        "alwaysIncludePattern": true
+      }
+    ],
+    "replaceConsole": true
+  }
+}
