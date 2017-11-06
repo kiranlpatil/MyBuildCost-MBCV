@@ -1793,9 +1793,9 @@ export function changeTheme(req: express.Request, res: express.Response, next: a
 
 }
 
-export function getFeedbackQuestions(req: express.Request, res: express.Response, next: any) {
+export function getUserFeedback(req: express.Request, res: express.Response, next: any) {
   __dirname = './';
-  var filepath = "feedbackQuestions.json";
+  var filepath = "feedbackForCandidate.json";
   try {
     res.sendFile(filepath, {root: __dirname});
   }

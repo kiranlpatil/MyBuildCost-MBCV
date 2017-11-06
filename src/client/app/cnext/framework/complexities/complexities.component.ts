@@ -12,6 +12,7 @@ import {GuidedTourService} from "../guided-tour.service";
 import {ErrorService} from "../../../shared/services/error.service";
 import {ComplexityAnsweredService} from "../complexity-answered.service";
 import {Router} from "@angular/router";
+import {UserFeedback} from "../user-feedback/userFeedback";
 
 @Component({
   moduleId: module.id,
@@ -71,6 +72,9 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
   private guidedTourImgOverlayScreensKeySkillsPath:string;
   isGuideImg:boolean = false;
   userId:string;
+  milestonesForPopUp: UserFeedback[] = new Array();
+  currentFeedbackQuestion: number;
+  @Output() popUpFeedBackAnswer: EventEmitter<UserFeedback> = new EventEmitter<UserFeedback>();
   constructor(private complexityService: ComplexityService,
               private complexityComponentService: ComplexityComponentService,
               private jobCompareService: JobCompareService,
@@ -160,10 +164,38 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
     for (let id in complexities) {
       this.complexityList.unshift(this.complexityData[id]);
     }
+
+    this.generateMilestonePopUp(this.complexityIds.length);
     this.getCapabilityDetail(this.currentCapabilityNumber);
     this.currentComplexity = this.getCurrentComplexityPosition();
     this.getComplexityDetails(this.complexityIds[this.currentComplexity]);
   }
+
+  generateMilestonePopUp(totalQuestions: number) {
+    for(let value of ValueConstant.MILESTONES_FOR_POPUP) {
+      let userFeedback: UserFeedback = new UserFeedback();
+      userFeedback.questionNumber = Math.floor(totalQuestions * value);
+      this.milestonesForPopUp.push(userFeedback);
+    }
+  }
+
+  isShowFeedback(complexityNumber: number): boolean {
+    let userFeedback: UserFeedback = this.milestonesForPopUp.find((u: UserFeedback)=>u.questionNumber === complexityNumber);
+    if(userFeedback && !userFeedback.isAnswered) {
+      this.currentFeedbackQuestion = this.milestonesForPopUp.findIndex((u: UserFeedback)=>u.questionNumber === complexityNumber);
+      return true;
+    }
+    return false;
+  }
+
+  onFeedbackAnswer(answer: number) {
+    this.milestonesForPopUp[this.currentFeedbackQuestion].isAnswered = true;
+    this.milestonesForPopUp[this.currentFeedbackQuestion].answer = answer;
+    this.milestonesForPopUp[this.currentFeedbackQuestion].indexOfQuestion = this.currentFeedbackQuestion;
+    console.log('this.milestonesForPopUp[this.currentFeedbackQuestion]1: ', this.milestonesForPopUp[this.currentFeedbackQuestion]);
+    this.popUpFeedBackAnswer.emit(this.milestonesForPopUp[this.currentFeedbackQuestion]);
+  }
+
   /*removeDuplicateIds() {
    /!* let copyOfcomplexityIds = this.complexityIds.slice();
      for(let copy of copyOfcomplexityIds){

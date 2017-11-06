@@ -12,7 +12,7 @@ export class UserFeedbackComponentService extends BaseService{
     super();
   }
 
-  getQuestionsForCandidateFeedback():Observable<any> {
+  getFeedbackForCandidate():Observable<any> {
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({headers: headers});
     var url = API.FEEDBACK_QUESTIONS;

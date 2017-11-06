@@ -410,6 +410,7 @@ export class ValueConstant {
   public static MATCHED_CANDIDATE: string = 'matchedList';
   public static VALUE_FOR_CANDIDATES_PERCENT_MATCHING_LOWER_BOUND = 10;
   public static JOB__EXPIRIY_PERIOD= 2592000000;
+  public static MILESTONES_FOR_POPUP: number[]= [0.25, 0.50, 0.75];
 }
 
 
@@ -483,7 +484,7 @@ export class API {
   public static FAQ = '/blog/index.php/faq/';
   public static ACCEPT_TERMS = '/terms-and-conditions.php';
   public static COUNT_OF_USERS = 'countofusers';
-  public static FEEDBACK_QUESTIONS = 'feedbackQuestions';
+  public static FEEDBACK_QUESTIONS = 'userFeedback';
 
 }
 

@@ -76,7 +76,7 @@ export function cnextInit(app: express.Application) {
   app.get('/api/share/:shortUrl',loggerInterceptor.logDetail, shareController.getActualUrlForShare);
   app.put('/api/share/:shortUrl',loggerInterceptor.logDetail, this.authInterceptor.requiresAuth,shareController.resetActualUrlForShare);
   app.get("/api/closeJob",loggerInterceptor.logDetail,this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, userController.getCloseJobReasons);
-  app.get("/api/feedbackQuestions",loggerInterceptor.logDetail,this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, userController.getFeedbackQuestions);
+  app.get("/api/userFeedback",loggerInterceptor.logDetail,this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, userController.getUserFeedback);
 
   // API for Uses Tracking
   app.put('/api/usageTracking',loggerInterceptor.logDetail, jobProfileController.createUsesTracking);

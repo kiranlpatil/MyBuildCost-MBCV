@@ -1,20 +1,17 @@
-<div class="feedback-modal">
+<div class="feedback-modal" [hidden]="!isOpen">
   <div class="feedback-section">
-    <p><!--ngFor="let feedbackQuestion of feedbackQuestions[0]?.questions"-->
-      <!--Welcome1{{feedbackQuestion}}-->
-      Did you notice that every question shows various degrees of job
-      complexity? This provides direction to career progression
+    <p>
+      {{feedbackQuestions[currentFeedbackQuestion]}}
     </p>
     <div class="thumbs-section">
-      <i class="glyphicon glyphicon-thumbs-up"></i>
-      <i class="glyphicon glyphicon-thumbs-up thumbs-down"></i>
+      <i class="glyphicon glyphicon-thumbs-up" (click)="onSelect(1)"></i>
+      <i class="glyphicon glyphicon-thumbs-up thumbs-down" (click)="onSelect(-1)"></i>
     </div>
-    <div class="skip-btn">
+    <div class="skip-btn" (click)="onSelect(0)">
       skip
     </div>
   </div>
 </div>
-
   <!--{{feedbackQuestions}}-->
   <!--{{feedbackQuestions[0]?.questions}}
   {{feedbackQuestions[0]?.answers}}
