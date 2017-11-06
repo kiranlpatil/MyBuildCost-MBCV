@@ -96,7 +96,7 @@
     </div>
   </div>
 </div>
-<div class="section-container " *ngIf="highlightedSection.name!='Complexities'">
+<div class="section-container" [hidden]="highlightedSection.name =='Complexities'">
   <div class="main-content clearfix">
     <div class="compact-view">
 
