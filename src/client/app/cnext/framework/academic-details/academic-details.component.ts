@@ -13,7 +13,7 @@ import {
 import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
 import {Candidate, Section} from "../../../user/models/candidate";
 import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {Headings, Tooltip, CandidateProfileUpdateTrack, LocalStorage} from "../../../shared/constants";
+import {Headings, Tooltip, CandidateProfileUpdateTrack, LocalStorage, Messages} from "../../../shared/constants";
 import {ErrorService} from "../../../shared/services/error.service";
 import {LocalStorageService} from "../../../shared/services/localstorage.service";
 import {ComplexityAnsweredService} from "../complexity-answered.service";
@@ -238,6 +238,10 @@ export class AcademicDetailComponent implements OnInit, OnChanges, AfterViewChec
     this.highlightedSection.isDisable = true;
     this.showButton = false;
     window.scrollTo(0, 0);
+  }
+
+  getMessage() {
+    return Messages;
   }
 
   navigateToWithId(nav:string) {

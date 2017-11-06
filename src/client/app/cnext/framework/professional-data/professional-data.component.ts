@@ -201,6 +201,10 @@ export class ProfessionalDataComponent extends BaseService implements OnChanges,
     window.scrollTo(0, 0);
   }
 
+  getMessage() {
+    return Messages;
+  }
+
   onEdit() {
     this.highlightedSection.name = 'Professional-Details';
     this.highlightedSection.isDisable = true;
