@@ -3,10 +3,9 @@
 
   <div class="main-content edit-modal-content clearfix" industrydata>
     <!--Additional domain Exposure-->
-    <h4 class="heading">{{additinaolDomainHeading}}<!-- <span class="sub-heading">(In additional to your core industry, select Industries In which you have work exposure / experience)</span>-->
-    </h4>
-
-    <div class="scrollable-content">
+    <div class="scrollable-content industry-domin-left-section col-md-7 col-xs-12">
+      <h4 class="heading">{{additinaolDomainHeading}}<!-- <span class="sub-heading">(In additional to your core industry, select Industries In which you have work exposure / experience)</span>-->
+      </h4>
       <p *ngIf="isCandidate">{{suggestionMessageAboutCandidateDomain}}</p>
       <p *ngIf="!isCandidate">{{suggestionMessageAboutDomain}}</p>
       <div class="select-option" *ngFor="let choice of industries;let i = index">
@@ -36,9 +35,18 @@
       </button>
     </div>
 
-    <cn-tool-tip [message]="tooltipCandidateMessage" *ngIf="isCandidate"></cn-tool-tip>
-    <cn-tool-tip [message]="tooltipRecruiterMessage" *ngIf="!isCandidate"></cn-tool-tip>
+    <div class="col-xs-5">
+      <div class="bg-empty-class col-xs-5"></div>
+      <div class="mini-value-portrait-section" *ngIf="isCandidate">
+        <h3 [innerHTML]="getMessage().CLICK_BELOW_FOR_PREVIEW_MSG"></h3>
+        <cn-value-portrait (click)="navigateToWithId('/value-portrait');" [isShareView]="false" [isMiniView]="true" [userId]="userId" *ngIf="isCandidate"></cn-value-portrait>
+      </div>
+      <cn-tool-tip id="candidate-tooltip" [message]="tooltipCandidateMessage" *ngIf="isCandidate"></cn-tool-tip>
+      <cn-tool-tip [message]="tooltipRecruiterMessage" *ngIf="!isCandidate"></cn-tool-tip>
+    </div>
+
   </div>
+
 </div>
 <div class="section-container profeiciency-domain" *ngIf="highlightedSection.name !='IndustryExposure'">
   <div class="main-content" (click)="onEdit()">

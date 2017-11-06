@@ -7,6 +7,7 @@ import { LocalStorageService } from '../../../shared/services/localstorage.servi
 import { GuidedTourService } from '../guided-tour.service';
 import { ErrorService } from '../../../shared/services/error.service';
 import {ComplexityAnsweredService} from "../complexity-answered.service";
+import {Router} from "@angular/router";
 
 @Component({
   moduleId: module.id,
@@ -57,7 +58,8 @@ export class CapabilitiesComponent {
     '</ul>';
 
   constructor(private guidedTourService:GuidedTourService, private errorService:ErrorService,
-              private complexityAnsweredService: ComplexityAnsweredService) {
+              private complexityAnsweredService: ComplexityAnsweredService,
+              private _router: Router) {
 
   }
 
@@ -98,7 +100,8 @@ export class CapabilitiesComponent {
     this.primaryCapabilitiesNumber = this.primaryNames.length;
   }
 
-  selectedCapability(selectedRole: Role, selectedCapability: Capability, event: any) { debugger
+  selectedCapability(selectedRole: Role, selectedCapability: Capability, event: any) {
+    selectedCapability.complexities=[];
     this.isValid = true;
     this.isInfoMessage = false;
     this.validationMessage = '';
@@ -138,7 +141,7 @@ export class CapabilitiesComponent {
         }
         this.primaryNames.splice(this.primaryNames.indexOf(selectedCapability.code), 1);
         selectedCapability.isPrimary = false;
-        this.complexityAnsweredService.change(true);
+        //this.complexityAnsweredService.change(true);
         this.saveOnSelect();
       } else if (selectedCapability.isSecondary) {
         /*this.secondaryNames.splice(this.secondaryNames.indexOf(selectedCapability.name), 1);
@@ -170,7 +173,7 @@ export class CapabilitiesComponent {
       );
   }
 
-  onNextAction() { debugger
+  onNextAction() {
     this.isValid = true;
     this.validationMessage = '';
     if(this.primaryNames.length == 0){
@@ -196,7 +199,7 @@ export class CapabilitiesComponent {
       window.scrollTo(0, 0);
   }
 
-  onSave(){ debugger
+  onSave(){
     this.isValid = true;
     this.validationMessage = '';
     if(this.primaryNames.length == 0){
@@ -304,4 +307,14 @@ export class CapabilitiesComponent {
     this.onComplete.emit(newselectedRoles);
     this.complexityAnsweredService.change(true);
   }
+
+  navigateToWithId(nav:string) {
+    var userId = LocalStorageService.getLocalValue(LocalStorage.USER_ID);
+    if (nav !== undefined) {
+      let x = nav+'/'+ userId + '/create';
+      // this._router.navigate([nav, userId]);
+      this._router.navigate([x]);
+    }
+  }
+
 }

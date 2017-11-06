@@ -354,6 +354,14 @@ header {
   }
 }
 
+#cart-job {
+  .card-view {
+    background: $body-bg;
+    top: 176px;
+    z-index: 9;
+  }
+}
+
 #applied-job {
   .empty-list-message {
     margin-top: 60px !important;

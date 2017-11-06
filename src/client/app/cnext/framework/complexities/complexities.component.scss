@@ -73,7 +73,7 @@
 .question-count {
   position: absolute;
   bottom: 15px;
-  right: 130px;
+  right: 120px;
   z-index: 3;
 }
 
@@ -116,8 +116,8 @@
   }
 }
 
-.button-group {
-  width: calc(100% - 410px);
+.button-group-width {
+  width: calc(100% - 400px);
 }
 .complexities {
   .complexities-help-section {
@@ -129,4 +129,14 @@
   height: 100%;
   position: fixed;
   right: 0;
+}
+
+@media only screen and (max-width: 767px) {
+  .complexities-section {
+    padding: 0 0 75px 30px;
+    width: 94%;
+  }
+  .button-group  {
+    width: 100% !important;
+  }
 }

@@ -22,6 +22,7 @@ export class ValuePortraitComponent implements OnInit {
   @Input() isMiniView:boolean;
   gotItMessage: string= Headings.GOT_IT;
   isCandidate:boolean;
+  isSubmitted:boolean;
   isAnswered: boolean;
   valuePortraitImgName:string;
   guidedTourStatus:string[] = new Array(0);
@@ -29,6 +30,9 @@ export class ValuePortraitComponent implements OnInit {
               private errorService:ErrorService,private complexityAnsweredService: ComplexityAnsweredService) {
     if (LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE) === 'true') {
       this.isCandidate = true;
+    }
+    if (LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE_SUBMITTED) === 'true') {
+      this.isSubmitted = true;
     }
   }
 
@@ -46,6 +50,7 @@ export class ValuePortraitComponent implements OnInit {
         });
     }
     this.getCandidateAllDetails();
+    console.log('is miniVIew = ', this.isMiniView);
   }
 
   getCandidateAllDetails() {
@@ -76,6 +81,15 @@ export class ValuePortraitComponent implements OnInit {
   updateCapabilityData(candidate: Candidate) {
     for (var i = candidate.capabilities.length - 1; i >= 0; i--) {
         if(candidate.capabilities.length > 0) {
+          for (let i = candidate.capabilities.length - 1; i >= 0; i--) {
+            for(let j = candidate.capabilities[i].complexities.length - 1; j >= 0; j--) {
+              if(candidate.capabilities[i].complexities[j].answer != undefined) {
+                candidate.capabilities[i].isComplexityAnswerComplete = true;
+              } else {
+                candidate.capabilities[i].isComplexityAnswerComplete = false;
+              }
+            }
+          }
           return candidate;
         }
       for (var j = candidate.capabilities[i].complexities.length - 1; j >= 0; j--) {

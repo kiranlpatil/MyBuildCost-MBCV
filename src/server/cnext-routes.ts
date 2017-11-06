@@ -79,6 +79,7 @@ export function cnextInit(app: express.Application) {
   // API for Uses Tracking
   app.put('/api/usageTracking',loggerInterceptor.logDetail, jobProfileController.createUsesTracking);
   app.get('/api/usageDetails',loggerInterceptor.logDetail, this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, adminController.exportUsageDetails);
+  app.get('/api/keySkills',loggerInterceptor.logDetail, this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, adminController.exportKeySkills);
 
   //Api for update candidate field
   app.put('/api/candidate/fieldUpdate/:id',loggerInterceptor.logDetail, this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, candidateController.updateField);

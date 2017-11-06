@@ -8,26 +8,26 @@ import { MessageService } from '../../../shared/services/message.service';
 
 @Component({
   moduleId: module.id,
-  selector: 'cn-keyskills-detail-list',
+  selector: 'cn-key-skills-detail-list',
   templateUrl: 'keyskills-detail-list.component.html',
   styleUrls: ['keyskills-detail-list.component.css'],
 })
 
-export class KeyskillsDetailListComponent {
+export class KeySkillsDetailListComponent {
   constructor(private adminDashboardService: AdminDashboardService,
               private loaderService: LoaderService,
               private errorService: ErrorService,
               private messageService: MessageService,) {
   }
 
-  getUsageDetails() {
+  getKeySkillsData() {
     this.messageService.message(new Message(Messages.MSG_FOR_FILE_DOWNLOAD));
     this.loaderService.start();
-    this.adminDashboardService.getUsageDetails()
+    this.adminDashboardService.getKeySkillsData()
       .subscribe(
-        UsageDetails => {
+        data => {
           this.loaderService.stop();
-          document.getElementById('link').click();
+          document.getElementById('link-keySkills').click();
           this.messageService.message(new Message(Messages.MSG_SUCCESS_FOR_FILE_DOWNLOAD));
           },
         error => {

@@ -175,7 +175,7 @@ class UserService {
         let auth = new AuthInterceptor();
         let token = auth.issueTokenWithUid(result);
         let host = config.get('TplSeed.mail.host');
-        let link = host + 'activate_user?access_token=' + token + '&_id=' + result._id;
+        let link = host + 'activate_user?access_token=' + token + '&_id=' + result._id+'isEmailVerification';
         let header1 = fs.readFileSync('./src/server/app/framework/public/header1.html').toString();
         let content = fs.readFileSync('./src/server/app/framework/public/change.mail.html').toString();
         let footer1 = fs.readFileSync('./src/server/app/framework/public/footer1.html').toString();

@@ -1,3 +1,4 @@
+@import '../../../../../../css/common';
 @import '../../../../../../css/variables';
 
 .exact {
@@ -675,6 +676,9 @@
 .capability-of-capabilities-section {
   width: 100%;
   display: inline-block;
+  .row-list {
+    border-bottom: 1px solid $border-color1;
+  }
   .content {
     font-size: 14px;
     padding: 10px 0;
@@ -730,6 +734,22 @@
     .btn-edit {
       top: 0 !important;
       right: 7px !important;
+    }
+
+    .notes {
+      @include multiLineEllipsis($lineHeight: 1.5em, $lineCount: 3, $bgColor: $capability-edit-notes-bg);
+      background: $capability-edit-notes-bg;
+      border: 1px dashed $capability-edit-notes-border;
+      font-size: 12px;
+      line-height: 1.3em !important;
+      margin-top: 5px;
+      max-height: 7.1em !important;
+      padding: 5px 15px 5px 5px !important;
+
+      &:before {
+        bottom: 3px !important;
+        right: 3px !important;
+      }
     }
 
   }

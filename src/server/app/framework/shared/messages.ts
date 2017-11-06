@@ -51,6 +51,7 @@ class Messages {
   public static MSG_ERROR_WRONG_CURRENT_EMAIL: string = 'Incorrect current email address entered.';
   public static MSG_ERROR_PROVIDE_TOKEN: string = 'Provide access token';
   public static MSG_ERROR_IS_BEARER: string = 'Invalid token strategy';
+  public static MSG_ERROR_TOKEN_NOT_PROVIDED: string = 'Access token is not provided';
   public static MSG_ERROR_PROVIDE_ID: string = 'Provide user ID';
   public static MSG_ERROR_ACCOUNT_STATUS: string = 'Your account is still inactive. Verify your account by clicking the verification link sent on your email.';//dont change It
   public static MSG_ERROR_VERIFY_ACCOUNT: string = 'Please click on the link sent to your email in order to activate your account.';//Dont CHange It
@@ -85,6 +86,8 @@ class Messages {
   // Error Reason
   // public static MSG_ERROR_RSN_MESSAGE_NOT_SENT:string = 'message could not send';
   public static MSG_ERROR_RSN_USER_NOT_FOUND: string = 'User not found';
+  public static MSG_ERROR_CREATE_JOB: string = 'error while creating job';
+  public static MSG_ERROR_UPDATE_JOB: string = 'error while updating job';
   public static MSG_ERROR_USER_NOT_ACTIVATED: string = 'User account is not activated';
   public static MSG_ERROR_RSN_DIRECTORY_NOT_FOUND: string = 'Directory not found';
   //MSG_ERROR_RSN_REGISTRATION
@@ -94,7 +97,7 @@ class Messages {
   public static MSG_ERROR_RSN_NOT_ALLOW: string = 'Insufficient user permission to access public profile';
   public static MSG_ERROR_RSN_EXISTING_USER: string = 'User already exists.';
   public static MSG_ERROR_RSN_WHILE_CONTACTING: string = 'There may be a network problem.';
-  
+
   public static MSG_ERROR_FAILED_TO_UPDATE_CANDIDATE_FIELD: string = 'Failed to update candidate field';
 
   //Verify errors
@@ -121,6 +124,7 @@ class Messages {
   public static MSG_ERROR_RETRIEVING_USER = 'Error In Retrieving the Users';
   public static MSG_ERROR_RETRIEVING_USERS_COUNT = 'Error In Retrieving the Users Count';
   public static MSG_ERROR_RETRIEVING_USAGE_DETAIL = 'Error In Retrieving the Usage Detail';
+  public static MSG_ERROR_RETRIEVING_KEY_SKILLS = 'Error In Retrieving the Key Skills';
   public static MSG_ERROR_ADDING_USAGE_DETAIL = 'Error In editing the Usage Detail';
   public static MSG_ERROR_SEPERATING_USER = 'Error In Seperating the Users';
   public static MSG_ERROR_CREATING_EXCEL = 'Error In creating csv file';

@@ -1,4 +1,4 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, OnInit, Output ,EventEmitter } from "@angular/core";
 import {Router} from "@angular/router";
 import {ChangeEmailService} from "./change-email.service";
 import {ChangeEmail} from "../../models/changeemail";
@@ -17,6 +17,8 @@ import {ValidationService} from "../../../shared/customvalidations/validation.se
 })
 
 export class ChangeEmailComponent implements OnInit {
+  @Output() onEmailChangeSuccess: EventEmitter<boolean> = new EventEmitter();
+
   isEmailConfirm: boolean;
   model = new ChangeEmail();
   userForm: FormGroup;
@@ -69,16 +71,15 @@ export class ChangeEmailComponent implements OnInit {
   }
 
   changeEmailSuccess(body: ChangeEmail) {
-    window.localStorage.clear();
+    //window.localStorage.clear();
     LocalStorageService.setLocalValue(LocalStorage.CHANGE_MAIL_VALUE, 'from_settings');
     this.userForm.reset();
+    this.onEmailChangeSuccess.emit();
+
     var message = new Message();
     message.isError = false;
     message.custom_message = Messages.MSG_SUCCESS_CHANGE_EMAIL;
     this.messageService.message(message);
-    setTimeout(() => {
-      this.logOut();
-    },10000);
   }
 
   changeEmailFail(error: any) {

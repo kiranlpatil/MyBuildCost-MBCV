@@ -6,6 +6,7 @@ export class Capability {
   isSecondary: boolean = false;
   isFound : boolean = false;
   code: string = '';
+  isComplexityAnswerComplete: boolean = false;
 }
 
 export class SecondaryCapability {

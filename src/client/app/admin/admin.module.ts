@@ -6,7 +6,7 @@ import {AdminModuleRoutes} from "./admin.routing";
 import {AdminDashboardComponent} from "./admin-dashboard/admin-dashboard.component";
 import {CandidateDetailListComponent} from "./admin-dashboard/candidate-detail-list/candidate-detail-list.component";
 import {RecruiterDetailListComponent} from "./admin-dashboard/recruiter-detail-list/recruiter-detail-list.component";
-import {KeyskillsDetailListComponent} from "./admin-dashboard/keyskills-detail-list/keyskills-detail-list.component";
+import {KeySkillsDetailListComponent} from "./admin-dashboard/keyskills-detail-list/keyskills-detail-list.component";
 import {UsageDetailsComponent} from "./admin-dashboard/usage-details/usage-details.component";
 import {FilterBarComponent} from "./admin-dashboard/filter-bar/filter-bar.component";
 
@@ -15,7 +15,7 @@ import {FilterBarComponent} from "./admin-dashboard/filter-bar/filter-bar.compon
   declarations : [AdminDashboardComponent,
     CandidateDetailListComponent,
     RecruiterDetailListComponent,
-    KeyskillsDetailListComponent,
+    KeySkillsDetailListComponent,
     UsageDetailsComponent, FilterBarComponent],
   exports : [],
   providers : []

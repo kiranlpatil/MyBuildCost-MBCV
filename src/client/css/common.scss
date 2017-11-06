@@ -45,9 +45,21 @@ $exact-bg: #edf7c4;
 $higher-bg: #b1d669;
 $less-bg: #ffe180;
 $missmatch-bg: #ffc3bb;
-$golden-star: #e2c702;
-$golden-star-shadow: #42441d;
-$print-golden-star: #927b01;
+$golden-star: #9a8a17;
+$orange3: #fac51c;
+$light-orange: #fba026;
+$dark-orange: #f48c37;
+$light-red: #eb6b56;
+$light-red1: #e14938;
+$dark-red1: #b8312f;
+$light-gray-bg: #d1d1d1;
+$active-green: #419441;
+$red-gradient-light: rgba(255,0,0,0);
+$red-gradient-dark: rgb(235, 107, 86);
+$close-button-shadow: rgba(0,0,0,0.3);
+$hover-bg: #f2f2f2;
+$blue: #29b6f6;
+$hover-list-bg: #dbdbdb;
 
 .btn-logout {
   margin-top: 15px;
@@ -133,7 +145,6 @@ $print-golden-star: #927b01;
     content: "\2605";
     left: 0;
     position: absolute;
-    text-shadow: 0 0 1px $golden-star-shadow;
     top: -5px;
   }
 }
@@ -142,7 +153,6 @@ $print-golden-star: #927b01;
   color: $golden-star;
   font-size: 20px;
   margin: 0;
-  text-shadow: 0 0 1px $golden-star-shadow;
 
   &:before {
     content: "\2605";
@@ -158,7 +168,6 @@ $print-golden-star: #927b01;
   font-size: 17px !important;
   margin: 0;
   padding-right: 3px;
-  text-shadow: 0 0 1px #42441d;
 }
 
 .required-field {
@@ -879,6 +888,87 @@ cn-control-messages {
   }
 }
 
+.mini-value-portrait-section {
+  .greenCircle {
+    background: $active-green;
+    .inner-circle {
+      span {
+        color: $white;
+      }
+    }
+  }
+  .grayBox {
+    background: $light-gray-bg;
+    text-align: center;
+  }
+  .about-myself-btn {
+    text-align: center;
+  }
+  .value-portrait-candidate-info-block {
+    ul {
+      li {
+        div {
+          background: $light-gray-bg !important;
+        }
+      }
+    }
+  }
+  .value-portrait-candidate-info-block {
+    ul {
+      li {
+        div.current-location-tabs.grayBox {
+          background: $orange3 !important;
+        }
+      }
+    }
+  }
+  .value-portrait-candidate-info-block {
+    ul {
+      li {
+        div.experience-level-tabs.grayBox {
+          background: $light-orange !important;
+        }
+      }
+    }
+  }
+  .value-portrait-candidate-info-block {
+    ul {
+      li {
+        div.education-tabs.grayBox {
+          background: $dark-orange !important;
+        }
+      }
+    }
+  }
+  .value-portrait-candidate-info-block {
+    ul {
+      li {
+        div.employment-tabs.grayBox {
+          background: $light-red !important;
+        }
+      }
+    }
+  }
+  .value-portrait-candidate-info-block {
+    ul {
+      li {
+        div.certification-tabs.grayBox {
+          background: $light-red1 !important;
+        }
+      }
+    }
+  }
+  .value-portrait-candidate-info-block {
+    ul {
+      li {
+        div.awards-tabs.grayBox {
+          background: $dark-red1 !important;
+        }
+      }
+    }
+  }
+}
+
 // Media Queries
 @media only screen and (max-width: 1024px) {
   .logout-dropdown {
@@ -1306,7 +1396,7 @@ select:focus {
       }
       .modal-content {
         border: 1px solid $modal-content-bg;
-        border-radius: 6px;
+        border-radius: 10px;
         background-color: $modal-content-bg;
         height: 100%;
         margin: 0;
@@ -1322,26 +1412,26 @@ select:focus {
         }
       }
       .modal-body {
-        padding: 0;
         color: $white;
-        height: calc(100% - 110px);
+        height: 100%;
         overflow-y: auto;
         overflow-x: hidden;
+        padding: 0 0 110px 0;
         .complexities-list {
           border-bottom: 1px solid $modal-border;
-          text-align: left;
           padding: 15px;
+          text-align: left;
           label {
+            font-family: 'gothamrnd-book';
             font-size: 14px;
             font-weight: bold;
-            font-family: 'gothamrnd-book';
             width: 100%;
           }
           span {
             display: inline-block;
-            width: 100%;
             font-weight: normal;
             height: auto;
+            width: 100%;
           }
         }
       }
@@ -1349,19 +1439,24 @@ select:focus {
       .close-modal {
         background: $white;
         border: 0;
-        width: 49px;
-        height: 49px;
         border-radius: 49px;
+        bottom: -10%;
+        box-shadow: 3px 3px 10px $close-button-shadow;
         font-size: 34px;
-        margin: 0 0 0 -23px;
-        text-align: center;
+        height: 49px;
+        left: 50%;
+        margin: 0 auto;
         padding: 0;
-        position: fixed;
-        bottom: 15px;
+        position: absolute;
+        text-align: center;
+        transform: translate(-50%, -50%);
+        width: 49px;
         span {
           color: $modal-content-bg;
           font-family: 'gothamrnd-book';
-          font-size: 31px;
+          font-size: 40px;
+          position: relative;
+          top: -3px;
         }
       }
 
@@ -1369,6 +1464,16 @@ select:focus {
         border: 0;
         margin: 0 auto;
         display: table;
+        height: 75px;
+        background: $close-button-shadow;
+        width: 100%;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        background: -webkit-linear-gradient($red-gradient-light 0%, $red-gradient-dark 75%);
+        background: -o-linear-gradient($red-gradient-light 0%, $red-gradient-dark 75%);
+        background: -moz-linear-gradient($red-gradient-light 0%, $red-gradient-dark 75%);
+        background: linear-gradient($red-gradient-light 0%, $red-gradient-dark 75%);
       }
     }
   }
@@ -1426,11 +1531,11 @@ select:focus {
 }
 
 .share-button-container {
-  width: 100%;
-  text-align: center;
-  height: auto;
-  margin: 30px auto;
   display: inline-block;
+  height: auto;
+  margin: 18px auto;
+  text-align: center;
+  width: 100%;
 }
 
 #print-job-compare-view {
@@ -1729,7 +1834,17 @@ select:focus {
   }
 }
 
+.bg-empty-class {
+  background: $optional-field;
+  height: 100%;
+  position: fixed;
+  right: 0;
+}
+
 .mini-value-portrait-section {
+  cursor: pointer;
+  display: inline-block;
+  height: 100%;
   h3 {
     color: $white;
     font-size: 50px;
@@ -1788,6 +1903,57 @@ select:focus {
   .value-portrait-candidate-number {
     .phone-icon {
       width: 40px !important;
+    }
+  }
+}
+
+.select-option {
+  .hover-list {
+    background: $hover-bg;
+    border: 1px solid #e4e4e4;
+    box-shadow: 1px 1px 4px #9c9c9c;
+    display: none;
+    min-width: 415px;
+    margin: 5px 373px 0 0;
+    padding: 10px;
+    position: fixed;
+    z-index: 999;
+    &:after {
+      content: "";
+      border-bottom: 10px solid $hover-bg;
+      border-left: 10px solid transparent;
+      border-right: 10px solid transparent;
+      left: 10%;
+      margin-left: -10px;
+      position: absolute;
+      top: -10px;
+    }
+    h2 {
+      color: $blue;
+      font-family: 'gothamrnd-book';
+      font-size: 14px;
+      font-weight: 600;
+      margin: 0 0 10px;
+    }
+  }
+  &:hover {
+    span {
+      background: $blue;
+      color: $white;
+    }
+    .hover-list {
+      display: block;
+      .lists-item {
+        float: left;
+        margin: 0 0 5px 5px;
+        span {
+          background: $hover-list-bg;
+          color: $black;
+          float: left;
+          font-size: 12px;
+          padding: 4px 5px;
+        }
+      }
     }
   }
 }

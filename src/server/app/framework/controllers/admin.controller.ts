@@ -332,6 +332,43 @@ export function exportUsageDetails(req: express.Request, res: express.Response, 
   }
 }
 
+export function exportKeySkills(req: express.Request, res: express.Response, next: any) {
+  try {
+    var adminService = new AdminService();
+    if (req.user.isAdmin) {
+      adminService.exportKeySkillsCollection((error, result) => {
+        if (error) {
+          next({
+            reason: Messages.MSG_ERROR_RETRIEVING_KEY_SKILLS,
+            message: Messages.MSG_ERROR_RETRIEVING_KEY_SKILLS,
+            stackTrace: error,
+            code: 500
+          });
+        } else {
+          res.status(200).send({
+            'status': 'success'
+          });
+        }
+      });
+    } else {
+      next({
+          reason: Messages.MSG_ERROR_UNAUTHORIZED_USER,
+          message: Messages.MSG_ERROR_UNAUTHORIZED_USER,
+          stackTrace: new Error(),
+          code: 401
+        }
+      );
+    }
+  } catch (e) {
+    next({
+      reason: e.message,
+      message: e.message,
+      stackTrace: new Error(),
+      code: 500
+    });
+  }
+}
+
 export function updateDetailOfUser(req: express.Request, res: express.Response, next: any) {
   try {
     var newUserData: UserModel = <UserModel>req.body;

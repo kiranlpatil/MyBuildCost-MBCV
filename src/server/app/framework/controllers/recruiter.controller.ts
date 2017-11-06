@@ -102,9 +102,10 @@ export function postJob(req: express.Request, res: express.Response, next: any) 
       recruiterService.updateJob(userId, newJob, (err, result) => {
         if (err) {
           next({
-            reason: Messages.MSG_ERROR_RSN_USER_NOT_FOUND,
-            message: Messages.MSG_ERROR_RSN_USER_NOT_FOUND,
+            reason: Messages.MSG_ERROR_UPDATE_JOB,
+            message: Messages.MSG_ERROR_UPDATE_JOB,
             stackTrace: new Error(),
+            actualError: err,
             code: 403
           });
         } else {
@@ -119,9 +120,10 @@ export function postJob(req: express.Request, res: express.Response, next: any) 
       recruiterService.addJob(userId, newJob, (err, result) => {
         if (err) {
           next({
-            reason: Messages.MSG_ERROR_RSN_USER_NOT_FOUND,
-            message: Messages.MSG_ERROR_RSN_USER_NOT_FOUND,
+            reason: Messages.MSG_ERROR_CREATE_JOB,
+            message: Messages.MSG_ERROR_CREATE_JOB,
             stackTrace: new Error(),
+            actualError: err,
             code: 403
           });
         } else {

@@ -142,7 +142,7 @@
         <div class="modal-body">
           <p>{{getMessages().MSG_RESET_EMAIL_ADDRESS}}</p>
           <div class="col-sm-12">
-            <cn-change-email></cn-change-email>
+            <cn-change-email (onEmailChangeSuccess)="showHideEmailModal()"></cn-change-email>
           </div>
         </div>
       </div>

@@ -7,20 +7,36 @@ import ProficiencyService = require("../services/proficiency.service");
 import AuthInterceptor = require("../interceptor/auth.interceptor");
 
 export function create(req: express.Request, res: express.Response, next: any) {
-  var proficiencyModel: ProficiencyModel = <ProficiencyModel>req.body;
-  var proficiencyService = new ProficiencyService();
-  proficiencyService.create(proficiencyModel, (error, result) => {
-    if (error) {
-     next(error);
-    } else {
-      res.status(200).send({
-        "status": "success",
+  try{
+    if (req.user.isAdmin) {
+      var proficiencyModel: ProficiencyModel = <ProficiencyModel>req.body;
+      var proficiencyService = new ProficiencyService();
+      proficiencyService.create(proficiencyModel, (error, result) => {
+        if (error) {
+          next(error);
+        } else {
+          res.status(200).send({
+            "status": "success",
+          });
+        }
+
+      });
+    }else {
+      next({
+        reason: Messages.MSG_ERROR_UNAUTHORIZED_USER,
+        message: Messages.MSG_ERROR_UNAUTHORIZED_USER,
+        stackTrace: new Error(),
+        code: 401
       });
     }
-
-  });
-
-
+  } catch (e) {
+    next({
+      reason: e.message,
+      message: e.message,
+      stackTrace: new Error(),
+      code: 500
+    });
+  }
 }
 
 export function retrieve(req: express.Request, res: express.Response, next: any) {

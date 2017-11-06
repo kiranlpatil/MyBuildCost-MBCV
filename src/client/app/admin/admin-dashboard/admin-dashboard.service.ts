@@ -57,6 +57,11 @@ export class AdminDashboardService extends BaseService {
     return this.http.get(url);
   }
 
+  getKeySkillsData(): Observable<any> {
+    var url = API.KEY_SKILLS;
+    return this.http.get(url);
+  }
+
   generateCandidateDetailFile(): Observable<any> {
     var url = API.EXPORT_CANDIDATE_DETAIL_PROFILE;
     return this.http.get(url);

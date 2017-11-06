@@ -14,6 +14,7 @@ import {
 } from "./shared/index";
 
 
+
 @Component({
   moduleId: module.id,
   selector: 'tpl-app',
@@ -111,7 +112,7 @@ export class AppComponent implements OnInit {
     this.customMessage = message.custom_message;
     setTimeout(function () {
       this.isShowSuccessMessage = true;
-    }.bind(this), 5555);
+    }.bind(this), 8888);
   };
 
   closeErrorMessage() {

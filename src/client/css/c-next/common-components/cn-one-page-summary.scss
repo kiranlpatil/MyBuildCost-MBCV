@@ -53,8 +53,13 @@
     margin: 0;
     padding: 10px 0;
   }
-
+  .row-section {
+    padding: 0 !important;
+  }
   .capability-of-capabilities-section {
+    .row-list {
+      border: 0 !important;
+    }
     .btn-edit {
       display: none !important;
     }

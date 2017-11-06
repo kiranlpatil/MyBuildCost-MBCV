@@ -216,28 +216,38 @@ class AuthInterceptor {
             }
           );
         } else {
-          if (req.headers.authorization.split(' ')[0].toLowerCase() !== 'bearer' || req.headers.authorization.split(' ').length !== 2) {
-            next( {
-                reason: Messages.MSG_ERROR_IS_BEARER,
-                message: Messages.MSG_ERROR_IS_BEARER,
-              stackTrace: new Error(),
-                code: 401
-              }
-            );
-          } else {
-            if (!myuser) {
-              next({
-                  reason: Messages.MSG_ERROR_INVALID_TOKEN_2,
-                  message: Messages.MSG_ERROR_INVALID_TOKEN_2,
-                stackTrace: new Error(),
+          if(req.headers.authorization) {
+            if (req.headers.authorization.split(' ')[0].toLowerCase() !== 'bearer' || req.headers.authorization.split(' ').length !== 2) {
+              next( {
+                  reason: Messages.MSG_ERROR_IS_BEARER,
+                  message: Messages.MSG_ERROR_IS_BEARER,
+                  stackTrace: new Error(),
                   code: 401
                 }
               );
             } else {
-              req.user = myuser;
-              (isShareApi) ? req.isShareApi = true : req.isShareApi = false;
-              next();
+              if (!myuser) {
+                next({
+                    reason: Messages.MSG_ERROR_INVALID_TOKEN_2,
+                    message: Messages.MSG_ERROR_INVALID_TOKEN_2,
+                    stackTrace: new Error(),
+                    code: 401
+                  }
+                );
+              } else {
+                req.user = myuser;
+                (isShareApi) ? req.isShareApi = true : req.isShareApi = false;
+                next();
+              }
             }
+
+          } else {
+            next({
+                reason: Messages.MSG_ERROR_TOKEN_NOT_PROVIDED,
+                message: Messages.MSG_ERROR_UNAUTHORIZED_USER,
+                stackTrace: new Error(),
+                code: 401
+              });
           }
         }
       })(req, res, next);

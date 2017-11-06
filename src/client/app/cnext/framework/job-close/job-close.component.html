@@ -1,7 +1,7 @@
 <div class="modal" [style.display]="setStyleForDialogueBox()">
     <div class="modal-bg">
         <div class="modal-dialog modal-md">
-            <div class="modal-content">
+            <div class="modal-content" *ngIf="showCloseDialogue">
                 <div class="modal-header">
                     <button type="button" class="close" (click)="onCancel()">
                         <span>&times;</span>
@@ -11,10 +11,10 @@
                 <div class="modal-body" *ngIf="reasonForClosingJob && reasonForClosingJob.length>0">
                     <div class="col-sm-12">
                         <div class="scenarios">
-                            <div class="item-radio" *ngFor="let answer of reasonForClosingJob[0].answers">
+                            <div class="item-radio" *ngFor="let answer of reasonForClosingJob[0].answers let i of index">
                                 <label>
                                     <input type="radio" name="reasons" value="{{answer}}"
-                                           (change)="onJobCloseReason(answer)">
+                                           (change)="onJobCloseReason(answer)" [checked]="false">
                                     <span>{{answer}}</span>
                                     <div class="check"></div>
                                 </label>

@@ -16,11 +16,15 @@ export class ValuePortraitContainerComponent implements OnInit {
   _userId:string;
   isShareView:boolean = false;
   private isCandidate: boolean;
+  private isCandidateSubmitted: boolean;
   private isFromCreate: boolean = false;
 
   constructor(private _router:Router, private activatedRoute:ActivatedRoute) {
     if (LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE) === 'true') {
       this.isCandidate = true;
+    }
+    if (LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE_SUBMITTED) === 'true') {
+    this.isCandidateSubmitted = true;
     }
   }
 
