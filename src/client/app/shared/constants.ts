@@ -3,7 +3,8 @@ export class AppSettings {
   // public static IP = 'http://ee802b7f.ngrok.io';
   //public static IP = 'http://10.192.33.77:8080';
   //public static IP = 'http://52.10.145.87:3000';
-  public static IP = 'http://34.215.90.153:3000';
+  //public static IP = 'http://34.215.90.153:3000';
+  public static IP = 'http://34.215.90.153';
   //public static IP = 'http://34.214.128.209:3000'; //auto deploy
   //public static IP = 'http://52.43.220.29:3000';
   // public static IP = 'app.jobmosis.com';
