@@ -11,8 +11,8 @@ import {Headers, Http, RequestOptions, Response} from "@angular/http";
 import {Location} from "../../user/models/location";
 import {MyGoogleAddress} from "../../shared/models/my-google-address";
 import {SharedService} from "../../shared/services/shared-service";
-declare  var fbq:any;
-declare  var gtag:any;
+/*declare  var fbq:any;
+declare  var gtag:any;*/
 
 
 @Component({
@@ -217,8 +217,8 @@ export class RecruiterSignUpComponent implements OnInit {
       this.model.isRecruitingForself = this.isRecruitingForself;
       this.model.email = this.model.email.toLowerCase();
       if (!this.makePasswordConfirm()) {
-       fbq('track', 'CompleteRegistration');
-       this.gtag_report_conversion('AW-831903917/QE2JCIuxrHcQrbHXjAM');
+       /*fbq('track', 'CompleteRegistration');
+       this.gtag_report_conversion('AW-831903917/QE2JCIuxrHcQrbHXjAM');*/
 
         this.isFormSubmitted = true;
         this.recruiterService.addRecruiter(this.model)
@@ -304,15 +304,15 @@ export class RecruiterSignUpComponent implements OnInit {
     let host = AppSettings.HTTP_CLIENT + window.location.hostname + API.ACCEPT_TERMS;
     window.open(host, '_blank');
   }
-  gtag_report_conversion(sendTo:any) {
+ /* gtag_report_conversion(sendTo:any) {
     var callback = function () {
-      /*if (typeof(url) != 'undefined') {
+      /!*if (typeof(url) != 'undefined') {
         window.location = url;
-      }*/
+      }*!/
     };
     gtag('event', 'conversion', {
       'send_to': sendTo
     });
     return false;
-  }
+  }*/
 }
