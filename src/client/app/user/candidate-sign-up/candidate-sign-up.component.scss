@@ -18,6 +18,15 @@
   padding: 15px 0;
   margin-top: 15px;
 
+  .select-option {
+    &:hover {
+      span {
+        background: transparent;
+        color: $text-color;
+      }
+    }
+  }
+
   .form-group {
     padding: 0 15px;
     width: 50%;
