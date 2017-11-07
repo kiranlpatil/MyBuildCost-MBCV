@@ -7,15 +7,16 @@ import {JobDashboardComponent} from "./job-dashboard/job-dashboard.component";
 
 export const RecruiterDashboard: Route[] = [
   {
-    path: 'recruiterdashboard',
+    path: 'recruiter',
     component: RecruiterDashboardComponent,
     children: [
-      {path: '', component: JobListerComponent},
-      {path: 'applicant_search/:id', component: CandidateSearchComponent},
-      {path: 'applicant_search', component: CandidateSearchComponent},
+      {path: '',redirectTo: 'dashboard',pathMatch: 'full'},
+      {path: 'dashboard', component: JobListerComponent},
+      {path: 'search/:id', component: CandidateSearchComponent},
+      {path: 'search', component: CandidateSearchComponent},
       {path: 'jobpost/:jobId', component: JobPosterComponent},
       {path: 'jobpost', component: JobPosterComponent},
-      {path: 'jobdashboard/:jobId', component: JobDashboardComponent}
+      {path: 'job/:jobId', component: JobDashboardComponent}
     ]
   },
   {

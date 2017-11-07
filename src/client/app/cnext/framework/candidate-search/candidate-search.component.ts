@@ -88,7 +88,7 @@ export class CandidateSearchComponent implements OnChanges {
     this.searchValue = item.first_name + ' ' + item.last_name;
     this.isCandidateFound = true;
     //this.getJobProfiles(item.id);
-    this._router.navigate(['/recruiterdashboard/applicant_search', item.id]);
+    this._router.navigate(['/recruiter/search', item.id]);
   }
 
   getJobProfiles(candidateId:string) {

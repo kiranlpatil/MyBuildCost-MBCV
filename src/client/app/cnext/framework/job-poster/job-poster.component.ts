@@ -228,7 +228,7 @@ export class JobPosterComponent implements OnInit, OnChanges {
           this.jobPosterModel.complexity_musthave_matrix = data.data.postedJobs[0].complexity_musthave_matrix;
           this.setComplexityMustHaveMatrix = false;
         }
-        this._router.navigate(['/recruiterdashboard/jobpost', this.jobPosterModel._id]);
+        this._router.navigate(['/recruiter/jobpost', this.jobPosterModel._id]);
       }, error => this.errorService.onError(error));
   }
 
@@ -241,7 +241,7 @@ export class JobPosterComponent implements OnInit, OnChanges {
           }, error => this.errorService.onError(error));
       }
       LocalStorageService.setLocalValue(LocalStorage.CURRENT_JOB_POSTED_ID, jobModel._id);
-      this._router.navigate(['recruiterdashboard/jobdashboard/', jobModel._id]);
+      this._router.navigate(['recruiter/job/', jobModel._id]);
     }
   }
 
@@ -504,7 +504,7 @@ export class JobPosterComponent implements OnInit, OnChanges {
 
   onJobCloned(id:any) {
     //this.jobPostEventEmitter.emit(event);
-    this._router.navigate(['/recruiterdashboard/jobpost', id]);
+    this._router.navigate(['/recruiter/jobpost', id]);
     this.jobPostCloneSuccessEmitter.emit();
   }
 

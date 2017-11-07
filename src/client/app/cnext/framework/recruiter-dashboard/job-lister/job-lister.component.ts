@@ -105,10 +105,10 @@ export class JobListerComponent implements  OnInit, OnDestroy {
   }
   onJobClicked(item: any,isJobSubmit:boolean) {
     if (isJobSubmit) {
-      this._router.navigate(['recruiterdashboard/jobdashboard/', item]);
+      this._router.navigate(['recruiter/job/', item]);
     } else {
       //this.jobPostEventEmitter.emit(item);
-      this._router.navigate(['recruiterdashboard/jobpost/', item]);
+      this._router.navigate(['recruiter/jobpost/', item]);
     }
   }
 

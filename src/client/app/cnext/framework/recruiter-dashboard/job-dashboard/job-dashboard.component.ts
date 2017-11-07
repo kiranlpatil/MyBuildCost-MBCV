@@ -313,7 +313,7 @@ export class JobDashboardComponent implements OnInit {
 
   jobcloned(event:any) { debugger
     //this.navigateTo('recruiterdashboard/jobpost',event);
-    this._router.navigate(['/recruiterdashboard/jobpost', event]);
+    this._router.navigate(['/recruiter/jobpost', event]);
   }
 
   getLabel() {

@@ -32,7 +32,7 @@ export const routes: Routes = [
   ...CandidateCompare,
   ...JobCompare,
   ...AboutRoutes,
-  ...ProfileCreator,
+//  ...ProfileCreator,
   ...CandidateSummary,
   ...ValuePortrait,
   ...JobDashboardRoutes,
