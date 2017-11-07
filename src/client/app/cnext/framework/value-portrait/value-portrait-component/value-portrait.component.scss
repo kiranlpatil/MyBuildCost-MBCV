@@ -151,16 +151,6 @@
   }
 }
 
-.domain-exposure-tooltip-content:after {
-  content: "";
-  border-top: 10px solid $white;
-  border-left: 10px solid transparent;
-  border-right: 10px solid transparent;
-  position: fixed;
-  margin-left: 120px;
-  margin-top: 30px;
-}
-
 .user-info-black,
 .user-bottom-section {
   display: none;
