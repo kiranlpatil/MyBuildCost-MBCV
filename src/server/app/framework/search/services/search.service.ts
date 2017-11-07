@@ -18,6 +18,7 @@ import IndustryRepository = require('../../dataaccess/repository/industry.reposi
 import IndustryModel = require('../../dataaccess/model/industry.model');
 import ScenarioModel = require('../../dataaccess/model/scenario.model');
 import { FilterSort } from "../../dataaccess/model/filter";
+import {QueryBuilder} from "./query-builder.service";
 let usestracking = require('uses-tracking');
 
 class SearchService {
@@ -37,120 +38,30 @@ class SearchService {
   }
 
   getMatchingCandidates(jobProfile: JobProfileModel, appliedFilters : FilterSort,callback: (error: any, result: any) => void) {
-    console.time('getMatching Candidate');
     let data: any;
-    let isFound: boolean = false;
-    let industries: string[] = [];
-    let isReleventIndustriesFound: boolean = false;
-    if (jobProfile.interestedIndustries && jobProfile.interestedIndustries.length > 0) {
-      for (let name of jobProfile.interestedIndustries) {
-        if (name === 'None') {
-          isFound = true;
-        }
-      }
-      if(jobProfile.releventIndustries && jobProfile.releventIndustries.length) {
-        isReleventIndustriesFound = true;
-      }
-      if (isFound) {
-
-        if(isReleventIndustriesFound) {
-          industries = jobProfile.releventIndustries;
-
-          industries.push(jobProfile.industry.name);
-          data = {
-            'industry.name': {$in: industries},
-            'proficiencies': {$in: jobProfile.proficiencies},
-            'isVisible': true,
-          };
-        } else {
-          data = {
-            'industry.name': jobProfile.industry.name,
-            'proficiencies': {$in: jobProfile.proficiencies},
-            'isVisible': true,
-          };
-        }
-      } else {
-        if(isReleventIndustriesFound) {
-          industries = jobProfile.releventIndustries;
-          industries.push(jobProfile.industry.name);
-          data = {
-            'industry.name': {$in: industries},
-            'proficiencies': {$in: jobProfile.proficiencies},
-            'interestedIndustries': {$in: jobProfile.interestedIndustries},
-            'isVisible': true,
-          };
-        } else {
-          data = {
-            'industry.name': jobProfile.industry.name,
-            'proficiencies': {$in: jobProfile.proficiencies},
-            'interestedIndustries': {$in: jobProfile.interestedIndustries},
-            'isVisible': true,
-          };
-        }
-      }
-
-    } else {
-      data = {
-        'isVisible': true,
-        'industry.name': jobProfile.industry.name,
-        'proficiencies': {$in: jobProfile.proficiencies}
-      };
+    data = {
+      'industry.name': jobProfile.industry.name,
+      'proficiencies': {$in: jobProfile.proficiencies},
+      'isVisible': true,
+    };
+    if(jobProfile.interestedIndustries && jobProfile.interestedIndustries.indexOf('None')) {
+        data['interestedIndustries']= {$in: jobProfile.interestedIndustries};
+    }
+    if(jobProfile.releventIndustries && jobProfile.releventIndustries.length > 0) {
+      let industries = jobProfile.releventIndustries;
+      industries.push(jobProfile.industry.name);
+      data['industry.name']= {$in: industries};
     }
     let included_fields = {
-      'industry.roles.capabilities.complexities.scenarios.code': 1,
-      'industry.roles.capabilities.complexities.scenarios.isChecked': 1,
-      'industry.roles.default_complexities.complexities.scenarios.code': 1,
-      'industry.roles.default_complexities.complexities.scenarios.isChecked': 1,
-      'userId': 1,
-      'proficiencies': 1,
-      'location': 1,
-      'interestedIndustries': 1,
-      'professionalDetails': 1,
-      'capability_matrix':1,
-      'complexity_musthave_matrix': 1
+      'userId': 1, 'proficiencies': 1, 'location': 1,
+      'interestedIndustries': 1, 'professionalDetails': 1,
+      'capability_matrix':1, 'complexity_musthave_matrix': 1
     };
     let query: Object;
-    if(appliedFilters.filterByLocation !== undefined  && appliedFilters.filterByLocation !== '') {
-      data.$or =[{'location.city': appliedFilters.filterByLocation}];
-    }else {
-      data.$or = [
+    data.$or = [
         {'professionalDetails.relocate': 'Yes'},
-        {'location.city': jobProfile.location.city}
-      ];
-    }
-    if(appliedFilters.educationDataForFilter && appliedFilters.educationDataForFilter.length > 0 ) {
-        data['professionalDetails.education'] = {$in: appliedFilters.educationDataForFilter};
-    }
-    if(appliedFilters.proficiencyDataForFilter && appliedFilters.proficiencyDataForFilter.length > 0 ) {
-      data['proficiencies'] = {$in: appliedFilters.proficiencyDataForFilter};
-    }
-    if(appliedFilters.industryExposureDataForFilter && appliedFilters.industryExposureDataForFilter.length > 0 ) {
-      data['interestedIndustries'] = {$in: appliedFilters.industryExposureDataForFilter};
-    }
-    if(appliedFilters.filterByJoinTime !== undefined  && appliedFilters.filterByJoinTime !== '') {
-        data['professionalDetails.noticePeriod'] = appliedFilters.filterByJoinTime;
-    }
-    if(appliedFilters.salaryMinValue !== undefined  && appliedFilters.salaryMinValue !== '' &&
-      appliedFilters.salaryMaxValue !== undefined  && appliedFilters.salaryMaxValue !== '') {
-      data['professionalDetails.currentSalary'] = {$gte:Number(appliedFilters.salaryMinValue),
-        $lte:Number(appliedFilters.salaryMaxValue)};
-    }
-    if(appliedFilters.experienceMinValue !== undefined  && appliedFilters.experienceMinValue !== '' &&
-      appliedFilters.experienceMaxValue !== undefined  && appliedFilters.experienceMaxValue !== '') {
-      data['professionalDetails.experience'] = {$gte:Number(appliedFilters.experienceMinValue),
-        $lte:Number(appliedFilters.experienceMaxValue)};
-    }
-    switch (appliedFilters.sortBy) {
-      case 'Salary':
-        query = {'$query':data,'$orderby':{'professionalDetails.currentSalary':-1}};
-        break;
-      case 'Experience':
-        query = {'$query':data,'$orderby':{'professionalDetails.experience':-1}};
-        break;
-      default :
-        query= data;
-        break;
-    }
+        {'location.city': jobProfile.location.city}];
+    query = QueryBuilder.getFilterQuery(data,appliedFilters);
     this.candidateRepository.retrieveAndPopulate(query, included_fields, (err, res) => {
       if (err) {
         callback(err, null);

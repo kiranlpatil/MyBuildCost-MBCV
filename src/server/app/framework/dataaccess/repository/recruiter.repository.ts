@@ -97,7 +97,7 @@ class RecruiterRepository extends RepositoryBase<IRecruiter> {
           job_qcard.proficiencies = job.proficiencies;
           job_qcard.location = job.location.city;
           job_qcard._id = job._id;
-          job_qcard.industry = job.industry.name; //todo add industry name
+          job_qcard.industry = job.industry.name;
           job_qcard.jobTitle = job.jobTitle;
           job_qcard.joiningPeriod = job.joiningPeriod;
           job_qcard.postingDate = job.postingDate;

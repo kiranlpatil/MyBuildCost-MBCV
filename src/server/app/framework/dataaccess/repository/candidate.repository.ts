@@ -1,15 +1,15 @@
-import CandidateSchema = require("../schemas/candidate.schema");
-import RepositoryBase = require("./base/repository.base");
-import ICandidate = require("../mongoose/candidate");
-import * as mongoose from "mongoose";
-import {CandidateQCard} from "../../search/model/candidate-q-card";
-import {ConstVariables} from "../../shared/sharedconstants";
-import JobProfileModel = require("../model/jobprofile.model");
-import CandidateModel = require("../model/candidate.model");
-import IndustryModel = require("../model/industry.model");
-import CandidateCardViewModel = require("../model/candidate-card-view.model");
-import UserRepository = require("./user.repository");
-import UserModel = require("../model/user.model");
+import CandidateSchema = require('../schemas/candidate.schema');
+import RepositoryBase = require('./base/repository.base');
+import ICandidate = require('../mongoose/candidate');
+import { CandidateQCard } from '../../search/model/candidate-q-card';
+import { ConstVariables } from '../../shared/sharedconstants';
+import JobProfileModel = require('../model/jobprofile.model');
+import CandidateModel = require('../model/candidate.model');
+import IndustryModel = require('../model/industry.model');
+import CandidateCardViewModel = require('../model/candidate-card-view.model');
+import UserRepository = require('./user.repository');
+import UserModel = require('../model/user.model');
+import { CommonSearchService } from '../../search/services/common.search.service';
 
 
 class CandidateRepository extends RepositoryBase<ICandidate> {
@@ -18,121 +18,92 @@ class CandidateRepository extends RepositoryBase<ICandidate> {
     super(CandidateSchema);
   }
 
-  getCandidateQCard(candidates: any[], jobProfile: JobProfileModel, candidatesIds: any[], sortBy: string, callback: (err: any, res: any) => void) {
-    console.time('getCandidateQCardForLoop');
-    let candidates_q_cards_send : CandidateQCard[] = new Array(0);
-    let candidate_q_card_map :any = { };
-    let idsOfSelectedCandidates : string[]= new Array(0);
-    for (let candidate of candidates) {
-      let isFound: boolean = false;
-      if (candidatesIds) {
-        let isIdFound : boolean = false;
-        for(let id of candidatesIds){
-          if (id.toString() === candidate._id.toString()) {
-            isIdFound = true;
+  getCandidateQCard(candidates: any[], jobProfile: JobProfileModel, candidatesIds: any[], sortBy: string,
+                    callback: (err: any, res: any) => void) {
+    let candidates_q_cards_send: CandidateQCard[] = new Array(0);
+    candidatesLoop: for (let candidate of candidates) {
+      if(this.isCandidatePresentInList(candidatesIds,candidate._id.toString())) {
+        continue;
+      }
+      if (jobProfile.candidate_list) {
+        for (let list of jobProfile.candidate_list) {
+          if (list.name !== ConstVariables.SHORT_LISTED_CANDIDATE &&
+            list.ids.indexOf(candidate._id.toString()) !== -1) {
+            continue candidatesLoop;
           }
-        }
-        if(!isIdFound) {
-          continue;
-        }
-      } else {
-        if (jobProfile.candidate_list) {
-          for (let list of jobProfile.candidate_list) {
-            if (list.name === ConstVariables.SHORT_LISTED_CANDIDATE) {
-              continue;
-            }
-            if (list.ids.indexOf(candidate._id.toString()) !== -1) {
-              isFound = true;
-              break;
-            }
-          }
-        }
-        if (isFound) {
-          continue;
         }
       }
       let candidate_card_view: CandidateQCard = new CandidateQCard();
-      candidate_card_view.matching = 0;
-      let count =0;
-      for (let cap in jobProfile.capability_matrix) {
-        if (jobProfile.capability_matrix[cap] == -1 || jobProfile.capability_matrix[cap] == 0 || jobProfile.capability_matrix[cap] == undefined) {
-        } else if (jobProfile.capability_matrix[cap] == candidate.capability_matrix[cap]) {
-            candidate_card_view.exact_matching += 1;
-          count++;
-        } else if (jobProfile.capability_matrix[cap] == (Number(candidate.capability_matrix[cap]) - ConstVariables.DIFFERENCE_IN_COMPLEXITY_SCENARIO)) {
-          candidate_card_view.above_one_step_matching += 1;
-          count++;
-        } else if (jobProfile.capability_matrix[cap] == (Number(candidate.capability_matrix[cap]) + ConstVariables.DIFFERENCE_IN_COMPLEXITY_SCENARIO)) {
-          candidate_card_view.below_one_step_matching += 1;
-          count++;
-        }  else {
-          count++;
-        }
-      }
-      for(let cap in jobProfile.capability_matrix) {
-        if (jobProfile.complexity_musthave_matrix == -1 || jobProfile.complexity_musthave_matrix == undefined || jobProfile.capability_matrix[cap] == 0) {
-          candidate_card_view.complexityIsMustHave = false;
-        } else if(jobProfile.complexity_musthave_matrix[cap]) {
-          if(jobProfile.capability_matrix[cap] == candidate.capability_matrix[cap]) {
-            candidate_card_view.complexityIsMustHave = jobProfile.complexity_musthave_matrix[cap];
-          } else {
-            candidate_card_view.complexityIsMustHave = false;
-          }
-        }
-      }
-      candidate_card_view.above_one_step_matching = (candidate_card_view.above_one_step_matching / count) * 100;
-      candidate_card_view.below_one_step_matching = (candidate_card_view.below_one_step_matching / count) * 100;
-      candidate_card_view.exact_matching = (candidate_card_view.exact_matching / count) * 100;
-      candidate_card_view.matching = candidate_card_view.above_one_step_matching + candidate_card_view.below_one_step_matching + candidate_card_view.exact_matching;
-      candidate_card_view.salary = candidate.professionalDetails.currentSalary;
-      candidate_card_view.experience = candidate.professionalDetails.experience;
-      candidate_card_view.education = candidate.professionalDetails.education;
-      candidate_card_view.proficiencies = candidate.proficiencies;
-      candidate_card_view.interestedIndustries = candidate.interestedIndustries;
-      candidate_card_view._id = candidate._id;
-      candidate_card_view.isVisible = candidate.isVisible;
-      candidate_card_view.email = candidate.userId.email;
-      candidate_card_view.first_name = candidate.userId.first_name;
-      candidate_card_view.last_name = candidate.userId.last_name;
-      candidate_card_view.mobile_number = candidate.userId.mobile_number;
-      candidate_card_view.picture = candidate.userId.picture;
-      //todo solve the problem of location from front end
-      if(candidate.location) {
-        candidate_card_view.location = candidate.location.city;
-      }else {
-        candidate_card_view.location = 'Pune';
-      }
-      candidate_card_view.noticePeriod = candidate.professionalDetails.noticePeriod;
+      candidate_card_view = CommonSearchService.setQcardData(candidate_card_view, jobProfile, candidate);
+      candidate_card_view = CommonSearchService.setMustHaveMatrix(jobProfile, candidate, candidate_card_view);
+      this.setQcardData(candidate_card_view, candidate);
       if ((candidate_card_view.above_one_step_matching + candidate_card_view.exact_matching) >=
         ConstVariables.LOWER_LIMIT_FOR_SEARCH_RESULT) {
-        candidate_q_card_map[candidate.userId._id]=candidate_card_view;
-        if('Best match' != sortBy.toString()) {
-          if(candidates_q_cards_send.length < 100) {
+        if ('Best match' !== sortBy) {
+          if (candidates_q_cards_send.length < 100) {
             candidates_q_cards_send.push(candidate_card_view);
-          }else {
+          } else {
             break;
           }
-        }else {
+        } else {
           candidates_q_cards_send.push(candidate_card_view);
         }
       }
     }
-    if ('Best match' != sortBy.toString()) {
-      callback(null,candidates_q_cards_send);
-    }else {
-      candidates_q_cards_send.sort((first: CandidateQCard,second : CandidateQCard):number=> {
-        if((first.above_one_step_matching+first.exact_matching) >(second.above_one_step_matching+second.exact_matching) ){
-          return -1;
-        }
-        if((first.above_one_step_matching+first.exact_matching) < (second.above_one_step_matching+second.exact_matching) ) {
-          return 1;
-        }
-        return 0;
-      });
-      let q_cards = candidates_q_cards_send.slice(0,100);
-      callback(null,q_cards);
+    if ('Best match' !== sortBy.toString()) {
+      callback(null, candidates_q_cards_send);
+    } else {
+      candidates_q_cards_send = this.getSortedQCard(candidates_q_cards_send);
+      let q_cards = candidates_q_cards_send.slice(0, 100);
+      callback(null, q_cards);
     }
   }
+
+
+  getSortedQCard(candidates_q_cards : CandidateQCard [] ) {
+    candidates_q_cards.sort((first: CandidateQCard,second : CandidateQCard):number=> {
+      if((first.above_one_step_matching+first.exact_matching) >(second.above_one_step_matching+second.exact_matching) ) {
+        return -1;
+      }
+      if((first.above_one_step_matching+first.exact_matching) < (second.above_one_step_matching+second.exact_matching) ) {
+        return 1;
+      }
+      return 0;
+    });
+    return candidates_q_cards;
+  }
+
+  isCandidatePresentInList(candidatesIds : any[], _id :string) : boolean {
+    if (candidatesIds) {
+      let isIdFound: boolean = false;
+      for (let id of candidatesIds) {
+        if (id.toString() === _id) {
+          isIdFound = true;
+        }
+      }
+      return !isIdFound;
+    }
+    return false;
+  }
+
+  setQcardData(candidate_card_view : any ,candidate: any ) {
+    candidate_card_view.salary = candidate.professionalDetails.currentSalary;
+    candidate_card_view.experience = candidate.professionalDetails.experience;
+    candidate_card_view.education = candidate.professionalDetails.education;
+    candidate_card_view.proficiencies = candidate.proficiencies;
+    candidate_card_view.interestedIndustries = candidate.interestedIndustries;
+    candidate_card_view._id = candidate._id;
+    candidate_card_view.isVisible = candidate.isVisible;
+    candidate_card_view.email = candidate.userId.email;
+    candidate_card_view.first_name = candidate.userId.first_name;
+    candidate_card_view.last_name = candidate.userId.last_name;
+    candidate_card_view.mobile_number = candidate.userId.mobile_number;
+    candidate_card_view.picture = candidate.userId.picture;
+    candidate_card_view.location = candidate.location.city;
+   candidate_card_view.noticePeriod = candidate.professionalDetails.noticePeriod;
+   return candidate_card_view;
+  }
+
 
   getCodesFromindustry(industry: IndustryModel): string[] {
     console.time('getCodesFromindustry');
