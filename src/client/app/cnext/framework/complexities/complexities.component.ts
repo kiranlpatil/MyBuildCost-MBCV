@@ -46,7 +46,7 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
   private isAnswerComplete: boolean = false;
   private slideToRight: boolean = false;
   private slideToLeft: boolean = false;
-  private capabilities: Capability[] = [];
+  capabilities: Capability[] = [];
   private complexityData: any;
   private isValid: boolean = true;
   private currentCapability: Capability = new Capability();
