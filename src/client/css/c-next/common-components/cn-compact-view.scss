@@ -219,14 +219,18 @@
     color: $theme-color;
     font-size: 10px;
     text-align: center;
-    margin: 0;
+    margin: 0 !important;
   }
 
   span {
     color: $theme-color;
     font-size: 8px;
-    text-align: center;
     display: block;
+    margin: 5px 0 0;
+    text-align: center;
+  }
+  .glyphicon-chevron-down {
+    margin: 0 !important;
   }
 }
 

@@ -756,6 +756,9 @@
 }
 
 .capability-of-capabilities {
+  .row-list {
+    border-bottom: 1px solid $border-color1;
+  }
   .content {
     font-size: 14px;
     padding: 10px 0;

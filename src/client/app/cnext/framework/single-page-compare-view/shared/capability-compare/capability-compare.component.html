@@ -98,8 +98,8 @@
       </div>
     </div>
       <div class="capability-of-capabilities-section" *ngIf="isCompact">
-        <div class="row-list" *ngFor="let capability of capabilities;let j=index">
-          <div class="content clearfix" [class.hide-capability]="j >= rowsToShow">
+        <div class="row-list" [class.hide-capability]="j >= rowsToShow" *ngFor="let capability of capabilities;let j=index">
+          <div class="content clearfix">
             <div class="col-sm-3">
               <!--<div class="heading visible-xs"><h4>Core Capabilities</h4></div>-->
               <span class="capability-label-name">{{capability.name}}</span>
@@ -135,8 +135,8 @@
         </div>
       </div>
     <div class="capability-of-capabilities" [hidden]="!showMore">
-    <div class="row-list" *ngFor="let capability of capabilities;let j=index" >
-      <div class="content clearfix" [class.hide-capability]="j < rowsToShow">
+    <div class="row-list" [class.hide-capability]="j < rowsToShow" *ngFor="let capability of capabilities;let j=index" >
+      <div class="content clearfix">
         <div class="col-sm-3">
           <!--<div class="heading visible-xs"><h4>Core Capabilities</h4></div>-->
           <span class="capability-label-name">{{capability.name}}</span>

@@ -1960,6 +1960,12 @@ select:focus {
   }
 }
 
+.edit-compact-view {
+  .row-section {
+    padding-right: 0 !important;
+  }
+}
+
 @media only screen and (max-width: 767px) {
   .add-complexity-notes {
     textarea {
