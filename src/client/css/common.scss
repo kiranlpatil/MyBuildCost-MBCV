@@ -54,6 +54,7 @@ $light-red1: #e14938;
 $dark-red1: #b8312f;
 $light-gray-bg: #d1d1d1;
 $active-green: #419441;
+$green: #8dc63f;
 $red-gradient-light: rgba(255,0,0,0);
 $red-gradient-dark: rgb(235, 107, 86);
 $close-button-shadow: rgba(0,0,0,0.3);
@@ -966,6 +967,34 @@ cn-control-messages {
         }
       }
     }
+  }
+}
+
+.work-area-section {
+  .tooltip-message {
+    height: auto;
+    position: relative;
+    width: auto;
+  }
+}
+
+.jobs-available-message {
+  background: $white;
+  border-radius: 0 8px 0 0;
+  display: inline-block;
+  margin: 10px 0;
+  padding: 10px;
+  position: relative;
+  text-align: center;
+  width: 100%;
+  z-index: 99;
+  span {
+    color: $green;
+    font-size: 36px;
+    line-height: 36px;
+  }
+  p {
+    margin: 5px 0 7px;
   }
 }
 

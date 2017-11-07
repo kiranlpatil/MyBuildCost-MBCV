@@ -52,6 +52,13 @@ export class CandidateProfileService extends BaseService {
       .map(this.extractData)
       .catch(this.handleError);
   }
+  getJobsInIndustry(industryCode:string) :Observable<any> {
+    let headers = new Headers({'Content-Type': 'application/json'});
+    let url: string = API.JOBS + '/' +industryCode;
+    return this.http.get(url)
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
 
   getCandidateAllDetails(userId:string):Observable<any> {
     let headers = new Headers({'Content-Type': 'application/json'});

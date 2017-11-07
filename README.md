@@ -499,6 +499,9 @@ replace the ServerAddress with address you wish to work on(stagging IP address)
  9. Time complexity should be minimum.
  10. Performance testing must be completed.
  11. Solution approach must be discussed before development.
+ 12. Before check in on development branch build prod aot. (gulp build.prod.aot)
+ 13. Handle exception in backend with proper error handling.
+ 14. If have any schema change, do changes in admin export functionality.
  
  # Definition of DONE for QA:
  

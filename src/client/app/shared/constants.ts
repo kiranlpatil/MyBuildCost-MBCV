@@ -327,6 +327,7 @@ export class Messages {
   public static CLICK_BELOW_FOR_PREVIEW_MSG = 'Your Value Portrait is getting ready<br/>' +
   'Click below to Preview';
   public static PLEASE_COMPLETE_THE_PROFILE_MSG = 'Please complete the profile before sharing';
+  public static JOBS_AVALLABLE_MESSAGE = 'Jobs are avallable in your industry.';
 }
 export class AdminPanel {
   public static PUBLIC_PROFILE='Profile is public';
@@ -410,6 +411,7 @@ export class ValueConstant {
   public static MATCHED_CANDIDATE: string = 'matchedList';
   public static VALUE_FOR_CANDIDATES_PERCENT_MATCHING_LOWER_BOUND = 10;
   public static JOB__EXPIRIY_PERIOD= 2592000000;
+  public static MILESTONES_FOR_POPUP: number[]= [0.25, 0.50, 0.75];
 }
 
 
@@ -432,6 +434,7 @@ export class API {
   public static EXPORT_CANDIDATE_DETAIL_PROFILE = 'exportCandidateDetails';
   public static EXPORT_RECRUITER_DETAIL_PROFILE = 'exportRecruiterDetails';
   public static RECRUITER_PROFILE = 'recruiter';
+  public static JOBS = 'jobs';
   public static PROFESSIONAL_DATA = 'professionaldata';
   public static EMPLOYMENTHISTORY = 'employmentdata';
   public static LOGIN = 'login';
@@ -482,6 +485,7 @@ export class API {
   public static FAQ = '/blog/index.php/faq/';
   public static ACCEPT_TERMS = '/terms-and-conditions.php';
   public static COUNT_OF_USERS = 'countofusers';
+  public static FEEDBACK_QUESTIONS = 'userFeedback';
 
 }
 

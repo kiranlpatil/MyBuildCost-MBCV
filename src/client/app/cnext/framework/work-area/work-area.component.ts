@@ -7,6 +7,7 @@ import {GuidedTourService} from "../guided-tour.service";
 import {MessageService} from "../../../shared/services/message.service";
 import {Message} from "../../../shared/models/message";
 import {ErrorService} from "../../../shared/services/error.service";
+import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
 
 @Component({
   moduleId: module.id,
@@ -31,6 +32,7 @@ export class WorkAreaComponent implements OnInit,OnChanges {
     '<ul>' +
     '<li><p>1. '+ Tooltip.RECRUITER_AREA_OF_WORK_TOOLTIP+'</p></li>' +
     '</ul>';
+  private availableJobs:number=0;
   private savedSelectedRoles: Role[] = new Array(0);
   private isCandidate: boolean = false;
   private showModalStyle:boolean = false;
@@ -46,7 +48,7 @@ export class WorkAreaComponent implements OnInit,OnChanges {
   private isOthers:boolean = false;
 
   constructor(private guidedTourService:GuidedTourService, private errorService:ErrorService,
-              private messageService: MessageService) {
+              private candidateProfileService: CandidateProfileService,private messageService: MessageService) {
 
   }
   ngOnInit() {
@@ -64,8 +66,20 @@ export class WorkAreaComponent implements OnInit,OnChanges {
         this.savedSelectedRoles.push(savetempRole);
       }
     }
+    if(changes.roles !== undefined && changes.roles.currentValue !== undefined) {
+      this.roles=changes.roles.currentValue;
+     if(this.roles && this.roles.length > 0) {
+       this.getAvailableJobs(this.roles[0].industryCode);
+     }
+    }
   }
-
+  getAvailableJobs(industryCode:string) {
+    this.candidateProfileService.getJobsInIndustry(industryCode)
+      .subscribe(
+        data => {
+          this.availableJobs=data.count;
+        },error => this.errorService.onError(error));
+  }
   selectOption(role: Role, event: any) {
     this.validationMessage = '';
     this.isValid = true;

@@ -48,6 +48,11 @@
                                      (onMustHaveSelect)="onMustHaveSelect($event)"
                                      (onQuestionComplete)="oncurrentComplexityAnswered($event)"></cn-multiple-question-answer>
       </div>
+        <div *ngIf="isCandidate">
+          <cn-user-feedback [currentFeedbackQuestion]="currentFeedbackQuestion" *ngIf="isShowFeedback(currentComplexity+1)"
+            (onFeedbackAnswer)="onFeedbackAnswer($event)">
+          </cn-user-feedback>
+        </div>
       </div>
 
       <div class="button-group clearfix clear" [class.button-group-width]="isCandidate">

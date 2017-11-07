@@ -144,6 +144,9 @@ class CandidateSchema {
       proficiencies: {
         type: [String]
       },
+      userFeedBack: {
+        type: [Number]
+      },
       lockedOn: {
         type: Date
       },

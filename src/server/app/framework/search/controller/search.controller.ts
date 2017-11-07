@@ -43,6 +43,20 @@ export class SearchController {
       }
     });
   }
+  getJobsInIndustry(req: express.Request, res: express.Response,next:any) {
+    let searchService = new SearchService();
+    let industryCode = req.params.id;
+        searchService.getJobsInIndustry(industryCode, (error: Error, result: any) => {
+          if (error) {
+           next(error);
+          } else {
+            let resu:any = {
+              'count': result
+            };
+            res.status(200).send(resu);
+          }
+        });
+  }
 
   searchCandidateJobProfiles(req:express.Request, res:express.Response,next:any) {
     let candidateSearchService = new CandidateSearchService();

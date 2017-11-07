@@ -14,6 +14,20 @@
   }
 }
 
+.candidate-work-area {
+  h4.title {
+    padding-left: 0;
+    width: 100% !important;
+  }
+}
+.candidate-work-area-btn {
+  width: calc(100% - 395px) !important;
+}
+.candidate-work-area {
+  padding: 0 0 75px 50px;
+  width: 58.33333333%;
+}
+
 @media only screen and (max-width: 767px) {
   .compact-view {
     .option-list {
@@ -36,4 +50,11 @@
       }
     }
   }
+  .candidate-work-area {
+    width: 100%;
+  }
+  .candidate-work-area-btn {
+    width: 100% !important;
+  }
 }
+

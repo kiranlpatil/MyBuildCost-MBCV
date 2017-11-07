@@ -1,0 +1,53 @@
+@import '../../../../css/variables';
+
+.feedback-modal {
+  background: rgba(0,0,0,0.5);
+  border-radius: 9px;
+  display: inline-block;
+  height: 101%;
+  left: -2px;
+  margin: 10px 0;
+  padding: 10px;
+  position: fixed;
+  top: -12px;
+  width: 100.5%;
+  z-index: 99999;
+  .feedback-section {
+    background: $white;
+    display: table;
+    height: 200px;
+    margin: 104px auto;
+    padding-bottom: 20px;
+    position: relative;
+    width: 80%;
+  }
+  p {
+    font-size: 20px;
+    line-height: 28px;
+    padding: 15px 24px 0;
+    text-align: center;
+  }
+  .skip-btn {
+    bottom: 10px;
+    color: $theme-color;
+    cursor: pointer;
+    font-size: 14px;
+    position: absolute;
+    right: 10px;
+  }
+  .thumbs-section {
+    margin-top: 15px;
+    text-align: center;
+    i {
+      color: $theme-color;
+      font-size:75px;
+      margin: 0 10px;
+      &:hover {
+        color: $black1;
+      }
+    }
+    .thumbs-down {
+      transform: rotate(180deg);
+    }
+  }
+}

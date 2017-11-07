@@ -1,9 +1,9 @@
 <div class="modal-bg" *ngIf="highlightedSection.name=='Work-Area'"></div>
 <div class="section-container" *ngIf="highlightedSection.name=='Work-Area'">
   <div class="main-content clearfix edit-modal-content">
-    <h4 class="heading" *ngIf="isCandidate">Select area of work that describes your current focus.</h4>
-    <h4 class="heading" *ngIf="!isCandidate">In which area(s) is the candidate expected to work? </h4>
-    <div class="scrollable-content">
+    <div class="scrollable-content col-xs-7 candidate-work-area">
+      <h4 class="heading title" *ngIf="isCandidate">Select area of work that describes your current focus.</h4>
+      <h4 class="heading title" *ngIf="!isCandidate">In which area(s) is the candidate expected to work? </h4>
       <div class="select-option" *ngFor="let item of roles;let i = index">
         <label>
           <input type="checkbox" name="choices"
@@ -12,7 +12,7 @@
           <span>{{item.name}}</span>
           <div class="check"></div>
         </label>
-        <div class="hover-list" *ngIf="item.allcapabilities.length > 0">
+        <div class="hover-list" *ngIf="item.allcapabilities && item.allcapabilities.length > 0">
           <h2>Capabilities under {{item.name}}</h2>
           <div class="lists-item" *ngFor="let capability of item.allcapabilities">
             <span>{{capability}}</span>
@@ -34,7 +34,7 @@
       {{getMessage().OTHERS_AOW_MESSAGE}}
     </div>
 
-    <div *ngIf="!isOthers" class="button-group clearfix">
+    <div *ngIf="!isOthers" class="button-group clearfix candidate-work-area-btn">
       <!--<div class="saving-loader">Saving...</div>-->
       <button class="btn btn-primary" scrollTo scrollTargetSelector="#capability-area" (click)="onSave()"
               [hidden]="!showButton">Next</button>
@@ -44,9 +44,19 @@
       <div *ngIf="isOthers" class="button-group clearfix">
           <button class="btn btn-primary" scrollTo scrollTargetSelector="#capability-area" (click)="onClose()">Close</button>
       </div>
-
-    <cn-tool-tip [message]="tooltipCandidateMessage" *ngIf="isCandidate"></cn-tool-tip>
-    <cn-tool-tip [message]="tooltipRecruiterMessage" *ngIf="!isCandidate"></cn-tool-tip>
+    <div class="col-xs-5 work-area-section">
+      <div class="bg-empty-class col-xs-5"></div>
+      <div class="jobs-available-message" *ngIf="isCandidate">
+        <span class="jobs-count">
+          {{availableJobs}}
+        </span>
+        <p>
+          {{getMessage().JOBS_AVALLABLE_MESSAGE}}
+        </p>
+      </div>
+      <cn-tool-tip [message]="tooltipCandidateMessage" *ngIf="isCandidate"></cn-tool-tip>
+      <cn-tool-tip [message]="tooltipRecruiterMessage" *ngIf="!isCandidate"></cn-tool-tip>
+    </div>
   </div>
 </div>
 

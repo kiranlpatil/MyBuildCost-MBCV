@@ -1792,3 +1792,19 @@ export function changeTheme(req: express.Request, res: express.Response, next: a
 
 
 }
+
+export function getUserFeedback(req: express.Request, res: express.Response, next: any) {
+  __dirname = './';
+  var filepath = "feedbackForCandidate.json";
+  try {
+    res.sendFile(filepath, {root: __dirname});
+  }
+  catch (e) {
+    next({
+      reason: e.message,
+      message: e.message,
+      stackTrace: new Error(),
+      code: 403
+    });
+  }
+}

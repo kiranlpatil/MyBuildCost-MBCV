@@ -47,6 +47,7 @@ interface CandidateModel {
   proficienciesMatch: string[];
   personalDetails: User;
   profile_update_tracking:number;
+  userFeedBack: number[];
   _id:any;
 }
 export = CandidateModel;
