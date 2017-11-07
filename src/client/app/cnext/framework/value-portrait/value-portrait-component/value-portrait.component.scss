@@ -94,14 +94,17 @@
   visibility: visible;
 }
 
-.tooltip-content3:after {
+.hover-down-arrow {
   content: "";
   border-top: 10px solid $white;
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
-  position: fixed;
-  margin-left: 300px;
-  margin-top: 30px;
+  bottom: 59px;
+  display: none;
+  left: 49%;
+  margin-top: -47px;
+  position: absolute;
+  z-index: 9;
 }
 
 .hover-block > .tooltip-content4,
@@ -135,24 +138,17 @@
   visibility: visible;
 }
 
-.tooltip-content4:after {
-  content: "";
-  border-top: 10px solid $white;
-  border-left: 10px solid transparent;
-  border-right: 10px solid transparent;
-  position: fixed;
-  margin-left: 120px;
-  margin-top: 30px;
+.hover-block:hover,
+.hover-block > .domain-exposure-tooltip-content {
+  .hover-down-arrow {
+    display: block;
+  }
 }
-
-.domain-exposure-tooltip-content:after {
-  content: "";
-  border-top: 10px solid $white;
-  border-left: 10px solid transparent;
-  border-right: 10px solid transparent;
-  position: fixed;
-  margin-left: 120px;
-  margin-top: 30px;
+.about-myself-btn:hover{
+  .hover-down-arrow {
+    display: block;
+    left: 29%;
+  }
 }
 
 .user-info-black,

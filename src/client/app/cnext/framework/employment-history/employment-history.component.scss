@@ -39,3 +39,26 @@
   margin-top: 35px !important;
 }
 
+.main-content {
+  .mini-value-portrait-section {
+    zoom: 0.3;
+    z-index: 999;
+  }
+  .button-group {
+    width: calc(100% - 400px);
+  }
+}
+
+.employeement-section {
+  padding: 0 0 75px 50px;
+  width: 58.33333333%;
+  h4 {
+    padding: 8px 15px 8px 0;
+    width: 100% !important;
+  }
+}
+
+.employeement-help-section {
+  background: $theme-color;
+}
+

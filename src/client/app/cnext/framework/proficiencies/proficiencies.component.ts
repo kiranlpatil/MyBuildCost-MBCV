@@ -72,7 +72,7 @@ export class ProficienciesComponent {
   private requiredKeySkillsValidationMessage = Messages.MSG_ERROR_VALIDATION_KEYSKILLS_REQUIRED;
   private maxKeySkillsValidationMessage = Messages.MSG_ERROR_VALIDATION_MAX_SKILLS_CROSSED + ValueConstant.MAX_PROFECIENCES + Messages.MSG_ERROR_VALIDATION_MAX_PROFICIENCIES;
 
-  onProficiencyComplete(proficiency: string[]) { debugger
+  onProficiencyComplete(proficiency: string[]) {
     /*if (proficiency.length > 0) {
      this.disablebutton = false;
      } else {
@@ -102,7 +102,7 @@ export class ProficienciesComponent {
       );
   }
 
-  onNext() { 
+  onNext() {
     if (this.choosedproficiencies.length === 0) {
       this.submitStatus = true;
       return;

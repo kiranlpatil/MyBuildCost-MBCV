@@ -2,9 +2,9 @@
 <div class="section-container" *ngIf="highlightedSection.name =='Professional-Details'">
   <div professionaldetails></div>
   <div class="main-content edit-modal-content clearfix">
-    <h4 class="heading">Professional Preferences (Mandatory)</h4>
     <!-- <form [formGroup]="professionalDetailForm" (ngSubmit)="onNext(jobPostForm.value)">-->
-    <div class="scrollable-content clearfix">
+    <div class="scrollable-content professional-preferences-section col-xs-7 clearfix">
+      <h4 class="heading">Professional Preferences (Mandatory)</h4>
       <div class="col-md-8 col-sm-10 no-padding">
         <div class="form-group">
           <label>Current Salary</label>
@@ -65,13 +65,24 @@
       <button type="submit" class="btn btn-primary" scrollTo scrollTargetSelector="#Employment-History"
               (click)="onNext()" [hidden]="!showButton">Next
       </button>
+
       <button class="btn btn-primary" (click)="onSave()" [hidden]="showButton">Done</button>
     </div>
 
     <button class="btn-prev" (click)="onPrevious()"><span
       class="glyphicon glyphicon-chevron-left"></span></button>
 
-    <cn-tool-tip [message]="tooltipMessage"></cn-tool-tip>
+    <div class="col-xs-5 professional-preferences-help-section" *ngIf="isCandidate">
+      <div class="bg-empty-class col-xs-5"></div>
+      <div class="mini-value-portrait-section">
+        <h3 [innerHTML]="getMessage().CLICK_BELOW_FOR_PREVIEW_MSG">
+        </h3>
+        <cn-value-portrait (click)="navigateToWithId('/value-portrait');" [isShareView]="false" [isMiniView]="true"
+                           [userId]="userId" *ngIf="isCandidate"></cn-value-portrait>
+      </div>
+      <cn-tool-tip id="candidate-tooltip" [message]="tooltipMessage" *ngIf="isCandidate"></cn-tool-tip>
+    </div>
+
   </div>
 </div>
 <div class="section-container" *ngIf="highlightedSection.name !='Professional-Details'">

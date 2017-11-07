@@ -25,8 +25,8 @@
 <div class="section-container clear" *ngIf="highlightedSection.name =='AboutMySelf'">
 
   <div class="main-content edit-modal-content clearfix">
-    <h4 class="heading">{{aboutMyselfHeading}} {{optinalfield}}</h4>
-    <div class="scrollable-content">
+    <div class="scrollable-content about-myself-section col-xs-7">
+      <h4 class="heading">{{aboutMyselfHeading}} {{optinalfield}}</h4>
       <div class="col-sm-8 no-padding more-about-myself">
       <textarea class="form-control" [(ngModel)]="candidate.aboutMyself" (ngModelChange)="addAboutMyself()"
                 [maxlength]="maxword" Placeholder="Enter About Yourself"></textarea>
@@ -48,7 +48,16 @@
     <button class="btn-prev" (click)="onPrevious()"><span
             class="glyphicon glyphicon-chevron-left"></span></button>
 
-    <cn-tool-tip [message]="tooltipMessage"></cn-tool-tip>
+    <div class="col-xs-5 about-myself-help-section" *ngIf="isCandidate">
+      <div class="bg-empty-class col-xs-5"></div>
+      <div class="mini-value-portrait-section">
+        <h3 [innerHTML]="getMessage().CLICK_BELOW_FOR_PREVIEW_MSG">
+        </h3>
+        <cn-value-portrait (click)="navigateToWithId('/value-portrait');" [isShareView]="false" [isMiniView]="true"
+                           [userId]="userId" *ngIf="isCandidate"></cn-value-portrait>
+      </div>
+      <cn-tool-tip id="candidate-tooltip" [message]="tooltipMessage" *ngIf="isCandidate"></cn-tool-tip>
+    </div>
   </div>
 </div>
 <div class="section-container clear" *ngIf="highlightedSection.name !='AboutMySelf'">

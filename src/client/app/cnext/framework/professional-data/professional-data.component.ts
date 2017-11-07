@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnChanges, Output} from "@angular/core";
+import {Component, EventEmitter, Input, OnChanges, Output, OnInit} from "@angular/core";
 import {BaseService} from "../../../shared/services/http/base.service";
 import {ProfessionalData} from "../../../user/models/professional-data";
 import {ProfessionalDataService} from "./professional-data.service";
@@ -7,9 +7,12 @@ import {MessageService} from "../../../shared/services/message.service";
 import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
 import {Candidate, Section} from "../../../user/models/candidate";
 import {FormBuilder} from "@angular/forms";
-import {Messages, Tooltip, CandidateProfileUpdateTrack} from "../../../shared/constants";
+import {Messages, Tooltip, CandidateProfileUpdateTrack, LocalStorage} from "../../../shared/constants";
 import {ProfessionalDetailsService} from "../professional-detail-service";
 import {ErrorService} from "../../../shared/services/error.service";
+import {ComplexityAnsweredService} from "../complexity-answered.service";
+import {Router} from "@angular/router";
+import { LocalStorageService } from '../../../shared/services/localstorage.service';
 
 @Component({
   moduleId: module.id,
@@ -18,7 +21,7 @@ import {ErrorService} from "../../../shared/services/error.service";
   styleUrls: ['professional-data.component.css']
  })
 
-export class ProfessionalDataComponent extends BaseService implements OnChanges {
+export class ProfessionalDataComponent extends BaseService implements OnChanges, OnInit {
   @Input() candidate: Candidate;
   @Input() highlightedSection: Section;
   @Output() onComplete = new EventEmitter();
@@ -38,6 +41,8 @@ export class ProfessionalDataComponent extends BaseService implements OnChanges 
   private noticePeriodList:any = [];
   private industryExposureList:any = [];
   private isValid: boolean = true;
+  private isCandidate: boolean;
+  private userId: string;
   private requiedSalaryValidationMessage = Messages.MSG_ERROR_VALIDATION_CURRENTSALARY_REQUIRED;
   private requiedRelocateValidationMessage = Messages.MSG_ERROR_VALIDATION_RELOCATE_REQUIRED;
   private requiedIndustryExposureValidationMessage = Messages.MSG_ERROR_VALIDATION_INDUSTRY_EXPOSURE_REQUIRED;
@@ -48,7 +53,9 @@ export class ProfessionalDataComponent extends BaseService implements OnChanges 
               private messageService: MessageService,
               private errorService: ErrorService,
               private formBuilder: FormBuilder,
-              private profileCreatorService: CandidateProfileService) {
+              private profileCreatorService: CandidateProfileService,
+              private complexityAnsweredService: ComplexityAnsweredService,
+              private _router: Router) {
     super();
     /*this.professionalDetailForm=this.formBuilder.group({
      'education':['', Validators.required],
@@ -65,6 +72,13 @@ export class ProfessionalDataComponent extends BaseService implements OnChanges 
         }
       }
     );
+  }
+
+  ngOnInit() {
+    if (LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE) === 'true') {
+      this.isCandidate = true;
+      this.userId=LocalStorageService.getLocalValue(LocalStorage.USER_ID);
+    }
   }
 
   ngOnChanges(changes: any) {
@@ -138,6 +152,7 @@ export class ProfessionalDataComponent extends BaseService implements OnChanges 
       return;
     }
     this.onComplete.emit();
+    this.complexityAnsweredService.change(true);
     this.highlightedSection.name = 'AboutMySelf';
     this.highlightedSection.isDisable = false;
     window.scrollTo(0, 0);
@@ -186,12 +201,25 @@ export class ProfessionalDataComponent extends BaseService implements OnChanges 
     window.scrollTo(0, 0);
   }
 
+  getMessage() {
+    return Messages;
+  }
+
   onEdit() {
     this.highlightedSection.name = 'Professional-Details';
     this.highlightedSection.isDisable = true;
     this.isValid = true;
     this.showButton = false;
     window.scrollTo(0, 0);
+  }
+
+  navigateToWithId(nav:string) {
+    var userId = LocalStorageService.getLocalValue(LocalStorage.USER_ID);
+    if (nav !== undefined) {
+      let x = nav+'/'+ userId + '/create';
+      // this._router.navigate([nav, userId]);
+      this._router.navigate([x]);
+    }
   }
 }
 

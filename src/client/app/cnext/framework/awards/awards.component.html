@@ -24,8 +24,8 @@
 <div class="modal-bg" *ngIf="highlightedSection.name=='Awards'"></div>
 <div class="section-container clear" *ngIf="highlightedSection.name =='Awards'">
   <div class="main-content edit-modal-content clearfix">
-    <h4 class="heading">{{awardsHeading}}</h4>
-    <div class="scrollable-content" #awardParentDiv>
+    <div class="scrollable-content awards-section col-xs-7" #awardParentDiv>
+      <h4 class="heading">{{awardsHeading}}</h4>
       <form class="description-form" [formGroup]="awardDetail" novalidate>
         <div class="row">
           <div class="col-md-8 col-sm-10 no-padding" formArrayName="awards" #awardInnerDiv>
@@ -58,7 +58,16 @@
     <button class="btn-prev" (click)="onPrevious()"><span
             class="glyphicon glyphicon-chevron-left"></span></button>
 
-    <cn-tool-tip [message]="tooltipMessage"></cn-tool-tip>
+    <div class="col-xs-5 awards-help-section" *ngIf="isCandidate">
+      <div class="bg-empty-class col-xs-5"></div>
+      <div class="mini-value-portrait-section">
+        <h3 [innerHTML]="getMessage().CLICK_BELOW_FOR_PREVIEW_MSG">
+        </h3>
+        <cn-value-portrait (click)="navigateToWithId('/value-portrait');" [isShareView]="false" [isMiniView]="true"
+                           [userId]="userId" *ngIf="isCandidate"></cn-value-portrait>
+      </div>
+      <cn-tool-tip id="candidate-tooltip" [message]="tooltipMessage" *ngIf="isCandidate"></cn-tool-tip>
+    </div>
   </div>
 </div>
 

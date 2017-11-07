@@ -10,6 +10,8 @@ import {
 import {GuidedTourService} from "../guided-tour.service";
 import {ErrorService} from "../../../shared/services/error.service";
 import {LocalStorageService} from "../../../shared/services/localstorage.service";
+import {ComplexityAnsweredService} from "../complexity-answered.service";
+import {Router} from "@angular/router";
 
 @Component({
   moduleId: module.id,
@@ -41,13 +43,21 @@ export class MoreAboutMyselfComponent implements OnInit {
   guidedTourImgOverlayScreensEmploymentHistory:string;
   private guidedTourImgOverlayScreensEmploymentHistoryPath:string;
   isGuideImg:boolean = false;
+  private isCandidate: boolean;
+  private userId: string;
 
   constructor(private messageService: MessageService,private errorService:ErrorService,
-              private profileCreatorService: CandidateProfileService,private guidedTourService:GuidedTourService) {
+              private profileCreatorService: CandidateProfileService,private guidedTourService:GuidedTourService,
+              private complexityAnsweredService: ComplexityAnsweredService,
+              private _router: Router) {
     this.reSize = new Array(1);
   }
 
   ngOnInit() {
+    if (LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE) === 'true') {
+      this.isCandidate = true;
+      this.userId=LocalStorageService.getLocalValue(LocalStorage.USER_ID);
+    }
   }
 
   ngOnChanges(changes: any) {
@@ -94,6 +104,7 @@ export class MoreAboutMyselfComponent implements OnInit {
   onNext() {
     this.profileCreatorService.updateStepTracking(CandidateProfileUpdateTrack.STEP_IS_ENTER_ABOUT_MYSELF);
     this.isGuidedTourImgRequire();
+    this.complexityAnsweredService.change(true);
   }
 
   isGuidedTourImgRequire() {
@@ -110,6 +121,7 @@ export class MoreAboutMyselfComponent implements OnInit {
     this.highlightedSection.name='EmploymentHistory';
     this.highlightedSection.isDisable=false;
     this.onComplete.emit(this.candidate.aboutMyself);
+    this.complexityAnsweredService.change(true);
     window.scrollTo(0, 0);
   }
 
@@ -147,5 +159,14 @@ export class MoreAboutMyselfComponent implements OnInit {
 
   getMessage() {
     return Messages;
+  }
+
+  navigateToWithId(nav:string) {
+    var userId = LocalStorageService.getLocalValue(LocalStorage.USER_ID);
+    if (nav !== undefined) {
+      let x = nav+'/'+ userId + '/create';
+      // this._router.navigate([nav, userId]);
+      this._router.navigate([x]);
+    }
   }
 }

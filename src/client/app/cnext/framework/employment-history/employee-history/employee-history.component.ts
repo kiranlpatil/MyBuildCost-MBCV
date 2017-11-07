@@ -1,6 +1,6 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {FormGroup} from '@angular/forms';
-import {Messages, ValueConstant} from '../../../../shared/constants';
+import {Messages, ValueConstant, LocalStorage} from '../../../../shared/constants';
 
 
 @Component({
@@ -10,7 +10,7 @@ import {Messages, ValueConstant} from '../../../../shared/constants';
   styleUrls: ['employee-history.component.css']
 })
 
-export class EmployeeHistoryComponent {
+export class EmployeeHistoryComponent implements OnInit{
   @Input('group')
   public employeeForm: FormGroup;
 
@@ -31,6 +31,10 @@ export class EmployeeHistoryComponent {
     this.year = this.currentDate.getUTCFullYear();
     this.year = this.year - ValueConstant.MAX_YEAR_LIST;
     this.createYearList(this.year); //TODO use the service for date list
+  }
+
+  ngOnInit() {
+    
   }
 
   ngOnChanges(changes: any) {
@@ -58,6 +62,7 @@ export class EmployeeHistoryComponent {
     this.employeeForm.controls["to"].reset();
     this.isDisableToDate = value;
   }
+
 
 }
 

@@ -2,8 +2,11 @@ import {Component, ElementRef, EventEmitter, Input, Output, ViewChild} from "@an
 import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
 import {Candidate, Section} from "../../../user/models/candidate";
 import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {Headings, Messages, Tooltip, CandidateProfileUpdateTrack} from "../../../shared/constants";
+import {Headings, Messages, Tooltip, CandidateProfileUpdateTrack, LocalStorage} from "../../../shared/constants";
 import {ErrorService} from "../../../shared/services/error.service";
+import {LocalStorageService} from "../../../shared/services/localstorage.service";
+import {ComplexityAnsweredService} from "../complexity-answered.service";
+import {Router} from "@angular/router";
 
 @Component({
   moduleId: module.id,
@@ -34,16 +37,25 @@ export class EmploymentHistoryComponent {
   private submitStatus: boolean;
   private isValidservicePeriod: boolean = true;
   private serviceValidMessage: string = Messages.MSG_ERROR_VALIDATION_EMPLOYMENTHISTORY;
+  private isCandidate: boolean;
+  private userId: string;
 
   constructor(private _fb: FormBuilder,
               private errorService:ErrorService,
-              private profileCreatorService: CandidateProfileService) {
+              private profileCreatorService: CandidateProfileService,
+              private complexityAnsweredService: ComplexityAnsweredService,
+              private _router: Router) {
     this.employeeHistory = this._fb.group({
       employeeHistories: this._fb.array([])
     });
   }
 
   ngOnInit() {
+    if (LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE) === 'true') {
+      this.isCandidate = true;
+      this.userId=LocalStorageService.getLocalValue(LocalStorage.USER_ID);
+    }
+
     //subscribe to addresses value changes
     this.employeeHistory.controls['employeeHistories'].valueChanges.subscribe(x => {
       this.isButtonShow = true;
@@ -231,6 +243,7 @@ export class EmploymentHistoryComponent {
   onNext() {
     this.submitStatus = false;
     this.onComplete.emit();
+    this.complexityAnsweredService.change(true);
     this.highlightedSection.name = 'AcademicDetails';
     this.highlightedSection.isDisable = false;
     window.scrollTo(0, 0);
@@ -260,6 +273,16 @@ export class EmploymentHistoryComponent {
   getMessages() {
     return Messages;
   }
+
+  navigateToWithId(nav:string) {
+    var userId = LocalStorageService.getLocalValue(LocalStorage.USER_ID);
+    if (nav !== undefined) {
+      let x = nav+'/'+ userId + '/create';
+      // this._router.navigate([nav, userId]);
+      this._router.navigate([x]);
+    }
+  }
+
 }
 
 export class EmpHis {

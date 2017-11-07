@@ -2,6 +2,10 @@ import {Component, OnInit} from "@angular/core";
 import {ShareService} from "./share.service";
 import {ErrorService} from "../../../shared/services/error.service";
 import {Share} from "../model/share";
+import {LocalStorageService} from "../../../shared/services/localstorage.service";
+import {LocalStorage, Messages} from "../../../shared/constants";
+import {MessageService} from "../../../shared/services/message.service";
+import { Message } from '../../../shared/models/message';
 
 @Component({
   moduleId: module.id,
@@ -17,11 +21,21 @@ export class ShareComponent implements OnInit {
   public repoUrlTwitter:string;
   public socialActionValue:string;
   public getUrlCount:number = 0;
+  public isCandidate: boolean;
+  public isCandidateSubmitted: boolean;
 
-  constructor(private shareService:ShareService, private errorService:ErrorService) {
+  constructor(private shareService:ShareService, private errorService:ErrorService,
+              private messageService: MessageService) {
+    if (LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE) === 'true') {
+      this.isCandidate = true;
+    }
+    if (LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE_SUBMITTED) === 'true') {
+      this.isCandidateSubmitted = true;
+    }
   }
 
   ngOnInit() {
+
   }
 
   buildValuePortraitUrl() {
@@ -41,12 +55,20 @@ export class ShareComponent implements OnInit {
   }
 
   openTab(value:string) {
-    this.socialActionValue = value;
-    if (this.getUrlCount === 0) {
-      this.buildValuePortraitUrl();
-    }
-    if (this.getUrlCount !== 0 && this.socialActionValue) {
-      this.bootTabAction(this.socialActionValue);
+    if(!this.isCandidateSubmitted) {
+      let message = new Message();
+      message.isError = true;
+      message.error_msg= Messages.PLEASE_COMPLETE_THE_PROFILE_MSG;
+      this.messageService.message(message);
+      return;
+    } else {
+      this.socialActionValue = value;
+      if (this.getUrlCount === 0) {
+        this.buildValuePortraitUrl();
+      }
+      if (this.getUrlCount !== 0 && this.socialActionValue) {
+        this.bootTabAction(this.socialActionValue);
+      }
     }
   }
 

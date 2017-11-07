@@ -9,6 +9,8 @@ import {Button,
 import {GuidedTourService} from "../guided-tour.service";
 import {ErrorService} from "../../../shared/services/error.service";
 import {LocalStorageService} from "../../../shared/services/localstorage.service";
+import {ComplexityAnsweredService} from "../complexity-answered.service";
+import {Router} from "@angular/router";
 
 
 @Component({
@@ -41,13 +43,25 @@ export class AwardsComponent implements OnInit {
   guidedTourImgOverlayScreensProfile:string;
   private guidedTourImgOverlayScreensProfilePath:string;
   isGuideImg:boolean;
-  constructor(private _fb: FormBuilder,private errorService:ErrorService, private profileCreatorService: CandidateProfileService,private guidedTourService:GuidedTourService) {
+  private isCandidate: boolean;
+  private userId: string;
+
+  constructor(private _fb: FormBuilder,private errorService:ErrorService,
+              private profileCreatorService: CandidateProfileService,
+              private guidedTourService:GuidedTourService,
+              private complexityAnsweredService: ComplexityAnsweredService,
+              private _router: Router) {
     this.awardDetail = this._fb.group({
       awards: this._fb.array([])
     });
   }
 
   ngOnInit() {
+    if (LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE) === 'true') {
+      this.isCandidate = true;
+      this.userId=LocalStorageService.getLocalValue(LocalStorage.USER_ID);
+    }
+
     //subscribe to addresses value changes
     this.awardDetail.controls['awards'].valueChanges.subscribe(x => {
       this.isButtonShow = true;
@@ -210,6 +224,7 @@ export class AwardsComponent implements OnInit {
     this.guidedTourStatus = this.guidedTourService.getTourStatus();
     if(this.guidedTourStatus.indexOf(this.guidedTourImgOverlayScreensProfile) !== -1) {
       this.onComplete.emit();
+      this.complexityAnsweredService.change(true);
       this.highlightedSection.name = 'none';
       this.highlightedSection.isDisable = false;
     }
@@ -253,5 +268,14 @@ export class AwardsComponent implements OnInit {
 
   getButton() {
     return Button;
+  }
+
+  navigateToWithId(nav:string) {
+    var userId = LocalStorageService.getLocalValue(LocalStorage.USER_ID);
+    if (nav !== undefined) {
+      let x = nav+'/'+ userId + '/create';
+      // this._router.navigate([nav, userId]);
+      this._router.navigate([x]);
+    }
   }
 }

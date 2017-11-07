@@ -13,8 +13,11 @@ import {
 import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
 import {Candidate, Section} from "../../../user/models/candidate";
 import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {Headings, Tooltip, CandidateProfileUpdateTrack} from "../../../shared/constants";
+import {Headings, Tooltip, CandidateProfileUpdateTrack, LocalStorage, Messages} from "../../../shared/constants";
 import {ErrorService} from "../../../shared/services/error.service";
+import {LocalStorageService} from "../../../shared/services/localstorage.service";
+import {ComplexityAnsweredService} from "../complexity-answered.service";
+import {Router} from "@angular/router";
 
 @Component({
   moduleId: module.id,
@@ -39,17 +42,26 @@ export class AcademicDetailComponent implements OnInit, OnChanges, AfterViewChec
   acadamicDetailsHeading: string= Headings.ACADAMIC_DETAILS;
   private isButtonShow: boolean = false;
   private submitStatus: boolean;
+  private isCandidate: boolean;
+  private userId: string;
 
   constructor(private _fb: FormBuilder,
               private errorService:ErrorService,
               private profileCreatorService: CandidateProfileService,
-              private renderer: Renderer) {
+              private renderer: Renderer,
+              private complexityAnsweredService: ComplexityAnsweredService,
+              private _router: Router) {
     this.academicDetail = this._fb.group({
       academicDetails: this._fb.array([])
     });
   }
 
   ngOnInit() {
+    if (LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE) === 'true') {
+      this.isCandidate = true;
+      this.userId=LocalStorageService.getLocalValue(LocalStorage.USER_ID);
+    }
+
     //subscribe to addresses value changes
     this.academicDetail.controls['academicDetails'].valueChanges.subscribe(x => {
       this.isButtonShow = true;
@@ -203,6 +215,7 @@ export class AcademicDetailComponent implements OnInit, OnChanges, AfterViewChec
   onNext() {
     this.profileCreatorService.updateStepTracking(CandidateProfileUpdateTrack.STEP_IS_ENTER_ACADEMIC_DETAILS);
     this.onComplete.emit();
+    this.complexityAnsweredService.change(true);
     this.highlightedSection.name = 'Certification';
     this.highlightedSection.isDisable = false;
     window.scrollTo(0, 0);
@@ -225,5 +238,18 @@ export class AcademicDetailComponent implements OnInit, OnChanges, AfterViewChec
     this.highlightedSection.isDisable = true;
     this.showButton = false;
     window.scrollTo(0, 0);
+  }
+
+  getMessage() {
+    return Messages;
+  }
+
+  navigateToWithId(nav:string) {
+    var userId = LocalStorageService.getLocalValue(LocalStorage.USER_ID);
+    if (nav !== undefined) {
+      let x = nav+'/'+ userId + '/create';
+      // this._router.navigate([nav, userId]);
+      this._router.navigate([x]);
+    }
   }
 }

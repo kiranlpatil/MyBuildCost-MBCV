@@ -268,7 +268,7 @@ export class WorkAreaComponent implements OnInit,OnChanges {
     this.showModalStyle2 = !this.showModalStyle2;
   }
 
-  OnEdit() { debugger
+  OnEdit() {
     this.isOthers = false;
     this.highlightedSection.name = 'Work-Area';
     this.showButton = false;

@@ -1,10 +1,8 @@
 <div class="modal-bg" *ngIf="highlightedSection.name=='EmploymentHistory'"></div>
 <div class="section-container clear" *ngIf="highlightedSection.name =='EmploymentHistory'">
   <div class="main-content edit-modal-content clearfix" >
-
-    <h4 class="heading">{{employemntHistoryHeader}}</h4>
-
-    <div class="scrollable-content" #EmloymentHostoryParent>
+    <div class="scrollable-content employeement-section col-xs-7" #EmloymentHostoryParent>
+      <h4 class="heading">{{employemntHistoryHeader}}</h4>
       <form class="description-form" [formGroup]="employeeHistory" novalidate>
         <div class="row">
           <div class="col-md-8 col-sm-10 no-padding" formArrayName="employeeHistories" #EmloymentHostoryInner>
@@ -45,7 +43,16 @@
     <button class="btn-prev" (click)="onPrevious()"><span
       class="glyphicon glyphicon-chevron-left"></span></button>
 
-    <cn-tool-tip [message]="tooltipMessage"></cn-tool-tip>
+    <div class="col-xs-5 employeement-help-section" *ngIf="isCandidate">
+      <div class="bg-empty-class col-xs-5"></div>
+      <div class="mini-value-portrait-section">
+        <h3 [innerHTML]="getMessages().CLICK_BELOW_FOR_PREVIEW_MSG">
+        </h3>
+        <cn-value-portrait (click)="navigateToWithId('/value-portrait');" [isShareView]="false" [isMiniView]="true"
+                           [userId]="userId" *ngIf="isCandidate"></cn-value-portrait>
+      </div>
+      <cn-tool-tip id="candidate-tooltip" [message]="tooltipMessage" *ngIf="isCandidate"></cn-tool-tip>
+    </div>
   </div>
 </div>
 

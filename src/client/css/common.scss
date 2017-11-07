@@ -1875,7 +1875,7 @@ select:focus {
   display: inline-block;
   height: 100%;
   h3 {
-    color: $white;
+    color: $white !important;
     font-size: 50px;
     font-weight: bold;
     margin: 20px 0 26px;
@@ -1887,7 +1887,8 @@ select:focus {
     .inner-circle {
       span {
         line-height: 21px;
-        letter-spacing: -2px;
+        letter-spacing: -4px;
+        padding: 0px 8px 0;
         text-align: center;
       }
     }
@@ -1916,6 +1917,7 @@ select:focus {
     }
   }
   .value-portrait-bottom-section {
+    margin: -5px 0 0;
     .value-portrait-candidate-industry,
     .value-portrait-candidate-keyskills {
       span {
