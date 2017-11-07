@@ -109,9 +109,9 @@ class UserService {
 
     this.userRepository.retrieve({'email': field.email}, (err, res) => {
       if (res.length > 0 && res[0].isActivated === true) {
-        let header1 = fs.readFileSync('./src/server/app/framework/public/header1.html').toString();
-        let content = fs.readFileSync('./src/server/app/framework/public/forgotpassword.html').toString();
-        let footer1 = fs.readFileSync('./src/server/app/framework/public/footer1.html').toString();
+        let header1 = fs.readFileSync(config.get('TplSeed.publicPath')+'header1.html').toString();
+        let content = fs.readFileSync(config.get('TplSeed.publicPath')+'forgotpassword.html').toString();
+        let footer1 = fs.readFileSync(config.get('TplSeed.publicPath')+'footer1.html').toString();
 
         let auth = new AuthInterceptor();
         let token = auth.issueTokenWithUid(res[0]);
@@ -176,9 +176,9 @@ class UserService {
         let token = auth.issueTokenWithUid(result);
         let host = config.get('TplSeed.mail.host');
         let link = host + 'activate_user?access_token=' + token + '&_id=' + result._id+'isEmailVerification';
-        let header1 = fs.readFileSync('./src/server/app/framework/public/header1.html').toString();
-        let content = fs.readFileSync('./src/server/app/framework/public/change.mail.html').toString();
-        let footer1 = fs.readFileSync('./src/server/app/framework/public/footer1.html').toString();
+        let header1 = fs.readFileSync(config.get('TplSeed.publicPath')+'header1.html').toString();
+        let content = fs.readFileSync(config.get('TplSeed.publicPath')+'change.mail.html').toString();
+        let footer1 = fs.readFileSync(config.get('TplSeed.publicPath')+'footer1.html').toString();
         let mid_content = content.replace('$link$', link);
 
         let mailOptions = {
@@ -211,9 +211,9 @@ class UserService {
             let token = auth.issueTokenWithUid(recruiter[0]);
             let host = config.get('TplSeed.mail.host');
             let link = host + 'company_details?access_token=' + token + '&_id=' + res[0]._id + '&companyName=' + this.company_name;
-            let header1 = fs.readFileSync('./src/server/app/framework/public/header1.html').toString();
-            let content = fs.readFileSync('./src/server/app/framework/public/recruiter.mail.html').toString();
-            let footer1 = fs.readFileSync('./src/server/app/framework/public/footer1.html').toString();
+            let header1 = fs.readFileSync(config.get('TplSeed.publicPath')+'header1.html').toString();
+            let content = fs.readFileSync(config.get('TplSeed.publicPath')+'recruiter.mail.html').toString();
+            let footer1 = fs.readFileSync(config.get('TplSeed.publicPath')+'footer1.html').toString();
             let mid_content = content.replace('$link$', link);
             let mailOptions = {
               from: config.get('TplSeed.mail.MAIL_SENDER'),
@@ -240,9 +240,9 @@ class UserService {
         let token = auth.issueTokenWithUid(res[0]);
         let host = config.get('TplSeed.mail.host');
         let link = host + 'activate_user?access_token=' + token + '&_id=' + res[0]._id;
-        let header1 = fs.readFileSync('./src/server/app/framework/public/header1.html').toString();
-        let content = fs.readFileSync('./src/server/app/framework/public/recruiter.mail.html').toString();
-        let footer1 = fs.readFileSync('./src/server/app/framework/public/footer1.html').toString();
+        let header1 = fs.readFileSync(config.get('TplSeed.publicPath')+'header1.html').toString();
+        let content = fs.readFileSync(config.get('TplSeed.publicPath')+'recruiter.mail.html').toString();
+        let footer1 = fs.readFileSync(config.get('TplSeed.publicPath')+'footer1.html').toString();
         let mid_content = content.replace('$link$', link);
         let mailOptions = {
           from: config.get('TplSeed.mail.MAIL_SENDER'),
@@ -263,9 +263,9 @@ class UserService {
 
 
   sendMail(field: any, callback: (error: any, result: any) => void) {
-    let header1 = fs.readFileSync('./src/server/app/framework/public/header1.html').toString();
-    let content = fs.readFileSync('./src/server/app/framework/public/contactus.mail.html').toString();
-    let footer1 = fs.readFileSync('./src/server/app/framework/public/footer1.html').toString();
+    let header1 = fs.readFileSync(config.get('TplSeed.publicPath')+'header1.html').toString();
+    let content = fs.readFileSync(config.get('TplSeed.publicPath')+'contactus.mail.html').toString();
+    let footer1 = fs.readFileSync(config.get('TplSeed.publicPath')+'footer1.html').toString();
     let mid_content = content.replace('$first_name$', field.first_name).replace('$email$', field.email).replace('$message$', field.message);
     let to = config.get('TplSeed.mail.ADMIN_MAIL');
     let mailOptions = {
@@ -282,9 +282,9 @@ class UserService {
 
   sendMailOnError(errorInfo: any, callback: (error: any, result: any) => void) {
     let current_Time = new Date().toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'});
-    let header1 = fs.readFileSync('./src/server/app/framework/public/header1.html').toString();
-    let content = fs.readFileSync('./src/server/app/framework/public/error.mail.html').toString();
-    let footer1 = fs.readFileSync('./src/server/app/framework/public/footer1.html').toString();
+    let header1 = fs.readFileSync(config.get('TplSeed.publicPath')+'header1.html').toString();
+    let content = fs.readFileSync(config.get('TplSeed.publicPath')+'error.mail.html').toString();
+    let footer1 = fs.readFileSync(config.get('TplSeed.publicPath')+'footer1.html').toString();
     let mid_content = content.replace('$time$', current_Time).replace('$host$', config.get('TplSeed.mail.host')).replace('$reason$', errorInfo.reason).replace('$code$', errorInfo.code).replace('$message$', errorInfo.message);
     if(errorInfo.stackTrace) {
       mid_content=mid_content.replace('$error$',errorInfo.stackTrace.stack);

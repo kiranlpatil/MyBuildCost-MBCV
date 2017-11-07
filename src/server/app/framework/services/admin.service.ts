@@ -213,9 +213,9 @@ class AdminService {
   };
 
   sendAdminLoginInfoMail(field: any, callback: (error: any, result: any) => void) {
-    let header1 = fs.readFileSync('./src/server/app/framework/public/header1.html').toString();
-    let content = fs.readFileSync('./src/server/app/framework/public/adminlogininfo.mail.html').toString();
-    let footer1 = fs.readFileSync('./src/server/app/framework/public/footer1.html').toString();
+    let header1 = fs.readFileSync(config.get('TplSeed.publicPath')+'header1.html').toString();
+    let content = fs.readFileSync(config.get('TplSeed.publicPath')+'adminlogininfo.mail.html').toString();
+    let footer1 = fs.readFileSync(config.get('TplSeed.publicPath')+'footer1.html').toString();
     let mid_content = content.replace('$email$', field.email).replace('$address$', (field.location === undefined) ? 'Not Found' : field.location)
       .replace('$ip$', field.ip).replace('$host$', config.get('TplSeed.mail.host'));
 

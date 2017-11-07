@@ -15,6 +15,7 @@
       "usageDetailsCSV": "/home/bitnami/apps/jobmosis-staging/c-next/dist/server/prod/public/usagedetail.csv",
       "keySkillsCSV": "/home/bitnami/apps/jobmosis-staging/c-next/dist/server/prod/public/key-skills.csv"
     },
+    "publicPath":"/home/bitnami/apps/jobmosis-staging/myApp/dist/server/prod/app/framework/public/",
     "limitForQuery" : 10,
     "mail": {
       "host":"http://52.41.194.37/",

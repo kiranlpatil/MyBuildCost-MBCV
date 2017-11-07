@@ -15,6 +15,7 @@
       "usageDetailsCSV": "/home/kapil/JavaProject/ng4-cnext/c-next/dist/server/dev/public/usagedetail.csv",
       "keySkillsCSV": "/home/kapil/JavaProject/ng4-cnext/c-next/dist/server/dev/public/key-skills.csv"
     },
+    "publicPath":"./src/server/app/framework/public/",
     "limitForQuery" : 10,
     "mail": {
       "host": "http://localhost:8080/",
