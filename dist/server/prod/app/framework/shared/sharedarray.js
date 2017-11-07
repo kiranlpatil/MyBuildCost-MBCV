@@ -1,0 +1,18 @@
+"use strict";
+var MailAttachments = (function () {
+    function MailAttachments() {
+    }
+    MailAttachments.AttachmentArray = [
+        {
+            path: './src/server/app/framework/public/images/logo/jobmosis-mobile-logo.png',
+            cid: 'unique@company-logo'
+        }, {
+            path: './src/server/app/framework/public/images/banner/banner.png',
+            cid: 'unique@banner'
+        }
+    ];
+    return MailAttachments;
+}());
+module.exports = MailAttachments;
+
+//# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFwcC9mcmFtZXdvcmsvc2hhcmVkL3NoYXJlZGFycmF5LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFLQTtJQUFBO0lBbUJBLENBQUM7SUFsQmUsK0JBQWUsR0FBZTtRQUMxQztZQUNFLElBQUksRUFBRSx3RUFBd0U7WUFDOUUsR0FBRyxFQUFFLHFCQUFxQjtTQUMzQixFQUFFO1lBQ0QsSUFBSSxFQUFFLDREQUE0RDtZQUNsRSxHQUFHLEVBQUUsZUFBZTtTQUNyQjtLQVVGLENBQUM7SUFDSixzQkFBQztDQW5CRCxBQW1CQyxJQUFBO0FBQ0QsaUJBQU8sZUFBZSxDQUFDIiwiZmlsZSI6ImFwcC9mcmFtZXdvcmsvc2hhcmVkL3NoYXJlZGFycmF5LmpzIiwic291cmNlc0NvbnRlbnQiOlsiLyoqXG4gKiBDcmVhdGVkIGJ5IGFkbWluIG9uIDEwLzUvMTYuXG4gKi9cbi8vaW1wb3J0IE1lc3NhZ2VzID0gcmVxdWlyZShcIi4uL3NoYXJlZC9tZXNzYWdlc1wiKTtcblxuY2xhc3MgTWFpbEF0dGFjaG1lbnRzIHtcbiAgcHVibGljIHN0YXRpYyBBdHRhY2htZW50QXJyYXk6IEFycmF5PGFueT4gPSBbXG4gICAge1xuICAgICAgcGF0aDogJy4vc3JjL3NlcnZlci9hcHAvZnJhbWV3b3JrL3B1YmxpYy9pbWFnZXMvbG9nby9qb2Jtb3Npcy1tb2JpbGUtbG9nby5wbmcnLFxuICAgICAgY2lkOiAndW5pcXVlQGNvbXBhbnktbG9nbydcbiAgICB9LCB7XG4gICAgICBwYXRoOiAnLi9zcmMvc2VydmVyL2FwcC9mcmFtZXdvcmsvcHVibGljL2ltYWdlcy9iYW5uZXIvYmFubmVyLnBuZycsXG4gICAgICBjaWQ6ICd1bmlxdWVAYmFubmVyJ1xuICAgIH0vKiwge1xuICAgICAgcGF0aDogJy4vc3JjL3NlcnZlci9hcHAvZnJhbWV3b3JrL3B1YmxpYy9pbWFnZXMvZm9vdGVyL2ZiLnBuZycsXG4gICAgICBjaWQ6ICd1bmlxdWVAZmJmb290ZXInXG4gICAgfSwge1xuICAgICAgcGF0aDogJy4vc3JjL3NlcnZlci9hcHAvZnJhbWV3b3JrL3B1YmxpYy9pbWFnZXMvZm9vdGVyL2dvb2dsZS1wbHVzLnBuZycsXG4gICAgICBjaWQ6ICd1bmlxdWVAZ29vZ2xlcGx1cydcbiAgICB9LCB7XG4gICAgICBwYXRoOiAnLi9zcmMvc2VydmVyL2FwcC9mcmFtZXdvcmsvcHVibGljL2ltYWdlcy9mb290ZXIvbGlua2VkLWluLnBuZycsXG4gICAgICBjaWQ6ICd1bmlxdWVAbGlua2VkaW4nXG4gICAgfSovXG4gIF07XG59XG5leHBvcnQ9TWFpbEF0dGFjaG1lbnRzO1xuIl19

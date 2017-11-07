@@ -1,0 +1,69 @@
+{
+  "TplSeed": {
+    "database": {
+      "host":"127.0.0.1",
+      "name": "Jobmosis-staging",
+      "username": "admin",
+      "password": "jobmosisadmin123",
+      "mongoExport": "/usr/bin/mongoexport"
+    },
+    "adminExportFilePath": {
+      "candidatesCSV": "/home/bitnami/apps/jobmosis-staging/c-next/dist/server/prod/public/candidates.csv",
+      "candidateOtherDetailsCSV": "/home/bitnami/apps/jobmosis-staging/c-next/dist/server/prod/public/candidates-other-details.csv",
+      "recruitersCSV": "/home/bitnami/apps/jobmosis-staging/c-next/dist/server/prod/public/recruiters.csv",
+      "usersCSV": "/home/bitnami/apps/jobmosis-staging/c-next/dist/server/prod/public/users.csv",
+      "usageDetailsCSV": "/home/bitnami/apps/jobmosis-staging/c-next/dist/server/prod/public/usagedetail.csv",
+      "keySkillsCSV": "/home/bitnami/apps/jobmosis-staging/c-next/dist/server/prod/public/key-skills.csv"
+    },
+    "limitForQuery" : 10,
+    "mail": {
+      "host":"http://34.215.90.153:3000/",
+      "MAIL_SENDER": "redminestatus@techprimelab.com",
+      "MAIL_SENDER_PASSWORD": "Contactu$@tpl",
+      "ADMIN_MAIL": "Jobmosis_TPL@techprimelab.com",
+      "TPLGROUP_MAIL":"",
+      "MAIL_SERVICE": "Gmail",
+      "MAILCHIMP_CANDIDATE_SIGN_IN_SUCCESS_LISTID": "222f48cf9a",
+      "MAILCHIMP_CANDIDATE_PROFILE_SUBMIT_SUCCESS_LISTID": "a1b8d070ce",
+      "MAILCHIMP_CANDIDATE_PROFILE_SUBMIT_25%_LISTID": "bd22dce604",
+      "MAILCHIMP_CANDIDATE_PROFILE_SUBMIT_50%_LISTID": "9856839bad",
+      "MAILCHIMP_CANDIDATE_PROFILE_SUBMIT_75%_LISTID": "a82db1bff5",
+      "MAILCHIMP_CANDIDATE_PROFILE_SUBMIT_95%_LISTID": "24cd79227b",
+
+      "MAIL_CHIMP_SERVICE_KEY": "7ed37fe28217d97fe5785a01207a494e-us16"
+
+    },
+    "facebookIds":{
+      "clientId" : "1000308350087499",
+      "clientSecretId" : "fdd2b77c78273fc8f7dd6b2dd2dcdac9"
+    },
+    "googlePlusIds":{
+      "clientId" : "244363436693-l4fglqbjitj39t9dsg7lkep5esfoe1bq.apps.googleusercontent.com",
+      "clientSecretId" : "OzWBm3F7biB0NUrdTQ5tmdUM"
+    },
+    "messaging": {
+      "authKey": "152516A0pwPFRp59198cd9",
+      "senderId": "JOBMOS",
+      "routerNumber": "4"
+    },
+    "filePathForMasterDataExcel" : "./src/server/app/framework/public/config/NewIndustryDataExcel.xlsx",
+    "folderPath":"/home/bitnami/apps/jobmosis-staging/c-next/dist/prod/server/public/candidate.csv"
+  },
+  "logger" : {
+    "levels": {
+      "[all]":"DEBUG"
+    },
+    "appenders": [
+      {
+        "type": "console"
+      },
+      {
+        "type": "dateFile",
+        "filename": "logs/application",
+        "pattern": "-yyyy-MM-dd.log",
+        "alwaysIncludePattern": true
+      }
+    ],
+    "replaceConsole": true
+  }
+}
