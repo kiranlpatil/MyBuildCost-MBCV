@@ -1,0 +1,9 @@
+"use strict";
+var ShareLinkModel = (function () {
+    function ShareLinkModel() {
+    }
+    return ShareLinkModel;
+}());
+module.exports = ShareLinkModel;
+
+//# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFwcC9mcmFtZXdvcmsvZGF0YWFjY2Vzcy9tb2RlbC9zaGFyZS1saW5rLm1vZGVsLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQTtJQUFBO0lBR0EsQ0FBQztJQUFELHFCQUFDO0FBQUQsQ0FIQSxBQUdDLElBQUE7QUFDRCxpQkFBUyxjQUFjLENBQUMiLCJmaWxlIjoiYXBwL2ZyYW1ld29yay9kYXRhYWNjZXNzL21vZGVsL3NoYXJlLWxpbmsubW9kZWwuanMiLCJzb3VyY2VzQ29udGVudCI6WyJjbGFzcyBTaGFyZUxpbmtNb2RlbCB7XG4gIGxvbmdVcmw6c3RyaW5nO1xuICBzaG9ydFVybDpzdHJpbmc7XG59XG5leHBvcnQgPSBTaGFyZUxpbmtNb2RlbDtcbiJdfQ==
