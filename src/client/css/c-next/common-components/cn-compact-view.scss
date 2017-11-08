@@ -211,15 +211,16 @@
 }
 
 .see-more {
+  bottom: 5px;
   clear: both;
-  position: relative;
-  top: -3px;
+  position: absolute;
+  width: 100%;
 
   p {
-    color: $theme-color;
+    color: $theme-color !important;
     font-size: 10px;
-    text-align: center;
     margin: 0 !important;
+    text-align: center;
   }
 
   span {
