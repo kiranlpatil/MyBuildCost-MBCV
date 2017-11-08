@@ -10,11 +10,11 @@ import {ChangePasswordComponent} from "../../user/change-password/change-passwor
 
 export const DashboardRoutes: Route[] = [
   {
-    path: 'dashboard',
+    path: 'user',
     component: DashboardComponent,
     children: [
       {path: '', component: DashboardHomeComponent},
-      {path: 'profile', component: UserProfileComponent},
+      {path: 'details', component: UserProfileComponent},
       {path: 'changepassword', component: ChangePasswordComponent},
       {path: 'changeemail', component: ChangeEmailComponent},
       {path: 'settings', component: SettingsComponent},

@@ -91,14 +91,13 @@
                   </a>
                 </li>
                 <li role="menuitem" [routerLinkActive]="['active']">
-                  <a class="dropdown-item" [routerLink]="['/profile/candidate']"
-                     (click)="navigateTo('/profile/candidate');">
+                  <a class="dropdown-item" [routerLink]="['/user/details']" [queryParams]="{ role: 'candidate'}">
                     <span class="glyphicon glyphicon-list-alt"></span>Account Details
                   </a>
                 </li>
                 <li role="menuitem" [routerLinkActive]="['active']">
-                  <a class="dropdown-item" [routerLink]="['/settings/candidate']"
-                     (click)="navigateTo('/settings/candidate');">
+                  <a class="dropdown-item" [routerLink]="['/user/changepassword']"
+                     [queryParams]="{ role: 'candidate'}">
                     <span class="glyphicon glyphicon-lock"></span>Change Password
                   </a>
                 </li>

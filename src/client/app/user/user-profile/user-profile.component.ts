@@ -1,5 +1,5 @@
 import {Component, NgZone, OnDestroy, OnInit} from "@angular/core";
-import {ActivatedRoute, Router} from "@angular/router";
+import {ActivatedRoute, Router, Params} from "@angular/router";
 import {DashboardService} from "../services/dashboard.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ValidationService} from "../../shared/customvalidations/validation.service";
@@ -91,16 +91,14 @@ export class UserProfileComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.activatedRoute.params.subscribe(params => {
+    this.activatedRoute.queryParams.subscribe((params: Params) => {
       this.role = params['role'];
-      if (this.role) {
-        if (this.role === 'candidate') {
-          this.getCandidate();
-        } else if (this.role === 'recruiter') {
-          this.getRecruiter();
-        }
-      }
       LocalStorageService.setLocalValue(LocalStorage.ROLE_NAME, this.role);
+      switch(this.role) {
+        case 'candidate': this.getCandidate(); break;
+        case 'recruiter': this.getRecruiter(); break;
+        default :  this._router.navigate([NavigationRoutes.APP_START]); break;
+      }
     });
     var socialLogin: string = LocalStorageService.getLocalValue(LocalStorage.IS_SOCIAL_LOGIN);
     if (socialLogin === AppSettings.IS_SOCIAL_LOGIN_YES) {
@@ -171,7 +169,7 @@ export class UserProfileComponent implements OnInit {
     }else if(this.recruiterForm.valid) {
       this.model = this.recruiterForm.value;
      if( this.model.company_website===''||
-       (this.model.company_website!=='' && this.model.company_website.match('[a-zA-Z0-9_\\-]+\\.[a-zA-Z0-9_\\-]+\\.[a-zA-Z0-9_\\-]'))) {
+       (this.model.company_website !=='' && this.model.company_website.match('[a-zA-Z0-9_\\-]+\\.[a-zA-Z0-9_\\-]+\\.[a-zA-Z0-9_\\-]'))) {
        this.isCompanyWebsiteValid=true;
       this.dashboardService.changeRecruiterAccountDetails(this.model)
         .subscribe(
