@@ -719,6 +719,7 @@ export class Label {
   public static MUST_TO_HAVE_FILTER_LABEL: string = 'Show candidate with must have complexity';
   public static PROFILE_VISIBILITY: string = 'Profile Visibility for Recruiter';
   public static SUBMIT_PROFILE: string = 'Submit Your Profile';
+  public static MORE: string = 'More';
 }
 
 export class Button {
