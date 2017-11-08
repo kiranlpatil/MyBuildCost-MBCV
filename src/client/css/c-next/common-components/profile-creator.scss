@@ -496,6 +496,34 @@
   display: inline-block !important;
 }
 
+.work-area-section {
+  .tooltip-message {
+    height: auto;
+    position: relative;
+    width: auto;
+  }
+}
+
+.jobs-available-message {
+  background: $white;
+  border-radius: 0 8px 0 0;
+  display: inline-block;
+  margin: 10px 0;
+  padding: 10px;
+  position: relative;
+  text-align: center;
+  width: 100%;
+  z-index: 99;
+  span {
+    color: $green !important;
+    font-size: 36px !important;
+    line-height: 36px !important;
+  }
+  p {
+    margin: 5px 0 7px;
+  }
+}
+
 @media only screen and (max-width: 980px) {
   .main-content {
     .heading {
