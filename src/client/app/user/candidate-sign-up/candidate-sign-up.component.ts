@@ -118,8 +118,6 @@ export class CandidateSignUpComponent implements OnInit, AfterViewInit {
     this.model.email = this.model.email.toLowerCase();
 
     if (!this.makePasswordConfirm()) {
-      fbq('track', 'CompleteRegistration');
-      this.gtag_report_conversion('AW-831903917/fTZvCPC1q3YQrbHXjAM');
       this.isFormSubmitted = true;
       this.candidateService.addCandidate(this.model)
         .subscribe(
@@ -128,6 +126,8 @@ export class CandidateSignUpComponent implements OnInit, AfterViewInit {
     }
   }
   onRegistrationSuccess(candidate: any) {
+    fbq('track', 'CompleteRegistration');
+    this.gtag_report_conversion('AW-831903917/fTZvCPC1q3YQrbHXjAM');
     LocalStorageService.setLocalValue(LocalStorage.USER_ID, candidate.data._id);
     LocalStorageService.setLocalValue(LocalStorage.EMAIL_ID, this.userForm.value.email);
     LocalStorageService.setLocalValue(LocalStorage.PASSWORD, this.model.password);

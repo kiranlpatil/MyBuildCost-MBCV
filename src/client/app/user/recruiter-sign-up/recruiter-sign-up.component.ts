@@ -217,9 +217,6 @@ export class RecruiterSignUpComponent implements OnInit {
       this.model.isRecruitingForself = this.isRecruitingForself;
       this.model.email = this.model.email.toLowerCase();
       if (!this.makePasswordConfirm()) {
-       fbq('track', 'CompleteRegistration');
-       this.gtag_report_conversion('AW-831903917/QE2JCIuxrHcQrbHXjAM');
-
         this.isFormSubmitted = true;
         this.recruiterService.addRecruiter(this.model)
           .subscribe(
@@ -230,6 +227,8 @@ export class RecruiterSignUpComponent implements OnInit {
   }
 
   onRegistrationSuccess(user: any) {
+    fbq('track', 'CompleteRegistration');
+    this.gtag_report_conversion('AW-831903917/QE2JCIuxrHcQrbHXjAM');
     LocalStorageService.setLocalValue(LocalStorage.USER_ID, user.data._id);
     LocalStorageService.setLocalValue(LocalStorage.EMAIL_ID, this.recruiterForm.value.email);
     LocalStorageService.setLocalValue(LocalStorage.COMPANY_NAME, this.recruiterForm.value.company_name);
