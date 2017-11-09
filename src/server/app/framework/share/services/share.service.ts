@@ -43,7 +43,7 @@ class ShareService {
     let _date = new Date();
     let _miliSeconds:string = _date.getTime().toString();
     let _shortString:string = _miliSeconds+user._id;
-    this.shareDetails.shareUrl = host + 'editJob' + '/' + _shortString;
+    this.shareDetails.shareUrl = host + 'jobposting' + '/' + _shortString;
     let _item:any = {
       shortUrl: _shortString,
       longUrl: actualUrl,
