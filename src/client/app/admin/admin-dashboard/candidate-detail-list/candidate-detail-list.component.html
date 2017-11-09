@@ -3,9 +3,9 @@
     <!--<a href="./public/candidate.csv" download="candiadte.csv" title="Export Candidate to CSV File"><i class="glyphicon glyphicon-export"></i>Export</a>-->
   </div>
   <div title="Export candidates list to CSV file" class="export-data-link" (click)="generateCandidateDetailFile()"><span class="glyphicon glyphicon-export" ></span>Export</div>
-  <a href="./public/candidates.csv" download="candidates.csv" id="link_candidate"  hidden></a>
-  <a href="./public/users.csv" download="users.csv" id="link_candidate1"  hidden></a>
-  <a href="./public/candidates-other-details.csv" download="candidates-other-details.csv" id="link_candidate2"  hidden></a>
+  <a href={{candidateCSV}} download="candidates.csv" id="link_candidate"  hidden></a>
+  <a href={{usersCSV}} download="users.csv" id="link_candidate1"  hidden></a>
+  <a href={{candidateOtherDetailsCSV}} download="candidates-other-details.csv" id="link_candidate2"  hidden></a>
   <div class="list-view" *ngIf="candidates && candidates.length > 0">
     <ul class="list-header">
       <li>

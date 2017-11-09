@@ -17,6 +17,8 @@ import {Label, Messages} from "../../../shared/constants";
 export class RecruiterDetailListComponent {
   @Input() recruiters:any[]=new Array(0);
   private successMessage:string;
+  recruitersCSV: string = '';
+  recruitersUsersCSV: string = '';
   constructor(private adminDashboardService:AdminDashboardService,
               private loaderService: LoaderService,
               private errorService: ErrorService,
@@ -51,8 +53,10 @@ export class RecruiterDetailListComponent {
     this.messageService.message(new Message(Messages.MSG_FOR_FILE_DOWNLOAD));
     this.adminDashboardService.generateRecruiterDetailFile()
       .subscribe(
-        UsageDetails => {
+        recruiterDetails => {
           this.loaderService.stop();
+          this.recruitersCSV = recruiterDetails.candidatesOtherDetailsFilePath;
+          this.recruitersUsersCSV = recruiterDetails.usersFilePath;
           document.getElementById('link_recruiter').click();
           document.getElementById('link_recruiter1').click();
           this.messageService.message(new Message(Messages.MSG_SUCCESS_FOR_FILE_DOWNLOAD));

@@ -4,12 +4,14 @@ import Messages = require('../shared/messages');
 import ImportIndustryService = require('../services/import-industries.service');
 let importIndustriesService = new ImportIndustryService();
 let config = require('config');
+let path = require('path');
 
 export class ImportIndustryController {
 
   readXlsx(req: express.Request, res: express.Response, next: any) {
     try {
-      let filePath = config.get('TplSeed.filePathForMasterDataExcel');
+      console.log("file:" +path.resolve());
+      let filePath = path.resolve()+ config.get('TplSeed.filePathForMasterDataExcel');
       let isFileExist = fs.existsSync(filePath);
       if (!isFileExist) {
         next({

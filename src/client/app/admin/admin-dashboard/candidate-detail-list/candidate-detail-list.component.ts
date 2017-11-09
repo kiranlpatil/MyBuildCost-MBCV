@@ -17,7 +17,9 @@ import {ErrorService} from "../../../shared/services/error.service";
 export class CandidateDetailListComponent {
   @Input() candidates: any[] = new Array(0);
   private successMessage: string;
-
+  candidateCSV: string = '';
+  candidateOtherDetailsCSV: string = '';
+  usersCSV: string = '';
   constructor(private adminDashboardService: AdminDashboardService,
               private loaderService: LoaderService,
               private errorService: ErrorService,
@@ -55,8 +57,11 @@ export class CandidateDetailListComponent {
     this.loaderService.start();
     this.adminDashboardService.generateCandidateDetailFile()
       .subscribe(
-        UsageDetails => {
+        CandidateDetails => {
           this.loaderService.stop();
+          this.candidateCSV = CandidateDetails.candidatesFilePath;
+          this.candidateOtherDetailsCSV = CandidateDetails.candidatesOtherDetailsFilePath;
+          this.usersCSV = CandidateDetails.usersFilePath;
           document.getElementById('link_candidate').click();
           document.getElementById('link_candidate1').click();
           document.getElementById('link_candidate2').click();
