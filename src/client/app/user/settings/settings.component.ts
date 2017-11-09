@@ -111,7 +111,6 @@ export class SettingsComponent implements OnInit, OnDestroy {
   onAdminProfileSuccess(candidateData: any) {
     this.candidate.basicInformation = candidateData.data;
   }
-
   ngOnDestroy() {
     //this.loaderService.stop();
   }

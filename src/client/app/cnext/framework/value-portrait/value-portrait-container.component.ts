@@ -18,7 +18,7 @@ export class ValuePortraitContainerComponent implements OnInit {
   private isCandidate: boolean;
   private isCandidateSubmitted: boolean;
   private isFromCreate: boolean = false;
-
+  candidateId:string;
   constructor(private _router:Router, private activatedRoute:ActivatedRoute) {
     if (LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE) === 'true') {
       this.isCandidate = true;
@@ -37,14 +37,14 @@ export class ValuePortraitContainerComponent implements OnInit {
     if (role === 'true') {
       if(this.isFromCreate) {
         this.isFromCreate=false;
-        this._router.navigate(['/create_profile']);
+        this._router.navigate(['/candidate/profile']);
       }
       else {
-        this._router.navigate(['/candidate_dashboard']);
+        this._router.navigate(['/candidate/dashboard']);
       }
     }
     if (role === 'false') {
-      this._router.navigate(['/recruiterdashboard', 'applicant_search']);
+      this._router.navigate(['/recruiter/search', this.candidateId]);
     }
 
   }
@@ -81,5 +81,9 @@ export class ValuePortraitContainerComponent implements OnInit {
 
   getButtons() {
     return Button;
+  }
+
+  updateCanidateId(value:string) {
+    this.candidateId = value;
   }
 }

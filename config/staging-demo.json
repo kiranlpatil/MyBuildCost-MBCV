@@ -7,15 +7,23 @@
       "password": "jobmosisadmin123",
       "mongoExport": "/usr/bin/mongoexport"
     },
-    "adminExportFilePath": {
-      "candidatesCSV": "/home/bitnami/apps/jobmosis-staging/c-next/dist/server/prod/public/candidates.csv",
-      "candidateOtherDetailsCSV": "/home/bitnami/apps/jobmosis-staging/c-next/dist/server/prod/public/candidates-other-details.csv",
-      "recruitersCSV": "/home/bitnami/apps/jobmosis-staging/c-next/dist/server/prod/public/recruiters.csv",
-      "usersCSV": "/home/bitnami/apps/jobmosis-staging/c-next/dist/server/prod/public/users.csv",
-      "usageDetailsCSV": "/home/bitnami/apps/jobmosis-staging/c-next/dist/server/prod/public/usagedetail.csv",
-      "keySkillsCSV": "/home/bitnami/apps/jobmosis-staging/c-next/dist/server/prod/public/key-skills.csv"
+    "adminExportFilePathForServer": {
+      "candidatesCSV": "/server/prod/public/candidates.csv",
+      "candidateOtherDetailsCSV": "/server/prod/public/candidates-other-details.csv",
+      "recruitersCSV": "/server/prod/public/recruiters.csv",
+      "usersCSV": "/server/prod/public/users.csv",
+      "usageDetailsCSV": "/server/prod/public/usagedetail.csv",
+      "keySkillsCSV": "/server/prod/public/key-skills.csv"
     },
-    "publicPath":"/home/bitnami/apps/jobmosis-staging/myApp/dist/server/prod/app/framework/public/",
+    "adminExportFilePathForClient": {
+      "candidatesCSV": "public/candidates.csv",
+      "candidateOtherDetailsCSV": "public/candidates-other-details.csv",
+      "recruitersCSV": "public/recruiters.csv",
+      "usersCSV": "public/users.csv",
+      "usageDetailsCSV": "public/usagedetail.csv",
+      "keySkillsCSV": "public/key-skills.csv"
+    },
+    "publicPath":"/server/prod/app/framework/public/",
     "limitForQuery" : 10,
     "mail": {
       "host":"http://52.43.220.29:3000/",
@@ -45,8 +53,9 @@
       "senderId": "JOBMOS",
       "routerNumber": "4"
     },
-    "filePathForMasterDataExcel" : "./src/server/app/framework/public/config/NewIndustryDataExcel.xlsx",
-    "folderPath":"/home/bitnami/apps/jobmosis-staging/c-next/dist/prod/server/public/candidate.csv"
+    "filePathForMasterDataExcel" : "/server/prod/app/framework/public/config/NewIndustryDataExcel.xlsx",
+    "filePathForProfileImage" : "/server/prod/app/framework/public/profileimage"
+
   },
   "logger" : {
     "levels": {

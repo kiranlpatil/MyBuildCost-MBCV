@@ -1,4 +1,4 @@
-import {AfterViewChecked, Component, Input, OnInit, OnChanges} from "@angular/core";
+import {AfterViewChecked, Component, Input, Output, OnInit, OnChanges, EventEmitter} from "@angular/core";
 import {CandidateProfileService} from "../../candidate-profile/candidate-profile.service";
 import {Candidate} from "../../../../user/models/candidate";
 import {ErrorService} from "../../../../shared/services/error.service";
@@ -20,6 +20,7 @@ export class ValuePortraitComponent implements OnInit {
   @Input() userId:string;
   @Input() isShareView:boolean;
   @Input() isMiniView:boolean;
+  @Output() candidateId: EventEmitter<string> = new EventEmitter<string>();
   gotItMessage: string= Headings.GOT_IT;
   isCandidate:boolean;
   isSubmitted:boolean;
@@ -57,6 +58,7 @@ export class ValuePortraitComponent implements OnInit {
     this.candidateProfileService.getCandidateAllDetails(this.userId)
       .subscribe(
         candidateData => {
+          this.candidateId.emit(candidateData.data.candidateId);
           this.candidate = this.updateCapabilityData(candidateData.data);
           console.log("capability details = ",this.candidate );
         },error => this.errorService.onError(error));

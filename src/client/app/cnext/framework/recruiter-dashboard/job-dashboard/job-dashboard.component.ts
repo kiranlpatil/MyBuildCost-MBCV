@@ -217,7 +217,6 @@ export class JobDashboardComponent implements OnInit {
   }
 //TODO: move this (performActionOnComparisonList) code to comaprison compoent  ->by krishna ghatul code refactor
   performActionOnComparisonList(data:any) {
-    //console.log('---------------candidateQlistcandidateQlistcandidateQlist--------------------------',this.candidateQlist);
     if (data.action == 'Remove') {
       this.profileComparison.profileComparisonData.splice(this.profileComparison.profileComparisonData.indexOf(data.item), 1);
       this.listOfCandidateIdToCompare.splice(this.profileComparison.profileComparisonData.indexOf(data.item._id), 1);
@@ -300,7 +299,6 @@ export class JobDashboardComponent implements OnInit {
         console.log(''+data);
       }, error => this.errorService.onError(error));
     if (this.listOfCandidateIdToCompare.indexOf(obj.id) === -1) {
-      //this.listOfCandidateStatus.push(obj);
       this.listOfCandidateIdToCompare.push(obj.id);
       this.recruiterJobView.numberOfCandidatesInCompare++;
     }
@@ -312,9 +310,7 @@ export class JobDashboardComponent implements OnInit {
   }
 
   jobcloned(event:any) {
-
-    this.navigateTo('recruiterdashboard/edit',event);
-
+    this._router.navigate(['/recruiter/jobpost', event]);
   }
 
   getLabel() {

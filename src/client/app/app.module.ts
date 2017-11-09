@@ -165,6 +165,7 @@ import {JobCloseComponentService} from "./cnext/framework/job-close/job-close.co
 import {ComplexityAnsweredService} from "./cnext/framework/complexity-answered.service";
 import {UserFeedbackComponent} from "./cnext/framework/user-feedback/user-feedback.component";
 import {UserFeedbackComponentService} from "./cnext/framework/user-feedback/user-feedback.component.service";
+import {CandidateRouteSwitchComponent} from "./cnext/framework/candidate-dashboard/candidate-route-switch.component";
 //C-NEXT IMPORTS
 
 
@@ -283,7 +284,8 @@ import {UserFeedbackComponentService} from "./cnext/framework/user-feedback/user
     ShareContainerComponent,
     PrintScreenComponent,
     JobCloseComponent,
-    UserFeedbackComponent
+    UserFeedbackComponent,
+    CandidateRouteSwitchComponent
   ],
 
   providers: [

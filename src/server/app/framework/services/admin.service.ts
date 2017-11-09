@@ -15,6 +15,7 @@ import CandidateModelClass = require('../dataaccess/model/candidateClass.model')
 import RecruiterClassModel = require('../dataaccess/model/recruiterClass.model');
 import CandidateClassModel = require('../dataaccess/model/candidate-class.model');
 import UserService = require("./user.service");
+let path = require('path');
 let config = require('config');
 let fs = require('fs');
 let usestracking = require('uses-tracking');
@@ -213,9 +214,9 @@ class AdminService {
   };
 
   sendAdminLoginInfoMail(field: any, callback: (error: any, result: any) => void) {
-    let header1 = fs.readFileSync(config.get('TplSeed.publicPath')+'header1.html').toString();
-    let content = fs.readFileSync(config.get('TplSeed.publicPath')+'adminlogininfo.mail.html').toString();
-    let footer1 = fs.readFileSync(config.get('TplSeed.publicPath')+'footer1.html').toString();
+    let header1 = fs.readFileSync(path.resolve()+ config.get('TplSeed.publicPath') + 'header1.html').toString();
+    let content = fs.readFileSync(path.resolve() +config.get('TplSeed.publicPath') + 'adminlogininfo.mail.html').toString();
+    let footer1 = fs.readFileSync(path.resolve() +config.get('TplSeed.publicPath') + 'footer1.html').toString();
     let mid_content = content.replace('$email$', field.email).replace('$address$', (field.location === undefined) ? 'Not Found' : field.location)
       .replace('$ip$', field.ip).replace('$host$', config.get('TplSeed.mail.host'));
 
@@ -280,13 +281,13 @@ class AdminService {
       'certifications,profile_update_tracking,isVisible,isSubmitted,isCompleted,complexity_note_matrix,' +
       'professionalDetails,aboutMyself,jobTitle,location,lastUpdateAt';
 
-    let downloadLocation = config.get('TplSeed.adminExportFilePath.candidatesCSV');
+    let downloadLocation = path.resolve() + config.get('TplSeed.adminExportFilePathForServer.candidatesCSV');
 
     this.exportCollection("candidates", fields, downloadLocation, '{}', (error: any, result: any) => {
       if (error) {
         callback(error, null);
       } else {
-        callback(null, 'success');
+        callback(null, config.get('TplSeed.adminExportFilePathForClient.candidatesCSV'));
       }
     });
 
@@ -295,13 +296,13 @@ class AdminService {
   exportCandidateOtherDetailsCollection(callback: (err: any, res: any) => void) {
     let fields = 'userId,capability_matrix';
 
-    let downloadLocation = config.get('TplSeed.adminExportFilePath.candidateOtherDetailsCSV');
+    let downloadLocation = path.resolve() + config.get('TplSeed.adminExportFilePathForServer.candidateOtherDetailsCSV');
 
     this.exportCollection("candidates", fields, downloadLocation, '{}', (error: any, result: any) => {
       if (error) {
         callback(error, null);
       } else {
-        callback(null, 'success');
+        callback(null, config.get('TplSeed.adminExportFilePathForClient.candidateOtherDetailsCSV'));
       }
     });
   }
@@ -309,7 +310,7 @@ class AdminService {
   exportUserCollection(userType: string, callback: (err: any, res: any) => void) {
     let fields: string;
     let query: string;
-    let downloadLocation = config.get('TplSeed.adminExportFilePath.usersCSV');
+    let downloadLocation = path.resolve() + config.get('TplSeed.adminExportFilePathForServer.usersCSV');
 
     if (userType == 'candidate') {
       fields = '_id,first_name,last_name,mobile_number,email,current_theme,isCandidate,guide_tour,notifications,' +
@@ -325,7 +326,7 @@ class AdminService {
       if (error) {
         callback(error, null);
       } else {
-        callback(null, 'success');
+        callback(null, config.get('TplSeed.adminExportFilePathForClient.usersCSV'));
       }
     });
 
@@ -336,13 +337,13 @@ class AdminService {
     let fields = '_id,userId,isRecruitingForself,company_name,company_size,company_website,postedJobs,setOfDocuments,' +
       'company_logo'
 
-    let downloadLocation = config.get('TplSeed.adminExportFilePath.recruitersCSV');
+    let downloadLocation = path.resolve() + config.get('TplSeed.adminExportFilePathForServer.recruitersCSV');
 
     this.exportCollection("recruiters", fields, downloadLocation, '{}', (error: any, result: any) => {
       if (error) {
         callback(error, null);
       } else {
-        callback(null, 'success');
+        callback(null, config.get('TplSeed.adminExportFilePathForClient.recruitersCSV'));
       }
     });
 
@@ -350,13 +351,13 @@ class AdminService {
 
   exportUsageDetailsCollection(callback: (err: any, res: any) => void) {
     let fields = '_id,candidateId,jobProfileId,timestamp,action,__v';
-    let downloadLocation = config.get('TplSeed.adminExportFilePath.usageDetailsCSV');
+    let downloadLocation = path.resolve() + config.get('TplSeed.adminExportFilePathForServer.usageDetailsCSV');
 
     this.exportCollection("usestrackings", fields, downloadLocation, '{}', (error: any, result: any) => {
       if (error) {
         callback(error, null);
       } else {
-        callback(null, 'success');
+        callback(null, config.get('TplSeed.adminExportFilePathForClient.usageDetailsCSV'));
       }
     });
 
@@ -364,13 +365,13 @@ class AdminService {
 
   exportKeySkillsCollection(callback: (err: any, res: any) => void) {
     let fields = '_id,proficiencies';
-    let downloadLocation = config.get('TplSeed.adminExportFilePath.keySkillsCSV');
+    let downloadLocation = path.resolve() + config.get('TplSeed.adminExportFilePathForServer.keySkillsCSV');
 
     this.exportCollection("proficiencies", fields, downloadLocation, '{}', (error: any, result: any) => {
       if (error) {
         callback(error, null);
       } else {
-        callback(null, 'success');
+        callback(null, config.get('TplSeed.adminExportFilePathForClient.keySkillsCSV'));
       }
     });
 

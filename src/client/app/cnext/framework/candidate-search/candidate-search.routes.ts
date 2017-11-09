@@ -5,5 +5,9 @@ export const CandidateSearchRoutes:Route[] = [
   {
     path: 'applicant_search',
     component: CandidateSearchComponent
+  },
+  {
+    path: 'applicant_search/:id',
+    component: CandidateSearchComponent
   }
 ];

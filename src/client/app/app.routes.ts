@@ -5,17 +5,14 @@ import { AboutRoutes } from './framework/dashboard/about/index';
 import { ActivateUserRoutes } from './framework/registration/activate-user/activate-user.routes';
 import { RecruiterDashboard } from './cnext/framework/recruiter-dashboard/recruiter-dashboard.routes';
 import { CandidateSummary } from './cnext/framework/one-page-summary/candidate-summary/candidate-summary.routes';
-import { ProfileCreator } from './cnext/framework/candidate-profile/candidate-profile.routes';
 import { RecruiterSummary } from './cnext/framework/one-page-summary/recruiter-job-summary/recruiter-job-summary.routes';
-import { CandidateDashboard } from './cnext/framework/candidate-dashboard/candidate-dashboard.routes';
-import { JobDashboardRoutes } from './cnext/framework/recruiter-dashboard/job-dashboard/job-dashboard.routes';
 import { CandidateCompare } from './cnext/framework/single-page-compare-view/candidate-compare-view/candidate-compare-view.routes';
 import { JobCompare } from './cnext/framework/single-page-compare-view/job-compare-view/job-compare-view.routes';
-import { JobPosterRoutes } from './cnext/framework/job-poster/job-poster.routes';
 import { ValuePortrait } from './cnext/framework/value-portrait/value-portrait-container.routes';
 import { LandingPageRoutes } from './framework/landing-page/landing-page.routes';
 import { ShareContainerRoutes } from './cnext/framework/share-container/share-container.routes';
 import { JobShareContainerRoutes } from './cnext/framework/job-share-container/job-share-container.routes';
+import {CandidateRouteSwitch} from "./cnext/framework/candidate-dashboard/candidate-route-switch.routes";
 
 
 export const routes: Routes = [
@@ -26,17 +23,17 @@ export const routes: Routes = [
   ...LandingPageRoutes,
   ...ActivateUserRoutes,
   ...DashboardRoutes,
-  ...CandidateDashboard,
+  ...CandidateRouteSwitch,
   ...RecruiterDashboard,
   ...RecruiterSummary,
   ...CandidateCompare,
   ...JobCompare,
   ...AboutRoutes,
-  ...ProfileCreator,
+//  ...ProfileCreator,
   ...CandidateSummary,
   ...ValuePortrait,
-  ...JobDashboardRoutes,
-  ...JobPosterRoutes,
+  //...JobDashboardRoutes,
+  //...JobPosterRoutes,
   ...ShareContainerRoutes,
   ...JobShareContainerRoutes,
   ...StartRoutes

@@ -6,7 +6,7 @@ import {CandidateProfileService} from "../candidate-profile/candidate-profile.se
 import {Proficiences} from "../model/proficiency";
 import {Section} from "../../../user/models/candidate";
 import {ShowQcardviewService} from "../showQCard.service";
-import {Router} from "@angular/router";
+import {Router, ActivatedRoute} from "@angular/router";
 import {Industry} from "../../../user/models/industry";
 import {RecruiterDashboardService} from "../recruiter-dashboard/recruiter-dashboard.service";
 import {RecruiterDashboard} from "../model/recruiter-dashboard";
@@ -29,7 +29,7 @@ import {JobShareContainerService} from "../job-share-container/job-share-contain
 export class JobPosterComponent implements OnInit, OnChanges {
   @Input() noOfJobPosted: number;
   @Input() currentjobId: string;
-  @Input() role: string;
+  @Input() role: string = 'recruiter';
   @Output() jobPostEventEmitter: EventEmitter<string> = new EventEmitter();
   @Output() jobPostCloneSuccessEmitter: EventEmitter<boolean> = new EventEmitter();
 
@@ -80,13 +80,23 @@ export class JobPosterComponent implements OnInit, OnChanges {
               private errorService: ErrorService,
               private showQCardView: ShowQcardviewService,
               private jobPostService: JobPosterService,
-              private _router: Router) {
+              private _router: Router,
+              private activatedRoute:ActivatedRoute) {
   }
 
   ngOnInit() {
     if (LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE) === 'true') {
       this.isCandidate = true;
     }
+    this.activatedRoute.params.subscribe(params => {
+      this.jobId = params['jobId'];
+      if(this.jobId) {
+        this.getJobProfile();
+      } else {
+        this.jobPosterModel = new JobPosterModel();
+        this.highlightedSection.name = 'JobProfile';
+      }
+    });
   }
 
   ngOnChanges(changes: any) {
@@ -218,6 +228,7 @@ export class JobPosterComponent implements OnInit, OnChanges {
           this.jobPosterModel.complexity_musthave_matrix = data.data.postedJobs[0].complexity_musthave_matrix;
           this.setComplexityMustHaveMatrix = false;
         }
+        this._router.navigate(['/recruiter/jobpost', this.jobPosterModel._id]);
       }, error => this.errorService.onError(error));
   }
 
@@ -230,7 +241,7 @@ export class JobPosterComponent implements OnInit, OnChanges {
           }, error => this.errorService.onError(error));
       }
       LocalStorageService.setLocalValue(LocalStorage.CURRENT_JOB_POSTED_ID, jobModel._id);
-      this._router.navigate(['jobdashboard/', jobModel._id]);
+      this._router.navigate(['recruiter/job/', jobModel._id]);
     }
   }
 
@@ -491,8 +502,9 @@ export class JobPosterComponent implements OnInit, OnChanges {
 
   }
 
-  onJobCloned(event:any) {
-    this.jobPostEventEmitter.emit(event);
+  onJobCloned(id:any) {
+    //this.jobPostEventEmitter.emit(event);
+    this._router.navigate(['/recruiter/jobpost', id]);
     this.jobPostCloneSuccessEmitter.emit();
   }
 

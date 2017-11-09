@@ -54,22 +54,30 @@ export class AdminDashboardService extends BaseService {
 
   getUsageDetails(): Observable<any> {
     var url = API.USAGE_DETAIL;
-    return this.http.get(url);
+    return this.http.get(url)
+      .map(this.extractData)
+      .catch(this.handleError);
   }
 
   getKeySkillsData(): Observable<any> {
     var url = API.KEY_SKILLS;
-    return this.http.get(url);
+    return this.http.get(url)
+      .map(this.extractData)
+      .catch(this.handleError);
   }
 
   generateCandidateDetailFile(): Observable<any> {
     var url = API.EXPORT_CANDIDATE_DETAIL_PROFILE;
-    return this.http.get(url);
+    return this.http.get(url)
+      .map(this.extractData)
+      .catch(this.handleError);
   }
 
   generateRecruiterDetailFile(): Observable<any> {
     var url = API.EXPORT_RECRUITER_DETAIL_PROFILE;
-    return this.http.get(url);
+    return this.http.get(url)
+      .map(this.extractData)
+      .catch(this.handleError);
   }
 
   updateProfile(model: CandidateDetail): Observable<CandidateDetail> {

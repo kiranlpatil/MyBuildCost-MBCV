@@ -637,7 +637,7 @@
       float: left;
       padding: 7px;
       position: fixed;
-      width: 100%;
+      width: 100% !important;
     }
 
     .btn-prev {
@@ -733,5 +733,8 @@
     textarea {
       font-size: 16px;
     }
+  }
+  .work-area-section {
+    display: none;
   }
 }

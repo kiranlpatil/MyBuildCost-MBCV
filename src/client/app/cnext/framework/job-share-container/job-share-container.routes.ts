@@ -3,7 +3,7 @@ import {JobShareContainerComponent} from './job-share-container.component';
 
 export const JobShareContainerRoutes:Route[] = [
   {
-    path: 'editJob/:shortUrl',
+    path: 'jobposting/:shortUrl',
     component: JobShareContainerComponent
   }
 ];

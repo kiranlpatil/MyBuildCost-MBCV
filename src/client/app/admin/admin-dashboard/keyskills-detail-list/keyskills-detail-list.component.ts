@@ -14,6 +14,7 @@ import { MessageService } from '../../../shared/services/message.service';
 })
 
 export class KeySkillsDetailListComponent {
+  keySkillCSV: string= '';
   constructor(private adminDashboardService: AdminDashboardService,
               private loaderService: LoaderService,
               private errorService: ErrorService,
@@ -27,6 +28,7 @@ export class KeySkillsDetailListComponent {
       .subscribe(
         data => {
           this.loaderService.stop();
+          this.keySkillCSV = data.path;
           document.getElementById('link-keySkills').click();
           this.messageService.message(new Message(Messages.MSG_SUCCESS_FOR_FILE_DOWNLOAD));
           },

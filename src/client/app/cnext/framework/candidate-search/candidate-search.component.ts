@@ -6,7 +6,7 @@ import { JobQcard } from '../model/JobQcard';
 import { CandidateProfileService } from '../candidate-profile/candidate-profile.service';
 import { Candidate } from '../../../user/models/candidate';
 import { CandidateDetail } from '../../../user/models/candidate-details';
-import { Router } from '@angular/router';
+import {Router, ActivatedRoute} from '@angular/router';
 import { ImagePath, LocalStorage, Messages, UsageActions, ValueConstant } from '../../../shared/constants';
 import { QCardViewService } from '../recruiter-dashboard/q-card-view/q-card-view.service';
 import { LocalStorageService } from '../../../shared/services/localstorage.service';
@@ -49,7 +49,7 @@ export class CandidateSearchComponent implements OnChanges {
   private isShowSuggestionToasterMsg:boolean = false;
 
 
-  constructor(private _router:Router, private candidateSearchService:CandidateSearchService,
+  constructor(private _router:Router, private activatedRoute:ActivatedRoute, private candidateSearchService:CandidateSearchService,
               private usageTrackingService : UsageTrackingService,
               private errorService:ErrorService, private profileCreatorService:CandidateProfileService,
               private qCardViewService:QCardViewService,private messageService: MessageService) {
@@ -58,6 +58,15 @@ export class CandidateSearchComponent implements OnChanges {
 
   ngOnChanges(changes:any) {
 
+  }
+
+  ngOnInit() {
+    this.activatedRoute.params.subscribe(params => {
+      const _userId = params['id'];
+      if(_userId) {
+        this.getJobProfiles(_userId);
+      }
+    });
   }
 
   searchCandidate(value:string) {
@@ -78,7 +87,8 @@ export class CandidateSearchComponent implements OnChanges {
   getJobProfileMatching(item:CandidateSearch) {
     this.searchValue = item.first_name + ' ' + item.last_name;
     this.isCandidateFound = true;
-    this.getJobProfiles(item.id);
+    //this.getJobProfiles(item.id);
+    this._router.navigate(['/recruiter/search', item.id]);
   }
 
   getJobProfiles(candidateId:string) {
@@ -100,6 +110,7 @@ export class CandidateSearchComponent implements OnChanges {
   onCandidateDataSuccess(candidateData:any) {
     this.candidate = candidateData;
     this.candidateDetails = <CandidateDetail>candidateData.userId;
+    this.searchValue = this.candidateDetails.first_name + ' ' + this.candidateDetails.last_name;
     this.candidateId = this.candidate._id;
     this.userId = this.candidateDetails._id;
   }

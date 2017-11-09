@@ -57,8 +57,8 @@ export class JobCloseComponent implements OnChanges, OnInit {
       this.jobPosterService.postJob(this.selectedJobProfile).subscribe(
         data => {
           this.selectedJobProfile = data.data.postedJobs[0];
+          this.messageService.message(new Message(this.selectedJobTitleForClose+ " Job Post is closed"));
         }, error => this.errorService.onError(error));
-      this.messageService.message(new Message(this.selectedJobTitleForClose+ " Job Post is closed"));
     }
   }
 

@@ -190,6 +190,7 @@ export function exportCandidateDetails(req: express.Request, res: express.Respon
     var userService = new UserService();
     var adminService = new AdminService();
     let userType = 'candidate';
+    let files: any = {};
     if (req.user.isAdmin) {
       adminService.exportCandidateCollection((err, respo) => {
         if (err) {
@@ -200,6 +201,7 @@ export function exportCandidateDetails(req: express.Request, res: express.Respon
             code: 500
           });
         } else {
+          files['candidatesFilePath'] = respo;
           adminService.exportCandidateOtherDetailsCollection((err, respo) => {
             if (err) {
               next({
@@ -209,6 +211,7 @@ export function exportCandidateDetails(req: express.Request, res: express.Respon
                 code: 500
               });
             } else {
+              files['candidatesOtherDetailsFilePath'] = respo;
               adminService.exportUserCollection(userType, (err, respo) => {
                 if (err) {
                   next({
@@ -218,7 +221,9 @@ export function exportCandidateDetails(req: express.Request, res: express.Respon
                     code: 500
                   });
                 } else {
+                  files['usersFilePath'] = respo;
                   res.status(200).send({
+                    'path': files,
                     'status': 'success'
                   });
                 }
@@ -251,6 +256,7 @@ export function exportRecruiterDetails(req: express.Request, res: express.Respon
     var userService = new UserService();
     var adminService = new AdminService();
     let userType = 'recruiter';
+    let files: any = {};
     if (req.user.isAdmin) {
       adminService.exportRecruiterCollection((err, respo) => {
         if (err) {
@@ -261,6 +267,7 @@ export function exportRecruiterDetails(req: express.Request, res: express.Respon
             code: 500
           });
         } else {
+          files['recruitersFilePath'] = respo;
           adminService.exportUserCollection(userType, (err, respo) => {
             if (err) {
               next({
@@ -270,7 +277,9 @@ export function exportRecruiterDetails(req: express.Request, res: express.Respon
                 code: 500
               });
             } else {
+              files['usersFilePath'] = respo;
               res.status(200).send({
+                'path': files,
                 'status': 'success'
               });
             }
@@ -309,6 +318,7 @@ export function exportUsageDetails(req: express.Request, res: express.Response, 
           });
         } else {
           res.status(200).send({
+            'path': result,
             'status': 'success'
           });
         }
@@ -346,6 +356,7 @@ export function exportKeySkills(req: express.Request, res: express.Response, nex
           });
         } else {
           res.status(200).send({
+            'path': result,
             'status': 'success'
           });
         }

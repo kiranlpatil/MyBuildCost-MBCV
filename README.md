@@ -394,6 +394,35 @@ $ src/redis-server
   }
  })
  
+ //script for demo and staging
+ db.getCollection('recruiters').find({}).forEach(function(recruiter) {
+   for(var i = 0;i <= recruiter.postedJobs.length-1; i++){
+       if(recruiter.postedJobs[i].isJobPostClosed == true){
+   		print("skip");
+   	}else {
+  	 	recruiter.postedJobs[i].isJobPostExpired = false;
+  		 db.getCollection('recruiters').update(
+  		 {"postedJobs._id":recruiter.postedJobs[i]._id},recruiter)
+  		 print("success:" + recruiter.postedJobs[i]._id);
+  	}
+   }
+  })
+  
+  //Updated script for production
+  db.getCollection('recruiters').find({}).forEach(function(recruiter) {
+    for(var i = 0;i <= recruiter.postedJobs.length-1; i++){
+        if(recruiter.postedJobs[i].isJobPostClosed == true){
+    		print("skip");
+    	}else {
+   	 	recruiter.postedJobs[i].expiringDate = ISODate("2018-04-30T18:29:59.414Z");
+   	 	recruiter.postedJobs[i].isJobPostExpired = false;
+   		 db.getCollection('recruiters').update(
+   		 {"postedJobs._id":recruiter.postedJobs[i]._id},recruiter)
+   		 print("success:" + recruiter.postedJobs[i]._id);
+   	}
+    }
+   })
+ 
  
 
 # MySQL

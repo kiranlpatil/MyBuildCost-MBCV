@@ -9,6 +9,7 @@ import JobProfileModel = require('../dataaccess/model/jobprofile.model');
 import CandidateRepository = require('../dataaccess/repository/candidate.repository');
 import * as fs from 'fs';
 var config = require('config');
+let path = require('path');
 import CapabilityMatrixService = require('./capbility-matrix.builder');
 import IndustryModel = require('../dataaccess/model/industry.model');
 import IndustryRepository = require('../dataaccess/repository/industry.repository');
@@ -334,8 +335,8 @@ class RecruiterService {
     this.recruiterRepository.retrieveWithLean(field, projection, callback);
   }
   sendMailToAdvisor(field: any, callback: (error: any, result: any) => void) {
-    var header1 = fs.readFileSync(config.get('TplSeed.publicPath')+'header1.html').toString();
-    var footer1 = fs.readFileSync(config.get('TplSeed.publicPath')+'footer1.html').toString();
+    var header1 = fs.readFileSync(path.resolve() +config.get('TplSeed.publicPath')+'header1.html').toString();
+    var footer1 = fs.readFileSync(path.resolve() +config.get('TplSeed.publicPath')+'footer1.html').toString();
     var mailOptions = {
       to: field.email_id,
       subject: Messages.EMAIL_SUBJECT_RECRUITER_CONTACTED_YOU,
@@ -347,9 +348,9 @@ class RecruiterService {
   }
 
   sendMailToRecruiter(user:any,field: any, callback: (error: any, result: any) => void) {
-    var header1 = fs.readFileSync(config.get('TplSeed.publicPath')+'header1.html').toString();
-    var content = fs.readFileSync(config.get('TplSeed.publicPath')+'confirmation.mail.html').toString();
-    var footer1 = fs.readFileSync(config.get('TplSeed.publicPath')+'footer1.html').toString();
+    var header1 = fs.readFileSync(path.resolve() +config.get('TplSeed.publicPath')+'header1.html').toString();
+    var content = fs.readFileSync(path.resolve() +config.get('TplSeed.publicPath')+'confirmation.mail.html').toString();
+    var footer1 = fs.readFileSync(path.resolve() +config.get('TplSeed.publicPath')+'footer1.html').toString();
     content=content.replace('$job_title$', field.jobTitle);
     let host = config.get('TplSeed.mail.host');
     let link = host + 'signin';

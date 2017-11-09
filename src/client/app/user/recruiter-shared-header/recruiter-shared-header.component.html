@@ -37,20 +37,20 @@
                 </li>
                 <li class="divider"></li>
                 <li role="menuitem" [routerLinkActive]="['active']">
-                  <a class="dropdown-item" [routerLink]="['/recruiterdashboard']"
+                  <a class="dropdown-item" [routerLink]="['/recruiter/dashboard']"
                      (click)="redirectToRecruiterDashboard(); toggleMenu();">
                     <span class="glyphicon glyphicon-th"></span>My Dashboard
                   </a>
                 </li>
                 <li role="menuitem" [routerLinkActive]="['active']">
-                  <a class="dropdown-item" [routerLink]="['/settings/recruiter']"
-                     (click)="navigateTo('/settings/recruiter'); toggleMenu();">
+                  <a class="dropdown-item" [routerLink]="['/user/changepassword']" [queryParams]="{ role: 'recruiter'}"
+                     (click)="toggleMenu();">
                     <span class="glyphicon glyphicon-lock"></span>Change Password
                   </a>
                 </li>
                 <li role="menuitem" [routerLinkActive]="['active']">
-                  <a class="dropdown-item" [routerLink]="['/profile/recruiter']"
-                     (click)="navigateTo('/profile/recruiter'); toggleMenu();">
+                  <a class="dropdown-item" [routerLink]="['/user/details']" [queryParams]="{ role: 'recruiter'}"
+                     (click)="toggleMenu();">
                     <span class="glyphicon glyphicon-list-alt"></span>Account Details
                   </a>
                 </li>

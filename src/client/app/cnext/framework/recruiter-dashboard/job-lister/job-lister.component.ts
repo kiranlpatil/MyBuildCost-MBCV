@@ -1,4 +1,7 @@
-import {Component, EventEmitter, Input, OnChanges, OnDestroy, Output, ElementRef, ViewChild} from "@angular/core";
+import {
+  Component, EventEmitter, Input, OnChanges, OnDestroy, Output, ElementRef, ViewChild,
+  OnInit
+} from "@angular/core";
 import {QCardsortBy} from "../../model/q-cardview-sortby";
 import {Router} from "@angular/router";
 import {RecruiterHeaderDetails} from "../../model/recuirterheaderdetails";
@@ -8,6 +11,8 @@ import {Button, Headings, ImagePath, Label, Messages, Tooltip} from "../../../..
 import {RenewJobPostService} from "../../../../user/services/renew-jobpost.service";
 import {Message} from "../../../../shared/models/message";
 import {MessageService} from "../../../../shared/services/message.service";
+import {RecruiterDashboardService} from "../recruiter-dashboard.service";
+import {ErrorService} from "../../../../shared/services/error.service";
 
 
 @Component({
@@ -17,11 +22,11 @@ import {MessageService} from "../../../../shared/services/message.service";
   styleUrls: ['job-lister.component.css'],
  })
 
-export class JobListerComponent implements  OnDestroy {
-  @Input() jobListInput: any[] = new Array(0);
-  @Input() headerInfoForJob: RecruiterHeaderDetails;
-  @Input() screenType:string;
-  @Input() recruiter: RecruiterDashboard;
+export class JobListerComponent implements  OnInit, OnDestroy {
+  jobListInput: any[] = new Array(0);
+  headerInfoForJob: RecruiterHeaderDetails;
+  screenType:string;
+  recruiter: RecruiterDashboard;
 //  @Input() showClosedJobs: boolean;
   @Output() jobPostEventEmitter: EventEmitter<string> = new EventEmitter();
   @Output() jobListCloneSuccessEmitter: EventEmitter<boolean> = new EventEmitter();
@@ -42,12 +47,47 @@ export class JobListerComponent implements  OnDestroy {
   private qCardModel: QCardsortBy = new QCardsortBy();
   private showClosedJobs: boolean = false;
 
+  recruiterDashboard: RecruiterDashboard = new RecruiterDashboard();
+  private recruiterHeaderDetails: RecruiterHeaderDetails = new RecruiterHeaderDetails();
+  private jobId: string;
+
   constructor(private _router: Router, public refrence: ReferenceService,
-              private renewJobPostService: RenewJobPostService, private messageService: MessageService) {
+              private renewJobPostService: RenewJobPostService, private messageService: MessageService,
+              private recruiterDashboardService: RecruiterDashboardService,
+              private errorService:ErrorService
+  ) {
     this.qCardModel.name = 'Date';
 
   }
 
+
+  getRecruiterData() {
+    this.recruiterDashboardService.getJobList()
+      .subscribe(
+        (data: any) => {
+          this.recruiterDashboard = <RecruiterDashboard>data.data[0];
+          this.recruiterHeaderDetails = <RecruiterHeaderDetails>data.jobCountModel;
+          for(let postedJob of this.recruiterDashboard.postedJobs) {
+            let currentDate = Number(new Date());
+            let expiringDate = Number(new Date(postedJob.expiringDate));
+            let daysRemainingForExpiring = Math.round(Number(new Date(expiringDate - currentDate))/(1000*60*60*24));
+            postedJob.daysRemainingForExpiring = daysRemainingForExpiring;
+          }
+          if(this.recruiterDashboard !== undefined && this.recruiterDashboard.postedJobs !== undefined && this.recruiterDashboard.postedJobs.length>0) {
+            this.screenType='jobList';
+          } else {
+            this.screenType='welcomescreen';
+          }
+
+          this.headerInfoForJob = this.recruiterHeaderDetails;
+          this.jobListInput = this.recruiterDashboard.postedJobs;
+          this.recruiter = this.recruiterDashboard;
+        },error => this.errorService.onError(error));
+  }
+
+  ngOnInit() {
+    this.getRecruiterData();
+  }
 
 
   ngOnDestroy() {
@@ -65,9 +105,10 @@ export class JobListerComponent implements  OnDestroy {
   }
   onJobClicked(item: any,isJobSubmit:boolean) {
     if (isJobSubmit) {
-      this._router.navigate(['jobdashboard/', item]);
+      this._router.navigate(['recruiter/job/', item]);
     } else {
-      this.jobPostEventEmitter.emit(item);
+      //this.jobPostEventEmitter.emit(item);
+      this._router.navigate(['recruiter/jobpost/', item]);
     }
   }
 
@@ -78,8 +119,9 @@ export class JobListerComponent implements  OnDestroy {
   }
 
   onJobCloned(event:any) {
-    this.jobPostEventEmitter.emit(event);
+    //this.jobPostEventEmitter.emit(event);
     this.jobListCloneSuccessEmitter.emit();
+    this._router.navigate(['/recruiterdashboard/jobpost', event]);
   }
   get format() {
     return this.toggle ? this.qCardModel.name : 'Date';
@@ -123,4 +165,23 @@ export class JobListerComponent implements  OnDestroy {
   displayClosedJobs() {
     this.showClosedJobs = !this.showClosedJobs;
   }
+
+
+  jobSelected(jobId: string) {
+    this.jobId = jobId;
+    let matchElement: any = document.getElementById('post_job');
+    matchElement.click();
+  }
+  OnCloneSuccessMessage()  {
+    let message = new Message();
+    message.custom_message=Messages.MSG_MSG_CLONED_SUCCESSFULLY;
+    this.messageService.message(message);
+    this.getRecruiterData();
+  }
+
+  checkJobPostExpiryDate(selectedJobProfile: string) {
+    this.renewJobPostService.checkJobPostExpiryDate(selectedJobProfile);
+    this.getRecruiterData();
+  }
+
 }

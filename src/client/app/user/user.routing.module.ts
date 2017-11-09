@@ -8,12 +8,9 @@ import {RecruiterSignUpRoutes} from "./recruiter-sign-up/recruiter.routes";
 import {ResetPasswordRoutes} from "./forgot-password/reset-password/reset-password.routes";
 import {ForgotPasswordRoutes} from "./forgot-password/forgot-password.routes";
 import {CompanyDetailsRoutes} from "./company-details/company-details.routes";
-import {ChangePasswordRoutes} from "./change-password/change-password.routes";
 import {ActivateEmailRoutes} from "./settings/activate-email/activate-email.routes";
 import {ChangeEmailRoutes} from "./settings/change-email/change-email.routes";
 import {ChangeMobileRoutes} from "./settings/change-mobile/change-mobile.routes";
-import {UserProfileRoutes} from "./user-profile/user-profile.routes";
-import {SettingsRoutes} from "./settings/settings.routes";
 
 @NgModule({
   imports: [
@@ -21,7 +18,7 @@ import {SettingsRoutes} from "./settings/settings.routes";
       ...LoginRoutes,
       ...CandidateSignUpRoutes,
       ...CandidateSignUpVerificationRoutes,
-      ...ChangePasswordRoutes,
+      //...ChangePasswordRoutes,
       ...CompanyDetailsRoutes,
       ...ForgotPasswordRoutes,
       ...ResetPasswordRoutes,
@@ -30,8 +27,8 @@ import {SettingsRoutes} from "./settings/settings.routes";
       ...ActivateEmailRoutes,
       ...ChangeEmailRoutes,
       ...ChangeMobileRoutes,
-      ...UserProfileRoutes,
-      ...SettingsRoutes
+      //...UserProfileRoutes,
+      //...SettingsRoutes
     ])
   ],
   exports: [

@@ -7,13 +7,21 @@
       "password": "",
       "mongoExport": "/usr/bin/mongoexport"
     },
-    "adminExportFilePath": {
-      "candidatesCSV": "/home/kapil/JavaProject/ng4-cnext/c-next/dist/server/dev/public/candidates.csv",
-      "candidateOtherDetailsCSV": "/home/kapil/JavaProject/ng4-cnext/c-next/dist/server/dev/public/candidates-other-details.csv",
-      "recruitersCSV": "/home/kapil/JavaProject/ng4-cnext/c-next/dist/server/dev/public/recruiters.csv",
-      "usersCSV": "/home/kapil/JavaProject/ng4-cnext/c-next/dist/server/dev/public/users.csv",
-      "usageDetailsCSV": "/home/kapil/JavaProject/ng4-cnext/c-next/dist/server/dev/public/usagedetail.csv",
-      "keySkillsCSV": "/home/kapil/JavaProject/ng4-cnext/c-next/dist/server/dev/public/key-skills.csv"
+    "adminExportFilePathForServer": {
+      "candidatesCSV": "/src/server/public/candidates.csv",
+      "candidateOtherDetailsCSV": "/src/server/public/candidates-other-details.csv",
+      "recruitersCSV": "/src/server/public/recruiters.csv",
+      "usersCSV": "/src/server/public/users.csv",
+      "usageDetailsCSV": "/src/server/public/usagedetail.csv",
+      "keySkillsCSV": "/src/server/public/key-skills.csv"
+    },
+    "adminExportFilePathForClient": {
+      "candidatesCSV": "public/candidates.csv",
+      "candidateOtherDetailsCSV": "public/candidates-other-details.csv",
+      "recruitersCSV": "public/recruiters.csv",
+      "usersCSV": "public/users.csv",
+      "usageDetailsCSV": "public/usagedetail.csv",
+      "keySkillsCSV": "public/key-skills.csv"
     },
     "publicPath":"./src/server/app/framework/public/",
     "limitForQuery" : 10,
@@ -47,8 +55,9 @@
       "senderId": "JOBMOS",
       "routerNumber": "4"
     },
-    "filePathForMasterDataExcel" : "./src/server/app/framework/public/config/NewIndustryDataExcel.xlsx",
-    "folderPath":"./dist/dev/server/public"
+    "filePathForMasterDataExcel" : "/src/server/app/framework/public/config/NewIndustryDataExcel.xlsx",
+    "filePathForProfileImage" : "/src/server/app/framework/public/profileimage"
+
   },
   "logger" : {
     "levels": {

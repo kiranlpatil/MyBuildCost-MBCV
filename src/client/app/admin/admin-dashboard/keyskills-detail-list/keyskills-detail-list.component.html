@@ -4,6 +4,6 @@
   <div class="list-view">
     <h5>Download Details by clicking on export Detail  </h5>
     <button class="btn btn-primary" (click)="getKeySkillsData()">Export Key Skills</button>
-    <a id="link-keySkills" href="./public/key-skills.csv" download hidden></a>
+    <a id="link-keySkills" href={{keySkillCSV}} download="key-skills.csv" hidden></a>
   </div>
 </div>

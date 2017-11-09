@@ -1,14 +1,5 @@
 <cn-recruiter-header [headerInfo]="headerInfo" [jobCount]="jobCount"></cn-recruiter-header>
 <div class="container-fluid profile-wrapper">
-  <ul id="recruiter-job-dashboard-tabs" class="nav nav-tabs dashboard-tabs">
-    <li class="active"><a data-toggle="tab" title="My Job Posts" href="#">
-      <span class="icon-dashboard"></span>My Job Posts</a></li>
-    <li><a data-toggle="tab" title="My Job Posts" (click)="navigateTo('recruiterdashboard','applicant_search')">
-      <span class="icon-candidate-search"></span>Applicant Search</a></li>
-    <li><a class="btn-new-job" data-toggle="tab" title="Post New Job"
-           (click)="navigateTo('recruiterdashboard','post_new_job')">Post New Job</a>
-    </li>
-  </ul>
   <div class="candidate-listing">
     <cn-filter [hidden]="whichListVisible[4]" [selectedJob]="selectedJobProfile" [role]=true></cn-filter>
     <div class="col-sm-12 no-padding">
@@ -59,10 +50,10 @@
                 <label>Expiry Date</label>
                 <p>{{selectedJobProfile.expiringDate | date :'dd MMM yyyy'}}</p>
               </li>
-              <li>
+             <!-- <li>
                 <button class="btn-back" title="All Jobs" (click)="navigateTo('recruiterdashboard',undefined)">All Jobs
                 </button>
-              </li>
+              </li>-->
             </ul>
           </div>
         </div>
@@ -139,11 +130,6 @@
       <cn-profile-comparison  [profileComparison]="profileComparison"
                              (performActionOnComparisonList)="performActionOnComparisonList($event)"
                              *ngIf="whichListVisible[4]"></cn-profile-comparison>
-      <!--add below to cn-profile-comparison tag
-      (performActionOnComparisonList)="performActionOnComparisonList($event)"
-      *ngIf="whichListVisible[4]"
-
-       uncomment below code -->
       <p class="empty-list-message" *ngIf="recruiterJobView.numberOfCandidatesInCompare==0 && whichListVisible[4]">There
         are no candidates to
         compare.</p>

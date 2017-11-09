@@ -6,34 +6,15 @@
   <cn-recruiter-header [headerInfo]="recruiterHeaderDetails" [jobCount]=0 [companyName]="please"></cn-recruiter-header>
 </div>
 <div class="container-fluid profile-wrapper">
-  <!--<ul class="nav nav-tabs dashboard-tabs" [class.move-left]="setValue">-->
   <ul id="recruiter-dashboard-tabs" class="nav nav-tabs dashboard-tabs">
-    <li class="active"><a data-toggle="tab" title="My Job Posts" id="recr_job_dashboard" href="#posted-job">
+    <li><a data-toggle="tab" title="My Job Posts" id="recr_job_dashboard" (click)="navigateTo('recruiter')">
       <span class="icon-dashboard"></span>My Job Posts</a></li>
-    <li><a data-toggle="tab" title="Candidate Search" id="applicant_search" href="#search-candidate">
+    <li><a data-toggle="tab" title="Candidate Search" id="applicant_search" (click)="navigateTo('recruiter/search')">
       <span class="icon-candidate-search"></span>Applicant Search</a></li>
-    <li><a class="btn-new-job" data-toggle="tab" id="post_job" title="Post New Job" href="#post_new_job">Post New Job</a></li>
+    <li><a class="btn-new-job" data-toggle="tab" id="post_job" title="Post New Job" (click)="navigateTo('recruiter/jobpost')">Post New Job</a></li>
   </ul>
   <div class="tab-content">
-
-    <div id="posted-job" class="tab-pane fade active in clearfix">
-      <div *ngIf="recruiterDashboard && screenType != ''">
-        <cn-job-lister [headerInfoForJob]="recruiterHeaderDetails" [jobListInput]="recruiterDashboard.postedJobs"
-                       (jobPostEventEmitter)="jobSelected($event)" [screenType]="screenType"
-                       [recruiter]="recruiterDashboard" (jobListCloneSuccessEmitter)="OnCloneSuccessMessage()"
-        (selectedJobProfileEmitter)="checkJobPostExpiryDate($event)"></cn-job-lister>
-      </div>
-    </div>
-    <!--<cn-tool-tip [message]="test"></cn-tool-tip>-->
-    <div id="post_new_job" class="tab-pane fade clearfix" *ngIf="recruiterDashboard">
-      <cn-job-poster [noOfJobPosted]="recruiterDashboard.postedJobs.length" [currentjobId]="jobId" [role]="'recruiter'"
-                     (jobPostEventEmitter)="jobSelected($event)" (jobPostCloneSuccessEmitter)="OnCloneSuccessMessage()"></cn-job-poster>
-    </div>
-
-    <div id="search-candidate" class="tab-pane fade clearfix" *ngIf="recruiterDashboard">
-      <cn-candidate-search></cn-candidate-search>
-    </div>
-
+    <router-outlet></router-outlet>
   </div>
 </div>
 <tpl-footer></tpl-footer>

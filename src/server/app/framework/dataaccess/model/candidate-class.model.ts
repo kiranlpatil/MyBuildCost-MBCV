@@ -43,5 +43,6 @@ class CandidateClassModel {
   personalDetails: User;
   isCompleted: boolean;
   keySkills: string;
+  candidateId:string;
 }
 export = CandidateClassModel;

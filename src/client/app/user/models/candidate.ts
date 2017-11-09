@@ -34,6 +34,7 @@ export class Candidate {
   basicInformation: CandidateDetail = new CandidateDetail();
   profile_update_tracking:number;
   _id: string;
+  candidateId:string;
   userFeedBack: number[] = new Array(3);
 }
 

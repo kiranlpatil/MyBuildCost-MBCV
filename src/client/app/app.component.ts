@@ -36,7 +36,7 @@ export class AppComponent implements OnInit {
               protected loaderService: LoaderService) {
     this.appTheme = AppSettings.INITIAL_THEM;
     if (window.location.href.indexOf('/share/') === -1) {
-    if (window.location.href.indexOf('/editJob/') === -1) {
+    if (window.location.href.indexOf('/jobposting/') === -1) {
       if (parseInt(LocalStorageService.getLocalValue(LocalStorage.IS_LOGGED_IN)) === 1) {
         if (LocalStorageService.getLocalValue(LocalStorage.ISADMIN) === 'true') {
           this._router.navigate([NavigationRoutes.APP_ADMIN_DASHBOARD]);

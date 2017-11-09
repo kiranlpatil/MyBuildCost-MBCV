@@ -44,10 +44,16 @@
 
 .about-myself-help-section {
   background: $theme-color;
+  border-radius: 0 9px 9px 0;
 }
 
 @media only screen and (max-width: 767px) {
   .more-about-myself {
     padding: 0 0 20px;
+  }
+  .about-myself-section {
+    height: 100vh;
+    padding: 0 0 75px 30px;
+    width: 98%;
   }
 }

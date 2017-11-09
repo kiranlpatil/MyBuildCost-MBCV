@@ -71,15 +71,17 @@
 
 .capabilities-help-section {
   background: $theme-color;
+  border-radius: 0 9px 9px 0;
 }
-
 
 @media only screen and (max-width: 767px) {
   .capabilities {
+    height: 100vh;
     padding: 0 0 75px 30px;
     width: 98%;
   }
   .button-group  {
     width: 100% !important;
+    z-index: 9;
   }
 }

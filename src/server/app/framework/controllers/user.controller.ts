@@ -1546,7 +1546,7 @@ export function googlelogin(req: express.Request, res: express.Response, next: a
  }*/
 
 export function updatePicture(req: express.Request, res: express.Response, next: any): void {
-  __dirname = 'src/server/app/framework/public/profileimage';
+  __dirname = 'server/prod/app/framework/public/profileimage';
   var form = new multiparty.Form({uploadDir: __dirname});
   form.parse(req, (err: Error, fields: any, files: any) => {
     if (err) {

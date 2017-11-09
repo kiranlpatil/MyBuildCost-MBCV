@@ -184,6 +184,7 @@ class CandidateService {
     customCandidate.isSubmitted = candidate.isSubmitted;
     customCandidate.isVisible = candidate.isVisible;
     customCandidate.isCompleted = candidate.isCompleted;
+    customCandidate.candidateId = candidate._id;
     customCandidate.capabilities = this.getCapabilitiesBuild(candidate.capability_matrix,candidate.complexity_note_matrix, candidate.industry.roles, industries);
 
     return customCandidate;

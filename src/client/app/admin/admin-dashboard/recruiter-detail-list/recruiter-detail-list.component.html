@@ -3,8 +3,8 @@
     <!--<a href="./public/recruiter.csv" download="Recruiter.csv" title="Export recruiter to CSV File"><i class="glyphicon glyphicon-export"></i>Export</a>-->
   </div>
   <div title="Export recruiters list to CSV file" class="export-data-link" (click)="generateRecruiterDetailFile()"><span class="glyphicon glyphicon-export" ></span>Export</div>
-  <a href="./public/recruiters.csv" download="recruiters.csv"  id="link_recruiter" hidden></a>
-  <a href="./public/users.csv" download="users.csv"  id="link_recruiter1" hidden></a>
+  <a href={{recruitersCSV}} download="recruiters.csv"  id="link_recruiter" hidden></a>
+  <a href={{recruitersUsersCSV}} download="users.csv"  id="link_recruiter1" hidden></a>
   <div *ngIf="recruiters && recruiters.length > 0" class="list-view">
     <ul class="list-header">
       <li>
