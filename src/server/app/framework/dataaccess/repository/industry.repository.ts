@@ -60,7 +60,7 @@ class IndustryRepository extends RepositoryBase<IIndustry> {
     this.items = new Array(0);
     console.time('findCapability');
 
-    IndustrySchema.find({'code': item.code},{'roles.capabilities.complexities.scenarios':0}).lean().exec((err: any, industry: any)=> {
+    IndustrySchema.find({'code': item.code},{'roles.default_complexities.complexities':0,'roles.capabilities.complexities.scenarios':0}).lean().exec((err: any, industry: any)=> {
       if (err) {
         callback(err, null);
       } else {
