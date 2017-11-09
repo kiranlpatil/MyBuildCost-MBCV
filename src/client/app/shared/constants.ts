@@ -339,7 +339,7 @@ export class NavigationRoutes {
   public static APP_FORGOTPASSWORD: string = '/forgotpassword';
   public static APP_DASHBOARD: string = '/dashboard';
   public static APP_CANDIDATE_DASHBOARD: string = '/candidate';
-  public static APP_ADMIN_DASHBOARD: string = '/admin_dashboard';
+  public static APP_ADMIN_DASHBOARD: string = '/admin';
   public static APP_RECRUITER_DASHBOARD: string = '/recruiter';
   public static APP_LOGIN: string = '/signin';
   public static APP_START: string = '/';

@@ -1,4 +1,4 @@
-import {Component, Input} from "@angular/core";
+import {Component} from "@angular/core";
 import { ErrorService } from '../../../shared/services/error.service';
 import {AdminDashboardService} from "../admin-dashboard.service";
 import {Router} from "@angular/router";
@@ -15,7 +15,7 @@ import {Label, Messages} from "../../../shared/constants";
 })
 
 export class RecruiterDetailListComponent {
-  @Input() recruiters:any[]=new Array(0);
+  recruiters:any[]=new Array(0);
   private successMessage:string;
   constructor(private adminDashboardService:AdminDashboardService,
               private loaderService: LoaderService,
@@ -23,6 +23,11 @@ export class RecruiterDetailListComponent {
               private messageService: MessageService,
               private _router:Router) {
 
+  }
+
+  ngOnInit() {
+    this.loaderService.start();
+    this.getAllRecruiters();
   }
   updateDetail(index:number,recruiter:any,activated:boolean) {
     this.loaderService.start();
@@ -64,6 +69,25 @@ export class RecruiterDetailListComponent {
       this._router.navigate([nav, recruiter._id]);
     }
   }
+
+  getAllRecruiters() {
+    this.adminDashboardService.getAllRecruiters("a")
+      .subscribe(
+        recruiterProfile => this.onGetAllRecruiterSuccess(recruiterProfile),
+        error => this.errorService.onError(error));
+  }
+  onGetAllRecruiterSuccess(recruiterProfile: any) {
+    this.recruiters = recruiterProfile.data.recruiter;
+    this.loaderService.stop();
+  }
+
+  loadUser(letter: string) {
+   this.loaderService.start();
+   this.adminDashboardService.getAllRecruiters(letter)
+   .subscribe(
+   recruiterProfile => this.onGetAllRecruiterSuccess(recruiterProfile),
+   error => this.errorService.onError(error));
+   }
 
   getLabel() {
     return Label;

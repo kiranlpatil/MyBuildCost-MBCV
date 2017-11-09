@@ -8,9 +8,9 @@ import {Component, Input, Output, EventEmitter} from "@angular/core";
 })
 
 export class FilterBarComponent {
-  @Input() filterData: string[];
   @Output() onItemSelect = new EventEmitter();
-
+  public filterData: string[] = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q",
+    "r", "s", "t", "u", "v", "w", "x", "y", "z"]
 
   onFilterSelect(item: any,event:any) {
     if(document.getElementsByClassName('select-filter-bar-item').length){

@@ -17,7 +17,7 @@ export class KeySkillsDetailListComponent {
   constructor(private adminDashboardService: AdminDashboardService,
               private loaderService: LoaderService,
               private errorService: ErrorService,
-              private messageService: MessageService,) {
+              private messageService: MessageService) {
   }
 
   getKeySkillsData() {

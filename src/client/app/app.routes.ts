@@ -21,13 +21,13 @@ export const routes: Routes = [
     loadChildren: '/app/user/user.module#UserModule'
   },
   ...LandingPageRoutes,
-  ...ActivateUserRoutes,
+  ...ActivateUserRoutes,  //Check usage
   ...DashboardRoutes,
   ...CandidateRouteSwitch,
   ...RecruiterDashboard,
   ...RecruiterSummary,
-  ...CandidateCompare,
-  ...JobCompare,
+  ...CandidateCompare, //Check is require in app.route.ts or its usage in app
+  ...JobCompare,  //Check is require in app.route.ts or its usage in app
   ...AboutRoutes,
 //  ...ProfileCreator,
   ...CandidateSummary,

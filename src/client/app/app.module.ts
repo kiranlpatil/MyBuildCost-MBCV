@@ -43,7 +43,6 @@ import {AboutCandidateService} from "./cnext/framework/more-about-myself/more-ab
 import {CandidateAcademyDetailService} from "./cnext/framework/academic-details/academic-details.service";
 import {JobPosterService} from "./cnext/framework/job-poster/job-poster.service";
 import {CandidateSummaryComponent} from "./cnext/framework/one-page-summary/candidate-summary/candidate-summary.component";
-import {CandidateBasicInformationComponent} from "./cnext/framework/one-page-summary/candidate-summary/candidate-basic-information/candidate-basic-information.component";
 import {VericalListViewComponent} from "./cnext/framework/one-page-summary/shared/vertical-list-view/vertical-list-view.component";
 import {TabularListViewComponent} from "./cnext/framework/one-page-summary/shared/tabular-list-view/tabular-list-view.component";
 import {HorizontalListViewComponent} from "./cnext/framework/one-page-summary/shared/horizontal-list-view/horizontal-list-view.component";
@@ -166,6 +165,7 @@ import {ComplexityAnsweredService} from "./cnext/framework/complexity-answered.s
 import {UserFeedbackComponent} from "./cnext/framework/user-feedback/user-feedback.component";
 import {UserFeedbackComponentService} from "./cnext/framework/user-feedback/user-feedback.component.service";
 import {CandidateRouteSwitchComponent} from "./cnext/framework/candidate-dashboard/candidate-route-switch.component";
+import {CandidateBasicInformationComponent} from "./cnext/framework/one-page-summary/candidate-summary/candidate-basic-information/candidate-basic-information.component";
 //C-NEXT IMPORTS
 
 
