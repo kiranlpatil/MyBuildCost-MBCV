@@ -1984,4 +1984,25 @@ img[alt] {
       max-width: 100%;
     }
   }
+  .bg-empty-class {
+    display: none;
+  }
+}
+
+
+@media only screen and (device-width: 768px) {
+  .section-container {
+    .col-xs-7 {
+      height: auto !important;
+      width: 100% !important;
+    }
+    .col-xs-5 {
+      display: none;
+    }
+    .main-content {
+      .button-group {
+        width: 100% !important;
+      }
+    }
+  }
 }

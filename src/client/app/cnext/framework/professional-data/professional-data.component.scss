@@ -44,6 +44,7 @@
 
 .professional-preferences-help-section {
   background: $theme-color;
+  border-radius: 0 9px 9px 0;
 }
 
 @media only screen and (max-width: 980px) {
@@ -70,6 +71,14 @@
   label {
     padding-right: 5px !important;
     width: 100%;
+  }
+  .professional-preferences-section {
+    height: 100vh;
+    padding: 0 0 75px 30px;
+    width: 94%;
+    .button-group {
+      width: 100% !important;
+    }
   }
 }
 

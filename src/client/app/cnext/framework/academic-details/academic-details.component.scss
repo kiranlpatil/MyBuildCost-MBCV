@@ -46,5 +46,13 @@
 
 .academic-help-section {
   background: $theme-color;
+  border-radius: 0 9px 9px 0;
 }
 
+@media only screen and (max-width: 767px) {
+  .academic-section {
+    height: calc(100vh - 72px);
+    padding: 0 0 75px 30px;
+    width: 98%;
+  }
+}

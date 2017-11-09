@@ -35,6 +35,14 @@
   .recaptcha {
     margin-bottom: 10px;
   }
+  .select-option {
+    &:hover {
+      span {
+        background: transparent;
+        color: $text-color;
+      }
+    }
+  }
 }
 
 @media only screen and (max-width: 767px) {
