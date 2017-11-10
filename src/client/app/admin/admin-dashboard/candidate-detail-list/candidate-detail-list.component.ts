@@ -1,7 +1,7 @@
 import {Component, OnInit} from "@angular/core";
 import {AdminDashboardService} from "../admin-dashboard.service";
 import {Router} from "@angular/router";
-import {Messages, Label} from "../../../shared/constants";
+import {Messages, Label, AppSettings} from "../../../shared/constants";
 import {Message} from "../../../shared/models/message";
 import {MessageService} from "../../../shared/services/message.service";
 import {LoaderService} from "../../../shared/loader/loaders.service";
@@ -67,9 +67,9 @@ export class CandidateDetailListComponent implements OnInit {
           this.candidateCSV = CandidateDetails.candidatesFilePath;
           this.candidateOtherDetailsCSV = CandidateDetails.candidatesOtherDetailsFilePath;
           this.usersCSV = CandidateDetails.usersFilePath;
-          window.open('http://localhost:8080/'+this.candidateCSV,'_self');
-          window.open('http://localhost:8080/'+this.candidateOtherDetailsCSV,'_self');
-          window.open('http://localhost:8080/'+this.usersCSV,'_self');
+          window.open( AppSettings.IP + this.candidateCSV,'_self');
+          window.open(AppSettings.IP + this.candidateOtherDetailsCSV,'_self');
+          window.open(AppSettings.IP + this.usersCSV,'_self');
           this.messageService.message(new Message(Messages.MSG_SUCCESS_FOR_FILE_DOWNLOAD));
         },
         error => {

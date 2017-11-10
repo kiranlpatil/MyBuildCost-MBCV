@@ -5,7 +5,7 @@ import {Router} from "@angular/router";
 import {LoaderService} from "../../../shared/loader/loaders.service";
 import {MessageService} from "../../../shared/services/message.service";
 import {Message} from "../../../shared/models/message";
-import {Label, Messages} from "../../../shared/constants";
+import {Label, Messages, AppSettings} from "../../../shared/constants";
 
 @Component({
   moduleId: module.id,
@@ -62,8 +62,8 @@ export class RecruiterDetailListComponent {
           this.loaderService.stop();
           this.recruitersCSV = recruiterDetails.candidatesOtherDetailsFilePath;
           this.recruitersUsersCSV = recruiterDetails.usersFilePath;
-          window.open('http://localhost:8080/'+this.recruitersCSV,'_self');
-          window.open('http://localhost:8080/'+this.recruitersUsersCSV,'_self');
+          window.open(AppSettings.IP + this.recruitersCSV,'_self');
+          window.open(AppSettings.IP + this.recruitersUsersCSV,'_self');
           this.messageService.message(new Message(Messages.MSG_SUCCESS_FOR_FILE_DOWNLOAD));
         },
         error => this.errorService.onError(error));
