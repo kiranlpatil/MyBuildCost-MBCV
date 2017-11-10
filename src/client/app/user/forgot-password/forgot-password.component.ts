@@ -19,7 +19,6 @@ export class ForgotPasswordComponent {
   model = new ForgotPassword();
   userForm: FormGroup;
   error_msg: string;
-  isShowErrorMessage: boolean = true;
   MY_LOGO_PATH: string;
   MY_TAG_LINE: string;
   UNDER_LICENCE: string;
@@ -48,6 +47,7 @@ export class ForgotPasswordComponent {
 
   onSubmit() {
     this.model = this.userForm.value;
+    this.error_msg='';
     if (this.model.email == '') {
       this.submitStatus = true;
       return;
@@ -85,7 +85,6 @@ export class ForgotPasswordComponent {
       message.isError = true;
       this.messageService.message(message);
     } else {
-      this.isShowErrorMessage = false;
       this.error_msg = error.err_msg;
     }
   }
