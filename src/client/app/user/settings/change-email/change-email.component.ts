@@ -101,7 +101,7 @@ export class ChangeEmailComponent implements OnInit {
   logOut() {
     window.localStorage.clear();
     LocalStorageService.setLocalValue(LocalStorage.CHANGE_MAIL_VALUE, 'from_settings');
-    let host = AppSettings.HTTP_CLIENT + window.location.hostname;
+    let host = AppSettings.HTTP_CLIENT + AppSettings.HOST_NAME;
     window.location.href = host;
   }
 }

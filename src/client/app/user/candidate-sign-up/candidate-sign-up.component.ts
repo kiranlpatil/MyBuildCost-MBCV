@@ -174,7 +174,7 @@ export class CandidateSignUpComponent implements OnInit, AfterViewInit {
   }
 
   goToAcceptTerms() {
-    let host = AppSettings.HTTP_CLIENT + window.location.hostname + API.ACCEPT_TERMS;
+    let host = AppSettings.HTTP_CLIENT + AppSettings.HOST_NAME + API.ACCEPT_TERMS;
     window.open(host, '_blank');
   }
   gtag_report_conversion(sendTo:any) {

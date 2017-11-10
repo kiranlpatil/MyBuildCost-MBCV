@@ -32,7 +32,7 @@ export class UserHeaderComponent {
 
     onHomePage() {
       window.localStorage.clear();
-      let host = AppSettings.HTTP_CLIENT + window.location.hostname;
+      let host = AppSettings.HTTP_CLIENT + AppSettings.HOST_NAME;
       window.location.href = host;
     }
 
