@@ -5,6 +5,7 @@ import UserService = require('../services/user.service');
 import CandidateService = require('../services/candidate.service');
 import AdminService = require('../services/admin.service');
 import UserModel = require('../dataaccess/model/user.model');
+let config = require('config');
 var request = require('request');
 
 export function create(req: express.Request, res: express.Response, next: any) {
@@ -221,7 +222,7 @@ export function exportCandidateDetails(req: express.Request, res: express.Respon
                     code: 500
                   });
                 } else {
-                  files['usersFilePath'] = respo;
+                  files['usersFilePath'] = config.get('TplSeed.adminExportFilePathForClient.candidateAccountDetailsCSV');
                   res.status(200).send({
                     'path': files,
                     'status': 'success'
@@ -277,7 +278,7 @@ export function exportRecruiterDetails(req: express.Request, res: express.Respon
                 code: 500
               });
             } else {
-              files['usersFilePath'] = respo;
+              files['usersFilePath'] = config.get('TplSeed.adminExportFilePathForClient.recruiterAccountDetailsCSV');
               res.status(200).send({
                 'path': files,
                 'status': 'success'

@@ -310,13 +310,15 @@ class AdminService {
   exportUserCollection(userType: string, callback: (err: any, res: any) => void) {
     let fields: string;
     let query: string;
-    let downloadLocation = path.resolve() + config.get('TplSeed.adminExportFilePathForServer.usersCSV');
+    let downloadLocation: string;
 
     if (userType == 'candidate') {
+      downloadLocation = path.resolve() + config.get('TplSeed.adminExportFilePathForServer.candidateAccountDetailsCSV');
       fields = '_id,first_name,last_name,mobile_number,email,current_theme,isCandidate,guide_tour,notifications,' +
         'isAdmin,otp,isActivated,temp_mobile'
       query = '{"isCandidate":true}';
     } else {
+      downloadLocation = path.resolve() + config.get('TplSeed.adminExportFilePathForServer.recruiterAccountDetailsCSV');
       fields = '_id,mobile_number,email,current_theme,isCandidate,guide_tour,notifications,isAdmin,otp,isActivated,' +
         'temp_mobile,location,picture',
         query = '{"isCandidate":false}';
@@ -326,7 +328,7 @@ class AdminService {
       if (error) {
         callback(error, null);
       } else {
-        callback(null, config.get('TplSeed.adminExportFilePathForClient.usersCSV'));
+        callback(null, 'success');
       }
     });
 

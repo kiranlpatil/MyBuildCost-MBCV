@@ -60,10 +60,10 @@ export class RecruiterDetailListComponent {
       .subscribe(
         recruiterDetails => {
           this.loaderService.stop();
-          this.recruitersCSV = recruiterDetails.candidatesOtherDetailsFilePath;
-          this.recruitersUsersCSV = recruiterDetails.usersFilePath;
-          window.open(AppSettings.IP + this.recruitersCSV,'_self');
-          window.open(AppSettings.IP + this.recruitersUsersCSV,'_self');
+          this.recruitersCSV = recruiterDetails.path.recruitersFilePath;
+          this.recruitersUsersCSV = recruiterDetails.path.usersFilePath;
+          window.open(AppSettings.IP + this.recruitersCSV,'_blank');
+          window.open(AppSettings.IP + this.recruitersUsersCSV,'_blank');
           this.messageService.message(new Message(Messages.MSG_SUCCESS_FOR_FILE_DOWNLOAD));
         },
         error => this.errorService.onError(error));
