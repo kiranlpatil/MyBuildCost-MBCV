@@ -72,6 +72,7 @@ export class SearchController {
           if (error) {
             next(error);
           } else {
+            console.log('search controller matching profile response = ', result);
             candidateSearchService.getCandidateInfoById([candidateId], (error, candidateDetails) => {
               if (error) {
                 next(error);

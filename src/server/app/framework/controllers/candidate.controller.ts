@@ -9,6 +9,9 @@ import RecruiterService = require('../services/recruiter.service');
 import SearchService = require('../search/services/search.service');
 import CandidateInfoSearch = require('../dataaccess/model/candidate-info-search');
 import { MailChimpMailerService } from '../services/mailchimp-mailer.service';
+import CandidateSearchService = require("../services/candidate-search.service");
+import {CandidateDetailsWithJobMatching} from "../dataaccess/model/candidatedetailswithjobmatching";
+import CandidateClassModel = require("../dataaccess/model/candidate-class.model");
 
 
 export function create(req: express.Request, res: express.Response, next: any) {
@@ -255,9 +258,15 @@ export function retrieve(req: express.Request, res: express.Response, next: any)
 
 export function get(req: express.Request, res: express.Response, next: any) { //todo authentication is remaining
   try {
+    let candidateSearchService = new CandidateSearchService();
+    let recruiterService = new RecruiterService();
     let candidateService = new CandidateService();
     let candidateId = req.params.id;
+    let searchService = new SearchService();
+    let recruiterUserId = req.user._id;
     /* if (String(req.user._id) === String(candidateId)) {*/
+    if (req.user.isCandidate || req.user.isAdmin) {
+      console.log("isCandidate or isAdmin");
       candidateService.get(candidateId, (error, result) => {
         if (error) {
           next(error);
@@ -265,10 +274,43 @@ export function get(req: express.Request, res: express.Response, next: any) { //
         else {
           res.send({
             'status': 'success',
-            'data': result,
+            'data': result
           });
+          console.log('Candidate login data=', result);
         }
       });
+    } else {
+      candidateService.get(candidateId, (error, candidateDetails) => {
+        if (error) {
+          next(error);
+        }
+        else {
+          let _candidateId = candidateDetails._id;
+          recruiterService.retrieve({'userId':recruiterUserId}, (error, recruiterDetails)=> {
+            if(error) {
+              next(error);
+            } else {
+              let _recruiterId = recruiterDetails[0]._id;
+              console.log('recruiterId = ', _recruiterId);
+              console.log('recruiterDetails = ',recruiterDetails);
+              let _candidateDetails:CandidateClassModel = candidateService.isCandidateInCart(candidateDetails, recruiterDetails[0].postedJobs);
+              console.log('Masked candidate detail=',_candidateDetails);
+              res.send({
+                'status': 'success',
+                'data': _candidateDetails
+              });
+              candidateDetails = _candidateDetails;
+              console.log('candidate details from value portrait =', candidateDetails);
+            }
+          });
+          /*res.send({
+            'status': 'success',
+            'data': candidateDetails,
+          });*/
+        }
+      });
+    }
+
     /* } else {
       next({
         reason: Messages.MSG_ERROR_IF_USER_ID_INVALID_FROM_URL_PARAMETER,

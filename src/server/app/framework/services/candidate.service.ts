@@ -15,6 +15,10 @@ import CapabilitiesClassModel = require('../dataaccess/model/capabilities-class.
 import ComplexitiesClassModel = require('../dataaccess/model/complexities-class.model');
 import RoleModel = require('../dataaccess/model/role.model');
 import {underline} from "chalk";
+
+import CandidateModel = require("../dataaccess/model/candidate.model");
+import JobProfileModel = require("../dataaccess/model/jobprofile.model");
+import {UtilityFunction} from "../uitility/utility-function";
 let bcrypt = require('bcrypt');
 class CandidateService {
   private candidateRepository: CandidateRepository;
@@ -813,6 +817,30 @@ class CandidateService {
 
   updateField(_id:string, item:any, callback:(error:any, result:any) => void) {
     this.candidateRepository.updateByUserId( new mongoose.Types.ObjectId(_id), item, callback);
+  }
+
+  isCandidateInCart(candidateDetails:CandidateClassModel, jobProfiles:JobProfileModel[] ) {
+    let isGotIt = true;
+    for (let job of jobProfiles) {
+      for (let item of job.candidate_list) {
+        if (item.name === 'cartListed') {
+          if (item.ids.indexOf(new mongoose.Types.ObjectId(candidateDetails.candidateId).toString()) !== -1) {
+            console.log('isGot it');
+            isGotIt = false;
+            break;
+          }
+        }
+      }
+      if (!isGotIt) {
+        break;
+      }
+    }
+    if (isGotIt) {
+      console.log('isNotGotIt');
+      candidateDetails.personalDetails.last_name = UtilityFunction.valueHide(candidateDetails.personalDetails.last_name);
+    }
+    console.log('candidate service details = ',candidateDetails);
+    return candidateDetails;
   }
 
 }
