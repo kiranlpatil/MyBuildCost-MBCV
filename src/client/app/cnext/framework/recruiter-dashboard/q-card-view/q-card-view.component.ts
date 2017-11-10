@@ -16,6 +16,7 @@ import {MessageService} from "../../../../shared/services/message.service";
 import {ErrorService} from "../../../../shared/services/error.service";
 import {UsageTrackingService} from "../../usage-tracking.service";
 import {LocalStorageService} from "../../../../shared/services/localstorage.service";
+import {Router, ActivatedRoute} from '@angular/router';
 /*import underline = Chalk.underline;*/
 
 
@@ -61,7 +62,8 @@ export class QCardviewComponent implements OnChanges {
               private errorService:ErrorService,
               private profileCreatorService: CandidateProfileService,
               private qCardViewService: QCardViewService,
-              private messageService: MessageService) {
+              private messageService: MessageService,
+              private _router:Router) {
 
     this.qCardFilterService.aboveMatch$.subscribe(
       () => {
@@ -344,6 +346,7 @@ export class QCardviewComponent implements OnChanges {
   }
 
   OnCandidateDataSuccess(candidate: any) {
+    console.log('onCandidateSuccess = ',candidate);
     this.selectedCandidate = candidate.data;
     this.candidateDetails = candidate.metadata;
     this.showModalStyle = !this.showModalStyle;
@@ -378,6 +381,13 @@ export class QCardviewComponent implements OnChanges {
     message.isError = false;
     message.custom_message = 'Candidate' + ' ' + value.first_name + ' ' + value.last_name + ' added to compare view.';
     this.messageService.message(message);
+  }
+
+  navigateWithId(nav: string, candidate: CandidateQCard) {
+    this.profileCreatorService.getCandidateDetailsOfParticularId(candidate._id).subscribe(
+      candidateData => {
+        this._router.navigate([nav, candidateData.data.userId]);
+      });
   }
 
 }

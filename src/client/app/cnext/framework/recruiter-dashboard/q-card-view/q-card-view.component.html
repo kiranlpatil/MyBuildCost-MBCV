@@ -127,6 +127,9 @@
           <button *ngIf="!candidates.isVisible" class="btn btn-cart" type="button" [class.hidden]="(isJobPostExpired || isJobPostClosed) || (isJobPostExpired && isJobPostClosed)"
                   (click)="addForCompareView(item,type)">Compare
           </button>
+            <button *ngIf="!candidates.isVisible" class="btn btn-cart" type="button" [class.hidden]="(isJobPostExpired || isJobPostClosed) || (isJobPostExpired && isJobPostClosed)"
+                    (click)="navigateWithId('/value-portrait', item)">Show Value Portrait
+            </button>
         </div>
       </div>
       <div class="button-group" *ngIf="type=='cartListed'">
