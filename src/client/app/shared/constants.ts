@@ -9,7 +9,7 @@ export class AppSettings {
   //public static IP = 'http://52.43.220.29:3000';
   // public static IP = 'app.jobmosis.com';
   // public static IP = '';
-  public static HOST_NAME = 'localhost:8080';
+  public static HOST_NAME = '34.214.128.209';
 
   public static get API_ENDPOINT(): string {
     return this.IP + '/api/';
