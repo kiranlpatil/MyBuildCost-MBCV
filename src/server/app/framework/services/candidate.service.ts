@@ -838,6 +838,9 @@ class CandidateService {
     if (isGotIt) {
       console.log('isNotGotIt');
       candidateDetails.personalDetails.last_name = UtilityFunction.valueHide(candidateDetails.personalDetails.last_name);
+      candidateDetails.personalDetails.email = UtilityFunction.emailValueHider(candidateDetails.personalDetails.email);
+      candidateDetails.personalDetails.mobile_number = UtilityFunction.mobileNumberHider(candidateDetails.personalDetails.mobile_number);
+
     }
     console.log('candidate service details = ',candidateDetails);
     return candidateDetails;
