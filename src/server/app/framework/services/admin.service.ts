@@ -373,6 +373,9 @@ class AdminService {
       if (error) {
         callback(error, null);
       } else {
+        console.log("downloadLocation: " + downloadLocation);
+        console.log("PathResolve: " + path.resolve());
+        console.log("Path: " + config.get('TplSeed.adminExportFilePathForClient.keySkillsCSV'));
         callback(null, config.get('TplSeed.adminExportFilePathForClient.keySkillsCSV'));
       }
     });

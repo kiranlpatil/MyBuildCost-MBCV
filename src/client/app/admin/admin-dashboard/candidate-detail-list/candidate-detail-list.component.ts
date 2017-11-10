@@ -64,12 +64,18 @@ export class CandidateDetailListComponent implements OnInit {
       .subscribe(
         CandidateDetails => {
           this.loaderService.stop();
+          console.log(CandidateDetails.path.candidatesFilePath);
+          console.log(CandidateDetails.path.candidatesOtherDetailsFilePath);
+          console.log(CandidateDetails.path.candidatesOtherDetailsFilePath);
           this.candidateCSV = CandidateDetails.path.candidatesFilePath;
           this.candidateOtherDetailsCSV = CandidateDetails.path.candidatesOtherDetailsFilePath;
           this.usersCSV = CandidateDetails.path.usersFilePath;
+          console.log("1: " +CandidateDetails.path.candidatesFilePath);
+          console.log("2: " +CandidateDetails.path.candidatesOtherDetailsFilePath);
+          console.log("3: " +CandidateDetails.path.candidatesOtherDetailsFilePath);
           window.open( AppSettings.IP + this.candidateCSV,'_blank');
-          window.open(AppSettings.IP +  this.candidateOtherDetailsCSV,'_blank');
-          window.open(AppSettings.IP +  this.usersCSV,'_blank');
+          window.open(AppSettings.IP + this.candidateOtherDetailsCSV,'_blank');
+          window.open(AppSettings.IP + this.usersCSV,'_blank');
           this.messageService.message(new Message(Messages.MSG_SUCCESS_FOR_FILE_DOWNLOAD));
         },
         error => {
