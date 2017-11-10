@@ -7,7 +7,7 @@
       <h4 class="heading">Professional Preferences (Mandatory)</h4>
       <div class="col-md-8 col-sm-10 no-padding">
         <div class="form-group">
-          <label>Current Salary</label>
+          <label>{{getLabel().CURRENT_ANNUAL_SALARY}}</label>
           <!-- <cn-control-messages [control]="professionalDetailForm.controls.currentSalary"></cn-control-messages>-->
           <select [(ngModel)]="candidate.professionalDetails.currentSalary" (change)="saveProfessionalData()">
             <option *ngFor="let c of salaryList" [ngValue]="c">{{c}}</option>
@@ -20,7 +20,7 @@
         </div>
 
         <div class="form-group">
-          <label>Ready To Relocate?</label>
+          <label>{{getLabel().READY_TO_RELOCATE}}</label>
           <!--  <cn-control-messages [control]="professionalDetailForm.controls.relocate"></cn-control-messages>-->
           <select [(ngModel)]="candidate.professionalDetails.relocate" (change)="saveProfessionalData()">
             <option *ngFor="let c of realocationList" [ngValue]="c">{{c}}</option>
@@ -32,7 +32,7 @@
         </div>
 
         <div class="form-group">
-          <label>Company Culture</label>
+          <label>{{getLabel().COMPANY_CULTURE}}</label>
           <!-- <cn-control-messages [control]="professionalDetailForm.controls.noticePeriod"></cn-control-messages>-->
           <select [(ngModel)]="candidate.professionalDetails.industryExposure" (change)="saveProfessionalData()">
             <option *ngFor="let c of industryExposureList" [ngValue]="c">{{c}}</option>
@@ -44,7 +44,7 @@
         </div>
 
         <div class="form-group">
-          <label>Notice Period</label>
+          <label>{{getLabel().NOTICE_PERIOD}}</label>
           <!-- <cn-control-messages [control]="professionalDetailForm.controls.noticePeriod"></cn-control-messages>-->
           <select [(ngModel)]="candidate.professionalDetails.noticePeriod" (change)="saveProfessionalData()">
             <option *ngFor="let c of noticePeriodList" [ngValue]="c">{{c}}</option>
@@ -94,19 +94,19 @@
                 [hidden]="highlightedSection.isDisable" title="Edit Professional Preferences & Experience Summary"></button>
       </h4>
       <div class="col-sm-6 col-xs-12 no-padding">
-        <div class="col-xs-6 no-padding"><p><label>Current Salary</label></p></div>
+        <div class="col-xs-6 no-padding"><p><label>{{getLabel().CURRENT_ANNUAL_SALARY}}</label></p></div>
         <div class="col-xs-6 no-padding"><p> {{candidate.professionalDetails.currentSalary}}</p></div>
       </div>
       <div class="col-sm-6 col-xs-12 no-padding">
-        <div class="col-xs-6 no-padding"><p><label>Ready To Relocate?</label></p></div>
+        <div class="col-xs-6 no-padding"><p><label>{{getLabel().READY_TO_RELOCATE}}</label></p></div>
         <div class="col-xs-6 no-padding"><p> {{candidate.professionalDetails.relocate}}</p></div>
       </div>
       <div class="col-sm-6 col-xs-12 no-padding">
-        <div class="col-xs-6 no-padding"><p><label>Company Culture</label></p></div>
+        <div class="col-xs-6 no-padding"><p><label>{{getLabel().COMPANY_CULTURE}}</label></p></div>
         <div class="col-xs-6 no-padding"><p> {{candidate.professionalDetails.industryExposure}}</p></div>
       </div>
       <div class="col-sm-6 col-xs-12 no-padding">
-        <div class="col-xs-6 no-padding"><p><label>Notice Period</label></p></div>
+        <div class="col-xs-6 no-padding"><p><label>{{getLabel().NOTICE_PERIOD}}</label></p></div>
         <div class="col-xs-6 no-padding"><p> {{candidate.professionalDetails.noticePeriod}}</p></div>
       </div>
     </div>
