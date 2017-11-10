@@ -6,7 +6,7 @@ export class AppSettings {
  // public static IP = 'https://34.215.90.153:3000';
   // public static IP = 'app.jobmosis.com';
   // public static IP = '';
-
+  public static HOST_NAME = 'localhost:8080';
 
   public static get API_ENDPOINT(): string {
     return this.IP + '/api/';

@@ -105,7 +105,7 @@ export class AppComponent implements OnInit {
         this.logOut();
       }.bind(this), 5555);
     }
-  };
+  }
 
   showSuccess(message: Message) {
     this.isShowSuccessMessage = false;
@@ -124,7 +124,7 @@ export class AppComponent implements OnInit {
   }
   logOut() {
     window.localStorage.clear();
-    let host = AppSettings.HTTP_CLIENT + window.location.hostname;
+    let host = AppSettings.HTTP_CLIENT + AppSettings.HOST_NAME;
     window.location.href = host;
   }
 }

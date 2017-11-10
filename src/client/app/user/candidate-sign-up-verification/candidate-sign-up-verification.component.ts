@@ -98,7 +98,7 @@ export class CandidateSignUpVerificationComponent {
     this._router.navigate(['/profile/'+LocalStorageService.getLocalValue(LocalStorage.ROLE_NAME)]);
     /*setTimeout(() => {
       window.localStorage.clear();
-      let host = AppSettings.HTTP_CLIENT + window.location.hostname;
+      let host = AppSettings.HTTP_CLIENT + AppSettings.HOST_NAME;
       window.location.href = host;
     }, 2000);
 */
