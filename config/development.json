@@ -10,18 +10,21 @@
     "adminExportFilePathForServer": {
       "candidatesCSV": "/src/server/public/candidates.csv",
       "candidateOtherDetailsCSV": "/src/server/public/candidates-other-details.csv",
+      "candidateAccountDetailsCSV": "/src/server/public/candidate-account-details.csv",
       "recruitersCSV": "/src/server/public/recruiters.csv",
-      "usersCSV": "/src/server/public/users.csv",
+      "recruiterAccountDetailsCSV": "/src/server/public/recruiter-account-details.csv",
       "usageDetailsCSV": "/src/server/public/usagedetail.csv",
       "keySkillsCSV": "/src/server/public/key-skills.csv"
     },
     "adminExportFilePathForClient": {
-      "candidatesCSV": "public/candidates.csv",
-      "candidateOtherDetailsCSV": "public/candidates-other-details.csv",
-      "recruitersCSV": "public/recruiters.csv",
-      "usersCSV": "public/users.csv",
-      "usageDetailsCSV": "public/usagedetail.csv",
-      "keySkillsCSV": "public/key-skills.csv"
+      "candidatesCSV": "/public/candidates.csv",
+      "candidateOtherDetailsCSV": "/public/candidates-other-details.csv",
+      "candidateAccountDetailsCSV": "/public/candidate-account-details.csv",
+      "recruitersCSV": "/public/recruiters.csv",
+      "recruiterAccountDetailsCSV": "/public/recruiter-account-details.csv",
+      "usersCSV": "/public/users.csv",
+      "usageDetailsCSV": "/public/usagedetail.csv",
+      "keySkillsCSV": "/public/key-skills.csv"
     },
     "publicPath":"/src/server/app/framework/public/",
     "limitForQuery" : 10,

@@ -66,7 +66,7 @@ export class JobPosterComponent implements OnInit, OnChanges {
   private isComplexityFilled: boolean = true;
   private isPresentDefaultcomplexity: boolean = false;
   private flag: boolean = true;
-  isRecruitingForSelf: boolean=true;
+  isRecruitingForSelf: boolean= (LocalStorageService.getLocalValue(LocalStorage.IS_RECRUITING_FOR_SELF) == 'true');
   highlightedSection: Section = new Section();
   private selectedJobTitle:string;
   private selectedJobId:string;

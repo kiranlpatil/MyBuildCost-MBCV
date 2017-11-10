@@ -7,7 +7,7 @@ import {MessageService} from "../../../shared/services/message.service";
 import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
 import {Candidate, Section} from "../../../user/models/candidate";
 import {FormBuilder} from "@angular/forms";
-import {Messages, Tooltip, CandidateProfileUpdateTrack, LocalStorage} from "../../../shared/constants";
+import {Messages, Tooltip, CandidateProfileUpdateTrack, LocalStorage, Label} from "../../../shared/constants";
 import {ProfessionalDetailsService} from "../professional-detail-service";
 import {ErrorService} from "../../../shared/services/error.service";
 import {ComplexityAnsweredService} from "../complexity-answered.service";
@@ -203,6 +203,10 @@ export class ProfessionalDataComponent extends BaseService implements OnChanges,
 
   getMessage() {
     return Messages;
+  }
+
+  getLabel() {
+    return Label;
   }
 
   onEdit() {

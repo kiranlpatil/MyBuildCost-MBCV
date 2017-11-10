@@ -371,6 +371,7 @@ export class LocalStorage {
   public static MOBILE_NUMBER = 'mobile_number';
   public static VERIFIED_MOBILE_NUMBER = 'verified_mobile_number';
   public static COMPANY_NAME = 'company_name';
+  public static IS_RECRUITING_FOR_SELF = 'is_recruiting_for_self';
   public static COMPANY_SIZE = 'company_size';
   public static FIRST_NAME = 'first_name';
   public static LAST_NAME = 'last_name';
@@ -717,6 +718,10 @@ export class Label {
   public static PROFILE_VISIBILITY: string = 'Profile Visibility for Recruiter';
   public static SUBMIT_PROFILE: string = 'Submit Your Profile';
   public static MORE: string = 'More';
+  public static CURRENT_ANNUAL_SALARY: string = 'Current Annual Salary';
+  public static READY_TO_RELOCATE: string = 'Ready To Relocate?';
+  public static COMPANY_CULTURE: string = 'Company Culture';
+  public static NOTICE_PERIOD: string = 'Notice Period';
 }
 
 export class Button {
