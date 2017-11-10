@@ -39,13 +39,11 @@
         <span class="glyphicon glyphicon-share" title="This job is shared with hiring manager." *ngIf="item.isJobShared && !item.isJobPosted"></span>
         <div class="job-posted clearfix">
           <div class="col-xs-2 no-padding">
-
-            <div *ngFor="let i of item.candidate_list">
-              <p [class.closed]="item.isJobPostClosed" *ngIf="i.name == 'cartListed'" title="{{i.ids.length}} Candidates In Cart">
-                <span>{{i.ids.length}}</span>
+            <div>
+              <p [class.closed]="item.isJobPostClosed"  title="Candidates In Cart">
+                <span>{{item.numberOfCandidatesInList.cart}}</span>
               </p>
             </div>
-            <p [class.closed]="item.isJobPostClosed" *ngIf="item.candidate_list.length == 0" title="Candidates In Cart"><span>0</span></p>
           </div>
           <div class="col-xs-10 padding-left15">
             <h4 title="Job Title : {{item.jobTitle}}">{{item.jobTitle}}</h4>
