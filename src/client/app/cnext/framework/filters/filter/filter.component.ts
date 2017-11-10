@@ -140,11 +140,11 @@ export class FilterComponent implements OnChanges, OnInit {
   filterByProficiency(event: any) {
     var value = event.target.value;
     if (event.target.checked) {
-      this.qCardFilter.proficiencyDataForFilter.push(value);
+      this.qCardFilter.proficiencies.push(value);
     } else {
-      var index = this.qCardFilter.proficiencyDataForFilter.indexOf(value);
+      var index = this.qCardFilter.proficiencies.indexOf(value);
       if (index > -1) {
-        this.qCardFilter.proficiencyDataForFilter.splice(index, 1);
+        this.qCardFilter.proficiencies.splice(index, 1);
       }
     }
     this.showClearFilter = true;
@@ -161,14 +161,14 @@ export class FilterComponent implements OnChanges, OnInit {
       this.queryListRemove('(args.educationDataForFilter.indexOf(item.education.toLowerCase()) !== -1)');
     }
     if (event.target.checked) {
-      this.qCardFilter.educationDataForFilter.push(value);
+      this.qCardFilter.education.push(value);
     } else {
-      var index = this.qCardFilter.educationDataForFilter.indexOf(value);
+      var index = this.qCardFilter.education.indexOf(value);
       if (index > -1) {
-        this.qCardFilter.educationDataForFilter.splice(index, 1);
+        this.qCardFilter.education.splice(index, 1);
       }
     }
-    if (this.qCardFilter.educationDataForFilter.length) {
+    if (this.qCardFilter.education.length) {
       this.queryListPush('(args.educationDataForFilter.indexOf(item.education.toLowerCase()) !== -1)');
     } else {
       this.queryListRemove('(args.educationDataForFilter.indexOf(item.education.toLowerCase()) !== -1)');
@@ -184,14 +184,14 @@ export class FilterComponent implements OnChanges, OnInit {
   filterByIndustryExposure(event: any) {
     var value = event.target.value;
     if (event.target.checked) {
-      this.qCardFilter.industryExposureDataForFilter.push(value)
+      this.qCardFilter.interestedIndustries.push(value)
     } else {
-      var index = this.qCardFilter.industryExposureDataForFilter.indexOf(value);
+      var index = this.qCardFilter.interestedIndustries.indexOf(value);
       if (index > -1) {
-        this.qCardFilter.industryExposureDataForFilter.splice(index, 1);
+        this.qCardFilter.interestedIndustries.splice(index, 1);
       }
     }
-    if (this.qCardFilter.industryExposureDataForFilter.length) {
+    if (this.qCardFilter.interestedIndustries.length) {
       //Below commented line for AND logic
       //this.queryListPush('(item.interestedIndustries.filter(function (obj) {return args.industryExposureDataForFilter.indexOf(obj.toLowerCase()) !== -1;}).length == args.industryExposureDataForFilter.length)');
       this.queryListPush('(item.interestedIndustries.filter(function (obj) {return args.industryExposureDataForFilter.indexOf(obj.toLowerCase()) !== -1;}).length > 0)');
@@ -215,7 +215,7 @@ export class FilterComponent implements OnChanges, OnInit {
         this.queryListRemove('((args.filterByJoinTime && item.joiningPeriod) && (args.filterByJoinTime.toLowerCase() === item.joiningPeriod.toLowerCase()))');
       }
     } else if (value) {
-      this.qCardFilter.filterByJoinTime = value;
+      this.qCardFilter.joinTime = value;
       if (this.isRecuirter) {
           this.changeFilter.emit(this.qCardFilter);
       }
@@ -230,12 +230,12 @@ export class FilterComponent implements OnChanges, OnInit {
 
   selectSalaryMinModel(value: any) {
     if(value == ''){
-      this.qCardFilter.salaryMinValue = Number(this.salaryRangeList[0]);
+      this.qCardFilter.minSalary = Number(this.salaryRangeList[0]);
       return;
     }
-    this.qCardFilter.salaryMinValue = value;
+    this.qCardFilter.minSalary = value;
     if(this.isRecuirter) {
-      this.qCardFilter.salaryMinValue = Number(this.qCardFilter.salaryMinValue.toString()) * 100000;
+      this.qCardFilter.minSalary = Number(this.qCardFilter.minSalary.toString()) * 100000;
     }
     this.salaryFilterBy();
   }
@@ -250,18 +250,18 @@ export class FilterComponent implements OnChanges, OnInit {
           'Number(item.salaryMinValue) <= Number(args.salaryMaxValue)) || (Number(args.salaryMinValue) ' +
           '<= Number(item.salaryMaxValue)  && Number(item.salaryMaxValue) <= Number(args.salaryMaxValue)))');
       }
-      this.qCardFilter.salaryMaxValue = Number(this.salaryRangeList[this.salaryRangeList.length -1]);
+      this.qCardFilter.maxSalary = Number(this.salaryRangeList[this.salaryRangeList.length -1]);
       return;
     }
-    this.qCardFilter.salaryMaxValue = value;
+    this.qCardFilter.maxSalary = value;
     if(this.isRecuirter) {
-      this.qCardFilter.salaryMaxValue = Number(this.qCardFilter.salaryMaxValue.toString()) * 100000;
+      this.qCardFilter.maxSalary = Number(this.qCardFilter.maxSalary.toString()) * 100000;
     }
     this.salaryFilterBy();
   }
 
   salaryFilterBy() {debugger
-    if (Number(this.qCardFilter.salaryMaxValue) && Number(this.qCardFilter.salaryMinValue)) {
+    if (Number(this.qCardFilter.maxSalary) && Number(this.qCardFilter.minSalary)) {
       if(!this.isRecuirter) {
         this.queryListPush('((Number(args.salaryMinValue) <= Number(item.salaryMinValue)  && ' +
           'Number(item.salaryMinValue) <= Number(args.salaryMaxValue)) || (Number(args.salaryMinValue) ' +
@@ -286,25 +286,25 @@ export class FilterComponent implements OnChanges, OnInit {
           'Number(item.experienceMinValue) <= Number(args.experienceMaxValue)) || (Number(args.experienceMinValue) ' +
           '<= Number(item.experienceMaxValue)  && Number(item.experienceMaxValue) <= Number(args.experienceMaxValue)))');
       }
-      this.qCardFilter.experienceMaxValue = Number(this.experienceRangeList[this.experienceRangeList.length -1]);
+      this.qCardFilter.maxExperience = Number(this.experienceRangeList[this.experienceRangeList.length -1]);
       return;
     }
-    this.qCardFilter.experienceMaxValue = value;
+    this.qCardFilter.maxExperience = value;
     this.experienceFilterBy();
 
   }
 
   selectExperiencesMinModel(value: any) {
     if(value == ''){
-      this.qCardFilter.experienceMinValue = Number(this.experienceRangeList[0]);
+      this.qCardFilter.minExperience = Number(this.experienceRangeList[0]);
       return;
     }
-    this.qCardFilter.experienceMinValue = value;
+    this.qCardFilter.minExperience = value;
     this.experienceFilterBy();
   }
 
   experienceFilterBy() {
-    if (Number(this.qCardFilter.experienceMinValue) != undefined && Number(this.qCardFilter.experienceMaxValue) != undefined) {
+    if (Number(this.qCardFilter.minExperience) != undefined && Number(this.qCardFilter.maxExperience) != undefined) {
       if(this.isRecuirter === false) {
         this.queryListPush('((Number(args.experienceMinValue) <= Number(item.experienceMinValue)  && ' +
           'Number(item.experienceMinValue) <= Number(args.experienceMaxValue)) || (Number(args.experienceMinValue) ' +
@@ -323,7 +323,7 @@ export class FilterComponent implements OnChanges, OnInit {
     if(value == ''){
       this.queryListRemove('(((args.filterByLocation && item.location))&&(args.filterByLocation.toLowerCase() === item.location.toLowerCase()))');
     }else if (value) {
-      this.qCardFilter.filterByLocation = value;
+      this.qCardFilter.location = value;
       this.queryListPush('(((args.filterByLocation && item.location))&&(args.filterByLocation.toLowerCase() === item.location.toLowerCase()))');
       this.showClearFilter = true;
     }
@@ -332,7 +332,7 @@ export class FilterComponent implements OnChanges, OnInit {
   }
 
   candidatesFilterByLocation(value: any) {
-    this.qCardFilter.filterByLocation = value;
+    this.qCardFilter.location = value;
     if (value == 'All') {
       this.queryListPush('((args.filterByLocation && item.location) && ((args.filterByLocation.toLowerCase() === item.location.toLowerCase()) || (args.filterByLocation.toLowerCase() !== item.location.toLowerCase())))');
       this.queryListRemove('(((args.filterByLocation && item.location))&&(args.filterByLocation.toLowerCase() === item.location.toLowerCase()))');
@@ -351,7 +351,7 @@ export class FilterComponent implements OnChanges, OnInit {
       this.queryListRemove('(((args.filterByCompanySize && item.company_size))&&(args.filterByCompanySize.toLowerCase() === item.company_size.toLowerCase()))');
     }
     if (value) {
-      this.qCardFilter.filterByCompanySize = value;
+      this.qCardFilter.companySize = value;
       this.queryListPush('(((args.filterByCompanySize && item.company_size))&&(args.filterByCompanySize.toLowerCase() === item.company_size.toLowerCase()))');
       this.showClearFilter = true;
     }
@@ -402,7 +402,7 @@ export class FilterComponent implements OnChanges, OnInit {
     console.log('filterByMustHaveComplexity called1');
     let value = event.target.checked;
     if(value){
-      this.qCardFilter.filterByMustHaveComplexity = value;
+      this.qCardFilter.mustHaveComplexity = value;
       this.queryListPush('((args.filterByMustHaveComplexity && item.complexityIsMustHave) && (args.filterByMustHaveComplexity === item.complexityIsMustHave))');
       this.showClearFilter = true;
     } else {

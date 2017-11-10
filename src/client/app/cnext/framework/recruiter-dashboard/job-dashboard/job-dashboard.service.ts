@@ -6,6 +6,7 @@ import {BaseService} from "../../../../shared/services/http/base.service";
 import {LoaderService} from "../../../../shared/loader/loaders.service";
 import {UsageTracking} from "../../model/usage-tracking";
 import {QCardFilter} from "../../model/q-card-filter";
+import {EList} from "../../model/list-type";
 
 @Injectable()
 
@@ -43,7 +44,7 @@ export class JobDashboardService extends BaseService {
     return Observable.throw(error);
   }
 
-  getSelectedListData(jobId: string, listName: string, obj : QCardFilter) {
+  getSelectedListData(jobId: string, listName: EList, obj : QCardFilter) {
     var url = 'recruiter/jobProfile/' + jobId + '/list/' + listName;
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({headers: headers});

@@ -16,6 +16,7 @@ import {MessageService} from "../../../../shared/services/message.service";
 import {ErrorService} from "../../../../shared/services/error.service";
 import {UsageTrackingService} from "../../usage-tracking.service";
 import {LocalStorageService} from "../../../../shared/services/localstorage.service";
+import {ESort} from "../../model/sort-type";
 /*import underline = Chalk.underline;*/
 
 
@@ -37,7 +38,7 @@ export class QCardviewComponent implements OnChanges {
   @Input() isJobPostExpired : boolean;
   @Input() isJobPostClosed : boolean;
   @Output() addedTocart: EventEmitter<any> = new EventEmitter<any>();
-  @Output() changeSorting: EventEmitter<string> = new EventEmitter<string>();
+  @Output() changeSorting: EventEmitter<ESort> = new EventEmitter<ESort>();
   @Input() progress_bar_color : string='#0d75fa';
   @Output() addForCompare: EventEmitter<any> = new EventEmitter<any>();
   public qCardModel: QCardsortBy = new QCardsortBy();
@@ -306,7 +307,20 @@ export class QCardviewComponent implements OnChanges {
   }
 
   changeSort() {
-    this.changeSorting.emit(this.qCardModel.sortValue);
+    switch(this.qCardModel.sortValue) {
+      case 'Best match':
+        this.changeSorting.emit(ESort.BEST_MATCH);
+        break;
+      case 'Experience' :
+        this.changeSorting.emit(ESort.EXPERIENCE);
+        break;
+      case 'Salary' :
+        this.changeSorting.emit(ESort.SALARY);
+        break;
+      default :
+        this.changeSorting.emit(ESort.BEST_MATCH);
+        break;
+    }
     if (this.type !== 'matchedList') {
       this.matchFormat = this.match.belowMatch;
     }

@@ -19,6 +19,8 @@ import { JobPosterService } from '../../job-poster/job-poster.service';
 import { MessageService } from '../../../../shared/services/message.service';
 import { RenewJobPostService } from '../../../../user/services/renew-jobpost.service';
 import { Message } from '../../../../shared/models/message';
+import {ESort} from "../../model/sort-type";
+import {EList} from "../../model/list-type";
 @Component({
   moduleId: module.id,
   selector: 'cn-job-dashboard',
@@ -38,8 +40,10 @@ export class JobDashboardComponent implements OnInit {
   selectedJobTitle:string;
   isCloneButtonClicked:boolean;
   selectedJobProfile: JobPosterModel = new JobPosterModel();
-  sortBy : string = 'Best match';
-  listName : string= ValueConstant.MATCHED_CANDIDATE;
+  /*sortBy : string = 'Best match';*/
+  sortBy : ESort = ESort.BEST_MATCH;
+  /*listName : string= ValueConstant.MATCHED_CANDIDATE;*/
+  listName : EList = EList.CAN_MATCHED;
   @ViewChild(QCardviewComponent) acaQcardClassObject: QCardviewComponent;
   private candidateQlist: CandidateQListModel = new CandidateQListModel();
   private recruiterId: string;
@@ -106,7 +110,8 @@ export class JobDashboardComponent implements OnInit {
 
   getMatchingProfiles() {
    /* this.qcardFilterService.clearFilter();*/
-   this.listName = ValueConstant.MATCHED_CANDIDATE;
+   /*this.listName = ValueConstant.MATCHED_CANDIDATE*/;
+   this.listName = EList.CAN_MATCHED;
     for (let i = 0; i < this.whichListVisible.length; i++) {
       this.whichListVisible[i] = false;
     }
@@ -119,7 +124,7 @@ export class JobDashboardComponent implements OnInit {
     this.jobDashboardService.getSearchedcandidate(this.jobId,this.appliedFilters)
       .subscribe(
         (data: any) => {
-          this.jobDashboardService.getSelectedListData(this.jobId, ValueConstant.SHORT_LISTED_CANDIDATE, this.appliedFilters)
+          this.jobDashboardService.getSelectedListData(this.jobId, EList.CAN_SHORT_LIST, this.appliedFilters)
             .subscribe(
               (listdata: any) => {
                 this.loaderService.stop();
@@ -141,7 +146,7 @@ export class JobDashboardComponent implements OnInit {
   }
 
 
-  getSelectedListData(listName: string,isFromFilter : boolean) {
+  getSelectedListData(listName: EList,isFromFilter : boolean) {
 
    /* this.qcardFilterService.clearFilter();*/
     for (let i = 0; i < this.whichListVisible.length; i++) {
@@ -149,7 +154,7 @@ export class JobDashboardComponent implements OnInit {
     }
     this.listName = listName;
     switch (listName) {
-      case ValueConstant.CART_LISTED_CANDIDATE :
+      case EList.CAN_CART :
         if(this.candidateQlist.cartCandidates.length>0) {
           this.whichListVisible[1] = true;
           if(!isFromFilter) {
@@ -157,7 +162,7 @@ export class JobDashboardComponent implements OnInit {
           }
         }
         break;
-      case ValueConstant.REJECTED_LISTED_CANDIDATE :
+      case EList.CAN_REJECTED :
         if(this.candidateQlist.rejectedCandidates.length>0) {
           this.whichListVisible[3] = true;
           if(!isFromFilter) {
@@ -165,14 +170,14 @@ export class JobDashboardComponent implements OnInit {
           }
         }
         break;
-      case ValueConstant.SHORT_LISTED_CANDIDATE :
+      case EList.CAN_SHORT_LIST :
         if(this.candidateQlist.shortListedCandidates.length>0) {
           if(!isFromFilter) {
             return;
           }
         }
         break;
-      case ValueConstant.APPLIED_CANDIDATE :
+      case EList.CAN_APPLIED :
         if(this.candidateQlist.appliedCandidates.length>0) {
           this.whichListVisible[2] = true;
           if(!isFromFilter) {
@@ -181,24 +186,24 @@ export class JobDashboardComponent implements OnInit {
         }
         break;
     }
-    this.jobDashboardService.getSelectedListData(this.jobId, listName, this.appliedFilters)
+    this.jobDashboardService.getSelectedListData(this.jobId, this.listName, this.appliedFilters)
       .subscribe(
         (data: any) => {
-          switch (listName) {
-            case ValueConstant.CART_LISTED_CANDIDATE :
+          switch (this.listName) {
+            case EList.CAN_CART :
               this.candidateQlist.cartCandidates = data.data;
               this.recruiterJobView.numberOfCandidatesInCart = this.candidateQlist.cartCandidates.length;
               this.whichListVisible[1] = true;
               break;
-            case ValueConstant.REJECTED_LISTED_CANDIDATE :
+            case EList.CAN_REJECTED :
               this.candidateQlist.rejectedCandidates = data.data;
               this.recruiterJobView.numberOfCandidatesrejected = this.candidateQlist.rejectedCandidates.length;
               this.whichListVisible[3] = true;
               break;
-            case ValueConstant.SHORT_LISTED_CANDIDATE :
+            case EList.CAN_SHORT_LIST :
               this.candidateQlist.shortListedCandidates = data.data;
               break;
-            case ValueConstant.APPLIED_CANDIDATE :
+            case EList.CAN_APPLIED :
               this.candidateQlist.appliedCandidates = data.data;
               this.recruiterJobView.numberOfCandidatesApplied = this.candidateQlist.appliedCandidates.length;
               this.whichListVisible[2] = true;
@@ -293,9 +298,9 @@ export class JobDashboardComponent implements OnInit {
     }
   }
 
-  changeSorting(sortBy : string) {
+  changeSorting(sortBy : ESort) {
     this.appliedFilters.sortBy = sortBy;
-    if(ValueConstant.MATCHED_CANDIDATE === this.listName) {
+    if(EList.CAN_MATCHED === this.listName) {
       this.getCandidatesWithSort();
     }else {
       this.getSelectedListData(this.listName,true);
@@ -304,7 +309,7 @@ export class JobDashboardComponent implements OnInit {
 
   changeFilter(obj : QCardFilter) {
     this.appliedFilters= obj;
-    if(ValueConstant.MATCHED_CANDIDATE === this.listName) {
+    if(EList.CAN_MATCHED === this.listName) {
       this.getCandidatesWithSort();
     }else {
       this.getSelectedListData(this.listName,true);
@@ -315,7 +320,7 @@ export class JobDashboardComponent implements OnInit {
     this.jobDashboardService.getSearchedcandidate(this.jobId,this.appliedFilters)
       .subscribe(
         (data: any) => {
-          this.jobDashboardService.getSelectedListData(this.jobId, ValueConstant.SHORT_LISTED_CANDIDATE, this.appliedFilters)
+          this.jobDashboardService.getSelectedListData(this.jobId, EList.CAN_SHORT_LIST, this.appliedFilters)
             .subscribe(
               (listdata: any) => {
                 this.loaderService.stop();

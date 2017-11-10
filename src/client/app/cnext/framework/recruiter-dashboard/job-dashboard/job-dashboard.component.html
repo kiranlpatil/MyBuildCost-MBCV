@@ -66,19 +66,19 @@
           class="match-count count"><span>{{recruiterJobView.numberOfMatchedCandidates}}</span></span> Matched</a>
       </li>
       <li class="cart-job-tabs">
-        <a (click)="getSelectedListData('cartListed',false)" title="{{recruiterJobView.numberOfCandidatesInCart}} In Cart"
+        <a (click)="getSelectedListData(EList.CAN_CART,false)" title="{{recruiterJobView.numberOfCandidatesInCart}} In Cart"
            data-toggle="tab" href="#cart-job"><span
           class="count"><span>{{recruiterJobView.numberOfCandidatesInCart}}</span></span>
           In Cart</a>
       </li>
       <li class="applied-count-tabs">
-        <a (click)="getSelectedListData('applied',false)" title="{{recruiterJobView.numberOfCandidatesApplied}} Applied"
+        <a (click)="getSelectedListData(EList.CAN_APPLIED,false)" title="{{recruiterJobView.numberOfCandidatesApplied}} Applied"
            data-toggle="tab" href="#applied-job"><span class="applied-count count">
           <span>{{recruiterJobView.numberOfCandidatesApplied}}</span></span>
           Applied</a>
       </li>
       <li class="rejected-job-tabs">
-        <a (click)="getSelectedListData('rejectedList',false)"
+        <a (click)="getSelectedListData(EList.CAN_REJECTED,false)"
            title="{{recruiterJobView.numberOfCandidatesrejected}} Rejected" data-toggle="tab" href="#rejected-job"><span
           class="rejected-count count"><span>{{recruiterJobView.numberOfCandidatesrejected}}</span></span> Rejected</a>
       </li>
