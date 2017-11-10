@@ -23,7 +23,7 @@
       "usageDetailsCSV": "public/usagedetail.csv",
       "keySkillsCSV": "public/key-skills.csv"
     },
-    "publicPath":"./src/server/app/framework/public/",
+    "publicPath":"/src/server/app/framework/public/",
     "limitForQuery" : 10,
     "mail": {
       "host": "http://localhost:8080/",

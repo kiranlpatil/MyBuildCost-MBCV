@@ -1,7 +1,7 @@
-import {Component, Input} from "@angular/core";
+import {Component, OnInit} from "@angular/core";
 import {AdminDashboardService} from "../admin-dashboard.service";
 import {Router} from "@angular/router";
-import {Messages, Label} from "../../../shared/constants";
+import {Messages, Label, AppSettings} from "../../../shared/constants";
 import {Message} from "../../../shared/models/message";
 import {MessageService} from "../../../shared/services/message.service";
 import {LoaderService} from "../../../shared/loader/loaders.service";
@@ -14,8 +14,8 @@ import {ErrorService} from "../../../shared/services/error.service";
   styleUrls: ['candidate-detail-list.component.css'],
 })
 
-export class CandidateDetailListComponent {
-  @Input() candidates: any[] = new Array(0);
+export class CandidateDetailListComponent implements OnInit {
+  candidates: any[] = new Array(0);
   private successMessage: string;
   candidateCSV: string = '';
   candidateOtherDetailsCSV: string = '';
@@ -26,6 +26,11 @@ export class CandidateDetailListComponent {
               private messageService: MessageService,
               private _router: Router) {
 
+  }
+
+  ngOnInit() {
+    this.loaderService.start();
+    this.getAllCandidates();
   }
 
   updateDetail(index: number, candidate: any, activated: boolean) {
@@ -62,9 +67,9 @@ export class CandidateDetailListComponent {
           this.candidateCSV = CandidateDetails.candidatesFilePath;
           this.candidateOtherDetailsCSV = CandidateDetails.candidatesOtherDetailsFilePath;
           this.usersCSV = CandidateDetails.usersFilePath;
-          document.getElementById('link_candidate').click();
-          document.getElementById('link_candidate1').click();
-          document.getElementById('link_candidate2').click();
+          window.open( AppSettings.IP + this.candidateCSV,'_self');
+          window.open(AppSettings.IP + this.candidateOtherDetailsCSV,'_self');
+          window.open(AppSettings.IP + this.usersCSV,'_self');
           this.messageService.message(new Message(Messages.MSG_SUCCESS_FOR_FILE_DOWNLOAD));
         },
         error => {
@@ -85,6 +90,26 @@ export class CandidateDetailListComponent {
 
   getMessages() {
     return Messages;
+  }
+
+  getAllCandidates() {
+    this.adminDashboardService.getAllCandidates("a")
+      .subscribe(
+        candidateProfile => this.onGetAllCandidateSuccess(candidateProfile),
+        error => this.errorService.onError(error));
+  }
+
+  onGetAllCandidateSuccess(candidateProfile: any) {
+    this.candidates = candidateProfile.data.candidate;
+    this.loaderService.stop();
+  }
+
+  loadUser(letter: string) {
+    this.loaderService.start();
+    this.adminDashboardService.getAllCandidates(letter)
+      .subscribe(
+        candidateProfile => this.onGetAllCandidateSuccess(candidateProfile),
+        error => this.errorService.onError(error));
   }
 }
 

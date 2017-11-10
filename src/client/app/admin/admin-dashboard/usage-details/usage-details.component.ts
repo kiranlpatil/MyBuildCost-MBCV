@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { AdminDashboardService } from '../admin-dashboard.service';
 import { ErrorService } from '../../../shared/services/error.service';
 import { LoaderService } from '../../../shared/loader/loaders.service';
-import { Messages } from  '../../../shared/constants';
+import {Messages, AppSettings} from  '../../../shared/constants';
 import { Message } from '../../../shared/models/message';
 import { MessageService } from '../../../shared/services/message.service';
 
@@ -28,8 +28,7 @@ export class UsageDetailsComponent {
       .subscribe(
         UsageDetails => {
           this.loaderService.stop();
-          this.usageDetailsCSV = UsageDetails.path;
-          document.getElementById('link_usage').click();
+          window.open(AppSettings.IP + UsageDetails.path,'_self');
           this.messageService.message(new Message(Messages.MSG_SUCCESS_FOR_FILE_DOWNLOAD));
           },
         error => {

@@ -43,12 +43,6 @@ export class AdminDashboardHeaderComponent {
     window.location.href = host;
   }
 
-  navigateTo(nav: string) {
-    if (nav !== undefined) {
-      this._router.navigate([nav]);
-    }
-  }
-
   onSkip() {
     this.highlightedSection.name = 'none';
   }

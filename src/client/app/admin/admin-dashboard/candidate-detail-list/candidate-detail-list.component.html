@@ -70,5 +70,8 @@
       </ul>
     </div>
   </div>
+  <div>
+    <cn-filter-bar (onItemSelect)="loadUser($event)"></cn-filter-bar>
+  </div>
 </div>
 <div *ngIf="candidates == undefined || candidates && candidates.length==0"> {{getMessages().NO_CANDIDATES_AVAILABLE}} </div>

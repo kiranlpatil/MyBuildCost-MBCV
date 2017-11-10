@@ -3,27 +3,12 @@
   <h4>Site Administration</h4>
   <!--<ul class="nav nav-tabs dashboard-tabs" [class.move-left]="setValue">-->
   <ul class="nav nav-tabs dashboard-tabs">
-    <li class="active"><a data-toggle="tab" id="candidate-list" href="#candidate-list-view">Candidates (Total: {{numberOfCandidates}})</a></li>
-    <li><a data-toggle="tab" id="recruiter-list" href="#recruiter-list-view">Recruiters (Total: {{numberOfRecruiters}})</a></li>
-    <li><a data-toggle="tab" id="key-skills" href="#keyskills-list-view">Key Skills</a></li>
-    <li><a data-toggle="tab" id="usage-details" href="#usage-details-view">Usage Details</a></li>
+    <li class="active"><a id="candidate-list" [routerLink]="['/admin/candidates']">Candidates (Total: {{numberOfCandidates}})</a></li>
+    <li><a id="recruiter-list" [routerLink]="['/admin/recruiters']">Recruiters (Total: {{numberOfRecruiters}})</a></li>
+    <li><a id="key-skills" [routerLink]="['/admin/keyskills']">Key Skills</a></li>
+    <li><a id="usage-details" [routerLink]="['/admin/usagedetails']">Usage Details</a></li>
   </ul>
   <div class="tab-content">
-
-    <div id="candidate-list-view" class="tab-pane fade active in clearfix">
-      <cn-candidate-detail-list [candidates]="userData.candidate"></cn-candidate-detail-list>
-    </div>
-    <div id="recruiter-list-view" class="tab-pane fade clearfix">
-      <cn-recruiter-detail-list [recruiters]="userData.recruiter"></cn-recruiter-detail-list>
-    </div>
-    <div id="keyskills-list-view" class="tab-pane fade clearfix">
-      <cn-key-skills-detail-list></cn-key-skills-detail-list>
-    </div>
-    <div id="usage-details-view" class="tab-pane fade clearfix">
-      <cn-usage-details></cn-usage-details>
-    </div>
-    <div>
-      <cn-filter-bar [filterData] = filterData (onItemSelect)="loadUser($event)"></cn-filter-bar>
-    </div>
+    <router-outlet></router-outlet>
   </div>
 </div>
