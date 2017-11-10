@@ -47,9 +47,9 @@ export class AppComponent implements OnInit {
             } else {
               this._router.navigate([NavigationRoutes.APP_CREATEPROFILE]);
             }
-          } else {
+          } else if(LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE) === 'false') {
             this._router.navigate([NavigationRoutes.APP_RECRUITER_DASHBOARD]);
-          }
+          } 
         }
       } else {
         LocalStorageService.setLocalValue(LocalStorage.IS_LOGGED_IN, 0);

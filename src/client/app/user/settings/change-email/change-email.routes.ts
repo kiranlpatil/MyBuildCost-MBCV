@@ -3,7 +3,7 @@ import {ChangeEmailComponent} from "./change-email.component";
 
 export const ChangeEmailRoutes: Route[] = [
   {
-    path: 'change_email',
+    path: 'change-email',
     component: ChangeEmailComponent
   }
 ];

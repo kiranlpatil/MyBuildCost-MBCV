@@ -110,7 +110,7 @@ export class CompanyDetailsComponent implements OnInit {
   }
 
   goToLanding() {
-    this._router.navigate(['/landing']);
+    this._router.navigate(['/signin']);
   }
 
   fileChangeEvent(fileInput: any) {

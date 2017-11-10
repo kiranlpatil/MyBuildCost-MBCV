@@ -339,22 +339,22 @@ export class AdminPanel {
 
 export class NavigationRoutes {
   public static APP_REGISTRATION: string = '/registration';
-  public static APP_FORGOTPASSWORD: string = '/forgotpassword';
+  public static APP_FORGOTPASSWORD: string = '/forgot-password';
   public static APP_DASHBOARD: string = '/dashboard';
   public static APP_CANDIDATE_DASHBOARD: string = '/candidate';
   public static APP_ADMIN_DASHBOARD: string = '/admin';
   public static APP_RECRUITER_DASHBOARD: string = '/recruiter';
   public static APP_LOGIN: string = '/signin';
   public static APP_START: string = '/';
-  public static APP_LANDING: string = '/landing';
-  public static VERIFY_USER: string = '/verify_user';
+  public static APP_LANDING: string = '/signin';
+  public static VERIFY_USER: string = '/verify-user';
   public static ACTIVATE_USER: string = '/activate_user';
-  public static VERIFY_PHONE: string = '/verify_phone';
-  public static APP_CHANGEEMAIL: string = '/change_email';
+  public static VERIFY_PHONE: string = '/verify-phone';
+  public static APP_CHANGEEMAIL: string = '/change-email';
   public static APP_CREATEPROFILE: string = '/candidate/profile';
   public static APP_PROFILESUMMURY: string = '/profile_summary';
   public static APP_JOB_SUMMURY: string = '/job_summary';
-  public static APP_COMPANYDETAILS: string = '/company_details';
+  public static APP_COMPANYDETAILS: string = '/company-details';
   public static APP_VLAUEPORTRAIT: string = '/value-portrait';
 }
 

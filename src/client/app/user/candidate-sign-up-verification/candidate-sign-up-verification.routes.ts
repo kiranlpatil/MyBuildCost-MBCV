@@ -3,7 +3,7 @@ import {CandidateSignUpVerificationComponent} from "./candidate-sign-up-verifica
 
 export const CandidateSignUpVerificationRoutes: Route[] = [
   {
-    path: 'verify_phone',
+    path: 'verify-phone',
     component: CandidateSignUpVerificationComponent
   }
 ];

@@ -39,7 +39,7 @@ isJobPosted:boolean=true;
           if (data.length > 0) {
            this.onSuccess(data[0]);
           } else {
-            this._router.navigate(['/landing']);
+            this._router.navigate(['/signin']);
           }
         },
         error=> {

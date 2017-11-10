@@ -166,6 +166,7 @@ import {UserFeedbackComponent} from "./cnext/framework/user-feedback/user-feedba
 import {UserFeedbackComponentService} from "./cnext/framework/user-feedback/user-feedback.component.service";
 import {CandidateRouteSwitchComponent} from "./cnext/framework/candidate-dashboard/candidate-route-switch.component";
 import {CandidateBasicInformationComponent} from "./cnext/framework/one-page-summary/candidate-summary/candidate-basic-information/candidate-basic-information.component";
+import {PageNotFoundComponent} from "./shared/page-not-found/page-not-found.component";
 //C-NEXT IMPORTS
 
 
@@ -285,7 +286,8 @@ import {CandidateBasicInformationComponent} from "./cnext/framework/one-page-sum
     PrintScreenComponent,
     JobCloseComponent,
     UserFeedbackComponent,
-    CandidateRouteSwitchComponent
+    CandidateRouteSwitchComponent,
+    PageNotFoundComponent
   ],
 
   providers: [

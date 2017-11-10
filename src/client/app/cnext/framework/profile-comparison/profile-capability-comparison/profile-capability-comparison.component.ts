@@ -11,14 +11,11 @@ declare let $: any;
 })
 
 export class ProfileCapabilityComparisonComponent implements OnChanges, OnInit {
-  //@Input() capabilityList: string[];
+
   @Input() profileComparisonResult: ProfileComparisonData[];
   constructor() {}
 
   ngOnChanges(changes: any) {
-    /*if (changes.profileComparisonResult.currentValue != undefined) {
-     //this.getCapabilityComparison(this.profileComparisonResult);
-     }*/
   }
 
   ngOnInit() {

@@ -3,7 +3,7 @@ import {ActivateEmailComponent} from "./activate-email.component";
 
 export const ActivateEmailRoutes: Route[] = [
   {
-    path: 'activate_email',
+    path: 'activate-email',
     component: ActivateEmailComponent
   }
 ];

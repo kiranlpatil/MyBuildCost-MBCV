@@ -9,10 +9,10 @@ import { RecruiterSummary } from './cnext/framework/one-page-summary/recruiter-j
 import { CandidateCompare } from './cnext/framework/single-page-compare-view/candidate-compare-view/candidate-compare-view.routes';
 import { JobCompare } from './cnext/framework/single-page-compare-view/job-compare-view/job-compare-view.routes';
 import { ValuePortrait } from './cnext/framework/value-portrait/value-portrait-container.routes';
-import { LandingPageRoutes } from './framework/landing-page/landing-page.routes';
 import { ShareContainerRoutes } from './cnext/framework/share-container/share-container.routes';
 import { JobShareContainerRoutes } from './cnext/framework/job-share-container/job-share-container.routes';
 import {CandidateRouteSwitch} from "./cnext/framework/candidate-dashboard/candidate-route-switch.routes";
+import {PageNotFoundComponent} from "./shared/page-not-found/page-not-found.component";
 
 
 export const routes: Routes = [
@@ -20,7 +20,7 @@ export const routes: Routes = [
     path: 'signin',
     loadChildren: '/app/user/user.module#UserModule'
   },
-  ...LandingPageRoutes,
+  //...LandingPageRoutes,
   ...ActivateUserRoutes,  //Check usage
   ...DashboardRoutes,
   ...CandidateRouteSwitch,
@@ -36,5 +36,9 @@ export const routes: Routes = [
   //...JobPosterRoutes,
   ...ShareContainerRoutes,
   ...JobShareContainerRoutes,
-  ...StartRoutes
+  ...StartRoutes,
+  {
+    path:'**',
+    component: PageNotFoundComponent
+  }
 ];

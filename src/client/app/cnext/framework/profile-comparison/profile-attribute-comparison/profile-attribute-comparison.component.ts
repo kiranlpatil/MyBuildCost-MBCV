@@ -15,12 +15,7 @@ export class ProfileAttributeComparisonComponent implements OnInit {
   @Input() profileComparisonJobData:CompareEntityDetails;
   keySkillSorting:any[] = new Array(0);
  constructor() {}
-
-  /*ngOnChanges(changes: any) {
-    if (changes.profileComparisonResult.currentValue != undefined) {
-      this.sortKeySkills(this.profileComparisonResult);
-    }
-  }*/
+  
   ngOnInit() {
         $('.compare-candidate-container').scroll(function () {
             $(this).find('.matching-attribute-name').css('left', $(this).scrollLeft());

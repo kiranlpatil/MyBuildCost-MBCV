@@ -15,7 +15,7 @@ export const DashboardRoutes: Route[] = [
     children: [
       {path: '', component: DashboardHomeComponent},
       {path: 'details', component: UserProfileComponent},
-      {path: 'changepassword', component: ChangePasswordComponent},
+      {path: 'change-password', component: ChangePasswordComponent},
       {path: 'changeemail', component: ChangeEmailComponent},
       {path: 'settings', component: SettingsComponent},
       {path: 'about', component: AboutComponent},

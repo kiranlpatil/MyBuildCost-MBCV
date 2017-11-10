@@ -36,7 +36,7 @@ export class ShareContainerComponent implements OnInit {
             let access = url.searchParams.get('access_token');
             this._router.navigate(['/value-portrait', id], {queryParams: {access_token: access}});
           } else {
-            this._router.navigate(['/landing']);
+            this._router.navigate(['/signin']);
           }
         },
         error=> {

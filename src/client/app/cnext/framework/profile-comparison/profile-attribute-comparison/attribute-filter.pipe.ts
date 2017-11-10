@@ -6,7 +6,7 @@ import {SkillStatus} from "../../model/profile-comparison";
 })
 @Injectable()
 export class AttributeFilterPipe implements PipeTransform {
-  transform(array: SkillStatus[], filterFrom: string[]): any { debugger
+  transform(array: SkillStatus[], filterFrom: string[]): any {
     return array.filter(item => filterFrom.some(f => f === item.name))
       .sort((a, b) => {
         let fromValues = filterFrom.map(f => f);

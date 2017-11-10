@@ -117,7 +117,7 @@ class UserService {
         let auth = new AuthInterceptor();
         let token = auth.issueTokenWithUid(res[0]);
         let host = config.get('TplSeed.mail.host');
-        let link = host + 'reset_password?access_token=' + token + '&_id=' + res[0]._id;
+        let link = host + 'reset-password?access_token=' + token + '&_id=' + res[0]._id;
         if (res[0].isCandidate === true) {
           this.mid_content = content.replace('$link$', link).replace('$first_name$', res[0].first_name).replace('$app_name$', this.APP_NAME);
           let mailOptions = {
@@ -211,7 +211,7 @@ class UserService {
             let auth = new AuthInterceptor();
             let token = auth.issueTokenWithUid(recruiter[0]);
             let host = config.get('TplSeed.mail.host');
-            let link = host + 'company_details?access_token=' + token + '&_id=' + res[0]._id + '&companyName=' + this.company_name;
+            let link = host + 'company-details?access_token=' + token + '&_id=' + res[0]._id + '&companyName=' + this.company_name;
             let header1 = fs.readFileSync(path.resolve() +config.get('TplSeed.publicPath')+'header1.html').toString();
             let content = fs.readFileSync(path.resolve() +config.get('TplSeed.publicPath')+'recruiter.mail.html').toString();
             let footer1 = fs.readFileSync(path.resolve() +config.get('TplSeed.publicPath')+'footer1.html').toString();

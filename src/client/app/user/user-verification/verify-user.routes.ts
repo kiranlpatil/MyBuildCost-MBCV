@@ -3,7 +3,7 @@ import {UserVerificationComponent} from "./user-verification.component";
 
 export const UserVerificationRoutes: Route[] = [
   {
-    path: 'verify_user',
+    path: 'verify-user',
     component: UserVerificationComponent
   }
 ];
