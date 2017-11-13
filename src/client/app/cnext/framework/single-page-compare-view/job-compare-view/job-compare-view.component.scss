@@ -175,7 +175,7 @@
   font-weight: bold;
   margin: 5px 15px 5px 0;
   min-width: 100px;
-  padding: 5px 10px 5px 15px;
+  padding: 3px 10px 5px 15px;
   text-align: center;
   height: 28px;
   background: transparent !important;
@@ -188,6 +188,10 @@
 
 .option.exact {
   border: 1px solid $green;
+  background: $green !important;
+  span {
+    color: $white !important;
+  }
 }
 
 .option.missing {

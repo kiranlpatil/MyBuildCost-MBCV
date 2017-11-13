@@ -279,7 +279,7 @@ class AdminService {
   exportCandidateCollection(callback: (err: any, res: any) => void) {
     let fields = '_id,userId,job_list,proficiencies,employmentHistory,academics,industry,awards,interestedIndustries,' +
       'certifications,profile_update_tracking,isVisible,isSubmitted,isCompleted,complexity_note_matrix,' +
-      'professionalDetails,aboutMyself,jobTitle,location,lastUpdateAt';
+      'professionalDetails,aboutMyself,jobTitle,location,lastUpdateAt,lockedOn,userFeedBack,roleType';
 
     let downloadLocation = path.resolve() + config.get('TplSeed.adminExportFilePathForServer.candidatesCSV');
 
@@ -310,15 +310,17 @@ class AdminService {
   exportUserCollection(userType: string, callback: (err: any, res: any) => void) {
     let fields: string;
     let query: string;
-    let downloadLocation = path.resolve() + config.get('TplSeed.adminExportFilePathForServer.usersCSV');
+    let downloadLocation: string;
 
     if (userType == 'candidate') {
+      downloadLocation = path.resolve() + config.get('TplSeed.adminExportFilePathForServer.candidateAccountDetailsCSV');
       fields = '_id,first_name,last_name,mobile_number,email,current_theme,isCandidate,guide_tour,notifications,' +
-        'isAdmin,otp,isActivated,temp_mobile'
+        'isAdmin,otp,isActivated,temp_mobile,temp_email,picture'
       query = '{"isCandidate":true}';
     } else {
+      downloadLocation = path.resolve() + config.get('TplSeed.adminExportFilePathForServer.recruiterAccountDetailsCSV');
       fields = '_id,mobile_number,email,current_theme,isCandidate,guide_tour,notifications,isAdmin,otp,isActivated,' +
-        'temp_mobile,location,picture',
+        'temp_mobile,location,picture,temp_email',
         query = '{"isCandidate":false}';
     }
 
@@ -326,7 +328,7 @@ class AdminService {
       if (error) {
         callback(error, null);
       } else {
-        callback(null, config.get('TplSeed.adminExportFilePathForClient.usersCSV'));
+        callback(null, 'success');
       }
     });
 

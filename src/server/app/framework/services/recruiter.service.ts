@@ -18,6 +18,7 @@ import SendMailService = require("./sendmail.service");
 import RecruiterModel = require('../dataaccess/model/recruiter.model');
 import RecruiterClassModel = require('../dataaccess/model/recruiterClass.model');
 import CandidateService = require('./candidate.service');
+import {CandidatesInLists} from "../dataaccess/model/CandidatesInLists.model";
 var bcrypt = require('bcrypt');
 
 class RecruiterService {
@@ -103,12 +104,15 @@ class RecruiterService {
               for (let list of job.candidate_list) {
                 switch (list.name) {
                   case ConstVariables.APPLIED_CANDIDATE :
+                    recruiter.postedJobs[recruiter.postedJobs.indexOf(job)].numberOfCandidatesInList.cart=list.ids.length;
                     recruiter.jobCountModel.totalNumberOfCandidatesApplied += list.ids.length;
                     break;
                   case ConstVariables.CART_LISTED_CANDIDATE :
+                    recruiter.postedJobs[recruiter.postedJobs.indexOf(job)].numberOfCandidatesInList.applied=list.ids.length;
                     recruiter.jobCountModel.totalNumberOfCandidateInCart += list.ids.length;
                     break;
                   case ConstVariables.REJECTED_LISTED_CANDIDATE :
+                    recruiter.postedJobs[recruiter.postedJobs.indexOf(job)].numberOfCandidatesInList.rejected=list.ids.length;
                     recruiter.jobCountModel.totalNumberOfCandidatesRejected += list.ids.length;
                     break;
                   default :

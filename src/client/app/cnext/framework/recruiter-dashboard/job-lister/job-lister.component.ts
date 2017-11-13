@@ -107,7 +107,6 @@ export class JobListerComponent implements  OnInit, OnDestroy {
     if (isJobSubmit) {
       this._router.navigate(['recruiter/job/', item]);
     } else {
-      //this.jobPostEventEmitter.emit(item);
       this._router.navigate(['recruiter/jobpost/', item]);
     }
   }
@@ -121,7 +120,7 @@ export class JobListerComponent implements  OnInit, OnDestroy {
   onJobCloned(event:any) {
     //this.jobPostEventEmitter.emit(event);
     this.jobListCloneSuccessEmitter.emit();
-    this._router.navigate(['/recruiterdashboard/jobpost', event]);
+    this._router.navigate(['/recruiter/jobpost', event]);
   }
   get format() {
     return this.toggle ? this.qCardModel.name : 'Date';

@@ -159,6 +159,7 @@ export class LoginComponent implements OnInit {
       }
     } else {
       LocalStorageService.setLocalValue(LocalStorage.COMPANY_NAME, res.data.company_name);
+      LocalStorageService.setLocalValue(LocalStorage.IS_RECRUITING_FOR_SELF, res.data.isRecruitingForself);
       this._router.navigate([NavigationRoutes.APP_RECRUITER_DASHBOARD]);
     }
   }

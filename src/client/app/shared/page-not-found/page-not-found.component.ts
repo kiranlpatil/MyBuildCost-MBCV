@@ -1,4 +1,5 @@
 import {Component} from "@angular/core";
+import {Button, Label, Messages} from "../constants";
 
 @Component({
   moduleId: module.id,
@@ -9,4 +10,14 @@ import {Component} from "@angular/core";
 
 export class PageNotFoundComponent {
 
+  getMessages() {
+    return Messages;
+  }
+  getLabels() {
+    return Label;
+  }
+  getButton() {
+    return Button;
+  }
 }
+

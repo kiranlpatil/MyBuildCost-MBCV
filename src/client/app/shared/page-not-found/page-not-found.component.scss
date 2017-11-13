@@ -1,0 +1,43 @@
+@import '../../../css/variables';
+
+.page-not-found {
+  background: $white;
+  min-height: 360px;
+  position: absolute;
+  left: 50%;
+  top: 48%;
+  transform: translate(-50%, -50%);
+  width: 25%;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+  text-shadow: 0 2px 1px hsla(0,0%,100%,.2);
+
+  h1 {
+    background: $gray-light;
+    color: $white;
+    font-size: 4.5em;
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+    line-height: 150px;
+    display: table;
+    margin: 0 auto;
+  }
+
+  h2 {
+    font-size: 1.5em;
+    font-weight: bold;
+    font-family: 'gothamrnd-book';
+  }
+
+  p {
+    padding-bottom: 10px;
+  }
+
+  .bact-to-home {
+    padding-bottom: 10px;
+  }
+
+}
+
