@@ -7,11 +7,11 @@
 </div>
 <div class="container-fluid profile-wrapper">
   <ul id="recruiter-dashboard-tabs" class="nav nav-tabs dashboard-tabs">
-    <li><a data-toggle="tab" title="My Job Posts" id="recr_job_dashboard" (click)="navigateTo('recruiter')">
+    <li [routerLinkActive]="['active']"><a data-toggle="tab" title="My Job Posts"  [routerLink]="['/recruiter/dashboard']">
       <span class="icon-dashboard"></span>My Job Posts</a></li>
-    <li><a data-toggle="tab" title="Candidate Search" id="applicant_search" (click)="navigateTo('recruiter/search')">
+    <li [routerLinkActive]="['active']"><a data-toggle="tab" title="Candidate Search"  [routerLink]="['/recruiter/search']">
       <span class="icon-candidate-search"></span>Applicant Search</a></li>
-    <li><a class="btn-new-job" data-toggle="tab" id="post_job" title="Post New Job" (click)="navigateTo('recruiter/jobpost')">Post New Job</a></li>
+    <li><a class="btn-new-job" data-toggle="tab"  title="Post New Job" [routerLink]="['/recruiter/jobpost']">Post New Job</a></li>
   </ul>
   <div class="tab-content">
     <router-outlet></router-outlet>

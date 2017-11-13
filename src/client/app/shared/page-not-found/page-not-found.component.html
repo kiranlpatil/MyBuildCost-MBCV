@@ -1,1 +1,11 @@
-<p>page not found</p>
+<section class="page-not-found">
+  <h1>{{getLabels().NOT_FOUND_ERROR}}</h1>
+
+  <h2>{{getMessages().PAGE_NOT_FOUND}}</h2>
+
+  <p [innerHTML]="getMessages().NOT_FOUND_INFORMATION"></p>
+
+  <a href="" class="btn btn-success bact-to-home">
+    {{getButton().BACK_TO_HOME}}
+  </a>
+</section>

@@ -328,6 +328,11 @@ export class Messages {
   'Click below to Preview';
   public static PLEASE_COMPLETE_THE_PROFILE_MSG = 'Please complete the profile before sharing';
   public static JOBS_AVALLABLE_MESSAGE = 'Jobs are available in your industry.';
+  public static NOT_FOUND_INFORMATION = 'The page you are looking for doesn\t exist<br/>' +
+    'or an other error accoured.';
+  public static PAGE_NOT_FOUND = 'Page Not Found';
+
+
 }
 export class AdminPanel {
   public static PUBLIC_PROFILE='Profile is public';
@@ -722,6 +727,7 @@ export class Label {
   public static READY_TO_RELOCATE: string = 'Ready To Relocate?';
   public static COMPANY_CULTURE: string = 'Company Culture';
   public static NOTICE_PERIOD: string = 'Notice Period';
+  public static NOT_FOUND_ERROR: string = '404';
 }
 
 export class Button {
@@ -737,6 +743,7 @@ export class Button {
   public static NEXT: string = 'Next';
   public static SUBMIT: string = 'Submit';
   public static DOWNLOAD: string = 'Download';
+  public static BACK_TO_HOME: string = 'Back to home';
 }
 //These constant is used to track profile completion of candiate.(Having total 14 steps to complete)
 export enum CandidateProfileUpdateTrack {
