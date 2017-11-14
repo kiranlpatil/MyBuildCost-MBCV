@@ -1,12 +1,12 @@
 import DataAccess = require("../dataaccess");
 import ILocation = require("../mongoose/location");
 
-var mongoose = DataAccess.mongooseInstance;
-var mongooseConnection = DataAccess.mongooseConnection;
+let mongoose = DataAccess.mongooseInstance;
+let mongooseConnection = DataAccess.mongooseConnection;
 
 class LocationSchema {
   static get schema() {
-    var schema = mongoose.Schema({
+    let schema = mongoose.Schema({
       city: {
         type: String
       },
@@ -25,5 +25,5 @@ class LocationSchema {
     return schema;
   }
 }
-var schema = mongooseConnection.model<ILocation>("Location", LocationSchema.schema);
+let schema = mongooseConnection.model<ILocation>("Location", LocationSchema.schema);
 export = schema;

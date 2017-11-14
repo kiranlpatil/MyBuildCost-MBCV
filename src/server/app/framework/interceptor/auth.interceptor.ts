@@ -2,32 +2,32 @@ import * as passport from "passport";
 import * as jwt from "jwt-simple";
 import * as Bearer from "passport-http-bearer";
 import { ConstVariables } from "../shared/sharedconstants";
-var BearerStrategy: any = Bearer.Strategy;
-var FacebookTokenStrategy = require('passport-facebook-token');
+let BearerStrategy: any = Bearer.Strategy;
+let FacebookTokenStrategy = require('passport-facebook-token');
 import UserRepository = require("../dataaccess/repository/user.repository");
 import Messages=require("../shared/messages");
 import UserModel = require("../dataaccess/model/user.model");
 
-var GooglePlusTokenStrategy = require('passport-google-plus-token');
-var config = require('config');
+let GooglePlusTokenStrategy = require('passport-google-plus-token');
+let config = require('config');
 
 class AuthInterceptor {
 
   constructor() {
 
-    var fbClientId = config.get('TplSeed.facebookIds.clientId');
-    var fbClientSecretId = config.get('TplSeed.facebookIds.clientSecretId');
-    var googlePlusClientId = config.get('TplSeed.googlePlusIds.clientId');
-    var googlePlusClientSecretId = config.get('TplSeed.googlePlusIds.clientSecretId');
+    let fbClientId = config.get('TplSeed.facebookIds.clientId');
+    let fbClientSecretId = config.get('TplSeed.facebookIds.clientSecretId');
+    let googlePlusClientId = config.get('TplSeed.googlePlusIds.clientId');
+    let googlePlusClientSecretId = config.get('TplSeed.googlePlusIds.clientSecretId');
 
 
     passport.use(new BearerStrategy(function (token: any, done: any) {
-      var decoded: any = null;
-      var isShareApi:boolean = false;
+      let decoded: any = null;
+      let isShareApi:boolean = false;
       try {
         decoded = jwt.decode(token, ConstVariables.AUTHENTICATION_JWT_KEY);
       } catch (e) {
-        var err = new Error();
+        let err = new Error();
         err.message = Messages.MSG_ERROR_INVALID_TOKEN;
         return done(err, false, null);
       }
@@ -37,14 +37,14 @@ class AuthInterceptor {
         if (decoded.exp === undefined) {
           console.log('its an unsubscribed call in AuthInterceptor');
         } else if (decoded.exp <= Date.now()) {
-          var err = new Error();
+          let err = new Error();
           err.message = Messages.MSG_ERROR_TOKEN_SESSION;
           return done(err, false, null);
         }
       }
 
       if(decoded.iss !== undefined) {
-        var userRepository: UserRepository = new UserRepository();
+        let userRepository: UserRepository = new UserRepository();
         userRepository.findById(decoded.iss, function (err, user) {
           if (err) {
             return done(err,null,null);
@@ -55,7 +55,7 @@ class AuthInterceptor {
           return done(null, user, isShareApi);
         });
       } /*else {
-        var err = new Error();
+        let err = new Error();
         err.message = 'Issuer in token is not available';
         return done(err, false, null);
       }*/
@@ -73,8 +73,8 @@ class AuthInterceptor {
       function (access_token: any, refresh_token: any, profile: any, done: any) {
         process.nextTick(function () {
           // find the user in the database based on their facebook id
-          var userRepository: UserRepository = new UserRepository();
-          var query = {"email": profile.emails[0].value};
+          let userRepository: UserRepository = new UserRepository();
+          let query = {"email": profile.emails[0].value};
           userRepository.retrieve(query, function (err, user) {
 
             if (err) {
@@ -88,7 +88,7 @@ class AuthInterceptor {
               // if there is no user found with that facebook id, create them
 
               if (profile.emails[0].value) {
-                var newUser: any = <UserModel>{};
+                let newUser: any = <UserModel>{};
 
                 newUser.first_name = profile.name.givenName;
                 newUser.last_name = profile.name.familyName;
@@ -98,7 +98,7 @@ class AuthInterceptor {
                 newUser.current_theme = 'container-fluid light-theme';
 
                 // save our user to the database
-                var userRepository: UserRepository = new UserRepository();
+                let userRepository: UserRepository = new UserRepository();
                 userRepository.create(newUser, (err: any, res: any) => {
                   if (err) {
                     return done(err, null);
@@ -126,8 +126,8 @@ class AuthInterceptor {
       function (req: any, access_token: any, refresh_token: any, profile: any, done: any) {
         process.nextTick(function () {
           // find the user in the database based on their facebook id
-          var userRepository: UserRepository = new UserRepository();
-          var query = {"email": profile.emails[0].value};
+          let userRepository: UserRepository = new UserRepository();
+          let query = {"email": profile.emails[0].value};
           userRepository.retrieve(query, function (err, user) {
 
             if (err) {
@@ -141,8 +141,8 @@ class AuthInterceptor {
               // if there is no user found with that google id, create them
 
               if (profile.emails[0].value) {
-                var newUser: any = <UserModel>{};
-                var randomMobileNumber = Math.floor(Math.random() * (10000000000 - 100000) + 1000000000);
+                let newUser: any = <UserModel>{};
+                let randomMobileNumber = Math.floor(Math.random() * (10000000000 - 100000) + 1000000000);
                 newUser.first_name = profile.name.givenName;
                 newUser.last_name = profile.name.familyName;
                 //newUser.email = profile.emails[0].value;
@@ -151,7 +151,7 @@ class AuthInterceptor {
                 newUser.password = 'YH8n@4Sjj!tYk4q-';
 
                 // save our user to the database
-                var userRepository: UserRepository = new UserRepository();
+                let userRepository: UserRepository = new UserRepository();
                 userRepository.create(newUser, (err: any, res: any) => {
                   if (err) {
                     return done(err, null);
@@ -170,16 +170,16 @@ class AuthInterceptor {
   }
 
   issueTokenWithUid(user: any,role?:string) {
-    var issuer: string;
+    let issuer: string;
     if (user.userId) {
       issuer = user.userId;
     } else {
       issuer = user._id;
     }
-    var curDate = new Date();
+    let curDate = new Date();
     // expires in 60 days
-    var expires = new Date(curDate.getTime() + (60 * 24 * 60 * 60 * 1000)); //(day*hr*min*sec*milisec)
-    var token = jwt.encode({
+    let expires = new Date(curDate.getTime() + (60 * 24 * 60 * 60 * 1000)); //(day*hr*min*sec*milisec)
+    let token = jwt.encode({
       iss: issuer, // issue
       exp: expires.getTime(), // expiration time
       role: role
@@ -189,14 +189,14 @@ class AuthInterceptor {
 
   issueTokenWithUidForShare(user:any) {
     //Token with no expiry date
-    var issuer:string;
-    var customKey:string = ConstVariables.AUTHENTICATION_ENCODED_SHARE_KEY;
+    let issuer:string;
+    let customKey:string = ConstVariables.AUTHENTICATION_ENCODED_SHARE_KEY;
     if (user.userId) {
       issuer = user.userId;
     } else {
       issuer = user._id;
     }
-    var token = jwt.encode({
+    let token = jwt.encode({
       iss: issuer, // issue
       shareKey: customKey
     }, ConstVariables.AUTHENTICATION_JWT_KEY);
@@ -285,7 +285,7 @@ class AuthInterceptor {
   }
 
   googleAuth(req: any, res: any, next: any) {
-    var request = require('request');
+    let request = require('request');
     request('https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=' + req.body.googleToken, (error: any, response: any, body: any) => {
       if (error) {
         if (error.code == "ETIMEDOUT") {
@@ -300,9 +300,9 @@ class AuthInterceptor {
       }
       else if (response) {
         if (!error && response.statusCode == 200) {
-          var goolePlusObject = JSON.parse(body);
-          var userRepository: UserRepository = new UserRepository();
-          var query = {"email": goolePlusObject.email};
+          let goolePlusObject = JSON.parse(body);
+          let userRepository: UserRepository = new UserRepository();
+          let query = {"email": goolePlusObject.email};
           userRepository.retrieve(query, (err, user) => {
             if (err) {
               next(err);
@@ -314,9 +314,9 @@ class AuthInterceptor {
                 next();
               }
               else {
-                var query = {"email": user[0].email};
-                var updateData = {"social_profile_picture": goolePlusObject.picture};
-                var userRepository: UserRepository = new UserRepository();
+                let query = {"email": user[0].email};
+                let updateData = {"social_profile_picture": goolePlusObject.picture};
+                let userRepository: UserRepository = new UserRepository();
                 userRepository.findOneAndUpdate(query, updateData, {new: true}, (error, result) => {
                   if (error) {
                     next(error);
@@ -331,9 +331,9 @@ class AuthInterceptor {
 
             }
             else if (user.length === 0) {
-              var newUser: any = <UserModel>{};
-              //var randomMobileNumber = Math.floor(Math.random() * (10000000000 - 100000) + 1000000000);
-              var randomMobileNumber = Math.floor((Math.random() * 99999) + 100000);
+              let newUser: any = <UserModel>{};
+              //let randomMobileNumber = Math.floor(Math.random() * (10000000000 - 100000) + 1000000000);
+              let randomMobileNumber = Math.floor((Math.random() * 99999) + 100000);
               newUser.first_name = goolePlusObject.given_name;
               newUser.last_name = goolePlusObject.family_name;
               newUser.email = goolePlusObject.email;
@@ -343,7 +343,7 @@ class AuthInterceptor {
               newUser.social_profile_picture = goolePlusObject.picture;
               newUser.isActivated = true;
 
-              var userRepository: UserRepository = new UserRepository();
+              let userRepository: UserRepository = new UserRepository();
               userRepository.create(newUser, (err: any, res: any) => {
                 if (err) {
                   next(err);

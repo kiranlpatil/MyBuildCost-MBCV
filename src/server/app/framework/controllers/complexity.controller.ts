@@ -12,10 +12,10 @@ import ScenarioService = require('../services/scenario.service');
 
 export function retrieve(req: express.Request, res: express.Response, next: any) {  // todo find better solution
   try {
-    var complexityService = new ComplexityService();
-    var params = req.params.id;
-    var rolesparam = req.query.roles;
-    var capabilityparam = req.query.capability;
+    let complexityService = new ComplexityService();
+    let params = req.params.id;
+    let rolesparam = req.query.roles;
+    let capabilityparam = req.query.capability;
     let item: any = {
       'code': params,
       'roles': JSON.parse(rolesparam),

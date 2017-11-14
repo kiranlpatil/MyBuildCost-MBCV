@@ -49,7 +49,7 @@
     <span>{{postedJob.postingDate | date:'mediumDate'}}</span>
     <div *ngIf="recruiter.company_website!=undefined||''"><label>Website</label>
     <span>{{recruiter.company_website}} </span></div>
-    <label>About Company</label>
+    <label *ngIf="recruiter != undefined && recruiter.about_company && recruiter.about_company !== ''">About Company</label>
     <span>{{recruiter.about_company}} </span>
   </div>
 </div>

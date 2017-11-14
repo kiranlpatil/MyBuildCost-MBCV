@@ -275,7 +275,7 @@ class SearchService {
       if (err) {
         callback(err, null);
       } else {
-        var newCandidate = this.getCompareData(candidate, job, isCandidate, industries);
+        let newCandidate = this.getCompareData(candidate, job, isCandidate, industries);
         callback(null, newCandidate);
       }
     });
@@ -283,7 +283,7 @@ class SearchService {
 
   getCompareData(candidate: CandidateModel, job: any, isCandidate: boolean, industries: IndustryModel[]) {
     //let newCandidate = candidate.toObject();
-    var newCandidate = this.buildCandidateModel(candidate);
+    let newCandidate = this.buildCandidateModel(candidate);
     let jobMinExperience: number = Number(job.experienceMinValue);
     let jobMaxExperience: number = Number(job.experienceMaxValue);
     let jobMinSalary: number = Number(job.salaryMinValue);
@@ -371,13 +371,13 @@ class SearchService {
   }
 
   buildMultiCompareCapabilityView(job:any, newCandidate:ProfileComparisonDataModel, industries:any, isCandidate:any) {
-    var capabilityPercentage:number[] = new Array(0);
-    var capabilityKeys:string[] = new Array(0);
-    var correctQestionCountForAvgPercentage:number = 0;
-    var qestionCountForAvgPercentsge:number = 0;
+    let capabilityPercentage:number[] = new Array(0);
+    let capabilityKeys:string[] = new Array(0);
+    let correctQestionCountForAvgPercentage:number = 0;
+    let qestionCountForAvgPercentsge:number = 0;
     for (let cap in job.capability_matrix) {
 
-      var capabilityKey = cap.split('_');
+      let capabilityKey = cap.split('_');
       if (capabilityKeys.indexOf(capabilityKey[0]) == -1) {
         capabilityKeys.push(capabilityKey[0]);
       }
@@ -385,8 +385,8 @@ class SearchService {
     //for(let _cap in capbilityKeys) {
     for (let _cap of capabilityKeys) {
       let isCapabilityFound : boolean = false;
-      var capabilityQuestionCount:number = 0;
-      var matchCount:number = 0;
+      let capabilityQuestionCount:number = 0;
+      let matchCount:number = 0;
       for (let cap in job.capability_matrix) {
         //calculate total number of questions in capability
 
@@ -416,9 +416,9 @@ class SearchService {
           }
         }
       }
-      var capabilityModel = new CapabilityMatrixModel();
-      var capName:string;
-      var complexity:any;
+      let capabilityModel = new CapabilityMatrixModel();
+      let capName:string;
+      let complexity:any;
       for (let role of industries[0].roles) {
         for (let capability of role.capabilities) {
           if (_cap == capability.code) {
@@ -437,7 +437,7 @@ class SearchService {
           }
         }
       }
-      var percentage:number = 0;
+      let percentage:number = 0;
       if (capabilityQuestionCount) {
         percentage = (matchCount / capabilityQuestionCount) * 100;
       }
@@ -451,7 +451,7 @@ class SearchService {
       }
       //}
     }
-    var avgPercentage:number = 0;
+    let avgPercentage:number = 0;
     if (qestionCountForAvgPercentsge) {
       avgPercentage = ((correctQestionCountForAvgPercentage / qestionCountForAvgPercentsge) * 100);
     }
@@ -627,22 +627,22 @@ class SearchService {
             if (errInJob) {
               callback(errInJob, null);
             } else {
-              var jobName = resOfRecruiter.postedJobs[0].industry.name;
-              var job = resOfRecruiter.postedJobs[0];
+              let jobName = resOfRecruiter.postedJobs[0].industry.name;
+              let job = resOfRecruiter.postedJobs[0];
               this.industryRepository.retrieve({'name': jobName}, (err: any, industries: IndustryModel[]) => {
                 if (err) {
                   callback(err, null);
                 } else {
-                  var compareResult: ProfileComparisonDataModel[] = new Array(0);
+                  let compareResult: ProfileComparisonDataModel[] = new Array(0);
                   for (let candidate of candidateRes) {
-                    var newCandidate = this.getCompareData(candidate, job, isCandidate, industries);
+                    let newCandidate = this.getCompareData(candidate, job, isCandidate, industries);
                         newCandidate = this.getListStatusOfCandidate(newCandidate,job);
                         newCandidate = this.sortCandidateSkills(newCandidate);
                     compareResult.push(newCandidate);
                   }
                   let profileComparisonModel:ProfileComparisonModel = new ProfileComparisonModel();
                   profileComparisonModel.profileComparisonData = compareResult;
-                  var jobDetails:ProfileComparisonJobModel = this.getJobDetailsForComparison(job);
+                  let jobDetails:ProfileComparisonJobModel = this.getJobDetailsForComparison(job);
                   profileComparisonModel.profileComparisonJobData = jobDetails;
                   callback(null, profileComparisonModel);
                 }
@@ -657,7 +657,7 @@ class SearchService {
   }
 
   getJobDetailsForComparison(job:JobProfileModel) {
-    var profileComparisonJobModel:ProfileComparisonJobModel = new ProfileComparisonJobModel();
+    let profileComparisonJobModel:ProfileComparisonJobModel = new ProfileComparisonJobModel();
     profileComparisonJobModel.city = job.location.city;
     profileComparisonJobModel.country = job.location.country;
     profileComparisonJobModel.state = job.location.state;
@@ -674,7 +674,7 @@ class SearchService {
     return profileComparisonJobModel;
   }
   getListStatusOfCandidate(newCandidate:ProfileComparisonDataModel,jobProfile:JobProfileModel) {
-    var candidateListStatus:string[] = new Array(0);
+    let candidateListStatus:string[] = new Array(0);
     for(let list of jobProfile.candidate_list) {
       for(let id of list.ids) {
          if(newCandidate._id == id) {
@@ -691,15 +691,15 @@ class SearchService {
 
   sortCandidateSkills(newCandidate:ProfileComparisonDataModel) {
 
-    var skillStatusData:SkillStatus[] = new Array(0);
+    let skillStatusData:SkillStatus[] = new Array(0);
     for(let value of newCandidate.proficienciesMatch) {
-      var skillStatus:SkillStatus = new SkillStatus();
+      let skillStatus:SkillStatus = new SkillStatus();
       skillStatus.name = value;
       skillStatus.status = 'Match';
       skillStatusData.push(skillStatus);
     }
     for(let value of newCandidate.proficienciesUnMatch) {
-      var skillStatus:SkillStatus = new SkillStatus();
+      let skillStatus:SkillStatus = new SkillStatus();
       skillStatus.name = value;
       skillStatus.status = 'UnMatch';
       skillStatusData.push(skillStatus);
@@ -710,7 +710,7 @@ class SearchService {
 
   getCandidateVisibilityAgainstRecruiter(candidateDetails:CandidateModel, jobProfiles:JobProfileModel[]) {
     let isGotIt = true;
-    var _canDetailsWithJobMatching:CandidateDetailsWithJobMatching = new CandidateDetailsWithJobMatching();
+    let _canDetailsWithJobMatching:CandidateDetailsWithJobMatching = new CandidateDetailsWithJobMatching();
     for (let job of jobProfiles) {
       for (let item of job.candidate_list) {
         if (item.name === 'cartListed') {

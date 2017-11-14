@@ -4,8 +4,8 @@ import LoggerService = require('../shared/logger/LoggerService');
 import {CandidateProfileUpdateTrackServerSide} from "../shared/sharedconstants";
 
 let _loggerService: LoggerService = new LoggerService('MAILCHIMP_MAILER_SERVICE');
-var CronJob = require('cron').CronJob;
-var config = require('config');
+let CronJob = require('cron').CronJob;
+let config = require('config');
 
 let mailchimp = require('mailchimp-api-v3')
 let mailchimpClient = new mailchimp(config.get('TplSeed.mail.MAIL_CHIMP_SERVICE_KEY'));
@@ -50,10 +50,10 @@ export class MailChimpMailerService {
     this.candidateRepository = new CandidateRepository();
     this.userRepository = new UserRepository();
 
-    var today = new Date();
-    var yesterday = new Date(today);
+    let today = new Date();
+    let yesterday = new Date(today);
     yesterday.setDate(today.getDate() - 1);
-    var data;
+    let data;
     let trackNumber=CandidateProfileUpdateTrackServerSide.STEP_IS_ENTER_KEY_SKILLS;
     let trackNumberNotSubmitted=CandidateProfileUpdateTrackServerSide.STEP_IS_SUBMIT_DETAILS;
     if(profile_update_track===trackNumber) {

@@ -5,12 +5,12 @@ import DataAccess = require("../dataaccess");
 import ImportIndustryModel = require("../model/industry-class.model");
 import IImportIndustry = require("../mongoose/import-industry");
 
-var mongoose = DataAccess.mongooseInstance;
-var mongooseConnection = DataAccess.mongooseConnection;
+let mongoose = DataAccess.mongooseInstance;
+let mongooseConnection = DataAccess.mongooseConnection;
 
 class ImportIndustrySchema {
   static get schema() {
-    var schema = mongoose.Schema({
+    let schema = mongoose.Schema({
       roles: [{
         name: String,
         code: String,
@@ -65,5 +65,5 @@ class ImportIndustrySchema {
     return schema;
   }
 }
-var schema = mongooseConnection.model<IImportIndustry>("ImportIndustry", ImportIndustrySchema.schema);
+let schema = mongooseConnection.model<IImportIndustry>("ImportIndustry", ImportIndustrySchema.schema);
 export = schema;

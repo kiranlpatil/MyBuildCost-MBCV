@@ -654,7 +654,7 @@ class CandidateService {
         }
       }
     }
-    var orderKeys = function (o: any, f: any) {
+    let orderKeys = function (o: any, f: any) {
       let os: any = [], ks: any = [], i: any;
       for (let i in o) {
         os.push([i, o[i]]);
@@ -668,7 +668,7 @@ class CandidateService {
       return ks;
     };
 
-    var result = orderKeys(keyValueCapability, function (a: any, b: any) {
+    let result = orderKeys(keyValueCapability, function (a: any, b: any) {
       return a.main_sort_order - b.main_sort_order;
     }); // => ["Elem4", "Elem2", "Elem1", "Elem3"]
     let responseToReturn: any = {};

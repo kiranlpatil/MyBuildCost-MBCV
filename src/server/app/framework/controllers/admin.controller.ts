@@ -6,18 +6,18 @@ import CandidateService = require('../services/candidate.service');
 import AdminService = require('../services/admin.service');
 import UserModel = require('../dataaccess/model/user.model');
 let config = require('config');
-var request = require('request');
+let request = require('request');
 
 export function create(req: express.Request, res: express.Response, next: any) {
   try {
-    var newUser: UserModel = <UserModel>req.body;
+    let newUser: UserModel = <UserModel>req.body;
     newUser.isAdmin = true;
     newUser.first_name = 'Admin';
     newUser.email = 'support@jobmosis.com';
     newUser.mobile_number = 8669601616;
     newUser.isActivated = true;
     newUser.password = '$2a$10$5SBFt0BpQPp/15N5J38nZuh2zMSL1gbFmnEe4xRLIltlQn56bNcZq';
-    var userService = new UserService();
+    let userService = new UserService();
     userService.createUser(newUser, (error, result) => {
       if (error) {
         if (error === Messages.MSG_ERROR_CHECK_EMAIL_PRESENT) {
@@ -43,8 +43,8 @@ export function create(req: express.Request, res: express.Response, next: any) {
           });
         }
       } else {
-        var auth: AuthInterceptor = new AuthInterceptor();
-        var token = auth.issueTokenWithUid(result);
+        let auth: AuthInterceptor = new AuthInterceptor();
+        let token = auth.issueTokenWithUid(result);
         res.status(200).send({
           'status': Messages.STATUS_SUCCESS,
           'data': {
@@ -71,8 +71,8 @@ export function create(req: express.Request, res: express.Response, next: any) {
 
 export function getCountOfUsers(req: express.Request, res: express.Response, next: any) {
   try {
-    var adminService = new AdminService();
-    var params = {};
+    let adminService = new AdminService();
+    let params = {};
     if (req.user.isAdmin) {
       adminService.getCountOfUsers(params, (error, result) => {
         if (error) {
@@ -188,8 +188,8 @@ export function getRecruiterDetailsByInitial(req: express.Request, res: express.
 
 export function exportCandidateDetails(req: express.Request, res: express.Response, next: any) {
   try {
-    var userService = new UserService();
-    var adminService = new AdminService();
+    let userService = new UserService();
+    let adminService = new AdminService();
     let userType = 'candidate';
     let files: any = {};
     if (req.user.isAdmin) {
@@ -254,8 +254,8 @@ export function exportCandidateDetails(req: express.Request, res: express.Respon
 
 export function exportRecruiterDetails(req: express.Request, res: express.Response, next: any) {
   try {
-    var userService = new UserService();
-    var adminService = new AdminService();
+    let userService = new UserService();
+    let adminService = new AdminService();
     let userType = 'recruiter';
     let files: any = {};
     if (req.user.isAdmin) {
@@ -307,7 +307,7 @@ export function exportRecruiterDetails(req: express.Request, res: express.Respon
 
 export function exportUsageDetails(req: express.Request, res: express.Response, next: any) {
   try {
-    var adminService = new AdminService();
+    let adminService = new AdminService();
     if (req.user.isAdmin) {
       adminService.exportUsageDetailsCollection((error, result) => {
         if (error) {
@@ -345,7 +345,7 @@ export function exportUsageDetails(req: express.Request, res: express.Response, 
 
 export function exportKeySkills(req: express.Request, res: express.Response, next: any) {
   try {
-    var adminService = new AdminService();
+    let adminService = new AdminService();
     if (req.user.isAdmin) {
       adminService.exportKeySkillsCollection((error, result) => {
         if (error) {
@@ -383,14 +383,14 @@ export function exportKeySkills(req: express.Request, res: express.Response, nex
 
 export function updateDetailOfUser(req: express.Request, res: express.Response, next: any) {
   try {
-    var newUserData: UserModel = <UserModel>req.body;
-    var params = req.query;
+    let newUserData: UserModel = <UserModel>req.body;
+    let params = req.query;
     delete params.access_token;
-    var user = req.user;
-    var _id: string = user._id;
-    var auth: AuthInterceptor = new AuthInterceptor();
-    var adminService = new AdminService();
-    var userService = new UserService();
+    let user = req.user;
+    let _id: string = user._id;
+    let auth: AuthInterceptor = new AuthInterceptor();
+    let adminService = new AdminService();
+    let userService = new UserService();
 
     adminService.updateUser(newUserData.user_id, newUserData, (error, result) => {
       if (error) {
@@ -405,7 +405,7 @@ export function updateDetailOfUser(req: express.Request, res: express.Response, 
               code: 401
             });
           } else {
-            var token = auth.issueTokenWithUid(resu[0]);
+            let token = auth.issueTokenWithUid(resu[0]);
             res.send({
               'status': 'success',
               'data': {
@@ -434,11 +434,11 @@ export function updateDetailOfUser(req: express.Request, res: express.Response, 
 
 export function sendLoginInfoToAdmin(email: any, ip: any, latitude: any, longitude: any, next: any) {
   try {
-    var params: any = {email: undefined, ip: undefined, location: undefined};
-    var address: any;
+    let params: any = {email: undefined, ip: undefined, location: undefined};
+    let address: any;
     params.ip = ip;
     params.email = email;
-    var adminService = new AdminService();
+    let adminService = new AdminService();
     request('http://maps.googleapis.com/maps/api/geocode/json?latlng=' + latitude + ',' + longitude + '&sensor=true', function (error: any, response: any, body: any) {
       if (!error || response.statusCode == 200) {
         if (response.statusCode == 200) {

@@ -1,6 +1,6 @@
 import * as nodemailer from "nodemailer";
 import Messages=require("../shared/messages");
-var config = require('config');
+let config = require('config');
 
 class SendMailService {
 
@@ -16,9 +16,11 @@ class SendMailService {
 
     smtpTransport.sendMail(mailOptions, function (error: any, response: any) {
       if (error) {
+        console.log('in error of emial',error);
         callback(new Error(Messages.MSG_ERROR_EMAIL), response);
       }
       else {
+        console.log("success emial");
         callback(null, response);
       }
     });
