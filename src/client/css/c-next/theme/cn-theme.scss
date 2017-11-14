@@ -52,6 +52,15 @@
     }
   }
 
+  .green-bg {
+    background: $green;
+    &:hover,
+    &:active,
+    &:focus {
+      background: $green;
+    }
+  }
+
   // Buttons
   .btn-danger {
     background: $cn-theme-btn-danger;

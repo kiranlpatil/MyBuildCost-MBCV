@@ -737,7 +737,7 @@ export class Button {
   public static CLOSE_BUTTON: string = 'CLOSE';
   public static CANCEL_BUTTON: string = 'Cancel';
   public static VALUE_PORTRAIT_BUTTON: string = 'Create your Own Value Portrait';
-  public static SUBMIT_PROFILE: string = 'Submit Profile';
+  public static SUBMIT_PROFILE: string = 'Submit My Profile';
   public static VIEW_AND_EDIT: string = 'View and Edit';
   public static PROCEED: string = 'Proceed';
   public static NEXT: string = 'Next';
