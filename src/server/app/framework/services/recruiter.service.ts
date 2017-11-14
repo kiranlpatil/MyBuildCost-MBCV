@@ -101,22 +101,25 @@ class RecruiterService {
         if (res.length > 0) {
           if (recruiter.postedJobs) {
             for (let job of recruiter.postedJobs) {
-              for (let list of job.candidate_list) {
-                switch (list.name) {
-                  case ConstVariables.APPLIED_CANDIDATE :
-                    recruiter.postedJobs[recruiter.postedJobs.indexOf(job)].numberOfCandidatesInList.cart=list.ids.length;
-                    recruiter.jobCountModel.totalNumberOfCandidatesApplied += list.ids.length;
-                    break;
-                  case ConstVariables.CART_LISTED_CANDIDATE :
-                    recruiter.postedJobs[recruiter.postedJobs.indexOf(job)].numberOfCandidatesInList.applied=list.ids.length;
-                    recruiter.jobCountModel.totalNumberOfCandidateInCart += list.ids.length;
-                    break;
-                  case ConstVariables.REJECTED_LISTED_CANDIDATE :
-                    recruiter.postedJobs[recruiter.postedJobs.indexOf(job)].numberOfCandidatesInList.rejected=list.ids.length;
-                    recruiter.jobCountModel.totalNumberOfCandidatesRejected += list.ids.length;
-                    break;
-                  default :
-                    break;
+              job.numberOfCandidatesInList=new CandidatesInLists();
+              if(job.isJobPosted) {
+                for (let list of job.candidate_list) {
+                  switch (list.name) {
+                    case ConstVariables.APPLIED_CANDIDATE :
+                      job.numberOfCandidatesInList.applied=list.ids.length;
+                      recruiter.jobCountModel.totalNumberOfCandidatesApplied += list.ids.length;
+                      break;
+                    case ConstVariables.CART_LISTED_CANDIDATE :
+                      job.numberOfCandidatesInList.cart=list.ids.length;
+                      recruiter.jobCountModel.totalNumberOfCandidateInCart += list.ids.length;
+                      break;
+                    case ConstVariables.REJECTED_LISTED_CANDIDATE :
+                      job.numberOfCandidatesInList.rejected=list.ids.length;
+                      recruiter.jobCountModel.totalNumberOfCandidatesRejected += list.ids.length;
+                      break;
+                    default :
+                      break;
+                  }
                 }
               }
             }

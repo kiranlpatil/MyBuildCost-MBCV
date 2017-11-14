@@ -282,6 +282,12 @@
   .error-messages {
     padding-left: 12px;
   }
+  &:hover {
+    span {
+      background: transparent !important;
+      color: $text-color !important;
+    }
+  }
 }
 #recruiter-form {
   .default-checkbox {

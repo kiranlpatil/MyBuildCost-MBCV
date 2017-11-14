@@ -47,11 +47,10 @@
           </div>
 
           <div class="col-sm-8 no-padding" *ngIf="!isRecruitingForSelf">
-            <h4>{{hideCompanyNameHeading}}</h4>
             <div class="check-box">
               <label>
                 <input type="checkbox" name="hideCompanyName" formControlName="hideCompanyName">
-                <span>Hide company Name</span>
+                <h4>{{hideCompanyNameHeading}}</h4>
                 <div class="check"></div>
               </label>
             </div>
