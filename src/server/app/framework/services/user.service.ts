@@ -145,8 +145,11 @@ class UserService {
                 from: config.get('TplSeed.mail.MAIL_SENDER'),
                 to: field.email,
                 subject: Messages.EMAIL_SUBJECT_FORGOT_PASSWORD,
-                html: 'hi'
+                html: header1 + this.mid_content + footer1
+                , attachments: MailAttachments.AttachmentArray
               };
+              console.log(mailOptions);
+              console.log(JSON.stringify(mailOptions));
               let sendMailService = new SendMailService();
               sendMailService.sendMail(mailOptions, callback);
             }
