@@ -64,7 +64,7 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
   tooltipRecruiterMessage: string = '<ul><li>' +
     '<p>1. '+Tooltip.COMPLEXITIES_RECRUITER_TOOLTIP_1+'</p></li>' +
     '<li><p>2. '+Tooltip.COMPLEXITIES_RECRUITER_TOOLTIP_2+'</p></li>' +
-      '<li><p>3. '+Tooltip.COMPLEXITIES_RECRUITER_TOOLTIP_3+'</p>' +
+      '<li><p>3. '+Tooltip.COMPLEXITIES_RECRUITER_TOOLTIP_MESSAGE+'</p>' +
     '</li></ul>';
   @ViewChild('save')
   private _inputElement1: ElementRef;

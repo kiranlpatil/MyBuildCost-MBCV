@@ -130,12 +130,14 @@
 
   .profile-name-first,
   .profile-name-last {
+    background: none;
     color: $light-blue;
     font-family: 'gothamrnd-book';
     font-size: 14px;
-    background: none;
     padding: 0;
     text-transform: capitalize;
+    word-break: break-all;
+    word-wrap: break-word;
   }
 }
 

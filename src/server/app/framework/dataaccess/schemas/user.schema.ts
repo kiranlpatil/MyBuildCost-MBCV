@@ -1,13 +1,13 @@
 import DataAccess = require('../dataaccess');
 import User = require('../mongoose/user');
 
-var mongoose = DataAccess.mongooseInstance;
-var mongooseConnection = DataAccess.mongooseConnection;
+let mongoose = DataAccess.mongooseInstance;
+let mongooseConnection = DataAccess.mongooseConnection;
 
 
 class UserSchema {
   static get schema() {
-    var schema = mongoose.Schema({
+    let schema = mongoose.Schema({
 
       location: {
         city: String,
@@ -80,5 +80,5 @@ class UserSchema {
     return schema;
   }
 }
-var schema = mongooseConnection.model<User>('User', UserSchema.schema);
+let schema = mongooseConnection.model<User>('User', UserSchema.schema);
 export = schema;

@@ -1,12 +1,12 @@
 import DataAccess = require('../dataaccess');
 import ICandidate = require('../mongoose/candidate');
-var mongoose1 = DataAccess.mongooseInstance;
-var mongooseConnection = DataAccess.mongooseConnection;
-var mongoose = require('mongoose');
+let mongoose1 = DataAccess.mongooseInstance;
+let mongooseConnection = DataAccess.mongooseConnection;
+let mongoose = require('mongoose');
 
 class CandidateSchema {
   static get schema() {
-    var schema = mongoose1.Schema({
+    let schema = mongoose1.Schema({
 
       jobTitle: {
         type: String
@@ -162,5 +162,5 @@ class CandidateSchema {
     return schema;
   }
 }
-var schema = mongooseConnection.model<ICandidate>('Candidate', CandidateSchema.schema);
+let schema = mongooseConnection.model<ICandidate>('Candidate', CandidateSchema.schema);
 export = schema;

@@ -12,31 +12,30 @@ import adminController= require('./admin.controller');
 import RecruiterModel = require('../dataaccess/model/recruiter.model');
 import { MailChimpMailerService } from '../services/mailchimp-mailer.service';
 
-var bcrypt = require('bcrypt');
+let bcrypt = require('bcrypt');
 
 export function login(req: express.Request, res: express.Response, next: any) {
   try {
-
-    var userService = new UserService();
-    var params = req.body;
+    let userService = new UserService();
+    let params = req.body;
     delete params.access_token;
     userService.retrieve({"email": params.email}, (error, result) => {
       if (error) {
         next(error);
-      }
-      else if (result.length > 0 && result[0].isActivated === true) {
+      } else if (result.length > 0 && result[0].isActivated === true) {
         bcrypt.compare(params.password, result[0].password, (err: any, isSame: any) => {
           if (err) {
             next({
               reason: Messages.MSG_ERROR_RSN_INVALID_REGISTRATION_STATUS,
               message: Messages.MSG_ERROR_VERIFY_CANDIDATE_ACCOUNT,
               stackTrace: new Error(),
+              actualError: err,
               code: 400
             });
           } else {
             if (isSame) {
-              var auth = new AuthInterceptor();
-              var token = auth.issueTokenWithUid(result[0]);
+              let auth = new AuthInterceptor();
+              let token = auth.issueTokenWithUid(result[0]);
               if (result[0].isAdmin) {
                 adminController.sendLoginInfoToAdmin(result[0].email, req.connection.remoteAddress, params.latitude, params.longitude,next);
                 res.status(200).send({
@@ -56,7 +55,7 @@ export function login(req: express.Request, res: express.Response, next: any) {
                 });
               } else {
                 if (result[0].isCandidate === false) {
-                  var recruiterService = new RecruiterService();
+                  let recruiterService = new RecruiterService();
 
                   recruiterService.retrieve({"userId": result[0]._id}, (error, recruiter) => {
                     if (error) {
@@ -86,7 +85,7 @@ export function login(req: express.Request, res: express.Response, next: any) {
                   });
                 }
                 else {
-                  var candidateService = new CandidateService();
+                  let candidateService = new CandidateService();
                   candidateService.retrieve({"userId": result[0]._id}, (error, candidate) => {
                     if (error) {
                       next(error);
@@ -183,11 +182,11 @@ export function login(req: express.Request, res: express.Response, next: any) {
 }
 export function generateOtp(req: express.Request, res: express.Response, next: any) {
   try {
-    var userService = new UserService();
-    var user = req.user;
-    var params = req.body;  //mobile_number(new)
+    let userService = new UserService();
+    let user = req.user;
+    let params = req.body;  //mobile_number(new)
 
-    var Data = {
+    let Data = {
       new_mobile_number: params.mobile_number,
       old_mobile_number: user.mobile_number,
       _id: user._id
@@ -236,9 +235,9 @@ export function generateOtp(req: express.Request, res: express.Response, next: a
 }
 export function verificationMail(req: express.Request, res: express.Response, next: any) {
   try {
-    var userService = new UserService();
-    var user = req.user;
-    var params = req.body;
+    let userService = new UserService();
+    let user = req.user;
+    let params = req.body;
     userService.sendVerificationMail(params, (error, result) => {
       if (error) {
         next({
@@ -268,9 +267,9 @@ export function verificationMail(req: express.Request, res: express.Response, ne
 }
 export function recruiterVerificationMail(req: express.Request, res: express.Response, next: any) {
   try {
-    var userService = new UserService();
-    var user = req.user;
-    var params = req.body;
+    let userService = new UserService();
+    let user = req.user;
+    let params = req.body;
     userService.sendRecruiterVerificationMail(params, (error, result) => {
       if (error) {
         next({
@@ -300,8 +299,8 @@ export function recruiterVerificationMail(req: express.Request, res: express.Res
 }
 export function mail(req: express.Request, res: express.Response, next: any) {
   try {
-    var userService = new UserService();
-    var params = req.body;
+    let userService = new UserService();
+    let params = req.body;
     userService.sendMail(params, (error, result) => {
       if (error) {
         next({
@@ -331,8 +330,8 @@ export function mail(req: express.Request, res: express.Response, next: any) {
 }
 export function create(req: express.Request, res: express.Response, next: any) {
   try {
-    var newUser: UserModel = <UserModel>req.body;
-    var userService = new UserService();
+    let newUser: UserModel = <UserModel>req.body;
+    let userService = new UserService();
     // newUser.isActivated=true;
     userService.createUser(newUser, (error, result) => {
       if (error) {
@@ -363,8 +362,8 @@ export function create(req: express.Request, res: express.Response, next: any) {
         }
       }
       else {
-        var auth: AuthInterceptor = new AuthInterceptor();
-        var token = auth.issueTokenWithUid(result);
+        let auth: AuthInterceptor = new AuthInterceptor();
+        let token = auth.issueTokenWithUid(result);
         res.status(200).send({
           "status": Messages.STATUS_SUCCESS,
           "data": {
@@ -392,11 +391,11 @@ export function create(req: express.Request, res: express.Response, next: any) {
 
 export function forgotPassword(req: express.Request, res: express.Response, next: any) {
   try {
-    var userService = new UserService();
-    var params = req.body;   //email
+    let userService = new UserService();
+    let params = req.body;   //email
 
-    /* var linkq =req.url;
-     var fullUrl = app.get("/api/address",  userController.getAddress);req.protocol + '://' + req.get('host') + req.originalUrl;
+    /* let linkq =req.url;
+     let fullUrl = app.get("/api/address",  userController.getAddress);req.protocol + '://' + req.get('host') + req.originalUrl;
      console.log(fullUrl);*/
     userService.forgotPassword(params, (error, result) => {
 
@@ -438,20 +437,20 @@ export function forgotPassword(req: express.Request, res: express.Response, next
 
 export function notifications(req: express.Request, res: express.Response, next: any) {
   try {
-    var user = req.user;
-    var auth: AuthInterceptor = new AuthInterceptor();
-    var token = auth.issueTokenWithUid(user);
+    let user = req.user;
+    let auth: AuthInterceptor = new AuthInterceptor();
+    let token = auth.issueTokenWithUid(user);
 
     //retrieve notification for a particular user
-    var params = {_id: user._id};
-    var userService = new UserService();
+    let params = {_id: user._id};
+    let userService = new UserService();
 
     userService.retrieve(params, (error, result) => {
       if (error) {
         next(error);
       }
       else if (result.length > 0) {
-        var token = auth.issueTokenWithUid(user);
+        let token = auth.issueTokenWithUid(user);
         res.send({
           "status": "success",
           "data": result[0].notifications,
@@ -471,22 +470,22 @@ export function notifications(req: express.Request, res: express.Response, next:
 
 export function pushNotifications(req: express.Request, res: express.Response, next: any) {
   try {
-    var user = req.user;
-    var body_data = req.body;
-    var auth: AuthInterceptor = new AuthInterceptor();
-    var token = auth.issueTokenWithUid(user);
+    let user = req.user;
+    let body_data = req.body;
+    let auth: AuthInterceptor = new AuthInterceptor();
+    let token = auth.issueTokenWithUid(user);
 
     //retrieve notification for a particular user
-    var params = {_id: user._id};
-    var userService = new UserService();
-    var data = {$push: {notifications: body_data}};
+    let params = {_id: user._id};
+    let userService = new UserService();
+    let data = {$push: {notifications: body_data}};
 
     userService.findOneAndUpdate(params, data, {new: true}, (error, result) => {
       if (error) {
         next(error);
       }
       else {
-        var token = auth.issueTokenWithUid(user);
+        let token = auth.issueTokenWithUid(user);
         res.send({
           "status": "Success",
           "data": result.notifications,
@@ -506,21 +505,21 @@ export function pushNotifications(req: express.Request, res: express.Response, n
 
 export function updateNotifications(req: express.Request, res: express.Response, next: any) {
   try {
-    var user = req.user;
-    var body_data = req.body;
-    var auth: AuthInterceptor = new AuthInterceptor();
-    var token = auth.issueTokenWithUid(user);
+    let user = req.user;
+    let body_data = req.body;
+    let auth: AuthInterceptor = new AuthInterceptor();
+    let token = auth.issueTokenWithUid(user);
 
-    var params = {_id: user._id};
-    var userService = new UserService();
-    var data = {is_read: true};
+    let params = {_id: user._id};
+    let userService = new UserService();
+    let data = {is_read: true};
 
     userService.findAndUpdateNotification(params, data, {new: true}, (error, result) => {
       if (error) {
         next(error);
       }
       else {
-        var token = auth.issueTokenWithUid(user);
+        let token = auth.issueTokenWithUid(user);
         res.send({
           "status": "Success",
           "data": result.notifications,
@@ -540,14 +539,14 @@ export function updateNotifications(req: express.Request, res: express.Response,
 
 export function updateDetails(req: express.Request, res: express.Response, next: any) {
   try {
-    var newUserData: UserModel = <UserModel>req.body;
-    var params = req.query;
+    let newUserData: UserModel = <UserModel>req.body;
+    let params = req.query;
     delete params.access_token;
-    var user = req.user;
-    var _id: string = user._id;
+    let user = req.user;
+    let _id: string = user._id;
 
-    var auth: AuthInterceptor = new AuthInterceptor();
-    var userService = new UserService();
+    let auth: AuthInterceptor = new AuthInterceptor();
+    let userService = new UserService();
     userService.update(_id, newUserData, (error, result) => {
       if (error) {
         next(error);
@@ -563,7 +562,7 @@ export function updateDetails(req: express.Request, res: express.Response, next:
             });
           }
           else {
-            var token = auth.issueTokenWithUid(user);
+            let token = auth.issueTokenWithUid(user);
             res.send({
               "status": "success",
               "data": {
@@ -594,11 +593,11 @@ export function updateDetails(req: express.Request, res: express.Response, next:
 
 export function updateRecruiterAccountDetails(req: express.Request, res: express.Response, next: any) {
   try {
-    var newUserData: RecruiterModel = <RecruiterModel>req.body;
-    var user = req.user;
-    var _id: string = user._id;
-    var auth: AuthInterceptor = new AuthInterceptor();
-    var recruiterService = new RecruiterService();
+    let newUserData: RecruiterModel = <RecruiterModel>req.body;
+    let user = req.user;
+    let _id: string = user._id;
+    let auth: AuthInterceptor = new AuthInterceptor();
+    let recruiterService = new RecruiterService();
     recruiterService.updateDetails(_id, newUserData, (error, result) => {
       if (error) {
         next(error);
@@ -619,18 +618,18 @@ export function updateRecruiterAccountDetails(req: express.Request, res: express
 }
 export function updateProfileField(req: express.Request, res: express.Response, next: any) {
   try {
-    //var newUserData: UserModel = <UserModel>req.body;
+    //let newUserData: UserModel = <UserModel>req.body;
 
-    var params = req.query;
+    let params = req.query;
     delete params.access_token;
-    var user = req.user;
-    var _id: string = user._id;
-    var fName: string = req.params.fname;
+    let user = req.user;
+    let _id: string = user._id;
+    let fName: string = req.params.fname;
     if (fName == 'guide_tour') {
       var data = {'guide_tour': req.body};
     }
-    var auth: AuthInterceptor = new AuthInterceptor();
-    var userService = new UserService();
+    let auth: AuthInterceptor = new AuthInterceptor();
+    let userService = new UserService();
     userService.update(_id, data, (error, result) => {
       if (error) {
         next(error);
@@ -646,7 +645,7 @@ export function updateProfileField(req: express.Request, res: express.Response, 
             });
           }
           else {
-            var token = auth.issueTokenWithUid(user);
+            let token = auth.issueTokenWithUid(user);
             res.send({
               "status": "success",
               "data": {
@@ -675,13 +674,13 @@ export function updateProfileField(req: express.Request, res: express.Response, 
 
 export function retrieve(req: express.Request, res: express.Response, next: any) {
   try {
-    var userService = new UserService();
-    var params = req.params.id;
+    let userService = new UserService();
+    let params = req.params.id;
     delete params.access_token;
-    var user = req.user;
-    var auth: AuthInterceptor = new AuthInterceptor();
+    let user = req.user;
+    let auth: AuthInterceptor = new AuthInterceptor();
 
-    var token = auth.issueTokenWithUid(user);
+    let token = auth.issueTokenWithUid(user);
         res.send({
           "status": "success",
           "data": {
@@ -706,10 +705,10 @@ export function retrieve(req: express.Request, res: express.Response, next: any)
 }
 export function resetPassword(req: express.Request, res: express.Response, next: any) {
   try {
-    var user = req.user;
-    var params = req.body;   //new_password
+    let user = req.user;
+    let params = req.body;   //new_password
     delete params.access_token;
-    var userService = new UserService();
+    let userService = new UserService();
     const saltRounds = 10;
     bcrypt.hash(req.body.new_password, saltRounds, (err: any, hash: any) => {
       if (err) {
@@ -720,8 +719,8 @@ export function resetPassword(req: express.Request, res: express.Response, next:
           code: 403
         });
       } else {
-        var updateData = {'password': hash};
-        var query = {"_id": user._id, "password": req.user.password};
+        let updateData = {'password': hash};
+        let query = {"_id": user._id, "password": req.user.password};
         userService.findOneAndUpdate(query, updateData, {new: true}, (error, result) => {
           if (error) {
             next(error);
@@ -748,11 +747,11 @@ export function resetPassword(req: express.Request, res: express.Response, next:
 
 export function changePassword(req: express.Request, res: express.Response, next: any) {
   try {
-    var user = req.user;
-    var params = req.query;
+    let user = req.user;
+    let params = req.query;
     delete params.access_token;
-    var auth: AuthInterceptor = new AuthInterceptor();
-    var userService = new UserService();
+    let auth: AuthInterceptor = new AuthInterceptor();
+    let userService = new UserService();
     bcrypt.compare(req.body.current_password, user.password, (err: any, isSame: any) => {
       if (err) {
         next({
@@ -773,7 +772,7 @@ export function changePassword(req: express.Request, res: express.Response, next
             });
           } else {
 
-            var new_password: any;
+            let new_password: any;
             const saltRounds = 10;
             bcrypt.hash(req.body.new_password, saltRounds, (err: any, hash: any) => {
               // Store hash in your password DB.
@@ -787,14 +786,14 @@ export function changePassword(req: express.Request, res: express.Response, next
               }
               else {
                 new_password = hash;
-                var query = {"_id": req.user._id};
-                var updateData = {"password": new_password};
+                let query = {"_id": req.user._id};
+                let updateData = {"password": new_password};
                 userService.findOneAndUpdate(query, updateData, {new: true}, (error, result) => {
                   if (error) {
                     next(error);
                   }
                   else {
-                    var token = auth.issueTokenWithUid(user);
+                    let token = auth.issueTokenWithUid(user);
                     res.send({
                       "status": "Success",
                       "data": {"message": Messages.MSG_SUCCESS_PASSWORD_CHANGE},
@@ -829,13 +828,13 @@ export function changePassword(req: express.Request, res: express.Response, next
 export function changeMobileNumber(req: express.Request, res: express.Response, next: any) {
 
   try {
-    var user = req.user;
+    let user = req.user;
 
-    var params = req.body;
-    var auth: AuthInterceptor = new AuthInterceptor();
-    var userService = new UserService();
+    let params = req.body;
+    let auth: AuthInterceptor = new AuthInterceptor();
+    let userService = new UserService();
 
-    var query = {"mobile_number": params.new_mobile_number, "isActivated": true};
+    let query = {"mobile_number": params.new_mobile_number, "isActivated": true};
 
     userService.retrieve(query, (error, result) => {
       if (error) {
@@ -851,7 +850,7 @@ export function changeMobileNumber(req: express.Request, res: express.Response, 
 
       }
       else {
-        var Data = {
+        let Data = {
           current_mobile_number: user.mobile_number,
           _id: user._id,
           new_mobile_number: params.new_mobile_number
@@ -889,14 +888,14 @@ export function changeMobileNumber(req: express.Request, res: express.Response, 
 export function changeEmailId(req: express.Request, res: express.Response, next: any) {
 
   try {
-    var user = req.user;
-    var params = req.query;
+    let user = req.user;
+    let params = req.query;
     delete params.access_token;
-    var auth: AuthInterceptor = new AuthInterceptor();
-    var userService = new UserService();
+    let auth: AuthInterceptor = new AuthInterceptor();
+    let userService = new UserService();
 
 
-    var query = {"email": req.body.new_email};
+    let query = {"email": req.body.new_email};
 
     userService.retrieve(query, (error, result) => {
 
@@ -924,7 +923,7 @@ export function changeEmailId(req: express.Request, res: express.Response, next:
 
       else {
 
-        var emailId = {
+        let emailId = {
           current_email: req.body.current_email,
           new_email: req.body.new_email
         };
@@ -978,10 +977,10 @@ export function verifyMobileNumber(req: express.Request, res: express.Response, 
 
     let user = req.user;
 
-    var params = req.body; //otp
-    var userService = new UserService();
-    var query = {"_id": user._id};
-    var updateData = {"mobile_number": user.temp_mobile, "temp_mobile": user.mobile_number};
+    let params = req.body; //otp
+    let userService = new UserService();
+    let query = {"_id": user._id};
+    let updateData = {"mobile_number": user.temp_mobile, "temp_mobile": user.mobile_number};
     if (user.otp === params.otp) {
       userService.findOneAndUpdate(query, updateData, {new: true}, (error, result) => {
         if (error) {
@@ -1020,13 +1019,13 @@ export function verifyOtp(req: express.Request, res: express.Response, next: any
 
     let user = req.user;
 
-    var params = req.body; //OTP
+    let params = req.body; //OTP
     //  delete params.access_token;
-    var userService = new UserService();
+    let userService = new UserService();
     let mailChimpMailerService = new MailChimpMailerService();
 
-    var query = {"_id": user._id, "isActivated": false};
-    var updateData = {"isActivated": true};
+    let query = {"_id": user._id, "isActivated": false};
+    let updateData = {"isActivated": true};
     if (user.otp === params.otp) {
       userService.findOneAndUpdate(query, updateData, {new: true}, (error, result) => {
         if (error) {
@@ -1067,12 +1066,12 @@ export function verifyAccount(req: express.Request, res: express.Response, next:
   try {
 
     let user = req.user;
-    var params = req.query;
+    let params = req.query;
     delete params.access_token;
-    var userService = new UserService();
+    let userService = new UserService();
 
-    var query = {"_id": user._id, "isActivated": false};
-    var updateData = {"isActivated": true};
+    let query = {"_id": user._id, "isActivated": false};
+    let updateData = {"isActivated": true};
     userService.findOneAndUpdate(query, updateData, {new: true}, (error, result) => {
       if (error) {
         next(error);
@@ -1099,13 +1098,13 @@ export function verifyAccount(req: express.Request, res: express.Response, next:
 
 export function verifyChangedEmailId(req: express.Request, res: express.Response, next: any) {
   try {
-    var user = req.user;
-    var params = req.query;
+    let user = req.user;
+    let params = req.query;
     delete params.access_token;
-    var userService = new UserService();
+    let userService = new UserService();
 
-    var query = {"_id": user._id};
-    var updateData = {"email": user.temp_email, "temp_email": user.email};
+    let query = {"_id": user._id};
+    let updateData = {"email": user.temp_email, "temp_email": user.email};
     userService.findOneAndUpdate(query, updateData, {new: true}, (error, result) => {
       if (error) {
         next(error);
@@ -1132,7 +1131,7 @@ export function verifyChangedEmailId(req: express.Request, res: express.Response
 
 export function getIndustry(req: express.Request, res: express.Response, next: any) {
   __dirname = './';
-  var filepath = "industry.json";
+  let filepath = "industry.json";
   try {
     res.sendFile(filepath, {root: __dirname});
   }
@@ -1148,7 +1147,7 @@ export function getIndustry(req: express.Request, res: express.Response, next: a
 
 export function getCompanySize(req: express.Request, res: express.Response, next: any) {
   __dirname = './';
-  var filepath = "company-size.json";
+  let filepath = "company-size.json";
   try {
     res.sendFile(filepath, {root: __dirname});
   }
@@ -1164,7 +1163,7 @@ export function getCompanySize(req: express.Request, res: express.Response, next
 
 export function getAddress(req: express.Request, res: express.Response, next: any) {
   __dirname = './';
-  var filepath = "address.json";
+  let filepath = "address.json";
   try {
     res.sendFile(filepath, {root: __dirname});
   }
@@ -1180,7 +1179,7 @@ export function getAddress(req: express.Request, res: express.Response, next: an
 export function getRealocation(req: express.Request, res: express.Response, next: any) {
 
   __dirname = './';
-  var filepath = "realocation.json";
+  let filepath = "realocation.json";
   try {
     res.sendFile(filepath, {root: __dirname});
   }
@@ -1195,7 +1194,7 @@ export function getRealocation(req: express.Request, res: express.Response, next
 }
 export function getEducation(req: express.Request, res: express.Response, next: any) {
   __dirname = './';
-  var filepath = "education.json";
+  let filepath = "education.json";
   try {
     res.sendFile(filepath, {root: __dirname});
   }
@@ -1212,7 +1211,7 @@ export function getEducation(req: express.Request, res: express.Response, next: 
 
 export function getCloseJobReasons(req: express.Request, res: express.Response, next: any) {
   __dirname = './';
-  var filepath = "closeJob.json";
+  let filepath = "closeJob.json";
   try {
     res.sendFile(filepath, {root: __dirname});
   }
@@ -1229,7 +1228,7 @@ export function getCloseJobReasons(req: express.Request, res: express.Response, 
 
 export function getExperience(req: express.Request, res: express.Response, next: any) {
   __dirname = './';
-  var filepath = "experienceList.json";
+  let filepath = "experienceList.json";
   try {
     res.sendFile(filepath, {root: __dirname});
   }
@@ -1244,7 +1243,7 @@ export function getExperience(req: express.Request, res: express.Response, next:
 }
 export function getCurrentSalary(req: express.Request, res: express.Response, next: any) {
   __dirname = './';
-  var filepath = "currentsalaryList.json";
+  let filepath = "currentsalaryList.json";
   try {
     res.sendFile(filepath, {root: __dirname});
   }
@@ -1260,7 +1259,7 @@ export function getCurrentSalary(req: express.Request, res: express.Response, ne
 
 export function getNoticePeriod(req: express.Request, res: express.Response, next: any) {
   __dirname = './';
-  var filepath = "noticeperiodList.json";
+  let filepath = "noticeperiodList.json";
   try {
     res.sendFile(filepath, {root: __dirname});
   }
@@ -1276,7 +1275,7 @@ export function getNoticePeriod(req: express.Request, res: express.Response, nex
 
 export function getIndustryExposure(req: express.Request, res: express.Response, next: any) {
   __dirname = './';
-  var filepath = "industryexposureList.json";
+  let filepath = "industryexposureList.json";
   try {
     res.sendFile(filepath, {root: __dirname});
   }
@@ -1292,7 +1291,7 @@ export function getIndustryExposure(req: express.Request, res: express.Response,
 
 export function getSearchedCandidate(req: express.Request, res: express.Response, next: any) {
   __dirname = './';
-  var filepath = "candidate.json";
+  let filepath = "candidate.json";
   try {
     res.sendFile(filepath, {root: __dirname});
   }
@@ -1310,7 +1309,7 @@ export function getSearchedCandidate(req: express.Request, res: express.Response
 
 export function getCountries(req: express.Request, res: express.Response, next: any) {
   __dirname = './';
-  var filepath = "country.json";
+  let filepath = "country.json";
   try {
     res.sendFile(filepath, {root: __dirname});
   }
@@ -1325,7 +1324,7 @@ export function getCountries(req: express.Request, res: express.Response, next: 
 }
 export function getIndiaStates(req: express.Request, res: express.Response, next: any) {
   __dirname = './';
-  var filepath = "indiaStates.json";
+  let filepath = "indiaStates.json";
   try {
     res.sendFile(filepath, {root: __dirname});
   }
@@ -1342,7 +1341,7 @@ export function getIndiaStates(req: express.Request, res: express.Response, next
 
 export function getFunction(req: express.Request, res: express.Response, next: any) {
   __dirname = './';
-  var filepath = "function.json";
+  let filepath = "function.json";
   try {
     res.sendFile(filepath, {root: __dirname});
   }
@@ -1357,7 +1356,7 @@ export function getFunction(req: express.Request, res: express.Response, next: a
 }
 export function getRole(req: express.Request, res: express.Response, next: any) {
   __dirname = './';
-  var filepath = "roles.json";
+  let filepath = "roles.json";
   try {
     res.sendFile(filepath, {root: __dirname});
   }
@@ -1372,7 +1371,7 @@ export function getRole(req: express.Request, res: express.Response, next: any) 
 }
 export function getProficiency(req: express.Request, res: express.Response, next: any) {
   __dirname = './';
-  var filepath = "proficiency.json";
+  let filepath = "proficiency.json";
   try {
     res.sendFile(filepath, {root: __dirname});
   }
@@ -1388,7 +1387,7 @@ export function getProficiency(req: express.Request, res: express.Response, next
 
 export function getDomain(req: express.Request, res: express.Response, next: any) {
   __dirname = './';
-  var filepath = "domain.json";
+  let filepath = "domain.json";
   try {
     res.sendFile(filepath, {root: __dirname});
   }
@@ -1405,7 +1404,7 @@ export function getDomain(req: express.Request, res: express.Response, next: any
 
 export function getCapability(req: express.Request, res: express.Response, next: any) {
   __dirname = './';
-  var filepath = "capability.json";
+  let filepath = "capability.json";
   try {
     res.sendFile(filepath, {root: __dirname});
   }
@@ -1421,7 +1420,7 @@ export function getCapability(req: express.Request, res: express.Response, next:
 
 export function getComplexity(req: express.Request, res: express.Response, next: any) {
   __dirname = './';
-  var filepath = "complexity.json";
+  let filepath = "complexity.json";
   try {
     res.sendFile(filepath, {root: __dirname});
   }
@@ -1437,15 +1436,15 @@ export function getComplexity(req: express.Request, res: express.Response, next:
 
 export function fblogin(req: express.Request, res: express.Response, next: any) {
   try {
-    var userService = new UserService();
-    var params = req.user;
-    var auth = new AuthInterceptor();
+    let userService = new UserService();
+    let params = req.user;
+    let auth = new AuthInterceptor();
     userService.retrieve(params, (error, result) => {
       if (error) {
         next(error);
       }
       else if (result.length > 0) {
-        var token = auth.issueTokenWithUid(result[0]);
+        let token = auth.issueTokenWithUid(result[0]);
         res.status(200).send({
           "status": Messages.STATUS_SUCCESS,
           "isSocialLogin": true,
@@ -1483,15 +1482,15 @@ export function fblogin(req: express.Request, res: express.Response, next: any) 
 }
 export function googlelogin(req: express.Request, res: express.Response, next: any) {
   try {
-    var userService = new UserService();
-    var params = req.user;
-    var auth = new AuthInterceptor();
+    let userService = new UserService();
+    let params = req.user;
+    let auth = new AuthInterceptor();
     userService.retrieve(params, (error, result) => {
       if (error) {
         next(error);
       }
       else if (result.length > 0) {
-        var token = auth.issueTokenWithUid(result[0]);
+        let token = auth.issueTokenWithUid(result[0]);
         res.status(200).send({
           "status": Messages.STATUS_SUCCESS,
           "isSocialLogin": true,
@@ -1528,9 +1527,9 @@ export function googlelogin(req: express.Request, res: express.Response, next: a
   }
 }
 /*export function getGoogleToken(req : express.Request, res: express.Response, next: any) {
- var token = JSON.stringify(req.body.token);
+ let token = JSON.stringify(req.body.token);
 
- var url = 'https://www.googleapis.com/oauth2/v3/tokeninfo?id_token='+token;
+ let url = 'https://www.googleapis.com/oauth2/v3/tokeninfo?id_token='+token;
  console.log('url : '+token);
  request(url, function( error:any , response:any , body:any ) {
  if(error){
@@ -1547,7 +1546,7 @@ export function googlelogin(req: express.Request, res: express.Response, next: a
 
 export function updatePicture(req: express.Request, res: express.Response, next: any): void {
   __dirname = 'server/prod/app/framework/public/profileimage';
-  var form = new multiparty.Form({uploadDir: __dirname});
+  let form = new multiparty.Form({uploadDir: __dirname});
   form.parse(req, (err: Error, fields: any, files: any) => {
     if (err) {
       next({
@@ -1557,21 +1556,21 @@ export function updatePicture(req: express.Request, res: express.Response, next:
         code: 403
       });
     } else {
-      var path = JSON.stringify(files.file[0].path);
-      var image_path = files.file[0].path;
-      var originalFilename = JSON.stringify(image_path.substr(files.file[0].path.lastIndexOf('/') + 1));
-      var userService = new UserService();
+      let path = JSON.stringify(files.file[0].path);
+      let image_path = files.file[0].path;
+      let originalFilename = JSON.stringify(image_path.substr(files.file[0].path.lastIndexOf('/') + 1));
+      let userService = new UserService();
 
       userService.UploadImage(path, originalFilename, function (err: any, tempath: any) {
         if (err) {
           next(err);
         }
         else {
-          var mypath = tempath;
+          let mypath = tempath;
 
           try {
-            var user = req.user;
-            var query = {"_id": user._id};
+            let user = req.user;
+            let query = {"_id": user._id};
 
             userService.findById(user._id, (error, result) => {
               if (error) {
@@ -1591,8 +1590,8 @@ export function updatePicture(req: express.Request, res: express.Response, next:
                           next(error);
                         }
                         else {
-                          var auth: AuthInterceptor = new AuthInterceptor();
-                          var token = auth.issueTokenWithUid(result);
+                          let auth: AuthInterceptor = new AuthInterceptor();
+                          let token = auth.issueTokenWithUid(result);
                           res.status(200).send({access_token: token, data: response});
                         }
                       });
@@ -1606,8 +1605,8 @@ export function updatePicture(req: express.Request, res: express.Response, next:
                       next(error);
                     }
                     else {
-                      var auth: AuthInterceptor = new AuthInterceptor();
-                      var token = auth.issueTokenWithUid(result);
+                      let auth: AuthInterceptor = new AuthInterceptor();
+                      let token = auth.issueTokenWithUid(result);
                       res.status(200).send({access_token: token, data: response});
                     }
                   });
@@ -1635,16 +1634,16 @@ export function updatePicture(req: express.Request, res: express.Response, next:
 
 export function updateCompanyDetails(req: express.Request, res: express.Response, next: any): void {
 
-  var userService = new UserService();
-  var user = req.user;
-  var query = {"_id": user._id};
+  let userService = new UserService();
+  let user = req.user;
+  let query = {"_id": user._id};
   /*userService.findOneAndUpdate(query, {picture: mypath}, {new: true}, (error, result) => {
    if (error) {
    res.status(403).send({message: error});
    }
    else{
-   var auth:AuthInterceptor = new AuthInterceptor();
-   var token = auth.issueTokenWithUid(result);
+   let auth:AuthInterceptor = new AuthInterceptor();
+   let token = auth.issueTokenWithUid(result);
    res.status(200).send({access_token: token, data: result});
    }
    });*/
@@ -1653,7 +1652,7 @@ export function updateCompanyDetails(req: express.Request, res: express.Response
 export function uploaddocuments(req: express.Request, res: express.Response, next: any): void {
   __dirname = 'src/server/app/framework/public/uploaded-document';
 
-  var form = new multiparty.Form({uploadDir: __dirname});
+  let form = new multiparty.Form({uploadDir: __dirname});
   form.parse(req, (err: Error, fields: any, files: any) => {
     if (err) {
       next({
@@ -1663,9 +1662,9 @@ export function uploaddocuments(req: express.Request, res: express.Response, nex
         code: 403
       });
     } else {
-      var path = JSON.stringify(files.file[0].path);
-      var document_path = files.file[0].path;
-      var originalFilename = JSON.stringify(document_path.substr(files.file[0].path.lastIndexOf('/') + 1));
+      let path = JSON.stringify(files.file[0].path);
+      let document_path = files.file[0].path;
+      let originalFilename = JSON.stringify(document_path.substr(files.file[0].path.lastIndexOf('/') + 1));
 
       res.status(200).send({
         "status": Messages.STATUS_SUCCESS,
@@ -1674,24 +1673,24 @@ export function uploaddocuments(req: express.Request, res: express.Response, nex
         }
       });
 
-      /*   var userService = new UserService();
+      /*   let userService = new UserService();
        userService.UploadDocuments(path, originalFilename, function (err:any, tempath:any) {
        if (err) {
        console.log("Err message of uploaddocument is:",err);
        next(err);
        }
        else {
-       var mypath = tempath;
+       let mypath = tempath;
        try {
-       var user = req.user;
-       var query = {"_id": user._id};
+       let user = req.user;
+       let query = {"_id": user._id};
        userService.findOneAndUpdate(query, {document1: mypath}, {new: true}, (error, result) => {
        if (error) {
        res.status(403).send({message: error});
        }
        else{
-       var auth:AuthInterceptor = new AuthInterceptor();
-       var token = auth.issueTokenWithUid(result);
+       let auth:AuthInterceptor = new AuthInterceptor();
+       let token = auth.issueTokenWithUid(result);
        res.status(200).send({access_token: token, data: result});
        }
        });
@@ -1730,7 +1729,7 @@ export function profilecreate(req: express.Request, res: express.Response, next:
 export function professionaldata(req: express.Request, res: express.Response, next: any) {
   try {
 
-    var newUser = req.body;
+    let newUser = req.body;
 
   } catch (e) {
     next({
@@ -1746,7 +1745,7 @@ export function professionaldata(req: express.Request, res: express.Response, ne
 export function employmentdata(req: express.Request, res: express.Response, next: any) {
   try {
 
-    var newUser = req.body;
+    let newUser = req.body;
 
   } catch (e) {
     next({
@@ -1762,19 +1761,19 @@ export function employmentdata(req: express.Request, res: express.Response, next
 
 export function changeTheme(req: express.Request, res: express.Response, next: any): void {
   try {
-    var user = req.user;
-    var params = req.query;
+    let user = req.user;
+    let params = req.query;
     delete params.access_token;
-    var auth: AuthInterceptor = new AuthInterceptor();
-    var userService = new UserService();
-    var query = {"_id": req.user.id};
-    var updateData = {"current_theme": req.body.current_theme};
+    let auth: AuthInterceptor = new AuthInterceptor();
+    let userService = new UserService();
+    let query = {"_id": req.user.id};
+    let updateData = {"current_theme": req.body.current_theme};
     userService.findOneAndUpdate(query, updateData, {new: true}, (error, result) => {
       if (error) {
         next(error);
       }
       else {
-        var token = auth.issueTokenWithUid(user);
+        let token = auth.issueTokenWithUid(user);
 
         res.send({
           access_token: token, data: result
@@ -1795,7 +1794,7 @@ export function changeTheme(req: express.Request, res: express.Response, next: a
 
 export function getUserFeedback(req: express.Request, res: express.Response, next: any) {
   __dirname = './';
-  var filepath = "feedbackForCandidate.json";
+  let filepath = "feedbackForCandidate.json";
   try {
     res.sendFile(filepath, {root: __dirname});
   }

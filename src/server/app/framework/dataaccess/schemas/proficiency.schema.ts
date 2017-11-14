@@ -1,12 +1,12 @@
 import DataAccess = require("../dataaccess");
 import IProficiency = require("../mongoose/proficiency");
 
-var mongoose = DataAccess.mongooseInstance;
-var mongooseConnection = DataAccess.mongooseConnection;
+let mongoose = DataAccess.mongooseInstance;
+let mongooseConnection = DataAccess.mongooseConnection;
 
 class ProficiencySchema {
   static get schema() {
-    var schema = mongoose.Schema({
+    let schema = mongoose.Schema({
       /*name :{
        type: String
        },*/
@@ -18,5 +18,5 @@ class ProficiencySchema {
     return schema;
   }
 }
-var schema = mongooseConnection.model<IProficiency>("Proficiency", ProficiencySchema.schema);
+let schema = mongooseConnection.model<IProficiency>("Proficiency", ProficiencySchema.schema);
 export = schema;

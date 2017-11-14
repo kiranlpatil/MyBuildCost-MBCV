@@ -2,12 +2,12 @@ import DataAccess = require("../dataaccess");
 import IAcademic = require("../mongoose/academics");
 import ICompany = require("../mongoose/company");
 
-var mongoose = DataAccess.mongooseInstance;
-var mongooseConnection = DataAccess.mongooseConnection;
+let mongoose = DataAccess.mongooseInstance;
+let mongooseConnection = DataAccess.mongooseConnection;
 
 class CompanySchema {
   static get schema() {
-    var schema = mongoose.Schema({
+    let schema = mongoose.Schema({
       schoolName: {
         type: String
       },
@@ -26,5 +26,5 @@ class CompanySchema {
     return schema;
   }
 }
-var schema = mongooseConnection.model<ICompany>("Location", CompanySchema.schema);
+let schema = mongooseConnection.model<ICompany>("Location", CompanySchema.schema);
 export = schema;

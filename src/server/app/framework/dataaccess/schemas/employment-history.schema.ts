@@ -2,12 +2,12 @@ import DataAccess = require("../dataaccess");
 import ILocation = require("../mongoose/location");
 import IProfessionalDetails = require("../mongoose/professional-details");
 
-var mongoose = DataAccess.mongooseInstance;
-var mongooseConnection = DataAccess.mongooseConnection;
+let mongoose = DataAccess.mongooseInstance;
+let mongooseConnection = DataAccess.mongooseConnection;
 
 class EmploymentHistorySchema {
   static get schema() {
-    var schema = mongoose.Schema({
+    let schema = mongoose.Schema({
 
       companyName: {
         type: String
@@ -30,5 +30,5 @@ class EmploymentHistorySchema {
     return schema;
   }
 }
-var schema = mongooseConnection.model<IProfessionalDetails>("EmploymentHistory", EmploymentHistorySchema.schema);
+let schema = mongooseConnection.model<IProfessionalDetails>("EmploymentHistory", EmploymentHistorySchema.schema);
 export = schema;

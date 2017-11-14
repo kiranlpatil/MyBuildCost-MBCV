@@ -2,12 +2,12 @@ import DataAccess = require("../dataaccess");
 import ICapability = require("../mongoose/capability");
 import IComplexity = require("../mongoose/complexity");
 
-var mongoose = DataAccess.mongooseInstance;
-var mongooseConnection = DataAccess.mongooseConnection;
+let mongoose = DataAccess.mongooseInstance;
+let mongooseConnection = DataAccess.mongooseConnection;
 
 class CapabilitySchema {
   static get schema() {
-    var schema = mongoose.Schema({
+    let schema = mongoose.Schema({
       name: {
         type: String
       },
@@ -20,5 +20,5 @@ class CapabilitySchema {
     return schema;
   }
 }
-var schema = mongooseConnection.model<ICapability>("Capability", CapabilitySchema.schema);
+let schema = mongooseConnection.model<ICapability>("Capability", CapabilitySchema.schema);
 export = schema;

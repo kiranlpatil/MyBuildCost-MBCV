@@ -1,20 +1,20 @@
-var Messages = require("./messages");
+let Messages = require("./messages");
 
 class ResponseService {
 
   static errorMessage(reason: string, message: string, code: number) {
-    var otherObject = {
+    let otherObject = {
       reason: reason,
       message: message,
       code: code
 
     };
-    var sendData = otherObject;
+    let sendData = otherObject;
     return sendData;
   }
 
   static errorMessageWithToken(reason: string, message: string, code: number, token: any) {
-    var otherObject = {
+    let otherObject = {
       "status": Messages.STATUS_ERROR,
       "error": {
         "reason": reason,
@@ -23,7 +23,7 @@ class ResponseService {
       },
       access_token: token
     };
-    var sendData = JSON.stringify(otherObject);
+    let sendData = JSON.stringify(otherObject);
     return sendData;
   }
 }

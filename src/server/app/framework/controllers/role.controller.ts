@@ -9,9 +9,9 @@ import IndustryService = require("../services/industry.service");
 
 export function retrieve(req: express.Request, res: express.Response, next: any) {
   try {
-    var roleService = new RoleService();
-    var industryService = new IndustryService();
-    var params = req.params.id;
+    let roleService = new RoleService();
+    let industryService = new IndustryService();
+    let params = req.params.id;
     console.time('GetRole');
     roleService.findByName(params, (error, result) => {
       if (error) {

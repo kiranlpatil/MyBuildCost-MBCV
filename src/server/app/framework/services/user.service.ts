@@ -3,7 +3,7 @@ import SendMailService = require('./sendmail.service');
 import SendMessageService = require('./sendmessage.service');
 import * as fs from "fs";
 import * as mongoose from "mongoose";
-var config = require('config');
+let config = require('config');
 let path = require('path');
 import Messages = require('../shared/messages');
 import AuthInterceptor = require('../../framework/interceptor/auth.interceptor');
@@ -62,7 +62,7 @@ class UserService {
 
         let query = {'_id': field._id};
         let otp = Math.floor((Math.random() * 99999) + 100000);
-        // var otp = Math.floor(Math.random() * (10000 - 1000) + 1000);
+        // let otp = Math.floor(Math.random() * (10000 - 1000) + 1000);
         let updateData = {'mobile_number': field.new_mobile_number, 'otp': otp};
         this.userRepository.findOneAndUpdate(query, updateData, {new: true}, (error, result) => {
           if (error) {
@@ -85,7 +85,7 @@ class UserService {
   changeMobileNumber(field: any, callback: (error: any, result: any) => void) {
 
     let query = {'_id': field._id};
-    // var otp = Math.floor(Math.random() * (10000 - 1000) + 1000);
+    // let otp = Math.floor(Math.random() * (10000 - 1000) + 1000);
     let otp = Math.floor((Math.random() * 99999) + 100000);
     let updateData = {'otp': otp, 'temp_mobile': field.new_mobile_number};
 
@@ -127,6 +127,8 @@ class UserService {
             html: header1 + this.mid_content + footer1
             , attachments: MailAttachments.AttachmentArray
           };
+          console.log(mailOptions);
+          console.log(JSON.stringify(mailOptions));
           let sendMailService = new SendMailService();
           sendMailService.sendMail(mailOptions, callback);
 
@@ -146,16 +148,16 @@ class UserService {
                 html: header1 + this.mid_content + footer1
                 , attachments: MailAttachments.AttachmentArray
               };
+              console.log(mailOptions);
+              console.log(JSON.stringify(mailOptions));
               let sendMailService = new SendMailService();
               sendMailService.sendMail(mailOptions, callback);
-
             }
           });
         }
       } else if (res.length > 0 && res[0].isActivated === false) {
         callback(new Error(Messages.MSG_ERROR_ACCOUNT_STATUS), res);
       } else {
-
         callback(new Error(Messages.MSG_ERROR_USER_NOT_FOUND), res);
       }
     });

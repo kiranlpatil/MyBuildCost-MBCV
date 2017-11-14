@@ -9,8 +9,8 @@ import AuthInterceptor = require("../interceptor/auth.interceptor");
 export function create(req: express.Request, res: express.Response, next: any) {
   try{
     if (req.user.isAdmin) {
-      var proficiencyModel: ProficiencyModel = <ProficiencyModel>req.body;
-      var proficiencyService = new ProficiencyService();
+      let proficiencyModel: ProficiencyModel = <ProficiencyModel>req.body;
+      let proficiencyService = new ProficiencyService();
       proficiencyService.create(proficiencyModel, (error, result) => {
         if (error) {
           next(error);
@@ -41,8 +41,8 @@ export function create(req: express.Request, res: express.Response, next: any) {
 
 export function retrieve(req: express.Request, res: express.Response, next: any) {
   try {
-    var proficiencyService = new ProficiencyService();
-    var params = req.params.id;
+    let proficiencyService = new ProficiencyService();
+    let params = req.params.id;
     proficiencyService.retrieve(params, (error, result) => {
       if (error) {
         next({
@@ -74,8 +74,8 @@ export function update(req: express.Request, res: express.Response, next: any) {
 
 
   try {
-    var proficiencyService = new ProficiencyService();
-    var params = req.params.id;
+    let proficiencyService = new ProficiencyService();
+    let params = req.params.id;
     proficiencyService.pushIntoArray(req.query.proficiency, (error, result) => {
       if (error) {
         next({

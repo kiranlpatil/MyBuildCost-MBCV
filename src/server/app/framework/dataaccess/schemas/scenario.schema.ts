@@ -1,12 +1,12 @@
 import DataAccess = require("../dataaccess");
 import IScenario = require("../mongoose/scenario");
 
-var mongoose = DataAccess.mongooseInstance;
-var mongooseConnection = DataAccess.mongooseConnection;
+let mongoose = DataAccess.mongooseInstance;
+let mongooseConnection = DataAccess.mongooseConnection;
 
 class ScenarioSchema {
   static get schema() {
-    var schema = mongoose.Schema({
+    let schema = mongoose.Schema({
       name: {
         type: String
       }
@@ -16,5 +16,5 @@ class ScenarioSchema {
     return schema;
   }
 }
-var schema = mongooseConnection.model<IScenario>("Scenario", ScenarioSchema.schema);
+let schema = mongooseConnection.model<IScenario>("Scenario", ScenarioSchema.schema);
 export = schema;

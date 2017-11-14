@@ -38,7 +38,7 @@
         </div>
       </div>
     </div>
-    <div class="col-sm-12 proficiency-compare-section-area">
+    <div class="col-sm-12 proficiency-compare-section-area" *ngIf="postedJob.competencies && postedJob.competencies !== ''" >
       <div class="pull-left col-xs-3 no-padding text-left">
         <h4>Competencies and Responsibilities</h4>
       </div>

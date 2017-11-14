@@ -1,4 +1,4 @@
-var config = require('config');
+let config = require('config');
 import CNextMessages = require("../shared/cnext-messages");
 import ProjectAsset = require("../shared/projectasset");
 import EmployeeHistoryRepository = require("../dataaccess/repository/employee-history.repository");

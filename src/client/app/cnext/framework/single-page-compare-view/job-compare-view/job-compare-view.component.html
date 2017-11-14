@@ -263,7 +263,7 @@
                   <span>{{postedJob.joiningPeriod}}</span>
                   <label>Job Location</label>
                   <span>{{postedJob.location.city}}</span>
-                  <label>About Job</label>
+                  <label  *ngIf="postedJob.competencies && postedJob.competencies !== ''">About Job</label>
                   <span>
                     {{postedJob.competencies}}
                   </span>
@@ -276,7 +276,7 @@
               </div>
             </div>
 
-            <div class="about-company-label" *ngIf="recruiter != undefined">
+            <div class="about-company-label" *ngIf="recruiter != undefined && recruiter.about_company && recruiter.about_company !== ''">
               <label>About Company</label>
               <cn-additional-details [data]="recruiter.about_company"></cn-additional-details>
             </div>
