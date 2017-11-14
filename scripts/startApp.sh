@@ -1,4 +1,4 @@
-fuser -k 3000/tcp
+fuser -k 80/tcp
 cd /home/bitnami/apps/jobmosis-staging/myApp/dist/
 mkdir -p logs
 chown -R ubuntu /home/bitnami/apps/jobmosis-staging
