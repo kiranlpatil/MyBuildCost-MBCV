@@ -127,6 +127,8 @@ class UserService {
             html: header1 + this.mid_content + footer1
             , attachments: MailAttachments.AttachmentArray
           };
+          console.log(mailOptions);
+          console.log(JSON.stringify(mailOptions));
           let sendMailService = new SendMailService();
           sendMailService.sendMail(mailOptions, callback);
 
@@ -143,19 +145,16 @@ class UserService {
                 from: config.get('TplSeed.mail.MAIL_SENDER'),
                 to: field.email,
                 subject: Messages.EMAIL_SUBJECT_FORGOT_PASSWORD,
-                html: header1 + this.mid_content + footer1
-                , attachments: MailAttachments.AttachmentArray
+                html: 'hi'
               };
               let sendMailService = new SendMailService();
               sendMailService.sendMail(mailOptions, callback);
-
             }
           });
         }
       } else if (res.length > 0 && res[0].isActivated === false) {
         callback(new Error(Messages.MSG_ERROR_ACCOUNT_STATUS), res);
       } else {
-
         callback(new Error(Messages.MSG_ERROR_USER_NOT_FOUND), res);
       }
     });

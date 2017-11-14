@@ -626,7 +626,7 @@ export function updateProfileField(req: express.Request, res: express.Response, 
     let _id: string = user._id;
     let fName: string = req.params.fname;
     if (fName == 'guide_tour') {
-      let data = {'guide_tour': req.body};
+      var data = {'guide_tour': req.body};
     }
     let auth: AuthInterceptor = new AuthInterceptor();
     let userService = new UserService();
