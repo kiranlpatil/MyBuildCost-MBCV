@@ -41,6 +41,8 @@ export enum UsageActions  {
 
 
 export class Messages {
+  public static FROM_REGISTRATION = 'registration';
+  public static FROM_ACCOUNT_DETAIL = 'accountdetail';
   public static MSG_ON_FILE_CREATION_FAILED: string = 'Failed to create image of this page';
   public static MSG_MSG_CLONED_SUCCESSFULLY = 'New Job is been added successfully';
   public static MSG_PRESENTLY_WORKING = 'Presently Working';
@@ -52,7 +54,7 @@ export class Messages {
   public static MSG_ABOUT_SCREEN_PRINT_IF_NOT_IN_CART = 'Add this candidate to cart to enable profile download.';
   public static MSG_SUCCESS_LOGIN: string = 'You are successfully signed in.';
   public static MSG_SUCCESS_REGISTRATION: string = 'Kindly verify your account.';
-  public static MSG_SUCCESS_CHANGE_MOBILE_NUMBER: string = 'Mobile number updated successfully.Kindly sign in';
+  public static MSG_SUCCESS_CHANGE_MOBILE_NUMBER: string = 'Mobile number updated successfully.';
   public static MSG_SUCCESS_RESEND_VERIFICATION_CODE: string = 'New OTP (One Time Password) has been sent to your registered mobile number';
   public static MSG_SUCCESS_RESEND_VERIFICATION_CODE_RESEND_OTP: string = 'New OTP (One Time Password) has been sent to your new mobile number';
   //public static MSG_SUCCESS_MAIL_VERIFICATION: string = 'Verification e-mail sent successfully to your e-mail account. Kindly proceed by clicking on the link pProvided in your e-mail';
@@ -221,7 +223,9 @@ export class Messages {
   public static MSG_MOBILE_NUMBER_Change_SUCCESS = 'Mobile number changed successfully.You can Sign In again by clicking on "yes" button, please click on "No"' +
     'button to continue the session.';
   public static MSG_MOBILE_VERIFICATION_TITLE = 'Verify Your Mobile Number';
+  public static MSG_MOBILE_NUMBER_CHANGE_VERIFICATION_TITLE = 'Verify Your  New Mobile Number';
   public static MSG_MOBILE_VERIFICATION_MESSAGE = 'Please enter the verification code sent to your mobile number.';
+  public static MSG_MOBILE_NUMBER_CHANGE_VERIFICATION_MESSAGE= 'Please enter the verification code sent to your new mobile number.';
   public static MSG_MOBILE_VERIFICATION_SUCCUSS_HEADING = 'Congratulations!';
   public static MSG_MOBILE_VERIFICATION_SUCCUSS_TEXT = 'Registration successful. Kindly Sign In';
   public static CONTACT_US_ADDRESS = 'Blog. No. 14, 1st Floor, Electronic Estate, Parvati, Pune-Satara Road, Pune 411009, MH, INDIA.';
@@ -693,7 +697,7 @@ export class Label {
   public static LAST_NAME_LABEL: string = 'Last Name';
   public static EMAIL_FIELD_LABEL: string = 'Email';
   public static COMPANY_WEBSITE_FIELD_LABEL: string = 'Website';
-  public static CONTACT_FIELD_LABEL: string = 'Contact';
+  public static CONTACT_FIELD_LABEL: string = 'Mobile Number';
   public static SAVE_PROFILE_LABEL: string = 'Save Profile';
   public static RESET_PASSWORD_MESSAGE: string = 'Please set new password for your';
   public static JOB_TITLE: string = 'New Job Title';

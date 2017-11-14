@@ -150,7 +150,7 @@
   </div>
 </div>
 
-<div class="modal modal-mobile" [style.display]="getStyleMobile()">
+<div class="modal modal-mobile user-profile-model" [style.display]="getStyleMobile()">
   <div class="modal-bg">
     <div class="modal-dialog modal-md">
       <div class="modal-content">
@@ -163,7 +163,7 @@
         <div class="modal-body">
           <p>{{getMessages().MSG_RESET_MOBILE_NUMBER}}</p>
           <div class="col-sm-12">
-            <cn-change-mobile></cn-change-mobile>
+            <cn-change-mobile (onMobileNumberChangeComplete)="onMobileNumberChangeComplete()"></cn-change-mobile>
           </div>
         </div>
       </div>
