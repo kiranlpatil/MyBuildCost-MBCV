@@ -168,6 +168,15 @@
           <button *ngIf="!candidates.isVisible" class="btn btn-cart" type="button" [class.hidden]="(isJobPostExpired || isJobPostClosed) || (isJobPostExpired && isJobPostClosed)"
                   (click)="addForCompareView(item,type)">Compare
           </button>
+            <button *ngIf="!candidates.isVisible" class="btn btn-cart" type="button" [class.hidden]="(isJobPostExpired || isJobPostClosed) || (isJobPostExpired && isJobPostClosed)"
+                    (click)="navigateWithId('/value-portrait', item)" [innerHTML]="getMessage().SHOW_VALUE_PORTRAIT">
+            </button>
+            <button *ngIf="!candidates.isVisible" class="btn btn-cart" type="button" [class.hidden]="(isJobPostExpired || isJobPostClosed) || (isJobPostExpired && isJobPostClosed)"
+                    (click)="navigateToApplicantSearch('/recruiter/search', item)" [innerHTML]="getMessage().MATCH_AGAINST_ALL_JOB">
+            </button>
+            <button *ngIf="!candidates.isVisible" class="btn btn-cart" type="button" [class.hidden]="(isJobPostExpired || isJobPostClosed) || (isJobPostExpired && isJobPostClosed)"
+                    (click)="viewProfile(item)" [innerHTML]="getMessage().MATCH_AGAINST_THIS_JOB">
+            </button>
         </div>
       </div>
       <div class="button-group" *ngIf="type=='rejectedList'">
@@ -178,6 +187,15 @@
           <button class="btn btn-cart" type="button" [class.hidden]="(isJobPostExpired || isJobPostClosed) || (isJobPostExpired && isJobPostClosed)"
                   (click)="addForCompareView(item,type)">Compare
           </button>
+            <button *ngIf="!candidates.isVisible" class="btn btn-cart" type="button" [class.hidden]="(isJobPostExpired || isJobPostClosed) || (isJobPostExpired && isJobPostClosed)"
+                    (click)="navigateWithId('/value-portrait', item)" [innerHTML]="getMessage().SHOW_VALUE_PORTRAIT">
+            </button>
+            <button *ngIf="!candidates.isVisible" class="btn btn-cart" type="button" [class.hidden]="(isJobPostExpired || isJobPostClosed) || (isJobPostExpired && isJobPostClosed)"
+                    (click)="navigateToApplicantSearch('/recruiter/search', item)" [innerHTML]="getMessage().MATCH_AGAINST_ALL_JOB">
+            </button>
+            <button *ngIf="!candidates.isVisible" class="btn btn-cart" type="button" [class.hidden]="(isJobPostExpired || isJobPostClosed) || (isJobPostExpired && isJobPostClosed)"
+                    (click)="viewProfile(item)" [innerHTML]="getMessage().MATCH_AGAINST_THIS_JOB">
+            </button>
         </div>
       </div>
     </div>
