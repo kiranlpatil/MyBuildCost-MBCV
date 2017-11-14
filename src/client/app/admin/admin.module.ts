@@ -10,6 +10,7 @@ import {KeySkillsDetailListComponent} from "./admin-dashboard/keyskills-detail-l
 import {UsageDetailsComponent} from "./admin-dashboard/usage-details/usage-details.component";
 import {FilterBarComponent} from "./admin-dashboard/filter-bar/filter-bar.component";
 import {AdminDashboardService} from "./admin-dashboard/admin-dashboard.service";
+import {AdminAuthGuard} from "./admin-auth-guard.service";
 
 @NgModule({
   imports : [CommonModule, SharedModule, UserModule, AdminModuleRoutes],
@@ -19,7 +20,7 @@ import {AdminDashboardService} from "./admin-dashboard/admin-dashboard.service";
     KeySkillsDetailListComponent,
     UsageDetailsComponent, FilterBarComponent],
   exports : [],
-  providers : [AdminDashboardService]
+  providers : [AdminDashboardService,AdminAuthGuard]
 })
 
 export class AdminModule {

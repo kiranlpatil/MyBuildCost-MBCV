@@ -99,7 +99,6 @@ import {EmployeeHistoryComponent} from "./cnext/framework/employment-history/emp
 import {QCardListFilterPipe} from "./cnext/framework/filters/q-card-list-filter.pipe";
 import {JobDashboardComponent} from "./cnext/framework/recruiter-dashboard/job-dashboard/job-dashboard.component";
 import {JobDashboardService} from "./cnext/framework/recruiter-dashboard/job-dashboard/job-dashboard.service";
-import {ReferenceService} from "./cnext/framework/model/newClass";
 import {AcademicsComponent} from "./cnext/framework/academic-details/academics/academics.component";
 import {CandidateCompareViewComponent} from "./cnext/framework/single-page-compare-view/candidate-compare-view/candidate-compare-view.component";
 import {CapabilityCompareComponent} from "./cnext/framework/single-page-compare-view/shared/capability-compare/capability-compare.component";
@@ -342,7 +341,6 @@ import {PageNotFoundComponent} from "./shared/page-not-found/page-not-found.comp
     RecruiterCandidatesListsService,
     QCardFilterService,
     JobDashboardService,
-    ReferenceService,
     RedirectRecruiterDashboardService,
     ReleventIndustryListService,
     ProfileComparisonService,

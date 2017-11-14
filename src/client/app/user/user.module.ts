@@ -38,6 +38,7 @@ import {RecruiterSharedHeaderComponent} from "./recruiter-shared-header/recruite
 import {SettingsComponent} from "./settings/settings.component";
 import {SettingsService} from "./settings/settings.service";
 import {AdminDashboardHeaderComponent} from "./admin-dashboard-header/admin-dashboard-header.component";
+import {LoginauthGuard} from "./login/login-auth-guard.service";
 
 @NgModule({
   imports: [CommonModule, FormsModule, ReactiveFormsModule, SharedModule, /*TODO Abhijeet Ng2AutoCompleteModule,*/ UserRoutingModule],
@@ -54,7 +55,7 @@ import {AdminDashboardHeaderComponent} from "./admin-dashboard-header/admin-dash
   providers: [LoginService, FacebookService, ForgotPasswordService, ResetPasswordService, CandidateSignUpService,
     CandidateSignUpVerificationService, RegistrationService, UserVerificationService, RecruiterSignUpService,
     CompanyDetailsService, ChangePasswordService, ActiveEmailService, ChangeEmailService, ChangeMobileService,
-    RegistrationService, SettingsService]
+    RegistrationService, SettingsService,LoginauthGuard]
 })
 
 export class UserModule {
