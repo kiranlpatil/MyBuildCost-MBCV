@@ -281,7 +281,7 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
       this.complexityNotes[this.complexityIds[this.currentComplexity]] = complexityDetail.complexityNote.substring(0,2000);
     }
     this.complexityData[this.complexityIds[this.currentComplexity]] = complexityDetail;
-    this.onComplextyAnswered.emit(this.complexities);
+    this.onComplete.emit();
     //this.onNext();
   }
 
