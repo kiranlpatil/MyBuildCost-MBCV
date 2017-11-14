@@ -1,5 +1,5 @@
 import ComplexityClassModel = require('../dataaccess/model/complexity-class.model');
-var config = require('config');
+let config = require('config');
 import CNextMessages = require('../shared/cnext-messages');
 import ProjectAsset = require('../shared/projectasset');
 import ComplexityRepository = require('../dataaccess/repository/complexity.repository');
@@ -66,7 +66,7 @@ class ComplexityService {
       }
       return complexities;
     } else {
-      var newComplexity = new ComplexityClassModel(currentRow.complexity, currentRow.complexity_code, currentRow.complexity_display_sequence, currentRow.complexity_question_for_participant, currentRow.complexity_question_for_recruiter, currentRow.header_question_for_capability_candidate, currentRow.header_question_for_capability_recruiter);
+      let newComplexity = new ComplexityClassModel(currentRow.complexity, currentRow.complexity_code, currentRow.complexity_display_sequence, currentRow.complexity_question_for_participant, currentRow.complexity_question_for_recruiter, currentRow.header_question_for_capability_candidate, currentRow.header_question_for_capability_recruiter);
       let scenarios: ScenarioClassModel[] = new Array(0);
       for (let sceIndex: number = 0; sceIndex < 5; sceIndex++) {
         let sceName = 'Scenario' + (sceIndex + 1).toString();

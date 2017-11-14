@@ -1,12 +1,12 @@
 import DataAccess = require("../dataaccess");
 import ICertification = require("../mongoose/certification");
 
-var mongoose = DataAccess.mongooseInstance;
-var mongooseConnection = DataAccess.mongooseConnection;
+let mongoose = DataAccess.mongooseInstance;
+let mongooseConnection = DataAccess.mongooseConnection;
 
 class CertificationSchema {
   static get schema() {
-    var schema = mongoose.Schema({
+    let schema = mongoose.Schema({
       name: {
         type: String
       },
@@ -19,5 +19,5 @@ class CertificationSchema {
     return schema;
   }
 }
-var schema = mongooseConnection.model<ICertification>("Certification", CertificationSchema.schema);
+let schema = mongooseConnection.model<ICertification>("Certification", CertificationSchema.schema);
 export = schema;

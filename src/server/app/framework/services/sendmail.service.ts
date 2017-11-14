@@ -1,6 +1,6 @@
 import * as nodemailer from "nodemailer";
 import Messages=require("../shared/messages");
-var config = require('config');
+let config = require('config');
 
 class SendMailService {
 

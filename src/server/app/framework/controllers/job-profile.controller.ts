@@ -43,7 +43,7 @@ export function searchCandidatesByJobProfile(req: express.Request, res: express.
 
 export function retrieve(req: express.Request, res: express.Response, next: any) {
   try {
-    var jobProfileService = new JobProfileService();
+    let jobProfileService = new JobProfileService();
     let data = {
       'postedJob': req.params.id
     };
@@ -88,7 +88,7 @@ export function retrieve(req: express.Request, res: express.Response, next: any)
 
 export function getCapabilityMatrix(req: express.Request, res: express.Response, next: any) {
   try {
-    var jobProfileService = new JobProfileService();
+    let jobProfileService = new JobProfileService();
     let data = {
       'postedJob': req.params.id
     };
@@ -121,7 +121,7 @@ export function getCapabilityMatrix(req: express.Request, res: express.Response,
 export function update(req: express.Request, res: express.Response, next: any) {
   try {
 
-    var jobProfileService = new JobProfileService();
+    let jobProfileService = new JobProfileService();
     let data = {
       'recruiterId': req.params.recruiterId,
       'profileId': req.params.profileId,
@@ -157,7 +157,7 @@ export function update(req: express.Request, res: express.Response, next: any) {
 
 export function apply(req: express.Request, res: express.Response, next: any) {
   try {
-    var jobProfileService = new JobProfileService();
+    let jobProfileService = new JobProfileService();
     let data = {
       'candidateId': req.params.id,
       'profileId': req.params.profileId,
@@ -193,7 +193,7 @@ export function apply(req: express.Request, res: express.Response, next: any) {
 
 export function metchResultForJob(req: express.Request, res: express.Response, next: any) {
   try {
-    var searchService = new SearchService();
+    let searchService = new SearchService();
     let jobId = req.params.jobId;
     let candidateId = req.params.candidateId;
     searchService.getMatchingResult(candidateId, jobId, false, (error: any, result: any) => {
@@ -244,7 +244,7 @@ export function createUsesTracking(req: express.Request, res: express.Response, 
 
 export function getQCardDetails(req: express.Request, res: express.Response, next: any) {
   try {
-    var jobProfileService = new JobProfileService();
+    let jobProfileService = new JobProfileService();
     let data = {
       'jobId': req.params.id,
       'candidateIds': req.body.candidateIds
@@ -267,8 +267,8 @@ export function getQCardDetails(req: express.Request, res: express.Response, nex
 }
 export function cloneJob(req: express.Request, res: express.Response, next: any) {
   try {
-    var newJobTitle = req.query.newJobTitle;
-    var jobProfileService = new JobProfileService();
+    let newJobTitle = req.query.newJobTitle;
+    let jobProfileService = new JobProfileService();
     let data = {
       'postedJob': req.params.id
     };
@@ -281,7 +281,7 @@ export function cloneJob(req: express.Request, res: express.Response, next: any)
           code: 401
         });
       } else {
-        var newJob: any = result.postedJobs[0];
+        let newJob: any = result.postedJobs[0];
 
         delete newJob._id;
         newJob.jobTitle = newJobTitle;
@@ -294,7 +294,7 @@ export function cloneJob(req: express.Request, res: express.Response, next: any)
         newJob.jobCloseReason = null;
 
         newJob.expiringDate = new Date((new Date().getTime() + ConstVariables.JOB__EXPIRIY_PERIOD));
-        var recruiterService = new RecruiterService();
+        let recruiterService = new RecruiterService();
         recruiterService.addCloneJob(result.userId, newJob, (err, result) => {
           if (err) {
             next({

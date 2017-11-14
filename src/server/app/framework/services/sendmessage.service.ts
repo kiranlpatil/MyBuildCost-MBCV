@@ -2,11 +2,11 @@
 import Messages=require("../shared/messages");
 import ProjectAsset = require("../shared/projectasset");
 import UserRepository = require("../dataaccess/repository/user.repository");
-var config = require('config');
-var authKey = config.get('TplSeed.messaging.authKey');
-var senderId = config.get('TplSeed.messaging.senderId');
-var routerNumber = config.get('TplSeed.messaging.routerNumber');
-var msg91 = require("msg91")(authKey, senderId, routerNumber);
+let config = require('config');
+let authKey = config.get('TplSeed.messaging.authKey');
+let senderId = config.get('TplSeed.messaging.senderId');
+let routerNumber = config.get('TplSeed.messaging.routerNumber');
+let msg91 = require("msg91")(authKey, senderId, routerNumber);
 
 
 class SendMessageService {
@@ -19,8 +19,8 @@ class SendMessageService {
   }
 
   sendMessage(mobileNo: any, callback: any) {
-    var otp = Math.floor((Math.random() * 99999) + 100000);
-    var message = "The One Time Password(OTP) for " + " " + this.app_name + " " + "account is" + " " + otp + " " + ".Use this OTP to verify your account. ";
+    let otp = Math.floor((Math.random() * 99999) + 100000);
+    let message = "The One Time Password(OTP) for " + " " + this.app_name + " " + "account is" + " " + otp + " " + ".Use this OTP to verify your account. ";
     msg91.send(mobileNo, message, function (err: any, response: any) {
       if (err) {
         callback(new Error(Messages.MSG_ERROR_MESSAGE_SENDING), null);
@@ -35,7 +35,7 @@ class SendMessageService {
 
     console.log("Send sms on", Data.mobileNo);
 
-    var message = "The One Time Password(OTP) for " + " " + this.app_name + " " + "account is" + " " + Data.otp + " " + ".Use this OTP to verify your account. ";
+    let message = "The One Time Password(OTP) for " + " " + this.app_name + " " + "account is" + " " + Data.otp + " " + ".Use this OTP to verify your account. ";
     console.log("msg sent to user:", message);
     msg91.send(Data.mobileNo, message, function (err: any, response: any) {
       if (err) {

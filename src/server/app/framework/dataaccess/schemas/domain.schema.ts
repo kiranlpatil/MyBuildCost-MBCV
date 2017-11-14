@@ -4,12 +4,12 @@ import IRole = require("../mongoose/role");
 import IIndustry = require("../mongoose/industry");
 import IDomain = require("../mongoose/domain");
 
-var mongoose = DataAccess.mongooseInstance;
-var mongooseConnection = DataAccess.mongooseConnection;
+let mongoose = DataAccess.mongooseInstance;
+let mongooseConnection = DataAccess.mongooseConnection;
 
 class DomainSchema {
   static get schema() {
-    var schema = mongoose.Schema({
+    let schema = mongoose.Schema({
       name: {
         type: String
       },
@@ -20,5 +20,5 @@ class DomainSchema {
     return schema;
   }
 }
-var schema = mongooseConnection.model<IDomain>("Domain", DomainSchema.schema);
+let schema = mongooseConnection.model<IDomain>("Domain", DomainSchema.schema);
 export = schema;

@@ -2,12 +2,12 @@ import DataAccess = require("../dataaccess");
 import ILocation = require("../mongoose/location");
 import IProfessionalDetails = require("../mongoose/professional-details");
 
-var mongoose = DataAccess.mongooseInstance;
-var mongooseConnection = DataAccess.mongooseConnection;
+let mongoose = DataAccess.mongooseInstance;
+let mongooseConnection = DataAccess.mongooseConnection;
 
 class ProfessionalDetailsSchema {
   static get schema() {
-    var schema = mongoose.Schema({
+    let schema = mongoose.Schema({
       relocate: {
         type: String
       },
@@ -31,5 +31,5 @@ class ProfessionalDetailsSchema {
     return schema;
   }
 }
-var schema = mongooseConnection.model<IProfessionalDetails>("ProfessionalDetails", ProfessionalDetailsSchema.schema);
+let schema = mongooseConnection.model<IProfessionalDetails>("ProfessionalDetails", ProfessionalDetailsSchema.schema);
 export = schema;

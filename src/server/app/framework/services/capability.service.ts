@@ -1,5 +1,5 @@
 import CapabilityClassModel = require("../dataaccess/model/capability-class.model");
-var config = require('config');
+let config = require('config');
 import CNextMessages = require("../shared/cnext-messages");
 import ProjectAsset = require("../shared/projectasset");
 import CapabilityRepository = require("../dataaccess/repository/capability.repository");
@@ -52,7 +52,7 @@ class CapabilityService {
         }
       }
       if (!isCapabilityFound) {
-        var newCapability = new CapabilityClassModel(currentRow.capability, currentRow.capability_code, currentRow.capability_display_sequence);
+        let newCapability = new CapabilityClassModel(currentRow.capability, currentRow.capability_code, currentRow.capability_display_sequence);
         if (currentRow['default_capability_for_aow'] == 'D') {
           newCapability.code = 'd' + newCapability.code;
         }
@@ -60,7 +60,7 @@ class CapabilityService {
       }
       return capabilities;
     }else {
-      var newCapability = new CapabilityClassModel(currentRow.capability, currentRow.capability_code, currentRow.capability_display_sequence);
+      let newCapability = new CapabilityClassModel(currentRow.capability, currentRow.capability_code, currentRow.capability_display_sequence);
       if (currentRow['default_capability_for_aow'] == 'D') {
         newCapability.code = 'd' + newCapability.code;
       }

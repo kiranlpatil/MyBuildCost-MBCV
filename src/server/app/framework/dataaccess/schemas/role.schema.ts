@@ -2,12 +2,12 @@ import DataAccess = require("../dataaccess");
 import IRole = require("../mongoose/role");
 import ICapability = require("../mongoose/capability");
 
-var mongoose = DataAccess.mongooseInstance;
-var mongooseConnection = DataAccess.mongooseConnection;
+let mongoose = DataAccess.mongooseInstance;
+let mongooseConnection = DataAccess.mongooseConnection;
 
 class RoleSchema {
   static get schema() {
-    var schema = mongoose.Schema({
+    let schema = mongoose.Schema({
       name: {
         type: String
       },
@@ -20,5 +20,5 @@ class RoleSchema {
     return schema;
   }
 }
-var schema = mongooseConnection.model<IRole>("Role", RoleSchema.schema);
+let schema = mongooseConnection.model<IRole>("Role", RoleSchema.schema);
 export = schema;
