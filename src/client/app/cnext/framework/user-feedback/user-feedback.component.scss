@@ -41,12 +41,13 @@
     i {
       color: $theme-color;
       font-size:75px;
-      margin: 0 10px;
+      margin: 0 22px;
       &:hover {
         color: $black1;
       }
     }
     .thumbs-down {
+      color: $thumbs-down-bg;
       transform: rotate(180deg);
     }
   }

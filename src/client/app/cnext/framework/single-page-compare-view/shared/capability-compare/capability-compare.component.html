@@ -155,6 +155,9 @@
                 <div class="scenario-row" *ngFor="let scenario of complexity.scenarios">
                   <span>{{scenario.name}}</span>
                 </div>
+                <div class="notes" *ngIf="complexity.complexityDetails.complexityNote">
+                  {{complexity.complexityDetails.complexityNote}}
+                </div>
               </div>
             </div>
             <div class="clearfix devider" *ngIf="(i+1)%3==0"></div>

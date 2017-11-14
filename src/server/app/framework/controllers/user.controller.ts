@@ -199,7 +199,7 @@ export function generateOtp(req: express.Request, res: express.Response, next: a
             reason: Messages.MSG_ERROR_RSN_EXISTING_USER,
             message: Messages.MSG_ERROR_REGISTRATION_MOBILE_NUMBER,
             stackTrace: new Error(),
-            code: 403
+            code: 400
           });
         }
         else {
@@ -219,7 +219,7 @@ export function generateOtp(req: express.Request, res: express.Response, next: a
           reason: Messages.MSG_ERROR_RSN_USER_NOT_FOUND,
           message: Messages.MSG_ERROR_RSN_USER_NOT_FOUND,
           stackTrace: new Error(),
-          code: 403
+          code: 400
         });
       }
     });
@@ -245,7 +245,7 @@ export function verificationMail(req: express.Request, res: express.Response, ne
           reason: Messages.MSG_ERROR_RSN_WHILE_CONTACTING,
           message: Messages.MSG_ERROR_WHILE_CONTACTING,
           stackTrace: new Error(),
-          code: 403
+          code: 400
         });
       }
       else {
@@ -277,7 +277,7 @@ export function recruiterVerificationMail(req: express.Request, res: express.Res
           reason: Messages.MSG_ERROR_RSN_WHILE_CONTACTING,
           message: Messages.MSG_ERROR_WHILE_CONTACTING,
           stackTrace: new Error(),
-          code: 403
+          code: 400
         });
       }
       else {
@@ -308,7 +308,7 @@ export function mail(req: express.Request, res: express.Response, next: any) {
           reason: Messages.MSG_ERROR_RSN_WHILE_CONTACTING,
           message: Messages.MSG_ERROR_WHILE_CONTACTING,
           stackTrace: new Error(),
-          code: 403
+          code: 400
         });
       }
       else {
@@ -342,7 +342,7 @@ export function create(req: express.Request, res: express.Response, next: any) {
             reason: Messages.MSG_ERROR_RSN_EXISTING_USER,
             message: Messages.MSG_ERROR_VERIFY_ACCOUNT,
             stackTrace: new Error(),
-            code: 403
+            code: 400
           });
         }
         else if (error == Messages.MSG_ERROR_CHECK_MOBILE_PRESENT) {
@@ -350,7 +350,7 @@ export function create(req: express.Request, res: express.Response, next: any) {
             reason: Messages.MSG_ERROR_RSN_EXISTING_USER,
             message: Messages.MSG_ERROR_REGISTRATION_MOBILE_NUMBER,
             stackTrace: new Error(),
-            code: 403
+            code: 400
           });
         }
         else {
@@ -358,7 +358,7 @@ export function create(req: express.Request, res: express.Response, next: any) {
             reason: Messages.MSG_ERROR_RSN_EXISTING_USER,
             message: Messages.MSG_ERROR_USER_WITH_EMAIL_PRESENT,
             stackTrace: new Error(),
-            code: 403
+            code: 400
           });
         }
       }
@@ -406,7 +406,7 @@ export function forgotPassword(req: express.Request, res: express.Response, next
             reason: Messages.MSG_ERROR_USER_NOT_ACTIVATED,
             message: Messages.MSG_ERROR_ACCOUNT_STATUS,
             stackTrace: new Error(),
-            code: 403
+            code: 400
           });
         }
         else if (error == Messages.MSG_ERROR_CHECK_INVALID_ACCOUNT) {
@@ -414,7 +414,7 @@ export function forgotPassword(req: express.Request, res: express.Response, next
             reason: Messages.MSG_ERROR_RSN_USER_NOT_FOUND,
             message: Messages.MSG_ERROR_USER_NOT_FOUND,
             stackTrace: new Error(),
-            code: 403
+            code: 400
           });
         }
       }
@@ -559,7 +559,7 @@ export function updateDetails(req: express.Request, res: express.Response, next:
               reason: Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
               message: Messages.MSG_ERROR_WRONG_TOKEN,
               stackTrace: new Error(),
-              code: 403
+              code: 400
             });
           }
           else {
@@ -642,7 +642,7 @@ export function updateProfileField(req: express.Request, res: express.Response, 
               reason: Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
               message: Messages.MSG_ERROR_WRONG_TOKEN,
               stackTrace: new Error(),
-              code: 403
+              code: 400
             });
           }
           else {
@@ -759,7 +759,7 @@ export function changePassword(req: express.Request, res: express.Response, next
           reason: Messages.MSG_ERROR_RSN_INVALID_REGISTRATION_STATUS,
           message: Messages.MSG_ERROR_VERIFY_CANDIDATE_ACCOUNT,
           stackTrace: new Error(),
-          code: 403
+          code: 400
         });
       } else {
         if (isSame) {
@@ -782,7 +782,7 @@ export function changePassword(req: express.Request, res: express.Response, next
                   reason: Messages.MSG_ERROR_RSN_INVALID_REGISTRATION_STATUS,
                   message: Messages.MSG_ERROR_BCRYPT_CREATION,
                   stackTrace: new Error(),
-                  code: 403
+                  code: 400
                 });
               }
               else {
@@ -846,7 +846,7 @@ export function changeMobileNumber(req: express.Request, res: express.Response, 
           reason: Messages.MSG_ERROR_RSN_EXISTING_USER,
           message: Messages.MSG_ERROR_REGISTRATION_MOBILE_NUMBER,
           stackTrace: new Error(),
-          code: 403
+          code: 400
         });
 
       }
@@ -862,7 +862,7 @@ export function changeMobileNumber(req: express.Request, res: express.Response, 
               reason: Messages.MSG_ERROR_RSN_WHILE_CONTACTING,
               message: Messages.MSG_ERROR_WHILE_CONTACTING,
               stackTrace: new Error(),
-              code: 403
+              code: 400
             });
           }
           else {
@@ -908,7 +908,7 @@ export function changeEmailId(req: express.Request, res: express.Response, next:
           reason: Messages.MSG_ERROR_RSN_EXISTING_USER,
           message: Messages.MSG_ERROR_REGISTRATION,
           stackTrace: new Error(),
-          code: 403
+          code: 400
         });
 
       }
@@ -917,7 +917,7 @@ export function changeEmailId(req: express.Request, res: express.Response, next:
           reason: Messages.MSG_ERROR_RSN_EXISTING_USER,
           message: Messages.MSG_ERROR_ACCOUNT_STATUS,
           stackTrace: new Error(),
-          code: 403
+          code: 400
         });
 
       }
@@ -936,7 +936,7 @@ export function changeEmailId(req: express.Request, res: express.Response, next:
                 reason: Messages.MSG_ERROR_RSN_EXISTING_USER,
                 message: Messages.MSG_ERROR_EMAIL_ACTIVE_NOW,
                 stackTrace: new Error(),
-                code: 403
+                code: 400
               });
             }
             else {
@@ -944,7 +944,7 @@ export function changeEmailId(req: express.Request, res: express.Response, next:
                 reason: Messages.MSG_ERROR_RSN_WHILE_CONTACTING,
                 message: Messages.MSG_ERROR_WHILE_CONTACTING,
                 stackTrace: new Error(),
-                code: 403
+                code: 400
               });
 
             }
@@ -1000,7 +1000,7 @@ export function verifyMobileNumber(req: express.Request, res: express.Response, 
         reason: Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
         message: Messages.MSG_ERROR_WRONG_OTP,
         stackTrace: new Error(),
-        code: 403
+        code: 400
       });
     }
 
@@ -1047,7 +1047,7 @@ export function verifyOtp(req: express.Request, res: express.Response, next: any
         reason: Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
         message: Messages.MSG_ERROR_WRONG_OTP,
         stackTrace: new Error(),
-        code: 403
+        code: 400
       });
     }
 
@@ -1466,7 +1466,7 @@ export function fblogin(req: express.Request, res: express.Response, next: any) 
           reason: Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
           message: Messages.MSG_ERROR_INVALID_CREDENTIALS,
           stackTrace: new Error(),
-          code: 403
+          code: 400
         });
       }
     });
@@ -1512,7 +1512,7 @@ export function googlelogin(req: express.Request, res: express.Response, next: a
           reason: Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
           message: Messages.MSG_ERROR_INVALID_CREDENTIALS,
           stackTrace: new Error(),
-          code: 403
+          code: 400
         });
       }
     });
