@@ -8,7 +8,7 @@ interface RecruiterModel {
   company_headquarter_country: string;
   setOfDocuments: string[];
   userId: string;
-  postedJobs: JobProfileModel[];
+  postedJobs: string[];
   description1: string;
   description2: string;
   description3: string;

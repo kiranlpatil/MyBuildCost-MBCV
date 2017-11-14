@@ -1,4 +1,4 @@
-import {Actions, ConstVariables} from '../sharedconstants';
+import { Actions, ConstVariables } from '../sharedconstants';
 export class SharedService {
 
   constructAddActionData(listName: string): Actions {

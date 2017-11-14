@@ -19,7 +19,7 @@ export class CandidateSearchService extends SearchService {
   }
   getUserDetails(jobId: string, callback : (err : Error, res : BaseDetail)=> void) : void {
 
-    this.recruiterRepository.getJobById(jobId, (myError: Error, response : JobProfileModel) => {
+/*    this.recruiterRepository.getJobById(jobId, (myError: Error, response : JobProfileModel) => {
         if(myError) {
           callback(myError, null);
           return ;
@@ -32,7 +32,7 @@ export class CandidateSearchService extends SearchService {
         jobDetail.candidateList = response.candidate_list;
         jobDetail.capability_matrix = response.capability_matrix;
         callback(null,jobDetail);
-    });
+    });*/
   }
 
   getIdsByList(jobDetail : JobDetail, listName : EList) : mongoose.Types.ObjectId [] {

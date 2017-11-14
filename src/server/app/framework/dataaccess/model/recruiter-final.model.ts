@@ -9,7 +9,7 @@ export class Recruiter { // todo replace all the interface to class
   company_headquarter_country: string;
   setOfDocuments: string[];
   userId: any;
-  postedJobs: JobProfileModel[];
+  postedJobs: string[];
   jobCountModel: JobCountModel = new JobCountModel();
   description1: string;
   description2: string;

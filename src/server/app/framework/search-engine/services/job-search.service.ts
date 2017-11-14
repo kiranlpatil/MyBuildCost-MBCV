@@ -28,7 +28,7 @@ export class JobSearchService extends SearchService {
    }
 
    getJobsByCriteria (recruiters : RecruiterClassModel[], candidateDetail : CandidateDetail) : any {
-    let  jobProfiles : JobProfileModel[] = new Array(0);
+  /*  let  jobProfiles : JobProfileModel[] = new Array(0);
     for(let recruiter of recruiters){
           for(let job of recruiter.postedJobs){
             let isRelevantIndustryMatch = false;
@@ -56,7 +56,7 @@ export class JobSearchService extends SearchService {
             }
             jobProfiles.push(job);
           }
-        }
+        }*/
    }
 
   getIdsByList(candidateDetails: CandidateDetail, listName : EList) : mongoose.Types.ObjectId [] {

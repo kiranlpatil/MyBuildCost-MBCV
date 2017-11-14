@@ -218,7 +218,7 @@ export function createUsesTracking(req: express.Request, res: express.Response, 
     let data: UsageTracking;
     data = req.body;
     data.timestamp = new Date();
-    let obj: any = new usestracking.MyController();
+      let obj: any = new usestracking.MyController();
     obj._controller.create(data);
     res.send({
       'status': 'success',
@@ -240,13 +240,13 @@ export function getQCardDetails(req: express.Request, res: express.Response, nex
       'jobId': req.params.id,
       'candidateIds': req.body.candidateIds
     };
-    jobProfileService.getQCardDetails(data, (error: Error, result: any) => {
+    /*jobProfileService.getQCardDetails(data, (error: Error, result: any) => {
       if (error) {
         next(error);
       } else {
         res.status(200).send(result);
       }
-    });
+    });*/
   } catch (e) {
     next({
       reason: e.message,
@@ -294,7 +294,7 @@ export function cloneJob(req: express.Request, res: express.Response, next: any)
           } else {
             res.status(200).send({
               'status': Messages.STATUS_SUCCESS,
-              'data': result.postedJobs[0]._id
+              'data': result._id
             });
           }
         });

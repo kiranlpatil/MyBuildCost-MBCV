@@ -20,12 +20,14 @@ import ScenarioModel = require('../../dataaccess/model/scenario.model');
 import { FilterSort } from '../../dataaccess/model/filter';
 import { QueryBuilder } from './query-builder.service';
 import IJobProfile = require('../../dataaccess/mongoose/job-profile');
+import JobProfileRepository = require('../../dataaccess/repository/job-profile.repository');
 let usestracking = require('uses-tracking');
 
 class SearchService {
   APP_NAME: string;
   candidateRepository: CandidateRepository;
   recruiterRepository: RecruiterRepository;
+  jobProfileRepository: JobProfileRepository;
   industryRepository: IndustryRepository;
   private usesTrackingController: any;
 
@@ -33,6 +35,7 @@ class SearchService {
     this.APP_NAME = ProjectAsset.APP_NAME;
     this.candidateRepository = new CandidateRepository();
     this.recruiterRepository = new RecruiterRepository();
+    this.jobProfileRepository = new JobProfileRepository();
     this.industryRepository = new IndustryRepository();
     let obj: any = new usestracking.MyController();
     this.usesTrackingController = obj._controller;
@@ -91,39 +94,21 @@ class SearchService {
       }
     });
   }
-  getJobsInIndustry(industryCode: string, callback: (error: any, result: any) => void) {
+  getJobsInIndustry(industryCode: string, callback: (error: any, result: number) => void) {
     let data = {
       'industry.code': industryCode,
-      'isJobPosted':true
+      'isJobPosted':true,
+      'isJobPostClosed': false
     };
-    let excluded_fields = {
-      'industry.roles': 0,
-    };
-      this.recruiterRepository.countWithLean(data,excluded_fields, (err, res) => {
+    this.jobProfileRepository.getCount(data,excluded_fields, (err: Error, jobs : number) => {
       if (err) {
         callback(err, null);
       } else {
         console.log(res);
-        callback(null,this.countJobs(res,industryCode));
+        callback(null,jobs);
       }
     });
   }
-
-  countJobs(recruiters:any[],industryCode:string):number {
-    let count:number=0;
-    if (recruiters.length === 0) {
-      return count;
-    }
-    for (let recruiter of recruiters) {
-      for (let job of recruiter.postedJobs){
-        if (job.isJobPosted && !job.isJobPostClosed && (industryCode === job.industry.code) && !job.isJobPostExpired && (job.expiringDate > new Date())) {
-          count++;
-        }
-      }
-    }
-    return count;
-  }
-
 
   getMatchingResult(candidateId: string, jobId: string, isCandidate : boolean,callback: (error: any, result: any) => void) {
     let uses_data = {

@@ -745,22 +745,7 @@ class CandidateService {
   }
 
   getList(item: any, callback: (error: any, result: any) => void) {
-    let query = {
-      '_id': {$in: item.ids},
-    };
-    this.recruiterRepository.retrieve(query, (err, res) => {
-      if (err) {
-        callback(err, null);
-      } else {
-        this.recruiterRepository.getJobProfileQCard(res, item.candidate, item.ids, 'none', (canError, canResult) => {
-          if (canError) {
-            callback(canError, null);
-          } else {
-            callback(null, canResult);
-          }
-        });
-      }
-    });
+    console.log('get');
   }
 
   loadCapabilitiDetails(capabilityMatrix: any) {

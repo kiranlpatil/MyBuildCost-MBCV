@@ -5,11 +5,10 @@ import SearchService = require('../services/search.service');
 import CandidateService = require('../../services/candidate.service');
 import RecruiterService = require('../../services/recruiter.service');
 import CandidateSearchService = require('../../services/candidate-search.service');
-import { FilterSort} from "../../dataaccess/model/filter";
 
 export class SearchController {
 
-  getMatchingCandidates(req: express.Request, res: express.Response,next:any) {
+/*  getMatchingCandidates(req: express.Request, res: express.Response,next:any) {
     console.time('getMatchingCandidatesController');
     let searchService = new SearchService();
     let profileId = req.params.id;
@@ -25,7 +24,7 @@ export class SearchController {
         }
       });
     });
-  }
+  }*/
 
   getMatchingJobProfiles(req: express.Request, res: express.Response,next:any) {
     let searchService = new SearchService();

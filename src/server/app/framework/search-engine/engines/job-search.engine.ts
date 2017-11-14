@@ -12,14 +12,14 @@ export class JobSearchEngine extends SearchEngine {
   job_q_cards : JobCard[] = new Array(0);
   buildBusinessCriteria(details : BaseDetail): any {
     let criteria = {
-      'postedJobs.industry.name': details.industryName,
+     // 'postedJobs.industry.name': details.industryName,
       //'postedJobs.expiringDate': {$gte: currentDate}
     };
     return criteria;
   }
 
   buildUserCriteria(filter : AppliedFilter, criteria : any) : any {
-    if (filter.location !== undefined && filter.location !== '') {
+   /* if (filter.location !== undefined && filter.location !== '') {
       criteria.$or = [{'postedJobs.location.city': filter.location}];
     }
     if (filter.education && filter.education.length > 0) {
@@ -34,7 +34,7 @@ export class JobSearchEngine extends SearchEngine {
     if (filter.joinTime !== undefined && filter.joinTime !== '') {
       criteria['postedJobs.joiningPeriod'] = filter.joinTime;
     }
-/*
+/!*
     if (filter.minSalary !== undefined && filter.minSalary !== '' &&
       filter.maxSalary !== undefined && filter.maxSalary !== '') {
       criteria['postedJobs.currentSalary'] = {
@@ -49,7 +49,7 @@ export class JobSearchEngine extends SearchEngine {
         $lte: Number(filter.maxExperience)
       };
     }
-*/
+*!/*/
     return criteria;
   }
 

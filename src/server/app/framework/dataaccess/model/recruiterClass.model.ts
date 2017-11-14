@@ -11,7 +11,7 @@ class RecruiterClassModel {
   company_headquarter_country: string;
   setOfDocuments: string[];
   userId: any;
-  postedJobs: JobProfileModel[];
+  postedJobs: string[];
   description1: string;
   description2: string;
   description3: string;

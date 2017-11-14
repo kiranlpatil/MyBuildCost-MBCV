@@ -1,6 +1,5 @@
-import * as express from "express";
-import * as mongoose from "mongoose";
-import { Recruiter } from "../dataaccess/model/recruiter-final.model";
+import * as express from 'express';
+import { Recruiter } from '../dataaccess/model/recruiter-final.model';
 import AuthInterceptor = require('../interceptor/auth.interceptor');
 import Messages = require('../shared/messages');
 import CandidateService = require('../services/candidate.service');
@@ -8,12 +7,11 @@ import RecruiterModel = require('../dataaccess/model/recruiter.model');
 import RecruiterService = require('../services/recruiter.service');
 import JobProfileModel = require('../dataaccess/model/jobprofile.model');
 import CNextMessages = require('../shared/cnext-messages');
-import SearchService = require("../search/services/search.service");
-import CandidateInfoSearch = require("../dataaccess/model/candidate-info-search");
-import CandidateModel = require("../dataaccess/model/candidate.model");
-import UserService = require("../services/user.service");
-import CandidateSearchService = require("../services/candidate-search.service");
-import {FilterSort} from "../dataaccess/model/filter";
+import SearchService = require('../search/services/search.service');
+import CandidateInfoSearch = require('../dataaccess/model/candidate-info-search');
+import CandidateModel = require('../dataaccess/model/candidate.model');
+import UserService = require('../services/user.service');
+import CandidateSearchService = require('../services/candidate-search.service');
 
 
 export function create(req: express.Request, res: express.Response, next: any) {
@@ -21,29 +19,23 @@ export function create(req: express.Request, res: express.Response, next: any) {
 
     var newUser: RecruiterModel = <RecruiterModel>req.body;
     var recruiterService = new RecruiterService();
-/*
-    let mailChimpMailerService = new MailChimpMailerService();
-*/
-
     recruiterService.createUser(newUser, (error, result) => {
       if (error) {
-        if (error == Messages.MSG_ERROR_CHECK_EMAIL_PRESENT) {
+        if (error === Messages.MSG_ERROR_CHECK_EMAIL_PRESENT) {
           next({
             reason: Messages.MSG_ERROR_RSN_EXISTING_USER,
             message: Messages.MSG_ERROR_VERIFY_ACCOUNT,
             stackTrace: new Error(),
             code: 400
           });
-        }
-        else if (error == Messages.MSG_ERROR_CHECK_MOBILE_PRESENT) {
+        }else if (error === Messages.MSG_ERROR_CHECK_MOBILE_PRESENT) {
           next({
             reason: Messages.MSG_ERROR_RSN_EXISTING_USER,
             message: Messages.MSG_ERROR_REGISTRATION_MOBILE_NUMBER,
             stackTrace: new Error(),
             code: 400
           });
-        }
-        else {
+        }else {
           next({
             reason: Messages.MSG_ERROR_RSN_EXISTING_USER,
             message: Messages.MSG_ERROR_USER_WITH_EMAIL_PRESENT,
@@ -51,14 +43,9 @@ export function create(req: express.Request, res: express.Response, next: any) {
             code: 400
           });
         }
-      }
-      else {
+      }else {
         var auth: AuthInterceptor = new AuthInterceptor();
         var token = auth.issueTokenWithUid(result);
-/*
-        mailChimpMailerService.onRecruiterSignUpSuccess(newUser);
-*/
-
         res.status(200).send({
           'status': Messages.STATUS_SUCCESS,
           'data': {
@@ -75,8 +62,7 @@ export function create(req: express.Request, res: express.Response, next: any) {
         });
       }
     });
-  }
-  catch (e) {
+  }catch (e) {
     next({reason: e.message, message: e.message, stackTrace: new Error(), code: 500});
   }
 }
@@ -134,8 +120,7 @@ export function postJob(req: express.Request, res: express.Response, next: any) 
       });
     }
 
-  }
-  catch (e) {
+  }catch (e) {
     next({reason: e.message, message: e.message, stackTrace: new Error(), code: 500});
   }
 }
@@ -160,19 +145,15 @@ export function updateDetails(req: express.Request, res: express.Response, next:
         });
       }
     });
-  }
-  catch (e) {
+  }catch (e) {
     next({reason: e.message, message: e.message, stackTrace: new Error(), code: 500});
   }
 }
 
 export function retrieve(req: express.Request, res: express.Response, next: any) {
   try {
-    var recruiterService = new RecruiterService();
-    let data = {
-      'userId': new mongoose.Types.ObjectId(req.params.id)
-    };
-    recruiterService.retrieve(data, (error: any, result: Recruiter[]) => {
+    let recruiterService = new RecruiterService();
+    recruiterService.getJobsByRecruiterIdAndItsCount(req.params.id, (error: any, result: Recruiter[]) => {
       if (error) {
         next({
           reason: CNextMessages.PROBLEM_IN_RETRIEVE_JOB_PROFILE,
@@ -187,27 +168,12 @@ export function retrieve(req: express.Request, res: express.Response, next: any)
             'data': result,
             'jobCountModel': result[0].jobCountModel
           });
-        } else {
-
-          let currentDate = Number(new Date());
-          let expiringDate = Number(new Date(result[0].postedJobs[0].expiringDate));
-          let daysRemainingForExpiring = Math.round(Number(new Date(expiringDate - currentDate)) / (1000 * 60 * 60 * 24));
-          result[0].postedJobs[0].daysRemainingForExpiring = daysRemainingForExpiring;
-          if (daysRemainingForExpiring <= 0) {
-            result[0].postedJobs[0].isJobPostExpired = true;
-
-          } else {
-            result[0].postedJobs[0].isJobPostExpired = false;
-
-          }
-
-          res.status(200).send({
-            'status': Messages.STATUS_SUCCESS,
-            'data': result
+        } else { //todo reviewed by Rahul and then remove this todo
+          res.status(500).send({
+            'status': Messages.MSG_ERROR_INVALID_ID,
           });
         }
       }
-
     });
 
 
@@ -221,39 +187,14 @@ export function getFilterList(req: express.Request, res: express.Response,next:a
   var filepath = 'recruiter-filter-list.json';
   try {
     res.sendFile(filepath, {root: __dirname});
-  }
-  catch (e) {
+  }catch (e) {
     next({reason: e.message, message: e.message, stackTrace: new Error(), code: 500});
   }
 }
 
 
 export function getList(req: express.Request, res: express.Response, next: any) {
-  try {
-    let data: any = {
-      'jobProfileId': req.params.id,
-      'listName': req.params.listName
-    };
-    let appliedFilters : FilterSort = req.body.obj;
-    let recruiterService = new RecruiterService();
-    recruiterService.getCandidateList(data,appliedFilters, (error: any, response: any) => {
-      if (error) {
-        next({
-          reason: Messages.MSG_ERROR_RSN_EXISTING_USER,
-          message: Messages.MSG_ERROR_VERIFY_ACCOUNT,
-          stackTrace: new Error(),
-          code: 403
-        });
-      } else {
-        res.send({
-          'status': 'success',
-          'data': response,
-        });
-      }
-    });
-  } catch (e) {
-    next({reason: e.message, message: e.message, stackTrace: new Error(), code: 500});
-  }
+  console.log('Remove this code');
 }
 
 export function getCompareDetailsOfCandidate(req: express.Request, res: express.Response, next: any) {
@@ -267,23 +208,21 @@ export function getCompareDetailsOfCandidate(req: express.Request, res: express.
     searchService.getMultiCompareResult(candidateId, jobId, recruiterId, false, (error: any, result: any) => {
       if (error) {
         next({
-          reason: "Problem in Search Matching Result",//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
+          reason: 'Problem in Search Matching Result',//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
           message: 'Problem in Search Matching Result',//Messages.MSG_ERROR_WRONG_TOKEN,
           stackTrace: new Error(),
           code: 401
         });
-      }
-      else {
+      }else {
         res.send({
-          "status": "success",
-          "data": result,
+          'status': 'success',
+          'data': result,
         });
 
       }
     });
 
-  }
-  catch (e) {
+  }catch (e) {
     next({reason: e.message, message: e.message, stackTrace: new Error(), code: 500});
   }
 
@@ -296,15 +235,15 @@ export function getCandidatesByName(req: express.Request, res: express.Response,
     let candidateSearchService = new CandidateSearchService();
     var userName = req.params.searchvalue;
     var query:any;
-    var searchValueArray:string[] = userName.split(" ");
+    var searchValueArray:string[] = userName.split(' ');
     let included : any = {
       '_id':1
     };
     if (searchValueArray.length > 1) {
       var exp1 = eval('/^' + searchValueArray[0] + '/i');
       var exp2 = eval('/^' + searchValueArray[1] + '/i');
-      var searchString1: string = exp1.toString().replace(/'/g, "");
-      var searchString2: string = exp2.toString().replace(/'/g, "");
+      var searchString1: string = exp1.toString().replace(/'/g, '');
+      var searchString2: string = exp2.toString().replace(/'/g, '');
       query = {
         'isCandidate': true,
         $or: [{
@@ -314,7 +253,7 @@ export function getCandidatesByName(req: express.Request, res: express.Response,
       };
     } else {
       var exp = eval('/^' + searchValueArray[0] + '/i');
-      var searchString: string = exp.toString().replace(/'/g, "");
+      var searchString: string = exp.toString().replace(/'/g, '');
 
       query = {
         'isCandidate': true,
@@ -329,8 +268,7 @@ export function getCandidatesByName(req: express.Request, res: express.Response,
           stackTrace: new Error(),
           code: 401
         });
-      }
-      else {
+      }else {
         var candidateId: string[] = new Array(0);
         for (let obj of result) {
           candidateId.push(obj._id);
@@ -354,8 +292,7 @@ export function getCandidatesByName(req: express.Request, res: express.Response,
       }
     });
 
-  }
-  catch (e) {
+  }catch (e) {
     next({reason: e.message, message: e.message, stackTrace: new Error(), code: 500});
   }
 
@@ -376,13 +313,12 @@ export function requestToAdvisor(req: express.Request, res: express.Response, ne
         });
       } else {
         res.status(200).send({
-          "status": Messages.STATUS_SUCCESS,
-          "data": {"message": Messages.MSG_SUCCESS_EMAIL}
+          'status': Messages.STATUS_SUCCESS,
+          'data': {'message': Messages.MSG_SUCCESS_EMAIL}
         });
       }
     });
-  }
-  catch (e) {
+  }catch (e) {
     next({reason: e.message, message: e.message, stackTrace: new Error(), code: 500});
 
   }
@@ -401,16 +337,14 @@ export function responseToRecruiter(req: express.Request, res: express.Response,
           stackTrace: new Error(),
           code: 403
         });
-      }
-      else {
+      }else {
         res.status(200).send({
-          "status": Messages.STATUS_SUCCESS,
-          "data": {"message": Messages.MSG_SUCCESS_EMAIL}
+          'status': Messages.STATUS_SUCCESS,
+          'data': {'message': Messages.MSG_SUCCESS_EMAIL}
         });
       }
     });
-  }
-  catch (e) {
+  }catch (e) {
     next({reason: e.message, message: e.message, stackTrace: new Error(), code: 500});
 
   }

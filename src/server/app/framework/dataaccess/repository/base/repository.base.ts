@@ -130,10 +130,7 @@ class RepositoryBase<T extends mongoose.Document> implements IRead<T>, IWrite<T>
   //custom API created for C-next Roles capabilities and complexities
 
   //change the any data type to model
-//TODO: MOVE CODE TO ITS RELEATED REPOSITEORY
-  pushInJobpost(id: string, value: any, callback: (error: any, result: any) => void) {
-    this._model.update({_id: id}, {$push: {"postedJobs": value.postedJobs}}, callback);
-  }
+
 //TODO: MOVE CODE TO ITS RELEATED REPOSITEORY
   pushElementInArray(value: string, callback: (error: any, result: any) => void) {
     this._model.update({$push: {"proficiencies": value}}, callback);

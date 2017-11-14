@@ -90,57 +90,57 @@ class RecruiterService {
     this.recruiterRepository.findOneAndUpdate(query, newData, options, callback);
   }
 
-  retrieve(field: any, callback: (error: any, result: any) => void) {
-    this.recruiterRepository.retrieve(field, (err, res) => {
-      if (err) {
-        let er = new Error('Unable to retrieve recruiter details.');
-        callback(er, null);
-      } else {
-        let recruiter: Recruiter;
-        recruiter = res[0];
-        if (recruiter) {
-          recruiter.jobCountModel = new JobCountModel();
-          recruiter.jobCountModel.numberOfJobposted = recruiter.postedJobs.length;
+  getJobsByRecruiterId(id: string, callback :(err: Error, res : IJobProfile[]) => void) {
+    let query = { 'recruiterId' : new mongoose.Types.ObjectId(id)};
+    this.jobProfileRepository.retrieve(query, (error : Error, jobs : IJobProfile[]) => {
+        if(error) {
+          callback(error,null);
+          return;
         }
-        if (res.length > 0) {
-          if (recruiter.postedJobs) {
-            for (let job of recruiter.postedJobs) {
-              for (let list of job.candidate_list) {
-                switch (list.name) {
-                  case ConstVariables.APPLIED_CANDIDATE :
-                    recruiter.jobCountModel.totalNumberOfCandidatesApplied += list.ids.length;
-                    break;
-                  case ConstVariables.CART_LISTED_CANDIDATE :
-                    recruiter.jobCountModel.totalNumberOfCandidateInCart += list.ids.length;
-                    break;
-                  case ConstVariables.REJECTED_LISTED_CANDIDATE :
-                    recruiter.jobCountModel.totalNumberOfCandidatesRejected += list.ids.length;
-                    break;
-                  default :
-                    break;
-                }
-              }
-            }
-          }
-        }
-        callback(null, [recruiter]);
-      }
+        callback(null,jobs);
     });
   }
 
-  addJob(_id: string, item: any, callback: (error: any, result: any) => void) { //Todo change with candidate_id now it is a user_id operation
-    this.jobProfileRepository.create(item.postedJobs, (err : Error, res : IJobProfile)=> {
+  getJobsByRecruiterIdAndItsCount(id: string, callback :(err: Error, res : IJobProfile[]) => void) {
+    this.getJobsByRecruiterId(id, (error : Error, jobs : IJobProfile[]) => {
+      if(error) {
+        callback(error,null);
+        return;
+      }
+      let jobWithCount = {
+        jobs : jobs
+      };
+      jobWithCount.jobCountModel = new JobCountModel();
+      for (let job of jobs) {
+        for (let list of job.candidate_list) {
+          switch (list.name) {
+            case ConstVariables.APPLIED_CANDIDATE :
+              jobWithCount.jobCountModel.totalNumberOfCandidatesApplied += list.ids.length;
+              break;
+            case ConstVariables.CART_LISTED_CANDIDATE :
+              jobWithCount.jobCountModel.totalNumberOfCandidateInCart += list.ids.length;
+              break;
+            case ConstVariables.REJECTED_LISTED_CANDIDATE :
+              jobWithCount.jobCountModel.totalNumberOfCandidatesRejected += list.ids.length;
+              break;
+            default :
+              break;
+          }
+        }
+      }
+      callback(null,jobWithCount);
+    });
+  }
+  //Todo change with candidate_id now it is a user_id operation
+  addJob(_id: string, job: IJobProfile, callback: (error: any, result: any) => void) {
+    this.jobProfileRepository.create(job, (err : Error, res : IJobProfile)=> {
       if(err) {
         callback(err,null);
       }else {
         this.recruiterRepository.findOneAndUpdate({'userId': new mongoose.Types.ObjectId(_id)},
           {$push: {postedJobs: res._id}},
           {
-            'new': true, select: {
-            postedJobs: {
-              $elemMatch: {'postingDate': item.postedJobs.postingDate}
-            }
-          }
+            'new': true,
           },(err, response) => {
             if (err) {
               callback(err,null);
@@ -152,29 +152,25 @@ class RecruiterService {
       });
   }
 
-  addCloneJob(_id: string, item: any, callback: (error: any, result: any) => void) { //Todo change with candidate_id now it is a user_id operation
-    this.recruiterRepository.findOneAndUpdate({'_id': new mongoose.Types.ObjectId(_id)},
-      {$push: {postedJobs: item}},
-      {
-        'new': true, select: {
-        postedJobs: {
-          $elemMatch: {'postingDate': item.postingDate}
-        }
+  //Todo change with candidate_id now it is a user_id operation
+  addCloneJob(_id: string, job : IJobProfile, callback: (error: any, result: any) => void) {
+    this.jobProfileRepository.create(job, (err : Error, res : IJobProfile)=> {
+      if(err) {
+        callback(err,null);
+      }else {
+        this.recruiterRepository.findOneAndUpdate({'_id': new mongoose.Types.ObjectId(_id)},
+          {$push: {postedJobs: res._id}},
+          {
+            'new': true,
+          },(err, response) => {
+            if (err) {
+              callback(err,null);
+            } else {
+              callback(null, response);
+            }
+          });
       }
-      },
-      function (err, record) {
-        if (record) {
-          callback(null, record);
-        } else {
-          let error: any;
-          if (record === null) {
-            error = new Error('Job cloning is failed');
-            callback(error, null);
-          } else {
-            callback(err, null);
-          }
-        }
-      });
+    });
   }
 //Todo change with candidate_id now it is a user_id operation
   updateJob(_id: string, job: IJobProfile, callback: (error: any, result: any) => void) {
@@ -218,22 +214,7 @@ class RecruiterService {
   }
 
   getList(item: any, callback: (error: any, result: any) => void) {
-    let query = {
-      'postedJobs._id': {$in: item.ids},
-    };
-    this.recruiterRepository.retrieve(query, (err, res) => {
-      if (err) {
-        callback(err, null);
-      } else {
-        this.recruiterRepository.getJobProfileQCard(res, item.candidate, item.ids, 'none', (canError, canResult) => {
-          if (canError) {
-            callback(canError, null);
-          } else {
-            callback(null, canResult);
-          }
-        });
-      }
-    });
+   console.log('remove this code also');
   }
 
   updateDetails(_id: string, item: any, callback: (error: any, result: any) => void) {
@@ -244,100 +225,6 @@ class RecruiterService {
         callback(err, res);
       } else {
         this.recruiterRepository.findOneAndUpdate({'_id': res[0]._id}, item, {'new': true}, callback);
-      }
-    });
-  }
-
-  getCandidateList(item: any, appliedFilters : FilterSort, callback: (error: any, result: any) => void) {
-    let query = {
-      'postedJobs': {$elemMatch: {'_id': new mongoose.Types.ObjectId(item.jobProfileId)}}
-    };
-    this.recruiterRepository.retrieve(query, (err, res) => {
-      if (err) {
-        callback(new Error('Not Found Any Job posted'), null);
-      } else {
-        if (res.length > 0) {
-          let candidateIds: any[] = new Array(0);
-          let jobProfile: JobProfileModel;
-          for (let job of res[0].postedJobs) {
-            if (job._id.toString() === item.jobProfileId) {
-              jobProfile = job;
-              for (let list of job.candidate_list) {
-                if (list.name.toString() === item.listName.toString()) {
-                  for(let id of list.ids) {
-                    candidateIds.push(new mongoose.Types.ObjectId(id));
-                  }
-                }
-              }
-            }
-          }
-          let query : any = {_id: {$in: candidateIds}};
-          if(appliedFilters.filterByLocation !== undefined  && appliedFilters.filterByLocation !== '') {
-            query.$or =[{'location.city': appliedFilters.filterByLocation}];
-          }
-          if(appliedFilters.educationDataForFilter && appliedFilters.educationDataForFilter.length > 0 ) {
-            query['professionalDetails.education'] = {$in: appliedFilters.educationDataForFilter};
-          }
-          if(appliedFilters.proficiencyDataForFilter && appliedFilters.proficiencyDataForFilter.length > 0 ) {
-            query['proficiencies'] = {$in: appliedFilters.proficiencyDataForFilter};
-          }
-          if(appliedFilters.industryExposureDataForFilter && appliedFilters.industryExposureDataForFilter.length > 0 ) {
-            query['interestedIndustries'] = {$in: appliedFilters.industryExposureDataForFilter};
-          }
-          if(appliedFilters.filterByJoinTime !== undefined  && appliedFilters.filterByJoinTime !== '') {
-            query['professionalDetails.noticePeriod'] = appliedFilters.filterByJoinTime;
-          }
-          if(appliedFilters.salaryMinValue !== undefined  && appliedFilters.salaryMinValue !== '' &&
-            appliedFilters.salaryMaxValue !== undefined  && appliedFilters.salaryMaxValue !== '') {
-            query['professionalDetails.currentSalary'] = {$gte:Number(appliedFilters.salaryMinValue),
-              $lte:Number(appliedFilters.salaryMaxValue)};
-          }
-          if(appliedFilters.experienceMinValue !== undefined  && appliedFilters.experienceMinValue !== '' &&
-            appliedFilters.experienceMaxValue !== undefined  && appliedFilters.experienceMaxValue !== '') {
-            query['professionalDetails.experience'] = {$gte:Number(appliedFilters.experienceMinValue),
-              $lte:Number(appliedFilters.experienceMaxValue)};
-          }
-          let mainQuery : any;
-          switch (appliedFilters.sortBy) {
-            case 'Salary':
-              mainQuery = {'$query':query,'$orderby':{'professionalDetails.currentSalary':-1}};
-              break;
-            case 'Experience':
-              mainQuery = {'$query':query,'$orderby':{'professionalDetails.experience':-1}};
-              break;
-            default :
-              mainQuery= query;
-              break;
-          }
-          this.candidateRepository.retrieveAndPopulate(mainQuery, {}, (err: any, res: any) => {
-            if (err) {
-              callback(new Error('Candidates are not founds'), null);
-            } else {
-              this.candidateRepository.getCandidateQCard(res, jobProfile, candidateIds, appliedFilters.sortBy, callback);
-            }
-          });
-        }
-      }
-    });
-  }
-
-  getJobById(id: string, callback: (error: any, result: JobProfileModel) => void) {
-    let query = {
-      'postedJobs': {$elemMatch: {'_id': new mongoose.Types.ObjectId(id)}}
-    };
-    this.recruiterRepository.retrieve(query, (err: any, res: RecruiterModel[]) => {
-      if (err) {
-        callback(new Error('Problem in Job Retrieve'), null);
-      } else {
-        let jobProfile: JobProfileModel;
-        if (res.length > 0) {
-          for (let job of res[0].postedJobs) {
-            if (job._id.toString() === id) {
-              jobProfile = job;
-            }
-          }
-        }
-        callback(null, jobProfile);
       }
     });
   }
