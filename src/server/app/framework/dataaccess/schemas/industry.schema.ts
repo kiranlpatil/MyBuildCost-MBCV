@@ -3,12 +3,12 @@ import IScenario = require("../mongoose/scenario");
 import IRole = require("../mongoose/role");
 import IIndustry = require("../mongoose/industry");
 
-var mongoose = DataAccess.mongooseInstance;
-var mongooseConnection = DataAccess.mongooseConnection;
+let mongoose = DataAccess.mongooseInstance;
+let mongooseConnection = DataAccess.mongooseConnection;
 
 class IndustrySchema {
   static get schema() {
-    var schema = mongoose.Schema({
+    let schema = mongoose.Schema({
       code: {
         type: String
       },
@@ -65,5 +65,5 @@ class IndustrySchema {
     return schema;
   }
 }
-var schema = mongooseConnection.model<IIndustry>("Industry", IndustrySchema.schema);
+let schema = mongooseConnection.model<IIndustry>("Industry", IndustrySchema.schema);
 export = schema;

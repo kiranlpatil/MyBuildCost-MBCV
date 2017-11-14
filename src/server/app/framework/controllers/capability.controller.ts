@@ -10,8 +10,8 @@ import CapabilityService = require('../services/capability.service');
 
 export function retrieve(req: express.Request, res: express.Response, next: any) {
   try {
-    var capabilityService = new CapabilityService();
-    var rolesparam = req.query.roles;
+    let capabilityService = new CapabilityService();
+    let rolesparam = req.query.roles;
     let item: any = {
       code: req.params.id,
       roles: JSON.parse(rolesparam)

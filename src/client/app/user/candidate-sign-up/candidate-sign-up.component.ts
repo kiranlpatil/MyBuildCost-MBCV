@@ -47,8 +47,8 @@ export class CandidateSignUpComponent implements OnInit, AfterViewInit {
               private sharedService: SharedService, private activatedRoute: ActivatedRoute) {
 
     this.userForm = this.formBuilder.group({
-      'first_name': ['', [ValidationService.requireFirstNameValidator, ValidationService.noWhiteSpaceValidator, ValidationService.nameValidator]],
-      'last_name': ['', [ValidationService.requireLastNameValidator, ValidationService.noWhiteSpaceValidator, ValidationService.nameValidator]],
+      'first_name': ['', [ValidationService.requireFirstNameValidator]],
+      'last_name': ['', [ValidationService.requireLastNameValidator]],
       'mobile_number': ['', [ValidationService.requireMobileNumberValidator, ValidationService.mobileNumberValidator]],
       'email': ['', [ValidationService.requireEmailValidator, ValidationService.emailValidator]],
       'password': ['', [ValidationService.requirePasswordValidator, ValidationService.passwordValidator]],
@@ -113,6 +113,8 @@ export class CandidateSignUpComponent implements OnInit, AfterViewInit {
     }
 
     this.model = this.userForm.value;
+    this.model.first_name = this.model.first_name.trim();
+    this.model.last_name = this.model.last_name.trim();
     this.model.current_theme = AppSettings.LIGHT_THEM;
     this.model.isCandidate = true;
     this.model.email = this.model.email.toLowerCase();

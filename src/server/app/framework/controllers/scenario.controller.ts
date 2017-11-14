@@ -16,8 +16,8 @@ import ScenarioModel = require("../dataaccess/model/scenario.model");
 
 export function retrieve(req: express.Request, res: express.Response, next: any) {
   try {
-    var industryService = new IndustryService();
-    var params = {};
+    let industryService = new IndustryService();
+    let params = {};
     industryService.retrieve(params, (error, result) => {
       if (error) {
         next({
@@ -28,7 +28,7 @@ export function retrieve(req: express.Request, res: express.Response, next: any)
 
       }
       else {
-        //  var token = auth.issueTokenWithUid(user);
+        //  let token = auth.issueTokenWithUid(user);
         res.send({
           "status": "success",
           "data": {
@@ -47,19 +47,19 @@ export function retrieve(req: express.Request, res: express.Response, next: any)
 }
 export function create(req: express.Request, res: express.Response, next: any) {
   try {
-    var newIndustry: IndustryModel = <IndustryModel>req.body;
-    var newRole: RoleModel = <RoleModel>req.body.roles;
-    var newCapability: CapabilityModel = <CapabilityModel>req.body.roles[0].capabilities;
-    var newComplexity: ComplexityModel = <ComplexityModel>req.body.roles[0].capabilities[0].complexities;
-    var newScenario: ScenarioModel = <ScenarioModel>req.body.roles[0].capabilities[0].complexities[0].scenarios;
+    let newIndustry: IndustryModel = <IndustryModel>req.body;
+    let newRole: RoleModel = <RoleModel>req.body.roles;
+    let newCapability: CapabilityModel = <CapabilityModel>req.body.roles[0].capabilities;
+    let newComplexity: ComplexityModel = <ComplexityModel>req.body.roles[0].capabilities[0].complexities;
+    let newScenario: ScenarioModel = <ScenarioModel>req.body.roles[0].capabilities[0].complexities[0].scenarios;
 
-    var industryService = new IndustryService();
+    let industryService = new IndustryService();
     industryService.create(newIndustry, (error, result) => {
       if (error) {
         next(error);
       }
       else {
-        var auth: AuthInterceptor = new AuthInterceptor();
+        let auth: AuthInterceptor = new AuthInterceptor();
         res.status(200).send({
           "status": Messages.STATUS_SUCCESS,
           "data": {

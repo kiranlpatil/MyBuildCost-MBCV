@@ -2,7 +2,7 @@ import log4js = require('log4js');
 import {Logger} from "log4js";
 
 let config = require('config');
-var loggerConfig = config.get("logger");
+let loggerConfig = config.get("logger");
 log4js.configure(loggerConfig);
 
 class LoggerService {

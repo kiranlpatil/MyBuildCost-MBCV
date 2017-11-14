@@ -1,25 +1,25 @@
 import LoggerService = require("./LoggerService");
 
-var Messages = require('../messages');
-var logger = require('./logger');
+let Messages = require('../messages');
+let logger = require('./logger');
 import UserService = require('../../services/user.service');
 
 
 export function errorHandler(err: any, req: any, res: any, next: any) {
   let _loggerService: LoggerService = new LoggerService('errorHandler');
   if (err.code) {
-    var errObject = {
+    let errObject = {
       status: Messages.STATUS_ERROR,
       error: err
     };
-    var responseObject = JSON.stringify(errObject);
+    let responseObject = JSON.stringify(errObject);
     _loggerService.logError(err);
     if(err.code !== 400) {
       mailToAdmin(err);
     }
     res.status(err.code).send(responseObject);
   } else {
-    var errorObject:any = {
+    let errorObject:any = {
       'status': Messages.STATUS_ERROR,
       'error': {
         'reason': 'Internal Server ',
@@ -28,7 +28,7 @@ export function errorHandler(err: any, req: any, res: any, next: any) {
       }
     };
     mailToAdmin(err);
-    var responseObject = JSON.stringify(errorObject);
+    let responseObject = JSON.stringify(errorObject);
     _loggerService.logError(err);
     res.status(500).send(responseObject);
   }
@@ -36,7 +36,7 @@ export function errorHandler(err: any, req: any, res: any, next: any) {
 
 
 export function mailToAdmin(errorInfo:any) {
-  var userService = new UserService();
+  let userService = new UserService();
   userService.sendMailOnError(errorInfo, (error:any, result:any) => {
     if (error) {
       logger.error( Messages.MSG_ERROR_WHILE_CONTACTING);

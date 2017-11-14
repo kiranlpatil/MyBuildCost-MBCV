@@ -1,11 +1,11 @@
 import DataAccess = require("../dataaccess");
 import ShareLink = require("../mongoose/share-link");
-var mongoose = DataAccess.mongooseInstance;
-var mongooseConnection = DataAccess.mongooseConnection;
+let mongoose = DataAccess.mongooseInstance;
+let mongooseConnection = DataAccess.mongooseConnection;
 
 class ShareLinkSchema {
   static get schema() {
-    var schema = mongoose.Schema({
+    let schema = mongoose.Schema({
       shortUrl: {
         type: String,
         unique: true
@@ -21,5 +21,5 @@ class ShareLinkSchema {
     return schema;
   }
 }
-var schema = mongooseConnection.model<ShareLink>('ShareLink', ShareLinkSchema.schema);
+let schema = mongooseConnection.model<ShareLink>('ShareLink', ShareLinkSchema.schema);
 export = schema;

@@ -1,5 +1,5 @@
 import LoggerService = require('../shared/logger/LoggerService');
-var logger = require('../shared/logger/logger');
+let logger = require('../shared/logger/logger');
 
 export function logDetail(req: any, res: any, next: any) {
   let _loggerService: LoggerService = new LoggerService("API ENTRY");//TODO remove password from parm

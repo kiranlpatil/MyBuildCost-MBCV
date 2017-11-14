@@ -18,8 +18,8 @@ import CandidateSearchService = require("../services/candidate-search.service");
 export function create(req: express.Request, res: express.Response, next: any) {
   try {
 
-    var newUser: RecruiterModel = <RecruiterModel>req.body;
-    var recruiterService = new RecruiterService();
+    let newUser: RecruiterModel = <RecruiterModel>req.body;
+    let recruiterService = new RecruiterService();
 /*
     let mailChimpMailerService = new MailChimpMailerService();
 */
@@ -52,8 +52,8 @@ export function create(req: express.Request, res: express.Response, next: any) {
         }
       }
       else {
-        var auth: AuthInterceptor = new AuthInterceptor();
-        var token = auth.issueTokenWithUid(result);
+        let auth: AuthInterceptor = new AuthInterceptor();
+        let token = auth.issueTokenWithUid(result);
 /*
         mailChimpMailerService.onRecruiterSignUpSuccess(newUser);
 */
@@ -83,9 +83,9 @@ export function create(req: express.Request, res: express.Response, next: any) {
 
 export function postJob(req: express.Request, res: express.Response, next: any) {
   try {
-    var newJob: JobProfileModel = <JobProfileModel>req.body;
-    var recruiterService = new RecruiterService();
-    var userId = req.params.id;
+    let newJob: JobProfileModel = <JobProfileModel>req.body;
+    let recruiterService = new RecruiterService();
+    let userId = req.params.id;
     if (newJob.postedJobs._id !== undefined && newJob.postedJobs._id !== null && newJob.postedJobs._id !== '') {
 
       let currentDate = Number(new Date());
@@ -142,17 +142,17 @@ export function postJob(req: express.Request, res: express.Response, next: any) 
 
 export function updateDetails(req: express.Request, res: express.Response, next: any) {
   try {
-    var newRecruiter: RecruiterModel = <RecruiterModel>req.body;
-    var params = req.query;
+    let newRecruiter: RecruiterModel = <RecruiterModel>req.body;
+    let params = req.query;
     delete params.access_token;
-    var userId: string = req.params.id;
-    var auth: AuthInterceptor = new AuthInterceptor();
-    var recruiterService = new RecruiterService();
+    let userId: string = req.params.id;
+    let auth: AuthInterceptor = new AuthInterceptor();
+    let recruiterService = new RecruiterService();
     recruiterService.updateDetails(userId, newRecruiter, (error, result) => {
       if (error) {
         next(error);
       } else {
-        var token = auth.issueTokenWithUid(newRecruiter);
+        let token = auth.issueTokenWithUid(newRecruiter);
         res.send({
           'status': 'success',
           'data': result,
@@ -168,7 +168,7 @@ export function updateDetails(req: express.Request, res: express.Response, next:
 
 export function retrieve(req: express.Request, res: express.Response, next: any) {
   try {
-    var recruiterService = new RecruiterService();
+    let recruiterService = new RecruiterService();
     let data = {
       'userId': new mongoose.Types.ObjectId(req.params.id)
     };
@@ -218,7 +218,7 @@ export function retrieve(req: express.Request, res: express.Response, next: any)
 
 export function getFilterList(req: express.Request, res: express.Response,next:any) {
   __dirname = './';
-  var filepath = 'recruiter-filter-list.json';
+  let filepath = 'recruiter-filter-list.json';
   try {
     res.sendFile(filepath, {root: __dirname});
   }
@@ -258,8 +258,8 @@ export function getList(req: express.Request, res: express.Response, next: any) 
 export function getCompareDetailsOfCandidate(req: express.Request, res: express.Response, next: any) {
 
   try {
-    var searchService = new SearchService();
-    var params = req.query;
+    let searchService = new SearchService();
+    let params = req.query;
     let jobId = req.params.jobId;
     let recruiterId = req.params.id;
     let candidateId: string[] = JSON.parse(params.candidateId);
@@ -293,17 +293,17 @@ export function getCandidatesByName(req: express.Request, res: express.Response,
     let userService = new UserService();
     let candidateService = new CandidateService();
     let candidateSearchService = new CandidateSearchService();
-    var userName = req.params.searchvalue;
-    var query:any;
-    var searchValueArray:string[] = userName.split(" ");
+    let userName = req.params.searchvalue;
+    let query:any;
+    let searchValueArray:string[] = userName.split(" ");
     let included : any = {
       '_id':1
     };
     if (searchValueArray.length > 1) {
-      var exp1 = eval('/^' + searchValueArray[0] + '/i');
-      var exp2 = eval('/^' + searchValueArray[1] + '/i');
-      var searchString1: string = exp1.toString().replace(/'/g, "");
-      var searchString2: string = exp2.toString().replace(/'/g, "");
+      let exp1 = eval('/^' + searchValueArray[0] + '/i');
+      let exp2 = eval('/^' + searchValueArray[1] + '/i');
+      let searchString1: string = exp1.toString().replace(/'/g, "");
+      let searchString2: string = exp2.toString().replace(/'/g, "");
       query = {
         'isCandidate': true,
         $or: [{
@@ -312,8 +312,8 @@ export function getCandidatesByName(req: express.Request, res: express.Response,
         }, {'first_name': {$regex: eval(searchString2)}, 'last_name': {$regex: eval(searchString1)}}]
       };
     } else {
-      var exp = eval('/^' + searchValueArray[0] + '/i');
-      var searchString: string = exp.toString().replace(/'/g, "");
+      let exp = eval('/^' + searchValueArray[0] + '/i');
+      let searchString: string = exp.toString().replace(/'/g, "");
 
       query = {
         'isCandidate': true,
@@ -330,7 +330,7 @@ export function getCandidatesByName(req: express.Request, res: express.Response,
         });
       }
       else {
-        var candidateId: string[] = new Array(0);
+        let candidateId: string[] = new Array(0);
         for (let obj of result) {
           candidateId.push(obj._id);
         }
@@ -343,7 +343,7 @@ export function getCandidatesByName(req: express.Request, res: express.Response,
               code: 401
             });
           } else {
-            var searchArray: CandidateInfoSearch[] = candidateSearchService.buidResultOnCandidateSearch(candidateInfo);
+            let searchArray: CandidateInfoSearch[] = candidateSearchService.buidResultOnCandidateSearch(candidateInfo);
             res.send({
               'status': 'success',
               'data': searchArray,
@@ -364,7 +364,7 @@ export function requestToAdvisor(req: express.Request, res: express.Response, ne
   try {
 
     let recruiterService = new RecruiterService();
-    var params = req.body;
+    let params = req.body;
     recruiterService.sendMailToAdvisor(params, (error, result) => {
       if (error) {
         next({
@@ -391,7 +391,7 @@ export function responseToRecruiter(req: express.Request, res: express.Response,
   try {
     let recruiterService = new RecruiterService();
     let user = req.user;
-    var params = req.body;
+    let params = req.body;
     recruiterService.sendMailToRecruiter(user, params, (error, result) => {
       if (error) {
         next({

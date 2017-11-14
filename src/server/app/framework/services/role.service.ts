@@ -1,5 +1,5 @@
 import RoleClassModel = require("../dataaccess/model/role-class.model");
-var config = require('config');
+let config = require('config');
 import CNextMessages = require("../shared/cnext-messages");
 import ProjectAsset = require("../shared/projectasset");
 import RoleRepository = require("../dataaccess/repository/role.repository");

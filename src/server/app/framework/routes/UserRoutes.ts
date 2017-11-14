@@ -4,7 +4,7 @@
 import * as express from "express";
 
 
-var router = express.Router();
+let router = express.Router();
 class UserRoutes {
 
 

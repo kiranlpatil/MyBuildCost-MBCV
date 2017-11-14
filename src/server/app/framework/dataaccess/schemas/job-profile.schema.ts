@@ -9,12 +9,12 @@ import IEmploymentHistory = require("../mongoose/employment-history");
 import IJobProfile = require("../mongoose/job-profile");
 import ILocation = require("../mongoose/location");
 import IDomain = require("../mongoose/domain");
-var mongoose = DataAccess.mongooseInstance;
-var mongooseConnection = DataAccess.mongooseConnection;
+let mongoose = DataAccess.mongooseInstance;
+let mongooseConnection = DataAccess.mongooseConnection;
 
 class JobProfileSchema {
   static get schema() {
-    var schema = mongoose.Schema({
+    let schema = mongoose.Schema({
       jobTitle: {
         type: String
       },
@@ -94,5 +94,5 @@ class JobProfileSchema {
     return schema;
   }
 }
-var schema = mongooseConnection.model<IJobProfile>("JobProfile", JobProfileSchema.schema);
+let schema = mongooseConnection.model<IJobProfile>("JobProfile", JobProfileSchema.schema);
 export = schema;

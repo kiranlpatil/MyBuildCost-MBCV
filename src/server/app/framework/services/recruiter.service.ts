@@ -8,7 +8,7 @@ import RecruiterRepository = require('../dataaccess/repository/recruiter.reposit
 import JobProfileModel = require('../dataaccess/model/jobprofile.model');
 import CandidateRepository = require('../dataaccess/repository/candidate.repository');
 import * as fs from 'fs';
-var config = require('config');
+let config = require('config');
 let path = require('path');
 import CapabilityMatrixService = require('./capbility-matrix.builder');
 import IndustryModel = require('../dataaccess/model/industry.model');
@@ -19,7 +19,7 @@ import RecruiterModel = require('../dataaccess/model/recruiter.model');
 import RecruiterClassModel = require('../dataaccess/model/recruiterClass.model');
 import CandidateService = require('./candidate.service');
 import {CandidatesInLists} from "../dataaccess/model/CandidatesInLists.model";
-var bcrypt = require('bcrypt');
+let bcrypt = require('bcrypt');
 
 class RecruiterService {
   APP_NAME: string;
@@ -342,32 +342,32 @@ class RecruiterService {
     this.recruiterRepository.retrieveWithLean(field, projection, callback);
   }
   sendMailToAdvisor(field: any, callback: (error: any, result: any) => void) {
-    var header1 = fs.readFileSync(path.resolve() +config.get('TplSeed.publicPath')+'header1.html').toString();
-    var footer1 = fs.readFileSync(path.resolve() +config.get('TplSeed.publicPath')+'footer1.html').toString();
-    var mailOptions = {
+    let header1 = fs.readFileSync(path.resolve() +config.get('TplSeed.publicPath')+'header1.html').toString();
+    let footer1 = fs.readFileSync(path.resolve() +config.get('TplSeed.publicPath')+'footer1.html').toString();
+    let mailOptions = {
       to: field.email_id,
       subject: Messages.EMAIL_SUBJECT_RECRUITER_CONTACTED_YOU,
       html: header1  + footer1, attachments: MailAttachments.AttachmentArray
     }
-    var sendMailService = new SendMailService();
+    let sendMailService = new SendMailService();
     sendMailService.sendMail(mailOptions, callback);
 
   }
 
   sendMailToRecruiter(user:any,field: any, callback: (error: any, result: any) => void) {
-    var header1 = fs.readFileSync(path.resolve() +config.get('TplSeed.publicPath')+'header1.html').toString();
-    var content = fs.readFileSync(path.resolve() +config.get('TplSeed.publicPath')+'confirmation.mail.html').toString();
-    var footer1 = fs.readFileSync(path.resolve() +config.get('TplSeed.publicPath')+'footer1.html').toString();
+    let header1 = fs.readFileSync(path.resolve() +config.get('TplSeed.publicPath')+'header1.html').toString();
+    let content = fs.readFileSync(path.resolve() +config.get('TplSeed.publicPath')+'confirmation.mail.html').toString();
+    let footer1 = fs.readFileSync(path.resolve() +config.get('TplSeed.publicPath')+'footer1.html').toString();
     content=content.replace('$job_title$', field.jobTitle);
     let host = config.get('TplSeed.mail.host');
     let link = host + 'signin';
     content=content.replace('$link$', link);
-    var mailOptions = {
+    let mailOptions = {
       to: user.email,
       subject: Messages.EMAIL_SUBJECT_RECRUITER_CONTACTED_YOU+field.jobTitle,
       html: header1+content+ footer1, attachments: MailAttachments.AttachmentArray
     }
-    var sendMailService = new SendMailService();
+    let sendMailService = new SendMailService();
     sendMailService.sendMail(mailOptions, callback);
   }
 

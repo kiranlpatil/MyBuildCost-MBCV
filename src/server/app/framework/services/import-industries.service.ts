@@ -2,7 +2,7 @@ import IndustryRepository = require('../dataaccess/repository/import-industries.
 /**
  * Created by techprime002 on 7/11/2017.
  */
-var xlsxj = require('xlsx-to-json');
+let xlsxj = require('xlsx-to-json');
 import CNextMessages = require('../shared/cnext-messages');
 import ProjectAsset = require('../shared/projectasset');
 import ImportIndustriesModel = require('../dataaccess/model/industry-class.model');
@@ -53,7 +53,7 @@ class ImportIndustryService {
         console.error(err);
         callback(err, null);
       } else {
-        var rolesArray:any = [];
+        let rolesArray:any = [];
 
         for (let i = 0; i < result.length-1; i++) {
           if(result[i].area_of_work_code === '') {
@@ -71,9 +71,9 @@ class ImportIndustryService {
         }
 
         for (let i = 0; i < rolesArray.length; i++) {
-          var capabilities: any = [];
+          let capabilities: any = [];
           for (let j = 1; j < result.length; j++) {
-            var currentRow = result[j];
+            let currentRow = result[j];
             if (rolesArray[i].name === currentRow.area_of_work) {
               if(result[j].capability_code === '') {
                 if(result[j].area_of_work === '' && result[j].capability ==='' && result[j].complexity==='') {

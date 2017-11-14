@@ -16,8 +16,8 @@ import ScenarioModel = require("../dataaccess/model/scenario.model");
 
 export function create(req: express.Request, res: express.Response, next: any) {
   /*try {
-   var newUser: UserModel = <UserModel>req.body;
-   var userService = new UserService();
+   let newUser: UserModel = <UserModel>req.body;
+   let userService = new UserService();
    userService.createUser(newUser, (error, result) => {
    if (error) {
    console.log("crt user error",error);
@@ -45,8 +45,8 @@ export function create(req: express.Request, res: express.Response, next: any) {
    }
    }
    else {
-   var auth: AuthInterceptor = new AuthInterceptor();
-   var token = auth.issueTokenWithUid(newUser);
+   let auth: AuthInterceptor = new AuthInterceptor();
+   let token = auth.issueTokenWithUid(newUser);
    res.status(200).send({
    "status": Messages.STATUS_SUCCESS,
    "data": {

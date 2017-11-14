@@ -21,8 +21,8 @@ import CNextMessages = require("../shared/cnext-messages");
 
 export function retrieve(req: express.Request, res: express.Response, next: any) {
   try {
-    var industryService = new IndustryService();
-    var params = {};
+    let industryService = new IndustryService();
+    let params = {};
     industryService.retrieveAll(params, (error, result) => {
       if (error) {
         next({
@@ -82,8 +82,8 @@ export function create(req: express.Request, res: express.Response, next: any) {
 
 export function getReleventIndustryList(req: express.Request, res: express.Response, next: any) {
   try {
-    var rolesparam = req.query.roles;
-    var industryName = req.query.industryName;
+    let rolesparam = req.query.roles;
+    let industryName = req.query.industryName;
     let industryService = new IndustryService();
     industryService.getReleventIndustryList(rolesparam, industryName, (error: any, response: any) => {
       if (error) {

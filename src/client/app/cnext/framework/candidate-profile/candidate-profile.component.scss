@@ -260,15 +260,20 @@
 }
 
 .submit-view-profile-btn {
-  background: $bg-tabs;
-  bottom: 5px;
-  display: table;
-  left: 0;
+  bottom: 6px;
+  float: right;
   margin: 7px auto;
   padding: 10px;
   position: fixed;
-  text-align: center;
-  width: 100%;
+  text-align: right;
+  width: 850px;
+  .btn {
+    border-radius: 23px;
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    color: $white;
+    font-size: 14px;
+    font-family: 'gothamrnd-book';
+  }
 }
 
 .profile-visibility-wrapper {
