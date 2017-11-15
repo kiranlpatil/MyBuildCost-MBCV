@@ -3,7 +3,7 @@ import {ActivateUserComponent} from "./index";
 
 export const ActivateUserRoutes: Route[] = [
   {
-    path: 'activate_user',
+    path: 'activate-user',
     component: ActivateUserComponent
   }
 ];
