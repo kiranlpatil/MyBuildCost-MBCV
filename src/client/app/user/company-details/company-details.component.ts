@@ -177,7 +177,7 @@ export class CompanyDetailsComponent implements OnInit {
     } else if (socialLogin === AppSettings.IS_SOCIAL_LOGIN_YES) {
       this.image_path = this.model.picture;
     } else {
-      this.image_path = AppSettings.IP + this.model.picture.substring(4).replace('"', '');
+      this.image_path = AppSettings.IP + this.model.picture.replace('"', '');
     }
     var message = new Message();
     message.isError = false;

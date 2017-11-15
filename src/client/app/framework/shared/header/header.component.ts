@@ -68,7 +68,7 @@ export class HeaderComponent implements OnInit {
     } else if (!this.model.picture || this.model.picture === undefined) {
       this.PROFILE_IMG_PATH = ImagePath.PROFILE_IMG_ICON;
     } else {
-      this.PROFILE_IMG_PATH = AppSettings.IP + this.model.picture.substring(4).replace('"', '');
+      this.PROFILE_IMG_PATH = AppSettings.IP + this.model.picture;
     }
   }
 
