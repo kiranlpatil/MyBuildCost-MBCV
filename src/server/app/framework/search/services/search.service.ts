@@ -42,12 +42,6 @@ class SearchService {
     let industries: string[] = [];
     let isReleventIndustriesFound: boolean = false;
     if (jobProfile.interestedIndustries && jobProfile.interestedIndustries.length > 0) {
-      /*isFound= jobProfile.interestedIndustries.filter((name : string)=> {
-       if(name === 'None'){
-       return name;
-       }
-       });*/
-      //jobProfile.releventIndustries = ['Textile'];
       for (let name of jobProfile.interestedIndustries) {
         if (name === 'None') {
           isFound = true;

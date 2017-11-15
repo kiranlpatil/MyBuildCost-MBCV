@@ -386,7 +386,7 @@ export class QCardviewComponent implements OnChanges {
   navigateWithId(nav: string, candidate: CandidateQCard) {
     this.profileCreatorService.getCandidateDetailsOfParticularId(candidate._id).subscribe(
       candidateData => {
-        this._router.navigate([nav, candidateData.data.userId,{jobId: this.jobId}]);
+        this._router.navigate([nav, candidateData.data.userId,{jobId: this.jobId}]); //todo Rahul get only userId
       });
   }
 

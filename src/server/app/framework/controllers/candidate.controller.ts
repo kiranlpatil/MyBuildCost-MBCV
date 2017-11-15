@@ -258,7 +258,6 @@ export function retrieve(req: express.Request, res: express.Response, next: any)
 
 export function get(req: express.Request, res: express.Response, next: any) { //todo authentication is remaining
   try {
-    let recruiterService = new RecruiterService();
     let candidateService = new CandidateService();
     let candidateId = req.params.id;
     let recruiterUserId = req.user._id;
@@ -276,7 +275,6 @@ export function get(req: express.Request, res: express.Response, next: any) { //
       });
     } else {
       candidateService.maskCandidateDetails(candidateId, recruiterUserId, (error, candidateDetails) => {
-        console.log('call successssssss-------.....', candidateDetails);
         res.send({
           'status': 'success',
           'data': candidateDetails
