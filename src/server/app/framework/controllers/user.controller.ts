@@ -1562,7 +1562,7 @@ export function updatePicture(req: express.Request, res: express.Response, next:
       let image_path = files.file[0].path;
       let originalFilename = JSON.stringify(image_path.substr(files.file[0].path.lastIndexOf('/') + 1));
       let userService = new UserService();
-      path=config.get('TplSeed.publicPath')+'profileimage/'+originalFilename.replace(/"/g,'');
+      path=config.get('TplSeed.profilePath')+'profileimage/'+originalFilename.replace(/"/g,'');
 
       userService.UploadImage(path, originalFilename, function (err: any, tempath: any) {
         if (err) {
