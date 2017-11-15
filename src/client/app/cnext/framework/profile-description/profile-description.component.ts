@@ -122,7 +122,7 @@ export class ProfileDescriptionComponent implements OnInit {
 
   onPictureUpload(imagePath: string) {
     this.candidate.basicInformation.picture = imagePath;
-    this.image_path = AppSettings.IP + imagePath.substring(4).replace('"', '');
+    this.image_path = AppSettings.IP + imagePath.replace('"', '');
   }
 
   onExperienceListSuccess(data: any) {

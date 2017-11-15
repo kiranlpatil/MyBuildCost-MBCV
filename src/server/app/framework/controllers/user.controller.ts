@@ -11,7 +11,8 @@ import CandidateService = require('../services/candidate.service');
 import adminController= require('./admin.controller');
 import RecruiterModel = require('../dataaccess/model/recruiter.model');
 import { MailChimpMailerService } from '../services/mailchimp-mailer.service';
-
+let config = require('config');
+let path = require('path');
 let bcrypt = require('bcrypt');
 
 export function login(req: express.Request, res: express.Response, next: any) {
@@ -1545,7 +1546,7 @@ export function googlelogin(req: express.Request, res: express.Response, next: a
  }*/
 
 export function updatePicture(req: express.Request, res: express.Response, next: any): void {
-  __dirname = 'server/prod/app/framework/public/profileimage';
+  __dirname = path.resolve() + config.get('TplSeed.publicPath')+'profileimage';
   let form = new multiparty.Form({uploadDir: __dirname});
   form.parse(req, (err: Error, fields: any, files: any) => {
     if (err) {
@@ -1553,6 +1554,7 @@ export function updatePicture(req: express.Request, res: express.Response, next:
         reason: Messages.MSG_ERROR_RSN_DIRECTORY_NOT_FOUND,
         message: Messages.MSG_ERROR_DIRECTORY_NOT_FOUND,
         stackTrace: new Error(),
+        actualError: err,
         code: 403
       });
     } else {
@@ -1560,6 +1562,7 @@ export function updatePicture(req: express.Request, res: express.Response, next:
       let image_path = files.file[0].path;
       let originalFilename = JSON.stringify(image_path.substr(files.file[0].path.lastIndexOf('/') + 1));
       let userService = new UserService();
+      path=config.get('TplSeed.publicPath')+'profileimage/'+originalFilename.replace(/"/g,'');
 
       userService.UploadImage(path, originalFilename, function (err: any, tempath: any) {
         if (err) {

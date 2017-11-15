@@ -321,7 +321,7 @@ export class Messages {
   public static GUIDED_TOUR_VALUE_PORTRAIT_MWSSAGE = 'You can share your value portrait on Social Media.';
   public static GUIDED_TOUR_VALUE_PORTRAIT_GO_TO_DASHBOARD = 'Proceed to Job Matching Dashboard.';
 
-  public static UNABLE_TO_RENEW_JOB_POST_MSG = 'Can not renew your job post kindly click on "Clone" button to clone the same job';
+  public static UNABLE_TO_RENEW_JOB_POST_MSG = 'Your job post can be renewed only 30 or less days before expiry, you can click on "Clone" button to clone the same job';
   public static RENEW_JOB_POST_MSG = 'Your job post has been expired to renew your job click on "Renew Job Post" button';
 
   public static NO_CANDIDATES_AVAILABLE = 'No candidates available for selected alphabet.';

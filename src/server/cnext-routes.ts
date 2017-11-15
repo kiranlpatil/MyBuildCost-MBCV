@@ -20,6 +20,7 @@ this.authInterceptor = new AuthInterceptor();
 
 
 export function cnextInit(app: express.Application) {
+  try {
   //todo add interceptor to authenticate
   let searchController = new SearchController();
   let shareController = new ShareController();
@@ -87,4 +88,8 @@ export function cnextInit(app: express.Application) {
   app.put('/api/candidate/fieldUpdate/:id',loggerInterceptor.logDetail, this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, candidateController.updateField);
 
   app.use(sharedService.errorHandler);
+}catch (e) {
+  console.log('exception',e);
+  sharedService.errorHandler(e);
+}
 }

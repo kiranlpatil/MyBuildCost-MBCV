@@ -44,7 +44,7 @@ export class ProfilePictureComponent {
         this.image_path = ImagePath.COMPANY_LOGO_IMG_ICON;
       }
     } else {
-      this.uploaded_image_path = this.uploaded_image_path.substring(4, this.uploaded_image_path.length - 1).replace('"', '');
+      this.uploaded_image_path = this.uploaded_image_path.replace('"', '');
       this.image_path = AppSettings.IP + this.uploaded_image_path;
     }
 
@@ -93,7 +93,7 @@ export class ProfilePictureComponent {
     } else if (socialLogin === AppSettings.IS_SOCIAL_LOGIN_YES) {
       this.image_path = this.model.picture;
     } else {
-      this.image_path = AppSettings.IP + this.model.picture.substring(4).replace('"', '');
+      this.image_path = AppSettings.IP + this.model.picture.replace('"', '');
     }
     this.isLoading = false;
     this.profileService.onProfileUpdate(result);
