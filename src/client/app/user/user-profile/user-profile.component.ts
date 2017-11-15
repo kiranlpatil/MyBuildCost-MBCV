@@ -264,6 +264,10 @@ export class UserProfileComponent implements OnInit {
       }
     }
   }
+  onMobileNumberChangeComplete() {
+    this.model.mobile_number = LocalStorageService.getLocalValue(LocalStorage.MOBILE_NUMBER);
+    this.showStyleMobile = !this.showStyleMobile;
+  }
   onCompanyWebsiteUpdate(event:any) {
     this.showStyleCompanyWebsite=false;
     this.company_website=event;

@@ -1,4 +1,4 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, EventEmitter, OnInit, Output} from "@angular/core";
 import {Router} from "@angular/router";
 import {ChangeMobileService} from "./change-mobile.service";
 import {ChangeMobile} from "../../models/changemobile";
@@ -18,12 +18,18 @@ import {LoaderService} from "../../../shared/loader/loaders.service";
 })
 
 export class ChangeMobileComponent implements OnInit {
+  @Output() onMobileNumberChangeComplete: EventEmitter<boolean> = new EventEmitter();
+
   isMobileNoConfirm: boolean;
   model = new ChangeMobile();
   userForm: FormGroup;
   error_msg: string;
-  isShowErrorMessage: boolean = true;
+  verificationMessage: string;
+  verificationMessageHeading: string;
+  actioName: string;
+  isShowErrorMessage: boolean = false;
   showModalStyle: boolean = false;
+  showModalStyleVerification: boolean = false;
   MOBILE_ICON: string;
   NEW_MOBILE_ICON: string;
   CONFIRM_MOBILE_ICON: string;
@@ -31,7 +37,8 @@ export class ChangeMobileComponent implements OnInit {
   mobileNumberChangeSucess:string =Messages.MSG_MOBILE_NUMBER_Change_SUCCESS;
 
   constructor(private commonService: CommonService, private _router: Router,
-              private MobileService: ChangeMobileService, private messageService: MessageService, private formBuilder: FormBuilder, private loaderService: LoaderService) {
+              private MobileService: ChangeMobileService, private messageService: MessageService, private formBuilder: FormBuilder,
+              private loaderService: LoaderService) {
 
     this.userForm = this.formBuilder.group({
       'new_mobile_number': ['', [Validators.required, ValidationService.mobileNumberValidator]],
@@ -57,11 +64,13 @@ export class ChangeMobileComponent implements OnInit {
   ngOnInit() {
     this.model.current_mobile_number = LocalStorageService.getLocalValue(LocalStorage.MOBILE_NUMBER);
   }
-
+  onChangeInputValue() {
+    this.isMobileNoConfirm=false;
+    this.isShowErrorMessage=false;
+  }
   onSubmit() {
     this.model = this.userForm.value;
     if (!this.makeMobileConfirm()) {
-      //this._router.navigate([NavigationRoutes.VERIFY_PHONE]);
       this.MobileService.changeMobile(this.model)
         .subscribe(
           body => this.changeMobileSuccess(body),
@@ -72,11 +81,16 @@ export class ChangeMobileComponent implements OnInit {
 
   changeMobileSuccess(body: ChangeMobile) {
     LocalStorageService.setLocalValue(LocalStorage.VERIFIED_MOBILE_NUMBER, this.model.new_mobile_number);
-    this.userForm.reset();
     LocalStorageService.setLocalValue(LocalStorage.VERIFY_PHONE_VALUE, 'from_settings');
-    this._router.navigate([NavigationRoutes.VERIFY_PHONE]);
+    this.raiseOtpVerification();
   }
-
+   raiseOtpVerification() {
+     this.verificationMessage=this.getMessages().MSG_MOBILE_NUMBER_CHANGE_VERIFICATION_MESSAGE;
+     this.verificationMessageHeading=this.getMessages().MSG_MOBILE_NUMBER_CHANGE_VERIFICATION_TITLE;
+     this.actioName=this.getMessages().FROM_ACCOUNT_DETAIL;
+     this.showModalStyleVerification=true;
+     this.model.id=LocalStorageService.getLocalValue(LocalStorage.USER_ID);
+  }
   changeMobileFail(error: any) {
     if (error.err_code === 404 || error.err_code === 0 || error.err_code===401) {
       var message = new Message();
@@ -84,7 +98,7 @@ export class ChangeMobileComponent implements OnInit {
       message.isError = true;
       this.messageService.message(message);
     } else {
-      this.isShowErrorMessage = false;
+      this.isShowErrorMessage = true;
       this.error_msg = error.err_msg;
     }
   }
@@ -93,10 +107,18 @@ export class ChangeMobileComponent implements OnInit {
     this.commonService.goBack();
   }
 
+  getMessages() {
+    return Messages;
+  }
+
   showHideModal() {
     this.showModalStyle = !this.showModalStyle;
   }
-
+  showHideModalVerification() {
+    this.showModalStyleVerification = !this.showModalStyleVerification;
+    this.model.current_mobile_number=LocalStorageService.getLocalValue(LocalStorage.MOBILE_NUMBER);
+    this.onMobileNumberChangeComplete.emit();
+  }
   logOut() {
     window.localStorage.clear();
     this._router.navigate([NavigationRoutes.APP_START]);
@@ -108,5 +130,21 @@ export class ChangeMobileComponent implements OnInit {
     } else {
       return 'none';
     }
+  }
+  getStyleVerification() {
+    if (this.showModalStyleVerification) {
+      return 'block';
+    } else {
+      return 'none';
+    }
+  }
+  onMobileNumberChange() {
+    LocalStorageService.setLocalValue(LocalStorage.MOBILE_NUMBER, LocalStorage.VERIFIED_MOBILE_NUMBER);
+    this.userForm.reset();
+    this.showModalStyleVerification=!this.showModalStyleVerification;
+    this.model.current_mobile_number=LocalStorageService.getLocalValue(LocalStorage.VERIFIED_MOBILE_NUMBER);
+    LocalStorageService.setLocalValue(LocalStorage.MOBILE_NUMBER,this.model.current_mobile_number);
+    this.onMobileNumberChangeComplete.emit();
+
   }
 }

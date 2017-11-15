@@ -13,7 +13,6 @@ import {ResetPasswordService} from "./forgot-password/reset-password/reset-passw
 import {CandidateSignUpComponent} from "./candidate-sign-up/candidate-sign-up.component";
 import {CandidateSignUpService} from "./candidate-sign-up/candidate-sign-up.service";
 import {CandidateSignUpVerificationComponent} from "./candidate-sign-up-verification/candidate-sign-up-verification.component";
-import {CandidateSignUpVerificationService} from "./candidate-sign-up-verification/candidate-sign-up-verification.service";
 import {RegistrationService} from "./services/registration.service";
 import {UserVerificationComponent} from "./user-verification/user-verification.component";
 import {UserVerificationService} from "./user-verification/user-verification.service";
@@ -38,23 +37,26 @@ import {RecruiterSharedHeaderComponent} from "./recruiter-shared-header/recruite
 import {SettingsComponent} from "./settings/settings.component";
 import {SettingsService} from "./settings/settings.service";
 import {AdminDashboardHeaderComponent} from "./admin-dashboard-header/admin-dashboard-header.component";
+import { OtpVerificationComponent} from './otp-verification/otp-verification.component';
+import { OtpVerificationService} from './otp-verification/otp-verification.service';
+import { LoginauthGuard } from './login/login-auth-guard.service';
 
 @NgModule({
   imports: [CommonModule, FormsModule, ReactiveFormsModule, SharedModule, /*TODO Abhijeet Ng2AutoCompleteModule,*/ UserRoutingModule],
   declarations: [UserHeaderComponent, LoginComponent, ResetPasswordComponent, ForgotPasswordComponent,
+    CandidateSignUpComponent, CandidateSignUpVerificationComponent,OtpVerificationComponent, UserVerificationComponent, RecruiterSignUpComponent,
+    CompanyDetailsComponent, ProfilePictureComponent, ChangePasswordComponent, ActivateEmailComponent,
+    ChangeEmailComponent, ChangeMobileComponent, UserProfileComponent, CandidateDashboardHeaderComponent,
+    CandidateHeaderComponent, RecruiterSharedHeaderComponent, SettingsComponent, AdminDashboardHeaderComponent],
+  exports: [UserHeaderComponent, LoginComponent, ResetPasswordComponent,OtpVerificationComponent, ForgotPasswordComponent,
     CandidateSignUpComponent, CandidateSignUpVerificationComponent, UserVerificationComponent, RecruiterSignUpComponent,
     CompanyDetailsComponent, ProfilePictureComponent, ChangePasswordComponent, ActivateEmailComponent,
     ChangeEmailComponent, ChangeMobileComponent, UserProfileComponent, CandidateDashboardHeaderComponent,
     CandidateHeaderComponent, RecruiterSharedHeaderComponent, SettingsComponent, AdminDashboardHeaderComponent],
-  exports: [UserHeaderComponent, LoginComponent, ResetPasswordComponent, ForgotPasswordComponent,
-    CandidateSignUpComponent, CandidateSignUpVerificationComponent, UserVerificationComponent, RecruiterSignUpComponent,
-    CompanyDetailsComponent, ProfilePictureComponent, ChangePasswordComponent, ActivateEmailComponent,
-    ChangeEmailComponent, ChangeMobileComponent, UserProfileComponent, CandidateDashboardHeaderComponent,
-    CandidateHeaderComponent, RecruiterSharedHeaderComponent, SettingsComponent, AdminDashboardHeaderComponent],
-  providers: [LoginService, FacebookService, ForgotPasswordService, ResetPasswordService, CandidateSignUpService,
-    CandidateSignUpVerificationService, RegistrationService, UserVerificationService, RecruiterSignUpService,
+  providers: [LoginService, FacebookService, ForgotPasswordService, ResetPasswordService,CandidateSignUpService,OtpVerificationService,
+     RegistrationService, UserVerificationService, RecruiterSignUpService,
     CompanyDetailsService, ChangePasswordService, ActiveEmailService, ChangeEmailService, ChangeMobileService,
-    RegistrationService, SettingsService]
+    RegistrationService, SettingsService,LoginauthGuard]
 })
 
 export class UserModule {

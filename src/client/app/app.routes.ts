@@ -6,8 +6,6 @@ import { ActivateUserRoutes } from './framework/registration/activate-user/activ
 import { RecruiterDashboard } from './cnext/framework/recruiter-dashboard/recruiter-dashboard.routes';
 import { CandidateSummary } from './cnext/framework/one-page-summary/candidate-summary/candidate-summary.routes';
 import { RecruiterSummary } from './cnext/framework/one-page-summary/recruiter-job-summary/recruiter-job-summary.routes';
-import { CandidateCompare } from './cnext/framework/single-page-compare-view/candidate-compare-view/candidate-compare-view.routes';
-import { JobCompare } from './cnext/framework/single-page-compare-view/job-compare-view/job-compare-view.routes';
 import { ValuePortrait } from './cnext/framework/value-portrait/value-portrait-container.routes';
 import { ShareContainerRoutes } from './cnext/framework/share-container/share-container.routes';
 import { JobShareContainerRoutes } from './cnext/framework/job-share-container/job-share-container.routes';
@@ -16,24 +14,19 @@ import {PageNotFoundComponent} from "./shared/page-not-found/page-not-found.comp
 
 
 export const routes: Routes = [
+
   {
-    path: 'signin',
-    loadChildren: '/app/user/user.module#UserModule'
+    path: 'admin',
+    loadChildren: '/app/admin/admin.module#AdminModule'
   },
-  //...LandingPageRoutes,
   ...ActivateUserRoutes,  //Check usage
   ...DashboardRoutes,
   ...CandidateRouteSwitch,
   ...RecruiterDashboard,
   ...RecruiterSummary,
-  ...CandidateCompare, //Check is require in app.route.ts or its usage in app
-  ...JobCompare,  //Check is require in app.route.ts or its usage in app
   ...AboutRoutes,
-//  ...ProfileCreator,
   ...CandidateSummary,
   ...ValuePortrait,
-  //...JobDashboardRoutes,
-  //...JobPosterRoutes,
   ...ShareContainerRoutes,
   ...JobShareContainerRoutes,
   ...StartRoutes,

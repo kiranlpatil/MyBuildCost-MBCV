@@ -1972,6 +1972,46 @@ select:focus {
   }
 }
 
+.user-profile-model {
+  .main-form-wrapper {
+    display: inherit;
+    height: auto;
+    width: 100%;
+    .content {
+      background: transparent;
+      left: inherit;
+      margin-right: 0;
+      padding: 0;
+      position: relative;
+      text-align: left;
+      top: inherit;
+      -webkit-transform: translate(0%, 0%);
+      transform: translate(0%, 0%);
+      border: 0px solid #ccc;
+      box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.15);
+    }
+  }
+}
+
+.mobile-verification {
+  .button-group {
+    padding: 0;
+  }
+  p {
+    padding: 0;
+  }
+  h5 {
+    font-weight: bold;
+    color: #29b6f6;
+    padding: 0;
+    font-size: 16px;
+    padding: 15px 15px 15px 0;
+    border-bottom: 1px solid #e5e5e5;
+    background: #f2f2f2 !important;
+    text-align: left;
+  }
+}
+
 img[alt] {
   font-size: 0;
 }
