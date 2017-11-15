@@ -12,7 +12,7 @@ import {JobPosterModel} from "../../../../../user/models/jobPoster";
 
 export class RecruiterJobInformation {
   @Input() recruiter: JobSummary = new JobSummary(); // todo Get this API For recruiter information -- Abhijeet
-  job: JobPosterModel; // todo integrate with @input -- Abhijeet
+  job: JobPosterModel = new JobPosterModel(); // todo integrate with @input -- Abhijeet
   private image_path: string = ImagePath.PROFILE_IMG_ICON;
 
   ngOnChanges(changes: any) {

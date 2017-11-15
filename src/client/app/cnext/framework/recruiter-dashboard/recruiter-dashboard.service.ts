@@ -21,7 +21,7 @@ export class RecruiterDashboardService extends BaseService {
       .catch(this.handleError);
   }
 
-  getJobsByRecruiterId(): Observable<any> {
+  getJobsByRecruiterIdAndItsCount(): Observable<any> {
     // let recruiterId: string;
     var url = API.JOB_LIST + '/' + LocalStorageService.getLocalValue(LocalStorage.END_USER_ID) + '/jobs';
     return this.http.get(url)

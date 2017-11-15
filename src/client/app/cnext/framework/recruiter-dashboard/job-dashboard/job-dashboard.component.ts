@@ -91,11 +91,11 @@ export class JobDashboardComponent implements OnInit {
     this.jobDashboardService.getPostedJobDetails(this.jobId)
       .subscribe(
         (data: any) => {
-          this.isRecruitingForSelf = data.data.industry.isRecruitingForself;
-          this.selectedJobProfile = data;
-          this.recruiterId = data.data.industry._id;
+          this.isRecruitingForSelf = true; // todo remove this hardcode //data.data.industry.isRecruitingForself;
+          this.selectedJobProfile = data.result;
+          this.recruiterId = data.result.recruiterId;
           this.renewJobPostService.checkJobPostExpiryDate(this.selectedJobProfile);
-          for (let item of data.candidate_list) {
+          for (let item of this.selectedJobProfile.candidate_list) {
             if (item.name === ValueConstant.APPLIED_CANDIDATE)
               this.recruiterJobView.numberOfCandidatesApplied = item.ids.length;
             if (item.name === ValueConstant.CART_LISTED_CANDIDATE)

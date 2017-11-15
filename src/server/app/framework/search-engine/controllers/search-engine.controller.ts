@@ -22,14 +22,14 @@ export class SearchEngineController {
       if(profileId) {
         objectId = profileId;
         searchEngine = new JobSearchEngine();
-        searchService  = new JobSearchService();
+        searchService  = new CandidateSearchService();
         if(appliedFilters.listName === EList.CAN_MATCHED) {
           isMatchList = true;
         }
       }else {
         objectId= req.params.candidateId;
         searchEngine = new CandidateSearchEngine();
-        searchService = new CandidateSearchService();
+        searchService = new JobSearchService();
         if(appliedFilters.listName === EList.JOB_MATCHED) {
           isMatchList = true;
         }

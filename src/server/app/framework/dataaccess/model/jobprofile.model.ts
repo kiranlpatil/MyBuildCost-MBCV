@@ -3,6 +3,7 @@ import IndustryModel = require('./industry.model');
 import * as mongoose from 'mongoose';
 import CapabilityModel = require('./capability.model');
 import { CandidateListModel } from './candidate-list.model';
+import {CandidatesInLists} from "./CandidatesInLists.model";
 
 interface JobProfileModel extends mongoose.Document {
   jobTitle: string;

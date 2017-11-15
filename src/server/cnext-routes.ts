@@ -39,7 +39,7 @@ export function cnextInit(app: express.Application) {
   app.get('/api/companysize',loggerInterceptor.logDetail, userController.getCompanySize);
   app.get('/api/function',loggerInterceptor.logDetail, this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, userController.getFunction);
   app.put('/api/recruiter/:id',loggerInterceptor.logDetail, this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, recruiterController.updateDetails);
-  app.get('/api/recruiter/:id',loggerInterceptor.logDetail, this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, recruiterController.retrieve);
+  app.get('/api/recruiter/:id/jobs',loggerInterceptor.logDetail, this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, recruiterController.retrieve);
   app.get('/api/capabilitymatrix/candidate/:id',loggerInterceptor.logDetail, this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, candidateController.getCapabilityMatrix);
   app.get('/api/capabilitymatrix/recruiter/jobProfile/:id/',loggerInterceptor.logDetail, this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, jobProfileController.getCapabilityMatrix);
   app.post('/api/recruiter/jobProfile/:id/candidates',loggerInterceptor.logDetail, this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, searchEngineController.getMatchingProfile);

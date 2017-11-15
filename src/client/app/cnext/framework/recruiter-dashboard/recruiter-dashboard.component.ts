@@ -15,7 +15,6 @@ export class RecruiterDashboardComponent {
   recruiterDashboard: RecruiterDashboard = new RecruiterDashboard();// todo take this with jobs for meta data --abhijeet
   @Input() jobs: string[] = new Array(0);
   screenType: string='';
-  recruiterDashboard: RecruiterDashboard = new RecruiterDashboard();
 
   constructor() {
   }

@@ -5,7 +5,7 @@ import {Router} from "@angular/router";
 import {LoaderService} from "../../../shared/loader/loaders.service";
 import {MessageService} from "../../../shared/services/message.service";
 import {Message} from "../../../shared/models/message";
-import {Label, Messages} from "../../../shared/constants";
+import {AppSettings, Label, Messages} from "../../../shared/constants";
 import {JobPosterModel} from "../../../user/models/jobPoster";
 
 @Component({

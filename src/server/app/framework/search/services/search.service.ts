@@ -94,6 +94,7 @@ class SearchService {
       }
     });
   }
+
   getJobsInIndustry(industryCode: string, callback: (error: any, result: number) => void) {
     let data = {
       'industry.code': industryCode,

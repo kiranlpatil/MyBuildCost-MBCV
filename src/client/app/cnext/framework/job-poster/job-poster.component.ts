@@ -94,6 +94,7 @@ export class JobPosterComponent implements OnInit, OnChanges {
         this.getJobProfile();
       } else {
         this.jobPosterModel = new JobPosterModel();
+        this.jobPosterModel.recruiterId = LocalStorageService.getLocalValue(LocalStorage.END_USER_ID);
         this.highlightedSection.name = 'JobProfile';
       }
     });
@@ -105,6 +106,7 @@ export class JobPosterComponent implements OnInit, OnChanges {
       this.getJobProfile();
     } else if(changes.currentjobId !== undefined ) {
       this.jobPosterModel = new JobPosterModel();
+      this.jobPosterModel.recruiterId = LocalStorageService.getLocalValue(LocalStorage.END_USER_ID);
       this.highlightedSection.name = 'JobProfile';
     }
   }
@@ -113,7 +115,7 @@ export class JobPosterComponent implements OnInit, OnChanges {
     this.recruiterDashboardService.getPostedJobDetails(this.jobId)
       .subscribe(
         data => {
-          this.isRecruitingForSelf=data.data.industry.isRecruitingForself; // todo solve it
+          //this.isRecruitingForSelf=data.data.industry.isRecruitingForself; // todo solve it
           this.jobPosterModel = data;
           if(this.jobPosterModel.complexity_musthave_matrix == undefined) {
             this.jobPosterModel.complexity_musthave_matrix = {};
@@ -205,8 +207,8 @@ export class JobPosterComponent implements OnInit, OnChanges {
     this.jobPosterModel.postingDate = new Date();
     this.jobPosterModel.expiringDate = new Date((new Date().getTime() + ValueConstant.JOB__EXPIRIY_PERIOD * 6));
     this.jobPostService.postJob(this.jobPosterModel).subscribe(
-      data => {
-        this.onSuccess(data);
+      response => {debugger
+        this.onSuccess(response.data);
       }, error => this.errorService.onError(error));
   }
 
@@ -216,23 +218,23 @@ export class JobPosterComponent implements OnInit, OnChanges {
     this.jobPosterModel.daysRemainingForExpiring = ValueConstant.JOB__EXPIRIY_PERIOD;
     this.jobPosterModel.isJobPostExpired = false;
     this.jobPostService.postJob(this.jobPosterModel).subscribe(
-      data => {
-        this.jobPosterModel._id = data._id;
-        this.jobId=data._id;
+      response => { debugger
+        this.jobPosterModel._id = response.data._id;
+        this.jobId = response.data._id;
         LocalStorageService.setLocalValue(LocalStorage.POSTED_JOB, this.jobPosterModel._id);
         if (this.setCapabilityMatrix) {
-          this.jobPosterModel.capability_matrix = data.capability_matrix;
+          this.jobPosterModel.capability_matrix = response.data.capability_matrix;
           this.setCapabilityMatrix = false;
         }
         if (this.setComplexityMustHaveMatrix) {
-          this.jobPosterModel.complexity_musthave_matrix = data.complexity_musthave_matrix;
+          this.jobPosterModel.complexity_musthave_matrix = response.data.complexity_musthave_matrix;
           this.setComplexityMustHaveMatrix = false;
         }
-        this._router.navigate(['/recruiter/jobpost', this.jobPosterModel._id]);
+        //this._router.navigate(['/recruiter/jobpost', this.jobPosterModel._id]);
       }, error => this.errorService.onError(error));
   }
 
-  onSuccess(jobModel: JobPosterModel) {
+  onSuccess(jobModel: JobPosterModel) {debugger
     if (jobModel._id !== undefined) {
       if(jobModel.isJobShared) {
         this.jobshareContainerService.updateUrl(jobModel.sharedLink.split('/')[4]).subscribe(

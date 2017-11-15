@@ -21,6 +21,7 @@ import CandidateService = require('./candidate.service');
 import JobProfileRepository = require('../dataaccess/repository/job-profile.repository');
 import IJobProfile = require('../dataaccess/mongoose/job-profile');
 import IRecruiter = require('../dataaccess/mongoose/recruiter');
+import {CandidatesInLists} from "../dataaccess/model/CandidatesInLists.model";
 var bcrypt = require('bcrypt');
 
 class RecruiterService {
@@ -102,7 +103,7 @@ class RecruiterService {
 
   getJobsByRecruiterId(id: string, callback :(err: Error, res : IJobProfile[]) => void) {
     let query = { 'recruiterId' : new mongoose.Types.ObjectId(id)};
-    this.jobProfileRepository.retrieve(query, (error : Error, jobs : IJobProfile[]) => {
+    this.jobProfileRepository.retrieveAndPopulate(query,{}, (error : Error, jobs : IJobProfile[]) => {
         if(error) {
           callback(error,null);
           return;
@@ -126,16 +127,22 @@ class RecruiterService {
           switch (list.name) {
             case ConstVariables.APPLIED_CANDIDATE :
               jobWithCount.jobCountModel.totalNumberOfCandidatesApplied += list.ids.length;
+              job.numberOfCandidatesInList.applied = list.ids.length;
               break;
             case ConstVariables.CART_LISTED_CANDIDATE :
+              job.numberOfCandidatesInList.cart = list.ids.length;
               jobWithCount.jobCountModel.totalNumberOfCandidateInCart += list.ids.length;
               break;
             case ConstVariables.REJECTED_LISTED_CANDIDATE :
+              job.numberOfCandidatesInList.rejected = list.ids.length;
               jobWithCount.jobCountModel.totalNumberOfCandidatesRejected += list.ids.length;
               break;
             default :
               break;
           }
+        }
+        if(!job.numberOfCandidatesInList) {
+          job.numberOfCandidatesInList= new CandidatesInLists();
         }
       }
       callback(null,jobWithCount);
@@ -151,11 +158,11 @@ class RecruiterService {
           {$push: {postedJobs: res._id}},
           {
             'new': true,
-          },(err, response) => {
+          },(err : Error, response : any) => {
             if (err) {
               callback(err,null);
             } else {
-              callback(null, response);
+              callback(null, res);
             }
           });
       }
@@ -202,7 +209,7 @@ class RecruiterService {
         let query = {
             '_id': new mongoose.Types.ObjectId(job._id)
           };
-        this.jobProfileRepository.updateWithQuery(query, job, (err: Error, record: IJobProfile) => {
+        this.jobProfileRepository.updateWithQuery(query, job, {new: true},(err: Error, record: IJobProfile) => {
             if (record) {
               callback(null, record);
             } else {

@@ -103,7 +103,7 @@ export function postJob(req: express.Request, res: express.Response, next: any) 
         }
       });
     }else {
-      recruiterService.addJob(userId, newJob, (err, result) => {
+      recruiterService.addJob(userId, newJob, (err : any, result : any) => {
         if (err) {
           next({
             reason: Messages.MSG_ERROR_CREATE_JOB,
