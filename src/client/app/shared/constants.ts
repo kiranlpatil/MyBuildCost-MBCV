@@ -355,12 +355,10 @@ export class NavigationRoutes {
   public static APP_START: string = '/';
   public static APP_LANDING: string = '/signin';
   public static VERIFY_USER: string = '/verify-user';
-  public static ACTIVATE_USER: string = '/activate_user';
+  public static ACTIVATE_USER: string = '/activate-user';
   public static VERIFY_PHONE: string = '/verify-phone';
   public static APP_CHANGEEMAIL: string = '/change-email';
   public static APP_CREATEPROFILE: string = '/candidate/profile';
-  public static APP_PROFILESUMMURY: string = '/profile_summary';
-  public static APP_JOB_SUMMURY: string = '/job_summary';
   public static APP_COMPANYDETAILS: string = '/company-details';
   public static APP_VLAUEPORTRAIT: string = '/value-portrait';
 }

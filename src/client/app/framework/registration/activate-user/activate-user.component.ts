@@ -38,7 +38,7 @@ export class ActivateUserComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.token = this._router.url.substr('activate_user?access_token'.length + 2);
+    this.token = this._router.url.substr('activate-user?access_token'.length + 2);
     if(this._router.url.indexOf('isEmailVerification')!==-1) {
       this.isEmailVerification=true;
     }
