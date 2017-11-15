@@ -54,7 +54,7 @@ class Messages {
   public static MSG_ERROR_TOKEN_NOT_PROVIDED: string = 'Access token is not provided';
   public static MSG_ERROR_PROVIDE_ID: string = 'Provide user ID';
   public static MSG_ERROR_ACCOUNT_STATUS: string = 'Your account is still inactive. Verify your account by clicking the verification link sent on your email.';//dont change It
-  public static MSG_ERROR_VERIFY_ACCOUNT: string = 'Please click on the link sent to your email in order to activate your account.';//Dont CHange It
+  public static MSG_ERROR_VERIFY_ACCOUNT: string = 'Your account is not active please contact jobMosis team to activate your account.';//Dont CHange It
   public static MSG_ERROR_VERIFY_CANDIDATE_ACCOUNT: string = 'Please contact the administrator to activate your account.';//Dont CHange It
   public static MSG_ERROR_BCRYPT_CREATION: string = 'Error in creating hash using bcrypt.';//Dont CHange It
   public static MSG_ERROR_INVALID_ID: string = 'Invalid Userid';

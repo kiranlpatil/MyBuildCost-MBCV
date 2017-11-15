@@ -5,7 +5,6 @@ import {
 import {QCardsortBy} from "../../model/q-cardview-sortby";
 import {Router} from "@angular/router";
 import {RecruiterHeaderDetails} from "../../model/recuirterheaderdetails";
-import {ReferenceService} from "../../model/newClass";
 import {RecruiterDashboard} from "../../model/recruiter-dashboard";
 import {Button, Headings, ImagePath, Label, Messages, Tooltip} from "../../../../shared/constants";
 import {RenewJobPostService} from "../../../../user/services/renew-jobpost.service";
@@ -51,7 +50,7 @@ export class JobListerComponent implements  OnInit, OnDestroy {
   private recruiterHeaderDetails: RecruiterHeaderDetails = new RecruiterHeaderDetails();
   private jobId: string;
 
-  constructor(private _router: Router, public refrence: ReferenceService,
+  constructor(private _router: Router,
               private renewJobPostService: RenewJobPostService, private messageService: MessageService,
               private recruiterDashboardService: RecruiterDashboardService,
               private errorService:ErrorService
@@ -91,7 +90,6 @@ export class JobListerComponent implements  OnInit, OnDestroy {
 
 
   ngOnDestroy() {
-    this.refrence.data = this.headerInfoForJob;
   }
 
   sortBy() {

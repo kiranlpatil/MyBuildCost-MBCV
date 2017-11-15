@@ -62,10 +62,7 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     this.mainHeaderMenuHideShow = 'signin';
     window.history.forward();
-    if (parseInt(LocalStorageService.getLocalValue(LocalStorage.IS_LOGGED_IN)) === 1) {
-      this._router.navigate([NavigationRoutes.APP_CANDIDATE_DASHBOARD]);
-    }
-
+    //this._validateUserNavigation.validate();
   }
 
   closeToaster() {

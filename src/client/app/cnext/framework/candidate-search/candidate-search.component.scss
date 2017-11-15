@@ -16,9 +16,10 @@
       padding: 5px 10px 3px;
       .suggestion-lists {
         label {
+          color: $black1;
           font-family: 'gothamrnd-book';
           font-weight: 600;
-          color: $black1;
+          text-transform: capitalize;
         }
         span {
           color: #989898;
@@ -44,6 +45,7 @@
     border: 1px solid $gray;
     float: left;
     padding: 9px 7px 7px 10px;
+    text-transform: capitalize;
     width: 500px;
   }
   .search-btn {

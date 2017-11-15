@@ -127,8 +127,6 @@ class UserService {
             html: header1 + this.mid_content + footer1
             , attachments: MailAttachments.AttachmentArray
           };
-          console.log(mailOptions);
-          console.log(JSON.stringify(mailOptions));
           let sendMailService = new SendMailService();
           sendMailService.sendMail(mailOptions, callback);
 
@@ -145,7 +143,8 @@ class UserService {
                 from: config.get('TplSeed.mail.MAIL_SENDER'),
                 to: field.email,
                 subject: Messages.EMAIL_SUBJECT_FORGOT_PASSWORD,
-                html: 'hi'
+                html: header1 + this.mid_content + footer1
+                , attachments: MailAttachments.AttachmentArray
               };
               let sendMailService = new SendMailService();
               sendMailService.sendMail(mailOptions, callback);
@@ -167,11 +166,8 @@ class UserService {
     let updateData = {'temp_email': field.new_email};
     this.userRepository.findOneAndUpdate(query, updateData, {new: true}, (error, result) => {
       if (error) {
-
         callback(new Error(Messages.MSG_ERROR_EMAIL_ACTIVE_NOW), null);
-
       } else {
-
         let auth = new AuthInterceptor();
         let token = auth.issueTokenWithUid(result);
         let host = config.get('TplSeed.mail.host');
@@ -186,7 +182,6 @@ class UserService {
           to: field.new_email,
           subject: Messages.EMAIL_SUBJECT_CHANGE_EMAILID,
           html: header1 + mid_content + footer1
-
           , attachments: MailAttachments.AttachmentArray
         };
         let sendMailService = new SendMailService();

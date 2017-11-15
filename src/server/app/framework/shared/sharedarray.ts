@@ -2,14 +2,15 @@
  * Created by admin on 10/5/16.
  */
 //import Messages = require("../shared/messages");
-
+let config = require('config');
+let path = require('path');
 class MailAttachments {
   public static AttachmentArray: Array<any> = [
     {
-      path: './src/server/app/framework/public/images/logo/jobmosis-mobile-logo.png',
+      path: path.resolve() + config.get('TplSeed.publicPath')+'images/logo/jobmosis-mobile-logo.png',
       cid: 'unique@company-logo'
     }, {
-      path: './src/server/app/framework/public/images/banner/banner.png',
+      path:  path.resolve() + config.get('TplSeed.publicPath')+'images/banner/banner.png',
       cid: 'unique@banner'
     }/*, {
       path: './src/server/app/framework/public/images/footer/fb.png',

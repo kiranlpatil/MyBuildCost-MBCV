@@ -41,6 +41,8 @@ export enum UsageActions  {
 
 
 export class Messages {
+  public static FROM_REGISTRATION = 'registration';
+  public static FROM_ACCOUNT_DETAIL = 'accountdetail';
   public static MSG_ON_FILE_CREATION_FAILED: string = 'Failed to create image of this page';
   public static MSG_MSG_CLONED_SUCCESSFULLY = 'New Job is been added successfully';
   public static MSG_PRESENTLY_WORKING = 'Presently Working';
@@ -52,7 +54,7 @@ export class Messages {
   public static MSG_ABOUT_SCREEN_PRINT_IF_NOT_IN_CART = 'Add this candidate to cart to enable profile download.';
   public static MSG_SUCCESS_LOGIN: string = 'You are successfully signed in.';
   public static MSG_SUCCESS_REGISTRATION: string = 'Kindly verify your account.';
-  public static MSG_SUCCESS_CHANGE_MOBILE_NUMBER: string = 'Mobile number updated successfully.Kindly sign in';
+  public static MSG_SUCCESS_CHANGE_MOBILE_NUMBER: string = 'Mobile number updated successfully.';
   public static MSG_SUCCESS_RESEND_VERIFICATION_CODE: string = 'New OTP (One Time Password) has been sent to your registered mobile number';
   public static MSG_SUCCESS_RESEND_VERIFICATION_CODE_RESEND_OTP: string = 'New OTP (One Time Password) has been sent to your new mobile number';
   //public static MSG_SUCCESS_MAIL_VERIFICATION: string = 'Verification e-mail sent successfully to your e-mail account. Kindly proceed by clicking on the link pProvided in your e-mail';
@@ -221,7 +223,9 @@ export class Messages {
   public static MSG_MOBILE_NUMBER_Change_SUCCESS = 'Mobile number changed successfully.You can Sign In again by clicking on "yes" button, please click on "No"' +
     'button to continue the session.';
   public static MSG_MOBILE_VERIFICATION_TITLE = 'Verify Your Mobile Number';
+  public static MSG_MOBILE_NUMBER_CHANGE_VERIFICATION_TITLE = 'Verify Your  New Mobile Number';
   public static MSG_MOBILE_VERIFICATION_MESSAGE = 'Please enter the verification code sent to your mobile number.';
+  public static MSG_MOBILE_NUMBER_CHANGE_VERIFICATION_MESSAGE= 'Please enter the verification code sent to your new mobile number.';
   public static MSG_MOBILE_VERIFICATION_SUCCUSS_HEADING = 'Congratulations!';
   public static MSG_MOBILE_VERIFICATION_SUCCUSS_TEXT = 'Registration successful. Kindly Sign In';
   public static CONTACT_US_ADDRESS = 'Blog. No. 14, 1st Floor, Electronic Estate, Parvati, Pune-Satara Road, Pune 411009, MH, INDIA.';
@@ -595,7 +599,7 @@ export class Tooltip {
   public static COMPLEXITIES_RECRUITER_TOOLTIP_1: string = 'This section provides a list of complexity scenarios for selected capabilities.' +
     'For each scenario, select the most appropriate level that candidate is required to handle.';
   public static COMPLEXITIES_RECRUITER_TOOLTIP_2: string = 'For scenarios that are not relevant to your job profile, choose "Not Applicable".';
-  public static COMPLEXITIES_RECRUITER_TOOLTIP_3: string = 'Please click on &#9733; to select a must have capability for candidate to fulfilled this job.';
+  public static COMPLEXITIES_RECRUITER_TOOLTIP_MESSAGE: string = 'Please click on &#9733; to select must have capability details required in candidate for this job profile.';
   public static EMPLOYMENT_HISTORY_TOOLTIP: string = 'An individual may be exposed to multiple industries during his professional life.';
   public static INDUSTRY_EXPERIENCE_CANDIDATE_TOOLTIP_1: string = 'An individual may be exposed to multiple industries during their professional life. ' +
     'At times, organisations need individuals who have cross industry expertise.';
@@ -693,7 +697,7 @@ export class Label {
   public static LAST_NAME_LABEL: string = 'Last Name';
   public static EMAIL_FIELD_LABEL: string = 'Email';
   public static COMPANY_WEBSITE_FIELD_LABEL: string = 'Website';
-  public static CONTACT_FIELD_LABEL: string = 'Contact';
+  public static CONTACT_FIELD_LABEL: string = 'Mobile Number';
   public static SAVE_PROFILE_LABEL: string = 'Save Profile';
   public static RESET_PASSWORD_MESSAGE: string = 'Please set new password for your';
   public static JOB_TITLE: string = 'New Job Title';

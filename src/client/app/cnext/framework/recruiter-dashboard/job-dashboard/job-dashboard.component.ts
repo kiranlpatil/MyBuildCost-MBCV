@@ -5,7 +5,6 @@ import { RecruiterJobView } from '../../model/recruiter-job-view';
 import { ValueConstant, Tooltip, UsageActions } from '../../../../shared/constants';
 import { CandidateQListModel } from './q-cards-candidates';
 import { JobPosterModel } from '../../../../user/models/jobPoster';
-import { ReferenceService } from '../../model/newClass';
 import { QCardFilterService } from '../../filters/q-card-filter.service';
 import { QCardFilter } from '../../model/q-card-filter';
 import { LoaderService } from '../../../../shared/loader/loaders.service';
@@ -19,6 +18,7 @@ import { JobPosterService } from '../../job-poster/job-poster.service';
 import { MessageService } from '../../../../shared/services/message.service';
 import { RenewJobPostService } from '../../../../user/services/renew-jobpost.service';
 import { Message } from '../../../../shared/models/message';
+import {RecruiterHeaderDetails} from "../../model/recuirterheaderdetails";
 @Component({
   moduleId: module.id,
   selector: 'cn-job-dashboard',
@@ -31,7 +31,7 @@ export class JobDashboardComponent implements OnInit {
 
   jobId: any;
   jobCount: any;
-  headerInfo: any;
+  headerInfo: RecruiterHeaderDetails;
   recruiterJobView: RecruiterJobView = new RecruiterJobView();
   whichListVisible: boolean[] = new Array(4);
   selectedJobId:string;
@@ -52,8 +52,7 @@ export class JobDashboardComponent implements OnInit {
   isJobCloseButtonClicked:boolean;
 
 
-  constructor(public refrence: ReferenceService,
-              private activatedRoute: ActivatedRoute,
+  constructor(private activatedRoute: ActivatedRoute,
               private errorService: ErrorService,
               private jobDashboardService: JobDashboardService,
               private usageTracking : UsageTrackingService,
@@ -65,11 +64,10 @@ export class JobDashboardComponent implements OnInit {
         this.filterMeta = data;
       }
     );
-
+    this.headerInfo = new RecruiterHeaderDetails();
   }
 
   ngOnInit() {
-    this.headerInfo = this.refrence.data;
     this.jobCount = this.headerInfo.numberOfJobposted;
 
     this.activatedRoute.params.subscribe(params => {
