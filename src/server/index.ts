@@ -44,6 +44,7 @@ export function init(port: number, mode: string, protocol: string, dist_runner: 
     console.error(error);
     _loggerService.logError("Catching uncaught Exceptions. : " +err);
     _loggerService.logError("Catching uncaught Exceptions stack : " +err.stack);
+    //sharedService.errorHandler(error);
     sharedService.mailToAdmin(error);
   });
 

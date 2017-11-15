@@ -20,7 +20,7 @@ export class ValuePortraitHeader {
 
   getImagePath(imagePath: string) {
     if (imagePath != undefined) {
-      return AppSettings.IP + imagePath.substring(4).replace('"', '');
+      return AppSettings.IP + imagePath.replace('"', '');
     }
     return null;
   }

@@ -2,11 +2,11 @@
   <div class="col-sm-12 no-padding">
     <div class="keyskill-form-group">
       <div>
-          <input class="form-control" #elem [id]="type" (change)='selectedProficiencyModel($event.target.value)'
-                 (keyup.enter)="showHideModal($event.target.value)" [disabled]='selectedProficiencies.length == maxLength'
-                 placeholder="{{proficienciesPlaceholder}}" list="Proficiencies"/>
+          <input class="form-control" [id]="type" (ngModelChange)="proficiencyChanged($event)" (keyup.enter)="addProficiency($event)"
+                 [disabled]='selectedProficiencies.length == maxLength'
+                 placeholder="{{proficienciesPlaceholder}}" list="Proficiencies" [(ngModel)] = "proficiency"/>
           <datalist id="Proficiencies" >
-            <option *ngFor="let Proficiency of Proficiencies" value="{{Proficiency}}">
+            <option *ngFor="let pro of proficiencies" value="{{pro}}">
             </option>
           </datalist>
         <div class="error-messages" [class.proficiency-info-messages]="isInfoMessage" *ngIf="showAlert"><p>
@@ -17,8 +17,8 @@
         </div>
       </div>
       <div class="add-keyskill">
-        <button (click)="showHideModal(elem.value)"><span class="glyphicon glyphicon-plus-sign"></span>Add</button>
-        <span class="new-keyskill">{{elem.value}}</span>
+        <button (click)="addProficiencyToMasterData()" [disabled]="newProficiency == ''"><span class="glyphicon glyphicon-plus-sign"></span>Add</button>
+        <span id="new-proficiency" class="new-keyskill">{{newProficiency}}</span>
       </div>
     </div>
 

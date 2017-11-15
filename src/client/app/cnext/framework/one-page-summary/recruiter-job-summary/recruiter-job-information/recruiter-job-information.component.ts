@@ -18,13 +18,13 @@ export class RecruiterJobInformation {
       this.recruiter = changes.recruiter.currentValue;
     }
     if (this.recruiter != undefined && this.recruiter.company_logo != undefined) {
-      this.image_path = AppSettings.IP + this.recruiter.company_logo.substring(4).replace('"', '');
+      this.image_path = AppSettings.IP + this.recruiter.company_logo;
     }
   }
 
   getImagePath(imagePath: string) {
     if (imagePath != undefined) {
-      return AppSettings.IP + imagePath.substring(4).replace('"', '');
+      return AppSettings.IP + imagePath;
     }
     return null;
   }

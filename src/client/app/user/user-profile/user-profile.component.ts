@@ -153,7 +153,7 @@ export class UserProfileComponent implements OnInit {
         this.image_path = ImagePath.PROFILE_IMG_ICON;
 
       } else if (this.model.picture !== undefined && socialLogin !== AppSettings.IS_SOCIAL_LOGIN_YES) {
-        this.image_path = AppSettings.IP + this.model.picture.substring(4).replace('"', '');
+        this.image_path = AppSettings.IP + this.model.picture.replace('"', '');
       }
     }
   }
@@ -252,14 +252,14 @@ export class UserProfileComponent implements OnInit {
   onPictureUpload(imagePath: string) {
     if(this.role ==='candidate') {
       this.candidate.basicInformation.picture = imagePath;
-    this.image_path = AppSettings.IP + imagePath.substring(4).replace('"', '');
+    this.image_path = AppSettings.IP + imagePath.replace('"', '');
     } else if (this.role ==='recruiter') {
       this.candidate.basicInformation.picture = LocalStorageService.getLocalValue(LocalStorage.PROFILE_PICTURE); //TODO:Get it from get user call.
-      this.image_path = AppSettings.IP + imagePath.substring(4).replace('"', '');
+      this.image_path = AppSettings.IP + imagePath.replace('"', '');
       if (this.candidate.basicInformation.picture === 'undefined' || this.candidate.basicInformation.picture === null) {
         this.candidate.basicInformation.picture = ImagePath.COMPANY_LOGO_IMG_ICON;
       } else {
-        this.candidate.basicInformation.picture = this.candidate.basicInformation.picture.substring(4, this.candidate.basicInformation.picture.length - 1).replace('"', '');
+        this.candidate.basicInformation.picture = this.candidate.basicInformation.picture.replace('"', '');
         this.candidate.basicInformation.picture = AppSettings.IP + this.candidate.basicInformation.picture;
       }
     }

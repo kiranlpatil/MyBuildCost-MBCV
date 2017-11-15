@@ -22,14 +22,14 @@ export class CandidateBasicInformationComponent {
   ngOnChanges() {
     if (this.candidateDetails !== undefined) {
       if (this.candidateDetails.picture !== undefined) {
-        this.image_path = AppSettings.IP + this.candidateDetails.picture.substring(4).replace('"', '');
+        this.image_path = AppSettings.IP + this.candidateDetails.picture.replace('"', '');
       }
     }
   }
 
   getImagePath(imagePath: string) {
     if (imagePath != undefined) {
-      return AppSettings.IP + imagePath.substring(4).replace('"', '');
+      return AppSettings.IP + imagePath.replace('"', '');
     }
     return null;
   }

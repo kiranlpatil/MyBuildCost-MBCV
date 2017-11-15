@@ -11,7 +11,7 @@
       <span class="icon-dashboard"></span>My Job Posts</a></li>
     <li [routerLinkActive]="['active']"><a data-toggle="tab" title="Candidate Search"  [routerLink]="['/recruiter/search']">
       <span class="icon-candidate-search"></span>Applicant Search</a></li>
-    <li><a class="btn-new-job" data-toggle="tab"  title="Post New Job" [routerLink]="['/recruiter/jobpost']">Post New Job</a></li>
+    <li [routerLinkActive]="['active']"><a class="btn-new-job" data-toggle="tab"  title="Post New Job" [routerLink]="['/recruiter/jobpost']">Post New Job</a></li>
   </ul>
   <div class="tab-content">
     <router-outlet></router-outlet>

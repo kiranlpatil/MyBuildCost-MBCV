@@ -20,13 +20,14 @@ export class ValidationService {
       'requiredCompanyDescription': Messages.MSG_ERROR_VALIDATION_ABOUT_COMPANY_REQUIRED,
       'requiredCompanyName': Messages.MSG_ERROR_VALIDATION_COMPANYNAME_REQUIRED,
       'requiredOtp': Messages.MSG_ERROR_VALIDATION_OTP_REQUIRED,
+      'requiredBirthYear': Messages.MSG_ERROR_VALIDATION_BIRTHYEAR_REQUIRED,
       'invalidEmailAddress': Messages.MSG_ERROR_VALIDATION_INVALID_EMAIL_REQUIRED,
       'invalidUrlAddress': Messages.MSG_ERROR_VALIDATION_INVALID_URL_REQUIRED,
       'invalidName': Messages.MSG_ERROR_VALIDATION_INVALID_NAME,
       'containsWhiteSpace': Messages.MSG_ERROR_VALIDATION_INVALID_DATA,
       'invalidPassword': Messages.MSG_ERROR_VALIDATION_PASSWORD,
       'invalidMobile': Messages.MSG_ERROR_VALIDATION_OTP_MOBILE_NUMBER,
-      'invalidBirthYear': Messages.MSG_ERROR_VALIDATION_BIRTH_YEAR,
+      'invalidBirthYear': Messages.MSG_ERROR_VALIDATION_BIRTHYEAR_INVALID,
       'invalidPin': Messages.MSG_ERROR_VALIDATION_PIN_NUMBER,
 
       'maxlength': `Maximum ${validatorValue.requiredLength} characters`,
@@ -215,6 +216,10 @@ export class ValidationService {
 
 
   static birthYearValidator(control: any) {
+    if (control.value === '' || control.value === undefined) {
+      return {'requiredBirthYear': true};
+    };
+
     var birthYear = control.value;
     var count = 0;
     var isValid: boolean = false;

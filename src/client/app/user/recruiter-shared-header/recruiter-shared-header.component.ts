@@ -37,7 +37,7 @@ export class RecruiterSharedHeaderComponent implements OnInit {
     if (this.uploaded_image_path === 'undefined' || this.uploaded_image_path === null) {
       this.uploaded_image_path = ImagePath.COMPANY_LOGO_IMG_ICON;
     } else {
-      this.uploaded_image_path = this.uploaded_image_path.substring(4, this.uploaded_image_path.length - 1).replace('"', '');
+      this.uploaded_image_path = this.uploaded_image_path.replace('"', '');
       this.uploaded_image_path = AppSettings.IP + this.uploaded_image_path;
     }
   }

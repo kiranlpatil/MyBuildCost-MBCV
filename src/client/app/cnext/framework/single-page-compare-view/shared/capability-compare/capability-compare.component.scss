@@ -804,6 +804,21 @@
         border: 1px solid $border-color1;
       }
     }
+    .notes {
+      @include multiLineEllipsis($lineHeight: 1.5em, $lineCount: 3, $bgColor: $capability-edit-notes-bg);
+      background: $capability-edit-notes-bg;
+      border: 1px dashed $capability-edit-notes-border;
+      font-size: 12px;
+      line-height: 1.3em !important;
+      margin-top: 5px;
+      max-height: 7.1em !important;
+      padding: 5px 15px 5px 5px !important;
+
+      &:before {
+        bottom: 3px !important;
+        right: 3px !important;
+      }
+    }
   }
 }
 
