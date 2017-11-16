@@ -46,9 +46,14 @@
               <span class="icon-value-portrait"></span>Value Portrait
             </a>
           </li>
-          <li role="menuitem" *ngIf="candidate.isCompleted" [routerLinkActive]="['active']">
+          <li role="menuitem" *ngIf="candidate.isSubmitted" [routerLinkActive]="['active']">
             <a class="dropdown-item" [routerLink]="['/candidate/profile']" (click)="navigateTo('/candidate/profile');">
               <span class="icon-edit-profile"></span>Edit Profile
+            </a>
+          </li>
+          <li role="menuitem" *ngIf="!candidate.isSubmitted" [routerLinkActive]="['active']">
+            <a class="dropdown-item" [routerLink]="['/candidate/profile']" (click)="navigateTo('/candidate/profile');">
+              <span class="icon-edit-profile"></span>{{getLabel().CREATE_PROFILE_LABEL}}
             </a>
           </li>
         </ul>

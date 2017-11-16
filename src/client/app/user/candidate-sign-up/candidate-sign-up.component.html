@@ -62,15 +62,15 @@
 
       <div class="form-group">
         <div id="yearf">
-          <input type="number" formControlName="birth_year" (change)='selectYearModel($event.target.value)' [ngModel]="passingYear"
+          <cn-control-messages [control]="userForm.controls.birth_year"
+                                             [submitStatus]="submitStatus"></cn-control-messages>
+          <input type="text" formControlName="birth_year" (change)='selectYearModel($event.target.value)' [ngModel]="passingYear"
                  id="birth_year" class="form-control" placeholder="" list="validBirthYearList"
-                 name="birthYear" required/>
+                 name="birthYear" onkeypress='return event.charCode >= 48 && event.charCode <= 57'/>
           <label>Year of Birth</label>
           <datalist id="validBirthYearList" >
             <option *ngFor="let validBirthYear of validBirthYearList" value="{{validBirthYear}}"></option>
           </datalist>
-          <div class="error-messages" *ngIf='userForm.get("birth_year").value == undefined'>{{birthYearErrorMessage}}
-          </div>
         </div>
       </div>
 

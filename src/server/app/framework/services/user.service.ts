@@ -171,7 +171,7 @@ class UserService {
         let auth = new AuthInterceptor();
         let token = auth.issueTokenWithUid(result);
         let host = config.get('TplSeed.mail.host');
-        let link = host + 'activate_user?access_token=' + token + '&_id=' + result._id+'isEmailVerification';
+        let link = host + 'activate-user?access_token=' + token + '&_id=' + result._id+'isEmailVerification';
         let header1 = fs.readFileSync(path.resolve() + config.get('TplSeed.publicPath')+'header1.html').toString();
         let content = fs.readFileSync(path.resolve() + config.get('TplSeed.publicPath')+'change.mail.html').toString();
         let footer1 = fs.readFileSync(path.resolve() + config.get('TplSeed.publicPath')+'footer1.html').toString();
@@ -234,7 +234,7 @@ class UserService {
         let auth = new AuthInterceptor();
         let token = auth.issueTokenWithUid(res[0]);
         let host = config.get('TplSeed.mail.host');
-        let link = host + 'activate_user?access_token=' + token + '&_id=' + res[0]._id;
+        let link = host + 'activate-user?access_token=' + token + '&_id=' + res[0]._id;
         let header1 = fs.readFileSync(path.resolve() +config.get('TplSeed.publicPath')+'header1.html').toString();
         let content = fs.readFileSync(path.resolve() +config.get('TplSeed.publicPath')+'recruiter.mail.html').toString();
         let footer1 = fs.readFileSync(path.resolve() +config.get('TplSeed.publicPath')+'footer1.html').toString();

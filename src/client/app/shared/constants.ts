@@ -130,6 +130,7 @@ export class Messages {
   public static MSG_ERROR_VALIDATION_INVALID_DATA = 'Enter valid data.';
   public static MSG_ERROR_VALIDATION_PASSWORD_MISMATCHED = 'Passwords do not match.';
   public static MSG_ERROR_VALIDATION_BIRTHYEAR_REQUIRED = 'This field can\'t be left blank.';
+  public static MSG_ERROR_VALIDATION_BIRTHYEAR_INVALID = 'Enter valid birth-year';
   public static MSG_ERROR_VALIDATION_LOCATION_REQUIRED = 'This field can\'t be left blank.';
   public static MSG_ERROR_VALIDATION_INVALID_LOCATION = 'Enter valid location';
   public static MSG_ERROR_VALIDATION_HEADQUARTER_REQUIRED = 'This field can\'t be left blank.';
@@ -357,12 +358,10 @@ export class NavigationRoutes {
   public static APP_START: string = '/';
   public static APP_LANDING: string = '/signin';
   public static VERIFY_USER: string = '/verify-user';
-  public static ACTIVATE_USER: string = '/activate_user';
+  public static ACTIVATE_USER: string = '/activate-user';
   public static VERIFY_PHONE: string = '/verify-phone';
   public static APP_CHANGEEMAIL: string = '/change-email';
   public static APP_CREATEPROFILE: string = '/candidate/profile';
-  public static APP_PROFILESUMMURY: string = '/profile_summary';
-  public static APP_JOB_SUMMURY: string = '/job_summary';
   public static APP_COMPANYDETAILS: string = '/company-details';
   public static APP_VLAUEPORTRAIT: string = '/value-portrait';
 }
@@ -699,6 +698,7 @@ export class Label {
   public static COMPANY_NAME_LABEL: string = 'Company Name';
   public static LAST_NAME_LABEL: string = 'Last Name';
   public static EMAIL_FIELD_LABEL: string = 'Email';
+  public static CREATE_PROFILE_LABEL: string = 'Create Profile';
   public static COMPANY_WEBSITE_FIELD_LABEL: string = 'Website';
   public static CONTACT_FIELD_LABEL: string = 'Mobile Number';
   public static SAVE_PROFILE_LABEL: string = 'Save Profile';
