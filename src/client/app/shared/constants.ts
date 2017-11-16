@@ -250,7 +250,7 @@ export class Messages {
   'It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,' +
   'and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.';
   public static BROWSER_ALERT_MSG = 'This application is certified on Google chrome browser. Switch to chrome for better experience.';
-  public static KEYSKILLS_PLACEHOLDER_DESKTOP = 'E.g. for IT:- Java, C. for Manufacturing:- Metal Cutting';
+  public static KEYSKILLS_PLACEHOLDER_DESKTOP = 'E.g. for IT:- Java, C++';
   public static KEYSKILLS_PLACEHOLDER_MOBILE = 'E.g. for IT:- Java, C++';
   public static FAQ_CONTACT_NUMBER = '+91-8669601612';
   public static FAQ_CONTACT_EMAIL = 'support@jobmosis.com';

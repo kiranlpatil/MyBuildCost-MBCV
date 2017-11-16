@@ -568,7 +568,8 @@ header {
   }
 
   .btn-cart {
-    background: $orange;
+    background: transparent;
+    color: $orange;
     border: 1px solid $orange;
 
     &:hover,
@@ -576,6 +577,7 @@ header {
     &:active {
       background: $orange;
       border: 1px solid $orange;
+      color: $white;
     }
   }
   .canvas-container,
@@ -673,7 +675,8 @@ header {
   }
 
   .btn-cart {
-    background: $pink;
+    background: transparent;
+    color: $pink;
     border: 1px solid $pink;
 
     &:hover,
@@ -681,6 +684,7 @@ header {
     &:active {
       background: $pink;
       border: 1px solid $pink;
+      color: $white;
     }
   }
   .canvas-container,
@@ -751,7 +755,8 @@ header {
   }
 
   .btn-cart {
-    background: $purple;
+    background: transparent;
+    color: $purple;
     border: 1px solid $purple;
 
     &:hover,
@@ -759,6 +764,7 @@ header {
     &:active {
       background: $purple;
       border: 1px solid $purple;
+      color: $white;
     }
   }
   .canvas-container,
