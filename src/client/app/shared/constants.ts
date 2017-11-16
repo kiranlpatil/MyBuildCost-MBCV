@@ -742,6 +742,7 @@ export class Label {
   public static COMPANY_CULTURE: string = 'Company Culture';
   public static NOTICE_PERIOD: string = 'Notice Period';
   public static NOT_FOUND_ERROR: string = '404';
+  public static CURRENT_JOB: string = 'Current Job';
 }
 
 export class Button {

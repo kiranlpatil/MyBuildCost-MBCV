@@ -5,7 +5,7 @@
 
   <p [innerHTML]="getMessages().NOT_FOUND_INFORMATION"></p>
 
-  <a href="" class="btn btn-success bact-to-home">
+  <a [routerLink]="['/signin']" class="btn btn-success bact-to-home">
     {{getButton().BACK_TO_HOME}}
   </a>
 </section>

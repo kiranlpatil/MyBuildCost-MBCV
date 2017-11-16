@@ -1,4 +1,10 @@
 <cn-recruiter-header [headerInfo]="headerInfo" [jobCount]="jobCount"></cn-recruiter-header>
+<div class="container-fluid profile-wrapper my-job-tabs">
+  <ul class="nav nav-tabs dashboard-tabs">
+    <li class="active"><a title="Current Job">
+      <span class="icon-dashboard"></span> {{getLabel().CURRENT_JOB}} </a></li>
+  </ul>
+</div>
 <div class="container-fluid profile-wrapper">
   <div class="candidate-listing">
     <cn-filter [hidden]="whichListVisible[4]" [selectedJob]="selectedJobProfile" [role]=true></cn-filter>
