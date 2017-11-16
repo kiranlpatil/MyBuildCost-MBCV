@@ -367,7 +367,7 @@
 <section *ngIf="data != undefined && typeOfView=='compact'">
   <div class="one-page-summary">
     <div class="col-xs-12">
-      <div *ngIf="candidateDetails != undefined">
+      <div *ngIf="candidateDetails != undefined && recruiter != undefined">
         <cn-capability-compare [candidate_picture]="candidateDetails.picture" [job_picture]="recruiter.company_logo"   [capabilities]="capabilities"></cn-capability-compare>
       </div>
 
