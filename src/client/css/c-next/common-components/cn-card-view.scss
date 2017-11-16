@@ -19,12 +19,12 @@
     ul {
       display: block;
       list-style: none;
-      padding: 0;
       margin: 0;
+      padding: 0;
       position: absolute;
-      z-index: 5;
-      top: 5px;
       right: 5px;
+      top: 5px;
+      z-index: 99;
 
       li {
         float: left;
@@ -136,17 +136,18 @@
   }
 
   .btn-cart {
-    background-color: $theme-color;
+    background: transparent;
     border: 1px solid $theme-color;
     border-radius: 0;
     box-shadow: none;
-    color: $white;
-    font-size: 14px !important;
+    color: $theme-color;
+    display: table;
+    font-size: 12px !important;
     height: 32px !important;
-    margin: 0 3px 0 -3px;
-    padding: 6px 25px !important;
+    margin: 0 auto 6px auto;
+    padding: 6px 15px !important;
     position: relative;
-    width: 48.5%;
+    width: 64%;
     z-index: 2;
 
     &:hover,
@@ -165,11 +166,13 @@
 
     .button-group {
       position: absolute;
-      width: 100%;
+      width: 92%;
       bottom: 13px;
-      left: 0;
       padding: 5px;
       display: none;
+      background: rgba(255,255,255,0.9);
+      height: 89%;
+      z-index: 9;
 
       .btn {
         border-radius: 0;
@@ -565,7 +568,8 @@ header {
   }
 
   .btn-cart {
-    background: $orange;
+    background: transparent;
+    color: $orange;
     border: 1px solid $orange;
 
     &:hover,
@@ -573,6 +577,7 @@ header {
     &:active {
       background: $orange;
       border: 1px solid $orange;
+      color: $white;
     }
   }
   .canvas-container,
@@ -670,7 +675,8 @@ header {
   }
 
   .btn-cart {
-    background: $pink;
+    background: transparent;
+    color: $pink;
     border: 1px solid $pink;
 
     &:hover,
@@ -678,6 +684,7 @@ header {
     &:active {
       background: $pink;
       border: 1px solid $pink;
+      color: $white;
     }
   }
   .canvas-container,
@@ -748,7 +755,8 @@ header {
   }
 
   .btn-cart {
-    background: $purple;
+    background: transparent;
+    color: $purple;
     border: 1px solid $purple;
 
     &:hover,
@@ -756,6 +764,7 @@ header {
     &:active {
       background: $purple;
       border: 1px solid $purple;
+      color: $white;
     }
   }
   .canvas-container,
