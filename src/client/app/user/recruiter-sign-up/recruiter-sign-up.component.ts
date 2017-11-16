@@ -5,7 +5,7 @@ import {Recruiter} from "../models/recruiter";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ValidationService} from "../../shared/customvalidations/validation.service";
 import {AppSettings, CommonService, Message, MessageService, NavigationRoutes} from "../../shared/index";
-import {API, ImagePath, Label, LocalStorage, Messages} from "../../shared/constants";
+import {API, Button, ImagePath, Label, LocalStorage, Messages} from "../../shared/constants";
 import {LocalStorageService} from "../../shared/services/localstorage.service";
 import {Headers, Http, RequestOptions, Response} from "@angular/http";
 import {Location} from "../../user/models/location";
@@ -298,6 +298,9 @@ export class RecruiterSignUpComponent implements OnInit {
 
   getLabel() {
     return Label;
+  }
+  getButton() {
+    return Button;
   }
 
   goToAcceptTerms() {

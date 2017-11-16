@@ -690,6 +690,8 @@ export class Headings {
 export class Label {
   public static CURRENT_PASSWORD_LABEL: string = 'Current Password';
   public static NEW_PASSWORD_LABEL: string = 'New Password';
+  public static PASSWORD: string = 'Password';
+  public static YEAR_OF_BIRTH: string = 'Year of Birth';
   public static CONFIRM_PASSWORD_LABEL: string = 'Confirm Password';
   public static FIRST_NAME_LABEL: string = 'First Name';
   public static COMPANY_NAME_LABEL: string = 'Company Name';
@@ -715,6 +717,11 @@ export class Label {
   public static ACTIONS: string = 'Actions';
   public static TOTAL_POSTED_JOB: string = 'Total Posted Jobs';
   public static COMPANY_NAME: string = 'Company Name (Size)';
+  public static COMPANY_SIZE: string = 'Company Size';
+  public static OWN_COMPANY: string = 'Own company';
+  public static OTHER_COMPANY: string = 'Other company';
+  public static RECRUITING_FOR: string = 'Recruiting for';
+  public static COMPANY_HEAD_QUARTER: string = 'Company Head Quarter';
   public static ACCEPT_NAME: string = 'I accept the';
   public static TERMS_AND_CONDITIONS_NAME: string = 'Terms and Conditions.';
   public static REGISTER_AS_APPLICANT: string = 'Register as an applicant';
@@ -748,6 +755,7 @@ export class Button {
   public static SUBMIT: string = 'Submit';
   public static DOWNLOAD: string = 'Download';
   public static BACK_TO_HOME: string = 'Back to home';
+  public static CREATE_MY_ACCOUNT: string = 'Create my account';
 }
 //These constant is used to track profile completion of candiate.(Having total 14 steps to complete)
 export enum CandidateProfileUpdateTrack {

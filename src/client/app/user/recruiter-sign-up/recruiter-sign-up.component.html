@@ -11,18 +11,18 @@
     <form [formGroup]="recruiterForm" (submit)="onSubmit()" id="recruiter-form" class="employer-form" novalidate>
       <div class="radio-group text-left clearfix">
         <div class="registration-btn-radio text-left clearfix">
-          <label class="lable-name">Recruiting for</label>
+          <label class="lable-name">{{getLabel().RECRUITING_FOR}}</label>
           <div class="item-radio">
             <label for="self" class="radio-inline">
               <input type="radio" id="self" name="recruiting_for" value="self" (click)="recruitmentForSelf()" checked/>
-              <span>Own company</span>
+              <span>{{getLabel().OWN_COMPANY}}</span>
               <div class="check"></div>
             </label>
           </div>
           <div class="item-radio">
             <label for="others" class="radio-inline">
               <input type="radio" id="others" name="recruiting_for" value="others" (click)="recruitmentForOthers()"/>
-              <span>Other company</span>
+              <span>{{getLabel().OTHER_COMPANY}}</span>
               <div class="check"></div>
             </label>
           </div>
@@ -34,14 +34,14 @@
                                [submitStatus]="submitStatus"></cn-control-messages>
           <input type="text" formControlName="company_name" id="company_name" class="form-control" maxlength="40"
                  autocomplete="off" required/>
-          <label>Company Name</label>
+          <label>{{getLabel().COMPANY_NAME_LABEL}}</label>
         </div>
 
         <div class="form-group list">
           <select class="select" formControlName="company_size">
             <option *ngFor="let c of companySize" [ngValue]="c">{{c}}</option>
           </select>
-          <label>Company Size</label>
+          <label>{{getLabel().COMPANY_SIZE}}</label>
           <div class="error-messages"
                *ngIf="(recruiterForm.get('company_size').touched || submitStatus)&& recruiterForm.get('company_size').hasError('required')">
             {{companySizeErrorMessage}}
@@ -53,7 +53,7 @@
                                [submitStatus]="submitStatus"></cn-control-messages>
           <input type="text" (keydown)="onCompanyWebsiteType()" formControlName="company_website" id="company_website" class="form-control" maxlength="40"
                 placeholder="www.example.com" autocomplete="off" />
-          <label>Website <span>(Optional)</span></label>
+          <label>{{getLabel().COMPANY_WEBSITE_FIELD_LABEL}} <span>(Optional)</span></label>
           <span class="error-messages" *ngIf="!isCompanyWebsiteValid">{{getMessages().MSG_ERROR_VALIDATION_INVALID_URL_REQUIRED}}</span>
 
         </div>
@@ -63,7 +63,7 @@
                                [submitStatus]="submitStatus"></cn-control-messages>
           <input type="email" formControlName="email" id="email" maxlength="40" class="form-control" autocomplete="off"
                  required/>
-          <label>Email</label>
+          <label>{{getLabel().EMAIL_FIELD_LABEL}}</label>
         </div>
 
         <div class="form-group">
@@ -72,7 +72,7 @@
           <input type="password" formControlName="password" id="password" [(ngModel)]="model.password"
                  class="form-control" (focus)="showMessage()" [(ngModel)]="myPassword"
                  (ngModelChange)="selectPassword($event)" required/>
-          <label>Password</label>
+          <label>{{getLabel().PASSWORD}}</label>
         </div>
 
         <div class="form-group">
@@ -81,7 +81,7 @@
           <input type="password" formControlName="confirm_password" id="confirm_password"
                  [(ngModel)]="model.confirm_password"
                  (blur)="makePasswordConfirm()" class="form-control" required/>
-          <label>Confirm Password</label>
+          <label>{{getLabel().CONFIRM_PASSWORD_LABEL}}</label>
           <span class="error-messages" *ngIf="isPasswordConfirm == true">{{passwordMismatchMessage}}</span>
         </div>
 
@@ -91,7 +91,7 @@
           <span class="input-group-addon">+91</span>
           <!--<input type="text" formControlName="mobile_number" id="mobile_number" class="form-control" pattern="/[^0-9]/g" />-->
           <input type="number" formControlName="mobile_number" id="mobile_number" class="form-control"/>
-          <label>Mobile</label>
+          <label>{{getLabel().CONTACT_FIELD_LABEL}}</label>
         </div>
 
         <!--<div class="form-group">
@@ -107,7 +107,7 @@
           <input type="text" formControlName="location" class="form-control" placeholder=""
                  [(ngModel)]="storedLocation.formatted_address" (keydown)="keyDownCheck($event)"
                  (setAddress)="getAddress($event)" mygoogleplace/>
-          <label>Current Location</label>
+          <label>{{getLabel().CURRENT_LOCATION}}</label>
           <div class="error-messages" *ngIf="isLocationEmpty">{{locationValidationMessage}}</div>
           <div class="error-messages" *ngIf="isLocationInvalid">{{inValidLocationMessage}}</div>
         </div>
@@ -119,7 +119,7 @@
                  [(ngModel)]="companyHQCountry"
                  (keydown)="keyDownCheckCompanyHQ($event)"
                  placeholder="" (setAddress)="selectCompanyHeadquarterModel($event)" mygoogleplace/>
-          <label>Company Head Quarter</label>
+          <label>{{getLabel().COMPANY_HEAD_QUARTER}}</label>
           <div class="error-messages" *ngIf='isCompanyHQEmpty'>{{locationValidationMessage}}</div>
           <div class="error-messages" *ngIf='isCompanyHQInvalid'>{{inValidLocationMessage}}</div>
         </div>
@@ -143,7 +143,7 @@
           <div class="error-messages" *ngIf='!recruiterForm.get("accept_terms").value && submitStatus'>{{getMessages().MSG_ERROR_VALIDATION_TERMS_AND_CONDITIONS_REQUIRED}}
           </div>
         </div>
-        <button type="submit" class="btn btn-success">Create my account</button>
+        <button type="submit" class="btn btn-success">{{getButton().CREATE_MY_ACCOUNT}}</button>
       </div>
     </form>
   </div>
