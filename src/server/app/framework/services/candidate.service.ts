@@ -853,6 +853,7 @@ class CandidateService {
       if(err) {
         callback(err, null);
       } else {
+        candidateDetails = res;
         this.recruiterRepository.retrieve({'userId':recruiterUserId}, (err, recruiterDetails)=> {
           if(err) {
             callback(err, null);
