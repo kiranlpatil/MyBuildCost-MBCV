@@ -77,7 +77,7 @@ export class MultiSelectComponent implements OnChanges, OnInit {
     this.proficiency = event.target.value;
     if (this.validateProficiency(this.proficiency)) {
       let tempMasterDataProficiencies: any = this.masterDataProficiencies;
-      tempMasterDataProficiencies = tempMasterDataProficiencies.map(i  => i.toLowerCase());
+      tempMasterDataProficiencies = tempMasterDataProficiencies.map((i:any)  => i.toLowerCase());
       if (tempMasterDataProficiencies.indexOf(this.proficiency.toLowerCase()) == -1) {
         this.newProficiency = this.proficiency;
         this.addProficiencyToMasterData();

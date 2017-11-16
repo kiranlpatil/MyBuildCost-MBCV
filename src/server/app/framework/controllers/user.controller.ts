@@ -1546,7 +1546,7 @@ export function googlelogin(req: express.Request, res: express.Response, next: a
  }*/
 
 export function updatePicture(req: express.Request, res: express.Response, next: any): void {
-  __dirname = path.resolve() + config.get('TplSeed.publicPath')+'profileimage';
+  __dirname = path.resolve() + config.get('TplSeed.profilePath');
   let form = new multiparty.Form({uploadDir: __dirname});
   form.parse(req, (err: Error, fields: any, files: any) => {
     if (err) {
@@ -1562,7 +1562,7 @@ export function updatePicture(req: express.Request, res: express.Response, next:
       let image_path = files.file[0].path;
       let originalFilename = JSON.stringify(image_path.substr(files.file[0].path.lastIndexOf('/') + 1));
       let userService = new UserService();
-      path=config.get('TplSeed.profilePath')+'profileimage/'+originalFilename.replace(/"/g,'');
+      path='/public/profileImage/'+originalFilename.replace(/"/g,'');
 
       userService.UploadImage(path, originalFilename, function (err: any, tempath: any) {
         if (err) {
