@@ -174,8 +174,8 @@ class RecruiterService {
     this.jobProfileRepository.create(job, (err : Error, res : IJobProfile)=> {
       if(err) {
         callback(err,null);
-      }else {
-        this.recruiterRepository.findOneAndUpdate({'_id': new mongoose.Types.ObjectId(_id)},
+      } else {
+        /*this.recruiterRepository.findOneAndUpdate({'_id': new mongoose.Types.ObjectId(_id)},
           {$push: {postedJobs: res._id}},
           {
             'new': true,
@@ -185,7 +185,8 @@ class RecruiterService {
             } else {
               callback(null, response);
             }
-          });
+          });*/
+        callback(null, res);
       }
     });
   }

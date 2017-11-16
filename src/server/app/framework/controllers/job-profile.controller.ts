@@ -269,9 +269,10 @@ export function cloneJob(req: express.Request, res: express.Response, next: any)
           code: 401
         });
       } else {
-        var newJob: any = result;
-
-        delete newJob._id;
+        let oldId: any = result;
+        let newJob: any = result.toObject();
+        delete newJob["_id"];
+        console.log('-----------------------newJob._id---------------------',newJob._id);
         newJob.jobTitle = newJobTitle;
         newJob.isJobPosted = false;
         newJob.isJobShared = false;
@@ -283,7 +284,7 @@ export function cloneJob(req: express.Request, res: express.Response, next: any)
 
         newJob.expiringDate = new Date((new Date().getTime() + ConstVariables.JOB__EXPIRIY_PERIOD));
         var recruiterService = new RecruiterService();
-        recruiterService.addCloneJob(result._id, newJob, (err, result) => {
+        recruiterService.addCloneJob(oldId, newJob, (err, result) => {
           if (err) {
             next({
               reason: err,

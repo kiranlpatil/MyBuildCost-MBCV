@@ -41,8 +41,8 @@ export class UserProfileComponent implements OnInit {
   filesToUpload: Array<File>;
   image_path: any;
   error_msg: string;
-  company_website:string;
-  company_name:string;
+  company_website:string = "Test";
+  company_name:string = "Test";
   isShowErrorMessage: boolean = true;
   newUser: number;
   showModalStyle: boolean = false;
@@ -96,7 +96,7 @@ export class UserProfileComponent implements OnInit {
       LocalStorageService.setLocalValue(LocalStorage.ROLE_NAME, this.role);
       switch(this.role) {
         case 'candidate': this.getCandidate(); break;
-        case 'recruiter': this.getRecruiter(); break;
+        case 'recruiter': /*this.getRecruiter();*/ break;
         default :  this._router.navigate([NavigationRoutes.APP_START]); break;
       }
     });

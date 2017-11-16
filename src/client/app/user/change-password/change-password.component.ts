@@ -52,7 +52,7 @@ export class ChangePasswordComponent {
       this.role = params['role'];
       switch(this.role) {
         case 'candidate': this.getCandidate(); break;
-        case 'recruiter': this.getRecruiter(); break;
+        case 'recruiter': /*this.getRecruiter();*/ break;
         case 'admin': break;
         default :  this._router.navigate([NavigationRoutes.APP_START]); break;
       }

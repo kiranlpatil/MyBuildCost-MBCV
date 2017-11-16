@@ -64,6 +64,6 @@ export function init(app: express.Application) {
     app.use(sharedService.errorHandler);
   }catch (e) {
     console.log('exception',e);
-    sharedService.errorHandler(e);
+    //sharedService.errorHandler(e);
   }
 }
