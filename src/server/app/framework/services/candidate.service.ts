@@ -819,33 +819,6 @@ class CandidateService {
     this.candidateRepository.updateByUserId( new mongoose.Types.ObjectId(_id), item, callback);
   }
 
-  /*isCandidateInCart(candidateDetails:CandidateClassModel, jobProfiles:JobProfileModel[] ) {
-    let isGotIt = true;
-    for (let job of jobProfiles) {
-      for (let item of job.candidate_list) {
-        if (item.name === 'cartListed') {
-          if (item.ids.indexOf(new mongoose.Types.ObjectId(candidateDetails.candidateId).toString()) !== -1) {
-            console.log('isGot it');
-            isGotIt = false;
-            break;
-          }
-        }
-      }
-      if (!isGotIt) {
-        break;
-      }
-    }
-    if (isGotIt) {
-      console.log('isNotGotIt');
-      candidateDetails.personalDetails.last_name = UtilityFunction.valueHide(candidateDetails.personalDetails.last_name);
-      candidateDetails.personalDetails.email = UtilityFunction.emailValueHider(candidateDetails.personalDetails.email);
-      candidateDetails.personalDetails.mobile_number = UtilityFunction.mobileNumberHider(candidateDetails.personalDetails.mobile_number);
-
-    }
-    console.log('candidate service details = ',candidateDetails);
-    return candidateDetails;
-  }*/
-
   isCandidateInCart(candidateDetails:CandidateClassModel, jobProfiles:JobProfileModel[]): boolean {
     let isInCart = false;
     for (let job of jobProfiles) {
@@ -864,26 +837,65 @@ class CandidateService {
     return isInCart;
   }
 
+    checkIsCarted(candidateUserId: string,recruiterUserId: string, callback: (error: any, result: any) => void) {
+      this.get(candidateUserId, (err, candidateDetails ) => {
+        if(err) {
+          callback(err, null);
+        } else {
+          this.recruiterRepository.retrieve({'userId':recruiterUserId}, (err, recruiterDetails)=> {
+            if(err) {
+              callback(err, null);
+            } else {
+              let isInCart = false;
+              for (let job of recruiterDetails[0].postedJobs) {
+                for (let item of job.candidate_list) {
+                  if (item.name === 'cartListed') {
+                    if (item.ids.indexOf(new mongoose.Types.ObjectId(candidateDetails.candidateId).toString()) !== -1) {
+                      isInCart = true;
+                      break;
+                    }
+                  }
+                }
+                if (isInCart) {
+                  break;
+                }
+              }
+              callback(err, isInCart);
+            }
+          });
+        }
+      });
+    }
+
+
 
   maskCandidateDetails(candidateUserId: string,recruiterUserId: string, callback: (error: any, result: any) => void) {
-   // let candidateDetails :CandidateClassModel = new CandidateClassModel();
     this.get(candidateUserId, (err, candidateDetails ) => {
       if(err) {
         callback(err, null);
       } else {
-       // candidateDetails = res;
         this.recruiterRepository.retrieve({'userId':recruiterUserId}, (err, recruiterDetails)=> {
           if(err) {
             callback(err, null);
           } else {
-            let isInCart = this.isCandidateInCart(candidateDetails, recruiterDetails[0].postedJobs);
-            if (!isInCart) {
-              candidateDetails.personalDetails.last_name = UtilityFunction.valueHide(candidateDetails.personalDetails.last_name);
-              candidateDetails.personalDetails.email = UtilityFunction.emailValueHider(candidateDetails.personalDetails.email);
-              candidateDetails.personalDetails.mobile_number = UtilityFunction.mobileNumberHider(candidateDetails.personalDetails.mobile_number);
+            let isInCart: boolean;
+           // let isInCart = this.isCandidateInCart(candidateDetails, recruiterDetails[0].postedJobs);
+            this.checkIsCarted(candidateUserId,recruiterUserId, (err, isCarted) => {
+              if(err) {
+                callback(err,null);
+              } else {
+                isInCart = isCarted;
+                console.log('isInCart',isCarted);
+                if (!isCarted) {
+                  candidateDetails.personalDetails.last_name = UtilityFunction.valueHide(candidateDetails.personalDetails.last_name);
+                  candidateDetails.personalDetails.email = UtilityFunction.emailValueHider(candidateDetails.personalDetails.email);
+                  candidateDetails.personalDetails.mobile_number = UtilityFunction.mobileNumberHider(candidateDetails.personalDetails.mobile_number);
 
-            }
-            callback(err, candidateDetails);
+                }
+                callback(err, candidateDetails);
+              }
+            });
+            //callback(err, candidateDetails);
           }
         });
       }
