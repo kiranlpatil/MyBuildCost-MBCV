@@ -116,16 +116,16 @@ export class CandidateSearchComponent implements OnChanges {
   }
 
   viewProfile(nav:string) {
-    if (!this.candidateDetailsJobMatching.isShowCandidateDetails) {
+   // if (!this.candidateDetailsJobMatching.isShowCandidateDetails) {
       this.usageTrackingService.addUsesTrackingData(UsageActions.VIEWED_VALUE_PORTRAIT_BY_RECRUITER,
         LocalStorageService.getLocalValue(LocalStorage.END_USER_ID), this.jobId, this.candidateId).subscribe(
         data  => {
           console.log(''+data);
         }, error => this.errorService.onError(error));
       this._router.navigate([nav, this.userId]);
-    } else {
+   /* } else {
       this.isShowSuggestionToasterMsg = !this.isShowSuggestionToasterMsg;
-    }
+    }*/
   }
 
   showSearchResult() {

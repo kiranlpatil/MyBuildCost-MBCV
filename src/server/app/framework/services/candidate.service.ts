@@ -15,6 +15,10 @@ import CapabilitiesClassModel = require('../dataaccess/model/capabilities-class.
 import ComplexitiesClassModel = require('../dataaccess/model/complexities-class.model');
 import RoleModel = require('../dataaccess/model/role.model');
 import {underline} from "chalk";
+
+import CandidateModel = require("../dataaccess/model/candidate.model");
+import JobProfileModel = require("../dataaccess/model/jobprofile.model");
+import {UtilityFunction} from "../uitility/utility-function";
 let bcrypt = require('bcrypt');
 class CandidateService {
   private candidateRepository: CandidateRepository;
@@ -798,6 +802,80 @@ class CandidateService {
 
   updateField(_id:string, item:any, callback:(error:any, result:any) => void) {
     this.candidateRepository.updateByUserId( new mongoose.Types.ObjectId(_id), item, callback);
+  }
+
+  /*isCandidateInCart(candidateDetails:CandidateClassModel, jobProfiles:JobProfileModel[]): boolean {
+    let isInCart = false;
+    for (let job of jobProfiles) {
+      for (let item of job.candidate_list) {
+        if (item.name === 'cartListed') {
+          if (item.ids.indexOf(new mongoose.Types.ObjectId(candidateDetails.candidateId).toString()) !== -1) {
+            isInCart = true;
+            break;
+          }
+        }
+      }
+      if (isInCart) {
+        break;
+      }
+    }
+    return isInCart;
+  }*/
+
+    checkIsCarted(candidateUserId: string,recruiterUserId: string, callback: (error: any, result: any) => void) {
+      this.get(candidateUserId, (err, candidateDetails ) => {
+        if(err) {
+          callback(err, null);
+        } else {
+          this.recruiterRepository.retrieve({'userId':recruiterUserId}, (err, recruiterDetails)=> {
+            if(err) {
+              callback(err, null);
+            } else {
+              let isInCart = false;
+              for (let job of recruiterDetails[0].postedJobs) {
+                for (let item of job.candidate_list) {
+                  if (item.name === 'cartListed') {
+                    if (item.ids.indexOf(new mongoose.Types.ObjectId(candidateDetails.candidateId).toString()) !== -1) {
+                      isInCart = true;
+                      break;
+                    }
+                  }
+                }
+                if (isInCart) {
+                  break;
+                }
+              }
+              callback(err, isInCart);
+            }
+          });
+        }
+      });
+    }
+
+
+  maskCandidateDetails(candidateUserId:string, recruiterUserId:string, callback:(error:any, result:any) => void) {
+    this.get(candidateUserId, (err, candidateDetails) => {
+      if (err) {
+        callback(err, null);
+      } else {
+        let isInCart:boolean;
+        this.checkIsCarted(candidateUserId, recruiterUserId, (err, isCarted) => {
+          if (err) {
+            callback(err, null);
+          } else {
+            isInCart = isCarted;
+            console.log('isInCart', isCarted);
+            if (!isCarted) {
+              candidateDetails.personalDetails.last_name = UtilityFunction.valueHide(candidateDetails.personalDetails.last_name);
+              candidateDetails.personalDetails.email = UtilityFunction.emailValueHider(candidateDetails.personalDetails.email);
+              candidateDetails.personalDetails.mobile_number = UtilityFunction.mobileNumberHider(candidateDetails.personalDetails.mobile_number);
+
+            }
+            callback(err, candidateDetails);
+          }
+        });
+      }
+    });
   }
 
 }

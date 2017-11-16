@@ -219,7 +219,7 @@
     "spdy": "^3.4.4",
     "systemjs": "0.20.14",
     "typings": "^2.1.1",
-    "uses-tracking": "^1.0.28",
+    "uses-tracking": "1.0.28",
     "winston": "^2.2.0",
     "xlsx-to-json": "^0.3.0",
     "zone.js": "^0.8.7"

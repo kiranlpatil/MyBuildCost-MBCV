@@ -74,7 +74,8 @@
 }
 
 #recruiter-dashboard-tabs,
-#recruiter-job-dashboard-tabs {
+#recruiter-job-dashboard-tabs,
+.my-job-tabs {
   border-bottom: 0;
   background: $page-header-bg;
   left: 100px;
@@ -147,6 +148,28 @@
      }
    }
  }
+
+.my-job-tabs.profile-wrapper {
+  .dashboard-tabs {
+    background: transparent;
+    border: 0;
+    left: 575px;
+    top: 0;
+    width: 200px;
+    z-index: 9999;
+    &:first-child {
+      .active {
+        margin-left: 0;
+        a {
+          padding: 16px 5px 14px 30px;
+          .icon-dashboard {
+            background: url(../../assets/c-next/card-view/sprite.png) no-repeat -56px -921px;
+          }
+        }
+      }
+    }
+  }
+}
 
 .tab-content {
   border-top-color: transparent;

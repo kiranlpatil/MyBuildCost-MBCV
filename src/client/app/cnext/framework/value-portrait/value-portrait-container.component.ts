@@ -14,10 +14,12 @@ import {LocalStorageService} from "../../../shared/services/localstorage.service
 export class ValuePortraitContainerComponent implements OnInit {
 
   _userId:string;
+  _jobId:string;
   isShareView:boolean = false;
   private isCandidate: boolean;
   private isCandidateSubmitted: boolean;
   private isFromCreate: boolean = false;
+  private isFromRecruiterJob: boolean = false;
   candidateId:string;
   constructor(private _router:Router, private activatedRoute:ActivatedRoute) {
     if (LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE) === 'true') {
@@ -47,15 +49,22 @@ export class ValuePortraitContainerComponent implements OnInit {
       this._router.navigate(['/recruiter/search', this.candidateId]);
     }
 
+    if(this.isFromRecruiterJob) {
+      this._router.navigate(['/recruiter/job', this._jobId]);
+    }
+
   }
 
   ngOnInit() {
     this.activatedRoute.params.subscribe(params => {
       this._userId = params['id'];
       this.isFromCreate=false;
+      if(params['jobId']) {
+        this._jobId = params['jobId'];
+        this.isFromRecruiterJob = true;
+      }
     });
     this.activatedRoute.params.subscribe(params => {
-      console.log(params['userId']);
       if(params['userId']){
         this.isFromCreate = true;
         this._userId = params['userId'];

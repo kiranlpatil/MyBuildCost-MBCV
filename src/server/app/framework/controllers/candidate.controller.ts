@@ -8,6 +8,9 @@ import UserService = require('../services/user.service');
 import SearchService = require('../search/services/search.service');
 import CandidateInfoSearch = require('../dataaccess/model/candidate-info-search');
 import { MailChimpMailerService } from '../services/mailchimp-mailer.service';
+import CandidateSearchService = require("../services/candidate-search.service");
+import {CandidateDetailsWithJobMatching} from "../dataaccess/model/candidatedetailswithjobmatching";
+import CandidateClassModel = require("../dataaccess/model/candidate-class.model");
 
 
 export function create(req: express.Request, res: express.Response, next: any) {
@@ -256,7 +259,8 @@ export function get(req: express.Request, res: express.Response, next: any) { //
   try {
     let candidateService = new CandidateService();
     let candidateId = req.params.id;
-    /* if (String(req.user._id) === String(candidateId)) {*/
+    let recruiterUserId = req.user._id;
+    if (req.user.isCandidate || req.user.isAdmin) {
       candidateService.get(candidateId, (error, result) => {
         if (error) {
           next(error);
@@ -264,17 +268,18 @@ export function get(req: express.Request, res: express.Response, next: any) { //
         else {
           res.send({
             'status': 'success',
-            'data': result,
+            'data': result
           });
         }
       });
-    /* } else {
-      next({
-        reason: Messages.MSG_ERROR_IF_USER_ID_INVALID_FROM_URL_PARAMETER,
-        message: Messages.MSG_ERROR_IF_USER_ID_INVALID_FROM_URL_PARAMETER,
-        code: 401
+    } else {
+      candidateService.maskCandidateDetails(candidateId, recruiterUserId, (error, candidateDetails) => {
+        res.send({
+          'status': 'success',
+          'data': candidateDetails
+        });
       });
-     }*/
+    }
   }
   catch (e) {
    next({

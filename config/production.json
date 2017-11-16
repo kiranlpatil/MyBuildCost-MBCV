@@ -26,6 +26,8 @@
       "keySkillsCSV": "/public/key-skills.csv"
     },
     "publicPath":"/server/prod/app/framework/public/",
+    "profilePath":"/server/prod/public/profileImage",
+    "profilePathForClient":"/public/profileImage/",
     "limitForQuery" : 10,
     "mail": {
       "host":"http://52.41.194.37/",

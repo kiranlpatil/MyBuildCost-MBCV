@@ -318,5 +318,5 @@ class RecruiterService {
 
 }
 
-Object.seal(RecruiterService);
+/*Object.seal(RecruiterService);*/
 export = RecruiterService;
