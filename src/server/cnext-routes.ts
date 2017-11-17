@@ -8,6 +8,7 @@ import * as proficienciesController from "./app/framework/controllers/proficienc
 import * as industryController from "./app/framework/controllers/industry.controller";
 import * as recruiterController from "./app/framework/controllers/recruiter.controller";
 import * as jobProfileController from "./app/framework/controllers/job-profile.controller";
+import {UsageTrackingController} from "./app/framework/controllers/usage-tracking-controller";
 import * as userInterceptor from "./app/framework/interceptor/user.interceptor";
 import {SearchController} from "./app/framework/search/controller/search.controller";
 import * as adminController from "./app/framework/controllers/admin.controller";
@@ -24,6 +25,7 @@ export function cnextInit(app: express.Application) {
   //todo add interceptor to authenticate
   let searchController = new SearchController();
   let shareController = new ShareController();
+  let usageTrackingController = new UsageTrackingController();
   app.get('/api/industry',loggerInterceptor.logDetail, this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, industryController.retrieve);
   app.put('/api/updateUser/:id',loggerInterceptor.logDetail, this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, adminController.updateDetailOfUser);
   app.post('/api/proficiency',loggerInterceptor.logDetail, this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, proficienciesController.create);
@@ -80,7 +82,7 @@ export function cnextInit(app: express.Application) {
   app.get("/api/userFeedback",loggerInterceptor.logDetail,this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, userController.getUserFeedback);
 
   // API for Uses Tracking
-  app.put('/api/usageTracking',loggerInterceptor.logDetail, jobProfileController.createUsesTracking);
+  app.put('/api/usageTracking',loggerInterceptor.logDetail, usageTrackingController.create);
   app.get('/api/usageDetails',loggerInterceptor.logDetail, this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, adminController.exportUsageDetails);
   app.get('/api/keySkills',loggerInterceptor.logDetail, this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, adminController.exportKeySkills);
 

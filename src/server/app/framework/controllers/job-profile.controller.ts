@@ -7,8 +7,6 @@ import JobProfileService = require('../services/jobprofile.service');
 import CNextMessages = require('../shared/cnext-messages');
 import SearchService = require('../search/services/search.service');
 import RecruiterService = require('../services/recruiter.service');
-let usestracking = require('uses-tracking');
-
 
 export function searchCandidatesByJobProfile(req: express.Request, res: express.Response, next: any) {
   try {
@@ -213,25 +211,6 @@ export function metchResultForJob(req: express.Request, res: express.Response, n
       }
     });
 
-  } catch (e) {
-    next({
-      reason: e.message,
-      message: e.message,
-      stackTrace: new Error(),
-      code: 500
-    });
-  }
-}
-export function createUsesTracking(req: express.Request, res: express.Response, next: any) {
-  try {
-    let data: UsageTracking;
-    data = req.body;
-    data.timestamp = new Date();
-    let obj: any = new usestracking.MyController();
-    obj._controller.create(data);
-    res.send({
-      'status': 'success',
-    });
   } catch (e) {
     next({
       reason: e.message,

@@ -18,7 +18,6 @@ import UserService = require("./user.service");
 let path = require('path');
 let config = require('config');
 let fs = require('fs');
-let usestracking = require('uses-tracking');
 let spawn = require('child_process').spawn;
 
 let mongoExport = config.get('TplSeed.database.mongoExport');
@@ -31,14 +30,11 @@ class AdminService {
   private userRepository: UserRepository;
   private industryRepositiry: IndustryRepository;
   private recruiterRepository: RecruiterRepository;
-  private usesTrackingController: any;
 
   constructor() {
     this.userRepository = new UserRepository();
     this.industryRepositiry = new IndustryRepository();
     this.recruiterRepository = new RecruiterRepository();
-    let obj: any = new usestracking.MyController();
-    this.usesTrackingController = obj._controller;
   }
 
   getCountOfUsers(item: any, callback: (error: any, result: any) => void) {
@@ -352,7 +348,7 @@ class AdminService {
   }
 
   exportUsageDetailsCollection(callback: (err: any, res: any) => void) {
-    let fields = '_id,candidateId,jobProfileId,timestamp,action,__v';
+    let fields = '_id,candidateId,recruiterId,jobProfileId,action,timestamp';
     let downloadLocation = path.resolve() + config.get('TplSeed.adminExportFilePathForServer.usageDetailsCSV');
 
     this.exportCollection("usestrackings", fields, downloadLocation, '{}', (error: any, result: any) => {

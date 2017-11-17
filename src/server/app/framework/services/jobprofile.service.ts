@@ -11,7 +11,7 @@ import CandidateSearchRepository = require('../search/candidate-search.repositor
 import IndustryModel = require('../dataaccess/model/industry.model');
 import IndustryRepository = require('../dataaccess/repository/industry.repository');
 import CandidateService = require('./candidate.service');
-let usestracking = require('uses-tracking');
+import UsageTrackingService = require('./usage-tracking.service');
 
 
 class JobProfileService {
@@ -21,7 +21,7 @@ class JobProfileService {
   private recruiterRepository: RecruiterRepository;
   private candidateRepository: CandidateRepository;
   private APP_NAME: string;
-  private usesTrackingController: any;
+  private usageTrackingService: UsageTrackingService;
 
   constructor() {
     this.jobprofileRepository = new JobProfileRepository();
@@ -30,8 +30,7 @@ class JobProfileService {
     this.industryRepository = new IndustryRepository();
     this.candidateRepository = new CandidateRepository();
     this.APP_NAME = ProjectAsset.APP_NAME;
-    let obj: any = new usestracking.MyController();
-    this.usesTrackingController = obj._controller;
+    this.usageTrackingService = new UsageTrackingService();
   }
 
   create(item: any, callback: (error: any, result: any) => void) {
@@ -139,17 +138,17 @@ class JobProfileService {
               for (let list of job.candidate_list) {
                 if (list.name == item.listName) {
                   updateFlag = true;
+                  let uses_data: any;
+                  let sharedService:SharedService = new SharedService();
                   if (item.action == 'add') {
-                    let uses_data = {
+                    uses_data = {
                       recruiterId: res[0]._id,
                       candidateId: item.candidateId,
                       jobProfileId: job._id,
                       timestamp: new Date(),
                       action: Actions.DEFAULT_VALUE
                     };
-                    let sharedService:SharedService = new SharedService();
                     uses_data.action = sharedService.constructAddActionData(item.listName);
-                    this.usesTrackingController.create(uses_data);
 
                     if (list.name == ConstVariables.REJECTED_LISTED_CANDIDATE) {
                       for (let _list of job.candidate_list) {
@@ -167,21 +166,26 @@ class JobProfileService {
 
                     }
                   } else {
-                    let uses_data = {
+                    uses_data = {
                       recruiterId: res[0]._id,
                       candidateId: item.candidateId,
                       jobProfileId: job._id,
                       timestamp: new Date(),
                       action: Actions.DEFAULT_VALUE
                     };
-                    let sharedService: SharedService = new SharedService();
                     uses_data.action = sharedService.constructRemoveActionData(item.listName);
-                    this.usesTrackingController.create(uses_data);
                     let index = list.ids.indexOf(item.candidateId);    // <-- Not supported in <IE9
                     if (index !== -1) {
                       list.ids.splice(index, 1);
                     }
                   }
+
+                  this.usageTrackingService.create(uses_data, (err, result) => {
+                    if (err) {
+                      callback(err, null);
+                    }
+                  });
+
                   updatedQuery3 = {
                     $set: {
                       'postedJobs.$.candidate_list': job.candidate_list
@@ -230,35 +234,40 @@ class JobProfileService {
           for (let list of response[0].job_list) {
             if (list.name == item.listName) {
               isJobFound = true;
+              let uses_data: any;
+              let sharedService: SharedService = new SharedService();
               if (item.action == 'add') {
                 let index = list.ids.indexOf(item.profileId);
                 if (index == -1) {
-                  let uses_data = {
+                  uses_data = {
                     candidateId: item.candidateId,
                     jobProfileId: item.profileId,
                     timestamp: new Date(),
                     action: Actions.DEFAULT_VALUE
                   };
-                  let sharedService: SharedService = new SharedService();
                   uses_data.action = sharedService.constructAddActionData(item.listName);
-                  this.usesTrackingController.create(uses_data);
                   list.ids.push(item.profileId);
                 }
               } else if (item.action == 'remove' && item.listName != 'applied') {
-                let uses_data = {
+                uses_data = {
                   candidateId: item.candidateId,
                   jobProfileId: item.profileId,
                   timestamp: new Date(),
                   action: Actions.DEFAULT_VALUE
                 };
-                let sharedService: SharedService = new SharedService();
                 uses_data.action = sharedService.constructRemoveActionData(item.listName);
-                this.usesTrackingController.create(uses_data);
                 let index = list.ids.indexOf(item.profileId);
                 if (index !== -1) {
                   list.ids.splice(index, 1);
                 }
               }
+
+              this.usageTrackingService.create(uses_data, (err, result) => {
+                if (err) {
+                  callback(err, null);
+                }
+              });
+
               updateExistingQueryForCandidate = {
                 $set: {
                   'job_list': response[0].job_list

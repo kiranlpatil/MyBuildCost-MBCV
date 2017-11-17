@@ -17,22 +17,19 @@ import Match = require('../../dataaccess/model/match-enum');
 import IndustryRepository = require('../../dataaccess/repository/industry.repository');
 import IndustryModel = require('../../dataaccess/model/industry.model');
 import ScenarioModel = require('../../dataaccess/model/scenario.model');
-let usestracking = require('uses-tracking');
+import UsageTrackingService = require('../../services/usage-tracking.service');
 
 class SearchService {
   APP_NAME: string;
   candidateRepository: CandidateRepository;
   recruiterRepository: RecruiterRepository;
   industryRepository: IndustryRepository;
-  private usesTrackingController: any;
 
   constructor() {
     this.APP_NAME = ProjectAsset.APP_NAME;
     this.candidateRepository = new CandidateRepository();
     this.recruiterRepository = new RecruiterRepository();
     this.industryRepository = new IndustryRepository();
-    let obj: any = new usestracking.MyController();
-    this.usesTrackingController = obj._controller;
   }
 
   getMatchingCandidates(jobProfile: JobProfileModel, callback: (error: any, result: any) => void) {
@@ -192,18 +189,24 @@ class SearchService {
 
 
   getMatchingResult(candidateId: string, jobId: string, isCandidate : boolean,callback: (error: any, result: any) => void) {
+    let usageTrackingService = new UsageTrackingService();
     let uses_data = {
       candidateId: candidateId,
       jobProfileId: jobId,
       timestamp: new Date(),
       action: Actions.DEFAULT_VALUE
     };
+
     if (isCandidate) {
       uses_data.action = Actions.VIEWED_JOB_PROFILE_BY_CANDIDATE;
     } else {
       uses_data.action = Actions.VIEWED_FULL_PROFILE_BY_RECRUITER;
     }
-    this.usesTrackingController.create(uses_data);
+    usageTrackingService.create(uses_data, (err, result) => {
+      if (err) {
+        callback(err, null);
+      }
+    });
     this.candidateRepository.findByIdwithExclude(candidateId,{'industry':0}, (err: any, candidateRes: any) => {
       if (err) {
         callback(err, null);
