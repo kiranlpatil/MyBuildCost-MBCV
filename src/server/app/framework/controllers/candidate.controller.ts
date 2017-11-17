@@ -199,7 +199,7 @@ export function retrieve(req: express.Request, res: express.Response, next: any)
                 if(err) {
                   next(err);
                 } else {
-                      if(!isCarted) {
+                      if(!isCarted && (!req.user.isCandidate || !req.user.isAdmin)) {
                         result.last_name = UtilityFunction.valueHide(result.last_name);
                       }
                   res.send({
