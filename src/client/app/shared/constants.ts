@@ -742,6 +742,7 @@ export class Label {
   public static MATCH_AGAINST_ALL_JOB = 'Match Against All Jobs';
   public static MATCH_AGAINST_THIS_JOB = 'Match Against This Job';
   public static SHOW_VALUE_PORTRAIT = 'Show Value Portrait';
+  public static COMPARE_WITH_OTHERS = 'Compare with Others';
 }
 
 export class Button {
