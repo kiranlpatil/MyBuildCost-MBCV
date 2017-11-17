@@ -8,7 +8,7 @@ import {AdminAuthGuard} from "../admin-auth-guard.service";
 
 export const AdminDashboard: Route[] = [
   {
-    path: '',
+    path: 'admin',
     component: AdminDashboardComponent,
     canActivate: [AdminAuthGuard],
     children:[

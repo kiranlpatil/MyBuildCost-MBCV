@@ -164,6 +164,7 @@ import {UserFeedbackComponentService} from "./cnext/framework/user-feedback/user
 import {CandidateRouteSwitchComponent} from "./cnext/framework/candidate-dashboard/candidate-route-switch.component";
 import {CandidateBasicInformationComponent} from "./cnext/framework/one-page-summary/candidate-summary/candidate-basic-information/candidate-basic-information.component";
 import {PageNotFoundComponent} from "./shared/page-not-found/page-not-found.component";
+import {AdminModule} from "./admin/admin.module";
 //C-NEXT IMPORTS
 
 
@@ -174,7 +175,7 @@ import {PageNotFoundComponent} from "./shared/page-not-found/page-not-found.comp
     RouterModule.forRoot(routes),
     HttpModule,
     ReactiveFormsModule,
-
+    AdminModule,
     SharedModule,
     UserModule
   ],

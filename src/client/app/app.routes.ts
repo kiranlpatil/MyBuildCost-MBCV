@@ -13,10 +13,6 @@ import {PageNotFoundComponent} from "./shared/page-not-found/page-not-found.comp
 
 export const routes: Routes = [
 
-  {
-    path: 'admin',
-    loadChildren: '/app/admin/admin.module#AdminModule'
-  },
   ...ActivateUserRoutes,
   ...DashboardRoutes,
   ...CandidateRouteSwitch,
