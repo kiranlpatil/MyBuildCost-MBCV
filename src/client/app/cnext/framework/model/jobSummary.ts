@@ -1,4 +1,3 @@
-import {JobPosterModel} from "../../../user/models/jobPoster";
 export class JobSummary {
   isRecruitingForself: boolean;
   company_name: string = '';

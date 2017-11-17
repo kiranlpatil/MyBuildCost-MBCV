@@ -62,6 +62,12 @@ export class JobCompareViewComponent implements OnChanges,OnInit {
           data => {
             this.OnRecruiterDataSuccess(data);
           },error => this.errorService.onError(error));
+
+      this.recruiterDashboardService.getRecruiterDetails()
+        .subscribe(
+          recruiterData => {
+            this.recruiter = recruiterData.data;
+          },error => this.errorService.onError(error));
     }
   }
 
@@ -121,12 +127,12 @@ export class JobCompareViewComponent implements OnChanges,OnInit {
   getCompareDetail(candidateId: string, recruiterId: string) {
     this.jobCompareService.getCompareDetail(candidateId, recruiterId)
       .subscribe(
-        data => this.OnCompareSuccess(data)
+        data => this.OnCompareSuccess(data.data)
         ,error => this.errorService.onError(error));
   }
 
   OnCompareSuccess(data: any) {
-    this.data = data.data;
+    this.data = data;
     this.isCandidateHaveExtraKeySkill = false;
     for (let proficiency of this.data.proficiencies) {
       if (this.data.proficienciesMatch.indexOf(proficiency) == -1) {

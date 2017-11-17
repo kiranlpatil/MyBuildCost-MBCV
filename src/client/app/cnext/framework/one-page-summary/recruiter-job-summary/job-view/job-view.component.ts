@@ -7,6 +7,7 @@ import {ComplexityComponentService} from "../../../complexities/complexity.servi
 import {JobCompareService} from "../../../single-page-compare-view/job-compare-view/job-compare-view.service";
 import {ErrorService} from "../../../../../shared/services/error.service";
 import {JobPosterModel} from "../../../../../user/models/jobPoster";
+import {Recruiter} from "../../../../../user/models/recruiter";
 
 
 @Component({
@@ -19,7 +20,7 @@ import {JobPosterModel} from "../../../../../user/models/jobPoster";
 export class JobViewComponent implements OnChanges ,OnInit {
   @Input() jobId: string;
   @Input() calledFrom: string;
-  recruiter: JobSummary = new JobSummary();
+  recruiter: Recruiter = new Recruiter();
   job: JobPosterModel = new JobPosterModel();
   capabilities : any;
 
@@ -48,10 +49,18 @@ export class JobViewComponent implements OnChanges ,OnInit {
     }
   }
 
-  OnRecruiterDataSuccess(data: any) {
-    this.job = data;
+  OnRecruiterDataSuccess(jobData: any) {
+    this.getRecruiterDetails();
+    this.job = jobData;
     this.getCapabilities();
+  }
 
+  getRecruiterDetails() {
+    this.recruiterDashboardService.getRecruiterDetails()
+      .subscribe(
+        recruiterData => {
+          this.recruiter = recruiterData.data;
+        }, error => this.errorService.onError(error));
   }
 
   getCapabilities() {
