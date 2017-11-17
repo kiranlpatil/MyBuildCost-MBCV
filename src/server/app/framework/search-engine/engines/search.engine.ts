@@ -61,7 +61,6 @@ export abstract class SearchEngine {
     for(let qCard in q_cards) {
       q_cards[qCard].last_name =  UtilityFunction.valueHide(q_cards[qCard].last_name);
     }
-    console.log('maskQCards', q_cards);
     return q_cards;
   }
 

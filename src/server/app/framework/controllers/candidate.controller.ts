@@ -11,6 +11,7 @@ import { MailChimpMailerService } from '../services/mailchimp-mailer.service';
 import CandidateSearchService = require("../services/candidate-search.service");
 import {CandidateDetailsWithJobMatching} from "../dataaccess/model/candidatedetailswithjobmatching";
 import CandidateClassModel = require("../dataaccess/model/candidate-class.model");
+import {UtilityFunction} from "../uitility/utility-function";
 
 
 export function create(req: express.Request, res: express.Response, next: any) {
@@ -173,6 +174,7 @@ export function retrieve(req: express.Request, res: express.Response, next: any)
     let candidateService = new CandidateService();
     let params = req.params.id;
     let candidateId = req.params.candidateId;
+    let recruiterUserId = req.user._id;
     if (candidateId) {
       candidateService.findById(candidateId, (error, resu) => {
         if (error) {
@@ -193,10 +195,19 @@ export function retrieve(req: express.Request, res: express.Response, next: any)
                 code: 401
               })
             } else {
-              res.send({
-                'status': 'success',
-                'data': resu,
-                'metadata': result
+              candidateService.checkIsCarted(resu.userId,recruiterUserId, (err, isCarted) => {
+                if(err) {
+                  next(err);
+                } else {
+                      if(!isCarted) {
+                        result.last_name = UtilityFunction.valueHide(result.last_name);
+                      }
+                  res.send({
+                    'status': 'success',
+                    'data': resu,
+                    'metadata': result
+                  });
+                }
               });
             }
 
