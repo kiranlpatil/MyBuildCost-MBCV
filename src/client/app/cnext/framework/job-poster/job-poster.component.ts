@@ -218,7 +218,7 @@ export class JobPosterComponent implements OnInit, OnChanges {
     this.jobPosterModel.daysRemainingForExpiring = ValueConstant.JOB__EXPIRIY_PERIOD;
     this.jobPosterModel.isJobPostExpired = false;
     this.jobPostService.postJob(this.jobPosterModel).subscribe(
-      response => { debugger
+      response => {
         this.jobPosterModel._id = response.data._id;
         this.jobId = response.data._id;
         LocalStorageService.setLocalValue(LocalStorage.POSTED_JOB, this.jobPosterModel._id);
@@ -230,7 +230,7 @@ export class JobPosterComponent implements OnInit, OnChanges {
           this.jobPosterModel.complexity_musthave_matrix = response.data.complexity_musthave_matrix;
           this.setComplexityMustHaveMatrix = false;
         }
-        //this._router.navigate(['/recruiter/jobpost', this.jobPosterModel._id]);
+        this._router.navigate(['/recruiter/jobpost', this.jobPosterModel._id]);
       }, error => this.errorService.onError(error));
   }
 
