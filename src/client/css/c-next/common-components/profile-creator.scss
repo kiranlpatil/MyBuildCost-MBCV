@@ -316,21 +316,6 @@
     }
   }
 
-  .btn-prev {
-    position: absolute;
-    top: 50%;
-    left: 15px;
-    background: transparent;
-    border: 0;
-    background: url('../../assets/c-next/profile-creator/previous.png') center center;
-    padding: 12px 7px;
-    z-index: 9999;
-
-    span {
-      display: none;
-    }
-  }
-
   .form {
     border: 1px solid $border-color;
     margin: 10px 0 20px;
@@ -339,9 +324,24 @@
 
     &:first-child {
       border-top: 0;
-      padding-top: 0;
       margin-top: 0;
+      padding-top: 0;
     }
+  }
+}
+
+.btn-prev {
+  position: absolute;
+  top: 50%;
+  left: 15px;
+  background: transparent;
+  border: 0;
+  background: url('../../assets/c-next/profile-creator/previous.png') center center;
+  padding: 12px 7px;
+  z-index: 9999;
+
+  span {
+    display: none;
   }
 }
 

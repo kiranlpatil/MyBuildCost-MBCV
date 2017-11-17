@@ -2,7 +2,7 @@ import {AfterViewChecked, Component, Input, Output, OnInit, OnChanges, EventEmit
 import {CandidateProfileService} from "../../candidate-profile/candidate-profile.service";
 import {Candidate} from "../../../../user/models/candidate";
 import {ErrorService} from "../../../../shared/services/error.service";
-import {Headings, ImagePath, LocalStorage, Messages} from "../../../../shared/constants";
+import {Headings, ImagePath, Label, LocalStorage, Messages} from "../../../../shared/constants";
 import {LocalStorageService} from "../../../../shared/services/localstorage.service";
 import {GuidedTourService} from "../../guided-tour.service";
 import {ComplexityAnsweredService} from "../../complexity-answered.service";
@@ -112,6 +112,10 @@ export class ValuePortraitComponent implements OnInit {
 
   getHeadings() {
     return Headings;
+  }
+
+  getLabel() {
+    return Label;
   }
 
 }

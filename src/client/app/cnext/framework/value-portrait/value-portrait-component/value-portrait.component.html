@@ -53,7 +53,7 @@
         <b class="remark">{{academic.schoolName}}</b>
       </div>
       <div *ngIf="candidate.academics.length == 0" class="line-block">
-        Not Available
+        {{getMessage().NOT_AVAILABLE}}
       </div>
     </div>
   </div>
@@ -71,7 +71,7 @@
         <b class="remark">{{history.remarks}}</b>
       </div>
       <div *ngIf="candidate.employmentHistory.length == 0" class="line-block">
-        Not Available
+        {{getMessage().NOT_AVAILABLE}}
       </div>
     </div>
   </div>
@@ -86,7 +86,7 @@
         <b class="remark">{{certification.remark}}</b>
       </div>
       <div *ngIf="candidate.certifications.length == 0" class="line-block">
-        Not Available
+        {{getMessage().NOT_AVAILABLE}}
       </div>
     </div>
   </div>
@@ -100,7 +100,7 @@
         <b class="remark">{{award.remark}}</b>
       </div>
       <div *ngIf="candidate.awards.length == 0" class="line-block">
-        Not Available
+        {{getMessage().NOT_AVAILABLE}}
       </div>
     </div>
   </div>
@@ -111,7 +111,7 @@
     <div class="hover-block">
       <span class="icon"> </span>
       <label>
-        Additional Domain Exposure:
+        {{getLabel().DOMAIN_EXPOSURE}}
       </label>
       <span>
          <b *ngFor="let industry of candidate.interestedIndustries;let i = index">
@@ -153,13 +153,13 @@
         {{candidate.aboutMyself}}
       </div>
       <div *ngIf="candidate.aboutMyself == ''" class="tooltip-content3">
-        Not Available
+        {{getMessage().NOT_AVAILABLE}}
       </div>
       <div class="hover-down-arrow"></div>
     </div>
 
   </div>
-  <div class="visible-xs" *ngIf="!isShareView && isCandidate">
+  <div class="visible-sm visible-xs" *ngIf="!isShareView && isCandidate">
         <cn-share></cn-share>
     </div>
     <div class="value-portrait-footer">

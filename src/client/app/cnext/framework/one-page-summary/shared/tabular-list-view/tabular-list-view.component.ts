@@ -1,5 +1,6 @@
 import {Component, Input} from "@angular/core";
 import {Role} from "../../../model/role";
+import {Label} from "../../../../../shared/constants";
 
 @Component({
   moduleId: module.id,
@@ -25,4 +26,8 @@ export class TabularListViewComponent {
    this.eventCart.emit(this.model);
    this.model=new Candidate();
    }*/
+
+  getLabel() {
+    return Label;
+  }
 }
