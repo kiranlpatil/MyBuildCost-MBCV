@@ -1,6 +1,6 @@
 import {Component, Input} from "@angular/core";
 import {Candidate} from "../../../../../user/models/candidate";
-import {AppSettings} from "../../../../../shared/constants";
+import {AppSettings, Label} from "../../../../../shared/constants";
 import {Router} from "@angular/router";
 
 @Component({
@@ -23,6 +23,10 @@ export class ValuePortraitHeader {
       return AppSettings.IP + imagePath.replace('"', '');
     }
     return null;
+  }
+
+  getLabel() {
+    return Label;
   }
 
 }

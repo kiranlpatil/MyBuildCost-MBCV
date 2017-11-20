@@ -7,23 +7,16 @@
   position: absolute;
   top: 0;
   z-index: 999;
-  width: 1200px;
+  width: 900px;
   h1 {
-    color: $white;
+    color: $black1;
     float: left;
-    font-size: 22px;
-    font-family: 'gothamrnd-light';
+    font-size: 18px;
+    font-family: 'gothamrnd-book';
     font-weight: 600;
-    margin: 8px 0;
-    padding: 0 0 0 16px;
+    margin: 14px 0;
+    padding: 0;
     text-align: left;
-
-    span {
-      float: left;
-      font-size: 16px;
-      padding: 5px 0 0 0;
-      width: 100%;
-    }
   }
   .job-mosis-white-logo {
     float: right;
@@ -37,15 +30,43 @@
       cursor: pointer;
     }
   }
+  span {
+    color: $header-text-color;
+    float: right;
+    font-size: 12px;
+    padding: 20px 0;
+    label {
+      font-family: 'gothamrnd-book';
+      font-weight: bold;
+      padding-left: 4px;
+      text-transform: uppercase;
+    }
+  }
+}
+
+.share-button {
+  background: url(../assets/c-next/card-view/sprite.png) no-repeat -4px -882px;
+  float: left;
+  height: 30px;
+  margin: 9px 5px 0 0;
+  position: absolute;
+  right: 0;
+  width: 29px;
+  z-index: 99;
+  &:hover {
+    .share-button-container {
+      display: block;
+    }
+  }
 }
 
 .value-portrait-container {
   box-shadow: 0 0 27px 0 rgba(76, 76, 76, 0.26), 0 2px 10px 0 rgba(0, 0, 0, 0.16);
   display: inline-block;
-  margin: 65px auto 0;
+  margin: 50px auto 0;
   padding: 0;
   position: relative;
-  width: 1200px;
+  width: 900px;
 
   .btn-close {
     color: #999;
@@ -62,7 +83,7 @@
 }
 
 .value-portrait-section {
-  background: $theme-color;
+  background: $value-portrait-background;
   display: inline-block;
   width: 100%;
   height: 100%;
@@ -96,18 +117,20 @@
 }
 
 .back-button {
-  border: 2px solid $white;
-  border-radius: 50%;
+  background: $theme-color;
   cursor: pointer;
+  height: 80px;
   float: left;
-  height: 46px;
-  margin: 8px 0 0 0;
+  margin: 0;
+  position: absolute;
+  top: 1px;
+  text-align: center;
   width: 48px;
+  z-index: 9;
   span {
     color: $white;
-    float: left;
-    font-size: 14px;
-    margin: 12px 0;
+    font-size: 12px;
+    margin: 5px 0;
   }
 }
 
@@ -115,8 +138,26 @@
   background: url(../assets/c-next/card-view/sprite.png) no-repeat -112px -742px;
   float: left;
   height: 30px;
-  margin: 7px 5px 9px 13px;
+  margin: 21px 5px 0 14px;
   width: 18px;
+}
+
+.job-mosis-logo {
+  background: url(../assets/c-next/card-view/sprite.png) no-repeat -136px -698px;
+  height: 40px;
+  width: 45px;
+  float: left;
+}
+
+.value-portrait-heading {
+  color: $white;
+  font-family: 'gothamrnd-book';
+  font-size: 20px;
+  font-weight: bold;
+  left: 0;
+  padding: 18px;
+  position: absolute;
+  width: 100%;
 }
 
 @media only screen and (max-width: 980px) {
@@ -129,8 +170,10 @@
 
 @media only screen and (max-width: 768px) {
   .top-header {
-    width: 100%;
+    background: $page-header-bg;
+    height: 65px;
     padding: 0 10px;
+    width: 100%;
     h1 {
       border: 0;
       font-size: 14px;
@@ -171,7 +214,9 @@
     float: left;
     height: 30px;
     margin: 17px 0;
+    position: relative;
     width: 27px;
+    z-index: 99;
   }
   .back-button {
     display: none;

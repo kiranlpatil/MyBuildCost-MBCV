@@ -852,19 +852,25 @@ cn-control-messages {
 }
 
 .share-button-container {
-  width: 100%;
-  text-align: center;
-  height: auto;
-  margin: 30px auto;
-  display: inline-block;
-  padding: 0;
+  background-color: #29b6f6;
+  border-radius: 2px;
+  display: none;
+  margin-left: -48px;
+  padding: 10px;
+  position: absolute;
+  right: 0;
+  transition: all .1s linear;
+  top: 30px;
+  width: 117px;
+  z-index: 9;
 
   .btn-share {
     background-color: transparent;
     border: 1px solid transparent;
-    border-radius: 0;
-    margin: 0 4px;
-    padding: 25px 19px 0;
+    display: inline-block;
+    float: left;
+    height: 25px;
+    padding: 0 11px 0;
     z-index: 1000;
 
     &:hover,
@@ -876,15 +882,33 @@ cn-control-messages {
   }
 
   .btn-facebook {
-    background: url(../assets/c-next/card-view/sprite.png) no-repeat 0 -806px;
+    background: url(../assets/c-next/card-view/sprite.png) no-repeat -14px -708px;
   }
 
   .btn-linkedin {
-    background: url(../assets/c-next/card-view/sprite.png) no-repeat -38px -806px;
+    background: url(../assets/c-next/card-view/sprite.png) no-repeat -48px -709px;
   }
 
   .btn-twitter {
-    background: url(../assets/c-next/card-view/sprite.png) no-repeat -75px -804px;
+    background: url(../assets/c-next/card-view/sprite.png) no-repeat -84px -708px;
+  }
+  &:after {
+    content: "";
+    border-bottom: 7px solid #29b6f6;
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    margin-left: -10px;
+    position: absolute;
+    right: 7px;
+    top: -6px;
+  }
+}
+
+.share-button{
+  &:hover {
+    .share-button-container {
+      display: block;
+    }
   }
 }
 
@@ -903,12 +927,16 @@ cn-control-messages {
   }
   .about-myself-btn {
     text-align: center;
+    width: 180px !important;
   }
   .value-portrait-candidate-info-block {
     ul {
       li {
-        div {
+        .info-block-tabs {
           background: $light-gray-bg !important;
+          .tooltip-content2 {
+            background: $white !important;
+          }
         }
       }
     }
@@ -966,6 +994,9 @@ cn-control-messages {
         }
       }
     }
+  }
+  .value-portrait-candidate-profile-img {
+    padding-left: 0 !important;
   }
 }
 
@@ -1112,11 +1143,126 @@ cn-control-messages {
   .dashboard-view {
     margin-bottom: 0;
   }
+}
 
+@media only screen and (max-width: 480px) {
+  .toaster-message {
+    .col-xs-10 {
+      width: 80%;
+    }
+  }
+}
+
+#core-capabilities-tabs {
+  background: $white;
+  min-height: 500px;
+}
+
+@media screen and (min-width: 300px) and (max-width: 768px) {
+  .employee-form,
+  .employer-form {
+    cn-control-messages {
+      div {
+        padding: 0 !important;
+      }
+    }
+  }
+
+  .btn {
+    border-radius: 4px;
+    font-size: 14px;
+    height: 38px;
+    padding: 5px 15px;
+  }
+  #recruiter-form {
+    cn-control-messages {
+      div {
+        padding: 0 0 0 15px !important;
+      }
+    }
+  }
+
+  /* value portrait css */
+  #core-capabilities-tabs {
+    h3 {
+      display: block;
+      background: transparent;
+      border: 0;
+      color: $black;
+      box-shadow: 0 0 0;
+      text-align: left;
+      font-size: 16px;
+      font-weight: 600;
+      margin: 0;
+      width: 100%;
+      padding-left: 15px;
+    }
+    .circle::after,
+    .circle::before {
+      display: none;
+    }
+    .value-portrait-candidate-capability-circle {
+      width: auto;
+      display: block;
+      overflow-x: auto;
+      overflow-y: hidden;
+      .circle-list {
+        display: inline-block;
+      }
+      .six-element,
+      .ten-element {
+        .circle {
+          margin: 19px 10px 16px;
+        }
+      }
+      .tooltip-content {
+        display: none;
+      }
+    }
+    .second-line {
+      margin: 19px 10px 10px;
+    }
+    .circle {
+      background: $light-red;
+      float: left;
+      height: 160px;
+      margin: 19px 9px 0;
+      width: 160px;
+      span {
+        color: $white;
+        font-size: 14px;
+        height: 160px;
+        width: 160px;
+      }
+    }
+    .inner-circle {
+      box-shadow: 0 0 0 transparent;
+      height: 146px;
+      margin: 0;
+      width: 146px;
+    }
+  }
+  .value-portrait-about-myself {
+    background: $value-portrait-bg;
+  }
+  .show-more-btn {
+    display: none;
+  }
+  /* value portrait css */
   .share-button-container {
+      background: transparent;
+      display: inline-block;
+      height: auto;
+      margin: 18px auto;
+      position: relative;
+      right: inherit;
+      text-align: center;
+      top: inherit;
+      width: 100%;
     .btn-share {
       border-radius: 50%;
-      padding: 13px 15px 0;
+      padding: 14px 15px;
+      float: none;
     }
 
     .btn-facebook {
@@ -1157,135 +1303,37 @@ cn-control-messages {
         border: 1px solid $linkedin-share;
       }
     }
-  }
-}
-
-@media only screen and (max-width: 480px) {
-  .toaster-message {
-    .col-xs-10 {
-      width: 80%;
-    }
-  }
-}
-
-@media screen and (min-width: 300px) and (max-width: 768px) {
-  .employee-form,
-  .employer-form {
-    cn-control-messages {
-      div {
-        padding: 0 !important;
-      }
-    }
-  }
-
-  .btn {
-    border-radius: 4px;
-    font-size: 14px;
-    height: 38px;
-    padding: 5px 15px;
-  }
-  #recruiter-form {
-    cn-control-messages {
-      div {
-        padding: 0 0 0 15px !important;
-      }
-    }
-  }
-
-  /* value portrait css */
-  #core-capabilities-tabs {
-    h3 {
-      display: block;
-      background: transparent;
-      color: $black;
-      box-shadow: 0 0 0;
-      text-align: left;
-      font-size: 16px;
-      font-weight: 600;
-      margin: 0;
-      width: 100%;
-      padding-left: 15px;
-    }
-    .circle::after,
-    .circle::before {
+    &:after {
       display: none;
     }
-    .value-portrait-candidate-capability-circle {
-      width: auto;
-      overflow-x: scroll;
-      display: block;
-      overflow-y: hidden;
-      .circle-list {
-        display: inline-block;
-      }
-      .six-element,
-      .ten-element {
-        .circle {
-          margin: 19px 10px 16px;
-        }
-      }
-      .tooltip-content {
-        display: none;
-      }
-    }
-    .second-line {
-      margin: 19px 10px 10px;
-    }
-    .circle {
-      background: $circle-bg;
-      float: left;
-      height: 160px;
-      margin: 19px 9px 0;
-      width: 160px;
-      span {
-        color: $white;
-        font-size: 14px;
-        height: 160px;
-        width: 160px;
-      }
-      &:hover {
-        border: 4px solid $circle-border !important;
-      }
-    }
-    .inner-circle {
-      box-shadow: 0 0 0 transparent;
-      height: 146px;
-      margin: 0;
-      width: 146px;
-    }
   }
-  .value-portrait-about-myself {
-    background: $value-portrait-bg;
-  }
-  .show-more-btn {
-    display: none;
-  }
-  /* value portrait css */
 }
 
-@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+@media only screen and (min-device-width: 769px) and (max-device-width: 1024px) {
   .value-portrait-user-info {
     display: block !important;
-    margin-top: -78px;
+    margin-top: -60px;
     margin-left: 100px;
   }
   #core-capabilities-tabs {
     .circle {
       margin: 19px 7px 6px !important;
       .inner-circle {
-        height: 152px;
-        width: 152px;
+        height: 105px;
+        margin: 6px !important;
+        width: 105px;
         span {
-          height: 152px;
-          width: 152px;
+          height: 105px;
+          margin: 6px;
+          width: 105px;
         }
       }
     }
-    .value-portrait-candidate-capability-circle {
+    /*.value-portrait-candidate-capability-circle {
       .circle-list {
         display: inline-flex;
       }
-    }
+    }*/
   }
 }
 
@@ -1343,16 +1391,15 @@ select:focus {
     .value-portrait-candidate-capability-circle {
       .circle {
         margin: 20px 20px 0 !important;
-        .inner-circle {
-          margin: -5px;
-        }
       }
     }
     .show-more-btn {
       font-size: 12px;
-      padding: 7px 5px;
-      width: 65px;
-      height: 65px;
+      height: 35px;
+      left: 46%;
+      margin: 5px 0 0;
+      padding: 0;
+      width: 84px;
     }
     .tooltip-content {
       display: none;
@@ -1529,14 +1576,6 @@ select:focus {
     background-color: $twitter-share;
     border: 1px solid $twitter-share;
   }
-}
-
-.share-button-container {
-  display: inline-block;
-  height: auto;
-  margin: 18px auto;
-  text-align: center;
-  width: 100%;
 }
 
 #print-job-compare-view {
@@ -1860,17 +1899,21 @@ select:focus {
     .inner-circle {
       span {
         line-height: 21px;
-        letter-spacing: -4px;
-        padding: 0px 8px 0;
+        letter-spacing: -5px;
+        padding: 0 8px 0;
         text-align: center;
+        width: 98px !important;
       }
     }
   }
   .value-portrait-candidate-capability {
+    min-height: 361px;
     h3 {
+      color: $black !important;
       display: table !important;
       margin: 0 auto !important;
       text-align: center !important;
+      width: 205px !important;
     }
   }
   .value-portrait-footer {

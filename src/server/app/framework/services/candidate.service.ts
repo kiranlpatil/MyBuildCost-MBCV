@@ -14,8 +14,6 @@ import User = require('../dataaccess/mongoose/user');
 import CapabilitiesClassModel = require('../dataaccess/model/capabilities-class.model');
 import ComplexitiesClassModel = require('../dataaccess/model/complexities-class.model');
 import RoleModel = require('../dataaccess/model/role.model');
-import {underline} from "chalk";
-
 import CandidateModel = require("../dataaccess/model/candidate.model");
 import JobProfileModel = require("../dataaccess/model/jobprofile.model");
 import {UtilityFunction} from "../uitility/utility-function";

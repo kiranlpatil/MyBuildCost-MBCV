@@ -1,85 +1,107 @@
 @import '../../../../../../css/variables';
 
 .value-portrait-candidate-profile-section {
-  background: $filter-border;
+  background: $page-header-bg;
   display: inline-block;
-  min-height: 166px;
+  height: 80px;
   padding: 10px 20px;
   .value-portrait-candidate-profile-img {
+    padding-left: 30px;
     img {
       border-radius: 50%;
       box-shadow: 0 0 4px 2px rgba(125, 125, 125, 0.28), 0 0 1px 0 rgba(0, 0, 0, 0.16);
       float: left;
-      height: 174px;
-      margin: 0 0 -55px 0;
+      height: 60px;
+      margin: 0;
       position: relative;
-      width: 174px;
+      width: 60px;
       z-index: 9;
     }
   }
   .value-portrait-candidate-name {
-    background: $orange3;
+    color: $white;
     display: inline-block;
-    font-size: 20px;
     font-family: 'gothamrnd-book';
-    width: calc(100% - 160px);
-    padding: 10px 25px;
-    margin: 50px 0 0 -15px;
-    text-transform: capitalize;
+    font-size: 14px;
+    margin: 0 0 -4px -15px;
+    overflow: hidden;
+    padding: 0 0 0 25px;
+    text-transform: uppercase;
+    text-overflow: ellipsis;
+    width: calc(100% - 78px);
+    white-space: nowrap;
   }
   .value-portrait-candidate-job-title {
-    background: $orange4;
+    color: $white;
     display: inline-block;
-    width: calc(100% - 160px);
-    padding: 5px 25px;
+    font-family: 'gothamrnd-book';
+    font-size: 12px;
     margin-left: -15px;
-    text-transform: capitalize;
+    overflow: hidden;
+    padding: 0 0 5px 25px;
+    text-overflow: ellipsis;
+    width: calc(100% - 78px);
+    white-space: nowrap;
+    label {
+      float: left;
+    }
+    span {
+      display: inline-block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      WIDTH: calc(100% - 58px);
+    }
   }
 }
 
 .value-portrait-candidate-number {
   display: inline-block !important;
-  margin: 40px 0 10px 0;
+  margin: 5px 0 -4px;
   width: 100%;
   .phone-icon {
-    background: url(../assets/c-next/card-view/sprite.png) no-repeat -135px -434px;
+    background: url(../assets/c-next/card-view/sprite.png) no-repeat -147px -846px;
     float: left;
-    height: 34px;
+    height: 28px;
     margin: 0;
-    width: 50px;
+    width: 34px;
   }
   span {
     float: left;
-    font-size: 14px;
+    font-size: 12px;
     margin-top: 5px;
     a {
-      color: $black1;
+      color: $white;
     }
   }
 }
 
 .value-portrait-candidate-email {
   display: inline-block !important;
-  margin: 40px 0 10px 0;
+  margin: -7px 0;
   width: 100%;
   .email-icon {
-    background: url(../assets/c-next/card-view/sprite.png) no-repeat 6px -474px;
+    background: url(../assets/c-next/card-view/sprite.png) no-repeat -147px -884px;
     float: left;
-    height: 34px;
+    height: 28px;
     margin: 0;
-    width: 50px;
+    width: 34px;
   }
   span {
     float: left;
-    font-size: 14px;
+    font-size: 12px;
     margin-top: 5px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
     width: calc(100% - 50px);
     a {
-      color: $black1;
+      color: $white;
+      display: inline-block;
+      overflow: hidden;
+      text-overflow: ellipsis;
       text-transform: lowercase;
+      white-space: nowrap;
     }
   }
 }
@@ -94,7 +116,7 @@
     width: 50px;
   }
   label {
-    color: $black1;
+    color: $white;
     float: left;
     font-family: 'gothamrnd-book';
     font-size: 14px;
@@ -104,7 +126,7 @@
   }
   span {
     display: block;
-    font-size: 14px;
+    font-size: 12px;
     padding-top: 10px;
   }
 }
@@ -119,20 +141,21 @@
     width: 50px;
   }
   label {
-    color: $black1;
+    color: $white;
     float: left;
     font-family: 'gothamrnd-book';
-    font-size: 14px;
+    font-size: 12px;
     font-weight: bold;
     margin: 10px 5px 25px 0;
     width: 103px;
   }
   span {
-    display: block;
-    float: left;
-    font-size: 14px;
-    padding-top: 10px;
-    width: calc(100% - 170px);
+    color: $white;
+    display: table-cell;
+    font-size: 12px;
+    height: 60px;
+    vertical-align: middle;
+    width: 100%;
   }
 }
 
@@ -143,22 +166,34 @@
 @media only screen and (max-width: 768px) {
   .value-portrait-candidate-profile-section {
     background: $white;
+    height: auto;
     padding: 10px 15px;
     .value-portrait-candidate-name {
+      color: $black1;
       background: transparent;
+      font-size: 18px;
       margin: 0;
       padding: 0 15px;
       width: calc(100% - 100px);
     }
     .value-portrait-candidate-job-title {
+      color: $black1;
       background: transparent;
-      float: left;
+      float: right;
       margin: 0;
       padding: 0 0 0 15px;
       width: calc(100% - 100px);
+      label {
+        float: left;
+      }
+      span {
+        width: calc(100% - 70px);
+        float: left;
+      }
     }
     .value-portrait-candidate-profile-img {
       float: left;
+      padding-left: 0;
       img {
         width: 100px;
         height: 100px;
@@ -178,6 +213,10 @@
       }
       span {
         margin: 0;
+        width: calc(100% - 35px);
+        a {
+          color: $black1;
+        }
       }
     }
     .value-portrait-candidate-email {
@@ -191,6 +230,10 @@
       }
       span {
         margin: 0;
+        width: calc(100% - 35px);
+        a {
+          color: $black1;
+        }
       }
     }
     .value-portrait-candidate-industry {
@@ -205,11 +248,15 @@
     }
     .value-portrait-candidate-area-work {
       label {
+        color: $black1;
         display: inline-block;
-        margin: 0;
+        font-size: 14px;
+        margin: 8px 0 0;
         width: 100%;
       }
       span {
+        color: $black1;
+        height: 30px;
         padding: 0;
         width: auto;
       }

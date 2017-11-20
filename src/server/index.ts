@@ -223,7 +223,8 @@ export function init(port: number, mode: string, protocol: string, dist_runner: 
       .listen(port, (error: any) => {
         if (error) {
           console.error(error)
-          return process.exit(1);
+         // return process.exit(1);
+          process.exit(1);
         } else {
           console.log('http2 Listening on port: ' + port + '.');
         }

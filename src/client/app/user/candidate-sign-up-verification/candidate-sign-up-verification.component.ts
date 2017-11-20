@@ -12,13 +12,13 @@ import { LoginService } from '../login/login.service';
   styleUrls: ['candidate-sign-up-verification.component.css'],
 })
 export class CandidateSignUpVerificationComponent {
-  private signUpVerificationMessage:string;
-  private signUpVerificationHeading:string;
-  private actionName:string;
+  signUpVerificationMessage:string;
+  signUpVerificationHeading:string;
+  actionName:string;
   private loginModel:Login;
   private showModalStyle: boolean = false;
-  private userID:string;
-  private mobileNumber:any;
+  userID:string;
+  mobileNumber:any;
   constructor( private registrationService:RegistrationService, private loginService: LoginService,) {
     this.signUpVerificationMessage = this.getMessages().MSG_MOBILE_VERIFICATION_MESSAGE;
     this.signUpVerificationHeading = this.getMessages().MSG_MOBILE_VERIFICATION_TITLE;

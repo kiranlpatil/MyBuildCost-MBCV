@@ -7,43 +7,43 @@
   position: relative;
   width: 100%;
   h3 {
-    border: 1px solid $gray-light1;
-    border-radius: 7px;
-    color: $theme-color;
+    border: 1px solid $theme-color;
+    color: $black1;
     display: inline-block;
     font-family: 'gothamrnd-book';
-    font-size: 18px;
+    font-size: 14px;
+    font-weight: bold;
     margin: 0;
-    padding: 15px 10px;
-    width: 226px;
+    padding: 13px 0;
+    width: 180px;
     &:before {
+      background: $theme-color;
       content: "";
-      width: 262px;
       height: 1px;
-      background: $gray-light1;
+      margin-left: -264px;
+      margin-top: 5px;
       position: absolute;
+      width: 232px;
       z-index: 0;
-      margin-left: -299px;
-      margin-top: 9px;
     }
   }
   .show-more-btn {
-    background: $white;
+    background: transparent;
+    border: 0;
+    color: $theme-color;
+    font-size: 11px;
+    height: 40px;
+    line-height: 12px;
+    left: 42%;
+    padding: 2px 10px;
     position: absolute;
-    right: 15px;
-    top: 48%;
-    padding: 15px 10px;
-    width: 80px;
-    height: 80px;
-    color: $label-border;
-    border-radius: 80px;
-    border: 6px solid #eaeaea;
-    box-shadow: 1px 1px 5px 1px rgba(179, 179, 179, 0.26), 0 2px 10px 0 rgba(158, 158, 158, 0.16);
-    line-height: 16px;
+    top: 91%;
+    width: 144px;
     span {
+      color: $theme-color;
       float: left;
+      font-size: 12px;
       width: 100%;
-      color: #b5b5b5;
     }
   }
 }
@@ -51,18 +51,18 @@
 .value-portrait-candidate-capability-circle {
   /*display: table;*/
   margin: 0 auto;
-  width: 950px;
+  width: 800px;
   .circle {
     border-radius: 50%;
     box-shadow: -1px 2px 9px 1px rgba(0, 0, 0, 0.26), 0 2px 10px 0 rgba(0, 0, 0, 0.16);
     display: inline-block;
-    height: 150px;
-    width: 150px;
+    float: left;
+    height: 120px;
     margin: 20px 20px 0;
     position: relative;
-    float: left;
+    width: 120px;
     &:hover {
-      border: 4px solid $portrait-theme !important;
+      border: 2px solid $portrait-theme !important;
     }
   }
   .second-line {
@@ -72,24 +72,24 @@
     border-radius: 50%;
     box-shadow: 0 0 4px 2px rgba(125, 125, 125, 0.28), 0 0 1px 0 rgba(0, 0, 0, 0.16);
     float: left;
-    height: 125px;
-    margin: 8px;
-    width: 125px;
+    height: 106px;
+    margin: 5px;
+    width: 105px;
     span {
       display: table-cell;
-      font-size: 13px;
-      height: 125px;
-      padding: 0px 12px 0;
+      font-size: 12px;
+      height: 105px;
+      padding: 0 12px 0;
       vertical-align: middle;
       word-break: keep-all;
-      width: 125px;
+      width: 105px;
     }
   }
   .circle:nth-child(even) {
-    border: 4px solid $circle-border;
+    border: 2px solid $portrait-theme;
   }
   .circle:nth-child(odd) {
-    border: 4px solid $circle-border;
+    border: 2px solid $portrait-theme;
   }
   .first-element {
     .circle {
@@ -107,14 +107,17 @@
       }
     }
   }
+  .third-element,
   .four-element,
   .six-element,
   .seven-element,
+  .eight-element,
+  .thirteen-element,
   .fourteen-element,
   .fifteen-element{
     .circle {
       .tooltip-content {
-        margin-left: -458px;
+        margin-left: -432px;
         &:after {
           border-top: 10px solid transparent;
           border-bottom: 10px solid transparent;
@@ -138,10 +141,44 @@
       }
     }
   }
+  .first-element,
+  .second-element,
+  .third-element,
+  .four-element,
+  .eight-element,
+  .thirteen-element {
+    .circle {
+      .tooltip-content {
+        bottom: inherit;
+        top: 0;
+        &:after {
+          bottom: inherit;
+          top: 74px;
+        }
+      }
+    }
+  }
+  .third-element,
+  .eight-element,
+  .thirteen-element {
+    .circle {
+      .tooltip-content1 {
+        left: inherit;
+        right: -212px;
+        &:after {
+          border-bottom: 10px solid $white;
+          border-top: 0;
+          left: initial;
+          right: 194px;
+          transform: rotate(270deg);
+        }
+      }
+    }
+  }
   .five-element {
     .circle {
       .tooltip-content {
-        margin-left: -458px;
+        margin-left: -433px;
         &:after {
           border-top: 10px solid transparent;
           border-bottom: 10px solid transparent;
@@ -166,7 +203,7 @@
       &:before {
         width: 37px;
         transform: rotate(90deg);
-        left: 41%;
+        left: 35%;
         bottom: -22px;
         top: inherit;
       }
@@ -185,7 +222,7 @@
   .six-element {
     .circle {
       .tooltip-content {
-        margin-left: -458px;
+        margin-left: -430px;
         &:after {
           border-top: 10px solid transparent;
           border-bottom: 10px solid transparent;
@@ -207,7 +244,8 @@
           border-top: 0;
         }
       }
-      &:before {
+      &:before,
+      &:after{
         display: none;
       }
       .tooltip-content {
@@ -253,13 +291,13 @@
     .circle {
       &:after {
         content: "";
-        width: 37px;
-        transform: rotate(90deg);
-        left: 41%;
-        top: -22px;
-        position: absolute;
-        background: $gray-light1;
+        background: $theme-color;
         height: 1px;
+        left: 34%;
+        position: absolute;
+        transform: rotate(90deg);
+        top: -22px;
+        width: 37px;
       }
     }
   }
@@ -286,15 +324,15 @@
     border-left: 5px solid transparent;
     border-bottom: 1px solid #ff927f;
     color: $white;
-    font-size: 14px;
+    font-size: 12px;
     margin: 0;
-    padding: 7px 0 7px 7px;
+    padding: 7px;
     text-align: left;
     width: 100%;
     &:hover {
-      background: $white;
+      background: #ef8978;
       border-left: 5px solid $portrait-theme;
-      color: $portrait-theme;
+      color: $white;
     }
   }
 }
@@ -313,7 +351,7 @@
   top: -10px;
   margin-left: -10px;
   right: 142px;*/
-  bottom: 57px;
+  bottom: 48px;
   border-top: 10px solid transparent;
   border-bottom: 10px solid transparent;
   border-right: 10px solid $portrait-theme;
@@ -327,8 +365,9 @@
   background-color: $white;
   box-shadow: 3px 3px 15px 1px $gray;
   border-radius: 4px;
-  color: $portrait-theme;
+  color: $black1;
   display: inline-block;
+  font-family: 'gothamrnd-book';
   min-height: 56px;
   margin-top: -28px;
   opacity: 0;
@@ -336,34 +375,36 @@
   position: absolute;
   right: -212px;
   transition: all .1s linear;
+  visibility: hidden;
   width: 200px;
 }
 
 .complexities-list:hover > .tooltip-content1 {
   opacity: 1;
+  visibility: visible;
 }
 
 .complexities-list .tooltip-content1:after {
   content: "";
-  border-top: 10px solid $portrait-theme;
+  border-top: 10px solid $white;
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
   left: -8px;
-  margin-left: -8px;
+  margin-left: -7px;
   position: absolute;
-  top: 34px;
+  top: 47%;
   transform: rotate(90deg);
   z-index: 99;
 }
 
 .circle::before {
+  background: $theme-color;
   content: "";
-  width: 39px;
   height: 1px;
-  background: $gray-light1;
+  left: 118px;
   position: absolute;
   top: 50%;
-  left: 148px;
+  width: 39px;
   z-index: 0;
 }
 
@@ -371,20 +412,31 @@
   display: none;
 }
 
-.circle-list:first-child .circle::after {
+.value-portrait-candidate-capability-circle .circle-list:last-child .circle.second-line::after {
+  background: $theme-color;
   content: "";
-  width: 47px;
-  -webkit-transform: rotate(90deg);
-  transform: rotate(90deg);
-  left: 38%;
-  top: -29px;
-  position: absolute;
-  background: $gray-light1;
   height: 1px;
+  left: 118px;
+  position: absolute;
+  top: 50%;
+  width: 39px;
+  z-index: 0;
+}
+
+.circle-list:first-child .circle::after {
+  background: $theme-color;
+  content: "";
+  height: 1px;
+  left: 28%;
+  position: absolute;
+  top: -29px;
+  transform: rotate(90deg);
+  -webkit-transform: rotate(90deg);
+  width: 47px;
 }
 
 .value-portrait-notes {
-  color: $black1;
+  color: $text-color4;
   display: inline-block;
   float: left;
   font-size: 12px;

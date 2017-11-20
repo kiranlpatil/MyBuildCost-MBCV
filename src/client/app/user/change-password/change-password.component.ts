@@ -31,6 +31,7 @@ export class ChangePasswordComponent {
   CONFIRM_PASSWORD_ICON: string;
   candidate: Candidate = new Candidate();
   role: string;
+  isSocialLogin:boolean;
   constructor(private _router: Router, private activatedRoute: ActivatedRoute, private errorService: ErrorService, private candidateProfileService: CandidateProfileService, private commonService: CommonService,
               private passwordService: ChangePasswordService,
               private messageService: MessageService,

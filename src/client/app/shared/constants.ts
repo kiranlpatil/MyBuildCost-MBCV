@@ -333,8 +333,15 @@ export class Messages {
   'Click below to Preview';
   public static PLEASE_COMPLETE_THE_PROFILE_MSG = 'Please complete the profile before sharing';
   public static JOBS_AVALLABLE_MESSAGE = 'Jobs are available in your industry.';
-  public static NOT_FOUND_INFORMATION = 'The page you are looking for doesn\t exist<br/>' +
-    'or an other error accoured.';
+  public static NOT_FOUND_INFORMATION = 'The page you are looking for doesn\'t exist<br/>' +
+    'or an other error ocourred.';
+  public static PAGE_NOT_FOUND = 'Page Not Found';
+  public static MATCH_AGAINST_ALL_JOB = 'Match Against All Jobs';
+  public static MATCH_AGAINST_THIS_JOB = 'Match Against This Job';
+  public static SHOW_VALUE_PORTRAIT = 'Show Value Portrait';
+  public static CAPABILITY_DETAILS = 'Capability details under';
+  public static NOT_AVAILABLE = 'Not Available';
+
 
 }
 export class AdminPanel {
@@ -590,7 +597,7 @@ export class Tooltip {
   public static COMPETENCIES_AND_RESPONSIBILITIES_TOOLTIP_2: string = 'You can use this field to describe specific ' +
       'aspects of the job profile that will help the candidate to understand your expectations better.';
   public static COMPLEXITIES_CANDIDATE_TOOLTIP_1: string = 'This section provides a list of complexity scenarios for your selected capabilities.' +
-    'If more than one options are applicable to you, choose the option where you can demonstrate a higher level of expertise.';
+    ' If more than one options are applicable to you, choose the option where you can demonstrate a higher level of expertise.';
   public static COMPLEXITIES_CANDIDATE_TOOLTIP_2: string = 'If a scenario was applicable to you in past but is no ' +
       'more relevant to you, avoid choosing such scenarios.In such cases, choose "Not Applicable".';
   public static COMPLEXITIES_RECRUITER_TOOLTIP_1: string = 'This section provides a list of complexity scenarios for selected capabilities.' +
@@ -703,8 +710,8 @@ export class Label {
   public static JOB_TITLE: string = 'New Job Title';
   public static CLONE_JOB: string = 'Clone Job';
   public static CLOSE_JOB: string = 'Close Job';
-  public static VALUE_PORTRAIT_HEADER: string = 'Value Portrait';
-  public static VALUE_PORTRAIT_TITLE: string = 'Bring Value to Work Add Job to Life';
+  public static VALUE_PORTRAIT_HEADER: string = 'Job Mosis';
+  public static VALUE_PORTRAIT_TITLE: string = 'Value Portrait of';
   public static CORE_CAPABILITIES_TITLE: string = 'Core Capabilities';
   public static NOTE_OF_TRUST: string = 'Note of Trust';
   public static JOB_TITLE_LABEL: string = 'Job Title';
@@ -738,10 +745,10 @@ export class Label {
   public static NOTICE_PERIOD: string = 'Notice Period';
   public static NOT_FOUND_ERROR: string = '404';
   public static CURRENT_JOB: string = 'Current Job';
-  public static PAGE_NOT_FOUND = 'Page Not Found';
-  public static MATCH_AGAINST_ALL_JOB = 'Match Against All Jobs';
-  public static MATCH_AGAINST_THIS_JOB = 'Match Against This Job';
-  public static SHOW_VALUE_PORTRAIT = 'Show Value Portrait';
+  public static VALUE_PORTRAIT: string = 'Value Portrait';
+  public static LEVEL_CAPABILITIES_HANDLED: string = 'Level of Capabilities Handled';
+  public static INDUSTRY: string = 'Industry:';
+  public static DOMAIN_EXPOSURE: string = 'Domain Exposure:';
 }
 
 export class Button {

@@ -6,25 +6,27 @@
   .value-portrait-candidate-industry {
     padding-top: 10px;
     .icon {
-      background: url(../assets/c-next/card-view/sprite.png) no-repeat -42px -472px;
+      background: url(../assets/c-next/card-view/sprite.png) no-repeat -4px -914px;
       float: left;
       height: 34px;
-      width: 50px;
+      width: 30px;
     }
     label {
-      color: $black1;
+      color: $theme-color;
       float: left;
       font-family: 'gothamrnd-book';
+      font-size: 12px;
       font-weight: bold;
-      margin: 7px 5px 25px 0;
+      margin: 7px 5px 20px 0;
     }
     span {
       float: left;
+      font-size: 12px;
       padding-top: 8px;
       text-align: left;
       overflow: hidden;
       text-overflow: ellipsis;
-      width: calc(100% - 265px);
+      width: calc(100% - 165px);
       white-space: nowrap;
     }
   }
@@ -32,23 +34,22 @@
   .value-portrait-candidate-keyskills {
     padding-top: 10px;
     .icon {
-      background: url(../assets/c-next/card-view/sprite.png) no-repeat -91px -472px;
+      background: url(../assets/c-next/card-view/sprite.png) no-repeat -32px -914px;
       float: left;
       height: 34px;
-      width: 50px;
+      width: 30px;
     }
     label {
-      color: $black1;
+      color: $theme-color;
       float: left;
       font-family: 'gothamrnd-book';
-      font-size: 16px;
       font-weight: bold;
-      font-size: 16px;
-      margin: 8px 5px 25px 0;
+      font-size: 12px;
+      margin: 8px 5px 20px 0;
     }
     span {
       float: left;
-      font-size: 16px;
+      font-size: 12px;
       padding-top: 8px;
       text-align: left;
       overflow: hidden;
@@ -60,32 +61,37 @@
 }
 
 .about-myself-btn {
-  border-radius: 7px;
-  border: 3px solid $portrait-theme;
+  border-radius: 2px;
+  border: 2px solid $theme-color;
   box-shadow: 0 0 4px 2px rgba(125, 125, 125, 0.28), 0 0 1px 0 rgba(0, 0, 0, 0.16);
-  margin: 0 10px;
-  padding: 10px;
-  width: 200px;
+  margin: 10px;
+  padding: 3px;
+  width: 120px;
+  label {
+    color: $theme-color;
+    font-size: 12px;
+  }
 }
 
 .about-myself-btn > .tooltip-content3 {
-  color: $portrait-theme;
+  background-color: $white;
+  border-radius: 4px;
+  bottom: 69px;
+  box-shadow: 3px 3px 15px 1px $gray;
+  color: $text-color;
   opacity: 0;
   display: inline-block;
-  position: absolute;
-  width: 600px;
+  font-size: 12px;
   margin-left: -148px;
-  max-height: 200px;
+  max-height: 160px;
   overflow: auto;
-  bottom: 69px;
-  background-color: $white;
+  position: absolute;
   padding: 10px;
-  transition: all .1s linear;
-  box-shadow: 3px 3px 15px 1px $gray;
-  border-radius: 4px;
-  visibility: hidden;
   right: 10px;
+  transition: all .1s linear;
   text-align: left;
+  visibility: hidden;
+  width: 600px;
   z-index: 9;
 }
 
@@ -99,7 +105,7 @@
   border-top: 10px solid $white;
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
-  bottom: 59px;
+  bottom: 46px;
   display: none;
   left: 49%;
   margin-top: -47px;
@@ -109,26 +115,27 @@
 
 .hover-block > .tooltip-content4,
 .hover-block > .domain-exposure-tooltip-content{
-  color: $theme-color;
-  opacity: 0;
-  display: inline-block;
-  position: absolute;
-  width: 370px;
-  max-height: 140px;
-  margin-left: -148px;
-  overflow: auto;
-  bottom: 69px;
   background-color: $white;
-  padding: 10px;
-  transition: all .1s linear;
   box-shadow: 3px 3px 15px 1px $gray;
   border-radius: 4px;
-  visibility: hidden;
+  bottom: 56px;
+  color: $text-color;
+  display: inline-block;
+  position: absolute;
+  max-height: 140px;
+  margin-left: -148px;
+  opacity: 0;
+  overflow: auto;
+  padding: 10px;
   right: 10px;
+  transition: all .1s linear;
   text-align: left;
+  visibility: hidden;
+  width: 260px;
   z-index: 9;
   b {
     float: left;
+    font-size: 12px;
   }
 }
 
@@ -146,6 +153,7 @@
 }
 .about-myself-btn:hover{
   .hover-down-arrow {
+    bottom: 59px;
     display: block;
     left: 29%;
   }
@@ -173,6 +181,7 @@
     .tooltip-content4,
     .domain-exposure-tooltip-content{
       background: transparent;
+      max-height: inherit;
       &:after {
         display: none;
       }
@@ -215,7 +224,7 @@
     }
     label {
       margin: 7px 5px 0 0 !important;
-      font-size: 16px;
+      font-size: 12px;
     }
     .tooltip-content4,
     .domain-exposure-tooltip-content{

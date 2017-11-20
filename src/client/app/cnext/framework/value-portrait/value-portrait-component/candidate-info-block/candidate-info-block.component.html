@@ -1,25 +1,25 @@
 <div class="col-xs-12 no-padding value-portrait-candidate-info-block">
   <ul>
     <li>
-      <div class="current-location-tabs info-block-tabs dropdown-toggle" [class.grayBox]="candidate.location.city !='' && isMiniView">
-        <span id="currentlocation" data-toggle="dropdown"> Current Location </span>
-        <div class="dropdown-menu tooltip-content2" role="currentlocation" aria-labelledby="currentlocation">
+      <div class="current-location-tabs info-block-tabs" [class.grayBox]="candidate.location.city !='' && isMiniView">
+        <span id="currentlocation"> Current Location </span>
+        <div class="tooltip-content2" role="currentlocation" aria-labelledby="currentlocation">
           {{candidate.location.city}}
         </div>
       </div>
     </li>
     <li>
-      <div class="experience-level-tabs info-block-tabs dropdown-toggle" [class.grayBox]="candidate.professionalDetails.experience !='' && isMiniView">
-        <span id="experience" data-toggle="dropdown"> Experience Level </span>
-        <div class="dropdown-menu tooltip-content2" role="experience" aria-labelledby="experience">
+      <div class="experience-level-tabs info-block-tabs" [class.grayBox]="candidate.professionalDetails.experience !='' && isMiniView">
+        <span id="experience"> Experience Level </span>
+        <div class="tooltip-content2" role="experience" aria-labelledby="experience">
           {{candidate.professionalDetails.experience}}
         </div>
       </div>
     </li>
     <li>
-      <div class="education-tabs info-block-tabs dropdown-toggle" [class.grayBox]="candidate.academics.length != 0 && isMiniView">
-        <span id="education" data-toggle="dropdown"> Education </span>
-        <div class="dropdown-menu tooltip-content2" role="education" aria-labelledby="education">
+      <div class="education-tabs info-block-tabs" [class.grayBox]="candidate.academics.length != 0 && isMiniView">
+        <span id="education"> Education </span>
+        <div class="tooltip-content2" role="education" aria-labelledby="education">
           <div *ngFor="let academic of candidate.academics" class="line-block">
             <b>{{academic.yearOfPassing}}</b>
             <b><label><strong>{{academic.specialization}}</strong></label> | <label>{{academic.board}}</label></b>
@@ -35,9 +35,9 @@
       </div>
     </li>
     <li>
-      <div class="employment-tabs info-block-tabs dropdown-toggle" [class.grayBox]="candidate.employmentHistory.length != 0 && isMiniView">
-        <span id="employment" data-toggle="dropdown"> Employment </span>
-        <div class="dropdown-menu tooltip-content2" role="employment" aria-labelledby="employment">
+      <div class="employment-tabs info-block-tabs" [class.grayBox]="candidate.employmentHistory.length != 0 && isMiniView">
+        <span id="employment"> Employment </span>
+        <div class="tooltip-content2" role="employment" aria-labelledby="employment">
           <div *ngFor="let history of candidate.employmentHistory" class="line-block">
             <b *ngIf="history.isPresentlyWorking!=true">{{history.from.year}} - {{history.to.year}}</b>
             <b *ngIf="history.isPresentlyWorking===true">{{history.from.year}} -Presently working</b>
@@ -54,9 +54,9 @@
       </div>
     </li>
     <li>
-      <div class="certification-tabs info-block-tabs dropdown-toggle" [class.grayBox]="candidate.certifications.length != 0 && isMiniView">
-        <span id="certification" data-toggle="dropdown"> Certification </span>
-        <div class="dropdown-menu tooltip-content2" role="certification" aria-labelledby="certification">
+      <div class="certification-tabs info-block-tabs" [class.grayBox]="candidate.certifications.length != 0 && isMiniView">
+        <span id="certification"> Certification </span>
+        <div class="tooltip-content2" role="certification" aria-labelledby="certification">
           <div *ngFor="let certification of candidate.certifications" class="line-block">
             <b>{{certification.year}}</b>
             <b><label><strong>{{certification.name}}</strong></label> | {{certification.issuedBy}} </b>
@@ -73,9 +73,9 @@
       </div>
     </li>
     <li>
-      <div class="awards-tabs info-block-tabs dropdown-toggle" [class.grayBox]="candidate.awards.length != 0 && isMiniView">
-        <span id="awards" data-toggle="dropdown"> Awards </span>
-        <div class="dropdown-menu tooltip-content2" role="awards" aria-labelledby="awards">
+      <div class="awards-tabs info-block-tabs" [class.grayBox]="candidate.awards.length != 0 && isMiniView">
+        <span id="awards"> Awards </span>
+        <div class="tooltip-content2" role="awards" aria-labelledby="awards">
           <div *ngFor="let award of candidate.awards" class="line-block">
             <b>{{award.year}}</b>
             <b><label><strong>{{award.name}}</strong></label> | {{award.issuedBy}} </b>

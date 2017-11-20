@@ -27,7 +27,7 @@ export class MultiSelectComponent implements OnChanges, OnInit {
   private validationMessage: string;
   showAlert: boolean = false;
   private showModalStyle: boolean = false;
-  private newProficiency: string = '';
+  newProficiency: string = '';
   proficiency: string = '';
   proficienciesPlaceholder: string = '';
   private disableTextField: boolean = false;
