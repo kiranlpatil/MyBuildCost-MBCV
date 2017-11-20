@@ -544,6 +544,11 @@ class SearchService {
                     let newCandidate = this.getCompareData(candidate, job, isCandidate, industries);
                         newCandidate = this.getListStatusOfCandidate(newCandidate,job);
                         newCandidate = this.sortCandidateSkills(newCandidate);
+                    for(let candidateList of newCandidate.candidateListStatus) {
+                      if(candidateList !== 'cartListed') {
+                        newCandidate.profileComparisonHeader.last_name = UtilityFunction.valueHide(newCandidate.profileComparisonHeader.last_name);
+                      }
+                    }
                     compareResult.push(newCandidate);
                   }
                   let profileComparisonModel:ProfileComparisonModel = new ProfileComparisonModel();
