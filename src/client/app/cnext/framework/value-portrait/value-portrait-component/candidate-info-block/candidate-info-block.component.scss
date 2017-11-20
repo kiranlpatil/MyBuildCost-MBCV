@@ -5,7 +5,7 @@
     background: $white;
     float: left;
     margin: 0;
-    padding: 30px 0 20px;
+    padding: 5px 0 20px;
     width: 100%;
 
     li {
@@ -17,13 +17,14 @@
       width: 16.6%;
       .current-location-tabs {
         background: $orange3;
-        border-radius: 7px;
-        box-shadow: 0 0 9px 3px rgba(0, 0, 0, 0.28), 0 0 1px 0 rgba(0, 0, 0, 0.16);
+        border-radius: 2px;
+        box-shadow: 0 0 8px 1px rgba(0, 0, 0, 0.28), 0 0 1px 0 rgba(0, 0, 0, 0.16);
         margin: 0 5px;
         span {
           color: $white;
           cursor: pointer;
           display: inline-block;
+          font-size: 12px;
           padding: 10px;
           width: 100%;
         }
@@ -36,73 +37,81 @@
       }
       .experience-level-tabs {
         background: $light-orange;
-        border-radius: 7px;
-        box-shadow: 0 0 9px 3px rgba(0, 0, 0, 0.28), 0 0 1px 0 rgba(0, 0, 0, 0.16);
+        border-radius: 2px;
+        box-shadow: 0 0 8px 1px rgba(0, 0, 0, 0.28), 0 0 1px 0 rgba(0, 0, 0, 0.16);
         margin: 0 5px;
         span {
           color: $white;
           cursor: pointer;
           display: inline-block;
+          font-size: 12px;
           padding: 10px;
           width: 100%;
         }
         .tooltip-content2 {
           width: 195px;
           right: 0;
-          left: 5px;
+          left: -27px;
           margin: 0;
         }
       }
       .education-tabs {
         background: $dark-orange;
-        border-radius: 7px;
-        box-shadow: 0 0 9px 3px rgba(0, 0, 0, 0.28), 0 0 1px 0 rgba(0, 0, 0, 0.16);
+        border-radius: 2px;
+        box-shadow: 0 0 8px 1px rgba(0, 0, 0, 0.28), 0 0 1px 0 rgba(0, 0, 0, 0.16);
         margin: 0 5px;
         span {
           color: $white;
           cursor: pointer;
           display: inline-block;
+          font-size: 12px;
           padding: 10px;
           width: 100%;
         }
       }
       .employment-tabs {
         background: $light-red;
-        border-radius: 7px;
-        box-shadow: 0 0 9px 3px rgba(0, 0, 0, 0.28), 0 0 1px 0 rgba(0, 0, 0, 0.16);
+        border-radius: 2px;
+        box-shadow: 0 0 8px 1px rgba(0, 0, 0, 0.28), 0 0 1px 0 rgba(0, 0, 0, 0.16);
         margin: 0 5px;
         span {
           color: $white;
           cursor: pointer;
           display: inline-block;
+          font-size: 12px;
           padding: 10px;
           width: 100%;
         }
       }
       .certification-tabs {
         background: $light-red1;
-        border-radius: 7px;
-        box-shadow: 0 0 9px 3px rgba(0, 0, 0, 0.28), 0 0 1px 0 rgba(0, 0, 0, 0.16);
+        border-radius: 2px;
+        box-shadow: 0 0 8px 1px rgba(0, 0, 0, 0.28), 0 0 1px 0 rgba(0, 0, 0, 0.16);
         margin: 0 5px;
         span {
           color: $white;
           cursor: pointer;
           display: inline-block;
+          font-size: 12px;
           padding: 10px;
           width: 100%;
         }
       }
       .awards-tabs {
         background: $dark-red1;
-        border-radius: 7px;
-        box-shadow: 0 0 9px 3px rgba(0, 0, 0, 0.28), 0 0 1px 0 rgba(0, 0, 0, 0.16);
+        border-radius: 2px;
+        box-shadow: 0 0 8px 1px rgba(0, 0, 0, 0.28), 0 0 1px 0 rgba(0, 0, 0, 0.16);
         margin: 0 5px;
         span {
           color: $white;
           cursor: pointer;
           display: inline-block;
+          font-size: 12px;
           padding: 10px;
           width: 100%;
+        }
+        .tooltip-content2 {
+          right: 0;
         }
       }
       &:first-child {
@@ -115,16 +124,16 @@
 
 .info-block-tabs > .tooltip-content2 {
   /*opacity: 0;*/
-  background-color: $light-gray;
+  background-color: $white;
   box-shadow: 3px 3px 15px 1px $gray;
   border-radius: 4px;
-  display: none;
   margin-left: -48px;
   padding: 10px;
   position: absolute;
-  right: 10px;
   transition: all .1s linear;
   top: 52px;
+  opacity: 0;
+  visibility: hidden;
   width: 240px;
   z-index: 9;
   b {
@@ -160,20 +169,21 @@
   }
 }
 
-/*.info-block-tabs:hover > .tooltip-content2 {
+.info-block-tabs:hover > .tooltip-content2 {
   opacity: 1;
   visibility: visible;
-}*/
+}
 
 .tooltip-content2:after {
+  background: $white;
+  box-shadow: -1px -1px 2px -2px rgba(0, 0, 0, 0.5);
   content: "";
-  border-bottom: 10px solid $light-gray;
-  border-left: 10px solid transparent;
-  border-right: 10px solid transparent;
-  margin-left: -10px;
+  height: 12px;
   position: absolute;
   right: 40%;
-  top: -10px;
+  transform: rotate(45deg);
+  top: -8px;
+  width: 12px;
 }
 
 @media only screen and (max-width: 767px) {

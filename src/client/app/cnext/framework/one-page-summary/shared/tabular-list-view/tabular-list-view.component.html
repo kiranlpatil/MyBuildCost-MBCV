@@ -1,17 +1,17 @@
 <div class="row capability-complexity">
   <div class="heading clearfix">
-    <div class="col-sm-3 hidden-xs"><h4>Core Capabilities</h4></div>
-    <div class="col-sm-9 hidden-xs"><h4>Complexities Handled</h4></div>
+    <div class="col-sm-3 hidden-xs"><h4>{{getLabel().CORE_CAPABILITIES_TITLE}} </h4></div>
+    <div class="col-sm-9 hidden-xs"><h4> {{getLabel().LEVEL_CAPABILITIES_HANDLED}}</h4></div>
   </div>
   <div *ngFor="let role of roles">
     <div *ngFor="let capability of role.capabilities">
       <div class="content clearfix" *ngIf="capability.isPrimary">
         <div class="col-sm-3">
-          <div class="heading visible-xs"><h4>Core Capabilities</h4></div>
+          <div class="heading visible-xs"><h4>{{getLabel().CORE_CAPABILITIES_TITLE}}</h4></div>
           <span>{{capability.name}}</span>
         </div>
         <div class="col-sm-9">
-          <div class="heading visible-xs"><h4>Complexities Handled</h4></div>
+          <div class="heading visible-xs"><h4>{{getLabel().LEVEL_CAPABILITIES_HANDLED}}</h4></div>
           <div *ngFor="let complexity of capability.complexities;let i=index">
             <div class="col-sm-4 padding-right15">
               <span class="complexity-name">{{complexity.name}}</span>

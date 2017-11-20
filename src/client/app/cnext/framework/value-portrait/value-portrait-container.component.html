@@ -1,33 +1,47 @@
 <div class="value-portrait-section">
   <div class="top-header">
-    <div class="col-sm-6 col-xs-10 no-padding">
+    <div class="col-sm-3 col-xs-7 no-padding">
       <div class="back-btn" (click)="navigateTo();"></div>
-      <div class="back-button" (click)="navigateTo();" *ngIf="!isShareView">
-        <div class="back-button-arrow"></div>
-      </div>
-      <h1>
+      <div class="visible-lg visible-md hidden-sm hidden-xs job-mosis-logo"></div>
+      <h1 class="visible-lg visible-md hidden-sm hidden-xs">
         {{getLabel().VALUE_PORTRAIT_HEADER}}
-        <span> {{getLabel().VALUE_PORTRAIT_TITLE}}  </span>
       </h1>
     </div>
-      <div *ngIf="isShareView">
+    <div *ngIf="isShareView">
       <button class="btn btn-get-portrait" (click)="routeToSignUpPage()">
         <span class="hidden-xs">{{getButtons().VALUE_PORTRAIT_BUTTON}}</span>
       </button>
-      </div>
-    <div *ngIf="!isShareView" class="col-sm-6 col-xs-2 no-padding">
-      <div class="job-mosis-white-logo">
-        <!--<img (click)="navigateTo();" src="/assets/c-next/header/job-mosis-logo-white.png"/>-->
-        <div class="hidden-xs pull-left" *ngIf="!isShareView && isCandidate">
-          <cn-share></cn-share>
-        </div>
-      </div>
+    </div>
+    <div class="col-sm-9 col-xs-12 no-padding visible-lg visible-md hidden-sm hidden-xs">
+      <span>
+        {{getLabel().VALUE_PORTRAIT_TITLE}}
+        <label>{{candidateName}}</label>
+      </span>
+    </div>
+    <div class="hidden-lg hidden-md visible-sm visible-xs value-portrait-heading">
+      {{getLabel().VALUE_PORTRAIT}}
     </div>
   </div>
   <div class="value-portrait-container">
     <!--<div class="btn-close" (click)="navigateTo();" *ngIf="!isShareView">
       <span class="glyphicon glyphicon-remove"></span>
     </div>-->
+    <div class="back-button" (click)="navigateTo();" *ngIf="!isShareView">
+      <div class="back-button-arrow"></div>
+      <span>Back</span>
+    </div>
+
+    <div *ngIf="!isShareView" class="col-xs-12 no-padding">
+      <div class="share-button">
+        <div class="job-mosis-white-logo">
+          <div class="hidden-sm hidden-xs pull-left" *ngIf="!isShareView && isCandidate">
+            <cn-share></cn-share>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <cn-value-portrait [isShareView]="isShareView" [isMiniView]="false" [userId]="_userId" (candidateId)="updateCanidateId($event)"></cn-value-portrait>
+
   </div>
 </div>

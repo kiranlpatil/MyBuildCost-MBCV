@@ -16,6 +16,7 @@ export class ValuePortraitContainerComponent implements OnInit {
   _userId:string;
   _jobId:string;
   isShareView:boolean = false;
+  candidateName: string = 'candidate';
   private isCandidate: boolean;
   private isCandidateSubmitted: boolean;
   private isFromCreate: boolean = false;
@@ -24,6 +25,7 @@ export class ValuePortraitContainerComponent implements OnInit {
   constructor(private _router:Router, private activatedRoute:ActivatedRoute) {
     if (LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE) === 'true') {
       this.isCandidate = true;
+      this.candidateName = LocalStorageService.getLocalValue(LocalStorage.FIRST_NAME)+' '+ LocalStorageService.getLocalValue(LocalStorage.LAST_NAME);
     }
     if (LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE_SUBMITTED) === 'true') {
     this.isCandidateSubmitted = true;
