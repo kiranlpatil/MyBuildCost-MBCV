@@ -5,6 +5,7 @@ import UserService = require('../services/user.service');
 import CandidateService = require('../services/candidate.service');
 import AdminService = require('../services/admin.service');
 import UserModel = require('../dataaccess/model/user.model');
+import ExportService = require("../services/export.service");
 let config = require('config');
 let request = require('request');
 
@@ -188,49 +189,20 @@ export function getRecruiterDetailsByInitial(req: express.Request, res: express.
 
 export function exportCandidateDetails(req: express.Request, res: express.Response, next: any) {
   try {
-    let userService = new UserService();
     let adminService = new AdminService();
-    let userType = 'candidate';
-    let files: any = {};
     if (req.user.isAdmin) {
-      adminService.exportCandidateCollection((err, respo) => {
+      adminService.exportCandidateDetails((err, result) => {
         if (err) {
           next({
-            reason: Messages.MSG_ERROR_CREATING_EXCEL,//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
+            reason: Messages.MSG_ERROR_CREATING_EXCEL,
             message: Messages.MSG_ERROR_CREATING_EXCEL,
             stackTrace: err,
             code: 500
           });
         } else {
-          files['candidatesFilePath'] = respo;
-          adminService.exportCandidateOtherDetailsCollection((err, respo) => {
-            if (err) {
-              next({
-                reason: Messages.MSG_ERROR_CREATING_EXCEL,//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
-                message: Messages.MSG_ERROR_CREATING_EXCEL,
-                stackTrace: err,
-                code: 500
-              });
-            } else {
-              files['candidatesOtherDetailsFilePath'] = respo;
-              adminService.exportUserCollection(userType, (err, respo) => {
-                if (err) {
-                  next({
-                    reason: Messages.MSG_ERROR_CREATING_EXCEL,//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
-                    message: Messages.MSG_ERROR_CREATING_EXCEL,
-                    stackTrace: err,
-                    code: 500
-                  });
-                } else {
-                  files['usersFilePath'] = config.get('TplSeed.downloadFilePathClient')
-                    + config.get('TplSeed.exportFileNames.candidateAccountDetailsCSV');
-                  res.status(200).send({
-                    'path': files,
-                    'status': 'success'
-                  });
-                }
-              });
-            }
+          res.status(200).send({
+            'path': result,
+            'status': 'success'
           });
         }
       });
@@ -256,46 +228,19 @@ export function exportCandidateDetails(req: express.Request, res: express.Respon
 export function exportRecruiterDetails(req: express.Request, res: express.Response, next: any) {
   try {
     let adminService = new AdminService();
-    let files: any = {};
     if (req.user.isAdmin) {
-      adminService.exportRecruiterCollection((err, respo) => {
+      adminService.exportRecruiterDetails((err, result) => {
         if (err) {
           next({
-            reason: Messages.MSG_ERROR_CREATING_EXCEL,//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
+            reason: Messages.MSG_ERROR_CREATING_EXCEL,
             message: Messages.MSG_ERROR_CREATING_EXCEL,
             stackTrace: err,
             code: 500
           });
         } else {
-          files['recruitersFilePath'] = respo;
-          adminService.exportJobDetailsCollection((err, respo) => {
-            if (err) {
-              next({
-                reason: Messages.MSG_ERROR_CREATING_EXCEL,//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
-                message: Messages.MSG_ERROR_CREATING_EXCEL,
-                stackTrace: err,
-                code: 500
-              });
-            } else {
-              files['jobDetailsFilePath'] = respo;
-              adminService.exportUserCollection('recruiter', (err, respo) => {
-                if (err) {
-                  next({
-                    reason: Messages.MSG_ERROR_CREATING_EXCEL,//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
-                    message: Messages.MSG_ERROR_CREATING_EXCEL,
-                    stackTrace: err,
-                    code: 500
-                  });
-                } else {
-                  files['usersFilePath'] = config.get('TplSeed.downloadFilePathClient')
-                    + config.get('TplSeed.exportFileNames.companyAccountDetailsCSV');
-                  res.status(200).send({
-                    'path': files,
-                    'status': 'success'
-                  });
-                }
-              });
-            }
+          res.status(200).send({
+            'path': result,
+            'status': 'success'
           });
         }
       });
@@ -319,12 +264,12 @@ export function exportRecruiterDetails(req: express.Request, res: express.Respon
 
 export function exportUsageDetails(req: express.Request, res: express.Response, next: any) {
   try {
-    let adminService = new AdminService();
+    let exportService = new ExportService();
     if (req.user.isAdmin) {
-      adminService.exportUsageDetailsCollection((error, result) => {
+      exportService.exportUsageTrackingCollection((error, result) => {
         if (error) {
           next({
-            reason: Messages.MSG_ERROR_RETRIEVING_USAGE_DETAIL,//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
+            reason: Messages.MSG_ERROR_RETRIEVING_USAGE_DETAIL,
             message: Messages.MSG_ERROR_RETRIEVING_USAGE_DETAIL,
             stackTrace: error,
             code: 500
@@ -357,9 +302,9 @@ export function exportUsageDetails(req: express.Request, res: express.Response, 
 
 export function exportKeySkills(req: express.Request, res: express.Response, next: any) {
   try {
-    let adminService = new AdminService();
+    let exportService = new ExportService();
     if (req.user.isAdmin) {
-      adminService.exportKeySkillsCollection((error, result) => {
+      exportService.exportKeySkillsCollection((error, result) => {
         if (error) {
           next({
             reason: Messages.MSG_ERROR_RETRIEVING_KEY_SKILLS,
