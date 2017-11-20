@@ -13,6 +13,7 @@ import {ErrorService} from "../../../shared/services/error.service";
 import {QCardFilter} from "../model/q-card-filter";
 import {EList} from "../model/list-type";
 import {ESort} from "../model/sort-type";
+import {QCardsortBy} from "../model/q-cardview-sortby";
 
 
 @Component({
@@ -42,7 +43,7 @@ export class CandidateDashboardComponent implements OnInit{
   overlayScreensDashboardImgName:string;
   private typeOfListVisible : string ='matched';
   private appliedFilters :QCardFilter = new QCardFilter();
-
+  private qCardModel: QCardsortBy = new QCardsortBy();
   constructor(private candidateProfileService: CandidateProfileService,
               private candidateDashboardService: CandidateDashboardService,
               private errorService: ErrorService,
@@ -55,6 +56,7 @@ export class CandidateDashboardComponent implements OnInit{
         candidateData => {
           this.OnCandidateDataSuccess(candidateData);
         },error => this.errorService.onError(error));
+    this.appliedFilters = new QCardFilter();
   }
 
   ngOnInit() {
@@ -199,8 +201,6 @@ export class CandidateDashboardComponent implements OnInit{
     this.getMatchedJobList();
   }
   getMatchedJobList() {
-    this.appliedFilters = new QCardFilter();
-    this.appliedFilters.sortBy = this.sortBy;
     this.appliedFilters.listName= EList.JOB_MATCHED;
     this.candidateDashboardService.getJobList(this.appliedFilters)
       .subscribe(
@@ -215,4 +215,37 @@ export class CandidateDashboardComponent implements OnInit{
   getMessage() {
     return Messages;
   }
+
+  changeFilter(obj : QCardFilter) {
+    this.appliedFilters= obj;
+    if(EList.JOB_APPLIED === this.listName) {
+      this.appliedFilters.listName = EList.JOB_APPLIED;
+      this.getAppliedJobList();
+    } else if(EList.JOB_NOT_INTERESTED === this.listName) {
+      this.appliedFilters.listName = EList.JOB_NOT_INTERESTED;
+      this.getRejectedJobList();
+    } else {
+      this.appliedFilters.listName = EList.JOB_MATCHED;
+      this.getMatchedJobList();
+    }
+  }
+
+  onSortChange(value:string) {
+    switch (value) {
+      case this.qCardModel.listOfMatchings[2]:
+        this.appliedFilters.sortBy =ESort.SALARY;
+        break;
+      case this.qCardModel.listOfMatchings[1]:
+        this.appliedFilters.sortBy = ESort.EXPERIENCE;
+        break;
+      case this.qCardModel.listOfMatchings[0] :
+        this.appliedFilters.sortBy = ESort.BEST_MATCH;
+        break;
+      default :
+        this.appliedFilters.sortBy = ESort.BEST_MATCH;
+        break;
+    }
+    this.changeFilter(this.appliedFilters);
+  }
+
 }

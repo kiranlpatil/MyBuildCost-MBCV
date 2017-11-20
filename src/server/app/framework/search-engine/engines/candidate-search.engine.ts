@@ -6,6 +6,7 @@ import { EList } from '../models/input-model/list-enum';
 import { CandidateCard } from '../models/output-model/candidate-card';
 import CandidateRepository = require('../../dataaccess/repository/candidate.repository');
 import {ConstVariables} from "../../shared/sharedconstants";
+import {UtilityFunction} from "../../uitility/utility-function";
 
 export class CandidateSearchEngine extends SearchEngine {
   candidate_q_cards: CandidateCard[] = new Array(0);
@@ -60,6 +61,9 @@ export class CandidateSearchEngine extends SearchEngine {
     }
     if (sortBy === ESort.BEST_MATCH) {
      this.candidate_q_cards = <CandidateCard[]>this.getSortedObjectsByMatchingPercentage(this.candidate_q_cards);
+    }
+    if(listName !== EList.CAN_CART) {
+      this.candidate_q_cards = this.maskQCards(this.candidate_q_cards);
     }
     return this.candidate_q_cards.slice(0, 100);
   }
@@ -160,4 +164,12 @@ export class CandidateSearchEngine extends SearchEngine {
       candidate.proficiencies);
     this.candidate_q_cards.push(candidate_card);
   }
+
+  maskQCards(q_cards: any []): any[] {
+      for(let qCard in q_cards) {
+        q_cards[qCard].last_name =  UtilityFunction.valueHide(q_cards[qCard].last_name);
+      }
+    return q_cards;
+  }
+
 }

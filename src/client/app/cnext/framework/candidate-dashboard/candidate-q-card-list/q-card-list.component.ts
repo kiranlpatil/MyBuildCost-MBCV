@@ -16,6 +16,8 @@ export class QcardListComponent implements OnChanges {
   @Input() type: string;
   @Input() joblistCount: any;
   @Output() onAction = new EventEmitter();
+  @Output() onSortByChange = new EventEmitter();
+
   private filterMeta: QCardFilter;
   private qCardModel: QCardsortBy = new QCardsortBy();
   private qCardCount = {count: 0};
@@ -39,5 +41,9 @@ export class QcardListComponent implements OnChanges {
 
   clearFilter() {
     this.qCardFilterService.clearFilter();
+  }
+
+  sortBy(value:string) {
+  this.onSortByChange.emit(value);
   }
 }

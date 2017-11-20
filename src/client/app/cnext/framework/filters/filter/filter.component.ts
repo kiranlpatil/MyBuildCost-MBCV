@@ -150,14 +150,12 @@ export class FilterComponent implements OnChanges, OnInit {
     this.showClearFilter = true;
     this.buildQuery();
     this.qCardFilterService.filterby(this.qCardFilter);
-    if(this.isRecuirter) {
-      this.changeFilter.emit(this.qCardFilter);
-    }
+    this.changeFilter.emit(this.qCardFilter);
   }
 
   filterByEducation(event: any) {
     var value = event.target.value;
-    if(value == ''){
+    if(value == '') {
       this.queryListRemove('(args.educationDataForFilter.indexOf(item.education.toLowerCase()) !== -1)');
     }
     if (event.target.checked) {
@@ -176,15 +174,13 @@ export class FilterComponent implements OnChanges, OnInit {
     this.showClearFilter = true;
     this.buildQuery();
     this.qCardFilterService.filterby(this.qCardFilter);
-    if(this.isRecuirter) {
-      this.changeFilter.emit(this.qCardFilter);
-    }
+    this.changeFilter.emit(this.qCardFilter);
   }
 
   filterByIndustryExposure(event: any) {
     var value = event.target.value;
     if (event.target.checked) {
-      this.qCardFilter.interestedIndustries.push(value)
+      this.qCardFilter.interestedIndustries.push(value);
     } else {
       var index = this.qCardFilter.interestedIndustries.indexOf(value);
       if (index > -1) {
@@ -201,9 +197,7 @@ export class FilterComponent implements OnChanges, OnInit {
     this.showClearFilter = true;
     this.buildQuery();
     this.qCardFilterService.filterby(this.qCardFilter);
-    if(this.isRecuirter) {
-      this.changeFilter.emit(this.qCardFilter);
-    }
+    this.changeFilter.emit(this.qCardFilter);
   }
 
   filterByJoinTime(value: any) {
@@ -226,6 +220,7 @@ export class FilterComponent implements OnChanges, OnInit {
     }
     this.buildQuery();
     this.qCardFilterService.filterby(this.qCardFilter);
+    this.changeFilter.emit(this.qCardFilter);
   }
 
   selectSalaryMinModel(value: any) {
@@ -234,9 +229,7 @@ export class FilterComponent implements OnChanges, OnInit {
       return;
     }
     this.qCardFilter.minSalary = value;
-    if(this.isRecuirter) {
-      this.qCardFilter.minSalary = Number(this.qCardFilter.minSalary.toString()) * 100000;
-    }
+    this.qCardFilter.minSalary = Number(this.qCardFilter.minSalary.toString()) * 100000;
     this.salaryFilterBy();
   }
 
@@ -254,9 +247,7 @@ export class FilterComponent implements OnChanges, OnInit {
       return;
     }
     this.qCardFilter.maxSalary = value;
-    if(this.isRecuirter) {
-      this.qCardFilter.maxSalary = Number(this.qCardFilter.maxSalary.toString()) * 100000;
-    }
+    this.qCardFilter.maxSalary = Number(this.qCardFilter.maxSalary.toString()) * 100000;
     this.salaryFilterBy();
   }
 
@@ -270,9 +261,7 @@ export class FilterComponent implements OnChanges, OnInit {
       this.showClearFilter = true;
       this.buildQuery();
       this.qCardFilterService.filterby(this.qCardFilter);
-      if(this.isRecuirter) {
-        this.changeFilter.emit(this.qCardFilter);
-      }
+      this.changeFilter.emit(this.qCardFilter);
     }
   }
 
@@ -313,9 +302,7 @@ export class FilterComponent implements OnChanges, OnInit {
       this.showClearFilter = true;
       this.buildQuery();
       this.qCardFilterService.filterby(this.qCardFilter);
-      if(this.isRecuirter) {
         this.changeFilter.emit(this.qCardFilter);
-      }
     }
   }
 
@@ -329,6 +316,7 @@ export class FilterComponent implements OnChanges, OnInit {
     }
     this.buildQuery();
     this.qCardFilterService.filterby(this.qCardFilter);
+    this.changeFilter.emit(this.qCardFilter);
   }
 
   candidatesFilterByLocation(value: any) {
@@ -358,6 +346,7 @@ export class FilterComponent implements OnChanges, OnInit {
     }
     this.buildQuery();
     this.qCardFilterService.filterby(this.qCardFilter);
+    this.changeFilter.emit(this.qCardFilter);
   }
 
   queryListPush(query: string) {
@@ -397,6 +386,7 @@ export class FilterComponent implements OnChanges, OnInit {
       }
     }
     this.qCardFilterService.filterby(this.qCardFilter);
+    this.changeFilter.emit(this.qCardFilter);
   }
 
   filterByMustHaveComplexity(event: any) {

@@ -21,7 +21,7 @@ import { FilterSort } from '../../dataaccess/model/filter';
 import { QueryBuilder } from './query-builder.service';
 import IJobProfile = require('../../dataaccess/mongoose/job-profile');
 import JobProfileRepository = require('../../dataaccess/repository/job-profile.repository');
-let usestracking = require('uses-tracking');
+//let usestracking = require('uses-tracking');
 
 class SearchService {
   APP_NAME: string;
@@ -29,7 +29,7 @@ class SearchService {
   recruiterRepository: RecruiterRepository;
   jobProfileRepository: JobProfileRepository;
   industryRepository: IndustryRepository;
-  private usesTrackingController: any;
+  //private usesTrackingController: any;
 
   constructor() {
     this.APP_NAME = ProjectAsset.APP_NAME;
@@ -37,8 +37,8 @@ class SearchService {
     this.recruiterRepository = new RecruiterRepository();
     this.jobProfileRepository = new JobProfileRepository();
     this.industryRepository = new IndustryRepository();
-    let obj: any = new usestracking.MyController();
-    this.usesTrackingController = obj._controller;
+    /*let obj: any = new usestracking.MyController();
+    this.usesTrackingController = obj._controller;*/
   }
 
   getMatchingCandidates(jobProfile: JobProfileModel, appliedFilters : FilterSort,callback: (error: any, result: any) => void) {
@@ -122,7 +122,7 @@ class SearchService {
     } else {
       uses_data.action = Actions.VIEWED_FULL_PROFILE_BY_RECRUITER;
     }
-    this.usesTrackingController.create(uses_data);
+    //this.usesTrackingController.create(uses_data);
     this.candidateRepository.findByIdwithExclude(candidateId,{'industry':0}, (err: any, candidateRes: any) => {
       if (err) {
         callback(err, null);

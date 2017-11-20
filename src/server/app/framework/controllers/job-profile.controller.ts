@@ -8,7 +8,7 @@ import CNextMessages = require('../shared/cnext-messages');
 import SearchService = require('../search/services/search.service');
 import RecruiterService = require('../services/recruiter.service');
 import IJobProfile = require('../dataaccess/mongoose/job-profile');
-let usestracking = require('uses-tracking');
+//let usestracking = require('uses-tracking');
 
 
 export function searchCandidatesByJobProfile(req: express.Request, res: express.Response, next: any) {
@@ -218,8 +218,8 @@ export function createUsesTracking(req: express.Request, res: express.Response, 
     let data: UsageTracking;
     data = req.body;
     data.timestamp = new Date();
-      let obj: any = new usestracking.MyController();
-    obj._controller.create(data);
+   /*   let obj: any = new usestracking.MyController();
+    obj._controller.create(data);*/
     res.send({
       'status': 'success',
     });

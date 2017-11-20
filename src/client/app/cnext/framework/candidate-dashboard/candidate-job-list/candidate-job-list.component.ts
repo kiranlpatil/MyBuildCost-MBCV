@@ -15,6 +15,7 @@ export class CandidateJobListComponent {
   @Input() type: string;
   @Output() onAction = new EventEmitter();
   @Input() progress_bar_color : string;
+  @Output() onSortByChange = new EventEmitter();
   private filterMeta: QCardFilter;
   private qCardModel: QCardsortBy = new QCardsortBy();
   private qCardCount = {count: 0};
@@ -32,5 +33,9 @@ export class CandidateJobListComponent {
   }
   clearFilter() {
     this.qCardFilterService.clearFilter();
+  }
+
+  sortBy(value:string) {
+    this.onSortByChange.emit(value);
   }
 }

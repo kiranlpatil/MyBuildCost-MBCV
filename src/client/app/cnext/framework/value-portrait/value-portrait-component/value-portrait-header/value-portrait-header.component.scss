@@ -23,7 +23,7 @@
     display: inline-block;
     font-family: 'gothamrnd-book';
     font-size: 14px;
-    margin: 0 0 0 -15px;
+    margin: 0 0 -4px -15px;
     overflow: hidden;
     padding: 0 0 0 25px;
     text-transform: uppercase;
@@ -38,7 +38,7 @@
     font-size: 12px;
     margin-left: -15px;
     overflow: hidden;
-    padding: 5px 0 5px 25px;
+    padding: 0 0 5px 25px;
     text-overflow: ellipsis;
     width: calc(100% - 78px);
     white-space: nowrap;
@@ -97,7 +97,11 @@
     width: calc(100% - 50px);
     a {
       color: $white;
+      display: inline-block;
+      overflow: hidden;
+      text-overflow: ellipsis;
       text-transform: lowercase;
+      white-space: nowrap;
     }
   }
 }

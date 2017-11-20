@@ -203,7 +203,7 @@
       &:before {
         width: 37px;
         transform: rotate(90deg);
-        left: 41%;
+        left: 35%;
         bottom: -22px;
         top: inherit;
       }
@@ -244,7 +244,8 @@
           border-top: 0;
         }
       }
-      &:before {
+      &:before,
+      &:after{
         display: none;
       }
       .tooltip-content {

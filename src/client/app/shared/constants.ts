@@ -333,8 +333,8 @@ export class Messages {
   'Click below to Preview';
   public static PLEASE_COMPLETE_THE_PROFILE_MSG = 'Please complete the profile before sharing';
   public static JOBS_AVALLABLE_MESSAGE = 'Jobs are available in your industry.';
-  public static NOT_FOUND_INFORMATION = 'The page you are looking for doesn\t exist<br/>' +
-    'or an other error accoured.';
+  public static NOT_FOUND_INFORMATION = 'The page you are looking for doesn\'t exist<br/>' +
+    'or an other error ocourred.';
   public static PAGE_NOT_FOUND = 'Page Not Found';
   public static MATCH_AGAINST_ALL_JOB = 'Match Against All Jobs';
   public static MATCH_AGAINST_THIS_JOB = 'Match Against This Job';
