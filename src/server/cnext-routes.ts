@@ -1,16 +1,17 @@
-import * as express from 'express';
-import * as userController from './app/framework/controllers/user.controller';
-import * as roleController from './app/framework/controllers/role.controller';
-import * as candidateController from './app/framework/controllers/candidate.controller';
-import * as capabilityController from './app/framework/controllers/capability.controller';
-import * as complexityController from './app/framework/controllers/complexity.controller';
-import * as proficienciesController from './app/framework/controllers/proficiency.controller';
-import * as industryController from './app/framework/controllers/industry.controller';
-import * as recruiterController from './app/framework/controllers/recruiter.controller';
-import * as jobProfileController from './app/framework/controllers/job-profile.controller';
-import * as userInterceptor from './app/framework/interceptor/user.interceptor';
-import { SearchController } from './app/framework/search/controller/search.controller';
-import * as adminController from './app/framework/controllers/admin.controller';
+import * as express from "express";
+import * as userController from "./app/framework/controllers/user.controller";
+import * as roleController from "./app/framework/controllers/role.controller";
+import * as candidateController from "./app/framework/controllers/candidate.controller";
+import * as capabilityController from "./app/framework/controllers/capability.controller";
+import * as complexityController from "./app/framework/controllers/complexity.controller";
+import * as proficienciesController from "./app/framework/controllers/proficiency.controller";
+import * as industryController from "./app/framework/controllers/industry.controller";
+import * as recruiterController from "./app/framework/controllers/recruiter.controller";
+import * as jobProfileController from "./app/framework/controllers/job-profile.controller";
+import {UsageTrackingController} from "./app/framework/controllers/usage-tracking-controller";
+import * as userInterceptor from "./app/framework/interceptor/user.interceptor";
+import {SearchController} from "./app/framework/search/controller/search.controller";
+import * as adminController from "./app/framework/controllers/admin.controller";
 let AuthInterceptor = require('./app/framework/interceptor/auth.interceptor');
 import ShareController = require('./app/framework/share/controller/share.controller');
 import * as sharedService from './app/framework/shared/logger/shared.service';
@@ -24,6 +25,7 @@ export function cnextInit(app: express.Application) {
   //todo add interceptor to authenticate
   let searchController = new SearchController();
   let shareController = new ShareController();
+  let usageTrackingController = new UsageTrackingController();
   let searchEngineController = new SearchEngineController();
   app.get('/api/industry',loggerInterceptor.logDetail, this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, industryController.retrieve);
   app.put('/api/updateUser/:id',loggerInterceptor.logDetail, this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, adminController.updateDetailOfUser);
@@ -83,7 +85,7 @@ export function cnextInit(app: express.Application) {
   app.get('/api/userFeedback',loggerInterceptor.logDetail,this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, userController.getUserFeedback);
 
   // API for Uses Tracking
-  app.put('/api/usageTracking',loggerInterceptor.logDetail, jobProfileController.createUsesTracking);
+  app.put('/api/usageTracking',loggerInterceptor.logDetail, usageTrackingController.create);
   app.get('/api/usageDetails',loggerInterceptor.logDetail, this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, adminController.exportUsageDetails);
   app.get('/api/keySkills',loggerInterceptor.logDetail, this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, adminController.exportKeySkills);
 

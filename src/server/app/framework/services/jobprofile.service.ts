@@ -12,6 +12,7 @@ import IndustryRepository = require('../dataaccess/repository/industry.repositor
 import CandidateService = require('./candidate.service');
 import IJobProfile = require('../dataaccess/mongoose/job-profile');
 let usestracking = require('uses-tracking');
+import UsageTrackingService = require('./usage-tracking.service');
 
 
 class JobProfileService {
@@ -21,7 +22,7 @@ class JobProfileService {
   private recruiterRepository: RecruiterRepository;
   private candidateRepository: CandidateRepository;
   private APP_NAME: string;
-  private usesTrackingController: any;
+  private usageTrackingService: UsageTrackingService;
 
   constructor() {
     this.jobProfileRepository = new JobProfileRepository();
@@ -30,8 +31,7 @@ class JobProfileService {
     this.industryRepository = new IndustryRepository();
     this.candidateRepository = new CandidateRepository();
     this.APP_NAME = ProjectAsset.APP_NAME;
-    let obj: any = new usestracking.MyController();
-    this.usesTrackingController = obj._controller;
+    this.usageTrackingService = new UsageTrackingService();
   }
 
   create(item: any, callback: (error: any, result: IJobProfile) => void) {
