@@ -766,6 +766,10 @@ export class Button {
   public static DOWNLOAD: string = 'Download';
   public static BACK_TO_HOME: string = 'Back to home';
   public static CREATE_MY_ACCOUNT: string = 'Create my account';
+  public static MATCH_AGAINST_THIS_JOB: string = 'Match Against This Job';
+  public static MATCH_AGAINST_ALL_JOB: string = 'Match Against All Job';
+  public static SHOW_VALUE_PORTRAIT: string = 'Show Value Portrait';
+  public static COMPARE_WITH_OTHERS: string = 'Compare With Others';
 }
 //These constant is used to track profile completion of candiate.(Having total 14 steps to complete)
 export enum CandidateProfileUpdateTrack {
