@@ -145,7 +145,7 @@
       </div>
       <div class="profile-configurations" [hidden]="!showAboutMySelf" >
         <div class="text-right">
-          <div class="button-group submit-view-profile-btn" *ngIf="!candidate.isSubmitted">
+          <div class="button-group" *ngIf="!candidate.isSubmitted" [class.submit-view-profile-btn] = "!candidate.isSubmitted">
             <button class="btn green-bg" tabindex="1" data-toggle="modal" data-target="#note-modal">{{getButton().SUBMIT_PROFILE}}</button>
           </div>
           <div class="button-group" *ngIf="candidate.isSubmitted">
