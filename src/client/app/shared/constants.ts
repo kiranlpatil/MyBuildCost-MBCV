@@ -338,13 +338,6 @@ export class Messages {
   public static JOBS_AVALLABLE_MESSAGE = 'Jobs are available in your industry.';
   public static NOT_FOUND_INFORMATION = 'The page you are looking for doesn\'t exist<br/>' +
     'or an other error ocourred.';
-  public static PAGE_NOT_FOUND = 'Page Not Found';
-  public static MATCH_AGAINST_ALL_JOB = 'Match Against All Jobs';
-  public static MATCH_AGAINST_THIS_JOB = 'Match Against This Job';
-  public static SHOW_VALUE_PORTRAIT = 'Show Value Portrait';
-  public static CAPABILITY_DETAILS = 'Capability details under';
-  public static NOT_AVAILABLE = 'Not Available';
-
 
 }
 export class AdminPanel {
@@ -769,6 +762,9 @@ export class Button {
   public static DOWNLOAD: string = 'Download';
   public static BACK_TO_HOME: string = 'Back to home';
   public static CREATE_MY_ACCOUNT: string = 'Create my account';
+  public static MATCH_AGAINST_ALL_JOB = 'Match Against All Jobs';
+  public static MATCH_AGAINST_THIS_JOB = 'Match Against This Job';
+  public static SHOW_VALUE_PORTRAIT = 'Show Value Portrait';
 }
 //These constant is used to track profile completion of candiate.(Having total 14 steps to complete)
 export enum CandidateProfileUpdateTrack {

@@ -4,7 +4,10 @@ import {QCardsortBy} from "../../model/q-cardview-sortby";
 import {MatchCandidate} from "../../model/match-candidate";
 import {QCardViewService} from "./q-card-view.service";
 import {QCardFilterService} from "../../filters/q-card-filter.service";
-import {AppSettings, LocalStorage, UsageActions, ValueConstant, Messages, Label} from "../../../../shared/constants";
+import {
+  AppSettings, LocalStorage, UsageActions, ValueConstant, Messages, Label,
+  Button
+} from "../../../../shared/constants";
 import {QCardFilter} from "../../model/q-card-filter";
 import {CandidateQListModel} from "../job-dashboard/q-cards-candidates";
 import {RecruiterJobView} from "../../model/recruiter-job-view";
@@ -394,7 +397,7 @@ export class QCardviewComponent implements OnChanges {
     this._router.navigate([nav, candidate._id]);
   }
 
-  getLabels() {
-    return Label;
+  getButtons() {
+    return Button;
   }
 }
