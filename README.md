@@ -422,8 +422,46 @@ $ src/redis-server
    	}
     }
    })
+   
+   //script to create the indexes on table 
+   
  
- 
+ //Script for performance branch to seperate the postedjobs from recruiter
+ db.getCollection('recruiters').find({}).forEach(function(recruiter) {
+   for(var i = 0;i <= recruiter.postedJobs.length-1; i++){
+       var jobprofile = recruiter.postedJobs[i];
+   jobprofile.recruiterId = recruiter._id;
+   db.getCollection('jobprofiles').insert(jobprofile);
+   }
+  })
+  
+  //Script for image path on Demo for user and recruiter table 
+  
+  db.getCollection('users').find({'picture':{'$exists':true}}).forEach(function(user) {
+  if(user.picture){
+  var pic = user.picture;
+  print(pic.substr(pic.lastIndexOf('/') + 1));
+  pic = '/public/profileImage/'+pic.substr(pic.lastIndexOf('/') + 1);
+  print(user._id,pic);
+  user.picture=pic.replace(/"/g, "");
+  db.getCollection('users').update(
+       {"_id":user._id},user);
+       print("success:" + user._id);
+  }
+  })
+  
+  db.getCollection('recruiters').find({'company_logo':{'$exists':true}}).forEach(function(user) {
+  if(user.company_logo){
+  var pic = user.company_logo;
+  print(pic.substr(pic.lastIndexOf('/') + 1));
+  pic = '/public/profileImage/'+pic.substr(pic.lastIndexOf('/') + 1);
+  print(user._id,pic);
+  user.company_logo=pic.replace(/"/g, "");
+  db.getCollection('recruiters').update(
+       {"_id":user._id},user);
+       print("success:" + user._id);
+  }
+  })
 
 # MySQL
 

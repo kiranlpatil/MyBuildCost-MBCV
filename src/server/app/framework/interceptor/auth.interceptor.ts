@@ -246,7 +246,7 @@ class AuthInterceptor {
                 reason: Messages.MSG_ERROR_TOKEN_NOT_PROVIDED,
                 message: Messages.MSG_ERROR_UNAUTHORIZED_USER,
                 stackTrace: new Error(),
-                code: 401
+                code: 400
               });
           }
         }

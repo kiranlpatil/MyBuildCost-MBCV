@@ -771,7 +771,7 @@ export function changePassword(req: express.Request, res: express.Response, next
               reason: Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
               message: Messages.MSG_ERROR_SAME_NEW_PASSWORD,
               stackTrace: new Error(),
-              code: 403
+              code: 400
             });
           } else {
 
@@ -812,7 +812,7 @@ export function changePassword(req: express.Request, res: express.Response, next
             reason: Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
             message: Messages.MSG_ERROR_WRONG_CURRENT_PASSWORD,
             stackTrace: new Error(),
-            code: 403
+            code: 400
           });
         }
       }
