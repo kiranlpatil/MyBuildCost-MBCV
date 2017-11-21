@@ -54,6 +54,9 @@ export class MoreAboutMyselfComponent implements OnInit {
   }
 
   ngOnInit() {
+    if(Number(window.innerWidth) <= 768) {
+      this.guidedTourService.updateTourStatus(ImagePath.CANDIDATE_OERLAY_SCREENS_EMPLOYMENT_HISTORY,true);
+    }
     if (LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE) === 'true') {
       this.isCandidate = true;
       this.userId=LocalStorageService.getLocalValue(LocalStorage.USER_ID);
