@@ -37,7 +37,7 @@ export class SearchEngineController {
 
     searchService.getUserDetails(objectId, (err: Error, againstDetails: BaseDetail) => {
       if (err) {
-        res.send();
+        next(err);
       } else {
         let criteria: any;
         if (isMatchList) {
@@ -49,11 +49,12 @@ export class SearchEngineController {
 
 
         let mainCriteria = searchEngine.buildUserCriteria(appliedFilters, criteria);
+        console.log('-----------------------mainCriteria--------------------', mainCriteria);
         searchEngine.getMatchingObjects(mainCriteria, (error: any, response: any[]) => {
           if (error) {
-            res.send();
+            next(error);
           } else {
-            let q_cards = searchEngine.buildQCards(response, againstDetails, appliedFilters.sortBy, appliedFilters.listName);
+            let q_cards = searchEngine.buildQCards(response, againstDetails, appliedFilters.sortBy, appliedFilters.listName, appliedFilters.mustHaveComplexity);
             /*if(appliedFilters.listName !== EList.CAN_CART) {
               q_cards = searchEngine.maskQCards(q_cards, appliedFilters.listName);
             }*/
@@ -71,7 +72,7 @@ export class SearchEngineController {
     let appliedFilters: AppliedFilter = req.body.obj;
     let objectId: string;
     let jobSearchService = new JobSearchService();
-    let candId = req.params.id;
+    //let candId = req.params.id;
     let candidateService = new CandidateService();
 
     objectId = req.params.candidateId;
@@ -83,7 +84,7 @@ export class SearchEngineController {
 
     searchService.getUserDetails(objectId, (err: Error, againstDetails: BaseDetail) => {
       if (err) {
-        res.send();
+        next(err);
       } else {
         let candidateDetails = againstDetails;
         let criteria: any;
@@ -97,12 +98,13 @@ export class SearchEngineController {
         let mainCriteria = searchEngine.buildUserCriteria(appliedFilters, criteria);
         searchEngine.getMatchingObjects(mainCriteria, (error: any, response: any[]) => {
           if (error) {
-            res.send();
+            next(error);
           } else {
             let jobQCardMatching = searchEngine.buildQCards(response, againstDetails, appliedFilters.sortBy, appliedFilters.listName);
 
             candidateService.get(againstDetails.userId, (error, candidateDetails) => {
               if(error) {
+                next(error);
               }
               let _candidateDetails: CandidateDetailsWithJobMatching;
               _candidateDetails = jobSearchService.getCandidateVisibilityAgainstRecruiter(candidateDetails, jobQCardMatching);

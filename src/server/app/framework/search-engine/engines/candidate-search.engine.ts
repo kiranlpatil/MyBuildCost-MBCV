@@ -22,7 +22,7 @@ export class CandidateSearchEngine extends SearchEngine {
     });
   }
 
-  buildQCards(objects: any[], jobDetails: JobDetail, sortBy: ESort, listName: EList): any {
+  buildQCards(objects: any[], jobDetails: JobDetail, sortBy: ESort, listName: EList, mustHaveComplexity: boolean): any {
     for (let obj of objects) {
       let isFound: boolean = false;
       if (listName === EList.CAN_MATCHED) {
@@ -42,7 +42,7 @@ export class CandidateSearchEngine extends SearchEngine {
         }
       }
       let candidate_q_card: CandidateCard;
-      if (!this.setMustHaveMatrix(jobDetails.capability_matrix, obj.capability_matrix, jobDetails.complexity_must_have_matrix)) {
+      if (mustHaveComplexity && !this.setMustHaveMatrix(jobDetails.capability_matrix, obj.capability_matrix, jobDetails.complexity_must_have_matrix)) {
         continue;
       } else {
         candidate_q_card = <CandidateCard> this.computePercentage(obj.capability_matrix, jobDetails.capability_matrix);
@@ -73,8 +73,8 @@ export class CandidateSearchEngine extends SearchEngine {
     let isNotSatisfy: boolean = false;
     for (let cap in jobProfile_capability_matrix) {
       if (candidate_capability_matrix && candidate_capability_matrix[cap] && complexity_musthave_matrix && complexity_musthave_matrix[cap]) {
-        if (jobProfile_capability_matrix[cap] !== candidate_capability_matrix[cap] &&
-          jobProfile_capability_matrix[cap] !== (Number(candidate_capability_matrix[cap].toString()))) {
+        if (jobProfile_capability_matrix[cap] !== candidate_capability_matrix[cap] /*&&
+          jobProfile_capability_matrix[cap] !== (Number(candidate_capability_matrix[cap].toString()))*/) {
           isNotSatisfy = true;
           break;
         }
@@ -121,7 +121,7 @@ export class CandidateSearchEngine extends SearchEngine {
     let mainQuery: any;
     switch (sortBy) {
       case ESort.SALARY:
-        mainQuery = {'$query': criteria, '$orderby': {'professionalDetails.currentSalary': -1}};
+        mainQuery = {'$query': criteria, '$orderby': {'professionalDetails.currentSalary': 1}};
         break;
       case ESort.EXPERIENCE:
         mainQuery = {'$query': criteria, '$orderby': {'professionalDetails.experience': -1}};

@@ -65,7 +65,7 @@ export abstract class SearchEngine {
 
   abstract getSortedCriteria(sortBy : ESort, criteria : any) : Object ;
 
-  abstract buildQCards(objects : any[], jobDetails : BaseDetail,sortBy : ESort, listName: EList) : any ;
+  abstract buildQCards(objects : any[], jobDetails : BaseDetail,sortBy : ESort, listName: EList, mustHaveComplexity?: boolean) : any ;
 
   abstract getMatchingObjects(criteria : any, callback : (error : any, response : any[]) => void) : void;
 
