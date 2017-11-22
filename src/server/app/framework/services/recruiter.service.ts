@@ -1,13 +1,14 @@
-import * as mongoose from 'mongoose';
-import { Recruiter } from '../dataaccess/model/recruiter-final.model';
-import { ConstVariables } from '../shared/sharedconstants';
-import { JobCountModel } from '../dataaccess/model/job-count.model';
+import * as mongoose from "mongoose";
+import {ConstVariables, Actions} from "../shared/sharedconstants";
+import {JobCountModel} from "../dataaccess/model/job-count.model";
+import * as fs from "fs";
+import {CandidatesInLists} from "../dataaccess/model/CandidatesInLists.model";
+import {UsageTracking} from "../dataaccess/model/usage-tracking.model";
 import Messages = require('../shared/messages');
 import UserRepository = require('../dataaccess/repository/user.repository');
 import RecruiterRepository = require('../dataaccess/repository/recruiter.repository');
 import JobProfileModel = require('../dataaccess/model/jobprofile.model');
 import CandidateRepository = require('../dataaccess/repository/candidate.repository');
-import * as fs from 'fs';
 let config = require('config');
 let path = require('path');
 import CapabilityMatrixService = require('./capbility-matrix.builder');
@@ -21,7 +22,7 @@ import CandidateService = require('./candidate.service');
 import JobProfileRepository = require('../dataaccess/repository/job-profile.repository');
 import IJobProfile = require('../dataaccess/mongoose/job-profile');
 import IRecruiter = require('../dataaccess/mongoose/recruiter');
-import {CandidatesInLists} from "../dataaccess/model/CandidatesInLists.model";
+import UsageTrackingService = require("./usage-tracking.service");
 var bcrypt = require('bcrypt');
 
 class RecruiterService {
@@ -87,39 +88,39 @@ class RecruiterService {
     });
   }
 
-  retrieve(query : any, callback : (err: any, res : IRecruiter[]) => void) {
-      this.recruiterRepository.retrieve(query,(error : Error, result: IRecruiter[]) => {
-        if(error) {
-          callback(error, null);
-        }else {
-          callback(null, result);
-        }
-      });
+  retrieve(query: any, callback: (err: any, res: IRecruiter[]) => void) {
+    this.recruiterRepository.retrieve(query, (error: Error, result: IRecruiter[]) => {
+      if (error) {
+        callback(error, null);
+      } else {
+        callback(null, result);
+      }
+    });
   }
 
   findOneAndUpdate(query: any, newData: any, options: any, callback: (error: any, result: any) => void) {
     this.recruiterRepository.findOneAndUpdate(query, newData, options, callback);
   }
 
-  getJobsByRecruiterId(id: string, callback :(err: Error, res : IJobProfile[]) => void) {
-    let query = { 'recruiterId' : new mongoose.Types.ObjectId(id)};
-    this.jobProfileRepository.retrieveAndPopulate(query,{}, (error : Error, jobs : IJobProfile[]) => {
-        if(error) {
-          callback(error,null);
-          return;
-        }
-        callback(null,jobs);
+  getJobsByRecruiterId(id: string, callback: (err: Error, res: IJobProfile[]) => void) {
+    let query = {'recruiterId': new mongoose.Types.ObjectId(id)};
+    this.jobProfileRepository.retrieveAndPopulate(query, {}, (error: Error, jobs: IJobProfile[]) => {
+      if (error) {
+        callback(error, null);
+        return;
+      }
+      callback(null, jobs);
     });
   }
 
-  getJobsByRecruiterIdAndItsCount(id: string, callback :(err: Error, res : any) => void) {
-    this.getJobsByRecruiterId(id, (error : Error, jobs : IJobProfile[]) => {
-      if(error) {
-        callback(error,null);
+  getJobsByRecruiterIdAndItsCount(id: string, callback: (err: Error, res: any) => void) {
+    this.getJobsByRecruiterId(id, (error: Error, jobs: IJobProfile[]) => {
+      if (error) {
+        callback(error, null);
         return;
       }
-      let jobWithCount : any = {
-        jobs : jobs
+      let jobWithCount: any = {
+        jobs: jobs
       };
       jobWithCount.jobCountModel = new JobCountModel();
 
@@ -143,55 +144,57 @@ class RecruiterService {
               break;
           }
         }
-        if(!job.numberOfCandidatesInList) {
-          job.numberOfCandidatesInList= new CandidatesInLists();
+        if (!job.numberOfCandidatesInList) {
+          job.numberOfCandidatesInList = new CandidatesInLists();
         }
       }
-      callback(null,jobWithCount);
+      callback(null, jobWithCount);
     });
   }
+
   //Todo change with candidate_id now it is a user_id operation
   addJob(_id: string, job: IJobProfile, callback: (error: any, result: any) => void) {
-    this.jobProfileRepository.create(job, (err : Error, res : IJobProfile)=> {
-      if(err) {
-        callback(err,null);
-      }else {
+    this.jobProfileRepository.create(job, (err: Error, res: IJobProfile) => {
+      if (err) {
+        callback(err, null);
+      } else {
         this.recruiterRepository.findOneAndUpdate({'userId': new mongoose.Types.ObjectId(_id)},
           {$push: {postedJobs: res._id}},
           {
             'new': true,
-          },(err : Error, response : any) => {
+          }, (err: Error, response: any) => {
             if (err) {
-              callback(err,null);
+              callback(err, null);
             } else {
               callback(null, res);
             }
           });
       }
-      });
+    });
   }
 
   //Todo change with candidate_id now it is a user_id operation
-  addCloneJob(_id: string, job : IJobProfile, callback: (error: any, result: any) => void) {
-    this.jobProfileRepository.create(job, (err : Error, res : IJobProfile)=> {
-      if(err) {
-        callback(err,null);
+  addCloneJob(_id: string, job: IJobProfile, callback: (error: any, result: any) => void) {
+    this.jobProfileRepository.create(job, (err: Error, res: IJobProfile) => {
+      if (err) {
+        callback(err, null);
       } else {
         /*this.recruiterRepository.findOneAndUpdate({'_id': new mongoose.Types.ObjectId(_id)},
-          {$push: {postedJobs: res._id}},
-          {
-            'new': true,
-          },(err, response) => {
-            if (err) {
-              callback(err,null);
-            } else {
-              callback(null, response);
-            }
-          });*/
+         {$push: {postedJobs: res._id}},
+         {
+         'new': true,
+         },(err, response) => {
+         if (err) {
+         callback(err,null);
+         } else {
+         callback(null, response);
+         }
+         });*/
         callback(null, res);
       }
     });
   }
+
 //Todo change with candidate_id now it is a user_id operation
   updateJob(_id: string, job: IJobProfile, callback: (error: any, result: any) => void) {
 
@@ -210,21 +213,21 @@ class RecruiterService {
         job.complexity_musthave_matrix = capabilityMatrixService.getComplexityMustHaveMatrix(job,
           industries, new_complexity_musthave_matrix);
         let query = {
-            '_id': new mongoose.Types.ObjectId(job._id)
-          };
-        this.jobProfileRepository.updateWithQuery(query, job, {new: true},(err: Error, record: IJobProfile) => {
-            if (record) {
-              callback(null, record);
+          '_id': new mongoose.Types.ObjectId(job._id)
+        };
+        this.jobProfileRepository.updateWithQuery(query, job, {new: true}, (err: Error, record: IJobProfile) => {
+          if (record) {
+            callback(null, record);
+          } else {
+            let error: any;
+            if (record === null) {
+              error = new Error('Unable to update posted job maybe recruiter & job post not found. ');
+              callback(error, null);
             } else {
-              let error: any;
-              if (record === null) {
-                error = new Error('Unable to update posted job maybe recruiter & job post not found. ');
-                callback(error, null);
-              } else {
-                callback(err, null);
-              }
+              callback(err, null);
             }
-          });
+          }
+        });
       }
     });
   }
@@ -234,7 +237,7 @@ class RecruiterService {
   }
 
   getList(item: any, callback: (error: any, result: any) => void) {
-   console.log('remove this code also');
+    console.log('remove this code also');
   }
 
   updateDetails(_id: string, item: any, callback: (error: any, result: any) => void) {
@@ -252,17 +255,17 @@ class RecruiterService {
   loadCapbilityAndKeySkills(postedJob: JobProfileModel[]) {
     let candidateService = new CandidateService();
     for (let i = 0; i < postedJob.length; i++) {
-      if(postedJob[i].proficiencies.length > 0){
+      if (postedJob[i].proficiencies.length > 0) {
         postedJob[i].keySkills = postedJob[i].proficiencies.toString().replace(/,/g, ' $');
       }
-      if(postedJob[i].additionalProficiencies.length > 0) {
+      if (postedJob[i].additionalProficiencies.length > 0) {
         postedJob[i].additionalKeySkills = postedJob[i].additionalProficiencies.toString().replace(/,/g, ' $');
       }
-      if(postedJob[i].capability_matrix) {
+      if (postedJob[i].capability_matrix) {
         postedJob[i].capabilityMatrix = candidateService.loadCapabilitiDetails(postedJob[i].capability_matrix);
       }
 
-      if(postedJob[i].industry.roles.length > 0) {
+      if (postedJob[i].industry.roles.length > 0) {
         postedJob[i].roles = candidateService.loadRoles(postedJob[i].industry.roles);
       }
 
@@ -277,31 +280,32 @@ class RecruiterService {
   retrieveWithLean(field: any, projection: any, callback: (error: any, result: any) => void) {
     this.recruiterRepository.retrieveWithLean(field, projection, callback);
   }
+
   sendMailToAdvisor(field: any, callback: (error: any, result: any) => void) {
-    let header1 = fs.readFileSync(path.resolve() +config.get('TplSeed.publicPath')+'header1.html').toString();
-    let footer1 = fs.readFileSync(path.resolve() +config.get('TplSeed.publicPath')+'footer1.html').toString();
+    let header1 = fs.readFileSync(path.resolve() + config.get('TplSeed.publicPath') + 'header1.html').toString();
+    let footer1 = fs.readFileSync(path.resolve() + config.get('TplSeed.publicPath') + 'footer1.html').toString();
     let mailOptions = {
       to: field.email_id,
       subject: Messages.EMAIL_SUBJECT_RECRUITER_CONTACTED_YOU,
-      html: header1  + footer1, attachments: MailAttachments.AttachmentArray
+      html: header1 + footer1, attachments: MailAttachments.AttachmentArray
     }
     let sendMailService = new SendMailService();
     sendMailService.sendMail(mailOptions, callback);
 
   }
 
-  sendMailToRecruiter(user:any,field: any, callback: (error: any, result: any) => void) {
-    let header1 = fs.readFileSync(path.resolve() +config.get('TplSeed.publicPath')+'header1.html').toString();
-    let content = fs.readFileSync(path.resolve() +config.get('TplSeed.publicPath')+'confirmation.mail.html').toString();
-    let footer1 = fs.readFileSync(path.resolve() +config.get('TplSeed.publicPath')+'footer1.html').toString();
-    content=content.replace('$job_title$', field.jobTitle);
+  sendMailToRecruiter(user: any, field: any, callback: (error: any, result: any) => void) {
+    let header1 = fs.readFileSync(path.resolve() + config.get('TplSeed.publicPath') + 'header1.html').toString();
+    let content = fs.readFileSync(path.resolve() + config.get('TplSeed.publicPath') + 'confirmation.mail.html').toString();
+    let footer1 = fs.readFileSync(path.resolve() + config.get('TplSeed.publicPath') + 'footer1.html').toString();
+    content = content.replace('$job_title$', field.jobTitle);
     let host = config.get('TplSeed.mail.host');
     let link = host + 'signin';
-    content=content.replace('$link$', link);
+    content = content.replace('$link$', link);
     let mailOptions = {
       to: user.email,
-      subject: Messages.EMAIL_SUBJECT_RECRUITER_CONTACTED_YOU+field.jobTitle,
-      html: header1+content+ footer1, attachments: MailAttachments.AttachmentArray
+      subject: Messages.EMAIL_SUBJECT_RECRUITER_CONTACTED_YOU + field.jobTitle,
+      html: header1 + content + footer1, attachments: MailAttachments.AttachmentArray
     }
     let sendMailService = new SendMailService();
     sendMailService.sendMail(mailOptions, callback);
@@ -316,6 +320,37 @@ class RecruiterService {
         callback(err, result);
       }
     });
+  }
+
+  updateUsageTrackingData(updatedJob: any, job: any, callback: (error: any, result: any) => void) {
+    let usageTrackingData: UsageTracking = new UsageTracking();
+    usageTrackingData.recruiterId = String(updatedJob._doc.recruiterId);
+    usageTrackingData.jobProfileId = String(updatedJob._doc._id);
+    usageTrackingData.timestamp = new Date();
+
+    if (Boolean(updatedJob._doc.isJobPostClosed) == true) {
+      usageTrackingData.action = Actions.CLOSED_JOB_POST_BY_RECRUITER;
+    } else if (new Date(job.expiringDate) != new Date(updatedJob._doc.expiringDate)) {
+      usageTrackingData.action = Actions.RENEWED_JOB_POST_BY_RECRUITER;
+    } else if (Boolean(updatedJob._doc.isJobPosted) && !Boolean(updatedJob._doc.isJobPostClosed)) {
+      usageTrackingData.action = Actions.POSTED_JOB_BY_RECRUIER;
+    } else if (job._id == undefined) {
+      usageTrackingData.action = Actions.CREATED_NEW_JOB_BY_RECRUIER;
+    }
+
+
+    if (usageTrackingData.action != undefined || usageTrackingData.action != null) {
+      let usageTrackingService = new UsageTrackingService();
+      usageTrackingService.create(usageTrackingData, (err, result) => {
+        if (err) {
+          callback(err, null);
+        } else {
+          callback(null, result);
+        }
+      });
+    } else {
+      callback(null, '');
+    }
   }
 
 }

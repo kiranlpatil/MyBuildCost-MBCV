@@ -1,11 +1,12 @@
-import {Component, Input, ViewChild, ElementRef} from '@angular/core';
-import * as html2canvas from 'html2canvas';
-import {Message} from '../../../shared/models/message';
-import {Messages, UsageActions, LocalStorage, ImagePath, Button} from '../../../shared/constants';
-import {MessageService} from '../../../shared/services/message.service';
-import {UsageTrackingService} from '../usage-tracking.service';
-import {LocalStorageService} from '../../../shared/services/localstorage.service';
-import {ErrorService} from '../../../shared/services/error.service';
+import {Component, Input, ViewChild, ElementRef} from "@angular/core";
+import * as html2canvas from "html2canvas";
+import {Message} from "../../../shared/models/message";
+import {Messages, UsageActions, LocalStorage, ImagePath, Button} from "../../../shared/constants";
+import {MessageService} from "../../../shared/services/message.service";
+import {UsageTrackingService} from "../usage-tracking.service";
+import {LocalStorageService} from "../../../shared/services/localstorage.service";
+import {ErrorService} from "../../../shared/services/error.service";
+import {UsageTracking} from "../model/usage-tracking";
 //import * as jsPDF from 'jspdf';
 
 @Component({
@@ -16,25 +17,25 @@ import {ErrorService} from '../../../shared/services/error.service';
 })
 
 export class PrintScreenComponent {
-  @ViewChild('fileToDownload') fileToDownload:ElementRef;
-  @Input() screenIdForPrint:string;
-  @Input() fileName:string;
-  @Input() candidateId:string;
-  @Input() jobId:string;
-  @Input() typeOfView:string;
-  isShowSuggestionToasterMsg:boolean = false;
-  msgCandidateIfNotInCartForPrint:string = Messages.MSG_ABOUT_SCREEN_PRINT_IF_NOT_IN_CART;
-  
-  constructor(private errorService:ErrorService, private messageService: MessageService,
-              private usageTrackingService:UsageTrackingService) {
+  @ViewChild('fileToDownload') fileToDownload: ElementRef;
+  @Input() screenIdForPrint: string;
+  @Input() fileName: string;
+  @Input() candidateId: string;
+  @Input() jobId: string;
+  @Input() typeOfView: string;
+  isShowSuggestionToasterMsg: boolean = false;
+  msgCandidateIfNotInCartForPrint: string = Messages.MSG_ABOUT_SCREEN_PRINT_IF_NOT_IN_CART;
+
+  constructor(private errorService: ErrorService, private messageService: MessageService,
+              private usageTrackingService: UsageTrackingService) {
 
   }
 
-  createFile(_value:string) {
-    if(this.typeOfView == 'spa_candidate' || this.screenIdForPrint === 'printProfileComparison') {
+  createFile(_value: string) {
+    if (this.typeOfView == 'spa_candidate' || this.screenIdForPrint === 'printProfileComparison') {
       window.scrollTo(0, 0);
       html2canvas(document.getElementById(this.screenIdForPrint))
-        .then((canvas:any) => {
+        .then((canvas: any) => {
           let dataURL = canvas.toDataURL('image/jpeg');
           if (_value === 'img') {
             this.fileToDownload.nativeElement.href = dataURL;
@@ -53,7 +54,7 @@ export class PrintScreenComponent {
              doc.save('two-by-four.pdf')*/
           }
         })
-        .catch((err:any) => {
+        .catch((err: any) => {
           let message = new Message();
           message.custom_message = err.message;//Messages.MSG_ON_FILE_CREATION_FAILED;
           message.isError = true;
@@ -63,13 +64,18 @@ export class PrintScreenComponent {
       this.isShowSuggestionToasterMsg = true;
     }
   }
-  trackUsage(action:number,candidateId:string,jobId:string) {
-      let recruiterId =  LocalStorageService.getLocalValue(LocalStorage.END_USER_ID);
-      this.usageTrackingService.addUsesTrackingData(action,recruiterId, jobId, candidateId).subscribe(
-        data  => {
-          console.log(''+data);
-        }, error => this.errorService.onError(error));
-   }
+
+  trackUsage(action: number, candidateId: string, jobId: string) {
+    let recruiterId = LocalStorageService.getLocalValue(LocalStorage.END_USER_ID);
+    let usageTrackingData: UsageTracking = new UsageTracking();
+    usageTrackingData.recruiterId = recruiterId;
+    usageTrackingData.action = action;
+    usageTrackingData.jobProfileId = jobId;
+    usageTrackingData.candidateId = candidateId;
+    this.usageTrackingService.addUsesTrackingData(usageTrackingData).subscribe(
+      data => {
+      }, error => this.errorService.onError(error));
+  }
 
   getImagePath() {
     return ImagePath;

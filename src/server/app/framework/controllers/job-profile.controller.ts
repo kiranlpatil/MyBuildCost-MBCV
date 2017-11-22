@@ -1,6 +1,6 @@
-import * as express from 'express';
-import {UsageTracking} from '../dataaccess/model/usage-tracking';
-import {ConstVariables} from '../shared/sharedconstants';
+import * as express from "express";
+import {UsageTracking} from "../dataaccess/model/usage-tracking.model";
+import {ConstVariables, Actions} from "../shared/sharedconstants";
 import Messages = require('../shared/messages');
 import JobProfileModel = require('../dataaccess/model/jobprofile.model');
 import JobProfileService = require('../services/jobprofile.service');
@@ -8,7 +8,7 @@ import CNextMessages = require('../shared/cnext-messages');
 import SearchService = require('../search/services/search.service');
 import RecruiterService = require('../services/recruiter.service');
 import IJobProfile = require('../dataaccess/mongoose/job-profile');
-//let usestracking = require('uses-tracking');
+import UsageTrackingService = require("../services/usage-tracking.service");
 
 
 export function searchCandidatesByJobProfile(req: express.Request, res: express.Response, next: any) {
@@ -213,25 +213,6 @@ export function metchResultForJob(req: express.Request, res: express.Response, n
     });
   }
 }
-export function createUsesTracking(req: express.Request, res: express.Response, next: any) {
-  try {
-    let data: UsageTracking;
-    data = req.body;
-    data.timestamp = new Date();
-   /*   let obj: any = new usestracking.MyController();
-    obj._controller.create(data);*/
-    res.send({
-      'status': 'success',
-    });
-  } catch (e) {
-    next({
-      reason: e.message,
-      message: e.message,
-      stackTrace: new Error(),
-      code: 500
-    });
-  }
-}
 
 export function getQCardDetails(req: express.Request, res: express.Response, next: any) {
   try {
@@ -241,12 +222,12 @@ export function getQCardDetails(req: express.Request, res: express.Response, nex
       'candidateIds': req.body.candidateIds
     };
     /*jobProfileService.getQCardDetails(data, (error: Error, result: any) => {
-      if (error) {
-        next(error);
-      } else {
-        res.status(200).send(result);
-      }
-    });*/
+     if (error) {
+     next(error);
+     } else {
+     res.status(200).send(result);
+     }
+     });*/
   } catch (e) {
     next({
       reason: e.message,
@@ -260,7 +241,7 @@ export function cloneJob(req: express.Request, res: express.Response, next: any)
   try {
     var newJobTitle = req.query.newJobTitle;
     var jobProfileService = new JobProfileService();
-    jobProfileService.retrieveByJobId(req.params.id, (error: any, result : IJobProfile) => { //todo use
+    jobProfileService.retrieveByJobId(req.params.id, (error: any, result: IJobProfile) => { //todo use
       if (error) {
         next({
           reason: CNextMessages.PROBLEM_IN_RETRIEVE_JOB_PROFILE,
@@ -272,7 +253,7 @@ export function cloneJob(req: express.Request, res: express.Response, next: any)
         let oldId: any = result;
         let newJob: any = result.toObject();
         delete newJob["_id"];
-        console.log('-----------------------newJob._id---------------------',newJob._id);
+        console.log('-----------------------newJob._id---------------------', newJob._id);
         newJob.jobTitle = newJobTitle;
         newJob.isJobPosted = false;
         newJob.isJobShared = false;
@@ -293,9 +274,27 @@ export function cloneJob(req: express.Request, res: express.Response, next: any)
               code: 403
             });
           } else {
-            res.status(200).send({
-              'status': Messages.STATUS_SUCCESS,
-              'data': result._id
+            let usageTrackingService = new UsageTrackingService();
+            let usageTrackingData = new UsageTracking();
+            usageTrackingData.action = Actions.CLONED_JOB_POST_BY_RECRUITER;
+            usageTrackingData.recruiterId = newJob.recruiterId;
+            usageTrackingData.jobProfileId = req.params.id;
+            usageTrackingData.timestamp = new Date();
+            usageTrackingService.create(usageTrackingData, (err, result) => {
+              if (err) {
+                next({
+                  reason: Messages.MSG_ERROR_UPDATING_USAGE_DETAIL,
+                  message: Messages.MSG_ERROR_UPDATING_USAGE_DETAIL,
+                  stackTrace: new Error(),
+                  actualError: err,
+                  code: 500
+                });
+              } else {
+                res.status(200).send({
+                  'status': Messages.STATUS_SUCCESS,
+                  'data': result._id
+                });
+              }
             });
           }
         });

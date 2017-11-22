@@ -1,5 +1,4 @@
-import * as express from 'express';
-import { Recruiter } from '../dataaccess/model/recruiter-final.model';
+import * as express from "express";
 import AuthInterceptor = require('../interceptor/auth.interceptor');
 import Messages = require('../shared/messages');
 import CandidateService = require('../services/candidate.service');
@@ -13,7 +12,7 @@ import CandidateModel = require('../dataaccess/model/candidate.model');
 import UserService = require('../services/user.service');
 import CandidateSearchService = require('../services/candidate-search.service');
 import IJobProfile = require("../dataaccess/mongoose/job-profile");
-
+import UsageTrackingService = require('../services/usage-tracking.service');
 
 export function create(req: express.Request, res: express.Response, next: any) {
   try {
@@ -29,14 +28,14 @@ export function create(req: express.Request, res: express.Response, next: any) {
             stackTrace: new Error(),
             code: 400
           });
-        }else if (error === Messages.MSG_ERROR_CHECK_MOBILE_PRESENT) {
+        } else if (error === Messages.MSG_ERROR_CHECK_MOBILE_PRESENT) {
           next({
             reason: Messages.MSG_ERROR_RSN_EXISTING_USER,
             message: Messages.MSG_ERROR_REGISTRATION_MOBILE_NUMBER,
             stackTrace: new Error(),
             code: 400
           });
-        }else {
+        } else {
           next({
             reason: Messages.MSG_ERROR_RSN_EXISTING_USER,
             message: Messages.MSG_ERROR_USER_WITH_EMAIL_PRESENT,
@@ -44,7 +43,7 @@ export function create(req: express.Request, res: express.Response, next: any) {
             code: 400
           });
         }
-      }else {
+      } else {
         var auth: AuthInterceptor = new AuthInterceptor();
         var token = auth.issueTokenWithUid(result);
         res.status(200).send({
@@ -63,7 +62,7 @@ export function create(req: express.Request, res: express.Response, next: any) {
         });
       }
     });
-  }catch (e) {
+  } catch (e) {
     next({reason: e.message, message: e.message, stackTrace: new Error(), code: 500});
   }
 }
@@ -96,14 +95,26 @@ export function postJob(req: express.Request, res: express.Response, next: any) 
             code: 403
           });
         } else {
-          res.status(200).send({
-            'status': Messages.STATUS_SUCCESS,
-            'data': result
+          recruiterService.updateUsageTrackingData(result, newJob, (error, data) => {
+            if (error) {
+              next({
+                reason: Messages.MSG_ERROR_UPDATING_USAGE_DETAIL,
+                message: Messages.MSG_ERROR_UPDATING_USAGE_DETAIL,
+                stackTrace: new Error(),
+                actualError: err,
+                code: 500
+              });
+            } else {
+              res.status(200).send({
+                'status': Messages.STATUS_SUCCESS,
+                'data': result
+              });
+            }
           });
         }
       });
-    }else {
-      recruiterService.addJob(userId, newJob, (err : any, result : any) => {
+    } else {
+      recruiterService.addJob(userId, newJob, (err: any, result: any) => {
         if (err) {
           next({
             reason: Messages.MSG_ERROR_CREATE_JOB,
@@ -113,15 +124,27 @@ export function postJob(req: express.Request, res: express.Response, next: any) 
             code: 403
           });
         } else {
-          res.status(200).send({
-            'status': Messages.STATUS_SUCCESS,
-            'data': result
+          recruiterService.updateUsageTrackingData(result, newJob, (error, data) => {
+            if (error) {
+              next({
+                reason: Messages.MSG_ERROR_UPDATING_USAGE_DETAIL,
+                message: Messages.MSG_ERROR_UPDATING_USAGE_DETAIL,
+                stackTrace: new Error(),
+                actualError: err,
+                code: 500
+              });
+            } else {
+              res.status(200).send({
+                'status': Messages.STATUS_SUCCESS,
+                'data': result
+              });
+            }
           });
         }
       });
     }
 
-  }catch (e) {
+  } catch (e) {
     next({reason: e.message, message: e.message, stackTrace: new Error(), code: 500});
   }
 }
@@ -146,7 +169,7 @@ export function updateDetails(req: express.Request, res: express.Response, next:
         });
       }
     });
-  }catch (e) {
+  } catch (e) {
     next({reason: e.message, message: e.message, stackTrace: new Error(), code: 500});
   }
 }
@@ -174,24 +197,24 @@ export function getRecruiterDetails(req: express.Request, res: express.Response,
             });
           } else {
             let _details = userDetails[0];
-            delete _details['password'] ;
-            delete _details['isActivated'] ;
-            delete _details['otp'] ;
-            delete _details['isAdmin'] ;
-            delete _details['guide_tour'] ;
+            delete _details['password'];
+            delete _details['isActivated'];
+            delete _details['otp'];
+            delete _details['isAdmin'];
+            delete _details['guide_tour'];
             res.send({
               'status': 'success',
               'data': result[0],
-              'metadata':_details
+              'metadata': _details
             });
           }
 
         });
       }
-   });
+    });
   } catch (e) {
-  next({reason: e.message, message: e.message, stackTrace: new Error(), code: 500});
- }
+    next({reason: e.message, message: e.message, stackTrace: new Error(), code: 500});
+  }
 }
 
 export function retrieve(req: express.Request, res: express.Response, next: any) {
@@ -226,12 +249,12 @@ export function retrieve(req: express.Request, res: express.Response, next: any)
   }
 }
 
-export function getFilterList(req: express.Request, res: express.Response,next:any) {
+export function getFilterList(req: express.Request, res: express.Response, next: any) {
   __dirname = './';
   let filepath = 'recruiter-filter-list.json';
   try {
     res.sendFile(filepath, {root: __dirname});
-  }catch (e) {
+  } catch (e) {
     next({reason: e.message, message: e.message, stackTrace: new Error(), code: 500});
   }
 }
@@ -257,7 +280,7 @@ export function getCompareDetailsOfCandidate(req: express.Request, res: express.
           stackTrace: new Error(),
           code: 401
         });
-      }else {
+      } else {
         res.send({
           'status': 'success',
           'data': result,
@@ -266,7 +289,7 @@ export function getCompareDetailsOfCandidate(req: express.Request, res: express.
       }
     });
 
-  }catch (e) {
+  } catch (e) {
     next({reason: e.message, message: e.message, stackTrace: new Error(), code: 500});
   }
 
@@ -278,10 +301,10 @@ export function getCandidatesByName(req: express.Request, res: express.Response,
     let candidateService = new CandidateService();
     let candidateSearchService = new CandidateSearchService();
     let userName = req.params.searchvalue;
-    let query:any;
-    let searchValueArray:string[] = userName.split(" ");
-    let included : any = {
-      '_id':1
+    let query: any;
+    let searchValueArray: string[] = userName.split(" ");
+    let included: any = {
+      '_id': 1
     };
     if (searchValueArray.length > 1) {
       let exp1 = eval('/^' + searchValueArray[0] + '/i');
@@ -304,7 +327,7 @@ export function getCandidatesByName(req: express.Request, res: express.Response,
         $or: [{'first_name': {$regex: eval(searchString)}}, {'last_name': {$regex: eval(searchString)}}]
       };
     }
-    userService.retrieveWithLimit(query,included, (error:any, result:any) => {
+    userService.retrieveWithLimit(query, included, (error: any, result: any) => {
       if (error) {
         next({
           reason: 'Problem in Search user details',
@@ -312,7 +335,7 @@ export function getCandidatesByName(req: express.Request, res: express.Response,
           stackTrace: new Error(),
           code: 401
         });
-      }else {
+      } else {
         var candidateId: string[] = new Array(0);
         for (let obj of result) {
           candidateId.push(obj._id);
@@ -336,7 +359,7 @@ export function getCandidatesByName(req: express.Request, res: express.Response,
       }
     });
 
-  }catch (e) {
+  } catch (e) {
     next({reason: e.message, message: e.message, stackTrace: new Error(), code: 500});
   }
 
@@ -362,7 +385,7 @@ export function requestToAdvisor(req: express.Request, res: express.Response, ne
         });
       }
     });
-  }catch (e) {
+  } catch (e) {
     next({reason: e.message, message: e.message, stackTrace: new Error(), code: 500});
 
   }
@@ -381,14 +404,14 @@ export function responseToRecruiter(req: express.Request, res: express.Response,
           stackTrace: new Error(),
           code: 403
         });
-      }else {
+      } else {
         res.status(200).send({
           'status': Messages.STATUS_SUCCESS,
           'data': {'message': Messages.MSG_SUCCESS_EMAIL}
         });
       }
     });
-  }catch (e) {
+  } catch (e) {
     next({reason: e.message, message: e.message, stackTrace: new Error(), code: 500});
 
   }

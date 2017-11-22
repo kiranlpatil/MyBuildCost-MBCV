@@ -3,7 +3,7 @@ export class AppSettings {
   // public static IP = 'http://ee802b7f.ngrok.io';
   //public static IP = 'http://10.192.33.77:8080';
   //public static IP = 'http://52.10.145.87:3000';
- // public static IP = 'https://34.215.90.153:3000';
+  // public static IP = 'https://34.215.90.153:3000';
   // public static IP = 'app.jobmosis.com';
   // public static IP = '';
   public static HOST_NAME = 'localhost:8080';
@@ -11,13 +11,13 @@ export class AppSettings {
   public static get API_ENDPOINT(): string {
     return this.IP + '/api/';
   }
+
   public static INITIAL_THEM = 'container-fluid dark-theme';
   public static LIGHT_THEM = 'container-fluid light-theme';
   public static IS_SOCIAL_LOGIN_YES = 'YES';
   public static IS_SOCIAL_LOGIN_NO = 'NO';
   public static HTTP_CLIENT = 'http://';
 }
-
 export enum UsageActions  {
   ADDED_IN_TO_CART_BY_RECRUITER,
   ADDED_IN_TO_REJECT_BY_RECRUITER,
@@ -26,6 +26,7 @@ export enum UsageActions  {
   VIEWED_FULL_PROFILE_BY_RECRUITER,
   VIEWED_VALUE_PORTRAIT_BY_RECRUITER,
   VIEWED_JOB_PROFILE_BY_CANDIDATE,
+  MATCHED_CANDIDATE_AGAINST_ALL_JOB_BY_RECRUITER,
   APPLIED_FOR_JOB_PROFILE_BY_CANDIDATE,
   ADDED_INTO_NOT_INTERESTED,
   REMOVED_FROM_CART_BY_RECRUITER,
@@ -35,6 +36,11 @@ export enum UsageActions  {
   PRINT_COMPARISON_VIEW_BY_RECRUITER,
   PRINT_OVERLAY_VIEW_BY_RECRUITER,
   RENEWED_JOB_POST_BY_RECRUITER,
+  CREATED_NEW_JOB_BY_RECRUIER,
+  POSTED_JOB_BY_RECRUIER,
+  CLONED_JOB_POST_BY_RECRUITER,
+  CLOSED_JOB_POST_BY_RECRUITER,
+  SEARCHED_CANDIDATE_BY_RECRUITER,
   DEFAULT_VALUE = 999
   //append your new enum value at the end of the list DON'T MODIFY THE LIST
 }
@@ -146,7 +152,7 @@ export class Messages {
   public static MSG_ERROR_VALIDATION_COMPLEXITY_REQUIRED_CANDIDATE = 'Answer this question';
   public static MSG_ERROR_VALIDATION_COMPLEXITY_REQUIRED_RECRUITER = 'Do not leave any question blank. If a question is not relevant, select "Not applicable".';
   public static MSG_ERROR_VALIDATION_MAX_SKILLS_CROSSED = 'You can select maximum ';
-  public static MSG_NO_MATCH_FOUND_TEXT ='This skill is not listed in our skills repository but you can still add this skill by pressing Add button on right.';
+  public static MSG_NO_MATCH_FOUND_TEXT = 'This skill is not listed in our skills repository but you can still add this skill by pressing Add button on right.';
   public static MSG_ERROR_VALIDATION_KEYSKILLS_REQUIRED = 'Select a value from drop down.';
   public static MSG_ERROR_VALIDATION_INDUSTRY_EXPOSURE_REQUIRED = 'This field can\'t be left blank.';
   public static MSG_ERROR_VALIDATION_CURRENTSALARY_REQUIRED = 'This field can\'t be left blank.';
@@ -183,9 +189,9 @@ export class Messages {
   public static MSG_ERROR_VALIDATION_PIN_NUMBER = 'Pin code should not be greater than 20 characters.';
   public static SUGGESTION_MSG_FOR_RELEVENT_INDUSTRY = 'Based on the profile you have selected, we suggest to search ' +
     'candidate from following industries for matching profiles.\n Unselect if you don\'t want to search candidates from any specific industry.';
-  public static SUGGESTION_MSG_ABOUT_DOMAIN =  'In addition to<br /> '+ 'this.choosedIndeustry' + ' industry, do you want the ' +
+  public static SUGGESTION_MSG_ABOUT_DOMAIN = 'In addition to<br /> ' + 'this.choosedIndeustry' + ' industry, do you want the ' +
     'candidate to have mandatory experience in any specific Domain? If yes, select such MUST HAVE DOMAINS from below.';
-  public static MSG_ERROR_VALIDATION_MAX_PROFICIENCIES =  ' Key skills. Click the cross sign to deselect existing one and add a new skill.';
+  public static MSG_ERROR_VALIDATION_MAX_PROFICIENCIES = ' Key skills. Click the cross sign to deselect existing one and add a new skill.';
   public static MSG_ERROR_VALIDATION_EMPLOYMENTHISTORY = 'Provide valid employment start and end date';
   public static MSG_ERROR_VALIDATION_TERMS_AND_CONDITIONS_REQUIRED = 'Please accept the terms and conditions.';
 
@@ -209,7 +215,7 @@ export class Messages {
   public static MSG_JOB_POST = 'This job post will now be published. You can see matching candidates for this job in your dashboard view. Proceed?';
   public static MSG_CONFIRM_PASSWORD = ' Passwords do not match.';
   public static MSG_CHANGE_PASSWORD_SUCCESS = 'Password changed successfully. You can Sign In again with new password by clicking on "YES" button, Please' +
-      ' click on "No" button to continue the session.';
+    ' click on "No" button to continue the session.';
   public static MSG_VERIFY_USER_1 = 'You are almost done!';
   public static MSG_VERIFY_USER_2 = 'We need to verify your mobile number before you can start using the system.';
   public static MSG_VERIFY_USER_3 = 'One Time Password(OTP) will be sent on following mobile number.';
@@ -226,7 +232,7 @@ export class Messages {
   public static MSG_MOBILE_VERIFICATION_TITLE = 'Verify Your Mobile Number';
   public static MSG_MOBILE_NUMBER_CHANGE_VERIFICATION_TITLE = 'Verify Your  New Mobile Number';
   public static MSG_MOBILE_VERIFICATION_MESSAGE = 'Please enter the verification code sent to your mobile number.';
-  public static MSG_MOBILE_NUMBER_CHANGE_VERIFICATION_MESSAGE= 'Please enter the verification code sent to your new mobile number.';
+  public static MSG_MOBILE_NUMBER_CHANGE_VERIFICATION_MESSAGE = 'Please enter the verification code sent to your new mobile number.';
   public static MSG_MOBILE_VERIFICATION_SUCCUSS_HEADING = 'Congratulations!';
   public static MSG_MOBILE_VERIFICATION_SUCCUSS_TEXT = 'Registration successful. Kindly Sign In';
   public static CONTACT_US_ADDRESS = 'Blog. No. 14, 1st Floor, Electronic Estate, Parvati, Pune-Satara Road, Pune 411009, MH, INDIA.';
@@ -235,20 +241,20 @@ export class Messages {
   public static CONTACT_US_EMAIL_1 = 'sales@techprimelab.com';
   public static CONTACT_US_EMAIL_2 = 'careers@techprimelab.com';
   public static MSG_EMAIL_VERIFICATION_HEADING = 'Your email is updated successfully.';
-  public static MSG_EMAIL_VERIFICATION_MESSAGE= 'Kindly click on SIGN IN to use JobMosis.';
+  public static MSG_EMAIL_VERIFICATION_MESSAGE = 'Kindly click on SIGN IN to use JobMosis.';
   public static MSG_ACTIVATE_USER_HEADING = 'Congratulations! Welcome To JobMosis.';
   public static MSG_ACTIVATE_USER_SUB_HEADING = 'You can now find candidates using the highly accurate, simpler, faster and powerful solution.';
   public static MSG_ACTIVATE_USER_MESSAGE = 'Your account has been created successfully. Kindly click Sign In.';
-  public static MSG_VERIFICATION_EMAIL= 'Your account has been created successfully. Kindly click Sign In.';
+  public static MSG_VERIFICATION_EMAIL = 'Your account has been created successfully. Kindly click Sign In.';
   public static MSG_COMPANY_DOCUMENTS = 'Please upload relevant company documents to activate your account.';
   public static MSG_UPLOAD_FILE = 'Please select a file to upload.';
   public static MSG_ABOUT_US_DISCRIPTION = 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.' +
     'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s' +
-  'when an unknown printer took a galley of type and scrambled it to make a type specimen book.' +
-  'It has survived not only five centuries, but also the leap into electronic typesetting,remaining essentially ' +
-  'unchanged. ' +
-  'It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,' +
-  'and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.';
+    'when an unknown printer took a galley of type and scrambled it to make a type specimen book.' +
+    'It has survived not only five centuries, but also the leap into electronic typesetting,remaining essentially ' +
+    'unchanged. ' +
+    'It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,' +
+    'and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.';
   public static BROWSER_ALERT_MSG = 'This application is certified on Google chrome browser. Switch to chrome for better experience.';
   public static KEYSKILLS_PLACEHOLDER_DESKTOP = 'E.g. for IT:- Java, C++';
   public static KEYSKILLS_PLACEHOLDER_MOBILE = 'E.g. for IT:- Java, C++';
@@ -257,13 +263,13 @@ export class Messages {
   public static FAQ_MESSAGE = 'Have any questions?';
   public static POST_NEW_JOB_MESSAGE = 'Please click on "Post New Job" to proceed.';
   public static NOTE_OF_TRUST = 'JobMosis believes in building a sustainable ecosystem for candidates and ' +
-      'recruiters that is based on trust and transparency. We strive to reduce the inconvenience caused to all ' +
-      'parties due to false / incorrect information provided in the individual and job profiles. We believe that ' +
-      'individual acts of trust and faith add up to make the world a better place. We appeal to each user to uphold ' +
-      'the sanctity of the JobMosis platform by providing truthful information about their profiles.';
+    'recruiters that is based on trust and transparency. We strive to reduce the inconvenience caused to all ' +
+    'parties due to false / incorrect information provided in the individual and job profiles. We believe that ' +
+    'individual acts of trust and faith add up to make the world a better place. We appeal to each user to uphold ' +
+    'the sanctity of the JobMosis platform by providing truthful information about their profiles.';
   public static GUIDE_MESSAGE_FOR_NEW_VIEWER = 'Thank you for showing interest, ' +
-      'we will need your basic information to create your value portrait on JobMosis. Go ahead, ' +
-      'fill the form and get your value portrait!';
+    'we will need your basic information to create your value portrait on JobMosis. Go ahead, ' +
+    'fill the form and get your value portrait!';
   public static GUIDED_TOUR_COMPATIBILITY_SCORES_MESSAGE = 'The Dashboard shows Job Postings based on Compatibility Scores.';
   public static GUIDED_TOUR_MATCHING_EXPERTISE_MESSAGE = 'Click on a job and see its degree of matching to your expertise.' +
     '<br/> Using that, helps you understand the profile better.';
@@ -274,48 +280,48 @@ export class Messages {
     '<br /><br /> The professional parameters will help you sort/filter through jobs.';
   public static GUIDED_TOUR_MISMATCHES_COMPATIBILITY_MESSAGE = 'This view shows you the precise degree of matches and ' +
     '<br/> mismatches between the capabilities and job expectations.';
-  public static GUIDED_TOUR_JOB_PROFILE_SCENARIO_HELP_MESSAGE ='Each tile within a tower represents a scenario and how you' +
+  public static GUIDED_TOUR_JOB_PROFILE_SCENARIO_HELP_MESSAGE = 'Each tile within a tower represents a scenario and how you' +
     '<br/> compare against it as specified in the job profile';
-  public static GUIDED_TOUR_MATCHING_KEY_SKILLS_MESSAGE ='Shows matching of your key-skills with that required for the job';
-  public static GUIDED_TOUR_WELCOME_MESSAGE ='<h1> Welcome to JobMosis!</h1>' +
+  public static GUIDED_TOUR_MATCHING_KEY_SKILLS_MESSAGE = 'Shows matching of your key-skills with that required for the job';
+  public static GUIDED_TOUR_WELCOME_MESSAGE = '<h1> Welcome to JobMosis!</h1>' +
     '<p> You are taking your first step to<br>Add Job to Life! </p>' +
     '<p>Let\'s start by capturing your basic profile details and the industry in which you work.</p>';
-  public static GUIDED_TOUR_DESCRIBE_CAPABILITIES_MESSAGE ='Select the different Capabilities that describe your Current Strength.' +
+  public static GUIDED_TOUR_DESCRIBE_CAPABILITIES_MESSAGE = 'Select the different Capabilities that describe your Current Strength.' +
     '<br/>These Capabilities would define you in the best' +
     '<br/> way and align you with the best suitable job.';
-  public static GUIDED_TOUR_SELECTED_CAPABILITY_MESSAGE ='You can select maximum 10 Capabilities. To select a new ' +
+  public static GUIDED_TOUR_SELECTED_CAPABILITY_MESSAGE = 'You can select maximum 10 Capabilities. To select a new ' +
     '<br/> Capability, deselect any of the earlier selected Capability.';
-  public static GUIDED_TOUR_CAPABILITY_NOTE_MESSAGE ='<span>Note:</span> If there are Capabilities that you have ' +
+  public static GUIDED_TOUR_CAPABILITY_NOTE_MESSAGE = '<span>Note:</span> If there are Capabilities that you have ' +
     'developed in past but are no longer relevent, you should not select such Capabilities as this would dilute the ' +
     'matching and alignment with the best job Opportunity.';
-  public static GUIDED_TOUR_COMPLEXITY_SCENARIOS_MESSAGE ='This section provides a list of Complexity Scenarios for' +
+  public static GUIDED_TOUR_COMPLEXITY_SCENARIOS_MESSAGE = 'This section provides a list of Complexity Scenarios for' +
     ' your selected Capabilities';
-    public static GUIDED_TOUR_COMPLEXITY_RIGHT_FIT_MESSAGE ='This section has questions designed by industry ' +
-        'stalwarts and experts by investing more than <b>10,000</b> person hours with a view to help the candidates and ' +
-        'recruiters get the 100% right fit.';
-  public static GUIDED_TOUR_COMPLEXITY_SCENARIO_NOTE_MESSAGE ='<span>Note:</span> If a scenario was applicable to you in past but ' +
+  public static GUIDED_TOUR_COMPLEXITY_RIGHT_FIT_MESSAGE = 'This section has questions designed by industry ' +
+    'stalwarts and experts by investing more than <b>10,000</b> person hours with a view to help the candidates and ' +
+    'recruiters get the 100% right fit.';
+  public static GUIDED_TOUR_COMPLEXITY_SCENARIO_NOTE_MESSAGE = '<span>Note:</span> If a scenario was applicable to you in past but ' +
     'is no more relevant to you, avoid choosing such scenarios. In such cases, choose' +
     ' "Not Applicable".';
-  public static GUIDED_TOUR_KEY_SKILLS_NOTE_MESSAGE ='<span>Note:</span> Selecting too many Key Skills dilutes the' +
+  public static GUIDED_TOUR_KEY_SKILLS_NOTE_MESSAGE = '<span>Note:</span> Selecting too many Key Skills dilutes the' +
     ' matching and alignment with the best Job Opportunity.';
-  public static GUIDED_TOUR_DESCRIBE_YOUR_WORK_MESSAGE ='Select Key Skills, maximum 25.<br clear="all"/>' +
+  public static GUIDED_TOUR_DESCRIBE_YOUR_WORK_MESSAGE = 'Select Key Skills, maximum 25.<br clear="all"/>' +
     '<br clear="all"/>' +
     'Enter all key words that describe your area of expertise or specialization.<br />' +
     'Ensure that you cover all relevant aspects of Technologies, Products, <br /> Methodologies, Models, Processes, ' +
     'Tools, Domain expertise and any <br />' +
     'additional keywords that describe your work.';
-  public static GUIDED_TOUR_ABOUT_MYSELF_MESSAGE ='In next 4 subsections, tell us more about your Educational and ' +
+  public static GUIDED_TOUR_ABOUT_MYSELF_MESSAGE = 'In next 4 subsections, tell us more about your Educational and ' +
     '<br/> Professional milestones, Certifications and Awards.';
-  public static GUIDED_TOUR_ABOUT_MYSELF_NOTE_MESSAGE ='<span>Note:</span> You can add multiple number of companies, ' +
+  public static GUIDED_TOUR_ABOUT_MYSELF_NOTE_MESSAGE = '<span>Note:</span> You can add multiple number of companies, ' +
     'qualifications, certifications and awards';
-  public static GUIDED_TOUR_PROFILE_SUBMISSION_MESSAGE ='Now you have reached the final step of Profile Submission.' +
+  public static GUIDED_TOUR_PROFILE_SUBMISSION_MESSAGE = 'Now you have reached the final step of Profile Submission.' +
     '<br/><br/> Here you will select your Profile Visibility for the Recruiter.<br/><br/>' +
     'On selecting "Yes", your profile will be available for Recruiter.<br/> ' +
     'On selecting "No", your profile will not be visible to any Recruiter.';
-  public static GUIDED_TOUR_PROFILE_SUBMISSION_NOTE_MESSAGE ='<span>Note:</span> If you wish to edit your profile before ' +
+  public static GUIDED_TOUR_PROFILE_SUBMISSION_NOTE_MESSAGE = '<span>Note:</span> If you wish to edit your profile before ' +
     'submitting, you can edit by clicking on relevant section ' +
     '<br/> It is recommended that you keep the settings to "Yes". If you wish a job change, You can <br/>' +
-  'change this setting later.';
+    'change this setting later.';
   public static GUIDED_TOUR_VALUE_PORTRAIT_MWSSAGE = 'You can share your value portrait on Social Media.';
   public static GUIDED_TOUR_VALUE_PORTRAIT_GO_TO_DASHBOARD = 'Proceed to Job Matching Dashboard.';
 
@@ -324,13 +330,13 @@ export class Messages {
 
   public static NO_CANDIDATES_AVAILABLE = 'No candidates available for selected alphabet.';
   public static NO_RECRUITERS_AVAILABLE = 'No recruiters available for selected alphabet.';
-  public static OTHERS_AOW_MESSAGE = 'Thank you for your interest in our Job post but currently we do not have your Area of Work, we will get back to you after building your Area of Work. For any query mail us on '+Messages.FAQ_CONTACT_EMAIL +' or contact us on '+ Messages.FAQ_CONTACT_NUMBER+'.';
+  public static OTHERS_AOW_MESSAGE = 'Thank you for your interest in our Job post but currently we do not have your Area of Work, we will get back to you after building your Area of Work. For any query mail us on ' + Messages.FAQ_CONTACT_EMAIL + ' or contact us on ' + Messages.FAQ_CONTACT_NUMBER + '.';
   public static SELECT_REASON_FOR_JOB_CLOSE = 'Please select a reason.';
   public static ASK_EXPERT_MESSAGE = 'You can copy and share this link to hiring manager to independently define the job description.\n' +
-      'On completion by hiring manager you will receive an email.';
+    'On completion by hiring manager you will receive an email.';
 
   public static CLICK_BELOW_FOR_PREVIEW_MSG = 'Your Value Portrait is getting ready<br/>' +
-  'Click below to Preview';
+    'Click below to Preview';
   public static PLEASE_COMPLETE_THE_PROFILE_MSG = 'Please complete the profile before sharing';
   public static JOBS_AVALLABLE_MESSAGE = 'Jobs are available in your industry.';
   public static NOT_FOUND_INFORMATION = 'The page you are looking for doesn\'t exist<br/>' +
@@ -345,8 +351,8 @@ export class Messages {
 
 }
 export class AdminPanel {
-  public static PUBLIC_PROFILE='Profile is public';
-  public static PRIVATE_PROFILE='Profile is private';
+  public static PUBLIC_PROFILE = 'Profile is public';
+  public static PRIVATE_PROFILE = 'Profile is private';
 }
 
 export class NavigationRoutes {
@@ -424,8 +430,8 @@ export class ValueConstant {
   public static BLOCKED_CANDIDATE: string = 'blocked';
   public static MATCHED_CANDIDATE: string = 'matchedList';
   public static VALUE_FOR_CANDIDATES_PERCENT_MATCHING_LOWER_BOUND = 10;
-  public static JOB__EXPIRIY_PERIOD= 2592000000;
-  public static MILESTONES_FOR_POPUP: number[]= [0.25, 0.50, 0.75];
+  public static JOB__EXPIRIY_PERIOD = 2592000000;
+  public static MILESTONES_FOR_POPUP: number[] = [0.25, 0.50, 0.75];
 }
 
 
@@ -543,21 +549,21 @@ export class ImagePath {
 
   //guided tour images for desktop
   public static BASE_ASSETS_PATH_DESKTOP = './assets/c-next/guided-tour/tour-for-desktop/';
-  public static CANDIDATE_OERLAY_SCREENS_CAPABILITIES ='candidate_overlay-screens-capabilities.jpg';
-  public static CANDIDATE_OERLAY_SCREENS_COMPLEXITIES='candidate_overlay-screens-complexities.jpg';
-  public static CANDIDATE_OERLAY_SCREENS_DASHBOARD='candidate_overlay-screens-dashboard.jpg';
-  public static CANDIDATE_OERLAY_SCREENS_EMPLOYMENT_HISTORY='candidate_overlay-screens-emloyment-history.jpg';
-  public static CANDIDATE_OERLAY_SCREENS_KEY_SKILLS='candidate_overlay-screens-key-skills.jpg';
-  public static CANDIDATE_OERLAY_SCREENS_PROFILE='candidate_overlay-screens-profile.jpg';
+  public static CANDIDATE_OERLAY_SCREENS_CAPABILITIES = 'candidate_overlay-screens-capabilities.jpg';
+  public static CANDIDATE_OERLAY_SCREENS_COMPLEXITIES = 'candidate_overlay-screens-complexities.jpg';
+  public static CANDIDATE_OERLAY_SCREENS_DASHBOARD = 'candidate_overlay-screens-dashboard.jpg';
+  public static CANDIDATE_OERLAY_SCREENS_EMPLOYMENT_HISTORY = 'candidate_overlay-screens-emloyment-history.jpg';
+  public static CANDIDATE_OERLAY_SCREENS_KEY_SKILLS = 'candidate_overlay-screens-key-skills.jpg';
+  public static CANDIDATE_OERLAY_SCREENS_PROFILE = 'candidate_overlay-screens-profile.jpg';
   public static CANDIDATE_OVERLAY_SCREENS_BASIC_INFO = 'candidate_overlay-screens-basic-info.jpg';
-  public static CANDIDATE_OERLAY_SCREENS_STACK_VIEW='candidate_overlay-screens-stack-view.jpg';
-  public static CANDIDATE_VALUE_PORTRAIT_VIEW='candidate_value_portrait_view.jpg';
+  public static CANDIDATE_OERLAY_SCREENS_STACK_VIEW = 'candidate_overlay-screens-stack-view.jpg';
+  public static CANDIDATE_VALUE_PORTRAIT_VIEW = 'candidate_value_portrait_view.jpg';
 
 
 }
 
 export class ProjectAsset {
-  static _year:Date = new Date();
+  static _year: Date = new Date();
   static currentYear = ProjectAsset._year.getFullYear();
   public static APP_NAME = 'JobMosis';
   public static TAG_LINE = 'The Awesome Web Experience';
@@ -585,21 +591,21 @@ export class Tooltip {
     'If you are on the lookout of job change, it is recommended to keep this setting to "Yes". You can change this settings at anytime.';
   public static PROFILE_INFO_VISIBILIT_SET_TO_YES: string = 'If "Yes", your profile will be available in employer search. You can change this settings at anytime.';
   public static CANDIDATE_CAPABILITY_TOOLTIP_1: string = 'Select those capabilities that describe your current ' +
-      'strength. These capabilities would define you in the eyes of the recruiter and help you align with the best ' +
-      'suitable job.';
+    'strength. These capabilities would define you in the eyes of the recruiter and help you align with the best ' +
+    'suitable job.';
   public static CANDIDATE_CAPABILITY_TOOLTIP_2: string = 'If there are capabilities that you have developed in past ' +
-      'but are no more relevent, you should not select such capabilites as this would dilute the matching ' +
-      'and alignment with the best job opportunity.';
+    'but are no more relevent, you should not select such capabilites as this would dilute the matching ' +
+    'and alignment with the best job opportunity.';
   public static RECRUITER_CAPABILITY_TOOLTIP: string = 'These capabilities would form the core of the job profile. ' +
-      'In next section, you would get to define these capabilities in detail.';
+    'In next section, you would get to define these capabilities in detail.';
   public static CERTIFICATE_TOOLTIP: string = 'Please provide Certification/Accreditation details.';
   public static COMPETENCIES_AND_RESPONSIBILITIES_TOOLTIP_1: string = 'Additional Information';
   public static COMPETENCIES_AND_RESPONSIBILITIES_TOOLTIP_2: string = 'You can use this field to describe specific ' +
-      'aspects of the job profile that will help the candidate to understand your expectations better.';
+    'aspects of the job profile that will help the candidate to understand your expectations better.';
   public static COMPLEXITIES_CANDIDATE_TOOLTIP_1: string = 'This section provides a list of complexity scenarios for your selected capabilities.' +
     ' If more than one options are applicable to you, choose the option where you can demonstrate a higher level of expertise.';
   public static COMPLEXITIES_CANDIDATE_TOOLTIP_2: string = 'If a scenario was applicable to you in past but is no ' +
-      'more relevant to you, avoid choosing such scenarios.In such cases, choose "Not Applicable".';
+    'more relevant to you, avoid choosing such scenarios.In such cases, choose "Not Applicable".';
   public static COMPLEXITIES_RECRUITER_TOOLTIP_1: string = 'This section provides a list of complexity scenarios for selected capabilities.' +
     'For each scenario, select the most appropriate level that candidate is required to handle.';
   public static COMPLEXITIES_RECRUITER_TOOLTIP_2: string = 'For scenarios that are not relevant to your job profile, choose "Not Applicable".';
@@ -610,13 +616,13 @@ export class Tooltip {
   public static INDUSTRY_EXPERIENCE_CANDIDATE_TOOLTIP_2: string = 'Select such industries where you can claim a reasonable exposure.';
   public static INDUSTRY_EXPERIENCE_RECRUITER_TOOLTIP: string = 'If you wish the candidate to have exposure to any industry besides his core industry, please select such additional industries.';
   public static INDUSTRY_LIST_TOOLTIP_1: string = 'Enter the industry from which you wish to hire the candidate. ' +
-      'This Industry forms the core of your Job Profile posting. In next sections, you shall be shown questions and ' +
-      'parameters that are relevant to this Industry.';
+    'This Industry forms the core of your Job Profile posting. In next sections, you shall be shown questions and ' +
+    'parameters that are relevant to this Industry.';
   public static INDUSTRY_LIST_TOOLTIP_2: string = 'If you wish the candidate to have worked in multiple Industries, ' +
-      'choose the one that is most relevent as on date. You shall get option to include additional industries ' +
-      'in Relevant Industry section.';
+    'choose the one that is most relevent as on date. You shall get option to include additional industries ' +
+    'in Relevant Industry section.';
   public static JOB_PROFICIENCIES_TOOLTIP_1: string = 'Enter keywords for specialization in Technologies, ' +
-      'Products, Tools, Domains etc. E.g Java, Oracle, SAP, Cognos, AWS, Agile, DevOps, CMM, Telecom Billing, Retail Banking etc.';
+    'Products, Tools, Domains etc. E.g Java, Oracle, SAP, Cognos, AWS, Agile, DevOps, CMM, Telecom Billing, Retail Banking etc.';
   public static JOB_PROFICIENCIES_TOOLTIP_2: string = 'Use the Top 5 "Must Have" keywords to describe the mandatory skills. You can provide additional 5 keywords that are "Nice to Have".';
   public static MORE_ABOUT_MYSELF_TOOLTIP: string = 'Please mention additional details about your personal and professional journey that would help the recruiter to know you better.';
   public static PROFESSIONAL_DATA_TOOLTIP_1: string = 'Please mention your current salary (CTC).';
@@ -639,9 +645,9 @@ export class Tooltip {
   public static SAVE_ROLES_MESSAGE: string = 'Saving role details. Once saved, you cannot change it for 3 months.';
   public static AREA_OF_WORK_TOOLTIP_1: string = 'Select those areas of work that best describe your current focus.';
   public static AREA_OF_WORK_TOOLTIP_2: string = 'If there are areas that you have worked in past but are no more ' +
-      'relevent, you should not select such areas as they may fetch jobs that are no more relevant to you.';
+    'relevent, you should not select such areas as they may fetch jobs that are no more relevant to you.';
   public static RECRUITER_AREA_OF_WORK_TOOLTIP: string = 'Select those areas in which the candidate is expected ' +
-      'to work. You can select maximum 3 areas of work for a job profile in order to make your search more relevant.';
+    'to work. You can select maximum 3 areas of work for a job profile in order to make your search more relevant.';
   public static EMPTY_LIST_MESSAGE: string = 'Currently there are no candidates matching to your job posting.' +
     'This is because the currently available candidates possess different set of capabilities than' +
     'what your job expects. This dashboard shows candidates that have best matches with your desired' +
@@ -653,8 +659,8 @@ export class Tooltip {
   public static CAPABILITY_COMPARE_BELOW_MATCH: string = 'Candidate capabilities slightly less than desired';
   public static CAPABILITY_COMPARE_MISSING_MATCH: string = 'Large mismatch of capabilities';
   public static COMPANY_DETAILS_TOOLTIP: string = 'Company Details Message';
-    public static MUST_TO_HAVE_TOOLTIP: string = 'Mark this complexity as "must have" for candidate to fulfill your job.';
-    public static MUST_TO_HAVE_CAPABILITY_COMPARE_MESSAGE: string = 'This is a capability that a candidate must have to perform this job.';
+  public static MUST_TO_HAVE_TOOLTIP: string = 'Mark this complexity as "must have" for candidate to fulfill your job.';
+  public static MUST_TO_HAVE_CAPABILITY_COMPARE_MESSAGE: string = 'This is a capability that a candidate must have to perform this job.';
 }
 
 export class Headings {

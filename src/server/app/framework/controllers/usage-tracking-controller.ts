@@ -1,7 +1,7 @@
 import express= require('express');
 import Messages = require('../shared/messages');
-import UsageTracking = require('../services/usage-tracking.service');
-import UsageTrackingModel = require("../dataaccess/mongoose/usage-tracking.interface");
+import UsageTrackingService = require('../services/usage-tracking.service');
+import {UsageTracking} from "../dataaccess/model/usage-tracking.model";
 
 export class UsageTrackingController {
 
@@ -10,8 +10,8 @@ export class UsageTrackingController {
 
   create(req: express.Request, res: express.Response, next: any) {
     try {
-      let usageTrackingService = new UsageTracking();
-      let usageTrackingModel: UsageTrackingModel = req.body.data;
+      let usageTrackingService = new UsageTrackingService();
+      let usageTrackingModel: UsageTracking = req.body.usageTrackingData;
       usageTrackingModel.timestamp = new Date();
       console.log("usageData: " + JSON.stringify(usageTrackingModel));
       usageTrackingService.create(usageTrackingModel, (error, result) => {

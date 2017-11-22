@@ -11,6 +11,7 @@ import {UsageTrackingService} from "../../usage-tracking.service";
 import {ErrorService} from "../../../../shared/services/error.service";
 import {SearchEvent} from "../../model/search-event";
 import {SearchEventCompare} from "../../model/search-event-compare";
+import {UsageTracking} from "../../model/usage-tracking";
 
 
 @Component({
@@ -25,16 +26,16 @@ export class CandidateQCardComponent implements OnInit {
   @Output() onAction = new EventEmitter();
   @Output() searchViewAction = new EventEmitter();
   @Output() jobComapare = new EventEmitter();
-  @Input() progress_bar_color : string='#0d75fa';
-  @Input() candidateIDFromSearchView:string;
+  @Input() progress_bar_color: string = '#0d75fa';
+  @Input() candidateIDFromSearchView: string;
   candidateId: string;
   private showModalStyle: boolean = false;
   hideButton: boolean = true;
 
-  inCartListedStatusForSearchView:boolean = false;
-  inRejectListedStatusForSearchView:boolean = false;
-  inShortListedStatusForSearchView:boolean = false;
-  inAppliedListedStatusForSearchView:boolean = false;
+  inCartListedStatusForSearchView: boolean = false;
+  inRejectListedStatusForSearchView: boolean = false;
+  inShortListedStatusForSearchView: boolean = false;
+  inAppliedListedStatusForSearchView: boolean = false;
 
   jobId: string;
   @ViewChild(JobCompareViewComponent) checkForGuidedTour: JobCompareViewComponent;
@@ -42,7 +43,7 @@ export class CandidateQCardComponent implements OnInit {
   constructor(private candidateDashboardService: CandidateDashboardService,
               private messageService: MessageService,
               private usageTrackingService: UsageTrackingService,
-              private errorService:ErrorService) {
+              private errorService: ErrorService) {
   }
 
   ngOnChanges(changes: any) {
@@ -64,30 +65,32 @@ export class CandidateQCardComponent implements OnInit {
   }
 
   viewJob(job: JobQcard) {
+    let usageTrackingData: UsageTracking = new UsageTracking();
     if (this.type !== 'searchView') {
-      this.usageTrackingService.addUsesTrackingData(UsageActions.VIEWED_JOB_PROFILE_BY_CANDIDATE,
-        undefined, this.jobId,LocalStorageService.getLocalValue(LocalStorage.END_USER_ID) ).subscribe(
-        data  => {
-          console.log(''+data);
-        }, error => this.errorService.onError(error));
-        this.checkForGuidedTour.isGuidedTourImgRequire();
-        LocalStorageService.setLocalValue(LocalStorage.CURRENT_JOB_POSTED_ID, job._id);
-        this.jobId = job._id;
-        this.candidateId = LocalStorageService.getLocalValue(LocalStorage.END_USER_ID);
+      usageTrackingData.recruiterId = LocalStorageService.getLocalValue(LocalStorage.END_USER_ID);
+      usageTrackingData.action = UsageActions.VIEWED_JOB_PROFILE_BY_CANDIDATE;
+      usageTrackingData.jobProfileId = this.jobId;
+      this.checkForGuidedTour.isGuidedTourImgRequire();
+      LocalStorageService.setLocalValue(LocalStorage.CURRENT_JOB_POSTED_ID, job._id);
+      this.jobId = job._id;
+      this.candidateId = LocalStorageService.getLocalValue(LocalStorage.END_USER_ID);
       this.showModalStyle = !this.showModalStyle;
     }
     if (this.type == 'searchView') {
-      this.usageTrackingService.addUsesTrackingData(UsageActions.VIEWED_JOB_PROFILE_BY_CANDIDATE,
-        LocalStorageService.getLocalValue(LocalStorage.END_USER_ID), this.jobId,this.candidateIDFromSearchView ).subscribe(
-        data  => {
-          console.log(''+data);
-        }, error => this.errorService.onError(error));
-      let searchEventCompare:SearchEventCompare = new SearchEventCompare();
+      usageTrackingData.recruiterId = LocalStorageService.getLocalValue(LocalStorage.END_USER_ID);
+      usageTrackingData.action = UsageActions.VIEWED_JOB_PROFILE_BY_CANDIDATE;
+      usageTrackingData.jobProfileId = this.jobId;
+      usageTrackingData.candidateId = this.candidateIDFromSearchView;
+      let searchEventCompare: SearchEventCompare = new SearchEventCompare();
       searchEventCompare.job = job;
       searchEventCompare.inCartStatus = this.inCartListedStatusForSearchView;
       searchEventCompare.inRejectedStatus = this.inRejectListedStatusForSearchView;
       this.jobComapare.emit(searchEventCompare);
     }
+    this.usageTrackingService.addUsesTrackingData(usageTrackingData).subscribe(
+      data => {
+        console.log('' + data);
+      }, error => this.errorService.onError(error));
   }
 
 
@@ -121,18 +124,24 @@ export class CandidateQCardComponent implements OnInit {
   displayMsg(condition: string) {
     var message = new Message();
     message.isError = false;
-    if(condition==='APPLY') {message.custom_message = 'You have applied for a job as '+this.job.jobTitle+' at '+this.job.company_name;}
-    if(condition==='REJECT') {message.custom_message = 'Your matching job as '+this.job.jobTitle+' at '+this.job.company_name+' is marked as Not interested.';}
-    if(condition==='DELETE') {message.custom_message = 'Job marked as not interested is moved back to matching section. ';}
+    if (condition === 'APPLY') {
+      message.custom_message = 'You have applied for a job as ' + this.job.jobTitle + ' at ' + this.job.company_name;
+    }
+    if (condition === 'REJECT') {
+      message.custom_message = 'Your matching job as ' + this.job.jobTitle + ' at ' + this.job.company_name + ' is marked as Not interested.';
+    }
+    if (condition === 'DELETE') {
+      message.custom_message = 'Job marked as not interested is moved back to matching section. ';
+    }
     this.messageService.message(message);
   }
 
-  closeJob(isHide : boolean) {
+  closeJob(isHide: boolean) {
     this.showModalStyle = !this.showModalStyle;
   }
 
   deleteItem(jobId: string) {
-    this.showModalStyle=true;
+    this.showModalStyle = true;
     LocalStorageService.setLocalValue(LocalStorage.CURRENT_JOB_POSTED_ID, jobId);
     this.candidateDashboardService.removeBlockJob().subscribe(
       data => {
@@ -148,8 +157,8 @@ export class CandidateQCardComponent implements OnInit {
     return null;
   }
 
-  actionForSearchView(value:string, job:JobQcard) {
-    let searchEvent:SearchEvent = new SearchEvent();
+  actionForSearchView(value: string, job: JobQcard) {
+    let searchEvent: SearchEvent = new SearchEvent();
     searchEvent.actionName = value;
     searchEvent.job = job;
     this.searchViewAction.emit(searchEvent);
@@ -159,7 +168,7 @@ export class CandidateQCardComponent implements OnInit {
     this.calculateQCardStatus(this.candidateIDFromSearchView, this.job.candidate_list);
   }
 
-  calculateQCardStatus(candidateIDFromSearchView:string, candidate_list:CandidateList[]) {
+  calculateQCardStatus(candidateIDFromSearchView: string, candidate_list: CandidateList[]) {
 
     for (let item of candidate_list) {
       switch (item.name) {
@@ -227,11 +236,13 @@ export class CandidateQCardComponent implements OnInit {
     };
     return classes;
   }
-  onCompanyWebsiteClick(websiteLink:string) {debugger
-    if(websiteLink.indexOf('http')===0 ||websiteLink.indexOf('https')===0) {
-      let host= websiteLink;
+
+  onCompanyWebsiteClick(websiteLink: string) {
+    debugger
+    if (websiteLink.indexOf('http') === 0 || websiteLink.indexOf('https') === 0) {
+      let host = websiteLink;
       window.open(host, '_blank');
-    } else if( websiteLink!==undefined && websiteLink!=='') {
+    } else if (websiteLink !== undefined && websiteLink !== '') {
       let host = AppSettings.HTTP_CLIENT + websiteLink;
       window.open(host, '_blank');
     }

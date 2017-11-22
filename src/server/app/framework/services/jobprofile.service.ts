@@ -1,6 +1,7 @@
-import * as mongoose from 'mongoose';
-import { Actions, ConstVariables } from '../shared/sharedconstants';
-import { SharedService } from '../shared/services/shared-service';
+import * as mongoose from "mongoose";
+import {Actions, ConstVariables} from "../shared/sharedconstants";
+import {SharedService} from "../shared/services/shared-service";
+import {UsageTracking} from "../dataaccess/model/usage-tracking.model";
 import ProjectAsset = require('../shared/projectasset');
 import RecruiterRepository = require('../dataaccess/repository/recruiter.repository');
 import JobProfileRepository = require('../dataaccess/repository/job-profile.repository');
@@ -11,7 +12,6 @@ import IndustryModel = require('../dataaccess/model/industry.model');
 import IndustryRepository = require('../dataaccess/repository/industry.repository');
 import CandidateService = require('./candidate.service');
 import IJobProfile = require('../dataaccess/mongoose/job-profile');
-//let usestracking = require('uses-tracking');
 import UsageTrackingService = require('./usage-tracking.service');
 
 
@@ -22,7 +22,6 @@ class JobProfileService {
   private recruiterRepository: RecruiterRepository;
   private candidateRepository: CandidateRepository;
   private APP_NAME: string;
-  private usageTrackingService: UsageTrackingService;
 
   constructor() {
     this.jobProfileRepository = new JobProfileRepository();
@@ -31,11 +30,10 @@ class JobProfileService {
     this.industryRepository = new IndustryRepository();
     this.candidateRepository = new CandidateRepository();
     this.APP_NAME = ProjectAsset.APP_NAME;
-    this.usageTrackingService = new UsageTrackingService();
   }
 
   create(item: any, callback: (error: any, result: IJobProfile) => void) {
-    this.jobProfileRepository.create(item, (err, res : IJobProfile) => {
+    this.jobProfileRepository.create(item, (err, res: IJobProfile) => {
       if (err) {
         callback(new Error(err), null);
       } else {
@@ -55,13 +53,13 @@ class JobProfileService {
     });
   }
 
-  retrieve(data: any, callback: (error: any, result: IJobProfile ) => void) {
-    this.jobProfileRepository.retrieve(data, (err, res : IJobProfile) => {
+  retrieve(data: any, callback: (error: any, result: IJobProfile) => void) {
+    this.jobProfileRepository.retrieve(data, (err, res: IJobProfile) => {
       if (err) {
         callback(new Error('Not Found Any Job posted'), null);
         return;
       } else {
-        callback(null,res);
+        callback(null, res);
       }
     });
   }
@@ -76,19 +74,19 @@ class JobProfileService {
     });
   };
 
-  retrieveByJobId(id: any, callback: (error: any, result: IJobProfile ) => void) {
-    this.jobProfileRepository.findById(id, (err: any, res : any) => {
+  retrieveByJobId(id: any, callback: (error: any, result: IJobProfile) => void) {
+    this.jobProfileRepository.findById(id, (err: any, res: any) => {
       if (err) {
         callback(new Error('Not Found Any Job posted'), null);
         return;
       } else {
-        callback(null,res);
+        callback(null, res);
       }
     });
   }
 
 
-  getCapabilityValueKeyMatrix(_id: string,  callback: (error: any, result: any) => void) {
+  getCapabilityValueKeyMatrix(_id: string, callback: (error: any, result: any) => void) {
     this.retrieveByJobId(_id, (err: any, res: IJobProfile) => {
       if (err) {
         callback(err, null);
@@ -98,7 +96,7 @@ class JobProfileService {
             callback(err, res);
           } else {
             let candidateService: any = new CandidateService();
-            let new_capability_matrix: any =  candidateService.getCapabilityValueKeyMatrixBuild(res.capability_matrix,
+            let new_capability_matrix: any = candidateService.getCapabilityValueKeyMatrixBuild(res.capability_matrix,
               industries, res.complexity_musthave_matrix);
             callback(null, new_capability_matrix);
           }
@@ -124,80 +122,81 @@ class JobProfileService {
       'new': true, 'upsert': true
     };
 
-    this.jobProfileRepository.findById(item.profileId, (err, job : any) => {
+    this.jobProfileRepository.findById(item.profileId, (err, job: any) => {
       if (err) {
         callback(new Error('Not Found Any Job posted'), null);
       } else {
         if (job) {
-              for (let list of job.candidate_list) {
-                if (list.name === item.listName) {
-                  updateFlag = true;
-                  if (item.action === 'add') {
-                    let uses_data = {
-                      recruiterId: item.recruiterId,
-                      candidateId: item.candidateId,
-                      jobProfileId: job._id,
-                      timestamp: new Date(),
-                      action: Actions.DEFAULT_VALUE
-                    };
-                    let sharedService:SharedService = new SharedService();
-                    uses_data.action = sharedService.constructAddActionData(item.listName);
-                    //this.usesTrackingController.create(uses_data);
+          for (let list of job.candidate_list) {
+            if (list.name === item.listName) {
+              updateFlag = true;
+              let uses_data: UsageTracking = new UsageTracking();
+              if (item.action === 'add') {
+                uses_data.recruiterId = item.recruiterId;
+                uses_data.candidateId = item.candidateId;
+                uses_data.jobProfileId = job._id;
+                let sharedService: SharedService = new SharedService();
+                uses_data.action = sharedService.constructAddActionData(item.listName);
 
-                    if (list.name === ConstVariables.REJECTED_LISTED_CANDIDATE) {
-                      for (let _list of job.candidate_list) {
-                        if (_list.name === ConstVariables.CART_LISTED_CANDIDATE) {
-                          let index = _list.ids.indexOf(item.candidateId);    // <-- Not supported in <IE9
-                          if (index !== -1) {
-                            _list.ids.splice(index, 1);
-                          }
-                        }
+                if (list.name === ConstVariables.REJECTED_LISTED_CANDIDATE) {
+                  for (let _list of job.candidate_list) {
+                    if (_list.name === ConstVariables.CART_LISTED_CANDIDATE) {
+                      let index = _list.ids.indexOf(item.candidateId);    // <-- Not supported in <IE9
+                      if (index !== -1) {
+                        _list.ids.splice(index, 1);
                       }
                     }
-                    if (list.ids.indexOf(item.candidateId) === -1) {
-                      list.ids.push(item.candidateId);
-                    }
-                  } else {
-                    let uses_data = {
-                      candidateId: item.candidateId,
-                      jobProfileId: job._id,
-                      timestamp: new Date(),
-                      action: Actions.DEFAULT_VALUE
-                    };
-                    let sharedService: SharedService = new SharedService();
-                    uses_data.action = sharedService.constructRemoveActionData(item.listName);
-                    //this.usesTrackingController.create(uses_data);
-                    let index = list.ids.indexOf(item.candidateId);    // <-- Not supported in <IE9
-                    if (index !== -1) {
-                      list.ids.splice(index, 1);
-                    }
                   }
-                  updatedQuery3 = {
-                    $set: {
-                      'candidate_list': job.candidate_list
-                    }
-                  };
-                  break;
+                }
+                if (list.ids.indexOf(item.candidateId) === -1) {
+                  list.ids.push(item.candidateId);
+                }
+              } else {
+                uses_data.recruiterId = item.recruiterId;
+                uses_data.candidateId = item.candidateId;
+                uses_data.jobProfileId = job._id;
+
+                let sharedService: SharedService = new SharedService();
+                uses_data.action = sharedService.constructRemoveActionData(item.listName);
+                let index = list.ids.indexOf(item.candidateId);    // <-- Not supported in <IE9
+                if (index !== -1) {
+                  list.ids.splice(index, 1);
                 }
               }
-
-              let param2: any;
-              updateFlag ? param2 = updatedQuery3 : param2 = updatedQuery2;
-
-              this.jobProfileRepository.findOneAndUpdate({'_id':mongoose.Types.ObjectId(item.profileId)},
-                param2, updatedQuery4, (err, record) => {
-                if (record) {
-                  callback(null, record);
-                } else {
-                  let error: any;
-                  if (record === null) {
-                    error = new Error('Unable to add candidate.');
-                    callback(error, null);
-                  }else {
-                    callback(err, null);
-                  }
+              uses_data.timestamp = new Date();
+              let usageTrackingService = new UsageTrackingService();
+              usageTrackingService.create(uses_data, (err, result) => {
+                if (err) {
+                  callback(err, null);
                 }
               });
+
+              updatedQuery3 = {
+                $set: {
+                  'candidate_list': job.candidate_list
+                }
+              };
+              break;
+            }
+          }
+
+          let param2: any;
+          updateFlag ? param2 = updatedQuery3 : param2 = updatedQuery2;
+
+          this.jobProfileRepository.findOneAndUpdate({'_id': mongoose.Types.ObjectId(item.profileId)},
+            param2, updatedQuery4, (err, record) => {
+              if (record) {
+                callback(null, record);
+              } else {
+                let error: any;
+                if (record === null) {
+                  error = new Error('Unable to add candidate.');
+                  callback(error, null);
+                } else {
+                  callback(err, null);
+                }
+              }
+            });
         }
       }
     });
@@ -284,26 +283,26 @@ class JobProfileService {
                   }
                 };
                 let updateExistingQuery: any;
-                this.jobProfileRepository.findById(item.profileId, (err: any, job : any) => {
+                this.jobProfileRepository.findById(item.profileId, (err: any, job: any) => {
                   if (err) {
                     callback(new Error('Not Found Any Job posted'), null);
-                  }else {
+                  } else {
                     let isFound: boolean = false;
                     if (job) {
-                          for (let list of job.candidate_list) {
-                            if (list.name === ConstVariables.APPLIED_CANDIDATE) {
-                              isFound = true;
-                              if (list.ids.indexOf(item.candidateId) === -1) {
-                                list.ids.push(item.candidateId);
-                              }
-                              updateExistingQuery = {
-                                $set: {
-                                  'candidate_list': job.candidate_list
-                                }
-                              };
-                              break;
-                            }
+                      for (let list of job.candidate_list) {
+                        if (list.name === ConstVariables.APPLIED_CANDIDATE) {
+                          isFound = true;
+                          if (list.ids.indexOf(item.candidateId) === -1) {
+                            list.ids.push(item.candidateId);
                           }
+                          updateExistingQuery = {
+                            $set: {
+                              'candidate_list': job.candidate_list
+                            }
+                          };
+                          break;
+                        }
+                      }
                       let latestQuery: any;
                       isFound ? latestQuery = updateExistingQuery : latestQuery = newEntryQuery;
                       let jobSearchQuery = {
@@ -318,7 +317,7 @@ class JobProfileService {
                           if (record === null) {
                             error = new Error('Unable to add candidate.');
                             callback(error, null);
-                          }else {
+                          } else {
                             callback(err, null);
                           }
                         }
@@ -326,7 +325,7 @@ class JobProfileService {
                     }
                   }
                 });
-              }else {
+              } else {
                 callback(null, record);
               }
             } else {
@@ -334,7 +333,7 @@ class JobProfileService {
               if (record === null) {
                 error = new Error('Unable to add Job to List.');
                 callback(error, null);
-              }else {
+              } else {
                 callback(err, null);
               }
             }
@@ -350,34 +349,33 @@ class JobProfileService {
   getQCardDetails(item: any, callback: (error: any, result: any) => void) {
     let candidateDetails: any;
     /*
-    this.candidateRepository.retrieveByMultiIds(item.candidateIds, {}, (err, candidateDetailsRes) => {
-      if (err) {
-        callback(err, null);
-      } else {
-        candidateDetails = candidateDetailsRes;
-        let query = {
-          'postedJobs': {$elemMatch: {'_id': new mongoose.Types.ObjectId(item.jobId)}}
-        };
-        this.recruiterRepository.retrieve(query, (err, res) => {
-          if (err) {
-            callback(new Error('Not Found Any Job posted'), null);
-          }else {
-            if (res.length > 0) {
-              let recruiter: Recruiter = new Recruiter();
-              recruiter = res[0];
-              for (let job of res[0].postedJobs) {
-                if (job._id.toString() === item.jobId) {
-                  let sortBy = 'Experience';
-                  this.candidateRepository.getCandidateQCard(candidateDetails, job, undefined, sortBy, callback);
-                }
-              }
-            }
-          }
-        });
-      }
-    });*/
+     this.candidateRepository.retrieveByMultiIds(item.candidateIds, {}, (err, candidateDetailsRes) => {
+     if (err) {
+     callback(err, null);
+     } else {
+     candidateDetails = candidateDetailsRes;
+     let query = {
+     'postedJobs': {$elemMatch: {'_id': new mongoose.Types.ObjectId(item.jobId)}}
+     };
+     this.recruiterRepository.retrieve(query, (err, res) => {
+     if (err) {
+     callback(new Error('Not Found Any Job posted'), null);
+     }else {
+     if (res.length > 0) {
+     let recruiter: Recruiter = new Recruiter();
+     recruiter = res[0];
+     for (let job of res[0].postedJobs) {
+     if (job._id.toString() === item.jobId) {
+     let sortBy = 'Experience';
+     this.candidateRepository.getCandidateQCard(candidateDetails, job, undefined, sortBy, callback);
+     }
+     }
+     }
+     }
+     });
+     }
+     });*/
   }
-
 
 }
 

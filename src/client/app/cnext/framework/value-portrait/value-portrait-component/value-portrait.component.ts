@@ -1,11 +1,13 @@
-import {AfterViewChecked, Component, Input, Output, OnInit, OnChanges, EventEmitter} from "@angular/core";
+import {Component, Input, Output, OnInit, EventEmitter} from "@angular/core";
 import {CandidateProfileService} from "../../candidate-profile/candidate-profile.service";
 import {Candidate} from "../../../../user/models/candidate";
 import {ErrorService} from "../../../../shared/services/error.service";
-import {Headings, ImagePath, Label, LocalStorage, Messages} from "../../../../shared/constants";
+import {Headings, ImagePath, Label, LocalStorage, Messages, UsageActions} from "../../../../shared/constants";
 import {LocalStorageService} from "../../../../shared/services/localstorage.service";
 import {GuidedTourService} from "../../guided-tour.service";
 import {ComplexityAnsweredService} from "../../complexity-answered.service";
+import {UsageTrackingService} from "../../usage-tracking.service";
+import {UsageTracking} from "../../model/usage-tracking";
 
 @Component({
   moduleId: module.id,
@@ -17,18 +19,20 @@ import {ComplexityAnsweredService} from "../../complexity-answered.service";
 export class ValuePortraitComponent implements OnInit {
 
   candidate: Candidate = new Candidate();
-  @Input() userId:string;
-  @Input() isShareView:boolean;
-  @Input() isMiniView:boolean;
+  @Input() userId: string;
+  @Input() isShareView: boolean;
+  @Input() isMiniView: boolean;
   @Output() candidateId: EventEmitter<string> = new EventEmitter<string>();
-  gotItMessage: string= Headings.GOT_IT;
-  isCandidate:boolean;
-  isSubmitted:boolean;
+  gotItMessage: string = Headings.GOT_IT;
+  isCandidate: boolean;
+  isSubmitted: boolean;
   isAnswered: boolean;
-  valuePortraitImgName:string;
-  guidedTourStatus:string[] = new Array(0);
-  constructor(private guidedTourService:GuidedTourService,private candidateProfileService: CandidateProfileService,
-              private errorService:ErrorService,private complexityAnsweredService: ComplexityAnsweredService) {
+  valuePortraitImgName: string;
+  guidedTourStatus: string[] = new Array(0);
+
+  constructor(private guidedTourService: GuidedTourService, private candidateProfileService: CandidateProfileService,
+              private errorService: ErrorService, private complexityAnsweredService: ComplexityAnsweredService,
+              private usageTrackingService: UsageTrackingService) {
     if (LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE) === 'true') {
       this.isCandidate = true;
     }
@@ -39,11 +43,11 @@ export class ValuePortraitComponent implements OnInit {
 
   ngOnInit(): void {
     this.valuePortraitImgName = ImagePath.CANDIDATE_VALUE_PORTRAIT_VIEW;
-    if(this.isCandidate) {
+    if (this.isCandidate) {
       this.isRequireGuidedTourImg();
     }
-   // this.getCandidateAllDetails();
-    if(this.isMiniView) {
+    // this.getCandidateAllDetails();
+    if (this.isMiniView) {
       this.complexityAnsweredService.makeCall()
         .subscribe(isAnswered => {
           this.isAnswered = isAnswered;
@@ -58,10 +62,21 @@ export class ValuePortraitComponent implements OnInit {
     this.candidateProfileService.getCandidateAllDetails(this.userId)
       .subscribe(
         candidateData => {
+          if (!this.isCandidate) {
+            let usageTrackingData: UsageTracking = new UsageTracking();
+            usageTrackingData.recruiterId = LocalStorageService.getLocalValue(LocalStorage.END_USER_ID);
+            usageTrackingData.action = UsageActions.VIEWED_VALUE_PORTRAIT_BY_RECRUITER;
+            usageTrackingData.candidateId = candidateData.data.candidateId;
+
+            this.usageTrackingService.addUsesTrackingData(usageTrackingData).subscribe(
+              data => {
+
+              }, error => this.errorService.onError(error));
+          }
           this.candidateId.emit(candidateData.data.candidateId);
           this.candidate = this.updateCapabilityData(candidateData.data);
-          console.log("capability details = ",this.candidate );
-        },error => this.errorService.onError(error));
+          console.log("capability details = ", this.candidate);
+        }, error => this.errorService.onError(error));
   }
 
   isRequireGuidedTourImg() {
@@ -73,7 +88,7 @@ export class ValuePortraitComponent implements OnInit {
     this.guidedTourStatus = this.guidedTourService.getTourStatus();
     this.guidedTourService.updateProfileField(this.guidedTourStatus)
       .subscribe(
-        (res:any) => {
+        (res: any) => {
           LocalStorageService.setLocalValue(LocalStorage.GUIDED_TOUR, JSON.stringify(res.data.guide_tour));
         },
         error => this.errorService.onError(error)
@@ -82,18 +97,18 @@ export class ValuePortraitComponent implements OnInit {
 
   updateCapabilityData(candidate: Candidate) {
     for (var i = candidate.capabilities.length - 1; i >= 0; i--) {
-        if(candidate.capabilities.length > 0) {
-          for (let i = candidate.capabilities.length - 1; i >= 0; i--) {
-            for(let j = candidate.capabilities[i].complexities.length - 1; j >= 0; j--) {
-              if(candidate.capabilities[i].complexities[j].answer != undefined) {
-                candidate.capabilities[i].isComplexityAnswerComplete = true;
-              } else {
-                candidate.capabilities[i].isComplexityAnswerComplete = false;
-              }
+      if (candidate.capabilities.length > 0) {
+        for (let i = candidate.capabilities.length - 1; i >= 0; i--) {
+          for (let j = candidate.capabilities[i].complexities.length - 1; j >= 0; j--) {
+            if (candidate.capabilities[i].complexities[j].answer != undefined) {
+              candidate.capabilities[i].isComplexityAnswerComplete = true;
+            } else {
+              candidate.capabilities[i].isComplexityAnswerComplete = false;
             }
           }
-          return candidate;
         }
+        return candidate;
+      }
       for (var j = candidate.capabilities[i].complexities.length - 1; j >= 0; j--) {
         if (candidate.capabilities[i].complexities[j].answer == undefined || candidate.capabilities[i].complexities[j].answer == 'Not Applicable') {
           candidate.capabilities[i].complexities.splice(j, 1);

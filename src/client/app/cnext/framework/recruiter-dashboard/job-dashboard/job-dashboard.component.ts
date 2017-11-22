@@ -1,33 +1,31 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { JobDashboardService } from './job-dashboard.service';
-import { RecruiterJobView } from '../../model/recruiter-job-view';
-import { ValueConstant, Tooltip, UsageActions } from '../../../../shared/constants';
-import { CandidateQListModel } from './q-cards-candidates';
-import { JobPosterModel } from '../../../../user/models/jobPoster';
-import { QCardFilterService } from '../../filters/q-card-filter.service';
-import { QCardFilter } from '../../model/q-card-filter';
-import { LoaderService } from '../../../../shared/loader/loaders.service';
-import { ProfileComparisonService } from '../../profile-comparison/profile-comparison.service';
-import { ProfileComparison } from '../../model/profile-comparison';
-import { QCardviewComponent } from '../q-card-view/q-card-view.component';
-import { ErrorService } from '../../../../shared/services/error.service';
-import { Label } from '../../../../shared/constants';
-import { UsageTrackingService } from '../../usage-tracking.service';
-import { JobPosterService } from '../../job-poster/job-poster.service';
-import { MessageService } from '../../../../shared/services/message.service';
-import { RenewJobPostService } from '../../../../user/services/renew-jobpost.service';
-import { Message } from '../../../../shared/models/message';
+import {Component, OnInit, ViewChild} from "@angular/core";
+import {ActivatedRoute, Router} from "@angular/router";
+import {JobDashboardService} from "./job-dashboard.service";
+import {RecruiterJobView} from "../../model/recruiter-job-view";
+import {ValueConstant, Tooltip, UsageActions, Label} from "../../../../shared/constants";
+import {CandidateQListModel} from "./q-cards-candidates";
+import {JobPosterModel} from "../../../../user/models/jobPoster";
+import {QCardFilterService} from "../../filters/q-card-filter.service";
+import {QCardFilter} from "../../model/q-card-filter";
+import {LoaderService} from "../../../../shared/loader/loaders.service";
+import {ProfileComparisonService} from "../../profile-comparison/profile-comparison.service";
+import {ProfileComparison} from "../../model/profile-comparison";
+import {QCardviewComponent} from "../q-card-view/q-card-view.component";
+import {ErrorService} from "../../../../shared/services/error.service";
+import {UsageTrackingService} from "../../usage-tracking.service";
+import {MessageService} from "../../../../shared/services/message.service";
+import {RenewJobPostService} from "../../../../user/services/renew-jobpost.service";
 import {ESort} from "../../model/sort-type";
 import {EList} from "../../model/list-type";
 import {RecruiterHeaderDetails} from "../../model/recuirterheaderdetails";
+import {UsageTracking} from "../../model/usage-tracking";
 @Component({
   moduleId: module.id,
   selector: 'cn-job-dashboard',
   templateUrl: 'job-dashboard.component.html',
   styleUrls: ['job-dashboard.component.css']
 
- })
+})
 
 export class JobDashboardComponent implements OnInit {
 
@@ -36,35 +34,35 @@ export class JobDashboardComponent implements OnInit {
   headerInfo: RecruiterHeaderDetails;
   recruiterJobView: RecruiterJobView = new RecruiterJobView();
   whichListVisible: boolean[] = new Array(4);
-  selectedJobId:string;
-  selectedJobTitle:string;
-  isCloneButtonClicked:boolean;
+  selectedJobId: string;
+  selectedJobTitle: string;
+  isCloneButtonClicked: boolean;
   selectedJobProfile: JobPosterModel = new JobPosterModel();
   /*sortBy : string = 'Best match';*/
-  sortBy : ESort = ESort.BEST_MATCH;
+  sortBy: ESort = ESort.BEST_MATCH;
   /*listName : string= ValueConstant.MATCHED_CANDIDATE;*/
-  listName : EList = EList.CAN_MATCHED;
+  listName: EList = EList.CAN_MATCHED;
   @ViewChild(QCardviewComponent) acaQcardClassObject: QCardviewComponent;
   private candidateQlist: CandidateQListModel = new CandidateQListModel();
   private recruiterId: string;
   private showModalStyle: boolean = false;
   private filterMeta: QCardFilter;
-  private appliedFilters :QCardFilter = new QCardFilter();
+  private appliedFilters: QCardFilter = new QCardFilter();
   private isRecruitingForSelf: boolean;
   private profileComparison: ProfileComparison;
   private listOfCandidateIdToCompare: string[] = new Array(0);
   private emptyListMessage: string = Tooltip.EMPTY_LIST_MESSAGE;
   private emptyCartMessage: string = Tooltip.EMPTY_CART_MESSAGE;
   private emptyRejectedList: string = Tooltip.EMPTY_REJECTED_LIST_MESSAGE;
-  isJobCloseButtonClicked:boolean;
+  isJobCloseButtonClicked: boolean;
 
 
   constructor(private activatedRoute: ActivatedRoute,
               private errorService: ErrorService,
               private jobDashboardService: JobDashboardService,
-              private usageTracking : UsageTrackingService,
-              private _router:Router,private qcardFilterService:QCardFilterService,
-              private loaderService: LoaderService,private profileComparisonService: ProfileComparisonService,
+              private usageTracking: UsageTrackingService,
+              private _router: Router, private qcardFilterService: QCardFilterService,
+              private loaderService: LoaderService, private profileComparisonService: ProfileComparisonService,
               private renewJobPostService: RenewJobPostService, private messageService: MessageService) {
     this.qcardFilterService.candidateFilterValue$.subscribe(
       (data: QCardFilter) => {
@@ -103,25 +101,25 @@ export class JobDashboardComponent implements OnInit {
             if (item.name === ValueConstant.REJECTED_LISTED_CANDIDATE)
               this.recruiterJobView.numberOfCandidatesrejected = item.ids.length;
           }
-        },error => this.errorService.onError(error));
+        }, error => this.errorService.onError(error));
   }
 
   getMatchingProfiles() {
-   /* this.qcardFilterService.clearFilter();*/
+    /* this.qcardFilterService.clearFilter();*/
    /*this.listName = ValueConstant.MATCHED_CANDIDATE*/;
-   this.listName = EList.CAN_MATCHED;
+    this.listName = EList.CAN_MATCHED;
     for (let i = 0; i < this.whichListVisible.length; i++) {
       this.whichListVisible[i] = false;
     }
     this.whichListVisible[0] = true;
-    if(this.candidateQlist.matchedCandidates.length>0) {
+    if (this.candidateQlist.matchedCandidates.length > 0) {
       return;
     }
     this.appliedFilters = new QCardFilter();
     this.appliedFilters.sortBy = this.sortBy;
-    this.appliedFilters.listName= this.listName;
-    this.appliedFilters.proficiencies=this.selectedJobProfile.proficiencies;
-    this.jobDashboardService.getSearchedcandidate(this.jobId,this.appliedFilters)
+    this.appliedFilters.listName = this.listName;
+    this.appliedFilters.proficiencies = this.selectedJobProfile.proficiencies;
+    this.jobDashboardService.getSearchedcandidate(this.jobId, this.appliedFilters)
       .subscribe(
         (data: any) => {
           this.jobDashboardService.getSelectedListData(this.jobId, EList.CAN_SHORT_LIST, this.appliedFilters)
@@ -133,9 +131,9 @@ export class JobDashboardComponent implements OnInit {
                 temp.shortListedCandidates = listdata.data;
                 temp.matchedCandidates = data;
                 this.candidateQlist = temp;
-              },error => this.errorService.onError(error));
-        },error => this.errorService.onError(error));
-    window.scrollTo(0,0);
+              }, error => this.errorService.onError(error));
+        }, error => this.errorService.onError(error));
+    window.scrollTo(0, 0);
   }
 
   AddedToCart(event: any) {
@@ -146,41 +144,41 @@ export class JobDashboardComponent implements OnInit {
   }
 
 
-  getSelectedListData(listName: EList,isFromFilter : boolean) {
+  getSelectedListData(listName: EList, isFromFilter: boolean) {
 
-   /* this.qcardFilterService.clearFilter();*/
+    /* this.qcardFilterService.clearFilter();*/
     for (let i = 0; i < this.whichListVisible.length; i++) {
       this.whichListVisible[i] = false;
     }
     this.listName = listName;
     switch (listName) {
       case EList.CAN_CART :
-        if(this.candidateQlist.cartCandidates.length>0) {
+        if (this.candidateQlist.cartCandidates.length > 0) {
           this.whichListVisible[1] = true;
-          if(!isFromFilter) {
+          if (!isFromFilter) {
             return;
           }
         }
         break;
       case EList.CAN_REJECTED :
-        if(this.candidateQlist.rejectedCandidates.length>0) {
+        if (this.candidateQlist.rejectedCandidates.length > 0) {
           this.whichListVisible[3] = true;
-          if(!isFromFilter) {
+          if (!isFromFilter) {
             return;
           }
         }
         break;
       case EList.CAN_SHORT_LIST :
-        if(this.candidateQlist.shortListedCandidates.length>0) {
-          if(!isFromFilter) {
+        if (this.candidateQlist.shortListedCandidates.length > 0) {
+          if (!isFromFilter) {
             return;
           }
         }
         break;
       case EList.CAN_APPLIED :
-        if(this.candidateQlist.appliedCandidates.length>0) {
+        if (this.candidateQlist.appliedCandidates.length > 0) {
           this.whichListVisible[2] = true;
-          if(!isFromFilter) {
+          if (!isFromFilter) {
             return;
           }
         }
@@ -209,8 +207,8 @@ export class JobDashboardComponent implements OnInit {
               this.whichListVisible[2] = true;
               break;
           }
-        },error => this.errorService.onError(error));
-      window.scrollTo(0,0);
+        }, error => this.errorService.onError(error));
+    window.scrollTo(0, 0);
   }
 
   navigateTo(navigateTo: string, item: string) {
@@ -238,20 +236,25 @@ export class JobDashboardComponent implements OnInit {
   closeJob() {
     this.showModalStyle = !this.showModalStyle;
   }
+
 //TODO: move this (performActionOnComparisonList) code to comaprison compoent  ->by krishna ghatul code refactor
-  performActionOnComparisonList(data:any) {
+  performActionOnComparisonList(data: any) {
+    let usageTrackingData: UsageTracking = new UsageTracking();
     if (data.action == 'Remove') {
       this.profileComparison.profileComparisonData.splice(this.profileComparison.profileComparisonData.indexOf(data.item), 1);
       this.listOfCandidateIdToCompare.splice(this.profileComparison.profileComparisonData.indexOf(data.item._id), 1);
       this.recruiterJobView.numberOfCandidatesInCompare--;
-      this.usageTracking.addUsesTrackingData(UsageActions.REMOVED_FROM_COMPARE_VIEW_BY_RECRUITER,
-        this.recruiterId, this.jobId, data.item._id ).subscribe(
-        data  => {
-          console.log(''+data);
+      usageTrackingData.recruiterId = this.recruiterId;
+      usageTrackingData.action = UsageActions.REMOVED_FROM_COMPARE_VIEW_BY_RECRUITER;
+      usageTrackingData.jobProfileId = this.jobId;
+      usageTrackingData.candidateId = data.item._id;
+      this.usageTracking.addUsesTrackingData(usageTrackingData).subscribe(
+        data => {
+          console.log('' + data);
         }, error => this.errorService.onError(error));
     } else if (data.action == 'AddToCart') {
       //matchedList cartListed applied rejectedList
-      var compareAction:any;
+      var compareAction: any;
 
       if (this.candidateQlist.matchedCandidates.filter(function (obj) {
           return data.item._id == obj._id;
@@ -274,7 +277,7 @@ export class JobDashboardComponent implements OnInit {
       this.acaQcardClassObject.actionOnQCardFromParent(compareAction);
 
     } else if (data.action == 'Reject') {
-      var compareAction:any;
+      var compareAction: any;
       if (this.candidateQlist.matchedCandidates.filter(function (obj) {
           return data.item._id == obj._id;
         }).length && (data.item.candidateListStatus.indexOf('applied') !== -1)) {
@@ -298,26 +301,26 @@ export class JobDashboardComponent implements OnInit {
     }
   }
 
-  changeSorting(sortBy : ESort) {
+  changeSorting(sortBy: ESort) {
     this.appliedFilters.sortBy = sortBy;
-    if(EList.CAN_MATCHED === this.listName) {
+    if (EList.CAN_MATCHED === this.listName) {
       this.getCandidatesWithSort();
-    }else {
-      this.getSelectedListData(this.listName,true);
+    } else {
+      this.getSelectedListData(this.listName, true);
     }
   }
 
-  changeFilter(obj : QCardFilter) {
-    this.appliedFilters= obj;
-    if(EList.CAN_MATCHED === this.listName) {
+  changeFilter(obj: QCardFilter) {
+    this.appliedFilters = obj;
+    if (EList.CAN_MATCHED === this.listName) {
       this.getCandidatesWithSort();
-    }else {
-      this.getSelectedListData(this.listName,true);
+    } else {
+      this.getSelectedListData(this.listName, true);
     }
   }
 
   getCandidatesWithSort() {
-    this.jobDashboardService.getSearchedcandidate(this.jobId,this.appliedFilters)
+    this.jobDashboardService.getSearchedcandidate(this.jobId, this.appliedFilters)
       .subscribe(
         (data: any) => {
           this.jobDashboardService.getSelectedListData(this.jobId, EList.CAN_SHORT_LIST, this.appliedFilters)
@@ -329,9 +332,9 @@ export class JobDashboardComponent implements OnInit {
                 temp.shortListedCandidates = listdata.data;
                 temp.matchedCandidates = data;
                 this.candidateQlist = temp;
-              },error => this.errorService.onError(error));
-        },error => this.errorService.onError(error));
-    window.scrollTo(0,0);
+              }, error => this.errorService.onError(error));
+        }, error => this.errorService.onError(error));
+    window.scrollTo(0, 0);
   }
 
   getCompareDetail() {
@@ -340,9 +343,9 @@ export class JobDashboardComponent implements OnInit {
       this.profileComparisonService.getCompareDetail(this.listOfCandidateIdToCompare, this.jobId)
         .subscribe(
           data => this.OnCompareSuccess(data.data)
-          ,error => this.errorService.onError(error));
+          , error => this.errorService.onError(error));
     }
-    window.scrollTo(0,0);
+    window.scrollTo(0, 0);
   }
 
   OnCompareSuccess(data: ProfileComparison) {
@@ -350,24 +353,28 @@ export class JobDashboardComponent implements OnInit {
   }
 
   addForCompare(obj: any) {
-
-    this.usageTracking.addUsesTrackingData(UsageActions.ADDED_IN_TO_COMPARE_VIEW_BY_RECRUITER,
-      this.recruiterId, this.jobId, obj.id ).subscribe(
-      data  => {
-        console.log(''+data);
+    let usageTrackingData: UsageTracking = new UsageTracking();
+    usageTrackingData.recruiterId = this.recruiterId;
+    usageTrackingData.action = UsageActions.ADDED_IN_TO_COMPARE_VIEW_BY_RECRUITER;
+    usageTrackingData.jobProfileId = this.jobId;
+    usageTrackingData.candidateId = obj.id;
+    this.usageTracking.addUsesTrackingData(usageTrackingData).subscribe(
+      data => {
+        console.log('' + data);
       }, error => this.errorService.onError(error));
     if (this.listOfCandidateIdToCompare.indexOf(obj.id) === -1) {
       this.listOfCandidateIdToCompare.push(obj.id);
       this.recruiterJobView.numberOfCandidatesInCompare++;
     }
   }
+
   raiseCloneEvent() {
-    this.selectedJobId= this.selectedJobProfile._id;
-    this.selectedJobTitle=this.selectedJobProfile.jobTitle;
-    this.isCloneButtonClicked=!this.isCloneButtonClicked;
+    this.selectedJobId = this.selectedJobProfile._id;
+    this.selectedJobTitle = this.selectedJobProfile.jobTitle;
+    this.isCloneButtonClicked = !this.isCloneButtonClicked;
   }
 
-  jobcloned(event:any) {
+  jobcloned(event: any) {
     this._router.navigate(['/recruiter/jobpost', event]);
   }
 
@@ -385,10 +392,10 @@ export class JobDashboardComponent implements OnInit {
   }
 
   closeJobPost(selectedJobProfile: any) {
-    console.log('isJob posted = ',selectedJobProfile.isJobPosted);
-      this.selectedJobProfile = selectedJobProfile;
-      this.selectedJobTitle = selectedJobProfile.jobTitle;
-      this.isJobCloseButtonClicked=!this.isJobCloseButtonClicked;
+    console.log('isJob posted = ', selectedJobProfile.isJobPosted);
+    this.selectedJobProfile = selectedJobProfile;
+    this.selectedJobTitle = selectedJobProfile.jobTitle;
+    this.isJobCloseButtonClicked = !this.isJobCloseButtonClicked;
   }
 
 }

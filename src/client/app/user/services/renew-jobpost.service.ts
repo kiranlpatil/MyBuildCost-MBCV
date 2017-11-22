@@ -1,11 +1,9 @@
-import {Injectable, ElementRef} from "@angular/core";
+import {Injectable} from "@angular/core";
 import {JobPosterModel} from "../models/jobPoster";
 import {MessageService} from "../../shared/services/message.service";
 import {Message} from "../../shared/models/message";
 import {JobPosterService} from "../../cnext/framework/job-poster/job-poster.service";
-import {Messages, UsageActions, LocalStorage} from "../../shared/constants";
-import {UsageTrackingService} from "../../cnext/framework/usage-tracking.service";
-import {LocalStorageService} from "../../shared/services/localstorage.service";
+import {Messages} from "../../shared/constants";
 import {ErrorService} from "../../shared/services/error.service";
 
 
@@ -16,7 +14,7 @@ export class RenewJobPostService {
   private selectedJobProfile: JobPosterModel = new JobPosterModel();
 
   constructor(private errorService: ErrorService, private messageService: MessageService,
-              private jobPostService: JobPosterService, private usageTrackingService : UsageTrackingService ) {
+              private jobPostService: JobPosterService) {
 
   }
 
@@ -32,14 +30,14 @@ export class RenewJobPostService {
       this.selectedJobProfile.expiringDate = new Date();
       this.selectedJobProfile.expiringDate.setDate(this.selectedJobProfile.expiringDate.getDate() + 30);
       this.updateJob();
-    }else if(this.selectedJobProfile.daysRemainingForExpiring > 0 && this.selectedJobProfile.daysRemainingForExpiring < 31){
+    } else if (this.selectedJobProfile.daysRemainingForExpiring > 0 && this.selectedJobProfile.daysRemainingForExpiring < 31) {
       this.selectedJobProfile.expiringDate = new Date(this.selectedJobProfile.expiringDate);
       this.selectedJobProfile.expiringDate.setDate(this.selectedJobProfile.expiringDate.getDate() + 30);
       this.updateJob();
-    }else {
+    } else {
       let message = new Message();
-      message.isError=true;
-      message.error_msg=Messages.UNABLE_TO_RENEW_JOB_POST_MSG;
+      message.isError = true;
+      message.error_msg = Messages.UNABLE_TO_RENEW_JOB_POST_MSG;
       this.messageService.message(message);
     }
 
@@ -49,17 +47,8 @@ export class RenewJobPostService {
     this.jobPostService.postJob(this.selectedJobProfile).subscribe(
       data => {
         this.selectedJobProfile = data;
-        this.messageService.message(new Message('You have successfully renewed ' + this.selectedJobProfile.jobTitle + 'Job by '+ '30 days'));
+        this.messageService.message(new Message('You have successfully renewed ' + this.selectedJobProfile.jobTitle + 'Job by ' + '30 days'));
       }, error => this.errorService.onError(error));
-    this.usageTrackingService.addUsesTrackingData(UsageActions.RENEWED_JOB_POST_BY_RECRUITER,
-      LocalStorageService.getLocalValue(LocalStorage.END_USER_ID),LocalStorageService.getLocalValue(LocalStorage.CURRENT_JOB_POSTED_ID), undefined).subscribe(
-      data=> {
-        console.log('');
-      },
-      err=> {
-        this.errorService.onError(err);
-      }
-    );
   }
 
 }
