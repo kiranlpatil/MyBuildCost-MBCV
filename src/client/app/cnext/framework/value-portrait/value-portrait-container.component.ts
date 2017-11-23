@@ -1,4 +1,4 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, OnInit, Output, EventEmitter} from "@angular/core";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Button, Label, LocalStorage} from "../../../shared/constants";
 import {LocalStorageService} from "../../../shared/services/localstorage.service";
@@ -13,6 +13,7 @@ import {LocalStorageService} from "../../../shared/services/localstorage.service
 
 export class ValuePortraitContainerComponent implements OnInit {
 
+  
   _userId:string;
   _jobId:string;
   isShareView:boolean = false;
@@ -97,4 +98,5 @@ export class ValuePortraitContainerComponent implements OnInit {
   updateCanidateId(value:string) {
     this.candidateId = value;
   }
+
 }

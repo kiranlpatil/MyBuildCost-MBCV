@@ -1,0 +1,21 @@
+<button class="btn btn-cart" type="button" [class.hidden]="(isJobPostExpired || isJobPostClosed) || (isJobPostExpired && isJobPostClosed)"
+        (click)="viewProfile(candidate)" [innerHTML]="getButtons().MATCH_AGAINST_THIS_JOB">
+</button>
+<button class="btn btn-cart" type="button" [class.hidden]="(isJobPostExpired || isJobPostClosed) || (isJobPostExpired && isJobPostClosed)"
+        (click)="navigateToApplicantSearch('/recruiter/search', candidate)" [innerHTML]="getButtons().MATCH_AGAINST_ALL_JOB">
+</button>
+<button class="btn btn-cart" type="button" [class.hidden]="(isJobPostExpired || isJobPostClosed) || (isJobPostExpired && isJobPostClosed)"
+        (click)="navigateWithId('/value-portrait', candidate)" [innerHTML]="getButtons().SHOW_VALUE_PORTRAIT">
+</button>
+<button class="btn btn-cart" type="button" [class.hidden]="(isJobPostExpired || isJobPostClosed) || (isJobPostExpired && isJobPostClosed)"
+        (click)="addForCompareView(candidate,type)" [innerHTML]="getButtons().COMPARE_WITH_OTHERS">
+</button>
+<button *ngIf="type =='matchedList'" class="btn btn-cart" type="button" [class.hidden]="(isJobPostExpired || isJobPostClosed) || (isJobPostExpired && isJobPostClosed)"
+        (click)="actionOnQCard('add','matchedList','rejectedList', candidate)">Reject
+</button>
+<button *ngIf="type =='cartListed'" class="btn btn-cart" type="button" [class.hidden]="(isJobPostExpired || isJobPostClosed) || (isJobPostExpired && isJobPostClosed)"
+        (click)="actionOnQCard('add','cartListed','rejectedList', candidate)">Reject
+</button>
+<button *ngIf="type =='applied'" class="btn btn-cart" type="button" [class.hidden]="(isJobPostExpired || isJobPostClosed) || (isJobPostExpired && isJobPostClosed)"
+        (click)="actionOnQCard('add','applied','rejectedList', candidate)">Reject
+</button>

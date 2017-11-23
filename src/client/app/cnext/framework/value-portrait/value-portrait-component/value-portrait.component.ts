@@ -8,6 +8,7 @@ import {GuidedTourService} from "../../guided-tour.service";
 import {ComplexityAnsweredService} from "../../complexity-answered.service";
 import {UsageTrackingService} from "../../usage-tracking.service";
 import {UsageTracking} from "../../model/usage-tracking";
+import {ActionOnQCardService} from "../../../../user/services/action-on-q-card.service";
 
 @Component({
   moduleId: module.id,
@@ -23,6 +24,7 @@ export class ValuePortraitComponent implements OnInit {
   @Input() isShareView: boolean;
   @Input() isMiniView: boolean;
   @Output() candidateId: EventEmitter<string> = new EventEmitter<string>();
+  @Output() actionOnValuePortrait = new EventEmitter();
   gotItMessage: string = Headings.GOT_IT;
   isCandidate: boolean;
   isSubmitted: boolean;
@@ -32,7 +34,8 @@ export class ValuePortraitComponent implements OnInit {
 
   constructor(private guidedTourService: GuidedTourService, private candidateProfileService: CandidateProfileService,
               private errorService: ErrorService, private complexityAnsweredService: ComplexityAnsweredService,
-              private usageTrackingService: UsageTrackingService) {
+              private usageTrackingService: UsageTrackingService,
+  private actionOnQCardService: ActionOnQCardService) {
     if (LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE) === 'true') {
       this.isCandidate = true;
     }
@@ -131,6 +134,11 @@ export class ValuePortraitComponent implements OnInit {
 
   getLabel() {
     return Label;
+  }
+
+  actionToBePerformedOnValuePortrait(action:string, item: any) {
+    let data = {'action': action, 'item': item};
+    this.actionOnQCardService.actionToBePerformedOnValuePortrait(data);
   }
 
 }

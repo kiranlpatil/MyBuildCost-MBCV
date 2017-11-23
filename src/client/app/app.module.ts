@@ -165,6 +165,8 @@ import {CandidateRouteSwitchComponent} from "./cnext/framework/candidate-dashboa
 import {CandidateBasicInformationComponent} from "./cnext/framework/one-page-summary/candidate-summary/candidate-basic-information/candidate-basic-information.component";
 import {PageNotFoundComponent} from "./shared/page-not-found/page-not-found.component";
 import {AdminModule} from "./admin/admin.module";
+import {RecruiterAction} from "./cnext/framework/recruiter-action/recruiter-action.component";
+import {ActionOnQCardService} from "./user/services/action-on-q-card.service";
 //C-NEXT IMPORTS
 
 
@@ -284,7 +286,8 @@ import {AdminModule} from "./admin/admin.module";
     JobCloseComponent,
     UserFeedbackComponent,
     CandidateRouteSwitchComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    RecruiterAction
   ],
 
   providers: [
@@ -353,7 +356,8 @@ import {AdminModule} from "./admin/admin.module";
     ShareContainerService,
     JobCloseComponentService,
     ComplexityAnsweredService,
-    UserFeedbackComponentService
+    UserFeedbackComponentService,
+    ActionOnQCardService
   ],
   bootstrap: [AppComponent]
 })
