@@ -16,6 +16,14 @@ export abstract class SearchEngine {
 
   abstract buildBusinessCriteria(details : BaseDetail): any;
 
+  abstract getSortedCriteria(sortBy : any, criteria : any) : Object ;
+
+  abstract buildQCards(objects : any[], jobDetails : BaseDetail,sortBy : ESort, listName: EList, mustHaveComplexity?: boolean) : any ;
+
+  abstract getMatchingObjects(criteria : any, sortingQuery: any, callback : (error : any, response : any[]) => void) : void;
+
+  abstract createQCard(q_card : QCard, user : any): void;
+
   computePercentage(candidate_capability_matrix : any , job_capability_matrix :any) : QCard {
     let q_card = new QCard();
     let count =0;
@@ -63,11 +71,4 @@ export abstract class SearchEngine {
     return q_cards;
   }*/
 
-  abstract getSortedCriteria(sortBy : ESort, criteria : any) : Object ;
-
-  abstract buildQCards(objects : any[], jobDetails : BaseDetail,sortBy : ESort, listName: EList, mustHaveComplexity?: boolean) : any ;
-
-  abstract getMatchingObjects(criteria : any, callback : (error : any, response : any[]) => void) : void;
-
-  abstract createQCard(q_card : QCard, user : any): void;
 }

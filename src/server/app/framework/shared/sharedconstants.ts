@@ -11,7 +11,7 @@ export class ConstVariables {
   public static AUTHENTICATION_JWT_KEY: string = 'thisisjwtsecret#@$#&(*0)%';
   public static AUTHENTICATION_ENCODED_SHARE_KEY: string = '$$$socialShare@$#*';
   public static BEST_MATCH_SORT = 'Best match';
-
+  public static QCARD_LIMIT = 100;
 }
 
 

@@ -47,10 +47,9 @@ export class SearchEngineController {
           criteria = {'_id': {$in: ids}};
         }
 
-
         let mainCriteria = searchEngine.buildUserCriteria(appliedFilters, criteria);
-        console.log('-----------------------mainCriteria--------------------', mainCriteria);
-        searchEngine.getMatchingObjects(mainCriteria, (error: any, response: any[]) => {
+        let sortingQuery = searchEngine.getSortedCriteria(appliedFilters, criteria);
+        searchEngine.getMatchingObjects(mainCriteria, sortingQuery, (error: any, response: any[]) => {
           if (error) {
             next(error);
           } else {
@@ -96,7 +95,7 @@ export class SearchEngineController {
         }
 
         let mainCriteria = searchEngine.buildUserCriteria(appliedFilters, criteria);
-        searchEngine.getMatchingObjects(mainCriteria, (error: any, response: any[]) => {
+        searchEngine.getMatchingObjects(mainCriteria, {},(error: any, response: any[]) => {
           if (error) {
             next(error);
           } else {

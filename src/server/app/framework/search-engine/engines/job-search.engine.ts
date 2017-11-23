@@ -58,13 +58,32 @@ export class JobSearchEngine extends SearchEngine {
         $gte: Number(filter.minExperience),
       };
     }
-    return this.getSortedCriteria(filter.sortBy, criteria);
+    return criteria;
   }
 
-  getMatchingObjects(criteria : any, callback : (error : any, response : any[]) => void) : void {
+  getSortedCriteria(appliedFilters: AppliedFilter, criteria: any) : Object {
+    let sortBy = appliedFilters.sortBy;
+    let sortingQuery: any;
+    switch (sortBy) {
+      case ESort.SALARY:
+        sortingQuery = {'salaryMaxValue' : -1 };
+        break;
+      case ESort.EXPERIENCE:
+        sortingQuery = {'experienceMinValue' : 1 };
+        break;
+      case ESort.BEST_MATCH :
+        sortingQuery = {};
+        break;
+      default:
+        sortingQuery = {};
+        break;
+    }
+    return sortingQuery;
+  }
+
+  getMatchingObjects(criteria : any, sortingQuery: any, callback : (error : any, response : any[]) => void) : void {
     let jobProfileRepository : JobProfileRepository = new JobProfileRepository();
-    console.log('-------------criteria----------------------------------',criteria);
-    jobProfileRepository.retrieveWithLean(criteria, {}, (err : Error, res: any[]) => {
+    jobProfileRepository.retrieveBySortedOrderAndLimit(criteria, sortingQuery,(err : Error, res: any[]) => {
         if (err) {
           callback(err, null);
         } else {
@@ -93,25 +112,6 @@ export class JobSearchEngine extends SearchEngine {
       this.job_q_cards = <JobCard[]>this.getSortedObjectsByMatchingPercentage(this.job_q_cards);
     }
     return this.job_q_cards.slice(0,100);
-  }
-
-  getSortedCriteria(sortBy : ESort, criteria : any) : Object {
-    let mainQuery: any;
-    switch (sortBy) {
-      case ESort.SALARY:
-        mainQuery = {'$query': criteria, '$orderby': {'salaryMaxValue': -1}};
-        break;
-      case ESort.EXPERIENCE:
-        mainQuery = {'$query': criteria, '$orderby': {'experienceMinValue': -1}};
-        break;
-      case ESort.BEST_MATCH :
-        mainQuery = criteria;
-        break;
-      default :
-        mainQuery = criteria;
-        break;
-    }
-    return mainQuery;
   }
 
   createQCard(job_q_card : JobCard, job : any): any {

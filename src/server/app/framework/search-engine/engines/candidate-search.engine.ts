@@ -11,9 +11,9 @@ import {UtilityFunction} from "../../uitility/utility-function";
 export class CandidateSearchEngine extends SearchEngine {
   candidate_q_cards: CandidateCard[] = new Array(0);
 
-  getMatchingObjects(criteria: any, callback: (error: any, response: any[]) => void): any {
+  getMatchingObjects(criteria: any, sortingQuery: any, callback: (error: any, response: any[]) => void): any {
     let candidateRepository: CandidateRepository = new CandidateRepository();
-    candidateRepository.retrieveAndPopulate(criteria, {}, (err, res) => {
+    candidateRepository.retrieveBySortedOrderAndLimit(criteria, sortingQuery,(err, res) => {
       if (err) {
         callback(err, null);
       } else {
@@ -48,7 +48,7 @@ export class CandidateSearchEngine extends SearchEngine {
         candidate_q_card = <CandidateCard> this.computePercentage(obj.capability_matrix, jobDetails.capability_matrix);
         if(candidate_q_card.exact_matching >= ConstVariables.LOWER_LIMIT_FOR_SEARCH_RESULT) {
           if (sortBy !== ESort.BEST_MATCH) {
-            if (this.candidate_q_cards.length < 100) {
+            if (this.candidate_q_cards.length < ConstVariables.QCARD_LIMIT) {
               this.createQCard(candidate_q_card, obj);
             } else {
               break;
@@ -114,26 +114,27 @@ export class CandidateSearchEngine extends SearchEngine {
         $lte: Number(filter.maxExperience)
       };
     }
-    return this.getSortedCriteria(filter.sortBy, criteria);
+    return criteria;
   }
 
-  getSortedCriteria(sortBy : ESort, criteria : any) : Object {
-    let mainQuery: any;
+  getSortedCriteria(appliedFilters: AppliedFilter, criteria: any) : Object {
+    let sortBy = appliedFilters.sortBy;
+    let sortingQuery: any;
     switch (sortBy) {
       case ESort.SALARY:
-        mainQuery = {'$query': criteria, '$orderby': {'professionalDetails.currentSalary': 1}};
+        sortingQuery = {'professionalDetails.currentSalary' : 1 };
         break;
       case ESort.EXPERIENCE:
-        mainQuery = {'$query': criteria, '$orderby': {'professionalDetails.experience': -1}};
+        sortingQuery = {'professionalDetails.experience' : -1 };
         break;
       case ESort.BEST_MATCH :
-        mainQuery = criteria;
+        sortingQuery = {};
         break;
-      default :
-        mainQuery = criteria;
+      default:
+        sortingQuery = {};
         break;
     }
-    return mainQuery;
+    return sortingQuery;
   }
 
 

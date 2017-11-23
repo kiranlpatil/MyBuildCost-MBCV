@@ -152,6 +152,12 @@ class RepositoryBase<T extends mongoose.Document> implements IRead<T>, IWrite<T>
     });
   }
 
+  retrieveBySortedOrderAndLimit(query: any, sortingQuery: any, callback: (error: any, result: any) => void) {
+    this._model.find(query).sort(sortingQuery).limit(100).populate('userId').lean().exec(function (err: any, items: any) {
+      callback(err, items);
+    });
+  }
+
   getCount(query: any,  callback: (error: any, result: any) => void) {
     this._model.find(query).count().lean().exec(function (err, items) {
       callback(err, items);
