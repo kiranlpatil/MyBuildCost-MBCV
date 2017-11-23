@@ -97,6 +97,7 @@ export class LoginComponent implements OnInit {
     LocalStorageService.setLocalValue(LocalStorage.MOBILE_NUMBER, res.data.mobile_number);
     LocalStorageService.setLocalValue(LocalStorage.FIRST_NAME, res.data.first_name);
     LocalStorageService.setLocalValue(LocalStorage.LAST_NAME, res.data.last_name);
+    LocalStorageService.setLocalValue(LocalStorage.RECRUITER_REFERENCE_ID,"5a1660c6d93f341403aedc18");
     if (res.data.guide_tour) {
       LocalStorageService.setLocalValue(LocalStorage.GUIDED_TOUR, JSON.stringify(res.data.guide_tour));
     } else {

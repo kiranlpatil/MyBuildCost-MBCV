@@ -45,14 +45,20 @@
 
 
   <div class="container-fluid profile-wrapper candidate-dashboard-wrapper">
-    <!--<h4>{{}} total jobs available</h4>-->
     <div>
       <div class="clearfix">
         <div>
           <div class="candidate-listing" id="candidate-dashboard-cards">
-            <cn-filter [candidate]="candidate" [locations]="_locationList" [role]=false (changeFilter)="changeFilter($event)"></cn-filter>
+            <cn-filter [candidate]="candidate" [locations]="_locationList" [role]=false
+                       (changeFilter)="changeFilter($event)"></cn-filter>
             <ul class="nav nav-tabs sub-tabs candidate-tabs">
-              <li class="match-count-tabs active">
+              <li [ngClass]="{'recruiters-count-tabs' : true, 'active': isRecruiterReferred}"
+                  *ngIf="isRecruiterReferred">
+                <a id="recruiters-anchor" (click)="showRecruitersMatchedJobs()" data-toggle="tab"
+                   href="#recruiters"><span
+                  class="count"><span>{{recruitersJobList.length}}</span></span> {{companyName}}</a>
+              </li>
+              <li [ngClass]="{'match-count-tabs' : true, 'active': !isRecruiterReferred}">
                 <a id="matched_anchor" (click)="showMatchedJobs()" data-toggle="tab" href="#matched"><span
                   class="count"><span>{{jobList.length}}</span></span> Matched</a>
               </li>
@@ -67,28 +73,43 @@
               </li>
             </ul>
             <div class="tab-content">
-              <div id="matched" class="tab-pane fade in active matched">
-                <cn-q-card-list *ngIf="typeOfListVisible=='matched'" [joblistCount]="jobList.length" [listOfJobs]="jobList" [type]="'none'"
+              <div id="recruiters"
+                   [ngClass]="{'tab-pane' : true, 'fade in' : isRecruiterReferred, 'fade' : !isRecruiterReferred, 'active' : isRecruiterReferred, 'matched' : true}"
+                   *ngIf="isRecruiterReferred">
+                <cn-q-card-list *ngIf="typeOfListVisible=='recruiters'" [joblistCount]="recruitersJobList.length"
+                                [listOfJobs]="recruitersJobList" [type]="'none'"
+                                (onAction)="onActionPerformOnExactList($event)"
+                                (onSortByChange)="onSortChange($event)"></cn-q-card-list>
+                <div class="empty-list-message" *ngIf="candidate.summary.numberOfRecruiterJobs==0">
+                  <p>{{emptyDashboardMessage}}</p>
+                </div>
+              </div>
+              <div id="matched"
+                   [ngClass]="{'tab-pane' : true, 'fade in' : !isRecruiterReferred, 'fade' : isRecruiterReferred, 'active' : !isRecruiterReferred, 'matched' : true}">
+                <cn-q-card-list *ngIf="typeOfListVisible=='matched'" [joblistCount]="jobList.length"
+                                [listOfJobs]="jobList" [type]="'none'"
                                 (onAction)="onActionPerformOnExactList($event)"
                                 (onSortByChange)="onSortChange($event)"></cn-q-card-list>
                 <div class="empty-list-message" *ngIf="candidate.summary.numberOfmatched==0">
                   <p>{{emptyDashboardMessage}}</p>
                 </div>
               </div>
-              <div id="applied" class="tab-pane fade"><!--[hidden]="!hideSection"-->
-                <cn-candidate-job-list  *ngIf="typeOfListVisible=='applied'"  [progress_bar_color]="'#f7c72d'" [type]="'apply'" [listOfJobs]="appliedJobs"
+              <div id="applied" class="tab-pane fade">
+                <cn-candidate-job-list *ngIf="typeOfListVisible=='applied'" [progress_bar_color]="'#f7c72d'"
+                                       [type]="'apply'" [listOfJobs]="appliedJobs"
                                        (onAction)="onActionOnApplyJob($event)"
-                                       (onSortByChange)="onSortChange($event)"></cn-candidate-job-list><!--[hidden]="type !=='apply'"-->
+                                       (onSortByChange)="onSortChange($event)"></cn-candidate-job-list>
                 <div class="empty-list-message" *ngIf="candidate.summary.numberOfJobApplied==0 ">
                   <p>{{noAppliedJobMessage}}</p>
                 </div>
               </div>
-              <div id="rejected" class="tab-pane fade"><!-- [hidden]="!hideSection" -->
-                <cn-candidate-job-list *ngIf="typeOfListVisible=='rejected'"  [progress_bar_color]="'#e91d62'" [type]="'block'" [listOfJobs]="blockedJobs"
+              <div id="rejected" class="tab-pane fade">
+                <cn-candidate-job-list *ngIf="typeOfListVisible=='rejected'" [progress_bar_color]="'#e91d62'"
+                                       [type]="'block'" [listOfJobs]="blockedJobs"
                                        (onAction)="onActionOnBlockJob($event)"
                                        (onSortByChange)="onSortChange($event)"
-                ></cn-candidate-job-list><!-- [hidden]="type !=='block'" -->
-                <div class="empty-list-message"  *ngIf="candidate.summary.numberJobsBlocked==0 ">
+                ></cn-candidate-job-list>
+                <div class="empty-list-message" *ngIf="candidate.summary.numberJobsBlocked==0 ">
                   <p>{{noNotIntrestedJobMessage}}</p>
                 </div>
               </div>
