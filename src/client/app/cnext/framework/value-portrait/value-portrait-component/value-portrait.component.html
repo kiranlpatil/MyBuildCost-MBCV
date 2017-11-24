@@ -164,9 +164,6 @@
   </div>
 
   <div class="action-button" *ngIf="!isCandidate">
-    <!--<button class="btn btn-cart add-cart-btn" type="button" *ngIf="!candidate.isInCart" (click)="actionToBePerformedOnValuePortrait('add','cartListed',candidate.candidateId)">Add to cart</button>
-    <button class="btn btn-cart" type="button">Match against all jobs</button>
-    <button class="btn btn-cart reject-btn" type="button" (click)="actionToBePerformedOnValuePortrait('add','rejectedList',candidate.candidateId)">Reject</button>-->
       <cn-recruiter-action [candidate]="candidate" [jobId]="jobId" [type]="type" [isOverlayView]="false" [isValuePortraitView]="true"></cn-recruiter-action>
   </div>
   <div class="value-portrait-footer">
