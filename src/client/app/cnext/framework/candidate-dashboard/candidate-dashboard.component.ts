@@ -241,7 +241,9 @@ export class CandidateDashboardComponent implements OnInit {
         data => {
           this.loaderService.stop();
           this.recruitersJobList = data;
-          this.companyName = this.recruitersJobList[0].company_name;
+          if(this.recruitersJobList.length > 0) {
+            this.companyName =this.recruitersJobList[0].company_name;
+          }
           this.candidate.summary.numberOfRecruiterJobs = this.recruitersJobList.length;
           this.extractRecruitersJobList(this.recruitersJobList);
         }, error => this.errorService.onError(error));
@@ -272,6 +274,9 @@ export class CandidateDashboardComponent implements OnInit {
     } else if (EList.JOB_NOT_INTERESTED === this.listName) {
       this.appliedFilters.listName = EList.JOB_NOT_INTERESTED;
       this.getRejectedJobList();
+    } else if(this.typeOfListVisible == 'recruiters') {
+      this.appliedFilters.listName = EList.JOB_MATCHED;
+      this.getRecruitersJobList();
     } else {
       this.appliedFilters.listName = EList.JOB_MATCHED;
       this.getMatchedJobList();

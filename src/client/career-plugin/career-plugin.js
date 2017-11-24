@@ -16,11 +16,11 @@ function CareerPluginLoad() {
 
   this.applyForJob = function () {
     var phone_no = document.getElementById('career-plugin-mobile-no');
-    var tokenId = 'xyz';
+    var tokenId = '5a1660c6d93f341403aedc18';
     var isCorrect = validateMobileNumber(phone_no.value);
     if (isCorrect) {
       alert("We are redirecting to. Our carrier partner jobmosis");
-      window.location.href = "http://localhost:8080/applicant-registration?phoneNumber=" + phone_no.value + "&" + "tokenId=" + tokenId;
+      window.location.href = "http://localhost:8080/applicant-signup?phoneNumber=" + phone_no.value + "&" + "tokenId=" + tokenId;
     } else {
       document.getElementById('career-plugin-notification').innerHTML = "Invalid mobile number.number should be 10 digits."
     }

@@ -6,5 +6,6 @@ export enum EList {
   CAN_SHORT_LIST,
   JOB_MATCHED, // Candidate Dashboard Match list
   JOB_APPLIED,
-  JOB_NOT_INTERESTED
+  JOB_NOT_INTERESTED,
+  REFERRED_RECRUITERS_JOBS
 }

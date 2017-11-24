@@ -74,16 +74,16 @@ export class CandidateSignUpComponent implements OnInit, AfterViewInit {
     }
     this.validBirthYearList = this.dateService.createBirthYearList(this.year);
     this.mainHeaderMenuHideShow = 'applicant';
+
+    this.activatedRoute.queryParams.subscribe((params: Params) => {
+      this.userForm.controls['mobile_number'].setValue(Number(params['phoneNumber']));
+      LocalStorageService.setLocalValue(LocalStorage.RECRUITER_REFERENCE_ID,params['tokenId']);
+    });
   }
 
   ngAfterViewInit() {
     this.activatedRoute.params.subscribe(params => {
       this.isGuideMessageVisible = params['id'] === 'new_user' ? true : false;
-    });
-
-    this.activatedRoute.queryParams.subscribe((params: Params) => {
-      this.model.mobile_number = params['phoneNumber'];
-      LocalStorageService.setLocalValue(LocalStorage.RECRUITER_REFERENCE_ID,params['tokenId']);
     });
   }
 
