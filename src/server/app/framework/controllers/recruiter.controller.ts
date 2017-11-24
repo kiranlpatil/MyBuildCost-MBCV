@@ -20,10 +20,6 @@ export function create(req: express.Request, res: express.Response, next: any) {
 
     let newUser: RecruiterModel = <RecruiterModel>req.body;
     let recruiterService = new RecruiterService();
-/*
-    let mailChimpMailerService = new MailChimpMailerService();
-*/
-
     recruiterService.createUser(newUser, (error, result) => {
       if (error) {
         if (error == Messages.MSG_ERROR_CHECK_EMAIL_PRESENT) {
@@ -54,10 +50,6 @@ export function create(req: express.Request, res: express.Response, next: any) {
       else {
         let auth: AuthInterceptor = new AuthInterceptor();
         let token = auth.issueTokenWithUid(result);
-/*
-        mailChimpMailerService.onRecruiterSignUpSuccess(newUser);
-*/
-
         res.status(200).send({
           'status': Messages.STATUS_SUCCESS,
           'data': {

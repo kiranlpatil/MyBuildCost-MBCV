@@ -2,7 +2,7 @@
  * Created by techprime002 on 8/28/2017.
  */
 import UserRepository = require('../dataaccess/repository/user.repository');
-import SendMailService = require('./sendmail.service');
+import SendMailService = require('./mailer.service');
 import Messages = require('../shared/messages');
 import MailAttachments = require('../shared/sharedarray');
 import RecruiterRepository = require('../dataaccess/repository/recruiter.repository');
@@ -14,7 +14,7 @@ import IndustryRepository = require('../dataaccess/repository/industry.repositor
 import CandidateModelClass = require('../dataaccess/model/candidateClass.model');
 import RecruiterClassModel = require('../dataaccess/model/recruiterClass.model');
 import CandidateClassModel = require('../dataaccess/model/candidate-class.model');
-import UserService = require("./user.service");
+import UserService = require('./user.service');
 let path = require('path');
 let config = require('config');
 let fs = require('fs');
@@ -63,12 +63,11 @@ class AdminService {
           });
         }
       });
-    }
-    catch
+    } catch
       (e) {
       callback(e, null);
     }
-  };
+  }
 
   getRecruiterDetails(initial: string, callback: (error: any, result: any) => void) {
     try {
@@ -99,10 +98,9 @@ class AdminService {
           callback(error, null);
         } else {
           users.totalNumberOfRecruiters = recruiterResult.length;
-          if (recruiterResult.length == 0) {
+          if (recruiterResult.length === 0) {
             callback(null, users);
-          }
-          else {
+          } else {
             let userFields = {
               '_id': 1,
               'mobile_number': 1,
@@ -117,7 +115,7 @@ class AdminService {
               if (error) {
                 callback(error, null);
               } else {
-                console.log("Fetched all recruiters from users:" + recruiterResult.length);
+                console.log('Fetched all recruiters from users:' + recruiterResult.length);
                 for (let user of result) {
                   if (usersMap.get(user._id.toString())) {
                     user.data = usersMap.get(user._id.toString());
@@ -133,12 +131,11 @@ class AdminService {
           }
         }
       });
-    }
-    catch
+    } catch
       (e) {
       callback(e, null);
     }
-  };
+  }
 
   getCandidateDetails(initial: string, callback: (error: any, result: any) => void) {
     try {
@@ -172,10 +169,9 @@ class AdminService {
           callback(error, null);
         } else {
           users.totalNumberOfCandidates = result.length;
-          if (result.length == 0) {
+          if (result.length === 0) {
             callback(null, users);
-          }
-          else {
+          } else {
             let value = 0;
             let candidateFields = {
               'userId': 1,
@@ -189,7 +185,7 @@ class AdminService {
               if (error) {
                 callback(error, null);
               } else {
-                console.log("Fetched all candidates:" + candidatesResult.length);
+                console.log('Fetched all candidates:' + candidatesResult.length);
                 for (let candidate of candidatesResult) {
                   usersMap.set(candidate.userId.toString(), candidate);
                 }
@@ -211,28 +207,19 @@ class AdminService {
     } catch (e) {
       callback(e, null);
     }
-  };
+  }
 
   sendAdminLoginInfoMail(field: any, callback: (error: any, result: any) => void) {
-    let header1 = fs.readFileSync(path.resolve()+ config.get('TplSeed.publicPath') + 'header1.html').toString();
-    let content = fs.readFileSync(path.resolve() +config.get('TplSeed.publicPath') + 'adminlogininfo.mail.html').toString();
-    let footer1 = fs.readFileSync(path.resolve() +config.get('TplSeed.publicPath') + 'footer1.html').toString();
-    let mid_content = content.replace('$email$', field.email).replace('$address$', (field.location === undefined) ? 'Not Found' : field.location)
-      .replace('$ip$', field.ip).replace('$host$', config.get('TplSeed.mail.host'));
-
-
-    let mailOptions = {
-      from: config.get('TplSeed.mail.MAIL_SENDER'),
-      to: config.get('TplSeed.mail.ADMIN_MAIL'),
-      cc: config.get('TplSeed.mail.TPLGROUP_MAIL'),
-      subject: Messages.EMAIL_SUBJECT_ADMIN_LOGGED_ON + " " + config.get('TplSeed.mail.host'),
-      html: header1 + mid_content + footer1
-      , attachments: MailAttachments.AttachmentArray
-    }
     let sendMailService = new SendMailService();
-    sendMailService.sendMail(mailOptions, callback);
+    let data: Map<string, string> = new Map([['$email$', field.email],
+      ['$address$', (field.location === undefined) ? 'Not Found' : field.location],
+      ['$ip$', field.ip],
+      ['$host$', config.get('TplSeed.mail.host')]]);
+    sendMailService.send(config.get('TplSeed.mail.ADMIN_MAIL'),
+      Messages.EMAIL_SUBJECT_ADMIN_LOGGED_ON + ' '+ config.get('TplSeed.mail.host'),
+      'adminlogininfo.mail.html', data, callback,config.get('TplSeed.mail.TPLGROUP_MAIL'));
 
-  };
+  }
 
   updateUser(_id: string, item: any, callback: (error: any, result: any) => void) {
     this.userRepository.findById(_id, (err: any, res: any) => {
@@ -242,15 +229,15 @@ class AdminService {
         this.userRepository.update(res._id, item, callback);
       }
     });
-  };
+  }
 
   exportCollection(collectionType: string, fields: string, downloadLocation: string, query: string,
                    callback: (err: any, res: any) => void) {
-    console.log("inside " + collectionType + "collection");
+    console.log('inside ' + collectionType + 'collection');
     let stderr: any = '';
     let childProcess: any;
 
-    if (username == "") {
+    if (username === '') {
       childProcess = spawn('mongoexport', ['--db', db, '--collection', collectionType, '--type', 'csv', '--fields', fields,
         '--out', downloadLocation, '--query', query]);
     } else {
@@ -260,7 +247,7 @@ class AdminService {
 
 
     childProcess.on('exit', function (code: any) {
-      if (code != 0) {
+      if (code !== 0) {
         childProcess.kill();
         callback(new Error(), null);
       } else {
@@ -283,7 +270,7 @@ class AdminService {
 
     let downloadLocation = path.resolve() + config.get('TplSeed.adminExportFilePathForServer.candidatesCSV');
 
-    this.exportCollection("candidates", fields, downloadLocation, '{}', (error: any, result: any) => {
+    this.exportCollection('candidates', fields, downloadLocation, '{}', (error: any, result: any) => {
       if (error) {
         callback(error, null);
       } else {
@@ -298,7 +285,7 @@ class AdminService {
 
     let downloadLocation = path.resolve() + config.get('TplSeed.adminExportFilePathForServer.candidateOtherDetailsCSV');
 
-    this.exportCollection("candidates", fields, downloadLocation, '{}', (error: any, result: any) => {
+    this.exportCollection('candidates', fields, downloadLocation, '{}', (error: any, result: any) => {
       if (error) {
         callback(error, null);
       } else {
@@ -312,7 +299,7 @@ class AdminService {
     let query: string;
     let downloadLocation: string;
 
-    if (userType == 'candidate') {
+    if (userType === 'candidate') {
       downloadLocation = path.resolve() + config.get('TplSeed.adminExportFilePathForServer.candidateAccountDetailsCSV');
       fields = '_id,first_name,last_name,mobile_number,email,current_theme,isCandidate,guide_tour,notifications,' +
         'isAdmin,otp,isActivated,temp_mobile,temp_email,picture'
@@ -324,7 +311,7 @@ class AdminService {
         query = '{"isCandidate":false}';
     }
 
-    this.exportCollection("users", fields, downloadLocation, query, (error: any, result: any) => {
+    this.exportCollection('users', fields, downloadLocation, query, (error: any, result: any) => {
       if (error) {
         callback(error, null);
       } else {
@@ -341,7 +328,7 @@ class AdminService {
 
     let downloadLocation = path.resolve() + config.get('TplSeed.adminExportFilePathForServer.recruitersCSV');
 
-    this.exportCollection("recruiters", fields, downloadLocation, '{}', (error: any, result: any) => {
+    this.exportCollection('recruiters', fields, downloadLocation, '{}', (error: any, result: any) => {
       if (error) {
         callback(error, null);
       } else {
@@ -355,7 +342,7 @@ class AdminService {
     let fields = '_id,candidateId,jobProfileId,timestamp,action,__v';
     let downloadLocation = path.resolve() + config.get('TplSeed.adminExportFilePathForServer.usageDetailsCSV');
 
-    this.exportCollection("usestrackings", fields, downloadLocation, '{}', (error: any, result: any) => {
+    this.exportCollection('usestrackings', fields, downloadLocation, '{}', (error: any, result: any) => {
       if (error) {
         callback(error, null);
       } else {
@@ -369,7 +356,7 @@ class AdminService {
     let fields = '_id,proficiencies';
     let downloadLocation = path.resolve() + config.get('TplSeed.adminExportFilePathForServer.keySkillsCSV');
 
-    this.exportCollection("proficiencies", fields, downloadLocation, '{}', (error: any, result: any) => {
+    this.exportCollection('proficiencies', fields, downloadLocation, '{}', (error: any, result: any) => {
       if (error) {
         callback(error, null);
       } else {

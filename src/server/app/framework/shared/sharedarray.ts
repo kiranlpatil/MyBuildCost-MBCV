@@ -9,9 +9,15 @@ class MailAttachments {
     {
       path: path.resolve() + config.get('TplSeed.publicPath')+'images/logo/jobmosis-mobile-logo.png',
       cid: 'unique@company-logo'
+    },{
+      path: path.resolve() + config.get('TplSeed.publicPath')+'images/logo/jobmosis-logo-new.png',
+      cid: 'unique@jobmosis-logo'
     }, {
       path:  path.resolve() + config.get('TplSeed.publicPath')+'images/banner/banner.png',
       cid: 'unique@banner'
+    }, {
+      path:  path.resolve() + config.get('TplSeed.publicPath')+'images/banner/password-reset.png',
+      cid: 'unique@password-reset'
     }/*, {
       path: './src/server/app/framework/public/images/footer/fb.png',
       cid: 'unique@fbfooter'
