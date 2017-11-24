@@ -14,6 +14,7 @@ class Messages {
   public static EMAIL_SUBJECT_RECRUITER_CONTACTED_YOU: string = 'Urgent attention required on Jobmosis with jobtitle ';
   public static EMAIL_SUBJECT_ADMIN_LOGGED_ON: string = 'Admin Logged on';
   public static EMAIL_SUBJECT_SERVER_ERROR: string = 'Server Error Info';
+  public static EMAIL_SUBJECT_RECRUITER_REGISTRATION: string = 'Recruiter registered with Jobmosis.';
 
   //Sendmail
   public static MSG_SUCCESS_EMAIL_REGISTRATION: string = 'Email sent on registered email address.';

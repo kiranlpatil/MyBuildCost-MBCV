@@ -1,23 +1,27 @@
-import {Component, OnInit, ViewChild} from "@angular/core";
-import {ActivatedRoute, Router} from "@angular/router";
-import {JobDashboardService} from "./job-dashboard.service";
-import {RecruiterJobView} from "../../model/recruiter-job-view";
-import {ValueConstant, Tooltip, UsageActions, Label} from "../../../../shared/constants";
-import {CandidateQListModel} from "./q-cards-candidates";
-import {JobPosterModel} from "../../../../user/models/jobPoster";
-import {QCardFilterService} from "../../filters/q-card-filter.service";
-import {QCardFilter} from "../../model/q-card-filter";
-import {LoaderService} from "../../../../shared/loader/loaders.service";
-import {ProfileComparisonService} from "../../profile-comparison/profile-comparison.service";
-import {ProfileComparison} from "../../model/profile-comparison";
-import {QCardviewComponent} from "../q-card-view/q-card-view.component";
-import {ErrorService} from "../../../../shared/services/error.service";
-import {UsageTrackingService} from "../../usage-tracking.service";
-import {MessageService} from "../../../../shared/services/message.service";
-import {RenewJobPostService} from "../../../../user/services/renew-jobpost.service";
+import {Component, OnInit, ViewChild, ElementRef, OnChanges} from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { JobDashboardService } from './job-dashboard.service';
+import { RecruiterJobView } from '../../model/recruiter-job-view';
+import { ValueConstant, Tooltip, UsageActions } from '../../../../shared/constants';
+import { CandidateQListModel } from './q-cards-candidates';
+import { JobPosterModel } from '../../../../user/models/jobPoster';
+import { QCardFilterService } from '../../filters/q-card-filter.service';
+import { QCardFilter } from '../../model/q-card-filter';
+import { LoaderService } from '../../../../shared/loader/loaders.service';
+import { ProfileComparisonService } from '../../profile-comparison/profile-comparison.service';
+import { ProfileComparison } from '../../model/profile-comparison';
+import { QCardviewComponent } from '../q-card-view/q-card-view.component';
+import { ErrorService } from '../../../../shared/services/error.service';
+import { Label } from '../../../../shared/constants';
+import { UsageTrackingService } from '../../usage-tracking.service';
+import { JobPosterService } from '../../job-poster/job-poster.service';
+import { MessageService } from '../../../../shared/services/message.service';
+import { RenewJobPostService } from '../../../../user/services/renew-jobpost.service';
+import { Message } from '../../../../shared/models/message';
 import {ESort} from "../../model/sort-type";
 import {EList} from "../../model/list-type";
 import {RecruiterHeaderDetails} from "../../model/recuirterheaderdetails";
+import {ActionOnQCardService} from "../../../../user/services/action-on-q-card.service";
 import {UsageTracking} from "../../model/usage-tracking";
 @Component({
   moduleId: module.id,
@@ -25,9 +29,9 @@ import {UsageTracking} from "../../model/usage-tracking";
   templateUrl: 'job-dashboard.component.html',
   styleUrls: ['job-dashboard.component.css']
 
-})
+ })
 
-export class JobDashboardComponent implements OnInit {
+export class JobDashboardComponent implements OnInit, OnChanges {
 
   jobId: any;
   jobCount: any;
@@ -39,37 +43,46 @@ export class JobDashboardComponent implements OnInit {
   isCloneButtonClicked: boolean;
   selectedJobProfile: JobPosterModel = new JobPosterModel();
   /*sortBy : string = 'Best match';*/
-  sortBy: ESort = ESort.BEST_MATCH;
+  sortBy : ESort = ESort.BEST_MATCH;
   /*listName : string= ValueConstant.MATCHED_CANDIDATE;*/
-  listName: EList = EList.CAN_MATCHED;
+  listName : EList = EList.CAN_MATCHED;
   @ViewChild(QCardviewComponent) acaQcardClassObject: QCardviewComponent;
   private candidateQlist: CandidateQListModel = new CandidateQListModel();
   private recruiterId: string;
   private showModalStyle: boolean = false;
   private filterMeta: QCardFilter;
-  private appliedFilters: QCardFilter = new QCardFilter();
+  private appliedFilters :QCardFilter = new QCardFilter();
   private isRecruitingForSelf: boolean;
+  private addedToCart: boolean;
   private profileComparison: ProfileComparison;
   private listOfCandidateIdToCompare: string[] = new Array(0);
   private emptyListMessage: string = Tooltip.EMPTY_LIST_MESSAGE;
   private emptyCartMessage: string = Tooltip.EMPTY_CART_MESSAGE;
   private emptyRejectedList: string = Tooltip.EMPTY_REJECTED_LIST_MESSAGE;
-  isJobCloseButtonClicked: boolean;
+  isJobCloseButtonClicked:boolean;
+  addForCompareView: any;
 
 
   constructor(private activatedRoute: ActivatedRoute,
               private errorService: ErrorService,
               private jobDashboardService: JobDashboardService,
-              private usageTracking: UsageTrackingService,
-              private _router: Router, private qcardFilterService: QCardFilterService,
-              private loaderService: LoaderService, private profileComparisonService: ProfileComparisonService,
-              private renewJobPostService: RenewJobPostService, private messageService: MessageService) {
+              private usageTracking : UsageTrackingService,
+              private _router:Router,private qcardFilterService:QCardFilterService,
+              private loaderService: LoaderService,private profileComparisonService: ProfileComparisonService,
+              private renewJobPostService: RenewJobPostService, private messageService: MessageService,
+              private actionOnQCardService: ActionOnQCardService) {
     this.qcardFilterService.candidateFilterValue$.subscribe(
       (data: QCardFilter) => {
         this.filterMeta = data;
       }
     );
     this.headerInfo = new RecruiterHeaderDetails();
+    this.actionOnQCardService.getCartStatus()
+      .subscribe( addedToCart => { this.addedToCart = addedToCart;
+      this.AddedToCart(addedToCart)});
+    this.actionOnQCardService.getValueForCompareView().subscribe(addForCompareView => {this.addForCompareView = addForCompareView;
+    this.addForCompare(addForCompareView);
+    });
   }
 
   ngOnInit() {
@@ -82,6 +95,9 @@ export class JobDashboardComponent implements OnInit {
     this.getJobProfile();
     this.whichListVisible = new Array(5);
 
+  }
+
+  ngOnChanges(changes: any) {
   }
 
   getJobProfile() {
@@ -238,7 +254,7 @@ export class JobDashboardComponent implements OnInit {
   }
 
 //TODO: move this (performActionOnComparisonList) code to comaprison compoent  ->by krishna ghatul code refactor
-  performActionOnComparisonList(data: any) {
+  performActionOnComparisonList(data: any) {debugger
     let usageTrackingData: UsageTracking = new UsageTracking();
     if (data.action == 'Remove') {
       this.profileComparison.profileComparisonData.splice(this.profileComparison.profileComparisonData.indexOf(data.item), 1);
@@ -259,15 +275,18 @@ export class JobDashboardComponent implements OnInit {
       if (this.candidateQlist.matchedCandidates.filter(function (obj) {
           return data.item._id == obj._id;
         }).length && (data.item.candidateListStatus.indexOf('applied') !== -1)) {
-        compareAction = {'action': 'add', 'source': 'matchedList', 'destination': 'cartListed', 'id': data.item._id};
+        compareAction = {'action': 'add', 'destination': 'cartListed', 'id': data.item._id};
+       // compareAction = {'action': 'add', 'source': 'matchedList', 'destination': 'cartListed', 'id': data.item._id};
       } else if (this.candidateQlist.matchedCandidates.filter(function (obj) {
           return data.item._id == obj._id;
         }).length) {
-        compareAction = {'action': 'add', 'source': 'matchedList', 'destination': 'cartListed', 'id': data.item._id};
+        compareAction = {'action': 'add', 'destination': 'cartListed', 'id': data.item._id};
+       // compareAction = {'action': 'add', 'source': 'matchedList', 'destination': 'cartListed', 'id': data.item._id};
       } else if (this.candidateQlist.appliedCandidates.filter(function (obj) {
           return data.item._id == obj._id;
         }).length) {
-        compareAction = {'action': 'add', 'source': 'applied', 'destination': 'cartListed', 'id': data.item._id};
+        compareAction = {'action': 'add', 'destination': 'cartListed', 'id': data.item._id};
+       // compareAction = {'action': 'add', 'source': 'applied', 'destination': 'cartListed', 'id': data.item._id};
       }
 
       this.profileComparison.profileComparisonData.splice(this.profileComparison.profileComparisonData.indexOf(data.item), 1);
@@ -281,17 +300,22 @@ export class JobDashboardComponent implements OnInit {
       if (this.candidateQlist.matchedCandidates.filter(function (obj) {
           return data.item._id == obj._id;
         }).length && (data.item.candidateListStatus.indexOf('applied') !== -1)) {
-        compareAction = {'action': 'add', 'source': 'matchedList', 'destination': 'rejectedList', 'id': data.item._id};
+        compareAction = {'action': 'add', 'destination': 'rejectedList', 'id': data.item._id};
+       // compareAction = {'action': 'add', 'source': 'matchedList', 'destination': 'rejectedList', 'id': data.item._id};
       } else if (this.candidateQlist.matchedCandidates.filter(function (obj) {
           return data.item._id == obj._id;
         }).length) {
-        compareAction = {'action': 'add', 'source': 'matchedList', 'destination': 'rejectedList', 'id': data.item._id};
+        compareAction = {'action': 'add', 'destination': 'rejectedList', 'id': data.item._id};
+       // compareAction = {'action': 'add', 'source': 'matchedList', 'destination': 'rejectedList', 'id': data.item._id};
       } else if ((data.item.candidateListStatus.indexOf('cartListed') !== -1) && (data.item.candidateListStatus.indexOf('applied') == -1)) {
-        compareAction = {'action': 'add', 'source': 'cartListed', 'destination': 'rejectedList', 'id': data.item._id};
+          compareAction = {'action': 'add', 'destination': 'rejectedList', 'id': data.item._id};
+        //  compareAction = {'action': 'add', 'source': 'cartListed', 'destination': 'rejectedList', 'id': data.item._id};
       } else if ((data.item.candidateListStatus.indexOf('applied') !== -1) && (data.item.candidateListStatus.indexOf('cartListed') == -1)) {
-        compareAction = {'action': 'add', 'source': 'applied', 'destination': 'rejectedList', 'id': data.item._id};
+        compareAction = {'action': 'add', 'destination': 'rejectedList', 'id': data.item._id};
+      //  compareAction = {'action': 'add', 'source': 'applied', 'destination': 'rejectedList', 'id': data.item._id};
       } else if ((data.item.candidateListStatus.indexOf('cartListed') !== -1) && (data.item.candidateListStatus.indexOf('applied') !== -1)) {
-        compareAction = {'action': 'add', 'source': 'cartListed', 'destination': 'rejectedList', 'id': data.item._id};
+         compareAction = {'action': 'add', 'destination': 'rejectedList', 'id': data.item._id};
+        // compareAction = {'action': 'add', 'source': 'cartListed', 'destination': 'rejectedList', 'id': data.item._id};
       }
 
       this.profileComparison.profileComparisonData.splice(this.profileComparison.profileComparisonData.indexOf(data.item), 1);

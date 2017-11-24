@@ -1,6 +1,6 @@
 import * as express from "express";
 import AuthInterceptor = require("../interceptor/auth.interceptor");
-import SendMailService = require("../services/sendmail.service");
+import SendMailService = require("../services/mailer.service");
 import UserModel = require("../dataaccess/model/user.model");
 import Messages = require("../shared/messages");
 import ResponseService = require("../shared/response.service");

@@ -18,8 +18,9 @@ import {UsageTrackingService} from "../../usage-tracking.service";
 import {LocalStorageService} from "../../../../shared/services/localstorage.service";
 import {ESort} from "../../model/sort-type";
 import {JobPosterModel} from "../../../../user/models/jobPoster";
-import {Router} from "@angular/router";
+import {Router, ActivatedRoute} from "@angular/router";
 import {UsageTracking} from "../../model/usage-tracking";
+import {ActionOnQCardService} from "../../../../user/services/action-on-q-card.service";
 /*import underline = Chalk.underline;*/
 
 
@@ -54,26 +55,46 @@ export class QCardviewComponent implements OnChanges {
   private selectedCandidate: Candidate = new Candidate();
   private modelCandidate: CandidateQCard = new CandidateQCard();
   private candidateDetails: CandidateDetail = new CandidateDetail();
-  private showModalStyle: boolean = false;
+  private showModalStyle: boolean;
   private isAlreadyPresentInCart: boolean = false;
   private isShortlistedclicked: boolean = false;
   isShowPrintView: boolean = false;
 
 
+
   constructor(private qCardFilterService: QCardFilterService,
-              private usageTrackingService: UsageTrackingService,
-              private errorService: ErrorService,
+              private usageTrackingService : UsageTrackingService,
+              private errorService:ErrorService,
               private profileCreatorService: CandidateProfileService,
               private qCardViewService: QCardViewService,
               private messageService: MessageService,
-              private _router: Router) {
+              private _router:Router,
+              private actionOnQCardService: ActionOnQCardService) {
 
     this.qCardFilterService.aboveMatch$.subscribe(
       () => {
         this.matchFormat = this.match.aboveMatch;
       }
     );
-
+    this.actionOnQCardService.getShowModalStyle()
+      .subscribe( showModalStyle => {
+        this.showModalStyle = showModalStyle
+      });
+    this.actionOnQCardService.getSelectedCandidate()
+      .subscribe( selectedCandidate => {
+        this.selectedCandidate = selectedCandidate
+      });
+    this.actionOnQCardService.getAction().subscribe(actionOnValuePortrait => { debugger
+      let result = this.actionOnQCardService.actionFromValuePortrait(actionOnValuePortrait.item,this.candidateQlist);
+      console.log('response from valuePortrait = ', result);
+      this.actionOnQCard(actionOnValuePortrait.action, result.source, actionOnValuePortrait.destination, result.candidate);
+    });
+    this.actionOnQCardService.getActionOnViewProfile().subscribe(actionOnViewProfile => {
+      this.viewProfile(actionOnViewProfile);
+    });
+    /*this.actionOnQCardService.getValueForCompareView().subscribe(addForCompareView => {
+      this.addForCompareView(addForCompareView.id, addForCompareView.sorceName)
+    });*/
   }
 
   ngOnInit() {
@@ -95,8 +116,8 @@ export class QCardviewComponent implements OnChanges {
   }
 
 //TODO: refactor below code proper ->use service for logic ->by krishna ghatul
-  actionOnQCardFromParent(data: any) {
-    var candidate: CandidateQCard;
+  actionOnQCardFromParent(data: any) {debugger
+    /*var candidate: CandidateQCard;
     var isFound: boolean = false;
     this.candidateQlist.rejectedCandidates.forEach(item => {
       if (data.id == item._id) {
@@ -127,12 +148,13 @@ export class QCardviewComponent implements OnChanges {
           isFound = true;
         }
       })
-    }
-    this.actionOnQCard(data.action, data.source, data.destination, candidate);
+    }*/
+    let result = this.actionOnQCardService.actionFromValuePortrait(data.id, this.candidateQlist);
+    this.actionOnQCard(data.action, result.source, data.destination, result.candidate);
 
   }
 
-  actionOnQCard(action: string, sourceListName: string, destinationListName: string, candidate: CandidateQCard) {
+  actionOnQCard(action: string, sourceListName: string, destinationListName: string, candidate: CandidateQCard) { debugger
     let isMatchList: boolean = false;
     let isFound: boolean = false;
     switch (sourceListName) {
@@ -346,7 +368,7 @@ export class QCardviewComponent implements OnChanges {
     }
   }
 
-  viewProfile(candidate: CandidateQCard) {
+  viewProfile(candidate: CandidateQCard) { debugger
     if (!this.isShortlistedclicked) {
       this.modelCandidate = candidate;
       let usageTrackingData: UsageTracking = new UsageTracking();

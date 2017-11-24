@@ -1,7 +1,7 @@
 import * as express from 'express';
 import * as multiparty from 'multiparty';
 import AuthInterceptor = require('../interceptor/auth.interceptor');
-import SendMailService = require('../services/sendmail.service');
+import SendMailService = require('../services/mailer.service');
 import UserModel = require('../dataaccess/model/user.model');
 import UserService = require('../services/user.service');
 import RecruiterService = require('../services/recruiter.service');

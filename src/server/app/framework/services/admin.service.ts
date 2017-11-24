@@ -2,7 +2,7 @@
  * Created by techprime002 on 8/28/2017.
  */
 import UserRepository = require('../dataaccess/repository/user.repository');
-import SendMailService = require('./sendmail.service');
+import SendMailService = require('./mailer.service');
 import Messages = require('../shared/messages');
 import MailAttachments = require('../shared/sharedarray');
 import RecruiterRepository = require('../dataaccess/repository/recruiter.repository');
@@ -15,7 +15,7 @@ import IndustryRepository = require('../dataaccess/repository/industry.repositor
 import CandidateModelClass = require('../dataaccess/model/candidateClass.model');
 import RecruiterClassModel = require('../dataaccess/model/recruiterClass.model');
 import CandidateClassModel = require('../dataaccess/model/candidate-class.model');
-import UserService = require("./user.service");
+import UserService = require('./user.service');
 import ExportService = require("./export.service");
 let path = require('path');
 let config = require('config');
@@ -55,12 +55,11 @@ class AdminService {
           });
         }
       });
-    }
-    catch
+    } catch
       (e) {
       callback(e, null);
     }
-  };
+  }
 
   getRecruiterDetails(initial: string, callback: (error: any, result: any) => void) {
     try {
@@ -94,10 +93,9 @@ class AdminService {
           callback(error, null);
         } else {
           users.totalNumberOfRecruiters = recruiterResult.length;
-          if (recruiterResult.length == 0) {
+          if (recruiterResult.length === 0) {
             callback(null, users);
-          }
-          else {
+          } else {
             let userFields = {
               '_id': 1,
               'mobile_number': 1,
@@ -114,7 +112,7 @@ class AdminService {
               if (error) {
                 callback(error, null);
               } else {
-                console.log("Fetched all recruiters from users:" + recruiterResult.length);
+                console.log('Fetched all recruiters from users:' + recruiterResult.length);
                 for (let user of result) {
                   if (usersMap.get(user._id.toString())) {
                     user.data = usersMap.get(user._id.toString());
@@ -150,12 +148,11 @@ class AdminService {
           }
         }
       });
-    }
-    catch
+    } catch
       (e) {
       callback(e, null);
     }
-  };
+  }
 
   getCandidateDetails(initial: string, callback: (error: any, result: any) => void) {
     try {
@@ -189,10 +186,9 @@ class AdminService {
           callback(error, null);
         } else {
           users.totalNumberOfCandidates = result.length;
-          if (result.length == 0) {
+          if (result.length === 0) {
             callback(null, users);
-          }
-          else {
+          } else {
             let value = 0;
             let candidateFields = {
               'userId': 1,
@@ -206,7 +202,7 @@ class AdminService {
               if (error) {
                 callback(error, null);
               } else {
-                console.log("Fetched all candidates:" + candidatesResult.length);
+                console.log('Fetched all candidates:' + candidatesResult.length);
                 for (let candidate of candidatesResult) {
                   usersMap.set(candidate.userId.toString(), candidate);
                 }
@@ -228,28 +224,19 @@ class AdminService {
     } catch (e) {
       callback(e, null);
     }
-  };
+  }
 
   sendAdminLoginInfoMail(field: any, callback: (error: any, result: any) => void) {
-    let header1 = fs.readFileSync(path.resolve() + config.get('TplSeed.publicPath') + 'header1.html').toString();
-    let content = fs.readFileSync(path.resolve() + config.get('TplSeed.publicPath') + 'adminlogininfo.mail.html').toString();
-    let footer1 = fs.readFileSync(path.resolve() + config.get('TplSeed.publicPath') + 'footer1.html').toString();
-    let mid_content = content.replace('$email$', field.email).replace('$address$', (field.location === undefined) ? 'Not Found' : field.location)
-      .replace('$ip$', field.ip).replace('$host$', config.get('TplSeed.mail.host'));
-
-
-    let mailOptions = {
-      from: config.get('TplSeed.mail.MAIL_SENDER'),
-      to: config.get('TplSeed.mail.ADMIN_MAIL'),
-      cc: config.get('TplSeed.mail.TPLGROUP_MAIL'),
-      subject: Messages.EMAIL_SUBJECT_ADMIN_LOGGED_ON + " " + config.get('TplSeed.mail.host'),
-      html: header1 + mid_content + footer1
-      , attachments: MailAttachments.AttachmentArray
-    }
     let sendMailService = new SendMailService();
-    sendMailService.sendMail(mailOptions, callback);
+    let data: Map<string, string> = new Map([['$email$', field.email],
+      ['$address$', (field.location === undefined) ? 'Not Found' : field.location],
+      ['$ip$', field.ip],
+      ['$host$', config.get('TplSeed.mail.host')]]);
+    sendMailService.send(config.get('TplSeed.mail.ADMIN_MAIL'),
+      Messages.EMAIL_SUBJECT_ADMIN_LOGGED_ON + ' '+ config.get('TplSeed.mail.host'),
+      'adminlogininfo.mail.html', data, callback,config.get('TplSeed.mail.TPLGROUP_MAIL'));
 
-  };
+  }
 
   updateUser(_id: string, item: any, callback: (error: any, result: any) => void) {
     this.userRepository.findById(_id, (err: any, res: any) => {
@@ -259,7 +246,7 @@ class AdminService {
         this.userRepository.update(res._id, item, callback);
       }
     });
-  };
+  }
 
   exportCandidateDetails(callback: (error: any, response: any) => void) {
     let files: any = {};

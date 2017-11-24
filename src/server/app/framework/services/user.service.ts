@@ -1,8 +1,8 @@
 import UserRepository = require('../dataaccess/repository/user.repository');
-import SendMailService = require('./sendmail.service');
+import SendMailService = require('./mailer.service');
 import SendMessageService = require('./sendmessage.service');
-import * as fs from "fs";
-import * as mongoose from "mongoose";
+import * as fs from 'fs';
+import * as mongoose from 'mongoose';
 let config = require('config');
 let path = require('path');
 import Messages = require('../shared/messages');
@@ -10,6 +10,8 @@ import AuthInterceptor = require('../../framework/interceptor/auth.interceptor')
 import ProjectAsset = require('../shared/projectasset');
 import MailAttachments = require('../shared/sharedarray');
 import RecruiterRepository = require('../dataaccess/repository/recruiter.repository');
+import RecruiterService = require('./recruiter.service');
+import { SentMessageInfo } from 'nodemailer';
 
 class UserService {
   APP_NAME: string;
@@ -106,48 +108,35 @@ class UserService {
 
   }
 
-  forgotPassword(field: any, callback: (error: any, result: any) => void) {
+  forgotPassword(field: any, callback: (error: any, result: SentMessageInfo) => void) {
+    let sendMailService = new SendMailService();
 
     this.userRepository.retrieve({'email': field.email}, (err, res) => {
       if (res.length > 0 && res[0].isActivated === true) {
-        let header1 = fs.readFileSync(path.resolve() + config.get('TplSeed.publicPath')+'header1.html').toString();
-        let content = fs.readFileSync(path.resolve() + config.get('TplSeed.publicPath')+'forgotpassword.html').toString();
-        let footer1 = fs.readFileSync(path.resolve() + config.get('TplSeed.publicPath')+'footer1.html').toString();
 
         let auth = new AuthInterceptor();
         let token = auth.issueTokenWithUid(res[0]);
         let host = config.get('TplSeed.mail.host');
         let link = host + 'reset-password?access_token=' + token + '&_id=' + res[0]._id;
         if (res[0].isCandidate === true) {
-          this.mid_content = content.replace('$link$', link).replace('$first_name$', res[0].first_name).replace('$app_name$', this.APP_NAME);
-          let mailOptions = {
-            from: config.get('TplSeed.mail.MAIL_SENDER'),
-            to: field.email,
-            subject: Messages.EMAIL_SUBJECT_FORGOT_PASSWORD,
-            html: header1 + this.mid_content + footer1
-            , attachments: MailAttachments.AttachmentArray
-          };
-          let sendMailService = new SendMailService();
-          sendMailService.sendMail(mailOptions, callback);
-
+          let data:Map<string,string>= new Map([['$first_name$',res[0].first_name],['$link$',link],['$app_name$',this.APP_NAME]]);
+          sendMailService.send(field.email,
+            Messages.EMAIL_SUBJECT_FORGOT_PASSWORD,
+            'forgotpassword.html',data,(err: any, result: any) => {
+              callback(err, result);
+            });
         } else {
           this.recruiterRepository.retrieve({'userId': new mongoose.Types.ObjectId(res[0]._id)}, (err, recruiter) => {
             if (err) {
               callback(err, null);
             } else {
               this.company_name = recruiter[0].company_name;
-
-              this.mid_content = content.replace('$link$', link).replace('$first_name$', this.company_name).replace('$app_name$', this.APP_NAME);
-
-              let mailOptions = {
-                from: config.get('TplSeed.mail.MAIL_SENDER'),
-                to: field.email,
-                subject: Messages.EMAIL_SUBJECT_FORGOT_PASSWORD,
-                html: header1 + this.mid_content + footer1
-                , attachments: MailAttachments.AttachmentArray
-              };
-              let sendMailService = new SendMailService();
-              sendMailService.sendMail(mailOptions, callback);
+              let data:Map<string,string>= new Map([['$first_name$',this.company_name],['$link$',link],['$app_name$',this.APP_NAME]]);
+              sendMailService.send(field.email,
+                Messages.EMAIL_SUBJECT_FORGOT_PASSWORD,
+                'forgotpassword.html',data,(err: any, result: any) => {
+                  callback(err, result);
+                });
             }
           });
         }
@@ -161,7 +150,7 @@ class UserService {
   }
 
 
-  SendChangeMailVerification(field: any, callback: (error: any, result: any) => void) {
+  SendChangeMailVerification(field: any, callback: (error: any, result: SentMessageInfo) => void) {
     let query = {'email': field.current_email, 'isActivated': true};
     let updateData = {'temp_email': field.new_email};
     this.userRepository.findOneAndUpdate(query, updateData, {new: true}, (error, result) => {
@@ -172,27 +161,17 @@ class UserService {
         let token = auth.issueTokenWithUid(result);
         let host = config.get('TplSeed.mail.host');
         let link = host + 'activate-user?access_token=' + token + '&_id=' + result._id+'isEmailVerification';
-        let header1 = fs.readFileSync(path.resolve() + config.get('TplSeed.publicPath')+'header1.html').toString();
-        let content = fs.readFileSync(path.resolve() + config.get('TplSeed.publicPath')+'change.mail.html').toString();
-        let footer1 = fs.readFileSync(path.resolve() + config.get('TplSeed.publicPath')+'footer1.html').toString();
-        let mid_content = content.replace('$link$', link);
-
-        let mailOptions = {
-          from: config.get('TplSeed.mail.MAIL_SENDER'),
-          to: field.new_email,
-          subject: Messages.EMAIL_SUBJECT_CHANGE_EMAILID,
-          html: header1 + mid_content + footer1
-          , attachments: MailAttachments.AttachmentArray
-        };
         let sendMailService = new SendMailService();
-        sendMailService.sendMail(mailOptions, callback);
-
+        let data: Map<string, string> = new Map([['$link$', link]]);
+        sendMailService.send(field.new_email,
+          Messages.EMAIL_SUBJECT_CHANGE_EMAILID,
+          'change.mail.html', data, callback);
       }
     });
   }
 
 
-  sendVerificationMail(field: any, callback: (error: any, result: any) => void) {
+  sendVerificationMail(field: any, callback: (error: any, result: SentMessageInfo) => void) {
 
     this.userRepository.retrieve({'email': field.email}, (err, res) => {
       if (res.length > 0) {
@@ -201,33 +180,31 @@ class UserService {
             callback(err, null);
           } else {
             this.company_name = recruiter[0].company_name;
-
             let auth = new AuthInterceptor();
             let token = auth.issueTokenWithUid(recruiter[0]);
             let host = config.get('TplSeed.mail.host');
             let link = host + 'company-details?access_token=' + token + '&_id=' + res[0]._id + '&companyName=' + this.company_name;
-            let header1 = fs.readFileSync(path.resolve() +config.get('TplSeed.publicPath')+'header1.html').toString();
-            let content = fs.readFileSync(path.resolve() +config.get('TplSeed.publicPath')+'recruiter.mail.html').toString();
-            let footer1 = fs.readFileSync(path.resolve() +config.get('TplSeed.publicPath')+'footer1.html').toString();
-            let mid_content = content.replace('$link$', link);
-            let mailOptions = {
-              from: config.get('TplSeed.mail.MAIL_SENDER'),
-              to: field.email,
-              subject: Messages.EMAIL_SUBJECT_REGISTRATION,
-              html: header1 + mid_content + footer1
-              , attachments: MailAttachments.AttachmentArray
-            };
             let sendMailService = new SendMailService();
-            sendMailService.sendMail(mailOptions, callback);
-          }
-        });
+            let data:Map<string,string>= new Map([['$link$',link]]);
+            sendMailService.send(field.email,
+              Messages.EMAIL_SUBJECT_REGISTRATION,
+              'recruiter.mail.html',data,(err: any, result: any) => {
+              if(err) {
+                callback(err,result);
+                return;
+                 }
+                let recruiterService = new RecruiterService();
+                recruiterService.mailOnRecruiterSignupToAdmin(res[0], this.company_name, callback);
+
+              });
+                 } });
       } else {
         callback(new Error(Messages.MSG_ERROR_USER_NOT_FOUND), res);
       }
     });
   }
 
-  sendRecruiterVerificationMail(field: any, callback: (error: any, result: any) => void) {
+  sendRecruiterVerificationMail(field: any, callback: (error: any, result: SentMessageInfo) => void) {
 
     this.userRepository.retrieve({'email': field.email}, (err, res) => {
       if (res.length > 0) {
@@ -235,68 +212,44 @@ class UserService {
         let token = auth.issueTokenWithUid(res[0]);
         let host = config.get('TplSeed.mail.host');
         let link = host + 'activate-user?access_token=' + token + '&_id=' + res[0]._id;
-        let header1 = fs.readFileSync(path.resolve() +config.get('TplSeed.publicPath')+'header1.html').toString();
-        let content = fs.readFileSync(path.resolve() +config.get('TplSeed.publicPath')+'recruiter.mail.html').toString();
-        let footer1 = fs.readFileSync(path.resolve() +config.get('TplSeed.publicPath')+'footer1.html').toString();
-        let mid_content = content.replace('$link$', link);
-        let mailOptions = {
-          from: config.get('TplSeed.mail.MAIL_SENDER'),
-          to: field.email,
-          subject: Messages.EMAIL_SUBJECT_REGISTRATION,
-          html: header1 + mid_content + footer1
-          , attachments: MailAttachments.AttachmentArray
-        };
         let sendMailService = new SendMailService();
-        sendMailService.sendMail(mailOptions, callback);
+        let data: Map<string, string> = new Map([['$link$', link]]);
+        sendMailService.send(field.email,
+          Messages.EMAIL_SUBJECT_REGISTRATION,
+          'recruiter.mail.html', data, callback);
 
       } else {
-
         callback(new Error(Messages.MSG_ERROR_USER_NOT_FOUND), res);
       }
     });
   }
 
 
-  sendMail(field: any, callback: (error: any, result: any) => void) {
-    let header1 = fs.readFileSync(path.resolve() +config.get('TplSeed.publicPath')+'header1.html').toString();
-    let content = fs.readFileSync(path.resolve() +config.get('TplSeed.publicPath')+'contactus.mail.html').toString();
-    let footer1 = fs.readFileSync(path.resolve() +config.get('TplSeed.publicPath')+'footer1.html').toString();
-    let mid_content = content.replace('$first_name$', field.first_name).replace('$email$', field.email).replace('$message$', field.message);
-    let to = config.get('TplSeed.mail.ADMIN_MAIL');
-    let mailOptions = {
-      from: config.get('TplSeed.mail.MAIL_SENDER'),
-      to: to,
-      subject: Messages.EMAIL_SUBJECT_USER_CONTACTED_YOU,
-      html: header1 + mid_content + footer1
-      , attachments: MailAttachments.AttachmentArray
-    };
+  sendMail(field: any, callback: (error: any, result: SentMessageInfo) => void) {
     let sendMailService = new SendMailService();
-    sendMailService.sendMail(mailOptions, callback);
-
+    let data:Map<string,string>= new Map([['$first_name$',field.first_name],['$email$',field.email],['$message$',field.message]]);
+    sendMailService.send(config.get('TplSeed.mail.ADMIN_MAIL'),
+      Messages.EMAIL_SUBJECT_USER_CONTACTED_YOU,
+      'contactus.mail.html',data,callback);
   }
 
-  sendMailOnError(errorInfo: any, callback: (error: any, result: any) => void) {
+  sendMailOnError(errorInfo: any, callback: (error: any, result: SentMessageInfo) => void) {
     let current_Time = new Date().toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'});
-    let header1 = fs.readFileSync(path.resolve() +config.get('TplSeed.publicPath')+'header1.html').toString();
-    let content = fs.readFileSync(path.resolve() +config.get('TplSeed.publicPath')+'error.mail.html').toString();
-    let footer1 = fs.readFileSync(path.resolve() +config.get('TplSeed.publicPath')+'footer1.html').toString();
-    let mid_content = content.replace('$time$', current_Time).replace('$host$', config.get('TplSeed.mail.host')).replace('$reason$', errorInfo.reason).replace('$code$', errorInfo.code).replace('$message$', errorInfo.message);
+    let data:Map<string,string>;
     if(errorInfo.stackTrace) {
-      mid_content=mid_content.replace('$error$',errorInfo.stackTrace.stack);
-    } else if(errorInfo.stack){
-      mid_content=mid_content.replace('$error$',errorInfo.stack);
-    }
-    let mailOptions = {
-      from: config.get('TplSeed.mail.MAIL_SENDER'),
-      to: config.get('TplSeed.mail.ADMIN_MAIL'),
-      cc: config.get('TplSeed.mail.TPLGROUP_MAIL'),
-      subject: Messages.EMAIL_SUBJECT_SERVER_ERROR + ' on ' + config.get('TplSeed.mail.host'),
-      html: header1 + mid_content + footer1
-      , attachments: MailAttachments.AttachmentArray
-    };
-    let sendMailService = new SendMailService();
-    sendMailService.sendMail(mailOptions, callback);
+       data= new Map([['$time$',current_Time],['$host$',config.get('TplSeed.mail.host')],
+        ['$reason$',errorInfo.reason],['$code$',errorInfo.code],
+        ['$message$',errorInfo.message],['$error$',errorInfo.stackTrace.stack]]);
 
+    } else if(errorInfo.stack) {
+      data= new Map([['$time$',current_Time],['$host$',config.get('TplSeed.mail.host')],
+        ['$reason$',errorInfo.reason],['$code$',errorInfo.code],
+        ['$message$',errorInfo.message],['$error$',errorInfo.stack]]);
+    }
+    let sendMailService = new SendMailService();
+    sendMailService.send(config.get('TplSeed.mail.ADMIN_MAIL'),
+      Messages.EMAIL_SUBJECT_SERVER_ERROR + ' on ' + config.get('TplSeed.mail.host'),
+      'error.mail.html',data,callback,config.get('TplSeed.mail.TPLGROUP_MAIL'));
   }
 
   findById(id: any, callback: (error: any, result: any) => void) {

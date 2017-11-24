@@ -8,6 +8,7 @@ import {GuidedTourService} from "../../guided-tour.service";
 import {ComplexityAnsweredService} from "../../complexity-answered.service";
 import {UsageTrackingService} from "../../usage-tracking.service";
 import {UsageTracking} from "../../model/usage-tracking";
+import {ActionOnQCardService} from "../../../../user/services/action-on-q-card.service";
 
 @Component({
   moduleId: module.id,
@@ -25,20 +26,31 @@ export class ValuePortraitComponent implements OnInit {
   @Output() candidateId: EventEmitter<string> = new EventEmitter<string>();
   gotItMessage: string = Headings.GOT_IT;
   isCandidate: boolean;
+  isAdmin: boolean;
   isSubmitted: boolean;
   isAnswered: boolean;
+  jobId: string;
+  type: string;
   valuePortraitImgName: string;
   guidedTourStatus: string[] = new Array(0);
 
   constructor(private guidedTourService: GuidedTourService, private candidateProfileService: CandidateProfileService,
               private errorService: ErrorService, private complexityAnsweredService: ComplexityAnsweredService,
-              private usageTrackingService: UsageTrackingService) {
+              private usageTrackingService: UsageTrackingService,
+  private actionOnQCardService: ActionOnQCardService) {
     if (LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE) === 'true') {
       this.isCandidate = true;
+    }
+    if (LocalStorageService.getLocalValue(LocalStorage.ISADMIN) === 'true') {
+      this.isAdmin = true;
     }
     if (LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE_SUBMITTED) === 'true') {
       this.isSubmitted = true;
     }
+    this.actionOnQCardService.getJobId().subscribe(obj => {
+      this.jobId = obj.jobId;
+      this.type = obj.type;
+    });
   }
 
   ngOnInit(): void {

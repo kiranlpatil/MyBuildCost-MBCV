@@ -163,12 +163,9 @@
     <cn-share></cn-share>
   </div>
 
-  <div class="action-button">
-    <button class="btn btn-cart add-cart-btn" type="button">Add to cart</button>
-    <button class="btn btn-cart" type="button">Match against all jobs</button>
-    <button class="btn btn-cart reject-btn" type="button">Reject</button>
+  <div class="action-button" *ngIf="!isCandidate">
+      <cn-recruiter-action [candidate]="candidate" [jobId]="jobId" [type]="type" [isOverlayView]="false" [isValuePortraitView]="true"></cn-recruiter-action>
   </div>
-
   <div class="value-portrait-footer">
     <tpl-footer></tpl-footer>
   </div>

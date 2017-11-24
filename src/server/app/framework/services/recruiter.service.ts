@@ -15,10 +15,12 @@ import CapabilityMatrixService = require('./capbility-matrix.builder');
 import IndustryModel = require('../dataaccess/model/industry.model');
 import IndustryRepository = require('../dataaccess/repository/industry.repository');
 import MailAttachments = require('../shared/sharedarray');
-import SendMailService = require('./sendmail.service');
+import SendMailService = require('./mailer.service');
 import RecruiterModel = require('../dataaccess/model/recruiter.model');
 import RecruiterClassModel = require('../dataaccess/model/recruiterClass.model');
 import CandidateService = require('./candidate.service');
+import {SentMessageInfo} from "nodemailer";
+let bcrypt = require('bcrypt');
 import JobProfileRepository = require('../dataaccess/repository/job-profile.repository');
 import IJobProfile = require('../dataaccess/mongoose/job-profile');
 import IRecruiter = require('../dataaccess/mongoose/recruiter');
@@ -284,33 +286,41 @@ class RecruiterService {
   sendMailToAdvisor(field: any, callback: (error: any, result: any) => void) {
     let header1 = fs.readFileSync(path.resolve() + config.get('TplSeed.publicPath') + 'header1.html').toString();
     let footer1 = fs.readFileSync(path.resolve() + config.get('TplSeed.publicPath') + 'footer1.html').toString();
+    /*let header1 = fs.readFileSync(path.resolve() +config.get('TplSeed.publicPath')+'header1.html').toString();
+    let footer1 = fs.readFileSync(path.resolve() +config.get('TplSeed.publicPath')+'footer1.html').toString();
     let mailOptions = {
       to: field.email_id,
       subject: Messages.EMAIL_SUBJECT_RECRUITER_CONTACTED_YOU,
       html: header1 + footer1, attachments: MailAttachments.AttachmentArray
     }
     let sendMailService = new SendMailService();
-    sendMailService.sendMail(mailOptions, callback);
+    sendMailService.sendMail(mailOptions, callback);*/
 
   }
 
-  sendMailToRecruiter(user: any, field: any, callback: (error: any, result: any) => void) {
-    let header1 = fs.readFileSync(path.resolve() + config.get('TplSeed.publicPath') + 'header1.html').toString();
-    let content = fs.readFileSync(path.resolve() + config.get('TplSeed.publicPath') + 'confirmation.mail.html').toString();
-    let footer1 = fs.readFileSync(path.resolve() + config.get('TplSeed.publicPath') + 'footer1.html').toString();
-    content = content.replace('$job_title$', field.jobTitle);
+  sendMailToRecruiter(user:any,field: any, callback: (error: Error, result: SentMessageInfo) => void) {
     let host = config.get('TplSeed.mail.host');
     let link = host + 'signin';
-    content = content.replace('$link$', link);
-    let mailOptions = {
-      to: user.email,
-      subject: Messages.EMAIL_SUBJECT_RECRUITER_CONTACTED_YOU + field.jobTitle,
-      html: header1 + content + footer1, attachments: MailAttachments.AttachmentArray
-    }
     let sendMailService = new SendMailService();
-    sendMailService.sendMail(mailOptions, callback);
+    let data: Map<string, string> = new Map([['$link$', link],['$job_title$',field.jobTitle]]);
+    sendMailService.send(user.email,
+      Messages.EMAIL_SUBJECT_RECRUITER_CONTACTED_YOU+field.jobTitle,
+      'confirmation.mail.html', data, callback);
   }
 
+  mailOnRecruiterSignupToAdmin(recruiterBasicInfo:any, companyName:string , callback: (error: Error, result: SentMessageInfo) => void) {
+    let link = config.get('TplSeed.mail.host') + 'signin';
+    let data:Map<string,string>= new Map([['$company_name$',companyName],['$email_id$',recruiterBasicInfo.email],
+      ['$contact_number$',recruiterBasicInfo.mobile_number],['$link$',link]]);
+
+
+    let sendMailService = new SendMailService();
+    sendMailService.send( config.get('TplSeed.mail.ADMIN_MAIL'),
+      Messages.EMAIL_SUBJECT_RECRUITER_REGISTRATION,
+      'recruiter-registration.html',data,(err: Error, result: SentMessageInfo) => {
+        callback(err, result);
+      });
+  }
   getTotalRecruiterCount(callback: (error: any, result: any) => void) {
     let query = {};
     this.recruiterRepository.getCount(query, (err, result) => {

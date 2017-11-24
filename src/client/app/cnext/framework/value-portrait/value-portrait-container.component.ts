@@ -1,7 +1,8 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, OnInit, Output, EventEmitter} from "@angular/core";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Button, Label, LocalStorage} from "../../../shared/constants";
 import {LocalStorageService} from "../../../shared/services/localstorage.service";
+import {ActionOnQCardService} from "../../../user/services/action-on-q-card.service";
 
 
 @Component({
@@ -13,6 +14,7 @@ import {LocalStorageService} from "../../../shared/services/localstorage.service
 
 export class ValuePortraitContainerComponent implements OnInit {
 
+
   _userId:string;
   _jobId:string;
   isShareView:boolean = false;
@@ -22,7 +24,9 @@ export class ValuePortraitContainerComponent implements OnInit {
   private isFromCreate: boolean = false;
   private isFromRecruiterJob: boolean = false;
   candidateId:string;
-  constructor(private _router:Router, private activatedRoute:ActivatedRoute) {
+  type:string;
+  constructor(private _router:Router, private activatedRoute:ActivatedRoute,
+  private actionOnQCardService: ActionOnQCardService) {
     if (LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE) === 'true') {
       this.isCandidate = true;
       this.candidateName = LocalStorageService.getLocalValue(LocalStorage.FIRST_NAME)+' '+ LocalStorageService.getLocalValue(LocalStorage.LAST_NAME);
@@ -63,6 +67,8 @@ export class ValuePortraitContainerComponent implements OnInit {
       this.isFromCreate=false;
       if(params['jobId']) {
         this._jobId = params['jobId'];
+        this.type = params['type'];
+        this.actionOnQCardService.setJobId(this._jobId, this.type);
         this.isFromRecruiterJob = true;
       }
     });
@@ -97,4 +103,5 @@ export class ValuePortraitContainerComponent implements OnInit {
   updateCanidateId(value:string) {
     this.candidateId = value;
   }
+
 }

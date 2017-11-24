@@ -17,8 +17,8 @@ import UsageTrackingService = require('../services/usage-tracking.service');
 export function create(req: express.Request, res: express.Response, next: any) {
   try {
 
-    var newUser: RecruiterModel = <RecruiterModel>req.body;
-    var recruiterService = new RecruiterService();
+    let newUser: RecruiterModel = <RecruiterModel>req.body;
+    let recruiterService = new RecruiterService();
     recruiterService.createUser(newUser, (error, result) => {
       if (error) {
         if (error === Messages.MSG_ERROR_CHECK_EMAIL_PRESENT) {
@@ -43,9 +43,10 @@ export function create(req: express.Request, res: express.Response, next: any) {
             code: 400
           });
         }
-      } else {
-        var auth: AuthInterceptor = new AuthInterceptor();
-        var token = auth.issueTokenWithUid(result);
+      }
+      else {
+        let auth: AuthInterceptor = new AuthInterceptor();
+        let token = auth.issueTokenWithUid(result);
         res.status(200).send({
           'status': Messages.STATUS_SUCCESS,
           'data': {
