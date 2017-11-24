@@ -105,10 +105,7 @@
         </div>-->
         <div class="col-sm-12 text-right">
             <cn-recruiter-action [candidate]="item" [jobId]="jobId" [type]="type"
-                                 [isShowPrintView]="isShowPrintView"
-                                 [candidateQlist]="candidateQlist"
-                                 [recuirterListCountModel]="recuirterListCountModel"
-                                 [isShortlistedclicked]="isShortlistedclicked"></cn-recruiter-action>
+                                 [candidateQlist]="candidateQlist"></cn-recruiter-action>
             <!--<button *ngIf="!candidates.isVisible" class="btn btn-cart" type="button" [class.hidden]="(isJobPostExpired || isJobPostClosed) || (isJobPostExpired && isJobPostClosed)"
                     (click)="viewProfile(item)" [innerHTML]="getButtons().MATCH_AGAINST_THIS_JOB">
             </button>
