@@ -20,7 +20,6 @@ import RecruiterModel = require('../dataaccess/model/recruiter.model');
 import RecruiterClassModel = require('../dataaccess/model/recruiterClass.model');
 import CandidateService = require('./candidate.service');
 import {SentMessageInfo} from "nodemailer";
-let bcrypt = require('bcrypt');
 import JobProfileRepository = require('../dataaccess/repository/job-profile.repository');
 import IJobProfile = require('../dataaccess/mongoose/job-profile');
 import IRecruiter = require('../dataaccess/mongoose/recruiter');
