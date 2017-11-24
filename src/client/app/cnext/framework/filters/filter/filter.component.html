@@ -115,11 +115,11 @@
         <h5 data-toggle="collapse" href="#proficiencies" (click)="openKeyskillsPanel=!openKeyskillsPanel"
             [ngClass]="{'panel-up': openKeyskillsPanel , 'panel-down': !openKeyskillsPanel }"
             >Key Skills</h5>
-        <div id="proficiencies" class="collapse">
+        <div id="proficiencies" class="collapse in">
           <div *ngFor="let itemList of proficiencyList">
             <label class="checkbox">
               <input formControlName="proficiencies" type="checkbox" value="{{itemList}}"
-                     (change)="filterByProficiency($event)">{{itemList}}
+                     (change)="filterByProficiency($event)" [checked]="true">{{itemList}}
             </label>
           </div>
         </div>

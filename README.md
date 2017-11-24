@@ -424,6 +424,11 @@ $ src/redis-server
    })
    
    //script to create the indexes on table 
+   db.getCollection('candidates').createIndex({'professionalDetails.experience':-1})
+   db.getCollection('candidates').createIndex({'professionalDetails.salary':1})
+   db.getCollection('candidates').createIndex({'location.city':1})
+   db.getCollection('candidates').createIndex({'proficiencies':1})
+   db.getCollection('candidates').createIndex({'industry.name':1})
    
  
  //Script for performance branch to seperate the postedjobs from recruiter

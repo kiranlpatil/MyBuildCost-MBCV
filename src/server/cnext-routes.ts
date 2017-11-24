@@ -68,7 +68,7 @@ export function cnextInit(app: express.Application) {
   app.get('/api/exportRecruiterDetails',loggerInterceptor.logDetail, this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, adminController.exportRecruiterDetails);
   app.get('/api/getCandidateDetails/:initial',loggerInterceptor.logDetail, this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, adminController.getCandidateDetailsByInitial);
   app.get('/api/getRecruiterDetails/:initial',loggerInterceptor.logDetail, this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, adminController.getRecruiterDetailsByInitial);
-  app.post('/api/request_to_advisor',loggerInterceptor.logDetail,recruiterController.requestToAdvisor);
+  app.post('/api/notify_recruiter',loggerInterceptor.logDetail,recruiterController.notifyRecruiter);
   app.post('/api/response_to_recruiter/:id',loggerInterceptor.logDetail,this.authInterceptor.requiresAuth,recruiterController.responseToRecruiter);
   app.put('/api/job/:id/clone',loggerInterceptor.logDetail, this.authInterceptor.requiresAuth, jobProfileController.cloneJob);
 

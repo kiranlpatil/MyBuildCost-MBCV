@@ -106,13 +106,11 @@ export function updateDetails(req: express.Request, res: express.Response, next:
               code: 400
             });
           } else {
-            let token = auth.issueTokenWithUid(result[0]);
             if(!isEditingProfile && updatedCandidate.isSubmitted) {
                 mailChimpMailerService.onCandidatePofileSubmitted(req.body.basicInformation);}
             res.send({
               'status': 'success',
-              'data': result,
-              access_token: token
+              'data': result
             });
           }
         });

@@ -282,19 +282,20 @@ class RecruiterService {
     this.recruiterRepository.retrieveWithLean(field, projection, callback);
   }
 
-  sendMailToAdvisor(field: any, callback: (error: any, result: any) => void) {
-    let header1 = fs.readFileSync(path.resolve() + config.get('TplSeed.publicPath') + 'header1.html').toString();
-    let footer1 = fs.readFileSync(path.resolve() + config.get('TplSeed.publicPath') + 'footer1.html').toString();
-    /*let header1 = fs.readFileSync(path.resolve() +config.get('TplSeed.publicPath')+'header1.html').toString();
-    let footer1 = fs.readFileSync(path.resolve() +config.get('TplSeed.publicPath')+'footer1.html').toString();
-    let mailOptions = {
-      to: field.email_id,
-      subject: Messages.EMAIL_SUBJECT_RECRUITER_CONTACTED_YOU,
-      html: header1 + footer1, attachments: MailAttachments.AttachmentArray
-    }
+  notifyRecruiter(field: any, callback: (error: any, result: any) => void) {
     let sendMailService = new SendMailService();
-    sendMailService.sendMail(mailOptions, callback);*/
-
+    let host = config.get('TplSeed.mail.host');
+    let link = host + 'signin';
+    let data: Map<string, string> = new Map([['$link$', link],['$mobile_number$',field.mobileNo]]);
+    this.recruiterRepository.retrieveAndPopulate({'_id':new mongoose.Types.ObjectId(field.recruiterId)},{'email':1,'userId':1}, (err, res) => {
+      if (err) {
+        callback(err, null);
+      } else {
+        sendMailService.send(res.email,
+          Messages.EMAIL_SUBJECT_CANDIDATE_REGISTERED_FROM_SITE,
+          'notify-recruiter.mail.html', data, callback);
+      }
+    });
   }
 
   sendMailToRecruiter(user:any,field: any, callback: (error: Error, result: SentMessageInfo) => void) {

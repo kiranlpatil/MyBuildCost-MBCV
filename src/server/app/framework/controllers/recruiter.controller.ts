@@ -162,11 +162,9 @@ export function updateDetails(req: express.Request, res: express.Response, next:
       if (error) {
         next(error);
       } else {
-        var token = auth.issueTokenWithUid(newRecruiter);
         res.send({
           'status': 'success',
-          'data': result,
-          access_token: token
+          'data': result
         });
       }
     });
@@ -366,12 +364,12 @@ export function getCandidatesByName(req: express.Request, res: express.Response,
 
 }
 
-export function requestToAdvisor(req: express.Request, res: express.Response, next: any) {
+export function notifyRecruiter(req: express.Request, res: express.Response, next: any) {
   try {
 
     let recruiterService = new RecruiterService();
     let params = req.body;
-    recruiterService.sendMailToAdvisor(params, (error, result) => {
+    recruiterService.notifyRecruiter(params, (error, result) => {
       if (error) {
         next({
           reason: Messages.MSG_ERROR_RSN_WHILE_CONTACTING,

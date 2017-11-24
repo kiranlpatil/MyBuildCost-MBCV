@@ -12,6 +12,7 @@ class Messages {
   public static EMAIL_SUBJECT_FORGOT_PASSWORD: string = 'Reset your password';
   public static EMAIL_SUBJECT_USER_CONTACTED_YOU: string = 'User Contacted you';
   public static EMAIL_SUBJECT_RECRUITER_CONTACTED_YOU: string = 'Urgent attention required on Jobmosis with jobtitle ';
+  public static EMAIL_SUBJECT_CANDIDATE_REGISTERED_FROM_SITE: string = 'Candidate applied on your site';
   public static EMAIL_SUBJECT_ADMIN_LOGGED_ON: string = 'Admin Logged on';
   public static EMAIL_SUBJECT_SERVER_ERROR: string = 'Server Error Info';
   public static EMAIL_SUBJECT_RECRUITER_REGISTRATION: string = 'Recruiter registered with Jobmosis.';

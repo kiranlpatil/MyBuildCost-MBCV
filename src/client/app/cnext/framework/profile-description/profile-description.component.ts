@@ -151,8 +151,7 @@ export class ProfileDescriptionComponent implements OnInit {
       this.candidate.professionalDetails.currentCompany== undefined ) ||
       (this.candidate.professionalDetails.education == '' ||
       this.candidate.professionalDetails.education == undefined ) ||
-      (this.candidate.professionalDetails.experience == '' ||
-      this.candidate.professionalDetails.experience == undefined ) || this.storedLocation.city == undefined) {
+      (this.candidate.professionalDetails.experience == undefined ) || this.storedLocation.city == undefined) {
       if (this.storedLocation.formatted_address == '') {
         this.isLocationEmpty = true;
       }
@@ -205,8 +204,7 @@ export class ProfileDescriptionComponent implements OnInit {
       this.candidate.professionalDetails.currentCompany=== undefined ) ||
       (this.candidate.professionalDetails.education === '' ||
       this.candidate.professionalDetails.education === undefined ) ||
-      (this.candidate.professionalDetails.experience === '' ||
-      this.candidate.professionalDetails.experience === undefined ) || this.storedLocation.city === undefined ){
+      (this.candidate.professionalDetails.experience === undefined ) || this.storedLocation.city === undefined ){
       if (this.storedLocation.formatted_address == '') {
         this.isLocationEmpty = true;
       }

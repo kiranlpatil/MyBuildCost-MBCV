@@ -88,8 +88,8 @@ export class ProfessionalDataComponent extends BaseService implements OnChanges,
     /*if(this.candidate.professionalDetails!==undefined){
      this.professionalDetailForm.education.value=this.candidate.professionalDetails;
      }*/
-    if (changes.candidate != undefined && changes.candidate.professionalDetails != undefined) {
-      if (this.candidate.professionalDetails.currentSalary !== '' && this.candidate.professionalDetails.noticePeriod !==
+    if (changes.candidate !== undefined && changes.candidate.professionalDetails !== undefined) {
+      if (this.candidate.professionalDetails.currentSalary && this.candidate.professionalDetails.noticePeriod !==
         '' && this.candidate.professionalDetails.relocate !== '' && this.candidate.professionalDetails.industryExposure !== '') {
         this.isValid = true;
       }
@@ -145,7 +145,7 @@ export class ProfessionalDataComponent extends BaseService implements OnChanges,
   }
 
   onNext() {
-    if (this.candidate.professionalDetails.currentSalary == '' ||
+    if (this.candidate.professionalDetails.currentSalary ||
       this.candidate.professionalDetails.industryExposure == '' || this.candidate.professionalDetails.noticePeriod == ''
       || this.candidate.professionalDetails.relocate == '') {
       this.isValid = false;
@@ -160,7 +160,7 @@ export class ProfessionalDataComponent extends BaseService implements OnChanges,
   }
 
   onSave() {
-    if (this.candidate.professionalDetails.currentSalary == '' ||
+    if (this.candidate.professionalDetails.currentSalary ||
       this.candidate.professionalDetails.industryExposure == '' || this.candidate.professionalDetails.noticePeriod == ''
       || this.candidate.professionalDetails.relocate == '') {
       this.isValid = false;

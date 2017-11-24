@@ -565,7 +565,6 @@ export function updateDetails(req: express.Request, res: express.Response, next:
             });
           }
           else {
-            let token = auth.issueTokenWithUid(user);
             res.send({
               "status": "success",
               "data": {
@@ -576,8 +575,7 @@ export function updateDetails(req: express.Request, res: express.Response, next:
                 "picture": result[0].picture,
                 "_id": result[0].userId,
                 "current_theme": result[0].current_theme
-              },
-              access_token: token
+              }
             });
           }
         });
@@ -648,7 +646,6 @@ export function updateProfileField(req: express.Request, res: express.Response, 
             });
           }
           else {
-            let token = auth.issueTokenWithUid(user);
             res.send({
               "status": "success",
               "data": {
@@ -657,8 +654,7 @@ export function updateProfileField(req: express.Request, res: express.Response, 
                 "email": result[0].email,
                 "_id": result[0].userId,
                 "guide_tour": result[0].guide_tour
-              },
-              access_token: token
+              }
             });
           }
         });

@@ -2,8 +2,8 @@ import {Location} from "./location";
 
 export class ProfessionalData {
   education: string = '';
-  experience: string = '';
-  currentSalary: string = '';
+  experience: number;
+  currentSalary: number;
   noticePeriod: string = '';
   relocate: string = '';
   industryExposure: string = '';
