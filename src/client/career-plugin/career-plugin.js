@@ -20,7 +20,7 @@ function CareerPluginLoad() {
     var isCorrect = validateMobileNumber(phone_no.value);
     if (isCorrect) {
       alert("We are redirecting to. Our carrier partner jobmosis");
-      window.location.href = "http://app.jobmosis.com/applicant-registration?phoneNumber=" + phone_no + "&" + "tokenId=" + tokenId;
+      window.location.href = "http://localhost:8080/applicant-registration?phoneNumber=" + phone_no.value + "&" + "tokenId=" + tokenId;
     } else {
       document.getElementById('career-plugin-notification').innerHTML = "Invalid mobile number.number should be 10 digits."
     }
@@ -30,7 +30,6 @@ function CareerPluginLoad() {
     document.getElementById('jobmosis-career-plugin').innerHTML = "<input id='career-plugin-mobile-no' type='number' min='100'><button id='career-plugin-submit'>submit</button><span id='career-plugin-notification'></span>";
     document.getElementById("career-plugin-submit").addEventListener("click", this.applyForJob);
   };
-
 };
 
 validateMobileNumber = function (phoneNumber) {
