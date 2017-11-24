@@ -24,7 +24,6 @@ export class ValuePortraitComponent implements OnInit {
   @Input() isShareView: boolean;
   @Input() isMiniView: boolean;
   @Output() candidateId: EventEmitter<string> = new EventEmitter<string>();
-  @Output() actionOnValuePortrait = new EventEmitter();
   gotItMessage: string = Headings.GOT_IT;
   isCandidate: boolean;
   isAdmin: boolean;
@@ -144,11 +143,6 @@ export class ValuePortraitComponent implements OnInit {
 
   getLabel() {
     return Label;
-  }
-
-  actionToBePerformedOnValuePortrait(action:string, destination:string, item: any) {
-    let data = {'action': action, 'destination': destination, 'item': item};
-    this.actionOnQCardService.actionToBePerformed(data);
   }
 
 }
