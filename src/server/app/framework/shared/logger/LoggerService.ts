@@ -21,6 +21,11 @@ class LoggerService {
 
   }
 
+  logDebug(statement:string) {
+    this.logger.debug(statement);
+
+  }
+
 }
 
 Object.seal(LoggerService);
