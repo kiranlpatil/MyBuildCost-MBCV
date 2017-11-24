@@ -9,7 +9,7 @@
       </div>
     </li>
     <li>
-      <div class="experience-level-tabs info-block-tabs" [class.grayBox]="candidate.professionalDetails.experience !='' && isMiniView">
+      <div class="experience-level-tabs info-block-tabs" [class.grayBox]="candidate.professionalDetails && candidate.professionalDetails.experience !== undefined && isMiniView">
         <span id="experience"> Experience Level </span>
         <div class="tooltip-content2" role="experience" aria-labelledby="experience">
           {{candidate.professionalDetails.experience}}

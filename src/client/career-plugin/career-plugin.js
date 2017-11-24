@@ -14,10 +14,10 @@ function CareerPluginLoad() {
 
   this.loadCareerPluginScript = function () {
     // document.getElementById('jobmosis-career-plugin').innerHTML = "<input id='career-plugin-mobile-no' type='number' min='100'><button id='career-plugin-submit'>submit</button><span id='career-plugin-notification'></span>";
-    var link = document.createElement('link');
-    link.rel = 'stylesheet';
-    link.href = 'assets/career-plugin/career-plugin.css';
-    document.head.appendChild(link);
+    // var link = document.createElement('link');
+    // link.rel = 'stylesheet';
+    // link.href = '/career-plugin/career-plugin.css';
+    // document.head.appendChild(link);
     document.getElementById('jobmosis-career-plugin').innerHTML = "<h3 class='career-plugin-header'>Apply for Jobs</h3>" +
       "<div class='plugin-form-wrap'>" +
       "<label for='career-plugin-mobile-no'>Enter Your Mobile Number</label>" +
