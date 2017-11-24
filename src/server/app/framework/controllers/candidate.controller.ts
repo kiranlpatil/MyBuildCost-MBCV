@@ -12,6 +12,8 @@ import CandidateSearchService = require("../services/candidate-search.service");
 import {CandidateDetailsWithJobMatching} from "../dataaccess/model/candidatedetailswithjobmatching";
 import CandidateClassModel = require("../dataaccess/model/candidate-class.model");
 import {UtilityFunction} from "../uitility/utility-function";
+import SendMailService = require('../services/mailer.service');
+import ProjectAsset = require('../shared/projectasset');
 
 
 export function create(req: express.Request, res: express.Response, next: any) {
@@ -108,7 +110,9 @@ export function updateDetails(req: express.Request, res: express.Response, next:
           } else {
             let token = auth.issueTokenWithUid(result[0]);
             if(!isEditingProfile && updatedCandidate.isSubmitted) {
-                mailChimpMailerService.onCandidatePofileSubmitted(req.body.basicInformation);}
+                mailChimpMailerService.onCandidatePofileSubmitted(req.body.basicInformation);
+                //candidateService.sendMailToRecruiter();
+            }
             res.send({
               'status': 'success',
               'data': result,

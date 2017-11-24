@@ -20,6 +20,9 @@ import JobProfileModel = require("../dataaccess/model/jobprofile.model");
 import JobProfileRepository = require("../dataaccess/repository/job-profile.repository");
 import RecruiterService = require("./recruiter.service");
 import RecruiterClassModel = require("../dataaccess/model/recruiterClass.model");
+import SendMailService = require('./mailer.service');
+import ProjectAsset = require('../shared/projectasset');
+
 let bcrypt = require('bcrypt');
 class CandidateService {
   private candidateRepository: CandidateRepository;
@@ -75,7 +78,7 @@ class CandidateService {
                   if (err) {
                     callback(err, null);
                   } else {
-                    this.updateCandidateList(res._doc._id, item.recruiterReferenceId, (err: Error) => {
+                    this.updateCandidateList(res._doc._id, item, (err: Error, result: any) => {
                       if (err) {
                         callback(err, null);
                       } else {
@@ -94,7 +97,7 @@ class CandidateService {
     });
   }
 
-  updateCandidateList(candidateId: number, recruiterId: number, callback: (error: Error) => void) {
+  updateCandidateList(candidateId: number, candidate: any, callback: (error: Error, result: any) => void) {
     let updateQuery = {
       $push: {
         'candidate_list': new mongoose.Types.ObjectId(candidateId)
@@ -102,17 +105,40 @@ class CandidateService {
     };
 
     let searchQuery = {
-      '_id': new mongoose.Types.ObjectId(recruiterId)
+      '_id': new mongoose.Types.ObjectId(candidate.recruiterReferenceId)
     };
 
-    this.recruiterRepository.findOneAndUpdate(searchQuery, updateQuery, {}, (error: Error) => {
+    this.recruiterRepository.findOneAndUpdate(searchQuery, updateQuery, {}, (error: Error, recruiter: RecruiterClassModel) => {
       if (error) {
-        callback(error);
+        callback(error, null);
       } else {
-        callback(null);
+        this.recruiterRepository.retrieve({'_id': new mongoose.Types.ObjectId(candidate.recruiterReferenceId)}, (recruiterErr, recData) => {
+          if (recruiterErr) {
+            callback(recruiterErr, null);
+          } else {
+            this.userRepository.retrieve({'_id': new mongoose.Types.ObjectId(recData[0].userId)}, (userError, userData) => {
+              if (userError) {
+                callback(userError, null);
+              } else {
+                let sendMailService = new SendMailService();
+                let data: Map<string,string> = new Map([['$first_name$', candidate.first_name],
+                  ['$app_name$', ProjectAsset.APP_NAME]]);
+                sendMailService.send(userData[0].email,
+                  Messages.EMAIL_SUBJECT_CANDIDATE_REGISTRATION,
+                  'new-candidate-registration.html', data, (err: Error) => {
+                    if (error) {
+                      callback(error, null);
+                    } else {
+                      callback(null, "success");
+                    }
+                  });
+              }
+            });
+          }
+        });
+
       }
     });
-
   }
 
   retrieve(field: any, callback: (error: any, result: any) => void) {

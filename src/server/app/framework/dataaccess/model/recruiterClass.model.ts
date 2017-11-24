@@ -17,6 +17,7 @@ class RecruiterClassModel {
   description3: string;
   about_company: string;
   candidateList: string[];
+  personalDetails: User
 }
 
 export = RecruiterClassModel;
