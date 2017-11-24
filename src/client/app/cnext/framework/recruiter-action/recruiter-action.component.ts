@@ -21,6 +21,7 @@ export class RecruiterAction implements OnChanges {
   @Input() jobId: string;
   @Input() type: string;
   @Input() isValuePortraitView: boolean;
+  @Input() isOverlayView: boolean;
 
   constructor(private _router:Router,private profileCreatorService: CandidateProfileService,
               private messageService: MessageService,

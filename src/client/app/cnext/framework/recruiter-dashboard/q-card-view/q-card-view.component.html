@@ -140,9 +140,10 @@
               Reject
             </button>
             <div class="action-button">
-              <button class="btn btn-cart add-cart-btn" type="button">Add to cart</button>
+                <cn-recruiter-action [candidate]="modelCandidate" [isOverlayView]="true" [jobId]="jobId" [type]="type" [isValuePortraitView]="false"></cn-recruiter-action>
+              <!--<button class="btn btn-cart add-cart-btn" type="button">Add to cart</button>
               <button class="btn btn-cart" type="button">Match against all jobs</button>
-              <button class="btn btn-cart reject-btn" type="button">Reject</button>
+              <button class="btn btn-cart reject-btn" type="button">Reject</button>-->
             </div>
           </div>
           <!--<div class="button-group" *ngIf="type=='matchedList'">

@@ -1,4 +1,4 @@
-<button *ngIf="!isValuePortraitView" class="btn btn-cart" type="button" [class.hidden]="(isJobPostExpired || isJobPostClosed) || (isJobPostExpired && isJobPostClosed)"
+<button *ngIf="!isValuePortraitView && !isOverlayView" class="btn btn-cart" type="button" [class.hidden]="(isJobPostExpired || isJobPostClosed) || (isJobPostExpired && isJobPostClosed)"
         (click)="viewProfile(candidate)" [innerHTML]="getButtons().MATCH_AGAINST_THIS_JOB">
 </button>
 <button class="btn btn-cart" type="button" [class.hidden]="(isJobPostExpired || isJobPostClosed) || (isJobPostExpired && isJobPostClosed)"
