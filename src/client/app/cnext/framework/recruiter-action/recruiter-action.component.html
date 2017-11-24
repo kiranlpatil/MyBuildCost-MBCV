@@ -11,14 +11,6 @@
 <button *ngIf="!isValuePortraitView" class="btn btn-cart" type="button"
         (click)="addForCompareView(candidate,type)" [innerHTML]="getButtons().COMPARE_WITH_OTHERS">
 </button>
-<button *ngIf="(type =='cartListed' || type =='applied' || type =='matchedList') && !isValuePortraitView"
-        class="btn btn-cart" type="button"
-        (click)="actionToBePerformed('add','rejectedList', candidate._id)">Reject
-</button>
-<button *ngIf="(type =='cartListed' || type =='applied' || type =='matchedList') && isValuePortraitView"
-        class="btn btn-cart" type="button"
-        (click)="actionToBePerformed('add','rejectedList', candidate.candidateId)">Reject
-</button>
 <button *ngIf="(type =='rejectedList' || type =='applied' || type =='matchedList') && isValuePortraitView"
         class="btn btn-cart" type="button"
         (click)="actionToBePerformed('add','cartListed', candidate.candidateId)">Add to cart
@@ -27,3 +19,12 @@
         class="btn btn-cart" type="button"
         (click)="actionToBePerformed('add','cartListed', candidate._id)">Add to cart
 </button>
+<button *ngIf="(type =='cartListed' || type =='applied' || type =='matchedList') && !isValuePortraitView"
+        class="btn btn-cart" type="button"
+        (click)="actionToBePerformed('add','rejectedList', candidate._id)">Reject
+</button>
+<button *ngIf="(type =='cartListed' || type =='applied' || type =='matchedList') && isValuePortraitView"
+        class="btn btn-cart" type="button"
+        (click)="actionToBePerformed('add','rejectedList', candidate.candidateId)">Reject
+</button>
+
