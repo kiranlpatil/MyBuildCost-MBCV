@@ -8,7 +8,7 @@ import { SentMessageInfo } from 'nodemailer';
 let config = require('config');
 let loggerService = new LoggerService('MAILCHIMP_MAILER_SERVICE');
 
-class SendMaileService {
+class SendMailService {
   static smtpTransport = nodemailer.createTransport({
     service: config.get('TplSeed.mail.MAIL_SERVICE'),
     auth: {
@@ -33,7 +33,7 @@ class SendMaileService {
       html: content,
       attachments: MailAttachments.AttachmentArray
     };
-    SendMaileService.smtpTransport.sendMail(mailOptions, function (error: Error, response: SentMessageInfo) {
+    SendMailService.smtpTransport.sendMail(mailOptions, function (error: Error, response: SentMessageInfo) {
       if (error) {
         loggerService.logError(' Error in mail send ' + error);
       }
@@ -42,5 +42,5 @@ class SendMaileService {
   }
 }
 
-Object.seal(SendMaileService);
-export = SendMaileService;
+Object.seal(SendMailService);
+export = SendMailService;

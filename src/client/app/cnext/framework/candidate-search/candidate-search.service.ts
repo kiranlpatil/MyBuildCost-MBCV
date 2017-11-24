@@ -4,7 +4,7 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import { API, LocalStorage } from '../../../shared/constants';
 import { LocalStorageService } from '../../../shared/services/localstorage.service';
-import {AppliedFilter} from "../../../../../server/app/framework/search-engine/models/input-model/applied-filter";
+import { QCardFilter } from '../model/q-card-filter';
 
 @Injectable()
 
@@ -24,7 +24,7 @@ export class CandidateSearchService extends BaseService {
       .catch(this.handleError);
   }
 
-  getJobProfileMatching(candidateId:string, obj: AppliedFilter):Observable<any> {
+  getJobProfileMatching(candidateId:string, obj: QCardFilter):Observable<any> {
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({headers: headers});
     let body = JSON.stringify({obj});
