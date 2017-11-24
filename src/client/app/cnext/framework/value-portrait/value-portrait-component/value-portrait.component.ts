@@ -30,6 +30,8 @@ export class ValuePortraitComponent implements OnInit {
   isAdmin: boolean;
   isSubmitted: boolean;
   isAnswered: boolean;
+  jobId: string;
+  type: string;
   valuePortraitImgName: string;
   guidedTourStatus: string[] = new Array(0);
 
@@ -46,6 +48,10 @@ export class ValuePortraitComponent implements OnInit {
     if (LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE_SUBMITTED) === 'true') {
       this.isSubmitted = true;
     }
+    this.actionOnQCardService.getJobId().subscribe(obj => {
+      this.jobId = obj.jobId;
+      this.type = obj.type;
+    });
   }
 
   ngOnInit(): void {

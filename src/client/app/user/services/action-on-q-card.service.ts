@@ -13,6 +13,7 @@ export class ActionOnQCardService {
 
   private addedToCart = new Subject<boolean>();
   private showModalStyle = new Subject<boolean>();
+  private jobId = new Subject<any>();
   private addForCompareView = new Subject<any>();
   private actionOnQCard = new Subject<any>();
   private selectedCandidate = new Subject<Candidate>();
@@ -70,6 +71,15 @@ export class ActionOnQCardService {
 
   getAction(): Observable<any> {
     return this.action.asObservable();
+  }
+
+  setJobId(jobId: string, type:string) {
+    let obj = {'jobId': jobId, 'type': type};
+    this.jobId.next(obj);
+  }
+
+  getJobId() : Observable<any> {
+    return this.jobId.asObservable();
   }
 
   actionFromValuePortrait(id: any, candidateQlist: CandidateQListModel) {debugger

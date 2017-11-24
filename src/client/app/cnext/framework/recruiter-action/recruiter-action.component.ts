@@ -20,6 +20,7 @@ export class RecruiterAction implements OnChanges {
   @Input() candidate: any;
   @Input() jobId: string;
   @Input() type: string;
+  @Input() isValuePortraitView: boolean;
 
   constructor(private _router:Router,private profileCreatorService: CandidateProfileService,
               private messageService: MessageService,
@@ -55,12 +56,16 @@ export class RecruiterAction implements OnChanges {
   navigateWithId(nav: string, candidate: CandidateQCard) {
     this.profileCreatorService.getCandidateDetailsOfParticularId(candidate._id).subscribe(
       candidateData => {
-        this._router.navigate([nav, candidateData.data.userId,{jobId: this.jobId}]);
+        this._router.navigate([nav, candidateData.data.userId,{jobId: this.jobId, type: this.type}]);
       });
   }
 
-  navigateToApplicantSearch(nav: string, candidate: CandidateQCard) {
-    this._router.navigate([nav, candidate._id]);
+  navigateToApplicantSearch(nav: string, candidate: any) {
+    if(!this.isValuePortraitView) {
+      this._router.navigate([nav, candidate._id]);
+    }else {
+      this._router.navigate([nav, candidate.candidateId]);
+    }
   }
 
   getButtons() {
