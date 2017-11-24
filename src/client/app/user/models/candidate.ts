@@ -56,4 +56,5 @@ export class Summary {
   numberOfJobApplied: number=0;
   numberJobsBlocked: number=0;
   numberOfmatched: number;
+  numberOfRecruiterJobs: number
 }

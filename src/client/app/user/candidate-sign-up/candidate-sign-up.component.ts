@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild, ElementRef, AfterViewInit} from "@angular/core";
-import {Router, ActivatedRoute} from "@angular/router";
+import {Router, ActivatedRoute, Params} from "@angular/router";
 import {CandidateSignUpService} from "./candidate-sign-up.service";
 import {CandidateDetail} from "../models/candidate-details";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
@@ -74,6 +74,11 @@ export class CandidateSignUpComponent implements OnInit, AfterViewInit {
     }
     this.validBirthYearList = this.dateService.createBirthYearList(this.year);
     this.mainHeaderMenuHideShow = 'applicant';
+
+    this.activatedRoute.queryParams.subscribe((params: Params) => {
+      this.userForm.controls['mobile_number'].setValue(Number(params['phoneNumber']));
+      LocalStorageService.setLocalValue(LocalStorage.RECRUITER_REFERENCE_ID,params['tokenId']);
+    });
   }
 
   ngAfterViewInit() {
@@ -118,6 +123,7 @@ export class CandidateSignUpComponent implements OnInit, AfterViewInit {
     this.model.current_theme = AppSettings.LIGHT_THEM;
     this.model.isCandidate = true;
     this.model.email = this.model.email.toLowerCase();
+    this.model.recruiterReferenceId = LocalStorageService.getLocalValue(LocalStorage.RECRUITER_REFERENCE_ID);
 
     if (!this.makePasswordConfirm()) {
       this.isFormSubmitted = true;

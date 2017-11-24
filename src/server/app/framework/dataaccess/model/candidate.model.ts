@@ -48,6 +48,7 @@ interface CandidateModel {
   personalDetails: User;
   profile_update_tracking:number;
   userFeedBack: number[];
+  recruiterReferenceId: string;
   _id:any;
 }
 export = CandidateModel;

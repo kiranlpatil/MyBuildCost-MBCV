@@ -13,6 +13,7 @@ interface RecruiterModel {
   description2: string;
   description3: string;
   about_company: string;
+  candidateList: string[];
 }
 
 export = RecruiterModel;

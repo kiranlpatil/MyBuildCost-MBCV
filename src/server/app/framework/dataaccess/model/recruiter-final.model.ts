@@ -15,4 +15,5 @@ export class Recruiter { // todo replace all the interface to class
   description2: string;
   description3: string;
   about_company: string;
+  candidateList: string[];
 }

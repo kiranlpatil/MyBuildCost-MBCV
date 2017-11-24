@@ -35,8 +35,11 @@ class RecruiterSchema {
       setOfDocuments: {
         type: [String]
       },
-      postedJobs: [ {
+      postedJobs: [{
         type: mongoose.Schema.Types.ObjectId, ref: 'JobProfile'
+      }],
+      candidate_list: [{
+        type: mongoose.Schema.Types.ObjectId, ref: 'Candidates'
       }]
     }, {versionKey: false});
 

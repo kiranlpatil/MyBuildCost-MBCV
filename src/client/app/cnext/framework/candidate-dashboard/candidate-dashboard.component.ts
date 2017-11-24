@@ -23,43 +23,50 @@ import {QCardsortBy} from "../model/q-cardview-sortby";
   styleUrls: ['candidate-dashboard.component.css']
 })
 
-export class CandidateDashboardComponent implements OnInit{
-  gotItMessage:string= Headings.GOT_IT;
+export class CandidateDashboardComponent implements OnInit {
+  gotItMessage: string = Headings.GOT_IT;
   candidate: Candidate = new Candidate();
-  listName : EList = EList.JOB_MATCHED;
-  sortBy : ESort = ESort.BEST_MATCH;
+  listName: EList = EList.JOB_MATCHED;
+  sortBy: ESort = ESort.BEST_MATCH;
   private jobList: JobQcard[] = new Array(0);
+  private recruitersJobList: JobQcard[] = new Array(0);
   private appliedJobs: JobQcard[] = new Array(0);
   private blockedJobs: JobQcard[] = new Array(0);
-  private hideSection: boolean = false;
   private locationList: string[] = new Array(0);
   private _locationList: string[] = new Array(0);
-  private type: string;
   private emptyDashboardMessage: string = Tooltip.EMPTY_CANDIDATE_DASHBOARD_MESSAGE;
   private noAppliedJobMessage: string = Tooltip.APPLIED_JOB_MESSAGE;
   private noNotIntrestedJobMessage: string = Tooltip.NOT_INTRESTED_JOB_MESSAGE;
-  private overlayScreensDashboardImgPath:string;
-  guidedTourStatus:string[] = new Array(0);
-  overlayScreensDashboardImgName:string;
-  private typeOfListVisible : string ='matched';
-  private appliedFilters :QCardFilter = new QCardFilter();
+  private overlayScreensDashboardImgPath: string;
+  guidedTourStatus: string[] = new Array(0);
+  overlayScreensDashboardImgName: string;
+  private typeOfListVisible: string = 'matched';
+  private appliedFilters: QCardFilter = new QCardFilter();
   private qCardModel: QCardsortBy = new QCardsortBy();
+  isRecruiterReferred: boolean = false;
+  recruiterReferenceId = LocalStorageService.getLocalValue(LocalStorage.RECRUITER_REFERENCE_ID);
+  companyName: string = '';
+
   constructor(private candidateProfileService: CandidateProfileService,
               private candidateDashboardService: CandidateDashboardService,
               private errorService: ErrorService,
               private candidateJobListService: CandidateJobListService,
-              private qcardFilterService:QCardFilterService,
+              private qcardFilterService: QCardFilterService,
               private loaderService: LoaderService,
-              private guidedTourService:GuidedTourService) {
+              private guidedTourService: GuidedTourService) {
     this.candidateProfileService.getCandidateDetails()
       .subscribe(
         candidateData => {
           this.OnCandidateDataSuccess(candidateData);
-        },error => this.errorService.onError(error));
+        }, error => this.errorService.onError(error));
     this.appliedFilters = new QCardFilter();
   }
 
   ngOnInit() {
+    if (this.recruiterReferenceId) {
+      this.isRecruiterReferred = true;
+      this.typeOfListVisible = 'recruiters';
+    }
     this.overlayScreensDashboardImgPath = ImagePath.BASE_ASSETS_PATH_DESKTOP + ImagePath.CANDIDATE_OERLAY_SCREENS_DASHBOARD;
     this.overlayScreensDashboardImgName = ImagePath.CANDIDATE_OERLAY_SCREENS_DASHBOARD;
     this.isRequireGuidedTourImg();
@@ -74,7 +81,7 @@ export class CandidateDashboardComponent implements OnInit{
     this.guidedTourStatus = this.guidedTourService.getTourStatus();
     this.guidedTourService.updateProfileField(this.guidedTourStatus)
       .subscribe(
-        (res:any) => {
+        (res: any) => {
           LocalStorageService.setLocalValue(LocalStorage.GUIDED_TOUR, JSON.stringify(res.data.guide_tour));
         },
         error => this.errorService.onError(error)
@@ -93,14 +100,27 @@ export class CandidateDashboardComponent implements OnInit{
         }
       }
     }
-    this.candidate.summary.numberOfmatched=this.jobList.length;
+    this.candidate.summary.numberOfmatched = this.jobList.length;
     this._locationList = this.locationList;
+  }
+
+  extractRecruitersJobList(jobList: JobQcard[]) {
+    for (let job of jobList) {
+      var addition = job.above_one_step_matching + job.exact_matching;
+      if (addition <= ValueConstant.MATCHING_PERCENTAGE) {
+        this.recruitersJobList.splice(this.recruitersJobList.indexOf(job), 1);
+      }
+    }
+    this.candidate.summary.numberOfRecruiterJobs = this.recruitersJobList.length;
   }
 
   OnCandidateDataSuccess(candidateData: any) {
     this.candidate = candidateData.data[0];
     this.candidate.basicInformation = candidateData.metadata;
     this.candidate.summary = new Summary();
+    if (this.isRecruiterReferred) {
+      this.getRecruitersJobList();
+    }
     this.getAppliedJobList();
     this.getMatchedJobList();
     this.getRejectedJobList();
@@ -110,9 +130,12 @@ export class CandidateDashboardComponent implements OnInit{
     for (let job of this.jobList) {
       if (job._id === LocalStorageService.getLocalValue(LocalStorage.CURRENT_JOB_POSTED_ID)) {
         this.jobList.splice(this.jobList.indexOf(job), 1);
+        this.recruitersJobList.splice(this.recruitersJobList.indexOf(job), 1);
       }
     }
-    this.candidate.summary.numberOfmatched=this.jobList.length;
+
+    this.candidate.summary.numberOfmatched = this.jobList.length;
+    this.candidate.summary.numberOfRecruiterJobs = this.recruitersJobList.length;
     this.onActionPerform(action);
   }
 
@@ -122,7 +145,7 @@ export class CandidateDashboardComponent implements OnInit{
         this.jobList.splice(this.jobList.indexOf(job), 1);
       }
     }
-    this.candidate.summary.numberOfmatched=this.jobList.length;
+    this.candidate.summary.numberOfmatched = this.jobList.length;
     this.onActionPerform(action);
   }
 
@@ -151,34 +174,35 @@ export class CandidateDashboardComponent implements OnInit{
   }
 
   showAppliedJobs() {
-   /* this.qcardFilterService.clearFilter();*/
-   this.typeOfListVisible='applied';
-    if(this.appliedJobs.length>0) {
+    /* this.qcardFilterService.clearFilter();*/
+    this.typeOfListVisible = 'applied';
+    if (this.appliedJobs.length > 0) {
       return;
     }
-   this.getAppliedJobList();
+    this.getAppliedJobList();
   }
 
   getAppliedJobList() {
-    this.appliedFilters.listName= EList.JOB_APPLIED;
+    this.appliedFilters.listName = EList.JOB_APPLIED;
     this.candidateJobListService.getAppliedJobList(this.appliedFilters)
       .subscribe(
         data => {
           this.appliedJobs = data;
           this.candidate.summary.numberOfJobApplied = this.appliedJobs.length;
-        },error => this.errorService.onError(error));
-    if( this.candidate.summary.numberOfJobApplied===undefined){
-      this.candidate.summary.numberOfJobApplied=0;
+        }, error => this.errorService.onError(error));
+    if (this.candidate.summary.numberOfJobApplied === undefined) {
+      this.candidate.summary.numberOfJobApplied = 0;
     }
   }
+
   showRejectedJobs() {
-   /* this.qcardFilterService.clearFilter();*/
-    this.typeOfListVisible='rejected';
-    if(this.blockedJobs.length>0) {
+    this.typeOfListVisible = 'rejected';
+    if (this.blockedJobs.length > 0) {
       return;
     }
     this.getRejectedJobList();
   }
+
   getRejectedJobList() {
     this.appliedFilters.listName = EList.JOB_NOT_INTERESTED;
     this.candidateJobListService.getBlockedJobList(this.appliedFilters)
@@ -186,54 +210,83 @@ export class CandidateDashboardComponent implements OnInit{
         data => {
           this.blockedJobs = data;
           this.candidate.summary.numberJobsBlocked = this.blockedJobs.length;
-        },error => this.errorService.onError(error));
-    if( this.candidate.summary.numberJobsBlocked===undefined){
-      this.candidate.summary.numberJobsBlocked=0;
+        }, error => this.errorService.onError(error));
+    if (this.candidate.summary.numberJobsBlocked === undefined) {
+      this.candidate.summary.numberJobsBlocked = 0;
     }
   }
 
   showMatchedJobs() {
-    this.typeOfListVisible='matched';
-    if(this.jobList.length>0) {
+    this.typeOfListVisible = 'matched';
+    if (this.jobList.length > 0) {
       return;
     }
-    /*this.qcardFilterService.clearFilter();*/
     this.getMatchedJobList();
   }
+
+  showRecruitersMatchedJobs() {
+    this.typeOfListVisible = 'recruiters';
+    if (this.jobList.length > 0) {
+      return;
+    }
+    this.getRecruitersJobList();
+  }
+
+  getRecruitersJobList() {
+    this.appliedFilters.listName = EList.JOB_MATCHED;
+    let updatedAppliedFilters = JSON.parse(JSON.stringify(this.appliedFilters));
+    updatedAppliedFilters['recruiterId'] = this.recruiterReferenceId;
+    this.candidateDashboardService.getJobList(updatedAppliedFilters)
+      .subscribe(
+        data => {
+          this.loaderService.stop();
+          this.recruitersJobList = data;
+          if(this.recruitersJobList.length > 0) {
+            this.companyName =this.recruitersJobList[0].company_name;
+          }
+          this.candidate.summary.numberOfRecruiterJobs = this.recruitersJobList.length;
+          this.extractRecruitersJobList(this.recruitersJobList);
+        }, error => this.errorService.onError(error));
+  }
+
   getMatchedJobList() {
-    this.appliedFilters.listName= EList.JOB_MATCHED;
+    this.appliedFilters.listName = EList.JOB_MATCHED;
     this.candidateDashboardService.getJobList(this.appliedFilters)
       .subscribe(
         data => {
           this.loaderService.stop();
           this.jobList = data;
           console.log("Candidate matched job list", this.jobList);
-          this.candidate.summary.numberOfmatched= this.jobList.length;
+          this.candidate.summary.numberOfmatched = this.jobList.length;
           this.extractList(this.jobList);
-        },error => this.errorService.onError(error));
+        }, error => this.errorService.onError(error));
   }
+
   getMessage() {
     return Messages;
   }
 
-  changeFilter(obj : QCardFilter) {
-    this.appliedFilters= obj;
-    if(EList.JOB_APPLIED === this.listName) {
+  changeFilter(obj: QCardFilter) {
+    this.appliedFilters = obj;
+    if (EList.JOB_APPLIED === this.listName) {
       this.appliedFilters.listName = EList.JOB_APPLIED;
       this.getAppliedJobList();
-    } else if(EList.JOB_NOT_INTERESTED === this.listName) {
+    } else if (EList.JOB_NOT_INTERESTED === this.listName) {
       this.appliedFilters.listName = EList.JOB_NOT_INTERESTED;
       this.getRejectedJobList();
+    } else if(this.typeOfListVisible == 'recruiters') {
+      this.appliedFilters.listName = EList.JOB_MATCHED;
+      this.getRecruitersJobList();
     } else {
       this.appliedFilters.listName = EList.JOB_MATCHED;
       this.getMatchedJobList();
     }
   }
 
-  onSortChange(value:string) {
+  onSortChange(value: string) {
     switch (value) {
       case this.qCardModel.listOfMatchings[2]:
-        this.appliedFilters.sortBy =ESort.SALARY;
+        this.appliedFilters.sortBy = ESort.SALARY;
         break;
       case this.qCardModel.listOfMatchings[1]:
         this.appliedFilters.sortBy = ESort.EXPERIENCE;
