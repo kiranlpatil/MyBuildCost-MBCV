@@ -142,7 +142,7 @@ export class ValuePortraitComponent implements OnInit {
 
   actionToBePerformedOnValuePortrait(action:string, destination:string, item: any) {
     let data = {'action': action, 'destination': destination, 'item': item};
-    this.actionOnQCardService.actionToBePerformedOnValuePortrait(data);
+    this.actionOnQCardService.actionToBePerformed(data);
   }
 
 }

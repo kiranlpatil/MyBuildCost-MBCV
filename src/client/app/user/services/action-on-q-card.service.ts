@@ -16,7 +16,7 @@ export class ActionOnQCardService {
   private addForCompareView = new Subject<any>();
   private actionOnQCard = new Subject<any>();
   private selectedCandidate = new Subject<Candidate>();
-  private actionOnValuePortrait = new Subject<any>();
+  private action = new Subject<any>();
   private actionOnViewProfile = new Subject<any>();
 
   constructor() {
@@ -64,12 +64,12 @@ export class ActionOnQCardService {
     return this.selectedCandidate.asObservable();
   }
 
-  actionToBePerformedOnValuePortrait(data: any) {
-    this.actionOnValuePortrait.next(data);
+  actionToBePerformed(data: any) {
+    this.action.next(data);
   }
 
-  getActionOnValuePortrait(): Observable<any> {
-    return this.actionOnValuePortrait.asObservable();
+  getAction(): Observable<any> {
+    return this.action.asObservable();
   }
 
   actionFromValuePortrait(id: any, candidateQlist: CandidateQListModel) {debugger

@@ -108,6 +108,12 @@ export class RecruiterAction implements OnChanges {
     this.actionOnQCardService.setActionOnQCard(action, sourceListName, destinationListName, candidate);
   }*/
 
+  actionToBePerformed(action:string, destination:string, item: any) {
+    let data = {'action': action, 'destination': destination, 'item': item};
+    this.actionOnQCardService.actionToBePerformed(data);
+  }
+
+
   actionOnQCard(action: string, sourceListName: string, destinationListName: string, candidate: CandidateQCard) {
     let isMatchList: boolean = false;
     let isFound : boolean=false;
