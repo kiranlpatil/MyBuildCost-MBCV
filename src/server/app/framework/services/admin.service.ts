@@ -305,7 +305,7 @@ class AdminService {
 
   }
 
-  exportKeySkillsCollection(callback: (err: any, res: any) => void) {
+ /* exportKeySkillsCollection(callback: (err: any, res: any) => void) {
     let fields = '_id,proficiencies';
     let downloadLocation = path.resolve() + config.get('TplSeed.adminExportFilePathForServer.keySkillsCSV');
 
@@ -320,7 +320,7 @@ class AdminService {
       }
     });
 
-  }
+  }*/
 
 }
 
