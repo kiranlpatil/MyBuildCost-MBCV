@@ -99,12 +99,18 @@
           </div>
         </div>
       </div>
-      <div class="button-group">
+      <div class="button-group"
+           [class.hidden]="(isJobPostExpired || isJobPostClosed) || (isJobPostExpired && isJobPostClosed)">
         <!--<div class="col-sm-6 padding-right5">
           <button class="btn btn-cart btn-block" type="button" >View</button>
         </div>-->
         <div class="col-sm-12 text-right">
-            <cn-recruiter-action [candidate]="item" [jobId]="jobId" [type]="type" [isValuePortraitView]="false"></cn-recruiter-action>
+            <cn-recruiter-action *ngIf="!candidates.isVisible"
+                                 [candidate]="item"
+                                 [jobId]="jobId"
+                                 [type]="type"
+                                 [isValuePortraitView]="false">
+            </cn-recruiter-action>
             <!--<button *ngIf="!candidates.isVisible" class="btn btn-cart" type="button" [class.hidden]="(isJobPostExpired || isJobPostClosed) || (isJobPostExpired && isJobPostClosed)"
                     (click)="viewProfile(item)" [innerHTML]="getButtons().MATCH_AGAINST_THIS_JOB">
             </button>
@@ -132,18 +138,21 @@
       <div class="modal-content">
         <div class="modal-body">
           <cn-job-compare-view [typeOfView]="'compact'" (close)="closeJob()" [candiadteId]="selectedCandidate._id" [jobId]="jobId"></cn-job-compare-view>
-          <div class="button-group" *ngIf="type=='applied' || type=='matchedList'">
+          <div class="button-group" *ngIf="type=='applied' || type=='matchedList'|| type=='rejectedList'">
            <!-- <button class="btn btn-primary" [class.hidden]="(isJobPostExpired || isJobPostClosed) || (isJobPostExpired && isJobPostClosed)" (click)="actionOnQCard('add','applied','cartListed',modelCandidate)">Add To
               Cart
             </button>
             <button class="btn btn-danger" [class.hidden]="(isJobPostExpired || isJobPostClosed) || (isJobPostExpired && isJobPostClosed)" (click)="actionOnQCard('add','applied','rejectedList', modelCandidate)">
               Reject
             </button>-->
-            <div class="action-button">
-                <cn-recruiter-action [candidate]="modelCandidate" [isOverlayView]="true" [jobId]="jobId" [type]="type" [isValuePortraitView]="false"></cn-recruiter-action>
-              <!--<button class="btn btn-cart add-cart-btn" type="button">Add to cart</button>
-              <button class="btn btn-cart" type="button">Match against all jobs</button>
-              <button class="btn btn-cart reject-btn" type="button">Reject</button>-->
+            <div class="action-button"
+                 [class.hidden]="(isJobPostExpired || isJobPostClosed) || (isJobPostExpired && isJobPostClosed)">
+                <cn-recruiter-action
+                        [candidate]="modelCandidate"
+                        [isOverlayView]="true" [jobId]="jobId"
+                        [type]="type"
+                        [isValuePortraitView]="false">
+                </cn-recruiter-action>
             </div>
           </div>
           <!--<div class="button-group" *ngIf="type=='matchedList'">
@@ -178,9 +187,15 @@
             <cn-job-compare-view [typeOfView]="'spa_candidate'" (close)="closeJob()" [candiadteId]="selectedCandidate._id" [jobId]="jobId"></cn-job-compare-view>
           </div>
 -->
-          <div class="button-group">
-              <div class="action-button">
-                  <cn-recruiter-action [candidate]="modelCandidate" [isOverlayView]="true" [jobId]="jobId" [type]="type" [isValuePortraitView]="false"></cn-recruiter-action>
+          <div class="button-group" >
+              <div class="action-button"
+                   [class.hidden]="(isJobPostExpired || isJobPostClosed) || (isJobPostExpired && isJobPostClosed)">
+              <cn-recruiter-action
+                      [candidate]="modelCandidate"
+                      [isOverlayView]="true" [jobId]="jobId"
+                      [type]="type"
+                      [isValuePortraitView]="false">
+              </cn-recruiter-action>
               </div>
           </div>
 

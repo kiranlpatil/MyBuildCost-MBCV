@@ -1,24 +1,29 @@
-<button *ngIf="!isValuePortraitView && !isOverlayView" class="btn btn-cart" type="button" [class.hidden]="(isJobPostExpired || isJobPostClosed) || (isJobPostExpired && isJobPostClosed)"
+<button *ngIf="!isValuePortraitView && !isOverlayView" class="btn btn-cart" type="button"
         (click)="viewProfile(candidate)" [innerHTML]="getButtons().MATCH_AGAINST_THIS_JOB">
 </button>
-<button class="btn btn-cart" type="button" [class.hidden]="(isJobPostExpired || isJobPostClosed) || (isJobPostExpired && isJobPostClosed)"
-        (click)="navigateToApplicantSearch('/recruiter/search', candidate)" [innerHTML]="getButtons().MATCH_AGAINST_ALL_JOB">
+<button class="btn btn-cart" type="button"
+        (click)="navigateToApplicantSearch('/recruiter/search', candidate)"
+        [innerHTML]="getButtons().MATCH_AGAINST_ALL_JOB">
 </button>
-<button *ngIf="!isValuePortraitView" class="btn btn-cart" type="button" [class.hidden]="(isJobPostExpired || isJobPostClosed) || (isJobPostExpired && isJobPostClosed)"
+<button *ngIf="!isValuePortraitView" class="btn btn-cart" type="button"
         (click)="navigateWithId('/value-portrait', candidate)" [innerHTML]="getButtons().SHOW_VALUE_PORTRAIT">
 </button>
-<button *ngIf="!isValuePortraitView" class="btn btn-cart" type="button" [class.hidden]="(isJobPostExpired || isJobPostClosed) || (isJobPostExpired && isJobPostClosed)"
+<button *ngIf="!isValuePortraitView" class="btn btn-cart" type="button"
         (click)="addForCompareView(candidate,type)" [innerHTML]="getButtons().COMPARE_WITH_OTHERS">
 </button>
-<button *ngIf="(type =='cartListed' || type =='applied' || type =='matchedList') && !isValuePortraitView" class="btn btn-cart" type="button" [class.hidden]="(isJobPostExpired || isJobPostClosed) || (isJobPostExpired && isJobPostClosed)"
+<button *ngIf="(type =='cartListed' || type =='applied' || type =='matchedList') && !isValuePortraitView"
+        class="btn btn-cart" type="button"
         (click)="actionToBePerformed('add','rejectedList', candidate._id)">Reject
 </button>
-<button *ngIf="(type =='cartListed' || type =='applied' || type =='matchedList') && isValuePortraitView" class="btn btn-cart" type="button" [class.hidden]="(isJobPostExpired || isJobPostClosed) || (isJobPostExpired && isJobPostClosed)"
+<button *ngIf="(type =='cartListed' || type =='applied' || type =='matchedList') && isValuePortraitView"
+        class="btn btn-cart" type="button"
         (click)="actionToBePerformed('add','rejectedList', candidate.candidateId)">Reject
 </button>
-<button *ngIf="(type =='rejectedList' || type =='applied' || type =='matchedList') && isValuePortraitView" class="btn btn-cart" type="button" [class.hidden]="(isJobPostExpired || isJobPostClosed) || (isJobPostExpired && isJobPostClosed)"
+<button *ngIf="(type =='rejectedList' || type =='applied' || type =='matchedList') && isValuePortraitView"
+        class="btn btn-cart" type="button"
         (click)="actionToBePerformed('add','cartListed', candidate.candidateId)">Add to cart
 </button>
-<button *ngIf="(type =='rejectedList' || type =='applied' || type =='matchedList') && isOverlayView" class="btn btn-cart" type="button" [class.hidden]="(isJobPostExpired || isJobPostClosed) || (isJobPostExpired && isJobPostClosed)"
+<button *ngIf="(type =='rejectedList' || type =='applied' || type =='matchedList') && isOverlayView"
+        class="btn btn-cart" type="button"
         (click)="actionToBePerformed('add','cartListed', candidate._id)">Add to cart
 </button>

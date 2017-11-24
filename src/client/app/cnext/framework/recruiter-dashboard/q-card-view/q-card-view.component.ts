@@ -84,7 +84,7 @@ export class QCardviewComponent implements OnChanges {
       .subscribe( selectedCandidate => {
         this.selectedCandidate = selectedCandidate
       });
-    this.actionOnQCardService.getAction().subscribe(actionOnValuePortrait => { debugger
+    this.actionOnQCardService.getAction().subscribe(actionOnValuePortrait => {
       let result = this.actionOnQCardService.actionFromValuePortrait(actionOnValuePortrait.item,this.candidateQlist);
       console.log('response from valuePortrait = ', result);
       this.actionOnQCard(actionOnValuePortrait.action, result.source, actionOnValuePortrait.destination, result.candidate);
