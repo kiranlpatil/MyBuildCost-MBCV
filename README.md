@@ -467,6 +467,21 @@ $ src/redis-server
        print("success:" + user._id);
   }
   })
+  
+  
+#Jobmosis Career_plugin 
+
+Step 1:Inject these two script/link in index.html
+
+<script src="http://localhost:3000/public/career-plugin/career-plugin.js"></script>
+<link rel="stylesheet" href="http://localhost:3000/public/career-plugin/career-plugin.css">
+
+Step 2: Add this tag 
+<div id="jobmosis-career-plugin" style="position: absolute;top: 75px;"></div>
+
+Note: To avoid typescript compilation error use below declartion.
+ declare var CareerPluginLoad:any;
+
 
 # MySQL
 
