@@ -1,4 +1,4 @@
-<button *ngIf="!isValuePortraitView && !isOverlayView" class="btn btn-cart" type="button"
+<button *ngIf="!isValuePortraitView && !isOverlayView" class="btn btn-cart match-job" type="button"
         (click)="viewProfile(candidate)" [innerHTML]="getButtons().MATCH_AGAINST_THIS_JOB">
 </button>
 <button class="btn btn-cart" type="button"
@@ -20,11 +20,11 @@
         (click)="actionToBePerformed('add','cartListed', candidate._id)">Add to cart
 </button>
 <button *ngIf="(type =='cartListed' || type =='applied' || type =='matchedList') && !isValuePortraitView"
-        class="btn btn-cart" type="button"
+        class="btn btn-cart reject-btn" type="button"
         (click)="actionToBePerformed('add','rejectedList', candidate._id)">Reject
 </button>
 <button *ngIf="(type =='cartListed' || type =='applied' || type =='matchedList') && isValuePortraitView"
-        class="btn btn-cart" type="button"
+        class="btn btn-cart reject-btn" type="button"
         (click)="actionToBePerformed('add','rejectedList', candidate.candidateId)">Reject
 </button>
 
