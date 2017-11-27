@@ -75,7 +75,7 @@ class JobProfileService {
   };
 
   retrieveByJobId(id: any, callback: (error: any, result: IJobProfile) => void) {
-    this.jobProfileRepository.findById(id, (err: any, res: any) => {
+    this.jobProfileRepository.retrieveJobProfiles({'_id': id}, (err: any, res: any) => {
       if (err) {
         callback(new Error('Not Found Any Job posted'), null);
         return;

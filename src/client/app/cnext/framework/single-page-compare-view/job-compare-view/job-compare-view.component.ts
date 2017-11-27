@@ -52,22 +52,25 @@ export class JobCompareViewComponent implements OnChanges,OnInit {
     }
     if (changes.jobId != undefined && changes.jobId.currentValue != undefined) {
       this.recruiterId = changes.jobId.currentValue;
-    }
-    if (this.candiadteId != undefined && this.recruiterId != undefined && this.typeOfView ) {
-      this.getCompareDetail(this.candiadteId, this.recruiterId);
-      this.candiadteId = changes.candiadteId.currentValue;
-      this.getCandidateProfile(this.candiadteId);
+
       this.recruiterDashboardService.getPostedJobDetails(this.jobId)
         .subscribe(
           data => {
-            this.OnRecruiterDataSuccess(data);
+            this.OnRecruiterDataSuccess(data[0]);
           },error => this.errorService.onError(error));
+    }
+    if (this.candiadteId != undefined && this.recruiterId != undefined && this.typeOfView ) {
+      this.candiadteId = changes.candiadteId.currentValue;
+      this.getCandidateProfile(this.candiadteId);
+      this.getCompareDetail(this.candiadteId, this.recruiterId);
 
-      this.recruiterDashboardService.getRecruiterDetails()
-        .subscribe(
-          recruiterData => {
-            this.recruiter = recruiterData.data;
-          },error => this.errorService.onError(error));
+      if(!this.isCandidate) {
+        this.recruiterDashboardService.getRecruiterDetails()
+          .subscribe(
+            recruiterData => {
+              this.recruiter = recruiterData.data;
+            },error => this.errorService.onError(error));
+      }
     }
   }
 
@@ -99,6 +102,7 @@ export class JobCompareViewComponent implements OnChanges,OnInit {
 
   OnRecruiterDataSuccess(data: any) {
     this.job = data;
+    this.recruiter = data.recruiterId;
   }
 
   getCandidateProfile(candidateId: string) {

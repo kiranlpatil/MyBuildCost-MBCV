@@ -12,20 +12,25 @@ export abstract class SearchEngine {
     console.log('In Search');
   }
 
-  abstract buildUserCriteria(filter : AppliedFilter, criteria : any) : any;
-
   abstract buildBusinessCriteria(details : BaseDetail): any;
 
-  abstract getSortedCriteria(sortBy : any, criteria : any) : Object ;
+  abstract buildUserCriteria(filter : AppliedFilter, criteria : any) : any;
 
-  abstract buildQCards(objects : any[], jobDetails : BaseDetail,sortBy : ESort, listName: EList, mustHaveComplexity?: boolean) : any ;
+  abstract getSortedCriteria(sortBy : any, criteria : any) : Object;
 
-  abstract getMatchingObjects(criteria : any, sortingQuery: any, callback : (error : any, response : any[]) => void) : void;
+  abstract getRequiredFieldNames(): any;
 
-  abstract createQCard(q_card : QCard, user : any): void;
+  abstract getMatchingObjects(criteria : any, includedFields: any, sortingQuery: any,
+                              callback : (error : any, response : any[]) => void) : void;
 
-  computePercentage(candidate_capability_matrix : any , job_capability_matrix :any) : QCard {
+  abstract buildQCards(objects : any[], jobDetails : BaseDetail, appliedFilter: AppliedFilter,
+                       callback : (error : any, response : any[]) => void) : any ;
+
+  abstract createQCard(q_card : QCard, user : any, called: string): void;
+
+  computePercentage(candidate_capability_matrix : any , job_capability_matrix :any, id: any) : QCard {
     let q_card = new QCard();
+    q_card._id = id;
     let count =0;
     for (let cap in job_capability_matrix) {
         if (job_capability_matrix[cap] === -1 || job_capability_matrix[cap] === 0 ||
@@ -47,8 +52,6 @@ export abstract class SearchEngine {
     q_card.above_one_step_matching = (q_card.above_one_step_matching / count) * 100;
     q_card.exact_matching = (q_card.exact_matching / count) * 100;
     return q_card;
-
-
   }
 
   getSortedObjectsByMatchingPercentage( q_cards : QCard [] ) : QCard[] {
@@ -70,5 +73,4 @@ export abstract class SearchEngine {
     }
     return q_cards;
   }*/
-
 }

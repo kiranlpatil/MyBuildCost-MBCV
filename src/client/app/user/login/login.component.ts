@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild, ElementRef} from "@angular/core";
+import {Component, ElementRef, OnInit, ViewChild} from "@angular/core";
 import {Router} from "@angular/router";
 import {LoginService} from "./login.service";
 import {Login} from "../models/login";
@@ -14,7 +14,7 @@ import {
 } from "../../shared/index";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {ValidationService} from "../../shared/customvalidations/validation.service";
-import {ProjectAsset, Messages} from "../../shared/constants";
+import {Messages, ProjectAsset} from "../../shared/constants";
 import {SharedService} from "../../shared/services/shared-service";
 /*declare var CareerPluginLoad:any;*/
 
@@ -42,7 +42,6 @@ export class LoginComponent implements OnInit {
   mainHeaderMenuHideShow: string;
   isChrome: boolean;
   isToasterVisible: boolean = true;
-
   constructor(private _router: Router, private loginService: LoginService, private themeChangeService: ThemeChangeService,
               private messageService: MessageService, private formBuilder: FormBuilder, private sharedService: SharedService) {
     this.userForm = this.formBuilder.group({
