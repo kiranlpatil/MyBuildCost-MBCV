@@ -16,7 +16,7 @@ import {FormBuilder, FormGroup} from "@angular/forms";
 import {ValidationService} from "../../shared/customvalidations/validation.service";
 import {ProjectAsset, Messages} from "../../shared/constants";
 import {SharedService} from "../../shared/services/shared-service";
-declare var CareerPluginLoad:any;
+/*declare var CareerPluginLoad:any;*/
 
 @Component({
   moduleId: module.id,
@@ -64,8 +64,8 @@ export class LoginComponent implements OnInit {
     this.mainHeaderMenuHideShow = 'signin';
     window.history.forward();
     //this._validateUserNavigation.validate();
-    var docLoad = new CareerPluginLoad();
-    docLoad.loadCareerPluginScript();
+   /* var docLoad = new CareerPluginLoad();
+    docLoad.loadCareerPluginScript();*/
   }
 
   closeToaster() {
