@@ -46,18 +46,21 @@ export class SearchEngineController {
           let ids = searchService.getObjectIdsByList(againstDetails, appliedFilters.listName);
           criteria = {'_id': {$in: ids}};
         }
-
         let mainCriteria = searchEngine.buildUserCriteria(appliedFilters, criteria);
         let sortingQuery = searchEngine.getSortedCriteria(appliedFilters, criteria);
-        searchEngine.getMatchingObjects(mainCriteria, sortingQuery, (error: any, response: any[]) => {
+        let includedFields = searchEngine.getRequiredFieldNames();
+
+        searchEngine.getMatchingObjects(mainCriteria, includedFields, sortingQuery, (error: any, response: any[]) => {
           if (error) {
             next(error);
           } else {
-            let q_cards = searchEngine.buildQCards(response, againstDetails, appliedFilters.sortBy, appliedFilters.listName, appliedFilters.mustHaveComplexity);
-            /*if(appliedFilters.listName !== EList.CAN_CART) {
-              q_cards = searchEngine.maskQCards(q_cards, appliedFilters.listName);
-            }*/
-            res.status(200).send(q_cards);
+            searchEngine.buildQCards(response, againstDetails, appliedFilters,(error: any, response: any[]) => {
+              if (error) {
+                next(error);
+              } else {
+                res.status(200).send(response);
+              }
+            });
           }
         });
       }
@@ -95,23 +98,30 @@ export class SearchEngineController {
         }
 
         let mainCriteria = searchEngine.buildUserCriteria(appliedFilters, criteria);
-        searchEngine.getMatchingObjects(mainCriteria, {},(error: any, response: any[]) => {
+        searchEngine.getMatchingObjects(mainCriteria, {},{},
+          (error: any, response: any[]) => {
           if (error) {
             next(error);
           } else {
-            let jobQCardMatching = searchEngine.buildQCards(response, againstDetails, appliedFilters.sortBy, appliedFilters.listName);
-
-            candidateService.get(againstDetails.userId, (error, candidateDetails) => {
-              if(error) {
-                next(error);
-              }
-              let _candidateDetails: CandidateDetailsWithJobMatching;
-              _candidateDetails = jobSearchService.getCandidateVisibilityAgainstRecruiter(candidateDetails, jobQCardMatching);
-              _candidateDetails.jobQCardMatching = candidateDetails.isVisible ? jobQCardMatching : [];
-                res.send({
-                  'status': 'success',
-                  'data': _candidateDetails
-                });
+            let jobQCardMatching = searchEngine.buildQCards(response, againstDetails, appliedFilters,
+              (error: any, response: any[]) => {
+                if (error) {
+                  next(error);
+                } else {
+                  res.status(200).send(response);
+                  candidateService.get(againstDetails.userId, (error, candidateDetails) => {
+                    if(error) {
+                      next(error);
+                    }
+                    let _candidateDetails: CandidateDetailsWithJobMatching;
+                    _candidateDetails = jobSearchService.getCandidateVisibilityAgainstRecruiter(candidateDetails, jobQCardMatching);
+                    _candidateDetails.jobQCardMatching = candidateDetails.isVisible ? jobQCardMatching : [];
+                    res.send({
+                      'status': 'success',
+                      'data': _candidateDetails
+                    });
+                  });
+                }
             });
           }
         });

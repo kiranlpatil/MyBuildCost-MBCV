@@ -8,8 +8,8 @@
   </div>
 </div>
 
-
 <div id="{{jobCompareIdForPrint}}">
+  {{recruiter | json}}
 <div class="modal-header">
   <cn-print-screen *ngIf="!isCandidate" [typeOfView]="typeOfView" [screenIdForPrint]="'print-job-compare-view'" [fileName]="'Candidate-Overlay-View'" [candidateId]="candiadteId" [jobId]="recruiterId"></cn-print-screen>
   <div *ngIf="typeOfView =='spa_job' && recruiter != undefined">
@@ -299,8 +299,8 @@
             <p [innerHTML]="getMessage().GUIDED_TOUR_JOB_PROFILE_SCENARIO_HELP_MESSAGE"></p>
           </div>
         </div>
-        <div *ngIf="typeOfView =='spa_job' && recruiter != undefined && candidateDetails != undefined" >
-          <cn-capability-compare [job_picture]="recruiter.company_logo" [candidate_picture]="candidateDetails.picture" [capabilities]="capabilities"></cn-capability-compare>
+        <div *ngIf="typeOfView =='spa_job' && candidateDetails != undefined" >
+          <cn-capability-compare [job_picture]="" [candidate_picture]="candidateDetails.picture" [capabilities]="capabilities"></cn-capability-compare>
         </div>
         <div *ngIf="typeOfView =='spa_candidate' && candidateDetails != undefined && recruiter != undefined">
           <cn-capability-compare [candidate_picture]="candidateDetails.picture"  [job_picture]="recruiter.company_logo"  [capabilities]="capabilities"></cn-capability-compare>

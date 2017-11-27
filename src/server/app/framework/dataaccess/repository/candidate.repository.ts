@@ -20,6 +20,30 @@ class CandidateRepository extends RepositoryBase<ICandidate> {
     super(CandidateSchema);
   }
 
+  public retrieveSortedResultWithLimit(query: any, included: Object, sortingQuery: any, callback: (error: any, result: any) => void) {
+    CandidateSchema.find(query, included).sort(sortingQuery).populate('userId').lean().exec(function (err: any, items: any) {
+      callback(err, items);
+    });
+  }
+
+  public retrieveResult(query: any, included: Object, callback: (error: any, result: any) => void) {
+    CandidateSchema.find(query, included).lean().exec(function (err: any, items: any) {
+      callback(err, items);
+    });
+  }
+
+  public retrieveAndPopulate(query : Object,included : Object, callback:(error : any, result : any) => void) {
+    CandidateSchema.find(query, included).populate('userId').lean().exec(function (err, items) {
+      callback(err, items);
+    });
+  }
+
+  public retrieveCandidate(field: any, callback:(error : any, result : any) => void) {
+    CandidateSchema.find(field).populate('userId').lean().exec(function (err, res) {
+      callback(err, res);
+    });
+  }
+
   getCandidateQCard(candidates: any[], jobProfile: JobProfileModel, candidatesIds: any[], sortBy: string,
                     callback: (err: any, res: any) => void) {
     let candidates_q_cards_send: CandidateQCard[] = new Array(0);
