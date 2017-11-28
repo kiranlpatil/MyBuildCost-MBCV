@@ -8,7 +8,7 @@ function CareerPluginLoad() {
       var isCorrect = validateMobileNumber(phone_no.value);
       if (isCorrect) {
         // alert("We are redirecting to. Our carrier partner jobmosis");
-        window.location.href = "http://localhost:8080/applicant-signup?phoneNumber=" + phone_no.value + "&" + "tokenId=" + tokenId;
+        window.location.href = "http://34.214.128.209/applicant-signup?phoneNumber=" + phone_no.value + "&" + "tokenId=" + tokenId;
       } else {
         document.getElementById('career-plugin-notification').innerHTML = "Number should be 10 digits."
       }

@@ -79,7 +79,8 @@
 .value-portrait-candidate-email {
   display: inline-block !important;
   margin: -7px 0;
-  width: 100%;
+  position: absolute;
+  width: 211px;
   .email-icon {
     background: url(../assets/c-next/card-view/sprite.png) no-repeat -147px -884px;
     float: left;
@@ -94,10 +95,10 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    width: calc(100% - 50px);
+    width: calc(100% - 35px);
     a {
       color: $white;
-      display: inline-block;
+      display: block;
       overflow: hidden;
       text-overflow: ellipsis;
       text-transform: lowercase;
@@ -274,9 +275,11 @@
 @media only screen and (max-width: 767px) {
   .value-portrait-candidate-profile-section {
     .value-portrait-candidate-email {
+      position: relative;
+      width: 100%;
       span {
-        overflow: visible;
-        text-overflow: clip;
+        overflow: hidden;
+        text-overflow: ellipsis;
         white-space: normal;
         word-break: break-all;
       }

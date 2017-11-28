@@ -233,8 +233,8 @@ class AdminService {
       ['$ip$', field.ip],
       ['$host$', config.get('TplSeed.mail.host')]]);
     sendMailService.send(config.get('TplSeed.mail.ADMIN_MAIL'),
-      Messages.EMAIL_SUBJECT_ADMIN_LOGGED_ON + ' '+ config.get('TplSeed.mail.host'),
-      'adminlogininfo.mail.html', data, callback,config.get('TplSeed.mail.TPLGROUP_MAIL'));
+      Messages.EMAIL_SUBJECT_ADMIN_LOGGED_ON + ' ' + config.get('TplSeed.mail.host'),
+      'adminlogininfo.mail.html', data, callback, config.get('TplSeed.mail.TPLGROUP_MAIL'));
 
   }
 
@@ -244,62 +244,6 @@ class AdminService {
         callback(err, res);
       } else {
         this.userRepository.update(res._id, item, callback);
-      }
-    });
-  }
-
-  exportCandidateDetails(callback: (error: any, response: any) => void) {
-    let files: any = {};
-    let exportService = new ExportService();
-    exportService.exportCandidateCollection((err, candidatesResponse) => {
-      if (err) {
-        callback(err, null);
-      } else {
-        files['candidatesFilePath'] = candidatesResponse;
-        exportService.exportCandidateCapabilities((err, capabilitiesResponse) => {
-          if (err) {
-            callback(err, null);
-          } else {
-            files['candidatesOtherDetailsFilePath'] = capabilitiesResponse;
-            exportService.exportUserCollection('candidate', (err, usersResponse) => {
-              if (err) {
-                callback(err, null);
-              } else {
-                files['usersFilePath'] = config.get('TplSeed.downloadFilePathClient')
-                  + config.get('TplSeed.exportFileNames.candidateAccountDetailsCSV');
-                callback(null, files);
-              }
-            });
-          }
-        });
-      }
-    });
-  }
-
-  exportRecruiterDetails(callback: (error: any, response: any) => void) {
-    let files: any = {};
-    let exportService = new ExportService();
-    exportService.exportRecruiterCollection((err, recruitersResponse) => {
-      if (err) {
-        callback(err, null);
-      } else {
-        files['recruitersFilePath'] = recruitersResponse;
-        exportService.exportJobDetailsCollection((err, jobsResponse) => {
-          if (err) {
-            callback(err, null);
-          } else {
-            files['jobDetailsFilePath'] = jobsResponse;
-            exportService.exportUserCollection('recruiter', (err, usersResponse) => {
-              if (err) {
-                callback(err, null);
-              } else {
-                files['usersFilePath'] = config.get('TplSeed.downloadFilePathClient')
-                  + config.get('TplSeed.exportFileNames.companyAccountDetailsCSV');
-                callback(null, files);
-              }
-            });
-          }
-        });
       }
     });
   }

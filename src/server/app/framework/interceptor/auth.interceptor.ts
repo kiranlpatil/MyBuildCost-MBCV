@@ -1,7 +1,7 @@
 import * as passport from "passport";
 import * as jwt from "jwt-simple";
 import * as Bearer from "passport-http-bearer";
-import { ConstVariables } from "../shared/sharedconstants";
+import {ConstVariables} from "../shared/sharedconstants";
 let BearerStrategy: any = Bearer.Strategy;
 let FacebookTokenStrategy = require('passport-facebook-token');
 import UserRepository = require("../dataaccess/repository/user.repository");
@@ -23,7 +23,7 @@ class AuthInterceptor {
 
     passport.use(new BearerStrategy(function (token: any, done: any) {
       let decoded: any = null;
-      let isShareApi:boolean = false;
+      let isShareApi: boolean = false;
       try {
         decoded = jwt.decode(token, ConstVariables.AUTHENTICATION_JWT_KEY);
       } catch (e) {
@@ -43,22 +43,23 @@ class AuthInterceptor {
         }
       }
 
-      if(decoded.iss !== undefined) {
+      if (decoded.iss !== undefined) {
         let userRepository: UserRepository = new UserRepository();
         userRepository.findById(decoded.iss, function (err, user) {
           if (err) {
-            return done(err,null,null);
+            return done(err, null, null);
           }
           if (!user) {
-            return done(null, false,null);
+            return done(null, false, null);
           }
           return done(null, user, isShareApi);
         });
-      } /*else {
-        let err = new Error();
-        err.message = 'Issuer in token is not available';
-        return done(err, false, null);
-      }*/
+      }
+      /*else {
+       let err = new Error();
+       err.message = 'Issuer in token is not available';
+       return done(err, false, null);
+       }*/
     }));
 
     passport.use(new FacebookTokenStrategy({
@@ -169,7 +170,7 @@ class AuthInterceptor {
       }));
   }
 
-  issueTokenWithUid(user: any,role?:string) {
+  issueTokenWithUid(user: any, role?: string) {
     let issuer: string;
     if (user.userId) {
       issuer = user.userId;
@@ -187,10 +188,10 @@ class AuthInterceptor {
     return token;
   }
 
-  issueTokenWithUidForShare(user:any) {
+  issueTokenWithUidForShare(user: any) {
     //Token with no expiry date
-    let issuer:string;
-    let customKey:string = ConstVariables.AUTHENTICATION_ENCODED_SHARE_KEY;
+    let issuer: string;
+    let customKey: string = ConstVariables.AUTHENTICATION_ENCODED_SHARE_KEY;
     if (user.userId) {
       issuer = user.userId;
     } else {
@@ -206,19 +207,19 @@ class AuthInterceptor {
 
   requiresAuth(req: any, res: any, next: any) {
     passport.authenticate('bearer', {session: false},
-      function (err:any, myuser:any, isShareApi:boolean) {
+      function (err: any, myuser: any, isShareApi: boolean) {
         if (err) {
           next({
               reason: err.message,
               message: err.message,
-            stackTrace: new Error(),
+              stackTrace: new Error(),
               code: 401
             }
           );
         } else {
-          if(req.headers.authorization) {
+          if (req.headers.authorization) {
             if (req.headers.authorization.split(' ')[0].toLowerCase() !== 'bearer' || req.headers.authorization.split(' ').length !== 2) {
-              next( {
+              next({
                   reason: Messages.MSG_ERROR_IS_BEARER,
                   message: Messages.MSG_ERROR_IS_BEARER,
                   stackTrace: new Error(),
@@ -243,11 +244,11 @@ class AuthInterceptor {
 
           } else {
             next({
-                reason: Messages.MSG_ERROR_TOKEN_NOT_PROVIDED,
-                message: Messages.MSG_ERROR_UNAUTHORIZED_USER,
-                stackTrace: new Error(),
-                code: 400
-              });
+              reason: Messages.MSG_ERROR_TOKEN_NOT_PROVIDED,
+              message: Messages.MSG_ERROR_UNAUTHORIZED_USER,
+              stackTrace: new Error(),
+              code: 400
+            });
           }
         }
       })(req, res, next);
@@ -360,16 +361,29 @@ class AuthInterceptor {
     });
   }
 
-  secureApiCheck(req:any, res:any, next:any) {
+  secureApiCheck(req: any, res: any, next: any) {
     if (req.isShareApi) {
-      next( {
-          reason: Messages.MSG_ERROR_API_CHECK,
-          message: Messages.MSG_ERROR_API_CHECK,
-          stackTrace: new Error(),
-          code: 401
-        });
+      next({
+        reason: Messages.MSG_ERROR_API_CHECK,
+        message: Messages.MSG_ERROR_API_CHECK,
+        stackTrace: new Error(),
+        code: 401
+      });
     } else {
       next();
+    }
+  }
+
+  validateAdmin(req: any, res: any, next: any) {
+    if (req.user.isAdmin) {
+      next();
+    } else {
+      next({
+        reason: Messages.MSG_ERROR_UNAUTHORIZED_USER,
+        message: Messages.MSG_ERROR_UNAUTHORIZED_USER,
+        stackTrace: new Error(),
+        code: 401
+      });
     }
   }
 }

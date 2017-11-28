@@ -62,6 +62,7 @@ export class AppComponent implements OnInit {
     this.errorMessage = message.error_msg;
     this.customMessage = message.custom_message;
     if(message.error_code===401) {
+      this.isShowErrorMessage = false;
       setTimeout(function () {
         this.closeErrorMessage();
         this.logOut();

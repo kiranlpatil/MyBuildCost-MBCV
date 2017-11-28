@@ -113,31 +113,21 @@ export function getCandidateDetailsByInitial(req: express.Request, res: express.
   try {
     let adminService = new AdminService();
     let initial = req.params.initial;
-
-    if (req.user.isAdmin) {
-      adminService.getCandidateDetails(initial, (error, result) => {
-        if (error) {
-          next({
-            reason: Messages.MSG_ERROR_RETRIEVING_USER,//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
-            message: Messages.MSG_ERROR_RETRIEVING_USER,
-            stackTrace: new Error(),
-            code: 403
-          });
-        } else {
-          res.status(200).send({
-            'status': 'success',
-            'data': result
-          });
-        }
-      });
-    } else {
-      next({
-        reason: Messages.MSG_ERROR_UNAUTHORIZED_USER,
-        message: Messages.MSG_ERROR_UNAUTHORIZED_USER,
-        stackTrace: new Error(),
-        code: 401
-      });
-    }
+    adminService.getCandidateDetails(initial, (error, result) => {
+      if (error) {
+        next({
+          reason: Messages.MSG_ERROR_RETRIEVING_USER,//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
+          message: Messages.MSG_ERROR_RETRIEVING_USER,
+          stackTrace: new Error(),
+          code: 403
+        });
+      } else {
+        res.status(200).send({
+          'status': 'success',
+          'data': result
+        });
+      }
+    });
   } catch (e) {
     next({
       reason: e.message,
@@ -153,30 +143,21 @@ export function getRecruiterDetailsByInitial(req: express.Request, res: express.
     let adminService = new AdminService();
     let initial = req.params.initial;
 
-    if (req.user.isAdmin) {
-      adminService.getRecruiterDetails(initial, (error, result) => {
-        if (error) {
-          next({
-            reason: Messages.MSG_ERROR_RETRIEVING_USER,//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
-            message: Messages.MSG_ERROR_RETRIEVING_USER,
-            stackTrace: new Error(),
-            code: 403
-          });
-        } else {
-          res.status(200).send({
-            'status': 'success',
-            'data': result
-          });
-        }
-      });
-    } else {
-      next({
-        reason: Messages.MSG_ERROR_UNAUTHORIZED_USER,
-        message: Messages.MSG_ERROR_UNAUTHORIZED_USER,
-        stackTrace: new Error(),
-        code: 401
-      });
-    }
+    adminService.getRecruiterDetails(initial, (error, result) => {
+      if (error) {
+        next({
+          reason: Messages.MSG_ERROR_RETRIEVING_USER,//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
+          message: Messages.MSG_ERROR_RETRIEVING_USER,
+          stackTrace: new Error(),
+          code: 403
+        });
+      } else {
+        res.status(200).send({
+          'status': 'success',
+          'data': result
+        });
+      }
+    });
   } catch (e) {
     next({
       reason: e.message,
@@ -187,147 +168,108 @@ export function getRecruiterDetailsByInitial(req: express.Request, res: express.
   }
 }
 
-export function exportCandidateDetails(req: express.Request, res: express.Response, next: any) {
-  try {
-    let adminService = new AdminService();
-    if (req.user.isAdmin) {
-      adminService.exportCandidateDetails((err, result) => {
-        if (err) {
-          next({
-            reason: Messages.MSG_ERROR_CREATING_EXCEL,
-            message: Messages.MSG_ERROR_CREATING_EXCEL,
-            stackTrace: err,
-            code: 500
-          });
-        } else {
-          res.status(200).send({
-            'path': result,
-            'status': 'success'
-          });
-        }
-      });
-    }
-    else {
-      next({
-        reason: Messages.MSG_ERROR_UNAUTHORIZED_USER,
-        message: Messages.MSG_ERROR_UNAUTHORIZED_USER,
-        stackTrace: new Error(),
-        code: 401
-      });
-    }
-  } catch (e) {
-    next({
-      reason: e.message,
-      message: e.message,
-      stackTrace: new Error(),
-      code: 500
-    });
-  }
-}
-
-export function exportRecruiterDetails(req: express.Request, res: express.Response, next: any) {
-  try {
-    let adminService = new AdminService();
-    if (req.user.isAdmin) {
-      adminService.exportRecruiterDetails((err, result) => {
-        if (err) {
-          next({
-            reason: Messages.MSG_ERROR_CREATING_EXCEL,
-            message: Messages.MSG_ERROR_CREATING_EXCEL,
-            stackTrace: err,
-            code: 500
-          });
-        } else {
-          res.status(200).send({
-            'path': result,
-            'status': 'success'
-          });
-        }
-      });
-    } else {
-      next({
-        reason: Messages.MSG_ERROR_UNAUTHORIZED_USER,
-        message: Messages.MSG_ERROR_UNAUTHORIZED_USER,
-        stackTrace: new Error(),
-        code: 401
-      });
-    }
-  } catch (e) {
-    next({
-      reason: e.message,
-      message: e.message,
-      stackTrace: new Error(),
-      code: 500
-    });
-  }
-}
-
-export function exportUsageDetails(req: express.Request, res: express.Response, next: any) {
+export function exportCandidateDetails(req: express.Request, response: express.Response, next: express.NextFunction) {
   try {
     let exportService = new ExportService();
-    if (req.user.isAdmin) {
-      exportService.exportUsageTrackingCollection((error, result) => {
-        if (error) {
-          next({
-            reason: Messages.MSG_ERROR_RETRIEVING_USAGE_DETAIL,
-            message: Messages.MSG_ERROR_RETRIEVING_USAGE_DETAIL,
-            stackTrace: error,
-            code: 500
-          });
-        } else {
-          res.status(200).send({
-            'path': result,
-            'status': 'success'
-          });
-        }
-      });
-    } else {
-      next({
-          reason: Messages.MSG_ERROR_UNAUTHORIZED_USER,
-          message: Messages.MSG_ERROR_UNAUTHORIZED_USER,
-          stackTrace: new Error(),
-          code: 401
-        }
-      );
-    }
-  } catch (e) {
+    exportService.exportCandidateDetails((error, filesPath) => {
+      if (error) {
+        next({
+          reason: Messages.MSG_ERROR_CREATING_EXCEL,
+          message: Messages.MSG_ERROR_CREATING_EXCEL,
+          stackTrace: error,
+          code: 500
+        });
+      } else {
+        response.status(200).send({
+          'path': filesPath,
+          'status': 'success'
+        });
+      }
+    });
+  } catch (err) {
     next({
-      reason: e.message,
-      message: e.message,
+      reason: err.message,
+      message: err.message,
       stackTrace: new Error(),
       code: 500
     });
   }
 }
 
-export function exportKeySkills(req: express.Request, res: express.Response, next: any) {
+export function exportRecruiterDetails(req: express.Request, response: express.Response, next: express.NextFunction) {
   try {
     let exportService = new ExportService();
-    if (req.user.isAdmin) {
-      exportService.exportKeySkillsCollection((error, result) => {
-        if (error) {
-          next({
-            reason: Messages.MSG_ERROR_RETRIEVING_KEY_SKILLS,
-            message: Messages.MSG_ERROR_RETRIEVING_KEY_SKILLS,
-            stackTrace: error,
-            code: 500
-          });
-        } else {
-          res.status(200).send({
-            'path': result,
-            'status': 'success'
-          });
-        }
-      });
-    } else {
-      next({
-          reason: Messages.MSG_ERROR_UNAUTHORIZED_USER,
-          message: Messages.MSG_ERROR_UNAUTHORIZED_USER,
-          stackTrace: new Error(),
-          code: 401
-        }
-      );
-    }
+    exportService.exportRecruiterDetails((error, filesPath) => {
+      if (error) {
+        next({
+          reason: Messages.MSG_ERROR_CREATING_EXCEL,
+          message: Messages.MSG_ERROR_CREATING_EXCEL,
+          stackTrace: error,
+          code: 500
+        });
+      } else {
+        response.status(200).send({
+          'path': filesPath,
+          'status': 'success'
+        });
+      }
+    });
+  } catch (err) {
+    next({
+      reason: err.message,
+      message: err.message,
+      stackTrace: new Error(),
+      code: 500
+    });
+  }
+}
+
+export function exportUsageDetails(req: express.Request, response: express.Response, next: express.NextFunction) {
+  try {
+    let exportService = new ExportService();
+    exportService.exportUsageTracking((error, filePath) => {
+      if (error) {
+        next({
+          reason: Messages.MSG_ERROR_RETRIEVING_USAGE_DETAIL,
+          message: Messages.MSG_ERROR_RETRIEVING_USAGE_DETAIL,
+          stackTrace: error,
+          code: 500
+        });
+      } else {
+        response.status(200).send({
+          'path': filePath,
+          'status': 'success'
+        });
+      }
+    });
+  } catch (err) {
+    next({
+      reason: err.message,
+      message: err.message,
+      stackTrace: new Error(),
+      code: 500
+    });
+  }
+}
+
+export function exportKeySkills(req: express.Request, response: express.Response, next: express.NextFunction) {
+  try {
+    let exportService = new ExportService();
+    exportService.exportKeySkills((error, filePath) => {
+      if (error) {
+        next({
+          reason: Messages.MSG_ERROR_RETRIEVING_KEY_SKILLS,
+          message: Messages.MSG_ERROR_RETRIEVING_KEY_SKILLS,
+          stackTrace: error,
+          code: 500
+        });
+      } else {
+        response.status(200).send({
+          'path': filePath,
+          'status': 'success'
+        });
+      }
+    });
   } catch (e) {
     next({
       reason: e.message,
