@@ -13,25 +13,26 @@
 
   .content {
     border-radius: 0;
-    color: $name;
+    color: $white;
+    left: 360px;
     margin: 0 auto;
-    left: 50%;
     position: absolute;
-    top: 50%;
-    transform: translate(-50%, -50%) !important;
-    width: 80%;
+    top: 120px;
     z-index: 100;
   }
 
-  img {
-    margin: 15px 0;
-    width: 100%;
+  span {
+    margin: -32px 0 -32px 104px;
+    transform: rotate(-22deg);
   }
 
-  h4 {
-    color: $theme-color;
-    font-size: 20px;
+  p {
+    color: $white;
+    float: left;
+    margin: 20px 0 0;
+    width: 350px;
   }
+
 }
 
 .job-list {
@@ -350,5 +351,9 @@
     .card-view > .col-md-3 {
       width: 100%;
     }
+  }
+  .welcome-text {
+    display: none;
+    visibility: hidden;
   }
 }

@@ -1,9 +1,9 @@
 <div class="welcome-text" *ngIf="screenType=='welcomescreen'">
-  <div class="content">
-   <h4>{{dashboardWelcomeMessage}}</h4>
-      <p>{{initialMessageToDisplay}}</p>
-    <img src="{{getImagePath().POST_NEW_JOB}}" alt="Post New Job"/>
-    <p>{{getMessage().POST_NEW_JOB_MESSAGE}}</p>
+  <div class="guided-tour-overlay-bg">
+    <div class="content">
+      <span class="up-arrow"></span>
+      <p [innerHTML]="getMessage().POST_NEW_JOB_MESSAGE"></p>
+    </div>
   </div>
 </div>
 

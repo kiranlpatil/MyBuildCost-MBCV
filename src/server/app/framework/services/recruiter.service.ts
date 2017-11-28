@@ -1,9 +1,9 @@
-import * as mongoose from "mongoose";
-import {Actions, ConstVariables} from "../shared/sharedconstants";
-import {JobCountModel} from "../dataaccess/model/job-count.model";
-import {CandidatesInLists} from "../dataaccess/model/CandidatesInLists.model";
-import {UsageTracking} from "../dataaccess/model/usage-tracking.model";
-import {SentMessageInfo} from "nodemailer";
+import * as mongoose from 'mongoose';
+import { Actions, ConstVariables } from '../shared/sharedconstants';
+import { JobCountModel} from '../dataaccess/model/job-count.model';
+import { CandidatesInLists} from '../dataaccess/model/CandidatesInLists.model';
+import { UsageTracking } from '../dataaccess/model/usage-tracking.model';
+import { SentMessageInfo } from 'nodemailer';
 import Messages = require('../shared/messages');
 import UserRepository = require('../dataaccess/repository/user.repository');
 import RecruiterRepository = require('../dataaccess/repository/recruiter.repository');
@@ -22,7 +22,10 @@ import CandidateService = require('./candidate.service');
 import JobProfileRepository = require('../dataaccess/repository/job-profile.repository');
 import IJobProfile = require('../dataaccess/mongoose/job-profile');
 import IRecruiter = require('../dataaccess/mongoose/recruiter');
-import UsageTrackingService = require("./usage-tracking.service");
+import UsageTrackingService = require('./usage-tracking.service');
+import AuthInterceptor = require('../interceptor/auth.interceptor');
+import ShareService = require('../share/services/share.service');
+import { Share } from '../../../../client/app/cnext/framework/model/share';
 var bcrypt = require('bcrypt');
 
 class RecruiterService {
@@ -303,31 +306,66 @@ class RecruiterService {
       }
     });
   }
-
-  sendMailToRecruiter(user: any, field: any, callback: (error: Error, result: SentMessageInfo) => void) {
+  sendMailToRecruiter(user:any,field: any, callback: (error: Error, result: SentMessageInfo) => void) {
     let host = config.get('TplSeed.mail.host');
     let link = host + 'signin';
     let sendMailService = new SendMailService();
-    let data: Map<string, string> = new Map([['$link$', link], ['$job_title$', field.jobTitle]]);
+    let data: Map<string, string> = new Map([['$link$', link],['$job_title$',field.jobTitle]]);
     sendMailService.send(user.email,
-      Messages.EMAIL_SUBJECT_RECRUITER_CONTACTED_YOU + field.jobTitle,
+      Messages.EMAIL_SUBJECT_RECRUITER_CONTACTED_YOU+field.jobTitle,
       'confirmation.mail.html', data, callback);
   }
 
-  mailOnRecruiterSignupToAdmin(recruiterBasicInfo: any, companyName: string, callback: (error: Error, result: SentMessageInfo) => void) {
+  mailOnRecruiterSignupToAdmin(recruiterBasicInfo:any, companyName:string , callback: (error: Error, result: SentMessageInfo) => void) {
     let link = config.get('TplSeed.mail.host') + 'signin';
-    let data: Map<string, string> = new Map([['$company_name$', companyName], ['$email_id$', recruiterBasicInfo.email],
-      ['$contact_number$', recruiterBasicInfo.mobile_number], ['$link$', link]]);
+
+    let data:Map<string,string>= new Map([['$company_name$',companyName],['$email_id$',recruiterBasicInfo.email],
+      ['$contact_number$',recruiterBasicInfo.mobile_number],['$link$',link]]);
 
 
     let sendMailService = new SendMailService();
-    sendMailService.send(config.get('TplSeed.mail.ADMIN_MAIL'),
+    sendMailService.send( config.get('TplSeed.mail.ADMIN_MAIL'),
       Messages.EMAIL_SUBJECT_RECRUITER_REGISTRATION,
-      'recruiter-registration.html', data, (err: Error, result: SentMessageInfo) => {
+      'recruiter-registration.html',data,(err: Error, result: SentMessageInfo) => {
         callback(err, result);
       });
   }
+  notifyOnCandidateJobAppply(candidateId:string,job:any,candidateData:any, callback: (error: Error, result:any) =>void) {
 
+    this.candidateRepository.retrieveAndPopulate({'_id': new mongoose.Types.ObjectId(candidateId)},{},(canErr,res)=> {
+      if (canErr) {
+        callback(canErr, res);
+        return;
+      }
+       let config = require('config');
+       let shareService = new ShareService();
+       let _host = config.get('TplSeed.mail.host');
+       let auth: AuthInterceptor = new AuthInterceptor();
+       let _token = auth.issueTokenWithUidForShare((res[0].userId));
+       let query = {'userId': (res[0].userId)._id};
+       let link: any;
+         shareService.buildValuePortraitUrl(_host, _token, (res[0].userId), candidateData, (error:Error, result:Share) => {
+           if (error) {
+             callback(error, result);
+             return;
+           }
+             link =result.shareUrl;
+             this.recruiterRepository.retrieveAndPopulate({'_id': new mongoose.Types.ObjectId(job.recruiterId)}, {}, (err, responce) => {
+               if (err) {
+
+                 callback(err, responce);
+                 return;
+               }
+               let sendMailService = new SendMailService();
+               let data: Map<string, string> = new Map([['$link$', link], ['$firstname$', (res[0].userId).first_name],
+                 ['$jobtitle$', job.jobTitle]]);
+               sendMailService.send((responce[0].userId).email,
+                 Messages.EMAIL_SUBJECT_CANDIDATE_APPLIED_FOR_JOB+job.jobTitle,
+                 'notifyrecruiteronjobapply.html', data, callback);
+             });
+         });
+    });
+  }
   getTotalRecruiterCount(callback: (error: any, result: any) => void) {
     let query = {};
     this.recruiterRepository.getCount(query, (err, result) => {

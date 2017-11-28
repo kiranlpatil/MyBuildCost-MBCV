@@ -265,7 +265,9 @@ export class Messages {
   public static FAQ_CONTACT_NUMBER = '+91-8669601612';
   public static FAQ_CONTACT_EMAIL = 'support@jobmosis.com';
   public static FAQ_MESSAGE = 'Have any questions?';
-  public static POST_NEW_JOB_MESSAGE = 'Please click on "Post New Job" to proceed.';
+  public static POST_NEW_JOB_MESSAGE = 'Currently you don\'t have any job Posted' +
+    '<br/> Please click on POST NEW JOB button to' +
+    '<br/> get started.';
   public static NOTE_OF_TRUST = 'JobMosis believes in building a sustainable ecosystem for candidates and ' +
     'recruiters that is based on trust and transparency. We strive to reduce the inconvenience caused to all ' +
     'parties due to false / incorrect information provided in the individual and job profiles. We believe that ' +
@@ -351,6 +353,7 @@ export class Messages {
   public static SHOW_VALUE_PORTRAIT = 'Show Value Portrait';
   public static CAPABILITY_DETAILS = 'Capability details under';
   public static NOT_AVAILABLE = 'Not Available';
+  public static PASSWORD_MESSAGE = 'Password Must be Alfa- Numeric having minimum 8 Characters.';
 
 
 }

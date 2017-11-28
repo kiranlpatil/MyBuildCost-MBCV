@@ -22,7 +22,7 @@ import RecruiterService = require("./recruiter.service");
 import RecruiterClassModel = require("../dataaccess/model/recruiterClass.model");
 import SendMailService = require('./mailer.service');
 import ProjectAsset = require('../shared/projectasset');
-
+import { SentMessageInfo } from 'nodemailer';
 let bcrypt = require('bcrypt');
 class CandidateService {
   private candidateRepository: CandidateRepository;
@@ -948,7 +948,30 @@ class CandidateService {
       }
     });
   }
-
+notifiyCandidateOnAddedToCart(candidateId:string, recruiterId:string, jobTitle:string,
+                              callback: (error: Error, result: SentMessageInfo) => void) {
+    this.recruiterRepository.retrieve({'_id': new mongoose.Types.ObjectId(recruiterId)}, (error, recData) => {
+    if (error) {
+      callback(error, null);
+      return;
+    }
+      this.candidateRepository.retrieveAndPopulate({'_id': new mongoose.Types.ObjectId(candidateId)}, {}, (err, candata) => {
+        if (err) {
+          callback(error, null);
+          return;
+        }
+          let config = require('config');
+          let host = config.get('TplSeed.mail.host');
+          let link = host + 'signin';
+          let sendMailService = new SendMailService();
+          let data: Map<string, string> = new Map([['$link$', link], ['$firstname$', (candata[0].userId).first_name],
+            ['$jobtitle$', jobTitle], ['$recruiter$', recData[0].company_name]]);
+          sendMailService.send((candata[0].userId).email,
+            Messages.EMAIL_SUBJECT_CANDIDATE_ADDED_TO_CART,
+            'candidateaddedtocart.html', data, callback);
+      });
+  });
+  }
   sendMailToRecruiter(candidate: any, callback: (error: any, result: any) => void) {
 
     this.recruiterRepository.retrieve({'_id': new mongoose.Types.ObjectId(candidate.recruiterReferenceId)}, (recruiterErr, recData) => {

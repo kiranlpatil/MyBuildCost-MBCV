@@ -134,9 +134,7 @@ class UserService {
               let data:Map<string,string>= new Map([['$first_name$',this.company_name],['$link$',link],['$app_name$',this.APP_NAME]]);
               sendMailService.send(field.email,
                 Messages.EMAIL_SUBJECT_FORGOT_PASSWORD,
-                'forgotpassword.html',data,(err: any, result: any) => {
-                  callback(err, result);
-                });
+                'forgotpassword.html',data,callback ,null,MailAttachments.ForgetPasswordAttachmentArray);
             }
           });
         }

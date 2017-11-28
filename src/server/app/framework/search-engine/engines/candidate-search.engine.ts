@@ -147,6 +147,7 @@ export class CandidateSearchEngine extends SearchEngine {
     //TODO apply all other sorts here itself Abhi
     if (sortBy === ESort.BEST_MATCH) {
      this.candidate_q_cards = <CandidateCard[]>this.getSortedObjectsByMatchingPercentage(this.candidate_q_cards);
+     this.candidate_q_cards.slice(0,ConstVariables.QCARD_LIMIT);
     }
 
     if(listName !== EList.CAN_CART) {
@@ -154,7 +155,7 @@ export class CandidateSearchEngine extends SearchEngine {
     }
 
     let ids:any[] = this.candidate_q_cards.map(a => a._id);
-    let candidateQuery:any={'_id': {$in: ids.slice(0, 101)}};
+    let candidateQuery:any={'_id': {$in: ids.slice(0,ConstVariables.QCARD_LIMIT)}};
     this.candidateRepository.retrieveCandidate(candidateQuery, (err, res) => {
       if(err) {
         callback(err, res);
@@ -171,7 +172,10 @@ export class CandidateSearchEngine extends SearchEngine {
   setMustHaveMatrix(jobProfile_capability_matrix: any, candidate_capability_matrix: any, complexity_musthave_matrix: any) {
     let isNotSatisfy: boolean = false;
     for (let cap in jobProfile_capability_matrix) {
-      if (candidate_capability_matrix && candidate_capability_matrix[cap] && complexity_musthave_matrix && complexity_musthave_matrix[cap]) {
+      if (candidate_capability_matrix
+        && candidate_capability_matrix[cap]
+        && complexity_musthave_matrix
+        && complexity_musthave_matrix[cap]) {
         if (jobProfile_capability_matrix[cap] !== candidate_capability_matrix[cap] &&
           jobProfile_capability_matrix[cap] !== (Number(candidate_capability_matrix[cap].toString()))) {
           isNotSatisfy = true;
@@ -182,29 +186,19 @@ export class CandidateSearchEngine extends SearchEngine {
     return !isNotSatisfy;
   }
 
-  generateQCards(candidateCards:any, deatailedcards:any): any{
-    let count = 0;
-    for(let card of deatailedcards) {
-      count++;
-      let cand_card = candidateCards.find((o:any) => o._id == (card._id).toString());
-      if(cand_card.exact_matching >= ConstVariables.LOWER_LIMIT_FOR_SEARCH_RESULT) {
-
+  generateQCards(candidateCards:any, candidateDeatails:any): any {
+    for(let card of candidateCards) {
+      let candidateDetail = candidateDeatails.find((o:any) => o._id == (card._id).toString());
+      if(card.exact_matching >= ConstVariables.LOWER_LIMIT_FOR_SEARCH_RESULT) {
         let candidate_card = new CandidateCard(
-          card.userId.first_name, card.userId.last_name,
-          card.salary, card.experience,
-          card.userId.picture, card._id, cand_card.above_one_step_matching,
-          cand_card.exact_matching, card.location, card.proficiencies);
+          candidateDetail.userId.first_name, candidateDetail.userId.last_name,
+          candidateDetail.professionalDetails.currentSalary, candidateDetail.professionalDetails.experience,
+          candidateDetail.userId.picture, card._id, card.above_one_step_matching,
+          card.exact_matching, candidateDetail.location.city, candidateDetail.proficiencies);
         this.final_candidate_q_cards.push(candidate_card);
-
-        if(deatailedcards.length == count) {
-          console.log('from return2');
-          return this.final_candidate_q_cards;
-        }
-      }
-      else {
-       continue;
       }
     }
+    return this.final_candidate_q_cards;
   }
 
   maskQCards(q_cards: any []): any[] {

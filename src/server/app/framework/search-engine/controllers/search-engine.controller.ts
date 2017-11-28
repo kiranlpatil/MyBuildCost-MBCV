@@ -54,11 +54,11 @@ export class SearchEngineController {
           if (error) {
             next(error);
           } else {
-            searchEngine.buildQCards(response, againstDetails, appliedFilters,(error: any, response: any[]) => {
+            searchEngine.buildQCards(response, againstDetails, appliedFilters,(error: any, qcards: any[]) => {
               if (error) {
                 next(error);
               } else {
-                res.status(200).send(response);
+                  res.status(200).send(qcards);
               }
             });
           }

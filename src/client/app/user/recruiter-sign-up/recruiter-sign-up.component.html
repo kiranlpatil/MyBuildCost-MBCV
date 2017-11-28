@@ -72,6 +72,9 @@
           <input type="password" formControlName="password" id="password" [(ngModel)]="model.password"
                  class="form-control" (focus)="showMessage()" [(ngModel)]="myPassword"
                  (ngModelChange)="selectPassword($event)" required/>
+          <div class="password-required-message">
+            {{getMessages().PASSWORD_MESSAGE}}
+          </div>
           <label>{{getLabel().PASSWORD}}</label>
         </div>
 

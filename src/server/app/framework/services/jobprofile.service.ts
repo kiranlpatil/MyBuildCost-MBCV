@@ -13,6 +13,7 @@ import IndustryRepository = require('../dataaccess/repository/industry.repositor
 import CandidateService = require('./candidate.service');
 import IJobProfile = require('../dataaccess/mongoose/job-profile');
 import UsageTrackingService = require('./usage-tracking.service');
+import RecruiterService = require('./recruiter.service');
 
 
 class JobProfileService {
@@ -80,7 +81,7 @@ class JobProfileService {
         callback(new Error('Not Found Any Job posted'), null);
         return;
       } else {
-        callback(null, res);
+        callback(null, res[0]);
       }
     });
   }
@@ -131,7 +132,7 @@ class JobProfileService {
             if (list.name === item.listName) {
               updateFlag = true;
               let uses_data: UsageTracking = new UsageTracking();
-              if (item.action === 'add') {
+              if (item.action === ConstVariables.ADD_CANDIDATE) {
                 uses_data.recruiterId = item.recruiterId;
                 uses_data.candidateId = item.candidateId;
                 uses_data.jobProfileId = job._id;
@@ -186,7 +187,17 @@ class JobProfileService {
           this.jobProfileRepository.findOneAndUpdate({'_id': mongoose.Types.ObjectId(item.profileId)},
             param2, updatedQuery4, (err, record) => {
               if (record) {
-                callback(null, record);
+                if( item.listName===ConstVariables.CART_LISTED_CANDIDATE  && item.action===ConstVariables.ADD_CANDIDATE) {
+                  let candidateService=new CandidateService();
+                  candidateService.notifiyCandidateOnAddedToCart(item.candidateId,item.recruiterId,job.jobTitle,
+                    (err:Error,responce:any)=> {
+                    if(err) {
+                      callback(err,responce);
+                      return;
+                    }
+                      callback(null, record);
+                  });
+                }
               } else {
                 let error: any;
                 if (record === null) {
@@ -204,8 +215,6 @@ class JobProfileService {
 
 
   applyJob(item: any, callback: (error: any, result: any) => void) {
-
-
     this.candidateRepository.retrieve({'_id': new mongoose.Types.ObjectId(item.candidateId)}, (error, response) => {
 
       if (error) {
@@ -217,7 +226,7 @@ class JobProfileService {
           for (let list of response[0].job_list) {
             if (list.name === item.listName) {
               isJobFound = true;
-              if (item.action === 'add') {
+              if (item.action === ConstVariables.ADD_CANDIDATE) {
                 let index = list.ids.indexOf(item.profileId);
                 if (index === -1) {
                   let uses_data = {
@@ -273,7 +282,7 @@ class JobProfileService {
 
           this.candidateRepository.findOneAndUpdate(candidateSearchQuery, latestQueryForCandidate, options, (err, record) => {
             if (record) {
-              if (item.listName === 'applied' && item.action === 'add') {
+              if (item.listName === 'applied' && item.action === ConstVariables.ADD_CANDIDATE) {
                 let newEntryQuery = {
                   $push: {
                     'candidate_list': {
@@ -310,8 +319,15 @@ class JobProfileService {
                       };
 
                       this.jobProfileRepository.findOneAndUpdate(jobSearchQuery, latestQuery, options, (err, record) => {
+
                         if (record) {
-                          callback(null, record);
+                          let recruiterService=new RecruiterService();
+                          recruiterService.notifyOnCandidateJobAppply(item.candidateId, job,response,(error, response) => {
+                            if(err) {
+                              callback(err,response);
+                              return;
+                            } callback(null, record);
+                          });
                         } else {
                           let error: any;
                           if (record === null) {
@@ -376,7 +392,6 @@ class JobProfileService {
      }
      });*/
   }
-
 }
 
 Object.seal(JobProfileService);

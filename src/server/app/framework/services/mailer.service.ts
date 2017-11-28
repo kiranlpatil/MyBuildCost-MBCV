@@ -3,7 +3,7 @@ import MailAttachments = require('../shared/sharedarray');
 import LoggerService = require('../shared/logger/LoggerService');
 import * as fs from 'fs';
 import * as path from 'path';
-import { SentMessageInfo } from 'nodemailer';
+import {SentMessageInfo} from 'nodemailer';
 
 let config = require('config');
 let loggerService = new LoggerService('MAILCHIMP_MAILER_SERVICE');
@@ -19,7 +19,7 @@ class SendMailService {
 
   send(sendmailTo: string, subject: string, templateName: string,
        data: Map<string, string>,
-       callback: (error: Error, result: SentMessageInfo) => void, carbonCopy?: string) {
+       callback: (error: Error, result: SentMessageInfo) => void, carbonCopy?: string,attachment?:any) {
     let content = fs.readFileSync(path.resolve() + config.get('TplSeed.publicPath') + 'templates/' + templateName).toString();
     data.forEach((value: string, key: string) => {
       content = content.replace(key, value);
@@ -31,7 +31,7 @@ class SendMailService {
       cc: carbonCopy,
       subject: subject,
       html: content,
-      attachments: MailAttachments.AttachmentArray
+      attachments:attachment?attachment: MailAttachments.AttachmentArray
     };
     SendMailService.smtpTransport.sendMail(mailOptions, function (error: Error, response: SentMessageInfo) {
       if (error) {
