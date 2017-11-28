@@ -47,19 +47,19 @@ export class JobCompareViewComponent implements OnChanges,OnInit {
   }
 
   ngOnChanges(changes:any) {
-    if (changes.candiadteId != undefined && changes.candiadteId.currentValue != undefined) {
+    if (changes.candiadteId !== undefined && changes.candiadteId.currentValue !== undefined) {
       this.candiadteId = changes.candiadteId.currentValue;
     }
-    if (changes.jobId != undefined && changes.jobId.currentValue != undefined) {
+    if (changes.jobId !== undefined && changes.jobId.currentValue !== undefined) {
       this.recruiterId = changes.jobId.currentValue;
 
       this.recruiterDashboardService.getPostedJobDetails(this.jobId)
         .subscribe(
           data => {
-            this.OnRecruiterDataSuccess(data[0]);
+            this.OnRecruiterDataSuccess(data);
           },error => this.errorService.onError(error));
     }
-    if (this.candiadteId != undefined && this.recruiterId != undefined && this.typeOfView ) {
+    if (this.candiadteId !== undefined && this.recruiterId !== undefined && this.typeOfView ) {
       this.candiadteId = changes.candiadteId.currentValue;
       this.getCandidateProfile(this.candiadteId);
       this.getCompareDetail(this.candiadteId, this.recruiterId);

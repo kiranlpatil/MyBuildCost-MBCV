@@ -55,7 +55,7 @@ export abstract class SearchEngine {
   }
 
   getSortedObjectsByMatchingPercentage( q_cards : QCard [] ) : QCard[] {
-    q_cards.sort((first: QCard, second: QCard): number => {
+    return q_cards.sort((first: QCard, second: QCard): number => {
       if ((first.above_one_step_matching + first.exact_matching) > (second.above_one_step_matching + second.exact_matching)) {
         return -1;
       }
@@ -64,7 +64,6 @@ export abstract class SearchEngine {
       }
       return 0;
     });
-    return q_cards;
   }
 
   /*maskQCards(q_cards: any []): any[] {

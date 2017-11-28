@@ -81,7 +81,7 @@ class JobProfileService {
         callback(new Error('Not Found Any Job posted'), null);
         return;
       } else {
-        callback(null, res);
+        callback(null, res[0]);
       }
     });
   }
