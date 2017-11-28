@@ -47,6 +47,9 @@
         <cn-control-messages [control]="userForm.controls.password" [submitStatus]="submitStatus"></cn-control-messages>
         <input type="password" formControlName="password" id="password" [(ngModel)]="model.password"
                class="form-control" (blur)="makePasswordConfirm()" required/>
+        <div class="password-required-message">
+          {{getMessages().PASSWORD_MESSAGE}}
+        </div>
         <label>{{getLabel().PASSWORD}}</label>
       </div>
 

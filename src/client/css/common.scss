@@ -63,6 +63,7 @@ $blue: #29b6f6;
 $hover-list-bg: #dbdbdb;
 $bottom-border: #eaeaea;
 $reject-color: #f7941d;
+$password-label: #a3a3a3;
 
 .btn-logout {
   margin-top: 15px;
@@ -2065,6 +2066,12 @@ select:focus {
 
 img[alt] {
   font-size: 0;
+}
+
+.password-required-message {
+  color: $password-label;
+  font-size: 10px;
+  position: absolute;
 }
 
 .line-break {
