@@ -103,7 +103,7 @@ export class SearchEngineController {
           if (error) {
             next(error);
           } else {
-            let jobQCardMatching = searchEngine.buildQCards(response, againstDetails, appliedFilters,
+            searchEngine.buildQCards(response, againstDetails, appliedFilters,
               (error: any, response: any[]) => {
                 if (error) {
                   next(error);

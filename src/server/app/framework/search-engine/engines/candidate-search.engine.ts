@@ -149,11 +149,6 @@ export class CandidateSearchEngine extends SearchEngine {
      this.candidate_q_cards = <CandidateCard[]>this.getSortedObjectsByMatchingPercentage(this.candidate_q_cards);
      this.candidate_q_cards.slice(0,ConstVariables.QCARD_LIMIT);
     }
-
-    if(listName !== EList.CAN_CART) {
-      this.candidate_q_cards = this.maskQCards(this.candidate_q_cards);
-    }
-
     let ids:any[] = this.candidate_q_cards.map(a => a._id);
     let candidateQuery:any={'_id': {$in: ids.slice(0,ConstVariables.QCARD_LIMIT)}};
     this.candidateRepository.retrieveCandidate(candidateQuery, (err, res) => {
@@ -162,6 +157,9 @@ export class CandidateSearchEngine extends SearchEngine {
         return;
       }
       let cards = this.generateQCards(this.candidate_q_cards, res);
+      if(listName !== EList.CAN_CART) {
+        cards = this.maskQCards(cards);
+      }
       callback(err, cards);
       return;
     });
