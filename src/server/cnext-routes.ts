@@ -112,7 +112,7 @@ export function cnextInit(app: express.Application) {
       this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck,
       searchEngineController.getMatchingJobs);
     app.post('/api/jobs/candidate/:candidateId', this.authInterceptor.requiresAuth,
-      searchEngineController.getMatchingJobs);
+      searchEngineController.getMatchingJobsForCandidate);
 
     //Share api
     app.get('/api/buildValuePortraitUrl', loggerInterceptor.logDetail, this.authInterceptor.requiresAuth,
