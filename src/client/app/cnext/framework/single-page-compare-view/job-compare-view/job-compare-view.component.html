@@ -9,7 +9,6 @@
 </div>
 
 <div id="{{jobCompareIdForPrint}}">
-  {{recruiter | json}}
 <div class="modal-header">
   <cn-print-screen *ngIf="!isCandidate" [typeOfView]="typeOfView" [screenIdForPrint]="'print-job-compare-view'" [fileName]="'Candidate-Overlay-View'" [candidateId]="candiadteId" [jobId]="recruiterId"></cn-print-screen>
   <div *ngIf="typeOfView =='spa_job' && recruiter != undefined">

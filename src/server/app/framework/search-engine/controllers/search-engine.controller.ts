@@ -109,7 +109,7 @@ export class SearchEngineController {
                   next(error);
                 } else {
                   res.status(200).send(response);
-                  candidateService.get(againstDetails.userId, (error, candidateDetails) => {
+                  /*candidateService.get(againstDetails.userId, (error, candidateDetails) => {
                     if(error) {
                       next(error);
                     }
@@ -120,7 +120,7 @@ export class SearchEngineController {
                       'status': 'success',
                       'data': _candidateDetails
                     });
-                  });
+                  });*/
                 }
             });
           }

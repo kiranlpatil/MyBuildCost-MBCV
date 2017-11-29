@@ -181,11 +181,11 @@ class SearchService {
   }
 
   getResult(candidate: any, job: any, isCandidate: boolean, callback: (error: any, result: any) => void) {
-    this.industryRepository.retrieve({'name': job[0].industry.name}, (err: any, industries: IndustryModel[]) => {
+    this.industryRepository.retrieve({'name': job.industry.name}, (err: any, industries: IndustryModel[]) => {
       if (err) {
         callback(err, null);
       } else {
-        var newCandidate = this.getCompareData(candidate, job[0], isCandidate, industries);
+        var newCandidate = this.getCompareData(candidate, job, isCandidate, industries);
         callback(null, newCandidate);
       }
     });
