@@ -27,6 +27,8 @@ export class CapabilityCompareComponent  implements OnChanges {
   private capabilityCompareBelowMatch= Tooltip.CAPABILITY_COMPARE_BELOW_MATCH;
   private capabilityCompareExactMatch= Tooltip.CAPABILITY_COMPARE_EXACT_MATCH;
   private capabilityCompareMissing= Tooltip.CAPABILITY_COMPARE_MISSING_MATCH;
+  private capabilityCompareMusthaveMatch= Tooltip.CAPABILITY_COMPARE_MUST_HAVE_CAPABILITIES;
+  private capabilityCompareNotes= Tooltip.CAPABILITY_COMPARE_NOTES;
   maxArray : number[]= new Array(0);
   ngOnChanges(changes : any) {
     if(changes.capabilities && changes.capabilities.currentValue) {

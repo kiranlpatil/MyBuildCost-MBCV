@@ -21,9 +21,9 @@
       <div class="panel clearfix" (click)="viewProfile(item)">
         <ul>
           <li *ngIf="type=='matchedList'">
-            <span class="glyphicon glyphicon-star" *ngIf="emailsOfShrortListedCandidates.indexOf(item.email)==-1"
+            <span class="shortlist-icon" *ngIf="emailsOfShrortListedCandidates.indexOf(item.email)==-1"
                   (click)="addRemoveToShortList(item)" title="Shortlist the candidate"></span>
-            <span class="glyphicon glyphicon-star active-star"
+            <span class="active-shortlist-icon"
                   *ngIf="emailsOfShrortListedCandidates.indexOf(item.email)!=-1"
                   (click)="addRemoveToShortList(item)" title="Remove candidate from shortlisted"></span>
           </li>
@@ -208,10 +208,10 @@
 <div *ngIf="isShowPrintView && type=='cartListed'">
   <div class="row capability-complexity">
     <ul class="legends">
-      <li ><span class="legend-above"></span>Candidate capabilities higher than desired</li>
-      <li ><span class="legend-exact"></span>Candidate capabilities with exact match</li>
-      <li ><span class="legend-below"></span>Candidate capabilities slightly less than desired</li>
-      <li ><span class="legend-missing"></span>Large mismatch of capabilities</li>
+      <li ><span class="legend-icon legend-above"></span>Candidate capabilities higher than desired</li>
+      <li ><span class="legend-icon legend-exact"></span>Candidate capabilities with exact match</li>
+      <li ><span class="legend-icon legend-below"></span>Candidate capabilities slightly less than desired</li>
+      <li ><span class="legend-icon legend-missing"></span>Large mismatch of capabilities</li>
     </ul>
   </div>
   <cn-job-compare-view [jobCompareIdForPrint]="'print-job-compare-view'" [typeOfView]="'spa_candidate'" (close)="closeJob()" [candiadteId]="selectedCandidate._id" [jobId]="jobId"></cn-job-compare-view>

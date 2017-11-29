@@ -1,9 +1,11 @@
 <div class="row capability-complexity">
   <ul class="legends" *ngIf="!isCompact">
-    <li><span class="legend-above"></span>{{capabilityCompareAboveMatch}}</li>
-    <li><span class="legend-exact"></span>{{capabilityCompareExactMatch}}</li>
-    <li><span class="legend-below"></span>{{capabilityCompareBelowMatch}}</li>
-    <li><span class="legend-missing"></span>{{capabilityCompareMissing}}</li>
+    <li><span class="legend-icon legend-above"></span>{{capabilityCompareAboveMatch}}</li>
+    <li><span class="legend-icon legend-exact"></span>{{capabilityCompareExactMatch}}</li>
+    <li><span class="legend-icon legend-below"></span>{{capabilityCompareBelowMatch}}</li>
+    <li><span class="legend-icon legend-missing"></span>{{capabilityCompareMissing}}</li>
+    <li><span class="legend-icon legend-musthave"></span>{{capabilityCompareMusthaveMatch}}</li>
+    <li><span class="legend-icon legend-notes"></span>{{capabilityCompareNotes}}</li>
   </ul>
   <!--<div class="heading clearfix">
     <div class="col-sm-3 hidden-xs"><h4>Core Capabilities</h4></div>

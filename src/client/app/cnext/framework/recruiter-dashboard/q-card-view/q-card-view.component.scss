@@ -101,3 +101,23 @@ header {
 .hidden {
   display: none;
 }
+
+.star-icon {
+  height: 16px;
+  position: absolute;
+  right: 0;
+  width: 16px;
+  z-index: 9999;
+}
+
+.active-shortlist-icon {
+  background: url(../../assets/c-next/card-view/sprite.png) no-repeat -87px -790px;
+  @extend .star-icon;
+  visibility: hidden;
+}
+
+.shortlist-icon {
+  background: url(../../assets/c-next/card-view/sprite.png) no-repeat -60px -790px;
+  @extend .star-icon;
+  visibility: hidden;
+}

@@ -473,8 +473,8 @@
     margin: 0 0 10px;
     padding: 4px 0;
     position: fixed;
-    z-index: 1000;
     top: 8px;
+    z-index: 1000;
 
     li {
       float: left;
@@ -492,41 +492,47 @@
       float: left;
     }
 
+    .legend-icon {
+      border-radius: 0;
+      height: 18px;
+      margin: 0 3px;
+      width: 17px;
+    }
+
     .legend-above {
       background: url(../assets/c-next/card-view/sprite.png) no-repeat -9px -748px;
-      height: 18px;
-      width: 17px;
-      border-radius: 0;
-      margin: 0 3px;
+      @extend .legend-icon
     }
 
     .legend-exact {
       background: url(../assets/c-next/card-view/sprite.png) no-repeat -34px -748px;
-      height: 18px;
-      width: 17px;
-      border-radius: 0;
-      margin: 0 3px;
+      @extend .legend-icon
     }
 
     .legend-below {
       background: url(../assets/c-next/card-view/sprite.png) no-repeat -59px -748px;
-      height: 18px;
-      width: 17px;
-      border-radius: 0;
-      margin: 0 3px;
+      @extend .legend-icon
     }
 
     .legend-missing {
       background: url(../assets/c-next/card-view/sprite.png) no-repeat -85px -748px;
-      height: 18px;
-      width: 17px;
-      border-radius: 0;
-      margin: 0 3px;
+      @extend .legend-icon
+    }
+
+    .legend-musthave {
+      background: url(../assets/c-next/card-view/sprite.png) no-repeat  -108px -923px;
+      @extend .legend-icon
+    }
+
+    .legend-notes {
+      background: url(../assets/c-next/card-view/sprite.png) no-repeat -130px -922px;
+      @extend .legend-icon
     }
 
     .legend-extra {
       background: $gray;
     }
+
   }
 
   .heading {
