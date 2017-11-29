@@ -189,7 +189,7 @@ class JobProfileService {
               if (record) {
                 if( item.listName===ConstVariables.CART_LISTED_CANDIDATE  && item.action===ConstVariables.ADD_CANDIDATE) {
                   let candidateService=new CandidateService();
-                  candidateService.notifiyCandidateOnAddedToCart(item.candidateId,item.recruiterId,job.jobTitle,
+                  candidateService.notifyCandidateOnCartAddition(item.candidateId,item.recruiterId,job.jobTitle,
                     (err:Error,responce:any)=> {
                     if(err) {
                       callback(err,responce);
@@ -197,6 +197,8 @@ class JobProfileService {
                     }
                       callback(null, record);
                   });
+                }else {
+                  callback(null, record);
                 }
               } else {
                 let error: any;
@@ -322,7 +324,7 @@ class JobProfileService {
 
                         if (record) {
                           let recruiterService=new RecruiterService();
-                          recruiterService.notifyOnCandidateJobAppply(item.candidateId, job,response,(error, response) => {
+                          recruiterService.notifyOnCandidateJobApply(item.candidateId, job,response,(error, response) => {
                             if(err) {
                               callback(err,response);
                               return;
