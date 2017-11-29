@@ -9,12 +9,22 @@ import {ConstVariables} from "../../shared/sharedconstants";
 import {UtilityFunction} from "../../uitility/utility-function";
 import {QCard} from "../models/output-model/q-card";
 import {obj} from "through2";
-
+import RecruiterRepository = require("../../dataaccess/repository/recruiter.repository");
+import JobProfileRepository = require("../../dataaccess/repository/job-profile.repository");
+import {CoreMatchingDetail} from "../models/output-model/base-detail";
+import * as mongoose from 'mongoose';
 export class CandidateSearchEngine extends SearchEngine {
   candidate_q_cards: CandidateCard[] = new Array(0);
   final_candidate_q_cards: CandidateCard[] = new Array(0);
   counter: number = 0;
   candidateRepository: CandidateRepository = new CandidateRepository();
+  recruiterRepository : RecruiterRepository;
+  jobProfileRepository : JobProfileRepository;
+  constructor() {
+    super();
+    this.recruiterRepository= new RecruiterRepository();
+    this.jobProfileRepository= new JobProfileRepository();
+  }
 
   buildBusinessCriteria(details: JobDetail): any {
     let criteria: any = {
@@ -147,10 +157,10 @@ export class CandidateSearchEngine extends SearchEngine {
     //TODO apply all other sorts here itself Abhi
     if (sortBy === ESort.BEST_MATCH) {
      this.candidate_q_cards = <CandidateCard[]>this.getSortedObjectsByMatchingPercentage(this.candidate_q_cards);
-     this.candidate_q_cards.slice(0,ConstVariables.QCARD_LIMIT);
+     this.candidate_q_cards = this.candidate_q_cards.slice(0,ConstVariables.QCARD_LIMIT);
     }
-    let ids:any[] = this.candidate_q_cards.map(a => a._id);
-    let candidateQuery:any={'_id': {$in: ids.slice(0,ConstVariables.QCARD_LIMIT)}};
+    let ids : any[] = this.candidate_q_cards.map(a => a._id);
+    let candidateQuery:any= {'_id': {$in: ids.slice(0,ConstVariables.QCARD_LIMIT)}};
     this.candidateRepository.retrieveCandidate(candidateQuery, (err, res) => {
       if(err) {
         callback(err, res);
@@ -164,8 +174,6 @@ export class CandidateSearchEngine extends SearchEngine {
       return;
     });
   }
-
-  createQCard(candidate_q_card: CandidateCard, called: string): void {}
 
   setMustHaveMatrix(jobProfile_capability_matrix: any, candidate_capability_matrix: any, complexity_musthave_matrix: any) {
     let isNotSatisfy: boolean = false;
@@ -184,16 +192,16 @@ export class CandidateSearchEngine extends SearchEngine {
     return !isNotSatisfy;
   }
 
-  generateQCards(candidateCards:any, candidateDeatails:any): any {
+  generateQCards(candidateCards:any, candidateDetails:any): any {
     for(let card of candidateCards) {
-      let candidateDetail = candidateDeatails.find((o:any) => o._id == (card._id).toString());
+      let candidateDetail = candidateDetails.find((o:any) => o._id == (card._id).toString());
       if(card.exact_matching >= ConstVariables.LOWER_LIMIT_FOR_SEARCH_RESULT) {
-        let candidate_card = new CandidateCard(
+        let candidateCard = new CandidateCard(
           candidateDetail.userId.first_name, candidateDetail.userId.last_name,
           candidateDetail.professionalDetails.currentSalary, candidateDetail.professionalDetails.experience,
           candidateDetail.userId.picture, card._id, card.above_one_step_matching,
           card.exact_matching, candidateDetail.location.city, candidateDetail.proficiencies);
-        this.final_candidate_q_cards.push(candidate_card);
+        this.final_candidate_q_cards.push(candidateCard);
       }
     }
     return this.final_candidate_q_cards;
@@ -204,5 +212,50 @@ export class CandidateSearchEngine extends SearchEngine {
         q_cards[qCard].last_name =  UtilityFunction.valueHide(q_cards[qCard].last_name);
       }
     return q_cards;
+  }
+
+  getCoreMatchAgainstDetails(jobId: string, callback : (err : Error, res : CoreMatchingDetail)=> void) : void {
+
+    this.jobProfileRepository.findById(jobId, (myError: Error, response : any) => {
+      if(myError) {
+        callback(myError, null);
+        return ;
+      }
+      let jobDetail = new JobDetail();
+      jobDetail.interestedIndustries= response.interestedIndustries;
+      jobDetail.industryName = response.industry.name;
+      jobDetail.relevantIndustries = response.releventIndustries;
+      jobDetail.city = response.location.city;
+      jobDetail.candidateList = response.candidate_list;
+      jobDetail.capability_matrix = response.capability_matrix;
+      jobDetail.complexity_must_have_matrix = response.complexity_musthave_matrix;
+      callback(null,jobDetail);
+    });
+  }
+
+  lookupInIds(jobDetail : JobDetail, listName : EList) : mongoose.Types.ObjectId [] {
+    let list : string;
+    switch (listName) {
+      case EList.CAN_APPLIED :
+        list =ConstVariables.APPLIED_CANDIDATE;
+        break;
+      case EList.CAN_CART :
+        list =ConstVariables.CART_LISTED_CANDIDATE;
+        break;
+      case EList.CAN_REJECTED :
+        list =ConstVariables.REJECTED_LISTED_CANDIDATE;
+        break;
+    }
+    let send_ids : mongoose.Types.ObjectId[];
+    send_ids  = new Array(0);
+    for(let obj of jobDetail.candidateList) {
+      if (list === obj.name) {
+        for(let id of obj.ids) {
+          send_ids.push(mongoose.Types.ObjectId(id));
+        }
+        break;
+      }
+    }
+    return send_ids;
   }
 }

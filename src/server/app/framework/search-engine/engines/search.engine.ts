@@ -1,18 +1,24 @@
+import * as express from 'express';
 import { AppliedFilter } from '../models/input-model/applied-filter';
-import { BaseDetail } from '../models/output-model/base-detail';
+import { CoreMatchingDetail } from '../models/output-model/base-detail';
 import { ConstVariables } from '../../shared/sharedconstants';
 import { QCard } from '../models/output-model/q-card';
 import { ESort } from '../models/input-model/sort-enum';
 import { EList } from '../models/input-model/list-enum';
 import {CandidateCard} from "../models/output-model/candidate-card";
 import {UtilityFunction} from "../../uitility/utility-function";
+import * as mongoose from 'mongoose';
 export abstract class SearchEngine {
 
   search() {
     console.log('In Search');
   }
 
-  abstract buildBusinessCriteria(details : BaseDetail): any;
+  abstract lookupInIds(detail : CoreMatchingDetail, listName : EList) : mongoose.Types.ObjectId[] ;
+
+  abstract getCoreMatchAgainstDetails(id: string, callback : (err : Error, res : CoreMatchingDetail)=> void) : void;
+
+  abstract buildBusinessCriteria(details : CoreMatchingDetail): any;
 
   abstract buildUserCriteria(filter : AppliedFilter, criteria : any) : any;
 
@@ -23,10 +29,8 @@ export abstract class SearchEngine {
   abstract getMatchingObjects(criteria : any, includedFields: any, sortingQuery: any,
                               callback : (error : any, response : any[]) => void) : void;
 
-  abstract buildQCards(objects : any[], jobDetails : BaseDetail, appliedFilter: AppliedFilter,
+  abstract buildQCards(objects : any[], jobDetails : CoreMatchingDetail, appliedFilter: AppliedFilter,
                        callback : (error : any, response : any[]) => void) : any ;
-
-  abstract createQCard(q_card : QCard, user : any, called: string): void;
 
   computePercentage(candidate_capability_matrix : any , job_capability_matrix :any, id: any) : QCard {
     let q_card = new QCard();
@@ -72,4 +76,40 @@ export abstract class SearchEngine {
     }
     return q_cards;
   }*/
+
+  getMatchingResult(searchEngine: SearchEngine, forId: any, next: any, appliedFilters: AppliedFilter,
+                    res: express.Response) : void {
+    searchEngine.getCoreMatchAgainstDetails(forId, (err: Error, againstDetails: CoreMatchingDetail) => {
+      if (err) {
+        next(err);
+        return;
+      }
+      let businessCriteria: any = searchEngine.buildBusinessCriteria(againstDetails);
+
+      if( appliedFilters.listName !== EList.CAN_MATCHED ) {
+        if (appliedFilters.listName !== EList.JOB_MATCHED) {
+          let ids = this.lookupInIds(againstDetails, appliedFilters.listName);
+          businessCriteria = {'_id': {$in: ids}};
+        }
+      }
+
+      let mainCriteria = searchEngine.buildUserCriteria(appliedFilters, businessCriteria);
+      let sortingQuery = searchEngine.getSortedCriteria(appliedFilters, businessCriteria);
+      let includedFields = searchEngine.getRequiredFieldNames();
+
+      searchEngine.getMatchingObjects(mainCriteria, includedFields, sortingQuery, (error: any, response: any[]) => {
+        if (error) {
+          next(error);
+          return;
+        }
+        searchEngine.buildQCards(response, againstDetails, appliedFilters, (error: any, qcards: any[]) => {
+          if (error) {
+            next(error);
+          } else {
+            res.status(200).send(qcards);
+          }
+        });
+      });
+    });
+  }
 }

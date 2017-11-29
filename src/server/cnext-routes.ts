@@ -102,17 +102,17 @@ export function cnextInit(app: express.Application) {
 
     //search-engine api
     app.post('/api/recruiter/jobProfile/:id/candidates', loggerInterceptor.logDetail, this.authInterceptor.requiresAuth,
-      this.authInterceptor.secureApiCheck, searchEngineController.getMatchingProfile);
-    app.post('/api/candidate/:candidateId/jobProfile', loggerInterceptor.logDetail, this.authInterceptor.requiresAuth,
-      this.authInterceptor.secureApiCheck, searchEngineController.getMatchingProfile);
-    app.post('/api/candidate/:candidateId/list/:listName', loggerInterceptor.logDetail,
-      this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck,
-      searchEngineController.getMatchingProfile);
+      this.authInterceptor.secureApiCheck, searchEngineController.getMatchingCandidates);
     app.post('/api/recruiter/jobProfile/:id/list/:listName', loggerInterceptor.logDetail,
       this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck,
-      searchEngineController.getMatchingProfile);
+      searchEngineController.getMatchingCandidates);
+    app.post('/api/candidate/:candidateId/jobProfile', loggerInterceptor.logDetail, this.authInterceptor.requiresAuth,
+      this.authInterceptor.secureApiCheck, searchEngineController.getMatchingJobs);
+    app.post('/api/candidate/:candidateId/list/:listName', loggerInterceptor.logDetail,
+      this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck,
+      searchEngineController.getMatchingJobs);
     app.post('/api/jobs/candidate/:candidateId', this.authInterceptor.requiresAuth,
-      searchEngineController.getMatchingJobProfiles);
+      searchEngineController.getMatchingJobs);
 
     //Share api
     app.get('/api/buildValuePortraitUrl', loggerInterceptor.logDetail, this.authInterceptor.requiresAuth,
