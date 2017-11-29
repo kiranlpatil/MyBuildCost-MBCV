@@ -53,7 +53,7 @@ export class CandidateSignUpComponent implements OnInit, AfterViewInit {
       'last_name': ['', [ValidationService.requireLastNameValidator]],
       'mobile_number': ['', [ValidationService.requireMobileNumberValidator, ValidationService.mobileNumberValidator]],
       'email': ['', [ValidationService.requireEmailValidator, ValidationService.emailValidator]],
-      'password': ['', [ValidationService.requirePasswordValidator, ValidationService.passwordValidator]],
+      'password': ['', [ValidationService.passwordValidator]],
       'confirm_password': ['', ValidationService.requireConfirmPasswordValidator],
       'birth_year': ['', [ValidationService.birthYearValidator]],
       'accept_terms': ['', [Validators.required]],
