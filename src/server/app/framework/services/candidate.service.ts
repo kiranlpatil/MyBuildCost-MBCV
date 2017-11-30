@@ -968,7 +968,7 @@ class CandidateService {
         let data: Map<string, string> = new Map([['$link$', config.get('TplSeed.mail.host') + 'signin'],
           ['$firstname$', candidate.first_name],
           ['$jobtitle$', jobTitle], ['$recruiter$', recruiter[0].company_name]]);
-        sendMailService.send('luckyvaishnav55@gmail.com',
+        sendMailService.send(candidate.email,
           Messages.EMAIL_SUBJECT_CANDIDATE_ADDED_TO_CART,
           'candidate-added-to-cart.html', data, callback);
       });
