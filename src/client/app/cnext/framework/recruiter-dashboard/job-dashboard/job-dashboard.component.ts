@@ -77,9 +77,6 @@ export class JobDashboardComponent implements OnInit, OnChanges {
       }
     );
     this.headerInfo = new RecruiterHeaderDetails();
-    this.actionOnQCardService.getCartStatus()
-      .subscribe( addedToCart => { this.addedToCart = addedToCart;
-      this.AddedToCart(addedToCart)});
     this.actionOnQCardService.getValueForCompareView().subscribe(addForCompareView => {this.addForCompareView = addForCompareView;
     this.addForCompare(addForCompareView);
     });
@@ -94,7 +91,7 @@ export class JobDashboardComponent implements OnInit, OnChanges {
 
     this.getJobProfile();
     this.whichListVisible = new Array(5);
-
+    this.getAction();
   }
 
   ngOnChanges(changes: any) {
@@ -254,8 +251,9 @@ export class JobDashboardComponent implements OnInit, OnChanges {
   }
 
 //TODO: move this (performActionOnComparisonList) code to comaprison compoent  ->by krishna ghatul code refactor
-  performActionOnComparisonList(data: any) {debugger
+  performActionOnComparisonList(data: any) {
     let usageTrackingData: UsageTracking = new UsageTracking();
+    var compareAction: any;
     if (data.action == 'Remove') {
       this.profileComparison.profileComparisonData.splice(this.profileComparison.profileComparisonData.indexOf(data.item), 1);
       this.listOfCandidateIdToCompare.splice(this.profileComparison.profileComparisonData.indexOf(data.item._id), 1);
@@ -270,59 +268,52 @@ export class JobDashboardComponent implements OnInit, OnChanges {
         }, error => this.errorService.onError(error));
     } else if (data.action == 'AddToCart') {
       //matchedList cartListed applied rejectedList
-      var compareAction: any;
+     // var compareAction: any;
 
       if (this.candidateQlist.matchedCandidates.filter(function (obj) {
           return data.item._id == obj._id;
         }).length && (data.item.candidateListStatus.indexOf('applied') !== -1)) {
         compareAction = {'action': 'add', 'destination': 'cartListed', 'id': data.item._id};
-       // compareAction = {'action': 'add', 'source': 'matchedList', 'destination': 'cartListed', 'id': data.item._id};
       } else if (this.candidateQlist.matchedCandidates.filter(function (obj) {
           return data.item._id == obj._id;
         }).length) {
         compareAction = {'action': 'add', 'destination': 'cartListed', 'id': data.item._id};
-       // compareAction = {'action': 'add', 'source': 'matchedList', 'destination': 'cartListed', 'id': data.item._id};
       } else if (this.candidateQlist.appliedCandidates.filter(function (obj) {
           return data.item._id == obj._id;
         }).length) {
         compareAction = {'action': 'add', 'destination': 'cartListed', 'id': data.item._id};
-       // compareAction = {'action': 'add', 'source': 'applied', 'destination': 'cartListed', 'id': data.item._id};
       }
 
       this.profileComparison.profileComparisonData.splice(this.profileComparison.profileComparisonData.indexOf(data.item), 1);
       this.listOfCandidateIdToCompare.splice(this.profileComparison.profileComparisonData.indexOf(data.item._id), 1);
       this.recruiterJobView.numberOfCandidatesInCompare--;
       //this.profileCompareService.change(compareAction);
-      this.acaQcardClassObject.actionOnQCardFromParent(compareAction);
+     // this.acaQcardClassObject.actionOnQCardFromParent(compareAction);
 
     } else if (data.action == 'Reject') {
-      var compareAction: any;
+     // var compareAction: any;
       if (this.candidateQlist.matchedCandidates.filter(function (obj) {
           return data.item._id == obj._id;
         }).length && (data.item.candidateListStatus.indexOf('applied') !== -1)) {
         compareAction = {'action': 'add', 'destination': 'rejectedList', 'id': data.item._id};
-       // compareAction = {'action': 'add', 'source': 'matchedList', 'destination': 'rejectedList', 'id': data.item._id};
       } else if (this.candidateQlist.matchedCandidates.filter(function (obj) {
           return data.item._id == obj._id;
         }).length) {
         compareAction = {'action': 'add', 'destination': 'rejectedList', 'id': data.item._id};
-       // compareAction = {'action': 'add', 'source': 'matchedList', 'destination': 'rejectedList', 'id': data.item._id};
       } else if ((data.item.candidateListStatus.indexOf('cartListed') !== -1) && (data.item.candidateListStatus.indexOf('applied') == -1)) {
           compareAction = {'action': 'add', 'destination': 'rejectedList', 'id': data.item._id};
-        //  compareAction = {'action': 'add', 'source': 'cartListed', 'destination': 'rejectedList', 'id': data.item._id};
       } else if ((data.item.candidateListStatus.indexOf('applied') !== -1) && (data.item.candidateListStatus.indexOf('cartListed') == -1)) {
         compareAction = {'action': 'add', 'destination': 'rejectedList', 'id': data.item._id};
-      //  compareAction = {'action': 'add', 'source': 'applied', 'destination': 'rejectedList', 'id': data.item._id};
       } else if ((data.item.candidateListStatus.indexOf('cartListed') !== -1) && (data.item.candidateListStatus.indexOf('applied') !== -1)) {
          compareAction = {'action': 'add', 'destination': 'rejectedList', 'id': data.item._id};
-        // compareAction = {'action': 'add', 'source': 'cartListed', 'destination': 'rejectedList', 'id': data.item._id};
       }
 
       this.profileComparison.profileComparisonData.splice(this.profileComparison.profileComparisonData.indexOf(data.item), 1);
       this.listOfCandidateIdToCompare.splice(this.profileComparison.profileComparisonData.indexOf(data.item._id), 1);
       this.recruiterJobView.numberOfCandidatesInCompare--;
-      this.acaQcardClassObject.actionOnQCardFromParent(compareAction);
+      //this.acaQcardClassObject.actionOnQCardFromParent(compareAction);
     }
+    this.acaQcardClassObject.actionOnQCardFromParent(compareAction);
   }
 
   changeSorting(sortBy: ESort) {
@@ -422,4 +413,9 @@ export class JobDashboardComponent implements OnInit, OnChanges {
     this.isJobCloseButtonClicked = !this.isJobCloseButtonClicked;
   }
 
+  getAction() {
+    this.actionOnQCardService.getAction().subscribe(actionOnValuePortrait => {
+      this.acaQcardClassObject.actionOnQCardFromParent(actionOnValuePortrait);
+    });
+  }
 }

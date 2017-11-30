@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnChanges, Output} from "@angular/core";
+import {Component, EventEmitter, Input, OnChanges, Output, OnInit} from "@angular/core";
 import {CandidateQCard} from "../../model/candidateQcard";
 import {QCardsortBy} from "../../model/q-cardview-sortby";
 import {MatchCandidate} from "../../model/match-candidate";
@@ -31,7 +31,7 @@ import {ActionOnQCardService} from "../../../../user/services/action-on-q-card.s
   styleUrls: ['q-card-view.component.css'],
 
 })
-export class QCardviewComponent implements OnChanges {
+export class QCardviewComponent implements OnChanges, OnInit {
 
   @Input() candidateQlist: CandidateQListModel = new CandidateQListModel();
   @Input() candidates: CandidateQCard[];
@@ -80,25 +80,33 @@ export class QCardviewComponent implements OnChanges {
       .subscribe( showModalStyle => {
         this.showModalStyle = showModalStyle
       });
-    this.actionOnQCardService.getSelectedCandidate()
-      .subscribe( selectedCandidate => {
-        this.selectedCandidate = selectedCandidate
-      });
-    this.actionOnQCardService.getAction().subscribe(actionOnValuePortrait => {
-      let result = this.actionOnQCardService.actionFromValuePortrait(actionOnValuePortrait.item,this.candidateQlist);
-      console.log('response from valuePortrait = ', result);
-      this.actionOnQCard(actionOnValuePortrait.action, result.source, actionOnValuePortrait.destination, result.candidate);
-    });
-    this.actionOnQCardService.getActionOnViewProfile().subscribe(actionOnViewProfile => {
-      this.viewProfile(actionOnViewProfile);
-    });
-    /*this.actionOnQCardService.getValueForCompareView().subscribe(addForCompareView => {
-      this.addForCompareView(addForCompareView.id, addForCompareView.sorceName)
-    });*/
   }
 
   ngOnInit() {
     this.matchFormat = 'aboveMatch';
+    this.getSelectedCandidate();
+    //this.getAction();
+    this.getActionOnViewProfile();
+  }
+
+  getSelectedCandidate() {
+    this.actionOnQCardService.getSelectedCandidate()
+      .subscribe( selectedCandidate => {
+        this.selectedCandidate = selectedCandidate
+      });
+  }
+
+  getAction() {
+    this.actionOnQCardService.getAction().subscribe(actionOnValuePortrait => {
+      let result = this.actionOnQCardService.actionFromValuePortrait(actionOnValuePortrait.item,this.candidateQlist);
+      this.actionOnQCard(actionOnValuePortrait.action, result.source, actionOnValuePortrait.destination, result.candidate);
+    });
+  }
+
+  getActionOnViewProfile() {
+    this.actionOnQCardService.getActionOnViewProfile().subscribe(actionOnViewProfile => {
+      this.viewProfile(actionOnViewProfile);
+    });
   }
 
   ngOnChanges(changes: any) {
@@ -116,39 +124,7 @@ export class QCardviewComponent implements OnChanges {
   }
 
 //TODO: refactor below code proper ->use service for logic ->by krishna ghatul
-  actionOnQCardFromParent(data: any) {debugger
-    /*var candidate: CandidateQCard;
-    var isFound: boolean = false;
-    this.candidateQlist.rejectedCandidates.forEach(item => {
-      if (data.id == item._id) {
-        candidate = item;
-        isFound = true;
-      }
-    });
-    if (!isFound) {
-      this.candidateQlist.appliedCandidates.forEach(item => {
-        if (data.id == item._id) {
-          candidate = item;
-          isFound = true;
-        }
-      })
-    }
-    if (!isFound) {
-      this.candidateQlist.cartCandidates.forEach(item => {
-        if (data.id == item._id) {
-          candidate = item;
-          isFound = true;
-        }
-      })
-    }
-    if (!isFound) {
-      this.candidateQlist.matchedCandidates.forEach(item => {
-        if (data.id == item._id) {
-          candidate = item;
-          isFound = true;
-        }
-      })
-    }*/
+  actionOnQCardFromParent(data: any) {
     let result = this.actionOnQCardService.actionFromValuePortrait(data.id, this.candidateQlist);
     this.actionOnQCard(data.action, result.source, data.destination, result.candidate);
 

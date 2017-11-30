@@ -82,7 +82,7 @@ export class ActionOnQCardService {
     return this.jobId.asObservable();
   }
 
-  actionFromValuePortrait(id: any, candidateQlist: CandidateQListModel) {debugger
+  actionFromValuePortrait(id: any, candidateQlist: CandidateQListModel) {
     let candidate: CandidateQCard;
     let source: string;
     let isFound: boolean = false;

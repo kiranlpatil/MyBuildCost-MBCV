@@ -39,6 +39,12 @@ export class RecruiterAction implements OnChanges {
     if(changes.type !== undefined && changes.type.currentValue !== undefined) {
       this.type = changes.type.currentValue;
     }
+    if(changes.isOverlayView !== undefined && changes.isOverlayView.currentValue !== undefined) {
+      this.isOverlayView = changes.isOverlayView.currentValue;
+    }
+    if(changes.isValuePortraitView !== undefined && changes.isValuePortraitView.currentValue !== undefined) {
+      this.isValuePortraitView = changes.isValuePortraitView.currentValue;
+    }
   }
 
   viewProfile(candidate: CandidateQCard) {
@@ -73,9 +79,13 @@ export class RecruiterAction implements OnChanges {
     return Button;
   }
 
-  actionToBePerformed(action:string, destination:string, item: any) {
+  /*actionToBePerformed(action:string, destination:string, item: any) {debugger
     let data = {'action': action, 'destination': destination, 'item': item};
     this.actionOnQCardService.actionToBePerformed(data);
-  }
+  }*/
 
+  actionToBePerformed(action:string, destination:string, item: any) {
+    let data = {'action': action, 'destination': destination, 'id': item};
+    this.actionOnQCardService.actionToBePerformed(data);
+  }
 }
