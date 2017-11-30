@@ -7,7 +7,7 @@
   overflow: hidden;
   color: black;
   box-shadow: 2px 2px 8px 1px grey;
-  height: 300px;
+  height: 265px;
   width: 290px;
 }
 
@@ -53,6 +53,8 @@ h3.career-plugin-header {
   margin-left: 4px;
   cursor: pointer;
   width: 100%;
+  font-weight: bold;
+  box-shadow: 1px 1px 2px 1px grey;
 }
 
 span#career-plugin-notification {

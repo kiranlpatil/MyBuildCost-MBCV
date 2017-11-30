@@ -356,6 +356,9 @@ export class Messages {
   public static NOT_AVAILABLE = 'Not Available';
   public static PASSWORD_MESSAGE = 'Password Must be Alfa- Numeric having minimum 8 Characters.';
 
+  public static CAREER_PLUGIN_MSG_NEW_USER = 'You are not registered, Kindly register with our carrier partner to apply for job';
+  public static CAREER_PLUGIN_MSG_EXISTING_USER = 'You are all ready registered, Kindly please login';
+
 
 }
 export class AdminPanel {

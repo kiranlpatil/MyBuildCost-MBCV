@@ -132,7 +132,8 @@ export function update(req: any, res: any, next: any) {
 };
 
 export function validateRegistrationStatus(req: any, res: any, next: any) {
-  if (req.params.mobileNo === undefined || req.params.mobileNo === '') {
+  if ((req.params.mobileNo === undefined || req.params.mobileNo === '') &&
+    (req.query.recruiterId === undefined || req.query.recruiterId === '')) {
     next({
       reason: Messages.MSG_ERROR_PROVIDE_MOBILE_NO,
       message: Messages.MSG_ERROR_FIELD_VERIFICATION,

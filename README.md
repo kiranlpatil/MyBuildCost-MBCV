@@ -483,8 +483,8 @@ Step 2: Add this tag in html page.
 
 Step 3: Add below code to initilise/load plugin script.
 
-var docLoad = new CareerPluginLoad();
-docLoad.loadCareerPluginScript()
+var docLoad = new CareerPlugin();
+docLoad.load()
 
 Note: To avoid typescript compilation error use below declartion(If typescript).
  declare var CareerPluginLoad:any;
