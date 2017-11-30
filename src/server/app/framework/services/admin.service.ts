@@ -239,6 +239,10 @@ class AdminService {
   }
 
   updateUser(_id: string, item: any, callback: (error: any, result: any) => void) {
+    if(!item.isCandidate && item.isActivated) {
+      item.activation_date = new Date();
+    }
+
     this.userRepository.findById(_id, (err: any, res: any) => {
       if (err) {
         callback(err, res);

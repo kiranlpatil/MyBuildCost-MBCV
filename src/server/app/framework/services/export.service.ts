@@ -95,7 +95,7 @@ class ExportService {
       downloadLocation = path.resolve() + config.get('TplSeed.exportFilePathServer')
         + config.get('TplSeed.exportFileNames.companyAccountDetailsCSV');
       fields = '_id,mobile_number,email,current_theme,isCandidate,guide_tour,notifications,isAdmin,otp,isActivated,' +
-        'temp_mobile,location,picture,temp_email';
+        'temp_mobile,location,picture,temp_email,activation_date,created_date';
       query = '{"isCandidate":false}';
     }
 

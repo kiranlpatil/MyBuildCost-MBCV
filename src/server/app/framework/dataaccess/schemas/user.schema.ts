@@ -75,7 +75,14 @@ class UserSchema {
         is_read: Boolean,
         notification_time: Date
       }],
-      guide_tour: [{type: String}]
+      guide_tour: [{type: String}],
+      activation_date: {
+        type: Date,
+      },
+      created_date: {
+        type: Date,
+        default: new Date()
+      },
     }, {versionKey: false});
     return schema;
   }
