@@ -76,38 +76,12 @@ export class QCardviewComponent implements OnChanges, OnInit {
         this.matchFormat = this.match.aboveMatch;
       }
     );
-    this.actionOnQCardService.getShowModalStyle()
-      .subscribe( showModalStyle => {
-        this.showModalStyle = showModalStyle
-      });
   }
 
   ngOnInit() {
     this.matchFormat = 'aboveMatch';
-    this.getSelectedCandidate();
-    //this.getAction();
-    this.getActionOnViewProfile();
   }
 
-  getSelectedCandidate() {
-    this.actionOnQCardService.getSelectedCandidate()
-      .subscribe( selectedCandidate => {
-        this.selectedCandidate = selectedCandidate
-      });
-  }
-
-  getAction() {
-    this.actionOnQCardService.getAction().subscribe(actionOnValuePortrait => {
-      let result = this.actionOnQCardService.actionFromValuePortrait(actionOnValuePortrait.item,this.candidateQlist);
-      this.actionOnQCard(actionOnValuePortrait.action, result.source, actionOnValuePortrait.destination, result.candidate);
-    });
-  }
-
-  getActionOnViewProfile() {
-    this.actionOnQCardService.getActionOnViewProfile().subscribe(actionOnViewProfile => {
-      this.viewProfile(actionOnViewProfile);
-    });
-  }
 
   ngOnChanges(changes: any) {
     if (changes.candidateQlist && changes.candidateQlist.currentValue) {
@@ -123,14 +97,16 @@ export class QCardviewComponent implements OnChanges, OnInit {
     }
   }
 
-//TODO: refactor below code proper ->use service for logic ->by krishna ghatul
   actionOnQCardFromParent(data: any) {
     let result = this.actionOnQCardService.actionFromValuePortrait(data.id, this.candidateQlist);
     this.actionOnQCard(data.action, result.source, data.destination, result.candidate);
-
   }
 
-  actionOnQCard(action: string, sourceListName: string, destinationListName: string, candidate: CandidateQCard) { debugger
+  viewProfileFromParent(data: any) {
+    this.viewProfile(data);
+  }
+
+  actionOnQCard(action: string, sourceListName: string, destinationListName: string, candidate: CandidateQCard) {
     let isMatchList: boolean = false;
     let isFound: boolean = false;
     switch (sourceListName) {
