@@ -11,12 +11,9 @@ import {CandidateQListModel} from "../../cnext/framework/recruiter-dashboard/job
 
 export class ActionOnQCardService {
 
-  private addedToCart = new Subject<boolean>();
-  private showModalStyle = new Subject<boolean>();
   private jobId = new Subject<any>();
   private addForCompareView = new Subject<any>();
-  private actionOnQCard = new Subject<any>();
-  private selectedCandidate = new Subject<Candidate>();
+  //private actionOnQCard = new Subject<any>();
   private action = new Subject<any>();
   private actionOnViewProfile = new Subject<any>();
 
@@ -24,22 +21,15 @@ export class ActionOnQCardService {
 
   }
 
-  setActionOnQCard(action: string, sourceListName: string, destinationListName: string, candidate: CandidateQCard) {
+  /*setActionOnQCard(action: string, sourceListName: string, destinationListName: string, candidate: CandidateQCard) {
     let obj = {action, sourceListName, destinationListName, candidate};
     this.actionOnQCard.next(obj);
-  }
+  }*/
 
-  getActionOnQCard(): Observable<any> {
+  /*getActionOnQCard(): Observable<any> {
     return this.actionOnQCard.asObservable();
-  }
+  }*/
 
-  setAddToCart(addedToCart: boolean) {
-    this.addedToCart.next(addedToCart);
-  }
-
-  getCartStatus() : Observable<boolean>{
-    return this.addedToCart.asObservable();
-  }
 
   setValueForCompareView(addForCompareView: any) {
     this.addForCompareView.next(addForCompareView);
@@ -47,22 +37,6 @@ export class ActionOnQCardService {
 
   getValueForCompareView() :Observable<any> {
     return this.addForCompareView.asObservable();
-  }
-
-  setShowModalStyle(showModalStyle: boolean) {
-    this.showModalStyle.next(showModalStyle);
-  }
-
-  getShowModalStyle() : Observable<boolean>{
-    return this.showModalStyle.asObservable();
-  }
-
-  setSelectedCandidate(selectedCandidate: any) {
-    this.selectedCandidate.next(selectedCandidate);
-  }
-
-  getSelectedCandidate() :Observable<any> {
-    return this.selectedCandidate.asObservable();
   }
 
   actionToBePerformed(data: any) {
