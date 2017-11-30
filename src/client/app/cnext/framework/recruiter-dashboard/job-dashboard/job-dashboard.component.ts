@@ -80,7 +80,6 @@ export class JobDashboardComponent implements OnInit, OnChanges {
     this.actionOnQCardService.getValueForCompareView().subscribe(addForCompareView => {this.addForCompareView = addForCompareView;
     this.addForCompare(addForCompareView);
     });
-    this.getActionOnViewProfile();
   }
 
   ngOnInit() {
@@ -89,7 +88,7 @@ export class JobDashboardComponent implements OnInit, OnChanges {
     this.activatedRoute.params.subscribe(params => {
       this.jobId = params['jobId'];
     });
-
+    this.getActionOnViewProfile();
     this.getJobProfile();
     this.whichListVisible = new Array(5);
     this.getAction();
