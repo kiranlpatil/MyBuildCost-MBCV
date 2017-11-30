@@ -64,6 +64,7 @@ $hover-list-bg: #dbdbdb;
 $bottom-border: #eaeaea;
 $reject-color: #f7941d;
 $password-label: #a3a3a3;
+$light-black1: #a0a0a0;
 
 .btn-logout {
   margin-top: 15px;
@@ -185,7 +186,7 @@ $password-label: #a3a3a3;
 }
 
 .optional-field {
-  color: $optional-field !important;
+  color: $light-black1 !important;
   font-size: 12px;
   font-weight: bold;
 }
@@ -2066,6 +2067,21 @@ select:focus {
 
 img[alt] {
   font-size: 0;
+}
+
+.form-password {
+  .error-message {
+    bottom: inherit;
+    left: 0;
+    position: absolute;
+    top: 36px;
+    width: 100%;
+    z-index: 999;
+    div {
+      background: $white;
+      margin: 0;
+    }
+  }
 }
 
 .password-required-message {

@@ -66,9 +66,9 @@
           <label>{{getLabel().EMAIL_FIELD_LABEL}}</label>
         </div>
 
-        <div class="form-group">
+        <div class="form-group form-password">
           <cn-control-messages [control]="recruiterForm.controls.password"
-                               [submitStatus]="submitStatus"></cn-control-messages>
+                               [submitStatus]="submitStatus" class="error-message"></cn-control-messages>
           <input type="password" formControlName="password" id="password" [(ngModel)]="model.password"
                  class="form-control" (focus)="showMessage()" [(ngModel)]="myPassword"
                  (ngModelChange)="selectPassword($event)" required/>

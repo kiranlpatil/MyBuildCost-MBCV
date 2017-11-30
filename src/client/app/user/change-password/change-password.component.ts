@@ -38,7 +38,7 @@ export class ChangePasswordComponent {
               private formBuilder: FormBuilder, private loaderService: LoaderService) {
 
     this.userForm = this.formBuilder.group({
-      'new_password': ['', [ValidationService.requireNewPasswordValidator, ValidationService.passwordValidator]],
+      'new_password': ['', [ValidationService.passwordValidator]],
       'confirm_password': ['', [ValidationService.requireConfirmPasswordValidator, ValidationService.passwordValidator]],
       'current_password': ['', [ValidationService.requireCurrentPasswordValidator, ValidationService.passwordValidator]]
     });
