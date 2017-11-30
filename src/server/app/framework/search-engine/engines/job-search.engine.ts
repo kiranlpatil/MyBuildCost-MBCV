@@ -119,6 +119,20 @@ export class JobSearchEngine extends SearchEngine {
     let listName = appliedFilter.listName;
 
     for (let job of jobs) {
+      let isFound: boolean = false;
+      if (listName === EList.JOB_MATCHED) {
+        if (candidateDetails.job_list) {
+          for (let list of candidateDetails.job_list) {
+            if (list.ids.indexOf(job._id.toString()) !== -1) {
+              isFound = true;
+              break;
+            }
+          }
+        }
+        if (isFound) {
+          continue;
+        }
+      }
       let job_q_card: JobCard;
       job_q_card = <JobCard> this.computePercentage(candidateDetails.capability_matrix,job.capability_matrix,
          job._id);
