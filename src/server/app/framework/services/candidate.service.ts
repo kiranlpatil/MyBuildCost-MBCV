@@ -102,7 +102,7 @@ class CandidateService {
   updateCandidateList(candidateId: number, candidate: any, callback: (error: Error, status: string) => void) {
     let updateQuery = {
       $push: {
-        'candidate_list': new mongoose.Types.ObjectId(candidateId)
+        'my_candidate_list': new mongoose.Types.ObjectId(candidateId)
       }
     };
 

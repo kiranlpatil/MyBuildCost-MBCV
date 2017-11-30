@@ -38,7 +38,7 @@ class RecruiterSchema {
       postedJobs: [{
         type: mongoose.Schema.Types.ObjectId, ref: 'JobProfile'
       }],
-      candidate_list: [{
+      my_candidate_list: [{
         type: mongoose.Schema.Types.ObjectId, ref: 'Candidates'
       }]
     }, {versionKey: false});
