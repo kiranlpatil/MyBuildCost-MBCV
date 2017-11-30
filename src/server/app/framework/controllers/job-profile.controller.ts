@@ -108,7 +108,6 @@ export function getCapabilityMatrix(req: express.Request, res: express.Response,
   }
 }
 
-
 export function update(req: express.Request, res: express.Response, next: any) {
   try {
 
@@ -237,6 +236,7 @@ export function getQCardDetails(req: express.Request, res: express.Response, nex
     });
   }
 }
+
 export function cloneJob(req: express.Request, res: express.Response, next: any) {
   try {
     var newJobTitle = req.query.newJobTitle;
@@ -275,12 +275,8 @@ export function cloneJob(req: express.Request, res: express.Response, next: any)
             });
           } else {
             let usageTrackingService = new UsageTrackingService();
-            let usageTrackingData = new UsageTracking();
-            usageTrackingData.action = Actions.CLONED_JOB_POST_BY_RECRUITER;
-            usageTrackingData.recruiterId = newJob.recruiterId;
-            usageTrackingData.jobProfileId = req.params.id;
-            usageTrackingData.timestamp = new Date();
-            usageTrackingService.create(usageTrackingData, (err, result) => {
+            usageTrackingService.customCreate(newJob.recruiterId, req.params.id, '',
+              Actions.CLONED_JOB_POST_BY_RECRUITER, (err: Error) => {
               if (err) {
                 next({
                   reason: Messages.MSG_ERROR_UPDATING_USAGE_DETAIL,

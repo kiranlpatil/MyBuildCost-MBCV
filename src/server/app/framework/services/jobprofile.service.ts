@@ -131,13 +131,10 @@ class JobProfileService {
           for (let list of job.candidate_list) {
             if (list.name === item.listName) {
               updateFlag = true;
-              let uses_data: UsageTracking = new UsageTracking();
+              let action: number;
               if (item.action === ConstVariables.ADD_CANDIDATE) {
-                uses_data.recruiterId = item.recruiterId;
-                uses_data.candidateId = item.candidateId;
-                uses_data.jobProfileId = job._id;
                 let sharedService: SharedService = new SharedService();
-                uses_data.action = sharedService.constructAddActionData(item.listName);
+                 action = sharedService.constructAddActionData(item.listName);
 
                 if (list.name === ConstVariables.REJECTED_LISTED_CANDIDATE) {
                   for (let _list of job.candidate_list) {
@@ -153,20 +150,16 @@ class JobProfileService {
                   list.ids.push(item.candidateId);
                 }
               } else {
-                uses_data.recruiterId = item.recruiterId;
-                uses_data.candidateId = item.candidateId;
-                uses_data.jobProfileId = job._id;
 
                 let sharedService: SharedService = new SharedService();
-                uses_data.action = sharedService.constructRemoveActionData(item.listName);
+                action = sharedService.constructRemoveActionData(item.listName);
                 let index = list.ids.indexOf(item.candidateId);    // <-- Not supported in <IE9
                 if (index !== -1) {
                   list.ids.splice(index, 1);
                 }
               }
-              uses_data.timestamp = new Date();
               let usageTrackingService = new UsageTrackingService();
-              usageTrackingService.create(uses_data, (err, result) => {
+              usageTrackingService.customCreate(item.recruiterId, job._id, item.candidateId, action, (err) => {
                 if (err) {
                   callback(err, null);
                 }

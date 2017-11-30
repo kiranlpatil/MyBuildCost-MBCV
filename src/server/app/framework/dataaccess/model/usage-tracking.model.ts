@@ -1,4 +1,5 @@
 import {Actions} from "../../shared/sharedconstants";
+import UsageTrackingModel = require("../mongoose/usage-tracking.interface");
 export class UsageTracking {
   recruiterId: string;
   candidateId: string;
@@ -6,7 +7,4 @@ export class UsageTracking {
   action: Actions;
   timestamp: Date;
 
-  constructor() {
-
-  }
 }

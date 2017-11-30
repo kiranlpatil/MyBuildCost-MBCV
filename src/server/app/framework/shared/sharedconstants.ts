@@ -39,6 +39,7 @@ export enum Actions  {
   CLONED_JOB_POST_BY_RECRUITER,
   CLOSED_JOB_POST_BY_RECRUITER,
   SEARCHED_CANDIDATE_BY_RECRUITER,
+  SHARED_JOB_POST_BY_RECRUITER,
   DEFAULT_VALUE = 999
   //append your new enum value at the end of the list DON'T MODIFY THE LIST
 }

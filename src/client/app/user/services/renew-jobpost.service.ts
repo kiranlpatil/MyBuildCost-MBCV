@@ -29,10 +29,12 @@ export class RenewJobPostService {
     if (this.selectedJobProfile.daysRemainingForExpiring > -31 && this.selectedJobProfile.daysRemainingForExpiring < 1) {
       this.selectedJobProfile.expiringDate = new Date();
       this.selectedJobProfile.expiringDate.setDate(this.selectedJobProfile.expiringDate.getDate() + 30);
+      this.selectedJobProfile.isJobPostRenew = true;
       this.updateJob();
     } else if (this.selectedJobProfile.daysRemainingForExpiring > 0 && this.selectedJobProfile.daysRemainingForExpiring < 31) {
       this.selectedJobProfile.expiringDate = new Date(this.selectedJobProfile.expiringDate);
       this.selectedJobProfile.expiringDate.setDate(this.selectedJobProfile.expiringDate.getDate() + 30);
+      this.selectedJobProfile.isJobPostRenew = true;
       this.updateJob();
     } else {
       let message = new Message();

@@ -344,7 +344,7 @@ export class QCardviewComponent implements OnChanges, OnInit {
     }
   }
 
-  viewProfile(candidate: CandidateQCard) { debugger
+  viewProfile(candidate: CandidateQCard) {
     if (!this.isShortlistedclicked) {
       this.modelCandidate = candidate;
       let usageTrackingData: UsageTracking = new UsageTracking();

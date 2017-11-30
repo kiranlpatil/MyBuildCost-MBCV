@@ -68,7 +68,6 @@ export function create(req: express.Request, res: express.Response, next: any) {
   }
 }
 
-
 export function postJob(req: express.Request, res: express.Response, next: any) {
   try {
     var newJob: JobProfileModel = <JobProfileModel>req.body.postedJobs;
@@ -86,6 +85,8 @@ export function postJob(req: express.Request, res: express.Response, next: any) 
       } else {
         newJob.isJobPostExpired = false;
       }
+
+
       recruiterService.updateJob(userId, newJob, (err, result) => {
         if (err) {
           next({
@@ -96,7 +97,7 @@ export function postJob(req: express.Request, res: express.Response, next: any) 
             code: 403
           });
         } else {
-          recruiterService.updateUsageTrackingData(result, newJob, (error, data) => {
+          recruiterService.updateUsageTrackingData(result, newJob, (error) => {
             if (error) {
               next({
                 reason: Messages.MSG_ERROR_UPDATING_USAGE_DETAIL,
@@ -125,7 +126,7 @@ export function postJob(req: express.Request, res: express.Response, next: any) 
             code: 403
           });
         } else {
-          recruiterService.updateUsageTrackingData(result, newJob, (error, data) => {
+          recruiterService.updateUsageTrackingData(result, newJob, (error) => {
             if (error) {
               next({
                 reason: Messages.MSG_ERROR_UPDATING_USAGE_DETAIL,
@@ -257,7 +258,6 @@ export function getFilterList(req: express.Request, res: express.Response, next:
     next({reason: e.message, message: e.message, stackTrace: new Error(), code: 500});
   }
 }
-
 
 export function getList(req: express.Request, res: express.Response, next: any) {
   console.log('Remove this code');
