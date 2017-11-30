@@ -49,19 +49,18 @@ export class JobCompareViewComponent implements OnChanges,OnInit {
   ngOnChanges(changes:any) {
     if (changes.candiadteId !== undefined && changes.candiadteId.currentValue !== undefined) {
       this.candiadteId = changes.candiadteId.currentValue;
+      this.getCandidateProfile(this.candiadteId);
     }
     if (changes.jobId !== undefined && changes.jobId.currentValue !== undefined) {
       this.recruiterId = changes.jobId.currentValue;
-
       this.recruiterDashboardService.getPostedJobDetails(this.jobId)
         .subscribe(
           data => {
-            this.OnRecruiterDataSuccess(data);
+            this.OnRecruiterDataSuccess(data.result);
           },error => this.errorService.onError(error));
     }
     if (this.candiadteId !== undefined && this.recruiterId !== undefined && this.typeOfView ) {
       this.candiadteId = changes.candiadteId.currentValue;
-      this.getCandidateProfile(this.candiadteId);
       this.getCompareDetail(this.candiadteId, this.recruiterId);
 
       if(!this.isCandidate) {
@@ -80,7 +79,6 @@ export class JobCompareViewComponent implements OnChanges,OnInit {
     if (LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE) === 'true') {
       this.isCandidate = true;
     }
-    //this.isGuidedTourImgRequire();
   }
 
   isGuidedTourImgRequire() {
@@ -94,7 +92,7 @@ export class JobCompareViewComponent implements OnChanges,OnInit {
       .subscribe(
         (res:any) => {
           LocalStorageService.setLocalValue(LocalStorage.GUIDED_TOUR, JSON.stringify(res.data.guide_tour));
-          this.isGuidedTourImgRequire()
+          this.isGuidedTourImgRequire();
         },
         error => this.errorService.onError(error)
       );
