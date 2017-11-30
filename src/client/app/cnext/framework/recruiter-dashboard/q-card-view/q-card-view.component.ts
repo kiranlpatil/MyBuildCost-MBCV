@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnChanges, Output} from "@angular/core";
+import {Component, EventEmitter, Input, OnChanges, Output, OnInit} from "@angular/core";
 import {CandidateQCard} from "../../model/candidateQcard";
 import {QCardsortBy} from "../../model/q-cardview-sortby";
 import {MatchCandidate} from "../../model/match-candidate";
@@ -31,7 +31,7 @@ import {ActionOnQCardService} from "../../../../user/services/action-on-q-card.s
   styleUrls: ['q-card-view.component.css'],
 
 })
-export class QCardviewComponent implements OnChanges {
+export class QCardviewComponent implements OnChanges, OnInit {
 
   @Input() candidateQlist: CandidateQListModel = new CandidateQListModel();
   @Input() candidates: CandidateQCard[];
@@ -76,30 +76,12 @@ export class QCardviewComponent implements OnChanges {
         this.matchFormat = this.match.aboveMatch;
       }
     );
-    this.actionOnQCardService.getShowModalStyle()
-      .subscribe( showModalStyle => {
-        this.showModalStyle = showModalStyle
-      });
-    this.actionOnQCardService.getSelectedCandidate()
-      .subscribe( selectedCandidate => {
-        this.selectedCandidate = selectedCandidate
-      });
-    this.actionOnQCardService.getAction().subscribe(actionOnValuePortrait => {
-      let result = this.actionOnQCardService.actionFromValuePortrait(actionOnValuePortrait.item,this.candidateQlist);
-      console.log('response from valuePortrait = ', result);
-      this.actionOnQCard(actionOnValuePortrait.action, result.source, actionOnValuePortrait.destination, result.candidate);
-    });
-    this.actionOnQCardService.getActionOnViewProfile().subscribe(actionOnViewProfile => {
-      this.viewProfile(actionOnViewProfile);
-    });
-    /*this.actionOnQCardService.getValueForCompareView().subscribe(addForCompareView => {
-      this.addForCompareView(addForCompareView.id, addForCompareView.sorceName)
-    });*/
   }
 
   ngOnInit() {
     this.matchFormat = 'aboveMatch';
   }
+
 
   ngOnChanges(changes: any) {
     if (changes.candidateQlist && changes.candidateQlist.currentValue) {
@@ -115,46 +97,16 @@ export class QCardviewComponent implements OnChanges {
     }
   }
 
-//TODO: refactor below code proper ->use service for logic ->by krishna ghatul
-  actionOnQCardFromParent(data: any) {debugger
-    /*var candidate: CandidateQCard;
-    var isFound: boolean = false;
-    this.candidateQlist.rejectedCandidates.forEach(item => {
-      if (data.id == item._id) {
-        candidate = item;
-        isFound = true;
-      }
-    });
-    if (!isFound) {
-      this.candidateQlist.appliedCandidates.forEach(item => {
-        if (data.id == item._id) {
-          candidate = item;
-          isFound = true;
-        }
-      })
-    }
-    if (!isFound) {
-      this.candidateQlist.cartCandidates.forEach(item => {
-        if (data.id == item._id) {
-          candidate = item;
-          isFound = true;
-        }
-      })
-    }
-    if (!isFound) {
-      this.candidateQlist.matchedCandidates.forEach(item => {
-        if (data.id == item._id) {
-          candidate = item;
-          isFound = true;
-        }
-      })
-    }*/
+  actionOnQCardFromParent(data: any) {
     let result = this.actionOnQCardService.actionFromValuePortrait(data.id, this.candidateQlist);
     this.actionOnQCard(data.action, result.source, data.destination, result.candidate);
-
   }
 
-  actionOnQCard(action: string, sourceListName: string, destinationListName: string, candidate: CandidateQCard) { debugger
+  viewProfileFromParent(data: any) {
+    this.viewProfile(data);
+  }
+
+  actionOnQCard(action: string, sourceListName: string, destinationListName: string, candidate: CandidateQCard) {
     let isMatchList: boolean = false;
     let isFound: boolean = false;
     switch (sourceListName) {
@@ -368,7 +320,7 @@ export class QCardviewComponent implements OnChanges {
     }
   }
 
-  viewProfile(candidate: CandidateQCard) { debugger
+  viewProfile(candidate: CandidateQCard) {
     if (!this.isShortlistedclicked) {
       this.modelCandidate = candidate;
       let usageTrackingData: UsageTracking = new UsageTracking();

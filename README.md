@@ -429,6 +429,7 @@ $ src/redis-server
    db.getCollection('candidates').createIndex({'location.city':1})
    db.getCollection('candidates').createIndex({'proficiencies':1})
    db.getCollection('candidates').createIndex({'industry.name':1})
+   db.getCollection('users').createIndex({'email':1})
    
  
  //Script for performance branch to seperate the postedjobs from recruiter
@@ -482,8 +483,8 @@ Step 2: Add this tag in html page.
 
 Step 3: Add below code to initilise/load plugin script.
 
-var docLoad = new CareerPluginLoad();
-docLoad.loadCareerPluginScript()
+var docLoad = new CareerPlugin();
+docLoad.load()
 
 Note: To avoid typescript compilation error use below declartion(If typescript).
  declare var CareerPluginLoad:any;

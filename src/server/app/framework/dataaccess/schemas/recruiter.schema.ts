@@ -38,9 +38,10 @@ class RecruiterSchema {
       postedJobs: [{
         type: mongoose.Schema.Types.ObjectId, ref: 'JobProfile'
       }],
-      candidate_list: [{
+      my_candidate_list: [{
         type: mongoose.Schema.Types.ObjectId, ref: 'Candidates'
-      }]
+      }],
+      api_key: String
     }, {versionKey: false});
 
     return schema;

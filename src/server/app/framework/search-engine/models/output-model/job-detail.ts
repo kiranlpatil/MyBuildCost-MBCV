@@ -1,6 +1,6 @@
-import { BaseDetail } from './base-detail';
+import { CoreMatchingDetail } from './base-detail';
 import {CandidateListModel} from '../../../dataaccess/model/candidate-list.model';
-export class JobDetail extends BaseDetail {
+export class JobDetail extends CoreMatchingDetail {
   city: string;
   relevantIndustries : string[];
   candidateList : CandidateListModel[];

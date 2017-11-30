@@ -16,7 +16,6 @@ import {ActionOnQCardService} from "../../../user/services/action-on-q-card.serv
 
 export class RecruiterAction implements OnChanges {
 
-  //@Input() candidate: Candidate;
   @Input() candidate: any;
   @Input() jobId: string;
   @Input() type: string;
@@ -38,6 +37,12 @@ export class RecruiterAction implements OnChanges {
     }
     if(changes.type !== undefined && changes.type.currentValue !== undefined) {
       this.type = changes.type.currentValue;
+    }
+    if(changes.isOverlayView !== undefined && changes.isOverlayView.currentValue !== undefined) {
+      this.isOverlayView = changes.isOverlayView.currentValue;
+    }
+    if(changes.isValuePortraitView !== undefined && changes.isValuePortraitView.currentValue !== undefined) {
+      this.isValuePortraitView = changes.isValuePortraitView.currentValue;
     }
   }
 
@@ -74,8 +79,7 @@ export class RecruiterAction implements OnChanges {
   }
 
   actionToBePerformed(action:string, destination:string, item: any) {
-    let data = {'action': action, 'destination': destination, 'item': item};
+    let data = {'action': action, 'destination': destination, 'id': item};
     this.actionOnQCardService.actionToBePerformed(data);
   }
-
 }

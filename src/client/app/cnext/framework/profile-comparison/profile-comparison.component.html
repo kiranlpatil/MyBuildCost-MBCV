@@ -2,7 +2,7 @@
   <div id="printProfileComparison" class="compare-candidate-view">
     <div class="compare-candidate-container">
       <cn-print-screen [screenIdForPrint]="'printProfileComparison'" [fileName]="'Candidate-Profile-Comparision'"></cn-print-screen>
-      <cn-profile-comparison-header [profileComparisonResult]="profileComparisonData" id="profile-comparison-header"
+      <cn-profile-comparison-header [jobId]="jobId" [profileComparisonResult]="profileComparisonData" id="profile-comparison-header"
                                     (actionOnComparisonList)="actionOnComparisonList($event)"></cn-profile-comparison-header>
       <cn-profile-capability-comparison
         [profileComparisonResult]="profileComparisonData"></cn-profile-capability-comparison>

@@ -1,4 +1,7 @@
 <section class="main-form-wrapper registration">
+  <div *ngIf="isFromCareerPlugin">
+    <span class="career-plugin-toster">{{getMessages().CAREER_PLUGIN_MSG_NEW_USER}}</span>
+  </div>
   <cn-user-header [MainHeaderMenuHideShow]="mainHeaderMenuHideShow"></cn-user-header>
 
   <div *ngIf="!isChrome && isToasterVisible" #toaster id="snackbar">{{getMessages().BROWSER_ALERT_MSG}}
@@ -43,8 +46,8 @@
         <label>{{getLabel().CONTACT_FIELD_LABEL}}</label>
       </div>
 
-      <div class="form-group">
-        <cn-control-messages [control]="userForm.controls.password" [submitStatus]="submitStatus"></cn-control-messages>
+      <div class="form-group form-password">
+        <cn-control-messages [control]="userForm.controls.password" [submitStatus]="submitStatus" class="error-message"></cn-control-messages>
         <input type="password" formControlName="password" id="password" [(ngModel)]="model.password"
                class="form-control" (blur)="makePasswordConfirm()" required/>
         <div class="password-required-message">

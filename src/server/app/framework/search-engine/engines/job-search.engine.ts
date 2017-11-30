@@ -1,21 +1,27 @@
 import {SearchEngine} from "./search.engine";
 import {AppliedFilter} from "../models/input-model/applied-filter";
-import {BaseDetail} from "../models/output-model/base-detail";
+import {CoreMatchingDetail} from "../models/output-model/base-detail";
 import {ESort} from "../models/input-model/sort-enum";
-import {EList} from "../models/input-model/list-enum";
 import {JobCard} from "../models/output-model/job-card";
 import {CandidateDetail} from "../models/output-model/candidate-detail";
 import {ConstVariables} from "../../shared/sharedconstants";
 import JobProfileRepository = require('../../dataaccess/repository/job-profile.repository');
-
+import CandidateRepository = require("../../dataaccess/repository/candidate.repository");
+import { EList } from '../models/input-model/list-enum';
+import * as mongoose from 'mongoose';
 export class JobSearchEngine extends SearchEngine {
   job_q_cards: JobCard[] = new Array(0);
   final_job_q_cards: JobCard[] = new Array(0);
 
   jobProfileRepository: JobProfileRepository = new JobProfileRepository();
+  candidateRepository: CandidateRepository;
 
+  constructor() {
+    super();
+    this.candidateRepository = new CandidateRepository();
+  }
 
-  buildBusinessCriteria(details: BaseDetail): any {
+  buildBusinessCriteria(details: CoreMatchingDetail): any {
     let today = new Date();
     if (details.interestedIndustries === undefined) {
       details.interestedIndustries = [];
@@ -56,8 +62,7 @@ export class JobSearchEngine extends SearchEngine {
       criteria['salaryMaxValue'] = {
         $lte: Number(filter.maxSalary)
       };
-    }
-    if (filter.minExperience && filter.minExperience.toString() !== undefined && filter.minExperience.toString() !== '' && filter.maxExperience &&
+    }if (filter.minExperience && filter.minExperience.toString() !== undefined && filter.minExperience.toString() !== '' && filter.maxExperience &&
       filter.maxExperience.toString() !== undefined && filter.maxExperience.toString() !== '') {
       criteria['experienceMinValue'] = {
         $gte: Number(filter.minExperience),
@@ -97,48 +102,52 @@ export class JobSearchEngine extends SearchEngine {
 
   getMatchingObjects(criteria: any, includedFields: any, sortingQuery: any,
                      callback: (error: any, response: any[]) => void): void {
-    if(Object.keys(sortingQuery).length === 0) {
-      this.jobProfileRepository.retrieveResult(criteria, includedFields,(err, items) => {
+    if (Object.keys(sortingQuery).length === 0) {
+      this.jobProfileRepository.retrieveResult(criteria, includedFields, (err, items) => {
         callback(err, items);
       });
     } else {
-      this.jobProfileRepository.retrieveSortedResultWithLimit(criteria, includedFields, sortingQuery,(err, items) => {
+      this.jobProfileRepository.retrieveSortedResultWithLimit(criteria, includedFields, sortingQuery, (err, items) => {
         callback(err, items);
       });
     }
   }
 
-  buildQCards(jobs: any[], candidateDetails: CandidateDetail,  appliedFilter: AppliedFilter,
+  buildQCards(jobs: any[], candidateDetails: CandidateDetail, appliedFilter: AppliedFilter,
               callback: (error: any, response: any[]) => any): any {
     let sortBy = appliedFilter.sortBy;
     let listName = appliedFilter.listName;
 
     for (let job of jobs) {
-      let job_q_card: JobCard;
-      job_q_card = <JobCard> this.computePercentage(job.capability_matrix,
-        candidateDetails.capability_matrix, job._id);
-      this.job_q_cards.push(job_q_card);
-
-      //if (job_q_card.exact_matching >= ConstVariables.LOWER_LIMIT_FOR_SEARCH_RESULT) {
-        /*if (sortBy !== ESort.BEST_MATCH) {
-          if (this.job_q_cards.length < 100) {
-            this.createQCard(job_q_card, job);
-          } else {
-            break;
+      let isFound: boolean = false;
+      if (listName === EList.JOB_MATCHED) {
+        if (candidateDetails.job_list) {
+          for (let list of candidateDetails.job_list) {
+            if (list.ids.indexOf(job._id.toString()) !== -1) {
+              isFound = true;
+              break;
+            }
           }
-        } else {
-          this.createQCard(job_q_card, job);
-        }*/
+        }
+        if (isFound) {
+          continue;
+        }
+      }
+      let job_q_card: JobCard;
+      job_q_card = <JobCard> this.computePercentage(candidateDetails.capability_matrix,job.capability_matrix,
+         job._id);
+      this.job_q_cards.push(job_q_card);
     }
 
     if (sortBy === ESort.BEST_MATCH) {
       this.job_q_cards = <JobCard[]>this.getSortedObjectsByMatchingPercentage(this.job_q_cards);
+      this.job_q_cards = this.job_q_cards.slice(0,ConstVariables.QCARD_LIMIT);
     }
 
-    let ids:any[] = this.job_q_cards.map(a => a._id);
-    let jobProfileQuery:any={'_id': {$in: ids.slice(0, 101)}};
+    let ids: any[] = this.job_q_cards.map(a => a._id);
+    let jobProfileQuery: any = {'_id': {$in: ids.slice(0, ConstVariables.QCARD_LIMIT)}};
     this.jobProfileRepository.retrieveJobProfiles(jobProfileQuery, (err, res) => {
-      if(err) {
+      if (err) {
         callback(err, res);
         return;
       }
@@ -148,37 +157,57 @@ export class JobSearchEngine extends SearchEngine {
     });
   }
 
-  createQCard(job_q_card: JobCard, job: any): any {
-    let job_card = new JobCard('Test', job.salaryMinValue, job.salaryMaxValue, job.experienceMinValue,
-      job.experienceMaxValue, job.education, 'No', 'No', job.postingDate, job.industry.name, job.jobTitle,
-      job.hideCompanyName, job.candidate_list, job.isJobPostClosed, job._id, job_q_card.above_one_step_matching, job_q_card.exact_matching,
-      job.location.city, job.proficiencies);
-    this.job_q_cards.push(job_card);
+  generateQCards(jobCards: any, jobDetails: any): any {
+    for (let card of jobCards) {
+      let jobDetail = jobDetails.find((o: any) => o._id == (card._id).toString());
+      if (card.exact_matching >= ConstVariables.LOWER_LIMIT_FOR_SEARCH_RESULT) {
+        let jobCard = new JobCard(
+          jobDetail.recruiterId.company_name, jobDetail.salaryMinValue, jobDetail.salaryMaxValue, jobDetail.experienceMinValue,
+          jobDetail.experienceMaxValue, jobDetail.education, jobDetail.recruiterId.company_size, jobDetail.recruiterId.company_logo,
+          jobDetail.postingDate, jobDetail.industry.name, jobDetail.jobTitle, jobDetail.hideCompanyName, jobDetail.candidate_list,
+          jobDetail.isJobPostClosed, jobDetail._id, card.above_one_step_matching, card.exact_matching,
+          jobDetail.location.city, jobDetail.proficiencies);
+        this.final_job_q_cards.push(jobCard);
+    }
+  }
+  return this.final_job_q_cards;
   }
 
-  generateQCards(jobCards:any, deatailedcards:any): any{
-    let count = 0;
-    for(let card of deatailedcards) {
-      count++;
-      let job_card = jobCards.find((o:any) => o._id == (card._id).toString());
-      if(job_card.exact_matching >= ConstVariables.LOWER_LIMIT_FOR_SEARCH_RESULT) {
-
-        let jobProfile_card = new JobCard(
-          card.recruiterId.company_name, card.salaryMinValue, card.salaryMaxValue, card.experienceMinValue,
-          card.experienceMaxValue, card.education, card.recruiterId.company_size, card.recruiterId.company_logo,
-          card.postingDate, card.industry.name, card.jobTitle, card.hideCompanyName, card.candidate_list,
-          card.isJobPostClosed, card._id, job_card.above_one_step_matching, job_card.exact_matching,
-          card.location.city, card.proficiencies);
-        this.final_job_q_cards.push(jobProfile_card);
-
-        if(deatailedcards.length == count) {
-          console.log('from return2');
-          return this.final_job_q_cards;
-        }
+  getCoreMatchAgainstDetails(canId: string, callback: (err: Error, res: CandidateDetail) => void): any {
+    this.candidateRepository.findById(canId, (myError: Error, response: any) => {
+      if (myError) {
+        callback(myError, null);
+        return;
       }
-      else {
-        continue;
+      let canDetail = new CandidateDetail();
+      canDetail.industryName = response.industry.name;
+      canDetail.capability_matrix = response.capability_matrix;
+      canDetail.job_list = response.job_list;
+      canDetail.userId = response.userId;
+      callback(null, canDetail);
+    });
+  }
+
+  lookupInIds(candidateDetails: CandidateDetail, listName : EList) : mongoose.Types.ObjectId [] {
+    let list : string;
+    switch (listName) {
+      case EList.JOB_APPLIED :
+        list = ConstVariables.APPLIED_CANDIDATE;
+        break;
+      case EList.JOB_NOT_INTERESTED :
+        list = ConstVariables.BLOCKED_CANDIDATE;
+        break;
+    }
+    let send_ids : mongoose.Types.ObjectId[];
+    send_ids  = new Array(0);
+    for(let obj of candidateDetails.job_list) {
+      if (list === obj.name) {
+        for(let id of obj.ids) {
+          send_ids.push(mongoose.Types.ObjectId(id));
+        }
+        break;
       }
     }
+    return send_ids;
   }
 }

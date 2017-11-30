@@ -81,9 +81,7 @@ export class ValuePortraitComponent implements OnInit {
             usageTrackingData.candidateId = candidateData.data.candidateId;
 
             this.usageTrackingService.addUsesTrackingData(usageTrackingData).subscribe(
-              data => {
-
-              }, error => this.errorService.onError(error));
+              error => this.errorService.onError(error));
           }
           this.candidateId.emit(candidateData.data.candidateId);
           this.candidate = this.updateCapabilityData(candidateData.data);

@@ -64,9 +64,10 @@ class CandidateService {
         bcrypt.hash(item.password, saltRounds, (err: any, hash: any) => {
           // Store hash in your password DB.
           if (err) {
-            callback(new Error(Messages.MSG_ERROR_BCRYPT_CREATION), null);
+            callback(err, null);
           } else {
             item.password = hash;
+            item.isCandidate = true;
             this.userRepository.create(item, (err, res) => {
               if (err) {
                 callback(new Error(Messages.MSG_ERROR_REGISTRATION_MOBILE_NUMBER), null);
@@ -80,13 +81,9 @@ class CandidateService {
                   if (err) {
                     callback(err, null);
                   } else {
-                    if (item.recruiterReferenceId != "undefined") {
-                      this.updateCandidateList(res._doc._id, item, (err: Error, result: any) => {
-                        if (err) {
-                          callback(err, null);
-                        } else {
-                          callback(null, res);
-                        }
+                    if (item.recruiterReferenceId) {
+                      this.updateRecruitersMyCandidateList(res._doc._id, item, (err: Error, status: string) => {
+                       callback(err, res);
                       });
                     } else {
                       callback(null, res);
@@ -98,16 +95,15 @@ class CandidateService {
             });
           }
         });
-        item.isCandidate = true;
-
       }
     });
   }
 
-  updateCandidateList(candidateId: number, candidate: any, callback: (error: Error, result: any) => void) {
+  updateRecruitersMyCandidateList(candidateId: number, candidate: any,
+                                  callback: (error: Error, status: string) => void) {
     let updateQuery = {
       $push: {
-        'candidate_list': new mongoose.Types.ObjectId(candidateId)
+        'my_candidate_list': new mongoose.Types.ObjectId(candidateId)
       }
     };
 
@@ -115,37 +111,36 @@ class CandidateService {
       '_id': new mongoose.Types.ObjectId(candidate.recruiterReferenceId)
     };
 
-    this.recruiterRepository.findOneAndUpdate(searchQuery, updateQuery, {}, (error: Error, recruiter: RecruiterClassModel) => {
-      if (error) {
-        callback(error, null);
-      } else {
-        this.recruiterRepository.retrieve({'_id': new mongoose.Types.ObjectId(candidate.recruiterReferenceId)}, (recruiterErr, recData) => {
-          if (recruiterErr) {
-            callback(recruiterErr, null);
-          } else {
-            this.userRepository.retrieve({'_id': new mongoose.Types.ObjectId(recData[0].userId)}, (userError, userData) => {
-              if (userError) {
-                callback(userError, null);
-              } else {
-                let sendMailService = new SendMailService();
-                let data: Map<string, string> = new Map([['$first_name$', candidate.first_name],
-                  ['$app_name$', ProjectAsset.APP_NAME]]);
-                sendMailService.send(userData[0].email,
-                  Messages.EMAIL_SUBJECT_CANDIDATE_REGISTRATION,
-                  'new-candidate-registration.html', data, (err: Error) => {
-                    if (error) {
-                      callback(error, null);
-                    } else {
-                      callback(null, "success");
-                    }
-                  });
-              }
-            });
-          }
-        });
+    this.recruiterRepository.findOneAndUpdate(searchQuery, updateQuery, {},
+      (error: Error, recruiter: RecruiterClassModel) => {
 
-      }
-    });
+        if (error) {
+          callback(error, null);
+          return;
+        } else {
+
+          this.recruiterRepository.populateRecruiterDetails(candidate.recruiterReferenceId, (err, recruiter) => {
+            if (err) {
+              callback(err, null);
+              return;
+            }
+            let sendMailService = new SendMailService();
+            let data: Map<string,string> = new Map([['$first_name$', candidate.first_name],
+              ['$app_name$', ProjectAsset.APP_NAME]]);
+            sendMailService.send(recruiter.email,
+              Messages.EMAIL_SUBJECT_CANDIDATE_REGISTRATION,
+              'new-candidate-registration.html', data, (e, status) => {
+                if (e) {
+                  callback(e, null);
+                  return;
+                }
+                callback(null, "success");
+              });
+          });
+
+
+        }
+      });
   }
 
   retrieve(field: any, callback: (error: any, result: any) => void) {

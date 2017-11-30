@@ -4,8 +4,4 @@ export class UsageTracking {
   candidateId: string;
   jobProfileId: string;
   action: UsageActions;
-
-  constructor() {
-
-  }
 }

@@ -13,6 +13,8 @@
           <li *ngIf="item.candidateListStatus.indexOf('cartListed') == -1 && item.candidateListStatus.indexOf('rejectedList') == -1" (click)="actionToPerformOnCompareList('AddToCart',item)"><a>Add to Cart</a></li>
           <li *ngIf="item.candidateListStatus.indexOf('rejectedList') == -1" (click)="actionToPerformOnCompareList('Reject',item)"><a>Reject</a></li>
           <li (click)="actionToPerformOnCompareList('Remove',item)"><a>Remove</a></li>
+            <li (click)="navigateWithId('/value-portrait',item.candidateListStatus[0], item)"><a>Show Value Portrait</a></li>
+            <li (click)="navigateToApplicantSearch('/recruiter/search', item)"><a>Match Against All Job</a></li>
         </ul>
       </div>
       <cn-profile-comparison-header-meta [matchingPercentage]="item.matchingPercentage"

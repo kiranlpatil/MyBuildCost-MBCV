@@ -13,7 +13,8 @@ class Messages {
   public static EMAIL_SUBJECT_CANDIDATE_REGISTRATION: string = 'New Candidate Registered';
   public static EMAIL_SUBJECT_USER_CONTACTED_YOU: string = 'User Contacted you';
   public static EMAIL_SUBJECT_RECRUITER_CONTACTED_YOU: string = 'Urgent attention required on Jobmosis with jobtitle ';
-  public static EMAIL_SUBJECT_CANDIDATE_REGISTERED_FROM_SITE: string = 'Candidate applied on your site';
+  public static EMAIL_SUBJECT_NEW_CANDIDATE_REGISTERED_FROM_SITE: string = 'New Candidate applied on your site';
+  public static EMAIL_SUBJECT_EXISTING_CANDIDATE_REGISTERED_FROM_SITE: string = 'Existing Candidate applied on your site';
   public static EMAIL_SUBJECT_ADMIN_LOGGED_ON: string = 'Admin Logged on';
   public static EMAIL_SUBJECT_SERVER_ERROR: string = 'Server Error Info';
   public static EMAIL_SUBJECT_RECRUITER_REGISTRATION: string = 'Recruiter registered with Jobmosis.';
@@ -134,6 +135,7 @@ class Messages {
   public static MSG_ERROR_ADDING_USAGE_DETAIL = 'Error In editing the Usage Detail';
   public static MSG_ERROR_SEPERATING_USER = 'Error In Seperating the Users';
   public static MSG_ERROR_CREATING_EXCEL = 'Error In creating csv file';
+  public static MSG_ERROR_PROVIDE_MOBILE_NO = 'Please provide valid mobile number.';
 }
 export=Messages;
 

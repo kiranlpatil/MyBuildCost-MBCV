@@ -44,6 +44,7 @@ export enum UsageActions  {
   CLONED_JOB_POST_BY_RECRUITER,
   CLOSED_JOB_POST_BY_RECRUITER,
   SEARCHED_CANDIDATE_BY_RECRUITER,
+  SHARED_JOB_POST_BY_RECRUITER,
   DEFAULT_VALUE = 999
   //append your new enum value at the end of the list DON'T MODIFY THE LIST
 }
@@ -354,6 +355,9 @@ export class Messages {
   public static CAPABILITY_DETAILS = 'Capability details under';
   public static NOT_AVAILABLE = 'Not Available';
   public static PASSWORD_MESSAGE = 'Password Must be Alfa- Numeric having minimum 8 Characters.';
+
+  public static CAREER_PLUGIN_MSG_NEW_USER = 'You are not registered, Kindly register with our carrier partner to apply for job';
+  public static CAREER_PLUGIN_MSG_EXISTING_USER = 'You are all ready registered, Kindly please login';
 
 
 }
@@ -741,6 +745,7 @@ export class Label {
   public static NAME: string = 'Name';
   public static ACTIONS: string = 'Actions';
   public static TOTAL_POSTED_JOB: string = 'Total Posted Jobs';
+  public static API_KEY: string = 'API Key';
   public static COMPANY_NAME: string = 'Company Name (Size)';
   public static COMPANY_SIZE: string = 'Company Size';
   public static OWN_COMPANY: string = 'Own company';

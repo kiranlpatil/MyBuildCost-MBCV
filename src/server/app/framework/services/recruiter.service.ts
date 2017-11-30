@@ -1,9 +1,9 @@
-import * as mongoose from 'mongoose';
-import {Actions, ConstVariables} from '../shared/sharedconstants';
-import {JobCountModel} from '../dataaccess/model/job-count.model';
-import {CandidatesInLists} from '../dataaccess/model/CandidatesInLists.model';
-import {UsageTracking} from '../dataaccess/model/usage-tracking.model';
-import {SentMessageInfo} from 'nodemailer';
+import * as mongoose from "mongoose";
+import {Actions, ConstVariables} from "../shared/sharedconstants";
+import {JobCountModel} from "../dataaccess/model/job-count.model";
+import {CandidatesInLists} from "../dataaccess/model/CandidatesInLists.model";
+import {SentMessageInfo} from "nodemailer";
+import {Share} from "../../../../client/app/cnext/framework/model/share";
 import Messages = require('../shared/messages');
 import UserRepository = require('../dataaccess/repository/user.repository');
 import RecruiterRepository = require('../dataaccess/repository/recruiter.repository');
@@ -26,7 +26,6 @@ import IRecruiter = require('../dataaccess/mongoose/recruiter');
 import UsageTrackingService = require('./usage-tracking.service');
 import AuthInterceptor = require('../interceptor/auth.interceptor');
 import ShareService = require('../share/services/share.service');
-import {Share} from '../../../../client/app/cnext/framework/model/share';
 
 var bcrypt = require('bcrypt');
 
@@ -286,12 +285,13 @@ class RecruiterService {
     this.recruiterRepository.retrieveWithLean(field, projection, callback);
   }
 
-  notifyRecruiter(field: any, callback: (error: any, result: any) => void) {
+  notifyRecruiter(field: any, result: any, callback: (error: any, result: any) => void) {
     let sendMailService = new SendMailService();
     let host = config.get('TplSeed.mail.host');
     let link = host + 'signin';
     let data: Map<string, string> = new Map([['$link$', link], ['$mobile_number$', field.mobileNo]]);
-
+    let emailSubject = (result.length) ?
+      Messages.EMAIL_SUBJECT_EXISTING_CANDIDATE_REGISTERED_FROM_SITE : Messages.EMAIL_SUBJECT_NEW_CANDIDATE_REGISTERED_FROM_SITE;
     this.recruiterRepository.retrieve({'_id': new mongoose.Types.ObjectId(field.recruiterId)}, (recruiterErr, recData) => {
       if (recruiterErr) {
         callback(recruiterErr, null);
@@ -301,7 +301,7 @@ class RecruiterService {
             callback(userError, null);
           } else {
             sendMailService.send(userData[0].email,
-              Messages.EMAIL_SUBJECT_CANDIDATE_REGISTERED_FROM_SITE,
+              emailSubject,
               'notify-recruiter.mail.html', data, callback);
           }
         });
@@ -380,34 +380,32 @@ class RecruiterService {
     });
   }
 
-  updateUsageTrackingData(updatedJob: any, job: any, callback: (error: any, result: any) => void) {
-    let usageTrackingData: UsageTracking = new UsageTracking();
-    usageTrackingData.recruiterId = String(updatedJob._doc.recruiterId);
-    usageTrackingData.jobProfileId = String(updatedJob._doc._id);
-    usageTrackingData.timestamp = new Date();
+  updateUsageTrackingData(updatedJob: any, job: JobProfileModel, callback: (error: Error) => void) {
+    let action: number = 99999;
 
     if (Boolean(updatedJob._doc.isJobPostClosed) == true) {
-      usageTrackingData.action = Actions.CLOSED_JOB_POST_BY_RECRUITER;
-    } else if (new Date(job.expiringDate) != new Date(updatedJob._doc.expiringDate)) {
-      usageTrackingData.action = Actions.RENEWED_JOB_POST_BY_RECRUITER;
+      action = Actions.CLOSED_JOB_POST_BY_RECRUITER;
+    } else if (job.isJobPostRenew) {
+      action = Actions.RENEWED_JOB_POST_BY_RECRUITER;
     } else if (Boolean(updatedJob._doc.isJobPosted) && !Boolean(updatedJob._doc.isJobPostClosed)) {
-      usageTrackingData.action = Actions.POSTED_JOB_BY_RECRUIER;
+      action = Actions.POSTED_JOB_BY_RECRUIER;
     } else if (job._id == undefined) {
-      usageTrackingData.action = Actions.CREATED_NEW_JOB_BY_RECRUIER;
+      action = Actions.CREATED_NEW_JOB_BY_RECRUIER;
     }
 
 
-    if (usageTrackingData.action != undefined || usageTrackingData.action != null) {
+    if (action != 99999) {
       let usageTrackingService = new UsageTrackingService();
-      usageTrackingService.create(usageTrackingData, (err, result) => {
+      usageTrackingService.customCreate(String(updatedJob._doc.recruiterId),String(updatedJob._doc._id), '',
+        action, (err) => {
         if (err) {
-          callback(err, null);
+          callback(err);
         } else {
-          callback(null, result);
+          callback(null);
         }
       });
     } else {
-      callback(null, '');
+      callback(null);
     }
   }
 

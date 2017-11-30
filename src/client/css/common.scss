@@ -64,6 +64,7 @@ $hover-list-bg: #dbdbdb;
 $bottom-border: #eaeaea;
 $reject-color: #f7941d;
 $password-label: #a3a3a3;
+$light-black1: #a0a0a0;
 
 .btn-logout {
   margin-top: 15px;
@@ -185,7 +186,7 @@ $password-label: #a3a3a3;
 }
 
 .optional-field {
-  color: $optional-field !important;
+  color: $light-black1 !important;
   font-size: 12px;
   font-weight: bold;
 }
@@ -2068,6 +2069,21 @@ img[alt] {
   font-size: 0;
 }
 
+.form-password {
+  .error-message {
+    bottom: inherit;
+    left: 0;
+    position: absolute;
+    top: 36px;
+    width: 100%;
+    z-index: 999;
+    div {
+      background: $white;
+      margin: 0;
+    }
+  }
+}
+
 .password-required-message {
   color: $password-label;
   font-size: 10px;
@@ -2162,4 +2178,20 @@ img[alt] {
       }
     }
   }
+}
+
+.career-plugin-toster {
+  background-color: #e8e8e8 !important;
+  border: 0 !important;
+  border-radius: 0px !important;
+  top: 97px;
+  color: #000 !important;
+  display: inline-block;
+  font-family: 'gothamrnd-book';
+  font-size: 15px;
+  margin: auto;
+  padding: 11px 10px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
 }

@@ -98,8 +98,7 @@ export class CandidateSearchComponent implements OnChanges {
     usageTrackingData.recruiterId = LocalStorageService.getLocalValue(LocalStorage.END_USER_ID);
     usageTrackingData.candidateId = item.id;
     this.usageTrackingService.addUsesTrackingData(usageTrackingData).subscribe(
-      data => {
-      }, error => this.errorService.onError(error));
+      error => this.errorService.onError(error));
     this._router.navigate(['/recruiter/search', item.id]);
   }
 

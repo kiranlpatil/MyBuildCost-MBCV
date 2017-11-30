@@ -68,7 +68,6 @@ export function create(req: express.Request, res: express.Response, next: any) {
   }
 }
 
-
 export function postJob(req: express.Request, res: express.Response, next: any) {
   try {
     var newJob: JobProfileModel = <JobProfileModel>req.body.postedJobs;
@@ -86,6 +85,8 @@ export function postJob(req: express.Request, res: express.Response, next: any) 
       } else {
         newJob.isJobPostExpired = false;
       }
+
+
       recruiterService.updateJob(userId, newJob, (err, result) => {
         if (err) {
           next({
@@ -96,7 +97,7 @@ export function postJob(req: express.Request, res: express.Response, next: any) 
             code: 403
           });
         } else {
-          recruiterService.updateUsageTrackingData(result, newJob, (error, data) => {
+          recruiterService.updateUsageTrackingData(result, newJob, (error) => {
             if (error) {
               next({
                 reason: Messages.MSG_ERROR_UPDATING_USAGE_DETAIL,
@@ -125,7 +126,7 @@ export function postJob(req: express.Request, res: express.Response, next: any) 
             code: 403
           });
         } else {
-          recruiterService.updateUsageTrackingData(result, newJob, (error, data) => {
+          recruiterService.updateUsageTrackingData(result, newJob, (error) => {
             if (error) {
               next({
                 reason: Messages.MSG_ERROR_UPDATING_USAGE_DETAIL,
@@ -258,7 +259,6 @@ export function getFilterList(req: express.Request, res: express.Response, next:
   }
 }
 
-
 export function getList(req: express.Request, res: express.Response, next: any) {
   console.log('Remove this code');
 }
@@ -362,32 +362,6 @@ export function getCandidatesByName(req: express.Request, res: express.Response,
     next({reason: e.message, message: e.message, stackTrace: new Error(), code: 500});
   }
 
-}
-
-export function notifyRecruiter(req: express.Request, res: express.Response, next: any) {
-  try {
-
-    let recruiterService = new RecruiterService();
-    let params = req.body;
-    recruiterService.notifyRecruiter(params, (error, result) => {
-      if (error) {
-        next({
-          reason: Messages.MSG_ERROR_RSN_WHILE_CONTACTING,
-          message: Messages.MSG_ERROR_WHILE_CONTACTING,
-          stackTrace: new Error(),
-          code: 403
-        });
-      } else {
-        res.status(200).send({
-          'status': Messages.STATUS_SUCCESS,
-          'data': {'message': Messages.MSG_SUCCESS_EMAIL}
-        });
-      }
-    });
-  } catch (e) {
-    next({reason: e.message, message: e.message, stackTrace: new Error(), code: 500});
-
-  }
 }
 
 export function responseToRecruiter(req: express.Request, res: express.Response, next: any) {

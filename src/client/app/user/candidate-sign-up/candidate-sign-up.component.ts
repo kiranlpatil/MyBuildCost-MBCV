@@ -1,11 +1,11 @@
-import {Component, OnInit, ViewChild, ElementRef, AfterViewInit} from "@angular/core";
-import {Router, ActivatedRoute, Params} from "@angular/router";
+import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from "@angular/core";
+import {ActivatedRoute, Params, Router} from "@angular/router";
 import {CandidateSignUpService} from "./candidate-sign-up.service";
 import {CandidateDetail} from "../models/candidate-details";
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ValidationService} from "../../shared/customvalidations/validation.service";
 import {AppSettings, CommonService, Message, MessageService, NavigationRoutes} from "../../shared/index";
-import {API, ImagePath, Label, LocalStorage, Messages, SessionStorage} from "../../shared/constants";
+import {API, ImagePath, Label, LocalStorage, Messages} from "../../shared/constants";
 import {LocalStorageService} from "../../shared/services/localstorage.service";
 import {DateService} from "../../cnext/framework/date.service";
 import {SharedService} from "../../shared/services/shared-service";
@@ -43,6 +43,7 @@ export class CandidateSignUpComponent implements OnInit, AfterViewInit {
   isChrome: boolean;
   isToasterVisible: boolean = true;
   isGuideMessageVisible: boolean = false;
+  isFromCareerPlugin: boolean = false;
 
   constructor(private commonService: CommonService, private _router: Router, private dateService: DateService,
               private candidateService: CandidateSignUpService, private messageService: MessageService, private formBuilder: FormBuilder,
@@ -80,10 +81,8 @@ export class CandidateSignUpComponent implements OnInit, AfterViewInit {
     this.activatedRoute.queryParams.subscribe((params: Params) => {
       params['phoneNumber'] !== undefined ? this.userForm.controls['mobile_number']
           .setValue(Number(params['phoneNumber'])) : false;
-      params['tokenId'] !== undefined ? SessionStorageService.setRecruiterReferenceId(params['tokenId']) : false;
-      if(params['tokenId'] !== undefined) {
-        this.notifyRecruiter(params['tokenId'],params['phoneNumber']);
-      }
+      params['integrationKey'] !== undefined ? SessionStorageService.setRecruiterReferenceId(params['integrationKey']) : false;
+      this.isFromCareerPlugin = (params['integrationKey'] !== undefined) ? true : false;
     });
   }
 
@@ -169,19 +168,6 @@ export class CandidateSignUpComponent implements OnInit, AfterViewInit {
   goBack() {
     this.commonService.goBack();
     this._router.navigate(['/']);
-  }
-
-  notifyRecruiter(recruiterId:string,mobileNo:string) {
-    let data:any= {
-      'recruiterId':recruiterId,
-      'mobileNo':mobileNo
-    }
-    this.candidateService.sendMailToRecruiter(data)
-      .subscribe(
-        res => {
-          this.messageService.message(new Message(Messages.MSG_SUCCESS_FOR_CANDIDATE_PROFILE_CREATION_STATUS));
-        },
-        error => (this.errorService.onError(error)));
   }
   makePasswordConfirm(): boolean {
     if (this.model.confirm_password !== this.model.password && this.model.confirm_password !== '') {

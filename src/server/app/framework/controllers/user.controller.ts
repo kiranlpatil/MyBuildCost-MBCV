@@ -1,5 +1,6 @@
-import * as express from 'express';
-import * as multiparty from 'multiparty';
+import * as express from "express";
+import * as multiparty from "multiparty";
+import {MailChimpMailerService} from "../services/mailchimp-mailer.service";
 import AuthInterceptor = require('../interceptor/auth.interceptor');
 import SendMailService = require('../services/mailer.service');
 import UserModel = require('../dataaccess/model/user.model');
@@ -10,7 +11,6 @@ import ResponseService = require('../shared/response.service');
 import CandidateService = require('../services/candidate.service');
 import adminController= require('./admin.controller');
 import RecruiterModel = require('../dataaccess/model/recruiter.model');
-import { MailChimpMailerService } from '../services/mailchimp-mailer.service';
 import IRecruiter = require("../dataaccess/mongoose/recruiter");
 
 let config = require('config');
@@ -1807,4 +1807,39 @@ export function getUserFeedback(req: express.Request, res: express.Response, nex
       code: 403
     });
   }
+}
+
+export function getUserRegistrationStatus(req: express.Request, res: express.Response, next: any) {
+  try {
+    let userService = new UserService();
+    let query = {'mobile_number': req.params.mobileNo};
+    userService.getUserRegistrationStatus(query, (error, result) => {
+      if (error) {
+        next(error);
+      } else {
+        let data: any = {'recruiterId': req.query.recruiterId, 'mobileNo': req.params.mobileNo};
+        let recruiterService = new RecruiterService();
+        recruiterService.notifyRecruiter(data, result, (error, notifyResponse) => {
+          if (error) {
+            next({
+              reason: Messages.MSG_ERROR_RSN_WHILE_CONTACTING,
+              message: Messages.MSG_ERROR_WHILE_CONTACTING,
+              stackTrace: new Error(),
+              code: 403
+            });
+          } else {
+            res.status(200).send(result);
+          }
+        });
+      }
+    });
+  } catch (e) {
+    next({
+      reason: e.message,
+      message: e.message,
+      stackTrace: new Error(),
+      code: 403
+    });
+  }
+
 }

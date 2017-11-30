@@ -42,7 +42,7 @@ interface JobProfileModel extends mongoose.Document {
   capabilityMatrix: any[];
   daysRemainingForExpiring: number;
   numberOfCandidatesInList: CandidatesInLists;
-
+  isJobPostRenew : boolean;
   roles: string;
 }
 export = JobProfileModel;

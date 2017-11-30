@@ -14,6 +14,8 @@ import {ProfileComparison, ProfileComparisonData, CompareEntityDetails} from "..
 export class ProfileComparisonComponent implements OnChanges {
 
   @Input() profileComparison:ProfileComparison;
+  @Input() jobId: string;
+  type: string;
   @Output() performActionOnComparisonList = new EventEmitter();
   profileComparisonData: ProfileComparisonData[] = new Array(0);
   private profileComparisonJobData: CompareEntityDetails = new CompareEntityDetails();

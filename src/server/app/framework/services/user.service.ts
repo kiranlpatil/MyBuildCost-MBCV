@@ -1,8 +1,9 @@
 import UserRepository = require('../dataaccess/repository/user.repository');
 import SendMailService = require('./mailer.service');
 import SendMessageService = require('./sendmessage.service');
-import * as fs from 'fs';
-import * as mongoose from 'mongoose';
+import * as fs from "fs";
+import * as mongoose from "mongoose";
+import {SentMessageInfo} from "nodemailer";
 let config = require('config');
 let path = require('path');
 import Messages = require('../shared/messages');
@@ -11,7 +12,6 @@ import ProjectAsset = require('../shared/projectasset');
 import MailAttachments = require('../shared/sharedarray');
 import RecruiterRepository = require('../dataaccess/repository/recruiter.repository');
 import RecruiterService = require('./recruiter.service');
-import { SentMessageInfo } from 'nodemailer';
 
 class UserService {
   APP_NAME: string;
@@ -318,6 +318,10 @@ class UserService {
 
   retrieveBySortedOrder(query: any, projection:any, sortingQuery: any, callback: (error: any, result: any) => void) {
     this.userRepository.retrieveBySortedOrder(query, projection, sortingQuery, callback);
+  }
+
+  getUserRegistrationStatus(query: any, callback: (error: any, result: any) => void) {
+    this.userRepository.retrieveWithIncluded(query, {'email': 1, '_id': 0}, callback);
   }
 
 }
