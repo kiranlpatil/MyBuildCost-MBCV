@@ -138,7 +138,7 @@
     </div>
 
     <div id="compare-candidates" class="tab-pane fade">
-      <cn-profile-comparison  [profileComparison]="profileComparison"
+      <cn-profile-comparison [jobId]="jobId"  [profileComparison]="profileComparison"
                              (performActionOnComparisonList)="performActionOnComparisonList($event)"
                              *ngIf="whichListVisible[4]"></cn-profile-comparison>
       <p class="empty-list-message" *ngIf="recruiterJobView.numberOfCandidatesInCompare==0 && whichListVisible[4]">There

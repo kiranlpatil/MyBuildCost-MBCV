@@ -79,11 +79,6 @@ export class RecruiterAction implements OnChanges {
     return Button;
   }
 
-  /*actionToBePerformed(action:string, destination:string, item: any) {debugger
-    let data = {'action': action, 'destination': destination, 'item': item};
-    this.actionOnQCardService.actionToBePerformed(data);
-  }*/
-
   actionToBePerformed(action:string, destination:string, item: any) {
     let data = {'action': action, 'destination': destination, 'id': item};
     this.actionOnQCardService.actionToBePerformed(data);
