@@ -80,6 +80,7 @@ export class JobDashboardComponent implements OnInit, OnChanges {
     this.actionOnQCardService.getValueForCompareView().subscribe(addForCompareView => {this.addForCompareView = addForCompareView;
     this.addForCompare(addForCompareView);
     });
+    this.getActionOnViewProfile();
   }
 
   ngOnInit() {
@@ -416,6 +417,12 @@ export class JobDashboardComponent implements OnInit, OnChanges {
   getAction() {
     this.actionOnQCardService.getAction().subscribe(actionOnValuePortrait => {
       this.acaQcardClassObject.actionOnQCardFromParent(actionOnValuePortrait);
+    });
+  }
+
+  getActionOnViewProfile() {
+    this.actionOnQCardService.getActionOnViewProfile().subscribe(actionOnViewProfile => {
+      this.acaQcardClassObject.viewProfileFromParent(actionOnViewProfile);
     });
   }
 }

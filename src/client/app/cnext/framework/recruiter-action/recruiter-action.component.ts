@@ -16,7 +16,6 @@ import {ActionOnQCardService} from "../../../user/services/action-on-q-card.serv
 
 export class RecruiterAction implements OnChanges {
 
-  //@Input() candidate: Candidate;
   @Input() candidate: any;
   @Input() jobId: string;
   @Input() type: string;
