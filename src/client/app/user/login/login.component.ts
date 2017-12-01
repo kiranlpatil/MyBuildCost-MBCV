@@ -44,6 +44,7 @@ export class LoginComponent implements OnInit {
   isChrome: boolean;
   isToasterVisible: boolean = true;
   isFromCareerPlugin: boolean = false;
+  recruiterReferenceId: string;
   constructor(private _router: Router, private loginService: LoginService, private themeChangeService: ThemeChangeService,
               private messageService: MessageService, private formBuilder: FormBuilder,
               private sharedService: SharedService, private activatedRoute: ActivatedRoute) {
@@ -66,8 +67,13 @@ export class LoginComponent implements OnInit {
     this.mainHeaderMenuHideShow = 'signin';
     window.history.forward();
     this.activatedRoute.queryParams.subscribe((params: Params) => {
-      params['email'] !== undefined ? this.userForm.controls['email'].setValue(params['email']) : false;
-      params['integrationKey'] !== undefined ? SessionStorageService.setRecruiterReferenceId(params['integrationKey']) : false;
+      if (params['email'] !== undefined) {
+        this.userForm.controls['email'].setValue(params['email']);
+      }
+      this.recruiterReferenceId = params['integrationKey'];
+      if (this.recruiterReferenceId !== undefined) {
+        SessionStorageService.setRecruiterReferenceId(params['integrationKey']);
+      }
       this.isFromCareerPlugin = (params['integrationKey'] !== undefined) ? true : false;
     });
   }
@@ -79,13 +85,14 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     this.model = this.userForm.value;
+    this.model.recruiterReferenceId = (this.isFromCareerPlugin) ? this.recruiterReferenceId : undefined;
     if (this.model.email == '' || this.model.password == '') {
       this.submitStatus = true;
       return;
     }
 
     if (!this.userForm.valid) {
-      return
+      return;
     }
 
     this.model.email = this.model.email.toLowerCase();
