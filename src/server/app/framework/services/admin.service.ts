@@ -1,6 +1,7 @@
 /**
  * Created by techprime002 on 8/28/2017.
  */
+import * as mongoose from "mongoose";
 import UserRepository = require('../dataaccess/repository/user.repository');
 import SendMailService = require('./mailer.service');
 import Messages = require('../shared/messages');
@@ -17,6 +18,8 @@ import RecruiterClassModel = require('../dataaccess/model/recruiterClass.model')
 import CandidateClassModel = require('../dataaccess/model/candidate-class.model');
 import UserService = require('./user.service');
 import ExportService = require("./export.service");
+import User = require("../dataaccess/mongoose/user");
+import RecruiterModel = require("../dataaccess/model/recruiter.model");
 let path = require('path');
 let config = require('config');
 let fs = require('fs');
@@ -239,12 +242,29 @@ class AdminService {
   }
 
   updateUser(_id: string, item: any, callback: (error: any, result: any) => void) {
-    this.userRepository.findById(_id, (err: any, res: any) => {
+    if (!item.isCandidate && item.isActivated) {
+      item.activation_date = new Date();
+    }
+
+    this.userRepository.update(new mongoose.Types.ObjectId(_id), item, (err: Error, data: any) => {
       if (err) {
-        callback(err, res);
-      } else {
-        this.userRepository.update(res._id, item, callback);
+        callback(err, null);
+        return;
       }
+      if (!item.isCandidate) {
+        this.recruiterRepository.findOneAndUpdate({'userId': new mongoose.Types.ObjectId(_id)},
+          {$set: {'api_key': _id}}, {},
+          (err: Error, recruiter: RecruiterModel) => {
+            if (err) {
+              callback(err, null);
+              return;
+            }
+            callback(null, data);
+          });
+      } else {
+        callback(null, data);
+      }
+
     });
   }
 

@@ -21,6 +21,9 @@
         <h5>{{getLabel().TOTAL_POSTED_JOB}}</h5>
       </li>
       <li>
+        <h5>{{getLabel().API_KEY}}</h5>
+      </li>
+      <li>
         <h5>{{getLabel().ACTIVATION_STATUS}}</h5>
       </li>
       <li>
@@ -43,6 +46,9 @@
         </li>
         <li>
           <span *ngIf="recruiter.data">{{recruiter.data.totalNumberOfJobsPosted}}</span>
+        </li>
+        <li>
+          <span *ngIf="recruiter.data">{{recruiter.data._id}}</span>
         </li>
         <li>
           <div *ngIf="recruiter.isActivated"><span class="activated" title="User account is active."></span><span>Active</span></div>

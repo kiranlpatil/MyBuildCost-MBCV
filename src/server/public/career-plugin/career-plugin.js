@@ -1,6 +1,6 @@
 var userMobileNumber;
 var integrationKey;
-var careerPluginHost = 'http://localhost:8080';
+var careerPluginHost = 'http://34.214.128.209';
 function CareerPlugin() {
 
   this.applyForJob = function () {
@@ -21,9 +21,12 @@ function CareerPlugin() {
     }
   };
 
-  this.load = function () {
-
-    document.getElementById('jobmosis-career-plugin').innerHTML = "<h3 class='career-plugin-header'>Apply for Jobs</h3>" +
+  this.load = function (headerBg, btnBg) {
+    if (headerBg === undefined && btnBg === undefined) {
+      headerBg = '#165fac';
+      btnBg = '#8cc63f';
+    }
+    document.getElementById('jobmosis-career-plugin').innerHTML = "<h3 class='career-plugin-header' style='background-color:" + headerBg + "'>Apply for Jobs</h3>" +
       "<div class='plugin-form-wrap'>" +
       "<label for='career-plugin-mobile-no'>Enter Your Mobile Number</label>" +
       "<br>" +
@@ -32,7 +35,7 @@ function CareerPlugin() {
       "<span id='career-plugin-notification'></span>" +
       "<br>" +
       "<div class='plugin-btn-grp'>" +
-      "<button id='career-plugin-submit'>Apply</button>" +
+      "<button id='career-plugin-submit' style='background-color:" + btnBg + "'>Apply</button>" +
       "</div>" +
       "</div>" + "<span class='plugin-foot-note'>Note: New Users will be require to create their profile.</span>";
 
@@ -67,7 +70,7 @@ function CareerPlugin() {
   };
 
   function registrationStatus(mobNo) {
-    var _url = careerPluginHost + '/api/registrationstatus/' + mobNo;
+    var _url = careerPluginHost + '/api/registrationstatus/' + mobNo + '?recruiterId=' + integrationKey;
     var xhttp = new XMLHttpRequest();
     xhttp.open("GET", _url, true);
     xhttp.onload = registrationStatusHandler;
@@ -81,11 +84,11 @@ function CareerPlugin() {
       if (_status.length) {
         //alert('You are getting redirected to our carrier partner Jobmosis');
         window.location.href = careerPluginHost + "/signin?phoneNumber=" + userMobileNumber + "&" +
-          "tokenId=" + integrationKey + "&" + "email=" + _status[0].email;
+          "integrationKey=" + integrationKey + "&" + "email=" + _status[0].email;
       } else {
         //alert('You are not registered, Kindly register with our carrier partner to apply for job');
         window.location.href = careerPluginHost + "/applicant-signup?phoneNumber=" +
-          userMobileNumber + "&" + "tokenId=" + integrationKey;
+          userMobileNumber + "&" + "integrationKey=" + integrationKey;
       }
     } else {
       console.log('server error');

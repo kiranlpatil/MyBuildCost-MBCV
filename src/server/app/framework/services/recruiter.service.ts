@@ -2,7 +2,6 @@ import * as mongoose from "mongoose";
 import {Actions, ConstVariables} from "../shared/sharedconstants";
 import {JobCountModel} from "../dataaccess/model/job-count.model";
 import {CandidatesInLists} from "../dataaccess/model/CandidatesInLists.model";
-import {UsageTracking} from "../dataaccess/model/usage-tracking.model";
 import {SentMessageInfo} from "nodemailer";
 import {Share} from "../../../../client/app/cnext/framework/model/share";
 import Messages = require('../shared/messages');
@@ -286,12 +285,13 @@ class RecruiterService {
     this.recruiterRepository.retrieveWithLean(field, projection, callback);
   }
 
-  notifyRecruiter(field: any, callback: (error: any, result: any) => void) {
+  notifyRecruiter(field: any, result: any, callback: (error: any, result: any) => void) {
     let sendMailService = new SendMailService();
     let host = config.get('TplSeed.mail.host');
     let link = host + 'signin';
     let data: Map<string, string> = new Map([['$link$', link], ['$mobile_number$', field.mobileNo]]);
-
+    let emailSubject = (result.length) ?
+      Messages.EMAIL_SUBJECT_EXISTING_CANDIDATE_REGISTERED_FROM_SITE : Messages.EMAIL_SUBJECT_NEW_CANDIDATE_REGISTERED_FROM_SITE;
     this.recruiterRepository.retrieve({'_id': new mongoose.Types.ObjectId(field.recruiterId)}, (recruiterErr, recData) => {
       if (recruiterErr) {
         callback(recruiterErr, null);
@@ -301,7 +301,7 @@ class RecruiterService {
             callback(userError, null);
           } else {
             sendMailService.send(userData[0].email,
-              Messages.EMAIL_SUBJECT_CANDIDATE_REGISTERED_FROM_SITE,
+              emailSubject,
               'notify-recruiter.mail.html', data, callback);
           }
         });

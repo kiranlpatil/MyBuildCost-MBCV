@@ -94,7 +94,7 @@ export function cnextInit(app: express.Application) {
     app.get('/api/candidate/:candidateId/recruiter/:recruiterId/jobprofile', loggerInterceptor.logDetail,
       this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck,
       searchController.searchCandidateJobProfiles);
-    app.post('/api/notify_recruiter', loggerInterceptor.logDetail, recruiterController.notifyRecruiter);
+    //app.post('/api/notify_recruiter', loggerInterceptor.logDetail, recruiterController.notifyRecruiter);
     app.post('/api/response_to_recruiter/:id', loggerInterceptor.logDetail, this.authInterceptor.requiresAuth,
       recruiterController.responseToRecruiter);
     app.put('/api/job/:id/clone', loggerInterceptor.logDetail, this.authInterceptor.requiresAuth,

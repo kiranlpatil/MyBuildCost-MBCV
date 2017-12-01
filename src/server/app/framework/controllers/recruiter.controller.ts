@@ -364,32 +364,6 @@ export function getCandidatesByName(req: express.Request, res: express.Response,
 
 }
 
-export function notifyRecruiter(req: express.Request, res: express.Response, next: any) {
-  try {
-
-    let recruiterService = new RecruiterService();
-    let params = req.body;
-    recruiterService.notifyRecruiter(params, (error, result) => {
-      if (error) {
-        next({
-          reason: Messages.MSG_ERROR_RSN_WHILE_CONTACTING,
-          message: Messages.MSG_ERROR_WHILE_CONTACTING,
-          stackTrace: new Error(),
-          code: 403
-        });
-      } else {
-        res.status(200).send({
-          'status': Messages.STATUS_SUCCESS,
-          'data': {'message': Messages.MSG_SUCCESS_EMAIL}
-        });
-      }
-    });
-  } catch (e) {
-    next({reason: e.message, message: e.message, stackTrace: new Error(), code: 500});
-
-  }
-}
-
 export function responseToRecruiter(req: express.Request, res: express.Response, next: any) {
   try {
     let recruiterService = new RecruiterService();

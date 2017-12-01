@@ -14,5 +14,6 @@ interface UserModel {
   current_theme: string;
   notifications: Array<any>;
   guide_tour:Array<string>;
+  activation_date: Date;
 }
 export = UserModel;

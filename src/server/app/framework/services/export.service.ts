@@ -95,7 +95,7 @@ class ExportService {
       downloadLocation = path.resolve() + config.get('TplSeed.exportFilePathServer')
         + config.get('TplSeed.exportFileNames.companyAccountDetailsCSV');
       fields = '_id,mobile_number,email,current_theme,isCandidate,guide_tour,notifications,isAdmin,otp,isActivated,' +
-        'temp_mobile,location,picture,temp_email';
+        'temp_mobile,location,picture,temp_email,activation_date,created_date';
       query = '{"isCandidate":false}';
     }
 
@@ -111,8 +111,8 @@ class ExportService {
   }
 
   exportRecruiter(callback: (error: Error, filesPath: string) => void) {
-    let fields = '_id,userId,isRecruitingForself,company_name,company_size,company_website,my_candidate_list,setOfDocuments,' +
-      'company_logo';
+    let fields = '_id,userId,isRecruitingForself,company_name,company_size,company_website,my_candidate_list,' +
+      'setOfDocuments,company_logo,api_key';
 
     let downloadLocation = path.resolve() + config.get('TplSeed.exportFilePathServer')
       + config.get('TplSeed.exportFileNames.companyDetailsCSV');

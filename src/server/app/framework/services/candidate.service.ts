@@ -82,7 +82,7 @@ class CandidateService {
                     callback(err, null);
                   } else {
                     if (item.recruiterReferenceId) {
-                      this.updateCandidateList(res._doc._id, item, (err: Error, status: string) => {
+                      this.updateRecruitersMyCandidateList(res._doc._id, item, (err: Error, status: string) => {
                        callback(err, res);
                       });
                     } else {
@@ -99,7 +99,8 @@ class CandidateService {
     });
   }
 
-  updateCandidateList(candidateId: number, candidate: any, callback: (error: Error, status: string) => void) {
+  updateRecruitersMyCandidateList(candidateId: number, candidate: any,
+                                  callback: (error: Error, status: string) => void) {
     let updateQuery = {
       $push: {
         'my_candidate_list': new mongoose.Types.ObjectId(candidateId)
@@ -115,36 +116,29 @@ class CandidateService {
 
         if (error) {
           callback(error, null);
+          return;
         } else {
 
-          this.recruiterRepository.retrieve({'_id': new mongoose.Types.ObjectId(candidate.recruiterReferenceId)},
-            (recruiterErr, recData) => {
+          this.recruiterRepository.populateRecruiterDetails(candidate.recruiterReferenceId, (err, recruiter) => {
+            if (err) {
+              callback(err, null);
+              return;
+            }
+            let sendMailService = new SendMailService();
+            let data: Map<string,string> = new Map([['$first_name$', candidate.first_name],
+              ['$app_name$', ProjectAsset.APP_NAME]]);
+            sendMailService.send(recruiter.email,
+              Messages.EMAIL_SUBJECT_CANDIDATE_REGISTRATION,
+              'new-candidate-registration.html', data, (e, status) => {
+                if (e) {
+                  callback(e, null);
+                  return;
+                }
+                callback(null, "success");
+              });
+          });
 
-              if (recruiterErr) {
-                callback(recruiterErr, null);
-              } else {
-                this.userRepository.retrieve({'_id': new mongoose.Types.ObjectId(recData[0].userId)},
-                  (userError, userData) => {
 
-                  if (userError) {
-                    callback(userError, null);
-                  } else {
-                    let sendMailService = new SendMailService();
-                    let data: Map<string,string> = new Map([['$first_name$', candidate.first_name],
-                      ['$app_name$', ProjectAsset.APP_NAME]]);
-                    sendMailService.send(userData[0].email,
-                      Messages.EMAIL_SUBJECT_CANDIDATE_REGISTRATION,
-                      'new-candidate-registration.html', data, (err: Error) => {
-                        if (error) {
-                          callback(error, null);
-                        } else {
-                          callback(null, "success");
-                        }
-                      });
-                  }
-                });
-              }
-            });
         }
       });
   }
@@ -969,7 +963,7 @@ class CandidateService {
         let data: Map<string, string> = new Map([['$link$', config.get('TplSeed.mail.host') + 'signin'],
           ['$firstname$', candidate.first_name],
           ['$jobtitle$', jobTitle], ['$recruiter$', recruiter[0].company_name]]);
-        sendMailService.send('luckyvaishnav55@gmail.com',
+        sendMailService.send(candidate.email,
           Messages.EMAIL_SUBJECT_CANDIDATE_ADDED_TO_CART,
           'candidate-added-to-cart.html', data, callback);
       });

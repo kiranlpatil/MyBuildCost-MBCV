@@ -26,13 +26,13 @@ export class JobSearchService extends SearchService {
      });
    }
 
-  getCandidateVisibilityAgainstRecruiter(candidateDetails:CandidateModel, jobProfiles:JobProfileModel[]) {
+  getCandidateVisibilityAgainstRecruiter(candidateDetails:any, jobProfiles:JobProfileModel[]) {
     let isGotIt = true;
     let _canDetailsWithJobMatching:CandidateDetailsWithJobMatching = new CandidateDetailsWithJobMatching();
     for (let job of jobProfiles) {
       for (let item of job.candidate_list) {
         if (item.name === 'cartListed') {
-          if (item.ids.indexOf(new mongoose.Types.ObjectId(candidateDetails._id).toString()) !== -1) {
+          if (item.ids.indexOf(new mongoose.Types.ObjectId(candidateDetails.candidateId).toString()) !== -1) {
             isGotIt = false;
             break;
           }
@@ -53,8 +53,8 @@ export class JobSearchService extends SearchService {
       candidateDetails.proficiencies = [];
       candidateDetails.awards = [];
       candidateDetails.proficiencies = [];
+      candidateDetails.personalDetails.password = '';
     }
-    candidateDetails.personalDetails.password = '';
     _canDetailsWithJobMatching.candidateDetails = candidateDetails;
     _canDetailsWithJobMatching.isShowCandidateDetails = isGotIt;
     return _canDetailsWithJobMatching;

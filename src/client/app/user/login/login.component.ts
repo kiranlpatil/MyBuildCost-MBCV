@@ -1,5 +1,5 @@
 import {Component, ElementRef, OnInit, ViewChild} from "@angular/core";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Params, Router} from "@angular/router";
 import {LoginService} from "./login.service";
 import {Login} from "../models/login";
 import {
@@ -16,6 +16,7 @@ import {FormBuilder, FormGroup} from "@angular/forms";
 import {ValidationService} from "../../shared/customvalidations/validation.service";
 import {Messages, ProjectAsset} from "../../shared/constants";
 import {SharedService} from "../../shared/services/shared-service";
+import {SessionStorageService} from "../../shared/services/session.service";
 /*declare var CareerPluginLoad:any;*/
 
 @Component({
@@ -42,8 +43,10 @@ export class LoginComponent implements OnInit {
   mainHeaderMenuHideShow: string;
   isChrome: boolean;
   isToasterVisible: boolean = true;
+  isFromCareerPlugin: boolean = false;
   constructor(private _router: Router, private loginService: LoginService, private themeChangeService: ThemeChangeService,
-              private messageService: MessageService, private formBuilder: FormBuilder, private sharedService: SharedService) {
+              private messageService: MessageService, private formBuilder: FormBuilder,
+              private sharedService: SharedService, private activatedRoute: ActivatedRoute) {
     this.userForm = this.formBuilder.group({
       'email': ['', [ValidationService.requireEmailValidator, ValidationService.emailValidator]],
       'password': ['', [ValidationService.requirePasswordValidator]]
@@ -62,9 +65,11 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     this.mainHeaderMenuHideShow = 'signin';
     window.history.forward();
-    //this._validateUserNavigation.validate();
-   /* var docLoad = new CareerPluginLoad();
-    docLoad.loadCareerPluginScript();*/
+    this.activatedRoute.queryParams.subscribe((params: Params) => {
+      params['email'] !== undefined ? this.userForm.controls['email'].setValue(params['email']) : false;
+      params['integrationKey'] !== undefined ? SessionStorageService.setRecruiterReferenceId(params['integrationKey']) : false;
+      this.isFromCareerPlugin = (params['integrationKey'] !== undefined) ? true : false;
+    });
   }
 
   closeToaster() {
