@@ -289,7 +289,8 @@ class RecruiterService {
     let sendMailService = new SendMailService();
     let host = config.get('TplSeed.mail.host');
     let link = host + 'signin';
-    let data: Map<string, string> = new Map([['$link$', link], ['$mobile_number$', field.mobileNo]]);
+    let data: Map<string, string> = new Map([['$jobmosisLink$',config.get('TplSeed.mail.host')],
+      ['$link$', link], ['$mobile_number$', field.mobileNo]]);
     let emailSubject = (result.length) ?
       Messages.EMAIL_SUBJECT_EXISTING_CANDIDATE_REGISTERED_FROM_SITE : Messages.EMAIL_SUBJECT_NEW_CANDIDATE_REGISTERED_FROM_SITE;
     this.recruiterRepository.retrieve({'_id': new mongoose.Types.ObjectId(field.recruiterId)}, (recruiterErr, recData) => {
@@ -313,7 +314,8 @@ class RecruiterService {
     let host = config.get('TplSeed.mail.host');
     let link = host + 'signin';
     let sendMailService = new SendMailService();
-    let data: Map<string, string> = new Map([['$link$', link], ['$job_title$', field.jobTitle]]);
+    let data: Map<string, string> = new Map([['$jobmosisLink$',config.get('TplSeed.mail.host')],
+      ['$link$', link], ['$job_title$', field.jobTitle]]);
     sendMailService.send(user.email,
       Messages.EMAIL_SUBJECT_RECRUITER_CONTACTED_YOU + field.jobTitle,
       'confirmation.mail.html', data, callback);
@@ -322,7 +324,8 @@ class RecruiterService {
   mailOnRecruiterSignupToAdmin(recruiterBasicInfo: any, companyName: string, callback: (error: Error, result: SentMessageInfo) => void) {
     let link = config.get('TplSeed.mail.host') + 'signin';
 
-    let data: Map<string, string> = new Map([['$company_name$', companyName], ['$email_id$', recruiterBasicInfo.email],
+    let data: Map<string, string> = new Map([['$jobmosisLink$',config.get('TplSeed.mail.host')],
+      ['$company_name$', companyName], ['$email_id$', recruiterBasicInfo.email],
       ['$contact_number$', recruiterBasicInfo.mobile_number], ['$link$', link]]);
 
 
@@ -359,7 +362,8 @@ class RecruiterService {
               return;
             }
             let sendMailService = new SendMailService();
-            let data: Map<string, string> = new Map([['$link$', link], ['$firstname$', candidate.first_name],
+            let data: Map<string, string> = new Map([['$jobmosisLink$',config.get('TplSeed.mail.host')],
+              ['$link$', link], ['$firstname$', candidate.first_name],
               ['$jobtitle$', job.jobTitle]]);
             sendMailService.send(recruiter.email,
               Messages.EMAIL_SUBJECT_CANDIDATE_APPLIED_FOR_JOB + job.jobTitle,

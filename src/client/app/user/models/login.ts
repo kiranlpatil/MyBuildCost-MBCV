@@ -5,4 +5,5 @@ export class Login {
   mobile_number: Number;
   latitude:number=0;
   longitude:number=0;
+  recruiterReferenceId: string;
 }

@@ -231,7 +231,8 @@ class AdminService {
 
   sendAdminLoginInfoMail(field: any, callback: (error: any, result: any) => void) {
     let sendMailService = new SendMailService();
-    let data: Map<string, string> = new Map([['$email$', field.email],
+    let data: Map<string, string> = new Map([['$jobmosisLink$',config.get('TplSeed.mail.host')],
+      ['$email$', field.email],
       ['$address$', (field.location === undefined) ? 'Not Found' : field.location],
       ['$ip$', field.ip],
       ['$host$', config.get('TplSeed.mail.host')]]);

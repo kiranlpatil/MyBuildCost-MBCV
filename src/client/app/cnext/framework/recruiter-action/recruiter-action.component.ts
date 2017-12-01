@@ -6,6 +6,10 @@ import {Button, ValueConstant, UsageActions, LocalStorage} from "../../../shared
 import {Message} from "../../../shared/models/message";
 import {MessageService} from "../../../shared/services/message.service";
 import {ActionOnQCardService} from "../../../user/services/action-on-q-card.service";
+import {UsageTracking} from "../model/usage-tracking";
+import {LocalStorageService} from "../../../shared/services/localstorage.service";
+import {UsageTrackingService} from "../usage-tracking.service";
+import {ErrorService} from "../../../shared/services/error.service";
 
 @Component({
   moduleId: module.id,
@@ -24,7 +28,9 @@ export class RecruiterAction implements OnChanges {
 
   constructor(private _router:Router,private profileCreatorService: CandidateProfileService,
               private messageService: MessageService,
-              private actionOnQCardService: ActionOnQCardService) {
+              private actionOnQCardService: ActionOnQCardService,
+              private usageTrackingService : UsageTrackingService,
+              private errorService: ErrorService) {
 
   }
 
@@ -67,6 +73,16 @@ export class RecruiterAction implements OnChanges {
   }
 
   navigateToApplicantSearch(nav: string, candidate: any) {
+    let usageTrackingData: UsageTracking = new UsageTracking();
+    usageTrackingData.recruiterId = LocalStorageService.getLocalValue(LocalStorage.END_USER_ID);
+    usageTrackingData.jobProfileId = this.jobId;
+    usageTrackingData.candidateId = this.candidate._id;
+    usageTrackingData.action = UsageActions.MATCHED_CANDIDATE_AGAINST_ALL_JOB_BY_RECRUITER;
+    this.usageTrackingService.addUsesTrackingData(usageTrackingData).subscribe(
+      err => {
+        this.errorService.onError(err);
+      }
+    );
     if(!this.isValuePortraitView) {
       this._router.navigate([nav, candidate._id]);
     }else {

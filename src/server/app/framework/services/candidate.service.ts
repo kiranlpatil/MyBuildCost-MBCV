@@ -1,5 +1,6 @@
 import * as mongoose from "mongoose";
 import {UtilityFunction} from "../uitility/utility-function";
+import {SentMessageInfo} from "nodemailer";
 import Messages = require('../shared/messages');
 import CandidateRepository = require('../dataaccess/repository/candidate.repository');
 import UserRepository = require('../dataaccess/repository/user.repository');
@@ -22,7 +23,6 @@ import RecruiterService = require("./recruiter.service");
 import RecruiterClassModel = require("../dataaccess/model/recruiterClass.model");
 import SendMailService = require('./mailer.service');
 import ProjectAsset = require('../shared/projectasset');
-import {SentMessageInfo} from 'nodemailer';
 
 let bcrypt = require('bcrypt');
 
@@ -88,7 +88,6 @@ class CandidateService {
                     } else {
                       callback(null, res);
                     }
-
                   }
                 });
               }
@@ -124,11 +123,14 @@ class CandidateService {
               callback(err, null);
               return;
             }
+            var subject = (candidate.login) ?
+              Messages.EMAIL_SUBJECT_EXISTING_CANDIDATE_LOGGEDIN : Messages.EMAIL_SUBJECT_CANDIDATE_REGISTRATION;
+            let config = require('config');
             let sendMailService = new SendMailService();
-            let data: Map<string,string> = new Map([['$first_name$', candidate.first_name],
+            let data: Map<string, string> = new Map([['$jobmosisLink$', config.get('TplSeed.mail.host')],
+              ['$first_name$', candidate.first_name],
               ['$app_name$', ProjectAsset.APP_NAME]]);
-            sendMailService.send(recruiter.email,
-              Messages.EMAIL_SUBJECT_CANDIDATE_REGISTRATION,
+            sendMailService.send(recruiter.email, subject,
               'new-candidate-registration.html', data, (e, status) => {
                 if (e) {
                   callback(e, null);
@@ -137,8 +139,6 @@ class CandidateService {
                 callback(null, "success");
               });
           });
-
-
         }
       });
   }
@@ -960,7 +960,8 @@ class CandidateService {
         }
         let config = require('config');
         let sendMailService = new SendMailService();
-        let data: Map<string, string> = new Map([['$link$', config.get('TplSeed.mail.host') + 'signin'],
+        let data: Map<string, string> = new Map([['$jobmosisLink$',config.get('TplSeed.mail.host')],
+          ['$link$', config.get('TplSeed.mail.host') + 'signin'],
           ['$firstname$', candidate.first_name],
           ['$jobtitle$', jobTitle], ['$recruiter$', recruiter[0].company_name]]);
         sendMailService.send(candidate.email,
@@ -981,8 +982,10 @@ class CandidateService {
           if (userError) {
             callback(userError, null);
           } else {
+            let config = require('config');
             let sendMailService = new SendMailService();
-            let data: Map<string, string> = new Map([['$first_name$', candidate.basicInformation.first_name],
+            let data: Map<string, string> = new Map([['$jobmosisLink$',config.get('TplSeed.mail.host')],
+              ['$first_name$', candidate.basicInformation.first_name],
               ['$app_name$', ProjectAsset.APP_NAME]]);
             sendMailService.send(userData[0].email,
               Messages.EMAIL_SUBJECT_CANDIDATE_REGISTRATION,

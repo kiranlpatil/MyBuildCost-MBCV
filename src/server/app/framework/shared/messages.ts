@@ -11,6 +11,7 @@ class Messages {
   public static EMAIL_SUBJECT_CHANGE_EMAILID: string = 'Confirmation for change in email address.';
   public static EMAIL_SUBJECT_FORGOT_PASSWORD: string = 'Reset your password';
   public static EMAIL_SUBJECT_CANDIDATE_REGISTRATION: string = 'New Candidate Registered';
+  public static EMAIL_SUBJECT_EXISTING_CANDIDATE_LOGGEDIN: string = 'Existing Candidate Logged in';
   public static EMAIL_SUBJECT_USER_CONTACTED_YOU: string = 'User Contacted you';
   public static EMAIL_SUBJECT_RECRUITER_CONTACTED_YOU: string = 'Urgent attention required on Jobmosis with jobtitle ';
   public static EMAIL_SUBJECT_NEW_CANDIDATE_REGISTERED_FROM_SITE: string = 'New Candidate applied on your site';

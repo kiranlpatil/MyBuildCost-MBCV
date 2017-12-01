@@ -94,7 +94,7 @@ export function login(req: express.Request, res: express.Response, next: any) {
                       next(error);
                     }
                     else {
-                      res.status(200).send({
+                      var data: any = {
                         "status": Messages.STATUS_SUCCESS,
                         "data": {
                           "first_name": result[0].first_name,
@@ -112,7 +112,25 @@ export function login(req: express.Request, res: express.Response, next: any) {
                           "guide_tour": result[0].guide_tour
                         },
                         access_token: token
-                      });
+                      }
+                      if (params.recruiterReferenceId) {
+                        let candidateService = new CandidateService();
+                        candidateService.updateRecruitersMyCandidateList(candidate[0]._id,
+                          {
+                            'first_name': result[0].first_name,
+                            'recruiterReferenceId': params.recruiterReferenceId,
+                            'login': true
+                          },
+                          (err: Error, status: string) => {
+                            if (err) {
+                              next(error);
+                            } else {
+                              res.status(200).send(data);
+                            }
+                          });
+                      } else {
+                        res.status(200).send(data);
+                      }
                     }
                   });
                 }

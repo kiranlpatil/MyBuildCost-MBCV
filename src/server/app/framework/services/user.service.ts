@@ -119,7 +119,8 @@ class UserService {
         let host = config.get('TplSeed.mail.host');
         let link = host + 'reset-password?access_token=' + token + '&_id=' + res[0]._id;
         if (res[0].isCandidate === true) {
-          let data:Map<string,string>= new Map([['$first_name$',res[0].first_name],['$link$',link],['$app_name$',this.APP_NAME]]);
+          let data:Map<string,string>= new Map([['$jobmosisLink$',config.get('TplSeed.mail.host')],
+            ['$first_name$',res[0].first_name],['$link$',link],['$app_name$',this.APP_NAME]]);
           sendMailService.send(field.email,
             Messages.EMAIL_SUBJECT_FORGOT_PASSWORD,
             'forgotpassword.html',data,(err: any, result: any) => {
@@ -131,7 +132,8 @@ class UserService {
               callback(err, null);
             } else {
               this.company_name = recruiter[0].company_name;
-              let data:Map<string,string>= new Map([['$first_name$',this.company_name],['$link$',link],['$app_name$',this.APP_NAME]]);
+              let data:Map<string,string>= new Map([['$jobmosisLink$',config.get('TplSeed.mail.host')],
+                ['$first_name$',this.company_name],['$link$',link],['$app_name$',this.APP_NAME]]);
               sendMailService.send(field.email,
                 Messages.EMAIL_SUBJECT_FORGOT_PASSWORD,
                 'forgotpassword.html',data,callback ,null,MailAttachments.ForgetPasswordAttachmentArray);
@@ -160,7 +162,8 @@ class UserService {
         let host = config.get('TplSeed.mail.host');
         let link = host + 'activate-user?access_token=' + token + '&_id=' + result._id+'isEmailVerification';
         let sendMailService = new SendMailService();
-        let data: Map<string, string> = new Map([['$link$', link]]);
+        let data: Map<string, string> = new Map([['$jobmosisLink$',config.get('TplSeed.mail.host')],
+          ['$link$', link]]);
         sendMailService.send(field.new_email,
           Messages.EMAIL_SUBJECT_CHANGE_EMAILID,
           'change.mail.html', data, callback);
@@ -183,7 +186,8 @@ class UserService {
             let host = config.get('TplSeed.mail.host');
             let link = host + 'company-details?access_token=' + token + '&_id=' + res[0]._id + '&companyName=' + this.company_name;
             let sendMailService = new SendMailService();
-            let data:Map<string,string>= new Map([['$link$',link]]);
+            let data:Map<string,string>= new Map([['$jobmosisLink$',config.get('TplSeed.mail.host')],
+              ['$link$',link]]);
             sendMailService.send(field.email,
               Messages.EMAIL_SUBJECT_REGISTRATION,
               'recruiter.mail.html',data,(err: any, result: any) => {
@@ -211,7 +215,7 @@ class UserService {
         let host = config.get('TplSeed.mail.host');
         let link = host + 'activate-user?access_token=' + token + '&_id=' + res[0]._id;
         let sendMailService = new SendMailService();
-        let data: Map<string, string> = new Map([['$link$', link]]);
+        let data: Map<string, string> = new Map([['$jobmosisLink$',config.get('TplSeed.mail.host')],['$link$', link]]);
         sendMailService.send(field.email,
           Messages.EMAIL_SUBJECT_REGISTRATION,
           'recruiter.mail.html', data, callback);
@@ -225,7 +229,8 @@ class UserService {
 
   sendMail(field: any, callback: (error: any, result: SentMessageInfo) => void) {
     let sendMailService = new SendMailService();
-    let data:Map<string,string>= new Map([['$first_name$',field.first_name],['$email$',field.email],['$message$',field.message]]);
+    let data:Map<string,string>= new Map([['$jobmosisLink$',config.get('TplSeed.mail.host')],
+      ['$first_name$',field.first_name],['$email$',field.email],['$message$',field.message]]);
     sendMailService.send(config.get('TplSeed.mail.ADMIN_MAIL'),
       Messages.EMAIL_SUBJECT_USER_CONTACTED_YOU,
       'contactus.mail.html',data,callback);
@@ -235,12 +240,14 @@ class UserService {
     let current_Time = new Date().toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'});
     let data:Map<string,string>;
     if(errorInfo.stackTrace) {
-       data= new Map([['$time$',current_Time],['$host$',config.get('TplSeed.mail.host')],
+       data= new Map([['$jobmosisLink$',config.get('TplSeed.mail.host')],
+         ['$time$',current_Time],['$host$',config.get('TplSeed.mail.host')],
         ['$reason$',errorInfo.reason],['$code$',errorInfo.code],
         ['$message$',errorInfo.message],['$error$',errorInfo.stackTrace.stack]]);
 
     } else if(errorInfo.stack) {
-      data= new Map([['$time$',current_Time],['$host$',config.get('TplSeed.mail.host')],
+      data= new Map([['$jobmosisLink$',config.get('TplSeed.mail.host')],
+        ['$time$',current_Time],['$host$',config.get('TplSeed.mail.host')],
         ['$reason$',errorInfo.reason],['$code$',errorInfo.code],
         ['$message$',errorInfo.message],['$error$',errorInfo.stack]]);
     }

@@ -72,3 +72,12 @@ span#career-plugin-notification {
   font-size: 12px;
   font-weight: bold;
 }
+
+@media only screen and (max-width: 767px) {
+  #jobmosis-career-plugin {
+    margin: 0 auto 20px;
+    position: relative;
+    right: inherit;
+    top: 0;
+  }
+}
