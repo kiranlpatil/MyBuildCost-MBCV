@@ -1,15 +1,15 @@
 export class AppSettings {
-   public static IP = 'http://localhost:8080';
+  // public static IP = 'http://localhost:8080';
   // public static IP = 'http://ee802b7f.ngrok.io';
   //public static IP = 'http://10.192.33.77:8080';
   //public static IP = 'http://52.10.145.87:3000';
   //public static IP = 'http://34.215.90.153:3000';
   //public static IP = 'http://34.215.90.153';
-  //public static IP = 'http://34.214.128.209'; //auto deploy
+  public static IP = 'http://34.214.128.209'; //auto deploy
   //public static IP = 'http://52.43.220.29:3000';
   // public static IP = 'app.jobmosis.com';
   // public static IP = '';
-  public static HOST_NAME = 'localhost:8080';
+  public static HOST_NAME = '34.214.128.209';
 
   public static get API_ENDPOINT(): string {
     return this.IP + '/api/';
@@ -764,7 +764,7 @@ export class Label {
   public static PROFILE_VISIBILITY: string = 'Profile Visibility for Recruiter';
   public static SUBMIT_PROFILE: string = 'Submit Your Profile';
   public static MORE: string = 'More';
-  public static CURRENT_ANNUAL_SALARY: string = 'Current Annual Salary';
+  public static CURRENT_ANNUAL_SALARY: string = 'Current Annual Salary(In Lacs)';
   public static READY_TO_RELOCATE: string = 'Ready To Relocate?';
   public static COMPANY_CULTURE: string = 'Company Culture';
   public static NOTICE_PERIOD: string = 'Notice Period';
