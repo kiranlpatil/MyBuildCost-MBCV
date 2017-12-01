@@ -469,6 +469,19 @@ $ src/redis-server
   }
   })
   
+  // script to update experience 
+  var experiences = [ "0 Year","1 Year","2 Year","3 Year","4 Year","5 Year","6 Year","7 Year","8 Year","9 Year","10 Year","11 Year","12 Year","13 Year","14 Year","15 Year","16 Year","17 Year","18 Year","19 Year","20 Year","21 Year","22 Year","23 Year","24 Year","25 Year","26 Year","27 Year","29 Year","30 Year" ];
+  for(var i=0;i<experiences.length;i++ ){
+  db.getCollection('candidates').update({'professionalDetails.experience':experiences[i]},{$set:{'professionalDetails.experience':i}},{multi:true})
+  }
+  
+  //script to update the salary
+  var   salary=[ "1 Lac","2 Lacs","3 Lacs","4 Lacs","5 Lacs","6 Lacs","7 Lacs","8 Lacs","9 Lacs","10 Lacs","11 Lacs","12 Lacs","13 Lacs","14 Lacs","15 Lacs","16 Lacs","17 Lacs","18 Lacs","19 Lacs","20 Lacs","21 Lacs","22 Lacs","23 Lacs","24 Lacs","25 Lacs","26 Lacs","27 Lacs","29 Lacs","30 Lacs" ];
+  for(var i=0;i<salary.length;i++ ){
+  db.getCollection('candidates').update({'professionalDetails.currentSalary':salary[i]},{$set:{'professionalDetails.currentSalary':i}},{multi:true})
+  }
+  
+  
   
 #Jobmosis Career_plugin 
 
