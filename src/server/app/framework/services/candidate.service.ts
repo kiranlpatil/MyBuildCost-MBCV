@@ -890,27 +890,30 @@ class CandidateService {
           if (err) {
             callback(err, null);
           } else {
-            this.jobProfileRepository.retrieve({'recruiterId': recruiterDetails[0]._id}, (error: any, jobs: any[]) => {
-              if (error) {
-                callback(error, null);
-              }
-              let isInCart = false;
-              for (let job of jobs) {
-                for (let item of job.candidate_list) {
-                  if (item.name === 'cartListed') {
-                    if (item.ids.indexOf(new mongoose.Types.ObjectId(candidateDetails.candidateId).toString()) !== -1) {
-                      isInCart = true;
-                      break;
+            if(recruiterDetails.length > 0){
+              this.jobProfileRepository.retrieve({'recruiterId': recruiterDetails[0]._id}, (error: any, jobs: any[]) => {
+                if (error) {
+                  callback(error, null);
+                }
+                let isInCart = false;
+                for (let job of jobs) {
+                  for (let item of job.candidate_list) {
+                    if (item.name === 'cartListed') {
+                      if (item.ids.indexOf(new mongoose.Types.ObjectId(candidateDetails.candidateId).toString()) !== -1) {
+                        isInCart = true;
+                        break;
+                      }
                     }
                   }
+                  if (isInCart) {
+                    break;
+                  }
                 }
-                if (isInCart) {
-                  break;
-                }
-              }
-              callback(err, isInCart);
-            });
-
+                callback(err, isInCart);
+              });
+            }else {
+              callback(err,true);
+            }
           }
         });
       }
