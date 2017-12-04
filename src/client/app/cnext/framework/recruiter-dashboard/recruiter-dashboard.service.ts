@@ -55,4 +55,12 @@ export class RecruiterDashboardService extends BaseService {
       .catch(this.handleError);
   }
 
+  getRecruiterDetailsById(id: string) :Observable<any> {
+    let headers = new Headers({'Content-Type': 'application/json'});
+    let url: string = API.RECRUITER_PROFILE + '/' + id + '/details';
+    return this.http.get(url)
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
+
 }

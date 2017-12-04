@@ -3,10 +3,7 @@ import {CandidateProfileService} from "../candidate-profile/candidate-profile.se
 import {Candidate, Summary} from "../../../user/models/candidate";
 import {CandidateDashboardService} from "./candidate-dashboard.service";
 import {JobQcard} from "../model/JobQcard";
-import {
-  LocalStorage, ValueConstant, Tooltip, ImagePath, Headings, Messages,
-  SessionStorage
-} from "../../../shared/constants";
+import {LocalStorage, ValueConstant, Tooltip, ImagePath, Headings, Messages} from "../../../shared/constants";
 import {LocalStorageService} from "../../../shared/services/localstorage.service";
 import {CandidateJobListService} from "./candidate-job-list/candidate-job-list.service";
 import {QCardFilterService} from "../filters/q-card-filter.service";
@@ -18,6 +15,7 @@ import {EList} from "../model/list-type";
 import {ESort} from "../model/sort-type";
 import {QCardsortBy} from "../model/q-cardview-sortby";
 import {SessionStorageService} from "../../../shared/services/session.service";
+import {RecruiterDashboardService} from "../recruiter-dashboard/recruiter-dashboard.service";
 
 
 @Component({
@@ -57,7 +55,8 @@ export class CandidateDashboardComponent implements OnInit {
               private candidateJobListService: CandidateJobListService,
               private qcardFilterService: QCardFilterService,
               private loaderService: LoaderService,
-              private guidedTourService: GuidedTourService) {
+              private guidedTourService: GuidedTourService,
+              private recruiterDashboardService: RecruiterDashboardService) {
     this.candidateProfileService.getCandidateDetails()
       .subscribe(
         candidateData => {
@@ -70,6 +69,13 @@ export class CandidateDashboardComponent implements OnInit {
     if (this.recruiterReferenceId) {
       this.isRecruiterReferred = true;
       this.typeOfListVisible = 'recruiters';
+      this.recruiterDashboardService.getRecruiterDetailsById(this.recruiterReferenceId)
+        .subscribe(
+          recruiter => {
+            this.companyName = recruiter.data.company_name;
+          },
+          error => this.errorService.onError(error)
+        );
     }
     this.overlayScreensDashboardImgPath = ImagePath.BASE_ASSETS_PATH_DESKTOP + ImagePath.CANDIDATE_OERLAY_SCREENS_DASHBOARD;
     this.overlayScreensDashboardImgName = ImagePath.CANDIDATE_OERLAY_SCREENS_DASHBOARD;
@@ -245,9 +251,6 @@ export class CandidateDashboardComponent implements OnInit {
         data => {
           this.loaderService.stop();
           this.recruitersJobList = data;
-          if(this.recruitersJobList.length > 0) {
-            this.companyName =this.recruitersJobList[0].company_name;
-          }
           this.candidate.summary.numberOfRecruiterJobs = this.recruitersJobList.length;
           this.extractRecruitersJobList(this.recruitersJobList);
         }, error => this.errorService.onError(error));
@@ -278,7 +281,7 @@ export class CandidateDashboardComponent implements OnInit {
     } else if (EList.JOB_NOT_INTERESTED === this.listName) {
       this.appliedFilters.listName = EList.JOB_NOT_INTERESTED;
       this.getRejectedJobList();
-    } else if(this.typeOfListVisible == 'recruiters') {
+    } else if (this.typeOfListVisible == 'recruiters') {
       this.appliedFilters.listName = EList.JOB_MATCHED;
       this.getRecruitersJobList();
     } else {

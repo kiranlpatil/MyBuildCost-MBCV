@@ -22,7 +22,7 @@ class CandidateRepository extends RepositoryBase<ICandidate> {
     super(CandidateSchema);
   }
 
-  public retrieveSortedResultWithLimit(query: any, included: Object, sortingQuery: any, callback: (error: any, result: any) => void) {
+  public retrieveSortedResult(query: any, included: Object, sortingQuery: any, callback: (error: any, result: any) => void) {
     CandidateSchema.find(query, included).sort(sortingQuery).populate('userId').lean().exec(function (err: any, items: any) {
       callback(err, items);
     });
