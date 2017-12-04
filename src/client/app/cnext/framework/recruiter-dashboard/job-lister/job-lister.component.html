@@ -75,9 +75,10 @@
                 <p class="expired" *ngIf="item.daysRemainingForExpiring <= 0">Expired</p>
               </div>
             </div>
+              <p class="active" *ngIf="!item.isJobPosted">{{getMessage().THIS_JOB_IS_NOT_YET_POSTED}}</p>
           </div>
         </div>
-        <div class="edit-job-notification" title="Post this job" *ngIf="!item.isJobPosted">{{getLabel().POST_JOB}}</div>
+        <!--<div class="edit-job-notification" title="Post this job" *ngIf="!item.isJobPosted">{{getLabel().POST_JOB}}</div>-->
         <div class="closed-post-job" title="Post this job" *ngIf="item.isJobPostClosed">{{getLabel().CLOSED_JOB}}</div>
       </div>
     </div>

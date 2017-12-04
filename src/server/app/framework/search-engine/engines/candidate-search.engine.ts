@@ -114,7 +114,7 @@ export class CandidateSearchEngine extends SearchEngine {
         callback(err, items);
       });
     } else {
-      this.candidateRepository.retrieveSortedResultWithLimit(criteria, includedFields, sortingQuery,(err, items) => {
+      this.candidateRepository.retrieveSortedResult(criteria, includedFields, sortingQuery,(err, items) => {
         callback(err, items);
       });
     }
@@ -125,7 +125,7 @@ export class CandidateSearchEngine extends SearchEngine {
     let sortBy = appliedFilter.sortBy;
     let listName = appliedFilter.listName;
     let mustHaveComplexity = appliedFilter.mustHaveComplexity;
-
+    let candidateQuery:any;
     for (let obj of objects) {
       let isFound: boolean = false;
       if (listName === EList.CAN_MATCHED) {
@@ -158,15 +158,18 @@ export class CandidateSearchEngine extends SearchEngine {
     if (sortBy === ESort.BEST_MATCH) {
      this.candidate_q_cards = <CandidateCard[]>this.getSortedObjectsByMatchingPercentage(this.candidate_q_cards);
      this.candidate_q_cards = this.candidate_q_cards.slice(0,ConstVariables.QCARD_LIMIT);
+      let ids : any[] = this.candidate_q_cards.map(a => a._id);
+      candidateQuery= {'_id': {$in: ids.slice(0,ConstVariables.QCARD_LIMIT)}};
+    }else {
+      let ids: any[] = this.candidate_q_cards.map(a => a._id);
+      candidateQuery = {'_id': {$in: ids}};
     }
-    let ids : any[] = this.candidate_q_cards.map(a => a._id);
-    let candidateQuery:any= {'_id': {$in: ids.slice(0,ConstVariables.QCARD_LIMIT)}};
     this.candidateRepository.retrieveCandidate(candidateQuery, (err, res) => {
       if(err) {
         callback(err, res);
         return;
       }
-      let cards = this.generateQCards(this.candidate_q_cards, res);
+      let cards = this.generateQCards(this.candidate_q_cards, res,sortBy);
       if(listName !== EList.CAN_CART) {
         cards = this.maskQCards(cards);
       }
@@ -192,7 +195,7 @@ export class CandidateSearchEngine extends SearchEngine {
     return !isNotSatisfy;
   }
 
-  generateQCards(candidateCards:any, candidateDetails:any): any {
+  generateQCards(candidateCards:any, candidateDetails:any,sortBy:any): any {
     for(let card of candidateCards) {
       let candidateDetail = candidateDetails.find((o:any) => o._id == (card._id).toString());
       if(card.exact_matching >= ConstVariables.LOWER_LIMIT_FOR_SEARCH_RESULT) {
@@ -202,6 +205,9 @@ export class CandidateSearchEngine extends SearchEngine {
           candidateDetail.userId.picture, card._id, card.above_one_step_matching,
           card.exact_matching, candidateDetail.location.city, candidateDetail.proficiencies);
         this.final_candidate_q_cards.push(candidateCard);
+        if(sortBy !== ESort.BEST_MATCH && this.final_candidate_q_cards.length === ConstVariables.QCARD_LIMIT) {
+          break;
+        }
       }
     }
     return this.final_candidate_q_cards;

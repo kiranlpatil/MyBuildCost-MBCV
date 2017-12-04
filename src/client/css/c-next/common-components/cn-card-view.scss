@@ -153,10 +153,10 @@
     &:hover,
     &:focus,
     &:active {
-      background-color: $theme-color;
-      border: 1px solid $theme-color;
+      background-color: $select-hover-bg;
+      border: 1px solid $select-hover-bg;
       box-shadow: none;
-      color: $white;
+      color: $theme-color;
     }
   }
 

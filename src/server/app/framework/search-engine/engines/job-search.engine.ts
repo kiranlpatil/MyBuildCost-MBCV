@@ -107,7 +107,7 @@ export class JobSearchEngine extends SearchEngine {
         callback(err, items);
       });
     } else {
-      this.jobProfileRepository.retrieveSortedResultWithLimit(criteria, includedFields, sortingQuery, (err, items) => {
+      this.jobProfileRepository.retrieveSortedResult(criteria, includedFields, sortingQuery, (err, items) => {
         callback(err, items);
       });
     }
@@ -117,7 +117,7 @@ export class JobSearchEngine extends SearchEngine {
               callback: (error: any, response: any[]) => any): any {
     let sortBy = appliedFilter.sortBy;
     let listName = appliedFilter.listName;
-
+    let jobProfileQuery:any;
     for (let job of jobs) {
       let isFound: boolean = false;
       if (listName === EList.JOB_MATCHED) {
@@ -142,22 +142,24 @@ export class JobSearchEngine extends SearchEngine {
     if (sortBy === ESort.BEST_MATCH) {
       this.job_q_cards = <JobCard[]>this.getSortedObjectsByMatchingPercentage(this.job_q_cards);
       this.job_q_cards = this.job_q_cards.slice(0,ConstVariables.QCARD_LIMIT);
+      let ids: any[] = this.job_q_cards.map(a => a._id);
+      jobProfileQuery = {'_id': {$in: ids.slice(0, ConstVariables.QCARD_LIMIT)}};
+    }else {
+      let ids: any[] = this.job_q_cards.map(a => a._id);
+      jobProfileQuery = {'_id': {$in: ids}};
     }
-
-    let ids: any[] = this.job_q_cards.map(a => a._id);
-    let jobProfileQuery: any = {'_id': {$in: ids.slice(0, ConstVariables.QCARD_LIMIT)}};
     this.jobProfileRepository.retrieveJobProfiles(jobProfileQuery, (err, res) => {
       if (err) {
         callback(err, res);
         return;
       }
-      let cards = this.generateQCards(this.job_q_cards, res);
+      let cards = this.generateQCards(this.job_q_cards, res,sortBy);
       callback(err, cards);
       return;
     });
   }
 
-  generateQCards(jobCards: any, jobDetails: any): any {
+  generateQCards(jobCards: any, jobDetails: any,sortBy:any): any {
     for (let card of jobCards) {
       let jobDetail = jobDetails.find((o: any) => o._id == (card._id).toString());
       if (card.exact_matching >= ConstVariables.LOWER_LIMIT_FOR_SEARCH_RESULT) {
@@ -168,6 +170,9 @@ export class JobSearchEngine extends SearchEngine {
           jobDetail.isJobPostClosed, jobDetail._id, card.above_one_step_matching, card.exact_matching,
           jobDetail.location.city, jobDetail.proficiencies);
         this.final_job_q_cards.push(jobCard);
+        if(sortBy !== ESort.BEST_MATCH && this.final_job_q_cards.length === ConstVariables.QCARD_LIMIT) {
+          break;
+        }
     }
   }
   return this.final_job_q_cards;
