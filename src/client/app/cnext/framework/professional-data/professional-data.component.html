@@ -13,10 +13,11 @@
             <option *ngFor="let c of salaryList" [ngValue]="c">{{c}}</option>
           </select>
           <div class="error-messages"
-               *ngIf="candidate.professionalDetails.currentSalary == '' && !isValid">
+               *ngIf="(candidate.professionalDetails.currentSalary == '' ||
+               candidate.professionalDetails.currentSalary == undefined) && !isValid">
             <p>{{requiedSalaryValidationMessage}}</p>
           </div>
-
+        <!--TODO: check only against number-->
         </div>
 
         <div class="form-group">
