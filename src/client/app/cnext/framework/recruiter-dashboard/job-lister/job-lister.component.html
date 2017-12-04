@@ -25,10 +25,8 @@
                   (raiseJobEditViewEventEmitter)="onJobCloned($event)" ></cn-job-clone>
       <cn-job-close [selectedJobTitleForClose]="selectedJobTitle" [selectedJobProfile]="selectedJobProfile"
       [isJobCloseButtonClicked]="isJobCloseButtonClicked"></cn-job-close>
-    <div  class="col-md-3" *ngFor="let item of jobs | orderBy:format | closedJobFilter : showClosedJobs;let i = index">
-      <div class="dropdown clone-job-menu">
-        <button class="btn dropdown-toggle btn-menu" type="button" data-toggle="dropdown"><span
-                class="glyphicon glyphicon-option-vertical"></span></button>
+    <div  class="col-md-3 my-post-jobs" *ngFor="let item of jobs | orderBy:format | closedJobFilter : showClosedJobs;let i = index">
+      <div class="dropdown clone-job-menu" [class.post-jobs-card]="!item.isJobPosted">
         <!--<ul class="dropdown-menu">
           <li (click)="raiseCloneEvent(item)"><a>{{getLabel().CLONE_JOB}}</a></li>
           <li *ngIf="item.isJobPosted && !item.isJobPostClosed" (click)="renewJobPost(item)"><a>Renew Job Post</a></li>
