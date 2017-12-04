@@ -2146,8 +2146,8 @@ img[alt] {
   background: $blue !important;
   color: $white !important;
   &:hover {
-    background: $blue;
-    color: $white;
+    background: $select-hover-bg !important;
+    color: $blue !important;
   }
 }
 

@@ -30,6 +30,7 @@
         <h4 class="heading">Keywords that describes your area of expertise (optional)</h4>
         <div class="col-sm-12 no-padding">
           <label>Add Key Skills</label>
+          <label class="select-keyskill">{{getMessage().PRESS_ENTER_KEYSKILL}}</label>
         </div>
         <cn-multi-select [data]="proficiencies" [selectedData]="choosedproficiencies" [maxLength]="maxProficiencies"
                          (onComplete)="onProficiencyComplete($event)"  [type]="'xyz'"
