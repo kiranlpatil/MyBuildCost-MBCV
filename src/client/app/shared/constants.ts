@@ -189,7 +189,7 @@ export class Messages {
   public static MSG_ERROR_VALIDATION_SALARY = 'Select valid Minimum and Maximum salary band.';
   public static MSG_ERROR_VALIDATION_JOINING_PERIOD_REQUIRED = 'Select joining period.';
   public static MSG_ERROR_VALIDATION_OTP_MOBILE_NUMBER = 'Please provide a valid mobile number.';
-  public static MSG_ERROR_VALIDATION_PASSWORD = 'Password Must be Alfa- Numeric having minimum 8 Characters.';
+  public static MSG_ERROR_VALIDATION_PASSWORD = 'Password must be Alfa-Numeric having minimum 8 Characters.';
   public static MSG_ERROR_VALIDATION_BIRTH_YEAR = `This field can't be left blank.`;
   public static MSG_ERROR_VALIDATION_PIN_NUMBER = 'Pin code should not be greater than 20 characters.';
   public static SUGGESTION_MSG_FOR_RELEVENT_INDUSTRY = 'Based on the profile you have selected, we suggest to search ' +
@@ -354,7 +354,7 @@ export class Messages {
   public static SHOW_VALUE_PORTRAIT = 'Show Value Portrait';
   public static CAPABILITY_DETAILS = 'Capability details under';
   public static NOT_AVAILABLE = 'Not Available';
-  public static PASSWORD_MESSAGE = 'Password Must be Alfa- Numeric having minimum 8 Characters.';
+  public static PASSWORD_MESSAGE = 'Password must be Alfa-Numeric having minimum 8 Characters.';
 
   public static CAREER_PLUGIN_MSG_NEW_USER = 'You are not registered, Kindly register with our carrier partner to apply for job';
   public static CAREER_PLUGIN_MSG_EXISTING_USER = 'You are all ready registered, Kindly please login';

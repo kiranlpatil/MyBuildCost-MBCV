@@ -66,9 +66,10 @@
     }
 
     ul > li {
-      width: 14%;
       padding: 5px 10px;
-
+      width: 12.5%;
+      word-wrap: break-word;
+      word-break: keep-all;
     }
 
     ul > li > p {

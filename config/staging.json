@@ -24,7 +24,7 @@
     "profilePathForClient":"/public/profileImage/",
     "limitForQuery" : 10,
     "mail": {
-      "host":"https://34.214.128.209/",
+      "host":"http://34.214.128.209/",
       "MAIL_SENDER": "redminestatus@techprimelab.com",
       "MAIL_SENDER_PASSWORD": "Contactu$@tpl",
       "ADMIN_MAIL": "Jobmosis_TPL@techprimelab.com",

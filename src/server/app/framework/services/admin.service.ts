@@ -231,7 +231,7 @@ class AdminService {
 
   sendAdminLoginInfoMail(field: any, callback: (error: any, result: any) => void) {
     let sendMailService = new SendMailService();
-    let data: Map<string, string> = new Map([['$jobmosisLink$',config.get('TplSeed.mail.host')],
+    let data: Map<string, string> = new Map([['$jobmosisLink$', config.get('TplSeed.mail.host')],
       ['$email$', field.email],
       ['$address$', (field.location === undefined) ? 'Not Found' : field.location],
       ['$ip$', field.ip],
@@ -252,20 +252,7 @@ class AdminService {
         callback(err, null);
         return;
       }
-      if (!item.isCandidate) {
-        this.recruiterRepository.findOneAndUpdate({'userId': new mongoose.Types.ObjectId(_id)},
-          {$set: {'api_key': _id}}, {},
-          (err: Error, recruiter: RecruiterModel) => {
-            if (err) {
-              callback(err, null);
-              return;
-            }
-            callback(null, data);
-          });
-      } else {
-        callback(null, data);
-      }
-
+      callback(null, data);
     });
   }
 

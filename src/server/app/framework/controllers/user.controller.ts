@@ -1042,7 +1042,7 @@ export function verifyOtp(req: express.Request, res: express.Response, next: any
     let mailChimpMailerService = new MailChimpMailerService();
 
     let query = {"_id": user._id, "isActivated": false};
-    let updateData = {"isActivated": true};
+    let updateData = {"isActivated": true, "activation_date" : new Date()};
     if (user.otp === params.otp) {
       userService.findOneAndUpdate(query, updateData, {new: true}, (error, result) => {
         if (error) {
