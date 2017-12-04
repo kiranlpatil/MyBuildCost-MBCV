@@ -82,8 +82,8 @@ header {
 }
 
 .proficiencies-key-skills:hover > .tooltip-content-new {
-  opacity: 1;
-  visibility: visible;
+  opacity: 0;
+  visibility: hidden;
 }
 
 .proficiencies-key-skills .tooltip-content-new:after {

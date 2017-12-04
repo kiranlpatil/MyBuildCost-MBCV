@@ -15,8 +15,8 @@ class JobProfileRepository extends RepositoryBase<IJobProfile> {
     });
   }
 
-  public retrieveSortedResultWithLimit(query: any, included: Object, sortingQuery: any, callback: (error: any, result: any) => void) {
-    JobProfileSchema.find(query, included).sort(sortingQuery).limit(ConstVariables.QCARD_LIMIT).populate('recruiterId').lean().exec(function (err: any, items: any) {
+  public retrieveSortedResult(query: any, included: Object, sortingQuery: any, callback: (error: any, result: any) => void) {
+    JobProfileSchema.find(query, included).sort(sortingQuery).populate('recruiterId').lean().exec(function (err: any, items: any) {
       callback(err, items);
     });
   }

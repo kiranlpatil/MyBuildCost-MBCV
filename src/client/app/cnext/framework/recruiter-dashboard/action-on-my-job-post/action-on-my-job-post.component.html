@@ -1,4 +1,6 @@
-<button class="btn btn-cart" [innerHTML]="getLabel().CLONE_JOB" (click)="raiseCloneEvent()"></button>
+<button class="btn btn-cart" *ngIf="!jobProfile.isJobPostClosed && jobProfile.isJobPosted" (click)="onJobClicked(jobProfile._id,jobProfile.isJobPosted)" >View Job</button>
+<button class="btn btn-cart" *ngIf="!jobProfile.isJobPosted" (click)="onJobClicked(jobProfile._id,jobProfile.isJobPosted)">Post Job</button>
 <button class="btn btn-cart" *ngIf="jobProfile.isJobPosted && !jobProfile.isJobPostClosed" (click)="renewJobPost()">Renew Job Post</button>
+<button class="btn btn-cart" [innerHTML]="getLabel().CLONE_JOB" (click)="raiseCloneEvent()"></button>
 <button class="btn btn-cart" *ngIf="!jobProfile.isJobPostClosed" (click)="closeJobPost()" [innerHTML]="getLabel().CLOSE_JOB"></button>
-<button class="btn btn-cart" *ngIf="!jobProfile.isJobPostClosed" (click)="onJobClicked(jobProfile._id,jobProfile.isJobPosted)" >View Job</button>
+
