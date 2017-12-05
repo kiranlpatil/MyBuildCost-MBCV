@@ -354,10 +354,10 @@ export class Messages {
   public static SHOW_VALUE_PORTRAIT = 'Show Value Portrait';
   public static CAPABILITY_DETAILS = 'Capability details under';
   public static NOT_AVAILABLE = 'Not Available';
-  public static PASSWORD_MESSAGE = 'Password must be Alfa-Numeric having minimum 8 Characters.';
+  public static PASSWORD_MESSAGE = 'Password must be alphanumeric having minimum 8 Characters.';
 
   public static CAREER_PLUGIN_MSG_NEW_USER = 'You are not registered, Kindly register with our carrier partner to apply for job';
-  public static CAREER_PLUGIN_MSG_EXISTING_USER = 'You are all ready registered, Kindly please login';
+  public static CAREER_PLUGIN_MSG_EXISTING_USER = 'You are already registered, Kindly SignIn';
   public static THIS_JOB_IS_NOT_YET_POSTED = 'This Job is not yet posted';
   public static PRESS_ENTER_KEYSKILL = 'Select one key skill from dropdown at a time and press enter to add it.';
 
