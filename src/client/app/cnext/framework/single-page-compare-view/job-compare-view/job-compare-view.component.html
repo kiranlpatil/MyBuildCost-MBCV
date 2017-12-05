@@ -396,7 +396,7 @@
           <div class="pull-left" *ngFor="let item of data.proficiencies;let i = index"
                style="padding-top: 6px;padding-right: 7px;" >
             <span *ngIf="data.proficienciesMatch.indexOf(item)== -1 && data.proficienciesUnMatch.indexOf(item)== -1 " >{{item}}
-            <span *ngIf="data.proficiencies.length>1 && i!=data.proficiencies.length -1">,:&nbsp;</span>&nbsp;
+            <span *ngIf="data.proficiencies.length>1 && i!=data.proficiencies.length -1">,&nbsp;</span>&nbsp;
             </span>
           </div>
         </div>
