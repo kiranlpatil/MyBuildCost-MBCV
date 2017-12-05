@@ -33,7 +33,7 @@ export abstract class SearchEngine {
     q_card._id = id;
     let count = 0;
     for (let cap in job_capability_matrix) {
-      if (job_capability_matrix[cap] === -1 || job_capability_matrix[cap] === 0 ||
+      if (job_capability_matrix[cap] === -1 || job_capability_matrix[cap] === '0' ||
         job_capability_matrix[cap] === undefined) {
       } else if (candidate_capability_matrix[cap] && (Number(job_capability_matrix[cap].toString()) === Number(candidate_capability_matrix[cap].toString()))) {
         q_card.exact_matching += 1;
