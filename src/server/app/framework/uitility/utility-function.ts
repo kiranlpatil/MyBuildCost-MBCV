@@ -17,9 +17,10 @@ export class UtilityFunction {
         }
     }
 
-  public static mobileNumberHider(_mobileNumber:number) {
-        let hideMobileNumber = _mobileNumber.toString()[0] + _mobileNumber.toString().substr(_mobileNumber.toString().length - 4);
-        return Number(hideMobileNumber);
-    }
+  public static mobileNumberHider(_mobileNumber: number) {
+    let hideMobileNumber = _mobileNumber.toString().substr(1, 4) +
+      new Array((_mobileNumber.toString().substr(0, 7)).length).join('X');
+    return hideMobileNumber;
+  }
 
 }
