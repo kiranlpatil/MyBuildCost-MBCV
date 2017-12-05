@@ -119,7 +119,7 @@ export class JobDashboardComponent implements OnInit, OnChanges {
 
   getMatchingProfiles() {
     /* this.qcardFilterService.clearFilter();*/
-   /*this.listName = ValueConstant.MATCHED_CANDIDATE*/;
+   /*this.listName = ValueConstant.MATCHED_CANDIDATE*/
     this.listName = EList.CAN_MATCHED;
     for (let i = 0; i < this.whichListVisible.length; i++) {
       this.whichListVisible[i] = false;
