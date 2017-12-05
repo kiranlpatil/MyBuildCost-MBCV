@@ -37,7 +37,8 @@ function CareerPlugin() {
       "<div class='plugin-btn-grp'>" +
       "<button id='career-plugin-submit' style='background-color:" + btnBg + "'>Apply</button>" +
       "</div>" +
-      "</div>" + "<span class='plugin-foot-note'>Note: New Users will be require to create their profile.</span>";
+      "</div>" + "<span class='plugin-foot-note'>Note: New applicant will be required to create their profile on our " +
+      "career partner portal.</span>";
 
     function drag_start(event) {
       var style = window.getComputedStyle(event.target, null);

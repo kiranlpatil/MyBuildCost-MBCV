@@ -1,6 +1,6 @@
 import {Component, Input} from "@angular/core";
 import {JobSummary} from "../../../model/jobSummary";
-import {AppSettings, ImagePath} from "../../../../../shared/constants";
+import {AppSettings, ImagePath, Label} from "../../../../../shared/constants";
 import {JobPosterModel} from "../../../../../user/models/jobPoster";
 import {Recruiter} from "../../../../../user/models/recruiter";
 
@@ -30,5 +30,9 @@ export class RecruiterJobInformation {
       return AppSettings.IP + imagePath;
     }
     return null;
+  }
+
+  getLabel() {
+    return Label;
   }
 }

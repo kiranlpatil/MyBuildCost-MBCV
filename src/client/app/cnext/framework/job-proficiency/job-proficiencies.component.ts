@@ -68,6 +68,13 @@ export class JobProficienciesComponent implements OnInit {
     this.showButton = false;
     window.scrollTo(0, 0);
   }
+  getMessage() {
+    return Messages;
+  }
+
+  getHeadings() {
+    return Headings;
+  }
 }
 
 

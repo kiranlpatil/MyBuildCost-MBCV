@@ -80,28 +80,30 @@
           <span *ngIf="candidate.interestedIndustries.length>1 && i<candidate.interestedIndustries.length-1">,</span>
         </span>
                 <label  *ngIf="recruiter != undefined" [class.exact]="data.experienceMatch=='exact'" [class.missing]="data.experienceMatch=='missing'">
-                  <strong class="title-name pull-left"> Experience <b class="small-label"></b></strong>
+                  <strong class="title-name pull-left"> Experience <span class="optional-field">{{getLabel().YEARS}}</span> <b class="small-label"></b></strong>
                   <img class="exact-img" src="assets/framework/images/dashboard/right-tick.svg"/>
                   <div class="info-description">
                     <img class="missing-img" src="assets/framework/images/dashboard/info-red.svg"/>
                     <div class="info-hover-section">
                       Job Experience Band {{job.experienceMinValue}} -
-                      {{job.experienceMaxValue}}<br/>
-                      {{candidateDetails.first_name}}'s Experience {{candidate.professionalDetails.experience}}
+                      {{job.experienceMaxValue}} {{getLabel().YEARS}} <br/>
+                      {{candidateDetails.first_name}}'s Experience {{candidate.professionalDetails.experience}} {{getLabel().YEARS}}
                     </div>
                   </div>
                 </label>
                 <span>{{candidate.professionalDetails.experience}}</span>
                 <label [class.exact]="data.salaryMatch=='exact'" [class.above]="data.salaryMatch=='above'"
                        [class.below]="data.salaryMatch=='below'" [class.missing]="data.salaryMatch=='missing'">
-                  <strong class="title-name pull-left"> Current Salary <b class="small-label"></b></strong>
+                  <strong class="title-name pull-left"> Current Salary <span class="optional-field">
+                    {{getLabel().IN_LAKH}}</span> <b class="small-label"></b></strong>
                   <img class="exact-img" src="assets/framework/images/dashboard/right-tick.svg"/>
                   <div  *ngIf="recruiter != undefined" class="info-description">
                     <img class="missing-img" src="assets/framework/images/dashboard/info-red.svg"/>
                     <div class="info-hover-section">
                       Job Salary Band {{job.salaryMinValue}} -
-                      {{job.salaryMaxValue}}<br/>
+                      {{job.salaryMaxValue}} {{getLabel().IN_LAKH}} <br/>
                       {{candidateDetails.first_name}}'s Salary {{candidate.professionalDetails.currentSalary}}
+                      {{getLabel().IN_LAKH}}
                     </div>
                   </div>
                 </label>
@@ -192,7 +194,7 @@
                     *ngIf="job.experienceMinValue != job.experienceMaxValue"
                     [class.exact]="data.experienceMatch=='exact'" [class.above]="data.experienceMatch=='above'"
                          [class.below]="data.experienceMatch=='below'" [class.missing]="data.experienceMatch=='missing'">
-                    <strong class="title-name pull-left"> Experience Band <b class="small-label">(In Years)</b></strong>
+                    <strong class="title-name pull-left"> Experience Band <b class="small-label">{{getLabel().YEARS}}</b></strong>
                     <img class="exact-img" src="assets/framework/images/dashboard/right-tick.svg"/>
                     <div class="info-description">
                       <img class="missing-img" src="assets/framework/images/dashboard/info-red.svg"/>
@@ -211,7 +213,7 @@
                     *ngIf="job.experienceMinValue == job.experienceMaxValue"
                     [class.exact]="data.experienceMatch=='exact'" [class.above]="data.experienceMatch=='above'"
                     [class.below]="data.experienceMatch=='below'" [class.missing]="data.experienceMatch=='missing'">
-                    <strong class="title-name pull-left"> Experience <b class="small-label">(In Years)</b></strong>
+                    <strong class="title-name pull-left"> Experience <b class="small-label">{{getLabel().YEARS}}</b></strong>
                     <img class="exact-img" src="assets/framework/images/dashboard/right-tick.svg"/>
                     <div class="info-description">
                       <img class="missing-img" src="assets/framework/images/dashboard/info-red.svg"/>
@@ -227,7 +229,7 @@
                   <label *ngIf="job.salaryMinValue != job.salaryMaxValue"
                          [class.exact]="data.salaryMatch=='exact'" [class.above]="data.salaryMatch=='above'"
                          [class.below]="data.salaryMatch=='below'" [class.missing]="data.salaryMatch=='missing'">
-                    <strong class="title-name pull-left"> Salary Band <b class="small-label">(In Lacs)</b></strong>
+                    <strong class="title-name pull-left"> Salary Band <b class="small-label">{{getLabel().IN_LAKH}}</b></strong>
                     <img class="exact-img" src="assets/framework/images/dashboard/right-tick.svg"/>
                     <div class="info-description">
                       <img class="missing-img" src="assets/framework/images/dashboard/info-red.svg"/>
@@ -243,7 +245,7 @@
                   <label *ngIf="job.salaryMinValue == job.salaryMaxValue"
                          [class.exact]="data.salaryMatch=='exact'" [class.above]="data.salaryMatch=='above'"
                          [class.below]="data.salaryMatch=='below'" [class.missing]="data.salaryMatch=='missing'">
-                    <strong class="title-name pull-left"> Salary <b class="small-label">(In Lacs)</b></strong>
+                    <strong class="title-name pull-left"> Salary <b class="small-label">{{getLabel().IN_LAKH}}</b></strong>
                     <img class="exact-img" src="assets/framework/images/dashboard/right-tick.svg"/>
                     <div class="info-description">
                       <img class="missing-img" src="assets/framework/images/dashboard/info-red.svg"/>
@@ -391,9 +393,9 @@
           These are candidate's extra key skills
         </h4>
         <div class="pull-left col-xs-8 no-padding text-left">
-          <div class="pull-left" *ngFor="let item of data.proficienciesUnMatch;let i = index"
-               style="padding-top: 6px;padding-right: 7px;">
-            <span >{{item}}<b *ngIf="i < data.proficienciesUnMatch.length-1">,</b></span>
+          <div class="pull-left" *ngFor="let item of data.proficiencies;let i = index"
+               style="padding-top: 6px;padding-right: 7px;" >
+            <span *ngIf="data.proficienciesMatch.indexOf(item)== -1 && data.proficienciesUnMatch.indexOf(item)== -1 " >{{item}}<b *ngIf="i < data.proficiencies.length-1">,</b></span>
           </div>
         </div>
       </div>

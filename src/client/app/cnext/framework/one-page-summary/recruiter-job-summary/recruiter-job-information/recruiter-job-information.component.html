@@ -33,13 +33,18 @@
     </span>
     <label>Education</label>
     <span>{{job.education}}</span>
-    <label *ngIf="job.experienceMinValue !=job.experienceMaxValue">Experience Band(In Years)</label>
+    <label *ngIf="job.experienceMinValue !=job.experienceMaxValue">Experience Band
+      <span class="optional-field">{{getLabel().YEARS}}</span>
+    </label>
     <span *ngIf="job.experienceMinValue !=job.experienceMaxValue">{{job.experienceMinValue}} - {{job.experienceMaxValue}}</span>
-    <label *ngIf="job.experienceMinValue ==job.experienceMaxValue">Experience(In Years)</label>
+    <label *ngIf="job.experienceMinValue ==job.experienceMaxValue">Experience
+      <span class="optional-field"> {{getLabel().YEARS}} </span> </label>
     <span *ngIf="job.experienceMinValue ==job.experienceMaxValue">{{job.experienceMinValue}}</span>
-    <label *ngIf="job.salaryMinValue != job.salaryMaxValue">Salary Band(In Lacs)</label>
+    <label *ngIf="job.salaryMinValue != job.salaryMaxValue">Salary Band
+      <span class="optional-field"> {{getLabel().IN_LAKH}} </span> </label>
     <span *ngIf="job.salaryMinValue != job.salaryMaxValue">{{job.salaryMinValue}} - {{job.salaryMaxValue}}</span>
-    <label *ngIf="job.salaryMinValue == job.salaryMaxValue">Salary(In Lacs)</label>
+    <label *ngIf="job.salaryMinValue == job.salaryMaxValue">Salary
+      <span class="optional-field"> {{getLabel().IN_LAKH}}</span> </label>
     <span *ngIf="job.salaryMinValue == job.salaryMaxValue">{{job.salaryMinValue}}</span>
     <label>Joining Period</label>
     <span>{{job.joiningPeriod}}</span>

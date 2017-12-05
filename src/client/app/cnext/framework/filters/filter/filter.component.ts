@@ -105,7 +105,7 @@ export class FilterComponent implements OnChanges, OnInit {
     if (changes.selectedJob) {
       if (changes.selectedJob.currentValue) {
         this.proficiencyList = changes.selectedJob.currentValue.proficiencies;
-        if(changes.candidate && changes.candidate.currentValue.interestedIndustries[0] !== 'None') {
+        if(changes.selectedJob && changes.selectedJob.currentValue.interestedIndustries[0] !== 'None') {
           this.industryList = changes.selectedJob.currentValue.interestedIndustries;
         }
         this.location = changes.selectedJob.currentValue.location.city;

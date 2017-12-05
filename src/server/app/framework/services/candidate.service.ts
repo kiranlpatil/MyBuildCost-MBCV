@@ -120,15 +120,19 @@ class CandidateService {
               callback(err, null);
               return;
             }
-            var subject = (candidate.login) ?
+            let subject = (candidate.login) ?
               Messages.EMAIL_SUBJECT_EXISTING_CANDIDATE_LOGGEDIN : Messages.EMAIL_SUBJECT_CANDIDATE_REGISTRATION;
+            let template = (candidate.login) ?
+              'existing-candidate-logged-in.html' : 'new-candidate-registration.html';
             let config = require('config');
             let sendMailService = new SendMailService();
             let data: Map<string, string> = new Map([['$jobmosisLink$', config.get('TplSeed.mail.host')],
               ['$first_name$', candidate.first_name],
-              ['$app_name$', ProjectAsset.APP_NAME]]);
+              ['$mobile_number$', candidate.mobile_number],
+              ['$email$', candidate.email],
+              ['$app_name$', ProjectAsset.APP_NAME],]);
             sendMailService.send(recruiter.email, subject,
-              'new-candidate-registration.html', data, (e, status) => {
+              template, data, (e, status) => {
                 if (e) {
                   callback(e, null);
                   return;

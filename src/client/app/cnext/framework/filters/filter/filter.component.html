@@ -22,7 +22,7 @@
         <h5 data-toggle="collapse" href="#experience" (click)="openExperiencePanel=!openExperiencePanel"
             [ngClass]="{'panel-up': openExperiencePanel , 'panel-down': !openExperiencePanel }"
             >Experience <b
-          class="small-label">(In Year)</b></h5>
+          class="small-label">{{getLabel().YEARS}}</b></h5>
         <div id="experience" class="min-max-values clearfix  collapse">
           <div class="col-sm-6 padding-left5 padding-right5">
             <label>Min</label>
@@ -49,7 +49,7 @@
         <h5 data-toggle="collapse" href="#salary" (click)="openSalaryPanel=!openSalaryPanel"
             [ngClass]="{'panel-up': openSalaryPanel , 'panel-down': !openSalaryPanel }"
             >Salary Range <b
-          class="small-label">(In Lacs)</b></h5>
+          class="small-label">{{getLabel().IN_LAKH}}</b></h5>
         <div id="salary" class="min-max-values clearfix collapse">
           <div class="col-sm-6 padding-left5 padding-right5">
             <label>Min</label>

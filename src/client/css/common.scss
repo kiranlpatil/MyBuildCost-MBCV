@@ -66,6 +66,8 @@ $reject-color: #f7941d;
 $password-label: #a3a3a3;
 $light-black1: #a0a0a0;
 $select-hover-bg: #b2eaf9;
+$add-keyskill-color: #b1b1b1;
+
 
 .btn-logout {
   margin-top: 15px;
@@ -2148,6 +2150,23 @@ img[alt] {
   &:hover {
     background: $select-hover-bg !important;
     color: $blue !important;
+  }
+}
+
+.select-keyskill {
+  color: $add-keyskill-color !important;
+  float: left;
+  font-family: 'gothamrnd-light' !important;
+  font-size: 12px !important;
+  margin: -6px 0 0;
+  width: 100%;
+}
+
+.recruiter-profile-wrapper {
+  .select-keyskill {
+    position: absolute;
+    top: -6px;
+    width: auto;
   }
 }
 
