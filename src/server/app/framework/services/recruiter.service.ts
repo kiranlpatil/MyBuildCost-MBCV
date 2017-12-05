@@ -58,6 +58,7 @@ class RecruiterService {
       } else {
         item.isActivated = false;
         item.isCandidate = false;
+        item.created_date = new Date();
         const saltRounds = 10;
         bcrypt.hash(item.password, saltRounds, (err: any, hash: any) => {
           if (err) {

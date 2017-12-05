@@ -68,6 +68,7 @@ class CandidateService {
           } else {
             item.password = hash;
             item.isCandidate = true;
+            item.created_date = new Date();
             this.userRepository.create(item, (err, res) => {
               if (err) {
                 callback(new Error(Messages.MSG_ERROR_REGISTRATION_MOBILE_NUMBER), null);
