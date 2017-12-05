@@ -261,8 +261,8 @@ export class Messages {
     'It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,' +
     'and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.';
   public static BROWSER_ALERT_MSG = 'This application is certified on Google chrome browser. Switch to chrome for better experience.';
-  public static KEYSKILLS_PLACEHOLDER_DESKTOP = 'E.g. for IT:- Java, C++';
-  public static KEYSKILLS_PLACEHOLDER_MOBILE = 'E.g. for IT:- Java, C++';
+  public static KEYSKILLS_PLACEHOLDER_DESKTOP = 'E.g. for IT:- Java';
+  public static KEYSKILLS_PLACEHOLDER_MOBILE = 'E.g. for IT:- Java';
   public static FAQ_CONTACT_NUMBER = '+91-8669601612';
   public static FAQ_CONTACT_EMAIL = 'support@jobmosis.com';
   public static FAQ_MESSAGE = 'Have any questions?';
@@ -354,10 +354,10 @@ export class Messages {
   public static SHOW_VALUE_PORTRAIT = 'Show Value Portrait';
   public static CAPABILITY_DETAILS = 'Capability details under';
   public static NOT_AVAILABLE = 'Not Available';
-  public static PASSWORD_MESSAGE = 'Password must be Alfa-Numeric having minimum 8 Characters.';
+  public static PASSWORD_MESSAGE = 'Password must be alphanumeric having minimum 8 Characters.';
 
   public static CAREER_PLUGIN_MSG_NEW_USER = 'You are not registered, Kindly register with our carrier partner to apply for job';
-  public static CAREER_PLUGIN_MSG_EXISTING_USER = 'You are all ready registered, Kindly please login';
+  public static CAREER_PLUGIN_MSG_EXISTING_USER = 'You are already registered, Kindly SignIn';
   public static THIS_JOB_IS_NOT_YET_POSTED = 'This Job is not yet posted';
   public static PRESS_ENTER_KEYSKILL = 'Select one key skill from dropdown at a time and press enter to add it.';
 
@@ -779,6 +779,7 @@ export class Label {
   public static REFINE_BY: string = 'Refine by:';
   public static IN_LAKH: string = '(In Lakh)';
   public static YEARS: string = '(Year)';
+  public static NONE: string = 'None';
 }
 
 export class Button {

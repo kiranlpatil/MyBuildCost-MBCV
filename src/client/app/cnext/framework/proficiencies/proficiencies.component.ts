@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, Output} from "@angular/core";
 import {Section} from "../../../user/models/candidate";
-import {Headings, ImagePath, LocalStorage, Messages, Tooltip, ValueConstant} from "../../../shared/constants";
+import {Headings, ImagePath, Label, LocalStorage, Messages, Tooltip, ValueConstant} from "../../../shared/constants";
 import {ProficiencyDetailsService} from "../proficiency-detail-service";
 import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
 import {ErrorService} from "../../../shared/services/error.service";
@@ -142,5 +142,9 @@ export class ProficienciesComponent {
       // this._router.navigate([nav, userId]);
       this._router.navigate([x]);
     }
+  }
+
+  getLabel() {
+    return Label;
   }
 }

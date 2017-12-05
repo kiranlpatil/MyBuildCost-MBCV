@@ -79,6 +79,9 @@ export class RecruiterAction implements OnChanges {
     usageTrackingData.candidateId = this.candidate._id;
     usageTrackingData.action = UsageActions.MATCHED_CANDIDATE_AGAINST_ALL_JOB_BY_RECRUITER;
     this.usageTrackingService.addUsesTrackingData(usageTrackingData).subscribe(
+      data => {
+
+      },
       err => {
         this.errorService.onError(err);
       }

@@ -7,7 +7,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {JobLocation} from "../../../user/models/job-location";
 import {MyGoogleAddress} from "../../../shared/models/my-google-address";
 import {FilterService} from "../filters/filter/filter.service";
-import {Headings, Messages, Tooltip} from "../../../shared/constants";
+import {Headings, Label, Messages, Tooltip} from "../../../shared/constants";
 import {RecruiterDashboard} from "../model/recruiter-dashboard";
 import {ValidationService} from "../../../shared/customvalidations/validation.service";
 import {ErrorService} from "../../../shared/services/error.service";
@@ -240,6 +240,10 @@ export class BasicJobInformationComponent implements OnInit, OnChanges {
     this.showButton = false;
     this.disableButton = false;
     window.scrollTo(0, 0);
+  }
+
+  getLabel() {
+    return Label;
   }
 }
 

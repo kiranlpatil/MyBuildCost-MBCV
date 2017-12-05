@@ -138,7 +138,7 @@ export class JobCompareViewComponent implements OnChanges,OnInit {
     this.isCandidateHaveExtraKeySkill = false;
     for (let proficiency of this.data.proficiencies) {
       if (this.data.proficienciesMatch.indexOf(proficiency) == -1) {
-        this.data.proficienciesUnMatch.push(proficiency);
+        //this.data.proficienciesUnMatch.push(proficiency);
         this.isCandidateHaveExtraKeySkill = true;
       }
     }

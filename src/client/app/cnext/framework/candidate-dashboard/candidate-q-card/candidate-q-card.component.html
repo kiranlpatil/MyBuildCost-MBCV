@@ -20,8 +20,11 @@
             <b *ngFor="let proficiency of job.proficiencies;let i=index">
               {{proficiency}}<b *ngIf="i>=0 && i<4 &&  job.proficiencies.length-1 != i ">,&nbsp;</b>
             </b>
+            <span *ngIf="job.proficiencies.length == 0">
+              {{getLabel().NONE}}
+            </span>
           </div>
-          <span class="tooltip-content-new">
+          <span class="tooltip-content-new" *ngIf="job.proficiencies.length !== 0">
              <span *ngFor="let proficiency of job.proficiencies;let i=index">
                 {{proficiency}}
              <span *ngIf="i>=0 && i<4 &&  job.proficiencies.length-1 != i ">,&nbsp;</span>

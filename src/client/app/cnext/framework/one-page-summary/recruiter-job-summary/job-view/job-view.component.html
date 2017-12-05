@@ -22,7 +22,8 @@
         </div>
         <div class="pull-left col-xs-8 no-padding text-left">
           <div class="pull-left" style="padding-top: 6px;padding-right: 7px; font-size: 12px;" *ngFor="let item of job.proficiencies;let i = index">
-            <span>{{item}}</span>,
+            <span>{{item}}</span>
+            <span *ngIf="job.proficiencies.length>1 && i!=job.proficiencies.length -1">,&nbsp;</span>&nbsp;
           </div>
         </div>
       </div>
@@ -33,7 +34,8 @@
         </div>
         <div class="pull-left col-xs-8 no-padding text-left">
           <div class="pull-left" style="padding-top: 6px;padding-right: 7px; font-size: 12px;" *ngFor="let item of job.additionalProficiencies;let i = index">
-            <span>{{item}}</span>,
+            <span>{{item}}</span>
+            <span *ngIf="job.additionalProficiencies.length>1 && i!=job.additionalProficiencies.length -1">,&nbsp;</span>&nbsp;
           </div>
         </div>
       </div>

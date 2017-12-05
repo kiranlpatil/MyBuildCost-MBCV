@@ -10,6 +10,7 @@
                          [selectedData]="jobPosterModel.proficiencies"
                          (onComplete)="onMandatoryProficiencyComplete($event)"
                          [maxKeySkillsValidationMessage] = "maxKeySkillsValidationMessage"></cn-multi-select>
+        <label class="select-keyskill">{{getMessage().PRESS_ENTER_KEYSKILL}}</label>
         <div class="clearfix">&nbsp;</div>
       </div>
 
@@ -31,7 +32,8 @@
         <button class="btn-edit" (click)="onEdit()" title="Edit Key Skills"></button>
 
         <div class="col-sm-3 padding-right15">
-        <h4 class="heading-compact">Key Skills<span class="optional-field">(optional)</span>
+        <h4 class="heading-compact">Key Skills
+          <span class="optional-field">{{getHeadings().OPTIONAL}}</span>
         </h4>
 </div>
         <div class="col-sm-9 padding-left15">
@@ -40,6 +42,7 @@
             <span class="option">
               {{item}}
             </span>
+              <span *ngIf="jobPosterModel.proficiencies.length>1 && i!=jobPosterModel.proficiencies.length -1">,&nbsp;</span>&nbsp;
             </div>
             <div class="option-list" *ngIf="jobPosterModel.proficiencies && jobPosterModel.proficiencies.length==0 ">
             <span class="option">

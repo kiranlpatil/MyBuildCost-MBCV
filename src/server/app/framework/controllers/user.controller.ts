@@ -118,6 +118,8 @@ export function login(req: express.Request, res: express.Response, next: any) {
                         candidateService.updateRecruitersMyCandidateList(candidate[0]._id,
                           {
                             'first_name': result[0].first_name,
+                            'email': result[0].email,
+                            'mobile_number': result[0].mobile_number,
                             'recruiterReferenceId': params.recruiterReferenceId,
                             'login': true
                           },
