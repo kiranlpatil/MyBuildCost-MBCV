@@ -779,6 +779,7 @@ export class Label {
   public static REFINE_BY: string = 'Refine by:';
   public static IN_LAKH: string = '(In Lakh)';
   public static YEARS: string = '(Year)';
+  public static NONE: string = 'None';
 }
 
 export class Button {
