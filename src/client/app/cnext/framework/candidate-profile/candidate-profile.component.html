@@ -61,7 +61,8 @@
                          [isComplexityPresent]="isComplexityPresent" [complexityNotes]="candidate.complexity_note_matrix"
                          (onComplextyAnswered)="onComplextyAnswered($event)"
                          (onComplete)="onComplexityComplete($event)" [hidden]="!showComplexity"
-                         (popUpFeedBackAnswer)="popUpFeedBackAnswer($event)"></cn-complexities>
+                         (popUpFeedBackAnswer)="popUpFeedBackAnswer($event)"
+                         (proficiencyGuidedTour)="showProficiencyGuidedTour()"></cn-complexities>
       </div>
       <div class="wrapper">
         <cn-proficiencies [choosedproficiencies]="candidate.proficiencies"
