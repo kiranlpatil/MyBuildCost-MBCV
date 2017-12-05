@@ -1,7 +1,7 @@
 import {Component, Input} from "@angular/core";
 import {CandidateDetail} from "../../../../../user/models/candidate-details";
 import {Candidate} from "../../../../../user/models/candidate";
-import {AppSettings, ImagePath} from "../../../../../shared/constants";
+import {AppSettings, ImagePath, Label} from "../../../../../shared/constants";
 
 
 @Component({
@@ -36,5 +36,9 @@ export class CandidateBasicInformationComponent {
 
   maskingToMobileNumber(mobile_number:number) {
     return mobile_number.toString()[0] + '*****' + mobile_number.toString().substr(mobile_number.toString().length - 4);
+  }
+
+  getLabel() {
+    return Label;
   }
 }

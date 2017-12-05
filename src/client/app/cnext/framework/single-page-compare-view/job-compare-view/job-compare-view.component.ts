@@ -6,7 +6,7 @@ import {CandidateDetail} from "../../../../user/models/candidate-details";
 import {CandidateProfileService} from "../../candidate-profile/candidate-profile.service";
 import {RecruiterDashboardService} from "../../recruiter-dashboard/recruiter-dashboard.service";
 import {Recruiter} from "../../../../user/models/recruiter";
-import {AppSettings, Headings, ImagePath, LocalStorage, Messages} from "../../../../shared/constants";
+import {AppSettings, Headings, ImagePath, Label, LocalStorage, Messages} from "../../../../shared/constants";
 import {GuidedTourService} from "../../guided-tour.service";
 import {LocalStorageService} from "../../../../shared/services/localstorage.service";
 import {ErrorService} from "../../../../shared/services/error.service";
@@ -157,6 +157,10 @@ export class JobCompareViewComponent implements OnChanges,OnInit {
 
   getMessage() {
     return Messages;
+  }
+
+  getLabel() {
+    return Label;
   }
 
 }

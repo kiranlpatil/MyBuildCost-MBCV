@@ -95,7 +95,12 @@
                 [hidden]="highlightedSection.isDisable" title="Edit Professional Preferences & Experience Summary"></button>
       </h4>
       <div class="col-sm-6 col-xs-12 no-padding">
-        <div class="col-xs-6 no-padding"><p><label>{{getLabel().CURRENT_ANNUAL_SALARY}}</label></p></div>
+        <div class="col-xs-6 no-padding">
+          <p>
+            <label>{{getLabel().CURRENT_ANNUAL_SALARY}}</label> <br/>
+            <span class="optional-field">{{getLabel().IN_LAKH}}</span>
+          </p>
+        </div>
         <div class="col-xs-6 no-padding"><p> {{candidate.professionalDetails.currentSalary}}</p></div>
       </div>
       <div class="col-sm-6 col-xs-12 no-padding">

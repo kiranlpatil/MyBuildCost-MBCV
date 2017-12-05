@@ -71,7 +71,7 @@
 
           <div class="col-sm-8 no-padding">
             <div class="form-group clearfix">
-              <label>Experience Band (In Years)</label>
+              <label>Experience Band <span class="optional-field"> {{getLabel().YEARS}}</span> </label>
               <div class="col-sm-6 padding-right15 min-range">
                 <select class="select" formControlName="experienceMinValue">
                   <option *ngFor="let c of experienceRangeList" [ngValue]="c">{{c}}</option>
@@ -95,7 +95,7 @@
 
           <div class="col-sm-8 no-padding">
             <div class="form-group clearfix">
-              <label>Salary Band (In Lacs)</label>
+              <label>Salary Band <span class="optional-field">{{getLabel().IN_LAKH}}</span></label>
               <div class="col-sm-6 padding-right15 min-range">
                 <select class="select" formControlName="salaryMinValue">
                   <option *ngFor="let c of salaryRangeList" [ngValue]="c">{{c}}</option>
@@ -171,14 +171,14 @@
         <p><label>Education</label> {{jobPosterModel.education}}</p>
         <p *ngIf="jobPosterModel.experienceMinValue !=jobPosterModel.experienceMaxValue"><label>Experience Band</label>
           {{jobPosterModel.experienceMinValue}} -
-          {{jobPosterModel.experienceMaxValue}} Year(s)</p>
+          {{jobPosterModel.experienceMaxValue}} {{getLabel().YEARS}}</p>
         <p *ngIf="jobPosterModel.experienceMinValue == jobPosterModel.experienceMaxValue"><label>Experience</label>
-          {{jobPosterModel.experienceMinValue}} Year(s)</p>
+          {{jobPosterModel.experienceMinValue}} {{getLabel().YEARS}}</p>
         <p *ngIf="jobPosterModel.salaryMinValue != jobPosterModel.salaryMaxValue"><label>Salary Band</label>
-          {{jobPosterModel.salaryMinValue}} - {{jobPosterModel.salaryMaxValue}} Lac(s)
+          {{jobPosterModel.salaryMinValue}} - {{jobPosterModel.salaryMaxValue}} {{getLabel().IN_LAKH}}
         </p>
         <p *ngIf="jobPosterModel.salaryMinValue == jobPosterModel.salaryMaxValue"><label>Salary</label>
-          {{jobPosterModel.salaryMinValue}} Lac(s)</p>
+          {{jobPosterModel.salaryMinValue}} {{getLabel().IN_LAKH}}</p>
       </div>
       <div class="clearfix">
         <p><label>Notice Period</label> {{jobPosterModel.joiningPeriod}}</p>

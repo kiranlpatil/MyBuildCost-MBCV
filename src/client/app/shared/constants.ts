@@ -766,7 +766,7 @@ export class Label {
   public static PROFILE_VISIBILITY: string = 'Profile Visibility for Recruiter';
   public static SUBMIT_PROFILE: string = 'Submit Your Profile';
   public static MORE: string = 'More';
-  public static CURRENT_ANNUAL_SALARY: string = 'Current Annual Salary(In Lacs)';
+  public static CURRENT_ANNUAL_SALARY: string = 'Current Annual Salary';
   public static READY_TO_RELOCATE: string = 'Ready To Relocate?';
   public static COMPANY_CULTURE: string = 'Company Culture';
   public static NOTICE_PERIOD: string = 'Notice Period';
@@ -777,6 +777,8 @@ export class Label {
   public static INDUSTRY: string = 'Industry:';
   public static DOMAIN_EXPOSURE: string = 'Domain Exposure:';
   public static REFINE_BY: string = 'Refine by:';
+  public static IN_LAKH: string = '(In Lakh)';
+  public static YEARS: string = '(Year)';
 }
 
 export class Button {

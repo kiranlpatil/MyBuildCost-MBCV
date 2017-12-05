@@ -76,8 +76,8 @@
         </div>
         <div class="col-sm-9 padding-left15">
           <span class="option-list" *ngFor="let item of choosedproficiencies;let i = index">
-            <span class="option">{{item}}</span><span class="visible-xs"
-                                                      *ngIf="choosedproficiencies.length>1 && i!=choosedproficiencies.length -1">,&nbsp;</span>&nbsp;
+            <span class="option">{{item}}</span>
+            <span *ngIf="choosedproficiencies.length>1 && i!=choosedproficiencies.length -1">,&nbsp;</span>&nbsp;
           </span>
         </div>
       </div>

@@ -21,7 +21,7 @@
     <span *ngFor="let industry of candidate.interestedIndustries;let i = index">{{industry}}
         <span *ngIf="candidate.interestedIndustries.length>1 && i<candidate.interestedIndustries.length-1">,</span>
       </span>
-    <label>Experience</label>
+    <label>Experience <span class="optional-field"> {{getLabel().YEARS}}</span></label>
     <span>{{candidate.professionalDetails.experience}}</span>
     <label>Current Company</label>
     <span>{{candidate.professionalDetails.currentCompany}}</span>
@@ -30,7 +30,7 @@
     <!--<span>{{candidateDetails.location.city}}</span>-->
     <label>Ready to Relocate</label>
     <span>{{candidate.professionalDetails.relocate}}</span>
-    <label>Current Salary</label>
+    <label>Current Salary <span class="optional-field"> {{getLabel().IN_LAKH}}</span> </label>
     <span>{{candidate.professionalDetails.currentSalary}}</span>
 
   </div>
