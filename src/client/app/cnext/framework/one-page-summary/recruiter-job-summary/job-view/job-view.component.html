@@ -21,7 +21,7 @@
           <h4>Key Skills</h4>
         </div>
         <div class="pull-left col-xs-8 no-padding text-left">
-          <div class="pull-left" style="padding-top: 6px;padding-right: 7px; font-size: 12px;" *ngFor="let item of job.proficiencies;let i = index">
+          <div class="pull-left" style="padding-top: 6px;font-size: 12px;" *ngFor="let item of job.proficiencies;let i = index">
             <span>{{item}}</span>
             <span *ngIf="job.proficiencies.length>1 && i!=job.proficiencies.length -1">,&nbsp;</span>&nbsp;
           </div>
@@ -33,7 +33,7 @@
           <h4>Additional Key Skills</h4>
         </div>
         <div class="pull-left col-xs-8 no-padding text-left">
-          <div class="pull-left" style="padding-top: 6px;padding-right: 7px; font-size: 12px;" *ngFor="let item of job.additionalProficiencies;let i = index">
+          <div class="pull-left" style="padding-top: 6px;font-size: 12px;" *ngFor="let item of job.additionalProficiencies;let i = index">
             <span>{{item}}</span>
             <span *ngIf="job.additionalProficiencies.length>1 && i!=job.additionalProficiencies.length -1">,&nbsp;</span>&nbsp;
           </div>

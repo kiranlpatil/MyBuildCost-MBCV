@@ -113,7 +113,7 @@ header {
 .active-shortlist-icon {
   background: url(../../assets/c-next/card-view/sprite.png) no-repeat -87px -790px;
   @extend .star-icon;
-  visibility: hidden;
+  visibility: visible;
 }
 
 .shortlist-icon {

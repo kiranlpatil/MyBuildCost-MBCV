@@ -59,8 +59,9 @@
       </div>
       <div class="col-sm-9 padding-left15">
         <div class="option-list" *ngFor="let item of candidateExperiencedIndustry;let i = index">
-          <span class="option">{{item}}</span><span class="visible-xs"
-                                                    *ngIf="candidateExperiencedIndustry.length>1 && i!=candidateExperiencedIndustry.length -1">,&nbsp;</span>
+          <span class="option">{{item}}</span>
+          <!--<span class="visible-xs" *ngIf="candidateExperiencedIndustry.length>1 && i!=candidateExperiencedIndustry.length -1">,&nbsp;</span>-->
+          <span *ngIf="candidateExperiencedIndustry.length>1 && i!=candidateExperiencedIndustry.length -1">,&nbsp;</span>
         </div>
       </div>
     </div>

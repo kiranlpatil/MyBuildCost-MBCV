@@ -36,6 +36,7 @@ export class ActionOnQCardService {
 }
 
   getValueForCompareView() :Observable<any> {
+    this.addForCompareView.observers.splice(0, this.addForCompareView.observers.length);
     return this.addForCompareView.asObservable();
   }
 
@@ -44,6 +45,7 @@ export class ActionOnQCardService {
   }
 
   getAction(): Observable<any> {
+    this.action.observers.splice(0, this.action.observers.length);
     return this.action.asObservable();
   }
 
@@ -53,6 +55,7 @@ export class ActionOnQCardService {
   }
 
   getJobId() : Observable<any> {
+    this.jobId.observers.splice(0, this.jobId.observers.length);
     return this.jobId.asObservable();
   }
 
@@ -103,6 +106,7 @@ export class ActionOnQCardService {
   }
 
   getActionOnViewProfile(): Observable<any> {
+    this.actionOnViewProfile.observers.splice(0, this.actionOnViewProfile.observers.length);
     return this.actionOnViewProfile.asObservable();
   }
 
