@@ -166,11 +166,12 @@
     h4 {
       @extend %text-ellipsis;
       color: $highlight;
-      font-size: 16px;
+      font-family: 'gothamrnd-book';
+      font-size: 12px;
       font-weight: bold;
       margin: 0 0 5px;
       text-transform: capitalize;
-      width: calc(100% - 50px);
+      width: calc(100% - 0);
     }
 
     .contact-info {
@@ -181,7 +182,7 @@
       p {
         border: 0;
         color: $text-color4;
-        font-size: 13px;
+        font-size: 12px;
         margin-top: 0;
         padding-left: 5px;
       }
