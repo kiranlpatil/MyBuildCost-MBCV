@@ -271,7 +271,7 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
       this.highlightedSection.name = 'Proficiencies';
     }
     this.highlightedSection.isDisable = false;
-    //this.onComplete.emit();
+    this.onComplete.emit();
   }
 
   saveComplexity() {
