@@ -298,10 +298,11 @@ export function updateDetailOfUser(req: express.Request, res: express.Response, 
         userService.retrieve(_id, (error, resu) => {
           if (error) {
             next({
-              reason: Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
-              message: Messages.MSG_ERROR_WRONG_TOKEN,
+              reason: Messages.MSG_ERROR_RETRIEVING_USER,
+              message: Messages.MSG_ERROR_RETRIEVING_USER,
               stackTrace: new Error(),
-              code: 401
+              actualError:error,
+              code: 403
             });
           } else {
             let token = auth.issueTokenWithUid(resu[0]);

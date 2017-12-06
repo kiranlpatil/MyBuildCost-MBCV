@@ -102,8 +102,9 @@ export function updateDetails(req: express.Request, res: express.Response, next:
               if (error) {
                 next({
                   reason: Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
-                  message: Messages.MSG_ERROR_WRONG_TOKEN,
+                  message: Messages.MSG_ERROR_RETRIEVING_USER,
                   stackTrace: new Error(),
+                  actualError:error,
                   code: 400
                 });
               } else {
@@ -190,7 +191,8 @@ export function retrieve(req: express.Request, res: express.Response, next: any)
             reason: 'User Not Available',//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
             message: 'User is not available',//Messages.MSG_ERROR_WRONG_TOKEN,
             stackTrace: new Error(),
-            code: 401
+            actualError:error,
+            code: 400
           });
         }
         else {
@@ -200,8 +202,9 @@ export function retrieve(req: express.Request, res: express.Response, next: any)
                 reason: 'User Not Available',//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
                 message: 'User is not available',//Messages.MSG_ERROR_WRONG_TOKEN,
                 stackTrace: new Error(),
-                code: 401
-              })
+                actualError:error,
+                code: 400
+              });
             } else {
               candidateService.checkIsCarted(resu.userId, recruiterUserId, (err, isCarted) => {
                 if (err) {
@@ -226,19 +229,19 @@ export function retrieve(req: express.Request, res: express.Response, next: any)
       userService.findById(params, (error, result) => {
         if (error) {
           next({
-            reason: Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
-            message: Messages.MSG_ERROR_WRONG_TOKEN,
+            reason: Messages.MSG_ERROR_RETRIEVING_USER,
+            message: Messages.MSG_ERROR_RETRIEVING_USER,
             stackTrace: new Error(),
-            code: 401
+            actualError:error,
+            code: 400
           });
-        }
-        else {
+        } else {
           if (result.length <= 0) {
             next({
               reason: 'User Not Available',//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
               message: 'User is not available',//Messages.MSG_ERROR_WRONG_TOKEN,
               stackTrace: new Error(),
-              code: 401
+              code: 400
             });
           } else {
             candidateService.retrieve({'userId': new mongoose.Types.ObjectId(result._id)}, (error, resu) => {
@@ -247,7 +250,7 @@ export function retrieve(req: express.Request, res: express.Response, next: any)
                   reason: 'User Not Available',//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
                   message: 'User is not available',//Messages.MSG_ERROR_WRONG_TOKEN,
                   stackTrace: new Error(),
-                  code: 401
+                  code: 400
                 });
               }
               else {
@@ -321,7 +324,8 @@ export function metchResult(req: express.Request, res: express.Response, next: a
           reason: 'Problem in Search Matching Result',//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
           message: 'Problem in Search Matching Result',//Messages.MSG_ERROR_WRONG_TOKEN,
           stackTrace: new Error(),
-          code: 401
+          actualError:error,
+          code: 500
         });
       }
       else {
