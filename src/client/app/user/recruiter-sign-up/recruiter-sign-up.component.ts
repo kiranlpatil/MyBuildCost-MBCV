@@ -179,7 +179,7 @@ export class RecruiterSignUpComponent implements OnInit {
     this.model = this.recruiterForm.value;
 
         if( this.model.company_website===''||
-      (this.model.company_website!=='' && this.model.company_website.match('[a-zA-Z0-9_\\-]+\\.[a-zA-Z0-9_\\-]+\\.[a-zA-Z0-9_\\-]'))) {
+      (this.model.company_website!=='' && this.model.company_website.match('[a-zA-Z0-9_\\-]+\\.[a-zA-Z0-9_\\-]'))) {
       this.isCompanyWebsiteValid = true;
     }else {
       this.isCompanyWebsiteValid=false;
