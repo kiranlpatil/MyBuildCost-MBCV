@@ -1,7 +1,13 @@
-import {Component, DoCheck, HostListener, KeyValueDiffers, OnDestroy, OnInit} from "@angular/core";
+import {Component, DoCheck, HostListener, KeyValueDiffers, OnDestroy, OnInit, ViewChild} from "@angular/core";
 import {
-  Button, ImagePath, Label, LocalStorage, Messages, NavigationRoutes, Tooltip,
-  CandidateProfileUpdateTrack, SessionStorage
+  Button,
+  CandidateProfileUpdateTrack,
+  ImagePath,
+  Label,
+  LocalStorage,
+  Messages,
+  NavigationRoutes,
+  Tooltip
 } from "../../../shared/constants";
 import {Router} from "@angular/router";
 import {ComplexityService} from "../complexity.service";
@@ -15,6 +21,8 @@ import {ErrorService} from "../../../shared/services/error.service";
 import {LocalStorageService} from "../../../shared/services/localstorage.service";
 import {UserFeedback} from "../user-feedback/userFeedback";
 import {SessionStorageService} from "../../../shared/services/session.service";
+import {ProficienciesComponent} from "../proficiencies/proficiencies.component";
+import {AnalyticService} from "../../../shared/services/analytic.service";
 
 @Component({
   moduleId: module.id,
@@ -65,8 +73,9 @@ export class CandidateProfileComponent implements OnInit, DoCheck, OnDestroy {
   differ: any;
   public navIsFixed: boolean = false;
   public isOthers: boolean;
+  @ViewChild(ProficienciesComponent) proficiencyClassObject: ProficienciesComponent;
 
-  constructor(private _router: Router,
+  constructor(private analyticService: AnalyticService, private _router: Router,
               private complexityService: ComplexityService,
               private differs: KeyValueDiffers,
               private messageService: MessageService,
@@ -81,7 +90,9 @@ export class CandidateProfileComponent implements OnInit, DoCheck, OnDestroy {
     );
     this.getCandidateProfile();
     this.differ = differs.find({}).create(null);
-
+    if (!this.candidate.isCompleted) {
+      this.analyticService.googleAnalyse(this._router);
+    }
   }
 
   @HostListener('window:scroll', []) onWindowScroll() {
@@ -501,6 +512,10 @@ export class CandidateProfileComponent implements OnInit, DoCheck, OnDestroy {
 
   isContains(element: any) {
     return this.candidate.capability_matrix[element] === -1;
+  }
+
+  showProficiencyGuidedTour() {
+    this.proficiencyClassObject.showGuidedTour();
   }
 
   dateDifferenceInDays(currentDate: Date, storedDate: Date) {

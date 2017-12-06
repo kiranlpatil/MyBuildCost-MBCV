@@ -7,7 +7,7 @@ export function login(req: any, res: any, next: any) {
       reason: Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
       message: Messages.MSG_ERROR_WRONG_PASSWORD,
       stackTrace: new Error(),
-      code: 401
+      code: 400
     });
   }
   else if ((req.body.email === "") || (req.body.password === "")) {
@@ -15,7 +15,7 @@ export function login(req: any, res: any, next: any) {
       reason: Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
       message: Messages.MSG_ERROR_WRONG_PASSWORD,
       stackTrace: new Error(),
-      code: 401
+      code: 400
     });
   }
   next();
@@ -28,7 +28,7 @@ export function create(req: any, res: any, next: any) {
       reason: Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
       message: Messages.MSG_ERROR_FIELD_VERIFICATION,
       stackTrace: new Error(),
-      code: 401
+      code: 400
     });
   }
   else if ((req.body.first_name === "") || (req.body.email === "") ||
@@ -47,7 +47,7 @@ export function createRecruiter(req: any, res: any, next: any) {
       reason: Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
       message: Messages.MSG_ERROR_FIELD_VERIFICATION,
       stackTrace: new Error(),
-      code: 401
+      code: 400
     });
   }
   else if ((req.body.company_name === "") || (req.body.company_size === "") || (req.body.email === "") ||
@@ -65,7 +65,7 @@ export function changePassword(req: any, res: any, next: any) {
       reason: Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
       message: Messages.MSG_ERROR_FIELD_VERIFICATION,
       stackTrace: new Error(),
-      code: 401
+      code: 400
     });
   }
   else if ((req.body.current_password === "") || (req.body.new_password === "")) {
@@ -73,7 +73,7 @@ export function changePassword(req: any, res: any, next: any) {
       reason: Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
       message: Messages.MSG_ERROR_EMPTY_FIELD,
       stackTrace: new Error(),
-      code: 401
+      code: 400
     });
   }
   next();
@@ -90,7 +90,7 @@ export function forgotPassword(req: any, res: any, next: any) {
       reason: Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
       message: Messages.MSG_ERROR_FIELD_VERIFICATION,
       stackTrace: new Error(),
-      code: 401
+      code: 400
     });
   }
   else if ((req.body.email === "")) {
@@ -98,7 +98,7 @@ export function forgotPassword(req: any, res: any, next: any) {
       reason: Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
       message: Messages.MSG_ERROR_EMPTY_FIELD,
       stackTrace: new Error(),
-      code: 401
+      code: 400
     });
   }
   next();
@@ -113,7 +113,7 @@ export function mail(req: any, res: any, next: any) {
       reason: Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
       message: Messages.MSG_ERROR_FIELD_VERIFICATION,
       stackTrace: new Error(),
-      code: 401
+      code: 400
     });
   }
   next();
@@ -125,7 +125,7 @@ export function update(req: any, res: any, next: any) {
       reason: Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
       message: Messages.MSG_ERROR_FIELD_VERIFICATION,
       stackTrace: new Error(),
-      code: 401
+      code: 400
     });
   }
   next();
@@ -138,7 +138,7 @@ export function validateRegistrationStatus(req: any, res: any, next: any) {
       reason: Messages.MSG_ERROR_PROVIDE_MOBILE_NO,
       message: Messages.MSG_ERROR_FIELD_VERIFICATION,
       stackTrace: new Error(),
-      code: 401
+      code: 400
     });
   }
   next();

@@ -474,6 +474,7 @@
     padding: 4px 0;
     position: fixed;
     top: 8px;
+    width: 78.4%;
     z-index: 1000;
 
     li {
@@ -774,7 +775,7 @@
     width: 100%;
     .capability-label-name {
       font-size: 14px;
-      color: $theme-color;
+      color: $black-theme-color;
       font-family: 'gothamrnd-book';
       font-weight: 600;
     }

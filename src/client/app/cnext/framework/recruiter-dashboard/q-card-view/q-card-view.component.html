@@ -72,12 +72,15 @@
                 <b *ngFor="let proficiency of item.proficiencies;let i=index">
                   {{proficiency}}<b *ngIf="i>=0 && i<4 &&  item.proficiencies.length-1 != i ">,&nbsp;</b>
                 </b>
+                <span *ngIf="item.proficiencies.length == 0">
+                    {{getLabel().NONE}}
+                </span>
               </div>
-              <span class="tooltip-content-new">
+              <span class="tooltip-content-new" *ngIf="item.proficiencies.length !== 0">
                <span *ngFor="let proficiency of item.proficiencies;let i=index">
                   {{proficiency}}
-               <span *ngIf="i>=0 && i<4 &&  item.proficiencies.length-1 != i ">,&nbsp;</span>
-              </span>
+                <span *ngIf="i>=0 && i<4 &&  item.proficiencies.length-1 != i ">,&nbsp;</span>
+               </span>
               </span>
             </div>
             <div class="icons-section">

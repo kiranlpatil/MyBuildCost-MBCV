@@ -11,6 +11,7 @@ import {DateService} from "../../cnext/framework/date.service";
 import {SharedService} from "../../shared/services/shared-service";
 import {ErrorService} from "../../shared/services/error.service";
 import {SessionStorageService} from "../../shared/services/session.service";
+import {AnalyticService} from "../../shared/services/analytic.service";
 declare  var fbq:any;
 declare  var gtag:any;
 
@@ -45,9 +46,9 @@ export class CandidateSignUpComponent implements OnInit, AfterViewInit {
   isGuideMessageVisible: boolean = false;
   isFromCareerPlugin: boolean = false;
 
-  constructor(private commonService: CommonService, private _router: Router, private dateService: DateService,
+  constructor(private analyticService: AnalyticService, private commonService: CommonService, private _router: Router, private dateService: DateService,
               private candidateService: CandidateSignUpService, private messageService: MessageService, private formBuilder: FormBuilder,
-              private sharedService: SharedService,private errorService: ErrorService, private activatedRoute: ActivatedRoute) {
+              private sharedService: SharedService, private errorService: ErrorService, private activatedRoute: ActivatedRoute) {
 
     this.userForm = this.formBuilder.group({
       'first_name': ['', [ValidationService.requireFirstNameValidator]],
@@ -60,7 +61,7 @@ export class CandidateSignUpComponent implements OnInit, AfterViewInit {
       'accept_terms': ['', [Validators.required]],
     });
 
-
+    this.analyticService.googleAnalyse(this._router);
     this.BODY_BACKGROUND = ImagePath.BODY_BACKGROUND;
     this.currentDate = new Date();
     this.year = this.currentDate.getUTCFullYear() - 18;

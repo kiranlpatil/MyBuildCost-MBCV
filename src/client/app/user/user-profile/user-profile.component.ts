@@ -173,7 +173,7 @@ export class UserProfileComponent implements OnInit {
     }else if(this.recruiterForm.valid) {
       this.model = this.recruiterForm.value;
      if( (this.model.company_website===undefined || this.model.company_website==='')|| (this.model.company_website !=='' &&
-         this.model.company_website.match('[a-zA-Z0-9_\\-]+\\.[a-zA-Z0-9_\\-]+\\.[a-zA-Z0-9_\\-]'))) {
+         this.model.company_website.match('[a-zA-Z0-9_\\-]+\\.[a-zA-Z0-9_\\-]'))) {
        this.isCompanyWebsiteValid=true;
       this.dashboardService.changeRecruiterAccountDetails(this.model)
         .subscribe(
