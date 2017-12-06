@@ -21,6 +21,7 @@ export class CapabilitiesComponent {
   @Input() roles: Role[] = new Array(0);
     @Input() candidateRoles: Role[] = [];
   @Output() onComplete = new EventEmitter();
+  @Output() emitOnNext = new EventEmitter();
   @Input() highlightedSection: Section;
   @Input() callFrom: string;
   candidateCapabilityMessage:string = Headings.CAPABILITIES_FOR_CANDIDATE;
@@ -130,8 +131,6 @@ export class CapabilitiesComponent {
         }
         selectedCapability.isPrimary = true;
         this.primaryNames.push(selectedCapability.name);
-       // this.isCapabilityAnswered = true;
-       // this.complexityAnsweredService.change(true);
         this.saveOnSelect();
 
       } else {
@@ -141,7 +140,6 @@ export class CapabilitiesComponent {
         this.validationMessage = Messages.MSG_ERROR_VALIDATION_MAX_CAPABILITIES_CROSSED;
         /*this.secondaryNames.push(selectedCapability.name);
         selectedCapability.isSecondary = true;*/
-       // this.isCapabilityAnswered = true;
       }
     } else {
       if (selectedCapability.isPrimary) {
@@ -153,13 +151,10 @@ export class CapabilitiesComponent {
         }
         this.primaryNames.splice(this.primaryNames.indexOf(selectedCapability.code), 1);
         selectedCapability.isPrimary = false;
-        //this.complexityAnsweredService.change(true);
-       // this.isCapabilityAnswered = true;
         this.saveOnSelect();
       } else if (selectedCapability.isSecondary) {
         /*this.secondaryNames.splice(this.secondaryNames.indexOf(selectedCapability.name), 1);
         selectedCapability.isSecondary = false;*/
-       // this.isCapabilityAnswered = false;
       }
     }
   }
@@ -209,6 +204,7 @@ export class CapabilitiesComponent {
     this.onComplete.emit(newselectedRoles);*/
     //this.complexityAnsweredService.change(true);
     //  this.isCapabilityAnswered = true;
+      this.emitOnNext.emit(true);
       window.scrollTo(0, 0);
   }
 
@@ -314,16 +310,10 @@ export class CapabilitiesComponent {
       let tempRole =Object.assign({}, role);
       newselectedRoles.push(tempRole);
       tempRole.capabilities= tempRole.capabilities.filter((cap : Capability)=> {
-       // this.isCapabilityAnswered = true;
         return cap.isPrimary;
       });
     }
     this.onComplete.emit(newselectedRoles);
-   // this.complexityAnsweredService.change(true);
-   // this.isCapabilityAnswered = true;
-    /*if(this.callFrom === 'capability') {
-      this.isCapabilityAnswered = !this.isCapabilityAnswered;
-    }*/
   }
 
   navigateToWithId(nav:string) {

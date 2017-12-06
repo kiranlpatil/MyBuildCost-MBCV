@@ -99,9 +99,7 @@
         <div class="mini-value-portrait-section" *ngIf="highlightedSection.name=='Complexities'">
           <h3 [innerHTML]="getMessage().CLICK_BELOW_FOR_PREVIEW_MSG"></h3>
           <cn-value-portrait (click)="navigateToWithId('/value-portrait');" [isShareView]="false"
-                             [isMiniView]="true" [userId]="userId" *ngIf="isCandidate"
-                             [isCapabilityAnswered]="false"
-                             [isComplexityAnswered]="isComplexityAnswered"></cn-value-portrait>
+                             [isMiniView]="true" [userId]="userId" *ngIf="isCandidate"></cn-value-portrait>
         </div>
         <cn-tool-tip id="candidate-tooltip" [message]="tooltipCandidateMessage" *ngIf="isCandidate"></cn-tool-tip>
       </div>

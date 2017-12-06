@@ -15,6 +15,7 @@ import {ErrorService} from "../../../shared/services/error.service";
 import {LocalStorageService} from "../../../shared/services/localstorage.service";
 import {UserFeedback} from "../user-feedback/userFeedback";
 import {SessionStorageService} from "../../../shared/services/session.service";
+import {ComplexityAnsweredService} from "../complexity-answered.service";
 
 @Component({
   moduleId: module.id,
@@ -72,7 +73,8 @@ export class CandidateProfileComponent implements OnInit, DoCheck, OnDestroy {
               private differs: KeyValueDiffers,
               private messageService: MessageService,
               private errorService: ErrorService,
-              private profileCreatorService: CandidateProfileService) {
+              private profileCreatorService: CandidateProfileService,
+              private complexityAnsweredService: ComplexityAnsweredService) {
 
     complexityService.showTest$.subscribe(
       data => {
@@ -223,6 +225,7 @@ export class CandidateProfileComponent implements OnInit, DoCheck, OnDestroy {
     }
     this.candidate.proficiencies = proficiency;
     this.highlightedSection.isProficiencyFilled = true;
+    this.callFrom = 'default';
     this.saveCandidateDetails('proficiency');
     this.whichStepsVisible[4] = true;
   }
@@ -337,7 +340,7 @@ export class CandidateProfileComponent implements OnInit, DoCheck, OnDestroy {
         .subscribe(
           rolelist => {
             this.rolesForComplexity = rolelist.data;
-            this.getCandidateForComplexity();
+            //this.getCandidateForComplexity();
           },error => this.errorService.onError(error));
     }
   }
@@ -539,7 +542,8 @@ export class CandidateProfileComponent implements OnInit, DoCheck, OnDestroy {
   }
 
   onSaveCandidateDetails(section?: string) {
-   if(section) {
+   if(section != undefined || section!='default') {
+     this.complexityAnsweredService.change(true);
     this.callFrom = section;
    }
   }
@@ -594,4 +598,9 @@ export class CandidateProfileComponent implements OnInit, DoCheck, OnDestroy {
   getButton() {
     return Button;
   }
+
+  afterEmit(data: any) {
+  this.getCandidateForComplexity();
+  }
+
 }

@@ -22,8 +22,6 @@ export class ValuePortraitComponent implements OnInit, OnChanges {
   candidate: Candidate = new Candidate();
   @Input() userId: string;
   @Input() isShareView: boolean;
-  @Input() isCapabilityAnswered: boolean;
-  @Input() isComplexityAnswered: boolean;
   @Input() isMiniView: boolean;
   @Output() candidateId: EventEmitter<string> = new EventEmitter<string>();
   gotItMessage: string = Headings.GOT_IT;
@@ -60,30 +58,33 @@ export class ValuePortraitComponent implements OnInit, OnChanges {
     if (this.isCandidate) {
       this.isRequireGuidedTourImg();
     }
-    /*if (this.isMiniView) {
+    if (this.isMiniView) {
       this.complexityAnsweredService.makeCall()
         .subscribe(isAnswered => {
           this.isAnswered = isAnswered;
           this.getCandidateAllDetails();
         });
-    }*/
+    }
     this.getCandidateAllDetails();
     console.log('is miniVIew = ', this.isMiniView);
   }
 
   ngOnChanges(changes: any) {
+    /*if(changes.callFrom && changes.callFrom.currentValue) {
+      this.callFrom = changes.callFrom.currentValue;
+    }
     if (changes.isCapabilityAnswered!== undefined
       && changes.isCapabilityAnswered.currentValue !== undefined) {
-      if (this.isMiniView) {
-        this.getCandidateAllDetails();
+        if (this.isMiniView && this.callFrom === 'capability') {
+          this.getCandidateAllDetails();
       }
     }
     if (changes.isComplexityAnswered!== undefined
       && changes.isComplexityAnswered.currentValue !== undefined) {
-      if (this.isMiniView) {
+      if (this.isMiniView && this.callFrom === 'complexity') {
         this.getCandidateAllDetails();
       }
-    }
+    }*/
   }
 
   getCandidateAllDetails() {

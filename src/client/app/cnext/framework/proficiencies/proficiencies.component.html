@@ -59,8 +59,6 @@
           <h3 [innerHTML]="getMessage().CLICK_BELOW_FOR_PREVIEW_MSG"></h3>
           <cn-value-portrait (click)="navigateToWithId('/value-portrait');"
                              [isShareView]="false" [isMiniView]="true"
-                             [isCapabilityAnswered]="false"
-                             [isComplexityAnswered]="false"
                              [userId]="userId" *ngIf="isCandidate"></cn-value-portrait>
         </div>
         <cn-tool-tip id="candidate-tooltip" [message]="tooltipMessage"></cn-tool-tip>

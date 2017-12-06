@@ -33,7 +33,7 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
   @Output() onComplextyAnswered = new EventEmitter();
   @Input() highlightedSection: Section;
   @Input() isComplexityPresent: boolean = true;
-  @Input() callFrom: string;
+  //@Input() callFrom: string;
 
   gotItMessage: string= Headings.GOT_IT;
   capabilitiesHeading: string= Headings.CAPABITITIES_HEADING;
@@ -79,7 +79,7 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
   currentFeedbackQuestion: number;
   @Output() popUpFeedBackAnswer: EventEmitter<UserFeedback> = new EventEmitter<UserFeedback>();
   feedbackQuestions: string[] = new Array(0);
-  isComplexityAnswered: boolean = false;
+  //isComplexityAnswered: boolean = false;
 
   constructor(private complexityService: ComplexityService,
               private complexityComponentService: ComplexityComponentService,
@@ -139,12 +139,12 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
       }
     }
 
-    if(changes.callFrom && changes.callFrom.currentValue) {
+    /*if(changes.callFrom && changes.callFrom.currentValue) {
       this.callFrom = changes.callFrom.currentValue;
       if(this.callFrom == 'complexity') {
         this.isComplexityAnswered = !this.isComplexityAnswered;
       }
-    }
+    }*/
   }
 
 
@@ -271,7 +271,7 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
       this.highlightedSection.name = 'Proficiencies';
     }
     this.highlightedSection.isDisable = false;
-    this.onComplete.emit();
+    //this.onComplete.emit();
   }
 
   saveComplexity() {
@@ -281,10 +281,6 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
   onAnswered(complexityDetail: ComplexityDetails) {
     this.isValid = true;
     this.complexities[this.complexityIds[this.currentComplexity]] = complexityDetail.userChoice;
-    /*if (this.duplicateComplexityIds.indexOf("d" + this.complexityIds[this.currentComplexity]) > -1) {
-      let tempIndex = "d" + this.complexityIds[this.currentComplexity];
-      this.complexities[tempIndex] = complexityDetail.userChoice;
-     }*/
     if(this.isCandidate && complexityDetail.complexityNote !== undefined) {
       this.complexityNotes[this.complexityIds[this.currentComplexity]] = complexityDetail.complexityNote.substring(0,2000);
     }

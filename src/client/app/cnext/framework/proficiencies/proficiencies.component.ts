@@ -74,7 +74,6 @@ export class ProficienciesComponent {
 
   onProficiencyComplete(proficiency: string[]) {
     this.onSelect.emit(proficiency);
-    this.complexityAnsweredService.change(true);
   }
 
   isGuidedTourImgRequire() {
@@ -98,7 +97,6 @@ export class ProficienciesComponent {
 
   onNext() {
     this.onComplete.emit();
-    this.complexityAnsweredService.change(true);
     this.highlightedSection.name = 'IndustryExposure';
     this.highlightedSection.isDisable = false;
     window.scrollTo(0, 0);

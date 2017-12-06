@@ -40,8 +40,6 @@
       <div class="mini-value-portrait-section" *ngIf="isCandidate">
         <h3 [innerHTML]="getMessage().CLICK_BELOW_FOR_PREVIEW_MSG"></h3>
         <cn-value-portrait (click)="navigateToWithId('/value-portrait');"
-                           [isCapabilityAnswered]="false"
-                           [isComplexityAnswered]="false"
                            [isShareView]="false" [isMiniView]="true"
                            [userId]="userId" *ngIf="isCandidate"></cn-value-portrait>
       </div>
