@@ -57,7 +57,7 @@ export class ActivateUserComponent implements OnInit {
         res => (this.newRegistrationSuccess(res)),
         error => (this.newRegistrationFail(error)));
   }
-  /*activateUser(user:any) { debugger
+  /*activateUser(user:any) {
     this.activeService.activeUser()
       .subscribe(
         res => (this.newRegistrationSuccess(res)),

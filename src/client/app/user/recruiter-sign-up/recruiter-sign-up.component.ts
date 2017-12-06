@@ -169,7 +169,7 @@ export class RecruiterSignUpComponent implements OnInit {
   onCompanyWebsiteType() {
     this.isCompanyWebsiteValid=true;
   }
-  onSubmit() {debugger
+  onSubmit() {
     this.isLocationInvalid = false;
     this.isLocationEmpty = false;
     this.isCompanyHQInvalid = false;

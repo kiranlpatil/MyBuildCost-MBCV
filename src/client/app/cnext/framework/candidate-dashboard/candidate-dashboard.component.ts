@@ -277,7 +277,7 @@ export class CandidateDashboardComponent implements OnInit {
     return Messages;
   }
 
-  changeFilter(obj: QCardFilter) {debugger
+  changeFilter(obj: QCardFilter) {
     this.appliedFilters = obj;
     if (EList.JOB_APPLIED === this.listName) {
       this.appliedFilters.listName = EList.JOB_APPLIED;

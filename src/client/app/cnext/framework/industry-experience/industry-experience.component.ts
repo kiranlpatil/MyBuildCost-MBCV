@@ -108,7 +108,7 @@ export class IndustryExperienceListComponent implements OnInit,OnChanges {
     this.onComplete.emit(this.selectedIndustries);
   }
 
-  onNext() { debugger
+  onNext() {
     if(this.selectedIndustries.length==0) {
       this.submitStatus = true;
       return;

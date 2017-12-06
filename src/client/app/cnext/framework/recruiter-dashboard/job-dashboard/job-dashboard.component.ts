@@ -99,9 +99,9 @@ export class JobDashboardComponent implements OnInit, OnChanges {
     this.jobDashboardService.getPostedJobDetails(this.jobId)
       .subscribe(
         (data: any) => {
-          this.isRecruitingForSelf = true; // todo remove this hardcode //data.data.industry.isRecruitingForself;
+          this.isRecruitingForSelf = data.result.recruiterId.isRecruitingForself;
           this.selectedJobProfile = data.result;
-          this.recruiterId = data.result.recruiterId;
+          this.recruiterId = data.result.recruiterId._id;
           this.getMatchingProfiles();
           this.renewJobPostService.checkJobPostExpiryDate(this.selectedJobProfile);
           for (let item of this.selectedJobProfile.candidate_list) {

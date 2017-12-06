@@ -129,7 +129,7 @@ export class UserProfileComponent implements OnInit {
   getRecruiter() {
     this.recruiterDashboardService.getRecruiterDetails()
       .subscribe(
-        recruiterData => { debugger
+        recruiterData => {
            this.company_website=recruiterData.data.company_website;
             this.company_name=recruiterData.data.company_name;
             this.model.email = recruiterData.metadata.email;

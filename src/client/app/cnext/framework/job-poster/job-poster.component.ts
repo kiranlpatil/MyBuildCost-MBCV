@@ -203,7 +203,7 @@ export class JobPosterComponent implements OnInit, OnChanges {
     this.jobPosterModel.postingDate = new Date();
     this.jobPosterModel.expiringDate = new Date((new Date().getTime() + ValueConstant.JOB__EXPIRIY_PERIOD * 6));
     this.jobPostService.postJob(this.jobPosterModel).subscribe(
-      response => {debugger
+      response => {
         this.onSuccess(response.data);
       }, error => this.errorService.onError(error));
   }
@@ -230,7 +230,7 @@ export class JobPosterComponent implements OnInit, OnChanges {
       }, error => this.errorService.onError(error));
   }
 
-  onSuccess(jobModel: JobPosterModel) {debugger
+  onSuccess(jobModel: JobPosterModel) {
     if (jobModel._id !== undefined) {
       if(jobModel.isJobShared) {
         this.jobshareContainerService.updateUrl(jobModel.sharedLink.split('/')[4]).subscribe(
