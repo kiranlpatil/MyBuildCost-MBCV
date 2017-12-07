@@ -44,6 +44,12 @@ header {
   .modal-header {
     left: 0;
   }
+  .capability-complexity {
+    .legends {
+      top: 16px;
+      width: auto !important;
+    }
+  }
 }
 
 .details {
