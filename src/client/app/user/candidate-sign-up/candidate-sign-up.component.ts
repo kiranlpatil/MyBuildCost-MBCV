@@ -60,7 +60,7 @@ export class CandidateSignUpComponent implements OnInit, AfterViewInit {
       'birth_year': ['', [ValidationService.birthYearValidator]],
       'accept_terms': ['', [Validators.required]],
     });
-
+    fbq('track', 'PageView');
     this.analyticService.googleAnalyse(this._router);
     this.BODY_BACKGROUND = ImagePath.BODY_BACKGROUND;
     this.currentDate = new Date();

@@ -24,6 +24,7 @@ import {SessionStorageService} from "../../../shared/services/session.service";
 import {ProficienciesComponent} from "../proficiencies/proficiencies.component";
 import {AnalyticService} from "../../../shared/services/analytic.service";
 import {ComplexityAnsweredService} from "../complexity-answered.service";
+declare var fbq: any;
 
 @Component({
   moduleId: module.id,
@@ -76,7 +77,7 @@ export class CandidateProfileComponent implements OnInit, DoCheck, OnDestroy {
   public isOthers: boolean;
   @ViewChild(ProficienciesComponent) proficiencyClassObject: ProficienciesComponent;
   callFrom: string;
-  
+
   constructor(private analyticService: AnalyticService, private _router: Router,
               private complexityService: ComplexityService,
               private differs: KeyValueDiffers,
@@ -94,6 +95,7 @@ export class CandidateProfileComponent implements OnInit, DoCheck, OnDestroy {
     this.getCandidateProfile();
     this.differ = differs.find({}).create(null);
     if (!this.candidate.isCompleted) {
+      fbq('track', 'PageView');
       this.analyticService.googleAnalyse(this._router);
     }
   }
