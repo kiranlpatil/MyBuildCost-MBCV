@@ -2170,6 +2170,15 @@ img[alt] {
   }
 }
 
+.recruiter-modal {
+  .capability-complexity {
+    .legends {
+      top: 16px !important;
+      width: auto !important;
+    }
+  }
+}
+
 @media only screen and (max-width: 767px) {
   .add-complexity-notes {
     textarea {

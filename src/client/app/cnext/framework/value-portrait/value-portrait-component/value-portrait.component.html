@@ -163,7 +163,7 @@
     <cn-share></cn-share>
   </div>
 
-  <div class="action-button" *ngIf="!isCandidate">
+  <div class="action-button" *ngIf="!isShareView && !isCandidate">
       <cn-recruiter-action [candidate]="candidate" [jobId]="jobId" [type]="type" [isOverlayView]="false" [isValuePortraitView]="true"></cn-recruiter-action>
   </div>
   <div class="value-portrait-footer">

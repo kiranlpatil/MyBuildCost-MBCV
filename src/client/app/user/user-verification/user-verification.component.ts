@@ -8,6 +8,7 @@ import {UserVerificationService} from "./user-verification.service";
 import {LocalStorageService} from "../../shared/services/localstorage.service";
 import {Message} from "../../shared/models/message";
 import {MessageService} from "../../shared/services/message.service";
+import {AnalyticService} from "../../shared/services/analytic.service";
 
 @Component({
   moduleId: module.id,
@@ -37,14 +38,14 @@ export class UserVerificationComponent implements OnInit {
   isShowLoader: boolean = false;
 
 
-  constructor(private _router: Router, private formBuilder: FormBuilder,
+  constructor(private analyticService: AnalyticService, private _router: Router, private formBuilder: FormBuilder,
               private verifyUserService: UserVerificationService, private messageService: MessageService) {
 
     this.userForm = this.formBuilder.group({
       'mobile_number': ['', [ValidationService.requireMobileNumberValidator, ValidationService.mobileNumberValidator]],
       'email': ['', [ValidationService.requireEmailValidator, ValidationService.emailValidator]]
     });
-
+    this.analyticService.googleAnalyse(this._router);
     this.MY_LOGO_PATH = ImagePath.MY_WHITE_LOGO;
     this.MY_TAG_LINE = ProjectAsset.TAG_LINE;
     this.UNDER_LICENCE = ProjectAsset.UNDER_LICENECE;

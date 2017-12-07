@@ -106,12 +106,11 @@ export function postJob(req: express.Request, res: express.Response, next: any) 
                 actualError: err,
                 code: 500
               });
-            } else {
-              res.status(200).send({
-                'status': Messages.STATUS_SUCCESS,
-                'data': result
-              });
             }
+          });
+          res.status(200).send({
+            'status': Messages.STATUS_SUCCESS,
+            'data': result
           });
         }
       });
@@ -135,12 +134,11 @@ export function postJob(req: express.Request, res: express.Response, next: any) 
                 actualError: err,
                 code: 500
               });
-            } else {
-              res.status(200).send({
-                'status': Messages.STATUS_SUCCESS,
-                'data': result
-              });
             }
+          });
+          res.status(200).send({
+            'status': Messages.STATUS_SUCCESS,
+            'data': result
           });
         }
       });

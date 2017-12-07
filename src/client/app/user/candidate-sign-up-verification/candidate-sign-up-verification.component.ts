@@ -1,9 +1,11 @@
-import { Component } from '@angular/core';
-import { LocalStorage, Messages } from '../../shared/constants';
-import { RegistrationService } from '../services/registration.service';
-import { Login } from '../models/login';
-import { LocalStorageService  } from '../../shared/services/localstorage.service';
-import { LoginService } from '../login/login.service';
+import {Component} from "@angular/core";
+import {LocalStorage, Messages} from "../../shared/constants";
+import {RegistrationService} from "../services/registration.service";
+import {Login} from "../models/login";
+import {LocalStorageService} from "../../shared/services/localstorage.service";
+import {LoginService} from "../login/login.service";
+import {AnalyticService} from "../../shared/services/analytic.service";
+import {Router} from "@angular/router";
 
 @Component({
   moduleId: module.id,
@@ -19,13 +21,15 @@ export class CandidateSignUpVerificationComponent {
   private showModalStyle: boolean = false;
   userID:string;
   mobileNumber:any;
-  constructor( private registrationService:RegistrationService, private loginService: LoginService,) {
+
+  constructor(private _router: Router, private analyticService: AnalyticService, private registrationService: RegistrationService, private loginService: LoginService,) {
     this.signUpVerificationMessage = this.getMessages().MSG_MOBILE_VERIFICATION_MESSAGE;
     this.signUpVerificationHeading = this.getMessages().MSG_MOBILE_VERIFICATION_TITLE;
     this.actionName = this.getMessages().FROM_REGISTRATION;
     this.loginModel = new Login();
     this.userID=LocalStorageService.getLocalValue(LocalStorage.USER_ID);
     this.mobileNumber=LocalStorageService.getLocalValue(LocalStorage.MOBILE_NUMBER);
+    this.analyticService.googleAnalyse(this._router);
   }
   navigateToDashboard() {
     this.loginModel.email = LocalStorageService.getLocalValue(LocalStorage.EMAIL_ID);

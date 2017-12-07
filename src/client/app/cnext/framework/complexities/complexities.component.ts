@@ -31,6 +31,7 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
   @Output() onComplete = new EventEmitter();
   @Output() onMustHave = new EventEmitter();
   @Output() onComplextyAnswered = new EventEmitter();
+  @Output() proficiencyGuidedTour = new EventEmitter();
   @Input() highlightedSection: Section;
   @Input() isComplexityPresent: boolean = true;
   //@Input() callFrom: string;
@@ -269,6 +270,7 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
       this.highlightedSection.name = 'none';
     } else {
       this.highlightedSection.name = 'Proficiencies';
+      this.proficiencyGuidedTour.emit();
     }
     this.highlightedSection.isDisable = false;
     this.onComplete.emit();

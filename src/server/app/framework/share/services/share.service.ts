@@ -62,8 +62,8 @@ class ShareService {
               callback(err, null);
               return;
             }
-            callback(null, this.shareDetails);
           });
+        callback(null, this.shareDetails);
       }
     });
   }

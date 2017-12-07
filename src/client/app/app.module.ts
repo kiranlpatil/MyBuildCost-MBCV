@@ -168,6 +168,7 @@ import {AdminModule} from "./admin/admin.module";
 import {RecruiterAction} from "./cnext/framework/recruiter-action/recruiter-action.component";
 import {ActionOnQCardService} from "./user/services/action-on-q-card.service";
 import {ActionOnMyJobPostComponent} from "./cnext/framework/recruiter-dashboard/action-on-my-job-post/action-on-my-job-post.component";
+import {AnalyticService} from "./shared/services/analytic.service";
 
 //C-NEXT IMPORTS
 
@@ -360,7 +361,8 @@ import {ActionOnMyJobPostComponent} from "./cnext/framework/recruiter-dashboard/
     JobCloseComponentService,
     ComplexityAnsweredService,
     UserFeedbackComponentService,
-    ActionOnQCardService
+    ActionOnQCardService,
+    AnalyticService
   ],
   bootstrap: [AppComponent]
 })

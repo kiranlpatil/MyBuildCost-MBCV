@@ -285,12 +285,11 @@ export function cloneJob(req: express.Request, res: express.Response, next: any)
                   actualError: err,
                   code: 500
                 });
-              } else {
-                res.status(200).send({
-                  'status': Messages.STATUS_SUCCESS,
-                  'data': job._id
-                });
               }
+            });
+            res.status(200).send({
+              'status': Messages.STATUS_SUCCESS,
+              'data': job._id
             });
           }
         });
