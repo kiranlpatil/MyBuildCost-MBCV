@@ -1,4 +1,4 @@
-import {Component, Input, Output, OnInit, EventEmitter} from "@angular/core";
+import {Component, Input, Output, OnInit, EventEmitter, OnChanges} from "@angular/core";
 import {CandidateProfileService} from "../../candidate-profile/candidate-profile.service";
 import {Candidate} from "../../../../user/models/candidate";
 import {ErrorService} from "../../../../shared/services/error.service";
@@ -17,7 +17,7 @@ import {ActionOnQCardService} from "../../../../user/services/action-on-q-card.s
   styleUrls: ['value-portrait.component.css']
 })
 
-export class ValuePortraitComponent implements OnInit {
+export class ValuePortraitComponent implements OnInit, OnChanges {
 
   candidate: Candidate = new Candidate();
   @Input() userId: string;
@@ -58,7 +58,6 @@ export class ValuePortraitComponent implements OnInit {
     if (this.isCandidate) {
       this.isRequireGuidedTourImg();
     }
-    // this.getCandidateAllDetails();
     if (this.isMiniView) {
       this.complexityAnsweredService.makeCall()
         .subscribe(isAnswered => {
@@ -68,6 +67,24 @@ export class ValuePortraitComponent implements OnInit {
     }
     this.getCandidateAllDetails();
     console.log('is miniVIew = ', this.isMiniView);
+  }
+
+  ngOnChanges(changes: any) {
+    /*if(changes.callFrom && changes.callFrom.currentValue) {
+      this.callFrom = changes.callFrom.currentValue;
+    }
+    if (changes.isCapabilityAnswered!== undefined
+      && changes.isCapabilityAnswered.currentValue !== undefined) {
+        if (this.isMiniView && this.callFrom === 'capability') {
+          this.getCandidateAllDetails();
+      }
+    }
+    if (changes.isComplexityAnswered!== undefined
+      && changes.isComplexityAnswered.currentValue !== undefined) {
+      if (this.isMiniView && this.callFrom === 'complexity') {
+        this.getCandidateAllDetails();
+      }
+    }*/
   }
 
   getCandidateAllDetails() {

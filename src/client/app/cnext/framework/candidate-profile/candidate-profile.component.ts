@@ -23,6 +23,7 @@ import {UserFeedback} from "../user-feedback/userFeedback";
 import {SessionStorageService} from "../../../shared/services/session.service";
 import {ProficienciesComponent} from "../proficiencies/proficiencies.component";
 import {AnalyticService} from "../../../shared/services/analytic.service";
+import {ComplexityAnsweredService} from "../complexity-answered.service";
 
 @Component({
   moduleId: module.id,
@@ -74,13 +75,15 @@ export class CandidateProfileComponent implements OnInit, DoCheck, OnDestroy {
   public navIsFixed: boolean = false;
   public isOthers: boolean;
   @ViewChild(ProficienciesComponent) proficiencyClassObject: ProficienciesComponent;
-
+  callFrom: string;
+  
   constructor(private analyticService: AnalyticService, private _router: Router,
               private complexityService: ComplexityService,
               private differs: KeyValueDiffers,
               private messageService: MessageService,
               private errorService: ErrorService,
-              private profileCreatorService: CandidateProfileService) {
+              private profileCreatorService: CandidateProfileService,
+              private complexityAnsweredService: ComplexityAnsweredService) {
 
     complexityService.showTest$.subscribe(
       data => {
@@ -204,7 +207,8 @@ export class CandidateProfileComponent implements OnInit, DoCheck, OnDestroy {
     this.candidateForRole = this.candidate.industry.roles;
     this.candidateForComplexity = this.candidate.industry.roles;
     this.candidate.userFeedBack = new Array();
-    this.saveCandidateDetails();
+    this.callFrom = 'default';
+    this.saveCandidateDetails('capability');
     this.whichStepsVisible[2] = true;
   }
 
@@ -221,7 +225,8 @@ export class CandidateProfileComponent implements OnInit, DoCheck, OnDestroy {
     date.setDate(date.getDate() + 90);
     this.candidate.lockedOn = date;
     this.highlightedSection.date = date;
-    this.saveCandidateDetails();
+    this.callFrom = 'default';
+    this.saveCandidateDetails('complexity');
     this.showProficiency = true;
   }
 
@@ -231,7 +236,8 @@ export class CandidateProfileComponent implements OnInit, DoCheck, OnDestroy {
     }
     this.candidate.proficiencies = proficiency;
     this.highlightedSection.isProficiencyFilled = true;
-    this.saveCandidateDetails();
+    this.callFrom = 'default';
+    this.saveCandidateDetails('proficiency');
     this.whichStepsVisible[4] = true;
   }
 
@@ -345,7 +351,7 @@ export class CandidateProfileComponent implements OnInit, DoCheck, OnDestroy {
         .subscribe(
           rolelist => {
             this.rolesForComplexity = rolelist.data;
-            this.getCandidateForComplexity();
+            //this.getCandidateForComplexity();
           },error => this.errorService.onError(error));
     }
   }
@@ -544,10 +550,17 @@ export class CandidateProfileComponent implements OnInit, DoCheck, OnDestroy {
     this.saveCandidateDetails();
   }
 
-  saveCandidateDetails() {
+  saveCandidateDetails(section?: string) {
     this.profileCreatorService.addProfileDetail(this.candidate).subscribe(
-      user => console.log(user),
+      user => this.onSaveCandidateDetails(section),
       error => this.errorService.onError(error));
+  }
+
+  onSaveCandidateDetails(section?: string) {
+   if(section != undefined || section!='default') {
+     this.complexityAnsweredService.change(true);
+    this.callFrom = section;
+   }
   }
 
   onSubmit() {
@@ -600,4 +613,9 @@ export class CandidateProfileComponent implements OnInit, DoCheck, OnDestroy {
   getButton() {
     return Button;
   }
+
+  afterEmit(data: any) {
+  this.getCandidateForComplexity();
+  }
+
 }

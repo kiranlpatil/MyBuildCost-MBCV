@@ -818,4 +818,3 @@ export enum CandidateProfileUpdateTrack {
   STEP_IS_ENTER_AWARDS_DETAILS,
   STEP_IS_SUBMIT_DETAILS
 }
-
