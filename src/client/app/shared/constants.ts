@@ -360,8 +360,7 @@ export class Messages {
   public static CAREER_PLUGIN_MSG_EXISTING_USER = 'You are already registered, Kindly SignIn';
   public static THIS_JOB_IS_NOT_YET_POSTED = 'This Job is not yet posted';
   public static PRESS_ENTER_KEYSKILL = 'Select one key skill from dropdown at a time and press enter to add it.';
-
-
+  public static EXPORT_DATA: string = 'Allow popups to download exported files';
 }
 export class AdminPanel {
   public static PUBLIC_PROFILE = 'Profile is public';
