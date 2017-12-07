@@ -1,4 +1,5 @@
 import {Component} from "@angular/core";
+import {Button} from "../../../shared/constants";
 
 @Component({
   moduleId: module.id,
@@ -9,4 +10,7 @@ import {Component} from "@angular/core";
 
 export class ManageCandidatesComponent{
 
+  getButtons() {
+    return Button;
+  }
 }

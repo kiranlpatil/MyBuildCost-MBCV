@@ -800,6 +800,8 @@ export class Button {
   public static MATCH_AGAINST_ALL_JOB: string = 'Match Against All Job';
   public static SHOW_VALUE_PORTRAIT: string = 'Show Value Portrait';
   public static COMPARE_WITH_OTHERS: string = 'Compare With Others';
+  public static MY_CAREER_PAGE: string = 'My Career Page';
+  public static EXPORT: string = 'Export';
 }
 //These constant is used to track profile completion of candiate.(Having total 14 steps to complete)
 export enum CandidateProfileUpdateTrack {
