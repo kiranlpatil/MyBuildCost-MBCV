@@ -224,7 +224,7 @@ export class AwardsComponent implements OnInit {
     this.guidedTourStatus = this.guidedTourService.getTourStatus();
     if(this.guidedTourStatus.indexOf(this.guidedTourImgOverlayScreensProfile) !== -1) {
       this.onComplete.emit();
-      this.complexityAnsweredService.change(true);
+      //this.complexityAnsweredService.change(true);
       this.highlightedSection.name = 'none';
       this.highlightedSection.isDisable = false;
     }

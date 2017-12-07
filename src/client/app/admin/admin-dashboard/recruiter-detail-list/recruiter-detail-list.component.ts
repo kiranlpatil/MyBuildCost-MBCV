@@ -63,7 +63,6 @@ export class RecruiterDetailListComponent {
           window.open(AppSettings.IP + recruiterDetails.path.companyDetailsCSV,'_blank');
           window.open(AppSettings.IP + recruiterDetails.path.jobDetailsCSV,'_blank');
           window.open(AppSettings.IP + recruiterDetails.path.companyAccountDetailsCSV,'_blank');
-          this.messageService.message(new Message(Messages.MSG_SUCCESS_FOR_FILE_DOWNLOAD));
         },
         error => this.errorService.onError(error));
   }

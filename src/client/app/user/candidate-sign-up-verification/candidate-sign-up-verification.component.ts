@@ -6,6 +6,7 @@ import {LocalStorageService} from "../../shared/services/localstorage.service";
 import {LoginService} from "../login/login.service";
 import {AnalyticService} from "../../shared/services/analytic.service";
 import {Router} from "@angular/router";
+declare var fbq: any;
 
 @Component({
   moduleId: module.id,
@@ -29,6 +30,7 @@ export class CandidateSignUpVerificationComponent {
     this.loginModel = new Login();
     this.userID=LocalStorageService.getLocalValue(LocalStorage.USER_ID);
     this.mobileNumber=LocalStorageService.getLocalValue(LocalStorage.MOBILE_NUMBER);
+    fbq('track', 'PageView');
     this.analyticService.googleAnalyse(this._router);
   }
   navigateToDashboard() {

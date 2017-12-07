@@ -90,6 +90,7 @@ export class FilterComponent implements OnChanges, OnInit {
     if (changes.candidate) {
       if (changes.candidate.currentValue) {
         this.proficiencyList = changes.candidate.currentValue.proficiencies;
+        this.qCardFilter.proficiencies = this.proficiencyList.slice();
         if(changes.candidate && changes.candidate.currentValue && changes.candidate.currentValue.interestedIndustries[0] !== 'None') {
           this.industryList = changes.candidate.currentValue.interestedIndustries;
         }
@@ -105,6 +106,7 @@ export class FilterComponent implements OnChanges, OnInit {
     if (changes.selectedJob) {
       if (changes.selectedJob.currentValue) {
         this.proficiencyList = changes.selectedJob.currentValue.proficiencies;
+        this.qCardFilter.proficiencies = this.proficiencyList.slice();
         if(changes.selectedJob && changes.selectedJob.currentValue.interestedIndustries[0] !== 'None') {
           this.industryList = changes.selectedJob.currentValue.interestedIndustries;
         }

@@ -65,7 +65,6 @@ export class CandidateDetailListComponent implements OnInit {
           window.open(AppSettings.IP + CandidateDetails.path.candidateProfilesCSV, '_blank');
           window.open(AppSettings.IP + CandidateDetails.path.candidateCapabilitiesCSV, '_blank');
           window.open(AppSettings.IP + CandidateDetails.path.candidateAccountDetailsCSV, '_blank');
-          this.messageService.message(new Message(Messages.MSG_SUCCESS_FOR_FILE_DOWNLOAD));
         },
         error => {
           this.loaderService.stop();

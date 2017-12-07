@@ -53,7 +53,9 @@
 
       <cn-capabilities [roles]="rolesForCapability" [candidateRoles]="candidateForCapability"
                        [highlightedSection]="highlightedSection"
-                       (onComplete)="onCapabilityComplete($event)" [hidden]="!showCapability"></cn-capabilities>
+                       (onComplete)="onCapabilityComplete($event)"
+                       (emitOnNext)="afterEmit($event)"
+                       [hidden]="!showCapability"></cn-capabilities>
 
       <div class="wrapper">
         <cn-complexities [roles]="rolesForComplexity" [complexities]="candidate.capability_matrix"

@@ -15,6 +15,7 @@ export class ComplexityAnsweredService {
   }
 
   makeCall(): Observable<any> {
+    this._isAnswered.observers.splice(0, this._isAnswered.observers.length);
     return this._isAnswered.asObservable();
   }
 }

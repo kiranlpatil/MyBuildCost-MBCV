@@ -207,7 +207,7 @@ export class CertificationAccreditationComponent {
 
   onNext() {
     this.onComplete.emit();
-    this.complexityAnsweredService.change(true);
+    //this.complexityAnsweredService.change(true);
     this.highlightedSection.name = 'Awards';
     this.highlightedSection.isDisable = false;
     window.scrollTo(0, 0);
