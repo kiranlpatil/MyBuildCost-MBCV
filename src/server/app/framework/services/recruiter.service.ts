@@ -109,7 +109,7 @@ class RecruiterService {
 
   getJobsByRecruiterId(id: string, callback: (err: Error, res: IJobProfile[]) => void) {
     let query = {'recruiterId': new mongoose.Types.ObjectId(id)};
-    this.jobProfileRepository.retrieveAndPopulate(query, {'industry': 0}, (error: Error, jobs: IJobProfile[]) => {
+    this.jobProfileRepository.retrieveAndPopulate(query, {}, (error: Error, jobs: IJobProfile[]) => {
       if (error) {
         callback(error, null);
         return;

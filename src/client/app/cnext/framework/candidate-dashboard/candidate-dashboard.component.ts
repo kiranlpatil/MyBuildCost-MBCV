@@ -128,6 +128,7 @@ export class CandidateDashboardComponent implements OnInit {
     this.candidate = candidateData.data[0];
     this.candidate.basicInformation = candidateData.metadata;
     this.candidate.summary = new Summary();
+    this.appliedFilters.proficiencies=this.candidate.proficiencies;
     if (this.isRecruiterReferred) {
       this.getRecruitersJobList();
     }
