@@ -77,7 +77,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   onLogout() {
-    window.localStorage.clear();
+    window.sessionStorage.clear();
     this._router.navigate([NavigationRoutes.APP_START]);
   }
 

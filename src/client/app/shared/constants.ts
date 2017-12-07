@@ -393,6 +393,7 @@ export class LocalStorage {
   public static IS_SOCIAL_LOGIN = 'is_social_login';
   public static PROFILE_PICTURE = 'profile_picture';
   public static ISADMIN = 'is_admin';
+  public static FROM_ADMIN = 'from_admin';
   public static IS_LOGGED_IN = 'is_user_logged_in';
   public static USER_ID = 'user_id';
   public static END_USER_ID = 'end_user_id';
@@ -471,6 +472,7 @@ export class API {
   public static GET_RECRUITER_DETAILS = 'getRecruiterDetails';
   public static EXPORT_CANDIDATE_DETAIL_PROFILE = 'exportCandidateDetails';
   public static EXPORT_RECRUITER_DETAIL_PROFILE = 'exportRecruiterDetails';
+  public static USER_DETAILS = 'userDetails';
   public static RECRUITER_PROFILE = 'recruiter';
   public static JOBS = 'jobs';
   public static PROFESSIONAL_DATA = 'professionaldata';

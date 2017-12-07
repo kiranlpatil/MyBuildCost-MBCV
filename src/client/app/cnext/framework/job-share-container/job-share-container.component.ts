@@ -49,7 +49,7 @@ isJobPosted:boolean=true;
   }
 
   onSuccess(shareLink:ShareLink) {
-    window.localStorage.clear();
+    window.sessionStorage.clear();
     let url:any = new URL('localhost:8080/' + shareLink.longUrl);
     let newUrl = shareLink.longUrl.split('/')[2];
     LocalStorageService.setLocalValue(LocalStorage.ACCESS_TOKEN, url.searchParams.get('access_token'));

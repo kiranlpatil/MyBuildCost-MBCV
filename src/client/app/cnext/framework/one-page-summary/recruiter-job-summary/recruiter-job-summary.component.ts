@@ -19,7 +19,7 @@ export class RecruiterJobSummaryComponent {
   }
 
   logOut() {
-    window.localStorage.clear();
+    window.sessionStorage.clear();
     this._router.navigate([NavigationRoutes.APP_START]);
   }
 }

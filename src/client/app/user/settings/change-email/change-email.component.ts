@@ -71,7 +71,7 @@ export class ChangeEmailComponent implements OnInit {
   }
 
   changeEmailSuccess(body: ChangeEmail) {
-    //window.localStorage.clear();
+    //window.sessionStorage.clear();
     LocalStorageService.setLocalValue(LocalStorage.CHANGE_MAIL_VALUE, 'from_settings');
     this.userForm.reset();
     this.onEmailChangeSuccess.emit();
@@ -99,7 +99,7 @@ export class ChangeEmailComponent implements OnInit {
   }
 
   logOut() {
-    window.localStorage.clear();
+    window.sessionStorage.clear();
     LocalStorageService.setLocalValue(LocalStorage.CHANGE_MAIL_VALUE, 'from_settings');
     let host = AppSettings.HTTP_CLIENT + AppSettings.HOST_NAME;
     window.location.href = host;

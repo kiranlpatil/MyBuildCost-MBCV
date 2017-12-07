@@ -120,7 +120,7 @@ export class ChangeMobileComponent implements OnInit {
     this.onMobileNumberChangeComplete.emit();
   }
   logOut() {
-    window.localStorage.clear();
+    window.sessionStorage.clear();
     this._router.navigate([NavigationRoutes.APP_START]);
   }
 

@@ -38,7 +38,7 @@ export class AdminDashboardHeaderComponent {
   }
 
   logOut() {
-    window.localStorage.clear();
+    window.sessionStorage.clear();
     let host = AppSettings.HTTP_CLIENT + AppSettings.HOST_NAME;
     window.location.href = host;
   }

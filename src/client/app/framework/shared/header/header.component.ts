@@ -106,7 +106,7 @@ export class HeaderComponent implements OnInit {
   }
 
   logOut() {
-    window.localStorage.clear();
+    window.sessionStorage.clear();
     this._router.navigate([NavigationRoutes.APP_START]);
   }
 

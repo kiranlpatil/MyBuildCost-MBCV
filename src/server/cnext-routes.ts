@@ -147,6 +147,8 @@ export function cnextInit(app: express.Application) {
       this.authInterceptor.secureApiCheck, this.authInterceptor.validateAdmin, adminController.exportKeySkills);
     app.get('/api/usageDetails', loggerInterceptor.logDetail, this.authInterceptor.requiresAuth,
       this.authInterceptor.secureApiCheck, this.authInterceptor.validateAdmin, adminController.exportUsageDetails);
+    app.get('/api/userDetails/:id', loggerInterceptor.logDetail, this.authInterceptor.requiresAuth,
+      this.authInterceptor.secureApiCheck, this.authInterceptor.validateAdmin, adminController.getUserDetails);
 
 
     //Api for update candidate field

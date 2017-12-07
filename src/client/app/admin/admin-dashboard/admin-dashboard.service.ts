@@ -96,4 +96,11 @@ export class AdminDashboardService extends BaseService {
       .catch(this.handleError);
   }
 
+  getUserDetails(userId: string): Observable<any> {
+    var url = API.USER_DETAILS + '/' + userId;
+    return this.http.get(url)
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
+
 }
