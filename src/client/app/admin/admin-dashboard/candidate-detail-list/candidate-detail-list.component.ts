@@ -108,7 +108,6 @@ export class CandidateDetailListComponent implements OnInit {
   }
 
   openCandidateDashboard(userId: any) {
-    console.log(userId);
     let token = LocalStorageService.getLocalValue(LocalStorage.ACCESS_TOKEN);
     let url = AppSettings.IP + '/usercontainer?token='+token+'&'+'userid='+userId;
     window.open(url, '_blank');
