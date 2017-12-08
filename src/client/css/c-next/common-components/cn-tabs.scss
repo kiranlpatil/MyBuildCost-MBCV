@@ -73,6 +73,10 @@
   }
 }
 
+#recruiter-dashboard-tabs {
+  width: calc(100% - 180px) !important;
+}
+
 #recruiter-dashboard-tabs,
 #recruiter-job-dashboard-tabs,
 .my-job-tabs {
@@ -153,7 +157,7 @@
   .dashboard-tabs {
     background: transparent;
     border: 0;
-    left: 575px;
+    left: 630px;
     top: 0;
     width: 200px;
     z-index: 9999;

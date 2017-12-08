@@ -120,7 +120,7 @@ export class JobSearchEngine extends SearchEngine {
     let jobProfileQuery:any;
     for (let job of jobs) {
       let isFound: boolean = false;
-      if (listName === EList.JOB_MATCHED) {
+      if (listName === EList.JOB_MATCHED && !appliedFilter.isCandidateSearch) {
         if (candidateDetails.job_list) {
           for (let list of candidateDetails.job_list) {
             if (list.ids.indexOf(job._id.toString()) !== -1) {

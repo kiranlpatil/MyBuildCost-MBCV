@@ -41,6 +41,7 @@ export class SearchEngineController {
     let candidateId = req.params.candidateId;
     let appliedFilters: AppliedFilter = req.body.obj;
     let searchEngine: SearchEngine = new JobSearchEngine();
+    appliedFilters.isCandidateSearch=true;
     searchEngine.getMatchingResult(searchEngine, candidateId, appliedFilters, (error: any, qcards: any[],userId:string) => {
       if (error) {
         next(error);

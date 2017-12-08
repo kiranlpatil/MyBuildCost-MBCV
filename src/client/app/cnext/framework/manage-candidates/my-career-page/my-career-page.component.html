@@ -1,0 +1,82 @@
+<div class="manage__candidates__date">
+  <ul>
+    <li>
+      <label> From</label>
+      <input type="date" [(ngModel)]="fromDate" [value]="fromDate"
+             (change)="loadSummary(fromDate, toDate)"/>
+    </li>
+    <li>
+      <label> To</label>
+      <input type="date" [(ngModel)]="toDate" [value]="toDate"
+             (change)="loadSummary(fromDate, toDate)"/>
+    </li>
+  </ul>
+  <span class="error-messages"
+        *ngIf="inValidDates"> {{getMessages().MSG_ERROR_VALIDATION_DATES}} </span>
+</div>
+<div *ngIf="summary.total > 0" class="manage__candidates_table">
+  <div class="row">
+    <div class="col-xs-10">
+       <span>
+         Applied Candidates
+       </span>
+    </div>
+    <div class="col-xs-2">
+      <span>
+         {{summary.applied}}
+       </span>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-10">
+      <span>
+         Registered Candidates
+       </span>
+    </div>
+    <div class="col-xs-2">
+      <span>
+         {{summary.registered}}
+       </span>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-10">
+      <span>
+         Candidates Who Submitted Their Profile
+       </span>
+    </div>
+    <div class="col-xs-2">
+      <span>
+         {{summary.profileSubmitted}}
+       </span>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-10">
+      <span>
+         Existing Users
+       </span>
+    </div>
+    <div class="col-xs-2">
+      <span>
+         {{summary.existing}}
+       </span>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-10">
+      <span>
+         Total Candidates Visited
+       </span>
+    </div>
+    <div class="col-xs-2">
+      <span>
+         {{summary.total}}
+       </span>
+    </div>
+  </div>
+</div>
+<div *ngIf="noCandidatesToShow && !inValidDates"> {{getMessages().NO_CANDIDATES_TO_LIST}}</div>
+<a class="manage__candidates__export__btn" href="" hidden>
+  {{getButtons().EXPORT}}
+</a>

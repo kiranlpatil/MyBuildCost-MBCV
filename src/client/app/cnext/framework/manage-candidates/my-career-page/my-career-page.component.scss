@@ -1,0 +1,31 @@
+@import '../../../../../css/variables';
+
+.manage__candidates__date {
+  ul {
+    float: left;
+    margin: 10px 0;
+    padding: 0;
+    width: 100%;
+    li {
+      display: block;
+      float: left;
+      margin: 0 10px 0 0;
+    }
+  }
+}
+.manage__candidates_table {
+  background: $white;
+  display: inline-block;
+  padding: 2px;
+  width: 100%;
+  .row {
+    margin: 0;
+    padding: 8px 10px;
+    &:nth-child(odd) {
+      background: $active-color;
+    }
+    &:nth-child(even) {
+      background: $white;
+    }
+  }
+}

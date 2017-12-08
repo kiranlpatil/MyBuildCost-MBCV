@@ -199,6 +199,7 @@ export class Messages {
   public static MSG_ERROR_VALIDATION_MAX_PROFICIENCIES = ' Key skills. Click the cross sign to deselect existing one and add a new skill.';
   public static MSG_ERROR_VALIDATION_EMPLOYMENTHISTORY = 'Provide valid employment start and end date';
   public static MSG_ERROR_VALIDATION_TERMS_AND_CONDITIONS_REQUIRED = 'Please accept the terms and conditions.';
+  public static MSG_ERROR_VALIDATION_DATES = 'Please select valid from and to date.';
 
 
   public static MSG_LANDING_PAGE = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' +
@@ -361,6 +362,7 @@ export class Messages {
   public static THIS_JOB_IS_NOT_YET_POSTED = 'This Job is not yet posted';
   public static PRESS_ENTER_KEYSKILL = 'Select one key skill from dropdown at a time and press enter to add it.';
   public static EXPORT_DATA: string = 'Allow popups to download exported files';
+  public static NO_CANDIDATES_TO_LIST = 'No candidates available.';
 }
 export class AdminPanel {
   public static PUBLIC_PROFILE = 'Profile is public';
@@ -803,6 +805,8 @@ export class Button {
   public static MATCH_AGAINST_ALL_JOB: string = 'Match Against All Job';
   public static SHOW_VALUE_PORTRAIT: string = 'Show Value Portrait';
   public static COMPARE_WITH_OTHERS: string = 'Compare With Others';
+  public static MY_CAREER_PAGE: string = 'My Career Page';
+  public static EXPORT: string = 'Export';
 }
 //These constant is used to track profile completion of candiate.(Having total 14 steps to complete)
 export enum CandidateProfileUpdateTrack {

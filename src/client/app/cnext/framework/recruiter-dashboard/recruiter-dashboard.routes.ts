@@ -4,6 +4,7 @@ import {JobListerComponent} from "./job-lister/job-lister.component";
 import {CandidateSearchComponent} from "../candidate-search/candidate-search.component";
 import {JobPosterComponent} from "../job-poster/job-poster.component";
 import {JobDashboardComponent} from "./job-dashboard/job-dashboard.component";
+import {ManageCandidatesComponent} from "../manage-candidates/manage-candidates.component";
 
 export const RecruiterDashboard: Route[] = [
   {
@@ -16,7 +17,8 @@ export const RecruiterDashboard: Route[] = [
       {path: 'search', component: CandidateSearchComponent},
       {path: 'jobpost/:jobId', component: JobPosterComponent},
       {path: 'jobpost', component: JobPosterComponent},
-      {path: 'job/:jobId', component: JobDashboardComponent}
+      {path: 'job/:jobId', component: JobDashboardComponent},
+      {path: 'manage_candidates', component: ManageCandidatesComponent}
     ]
   }
 ];
