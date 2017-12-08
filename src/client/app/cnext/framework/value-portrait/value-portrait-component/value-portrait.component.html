@@ -49,7 +49,9 @@
     <div class="" role="education" aria-labelledby="education">
       <div *ngFor="let academic of candidate.academics" class="line-block">
         <b>{{academic.yearOfPassing}}</b>
-        <b><label><strong>{{academic.specialization}}</strong></label> | <label>{{academic.board}}</label></b>
+        <b><label><strong>{{academic.educationDegree}} </strong>
+        </label><label *ngIf="academic.specialization&&academic.educationDegree">|</label> {{academic.specialization}}</b>
+        <b><label>{{academic.board}}</label></b>
         <b class="remark">{{academic.schoolName}}</b>
       </div>
       <div *ngIf="candidate.academics.length == 0" class="line-block">
@@ -64,8 +66,7 @@
     <span id="employment"> Employment </span>
     <div class="" role="employment" aria-labelledby="employment">
       <div *ngFor="let history of candidate.employmentHistory" class="line-block">
-        <b *ngIf="history.isPresentlyWorking!=true">{{history.from.year}} - {{history.to.year}}</b> //To do lucky-add if
-        else instead of using two ngIf
+        <b *ngIf="history.isPresentlyWorking!=true">{{history.from.year}} - {{history.to.year}}</b>
         <b *ngIf="history.isPresentlyWorking===true">{{history.from.year}} - {{getMessage().MSG_PRESENTLY_WORKING}}</b>
         <b><label><strong>{{history.designation}}</strong></label> | <label>{{history.companyName}}</label></b>
         <b class="remark">{{history.remarks}}</b>

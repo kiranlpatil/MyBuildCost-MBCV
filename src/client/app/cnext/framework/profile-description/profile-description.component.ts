@@ -149,8 +149,6 @@ export class ProfileDescriptionComponent implements OnInit {
     if((this.candidate.jobTitle == '' || this.candidate.jobTitle == undefined ) ||
       (this.candidate.professionalDetails.currentCompany == '' ||
       this.candidate.professionalDetails.currentCompany== undefined ) ||
-      (this.candidate.professionalDetails.education == '' ||
-      this.candidate.professionalDetails.education == undefined ) ||
       (this.candidate.professionalDetails.experience == undefined ) || this.storedLocation.city == undefined) {
       if (this.storedLocation.formatted_address == '') {
         this.isLocationEmpty = true;

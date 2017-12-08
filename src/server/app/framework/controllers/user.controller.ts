@@ -1227,6 +1227,22 @@ export function getEducation(req: express.Request, res: express.Response, next: 
   }
 }
 
+export function getEducationDegreeList(req: express.Request, res: express.Response, next: any) {
+  __dirname = './';
+  let filepath = 'educationalDegrees.json';
+  try {
+    res.sendFile(filepath, {root: __dirname});
+  }
+  catch (e) {
+    next({
+      reason: e.message,
+      message: e.message,
+      stackTrace: new Error(),
+      code: 403
+    });
+  }
+}
+
 
 export function getCloseJobReasons(req: express.Request, res: express.Response, next: any) {
   __dirname = './';

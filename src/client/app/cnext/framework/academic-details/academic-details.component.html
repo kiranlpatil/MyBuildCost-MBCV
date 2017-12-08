@@ -3,10 +3,10 @@
 <div class="section-container clear" *ngIf="highlightedSection.name =='AcademicDetails'">
   <div class="main-content edit-modal-content clearfix">
     <div class="scrollable-content academic-section col-xs-7" #parentDiv>
-      <h4 class="heading">{{acadamicDetailsHeading}}</h4>
+      <h4 class="heading">{{acadamicDetailsHeading}} (Mandatory)</h4>
       <form class="description-form" [formGroup]="academicDetail" novalidate>
         <div class="row">
-          <div class="col-md-8 col-sm-10 no-padding" formArrayName="academicDetails" #innerDiv>
+          <div class="col-md-11 col-sm-10 no-padding" formArrayName="academicDetails" #innerDiv>
             <div *ngFor="let history of academicDetail.controls.academicDetails.controls; let i=index"
                  class="panel panel-default">
               <div>
@@ -64,7 +64,7 @@
         <h4 class="heading-compact icons-section">
           <!--<img src="assets/c-next/icons/education-icon.png" alt="employment"/>-->
           <span class="icons icon-education"></span>
-          Academic Details <span class="optional-field">(Optional)</span>
+          Academic Details <span class="optional-field"> (Mandatory)</span>
           <button class="btn-edit" (click)="onEdit()"></button>
         </h4>
       </div>
@@ -73,14 +73,15 @@
         <h4 class="heading-compact icons-section">
           <!--<img src="assets/c-next/icons/education-icon.png" alt="employment"/>-->
           <span class="icons icon-education"></span>
-          Academic Details <span class="optional-field">(Optional)</span>
+          Academic Details <span class="optional-field">  (Mandatory)</span>
           <button class="btn-edit" (click)="onEdit()"></button>
         </h4>
         <ul class="">
           <div *ngFor="let item of candidate.academics;let i = index">
             <div *ngIf="i == 0">
               <li>
-                <p>{{item.specialization}} at {{item.board}} in {{item.yearOfPassing}}</p>
+                <p>{{item.educationDegree}} <b *ngIf="item.specialization&&item.educationDegree">in</b>
+                  {{item.specialization}} at {{item.board}} in {{item.yearOfPassing}}</p>
               </li>
             </div>
           </div>

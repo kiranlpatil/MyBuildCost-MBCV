@@ -22,7 +22,9 @@
         <div class="tooltip-content2" role="education" aria-labelledby="education">
           <div *ngFor="let academic of candidate.academics" class="line-block">
             <b>{{academic.yearOfPassing}}</b>
-            <b><label><strong>{{academic.specialization}}</strong></label> | <label>{{academic.board}}</label></b>
+            <b><label><strong>{{academic.educationDegree}} </strong></label>
+              <label *ngIf="academic.specialization&&academic.educationDegree">|</label> {{academic.specialization}}</b>
+            <b><label>{{academic.board}}</label></b>
             <b class="line-break">{{academic.schoolName}}</b>
           </div>
           <div *ngIf="candidate.academics.length == 0" [class.grayBox]="candidate.academics.length == 0 && isMiniView" class="line-block">

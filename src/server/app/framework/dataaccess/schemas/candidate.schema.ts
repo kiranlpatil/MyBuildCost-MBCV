@@ -107,7 +107,8 @@ class CandidateSchema {
         schoolName: String,
         board: String,
         yearOfPassing: Number,
-        specialization: String
+        specialization: String,
+        educationDegree:String
       }],
       professionalDetails: {
         education: String,

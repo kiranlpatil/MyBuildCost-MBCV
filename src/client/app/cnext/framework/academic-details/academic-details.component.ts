@@ -97,9 +97,10 @@ export class AcademicDetailComponent implements OnInit, OnChanges, AfterViewChec
   initAcademicDetails() {
     return this._fb.group({
       schoolName: [''],
+      educationDegree: ['',Validators.required],
       board: ['', Validators.required],
       yearOfPassing: ['', Validators.required],
-      specialization: ['', Validators.required]
+      specialization: ['']
     });
   }
 
@@ -160,10 +161,11 @@ export class AcademicDetailComponent implements OnInit, OnChanges, AfterViewChec
       return;
     }
 
-    let academics = this.academicDetail.value.academicDetails;
-    if(academics.length == 1){
-      if (academics[0].board == '' && academics[0].specialization == ''
-          && academics[0].yearOfPassing == '') {
+    /*let academics = this.academicDetail.value.academicDetails;
+    if(academics.length == 1){debugger
+      if (academics[0].educationDegree!=='' && academics[0].board !== ''
+          && academics[0].yearOfPassing !== '') {
+        this.candidate.academics = this.academicDetail.value.academicDetails;
         if (type == 'next') {
           this.onNext();
         }
@@ -172,12 +174,12 @@ export class AcademicDetailComponent implements OnInit, OnChanges, AfterViewChec
         }
         return;
       }
-    }
+    }*/
 
     for (let academicsData of this.academicDetail.value.academicDetails) {
-      if (academicsData.board != '' && academicsData.specialization != '' && academicsData.yearOfPassing != '') {
+      if (academicsData.board != '' && academicsData.educationDegree!='' && academicsData.yearOfPassing != '') {
           isDataValid = true;
-      } else if (academicsData.board != '' || academicsData.specialization != '' || academicsData.yearOfPassing != '') {
+      } else if (academicsData.board != '' || academicsData.educationDegree != '' || academicsData.yearOfPassing != '') {
         this.submitStatus = true;
         return;
       } else {

@@ -38,7 +38,14 @@ export class ProfessionalDataService extends BaseService {
       .map(this.extractData)
       .catch(this.handleError);
   }
-
+  getEducationDegreeList(): Observable<any> {
+    let headers = new Headers({'Content-Type': 'application/json'});
+    let options = new RequestOptions({headers: headers});
+    var url = API.EDUCATIONDEGREES;
+    return this.http.get(url, options)
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
   getExperienceList(): Observable<any> {
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({headers: headers});

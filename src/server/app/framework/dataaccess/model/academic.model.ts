@@ -3,6 +3,7 @@ interface AcademicModel {
   board: string;
   yearOfPassing: number;
   specialization: string;
+  educationDegree: string;
 
 }
 export = AcademicModel;

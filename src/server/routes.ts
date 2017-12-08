@@ -39,6 +39,7 @@ export function init(app: express.Application) {
     //api calling fo professional data-lucky
     app.get("/api/realocation", loggerInterceptor.logDetail, this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, userController.getRealocation);
     app.get("/api/education", loggerInterceptor.logDetail, userController.getEducation);
+    app.get("/api/educationdegrees", loggerInterceptor.logDetail, userController.getEducationDegreeList);
     app.get("/api/experience", loggerInterceptor.logDetail, this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, userController.getExperience);
     app.get("/api/currentsalary", loggerInterceptor.logDetail, this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, userController.getCurrentSalary);
     app.get("/api/noticeperiod", loggerInterceptor.logDetail, userController.getNoticePeriod);

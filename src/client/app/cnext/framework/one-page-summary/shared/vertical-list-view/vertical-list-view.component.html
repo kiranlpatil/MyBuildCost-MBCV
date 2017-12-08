@@ -37,7 +37,8 @@
       <ul *ngIf="calledFrom=='singlepageview'">
         <li *ngFor="let item of data;let i = index">
           <p>{{item.yearOfPassing}}</p>
-          <p>{{item.specialization}}</p>
+          <p *ngIf="item.educationDegree">{{item.educationDegree}}</p>
+          <p *ngIf="item.specialization">{{item.specialization}}</p>
           <p>{{item.board}}</p>
           <p [class.text-ellipsis]="!readMore[i]" [class.text-wrap]="readMore[i]">{{item.schoolName}}</p>
           <p class="read-more" (click)="readMore[i] = !readMore[i]" *ngIf="item.schoolName.length>30">Read More</p>
@@ -47,9 +48,10 @@
       <ul class="candidate-vertical-view" *ngIf="calledFrom=='candidateview'">
         <li  *ngFor="let item of data;let i = index">
           <div *ngIf="i == 0">
-          <p>{{item.yearOfPassing}}</p>
-          <p>{{item.specialization}}</p>
-          <p>{{item.board}}</p>
+            <p>{{item.yearOfPassing}}</p>
+            <p *ngIf="item.educationDegree">{{item.educationDegree}}</p>
+            <p>{{item.specialization}}</p>
+            <p>{{item.board}}</p>
           <p [class.text-ellipsis]="!readMore[i]" [class.text-wrap]="readMore[i]">{{item.schoolName}}</p>
           <p class="read-more" (click)="readMore[i] = !readMore[i]" *ngIf="item.schoolName.length>30">Read More</p>
           <p class="read-less" (click)="readMore[i] = !readMore[i]">Read Less</p>

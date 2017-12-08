@@ -501,6 +501,7 @@ export class API {
   public static INDUSTRY_LIST = 'industry';
   public static REALOCATION = 'realocation';
   public static EDUCATION = 'education';
+  public static EDUCATIONDEGREES = 'educationdegrees';
   public static EXPERIENCE = 'experience';
   public static CURRENTSALARY = 'currentsalary';
   public static NOTICEPERIOD = 'noticeperiod';
@@ -685,7 +686,7 @@ export class Tooltip {
 }
 
 export class Headings {
-  public static ACADAMIC_DETAILS: string = 'Academic Details (Optional)';
+  public static ACADAMIC_DETAILS: string = 'Academic Details';
   public static AWARDS: string = 'Awards (Optional)';
   public static JOB_DISCRIPTION: string = 'Job Description';
   public static HIDE_COMPANY_NAME: string = 'Hide company Name from applicant';
