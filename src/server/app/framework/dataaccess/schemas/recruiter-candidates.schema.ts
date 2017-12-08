@@ -1,4 +1,5 @@
 import DataAccess = require("../dataaccess");
+import RecruiterCandidates = require("../mongoose/recruiter-candidates");
 let mongoose = DataAccess.mongooseInstance;
 let mongooseConnection = DataAccess.mongooseConnection;
 

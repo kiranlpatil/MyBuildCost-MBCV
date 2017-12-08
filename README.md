@@ -518,19 +518,7 @@ $ src/redis-server
   //indexes for new collection
     db.getCollection('recruiter-candidates').createIndex({'recruiterId':1})
     db.getCollection('recruiter-candidates').createIndex({'recruiterId':1,'source':1})
-    
-  //script to move my_candidate_list to recruiter-candidates
-  db.getCollection('recruiters').find({}).forEach(function(recruiter) {
-    for(var i = 0;i <= recruiter.my_candidate_list.length-1; i++){
-      var candidate = {
-        recruiterId : recruiter._id,
-        candidateId : recruiter.my_candidate_list[i],
-        source : 'recruiterPortal'
-      }
-      db.getCollection('recruiter-candidates').insert(candidate);
-    }
-  })
-  
+   
   
 #Jobmosis Career_plugin 
 

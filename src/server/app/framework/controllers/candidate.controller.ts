@@ -13,6 +13,8 @@ import CandidateSearchService = require("../services/candidate-search.service");
 import CandidateClassModel = require("../dataaccess/model/candidate-class.model");
 import SendMailService = require('../services/mailer.service');
 import ProjectAsset = require('../shared/projectasset');
+import {RecruiterCandidatesService} from "../services/recruiter-candidates.service";
+import RecruiterCandidatesModel = require("../dataaccess/model/recruiter-candidate.model");
 
 
 export function create(req: express.Request, res: express.Response, next: any) {

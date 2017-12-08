@@ -1,5 +1,4 @@
 class RecruiterCandidatesModel {
-  id: any;
   recruiterId: String;
   candidateId: String;
   mobileNumber: Number;
@@ -7,5 +6,7 @@ class RecruiterCandidatesModel {
   noOfMatchingJobs: Number;
   source: String;
   statusUpdatedOn: Date;
+  fromDate: Date;
+  toDate: Date;
 }
 export = RecruiterCandidatesModel;
