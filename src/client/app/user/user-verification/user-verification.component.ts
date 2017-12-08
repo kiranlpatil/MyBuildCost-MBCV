@@ -9,6 +9,7 @@ import {LocalStorageService} from "../../shared/services/localstorage.service";
 import {Message} from "../../shared/models/message";
 import {MessageService} from "../../shared/services/message.service";
 import {AnalyticService} from "../../shared/services/analytic.service";
+declare var fbq: any;
 
 @Component({
   moduleId: module.id,
@@ -45,6 +46,7 @@ export class UserVerificationComponent implements OnInit {
       'mobile_number': ['', [ValidationService.requireMobileNumberValidator, ValidationService.mobileNumberValidator]],
       'email': ['', [ValidationService.requireEmailValidator, ValidationService.emailValidator]]
     });
+    fbq('track', 'PageView');
     this.analyticService.googleAnalyse(this._router);
     this.MY_LOGO_PATH = ImagePath.MY_WHITE_LOGO;
     this.MY_TAG_LINE = ProjectAsset.TAG_LINE;

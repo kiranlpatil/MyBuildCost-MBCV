@@ -462,7 +462,7 @@ select,
   border: 0;
   font-size: 14px;
   line-height: 20px;
-  text-transform: uppercase;
+  text-transform: inherit;
 
   &:focus,
   &:active {
@@ -1011,6 +1011,12 @@ cn-control-messages {
   }
 }
 
+.edit-profile-pic {
+  background: url(../assets/c-next/card-view/sprite.png) no-repeat -9px -304px;
+  width: 30px !important;
+  height: 30px;
+  display: block;
+}
 
 // Media Queries
 @media only screen and (max-width: 1024px) {

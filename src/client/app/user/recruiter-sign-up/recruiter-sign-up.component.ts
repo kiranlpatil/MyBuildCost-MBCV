@@ -76,6 +76,7 @@ export class RecruiterSignUpComponent implements OnInit {
       'accept_terms': ['', Validators.required],
 
     });
+    fbq('track', 'PageView');
     this.analyticService.googleAnalyse(this._router);
     this.BODY_BACKGROUND = ImagePath.BODY_BACKGROUND;
     this.image_path = ImagePath.PROFILE_IMG_ICON;
