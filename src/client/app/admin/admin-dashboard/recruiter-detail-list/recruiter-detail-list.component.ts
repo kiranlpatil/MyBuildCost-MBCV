@@ -100,10 +100,10 @@ export class RecruiterDetailListComponent {
     return Messages;
   }
 
-  openRecruiterDashboard(recruiterId: any) {
+  openRecruiterDashboard(userId: any) {
     let token = LocalStorageService.getLocalValue(LocalStorage.ACCESS_TOKEN);
-    let url = 'http://localhost:8080/usercontainer?token='+token+'&'+'userid='+recruiterId;
-    window.open(url, 'popupwindow');
+    let url = 'http://localhost:8080/usercontainer?token='+token+'&'+'userid='+userId;
+    window.open(url, '_blank');
   }
 }
 

@@ -381,7 +381,7 @@ export function getUserDetails(req: express.Request, res: express.Response, next
                       next(error);
                     }
                     else {
-                      var data: any = {
+                      res.status(200).send({
                         "status": Messages.STATUS_SUCCESS,
                         "data": {
                           "first_name": result[0].first_name,
@@ -399,7 +399,7 @@ export function getUserDetails(req: express.Request, res: express.Response, next
                           "guide_tour": result[0].guide_tour
                         },
                         access_token: token
-                      }
+                      });
                     }
                   });
                 }
