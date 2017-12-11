@@ -4,11 +4,13 @@ import {CandidateRouteSwitchComponent} from "./candidate-route-switch.component"
 import {CandidateDashboardComponent} from "./candidate-dashboard.component";
 import {CandidateProfileComponent} from "../candidate-profile/candidate-profile.component";
 import {ValuePortraitContainerComponent} from "../value-portrait/value-portrait-container.component";
+import {AuthGuardService} from "../../../shared/services/auth-guard.service";
 
 export const CandidateRouteSwitch: Route[] = [
   {
     path: 'candidate',
     component: CandidateRouteSwitchComponent,
+    canActivate: [AuthGuardService],
     children:[
       {path: '',redirectTo: 'dashboard',pathMatch: 'full'},
       {path: 'dashboard', component: CandidateDashboardComponent},
