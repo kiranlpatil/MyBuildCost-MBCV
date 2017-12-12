@@ -137,6 +137,7 @@ class Messages {
   public static MSG_ERROR_SEPERATING_USER = 'Error In Seperating the Users';
   public static MSG_ERROR_CREATING_EXCEL = 'Error In creating csv file';
   public static MSG_ERROR_PROVIDE_MOBILE_NO = 'Please provide valid mobile number.';
+  public static MSG_ERROR_FETCHING_MANAGED_CANDIDATES = 'Error In fetching managed candidates by recruiter';
 }
 export=Messages;
 

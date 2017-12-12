@@ -7,7 +7,7 @@ import UserService = require('../../services/user.service');
 
 export function errorHandler(err: any, req: any, res: any, next: any) {
   let _loggerService: LoggerService = new LoggerService('errorHandler');
-  if (err.code) {
+  if (err.code && err.code != 'ECONNABORTED') {
     let errObject = {
       status: Messages.STATUS_ERROR,
       error: err
@@ -18,6 +18,19 @@ export function errorHandler(err: any, req: any, res: any, next: any) {
       mailToAdmin(err);
     }
     res.status(err.code).send(responseObject);
+  } else if(err.code == 'ECONNABORTED') {
+    let errorObject:any = {
+      'status': Messages.STATUS_ERROR,
+      'error': {
+        'reason': 'Internal Server ',
+        'message': 'Internal Server ',
+        'code': 500
+      }};
+    err.reason='Request is aborted by user';
+    mailToAdmin(err);
+    let responseObject = JSON.stringify(errorObject);
+    _loggerService.logError(err);
+    res.status(500).send(responseObject);
   } else {
     let errorObject:any = {
       'status': Messages.STATUS_ERROR,
@@ -42,5 +55,4 @@ export function mailToAdmin(errorInfo:any) {
       logger.error( Messages.MSG_ERROR_WHILE_CONTACTING);
     }
   });
-
 }

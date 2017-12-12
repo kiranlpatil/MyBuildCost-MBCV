@@ -302,47 +302,27 @@ class RecruiterService {
       if (recruiterErr) {
         callback(recruiterErr, null);
       } else {
+        let candidateId = '';
         if(result.length) {
-          let searchField: any = {
-            'mobile_number': field.mobileNo
-          };
           this.candidateRepository.retrieve({'userId': new mongoose.Types.ObjectId(result[0]._id)},
             (error: Error, candidate: any) => {
             if (error) {
               callback(error, null);
               return;
+            } else {
+              candidateId = candidate[0]._id.toString()
             }
-            let recruiterCandidatesService = new RecruiterCandidatesService();
-
-            let recruiterCandidatesModel: RecruiterCandidatesModel = new RecruiterCandidatesModel();
-            recruiterCandidatesModel.recruiterId = field.recruiterId;
-            recruiterCandidatesModel.candidateId = candidate[0]._id.toString();
-            recruiterCandidatesModel.mobileNumber = field.mobileNo;
-            recruiterCandidatesModel.source = 'career plugin';
-            recruiterCandidatesModel.status = 'Applied';
-            recruiterCandidatesService.update(recruiterCandidatesModel, (error: Error, status: String) => {
-              if (error) {
-                callback(error, null);
-                return;
-              }
-            });
-
           });
-        } else {
-          let recruiterCandidatesService = new RecruiterCandidatesService();
+        }
 
-          let recruiterCandidatesModel: RecruiterCandidatesModel = new RecruiterCandidatesModel();
-          recruiterCandidatesModel.recruiterId = field.recruiterId;
-          recruiterCandidatesModel.mobileNumber = field.mobileNo;
-          recruiterCandidatesModel.source = 'career plugin';
-          recruiterCandidatesModel.status = 'Applied';
-          recruiterCandidatesService.add(recruiterCandidatesModel, (error: Error, status: String) => {
+        let recruiterCandidatesService = new RecruiterCandidatesService();
+        recruiterCandidatesService.update(field.recruiterId, candidateId, field.mobileNo,
+          'Applied', (error: Error, data: RecruiterCandidatesModel) => {
             if (error) {
               callback(error, null);
               return;
             }
           });
-        }
 
         this.userRepository.retrieve({'_id': new mongoose.Types.ObjectId(recData[0].userId)}, (userError, userData) => {
           if (userError) {

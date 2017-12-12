@@ -244,7 +244,7 @@ export class CandidateQCardComponent implements OnInit {
   }
 
   onCompanyWebsiteClick(websiteLink: string) {
-    if (websiteLink.indexOf('http') === 0 || websiteLink.indexOf('https') === 0) {
+    if (websiteLink && websiteLink !== '' &&  (websiteLink.indexOf('http') === 0 || websiteLink.indexOf('https') === 0)) {
       let host = websiteLink;
       window.open(host, '_blank');
     } else if (websiteLink !== undefined && websiteLink !== '') {
