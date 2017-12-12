@@ -270,6 +270,10 @@ export class AwardsComponent implements OnInit {
     return Button;
   }
 
+  getHeadings() {
+    return Headings;
+  }
+
   navigateToWithId(nav:string) {
     var userId = LocalStorageService.getLocalValue(LocalStorage.USER_ID);
     if (nav !== undefined) {

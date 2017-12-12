@@ -4,7 +4,11 @@
   <div class="main-content edit-modal-content clearfix">
     <!-- <form [formGroup]="professionalDetailForm" (ngSubmit)="onNext(jobPostForm.value)">-->
     <div class="scrollable-content professional-preferences-section col-xs-7 clearfix">
-      <h4 class="heading">Professional Preferences (Mandatory)</h4>
+      <h4 class="heading">Professional Preferences
+        <span class="heading-optional-field">
+          {{getHeadings().MANDATORY}}
+        </span>
+      </h4>
       <div class="col-md-8 col-sm-10 no-padding">
         <div class="form-group">
           <label>{{getLabel().CURRENT_ANNUAL_SALARY}}</label>

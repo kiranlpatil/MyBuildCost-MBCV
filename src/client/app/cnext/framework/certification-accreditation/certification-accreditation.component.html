@@ -3,7 +3,11 @@
 <div class="section-container clear"  *ngIf="highlightedSection.name =='Certification'">
   <div class="main-content edit-modal-content clearfix">
     <div class="scrollable-content certfication-section col-xs-7" #certficationParentDiv>
-      <h4 class="heading">{{certificateAccrediation}}</h4>
+      <h4 class="heading">{{certificateAccrediation}}
+        <span class="heading-optional-field">
+          {{getHeadings().OPTIONAL}}
+        </span>
+      </h4>
       <form class="description-form" [formGroup]="certificationDetail" novalidate>
         <div class="row">
           <div class="col-md-8 col-sm-10 no-padding" formArrayName="certifications" #certficationInnerDiv>
@@ -61,7 +65,7 @@
 
         <h4 class="heading-compact icons-section">
           <span class="icons icon-certification"></span>
-          Certifications <span class="optional-field">(Optional)</span>
+          Certifications
           <button class="btn-edit" (click)="onEdit()"></button>
         </h4>
       </div>
@@ -69,7 +73,7 @@
       <div class="" *ngIf="certificationDetail.controls.certifications.controls.length>0">
         <h4 class="heading-compact icons-section">
           <span class="icons icon-certification"></span>
-          Certifications <span class="optional-field">(Optional)</span>
+          Certifications
           <button class="btn-edit" (click)="onEdit()" title="Edit Certifications"></button>
         </h4>
         <ul class="clearfix">

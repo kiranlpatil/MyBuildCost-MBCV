@@ -31,22 +31,6 @@
     top: 50px;
     border-bottom: 2px solid #d1dce4;
     border-top: 0 solid #d1dce4;
-
-    li:first-child > a > .count {
-      background-color: $purple;
-    }
-
-    li:nth-child(2) > a > .count {
-      background-color: $orange;
-    }
-
-    li:nth-child(3) > a > .count {
-      background-color: $red;
-    }
-
-    li:nth-child(5) > a > .count {
-      background-color: $red;
-    }
   }
 
   .candidate-listing {

@@ -26,7 +26,7 @@
 
   <div class="main-content edit-modal-content clearfix">
     <div class="scrollable-content about-myself-section col-xs-7">
-      <h4 class="heading">{{aboutMyselfHeading}} {{optinalfield}}</h4>
+      <h4 class="heading">{{aboutMyselfHeading}} <span class="heading-optional-field">{{optinalfield}}</span> </h4>
       <div class="col-sm-8 no-padding more-about-myself">
       <textarea class="form-control" [(ngModel)]="candidate.aboutMyself" (ngModelChange)="addAboutMyself()"
                 [maxlength]="maxword" Placeholder="Enter About Yourself"></textarea>
@@ -63,7 +63,7 @@
 <div class="section-container clear" *ngIf="highlightedSection.name !='AboutMySelf'">
   <div class="main-content" (click)="onEdit()">
     <div class="compact-view clearfix">
-      <h4 class="heading-compact">{{aboutMyselfHeading}} <span class="optional-field">{{optinalfield}}</span>
+      <h4 class="heading-compact">{{aboutMyselfHeading}}
         <button class="btn-edit"
                 (click)="onEdit()"
                 [hidden]="highlightedSection.isDisable" title="Edit More About Self"></button>

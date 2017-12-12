@@ -246,6 +246,10 @@ export class AcademicDetailComponent implements OnInit, OnChanges, AfterViewChec
     return Messages;
   }
 
+  getHeadings() {
+    return Headings;
+  }
+
   navigateToWithId(nav:string) {
     var userId = LocalStorageService.getLocalValue(LocalStorage.USER_ID);
     if (nav !== undefined) {

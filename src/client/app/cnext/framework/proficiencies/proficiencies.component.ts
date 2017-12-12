@@ -142,4 +142,9 @@ export class ProficienciesComponent {
   getLabel() {
     return Label;
   }
+
+  getHeadings() {
+    return Headings;
+  }
+
 }

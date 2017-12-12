@@ -25,7 +25,11 @@
 <div class="section-container clear" *ngIf="highlightedSection.name =='Awards'">
   <div class="main-content edit-modal-content clearfix">
     <div class="scrollable-content awards-section col-xs-7" #awardParentDiv>
-      <h4 class="heading">{{awardsHeading}}</h4>
+      <h4 class="heading">{{awardsHeading}}
+        <span class="heading-optional-field">
+          {{getHeadings().OPTIONAL}}
+        </span>
+      </h4>
       <form class="description-form" [formGroup]="awardDetail" novalidate>
         <div class="row">
           <div class="col-md-8 col-sm-10 no-padding" formArrayName="awards" #awardInnerDiv>
@@ -81,14 +85,14 @@
 
         <h4 class="heading-compact icons-section">
           <span class="icons icon-award"></span>
-          Awards <span class="optional-field">(Optional)</span>
+          Awards
           <button class="btn-edit" (click)="onEdit()"></button>
         </h4>
       </div>
       <div class="" *ngIf=" awardDetail.controls.awards.controls.length>0 ">
         <h4 class="heading-compact icons-section">
           <span class="icons icon-award"></span>
-          Awards <span class="optional-field">(Optional)</span>
+          Awards
           <button class="btn-edit" (click)="onEdit()" title="Edit Awards"></button>
         </h4>
         <ul class="clearfix">

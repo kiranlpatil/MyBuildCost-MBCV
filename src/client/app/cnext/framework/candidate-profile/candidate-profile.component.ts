@@ -460,13 +460,25 @@ export class CandidateProfileComponent implements OnInit, DoCheck, OnDestroy {
                       this.whichStepsVisible[4] = true;
                       if (this.candidate.interestedIndustries !== undefined && this.candidate.interestedIndustries.length > 0) {
                         this.showIndustryExperience = true;
-                        if (this.candidate.professionalDetails !== undefined && this.candidate.professionalDetails.noticePeriod !== '') {
+                        if (this.candidate.professionalDetails !== undefined &&
+                          this.candidate.professionalDetails.noticePeriod !== undefined &&
+                          this.candidate.professionalDetails.noticePeriod !== '') {
                           this.showProfessionalData = true;
                           this.whichStepsVisible[5] = true;
                           this.candidate.isCompleted = true;
                           this.highlightedSection.iscompleted = true;
                           this.checkdataFilled();
-                          this.highlightedSection.name = 'None';
+                              if(this.candidate.academics!==undefined && this.candidate.academics.length>0) {
+                                this.showAcademicsDetails = true;
+                                this.showAboutMySelf = true;
+                                this.showEmploymentHistory = true;
+                                this.highlightedSection.name = 'None';
+                              }else {
+                                this.showAcademicsDetails = true;
+                                this.showEmploymentHistory = true;
+                                this.showAboutMySelf = true;
+                                this.highlightedSection.name='AcademicDetails';
+                              }
                         } else {
                           this.showProfessionalData = true;
                           this.whichStepsVisible[5] = true;

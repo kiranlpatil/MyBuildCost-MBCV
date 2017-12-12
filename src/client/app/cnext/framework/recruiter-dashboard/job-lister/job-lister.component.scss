@@ -306,6 +306,12 @@
   width: 91%;
 }
 
+.clone-job-menu {
+  .btn {
+    display: none !important;
+  }
+}
+
 .my-post-jobs {
   &:hover {
     .clone-job-menu {

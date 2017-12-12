@@ -4,7 +4,12 @@
     <cn-tool-tip [message]="tooltipMessage"></cn-tool-tip>
   -->
   <div class="main-content clearfix edit-modal-content" industrydetails>
-    <h4 class="heading" *ngIf="isCandidate">{{industryForCandidateHeading}}</h4>
+    <h4 class="heading" *ngIf="isCandidate">
+      {{industryForCandidateHeading}}
+      <span class="heading-optional-field">
+        {{getHeadings().ANYONE}}
+      </span>
+    </h4>
     <h4 class="heading" *ngIf="!isCandidate">{{industryForRecruiterHeading}}</h4>
     <div class="error-messages edit-error-msg" *ngIf="!isValid">
       <span class="glyphicon glyphicon-warning-sign"></span>

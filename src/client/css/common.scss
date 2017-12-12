@@ -194,6 +194,14 @@ $add-keyskill-color: #b1b1b1;
   font-weight: bold;
 }
 
+.heading-optional-field {
+  color: $light-black1 !important;
+  float: none !important;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 24px !important;
+}
+
 .input-group-addon {
   padding: 6px 12px 6px 0;
   background-color: transparent;

@@ -93,6 +93,10 @@ export class IndustryListComponent implements OnChanges {
         error => this.errorService.onError(error));
   }
 
+  getHeadings() {
+    return Headings;
+  }
+
     onEdit() {
         this.highlightedSection.name = 'Industry';
         this.disableButton = false;

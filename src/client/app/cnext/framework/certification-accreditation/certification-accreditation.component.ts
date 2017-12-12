@@ -231,6 +231,10 @@ export class CertificationAccreditationComponent {
     return Messages;
   }
 
+  getHeadings() {
+    return Headings;
+  }
+
   onEdit() {
     this.highlightedSection.name = 'Certification';
     this.highlightedSection.isDisable = true;

@@ -34,7 +34,7 @@
       <ul>
         <li>
           <span (click)="openCandidateDashboard(candidate.data.userId)">
-          <p class="username">{{candidate.first_name}} {{candidate.last_name}}
+          <p title="{{candidate.first_name}} {{candidate.last_name}}" class="username">{{candidate.first_name}} {{candidate.last_name}}
             <span class="glyphicon glyphicon-eye-open" *ngIf="candidate.data && candidate.data.isVisible" title="Profile is public and available in recruiter search"></span>
             <span class="glyphicon glyphicon-eye-close" *ngIf="candidate.data && !candidate.data.isVisible" title="Profile is private hence it will not be visible to recruiter"></span>
           </p>

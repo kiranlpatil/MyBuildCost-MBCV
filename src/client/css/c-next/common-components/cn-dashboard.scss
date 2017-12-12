@@ -166,9 +166,28 @@
       }
     }
 
-    li.match-count-tabs.active a {
+    li.match-count-tabs a {
+      span {
+        background: $purple;
+      }
+    }
+    li.match-count-tabs.active a{
       border-bottom: 3px solid $purple !important;
       color: $purple !important;
+      span {
+        background: $purple;
+      }
+    }
+
+    li.recruiters-count-tabs a {
+      span {
+        background: $dark-green;
+      }
+    }
+
+    li.recruiters-count-tabs.active a {
+      border-bottom: 3px solid $dark-green !important;
+      color: $dark-green !important;
     }
 
     li.cart-job-tabs.active a {

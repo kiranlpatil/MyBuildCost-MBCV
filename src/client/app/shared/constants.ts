@@ -689,20 +689,22 @@ export class Tooltip {
 
 export class Headings {
   public static ACADAMIC_DETAILS: string = 'Academic Details';
-  public static AWARDS: string = 'Awards (Optional)';
+  public static AWARDS: string = 'Awards';
   public static JOB_DISCRIPTION: string = 'Job Description';
   public static HIDE_COMPANY_NAME: string = 'Hide company Name from applicant';
   public static GOT_IT: string = 'OK, Got it';
   public static CAPABILITIES_FOR_CANDIDATE: string = 'Select those capabilities that describe your current strength.';
   public static CAPABILITIES_FOR_RECRUITER: string = 'Select core capabilities that are required in the candidate.';
-  public static CERTIFICATE_ACCREDITATION: string = 'Certification/Accreditation (Optional)';
+  public static CERTIFICATE_ACCREDITATION: string = 'Certification/Accreditation';
   public static ADDITIONAL_INFORMATION: string = 'Additional information about the job';
   public static OPTIONAL: string = '(Optional)';
+  public static MANDATORY: string = '(Mandatory)';
+  public static ANYONE: string = '(Any One)';
   public static CAPABITITIES_HEADING: string = 'Capabilities';
-  public static EMPLOYMENT_HISTORY: string = 'Employment History (Optional)';
+  public static EMPLOYMENT_HISTORY: string = 'Employment History';
   public static ADDITIONAL_DOMAIN_EXPOSURE: string = 'Additional domain exposure';
-  public static INDUSTRY_FOR_CANDIDATE: string = 'Select your Industry (Any One)';
-  public static INDUSTRY_FOR_RECRUITER: string = 'Select industry in which candidate is expected to work (Any One)';
+  public static INDUSTRY_FOR_CANDIDATE: string = 'Select your Industry';
+  public static INDUSTRY_FOR_RECRUITER: string = 'Select industry in which candidate is expected to work';
   public static JOB_PROFICIENCIES: string = 'Keywords that describe candidate\'s area of expertise (Optional)';
   public static MANDATORY_PROFICIENCIES: string = 'Mandatory Key Skills';
   public static ADDITIONAL_PROFICIENCIES: string = 'Additional Key Skills';

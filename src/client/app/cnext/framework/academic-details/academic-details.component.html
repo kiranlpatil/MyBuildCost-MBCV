@@ -3,7 +3,11 @@
 <div class="section-container clear" *ngIf="highlightedSection.name =='AcademicDetails'">
   <div class="main-content edit-modal-content clearfix">
     <div class="scrollable-content academic-section col-xs-7" #parentDiv>
-      <h4 class="heading">{{acadamicDetailsHeading}} (Mandatory)</h4>
+      <h4 class="heading">{{acadamicDetailsHeading}}
+        <span class="heading-optional-field">
+          {{getHeadings().MANDATORY}}
+        </span>
+      </h4>
       <form class="description-form" [formGroup]="academicDetail" novalidate>
         <div class="row">
           <div class="col-md-11 col-sm-10 no-padding" formArrayName="academicDetails" #innerDiv>
@@ -64,7 +68,7 @@
         <h4 class="heading-compact icons-section">
           <!--<img src="assets/c-next/icons/education-icon.png" alt="employment"/>-->
           <span class="icons icon-education"></span>
-          Academic Details <span class="optional-field"> (Mandatory)</span>
+          Academic Details
           <button class="btn-edit" (click)="onEdit()"></button>
         </h4>
       </div>
@@ -73,7 +77,7 @@
         <h4 class="heading-compact icons-section">
           <!--<img src="assets/c-next/icons/education-icon.png" alt="employment"/>-->
           <span class="icons icon-education"></span>
-          Academic Details <span class="optional-field">  (Mandatory)</span>
+          Academic Details
           <button class="btn-edit" (click)="onEdit()"></button>
         </h4>
         <ul class="">
