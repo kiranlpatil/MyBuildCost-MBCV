@@ -13,32 +13,30 @@ import {ManagedCandidatesSummary} from "../../model/managed-candidates-summary";
 
 export class MyCareerPageComponent {
 
-  public fromDate : string = '';
-  public toDate : string = '';
-  public inValidDates : boolean = false;
-  public summary : ManagedCandidatesSummary = new ManagedCandidatesSummary();
-  public noCandidatesToShow: boolean = false;
+  public fromDate: string = '';
+  public toDate: string = '';
+  public inValidDates: boolean = false;
+  public summary: ManagedCandidatesSummary = new ManagedCandidatesSummary();
 
   constructor(private manageCandidatesService: ManageCandidatesService, private errorService: ErrorService) {
 
   }
 
-  loadSummary(fromDate: string, toDate: string) {
-    if (fromDate != '' && toDate != '') {
-      if (new Date(fromDate) < new Date(toDate)) {
-        this.manageCandidatesService.getMyCareerPageSummary(fromDate, toDate)
+  loadSummary() {
+    this.inValidDates = false;
+    if (this.fromDate != '' && this.toDate != '') {
+      if (new Date(this.fromDate) < new Date(this.toDate)) {
+        this.manageCandidatesService.getMyCareerPageSummary(this.fromDate, this.toDate)
           .subscribe(
             data => {
-              this.summary = data.data;
-              if(this.summary.total == 0) {
-                this.noCandidatesToShow = true;
-              }
+              this.summary = data.summary;
             },
             (error: Error) => {
               this.errorService.onError(error);
             }
           );
       } else {
+        this.summary = new ManagedCandidatesSummary();
         this.inValidDates = true;
       }
     }

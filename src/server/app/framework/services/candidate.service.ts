@@ -101,20 +101,15 @@ class CandidateService {
   updateRecruitersMyCandidateList(candidateId: number, candidate: any,
                                   callback: (error: Error, status: string) => void) {
 
-    let recruiterCandidatesModel: RecruiterCandidatesModel = new RecruiterCandidatesModel();
-    recruiterCandidatesModel.recruiterId = candidate.recruiterReferenceId;
-    recruiterCandidatesModel.candidateId = String(candidateId);
-    recruiterCandidatesModel.mobileNumber = candidate.mobile_number;
-    recruiterCandidatesModel.source = 'career plugin';
-    recruiterCandidatesModel.status =  candidate.login ? 'Logged In' : 'Registered';
-
     this.recruiterRepository.populateRecruiterDetails(candidate.recruiterReferenceId, (err, recruiter) => {
       if (err) {
         callback(err, null);
         return;
       }
+      let status =  candidate.login ? 'Logged In' : 'Registered';
       let recruiterCandidatesService = new RecruiterCandidatesService();
-      recruiterCandidatesService.update(recruiterCandidatesModel, (error: Error, status: String) => {
+      recruiterCandidatesService.update(candidate.recruiterReferenceId, String(candidateId), candidate.mobile_number,
+        status, (error: Error, recruiterCandidatesData: RecruiterCandidatesModel) => {
         if (error) {
           callback(error, null);
           return;
@@ -971,7 +966,7 @@ class CandidateService {
     });
   }
 
-  sendMailToRecruiter(candidate: any, callback: (error: any, result: any) => void) {
+  updateToRecruiter(candidate: any, callback: (error: any, result: any) => void) {
 
     this.recruiterRepository.retrieve({'_id': new mongoose.Types.ObjectId(candidate.recruiterReferenceId)}, (recruiterErr, recData) => {
       if (recruiterErr) {
@@ -979,13 +974,8 @@ class CandidateService {
       } else {
 
         let recruiterCandidatesService = new RecruiterCandidatesService();
-        let recruiterCandidatesModel: RecruiterCandidatesModel = new RecruiterCandidatesModel();
-        recruiterCandidatesModel.recruiterId = recData[0]._id.toString();
-        recruiterCandidatesModel.candidateId = candidate._id;
-        recruiterCandidatesModel.mobileNumber = candidate.basicInformation.mobile_number;
-        recruiterCandidatesModel.source = 'career plugin';
-        recruiterCandidatesModel.status = 'Profile submitted';
-        recruiterCandidatesService.update(recruiterCandidatesModel, (error: Error, status: String) => {
+        recruiterCandidatesService.update(recData[0]._id.toString(), candidate._id,
+          candidate.basicInformation.mobile_number, 'Profile submitted', (error: Error, data: RecruiterCandidatesModel) => {
           if (error) {
             callback(error, null);
             return;

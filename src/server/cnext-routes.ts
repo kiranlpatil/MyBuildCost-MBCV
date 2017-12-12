@@ -160,8 +160,8 @@ export function cnextInit(app: express.Application) {
     app.get('/api/registrationstatus/:mobileNo', loggerInterceptor.logDetail, userInterceptor.validateRegistrationStatus,
       userController.getUserRegistrationStatus);
 
-    app.get('/api/recruiter/:id/recruiterCandidatesSummary', loggerInterceptor.logDetail, loggerInterceptor.logDetail,
-      this.authInterceptor.requiresAuth, recruiterCandidatesController.getSummary)
+    app.get('/api/recruiter/:id/recruiterCandidatesSummary', loggerInterceptor.logDetail,
+      this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, recruiterCandidatesController.getSummary)
 
     app.use(sharedService.errorHandler);
   } catch (e) {

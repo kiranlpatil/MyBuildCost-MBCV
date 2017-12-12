@@ -113,7 +113,7 @@ export function updateDetails(req: express.Request, res: express.Response, next:
                 if (!isEditingProfile && updatedCandidate.isSubmitted) {
                   mailChimpMailerService.onCandidatePofileSubmitted(req.body.basicInformation);
                   if (updatedCandidate.recruiterReferenceId) {
-                    candidateService.sendMailToRecruiter(updatedCandidate, (error: any, result: any) => {
+                    candidateService.updateToRecruiter(updatedCandidate, (error: any, result: any) => {
                       if (error) {
                         next(error);
                       }
