@@ -5,11 +5,13 @@ import {AboutComponent} from "./about/index";
 import {ContactComponent} from "./contact/contact.component";
 import {UserProfileComponent} from "../../user/user-profile/user-profile.component";
 import {ChangePasswordComponent} from "../../user/change-password/change-password.component";
+import {AuthGuardService} from "../../shared/services/auth-guard.service";
 
 export const DashboardRoutes: Route[] = [
   {
     path: 'user',
     component: DashboardComponent,
+    canActivate: [AuthGuardService],
     children: [
       {path: '', component: DashboardHomeComponent},
       {path: 'details', component: UserProfileComponent},
