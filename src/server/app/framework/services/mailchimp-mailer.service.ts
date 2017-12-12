@@ -3,7 +3,6 @@ import UserRepository = require('../dataaccess/repository/user.repository');
 import LoggerService = require('../shared/logger/LoggerService');
 import { CandidateProfileCompletionInPercentage } from '../shared/sharedconstants';
 import { CandidateDetail } from '../../../../client/app/user/models/candidate-details';
-import {underline} from "chalk";
 
 let config = require('config');
 let loggerService = new LoggerService('MAILCHIMP_MAILER_SERVICE');
