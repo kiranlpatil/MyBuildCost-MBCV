@@ -149,7 +149,7 @@
     <cn-job-clone [selectedJobId]="selectedJobId"  [selectedJobTitle]="selectedJobTitle"
                   [isCloneButtonClicked]="isCloneButtonClicked"  (raiseJobEditViewEventEmitter)="jobcloned($event)" ></cn-job-clone>
 
-      <cn-job-close [selectedJobTitleForClose]="selectedJobTitle" [isJobCloseButtonClicked]="isJobCloseButtonClicked"  [selectedJobProfile]="selectedJobProfile"></cn-job-close>
+      <cn-job-close [selectedJobTitleForClose]="selectedJobTitle" [isJobCloseButtonClicked]="isJobCloseButtonClicked"  [selectedJobProfileId]="selectedJobProfile._id"></cn-job-close>
   </div>
   <tpl-footer></tpl-footer>
 </div>

@@ -30,6 +30,7 @@ export class JobListerComponent implements  OnInit, OnDestroy {
   private selectedJobId:string;
   private selectedJobTitle:string;
   private selectedJobProfile: any;
+  private selectedJobProfileId: any;
   private isCloneButtonClicked:boolean;
   private isJobCloseButtonClicked:boolean;
   private toggle: boolean = false;
@@ -140,7 +141,7 @@ export class JobListerComponent implements  OnInit, OnDestroy {
   }
 
   closeJobPost(selectedJobProfile: any) {
-    this.selectedJobProfile = selectedJobProfile;
+    this.selectedJobProfileId = selectedJobProfile._id;
     this.selectedJobTitle = selectedJobProfile.jobTitle;
     this.isJobCloseButtonClicked=!this.isJobCloseButtonClicked;
   }
