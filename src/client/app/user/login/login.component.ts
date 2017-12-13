@@ -17,6 +17,7 @@ import {ValidationService} from "../../shared/customvalidations/validation.servi
 import {Messages, ProjectAsset} from "../../shared/constants";
 import {SharedService} from "../../shared/services/shared-service";
 import {SessionStorageService} from "../../shared/services/session.service";
+import {RegistrationService} from "../services/registration.service";
 /*declare var CareerPluginLoad:any;*/
 
 @Component({
@@ -45,9 +46,11 @@ export class LoginComponent implements OnInit {
   isToasterVisible: boolean = true;
   isFromCareerPlugin: boolean = false;
   recruiterReferenceId: string;
+  isRememberPassword: boolean = false;
   constructor(private _router: Router, private loginService: LoginService, private themeChangeService: ThemeChangeService,
               private messageService: MessageService, private formBuilder: FormBuilder,
-              private sharedService: SharedService, private activatedRoute: ActivatedRoute) {
+              private sharedService: SharedService, private activatedRoute: ActivatedRoute,
+              private registrationService:RegistrationService) {
     this.userForm = this.formBuilder.group({
       'email': ['', [ValidationService.requireEmailValidator, ValidationService.emailValidator]],
       'password': ['', [ValidationService.requirePasswordValidator]]
@@ -76,6 +79,18 @@ export class LoginComponent implements OnInit {
       }
       this.isFromCareerPlugin = (params['integrationKey'] !== undefined) ? true : false;
     });
+    if(SessionStorageService.getLocalValue(LocalStorage.ACCESS_TOKEN)) {
+      this.getUserData();
+    }
+  }
+
+  getUserData() {
+    this.loginService.getUserData()
+      .subscribe(
+        data => {
+          this.registrationService.onSuccess(data);
+        }, error => { this.registrationService.loginFail(error)}
+      );
   }
 
   closeToaster() {
@@ -103,6 +118,10 @@ export class LoginComponent implements OnInit {
   }
 
   loginSuccess(res: any) {
+    if(this.isRememberPassword) {
+      SessionStorageService.setLocalValue(LocalStorage.ACCESS_TOKEN, res.access_token);
+      SessionStorageService.setLocalValue(LocalStorage.IS_LOGGED_IN, 1);
+    }
     LocalStorageService.setLocalValue(LocalStorage.IS_CANDIDATE, res.data.isCandidate);
     LocalStorageService.setLocalValue(LocalStorage.IS_CANDIDATE_FILLED, res.data.isCompleted);
     LocalStorageService.setLocalValue(LocalStorage.IS_CANDIDATE_SUBMITTED,  res.data.isSubmitted);
@@ -195,6 +214,14 @@ export class LoginComponent implements OnInit {
 
   onForgotPassword() {
     this._router.navigate([NavigationRoutes.APP_FORGOTPASSWORD]);
+  }
+
+  OnRememberPassword(event: any) {
+    if(event.target.checked) {
+      this.isRememberPassword = true;
+    } else {
+      this.isRememberPassword = false;
+    }
   }
 
   onFailure(error: any) {

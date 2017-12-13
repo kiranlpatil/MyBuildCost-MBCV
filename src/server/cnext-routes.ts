@@ -101,6 +101,8 @@ export function cnextInit(app: express.Application) {
       recruiterController.responseToRecruiter);
     app.put('/api/job/:id/clone', loggerInterceptor.logDetail, this.authInterceptor.requiresAuth,
       jobProfileController.cloneJob);
+    app.get('/api/userData', loggerInterceptor.logDetail, this.authInterceptor.requiresAuth,
+      this.authInterceptor.secureApiCheck, userController.getUserDetails);
 
     //search-engine api
     app.post('/api/recruiter/jobProfile/:id/candidates', loggerInterceptor.logDetail, this.authInterceptor.requiresAuth,

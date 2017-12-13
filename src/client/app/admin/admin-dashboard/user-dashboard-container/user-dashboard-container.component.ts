@@ -25,6 +25,7 @@ export class UserDashboardContainerComponent implements OnInit {
 
   ngOnInit() {
     window.sessionStorage.clear();
+    //window.localStorage.clear();
     this.activatedRoute.queryParams.subscribe(params => {
       let token = params['token'];
       let userid = params['userid'];

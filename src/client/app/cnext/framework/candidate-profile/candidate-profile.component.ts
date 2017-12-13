@@ -556,6 +556,7 @@ export class CandidateProfileComponent implements OnInit, DoCheck, OnDestroy {
 
   logOut() {
     window.sessionStorage.clear();
+    window.localStorage.clear();
     this._router.navigate([NavigationRoutes.APP_START]);
   }
 

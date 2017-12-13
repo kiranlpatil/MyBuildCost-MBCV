@@ -43,6 +43,7 @@ export class CandidateSummaryComponent implements OnInit {
 
   logOut() {
     window.sessionStorage.clear();
+    window.localStorage.clear();
     this._router.navigate([NavigationRoutes.APP_START]);
   }
 }

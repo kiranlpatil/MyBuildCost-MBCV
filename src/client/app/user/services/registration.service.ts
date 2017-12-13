@@ -40,7 +40,11 @@ constructor(private _router: Router, private themeChangeService: ThemeChangeServ
     LocalStorageService.setLocalValue(LocalStorage.PROFILE_PICTURE, res.data.picture);
     LocalStorageService.setLocalValue(LocalStorage.AFTER_RECRUITER_REGISTRATION_FORM, null);
     LocalStorageService.setLocalValue(LocalStorage.AFTER_CANDIDATE_REGISTRATION_FORM, null);
-    if (res.data.isCandidate === true) {
+    LocalStorageService.setLocalValue(LocalStorage.ISADMIN, res.data.isAdmin);
+    if (res.data.isAdmin === true) {
+      this._router.navigate([NavigationRoutes.APP_ADMIN_DASHBOARD]);
+    }
+    else if (res.data.isCandidate === true) {
       if (res.data.isCompleted === true) {
         this._router.navigate([NavigationRoutes.APP_CANDIDATE_DASHBOARD]);
       } else {

@@ -50,4 +50,11 @@ export class LoginService extends BaseService {
       .catch(this.handleError);
   }
 
+  getUserData(): Observable<any> {
+    var url = API.USER_DATA;
+    return this.http.get(url)
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
+
 }
