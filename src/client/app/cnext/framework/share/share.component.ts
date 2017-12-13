@@ -2,8 +2,8 @@ import {Component, OnInit} from "@angular/core";
 import {ShareService} from "./share.service";
 import {ErrorService} from "../../../shared/services/error.service";
 import {Share} from "../model/share";
-import {LocalStorageService} from "../../../shared/services/localstorage.service";
-import {LocalStorage, Messages} from "../../../shared/constants";
+import {SessionStorageService} from "../../../shared/services/session.service";
+import {SessionStorage, Messages} from "../../../shared/constants";
 import {MessageService} from "../../../shared/services/message.service";
 import { Message } from '../../../shared/models/message';
 
@@ -26,10 +26,10 @@ export class ShareComponent implements OnInit {
 
   constructor(private shareService:ShareService, private errorService:ErrorService,
               private messageService: MessageService) {
-    if (LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE) === 'true') {
+    if (SessionStorageService.getSessionValue(SessionStorage.IS_CANDIDATE) === 'true') {
       this.isCandidate = true;
     }
-    if (LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE_SUBMITTED) === 'true') {
+    if (SessionStorageService.getSessionValue(SessionStorage.IS_CANDIDATE_SUBMITTED) === 'true') {
       this.isCandidateSubmitted = true;
     }
   }

@@ -1,12 +1,12 @@
 import {Component, OnInit} from "@angular/core";
 import {AdminDashboardService} from "../admin-dashboard.service";
 import {Router} from "@angular/router";
-import {Messages, Label, AppSettings, LocalStorage} from "../../../shared/constants";
+import {Messages, Label, AppSettings, SessionStorage} from "../../../shared/constants";
 import {Message} from "../../../shared/models/message";
 import {MessageService} from "../../../shared/services/message.service";
 import {LoaderService} from "../../../shared/loader/loaders.service";
 import {ErrorService} from "../../../shared/services/error.service";
-import {LocalStorageService} from "../../../shared/services/localstorage.service";
+import {SessionStorageService} from "../../../shared/services/session.service";
 
 @Component({
   moduleId: module.id,
@@ -108,7 +108,7 @@ export class CandidateDetailListComponent implements OnInit {
   }
 
   openCandidateDashboard(userId: any) {
-    let token = LocalStorageService.getLocalValue(LocalStorage.ACCESS_TOKEN);
+    let token = SessionStorageService.getSessionValue(SessionStorage.ACCESS_TOKEN);
     let url = AppSettings.IP + '/usercontainer?token='+token+'&'+'userid='+userId;
     window.open(url, '_blank');
   }

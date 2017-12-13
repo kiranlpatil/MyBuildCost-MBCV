@@ -1,4 +1,4 @@
-import {LocalStorage, SessionStorage} from "../../shared/constants";
+import {SessionStorage} from "../../shared/constants";
 
 export class SessionStorageService {
 
@@ -14,15 +14,27 @@ export class SessionStorageService {
     sessionStorage.setItem(SessionStorage.RECRUITER_REFERENCE_ID, id);
   }
 
-  public static getLocalValue(key: any) {
+ /* public static getSessionValue(key: any) {
     return localStorage.getItem(key);
   }
 
-  public static removeLocalValue(key: any) {
+  public static removeSessionValue(key: any) {
     localStorage.removeItem(key);
   }
 
-  public static setLocalValue(key: any, value: any) {
+  public static setSessionValue(key: any, value: any) {
     localStorage.setItem(key, value);
-  }
+  }*/
+
+   public static getSessionValue(key: any) {
+     return sessionStorage.getItem(key);
+   }
+
+   public static removeSessionValue(key: any) {
+     sessionStorage.removeItem(key);
+   }
+
+   public static setSessionValue(key: any, value: any) {
+     sessionStorage.setItem(key, value);
+   }
 }

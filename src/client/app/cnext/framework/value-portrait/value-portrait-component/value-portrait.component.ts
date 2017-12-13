@@ -2,8 +2,8 @@ import {Component, Input, Output, OnInit, EventEmitter, OnChanges} from "@angula
 import {CandidateProfileService} from "../../candidate-profile/candidate-profile.service";
 import {Candidate} from "../../../../user/models/candidate";
 import {ErrorService} from "../../../../shared/services/error.service";
-import {Headings, ImagePath, Label, LocalStorage, Messages, UsageActions} from "../../../../shared/constants";
-import {LocalStorageService} from "../../../../shared/services/localstorage.service";
+import {Headings, ImagePath, Label, SessionStorage, Messages, UsageActions} from "../../../../shared/constants";
+import {SessionStorageService} from "../../../../shared/services/session.service";
 import {GuidedTourService} from "../../guided-tour.service";
 import {ComplexityAnsweredService} from "../../complexity-answered.service";
 import {UsageTrackingService} from "../../usage-tracking.service";
@@ -38,13 +38,13 @@ export class ValuePortraitComponent implements OnInit, OnChanges {
               private errorService: ErrorService, private complexityAnsweredService: ComplexityAnsweredService,
               private usageTrackingService: UsageTrackingService,
   private actionOnQCardService: ActionOnQCardService) {
-    if (LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE) === 'true') {
+    if (SessionStorageService.getSessionValue(SessionStorage.IS_CANDIDATE) === 'true') {
       this.isCandidate = true;
     }
-    if (LocalStorageService.getLocalValue(LocalStorage.ISADMIN) === 'true') {
+    if (SessionStorageService.getSessionValue(SessionStorage.ISADMIN) === 'true') {
       this.isAdmin = true;
     }
-    if (LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE_SUBMITTED) === 'true') {
+    if (SessionStorageService.getSessionValue(SessionStorage.IS_CANDIDATE_SUBMITTED) === 'true') {
       this.isSubmitted = true;
     }
     this.actionOnQCardService.getJobId().subscribe(obj => {
@@ -93,7 +93,7 @@ export class ValuePortraitComponent implements OnInit, OnChanges {
         candidateData => {
           if (!this.isCandidate) {
             let usageTrackingData: UsageTracking = new UsageTracking();
-            usageTrackingData.recruiterId = LocalStorageService.getLocalValue(LocalStorage.END_USER_ID);
+            usageTrackingData.recruiterId = SessionStorageService.getSessionValue(SessionStorage.END_USER_ID);
             usageTrackingData.action = UsageActions.VIEWED_VALUE_PORTRAIT_BY_RECRUITER;
             usageTrackingData.candidateId = candidateData.data.candidateId;
 
@@ -116,7 +116,7 @@ export class ValuePortraitComponent implements OnInit, OnChanges {
     this.guidedTourService.updateProfileField(this.guidedTourStatus)
       .subscribe(
         (res: any) => {
-          LocalStorageService.setLocalValue(LocalStorage.GUIDED_TOUR, JSON.stringify(res.data.guide_tour));
+          SessionStorageService.setSessionValue(SessionStorage.GUIDED_TOUR, JSON.stringify(res.data.guide_tour));
         },
         error => this.errorService.onError(error)
       );

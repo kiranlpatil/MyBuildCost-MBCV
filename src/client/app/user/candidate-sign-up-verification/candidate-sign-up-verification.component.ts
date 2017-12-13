@@ -1,8 +1,8 @@
 import {Component} from "@angular/core";
-import {LocalStorage, Messages} from "../../shared/constants";
+import {SessionStorage, Messages} from "../../shared/constants";
 import {RegistrationService} from "../services/registration.service";
 import {Login} from "../models/login";
-import {LocalStorageService} from "../../shared/services/localstorage.service";
+import {SessionStorageService} from "../../shared/services/session.service";
 import {LoginService} from "../login/login.service";
 import {AnalyticService} from "../../shared/services/analytic.service";
 import {Router} from "@angular/router";
@@ -28,14 +28,14 @@ export class CandidateSignUpVerificationComponent {
     this.signUpVerificationHeading = this.getMessages().MSG_MOBILE_VERIFICATION_TITLE;
     this.actionName = this.getMessages().FROM_REGISTRATION;
     this.loginModel = new Login();
-    this.userID=LocalStorageService.getLocalValue(LocalStorage.USER_ID);
-    this.mobileNumber=LocalStorageService.getLocalValue(LocalStorage.MOBILE_NUMBER);
+    this.userID=SessionStorageService.getSessionValue(SessionStorage.USER_ID);
+    this.mobileNumber=SessionStorageService.getSessionValue(SessionStorage.MOBILE_NUMBER);
     fbq('track', 'PageView');
     this.analyticService.googleAnalyse(this._router);
   }
   navigateToDashboard() {
-    this.loginModel.email = LocalStorageService.getLocalValue(LocalStorage.EMAIL_ID);
-    this.loginModel.password = LocalStorageService.getLocalValue(LocalStorage.PASSWORD);
+    this.loginModel.email = SessionStorageService.getSessionValue(SessionStorage.EMAIL_ID);
+    this.loginModel.password = SessionStorageService.getSessionValue(SessionStorage.PASSWORD);
     this.loginService.userLogin(this.loginModel)
       .subscribe(
         res => (this.registrationService.onSuccess(res)),

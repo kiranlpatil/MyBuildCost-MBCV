@@ -1,7 +1,7 @@
 import {Component, OnInit} from "@angular/core";
 import {Router} from "@angular/router";
-import {LocalStorage, NavigationRoutes} from "../../../../shared/constants";
-import {LocalStorageService} from "../../../../shared/services/localstorage.service";
+import {SessionStorage, NavigationRoutes} from "../../../../shared/constants";
+import {SessionStorageService} from "../../../../shared/services/session.service";
 import {Candidate} from "../../../../user/models/candidate";
 import {CandidateProfileService} from "../../candidate-profile/candidate-profile.service";
 import {ErrorService} from "../../../../shared/services/error.service";
@@ -25,7 +25,7 @@ export class CandidateSummaryComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.candidateId = LocalStorageService.getLocalValue(LocalStorage.END_USER_ID);
+    this.candidateId = SessionStorageService.getSessionValue(SessionStorage.END_USER_ID);
     this.getCandidateProfile(this.candidateId);
   }
 

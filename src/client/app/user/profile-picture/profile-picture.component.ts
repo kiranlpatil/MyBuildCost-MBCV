@@ -4,8 +4,8 @@ import {DashboardService} from "../services/dashboard.service";
 import {
   AppSettings,
   ImagePath,
-  LocalStorage,
-  LocalStorageService,
+  SessionStorage,
+  SessionStorageService,
   Message,
   Messages,
   MessageService,
@@ -34,8 +34,8 @@ export class ProfilePictureComponent {
   constructor(private dashboardService: DashboardService,
               private messageService: MessageService, private profileService: ProfileService) {
     this.filesToUpload = [];
-    this.uploaded_image_path = LocalStorageService.getLocalValue(LocalStorage.PROFILE_PICTURE); //TODO:Get it from get user call.
-    this.isCandidate = LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE);
+    this.uploaded_image_path = SessionStorageService.getSessionValue(SessionStorage.PROFILE_PICTURE); //TODO:Get it from get user call.
+    this.isCandidate = SessionStorageService.getSessionValue(SessionStorage.IS_CANDIDATE);
     if (this.uploaded_image_path === "undefined" || this.uploaded_image_path === null) {
       if (this.isCandidate == "true") {
         this.image_path = ImagePath.PROFILE_IMG_ICON;
@@ -82,9 +82,9 @@ export class ProfilePictureComponent {
 
   fileChangeSuccess(result: any) {
     this.model = result.data;
-    LocalStorageService.setLocalValue(LocalStorage.PROFILE_PICTURE, result.data.picture);
-    var socialLogin: string = LocalStorageService.getLocalValue(LocalStorage.IS_SOCIAL_LOGIN);
-    if (LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE) === 'true') {
+    SessionStorageService.setSessionValue(SessionStorage.PROFILE_PICTURE, result.data.picture);
+    var socialLogin: string = SessionStorageService.getSessionValue(SessionStorage.IS_SOCIAL_LOGIN);
+    if (SessionStorageService.getSessionValue(SessionStorage.IS_CANDIDATE) === 'true') {
       this.onPictureUpload.emit(result.data.picture);
     }
 

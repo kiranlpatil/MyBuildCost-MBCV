@@ -1,7 +1,7 @@
 import {Component, OnInit} from "@angular/core";
 import {MessageService} from "../../../shared/services/message.service";
-import {LocalStorageService} from "../../../shared/services/localstorage.service";
-import {LocalStorage, NavigationRoutes} from "../../../shared/index";
+import {SessionStorageService} from "../../../shared/services/session.service";
+import {SessionStorage, NavigationRoutes} from "../../../shared/index";
 import {ResetPasswordService} from "./reset-password.service";
 import {ImagePath, Messages, ProjectAsset, Label, Button, Headings} from "../../../shared/constants";
 import {Message} from "../../../shared/models/message";
@@ -53,8 +53,8 @@ export class ResetPasswordComponent implements OnInit {
     this.activatedRoute.queryParams.subscribe((params: Params) => {
       let access_token = params['access_token'];
       let id = params['_id'];
-      LocalStorageService.setLocalValue(LocalStorage.ACCESS_TOKEN, access_token);
-      LocalStorageService.setLocalValue(LocalStorage.USER_ID, id);
+      SessionStorageService.setSessionValue(SessionStorage.ACCESS_TOKEN, access_token);
+      SessionStorageService.setSessionValue(SessionStorage.USER_ID, id);
     });
 
   }

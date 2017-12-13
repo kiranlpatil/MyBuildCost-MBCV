@@ -2,8 +2,8 @@ import {Injectable} from "@angular/core";
 import {Observable} from "rxjs/Observable";
 import {BaseService} from "../../../shared/services/http/base.service";
 import {Headers, Http, RequestOptions} from "@angular/http";
-import {API, LocalStorage} from "../../../shared/constants";
-import {LocalStorageService} from "../../../shared/services/localstorage.service";
+import {API, SessionStorage} from "../../../shared/constants";
+import {SessionStorageService} from "../../../shared/services/session.service";
 
 @Injectable()
 export class ProfessionalDataService extends BaseService {
@@ -15,7 +15,7 @@ export class ProfessionalDataService extends BaseService {
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({headers: headers});
     let body = JSON.stringify({'professionalDetails': professionaldata});
-    let url: string = API.CANDIDATE_PROFILE + '/' + LocalStorageService.getLocalValue(LocalStorage.USER_ID);
+    let url: string = API.CANDIDATE_PROFILE + '/' + SessionStorageService.getSessionValue(SessionStorage.USER_ID);
     return this.http.put(url, body, options)
       .map(this.extractData)
       .catch(this.handleError);
@@ -85,7 +85,7 @@ export class ProfessionalDataService extends BaseService {
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({headers: headers});
     let body = JSON.stringify({'proficiencies': candidateproficiency});
-    let url: string = API.CANDIDATE_PROFILE + '/' + LocalStorageService.getLocalValue(LocalStorage.USER_ID);
+    let url: string = API.CANDIDATE_PROFILE + '/' + SessionStorageService.getSessionValue(SessionStorage.USER_ID);
     return this.http.put(url, body, options)
       .map(this.extractData)
       .catch(this.handleError);

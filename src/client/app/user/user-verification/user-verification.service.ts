@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
 import {Http} from "@angular/http";
 import {Observable} from "rxjs/Observable";
-import {API, BaseService, LocalStorage, LocalStorageService, MessageService} from "../../shared/index";
+import {API, BaseService, SessionStorage, SessionStorageService, MessageService} from "../../shared/index";
 import {VerifyUser} from "../models/verify-user";
 
 
@@ -13,8 +13,8 @@ export class UserVerificationService extends BaseService {
   }
 
   verifyUserByMail(user: VerifyUser): Observable<any> {
-    LocalStorageService.setLocalValue(LocalStorage.CHANGE_MAIL_VALUE, 'from_registration');
-    var url = API.SEND_VERIFICATION_MAIL + '/' + LocalStorageService.getLocalValue(LocalStorage.USER_ID);
+    SessionStorageService.setSessionValue(SessionStorage.CHANGE_MAIL_VALUE, 'from_registration');
+    var url = API.SEND_VERIFICATION_MAIL + '/' + SessionStorageService.getSessionValue(SessionStorage.USER_ID);
     var body = JSON.stringify(user);
     return this.http.post(url, body)
       .map(this.extractData)
@@ -22,7 +22,7 @@ export class UserVerificationService extends BaseService {
   }
 
   verifyUserByMobile(user: VerifyUser): Observable<any> {
-    var url = API.GENERATE_OTP + '/' + LocalStorageService.getLocalValue(LocalStorage.USER_ID);
+    var url = API.GENERATE_OTP + '/' + SessionStorageService.getSessionValue(SessionStorage.USER_ID);
     var body = JSON.stringify(user);
     return this.http.post(url, body)
       .map(this.extractData)

@@ -388,7 +388,7 @@ export class NavigationRoutes {
   public static APP_VLAUEPORTRAIT: string = '/value-portrait';
 }
 
-export class LocalStorage {
+export class SessionStorage {
   public static ACCESS_TOKEN = 'access_token';
   public static IS_THEME_SELECTED = 'is_theme_selected';
   public static IS_SOCIAL_LOGIN = 'is_social_login';
@@ -424,10 +424,15 @@ export class LocalStorage {
   public static CURRENT_JOB_POSTED_ID = 'current_job_posted_job_id';
   public static POSTED_JOB = 'posted_job';
   public static GUIDED_TOUR = 'guided_tour';
+  public static RECRUITER_REFERENCE_ID = 'recruiter_reference_id';
 }
 
-export class SessionStorage {
-  public static RECRUITER_REFERENCE_ID = 'recruiter_reference_id';
+export class LocalStorage {
+  public static ACCESS_TOKEN = 'access_token';
+  public static IS_LOGGED_IN = 'is_user_logged_in';
+  public static ISADMIN = 'is_admin';
+  public static _ID = '_id';
+  public static FROM_ADMIN = 'from_admin';
 }
 
 export class ValueConstant {

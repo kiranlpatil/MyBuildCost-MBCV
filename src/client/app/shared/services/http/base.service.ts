@@ -1,6 +1,6 @@
 import {Response} from "@angular/http";
 import {Observable} from "rxjs/Observable";
-import {LocalStorage, LocalStorageService} from "../../index";
+import {SessionStorage, SessionStorageService} from "../../index";
 
 
 export class BaseService {
@@ -9,9 +9,9 @@ export class BaseService {
 
     let body = res.json();
     if (body.hasOwnProperty('access_token')) {
-      LocalStorageService.setLocalValue(LocalStorage.ACCESS_TOKEN, body.access_token);
+      SessionStorageService.setSessionValue(SessionStorage.ACCESS_TOKEN, body.access_token);
       if (body.data._id && body.data._id !== undefined) {
-        LocalStorageService.setLocalValue(LocalStorage.USER_ID, body.data._id);
+        SessionStorageService.setSessionValue(SessionStorage.USER_ID, body.data._id);
       }
     }
     return body || {};

@@ -4,7 +4,7 @@ import {
   CandidateProfileUpdateTrack,
   ImagePath,
   Label,
-  LocalStorage,
+  SessionStorage,
   Messages,
   NavigationRoutes,
   Tooltip
@@ -18,12 +18,11 @@ import {Industry} from "../../../user/models/industry";
 import {Message} from "../../../shared/models/message";
 import {MessageService} from "../../../shared/services/message.service";
 import {ErrorService} from "../../../shared/services/error.service";
-import {LocalStorageService} from "../../../shared/services/localstorage.service";
 import {UserFeedback} from "../user-feedback/userFeedback";
-import {SessionStorageService} from "../../../shared/services/session.service";
 import {ProficienciesComponent} from "../proficiencies/proficiencies.component";
 import {AnalyticService} from "../../../shared/services/analytic.service";
 import {ComplexityAnsweredService} from "../complexity-answered.service";
+import {SessionStorageService} from "../../../shared/services/session.service";
 declare var fbq: any;
 
 @Component({
@@ -583,7 +582,7 @@ export class CandidateProfileComponent implements OnInit, DoCheck, OnDestroy {
     if(SessionStorageService.getRecruiterReferenceId()) {
       this.candidate.recruiterReferenceId = SessionStorageService.getRecruiterReferenceId();
     }
-    LocalStorageService.setLocalValue(LocalStorage.IS_CANDIDATE_SUBMITTED, true);
+    SessionStorageService.setSessionValue(SessionStorage.IS_CANDIDATE_SUBMITTED, true);
     this.saveCandidateDetails();
     this.showModalStyle = !this.showModalStyle;
     if (this.setTimeoutId !== undefined) {
@@ -597,12 +596,12 @@ export class CandidateProfileComponent implements OnInit, DoCheck, OnDestroy {
     if(this.candidate.profile_update_tracking < CandidateProfileUpdateTrack.STEP_IS_SUBMIT_DETAILS) {
       this.candidate.profile_update_tracking = CandidateProfileUpdateTrack.STEP_IS_SUBMIT_DETAILS;
     }
-    LocalStorageService.setLocalValue(LocalStorage.IS_CANDIDATE_FILLED, true);
+    SessionStorageService.setSessionValue(SessionStorage.IS_CANDIDATE_FILLED, true);
     this.onSubmit();
   }
 
   goToDashboard() {
-    this._router.navigate([NavigationRoutes.APP_VLAUEPORTRAIT, LocalStorageService.getLocalValue(LocalStorage.USER_ID)]);
+    this._router.navigate([NavigationRoutes.APP_VLAUEPORTRAIT, SessionStorageService.getSessionValue(SessionStorage.USER_ID)]);
   }
 
   getStyleModal() {

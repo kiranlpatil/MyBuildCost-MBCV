@@ -1,7 +1,7 @@
 import {Component, OnInit, Output, EventEmitter} from "@angular/core";
 import {ActivatedRoute, Router} from "@angular/router";
-import {Button, Label, LocalStorage} from "../../../shared/constants";
-import {LocalStorageService} from "../../../shared/services/localstorage.service";
+import {Button, Label, SessionStorage} from "../../../shared/constants";
+import {SessionStorageService} from "../../../shared/services/session.service";
 import {ActionOnQCardService} from "../../../user/services/action-on-q-card.service";
 
 
@@ -27,18 +27,18 @@ export class ValuePortraitContainerComponent implements OnInit {
   type:string;
   constructor(private _router:Router, private activatedRoute:ActivatedRoute,
   private actionOnQCardService: ActionOnQCardService) {
-    if (LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE) === 'true') {
+    if (SessionStorageService.getSessionValue(SessionStorage.IS_CANDIDATE) === 'true') {
       this.isCandidate = true;
-      this.candidateName = LocalStorageService.getLocalValue(LocalStorage.FIRST_NAME)+' '+ LocalStorageService.getLocalValue(LocalStorage.LAST_NAME);
+      this.candidateName = SessionStorageService.getSessionValue(SessionStorage.FIRST_NAME)+' '+ SessionStorageService.getSessionValue(SessionStorage.LAST_NAME);
     }
-    if (LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE_SUBMITTED) === 'true') {
+    if (SessionStorageService.getSessionValue(SessionStorage.IS_CANDIDATE_SUBMITTED) === 'true') {
     this.isCandidateSubmitted = true;
     }
   }
 
   navigateTo() {
-    var role = LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE);
-    var isAdmin = LocalStorageService.getLocalValue(LocalStorage.ISADMIN);
+    var role = SessionStorageService.getSessionValue(SessionStorage.IS_CANDIDATE);
+    var isAdmin = SessionStorageService.getSessionValue(SessionStorage.ISADMIN);
     if(isAdmin) {
       this._router.navigate(['/admin_dashboard']);
     }

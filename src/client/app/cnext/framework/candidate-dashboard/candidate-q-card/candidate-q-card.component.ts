@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, Output, ViewChild, OnInit} from "@angular/core";
 import {JobQcard} from "../../model/JobQcard";
-import {AppSettings, Label, LocalStorage, UsageActions, ValueConstant} from "../../../../shared/constants";
-import {LocalStorageService} from "../../../../shared/services/localstorage.service";
+import {AppSettings, Label, SessionStorage, UsageActions, ValueConstant} from "../../../../shared/constants";
+import {SessionStorageService} from "../../../../shared/services/session.service";
 import {CandidateDashboardService} from "../candidate-dashboard.service";
 import {Message} from "../../../../shared/models/message";
 import {MessageService} from "../../../../shared/services/message.service";
@@ -68,17 +68,17 @@ export class CandidateQCardComponent implements OnInit {
   viewJob(job: JobQcard) {
     let usageTrackingData: UsageTracking = new UsageTracking();
     if (this.type !== 'searchView') {
-      usageTrackingData.recruiterId = LocalStorageService.getLocalValue(LocalStorage.END_USER_ID);
+      usageTrackingData.recruiterId = SessionStorageService.getSessionValue(SessionStorage.END_USER_ID);
       usageTrackingData.action = UsageActions.VIEWED_JOB_PROFILE_BY_CANDIDATE;
       usageTrackingData.jobProfileId = this.jobId;
       this.checkForGuidedTour.isGuidedTourImgRequire();
-      LocalStorageService.setLocalValue(LocalStorage.CURRENT_JOB_POSTED_ID, job._id);
+      SessionStorageService.setSessionValue(SessionStorage.CURRENT_JOB_POSTED_ID, job._id);
       this.jobId = job._id;
-      this.candidateId = LocalStorageService.getLocalValue(LocalStorage.END_USER_ID);
+      this.candidateId = SessionStorageService.getSessionValue(SessionStorage.END_USER_ID);
       this.showModalStyle = !this.showModalStyle;
     }
     if (this.type == 'searchView') {
-      usageTrackingData.recruiterId = LocalStorageService.getLocalValue(LocalStorage.END_USER_ID);
+      usageTrackingData.recruiterId = SessionStorageService.getSessionValue(SessionStorage.END_USER_ID);
       usageTrackingData.action = UsageActions.VIEWED_JOB_PROFILE_BY_CANDIDATE;
       usageTrackingData.jobProfileId = this.jobId;
       usageTrackingData.candidateId = this.candidateIDFromSearchView;
@@ -143,7 +143,7 @@ export class CandidateQCardComponent implements OnInit {
 
   deleteItem(jobId: string) {
     this.showModalStyle = true;
-    LocalStorageService.setLocalValue(LocalStorage.CURRENT_JOB_POSTED_ID, jobId);
+    SessionStorageService.setSessionValue(SessionStorage.CURRENT_JOB_POSTED_ID, jobId);
     this.candidateDashboardService.removeBlockJob().subscribe(
       data => {
         this.onAction.emit('delete');

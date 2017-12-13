@@ -4,12 +4,12 @@ import {CandidateProfileService} from "../candidate-profile/candidate-profile.se
 import {Message} from "../../../shared/models/message";
 import {Candidate, Section} from "../../../user/models/candidate";
 import {
-  Headings, ImagePath, LocalStorage, Messages, Tooltip,
+  Headings, ImagePath, SessionStorage, Messages, Tooltip,
   CandidateProfileUpdateTrack
 } from "../../../shared/constants";
 import {GuidedTourService} from "../guided-tour.service";
 import {ErrorService} from "../../../shared/services/error.service";
-import {LocalStorageService} from "../../../shared/services/localstorage.service";
+import {SessionStorageService} from "../../../shared/services/session.service";
 import {ComplexityAnsweredService} from "../complexity-answered.service";
 import {Router} from "@angular/router";
 
@@ -57,9 +57,9 @@ export class MoreAboutMyselfComponent implements OnInit {
     if(Number(window.innerWidth) <= 768) {
       this.guidedTourService.updateTourStatus(ImagePath.CANDIDATE_OERLAY_SCREENS_EMPLOYMENT_HISTORY,true);
     }
-    if (LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE) === 'true') {
+    if (SessionStorageService.getSessionValue(SessionStorage.IS_CANDIDATE) === 'true') {
       this.isCandidate = true;
-      this.userId=LocalStorageService.getLocalValue(LocalStorage.USER_ID);
+      this.userId=SessionStorageService.getSessionValue(SessionStorage.USER_ID);
     }
   }
 
@@ -134,7 +134,7 @@ export class MoreAboutMyselfComponent implements OnInit {
     this.guidedTourService.updateProfileField(this.guidedTourStatus)
       .subscribe(
         (res:any) => {
-          LocalStorageService.setLocalValue(LocalStorage.GUIDED_TOUR, JSON.stringify(res.data.guide_tour));
+          SessionStorageService.setSessionValue(SessionStorage.GUIDED_TOUR, JSON.stringify(res.data.guide_tour));
           this.isGuidedTourImgRequire()
         },
         error => this.errorService.onError(error)
@@ -165,7 +165,7 @@ export class MoreAboutMyselfComponent implements OnInit {
   }
 
   navigateToWithId(nav:string) {
-    var userId = LocalStorageService.getLocalValue(LocalStorage.USER_ID);
+    var userId = SessionStorageService.getSessionValue(SessionStorage.USER_ID);
     if (nav !== undefined) {
       let x = nav+'/'+ userId + '/create';
       // this._router.navigate([nav, userId]);

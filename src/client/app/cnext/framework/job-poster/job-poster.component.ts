@@ -11,8 +11,8 @@ import {Industry} from "../../../user/models/industry";
 import {RecruiterDashboardService} from "../recruiter-dashboard/recruiter-dashboard.service";
 import {RecruiterDashboard} from "../model/recruiter-dashboard";
 import { ErrorService } from '../../../shared/services/error.service';
-import {AppSettings,Headings, Label, LocalStorage, Messages, ValueConstant} from "../../../shared/constants";
-import {LocalStorageService} from "../../../shared/services/localstorage.service";
+import {AppSettings,Headings, Label, SessionStorage, Messages, ValueConstant} from "../../../shared/constants";
+import {SessionStorageService} from "../../../shared/services/session.service";
 import {Share} from "../model/share";
 import {ShareService} from "../share/share.service";
 import {Message} from "../../../shared/models/message";
@@ -66,7 +66,7 @@ export class JobPosterComponent implements OnInit, OnChanges {
   private isComplexityFilled: boolean = true;
   private isPresentDefaultcomplexity: boolean = false;
   private flag: boolean = true;
-  isRecruitingForSelf: boolean= (LocalStorageService.getLocalValue(LocalStorage.IS_RECRUITING_FOR_SELF) == 'true');
+  isRecruitingForSelf: boolean= (SessionStorageService.getSessionValue(SessionStorage.IS_RECRUITING_FOR_SELF) == 'true');
   highlightedSection: Section = new Section();
   private selectedJobTitle:string;
   private selectedJobId:string;
@@ -85,7 +85,7 @@ export class JobPosterComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-    if (LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE) === 'true') {
+    if (SessionStorageService.getSessionValue(SessionStorage.IS_CANDIDATE) === 'true') {
       this.isCandidate = true;
     }
     this.activatedRoute.params.subscribe(params => {
@@ -94,7 +94,7 @@ export class JobPosterComponent implements OnInit, OnChanges {
         this.getJobProfile();
       } else {
         this.jobPosterModel = new JobPosterModel();
-        this.jobPosterModel.recruiterId = LocalStorageService.getLocalValue(LocalStorage.END_USER_ID);
+        this.jobPosterModel.recruiterId = SessionStorageService.getSessionValue(SessionStorage.END_USER_ID);
         this.highlightedSection.name = 'JobProfile';
       }
     });
@@ -106,7 +106,7 @@ export class JobPosterComponent implements OnInit, OnChanges {
       this.getJobProfile();
     } else if(changes.currentjobId !== undefined ) {
       this.jobPosterModel = new JobPosterModel();
-      this.jobPosterModel.recruiterId = LocalStorageService.getLocalValue(LocalStorage.END_USER_ID);
+      this.jobPosterModel.recruiterId = SessionStorageService.getSessionValue(SessionStorage.END_USER_ID);
       this.highlightedSection.name = 'JobProfile';
     }
   }
@@ -125,7 +125,7 @@ export class JobPosterComponent implements OnInit, OnChanges {
   }
 
   onGetJobDetailsSuccess(jobmodel: JobPosterModel) {
-    LocalStorageService.setLocalValue(LocalStorage.POSTED_JOB, jobmodel._id);
+    SessionStorageService.setSessionValue(SessionStorage.POSTED_JOB, jobmodel._id);
     this.isShowIndustryList = true;
     if (jobmodel.industry && jobmodel.industry.name !== '') {
       this.getRoles();
@@ -217,7 +217,7 @@ export class JobPosterComponent implements OnInit, OnChanges {
       response => {
         this.jobPosterModel._id = response.data._id;
         this.jobId = response.data._id;
-        LocalStorageService.setLocalValue(LocalStorage.POSTED_JOB, this.jobPosterModel._id);
+        SessionStorageService.setSessionValue(SessionStorage.POSTED_JOB, this.jobPosterModel._id);
         if (this.setCapabilityMatrix) {
           this.jobPosterModel.capability_matrix = response.data.capability_matrix;
           this.setCapabilityMatrix = false;
@@ -238,7 +238,7 @@ export class JobPosterComponent implements OnInit, OnChanges {
             console.log('data',data);
           }, error => this.errorService.onError(error));
       }
-      LocalStorageService.setLocalValue(LocalStorage.CURRENT_JOB_POSTED_ID, jobModel._id);
+      SessionStorageService.setSessionValue(SessionStorage.CURRENT_JOB_POSTED_ID, jobModel._id);
       this._router.navigate(['recruiter/job/', jobModel._id]);
     }
   }

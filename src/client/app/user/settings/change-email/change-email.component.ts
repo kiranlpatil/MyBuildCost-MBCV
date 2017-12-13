@@ -2,8 +2,8 @@ import {Component, OnInit, Output ,EventEmitter } from "@angular/core";
 import {Router} from "@angular/router";
 import {ChangeEmailService} from "./change-email.service";
 import {ChangeEmail} from "../../models/changeemail";
-import {LocalStorageService} from "../../../shared/services/localstorage.service";
-import {LocalStorage, AppSettings} from "../../../shared/constants";
+import {SessionStorageService} from "../../../shared/services/session.service";
+import {SessionStorage, AppSettings} from "../../../shared/constants";
 import {CommonService, ImagePath, Message, Messages, MessageService} from "../../../shared/index";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ValidationService} from "../../../shared/customvalidations/validation.service";
@@ -54,13 +54,13 @@ export class ChangeEmailComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.model.current_email = LocalStorageService.getLocalValue(LocalStorage.EMAIL_ID);
+    this.model.current_email = SessionStorageService.getSessionValue(SessionStorage.EMAIL_ID);
   }
 
   onSubmit() {
     this.model = this.userForm.value;
-    this.model.current_email = LocalStorageService.getLocalValue(LocalStorage.EMAIL_ID);
-    LocalStorageService.setLocalValue(LocalStorage.CHANGE_MAIL_VALUE, 'from_settings');
+    this.model.current_email = SessionStorageService.getSessionValue(SessionStorage.EMAIL_ID);
+    SessionStorageService.setSessionValue(SessionStorage.CHANGE_MAIL_VALUE, 'from_settings');
     if (!this.makeEmailConfirm()) {
       this.emailService.changeEmail(this.model)
         .subscribe(
@@ -72,7 +72,7 @@ export class ChangeEmailComponent implements OnInit {
 
   changeEmailSuccess(body: ChangeEmail) {
     //window.sessionStorage.clear();
-    LocalStorageService.setLocalValue(LocalStorage.CHANGE_MAIL_VALUE, 'from_settings');
+    SessionStorageService.setSessionValue(SessionStorage.CHANGE_MAIL_VALUE, 'from_settings');
     this.userForm.reset();
     this.onEmailChangeSuccess.emit();
 
@@ -101,7 +101,7 @@ export class ChangeEmailComponent implements OnInit {
   logOut() {
     window.sessionStorage.clear();
     window.localStorage.clear();
-    LocalStorageService.setLocalValue(LocalStorage.CHANGE_MAIL_VALUE, 'from_settings');
+    SessionStorageService.setSessionValue(SessionStorage.CHANGE_MAIL_VALUE, 'from_settings');
     let host = AppSettings.HTTP_CLIENT + AppSettings.HOST_NAME;
     window.location.href = host;
   }

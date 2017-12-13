@@ -7,8 +7,8 @@ import {
   AppSettings,
   CommonService,
   ImagePath,
-  LocalStorage,
-  LocalStorageService,
+  SessionStorage,
+  SessionStorageService,
   Message,
   Messages,
   MessageService,
@@ -95,20 +95,20 @@ export class UserProfileComponent implements OnInit {
   ngOnInit() {
     this.activatedRoute.queryParams.subscribe((params: Params) => {
       this.role = params['role'];
-      LocalStorageService.setLocalValue(LocalStorage.ROLE_NAME, this.role);
+      SessionStorageService.setSessionValue(SessionStorage.ROLE_NAME, this.role);
       switch(this.role) {
         case 'candidate': this.getCandidate(); break;
         case 'recruiter': this.getRecruiter(); break;
         default :  this._router.navigate([NavigationRoutes.APP_START]); break;
       }
     });
-    var socialLogin: string = LocalStorageService.getLocalValue(LocalStorage.IS_SOCIAL_LOGIN);
+    var socialLogin: string = SessionStorageService.getSessionValue(SessionStorage.IS_SOCIAL_LOGIN);
     if (socialLogin === AppSettings.IS_SOCIAL_LOGIN_YES) {
       this.isSocialLogin = true;
     } else {
       this.isSocialLogin = false;
     }
-    this.newUser = parseInt(LocalStorageService.getLocalValue(LocalStorage.IS_LOGGED_IN));
+    this.newUser = parseInt(SessionStorageService.getSessionValue(SessionStorage.IS_LOGGED_IN));
     if (this.newUser === 0) {
       this._router.navigate([NavigationRoutes.APP_START]);
     } else {
@@ -142,15 +142,15 @@ export class UserProfileComponent implements OnInit {
     this.candidate = candidateData.data[0];
     this.candidate.basicInformation = candidateData.metadata;
     this.candidate.summary = new Summary();
-    this.model.email= LocalStorageService.getLocalValue(LocalStorage.EMAIL_ID);
-    this.model.mobile_number = LocalStorageService.getLocalValue(LocalStorage.MOBILE_NUMBER);
+    this.model.email= SessionStorageService.getSessionValue(SessionStorage.EMAIL_ID);
+    this.model.mobile_number = SessionStorageService.getSessionValue(SessionStorage.MOBILE_NUMBER);
     if (candidateData.metadata != undefined && candidateData.metadata != null) {
       if (candidateData.metadata.current_theme) {
-        LocalStorageService.setLocalValue(LocalStorage.MY_THEME, candidateData.metadata.current_theme);
+        SessionStorageService.setSessionValue(SessionStorage.MY_THEME, candidateData.metadata.current_theme);
         this.themeChangeService.change(candidateData.metadata.current_theme);
       }
       this.model = candidateData.metadata;
-      var socialLogin: string = LocalStorageService.getLocalValue(LocalStorage.IS_SOCIAL_LOGIN);
+      var socialLogin: string = SessionStorageService.getSessionValue(SessionStorage.IS_SOCIAL_LOGIN);
       if (socialLogin === AppSettings.IS_SOCIAL_LOGIN_YES) {
         this.image_path = this.model.social_profile_picture;
       } else if (this.image_path === undefined && socialLogin !== AppSettings.IS_SOCIAL_LOGIN_YES) {
@@ -258,7 +258,7 @@ export class UserProfileComponent implements OnInit {
       this.candidate.basicInformation.picture = imagePath;
     this.image_path = AppSettings.IP + imagePath.replace('"', '');
     } else if (this.role ==='recruiter') {
-      this.candidate.basicInformation.picture = LocalStorageService.getLocalValue(LocalStorage.PROFILE_PICTURE); //TODO:Get it from get user call.
+      this.candidate.basicInformation.picture = SessionStorageService.getSessionValue(SessionStorage.PROFILE_PICTURE); //TODO:Get it from get user call.
       this.image_path = AppSettings.IP + imagePath.replace('"', '');
       if (this.candidate.basicInformation.picture === 'undefined' || this.candidate.basicInformation.picture === null) {
         this.candidate.basicInformation.picture = ImagePath.COMPANY_LOGO_IMG_ICON;
@@ -269,7 +269,7 @@ export class UserProfileComponent implements OnInit {
     }
   }
   onMobileNumberChangeComplete() {
-    this.model.mobile_number = LocalStorageService.getLocalValue(LocalStorage.MOBILE_NUMBER);
+    this.model.mobile_number = SessionStorageService.getSessionValue(SessionStorage.MOBILE_NUMBER);
     this.showStyleMobile = !this.showStyleMobile;
   }
   onCompanyWebsiteUpdate(event:any) {

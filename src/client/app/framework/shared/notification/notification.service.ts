@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
 import {Observable} from "rxjs/Rx";
 import {Headers, Http, RequestOptions} from "@angular/http";
-import {API, BaseService, LocalStorage, LocalStorageService, MessageService} from "../../../shared/index";
+import {API, BaseService, SessionStorage, SessionStorageService, MessageService} from "../../../shared/index";
 import {Notification} from "./notification";
 
 @Injectable()
@@ -12,7 +12,7 @@ export class NotificationService extends BaseService {
   }
 
   getNotification(): Observable<Notification[]> {
-    var url = API.NOTIFICATION + '/' + LocalStorageService.getLocalValue(LocalStorage.USER_ID);
+    var url = API.NOTIFICATION + '/' + SessionStorageService.getSessionValue(SessionStorage.USER_ID);
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({headers: headers});
     return this.http.get(url, options)

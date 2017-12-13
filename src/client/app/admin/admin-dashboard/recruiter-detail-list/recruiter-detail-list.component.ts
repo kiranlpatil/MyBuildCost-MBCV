@@ -5,9 +5,9 @@ import {Router} from "@angular/router";
 import {LoaderService} from "../../../shared/loader/loaders.service";
 import {MessageService} from "../../../shared/services/message.service";
 import {Message} from "../../../shared/models/message";
-import {AppSettings, Label, LocalStorage, Messages} from "../../../shared/constants";
+import {AppSettings, Label, SessionStorage, Messages} from "../../../shared/constants";
 import {JobPosterModel} from "../../../user/models/jobPoster";
-import {LocalStorageService} from "../../../shared/services/localstorage.service";
+import {SessionStorageService} from "../../../shared/services/session.service";
 
 @Component({
   moduleId: module.id,
@@ -101,7 +101,7 @@ export class RecruiterDetailListComponent {
   }
 
   openRecruiterDashboard(userId: any) {
-    let token = LocalStorageService.getLocalValue(LocalStorage.ACCESS_TOKEN);
+    let token = SessionStorageService.getSessionValue(SessionStorage.ACCESS_TOKEN);
     let url = AppSettings.IP + '/usercontainer?token='+token+'&'+'userid='+userId;
     window.open(url, '_blank');
   }

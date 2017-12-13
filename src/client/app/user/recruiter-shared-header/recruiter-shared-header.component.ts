@@ -1,7 +1,7 @@
 import {Component, ElementRef, HostListener, OnInit} from "@angular/core";
 import {Router} from "@angular/router";
-import {LocalStorageService} from "../../shared/services/localstorage.service";
-import {AppSettings, ImagePath, LocalStorage} from "../../shared/constants";
+import {SessionStorageService} from "../../shared/services/session.service";
+import {AppSettings, ImagePath, SessionStorage} from "../../shared/constants";
 import {RedirectRecruiterDashboardService} from "../services/redirect-dashboard.service";
 
 @Component({
@@ -31,8 +31,8 @@ export class RecruiterSharedHeaderComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.company_name = LocalStorageService.getLocalValue(LocalStorage.COMPANY_NAME);
-    this.uploaded_image_path = LocalStorageService.getLocalValue(LocalStorage.PROFILE_PICTURE); //TODO:Get it from get user call.
+    this.company_name = SessionStorageService.getSessionValue(SessionStorage.COMPANY_NAME);
+    this.uploaded_image_path = SessionStorageService.getSessionValue(SessionStorage.PROFILE_PICTURE); //TODO:Get it from get user call.
 
     if (this.uploaded_image_path === 'undefined' || this.uploaded_image_path === null) {
       this.uploaded_image_path = ImagePath.COMPANY_LOGO_IMG_ICON;

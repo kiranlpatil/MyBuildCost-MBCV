@@ -6,9 +6,9 @@ import {CandidateDetail} from "../../../../user/models/candidate-details";
 import {CandidateProfileService} from "../../candidate-profile/candidate-profile.service";
 import {RecruiterDashboardService} from "../../recruiter-dashboard/recruiter-dashboard.service";
 import {Recruiter} from "../../../../user/models/recruiter";
-import {AppSettings, Headings, ImagePath, Label, LocalStorage, Messages} from "../../../../shared/constants";
+import {AppSettings, Headings, ImagePath, Label, SessionStorage, Messages} from "../../../../shared/constants";
 import {GuidedTourService} from "../../guided-tour.service";
-import {LocalStorageService} from "../../../../shared/services/localstorage.service";
+import {SessionStorageService} from "../../../../shared/services/session.service";
 import {ErrorService} from "../../../../shared/services/error.service";
 import {JobPosterModel} from "../../../../user/models/jobPoster";
 
@@ -76,7 +76,7 @@ export class JobCompareViewComponent implements OnChanges,OnInit {
   ngOnInit() {
     this.guidedTourImgOverlayScreensStackViewPath = ImagePath.BASE_ASSETS_PATH_DESKTOP + ImagePath.CANDIDATE_OERLAY_SCREENS_STACK_VIEW;
     this.guidedTourImgOverlayScreensStackView = ImagePath.CANDIDATE_OERLAY_SCREENS_STACK_VIEW;
-    if (LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE) === 'true') {
+    if (SessionStorageService.getSessionValue(SessionStorage.IS_CANDIDATE) === 'true') {
       this.isCandidate = true;
     }
   }
@@ -91,7 +91,7 @@ export class JobCompareViewComponent implements OnChanges,OnInit {
     this.guidedTourService.updateProfileField(this.guidedTourStatus)
       .subscribe(
         (res:any) => {
-          LocalStorageService.setLocalValue(LocalStorage.GUIDED_TOUR, JSON.stringify(res.data.guide_tour));
+          SessionStorageService.setSessionValue(SessionStorage.GUIDED_TOUR, JSON.stringify(res.data.guide_tour));
           this.isGuidedTourImgRequire();
         },
         error => this.errorService.onError(error)

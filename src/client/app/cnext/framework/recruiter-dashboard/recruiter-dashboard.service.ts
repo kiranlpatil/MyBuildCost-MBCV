@@ -1,9 +1,9 @@
 import {Injectable} from "@angular/core";
 import {Headers, Http, RequestOptions} from "@angular/http";
 import {Observable} from "rxjs/Observable";
-import {API, LocalStorage} from "../../../shared/constants";
+import {API, SessionStorage} from "../../../shared/constants";
 import {BaseService} from "../../../shared/services/http/base.service";
-import {LocalStorageService} from "../../../shared/services/localstorage.service";
+import {SessionStorageService} from "../../../shared/services/session.service";
 
 @Injectable()
 export class RecruiterDashboardService extends BaseService {
@@ -15,7 +15,7 @@ export class RecruiterDashboardService extends BaseService {
   getJobList(): Observable<any> {
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({headers: headers});
-    let url: string = API.JOB_LIST + '/' + LocalStorageService.getLocalValue(LocalStorage.END_USER_ID);
+    let url: string = API.JOB_LIST + '/' + SessionStorageService.getSessionValue(SessionStorage.END_USER_ID);
     return this.http.get(url, options)
       .map(this.extractData)
       .catch(this.handleError);
@@ -23,7 +23,7 @@ export class RecruiterDashboardService extends BaseService {
 
   getJobsByRecruiterIdAndItsCount(): Observable<any> {
     // let recruiterId: string;
-    var url = API.JOB_LIST + '/' + LocalStorageService.getLocalValue(LocalStorage.END_USER_ID) + '/jobs';
+    var url = API.JOB_LIST + '/' + SessionStorageService.getSessionValue(SessionStorage.END_USER_ID) + '/jobs';
     return this.http.get(url)
       .map(this.extractData)
       .catch(this.handleError);
@@ -49,7 +49,7 @@ export class RecruiterDashboardService extends BaseService {
 
   getRecruiterDetails() :Observable<any> {
     let headers = new Headers({'Content-Type': 'application/json'});
-    let url: string = API.RECRUITER_PROFILE + '/' + LocalStorageService.getLocalValue(LocalStorage.END_USER_ID) + '/details';
+    let url: string = API.RECRUITER_PROFILE + '/' + SessionStorageService.getSessionValue(SessionStorage.END_USER_ID) + '/details';
     return this.http.get(url)
       .map(this.extractData)
       .catch(this.handleError);

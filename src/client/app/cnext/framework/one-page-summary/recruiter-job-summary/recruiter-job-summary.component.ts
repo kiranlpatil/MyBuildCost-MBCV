@@ -1,7 +1,7 @@
 import {Component} from "@angular/core";
 import {Router} from "@angular/router";
-import {LocalStorage, NavigationRoutes} from "../../../../shared/constants";
-import {LocalStorageService} from "../../../../shared/services/localstorage.service";
+import {SessionStorage, NavigationRoutes} from "../../../../shared/constants";
+import {SessionStorageService} from "../../../../shared/services/session.service";
 
 
 @Component({
@@ -15,7 +15,7 @@ export class RecruiterJobSummaryComponent {
   jobId: string;
 
   constructor(private _router: Router) {
-    this.jobId = LocalStorageService.getLocalValue(LocalStorage.CURRENT_JOB_POSTED_ID);
+    this.jobId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_JOB_POSTED_ID);
   }
 
   logOut() {

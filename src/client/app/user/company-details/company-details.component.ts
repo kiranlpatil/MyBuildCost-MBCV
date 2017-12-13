@@ -11,8 +11,8 @@ import {
   NavigationRoutes,
   ProfileService
 } from "../../shared/index";
-import {ImagePath, LocalStorage, Tooltip} from "../../shared/constants";
-import {LocalStorageService} from "../../shared/services/localstorage.service";
+import {ImagePath, SessionStorage, Tooltip} from "../../shared/constants";
+import {SessionStorageService} from "../../shared/services/session.service";
 import {LoaderService} from "../../shared/loader/loaders.service";
 import {Http} from "@angular/http";
 import {ActivatedRoute, Params, Router} from "@angular/router";
@@ -71,9 +71,9 @@ export class CompanyDetailsComponent implements OnInit {
       let company_name = params['companyName'];
       this.company_name = company_name;
 
-      LocalStorageService.setLocalValue(LocalStorage.ACCESS_TOKEN, access_token);
-      LocalStorageService.setLocalValue(LocalStorage.USER_ID, id);
-      LocalStorageService.setLocalValue(LocalStorage.COMPANY_NAME, company_name);
+      SessionStorageService.setSessionValue(SessionStorage.ACCESS_TOKEN, access_token);
+      SessionStorageService.setSessionValue(SessionStorage.USER_ID, id);
+      SessionStorageService.setSessionValue(SessionStorage.COMPANY_NAME, company_name);
       this.companyDetailsService.activateAccount()
         .subscribe(
           res => (console.log("account activated")),
@@ -171,7 +171,7 @@ export class CompanyDetailsComponent implements OnInit {
 
   fileChangeSuccess(result: any) {
     this.model = result.data;
-    var socialLogin: string = LocalStorageService.getLocalValue(LocalStorage.IS_SOCIAL_LOGIN);
+    var socialLogin: string = SessionStorageService.getSessionValue(SessionStorage.IS_SOCIAL_LOGIN);
     if (!this.model.picture || this.model.picture === undefined) {
       this.image_path = ImagePath.PROFILE_IMG_ICON;
     } else if (socialLogin === AppSettings.IS_SOCIAL_LOGIN_YES) {

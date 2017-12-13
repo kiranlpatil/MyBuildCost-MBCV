@@ -1,8 +1,8 @@
 import {Component, EventEmitter, Input, OnChanges, Output} from "@angular/core";
 import {Capability} from "../../../../../user/models/capability";
 import {Scenario} from "../../../../../user/models/scenario";
-import {AppSettings, LocalStorage, Tooltip} from "../../../../../shared/constants";
-import {LocalStorageService} from "../../../../../shared/services/localstorage.service";
+import {AppSettings, SessionStorage, Tooltip} from "../../../../../shared/constants";
+import {SessionStorageService} from "../../../../../shared/services/session.service";
 import {Complexity} from "../../../../../user/models/complexity";
 
 @Component({
@@ -67,7 +67,7 @@ export class CapabilityCompareComponent  implements OnChanges {
 
 
       this.maxArray = new Array(max);
-      if (LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE) === 'true') {
+      if (SessionStorageService.getSessionValue(SessionStorage.IS_CANDIDATE) === 'true') {
         this.isCandidate = true;
       }else {
         this.isCandidate = false;

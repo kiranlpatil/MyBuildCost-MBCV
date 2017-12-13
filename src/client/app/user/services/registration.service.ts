@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
 import {Router} from "@angular/router";
-import {LocalStorageService} from "../../shared/services/localstorage.service";
-import {LocalStorage, AppSettings, NavigationRoutes} from "../../shared/constants";
+import {SessionStorageService} from "../../shared/services/session.service";
+import {SessionStorage, AppSettings, NavigationRoutes} from "../../shared/constants";
 import {ThemeChangeService} from "../../shared/services/themechange.service";
 import {Message} from "../../shared/models/message";
 import {MessageService} from "../../shared/services/message.service";
@@ -13,34 +13,34 @@ export class RegistrationService {
 constructor(private _router: Router, private themeChangeService: ThemeChangeService, private messageService: MessageService){}
 
   onSuccess(res: any) {
-    LocalStorageService.setLocalValue(LocalStorage.IS_CANDIDATE, res.data.isCandidate);
-    LocalStorageService.setLocalValue(LocalStorage.IS_CANDIDATE_FILLED, res.data.isCompleted);
-    LocalStorageService.setLocalValue(LocalStorage.IS_CANDIDATE_SUBMITTED, res.data.isSubmitted);
-    LocalStorageService.setLocalValue(LocalStorage.END_USER_ID, res.data.end_user_id);
-    LocalStorageService.setLocalValue(LocalStorage.EMAIL_ID, res.data.email);
-    LocalStorageService.setLocalValue(LocalStorage.MOBILE_NUMBER, res.data.mobile_number);
-    LocalStorageService.setLocalValue(LocalStorage.FIRST_NAME, res.data.first_name);
-    LocalStorageService.setLocalValue(LocalStorage.LAST_NAME, res.data.last_name);
+    SessionStorageService.setSessionValue(SessionStorage.IS_CANDIDATE, res.data.isCandidate);
+    SessionStorageService.setSessionValue(SessionStorage.IS_CANDIDATE_FILLED, res.data.isCompleted);
+    SessionStorageService.setSessionValue(SessionStorage.IS_CANDIDATE_SUBMITTED, res.data.isSubmitted);
+    SessionStorageService.setSessionValue(SessionStorage.END_USER_ID, res.data.end_user_id);
+    SessionStorageService.setSessionValue(SessionStorage.EMAIL_ID, res.data.email);
+    SessionStorageService.setSessionValue(SessionStorage.MOBILE_NUMBER, res.data.mobile_number);
+    SessionStorageService.setSessionValue(SessionStorage.FIRST_NAME, res.data.first_name);
+    SessionStorageService.setSessionValue(SessionStorage.LAST_NAME, res.data.last_name);
     if (res.data.current_theme) {
-      LocalStorageService.setLocalValue(LocalStorage.MY_THEME, res.data.current_theme);
+      SessionStorageService.setSessionValue(SessionStorage.MY_THEME, res.data.current_theme);
       this.themeChangeService.change(res.data.current_theme);
     }
     if (res.isSocialLogin) {
-      LocalStorageService.setLocalValue(LocalStorage.IS_SOCIAL_LOGIN, AppSettings.IS_SOCIAL_LOGIN_YES);
+      SessionStorageService.setSessionValue(SessionStorage.IS_SOCIAL_LOGIN, AppSettings.IS_SOCIAL_LOGIN_YES);
     } else {
-      LocalStorageService.setLocalValue(LocalStorage.IS_SOCIAL_LOGIN, AppSettings.IS_SOCIAL_LOGIN_NO);
+      SessionStorageService.setSessionValue(SessionStorage.IS_SOCIAL_LOGIN, AppSettings.IS_SOCIAL_LOGIN_NO);
     }
-    LocalStorageService.setLocalValue(LocalStorage.PASSWORD, '');
+    SessionStorageService.setSessionValue(SessionStorage.PASSWORD, '');
     this.successRedirect(res);
   }
 
   successRedirect(res: any) {
 
-    LocalStorageService.setLocalValue(LocalStorage.IS_LOGGED_IN, 1);
-    LocalStorageService.setLocalValue(LocalStorage.PROFILE_PICTURE, res.data.picture);
-    LocalStorageService.setLocalValue(LocalStorage.AFTER_RECRUITER_REGISTRATION_FORM, null);
-    LocalStorageService.setLocalValue(LocalStorage.AFTER_CANDIDATE_REGISTRATION_FORM, null);
-    LocalStorageService.setLocalValue(LocalStorage.ISADMIN, res.data.isAdmin);
+    SessionStorageService.setSessionValue(SessionStorage.IS_LOGGED_IN, 1);
+    SessionStorageService.setSessionValue(SessionStorage.PROFILE_PICTURE, res.data.picture);
+    SessionStorageService.setSessionValue(SessionStorage.AFTER_RECRUITER_REGISTRATION_FORM, null);
+    SessionStorageService.setSessionValue(SessionStorage.AFTER_CANDIDATE_REGISTRATION_FORM, null);
+    SessionStorageService.setSessionValue(SessionStorage.ISADMIN, res.data.isAdmin);
     if (res.data.isAdmin === true) {
       this._router.navigate([NavigationRoutes.APP_ADMIN_DASHBOARD]);
     }
@@ -51,14 +51,14 @@ constructor(private _router: Router, private themeChangeService: ThemeChangeServ
         this._router.navigate([NavigationRoutes.APP_CREATEPROFILE]);
       }
     } else {
-      LocalStorageService.setLocalValue(LocalStorage.COMPANY_NAME, res.data.company_name);
+      SessionStorageService.setSessionValue(SessionStorage.COMPANY_NAME, res.data.company_name);
 
       this._router.navigate([NavigationRoutes.APP_RECRUITER_DASHBOARD]);
     }
   }
 
   loginFail(error: any) {
-    LocalStorageService.setLocalValue(LocalStorage.PASSWORD, '');
+    SessionStorageService.setSessionValue(SessionStorage.PASSWORD, '');
     if (error.err_code === 404 || error.err_code === 0) {
       var message = new Message();
       message.error_msg = error.message;

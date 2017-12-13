@@ -4,7 +4,7 @@ import {QCardsortBy} from "../../model/q-cardview-sortby";
 import {MatchCandidate} from "../../model/match-candidate";
 import {QCardViewService} from "./q-card-view.service";
 import {QCardFilterService} from "../../filters/q-card-filter.service";
-import {AppSettings, LocalStorage, UsageActions, ValueConstant, Button, Label} from "../../../../shared/constants";
+import {AppSettings, SessionStorage, UsageActions, ValueConstant, Button, Label} from "../../../../shared/constants";
 import {QCardFilter} from "../../model/q-card-filter";
 import {CandidateQListModel} from "../job-dashboard/q-cards-candidates";
 import {RecruiterJobView} from "../../model/recruiter-job-view";
@@ -15,7 +15,7 @@ import {Message} from "../../../../shared/models/message";
 import {MessageService} from "../../../../shared/services/message.service";
 import {ErrorService} from "../../../../shared/services/error.service";
 import {UsageTrackingService} from "../../usage-tracking.service";
-import {LocalStorageService} from "../../../../shared/services/localstorage.service";
+import {SessionStorageService} from "../../../../shared/services/session.service";
 import {ESort} from "../../model/sort-type";
 import {JobPosterModel} from "../../../../user/models/jobPoster";
 import {Router, ActivatedRoute} from "@angular/router";
@@ -326,7 +326,7 @@ export class QCardviewComponent implements OnChanges, OnInit {
     if (!this.isShortlistedclicked) {
       this.modelCandidate = candidate;
       let usageTrackingData: UsageTracking = new UsageTracking();
-      usageTrackingData.recruiterId = LocalStorageService.getLocalValue(LocalStorage.END_USER_ID);
+      usageTrackingData.recruiterId = SessionStorageService.getSessionValue(SessionStorage.END_USER_ID);
       usageTrackingData.jobProfileId = this.jobId;
       usageTrackingData.candidateId = this.modelCandidate._id;
       if (this.type !== ValueConstant.CART_LISTED_CANDIDATE) {
@@ -396,7 +396,7 @@ export class QCardviewComponent implements OnChanges, OnInit {
 
   navigateToApplicantSearch(nav: string, candidate: CandidateQCard) {
     let usageTrackingData: UsageTracking = new UsageTracking();
-    usageTrackingData.recruiterId = LocalStorageService.getLocalValue(LocalStorage.END_USER_ID);
+    usageTrackingData.recruiterId = SessionStorageService.getSessionValue(SessionStorage.END_USER_ID);
     usageTrackingData.jobProfileId = this.jobId;
     usageTrackingData.candidateId = candidate._id;
     usageTrackingData.action = UsageActions.MATCHED_CANDIDATE_AGAINST_ALL_JOB_BY_RECRUITER;

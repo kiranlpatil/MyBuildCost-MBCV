@@ -2,8 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {JobShareContainerService} from './job-share-container.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ShareLink} from '../model/share-link';
-import {LocalStorage} from "../../../shared/constants";
-import {LocalStorageService} from "../../../shared/services/localstorage.service";
+import {SessionStorage} from "../../../shared/constants";
+import {SessionStorageService} from "../../../shared/services/session.service";
 import {ErrorService} from "../../../shared/services/error.service";
 
 @Component({
@@ -53,12 +53,12 @@ isJobPosted:boolean=true;
     //window.localStorage.clear();
     let url:any = new URL('localhost:8080/' + shareLink.longUrl);
     let newUrl = shareLink.longUrl.split('/')[2];
-    LocalStorageService.setLocalValue(LocalStorage.ACCESS_TOKEN, url.searchParams.get('access_token'));
-    LocalStorageService.setLocalValue(LocalStorage.IS_CANDIDATE, 'false');
-    LocalStorageService.setLocalValue(LocalStorage.IS_LOGGED_IN, 'true');
-    LocalStorageService.setLocalValue(LocalStorage.ISADMIN, 'false');
-    LocalStorageService.setLocalValue(LocalStorage.USER_ID, shareLink.longUrl.split('/')[1]);
-    LocalStorageService.setLocalValue(LocalStorage.POSTED_JOB, this.jobId);
+    SessionStorageService.setSessionValue(SessionStorage.ACCESS_TOKEN, url.searchParams.get('access_token'));
+    SessionStorageService.setSessionValue(SessionStorage.IS_CANDIDATE, 'false');
+    SessionStorageService.setSessionValue(SessionStorage.IS_LOGGED_IN, 'true');
+    SessionStorageService.setSessionValue(SessionStorage.ISADMIN, 'false');
+    SessionStorageService.setSessionValue(SessionStorage.USER_ID, shareLink.longUrl.split('/')[1]);
+    SessionStorageService.setSessionValue(SessionStorage.POSTED_JOB, this.jobId);
     this.isJobPosted=shareLink.isJobPosted;
     this.jobId = newUrl.split('?')[0];
   }

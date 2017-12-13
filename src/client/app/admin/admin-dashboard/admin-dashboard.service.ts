@@ -3,8 +3,8 @@ import {Headers, Http, RequestOptions} from "@angular/http";
 import {Observable} from "rxjs/Observable";
 import {BaseService} from "../../shared/services/http/base.service";
 import {MessageService} from "../../shared/services/message.service";
-import {API, LocalStorage} from "../../shared/constants";
-import {LocalStorageService} from "../../shared/services/localstorage.service";
+import {API, SessionStorage} from "../../shared/constants";
+import {SessionStorageService} from "../../shared/services/session.service";
 import {CandidateDetail} from "../../user/models/candidate-details";
 
 
@@ -16,7 +16,7 @@ export class AdminDashboardService extends BaseService {
   }
 
   getUserProfile(): Observable<any> {
-    var url = API.USER_PROFILE + '/' + LocalStorageService.getLocalValue(LocalStorage.USER_ID);
+    var url = API.USER_PROFILE + '/' + SessionStorageService.getSessionValue(SessionStorage.USER_ID);
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({headers: headers});
     return this.http.get(url, options)
@@ -81,7 +81,7 @@ export class AdminDashboardService extends BaseService {
   }
 
   updateProfile(model: CandidateDetail): Observable<CandidateDetail> {
-    var url = API.USER_PROFILE + '/' + LocalStorageService.getLocalValue(LocalStorage.USER_ID);
+    var url = API.USER_PROFILE + '/' + SessionStorageService.getSessionValue(SessionStorage.USER_ID);
     let body = JSON.stringify(model);
     return this.http.put(url, body)
       .map(this.extractData)
@@ -89,7 +89,7 @@ export class AdminDashboardService extends BaseService {
   }
 
   updateUser(model: any): Observable<any> {
-    var url = API.UPDATE_USER + '/' + LocalStorageService.getLocalValue(LocalStorage.USER_ID);
+    var url = API.UPDATE_USER + '/' + SessionStorageService.getSessionValue(SessionStorage.USER_ID);
     let body = JSON.stringify(model);
     return this.http.put(url, body)
       .map(this.extractData)

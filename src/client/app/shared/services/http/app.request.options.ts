@@ -1,6 +1,7 @@
 import {Headers, RequestOptions, RequestOptionsArgs} from "@angular/http";
-import {AppSettings, LocalStorage, LocalStorageService} from "../../index";
-import {SessionStorageService} from "../session.service";
+import {AppSettings, SessionStorage, SessionStorageService} from "../../index";
+import {LocalStorageService} from "../localstorage.service";
+import {LocalStorage} from "../../constants";
 //import {  Config  } from '../config/env.config';
 export class AppRequestOptions extends RequestOptions {
   constructor() {
@@ -26,7 +27,7 @@ export class AppRequestOptions extends RequestOptions {
       let access_token:string = url.searchParams.get('access_token');
       options.headers.append('Authorization', 'Bearer ' + access_token);
     } else {
-      options.headers.append('Authorization', 'Bearer ' +(SessionStorageService.getLocalValue(LocalStorage.ACCESS_TOKEN) ||( LocalStorageService.getLocalValue(LocalStorage.ACCESS_TOKEN))));
+      options.headers.append('Authorization', 'Bearer ' +(LocalStorageService.getLocalValue(LocalStorage.ACCESS_TOKEN) ||( SessionStorageService.getSessionValue(SessionStorage.ACCESS_TOKEN))));
     }
 
     //options.url = `${Config.API}/` + options.url;

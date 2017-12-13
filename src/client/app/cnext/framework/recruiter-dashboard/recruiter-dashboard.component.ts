@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from "@angular/core";
 import {RecruiterDashboard} from "../model/recruiter-dashboard";
-import {LocalStorageService} from "../../../shared/services/localstorage.service";
-import {LocalStorage} from "../../../shared/constants";
+import {SessionStorageService} from "../../../shared/services/session.service";
+import {SessionStorage} from "../../../shared/constants";
 
 @Component({
   moduleId: module.id,
@@ -21,7 +21,7 @@ export class RecruiterDashboardComponent implements OnInit {
   }
 
   ngOnInit() {
-    if(LocalStorageService.getLocalValue(LocalStorage.FROM_ADMIN) == 'true') {
+    if(SessionStorageService.getSessionValue(SessionStorage.FROM_ADMIN) == 'true') {
       this.fromAdmin = true;
     }
   }

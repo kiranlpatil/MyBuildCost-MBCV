@@ -1,9 +1,9 @@
 import {Component, EventEmitter, Input, Output, DoCheck, KeyValueDiffers} from '@angular/core';
 import { Role } from '../model/role';
 import { Capability } from '../../../user/models/capability';
-import { Headings, ImagePath, LocalStorage, Messages, Tooltip, ValueConstant } from '../../../shared/constants';
+import { Headings, ImagePath, SessionStorage, Messages, Tooltip, ValueConstant } from '../../../shared/constants';
 import { Section } from '../../../user/models/candidate';
-import { LocalStorageService } from '../../../shared/services/localstorage.service';
+import { SessionStorageService } from '../../../shared/services/session.service';
 import { GuidedTourService } from '../guided-tour.service';
 import { ErrorService } from '../../../shared/services/error.service';
 import {ComplexityAnsweredService} from "../complexity-answered.service";
@@ -68,9 +68,9 @@ export class CapabilitiesComponent {
   }
 
   ngOnInit() {
-    if (LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE) === 'true') {
+    if (SessionStorageService.getSessionValue(SessionStorage.IS_CANDIDATE) === 'true') {
       this.isCandidate = true;
-      this.userId=LocalStorageService.getLocalValue(LocalStorage.USER_ID);
+      this.userId=SessionStorageService.getSessionValue(SessionStorage.USER_ID);
     }
   }
 
@@ -95,7 +95,7 @@ export class CapabilitiesComponent {
             role.capabilities.splice(duplicateCapabilityIndex,1);
           }
       }
-      let guidedTourImages = LocalStorageService.getLocalValue(LocalStorage.GUIDED_TOUR);
+      let guidedTourImages = SessionStorageService.getSessionValue(SessionStorage.GUIDED_TOUR);
       let newArray = JSON.parse(guidedTourImages);
       if (newArray == undefined || newArray == null || (newArray && newArray.indexOf(ImagePath.CANDIDATE_OERLAY_SCREENS_CAPABILITIES) == -1)) {
         this.isGuidedTourImgRequire();
@@ -175,7 +175,7 @@ export class CapabilitiesComponent {
     this.guidedTourService.updateProfileField(this.guidedTourStatus)
       .subscribe(
         (res:any) => {
-          LocalStorageService.setLocalValue(LocalStorage.GUIDED_TOUR, JSON.stringify(res.data.guide_tour));
+          SessionStorageService.setSessionValue(SessionStorage.GUIDED_TOUR, JSON.stringify(res.data.guide_tour));
         },
         error => this.errorService.onError(error)
       );
@@ -317,7 +317,7 @@ export class CapabilitiesComponent {
   }
 
   navigateToWithId(nav:string) {
-    var userId = LocalStorageService.getLocalValue(LocalStorage.USER_ID);
+    var userId = SessionStorageService.getSessionValue(SessionStorage.USER_ID);
     if (nav !== undefined) {
       let x = nav+'/'+ userId + '/create';
       // this._router.navigate([nav, userId]);

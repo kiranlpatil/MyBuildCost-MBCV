@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {LocalStorageService} from "../../../shared/services/localstorage.service";
-import {LocalStorage} from "../../../shared/constants";
+import {SessionStorageService} from "../../../shared/services/session.service";
+import {SessionStorage} from "../../../shared/constants";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ErrorService} from "../../../shared/services/error.service";
 import {LoginComponent} from "../../../user/login/login.component";
@@ -30,7 +30,7 @@ export class UserDashboardContainerComponent implements OnInit {
       let token = params['token'];
       let userid = params['userid'];
       if (token && token !== '' && userid && userid !== '') {
-        LocalStorageService.setLocalValue(LocalStorage.ACCESS_TOKEN, token);
+        SessionStorageService.setSessionValue(SessionStorage.ACCESS_TOKEN, token);
         this.getUserDetails(userid);
       }
     });
@@ -40,7 +40,7 @@ export class UserDashboardContainerComponent implements OnInit {
     this.adminDashboardService.getUserDetails(userId)
       .subscribe(
         data => {
-          LocalStorageService.setLocalValue(LocalStorage.FROM_ADMIN, true);
+          SessionStorageService.setSessionValue(SessionStorage.FROM_ADMIN, true);
           this.registrationService.onSuccess(data);
         }, error => { this.registrationService.loginFail(error)}
       );

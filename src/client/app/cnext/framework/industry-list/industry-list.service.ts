@@ -2,8 +2,8 @@ import {Injectable} from "@angular/core";
 import {Headers, Http, RequestOptions} from "@angular/http";
 import {Observable} from "rxjs/Observable";
 import {BaseService} from "../../../shared/services/http/base.service";
-import {API, LocalStorage} from "../../../shared/constants";
-import {LocalStorageService} from "../../../shared/services/localstorage.service";
+import {API, SessionStorage} from "../../../shared/constants";
+import {SessionStorageService} from "../../../shared/services/session.service";
 import {Industry} from "../../../user/models/industry";
 
 @Injectable()
@@ -18,7 +18,7 @@ export class IndustryListService extends BaseService {
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({headers: headers});
     let body = JSON.stringify({'industry': industryprofile});
-    let url: string = API.CANDIDATE_PROFILE + '/' + LocalStorageService.getLocalValue(LocalStorage.USER_ID);
+    let url: string = API.CANDIDATE_PROFILE + '/' + SessionStorageService.getSessionValue(SessionStorage.USER_ID);
     return this.http.put(url, body, options)
       .map(this.extractData)
       .catch(this.handleError);

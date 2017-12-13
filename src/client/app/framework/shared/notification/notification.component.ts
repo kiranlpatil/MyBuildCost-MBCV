@@ -4,8 +4,8 @@ import {NotificationService} from "./notification.service";
 import {Notification} from "./notification";
 import {CommonService, Message, MessageService} from "../../../shared/index";
 import {Subscription} from "rxjs/Subscription";
-import {LocalStorage, NavigationRoutes} from "../../../shared/constants";
-import {LocalStorageService} from "../../../shared/services/localstorage.service";
+import {SessionStorage, NavigationRoutes} from "../../../shared/constants";
+import {SessionStorageService} from "../../../shared/services/session.service";
 import {LoaderService} from "../../../shared/loader/loaders.service";
 
 @Component({
@@ -27,7 +27,7 @@ export class NotificationComponent implements OnInit {
 
   ngOnInit() {
     this.unreadNotifications = 0;
-    this.newUser = parseInt(LocalStorageService.getLocalValue(LocalStorage.IS_LOGGED_IN));
+    this.newUser = parseInt(SessionStorageService.getSessionValue(SessionStorage.IS_LOGGED_IN));
     if (this.newUser === 0) {
       this._router.navigate([NavigationRoutes.APP_START]);
     } else {

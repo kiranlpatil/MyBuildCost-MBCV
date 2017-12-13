@@ -1,6 +1,6 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
-import { LocalStorageService } from '../../../../../shared/services/localstorage.service';
-import { LocalStorage } from '../../../../../shared/constants';
+import { SessionStorageService } from '../../../../../shared/services/session.service';
+import { SessionStorage } from '../../../../../shared/constants';
 
 @Component({
   moduleId: module.id,
@@ -16,7 +16,7 @@ export class ProficiencyCompareComponent implements OnInit ,OnChanges {
   private isCandidate: string;
 
   ngOnInit() {
-    this.isCandidate = LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE);
+    this.isCandidate = SessionStorageService.getSessionValue(SessionStorage.IS_CANDIDATE);
   }
 
 

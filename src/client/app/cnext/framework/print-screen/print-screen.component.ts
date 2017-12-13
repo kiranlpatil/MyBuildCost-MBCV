@@ -1,10 +1,10 @@
 import {Component, Input, ViewChild, ElementRef} from "@angular/core";
 import * as html2canvas from "html2canvas";
 import {Message} from "../../../shared/models/message";
-import {Messages, UsageActions, LocalStorage, ImagePath, Button} from "../../../shared/constants";
+import {Messages, UsageActions, SessionStorage, ImagePath, Button} from "../../../shared/constants";
 import {MessageService} from "../../../shared/services/message.service";
 import {UsageTrackingService} from "../usage-tracking.service";
-import {LocalStorageService} from "../../../shared/services/localstorage.service";
+import {SessionStorageService} from "../../../shared/services/session.service";
 import {ErrorService} from "../../../shared/services/error.service";
 import {UsageTracking} from "../model/usage-tracking";
 //import * as jsPDF from 'jspdf';
@@ -66,7 +66,7 @@ export class PrintScreenComponent {
   }
 
   trackUsage(action: number, candidateId: string, jobId: string) {
-    let recruiterId = LocalStorageService.getLocalValue(LocalStorage.END_USER_ID);
+    let recruiterId = SessionStorageService.getSessionValue(SessionStorage.END_USER_ID);
     let usageTrackingData: UsageTracking = new UsageTracking();
     usageTrackingData.recruiterId = recruiterId;
     usageTrackingData.action = action;

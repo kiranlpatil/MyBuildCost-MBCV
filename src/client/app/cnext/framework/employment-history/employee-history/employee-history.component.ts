@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FormGroup} from '@angular/forms';
-import {Messages, ValueConstant, LocalStorage} from '../../../../shared/constants';
+import {Messages, ValueConstant, SessionStorage} from '../../../../shared/constants';
 
 
 @Component({
@@ -34,7 +34,7 @@ export class EmployeeHistoryComponent implements OnInit{
   }
 
   ngOnInit() {
-    
+
   }
 
   ngOnChanges(changes: any) {

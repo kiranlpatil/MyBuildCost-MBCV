@@ -7,12 +7,12 @@ import {MessageService} from "../../../shared/services/message.service";
 import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
 import {Candidate, Section} from "../../../user/models/candidate";
 import {FormBuilder} from "@angular/forms";
-import {Messages, Tooltip, CandidateProfileUpdateTrack, LocalStorage, Label, Headings} from "../../../shared/constants";
+import {Messages, Tooltip, CandidateProfileUpdateTrack, SessionStorage, Label, Headings} from "../../../shared/constants";
 import {ProfessionalDetailsService} from "../professional-detail-service";
 import {ErrorService} from "../../../shared/services/error.service";
 import {ComplexityAnsweredService} from "../complexity-answered.service";
 import {Router} from "@angular/router";
-import { LocalStorageService } from '../../../shared/services/localstorage.service';
+import { SessionStorageService } from '../../../shared/services/session.service';
 import {isNullOrUndefined} from "util";
 
 @Component({
@@ -76,9 +76,9 @@ export class ProfessionalDataComponent extends BaseService implements OnChanges,
   }
 
   ngOnInit() {
-    if (LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE) === 'true') {
+    if (SessionStorageService.getSessionValue(SessionStorage.IS_CANDIDATE) === 'true') {
       this.isCandidate = true;
-      this.userId=LocalStorageService.getLocalValue(LocalStorage.USER_ID);
+      this.userId=SessionStorageService.getSessionValue(SessionStorage.USER_ID);
     }
   }
 
@@ -223,7 +223,7 @@ export class ProfessionalDataComponent extends BaseService implements OnChanges,
   }
 
   navigateToWithId(nav:string) {
-    var userId = LocalStorageService.getLocalValue(LocalStorage.USER_ID);
+    var userId = SessionStorageService.getSessionValue(SessionStorage.USER_ID);
     if (nav !== undefined) {
       let x = nav+'/'+ userId + '/create';
       // this._router.navigate([nav, userId]);

@@ -5,8 +5,8 @@ import {Recruiter} from "../models/recruiter";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ValidationService} from "../../shared/customvalidations/validation.service";
 import {AppSettings, CommonService, Message, MessageService, NavigationRoutes} from "../../shared/index";
-import {API, Button, ImagePath, Label, LocalStorage, Messages} from "../../shared/constants";
-import {LocalStorageService} from "../../shared/services/localstorage.service";
+import {API, Button, ImagePath, Label, SessionStorage, Messages} from "../../shared/constants";
+import {SessionStorageService} from "../../shared/services/session.service";
 import {Headers, Http, RequestOptions, Response} from "@angular/http";
 import {Location} from "../../user/models/location";
 import {MyGoogleAddress} from "../../shared/models/my-google-address";
@@ -86,7 +86,7 @@ export class RecruiterSignUpComponent implements OnInit {
   }
 
   ngOnInit() {
-    let val = LocalStorageService.getLocalValue(LocalStorage.AFTER_RECRUITER_REGISTRATION_FORM);
+    let val = SessionStorageService.getSessionValue(SessionStorage.AFTER_RECRUITER_REGISTRATION_FORM);
     if (val !== null) {
       if (val == "true") {
         this._router.navigate([NavigationRoutes.VERIFY_USER]);
@@ -233,12 +233,12 @@ export class RecruiterSignUpComponent implements OnInit {
   onRegistrationSuccess(user: any) {
     fbq('track', 'CompleteRegistration');
     this.gtag_report_conversion('AW-831903917/QE2JCIuxrHcQrbHXjAM');
-    LocalStorageService.setLocalValue(LocalStorage.USER_ID, user.data._id);
-    LocalStorageService.setLocalValue(LocalStorage.EMAIL_ID, this.recruiterForm.value.email);
-    LocalStorageService.setLocalValue(LocalStorage.COMPANY_NAME, this.recruiterForm.value.company_name);
-    LocalStorageService.setLocalValue(LocalStorage.CHANGE_MAIL_VALUE, 'from_registration');
-    LocalStorageService.setLocalValue(LocalStorage.FROM_CANDIDATE_REGISTRATION, 'false');
-    LocalStorageService.setLocalValue(LocalStorage.AFTER_RECRUITER_REGISTRATION_FORM, "true");
+    SessionStorageService.setSessionValue(SessionStorage.USER_ID, user.data._id);
+    SessionStorageService.setSessionValue(SessionStorage.EMAIL_ID, this.recruiterForm.value.email);
+    SessionStorageService.setSessionValue(SessionStorage.COMPANY_NAME, this.recruiterForm.value.company_name);
+    SessionStorageService.setSessionValue(SessionStorage.CHANGE_MAIL_VALUE, 'from_registration');
+    SessionStorageService.setSessionValue(SessionStorage.FROM_CANDIDATE_REGISTRATION, 'false');
+    SessionStorageService.setSessionValue(SessionStorage.AFTER_RECRUITER_REGISTRATION_FORM, "true");
     this._router.navigate([NavigationRoutes.VERIFY_USER]);
   }
 

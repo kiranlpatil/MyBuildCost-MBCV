@@ -1,8 +1,8 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from "@angular/core";
 import {Role} from "../model/role";
 import {Section} from "../../../user/models/candidate";
-import {ImagePath, LocalStorage, Messages, Tooltip, ValueConstant} from "../../../shared/constants";
-import {LocalStorageService} from "../../../shared/services/localstorage.service";
+import {ImagePath, SessionStorage, Messages, Tooltip, ValueConstant} from "../../../shared/constants";
+import {SessionStorageService} from "../../../shared/services/session.service";
 import {GuidedTourService} from "../guided-tour.service";
 import {MessageService} from "../../../shared/services/message.service";
 import {Message} from "../../../shared/models/message";
@@ -52,7 +52,7 @@ export class WorkAreaComponent implements OnInit,OnChanges {
 
   }
   ngOnInit() {
-    if (LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE) === 'true') {
+    if (SessionStorageService.getSessionValue(SessionStorage.IS_CANDIDATE) === 'true') {
       this.isCandidate = true;
     }
   }
@@ -149,7 +149,7 @@ export class WorkAreaComponent implements OnInit,OnChanges {
     this.guidedTourService.updateProfileField(this.guidedTourStatus)
       .subscribe(
         (res:any) => {
-          LocalStorageService.setLocalValue(LocalStorage.GUIDED_TOUR, JSON.stringify(res.data.guide_tour));
+          SessionStorageService.setSessionValue(SessionStorage.GUIDED_TOUR, JSON.stringify(res.data.guide_tour));
           this.isGuidedTourImgRequire()
         },
         error => this.errorService.onError(error)

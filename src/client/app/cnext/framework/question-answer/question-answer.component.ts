@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from "@angular/core";
 import {ComplexityDetails} from "../../../user/models/complexity-detail";
-import {LocalStorage} from "../../../shared/constants";
-import {LocalStorageService} from "../../../shared/services/localstorage.service";
+import {SessionStorage} from "../../../shared/constants";
+import {SessionStorageService} from "../../../shared/services/session.service";
 import {Scenario} from "../../../user/models/scenario";
 
 @Component({
@@ -20,7 +20,7 @@ export class QuestionAnswerComponent implements OnInit,OnChanges {
   private isCandidate:boolean = false;
 
   ngOnInit() {
-    if (LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE) === 'true') {
+    if (SessionStorageService.getSessionValue(SessionStorage.IS_CANDIDATE) === 'true') {
       this.isCandidate = true;
     }
   }

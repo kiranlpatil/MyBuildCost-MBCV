@@ -7,9 +7,9 @@ import {CandidateProfileService} from "../candidate-profile/candidate-profile.se
 import {Candidate} from "../../../user/models/candidate";
 import {CandidateDetail} from "../../../user/models/candidate-details";
 import {Router, ActivatedRoute} from "@angular/router";
-import {ImagePath, LocalStorage, Messages, UsageActions, ValueConstant} from "../../../shared/constants";
+import {ImagePath, SessionStorage, Messages, UsageActions, ValueConstant} from "../../../shared/constants";
 import {QCardViewService} from "../recruiter-dashboard/q-card-view/q-card-view.service";
-import {LocalStorageService} from "../../../shared/services/localstorage.service";
+import {SessionStorageService} from "../../../shared/services/session.service";
 import {UsageTrackingService} from "../usage-tracking.service";
 import {CandidateDetailsJobMatching} from "../model/candidate-details-jobmatching";
 import {SearchEvent} from "../model/search-event";
@@ -96,7 +96,7 @@ export class CandidateSearchComponent implements OnChanges {
     this.isCandidateFound = true;
     let usageTrackingData = new UsageTracking();
     usageTrackingData.action = UsageActions.SEARCHED_CANDIDATE_BY_RECRUITER;
-    usageTrackingData.recruiterId = LocalStorageService.getLocalValue(LocalStorage.END_USER_ID);
+    usageTrackingData.recruiterId = SessionStorageService.getSessionValue(SessionStorage.END_USER_ID);
     usageTrackingData.candidateId = item.id;
     this.usageTrackingService.addUsesTrackingData(usageTrackingData).subscribe(
       (res: any) => {},
@@ -108,7 +108,7 @@ export class CandidateSearchComponent implements OnChanges {
     this.appliedFilters = new QCardFilter();
     this.appliedFilters.sortBy = this.sortBy;
     this.appliedFilters.listName = EList.JOB_MATCHED;
-    this.appliedFilters.recruiterId = LocalStorageService.getLocalValue(LocalStorage.END_USER_ID);
+    this.appliedFilters.recruiterId = SessionStorageService.getSessionValue(SessionStorage.END_USER_ID);
     this.candidateSearchService.getJobProfileMatching(candidateId, this.appliedFilters)
       .subscribe(
         (res: any) => {

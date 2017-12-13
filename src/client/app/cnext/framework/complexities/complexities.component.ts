@@ -1,8 +1,8 @@
 import {Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, ViewChild} from "@angular/core";
 import {Role} from "../model/role";
 import {ComplexityService} from "../complexity.service";
-import {LocalStorageService} from "../../../shared/services/localstorage.service";
-import {Headings, ImagePath, LocalStorage, Messages, Tooltip, ValueConstant} from "../../../shared/constants";
+import {SessionStorageService} from "../../../shared/services/session.service";
+import {Headings, ImagePath, SessionStorage, Messages, Tooltip, ValueConstant} from "../../../shared/constants";
 import {Section} from "../../../user/models/candidate";
 import {ComplexityDetails} from "../../../user/models/complexity-detail";
 import {ComplexityComponentService} from "./complexity.service";
@@ -93,9 +93,9 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-    if (LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE) === 'true') {
+    if (SessionStorageService.getSessionValue(SessionStorage.IS_CANDIDATE) === 'true') {
       this.isCandidate = true;
-      this.userId=LocalStorageService.getLocalValue(LocalStorage.USER_ID);
+      this.userId=SessionStorageService.getSessionValue(SessionStorage.USER_ID);
       this.userFeedbackComponentService.getFeedbackForCandidate()
         .subscribe(data => {
           this.feedbackQuestions = data.questions;
@@ -118,7 +118,7 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
       this.complexities = changes.complexities.currentValue;
       let jobId: string;
       if (!this.isCandidate) {
-        jobId = LocalStorageService.getLocalValue(LocalStorage.POSTED_JOB);
+        jobId = SessionStorageService.getSessionValue(SessionStorage.POSTED_JOB);
       }
       this.complexityComponentService.getCapabilityMatrix(jobId).subscribe(
         capa => {
@@ -133,7 +133,7 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
             this.getComplexityIds(this.complexities);
           }
         },error => this.errorService.onError(error));
-      let guidedTourImages = LocalStorageService.getLocalValue(LocalStorage.GUIDED_TOUR);
+      let guidedTourImages = SessionStorageService.getSessionValue(SessionStorage.GUIDED_TOUR);
       let newArray = JSON.parse(guidedTourImages);
       if (newArray && newArray.indexOf(ImagePath.CANDIDATE_OERLAY_SCREENS_COMPLEXITIES) == -1) {
         this.isGuidedTourImgRequire();
@@ -254,7 +254,7 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
     this.isValid = true;
     let jobId: string;
     if (!this.isCandidate) {
-      jobId = LocalStorageService.getLocalValue(LocalStorage.POSTED_JOB);
+      jobId = SessionStorageService.getSessionValue(SessionStorage.POSTED_JOB);
     }
     this.complexityComponentService.getCapabilityMatrix(jobId).subscribe(
       capa => {
@@ -396,7 +396,7 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
     this.guidedTourService.updateProfileField(this.guidedTourStatus)
       .subscribe(
         (res:any) => {
-          LocalStorageService.setLocalValue(LocalStorage.GUIDED_TOUR, JSON.stringify(res.data.guide_tour));
+          SessionStorageService.setSessionValue(SessionStorage.GUIDED_TOUR, JSON.stringify(res.data.guide_tour));
         },
         error => this.errorService.onError(error)
       );
@@ -492,7 +492,7 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
   }
 
   navigateToWithId(nav:string) {
-    var userId = LocalStorageService.getLocalValue(LocalStorage.USER_ID);
+    var userId = SessionStorageService.getSessionValue(SessionStorage.USER_ID);
     if (nav !== undefined) {
       let x = nav+'/'+ userId + '/create';
      // this._router.navigate([nav, userId]);

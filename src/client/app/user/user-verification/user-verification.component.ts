@@ -1,11 +1,11 @@
 import {Component, OnInit} from "@angular/core";
 import {Router} from "@angular/router";
 import {FormBuilder, FormGroup} from "@angular/forms";
-import {ImagePath, LocalStorage, Messages, NavigationRoutes, ProjectAsset} from "../../shared/constants";
+import {ImagePath, SessionStorage, Messages, NavigationRoutes, ProjectAsset} from "../../shared/constants";
 import {ValidationService} from "../../shared/customvalidations/validation.service";
 import {VerifyUser} from "../models/verify-user";
 import {UserVerificationService} from "./user-verification.service";
-import {LocalStorageService} from "../../shared/services/localstorage.service";
+import {SessionStorageService} from "../../shared/services/session.service";
 import {Message} from "../../shared/models/message";
 import {MessageService} from "../../shared/services/message.service";
 import {AnalyticService} from "../../shared/services/analytic.service";
@@ -55,9 +55,9 @@ export class UserVerificationComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.model.mobile_number = LocalStorageService.getLocalValue(LocalStorage.MOBILE_NUMBER);
-    this.model.email = LocalStorageService.getLocalValue(LocalStorage.EMAIL_ID);
-    let val = LocalStorageService.getLocalValue(LocalStorage.FROM_CANDIDATE_REGISTRATION);
+    this.model.mobile_number = SessionStorageService.getSessionValue(SessionStorage.MOBILE_NUMBER);
+    this.model.email = SessionStorageService.getSessionValue(SessionStorage.EMAIL_ID);
+    let val = SessionStorageService.getSessionValue(SessionStorage.FROM_CANDIDATE_REGISTRATION);
     if (val === 'true') {
       this.isCandidate = true;
       this.chkMobile = false;
@@ -90,14 +90,14 @@ export class UserVerificationComponent implements OnInit {
     }
     if (!this.chkMobile) {
       this.model = this.userForm.value;
-      LocalStorageService.setLocalValue(LocalStorage.MOBILE_NUMBER, this.model.mobile_number);
-      this.model.mobile_number = LocalStorageService.getLocalValue(LocalStorage.MOBILE_NUMBER);
+      SessionStorageService.setSessionValue(SessionStorage.MOBILE_NUMBER, this.model.mobile_number);
+      this.model.mobile_number = SessionStorageService.getSessionValue(SessionStorage.MOBILE_NUMBER);
       this.verifyUserService.verifyUserByMobile(this.model)
         .subscribe(
           res => (this.verifySuccess(res)),
           error => (this.verifyFail(error)));
     } else {
-      this.model.email = LocalStorageService.getLocalValue(LocalStorage.EMAIL_ID);
+      this.model.email = SessionStorageService.getSessionValue(SessionStorage.EMAIL_ID);
       this.isShowLoader = true;
       this.verifyUserService.verifyUserByMail(this.model)
         .subscribe(
@@ -111,14 +111,14 @@ export class UserVerificationComponent implements OnInit {
   }
 
   verifySuccess(res: any) {
-    LocalStorageService.setLocalValue(LocalStorage.AFTER_RECRUITER_REGISTRATION_FORM, '');
+    SessionStorageService.setSessionValue(SessionStorage.AFTER_RECRUITER_REGISTRATION_FORM, '');
     if (!this.chkMobile) {
-      LocalStorageService.setLocalValue(LocalStorage.VERIFY_PHONE_VALUE, 'from_registration');
+      SessionStorageService.setSessionValue(SessionStorage.VERIFY_PHONE_VALUE, 'from_registration');
       this._router.navigate([NavigationRoutes.VERIFY_PHONE]);
 
     } else {
       this.isMailSent = true;
-      LocalStorageService.setLocalValue(LocalStorage.CHANGE_MAIL_VALUE, 'from_registration');
+      SessionStorageService.setSessionValue(SessionStorage.CHANGE_MAIL_VALUE, 'from_registration');
       var message = new Message();
       message.isError = false;
       message.custom_message = Messages.MSG_SUCCESS_MAIL_VERIFICATION;
