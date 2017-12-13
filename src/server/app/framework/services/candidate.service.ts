@@ -131,7 +131,6 @@ class CandidateService {
               callback(e, null);
               return;
             }
-            callback(null, "success");
           });
       });
     });

@@ -45,23 +45,25 @@ export class MailChimpMailerService {
   }
 
   triggerMailChimpService(data: CandidateDetail, listId: string) {
-    let mailchimp = require('mailchimp-api-v3');
-    let mailchimpClient = new mailchimp(config.get('TplSeed.mail.MAIL_CHIMP_SERVICE_KEY'));
-    let md5 = require('md5');
-    let md5String = md5(data.email);
-    mailchimpClient.put('/lists/' + listId + '/members/' + md5String, {
-      email_address: data.email,
-      status: 'subscribed',
-      merge_fields: {
-        'FNAME': data.first_name,
-        'LNAME': data.last_name
-      }
-    }).then(function (results: any) {
-      loggerService.logInfo('Mailchimp Triggered Successfully '+' emailId: ' + data.email + '  listId: ' + listId);
-      loggerService.logDebug(results);
-    }).catch(function (err: any) {
-      loggerService.logError('Mailchimp Trigger failed '+' emailId: ' + data.email + '  listId: ' + listId);
-      loggerService.logError(err);
-    });
+    if (data !== null && data !== undefined) {
+      let mailchimp = require('mailchimp-api-v3');
+      let mailchimpClient = new mailchimp(config.get('TplSeed.mail.MAIL_CHIMP_SERVICE_KEY'));
+      let md5 = require('md5');
+      let md5String = md5(data.email);
+      mailchimpClient.put('/lists/' + listId + '/members/' + md5String, {
+        email_address: data.email,
+        status: 'subscribed',
+        merge_fields: {
+          'FNAME': data.first_name,
+          'LNAME': data.last_name
+        }
+      }).then(function (results: any) {
+        loggerService.logInfo('Mailchimp Triggered Successfully ' + ' emailId: ' + data.email + '  listId: ' + listId);
+        loggerService.logDebug(results);
+      }).catch(function (err: any) {
+        loggerService.logError('Mailchimp Trigger failed ' + ' emailId: ' + data.email + '  listId: ' + listId);
+        loggerService.logError(err);
+      });
+    }
   }
 }

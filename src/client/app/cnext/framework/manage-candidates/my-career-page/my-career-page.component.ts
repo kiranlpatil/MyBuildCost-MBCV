@@ -25,7 +25,7 @@ export class MyCareerPageComponent {
   loadSummary() {
     this.inValidDates = false;
     if (this.fromDate != '' && this.toDate != '') {
-      if (new Date(this.fromDate) < new Date(this.toDate)) {
+      if (new Date(this.fromDate) <= new Date(this.toDate)) {
         this.manageCandidatesService.getMyCareerPageSummary(this.fromDate, this.toDate)
           .subscribe(
             data => {

@@ -44,13 +44,16 @@ export class RecruiterCandidatesService {
 
   getSummary(id: string, fromDate: string, toDate: string, callback: (error: Error, data: RecruiterCandidatesModel[]) => void) {
 
-    let searchQuery = {
-      'recruiterId': new mongoose.Types.ObjectId(id),
-      'statusUpdatedOn': {
-        $lte: new Date(toDate),
-        $gte: new Date(fromDate)
-      }
-    };
+    let newDate = new Date(toDate);
+      let numberOfDaysToAdd = 1;
+      newDate.setDate(newDate.getDate() + numberOfDaysToAdd);
+      let searchQuery = {
+        'recruiterId': new mongoose.Types.ObjectId(id),
+        'statusUpdatedOn': {
+          $lte: newDate,
+          $gte: new Date(fromDate)
+        }
+      };
 
     let recruiterCandidatesRepository = new RecruiterCandidatesRepository();
     recruiterCandidatesRepository.retrieve(searchQuery, (error: Error, data: RecruiterCandidatesModel[]) => {
