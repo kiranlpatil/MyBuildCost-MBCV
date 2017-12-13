@@ -99,7 +99,7 @@ export class ComplexitiesComponent implements OnInit, OnChanges {
       this.userFeedbackComponentService.getFeedbackForCandidate()
         .subscribe(data => {
           this.feedbackQuestions = data.questions;
-          console.log('feedbackQuestions: ', this.feedbackQuestions);
+          //console.log('feedbackQuestions: ', this.feedbackQuestions);
         }, error => {
           this.errorService.onError(error);
         });
