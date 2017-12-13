@@ -8,11 +8,11 @@
         (click)="addForCompareView(candidate,type)" [innerHTML]="getButtons().COMPARE_WITH_OTHERS">
 </button>
 <button *ngIf="(type =='rejectedList' || type =='applied' || type =='matchedList') && isValuePortraitView"
-        class="btn btn-cart" type="button"
+        class="btn btn-cart add-card-btn" type="button"
         (click)="actionToBePerformed('add','cartListed', candidate.candidateId)">Add to cart
 </button>
 <button *ngIf="(type =='rejectedList' || type =='applied' || type =='matchedList') && isOverlayView"
-        class="btn btn-cart" type="button"
+        class="btn btn-cart add-card-btn" type="button"
         (click)="actionToBePerformed('add','cartListed', candidate._id)">Add to cart
 </button>
 <button class="btn btn-cart" type="button"

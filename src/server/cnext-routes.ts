@@ -69,7 +69,6 @@ export function cnextInit(app: express.Application) {
       this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, jobProfileController.getCapabilityMatrix);
     app.get('/api/recruiter/jobProfile/:id', loggerInterceptor.logDetail, this.authInterceptor.requiresAuth,
       this.authInterceptor.secureApiCheck, jobProfileController.retrieve);
-
     app.get('/api/jobs/:id', loggerInterceptor.logDetail, this.authInterceptor.requiresAuth,
       this.authInterceptor.secureApiCheck, searchController.getJobsInIndustry);
     app.get('/api/candidate/:id/:candidateId', loggerInterceptor.logDetail, this.authInterceptor.requiresAuth,

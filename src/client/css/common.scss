@@ -1026,6 +1026,24 @@ cn-control-messages {
   display: block;
 }
 
+.action_button_container {
+  button {
+    width: 100%;
+    margin-top: 5px;
+    font-family: gothamrnd-light !important;
+  }
+  .add-card-btn {
+    display: none !important;
+  }
+}
+
+.add_cart_buttom {
+  margin-right: 68px !important;
+  position: absolute;
+  right: 0;
+  width: auto !important;
+}
+
 // Media Queries
 @media only screen and (max-width: 1024px) {
   .logout-dropdown {

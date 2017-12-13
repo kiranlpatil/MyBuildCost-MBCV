@@ -5,6 +5,7 @@ import { Message } from '../../../shared/models/message';
 import { Headings, Label, Button, Messages } from '../../../shared/constants';
 import { ErrorService } from '../../../shared/services/error.service';
 import { JobCloseComponentService } from './job-close.component.service';
+import { JobDashboardService } from '../recruiter-dashboard/job-dashboard/job-dashboard.service';
 
 @Component ({
 
@@ -17,17 +18,19 @@ import { JobCloseComponentService } from './job-close.component.service';
 export class JobCloseComponent implements OnChanges, OnInit {
 
   @Input() selectedJobTitleForClose: string;
-  @Input() selectedJobProfile: any;
+  @Input() selectedJobProfileId: any;
   @Input() isJobCloseButtonClicked:boolean;
 
 
   showCloseDialogue:boolean = false;
-  private selectedJobCloseReason: number;
+  selectedJobCloseReason: number;
   reasonForClosingJob: any = new Array(0);
-  private isShowNoSelectionError: boolean = false;
-
+  isShowNoSelectionError: boolean = false;
+  selectedJobProfile:any;
   constructor(private errorService: ErrorService, private jobPosterService: JobPosterService,
-              private messageService: MessageService, private jobCloseComponentService: JobCloseComponentService) {
+              private jobDashboardService: JobDashboardService,
+              private messageService: MessageService,
+              private jobCloseComponentService: JobCloseComponentService) {
   }
 
   ngOnInit() {
@@ -52,13 +55,18 @@ export class JobCloseComponent implements OnChanges, OnInit {
       return;
     } else {
       this.showCloseDialogue = false;
-      this.selectedJobProfile.isJobPostClosed = true;
-      this.selectedJobProfile.jobCloseReason = this.selectedJobCloseReason;
-      this.jobPosterService.postJob(this.selectedJobProfile).subscribe(
-        data => {
-          this.selectedJobProfile = data;
-          this.messageService.message(new Message(this.selectedJobTitleForClose+ " Job Post is closed"));
-        }, error => this.errorService.onError(error));
+      this.jobDashboardService.getPostedJobDetails(this.selectedJobProfileId)
+        .subscribe(
+          (data: any) => {
+            this.selectedJobProfile = data.result;
+            this.selectedJobProfile.isJobPostClosed = true;
+            this.selectedJobProfile.jobCloseReason = this.selectedJobCloseReason;
+            this.jobPosterService.postJob(this.selectedJobProfile).subscribe(
+              data => {
+                this.selectedJobProfile = data;
+                this.messageService.message(new Message(this.selectedJobTitleForClose+ " Job Post is closed"));
+              }, error => this.errorService.onError(error));
+          }, error => this.errorService.onError(error));
     }
   }
 

@@ -150,12 +150,22 @@
             </button>-->
             <div class="action-button"
                  [class.hidden]="(isJobPostExpired || isJobPostClosed) || (isJobPostExpired && isJobPostClosed)">
-                <cn-recruiter-action
-                        [candidate]="modelCandidate"
-                        [isOverlayView]="true" [jobId]="jobId"
-                        [type]="type"
-                        [isValuePortraitView]="false">
-                </cn-recruiter-action>
+
+              <div class="action_button_container">
+                <input type="checkbox" id="action_button_toggle" />
+                <label class="more__action__button" for="action_button_toggle"></label>
+                <button  class="btn btn-primary add_cart_buttom" type="button"
+                         [class.hidden]="(isJobPostExpired || isJobPostClosed) || (isJobPostExpired && isJobPostClosed)" (click)="actionOnQCard('add',type,'cartListed',modelCandidate)">Add To Cart
+                </button>
+                <div class="action__button__content">
+                  <cn-recruiter-action
+                    [candidate]="modelCandidate"
+                    [isOverlayView]="true" [jobId]="jobId"
+                    [type]="type"
+                    [isValuePortraitView]="false">
+                  </cn-recruiter-action>
+                </div>
+              </div>
             </div>
           </div>
           <!--<div class="button-group" *ngIf="type=='matchedList'">
@@ -176,7 +186,7 @@
 
 <div  *ngIf="type=='cartListed'" class="modal dashboard-modal" [style.display]="getStyleModal()">
   <div class="modal-bg">
-    <div class="compare-modal-dialog modal-md">
+    <div class="modal-dialog modal-md">
       <div class="modal-content">
         <div class="modal-body">
           <cn-job-compare-view [typeOfView]="'spa_candidate'" (close)="closeJob()" [candiadteId]="selectedCandidate._id" [jobId]="jobId"></cn-job-compare-view>
@@ -193,12 +203,18 @@
           <div class="button-group" >
               <div class="action-button"
                    [class.hidden]="(isJobPostExpired || isJobPostClosed) || (isJobPostExpired && isJobPostClosed)">
-              <cn-recruiter-action
-                      [candidate]="modelCandidate"
-                      [isOverlayView]="true" [jobId]="jobId"
-                      [type]="type"
-                      [isValuePortraitView]="false">
-              </cn-recruiter-action>
+                <div class="action_button_container">
+                  <input type="checkbox" id="addcart_action_button_toggle" />
+                  <label class="more__action__button" for="addcart_action_button_toggle"></label>
+                  <div class="action__button__content">
+                    <cn-recruiter-action
+                            [candidate]="modelCandidate"
+                            [isOverlayView]="true" [jobId]="jobId"
+                            [type]="type"
+                            [isValuePortraitView]="false">
+                    </cn-recruiter-action>
+                  </div>
+                </div>
               </div>
           </div>
 

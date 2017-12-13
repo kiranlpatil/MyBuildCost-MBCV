@@ -127,3 +127,58 @@ header {
   @extend .star-icon;
   visibility: hidden;
 }
+
+.action_button_container {
+  margin: -43px auto 0 auto;
+  position: fixed;
+  right: 50px;
+}
+#action_button_toggle,
+#addcart_action_button_toggle{
+  display: none;
+  &:checked {
+    ~ {
+      .action__button__content {
+        opacity: 1;
+        transform: translateY(-110%);
+        visibility: visible;
+      }
+      .more__action__button {
+        box-shadow: 0 0 0 0 transparent;
+        transform: rotate(90deg);
+      }
+    }
+  }
+}
+.more__action__button {
+  background: $blue-color;
+  border-radius: 100%;
+  cursor: pointer;
+  height: 43px;
+  position: fixed;
+  right: 50px;
+  transition: all 0.5s ease-in-out;
+  width: 43px;
+  z-index: 999;
+   &:before {
+    position: absolute;
+    color: $white;
+    content: '\2807';
+    font-size: 26px;
+    height: 2px;
+    left: 10px;
+    top: 3px;
+    width: 25px;
+  }
+}
+.action__button__content {
+  background: $white;
+  border-radius: 5px;
+  left: -50px;
+  opacity: 0;
+  top: 13px;
+  transform: translateY(-10%);
+  transition: all 0.5s ease-in-out;
+  visibility: hidden;
+  width: 183px;
+}
