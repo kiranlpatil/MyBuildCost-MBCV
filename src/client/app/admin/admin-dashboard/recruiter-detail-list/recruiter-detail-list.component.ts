@@ -100,12 +100,11 @@ export class RecruiterDetailListComponent {
     return Messages;
   }
 
-  openRecruiterDashboard(userId: any) {
-    let token = SessionStorageService.getSessionValue(SessionStorage.ACCESS_TOKEN);
-    let url = AppSettings.IP + '/usercontainer?token='+token+'&'+'userid='+userId;
-    window.open(url, '_blank');
+  openRecruiterDashboard(recruiter: any) {
+    if(recruiter.isActivated) {
+      let token = SessionStorageService.getSessionValue(SessionStorage.ACCESS_TOKEN);
+      let url = AppSettings.IP + '/usercontainer?token='+token+'&'+'userid='+recruiter.data.userId;
+      window.open(url, '_blank');
+    }
   }
 }
-
-
-

@@ -95,6 +95,7 @@
 
 .username {
   cursor: pointer;
+  color: $theme-color !important;
 }
 
 .completed {
@@ -151,6 +152,11 @@
   display: inline-block;
   background: #e3695f;
   margin: 0 5px 0 0;
+}
+
+.inactive_candidate {
+  color: $gray !important;
+  cursor: not-allowed;
 }
 
 @media only screen and (max-width: 1570px) {
