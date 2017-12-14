@@ -21,9 +21,11 @@ export class JobProficienciesComponent implements OnInit {
   mandatorySkills:string=Headings.MANDATORY_PROFICIENCIES;
   additionalSkills:string=Headings.ADDITIONAL_PROFICIENCIES;
   private showButton: boolean = true;
+  private isshowModal: boolean = false;
   private disablebutton: boolean = true;
   private submitStatus: boolean = false;
   private showAdditional: boolean = false;
+  private showModalStyle: boolean = false;
   private maxNumberOfMandatory: number;
   private maxNumberOfAdditional: number;
   private requiredKeySkillsValidationMessage = Messages.MSG_ERROR_VALIDATION_KEYSKILLS_REQUIRED;
@@ -44,17 +46,27 @@ export class JobProficienciesComponent implements OnInit {
   }
 
   onNext() {
-    this.highlightedSection.name = 'IndustryExposure';
-    this.highlightedSection.isDisable = false;
-    this.onNextComplete.emit();
-    window.scrollTo(0, 0);
+    if(this.jobPosterModel && this.jobPosterModel.proficiencies && this.jobPosterModel.proficiencies.length === 0 && !this.isshowModal){
+      this.isshowModal=true;
+    } else {
+      this.highlightedSection.name = 'IndustryExposure';
+      this.highlightedSection.isDisable = false;
+      this.onNextComplete.emit();
+      window.scrollTo(0, 0);
+      this.isshowModal=false;
+    }
   }
 
   onSave() {
+    if(this.jobPosterModel && this.jobPosterModel.proficiencies && this.jobPosterModel.proficiencies.length === 0 && !this.isshowModal){
+      this.isshowModal=true;
+    } else {
     this.highlightedSection.name = 'none';
     this.highlightedSection.isDisable = false;
     this.onNextComplete.emit();
     window.scrollTo(0, 0);
+    this.isshowModal=false;
+    }
   }
 
   onPrevious() {
