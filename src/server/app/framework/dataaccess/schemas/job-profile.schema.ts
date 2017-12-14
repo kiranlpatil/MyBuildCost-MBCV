@@ -135,7 +135,8 @@ class JobProfileSchema {
         },
       educationForJob: [{
         educationDegree:String,
-        specialization: String
+        specialization: String,
+        _id: false
       }],
         competencies: {
           type: String
