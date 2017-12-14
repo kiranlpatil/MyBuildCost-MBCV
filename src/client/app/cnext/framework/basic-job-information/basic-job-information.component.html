@@ -191,7 +191,7 @@
       <div class="clearfix">
         <p><label>Job Title</label> {{jobPosterModel.jobTitle}}</p>
         <p *ngIf="jobPosterModel.education"><label>Education</label>{{jobPosterModel.education}}</p>
-        <p *ngIf="jobPosterModel.educationForJob.length>0"><label>Education</label><b *ngFor="let education of jobPosterModel.educationForJob">
+        <p *ngIf="jobPosterModel.educationForJob && jobPosterModel.educationForJob.length>0"><label>Education</label><b *ngFor="let education of jobPosterModel.educationForJob">
         {{education.educationDegree}}<br/><b *ngIf="education.specialization">({{education.specialization}})</b><br/></b></p>
 
         <p *ngIf="jobPosterModel.experienceMinValue !=jobPosterModel.experienceMaxValue"><label>Experience Band</label>
