@@ -5,8 +5,9 @@ import {Router} from "@angular/router";
 import {LoaderService} from "../../../shared/loader/loaders.service";
 import {MessageService} from "../../../shared/services/message.service";
 import {Message} from "../../../shared/models/message";
-import {AppSettings, Label, Messages} from "../../../shared/constants";
+import {AppSettings, Label, SessionStorage, Messages} from "../../../shared/constants";
 import {JobPosterModel} from "../../../user/models/jobPoster";
+import {SessionStorageService} from "../../../shared/services/session.service";
 
 @Component({
   moduleId: module.id,
@@ -63,7 +64,6 @@ export class RecruiterDetailListComponent {
           window.open(AppSettings.IP + recruiterDetails.path.companyDetailsCSV,'_blank');
           window.open(AppSettings.IP + recruiterDetails.path.jobDetailsCSV,'_blank');
           window.open(AppSettings.IP + recruiterDetails.path.companyAccountDetailsCSV,'_blank');
-          this.messageService.message(new Message(Messages.MSG_SUCCESS_FOR_FILE_DOWNLOAD));
         },
         error => this.errorService.onError(error));
   }
@@ -98,6 +98,12 @@ export class RecruiterDetailListComponent {
 
   getMessages() {
     return Messages;
+  }
+
+  openRecruiterDashboard(userId: any) {
+    let token = SessionStorageService.getSessionValue(SessionStorage.ACCESS_TOKEN);
+    let url = AppSettings.IP + '/usercontainer?token='+token+'&'+'userid='+userId;
+    window.open(url, '_blank');
   }
 }
 

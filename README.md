@@ -423,10 +423,11 @@ $ src/redis-server
     }
    })
    
-       - Version : 1.1.4
-       - Date : 25 nov 2017
-       - image path change
-       - Update Script
+ - Version : 1.1.4
+ - Date : 25 nov 2017
+ - image path change
+ - Update Script
+       
     //Script for image path on Demo for user and recruiter table 
      
      db.getCollection('users').find({'picture':{'$exists':true}}).forEach(function(user) {
@@ -509,7 +510,15 @@ $ src/redis-server
     }
   })
   
+  - Version : 1.1.5
+  - Date : 6 dec 2017
+  - Recruiter's myCandidateList moved to new collection name RecruiterCandidates
+  - Update Script
   
+  //indexes for new collection
+    db.getCollection('recruiter-candidates').createIndex({'recruiterId':1})
+    db.getCollection('recruiter-candidates').createIndex({'recruiterId':1,'source':1})
+   
   
 #Jobmosis Career_plugin 
 

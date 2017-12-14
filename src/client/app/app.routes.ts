@@ -9,6 +9,7 @@ import { ShareContainerRoutes } from './cnext/framework/share-container/share-co
 import { JobShareContainerRoutes } from './cnext/framework/job-share-container/job-share-container.routes';
 import {CandidateRouteSwitch} from "./cnext/framework/candidate-dashboard/candidate-route-switch.routes";
 import {PageNotFoundComponent} from "./shared/page-not-found/page-not-found.component";
+import {UserDashboardContainer} from "./admin/admin-dashboard/user-dashboard-container/user-dashboard-container.routes";
 
 
 export const routes: Routes = [
@@ -21,6 +22,7 @@ export const routes: Routes = [
   ...ValuePortrait,
   ...ShareContainerRoutes,
   ...JobShareContainerRoutes,
+  ...UserDashboardContainer,
   ...StartRoutes,
   {
     path:'**',

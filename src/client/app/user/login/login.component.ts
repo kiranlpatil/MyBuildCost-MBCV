@@ -5,8 +5,8 @@ import {Login} from "../models/login";
 import {
   AppSettings,
   ImagePath,
-  LocalStorage,
-  LocalStorageService,
+  SessionStorage,
+  SessionStorageService,
   Message,
   MessageService,
   NavigationRoutes,
@@ -14,9 +14,10 @@ import {
 } from "../../shared/index";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {ValidationService} from "../../shared/customvalidations/validation.service";
-import {Messages, ProjectAsset} from "../../shared/constants";
+import {Label, LocalStorage, Messages, ProjectAsset} from "../../shared/constants";
 import {SharedService} from "../../shared/services/shared-service";
-import {SessionStorageService} from "../../shared/services/session.service";
+import {RegistrationService} from "../services/registration.service";
+import {LocalStorageService} from "../../shared/services/localstorage.service";
 /*declare var CareerPluginLoad:any;*/
 
 @Component({
@@ -45,9 +46,11 @@ export class LoginComponent implements OnInit {
   isToasterVisible: boolean = true;
   isFromCareerPlugin: boolean = false;
   recruiterReferenceId: string;
+  isRememberPassword: boolean = false;
   constructor(private _router: Router, private loginService: LoginService, private themeChangeService: ThemeChangeService,
               private messageService: MessageService, private formBuilder: FormBuilder,
-              private sharedService: SharedService, private activatedRoute: ActivatedRoute) {
+              private sharedService: SharedService, private activatedRoute: ActivatedRoute,
+              private registrationService:RegistrationService) {
     this.userForm = this.formBuilder.group({
       'email': ['', [ValidationService.requireEmailValidator, ValidationService.emailValidator]],
       'password': ['', [ValidationService.requirePasswordValidator]]
@@ -76,6 +79,18 @@ export class LoginComponent implements OnInit {
       }
       this.isFromCareerPlugin = (params['integrationKey'] !== undefined) ? true : false;
     });
+    if(LocalStorageService.getLocalValue(LocalStorage.ACCESS_TOKEN)) {
+      this.getUserData();
+    }
+  }
+
+  getUserData() {
+    this.loginService.getUserData()
+      .subscribe(
+        data => {
+          this.registrationService.onSuccess(data);
+        }, error => { this.registrationService.loginFail(error)}
+      );
   }
 
   closeToaster() {
@@ -103,30 +118,34 @@ export class LoginComponent implements OnInit {
   }
 
   loginSuccess(res: any) {
-    LocalStorageService.setLocalValue(LocalStorage.IS_CANDIDATE, res.data.isCandidate);
-    LocalStorageService.setLocalValue(LocalStorage.IS_CANDIDATE_FILLED, res.data.isCompleted);
-    LocalStorageService.setLocalValue(LocalStorage.IS_CANDIDATE_SUBMITTED,  res.data.isSubmitted);
-    LocalStorageService.setLocalValue(LocalStorage.END_USER_ID, res.data.end_user_id);
-    LocalStorageService.setLocalValue(LocalStorage.EMAIL_ID, res.data.email);
-    LocalStorageService.setLocalValue(LocalStorage.MOBILE_NUMBER, res.data.mobile_number);
-    LocalStorageService.setLocalValue(LocalStorage.FIRST_NAME, res.data.first_name);
-    LocalStorageService.setLocalValue(LocalStorage.LAST_NAME, res.data.last_name);
+    if(this.isRememberPassword) {
+      LocalStorageService.setLocalValue(LocalStorage.ACCESS_TOKEN, res.access_token);
+      LocalStorageService.setLocalValue(LocalStorage.IS_LOGGED_IN, 1);
+    }
+    SessionStorageService.setSessionValue(SessionStorage.IS_CANDIDATE, res.data.isCandidate);
+    SessionStorageService.setSessionValue(SessionStorage.IS_CANDIDATE_FILLED, res.data.isCompleted);
+    SessionStorageService.setSessionValue(SessionStorage.IS_CANDIDATE_SUBMITTED,  res.data.isSubmitted);
+    SessionStorageService.setSessionValue(SessionStorage.END_USER_ID, res.data.end_user_id);
+    SessionStorageService.setSessionValue(SessionStorage.EMAIL_ID, res.data.email);
+    SessionStorageService.setSessionValue(SessionStorage.MOBILE_NUMBER, res.data.mobile_number);
+    SessionStorageService.setSessionValue(SessionStorage.FIRST_NAME, res.data.first_name);
+    SessionStorageService.setSessionValue(SessionStorage.LAST_NAME, res.data.last_name);
     if (res.data.guide_tour) {
-      LocalStorageService.setLocalValue(LocalStorage.GUIDED_TOUR, JSON.stringify(res.data.guide_tour));
+      SessionStorageService.setSessionValue(SessionStorage.GUIDED_TOUR, JSON.stringify(res.data.guide_tour));
     } else {
       var dataArray: string[] = new Array(0);
-      LocalStorageService.setLocalValue(LocalStorage.GUIDED_TOUR, JSON.stringify(dataArray));
+      SessionStorageService.setSessionValue(SessionStorage.GUIDED_TOUR, JSON.stringify(dataArray));
     }
 
     this.userForm.reset();
     if (res.data.current_theme) {
-      LocalStorageService.setLocalValue(LocalStorage.MY_THEME, res.data.current_theme);
+      SessionStorageService.setSessionValue(SessionStorage.MY_THEME, res.data.current_theme);
       this.themeChangeService.change(res.data.current_theme);
     }
     if (res.isSocialLogin) {
-      LocalStorageService.setLocalValue(LocalStorage.IS_SOCIAL_LOGIN, AppSettings.IS_SOCIAL_LOGIN_YES);
+      SessionStorageService.setSessionValue(SessionStorage.IS_SOCIAL_LOGIN, AppSettings.IS_SOCIAL_LOGIN_YES);
     } else {
-      LocalStorageService.setLocalValue(LocalStorage.IS_SOCIAL_LOGIN, AppSettings.IS_SOCIAL_LOGIN_NO);
+      SessionStorageService.setSessionValue(SessionStorage.IS_SOCIAL_LOGIN, AppSettings.IS_SOCIAL_LOGIN_NO);
     }
     this.successRedirect(res);
   }
@@ -156,9 +175,9 @@ export class LoginComponent implements OnInit {
 
 
   successRedirect(res: any) {
-    LocalStorageService.setLocalValue(LocalStorage.IS_LOGGED_IN, 1);
-    LocalStorageService.setLocalValue(LocalStorage.PROFILE_PICTURE, res.data.picture);
-    LocalStorageService.setLocalValue(LocalStorage.ISADMIN, res.data.isAdmin);
+    SessionStorageService.setSessionValue(SessionStorage.IS_LOGGED_IN, 1);
+    SessionStorageService.setSessionValue(SessionStorage.PROFILE_PICTURE, res.data.picture);
+    SessionStorageService.setSessionValue(SessionStorage.ISADMIN, res.data.isAdmin);
     if (res.data.isAdmin === true) {
       this._router.navigate([NavigationRoutes.APP_ADMIN_DASHBOARD]);
     }
@@ -169,8 +188,8 @@ export class LoginComponent implements OnInit {
         this._router.navigate([NavigationRoutes.APP_CREATEPROFILE]);
       }
     } else {
-      LocalStorageService.setLocalValue(LocalStorage.COMPANY_NAME, res.data.company_name);
-      LocalStorageService.setLocalValue(LocalStorage.IS_RECRUITING_FOR_SELF, res.data.isRecruitingForself);
+      SessionStorageService.setSessionValue(SessionStorage.COMPANY_NAME, res.data.company_name);
+      SessionStorageService.setSessionValue(SessionStorage.IS_RECRUITING_FOR_SELF, res.data.isRecruitingForself);
       this._router.navigate([NavigationRoutes.APP_RECRUITER_DASHBOARD]);
     }
   }
@@ -197,11 +216,23 @@ export class LoginComponent implements OnInit {
     this._router.navigate([NavigationRoutes.APP_FORGOTPASSWORD]);
   }
 
+  OnRememberPassword(event: any) {
+    if(event.target.checked) {
+      this.isRememberPassword = true;
+    } else {
+      this.isRememberPassword = false;
+    }
+  }
+
   onFailure(error: any) {
   }
 
   getMessages() {
     return Messages;
+  }
+
+  getLabel() {
+    return Label;
   }
 
 }

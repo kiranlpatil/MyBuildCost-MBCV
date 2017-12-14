@@ -26,7 +26,7 @@
     <div
       *ngFor="let job of listOfJobs | qcardlistsort:['aboveMatch','candidate'];let i=index">
       <!--<p>{{qCardCount?.count}}</p>-->
-      <cn-candidate-q-card *ngIf="!job.isJobPostClosed" [progress_bar_color]="'#7264b5'" [job]="job" [type]="type" (onAction)="onActionPerform($event)"></cn-candidate-q-card>
+      <cn-candidate-q-card *ngIf="!job.isJobPostClosed" [progress_bar_color]=progress_bar_color [job]="job" [type]="type" (onAction)="onActionPerform($event)"></cn-candidate-q-card>
     </div>
   </div>
 </div>

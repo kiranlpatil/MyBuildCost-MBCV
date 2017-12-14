@@ -5,12 +5,12 @@ import {CandidateDetail} from "../models/candidate-details";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ValidationService} from "../../shared/customvalidations/validation.service";
 import {AppSettings, CommonService, Message, MessageService, NavigationRoutes} from "../../shared/index";
-import {API, ImagePath, Label, LocalStorage, Messages} from "../../shared/constants";
-import {LocalStorageService} from "../../shared/services/localstorage.service";
+import {API, ImagePath, Label, SessionStorage, Messages} from "../../shared/constants";
+import {SessionStorageService} from "../../shared/services/session.service";
 import {DateService} from "../../cnext/framework/date.service";
 import {SharedService} from "../../shared/services/shared-service";
 import {ErrorService} from "../../shared/services/error.service";
-import {SessionStorageService} from "../../shared/services/session.service";
+import {AnalyticService} from "../../shared/services/analytic.service";
 declare  var fbq:any;
 declare  var gtag:any;
 
@@ -45,9 +45,9 @@ export class CandidateSignUpComponent implements OnInit, AfterViewInit {
   isGuideMessageVisible: boolean = false;
   isFromCareerPlugin: boolean = false;
 
-  constructor(private commonService: CommonService, private _router: Router, private dateService: DateService,
+  constructor(private analyticService: AnalyticService, private commonService: CommonService, private _router: Router, private dateService: DateService,
               private candidateService: CandidateSignUpService, private messageService: MessageService, private formBuilder: FormBuilder,
-              private sharedService: SharedService,private errorService: ErrorService, private activatedRoute: ActivatedRoute) {
+              private sharedService: SharedService, private errorService: ErrorService, private activatedRoute: ActivatedRoute) {
 
     this.userForm = this.formBuilder.group({
       'first_name': ['', [ValidationService.requireFirstNameValidator]],
@@ -59,8 +59,8 @@ export class CandidateSignUpComponent implements OnInit, AfterViewInit {
       'birth_year': ['', [ValidationService.birthYearValidator]],
       'accept_terms': ['', [Validators.required]],
     });
-
-
+    fbq('track', 'PageView');
+    this.analyticService.googleAnalyse(this._router);
     this.BODY_BACKGROUND = ImagePath.BODY_BACKGROUND;
     this.currentDate = new Date();
     this.year = this.currentDate.getUTCFullYear() - 18;
@@ -71,7 +71,7 @@ export class CandidateSignUpComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    let val = LocalStorageService.getLocalValue(LocalStorage.AFTER_CANDIDATE_REGISTRATION_FORM);
+    let val = SessionStorageService.getSessionValue(SessionStorage.AFTER_CANDIDATE_REGISTRATION_FORM);
     if (val !== null) {
       this._router.navigate([NavigationRoutes.VERIFY_USER]);
     }
@@ -147,13 +147,13 @@ export class CandidateSignUpComponent implements OnInit, AfterViewInit {
   onRegistrationSuccess(candidate: any) {
     fbq('track', 'CompleteRegistration');
     this.gtag_report_conversion('AW-831903917/fTZvCPC1q3YQrbHXjAM');
-    LocalStorageService.setLocalValue(LocalStorage.USER_ID, candidate.data._id);
-    LocalStorageService.setLocalValue(LocalStorage.EMAIL_ID, this.userForm.value.email);
-    LocalStorageService.setLocalValue(LocalStorage.PASSWORD, this.model.password);
-    LocalStorageService.setLocalValue(LocalStorage.MOBILE_NUMBER, this.userForm.value.mobile_number);
-    LocalStorageService.setLocalValue(LocalStorage.CHANGE_MAIL_VALUE, 'from_registration');
-    LocalStorageService.setLocalValue(LocalStorage.FROM_CANDIDATE_REGISTRATION, 'true');
-    LocalStorageService.setLocalValue(LocalStorage.AFTER_CANDIDATE_REGISTRATION_FORM, 'true');
+    SessionStorageService.setSessionValue(SessionStorage.USER_ID, candidate.data._id);
+    SessionStorageService.setSessionValue(SessionStorage.EMAIL_ID, this.userForm.value.email);
+    SessionStorageService.setSessionValue(SessionStorage.PASSWORD, this.model.password);
+    SessionStorageService.setSessionValue(SessionStorage.MOBILE_NUMBER, this.userForm.value.mobile_number);
+    SessionStorageService.setSessionValue(SessionStorage.CHANGE_MAIL_VALUE, 'from_registration');
+    SessionStorageService.setSessionValue(SessionStorage.FROM_CANDIDATE_REGISTRATION, 'true');
+    SessionStorageService.setSessionValue(SessionStorage.AFTER_CANDIDATE_REGISTRATION_FORM, 'true');
     this._router.navigate([NavigationRoutes.VERIFY_USER]);
   }
 

@@ -3,4 +3,5 @@ export class AcademicDetails {
   board: string = '';
   yearOfPassing: string = '';
   specialization: string = '';
+  educationDegree: string = '';
 }

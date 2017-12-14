@@ -2,9 +2,9 @@ import {Component, ElementRef, EventEmitter, Input, Output, ViewChild} from "@an
 import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
 import {Candidate, Section} from "../../../user/models/candidate";
 import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {Headings, Tooltip, CandidateProfileUpdateTrack, LocalStorage, Messages} from "../../../shared/constants";
+import {Headings, Tooltip, CandidateProfileUpdateTrack, SessionStorage, Messages} from "../../../shared/constants";
 import {ErrorService} from "../../../shared/services/error.service";
-import {LocalStorageService} from "../../../shared/services/localstorage.service";
+import {SessionStorageService} from "../../../shared/services/session.service";
 import {ComplexityAnsweredService} from "../complexity-answered.service";
 import {Router} from "@angular/router";
 
@@ -48,9 +48,9 @@ export class CertificationAccreditationComponent {
   }
 
   ngOnInit() {
-    if (LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE) === 'true') {
+    if (SessionStorageService.getSessionValue(SessionStorage.IS_CANDIDATE) === 'true') {
       this.isCandidate = true;
-      this.userId=LocalStorageService.getLocalValue(LocalStorage.USER_ID);
+      this.userId=SessionStorageService.getSessionValue(SessionStorage.USER_ID);
     }
 
     //subscribe to addresses value changes
@@ -207,7 +207,7 @@ export class CertificationAccreditationComponent {
 
   onNext() {
     this.onComplete.emit();
-    this.complexityAnsweredService.change(true);
+    //this.complexityAnsweredService.change(true);
     this.highlightedSection.name = 'Awards';
     this.highlightedSection.isDisable = false;
     window.scrollTo(0, 0);
@@ -231,6 +231,10 @@ export class CertificationAccreditationComponent {
     return Messages;
   }
 
+  getHeadings() {
+    return Headings;
+  }
+
   onEdit() {
     this.highlightedSection.name = 'Certification';
     this.highlightedSection.isDisable = true;
@@ -239,7 +243,7 @@ export class CertificationAccreditationComponent {
   }
 
   navigateToWithId(nav:string) {
-    var userId = LocalStorageService.getLocalValue(LocalStorage.USER_ID);
+    var userId = SessionStorageService.getSessionValue(SessionStorage.USER_ID);
     if (nav !== undefined) {
       let x = nav+'/'+ userId + '/create';
       // this._router.navigate([nav, userId]);

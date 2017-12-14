@@ -1,2 +1,10 @@
 @import '../../../css/variables';
 
+.login {
+  .default-checkbox {
+    margin: 9px 10px 5px 0;
+    label {
+      padding: 10px 0 6px 20px;
+    }
+  }
+}

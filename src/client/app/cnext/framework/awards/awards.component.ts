@@ -3,12 +3,12 @@ import {CandidateProfileService} from "../candidate-profile/candidate-profile.se
 import {Candidate, Section} from "../../../user/models/candidate";
 import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Button,
-  Headings, ImagePath, LocalStorage, Messages, Tooltip,
+  Headings, ImagePath, SessionStorage, Messages, Tooltip,
   CandidateProfileUpdateTrack
 } from "../../../shared/constants";
 import {GuidedTourService} from "../guided-tour.service";
 import {ErrorService} from "../../../shared/services/error.service";
-import {LocalStorageService} from "../../../shared/services/localstorage.service";
+import {SessionStorageService} from "../../../shared/services/session.service";
 import {ComplexityAnsweredService} from "../complexity-answered.service";
 import {Router} from "@angular/router";
 
@@ -57,9 +57,9 @@ export class AwardsComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE) === 'true') {
+    if (SessionStorageService.getSessionValue(SessionStorage.IS_CANDIDATE) === 'true') {
       this.isCandidate = true;
-      this.userId=LocalStorageService.getLocalValue(LocalStorage.USER_ID);
+      this.userId=SessionStorageService.getSessionValue(SessionStorage.USER_ID);
     }
 
     //subscribe to addresses value changes
@@ -224,7 +224,7 @@ export class AwardsComponent implements OnInit {
     this.guidedTourStatus = this.guidedTourService.getTourStatus();
     if(this.guidedTourStatus.indexOf(this.guidedTourImgOverlayScreensProfile) !== -1) {
       this.onComplete.emit();
-      this.complexityAnsweredService.change(true);
+      //this.complexityAnsweredService.change(true);
       this.highlightedSection.name = 'none';
       this.highlightedSection.isDisable = false;
     }
@@ -236,7 +236,7 @@ export class AwardsComponent implements OnInit {
     this.guidedTourService.updateProfileField(this.guidedTourStatus)
       .subscribe(
         (res:any) => {
-          LocalStorageService.setLocalValue(LocalStorage.GUIDED_TOUR, JSON.stringify(res.data.guide_tour));
+          SessionStorageService.setSessionValue(SessionStorage.GUIDED_TOUR, JSON.stringify(res.data.guide_tour));
           this.isGuidedTourImgRequire()
         },
         error => this.errorService.onError(error)
@@ -270,8 +270,12 @@ export class AwardsComponent implements OnInit {
     return Button;
   }
 
+  getHeadings() {
+    return Headings;
+  }
+
   navigateToWithId(nav:string) {
-    var userId = LocalStorageService.getLocalValue(LocalStorage.USER_ID);
+    var userId = SessionStorageService.getSessionValue(SessionStorage.USER_ID);
     if (nav !== undefined) {
       let x = nav+'/'+ userId + '/create';
       // this._router.navigate([nav, userId]);

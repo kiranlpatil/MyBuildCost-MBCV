@@ -8,7 +8,7 @@
         <span *ngIf="isRecuirter"></span> {{getLabel().REFINE_BY}}
       </h4>
       <div class="inner col-sm-12">
-        <h5 data-toggle="collapse" href="#education" (click)="openEducationPanel=!openEducationPanel"
+        <!--<h5 data-toggle="collapse" href="#education" (click)="openEducationPanel=!openEducationPanel"
             [ngClass]="{'panel-up': openEducationPanel , 'panel-down': !openEducationPanel }">Education</h5>
         <div id="education" class="collapse">
           <div *ngFor="let itemList of educationList">
@@ -17,7 +17,7 @@
                      (change)="filterByEducation($event)">{{itemList}}
             </label>
           </div>
-        </div>
+        </div>-->
 
         <h5 data-toggle="collapse" href="#experience" (click)="openExperiencePanel=!openExperiencePanel"
             [ngClass]="{'panel-up': openExperiencePanel , 'panel-down': !openExperiencePanel }"

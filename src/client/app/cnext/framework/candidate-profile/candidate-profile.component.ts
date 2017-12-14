@@ -1,7 +1,13 @@
-import {Component, DoCheck, HostListener, KeyValueDiffers, OnDestroy, OnInit} from "@angular/core";
+import {Component, DoCheck, HostListener, KeyValueDiffers, OnDestroy, OnInit, ViewChild} from "@angular/core";
 import {
-  Button, ImagePath, Label, LocalStorage, Messages, NavigationRoutes, Tooltip,
-  CandidateProfileUpdateTrack, SessionStorage
+  Button,
+  CandidateProfileUpdateTrack,
+  ImagePath,
+  Label,
+  SessionStorage,
+  Messages,
+  NavigationRoutes,
+  Tooltip
 } from "../../../shared/constants";
 import {Router} from "@angular/router";
 import {ComplexityService} from "../complexity.service";
@@ -12,9 +18,12 @@ import {Industry} from "../../../user/models/industry";
 import {Message} from "../../../shared/models/message";
 import {MessageService} from "../../../shared/services/message.service";
 import {ErrorService} from "../../../shared/services/error.service";
-import {LocalStorageService} from "../../../shared/services/localstorage.service";
 import {UserFeedback} from "../user-feedback/userFeedback";
+import {ProficienciesComponent} from "../proficiencies/proficiencies.component";
+import {AnalyticService} from "../../../shared/services/analytic.service";
+import {ComplexityAnsweredService} from "../complexity-answered.service";
 import {SessionStorageService} from "../../../shared/services/session.service";
+declare var fbq: any;
 
 @Component({
   moduleId: module.id,
@@ -65,13 +74,16 @@ export class CandidateProfileComponent implements OnInit, DoCheck, OnDestroy {
   differ: any;
   public navIsFixed: boolean = false;
   public isOthers: boolean;
+  @ViewChild(ProficienciesComponent) proficiencyClassObject: ProficienciesComponent;
+  callFrom: string;
 
-  constructor(private _router: Router,
+  constructor(private analyticService: AnalyticService, private _router: Router,
               private complexityService: ComplexityService,
               private differs: KeyValueDiffers,
               private messageService: MessageService,
               private errorService: ErrorService,
-              private profileCreatorService: CandidateProfileService) {
+              private profileCreatorService: CandidateProfileService,
+              private complexityAnsweredService: ComplexityAnsweredService) {
 
     complexityService.showTest$.subscribe(
       data => {
@@ -81,7 +93,10 @@ export class CandidateProfileComponent implements OnInit, DoCheck, OnDestroy {
     );
     this.getCandidateProfile();
     this.differ = differs.find({}).create(null);
-
+    if (!this.candidate.isCompleted) {
+      fbq('track', 'PageView');
+      this.analyticService.googleAnalyse(this._router);
+    }
   }
 
   @HostListener('window:scroll', []) onWindowScroll() {
@@ -193,7 +208,8 @@ export class CandidateProfileComponent implements OnInit, DoCheck, OnDestroy {
     this.candidateForRole = this.candidate.industry.roles;
     this.candidateForComplexity = this.candidate.industry.roles;
     this.candidate.userFeedBack = new Array();
-    this.saveCandidateDetails();
+    this.callFrom = 'default';
+    this.saveCandidateDetails('capability');
     this.whichStepsVisible[2] = true;
   }
 
@@ -210,7 +226,8 @@ export class CandidateProfileComponent implements OnInit, DoCheck, OnDestroy {
     date.setDate(date.getDate() + 90);
     this.candidate.lockedOn = date;
     this.highlightedSection.date = date;
-    this.saveCandidateDetails();
+    this.callFrom = 'default';
+    this.saveCandidateDetails('complexity');
     this.showProficiency = true;
   }
 
@@ -220,7 +237,8 @@ export class CandidateProfileComponent implements OnInit, DoCheck, OnDestroy {
     }
     this.candidate.proficiencies = proficiency;
     this.highlightedSection.isProficiencyFilled = true;
-    this.saveCandidateDetails();
+    this.callFrom = 'default';
+    this.saveCandidateDetails('proficiency');
     this.whichStepsVisible[4] = true;
   }
 
@@ -334,7 +352,7 @@ export class CandidateProfileComponent implements OnInit, DoCheck, OnDestroy {
         .subscribe(
           rolelist => {
             this.rolesForComplexity = rolelist.data;
-            this.getCandidateForComplexity();
+            //this.getCandidateForComplexity();
           },error => this.errorService.onError(error));
     }
   }
@@ -441,13 +459,25 @@ export class CandidateProfileComponent implements OnInit, DoCheck, OnDestroy {
                       this.whichStepsVisible[4] = true;
                       if (this.candidate.interestedIndustries !== undefined && this.candidate.interestedIndustries.length > 0) {
                         this.showIndustryExperience = true;
-                        if (this.candidate.professionalDetails !== undefined && this.candidate.professionalDetails.noticePeriod !== '') {
+                        if (this.candidate.professionalDetails !== undefined &&
+                          this.candidate.professionalDetails.noticePeriod !== undefined &&
+                          this.candidate.professionalDetails.noticePeriod !== '') {
                           this.showProfessionalData = true;
                           this.whichStepsVisible[5] = true;
                           this.candidate.isCompleted = true;
                           this.highlightedSection.iscompleted = true;
                           this.checkdataFilled();
-                          this.highlightedSection.name = 'None';
+                              if(this.candidate.academics!==undefined && this.candidate.academics.length>0) {
+                                this.showAcademicsDetails = true;
+                                this.showAboutMySelf = true;
+                                this.showEmploymentHistory = true;
+                                this.highlightedSection.name = 'None';
+                              }else {
+                                this.showAcademicsDetails = true;
+                                this.showEmploymentHistory = true;
+                                this.showAboutMySelf = true;
+                                this.highlightedSection.name='AcademicDetails';
+                              }
                         } else {
                           this.showProfessionalData = true;
                           this.whichStepsVisible[5] = true;
@@ -503,6 +533,10 @@ export class CandidateProfileComponent implements OnInit, DoCheck, OnDestroy {
     return this.candidate.capability_matrix[element] === -1;
   }
 
+  showProficiencyGuidedTour() {
+    this.proficiencyClassObject.showGuidedTour();
+  }
+
   dateDifferenceInDays(currentDate: Date, storedDate: Date) {
     return Math.floor(( Date.UTC(storedDate.getFullYear(),
         storedDate.getMonth(),
@@ -520,6 +554,7 @@ export class CandidateProfileComponent implements OnInit, DoCheck, OnDestroy {
   }
 
   logOut() {
+    window.sessionStorage.clear();
     window.localStorage.clear();
     this._router.navigate([NavigationRoutes.APP_START]);
   }
@@ -529,10 +564,17 @@ export class CandidateProfileComponent implements OnInit, DoCheck, OnDestroy {
     this.saveCandidateDetails();
   }
 
-  saveCandidateDetails() {
+  saveCandidateDetails(section?: string) {
     this.profileCreatorService.addProfileDetail(this.candidate).subscribe(
-      user => console.log(user),
+      user => this.onSaveCandidateDetails(section),
       error => this.errorService.onError(error));
+  }
+
+  onSaveCandidateDetails(section?: string) {
+   if(section != undefined || section!='default') {
+     this.complexityAnsweredService.change(true);
+    this.callFrom = section;
+   }
   }
 
   onSubmit() {
@@ -540,7 +582,7 @@ export class CandidateProfileComponent implements OnInit, DoCheck, OnDestroy {
     if(SessionStorageService.getRecruiterReferenceId()) {
       this.candidate.recruiterReferenceId = SessionStorageService.getRecruiterReferenceId();
     }
-    LocalStorageService.setLocalValue(LocalStorage.IS_CANDIDATE_SUBMITTED, true);
+    SessionStorageService.setSessionValue(SessionStorage.IS_CANDIDATE_SUBMITTED, true);
     this.saveCandidateDetails();
     this.showModalStyle = !this.showModalStyle;
     if (this.setTimeoutId !== undefined) {
@@ -554,12 +596,12 @@ export class CandidateProfileComponent implements OnInit, DoCheck, OnDestroy {
     if(this.candidate.profile_update_tracking < CandidateProfileUpdateTrack.STEP_IS_SUBMIT_DETAILS) {
       this.candidate.profile_update_tracking = CandidateProfileUpdateTrack.STEP_IS_SUBMIT_DETAILS;
     }
-    LocalStorageService.setLocalValue(LocalStorage.IS_CANDIDATE_FILLED, true);
+    SessionStorageService.setSessionValue(SessionStorage.IS_CANDIDATE_FILLED, true);
     this.onSubmit();
   }
 
   goToDashboard() {
-    this._router.navigate([NavigationRoutes.APP_VLAUEPORTRAIT, LocalStorageService.getLocalValue(LocalStorage.USER_ID)]);
+    this._router.navigate([NavigationRoutes.APP_VLAUEPORTRAIT, SessionStorageService.getSessionValue(SessionStorage.USER_ID)]);
   }
 
   getStyleModal() {
@@ -585,4 +627,9 @@ export class CandidateProfileComponent implements OnInit, DoCheck, OnDestroy {
   getButton() {
     return Button;
   }
+
+  afterEmit(data: any) {
+  this.getCandidateForComplexity();
+  }
+
 }

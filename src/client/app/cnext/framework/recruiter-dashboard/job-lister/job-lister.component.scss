@@ -14,10 +14,11 @@
   .content {
     border-radius: 0;
     color: $white;
-    left: 360px;
     margin: 0 auto;
     position: absolute;
+    right: 0;
     top: 120px;
+    width: 309px;
     z-index: 100;
   }
 
@@ -97,7 +98,7 @@
     span {
       color: $text-color4;
       display: block;
-      font-size: 13px;
+      font-size: 12px;
       padding: 0;
       @extend %text-ellipsis;
     }
@@ -166,11 +167,12 @@
     h4 {
       @extend %text-ellipsis;
       color: $highlight;
-      font-size: 16px;
+      font-family: 'gothamrnd-book';
+      font-size: 12px;
       font-weight: bold;
       margin: 0 0 5px;
       text-transform: capitalize;
-      width: calc(100% - 50px);
+      width: calc(100% - 0);
     }
 
     .contact-info {
@@ -181,7 +183,7 @@
       p {
         border: 0;
         color: $text-color4;
-        font-size: 13px;
+        font-size: 12px;
         margin-top: 0;
         padding-left: 5px;
       }
@@ -302,6 +304,12 @@
   transition-delay: 0.1s;
   visibility: hidden;
   width: 91%;
+}
+
+.clone-job-menu {
+  .btn {
+    display: none !important;
+  }
 }
 
 .my-post-jobs {

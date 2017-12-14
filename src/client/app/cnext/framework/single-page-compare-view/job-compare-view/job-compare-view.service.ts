@@ -2,11 +2,11 @@ import {Injectable} from "@angular/core";
 import {Headers, Http, RequestOptions} from "@angular/http";
 import {Observable} from "rxjs/Observable";
 import {BaseService} from "../../../../shared/services/http/base.service";
-import {API, LocalStorage} from "../../../../shared/constants";
+import {API, SessionStorage} from "../../../../shared/constants";
 import {Capability} from "../../../../user/models/capability";
 import {Complexity} from "../../../../user/models/complexity";
 import {Scenario} from "../../../../user/models/scenario";
-import {LocalStorageService} from "../../../../shared/services/localstorage.service";
+import {SessionStorageService} from "../../../../shared/services/session.service";
 
 @Injectable()
 export class JobCompareService extends BaseService {
@@ -21,7 +21,7 @@ export class JobCompareService extends BaseService {
 
      */
     let isCandidate: boolean= false;
-    if (LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE) === 'true') {
+    if (SessionStorageService.getSessionValue(SessionStorage.IS_CANDIDATE) === 'true') {
       isCandidate = true;
     }else {
       isCandidate = false;

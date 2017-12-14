@@ -1,16 +1,17 @@
-import {Component, OnInit, ViewChild, ElementRef} from "@angular/core";
+import {Component, ElementRef, OnInit, ViewChild} from "@angular/core";
 import {Router} from "@angular/router";
 import {RecruiterSignUpService} from "./recruiter-sign-up.service";
 import {Recruiter} from "../models/recruiter";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ValidationService} from "../../shared/customvalidations/validation.service";
 import {AppSettings, CommonService, Message, MessageService, NavigationRoutes} from "../../shared/index";
-import {API, Button, ImagePath, Label, LocalStorage, Messages} from "../../shared/constants";
-import {LocalStorageService} from "../../shared/services/localstorage.service";
+import {API, Button, ImagePath, Label, SessionStorage, Messages} from "../../shared/constants";
+import {SessionStorageService} from "../../shared/services/session.service";
 import {Headers, Http, RequestOptions, Response} from "@angular/http";
 import {Location} from "../../user/models/location";
 import {MyGoogleAddress} from "../../shared/models/my-google-address";
 import {SharedService} from "../../shared/services/shared-service";
+import {AnalyticService} from "../../shared/services/analytic.service";
 declare  var fbq:any;
 declare  var gtag:any;
 
@@ -57,7 +58,7 @@ export class RecruiterSignUpComponent implements OnInit {
   isChrome: boolean;
   isToasterVisible: boolean = true;
 
-  constructor(private commonService: CommonService, private _router: Router, private http: Http,
+  constructor(private analyticService: AnalyticService, private commonService: CommonService, private _router: Router, private http: Http,
               private recruiterService: RecruiterSignUpService, private messageService: MessageService,
               private formBuilder: FormBuilder, private sharedService: SharedService) {
 
@@ -75,6 +76,8 @@ export class RecruiterSignUpComponent implements OnInit {
       'accept_terms': ['', Validators.required],
 
     });
+    fbq('track', 'PageView');
+    this.analyticService.googleAnalyse(this._router);
     this.BODY_BACKGROUND = ImagePath.BODY_BACKGROUND;
     this.image_path = ImagePath.PROFILE_IMG_ICON;
     this.isChrome = this.sharedService.getUserBrowser();
@@ -83,7 +86,7 @@ export class RecruiterSignUpComponent implements OnInit {
   }
 
   ngOnInit() {
-    let val = LocalStorageService.getLocalValue(LocalStorage.AFTER_RECRUITER_REGISTRATION_FORM);
+    let val = SessionStorageService.getSessionValue(SessionStorage.AFTER_RECRUITER_REGISTRATION_FORM);
     if (val !== null) {
       if (val == "true") {
         this._router.navigate([NavigationRoutes.VERIFY_USER]);
@@ -177,7 +180,7 @@ export class RecruiterSignUpComponent implements OnInit {
     this.model = this.recruiterForm.value;
 
         if( this.model.company_website===''||
-      (this.model.company_website!=='' && this.model.company_website.match('[a-zA-Z0-9_\\-]+\\.[a-zA-Z0-9_\\-]+\\.[a-zA-Z0-9_\\-]'))) {
+      (this.model.company_website!=='' && this.model.company_website.match('[a-zA-Z0-9_\\-]+\\.[a-zA-Z0-9_\\-]'))) {
       this.isCompanyWebsiteValid = true;
     }else {
       this.isCompanyWebsiteValid=false;
@@ -230,12 +233,12 @@ export class RecruiterSignUpComponent implements OnInit {
   onRegistrationSuccess(user: any) {
     fbq('track', 'CompleteRegistration');
     this.gtag_report_conversion('AW-831903917/QE2JCIuxrHcQrbHXjAM');
-    LocalStorageService.setLocalValue(LocalStorage.USER_ID, user.data._id);
-    LocalStorageService.setLocalValue(LocalStorage.EMAIL_ID, this.recruiterForm.value.email);
-    LocalStorageService.setLocalValue(LocalStorage.COMPANY_NAME, this.recruiterForm.value.company_name);
-    LocalStorageService.setLocalValue(LocalStorage.CHANGE_MAIL_VALUE, 'from_registration');
-    LocalStorageService.setLocalValue(LocalStorage.FROM_CANDIDATE_REGISTRATION, 'false');
-    LocalStorageService.setLocalValue(LocalStorage.AFTER_RECRUITER_REGISTRATION_FORM, "true");
+    SessionStorageService.setSessionValue(SessionStorage.USER_ID, user.data._id);
+    SessionStorageService.setSessionValue(SessionStorage.EMAIL_ID, this.recruiterForm.value.email);
+    SessionStorageService.setSessionValue(SessionStorage.COMPANY_NAME, this.recruiterForm.value.company_name);
+    SessionStorageService.setSessionValue(SessionStorage.CHANGE_MAIL_VALUE, 'from_registration');
+    SessionStorageService.setSessionValue(SessionStorage.FROM_CANDIDATE_REGISTRATION, 'false');
+    SessionStorageService.setSessionValue(SessionStorage.AFTER_RECRUITER_REGISTRATION_FORM, "true");
     this._router.navigate([NavigationRoutes.VERIFY_USER]);
   }
 

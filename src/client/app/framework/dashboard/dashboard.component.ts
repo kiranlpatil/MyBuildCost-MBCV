@@ -3,8 +3,8 @@ import {Router} from "@angular/router";
 import {DashboardService} from "../../user/services/dashboard.service";
 import {UserProfile} from "../../user/models/user";
 import {
-  LocalStorage,
-  LocalStorageService,
+  SessionStorage,
+  SessionStorageService,
   Message,
   MessageService,
   NavigationRoutes,
@@ -31,7 +31,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.newUser = parseInt(LocalStorageService.getLocalValue(LocalStorage.IS_LOGGED_IN));
+    this.newUser = parseInt(SessionStorageService.getSessionValue(SessionStorage.IS_LOGGED_IN));
     if (this.newUser === 0) {
       this._router.navigate([NavigationRoutes.APP_START]);
     } else {
@@ -52,8 +52,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   onUserProfileSuccess(result: any) {
-    LocalStorageService.setLocalValue(LocalStorage.EMAIL_ID, result.data.email);
-    LocalStorageService.setLocalValue(LocalStorage.MOBILE_NUMBER, result.data.mobile_number);
+    SessionStorageService.setSessionValue(SessionStorage.EMAIL_ID, result.data.email);
+    SessionStorageService.setSessionValue(SessionStorage.MOBILE_NUMBER, result.data.mobile_number);
     this.zone.run(() => {
       if (result !== null) {
         this.model = result;
@@ -77,6 +77,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   onLogout() {
+    window.sessionStorage.clear();
     window.localStorage.clear();
     this._router.navigate([NavigationRoutes.APP_START]);
   }

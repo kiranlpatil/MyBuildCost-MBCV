@@ -2,8 +2,8 @@ import {Injectable} from "@angular/core";
 import {Headers, Http, RequestOptions} from "@angular/http";
 import {Observable} from "rxjs/Observable";
 import {BaseService} from "../../../shared/services/http/base.service";
-import {API, LocalStorage} from "../../../shared/constants";
-import {LocalStorageService} from "../../../shared/services/localstorage.service";
+import {API, SessionStorage} from "../../../shared/constants";
+import {SessionStorageService} from "../../../shared/services/session.service";
 import {JobPosterModel} from "../../../user/models/jobPoster";
 
 @Injectable()
@@ -19,7 +19,7 @@ export class JobPosterService extends BaseService {
     let options = new RequestOptions({headers: headers});
     let body = JSON.stringify({'postedJobs': jobDetail});
     // /**//api/recruiter/:id/job"
-    let url: string = API.RECRUITER_PROFILE + '/' + LocalStorageService.getLocalValue(LocalStorage.USER_ID) + '/job';
+    let url: string = API.RECRUITER_PROFILE + '/' + SessionStorageService.getSessionValue(SessionStorage.USER_ID) + '/job';
     return this.http.put(url, body, options)
       .map(this.extractData)
       .catch(this.handleError);
@@ -35,7 +35,7 @@ export class JobPosterService extends BaseService {
   }
 
   sendMailToRecruiter(job: JobPosterModel): Observable<any> {
-    var url = API.SEND_CONFIRMATION_MAIL_TO_RECRUITER + '/' + LocalStorageService.getLocalValue(LocalStorage.USER_ID);
+    var url = API.SEND_CONFIRMATION_MAIL_TO_RECRUITER + '/' + SessionStorageService.getSessionValue(SessionStorage.USER_ID);
     var body = JSON.stringify(job);
     return this.http.post(url, body)
       .map(this.extractData)

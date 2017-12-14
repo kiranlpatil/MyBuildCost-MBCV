@@ -1,7 +1,7 @@
 import {Component, OnInit} from "@angular/core";
 import {ActivatedRoute, Router} from "@angular/router";
-import {ImagePath, LocalStorage, Messages, NavigationRoutes, ProjectAsset} from "../../../shared/constants";
-import {LocalStorageService} from "../../../shared/services/localstorage.service";
+import {ImagePath, SessionStorage, Messages, NavigationRoutes, ProjectAsset} from "../../../shared/constants";
+import {SessionStorageService} from "../../../shared/services/session.service";
 import {ActiveUserService} from "./activate-user.service";
 import {MessageService} from "../../../shared/services/message.service";
 //import {  Message  } from '../../shared/message';
@@ -45,8 +45,8 @@ export class ActivateUserComponent implements OnInit {
     this.idPosition = this.token.indexOf('&') + 1;
     this.id = this.token.substring(this.idPosition + 28, this.idPosition + 4);
     this.token = this.token.substring(this.token.length - 29, 0);
-    LocalStorageService.setLocalValue(LocalStorage.ACCESS_TOKEN, this.token);
-    LocalStorageService.setLocalValue(LocalStorage.USER_ID, this.id);
+    SessionStorageService.setSessionValue(SessionStorage.ACCESS_TOKEN, this.token);
+    SessionStorageService.setSessionValue(SessionStorage.USER_ID, this.id);
     /*this.activeService.getUser()
       .subscribe(
         res => (this.activateUser(res)),

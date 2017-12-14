@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
 import {Candidate, Section} from "../../../user/models/candidate";
 import {
-  AppSettings, Headings, ImagePath, LocalStorage, Messages, Tooltip,
+  AppSettings, Headings, ImagePath, SessionStorage, Messages, Tooltip,
   CandidateProfileUpdateTrack
 } from "../../../shared/constants";
 import {ProfessionalDataService} from "../professional-data/professional-data.service";
@@ -9,7 +9,7 @@ import {Location} from "../../../user/models/location";
 import {MyGoogleAddress} from "../../../shared/models/my-google-address";
 import {ProfileDetailsService} from "../profile-detail-service";
 import {ErrorService} from "../../../shared/services/error.service";
-import {LocalStorageService} from "../../../shared/services/localstorage.service";
+import {SessionStorageService} from "../../../shared/services/session.service";
 import {GuidedTourService} from "../guided-tour.service";
 import {CandidateDetail} from "../../../user/models/candidate-details";
 
@@ -77,7 +77,7 @@ export class ProfileDescriptionComponent implements OnInit {
   }
 
   ngOnInit() {
-    let guidedTourImages = LocalStorageService.getLocalValue(LocalStorage.GUIDED_TOUR);
+    let guidedTourImages = SessionStorageService.getSessionValue(SessionStorage.GUIDED_TOUR);
     let newArray = JSON.parse(guidedTourImages);
     if (newArray == undefined || newArray == null || (newArray && newArray.indexOf(ImagePath.CANDIDATE_OVERLAY_SCREENS_BASIC_INFO) == -1)) {
       this.isGuidedTourImgRequire();
@@ -90,7 +90,7 @@ export class ProfileDescriptionComponent implements OnInit {
     this.guidedTourService.updateProfileField(this.guidedTourStatus)
       .subscribe(
         (res: any) => {
-          LocalStorageService.setLocalValue(LocalStorage.GUIDED_TOUR, JSON.stringify(res.data.guide_tour));
+          SessionStorageService.setSessionValue(SessionStorage.GUIDED_TOUR, JSON.stringify(res.data.guide_tour));
           this.isGuideImg = false;
         },
         error => this.errorService.onError(error)
@@ -149,8 +149,6 @@ export class ProfileDescriptionComponent implements OnInit {
     if((this.candidate.jobTitle == '' || this.candidate.jobTitle == undefined ) ||
       (this.candidate.professionalDetails.currentCompany == '' ||
       this.candidate.professionalDetails.currentCompany== undefined ) ||
-      (this.candidate.professionalDetails.education == '' ||
-      this.candidate.professionalDetails.education == undefined ) ||
       (this.candidate.professionalDetails.experience == undefined ) || this.storedLocation.city == undefined) {
       if (this.storedLocation.formatted_address == '') {
         this.isLocationEmpty = true;
@@ -202,8 +200,6 @@ export class ProfileDescriptionComponent implements OnInit {
     if((this.candidate.jobTitle === '' || this.candidate.jobTitle === undefined ) ||
       (this.candidate.professionalDetails.currentCompany === '' ||
       this.candidate.professionalDetails.currentCompany=== undefined ) ||
-      (this.candidate.professionalDetails.education === '' ||
-      this.candidate.professionalDetails.education === undefined ) ||
       (this.candidate.professionalDetails.experience === undefined ) || this.storedLocation.city === undefined ){
       if (this.storedLocation.formatted_address == '') {
         this.isLocationEmpty = true;

@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from "@angular/core";
 import { ComplexityDetails } from "../../../user/models/complexity-detail";
-import { LocalStorage, Tooltip } from "../../../shared/constants";
-import { LocalStorageService } from "../../../shared/services/localstorage.service";
+import { SessionStorage, Tooltip } from "../../../shared/constants";
+import { SessionStorageService } from "../../../shared/services/session.service";
 import { Scenario } from "../../../user/models/scenario";
 import { Capability } from "../../../user/models/capability";
 
@@ -24,7 +24,7 @@ export class MultipleQuestionAnswerComponent implements OnInit, OnChanges {
   private counter: number;
 
   ngOnInit() {
-    if (LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE) === 'true') {
+    if (SessionStorageService.getSessionValue(SessionStorage.IS_CANDIDATE) === 'true') {
       this.isCandidate = true;
     }
   }

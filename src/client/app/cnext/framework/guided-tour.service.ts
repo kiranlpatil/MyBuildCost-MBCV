@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
 import {BaseService} from "../../shared/services/http/base.service";
-import {LocalStorage, API} from "../../shared/constants";
-import {LocalStorageService} from "../../shared/services/localstorage.service";
+import {SessionStorage, API} from "../../shared/constants";
+import {SessionStorageService} from "../../shared/services/session.service";
 import {Observable} from "rxjs/Observable";
 import {Http} from "@angular/http";
 
@@ -13,12 +13,12 @@ export class GuidedTourService extends BaseService {
  }
 
   getTourStatus(): Array<string> {
-    var dataString = LocalStorageService.getLocalValue(LocalStorage.GUIDED_TOUR);
+    var dataString = SessionStorageService.getSessionValue(SessionStorage.GUIDED_TOUR);
     return JSON.parse(dataString);
   }
 
   updateTourStatus(imgName:string,imgSatus:boolean): Array<string> {
-    var dataString = LocalStorageService.getLocalValue(LocalStorage.GUIDED_TOUR);
+    var dataString = SessionStorageService.getSessionValue(SessionStorage.GUIDED_TOUR);
     var dataArray:string[] = new Array(0);
     dataArray = JSON.parse(dataString);
     if (dataArray == null) {
@@ -27,12 +27,12 @@ export class GuidedTourService extends BaseService {
     if(dataArray.indexOf(imgName) == -1) {
       dataArray.push(imgName);
     }
-    LocalStorageService.setLocalValue(LocalStorage.GUIDED_TOUR,JSON.stringify(dataArray));
-    return JSON.parse(LocalStorageService.getLocalValue(LocalStorage.GUIDED_TOUR));
+    SessionStorageService.setSessionValue(SessionStorage.GUIDED_TOUR,JSON.stringify(dataArray));
+    return JSON.parse(SessionStorageService.getSessionValue(SessionStorage.GUIDED_TOUR));
   }
 
   updateProfileField(model:string[]):Observable<any> {
-      var url = API.USER_PROFILE + '/' + LocalStorageService.getLocalValue(LocalStorage.USER_ID) + '/' + 'fieldname' + '/' + 'guide_tour';
+      var url = API.USER_PROFILE + '/' + SessionStorageService.getSessionValue(SessionStorage.USER_ID) + '/' + 'fieldname' + '/' + 'guide_tour';
       let body = JSON.stringify(model);
       return this.http.put(url, body)
         .map(this.extractData)

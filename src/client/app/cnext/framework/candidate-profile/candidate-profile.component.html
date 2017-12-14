@@ -53,7 +53,9 @@
 
       <cn-capabilities [roles]="rolesForCapability" [candidateRoles]="candidateForCapability"
                        [highlightedSection]="highlightedSection"
-                       (onComplete)="onCapabilityComplete($event)" [hidden]="!showCapability"></cn-capabilities>
+                       (onComplete)="onCapabilityComplete($event)"
+                       (emitOnNext)="afterEmit($event)"
+                       [hidden]="!showCapability"></cn-capabilities>
 
       <div class="wrapper">
         <cn-complexities [roles]="rolesForComplexity" [complexities]="candidate.capability_matrix"
@@ -61,7 +63,8 @@
                          [isComplexityPresent]="isComplexityPresent" [complexityNotes]="candidate.complexity_note_matrix"
                          (onComplextyAnswered)="onComplextyAnswered($event)"
                          (onComplete)="onComplexityComplete($event)" [hidden]="!showComplexity"
-                         (popUpFeedBackAnswer)="popUpFeedBackAnswer($event)"></cn-complexities>
+                         (popUpFeedBackAnswer)="popUpFeedBackAnswer($event)"
+                         (proficiencyGuidedTour)="showProficiencyGuidedTour()"></cn-complexities>
       </div>
       <div class="wrapper">
         <cn-proficiencies [choosedproficiencies]="candidate.proficiencies"

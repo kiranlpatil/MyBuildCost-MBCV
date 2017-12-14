@@ -2,8 +2,8 @@ import {Component, OnDestroy, OnInit} from "@angular/core";
 import {
   AppSettings,
   CommonService,
-  LocalStorage,
-  LocalStorageService,
+  SessionStorage,
+  SessionStorageService,
   Message,
   Messages,
   MessageService,
@@ -45,7 +45,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
                 private messageService: MessageService, private formBuilder: FormBuilder, private loaderService: LoaderService,
                 private adminDashboardService: AdminDashboardService) {
 
-    //this.themeIs = LocalStorageService.getLocalValue(LocalStorage.MY_THEME);
+    //this.themeIs = SessionStorageService.getSessionValue(SessionStorage.MY_THEME);
     this.themeIs = AppSettings.INITIAL_THEM;
 
     this.userForm = this.formBuilder.group({
@@ -66,7 +66,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
               }
           }
       });
-    var socialLogin: string = LocalStorageService.getLocalValue(LocalStorage.IS_SOCIAL_LOGIN);
+    var socialLogin: string = SessionStorageService.getSessionValue(SessionStorage.IS_SOCIAL_LOGIN);
     if (socialLogin === 'YES') {
       this.isSocialLogin = true;
     } else {
@@ -141,7 +141,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
     message.custom_message = Messages.MSG_SUCCESS_CHANGE_THEME;
     this.messageService.message(message);
     this.themeChangeService.change(body.data.current_theme);
-    LocalStorageService.setLocalValue(LocalStorage.MY_THEME, body.data.current_theme);
+    SessionStorageService.setSessionValue(SessionStorage.MY_THEME, body.data.current_theme);
   }
 
   changeThemeFail(error: any) {

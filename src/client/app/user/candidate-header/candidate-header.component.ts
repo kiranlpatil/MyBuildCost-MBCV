@@ -1,8 +1,8 @@
 import {Component, ElementRef, HostListener, Input} from "@angular/core";
 import {Router} from "@angular/router";
 import {Candidate, Section} from "../models/candidate";
-import {AppSettings, ImagePath, LocalStorage, Label} from "../../shared/constants";
-import {LocalStorageService} from "../../shared/services/localstorage.service";
+import {AppSettings, ImagePath, SessionStorage, Label} from "../../shared/constants";
+import {SessionStorageService} from "../../shared/services/session.service";
 
 @Component({
   moduleId: module.id,
@@ -41,14 +41,14 @@ export class CandidateHeaderComponent {
   }
 
   logOut() {
-    window.localStorage.clear();
     window.sessionStorage.clear();
+    window.localStorage.clear();
     let host = AppSettings.HTTP_CLIENT + AppSettings.HOST_NAME;
       window.location.href = host;
   }
 
   navigateToWithId(nav:string) {
-    var userId = LocalStorageService.getLocalValue(LocalStorage.USER_ID);
+    var userId = SessionStorageService.getSessionValue(SessionStorage.USER_ID);
       this._router.navigate([nav, userId]);
   }
 

@@ -17,6 +17,7 @@ import * as loggerInterceptor from "./app/framework/interceptor/logger.intercept
 import {SearchEngineController} from "./app/framework/search-engine/controllers/search-engine.controller";
 let AuthInterceptor = require('./app/framework/interceptor/auth.interceptor');
 import ShareController = require('./app/framework/share/controller/share.controller');
+import {RecruiterCandidatesController} from "./app/framework/controllers/recruiter-candidates.controller";
 this.authInterceptor = new AuthInterceptor();
 
 
@@ -27,6 +28,7 @@ export function cnextInit(app: express.Application) {
     let shareController = new ShareController();
     let usageTrackingController = new UsageTrackingController();
     let searchEngineController = new SearchEngineController();
+    let recruiterCandidatesController = new RecruiterCandidatesController();
 
     app.get('/api/industry', loggerInterceptor.logDetail, this.authInterceptor.requiresAuth,
       this.authInterceptor.secureApiCheck, industryController.retrieve);
@@ -67,7 +69,6 @@ export function cnextInit(app: express.Application) {
       this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, jobProfileController.getCapabilityMatrix);
     app.get('/api/recruiter/jobProfile/:id', loggerInterceptor.logDetail, this.authInterceptor.requiresAuth,
       this.authInterceptor.secureApiCheck, jobProfileController.retrieve);
-
     app.get('/api/jobs/:id', loggerInterceptor.logDetail, this.authInterceptor.requiresAuth,
       this.authInterceptor.secureApiCheck, searchController.getJobsInIndustry);
     app.get('/api/candidate/:id/:candidateId', loggerInterceptor.logDetail, this.authInterceptor.requiresAuth,
@@ -99,6 +100,8 @@ export function cnextInit(app: express.Application) {
       recruiterController.responseToRecruiter);
     app.put('/api/job/:id/clone', loggerInterceptor.logDetail, this.authInterceptor.requiresAuth,
       jobProfileController.cloneJob);
+    app.get('/api/userData', loggerInterceptor.logDetail, this.authInterceptor.requiresAuth,
+      this.authInterceptor.secureApiCheck, userController.getUserDetails);
 
     //search-engine api
     app.post('/api/recruiter/jobProfile/:id/candidates', loggerInterceptor.logDetail, this.authInterceptor.requiresAuth,
@@ -147,6 +150,8 @@ export function cnextInit(app: express.Application) {
       this.authInterceptor.secureApiCheck, this.authInterceptor.validateAdmin, adminController.exportKeySkills);
     app.get('/api/usageDetails', loggerInterceptor.logDetail, this.authInterceptor.requiresAuth,
       this.authInterceptor.secureApiCheck, this.authInterceptor.validateAdmin, adminController.exportUsageDetails);
+    app.get('/api/userDetails/:id', loggerInterceptor.logDetail, this.authInterceptor.requiresAuth,
+      this.authInterceptor.secureApiCheck, this.authInterceptor.validateAdmin, adminController.getUserDetails);
 
 
     //Api for update candidate field
@@ -155,6 +160,9 @@ export function cnextInit(app: express.Application) {
     //Api to checck is user register with this mobile number or not,if yes get email id.
     app.get('/api/registrationstatus/:mobileNo', loggerInterceptor.logDetail, userInterceptor.validateRegistrationStatus,
       userController.getUserRegistrationStatus);
+
+    app.get('/api/recruiter/:id/recruiterCandidatesSummary', loggerInterceptor.logDetail,
+      this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, recruiterCandidatesController.getSummary)
 
     app.use(sharedService.errorHandler);
   } catch (e) {

@@ -1,11 +1,11 @@
 import {Component, EventEmitter, Input, Output} from "@angular/core";
 import {Section} from "../../../user/models/candidate";
-import {Headings, ImagePath, Label, LocalStorage, Messages, Tooltip, ValueConstant} from "../../../shared/constants";
+import {Headings, ImagePath, Label, SessionStorage, Messages, Tooltip, ValueConstant} from "../../../shared/constants";
 import {ProficiencyDetailsService} from "../proficiency-detail-service";
 import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
 import {ErrorService} from "../../../shared/services/error.service";
 import {GuidedTourService} from "../guided-tour.service";
-import {LocalStorageService} from "../../../shared/services/localstorage.service";
+import {SessionStorageService} from "../../../shared/services/session.service";
 import {Router} from "@angular/router";
 import {ComplexityAnsweredService} from "../complexity-answered.service";
 
@@ -50,22 +50,12 @@ export class ProficienciesComponent {
     );
   }
 
-  ngOnChanges(value: any) {
-    if (LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE) === 'true') {
+  ngOnInit() {
+    if (SessionStorageService.getSessionValue(SessionStorage.IS_CANDIDATE) === 'true') {
       this.isCandidate = true;
     }
-    if (value && value.choosedproficiencies && value.choosedproficiencies.currentValue) {
-      let guidedTourImages = LocalStorageService.getLocalValue(LocalStorage.GUIDED_TOUR);
-      let newArray = JSON.parse(guidedTourImages);
-      if (newArray && newArray.indexOf(ImagePath.CANDIDATE_OERLAY_SCREENS_KEY_SKILLS) == -1) {
-        this.isGuidedTourImgRequire();
-      }
-    }
-  }
-
-  ngOnInit() {
     this.maxProficiencies = ValueConstant.MAX_PROFECIENCES;
-    this.userId=LocalStorageService.getLocalValue(LocalStorage.USER_ID);
+    this.userId=SessionStorageService.getSessionValue(SessionStorage.USER_ID);
   }
   private showButton: boolean = true;
   private submitStatus: boolean;
@@ -74,9 +64,15 @@ export class ProficienciesComponent {
 
   onProficiencyComplete(proficiency: string[]) {
     this.onSelect.emit(proficiency);
-    this.complexityAnsweredService.change(true);
   }
 
+  showGuidedTour() {
+    let guidedTourImages = SessionStorageService.getSessionValue(SessionStorage.GUIDED_TOUR);
+    let newArray = JSON.parse(guidedTourImages);
+    if (newArray && newArray.indexOf(ImagePath.CANDIDATE_OERLAY_SCREENS_KEY_SKILLS) == -1) {
+      this.isGuidedTourImgRequire();
+    }
+  }
   isGuidedTourImgRequire() {
     this.isGuideImg = true;
     this.guidedTourImgOverlayScreensKeySkills = ImagePath.CANDIDATE_OERLAY_SCREENS_KEY_SKILLS;
@@ -90,7 +86,7 @@ export class ProficienciesComponent {
     this.guidedTourService.updateProfileField(this.guidedTourStatus)
       .subscribe(
         (res: any) => {
-          LocalStorageService.setLocalValue(LocalStorage.GUIDED_TOUR, JSON.stringify(res.data.guide_tour));
+          SessionStorageService.setSessionValue(SessionStorage.GUIDED_TOUR, JSON.stringify(res.data.guide_tour));
         },
         error => this.errorService.onError(error)
       );
@@ -98,7 +94,6 @@ export class ProficienciesComponent {
 
   onNext() {
     this.onComplete.emit();
-    this.complexityAnsweredService.change(true);
     this.highlightedSection.name = 'IndustryExposure';
     this.highlightedSection.isDisable = false;
     window.scrollTo(0, 0);
@@ -136,7 +131,7 @@ export class ProficienciesComponent {
   }
 
   navigateToWithId(nav:string) {
-    var userId = LocalStorageService.getLocalValue(LocalStorage.USER_ID);
+    var userId = SessionStorageService.getSessionValue(SessionStorage.USER_ID);
     if (nav !== undefined) {
       let x = nav+'/'+ userId + '/create';
       // this._router.navigate([nav, userId]);
@@ -147,4 +142,9 @@ export class ProficienciesComponent {
   getLabel() {
     return Label;
   }
+
+  getHeadings() {
+    return Headings;
+  }
+
 }

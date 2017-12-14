@@ -14,7 +14,11 @@ class JobProfileRepository extends RepositoryBase<IJobProfile> {
       callback(err, items);
     });
   }
-
+  retrieveWithoutPopulate(query : Object,included : Object, callback:(error : any, result : any) => void) {
+    JobProfileSchema.find(query, included).lean().exec(function (err, items) {
+      callback(err, items);
+    });
+  }
   public retrieveSortedResult(query: any, included: Object, sortingQuery: any, callback: (error: any, result: any) => void) {
     JobProfileSchema.find(query, included).sort(sortingQuery).populate('recruiterId').lean().exec(function (err: any, items: any) {
       callback(err, items);

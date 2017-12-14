@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
 import {CanActivate, Router} from "@angular/router";
-import {LocalStorageService} from "../shared/services/localstorage.service";
-import {LocalStorage} from "../shared/constants";
+import {SessionStorageService} from "../shared/services/session.service";
+import {SessionStorage} from "../shared/constants";
 
 @Injectable()
 
@@ -14,8 +14,8 @@ export class AdminAuthGuard implements CanActivate {
   }
 
   validateAdmin():boolean {
-    if (parseInt(LocalStorageService.getLocalValue(LocalStorage.IS_LOGGED_IN)) === 1) {
-      if (LocalStorageService.getLocalValue(LocalStorage.ISADMIN) === 'true') {
+    if (parseInt(SessionStorageService.getSessionValue(SessionStorage.IS_LOGGED_IN)) === 1) {
+      if (SessionStorageService.getSessionValue(SessionStorage.ISADMIN) === 'true') {
         return true;
       } else {
         this.router.navigate(['/signin']);

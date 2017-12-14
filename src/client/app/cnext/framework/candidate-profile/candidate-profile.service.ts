@@ -2,8 +2,8 @@ import {Injectable} from "@angular/core";
 import {Headers, Http, RequestOptions} from "@angular/http";
 import {Observable} from "rxjs/Observable";
 import {BaseService} from "../../../shared/services/http/base.service";
-import {API, LocalStorage} from "../../../shared/constants";
-import {LocalStorageService} from "../../../shared/services/localstorage.service";
+import {API, SessionStorage} from "../../../shared/constants";
+import {SessionStorageService} from "../../../shared/services/session.service";
 import {Candidate} from "../../../user/models/candidate";
 import {ErrorService} from "../../../shared/services/error.service";
 
@@ -18,7 +18,7 @@ export class CandidateProfileService extends BaseService {
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({headers: headers});
     let body = JSON.stringify(profile);
-    let url: string = API.CANDIDATE_PROFILE + '/' + LocalStorageService.getLocalValue(LocalStorage.USER_ID);
+    let url: string = API.CANDIDATE_PROFILE + '/' + SessionStorageService.getSessionValue(SessionStorage.USER_ID);
     return this.http.put(url, body, options)
       .map(this.extractData)
       .catch(this.handleError);
@@ -28,7 +28,7 @@ export class CandidateProfileService extends BaseService {
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({headers: headers});
     //let body = JSON.stringify(item);
-    let url: string = API.CANDIDATE_PROFILE + '/' +'fieldUpdate'+'/'+LocalStorageService.getLocalValue(LocalStorage.USER_ID)+'?value='+value;
+    let url: string = API.CANDIDATE_PROFILE + '/' +'fieldUpdate'+'/'+SessionStorageService.getSessionValue(SessionStorage.USER_ID)+'?value='+value;
     this.http.put(url, {}, options)
       .map(this.extractData)
       .catch(this.handleError)
@@ -40,14 +40,14 @@ export class CandidateProfileService extends BaseService {
   getCandidateDetails(): Observable<any> {
     let headers = new Headers({'Content-Type': 'application/json'});
    // let options = new RequestOptions({headers: headers});
-    let url: string = API.CANDIDATE_PROFILE + '/' + LocalStorageService.getLocalValue(LocalStorage.USER_ID);
+    let url: string = API.CANDIDATE_PROFILE + '/' + SessionStorageService.getSessionValue(SessionStorage.USER_ID);
     return this.http.get(url)
       .map(this.extractData)
       .catch(this.handleError);
   }
   getRecruiterDetails() :Observable<any> {
     let headers = new Headers({'Content-Type': 'application/json'});
-    let url: string = API.RECRUITER_PROFILE + '/' + LocalStorageService.getLocalValue(LocalStorage.USER_ID) + '/jobs';
+    let url: string = API.RECRUITER_PROFILE + '/' + SessionStorageService.getSessionValue(SessionStorage.USER_ID) + '/jobs';
     return this.http.get(url)
       .map(this.extractData)
       .catch(this.handleError);
@@ -72,7 +72,7 @@ export class CandidateProfileService extends BaseService {
   getMasterIndustry(): Observable<any> {
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({headers: headers});
-    let url: string = API.CANDIDATE_PROFILE + '/' + LocalStorageService.getLocalValue(LocalStorage.USER_ID);
+    let url: string = API.CANDIDATE_PROFILE + '/' + SessionStorageService.getSessionValue(SessionStorage.USER_ID);
     return this.http.get(url, options)
       .map(this.extractData)
       .catch(this.handleError);
@@ -82,7 +82,7 @@ export class CandidateProfileService extends BaseService {
   getCandidateDetailsOfParticularId(candidateId: string): Observable<any> {
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({headers: headers});
-    let url: string = API.CANDIDATE_PROFILE + '/' + LocalStorageService.getLocalValue(LocalStorage.USER_ID) + '/' + candidateId;
+    let url: string = API.CANDIDATE_PROFILE + '/' + SessionStorageService.getSessionValue(SessionStorage.USER_ID) + '/' + candidateId;
     return this.http.get(url, options)
       .map(this.extractData)
       .catch(this.handleError);

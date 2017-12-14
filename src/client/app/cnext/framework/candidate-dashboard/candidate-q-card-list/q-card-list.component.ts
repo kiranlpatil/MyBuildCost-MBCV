@@ -15,6 +15,7 @@ export class QcardListComponent implements OnChanges {
   @Input() listOfJobs: JobQcard[];
   @Input() type: string;
   @Input() joblistCount: any;
+  @Input() progress_bar_color: string;
   @Output() onAction = new EventEmitter();
   @Output() onSortByChange = new EventEmitter();
 

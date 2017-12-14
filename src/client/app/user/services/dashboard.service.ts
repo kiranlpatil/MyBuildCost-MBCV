@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
 import {Headers, Http, RequestOptions} from "@angular/http";
 import {Observable} from "rxjs/Observable";
-import {API, AppSettings, BaseService, LocalStorage, LocalStorageService, MessageService} from "../../shared/index";
+import {API, AppSettings, BaseService, SessionStorage, SessionStorageService, MessageService} from "../../shared/index";
 import {CandidateDetail} from "../models/candidate-details";
 
 @Injectable()
@@ -12,7 +12,7 @@ export class DashboardService extends BaseService {
   }
 
   getUserProfile(): Observable<any> { //todo
-    var url = API.USER_PROFILE + '/' + LocalStorageService.getLocalValue(LocalStorage.USER_ID);
+    var url = API.USER_PROFILE + '/' + SessionStorageService.getSessionValue(SessionStorage.USER_ID);
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({headers: headers});
     return this.http.get(url, options)
@@ -21,7 +21,7 @@ export class DashboardService extends BaseService {
   }
 
   updateProfile(model: CandidateDetail): Observable<CandidateDetail> {
-    var url = API.USER_PROFILE + '/' + LocalStorageService.getLocalValue(LocalStorage.USER_ID);
+    var url = API.USER_PROFILE + '/' + SessionStorageService.getSessionValue(SessionStorage.USER_ID);
     let body = JSON.stringify(model);
     return this.http.put(url, body)
       .map(this.extractData)
@@ -29,7 +29,7 @@ export class DashboardService extends BaseService {
   }
 
   makeDocumentUpload(files: Array<File>, params: Array<string>) {
-    var url = AppSettings.API_ENDPOINT + API.UPDATE_PICTURE + '/' + LocalStorageService.getLocalValue(LocalStorage.USER_ID);
+    var url = AppSettings.API_ENDPOINT + API.UPDATE_PICTURE + '/' + SessionStorageService.getSessionValue(SessionStorage.USER_ID);
     return new Promise((resolve: any, reject: any) => {
       var formData: any = new FormData();
       var xhr = new XMLHttpRequest();
@@ -45,12 +45,12 @@ export class DashboardService extends BaseService {
         }
       };
       xhr.open('PUT', url, true);
-      xhr.setRequestHeader('Authorization', 'Bearer ' + LocalStorageService.getLocalValue(LocalStorage.ACCESS_TOKEN));
+      xhr.setRequestHeader('Authorization', 'Bearer ' + SessionStorageService.getSessionValue(SessionStorage.ACCESS_TOKEN));
       xhr.send(formData);
     });
   }
   changeRecruiterAccountDetails(model:any): Observable<any> {
-    var url = API.CHANGE_COMPANY_ACCOUNT_DETAILS + '/' + LocalStorageService.getLocalValue(LocalStorage.USER_ID);
+    var url = API.CHANGE_COMPANY_ACCOUNT_DETAILS + '/' + SessionStorageService.getSessionValue(SessionStorage.USER_ID);
     var body = JSON.stringify(model);
     return this.http.put(url, body)
       .map(this.extractData)

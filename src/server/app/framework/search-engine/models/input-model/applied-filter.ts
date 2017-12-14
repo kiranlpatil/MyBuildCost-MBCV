@@ -15,4 +15,5 @@ export class AppliedFilter {
   sortBy: ESort = ESort.BEST_MATCH;
   listName: EList;
   recruiterId: string;
+  isCandidateSearch:boolean=false;
 }

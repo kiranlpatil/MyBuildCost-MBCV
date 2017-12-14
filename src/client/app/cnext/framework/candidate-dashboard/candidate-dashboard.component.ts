@@ -3,8 +3,7 @@ import {CandidateProfileService} from "../candidate-profile/candidate-profile.se
 import {Candidate, Summary} from "../../../user/models/candidate";
 import {CandidateDashboardService} from "./candidate-dashboard.service";
 import {JobQcard} from "../model/JobQcard";
-import {LocalStorage, ValueConstant, Tooltip, ImagePath, Headings, Messages} from "../../../shared/constants";
-import {LocalStorageService} from "../../../shared/services/localstorage.service";
+import {SessionStorage, ValueConstant, Tooltip, ImagePath, Headings, Messages} from "../../../shared/constants";
 import {CandidateJobListService} from "./candidate-job-list/candidate-job-list.service";
 import {QCardFilterService} from "../filters/q-card-filter.service";
 import {LoaderService} from "../../../shared/loader/loaders.service";
@@ -92,7 +91,7 @@ export class CandidateDashboardComponent implements OnInit {
     this.guidedTourService.updateProfileField(this.guidedTourStatus)
       .subscribe(
         (res: any) => {
-          LocalStorageService.setLocalValue(LocalStorage.GUIDED_TOUR, JSON.stringify(res.data.guide_tour));
+          SessionStorageService.setSessionValue(SessionStorage.GUIDED_TOUR, JSON.stringify(res.data.guide_tour));
         },
         error => this.errorService.onError(error)
       );
@@ -128,6 +127,7 @@ export class CandidateDashboardComponent implements OnInit {
     this.candidate = candidateData.data[0];
     this.candidate.basicInformation = candidateData.metadata;
     this.candidate.summary = new Summary();
+    this.appliedFilters.proficiencies=this.candidate.proficiencies;
     if (this.isRecruiterReferred) {
       this.getRecruitersJobList();
     }
@@ -138,7 +138,7 @@ export class CandidateDashboardComponent implements OnInit {
 
   onActionPerformOnExactList(action: string) {
     for (let job of this.jobList) {
-      if (job._id === LocalStorageService.getLocalValue(LocalStorage.CURRENT_JOB_POSTED_ID)) {
+      if (job._id === SessionStorageService.getSessionValue(SessionStorage.CURRENT_JOB_POSTED_ID)) {
         this.jobList.splice(this.jobList.indexOf(job), 1);
         this.recruitersJobList.splice(this.recruitersJobList.indexOf(job), 1);
       }
@@ -151,7 +151,7 @@ export class CandidateDashboardComponent implements OnInit {
 
   onActionPerformOnApproxList(action: string) {
     for (let job of this.jobList) {
-      if (job._id === LocalStorageService.getLocalValue(LocalStorage.CURRENT_JOB_POSTED_ID)) {
+      if (job._id === SessionStorageService.getSessionValue(SessionStorage.CURRENT_JOB_POSTED_ID)) {
         this.jobList.splice(this.jobList.indexOf(job), 1);
       }
     }

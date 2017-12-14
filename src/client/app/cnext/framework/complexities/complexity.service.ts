@@ -2,8 +2,8 @@ import {Injectable} from "@angular/core";
 import {Headers, Http, RequestOptions} from "@angular/http";
 import {Observable} from "rxjs/Observable";
 import {BaseService} from "../../../shared/services/http/base.service";
-import {API, LocalStorage} from "../../../shared/constants";
-import {LocalStorageService} from "../../../shared/services/localstorage.service";
+import {API, SessionStorage} from "../../../shared/constants";
+import {SessionStorageService} from "../../../shared/services/session.service";
 
 @Injectable()
 export class ComplexityComponentService extends BaseService {
@@ -16,8 +16,8 @@ export class ComplexityComponentService extends BaseService {
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({headers: headers});
     let url : any;
-    if (LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE) === 'true') {
-      url = API.CAPABILITY_MATRIX_FOR_CANDIDATE + '/' + LocalStorageService.getLocalValue(LocalStorage.END_USER_ID);
+    if (SessionStorageService.getSessionValue(SessionStorage.IS_CANDIDATE) === 'true') {
+      url = API.CAPABILITY_MATRIX_FOR_CANDIDATE + '/' + SessionStorageService.getSessionValue(SessionStorage.END_USER_ID);
     }else {
       url = API.CAPABILITY_MATRIX_FOR_RECRUITER + '/' + jobId;
     }

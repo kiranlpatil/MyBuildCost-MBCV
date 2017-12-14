@@ -5,8 +5,8 @@ import {ChangeMobile} from "../../models/changemobile";
 import {CommonService, ImagePath, Message, MessageService, NavigationRoutes} from "../../../shared/index";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ValidationService} from "../../../shared/customvalidations/validation.service";
-import {LocalStorageService} from "../../../shared/services/localstorage.service";
-import {LocalStorage, Messages} from "../../../shared/constants";
+import {SessionStorageService} from "../../../shared/services/session.service";
+import {SessionStorage, Messages} from "../../../shared/constants";
 import {LoaderService} from "../../../shared/loader/loaders.service";
 
 
@@ -62,7 +62,7 @@ export class ChangeMobileComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.model.current_mobile_number = LocalStorageService.getLocalValue(LocalStorage.MOBILE_NUMBER);
+    this.model.current_mobile_number = SessionStorageService.getSessionValue(SessionStorage.MOBILE_NUMBER);
   }
   onChangeInputValue() {
     this.isMobileNoConfirm=false;
@@ -80,8 +80,8 @@ export class ChangeMobileComponent implements OnInit {
   }
 
   changeMobileSuccess(body: ChangeMobile) {
-    LocalStorageService.setLocalValue(LocalStorage.VERIFIED_MOBILE_NUMBER, this.model.new_mobile_number);
-    LocalStorageService.setLocalValue(LocalStorage.VERIFY_PHONE_VALUE, 'from_settings');
+    SessionStorageService.setSessionValue(SessionStorage.VERIFIED_MOBILE_NUMBER, this.model.new_mobile_number);
+    SessionStorageService.setSessionValue(SessionStorage.VERIFY_PHONE_VALUE, 'from_settings');
     this.raiseOtpVerification();
   }
    raiseOtpVerification() {
@@ -89,7 +89,7 @@ export class ChangeMobileComponent implements OnInit {
      this.verificationMessageHeading=this.getMessages().MSG_MOBILE_NUMBER_CHANGE_VERIFICATION_TITLE;
      this.actioName=this.getMessages().FROM_ACCOUNT_DETAIL;
      this.showModalStyleVerification=true;
-     this.model.id=LocalStorageService.getLocalValue(LocalStorage.USER_ID);
+     this.model.id=SessionStorageService.getSessionValue(SessionStorage.USER_ID);
   }
   changeMobileFail(error: any) {
     if (error.err_code === 404 || error.err_code === 0 || error.err_code===401) {
@@ -116,10 +116,11 @@ export class ChangeMobileComponent implements OnInit {
   }
   showHideModalVerification() {
     this.showModalStyleVerification = !this.showModalStyleVerification;
-    this.model.current_mobile_number=LocalStorageService.getLocalValue(LocalStorage.MOBILE_NUMBER);
+    this.model.current_mobile_number=SessionStorageService.getSessionValue(SessionStorage.MOBILE_NUMBER);
     this.onMobileNumberChangeComplete.emit();
   }
   logOut() {
+    window.sessionStorage.clear();
     window.localStorage.clear();
     this._router.navigate([NavigationRoutes.APP_START]);
   }
@@ -139,11 +140,11 @@ export class ChangeMobileComponent implements OnInit {
     }
   }
   onMobileNumberChange() {
-    LocalStorageService.setLocalValue(LocalStorage.MOBILE_NUMBER, LocalStorage.VERIFIED_MOBILE_NUMBER);
+    SessionStorageService.setSessionValue(SessionStorage.MOBILE_NUMBER, SessionStorage.VERIFIED_MOBILE_NUMBER);
     this.userForm.reset();
     this.showModalStyleVerification=!this.showModalStyleVerification;
-    this.model.current_mobile_number=LocalStorageService.getLocalValue(LocalStorage.VERIFIED_MOBILE_NUMBER);
-    LocalStorageService.setLocalValue(LocalStorage.MOBILE_NUMBER,this.model.current_mobile_number);
+    this.model.current_mobile_number=SessionStorageService.getSessionValue(SessionStorage.VERIFIED_MOBILE_NUMBER);
+    SessionStorageService.setSessionValue(SessionStorage.MOBILE_NUMBER,this.model.current_mobile_number);
     this.onMobileNumberChangeComplete.emit();
 
   }

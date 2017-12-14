@@ -13,9 +13,9 @@ import {
 import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
 import {Candidate, Section} from "../../../user/models/candidate";
 import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {Headings, Tooltip, CandidateProfileUpdateTrack, LocalStorage, Messages} from "../../../shared/constants";
+import {Headings, Tooltip, CandidateProfileUpdateTrack, SessionStorage, Messages} from "../../../shared/constants";
 import {ErrorService} from "../../../shared/services/error.service";
-import {LocalStorageService} from "../../../shared/services/localstorage.service";
+import {SessionStorageService} from "../../../shared/services/session.service";
 import {ComplexityAnsweredService} from "../complexity-answered.service";
 import {Router} from "@angular/router";
 
@@ -57,9 +57,9 @@ export class AcademicDetailComponent implements OnInit, OnChanges, AfterViewChec
   }
 
   ngOnInit() {
-    if (LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE) === 'true') {
+    if (SessionStorageService.getSessionValue(SessionStorage.IS_CANDIDATE) === 'true') {
       this.isCandidate = true;
-      this.userId=LocalStorageService.getLocalValue(LocalStorage.USER_ID);
+      this.userId=SessionStorageService.getSessionValue(SessionStorage.USER_ID);
     }
 
     //subscribe to addresses value changes
@@ -97,9 +97,10 @@ export class AcademicDetailComponent implements OnInit, OnChanges, AfterViewChec
   initAcademicDetails() {
     return this._fb.group({
       schoolName: [''],
+      educationDegree: ['',Validators.required],
       board: ['', Validators.required],
       yearOfPassing: ['', Validators.required],
-      specialization: ['', Validators.required]
+      specialization: ['']
     });
   }
 
@@ -160,10 +161,11 @@ export class AcademicDetailComponent implements OnInit, OnChanges, AfterViewChec
       return;
     }
 
-    let academics = this.academicDetail.value.academicDetails;
-    if(academics.length == 1){
-      if (academics[0].board == '' && academics[0].specialization == ''
-          && academics[0].yearOfPassing == '') {
+    /*let academics = this.academicDetail.value.academicDetails;
+    if(academics.length == 1){debugger
+      if (academics[0].educationDegree!=='' && academics[0].board !== ''
+          && academics[0].yearOfPassing !== '') {
+        this.candidate.academics = this.academicDetail.value.academicDetails;
         if (type == 'next') {
           this.onNext();
         }
@@ -172,12 +174,12 @@ export class AcademicDetailComponent implements OnInit, OnChanges, AfterViewChec
         }
         return;
       }
-    }
+    }*/
 
     for (let academicsData of this.academicDetail.value.academicDetails) {
-      if (academicsData.board != '' && academicsData.specialization != '' && academicsData.yearOfPassing != '') {
+      if (academicsData.board != '' && academicsData.educationDegree!='' && academicsData.yearOfPassing != '') {
           isDataValid = true;
-      } else if (academicsData.board != '' || academicsData.specialization != '' || academicsData.yearOfPassing != '') {
+      } else if (academicsData.board != '' || academicsData.educationDegree != '' || academicsData.yearOfPassing != '') {
         this.submitStatus = true;
         return;
       } else {
@@ -244,8 +246,12 @@ export class AcademicDetailComponent implements OnInit, OnChanges, AfterViewChec
     return Messages;
   }
 
+  getHeadings() {
+    return Headings;
+  }
+
   navigateToWithId(nav:string) {
-    var userId = LocalStorageService.getLocalValue(LocalStorage.USER_ID);
+    var userId = SessionStorageService.getSessionValue(SessionStorage.USER_ID);
     if (nav !== undefined) {
       let x = nav+'/'+ userId + '/create';
       // this._router.navigate([nav, userId]);

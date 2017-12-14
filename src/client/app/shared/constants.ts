@@ -133,7 +133,7 @@ export class Messages {
   public static MSG_ERROR_VALIDATION_COMPANYNAME_REQUIRED = 'This field can\'t be left blank.';
   public static MSG_ERROR_VALIDATION_OTP_REQUIRED = 'Enter received OTP.';
   public static MSG_ERROR_VALIDATION_INVALID_EMAIL_REQUIRED = 'Enter a valid email address.';
-  public static MSG_ERROR_VALIDATION_INVALID_URL_REQUIRED = 'Website should start with www';
+  public static MSG_ERROR_VALIDATION_INVALID_URL_REQUIRED = 'Website is not valid.';
   public static MSG_ERROR_VALIDATION_INVALID_NAME = 'Enter valid name.';
   public static MSG_ERROR_VALIDATION_INVALID_DATA = 'Enter valid data.';
   public static MSG_ERROR_VALIDATION_PASSWORD_MISMATCHED = 'Passwords do not match.';
@@ -199,6 +199,7 @@ export class Messages {
   public static MSG_ERROR_VALIDATION_MAX_PROFICIENCIES = ' Key skills. Click the cross sign to deselect existing one and add a new skill.';
   public static MSG_ERROR_VALIDATION_EMPLOYMENTHISTORY = 'Provide valid employment start and end date';
   public static MSG_ERROR_VALIDATION_TERMS_AND_CONDITIONS_REQUIRED = 'Please accept the terms and conditions.';
+  public static MSG_ERROR_VALIDATION_DATES = 'Please select valid from and to date.';
 
 
   public static MSG_LANDING_PAGE = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' +
@@ -360,8 +361,8 @@ export class Messages {
   public static CAREER_PLUGIN_MSG_EXISTING_USER = 'You are already registered, Kindly SignIn';
   public static THIS_JOB_IS_NOT_YET_POSTED = 'This Job is not yet posted';
   public static PRESS_ENTER_KEYSKILL = 'Select one key skill from dropdown at a time and press enter to add it.';
-
-
+  public static EXPORT_DATA: string = 'Allow popups to download exported files';
+  public static NO_CANDIDATES_TO_LIST = 'No candidates available.';
 }
 export class AdminPanel {
   public static PUBLIC_PROFILE = 'Profile is public';
@@ -387,12 +388,13 @@ export class NavigationRoutes {
   public static APP_VLAUEPORTRAIT: string = '/value-portrait';
 }
 
-export class LocalStorage {
+export class SessionStorage {
   public static ACCESS_TOKEN = 'access_token';
   public static IS_THEME_SELECTED = 'is_theme_selected';
   public static IS_SOCIAL_LOGIN = 'is_social_login';
   public static PROFILE_PICTURE = 'profile_picture';
   public static ISADMIN = 'is_admin';
+  public static FROM_ADMIN = 'from_admin';
   public static IS_LOGGED_IN = 'is_user_logged_in';
   public static USER_ID = 'user_id';
   public static END_USER_ID = 'end_user_id';
@@ -422,10 +424,15 @@ export class LocalStorage {
   public static CURRENT_JOB_POSTED_ID = 'current_job_posted_job_id';
   public static POSTED_JOB = 'posted_job';
   public static GUIDED_TOUR = 'guided_tour';
+  public static RECRUITER_REFERENCE_ID = 'recruiter_reference_id';
 }
 
-export class SessionStorage {
-  public static RECRUITER_REFERENCE_ID = 'recruiter_reference_id';
+export class LocalStorage {
+  public static ACCESS_TOKEN = 'access_token';
+  public static IS_LOGGED_IN = 'is_user_logged_in';
+  public static ISADMIN = 'is_admin';
+  public static _ID = '_id';
+  public static FROM_ADMIN = 'from_admin';
 }
 
 export class ValueConstant {
@@ -471,6 +478,8 @@ export class API {
   public static GET_RECRUITER_DETAILS = 'getRecruiterDetails';
   public static EXPORT_CANDIDATE_DETAIL_PROFILE = 'exportCandidateDetails';
   public static EXPORT_RECRUITER_DETAIL_PROFILE = 'exportRecruiterDetails';
+  public static USER_DETAILS = 'userDetails';
+  public static USER_DATA = 'userData';
   public static RECRUITER_PROFILE = 'recruiter';
   public static JOBS = 'jobs';
   public static PROFESSIONAL_DATA = 'professionaldata';
@@ -500,6 +509,7 @@ export class API {
   public static INDUSTRY_LIST = 'industry';
   public static REALOCATION = 'realocation';
   public static EDUCATION = 'education';
+  public static EDUCATIONDEGREES = 'educationdegrees';
   public static EXPERIENCE = 'experience';
   public static CURRENTSALARY = 'currentsalary';
   public static NOTICEPERIOD = 'noticeperiod';
@@ -524,6 +534,8 @@ export class API {
   public static ACCEPT_TERMS = '/terms-and-conditions.php';
   public static COUNT_OF_USERS = 'countofusers';
   public static FEEDBACK_QUESTIONS = 'userFeedback';
+  public static RECRUITERCANDIDATESSUMMARY = 'recruiterCandidatesSummary';
+  public static RECRUITER = 'recruiter';
 
 }
 
@@ -684,21 +696,23 @@ export class Tooltip {
 }
 
 export class Headings {
-  public static ACADAMIC_DETAILS: string = 'Academic Details (Optional)';
-  public static AWARDS: string = 'Awards (Optional)';
+  public static ACADAMIC_DETAILS: string = 'Academic Details';
+  public static AWARDS: string = 'Awards';
   public static JOB_DISCRIPTION: string = 'Job Description';
   public static HIDE_COMPANY_NAME: string = 'Hide company Name from applicant';
   public static GOT_IT: string = 'OK, Got it';
   public static CAPABILITIES_FOR_CANDIDATE: string = 'Select those capabilities that describe your current strength.';
   public static CAPABILITIES_FOR_RECRUITER: string = 'Select core capabilities that are required in the candidate.';
-  public static CERTIFICATE_ACCREDITATION: string = 'Certification/Accreditation (Optional)';
+  public static CERTIFICATE_ACCREDITATION: string = 'Certification/Accreditation';
   public static ADDITIONAL_INFORMATION: string = 'Additional information about the job';
   public static OPTIONAL: string = '(Optional)';
+  public static MANDATORY: string = '(Mandatory)';
+  public static ANYONE: string = '(Any One)';
   public static CAPABITITIES_HEADING: string = 'Capabilities';
-  public static EMPLOYMENT_HISTORY: string = 'Employment History (Optional)';
+  public static EMPLOYMENT_HISTORY: string = 'Employment History';
   public static ADDITIONAL_DOMAIN_EXPOSURE: string = 'Additional domain exposure';
-  public static INDUSTRY_FOR_CANDIDATE: string = 'Select your Industry (Any One)';
-  public static INDUSTRY_FOR_RECRUITER: string = 'Select industry in which candidate is expected to work (Any One)';
+  public static INDUSTRY_FOR_CANDIDATE: string = 'Select your Industry';
+  public static INDUSTRY_FOR_RECRUITER: string = 'Select industry in which candidate is expected to work';
   public static JOB_PROFICIENCIES: string = 'Keywords that describe candidate\'s area of expertise (Optional)';
   public static MANDATORY_PROFICIENCIES: string = 'Mandatory Key Skills';
   public static ADDITIONAL_PROFICIENCIES: string = 'Additional Key Skills';
@@ -778,8 +792,9 @@ export class Label {
   public static DOMAIN_EXPOSURE: string = 'Domain Exposure:';
   public static REFINE_BY: string = 'Refine by:';
   public static IN_LAKH: string = '(In Lakh)';
-  public static YEARS: string = '(Year)';
+  public static YEARS: string = '(Years)';
   public static NONE: string = 'None';
+  public static REMENBER_ME: string = 'Remember me';
 }
 
 export class Button {
@@ -801,6 +816,8 @@ export class Button {
   public static MATCH_AGAINST_ALL_JOB: string = 'Match Against All Job';
   public static SHOW_VALUE_PORTRAIT: string = 'Show Value Portrait';
   public static COMPARE_WITH_OTHERS: string = 'Compare With Others';
+  public static MY_CAREER_PAGE: string = 'My Career Page';
+  public static EXPORT: string = 'Export';
 }
 //These constant is used to track profile completion of candiate.(Having total 14 steps to complete)
 export enum CandidateProfileUpdateTrack {
@@ -819,4 +836,3 @@ export enum CandidateProfileUpdateTrack {
   STEP_IS_ENTER_AWARDS_DETAILS,
   STEP_IS_SUBMIT_DETAILS
 }
-

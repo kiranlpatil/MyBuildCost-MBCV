@@ -1,11 +1,12 @@
 import {Component, OnInit} from "@angular/core";
 import {AdminDashboardService} from "../admin-dashboard.service";
 import {Router} from "@angular/router";
-import {Messages, Label, AppSettings} from "../../../shared/constants";
+import {Messages, Label, AppSettings, SessionStorage} from "../../../shared/constants";
 import {Message} from "../../../shared/models/message";
 import {MessageService} from "../../../shared/services/message.service";
 import {LoaderService} from "../../../shared/loader/loaders.service";
 import {ErrorService} from "../../../shared/services/error.service";
+import {SessionStorageService} from "../../../shared/services/session.service";
 
 @Component({
   moduleId: module.id,
@@ -65,7 +66,6 @@ export class CandidateDetailListComponent implements OnInit {
           window.open(AppSettings.IP + CandidateDetails.path.candidateProfilesCSV, '_blank');
           window.open(AppSettings.IP + CandidateDetails.path.candidateCapabilitiesCSV, '_blank');
           window.open(AppSettings.IP + CandidateDetails.path.candidateAccountDetailsCSV, '_blank');
-          this.messageService.message(new Message(Messages.MSG_SUCCESS_FOR_FILE_DOWNLOAD));
         },
         error => {
           this.loaderService.stop();
@@ -105,6 +105,12 @@ export class CandidateDetailListComponent implements OnInit {
       .subscribe(
         candidateProfile => this.onGetAllCandidateSuccess(candidateProfile),
         error => this.errorService.onError(error));
+  }
+
+  openCandidateDashboard(userId: any) {
+    let token = SessionStorageService.getSessionValue(SessionStorage.ACCESS_TOKEN);
+    let url = AppSettings.IP + '/usercontainer?token='+token+'&'+'userid='+userId;
+    window.open(url, '_blank');
   }
 }
 

@@ -1,6 +1,7 @@
 import * as mongoose from "mongoose";
 import {UtilityFunction} from "../uitility/utility-function";
 import {SentMessageInfo} from "nodemailer";
+import {RecruiterCandidatesService} from "./recruiter-candidates.service";
 import Messages = require('../shared/messages');
 import CandidateRepository = require('../dataaccess/repository/candidate.repository');
 import UserRepository = require('../dataaccess/repository/user.repository');
@@ -23,6 +24,7 @@ import RecruiterService = require("./recruiter.service");
 import RecruiterClassModel = require("../dataaccess/model/recruiterClass.model");
 import SendMailService = require('./mailer.service');
 import ProjectAsset = require('../shared/projectasset');
+import RecruiterCandidatesModel = require("../dataaccess/model/recruiter-candidate.model");
 
 let bcrypt = require('bcrypt');
 
@@ -98,51 +100,40 @@ class CandidateService {
 
   updateRecruitersMyCandidateList(candidateId: number, candidate: any,
                                   callback: (error: Error, status: string) => void) {
-    let updateQuery = {
-      $push: {
-        'my_candidate_list': new mongoose.Types.ObjectId(candidateId)
+
+    this.recruiterRepository.populateRecruiterDetails(candidate.recruiterReferenceId, (err, recruiter) => {
+      if (err) {
+        callback(err, null);
+        return;
       }
-    };
-
-    let searchQuery = {
-      '_id': new mongoose.Types.ObjectId(candidate.recruiterReferenceId)
-    };
-
-    this.recruiterRepository.findOneAndUpdate(searchQuery, updateQuery, {},
-      (error: Error, recruiter: RecruiterClassModel) => {
-
+      let status =  candidate.login ? 'Logged In' : 'Registered';
+      let recruiterCandidatesService = new RecruiterCandidatesService();
+      recruiterCandidatesService.update(candidate.recruiterReferenceId, String(candidateId), candidate.mobile_number,
+        status, (error: Error, recruiterCandidatesData: RecruiterCandidatesModel) => {
         if (error) {
           callback(error, null);
           return;
-        } else {
-
-          this.recruiterRepository.populateRecruiterDetails(candidate.recruiterReferenceId, (err, recruiter) => {
-            if (err) {
-              callback(err, null);
+        }
+        let subject = (candidate.login) ?
+          Messages.EMAIL_SUBJECT_EXISTING_CANDIDATE_LOGGEDIN : Messages.EMAIL_SUBJECT_CANDIDATE_REGISTRATION;
+        let template = (candidate.login) ?
+          'existing-candidate-logged-in.html' : 'new-candidate-registration.html';
+        let config = require('config');
+        let sendMailService = new SendMailService();
+        let data: Map<string, string> = new Map([['$jobmosisLink$', config.get('TplSeed.mail.host')],
+          ['$first_name$', candidate.first_name],
+          ['$mobile_number$', candidate.mobile_number],
+          ['$email$', candidate.email],
+          ['$app_name$', ProjectAsset.APP_NAME],]);
+        sendMailService.send(recruiter.email, subject,
+          template, data, (e, status) => {
+            if (e) {
+              callback(e, null);
               return;
             }
-            let subject = (candidate.login) ?
-              Messages.EMAIL_SUBJECT_EXISTING_CANDIDATE_LOGGEDIN : Messages.EMAIL_SUBJECT_CANDIDATE_REGISTRATION;
-            let template = (candidate.login) ?
-              'existing-candidate-logged-in.html' : 'new-candidate-registration.html';
-            let config = require('config');
-            let sendMailService = new SendMailService();
-            let data: Map<string, string> = new Map([['$jobmosisLink$', config.get('TplSeed.mail.host')],
-              ['$first_name$', candidate.first_name],
-              ['$mobile_number$', candidate.mobile_number],
-              ['$email$', candidate.email],
-              ['$app_name$', ProjectAsset.APP_NAME],]);
-            sendMailService.send(recruiter.email, subject,
-              template, data, (e, status) => {
-                if (e) {
-                  callback(e, null);
-                  return;
-                }
-                callback(null, "success");
-              });
           });
-        }
       });
+    });
   }
 
   retrieve(field: any, callback: (error: any, result: any) => void) {
@@ -492,7 +483,7 @@ class CandidateService {
     });
   }
 
-  getCapabilityValueKeyMatrixBuild(capability_matrix: any, industries: any, complexity_musthave_matrix?: any): any {
+  getCapabilityValueKeyMatrixBuild(capability_matrix: any, industries: any, complexity_musthave_matrix ?: any): any {
     let keyValueCapability: any = {};
     for (let cap in capability_matrix) {
       let isFound: boolean = false;
@@ -863,7 +854,6 @@ class CandidateService {
     return capability_matrix;
   }
 
-
   updateField(_id: string, item: any, callback: (error: any, result: any) => void) {
     this.candidateRepository.updateByUserId(new mongoose.Types.ObjectId(_id), item, callback);
   }
@@ -895,7 +885,7 @@ class CandidateService {
           if (err) {
             callback(err, null);
           } else {
-            if(recruiterDetails.length > 0){
+            if (recruiterDetails.length > 0) {
               this.jobProfileRepository.retrieve({'recruiterId': recruiterDetails[0]._id}, (error: any, jobs: any[]) => {
                 if (error) {
                   callback(error, null);
@@ -916,15 +906,14 @@ class CandidateService {
                 }
                 callback(err, isInCart);
               });
-            }else {
-              callback(err,true);
+            } else {
+              callback(err, true);
             }
           }
         });
       }
     });
   }
-
 
   maskCandidateDetails(candidateUserId: string, recruiterUserId: string, callback: (error: any, result: any) => void) {
     this.get(candidateUserId, (err, candidateDetails) => {
@@ -965,7 +954,7 @@ class CandidateService {
         }
         let config = require('config');
         let sendMailService = new SendMailService();
-        let data: Map<string, string> = new Map([['$jobmosisLink$',config.get('TplSeed.mail.host')],
+        let data: Map<string, string> = new Map([['$jobmosisLink$', config.get('TplSeed.mail.host')],
           ['$link$', config.get('TplSeed.mail.host') + 'signin'],
           ['$firstname$', candidate.first_name],
           ['$jobtitle$', jobTitle], ['$recruiter$', recruiter[0].company_name]]);
@@ -976,12 +965,21 @@ class CandidateService {
     });
   }
 
-  sendMailToRecruiter(candidate: any, callback: (error: any, result: any) => void) {
+  updateToRecruiter(candidate: any, callback: (error: any, result: any) => void) {
 
     this.recruiterRepository.retrieve({'_id': new mongoose.Types.ObjectId(candidate.recruiterReferenceId)}, (recruiterErr, recData) => {
       if (recruiterErr) {
         callback(recruiterErr, null);
       } else {
+
+        let recruiterCandidatesService = new RecruiterCandidatesService();
+        recruiterCandidatesService.update(recData[0]._id.toString(), candidate._id,
+          candidate.basicInformation.mobile_number, 'Profile submitted', (error: Error, data: RecruiterCandidatesModel) => {
+          if (error) {
+            callback(error, null);
+            return;
+          }
+        });
 
         this.userRepository.retrieve({'_id': new mongoose.Types.ObjectId(recData[0].userId)}, (userError, userData) => {
           if (userError) {
@@ -989,7 +987,7 @@ class CandidateService {
           } else {
             let config = require('config');
             let sendMailService = new SendMailService();
-            let data: Map<string, string> = new Map([['$jobmosisLink$',config.get('TplSeed.mail.host')],
+            let data: Map<string, string> = new Map([['$jobmosisLink$', config.get('TplSeed.mail.host')],
               ['$first_name$', candidate.basicInformation.first_name],
               ['$app_name$', ProjectAsset.APP_NAME]]);
             sendMailService.send(userData[0].email,

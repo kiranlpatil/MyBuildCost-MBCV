@@ -5,8 +5,8 @@ import {Subscription} from "rxjs/Subscription";
 import {ProfileService} from "../../shared/profileservice/profile.service";
 import {UserProfile} from "../../../user/models/user";
 import {DashboardService} from "../../../user/services/dashboard.service";
-import {AppSettings, ImagePath, LocalStorage, NavigationRoutes} from "../../../shared/constants";
-import {LocalStorageService} from "../../../shared/services/localstorage.service";
+import {AppSettings, ImagePath, SessionStorage, NavigationRoutes} from "../../../shared/constants";
+import {SessionStorageService} from "../../../shared/services/session.service";
 
 @Component({
   moduleId: module.id,
@@ -45,7 +45,7 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.newUser = parseInt(LocalStorageService.getLocalValue(LocalStorage.IS_LOGGED_IN));
+    this.newUser = parseInt(SessionStorageService.getSessionValue(SessionStorage.IS_LOGGED_IN));
     if (this.newUser === 0) {
       this._router.navigate([NavigationRoutes.APP_START]);
     } else {
@@ -62,7 +62,7 @@ export class HeaderComponent implements OnInit {
 
   onUserProfileSuccess(user: any) {
     this.model = user.data;
-    var socialLogin: string = LocalStorageService.getLocalValue(LocalStorage.IS_SOCIAL_LOGIN);
+    var socialLogin: string = SessionStorageService.getSessionValue(SessionStorage.IS_SOCIAL_LOGIN);
     if (socialLogin === AppSettings.IS_SOCIAL_LOGIN_YES) {
       this.PROFILE_IMG_PATH = this.model.social_profile_picture;
     } else if (!this.model.picture || this.model.picture === undefined) {
@@ -106,6 +106,7 @@ export class HeaderComponent implements OnInit {
   }
 
   logOut() {
+    window.sessionStorage.clear();
     window.localStorage.clear();
     this._router.navigate([NavigationRoutes.APP_START]);
   }

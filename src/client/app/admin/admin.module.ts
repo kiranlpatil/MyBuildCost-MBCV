@@ -11,6 +11,7 @@ import {UsageDetailsComponent} from "./admin-dashboard/usage-details/usage-detai
 import {FilterBarComponent} from "./admin-dashboard/filter-bar/filter-bar.component";
 import {AdminDashboardService} from "./admin-dashboard/admin-dashboard.service";
 import {AdminAuthGuard} from "./admin-auth-guard.service";
+import {UserDashboardContainerComponent} from "./admin-dashboard/user-dashboard-container/user-dashboard-container.component";
 
 @NgModule({
   imports : [CommonModule, SharedModule, UserModule, AdminModuleRoutes],
@@ -18,7 +19,8 @@ import {AdminAuthGuard} from "./admin-auth-guard.service";
     CandidateDetailListComponent,
     RecruiterDetailListComponent,
     KeySkillsDetailListComponent,
-    UsageDetailsComponent, FilterBarComponent],
+    UsageDetailsComponent, FilterBarComponent,
+    UserDashboardContainerComponent],
   exports : [],
   providers : [AdminDashboardService,AdminAuthGuard]
 })

@@ -2,12 +2,12 @@ import {Component, Input, OnChanges } from '@angular/core';
 import {CandidateQCard} from "../model/candidateQcard";
 import {Router} from '@angular/router';
 import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
-import {Button, ValueConstant, UsageActions, LocalStorage} from "../../../shared/constants";
+import {Button, ValueConstant, UsageActions, SessionStorage} from "../../../shared/constants";
 import {Message} from "../../../shared/models/message";
 import {MessageService} from "../../../shared/services/message.service";
 import {ActionOnQCardService} from "../../../user/services/action-on-q-card.service";
 import {UsageTracking} from "../model/usage-tracking";
-import {LocalStorageService} from "../../../shared/services/localstorage.service";
+import {SessionStorageService} from "../../../shared/services/session.service";
 import {UsageTrackingService} from "../usage-tracking.service";
 import {ErrorService} from "../../../shared/services/error.service";
 
@@ -74,7 +74,7 @@ export class RecruiterAction implements OnChanges {
 
   navigateToApplicantSearch(nav: string, candidate: any) {
     let usageTrackingData: UsageTracking = new UsageTracking();
-    usageTrackingData.recruiterId = LocalStorageService.getLocalValue(LocalStorage.END_USER_ID);
+    usageTrackingData.recruiterId = SessionStorageService.getSessionValue(SessionStorage.END_USER_ID);
     usageTrackingData.jobProfileId = this.jobId;
     usageTrackingData.candidateId = this.candidate._id;
     usageTrackingData.action = UsageActions.MATCHED_CANDIDATE_AGAINST_ALL_JOB_BY_RECRUITER;

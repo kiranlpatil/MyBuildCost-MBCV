@@ -86,6 +86,7 @@ export class AppComponent implements OnInit {
     this.isShowSuccessMessage = true;
   }
   logOut() {
+    window.sessionStorage.clear();
     window.localStorage.clear();
     let host = AppSettings.HTTP_CLIENT + AppSettings.HOST_NAME;
     window.location.href = host;

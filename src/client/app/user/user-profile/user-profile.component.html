@@ -110,7 +110,7 @@
           <cn-control-messages [control]="recruiterForm.controls.company_website"></cn-control-messages>
           <label>{{getLabels().COMPANY_WEBSITE_FIELD_LABEL}}(Optional)</label>
           <input type="text" [(ngModel)]="company_website" (keydown)="onCompnayWebsite()" formControlName="company_website" id="recruiter_company_website"
-                 placeholder="www.example.com" class="form-control clear"/>
+                 class="form-control clear"/>
           <span class="error-messages" *ngIf="!isCompanyWebsiteValid">{{getMessages().MSG_ERROR_VALIDATION_INVALID_URL_REQUIRED}}</span>
 
         </div>

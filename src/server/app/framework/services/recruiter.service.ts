@@ -26,6 +26,8 @@ import IRecruiter = require('../dataaccess/mongoose/recruiter');
 import UsageTrackingService = require('./usage-tracking.service');
 import AuthInterceptor = require('../interceptor/auth.interceptor');
 import ShareService = require('../share/services/share.service');
+import {RecruiterCandidatesService} from "./recruiter-candidates.service";
+import RecruiterCandidatesModel = require("../dataaccess/model/recruiter-candidate.model");
 
 var bcrypt = require('bcrypt');
 
@@ -109,7 +111,23 @@ class RecruiterService {
 
   getJobsByRecruiterId(id: string, callback: (err: Error, res: IJobProfile[]) => void) {
     let query = {'recruiterId': new mongoose.Types.ObjectId(id)};
-    this.jobProfileRepository.retrieveAndPopulate(query, {'industry': 0}, (error: Error, jobs: IJobProfile[]) => {
+    let projection = {
+      '_id':1,
+      'recruiterId':1,
+      'postingDate':1,
+      'jobTitle':1,
+      'isJobShared':1,
+      'isJobPosted':1,
+      'isJobPostExpired':1,
+      'isJobPostClosed':1,
+      'hiringManager':1,
+      'hideCompanyName':1,
+      'expiringDate':1,
+      'department':1,
+      'daysRemainingForExpiring':1,
+      'candidate_list':1
+    };
+    this.jobProfileRepository.retrieveWithoutPopulate(query, projection, (error: Error, jobs: IJobProfile[]) => {
       if (error) {
         callback(error, null);
         return;
@@ -293,11 +311,35 @@ class RecruiterService {
     let data: Map<string, string> = new Map([['$jobmosisLink$',config.get('TplSeed.mail.host')],
       ['$link$', link], ['$mobile_number$', field.mobileNo]]);
     let emailSubject = (result.length) ?
-      Messages.EMAIL_SUBJECT_EXISTING_CANDIDATE_REGISTERED_FROM_SITE : Messages.EMAIL_SUBJECT_NEW_CANDIDATE_REGISTERED_FROM_SITE;
-    this.recruiterRepository.retrieve({'_id': new mongoose.Types.ObjectId(field.recruiterId)}, (recruiterErr, recData) => {
+      Messages.EMAIL_SUBJECT_EXISTING_CANDIDATE_REGISTERED_FROM_SITE :
+      Messages.EMAIL_SUBJECT_NEW_CANDIDATE_REGISTERED_FROM_SITE;
+    this.recruiterRepository.retrieve({'_id': new mongoose.Types.ObjectId(field.recruiterId)},
+      (recruiterErr, recData) => {
       if (recruiterErr) {
         callback(recruiterErr, null);
       } else {
+        let candidateId = '';
+        if(result.length) {
+          this.candidateRepository.retrieve({'userId': new mongoose.Types.ObjectId(result[0]._id)},
+            (error: Error, candidate: any) => {
+            if (error) {
+              callback(error, null);
+              return;
+            } else {
+              candidateId = candidate[0]._id.toString()
+            }
+          });
+        }
+
+        let recruiterCandidatesService = new RecruiterCandidatesService();
+        recruiterCandidatesService.update(field.recruiterId, candidateId, field.mobileNo,
+          'Applied', (error: Error, data: RecruiterCandidatesModel) => {
+            if (error) {
+              callback(error, null);
+              return;
+            }
+          });
+
         this.userRepository.retrieve({'_id': new mongoose.Types.ObjectId(recData[0].userId)}, (userError, userData) => {
           if (userError) {
             callback(userError, null);

@@ -2,8 +2,8 @@ import {Component, EventEmitter, Input, OnChanges, Output} from "@angular/core";
 import {Industry} from "../../../user/models/industry";
 import {CandidateProfileService} from "../candidate-profile/candidate-profile.service";
 import {Section} from "../../../user/models/candidate";
-import {LocalStorageService} from "../../../shared/services/localstorage.service";
-import {Headings, LocalStorage, Messages, Tooltip} from "../../../shared/constants";
+import {SessionStorageService} from "../../../shared/services/session.service";
+import {Headings, SessionStorage, Messages, Tooltip} from "../../../shared/constants";
 import {IndustryDetailsService} from "../industry-detail-service";
 import {ErrorService} from "../../../shared/services/error.service";
 
@@ -43,7 +43,7 @@ export class IndustryListComponent implements OnChanges {
         }
       }
     );
-    if (LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE) === 'true') {
+    if (SessionStorageService.getSessionValue(SessionStorage.IS_CANDIDATE) === 'true') {
       this.isCandidate = true;
     }
   }
@@ -79,7 +79,7 @@ export class IndustryListComponent implements OnChanges {
     if (this.choosedIndustry.code !== this.selectedIndustry.code) {
       this.choosedIndustry = Object.assign(this.selectedIndustry);
     }
-    if (LocalStorageService.getLocalValue(LocalStorage.IS_CANDIDATE) === 'true') {
+    if (SessionStorageService.getSessionValue(SessionStorage.IS_CANDIDATE) === 'true') {
       this.highlightedSection.name = 'Profile';
     } else {
       this.highlightedSection.name = 'JobProfile';
@@ -91,6 +91,10 @@ export class IndustryListComponent implements OnChanges {
     this.candidateProfileService.getIndustries()
       .subscribe(industries => this.industries = industries.data,
         error => this.errorService.onError(error));
+  }
+
+  getHeadings() {
+    return Headings;
   }
 
     onEdit() {

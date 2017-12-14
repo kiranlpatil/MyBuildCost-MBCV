@@ -5,8 +5,8 @@ import {CandidateProfileService} from "../../candidate-profile/candidate-profile
 import {Router} from '@angular/router';
 import {UsageTrackingService} from "../../usage-tracking.service";
 import {ErrorService} from "../../../../shared/services/error.service";
-import {UsageActions, LocalStorage} from "../../../../shared/constants";
-import {LocalStorageService} from "../../../../shared/services/localstorage.service";
+import {UsageActions, SessionStorage} from "../../../../shared/constants";
+import {SessionStorageService} from "../../../../shared/services/session.service";
 import {UsageTracking} from "../../model/usage-tracking";
 declare let $: any;
 @Component({
@@ -49,7 +49,7 @@ export class ProfileComparisonHeaderComponent implements OnInit {
 
   navigateToApplicantSearch(nav: string, candidate: any) {
     let usageTrackingData: UsageTracking = new UsageTracking();
-    usageTrackingData.recruiterId = LocalStorageService.getLocalValue(LocalStorage.END_USER_ID);
+    usageTrackingData.recruiterId = SessionStorageService.getSessionValue(SessionStorage.END_USER_ID);
     usageTrackingData.jobProfileId = this.jobId;
     usageTrackingData.candidateId = candidate._id;
     usageTrackingData.action = UsageActions.MATCHED_CANDIDATE_AGAINST_ALL_JOB_BY_RECRUITER;

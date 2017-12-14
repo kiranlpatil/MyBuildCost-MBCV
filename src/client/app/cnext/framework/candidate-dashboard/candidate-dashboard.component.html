@@ -74,10 +74,10 @@
             </ul>
             <div class="tab-content">
               <div id="recruiters"
-                   [ngClass]="{'tab-pane' : true, 'fade in' : isRecruiterReferred, 'fade' : !isRecruiterReferred, 'active' : isRecruiterReferred, 'matched' : true}"
+                   [ngClass]="{'tab-pane' : true, 'fade in' : isRecruiterReferred, 'fade' : !isRecruiterReferred, 'active' : isRecruiterReferred, 'recruiters-anchor' : true}"
                    *ngIf="isRecruiterReferred">
                 <cn-q-card-list *ngIf="typeOfListVisible=='recruiters'" [joblistCount]="recruitersJobList.length"
-                                [listOfJobs]="recruitersJobList" [type]="'none'"
+                                [listOfJobs]="recruitersJobList" [type]="'none'" [progress_bar_color]="'#00a79d'"
                                 (onAction)="onActionPerformOnExactList($event)"
                                 (onSortByChange)="onSortChange($event)"></cn-q-card-list>
                 <div class="empty-list-message" *ngIf="candidate.summary.numberOfRecruiterJobs==0">
@@ -87,7 +87,7 @@
               <div id="matched"
                    [ngClass]="{'tab-pane' : true, 'fade in' : !isRecruiterReferred, 'fade' : isRecruiterReferred, 'active' : !isRecruiterReferred, 'matched' : true}">
                 <cn-q-card-list *ngIf="typeOfListVisible=='matched'" [joblistCount]="jobList.length"
-                                [listOfJobs]="jobList" [type]="'none'"
+                                [listOfJobs]="jobList" [type]="'none'" [progress_bar_color]="'#7264b5'"
                                 (onAction)="onActionPerformOnExactList($event)"
                                 (onSortByChange)="onSortChange($event)"></cn-q-card-list>
                 <div class="empty-list-message" *ngIf="candidate.summary.numberOfmatched==0">

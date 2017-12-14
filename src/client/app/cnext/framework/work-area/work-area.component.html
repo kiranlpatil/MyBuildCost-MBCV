@@ -76,6 +76,7 @@
           <span class="option">
             {{item.name}}
           </span>
+          <span *ngIf="selectedRoles.length>1 && i!=selectedRoles.length -1">,&nbsp;</span>&nbsp;
         </div>
       </div>
     </div>

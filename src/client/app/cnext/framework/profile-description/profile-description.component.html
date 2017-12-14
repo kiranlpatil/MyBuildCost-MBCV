@@ -58,14 +58,14 @@
           </div>
 
 
-          <div class="form-group">
+          <!--<div class="form-group">
             <label>Highest Qualification</label>
-            <!--<cn-control-messages [control]="professionalDetailForm.controls.education"></cn-control-messages>-->
+            &lt;!&ndash;<cn-control-messages [control]="professionalDetailForm.controls.education"></cn-control-messages>&ndash;&gt;
             <select [(ngModel)]="candidate.professionalDetails.education">
               <option *ngFor="let c of educationList" [ngValue]="c">{{c}}</option>
             </select>
             <div class="error-messages" *ngIf="(candidate.professionalDetails.education == '' || candidate.professionalDetails.education == undefined) && !isValid">{{educationValidationMessage}}</div>
-          </div>
+          </div>-->
 
           <div class="form-group">
             <label>Total Experience</label>

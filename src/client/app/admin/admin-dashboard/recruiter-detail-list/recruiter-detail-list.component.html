@@ -33,7 +33,9 @@
     <div *ngFor="let recruiter of recruiters;let i = index">
       <ul>
         <li>
-          <p>{{recruiter.data.company_name}} ({{recruiter.data.company_size}})</p>
+          <span (click)="openRecruiterDashboard(recruiter.data.userId)">
+            <p title="{{recruiter.data.company_name}}" class="username">{{recruiter.data.company_name}} ({{recruiter.data.company_size}})</p>
+          </span>
         </li>
         <li>
           <p>{{recruiter.email}}</p>
