@@ -76,7 +76,9 @@ export abstract class SearchEngine {
       if(candidateDetail && candidateDetail.exact_matching >= ConstVariables.LOWER_LIMIT_FOR_SEARCH_RESULT){
         if(candidate.academics && candidate.academics.length >0){
           for(let academic of candidate.academics){
-            educationDegreeMap[academic.educationDegree] =  '';
+            if(academic.educationDegree) {
+              educationDegreeMap[academic.educationDegree] =  '';
+            }
             if(academic.specialization){
               specializationMap[academic.specialization] = '';
             }
