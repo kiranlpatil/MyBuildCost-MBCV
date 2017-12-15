@@ -5,6 +5,7 @@ import {CandidatesInLists} from "../dataaccess/model/CandidatesInLists.model";
 import {SentMessageInfo} from "nodemailer";
 import {Share} from "../../../../client/app/cnext/framework/model/share";
 import {RecruiterCandidatesService} from "./recruiter-candidates.service";
+import * as sharedService from "../shared/logger/shared.service";
 import Messages = require('../shared/messages');
 import UserRepository = require('../dataaccess/repository/user.repository');
 import RecruiterRepository = require('../dataaccess/repository/recruiter.repository');
@@ -30,7 +31,6 @@ import ShareService = require('../share/services/share.service');
 import RecruiterCandidatesModel = require("../dataaccess/model/recruiter-candidate.model");
 import CandidateClassModel = require("../dataaccess/model/candidate-class.model");
 import LoggerService = require("../shared/logger/LoggerService");
-import * as sharedService from "../shared/logger/shared.service";
 
 var bcrypt = require('bcrypt');
 
@@ -309,7 +309,7 @@ class RecruiterService {
     this.recruiterRepository.retrieveWithLean(field, projection, callback);
   }
 
-  notifyRecruiter(field: any, result: any, callback: (error: any, result: any) => void) {
+  notifyRecruiter(field: any, result: any) {
     let sendMailService = new SendMailService();
     let host = config.get('TplSeed.mail.host');
     let link = host + 'signin';
@@ -322,42 +322,50 @@ class RecruiterService {
     this.recruiterRepository.retrieve({'_id': new mongoose.Types.ObjectId(field.recruiterId)},
       (recruiterErr, recData) => {
         if (recruiterErr) {
-          callback(recruiterErr, null);
-        } else {
-
-          let recruiterCandidatesModel = new RecruiterCandidatesModel();
-          recruiterCandidatesModel.recruiterId = field.recruiterId;
-          recruiterCandidatesModel.mobileNumber = field.mobile_number;
-          recruiterCandidatesModel.source = 'career plugin';
-          recruiterCandidatesModel.status = 'Applied';
-
-          if (result.length) {
-            this.candidateRepository.retrieve({'userId': new mongoose.Types.ObjectId(result[0]._id)},
-              (error: Error, candidate: any) => {
-                if (error) {
-                  callback(error, null);
-                  return;
-                } else {
-                  recruiterCandidatesModel.name = result[0].first_name + ' ' + result[0].last_name;
-                  recruiterCandidatesModel.email = result[0].email;
-                  recruiterCandidatesModel.candidateId = candidate[0]._id.toString();
-                  this.updateRecruiterCandidates(recruiterCandidatesModel);
-                }
-              });
-          } else {
-            this.updateRecruiterCandidates(recruiterCandidatesModel);
-          }
-
-          this.userRepository.retrieve({'_id': new mongoose.Types.ObjectId(recData[0].userId)}, (userError, userData) => {
-            if (userError) {
-              callback(userError, null);
-            } else {
-              sendMailService.send(userData[0].email,
-                emailSubject,
-                'notify-recruiter.mail.html', data, callback);
-            }
-          });
+          this.loggerService.logErrorObj(recruiterErr);
+          sharedService.mailToAdmin(recruiterErr);
+          return;
         }
+
+        let recruiterCandidatesModel = new RecruiterCandidatesModel();
+        recruiterCandidatesModel.recruiterId = field.recruiterId;
+        recruiterCandidatesModel.mobileNumber = field.mobile_number;
+        recruiterCandidatesModel.source = 'career plugin';
+        recruiterCandidatesModel.status = 'Applied';
+
+        if (result.length) {
+          this.candidateRepository.retrieve({'userId': new mongoose.Types.ObjectId(result[0]._id)},
+            (error: Error, candidate: any) => {
+              if (error) {
+                this.loggerService.logErrorObj(error);
+                sharedService.mailToAdmin(error);
+                return;
+              }
+              recruiterCandidatesModel.name = result[0].first_name + ' ' + result[0].last_name;
+              recruiterCandidatesModel.email = result[0].email;
+              recruiterCandidatesModel.candidateId = candidate[0]._id.toString();
+              this.updateRecruiterCandidates(recruiterCandidatesModel);
+            });
+        } else {
+          this.updateRecruiterCandidates(recruiterCandidatesModel);
+        }
+
+        this.userRepository.retrieve({'_id': new mongoose.Types.ObjectId(recData[0].userId)}, (userError, userData) => {
+          if (userError) {
+            this.loggerService.logErrorObj(userError);
+            sharedService.mailToAdmin(userError);
+            return;
+          }
+          sendMailService.send(userData[0].email,
+            emailSubject,
+            'notify-recruiter.mail.html', data, (emailError: Error, result: any) => {
+              if (emailError) {
+                this.loggerService.logErrorObj(emailError);
+                sharedService.mailToAdmin(emailError);
+              }
+            });
+
+        });
       });
   }
 

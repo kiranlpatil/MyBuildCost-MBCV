@@ -1849,18 +1849,8 @@ export function getUserRegistrationStatus(req: express.Request, res: express.Res
       } else {
         let data: any = {'recruiterId': req.query.recruiterId, 'mobile_number': req.params.mobileNo};
         let recruiterService = new RecruiterService();
-        recruiterService.notifyRecruiter(data, result, (error, notifyResponse) => {
-          if (error) {
-            next({
-              reason: Messages.MSG_ERROR_RSN_WHILE_CONTACTING,
-              message: Messages.MSG_ERROR_WHILE_CONTACTING,
-              stackTrace: new Error(),
-              code: 403
-            });
-          } else {
-            res.status(200).send(result);
-          }
-        });
+        recruiterService.notifyRecruiter(data, result);
+        res.status(200).send(result);
       }
     });
   } catch (e) {

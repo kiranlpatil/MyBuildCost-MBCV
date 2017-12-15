@@ -252,7 +252,7 @@ class ExportService {
     newDate.setDate(newDate.getDate() + 1); //To get records of current date and for same from and to date
 
     let fields = 'recruiterId,source,candidateId,name,mobileNumber,email,status,noOfMatchingJobs,' +
-      'highestMatchingPercentage,jobTitle,statusUpdatedOn';
+      'highestMatchingJobPercentage,jobTitle,statusUpdatedOn';
 
     let downloadLocation = path.resolve() + config.get('TplSeed.exportFilePathServer')
       + config.get('TplSeed.exportFileNames.recruiterCandidatesCSV');

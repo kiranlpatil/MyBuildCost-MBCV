@@ -7,7 +7,7 @@ class RecruiterCandidatesModel {
   email: string;
   status: string;
   noOfMatchingJobs: number;
-  highestMatchingPercentage: number;
+  highestMatchingJobPercentage: number;
   jobTitle: string;
   statusUpdatedOn: Date;
   fromDate: Date;

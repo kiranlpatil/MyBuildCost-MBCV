@@ -32,7 +32,7 @@ class RecruiterCandidatesSchema {
       noOfMatchingJobs: {
         type: Number
       },
-      highestMatchingPercentage: {
+      highestMatchingJobPercentage: {
         type: Number
       },
       jobTitle: {

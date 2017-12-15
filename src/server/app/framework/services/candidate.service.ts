@@ -1010,10 +1010,10 @@ class CandidateService {
           return;
         }
         recruiterCandidatesModel.noOfMatchingJobs = qcards.length;
-        recruiterCandidatesModel.highestMatchingPercentage = 0;
+        recruiterCandidatesModel.highestMatchingJobPercentage = 0;
         for (let card of qcards) {
-          if (recruiterCandidatesModel.highestMatchingPercentage < card.exact_matching) {
-            recruiterCandidatesModel.highestMatchingPercentage = card.exact_matching;
+          if (recruiterCandidatesModel.highestMatchingJobPercentage < card.exact_matching) {
+            recruiterCandidatesModel.highestMatchingJobPercentage = card.exact_matching;
             recruiterCandidatesModel.jobTitle = card.jobTitle;
 
           }
