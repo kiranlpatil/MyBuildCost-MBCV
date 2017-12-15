@@ -159,7 +159,7 @@
                 <div class="details clearfix">
                   <!-- <label class="first-label">Job Title </label>
                    <span>{{job.jobTitle}}</span>-->
-                  <label *ngIf="candidate == undefined">Hiring Manager</label>
+                  <label *ngIf="candidate == undefined">{{getLabel().REQUIRMENT_OWNER}}</label>
                   <span *ngIf="candidate == undefined">{{job.hiringManager}}</span>
                   <label *ngIf="recruiter.isRecruitingForself">Department</label>
                   <label *ngIf="!recruiter.isRecruitingForself">Company Name</label>

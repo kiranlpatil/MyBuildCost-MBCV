@@ -2245,17 +2245,17 @@ img[alt] {
 }
 
 .career-plugin-toster {
-  background-color: #e8e8e8 !important;
   border: 0 !important;
-  border-radius: 0px !important;
-  top: 97px;
+  border-radius: 0 !important;
   color: #000 !important;
   display: inline-block;
   font-family: 'gothamrnd-book';
-  font-size: 15px;
+  font-size: 16px;
+  left: 50%;
   margin: auto;
   padding: 11px 10px;
   position: absolute;
-  left: 50%;
+  top: 170px;
   transform: translateX(-50%);
+  width: 33%;
 }

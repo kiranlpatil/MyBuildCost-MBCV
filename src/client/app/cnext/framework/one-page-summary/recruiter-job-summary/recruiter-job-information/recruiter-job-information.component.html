@@ -11,7 +11,7 @@
   <div class="details clearfix">
     <label>Job Title</label>
     <span>{{job.jobTitle}}</span>
-    <label>Hiring Manager</label>
+    <label>{{getLabel().REQUIRMENT_OWNER}}</label>
     <span>{{job.hiringManager}}</span>
     <label *ngIf="recruiter.isRecruitingForself">Department</label>
     <label *ngIf="!recruiter.isRecruitingForself">Company</label>

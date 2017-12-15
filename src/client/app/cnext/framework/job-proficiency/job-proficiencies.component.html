@@ -3,7 +3,12 @@
   <div id="job-proficiencies" class="section-container clearfix" *ngIf="highlightedSection.name=='Proficiencies'">
     <div class="main-content  edit-modal-content clearfix edit-keyskill">
 
-      <h4 class="heading">{{jobProficienciesHeading}} </h4>
+      <h4 class="heading">
+        {{jobProficienciesHeading}}
+        <span class="heading-optional-field">
+          {{getHeadings().OPTIONAL}}
+        </span>
+      </h4>
       <div id="proficiency-container" class="scrollable-content proficiency-container">
         <cn-multi-select [type]="'Mandatory'" [data]="proficiencies"
                          [maxLength]="maxNumberOfMandatory"

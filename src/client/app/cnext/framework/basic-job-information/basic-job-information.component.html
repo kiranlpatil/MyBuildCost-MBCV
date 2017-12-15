@@ -23,7 +23,7 @@
 
           <div class="col-sm-8 no-padding">
             <div class="form-group">
-              <label>Hiring Manager</label>
+              <label>{{getLabel().REQUIRMENT_OWNER}}</label>
               <input class="form-control" type="text" maxlength="30" formControlName="hiringManager"
                      required>
               <div class="error-messages"
@@ -209,7 +209,7 @@
       </div>
       <div class="clearfix">
         <p><label>Notice Period</label> {{jobPosterModel.joiningPeriod}}</p>
-        <p><label>Hiring Manager</label> {{jobPosterModel.hiringManager}}</p>
+        <p><label>{{getLabel().REQUIRMENT_OWNER}}</label> {{jobPosterModel.hiringManager}}</p>
         <p *ngIf="isRecruitingForSelf"><label>Hiring Department</label> {{jobPosterModel.department}}</p>
         <p *ngIf="!isRecruitingForSelf"><label>Hiring Company</label> {{jobPosterModel.department}}</p>
         <p><label>Country</label> {{jobPosterModel.location?.country}}</p>

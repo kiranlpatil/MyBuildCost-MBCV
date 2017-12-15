@@ -361,7 +361,7 @@ export class Messages {
   public static PASSWORD_MESSAGE = 'Password must be alphanumeric having minimum 8 Characters.';
 
   public static CAREER_PLUGIN_MSG_NEW_USER = 'You are not registered, Kindly register with our carrier partner to apply for job';
-  public static CAREER_PLUGIN_MSG_EXISTING_USER = 'You are already registered, Kindly SignIn';
+  public static CAREER_PLUGIN_MSG_EXISTING_USER = 'You are already registered, kindly Sign in with JobMosis account ';
   public static THIS_JOB_IS_NOT_YET_POSTED = 'This Job is not yet posted';
   public static PRESS_ENTER_KEYSKILL = 'Select one key skill from dropdown at a time and press enter to add it.';
   public static EXPORT_DATA: string = 'Allow popups to download exported files';
@@ -717,7 +717,7 @@ export class Headings {
   public static ADDITIONAL_DOMAIN_EXPOSURE: string = 'Additional domain exposure';
   public static INDUSTRY_FOR_CANDIDATE: string = 'Select your Industry';
   public static INDUSTRY_FOR_RECRUITER: string = 'Select industry in which candidate is expected to work';
-  public static JOB_PROFICIENCIES: string = 'Keywords that describe candidate\'s area of expertise (Optional)';
+  public static JOB_PROFICIENCIES: string = 'Keywords that describe candidate\'s area of expertise';
   public static MANDATORY_PROFICIENCIES: string = 'Mandatory Key Skills';
   public static ADDITIONAL_PROFICIENCIES: string = 'Additional Key Skills';
   public static ABOUT_MYSELF: string = 'About Myself';
@@ -754,7 +754,7 @@ export class Label {
   public static JOB_TITLE: string = 'New Job Title';
   public static CLONE_JOB: string = 'Clone Job';
   public static CLOSE_JOB: string = 'Close Job';
-  public static VALUE_PORTRAIT_HEADER: string = 'Job Mosis';
+  public static VALUE_PORTRAIT_HEADER: string = 'JobMosis';
   public static VALUE_PORTRAIT_TITLE: string = 'Value Portrait of';
   public static CORE_CAPABILITIES_TITLE: string = 'Core Capabilities';
   public static NOTE_OF_TRUST: string = 'Note of Trust';
@@ -798,7 +798,8 @@ export class Label {
   public static IN_LAKH: string = '(In Lakh)';
   public static YEARS: string = '(Years)';
   public static NONE: string = 'None';
-  public static REMEMBER_ME: string = 'Remember me';
+  public static REMENBER_ME: string = 'Remember me';
+  public static REQUIRMENT_OWNER: string = 'Requirement Owner';
 }
 
 export class Button {
