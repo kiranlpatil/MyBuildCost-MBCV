@@ -138,6 +138,7 @@ class Messages {
   public static MSG_ERROR_CREATING_EXCEL = 'Error In creating csv file';
   public static MSG_ERROR_PROVIDE_MOBILE_NO = 'Please provide valid mobile number.';
   public static MSG_ERROR_FETCHING_MANAGED_CANDIDATES = 'Error In fetching managed candidates by recruiter';
+  public static MSG_ERROR_EXPORTING_MANAGED_CANDIDATES = 'Error In exporting managed candidates by recruiter';
 }
 export=Messages;
 

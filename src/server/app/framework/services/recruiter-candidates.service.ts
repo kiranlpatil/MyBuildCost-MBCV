@@ -6,58 +6,38 @@ import RecruiterCandidates = require("../dataaccess/mongoose/recruiter-candidate
 
 export class RecruiterCandidatesService {
 
-  update(recruiterId: string, candidateId: string, mobileNumber: number, status: string,
-         callback: (error: Error, data: RecruiterCandidatesModel) => void) {
+  update(data: any, callback: (error: Error, data: RecruiterCandidatesModel) => void) {
 
-    let updateQuery: any;
-    if(candidateId != '') {
-      updateQuery = {
-        $set: {
-          'status': status,
-          'candidateId': candidateId,
-          'statusUpdatedOn': new Date(),
-          'source': 'career plugin',
-        }
-      };
-    } else {
-      updateQuery = {
-        $set: {
-          'status': status,
-          'statusUpdatedOn': new Date(),
-          'source': 'career plugin',
-        }
-      };
-    }
-
+    data.statusUpdatedOn = new Date();
 
     let searchQuery = {
-      'mobileNumber': mobileNumber,
-      'recruiterId': recruiterId
+      'mobileNumber': data.mobileNumber,
+      'recruiterId': data.recruiterId
     };
 
     let recruiterCandidatesRepository = new RecruiterCandidatesRepository();
-    recruiterCandidatesRepository.findOneAndUpdate(searchQuery, updateQuery, {upsert: true}, (error: Error, data: RecruiterCandidatesModel) => {
+    recruiterCandidatesRepository.updateWithQuery(searchQuery, data, {upsert: true}, (error: Error, data: RecruiterCandidatesModel) => {
       callback(error, data);
     });
 
   }
 
-  getSummary(id: string, fromDate: string, toDate: string, callback: (error: Error, data: RecruiterCandidatesModel[]) => void) {
+  getSummary(recruiterCandidatesModel: RecruiterCandidatesModel, callback: (error: Error, data: RecruiterCandidatesModel[]) => void) {
 
-    let newDate = new Date(toDate);
-      let numberOfDaysToAdd = 1;
-      newDate.setDate(newDate.getDate() + numberOfDaysToAdd);
-      let searchQuery = {
-        'recruiterId': new mongoose.Types.ObjectId(id),
-        'statusUpdatedOn': {
-          $lte: newDate,
-          $gte: new Date(fromDate)
-        }
-      };
+    let newDate = new Date(recruiterCandidatesModel.toDate);
+    newDate.setDate(newDate.getDate() + 1);  //To get records of current date and for same from and to date
+    let searchQuery = {
+      'recruiterId': new mongoose.Types.ObjectId(recruiterCandidatesModel.recruiterId),
+      'statusUpdatedOn': {
+        $lte: newDate,
+        $gte: new Date(recruiterCandidatesModel.fromDate)
+      },
+      'source': recruiterCandidatesModel.source
+    };
 
     let recruiterCandidatesRepository = new RecruiterCandidatesRepository();
-    recruiterCandidatesRepository.retrieve(searchQuery, (error: Error, data: RecruiterCandidatesModel[]) => {
-      callback(error, data);
+    recruiterCandidatesRepository.retrieve(searchQuery, (error: Error, recruiterCandidatesData: RecruiterCandidatesModel[]) => {
+      callback(error, recruiterCandidatesData);
     });
 
   }
@@ -76,7 +56,7 @@ export class RecruiterCandidatesService {
         case 'Profile submitted' :
           summary.profileSubmitted++;
           break;
-        case 'Logged In' :
+        case 'Existing' :
           summary.existing++;
           break;
       }

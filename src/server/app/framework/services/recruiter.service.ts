@@ -4,6 +4,7 @@ import {JobCountModel} from "../dataaccess/model/job-count.model";
 import {CandidatesInLists} from "../dataaccess/model/CandidatesInLists.model";
 import {SentMessageInfo} from "nodemailer";
 import {Share} from "../../../../client/app/cnext/framework/model/share";
+import {RecruiterCandidatesService} from "./recruiter-candidates.service";
 import Messages = require('../shared/messages');
 import UserRepository = require('../dataaccess/repository/user.repository');
 import RecruiterRepository = require('../dataaccess/repository/recruiter.repository');
@@ -26,8 +27,10 @@ import IRecruiter = require('../dataaccess/mongoose/recruiter');
 import UsageTrackingService = require('./usage-tracking.service');
 import AuthInterceptor = require('../interceptor/auth.interceptor');
 import ShareService = require('../share/services/share.service');
-import {RecruiterCandidatesService} from "./recruiter-candidates.service";
 import RecruiterCandidatesModel = require("../dataaccess/model/recruiter-candidate.model");
+import CandidateClassModel = require("../dataaccess/model/candidate-class.model");
+import LoggerService = require("../shared/logger/LoggerService");
+import * as sharedService from "../shared/logger/shared.service";
 
 var bcrypt = require('bcrypt');
 
@@ -38,8 +41,10 @@ class RecruiterService {
   private userRepository: UserRepository;
   private jobProfileRepository: JobProfileRepository;
   private industryRepository: IndustryRepository;
+  private loggerService: LoggerService;
 
   constructor() {
+    this.loggerService = new LoggerService('RECRUITER_SERVICE_ERROR_HANDLER');
     this.recruiterRepository = new RecruiterRepository();
     this.userRepository = new UserRepository();
     this.jobProfileRepository = new JobProfileRepository();
@@ -112,20 +117,20 @@ class RecruiterService {
   getJobsByRecruiterId(id: string, callback: (err: Error, res: IJobProfile[]) => void) {
     let query = {'recruiterId': new mongoose.Types.ObjectId(id)};
     let projection = {
-      '_id':1,
-      'recruiterId':1,
-      'postingDate':1,
-      'jobTitle':1,
-      'isJobShared':1,
-      'isJobPosted':1,
-      'isJobPostExpired':1,
-      'isJobPostClosed':1,
-      'hiringManager':1,
-      'hideCompanyName':1,
-      'expiringDate':1,
-      'department':1,
-      'daysRemainingForExpiring':1,
-      'candidate_list':1
+      '_id': 1,
+      'recruiterId': 1,
+      'postingDate': 1,
+      'jobTitle': 1,
+      'isJobShared': 1,
+      'isJobPosted': 1,
+      'isJobPostExpired': 1,
+      'isJobPostClosed': 1,
+      'hiringManager': 1,
+      'hideCompanyName': 1,
+      'expiringDate': 1,
+      'department': 1,
+      'daysRemainingForExpiring': 1,
+      'candidate_list': 1
     };
     this.jobProfileRepository.retrieveWithoutPopulate(query, projection, (error: Error, jobs: IJobProfile[]) => {
       if (error) {
@@ -308,47 +313,60 @@ class RecruiterService {
     let sendMailService = new SendMailService();
     let host = config.get('TplSeed.mail.host');
     let link = host + 'signin';
-    let data: Map<string, string> = new Map([['$jobmosisLink$',config.get('TplSeed.mail.host')],
-      ['$link$', link], ['$mobile_number$', field.mobileNo]]);
+    let data: Map<string, string> = new Map([['$jobmosisLink$', config.get('TplSeed.mail.host')],
+      ['$link$', link], ['$mobile_number$', field.mobile_number]]);
     let emailSubject = (result.length) ?
       Messages.EMAIL_SUBJECT_EXISTING_CANDIDATE_REGISTERED_FROM_SITE :
       Messages.EMAIL_SUBJECT_NEW_CANDIDATE_REGISTERED_FROM_SITE;
+
     this.recruiterRepository.retrieve({'_id': new mongoose.Types.ObjectId(field.recruiterId)},
       (recruiterErr, recData) => {
-      if (recruiterErr) {
-        callback(recruiterErr, null);
-      } else {
-        let candidateId = '';
-        if(result.length) {
-          this.candidateRepository.retrieve({'userId': new mongoose.Types.ObjectId(result[0]._id)},
-            (error: Error, candidate: any) => {
-            if (error) {
-              callback(error, null);
-              return;
+        if (recruiterErr) {
+          callback(recruiterErr, null);
+        } else {
+
+          let recruiterCandidatesModel = new RecruiterCandidatesModel();
+          recruiterCandidatesModel.recruiterId = field.recruiterId;
+          recruiterCandidatesModel.mobileNumber = field.mobile_number;
+          recruiterCandidatesModel.source = 'career plugin';
+          recruiterCandidatesModel.status = 'Applied';
+
+          if (result.length) {
+            this.candidateRepository.retrieve({'userId': new mongoose.Types.ObjectId(result[0]._id)},
+              (error: Error, candidate: any) => {
+                if (error) {
+                  callback(error, null);
+                  return;
+                } else {
+                  recruiterCandidatesModel.name = result[0].first_name + ' ' + result[0].last_name;
+                  recruiterCandidatesModel.email = result[0].email;
+                  recruiterCandidatesModel.candidateId = candidate[0]._id.toString();
+                  this.updateRecruiterCandidates(recruiterCandidatesModel);
+                }
+              });
+          } else {
+            this.updateRecruiterCandidates(recruiterCandidatesModel);
+          }
+
+          this.userRepository.retrieve({'_id': new mongoose.Types.ObjectId(recData[0].userId)}, (userError, userData) => {
+            if (userError) {
+              callback(userError, null);
             } else {
-              candidateId = candidate[0]._id.toString()
+              sendMailService.send(userData[0].email,
+                emailSubject,
+                'notify-recruiter.mail.html', data, callback);
             }
           });
         }
+      });
+  }
 
-        let recruiterCandidatesService = new RecruiterCandidatesService();
-        recruiterCandidatesService.update(field.recruiterId, candidateId, field.mobileNo,
-          'Applied', (error: Error, data: RecruiterCandidatesModel) => {
-            if (error) {
-              callback(error, null);
-              return;
-            }
-          });
-
-        this.userRepository.retrieve({'_id': new mongoose.Types.ObjectId(recData[0].userId)}, (userError, userData) => {
-          if (userError) {
-            callback(userError, null);
-          } else {
-            sendMailService.send(userData[0].email,
-              emailSubject,
-              'notify-recruiter.mail.html', data, callback);
-          }
-        });
+  updateRecruiterCandidates(recruiterCandidatesModel: RecruiterCandidatesModel) {
+    let recruiterCandidatesService = new RecruiterCandidatesService();
+    recruiterCandidatesService.update(recruiterCandidatesModel, (error: Error, result: RecruiterCandidatesModel) => {
+      if (error) {
+        this.loggerService.logErrorObj(error);
+        sharedService.mailToAdmin(error);
       }
     });
   }
@@ -357,7 +375,7 @@ class RecruiterService {
     let host = config.get('TplSeed.mail.host');
     let link = host + 'signin';
     let sendMailService = new SendMailService();
-    let data: Map<string, string> = new Map([['$jobmosisLink$',config.get('TplSeed.mail.host')],
+    let data: Map<string, string> = new Map([['$jobmosisLink$', config.get('TplSeed.mail.host')],
       ['$link$', link], ['$job_title$', field.jobTitle]]);
     sendMailService.send(user.email,
       Messages.EMAIL_SUBJECT_RECRUITER_CONTACTED_YOU + field.jobTitle,
@@ -367,7 +385,7 @@ class RecruiterService {
   mailOnRecruiterSignupToAdmin(recruiterBasicInfo: any, companyName: string, callback: (error: Error, result: SentMessageInfo) => void) {
     let link = config.get('TplSeed.mail.host') + 'signin';
 
-    let data: Map<string, string> = new Map([['$jobmosisLink$',config.get('TplSeed.mail.host')],
+    let data: Map<string, string> = new Map([['$jobmosisLink$', config.get('TplSeed.mail.host')],
       ['$company_name$', companyName], ['$email_id$', recruiterBasicInfo.email],
       ['$contact_number$', recruiterBasicInfo.mobile_number], ['$link$', link]]);
 
@@ -405,7 +423,7 @@ class RecruiterService {
               return;
             }
             let sendMailService = new SendMailService();
-            let data: Map<string, string> = new Map([['$jobmosisLink$',config.get('TplSeed.mail.host')],
+            let data: Map<string, string> = new Map([['$jobmosisLink$', config.get('TplSeed.mail.host')],
               ['$link$', link], ['$firstname$', candidate.first_name],
               ['$jobtitle$', job.jobTitle]]);
             sendMailService.send(recruiter.email,
@@ -443,14 +461,14 @@ class RecruiterService {
 
     if (action != 99999) {
       let usageTrackingService = new UsageTrackingService();
-      usageTrackingService.customCreate(String(updatedJob._doc.recruiterId),String(updatedJob._doc._id), '',
+      usageTrackingService.customCreate(String(updatedJob._doc.recruiterId), String(updatedJob._doc._id), '',
         action, (err) => {
-        if (err) {
-          callback(err);
-        } else {
-          callback(null);
-        }
-      });
+          if (err) {
+            callback(err);
+          } else {
+            callback(null);
+          }
+        });
     } else {
       callback(null);
     }

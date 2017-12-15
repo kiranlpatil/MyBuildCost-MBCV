@@ -14,7 +14,7 @@ export class ManageCandidatesService extends BaseService {
 
   getSummary(source: string, fromDate: string, toDate: string): Observable<any> {
     let url = API.RECRUITER + '/' + SessionStorageService.getSessionValue(SessionStorage.END_USER_ID) +
-      '/' + API.RECRUITERCANDIDATESSUMMARY + '?source=' + source + '&from=' + fromDate + '&to=' + toDate;
+      '/' + API.RECRUITER_CANDIDATES_SUMMARY + '?source=' + source + '&from=' + fromDate + '&to=' + toDate;
     return this.http.get(url)
       .map(this.extractData)
       .catch(this.handleError);
@@ -22,7 +22,7 @@ export class ManageCandidatesService extends BaseService {
 
   exportCandidatesDetails(source: string, fromDate: string, toDate: string): Observable<any> {
     let url = API.RECRUITER + '/' + SessionStorageService.getSessionValue(SessionStorage.END_USER_ID) +
-      '/' + API.EXPORTRECRUITERCANDIDATESSUMMARY + '?source=' + source + '&from=' + fromDate + '&to=' + toDate;
+      '/' + API.EXPORT_RECRUITER_CANDIDATES_SUMMARY + '?source=' + source + '&from=' + fromDate + '&to=' + toDate;
     return this.http.get(url)
       .map(this.extractData)
       .catch(this.handleError);

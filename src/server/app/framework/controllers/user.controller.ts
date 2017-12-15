@@ -40,7 +40,7 @@ export function login(req: express.Request, res: express.Response, next: any) {
               let auth = new AuthInterceptor();
               let token = auth.issueTokenWithUid(result[0]);
               if (result[0].isAdmin) {
-                adminController.sendLoginInfoToAdmin(result[0].email, req.connection.remoteAddress, params.latitude, params.longitude,next);
+                adminController.sendLoginInfoToAdmin(result[0].email, req.connection.remoteAddress, params.latitude, params.longitude, next);
                 res.status(200).send({
                   "status": Messages.STATUS_SUCCESS,
                   "data": {
@@ -60,7 +60,7 @@ export function login(req: express.Request, res: express.Response, next: any) {
                 if (result[0].isCandidate === false) {
                   let recruiterService = new RecruiterService();
 
-                  recruiterService.retrieve({"userId": result[0]._id}, (error : Error, recruiter : IRecruiter[]) => {
+                  recruiterService.retrieve({"userId": result[0]._id}, (error: Error, recruiter: IRecruiter[]) => {
                     if (error) {
                       next(error);
                     }
@@ -115,18 +115,14 @@ export function login(req: express.Request, res: express.Response, next: any) {
                       }
                       if (params.recruiterReferenceId) {
                         let candidateService = new CandidateService();
-                        candidateService.updateRecruitersMyCandidateList(candidate[0]._id,
+                        candidateService.updateToRecruiter(candidate[0]._id,
                           {
                             'first_name': result[0].first_name,
+                            'last_name': result[0].last_name,
                             'email': result[0].email,
                             'mobile_number': result[0].mobile_number,
                             'recruiterReferenceId': params.recruiterReferenceId,
                             'login': true
-                          },
-                          (err: Error, status: string) => {
-                            if (err) {
-                              next(error);
-                            }
                           });
                       }
                       res.status(200).send(data);
@@ -697,27 +693,28 @@ export function retrieve(req: express.Request, res: express.Response, next: any)
     let auth: AuthInterceptor = new AuthInterceptor();
 
     let token = auth.issueTokenWithUid(user);
-        res.send({
-          "status": "success",
-          "data": {
-            "first_name": user.first_name,
-            "last_name": user.last_name,
-            "email": user.email,
-            "mobile_number": user.mobile_number,
-            "picture": user.picture,
-            "social_profile_picture": user.social_profile_picture,
-            "_id": user.userId,
-            "current_theme": user.current_theme
-          },
-          access_token: token
-        });
-  }catch (e) {
+    res.send({
+      "status": "success",
+      "data": {
+        "first_name": user.first_name,
+        "last_name": user.last_name,
+        "email": user.email,
+        "mobile_number": user.mobile_number,
+        "picture": user.picture,
+        "social_profile_picture": user.social_profile_picture,
+        "_id": user.userId,
+        "current_theme": user.current_theme
+      },
+      access_token: token
+    });
+  } catch (e) {
     next({
       reason: e.message,
       message: e.message,
       stackTrace: new Error(),
       code: 403
-    });  }
+    });
+  }
 }
 export function resetPassword(req: express.Request, res: express.Response, next: any) {
   try {
@@ -1041,7 +1038,7 @@ export function verifyOtp(req: express.Request, res: express.Response, next: any
     let mailChimpMailerService = new MailChimpMailerService();
 
     let query = {"_id": user._id, "isActivated": false};
-    let updateData = {"isActivated": true, "activation_date" : new Date()};
+    let updateData = {"isActivated": true, "activation_date": new Date()};
     if (user.otp === params.otp) {
       userService.findOneAndUpdate(query, updateData, {new: true}, (error, result) => {
         if (error) {
@@ -1593,7 +1590,7 @@ export function updatePicture(req: express.Request, res: express.Response, next:
       let image_path = files.file[0].path;
       let originalFilename = JSON.stringify(image_path.substr(files.file[0].path.lastIndexOf('/') + 1));
       let userService = new UserService();
-      path=config.get('TplSeed.profilePathForClient')+originalFilename.replace(/"/g,'');
+      path = config.get('TplSeed.profilePathForClient') + originalFilename.replace(/"/g, '');
 
       userService.UploadImage(path, originalFilename, function (err: any, tempath: any) {
         if (err) {
@@ -1850,7 +1847,7 @@ export function getUserRegistrationStatus(req: express.Request, res: express.Res
       if (error) {
         next(error);
       } else {
-        let data: any = {'recruiterId': req.query.recruiterId, 'mobileNo': req.params.mobileNo};
+        let data: any = {'recruiterId': req.query.recruiterId, 'mobile_number': req.params.mobileNo};
         let recruiterService = new RecruiterService();
         recruiterService.notifyRecruiter(data, result, (error, notifyResponse) => {
           if (error) {
@@ -1889,84 +1886,84 @@ export function getUserDetails(req: express.Request, res: express.Response, next
         next(error);
       } else if (result.length > 0 && result[0].isActivated === true) {
         let token = auth.issueTokenWithUid(result[0]);
-        if(result[0].isAdmin){
-            //adminController.sendLoginInfoToAdmin(result[0].email, req.connection.remoteAddress, params.latitude, params.longitude,next);
-            res.status(200).send({
-              "status": Messages.STATUS_SUCCESS,
-              "data": {
-                "email": result[0].email,
-                "first_name": result[0].first_name,
-                "_id": result[0]._id,
-                "current_theme": result[0].current_theme,
-                "end_user_id": result[0]._id,
-                "picture": result[0].picture,
-                "mobile_number": result[0].mobile_number,
-                "isCandidate": result[0].isCandidate,
-                "isAdmin": result[0].isAdmin
-              },
-              access_token: token
+        if (result[0].isAdmin) {
+          //adminController.sendLoginInfoToAdmin(result[0].email, req.connection.remoteAddress, params.latitude, params.longitude,next);
+          res.status(200).send({
+            "status": Messages.STATUS_SUCCESS,
+            "data": {
+              "email": result[0].email,
+              "first_name": result[0].first_name,
+              "_id": result[0]._id,
+              "current_theme": result[0].current_theme,
+              "end_user_id": result[0]._id,
+              "picture": result[0].picture,
+              "mobile_number": result[0].mobile_number,
+              "isCandidate": result[0].isCandidate,
+              "isAdmin": result[0].isAdmin
+            },
+            access_token: token
+          });
+        }
+        else {
+          if (result[0].isCandidate === false) {
+            let recruiterService = new RecruiterService();
+            recruiterService.retrieve({"userId": result[0]._id}, (error: Error, recruiter: IRecruiter[]) => {
+              if (error) {
+                next(error);
+              }
+              else {
+                res.status(200).send({
+                  "status": Messages.STATUS_SUCCESS,
+                  "data": {
+                    "email": result[0].email,
+                    "_id": result[0]._id,
+                    "end_user_id": recruiter[0]._id,
+                    "current_theme": result[0].current_theme,
+                    "picture": result[0].picture,
+                    "company_headquarter_country": recruiter[0].company_headquarter_country,
+                    "company_name": recruiter[0].company_name,
+                    "setOfDocuments": recruiter[0].setOfDocuments,
+                    "company_size": recruiter[0].company_size,
+                    "isRecruitingForself": recruiter[0].isRecruitingForself,
+                    "mobile_number": result[0].mobile_number,
+                    "isCandidate": result[0].isCandidate,
+                    "isAdmin": result[0].isAdmin
+                  },
+                  access_token: token
+                });
+              }
             });
+          }
+          else {
+            let candidateService = new CandidateService();
+            candidateService.retrieve({"userId": result[0]._id}, (error, candidate) => {
+              if (error) {
+                next(error);
+              }
+              else {
+                res.status(200).send({
+                  "status": Messages.STATUS_SUCCESS,
+                  "data": {
+                    "first_name": result[0].first_name,
+                    "last_name": result[0].last_name,
+                    "email": result[0].email,
+                    "_id": result[0]._id,
+                    "end_user_id": candidate[0]._id,
+                    "current_theme": result[0].current_theme,
+                    "picture": result[0].picture,
+                    "mobile_number": result[0].mobile_number,
+                    "isCandidate": result[0].isCandidate,
+                    "isAdmin": result[0].isAdmin,
+                    "isCompleted": candidate[0].isCompleted,
+                    "isSubmitted": candidate[0].isSubmitted,
+                    "guide_tour": result[0].guide_tour
+                  },
+                  access_token: token
+                });
+              }
+            });
+          }
         }
-        else {
-        if (result[0].isCandidate === false) {
-          let recruiterService = new RecruiterService();
-          recruiterService.retrieve({"userId": result[0]._id}, (error: Error, recruiter: IRecruiter[]) => {
-            if (error) {
-              next(error);
-            }
-            else {
-              res.status(200).send({
-                "status": Messages.STATUS_SUCCESS,
-                "data": {
-                  "email": result[0].email,
-                  "_id": result[0]._id,
-                  "end_user_id": recruiter[0]._id,
-                  "current_theme": result[0].current_theme,
-                  "picture": result[0].picture,
-                  "company_headquarter_country": recruiter[0].company_headquarter_country,
-                  "company_name": recruiter[0].company_name,
-                  "setOfDocuments": recruiter[0].setOfDocuments,
-                  "company_size": recruiter[0].company_size,
-                  "isRecruitingForself": recruiter[0].isRecruitingForself,
-                  "mobile_number": result[0].mobile_number,
-                  "isCandidate": result[0].isCandidate,
-                  "isAdmin": result[0].isAdmin
-                },
-                access_token: token
-              });
-            }
-          });
-        }
-        else {
-          let candidateService = new CandidateService();
-          candidateService.retrieve({"userId": result[0]._id}, (error, candidate) => {
-            if (error) {
-              next(error);
-            }
-            else {
-              res.status(200).send({
-                "status": Messages.STATUS_SUCCESS,
-                "data": {
-                  "first_name": result[0].first_name,
-                  "last_name": result[0].last_name,
-                  "email": result[0].email,
-                  "_id": result[0]._id,
-                  "end_user_id": candidate[0]._id,
-                  "current_theme": result[0].current_theme,
-                  "picture": result[0].picture,
-                  "mobile_number": result[0].mobile_number,
-                  "isCandidate": result[0].isCandidate,
-                  "isAdmin": result[0].isAdmin,
-                  "isCompleted": candidate[0].isCompleted,
-                  "isSubmitted": candidate[0].isSubmitted,
-                  "guide_tour": result[0].guide_tour
-                },
-                access_token: token
-              });
-            }
-          });
-        }
-      }
       }
       else if (result.length > 0 && result[0].isActivated === false) {
         if (result[0].isCandidate === true) {
