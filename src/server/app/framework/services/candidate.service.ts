@@ -30,6 +30,7 @@ import SendMailService = require('./mailer.service');
 import ProjectAsset = require('../shared/projectasset');
 import RecruiterCandidatesModel = require("../dataaccess/model/recruiter-candidate.model");
 import LoggerService = require("../shared/logger/LoggerService");
+import UserService = require("./user.service");
 
 
 let bcrypt = require('bcrypt');
@@ -963,7 +964,8 @@ class CandidateService {
     this.recruiterRepository.populateRecruiterDetails(recruiterId, (error, recruiter) => {
       if (error) {
         this.loggerService.logErrorObj(error);
-        sharedService.mailToAdmin(error);
+        //sharedService.mailToAdmin(error);
+        this.sendMailOnError(error);
         return;
       }
       let config = require('config');
@@ -982,7 +984,8 @@ class CandidateService {
     sendMailService.send(email, message, template, data, (err: Error) => {
       if (err) {
         this.loggerService.logErrorObj(err);
-        sharedService.mailToAdmin(err);
+        //sharedService.mailToAdmin(err);
+        this.sendMailOnError(err);
       }
     });
   }
@@ -1006,7 +1009,8 @@ class CandidateService {
       (error: any, qcards: any[], userId: string) => {
         if (error) {
           this.loggerService.logErrorObj(error);
-          sharedService.mailToAdmin(error);
+          //sharedService.mailToAdmin(error);
+          this.sendMailOnError(error);
           return;
         }
         recruiterCandidatesModel.noOfMatchingJobs = qcards.length;
@@ -1023,12 +1027,22 @@ class CandidateService {
           (error: Error, recruiterCandidatesData: RecruiterCandidatesModel) => {
             if (error) {
               this.loggerService.logErrorObj(error);
-              sharedService.mailToAdmin(error);
+              //sharedService.mailToAdmin(error);
+              this.sendMailOnError(error);
             }
           });
 
       });
 
+  }
+
+  sendMailOnError(errorInfo: any) {
+    let userService = new UserService();
+    userService.sendMailOnError(errorInfo, (error:any, result:any) => {
+      if (error) {
+        this.loggerService.logErrorObj(error);
+      }
+    });
   }
 }
 

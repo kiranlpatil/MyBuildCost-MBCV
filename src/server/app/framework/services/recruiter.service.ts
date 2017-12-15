@@ -31,6 +31,7 @@ import ShareService = require('../share/services/share.service');
 import RecruiterCandidatesModel = require("../dataaccess/model/recruiter-candidate.model");
 import CandidateClassModel = require("../dataaccess/model/candidate-class.model");
 import LoggerService = require("../shared/logger/LoggerService");
+import UserService = require("./user.service");
 
 var bcrypt = require('bcrypt');
 
@@ -323,7 +324,8 @@ class RecruiterService {
       (recruiterErr, recData) => {
         if (recruiterErr) {
           this.loggerService.logErrorObj(recruiterErr);
-          sharedService.mailToAdmin(recruiterErr);
+          //sharedService.mailToAdmin(recruiterErr);
+          this.sendMailOnError(recruiterErr);
           return;
         }
 
@@ -338,7 +340,8 @@ class RecruiterService {
             (error: Error, candidate: any) => {
               if (error) {
                 this.loggerService.logErrorObj(error);
-                sharedService.mailToAdmin(error);
+                //sharedService.mailToAdmin(error);
+                this.sendMailOnError(error);
                 return;
               }
               recruiterCandidatesModel.name = result[0].first_name + ' ' + result[0].last_name;
@@ -355,7 +358,8 @@ class RecruiterService {
           this.userRepository.retrieve({'_id': new mongoose.Types.ObjectId(recData[0].userId)}, (userError, userData) => {
           if (userError) {
             this.loggerService.logErrorObj(userError);
-            sharedService.mailToAdmin(userError);
+            //sharedService.mailToAdmin(userError);
+            this.sendMailOnError(userError);
             return;
           }
           sendMailService.send(userData[0].email,
@@ -363,7 +367,8 @@ class RecruiterService {
             'notify-recruiter.mail.html', data, (emailError: Error, result: any) => {
               if (emailError) {
                 this.loggerService.logErrorObj(emailError);
-                sharedService.mailToAdmin(emailError);
+                //sharedService.mailToAdmin(emailError);
+                this.sendMailOnError(emailError);
               }
             });
         });
@@ -376,7 +381,8 @@ class RecruiterService {
     recruiterCandidatesService.update(recruiterCandidatesModel, (error: Error, result: RecruiterCandidatesModel) => {
       if (error) {
         this.loggerService.logErrorObj(error);
-        sharedService.mailToAdmin(error);
+        //sharedService.mailToAdmin(error);
+        this.sendMailOnError(error);
       }
     });
   }
@@ -474,6 +480,15 @@ class RecruiterService {
     } else {
       callback(null);
     }
+  }
+
+  sendMailOnError(errorInfo: any) {
+    let userService = new UserService();
+    userService.sendMailOnError(errorInfo, (error:any, result:any) => {
+      if (error) {
+        this.loggerService.logErrorObj(error);
+      }
+    });
   }
 
 }

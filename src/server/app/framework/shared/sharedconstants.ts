@@ -1,5 +1,5 @@
 export class ConstVariables {
-  public static LOWER_LIMIT_FOR_SEARCH_RESULT = 10;
+  public static LOWER_LIMIT_FOR_SEARCH_RESULT = 0;
   public static MAXIMUM_QCARD_FOR_SEARCH_RESULT_RESPONSE = 10;
   public static DIFFERENCE_IN_COMPLEXITY_SCENARIO = 10;
   public static JOB__EXPIRIY_PERIOD = 2592000000;
