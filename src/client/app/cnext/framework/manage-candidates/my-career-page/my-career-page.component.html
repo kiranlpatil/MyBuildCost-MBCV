@@ -1,16 +1,16 @@
 <div class="manage__candidates__date">
-    <ul>
-      <li>
-        <label> From</label>
+  <ul>
+    <li>
+      <label> From</label>
       <input type="date" [(ngModel)]="fromDate"
              (change)="loadSummary()"/>
-      </li>
-      <li>
-        <label> To</label>
+    </li>
+    <li>
+      <label> To</label>
       <input type="date" [(ngModel)]="toDate"
              (change)="loadSummary()"/>
-      </li>
-    </ul>
+    </li>
+  </ul>
   <span class="error-messages"
         *ngIf="inValidDates"> {{getMessages().MSG_ERROR_VALIDATION_DATES}} </span>
 </div>
@@ -18,19 +18,19 @@
   <div class="row">
     <div class="col-xs-10">
        <span>
-         Applied Candidates
+         Number of applicants from your company career page
        </span>
     </div>
     <div class="col-xs-2">
       <span>
-         {{summary.applied}}
+         {{summary.total}}
        </span>
     </div>
   </div>
   <div class="row">
     <div class="col-xs-10">
       <span>
-         Registered Candidates
+         Number of applicants with OTP verification completion
        </span>
     </div>
     <div class="col-xs-2">
@@ -42,7 +42,7 @@
   <div class="row">
     <div class="col-xs-10">
       <span>
-         Candidates Who Submitted Their Profile
+         Number of applicants with successful profile submission
        </span>
     </div>
     <div class="col-xs-2">
@@ -54,7 +54,7 @@
   <div class="row">
     <div class="col-xs-10">
       <span>
-         Existing Users
+         Number of existing applicants from JobMosis
        </span>
     </div>
     <div class="col-xs-2">
@@ -63,21 +63,8 @@
        </span>
     </div>
   </div>
-  <div class="row">
-    <div class="col-xs-10">
-      <span>
-         Total Candidates Visited
-       </span>
-    </div>
-    <div class="col-xs-2">
-      <span>
-         {{summary.total}}
-       </span>
-    </div>
-  </div>
 </div>
 <div *ngIf="fromDate != '' && toDate != '' && summary.total == 0 && !inValidDates">
-  {{getMessages().NO_CANDIDATES_TO_LIST}}</div>
-<a class="manage__candidates__export__btn" href="" hidden>
-  {{getButtons().EXPORT}}
-</a>
+  {{getMessages().NO_CANDIDATES_TO_LIST}}
+</div>
+<button *ngIf="summary.total > 0" class="btn btn-primary" (click)="exportSummary()">Export</button>

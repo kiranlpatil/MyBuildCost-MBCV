@@ -1,6 +1,6 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AppSettings, SessionStorage } from '../../../../shared/constants';
+import {AppSettings, Label, SessionStorage} from '../../../../shared/constants';
 import { SessionStorageService } from '../../../../shared/services/session.service';
 import { CandidateCompareService } from './candidate-compare-view.service';
 import { RecruiterDashboardService } from '../../recruiter-dashboard/recruiter-dashboard.service';
@@ -71,5 +71,8 @@ export class CandidateCompareViewComponent implements OnInit, OnChanges {
     return null;
   }
 
+  getLabel() {
+    return Label;
+  }
 
 }

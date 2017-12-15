@@ -93,6 +93,12 @@
 
 .username {
   cursor: pointer;
+  color: $theme-color !important;
+}
+
+.inactive_recruiter {
+  color: $gray !important;
+  cursor: not-allowed;
 }
 
 .activated {

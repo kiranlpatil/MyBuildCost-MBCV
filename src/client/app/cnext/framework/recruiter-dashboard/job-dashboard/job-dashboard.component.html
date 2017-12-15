@@ -7,7 +7,7 @@
 </div>
 <div class="container-fluid profile-wrapper">
   <div class="candidate-listing">
-    <cn-filter (changeFilter)="changeFilter($event)" [hidden]="whichListVisible[4]" [selectedJob]="selectedJobProfile" [role]=true></cn-filter>
+    <cn-filter (changeFilter)="changeFilter($event)" [hidden]="whichListVisible[4]" [selectedJob]="selectedJobProfile" [filterMasterData]= "filterMasterData" [role]=true *ngIf="isShowJobFilter"></cn-filter>
     <div class="col-sm-12 no-padding">
       <div class="list-view" *ngIf="selectedJobProfile!=undefined">
         <div class="panel clearfix">
@@ -40,7 +40,7 @@
               </li>
               <li *ngIf="isRecruitingForSelf" class="contact-info"
                   title="Hiring Manager: {{selectedJobProfile.hiringManager}}">
-                <label>Hiring Manager</label>
+                <label>{{getLabel().REQUIRMENT_OWNER}}</label>
                 <p>{{selectedJobProfile.hiringManager}}</p>
               </li>
               <li *ngIf="!isRecruitingForSelf" class="contact-info"
@@ -97,7 +97,8 @@
     <div id="matched-job" class="tab-pane fade in active "  *ngIf="selectedJobProfile!=undefined">
       <cn-q-card-view (addForCompare)="addForCompare($event)" [progress_bar_color]="'#7264b5'"
                       (addedTocart)="AddedToCart($event)"
-                      (changeSorting)="changeSorting($event)"
+                      (updateShortlisted)="updateShortlisted($event)"
+                      (removeToShortlisted)="removeToShortlisted($event)"
                       *ngIf="whichListVisible[0]" [candidateQlist]="candidateQlist"
                       [filterMeta]="filterMeta"
                       [candidates]="candidateQlist.matchedCandidates" [type]="'matchedList'" [jobId]="jobId"

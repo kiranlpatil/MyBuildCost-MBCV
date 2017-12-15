@@ -21,10 +21,10 @@
       <div class="panel clearfix" (click)="viewProfile(item)">
         <ul>
           <li *ngIf="type=='matchedList'">
-            <span class="shortlist-icon" *ngIf="emailsOfShrortListedCandidates.indexOf(item.email)==-1"
+            <span class="shortlist-icon" *ngIf="emailsOfShrortListedCandidates.indexOf(item._id)==-1"
                   (click)="addRemoveToShortList(item)" title="Shortlist the candidate"></span>
             <span class="active-shortlist-icon"
-                  *ngIf="emailsOfShrortListedCandidates.indexOf(item.email)!=-1"
+                  *ngIf="emailsOfShrortListedCandidates.indexOf(item._id)!=-1"
                   (click)="addRemoveToShortList(item)" title="Remove candidate from shortlisted"></span>
           </li>
           <li *ngIf="type=='cartListed' || type=='rejectedList'">

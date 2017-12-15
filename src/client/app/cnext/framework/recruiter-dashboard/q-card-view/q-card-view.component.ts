@@ -45,6 +45,7 @@ export class QCardviewComponent implements OnChanges, OnInit {
   @Output() changeSorting: EventEmitter<ESort> = new EventEmitter<ESort>();
   @Input() progress_bar_color: string = '#0d75fa';
   @Output() addForCompare: EventEmitter<any> = new EventEmitter<any>();
+  @Output() updateShortlisted: EventEmitter<any> = new EventEmitter<any>();
   public qCardModel: QCardsortBy = new QCardsortBy();
   public totalQCardMatches = {count: 0};
   public qCardCount = {count: 0};
@@ -87,8 +88,8 @@ export class QCardviewComponent implements OnChanges, OnInit {
     if (changes.candidateQlist && changes.candidateQlist.currentValue) {
       if (changes.candidateQlist.currentValue.shortListedCandidates) {
         this.emailsOfShrortListedCandidates = new Array(0);
-        for (let candidate of changes.candidateQlist.currentValue.shortListedCandidates) {
-          this.emailsOfShrortListedCandidates.push(candidate.email);
+        for (let id of changes.candidateQlist.currentValue.shortListedCandidates) {
+          this.emailsOfShrortListedCandidates.push(id);
         }
       }
     }
@@ -257,15 +258,16 @@ export class QCardviewComponent implements OnChanges, OnInit {
   addRemoveToShortList(candidate: CandidateQCard) {
     this.isShortlistedclicked = true;
     let action: string;
-    (this.emailsOfShrortListedCandidates.indexOf(candidate.email) !== -1) ? action = 'remove' : action = 'add';
+    (this.emailsOfShrortListedCandidates.indexOf(candidate._id) !== -1) ? action = 'remove' : action = 'add';
     if (action === 'add') {
-      this.emailsOfShrortListedCandidates.push(candidate.email);
+      this.emailsOfShrortListedCandidates.push(candidate._id);
     } else {
-      this.emailsOfShrortListedCandidates.splice(this.emailsOfShrortListedCandidates.indexOf(candidate.email), 1);
+      this.emailsOfShrortListedCandidates.splice(this.emailsOfShrortListedCandidates.indexOf(candidate._id), 1);
     }
     this.qCardViewService.updateCandidateLists(this.jobId, candidate._id, ValueConstant.SHORT_LISTED_CANDIDATE, action).subscribe(
       data => {
         this.updateCountModel(data.data);
+        this.updateShortlisted.emit(candidate._id);
       }, error => this.errorService.onError(error)
     );
   }

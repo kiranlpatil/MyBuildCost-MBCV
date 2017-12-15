@@ -28,3 +28,9 @@
     font-size: 12px;
   }
 }
+
+#education,
+#experience {
+    max-height: 160px;
+    overflow-y: auto;
+}

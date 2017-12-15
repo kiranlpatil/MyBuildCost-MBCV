@@ -39,7 +39,7 @@ export class RecruiterDashboardService extends BaseService {
   }
 
   getCandidatesOfLists(Id: string, listname: string): Observable<any> {
-    let url: string = API.CANDIDATESFROMLISTS + '/' + Id + '/' + 'list' + '/' + listname;
+    let url: string = API.CANDIDATES_FROM_LISTS + '/' + Id + '/' + 'list' + '/' + listname;
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({headers: headers});
     return this.http.get(url, options)

@@ -1,5 +1,7 @@
+import EducationForJobModel = require('./education-for-job.model');
+
 export class ProfileComparisonJobModel {
-  
+
   joiningPeriod:string;
   salaryMinValue: string;
   salaryMaxValue: string;
@@ -13,4 +15,5 @@ export class ProfileComparisonJobModel {
   industryName:string;
   interestedIndustries:string[];
   proficiencies:string[];
+  educationForJob: EducationForJobModel[];
 }

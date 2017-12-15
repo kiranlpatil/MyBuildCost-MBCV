@@ -8,6 +8,8 @@ export class QCardFilter {
   proficiencies: string[] = new Array(0);
   education: string[] = new Array(0);
   interestedIndustries: string[] = new Array(0);
+  academics: string[] = new Array(0);
+  specialization: string[] = new Array(0);
   joinTime: string;
   location: string;
   companySize: string;

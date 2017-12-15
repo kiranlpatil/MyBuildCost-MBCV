@@ -58,7 +58,9 @@ export class JobDashboardComponent implements OnInit, OnChanges {
   private emptyCartMessage: string = Tooltip.EMPTY_CART_MESSAGE;
   private emptyRejectedList: string = Tooltip.EMPTY_REJECTED_LIST_MESSAGE;
   isJobCloseButtonClicked:boolean;
+  isShowJobFilter:boolean = false;
   addForCompareView: any;
+  filterMasterData: any;
 
 
   constructor(private activatedRoute: ActivatedRoute,
@@ -111,6 +113,8 @@ export class JobDashboardComponent implements OnInit, OnChanges {
               this.recruiterJobView.numberOfCandidatesInCart = item.ids.length;
             if (item.name === ValueConstant.REJECTED_LISTED_CANDIDATE)
               this.recruiterJobView.numberOfCandidatesrejected = item.ids.length;
+            if (item.name === ValueConstant.SHORT_LISTED_CANDIDATE)
+              this.candidateQlist.shortListedCandidates = item.ids;
           }
         }, error => this.errorService.onError(error));
   }
@@ -118,7 +122,11 @@ export class JobDashboardComponent implements OnInit, OnChanges {
   getMatchingProfiles() {
     /* this.qcardFilterService.clearFilter();*/
    /*this.listName = ValueConstant.MATCHED_CANDIDATE*/
-    this.listName = EList.CAN_MATCHED;
+    for (let item of this.selectedJobProfile.candidate_list) {
+      if (item.name === ValueConstant.SHORT_LISTED_CANDIDATE)
+        this.candidateQlist.shortListedCandidates = item.ids;
+    }
+        this.listName = EList.CAN_MATCHED;
     for (let i = 0; i < this.whichListVisible.length; i++) {
       this.whichListVisible[i] = false;
     }
@@ -133,6 +141,7 @@ export class JobDashboardComponent implements OnInit, OnChanges {
     this.jobDashboardService.getSearchedcandidate(this.jobId, this.appliedFilters)
       .subscribe(
         (data: any) => {
+          this.getMasterListForFilter();
           this.jobDashboardService.getSelectedListData(this.jobId, EList.CAN_SHORT_LIST, this.appliedFilters)
             .subscribe(
               (listdata: any) => {
@@ -147,14 +156,33 @@ export class JobDashboardComponent implements OnInit, OnChanges {
     window.scrollTo(0, 0);
   }
 
+  getMasterListForFilter() {
+    this.jobDashboardService.getMasterListForFilter(this.jobId, this.appliedFilters)
+      .subscribe(
+        (data: any) => {
+          this.filterMasterData = data;
+          this.isShowJobFilter  = true;
+        }, error => this.errorService.onError(error));
+  }
+
   AddedToCart(event: any) {
     if (event === true)
       this.headerInfo.totalNumberOfCandidateInCart += 1;
     if (event === false)
       this.headerInfo.totalNumberOfCandidateInCart -= 1;
   }
-
-
+  updateShortlisted(event:string) {debugger
+    for (let item of this.selectedJobProfile.candidate_list) {
+      if (item.name === ValueConstant.SHORT_LISTED_CANDIDATE) {
+        let index=this.selectedJobProfile.candidate_list.indexOf(item);
+        if(this.selectedJobProfile.candidate_list[index].ids.indexOf(event)!==-1) {
+          this.selectedJobProfile.candidate_list[index].ids.splice(this.selectedJobProfile.candidate_list[index].ids.indexOf(event), 1);
+        }else {
+          this.selectedJobProfile.candidate_list[index].ids.push(event);
+        }
+      }
+    }
+  }
   getSelectedListData(listName: EList, isFromFilter: boolean) {
 
     /* this.qcardFilterService.clearFilter();*/

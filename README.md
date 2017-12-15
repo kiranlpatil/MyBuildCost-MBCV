@@ -462,13 +462,19 @@ $ src/redis-server
     - Update Script
    
    //script to create the indexes on table 
-   db.getCollection('candidates').createIndex({'professionalDetails.experience':-1})
-   db.getCollection('candidates').createIndex({'professionalDetails.currentSalary':1})
-   db.getCollection('candidates').createIndex({'location.city':1})
-   db.getCollection('candidates').createIndex({'proficiencies':1})
-   db.getCollection('candidates').createIndex({'industry.name':1})
-   db.getCollection('users').createIndex({'email':1})
-   db.getCollection('jobprofiles').createIndex({'recruiterId':1})
+   db.getCollection('candidates').createIndex({'professionalDetails.experience':-1}) //for experience sort
+   db.getCollection('candidates').createIndex({'professionalDetails.currentSalary':1}) //for salary sort
+   db.getCollection('candidates').createIndex({'location.city':1}) //for search of candidate
+   db.getCollection('candidates').createIndex({'proficiencies':1}) //for search of candidate
+   db.getCollection('candidates').createIndex({'industry.name':1}) //for search of candidate
+   db.getCollection('users').createIndex({'email':1})  // for login 
+   db.getCollection('jobprofiles').createIndex({'recruiterId':1}) //for recruiter dashboard
+   db.getCollection('jobprofiles').createIndex({'salaryMaxValue': -1}) //for salary filter
+   db.getCollection('jobprofiles').createIndex({'experienceMinValue': 1}) //for min experience
+   db.getCollection('jobprofiles').createIndex({'location.city':1}) // for search job
+   db.getCollection('jobprofiles').createIndex({'proficiencies':1}) //for search job
+   db.getCollection('jobprofiles').createIndex({'industry.name':1}) //for search job
+   db.getCollection('industries').createIndex({'name':1})   // for industry 
    
  
  //Script for performance branch to seperate the postedjobs from recruiter
@@ -518,6 +524,16 @@ $ src/redis-server
   //indexes for new collection
     db.getCollection('recruiter-candidates').createIndex({'recruiterId':1})
     db.getCollection('recruiter-candidates').createIndex({'recruiterId':1,'source':1})
+    
+    
+   - Version : 1.1.6
+    - Date : 15 dec 2017
+    - Update Script for status change 'Logged In' 
+    - Update Script
+    
+  //Update Script for status change 'Logged In' 
+  db.getCollection('recruiter-candidates').update({'status' : 'Logged In'},
+  {$set:{"status" : "Existing"}},{ multi: true });
    
   
 #Jobmosis Career_plugin 

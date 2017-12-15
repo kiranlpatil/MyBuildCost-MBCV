@@ -14,7 +14,7 @@
         <div class="details clearfix" *ngFor="let postedJob of recruiter.postedJobs">
           <label class="first-label">Job Title </label>
           <span>{{postedJob.jobTitle}}</span>
-          <label>Hiring Manager</label>
+          <label>{{getLabel().REQUIRMENT_OWNER}}</label>
           <span>{{postedJob.hiringManager}}</span>
           <label>Department</label>
           <span>{{postedJob.department}}</span>

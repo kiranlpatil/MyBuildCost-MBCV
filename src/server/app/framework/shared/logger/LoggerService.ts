@@ -21,6 +21,11 @@ class LoggerService {
 
   }
 
+  logErrorObj(error:Error) {
+    this.logger.error(error.toString());
+
+  }
+
   logDebug(statement:string) {
     this.logger.debug(statement);
 

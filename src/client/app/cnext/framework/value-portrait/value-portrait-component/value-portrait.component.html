@@ -137,8 +137,9 @@
         <b *ngFor="let proficiency of candidate.proficiencies;let i=index">{{proficiency}}<small
           *ngIf="candidate.proficiencies.length -1 != i">,</small>
         </b>
+        <b *ngIf="candidate.proficiencies.length == 0">{{getLabel().NONE}}</b>
       </span>
-      <div class="tooltip-content4">
+      <div class="tooltip-content4" *ngIf="candidate.proficiencies.length !== 0">
         <b *ngFor="let proficiency of candidate.proficiencies;let i=index">
           <b>{{proficiency}}</b>
           <small *ngIf="candidate.proficiencies.length -1 != i">,&nbsp;</small>

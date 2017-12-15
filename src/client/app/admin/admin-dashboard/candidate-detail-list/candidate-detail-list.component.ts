@@ -107,10 +107,12 @@ export class CandidateDetailListComponent implements OnInit {
         error => this.errorService.onError(error));
   }
 
-  openCandidateDashboard(userId: any) {
-    let token = SessionStorageService.getSessionValue(SessionStorage.ACCESS_TOKEN);
-    let url = AppSettings.IP + '/usercontainer?token='+token+'&'+'userid='+userId;
-    window.open(url, '_blank');
+  openCandidateDashboard(candidate: any) {
+    if(candidate.isActivated) {
+      let token = SessionStorageService.getSessionValue(SessionStorage.ACCESS_TOKEN);
+      let url = AppSettings.IP + '/usercontainer?token='+token+'&'+'userid='+candidate.data.userId;
+      window.open(url, '_blank');
+    }
   }
 }
 

@@ -1,6 +1,7 @@
-import {Industry} from "./industry";
-import {JobLocation} from "./job-location";
-import {CandidatesInDiffList} from "./candidatesinDiffList";
+import { Industry } from './industry';
+import { JobLocation } from './job-location';
+import { CandidatesInDiffList } from './candidatesinDiffList';
+import { EducationForJob } from './education-for-job';
 export class JobPosterModel {
   _id: string;
   recruiterId: string;
@@ -38,4 +39,5 @@ export class JobPosterModel {
   isJobPostClosed: boolean;
   jobCloseReason: number;
   isJobPostRenew: boolean;
+  educationForJob: EducationForJob[] = new Array(0);
 }

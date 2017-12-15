@@ -40,15 +40,16 @@ import {AdminDashboardHeaderComponent} from "./admin-dashboard-header/admin-dash
 import { OtpVerificationComponent} from './otp-verification/otp-verification.component';
 import { OtpVerificationService} from './otp-verification/otp-verification.service';
 import { LoginauthGuard } from './login/login-auth-guard.service';
+import {JobEducationComponent} from "../cnext/framework/job-education-information/job-education-information.component";
 
 @NgModule({
   imports: [CommonModule, FormsModule, ReactiveFormsModule, SharedModule, /*TODO Abhijeet Ng2AutoCompleteModule,*/ UserRoutingModule],
   declarations: [UserHeaderComponent, LoginComponent, ResetPasswordComponent, ForgotPasswordComponent,
     CandidateSignUpComponent, CandidateSignUpVerificationComponent,OtpVerificationComponent, UserVerificationComponent, RecruiterSignUpComponent,
-    CompanyDetailsComponent, ProfilePictureComponent, ChangePasswordComponent, ActivateEmailComponent,
+    CompanyDetailsComponent, JobEducationComponent,ProfilePictureComponent, ChangePasswordComponent, ActivateEmailComponent,
     ChangeEmailComponent, ChangeMobileComponent, UserProfileComponent, CandidateDashboardHeaderComponent,
     CandidateHeaderComponent, RecruiterSharedHeaderComponent, SettingsComponent, AdminDashboardHeaderComponent],
-  exports: [UserHeaderComponent, LoginComponent, ResetPasswordComponent,OtpVerificationComponent, ForgotPasswordComponent,
+  exports: [UserHeaderComponent,JobEducationComponent, LoginComponent, ResetPasswordComponent,OtpVerificationComponent, ForgotPasswordComponent,
     CandidateSignUpComponent, CandidateSignUpVerificationComponent, UserVerificationComponent, RecruiterSignUpComponent,
     CompanyDetailsComponent, ProfilePictureComponent, ChangePasswordComponent, ActivateEmailComponent,
     ChangeEmailComponent, ChangeMobileComponent, UserProfileComponent, CandidateDashboardHeaderComponent,

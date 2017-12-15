@@ -28,8 +28,6 @@ export class KeySkillsDetailListComponent {
       .subscribe(
         data => {
           this.loaderService.stop();
-          console.log("path: " + data.path);
-          console.log("1: " + AppSettings.IP + data.path);
           window.open(AppSettings.IP + data.path,'_self');
           this.messageService.message(new Message(Messages.MSG_SUCCESS_FOR_FILE_DOWNLOAD));
           },

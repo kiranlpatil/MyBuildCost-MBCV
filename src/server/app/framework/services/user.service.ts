@@ -328,7 +328,7 @@ class UserService {
   }
 
   getUserRegistrationStatus(query: any, callback: (error: any, result: any) => void) {
-    this.userRepository.retrieveWithIncluded(query, {'email': 1, '_id': 1}, callback);
+    this.userRepository.retrieveWithIncluded(query, {}, callback);
   }
 
 }

@@ -253,8 +253,8 @@ export function cloneJob(req: express.Request, res: express.Response, next: any)
         let oldId: any = originalJob._id;
         let newJob: any = originalJob;
         delete newJob["_id"];
-        console.log('-----------------------newJob._id---------------------', newJob._id);
         newJob.jobTitle = newJobTitle;
+        newJob.education='';
         newJob.isJobPosted = false;
         newJob.isJobShared = false;
         newJob.sharedLink = '';

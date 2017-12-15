@@ -76,6 +76,15 @@ export class CandidateSearchEngine extends SearchEngine {
         $lte: Number(filter.maxExperience)
       };
     }
+    if (filter.academics && filter.academics.length > 0) {
+      criteria['academics'] = {$elemMatch: {educationDegree: filter.academics}};
+    }
+    if (filter.specialization && filter.specialization.length > 0) {
+      criteria['academics'] = {$elemMatch: {specialization: filter.specialization}};
+      if (filter.academics && filter.academics.length > 0) {
+        criteria['academics'] = {$elemMatch: {educationDegree: filter.academics,specialization: filter.specialization}};
+      }
+    }
     return criteria;
   }
 
@@ -99,11 +108,19 @@ export class CandidateSearchEngine extends SearchEngine {
     return sortingQuery;
   }
 
-  getRequiredFieldNames() {
-    let included_fields = {
-      '_id': 1,
-      'capability_matrix': 1
-    };
+  getRequiredFieldNames(appliedFilters: AppliedFilter) {
+    let included_fields: any;
+    if(appliedFilters.isMasterData) {
+      included_fields = {
+        'academics': 1,
+        'proficiencies': 1
+      };
+    } else {
+      included_fields = {
+        '_id': 1,
+        'capability_matrix': 1
+      };
+    }
     return included_fields;
   }
 
