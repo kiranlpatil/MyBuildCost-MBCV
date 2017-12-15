@@ -1,8 +1,13 @@
 import {Component, OnInit, Output, EventEmitter} from "@angular/core";
 import {ActivatedRoute, Router} from "@angular/router";
-import {Button, Label, SessionStorage} from "../../../shared/constants";
+import {Button, Label, SessionStorage, LocalStorage} from "../../../shared/constants";
 import {SessionStorageService} from "../../../shared/services/session.service";
 import {ActionOnQCardService} from "../../../user/services/action-on-q-card.service";
+import {LocalStorageService} from "../../../shared/services/localstorage.service";
+import {RegistrationService} from "../../../user/services/registration.service";
+import {LoginService} from "../../../user/login/login.service";
+import {ThemeChangeService} from "../../../shared/services/themechange.service";
+import {ErrorService} from "../../../shared/services/error.service";
 
 
 @Component({
@@ -26,7 +31,8 @@ export class ValuePortraitContainerComponent implements OnInit {
   candidateId:string;
   type:string;
   constructor(private _router:Router, private activatedRoute:ActivatedRoute,
-  private actionOnQCardService: ActionOnQCardService) {
+  private actionOnQCardService: ActionOnQCardService, private loginService: LoginService,
+              private errorService: ErrorService) {
     if (SessionStorageService.getSessionValue(SessionStorage.IS_CANDIDATE) === 'true') {
       this.isCandidate = true;
       this.candidateName = SessionStorageService.getSessionValue(SessionStorage.FIRST_NAME)+' '+ SessionStorageService.getSessionValue(SessionStorage.LAST_NAME);
@@ -61,7 +67,7 @@ export class ValuePortraitContainerComponent implements OnInit {
 
   }
 
-  ngOnInit() {
+  ngOnInit() {debugger
     this.activatedRoute.params.subscribe(params => {
       this._userId = params['id'];
       this.isFromCreate=false;
@@ -86,6 +92,12 @@ export class ValuePortraitContainerComponent implements OnInit {
       }
     });
 
+    if(LocalStorageService.getLocalValue(LocalStorage.ACCESS_TOKEN)) {
+      if(this.isFromRecruiterJob && this.type === undefined) {
+        this.getUserData();
+      }
+    }
+
   }
 
   routeToSignUpPage() {
@@ -102,6 +114,28 @@ export class ValuePortraitContainerComponent implements OnInit {
 
   updateCanidateId(value:string) {
     this.candidateId = value;
+  }
+
+  getUserData() {
+    this.loginService.getUserData()
+      .subscribe(
+        data => {
+          this.onSuccess(data);
+        }, error => { this.errorService.onError(error)}
+      );
+  }
+
+  onSuccess(res: any) {
+    SessionStorageService.setSessionValue(SessionStorage.IS_CANDIDATE, res.data.isCandidate);
+    SessionStorageService.setSessionValue(SessionStorage.IS_CANDIDATE_FILLED, res.data.isCompleted);
+    SessionStorageService.setSessionValue(SessionStorage.IS_CANDIDATE_SUBMITTED, res.data.isSubmitted);
+    SessionStorageService.setSessionValue(SessionStorage.END_USER_ID, res.data.end_user_id);
+    SessionStorageService.setSessionValue(SessionStorage.EMAIL_ID, res.data.email);
+    SessionStorageService.setSessionValue(SessionStorage.MOBILE_NUMBER, res.data.mobile_number);
+    SessionStorageService.setSessionValue(SessionStorage.FIRST_NAME, res.data.first_name);
+    SessionStorageService.setSessionValue(SessionStorage.LAST_NAME, res.data.last_name);
+    SessionStorageService.setSessionValue(SessionStorage.PASSWORD, '');
+    SessionStorageService.setSessionValue(SessionStorage.IS_LOGGED_IN, 1);
   }
 
 }

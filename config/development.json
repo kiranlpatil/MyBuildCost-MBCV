@@ -15,7 +15,8 @@
       "jobDetailsCSV": "job-details.csv",
       "companyAccountDetailsCSV": "company-account-details.csv",
       "usageTrackingCSV": "usage-tracking.csv",
-      "masterKeySkillsCSV": "master-key-skills.csv"
+      "masterKeySkillsCSV": "master-key-skills.csv",
+      "recruiterCandidatesCSV": "my-candidates-detail.csv"
     },
     "exportFilePathServer": "/src/server/public/exported-files/",
     "downloadFilePathClient": "/public/exported-files/",

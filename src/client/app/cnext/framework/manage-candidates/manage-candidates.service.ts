@@ -9,12 +9,20 @@ import {Observable} from "rxjs";
 export class ManageCandidatesService extends BaseService {
 
   constructor(private http: Http) {
-      super();
+    super();
   }
 
-  getMyCareerPageSummary(fromDate: string, toDate: string):Observable<any> {
+  getSummary(source: string, fromDate: string, toDate: string): Observable<any> {
     let url = API.RECRUITER + '/' + SessionStorageService.getSessionValue(SessionStorage.END_USER_ID) +
-      '/' + API.RECRUITERCANDIDATESSUMMARY + '?from=' + fromDate + '&to=' + toDate;
+      '/' + API.RECRUITER_CANDIDATES_SUMMARY + '?source=' + source + '&from=' + fromDate + '&to=' + toDate;
+    return this.http.get(url)
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
+
+  exportCandidatesDetails(source: string, fromDate: string, toDate: string): Observable<any> {
+    let url = API.RECRUITER + '/' + SessionStorageService.getSessionValue(SessionStorage.END_USER_ID) +
+      '/' + API.EXPORT_RECRUITER_CANDIDATES_SUMMARY + '?source=' + source + '&from=' + fromDate + '&to=' + toDate;
     return this.http.get(url)
       .map(this.extractData)
       .catch(this.handleError);

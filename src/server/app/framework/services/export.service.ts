@@ -1,6 +1,7 @@
 import {ChildProcess} from "child_process";
 import {Readable} from "stream";
 import ExportModel = require("../dataaccess/model/export.model");
+import RecruiterCandidatesModel = require("../dataaccess/model/recruiter-candidate.model");
 let path = require('path');
 let config = require('config');
 let spawn = require('child_process').spawn;
@@ -222,7 +223,7 @@ class ExportService {
         callback(err, null);
         return;
       } else {
-        let exportModel: ExportModel = new  ExportModel();
+        let exportModel: ExportModel = new ExportModel();
         exportModel.companyDetailsCSV = companyDetailsFilePath;
         exportService.exportJobDetails((exportJobsErr, jobDetailsFilePath) => {
           if (exportJobsErr) {
@@ -244,6 +245,33 @@ class ExportService {
         });
       }
     });
+  }
+
+  exportRecruiterCandidates(recruiterCandidatesModel: RecruiterCandidatesModel, callback: (err: Error, filePath: string) => void) {
+    let newDate = new Date(recruiterCandidatesModel.toDate);
+    newDate.setDate(newDate.getDate() + 1); //To get records of current date and for same from and to date
+
+    let fields = 'recruiterId,source,candidateId,name,mobileNumber,email,status,noOfMatchingJobs,' +
+      'highestMatchingJobPercentage,jobTitle,statusUpdatedOn';
+
+    let downloadLocation = path.resolve() + config.get('TplSeed.exportFilePathServer')
+      + config.get('TplSeed.exportFileNames.recruiterCandidatesCSV');
+
+    let query = '{"source": "' + recruiterCandidatesModel.source + '","recruiterId": ObjectId("' +
+      recruiterCandidatesModel.recruiterId + '"), "statusUpdatedOn" : ' +
+      '{"$gte" : {"$date" : "' + new Date(recruiterCandidatesModel.fromDate).toISOString() + '"}, ' +
+      '"$lte": {"$date": "' + newDate.toISOString() + '"}}}';
+
+    this.exportCollection("recruiter-candidates", fields, downloadLocation, query, (error: Error, status: string) => {
+      if (error) {
+        callback(error, null);
+        return;
+      } else {
+        callback(null, config.get('TplSeed.downloadFilePathClient')
+          + config.get('TplSeed.exportFileNames.recruiterCandidatesCSV'));
+      }
+    });
+
   }
 
 }

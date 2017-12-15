@@ -528,14 +528,15 @@ export class API {
   public static JOB_DETAILS = 'recruiter/jobProfile';
   public static SHORTLIST_CANDIDATE = 'shortlistedcandidate';
   public static CANDIDATE_DETAILS = 'recruiter/jobProfile';
-  public static CANDIDATESFROMLISTS = 'recruiter/jobProfile';
+  public static CANDIDATES_FROM_LISTS = 'recruiter/jobProfile';
   public static RElEVENT_INDUSTRIES = 'releventindustries';
   public static JOB = 'job';
   public static FAQ = '/blog/index.php/faq/';
   public static ACCEPT_TERMS = '/terms-and-conditions.php';
   public static COUNT_OF_USERS = 'countofusers';
   public static FEEDBACK_QUESTIONS = 'userFeedback';
-  public static RECRUITERCANDIDATESSUMMARY = 'recruiterCandidatesSummary';
+  public static RECRUITER_CANDIDATES_SUMMARY = 'recruiterCandidatesSummary';
+  public static EXPORT_RECRUITER_CANDIDATES_SUMMARY = 'exportRecruiterCandidatesSummary';
   public static RECRUITER = 'recruiter';
 
 }
@@ -795,7 +796,7 @@ export class Label {
   public static IN_LAKH: string = '(In Lakh)';
   public static YEARS: string = '(Years)';
   public static NONE: string = 'None';
-  public static REMENBER_ME: string = 'Remember me';
+  public static REMEMBER_ME: string = 'Remember me';
 }
 
 export class Button {

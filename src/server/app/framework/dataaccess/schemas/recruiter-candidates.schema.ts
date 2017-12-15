@@ -10,11 +10,21 @@ class RecruiterCandidatesSchema {
         type: mongoose.Schema.Types.ObjectId, ref: 'Recruiter',
         required: true
       },
+      source: {
+        type: String,
+        required: true
+      },
       candidateId: {
         type: mongoose.Schema.Types.ObjectId, ref: 'Candidate'
       },
+      name: {
+        type: String
+      },
       mobileNumber: {
         type: Number
+      },
+      email: {
+        type: String
       },
       status: {
         type: String
@@ -22,9 +32,11 @@ class RecruiterCandidatesSchema {
       noOfMatchingJobs: {
         type: Number
       },
-      source: {
-        type: String,
-        required: true
+      highestMatchingJobPercentage: {
+        type: Number
+      },
+      jobTitle: {
+        type: String
       },
       statusUpdatedOn: {
         type: Date

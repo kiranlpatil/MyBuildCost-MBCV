@@ -13,7 +13,6 @@ import CandidateSearchService = require("../services/candidate-search.service");
 import CandidateClassModel = require("../dataaccess/model/candidate-class.model");
 import SendMailService = require('../services/mailer.service');
 import ProjectAsset = require('../shared/projectasset');
-import {RecruiterCandidatesService} from "../services/recruiter-candidates.service";
 import RecruiterCandidatesModel = require("../dataaccess/model/recruiter-candidate.model");
 
 
@@ -106,18 +105,14 @@ export function updateDetails(req: express.Request, res: express.Response, next:
                   reason: Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
                   message: Messages.MSG_ERROR_RETRIEVING_USER,
                   stackTrace: new Error(),
-                  actualError:error,
+                  actualError: error,
                   code: 400
                 });
               } else {
                 if (!isEditingProfile && updatedCandidate.isSubmitted) {
                   mailChimpMailerService.onCandidatePofileSubmitted(req.body.basicInformation);
                   if (updatedCandidate.recruiterReferenceId) {
-                    candidateService.updateToRecruiter(updatedCandidate, (error: any, result: any) => {
-                      if (error) {
-                        next(error);
-                      }
-                    });
+                    candidateService.updateToRecruiterOnProfileSubmit(updatedCandidate);
                   }
                 }
                 res.send({
@@ -193,7 +188,7 @@ export function retrieve(req: express.Request, res: express.Response, next: any)
             reason: 'User Not Available',//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
             message: 'User is not available',//Messages.MSG_ERROR_WRONG_TOKEN,
             stackTrace: new Error(),
-            actualError:error,
+            actualError: error,
             code: 400
           });
         }
@@ -204,7 +199,7 @@ export function retrieve(req: express.Request, res: express.Response, next: any)
                 reason: 'User Not Available',//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
                 message: 'User is not available',//Messages.MSG_ERROR_WRONG_TOKEN,
                 stackTrace: new Error(),
-                actualError:error,
+                actualError: error,
                 code: 400
               });
             } else {
@@ -234,7 +229,7 @@ export function retrieve(req: express.Request, res: express.Response, next: any)
             reason: Messages.MSG_ERROR_RETRIEVING_USER,
             message: Messages.MSG_ERROR_RETRIEVING_USER,
             stackTrace: new Error(),
-            actualError:error,
+            actualError: error,
             code: 400
           });
         } else {
@@ -326,7 +321,7 @@ export function metchResult(req: express.Request, res: express.Response, next: a
           reason: 'Problem in Search Matching Result',//Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
           message: 'Problem in Search Matching Result',//Messages.MSG_ERROR_WRONG_TOKEN,
           stackTrace: new Error(),
-          actualError:error,
+          actualError: error,
           code: 500
         });
       }

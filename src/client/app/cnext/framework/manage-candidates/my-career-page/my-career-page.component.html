@@ -1,16 +1,16 @@
 <div class="manage__candidates__date">
-    <ul>
-      <li>
-        <label> From</label>
+  <ul>
+    <li>
+      <label> From</label>
       <input type="date" [(ngModel)]="fromDate"
              (change)="loadSummary()"/>
-      </li>
-      <li>
-        <label> To</label>
+    </li>
+    <li>
+      <label> To</label>
       <input type="date" [(ngModel)]="toDate"
              (change)="loadSummary()"/>
-      </li>
-    </ul>
+    </li>
+  </ul>
   <span class="error-messages"
         *ngIf="inValidDates"> {{getMessages().MSG_ERROR_VALIDATION_DATES}} </span>
 </div>
@@ -77,7 +77,6 @@
   </div>
 </div>
 <div *ngIf="fromDate != '' && toDate != '' && summary.total == 0 && !inValidDates">
-  {{getMessages().NO_CANDIDATES_TO_LIST}}</div>
-<a class="manage__candidates__export__btn" href="" hidden>
-  {{getButtons().EXPORT}}
-</a>
+  {{getMessages().NO_CANDIDATES_TO_LIST}}
+</div>
+<button *ngIf="summary.total > 0" class="btn btn-primary" (click)="exportSummary()">Export</button>

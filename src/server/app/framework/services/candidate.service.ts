@@ -2,6 +2,10 @@ import * as mongoose from "mongoose";
 import {UtilityFunction} from "../uitility/utility-function";
 import {SentMessageInfo} from "nodemailer";
 import {RecruiterCandidatesService} from "./recruiter-candidates.service";
+import {AppliedFilter} from "../search-engine/models/input-model/applied-filter";
+import {SearchEngine} from "../search-engine/engines/search.engine";
+import {JobSearchEngine} from "../search-engine/engines/job-search.engine";
+import * as sharedService from "../shared/logger/shared.service";
 import Messages = require('../shared/messages');
 import CandidateRepository = require('../dataaccess/repository/candidate.repository');
 import UserRepository = require('../dataaccess/repository/user.repository');
@@ -25,6 +29,8 @@ import RecruiterClassModel = require("../dataaccess/model/recruiterClass.model")
 import SendMailService = require('./mailer.service');
 import ProjectAsset = require('../shared/projectasset');
 import RecruiterCandidatesModel = require("../dataaccess/model/recruiter-candidate.model");
+import LoggerService = require("../shared/logger/LoggerService");
+
 
 let bcrypt = require('bcrypt');
 
@@ -35,9 +41,10 @@ class CandidateService {
   private userRepository: UserRepository;
   private locationRepository: LocationRepository;
   private jobProfileRepository: JobProfileRepository;
-
+  private loggerService: LoggerService;
 
   constructor() {
+    this.loggerService = new LoggerService('CANDIDATE_SERVICE_ERROR_HANDLER');
     this.candidateRepository = new CandidateRepository();
     this.userRepository = new UserRepository();
     this.recruiterRepository = new RecruiterRepository();
@@ -85,7 +92,7 @@ class CandidateService {
                     callback(err, null);
                   } else {
                     if (item.recruiterReferenceId) {
-                      this.updateRecruitersMyCandidateList(res._doc._id, item, callback);
+                      this.updateToRecruiter(res._doc._id, item);
                     }
                     callback(err, res);
                   }
@@ -98,42 +105,29 @@ class CandidateService {
     });
   }
 
-  updateRecruitersMyCandidateList(candidateId: number, candidate: any,
-                                  callback: (error: Error, status: string) => void) {
+  updateToRecruiter(candidateId: number, candidate: any) {
 
-    this.recruiterRepository.populateRecruiterDetails(candidate.recruiterReferenceId, (err, recruiter) => {
-      if (err) {
-        callback(err, null);
-        return;
-      }
-      let status =  candidate.login ? 'Logged In' : 'Registered';
-      let recruiterCandidatesService = new RecruiterCandidatesService();
-      recruiterCandidatesService.update(candidate.recruiterReferenceId, String(candidateId), candidate.mobile_number,
-        status, (error: Error, recruiterCandidatesData: RecruiterCandidatesModel) => {
-        if (error) {
-          callback(error, null);
-          return;
-        }
-        let subject = (candidate.login) ?
-          Messages.EMAIL_SUBJECT_EXISTING_CANDIDATE_LOGGEDIN : Messages.EMAIL_SUBJECT_CANDIDATE_REGISTRATION;
-        let template = (candidate.login) ?
-          'existing-candidate-logged-in.html' : 'new-candidate-registration.html';
-        let config = require('config');
-        let sendMailService = new SendMailService();
-        let data: Map<string, string> = new Map([['$jobmosisLink$', config.get('TplSeed.mail.host')],
-          ['$first_name$', candidate.first_name],
-          ['$mobile_number$', candidate.mobile_number],
-          ['$email$', candidate.email],
-          ['$app_name$', ProjectAsset.APP_NAME],]);
-        sendMailService.send(recruiter.email, subject,
-          template, data, (e, status) => {
-            if (e) {
-              callback(e, null);
-              return;
-            }
-          });
-      });
-    });
+    let subject = (candidate.login) ?
+      Messages.EMAIL_SUBJECT_EXISTING_CANDIDATE_LOGGEDIN : Messages.EMAIL_SUBJECT_CANDIDATE_REGISTRATION;
+
+    let template = (candidate.login) ?
+      'existing-candidate-logged-in.html' : 'new-candidate-registration.html';
+
+    this.updateMailToRecruiter(candidate.recruiterReferenceId, candidate, subject, template);
+
+    let status = candidate.login ? 'Existing' : 'Registered';
+
+    let recruiterCandidatesModel = new RecruiterCandidatesModel();
+    recruiterCandidatesModel.recruiterId = candidate.recruiterReferenceId;
+    recruiterCandidatesModel.source = 'career plugin';
+    recruiterCandidatesModel.candidateId = String(candidateId);
+    recruiterCandidatesModel.name = candidate.first_name + ' ' + candidate.last_name;
+    recruiterCandidatesModel.mobileNumber = candidate.mobile_number;
+    recruiterCandidatesModel.email = candidate.email;
+    recruiterCandidatesModel.status = status;
+
+    this.updateRecruiterCandidates(recruiterCandidatesModel);
+
   }
 
   retrieve(field: any, callback: (error: any, result: any) => void) {
@@ -858,24 +852,6 @@ class CandidateService {
     this.candidateRepository.updateByUserId(new mongoose.Types.ObjectId(_id), item, callback);
   }
 
-  /*isCandidateInCart(candidateDetails:CandidateClassModel, jobProfiles:JobProfileModel[]): boolean {
-   let isInCart = false;
-   for (let job of jobProfiles) {
-   for (let item of job.candidate_list) {
-   if (item.name === 'cartListed') {
-   if (item.ids.indexOf(new mongoose.Types.ObjectId(candidateDetails.candidateId).toString()) !== -1) {
-   isInCart = true;
-   break;
-   }
-   }
-   }
-   if (isInCart) {
-   break;
-   }
-   }
-   return isInCart;
-   }*/
-
   checkIsCarted(candidateUserId: string, recruiterUserId: string, callback: (error: any, result: any) => void) {
     this.get(candidateUserId, (err, candidateDetails) => {
       if (err) {
@@ -953,56 +929,106 @@ class CandidateService {
           return;
         }
         let config = require('config');
-        let sendMailService = new SendMailService();
         let data: Map<string, string> = new Map([['$jobmosisLink$', config.get('TplSeed.mail.host')],
           ['$link$', config.get('TplSeed.mail.host') + 'signin'],
           ['$firstname$', candidate.first_name],
           ['$jobtitle$', jobTitle], ['$recruiter$', recruiter[0].company_name]]);
-        sendMailService.send(candidate.email,
+        this.sendMail(candidate.email,
           Messages.EMAIL_SUBJECT_CANDIDATE_ADDED_TO_CART,
-          'candidate-added-to-cart.html', data, callback);
+          'candidate-added-to-cart.html', data);
       });
     });
   }
 
-  updateToRecruiter(candidate: any, callback: (error: any, result: any) => void) {
+  updateToRecruiterOnProfileSubmit(candidate: any) {
 
-    this.recruiterRepository.retrieve({'_id': new mongoose.Types.ObjectId(candidate.recruiterReferenceId)}, (recruiterErr, recData) => {
-      if (recruiterErr) {
-        callback(recruiterErr, null);
-      } else {
+    let recruiterCandidatesModel = new RecruiterCandidatesModel();
+    recruiterCandidatesModel.recruiterId = candidate.recruiterReferenceId;
+    recruiterCandidatesModel.source = 'career plugin';
+    recruiterCandidatesModel.candidateId = candidate._id;
+    recruiterCandidatesModel.name = candidate.basicInformation.first_name + ' ' + candidate.basicInformation.last_name;
+    recruiterCandidatesModel.mobileNumber = candidate.basicInformation.mobile_number;
+    recruiterCandidatesModel.email = candidate.basicInformation.email;
+    recruiterCandidatesModel.status = 'Profile submitted';
 
-        let recruiterCandidatesService = new RecruiterCandidatesService();
-        recruiterCandidatesService.update(recData[0]._id.toString(), candidate._id,
-          candidate.basicInformation.mobile_number, 'Profile submitted', (error: Error, data: RecruiterCandidatesModel) => {
-          if (error) {
-            callback(error, null);
-            return;
-          }
-        });
 
-        this.userRepository.retrieve({'_id': new mongoose.Types.ObjectId(recData[0].userId)}, (userError, userData) => {
-          if (userError) {
-            callback(userError, null);
-          } else {
-            let config = require('config');
-            let sendMailService = new SendMailService();
-            let data: Map<string, string> = new Map([['$jobmosisLink$', config.get('TplSeed.mail.host')],
-              ['$first_name$', candidate.basicInformation.first_name],
-              ['$app_name$', ProjectAsset.APP_NAME]]);
-            sendMailService.send(userData[0].email,
-              Messages.EMAIL_SUBJECT_CANDIDATE_REGISTRATION,
-              'candidate-profile-completed.html', data, (err: Error) => {
-                if (err) {
-                  callback(err, null);
-                } else {
-                  callback(null, "success");
-                }
-              });
-          }
-        });
+    this.updateRecruiterCandidates(recruiterCandidatesModel);
+
+
+    this.updateMailToRecruiter(candidate.recruiterReferenceId, candidate.basicInformation, Messages.EMAIL_SUBJECT_CANDIDATE_REGISTRATION,
+      'candidate-profile-completed.html');
+  }
+
+  updateMailToRecruiter(recruiterId: string, candidate: any, subject: string, template: string) {
+    this.recruiterRepository.populateRecruiterDetails(recruiterId, (error, recruiter) => {
+      if (error) {
+        this.loggerService.logErrorObj(error);
+        sharedService.mailToAdmin(error);
+        return;
+      }
+      let config = require('config');
+      let data: Map<string, string> = new Map([['$jobmosisLink$', config.get('TplSeed.mail.host')],
+        ['$first_name$', candidate.first_name],
+        ['$mobile_number$', candidate.mobile_number],
+        ['$email$', candidate.email],
+        ['$app_name$', ProjectAsset.APP_NAME],]);
+
+      this.sendMail(recruiter.email, subject, template, data);
+    });
+  }
+
+  sendMail(email: string, message: string, template: string, data: any) {
+    let sendMailService = new SendMailService();
+    sendMailService.send(email, message, template, data, (err: Error) => {
+      if (err) {
+        this.loggerService.logErrorObj(err);
+        sharedService.mailToAdmin(err);
       }
     });
+  }
+
+  updateRecruiterCandidates(recruiterCandidatesModel: RecruiterCandidatesModel) {
+    let recruiterCandidatesService = new RecruiterCandidatesService();
+
+    let candidateId = recruiterCandidatesModel.candidateId;
+    let appliedFilters: AppliedFilter = <AppliedFilter> {
+      "proficiencies": [],
+      "education": [],
+      "interestedIndustries": [],
+      "mustHaveComplexity": false,
+      "sortBy": 0,
+      "listName": 5,
+      "recruiterId": recruiterCandidatesModel.recruiterId
+    };
+
+    let searchEngine: SearchEngine = new JobSearchEngine();
+    searchEngine.getMatchingResult(searchEngine, candidateId, appliedFilters,
+      (error: any, qcards: any[], userId: string) => {
+        if (error) {
+          this.loggerService.logErrorObj(error);
+          sharedService.mailToAdmin(error);
+          return;
+        }
+        recruiterCandidatesModel.noOfMatchingJobs = qcards.length;
+        recruiterCandidatesModel.highestMatchingJobPercentage = 0;
+        for (let card of qcards) {
+          if (recruiterCandidatesModel.highestMatchingJobPercentage < card.exact_matching) {
+            recruiterCandidatesModel.highestMatchingJobPercentage = card.exact_matching;
+            recruiterCandidatesModel.jobTitle = card.jobTitle;
+
+          }
+        }
+
+        recruiterCandidatesService.update(recruiterCandidatesModel,
+          (error: Error, recruiterCandidatesData: RecruiterCandidatesModel) => {
+            if (error) {
+              this.loggerService.logErrorObj(error);
+              sharedService.mailToAdmin(error);
+            }
+          });
+
+      });
+
   }
 }
 
