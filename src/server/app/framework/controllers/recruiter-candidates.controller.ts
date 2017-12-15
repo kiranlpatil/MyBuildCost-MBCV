@@ -33,4 +33,30 @@ export class RecruiterCandidatesController {
         }
       });
   }
+
+  exportSummary(req: express.Request, response: express.Response, next: express.NextFunction) {
+    let recruiterCandidatesModel: RecruiterCandidatesModel = new RecruiterCandidatesModel();
+    recruiterCandidatesModel.recruiterId = req.params.id;
+    recruiterCandidatesModel.fromDate = req.query.from;
+    recruiterCandidatesModel.toDate = req.query.to;
+    recruiterCandidatesModel.source = req.query.source;
+
+    let exportService = new ExportService();
+    exportService.exportRecruiterCandidates(recruiterCandidatesModel,
+      (error: Error, filePath: string) => {
+        if (error) {
+          next({
+            reason: Messages.MSG_ERROR_EXPORTING_MANAGED_CANDIDATES,
+            message: Messages.MSG_ERROR_EXPORTING_MANAGED_CANDIDATES,
+            stackTrace: error,
+            code: 400
+          });
+        } else {
+          response.status(200).send({
+            'filePath': filePath,
+            'status': 'success'
+          });
+        }
+      });
+  }
 }

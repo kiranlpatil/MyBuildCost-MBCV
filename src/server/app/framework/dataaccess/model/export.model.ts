@@ -5,5 +5,6 @@ class ExportModel {
   companyDetailsCSV: string;
   jobDetailsCSV: string;
   companyAccountDetailsCSV: string;
+  recruiterCandidatesCSV: string;
 }
 export = ExportModel;

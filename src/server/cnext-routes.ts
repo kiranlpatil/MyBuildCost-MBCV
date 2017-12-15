@@ -162,7 +162,10 @@ export function cnextInit(app: express.Application) {
       userController.getUserRegistrationStatus);
 
     app.get('/api/recruiter/:id/recruiterCandidatesSummary', loggerInterceptor.logDetail,
-      this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, recruiterCandidatesController.getSummary)
+      this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, recruiterCandidatesController.getSummary);
+
+    app.get('/api/recruiter/:id/exportRecruiterCandidatesSummary', loggerInterceptor.logDetail,
+      this.authInterceptor.requiresAuth, this.authInterceptor.secureApiCheck, recruiterCandidatesController.exportSummary);
 
     app.use(sharedService.errorHandler);
   } catch (e) {
