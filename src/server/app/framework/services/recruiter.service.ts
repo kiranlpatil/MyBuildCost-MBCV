@@ -344,6 +344,7 @@ class RecruiterService {
               recruiterCandidatesModel.name = result[0].first_name + ' ' + result[0].last_name;
               recruiterCandidatesModel.email = result[0].email;
               recruiterCandidatesModel.candidateId = candidate[0]._id.toString();
+              recruiterCandidatesModel.status = 'Existing';
               this.updateRecruiterCandidates(recruiterCandidatesModel);
             });
         } else {

@@ -518,6 +518,16 @@ $ src/redis-server
   //indexes for new collection
     db.getCollection('recruiter-candidates').createIndex({'recruiterId':1})
     db.getCollection('recruiter-candidates').createIndex({'recruiterId':1,'source':1})
+    
+    
+   - Version : 1.1.6
+    - Date : 15 dec 2017
+    - Update Script for status change 'Logged In' 
+    - Update Script
+    
+  //Update Script for status change 'Logged In' 
+  db.getCollection('recruiter-candidates').update({'status' : 'Logged In'},
+  {$set:{"status" : "Existing"}},{ multi: true });
    
   
 #Jobmosis Career_plugin 

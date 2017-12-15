@@ -62,6 +62,8 @@ export class RecruiterCandidatesService {
       }
       summary.total++;
     }
+
+    summary.registered = summary.registered + summary.profileSubmitted;
     return summary;
   }
 
