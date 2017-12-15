@@ -42,6 +42,7 @@ export class JobPosterComponent implements OnInit, OnChanges {
   rolesForCapability: Role[] = new Array(0);
   rolesForComplexity: Role[] = new Array(0);
   private isCandidate: boolean = false;
+  updateBasicJobInfo: boolean = false;
   private disableButton: boolean = true;
   private isShowCandidateQCardView: boolean = false;
   private setCapabilityMatrix: boolean = true;
@@ -244,7 +245,12 @@ export class JobPosterComponent implements OnInit, OnChanges {
   }
 
   showHideModal() {
-    this.showModalStyle = !this.showModalStyle;
+    if(this.jobPosterModel && this.jobPosterModel.educationForJob
+      && this.jobPosterModel.educationForJob.length>0) {
+      this.showModalStyle = !this.showModalStyle;
+    }else {
+      this.updateBasicJobInfo=!this.updateBasicJobInfo;
+    }
   }
 
   getStyleModal() {

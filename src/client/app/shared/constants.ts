@@ -201,6 +201,8 @@ export class Messages {
   public static MSG_ERROR_VALIDATION_EMPLOYMENTHISTORY = 'Provide valid employment start and end date';
   public static MSG_ERROR_VALIDATION_TERMS_AND_CONDITIONS_REQUIRED = 'Please accept the terms and conditions.';
   public static MSG_ERROR_VALIDATION_DATES = 'Please select valid from and to date.';
+  public static MSG_ERROR_VALIDATION_EDUCATION_DEGREE = 'Please add education details required for the job.';
+
 
 
   public static MSG_LANDING_PAGE = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' +

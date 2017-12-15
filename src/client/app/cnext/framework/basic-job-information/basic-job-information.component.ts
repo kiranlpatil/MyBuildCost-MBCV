@@ -23,6 +23,7 @@ export class BasicJobInformationComponent implements OnInit, OnChanges {
   @Input() jobPosterModel: any;
   @Input() highlightedSection: Section;
   @Input() isRecruitingForSelf: boolean;
+  @Input() updateBasicJobInfo: boolean;
 
   @Output() onComplete = new EventEmitter();
   jobDiscriptionHeading:string = Headings.JOB_DISCRIPTION;
@@ -138,6 +139,10 @@ export class BasicJobInformationComponent implements OnInit, OnChanges {
           controlArray.push(fb);
         });
       }
+    }
+    if(changes.updateBasicJobInfo!==undefined &&
+      changes.updateBasicJobInfo.currentValue !== undefined) {
+      this.onEdit();
     }
   }
 

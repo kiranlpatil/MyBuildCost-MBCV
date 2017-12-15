@@ -9,7 +9,7 @@ import { Messages } from '../../../shared/constants';
   moduleId: module.id,
   selector: 'cn-job-education',
   templateUrl: 'job-education-information.component.html',
-  styleUrls: []
+  styleUrls: ['job-education-information.component.css']
 })
 
 export class JobEducationComponent {
