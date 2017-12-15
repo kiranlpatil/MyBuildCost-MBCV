@@ -3,7 +3,7 @@ import {Industry} from "../../../user/models/industry";
 import {Section} from "../../../user/models/candidate";
 import {JobPosterModel} from "../../../user/models/jobPoster";
 import {ProfessionalDataService} from "../professional-data/professional-data.service";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {JobLocation} from "../../../user/models/job-location";
 import {MyGoogleAddress} from "../../../shared/models/my-google-address";
 import {FilterService} from "../filters/filter/filter.service";
@@ -29,6 +29,7 @@ export class BasicJobInformationComponent implements OnInit, OnChanges {
   hideCompanyNameHeading:string = Headings.HIDE_COMPANY_NAME;
   private savedjobPosterModel: JobPosterModel = new JobPosterModel();
   private jobPostForm: FormGroup;
+  public educationForm: FormArray;
   private educationList: any = [];
   private experienceRangeList: string[] = new Array(0);
   private fromYear: string = '';
@@ -75,22 +76,22 @@ export class BasicJobInformationComponent implements OnInit, OnChanges {
 
   constructor(private professionalDataService: ProfessionalDataService,private errorService:ErrorService,
               private formBuilder: FormBuilder, private _filterService: FilterService,) {
-
     this.jobPostForm = this.formBuilder.group({
       'jobTitle': ['', [Validators.required, ValidationService.noWhiteSpaceValidator]],
       'hiringManager': ['', Validators.required],
       'department': ['', Validators.required],
-      'education': ['', Validators.required],
+      'education': [''],
       'experienceMaxValue': ['', Validators.required],
       'experienceMinValue': ['', Validators.required],
       'salaryMaxValue': ['', Validators.required],
       'salaryMinValue': ['', Validators.required],
       'joiningPeriod': ['', Validators.required],
       'location': ['', Validators.required],
-      'hideCompanyName': ['']
+      'hideCompanyName': [''],
+      educationForm: this.formBuilder.array([
+        this.initEducationDetails()])
     });
   }
-
   ngOnInit() {
     this.professionalDataService.getEducationList()
       .subscribe(
@@ -127,6 +128,16 @@ export class BasicJobInformationComponent implements OnInit, OnChanges {
           this.storedLocation.formatted_address = this.jobPosterModel.location.city + ', ' + this.jobPosterModel.location.state + ', ' + this.jobPosterModel.location.country;
         }
       }
+      if(this.jobPosterModel && this.jobPosterModel.educationForJob&&
+        this.jobPosterModel.educationForJob.length>0) {
+        this.clearEducationalDetails();
+        let controlArray = <FormArray>this.jobPostForm.controls['educationForm'];
+        this.jobPosterModel.educationForJob.forEach((item:any) => {
+          const fb = this.initEducationDetails();
+          fb.patchValue(item);
+          controlArray.push(fb);
+        });
+      }
     }
   }
 
@@ -160,6 +171,8 @@ export class BasicJobInformationComponent implements OnInit, OnChanges {
     this.isSalaryValid = true;
     this.isLocationInvalid = false;
     this.jobPosterModel = this.jobPostForm.value;
+    this.jobPosterModel.educationForJob=new Array();
+    this.jobPosterModel.educationForJob= this.jobPostForm.value.educationForm;
     if (!this.jobPostForm.valid && this.storedIndustry == undefined) {
       this.submitStatus = true;
       return;
@@ -240,6 +253,27 @@ export class BasicJobInformationComponent implements OnInit, OnChanges {
     this.showButton = false;
     this.disableButton = false;
     window.scrollTo(0, 0);
+  }
+  addAnotherEducationalDetails() {
+    const control: FormArray = <FormArray> this.jobPostForm.controls['educationForm'];
+    control.push(this.initEducationDetails());
+
+  }
+  removeEducationDetails(i:any) {
+    const control = <FormArray>this.jobPostForm.controls['educationForm'];
+    control.removeAt(i);
+  }
+  initEducationDetails() {
+    return this.formBuilder.group({
+      'educationDegree': ['', Validators.required],
+      'specialization': ['']
+    });
+  }
+  clearEducationalDetails() {
+    const control = <FormArray>this.jobPostForm.controls['educationForm'];
+    for (let index = 0; index < control.length; index++) {
+      control.removeAt(index);
+    }
   }
 
   getLabel() {

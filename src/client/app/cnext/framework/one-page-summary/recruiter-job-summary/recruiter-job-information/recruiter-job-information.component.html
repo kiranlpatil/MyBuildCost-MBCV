@@ -33,6 +33,13 @@
     </span>
     <label>Education</label>
     <span>{{job.education}}</span>
+    <span *ngFor="let education of job.educationForJob">
+      <span>{{education.educationDegree}}</span>
+            <span *ngIf="education.specialization">({{education.specialization}})<br/></span>
+
+    </span>
+
+
     <label *ngIf="job.experienceMinValue !=job.experienceMaxValue">Experience Band
       <span class="optional-field">{{getLabel().YEARS}}</span>
     </label>

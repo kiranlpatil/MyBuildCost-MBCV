@@ -58,7 +58,9 @@ export class JobDashboardComponent implements OnInit, OnChanges {
   private emptyCartMessage: string = Tooltip.EMPTY_CART_MESSAGE;
   private emptyRejectedList: string = Tooltip.EMPTY_REJECTED_LIST_MESSAGE;
   isJobCloseButtonClicked:boolean;
+  isShowJobFilter:boolean = false;
   addForCompareView: any;
+  filterMasterData: any;
 
 
   constructor(private activatedRoute: ActivatedRoute,
@@ -133,6 +135,7 @@ export class JobDashboardComponent implements OnInit, OnChanges {
     this.jobDashboardService.getSearchedcandidate(this.jobId, this.appliedFilters)
       .subscribe(
         (data: any) => {
+          this.getMasterListForFilter();
           this.jobDashboardService.getSelectedListData(this.jobId, EList.CAN_SHORT_LIST, this.appliedFilters)
             .subscribe(
               (listdata: any) => {
@@ -145,6 +148,15 @@ export class JobDashboardComponent implements OnInit, OnChanges {
               }, error => this.errorService.onError(error));
         }, error => this.errorService.onError(error));
     window.scrollTo(0, 0);
+  }
+
+  getMasterListForFilter() {
+    this.jobDashboardService.getMasterListForFilter(this.jobId, this.appliedFilters)
+      .subscribe(
+        (data: any) => {
+          this.filterMasterData = data;
+          this.isShowJobFilter  = true;
+        }, error => this.errorService.onError(error));
   }
 
   AddedToCart(event: any) {

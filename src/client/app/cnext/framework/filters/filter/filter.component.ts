@@ -8,6 +8,7 @@ import {FilterService} from "./filter.service";
 import {QCardFilter} from "../../model/q-card-filter";
 import {ErrorService} from "../../../../shared/services/error.service";
 import {Label} from "../../../../shared/constants";
+import {ProfessionalDataService} from "../../professional-data/professional-data.service";
 
 @Component({
   moduleId: module.id,
@@ -28,6 +29,8 @@ export class FilterComponent implements OnChanges, OnInit {
   openCurrentLocationPanel: boolean = false;
   openKeyskillsPanel: boolean = false;
   openJoiningPeriodPanel: boolean = false;
+  openEducationalDegreePanel: boolean = false;
+  openSpecializationPanel: boolean = false;
   openDomainPanel: boolean = false;
   mustHaveComplexityPanel: boolean = false;
   isComplexityMustHaveMatrixPresent : boolean;
@@ -39,12 +42,15 @@ export class FilterComponent implements OnChanges, OnInit {
   industryList: string[] = new Array(0);
   salaryRangeList: string[] = new Array(0);
   qCardFilter: QCardFilter = new QCardFilter();
+  educationDegrees: string[] = new Array(0);
+  specialization: string[] = new Array(0);
   @Output() changeFilter: EventEmitter<QCardFilter> = new EventEmitter<QCardFilter>();
 
   @Input() private candidate: Candidate;
   @Input() private locations: any[];
   @Input() private role: boolean;
   @Input() private selectedJob: JobPosterModel;
+  @Input() private filterMasterData: any;
   private isShowJobFilter: boolean = false;
   private locationList: string[] = new Array(0);
   private companySizeList: string[] = new Array(0);
@@ -69,7 +75,7 @@ export class FilterComponent implements OnChanges, OnInit {
 
     this.userForm = this.formBuilder.group({
       eduction: '', experienceMin: '', experienceMax: '', salaryMin: '', salaryMax: '', location: '',
-      proficiencies: '', timetojoin: '', industry: '', companysize: '', mustHaveComplexity: ''
+      proficiencies: '', timetojoin: '', industry: '', companysize: '', mustHaveComplexity: '', educationalDegree: '', specialization: ''
     });
   }
 
@@ -114,6 +120,14 @@ export class FilterComponent implements OnChanges, OnInit {
       }
     }
 
+    if (changes.filterMasterData) {
+      if (changes.filterMasterData.currentValue) {
+        this.filterMasterData = changes.filterMasterData.currentValue;
+        this.educationDegrees = this.filterMasterData.educationDegrees;
+        this.specialization = this.filterMasterData.specialization;
+      }
+    }
+
     if (changes.role) {
       this.isRecuirter = changes.role.currentValue;
     }
@@ -155,6 +169,34 @@ export class FilterComponent implements OnChanges, OnInit {
       var index = this.qCardFilter.education.indexOf(value);
       if (index > -1) {
         this.qCardFilter.education.splice(index, 1);
+      }
+    }
+    this.showClearFilter = true;
+    this.changeFilter.emit(this.qCardFilter);
+  }
+
+  filterByAcademics(event: any) {
+    var value = event.target.value;
+    if (event.target.checked) {
+      this.qCardFilter.academics.push(value);
+    } else {
+      var index = this.qCardFilter.academics.indexOf(value);
+      if (index > -1) {
+        this.qCardFilter.academics.splice(index, 1);
+      }
+    }
+    this.showClearFilter = true;
+    this.changeFilter.emit(this.qCardFilter);
+  }
+
+  filterBySpecialization(event: any) {
+    var value = event.target.value;
+    if (event.target.checked) {
+      this.qCardFilter.specialization.push(value);
+    } else {
+      var index = this.qCardFilter.specialization.indexOf(value);
+      if (index > -1) {
+        this.qCardFilter.specialization.splice(index, 1);
       }
     }
     this.showClearFilter = true;

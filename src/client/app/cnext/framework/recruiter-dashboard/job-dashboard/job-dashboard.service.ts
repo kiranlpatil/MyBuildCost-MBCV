@@ -40,6 +40,18 @@ export class JobDashboardService extends BaseService {
 
   }
 
+  getMasterListForFilter(jobId: string, obj: QCardFilter) {
+    obj.listName = EList.CAN_MATCHED;
+    let headers = new Headers({'Content-Type': 'application/json'});
+    let options = new RequestOptions({headers: headers});
+    var url = 'filter/masterData/' + jobId;
+    this.loaderService.start();
+    let body = JSON.stringify({obj});
+    return this.http.post(url, body, options)
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
+
   errorHandle(error: any) {
     this.loaderService.stop();
     return Observable.throw(error);

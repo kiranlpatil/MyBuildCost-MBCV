@@ -91,7 +91,7 @@ export class JobSearchEngine extends SearchEngine {
     return sortingQuery;
   }
 
-  getRequiredFieldNames() {
+  getRequiredFieldNames(filter:AppliedFilter) {
     let included_fields = {
       '_id': 1,
       'capability_matrix': 1,

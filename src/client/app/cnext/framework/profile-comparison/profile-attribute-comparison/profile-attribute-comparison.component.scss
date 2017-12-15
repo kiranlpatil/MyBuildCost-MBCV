@@ -8,6 +8,7 @@
 }
 
 .candidate-compare-attribute {
+  border-bottom: 1px solid $border-color1;
   position: relative;
   clear: both;
   text-align: left;
@@ -18,10 +19,9 @@
   display: table;
 
   .matching-attribute-name {
-    width: 267px;
+    width: 260px;
     float: left;
     margin-right: 0;
-    position: absolute;
     top: inherit;
     left: 0;
     z-index: 20;
@@ -31,7 +31,6 @@
 
     .inner {
       height: calc(100% - 10px);
-      border-bottom: 1px solid $border-color1;
     }
 
     h6 {
@@ -54,11 +53,9 @@
   .matching-candidate-attributes {
     float: left;
     width: auto;
-    padding-left: 259px;
     background: $white;
-    border-bottom: 1px solid $border-color1;
     min-height: 50px;
-    display: table;
+    display: inline-block;
 
     .candidate-attribute-list {
       display: inline-block;
@@ -76,7 +73,7 @@
       line-height: 14px;
       text-align: left;
       margin: 4px 0 0;
-      padding: 0 7px;
+      padding: 0 7px 0 0;
       white-space: normal;
       width: 100%;
       max-width: 100%;

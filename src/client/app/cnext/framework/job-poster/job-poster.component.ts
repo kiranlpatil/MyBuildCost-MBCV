@@ -128,73 +128,73 @@ export class JobPosterComponent implements OnInit, OnChanges {
     SessionStorageService.setSessionValue(SessionStorage.POSTED_JOB, jobmodel._id);
     this.isShowIndustryList = true;
     if (jobmodel.industry && jobmodel.industry.name !== '') {
-      this.getRoles();
-      this.isShowRoleList = true;
-      this.jobForRole = this.jobPosterModel.industry.roles;
-      this.jobForCapability = this.jobPosterModel.industry.roles;
-      if (jobmodel.industry.roles && jobmodel.industry.roles.length > 0) {
+        this.getRoles();
+        this.isShowRoleList = true;
+        this.jobForRole = this.jobPosterModel.industry.roles;
         this.jobForCapability = this.jobPosterModel.industry.roles;
-        this.jobForComplexity = this.jobPosterModel.industry.roles;
-        this.rolesForCapability = new Array(0);
-        if (this.flag) {
-          this.getCapability();
-          this.isShowCapability = true;
-          for (let role of jobmodel.industry.roles) {
-            if (role.default_complexities[0] !== undefined && role.default_complexities[0].complexities.length > 0) {
-              this.isPresentDefaultcomplexity = true;
-            }
-            if (role.capabilities !== undefined && role.capabilities.length > 0) {
-              this.isPresentCapability = true;
-            }
-          }
-        }
-        if (this.isPresentCapability || this.isPresentDefaultcomplexity) {
-          this.isShowComplexity = true;
+        if (jobmodel.industry.roles && jobmodel.industry.roles.length > 0) {
           this.jobForCapability = this.jobPosterModel.industry.roles;
-          this.jobForRole = this.jobPosterModel.industry.roles;
           this.jobForComplexity = this.jobPosterModel.industry.roles;
-          this.getComplexity();
-          this.setCapabilityMatrix = true;
-          if (jobmodel.capability_matrix) {
-            let capbilityMatrix: any = Object.keys(jobmodel.capability_matrix);
-            for (let index of capbilityMatrix) {
-              if (jobmodel.capability_matrix[index] === -1) {
-                this.isComplexityFilled = false;
+          this.rolesForCapability = new Array(0);
+          if (this.flag) {
+            this.getCapability();
+            this.isShowCapability = true;
+            for (let role of jobmodel.industry.roles) {
+              if (role.default_complexities[0] !== undefined && role.default_complexities[0].complexities.length > 0) {
+                this.isPresentDefaultcomplexity = true;
+              }
+              if (role.capabilities !== undefined && role.capabilities.length > 0) {
+                this.isPresentCapability = true;
               }
             }
           }
-          this.setComplexityMustHaveMatrix = true;
-          if (jobmodel.complexity_musthave_matrix) {
-            let complexityMustHaveMatrix: any = Object.keys(jobmodel.complexity_musthave_matrix);
-            for (let index of complexityMustHaveMatrix) {
-              if (jobmodel.complexity_musthave_matrix[index] === -1) {
-                this.isComplexityFilled = false;
+          if (this.isPresentCapability || this.isPresentDefaultcomplexity) {
+            this.isShowComplexity = true;
+            this.jobForCapability = this.jobPosterModel.industry.roles;
+            this.jobForRole = this.jobPosterModel.industry.roles;
+            this.jobForComplexity = this.jobPosterModel.industry.roles;
+            this.getComplexity();
+            this.setCapabilityMatrix = true;
+            if (jobmodel.capability_matrix) {
+              let capbilityMatrix: any = Object.keys(jobmodel.capability_matrix);
+              for (let index of capbilityMatrix) {
+                if (jobmodel.capability_matrix[index] === -1) {
+                  this.isComplexityFilled = false;
+                }
               }
             }
-          }
-          if (this.isComplexityFilled) {
-            this.getProficiency();
-            this.isShowProficiency = true;
+            this.setComplexityMustHaveMatrix = true;
+            if (jobmodel.complexity_musthave_matrix) {
+              let complexityMustHaveMatrix: any = Object.keys(jobmodel.complexity_musthave_matrix);
+              for (let index of complexityMustHaveMatrix) {
+                if (jobmodel.complexity_musthave_matrix[index] === -1) {
+                  this.isComplexityFilled = false;
+                }
+              }
+            }
+            if (this.isComplexityFilled) {
+              this.getProficiency();
+              this.isShowProficiency = true;
               this.showIndustryExposure = true;
               if (jobmodel.interestedIndustries !== undefined && jobmodel.interestedIndustries.length > 0) {
                 this.showReleventIndustryList = true;
                 this.showCompentensies = true;
                 this.highlightedSection.name = 'None';
+              } else {
+                this.highlightedSection.name = 'IndustryExposure';
+              }
             } else {
-              this.highlightedSection.name = 'IndustryExposure';
+              this.highlightedSection.name = 'Complexities';
             }
           } else {
-            this.highlightedSection.name = 'Complexities';
+            this.highlightedSection.name = 'Capabilities';
           }
         } else {
-          this.highlightedSection.name = 'Capabilities';
+          this.highlightedSection.name = 'Work-Area';
         }
       } else {
-        this.highlightedSection.name = 'Work-Area';
+        this.highlightedSection.name = 'Industry';
       }
-    } else {
-      this.highlightedSection.name = 'Industry';
-    }
   }
 
   postjob() {
@@ -306,7 +306,6 @@ export class JobPosterComponent implements OnInit, OnChanges {
 
   onBasicJobInformationComplete(jobModel: JobPosterModel) {
     this.jobPosterModel.department = jobModel.department;
-    this.jobPosterModel.education = jobModel.education;
     this.jobPosterModel.experienceMaxValue = jobModel.experienceMaxValue;
     this.jobPosterModel.experienceMinValue = jobModel.experienceMinValue;
     this.jobPosterModel.hiringManager = jobModel.hiringManager;
@@ -317,6 +316,7 @@ export class JobPosterComponent implements OnInit, OnChanges {
     this.jobPosterModel.salaryMinValue = jobModel.salaryMinValue;
     this.isShowIndustryList = true;
     this.jobPosterModel.hideCompanyName = jobModel.hideCompanyName;
+    this.jobPosterModel.educationForJob=jobModel.educationForJob;
     this.updateJob();
   }
 

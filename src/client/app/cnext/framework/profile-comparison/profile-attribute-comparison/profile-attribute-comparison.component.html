@@ -95,16 +95,17 @@
     <div class="matching-attribute-name">
       <div class="inner" title="Education : {{profileComparisonJobData.education}}">
         <h6>Education</h6>
-        <p>{{profileComparisonJobData.education}}</p>
+        {{profileComparisonJobData.education}}
+        <p *ngFor="let education of profileComparisonJobData.educationForJob">{{education.educationDegree}}<br/><b *ngIf="education.specialization">({{education.specialization}})</b></p>
       </div>
     </div>
     <div class="matching-candidate-attributes">
       <div class="candidate-attribute-list" *ngFor="let item of profileComparisonResult|valueSortFilter">
-        <p>
-          <span>
+        <span>
             {{item?.professionalDetails.education}}
           </span>
-        </p>
+        <p *ngFor="let academic of item?.academics">{{academic.educationDegree}}<br/><b *ngIf="academic.specialization">({{academic.specialization}})</b></p>
+
       </div>
     </div>
   </div>

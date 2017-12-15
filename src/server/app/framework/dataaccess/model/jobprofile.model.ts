@@ -4,6 +4,7 @@ import * as mongoose from 'mongoose';
 import CapabilityModel = require('./capability.model');
 import { CandidateListModel } from './candidate-list.model';
 import {CandidatesInLists} from "./CandidatesInLists.model";
+import EducationForJobModel = require("./education-for-job.model");
 
 interface JobProfileModel extends mongoose.Document {
   jobTitle: string;
@@ -44,5 +45,6 @@ interface JobProfileModel extends mongoose.Document {
   numberOfCandidatesInList: CandidatesInLists;
   isJobPostRenew : boolean;
   roles: string;
+  educationForJob: EducationForJobModel[];
 }
 export = JobProfileModel;

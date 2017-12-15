@@ -183,13 +183,27 @@
                     <div class="info-description">
                       <img class="missing-img" src="assets/framework/images/dashboard/info-red.svg"/>
                       <div class="info-hover-section">
-                        Job Education Required {{job.education}}<br/>
+                        Job Education Required {{job.education}}
+
+                        <div *ngFor="let education of job.educationForJob">
+                          <span>{{education.educationDegree}}</span>
+                          <span><b *ngIf="education.specialization">({{education.specialization}})</b></span><br/>
+                        </div>
+                        <br/>
                         {{candidateDetails.first_name}}'s Education {{candidate.professionalDetails.education}}
+                        <div *ngFor="let academic of candidate.academics">
+                          <span>{{academic.educationDegree}}</span>
+                          <span><b *ngIf="academic.specialization">({{academic.specialization}})</b></span><br/>
+                        </div>
                       </div>
                     </div>
+
                   </label>
                   <span>{{job.education}}</span>
-
+                  <div *ngFor="let education of job.educationForJob">
+                    <span>{{education.educationDegree}}</span>
+                    <span><b *ngIf="education.specialization">({{education.specialization}})</b></span><br/>
+                </div>
                   <label
                     *ngIf="job.experienceMinValue != job.experienceMaxValue"
                     [class.exact]="data.experienceMatch=='exact'" [class.above]="data.experienceMatch=='above'"

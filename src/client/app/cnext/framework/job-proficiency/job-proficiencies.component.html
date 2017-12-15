@@ -20,9 +20,14 @@
               class="glyphicon glyphicon-chevron-left"></span></button>
       <div class="button-group clearfix">
         <button class="btn btn-success" scrollTo scrollTargetSelector="#industry-experience"
-                (click)="onNext()"  [hidden]="!showButton">Next
+                (click)="onNext()" [hidden]="!showButton">Next
         </button>
-        <button class="btn btn-success" (click)="onSave()"  [hidden]="showButton">Done</button>
+        <button class="btn-info btn btn-success" (click)="onSave()"  [hidden]="showButton">Done</button>
+      </div>
+      <div class="keyskills-label" *ngIf="isshowModal">
+        <p>
+          {{getMessage().KEYSKILLS_MESSAGE}}
+        </p>
       </div>
     </div>
   </div>

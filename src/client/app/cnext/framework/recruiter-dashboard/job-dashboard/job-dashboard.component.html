@@ -7,7 +7,7 @@
 </div>
 <div class="container-fluid profile-wrapper">
   <div class="candidate-listing">
-    <cn-filter (changeFilter)="changeFilter($event)" [hidden]="whichListVisible[4]" [selectedJob]="selectedJobProfile" [role]=true></cn-filter>
+    <cn-filter (changeFilter)="changeFilter($event)" [hidden]="whichListVisible[4]" [selectedJob]="selectedJobProfile" [filterMasterData]= "filterMasterData" [role]=true *ngIf="isShowJobFilter"></cn-filter>
     <div class="col-sm-12 no-padding">
       <div class="list-view" *ngIf="selectedJobProfile!=undefined">
         <div class="panel clearfix">

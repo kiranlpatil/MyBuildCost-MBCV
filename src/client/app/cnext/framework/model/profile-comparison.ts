@@ -6,6 +6,7 @@ import {EmployementHistory} from "../../../user/models/employment-history";
 import {Industry} from "../../../user/models/industry";
 import {ProfileComparisonHeaderMeta} from "../profile-comparison/profile-comparison-header/profile-comparison-header-meta/profile-comparison-header-meta";
 import {ProfileCapabilityComparisonMeta} from "../profile-comparison/profile-capability-comparison/profile-capability-comparison-meta/profile-capability-compariosn-meta";
+import { EducationForJob } from '../../../user/models/education-for-job';
 
 export class ProfileComparison {
    profileComparisonJobData:CompareEntityDetails = new CompareEntityDetails();
@@ -68,6 +69,8 @@ export class CompareEntityDetails {
   industryName:string;
   interestedIndustries:string[];
   proficiencies:string[];
+  educationForJob: EducationForJob[] = new Array(0);
+
 }
 
 export class SkillStatus {

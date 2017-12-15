@@ -1,0 +1,22 @@
+<div [formGroup]="educationForm">
+  <div class="col-sm-12 no-padding">
+    <div class="form-group">
+      <label>Degree</label>
+      <input list="degree" class="degree_select select" formControlName="educationDegree">
+      <datalist id="degree" class="education_degree_list" >
+        <option *ngFor="let degree of educationDegrees" [ngValue]="degree">{{degree}}
+        </option>
+      </datalist>
+      <div class="error-messages"
+           *ngIf="(educationForm.get('educationDegree').touched || submitStatus) && educationForm.get('educationDegree').hasError('required')">
+        <p>{{getMessage().MSG_ERROR_VALIDATION_DEGREE_NAME_REQUIRED}}</p>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Specialization<span class="optional-field"> (Optional)</span></label>
+      <input class="form-control" type="text" formControlName="specialization"/>
+    </div>
+</div>
+</div>
+
+

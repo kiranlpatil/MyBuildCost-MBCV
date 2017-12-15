@@ -60,6 +60,23 @@
   }
 }
 
+.btn-add-another-degree {
+  color: #29b6f6;
+  float: left;
+  margin-top: -151px;
+  display: block;
+  margin-left: 50px;
+  position: relative;
+  background: transparent;
+  border: 0;
+  padding: 9px;
+  font-size: 12px;
+}
+
+button.btn-add-another-degree[disabled]{
+  cursor: not-allowed;
+}
+
 @media only screen and (max-width: 767px) {
   .compact-view {
     p {

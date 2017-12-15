@@ -56,7 +56,7 @@
             </div>
           </div>
 
-          <div class="col-sm-8 no-padding">
+         <!-- <div class="col-sm-8 no-padding">
             <div class="form-group">
               <label>Educational Qualification</label>
               <select class="select" formControlName="education">
@@ -67,7 +67,29 @@
                 <p>{{educationalValidationMessage}}</p>
               </div>
             </div>
+          </div>-->
+
+          <div class="col-sm-8 no-padding">
+            <div formArrayName="educationForm">
+              <div *ngFor="let educationForm of jobPostForm.controls.educationForm.controls; let i=index">
+                <div>
+              <span class="glyphicon glyphicon-trash pull-right"
+                    *ngIf="jobPostForm.controls.educationForm.controls.length>0 &&
+                     jobPostForm.controls.educationForm.controls.length !==1 "
+                    (click)="removeEducationDetails(i)"></span>
+                </div>
+
+                <cn-job-education [submitStatus]="submitStatus"
+                                  [educationForm]="educationForm"></cn-job-education>
+              </div>
+              <button (click)="addAnotherEducationalDetails()" class="btn-add-another-degree"
+                      [disabled]="!jobPostForm.controls.educationForm.valid">
+                Add another
+              </button>
+            </div>
           </div>
+
+
 
           <div class="col-sm-8 no-padding">
             <div class="form-group clearfix">
@@ -168,7 +190,12 @@
       </h4>
       <div class="clearfix">
         <p><label>Job Title</label> {{jobPosterModel.jobTitle}}</p>
-        <p><label>Education</label> {{jobPosterModel.education}}</p>
+<!--
+        <p><label>Education</label>{{jobPosterModel.education}}</p>
+-->
+        <p><label>Education</label><b *ngFor="let education of jobPosterModel.educationForJob">
+        {{education.educationDegree}}<br/><b *ngIf="education.specialization">({{education.specialization}})</b><br/></b></p>
+
         <p *ngIf="jobPosterModel.experienceMinValue !=jobPosterModel.experienceMaxValue"><label>Experience Band</label>
           {{jobPosterModel.experienceMinValue}} -
           {{jobPosterModel.experienceMaxValue}} {{getLabel().YEARS}}</p>

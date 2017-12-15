@@ -20,7 +20,7 @@ export abstract class SearchEngine {
 
   abstract getSortedCriteria(sortBy: any, criteria: any): Object;
 
-  abstract getRequiredFieldNames(): any;
+  abstract getRequiredFieldNames(filter:AppliedFilter): any;
 
   abstract getMatchingObjects(criteria: any, includedFields: any, sortingQuery: any,
                               callback: (error: any, response: any[]) => void): void;
@@ -66,12 +66,33 @@ export abstract class SearchEngine {
     });
   }
 
-  /*maskQCards(q_cards: any []): any[] {
-   for(let qCard in q_cards) {
-   q_cards[qCard].last_name =  UtilityFunction.valueHide(q_cards[qCard].last_name);
-   }
-   return q_cards;
-   }*/
+
+  getMasterDataForFilter(objects:any): any{
+    let educationDegreeMap: any = new Object();
+    let specializationMap: any = new Object();
+    let keySkillsMap: any = new Object();
+    for(let candidate of objects){
+      if(candidate.academics && candidate.academics.length >0){
+        for(let academic of candidate.academics){
+          educationDegreeMap[academic.educationDegree] =  '';
+          if(academic.specialization){
+            specializationMap[academic.specialization] = '';
+          }
+        }
+      }
+      if(candidate.proficiencies && candidate.proficiencies.length >0){
+        for(let keySkill of candidate.proficiencies){
+          keySkillsMap[keySkill] = '';
+        }
+      }
+    }
+    let result:any={
+     'educationDegrees':Object.keys(educationDegreeMap),
+     'specialization':Object.keys(specializationMap),
+      'keySkills':Object.keys(keySkillsMap)
+    }
+    return result;
+  }
 
   getMatchingResult(searchEngine: SearchEngine, forId: any, appliedFilters: AppliedFilter,
                     callback: (err: Error, res: any,userId:string) => void): void {
@@ -91,16 +112,22 @@ export abstract class SearchEngine {
 
       let mainCriteria = searchEngine.buildUserCriteria(appliedFilters, businessCriteria);
       let sortingQuery = searchEngine.getSortedCriteria(appliedFilters, businessCriteria);
-      let includedFields = searchEngine.getRequiredFieldNames();
+      let includedFields = searchEngine.getRequiredFieldNames(appliedFilters);
 
       searchEngine.getMatchingObjects(mainCriteria, includedFields, sortingQuery, (error: any, response: any[]) => {
         if (error) {
           callback(error, null,againstDetails.userId);
           return;
         }
-        searchEngine.buildQCards(response, againstDetails, appliedFilters, (error: any, qcards: any[]) => {
-          callback(error, qcards,againstDetails.userId);
-        });
+        if(appliedFilters.isMasterData) {
+         let masterData = this.getMasterDataForFilter(response);
+          callback(error, masterData,againstDetails.userId);
+        } else {
+          searchEngine.buildQCards(response, againstDetails, appliedFilters, (error: any, qcards: any[]) => {
+            callback(error, qcards,againstDetails.userId);
+          });
+        }
+
       });
     });
   }

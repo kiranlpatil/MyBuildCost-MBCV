@@ -1,4 +1,5 @@
 @import '../../../../css/variables';
+
 $border-color: #e8e8e8;
 $text-color: #333;
 $btn-color: #3694d1;
@@ -41,6 +42,17 @@ $message: #00aed5;
 
 .button-group {
   position: relative !important;
+}
+
+.keyskills-label {
+  p {
+    bottom: 2px;
+    color: $warning-text;
+    font-size: 12px;
+    left: 70px;
+    position: absolute;
+    width: 387px;
+  }
 }
 
 @media screen and (max-width: 767px) {
