@@ -117,7 +117,7 @@ export class Messages {
   public static MSG_ERROR_FB_AUTH: string = 'User cancelled login or did not fully authorize.';
   public static MSG_ERROR_FB_domain_error: string = 'The domain of this URL is not included in the app domains.';
   public static MSG_WARNING_ON_EDIT_CANDIDATE: string = 'This section can be updated only after.';
-  public static MSG_JOB_WITHOUT_KEYSKILLS: string = 'Keyskills are not added for the current job, your job will be posted without keyskills.';
+  public static MSG_JOB_WITHOUT_KEYSKILLS: string = 'Key skills are not added for the current job, your job will be posted without key skills.';
 
   public static MSG_ERROR_VALIDATION_EMAIL_REQUIRED = 'Enter your e-mail address.';
   public static MSG_ERROR_VALIDATION_WEBSITE_REQUIRED = 'Enter company website.';
