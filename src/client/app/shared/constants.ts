@@ -795,7 +795,7 @@ export class Label {
   public static IN_LAKH: string = '(In Lakh)';
   public static YEARS: string = '(Years)';
   public static NONE: string = 'None';
-  public static REMENBER: string = 'Remember me';
+  public static REMENBER_ME: string = 'Remember me';
 }
 
 export class Button {
