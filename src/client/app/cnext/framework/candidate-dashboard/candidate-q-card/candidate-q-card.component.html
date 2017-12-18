@@ -116,7 +116,7 @@
             (click)="actionForSearchView('rejectedList',job) ">Reject
     </button>
       <button *ngIf="inRejectListedStatusForSearchView == false" class="btn btn-cart"
-              (click)="viewJob(job)">Match against this job
+              (click)="viewJob(job)" [innerHTML]="getButton().MATCH_AGAINST_THIS_JOB">
       </button>
     </div>
   </div>

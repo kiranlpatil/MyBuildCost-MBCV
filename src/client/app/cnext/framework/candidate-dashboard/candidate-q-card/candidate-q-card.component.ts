@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, Output, ViewChild, OnInit} from "@angular/core";
 import {JobQcard} from "../../model/JobQcard";
-import {AppSettings, Label, SessionStorage, UsageActions, ValueConstant} from "../../../../shared/constants";
+import {AppSettings, Button, Label, SessionStorage, UsageActions, ValueConstant} from "../../../../shared/constants";
 import {SessionStorageService} from "../../../../shared/services/session.service";
 import {CandidateDashboardService} from "../candidate-dashboard.service";
 import {Message} from "../../../../shared/models/message";
@@ -257,4 +257,7 @@ export class CandidateQCardComponent implements OnInit {
     return Label;
   }
 
+  getButton() {
+    return Button;
+  }
 }
