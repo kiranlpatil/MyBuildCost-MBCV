@@ -30,11 +30,19 @@
       </div>
     </div>
     <div class="form-group">
-      <label>Certification Number <span class="optional-field">(Optional)</span></label>
+      <label>Certification Number
+        <span class="optional-field">
+          {{getHeadings().OPTIONAL}}
+        </span>
+      </label>
       <input type="text" class="form-control" formControlName="code" />
     </div>
     <div class="col-sm-12 no-padding">
-      <label>Certification/Accreditation Details <span class="optional-field">(Optional)</span></label>
+      <label>Certification/Accreditation Details
+        <span class="optional-field">
+          {{getHeadings().OPTIONAL}}
+        </span>
+      </label>
       <textarea row="2" formControlName="remark"
                 class="form-control"></textarea>
     </div>

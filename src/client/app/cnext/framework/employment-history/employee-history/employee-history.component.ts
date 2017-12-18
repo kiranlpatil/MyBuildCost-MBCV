@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FormGroup} from '@angular/forms';
-import {Messages, ValueConstant, SessionStorage} from '../../../../shared/constants';
+import {Messages, ValueConstant, SessionStorage, Headings} from '../../../../shared/constants';
 
 
 @Component({
@@ -63,6 +63,8 @@ export class EmployeeHistoryComponent implements OnInit{
     this.isDisableToDate = value;
   }
 
-
+  getHeadings() {
+    return Headings;
+  }
 }
 

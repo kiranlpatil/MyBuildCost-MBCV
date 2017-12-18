@@ -108,7 +108,11 @@
 
         <div *ngIf="role!=='candidate'"class="form-group" [class.fb-email-input]="isSocialLogin">
           <cn-control-messages [control]="recruiterForm.controls.company_website"></cn-control-messages>
-          <label>{{getLabels().COMPANY_WEBSITE_FIELD_LABEL}}(Optional)</label>
+          <label>{{getLabels().COMPANY_WEBSITE_FIELD_LABEL}}
+            <span class="optional-field">
+              {{getHeadings().OPTIONAL}}
+            </span>
+          </label>
           <input type="text" [(ngModel)]="company_website" (keydown)="onCompnayWebsite()" formControlName="company_website" id="recruiter_company_website"
                  class="form-control clear"/>
           <span class="error-messages" *ngIf="!isCompanyWebsiteValid">{{getMessages().MSG_ERROR_VALIDATION_INVALID_URL_REQUIRED}}</span>

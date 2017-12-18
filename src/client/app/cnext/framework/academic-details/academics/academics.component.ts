@@ -1,7 +1,7 @@
 import {Component, Input} from '@angular/core';
 
 import { FormGroup } from '@angular/forms';
-import { ValueConstant, Messages } from '../../../../shared/constants';
+import {ValueConstant, Messages, Headings} from '../../../../shared/constants';
 import { ProfessionalDataService } from '../../professional-data/professional-data.service';
 import { ErrorService } from '../../../../shared/services/error.service';
 
@@ -42,6 +42,10 @@ export class AcademicsComponent {
     for (let i = 0; i <= ValueConstant.MAX_YEAR_LIST; i++) {
       this.yearList.unshift(year++);
     }
+  }
+
+  getHeadings() {
+    return Headings;
   }
 }
 

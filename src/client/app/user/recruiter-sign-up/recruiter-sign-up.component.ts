@@ -5,7 +5,7 @@ import {Recruiter} from "../models/recruiter";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ValidationService} from "../../shared/customvalidations/validation.service";
 import {AppSettings, CommonService, Message, MessageService, NavigationRoutes} from "../../shared/index";
-import {API, Button, ImagePath, Label, SessionStorage, Messages} from "../../shared/constants";
+import {API, Button, ImagePath, Label, SessionStorage, Messages, Headings} from "../../shared/constants";
 import {SessionStorageService} from "../../shared/services/session.service";
 import {Headers, Http, RequestOptions, Response} from "@angular/http";
 import {Location} from "../../user/models/location";
@@ -304,6 +304,9 @@ export class RecruiterSignUpComponent implements OnInit {
   }
   getButton() {
     return Button;
+  }
+  getHeadings() {
+    return Headings;
   }
 
   goToAcceptTerms() {

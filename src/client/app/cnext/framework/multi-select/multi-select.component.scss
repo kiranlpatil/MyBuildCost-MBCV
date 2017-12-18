@@ -112,6 +112,9 @@ $message: #0d75fa;
       color: $new-skill;
     }
   }
+  input::-webkit-input-placeholder {
+    color: $keyskill-input;
+  }
 }
 
 .job-proficiency-container {

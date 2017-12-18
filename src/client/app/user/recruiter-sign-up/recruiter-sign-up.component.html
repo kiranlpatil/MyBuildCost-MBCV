@@ -53,7 +53,11 @@
                                [submitStatus]="submitStatus"></cn-control-messages>
           <input type="text" (keydown)="onCompanyWebsiteType()" formControlName="company_website" id="company_website" class="form-control" maxlength="40"
                  autocomplete="off" />
-          <label>{{getLabel().COMPANY_WEBSITE_FIELD_LABEL}} <span>(Optional)</span></label>
+          <label>{{getLabel().COMPANY_WEBSITE_FIELD_LABEL}}
+            <span class="optional-field">
+              {{getHeadings().OPTIONAL}}
+            </span>
+          </label>
           <span class="error-messages" *ngIf="!isCompanyWebsiteValid">{{getMessages().MSG_ERROR_VALIDATION_INVALID_URL_REQUIRED}}</span>
 
         </div>

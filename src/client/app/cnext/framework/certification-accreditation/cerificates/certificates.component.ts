@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 
 import { FormGroup } from '@angular/forms';
-import { ValueConstant, Messages } from '../../../../shared/constants';
+import {ValueConstant, Messages, Headings} from '../../../../shared/constants';
 
 
 @Component({
@@ -36,6 +36,9 @@ export class CertificatesComponent {
     for (let i = 0; i <= ValueConstant.MAX_YEAR_LIST; i++) {
       this.yearList.unshift(year++);
     }
+  }
+  getHeadings() {
+    return Headings;
   }
 }
 

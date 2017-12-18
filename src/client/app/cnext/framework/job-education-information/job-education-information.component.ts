@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ProfessionalDataService } from '../professional-data/professional-data.service';
 import { ErrorService } from '../../../shared/services/error.service';
-import { Messages } from '../../../shared/constants';
+import {Headings, Messages} from '../../../shared/constants';
 
 
 @Component({
@@ -29,7 +29,9 @@ export class JobEducationComponent {
   getMessage() {
     return Messages;
   }
-
+  getHeadings() {
+    return Headings;
+  }
 }
 
 
