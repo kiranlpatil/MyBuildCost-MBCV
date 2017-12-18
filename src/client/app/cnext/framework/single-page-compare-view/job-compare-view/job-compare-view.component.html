@@ -423,8 +423,11 @@
       <div>
         <div class="pull-left col-xs-7 no-padding text-left">
           <div *ngIf="data != undefined">
-            <div class="pull-left" *ngFor="let cap of data.additionalCapabilites" style="padding-top: 6px;padding-right: 7px;">
-              <span> {{cap}} </span><span *ngIf="j<data.additionalCapabilites.length-1">,</span>
+            <div class="pull-left" *ngFor="let cap of data.additionalCapabilites;let i = index" style="padding-top: 6px;padding-right: 7px;">
+              <span>{{cap}}
+                <span *ngIf="data.additionalCapabilites.length>1 && i!=data.additionalCapabilites.length -1">,&nbsp;</span>
+              </span>
+             <!-- <span *ngIf="j<data.additionalCapabilites.length-1">,</span>-->
             </div>
           </div>
         </div>
