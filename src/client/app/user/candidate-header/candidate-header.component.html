@@ -12,10 +12,7 @@
           <span class="icon-bar"></span>
         </button>
 
-        <a class="navbar-brand" (click)="navigateTo('candidate/profile'); closeMenu($event);" *ngIf="!candidate.isSubmitted">
-          <img src={{MOBILE_LOGO}}/>
-        </a>
-        <a class="navbar-brand" (click)="navigateTo('/candidate/dashboard'); closeMenu($event);" *ngIf="candidate.isSubmitted">
+        <a class="navbar-brand" (click)="navigateTo('candidate/profile'); closeMenu($event);">
           <img src={{MOBILE_LOGO}}/>
         </a>
       </div>
@@ -36,24 +33,9 @@
       <div class="bg-overlay" [class.show]="isClassVisible" (click)="isClassVisible = false;"></div>
       <div class="collapse navbar-collapse" [class.open-nav]="isClassVisible">
         <ul class="nav navbar-nav navbar-left hidden-xs navbar-links">
-          <li role="menuitem" *ngIf="candidate.isSubmitted" [routerLinkActive]="['active']">
-            <a class="dropdown-item"  [routerLink]="['/candidate/dashboard']" (click)="navigateTo('/candidate/dashboard');">
+          <li role="menuitem" [routerLinkActive]="['active']">
+            <a class="dropdown-item"  [routerLink]="['/dashboard']" (click)="navigateTo('/dashboard');">
               <span class="icon-dashboard"></span>My Dashboard
-            </a>
-          </li>
-          <li role="menuitem" *ngIf="candidate.isSubmitted" [routerLinkActive]="['active']">
-            <a class="dropdown-item" [routerLink]="['/value-portrait']" (click)="navigateToWithId('/candidate/value-portrait');">
-              <span class="icon-value-portrait"></span>Value Portrait
-            </a>
-          </li>
-          <li role="menuitem" *ngIf="candidate.isSubmitted" [routerLinkActive]="['active']">
-            <a class="dropdown-item" [routerLink]="['/candidate/profile']" (click)="navigateTo('/candidate/profile');">
-              <span class="icon-edit-profile"></span>Edit Profile
-            </a>
-          </li>
-          <li role="menuitem" *ngIf="candidate.isSubmitted==false" [routerLinkActive]="['active']">
-            <a class="dropdown-item" [routerLink]="['/candidate/profile']" (click)="navigateTo('/candidate/profile');">
-              <span class="icon-edit-profile"></span>{{getLabel().CREATE_PROFILE_LABEL}}
             </a>
           </li>
         </ul>
@@ -61,35 +43,22 @@
           <li class="dropdown last-child">
             <div class="dropdown">
               <a class="hidden-xs simple-dropdown dropdown-toggle" data-toggle="dropdown" href="#">
-                <img src="assets/framework/images/dashboard/profile.png" alt="User Profile"
-                     *ngIf="candidate.basicInformation.picture==undefined"/>
-                <img [src]="getImagePath(candidate.basicInformation.picture)" alt="User Profile"
-                     *ngIf="candidate.basicInformation.picture!=undefined"/>
+                <img src="assets/framework/images/dashboard/profile.png" alt="User Profile"/>
                 <span class="caret"></span>
               </a>
               <ul class="dropdown-menu mobile-dropdown">
                 <li class="user-info user-info-ipad">
-                  <img class="visible-xs" src="assets/framework/images/dashboard/profile.png" alt="User Profile"
-                       *ngIf="candidate.basicInformation.picture==undefined"/>
-                  <img class="visible-xs" [src]="getImagePath(candidate.basicInformation.picture)" alt="User Profile"
-                       *ngIf="candidate.basicInformation.picture!=undefined"/>
-                  <h4>{{candidate.basicInformation.first_name}} {{candidate.basicInformation.last_name}}</h4>
-                  <h5 *ngIf="candidate.jobTitle != undefined">{{candidate.jobTitle}}</h5>
+                  <img class="visible-xs" src="assets/framework/images/dashboard/profile.png" alt="User Profile"/>
+                  <h4>Swapnil</h4>
                 </li>
                 <li class="divider"></li>
-                <li class="visible-xs" role="menuitem" [routerLinkActive]="['active']" *ngIf="candidate.isSubmitted">
+                <li class="visible-xs" role="menuitem" [routerLinkActive]="['active']">
                   <a class="dropdown-item" [routerLink]="['/candidate/dashboard']"
                      (click)="navigateTo('/candidate/dashboard');">
                     <span class="glyphicon glyphicon-th"></span>My Dashboard
                   </a>
                 </li>
-                <li class="visible-xs" role="menuitem" [routerLinkActive]="['active']" *ngIf="candidate.isSubmitted">
-                  <a class="dropdown-item" [routerLink]="['/value-portrait']"
-                     (click)="navigateToWithId('/value-portrait');">
-                    <span class="glyphicon glyphicon-user"></span>Value Portrait
-                  </a>
-                </li>
-                <li class="visible-xs" role="menuitem" [routerLinkActive]="['active']" *ngIf="candidate.isCompleted">
+                <li class="visible-xs" role="menuitem" [routerLinkActive]="['active']">
                   <a class="dropdown-item" [routerLink]="['/candidate/profile']"
                      (click)="navigateTo('/candidate/profile');">
                     <span class="	glyphicon glyphicon-edit"></span>Edit Profile
@@ -106,12 +75,6 @@
                     <span class="glyphicon glyphicon-lock"></span>Change Password
                   </a>
                 </li>
-                <!--<li role="menuitem">
-                  <a class="dropdown-item"
-                     (click)="goToGuidedTour()">
-                    <span class="glyphicon glyphicon-road"></span>Guided Tour
-                  </a>
-                </li>-->
                 <li role="menuitem">
                   <a class="dropdown-item" (click)="logOut()">
                     <span class="glyphicon glyphicon-log-out"></span>Sign Out
@@ -126,7 +89,3 @@
     </div>
   </nav>
 </header>
-
-<!--<div *ngIf="highlightedSection.name=='GuideTour'">
-  <cn-guided-tour (onSkip)="onSkip($event)"></cn-guided-tour>
-</div>-->

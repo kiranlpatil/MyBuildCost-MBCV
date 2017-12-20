@@ -26,9 +26,6 @@ export class UserHeaderComponent {
   onApplicantSignUp() {
     this._router.navigate(['/applicant-signup']);
   }
-  onRecruiterSignUp() {
-    this._router.navigate(['/recruiter-signup']);
-  }
 
     onHomePage() {
       window.sessionStorage.clear();

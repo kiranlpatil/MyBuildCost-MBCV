@@ -74,14 +74,14 @@
               <ul class="dropdown-menu mobile-dropdown">
                 <li role="menuitem" [routerLinkActive]="['active']">
                   <a class="dropdown-item" [routerLink]="['profile']"
-                     (click)="navigateTo('/dashboard/profile'); toggleMenu();">
+                     (click)="navigateTo('/user/details'); toggleMenu();">
                     <span class="glyphicon glyphicon-user"></span>Profile
                   </a>
                 </li>
 
                 <li role="menuitem" [routerLinkActive]="['active']">
                   <a class="dropdown-item" [routerLink]="['settings']"
-                     (click)="navigateTo('/dashboard/settings'); toggleMenu();">
+                     (click)="navigateTo('/user/change-password'); toggleMenu();">
                     <span class="glyphicon glyphicon-cog"></span>Settings
                   </a>
                 </li>

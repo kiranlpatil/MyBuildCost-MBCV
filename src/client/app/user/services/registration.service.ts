@@ -46,9 +46,9 @@ constructor(private _router: Router, private themeChangeService: ThemeChangeServ
     }
     else if (res.data.isCandidate === true) {
       if (res.data.isCompleted === true) {
-        this._router.navigate([NavigationRoutes.APP_CANDIDATE_DASHBOARD]);
+        this._router.navigate([NavigationRoutes.APP_DASHBOARD]);
       } else {
-        this._router.navigate([NavigationRoutes.APP_CREATEPROFILE]);
+        this._router.navigate([NavigationRoutes.APP_DASHBOARD]);
       }
     } else {
       SessionStorageService.setSessionValue(SessionStorage.COMPANY_NAME, res.data.company_name);

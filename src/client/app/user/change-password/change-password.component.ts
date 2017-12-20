@@ -6,7 +6,6 @@ import {FormBuilder, FormGroup} from "@angular/forms";
 import {LoaderService} from "../../shared/loader/loaders.service";
 import {ValidationService} from "../../shared/customvalidations/validation.service";
 import {AppSettings, Messages, Label, Button, Headings, NavigationRoutes} from "../../shared/constants";
-import {CandidateProfileService} from "../../cnext/framework/candidate-profile/candidate-profile.service";
 import {Candidate, Summary} from "../models/candidate";
 import {ErrorService} from "../../shared/services/error.service";
 import {ActivatedRoute, Params, Router} from "@angular/router";
@@ -32,7 +31,7 @@ export class ChangePasswordComponent {
   candidate: Candidate = new Candidate();
   role: string;
   isSocialLogin:boolean;
-  constructor(private _router: Router, private activatedRoute: ActivatedRoute, private errorService: ErrorService, private candidateProfileService: CandidateProfileService, private commonService: CommonService,
+  constructor(private _router: Router, private activatedRoute: ActivatedRoute, private errorService: ErrorService, private commonService: CommonService,
               private passwordService: ChangePasswordService,
               private messageService: MessageService,
               private formBuilder: FormBuilder, private loaderService: LoaderService) {
@@ -51,12 +50,7 @@ export class ChangePasswordComponent {
   ngOnInit() {
     this.activatedRoute.queryParams.subscribe((params: Params) => {
       this.role = params['role'];
-      switch(this.role) {
-        case 'candidate': this.getCandidate(); break;
-        case 'recruiter': /*this.getRecruiter();*/ break;
-        case 'admin': break;
-        default :  this._router.navigate([NavigationRoutes.APP_START]); break;
-      }
+      this._router.navigate([NavigationRoutes.APP_START]);
     });
   }
 
@@ -143,40 +137,10 @@ export class ChangePasswordComponent {
     return Headings;
   }
 
-  getCandidate() {
-    this.candidateProfileService.getCandidateDetails()
-      .subscribe(
-        candidateData => {
-          this.OnCandidateDataSuccess(candidateData);
-        }, error => this.errorService.onError(error));
-  }
-
   OnCandidateDataSuccess(candidateData: any) {
     this.candidate = candidateData.data[0];
     this.candidate.basicInformation = candidateData.metadata;
     this.candidate.summary = new Summary();
   }
 
-  OnRecruiterDataSuccess(candidateData: any) {
-    this.candidate = candidateData.data[0];
-    this.candidate.basicInformation = candidateData.metadata;
-    this.candidate.summary = new Summary();
-  }
-
-  getRecruiter() {
-    this.candidateProfileService.getRecruiterDetails()
-      .subscribe(
-        recruiterData => {
-          this.OnRecruiterDataSuccess(recruiterData);
-        }, error => this.errorService.onError(error));
-  }
-  /*getAdminProfile() {
-    this.adminDashboardService.getUserProfile()
-      .subscribe(
-        userprofile => this.onAdminProfileSuccess(userprofile),
-        error => this.errorService.onError(error));
-  }
-  onAdminProfileSuccess(candidateData: any) {
-    this.candidate.basicInformation = candidateData.data;
-  }*/
 }

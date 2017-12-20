@@ -19,159 +19,22 @@ import {DashboardService} from "./user/services/dashboard.service";
 import {ContactService} from "./framework/dashboard/contact/contact.service";
 import {ActivateUserComponent} from "./framework/registration/activate-user/activate-user.component";
 import {ActiveUserService} from "./framework/registration/activate-user/activate-user.service";
-import {ComplexityService} from "./cnext/framework/complexity.service";
-import {ProfessionalDataComponent} from "./cnext/framework/professional-data/professional-data.component";
-import {ProfessionalDataService} from "./cnext/framework/professional-data/professional-data.service";
-import {EmploymentHistoryComponent} from "./cnext/framework/employment-history/employment-history.component";
-import {EmploymentHistoryService} from "./cnext/framework/employment-history/employment-history.service";
-import {AcademicDetailComponent} from "./cnext/framework/academic-details/academic-details.component";
-import {CertificationAccreditationComponent} from "./cnext/framework/certification-accreditation/certification-accreditation.component";
-import {AwardsComponent} from "./cnext/framework/awards/awards.component";
-import {MoreAboutMyselfComponent} from "./cnext/framework/more-about-myself/more-about-myself.component";
-import {JobPosterComponent} from "./cnext/framework/job-poster/job-poster.component";
-import {DescriptionFieldComponent} from "./cnext/framework/description-field/description-field.component";
-import {RecruiterDashboardComponent} from "./cnext/framework/recruiter-dashboard/recruiter-dashboard.component";
-import {IndustryListComponent} from "./cnext/framework/industry-list/industry-list.component";
-import {IndustryListService} from "./cnext/framework/industry-list/industry-list.service";
 import {DateService} from "./cnext/framework/date.service";
 import {RoleTypeListComponent} from "./cnext/framework/role-type/role-type.component";
 import {RoleTypeService} from "./cnext/framework/role-type/role-type.service";
-import {IndustryExperienceListComponent} from "./cnext/framework/industry-experience/industry-experience.component";
-import {IndustryExperienceService} from "./cnext/framework/industry-experience/industry-experience.service";
-import {CandidateAwardService} from "./cnext/framework/awards/awards.service";
-import {AboutCandidateService} from "./cnext/framework/more-about-myself/more-about-myself.service";
-import {CandidateAcademyDetailService} from "./cnext/framework/academic-details/academic-details.service";
-import {JobPosterService} from "./cnext/framework/job-poster/job-poster.service";
-import {CandidateSummaryComponent} from "./cnext/framework/one-page-summary/candidate-summary/candidate-summary.component";
-import {VericalListViewComponent} from "./cnext/framework/one-page-summary/shared/vertical-list-view/vertical-list-view.component";
-import {TabularListViewComponent} from "./cnext/framework/one-page-summary/shared/tabular-list-view/tabular-list-view.component";
-import {HorizontalListViewComponent} from "./cnext/framework/one-page-summary/shared/horizontal-list-view/horizontal-list-view.component";
-import {AdditionalDetailsComponent} from "./cnext/framework/one-page-summary/shared/additional-details/additional-details.component";
-import {ProfileDescriptionComponent} from "./cnext/framework/profile-description/profile-description.component";
-import {CandidateProfileComponent} from "./cnext/framework/candidate-profile/candidate-profile.component";
-import {CandidateProfileService} from "./cnext/framework/candidate-profile/candidate-profile.service";
-import {WorkAreaComponent} from "./cnext/framework/work-area/work-area.component";
-import {RecruiterHeaderComponent} from "./cnext/framework/recruiter-dashboard/recruiter-dashboard-header/recruiter-header.component";
-import {CapabilitiesComponent} from "./cnext/framework/capibilities/capabilities.component";
-import {ComplexitiesComponent} from "./cnext/framework/complexities/complexities.component";
-import {ProficienciesComponent} from "./cnext/framework/proficiencies/proficiencies.component";
-import {ProficiencyDomainService} from "./cnext/framework/proficiencies/proficiencies.service";
-import {BasicJobInformationComponent} from "./cnext/framework/basic-job-information/basic-job-information.component";
-import {CompetenciesAndResponsibilitiesComponent} from "./cnext/framework/compentacies-and-responsibilities/compentacies-and-responsibilities.component";
-import {BasicJobInformationService} from "./cnext/framework/basic-job-information/basic-job-information.service";
-import {JobListerComponent} from "./cnext/framework/recruiter-dashboard/job-lister/job-lister.component";
-import {QCardviewComponent} from "./cnext/framework/recruiter-dashboard/q-card-view/q-card-view.component";
-import {QCardViewService} from "./cnext/framework/recruiter-dashboard/q-card-view/q-card-view.service";
-import {ProgressBarComponent} from "./cnext/framework/progress-bar/progress-bar.component";
-import {ShowQcardviewService} from "./cnext/framework/showQCard.service";
-import {JobListerSortPipe} from "./cnext/framework/recruiter-dashboard/job-lister/job-lister.pipe";
-import {RecruiterDashboardService} from "./cnext/framework/recruiter-dashboard/recruiter-dashboard.service";
-import {RecruiterJobSummaryComponent} from "./cnext/framework/one-page-summary/recruiter-job-summary/recruiter-job-summary.component";
-import {RecruiterJobInformation} from "./cnext/framework/one-page-summary/recruiter-job-summary/recruiter-job-information/recruiter-job-information.component";
-import {MultiSelectComponent} from "./cnext/framework/multi-select/multi-select.component";
-import {MultiSelectService} from "./cnext/framework/multi-select/multi-select.service";
-import {JobProficienciesComponent} from "./cnext/framework/job-proficiency/job-proficiencies.component";
-import {RecruiteQCardView2Service} from "./cnext/framework/recruiter-dashboard/recruiter-q-card-view2/recruiter-q-card-view2.service";
-import {RecruiterQCardview2Component} from "./cnext/framework/recruiter-dashboard/recruiter-q-card-view2/recruiter-q-card-view2.component";
-import {RecruiterCandidatesListsService} from "./cnext/framework/candidate-lists.service";
-import {CandidateDashboardComponent} from "./cnext/framework/candidate-dashboard/candidate-dashboard.component";
-import {CandidateDashboardService} from "./cnext/framework/candidate-dashboard/candidate-dashboard.service";
-import {QcardListComponent} from "./cnext/framework/candidate-dashboard/candidate-q-card-list/q-card-list.component";
-import {CandidateQCardComponent} from "./cnext/framework/candidate-dashboard/candidate-q-card/candidate-q-card.component";
-import {FilterComponent} from "./cnext/framework/filters/filter/filter.component";
-import {JobViewComponent} from "./cnext/framework/one-page-summary/recruiter-job-summary/job-view/job-view.component";
-import {CandidateJobListComponent} from "./cnext/framework/candidate-dashboard/candidate-job-list/candidate-job-list.component";
-import {CandidateJobListService} from "./cnext/framework/candidate-dashboard/candidate-job-list/candidate-job-list.service";
-import {CandidateViewComponent} from "./cnext/framework/one-page-summary/candidate-summary/candidate-view/candidate-view.component";
-import {ValuePortraitContainerComponent} from "./cnext/framework/value-portrait/value-portrait-container.component";
-import {ValuePortraitComponent} from "./cnext/framework/value-portrait/value-portrait-component/value-portrait.component";
-import {ValuePortraitHeader} from "./cnext/framework/value-portrait/value-portrait-component/value-portrait-header/value-portrait-header.component";
-import {CandidateInfoBlock} from "./cnext/framework/value-portrait/value-portrait-component/candidate-info-block/candidate-info-block.component";
-import {CandidateCapabilityPortrait} from "./cnext/framework/value-portrait/value-portrait-component/candidate-capability-portrait/candidate-capability-portrait.component";
-import {CandidateInCartService} from "./cnext/framework/candidate-in-cart.service";
-import {FilterService} from "./cnext/framework/filters/filter/filter.service";
-import {QCardFilterService} from "./cnext/framework/filters/q-card-filter.service";
-import {QCardListSortPipe} from "./cnext/framework/filters/q-card-list-sort.pipe";
-import {MinRangeValidation} from "./cnext/framework/filters/min-range-validation.pipe";
-import {MaxRangeValidation} from "./cnext/framework/filters/max-range-validation.pipe";
-import {RecuirterQCardMatchingPipe} from "./cnext/framework/filters/recuirter-q-card-matching.pipe";
-import {EmployeeHistoryComponent} from "./cnext/framework/employment-history/employee-history/employee-history.component";
-import {QCardListFilterPipe} from "./cnext/framework/filters/q-card-list-filter.pipe";
-import {JobDashboardComponent} from "./cnext/framework/recruiter-dashboard/job-dashboard/job-dashboard.component";
-import {JobDashboardService} from "./cnext/framework/recruiter-dashboard/job-dashboard/job-dashboard.service";
-import {AcademicsComponent} from "./cnext/framework/academic-details/academics/academics.component";
-import {CandidateCompareViewComponent} from "./cnext/framework/single-page-compare-view/candidate-compare-view/candidate-compare-view.component";
-import {CapabilityCompareComponent} from "./cnext/framework/single-page-compare-view/shared/capability-compare/capability-compare.component";
-import {CertificatesComponent} from "./cnext/framework/certification-accreditation/cerificates/certificates.component";
-import {AwardComponent} from "./cnext/framework/awards/award/award.component";
-import {ProficiencyCompareComponent} from "./cnext/framework/single-page-compare-view/shared/proficiency-compare/proficiency-compare.component";
-import {CandidateCompareService} from "./cnext/framework/single-page-compare-view/candidate-compare-view/candidate-compare-view.service";
-import {JobCompareService} from "./cnext/framework/single-page-compare-view/job-compare-view/job-compare-view.service";
-import {JobCompareViewComponent} from "./cnext/framework/single-page-compare-view/job-compare-view/job-compare-view.component";
-import {GuidedTourComponent} from "./cnext/framework/guided-tour/guided-tour.component";
 import {RedirectRecruiterDashboardService} from "./user/services/redirect-dashboard.service";
-import {QuestionAnswerComponent} from "./cnext/framework/question-answer/question-answer.component";
-import {ComplexityComponentService} from "./cnext/framework/complexities/complexity.service";
-import {ReleventIndustryListComponent} from "./cnext/framework/relevent-industry-list/relevent-industry-list.component";
-import {ReleventIndustryListService} from "./cnext/framework/relevent-industry-list/relevent-industry-list.service";
-import {MultipleQuestionAnswerComponent} from "./cnext/framework/multiple-question-answer/multiple-question-answer.component";
-import {ProfessionalDetailsService} from "./cnext/framework/professional-detail-service";
-import {ProfessionalDetailsDirective} from "./cnext/framework/shared-directives/professional-details.directive";
 import {ProfileDetailsService} from "./cnext/framework/profile-detail-service";
-import {ProfileDetailsDirective} from "./cnext/framework/shared-directives/profile-details.directive";
-import {ProficiencyDetailsDirective} from "./cnext/framework/shared-directives/proficiency-details.directive";
-import {ProficiencyDetailsService} from "./cnext/framework/proficiency-detail-service";
-import {IndustryDetailsService} from "./cnext/framework/industry-detail-service";
-import {IndustryDetailsDirective} from "./cnext/framework/shared-directives/industry-details.directive";
-import {IndustryDataDirective} from "./cnext/framework/shared-directives/industry-data.directive";
-import {IndustryDataService} from "./cnext/framework/industry-data-service";
-import {ProfileComparisonComponent} from "./cnext/framework/profile-comparison/profile-comparison.component";
-import {ProfileComparisonService} from "./cnext/framework/profile-comparison/profile-comparison.service";
-import {ProfileComparisonHeaderComponent} from "./cnext/framework/profile-comparison/profile-comparison-header/profile-comparison-header.component";
-import {ProfileCapabilityComparisonComponent} from "./cnext/framework/profile-comparison/profile-capability-comparison/profile-capability-comparison.component";
-import {ProfileCapabilityComparisonMetaComponent} from "./cnext/framework/profile-comparison/profile-capability-comparison/profile-capability-comparison-meta/profile-capability-comparison-meta.component";
-import {ProfileComparisonHeaderMetaComponent} from "./cnext/framework/profile-comparison/profile-comparison-header/profile-comparison-header-meta/profile-comparison-header-meta.component";
-import {ProfileAttributeComparisonComponent} from "./cnext/framework/profile-comparison/profile-attribute-comparison/profile-attribute-comparison.component";
-import {ProfileComparisonPipe} from "./cnext/framework/profile-comparison/profile-capability-comparison/profile-comparison.pipe";
-import {ColorShadeDirective} from "./cnext/framework/profile-comparison/profile-capability-comparison/color-shade.directive";
-import {AttributeFilterPipe} from "./cnext/framework/profile-comparison/profile-attribute-comparison/attribute-filter.pipe";
-import {ValueSortFilterPipe} from "./cnext/framework/profile-comparison/value-sort.pipe";
 import {GuidedTourService} from "./cnext/framework/guided-tour.service";
 import {LoggerService, MyErrorHandler} from "./cnext/framework/my-error-handler.service";
-import {CandidateSearchComponent} from "./cnext/framework/candidate-search/candidate-search.component";
-import {CandidateSearchService} from "./cnext/framework/candidate-search/candidate-search.service";
 import {UserModule} from "./user/user.module";
-import {JobCloneComponent} from "./cnext/framework/job-clone/job-clone.component";
 import {SharedModule} from "./shared/shared.module";
 import {CustomHttp} from "./shared/services/http/custom.http";
 import {ProfileService} from "./framework/shared/profileservice/profile.service";
 import {LandingPageComponent} from "./framework/landing-page/landing-page.component";
-import {ShareComponent} from "./cnext/framework/share/share.component";
-import {ShareService} from "./cnext/framework/share/share.service";
 import {SharedService} from "./shared/services/shared-service";
-import {ShareContainerComponent} from "./cnext/framework/share-container/share-container.component";
-import {ShareContainerService} from "./cnext/framework/share-container/share-container.service";
-import {RenewJobPostService} from "./user/services/renew-jobpost.service";
-import {PrintScreenComponent} from "./cnext/framework/print-screen/print-screen.component";
-import {JobShareContainerComponent} from "./cnext/framework/job-share-container/job-share-container.component";
-import {JobShareContainerService} from "./cnext/framework/job-share-container/job-share-container.service";
-import {JobCloseComponent} from "./cnext/framework/job-close/job-close.component";
-import {ClosedJobFilter} from "./cnext/framework/filters/closed-job-filter.pipe";
-import {JobCloseComponentService} from "./cnext/framework/job-close/job-close.component.service";
-import {ComplexityAnsweredService} from "./cnext/framework/complexity-answered.service";
-import {UserFeedbackComponent} from "./cnext/framework/user-feedback/user-feedback.component";
-import {UserFeedbackComponentService} from "./cnext/framework/user-feedback/user-feedback.component.service";
-import {CandidateRouteSwitchComponent} from "./cnext/framework/candidate-dashboard/candidate-route-switch.component";
-import {CandidateBasicInformationComponent} from "./cnext/framework/one-page-summary/candidate-summary/candidate-basic-information/candidate-basic-information.component";
 import {PageNotFoundComponent} from "./shared/page-not-found/page-not-found.component";
-import {AdminModule} from "./admin/admin.module";
-import {RecruiterAction} from "./cnext/framework/recruiter-action/recruiter-action.component";
-import {ActionOnQCardService} from "./user/services/action-on-q-card.service";
-import {ActionOnMyJobPostComponent} from "./cnext/framework/recruiter-dashboard/action-on-my-job-post/action-on-my-job-post.component";
 import {AnalyticService} from "./shared/services/analytic.service";
-import {ManageCandidatesComponent} from "./cnext/framework/manage-candidates/manage-candidates.component";
-import {MyCareerPageComponent} from "./cnext/framework/manage-candidates/my-career-page/my-career-page.component";
-import {ManageCandidatesService} from "./cnext/framework/manage-candidates/manage-candidates.service";
+import { MyDashboardComponent} from "./cnext/framework/my-dashboard/my-dashboard.component"
 import {AuthGuardService} from "./shared/services/auth-guard.service";
 
 //C-NEXT IMPORTS
@@ -184,7 +47,6 @@ import {AuthGuardService} from "./shared/services/auth-guard.service";
     RouterModule.forRoot(routes),
     HttpModule,
     ReactiveFormsModule,
-    AdminModule,
     SharedModule,
     UserModule
   ],
@@ -201,103 +63,9 @@ import {AuthGuardService} from "./shared/services/auth-guard.service";
     SocialIconComponent,
 
     //C-NEXT COMPONENT
-
-    CandidateSummaryComponent,
-    CandidateBasicInformationComponent,
-    VericalListViewComponent,
-    TabularListViewComponent,
-    AcademicsComponent,
-    ProfileDetailsDirective,
-    ProfessionalDetailsDirective,
-    AdditionalDetailsComponent,
-    HorizontalListViewComponent,
-    CandidateProfileComponent,
-    ProfileDescriptionComponent,
-    CapabilitiesComponent,
-    GuidedTourComponent,
-    MultipleQuestionAnswerComponent,
-    JobProficienciesComponent,
-    ProficienciesComponent,
-    IndustryListComponent,
-    ComplexitiesComponent,
-    EmployeeHistoryComponent,
-    JobPosterComponent,
-    QuestionAnswerComponent,
-    MultiSelectComponent,
-    BasicJobInformationComponent,
-    CompetenciesAndResponsibilitiesComponent,
-    CandidateJobListComponent,
-    CandidateDashboardComponent,
-    ProfessionalDataComponent,
-    ProficiencyDetailsDirective,
-    EmploymentHistoryComponent,
-    CandidateCompareViewComponent,
-    ProficiencyCompareComponent,
-    CapabilityCompareComponent,
-    AcademicDetailComponent,
-    CertificationAccreditationComponent,
-    AwardsComponent,
-    JobShareContainerComponent,
-    DescriptionFieldComponent,
-    MoreAboutMyselfComponent,
-    FilterComponent,
-    CertificatesComponent,
-    AwardComponent,
-    RecruiterDashboardComponent,
-    ProgressBarComponent,
-    CandidateViewComponent,
-    ValuePortraitContainerComponent,
-    ValuePortraitComponent,
-    ValuePortraitHeader,
-    CandidateInfoBlock,
-    CandidateCapabilityPortrait,
-    WorkAreaComponent,
-    IndustryDetailsDirective,
-    IndustryDataDirective,
-    JobViewComponent,
-    JobCompareViewComponent,
-    QcardListComponent,
-    CandidateQCardComponent,
-    RecruiterHeaderComponent,
     RoleTypeListComponent,
-    IndustryExperienceListComponent,
-    JobListerComponent,
-    QCardviewComponent,
-    QCardListSortPipe,
-    JobListerSortPipe,
-    RecruiterJobSummaryComponent,
-    RecruiterJobInformation,
-    RecruiterQCardview2Component,
-    QCardListFilterPipe,
-    ClosedJobFilter,
-    RecuirterQCardMatchingPipe,
-    MinRangeValidation,
-    MaxRangeValidation,
-    JobDashboardComponent,
-    ReleventIndustryListComponent,
-    ProfileComparisonComponent,
-    ProfileComparisonHeaderComponent,
-    ProfileCapabilityComparisonComponent,
-    ProfileCapabilityComparisonMetaComponent,
-    ProfileComparisonHeaderMetaComponent,
-    ProfileAttributeComparisonComponent,
-    ProfileComparisonPipe,
-    ColorShadeDirective,
-    AttributeFilterPipe,
-    ValueSortFilterPipe,
-    CandidateSearchComponent,
-    ShareComponent,
-    JobCloneComponent,
-    ShareContainerComponent,
-    PrintScreenComponent,
-    JobCloseComponent,
-    ActionOnMyJobPostComponent,
-    UserFeedbackComponent,
-    CandidateRouteSwitchComponent,
-    PageNotFoundComponent,
-    RecruiterAction,
-    ManageCandidatesComponent,
-    MyCareerPageComponent
+    MyDashboardComponent,
+    PageNotFoundComponent
   ],
 
   providers: [
@@ -312,64 +80,19 @@ import {AuthGuardService} from "./shared/services/auth-guard.service";
       provide: APP_BASE_HREF,
       useValue: '<%= APP_BASE %>'
     },
-    ComplexityComponentService,
-    ComplexityService,
-    JobCompareService,
     NotificationService,
     DashboardService,
     ProfileService,
     ContactService,
-    CandidateCompareService,
     ActiveUserService,
-    BasicJobInformationService,
-    IndustryListService,
-    CandidateJobListService,
-    ProfessionalDataService,
-    EmploymentHistoryService,
-    ProficiencyDomainService,
-    EmploymentHistoryService,
     DateService,
-    CandidateDashboardService,
     RoleTypeService,
-    RenewJobPostService,
-    IndustryExperienceService,
-    ShowQcardviewService,
-    CandidateAwardService,
-    MultiSelectService,
     ProfileDetailsService,
-    AboutCandidateService,
-    JobPosterService,
-    JobShareContainerService,
-    ProfessionalDetailsService,
-    CandidateAcademyDetailService,
-    CandidateProfileService,
-    RecruiterDashboardService,
-    QCardViewService,
-    IndustryDetailsService,
-    ProficiencyDetailsService,
-    FilterService,
-    IndustryDataService,
-    RecruiteQCardView2Service,
-    RecruiterCandidatesListsService,
-    CandidateInCartService,
-    RecruiterCandidatesListsService,
-    QCardFilterService,
-    JobDashboardService,
     RedirectRecruiterDashboardService,
-    ReleventIndustryListService,
-    ProfileComparisonService,
     GuidedTourService,
-    CandidateSearchService,
     SharedService,
-    ShareService,
     Title,
-    ShareContainerService,
-    JobCloseComponentService,
-    ComplexityAnsweredService,
-    UserFeedbackComponentService,
-    ActionOnQCardService,
     AnalyticService,
-    ManageCandidatesService,
     AuthGuardService
   ],
   bootstrap: [AppComponent]

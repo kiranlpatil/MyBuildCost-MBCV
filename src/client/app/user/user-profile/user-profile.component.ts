@@ -19,9 +19,7 @@ import {NavigationRoutes, Label, Button, Headings} from "../../shared/constants"
 import {LoaderService} from "../../shared/loader/loaders.service";
 import {CandidateDetail} from "../models/candidate-details";
 import {Candidate, Summary} from "../models/candidate";
-import {CandidateProfileService} from "../../cnext/framework/candidate-profile/candidate-profile.service";
 import {ErrorService} from "../../shared/services/error.service";
-import {RecruiterDashboardService} from "../../cnext/framework/recruiter-dashboard/recruiter-dashboard.service";
 
 
 @Component({
@@ -61,8 +59,6 @@ export class UserProfileComponent implements OnInit {
               private _router: Router, private formBuilder: FormBuilder, private loaderService: LoaderService,
               private themeChangeService: ThemeChangeService,
               private activatedRoute: ActivatedRoute,
-              private candidateProfileService: CandidateProfileService,
-              private recruiterDashboardService: RecruiterDashboardService,
               private errorService: ErrorService) {
 
     this.userForm = this.formBuilder.group({
@@ -97,8 +93,6 @@ export class UserProfileComponent implements OnInit {
       this.role = params['role'];
       SessionStorageService.setSessionValue(SessionStorage.ROLE_NAME, this.role);
       switch(this.role) {
-        case 'candidate': this.getCandidate(); break;
-        case 'recruiter': this.getRecruiter(); break;
         default :  this._router.navigate([NavigationRoutes.APP_START]); break;
       }
     });
@@ -116,26 +110,6 @@ export class UserProfileComponent implements OnInit {
       //this.getUserProfile();
     }
     document.body.scrollTop = 0;
-  }
-
-  getCandidate() {
-    this.candidateProfileService.getCandidateDetails()
-        .subscribe(
-            candidateData => {
-              this.OnCandidateDataSuccess(candidateData);
-            }, error => this.errorService.onError(error));
-  }
-
-  getRecruiter() {
-    this.recruiterDashboardService.getRecruiterDetails()
-      .subscribe(
-        recruiterData => {
-           this.company_website=recruiterData.data.company_website;
-            this.company_name=recruiterData.data.company_name;
-            this.model.email = recruiterData.metadata.email;
-            this.model.mobile_number = recruiterData.metadata.mobile_number;
-          //this.OnCandidateDataSuccess(recruiterData);
-        }, error => this.errorService.onError(error));
   }
 
   OnCandidateDataSuccess(candidateData: any) {

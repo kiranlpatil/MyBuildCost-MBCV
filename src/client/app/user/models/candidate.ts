@@ -7,7 +7,6 @@ import {EmployementHistory} from "./employment-history";
 import {CandidateDetail} from "./candidate-details";
 import {Location} from "./location";
 import {Capability} from "./capability";
-import {UserFeedback} from "../../cnext/framework/user-feedback/userFeedback";
 export class Candidate {
   personalDetails: CandidateDetail = new CandidateDetail();
   jobTitle: string;

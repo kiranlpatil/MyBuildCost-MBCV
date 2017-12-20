@@ -378,6 +378,8 @@ export class NavigationRoutes {
   public static APP_FORGOTPASSWORD: string = '/forgot-password';
   public static APP_DASHBOARD: string = '/dashboard';
   public static APP_CANDIDATE_DASHBOARD: string = '/candidate';
+  public static APP_USER_DASHBOARD: string = '/user';
+  public static APP_USER__DETAILS_DASHBOARD: string = '/user/details';
   public static APP_ADMIN_DASHBOARD: string = '/admin';
   public static APP_RECRUITER_DASHBOARD: string = '/recruiter';
   public static APP_LOGIN: string = '/signin';

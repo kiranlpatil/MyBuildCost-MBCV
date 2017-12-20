@@ -16,9 +16,7 @@ import {ProjectAsset, Headings} from "../../shared/constants";
 import {LoaderService} from "../../shared/loader/loaders.service";
 import {ActivatedRoute} from "@angular/router";
 import {Candidate, Summary} from "../models/candidate";
-import {CandidateProfileService} from "../../cnext/framework/candidate-profile/candidate-profile.service";
 import {ErrorService} from "../../shared/services/error.service";
-import {AdminDashboardService} from "../../admin/admin-dashboard/admin-dashboard.service";
 
 @Component({
   moduleId: module.id,
@@ -39,11 +37,9 @@ export class SettingsComponent implements OnInit, OnDestroy {
   candidate: Candidate = new Candidate();
 
     constructor(private commonService: CommonService, private activatedRoute: ActivatedRoute,
-                private candidateProfileService: CandidateProfileService,
                 private errorService: ErrorService,
                 private themeChangeService: ThemeChangeService, private changeThemeServie: SettingsService,
-                private messageService: MessageService, private formBuilder: FormBuilder, private loaderService: LoaderService,
-                private adminDashboardService: AdminDashboardService) {
+                private messageService: MessageService, private formBuilder: FormBuilder, private loaderService: LoaderService) {
 
     //this.themeIs = SessionStorageService.getSessionValue(SessionStorage.MY_THEME);
     this.themeIs = AppSettings.INITIAL_THEM;
@@ -58,13 +54,6 @@ export class SettingsComponent implements OnInit, OnDestroy {
   ngOnInit() {
       this.activatedRoute.params.subscribe(params => {
           this.role = params['role'];
-          if (this.role) {
-              if (this.role === 'candidate') {
-                  this.getCandidate();
-              } else if (this.role === 'recruiter') {
-                  this.getRecruiter();
-              }
-          }
       });
     var socialLogin: string = SessionStorageService.getSessionValue(SessionStorage.IS_SOCIAL_LOGIN);
     if (socialLogin === 'YES') {
@@ -74,14 +63,6 @@ export class SettingsComponent implements OnInit, OnDestroy {
     }
     document.body.scrollTop = 0;
   }
-
-    getCandidate() {
-        this.candidateProfileService.getCandidateDetails()
-            .subscribe(
-                candidateData => {
-                    this.OnCandidateDataSuccess(candidateData);
-                }, error => this.errorService.onError(error));
-    }
 
     OnCandidateDataSuccess(candidateData: any) {
         this.candidate = candidateData.data[0];
@@ -95,22 +76,6 @@ export class SettingsComponent implements OnInit, OnDestroy {
     this.candidate.summary = new Summary();
   }
 
-  getRecruiter() {
-    this.candidateProfileService.getRecruiterDetails()
-      .subscribe(
-        recruiterData => {
-          this.OnRecruiterDataSuccess(recruiterData);
-        }, error => this.errorService.onError(error));
-  }
-  getAdminProfile() {
-    this.adminDashboardService.getUserProfile()
-      .subscribe(
-        userprofile => this.onAdminProfileSuccess(userprofile),
-        error => this.errorService.onError(error));
-  }
-  onAdminProfileSuccess(candidateData: any) {
-    this.candidate.basicInformation = candidateData.data;
-  }
   ngOnDestroy() {
     //this.loaderService.stop();
   }

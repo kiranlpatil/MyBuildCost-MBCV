@@ -6,8 +6,7 @@
     <ul>
       <li *ngIf="!(MainHeaderMenuHideShow == 'signin')"><a (click)="onLogin()">Sign In</a></li>
       <!--<li><a (click)="onSignUp()">Register</a></li>-->
-      <li *ngIf="!(MainHeaderMenuHideShow == 'applicant')"><a (click)="onApplicantSignUp()">Applicant Sign Up</a></li>
-      <li *ngIf="!(MainHeaderMenuHideShow == 'recruiter')"><a (click)="onRecruiterSignUp()">Recruiter Sign Up</a></li>
+      <li *ngIf="!(MainHeaderMenuHideShow == 'applicant')"><a (click)="onApplicantSignUp()">Sign Up</a></li>
     </ul>
   </nav>
   <span class="glyphicon glyphicon-log-out" (click)="onHomePage()" *ngIf="MainHeaderMenuHideShow === 'hiringManger'"></span>
