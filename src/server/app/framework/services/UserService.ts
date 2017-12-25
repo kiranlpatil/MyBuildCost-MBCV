@@ -12,6 +12,8 @@ import ProjectAsset = require('../shared/projectasset');
 import MailAttachments = require('../shared/sharedarray');
 import {asElementData} from "@angular/core/src/view";
 import bcrypt = require('bcrypt');
+import {MailChimpMailerService} from "./mailchimp-mailer.service";
+import UserModel = require("../dataaccess/model/UserModel");
 
 class UserService {
   APP_NAME: string;
@@ -86,6 +88,7 @@ class UserService {
                 },
                 access_token: token
               }
+              callback(null, data);
 
             } else {
               callback({
@@ -145,6 +148,45 @@ class UserService {
       }
     });
   }
+
+  sendOtp(params: any, user: any, callback:(error: any, result: any) => void) {
+    let Data = {
+      new_mobile_number: params.mobile_number,
+      old_mobile_number: user.mobile_number,
+      _id: user._id
+    };
+    this.generateOtp(Data, (error, result) => {
+      if (error) {
+        if (error == Messages.MSG_ERROR_CHECK_MOBILE_PRESENT) {
+          callback({
+            reason: Messages.MSG_ERROR_RSN_EXISTING_USER,
+            message: Messages.MSG_ERROR_REGISTRATION_MOBILE_NUMBER,
+            stackTrace: new Error(),
+            code: 400
+          }, null);
+        }
+        else {
+          callback(error, null);
+        }
+      }
+      else if (result.length > 0) {
+        callback({
+          "status": Messages.STATUS_SUCCESS,
+          "data": {
+            "message": Messages.MSG_SUCCESS_OTP
+          }
+        }, null);
+      }
+      else {
+        callback({
+          reason: Messages.MSG_ERROR_RSN_USER_NOT_FOUND,
+          message: Messages.MSG_ERROR_RSN_USER_NOT_FOUND,
+          stackTrace: new Error(),
+          code: 400
+        }, null);
+      }
+    });
+  }
   generateOtp(field: any, callback: (error: any, result: any) => void) {
     this.userRepository.retrieve({'mobile_number': field.new_mobile_number, 'isActivated': true}, (err, res) => {
 
@@ -173,6 +215,37 @@ class UserService {
         callback(new Error(Messages.MSG_ERROR_REGISTRATION_MOBILE_NUMBER), null);
       }
     });
+  }
+
+  verifyOtp(params: any, user:any, callback:(error:any, result:any) => void){
+    let mailChimpMailerService = new MailChimpMailerService();
+
+    let query = {"_id": user._id, "isActivated": false};
+    let updateData = {"isActivated": true, "activation_date": new Date()};
+    if (user.otp === params.otp) {
+      this.findOneAndUpdate(query, updateData, {new: true}, (error, result) => {
+        if (error) {
+          callback(error, null);
+        }
+        else {
+          callback(null,{
+            "status": "Success",
+            "data": {"message": "User Account verified successfully"}
+          });
+          mailChimpMailerService.onCandidateSignSuccess(result);
+
+        }
+      });
+    }
+    else {
+      callback({
+        reason: Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
+        message: Messages.MSG_ERROR_WRONG_OTP,
+        stackTrace: new Error(),
+        code: 400
+      }, null);
+    }
+
   }
 
   changeMobileNumber(field: any, callback: (error: any, result: any) => void) {
@@ -250,7 +323,7 @@ class UserService {
   }
 
 
-  /*sendVerificationMail(field: any, callback: (error: any, result: SentMessageInfo) => void) {
+ /* sendVerificationMail(field: any, callback: (error: any, result: SentMessageInfo) => void) {
 
     this.userRepository.retrieve({'email': field.email}, (err, res) => {
       if (res.length > 0) {
@@ -369,7 +442,7 @@ class UserService {
       if (err) {
         callback(err, res);
       }else {
-        this.userRepository.update(res._id, item, callback);
+        this.userRepository.update(_id, item, callback);
       }
     });
   }
@@ -409,6 +482,215 @@ class UserService {
     this.userRepository.retrieveWithIncluded(query, {}, callback);
   }
 
+  resetPassword(data: any, user : any, callback:(error: any, result: any) =>void ){
+    const saltRounds = 10;
+    bcrypt.hash(data.new_password, saltRounds, (err: any, hash: any) => {
+      if (err) {
+        callback({
+          reason: 'Error in creating hash using bcrypt',
+          message: 'Error in creating hash using bcrypt',
+          stackTrace: new Error(),
+          code: 403
+        }, null);
+      } else {
+        let updateData = {'password': hash};
+        let query = {"_id": user._id, "password": user.password};
+        this.findOneAndUpdate(query, updateData, {new: true}, (error, result) => {
+          if (error) {
+            callback(error, null);
+          } else {
+            callback(null,{
+              'status': 'Success',
+              'data': {'message': 'Password changed successfully'}
+            });
+          }
+        });
+      }
+    });
+  }
+
+  updateDetails(data:  UserModel, user: UserModel, callback:(error: any, result: any) => void){
+    let auth: AuthInterceptor = new AuthInterceptor();
+    this.update(user.user_id, data, (error, result) => {
+      if (error) {
+        callback(error, null);
+      }
+      else {
+        this.retrieve(user.user_id, (error, result) => {
+          if (error) {
+            callback({
+              reason: Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
+              message: Messages.MSG_ERROR_WRONG_TOKEN,
+              stackTrace: new Error(),
+              code: 400
+            }, null);
+          }
+          else {
+            callback(null,{
+              "status": "success",
+              "data": {
+                "first_name": result[0].first_name,
+                "last_name": result[0].last_name,
+                "email": result[0].email,
+                "mobile_number": result[0].mobile_number,
+                "picture": result[0].picture,
+                "_id": result[0].userId,
+                "current_theme": result[0].current_theme
+              }
+            });
+          }
+        });
+      }
+    });
+  }
+  getUserById(user, callback:(error, result)=>void){
+    let auth: AuthInterceptor = new AuthInterceptor();
+
+    let token = auth.issueTokenWithUid(user);
+    callback(null,{
+      "status": "success",
+      "data": {
+        "first_name": user.first_name,
+        "last_name": user.last_name,
+        "email": user.email,
+        "mobile_number": user.mobile_number,
+        "picture": user.picture,
+        "social_profile_picture": user.social_profile_picture,
+        "_id": user.userId,
+        "current_theme": user.current_theme
+      },
+      access_token: token
+    });
+  }
+
+  verifyAccount(user, callback:(error, result)=>void){
+    let query = {"_id": user._id, "isActivated": false};
+    let updateData = {"isActivated": true};
+    this.findOneAndUpdate(query, updateData, {new: true}, (error, result) => {
+      if (error) {
+        callback(error, null);
+      }
+      else {
+
+        callback(null,{
+          "status": "Success",
+          "data": {"message": "User Account verified successfully"}
+        });
+      }
+
+    });
+  }
+
+  changeEmailId(data, user, callback:(error, result)=>void){
+    let auth: AuthInterceptor = new AuthInterceptor();
+    let query = {"email": data.new_email};
+
+    this.retrieve(query, (error, result) => {
+
+      if (error) {
+        callback(error, null);
+      }
+      else if (result.length > 0 && result[0].isActivated === true) {
+        callback({
+          reason: Messages.MSG_ERROR_RSN_EXISTING_USER,
+          message: Messages.MSG_ERROR_REGISTRATION,
+          stackTrace: new Error(),
+          code: 400
+        },null);
+
+      }
+      else if (result.length > 0 && result[0].isActivated === false) {
+        callback({
+          reason: Messages.MSG_ERROR_RSN_EXISTING_USER,
+          message: Messages.MSG_ERROR_ACCOUNT_STATUS,
+          stackTrace: new Error(),
+          code: 400
+        }, null);
+
+      }
+
+      else {
+
+        /*let emailId = {
+          current_email: req.body.current_email,
+          new_email: req.body.new_email
+        };*/
+
+        this.SendChangeMailVerification(data, (error, result) => {
+          if (error) {
+            if (error === Messages.MSG_ERROR_CHECK_EMAIL_ACCOUNT) {
+              callback({
+                reason: Messages.MSG_ERROR_RSN_EXISTING_USER,
+                message: Messages.MSG_ERROR_EMAIL_ACTIVE_NOW,
+                stackTrace: new Error(),
+                code: 400
+              }, null);
+            }
+            else {
+              callback({
+                reason: Messages.MSG_ERROR_RSN_WHILE_CONTACTING,
+                message: Messages.MSG_ERROR_WHILE_CONTACTING,
+                stackTrace: new Error(),
+                code: 400
+              }, null);
+
+            }
+          }
+          else {
+            callback(null, {
+              "status": Messages.STATUS_SUCCESS,
+              "data": {"message": Messages.MSG_SUCCESS_EMAIL_CHANGE_EMAILID}
+            });
+          }
+        });
+
+      }
+    });
+  }
+
+  verifyChangedEmailId(user, callback:(error, result)=> void){
+    let query = {"_id": user._id};
+    let updateData = {"email": user.temp_email, "temp_email": user.email};
+    this.findOneAndUpdate(query, updateData, {new: true}, (error, result) => {
+      if (error) {
+        callback(error, null);
+      }
+      else {
+
+        callback(null,{
+          "status": "Success",
+          "data": {"message": "User Account verified successfully"}
+        });
+      }
+
+    });
+  }
+
+  verifyMobileNumber(data, user, callback:(error, result)=>void){
+    let query = {"_id": user._id};
+    let updateData = {"mobile_number": user.temp_mobile, "temp_mobile": user.mobile_number};
+    if (user.otp === data.otp) {
+      this.findOneAndUpdate(query, updateData, {new: true}, (error, result) => {
+        if (error) {
+          callback(error, null);
+        }
+        else {
+          callback(null,{
+            "status": "Success",
+            "data": {"message": "User Account verified successfully"}
+          });
+        }
+      });
+    }
+    else {
+      callback({
+        reason: Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
+        message: Messages.MSG_ERROR_WRONG_OTP,
+        stackTrace: new Error(),
+        code: 400
+      }, null);
+    }
+  }
 }
 
 Object.seal(UserService);

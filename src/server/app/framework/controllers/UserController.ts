@@ -46,14 +46,14 @@ class UserController{
       let userService = new UserService();
       let params = req.body;
       delete params.access_token;
-      /*userService.login(params, (error, result)=> {
+      userService.login(params, (error, result)=> {
         if(error){
           next(error);
         }else{
           res.status(200).send(result);
         }
-      });*/
-      userService.retrieve({"email": params.email}, (error, result) => {
+      });
+      /*userService.retrieve({"email": params.email}, (error, result) => {
         if (error) {
           next(error);
         } else if (result.length > 0 && result[0].isActivated === true) {
@@ -144,7 +144,7 @@ class UserController{
             code: 400
           });
         }
-      });
+      });*/
     } catch (e) {
       next({
         reason: e.message,
@@ -154,48 +154,19 @@ class UserController{
       });
     }
   }
-  generateOtp(req: express.Request, res: express.Response, next: any) {
+  sendOtp(req: express.Request, res: express.Response, next: any) {
     try {
       let userService = new UserService();
       let user = req.user;
       let params = req.body;  //mobile_number(new)
+      userService.sendOtp(params, user, (error, result)=>{
+        if(error){
+          res.send(error);
+        }else{
+          res.status(200).send(result);
+        }
+      })
 
-      let Data = {
-        new_mobile_number: params.mobile_number,
-        old_mobile_number: user.mobile_number,
-        _id: user._id
-      };
-      userService.generateOtp(Data, (error, result) => {
-        if (error) {
-          if (error == Messages.MSG_ERROR_CHECK_MOBILE_PRESENT) {
-            next({
-              reason: Messages.MSG_ERROR_RSN_EXISTING_USER,
-              message: Messages.MSG_ERROR_REGISTRATION_MOBILE_NUMBER,
-              stackTrace: new Error(),
-              code: 400
-            });
-          }
-          else {
-            next(error);
-          }
-        }
-        else if (result.length > 0) {
-          res.status(200).send({
-            "status": Messages.STATUS_SUCCESS,
-            "data": {
-              "message": Messages.MSG_SUCCESS_OTP
-            }
-          });
-        }
-        else {
-          next({
-            reason: Messages.MSG_ERROR_RSN_USER_NOT_FOUND,
-            message: Messages.MSG_ERROR_RSN_USER_NOT_FOUND,
-            stackTrace: new Error(),
-            code: 400
-          });
-        }
-      });
     }
     catch (e) {
       next({
@@ -215,33 +186,13 @@ class UserController{
       let params = req.body; //OTP
       //  delete params.access_token;
       let userService = new UserService();
-      let mailChimpMailerService = new MailChimpMailerService();
+      userService.verifyOtp(params, user, (error, result)=>{
+        if(error){
 
-      let query = {"_id": user._id, "isActivated": false};
-      let updateData = {"isActivated": true, "activation_date": new Date()};
-      if (user.otp === params.otp) {
-        userService.findOneAndUpdate(query, updateData, {new: true}, (error, result) => {
-          if (error) {
-            next(error);
-          }
-          else {
-            res.send({
-              "status": "Success",
-              "data": {"message": "User Account verified successfully"}
-            });
-            mailChimpMailerService.onCandidateSignSuccess(result);
-
-          }
-        });
-      }
-      else {
-        next({
-          reason: Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
-          message: Messages.MSG_ERROR_WRONG_OTP,
-          stackTrace: new Error(),
-          code: 400
-        });
-      }
+        }else{
+          res.send(result);
+        }
+      })
 
     }
     catch (e) {
@@ -298,14 +249,21 @@ class UserController{
       });
     }
   }
+
   resetPassword(req: express.Request, res: express.Response, next: any) {
     try {
       let user = req.user;
       let params = req.body;   //new_password
       delete params.access_token;
       let userService = new UserService();
-      const saltRounds = 10;
-      bcrypt.hash(req.body.new_password, saltRounds, (err: any, hash: any) => {
+      userService.resetPassword(params, user, (err: any, result: any) => {
+        if(err){
+          next(err, null);
+        } else {
+          res.send(result);
+        }
+      })
+      /*bcrypt.hash(req.body.new_password, saltRounds, (err: any, hash: any) => {
         if (err) {
           next({
             reason: 'Error in creating hash using bcrypt',
@@ -327,7 +285,7 @@ class UserController{
             }
           });
         }
-      });
+      });*/
 
     }
     catch (e) {
@@ -345,10 +303,17 @@ class UserController{
       let params = req.query;
       delete params.access_token;
       let user = req.user;
-      let _id: string = user._id;
+      /*let _id: string = user._id;*/
 
-      let auth: AuthInterceptor = new AuthInterceptor();
       let userService = new UserService();
+      userService.updateDetails(newUserData, user, (error, result)=>{
+        if(error){
+          next(error);
+        }else{
+          res.send(result);
+        }
+      })
+      /*let auth: AuthInterceptor = new AuthInterceptor();
       userService.update(_id, newUserData, (error, result) => {
         if (error) {
           next(error);
@@ -379,7 +344,7 @@ class UserController{
             }
           });
         }
-      });
+      });*/
     }
     catch (e) {
       next({
@@ -390,7 +355,7 @@ class UserController{
       });
     }
   }
-  updateProfileField(req: express.Request, res: express.Response, next: any) {
+  /*updateProfileField(req: express.Request, res: express.Response, next: any) {
     try {
       //let newUserData: UserModel = <UserModel>req.body;
 
@@ -442,30 +407,21 @@ class UserController{
         code: 403
       });
     }
-  }
+  }*/
   retrieve(req: express.Request, res: express.Response, next: any) {
     try {
       let userService = new UserService();
       let params = req.params.id;
       delete params.access_token;
       let user = req.user;
-      let auth: AuthInterceptor = new AuthInterceptor();
-
-      let token = auth.issueTokenWithUid(user);
-      res.send({
-        "status": "success",
-        "data": {
-          "first_name": user.first_name,
-          "last_name": user.last_name,
-          "email": user.email,
-          "mobile_number": user.mobile_number,
-          "picture": user.picture,
-          "social_profile_picture": user.social_profile_picture,
-          "_id": user.userId,
-          "current_theme": user.current_theme
-        },
-        access_token: token
-      });
+      var userServices = new UserService();
+      userServices.getUserById(user, (err, result)=>{
+        if(err){
+          next(err);
+        }else{
+          res.send(result);
+        }
+      })
     } catch (e) {
       next({
         reason: e.message,
@@ -475,7 +431,7 @@ class UserController{
       });
     }
   }
-  verificationMail(req: express.Request, res: express.Response, next: any) {
+  /*verificationMail(req: express.Request, res: express.Response, next: any) {
     try {
       let userService = new UserService();
       let user = req.user;
@@ -506,7 +462,7 @@ class UserController{
       });
 
     }
-  }
+  }*/
   verifyAccount(req: express.Request, res: express.Response, next: any) {
     try {
 
@@ -515,21 +471,13 @@ class UserController{
       delete params.access_token;
       let userService = new UserService();
 
-      let query = {"_id": user._id, "isActivated": false};
-      let updateData = {"isActivated": true};
-      userService.findOneAndUpdate(query, updateData, {new: true}, (error, result) => {
-        if (error) {
+      userService.verifyAccount(user, (error, result)=>void{
+        if(error){
           next(error);
+        }else{
+          res.send(result);
         }
-        else {
-
-          res.send({
-            "status": "Success",
-            "data": {"message": "User Account verified successfully"}
-          });
-        }
-
-      });
+      })
     }
     catch (e) {
       next({
@@ -546,75 +494,19 @@ class UserController{
       let user = req.user;
       let params = req.query;
       delete params.access_token;
-      let auth: AuthInterceptor = new AuthInterceptor();
+      var data = {
+        current_email: req.body.current_email,
+        new_email: req.body.new_email
+      };
       let userService = new UserService();
 
-
-      let query = {"email": req.body.new_email};
-
-      userService.retrieve(query, (error, result) => {
-
-        if (error) {
+      userService.changeEmailId(data, user, (error, result) =>{
+        if(error){
           next(error);
+        } else{
+          res.send(result);
         }
-        else if (result.length > 0 && result[0].isActivated === true) {
-          next({
-            reason: Messages.MSG_ERROR_RSN_EXISTING_USER,
-            message: Messages.MSG_ERROR_REGISTRATION,
-            stackTrace: new Error(),
-            code: 400
-          });
-
-        }
-        else if (result.length > 0 && result[0].isActivated === false) {
-          next({
-            reason: Messages.MSG_ERROR_RSN_EXISTING_USER,
-            message: Messages.MSG_ERROR_ACCOUNT_STATUS,
-            stackTrace: new Error(),
-            code: 400
-          });
-
-        }
-
-        else {
-
-          let emailId = {
-            current_email: req.body.current_email,
-            new_email: req.body.new_email
-          };
-
-          userService.SendChangeMailVerification(emailId, (error, result) => {
-            if (error) {
-              if (error === Messages.MSG_ERROR_CHECK_EMAIL_ACCOUNT) {
-                next({
-                  reason: Messages.MSG_ERROR_RSN_EXISTING_USER,
-                  message: Messages.MSG_ERROR_EMAIL_ACTIVE_NOW,
-                  stackTrace: new Error(),
-                  code: 400
-                });
-              }
-              else {
-                next({
-                  reason: Messages.MSG_ERROR_RSN_WHILE_CONTACTING,
-                  message: Messages.MSG_ERROR_WHILE_CONTACTING,
-                  stackTrace: new Error(),
-                  code: 400
-                });
-
-              }
-            }
-            else {
-              res.status(200).send({
-                "status": Messages.STATUS_SUCCESS,
-                "data": {"message": Messages.MSG_SUCCESS_EMAIL_CHANGE_EMAILID}
-              });
-            }
-          });
-
-        }
-      });
-
-
+      })
     }
 
     catch (e) {
@@ -633,21 +525,13 @@ class UserController{
       delete params.access_token;
       let userService = new UserService();
 
-      let query = {"_id": user._id};
-      let updateData = {"email": user.temp_email, "temp_email": user.email};
-      userService.findOneAndUpdate(query, updateData, {new: true}, (error, result) => {
-        if (error) {
+      userService.verifyChangedEmailId(user, (error, result)=>{
+        if(error){
           next(error);
+        }else{
+          res.send(result);
         }
-        else {
-
-          res.send({
-            "status": "Success",
-            "data": {"message": "User Account verified successfully"}
-          });
-        }
-
-      });
+      })
     }
     catch (e) {
       next({
@@ -724,30 +608,13 @@ class UserController{
 
       let params = req.body; //otp
       let userService = new UserService();
-      let query = {"_id": user._id};
-      let updateData = {"mobile_number": user.temp_mobile, "temp_mobile": user.mobile_number};
-      if (user.otp === params.otp) {
-        userService.findOneAndUpdate(query, updateData, {new: true}, (error, result) => {
-          if (error) {
-            next(error);
-          }
-          else {
-            res.send({
-              "status": "Success",
-              "data": {"message": "User Account verified successfully"}
-            });
-          }
-        });
-      }
-      else {
-        next({
-          reason: Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
-          message: Messages.MSG_ERROR_WRONG_OTP,
-          stackTrace: new Error(),
-          code: 400
-        });
-      }
-
+      userService.verifyMobileNumber(params, user, (error, result)=>{
+        if(error){
+          next(error);
+        }else{
+          res.send(result);
+        }
+      });
     }
     catch (e) {
       next({
@@ -868,7 +735,7 @@ class UserController{
 
     }
   }
-  notifications(req: express.Request, res: express.Response, next: any) {
+  /*notifications(req: express.Request, res: express.Response, next: any) {
     try {
       let user = req.user;
       let auth: AuthInterceptor = new AuthInterceptor();
@@ -933,7 +800,7 @@ class UserController{
         code: 403
       });
     }
-  }
+  }*/
   updatePicture(req: express.Request, res: express.Response, next: any): void {
     __dirname = path.resolve() + config.get('TplSeed.profilePath');
     let form = new multiparty.Form({uploadDir: __dirname});
