@@ -3,6 +3,7 @@ import {ActivatedRoute, Router, Params} from "@angular/router";
 import {DashboardUserProfileService} from "./dashboard-user-profile.service";
 import {UserProfile} from "./../../../user/models/user";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {ValidationService} from "../../../shared/customvalidations/validation.service";
 import {NavigationRoutes, Label, Button, Headings} from "../../../shared/constants";
 import {
   AppSettings,
@@ -37,7 +38,10 @@ export class DashboardProfileComponent implements OnInit {
               private messageService: MessageService, private profileService: ProfileService,
               ) {
     this.userForm = this.formBuilder.group({
-      first_name: '', last_name:'', email:''
+      'first_name': ['', Validators.required],
+      'last_name': ['', Validators.required],
+      'email': ['', [Validators.required, ValidationService.emailValidator]],
+      'mobile_number': ['', [Validators.required, ValidationService.mobileNumberValidator]]
     });
   }
 

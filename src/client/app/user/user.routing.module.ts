@@ -3,7 +3,7 @@ import {RouterModule} from "@angular/router";
 import {CandidateSignUpVerificationRoutes} from "./candidate-sign-up-verification/candidate-sign-up-verification.routes";
 import {CandidateSignUpRoutes} from "./candidate-sign-up/candidate-sign-up.routes";
 import {UserVerificationRoutes} from "./user-verification/verify-user.routes";
-import {LoginRoutes} from "./login/login.routes";
+import {LoginRoutes} from "./../framework/login/login.routes";
 import {RecruiterSignUpRoutes} from "./recruiter-sign-up/recruiter.routes";
 import {ResetPasswordRoutes} from "../framework/login/forgot-password/reset-password/reset-password.routes";
 import {ForgotPasswordRoutes} from "../framework/login/forgot-password/forgot-password.routes";

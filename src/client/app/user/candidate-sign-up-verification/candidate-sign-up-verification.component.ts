@@ -3,7 +3,7 @@ import {SessionStorage, Messages} from "../../shared/constants";
 import {RegistrationService} from "../services/registration.service";
 import {Login} from "../models/login";
 import {SessionStorageService} from "../../shared/services/session.service";
-import {LoginService} from "../login/login.service";
+import {LoginService} from "../../framework/login/login.service";
 import {AnalyticService} from "../../shared/services/analytic.service";
 import {Router} from "@angular/router";
 declare var fbq: any;
@@ -38,8 +38,8 @@ export class CandidateSignUpVerificationComponent {
     this.loginModel.password = SessionStorageService.getSessionValue(SessionStorage.PASSWORD);
     this.loginService.userLogin(this.loginModel)
       .subscribe(
-        res => (this.registrationService.onSuccess(res)),
-        error => (this.registrationService.loginFail(error)));
+        (res:any) => (this.registrationService.onSuccess(res)),
+        (error:any) => (this.registrationService.loginFail(error)));
   }
   getStyleModal() {
     if (this.showModalStyle) {

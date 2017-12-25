@@ -1,7 +1,7 @@
 import {Component, ElementRef, OnInit, ViewChild} from "@angular/core";
 import {ActivatedRoute, Params, Router} from "@angular/router";
 import {LoginService} from "./login.service";
-import {Login} from "../models/login";
+import {Login} from "../../user/models/login";
 import {
   AppSettings,
   ImagePath,
@@ -16,13 +16,13 @@ import {FormBuilder, FormGroup} from "@angular/forms";
 import {ValidationService} from "../../shared/customvalidations/validation.service";
 import {Label, LocalStorage, Messages, ProjectAsset} from "../../shared/constants";
 import {SharedService} from "../../shared/services/shared-service";
-import {RegistrationService} from "../services/registration.service";
+import {RegistrationService} from "../../user/services/registration.service";
 import {LocalStorageService} from "../../shared/services/localstorage.service";
 /*declare var CareerPluginLoad:any;*/
 
 @Component({
   moduleId: module.id,
-  selector: 'login',
+  selector: 'tpl-login',
   templateUrl: 'login.component.html',
   styleUrls: ['login.component.css'],
 })

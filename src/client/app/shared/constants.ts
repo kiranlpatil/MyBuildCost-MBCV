@@ -157,7 +157,7 @@ export class Messages {
 
 export class NavigationRoutes {
   public static APP_REGISTRATION: string = '/registration';
-  public static APP_FORGOTPASSWORD: string = '/forgot-password-new';
+  public static APP_FORGOTPASSWORD: string = '/forgot-password';
   public static APP_DASHBOARD: string = '/dashboard';
   public static APP_USER_DASHBOARD: string = '/user';
   public static APP_USER__DETAILS_DASHBOARD: string = '/user/details';

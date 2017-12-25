@@ -1,7 +1,7 @@
 import {NgModule} from "@angular/core";
 import {SharedModule} from "../shared/shared.module";
-import {LoginComponent} from "./login/login.component";
-import {LoginService} from "./login/login.service";
+import {LoginComponent} from "./../framework/login/login.component";
+import {LoginService} from "./../framework/login/login.service";
 import {UserHeaderComponent} from "./user-header/user-header.component";
 import {CommonModule} from "@angular/common";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
@@ -39,7 +39,7 @@ import {SettingsService} from "./settings/settings.service";
 import {AdminDashboardHeaderComponent} from "./admin-dashboard-header/admin-dashboard-header.component";
 import { OtpVerificationComponent} from './otp-verification/otp-verification.component';
 import { OtpVerificationService} from './otp-verification/otp-verification.service';
-import { LoginauthGuard } from './login/login-auth-guard.service';
+import { LoginauthGuard } from './../framework/login/login-auth-guard.service';
 
 @NgModule({
   imports: [CommonModule, FormsModule, ReactiveFormsModule, SharedModule, /*TODO Abhijeet Ng2AutoCompleteModule,*/ UserRoutingModule],

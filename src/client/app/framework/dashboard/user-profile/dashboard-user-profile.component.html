@@ -22,14 +22,14 @@
       <form [formGroup]="userForm" (submit)="onSubmit()" class="profile-form clearfix">
 
         <div  class="form-group">
-          <label>FIRST_NAME_LABEL </label>
+          <label>FIRST NAME</label>
           <input type="text" [(ngModel)]="model.first_name" formControlName="first_name" id="first_name "
                  class="form-control"/>
         </div>
 
 
         <div  class="form-group">
-          <label>LAST_NAME_LABEL</label>
+          <label>LAST NAME</label>
           <input type="text" [(ngModel)]="model.last_name" formControlName="last_name" id="last_name "
                  class="form-control"/>
         </div>
@@ -42,6 +42,15 @@
           </label>
           <input [(ngModel)]="model.email" formControlName="email" id="email"
                  class="form-control clear" readonly/>
+        </div>
+
+        <div class="form-group"[class.hide-list]>
+          <cn-control-messages [control]="userForm.controls.mobile_number"></cn-control-messages>
+          <label>{{getLabels().CONTACT_FIELD_LABEL}}
+            <span class="glyphicon glyphicon-pencil" (click)="showHideMobileModal()"></span>
+          </label>
+          <input type="number" [(ngModel)]="model.mobile_number" formControlName="mobile_number"
+                 id="mobile_number" class="form-control clear" readonly/>
         </div>
 
 

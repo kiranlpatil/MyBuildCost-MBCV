@@ -5,7 +5,7 @@ import { VerifyOtp  } from '../models/verify-otp';
 import { MessageService } from '../../shared/services/message.service';
 import { Message } from '../../shared/models/message';
 import { ValidationService } from '../../shared/customvalidations/validation.service';
-import { LoginService } from '../../user/login/login.service';
+import { LoginService } from '../../framework/login/login.service';
 import { RegistrationService } from '../services/registration.service';
 import { OtpVerificationService } from './otp-verification.service';
 
