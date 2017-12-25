@@ -12,7 +12,7 @@
           <span class="icon-bar"></span>
         </button>
 
-        <a class="navbar-brand" (click)="navigateTo('candidate/profile'); closeMenu($event);">
+        <a class="navbar-brand" (click)="navigateTo('/'); closeMenu($event);">
           <img src={{MOBILE_LOGO}}/>
         </a>
       </div>
@@ -49,7 +49,7 @@
               <ul class="dropdown-menu mobile-dropdown">
                 <li class="user-info user-info-ipad">
                   <img class="visible-xs" src="assets/framework/images/dashboard/profile.png" alt="User Profile"/>
-                  <h4>Swapnil</h4>
+                  <h4>{{user_first_name}} {{user_last_name}}</h4>
                 </li>
                 <li class="divider"></li>
                 <li role="menuitem" [routerLinkActive]="['active']">

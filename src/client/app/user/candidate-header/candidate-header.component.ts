@@ -16,6 +16,8 @@ export class CandidateHeaderComponent {
   public isClassVisible: boolean = false;
   public isOpenProfile: boolean = false;
   PROFILE_IMG_PATH: string;
+  user_first_name: string;
+  user_last_name: string;
   MY_LOGO: string;
   MOBILE_LOGO: string;
   newUser: number;
@@ -31,6 +33,8 @@ export class CandidateHeaderComponent {
   constructor(private _router: Router, private _eref: ElementRef) {
     this.MY_LOGO = ImagePath.MY_WHITE_LOGO;
     this.MOBILE_LOGO = ImagePath.MOBILE_WHITE_LOGO;
+    this.user_first_name = SessionStorageService.getSessionValue(SessionStorage.FIRST_NAME);
+    this.user_last_name = SessionStorageService.getSessionValue(SessionStorage.LAST_NAME);
   }
 
   getImagePath(imagePath: string) {

@@ -1,16 +1,16 @@
 import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from "@angular/core";
 import {ActivatedRoute, Params, Router} from "@angular/router";
 import {CandidateSignUpService} from "./candidate-sign-up.service";
-import {CandidateDetail} from "../models/candidate-details";
+import {CandidateDetail} from "./../../../user/models/candidate-details";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {ValidationService} from "../../shared/customvalidations/validation.service";
-import {AppSettings, CommonService, Message, MessageService, NavigationRoutes} from "../../shared/index";
-import {API, ImagePath, Label, SessionStorage, Messages} from "../../shared/constants";
-import {SessionStorageService} from "../../shared/services/session.service";
-import {DateService} from "../../cnext/framework/date.service";
-import {SharedService} from "../../shared/services/shared-service";
-import {ErrorService} from "../../shared/services/error.service";
-import {AnalyticService} from "../../shared/services/analytic.service";
+import {ValidationService} from "../../../shared/customvalidations/validation.service";
+import {AppSettings, CommonService, Message, MessageService, NavigationRoutes} from "../../../shared/index";
+import {API, ImagePath, Label, SessionStorage, Messages} from "../../../shared/constants";
+import {SessionStorageService} from "../../../shared/services/session.service";
+import {DateService} from "../../../cnext/framework/date.service";
+import {SharedService} from "../../../shared/services/shared-service";
+import {ErrorService} from "../../../shared/services/error.service";
+import {AnalyticService} from "../../../shared/services/analytic.service";
 declare  var fbq:any;
 declare  var gtag:any;
 
@@ -71,7 +71,7 @@ export class CandidateSignUpComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-     this._router.navigate([NavigationRoutes.VERIFY_USER]);
+     //this._router.navigate([NavigationRoutes.VERIFY_USER]);
     this.validBirthYearList = this.dateService.createBirthYearList(this.year);
     this.mainHeaderMenuHideShow = 'applicant';
 
@@ -180,8 +180,8 @@ export class CandidateSignUpComponent implements OnInit, AfterViewInit {
   }
 
   goToAcceptTerms() {
-    let host = AppSettings.HTTP_CLIENT + AppSettings.HOST_NAME + API.ACCEPT_TERMS;
-    window.open(host, '_blank');
+    //let host = AppSettings.HTTP_CLIENT + AppSettings.HOST_NAME + API.ACCEPT_TERMS;
+    //window.open(host, '_blank');
   }
   gtag_report_conversion(sendTo:any) {
     var callback = function () {

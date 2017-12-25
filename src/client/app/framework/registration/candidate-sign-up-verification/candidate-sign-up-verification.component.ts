@@ -1,10 +1,10 @@
 import {Component} from "@angular/core";
-import {SessionStorage, Messages} from "../../shared/constants";
-import {RegistrationService} from "../services/registration.service";
-import {Login} from "../models/login";
-import {SessionStorageService} from "../../shared/services/session.service";
-import {LoginService} from "../../framework/login/login.service";
-import {AnalyticService} from "../../shared/services/analytic.service";
+import {SessionStorage, Messages} from "../../../shared/constants";
+import {RegistrationService} from "../../../user/services/registration.service";
+import {Login} from "../../../user/models/login";
+import {SessionStorageService} from "../../../shared/services/session.service";
+import {LoginService} from "../../../framework/login/login.service";
+import {AnalyticService} from "../../../shared/services/analytic.service";
 import {Router} from "@angular/router";
 declare var fbq: any;
 
