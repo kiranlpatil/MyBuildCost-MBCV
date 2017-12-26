@@ -1,17 +1,17 @@
-import methodOverride = require("method-override");
-import express = require("express");
-import bodyParser =  require("body-parser");
-import compression =  require("compression");
-import cors = require("cors");
+import methodOverride = require('method-override');
+import express = require('express');
+import bodyParser =  require('body-parser');
+import compression =  require('compression');
+import cors = require('cors');
 
 class MethodOverride {
-    
+
    static configuration () : any {
         var app = express();
-        app.use(methodOverride("X-HTTP-Method"));          
-        app.use(methodOverride("X-HTTP-Method-Override")); 
-        app.use(methodOverride("X-Method-Override"));      
-        app.use(methodOverride("_method"));
+        app.use(methodOverride('X-HTTP-Method'));
+        app.use(methodOverride('X-HTTP-Method-Override'));
+        app.use(methodOverride('X-Method-Override'));
+        app.use(methodOverride('_method'));
 
         app.use(bodyParser.urlencoded({extended: false}));
         app.use(bodyParser.json({limit: '40mb'}));

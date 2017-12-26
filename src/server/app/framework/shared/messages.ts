@@ -48,7 +48,8 @@ class Messages {
   public static MSG_ERROR_REGISTRATION_MOBILE_NUMBER: string = 'This mobile number is already in use by an existing ' +
     'user. Please enter another mobile number.';//Dont Change It
   public static MSG_ERROR_USER_NOT_FOUND: string = 'Sorry. There is no user registered with this email address.';//Dont Change it
-  public static MSG_ERROR_USER_NOT_FOUND_Mail_SEND: string = 'E-mail has been sent successfully on your registered email to reset password.';//Dont Change it
+  public static MSG_ERROR_USER_NOT_FOUND_Mail_SEND: string = 'E-mail has been sent successfully on your '+
+    'registered email to reset password.';//Dont Change it
   public static MSG_ERROR_EMAIL_ACTIVE_NOW: string = 'User already has an account associated with this email address.';//DontChnge It
   public static MSG_ERROR_TOKEN_SESSION: string = 'Your session has expired.';
   public static MSG_ERROR_WRONG_TOKEN: string = 'Invalid access token';
@@ -60,8 +61,10 @@ class Messages {
   public static MSG_ERROR_IS_BEARER: string = 'Invalid token strategy';
   public static MSG_ERROR_TOKEN_NOT_PROVIDED: string = 'Access token is not provided';
   public static MSG_ERROR_PROVIDE_ID: string = 'Provide user ID';
-  public static MSG_ERROR_ACCOUNT_STATUS: string = 'Your account is still inactive. Verify your account by clicking the verification link sent on your email.';//dont change It
-  public static MSG_ERROR_VERIFY_ACCOUNT: string = 'Your account is not active please contact jobMosis team to activate your account.';//Dont CHange It
+  public static MSG_ERROR_ACCOUNT_STATUS: string = 'Your account is still inactive.' +
+    ' Verify your account by clicking the verification link sent on your email.';//dont change It
+  public static MSG_ERROR_VERIFY_ACCOUNT: string = 'Your account is not active please contact Technical support'+
+    ' team to activate your account.';//Dont CHange It
   public static MSG_ERROR_VERIFY_CANDIDATE_ACCOUNT: string = 'Please contact the administrator to activate your account.';//Dont CHange It
   public static MSG_ERROR_BCRYPT_CREATION: string = 'Error in creating hash using bcrypt.';//Dont CHange It
   public static MSG_ERROR_INVALID_ID: string = 'Invalid Userid';

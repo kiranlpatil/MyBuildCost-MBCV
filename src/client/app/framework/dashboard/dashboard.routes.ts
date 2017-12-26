@@ -9,7 +9,7 @@ import {AuthGuardService} from "../../shared/services/auth-guard.service";
 
 export const DashboardRoutes: Route[] = [
   {
-    path: 'user',
+    path: 'dashboard',
     component: DashboardComponent,
     children: [
       {path: '', component: DashboardHomeComponent},

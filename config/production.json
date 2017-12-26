@@ -1,8 +1,8 @@
 {
-  "TplSeed": {
+  "application": {
     "database": {
       "host":"127.0.0.1",
-      "name": "JobMosis-production",
+      "name": "Appication-production",
       "username": "productionadmin",
       "password": "productionadminjobmosis123",
       "mongoExport": "/usr/bin/mongoexport"

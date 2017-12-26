@@ -1,6 +1,6 @@
-import IRead = require("./read");
-import IWrite = require("./write");
-import mongoose = require("mongoose");
+import IRead = require('./read');
+import IWrite = require('./write');
+import mongoose = require('mongoose');
 
 class RepositoryBase<T extends mongoose.Document> implements IRead<T>, IWrite<T> {
 
@@ -132,7 +132,7 @@ class RepositoryBase<T extends mongoose.Document> implements IRead<T>, IWrite<T>
   }
 //TODO: MOVE CODE TO ITS RELEATED REPOSITEORY
   findByName(name: string, callback: (error: any, result: T) => void) {
-    this._model.find({"name": name}, callback);
+    this._model.find({'name': name}, callback);
   }
 
   toObjectId(_id: string): mongoose.Types.ObjectId {
@@ -175,7 +175,7 @@ class RepositoryBase<T extends mongoose.Document> implements IRead<T>, IWrite<T>
 
 //TODO: MOVE CODE TO ITS RELEATED REPOSITEORY
   pushElementInArray(value: string, callback: (error: any, result: any) => void) {
-    this._model.update({$push: {"proficiencies": value}}, callback);
+    this._model.update({$push: {'proficiencies': value}}, callback);
   }
 //TODO: MOVE CODE TO ITS RELEATED REPOSITEORY
   //in below query we use userId for search as refrence id

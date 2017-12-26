@@ -1,6 +1,6 @@
-import * as express from "express";
-import * as multiparty from "multiparty";
-import {MailChimpMailerService} from "../services/mailchimp-mailer.service";
+import * as express from 'express';
+import * as multiparty from 'multiparty';
+import { MailChimpMailerService } from '../services/mailchimp-mailer.service';
 import AuthInterceptor = require('../interceptor/auth.interceptor');
 import SendMailService = require('../services/mailer.service');
 import UserModel = require('../dataaccess/model/UserModel');
@@ -13,43 +13,46 @@ let config = require('config');
 let path = require('path');
 let bcrypt = require('bcrypt');
 
-class UserController{
+class UserController {
   private _authInterceptor : AuthInterceptor;
   private _sendMailService : SendMailService;
   private _userService : UserService;
   private _responseService : ResponseService;
 
-  constructor(){
+  constructor() {
     this._authInterceptor = new AuthInterceptor();
     this._sendMailService = new SendMailService();
     this._userService = new UserService();
     this._responseService = new ResponseService();
   }
 
-  create(req: express.Request, res: express.Response, next: any): void{
+  create(req: express.Request, res: express.Response, next: any): void {
     try {
 
-      var data = req.body;
-      var userService = new UserService();
+      let data = req.body;
+      let userService = new UserService();
       userService.createUser(data, (error, result) => {
-        if(error) res.send({"error": error.message});
-        else res.send({"result": result});
+        if(error) {
+          res.send({'error': error.message});
+        } else {
+          res.send({'result': result});
+        }
       });
-    }
-    catch (e)  {
+    } catch (e)  {
       console.log(e);
-      res.send({"error": "error in your request"});
+      res.send({'error': 'error in your request'});
     }
   }
+
   login(req: express.Request, res: express.Response, next: any) {
     try {
       let userService = new UserService();
       let params = req.body;
       delete params.access_token;
       userService.login(params, (error, result)=> {
-        if(error){
+        if(error) {
           next(error);
-        }else{
+        } else {
           res.status(200).send(result);
         }
       });
@@ -146,29 +149,29 @@ class UserController{
         }
       });*/
     } catch (e) {
-      next({
+      res.send(e);
+      /*next({
         reason: e.message,
         message: e.message,
         stackTrace: new Error(),
         code: 500
-      });
+      });*/
     }
   }
+
   sendOtp(req: express.Request, res: express.Response, next: any) {
     try {
       let userService = new UserService();
       let user = req.user;
       let params = req.body;  //mobile_number(new)
-      userService.sendOtp(params, user, (error, result)=>{
-        if(error){
+      userService.sendOtp(params, user, (error, result)=> {
+        if(error) {
           res.send(error);
-        }else{
+        } else {
           res.status(200).send(result);
         }
-      })
-
-    }
-    catch (e) {
+      });
+    } catch (e) {
       next({
         reason: e.message,
         message: e.message,
@@ -178,24 +181,21 @@ class UserController{
 
     }
   }
+
   verifyOtp(req: express.Request, res: express.Response, next: any) {
     try {
 
       let user = req.user;
-
-      let params = req.body; //OTP
-      //  delete params.access_token;
+      let params = req.body;
       let userService = new UserService();
-      userService.verifyOtp(params, user, (error, result)=>{
-        if(error){
-
-        }else{
+      userService.verifyOtp(params, user, (error, result)=> {
+        if(error) {
+          next(error);
+        } else {
           res.send(result);
         }
-      })
-
-    }
-    catch (e) {
+      });
+    } catch (e) {
       next({
         reason: e.message,
         message: e.message,
@@ -204,26 +204,23 @@ class UserController{
       });
     }
   }
+
   forgotPassword(req: express.Request, res: express.Response, next: any) {
     try {
       let userService = new UserService();
       let params = req.body;   //email
 
-      /* let linkq =req.url;
-       let fullUrl = app.get("/api/address",  userController.getAddress);req.protocol + '://' + req.get('host') + req.originalUrl;
-       console.log(fullUrl);*/
       userService.forgotPassword(params, (error, result) => {
 
         if (error) {
-          if (error == Messages.MSG_ERROR_CHECK_INACTIVE_ACCOUNT) {
+          if (error === Messages.MSG_ERROR_CHECK_INACTIVE_ACCOUNT) {
             next({
               reason: Messages.MSG_ERROR_USER_NOT_ACTIVATED,
               message: Messages.MSG_ERROR_ACCOUNT_STATUS,
               stackTrace: new Error(),
               code: 400
             });
-          }
-          else if (error == Messages.MSG_ERROR_CHECK_INVALID_ACCOUNT) {
+          } else if (error === Messages.MSG_ERROR_CHECK_INVALID_ACCOUNT) {
             next({
               reason: Messages.MSG_ERROR_RSN_USER_NOT_FOUND,
               message: Messages.MSG_ERROR_USER_NOT_FOUND,
@@ -231,16 +228,14 @@ class UserController{
               code: 400
             });
           }
-        }
-        else {
+        } else {
           res.status(200).send({
-            "status": Messages.STATUS_SUCCESS,
-            "data": {"message": Messages.MSG_SUCCESS_EMAIL_FORGOT_PASSWORD}
+            'status': Messages.STATUS_SUCCESS,
+            'data': {'message': Messages.MSG_SUCCESS_EMAIL_FORGOT_PASSWORD}
           });
         }
       });
-    }
-    catch (e) {
+    } catch (e) {
       next({
         reason: e.message,
         message: e.message,
@@ -257,12 +252,12 @@ class UserController{
       delete params.access_token;
       let userService = new UserService();
       userService.resetPassword(params, user, (err: any, result: any) => {
-        if(err){
+        if(err) {
           next(err, null);
         } else {
           res.send(result);
         }
-      })
+      });
       /*bcrypt.hash(req.body.new_password, saltRounds, (err: any, hash: any) => {
         if (err) {
           next({
@@ -273,7 +268,10 @@ class UserController{
           });
         } else {
           let updateData = {'password': hash};
-          let query = {"_id": user._id, "password": req.user.password};
+          let query = {
+            '_id': user._id,
+            'password': req.user.password
+          };
           userService.findOneAndUpdate(query, updateData, {new: true}, (error, result) => {
             if (error) {
               next(error);
@@ -287,8 +285,7 @@ class UserController{
         }
       });*/
 
-    }
-    catch (e) {
+    } catch (e) {
       next({
         reason: e.message,
         message: e.message,
@@ -297,6 +294,7 @@ class UserController{
       });
     }
   }
+
   updateDetails(req: express.Request, res: express.Response, next: any) {
     try {
       let newUserData: UserModel = <UserModel>req.body;
@@ -306,13 +304,13 @@ class UserController{
       /*let _id: string = user._id;*/
 
       let userService = new UserService();
-      userService.updateDetails(newUserData, user, (error, result)=>{
-        if(error){
+      userService.updateDetails(newUserData, user, (error, result)=> {
+        if(error) {
           next(error);
-        }else{
+        } else {
           res.send(result);
         }
-      })
+      });
       /*let auth: AuthInterceptor = new AuthInterceptor();
       userService.update(_id, newUserData, (error, result) => {
         if (error) {
@@ -330,23 +328,22 @@ class UserController{
             }
             else {
               res.send({
-                "status": "success",
-                "data": {
-                  "first_name": result[0].first_name,
-                  "last_name": result[0].last_name,
-                  "email": result[0].email,
-                  "mobile_number": result[0].mobile_number,
-                  "picture": result[0].picture,
-                  "_id": result[0].userId,
-                  "current_theme": result[0].current_theme
+                'status': 'success',
+                'data': {
+                  'first_name': result[0].first_name,
+                  'last_name': result[0].last_name,
+                  'email': result[0].email,
+                  'mobile_number': result[0].mobile_number,
+                  'picture': result[0].picture,
+                  '_id': result[0].userId,
+                  'current_theme': result[0].current_theme
                 }
               });
             }
           });
         }
       });*/
-    }
-    catch (e) {
+    } catch (e) {
       next({
         reason: e.message,
         message: e.message,
@@ -408,6 +405,7 @@ class UserController{
       });
     }
   }*/
+
   retrieve(req: express.Request, res: express.Response, next: any) {
     try {
       let userService = new UserService();
@@ -415,22 +413,24 @@ class UserController{
       delete params.access_token;
       let user = req.user;
       var userServices = new UserService();
-      userServices.getUserById(user, (err, result)=>{
-        if(err){
-          next(err);
-        }else{
+      userServices.getUserById(user, (err, result)=> {
+        if(err) {
+          res.send(err);
+        } else {
           res.send(result);
         }
-      })
+      });
     } catch (e) {
-      next({
+      res.send(e);
+      /*next({
         reason: e.message,
         message: e.message,
         stackTrace: new Error(),
         code: 403
-      });
+      });*/
     }
   }
+
   /*verificationMail(req: express.Request, res: express.Response, next: any) {
     try {
       let userService = new UserService();
@@ -463,31 +463,19 @@ class UserController{
 
     }
   }*/
-  verifyAccount(req: express.Request, res: express.Response, next: any) {
+  /*verifyAccount(req: express.Request, res: express.Response, next: any) {
     try {
 
       let user = req.user;
       let params = req.query;
       delete params.access_token;
       let userService = new UserService();
+      userService.verifyAccount(user, (error, result)=> {
 
-      userService.verifyAccount(user, (error, result)=>void{
-        if(error){
-          next(error);
-        }else{
-          res.send(result);
-        }
-      })
-    }
-    catch (e) {
-      next({
-        reason: e.message,
-        message: e.message,
-        stackTrace: new Error(),
-        code: 403
       });
     }
-  }
+  }*/
+
   changeEmailId(req: express.Request, res: express.Response, next: any) {
 
     try {
@@ -500,16 +488,14 @@ class UserController{
       };
       let userService = new UserService();
 
-      userService.changeEmailId(data, user, (error, result) =>{
-        if(error){
+      userService.changeEmailId(data, user, (error, result) => {
+        if(error) {
           next(error);
-        } else{
+        } else {
           res.send(result);
         }
-      })
-    }
-
-    catch (e) {
+      });
+    } catch (e) {
       next({
         reason: e.message,
         message: e.message,
@@ -518,6 +504,7 @@ class UserController{
       });
     }
   }
+
   verifyChangedEmailId(req: express.Request, res: express.Response, next: any) {
     try {
       let user = req.user;
@@ -525,15 +512,14 @@ class UserController{
       delete params.access_token;
       let userService = new UserService();
 
-      userService.verifyChangedEmailId(user, (error, result)=>{
-        if(error){
+      userService.verifyChangedEmailId(user, (error, result)=> {
+        if(error) {
           next(error);
-        }else{
+        } else {
           res.send(result);
         }
-      })
-    }
-    catch (e) {
+      });
+    } catch (e) {
       next({
         reason: e.message,
         message: e.message,
@@ -542,31 +528,28 @@ class UserController{
       });
     }
   }
+
   changeMobileNumber(req: express.Request, res: express.Response, next: any) {
 
     try {
       let user = req.user;
-
       let params = req.body;
       let auth: AuthInterceptor = new AuthInterceptor();
       let userService = new UserService();
 
-      let query = {"mobile_number": params.new_mobile_number, "isActivated": true};
+      let query = {'mobile_number': params.new_mobile_number, 'isActivated': true};
 
       userService.retrieve(query, (error, result) => {
         if (error) {
           next(error);
-        }
-        else if (result.length > 0) {
+        } else if (result.length > 0) {
           next({
             reason: Messages.MSG_ERROR_RSN_EXISTING_USER,
             message: Messages.MSG_ERROR_REGISTRATION_MOBILE_NUMBER,
             stackTrace: new Error(),
             code: 400
           });
-
-        }
-        else {
+        } else {
           let Data = {
             current_mobile_number: user.mobile_number,
             _id: user._id,
@@ -580,12 +563,11 @@ class UserController{
                 stackTrace: new Error(),
                 code: 400
               });
-            }
-            else {
+            } else {
               res.status(200).send({
-                "status": Messages.STATUS_SUCCESS,
-                "data": {
-                  "message": Messages.MSG_SUCCESS_OTP_CHANGE_MOBILE_NUMBER
+                'status': Messages.STATUS_SUCCESS,
+                'data': {
+                  'message': Messages.MSG_SUCCESS_OTP_CHANGE_MOBILE_NUMBER
                 }
               });
             }
@@ -601,22 +583,21 @@ class UserController{
       });
     }
   }
+
   verifyMobileNumber(req: express.Request, res: express.Response, next: any) {
     try {
 
       let user = req.user;
-
-      let params = req.body; //otp
+      let params = req.body;
       let userService = new UserService();
-      userService.verifyMobileNumber(params, user, (error, result)=>{
-        if(error){
+      userService.verifyMobileNumber(params, user, (error, result)=> {
+        if(error) {
           next(error);
-        }else{
+        } else {
           res.send(result);
         }
       });
-    }
-    catch (e) {
+    } catch (e) {
       next({
         reason: e.message,
         message: e.message,
@@ -625,6 +606,7 @@ class UserController{
       });
     }
   }
+
   changePassword(req: express.Request, res: express.Response, next: any) {
     try {
       let user = req.user;
@@ -663,20 +645,18 @@ class UserController{
                     stackTrace: new Error(),
                     code: 400
                   });
-                }
-                else {
+                } else {
                   new_password = hash;
-                  let query = {"_id": req.user._id};
-                  let updateData = {"password": new_password};
+                  let query = {'_id': req.user._id};
+                  let updateData = {'password': new_password};
                   userService.findOneAndUpdate(query, updateData, {new: true}, (error, result) => {
                     if (error) {
                       next(error);
-                    }
-                    else {
+                    } else {
                       let token = auth.issueTokenWithUid(user);
                       res.send({
-                        "status": "Success",
-                        "data": {"message": Messages.MSG_SUCCESS_PASSWORD_CHANGE},
+                        'status': 'Success',
+                        'data': {'message': Messages.MSG_SUCCESS_PASSWORD_CHANGE},
                         access_token: token
                       });
                     }
@@ -694,8 +674,7 @@ class UserController{
           }
         }
       });
-    }
-    catch (e) {
+    } catch (e) {
       next({
         reason: e.message,
         message: e.message,
@@ -704,7 +683,8 @@ class UserController{
       });
     }
   }
-  mail(req: express.Request, res: express.Response, next: any) {
+
+  sendMail(req: express.Request, res: express.Response, next: any) {
     try {
       let userService = new UserService();
       let params = req.body;
@@ -716,16 +696,14 @@ class UserController{
             stackTrace: new Error(),
             code: 400
           });
-        }
-        else {
+        } else {
           res.status(200).send({
-            "status": Messages.STATUS_SUCCESS,
-            "data": {"message": Messages.MSG_SUCCESS_SUBMITTED}
+            'status': Messages.STATUS_SUCCESS,
+            'data': {'message': Messages.MSG_SUCCESS_SUBMITTED}
           });
         }
       });
-    }
-    catch (e) {
+    } catch (e) {
       next({
         reason: e.message,
         message: e.message,
@@ -735,6 +713,7 @@ class UserController{
 
     }
   }
+
   /*notifications(req: express.Request, res: express.Response, next: any) {
     try {
       let user = req.user;
@@ -748,12 +727,12 @@ class UserController{
       userService.retrieve(params, (error, result) => {
         if (error) {
           next(error);
-        }
-        else if (result.length > 0) {
+        } else if (result.length > 0) {
           let token = auth.issueTokenWithUid(user);
           res.send({
-            "status": "success",
-            "data": result[0].notifications,
+            'status': 'success',
+            'data': result[0].notifications,
+            'code' : 200,
             access_token: token
           });
         }
@@ -767,6 +746,7 @@ class UserController{
       });
     }
   }
+
   pushNotifications(req: express.Request, res: express.Response, next: any) {
     try {
       let user = req.user;
@@ -782,13 +762,12 @@ class UserController{
       userService.findOneAndUpdate(params, data, {new: true}, (error, result) => {
         if (error) {
           next(error);
-        }
-        else {
+        } else {
           let token = auth.issueTokenWithUid(user);
           res.send({
-            "status": "Success",
-            "data": result.notifications,
-
+            'status': 'Success',
+            'data': result.notifications,
+            'code': 200
           });
         }
       });
@@ -802,7 +781,7 @@ class UserController{
     }
   }*/
   updatePicture(req: express.Request, res: express.Response, next: any): void {
-    __dirname = path.resolve() + config.get('TplSeed.profilePath');
+    __dirname = path.resolve() + config.get('application.profilePath');
     let form = new multiparty.Form({uploadDir: __dirname});
     form.parse(req, (err: Error, fields: any, files: any) => {
       if (err) {
@@ -818,29 +797,25 @@ class UserController{
         let image_path = files.file[0].path;
         let originalFilename = JSON.stringify(image_path.substr(files.file[0].path.lastIndexOf('/') + 1));
         let userService = new UserService();
-        path = config.get('TplSeed.profilePathForClient') + originalFilename.replace(/"/g, '');
+        path = config.get('application.profilePathForClient') + originalFilename.replace(/"/g, '');
 
         userService.UploadImage(path, originalFilename, function (err: any, tempath: any) {
           if (err) {
             next(err);
-          }
-          else {
+          } else {
             let mypath = tempath;
-
             try {
               let user = req.user;
-              let query = {"_id": user._id};
+              let query = {'_id': user._id};
 
               userService.findById(user._id, (error, result) => {
                 if (error) {
                   next(error);
-                }
-                else {
+                } else {
                   userService.findOneAndUpdate(query, {picture: mypath}, {new: true}, (error, response) => {
                     if (error) {
                       next(error);
-                    }
-                    else {
+                    } else {
                       let auth: AuthInterceptor = new AuthInterceptor();
                       let token = auth.issueTokenWithUid(result);
                       res.status(200).send({access_token: token, data: response});
@@ -848,8 +823,7 @@ class UserController{
                   });
                 }
               });
-            }
-            catch (e) {
+            } catch (e) {
               next({
                 reason: e.message,
                 message: e.message,

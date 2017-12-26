@@ -1,4 +1,4 @@
-import * as Mongoose from "mongoose";
+import * as Mongoose from 'mongoose';
 let config = require('config');
 
 class DataAccess {
@@ -14,8 +14,8 @@ class DataAccess {
       console.log('Connected to mongodb.');
     });
 
-    let host = config.get('TplSeed.database.host');
-    let name = config.get('TplSeed.database.name');
+    let host = config.get('application.database.host');
+    let name = config.get('application.database.name');
     Mongoose.set('debug',true);
     //this.mongooseInstance = Mongoose.connect('mongodb://admin:jobmosisadmin123@' + host + '/' + name + '');
     this.mongooseInstance = Mongoose.connect('mongodb://' + host + '/' + name+'');

@@ -1,13 +1,13 @@
 
-import express = require("express");
-import UserController = require("./../controllers/UserController");
-import AuthInterceptor = require("./../interceptor/auth.interceptor");
-import LoggerInterceptor = require("../interceptor/LoggerInterceptor");
-import UserInterceptor = require("../interceptor/UserInterceptor");
-import sharedService = require("./../shared/logger/shared.service");
-
+import express = require('express');
+import UserController = require('./../controllers/UserController');
+import AuthInterceptor = require('./../interceptor/auth.interceptor');
+import LoggerInterceptor = require('../interceptor/LoggerInterceptor');
+import UserInterceptor = require('../interceptor/UserInterceptor');
+import sharedService = require('./../shared/logger/shared.service');
 
 var router = express.Router();
+
 class UserRoutes {
     private _userController: UserController;
     private _authInterceptor: AuthInterceptor;
@@ -23,46 +23,60 @@ class UserRoutes {
     get routes () : express.Router {
 
         var controller = this._userController;
-      router.post("/generateotp/:id", this._loggerInterceptor.logDetail, this._authInterceptor.requiresAuth,
-        this._authInterceptor.secureApiCheck, this._userController.sendOtp);
-      router.put("/verifyotp/:id", this._loggerInterceptor.logDetail, this._authInterceptor.requiresAuth,
-        this._authInterceptor.secureApiCheck, this._userController.verifyOtp);
-      router.post("/login", this._loggerInterceptor.logDetail, this._userInterceptor.login, this._userController.login);
-      router.post("/forgotpassword", this._loggerInterceptor.logDetail, this._userInterceptor.forgotPassword,
-        this._userController.forgotPassword);
-      router.put("/resetpassword/:id", this._loggerInterceptor.logDetail, this._authInterceptor.requiresAuth,
-        this._authInterceptor.secureApiCheck, this._userController.resetPassword);
-      router.post("/", this._loggerInterceptor.logDetail,
-        this._userController.create);
-      router.put("/:id", this._loggerInterceptor.logDetail, this._authInterceptor.requiresAuth,
-        this._authInterceptor.secureApiCheck, this._userController.updateDetails);
-      /*router.put("/:id/fieldname/:fname", this._loggerInterceptor.logDetail, this._authInterceptor.requiresAuth,
-        this._authInterceptor.secureApiCheck, this._userController.updateProfileField);*/
-      router.get("/:id", this._loggerInterceptor.logDetail, this._userInterceptor.retrieve,
-        this._authInterceptor.requiresAuth, this._authInterceptor.secureApiCheck, this._userController.retrieve);
-      router.post("/sendverificationmail/:id", this._loggerInterceptor.logDetail, this._authInterceptor.requiresAuth,
-        this._authInterceptor.secureApiCheck, this._userController.verificationMail);
-      router.put("/verifyAccount/:id", this._loggerInterceptor.logDetail, this._authInterceptor.requiresAuth,
-        this._authInterceptor.secureApiCheck, this._userController.verifyAccount);
-      router.put("/changeemailid/:id", this._loggerInterceptor.logDetail, this._authInterceptor.requiresAuth,
-        this._authInterceptor.secureApiCheck, this._userController.changeEmailId);
-      router.put("/verifychangedemailid/:id", this._loggerInterceptor.logDetail, this._authInterceptor.requiresAuth,
-        this._authInterceptor.secureApiCheck, this._userController.verifyChangedEmailId);
-      router.put("/changemobilenumber/:id", this._loggerInterceptor.logDetail, this._authInterceptor.requiresAuth,
-        this._authInterceptor.secureApiCheck, this._userController.changeMobileNumber);
-      router.put("/verifymobilenumber/:id", this._loggerInterceptor.logDetail, this._authInterceptor.requiresAuth,
-        this._authInterceptor.secureApiCheck, this._userController.verifyMobileNumber);
-      router.put("/changepassword/:id", this._loggerInterceptor.logDetail, this._authInterceptor.requiresAuth,
-        this._authInterceptor.secureApiCheck, this._userInterceptor.changePassword, this._userController.changePassword);
-      router.post("/sendmail", this._loggerInterceptor.logDetail, this._userInterceptor.mail, this._userController.mail);
-      /*router.get("/notification/:id", this._loggerInterceptor.logDetail, this._authInterceptor.requiresAuth,
-        this._authInterceptor.secureApiCheck, this._userController.notifications);
-      router.put("/notification/:id", this._loggerInterceptor.logDetail, this._authInterceptor.requiresAuth,
-        this._authInterceptor.secureApiCheck, this._userController.pushNotifications);*/
-      router.put("/updatepicture/:id", this._loggerInterceptor.logDetail, this._authInterceptor.requiresAuth,
-        this._authInterceptor.secureApiCheck, this._userController.updatePicture);
-      /*router.use(sharedService.errorHandler);*/
+        var logger = this._loggerInterceptor;
+        var userInterceptor = this._userInterceptor;
+        var authInterceptor = this._authInterceptor;
 
+      //Dashboard
+      router.post('/login', logger.logDetail, userInterceptor.login, controller.login);
+      router.post('/forgotPassword', logger.logDetail, userInterceptor.forgotPassword, controller.forgotPassword);
+      router.post('/sendMail', logger.logDetail, userInterceptor.sendMail, controller.sendMail);
+
+      //User CRUD operations
+      router.post('/', logger.logDetail, controller.create);
+      router.get('/:id', logger.logDetail, userInterceptor.getById,
+        authInterceptor.requiresAuth, authInterceptor.secureApiCheck, controller.retrieve);
+      router.put('/:id', logger.logDetail, authInterceptor.requiresAuth,
+        authInterceptor.secureApiCheck, controller.updateDetails);
+      router.put('/updatePicture/:id', logger.logDetail, authInterceptor.requiresAuth,
+        authInterceptor.secureApiCheck, controller.updatePicture);
+
+      //Dashboard Auth
+      router.post('/generateOTP/:id', logger.logDetail, authInterceptor.requiresAuth,
+        authInterceptor.secureApiCheck, controller.sendOtp);
+      router.put('/resetPassword/:id', logger.logDetail, authInterceptor.requiresAuth,
+        authInterceptor.secureApiCheck, controller.resetPassword);
+
+      //User verification
+      router.put('/verify/otp/:id', logger.logDetail, authInterceptor.requiresAuth,
+        authInterceptor.secureApiCheck, controller.verifyOtp);
+      /*router.put('/verify/account/:id', logger.logDetail, authInterceptor.requiresAuth,
+        authInterceptor.secureApiCheck);*/
+      router.put('/verify/mobileNumber/:id', logger.logDetail, authInterceptor.requiresAuth,
+        authInterceptor.secureApiCheck, controller.verifyMobileNumber);
+      router.put('/verify/changedEmailId/:id', logger.logDetail, authInterceptor.requiresAuth,
+        authInterceptor.secureApiCheck, controller.verifyChangedEmailId);
+
+      //User settings
+      router.put('/change/emailId/:id', logger.logDetail, authInterceptor.requiresAuth,
+        authInterceptor.secureApiCheck, controller.changeEmailId);
+      router.put('/change/mobileNumber/:id', logger.logDetail, authInterceptor.requiresAuth,
+        authInterceptor.secureApiCheck, controller.changeMobileNumber);
+      router.put('/change/password/:id', logger.logDetail, authInterceptor.requiresAuth,
+        authInterceptor.secureApiCheck, userInterceptor.changePassword, controller.changePassword);
+
+      //User Notification
+      /*router.get('/notification/:id', logger.logDetail, authInterceptor.requiresAuth,
+        authInterceptor.secureApiCheck, controller.notifications);
+      router.put('/notification/:id', logger.logDetail, authInterceptor.requiresAuth,
+        authInterceptor.secureApiCheck, controller.pushNotifications);*/
+
+      /*router.put('/:id/fieldName/:fname', logger.logDetail, authInterceptor.requiresAuth,
+        authInterceptor.secureApiCheck, controller.updateProfileField);
+        router.post('/sendVerificationMail/:id', logger.logDetail, authInterceptor.requiresAuth,
+        authInterceptor.secureApiCheck, controller.sendVerificationMail);*/
+
+      /*router.use(sharedService.errorHandler);*/
         return router;
     }
 }

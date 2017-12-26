@@ -1,4 +1,4 @@
-let Messages = require("./messages");
+let Messages = require('./messages');
 
 class ResponseService {
 
@@ -15,11 +15,11 @@ class ResponseService {
 
   static errorMessageWithToken(reason: string, message: string, code: number, token: any) {
     let otherObject = {
-      "status": Messages.STATUS_ERROR,
-      "error": {
-        "reason": reason,
-        "message": message,
-        "code": code
+      'status': Messages.STATUS_ERROR,
+      'error': {
+        'reason': reason,
+        'message': message,
+        'code': code
       },
       access_token: token
     };

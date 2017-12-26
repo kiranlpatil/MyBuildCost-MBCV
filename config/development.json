@@ -1,8 +1,8 @@
 {
-  "TplSeed": {
+  "application": {
     "database": {
       "host": "127.0.0.1",
-      "name": "c-next-backend",
+      "name": "Appication-backend",
       "username": "",
       "password": "",
       "mongoExport": "/usr/bin/mongoexport"

@@ -1,19 +1,19 @@
 import UserRepository = require('../dataaccess/repository/UserRepository');
 import SendMailService = require('./mailer.service');
 import SendMessageService = require('./sendmessage.service');
-import * as fs from "fs";
-import * as mongoose from "mongoose";
-import {SentMessageInfo} from "nodemailer";
+import * as fs from 'fs';
+import * as mongoose from 'mongoose';
+import { SentMessageInfo } from 'nodemailer';
 let config = require('config');
 let path = require('path');
 import Messages = require('../shared/messages');
 import AuthInterceptor = require('../../framework/interceptor/auth.interceptor');
 import ProjectAsset = require('../shared/projectasset');
 import MailAttachments = require('../shared/sharedarray');
-import {asElementData} from "@angular/core/src/view";
+import { asElementData } from '@angular/core/src/view';
 import bcrypt = require('bcrypt');
-import {MailChimpMailerService} from "./mailchimp-mailer.service";
-import UserModel = require("../dataaccess/model/UserModel");
+import { MailChimpMailerService } from './mailchimp-mailer.service';
+import UserModel = require('../dataaccess/model/UserModel');
 
 class UserService {
   APP_NAME: string;
@@ -50,11 +50,10 @@ class UserService {
       }
 
     });
+  }
 
-  };
-
-  login(data: any, callback:(error: any, result: any) => void){
-    this.retrieve({"email": data.email}, (error, result) => {
+  login(data: any, callback:(error: any, result: any) => void) {
+    this.retrieve({'email': data.email}, (error, result) => {
       if (error) {
         callback(error, null);
       } else if (result.length > 0 && result[0].isActivated === true) {
@@ -65,31 +64,26 @@ class UserService {
               message: Messages.MSG_ERROR_VERIFY_CANDIDATE_ACCOUNT,
               stackTrace: new Error(),
               actualError: err,
-              code: 400
+              code: 500
             }, null);
           } else {
-
-            if (isSame){
+            if (isSame) {
               let auth = new AuthInterceptor();
               let token = auth.issueTokenWithUid(result[0]);
               var data: any = {
-                "status": Messages.STATUS_SUCCESS,
-                "data": {
-                  "first_name": result[0].first_name,
-                  "last_name": result[0].last_name,
-                  "email": result[0].email,
-                  "_id": result[0]._id,
-                  "current_theme": result[0].current_theme,
-                  "picture": result[0].picture,
-                  "mobile_number": result[0].mobile_number,
-                  "isCandidate": result[0].isCandidate,
-                  "isAdmin": result[0].isAdmin,
-                  "guide_tour": result[0].guide_tour
+                'status': Messages.STATUS_SUCCESS,
+                'data': {
+                  'first_name': result[0].first_name,
+                  'last_name': result[0].last_name,
+                  'email': result[0].email,
+                  '_id': result[0]._id,
+                  'current_theme': result[0].current_theme,
+                  'picture': result[0].picture,
+                  'mobile_number': result[0].mobile_number
                 },
                 access_token: token
-              }
+              };
               callback(null, data);
-
             } else {
               callback({
                 reason: Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
@@ -100,45 +94,14 @@ class UserService {
             }
           }
         });
-      }
-      else if (result.length > 0 && result[0].isActivated === false) {
-        bcrypt.compare(data.password, result[0].password, (err: any, isPassSame: any) => {
-          if (err) {
-            callback({
-              reason: Messages.MSG_ERROR_RSN_INVALID_REGISTRATION_STATUS,
-              message: Messages.MSG_ERROR_VERIFY_CANDIDATE_ACCOUNT,
-              stackTrace: new Error(),
-              code: 400
-            }, null);
-          } else {
-            if (isPassSame) {
-              if (result[0].isCandidate === true) {
-                callback({
-                  reason: Messages.MSG_ERROR_RSN_INVALID_REGISTRATION_STATUS,
-                  message: Messages.MSG_ERROR_VERIFY_CANDIDATE_ACCOUNT,
-                  stackTrace: new Error(),
-                  code: 400
-                }, null);
-              } else {
-                callback({
-                  reason: Messages.MSG_ERROR_RSN_INVALID_REGISTRATION_STATUS,
-                  message: Messages.MSG_ERROR_VERIFY_ACCOUNT,
-                  stackTrace: new Error(),
-                  code: 400
-                }, null);
-              }
-            } else {
-              callback({
-                reason: Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
-                message: Messages.MSG_ERROR_WRONG_PASSWORD,
-                stackTrace: new Error(),
-                code: 400
-              }, null);
-            }
-          }
-        });
-      }
-      else {
+      } else if (result.length > 0 && result[0].isActivated === false) {
+        callback({
+          reason: Messages.MSG_ERROR_RSN_INVALID_REGISTRATION_STATUS,
+          message: Messages.MSG_ERROR_VERIFY_CANDIDATE_ACCOUNT,
+          stackTrace: new Error(),
+          code: 500
+        }, null);
+      } else {
         callback({
           reason: Messages.MSG_ERROR_RSN_USER_NOT_FOUND,
           message: Messages.MSG_ERROR_USER_NOT_PRESENT,
@@ -157,27 +120,24 @@ class UserService {
     };
     this.generateOtp(Data, (error, result) => {
       if (error) {
-        if (error == Messages.MSG_ERROR_CHECK_MOBILE_PRESENT) {
+        if (error === Messages.MSG_ERROR_CHECK_MOBILE_PRESENT) {
           callback({
             reason: Messages.MSG_ERROR_RSN_EXISTING_USER,
             message: Messages.MSG_ERROR_REGISTRATION_MOBILE_NUMBER,
             stackTrace: new Error(),
             code: 400
           }, null);
-        }
-        else {
+        } else {
           callback(error, null);
         }
-      }
-      else if (result.length > 0) {
+      } else if (result.length > 0) {
         callback({
-          "status": Messages.STATUS_SUCCESS,
-          "data": {
-            "message": Messages.MSG_SUCCESS_OTP
+          'status': Messages.STATUS_SUCCESS,
+          'data': {
+            'message': Messages.MSG_SUCCESS_OTP
           }
         }, null);
-      }
-      else {
+      } else {
         callback({
           reason: Messages.MSG_ERROR_RSN_USER_NOT_FOUND,
           message: Messages.MSG_ERROR_RSN_USER_NOT_FOUND,
@@ -187,10 +147,12 @@ class UserService {
       }
     });
   }
+
   generateOtp(field: any, callback: (error: any, result: any) => void) {
     this.userRepository.retrieve({'mobile_number': field.new_mobile_number, 'isActivated': true}, (err, res) => {
 
       if (err) {
+        //callback(err, null);
       } else if (res.length > 0 && (res[0]._id) !== field._id) {
         callback(new Error(Messages.MSG_ERROR_REGISTRATION_MOBILE_NUMBER), null);
       } else if (res.length === 0) {
@@ -217,27 +179,25 @@ class UserService {
     });
   }
 
-  verifyOtp(params: any, user:any, callback:(error:any, result:any) => void){
+  verifyOtp(params: any, user:any, callback:(error:any, result:any) => void) {
     let mailChimpMailerService = new MailChimpMailerService();
 
-    let query = {"_id": user._id, "isActivated": false};
-    let updateData = {"isActivated": true, "activation_date": new Date()};
+    let query = {'_id': user._id, 'isActivated': false};
+    let updateData = {'isActivated': true, 'activation_date': new Date()};
     if (user.otp === params.otp) {
       this.findOneAndUpdate(query, updateData, {new: true}, (error, result) => {
         if (error) {
           callback(error, null);
-        }
-        else {
+        } else {
           callback(null,{
-            "status": "Success",
-            "data": {"message": "User Account verified successfully"}
+            'status': 'Success',
+            'data': {'message': 'User Account verified successfully'}
           });
           mailChimpMailerService.onCandidateSignSuccess(result);
 
         }
       });
-    }
-    else {
+    } else {
       callback({
         reason: Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
         message: Messages.MSG_ERROR_WRONG_OTP,
@@ -251,7 +211,6 @@ class UserService {
   changeMobileNumber(field: any, callback: (error: any, result: any) => void) {
 
     let query = {'_id': field._id};
-    // let otp = Math.floor(Math.random() * (10000 - 1000) + 1000);
     let otp = Math.floor((Math.random() * 99999) + 100000);
     let updateData = {'otp': otp, 'temp_mobile': field.new_mobile_number};
 
@@ -273,24 +232,26 @@ class UserService {
   }
 
   forgotPassword(field: any, callback: (error: any, result: SentMessageInfo) => void) {
-    let sendMailService = new SendMailService();
 
-    this.userRepository.retrieve({'email': field.email}, (err, res) => {
+    let sendMailService = new SendMailService();
+    let query = {'email': field.email};
+
+    this.userRepository.retrieve(query, (err, res) => {
+
       if (res.length > 0 && res[0].isActivated === true) {
 
         let auth = new AuthInterceptor();
         let token = auth.issueTokenWithUid(res[0]);
-        let host = config.get('TplSeed.mail.host');
+        let host = config.get('application.mail.host');
         let link = host + 'reset-password?access_token=' + token + '&_id=' + res[0]._id;
-        if (res[0].isCandidate === true) {
-          let data:Map<string,string>= new Map([['$jobmosisLink$',config.get('TplSeed.mail.host')],
-            ['$first_name$',res[0].first_name],['$link$',link],['$app_name$',this.APP_NAME]]);
-          sendMailService.send(field.email,
-            Messages.EMAIL_SUBJECT_FORGOT_PASSWORD,
-            'forgotpassword.html',data,(err: any, result: any) => {
-              callback(err, result);
-            });
-        }
+        let htmlTemplate = 'forgotpassword.html';
+        let data:Map<string,string>= new Map([['$applicationLink$',config.get('application.mail.host')],
+          ['$first_name$',res[0].first_name],['$link$',link],['$app_name$',this.APP_NAME]]);
+
+      sendMailService.send( field.email, Messages.EMAIL_SUBJECT_FORGOT_PASSWORD, htmlTemplate, data,
+(err: any, result: any) => {
+            callback(err, result);
+          });
       } else if (res.length > 0 && res[0].isActivated === false) {
         callback(new Error(Messages.MSG_ERROR_ACCOUNT_STATUS), res);
       } else {
@@ -310,10 +271,10 @@ class UserService {
       } else {
         let auth = new AuthInterceptor();
         let token = auth.issueTokenWithUid(result);
-        let host = config.get('TplSeed.mail.host');
+        let host = config.get('application.mail.host');
         let link = host + 'activate-user?access_token=' + token + '&_id=' + result._id+'isEmailVerification';
         let sendMailService = new SendMailService();
-        let data: Map<string, string> = new Map([['$jobmosisLink$',config.get('TplSeed.mail.host')],
+        let data: Map<string, string> = new Map([['$applicationLink$',config.get('application.mail.host')],
           ['$link$', link]]);
         sendMailService.send(field.new_email,
           Messages.EMAIL_SUBJECT_CHANGE_EMAILID,
@@ -334,7 +295,7 @@ class UserService {
             this.company_name = recruiter[0].company_name;
             let auth = new AuthInterceptor();
             let token = auth.issueTokenWithUid(recruiter[0]);
-            let host = config.get('TplSeed.mail.host');
+            let host = config.get('application.mail.host');
             let link = host + 'company-details?access_token=' + token + '&_id=' + res[0]._id + '&companyName=' + this.company_name;
             let sendMailService = new SendMailService();
             let data:Map<string,string>= new Map([['$jobmosisLink$',config.get('TplSeed.mail.host')],
@@ -380,9 +341,9 @@ class UserService {
 
   sendMail(field: any, callback: (error: any, result: SentMessageInfo) => void) {
     let sendMailService = new SendMailService();
-    let data:Map<string,string>= new Map([['$jobmosisLink$',config.get('TplSeed.mail.host')],
+    let data:Map<string,string>= new Map([['$applicationLink$',config.get('application.mail.host')],
       ['$first_name$',field.first_name],['$email$',field.email],['$message$',field.message]]);
-    sendMailService.send(config.get('TplSeed.mail.ADMIN_MAIL'),
+    sendMailService.send(config.get('application.mail.ADMIN_MAIL'),
       Messages.EMAIL_SUBJECT_USER_CONTACTED_YOU,
       'contactus.mail.html',data,callback);
   }
@@ -391,21 +352,21 @@ class UserService {
     let current_Time = new Date().toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'});
     let data:Map<string,string>;
     if(errorInfo.stackTrace) {
-       data= new Map([['$jobmosisLink$',config.get('TplSeed.mail.host')],
-         ['$time$',current_Time],['$host$',config.get('TplSeed.mail.host')],
+       data= new Map([['$applicationLink$',config.get('application.mail.host')],
+         ['$time$',current_Time],['$host$',config.get('application.mail.host')],
         ['$reason$',errorInfo.reason],['$code$',errorInfo.code],
         ['$message$',errorInfo.message],['$error$',errorInfo.stackTrace.stack]]);
 
     } else if(errorInfo.stack) {
-      data= new Map([['$jobmosisLink$',config.get('TplSeed.mail.host')],
-        ['$time$',current_Time],['$host$',config.get('TplSeed.mail.host')],
+      data= new Map([['$applicationLink$',config.get('application.mail.host')],
+        ['$time$',current_Time],['$host$',config.get('application.mail.host')],
         ['$reason$',errorInfo.reason],['$code$',errorInfo.code],
         ['$message$',errorInfo.message],['$error$',errorInfo.stack]]);
     }
     let sendMailService = new SendMailService();
-    sendMailService.send(config.get('TplSeed.mail.ADMIN_MAIL'),
-      Messages.EMAIL_SUBJECT_SERVER_ERROR + ' on ' + config.get('TplSeed.mail.host'),
-      'error.mail.html',data,callback,config.get('TplSeed.mail.TPLGROUP_MAIL'));
+    sendMailService.send(config.get('application.mail.ADMIN_MAIL'),
+      Messages.EMAIL_SUBJECT_SERVER_ERROR + ' on ' + config.get('application.mail.host'),
+      'error.mail.html',data,callback,config.get('application.mail.TPLGROUP_MAIL'));
   }
 
   findById(id: any, callback: (error: any, result: any) => void) {
@@ -417,7 +378,7 @@ class UserService {
   }
 
   retrieveWithLimit(field: any, included : any, callback: (error: any, result: any) => void) {
-    let limit = config.get('TplSeed.limitForQuery');
+    let limit = config.get('application.limitForQuery');
     this.userRepository.retrieveWithLimit(field, included, limit, callback);
   }
 
@@ -433,7 +394,7 @@ class UserService {
         callback(null, res);
       }
     });
-  };
+  }
 
   update(_id: string, item: any, callback: (error: any, result: any) => void) {
 
@@ -441,7 +402,7 @@ class UserService {
 
       if (err) {
         callback(err, res);
-      }else {
+      } else {
         this.userRepository.update(_id, item, callback);
       }
     });
@@ -494,7 +455,7 @@ class UserService {
         }, null);
       } else {
         let updateData = {'password': hash};
-        let query = {"_id": user._id, "password": user.password};
+        let query = {'_id': user._id, 'password': user.password};
         this.findOneAndUpdate(query, updateData, {new: true}, (error, result) => {
           if (error) {
             callback(error, null);
@@ -514,8 +475,7 @@ class UserService {
     this.update(user.user_id, data, (error, result) => {
       if (error) {
         callback(error, null);
-      }
-      else {
+      } else {
         this.retrieve(user.user_id, (error, result) => {
           if (error) {
             callback({
@@ -524,18 +484,17 @@ class UserService {
               stackTrace: new Error(),
               code: 400
             }, null);
-          }
-          else {
+          } else {
             callback(null,{
-              "status": "success",
-              "data": {
-                "first_name": result[0].first_name,
-                "last_name": result[0].last_name,
-                "email": result[0].email,
-                "mobile_number": result[0].mobile_number,
-                "picture": result[0].picture,
-                "_id": result[0].userId,
-                "current_theme": result[0].current_theme
+              'status': 'success',
+              'data': {
+                'first_name': result[0].first_name,
+                'last_name': result[0].last_name,
+                'email': result[0].email,
+                'mobile_number': result[0].mobile_number,
+                'picture': result[0].picture,
+                '_id': result[0].userId,
+                'current_theme': result[0].current_theme
               }
             });
           }
@@ -543,38 +502,36 @@ class UserService {
       }
     });
   }
-  getUserById(user, callback:(error, result)=>void){
+  getUserById(user, callback:(error, result)=>void) {
     let auth: AuthInterceptor = new AuthInterceptor();
 
     let token = auth.issueTokenWithUid(user);
     callback(null,{
-      "status": "success",
-      "data": {
-        "first_name": user.first_name,
-        "last_name": user.last_name,
-        "email": user.email,
-        "mobile_number": user.mobile_number,
-        "picture": user.picture,
-        "social_profile_picture": user.social_profile_picture,
-        "_id": user.userId,
-        "current_theme": user.current_theme
+      'status': 'success',
+      'data': {
+        'first_name': user.first_name,
+        'last_name': user.last_name,
+        'email': user.email,
+        'mobile_number': user.mobile_number,
+        'picture': user.picture,
+        'social_profile_picture': user.social_profile_picture,
+        '_id': user.userId,
+        'current_theme': user.current_theme
       },
       access_token: token
     });
   }
 
-  verifyAccount(user, callback:(error, result)=>void){
-    let query = {"_id": user._id, "isActivated": false};
-    let updateData = {"isActivated": true};
+  verifyAccount(user, callback:(error, result)=>void) {
+    let query = {'_id': user._id, 'isActivated': false};
+    let updateData = {'isActivated': true};
     this.findOneAndUpdate(query, updateData, {new: true}, (error, result) => {
       if (error) {
         callback(error, null);
-      }
-      else {
-
+      } else {
         callback(null,{
-          "status": "Success",
-          "data": {"message": "User Account verified successfully"}
+          'status': 'Success',
+          'data': {'message': 'User Account verified successfully'}
         });
       }
 
@@ -583,38 +540,27 @@ class UserService {
 
   changeEmailId(data, user, callback:(error, result)=>void){
     let auth: AuthInterceptor = new AuthInterceptor();
-    let query = {"email": data.new_email};
+    let query = {'email': data.new_email};
 
     this.retrieve(query, (error, result) => {
 
       if (error) {
         callback(error, null);
-      }
-      else if (result.length > 0 && result[0].isActivated === true) {
+      } else if (result.length > 0 && result[0].isActivated === true) {
         callback({
           reason: Messages.MSG_ERROR_RSN_EXISTING_USER,
           message: Messages.MSG_ERROR_REGISTRATION,
           stackTrace: new Error(),
           code: 400
         },null);
-
-      }
-      else if (result.length > 0 && result[0].isActivated === false) {
+      } else if (result.length > 0 && result[0].isActivated === false) {
         callback({
           reason: Messages.MSG_ERROR_RSN_EXISTING_USER,
           message: Messages.MSG_ERROR_ACCOUNT_STATUS,
           stackTrace: new Error(),
           code: 400
         }, null);
-
-      }
-
-      else {
-
-        /*let emailId = {
-          current_email: req.body.current_email,
-          new_email: req.body.new_email
-        };*/
+      } else {
 
         this.SendChangeMailVerification(data, (error, result) => {
           if (error) {
@@ -625,8 +571,7 @@ class UserService {
                 stackTrace: new Error(),
                 code: 400
               }, null);
-            }
-            else {
+            } else {
               callback({
                 reason: Messages.MSG_ERROR_RSN_WHILE_CONTACTING,
                 message: Messages.MSG_ERROR_WHILE_CONTACTING,
@@ -635,11 +580,10 @@ class UserService {
               }, null);
 
             }
-          }
-          else {
+          } else {
             callback(null, {
-              "status": Messages.STATUS_SUCCESS,
-              "data": {"message": Messages.MSG_SUCCESS_EMAIL_CHANGE_EMAILID}
+              'status': Messages.STATUS_SUCCESS,
+              'data': {'message': Messages.MSG_SUCCESS_EMAIL_CHANGE_EMAILID}
             });
           }
         });
@@ -649,40 +593,36 @@ class UserService {
   }
 
   verifyChangedEmailId(user, callback:(error, result)=> void){
-    let query = {"_id": user._id};
-    let updateData = {"email": user.temp_email, "temp_email": user.email};
+    let query = {'_id': user._id};
+    let updateData = {'email': user.temp_email, 'temp_email': user.email};
     this.findOneAndUpdate(query, updateData, {new: true}, (error, result) => {
       if (error) {
         callback(error, null);
-      }
-      else {
-
+      } else {
         callback(null,{
-          "status": "Success",
-          "data": {"message": "User Account verified successfully"}
+          'status': 'Success',
+          'data': {'message': 'User Account verified successfully'}
         });
       }
 
     });
   }
 
-  verifyMobileNumber(data, user, callback:(error, result)=>void){
-    let query = {"_id": user._id};
-    let updateData = {"mobile_number": user.temp_mobile, "temp_mobile": user.mobile_number};
+  verifyMobileNumber(data, user, callback:(error, result)=>void) {
+    let query = {'_id': user._id};
+    let updateData = {'mobile_number': user.temp_mobile, 'temp_mobile': user.mobile_number};
     if (user.otp === data.otp) {
       this.findOneAndUpdate(query, updateData, {new: true}, (error, result) => {
         if (error) {
           callback(error, null);
-        }
-        else {
+        } else {
           callback(null,{
-            "status": "Success",
-            "data": {"message": "User Account verified successfully"}
+            'status': 'Success',
+            'data': {'message': 'User Account verified successfully'}
           });
         }
       });
-    }
-    else {
+    } else {
       callback({
         reason: Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
         message: Messages.MSG_ERROR_WRONG_OTP,

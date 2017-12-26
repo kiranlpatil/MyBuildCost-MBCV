@@ -1,14 +1,14 @@
-import {Component, OnInit} from "@angular/core";
-import {Router} from "@angular/router";
-import {Subscription} from "rxjs/Subscription";
-import {ThemeChangeService} from "./shared/services/themechange.service";
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Subscription } from 'rxjs/Subscription';
+import { ThemeChangeService } from './shared/services/themechange.service';
 import {
   AppSettings,
   CommonService,
   LoaderService,
   Message,
   MessageService
-} from "./shared/index";
+} from './shared/index';
 
 
 

@@ -1,11 +1,10 @@
-import * as winston from "winston";
-
+import * as winston from 'winston';
 
 let logger = new winston.Logger({
   transports: [
     new winston.transports.File({
       level: 'info',
-      filename: "clientErrorLogs",
+      filename: 'clientErrorLogs',
       handleExceptions: true,
       json: true,
       maxsize: 5242880, //5MB

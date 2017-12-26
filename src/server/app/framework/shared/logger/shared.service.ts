@@ -1,4 +1,4 @@
-import LoggerService = require("./LoggerService");
+import LoggerService = require('./LoggerService');
 
 let Messages = require('../messages');
 let logger = require('./logger');
@@ -7,7 +7,7 @@ import UserService = require('../../services/UserService');
 
 export function errorHandler(err: any, req: any, res: any, next: any) {
   let _loggerService: LoggerService = new LoggerService('errorHandler');
-  if (err.code && err.code != 'ECONNABORTED') {
+  if (err.code && err.code !== 'ECONNABORTED') {
     let errObject = {
       status: Messages.STATUS_ERROR,
       error: err
@@ -18,7 +18,7 @@ export function errorHandler(err: any, req: any, res: any, next: any) {
       mailToAdmin(err);
     }
     res.status(err.code).send(responseObject);
-  } else if(err.code == 'ECONNABORTED') {
+  } else if(err.code === 'ECONNABORTED') {
     let errorObject:any = {
       'status': Messages.STATUS_ERROR,
       'error': {

@@ -1,12 +1,12 @@
-import * as http from "http";
-import * as express from "express";
-import * as path from "path";
+import * as http from 'http';
+import * as express from 'express';
+import * as path from 'path';
 /*import * as routes from "./routes";*/
 /*import * as cnextRoutes from "./cnext-routes";*/
-import * as fs from "fs";
-import LoggerService = require("./app/framework/shared/logger/LoggerService");
-import * as sharedService from "./app/framework/shared/logger/shared.service";
-import Middlewares = require("./app/framework/middlewares/base/MiddlewaresBase");
+import * as fs from 'fs';
+import LoggerService = require('./app/framework/shared/logger/LoggerService');
+import * as sharedService from './app/framework/shared/logger/shared.service';
+import Middlewares = require('./app/framework/middlewares/base/MiddlewaresBase');
 
 var spdy = require('spdy');
  __dirname = './';
@@ -25,8 +25,8 @@ export function init(port: number, mode: string, protocol: string, dist_runner: 
       code: 500
     };
     console.error(error);
-    _loggerService.logError("Catching uncaught Exceptions. : " +err);
-    _loggerService.logError("Catching uncaught Exceptions stack : " +err.stack);
+    _loggerService.logError('Catching uncaught Exceptions. : ' +err);
+    _loggerService.logError('Catching uncaught Exceptions stack : ' +err.stack);
     //sharedService.errorHandler(error);
     sharedService.mailToAdmin(error);
   });
@@ -35,8 +35,8 @@ export function init(port: number, mode: string, protocol: string, dist_runner: 
    * Dev Mode.
    * @note Dev server will only give for you middleware.
    */
-  if (mode == 'dev') {
-    if (dist_runner == 'dist') {
+  if (mode === 'dev') {
+    if (dist_runner === 'dist') {
       app.all('/*', function (req, res, next) {
         res.header('Access-Control-Allow-Origin', '*');
         res.header('Access-Control-Allow-Headers', 'X-Requested-With');
@@ -59,8 +59,7 @@ export function init(port: number, mode: string, protocol: string, dist_runner: 
       /**
        * Api Routes for `Development`.
        */
-    }
-    else {
+    } else {
       app.all('/*', function (req, res, next) {
         res.header('Access-Control-Allow-Origin', '*');
         res.header('Access-Control-Allow-Headers', 'X-Requested-With');
@@ -77,7 +76,7 @@ export function init(port: number, mode: string, protocol: string, dist_runner: 
       app.use(express.static(clientRoot));
       _serverDir = '/dist/server/dev';
       app.use('/public', express.static(path.resolve(__dirname+ _serverDir +'/public')));
-      var renderIndex = (req: express.Request, res: express.Response) => {
+      let renderIndex = (req: express.Request, res: express.Response) => {
         _clientDir = '/dist/client/dev';
         res.sendFile(path.resolve(__dirname + _clientDir + '/index.html'));
       };
@@ -86,9 +85,8 @@ export function init(port: number, mode: string, protocol: string, dist_runner: 
        * Api Routes for `Development`.
        */
     }
-  }
-  else {
-    if(dist_runner == 'dist') {
+  } else {
+    if(dist_runner === 'dist') {
       /**
        * Prod Mode.
        * @note Prod mod will give you static + middleware.
@@ -131,8 +129,7 @@ export function init(port: number, mode: string, protocol: string, dist_runner: 
        * Prevent server routing and use @ng2-router.
        */
       app.get('/*', renderIndex);
-    }
-    else {
+    } else {
       /**
        * Prod Mode.
        * @note Prod mod will give you static + middleware.
@@ -181,7 +178,7 @@ export function init(port: number, mode: string, protocol: string, dist_runner: 
    * Server with gzip compression.
    */
   //HTTP START:
-  if (protocol == 'http') {
+  if (protocol === 'http') {
     return new Promise<http.Server>((resolve, reject) => {
       let server = app.listen(port, () => {
         var port = server.address().port;
@@ -192,8 +189,8 @@ export function init(port: number, mode: string, protocol: string, dist_runner: 
     });
   } else {
     const options = {
-      key: fs.readFileSync("./staging.jobmosis.com.key"),
-      cert: fs.readFileSync("./staging.jobmosis.com.crt"),
+      key: fs.readFileSync('./staging.jobmosis.com.key'),
+      cert: fs.readFileSync('./staging.jobmosis.com.crt'),
       handshakeTimeout: 600000, //by default timeout set to 10 min for export functionality, Need to test this
       passphrase: 'tpl123',
       spdy: {
@@ -210,6 +207,6 @@ export function init(port: number, mode: string, protocol: string, dist_runner: 
         } else {
           console.log('http2 Listening on port: ' + port + '.');
         }
-      })
+      });
   }
-};
+}
