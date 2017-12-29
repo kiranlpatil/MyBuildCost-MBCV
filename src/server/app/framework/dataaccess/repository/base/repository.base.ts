@@ -10,13 +10,13 @@ class RepositoryBase<T extends mongoose.Document> implements IRead<T>, IWrite<T>
     this._model = schemaModel;
   }
 
-  /*create (item: T, callback: (error: any, result: any) => void) {
+  create (item: T, callback: (error: any, result: any) => void) {
     this._model.create(item, callback);
 
   }
 
   retrieve (field, callback: (error: any, result: any) => void) {
-    this._model.find(field, callback)
+    this._model.find(field, callback);
   }
 
   update (_id: mongoose.Types.ObjectId, item: T, callback: (error: any, result: any) => void) {
@@ -48,8 +48,16 @@ class RepositoryBase<T extends mongoose.Document> implements IRead<T>, IWrite<T>
     this._model.findOneAndUpdate(query, newData, options, function(err, result){
       callback(err, result);
     });
-  }*/
-  create(item: T, callback: (error: any, result: any) => void) {
+  }
+
+  insertMany(data, callback:(err: any, result : any)=> void) {
+    console.log('Inserting into base repo : '+JSON.stringify(data));
+    this._model.insertMany(data, function (err, result) {
+      callback(err,result);
+    });
+  }
+
+  /*create(item: T, callback: (error: any, result: any) => void) {
     this._model.create(item, callback);
   }
 
@@ -81,11 +89,9 @@ class RepositoryBase<T extends mongoose.Document> implements IRead<T>, IWrite<T>
     this._model.find(field, projection).lean().exec((err, res) => {
       console.timeEnd('count time');
       callback(err, res);
-    });
-  }
+    });*/
 
-
-  update(_id: mongoose.Types.ObjectId, item: T, callback: (error: any, result: any) => void) {
+ /* update(_id: mongoose.Types.ObjectId, item: T, callback: (error: any, result: any) => void) {
     this._model.update({_id: _id}, item, callback);
   }
 
@@ -195,7 +201,7 @@ class RepositoryBase<T extends mongoose.Document> implements IRead<T>, IWrite<T>
     this._model.find(query).count().lean().exec(function (err, items) {
       callback(err, items);
     });
-  }
+  }*/
 }
 
 export = RepositoryBase;
