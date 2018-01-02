@@ -20,7 +20,10 @@ export class ProjectComponent implements OnInit {
 
     this.projectForm = this.formBuilder.group({
       'name': '',
-      'region': ''
+      'region': '',
+      'plotArea': '',
+      'projectDuration': '',
+      'plotPeriphery': ''
     });
 
   }
@@ -35,7 +38,7 @@ export class ProjectComponent implements OnInit {
       this.model = this.projectForm.value;
       this.projectService.createProject(this.model)
         .subscribe(
-          candidate => this.projectCreationSuccess(project),
+          project => this.projectCreationSuccess(project),
           error => this.projectCreationFailed(error));
     }
   }
@@ -50,9 +53,6 @@ export class ProjectComponent implements OnInit {
   onGetProjecteSuccess(projects: any) {
     console.log(projects);
     this.projects = projects.data;
-    /*for (let entry of this.projects) {
-      console.log(entry); // 1, "string", false
-    }*/
   }
 
   onGetProjecteFail(error : any) {
@@ -61,9 +61,10 @@ export class ProjectComponent implements OnInit {
 
   projectCreationSuccess(project : any) {
     console.log(project);
+    this.getProjects();
   }
 
-  onGetProjecteFail(error : any) {
+  projectCreationFailed(error : any) {
     console.log(error);
   }
 
