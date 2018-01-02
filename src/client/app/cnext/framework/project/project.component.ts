@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { AppSettings, Messages, Label, Button, Headings, NavigationRoutes } from '../../../shared/constants';
 import { ProjectService } from './project.service';
+import { Project } from './../model/project';
 
 @Component({
   moduleId: module.id,
@@ -9,15 +10,17 @@ import { ProjectService } from './project.service';
   templateUrl: 'project.component.html'
 })
 
-export class ProjectComponent implements OnInit, OnDestroy {
+export class ProjectComponent implements OnInit {
 
   projectForm:  FormGroup;
   projects : any;
+  model: Project = new Project();
 
   constructor(private projectService: ProjectService, private formBuilder: FormBuilder) {
 
     this.projectForm = this.formBuilder.group({
-      'current_password': ''
+      'name': '',
+      'region': ''
     });
 
   }
@@ -28,6 +31,13 @@ export class ProjectComponent implements OnInit, OnDestroy {
 
   onSubmit() {
       //this.projectService
+    if(this.projectForm.valid) {
+      this.model = this.projectForm.value;
+      this.projectService.createProject(this.model)
+        .subscribe(
+          candidate => this.projectCreationSuccess(project),
+          error => this.projectCreationFailed(error));
+    }
   }
 
 
@@ -43,6 +53,14 @@ export class ProjectComponent implements OnInit, OnDestroy {
     /*for (let entry of this.projects) {
       console.log(entry); // 1, "string", false
     }*/
+  }
+
+  onGetProjecteFail(error : any) {
+    console.log(error);
+  }
+
+  projectCreationSuccess(project : any) {
+    console.log(project);
   }
 
   onGetProjecteFail(error : any) {

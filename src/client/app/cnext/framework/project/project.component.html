@@ -9,4 +9,30 @@
         </div>
     </ul>
   </div>
+
+  <div class="col-lg-4 col-md-4 col-sm-6 col-xs-11">
+      <div class="col-xs-12 no-padding">
+        <h5>Create Project</h5>
+
+        <div class="col-sm-12">
+
+          <form [formGroup]="projectForm" (submit)="onSubmit()" class="profile-form clearfix">
+
+            <div  class="form-group">
+              <label>Project Name</label>
+              <input type="text" [(ngModel)]="model.name" formControlName="name" id="name" class="form-control"/>
+            </div>
+
+
+            <div  class="form-group">
+              <label>Region</label>
+              <input type="text" [(ngModel)]="model.region" formControlName="region" id="region" class="form-control"/>
+            </div>
+
+            <button type="submit" class="btn btn-primary pull-right">Create Project</button>
+          </form>
+        </div>
+
+      </div>
+  </div>
 </section>

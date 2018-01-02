@@ -10,7 +10,7 @@ export class CandidateSignUpService extends BaseService {
     super();
   }
 
-  addCandidate(candidate: CandidateDetail): Observable<CandidateDetail> {debugger
+  addCandidate(candidate: CandidateDetail): Observable<CandidateDetail> {
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({headers: headers});
     let body = JSON.stringify(candidate);

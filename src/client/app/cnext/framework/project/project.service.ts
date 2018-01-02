@@ -21,4 +21,13 @@ export class ProjectService extends BaseService {
       .catch(this.handleError);
   }
 
+  createProject(project : Project): Observable<Project> {
+    let headers = new Headers({'Content-Type': 'application/json'});
+    let options = new RequestOptions({headers: headers});
+    let body = JSON.stringify(project);
+    return this.http.post(API.CREATE_PROJECT, body, options)
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
+
 }

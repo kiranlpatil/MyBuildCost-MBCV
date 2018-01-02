@@ -5,6 +5,7 @@ import ProjectAsset = require('../../framework/shared/projectasset');
 import User = require('../../framework/dataaccess/mongoose/user');
 import Project = require('../dataaccess/mongoose/Project');
 import AuthInterceptor = require('../../framework/interceptor/auth.interceptor');
+import {isNullOrUndefined} from "util";
 class ProjectService {
   APP_NAME: string;
   company_name: string;
@@ -23,7 +24,7 @@ class ProjectService {
     //console.log('data : '+JSON.stringify(data));
     const promise = new Promise((resolve, reject) => {
       if(data) {
-        if(data.building !== null) {
+        if((data.building !== null) && (data.building !== undefined)) {
           this.buildingRepository.insertMany(data.building, (err, result) => {
             if(err) {
               reject(err);
@@ -33,19 +34,16 @@ class ProjectService {
                 buildingIds.push(result[i]._id);
               }
               data.building = buildingIds;
-              console.log('Resolved Building IDs:'+ JSON.stringify(data));
               resolve(data);
             }
           });
         } else {
           data.building = [];
-          console.log('Resolved Empty Buildings:'+ JSON.stringify(data));
           resolve(data);
         }
       }
     });
     promise.then((res) => {
-      console.log('Resolved :'+ JSON.stringify(res));
       this.projectRepository.create(res, (err, res) => {
         if (err) {
           callback(err, null);
