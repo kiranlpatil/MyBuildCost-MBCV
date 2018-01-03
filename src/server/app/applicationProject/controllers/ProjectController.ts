@@ -73,6 +73,7 @@ class ProjectController {
       let projectId = req.params.id;
       let buildingDetails = <Building> req.body;
       let projectService = new ProjectService();
+      console.log('buildingDetails ' +JSON.stringify(buildingDetails));
       projectService.addBuilding(projectId, buildingDetails, user, (error, result) => {
         if(error) {
           next(error);

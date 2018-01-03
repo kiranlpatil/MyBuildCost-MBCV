@@ -1,40 +1,42 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AppSettings, Messages, Label, Button, Headings, NavigationRoutes } from '../../../shared/constants';
-import { ProjectService } from './project.service';
-import { Project } from './../model/project';
+import { AppSettings, Messages, Label, Button, Headings, NavigationRoutes } from '../../../../shared/constants';
+import { ListProjectService } from './listProjest.service';
+import { Project } from './../../model/project';
 
 @Component({
   moduleId: module.id,
-  selector: 'bi-project',
-  templateUrl: 'project.component.html'
+  selector: 'bi-list-project',
+  templateUrl: 'listProject.component.html'
 })
 
-export class ProjectComponent implements OnInit {
+export class ListProjectComponent implements OnInit {
 
   projectForm:  FormGroup;
   projects : any;
   model: Project = new Project();
 
-  constructor(private projectService: ProjectService, private _router: Router, private formBuilder: FormBuilder) {
+  constructor(private listProjectService: ListProjectService, private _router: Router, private formBuilder: FormBuilder) {
 
   }
 
   ngOnInit() {
-      this.getProjects();
+    this.getProjects();
   }
   createProject() {
+    ///project/createProject
     this._router.navigate([NavigationRoutes.APP_CREATE_PROJECT]);
   }
 
   getProjects() {
-    this.projectService.getProject().subscribe(
+    this.listProjectService.getProject().subscribe(
       projects => this.onGetProjecteSuccess(projects),
-      error => this.onGetProjecteFail(error) );
+      error => this.onGetProjecteFail(error)
+    );
   }
 
-  onGetProjecteSuccess(projects: any) {
+  onGetProjecteSuccess(projects : any) {
     console.log(projects);
     this.projects = projects.data;
   }

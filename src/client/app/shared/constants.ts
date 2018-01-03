@@ -158,6 +158,10 @@ export class Messages {
 export class NavigationRoutes {
   public static APP_REGISTRATION: string = '/registration';
   public static APP_FORGOTPASSWORD: string = '/forgot-password';
+  public static APP_PROJECT: string = '/project';
+  public static APP_CREATE_PROJECT: string = 'project/create';
+  public static APP_CREATE_BUILDING: string = 'building/create';
+  public static APP_LIST_PROJECT: string = 'project/list';
   public static APP_DASHBOARD: string = '/dashboard';
   public static APP_USER_DASHBOARD: string = '/user';
   public static APP_USER__DETAILS_DASHBOARD: string = '/user/details';

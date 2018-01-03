@@ -34,18 +34,24 @@ import {LandingPageComponent} from "./framework/landing-page/landing-page.compon
 import {SharedService} from "./shared/services/shared-service";
 import {PageNotFoundComponent} from "./shared/page-not-found/page-not-found.component";
 import {AnalyticService} from "./shared/services/analytic.service";
-import {BuildingComponent} from "./cnext/framework/building/building.component";
-import {BuildingService} from "./cnext/framework/building/building.service";
 //import { MyDashboardComponent} from "./cnext/framework/my-dashboard/my-dashboard.component";
 import { DashboardHeaderComponent} from "./framework/dashboard/dashboard-header/dashboard-header.component";
 import {DashboardUserProfileService} from "./framework/dashboard/user-profile/dashboard-user-profile.service";
 import {UserChangePasswordService} from "./framework/dashboard/user-change-password/user-change-password.service";
 import {AuthGuardService} from "./shared/services/auth-guard.service";
 
-//C-NEXT IMPORTS
+//Application IMPORTS
 
 import { ProjectService } from './cnext/framework/project/project.service';
 import { ProjectComponent } from './cnext/framework/project/project.component';
+import { CreateProjectComponent } from './cnext/framework/project/createProject/createProject.component';
+import { CreateProjectService } from './cnext/framework/project/createProject/createProject.service';
+import { BuildingComponent } from './cnext/framework/building/building.component';
+import { CreateBuildingComponent } from './cnext/framework/building/createBuilding/createBuilding.component';
+import { BuildingService } from './cnext/framework/building/building.service';
+import { CreateBuildingService } from './cnext/framework/building/createBuilding/createBuilding.service';
+import { ListProjectComponent } from './cnext/framework/project/listProject/listProject.component';
+import { ListProjectService } from './cnext/framework/project/listProject/listProjest.service';
 
 @NgModule({
   imports: [
@@ -74,6 +80,9 @@ import { ProjectComponent } from './cnext/framework/project/project.component';
     DashboardHeaderComponent,
     ProjectComponent,
     BuildingComponent,
+    CreateProjectComponent,
+    ListProjectComponent,
+    CreateBuildingComponent,
     //MyDashboardComponent,
     PageNotFoundComponent
   ],
@@ -109,7 +118,10 @@ import { ProjectComponent } from './cnext/framework/project/project.component';
 
     //Application Services
     ProjectService,
-    BuildingService
+    BuildingService,
+    CreateBuildingService,
+    CreateProjectService,
+    ListProjectService
   ],
   bootstrap: [AppComponent]
 })

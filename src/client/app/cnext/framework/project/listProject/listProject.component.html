@@ -1,0 +1,15 @@
+<section class="settings main-form-wrapper" style="margin-top: 100px">
+  <div class="col-lg-4 col-md-4 col-sm-6 col-xs-11 settings-content">
+    <ul>
+      <div class="col-xs-12 no-padding">
+        <h5>Project List</h5>
+        <li *ngFor="let key of projects">
+          {{key.name}}
+        </li>
+      </div>
+    </ul>
+  </div>
+
+  <button (click)="createProject()">Create Project</button>
+  <tpl-footer></tpl-footer>
+</section>

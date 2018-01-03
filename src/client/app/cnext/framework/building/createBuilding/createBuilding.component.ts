@@ -1,24 +1,24 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { ValidationService } from '../../../shared/customvalidations/validation.service';
-import { AppSettings, Messages, Label, Button, Headings, NavigationRoutes } from '../../../shared/constants';
+import { ValidationService } from '../../../../shared/customvalidations/validation.service';
+import { AppSettings, Messages, Label, Button, Headings, NavigationRoutes } from '../../../../shared/constants';
 // import { ProjectService } from './project.service';
-import { Building } from './../model/building';
-import { BuildingService } from './building.service';
+import { Building } from './../../model/building';
+import { CreateBuildingService } from './createBuilding.service';
 
 @Component({
   moduleId: module.id,
-  selector: 'bi-building',
-  templateUrl: 'building.component.html'
+  selector: 'bi-add-building-entity',
+  templateUrl: 'createBuilding.component.html'
 })
 
-export class BuildingComponent implements OnInit {
+export class CreateBuildingComponent implements OnInit {
 
   addBuildingForm:  FormGroup;
   buildings : any;
   model: Building = new Building();
 
-  constructor(private buildingService: BuildingService, private formBuilder: FormBuilder) {
+  constructor(private createBuildingService: CreateBuildingService, private formBuilder: FormBuilder) {
 
     this.addBuildingForm = this.formBuilder.group({
       'name': '',
@@ -42,7 +42,7 @@ export class BuildingComponent implements OnInit {
     //this.projectService
     if(this.addBuildingForm.valid) {
       this.model = this.addBuildingForm.value;
-      this.buildingService.addBuilding(this.model)
+      this.createBuildingService.addBuilding(this.model)
         .subscribe(
           building => this.addBuildingSuccess(building),
           error => this.addBuildingFailed(error));

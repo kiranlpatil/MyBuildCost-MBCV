@@ -97,7 +97,6 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     this.model = this.userForm.value;
-    this.model.recruiterReferenceId = (this.isFromCareerPlugin) ? this.recruiterReferenceId : undefined;
     if (this.model.email == '' || this.model.password == '') {
       this.submitStatus = true;
       return;
@@ -138,8 +137,6 @@ export class LoginComponent implements OnInit {
   }
 
   currentPosition(position: any) {
-    this.model.latitude = position.coords.latitude;
-    this.model.longitude = position.coords.longitude;
     this.loginService.userLogin(this.model)
       .subscribe(
         res => (this.loginSuccess(res)),
@@ -151,7 +148,7 @@ export class LoginComponent implements OnInit {
       .subscribe(
         res => (this.loginSuccess(res)),
         error => (this.loginFail(error)));
-    console.log("location access is disable");
+    console.log('location access is disable');
   }
 
   navigateTo(navigateTo: string) {

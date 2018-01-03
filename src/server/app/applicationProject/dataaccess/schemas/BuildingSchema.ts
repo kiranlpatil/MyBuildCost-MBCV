@@ -14,25 +14,24 @@ class BuildingSchema {
         type: String
       },
       totalSlabArea: {
-        quantity: Number,
-        unit: String
-      },
-      totalCarperAreaOfUnit: {
-        quantity: Number,
-        unit: String
-      },
-      totalSalebleAreaOfUnit: {
-        quantity: Number,
-        unit: String
-      },
-      totalParkingAreaOfUnit:{
-        quantity: Number,
-        unit: String
-      },
-      noOftwoBhk: {
         type: Number
       },
-      noOfthreeBhk: {
+      totalCarperAreaOfUnit: {
+        type: Number
+      },
+      totalSalebleAreaOfUnit: {
+        type: Number
+      },
+      totalParkingAreaOfUnit:{
+        type: Number
+      },
+      noOfOneBHK: {
+        type: Number
+      },
+      noOfTwoBHK: {
+        type: Number
+      },
+      noOfThreeBHK: {
         type: Number
       },
       noOfSlab: {
