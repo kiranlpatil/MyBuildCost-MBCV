@@ -1,17 +1,14 @@
 import * as express from 'express';
 import ProjectService = require('./../services/ProjectService');
-import UserService = require('./../../framework/services/UserService');
 import Project = require('../dataaccess/mongoose/Project');
 import Building = require('../dataaccess/mongoose/Building');
 let config = require('config');
 
 class ProjectController {
   private _projectService : ProjectService;
-  private _userService : UserService;
 
   constructor() {
     this._projectService = new ProjectService();
-    this._userService = new UserService();
   }
 
   create(req: express.Request, res: express.Response, next: any): void {
@@ -19,29 +16,11 @@ class ProjectController {
 
       let data = req.body;
       let projectService = new ProjectService();
-      let userService = new UserService();
-      let userId = req.user.userId;
-      console.log('User Id : '+userId);
       projectService.create(data, (error, result) => {
         if(error) {
           res.send({'error': error.message});
         } else {
-          console.log('data : '+JSON.stringify(data));
-          console.log('result : '+JSON.stringify(result));
-          let projectId = result._id;
-          console.log('Project ID : '+projectId);
-          let newData =  {$push: { project: projectId }};
-          console.log('newData : '+JSON.stringify(newData));
-
-          userService.findOneAndUpdate(userId, newData, {new :true},(err, resp) => {
-            if(err) {
-              console.log('err : '+err);
-              res.send({'error': err});
-            } else {
-              console.log('resp : '+resp);
-              res.send({'data': result});
-            }
-          });
+          res.send({'success': result});
         }
       });
     } catch (e)  {
@@ -56,7 +35,7 @@ class ProjectController {
       let projectService = new ProjectService();
       let user = req.user;
       let projectId =  req.params.id;
-      projectService.getProject(projectId, user, (error, result) =>{
+      projectService.getProject(projectId, user, (error, result) => {
           if(error) {
             next(error);
           } else {
@@ -69,13 +48,13 @@ class ProjectController {
     }
   }
 
-  updateProjectDetails(req: express.Request, res: express.Response, next: any): void{
+  updateProjectDetails(req: express.Request, res: express.Response, next: any): void {
     try {
       let projectDetail = <Project>req.body;
       projectDetail['_id'] = req.params.id;
       let user = req.user;
       let projectService = new ProjectService();
-      projectService.updateProjectDetails(projectDetail, user, (error, result)=>{
+      projectService.updateProjectDetails(projectDetail, user, (error, result)=> {
         if(error) {
           next(error);
         } else {
@@ -88,7 +67,7 @@ class ProjectController {
     }
   }
 
-  addBuilding(req: express.Request, res: express.Response, next: any): void{
+  addBuilding(req: express.Request, res: express.Response, next: any): void {
     try {
       let user = req.user;
       let projectId = req.params.id;
