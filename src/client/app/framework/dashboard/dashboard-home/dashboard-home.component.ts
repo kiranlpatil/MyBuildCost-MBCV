@@ -22,6 +22,10 @@ export class DashboardHomeComponent implements OnInit, OnDestroy {
     this._router.navigate([NavigationRoutes.APP_CREATE_PROJECT]);
   }
 
+  goToAddBuilding() {
+    this._router.navigate([NavigationRoutes.APP_CREATE_BUILDING]);
+  }
+
   goToViewProject() {
     this._router.navigate([NavigationRoutes.APP_LIST_PROJECT]);
   }

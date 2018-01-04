@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ValidationService } from '../../../../shared/customvalidations/validation.service';
 import { AppSettings, Messages, Label, Button, Headings, NavigationRoutes } from '../../../../shared/constants';
 import { API, BaseService, SessionStorage, SessionStorageService,  Message,
@@ -22,7 +23,8 @@ export class CreateBuildingComponent implements OnInit {
 
   model: Building = new Building();
 
-  constructor(private createBuildingService: CreateBuildingService, private formBuilder: FormBuilder, private messageService: MessageService) {
+  constructor(private createBuildingService: CreateBuildingService, private formBuilder: FormBuilder,
+              private _router: Router, private messageService: MessageService) {
 
     this.addBuildingForm = this.formBuilder.group({
       'name': '',
@@ -59,6 +61,7 @@ export class CreateBuildingComponent implements OnInit {
     message.isError = false;
     message.custom_message = Messages.MSG_SUCCESS_ADD_BUILDING_PROJECT;
     this.messageService.message(message);
+    this._router.navigate([NavigationRoutes.APP_DASHBOARD]);
   }
 
   addBuildingFailed(error : any) {

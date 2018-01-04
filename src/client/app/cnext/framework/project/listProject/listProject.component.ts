@@ -31,17 +31,17 @@ export class ListProjectComponent implements OnInit {
 
   getProjects() {
     this.listProjectService.getProject().subscribe(
-      projects => this.onGetProjecteSuccess(projects),
-      error => this.onGetProjecteFail(error)
+      projects => this.onGetProjectSuccess(projects),
+      error => this.onGetProjectFail(error)
     );
   }
 
-  onGetProjecteSuccess(projects : any) {
+  onGetProjectSuccess(projects : any) {
     console.log(projects);
     this.projects = projects.data;
   }
 
-  onGetProjecteFail(error : any) {
+  onGetProjectFail(error : any) {
     console.log(error);
   }
 
