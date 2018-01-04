@@ -4,12 +4,11 @@
       <div class="col-xs-12 no-padding">
         <h5>Project List</h5>
         <li *ngFor="let key of projects">
-          {{key.name}}
+         <button (click)="setCurrentProjectId(key._id)">{{key.name}}</button>
         </li>
       </div>
     </ul>
   </div>
 
-  <button (click)="createProject()">Create Project</button>
   <tpl-footer></tpl-footer>
 </section>

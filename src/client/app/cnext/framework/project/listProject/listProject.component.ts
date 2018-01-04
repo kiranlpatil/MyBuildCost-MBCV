@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AppSettings, Messages, Label, Button, Headings, NavigationRoutes } from '../../../../shared/constants';
 import { ListProjectService } from './listProjest.service';
 import { Project } from './../../model/project';
+import {SessionStorage, SessionStorageService} from "../../../../shared/index";
 
 @Component({
   moduleId: module.id,
@@ -36,12 +37,29 @@ export class ListProjectComponent implements OnInit {
     );
   }
 
+  getProjectDetails(){
+      this.listProjectService.getProject().subscribe(
+        project => this.onGetProjectDetailsSuccess(project),
+        error => this.onGetProjectDetailsFail(error)
+      );
+  }
+
+
   onGetProjectSuccess(projects : any) {
     console.log(projects);
     this.projects = projects.data;
   }
 
   onGetProjectFail(error : any) {
+    console.log(error);
+  }
+
+  onGetProjectDetailsSuccess(projects : any) {
+    console.log(projects);
+    this.projects = projects.data[0];
+  }
+
+  onGetProjectDetailsFail(error : any) {
     console.log(error);
   }
 
@@ -59,5 +77,11 @@ export class ListProjectComponent implements OnInit {
 
   getHeadings() {
     return Headings;
+  }
+
+  setCurrentProjectId(projectId:any){
+    console.log('Project ID'+JSON.stringify(projectId));
+   SessionStorageService.setSessionValue(SessionStorage.CURRENT_PROJECT, projectId);
+    this._router.navigate([NavigationRoutes.APP_VIEW_PROJECT]);
   }
 }
