@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import {
   AppSettings,
@@ -13,6 +13,8 @@ import { API, BaseService, SessionStorage, SessionStorageService,  Message,
   MessageService } from '../../../../shared/index';
 import { CreateProjectService } from './createProject.service';
 import { Project } from './../../model/project';
+import {ValidationService} from "./../../../../shared/customvalidations/validation.service";
+import {SharedService} from "../../../../shared/services/shared-service";
 
 @Component({
   moduleId: module.id,
@@ -29,14 +31,14 @@ export class CreateProjectComponent implements OnInit {
   model: Project = new Project();
 
   constructor(private createProjectService: CreateProjectService, private _router: Router, private formBuilder: FormBuilder,
-  private messageService: MessageService) {
+  private messageService: MessageService, private sharedService: SharedService) {
 
     this.projectForm = this.formBuilder.group({
-      'name': '',
-      'region': '',
-      'plotArea': '',
-      'projectDuration': '',
-      'plotPeriphery': ''
+      'name': ['', ValidationService.requiredProjectName],
+      'region': ['', ValidationService.requiredProjectAddress],
+      'plotArea': ['', ValidationService.requiredPlotArea],
+      'projectDuration': ['', ValidationService.requiredProjectDuration],
+      'plotPeriphery': ['', ValidationService.requiredPlotPeriphery]
     });
 
   }

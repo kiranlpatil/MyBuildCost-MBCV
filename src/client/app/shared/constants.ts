@@ -87,6 +87,12 @@ export class Messages {
   public static MSG_ERROR_VALIDATION_PIN_NUMBER = 'Pin code should not be greater than 20 characters.';
   public static MSG_ERROR_VALIDATION_TERMS_AND_CONDITIONS_REQUIRED = 'Please accept the terms and conditions.';
 
+  public static MSG_ERROR_VALIDATION_PROJECT_NAME_REQUIRED = 'Enter project name.';
+  public static MSG_ERROR_VALIDATION_PROJECT_ADDRESS_REQUIRED = 'Enter project address.';
+  public static MSG_ERROR_VALIDATION_PLOT_AREA_REQUIRED = 'Enter plot area.';
+  public static MSG_ERROR_VALIDATION_PROJECT_DURATION_REQUIRED = 'Enter project duration.';
+  public static MSG_ERROR_VALIDATION_PLOT_PERIPHERY_REQUIRED = 'Enter plot periphery.';
+
   public static MSG_LANDING_PAGE = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' +
     'Nullam sem turpis, sodales eu urna sed, posuere finibus leo finibus.' +
     'Sed et lorem eu mi tincidunt fringilla at non odio.' +

@@ -30,6 +30,12 @@ export class ValidationService {
       'invalidBirthYear': Messages.MSG_ERROR_VALIDATION_BIRTHYEAR_INVALID,
       'invalidPin': Messages.MSG_ERROR_VALIDATION_PIN_NUMBER,
 
+      'requiredProjectName': Messages.MSG_ERROR_VALIDATION_PROJECT_NAME_REQUIRED,
+      'requiredProjectAddress': Messages.MSG_ERROR_VALIDATION_PROJECT_ADDRESS_REQUIRED,
+      'requiredPlotArea': Messages.MSG_ERROR_VALIDATION_PLOT_AREA_REQUIRED,
+      'requiredProjectDuration': Messages.MSG_ERROR_VALIDATION_PROJECT_DURATION_REQUIRED ,
+      'requiredPlotPeriphery': Messages.MSG_ERROR_VALIDATION_PLOT_PERIPHERY_REQUIRED ,
+
       'maxlength': `Maximum ${validatorValue.requiredLength} characters`,
       'minlength': `Minimum ${validatorValue.requiredLength} characters`
 
@@ -247,6 +253,59 @@ export class ValidationService {
       return null;
     } else {
       return {'invalidPin': true};
+    }
+  }
+
+  static required(control: any) {
+    if (control.value === '' || control.value === undefined) {
+      return {'requiredField': true};
+    } else {
+      return null;
+    }
+  }
+
+
+  static requiredProjectName(control: any) {
+    if (control.value === '' || control.value === undefined) {
+      return {'requiredProjectName': true};
+    } else {
+      return null;
+    }
+  }
+
+
+  static requiredProjectAddress(control: any) {
+    if (control.value === '' || control.value === undefined) {
+      return {'requiredProjectAddress': true};
+    } else {
+      return null;
+    }
+  }
+
+
+  static requiredPlotArea(control: any) {
+    if (control.value === '' || control.value === undefined) {
+      return {'requiredPlotArea': true};
+    } else {
+      return null;
+    }
+  }
+
+
+  static requiredProjectDuration(control: any) {
+    if (control.value === '' || control.value === undefined) {
+      return {'requiredProjectDuration': true};
+    } else {
+      return null;
+    }
+  }
+
+
+  static requiredPlotPeriphery(control: any) {
+    if (control.value === '' || control.value === undefined) {
+      return {'requiredPlotPeriphery': true};
+    } else {
+      return null;
     }
   }
 
