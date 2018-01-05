@@ -82,6 +82,6 @@ export class ListProjectComponent implements OnInit {
   setCurrentProjectId(projectId:any) {
     console.log('Project ID'+JSON.stringify(projectId));
    SessionStorageService.setSessionValue(SessionStorage.CURRENT_PROJECT, projectId);
-    this._router.navigate([NavigationRoutes.APP_VIEW_BUILDINGS]);
+   this._router.navigate([NavigationRoutes.APP_VIEW_BUILDINGS]);
   }
 }

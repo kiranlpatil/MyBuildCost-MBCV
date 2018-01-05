@@ -184,6 +184,7 @@ export class NavigationRoutes {
   public static APP_CREATE_PROJECT: string = 'project/create';
   public static APP_VIEW_PROJECT: string = 'project/view';
   public static APP_VIEW_BUILDINGS: string = 'building/view';
+  public static APP_VIEW_BUILDING_DETAILS: string = 'building/details';
   public static APP_CREATE_BUILDING: string = 'building/create';
   public static APP_LIST_PROJECT: string = 'project/list';
   public static APP_DASHBOARD: string = '/dashboard';
@@ -221,6 +222,7 @@ export class SessionStorage {
   public static CHANGE_MAIL_VALUE = 'change_mail_value';
   public static VERIFY_CHANGE_PHONE_VALUE = 'verify_change_phone_value';
   public static CURRENT_PROJECT = 'current_project_id';
+  public static CURRENT_BUILDING = 'current_building_id';
 }
 
 export class LocalStorage {
@@ -320,6 +322,7 @@ export class API {
   public static VIEW_PROJECT = 'project';
   public static PROJECT_BUILDINGS = 'user/all/building';
   public static ADD_BUILDING = 'building';
+  public static VIEW_BUILDING = 'building';
 }
 
 export class ImagePath {

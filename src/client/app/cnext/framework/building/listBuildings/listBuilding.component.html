@@ -5,7 +5,9 @@
       <div class="col-xs-12 no-padding">
         <h5>Buildings List</h5>
         <li *ngFor="let building of buildings">
-          <button type="button" class="btn btn-primary">{{building.name}}</button><span (click)="deleteBuilding(building._id)" class="glyphicon glyphicon-trash"></span>
+          <button type="button" class="btn btn-primary">{{building.name}}</button>
+          <span (click)="deleteBuilding(building._id)" class="glyphicon glyphicon-trash"></span>
+          <span (click)="getBuildingDetails(building._id)" class="glyphicon glyphicon-pencil"></span>
           <br/><br/>
         </li>
         <li>
