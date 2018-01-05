@@ -27,7 +27,8 @@ export class ViewBuildingService extends BaseService {
 
 
   updateBuildingDetails(model: Building): Observable<UserProfile> {
-    let url = API.VIEW_PROJECT+'/'+SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT);
+    var url = API.VIEW_PROJECT+'/'+SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT)+'/'
+      +API.VIEW_BUILDING+'/'+ SessionStorageService.getSessionValue(SessionStorage.CURRENT_BUILDING);
     let body = JSON.stringify(model);
     return this.http.put(url, body)
       .map(this.extractData)

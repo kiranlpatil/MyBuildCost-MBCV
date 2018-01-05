@@ -74,14 +74,12 @@ export class ViewBuildingComponent implements OnInit {
 
 
   onSubmit() {
-    //this.submitted = true;
-    // if(this.ViewBuildingService.valid) {
-    //   this.model = this.viewBuildingForm.value;
-    //   this.ViewBuildingService.updateBuildingDetails(this.model)
-    //     .subscribe(
-    //       building => this.updateBuildingDetailsSuccess(building),
-    //       error => this.updateBuildingDetailsError(error));
-    // }
+    // this.submitted = true;
+      this.model = this.viewBuildingForm.value;
+      this.viewBuildingService.updateBuildingDetails(this.model)
+        .subscribe(
+          building => this.updateBuildingDetailsSuccess(building),
+          error => this.updateBuildingDetailsError(error));
   }
 
   updateBuildingDetailsSuccess(result: any) {
@@ -89,7 +87,7 @@ export class ViewBuildingComponent implements OnInit {
     if (result !== null) {
       var message = new Message();
       message.isError = false;
-      message.custom_message = Messages.MSG_SUCCESS_UPDATE_PROJECT_DETAILS;
+      message.custom_message = Messages.MSG_SUCCESS_UPDATE_BUILDING_DETAILS;
       this.messageService.message(message);
     }
   }

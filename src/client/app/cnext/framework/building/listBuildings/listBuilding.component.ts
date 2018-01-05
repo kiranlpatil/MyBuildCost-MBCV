@@ -5,7 +5,8 @@ import { AppSettings, Messages, Label, Button, Headings, NavigationRoutes } from
 import { ListBuildingService } from './listBuilding.service';
 import { ViewBuildingService } from './../viewBuilding/viewBuilding.service';
 import { Building } from './../../model/building';
-import {SessionStorage, SessionStorageService} from "../../../../shared/index";
+import {SessionStorage, SessionStorageService,MessageService} from "../../../../shared/index";
+import {Message} from "../../../../shared/index";
 
 @Component({
   moduleId: module.id,
@@ -18,7 +19,7 @@ export class ListBuildingComponent implements OnInit {
   buildings : any;
   model: Building = new Building();
 
-  constructor(private listBuildingService: ListBuildingService,private viewBuildingService: ViewBuildingService, private _router: Router) {
+  constructor(private listBuildingService: ListBuildingService,private viewBuildingService: ViewBuildingService, private _router: Router, private messageService: MessageService) {
 
   }
 
@@ -31,7 +32,7 @@ export class ListBuildingComponent implements OnInit {
 
   deleteBuilding(buildingId : any) {
     this.listBuildingService.deleteBuildingById(buildingId).subscribe(
-      projects => this.onDeleteBuildingSuccess(projects),
+      project => this.onDeleteBuildingSuccess(project),
       error => this.onDeleteBuildingFail(error)
     );
   }
@@ -52,9 +53,15 @@ export class ListBuildingComponent implements OnInit {
     console.log(error);
   }
 
-  onDeleteBuildingSuccess(projects : any) {
-    console.log(projects);
-    this.getProjects();
+  onDeleteBuildingSuccess(result : any) {
+    if (result !== null) {
+      var message = new Message();
+      message.isError = false;
+      message.custom_message = Messages.MSG_SUCCESS_DELETE_BUILDING;
+      console.log(result);
+      this.messageService.message(message);
+      this.getProjects();
+    }
   }
 
   onDeleteBuildingFail(error : any) {
