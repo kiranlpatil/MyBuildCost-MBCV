@@ -55,7 +55,9 @@ import { ListProjectService } from './cnext/framework/project/listProject/listPr
 import { ViewProjectComponent } from './cnext/framework/project/viewProject/viewProject.component';
 import { ViewProjectService } from './cnext/framework/project/viewProject/viewProject.service';
 import { ListBuildingComponent } from './cnext/framework/building/listBuildings/listBuilding.component';
+import { ViewBuildingComponent } from './cnext/framework/building/viewBuilding/viewBuilding.component';
 import { ListBuildingService } from './cnext/framework/building/listBuildings/listBuilding.service';
+import { ViewBuildingService } from './cnext/framework/building/viewBuilding/viewBuilding.service';
 import { ProjectHeaderComponent } from './cnext/framework/project/projectHeader/projectHeader.component';
 import { ProjectContentComponent } from './cnext/framework/project/project-content/project-content.component';
 
@@ -93,6 +95,7 @@ import { ProjectContentComponent } from './cnext/framework/project/project-conte
     ListBuildingComponent,
     ProjectHeaderComponent,
     ProjectContentComponent,
+    ViewBuildingComponent,
     //MyDashboardComponent,
     PageNotFoundComponent
   ],
@@ -133,7 +136,8 @@ import { ProjectContentComponent } from './cnext/framework/project/project-conte
     CreateProjectService,
     ViewProjectService,
     ListProjectService,
-    ListBuildingService
+    ListBuildingService,
+    ViewBuildingService
   ],
   bootstrap: [AppComponent]
 })

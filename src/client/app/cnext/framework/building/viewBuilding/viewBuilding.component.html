@@ -1,0 +1,77 @@
+<section class="settings main-form-wrapper" style="margin-top: 90px">
+  <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3"></div>
+  <div class="col-lg-4 col-md-4 col-sm-6 col-xs-11">
+    <div class="col-xs-12 no-padding">
+      <h5>View Building</h5>
+
+      <div class="col-sm-12">
+
+        <form [formGroup]="viewBuildingForm" (submit)="onSubmit()" class="profile-form clearfix">
+
+          <div  class="form-group">
+            <control-messages [control]="viewBuildingForm.controls.name" [submitStatus] = "submitStatus"></control-messages>
+            <label>Building Name</label>
+            <input type="text" [(ngModel)]="model.name" formControlName="name" id="name"  class="form-control" placeholder="Enter your building name" required />
+          </div>
+
+
+          <div  class="form-group">
+            <control-messages [control]="viewBuildingForm.controls.totalSlabArea" [submitStatus] = "submitStatus"></control-messages>
+            <label>Total Slab Area<small> (In sqm)</small></label>
+            <input type="number" [(ngModel)]="model.totalSlabArea" formControlName="totalSlabArea" id="totalSlabArea"  class="form-control" placeholder="Enter slab area" required/>
+          </div>
+
+          <div  class="form-group">
+            <control-messages [control]="viewBuildingForm.controls.totalCarperAreaOfUnit" [submitStatus] = "submitStatus"></control-messages>
+            <label>Total Carpet Area<small> (In sqm)</small></label>
+            <input type="number" class="form-control" [(ngModel)]="model.totalCarperAreaOfUnit" formControlName="totalCarperAreaOfUnit" id="totalCarperAreaOfUnit" placeholder="Enter carpet area" required/>
+          </div>
+
+          <div  class="form-group">
+            <control-messages [control]="viewBuildingForm.controls.totalParkingAreaOfUnit" [submitStatus] = "submitStatus"></control-messages>
+            <label>Total Parking Area<small> (In months)</small></label>
+            <input type="number" [(ngModel)]="model.totalParkingAreaOfUnit" formControlName="totalParkingAreaOfUnit" id="totalParkingAreaOfUnit" class="form-control" placeholder="Enter parking area" required/>
+          </div>
+
+          <div  class="form-group">
+            <control-messages [control]="viewBuildingForm.controls.noOfOneBHK" [submitStatus] = "submitStatus"></control-messages>
+            <div  class="col-lg-4 col-md-4 col-sm-6 col-xs-11">
+              <label>No. of 1 BHKs</label>
+              <input type="number" [(ngModel)]="model.noOfOneBHK" formControlName="noOfOneBHK" id="noOfOneBHK" class="form-control" required/>
+            </div>
+
+            <div  class="col-lg-4 col-md-4 col-sm-6 col-xs-11">
+              <label>No. of 2 BHKs</label>
+              <control-messages [control]="viewBuildingForm.controls.noOfTwoBHK" [submitStatus] = "submitStatus"></control-messages>
+              <input type="number" [(ngModel)]="model.noOfTwoBHK" formControlName="noOfTwoBHK" id="noOfTwoBHK" class="form-control" required/>
+            </div>
+
+            <div  class="col-lg-4 col-md-4 col-sm-6 col-xs-11">
+              <control-messages [control]="viewBuildingForm.controls.noOfThreeBHK" [submitStatus] = "submitStatus"></control-messages>
+              <label>No. of 3 BHKs</label>
+              <input type="number" [(ngModel)]="model.noOfThreeBHK" formControlName="noOfThreeBHK" id="noOfThreeBHK" class="form-control" required/>
+            </div>
+          </div>
+
+          <div  class="form-group">
+            <control-messages [control]="viewBuildingForm.controls.noOfSlab" [submitStatus] = "submitStatus"></control-messages>
+            <label>No. of Slabs</label>
+            <input type="number" [(ngModel)]="model.noOfSlab" formControlName="noOfSlab" id="noOfSlab" class="form-control" required/>
+          </div>
+
+          <div  class="form-group">
+            <control-messages [control]="viewBuildingForm.controls.noOfLift" [submitStatus] = "submitStatus"></control-messages>
+            <label>No. of Lifts</label>
+            <input type="number" [(ngModel)]="model.noOfLift" formControlName="noOfLift" id="noOfLift" class="form-control" required/>
+          </div>
+          <div class="col-xs-12 error-msg alert alert-danger form-alert" [hidden]="isShowErrorMessage"><b>{{
+            error_msg }}</b></div>
+
+          <button type="submit" class="btn btn-primary pull-right">Update</button>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</section>
+
