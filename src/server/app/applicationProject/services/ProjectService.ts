@@ -5,6 +5,7 @@ import UserService = require('./../../framework/services/UserService');
 import ProjectAsset = require('../../framework/shared/projectasset');
 import User = require('../../framework/dataaccess/mongoose/user');
 import Project = require('../dataaccess/mongoose/Project');
+import Building = require('../dataaccess/mongoose/Building');
 import AuthInterceptor = require('../../framework/interceptor/auth.interceptor');
 import CostControllException = require("../exception/CostControllException");
 
@@ -34,6 +35,9 @@ class ProjectService {
       } else {
         let projectId = res._id;
         let newData =  {$push: { project: projectId }};
+        console.log('User Id : '+JSON.stringify(user));
+        console.log('newData : '+JSON.stringify(newData));
+        console.log('projectId : '+JSON.stringify(res));
         this.userService.findOneAndUpdate(user._id, newData, {new :true},(err, resp) => {
           if(err) {
             callback(err, null);
@@ -70,7 +74,7 @@ class ProjectService {
     });
   }
 
-  addBuilding(projectId, buildingDetail, user, callback:(error: any, result: any)=> void) {
+  addBuilding(projectId : any, buildingDetail : Building, user, callback:(error: any, result: any)=> void) {
     this.buildingRepository.create(buildingDetail, (error, result)=> {
       if(error) {
         callback(error, null);

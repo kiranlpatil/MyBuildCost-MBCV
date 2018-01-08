@@ -11,7 +11,7 @@ import {
 import { API, BaseService, SessionStorage, SessionStorageService,  Message,
   Messages,
   MessageService } from '../../../../shared/index';
-import { CreateProjectService } from './createProject.service';
+import { CreateProjectService } from './create-project.service';
 import { Project } from './../../model/project';
 import {ValidationService} from "./../../../../shared/customvalidations/validation.service";
 import {SharedService} from "../../../../shared/services/shared-service";
@@ -19,7 +19,7 @@ import {SharedService} from "../../../../shared/services/shared-service";
 @Component({
   moduleId: module.id,
   selector: 'bi-create-project',
-  templateUrl: 'createProject.component.html'
+  templateUrl: 'create-project.component.html'
 })
 
 export class CreateProjectComponent implements OnInit {

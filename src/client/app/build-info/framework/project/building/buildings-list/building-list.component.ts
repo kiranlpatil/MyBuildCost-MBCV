@@ -1,25 +1,25 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AppSettings, Messages, Label, Button, Headings, NavigationRoutes } from '../../../../shared/constants';
-import { ListBuildingService } from './listBuilding.service';
-import { ViewBuildingService } from './../viewBuilding/viewBuilding.service';
-import { Building } from './../../model/building';
-import {SessionStorage, SessionStorageService,MessageService} from "../../../../shared/index";
-import {Message} from "../../../../shared/index";
+import { AppSettings, Messages, Label, Button, Headings, NavigationRoutes } from '../../../../../shared/constants';
+import { BuildingListService } from './building-list.service';
+import { BuildingDetailsService } from '../building-details/building-details.service';
+import { Building } from '../../../model/building';
+import {SessionStorage, SessionStorageService,MessageService} from "../../../../../shared/index";
+import {Message} from "../../../../../shared/index";
 
 @Component({
   moduleId: module.id,
   selector: 'bi-list-building',
-  templateUrl: 'listBuilding.component.html'
+  templateUrl: 'building-list.component.html'
 })
 
-export class ListBuildingComponent implements OnInit {
+export class BuildingListComponent implements OnInit {
 
   buildings : any;
   model: Building = new Building();
 
-  constructor(private listBuildingService: ListBuildingService,private viewBuildingService: ViewBuildingService, private _router: Router, private messageService: MessageService) {
+  constructor(private listBuildingService: BuildingListService, private viewBuildingService: BuildingDetailsService, private _router: Router, private messageService: MessageService) {
 
   }
 

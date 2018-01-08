@@ -2,23 +2,23 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AppSettings, Messages, Label, Button, Headings, NavigationRoutes } from '../../../../shared/constants';
-import { ListProjectService } from './listProjest.service';
+import { ProjectListService } from './project-list.service';
 import { Project } from './../../model/project';
 import {SessionStorage, SessionStorageService} from "../../../../shared/index";
 
 @Component({
   moduleId: module.id,
   selector: 'bi-list-project',
-  templateUrl: 'listProject.component.html'
+  templateUrl: 'project-list.component.html'
 })
 
-export class ListProjectComponent implements OnInit {
+export class ProjectListComponent implements OnInit {
 
   projectForm:  FormGroup;
   projects : any;
   model: Project = new Project();
 
-  constructor(private listProjectService: ListProjectService, private _router: Router, private formBuilder: FormBuilder) {
+  constructor(private listProjectService: ProjectListService, private _router: Router, private formBuilder: FormBuilder) {
 
   }
 

@@ -1,19 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AppSettings, Messages, Label, Button, Headings, NavigationRoutes } from '../../../../shared/constants';
+import { AppSettings, Messages, Label, Button, Headings, NavigationRoutes } from '../../../../../shared/constants';
 import { API, BaseService, SessionStorage, SessionStorageService,  Message,
-  MessageService } from '../../../../shared/index';
-import { Building } from './../../model/building';
-import { CreateBuildingService } from './createBuilding.service';
-import {ValidationService} from "./../../../../shared/customvalidations/validation.service";
-import {SharedService} from "./../../../../shared/services/shared-service";
+  MessageService } from '../../../../../shared/index';
+import { Building } from '../../../model/building';
+import { CreateBuildingService } from './create-building.service';
+import {ValidationService} from "../../../../../shared/customvalidations/validation.service";
+import {SharedService} from "../../../../../shared/services/shared-service";
 
 
 @Component({
   moduleId: module.id,
   selector: 'bi-add-building-entity',
-  templateUrl: 'createBuilding.component.html'
+  templateUrl: 'create-building.component.html'
 })
 
 export class CreateBuildingComponent implements OnInit {

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { ValidationService } from '../../../shared/customvalidations/validation.service';
-import { AppSettings, Messages, Label, Button, Headings, NavigationRoutes } from '../../../shared/constants';
+import { ValidationService } from '../../../../shared/customvalidations/validation.service';
+import { AppSettings, Messages, Label, Button, Headings, NavigationRoutes } from '../../../../shared/constants';
 // import { ProjectService } from './project.service';
-import { Building } from './../model/building';
+import { Building } from '../../model/building';
 import { BuildingService } from './building.service';
 
 @Component({

@@ -17,6 +17,7 @@ class ProjectController {
     try {
       let data =  <Project>req.body;
       let user = req.user;
+      console.log('User : '+JSON.stringify(user));
       let projectService = new ProjectService();
       projectService.create(data, user,(error, result) => {
         if(error) {

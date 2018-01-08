@@ -5,8 +5,8 @@ import { StartRoutes } from './framework/start/start.routes';
 import { AboutRoutes } from './framework/dashboard/about/index';
 import { ActivateUserRoutes } from './framework/registration/activate-user/activate-user.routes';
 import { PageNotFoundComponent } from './shared/page-not-found/page-not-found.component';
-import { ProjectRoutes } from './cnext/framework/project/project.routes';
-import { BuildingRoutes } from './cnext/framework/building/building.routes';
+import { ProjectRoutes } from './build-info/framework/project/project.routes';
+import { BuildingRoutes } from './build-info/framework/project/building/building.routes';
 
 
 export const routes: Routes = [

@@ -1,20 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Messages} from '../../../../shared/constants';
-import { ViewBuildingService } from './viewBuilding.service';
-import { Building } from './../../model/building';
-import { MessageService } from '../../../../shared/index';
-import {Message} from "../../../../shared/index";
-import {ValidationService} from "../../../../shared/customvalidations/validation.service";
+import { Messages} from '../../../../../shared/constants';
+import { BuildingDetailsService } from './building-details.service';
+import { Building } from './../../../model/building';
+import { MessageService } from '../../../../../shared/index';
+import {Message} from "../../../../../shared/index";
+import {ValidationService} from "../../../../../shared/customvalidations/validation.service";
 
 @Component({
   moduleId: module.id,
   selector: 'bi-view-building',
-  templateUrl: 'viewBuilding.component.html'
+  templateUrl: 'building-details.component.html'
 })
 
-export class ViewBuildingComponent implements OnInit {
+export class BuildingDetailsComponent implements OnInit {
 
   viewBuildingForm:  FormGroup;
   buildings : any;
@@ -22,7 +22,7 @@ export class ViewBuildingComponent implements OnInit {
   public isShowErrorMessage: boolean = true;
   public error_msg: boolean = false;
 
-  constructor(private viewBuildingService: ViewBuildingService, private _router: Router, private formBuilder: FormBuilder, private messageService: MessageService) {
+  constructor(private viewBuildingService: BuildingDetailsService, private _router: Router, private formBuilder: FormBuilder, private messageService: MessageService) {
 
     this.viewBuildingForm = this.formBuilder.group({
       'name': ['', ValidationService.requiredBuildingName],

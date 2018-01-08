@@ -1,4 +1,4 @@
-import {Role} from "../../cnext/framework/model/role";
+import { Role } from '../../build-info/framework/model/role';
 export class Industry {
   name: string = '';
   roles: Role[] = new Array();

@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 @Component({
   moduleId: module.id,
   selector: 'bi-project-header',
-  templateUrl: 'projectHeader.component.html'
+  templateUrl: 'project-header.component.html'
 })
 
 export class ProjectHeaderComponent {

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AppSettings, Messages, Label, Button, Headings, NavigationRoutes } from '../../../../shared/constants';
-import { ViewProjectService } from './viewProject.service';
+import { ProjectDetailsService } from './project-details.service';
 import { Project } from './../../model/project';
 import { API, BaseService, SessionStorage, SessionStorageService, MessageService } from '../../../../shared/index';
 import {Message} from "../../../../shared/index";
@@ -12,10 +12,10 @@ import {ValidationService} from "../../../../shared/customvalidations/validation
 @Component({
   moduleId: module.id,
   selector: 'bi-view-project',
-  templateUrl: 'viewProject.component.html'
+  templateUrl: 'project-details.component.html'
 })
 
-export class ViewProjectComponent implements OnInit {
+export class ProjectDetailsComponent implements OnInit {
 
   viewProjectForm:  FormGroup;
   project : any;
@@ -23,7 +23,7 @@ export class ViewProjectComponent implements OnInit {
   public isShowErrorMessage: boolean = true;
   public error_msg: boolean = false;
 
-  constructor(private ViewProjectService: ViewProjectService, private _router: Router, private formBuilder: FormBuilder, private messageService: MessageService,private sharedService: SharedService) {
+  constructor(private ViewProjectService: ProjectDetailsService, private _router: Router, private formBuilder: FormBuilder, private messageService: MessageService, private sharedService: SharedService) {
 
     this.viewProjectForm = this.formBuilder.group({
       'name': ['', ValidationService.requiredProjectName],

@@ -14,7 +14,7 @@ import {BaseService} from './services/http/base.service';
 import {CustomHttp} from './services/http/custom.http';
 import {TooltipComponent} from './tool-tip-component/tool-tip-component';
 import {FooterComponent} from '../framework/shared/footer/footer.component';
-import {UsageTrackingService} from '../cnext/framework/usage-tracking.service';
+import {UsageTrackingService} from '../build-info/framework/usage-tracking.service';
 import {ErrorService} from "./services/error.service";
 
 @NgModule({

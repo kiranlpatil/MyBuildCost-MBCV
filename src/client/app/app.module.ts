@@ -19,13 +19,13 @@ import {DashboardService} from "./user/services/dashboard.service";
 import {ContactService} from "./framework/dashboard/contact/contact.service";
 import {ActivateUserComponent} from "./framework/registration/activate-user/activate-user.component";
 import {ActiveUserService} from "./framework/registration/activate-user/activate-user.service";
-import {DateService} from "./cnext/framework/date.service";
-import {RoleTypeListComponent} from "./cnext/framework/role-type/role-type.component";
-import {RoleTypeService} from "./cnext/framework/role-type/role-type.service";
+import {DateService} from "./build-info/framework/date.service";
+import {RoleTypeListComponent} from "./build-info/framework/role-type/role-type.component";
+import {RoleTypeService} from "./build-info/framework/role-type/role-type.service";
 import {RedirectRecruiterDashboardService} from "./user/services/redirect-dashboard.service";
-import {ProfileDetailsService} from "./cnext/framework/profile-detail-service";
-import {GuidedTourService} from "./cnext/framework/guided-tour.service";
-import {LoggerService, MyErrorHandler} from "./cnext/framework/my-error-handler.service";
+import {ProfileDetailsService} from "./build-info/framework/profile-detail-service";
+import {GuidedTourService} from "./build-info/framework/guided-tour.service";
+import {LoggerService, MyErrorHandler} from "./build-info/framework/my-error-handler.service";
 import {UserModule} from "./user/user.module";
 import {SharedModule} from "./shared/shared.module";
 import {CustomHttp} from "./shared/services/http/custom.http";
@@ -34,7 +34,7 @@ import {LandingPageComponent} from "./framework/landing-page/landing-page.compon
 import {SharedService} from "./shared/services/shared-service";
 import {PageNotFoundComponent} from "./shared/page-not-found/page-not-found.component";
 import {AnalyticService} from "./shared/services/analytic.service";
-//import { MyDashboardComponent} from "./cnext/framework/my-dashboard/my-dashboard.component";
+//import { MyDashboardComponent} from "./build-info/framework/my-dashboard/my-dashboard.component";
 import { DashboardHeaderComponent} from "./framework/dashboard/dashboard-header/dashboard-header.component";
 import {DashboardUserProfileService} from "./framework/dashboard/user-profile/dashboard-user-profile.service";
 import {UserChangePasswordService} from "./framework/dashboard/user-change-password/user-change-password.service";
@@ -42,24 +42,24 @@ import {AuthGuardService} from "./shared/services/auth-guard.service";
 
 //Application IMPORTS
 
-import { ProjectService } from './cnext/framework/project/project.service';
-import { ProjectComponent } from './cnext/framework/project/project.component';
-import { CreateProjectComponent } from './cnext/framework/project/createProject/createProject.component';
-import { CreateProjectService } from './cnext/framework/project/createProject/createProject.service';
-import { BuildingComponent } from './cnext/framework/building/building.component';
-import { CreateBuildingComponent } from './cnext/framework/building/createBuilding/createBuilding.component';
-import { BuildingService } from './cnext/framework/building/building.service';
-import { CreateBuildingService } from './cnext/framework/building/createBuilding/createBuilding.service';
-import { ListProjectComponent } from './cnext/framework/project/listProject/listProject.component';
-import { ListProjectService } from './cnext/framework/project/listProject/listProjest.service';
-import { ViewProjectComponent } from './cnext/framework/project/viewProject/viewProject.component';
-import { ViewProjectService } from './cnext/framework/project/viewProject/viewProject.service';
-import { ListBuildingComponent } from './cnext/framework/building/listBuildings/listBuilding.component';
-import { ViewBuildingComponent } from './cnext/framework/building/viewBuilding/viewBuilding.component';
-import { ListBuildingService } from './cnext/framework/building/listBuildings/listBuilding.service';
-import { ViewBuildingService } from './cnext/framework/building/viewBuilding/viewBuilding.service';
-import { ProjectHeaderComponent } from './cnext/framework/project/projectHeader/projectHeader.component';
-import { ProjectContentComponent } from './cnext/framework/project/project-content/project-content.component';
+import { ProjectService } from './build-info/framework/project/project.service';
+import { ProjectComponent } from './build-info/framework/project/project.component';
+import { CreateProjectComponent } from './build-info/framework/project/create-project/create-project.component';
+import { CreateProjectService } from './build-info/framework/project/create-project/create-project.service';
+import { BuildingComponent } from './build-info/framework/project/building/building.component';
+import { CreateBuildingComponent } from './build-info/framework/project/building/create-building/create-building.component';
+import { BuildingService } from './build-info/framework/project/building/building.service';
+import { CreateBuildingService } from './build-info/framework/project/building/create-building/create-building.service';
+import { ProjectListComponent } from './build-info/framework/project/project-list/project-list.component';
+import { ProjectListService } from './build-info/framework/project/project-list/project-list.service';
+import { ProjectDetailsComponent } from './build-info/framework/project/project-details/project-details.component';
+import { ProjectDetailsService } from './build-info/framework/project/project-details/project-details.service';
+import { BuildingListComponent } from './build-info/framework/project/building/buildings-list/building-list.component';
+import { BuildingDetailsComponent } from './build-info/framework/project/building/building-details/building-details.component';
+import { BuildingListService } from './build-info/framework/project/building/buildings-list/building-list.service';
+import { BuildingDetailsService } from './build-info/framework/project/building/building-details/building-details.service';
+import { ProjectHeaderComponent } from './build-info/framework/project/project-header/project-header.component';
+import { ProjectContentComponent } from './build-info/framework/project/project-content/project-content.component';
 
 @NgModule({
   imports: [
@@ -89,13 +89,13 @@ import { ProjectContentComponent } from './cnext/framework/project/project-conte
     ProjectComponent,
     BuildingComponent,
     CreateProjectComponent,
-    ListProjectComponent,
+    ProjectListComponent,
     CreateBuildingComponent,
-    ViewProjectComponent,
-    ListBuildingComponent,
+    ProjectDetailsComponent,
+    BuildingListComponent,
     ProjectHeaderComponent,
     ProjectContentComponent,
-    ViewBuildingComponent,
+    BuildingDetailsComponent,
     //MyDashboardComponent,
     PageNotFoundComponent
   ],
@@ -134,10 +134,10 @@ import { ProjectContentComponent } from './cnext/framework/project/project-conte
     BuildingService,
     CreateBuildingService,
     CreateProjectService,
-    ViewProjectService,
-    ListProjectService,
-    ListBuildingService,
-    ViewBuildingService
+    ProjectDetailsService,
+    ProjectListService,
+    BuildingListService,
+    BuildingDetailsService
   ],
   bootstrap: [AppComponent]
 })
