@@ -191,6 +191,7 @@ export class NavigationRoutes {
   public static APP_VIEW_BUILDING_DETAILS: string = 'building/details';
   public static APP_CREATE_BUILDING: string = 'building/create';
   public static APP_LIST_PROJECT: string = 'project/list';
+  public static APP_COST_HEAD: string = 'project/cost-summary/cost-head';
   public static APP_DASHBOARD: string = '/dashboard';
   public static APP_USER_DASHBOARD: string = '/user';
   public static APP_USER__DETAILS_DASHBOARD: string = '/user/details';

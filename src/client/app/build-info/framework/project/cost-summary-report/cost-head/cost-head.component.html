@@ -1,0 +1,84 @@
+<section class="settings main-form-wrapper" style="margin-top: 120px">
+
+  <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"></div>
+
+  <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th colspan="5"><h4 align="center"> {{buildingDetails.name}} : Plaster</h4></th>
+        </tr>
+        <tr>
+          <th>Item</th>
+          <th>Qty.</th>
+          <th>Unit</th>
+          <th>Rate</th>
+          <th>Amount</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let costHead of buildingDetails.plaster">
+          <td><input [(ngModel)]="costHead.item" id="item" class="form-control clear"/></td>
+          <td>
+            <input [(ngModel)]="costHead.quantity" id="quantity" class="form-control clear"/><br/>
+            <button type="button" class="btn btn-primary" (click)="getQuantity()">Get Quanity</button>
+          </td>
+          <td>{{costHead.unit}}</td>
+          <td>
+            <input [(ngModel)]="costHead.rate" id="rate" class="form-control clear"/><br/>
+            <button type="button" class="btn btn-primary accordion-toggle" data-toggle="collapse" data-target="#cores" (click)="getRate()">Get Rate</button>
+          </td>
+          <td>{{(costHead.quantity * costHead.rate)}} <span class="glyphicon glyphicon-trash"></span></td>
+        </tr>
+        </tbody>
+        <tfoot>
+        <tr>
+          <th colspan="4"><strong>Total</strong></th>
+          <th><strong>54,134,476</strong></th>
+        </tr>
+        </tfoot>
+      </table>
+    </div>
+
+    <table class="table">
+      <thead>
+          <th>Item</th>
+          <th>Nos.</th>
+          <th>Length</th>
+          <th>Breadth</th>
+          <th>Height</th>
+          <th>Qty.</th>
+          <th>Unit</th>
+      </thead>
+      <tbody>
+          <tr>
+        <td>
+          <input [(ngModel)]="costitem" id="costitem" class="form-control clear"/>
+        </td>
+        <td>
+          <input [(ngModel)]="numbers" id="numbers" class="form-control clear"/>
+        </td>
+        <td>
+          <input [(ngModel)]="length" id="length" class="form-control clear"/>
+        </td>
+        <td>
+          <input [(ngModel)]="breadth" id="breadth" class="form-control clear"/>
+        </td>
+        <td>
+          <input [(ngModel)]="height" id="height" class="form-control clear"/>
+        </td>
+        <td>
+          <input [(ngModel)]="quantity" id="quantity" class="form-control clear"/>
+        </td>
+        <td>
+          <input [(ngModel)]="unit" id="unit" class="form-control clear"/>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+</section>
+
+<tpl-footer></tpl-footer>

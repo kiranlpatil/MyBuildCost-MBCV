@@ -52,6 +52,7 @@ class ProjectService {
   getProject( projectId : any, user: User, callback: (error: any, result: any) => void) {
     let query = { _id: projectId};
     let populate = {path : 'building', select: 'name'};
+    //`let populate = {path : 'building'};
     this.projectRepository.findAndPopulate(query, populate, (error, result) => {
       if(error) {
         callback(error, null);

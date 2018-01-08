@@ -3,6 +3,8 @@ import { ProjectComponent } from './project.component';
 import { CreateProjectComponent } from './create-project/create-project.component';
 import { ProjectDetailsComponent } from './project-details/project-details.component';
 import { ProjectListComponent } from './project-list/project-list.component';
+import { CostSummaryComponent } from './cost-summary-report/cost-summary.component';
+import { CostHeadComponent } from './cost-summary-report/cost-head/cost-head.component';
 
 export const ProjectRoutes: Route[] = [
   {
@@ -12,7 +14,9 @@ export const ProjectRoutes: Route[] = [
       {path: '', component: ProjectComponent},
       {path: 'list', component: ProjectListComponent},
       {path: 'details/:projectId', component: ProjectDetailsComponent},
-      {path: 'create', component: CreateProjectComponent}
+      {path: 'create', component: CreateProjectComponent},
+      {path: 'cost-summary/:projectId', component: CostSummaryComponent},
+      {path: 'cost-summary/cost-head/:projectId', component: CostHeadComponent}
     ]
   }
 ];

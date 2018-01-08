@@ -60,6 +60,10 @@ import { BuildingListService } from './build-info/framework/project/building/bui
 import { BuildingDetailsService } from './build-info/framework/project/building/building-details/building-details.service';
 import { ProjectHeaderComponent } from './build-info/framework/project/project-header/project-header.component';
 import { ProjectContentComponent } from './build-info/framework/project/project-content/project-content.component';
+import { CostSummaryComponent } from './build-info/framework/project/cost-summary-report/cost-summary.component';
+import { CostSummaryService } from './build-info/framework/project/cost-summary-report/cost-summary.service';
+import { CostHeadComponent } from './build-info/framework/project/cost-summary-report/cost-head/cost-head.component';
+import { CostHeadService } from './build-info/framework/project/cost-summary-report/cost-head/cost-head.service';
 
 @NgModule({
   imports: [
@@ -96,6 +100,8 @@ import { ProjectContentComponent } from './build-info/framework/project/project-
     ProjectHeaderComponent,
     ProjectContentComponent,
     BuildingDetailsComponent,
+    CostSummaryComponent,
+    CostHeadComponent,
     //MyDashboardComponent,
     PageNotFoundComponent
   ],
@@ -137,7 +143,9 @@ import { ProjectContentComponent } from './build-info/framework/project/project-
     ProjectDetailsService,
     ProjectListService,
     BuildingListService,
-    BuildingDetailsService
+    BuildingDetailsService,
+    CostSummaryService,
+    CostHeadService
   ],
   bootstrap: [AppComponent]
 })
