@@ -29,19 +29,29 @@ class ProjectService {
     if(!user._id) {
      callback(new CostControllException('UserId Not Found',null), null);
     }
+    /*let category = data.category;
+    for(let i=0; i< category.length; i++){
+      //console.log('category '+i+' : '+JSON.stringify(category[i]));
+      let item = category[i].item;
+      for(let j=0; j<item.length; j++){
+        //console.log('item '+j+' : '+JSON.stringify(item[j]));
+        let itemDetails = item[j];
+        itemDetails.amount = itemDetails.qty * itemDetails.rate;
+      }
+    }*/
+
     this.projectRepository.create(data, (err, res) => {
       if (err) {
         callback(err, null);
       } else {
         let projectId = res._id;
         let newData =  {$push: { project: projectId }};
-        console.log('User Id : '+JSON.stringify(user));
-        console.log('newData : '+JSON.stringify(newData));
-        console.log('projectId : '+JSON.stringify(res));
         this.userService.findOneAndUpdate(user._id, newData, {new :true},(err, resp) => {
           if(err) {
             callback(err, null);
           } else {
+            delete res.category;
+            delete res.rate;
             callback(null, res);
           }
         });
@@ -51,8 +61,8 @@ class ProjectService {
 
   getProject( projectId : any, user: User, callback: (error: any, result: any) => void) {
     let query = { _id: projectId};
-    let populate = {path : 'building', select: 'name'};
-    //`let populate = {path : 'building'};
+    let populate = {path : 'building', select: ['name' , 'totalSlabArea',]};
+    //let populate = {path : 'building'};
     this.projectRepository.findAndPopulate(query, populate, (error, result) => {
       if(error) {
         callback(error, null);
