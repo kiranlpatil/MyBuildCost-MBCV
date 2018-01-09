@@ -74,5 +74,48 @@
       }
     ],
     "replaceConsole": true
+  },
+  "category" : {
+    "default" : [
+      {
+        "name": "Plaster",
+        "thumbRuleRate":{
+          "sqft": 20,
+          "sqmt":30
+        },
+        "active": true,
+        "item":[
+          {
+            "name": "Internal Plaster in CM 1:4",
+            "qty":0,
+            "unit": "sqft",
+            "rate":0,
+            "ammount":0
+          },
+          {
+            "name": "External Plaster in CM 1:4",
+            "qty":0,
+            "unit": "sqft",
+            "rate":0,
+            "ammount":0
+          },
+          {
+            "name": "Internal Plaster in CM 1:5",
+            "qty":0,
+            "unit": "sqft",
+            "rate":0,
+            "ammount":0
+          },
+          {
+            "name": "External Plaster in CM 1:5",
+            "qty":0,
+            "unit": "sqft",
+            "rate":0,
+            "ammount":0
+          }
+        ]
+
+      }
+    ]
   }
 }

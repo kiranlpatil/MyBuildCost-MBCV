@@ -32,6 +32,8 @@ class ProjectSchema {
       plotPeriphery: {
         type: Number
       },
+      category: [{}],
+      rate: [{}],
       projectDuration: {
         type: Number
       },

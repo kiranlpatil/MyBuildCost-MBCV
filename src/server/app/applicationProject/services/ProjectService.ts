@@ -7,7 +7,7 @@ import User = require('../../framework/dataaccess/mongoose/user');
 import Project = require('../dataaccess/mongoose/Project');
 import Building = require('../dataaccess/mongoose/Building');
 import AuthInterceptor = require('../../framework/interceptor/auth.interceptor');
-import CostControllException = require("../exception/CostControllException");
+import CostControllException = require('../exception/CostControllException');
 
 class ProjectService {
   APP_NAME: string;
@@ -82,7 +82,7 @@ class ProjectService {
       } else {
         let query = {_id : projectId };
         let newData = { $push: {building : result._id}};
-        this.projectRepository.findOneAndUpdate(query, newData, {new : true}, (error, status)=>{
+        this.projectRepository.findOneAndUpdate(query, newData, {new : true}, (error, status)=> {
           if(error) {
             callback(error, null);
           } else {
@@ -123,7 +123,7 @@ class ProjectService {
       } else {
         let query = {_id: projectId};
         let newData = { $pull: {building : popBuildingId}};
-        this.projectRepository.findOneAndUpdate(query, newData, {new: true}, (error, status)=>{
+        this.projectRepository.findOneAndUpdate(query, newData, {new: true}, (error, status)=> {
           if(error) {
             callback(error, null);
           } else {
