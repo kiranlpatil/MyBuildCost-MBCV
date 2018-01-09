@@ -19,6 +19,10 @@ import { CostHeadService } from './cost-head.service';
 
 export class CostHeadComponent implements OnInit {
 
+ private toggleQty:boolean=false;
+ private toggleRate:boolean=false;
+ private compareIndex:number=0;
+
   projectId :any;
   buildingDetails = {
     "name": "Dwaraka",
@@ -90,11 +94,20 @@ export class CostHeadComponent implements OnInit {
   onSubmit() {
   }
 
-  getQuantity() {
+  getQuantity(i:number) {
+    this.toggleQty=!this.toggleQty;
+    this.compareIndex=i;
+    if(this.toggleQty===true){
+      this.toggleRate=false;
+    }
   }
 
-  getRate() {
-
+  getRate(i:number) {
+    this.toggleRate=!this.toggleRate;
+    this.compareIndex=i;
+    if(this.toggleRate===true){
+      this.toggleQty=false;
+    }
   }
 
   getCostHeadComponentDetails() {
@@ -127,4 +140,6 @@ export class CostHeadComponent implements OnInit {
   getHeadings() {
     return Headings;
   }
+
+
 }
