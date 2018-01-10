@@ -21,4 +21,34 @@ export class CostSummaryService extends BaseService {
       .catch(this.handleError);
   }
 
+
+  getCost(projectId: string,defaultCostIn:string,defaultCostPer:string){
+    let headers = new Headers({'Content-Type': 'application/json'});
+    let options = new RequestOptions({headers: headers});
+
+    console.log('defaultCostIn : '+defaultCostIn);
+    console.log('defaultCostPer : '+defaultCostPer);
+
+    var url = API.THUMBRULE_RULE_RATE + '/'+ API.VIEW_PROJECT +'/'+projectId+'/';
+
+    if(defaultCostIn=='Rs/Sqft'){
+      url=url + 'rate/' + API.SQFT;
+    }    else{
+      url=url + 'rate/' + API.SQM;
+    }
+
+
+    if(defaultCostPer=='SlabArea'){
+      url=url + '/area/' + API.SLAB_AREA;
+    }    else{
+      url=url + '/area/' + API.SELLABLE_AREA;
+    }
+
+    console.log('url -> '+url);
+
+    return this.http.get(url, options)
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
+
 }

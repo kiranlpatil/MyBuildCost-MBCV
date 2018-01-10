@@ -3,56 +3,23 @@
   <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"></div>
   <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
 
-    <!--<div class="container">
-      <div class="panel-group">
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h4 class="panel-title">
-              <a data-toggle="collapse" href="#collapse1">Dwaraka</a>
-            </h4>
-          </div>
-          <div id="collapse1" class="panel-collapse collapse">
-            <div class="panel-body">
-              <div class="table-responsive">
-                <table class="table table-bordered">
-                      <thead>
-                      <tr>
-                        <th rowspan="2">Cost Head</th>
-                        <th colspan="2">By Thumbrule</th>
-                        <th colspan="2">Estimated (as per project quantities & rates)</th>
-                      </tr>
-                      <tr>
-                        <th>Budgeted Cost</th>
-                        <th>Rate/Sqft<br/>(Saleble Area)</th>
-                        <th>Estimated Cost</th>
-                        <th>Rate/Sqft<br/>(Saleble Area)</th>
-                      </tr>
-                      </thead>
-                  <tbody>
-                      <tr>
-                        <td>Excavation</td>
-                        <td>15,00,000</td>
-                        <td>30</td>
-                        <td>16,50,000</td>
-                        <td>18</td>
-                      </tr>
-                  </tbody>
-                  <tfoot>
-                  <tr>
-                    <th><strong>Total</strong></th>
-                    <th><strong>54,134,476</strong></th>
-                    <th><strong>1610</strong></th>
-                    <th><strong>460</strong></th>
-                    <th><strong>527</strong></th>
-                  </tr>
-                  </tfoot>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>-->
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+      <label>Construction Cost(Material + Labour)</label>
+    </div>
+
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+      <label>Costing in</label>
+      <select (change)="onChangeCostingIn($event.target.value)">
+        <option *ngFor="let cIn of costIn" [value]="cIn.costInId">{{cIn.costInId}}</option>
+      </select>
+
+      <label>Costing per</label>
+      <select (change)="onChangeCostingPer($event.target.value)">
+        <option *ngFor="let cPer of costPer" [value]="cPer.costPerId">{{cPer.costPerId}}</option>
+      </select>
+
+    </div>
+
 
     <div *ngFor="let building of projectBuildings; let i = index">
       <div class="panel-group">
@@ -76,9 +43,9 @@
                   </tr>
                   <tr>
                     <th>Budgeted Cost</th>
-                    <th>Rate/Sqft<br/>(Saleble Area)</th>
+                    <th>{{defaultCostIn}}<br/>{{defaultCostPer}}</th>
                     <th>Estimated Cost</th>
-                    <th>Rate/Sqft<br/>(Saleble Area)</th>
+                    <th>{{defaultCostIn}}<br/>{{defaultCostPer}}</th>
                   </tr>
                   </thead>
                   <tbody>

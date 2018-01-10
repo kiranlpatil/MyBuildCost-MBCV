@@ -329,6 +329,16 @@ export class API {
   public static PROJECT_BUILDINGS = 'user/all/building';
   public static ADD_BUILDING = 'building';
   public static VIEW_BUILDING = 'building';
+
+
+  public static THUMBRULE_RULE_RATE='report/thumbRuleRate';
+  public static RATE='rate';
+  public static SQFT='sqft';
+  public static SQM='sqm';
+  public static AREA='area';
+  public static SLAB_AREA='slabArea';
+  public static SELLABLE_AREA='sellableArea';
+
 }
 
 export class ImagePath {

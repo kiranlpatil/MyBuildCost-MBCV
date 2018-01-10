@@ -23,6 +23,21 @@ export class CostSummaryComponent implements OnInit {
   projectId: string;
   estimatedCost : any;
 
+  public costIn: any[] = [
+    { 'costInId': 'Rs/Sqft'},
+    { 'costInId': 'Rs/Sqm',}
+  ];
+
+  public costPer: any[] = [
+    { 'costPerId': 'SlabArea',},
+    { 'costPerId': 'SellableArea',}
+  ];
+
+  defaultCostIn:string='Rs/Sqft';
+
+  defaultCostPer:string='SellableArea';
+
+
 
   constructor(private costSummaryService : CostSummaryService, private activatedRoute : ActivatedRoute,
               private _router : Router) {
@@ -76,5 +91,48 @@ export class CostSummaryComponent implements OnInit {
 
   getHeadings() {
     return Headings;
+  }
+
+  onChangeCostingIn(costInId:any){
+    console.log('costInId : '+costInId);
+    this.defaultCostIn=costInId;
+
+    this.costSummaryService.getCost(this.projectId,this.defaultCostIn,this.defaultCostPer).subscribe(
+      projectCostIn => this.onGetCostInSuccess(projectCostIn),
+      error => this.onGetCostInFail(error)
+    );
+
+  }
+
+
+  onGetCostInSuccess(projects : any) {
+    this.projectBuildings = projects.data[0].building;
+  }
+
+  onGetCostInFail(error : any) {
+    console.log('onGetCostInFail()'+error);
+  }
+
+
+
+  onChangeCostingPer(costPerId:any){
+    console.log('costPerId : '+costPerId);
+    this.defaultCostPer=costPerId;
+
+    this.costSummaryService.getCost(this.projectId,this.defaultCostIn,this.defaultCostPer).subscribe(
+      projectCostPer => this.onGetCostPerSuccess(projectCostPer),
+      error => this.onGetCostPerFail(error)
+    );
+  }
+
+
+
+
+  onGetCostPerSuccess(projects : any) {
+    this.projectBuildings = projects.data[0].building;
+  }
+
+  onGetCostPerFail(error : any) {
+    console.log('onGetCostPerFail()'+error);
   }
 }
