@@ -19,7 +19,7 @@
         </thead>
       </table>
 
-      <table style="border-collapse: collapse;" *ngFor="let costHead of buildingDetails.plaster; let i = index">
+      <table *ngFor="let costHead of buildingDetails.plaster; let i = index">
         <tbody>
         <tr>
           <td style="valign:top"><input [(ngModel)]="costHead.item" id="item" class="form-control clear"/></td>
@@ -39,7 +39,7 @@
 
           <!--getQty Code-->
         <tr [ngStyle]="(toggleQty==true && compareIndex==i) ? {'display': 'table-row'}:{'display': 'none'}" style="display: none;">
-          <td colspan="5">
+          <td colspan="5" style="valign:top">
             <table class="table ">
               <thead>
               <th>Item</th>
@@ -72,6 +72,55 @@
                 </td>
                 <td>
                   <input [(ngModel)]="unit" id="unit" class="form-control clear"/>
+                  <span (click)="deleteItem(i)"  class="glyphicon glyphicon-trash"></span>
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <label>Total</label>
+                </td>
+                <td>
+                  <label>--</label>
+                </td>
+                <td>
+                  <label>--</label>
+                </td>
+                <td>
+                  <label>--</label>
+                </td>
+                <td>
+                  <label>--</label>
+                </td>
+                <td>
+                  <label>--</label>
+                </td>
+                <td>
+                  <label>545466</label>
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <button type="button" class="btn btn-primary">+Add Items</button>
+                </td>
+                <td>
+
+                </td>
+                <td>
+
+                </td>
+                <td>
+
+                </td>
+                <td>
+
+                </td>
+                <td>
+
+                </td>
+                <td>
+                  <button type="button" class="btn btn-primary">Save</button>
                 </td>
               </tr>
               </tbody>
@@ -110,10 +159,48 @@
                     <input [(ngModel)]="itemamount" id="itemamount" class="form-control clear"/>
                   </td>
                 </tr>
+
+                <tr>
+                  <td>
+                    <label>Total</label>
+                  </td>
+                  <td>
+
+                  </td>
+                  <td>
+
+                  </td>
+                  <td>
+
+                  </td>
+                  <td>
+                    534534
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+
+                  </td>
+                  <td>
+
+                  </td>
+                  <td>
+
+                  </td>
+                  <td>
+
+                  </td>
+                  <td>
+                    <button type="button" class="btn btn-primary">Save</button>
+                  </td>
+                </tr>
+
                 </tbody>
               </table>
             </td>
           </tr>
+
 
         </tbody>
       </table>

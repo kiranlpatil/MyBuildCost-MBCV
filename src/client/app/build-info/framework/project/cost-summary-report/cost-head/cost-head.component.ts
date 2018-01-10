@@ -141,5 +141,9 @@ export class CostHeadComponent implements OnInit {
     return Headings;
   }
 
+  deleteItem(i:number){
+    console.log('Item will be delete : '+i);
+  }
+
 
 }
