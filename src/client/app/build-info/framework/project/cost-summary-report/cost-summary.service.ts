@@ -49,7 +49,7 @@ export class CostSummaryService extends BaseService {
     if(defaultCostPer=='SlabArea'){
       url=url + '/area/' + API.SLAB_AREA;
     }    else{
-      url=url + '/area/' + API.SELLABLE_AREA;
+      url=url + '/area/' + API.SALEABLE_AREA;
     }
 
     console.log('url -> '+url);

@@ -30,6 +30,7 @@ export class BuildingDetailsComponent implements OnInit {
       'name': ['', ValidationService.requiredBuildingName],
       'totalSlabArea':['', ValidationService.requiredSlabArea],
       'totalCarperAreaOfUnit':['', ValidationService.requiredCarpetArea],
+      'totalSaleableAreaOfUnit':['', ValidationService.requiredSalebleArea],
       'totalParkingAreaOfUnit':['', ValidationService.requiredParkingArea],
       'noOfOneBHK':['', ValidationService.requiredOneBHK],
       'noOfTwoBHK':['', ValidationService.requiredTwoBHK],
@@ -63,6 +64,7 @@ export class BuildingDetailsComponent implements OnInit {
     this.model.name=buildingDetails.name;
     this.model.totalSlabArea=buildingDetails.totalSlabArea;
     this.model.totalCarperAreaOfUnit=buildingDetails.totalCarperAreaOfUnit;
+    this.model.totalSaleableAreaOfUnit=buildingDetails.totalSaleableAreaOfUnit;
     this.model.totalParkingAreaOfUnit=buildingDetails.totalParkingAreaOfUnit;
     this.model.noOfOneBHK=buildingDetails.noOfOneBHK;
     this.model.noOfTwoBHK=buildingDetails.noOfTwoBHK;

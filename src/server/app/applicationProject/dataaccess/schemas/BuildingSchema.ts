@@ -19,7 +19,7 @@ class BuildingSchema {
       totalCarperAreaOfUnit: {
         type: Number
       },
-      totalSalebleAreaOfUnit: {
+        totalSaleableAreaOfUnit: {
         type: Number
       },
       totalParkingAreaOfUnit:{

@@ -40,6 +40,7 @@ export class ValidationService {
       'requiredBuildingName': Messages.MSG_ERROR_VALIDATION_BUILDING_NAME_REQUIRED,
       'requiredSlabArea': Messages.MSG_ERROR_VALIDATION_SLAB_AREA_REQUIRED,
       'requiredCarpetArea': Messages.MSG_ERROR_VALIDATION_CARPET_AREA_REQUIRED,
+      'requiredSalebleArea':Messages.MSG_ERROR_VALIDATION_SALEBLE_AREA_REQUIRED,
       'requiredParkingArea': Messages.MSG_ERROR_VALIDATION_PARKING_AREA_REQUIRED,
       'requiredOneBHK': Messages.MSG_ERROR_VALIDATION_ONE_BHK_REQUIRED,
       'requiredTwoBHK': Messages.MSG_ERROR_VALIDATION_TWO_BHK_REQUIRED,

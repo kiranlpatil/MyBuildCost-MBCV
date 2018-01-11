@@ -101,6 +101,7 @@ export class BuildingListComponent implements OnInit {
     this.model.name=buildingDetails.name;
     this.model.totalSlabArea=buildingDetails.totalSlabArea;
     this.model.totalCarperAreaOfUnit=buildingDetails.totalCarperAreaOfUnit;
+    this.model.totalSaleableAreaOfUnit=buildingDetails.totalSaleableAreaOfUnit;
     this.model.totalParkingAreaOfUnit=buildingDetails.totalParkingAreaOfUnit;
     this.model.noOfOneBHK=buildingDetails.noOfOneBHK;
     this.model.noOfTwoBHK=buildingDetails.noOfTwoBHK;

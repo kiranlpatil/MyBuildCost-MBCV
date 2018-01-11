@@ -28,6 +28,12 @@
           </div>
 
           <div  class="form-group">
+            <control-messages [control]="viewBuildingForm.controls.totalSaleableAreaOfUnit" [submitStatus] = "submitStatus"></control-messages>
+            <label>Total Saleble Area<small> (In sqm)</small></label>
+            <input type="number" class="form-control" [(ngModel)]="model.totalSaleableAreaOfUnit" formControlName="totalSaleableAreaOfUnit" id="totalSaleableAreaOfUnit" placeholder="Enter Saleble area" required/>
+          </div>
+
+          <div  class="form-group">
             <control-messages [control]="viewBuildingForm.controls.totalParkingAreaOfUnit" [submitStatus] = "submitStatus"></control-messages>
             <label>Total Parking Area<small> (In months)</small></label>
             <input type="number" [(ngModel)]="model.totalParkingAreaOfUnit" formControlName="totalParkingAreaOfUnit" id="totalParkingAreaOfUnit" class="form-control" placeholder="Enter parking area" required/>

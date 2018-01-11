@@ -99,6 +99,7 @@ export class Messages {
     public static MSG_ERROR_VALIDATION_SLAB_AREA_REQUIRED = 'Enter Slab Area.';
     public static MSG_ERROR_VALIDATION_CARPET_AREA_REQUIRED = 'Enter Carpet Area.';
     public static MSG_ERROR_VALIDATION_PARKING_AREA_REQUIRED  = 'Enter Parking Area.';
+    public static MSG_ERROR_VALIDATION_SALEBLE_AREA_REQUIRED  = 'Enter Saleble Area.';
     public static MSG_ERROR_VALIDATION_ONE_BHK_REQUIRED = 'Enter No of one BHKs.';
     public static MSG_ERROR_VALIDATION_TWO_BHK_REQUIRED = 'Enter No of two BHKs.';
     public static MSG_ERROR_VALIDATION_THREE_BHK_REQUIRED = 'Enter No of three BHKs.';
@@ -337,7 +338,7 @@ export class API {
   public static SQM='sqmt';
   public static AREA='area';
   public static SLAB_AREA='slabArea';
-  public static SELLABLE_AREA='salebleArea';
+  public static SALEABLE_AREA='saleableArea';
 
 }
 

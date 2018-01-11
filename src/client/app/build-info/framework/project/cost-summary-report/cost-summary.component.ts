@@ -31,7 +31,7 @@ export class CostSummaryComponent implements OnInit {
 
   public costPer: any[] = [
     { 'costPerId': 'SlabArea'},
-    { 'costPerId': 'SellableArea'}
+    { 'costPerId': 'SalebleArea'}
   ];
 
   defaultCostIn:string='Rs/Sqft';
