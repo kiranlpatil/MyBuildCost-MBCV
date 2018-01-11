@@ -27,6 +27,9 @@ class ReportRoutes {
     router.get('/:type/project/:id/rate/:rate/area/:area', this.authInterceptor.requiresAuth, this._requestInterceptor.intercept,
       controller.getProject, this._responseInterceptor.exit);
 
+    router.get('/building/:buildingId/costhead/:costHead', this.authInterceptor.requiresAuth, this._requestInterceptor.intercept,
+      controller.getBuildingCostHeadDetails, this._responseInterceptor.exit);
+
     return router;
   }
 }

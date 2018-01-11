@@ -79,14 +79,14 @@ class ReportService {
               buildingReport.area = buildings[index].totalSlabArea;
               if(projectRate === 'sqft') {
                 thumbRule.rate = costHeadArray[costHeadIndex].thumbRuleRate.slabArea.sqft;
-              }else {
+              } else {
                 thumbRule.rate = costHeadArray[costHeadIndex].thumbRuleRate.slabArea.sqmt;
               }
             } else {
               buildingReport.area = buildings[index].totalSaleableAreaOfUnit;
               if(projectRate === 'sqft') {
                 thumbRule.rate = costHeadArray[costHeadIndex].thumbRuleRate.salebleAres.sqft;
-              }else {
+              } else {
                 thumbRule.rate = costHeadArray[costHeadIndex].thumbRuleRate.salebleAres.sqmt;
               }
             }
@@ -98,6 +98,25 @@ class ReportService {
         }
 
         callback(null,{ data: report, access_token: this.authInterceptor.issueTokenWithUid(user)});
+      }
+    });
+  }
+
+  getReportCostHeadDetails( buildingId : string, costHead : string, user: User,
+             callback: (error: any, result: any) => void) {
+    this.buildingRepository.findById(buildingId, (error, result) => {
+      if (error) {
+        callback(error, null);
+      } else {
+
+        let response = result.costHead;
+        let costHeadItem;
+        for(let costHeadItems of response) {
+          if(costHeadItems.name === costHead) {
+            costHeadItem = costHeadItems.workitem;
+          }
+        }
+        callback(null, {data: costHeadItem, access_token: this.authInterceptor.issueTokenWithUid(user)});
       }
     });
   }

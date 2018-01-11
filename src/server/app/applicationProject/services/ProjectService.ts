@@ -85,7 +85,7 @@ class ProjectService {
     });
   }
 
-  addBuilding(projectId : any, buildingDetail : Building, user, callback:(error: any, result: any)=> void) {
+  addBuilding(projectId : any, buildingDetail : Building, user: User, callback:(error: any, result: any)=> void) {
     this.buildingRepository.create(buildingDetail, (error, result)=> {
       if(error) {
         callback(error, null);
@@ -115,7 +115,7 @@ class ProjectService {
     });
   }
 
-  getBuilding(projectId, buildingId, user, callback:(error: any, result: any)=> void) {
+  getBuilding(projectId : string, buildingId : string, user: User, callback:(error: any, result: any)=> void) {
     this.buildingRepository.findById(buildingId, (error, result) => {
       if (error) {
         callback(error, null);
