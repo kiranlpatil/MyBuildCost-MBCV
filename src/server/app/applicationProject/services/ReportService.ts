@@ -86,9 +86,9 @@ class ReportService {
             } else {
               buildingReport.area = buildings[index].totalSaleableAreaOfUnit;
               if(projectRate === 'sqft') {
-                thumbRule.rate = costHeadArray[costHeadIndex].thumbRuleRate.salebleAres.sqft;
+                thumbRule.rate = costHeadArray[costHeadIndex].thumbRuleRate.saleableArea.sqft;
               } else {
-                thumbRule.rate = costHeadArray[costHeadIndex].thumbRuleRate.salebleAres.sqmt;
+                thumbRule.rate = costHeadArray[costHeadIndex].thumbRuleRate.saleableArea.sqmt;
               }
             }
             thumbRule.amount = buildingReport.area * thumbRule.rate;

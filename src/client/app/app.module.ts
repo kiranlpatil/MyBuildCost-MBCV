@@ -64,6 +64,7 @@ import { CostSummaryComponent } from './build-info/framework/project/cost-summar
 import { CostSummaryService } from './build-info/framework/project/cost-summary-report/cost-summary.service';
 import { CostHeadComponent } from './build-info/framework/project/cost-summary-report/cost-head/cost-head.component';
 import { CostHeadService } from './build-info/framework/project/cost-summary-report/cost-head/cost-head.service';
+import { CostSummaryPipe } from './build-info/framework/project/cost-summary-report/cost-summary.pipe';
 
 @NgModule({
   imports: [
@@ -102,6 +103,7 @@ import { CostHeadService } from './build-info/framework/project/cost-summary-rep
     BuildingDetailsComponent,
     CostSummaryComponent,
     CostHeadComponent,
+    CostSummaryPipe,
     //MyDashboardComponent,
     PageNotFoundComponent
   ],
