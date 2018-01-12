@@ -12,9 +12,10 @@ export class CostHeadService extends BaseService {
     super();
   }
 
-  getCostHeadDetails(projectId:string,buildingId:string, costHead: string) {
+  getCostHeadDetails(projectId:string, costHead: string) {
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({headers: headers});
+    let buildingId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_BUILDING);
     var url = 'project/'+projectId+'/'+API.VIEW_BUILDING+'/'+buildingId+'/'+'costhead/'+costHead;
     return this.http.get(url, options)
       .map(this.extractData)

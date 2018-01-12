@@ -7,7 +7,7 @@
       <table class="table table-striped">
         <thead>
         <tr>
-          <th colspan="5"><h4 align="center"> {{buildingDetails.name}} : Plaster</h4></th>
+          <th colspan="5"><h4 align="center"> {{buildingName}} : {{costHead}}</h4></th>
         </tr>
         <tr>
           <th>Item</th>
@@ -21,19 +21,18 @@
 
       <table *ngFor="let costHead of costHeadDetails | keys; let i = index">
         <tbody>
-        <tr>{{costHeadDetails[costHead].name}}
-          <!--<td><input [(ngModel)]="costHeadDetails[costHead].item" id="item" class="form-control clear"/></td>
+        <tr>
+          <td>{{costHeadDetails[costHead].name}}</td>
           <td>
-            <input [(ngModel)]="costHeadDetails[costHead].quantity" id="quantity" class="form-control clear"/><br/>
+            <input [(ngModel)]="costHeadDetails[costHead].quantity.total" id="quantity" class="form-control clear"/><br/>
             <button type="button" id="getQuantity{{i}}" class="btn btn-primary" (click)="getQuantity(i)">Get Quanity</button>
           </td>
-          <td>{{costHead.unit}}</td>
+          <td>{{costHeadDetails[costHead].unit}}</td>
           <td>
-            <input [(ngModel)]="costHeadDetails[costHead].rate" id="rate" class="form-control clear"/><br/>
+            <input [(ngModel)]="costHeadDetails[costHead].rate.total" id="rate" class="form-control clear"/><br/>
             <button type="button" id="getRate{{i}}" class="btn btn-primary accordion-toggle" data-toggle="collapse" data-target="#cores" (click)="getRate(i)">Get Rate</button>
           </td>
-          <td>{{(costHead.quantity * costHead.rate)}} <span class="glyphicon glyphicon-trash"></span></td>
--->
+          <td>{{costHeadDetails[costHead].amount}} <span class="glyphicon glyphicon-trash"></span></td>
         </tr>
 
 

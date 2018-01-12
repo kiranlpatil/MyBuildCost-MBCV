@@ -28,6 +28,7 @@ export class CostHeadComponent implements OnInit {
 
   projectId : string;
   buildingId: string;
+  buildingName: string;
   costHead:  string;
   costHeadDetails :any;
   /*buildingDetails = {
@@ -90,13 +91,9 @@ export class CostHeadComponent implements OnInit {
   ngOnInit() {
     this.activatedRoute.params.subscribe(params => {
       this.projectId = params['projectId'];
-      this.buildingId = params['buildingId'];
+      this.buildingName = params['buildingName'];
       this.costHead = params['costHead'];
-      if(this.buildingId) {
-        console.log('Got into Project Cost Head Component Details : '+this.buildingId);
-        console.log('Got into Project Cost Head Component : '+this.costHead);
-        this.getCostHeadComponentDetails(this.projectId, this.buildingId, this.costHead);
-      }
+      this.getCostHeadComponentDetails(this.projectId,this.costHead);
     });
   }
 
@@ -119,16 +116,15 @@ export class CostHeadComponent implements OnInit {
     }
   }
 
-  getCostHeadComponentDetails(projectId:string,buildingId:string, costHead: string) {
-    this.costHeadService.getCostHeadDetails(projectId, buildingId, costHead).subscribe(
-      costHeadDetails => this.onGetCostHeadDetailsSuccess(costHeadDetails),
+  getCostHeadComponentDetails(projectId:string, costHead: string) {
+    this.costHeadService.getCostHeadDetails(projectId, costHead).subscribe(
+      costHeadDetail => this.onGetCostHeadDetailsSuccess(costHeadDetail),
       error => this.onGetCostHeadDetailsFail(error)
     );
   }
 
-  onGetCostHeadDetailsSuccess(costHeadDetails : any) {
-    this.costHeadDetails = costHeadDetails.data;
-    console.log('costHeadDetails: '+JSON.stringify(costHeadDetails));
+  onGetCostHeadDetailsSuccess(costHeadDetail : any) {
+    this.costHeadDetails = costHeadDetail.data;
   }
 
   onGetCostHeadDetailsFail(error : any) {
