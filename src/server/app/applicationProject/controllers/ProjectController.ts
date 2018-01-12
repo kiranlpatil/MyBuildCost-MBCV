@@ -4,6 +4,7 @@ import Project = require('../dataaccess/mongoose/Project');
 import Building = require('../dataaccess/mongoose/Building');
 import Response = require('../interceptor/response/Response');
 import CostControllException = require('../exception/CostControllException');
+import CostHead = require('../dataaccess/model/CostHead');
 let config = require('config');
 
 class ProjectController {
@@ -251,5 +252,25 @@ class ProjectController {
       next(new CostControllException(e.message,e.stack));
     }
   }
+
+  addCostHeadBuilding(req: express.Request, res: express.Response, next: any): void {
+    try {
+      let user = req.user;
+      let buildingId = req.params.buildingid;
+      let costHeadDetails = <CostHead> req.body;
+      let projectService = new ProjectService();
+      let query = {$push: { costHead : costHeadDetails}};
+      projectService.updateBuilding( buildingId, query, user, (error, result) => {
+        if(error) {
+          next(error);
+        } else {
+          next(new Response(200,result));
+        }
+      });
+    } catch(e) {
+      next(new CostControllException(e.message,e.stack));
+    }
+  }
+
 }
 export  = ProjectController;

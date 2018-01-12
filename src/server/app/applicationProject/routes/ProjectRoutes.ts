@@ -48,6 +48,8 @@ class ProjectRoutes {
       this._requestInterceptor.intercept, controller.deleteWorkitem, this._responseInterceptor.exit);
     router.get('/:id/building/:buildingid/costhead/:costhead', this.authInterceptor.requiresAuth, this._requestInterceptor.intercept,
       controller.getBuildingCostHeadDetails, this._responseInterceptor.exit);
+    router.put('/building/:buildingid/costhead', this.authInterceptor.requiresAuth, this._requestInterceptor.intercept,
+      controller.addCostHeadBuilding, this._responseInterceptor.exit);
     return router;
   }
 }
