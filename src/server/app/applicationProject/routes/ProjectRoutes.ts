@@ -44,6 +44,10 @@ class ProjectRoutes {
       this._requestInterceptor.intercept, controller.getRate, this._responseInterceptor.exit);
     router.delete('/:id/building/:buildingid/quantity/costhead/:costhead/workitem/:workitem/item/:item', this.authInterceptor.requiresAuth,
       this._requestInterceptor.intercept, controller.deleteQuantity, this._responseInterceptor.exit);
+    router.delete('/:id/building/:buildingid/costhead/:costhead/workitem/:workitem', this.authInterceptor.requiresAuth,
+      this._requestInterceptor.intercept, controller.deleteWorkitem, this._responseInterceptor.exit);
+    router.get('/:id/building/:buildingid/costhead/:costhead', this.authInterceptor.requiresAuth, this._requestInterceptor.intercept,
+      controller.getBuildingCostHeadDetails, this._responseInterceptor.exit);
     return router;
   }
 }

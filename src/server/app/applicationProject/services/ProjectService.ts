@@ -227,6 +227,48 @@ class ProjectService {
       }
     });
   }
+
+  deleteWorkitem(projectId, buildingId, costhead, workitem, user, callback:(error: any, result: any)=> void) {
+    this.buildingRepository.findById(buildingId, (error, building:Building) => {
+      if (error) {
+        callback(error, null);
+      } else {
+        for(let index = 0; building.costHead.length > index; index++) {
+          if(building.costHead[index].name === costhead) {
+            delete building.costHead[index].workitem[workitem];
+          }
+        }
+        let query = { _id : buildingId };
+        this.buildingRepository.findOneAndUpdate(query, building,{new: true}, (error, building) => {
+          if (error) {
+            callback(error, null);
+          } else {
+            let message = workitem + ' deleted.';
+            callback(null, {data: message, access_token: this.authInterceptor.issueTokenWithUid(user)});
+          }
+        });
+      }
+    });
+  }
+
+  getReportCostHeadDetails( buildingId : string, costHead : string, user: User,
+                            callback: (error: any, result: any) => void) {
+    this.buildingRepository.findById(buildingId, (error, result) => {
+      if (error) {
+        callback(error, null);
+      } else {
+
+        let response = result.costHead;
+        let costHeadItem;
+        for(let costHeadItems of response) {
+          if(costHeadItems.name === costHead) {
+            costHeadItem = costHeadItems.workitem;
+          }
+        }
+        callback(null, {data: costHeadItem, access_token: this.authInterceptor.issueTokenWithUid(user)});
+      }
+    });
+  }
 }
 
 Object.seal(ProjectService);

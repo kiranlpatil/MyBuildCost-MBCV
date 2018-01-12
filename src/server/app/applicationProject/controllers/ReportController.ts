@@ -35,24 +35,5 @@ class ReportController {
     }
   }
 
-  getBuildingCostHeadDetails(req: express.Request, res: express.Response, next: any): void {
-    try {
-      let reportService = new ReportService();
-      let user = req.user;
-      let buildingId =  req.params.buildingId;
-      let costHead =  req.params.costHead;
-
-      reportService.getReportCostHeadDetails(buildingId, costHead,  user, (error, result) => {
-        if(error) {
-          next(error);
-        } else {
-          next(new Response(200,result));
-        }
-      });
-    } catch(e) {
-      next(new CostControllException(e.message,e.stack));
-    }
-  }
-
 }
 export  = ReportController;

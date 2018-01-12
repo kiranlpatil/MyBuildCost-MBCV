@@ -10,7 +10,7 @@ import BuildingReport = require('../dataaccess/model/BuildingReport');
 import ThumbRuleReport = require('../dataaccess/model/ThumbRuleReport');
 import AuthInterceptor = require('../../framework/interceptor/auth.interceptor');
 import CostControllException = require('../exception/CostControllException');
-import CostHead = require("../dataaccess/mongoose/CostHead");
+import CostHead = require('../dataaccess/mongoose/CostHead');
 
 class ReportService {
   APP_NAME: string;
@@ -99,25 +99,6 @@ class ReportService {
         }
 
         callback(null,{ data: report, access_token: this.authInterceptor.issueTokenWithUid(user)});
-      }
-    });
-  }
-
-  getReportCostHeadDetails( buildingId : string, costHead : string, user: User,
-             callback: (error: any, result: any) => void) {
-    this.buildingRepository.findById(buildingId, (error, result) => {
-      if (error) {
-        callback(error, null);
-      } else {
-
-        let response = result.costHead;
-        let costHeadItem;
-        for(let costHeadItems of response) {
-          if(costHeadItems.name === costHead) {
-            costHeadItem = costHeadItems.workitem;
-          }
-        }
-        callback(null, {data: costHeadItem, access_token: this.authInterceptor.issueTokenWithUid(user)});
       }
     });
   }

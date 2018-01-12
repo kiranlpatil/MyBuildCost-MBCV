@@ -94,7 +94,7 @@ class ProjectController {
     }
   }
 
-  updateBuilding(req: express.Request, res: express.Response, next: any): void{
+  updateBuilding(req: express.Request, res: express.Response, next: any): void {
     try {
       let user = req.user;
       //let projectId = req.params.id;
@@ -113,7 +113,7 @@ class ProjectController {
     }
   }
 
-  getBuilding(req: express.Request, res: express.Response, next: any): void{
+  getBuilding(req: express.Request, res: express.Response, next: any): void {
     try {
       let user = req.user;
       let projectId = req.params.id;
@@ -131,7 +131,7 @@ class ProjectController {
     }
   }
 
-  deleteBuilding(req: express.Request, res: express.Response, next: any): void{
+  deleteBuilding(req: express.Request, res: express.Response, next: any): void {
     try {
       let user = req.user;
       let projectId = req.params.id;
@@ -149,7 +149,7 @@ class ProjectController {
     }
   }
 
-  getQuantity(req: express.Request, res: express.Response, next: any): void{
+  getQuantity(req: express.Request, res: express.Response, next: any): void {
     try {
       let user = req.user;
       let projectId = req.params.id;
@@ -170,7 +170,7 @@ class ProjectController {
     }
   }
 
-  getRate(req: express.Request, res: express.Response, next: any): void{
+  getRate(req: express.Request, res: express.Response, next: any): void {
     try {
       let user = req.user;
       let projectId = req.params.id;
@@ -191,7 +191,7 @@ class ProjectController {
     }
   }
 
-  deleteQuantity(req: express.Request, res: express.Response, next: any): void{
+  deleteQuantity(req: express.Request, res: express.Response, next: any): void {
     try {
       let user = req.user;
       let projectId = req.params.id;
@@ -202,6 +202,45 @@ class ProjectController {
       let projectService = new ProjectService();
       console.log(' workitem => '+ workitem);
       projectService.deleteQuantity(projectId, buildingId, costhead, workitem, item, user, (error, result) => {
+        if(error) {
+          next(error);
+        } else {
+          next(new Response(200,result));
+        }
+      });
+    } catch(e) {
+      next(new CostControllException(e.message,e.stack));
+    }
+  }
+  deleteWorkitem(req: express.Request, res: express.Response, next: any): void {
+    try {
+      let user = req.user;
+      let projectId = req.params.id;
+      let buildingId = req.params.buildingid;
+      let costhead = req.params.costhead;
+      let workitem = req.params.workitem;
+      let projectService = new ProjectService();
+      console.log(' workitem => '+ workitem);
+      projectService.deleteWorkitem(projectId, buildingId, costhead, workitem, user, (error, result) => {
+        if(error) {
+          next(error);
+        } else {
+          next(new Response(200,result));
+        }
+      });
+    } catch(e) {
+      next(new CostControllException(e.message,e.stack));
+    }
+  }
+
+  getBuildingCostHeadDetails(req: express.Request, res: express.Response, next: any): void {
+    try {
+      let projectService = new ProjectService();
+      let user = req.user;
+      let buildingId =  req.params.buildingid;
+      let costHead =  req.params.costhead;
+
+      projectService.getReportCostHeadDetails(buildingId, costHead,  user, (error, result) => {
         if(error) {
           next(error);
         } else {
