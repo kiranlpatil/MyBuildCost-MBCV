@@ -62,7 +62,8 @@ export class CostSummaryComponent implements OnInit {
     console.log('Adding Costhead');
   }
 
-  getAmount() {
+  getAmount(buildingId) {
+    SessionStorageService.setSessionValue(SessionStorage.CURRENT_BUILDING , buildingId);
     this.projectId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT);
     this._router.navigate([NavigationRoutes.APP_COST_HEAD, this.projectId]);
   }

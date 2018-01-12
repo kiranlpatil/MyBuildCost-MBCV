@@ -71,6 +71,7 @@ class ReportService {
         for(let index = 0; index < buildings.length; index++) {
           let buildingReport = new BuildingReport;
           buildingReport.name = buildings[index].name;
+          buildingReport._id = buildings[index]._id;
           /*buildingReport.costHead = costHead;*/
 
           for(let costHeadIndex = 0; costHeadIndex < costHeadArray.length; costHeadIndex++) {

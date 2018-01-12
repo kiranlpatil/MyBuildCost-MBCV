@@ -238,6 +238,7 @@ class ProjectController {
     try {
       let projectService = new ProjectService();
       let user = req.user;
+      let projectId =  req.params.id;
       let buildingId =  req.params.buildingid;
       let costHead =  req.params.costhead;
 

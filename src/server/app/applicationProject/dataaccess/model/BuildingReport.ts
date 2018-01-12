@@ -2,6 +2,7 @@ import ThumbRuleReport = require('./ThumbRuleReport');
 import EstimateReport = require('./EstimateReport');
 
 class BuildingReport {
+  _id:string;
   name: string;
   area: number;
   thumbRuleReport: Array<ThumbRuleReport>;

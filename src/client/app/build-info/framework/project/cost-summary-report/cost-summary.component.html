@@ -56,7 +56,7 @@
                       <input [(ngModel)]="estimatedCost" id="estimatedCost" class="form-control clear"/>
                     </td>
                     <td>{{(estimatedCost / building.area)}}
-                      <button type="button" class="btn btn-primary" (click)="getAmount()">Get Amount</button>
+                      <button type="button" class="btn btn-primary" (click)="getAmount(building._id)">Get Amount</button>
                     </td>
                     <td><span class="glyphicon glyphicon-trash"></span></td>
                   </tr>
