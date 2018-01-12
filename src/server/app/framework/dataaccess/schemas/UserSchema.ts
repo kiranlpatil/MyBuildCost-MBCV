@@ -1,7 +1,7 @@
 import DataAccess = require('../dataaccess');
 import User = require('../mongoose/user');
 import Project = require('./../../../applicationProject/dataaccess/model/Project');
-import {Schema} from "mongoose";
+import { Schema } from 'mongoose';
 let mongoose = DataAccess.mongooseInstance;
 let mongooseConnection = DataAccess.mongooseConnection;
 

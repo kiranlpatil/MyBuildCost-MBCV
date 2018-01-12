@@ -6,8 +6,8 @@ import { API, BaseService, SessionStorage, SessionStorageService,  Message,
   MessageService } from '../../../../../shared/index';
 import { Building } from '../../../model/building';
 import { CreateBuildingService } from './create-building.service';
-import {ValidationService} from "../../../../../shared/customvalidations/validation.service";
-import {SharedService} from "../../../../../shared/services/shared-service";
+import { ValidationService } from '../../../../../shared/customvalidations/validation.service';
+import { SharedService } from '../../../../../shared/services/shared-service';
 
 
 @Component({

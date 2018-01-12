@@ -12,7 +12,7 @@ export class CostSummaryService extends BaseService {
     super();
   }
 
-  getProjectDetails(projectId: string){
+  getProjectDetails(projectId: string) {
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({headers: headers});
     var url = API.VIEW_PROJECT + '/'+ projectId;
@@ -21,7 +21,7 @@ export class CostSummaryService extends BaseService {
       .catch(this.handleError);
   }
 
-  getBuildingDetails(projectId: string){
+  getBuildingDetails(projectId: string) {
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({headers: headers});
     var url = API.VIEW_PROJECT + '/'+ projectId +'/'+ API.ADD_BUILDING + '/'+SessionStorageService.getSessionValue(SessionStorage.CURRENT_BUILDING);
@@ -30,7 +30,7 @@ export class CostSummaryService extends BaseService {
       .catch(this.handleError);
   }
 
-  getCost(projectId: string,defaultCostIn:string,defaultCostPer:string){
+  getCost(projectId: string,defaultCostIn:string,defaultCostPer:string) {
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({headers: headers});
 
@@ -39,16 +39,16 @@ export class CostSummaryService extends BaseService {
 
     var url = API.THUMBRULE_RULE_RATE + '/'+ API.VIEW_PROJECT +'/'+projectId+'/';
 
-    if(defaultCostIn=='Rs/Sqft'){
+    if(defaultCostIn==='Rs/Sqft') {
       url=url + 'rate/' + API.SQFT;
-    }    else{
+    }    else {
       url=url + 'rate/' + API.SQM;
     }
 
 
-    if(defaultCostPer=='SlabArea'){
+    if(defaultCostPer==='SlabArea') {
       url=url + '/area/' + API.SLAB_AREA;
-    }    else{
+    }    else {
       url=url + '/area/' + API.SALEABLE_AREA;
     }
 

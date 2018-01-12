@@ -5,8 +5,8 @@ import { AppSettings, Messages, Label, Button, Headings, NavigationRoutes } from
 import { BuildingListService } from './building-list.service';
 import { BuildingDetailsService } from '../building-details/building-details.service';
 import { Building } from '../../../model/building';
-import {SessionStorage, SessionStorageService,MessageService} from "../../../../../shared/index";
-import {Message} from "../../../../../shared/index";
+import { SessionStorage, SessionStorageService,MessageService } from '../../../../../shared/index';
+import { Message } from '../../../../../shared/index';
 
 @Component({
   moduleId: module.id,
@@ -19,10 +19,8 @@ export class BuildingListComponent implements OnInit {
   buildings : any;
   projectId : any;
   model: Building = new Building();
-
   constructor(private listBuildingService: BuildingListService, private viewBuildingService: BuildingDetailsService, private _router: Router,
               private activatedRoute:ActivatedRoute, private messageService: MessageService) {
-
   }
 
   ngOnInit() {

@@ -1,5 +1,5 @@
-import {Component} from "@angular/core";
-import {API, AppSettings, Messages, ProjectAsset} from "../../../shared/constants";
+import { Component } from '@angular/core';
+import { API, AppSettings, Messages, ProjectAsset } from '../../../shared/constants';
 
 @Component({
   moduleId: module.id,

@@ -459,7 +459,7 @@ class UserService {
     this.userRepository.retrieveWithIncluded(query, {}, callback);
   }*/
 
-  resetPassword(data: any, user : any, callback:(error: any, result: any) =>void ){
+  resetPassword(data: any, user : any, callback:(error: any, result: any) =>any) {
     const saltRounds = 10;
     bcrypt.hash(data.new_password, saltRounds, (err: any, hash: any) => {
       if (err) {
@@ -486,7 +486,7 @@ class UserService {
     });
   }
 
-  updateDetails(data:  UserModel, user: UserModel, callback:(error: any, result: any) => void){
+  updateDetails(data:  UserModel, user: UserModel, callback:(error: any, result: any) => void) {
     let auth: AuthInterceptor = new AuthInterceptor();
     this.update(user.user_id, data, (error, result) => {
       if (error) {
@@ -518,7 +518,7 @@ class UserService {
       }
     });
   }
-  getUserById(user, callback:(error, result)=>void) {
+  getUserById(user, callback:(error:any, result:any)=>void) {
     let auth: AuthInterceptor = new AuthInterceptor();
 
     let token = auth.issueTokenWithUid(user);
@@ -538,7 +538,7 @@ class UserService {
     });
   }
 
-  verifyAccount(user, callback:(error, result)=>void) {
+  verifyAccount(user, callback:(error:any, result:any)=>void) {
     let query = {'_id': user._id, 'isActivated': false};
     let updateData = {'isActivated': true};
     this.findOneAndUpdate(query, updateData, {new: true}, (error, result) => {
@@ -554,7 +554,7 @@ class UserService {
     });
   }
 
-  changeEmailId(data, user, callback:(error, result)=>void){
+  changeEmailId(data, user, callback:(error:any, result:any)=>void) {
     let auth: AuthInterceptor = new AuthInterceptor();
     let query = {'email': data.new_email};
 
@@ -608,7 +608,7 @@ class UserService {
     });
   }
 
-  verifyChangedEmailId(user, callback:(error, result)=> void){
+  verifyChangedEmailId(user, callback:(error, result)=> any) {
     let query = {'_id': user._id};
     let updateData = {'email': user.temp_email, 'temp_email': user.email};
     this.findOneAndUpdate(query, updateData, {new: true}, (error, result) => {

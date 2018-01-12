@@ -1,8 +1,8 @@
-import {Injectable} from "@angular/core";
-import {Observable} from "rxjs/Rx";
-import {Headers, Http, RequestOptions} from "@angular/http";
-import {API, BaseService, SessionStorage, SessionStorageService, MessageService} from "../../../shared/index";
-import {Notification} from "./notification";
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/Rx';
+import { Headers, Http, RequestOptions } from '@angular/http';
+import { API, BaseService, SessionStorage, SessionStorageService, MessageService } from '../../../shared/index';
+import { Notification } from './notification';
 
 @Injectable()
 export class NotificationService extends BaseService {

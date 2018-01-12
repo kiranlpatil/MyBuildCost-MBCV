@@ -13,8 +13,8 @@ import { API, BaseService, SessionStorage, SessionStorageService,  Message,
   MessageService } from '../../../../shared/index';
 import { CreateProjectService } from './create-project.service';
 import { Project } from './../../model/project';
-import {ValidationService} from "./../../../../shared/customvalidations/validation.service";
-import {SharedService} from "../../../../shared/services/shared-service";
+import { ValidationService } from './../../../../shared/customvalidations/validation.service';
+import { SharedService } from '../../../../shared/services/shared-service';
 
 @Component({
   moduleId: module.id,

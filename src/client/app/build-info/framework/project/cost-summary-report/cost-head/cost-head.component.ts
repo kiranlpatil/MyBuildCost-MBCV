@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router , ActivatedRoute } from '@angular/router';
+import { CostSummaryPipe } from './../cost-summary.pipe';
+
 import {
   AppSettings,
   Label,
@@ -24,10 +26,13 @@ export class CostHeadComponent implements OnInit {
  private toggleRate:boolean=false;
  private compareIndex:number=0;
 
-  projectId :any;
-  buildingDetails = {
-    "name": "Dwaraka",
-    "plaster": [
+  projectId : string;
+  buildingId: string;
+  costHead:  string;
+  costHeadDetails :any;
+  /*buildingDetails = {
+    'name': 'Dwaraka',
+    'plaster': [
       {
         "item": "Internal Plaster in CM 1:4",
         "quantity": 800,
@@ -76,8 +81,8 @@ export class CostHeadComponent implements OnInit {
       }
       ]
   };
+*/
 
-  costHeadDetails :any;
 
   constructor(private costHeadService : CostHeadService, private activatedRoute : ActivatedRoute) {
   }
@@ -85,9 +90,12 @@ export class CostHeadComponent implements OnInit {
   ngOnInit() {
     this.activatedRoute.params.subscribe(params => {
       this.projectId = params['projectId'];
-      if(this.projectId) {
-        console.log('Got into Project Cost Head Component Details');
-        //this.getCostHeadComponentDetails();
+      this.buildingId = params['buildingId'];
+      this.costHead = params['costHead'];
+      if(this.buildingId) {
+        console.log('Got into Project Cost Head Component Details : '+this.buildingId);
+        console.log('Got into Project Cost Head Component : '+this.costHead);
+        this.getCostHeadComponentDetails(this.projectId, this.buildingId, this.costHead);
       }
     });
   }
@@ -98,7 +106,7 @@ export class CostHeadComponent implements OnInit {
   getQuantity(i:number) {
     this.toggleQty=!this.toggleQty;
     this.compareIndex=i;
-    if(this.toggleQty===true){
+    if(this.toggleQty===true) {
       this.toggleRate=false;
     }
   }
@@ -106,13 +114,13 @@ export class CostHeadComponent implements OnInit {
   getRate(i:number) {
     this.toggleRate=!this.toggleRate;
     this.compareIndex=i;
-    if(this.toggleRate===true){
+    if(this.toggleRate===true) {
       this.toggleQty=false;
     }
   }
 
-  getCostHeadComponentDetails() {
-    this.costHeadService.getCostHeadDetails().subscribe(
+  getCostHeadComponentDetails(projectId:string,buildingId:string, costHead: string) {
+    this.costHeadService.getCostHeadDetails(projectId, buildingId, costHead).subscribe(
       costHeadDetails => this.onGetCostHeadDetailsSuccess(costHeadDetails),
       error => this.onGetCostHeadDetailsFail(error)
     );
@@ -120,6 +128,7 @@ export class CostHeadComponent implements OnInit {
 
   onGetCostHeadDetailsSuccess(costHeadDetails : any) {
     this.costHeadDetails = costHeadDetails.data;
+    console.log('costHeadDetails: '+JSON.stringify(costHeadDetails));
   }
 
   onGetCostHeadDetailsFail(error : any) {
@@ -142,7 +151,7 @@ export class CostHeadComponent implements OnInit {
     return Headings;
   }
 
-  deleteItem(i:number){
+  deleteItem(i:number) {
     console.log('Item will be delete : '+i);
   }
 

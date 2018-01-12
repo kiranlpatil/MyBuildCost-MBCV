@@ -55,7 +55,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-  }
+    }
 
   showError(message: Message) {
     this.isShowErrorMessage = false;
@@ -76,7 +76,7 @@ export class AppComponent implements OnInit {
     setTimeout(function () {
       this.isShowSuccessMessage = true;
     }.bind(this), 8888);
-  };
+  }
 
   closeErrorMessage() {
     this.isShowErrorMessage = true;

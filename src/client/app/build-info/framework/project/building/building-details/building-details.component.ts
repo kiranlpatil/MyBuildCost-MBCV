@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Messages} from '../../../../../shared/constants';
+import { Messages } from '../../../../../shared/constants';
 import { BuildingDetailsService } from './building-details.service';
 import { Building } from './../../../model/building';
 import { MessageService } from '../../../../../shared/index';
-import {Message} from "../../../../../shared/index";
-import {ValidationService} from "../../../../../shared/customvalidations/validation.service";
+import { Message } from '../../../../../shared/index';
+import { ValidationService } from '../../../../../shared/customvalidations/validation.service';
 
 @Component({
   moduleId: module.id,

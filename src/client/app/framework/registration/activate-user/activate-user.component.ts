@@ -1,9 +1,9 @@
-import {Component, OnInit} from "@angular/core";
-import {ActivatedRoute, Router} from "@angular/router";
-import {ImagePath, SessionStorage, Messages, NavigationRoutes, ProjectAsset} from "../../../shared/constants";
-import {SessionStorageService} from "../../../shared/services/session.service";
-import {ActiveUserService} from "./activate-user.service";
-import {MessageService} from "../../../shared/services/message.service";
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ImagePath, SessionStorage, Messages, NavigationRoutes, ProjectAsset } from '../../../shared/constants';
+import { SessionStorageService } from '../../../shared/services/session.service';
+import { ActiveUserService } from './activate-user.service';
+import { MessageService } from '../../../shared/services/message.service';
 //import {  Message  } from '../../shared/message';
 
 @Component({

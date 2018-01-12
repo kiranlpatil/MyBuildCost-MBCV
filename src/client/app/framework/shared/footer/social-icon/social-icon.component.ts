@@ -1,5 +1,5 @@
-import {Component} from "@angular/core";
-import {ImagePath} from "../../../../shared/constants";
+import { Component } from '@angular/core';
+import { ImagePath } from '../../../../shared/constants';
 
 @Component({
   moduleId: module.id,

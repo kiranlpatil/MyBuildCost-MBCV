@@ -1,7 +1,7 @@
-import {Router} from "@angular/router";
-import {Component, OnDestroy, OnInit} from "@angular/core";
-import {LoaderService} from "../../../shared/loader/loaders.service";
-import { NavigationRoutes } from "../../../shared/index";
+import { Router } from '@angular/router';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { LoaderService } from '../../../shared/loader/loaders.service';
+import { NavigationRoutes } from '../../../shared/index';
 @Component({
   moduleId: module.id,
   selector: 'my-dashboard-home',

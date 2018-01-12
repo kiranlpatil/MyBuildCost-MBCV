@@ -1,8 +1,8 @@
-import {Injectable} from "@angular/core";
-import {Http} from "@angular/http";
-import {Observable} from "rxjs/Observable";
-import {ChangePassword} from "./../../../user/models/changepassword";
-import {API, BaseService, SessionStorage, SessionStorageService, MessageService} from "../../../shared/index";
+import { Injectable } from '@angular/core';
+import { Http } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
+import { ChangePassword } from './../../../user/models/changepassword';
+import { API, BaseService, SessionStorage, SessionStorageService, MessageService } from '../../../shared/index';
 
 
 @Injectable()

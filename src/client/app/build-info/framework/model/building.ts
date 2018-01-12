@@ -1,4 +1,4 @@
-import {ValidationService} from "../../../shared/customvalidations/validation.service";
+import { ValidationService } from '../../../shared/customvalidations/validation.service';
 
 export class Building {
   name: string = '';

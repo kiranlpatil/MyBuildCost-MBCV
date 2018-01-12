@@ -1,5 +1,5 @@
-import {Component} from "@angular/core";
-import {LoaderService} from "./loaders.service";
+import { Component } from '@angular/core';
+import { LoaderService } from './loaders.service';
 
 @Component({
   selector: 'cn-app-loader',

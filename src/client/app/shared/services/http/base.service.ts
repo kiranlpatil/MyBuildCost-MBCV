@@ -1,6 +1,6 @@
-import {Response} from "@angular/http";
-import {Observable} from "rxjs/Observable";
-import {SessionStorage, SessionStorageService} from "../../index";
+import { Response } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
+import { SessionStorage, SessionStorageService } from '../../index';
 
 
 export class BaseService {

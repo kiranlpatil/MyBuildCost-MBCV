@@ -121,7 +121,7 @@ export class Messages {
   public static MSG_YEAR_NO_MATCH_FOUND = 'The year doesn\'t look right. Be sure to use your actual year of birth.';
   public static MSG_FORGOT_PASSWORD = 'Enter your account e-mail address and we\'ll help you create a new password.';
   public static MSG_CONFIRM_PASSWORD = ' Passwords do not match.';
-  public static MSG_CHANGE_PASSWORD_SUCCESS = 'Password changed successfully. You can Sign In again with new password by clicking on "YES" button, Please' +
+  public static MSG_CHANGE_PASSWORD_SUCCESS ='Password changed successfully. You can Sign In again with new password by clicking on "YES" button, Please' +
     ' click on "No" button to continue the session.';
   public static MSG_VERIFY_USER_1 = 'You are almost done!';
   public static MSG_VERIFY_USER_2 = 'We need to verify your mobile number before you can start using the system.';

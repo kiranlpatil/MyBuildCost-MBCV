@@ -1,16 +1,16 @@
-import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from "@angular/core";
-import {ActivatedRoute, Params, Router} from "@angular/router";
-import {CandidateSignUpService} from "./candidate-sign-up.service";
-import {CandidateDetail} from "./../../../user/models/candidate-details";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {ValidationService} from "../../../shared/customvalidations/validation.service";
-import {AppSettings, CommonService, Message, MessageService, NavigationRoutes} from "../../../shared/index";
-import {API, ImagePath, Label, SessionStorage, Messages} from "../../../shared/constants";
-import {SessionStorageService} from "../../../shared/services/session.service";
-import {DateService} from "../../../build-info/framework/date.service";
-import {SharedService} from "../../../shared/services/shared-service";
-import {ErrorService} from "../../../shared/services/error.service";
-import {AnalyticService} from "../../../shared/services/analytic.service";
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { CandidateSignUpService } from './candidate-sign-up.service';
+import { CandidateDetail } from './../../../user/models/candidate-details';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ValidationService } from '../../../shared/customvalidations/validation.service';
+import { AppSettings, CommonService, Message, MessageService, NavigationRoutes } from '../../../shared/index';
+import { API, ImagePath, Label, SessionStorage, Messages } from '../../../shared/constants';
+import { SessionStorageService } from '../../../shared/services/session.service';
+import { DateService } from '../../../build-info/framework/date.service';
+import { SharedService } from '../../../shared/services/shared-service';
+import { ErrorService } from '../../../shared/services/error.service';
+import { AnalyticService } from '../../../shared/services/analytic.service';
 declare  var fbq:any;
 declare  var gtag:any;
 
@@ -78,7 +78,7 @@ export class CandidateSignUpComponent implements OnInit, AfterViewInit {
     this.activatedRoute.queryParams.subscribe((params: Params) => {
       if(params['phoneNumber']) {
         this.userForm.controls['mobile_number']
-          .setValue(Number(params['phoneNumber']))
+          .setValue(Number(params['phoneNumber']));
       }
     });
   }

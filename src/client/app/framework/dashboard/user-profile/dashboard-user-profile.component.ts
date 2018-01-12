@@ -1,10 +1,10 @@
-import {Component, NgZone, OnDestroy, OnInit} from "@angular/core";
-import {ActivatedRoute, Router, Params} from "@angular/router";
-import {DashboardUserProfileService} from "./dashboard-user-profile.service";
-import {UserProfile} from "./../../../user/models/user";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {ValidationService} from "../../../shared/customvalidations/validation.service";
-import {NavigationRoutes, Label, Button, Headings} from "../../../shared/constants";
+import { Component, NgZone, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, Router, Params } from '@angular/router';
+import { DashboardUserProfileService } from './dashboard-user-profile.service';
+import { UserProfile } from './../../../user/models/user';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ValidationService } from '../../../shared/customvalidations/validation.service';
+import { NavigationRoutes, Label, Button, Headings } from '../../../shared/constants';
 import {
   AppSettings,
   CommonService,
@@ -16,7 +16,7 @@ import {
   MessageService,
   ProfileService,
   ThemeChangeService
-} from "../../../shared/index";
+} from '../../../shared/index';
 
 @Component({
   moduleId: module.id,
@@ -133,7 +133,7 @@ export class DashboardProfileComponent implements OnInit {
     }
   }
   onPictureUpload(imagePath: string) {
-  }
+    }
   onMobileNumberChangeComplete() {
     this.model.mobile_number = SessionStorageService.getSessionValue(SessionStorage.MOBILE_NUMBER);
     this.showStyleMobile = !this.showStyleMobile;

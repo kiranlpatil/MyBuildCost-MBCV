@@ -21,8 +21,10 @@ export class CostSummaryComponent implements OnInit {
 
   projectBuildings: any;
   projectId: string;
+  buildingId: string;
   buildingsDetails: any;
   estimatedCost : any;
+  costHead: string;
 
   public costIn: any[] = [
     { 'costInId': 'Rs/Sqft'},
@@ -62,10 +64,10 @@ export class CostSummaryComponent implements OnInit {
     console.log('Adding Costhead');
   }
 
-  getAmount(buildingId) {
+  getAmount(buildingId: string, costHead:string) {
     SessionStorageService.setSessionValue(SessionStorage.CURRENT_BUILDING , buildingId);
     this.projectId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT);
-    this._router.navigate([NavigationRoutes.APP_COST_HEAD, this.projectId]);
+    this._router.navigate([NavigationRoutes.APP_COST_HEAD,this.projectId, buildingId, costHead]);
   }
 
   getProjects() {

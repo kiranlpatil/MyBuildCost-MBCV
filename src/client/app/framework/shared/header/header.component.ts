@@ -1,12 +1,12 @@
-import {Component, ElementRef, HostListener, OnInit} from "@angular/core";
-import {CommonService, Message, MessageService} from "../../../shared/index";
-import {Router} from "@angular/router";
-import {Subscription} from "rxjs/Subscription";
-import {ProfileService} from "../../shared/profileservice/profile.service";
-import {UserProfile} from "../../../user/models/user";
-import {DashboardService} from "../../../user/services/dashboard.service";
-import {AppSettings, ImagePath, SessionStorage, NavigationRoutes} from "../../../shared/constants";
-import {SessionStorageService} from "../../../shared/services/session.service";
+import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
+import { CommonService, Message, MessageService } from '../../../shared/index';
+import { Router } from '@angular/router';
+import { Subscription } from 'rxjs/Subscription';
+import { ProfileService } from '../../shared/profileservice/profile.service';
+import { UserProfile } from '../../../user/models/user';
+import { DashboardService } from '../../../user/services/dashboard.service';
+import { AppSettings, ImagePath, SessionStorage, NavigationRoutes } from '../../../shared/constants';
+import { SessionStorageService } from '../../../shared/services/session.service';
 
 @Component({
   moduleId: module.id,
