@@ -58,7 +58,7 @@
                         <td><!--{{(estimatedCostHead.total / building.area)}}-->
                           <button type="button" class="btn btn-primary" (click)="getAmount(building._id,thumbRuleItem.name,building.name)">Get Amount</button>
                         </td>
-                        <td><span class="glyphicon glyphicon-trash"></span></td>
+                    <td><span class="glyphicon glyphicon-trash" (click)="deleteQuantityDetails(building._id,thumbRuleItem.name)"></span></td>
                   </tr>
                   <tr class="container"><button type="button" class="btn btn-primary" (click)="addCostHead()"><span class="glyphicon glyphicon-plus"></span>Add Item</button></tr>
                   </tbody>

@@ -179,6 +179,7 @@ export class Messages {
   public static MSG_SUCCESS_UPDATE_PROJECT_DETAILS: string = 'Your project updated successfully.';
   public static MSG_SUCCESS_UPDATE_BUILDING_DETAILS: string = 'Your building details updated successfully.';
   public static MSG_SUCCESS_DELETE_BUILDING: string = 'Your building deleted successfully.';
+  public static MSG_SUCCESS_DELETE_COSTHEAD: string = 'Your costhead deleted successfully.';
 }
 
 export class NavigationRoutes {

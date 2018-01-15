@@ -21,7 +21,7 @@ import { GetQuantityService } from './get-quantity.service';
 
 export class GetQuantityComponent implements OnInit {
   @Input() quantityItems : any;
-  @Output() quantityItems : any;
+  @Output() quantityItemss : any;
 
   constructor(private getQuantityService : GetQuantityService, private activatedRoute : ActivatedRoute) {
   }

@@ -1,12 +1,12 @@
-import {Component, OnInit} from "@angular/core";
-import {Router} from "@angular/router";
-import {NotificationService} from "./notification.service";
-import {Notification} from "./notification";
-import {CommonService, Message, MessageService} from "../../../shared/index";
-import {Subscription} from "rxjs/Subscription";
-import {SessionStorage, NavigationRoutes} from "../../../shared/constants";
-import {SessionStorageService} from "../../../shared/services/session.service";
-import {LoaderService} from "../../../shared/loader/loaders.service";
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { NotificationService } from './notification.service';
+import { Notification } from './notification';
+import { CommonService, Message, MessageService } from '../../../shared/index';
+import { Subscription } from 'rxjs/Subscription';
+import { SessionStorage, NavigationRoutes } from '../../../shared/constants';
+import { SessionStorageService } from '../../../shared/services/session.service';
+import { LoaderService } from '../../../shared/loader/loaders.service';
 
 @Component({
   moduleId: module.id,

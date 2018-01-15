@@ -59,4 +59,12 @@ export class CostSummaryService extends BaseService {
       .catch(this.handleError);
   }
 
-}
+  deleteQuanatityDetails(buildingId:string, costHead:string) {
+    let projectId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT);
+    var url = 'project/'+projectId+'/'+API.VIEW_BUILDING+'/'+buildingId+'/'+'costhead/'+costHead;
+    let body = {};
+    return this.http.put(url, body)
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
+  }

@@ -8,7 +8,7 @@ import {
   NavigationRoutes
 } from '../../../../shared/constants';
 import { API, BaseService, SessionStorage, SessionStorageService,  Message,
-  Messages } from '../../../../shared/index';
+  Messages, MessageService } from '../../../../shared/index';
 import { CostSummaryService } from './cost-summary.service';
 
 @Component({
@@ -25,6 +25,7 @@ export class CostSummaryComponent implements OnInit {
   buildingsDetails: any;
   estimatedCost : any;
   costHead: string;
+  costHeadDetails :any;
 
   public costIn: any[] = [
     { 'costInId': 'Rs/Sqft'},
@@ -42,7 +43,7 @@ export class CostSummaryComponent implements OnInit {
 
 
   constructor(private costSummaryService : CostSummaryService, private activatedRoute : ActivatedRoute,
-              private _router : Router) {
+              private _router : Router, private messageService : MessageService) {
   }
 
   ngOnInit() {
@@ -64,10 +65,10 @@ export class CostSummaryComponent implements OnInit {
     console.log('Adding Costhead');
   }
 
-  getAmount(buildingId: string, costHead:string, buildingName: string) {
-    SessionStorageService.setSessionValue(SessionStorage.CURRENT_BUILDING , buildingId);
+  getAmount(buildingId: string, costHead: any, buildingName: string) {
+    SessionStorageService.setSessionValue(SessionStorage.CURRENT_BUILDING, buildingId);
     this.projectId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT);
-    this._router.navigate([NavigationRoutes.APP_COST_HEAD,this.projectId, buildingName, costHead]);
+    this._router.navigate([NavigationRoutes.APP_COST_HEAD, this.projectId, buildingName, costHead]);
   }
 
   getProjects() {
@@ -154,4 +155,27 @@ export class CostSummaryComponent implements OnInit {
   getHeadings() {
     return Headings;
   }
+
+  deleteQuantityDetails(buildingId: string, costHead: string) {
+      this.costSummaryService.deleteQuanatityDetails(buildingId, costHead).subscribe(
+        costHeadDetail => this.onDeleteQuantitySuccess(costHeadDetail),
+        error => this.onDeleteQuantityFail(error)
+      );
+    }
+
+  onDeleteQuantitySuccess(costHeadDetail: any) {
+    this.onChangeCostingIn(this.defaultCostIn);
+     if ( costHeadDetail!== null) {
+      var message = new Message();
+      message.isError = false;
+      message.custom_message = Messages.MSG_SUCCESS_DELETE_COSTHEAD;
+      this.messageService.message(message);
+      /* this.costSummaryService.onCostHeadUpdate(costHeadDetail);*/
+    }
+  }
+
+  onDeleteQuantityFail(error: any) {
+    console.log(error);
+  }
+
 }
