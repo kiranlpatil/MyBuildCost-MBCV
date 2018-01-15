@@ -268,6 +268,19 @@ class ProjectService {
       }
     });
   }
+
+  deleteBuildingCostHead( buildingId : string, costHead : string, user: User,
+                            callback: (error: any, result: any) => void) {
+    let query = {'_id' : buildingId, 'costHead.name' : costHead};
+    let newData = { $set : {'costHead.$.active' : false}};
+    this.buildingRepository.findOneAndUpdate(query, newData, {new: true},(err, response) => {
+      if(err) {
+        callback(err, null);
+      } else {
+        callback(null, {data: response, access_token: this.authInterceptor.issueTokenWithUid(user)});
+      }
+    });
+  }
 }
 
 Object.seal(ProjectService);

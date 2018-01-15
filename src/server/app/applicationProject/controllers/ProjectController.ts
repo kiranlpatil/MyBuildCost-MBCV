@@ -254,6 +254,26 @@ class ProjectController {
     }
   }
 
+  deleteBuildingCostHead(req: express.Request, res: express.Response, next: any): void {
+    try {
+      let projectService = new ProjectService();
+      let user = req.user;
+      let projectId =  req.params.id;
+      let buildingId =  req.params.buildingid;
+      let costHead =  req.params.costhead;
+
+      projectService.deleteBuildingCostHead(buildingId, costHead,  user,(error, result) => {
+        if(error) {
+          next(error);
+        } else {
+          next(new Response(200,result));
+        }
+      });
+    } catch(e) {
+      next(new CostControllException(e.message,e.stack));
+    }
+  }
+
   addCostHeadBuilding(req: express.Request, res: express.Response, next: any): void {
     try {
       let user = req.user;
