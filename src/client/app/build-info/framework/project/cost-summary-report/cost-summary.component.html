@@ -48,17 +48,17 @@
                   </tr>
                   </thead>
                   <tbody>
-                  <tr *ngFor="let costHead of building.thumbRuleReport; let i = index">
-                    <td>{{costHead.name}}</td>
-                    <td>{{costHead.amount}}</td>
-                    <td>{{costHead.rate}}</td>
-                    <td>
-                      <input [(ngModel)]="estimatedCost" id="estimatedCost" class="form-control clear"/>
-                    </td>
-                    <td>{{(estimatedCost / building.area)}}
-                      <button type="button" class="btn btn-primary" (click)="getAmount(building._id,costHead.name,building.name)">Get Amount</button>
-                    </td>
-                    <td><span class="glyphicon glyphicon-trash"></span></td>
+                  <tr *ngFor="let thumbRuleItem of building.thumbRule.thumbRuleReport; let i = index">
+                        <td>{{thumbRuleItem.name}}</td>
+                        <td>{{thumbRuleItem.amount}}</td>
+                        <td>{{thumbRuleItem.rate}}</td>
+                        <td>
+                          <input id="estimatedCost" class="form-control clear"/>
+                        </td>
+                        <td><!--{{(estimatedCostHead.total / building.area)}}-->
+                          <button type="button" class="btn btn-primary" (click)="getAmount(building._id,costHead.name,building.name)">Get Amount</button>
+                        </td>
+                        <td><span class="glyphicon glyphicon-trash"></span></td>
                   </tr>
                   <tr class="container"><button type="button" class="btn btn-primary" (click)="addCostHead()"><span class="glyphicon glyphicon-plus"></span>Add Item</button></tr>
                   </tbody>

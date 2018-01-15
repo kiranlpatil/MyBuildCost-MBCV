@@ -51,10 +51,8 @@ class ReportService {
           let buildingReport = new BuildingReport;
           let thumbRuleReport: ThumbRule = new ThumbRule();
           let estimatedReport: Estimated = new Estimated();
-          thumbRuleReport.name = buildings[index].name;
-          estimatedReport.name = buildings[index].name;
+          buildingReport.name = buildings[index].name;
           buildingReport._id = buildings[index]._id;
-          /*estimatedReport._id = buildings[index]._id;*/
           let costHeadArray : CostHead = buildings[index].costHead;
           for (let costHeadIndex = 0; costHeadIndex < costHeadArray.length; costHeadIndex++) {
               let thumbRule: ThumbRuleReport = new ThumbRuleReport();
@@ -64,6 +62,7 @@ class ReportService {
               if (areaType === 'slabArea') {
                 thumbRuleReport.area = buildings[index].totalSlabArea;
                 estimatedReport.area = buildings[index].totalSlabArea;
+                buildingReport.area = buildings[index].totalSlabArea;
                 if (projectRate === 'sqft') {
                   thumbRule.rate = costHeadArray[costHeadIndex].thumbRuleRate.slabArea.sqft;
                 } else {
@@ -72,6 +71,7 @@ class ReportService {
               } else {
                 thumbRuleReport.area = buildings[index].totalSaleableAreaOfUnit;
                 estimatedReport.area = buildings[index].totalSaleableAreaOfUnit;
+                buildingReport.area = buildings[index].totalSaleableAreaOfUnit;
                 if (projectRate === 'sqft') {
                   thumbRule.rate = costHeadArray[costHeadIndex].thumbRuleRate.saleableArea.sqft;
                 } else {
@@ -96,8 +96,6 @@ class ReportService {
               buildingReport.estimated = estimatedReport;
               buildingReport.thumbRule = thumbRuleReport;
             }
-            /*let buildingCostHead: CostHead = buildingReport[Index].costHead;*/
-            /*for(let costHeadIndex = 0, buildingCostHead)*/
           report.push(buildingReport);
         }
 
