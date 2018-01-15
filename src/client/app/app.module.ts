@@ -65,6 +65,8 @@ import { CostSummaryService } from './build-info/framework/project/cost-summary-
 import { CostHeadComponent } from './build-info/framework/project/cost-summary-report/cost-head/cost-head.component';
 import { CostHeadService } from './build-info/framework/project/cost-summary-report/cost-head/cost-head.service';
 import { CostSummaryPipe } from './build-info/framework/project/cost-summary-report/cost-summary.pipe';
+import { GetQuantityComponent } from './build-info/framework/project/cost-summary-report/cost-head/get-quantity/get-quantity.component';
+import { GetQuantityService } from './build-info/framework/project/cost-summary-report/cost-head/get-quantity/get-quantity.service';
 
 @NgModule({
   imports: [
@@ -104,6 +106,7 @@ import { CostSummaryPipe } from './build-info/framework/project/cost-summary-rep
     CostSummaryComponent,
     CostHeadComponent,
     CostSummaryPipe,
+    GetQuantityComponent,
     //MyDashboardComponent,
     PageNotFoundComponent
   ],
@@ -147,7 +150,8 @@ import { CostSummaryPipe } from './build-info/framework/project/cost-summary-rep
     BuildingListService,
     BuildingDetailsService,
     CostSummaryService,
-    CostHeadService
+    CostHeadService,
+    GetQuantityService
   ],
   bootstrap: [AppComponent]
 })

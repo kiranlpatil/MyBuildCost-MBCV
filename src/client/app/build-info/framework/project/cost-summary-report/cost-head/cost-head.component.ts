@@ -25,6 +25,8 @@ export class CostHeadComponent implements OnInit {
  private toggleQty:boolean=false;
  private toggleRate:boolean=false;
  private compareIndex:number=0;
+ private quantityItemsArray: any;
+ private rateItemsArray: any;
 
   projectId : string;
   buildingId: string;
@@ -100,20 +102,27 @@ export class CostHeadComponent implements OnInit {
   onSubmit() {
   }
 
-  getQuantity(i:number) {
+  getQuantity(i:number, quantityItems : any) {
     this.toggleQty=!this.toggleQty;
     this.compareIndex=i;
     if(this.toggleQty===true) {
       this.toggleRate=false;
     }
+    this.quantityItemsArray = quantityItems;
   }
 
-  getRate(i:number) {
+  getRate(i:number, rateItems : any) {
     this.toggleRate=!this.toggleRate;
     this.compareIndex=i;
     if(this.toggleRate===true) {
       this.toggleQty=false;
     }
+    this.rateItemsArray = rateItems;
+  }
+
+  getItemRates(workItem: any, costHead:string) {
+    console.log('WorkItem : '+workItem);
+    console.log('costHead : '+costHead);
   }
 
   getCostHeadComponentDetails(projectId:string, costHead: string) {

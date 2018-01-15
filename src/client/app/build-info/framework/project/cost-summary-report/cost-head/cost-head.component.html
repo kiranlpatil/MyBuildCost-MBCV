@@ -25,12 +25,12 @@
           <td>{{costHeadDetails[costHead].name}}</td>
           <td>
             <input [(ngModel)]="costHeadDetails[costHead].quantity.total" id="quantity" class="form-control clear"/><br/>
-            <button type="button" id="getQuantity{{i}}" class="btn btn-primary" (click)="getQuantity(i)">Get Quanity</button>
+            <button type="button" id="getQuantity{{i}}" class="btn btn-primary" (click)="getQuantity(i, costHeadDetails[costHead].quantity.item)">Get Quanity</button>
           </td>
           <td>{{costHeadDetails[costHead].unit}}</td>
           <td>
             <input [(ngModel)]="costHeadDetails[costHead].rate.total" id="rate" class="form-control clear"/><br/>
-            <button type="button" id="getRate{{i}}" class="btn btn-primary accordion-toggle" data-toggle="collapse" data-target="#cores" (click)="getRate(i)">Get Rate</button>
+            <button type="button" id="getRate{{i}}" class="btn btn-primary accordion-toggle" data-toggle="collapse" data-target="#cores" (click)="getRate(i, costHeadDetails[costHead].rate.item)">Get Rate</button>
           </td>
           <td>{{costHeadDetails[costHead].amount}} <span class="glyphicon glyphicon-trash"></span></td>
         </tr>
@@ -50,80 +50,33 @@
               <th>Unit</th>
               </thead>
               <tbody>
-              <tr>
+              <tr *ngFor="let quantityItem of quantityItemsArray">
                 <td>
-                  <input [(ngModel)]="costitem" id="costitem" class="form-control clear"/>
+                  <input [(ngModel)]="quantityItem.item" id="costitem" class="form-control clear"/>
                 </td>
                 <td>
-                  <input [(ngModel)]="numbers" id="numbers" class="form-control clear"/>
+                  <input [(ngModel)]="quantityItem.nos" id="numbers" class="form-control clear"/>
                 </td>
                 <td>
-                  <input [(ngModel)]="length" id="length" class="form-control clear"/>
+                  <input [(ngModel)]="quantityItem.length" id="length" class="form-control clear"/>
                 </td>
                 <td>
-                  <input [(ngModel)]="breadth" id="breadth" class="form-control clear"/>
+                  <input [(ngModel)]="quantityItem.breadth" id="breadth" class="form-control clear"/>
                 </td>
                 <td>
-                  <input [(ngModel)]="height" id="height" class="form-control clear"/>
+                  <input [(ngModel)]="quantityItem.height" id="height" class="form-control clear"/>
                 </td>
                 <td>
-                  <input [(ngModel)]="quantity" id="qty" class="form-control clear"/>
+                  <input [(ngModel)]="quantityItem.quantity" id="qty" class="form-control clear"/>
                 </td>
                 <td>
-                  <input [(ngModel)]="unit" id="unit" class="form-control clear"/>
-                  <span (click)="deleteItem(i)"  class="glyphicon glyphicon-trash"></span>
+                  <input [(ngModel)]="quantityItem.unit" id="unit" class="form-control clear"/>
                 </td>
-              </tr>
-
-              <tr>
-                <td>
-                  <label>Total</label>
-                </td>
-                <td>
-                  <label>--</label>
-                </td>
-                <td>
-                  <label>--</label>
-                </td>
-                <td>
-                  <label>--</label>
-                </td>
-                <td>
-                  <label>--</label>
-                </td>
-                <td>
-                  <label>--</label>
-                </td>
-                <td>
-                  <label>545466</label>
-                </td>
-              </tr>
-
-              <tr>
-                <td>
-                  <button type="button" class="btn btn-primary">+Add Items</button>
-                </td>
-                <td>
-
-                </td>
-                <td>
-
-                </td>
-                <td>
-
-                </td>
-                <td>
-
-                </td>
-                <td>
-
-                </td>
-                <td>
-                  <button type="button" class="btn btn-primary">Save</button>
-                </td>
+                <td><span (click)="deleteItem(i)"  class="glyphicon glyphicon-trash"></span></td>
               </tr>
               </tbody>
             </table>
+            <!--<bi-cost-head-get-quantity [quantityItems]="costHeadDetails[costHead].quantity.item" ></bi-cost-head-get-quantity>-->
           </td>
         </tr>
 
@@ -141,21 +94,24 @@
                 <th>Amount</th>
                 </thead>
                 <tbody>
-                <tr>
+                <tr *ngFor="let rateItem of rateItemsArray">
                   <td>
-                    <input [(ngModel)]="itemdescription" id="itemdescription" class="form-control clear"/>
+                    <input [(ngModel)]="rateItem.item" id="itemdescription" class="form-control clear"/>
                   </td>
                   <td>
-                    <input [(ngModel)]="itemquantity" id="itemquantity" class="form-control clear"/>
+                    <input [(ngModel)]="rateItem.remarks" id="itemquantity" class="form-control clear"/>
                   </td>
                   <td>
-                    <input [(ngModel)]="itemunit" id="itemunit" class="form-control clear"/>
+                    <input [(ngModel)]="rateItem.quantity" id="itemunit" class="form-control clear"/>
                   </td>
                   <td>
-                    <input [(ngModel)]="itemrate" id="itemrate" class="form-control clear"/>
+                    <input [(ngModel)]="rateItem.unit" id="itemrate" class="form-control clear"/>
                   </td>
                   <td>
-                    <input [(ngModel)]="itemamount" id="itemamount" class="form-control clear"/>
+                    <input [(ngModel)]="rateItem.rate" id="itemamount" class="form-control clear"/>
+                  </td>
+                  <td>
+                    <input [(ngModel)]="rateItem.totalAmount" id="itemamount" class="form-control clear"/>
                   </td>
                 </tr>
 
