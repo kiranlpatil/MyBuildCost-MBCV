@@ -333,6 +333,46 @@ class ProjectService {
       }
     });
   }
+
+  updateQuantity(projectId, buildingId, costhead, workitem, quantity, user, callback:(error: any, result: any)=> void) {
+    this.buildingRepository.findById(buildingId, (error, building:Building) => {
+      if (error) {
+        callback(error, null);
+      } else {
+        for(let index = 0; building.costHead.length > index; index++) {
+          if(building.costHead[index].name === costhead) {
+            let quantityArray :Quantity = building.costHead[index].workitem[workitem].quantity;
+            quantityArray.item = quantity;
+            if(quantityArray.total === null) {
+              quantityArray.total = 0;
+            }
+            for(let itemIndex =0; quantityArray.item.length >  itemIndex; itemIndex++) {
+              quantityArray.total = quantityArray.item[itemIndex].quantity + quantityArray.total;
+            }
+            let query = { _id : buildingId };
+            this.buildingRepository.findOneAndUpdate(query, building,{new: true}, (error, building) => {
+              if (error) {
+                callback(error, null);
+              } else {
+                let quantity: Quantity;
+                for(let index = 0; building.costHead.length > index; index++){
+                  if(building.costHead[index].name === costhead) {
+                    quantity = building.costHead[index].workitem[workitem].quantity;
+                  }
+                }
+                if(quantity.total === null) {
+                  for(let index = 0; quantity.item.length > index; index ++) {
+                    quantity.total = quantity.item[index].quantity + quantity.total;
+                  }
+                }
+                callback(null, {data: quantity, access_token: this.authInterceptor.issueTokenWithUid(user)});
+              }
+            });
+          }
+        }
+      }
+    });
+  }
 }
 
 Object.seal(ProjectService);

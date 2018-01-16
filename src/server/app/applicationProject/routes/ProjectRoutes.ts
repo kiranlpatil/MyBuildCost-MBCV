@@ -54,6 +54,8 @@ class ProjectRoutes {
       controller.addCostHeadBuilding, this._responseInterceptor.exit);
     router.post('/:id/building/:buildingid/costhead/:costhead/workitem/:workitem/quantity', this.authInterceptor.requiresAuth,
       this._requestInterceptor.intercept, controller.createQuantity, this._responseInterceptor.exit);
+    router.put('/:id/building/:buildingid/costhead/:costhead/workitem/:workitem/quantity', this.authInterceptor.requiresAuth,
+      this._requestInterceptor.intercept, controller.updateQuantity, this._responseInterceptor.exit);
     return router;
   }
 }
