@@ -94,6 +94,10 @@ export class BuildingListComponent implements OnInit {
     this._router.navigate([NavigationRoutes.APP_VIEW_BUILDING_DETAILS, buildingId]);
   }
 
+  cloneThisBuilding(buildingId : any) {
+    console.log('building Id : '+buildingId);
+  }
+
   onGetBuildingSuccess(building : any) {
     let buildingDetails=building.data[0];
     this.model.name=buildingDetails.name;

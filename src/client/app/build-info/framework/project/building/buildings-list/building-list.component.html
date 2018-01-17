@@ -9,6 +9,7 @@
           <button type="button" class="btn btn-primary">{{building.name}}</button>
           <span (click)="deleteBuilding(building._id)" class="glyphicon glyphicon-trash"></span>
           <span (click)="getBuildingDetails(building._id)" class="glyphicon glyphicon-pencil"></span>
+          <span (click)="cloneThisBuilding(building._id)" class="glyphicon glyphicon-duplicate"></span>
           <br/><br/>
         </li>
         <li>
