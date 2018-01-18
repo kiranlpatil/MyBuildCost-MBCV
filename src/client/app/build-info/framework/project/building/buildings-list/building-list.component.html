@@ -19,13 +19,14 @@
     </ul>
   </div>
   <!-- Modal -->
+  <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
   <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog modal-lg">
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h2 class="modal-title">Clone This Building</h2>
+          <h2 class="modal-title">Clone {{model.name}} Building</h2>
         </div>
         <form [formGroup]="cloneBuildingForm" class="profile-form clearfix">
           <div class="modal-body">
@@ -68,12 +69,12 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h2 class="modal-title">Clone This Building Details</h2>
+          <h2 class="modal-title">Clone {{model.name}} Building Details</h2>
         </div>
         <div class="modal-body">
           <p>Building Name</p>
             <ul *ngFor="let costHead of clonedBuildingDetails.costHead">
-              {{costHead.name}}
+              <input type="checkbox" [checked]="costHead.active" (change)="costHead.active = !costHead.active" />{{costHead.name}}
                 <li *ngFor="let workitem of costHead.workitem | keys; let i = index">
                   {{costHead.workitem[workitem].name}}
                 </li>
@@ -81,11 +82,11 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-          <button class="btn btn-primary" type="button" (click)="updateBuilding(clonedBuildingDetails.costHead)" data-toggle="modal" data-dismiss="modal">Clone</button>
+          <button class="btn btn-primary" type="button" (click)="updateBuilding(clonedBuildingDetails.costHead, clonedBuildingDetails._id)" data-toggle="modal" data-dismiss="modal">Clone</button>
         </div>
       </div>
     </div>
   </div>
-
+  </div>
   <tpl-footer></tpl-footer>
 </section>

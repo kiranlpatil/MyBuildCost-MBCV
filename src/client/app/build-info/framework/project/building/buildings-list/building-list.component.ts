@@ -66,20 +66,19 @@ export class BuildingListComponent implements OnInit {
     message.custom_message = Messages.MSG_SUCCESS_ADD_BUILDING_PROJECT;
     this.messageService.message(message);
     this.clonedBuildingDetails = building.data;
-   // this._router.navigate([NavigationRoutes.APP_DASHBOARD]);
   }
 
   addNewBuildingFailed(error : any) {
     console.log(error);
   }
-  updateBuilding(cloneCostHead: any) {
-    this.listBuildingService.updateBuildingByCostHead(cloneCostHead).subscribe(
+  updateBuilding(cloneCostHead: any, clonedBuildingId:string) {
+    this.listBuildingService.updateBuildingByCostHead(cloneCostHead, clonedBuildingId).subscribe(
       project => this.updateBuildingSuccess(project),
       error => this.updateBuildingFail(error)
     );
   }
   updateBuildingSuccess(project: any) {
-    this.buildings = project.data.building;
+    this.getProjects();
   }
   updateBuildingFail(error: any) {
     console.log(error);
