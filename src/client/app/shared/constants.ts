@@ -291,7 +291,7 @@ export class API {
   public static VERIFY_MOBILE = 'user/verify/mobileNumber';
   public static SEND_VERIFICATION_MAIL = 'sendverificationmail';
   public static FORGOT_PASSWORD = 'user/forgotpassword';
-  public static UPDATE_PICTURE = 'updatepicture';
+  public static UPDATE_PICTURE = 'user/updatepicture';
   public static UPLOAD_DOCUMENTS = 'uploaddocuments';
   public static CHANGE_THEME = 'changetheme';
   public static RESET_PASSWORD = 'user/resetpassword';
