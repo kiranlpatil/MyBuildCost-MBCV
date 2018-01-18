@@ -9,10 +9,10 @@ import {
   Headings,
   NavigationRoutes, Messages
 } from '../../../../../shared/constants';
-import { API, BaseService, SessionStorage, SessionStorageService,  MessageService } from '../../../../../shared/index';
+import { API, BaseService, SessionStorage, SessionStorageService,
+  Message, MessageService } from '../../../../../shared/index';
 import { CostHeadService } from './cost-head.service';
-import {Message} from '../../../../../shared/index';
-import {CustomHttp} from '../../../../../shared/services/http/custom.http';
+import { CustomHttp } from '../../../../../shared/services/http/custom.http';
 
 
 @Component({
@@ -35,6 +35,7 @@ export class CostHeadComponent implements OnInit {
   buildingName: string;
   costHead:  string;
   costHeadDetails :any;
+  workItemName: string;
   workItem:any;
   rateItemsTotal:number;
 
@@ -118,6 +119,27 @@ export class CostHeadComponent implements OnInit {
     console.log(error);
   }
 
+  deleteWorkitem(workItemName: string ) {
+    this.costHeadService.deleteWorkItemDetails(workItemName, this.costHead).subscribe(
+        costHeadDetail => this.onDeleteWorkItemSuccess(costHeadDetail),
+        error => this.onDeleteWorkItemFail(error)
+      );
+    }
+  onDeleteWorkItemSuccess(costHeadDetail: any) {
+    //this.onChangeCostingIn(this.defaultCostIn);
+    if ( costHeadDetail!== null) {
+      var message = new Message();
+      message.isError = false;
+      message.custom_message = Messages.MSG_SUCCESS_DELETE_COSTHEAD_WORKITEM;
+      this.messageService.message(message);
+      this.getCostHeadComponentDetails(this.projectId,this.costHead);
+      /* this.costSummaryService.onCostHeadUpdate(costHeadDetail);*/
+    }
+  }
+  onDeleteWorkItemFail(error: any) {
+    console.log(error);
+  }
+
   getMessages() {
     return Messages;
   }
@@ -156,12 +178,12 @@ export class CostHeadComponent implements OnInit {
 
   addItem() {
     console.log('addItems()');
-    let body={
+    let body = {
       'item': 'Wall 8',
       'remarks': 'internal walls',
       'nos': 2,
       'length': 'sqft',
-      'breadth': null,
+      'breadth': 'null',
       'height': 0,
       'quantity': 100,
       'unit': 'sqft'
@@ -202,7 +224,7 @@ export class CostHeadComponent implements OnInit {
 
 
   onSaveCostHeadItemsSuccess(costHeadItemSave : any) {
-    this.quantityItemsArray=costHeadItemSave.data.item
+    this.quantityItemsArray=costHeadItemSave.data.item;
     var message = new Message();
     message.isError = false;
     message.custom_message = Messages.MSG_SUCCESS_SAVED_COST_HEAD_ITEM;

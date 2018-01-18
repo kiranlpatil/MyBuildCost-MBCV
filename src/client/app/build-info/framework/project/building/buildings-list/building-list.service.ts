@@ -31,5 +31,13 @@ export class BuildingListService extends BaseService {
       .map(this.extractData)
       .catch(this.handleError);
   }
-
+  updateBuildingByCostHead(cloneCostHead: any) {
+    let headers = new Headers({'Content-Type': 'application/json'});
+    let options = new RequestOptions({headers: headers});
+    var url =  API.VIEW_PROJECT + '/' + SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT)
+      + '/'+ API.VIEW_BUILDING + '/'+ SessionStorageService.getSessionValue(SessionStorage.CURRENT_BUILDING);
+    return this.http.put(url, options)
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
 }

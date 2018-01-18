@@ -9,7 +9,7 @@
           <button type="button" class="btn btn-primary">{{building.name}}</button>
           <span (click)="deleteBuilding(building._id)" class="glyphicon glyphicon-trash"></span>
           <span (click)="getBuildingDetails(building._id)" class="glyphicon glyphicon-pencil"></span>
-          <span (click)="cloneThisBuilding(building._id)" class="glyphicon glyphicon-duplicate"></span>
+          <span data-toggle="modal" data-target="#myModal"(click)="cloneThisBuilding(building._id)" class="glyphicon glyphicon-duplicate"></span>
           <br/><br/>
         </li>
         <li>
@@ -18,5 +18,74 @@
       </div>
     </ul>
   </div>
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h2 class="modal-title">Clone This Building</h2>
+        </div>
+        <form [formGroup]="cloneBuildingForm" class="profile-form clearfix">
+          <div class="modal-body">
+            <p>Building Name</p>
+            <input type="text" [(ngModel)]="model.name" formControlName="name" size="45"><br>
+            <p>Total Slab area<small>(in sqm)</small></p>
+            <input type="text" [(ngModel)]="model.totalSlabArea" formControlName="totalSlabArea" size="45"><br>
+            <p>Total Carper area<small>(in sqm)</small></p>
+            <input type="text" [(ngModel)]="model.totalCarperAreaOfUnit" formControlName="totalCarperAreaOfUnit" size="45"><br>
+            <p>Total Saleable area<small>(in sqm)</small></p>
+            <input type="text" [(ngModel)]="model.totalSaleableAreaOfUnit" formControlName="totalSaleableAreaOfUnit" size="45"><br>
+            <p>Total Parking area<small>(in sqm)</small></p>
+            <input type="text" [(ngModel)]="model.totalParkingAreaOfUnit" formControlName="totalParkingAreaOfUnit" size="45"><br>
+            <div class="col-xs-4"><br>
+              No of 1BHKs<input type="text" [(ngModel)]="model.noOfOneBHK" formControlName="noOfOneBHK" size="10">
+            </div>
+            <div class="col-xs-4"><br>
+              No of 2BHKs<input type="text" [(ngModel)]="model.noOfTwoBHK" formControlName="noOfTwoBHK" size="10">
+            </div>
+            <div class="col-xs-4"><br>
+              No of 3 BHKs<input type="text" [(ngModel)]="model.noOfThreeBHK" formControlName="noOfThreeBHK" size="10">
+            </div><br>
+            <p>No of slabs</p>
+            <input type="text" [(ngModel)]="model.noOfSlab" formControlName="noOfSlab" size="45"><br>
+            <p>No of lifts</p>
+            <input type="text" [(ngModel)]="model.noOfLift" formControlName="noOfLift" size="45">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            <button class="btn btn-primary" type="button" (click)="onSubmit()" data-toggle="modal" data-target="#new" data-dismiss="modal">Next</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="new" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h2 class="modal-title">Clone This Building Details</h2>
+        </div>
+        <div class="modal-body">
+          <p>Building Name</p>
+            <ul *ngFor="let costHead of clonedBuildingDetails.costHead">
+              {{costHead.name}}
+                <li *ngFor="let workitem of costHead.workitem | keys; let i = index">
+                  {{costHead.workitem[workitem].name}}
+                </li>
+            </ul>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+          <button class="btn btn-primary" type="button" (click)="updateBuilding(clonedBuildingDetails.costHead)" data-toggle="modal" data-dismiss="modal">Clone</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <tpl-footer></tpl-footer>
 </section>

@@ -32,7 +32,7 @@
             <input [(ngModel)]="costHeadDetails[costHead].rate.total" id="rate" class="form-control clear"/><br/>
             <button type="button" id="getRate{{i}}" class="btn btn-primary accordion-toggle" data-toggle="collapse" data-target="#cores" (click)="getRate(i, costHeadDetails[costHead])">Get Rate</button>
           </td>
-          <td>{{costHeadDetails[costHead].amount}} <span class="glyphicon glyphicon-trash"></span></td>
+          <td>{{costHeadDetails[costHead].amount}} <span (click)="deleteWorkitem(costHeadDetails[costHead].name)" class="glyphicon glyphicon-trash"></span></td>
         </tr>
 
 
