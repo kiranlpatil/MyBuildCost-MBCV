@@ -38,6 +38,11 @@ export class CostHeadComponent implements OnInit {
   workItemName: string;
   workItem:any;
   rateItemsTotal:number;
+  quantityTotal:number = 0;
+  quanitytNumbersTotal:number = 0;
+  lengthTotal:number = 0;
+  breadthTotal:number = 0;
+  heightTotal:number = 0;
 
 
   constructor(private costHeadService : CostHeadService, private activatedRoute : ActivatedRoute, private messageService: MessageService) {
@@ -62,6 +67,7 @@ export class CostHeadComponent implements OnInit {
       this.toggleRate=false;
     }
     this.quantityItemsArray = quantityItems;
+    this.getQuantityTotal(this.quantityItemsArray);
     this.workItem=workItem;
   }
 
@@ -178,24 +184,25 @@ export class CostHeadComponent implements OnInit {
 
   addItem() {
     console.log('addItems()');
-    let body = {
-      'item': 'Wall 8',
-      'remarks': 'internal walls',
-      'nos': 2,
-      'length': 'sqft',
-      'breadth': 'null',
+    let quantity = {
+      'item': '',
+      'remarks': '',
+      'nos': 0,
+      'length': 0,
+      'breadth': '-',
       'height': 0,
-      'quantity': 100,
+      'quantity': '',
       'unit': 'sqft'
 
     };
-    this.costHeadService.addCostHeadItems(this.costHead,this.workItem,body).subscribe(
+    this.quantityItemsArray.push(quantity);
+    /*this.costHeadService.addCostHeadItems(this.costHead,this.workItem,body).subscribe(
       costHeadItemAdd => this.onAddCostHeadItemsSuccess(costHeadItemAdd),
       error => this.onAddCostHeadItemsFail(error)
-    );
+    );*/
   }
 
-
+/*
   onAddCostHeadItemsSuccess(costHeadItemAdd : any) {
     this.quantityItemsArray=costHeadItemAdd.data.item;
     var message = new Message();
@@ -211,7 +218,20 @@ export class CostHeadComponent implements OnInit {
     message.isError = false;
     message.custom_message = Messages.MSG_FAIL_ADD_ITEM + error.err_msg;
     this.messageService.message(message);
-  }
+  }*/
+
+ getQuantityTotal(quantityItems : any) {
+   for(let quantity in quantityItems) {
+     this.quanitytNumbersTotal = this.quanitytNumbersTotal + quantityItems[quantity].nos;
+     this.lengthTotal = this.lengthTotal + quantityItems[quantity].length;
+     this.breadthTotal = this.breadthTotal + quantityItems[quantity].breadth;
+     this.heightTotal = this.heightTotal + quantityItems[quantity].height;
+     this.quantityTotal = this.quantityTotal + quantityItems[quantity].quantity;
+     //quantityItems[quantity].length+=quantityItems[quantity].length;
+     //console.log('length : '+quantityItems[quantity].length);
+   }
+   console.log('Nos : '+this.quanitytNumbersTotal);
+ }
 
   updateCostHeadWorkItem() {
     console.log('updateWorkItem()');

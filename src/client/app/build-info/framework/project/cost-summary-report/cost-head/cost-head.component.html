@@ -52,29 +52,49 @@
               <tbody>
               <tr *ngFor="let quantityItem of quantityItemsArray">
                 <td>
-                  <input [(ngModel)]="quantityItem.item" id="costitem" class="form-control clear"/>
+                  <input [(ngModel)]="quantityItem.item" id="costitem" class="form-control clear" required/>
                 </td>
                 <td>
-                  <input [(ngModel)]="quantityItem.nos" id="numbers" class="form-control clear"/>
+                  <input [(ngModel)]="quantityItem.nos" id="numbers" class="form-control clear" required/>
                 </td>
                 <td>
-                  <input [(ngModel)]="quantityItem.length" id="length" class="form-control clear"/>
+                  <input [(ngModel)]="quantityItem.length" id="length" class="form-control clear" required/>
                 </td>
                 <td>
-                  <input [(ngModel)]="quantityItem.breadth" id="breadth" class="form-control clear"/>
+                  <input [(ngModel)]="quantityItem.breadth" id="breadth" class="form-control clear" required/>
                 </td>
                 <td>
-                  <input [(ngModel)]="quantityItem.height" id="height" class="form-control clear"/>
+                  <input [(ngModel)]="quantityItem.height" id="height" class="form-control clear" required/>
                 </td>
                 <td>
-                  <input [(ngModel)]="quantityItem.quantity" id="qty" class="form-control clear"/>
+                  <input [(ngModel)]="quantityItem.quantity" id="qty" class="form-control clear" required/>
                 </td>
                 <td>
-                  <input [(ngModel)]="quantityItem.unit" id="unit" class="form-control clear"/>
+                  <input [(ngModel)]="quantityItem.unit" id="unit" class="form-control clear" required/>
                 </td>
                 <td><span (click)="deleteItem(quantityItem.item)"  class="glyphicon glyphicon-trash"></span></td>
               </tr>
+              <tr>
+                <td>
+                  <label>Total</label>
+                </td>
+                <td>{{quanitytNumbersTotal}}
+                </td>
+                <td>{{lengthTotal}}
+                </td>
+                <td>{{breadthTotal}}
+                </td>
+                <td>{{heightTotal}}
+                </td>
+                <td>{{quantityTotal}}
+                </td>
+                <td>
+                    sqft
+                </td>
+                <td>
 
+                </td>
+              </tr>
               <tr>
                 <td>
                     <button type="button" class="btn btn-primary" (click)="addItem()">+ Add Item</button>
