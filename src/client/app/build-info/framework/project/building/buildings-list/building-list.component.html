@@ -7,7 +7,7 @@
         <h5>Buildings List</h5>
         <li *ngFor="let building of buildings">
           <button type="button" class="btn btn-primary">{{building.name}}</button>
-          <span (click)="deleteBuilding(building._id)" class="glyphicon glyphicon-trash"></span>
+          <span data-toggle="modal" data-target="#delete" (click)="deletefun(building._id)" class="glyphicon glyphicon-trash"></span>
           <span (click)="getBuildingDetails(building._id)" class="glyphicon glyphicon-pencil"></span>
           <span data-toggle="modal" data-target="#myModal"(click)="cloneThisBuilding(building._id)" class="glyphicon glyphicon-duplicate"></span>
           <br/><br/>
@@ -87,6 +87,25 @@
       </div>
     </div>
   </div>
+    <div class="modal fade" id="delete" role="dialog">
+      <div class="modal-dialog modal-sm">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h2 class="modal-title">Delete</h2>
+          </div>
+          <div class="modal-body">
+           <p><small>You Want to Delete a Building</small></p>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-primary" type="button"  (click)="deleteBuilding()" data-dismiss="modal">Yes</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
   <tpl-footer></tpl-footer>
 </section>

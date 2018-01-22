@@ -20,6 +20,7 @@ export class BuildingListComponent implements OnInit {
 
   buildings : any;
   projectId : any;
+  currentbuildingId: any;
   cloneCostHead: any;
   cloneBuildingForm: FormGroup;
   model: Building = new Building();
@@ -86,9 +87,12 @@ export class BuildingListComponent implements OnInit {
   addNewBuilding() {
     this._router.navigate([NavigationRoutes.APP_CREATE_BUILDING]);
   }
-
-  deleteBuilding(buildingId : any) {
-    this.listBuildingService.deleteBuildingById(buildingId).subscribe(
+  deletefun(buildingId : any) {
+    this.currentbuildingId = buildingId;
+    console.log('Building Id:'+buildingId);
+  }
+  deleteBuilding() {
+    this.listBuildingService.deleteBuildingById(this.currentbuildingId).subscribe(
       project => this.onDeleteBuildingSuccess(project),
       error => this.onDeleteBuildingFail(error)
     );
