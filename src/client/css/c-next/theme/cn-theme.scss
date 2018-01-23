@@ -19,7 +19,7 @@
 
   // Heading
   h3 {
-    color: $cn-theme-color;
+    //color: $cn-theme-color;
   }
 
   // Buttons
@@ -130,6 +130,7 @@
 
       h5 {
         color: $cn-theme-color;
+        padding: 5px 5px;
       }
 
       .read {
@@ -155,6 +156,7 @@
   .main-form-wrapper {
     h5 {
       background: $cn-theme-color;
+      padding: 5px 5px;
     }
   }
 
@@ -162,6 +164,7 @@
     .modal-body {
       h5 {
         background: $cn-theme-color;
+        padding: 5px 5px;
       }
     }
   }

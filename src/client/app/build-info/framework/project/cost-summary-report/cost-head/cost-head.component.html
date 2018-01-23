@@ -32,7 +32,7 @@
             <input [(ngModel)]="costHeadDetails[costHead].rate.total" id="rate" class="form-control clear"/><br/>
             <button type="button" id="getRate{{i}}" class="btn btn-primary accordion-toggle" data-toggle="collapse" data-target="#cores" (click)="getRate(i, costHeadDetails[costHead])">Get Rate</button>
           </td>
-          <td>{{costHeadDetails[costHead].amount}} <span (click)="deleteWorkitem(costHeadDetails[costHead].name)" class="glyphicon glyphicon-trash"></span></td>
+          <td>{{costHeadDetails[costHead].quantity.total*costHeadDetails[costHead].rate.total}} <span (click)="deleteWorkitem(costHeadDetails[costHead].name)" class="glyphicon glyphicon-trash"></span></td>
         </tr>
 
 
@@ -67,14 +67,34 @@
                   <input [(ngModel)]="quantityItem.height" id="height" class="form-control clear"/>
                 </td>
                 <td>
-                  <input [(ngModel)]="quantityItem.quantity" id="qty" class="form-control clear"/>
+                  <input [(ngModel)]="quantityItem.length * quantityItem.breadth * quantityItem.height" id="qty" class="form-control clear"/>
                 </td>
                 <td>
                   <input [(ngModel)]="quantityItem.unit" id="unit" class="form-control clear"/>
                 </td>
                 <td><span (click)="deleteItem(quantityItem.item)"  class="glyphicon glyphicon-trash"></span></td>
               </tr>
+              <tr>
+                <td>
+                  <label>Total</label>
+                </td>
+                <td>{{quanitytNumbersTotal}}
+                </td>
+                <td>{{lengthTotal}}
+                </td>
+                <td>{{breadthTotal}}
+                </td>
+                <td>{{heightTotal}}
+                </td>
+                <td>{{quantityTotal}}
+                </td>
+                <td>
+                    sqft
+                </td>
+                <td>
 
+                </td>
+              </tr>
               <tr>
                 <td>
                     <button type="button" class="btn btn-primary" (click)="addItem()">+ Add Item</button>
@@ -97,6 +117,7 @@
               <table class="table">
                 <thead>
                 <th>Description</th>
+                <th>Remarks</th>
                 <th>Qty.</th>
                 <th>Unit</th>
                 <th>Rate/Unit</th>
@@ -120,7 +141,7 @@
                     <input [(ngModel)]="rateItem.rate" id="itemamount" class="form-control clear"/>
                   </td>
                   <td>
-                    <input [(ngModel)]="rateItem.totalAmount" id="itemamount" class="form-control clear"/>
+                    <input [(ngModel)]="rateItem.totalAmount" id="totalAmount" class="form-control clear"/>
                   </td>
                 </tr>
 

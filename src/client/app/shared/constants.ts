@@ -1,8 +1,8 @@
 export class AppSettings {
-  // public static IP = 'http://localhost:8080';
-  public static IP = 'http://35.154.0.247'; // build info staging
-  // public static HOST_NAME = 'localhost:8080';
-  public static HOST_NAME = '35.154.0.247';
+  public static IP = 'http://localhost:8080';
+  //public static IP = 'http://52.66.120.228'; // build info staging
+  public static HOST_NAME = 'localhost:8080';
+  //public static HOST_NAME = '52.66.120.228';
 
   public static get API_ENDPOINT(): string {
     return this.IP + '/api/';
@@ -337,6 +337,7 @@ export class API {
   public static PROJECT_BUILDINGS = 'user/all/building';
   public static ADD_BUILDING = 'building';
   public static VIEW_BUILDING = 'building';
+  public static CLONE = 'clone';
 
 
   public static THUMBRULE_RULE_RATE='report/thumbRuleRate';
@@ -355,7 +356,7 @@ export class ImagePath {
   public static FAV_ICON = './assets/framework/images/logo/favicon.ico';
   public static BODY_BACKGROUND = './assets/framework/images/page_background/page-bg.png';
   public static MY_WHITE_LOGO = './assets/c-next/header/job-mosis-logo.png';
-  public static MOBILE_WHITE_LOGO = './assets/c-next/header/placeholder_image.jpg';
+  public static MOBILE_WHITE_LOGO = './assets/c-next/header/buildInfo-logo.jpg';
   public static FACEBOOK_ICON = './assets/framework/images/footer/fb.svg';
   public static GOOGLE_ICON = './assets/framework/images/footer/google-plus.svg';
   public static LINKEDIN_ICON = './assets/framework/images/footer/linked-in.svg';

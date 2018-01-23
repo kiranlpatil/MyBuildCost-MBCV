@@ -6,10 +6,14 @@ import ProjectAsset = require('../../framework/shared/projectasset');
 import User = require('../../framework/dataaccess/mongoose/user');
 import Project = require('../dataaccess/mongoose/Project');
 import Building = require('../dataaccess/mongoose/Building');
+import BuildingModel = require('../dataaccess/model/Building');
 import AuthInterceptor = require('../../framework/interceptor/auth.interceptor');
 import CostControllException = require('../exception/CostControllException');
 import Quantity = require('../dataaccess/model/Quantity');
 import Rate = require('../dataaccess/model/Rate');
+import ClonedCostHead = require('../dataaccess/model/ClonedCostHead');
+import ClonedWorkItem = require('../dataaccess/model/ClonedWorkItem');
+import CostHead = require('../dataaccess/model/CostHead');
 
 class ProjectService {
   APP_NAME: string;
@@ -118,12 +122,130 @@ class ProjectService {
     });
   }
 
+  cloneBuildingDetails( buildingId, buildingDetail, user, callback:(error: any, result: any)=> void) {
+    let query = { _id : buildingId };
+    //delete buildingDetail._id;
+    this.buildingRepository.findById(buildingId, (error, result) => {
+      if (error) {
+        callback(error, null);
+      } else {
+        let clonedCostHeadDetails :Array<CostHead>=[];
+        let costHeads =buildingDetail.costHead;
+        let resultCostHeads = result.costHead;
+        for(let costHead of costHeads) {
+          for(let resultCostHead of resultCostHeads) {
+            if(costHead.name === resultCostHead.name) {
+              let clonedCostHead = new CostHead;
+              clonedCostHead.name = resultCostHead.name;
+              clonedCostHead.rateAnalysisId = resultCostHead.rateAnalysisId;
+              clonedCostHead.active = costHead.active;
+              clonedCostHead.thumbRuleRate = resultCostHead.thumbRuleRate;
+
+              if(costHead.active) {
+                let workItemList = costHead.workitem;
+                let resultWorkItemList = resultCostHead.workitem;
+
+                for(let workItem of workItemList) {
+                  for(let resultWorkItem in resultWorkItemList) {
+                    if(workItem.name === resultWorkItem) {
+                      if(!workItem.active) {
+                        delete resultWorkItemList[resultWorkItem];
+                      }
+                    }
+                  }
+                }
+                clonedCostHead.workitem = resultWorkItemList;
+              } else {
+                clonedCostHead.workitem = resultCostHead.workitem;
+              }
+              clonedCostHeadDetails.push(clonedCostHead);
+            }
+          }
+        }
+
+        let updateBuildingCostHeads = {'costHead' : clonedCostHeadDetails};
+        this.buildingRepository.findOneAndUpdate(query, updateBuildingCostHeads,{new: true}, (error, result) => {
+          if (error) {
+            callback(error, null);
+          } else {
+            callback(null, {data: result, access_token: this.authInterceptor.issueTokenWithUid(user)});
+          }
+        });
+      }
+    });
+  }
+
   getBuilding(projectId : string, buildingId : string, user: User, callback:(error: any, result: any)=> void) {
     this.buildingRepository.findById(buildingId, (error, result) => {
       if (error) {
         callback(error, null);
       } else {
         callback(null, {data: result, access_token: this.authInterceptor.issueTokenWithUid(user)});
+      }
+    });
+  }
+
+  getInActiveCostHead(projectId: string, buildingId: string, user: User, callback:(error: any, result: any)=> void) {
+    this.buildingRepository.findById(buildingId, (error, result) => {
+      if (error) {
+        callback(error, null);
+      } else {
+        let response = result.costHead;
+        let inactiveCostHead=[];
+        for(let costHeadItem of response) {
+          if(!costHeadItem.active) {
+                inactiveCostHead.push(costHeadItem);
+          }
+        }
+        callback(null,{data:inactiveCostHead, access_token: this.authInterceptor.issueTokenWithUid(user)});
+          }
+      });
+  }
+
+  getClonedBuilding(projectId : string, buildingId : string, user: User, callback:(error: any, result: any)=> void) {
+    this.buildingRepository.findById(buildingId, (error, result) => {
+      if (error) {
+        callback(error, null);
+      } else {
+        let clonedBuilding = result.costHead;
+        let building = new BuildingModel();
+        building.name = result.name;
+        building.totalSlabArea = result.totalSlabArea;
+        building.totalCarperAreaOfUnit = result.totalCarperAreaOfUnit;
+        building.totalSaleableAreaOfUnit = result.totalSaleableAreaOfUnit;
+        building.totalParkingAreaOfUnit = result.totalParkingAreaOfUnit;
+        building.noOfOneBHK = result.noOfOneBHK;
+        building.noOfTwoBHK = result.noOfTwoBHK;
+        building.noOfThreeBHK = result.noOfThreeBHK;
+        building.noOfSlab = result.noOfSlab;
+        building.noOfLift = result.noOfLift;
+
+        let clonedCostHeadArray : Array<ClonedCostHead> = [];
+
+        for(let costHeadIndex = 0; costHeadIndex < clonedBuilding.length; costHeadIndex++) {
+
+          let clonedCostHead = new ClonedCostHead;
+          clonedCostHead.name = clonedBuilding[costHeadIndex].name;
+          clonedCostHead.rateAnalysisId = clonedBuilding[costHeadIndex].rateAnalysisId;
+          clonedCostHead.active = clonedBuilding[costHeadIndex].active;
+
+          let clonedWorkItemArray : Array<ClonedWorkItem> = [];
+          let workItemsArray = clonedBuilding[costHeadIndex].workitem;
+
+          for(let key in  workItemsArray) {
+            let clonedWorkItem = new ClonedWorkItem();
+            clonedWorkItem.name = workItemsArray[key].name;
+            clonedWorkItem.rateAnalysisId = workItemsArray[key].rateAnalysisId;
+            clonedWorkItem.quantity = workItemsArray[key].quantity;
+            clonedWorkItem.rate = workItemsArray[key].rate;
+            clonedWorkItem.active = true;
+            clonedWorkItemArray.push(clonedWorkItem);
+          }
+          clonedCostHead.workitem = clonedWorkItemArray;
+          clonedCostHeadArray.push(clonedCostHead);
+        }
+        building.costHead = clonedCostHeadArray;
+        callback(null, {data: building, access_token: this.authInterceptor.issueTokenWithUid(user)});
       }
     });
   }

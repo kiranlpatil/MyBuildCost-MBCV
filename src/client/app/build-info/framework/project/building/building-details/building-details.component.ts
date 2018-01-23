@@ -60,7 +60,7 @@ export class BuildingDetailsComponent implements OnInit {
 
   onGetBuildingSuccess(building : any) {
     console.log('Building Data: '+JSON.stringify(building.data));
-    let buildingDetails=building.data[0];
+    let buildingDetails=building.data;
     this.model.name=buildingDetails.name;
     this.model.totalSlabArea=buildingDetails.totalSlabArea;
     this.model.totalCarperAreaOfUnit=buildingDetails.totalCarperAreaOfUnit;

@@ -24,7 +24,8 @@ export class CostSummaryService extends BaseService {
   getBuildingDetails(projectId: string) {
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({headers: headers});
-    var url = API.VIEW_PROJECT + '/'+ projectId +'/'+ API.ADD_BUILDING + '/'+SessionStorageService.getSessionValue(SessionStorage.CURRENT_BUILDING);
+    var url = API.VIEW_PROJECT + '/'+ projectId +'/'+ API.ADD_BUILDING +
+      '/'+SessionStorageService.getSessionValue(SessionStorage.CURRENT_BUILDING);
     return this.http.get(url, options)
       .map(this.extractData)
       .catch(this.handleError);
@@ -67,4 +68,26 @@ export class CostSummaryService extends BaseService {
       .map(this.extractData)
       .catch(this.handleError);
   }
+
+
+  getCosthead(projectId:any,buildingID:any) {
+    let headers = new Headers({'Content-Type': 'application/json'});
+    let options = new RequestOptions({headers: headers});
+    var url = API.VIEW_PROJECT + '/'+ projectId +'/'+ API.VIEW_BUILDING + '/' +buildingID + '/costhead';
+    console.log('url getcosthead() ->'+url);
+    return this.http.get(url, options)
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
+
+  addCosthead(selectedinActiveCostHead:any,projectId:any,buildingID:any) {
+    let headers = new Headers({'Content-Type': 'application/json'});
+    let options = new RequestOptions({headers: headers});
+    var url = API.VIEW_PROJECT + '/'+ projectId +'/'+ API.VIEW_BUILDING + '/' +buildingID + '/costhead/' +selectedinActiveCostHead;
+    console.log('url addCosthead() ->'+url);
+    return this.http.put(url,options)
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
+
   }

@@ -36,6 +36,12 @@ class ProjectRoutes {
       controller.updateBuilding, this._responseInterceptor.exit);
     router.get('/:id/building/:buildingid', this.authInterceptor.requiresAuth, this._requestInterceptor.intercept,
       controller.getBuilding, this._responseInterceptor.exit);
+    router.get('/:id/building/:buildingid/costhead', this.authInterceptor.requiresAuth, this._requestInterceptor.intercept,
+      controller.getInActiveCostHead, this._responseInterceptor.exit);
+    router.get('/:id/building/:buildingid/clone', this.authInterceptor.requiresAuth, this._requestInterceptor.intercept,
+      controller.getBuildingDetailsForClone, this._responseInterceptor.exit);
+    router.put('/:id/building/:buildingid/clone',this.authInterceptor.requiresAuth, this._requestInterceptor.intercept,
+      controller.cloneBuilding, this._responseInterceptor.exit);
     router.delete('/:id/building/:buildingid', this.authInterceptor.requiresAuth, this._requestInterceptor.intercept,
       controller.deleteBuilding, this._responseInterceptor.exit);
     router.get('/:id/building/:buildingid/quantity/costhead/:costhead/workitem/:workitem', this.authInterceptor.requiresAuth,

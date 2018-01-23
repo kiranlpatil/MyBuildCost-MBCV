@@ -34,7 +34,7 @@ export class BuildingListService extends BaseService {
   updateBuildingByCostHead(cloneCostHead: any, clonedBuildingId:string) {
     let updateData = {'costHead' : cloneCostHead};
     var url =  API.VIEW_PROJECT + '/' + SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT)
-      + '/'+ API.VIEW_BUILDING + '/'+ clonedBuildingId;
+      + '/'+ API.VIEW_BUILDING + '/'+ clonedBuildingId + '/clone';
     return this.http.put(url, updateData)
       .map(this.extractData)
       .catch(this.handleError);

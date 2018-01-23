@@ -59,7 +59,7 @@ export class CostHeadService extends BaseService {
       .catch(this.handleError);
   }
 
-  addCostHeadItems(costHeadName:any,workItem:any,body:any){
+  addCostHeadItems(costHeadName:any,workItem:any,body:any) {
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({headers: headers});
     var url = API.VIEW_PROJECT + '/' + SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT)+
@@ -71,7 +71,7 @@ export class CostHeadService extends BaseService {
       .catch(this.handleError);
   }
 
-  saveCostHeadItems(costHeadName:any,workItem:any,quantityItemsArray:any){
+  saveCostHeadItems(costHeadName:any,workItem:any,quantityItemsArray:any) {
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({headers: headers});
     var body=quantityItemsArray;
