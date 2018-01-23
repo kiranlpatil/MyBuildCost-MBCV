@@ -213,6 +213,7 @@ export class CostSummaryComponent implements OnInit {
 
   onAddCostheadSuccess(inActiveCostHeads : any) {
     console.log('onAddCostheadSuccess ->'+inActiveCostHeads);
+    this.onChangeCostingIn(this.defaultCostIn);
   }
 
   onAddCostheadFail(error : any) {

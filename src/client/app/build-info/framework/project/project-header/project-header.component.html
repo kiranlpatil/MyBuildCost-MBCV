@@ -2,16 +2,16 @@
     <div class="container-fluid" style="background: #9ca4ab">
       <ul>
         <li>
-          <a type="button" class="btn btn-primary btn_dashboard" [routerLinkActive]="['active']" [routerLink]="['/project/cost-summary', projectId]" cost-summary>Cost Summary</a>
+          <a type="button" class="btn btn_dashboard" [routerLinkActive]="['active']" [routerLink]="['/project/cost-summary', projectId]" cost-summary>Cost Summary</a>
         </li>
         <li>
-          <a type="button" class="btn btn-primary btn_dashboard" [routerLinkActive]="['active']">Material Takeoff</a><!--[routerLink]='["/project/material-takeoff"]'-->
+          <a type="button" class="btn btn_dashboard" [routerLinkActive]="['active']" [routerLink]='["/project/material-takeoff"]'>Material Takeoff</a>
         </li>
         <li>
-            <a type="button" class="btn btn-primary btn_dashboard" [routerLinkActive]="['active']" [routerLink]="['/building/list', projectId]">Building Master</a>
+            <a type="button" class="btn btn_dashboard" [routerLinkActive]="['active']" [routerLink]="['/building/list', projectId]">Building Master</a>
         </li>
         <li>
-          <a type="button" class="btn btn-primary btn_dashboard" [routerLinkActive]="['active']"  [routerLink]="['/project/details', projectId]" >Project Master</a>
+          <a type="button" class="btn btn_dashboard" [routerLinkActive]="['active']"  [routerLink]="['/project/details', projectId]" >Project Master</a>
         </li>
       </ul>
     </div>
