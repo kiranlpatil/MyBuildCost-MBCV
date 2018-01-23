@@ -26,6 +26,10 @@ export class CostSummaryComponent implements OnInit {
   estimatedCost : any;
   costHead: string;
   costHeadDetails :any;
+  buildingIndex:number;
+  showCostHeadList:boolean=false;
+
+ public inActiveCostHeadArray:any;
 
   public costIn: any[] = [
     { 'costInId': 'Rs/Sqft'},
@@ -34,11 +38,13 @@ export class CostSummaryComponent implements OnInit {
 
   public costPer: any[] = [
     { 'costPerId': 'SlabArea'},
-    { 'costPerId': 'SalebleArea'}
+    { 'costPerId': 'SalebleArea'},
+    { 'costPerId': 'CarpetArea'},
   ];
 
   defaultCostIn:string='Rs/Sqft';
   defaultCostPer:string='SlabArea';
+
 
 
 
@@ -51,6 +57,7 @@ export class CostSummaryComponent implements OnInit {
     this.estimatedCost = 1650000;
     this.activatedRoute.params.subscribe(params => {
       this.projectId = params['projectId'];
+      console.log(' this.projectId ->'+ this.projectId);
       if(this.projectId) {
         this.onChangeCostingIn(this.defaultCostIn);
       }
@@ -61,8 +68,24 @@ export class CostSummaryComponent implements OnInit {
     console.log('Insdide');
   }
 
-  addCostHead() {
+  showCostHead(buildingId:any,i:number) {
     console.log('Adding Costhead');
+    this.buildingIndex=i;
+    this.buildingId=buildingId;
+    this.costSummaryService.getCosthead(this.projectId,this.buildingId).subscribe(
+      inActiveCostHeads => this.onGetCostheadSuccess(inActiveCostHeads),
+      error => this.onGetCostheadFail(error)
+    );
+  }
+
+
+  onGetCostheadSuccess(inActiveCostHeads : any) {
+      this.inActiveCostHeadArray=inActiveCostHeads.data;
+      this.showCostHeadList=true;
+  }
+
+  onGetCostheadFail(error : any) {
+    console.log(error);
   }
 
   getAmount(buildingId:string,costHead:any,buildingName:string) {
@@ -176,6 +199,24 @@ export class CostSummaryComponent implements OnInit {
 
   onDeleteQuantityFail(error: any) {
     console.log(error);
+  }
+
+  onSelectedinActiveCostHead(selectedinActiveCostHead:any) {
+    console.log('Selected Item '+selectedinActiveCostHead);
+    this.showCostHeadList=false;
+    this.costSummaryService.addCosthead(selectedinActiveCostHead,this.projectId,this.buildingId).subscribe(
+      inActiveCostHeads => this.onAddCostheadSuccess(inActiveCostHeads),
+      error => this.onAddCostheadFail(error)
+    );
+  }
+
+
+  onAddCostheadSuccess(inActiveCostHeads : any) {
+    console.log('onAddCostheadSuccess ->'+inActiveCostHeads);
+  }
+
+  onAddCostheadFail(error : any) {
+    console.log('onAddCostheadSuccess()'+error);
   }
 
 }

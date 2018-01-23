@@ -32,7 +32,7 @@
             <input [(ngModel)]="costHeadDetails[costHead].rate.total" id="rate" class="form-control clear"/><br/>
             <button type="button" id="getRate{{i}}" class="btn btn-primary accordion-toggle" data-toggle="collapse" data-target="#cores" (click)="getRate(i, costHeadDetails[costHead])">Get Rate</button>
           </td>
-          <td>{{costHeadDetails[costHead].amount}} <span (click)="deleteWorkitem(costHeadDetails[costHead].name)" class="glyphicon glyphicon-trash"></span></td>
+          <td>{{costHeadDetails[costHead].quantity.total*costHeadDetails[costHead].rate.total}} <span (click)="deleteWorkitem(costHeadDetails[costHead].name)" class="glyphicon glyphicon-trash"></span></td>
         </tr>
 
 
@@ -52,25 +52,25 @@
               <tbody>
               <tr *ngFor="let quantityItem of quantityItemsArray">
                 <td>
-                  <input [(ngModel)]="quantityItem.item" id="costitem" class="form-control clear" required/>
+                  <input [(ngModel)]="quantityItem.item" id="costitem" class="form-control clear"/>
                 </td>
                 <td>
-                  <input [(ngModel)]="quantityItem.nos" id="numbers" class="form-control clear" required/>
+                  <input [(ngModel)]="quantityItem.nos" id="numbers" class="form-control clear"/>
                 </td>
                 <td>
-                  <input [(ngModel)]="quantityItem.length" id="length" class="form-control clear" required/>
+                  <input [(ngModel)]="quantityItem.length" id="length" class="form-control clear"/>
                 </td>
                 <td>
-                  <input [(ngModel)]="quantityItem.breadth" id="breadth" class="form-control clear" required/>
+                  <input [(ngModel)]="quantityItem.breadth" id="breadth" class="form-control clear"/>
                 </td>
                 <td>
-                  <input [(ngModel)]="quantityItem.height" id="height" class="form-control clear" required/>
+                  <input [(ngModel)]="quantityItem.height" id="height" class="form-control clear"/>
                 </td>
                 <td>
-                  <input [(ngModel)]="quantityItem.quantity" id="qty" class="form-control clear" required/>
+                  <input [(ngModel)]="quantityItem.length * quantityItem.breadth * quantityItem.height" id="qty" class="form-control clear"/>
                 </td>
                 <td>
-                  <input [(ngModel)]="quantityItem.unit" id="unit" class="form-control clear" required/>
+                  <input [(ngModel)]="quantityItem.unit" id="unit" class="form-control clear"/>
                 </td>
                 <td><span (click)="deleteItem(quantityItem.item)"  class="glyphicon glyphicon-trash"></span></td>
               </tr>

@@ -1,17 +1,17 @@
-<header class="page-header" id="candidate-header" style="margin-top: 50px">
-    <div class="container-fluid">
+<header class="page-header" id="candidate-header" style="margin-top: 50px;background: #9ca4ab">
+    <div class="container-fluid" style="background: #9ca4ab">
       <ul>
         <li>
-          <button type="button" class="btn btn-primary" (click)="navigateToWithId('/project/cost-summary')" cost-summary>Cost Summary</button>
+          <a type="button" class="btn btn-primary btn_dashboard" [routerLinkActive]="['active']" [routerLink]="['/project/cost-summary', projectId]" cost-summary>Cost Summary</a>
         </li>
         <li>
-          <button type="button" class="btn btn-primary">Material Takeoff</button>
+          <a type="button" class="btn btn-primary btn_dashboard" [routerLinkActive]="['active']" [routerLink]='["/project/material-takeoff"]'>Material Takeoff</a>
         </li>
         <li>
-            <button type="button" class="btn btn-primary" (click)="navigateToWithId('/building/list')">Building Master</button>
+            <a type="button" class="btn btn-primary btn_dashboard" [routerLinkActive]="['active']" [routerLink]="['/building/list', projectId]">Building Master</a>
         </li>
         <li>
-          <button type="button" class="btn btn-primary" (click)="navigateToWithId('/project/details')">Project Master</button>
+          <a type="button" class="btn btn-primary btn_dashboard" [routerLinkActive]="['active']"  [routerLink]="['/project/details', projectId]" >Project Master</a>
         </li>
       </ul>
     </div>

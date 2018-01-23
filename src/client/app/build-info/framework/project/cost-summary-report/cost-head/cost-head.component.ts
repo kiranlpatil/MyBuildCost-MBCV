@@ -231,7 +231,7 @@ export class CostHeadComponent implements OnInit {
      //console.log('length : '+quantityItems[quantity].length);
    }
    console.log('Nos : '+this.quanitytNumbersTotal);
- }
+  }
 
   updateCostHeadWorkItem() {
     console.log('updateWorkItem()');
