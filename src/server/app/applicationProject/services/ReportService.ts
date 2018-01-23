@@ -91,8 +91,9 @@ class ReportService {
                     let workItem: WorkItem = costHeadArray[costHeadIndex].workitem;
                     for(let key in workItem) {
                       if(workItem[key].quantity.total !== null && workItem[key].rate.total !== null) {
-                        estimateReport.rate = workItem[key].rate.total + estimateReport.rate;
                         estimateReport.total = workItem[key].quantity.total + estimateReport.total;
+                        let estimatedRate = (estimateReport.total / buildingReport.area);
+                        estimateReport.rate = estimatedRate.toFixed(2);
                       }
                     }
                     estimatedReport.totalEstimatedCost = estimateReport.total + estimatedReport.totalEstimatedCost;
