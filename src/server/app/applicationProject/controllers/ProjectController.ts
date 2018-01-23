@@ -311,15 +311,16 @@ class ProjectController {
     }
   }
 
-  deleteBuildingCostHead(req: express.Request, res: express.Response, next: any): void {
+  updateBuildingCostHead(req: express.Request, res: express.Response, next: any): void {
     try {
       let projectService = new ProjectService();
       let user = req.user;
       let projectId =  req.params.id;
       let buildingId =  req.params.buildingid;
       let costHead =  req.params.costhead;
+      let costHeadValue =  req.params.value;
 
-      projectService.deleteBuildingCostHead(buildingId, costHead,  user,(error, result) => {
+      projectService.updateBuildingCostHead(buildingId, costHead, costHeadValue, user,(error, result) => {
         if(error) {
           next(error);
         } else {

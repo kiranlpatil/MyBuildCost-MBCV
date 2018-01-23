@@ -392,10 +392,11 @@ class ProjectService {
     });
   }
 
-  deleteBuildingCostHead( buildingId : string, costHead : string, user: User,
+  updateBuildingCostHead( buildingId : string, costHead : string, costHeadValue : string, user: User,
                             callback: (error: any, result: any) => void) {
     let query = {'_id' : buildingId, 'costHead.name' : costHead};
-    let newData = { $set : {'costHead.$.active' : false}};
+    let value = JSON.parse(costHeadValue);
+    let newData = { $set : {'costHead.$.active' : value}};
     this.buildingRepository.findOneAndUpdate(query, newData, {new: true},(err, response) => {
       if(err) {
         callback(err, null);

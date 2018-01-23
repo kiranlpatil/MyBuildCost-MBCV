@@ -62,7 +62,7 @@ export class CostSummaryService extends BaseService {
 
   deleteQuanatityDetails(buildingId:string, costHead:string) {
     let projectId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT);
-    var url = 'project/'+projectId+'/'+API.VIEW_BUILDING+'/'+buildingId+'/'+'costhead/'+costHead;
+    var url = 'project/'+projectId+'/'+API.VIEW_BUILDING+'/'+buildingId+'/'+'costhead/'+costHead+'/false';
     let body = {};
     return this.http.put(url, body)
       .map(this.extractData)
@@ -83,7 +83,7 @@ export class CostSummaryService extends BaseService {
   addCosthead(selectedinActiveCostHead:any,projectId:any,buildingID:any) {
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({headers: headers});
-    var url = API.VIEW_PROJECT + '/'+ projectId +'/'+ API.VIEW_BUILDING + '/' +buildingID + '/costhead/' +selectedinActiveCostHead;
+    var url = API.VIEW_PROJECT + '/'+ projectId +'/'+ API.VIEW_BUILDING + '/' +buildingID + '/costhead/' +selectedinActiveCostHead+'/true';
     console.log('url addCosthead() ->'+url);
     return this.http.put(url,options)
       .map(this.extractData)
