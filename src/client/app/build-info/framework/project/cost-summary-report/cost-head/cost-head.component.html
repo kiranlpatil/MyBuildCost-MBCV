@@ -10,11 +10,11 @@
           <th colspan="5"><h4 align="center"> {{buildingName}} : {{costHead}}</h4></th>
         </tr>
         <tr>
-          <th>Item</th>
-          <th>Qty.</th>
-          <th>Unit</th>
-          <th>Rate</th>
-          <th>Amount</th>
+          <th width="20%">Item</th>
+          <th width="20%">Qty.</th>
+          <th width="20%">Unit</th>
+          <th width="20%">Rate</th>
+          <th width="20%">Amount</th>
         </tr>
         </thead>
       </table>
@@ -22,21 +22,20 @@
       <table *ngFor="let costHead of costHeadDetails | keys; let i = index">
         <tbody>
         <tr>
-          <td>{{costHeadDetails[costHead].name}}</td>
-          <td>
-            <input  *ngIf="costHeadDetails[costHead].quantity.total != null"  [(ngModel)]="costHeadDetails[costHead].quantity.total" id="quantity"  size="10" class="form-control clear">
+          <td width="20%" align="left">{{costHeadDetails[costHead].name}}</td>
+          <td width="20%" align="left">
+            <input style="width: 78%;float: left;margin-right: 15px;" *ngIf="costHeadDetails[costHead].quantity.total != null"  [(ngModel)]="costHeadDetails[costHead].quantity.total" id="quantity"  size="10" class="form-control clear">
               <span *ngIf="costHeadDetails[costHead].quantity.total != null" class="glyphicon glyphicon-pencil" (click)="getQuantity(i, costHeadDetails[costHead].quantity.item,costHeadDetails[costHead].name)"></span>
               <button *ngIf="costHeadDetails[costHead].quantity.total == null" type="button"  id="getQuantity{{i}}"  class="btn btn-primary" (click)="getQuantity(i, costHeadDetails[costHead].quantity.item,costHeadDetails[costHead].name)">Get Quanity</button>
               </td>
-          <td>{{costHeadDetails[costHead].unit}}</td>
-          <td>
-            <input [(ngModel)]="costHeadDetails[costHead].rate.total" id="rate" size="10" class="form-control clear">
+          <td width="20%" align="left">{{costHeadDetails[costHead].unit}}</td>
+          <td width="20%" align="left">
+            <input style="width: 78%;float: left;margin-right: 15px;" [(ngModel)]="costHeadDetails[costHead].rate.total" id="rate" size="10" class="form-control clear">
             <span *ngIf="costHeadDetails[costHead].rate.total != 0" class="glyphicon glyphicon-pencil" (click)="getRate(i, costHeadDetails[costHead])"></span>
             <button *ngIf="costHeadDetails[costHead].rate.total == 0" type="button" id="getRate{{i}}" class="btn btn-primary accordion-toggle" data-toggle="collapse" data-target="#cores" (click)="getRate(i, costHeadDetails[costHead])">Get Rate</button>
           </td>
-          <td>{{costHeadDetails[costHead].quantity.total*costHeadDetails[costHead].rate.total}}<span data-toggle="modal" data-target="#deleteWorkItem" (click)=" deleteWorkitemfun(costHeadDetails[costHead].name)" class="glyphicon glyphicon-trash"></span></td>
+          <td width="20%" align="left">{{costHeadDetails[costHead].quantity.total*costHeadDetails[costHead].rate.total}}<span data-toggle="modal" data-target="#deleteWorkItem" (click)=" deleteWorkitemfun(costHeadDetails[costHead].name)" class="glyphicon glyphicon-trash"></span></td>
         </tr>
-
 
           <!--getQty Code-->
         <tr [ngStyle]="(toggleQty==true && compareIndex==i) ? {'display': 'table-row'}:{'display': 'none'}" style="display: none;">
@@ -102,7 +101,7 @@
                     <button type="button" class="btn btn-primary" (click)="addItem()">+ Add Item</button>
                 <td>
                 <td>
-                    <button type="button" class="btn btn-primary" (click)="updateCostHeadWorkItem()">Save</button>
+                    <button type="submit" class="btn btn-primary" (click)="updateCostHeadWorkItem()">Save</button>
                 </td>
               </tr>
               </tbody>
@@ -110,6 +109,7 @@
             <!--<bi-cost-head-get-quantity [quantityItems]="costHeadDetails[costHead].quantity.item" ></bi-cost-head-get-quantity>-->
           </td>
         </tr>
+
 
 
 
@@ -126,7 +126,7 @@
                 <th>Amount</th>
                 </thead>
                 <tbody>
-                <tr *ngFor="let rateItem of rateItemsArray">
+                <tr *ngFor="let rateItem of rateItemsArray;let k = index">
                   <td>
                     <input [(ngModel)]="rateItem.item" id="itemdescription" class="form-control clear"/>
                   </td>
@@ -134,16 +134,16 @@
                     <input [(ngModel)]="rateItem.remarks" id="itemquantity" class="form-control clear"/>
                   </td>
                   <td>
-                    <input [(ngModel)]="rateItem.quantity" id="itemunit" class="form-control clear"/>
+                    <input [(ngModel)]="rateItem.quantity" id="itemunit" class="form-control clear" (change)="changeQuantity(rateItem.quantity,k)"/>
                   </td>
                   <td>
                     <input [(ngModel)]="rateItem.unit" id="itemrate" class="form-control clear"/>
                   </td>
                   <td>
-                    <input [(ngModel)]="rateItem.rate" id="itemamount" class="form-control clear"/>
+                    <input [(ngModel)]="rateItem.rate" id="itemamount" class="form-control clear" (change)="changeRate(rateItem.rate,k)"/>
                   </td>
                   <td>
-                    <input [(ngModel)]="rateItem.totalAmount" id="totalAmount" class="form-control clear"/>
+                    <input [(ngModel)]="rateItem.quantity*rateItem.rate" id="totalAmount" class="form-control clear" readonly/>
                   </td>
                 </tr>
 
@@ -161,7 +161,10 @@
 
                   </td>
                   <td>
-                    534534
+                    {{totalRate}}
+                  </td>
+                  <td>
+                    {{totalAmount}}
                   </td>
                 </tr>
 

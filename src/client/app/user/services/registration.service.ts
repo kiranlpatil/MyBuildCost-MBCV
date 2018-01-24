@@ -31,13 +31,9 @@ constructor(private _router: Router, private themeChangeService: ThemeChangeServ
   }
 
   successRedirect(res: any) {
-
     SessionStorageService.setSessionValue(SessionStorage.IS_LOGGED_IN, 1);
     SessionStorageService.setSessionValue(SessionStorage.PROFILE_PICTURE, res.data.picture);
-
-    if (res.data.isCandidate === true) {
       this._router.navigate([NavigationRoutes.APP_DASHBOARD]);
-    }
   }
 
   loginFail(error: any) {
