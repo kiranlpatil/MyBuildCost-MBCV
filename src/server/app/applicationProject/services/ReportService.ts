@@ -59,10 +59,10 @@ class ReportService {
           buildingReport._id = buildings[index]._id;
           if (areaType === 'slabArea') {
             buildingReport.area = buildings[index].totalSlabArea;
-          }else {
+          } else {
             buildingReport.area = buildings[index].totalSaleableAreaOfUnit;
           }
-          let costHeadArray : CostHead = buildings[index].costHead;
+          let costHeadArray : any = buildings[index].costHead;
           for (let costHeadIndex = 0; costHeadIndex < costHeadArray.length; costHeadIndex++) {
 
               if(costHeadArray[costHeadIndex].active === true) {
@@ -88,7 +88,7 @@ class ReportService {
                         thumbRule.rate = costHeadArray[costHeadIndex].thumbRuleRate.saleableArea.sqmt;
                       }
                     }
-                    let workItem: WorkItem = costHeadArray[costHeadIndex].workitem;
+                    let workItem: any = costHeadArray[costHeadIndex].workitem;
                     for(let key in workItem) {
                       if(workItem[key].quantity.total !== null && workItem[key].rate.total !== null) {
                         estimateReport.total = workItem[key].quantity.total + estimateReport.total;

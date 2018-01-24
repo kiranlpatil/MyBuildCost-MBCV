@@ -24,15 +24,17 @@
         <tr>
           <td>{{costHeadDetails[costHead].name}}</td>
           <td>
-            <input [(ngModel)]="costHeadDetails[costHead].quantity.total" id="quantity" class="form-control clear"/><br/>
-            <button type="button" id="getQuantity{{i}}" class="btn btn-primary" (click)="getQuantity(i, costHeadDetails[costHead].quantity.item,costHeadDetails[costHead].name)">Get Quanity</button>
-          </td>
+            <input  *ngIf="costHeadDetails[costHead].quantity.total != null"  [(ngModel)]="costHeadDetails[costHead].quantity.total" id="quantity"  size="10" class="form-control clear">
+              <span *ngIf="costHeadDetails[costHead].quantity.total != null" class="glyphicon glyphicon-pencil" (click)="getQuantity(i, costHeadDetails[costHead].quantity.item,costHeadDetails[costHead].name)"></span>
+              <button *ngIf="costHeadDetails[costHead].quantity.total == null" type="button"  id="getQuantity{{i}}"  class="btn btn-primary" (click)="getQuantity(i, costHeadDetails[costHead].quantity.item,costHeadDetails[costHead].name)">Get Quanity</button>
+              </td>
           <td>{{costHeadDetails[costHead].unit}}</td>
           <td>
-            <input [(ngModel)]="costHeadDetails[costHead].rate.total" id="rate" class="form-control clear"/><br/>
-            <button type="button" id="getRate{{i}}" class="btn btn-primary accordion-toggle" data-toggle="collapse" data-target="#cores" (click)="getRate(i, costHeadDetails[costHead])">Get Rate</button>
+            <input [(ngModel)]="costHeadDetails[costHead].rate.total" id="rate" size="10" class="form-control clear">
+            <span *ngIf="costHeadDetails[costHead].rate.total != 0" class="glyphicon glyphicon-pencil" (click)="getRate(i, costHeadDetails[costHead])"></span>
+            <button *ngIf="costHeadDetails[costHead].rate.total == 0" type="button" id="getRate{{i}}" class="btn btn-primary accordion-toggle" data-toggle="collapse" data-target="#cores" (click)="getRate(i, costHeadDetails[costHead])">Get Rate</button>
           </td>
-          <td>{{costHeadDetails[costHead].quantity.total*costHeadDetails[costHead].rate.total}} <span (click)="deleteWorkitem(costHeadDetails[costHead].name)" class="glyphicon glyphicon-trash"></span></td>
+          <td>{{costHeadDetails[costHead].quantity.total*costHeadDetails[costHead].rate.total}}<span data-toggle="modal" data-target="#deleteWorkItem" (click)=" deleteWorkitemfun(costHeadDetails[costHead].name)" class="glyphicon glyphicon-trash"></span></td>
         </tr>
 
 
@@ -55,24 +57,24 @@
                   <input [(ngModel)]="quantityItem.item" id="costitem" class="form-control clear"/>
                 </td>
                 <td>
-                  <input [(ngModel)]="quantityItem.nos" id="numbers" class="form-control clear"/>
+                  <input type="number" [(ngModel)]="quantityItem.nos" id="numbers" class="form-control clear" required/>
                 </td>
                 <td>
-                  <input [(ngModel)]="quantityItem.length" id="length" class="form-control clear"/>
+                  <input type="number" [(ngModel)]="quantityItem.length" id="length" class="form-control clear" required/>
                 </td>
                 <td>
-                  <input [(ngModel)]="quantityItem.breadth" id="breadth" class="form-control clear"/>
+                  <input type="number" [(ngModel)]="quantityItem.breadth" id="breadth" class="form-control clear" required/>
                 </td>
                 <td>
-                  <input [(ngModel)]="quantityItem.height" id="height" class="form-control clear"/>
+                  <input type="number" [(ngModel)]="quantityItem.height" id="height" class="form-control clear" required/>
                 </td>
                 <td>
-                  <input [(ngModel)]="quantityItem.length * quantityItem.breadth * quantityItem.height" id="qty" class="form-control clear"/>
+                  <input type="number" [(ngModel)]="quantityItem.length * quantityItem.breadth * quantityItem.height" id="qty" class="form-control clear" required/>
                 </td>
                 <td>
-                  <input [(ngModel)]="quantityItem.unit" id="unit" class="form-control clear"/>
+                  <input [(ngModel)]="quantityItem.unit" id="unit" class="form-control clear" required/>
                 </td>
-                <td><span (click)="deleteItem(quantityItem.item)"  class="glyphicon glyphicon-trash"></span></td>
+                <td><span data-toggle="modal" data-target="#delete" (click)="deleteQuantityItemfun(quantityItem.item)" class="glyphicon glyphicon-trash"></span></td>
               </tr>
               <tr>
                 <td>
@@ -198,7 +200,42 @@
         </tr>
         </tfoot>
       </table>
-
+      <div class="modal fade" id="delete" role="dialog">
+        <div class="modal-dialog modal-sm">
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h2 class="modal-title">Delete</h2>
+            </div>
+            <div class="modal-body">
+              <p><small>You Want to Delete Quantity Item</small></p>
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-primary" type="button" (click)=" deleteQuantityItem()" data-dismiss="modal">Yes</button>
+              <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal fade" id="deleteWorkItem" role="dialog">
+        <div class="modal-dialog modal-sm">
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h2 class="modal-title">Delete</h2>
+            </div>
+            <div class="modal-body">
+              <p><small>You Want to Delete WorkItem</small></p>
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-primary" type="button" (click)="deleteWorkitem()" data-dismiss="modal">Yes</button>
+              <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
 
 
     </div>

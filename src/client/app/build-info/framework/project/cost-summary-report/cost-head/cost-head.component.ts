@@ -35,7 +35,8 @@ export class CostHeadComponent implements OnInit {
   buildingName: string;
   costHead:  string;
   costHeadDetails :any;
-  workItemName: string;
+  currentquantityItem: string
+  currentWorkItem: string;
   workItem:any;
   rateItemsTotal:number;
   quantityTotal:number = 0;
@@ -125,8 +126,11 @@ export class CostHeadComponent implements OnInit {
     console.log(error);
   }
 
-  deleteWorkitem(workItemName: string ) {
-    this.costHeadService.deleteWorkItemDetails(workItemName, this.costHead).subscribe(
+  deleteWorkitemfun(workItemName: string) {
+    this.currentWorkItem = workItemName;
+  }
+  deleteWorkitem( ) {
+    this.costHeadService.deleteWorkItemDetails(this.currentWorkItem, this.costHead).subscribe(
         costHeadDetail => this.onDeleteWorkItemSuccess(costHeadDetail),
         error => this.onDeleteWorkItemFail(error)
       );
@@ -161,9 +165,12 @@ export class CostHeadComponent implements OnInit {
   getHeadings() {
     return Headings;
   }
-
-  deleteItem(quantityItem:string) {
-    this.costHeadService.deleteCostHeadItems(this.costHead,this.workItem,quantityItem).subscribe(
+  deleteQuantityItemfun(quantityItem:string) {
+    this.currentquantityItem = quantityItem;
+    console.log(this.currentquantityItem);
+  }
+  deleteQuantityItem() {
+    this.costHeadService.deleteCostHeadItems(this.costHead,this.workItem, this.currentquantityItem).subscribe(
       costHeadItemDelete => this.onDeleteCostHeadItemsSuccess(costHeadItemDelete),
       error => this.onDeleteCostHeadItemsFail(error)
     );
@@ -226,10 +233,10 @@ export class CostHeadComponent implements OnInit {
      this.lengthTotal = this.lengthTotal + quantityItems[quantity].length;
      this.breadthTotal = this.breadthTotal + quantityItems[quantity].breadth;
      this.heightTotal = this.heightTotal + quantityItems[quantity].height;
-     this.quantityTotal = this.quantityTotal + quantityItems[quantity].quantity;
      //quantityItems[quantity].length+=quantityItems[quantity].length;
      //console.log('length : '+quantityItems[quantity].length);
    }
+   this.quantityTotal =this.lengthTotal * this.breadthTotal * this.heightTotal;
    console.log('Nos : '+this.quanitytNumbersTotal);
   }
 
