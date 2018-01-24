@@ -3,7 +3,8 @@ import WorkItem = require('./WorkItem');
 class CostHead {
   name: string;
   rateAnalysisId:number;
-  active: string;
+  active: boolean;
+  thumbRuleRate: any;
   workitem: Map<string, WorkItem>;
 }
 
