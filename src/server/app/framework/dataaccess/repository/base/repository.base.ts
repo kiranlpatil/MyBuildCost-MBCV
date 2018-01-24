@@ -22,11 +22,11 @@ class RepositoryBase<T extends mongoose.Document> implements IRead<T>, IWrite<T>
 
   }
 
-  retrieve (field, callback: (error: any, result: any) => void) {
+  retrieve (field:any, callback: (error: any, result: any) => void) {
     this._model.find(field, (error :Error, result: T) => {
       if(error) {
         callback(new CostControllException('retrieve Failed. '+error.message, error, 500), null);
-      }else {
+      } else {
         callback(null, result);
       }
     });
@@ -36,7 +36,7 @@ class RepositoryBase<T extends mongoose.Document> implements IRead<T>, IWrite<T>
     this._model.update({_id: _id}, item, (error :Error, result: T) => {
       if(error) {
         callback(new CostControllException('update Failed. '+error.message, error, 500), null);
-      }else {
+      } else {
         callback(null, result);
       }
     });
@@ -47,7 +47,7 @@ class RepositoryBase<T extends mongoose.Document> implements IRead<T>, IWrite<T>
     this._model.remove({_id: this.toObjectId(_id)}, (error :Error) => {
       if(error) {
         callback(new CostControllException('Delete Failed. '+error.message, error, 500), null);
-      }else {
+      } else {
         callback(null, 'Done.');
       }
     });
@@ -58,7 +58,7 @@ class RepositoryBase<T extends mongoose.Document> implements IRead<T>, IWrite<T>
     this._model.findById( _id, (error :Error, result: T) => {
       if(error) {
         callback(new CostControllException('findById Failed. '+error.message, error, 500), null);
-      }else {
+      } else {
         callback(null, result);
       }
     });
@@ -69,7 +69,7 @@ class RepositoryBase<T extends mongoose.Document> implements IRead<T>, IWrite<T>
     return mongoose.Types.ObjectId.createFromHexString(_id);
   }
 
-  findAndPopulate(searchField, populateField, callback:(err: any, result: any)=>void) {
+  findAndPopulate(searchField: any, populateField :any, callback:(err: any, result: any)=>void) {
     this._model.find(searchField).populate(populateField).exec((error :Error, result: T) => {
       if(error) {
         callback(new CostControllException('findAndPopulate Failed. '+error.message, error, 500), null);
@@ -79,7 +79,7 @@ class RepositoryBase<T extends mongoose.Document> implements IRead<T>, IWrite<T>
     });
   }
 
-  findOneAndUpdate(query, newData, options, callback:(err: any, result: any)=>void) {
+  findOneAndUpdate(query: any, newData: any, options: any, callback:(err: any, result: any)=>void) {
     this._model.findOneAndUpdate(query, newData, options, (error :Error, result: T) => {
       if(error) {
         callback(new CostControllException('findAndUpdate Failed. '+error.message, error, 500), null);
@@ -89,12 +89,12 @@ class RepositoryBase<T extends mongoose.Document> implements IRead<T>, IWrite<T>
     });
   }
 
-  insertMany(data, callback:(err: any, result : any)=> void) {
+  insertMany(data: any, callback:(err: any, result : any)=> void) {
     console.log('Inserting into base repo : '+JSON.stringify(data));
     this._model.insertMany(data, (error :Error, result: T) => {
       if(error) {
         callback(new CostControllException('InsertMany Failed. '+error.message, error, 500), null);
-      }else {
+      } else {
         callback(null, result);
       }
     });

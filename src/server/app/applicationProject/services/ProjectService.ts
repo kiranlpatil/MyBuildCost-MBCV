@@ -14,6 +14,8 @@ import Rate = require('../dataaccess/model/Rate');
 import ClonedCostHead = require('../dataaccess/model/ClonedCostHead');
 import ClonedWorkItem = require('../dataaccess/model/ClonedWorkItem');
 import CostHead = require('../dataaccess/model/CostHead');
+import WorkItem = require('../dataaccess/model/WorkItem');
+import Item = require('../dataaccess/model/Item');
 
 class ProjectService {
   APP_NAME: string;
@@ -110,7 +112,7 @@ class ProjectService {
     });
   }
 
-  updateBuilding( buildingId, buildingDetail, user, callback:(error: any, result: any)=> void) {
+  updateBuilding( buildingId:string, buildingDetail:any, user:User, callback:(error: any, result: any)=> void) {
     let query = { _id : buildingId };
     //delete buildingDetail._id;
     this.buildingRepository.findOneAndUpdate(query, buildingDetail,{new: true}, (error, result) => {
@@ -122,7 +124,7 @@ class ProjectService {
     });
   }
 
-  cloneBuildingDetails( buildingId, buildingDetail, user, callback:(error: any, result: any)=> void) {
+  cloneBuildingDetails( buildingId:string, buildingDetail:any, user:User, callback:(error: any, result: any)=> void) {
     let query = { _id : buildingId };
     //delete buildingDetail._id;
     this.buildingRepository.findById(buildingId, (error, result) => {
@@ -250,7 +252,7 @@ class ProjectService {
     });
   }
 
-  deleteBuilding(projectId, buildingId, user, callback:(error: any, result: any)=> void) {
+  deleteBuilding(projectId:string, buildingId:string, user:User, callback:(error: any, result: any)=> void) {
     let popBuildingId = buildingId;
     this.buildingRepository.delete(buildingId, (error, result)=> {
       if(error) {
@@ -269,7 +271,7 @@ class ProjectService {
     });
   }
 
-  getQuantity(projectId, buildingId, costhead, workitem, user, callback:(error: any, result: any)=> void) {
+  getQuantity(projectId:string, buildingId:string, costhead: CostHead, workitem, user, callback:(error: any, result: any)=> void) {
     this.buildingRepository.findById(buildingId, (error, building:Building) => {
       if (error) {
         callback(error, null);
@@ -290,7 +292,7 @@ class ProjectService {
     });
   }
 
-  getRate(projectId, buildingId, costhead, workitem, user, callback:(error: any, result: any)=> void) {
+  getRate(projectId:string, buildingId:string, costhead:CostHead, workitem:WorkItem, user, callback:(error: any, result: any)=> void) {
     this.buildingRepository.findById(buildingId, (error, building:Building) => {
       if (error) {
         callback(error, null);
@@ -311,7 +313,7 @@ class ProjectService {
     });
   }
 
-  deleteQuantity(projectId, buildingId, costhead, workitem, item, user, callback:(error: any, result: any)=> void) {
+  deleteQuantity(projectId:string, buildingId:string, costhead:CostHead, workitem:WorkItem, item:Item, user:User, callback:(error: any, result: any)=> void) {
     this.buildingRepository.findById(buildingId, (error, building:Building) => {
       if (error) {
         callback(error, null);
@@ -350,7 +352,7 @@ class ProjectService {
     });
   }
 
-  deleteWorkitem(projectId, buildingId, costhead, workitem, user, callback:(error: any, result: any)=> void) {
+  deleteWorkitem(projectId:string, buildingId:string, costhead:CostHead, workitem:WorkItem, user:User, callback:(error: any, result: any)=> void) {
     this.buildingRepository.findById(buildingId, (error, building:Building) => {
       if (error) {
         callback(error, null);
@@ -423,14 +425,14 @@ class ProjectService {
                   if(quantityArray[quantityIndex].remarks === quantity.remarks ) {
                     exist = true;
                     errorMessage = errorMessage + 'same remarks is also exist with quantity name.';
-                  }else {
+                  } else {
                     exist = false;
                   }
                 }
             }
             if(exist) {
               callback(new CostControllException(errorMessage, errorMessage), null);
-            }else {
+            } else {
               quantityArray.push(quantity);
               let query = { _id : buildingId };
               this.buildingRepository.findOneAndUpdate(query, building,{new: true}, (error, building) => {
@@ -458,7 +460,7 @@ class ProjectService {
     });
   }
 
-  updateQuantity(projectId, buildingId, costhead, workitem, quantity, user, callback:(error: any, result: any)=> void) {
+  updateQuantity(projectId:string, buildingId:string, costhead:string, workitem:string, quantity:any, user:User, callback:(error: any, result: any)=> void) {
     this.buildingRepository.findById(buildingId, (error, building:Building) => {
       if (error) {
         callback(error, null);

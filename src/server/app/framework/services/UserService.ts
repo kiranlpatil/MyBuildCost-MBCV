@@ -452,7 +452,7 @@ class UserService {
   }
 
   retrieveBySortedOrder(query: any, projection:any, sortingQuery: any, callback: (error: any, result: any) => void) {
-    this.userRepository.retrieveBySortedOrder(query, projection, sortingQuery, callback);
+    //this.userRepository.retrieveBySortedOrder(query, projection, sortingQuery, callback);
   }
 
   /*getUserRegistrationStatus(query: any, callback: (error: any, result: any) => void) {
@@ -518,7 +518,7 @@ class UserService {
       }
     });
   }
-  getUserById(user, callback:(error:any, result:any)=>void) {
+  getUserById(user:any, callback:(error:any, result:any)=>void) {
     let auth: AuthInterceptor = new AuthInterceptor();
 
     let token = auth.issueTokenWithUid(user);
@@ -538,7 +538,7 @@ class UserService {
     });
   }
 
-  verifyAccount(user, callback:(error:any, result:any)=>void) {
+  verifyAccount(user:User, callback:(error:any, result:any)=>void) {
     let query = {'_id': user._id, 'isActivated': false};
     let updateData = {'isActivated': true};
     this.findOneAndUpdate(query, updateData, {new: true}, (error, result) => {
@@ -554,7 +554,7 @@ class UserService {
     });
   }
 
-  changeEmailId(data, user, callback:(error:any, result:any)=>void) {
+  changeEmailId(data:any, user : User, callback:(error:any, result:any)=>void) {
     let auth: AuthInterceptor = new AuthInterceptor();
     let query = {'email': data.new_email};
 
@@ -608,7 +608,7 @@ class UserService {
     });
   }
 
-  verifyChangedEmailId(user, callback:(error, result)=> any) {
+  verifyChangedEmailId(user: any, callback:(error : any, result : any)=> any) {
     let query = {'_id': user._id};
     let updateData = {'email': user.temp_email, 'temp_email': user.email};
     this.findOneAndUpdate(query, updateData, {new: true}, (error, result) => {
@@ -624,7 +624,7 @@ class UserService {
     });
   }
 
-  verifyMobileNumber(data, user, callback:(error, result)=>void) {
+  verifyMobileNumber(data :any , user : any, callback:(error:any, result:any)=>void) {
     let query = {'_id': user._id};
     let updateData = {'mobile_number': user.temp_mobile, 'temp_mobile': user.mobile_number};
     if (user.otp === data.otp) {
@@ -648,7 +648,7 @@ class UserService {
     }
   }
 
-  getProjects(user: User, callback:(error, result)=>void) {
+  getProjects(user: User, callback:(error : any, result :any)=>void) {
     let query = {_id : user._id};
     this.userRepository.findAndPopulate(query, {path: 'project', select: 'name'}, (error, result) => {
       if(error) {
