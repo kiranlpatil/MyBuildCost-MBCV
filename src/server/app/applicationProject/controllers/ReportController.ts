@@ -6,6 +6,8 @@ import Response = require('../interceptor/response/Response');
 import CostControllException = require('../exception/CostControllException');
 //import config from "../../../../../tools/config";
 let config = require('config');
+var log4js = require('log4js');
+var logger=log4js.getLogger('Report Controller');
 
 class ReportController {
   private _reportService : ReportService;
@@ -16,6 +18,7 @@ class ReportController {
 
   getProject(req: express.Request, res: express.Response, next: any): void {
     try {
+      logger.info('Report Controller, getProject has been hit');
       let reportService = new ReportService();
       let user = req.user;
       let projectId =  req.params.id;
@@ -27,6 +30,9 @@ class ReportController {
         if(error) {
           next(error);
         } else {
+          logger.info('Get Project success');
+          logger.debug('Getting Project for Project ID : '+projectId+', Report Type : '+reportType+
+            ', Project Rate : '+projectRate+', Project Area : '+projectArea);
           next(new Response(200,result));
         }
       });
@@ -37,6 +43,7 @@ class ReportController {
 
   getRateAnalysisCostHeads(req: express.Request, res: express.Response, next: any): void {
     try {
+      logger.info('Report Controller, getRateAnalysisCostHeads has been hit');
       let reportService = new ReportService();
       let user = req.user;
       let url = config.get('rateAnalysisAPI.costHeads');
@@ -45,6 +52,7 @@ class ReportController {
         if(error) {
           next(error);
         } else {
+          logger.info('Get Rate Analysis CostHeads success');
           next(new Response(200,result));
         }
       });
@@ -55,6 +63,7 @@ class ReportController {
 
   getRateAnalysisWorkItems(req: express.Request, res: express.Response, next: any): void {
     try {
+      logger.info('Report Controller, getRateAnalysisWorkItems has been hit');
       let reportService = new ReportService();
       let user = req.user;
       let url = config.get('rateAnalysisAPI.workItems');
@@ -64,6 +73,7 @@ class ReportController {
         if(error) {
           next(error);
         } else {
+          logger.info('Get Rate Analysis WorkItems success');
           next(new Response(200,result));
         }
       });

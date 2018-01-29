@@ -17,6 +17,9 @@ import CostHead = require('../dataaccess/model/CostHead');
 import WorkItem = require('../dataaccess/model/WorkItem');
 import Item = require('../dataaccess/model/Item');
 import RateAnalysisService = require("./RateAnalysisService");
+let config = require('config');
+var log4js = require('log4js');
+var logger=log4js.getLogger('Project service');
 
 class ProjectService {
   APP_NAME: string;
@@ -36,7 +39,7 @@ class ProjectService {
 
   create(data: any, user : User, callback: (error: any, result: any) => void) {
     if(!user._id) {
-     callback(new CostControllException('UserId Not Found',null), null);
+      callback(new CostControllException('UserId Not Found',null), null);
     }
     /*let category = data.category;
     for(let i=0; i< category.length; i++){
@@ -53,10 +56,14 @@ class ProjectService {
       if (err) {
         callback(err, null);
       } else {
+        logger.info('Project service, create has been hit');
+        logger.debug('Project ID : '+res._id);
+        logger.debug('Project Name : '+res._doc.name);
         let projectId = res._id;
         let newData =  {$push: { project: projectId }};
         let query = {_id : user._id};
         this.userService.findOneAndUpdate(query, newData, {new :true},(err, resp) => {
+          logger.info('Project service, findOneAndUpdate has been hit');
           if(err) {
             callback(err, null);
           } else {
@@ -70,10 +77,13 @@ class ProjectService {
   }
 
   getProject( projectId : any, user: User, callback: (error: any, result: any) => void) {
+    logger.info('Project service, getProject has been hit');
     let query = { _id: projectId};
     let populate = {path : 'building', select: ['name' , 'totalSlabArea',]};
     //let populate = {path : 'building'};
     this.projectRepository.findAndPopulate(query, populate, (error, result) => {
+      logger.info('Project service, findAndPopulate has been hit');
+      logger.debug('Project Name : '+result[0]._doc.name);
       if(error) {
         callback(error, null);
       } else {
@@ -83,10 +93,12 @@ class ProjectService {
   }
 
   updateProjectDetails( projectDetails: Project, user: User, callback:(error: any, result:any) => void) {
+    logger.info('Project service, updateProjectDetails has been hit');
     let query = { _id : projectDetails._id };
     delete projectDetails._id;
 
     this.projectRepository.findOneAndUpdate(query, projectDetails, {new: true}, (error, result) => {
+      logger.info('Project service, findOneAndUpdate has been hit');
       if (error) {
         callback(error, null);
       } else {
@@ -96,13 +108,16 @@ class ProjectService {
   }
 
   addBuilding(projectId : any, buildingDetail : Building, user: User, callback:(error: any, result: any)=> void) {
+    logger.info('Project service, addBuilding has been hit');
     this.buildingRepository.create(buildingDetail, (error, result)=> {
+      logger.info('Project service, create has been hit');
       if(error) {
         callback(error, null);
       } else {
         let query = {_id : projectId };
         let newData = { $push: {building : result._id}};
         this.projectRepository.findOneAndUpdate(query, newData, {new : true}, (error, status)=> {
+          logger.info('Project service, findOneAndUpdate has been hit');
           if(error) {
             callback(error, null);
           } else {
@@ -114,9 +129,11 @@ class ProjectService {
   }
 
   updateBuilding( buildingId:string, buildingDetail:any, user:User, callback:(error: any, result: any)=> void) {
+    logger.info('Project service, updateBuilding has been hit');
     let query = { _id : buildingId };
     //delete buildingDetail._id;
     this.buildingRepository.findOneAndUpdate(query, buildingDetail,{new: true}, (error, result) => {
+      logger.info('Project service, findOneAndUpdate has been hit');
       if (error) {
         callback(error, null);
       } else {
@@ -126,9 +143,11 @@ class ProjectService {
   }
 
   cloneBuildingDetails( buildingId:string, buildingDetail:any, user:User, callback:(error: any, result: any)=> void) {
+    logger.info('Project service, cloneBuildingDetails has been hit');
     let query = { _id : buildingId };
     //delete buildingDetail._id;
     this.buildingRepository.findById(buildingId, (error, result) => {
+      logger.info('Project service, findById has been hit');
       if (error) {
         callback(error, null);
       } else {
@@ -168,6 +187,7 @@ class ProjectService {
 
         let updateBuildingCostHeads = {'costHead' : clonedCostHeadDetails};
         this.buildingRepository.findOneAndUpdate(query, updateBuildingCostHeads,{new: true}, (error, result) => {
+          logger.info('Project service, findOneAndUpdate has been hit');
           if (error) {
             callback(error, null);
           } else {
@@ -179,7 +199,9 @@ class ProjectService {
   }
 
   getBuilding(projectId : string, buildingId : string, user: User, callback:(error: any, result: any)=> void) {
+    logger.info('Project service, getBuilding has been hit');
     this.buildingRepository.findById(buildingId, (error, result) => {
+      logger.info('Project service, findById has been hit');
       if (error) {
         callback(error, null);
       } else {
@@ -189,24 +211,29 @@ class ProjectService {
   }
 
   getInActiveCostHead(projectId: string, buildingId: string, user: User, callback:(error: any, result: any)=> void) {
+    logger.info('Project service, getInActiveCostHead has been hit');
     this.buildingRepository.findById(buildingId, (error, result) => {
       if (error) {
         callback(error, null);
       } else {
+        logger.info('Project service, findById has been hit');
+        logger.debug('getting InActive CostHead for Building Name : '+result._doc.name);
         let response = result.costHead;
         let inactiveCostHead=[];
         for(let costHeadItem of response) {
           if(!costHeadItem.active) {
-                inactiveCostHead.push(costHeadItem);
+            inactiveCostHead.push(costHeadItem);
           }
         }
         callback(null,{data:inactiveCostHead, access_token: this.authInterceptor.issueTokenWithUid(user)});
-          }
-      });
+      }
+    });
   }
 
   getClonedBuilding(projectId : string, buildingId : string, user: User, callback:(error: any, result: any)=> void) {
+    logger.info('Project service, getClonedBuilding has been hit');
     this.buildingRepository.findById(buildingId, (error, result) => {
+      logger.info('Project service, findById has been hit');
       if (error) {
         callback(error, null);
       } else {
@@ -254,6 +281,7 @@ class ProjectService {
   }
 
   deleteBuilding(projectId:string, buildingId:string, user:User, callback:(error: any, result: any)=> void) {
+    logger.info('Project service, deleteBuilding has been hit');
     let popBuildingId = buildingId;
     this.buildingRepository.delete(buildingId, (error, result)=> {
       if(error) {
@@ -262,6 +290,7 @@ class ProjectService {
         let query = {_id: projectId};
         let newData = { $pull: {building : popBuildingId}};
         this.projectRepository.findOneAndUpdate(query, newData, {new: true}, (error, status)=> {
+          logger.info('Project service, findOneAndUpdate has been hit');
           if(error) {
             callback(error, null);
           } else {
@@ -273,15 +302,16 @@ class ProjectService {
   }
 
   getQuantity(projectId:string, buildingId:string, costhead: CostHead, workitem, user, callback:(error: any, result: any)=> void) {
+    logger.info('Project service, getQuantity has been hit');
     this.buildingRepository.findById(buildingId, (error, building:Building) => {
       if (error) {
         callback(error, null);
       } else {
         let quantity: Quantity;
         for(let index = 0; building.costHead.length > index; index++){
-         if(building.costHead[index].name === costhead) {
-           quantity = building.costHead[index].workitem[workitem].quantity;
-         }
+          if(building.costHead[index].name === costhead) {
+            quantity = building.costHead[index].workitem[workitem].quantity;
+          }
         }
         if(quantity.total === null) {
           for(let index = 0; quantity.item.length > index; index ++) {
@@ -294,6 +324,7 @@ class ProjectService {
   }
 
   getRate(projectId:string, buildingId:string, costhead:CostHead, workitem:WorkItem, user, callback:(error: any, result: any)=> void) {
+    logger.info('Project service, getRate has been hit');
     this.buildingRepository.findById(buildingId, (error, building:Building) => {
       if (error) {
         callback(error, null);
@@ -352,6 +383,7 @@ class ProjectService {
   }
 
   deleteQuantity(projectId:string, buildingId:string, costhead:CostHead, workitem:WorkItem, item:Item, user:User, callback:(error: any, result: any)=> void) {
+    logger.info('Project service, deleteQuantity has been hit');
     this.buildingRepository.findById(buildingId, (error, building:Building) => {
       if (error) {
         callback(error, null);
@@ -364,11 +396,12 @@ class ProjectService {
         }
         for(let index = 0; quantity.item.length > index; index ++) {
           if(quantity.item[index].item  === item) {
-           quantity.item.splice(index,1);
+            quantity.item.splice(index,1);
           }
         }
         let query = { _id : buildingId };
         this.buildingRepository.findOneAndUpdate(query, building,{new: true}, (error, building) => {
+          logger.info('Project service, findOneAndUpdate has been hit');
           if (error) {
             callback(error, null);
           } else {
@@ -391,6 +424,7 @@ class ProjectService {
   }
 
   deleteWorkitem(projectId:string, buildingId:string, costhead:CostHead, workitem:WorkItem, user:User, callback:(error: any, result: any)=> void) {
+    logger.info('Project service, deleteWorkitem has been hit');
     this.buildingRepository.findById(buildingId, (error, building:Building) => {
       if (error) {
         callback(error, null);
@@ -402,6 +436,7 @@ class ProjectService {
         }
         let query = { _id : buildingId };
         this.buildingRepository.findOneAndUpdate(query, building,{new: true}, (error, building) => {
+          logger.info('Project service, findOneAndUpdate has been hit');
           if (error) {
             callback(error, null);
           } else {
@@ -415,7 +450,9 @@ class ProjectService {
 
   getReportCostHeadDetails( buildingId : string, costHead : string, user: User,
                             callback: (error: any, result: any) => void) {
+    logger.info('Project service, getReportCostHeadDetails has been hit');
     this.buildingRepository.findById(buildingId, (error, result) => {
+      logger.info('Project service, findById has been hit');
       if (error) {
         callback(error, null);
       } else {
@@ -433,11 +470,13 @@ class ProjectService {
   }
 
   updateBuildingCostHead( buildingId : string, costHead : string, costHeadValue : string, user: User,
-                            callback: (error: any, result: any) => void) {
+                          callback: (error: any, result: any) => void) {
+    logger.info('Project service, updateBuildingCostHead has been hit');
     let query = {'_id' : buildingId, 'costHead.name' : costHead};
     let value = JSON.parse(costHeadValue);
     let newData = { $set : {'costHead.$.active' : value}};
     this.buildingRepository.findOneAndUpdate(query, newData, {new: true},(err, response) => {
+      logger.info('Project service, findOneAndUpdate has been hit');
       if(err) {
         callback(err, null);
       } else {
@@ -447,7 +486,7 @@ class ProjectService {
   }
 
   updateBudgetedCostForCostHead( buildingId : string, costHead : string, costHeadBudgetedAmountEdited : any, user: User,
-                          callback: (error: any, result: any) => void) {
+                                 callback: (error: any, result: any) => void) {
     let query = {'_id' : buildingId, 'costHead.name' : costHead};
     let newData = { $set : {'costHead.$.budgetedCostAmount' : costHeadBudgetedAmountEdited.budgetedCostAmount}};
     this.buildingRepository.findOneAndUpdate(query, newData, {new:true},(err, response) => {
@@ -459,8 +498,10 @@ class ProjectService {
     });
   }
 
-  createQuantity(projectId:string, buildingId:string, costhead:string, workitem:string, quantity:string, user:string, callback:(error: any, result: any)=> void) {
+  createQuantity(projectId, buildingId, costhead, workitem, quantity, user, callback:(error: any, result: any)=> void) {
+    logger.info('Project service, createQuantity has been hit');
     this.buildingRepository.findById(buildingId, (error, building:Building) => {
+      logger.info('Project service, findById has been hit');
       if (error) {
         callback(error, null);
       } else {
@@ -470,16 +511,16 @@ class ProjectService {
             let exist = false;
             let errorMessage ;
             for(let quantityIndex = 0; quantityArray.length > quantityIndex; quantityIndex++ ) {
-                if(quantityArray[quantityIndex].item === quantity.item ) {
+              if(quantityArray[quantityIndex].item === quantity.item ) {
+                exist = true;
+                errorMessage = 'Quantity name already exist. ';
+                if(quantityArray[quantityIndex].remarks === quantity.remarks ) {
                   exist = true;
-                  errorMessage = 'Quantity name already exist. ';
-                  if(quantityArray[quantityIndex].remarks === quantity.remarks ) {
-                    exist = true;
-                    errorMessage = errorMessage + 'same remarks is also exist with quantity name.';
-                  } else {
-                    exist = false;
-                  }
+                  errorMessage = errorMessage + 'same remarks is also exist with quantity name.';
+                } else {
+                  exist = false;
                 }
+              }
             }
             if(exist) {
               callback(new CostControllException(errorMessage, errorMessage), null);
@@ -487,6 +528,7 @@ class ProjectService {
               quantityArray.push(quantity);
               let query = { _id : buildingId };
               this.buildingRepository.findOneAndUpdate(query, building,{new: true}, (error, building) => {
+                logger.info('Project service, findOneAndUpdate has been hit');
                 if (error) {
                   callback(error, null);
                 } else {
@@ -512,6 +554,7 @@ class ProjectService {
   }
 
   updateQuantity(projectId:string, buildingId:string, costhead:string, workitem:string, quantity:any, user:User, callback:(error: any, result: any)=> void) {
+    logger.info('Project service, updateQuantity has been hit');
     this.buildingRepository.findById(buildingId, (error, building:Building) => {
       if (error) {
         callback(error, null);
@@ -528,6 +571,7 @@ class ProjectService {
             }
             let query = { _id : buildingId };
             this.buildingRepository.findOneAndUpdate(query, building,{new: true}, (error, building) => {
+              logger.info('Project service, findOneAndUpdate has been hit');
               if (error) {
                 callback(error, null);
               } else {

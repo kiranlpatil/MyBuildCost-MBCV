@@ -6,6 +6,8 @@ import CostControllException = require('../exception/CostControllException');
 import WorkItem = require('../dataaccess/model/WorkItem');
 let request = require('request');
 let config = require('config');
+var log4js = require('log4js');
+var logger=log4js.getLogger('Rate Analysis Service');
 import alasql = require('alasql');
 
 class RateAnalysisService {
@@ -21,7 +23,7 @@ class RateAnalysisService {
   }
 
   getCostHeads(user: User, url: string, callback: (error: any, result: any) => void) {
-
+    logger.info('Rate Analysis Service, getCostHeads has been hit');
     request.get({url: url}, function (error: any, response: any, body: any) {
       if (error) {
         callback(error, null);
@@ -34,7 +36,7 @@ class RateAnalysisService {
   }
 
   getWorkItems(user: User, url: string, callback: (error: any, result: any) => void) {
-
+    logger.info('Rate Analysis Service, getWorkItems has been hit');
     request.get({url: url}, function (error: any, response: any, body: any) {
       if (error) {
         callback(error, null);
@@ -46,7 +48,7 @@ class RateAnalysisService {
   }
 
   getWorkItemsByCostHeadId(costHeadId: number, user: User, url: string, callback: (error: any, result: any) => void) {
-
+    logger.info('Rate Analysis Service, getWorkItemsByCostHeadId has been hit');
     let workItems : Array<WorkItem> = [];
     request.get({url: url}, function (error: any, response: any, body: any) {
       if (error) {

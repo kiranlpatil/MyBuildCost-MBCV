@@ -58,7 +58,7 @@
     "filePathForProfileImage" : "/src/server/app/framework/public/profileimage"
 
   },
-  "logger" : {
+  /*"logger" : {
     "levels": {
       "[all]":"DEBUG"
     },
@@ -69,6 +69,19 @@
       {
         "type": "dateFile",
         "filename": "logs/application",
+        "pattern": "-yyyy-MM-dd.log",
+        "alwaysIncludePattern": true
+      }
+    ],
+    "replaceConsole": true
+  },*/
+  "logger" : {
+    "levels": {
+      "[all]":"info"
+    },
+    "appenders": [
+      {    "type": "dateFile",
+        "filename": "logs/application",    // specify the path where u want logs folder error.log
         "pattern": "-yyyy-MM-dd.log",
         "alwaysIncludePattern": true
       }

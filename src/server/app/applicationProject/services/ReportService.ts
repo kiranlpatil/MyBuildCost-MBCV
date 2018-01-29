@@ -16,7 +16,9 @@ import WorkItem = require('../dataaccess/model/WorkItem');
 import ThumbRule = require('../dataaccess/model/ThumbRule');
 import Estimated = require('../dataaccess/model/Estimated');
 import RateAnalysisService = require('./RateAnalysisService');
-var config = require('config');
+let config = require('config');
+var log4js = require('log4js');
+var logger=log4js.getLogger('Report Service');
 
 class ReportService {
   APP_NAME: string;
@@ -42,9 +44,11 @@ class ReportService {
 
   getReport( projectId : any,reportType : string, projectRate : string, areaType : string,  user: User,
              callback: (error: any, result: any) => void) {
+    logger.info('Report Service, getReport has been hit');
     let query = { _id: projectId};
     let populate = {path : 'building'};
     this.projectRepository.findAndPopulate(query, populate, (error, result) => {
+      logger.info('Report Service, findAndPopulate has been hit');
       if(error) {
         callback(error, null);
       } else {
@@ -122,6 +126,7 @@ class ReportService {
   }
 
   getCostHeads( user: User, url: string ,callback: (error: any, result: any) => void) {
+    logger.info('Report Service, getCostHeads has been hit');
     this.rateAnalysisService.getCostHeads(user, url,(error, result) => {
       if(error) {
         console.log('error : '+JSON.stringify(error));
@@ -133,6 +138,7 @@ class ReportService {
   }
 
   getWorkItems( user: User, url: string ,callback: (error: any, result: any) => void) {
+    logger.info('Report Service, getWorkItems has been hit');
     this.rateAnalysisService.getWorkItems( user, url,(error, result) => {
       if(error) {
         console.log('error : '+JSON.stringify(error));
