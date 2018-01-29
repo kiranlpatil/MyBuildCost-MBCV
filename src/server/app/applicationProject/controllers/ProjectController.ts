@@ -7,6 +7,7 @@ import CostControllException = require('../exception/CostControllException');
 import CostHead = require('../dataaccess/model/CostHead');
 import QuantityItem = require('../dataaccess/model/QuantityItem');
 import Quantity = require('../dataaccess/model/Quantity');
+import Rate = require("../dataaccess/model/Rate");
 let config = require('config');
 
 class ProjectController {
@@ -237,6 +238,28 @@ class ProjectController {
       let projectService = new ProjectService();
       console.log(' workitem => '+ workitem);
       projectService.getRate(projectId, buildingId, costhead, workitem, user, (error, result) => {
+        if(error) {
+          next(error);
+        } else {
+          next(new Response(200,result));
+        }
+      });
+    } catch(e) {
+      next(new CostControllException(e.message,e.stack));
+    }
+  }
+
+  updateRate(req: express.Request, res: express.Response, next: any): void {
+    try {
+      let user = req.user;
+      let projectId = req.params.id;
+      let buildingId = req.params.buildingid;
+      let costhead = req.params.costhead;
+      let workitem = req.params.workitem;
+      let rate : Rate = <Rate> req.body.data;
+      let projectService = new ProjectService();
+      console.log(' workitem => '+ workitem);
+      projectService.updateRate(projectId, buildingId, costhead, workitem, rate, user, (error, result) => {
         if(error) {
           next(error);
         } else {

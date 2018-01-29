@@ -5,7 +5,6 @@ import LoggerInterceptor = require('./../../framework/interceptor/LoggerIntercep
 import { Inject } from 'typescript-ioc';
 import RequestInterceptor = require('../interceptor/request/RequestInterceptor');
 import ResponseInterceptor = require('../interceptor/response/ResponseInterceptor');
-
 var router = express.Router();
 
 class RateAnalysisRoutes {
@@ -32,6 +31,9 @@ class RateAnalysisRoutes {
 
     router.get('/costHead/:id/workItems', this.authInterceptor.requiresAuth, this._requestInterceptor.intercept,
       controller.getRateAnalysisWorkItemsByCostHeadId, this._responseInterceptor.exit);
+
+    router.get('/costHead/:costHeadId/workItem/:workitemId', this.authInterceptor.requiresAuth, this._requestInterceptor.intercept,
+      controller.getRate, this._responseInterceptor.exit);
     return router;
   }
 }

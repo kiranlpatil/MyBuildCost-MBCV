@@ -5,6 +5,8 @@ import AuthInterceptor = require('../../framework/interceptor/auth.interceptor')
 import CostControllException = require('../exception/CostControllException');
 import WorkItem = require('../dataaccess/model/WorkItem');
 let request = require('request');
+let config = require('config');
+import alasql = require('alasql');
 
 class RateAnalysisService {
   APP_NAME: string;
@@ -63,6 +65,52 @@ class RateAnalysisService {
           }
         }
         callback(null, workItems);
+      }
+    });
+  }
+
+  getApiCall(url : string, callback:(error : any, response: any) => void) {
+    request.get({url: url}, function (error: any, response: any, body: any) {
+      if (error) {
+        callback(new CostControllException(error.message, error.stack), null);
+      } else if (!error && response.statusCode === 200) {
+        let res = JSON.parse(body);
+        /*if(res) {
+
+          for(let workitem of res.SubItemType) {
+            let workitemDetails = new WorkItem;
+            if(parseInt(costHeadId) === workitem.C3) {
+              workitemDetails.name = workitem.C2;
+              workitemDetails.rateAnalysisId = workitem.C1;
+              workItems.push(workitemDetails);
+            }
+          }
+        }*/
+        callback(null, res);
+      }
+    });
+  }
+
+  getRate(workitemId: number, callback:(error: any, data:any) => void) {
+    let url = config.get('rateAnalysisAPI.unit');
+    this.getApiCall(url, (error, unitData) => {
+      if(error) {
+        callback(error, null);
+      }else {
+        unitData = unitData['UOM'];
+        url = config.get('rateAnalysisAPI.rate');
+        this.getApiCall(url, (error, data) => {
+          if(error) {
+            callback(error, null);
+          } else {
+            let rate = data['RateAnalysisData'];
+            let sql2 = 'SELECT rate.C1 AS rateAnalysisId, rate.C2 AS item,rate.C5 AS quantity,rate.C3 AS rate,' +
+              ' rate.C3*rate.C5 AS totalAmount, rate.C6 type, unit.C2 As unit FROM ? AS rate JOIN ? AS unit ON unit.C1 = rate.C9' +
+              '  WHERE rate.C1 = '+ workitemId;
+            rate = alasql(sql2, [rate, unitData])
+            callback(null, rate);
+          }
+        });
       }
     });
   }

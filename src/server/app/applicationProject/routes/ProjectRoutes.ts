@@ -48,6 +48,8 @@ class ProjectRoutes {
       this._requestInterceptor.intercept, controller.getQuantity, this._responseInterceptor.exit);
     router.get('/:id/building/:buildingid/rate/costhead/:costhead/workitem/:workitem', this.authInterceptor.requiresAuth,
       this._requestInterceptor.intercept, controller.getRate, this._responseInterceptor.exit);
+    router.post('/:id/building/:buildingid/rate/costhead/:costhead/workitem/:workitem', this.authInterceptor.requiresAuth,
+      this._requestInterceptor.intercept, controller.updateRate, this._responseInterceptor.exit);
     router.delete('/:id/building/:buildingid/quantity/costhead/:costhead/workitem/:workitem/item/:item', this.authInterceptor.requiresAuth,
       this._requestInterceptor.intercept, controller.deleteQuantity, this._responseInterceptor.exit);
     router.delete('/:id/building/:buildingid/costhead/:costhead/workitem/:workitem', this.authInterceptor.requiresAuth,

@@ -66,5 +66,23 @@ class RateAnalysisController {
     }
   }
 
+  getRate(req: express.Request, res: express.Response, next: any): void {
+    try {
+      let rateAnalysisService = new RateAnalysisService();
+      let user = req.user;
+      let costHeadId = req.params.costHeadId;
+      let workitemId = req.params.workitemId;
+
+      rateAnalysisService.getRate(workitemId,(error, result) => {
+        if(error) {
+          next(error);
+        } else {
+          next(new Response(200,result));
+        }
+      });
+    } catch(e) {
+      next(new CostControllException(e.message,e.stack));
+    }
+  }
 }
 export  = RateAnalysisController;
