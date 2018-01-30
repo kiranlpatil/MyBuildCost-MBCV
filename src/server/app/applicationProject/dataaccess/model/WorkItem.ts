@@ -5,16 +5,17 @@ import Rate = require('./Rate');
 class WorkItem {
   name: string;
   rateAnalysisId:number;
-  quantity: Map<string, Quantity>;
+  quantity: Quantity;
   unit: string;
-  rate: Map<string, Rate>;
+  rate: Rate;
   amount: number;
   constructor(name:string, rateAnalysisId:number) {
     this.name = name;
     this.rateAnalysisId = rateAnalysisId;
-    this.quantity = new Map<string, Quantity>();
-    this.rate = new Map<string, Rate>();
+    this.quantity = new Quantity();
+    this.rate = new Rate();
     this.amount = 0;
+    this.unit = 'sqft';
   }
 }
 export = WorkItem;

@@ -558,9 +558,9 @@ class ProjectController {
       let user = req.user;
       let projectId = req.params.id;
       let buildingId = req.params.buildingId;
-      let costheadId = req.params.costheadId;
-      let subCategoryId = req.params.subCategoryId;
-      let workitem: WorkItem = req.body;
+      let costheadId : number = parseInt(req.params.costheadId);
+      let subCategoryId : number = parseInt(req.params.subCategoryId);
+      let workitem: WorkItem = new WorkItem(req.body.name, req.body.rateAnalysisId);
       let projectService = new ProjectService();
       projectService.addWorkitem(projectId, buildingId, costheadId, subCategoryId, workitem, user, (error, result) => {
         if(error

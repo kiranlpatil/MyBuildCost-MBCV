@@ -634,41 +634,24 @@ class ProjectService {
       if (error) {
         callback(error, null);
       } else {
+        let responseWorkitem : Array<WorkItem>= null;
         for(let index = 0; building.costHead.length > index; index++) {
           if(building.costHead[index].rateAnalysisId === costheadId) {
             let subCategory = building.costHead[index].subCategory;
             for(let subCategoryIndex = 0; subCategory.length > subCategoryIndex; subCategoryIndex++) {
               if(subCategory[subCategoryIndex].rateAnalysisId === subCategoryId) {
                 subCategory[subCategoryIndex].workitem.push(workitem);
+                responseWorkitem = subCategory[subCategoryIndex].workitem;
               }
             }
-            /*let quantityArray :Quantity = building.costHead[index].workitem[workitem].quantity;
-            quantityArray.item = quantity;
-            if(quantityArray.total === null) {
-              quantityArray.total = 0;
-            }
-            for(let itemIndex =0; quantityArray.item.length >  itemIndex; itemIndex++) {
-              quantityArray.total = quantityArray.item[itemIndex].quantity + quantityArray.total;
-            }*/
             let query = { _id : buildingId };
             let newData = { $set : {'costHead' : building.costHead}};
-            this.buildingRepository.findOneAndUpdate(query, building,{new: true}, (error, building) => {
+            this.buildingRepository.findOneAndUpdate(query, newData,{new: true}, (error, building) => {
               logger.info('Project service, findOneAndUpdate has been hit');
               if (error) {
                 callback(error, null);
               } else {
-                /*let quantity: Quantity;
-                for(let index = 0; building.costHead.length > index; index++) {
-                  if(building.costHead[index].name === costhead) {
-                    quantity = building.costHead[index].workitem[workitem].quantity;
-                  }
-                }
-                if(quantity.total === null) {
-                  for(let index = 0; quantity.item.length > index; index ++) {
-                    quantity.total = quantity.item[index].quantity + quantity.total;
-                  }
-                }*/
-                callback(null, {data: building, access_token: this.authInterceptor.issueTokenWithUid(user)});
+                callback(null, {data: responseWorkitem, access_token: this.authInterceptor.issueTokenWithUid(user)});
               }
             });
           }
