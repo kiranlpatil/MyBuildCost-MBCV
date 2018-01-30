@@ -20,7 +20,7 @@ export const ProjectRoutes: Route[] = [
       {path: 'cost-summary/:projectId', component: CostSummaryComponent},
       {path: 'cost-summary/cost-head/:projectId/:buildingName/:costHead', component: CostHeadComponent},
       {path: 'material-takeoff/:projectId', component: MaterialTakeoffComponent},
-      {path: 'project/cost-summary/common-amenities/:projectId', component: CommonAmenitiesComponent}
+      {path: 'cost-summary/common-amenities/:projectId', component: CommonAmenitiesComponent}
     ]
   }
 ];
