@@ -17,6 +17,7 @@ import CostHead = require('../dataaccess/model/CostHead');
 import WorkItem = require('../dataaccess/model/WorkItem');
 import Item = require('../dataaccess/model/Item');
 import RateAnalysisService = require('./RateAnalysisService');
+import SubCategory = require('../dataaccess/model/SubCategory');
 let config = require('config');
 var log4js = require('log4js');
 import alasql = require('alasql');
@@ -469,6 +470,7 @@ class ProjectService {
       }
     });
   }
+
   updateBuildingCostHead( buildingId : string, costHead : string, costHeadValue : string, user: User,
                           callback: (error: any, result: any) => void) {
     let query = {'_id' : buildingId, 'costHead.name' : costHead};
@@ -498,7 +500,8 @@ class ProjectService {
       }
     });
   }
-  createQuantity(projectId : string, buildingId : string, costhead : string, workitem : any, quantity, user : User,
+
+  createQuantity(projectId : string, buildingId : string, costhead : string, workitem : any, quantity :any, user : User,
                  callback:(error: any, result: any)=> void) {
     this.buildingRepository.findById(buildingId, (error, building:Building) => {
       logger.info('Project service, findById has been hit');
@@ -659,7 +662,26 @@ class ProjectService {
       }
     });
   }
-}
+
+  addSubcategoryToCostHead(projectId:string, buildingId:string, costheadId:string, subcategoryObject : any, user:User,
+    callback:(error: any, result: any)=> void) {
+
+    let subCategoryObj : SubCategory = new SubCategory(subcategoryObject.subCategory, subcategoryObject.subCategoryId);
+
+    let query = {'_id' : buildingId, 'costHead.rateAnalysisId' : parseInt(costheadId)};
+    let newData = { $push: { 'costHead.$.subCategory': subCategoryObj }};
+
+    this.buildingRepository.findOneAndUpdate(query, newData,{new: true}, (error, building) => {
+      logger.info('Project service, addSubcategoryToCostHead has been hit');
+      if (error) {
+        callback(error, null);
+      } else {
+        callback(null, {data: building, access_token: this.authInterceptor.issueTokenWithUid(user)});
+      }
+    });
+  }
+
+  }
 
 Object.seal(ProjectService);
 export = ProjectService;
