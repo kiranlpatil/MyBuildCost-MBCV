@@ -909,7 +909,8 @@
   "SqureMeter":0.092903,
   "rateAnalysisAPI" : {
     "costHeads" : "http://mobileapiv4.buildinfo.co.in/ItemType/ItemTypeResult?DeviceId=2fc85276aee45b7a&mobilenumber=8928520179&regionID=1&NeedFullData=y&AppCode=RA",
-    "workItems" : "http://mobileapiv4.buildinfo.co.in/SubItemType/SubItemTypeResult?DeviceId=2fc85276aee45b7a&mobilenumber=8928520179&regionID=1&NeedFullData=y&AppCode=RA",
+    "workItems" : "http://mobileapiv4.buildinfo.co.in/Items/ItemsResult?DeviceId=2fc85276aee45b7a&mobilenumber=8928520179&regionID=1&NeedFullData=y&AppCode=RA",
+    "subCategories" : "http://mobileapiv4.buildinfo.co.in/SubItemType/SubItemTypeResult?DeviceId=2fc85276aee45b7a&mobilenumber=8928520179&regionID=1&NeedFullData=y&AppCode=RA",
     "rate" : "http://mobileapiv4.buildinfo.co.in/RateAnalysisRegion/RateAnalysisRegionResult?DeviceId=2fc85276aee45b7a&mobilenumber=8928520179&regionID=1&NeedFullData=y&AppCode=RA",
     "unit": "http://mobileapiv4.buildinfo.co.in/UOM/UOMResult?DeviceId=2fc85276aee45b7a&mobilenumber=8928520179&regionID=1&NeedFullData=y&AppCode=RA"
   }

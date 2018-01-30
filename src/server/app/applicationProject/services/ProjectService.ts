@@ -16,11 +16,10 @@ import ClonedWorkItem = require('../dataaccess/model/ClonedWorkItem');
 import CostHead = require('../dataaccess/model/CostHead');
 import WorkItem = require('../dataaccess/model/WorkItem');
 import Item = require('../dataaccess/model/Item');
-import WorkItem = require('../dataaccess/model/WorkItem');
-import Item = require('../dataaccess/model/Item');
-import RateAnalysisService = require("./RateAnalysisService");
+import RateAnalysisService = require('./RateAnalysisService');
 let config = require('config');
 var log4js = require('log4js');
+import alasql = require('alasql');
 var logger=log4js.getLogger('Project service');
 
 class ProjectService {
@@ -588,6 +587,24 @@ class ProjectService {
             });
           }
         }
+      }
+    });
+  }
+
+  getAllSubcategoriesByCostHeadId(projectId:string, buildingId:string, costheadId:string, user:User,
+                                  callback:(error: any, result: any)=> void) {
+    let rateAnalysisServices : RateAnalysisService = new RateAnalysisService();
+    let url = config.get('rateAnalysisAPI.subCategories');
+    rateAnalysisServices.getApiCall(url, (error, subCategories)=> {
+      if(error) {
+        callback(error, null);
+      } else {
+        let costHead = parseInt(costheadId);
+        let subCategoriesList  =  subCategories.SubItemType;
+        let sqlQuery = 'SELECT subCategoriesList.C1 AS rateAnalysisId, subCategoriesList.C2 AS subCategory ' +
+          'FROM ? AS subCategoriesList WHERE subCategoriesList.C3 = '+ costHead;
+        subCategoriesList = alasql(sqlQuery, [subCategoriesList]);
+        callback(null, {data: subCategoriesList, access_token: this.authInterceptor.issueTokenWithUid(user)});
       }
     });
   }

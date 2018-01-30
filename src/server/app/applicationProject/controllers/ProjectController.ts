@@ -7,7 +7,7 @@ import CostControllException = require('../exception/CostControllException');
 import CostHead = require('../dataaccess/model/CostHead');
 import QuantityItem = require('../dataaccess/model/QuantityItem');
 import Quantity = require('../dataaccess/model/Quantity');
-import Rate = require("../dataaccess/model/Rate");
+import Rate = require('../dataaccess/model/Rate');
 let config = require('config');
 var log4js = require('log4js');
 var logger=log4js.getLogger('Project Controller');
@@ -504,5 +504,30 @@ class ProjectController {
       next(new CostControllException(e.message,e.stack));
     }
   }
+
+  getSubcategoryByCostHeadId(req: express.Request, res: express.Response, next: any): void {
+    try {
+      logger.info('Project controller, getSubcategoryByCostHeadId has been hit');
+      let user = req.user;
+      let projectId = req.params.id;
+      let buildingId = req.params.buildingid;
+      let costhead = req.params.costheadId;
+
+      let projectService = new ProjectService();
+
+      projectService.getAllSubcategoriesByCostHeadId(projectId, buildingId, costhead, user, (error, result) => {
+        if(error) {
+          next(error);
+        } else {
+          logger.info('Get Quantity success');
+          logger.debug('Getting Quantity of Project ID : '+projectId+' Building ID : '+buildingId);
+          next(new Response(200,result));
+        }
+      });
+    } catch(e) {
+      next(new CostControllException(e.message,e.stack));
+    }
+  }
+
 }
 export  = ProjectController;
