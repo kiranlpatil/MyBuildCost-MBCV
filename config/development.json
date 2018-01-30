@@ -95,26 +95,123 @@
   {
     "default": [
       {
-        "name": "Concrete",
-        "thumbRuleRate": {
-          "slabArea": {
-            "sqft": 20,
-            "sqmt": 30
-          },
-          "saleableArea": {
-            "sqft": 40,
-            "sqmt": 60
-          }
+      "name": "Concrete",
+      "thumbRuleRate": {
+        "slabArea": {
+          "sqft": 20,
+          "sqmt": 30
         },
-        "active": true,
-        "budgetedCostAmount" :0,
-        "rateAnalysisId" : 21,
-        "workitem": {
-          "Plum concrete in cft": {
-            "name": "Plum concrete in cft",
+        "saleableArea": {
+          "sqft": 40,
+          "sqmt": 60
+        }
+      },
+      "active": true,
+      "rateAnalysisId": 21,
+      "subCategory": [
+        {
+        "name": "Plum concrete in cft",
+        "rateAnalysisId": 696,
+        "amount": 0,
+        "workitem": [{
+          "name": "Plum Concrete in cft with M 7.5 grade PCC and plum @ 50: 50, and concrete by conventional volumetric method, using farma and mixer ",
+          "quantity": {
+            "total": 0,
+            "item": [
+              {
+              "item": "Wall 1",
+              "remarks": "internal walls",
+              "nos": 2,
+              "length": 10,
+              "breadth": null,
+              "height": 0,
+              "quantity": 100,
+              "unit": "sqft"
+            },
+              {
+                "item": "Wall 2",
+                "remarks": "internal walls",
+                "nos": 2,
+                "length": 15,
+                "breadth": null,
+                "height": 0,
+                "quantity": 100,
+                "unit": "sqft"
+              },
+              {
+                "item": "Wall 3",
+                "remarks": "internal walls",
+                "nos": 2,
+                "length": 20,
+                "breadth": null,
+                "height": 0,
+                "quantity": 100,
+                "unit": "sqft"
+              },
+              {
+                "item": "Wall 4",
+                "remarks": "internal walls",
+                "nos": 2,
+                "length": 20,
+                "breadth": null,
+                "height": 0,
+                "quantity": 100,
+                "unit": "sqft"
+              }
+            ]
+          },
+          "rateAnalysisId": 50,
+          "unit": "sqft",
+          "rate": {
+            "total": 0,
+            "quantity": 10,
+            "item": [
+              {
+              "item": "Cement",
+              "rateAnalysisId": null,
+              "remarks": "internal walls",
+              "quantity": 2,
+              "unit": "bags",
+              "rate": 200,
+              "totalAmount": 340,
+              "type": "material"
+            },
+              {
+                "item": "Sand",
+                "rateAnalysisId": null,
+                "remarks": "internal walls",
+                "quantity": 2,
+                "unit": "cu ft",
+                "rate": 80,
+                "totalAmount": 4550,
+                "type": "material - labour"
+              },
+              {
+                "item": "Labour for Internal Plaster",
+                "rateAnalysisId": null,
+                "remarks": "internal walls",
+                "quantity": 100,
+                "unit": "sqft",
+                "rate": 30,
+                "totalAmount": 880,
+                "type": "labour"
+              }
+            ]
+          },
+          "amount": 0
+        }]
+      },
+        {
+          "name": "Plum concrete in cum",
+          "rateAnalysisId": 688,
+          "amount": 0,
+          "workitem": [
+            {
+            "name": "Plum concrete in cum, with M 7.5 grade PCC and plum @ 50: 50, and concrete by conventional volumetric method, using farma and mixer ",
             "quantity": {
               "total": 0,
-              "item": [{
+              "item": [
+                {
                 "item": "Wall 1",
                 "remarks": "internal walls",
                 "nos": 2,
@@ -156,14 +253,15 @@
                 }
               ]
             },
-            "rateAnalysisId" : 696,
+            "rateAnalysisId": 153,
             "unit": "sqft",
             "rate": {
-              "total": 500,
+              "total": 0,
               "quantity": 10,
-              "item": [{
+              "item": [
+                {
                 "item": "Cement",
-                "rateAnalysisId" : null,
+                "rateAnalysisId": null,
                 "remarks": "internal walls",
                 "quantity": 2,
                 "unit": "bags",
@@ -173,7 +271,7 @@
               },
                 {
                   "item": "Sand",
-                  "rateAnalysisId" : null,
+                  "rateAnalysisId": null,
                   "remarks": "internal walls",
                   "quantity": 2,
                   "unit": "cu ft",
@@ -183,7 +281,7 @@
                 },
                 {
                   "item": "Labour for Internal Plaster",
-                  "rateAnalysisId" : null,
+                  "rateAnalysisId": null,
                   "remarks": "internal walls",
                   "quantity": 100,
                   "unit": "sqft",
@@ -194,16 +292,23 @@
               ]
             },
             "amount": 0
-          },
-          "Plum concrete in cum": {
-            "name": "Plum concrete in cum",
+          }]
+        },
+        {
+          "name": "Concrete in cft by mix design",
+          "rateAnalysisId": 55,
+          "amount": 0,
+          "workitem": [
+            {
+            "name": "Concrete M 20 in cft, as per mix design, by conventional mixing using weigh batcher and mixer(Only material analysis)",
             "quantity": {
               "total": 0,
-              "item": [{
+              "item": [
+                {
                 "item": "Wall 1",
                 "remarks": "internal walls",
                 "nos": 2,
-                "length": 25,
+                "length": 10,
                 "breadth": null,
                 "height": 0,
                 "quantity": 100,
@@ -223,166 +328,6 @@
                   "item": "Wall 3",
                   "remarks": "internal walls",
                   "nos": 2,
-                  "length": 35,
-                  "breadth": null,
-                  "height": 0,
-                  "quantity": 100,
-                  "unit": "sqft"
-                },
-                {
-                  "item": "Wall 4",
-                  "remarks": "internal walls",
-                  "nos": 2,
-                  "length": 30,
-                  "breadth": null,
-                  "height": 0,
-                  "quantity": 100,
-                  "unit": "sqft"
-                }
-              ]
-            },
-            "rateAnalysisId" : 688,
-            "unit": "sqft",
-            "rate": {
-              "total": 20,
-              "quantity": 10,
-              "item": [{
-                "item": "Cement",
-                "rateAnalysisId" : null,
-                "remarks": "internal walls",
-                "quantity": 2,
-                "unit": "bags",
-                "rate": 200,
-                "totalAmount": 0,
-                "type": "material"
-              },
-                {
-                  "item": "Sand",
-                  "rateAnalysisId" : null,
-                  "remarks": "internal walls",
-                  "quantity": 2,
-                  "unit": "cu ft",
-                  "rate": 80,
-                  "totalAmount": 0,
-                  "type": "material - labour"
-                },
-                {
-                  "item": "Labour for Internal Plaster",
-                  "rateAnalysisId" : null,
-                  "remarks": "internal walls",
-                  "quantity": 100,
-                  "unit": "sqft",
-                  "rate": 30,
-                  "totalAmount": 0,
-                  "type": "labour"
-                }
-              ]
-            },
-            "amount": 0
-          },
-          "Concrete in cft by mix design": {
-            "name": "Concrete in cft by mix design",
-            "quantity": {
-              "total": 0,
-              "item": [{
-                "item": "Wall 1",
-                "remarks": "internal walls",
-                "nos": 2,
-                "length": 40,
-                "breadth": null,
-                "height": 0,
-                "quantity": 100,
-                "unit": "sqft"
-              },
-                {
-                  "item": "Wall 2",
-                  "remarks": "internal walls",
-                  "nos": 2,
-                  "length": 45,
-                  "breadth": null,
-                  "height": 0,
-                  "quantity": 100,
-                  "unit": "sqft"
-                },
-                {
-                  "item": "Wall 3",
-                  "remarks": "internal walls",
-                  "nos": 2,
-                  "length": 50,
-                  "breadth": null,
-                  "height": 0,
-                  "quantity": 100,
-                  "unit": "sqft"
-                },
-                {
-                  "item": "Wall 4",
-                  "remarks": "internal walls",
-                  "nos": 2,
-                  "length": 55,
-                  "breadth": null,
-                  "height": 0,
-                  "quantity": 100,
-                  "unit": "sqft"
-                }
-              ]
-            },
-            "rateAnalysisId" : 55,
-            "unit": "sqft",
-            "rate": {
-              "total": 20,
-              "quantity": 10,
-              "item": [{
-                "item": "Cement",
-                "rateAnalysisId" : null,
-                "remarks": "internal walls",
-                "quantity": 2,
-                "unit": "bags",
-                "rate": 200,
-                "totalAmount": 0,
-                "type": "material"
-              },
-                {
-                  "item": "Sand",
-                  "rateAnalysisId" : null,
-                  "remarks": "internal walls",
-                  "quantity": 2,
-                  "unit": "cu ft",
-                  "rate": 80,
-                  "totalAmount": 0,
-                  "type": "material - labour"
-                },
-                {
-                  "item": "Labour for Internal Plaster",
-                  "rateAnalysisId" : null,
-                  "remarks": "internal walls",
-                  "quantity": 100,
-                  "unit": "sqft",
-                  "rate": 30,
-                  "totalAmount": 0,
-                  "type": "labour"
-                }
-              ]
-            },
-            "amount": 0
-          },
-          "Concrete in cft by volumetric method": {
-            "name": "Concrete in cft by volumetric method",
-            "quantity": {
-              "total": 0,
-              "item": [{
-                "item": "Wall 1",
-                "remarks": "internal walls",
-                "nos": 2,
-                "length": 25,
-                "breadth": null,
-                "height": 0,
-                "quantity": 100,
-                "unit": "sqft"
-              },
-                {
-                  "item": "Wall 2",
-                  "remarks": "internal walls",
-                  "nos": 2,
                   "length": 20,
                   "breadth": null,
                   "height": 0,
@@ -390,20 +335,10 @@
                   "unit": "sqft"
                 },
                 {
-                  "item": "Wall 3",
-                  "remarks": "internal walls",
-                  "nos": 2,
-                  "length": 30,
-                  "breadth": null,
-                  "height": 0,
-                  "quantity": 100,
-                  "unit": "sqft"
-                },
-                {
                   "item": "Wall 4",
                   "remarks": "internal walls",
                   "nos": 2,
-                  "length": 35,
+                  "length": 20,
                   "breadth": null,
                   "height": 0,
                   "quantity": 100,
@@ -411,47 +346,49 @@
                 }
               ]
             },
-            "rateAnalysisId" : 57,
+            "rateAnalysisId": 47,
             "unit": "sqft",
             "rate": {
-              "total": 20,
+              "total": 0,
               "quantity": 10,
-              "item": [{
+              "item": [
+                {
                 "item": "Cement",
-                "rateAnalysisId" : null,
+                "rateAnalysisId": null,
                 "remarks": "internal walls",
                 "quantity": 2,
                 "unit": "bags",
                 "rate": 200,
-                "totalAmount": 0,
+                "totalAmount": 340,
                 "type": "material"
               },
                 {
                   "item": "Sand",
-                  "rateAnalysisId" : null,
+                  "rateAnalysisId": null,
                   "remarks": "internal walls",
                   "quantity": 2,
                   "unit": "cu ft",
                   "rate": 80,
-                  "totalAmount": 0,
+                  "totalAmount": 4550,
                   "type": "material - labour"
                 },
                 {
                   "item": "Labour for Internal Plaster",
-                  "rateAnalysisId" : null,
+                  "rateAnalysisId": null,
                   "remarks": "internal walls",
                   "quantity": 100,
                   "unit": "sqft",
                   "rate": 30,
-                  "totalAmount": 0,
+                  "totalAmount": 880,
                   "type": "labour"
                 }
               ]
             },
             "amount": 0
-          }
+          }]
         }
-      },
+      ]
+    },
       {
         "name": "Doors",
         "thumbRuleRate": {
@@ -465,188 +402,23 @@
           }
         },
         "active": true,
-        "budgetedCostAmount" :0,
-        "rateAnalysisId" : 5,
-        "workitem": {
-          "PVC / FRP doors": {
-            "name": "PVC / FRP doors",
+        "rateAnalysisId": 5,
+        "subCategory": [
+          {
+          "name": "Flush doors",
+          "rateAnalysisId": 9,
+          "amount": 0,
+          "workitem": [
+            {
+            "name": " Door shutter 30 mm thick  for door opening size 2'6\" W x 7'0\" H with both side plain laminate",
             "quantity": {
               "total": 0,
-              "item": [{
+              "item": [
+                {
                 "item": "Wall 1",
                 "remarks": "internal walls",
                 "nos": 2,
-                "length": 40,
-                "breadth": null,
-                "height": 0,
-                "quantity": 100,
-                "unit": "sqft"
-              },
-                {
-                  "item": "Wall 2",
-                  "remarks": "internal walls",
-                  "nos": 2,
-                  "length": 45,
-                  "breadth": null,
-                  "height": 0,
-                  "quantity": 100,
-                  "unit": "sqft"
-                },
-                {
-                  "item": "Wall 3",
-                  "remarks": "internal walls",
-                  "nos": 2,
-                  "length": 50,
-                  "breadth": null,
-                  "height": 0,
-                  "quantity": 100,
-                  "unit": "sqft"
-                },
-                {
-                  "item": "Wall 4",
-                  "remarks": "internal walls",
-                  "nos": 2,
-                  "length": 55,
-                  "breadth": null,
-                  "height": 0,
-                  "quantity": 100,
-                  "unit": "sqft"
-                }
-              ]
-            },
-            "rateAnalysisId" : 10,
-            "unit": "sqft",
-            "rate": {
-              "total": null,
-              "quantity": 10,
-              "item": [{
-                "item": "Cement",
-                "rateAnalysisId" : null,
-                "remarks": "internal walls",
-                "quantity": 2,
-                "unit": "bags",
-                "rate": 200,
-                "totalAmount": 0,
-                "type": "material"
-              },
-                {
-                  "item": "Sand",
-                  "rateAnalysisId" : null,
-                  "remarks": "internal walls",
-                  "quantity": 2,
-                  "unit": "cu ft",
-                  "rate": 80,
-                  "totalAmount": 0,
-                  "type": "material - labour"
-                },
-                {
-                  "item": "Labour for Internal Plaster",
-                  "rateAnalysisId" : null,
-                  "remarks": "internal walls",
-                  "quantity": 100,
-                  "unit": "sqft",
-                  "rate": 30,
-                  "totalAmount": 0,
-                  "type": "labour"
-                }
-              ]
-            },
-            "amount": 0
-          },
-          "Flush doors": {
-            "name": "Flush doors",
-            "quantity": {
-              "total": 0,
-              "item": [{
-                "item": "Wall 1",
-                "remarks": "internal walls",
-                "nos": 2,
-                "length": 60,
-                "breadth": null,
-                "height": 0,
-                "quantity": 100,
-                "unit": "sqft"
-              },
-                {
-                  "item": "Wall 2",
-                  "remarks": "internal walls",
-                  "nos": 2,
-                  "length": 10,
-                  "breadth": null,
-                  "height": 0,
-                  "quantity": 100,
-                  "unit": "sqft"
-                },
-                {
-                  "item": "Wall 3",
-                  "remarks": "internal walls",
-                  "nos": 2,
-                  "length": 12,
-                  "breadth": null,
-                  "height": 0,
-                  "quantity": 100,
-                  "unit": "sqft"
-                },
-                {
-                  "item": "Wall 4",
-                  "remarks": "internal walls",
-                  "nos": 2,
-                  "length": 13,
-                  "breadth": null,
-                  "height": 0,
-                  "quantity": 100,
-                  "unit": "sqft"
-                }
-              ]
-            },
-            "rateAnalysisId" : 9,
-            "unit": "sqft",
-            "rate": {
-              "total": null,
-              "quantity": 10,
-              "item": [{
-                "item": "Cement",
-                "rateAnalysisId" : null,
-                "remarks": "internal walls",
-                "quantity": 2,
-                "unit": "bags",
-                "rate": 200,
-                "totalAmount": 0,
-                "type": "material"
-              },
-                {
-                  "item": "Sand",
-                  "rateAnalysisId" : null,
-                  "remarks": "internal walls",
-                  "quantity": 2,
-                  "unit": "cu ft",
-                  "rate": 80,
-                  "totalAmount": 0,
-                  "type": "material - labour"
-                },
-                {
-                  "item": "Labour for Internal Plaster",
-                  "rateAnalysisId" : null,
-                  "remarks": "internal walls",
-                  "quantity": 100,
-                  "unit": "sqft",
-                  "rate": 30,
-                  "totalAmount": 0,
-                  "type": "labour"
-                }
-              ]
-            },
-            "amount": 0
-          },
-          "Moulded doors": {
-            "name": "Moulded doors",
-            "quantity": {
-              "total": 0,
-              "item": [{
-                "item": "Wall 1",
-                "remarks": "internal walls",
-                "nos": 2,
-                "length": 14,
+                "length": 10,
                 "breadth": null,
                 "height": 0,
                 "quantity": 100,
@@ -666,7 +438,7 @@
                   "item": "Wall 3",
                   "remarks": "internal walls",
                   "nos": 2,
-                  "length": 16,
+                  "length": 20,
                   "breadth": null,
                   "height": 0,
                   "quantity": 100,
@@ -676,7 +448,7 @@
                   "item": "Wall 4",
                   "remarks": "internal walls",
                   "nos": 2,
-                  "length": 17,
+                  "length": 20,
                   "breadth": null,
                   "height": 0,
                   "quantity": 100,
@@ -684,46 +456,425 @@
                 }
               ]
             },
-            "rateAnalysisId" : 11,
+            "rateAnalysisId": 89,
             "unit": "sqft",
             "rate": {
-              "total": null,
+              "total": 0,
               "quantity": 10,
-              "item": [{
+              "item": [
+                {
                 "item": "Cement",
-                "rateAnalysisId" : null,
+                "rateAnalysisId": null,
                 "remarks": "internal walls",
                 "quantity": 2,
                 "unit": "bags",
                 "rate": 200,
-                "totalAmount": 0,
+                "totalAmount": 340,
                 "type": "material"
               },
                 {
                   "item": "Sand",
-                  "rateAnalysisId" : null,
+                  "rateAnalysisId": null,
                   "remarks": "internal walls",
                   "quantity": 2,
                   "unit": "cu ft",
                   "rate": 80,
-                  "totalAmount": 0,
+                  "totalAmount": 4550,
                   "type": "material - labour"
                 },
                 {
                   "item": "Labour for Internal Plaster",
-                  "rateAnalysisId" : null,
+                  "rateAnalysisId": null,
                   "remarks": "internal walls",
                   "quantity": 100,
                   "unit": "sqft",
                   "rate": 30,
-                  "totalAmount": 0,
+                  "totalAmount": 880,
+                  "type": "labour"
+                }
+              ]
+            },
+            "amount": 0
+          },
+            {
+              "name": " Door shutter 30 mm thick for door opening size 3'0\" W x 7'0\" H with both side painted",
+              "quantity": {
+                "total": 400,
+                "item": [{
+                  "item": "Wall 1",
+                  "remarks": "internal walls",
+                  "nos": 2,
+                  "length": 10,
+                  "breadth": null,
+                  "height": 0,
+                  "quantity": 100,
+                  "unit": "sqft"
+                },
+                  {
+                    "item": "Wall 2",
+                    "remarks": "internal walls",
+                    "nos": 2,
+                    "length": 15,
+                    "breadth": null,
+                    "height": 0,
+                    "quantity": 100,
+                    "unit": "sqft"
+                  },
+                  {
+                    "item": "Wall 3",
+                    "remarks": "internal walls",
+                    "nos": 2,
+                    "length": 20,
+                    "breadth": null,
+                    "height": 0,
+                    "quantity": 100,
+                    "unit": "sqft"
+                  },
+                  {
+                    "item": "Wall 4",
+                    "remarks": "internal walls",
+                    "nos": 2,
+                    "length": 20,
+                    "breadth": null,
+                    "height": 0,
+                    "quantity": 100,
+                    "unit": "sqft"
+                  }
+                ]
+              },
+              "rateAnalysisId": 92,
+              "unit": "sqft",
+              "rate": {
+                "total": 500,
+                "quantity": 10,
+                "item": [{
+                  "item": "Cement",
+                  "rateAnalysisId": null,
+                  "remarks": "internal walls",
+                  "quantity": 2,
+                  "unit": "bags",
+                  "rate": 200,
+                  "totalAmount": 340,
+                  "type": "material"
+                },
+                  {
+                    "item": "Sand",
+                    "rateAnalysisId": null,
+                    "remarks": "internal walls",
+                    "quantity": 2,
+                    "unit": "cu ft",
+                    "rate": 80,
+                    "totalAmount": 4550,
+                    "type": "material - labour"
+                  },
+                  {
+                    "item": "Labour for Internal Plaster",
+                    "rateAnalysisId": null,
+                    "remarks": "internal walls",
+                    "quantity": 100,
+                    "unit": "sqft",
+                    "rate": 30,
+                    "totalAmount": 880,
+                    "type": "labour"
+                  }
+                ]
+              },
+              "amount": 0
+            }
+          ]
+        },
+          {
+            "name": "Moulded doors",
+            "rateAnalysisId": 11,
+            "amount": 0,
+            "workitem": [
+              {
+              "name": "Moulded door shutter 30 mm thick with HDF door skin for door opening size 3'0\" W X 7'0\" H ",
+              "quantity": {
+                "total": 0,
+                "item": [
+                  {
+                  "item": "Wall 1",
+                  "remarks": "internal walls",
+                  "nos": 2,
+                  "length": 10,
+                  "breadth": null,
+                  "height": 0,
+                  "quantity": 100,
+                  "unit": "sqft"
+                },
+                  {
+                    "item": "Wall 2",
+                    "remarks": "internal walls",
+                    "nos": 2,
+                    "length": 15,
+                    "breadth": null,
+                    "height": 0,
+                    "quantity": 100,
+                    "unit": "sqft"
+                  },
+                  {
+                    "item": "Wall 3",
+                    "remarks": "internal walls",
+                    "nos": 2,
+                    "length": 20,
+                    "breadth": null,
+                    "height": 0,
+                    "quantity": 100,
+                    "unit": "sqft"
+                  },
+                  {
+                    "item": "Wall 4",
+                    "remarks": "internal walls",
+                    "nos": 2,
+                    "length": 20,
+                    "breadth": null,
+                    "height": 0,
+                    "quantity": 100,
+                    "unit": "sqft"
+                  }
+                ]
+              },
+              "rateAnalysisId": 295,
+              "unit": "sqft",
+              "rate": {
+                "total": 0,
+                "quantity": 10,
+                "item": [
+                  {
+                  "item": "Cement",
+                  "rateAnalysisId": null,
+                  "remarks": "internal walls",
+                  "quantity": 2,
+                  "unit": "bags",
+                  "rate": 200,
+                  "totalAmount": 340,
+                  "type": "material"
+                },
+                  {
+                    "item": "Sand",
+                    "rateAnalysisId": null,
+                    "remarks": "internal walls",
+                    "quantity": 2,
+                    "unit": "cu ft",
+                    "rate": 80,
+                    "totalAmount": 4550,
+                    "type": "material - labour"
+                  },
+                  {
+                    "item": "Labour for Internal Plaster",
+                    "rateAnalysisId": null,
+                    "remarks": "internal walls",
+                    "quantity": 100,
+                    "unit": "sqft",
+                    "rate": 30,
+                    "totalAmount": 880,
+                    "type": "labour"
+                  }
+                ]
+              },
+              "amount": 0
+            },
+              {
+                "name": "Moulded door shutter of opening size 3'0\" W X 7'0\" H with PVC door skin",
+                "quantity": {
+                  "total": 0,
+                  "item": [
+                    {
+                    "item": "Wall 1",
+                    "remarks": "internal walls",
+                    "nos": 2,
+                    "length": 10,
+                    "breadth": null,
+                    "height": 0,
+                    "quantity": 100,
+                    "unit": "sqft"
+                  },
+                    {
+                      "item": "Wall 2",
+                      "remarks": "internal walls",
+                      "nos": 2,
+                      "length": 15,
+                      "breadth": null,
+                      "height": 0,
+                      "quantity": 100,
+                      "unit": "sqft"
+                    },
+                    {
+                      "item": "Wall 3",
+                      "remarks": "internal walls",
+                      "nos": 2,
+                      "length": 20,
+                      "breadth": null,
+                      "height": 0,
+                      "quantity": 100,
+                      "unit": "sqft"
+                    },
+                    {
+                      "item": "Wall 4",
+                      "remarks": "internal walls",
+                      "nos": 2,
+                      "length": 20,
+                      "breadth": null,
+                      "height": 0,
+                      "quantity": 100,
+                      "unit": "sqft"
+                    }
+                  ]
+                },
+                "rateAnalysisId": 296,
+                "unit": "sqft",
+                "rate": {
+                  "total": 0,
+                  "quantity": 10,
+                  "item": [
+                    {
+                    "item": "Cement",
+                    "rateAnalysisId": null,
+                    "remarks": "internal walls",
+                    "quantity": 2,
+                    "unit": "bags",
+                    "rate": 200,
+                    "totalAmount": 340,
+                    "type": "material"
+                  },
+                    {
+                      "item": "Sand",
+                      "rateAnalysisId": null,
+                      "remarks": "internal walls",
+                      "quantity": 2,
+                      "unit": "cu ft",
+                      "rate": 80,
+                      "totalAmount": 4550,
+                      "type": "material - labour"
+                    },
+                    {
+                      "item": "Labour for Internal Plaster",
+                      "rateAnalysisId": null,
+                      "remarks": "internal walls",
+                      "quantity": 100,
+                      "unit": "sqft",
+                      "rate": 30,
+                      "totalAmount": 880,
+                      "type": "labour"
+                    }
+                  ]
+                },
+                "amount": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Pointing",
+        "thumbRuleRate": {
+          "slabArea": {
+            "sqft": 20,
+            "sqmt": 30
+          },
+          "saleableArea": {
+            "sqft": 40,
+            "sqmt": 60
+          }
+        },
+        "active": true,
+        "rateAnalysisId": 77,
+        "subCategory": [
+          {
+          "name": "default",
+          "rateAnalysisId": 0,
+          "amount": 0,
+          "workitem": [
+            {
+            "name": "Salai pointing for UCR masonry in CM 1: 4",
+            "quantity": {
+              "total": 0,
+              "item": [
+                {
+                "item": "Wall 1",
+                "remarks": "internal walls",
+                "nos": 2,
+                "length": 10,
+                "breadth": null,
+                "height": 0,
+                "quantity": 100,
+                "unit": "sqft"
+              },
+                {
+                  "item": "Wall 2",
+                  "remarks": "internal walls",
+                  "nos": 2,
+                  "length": 15,
+                  "breadth": null,
+                  "height": 0,
+                  "quantity": 100,
+                  "unit": "sqft"
+                },
+                {
+                  "item": "Wall 3",
+                  "remarks": "internal walls",
+                  "nos": 2,
+                  "length": 20,
+                  "breadth": null,
+                  "height": 0,
+                  "quantity": 100,
+                  "unit": "sqft"
+                },
+                {
+                  "item": "Wall 4",
+                  "remarks": "internal walls",
+                  "nos": 2,
+                  "length": 20,
+                  "breadth": null,
+                  "height": 0,
+                  "quantity": 100,
+                  "unit": "sqft"
+                }
+              ]
+            },
+            "rateAnalysisId": 348,
+            "unit": "sqft",
+            "rate": {
+              "total": 0,
+              "quantity": 10,
+              "item": [
+                {
+                "item": "Cement",
+                "rateAnalysisId": null,
+                "remarks": "internal walls",
+                "quantity": 2,
+                "unit": "bags",
+                "rate": 200,
+                "totalAmount": 340,
+                "type": "material"
+              },
+                {
+                  "item": "Sand",
+                  "rateAnalysisId": null,
+                  "remarks": "internal walls",
+                  "quantity": 2,
+                  "unit": "cu ft",
+                  "rate": 80,
+                  "totalAmount": 4550,
+                  "type": "material - labour"
+                },
+                {
+                  "item": "Labour for Internal Plaster",
+                  "rateAnalysisId": null,
+                  "remarks": "internal walls",
+                  "quantity": 100,
+                  "unit": "sqft",
+                  "rate": 30,
+                  "totalAmount": 880,
                   "type": "labour"
                 }
               ]
             },
             "amount": 0
           }
-        }
+          ]
+        }]
       }
     ]
   },
