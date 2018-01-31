@@ -11,8 +11,20 @@ export class CostHeadService extends BaseService {
   constructor(protected http: Http, protected messageService: MessageService) {
     super();
   }
+  getSubCategory(projectId: string,costheadId: number) {
+    let headers = new Headers({'Content-Type': 'application/json'});
+    let options = new RequestOptions({headers: headers});
+   let buildingId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_BUILDING);
+    var url = 'project/'+projectId+'/'+API.VIEW_BUILDING+'/'+buildingId+'/'+'costhead/'+costheadId+'/'+'subcategory';
+//  http://localhost:8080/api/project/5a71549f13d32f1704717dcd/building/5a7154c713d32f1704717dce/costhead/5/subcategory
+    console.log(url);
+    return this.http.get(url, options)
+      .map(this.extractData)
+      .catch(this.handleError);
+}
 
-  getCostHeadDetails(projectId:string, costHead: string) {
+
+getCostHeadDetails(projectId:string, costHead: string) {
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({headers: headers});
     let buildingId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_BUILDING);
@@ -53,7 +65,7 @@ export class CostHeadService extends BaseService {
     var url = API.VIEW_PROJECT + '/' + SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT)+
       '/'+ API.VIEW_BUILDING + '/' +SessionStorageService.getSessionValue(SessionStorage.CURRENT_BUILDING)+
       '/' + API.QUANTITY + '/' + costHeadName + '/workitem/' + workItem + '/item/' +costHeadItem_Item;// +costHeadItem;
-    console.log('deleteCostHeadItems() url : '+url);
+    console.log('deleteQuantityItems() url : '+url);
     return this.http.delete(url, options)
       .map(this.extractData)
       .catch(this.handleError);

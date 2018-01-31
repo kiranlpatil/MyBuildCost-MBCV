@@ -22,10 +22,13 @@ export class CostSummaryComponent implements OnInit {
   projectBuildings: any;
   projectId: string;
   buildingId: string;
+  costHeadId: number;
+  buildingName : string;
   buildingsDetails: any;
   estimatedCost : any;
   costHead: string;
   costHeadDetails :any;
+  estimatedItem: any;
   buildingIndex:number;
   showCostHeadList:boolean=false;
 
@@ -67,7 +70,9 @@ export class CostSummaryComponent implements OnInit {
   onSubmit() {
     console.log('Insdide');
   }
-
+  setBuildingId(buildingId: string) {
+    SessionStorageService.setSessionValue(SessionStorage.CURRENT_BUILDING, buildingId);
+  }
   showCostHead(buildingId: string,i:number) {
     console.log('Adding Costhead');
     this.buildingIndex=i;
@@ -88,10 +93,12 @@ export class CostSummaryComponent implements OnInit {
     console.log(error);
   }
 
-  getAmount(buildingId:string,costHead:any,buildingName:string) {
-    SessionStorageService.setSessionValue(SessionStorage.CURRENT_BUILDING , buildingId);
+  getAmount(buildingName:string, estimatedItem :any) {
+    this.estimatedItem = estimatedItem.data;
+    this.costHeadId = estimatedItem.rateAnalysisId;
+   this.buildingId =  SessionStorageService.getSessionValue(SessionStorage.CURRENT_BUILDING);
     this.projectId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT);
-    this._router.navigate([NavigationRoutes.APP_COST_HEAD, this.projectId, buildingName, costHead]);
+    this._router.navigate([NavigationRoutes.APP_COST_HEAD, this.projectId, buildingName, estimatedItem.name, this.costHeadId]);
   }
   getCommonAmenities() {
    this.projectId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT);

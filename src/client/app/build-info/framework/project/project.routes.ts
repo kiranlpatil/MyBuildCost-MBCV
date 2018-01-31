@@ -18,7 +18,7 @@ export const ProjectRoutes: Route[] = [
       {path: 'details/:projectId', component: ProjectDetailsComponent},
       {path: 'create', component: CreateProjectComponent},
       {path: 'cost-summary/:projectId', component: CostSummaryComponent},
-      {path: 'cost-summary/cost-head/:projectId/:buildingName/:costHead', component: CostHeadComponent},
+      {path: 'cost-summary/cost-head/:projectId/:buildingName/:costHeadName/:costHeadId', component: CostHeadComponent},
       {path: 'material-takeoff/:projectId', component: MaterialTakeoffComponent},
       {path: 'cost-summary/common-amenities/:projectId', component: CommonAmenitiesComponent}
     ]

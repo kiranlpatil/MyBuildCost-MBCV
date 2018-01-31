@@ -24,7 +24,7 @@
         <div class="panel panel-default">
           <div class="panel-heading">
             <h4 class="panel-title">
-              <a data-toggle="collapse" href="#collapse{{i}}">
+              <a (click)="setBuildingId(building._id)" data-toggle="collapse" href="#collapse{{i}}">
                 {{building.name}} <small> Total {{defaultCostPer}} : {{building.area}} Sqmt</small>
               </a>
             </h4>
@@ -71,10 +71,10 @@
                                       <input *ngIf="estimatedItem.total != 0" [(ngModel)]="estimatedItem.total" id="estimatedItem.total" class="form-control clear"/>
                                   </div>
                                   <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                      <span *ngIf="estimatedItem.total != 0" class="glyphicon glyphicon-pencil" (click)="getAmount(building._id,estimatedItem.name,building.name)"></span>
+                                      <span *ngIf="estimatedItem.total != 0" class="glyphicon glyphicon-pencil" (click)="getAmount(building.name,estimatedItem)"></span>
                                   </div>
                                   <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                                    <button *ngIf="estimatedItem.total == 0" type="button" class="btn btn-primary" (click)="getAmount(building._id,estimatedItem.name,building.name)">Get Amount</button>
+                                    <button *ngIf="estimatedItem.total == 0" type="button" class="btn btn-primary" (click)="getAmount(building.name, estimatedItem)">Get Amount</button>
                                   </div>
                               </div>
                               <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">

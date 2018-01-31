@@ -30,7 +30,11 @@ export class CostHeadComponent implements OnInit {
   buildingId: string;
   buildingName: string;
   costHead: string;
+  costheadId:number;
+ // costheadId1: number;
   costHeadDetails: any;
+  subCategoryDetails: any;
+  estimatedItem : any;
   currentquantityItem: string;
   currentWorkItem: string;
   workItem: any;
@@ -42,6 +46,7 @@ export class CostHeadComponent implements OnInit {
   heightTotal: number = 0;
   totalAmount:number=0;
   totalRate:number=0;
+  total:number=0;
 
   private toggleQty:boolean=false;
   private toggleRate:boolean=false;
@@ -60,8 +65,11 @@ export class CostHeadComponent implements OnInit {
     this.activatedRoute.params.subscribe(params => {
       this.projectId = params['projectId'];
       this.buildingName = params['buildingName'];
-      this.costHead = params['costHead'];
-      this.getCostHeadComponentDetails(this.projectId, this.costHead);
+      this.costHead = params['costHeadName'];
+      this.costheadId = params['costHeadId'];
+      console.log(this.costheadId);
+     // this.getCostHeadComponentDetails(this.projectId, this.costHead);
+      this.getSubCategoryDetails(this.projectId, this.costheadId);
     });
   }
 
@@ -121,8 +129,19 @@ export class CostHeadComponent implements OnInit {
     console.log('WorkItem : ' + workItem);
     console.log('costHead : ' + costHead);
   }
-
-
+  getSubCategoryDetails(projectId: string, costheadId: number) {
+    this.costHeadService.getSubCategory(projectId,costheadId).subscribe(
+      subCategoryDetail => this.OnGetSubCategorySuccess(subCategoryDetail),
+      error => this.OnGetSubCategoryFail(error)
+    );
+  }
+  OnGetSubCategorySuccess(subCategoryDetail: any) {
+    this.subCategoryDetails = subCategoryDetail.data;
+    console.log(this.subCategoryDetails);
+  }
+  OnGetSubCategoryFail(error: any) {
+    console.log(error);
+  }
   getCostHeadComponentDetails(projectId: string, costHead: string) {
     this.costHeadService.getCostHeadDetails(projectId, costHead).subscribe(
       costHeadDetail => this.onGetCostHeadDetailsSuccess(costHeadDetail),
