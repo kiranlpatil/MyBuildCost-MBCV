@@ -124,12 +124,12 @@ class RateAnalysisService {
       if(error) {
         callback(error, null);
       }else {
+        let sql: string = 'SELECT C2 AS rateAnalysisId, C3 AS name FROM ? WHERE C1 = '+ costHeadId+' and C4 = '+ subCategoryId;
         if(subCategoryId === 0) {
-          subCategoryId = null;
+          sql = 'SELECT C2 AS rateAnalysisId, C3 AS name FROM ? WHERE C1 = '+ costHeadId;
         }
         workitem = workitem['Items'];
-        let sql2 = 'SELECT C2 AS rateAnalysisId, C3 AS name FROM ? WHERE C1 = '+ costHeadId+' and C4 = '+ subCategoryId;
-        let workitemList = alasql(sql2, [workitem]);
+        let workitemList = alasql(sql, [workitem]);
         callback(null, workitemList);
       }
     });

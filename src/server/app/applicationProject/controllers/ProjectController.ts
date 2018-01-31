@@ -538,7 +538,7 @@ class ProjectController {
       let projectId = req.params.id;
       let buildingId = req.params.buildingId;
       let costheadId = req.params.costheadId;
-      let subCategoryId = req.params.subCategoryId;
+      let subCategoryId = parseInt(req.params.subCategoryId);
       let projectService = new ProjectService();
       projectService.getWorkitemList(projectId, buildingId, costheadId, subCategoryId, user, (error, result) => {
         if(error) {
