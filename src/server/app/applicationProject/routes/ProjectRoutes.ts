@@ -60,9 +60,13 @@ class ProjectRoutes {
 
     router.get('/:id/building/:buildingid/quantity/costhead/:costhead/workitem/:workitem', this.authInterceptor.requiresAuth,
       this._requestInterceptor.intercept, controller.getQuantity, this._responseInterceptor.exit);
-    router.get('/:id/building/:buildingid/rate/costhead/:costhead/workitem/:workitem', this.authInterceptor.requiresAuth,
+
+
+    router.get('/:id/building/:buildingid/rate/costhead/:costheadId/subcategory/:subcategoryId/workitem/:workitemId', this.authInterceptor.requiresAuth,
       this._requestInterceptor.intercept, controller.getRate, this._responseInterceptor.exit);
-    router.post('/:id/building/:buildingid/rate/costhead/:costhead/workitem/:workitem', this.authInterceptor.requiresAuth,
+
+
+    router.put('/:id/building/:buildingid/rate/costhead/:costheadId/subcategory/:subcategoryId/workitem/:workitemId', this.authInterceptor.requiresAuth,
       this._requestInterceptor.intercept, controller.updateRate, this._responseInterceptor.exit);
 
 
@@ -82,8 +86,8 @@ class ProjectRoutes {
     router.put('/:id/building/:buildingid/costhead/:costhead/workitem/:workitem/quantity', this.authInterceptor.requiresAuth,
       this._requestInterceptor.intercept, controller.updateQuantity, this._responseInterceptor.exit);
 
-    router.get('/:id/building/:buildingid/rate/costhead/:costhead/workitem/:workitem', this.authInterceptor.requiresAuth,
-      this._requestInterceptor.intercept, controller.getRate, this._responseInterceptor.exit);
+    /*router.get('/:id/building/:buildingid/rate/costhead/:costhead/workitem/:workitem', this.authInterceptor.requiresAuth,
+      this._requestInterceptor.intercept, controller.getRate, this._responseInterceptor.exit);*/
     router.get('/:id/building/:buildingId/costhead/:costheadId/subcategory/:subCategoryId/workitemlist',
       this.authInterceptor.requiresAuth, this._requestInterceptor.intercept, controller.getWorkitemList,
       this._responseInterceptor.exit);

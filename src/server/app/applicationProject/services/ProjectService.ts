@@ -327,7 +327,8 @@ class ProjectService {
     });
   }
 
-  getRate(projectId:string, buildingId:string, costhead:CostHead, workitem:WorkItem, user, callback:(error: any, result: any)=> void) {
+  getRate(projectId:string, buildingId:string, costheadId:number,subcategoryId:number, workitemId:number, user,
+          callback:(error: any, result: any)=> void) {
     logger.info('Project service, getRate has been hit');
     this.buildingRepository.findById(buildingId, (error, building:Building) => {
       if (error) {
@@ -336,12 +337,21 @@ class ProjectService {
         let rate: Rate;
         let rateAnalysisId: number;
         for(let index = 0; building.costHead.length > index; index++) {
-          if(building.costHead[index].name === costhead) {
-            rate = building.costHead[index].workitem[workitem].rate;
-            rateAnalysisId = building.costHead[index].workitem[workitem].rateAnalysisId;
+          if(building.costHead[index].rateAnalysisId === costheadId) {
+            for(let indexSubcategory = 0; building.costHead[index].subCategory.length > indexSubcategory; indexSubcategory++) {
+              if (building.costHead[index].subCategory[indexSubcategory].rateAnalysisId === subcategoryId) {
+                for(let indexWorkitem = 0; building.costHead[index].subCategory[indexSubcategory].workitem.length > indexWorkitem
+                  ; indexWorkitem++) {
+                  if (building.costHead[index].subCategory[indexSubcategory].workitem[indexWorkitem].rateAnalysisId === workitemId) {
+                    rate = building.costHead[index].subCategory[indexSubcategory].workitem[indexWorkitem].rate;
+                    rateAnalysisId =building.costHead[index].subCategory[indexSubcategory].workitem[indexWorkitem].rateAnalysisId;
+                  }
+                }
+              }
+            }
           }
         }
-        if(rate.total === null) {
+        if(rate.total === null && rate.total===0) {
           let rateAnalysisServices : RateAnalysisService = new RateAnalysisService();
           rateAnalysisServices.getRate(rateAnalysisId, (error, rateData)=> {
             if(error) {
@@ -361,7 +371,7 @@ class ProjectService {
     });
   }
 
-  updateRate(projectId, buildingId, costhead, workitem, rate :Rate, user, callback:(error: any, result: any)=> void) {
+  updateRate(projectId:string, buildingId:string, costheadId:number,subcategoryId:number, workitemId:number, rate :Rate, user, callback:(error: any, result: any)=> void) {
     logger.info('Project service, updateRate has been hit');
     this.buildingRepository.findById(buildingId, (error, building:Building) => {
       logger.info('Project service, findById has been hit');
@@ -371,8 +381,17 @@ class ProjectService {
         //let rate: Rate;
         let rateAnalysisId: number;
         for(let index = 0; building.costHead.length > index; index++) {
-          if(building.costHead[index].name === costhead) {
-            building.costHead[index].workitem[workitem].rate = rate;
+          if(building.costHead[index].rateAnalysisId === costheadId) {
+            for(let indexSubcategory = 0; building.costHead[index].subCategory.length > indexSubcategory; indexSubcategory++) {
+              if (building.costHead[index].subCategory[indexSubcategory].rateAnalysisId === subcategoryId) {
+                for(let indexWorkitem = 0; building.costHead[index].subCategory[indexSubcategory].workitem.length > indexWorkitem
+                  ; indexWorkitem++) {
+                  if (building.costHead[index].subCategory[indexSubcategory].workitem[indexWorkitem].rateAnalysisId === workitemId) {
+                    building.costHead[index].subCategory[indexSubcategory].workitem[indexWorkitem].rate=rate;
+                  }
+                }
+              }
+            }
           }
         }
         let query = {'_id' : buildingId};

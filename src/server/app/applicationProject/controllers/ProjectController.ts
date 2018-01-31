@@ -272,11 +272,12 @@ class ProjectController {
       let user = req.user;
       let projectId = req.params.id;
       let buildingId = req.params.buildingid;
-      let costhead = req.params.costhead;
-      let workitem = req.params.workitem;
+      let costheadId =parseInt(req.params.costheadId);
+      let subcategoryId =parseInt(req.params.subcategoryId);
+      let workitemId =parseInt(req.params.workitemId);
       let projectService = new ProjectService();
-      console.log(' workitem => '+ workitem);
-      projectService.getRate(projectId, buildingId, costhead, workitem, user, (error, result) => {
+      console.log(' workitemId => '+ workitemId);
+      projectService.getRate(projectId, buildingId, costheadId,subcategoryId ,workitemId, user, (error, result) => {
         if(error) {
           next(error);
         } else {
@@ -295,12 +296,13 @@ class ProjectController {
       let user = req.user;
       let projectId = req.params.id;
       let buildingId = req.params.buildingid;
-      let costhead = req.params.costhead;
-      let workitem = req.params.workitem;
-      let rate : Rate = <Rate> req.body.data;
+      let costheadId =parseInt(req.params.costheadId);
+      let subcategoryId =parseInt(req.params.subcategoryId);
+      let workitemId =parseInt(req.params.workitemId);
+      let rate : Rate = <Rate> req.body.item;
       let projectService = new ProjectService();
-      console.log(' workitem => '+ workitem);
-      projectService.updateRate(projectId, buildingId, costhead, workitem, rate, user, (error, result) => {
+      console.log(' workitemId => '+ workitemId);
+      projectService.updateRate(projectId, buildingId, costheadId,subcategoryId ,workitemId, rate, user, (error, result) => {
         if(error) {
           next(error);
         } else {
