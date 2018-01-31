@@ -136,5 +136,7 @@ class RateAnalysisService {
   }
 }
 
+
+
 Object.seal(RateAnalysisService);
 export = RateAnalysisService;
