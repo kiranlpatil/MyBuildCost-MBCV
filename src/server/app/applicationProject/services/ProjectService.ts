@@ -681,6 +681,43 @@ class ProjectService {
     });
   }
 
+  deleteSubcategoryFromCostHead(projectId:string, buildingId:string, costheadId:string, subcategoryObject : any, user:User,
+                           callback:(error: any, result: any)=> void) {
+
+    this.buildingRepository.findById(buildingId, (error, building) => {
+      logger.info('Project service, deleteSubcategoryFromCostHead has been hit');
+      if (error) {
+        callback(error, null);
+      } else {
+        let costHeadList = building.costHead;
+        let subCategoryList : any = [];
+
+        for(let index=0; index<costHeadList.length; index++) {
+          if(parseInt(costheadId) === costHeadList[index].rateAnalysisId) {
+            subCategoryList = costHeadList[index].subCategory;
+            for(let subcategoryIndex=0; subcategoryIndex<subCategoryList.length; subcategoryIndex++) {
+              if(subCategoryList[subcategoryIndex].rateAnalysisId === subcategoryObject.subCategoryId) {
+                subCategoryList.splice(subcategoryIndex, 1);
+              }
+            }
+          }
+        }
+
+        let query = {'_id' : buildingId, 'costHead.rateAnalysisId' : parseInt(costheadId)};
+        let newData = {'$set' : {'costHead.$.subCategory' : subCategoryList }};
+
+        this.buildingRepository.findOneAndUpdate(query, newData,{new: true}, (error, dataList) => {
+          logger.info('Project service, deleteSubcategoryFromCostHead has been hit');
+          if (error) {
+            callback(error, null);
+          } else {
+            callback(null, {data: dataList, access_token: this.authInterceptor.issueTokenWithUid(user)});
+          }
+        });
+      }
+    });
+  }
+
   getSubcategory(projectId:string, buildingId:string, costheadId:number, user:User, callback:(error: any, result: any)=> void) {
     logger.info('Project service, getSubcategory has been hit');
     this.buildingRepository.findById(buildingId, (error, building:Building) => {
