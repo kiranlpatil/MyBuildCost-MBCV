@@ -9,8 +9,10 @@
           <div class="panel panel-default">
             <div class="panel-heading">
               <h4 class="panel-title">
-                <a data-toggle="collapse" href="#collapse{{i}}">
+                <a *ngIf="subCategoryDetails[subCategory].rateAnalysisId != 0" data-toggle="collapse" href="#collapse{{i}}">
                   {{subCategoryDetails[subCategory].name}}
+                </a>
+                <a *ngIf="subCategoryDetails[subCategory].rateAnalysisId == 0" data-toggle="collapse" href="#collapse{{i}}">
                 </a>
               </h4>
             </div>
@@ -27,10 +29,21 @@
                   </tr>
                   <tr *ngFor="let workitemObj of subCategoryDetails[subCategory].workitem;">
                     {{workitemObj.name}}
-                    <td *ngFor="let quantityObj of subCategoryDetails[subCategory].workitem.quantity;">
+                    <td>
+                      <input *ngIf="workitemObj.quantity.total" [(ngModel)]="workitemObj.quantity.total" id="quantity"  size="10" class="form-control clear">
+                      <span *ngIf="workitemObj.quantity.total != 0" class="glyphicon glyphicon-pencil"></span>
+                      <button *ngIf="workitemObj.quantity.total == 0" type="button"  id="getQuantity{{i}}">Get Quanity</button>
                     </td>
                     <td>
                       {{workitemObj.unit}}
+                    </td>
+                    <td>
+                      <input *ngIf="workitemObj.rate.total" [(ngModel)]="workitemObj.rate.total" id="rate"  size="10" class="form-control clear">
+                      <span *ngIf="workitemObj.rate.total != 0" class="glyphicon glyphicon-pencil"></span>
+                      <button *ngIf="workitemObj.rate.total == 0" type="button"  id="getRate{{i}}">Get Rate</button>
+                    </td>
+                    <td>
+                      {{workitemObj.amount}}
                     </td>
                   </tr>
                   </thead>
