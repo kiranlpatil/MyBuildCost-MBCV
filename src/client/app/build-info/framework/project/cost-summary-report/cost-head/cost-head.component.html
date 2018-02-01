@@ -8,13 +8,15 @@
         <div class="panel-group">
           <div class="panel panel-default">
             <div class="panel-heading">
-              <h4 class="panel-title">
-                <a *ngIf="subCategoryDetails[subCategory].rateAnalysisId != 0" data-toggle="collapse" href="#collapse{{i}}">
-                  {{subCategoryDetails[subCategory].name}}
-                </a>
-                <a *ngIf="subCategoryDetails[subCategory].rateAnalysisId == 0" data-toggle="collapse" href="#collapse{{i}}">
-                </a>
-              </h4>
+              <div class="panel-title">
+                  <a *ngIf="subCategoryDetails[subCategory].rateAnalysisId !== 0" data-toggle="collapse" href="#collapse{{i}}">
+                      {{subCategoryDetails[subCategory].name}}
+                  </a>
+                  <a *ngIf="subCategoryDetails[subCategory].rateAnalysisId === 0" data-toggle="collapse" href="#collapse{{i}}">
+                  </a>
+                {{subCategoryDetails[subCategory].amount}}
+                <span *ngIf="subCategoryDetails[subCategory].rateAnalysisId !== 0"  class="glyphicon glyphicon-trash" (click)="deleteSubcategory(subCategoryDetails[subCategory])"></span>
+              </div>
             </div>
             <div id="collapse{{i}}" class="panel-collapse collapse">
               <div class="panel-body">

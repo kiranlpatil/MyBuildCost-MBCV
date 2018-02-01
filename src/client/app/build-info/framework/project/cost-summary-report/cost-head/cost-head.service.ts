@@ -59,7 +59,7 @@ getCostHeadDetails(projectId:string, costHead: string) {
   }
 
 
-  deleteCostHeadItems(costHeadName:any,workItem:any,costHeadItem_Item:any){
+  deleteCostHeadItems(costHeadName:any,workItem:any,costHeadItem_Item:any) {
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({headers: headers});
     var url = API.VIEW_PROJECT + '/' + SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT)+
@@ -109,5 +109,20 @@ getCostHeadDetails(projectId:string, costHead: string) {
       .catch(this.handleError);
   }
 
+  deleteSubcategoryFromCostHead(costHeadId:number, subcategory:any) {
+    let headers = new Headers({'Content-Type': 'application/json'});
+    let options = new RequestOptions({headers: headers});
+    let body = {
+      'name' : subcategory.name,
+      'rateAnalysisId' : subcategory.rateAnalysisId
+    };
+    let url = API.VIEW_PROJECT + '/' + SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT)+
+      '/'+ API.VIEW_BUILDING + '/' +SessionStorageService.getSessionValue(SessionStorage.CURRENT_BUILDING)+
+      '/costhead/' + costHeadId + '/subcategory';
+
+    return this.http.put(url,body, options)
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
 
 }

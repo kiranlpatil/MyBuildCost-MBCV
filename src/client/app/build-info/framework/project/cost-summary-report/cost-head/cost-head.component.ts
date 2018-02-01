@@ -66,9 +66,8 @@ export class CostHeadComponent implements OnInit {
       this.projectId = params['projectId'];
       this.buildingName = params['buildingName'];
       this.costHead = params['costHeadName'];
-      this.costheadId = params['costHeadId'];
-      console.log(this.costheadId);
-     // this.getCostHeadComponentDetails(this.projectId, this.costHead);
+      let costheadIdParams = params['costHeadId'];
+      this.costheadId = parseInt(costheadIdParams);
       this.getSubCategoryDetails(this.projectId, this.costheadId);
     });
   }
@@ -359,6 +358,22 @@ getHeight(quantityItems: any) {
       this.totalAmount= this.totalAmount+( this.rateItemsArray[i].quantity*this.rateItemsArray[i].rate);
       this.totalRate= this.totalRate+this.rateItemsArray[i].rate;
     }
+  }
+
+  deleteSubcategory(subcategory : any) {
+    this.costHeadService.deleteSubcategoryFromCostHead(this.costheadId, subcategory).subscribe(
+      deleteSubcategory => this.deleteSubcategorySuccess(deleteSubcategory),
+      error => this.deleteSubcategoryFail(error)
+    );
+  }
+
+  deleteSubcategorySuccess(deleteSubcategory : any) {
+    console.log('deleteSubcategory : '+JSON.stringify(deleteSubcategory));
+    this.getSubCategoryDetails(this.projectId, this.costheadId);
+  }
+
+  deleteSubcategoryFail(error : any) {
+    console.log('deleteSubcategory error : '+JSON.stringify(error));
   }
 
 }

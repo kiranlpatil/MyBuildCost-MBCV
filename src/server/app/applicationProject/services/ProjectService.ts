@@ -736,7 +736,7 @@ class ProjectService {
           if(parseInt(costheadId) === costHeadList[index].rateAnalysisId) {
             subCategoryList = costHeadList[index].subCategory;
             for(let subcategoryIndex=0; subcategoryIndex<subCategoryList.length; subcategoryIndex++) {
-              if(subCategoryList[subcategoryIndex].rateAnalysisId === subcategoryObject.subCategoryId) {
+              if(subCategoryList[subcategoryIndex].rateAnalysisId === subcategoryObject.rateAnalysisId) {
                 subCategoryList.splice(subcategoryIndex, 1);
               }
             }
