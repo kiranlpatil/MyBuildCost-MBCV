@@ -186,6 +186,7 @@ export class Messages {
   public static MSG_SUCCESS_ADD_ITEM: string = 'Your item added successfully.';
   public static MSG_FAIL_ADD_ITEM: string = 'Add new item failed : ';
   public static MSG_SUCCESS_SAVED_COST_HEAD_ITEM: string = 'Your cost head items updated successfully.';
+  public static MSG_SUCCESS_ADD_SUBCATEGORY: string = 'Subcategory added successfully.';
   public static MSG_SUCCESS_DELETE_COSTHEAD_WORKITEM: string = 'Your costhead workitem deleted successfully.';
 
   public static MSG_SUCCESS_UPDATE_BUDGETED_COST_COSTHEAD: string = 'Budgeted cost for costhead updated successfully.';

@@ -23,6 +23,18 @@ export class CostHeadService extends BaseService {
       .catch(this.handleError);
 }
 
+  getSubCategoryList(costheadId: number) {
+    let headers = new Headers({'Content-Type': 'application/json'});
+    let options = new RequestOptions({headers: headers});
+    let projectId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT);
+    let buildingId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_BUILDING);
+
+    var url = 'project/'+projectId+'/'+API.VIEW_BUILDING+'/'+buildingId+'/'+'costhead/'+costheadId+'/'+'subcategorylist';
+
+    return this.http.get(url, options)
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
 
 getCostHeadDetails(projectId:string, costHead: string) {
     let headers = new Headers({'Content-Type': 'application/json'});
@@ -121,6 +133,23 @@ getCostHeadDetails(projectId:string, costHead: string) {
       '/costhead/' + costHeadId + '/subcategory';
 
     return this.http.put(url,body, options)
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
+
+  addSubCategory( selectedSubCategory:any, costHeadId:number ) {
+    let headers = new Headers({'Content-Type': 'application/json'});
+    let options = new RequestOptions({headers: headers});
+    var url = API.VIEW_PROJECT + '/'+
+      SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT) +'/'+
+      API.VIEW_BUILDING + '/' +
+      SessionStorageService.getSessionValue(SessionStorage.CURRENT_BUILDING) +
+      '/costhead/' +costHeadId+'/subcategory';
+    var body = {
+      'subCategory' : selectedSubCategory[0].subCategory,
+      'subCategoryId' : selectedSubCategory[0].rateAnalysisId
+    };
+    return this.http.post(url, body,options)
       .map(this.extractData)
       .catch(this.handleError);
   }

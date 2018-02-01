@@ -47,12 +47,14 @@ export class CostHeadComponent implements OnInit {
   totalAmount:number=0;
   totalRate:number=0;
   total:number=0;
+  showSubcategoryListvar: boolean = false;
 
   private toggleQty:boolean=false;
   private toggleRate:boolean=false;
   private compareIndex:number=0;
   private quantityItemsArray: any;
   private rateItemsArray: any;
+  private subcategoryArray : Array = [];
  /* qForm : FormGroup;
   item: string = '';
   titleAlert:string = 'This field is required';*/
@@ -374,6 +376,46 @@ getHeight(quantityItems: any) {
 
   deleteSubcategoryFail(error : any) {
     console.log('deleteSubcategory error : '+JSON.stringify(error));
+  }
+
+  showSubcategoryList() {
+    this.costHeadService.getSubCategoryList(this.costheadId).subscribe(
+      subcategoryList => this.onGetSubCategoryListSuccess(subcategoryList),
+      error => this.onGetSubCategoryListFail(error)
+    );
+  }
+
+  onGetSubCategoryListSuccess(subcategoryList : any) {
+    this.subcategoryArray = subcategoryList.data;
+    this.showSubcategoryListvar = true;
+  }
+
+  onGetSubCategoryListFail(error : any) {
+    console.log('subcategoryList error : '+JSON.stringify(error));
+  }
+
+  onSelectedAddSubCategory( selectedSubCategoryId : string ) {
+    let subCategoriesList  =  this.subcategoryArray;
+    let subCategoryObj = subCategoriesList.filter(
+      function( subCatObj: any){
+        return subCatObj.rateAnalysisId === parseInt(selectedSubCategoryId);
+    });
+    this.costHeadService.addSubCategory( subCategoryObj, this.costheadId).subscribe(
+      building => this.onAddSubCategorySuccess(building),
+      error => this.onAddSubCategoryFail(error)
+    );
+  }
+
+  onAddSubCategorySuccess(building : any) {
+    var message = new Message();
+    message.isError = false;
+    message.custom_message = Messages.MSG_SUCCESS_ADD_SUBCATEGORY;
+    this.messageService.message(message);
+    this.getSubCategoryDetails(this.projectId, this.costheadId);
+  }
+
+  onAddSubCategoryFail(error : any) {
+    console.log('building error : '+ JSON.stringify(error));
   }
 
 }

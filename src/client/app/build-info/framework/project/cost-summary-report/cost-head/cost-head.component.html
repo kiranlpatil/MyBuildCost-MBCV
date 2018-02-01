@@ -13,6 +13,7 @@
                       {{subCategoryDetails[subCategory].name}}
                   </a>
                   <a *ngIf="subCategoryDetails[subCategory].rateAnalysisId === 0" data-toggle="collapse" href="#collapse{{i}}">
+                    Workitems
                   </a>
                 {{subCategoryDetails[subCategory].amount}}
                 <span *ngIf="subCategoryDetails[subCategory].rateAnalysisId !== 0"  class="glyphicon glyphicon-trash" (click)="deleteSubcategory(subCategoryDetails[subCategory])"></span>
@@ -55,6 +56,18 @@
           </div>
         </div>
       </div>
+
+    <div class="col-md-12" *ngIf="showSubcategoryListvar">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+          <select (change)="onSelectedAddSubCategory($event.target.value)">
+            <option [value]="selectItem">Select Subcategory</option>
+            <option *ngFor="let subCategoryObj of subcategoryArray" [value]="subCategoryObj.rateAnalysisId">{{subCategoryObj.subCategory}}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <button type="button" class="btn btn-primary" (click)="showSubcategoryList()"><span class="glyphicon glyphicon-plus"></span>Add Subcategory</button>
     </div>
 
 <!--  <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
