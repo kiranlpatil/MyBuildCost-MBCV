@@ -173,7 +173,7 @@ export class CostHeadComponent implements OnInit {
   }
 
   //Rate from DB
-  getRateFromDatabase(i:number,item:any){
+  getRateFromDatabase(i:number,itemArray:any){
     this.toggleRate = !this.toggleRate;
     this.compareIndex = i;
     if (this.toggleRate === true) {
@@ -182,9 +182,36 @@ export class CostHeadComponent implements OnInit {
 
     /*this.workItemId=workItemId;
     let subCategoryId=this.subCategoryDetails[i].rateAnalysisId;*/
-    console.log('item',+item);
-    this.rateItemsArray=item;
+    console.log('item',+itemArray);
+    this.rateItemsArray=itemArray.item;
+    let rate = {
+      item : itemArray.item,
+      quantity: itemArray.quantity,
+      total : itemArray.total
+    };
+    /*this.rateIArray.item=itemArray.item;
+    this.rateIArray.quantity=itemArray.quantity;
+    this.rateIArray.total=itemArray.total;*/
+    //TODO with actualll OOP
+    this.rateIArray = rate;
 
+
+
+    this.totalAmount=0;
+    this.totalRate=0;
+    this.totalQuantity=0;
+
+
+    this.quantity=this.rateIArray.quantity;
+    this.rateItemsArray = this.rateIArray.item;
+    let temp=0;
+
+
+    for(let i=0;i<this.rateIArray.item.length;i++) {
+      this.totalAmount= this.totalAmount+( this.rateIArray.item[i].quantity*this.rateIArray.item[i].rate);
+      this.totalRate= this.totalRate+this.rateIArray.item[i].rate;
+      this.totalQuantity=this.totalQuantity+this.rateIArray.item[i].quantity;
+    }
 
    /* this.onGetRateItemsSuccess(rateItem)*/
   }
@@ -440,7 +467,7 @@ getHeight(quantityItems: any) {
     this.rateIArray.total= this.totalAmount/this.totalQuantity;
   }
 
-  showWorkItem() {
+  showWorkItem(subCategoryDetails:any) {
     this.showWorkItemList=true;
     let costheadId=77;
     let subCategoryId=0;
@@ -493,6 +520,10 @@ getHeight(quantityItems: any) {
 
   onUpdateRateItemsSuccess(rateItem: any) {
     console.log('Rate updated successfully');
+    var message = new Message();
+    message.isError = false;
+    message.custom_message = Messages.MSG_SUCCESS_UPDATE_RATE;
+    this.messageService.message(message);
   }
 
   onUpdateRateItemsFail(error: any) {
