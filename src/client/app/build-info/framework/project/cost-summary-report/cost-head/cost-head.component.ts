@@ -55,6 +55,7 @@ export class CostHeadComponent implements OnInit {
   quantityIncrement:number=1;
   previousTotalQuantity:number=1;
   totalItemRateQuantity:number=0;
+  subcategoryRateAnalysisId:number;
 
   itemSize:number=0;
 
@@ -123,24 +124,6 @@ export class CostHeadComponent implements OnInit {
         rateItem => this.onGetRateItemsSuccess(rateItem),
         error => this.onGetRateItemsFail(error)
       );
-
-
-    /*this.rateItemsTotal = rateItems.rate.total;
-    this.workItem = rateItems.name;*/
-
-    /*if (this.rateItemsTotal === null) {
-///:id/building/:buildingid/rate/costhead/:costhead/workitem/:workitem
-      console.log('rateItemsTotal is null');
-      this.costHeadService.getRateItems(this.costheadId, this.workItem).subscribe(
-        rateItem => this.onGetRateItemsSuccess(rateItem),
-        error => this.onGetRateItemsFail(error)
-      );
-    } else {
-      this.costHeadService.getRateItems(this.costheadId, this.workItem).subscribe(
-        rateItem => this.onGetRateItemsSuccess(rateItem),
-        error => this.onGetRateItemsFail(error)
-      );
-    }*/
   }
 
   onGetRateItemsSuccess(rateItem: any) {
@@ -205,7 +188,7 @@ export class CostHeadComponent implements OnInit {
     this.quantity=this.rateIArray.quantity;
     this.rateItemsArray = this.rateIArray.item;
     let temp=0;
-
+    this.itemSize=this.rateIArray.item.length;
 
     for(let i=0;i<this.rateIArray.item.length;i++) {
       this.totalAmount= this.totalAmount+( this.rateIArray.item[i].quantity*this.rateIArray.item[i].rate);
@@ -467,11 +450,10 @@ getHeight(quantityItems: any) {
     this.rateIArray.total= this.totalAmount/this.totalQuantity;
   }
 
-  showWorkItem(subCategoryDetails:any) {
+  showWorkItem(subCategoryId:number) {
     this.showWorkItemList=true;
-    let costheadId=77;
-    let subCategoryId=0;
-    this.costHeadService.showWorkItem(costheadId,subCategoryId).subscribe(
+    this.subcategoryRateAnalysisId=subCategoryId;
+    this.costHeadService.showWorkItem(this.costheadId,subCategoryId).subscribe(
       workItemList => this.onshowWorkItemSuccess(workItemList),
       error => this.onshowWorkItemFail(error)
     );
@@ -490,16 +472,23 @@ getHeight(quantityItems: any) {
     console.log('selectedWorkItem : '+selectedWorkItem);
     this.showWorkItemList=false;
 
-    let costheadId=77;
-    let subCategoryId=0;
-    this.costHeadService.addWorkItem(costheadId,subCategoryId,selectedWorkItem).subscribe(
+    let workItemList  =  this.workItemListArray;
+    let workItemObject = workItemList.filter(
+      function( workItemObj: any){
+        return workItemObj.name === selectedWorkItem;
+      });
+
+    console.log('workItemObject : '+JSON.stringify(workItemObject));
+    let subCategoryId=this.subcategoryRateAnalysisId;
+    this.costHeadService.addWorkItem(this.costheadId,subCategoryId,workItemObject[0].rateAnalysisId,workItemObject[0].name).subscribe(
       workItemList => this.onaddWorkItemSuccess(workItemList),
       error => this.onaddWorkItemFail(error)
     );
   }
 
   onaddWorkItemSuccess(workItemList:any) {
-    this.workItemListArray=workItemList.data;
+    //this.workItemListArray=workItemList.data;
+    this.getSubCategoryDetails(this.projectId, this.costheadId);
   }
 
   onaddWorkItemFail(error:any) {
@@ -543,7 +532,6 @@ getHeight(quantityItems: any) {
     this.totalAmount=0;
     this.totalRate=0;
     this.totalQuantity=0;
-
     for(let i=0;i<this.itemSize;i++) {
       this.rateItemsArray[i].quantity=this.rateItemsArray[i].quantity*this.quantityIncrement;
       this.totalAmount= this.totalAmount+( this.rateItemsArray[i].quantity*this.rateItemsArray[i].rate);

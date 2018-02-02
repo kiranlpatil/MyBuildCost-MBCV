@@ -126,8 +126,8 @@ getCostHeadDetails(projectId:string, costHead: string) {
   showWorkItem(costheadId:number,subCategoryId:number) {
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({headers: headers});
-    var url = API.VIEW_PROJECT + '/5a718ade64a31f16e4521893/'
-      + API.VIEW_BUILDING + '/5a718af064a31f16e4521894/costhead/'
+    var url = API.VIEW_PROJECT + '/'+  SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT)+'/'
+      + API.VIEW_BUILDING + '/'+SessionStorageService.getSessionValue(SessionStorage.CURRENT_BUILDING)+'/costhead/'
       + costheadId + '/subcategory/'+subCategoryId + '/workitemlist';// +costHeadItem;
     console.log('showWorkItem url : '+url);
     return this.http.get(url, options)
@@ -136,15 +136,15 @@ getCostHeadDetails(projectId:string, costHead: string) {
   }
 
 
-  addWorkItem(costheadId:number,subCategoryId:number,selectedWorkItem:string) {
+  addWorkItem(costheadId:number,subCategoryId:number,selectedWorkItemRateAnalysisId:number,selectedWorkItemName:string) {
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({headers: headers});
     let body={
-      'rateAnalysisId': 56,
-      'name': selectedWorkItem
+      'rateAnalysisId': selectedWorkItemRateAnalysisId,
+      'name': selectedWorkItemName
     }
-    var url = API.VIEW_PROJECT + '/5a718ade64a31f16e4521893/'
-      + API.VIEW_BUILDING + '/5a718af064a31f16e4521894/costhead/'
+    var url = API.VIEW_PROJECT + '/'+  SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT)+'/'
+      + API.VIEW_BUILDING + '/'+SessionStorageService.getSessionValue(SessionStorage.CURRENT_BUILDING)+'/costhead/'
       + costheadId + '/subcategory/'+subCategoryId + '/workitem';// +costHeadItem;
     console.log('addWorkItem url : '+url);
     return this.http.post(url,body, options)
