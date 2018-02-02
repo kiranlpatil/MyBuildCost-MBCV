@@ -96,15 +96,19 @@ class ReportService {
                       }
                     }
                     let subCategory: Array<SubCategory> = costHeadArray[costHeadIndex].subCategory;
-                    for(let subCategoryKey in subCategory) {
-                      let workItem = subCategory[subCategoryKey].workitem;
-                      for(let key in workItem) {
-                        if(workItem[key].quantity.total !== null && workItem[key].rate.total !== null) {
-                          estimateReport.total = workItem[key].quantity.total + estimateReport.total;
-                          let estimatedRate = (estimateReport.total / buildingReport.area);
-                          estimateReport.rate = estimatedRate.toFixed(2);
+                    if(subCategory.length !==0) {
+
+                      for(let subCategoryKey in subCategory) {
+                        let workItem = subCategory[subCategoryKey].workitem;
+                        for(let key in workItem) {
+                          if(workItem[key].quantity.total !== null && workItem[key].rate.total !== null) {
+                            estimateReport.total = workItem[key].quantity.total + estimateReport.total;
+                            let estimatedRate = (estimateReport.total / buildingReport.area);
+                            estimateReport.rate = estimatedRate.toFixed(2);
+                          }
                         }
                       }
+
                     }
                     estimatedReport.totalEstimatedCost = estimateReport.total + estimatedReport.totalEstimatedCost;
                     estimatedReport.totalRate = estimatedReport.totalRate + estimateReport.rate;

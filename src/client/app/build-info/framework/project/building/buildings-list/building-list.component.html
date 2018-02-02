@@ -56,7 +56,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-            <button class="btn btn-primary" type="button"  data-toggle="modal" data-target="#new" data-dismiss="modal">Next</button>
+            <button class="btn btn-primary" type="submit" (click)="onSubmit()" data-toggle="modal" data-target="#new" data-dismiss="modal">Next</button>
           </div>
         </form>
       </div>
@@ -72,16 +72,24 @@
           <h2 class="modal-title">Clone {{model.name}} Building Details</h2>
         </div>
         <div class="modal-body">
-            <ul *ngFor="let costHead of clonedBuildingDetails">
-              <input type="checkbox" [checked]="costHead.active" (change)="costHead.active = !costHead.active" />{{costHead.name}}
-                <li *ngFor="let workitem of costHead.workitem">
-                  <input type="checkbox" [checked]="(costHead.active && workitem.active)" (change)="workitem.active = !workitem.active" />{{workitem.name}}
-                </li>
-            </ul>
+            <div *ngFor="let costHead of clonedBuildingDetails; let i = index">
+              <input type="checkbox" [checked]="costHead.active" (change)="costHead.active = !costHead.active"/>
+
+              <a href="#subCategory{{i}}" data-toggle="collapse">{{costHead.name}}</a>
+
+                <div id="subCategory{{i}}" class="collapse" *ngFor="let subcategory of costHead.subCategory">
+
+                  <input type="checkbox" [checked]="(costHead.active && subcategory.active)" (change)="subcategory.active = !subcategory.active" />
+                  {{subcategory.name}}
+                      <div *ngFor="let workitem of subcategory.workitem">
+                        <input type="checkbox" [checked]="(costHead.active && subcategory.active && workitem.active)" (change)="workitem.active = !workitem.active" />{{workitem.name}}
+                      </div>
+                </div>
+            </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-          <button class="btn btn-primary" type="button" (click)="onSubmit()" (click)="updateBuilding(clonedBuildingDetails, clonedBuildingDetails._id)" data-toggle="modal" data-dismiss="modal">Clone</button>
+          <button class="btn btn-primary" type="button" (click)="updateBuilding(clonedBuildingDetails, clonedBuildingDetails._id)" data-toggle="modal" data-dismiss="modal">Clone</button>
         </div>
       </div>
     </div>

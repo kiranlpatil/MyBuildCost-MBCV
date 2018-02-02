@@ -5,10 +5,10 @@ class ClonedWorkItem {
   name: string;
   rateAnalysisId:number;
   active:boolean;
-  quantity: Map<string, Quantity>;
+  quantity: Quantity;
   unit: string;
-  rate: Map<any, Rate>;
-  amount: 0;
+  rate: Rate;
+  amount: number;
   constructor() {
     this.active = true;
   }

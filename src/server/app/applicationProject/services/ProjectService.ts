@@ -22,6 +22,7 @@ import SubCategory = require('../dataaccess/model/SubCategory');
 let config = require('config');
 var log4js = require('log4js');
 import alasql = require('alasql');
+import ClonedSubcategory = require('../dataaccess/model/ClonedSubcategory');
 var logger=log4js.getLogger('Project service');
 
 class ProjectService {
@@ -168,23 +169,35 @@ class ProjectService {
               clonedCostHead.thumbRuleRate = resultCostHead.thumbRuleRate;
 
               if(costHead.active) {
-                let workItemList = costHead.workitem;
-                let resultWorkItemList = resultCostHead.workitem;
 
-                for(let workItem of workItemList) {
-                  for(let resultWorkItem in resultWorkItemList) {
-                    if(workItem.name === resultWorkItem) {
-                      if(!workItem.active) {
-                        delete resultWorkItemList[resultWorkItem];
+                let subcategoryList = costHead.subCategory;
+                let resultSubCategoryList = resultCostHead.subCategory;
+
+                for(let resultSubcategoryIndex=0; resultSubcategoryIndex<resultSubCategoryList.length; resultSubcategoryIndex++) {
+                  for(let subcategoryIndex=0 ; subcategoryIndex<subcategoryList.length; subcategoryIndex++) {
+                    if(subcategoryList[subcategoryIndex].name === resultSubCategoryList[resultSubcategoryIndex].name) {
+                      if(!subcategoryList[subcategoryIndex].active) {
+                        resultSubCategoryList.splice(resultSubcategoryIndex,1);
+                      } else {
+                        let resultWorkitemList = resultSubCategoryList[resultSubcategoryIndex].workitem;
+                        let workItemList = subcategoryList[subcategoryIndex].workitem;
+
+                        for(let resultWorkitemIndex=0;  resultWorkitemIndex < resultWorkitemList.length; resultWorkitemIndex++){
+                          for(let workitemIndex=0;  workitemIndex < workItemList.length; workitemIndex++) {
+                            if(!workItemList[workitemIndex].active) {
+                              resultWorkitemList.splice(resultWorkitemIndex, 1);
+                            }
+                          }
+                        }
                       }
                     }
                   }
                 }
-                clonedCostHead.workitem = resultWorkItemList;
+                clonedCostHead.subCategory = resultCostHead.subCategory;
               } else {
-                clonedCostHead.workitem = resultCostHead.workitem;
+                clonedCostHead.subCategory = resultCostHead.subCategory;
               }
-              clonedCostHeadDetails.push(clonedCostHead);
+                clonedCostHeadDetails.push(clonedCostHead);
             }
           }
         }
@@ -262,20 +275,34 @@ class ProjectService {
           clonedCostHead.name = clonedBuilding[costHeadIndex].name;
           clonedCostHead.rateAnalysisId = clonedBuilding[costHeadIndex].rateAnalysisId;
           clonedCostHead.active = clonedBuilding[costHeadIndex].active;
+          clonedCostHead.budgetedCostAmount = clonedBuilding[costHeadIndex].budgetedCostAmount;
 
           let clonedWorkItemArray : Array<ClonedWorkItem> = [];
-          let workItemsArray = clonedBuilding[costHeadIndex].workitem;
+          let clonedSubcategoryArray : Array<ClonedSubcategory> = [];
+          let subCategoryArray = clonedBuilding[costHeadIndex].subCategory;
 
-          for(let key in  workItemsArray) {
-            let clonedWorkItem = new ClonedWorkItem();
-            clonedWorkItem.name = workItemsArray[key].name;
-            clonedWorkItem.rateAnalysisId = workItemsArray[key].rateAnalysisId;
-            clonedWorkItem.quantity = workItemsArray[key].quantity;
-            clonedWorkItem.rate = workItemsArray[key].rate;
-            clonedWorkItem.active = true;
-            clonedWorkItemArray.push(clonedWorkItem);
+          for(let subCategoryIndex=0; subCategoryIndex<subCategoryArray.length; subCategoryIndex++) {
+            let clonedSubcategory = new ClonedSubcategory();
+            clonedSubcategory.name = subCategoryArray[subCategoryIndex].name;
+            clonedSubcategory.rateAnalysisId = subCategoryArray[subCategoryIndex].rateAnalysisId;
+            clonedSubcategory.amount = subCategoryArray[subCategoryIndex].amount;
+            clonedSubcategory.active = true;
+
+            let workitemArray = subCategoryArray[subCategoryIndex].workitem;
+            for(let workitemIndex=0; workitemIndex< workitemArray.length; workitemIndex++) {
+              let clonedWorkItem = new ClonedWorkItem();
+              clonedWorkItem.name = workitemArray[workitemIndex].name;
+              clonedWorkItem.rateAnalysisId =  workitemArray[workitemIndex].rateAnalysisId;
+              clonedWorkItem.unit =  workitemArray[workitemIndex].unit;
+              clonedWorkItem.amount = workitemArray[workitemIndex].amount;
+              clonedWorkItem.rate = workitemArray[workitemIndex].rate;
+              clonedWorkItem.quantity = workitemArray[workitemIndex].quantity;
+              clonedWorkItemArray.push(clonedWorkItem);
+            }
+            clonedSubcategory.workitem = clonedWorkItemArray;
+            clonedSubcategoryArray.push(clonedSubcategory);
           }
-          clonedCostHead.workitem = clonedWorkItemArray;
+          clonedCostHead.subCategory = clonedSubcategoryArray;
           clonedCostHeadArray.push(clonedCostHead);
         }
         building.costHead = clonedCostHeadArray;
@@ -407,7 +434,67 @@ class ProjectService {
     });
   }
 
-  deleteWorkitem(projectId:string, buildingId:string, costhead:CostHead, workitem:WorkItem, user:User,
+  deleteQuantity(projectId:string, buildingId:string, costheadId:string, subcategoryId:string, workitemId:string, user:User, item:string, callback:(error: any, result: any)=> void) {
+    logger.info('Project service, deleteQuantity has been hit');
+    this.buildingRepository.findById(buildingId, (error, building:Building) => {
+      if (error
+      ) {
+        callback(error, null);
+      } else {
+        let quantity: Quantity;
+         this.costHeadId = parseInt(costheadId);
+          this.subCategoryId = parseInt(subcategoryId);
+          this.workItemId = parseInt(workitemId);
+              for(let index = 0; building.costHead.length > index; index++) {
+                if (building.costHead[index].rateAnalysisId === this.costHeadId) {
+                  for (let index1 = 0; building.costHead[index].subCategory.length > index1; index1++) {
+                    if (building.costHead[index].subCategory[index1].rateAnalysisId === this.subCategoryId) {
+                      for (let index2 = 0; building.costHead[index].subCategory[index1].workitem.length > index2; index2++) {
+                        if (building.costHead[index].subCategory[index1].workitem[index2].rateAnalysisId === this.workItemId) {
+                          quantity = building.costHead[index].subCategory[index1].workitem[index2].quantity;
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+        for(let index = 0; quantity.item.length > index; index ++) {
+          if(quantity.item[index].item  === item) {
+            quantity.item.splice(index,1);
+          }
+        }
+        let query = { _id : buildingId };
+        this.buildingRepository.findOneAndUpdate(query, building,{new: true}, (error, building) => {
+          logger.info('Project service, findOneAndUpdate has been hit');
+          if (error) {
+            callback(error, null);
+          } else {
+            let quantity: Quantity;
+            for(let index = 0; building.costHead.length > index; index++) {
+              if (building.costHead[index].rateAnalysisId === this.costHeadId) {
+                for (let index1 = 0; building.costHead[index].subCategory.length > index1; index1++) {
+                  if (building.costHead[index].subCategory[index1].rateAnalysisId === this.subCategoryId) {
+                    for (let index2 = 0; building.costHead[index].subCategory[index1].workitem.length > index2; index2++) {
+                      if (building.costHead[index].subCategory[index1].workitem[index2].rateAnalysisId === this.workItemId) {
+                        quantity = building.costHead[index].subCategory[index1].workitem[index2].quantity;
+                      }
+                    }
+                  }
+                }
+              }
+            }
+            if(quantity.total === null) {
+              for(let index = 0; quantity.item.length > index; index ++) {
+                quantity.total = quantity.item[index].quantity + quantity.total;
+              }
+            }
+            callback(null, {data: quantity, access_token: this.authInterceptor.issueTokenWithUid(user)});
+          }
+        });
+      }
+    });
+  }
+  deleteWorkitem(projectId:string, buildingId:string, costhead:string, workitem:WorkItem, user:User,
                  callback:(error: any, result: any)=> void) {
     logger.info('Project service, deleteWorkitem has been hit');
     this.buildingRepository.findById(buildingId, (error, building:Building) => {
