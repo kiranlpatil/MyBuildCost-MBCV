@@ -73,23 +73,22 @@ export class CostSummaryComponent implements OnInit {
   setBuildingId(buildingId: string) {
     SessionStorageService.setSessionValue(SessionStorage.CURRENT_BUILDING, buildingId);
   }
-  showCostHead(buildingId: string,i:number) {
+  showInactiveCostHeadsOnDropDown(buildingId: string) {
     console.log('Adding Costhead');
-    this.buildingIndex=i;
     this.buildingId=buildingId;
-    this.costSummaryService.getCosthead(this.projectId,this.buildingId).subscribe(
-      inActiveCostHeads => this.onGetCostheadSuccess(inActiveCostHeads),
-      error => this.onGetCostheadFail(error)
+    this.costSummaryService.getInactiveCostHeads(this.projectId,this.buildingId).subscribe(
+      inActiveCostHeads => this.onGetInactiveCostHeadsSuccess(inActiveCostHeads),
+      error => this.onGetInactiveCostHeadsFailure(error)
     );
   }
 
 
-  onGetCostheadSuccess(inActiveCostHeads : any) {
+  onGetInactiveCostHeadsSuccess(inActiveCostHeads : any) {
       this.inActiveCostHeadArray=inActiveCostHeads.data;
       this.showCostHeadList=true;
   }
 
-  onGetCostheadFail(error : any) {
+  onGetInactiveCostHeadsFailure(error : any) {
     console.log(error);
   }
 
@@ -212,17 +211,16 @@ export class CostSummaryComponent implements OnInit {
     console.log(error);
   }
 
-  onSelectedinActiveCostHead(selectedinActiveCostHead:any) {
-    console.log('Selected Item '+selectedinActiveCostHead);
+  inactiveCostHeadSelected(selectedinActiveCostHead:string) {
     this.showCostHeadList=false;
-    this.costSummaryService.addCosthead(selectedinActiveCostHead,this.projectId,this.buildingId).subscribe(
-      inActiveCostHeads => this.onAddCostheadSuccess(inActiveCostHeads),
-      error => this.onAddCostheadFail(error)
+    this.costSummaryService.addInactiveCostHead(selectedinActiveCostHead,this.projectId,this.buildingId).subscribe(
+      inActiveCostHeads => this.onAddInactiveCostHeadSuccess(inActiveCostHeads),
+      error => this.onAddInactiveCostHeadFailure(error)
     );
   }
 
 
-  onAddCostheadSuccess(inActiveCostHeads : any) {
+  onAddInactiveCostHeadSuccess(inActiveCostHeads : any) {
     console.log('onAddCostheadSuccess ->'+inActiveCostHeads);
     var message = new Message();
     message.isError = false;
@@ -231,7 +229,7 @@ export class CostSummaryComponent implements OnInit {
     this.onChangeCostingIn(this.defaultCostIn);
   }
 
-  onAddCostheadFail(error : any) {
+  onAddInactiveCostHeadFailure(error : any) {
     console.log('onAddCostheadSuccess()'+error);
   }
 

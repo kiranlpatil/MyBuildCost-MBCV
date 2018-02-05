@@ -56,6 +56,7 @@ export class CostHeadComponent implements OnInit {
   previousTotalQuantity:number=1;
   totalItemRateQuantity:number=0;
   subcategoryRateAnalysisId:number;
+  comapreWorkItemRateAnalysisId:number;
 
   itemSize:number=0;
 
@@ -450,7 +451,8 @@ getHeight(quantityItems: any) {
     this.rateIArray.total= this.totalAmount/this.totalQuantity;
   }
 
-  showWorkItem(subCategoryId:number) {
+  showWorkItem(subCategoryId:number,i:number) {
+    this.comapreWorkItemRateAnalysisId=i;
     this.showWorkItemList=true;
     this.subcategoryRateAnalysisId=subCategoryId;
     this.costHeadService.showWorkItem(this.costheadId,subCategoryId).subscribe(
