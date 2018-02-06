@@ -143,4 +143,8 @@ export class UserChangePasswordComponent {
     //this.candidate.summary = new Summary();
   }
 
+  goToDashboard()  {
+  this._router.navigate([NavigationRoutes.APP_DASHBOARD]);
+}
+
 }
