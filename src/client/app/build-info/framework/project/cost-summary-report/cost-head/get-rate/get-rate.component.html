@@ -1,0 +1,51 @@
+<table class="table">
+      <thead>
+      <th>Description</th>
+      <th>Remarks</th>
+      <th>Qty.</th>
+      <th>Unit</th>
+      <th>Rate/Unit</th>
+      <th>Amount</th>
+      </thead>
+      <tbody>
+      <tr *ngFor="let rateItem of rateItemsArray; let k = index">
+        <td>
+          <input [(ngModel)]="rateItem.item" id="itemdescription" class="form-control clear"/>
+        </td>
+        <td>
+          <input [(ngModel)]="rateItem.remarks" id="itemquantity" class="form-control clear"/>
+        </td>
+        <td>
+          <input [(ngModel)]="rateItem.quantity" id="itemunit" class="form-control clear" (change)="changeQuantity(rateItem.quantity,k)"/>
+        </td>
+        <td>
+          <input [(ngModel)]="rateItem.unit" id="itemrate" class="form-control clear" readonly/>
+        </td>
+        <td>
+          <input [(ngModel)]="rateItem.rate" id="itemamount" class="form-control clear" (change)="changeRate(rateItem.rate,k)"/>
+        </td>
+        <td>
+          <input [(ngModel)]="rateItem.quantity*rateItem.rate" id="totalAmount" class="form-control clear" readonly/>
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="4">
+          <label>Total</label>
+        </td>
+        <td>
+          {{totalRate}}
+        </td>
+        <td>
+          {{totalAmount}}
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="6">
+              <button type="button" class="btn btn-primary" (click)="updateRate(rateItemsArray)">Save</button>
+        </td>
+      </tr>
+
+      </tbody>
+    </table>

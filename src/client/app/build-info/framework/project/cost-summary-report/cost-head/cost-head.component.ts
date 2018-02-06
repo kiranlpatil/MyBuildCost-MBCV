@@ -126,6 +126,7 @@ export class CostHeadComponent implements OnInit, OnChanges {
     }
 
     this.workItemId=workItemId;
+    SessionStorageService.setSessionValue(SessionStorage.CURRENT_WORKITEM_ID,workItemId);
     let subCategoryId=this.subCategoryDetails[i].rateAnalysisId;
 
     this.costHeadService.getRateItems(this.costheadId, subCategoryId,this.workItemId).subscribe(
@@ -147,9 +148,6 @@ export class CostHeadComponent implements OnInit, OnChanges {
 
     this.unit=rateItem.data.unit;
     this.rateItemsArray = rateItem.data.item;
-    let temp=0;
-
-    this.itemSize=rateItem.data.item.length;
 
     for(let i=0;i<rateItem.data.item.length;i++) {
       this.totalAmount= this.totalAmount+( rateItem.data.item[i].quantity*rateItem.data.item[i].rate);
@@ -166,46 +164,24 @@ export class CostHeadComponent implements OnInit, OnChanges {
   //Rate from DB
   getRateFromDatabase(i:number,itemArray:any, workItemRateAnalysisId : number) {
     this.toggleRate = !this.toggleRate;
-    this.workItemId = workItemRateAnalysisId;
+    SessionStorageService.setSessionValue(SessionStorage.CURRENT_WORKITEM_ID, workItemRateAnalysisId);
     this.compareIndex = i;
     if (this.toggleRate === true) {
       this.toggleQty = false;
     }
-
-    /*this.workItemId=workItemId;
-    let subCategoryId=this.subCategoryDetails[i].rateAnalysisId;*/
-    console.log('item',+itemArray);
     this.rateItemsArray=itemArray.item;
-    let rate = {
-      item : itemArray.item,
-      quantity: itemArray.quantity,
-      total : itemArray.total
-    };
-    /*this.rateIArray.item=itemArray.item;
-    this.rateIArray.quantity=itemArray.quantity;
-    this.rateIArray.total=itemArray.total;*/
-    //TODO with actualll OOP
+    let rate = new Rate();
+    rate.item = itemArray.item;
+    rate.total = itemArray.total;
     this.rateIArray = rate;
-
-
-
     this.totalAmount=0;
     this.totalRate=0;
     this.totalQuantity=0;
 
-
-    this.quantity=this.rateIArray.quantity;
-    this.rateItemsArray = this.rateIArray.item;
-    let temp=0;
-    this.itemSize=this.rateIArray.item.length;
-
     for(let i=0;i<this.rateIArray.item.length;i++) {
       this.totalAmount= this.totalAmount+( this.rateIArray.item[i].quantity*this.rateIArray.item[i].rate);
       this.totalRate= this.totalRate+this.rateIArray.item[i].rate;
-      this.totalQuantity=this.totalQuantity+this.rateIArray.item[i].quantity;
     }
-
-   /* this.onGetRateItemsSuccess(rateItem)*/
   }
 
 
@@ -264,7 +240,6 @@ export class CostHeadComponent implements OnInit, OnChanges {
       message.custom_message = Messages.MSG_SUCCESS_DELETE_COSTHEAD_WORKITEM;
       this.messageService.message(message);
       this.getCostHeadComponentDetails(this.projectId, this.costHead);
-      /* this.costSummaryService.onCostHeadUpdate(costHeadDetail);*/
     }
   }
 
@@ -309,9 +284,7 @@ export class CostHeadComponent implements OnInit, OnChanges {
     message.isError = false;
     message.custom_message = Messages.MSG_SUCCESS_DELETE_ITEM;
     this.messageService.message(message);
-    //this.getQuantity(i, this.quantityItemsArray)
     this.getQuantityTotal(this.quantityItemsArray);
-   // this.getCostHeadComponentDetails(this.projectId, this.costHead);
   }
 
   onDeleteCostHeadItemsFail(error: any) {
@@ -332,29 +305,8 @@ export class CostHeadComponent implements OnInit, OnChanges {
 
     };
     this.quantityItemsArray.push(quantity);
-    /*this.costHeadService.addCostHeadItems(this.costHead,this.workItem,body).subscribe(
-      costHeadItemAdd => this.onAddCostHeadItemsSuccess(costHeadItemAdd),
-      error => this.onAddCostHeadItemsFail(error)
-    );*/
   }
 
-  /*
-    onAddCostHeadItemsSuccess(costHeadItemAdd : any) {
-      this.quantityItemsArray=costHeadItemAdd.data.item;
-      var message = new Message();
-      message.isError = false;
-      message.custom_message = Messages.MSG_SUCCESS_ADD_ITEM;
-      this.messageService.message(message);
-      this.getCostHeadComponentDetails(this.projectId,this.costHead);
-    }
-
-  onAddCostHeadItemsFail(error : any) {
-    console.log(error);
-    var message = new Message();
-    message.isError = false;
-    message.custom_message = Messages.MSG_FAIL_ADD_ITEM + error.err_msg;
-    this.messageService.message(message);
-  }*/
   getNo(quantityItems : any) {
   this.quanitytNumbersTotal =0;
     for(let i=0;i<this.quantityItemsArray.length;i++) {

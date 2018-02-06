@@ -56,14 +56,24 @@
                       {{workitemObj.rate.unit}}
                     </div>
                   </div>
-                  <div  class="row" [ngStyle]="(toggleQty==true && compareIndex==i) ? {'display': 'table-row'}:{'display': 'none'}" style="display: none;">
+                  <div class="row" [ngStyle]="(toggleQty==true && compareIndex==i) ? {'display': 'table-row'}:{'display': 'none'}" style="display: none;">
                     <bi-cost-head-get-quantity [quantityItems]="quantityItemsArray"
                                                [subCategoryRateAnalysisId]="subCategoryDetails[subCategory].rateAnalysisId"
                                                 (refreshDataList)="refreshDataList()">
                     </bi-cost-head-get-quantity>
                   </div>
 
-                <!--Add workitem...-->
+                  <!--get rate-->
+                  <div class="row" [ngStyle]="(toggleRate==true && compareIndex==i) ? {'display': 'table-row'}:{'display': 'none'}" style="display: none;">
+                    <bi-rate-items [rateItemsArray]="rateItemsArray" [rateItemsObject]="rateIArray"
+                                               [subCategoryRateAnalysisId]="subCategoryDetails[subCategory].rateAnalysisId"
+                                               (refreshDataList)="refreshDataList()">
+                    </bi-rate-items>
+                  </div>
+                  <!--get rate end-->
+
+
+                  <!--Add workitem...-->
 
                 <button type="button" class="btn btn-primary" (click)="showWorkItem(subCategoryDetails[subCategory].rateAnalysisId,i)"><span class="glyphicon glyphicon-plus"></span>Add Workitem</button>
 
@@ -79,85 +89,6 @@
 
                   </select>
                 </div>
-
-                <!--get rate-->
-                <tr [ngStyle]="(toggleRate==true && compareIndex==i) ? {'display': 'table-row'}:{'display': 'none'}" style="display: none;">
-                  <td colspan="5">
-                    <table class="table">
-                      <thead>
-                      <th>Description</th>
-                      <th>Remarks</th>
-                      <th>Qty.</th>
-                      <th>Unit</th>
-                      <th>Rate/Unit</th>
-                      <th>Amount</th>
-                      </thead>
-                      <tbody>
-                      <tr *ngFor="let rateItem of rateItemsArray;let k = index">
-                        <td>
-                          <input [(ngModel)]="rateItem.item" id="itemdescription" class="form-control clear"/>
-                        </td>
-                        <td>
-                          <input [(ngModel)]="rateItem.remarks" id="itemquantity" class="form-control clear"/>
-                        </td>
-                        <td>
-                          <input [(ngModel)]="rateItem.quantity" id="itemunit" class="form-control clear" (change)="changeQuantity(rateItem.quantity,k)"/>
-                        </td>
-                        <td>
-                          <input [(ngModel)]="rateItem.unit" id="itemrate" class="form-control clear" readonly/>
-                        </td>
-                        <td>
-                          <input [(ngModel)]="rateItem.rate" id="itemamount" class="form-control clear" (change)="changeRate(rateItem.rate,k)"/>
-                        </td>
-                        <td>
-                          <input [(ngModel)]="rateItem.quantity*rateItem.rate" id="totalAmount" class="form-control clear" readonly/>
-                        </td>
-                      </tr>
-
-                      <tr>
-                        <td>
-                          <label>Total</label>
-                        </td>
-                        <td>
-
-                        </td>
-                        <td>
-
-                        </td>
-                        <td>
-
-                        </td>
-                        <td>
-                          {{totalRate}}
-                        </td>
-                        <td>
-                          {{totalAmount}}
-                        </td>
-                      </tr>
-
-                      <tr>
-                        <td>
-
-                        </td>
-                        <td>
-
-                        </td>
-                        <td>
-
-                        </td>
-                        <td>
-
-                        </td>
-                        <td>
-                          <button type="button" class="btn btn-primary" (click)="updateRate(i)">Save</button>
-                        </td>
-                      </tr>
-
-                      </tbody>
-                    </table>
-                  </td>
-                </tr>
-                <!--get rate end-->
 
               </div>
             </div>
