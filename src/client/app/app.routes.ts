@@ -7,6 +7,7 @@ import { ActivateUserRoutes } from './framework/registration/activate-user/activ
 import { PageNotFoundComponent } from './shared/page-not-found/page-not-found.component';
 import { ProjectRoutes } from './build-info/framework/project/project.routes';
 import { BuildingRoutes } from './build-info/framework/project/building/building.routes';
+import { LandingPageRoutes } from './framework/landing-page/landing-page.routes';
 
 
 export const routes: Routes = [
@@ -16,6 +17,7 @@ export const routes: Routes = [
   //...MyDashboardRoutes,
   ...AboutRoutes,
   ...ProjectRoutes,
+  ...LandingPageRoutes,
   ...BuildingRoutes,
   ...StartRoutes,
   {

@@ -1,10 +1,15 @@
 <div class="page-background" [ngStyle]="{'background-image': 'url(' + BODY_BACKGROUND + ')'}">
 
-  <cn-user-header></cn-user-header>
+ <!-- <cn-user-header></cn-user-header>-->
   <div class="inner-content clearfix">
-    <h4>Get Aligned</h4>
-    <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+    <h3 align="center"> BUILD INFO </h3><br><br>
+    <h2 align="center">Estimate Project Cost * Budget it * Control it</h2>
+    <h2 align="center"> Execute project within the approved budget</h2>
+   <!-- <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
       <p>{{landingPageText}}</p>
-    </div>
+    </div>-->
+    <button  class="btn btn-success" (click)="goToSignUp()"> Start free trial</button><br><br>
+    <h1 align="center">Already have an account?</h1>
+    <button  class="btn btn-success" (click)="goToSignIn()"> Sign in</button>
   </div>
 </div>

@@ -212,7 +212,7 @@ export class NavigationRoutes {
   public static APP_USER__DETAILS_DASHBOARD: string = '/user/details';
   public static APP_LOGIN: string = '/signin';
   public static APP_START: string = '/';
-  public static APP_LANDING: string = '/signin';
+  public static APP_LANDING: string = '/landing';
   public static VERIFY_USER: string = '/verify-user';
   public static ACTIVATE_USER: string = '/activate-user';
   public static VERIFY_PHONE: string = '/verify-phone';
@@ -443,7 +443,7 @@ export class Label {
   public static NAME: string = 'Name';
   public static ACTIONS: string = 'Actions';
   public static API_KEY: string = 'API Key';
-  public static ACCEPT_NAME: string = 'I accept the';
+  public static ACCEPT_NAME: string = 'By clicking "Continue" I agree to Build Infos';
   public static TERMS_AND_CONDITIONS_NAME: string = 'Terms and Conditions.';
   public static REGISTER_AS_APPLICANT: string = 'Register as an applicant';
   public static SUBMIT_PROFILE: string = 'Submit Your Profile';

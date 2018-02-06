@@ -34,7 +34,6 @@ export class DashboardHeaderComponent {
     this.MY_LOGO = ImagePath.MY_WHITE_LOGO;
     this.MOBILE_LOGO = ImagePath.MOBILE_WHITE_LOGO;
     this.user_first_name = SessionStorageService.getSessionValue(SessionStorage.FIRST_NAME);
-    this.user_last_name = SessionStorageService.getSessionValue(SessionStorage.LAST_NAME);
   }
 
   getImagePath(imagePath: string) {

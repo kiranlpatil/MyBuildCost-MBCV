@@ -51,15 +51,15 @@ export class CandidateSignUpComponent implements OnInit, AfterViewInit {
 
     this.userForm = this.formBuilder.group({
       'first_name': ['', [ValidationService.requireFirstNameValidator]],
-      'last_name': ['', [ValidationService.requireLastNameValidator]],
+    /*  'last_name': ['', [ValidationService.requireLastNameValidator]],*/
       'mobile_number': ['', [ValidationService.requireMobileNumberValidator, ValidationService.mobileNumberValidator]],
       'email': ['', [ValidationService.requireEmailValidator, ValidationService.emailValidator]],
       'password': ['', [ValidationService.passwordValidator]],
       'confirm_password': ['', ValidationService.requireConfirmPasswordValidator],
-      'birth_year': ['', [ValidationService.birthYearValidator]],
-      'accept_terms': ['', [Validators.required]],
+     /* 'birth_year': ['', [ValidationService.birthYearValidator]],
+      'accept_terms': ['', [Validators.required]],*/
     });
-    fbq('track', 'PageView');
+    /*fbq('track', 'PageView');
     this.analyticService.googleAnalyse(this._router);
     this.BODY_BACKGROUND = ImagePath.BODY_BACKGROUND;
     this.currentDate = new Date();
@@ -67,12 +67,12 @@ export class CandidateSignUpComponent implements OnInit, AfterViewInit {
     this.isChrome = this.sharedService.getUserBrowser();
     this.isToasterVisible = this.sharedService.getToasterVisiblity();
     console.log('isToasterVisible', this.isToasterVisible);
-    this.userForm.controls['accept_terms'].setValue(false);
+    this.userForm.controls['accept_terms'].setValue(false);*/
   }
 
   ngOnInit() {
      //this._router.navigate([NavigationRoutes.VERIFY_USER]);
-    this.validBirthYearList = this.dateService.createBirthYearList(this.year);
+   // this.validBirthYearList = this.dateService.createBirthYearList(this.year);
     this.mainHeaderMenuHideShow = 'applicant';
 
     this.activatedRoute.queryParams.subscribe((params: Params) => {
@@ -94,7 +94,7 @@ export class CandidateSignUpComponent implements OnInit, AfterViewInit {
     this.sharedService.setToasterVisiblity(this.isToasterVisible);
   }
 
-  selectYearModel(year: any) {
+  /*selectYearModel(year: any) {
     this.birthYearErrorMessage = undefined;
     if (year === '') {
       this.userForm.controls['birth_year'].setValue(undefined);
@@ -102,9 +102,9 @@ export class CandidateSignUpComponent implements OnInit, AfterViewInit {
     this.passingYear = year;
     this.model.birth_year = year;
   }
-
+*/
   onSubmit() {
-    this.model = this.userForm.value;
+   /* this.model = this.userForm.value;
     if (this.model.first_name === '' || this.model.last_name === '' || this.model.mobile_number === '' ||
       this.model.email === '' || this.model.password === '' || this.model.confirm_password === '' ||
       this.model.birth_year === undefined || !this.userForm.controls['accept_terms'].value) {
@@ -122,6 +122,29 @@ export class CandidateSignUpComponent implements OnInit, AfterViewInit {
     this.model = this.userForm.value;
     this.model.first_name = this.model.first_name.trim();
     this.model.last_name = this.model.last_name.trim();
+    this.model.current_theme = AppSettings.LIGHT_THEM;
+    this.model.isCandidate = true;
+    this.model.email = this.model.email.toLowerCase();
+
+    if (!this.makePasswordConfirm()) {
+      this.isFormSubmitted = true;
+      this.candidateService.addCandidate(this.model)
+        .subscribe(
+          candidate => this.onRegistrationSuccess(candidate),
+          error => this.onRegistrationError(error));
+    }*/ this.model = this.userForm.value;
+    if (this.model.first_name === '' || this.model.mobile_number === '' ||
+      this.model.email === '' || this.model.password === '' || this.model.confirm_password === '') {
+      this.submitStatus = true;
+      return;
+    }
+
+    if (!this.userForm.valid) {
+      return;
+    }
+
+    this.model = this.userForm.value;
+    this.model.first_name = this.model.first_name.trim();
     this.model.current_theme = AppSettings.LIGHT_THEM;
     this.model.isCandidate = true;
     this.model.email = this.model.email.toLowerCase();
@@ -156,10 +179,12 @@ export class CandidateSignUpComponent implements OnInit, AfterViewInit {
       this.error_msg = error.err_msg;
     }
   }
-
   goBack() {
     this.commonService.goBack();
     this._router.navigate(['/']);
+  }
+  goToCreateProject() {
+    this._router.navigate([NavigationRoutes.APP_DASHBOARD]);
   }
   makePasswordConfirm(): boolean {
     if (this.model.confirm_password !== this.model.password && this.model.confirm_password !== '') {

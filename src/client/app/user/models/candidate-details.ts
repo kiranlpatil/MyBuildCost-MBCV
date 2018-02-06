@@ -16,7 +16,7 @@ export class CandidateDetail {
   pin: string = '';
   location: Location= new Location();
   current_theme: string;
-  picture: string = "/assets/framework/images/dashboard/default-profile.png";
+  picture: string = '/assets/framework/images/dashboard/default-profile.png';
   social_profile_picture: string;
   guided_tour:string[] = new Array(0);
   recruiterReferenceId: string;

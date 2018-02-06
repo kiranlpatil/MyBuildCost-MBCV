@@ -1,7 +1,7 @@
-import {Component, ElementRef, OnInit, ViewChild} from "@angular/core";
-import {ActivatedRoute, Params, Router} from "@angular/router";
-import {LoginService} from "./login.service";
-import {Login} from "../../user/models/login";
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute, Params, Router} from '@angular/router';
+import { LoginService } from './login.service';
+import { Login } from '../../user/models/login';
 import {
   AppSettings,
   ImagePath,
@@ -11,13 +11,13 @@ import {
   MessageService,
   NavigationRoutes,
   ThemeChangeService
-} from "../../shared/index";
-import {FormBuilder, FormGroup} from "@angular/forms";
-import {ValidationService} from "../../shared/customvalidations/validation.service";
-import {Label, LocalStorage, Messages, ProjectAsset} from "../../shared/constants";
-import {SharedService} from "../../shared/services/shared-service";
-import {RegistrationService} from "../../user/services/registration.service";
-import {LocalStorageService} from "../../shared/services/localstorage.service";
+} from '../../shared/index';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { ValidationService } from '../../shared/customvalidations/validation.service';
+import { Label, LocalStorage, Messages, ProjectAsset } from '../../shared/constants';
+import { SharedService } from '../../shared/services/shared-service';
+import { RegistrationService } from '../../user/services/registration.service';
+import { LocalStorageService } from '../../shared/services/localstorage.service';
 /*declare var CareerPluginLoad:any;*/
 
 @Component({

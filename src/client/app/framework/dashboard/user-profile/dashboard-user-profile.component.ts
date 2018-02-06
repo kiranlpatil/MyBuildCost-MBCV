@@ -39,7 +39,7 @@ export class DashboardProfileComponent implements OnInit {
               ) {
     this.userForm = this.formBuilder.group({
       'first_name': ['', Validators.required],
-      'last_name': ['', Validators.required],
+    /*  'last_name': ['', Validators.required],*/
       'email': ['', [Validators.required, ValidationService.emailValidator]],
       'mobile_number': ['', [Validators.required, ValidationService.mobileNumberValidator]]
     });
@@ -60,7 +60,7 @@ export class DashboardProfileComponent implements OnInit {
     console.log(JSON.stringify(body.data));
     var user = body.data;
     this.model.first_name = user.first_name;
-    this.model.last_name = user.last_name;
+   /* this.model.last_name = user.last_name;*/
     this.model.email = user.email;
     this.model.mobile_number = user.mobile_number;
     //this.error_msg = '';

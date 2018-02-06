@@ -2,7 +2,7 @@
   <div *ngIf="isFromCareerPlugin">
     <span class="career-plugin-toster">{{getMessages().CAREER_PLUGIN_MSG_NEW_USER}}</span>
   </div>
-  <cn-user-header [MainHeaderMenuHideShow]="mainHeaderMenuHideShow"></cn-user-header>
+ <!-- <cn-user-header [MainHeaderMenuHideShow]="mainHeaderMenuHideShow"></cn-user-header>-->
 
   <div *ngIf="!isChrome && isToasterVisible" #toaster id="snackbar">{{getMessages().BROWSER_ALERT_MSG}}
     <button class="button-style" (click)="closeToaster()">x</button>
@@ -23,13 +23,13 @@
         <label>{{getLabel().FIRST_NAME_LABEL}}</label>
       </div>
 
-      <div class="form-group">
+     <!-- <div class="form-group">
         <control-messages [control]="userForm.controls.last_name"
                              [submitStatus]="submitStatus"></control-messages>
         <input type="text" formControlName="last_name" id="last_name" class="form-control" autocomplete="off"
                maxlength="20" required/>
         <label>{{getLabel().LAST_NAME_LABEL}}</label>
-      </div>
+      </div>-->
 
       <div class="form-group">
         <control-messages [control]="userForm.controls.email" [submitStatus]="submitStatus"></control-messages>
@@ -66,7 +66,7 @@
               *ngIf="isPasswordConfirm == true"> {{passwordMismatchMessage}} </span>
       </div>
 
-      <div class="form-group">
+<!--      <div class="form-group">
         <div id="yearf">
           <control-messages [control]="userForm.controls.birth_year"
                                              [submitStatus]="submitStatus"></control-messages>
@@ -78,14 +78,14 @@
             <option *ngFor="let validBirthYear of validBirthYearList" value="{{validBirthYear}}"></option>
           </datalist>
         </div>
-      </div>
+      </div>-->
 
 
 
-      <div class="col-sm-10 col-xs-11 error-msg alert alert-danger form-alert" [hidden]="isShowErrorMessage"><b>{{
-        error_msg }}</b></div>
+      <div class="col-sm-10 col-xs-11 error-msg alert alert-danger form-alert" [hidden]="isShowErrorMessage">
+        <b>{{error_msg }}</b></div>
       <div class="button-group">
-        <div class="select-option default-checkbox">
+       <!-- <div class="select-option default-checkbox">
           <label>
             <input type="checkbox" name="choices" formControlName="accept_terms"   required/>
             <div class="check"></div>
@@ -93,8 +93,10 @@
           <span>{{getLabel().ACCEPT_NAME}} <a (click)="goToAcceptTerms()"> {{getLabel().TERMS_AND_CONDITIONS_NAME}}.</a></span>
           <div class="error-messages" *ngIf='!userForm.get("accept_terms").value && submitStatus'>{{getMessages().MSG_ERROR_VALIDATION_TERMS_AND_CONDITIONS_REQUIRED}}
           </div>
-        </div>
-        <button type="submit" class="btn btn-success">Create my account</button>
+        </div>-->
+        <button type="submit" class="btn btn-success">Continue</button>
+        <span>{{getLabel().ACCEPT_NAME}} <a (click)="goToAcceptTerms()"> {{getLabel().TERMS_AND_CONDITIONS_NAME}}.</a></span>
+
       </div>
     </form>
   </div>
