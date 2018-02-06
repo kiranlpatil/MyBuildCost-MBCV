@@ -225,7 +225,7 @@ class UserController {
               stackTrace: new Error(),
               code: 400
             });
-          } else if (error === Messages.MSG_ERROR_CHECK_INVALID_ACCOUNT) {
+          } else if (error === Messages.MSG_ERROR_USER_NOT_FOUND) {
             next({
               reason: Messages.MSG_ERROR_RSN_USER_NOT_FOUND,
               message: Messages.MSG_ERROR_USER_NOT_FOUND,

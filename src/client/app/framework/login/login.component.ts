@@ -86,7 +86,7 @@ export class LoginComponent implements OnInit {
       .subscribe(
         data => {
           this.registrationService.onSuccess(data);
-        }, error => { this.registrationService.loginFail(error)}
+        }, error => { this.registrationService.loginFail(error);}
       );
   }
 
@@ -117,6 +117,7 @@ export class LoginComponent implements OnInit {
     if(this.isRememberPassword) {
       LocalStorageService.setLocalValue(LocalStorage.ACCESS_TOKEN, res.access_token);
       LocalStorageService.setLocalValue(LocalStorage.IS_LOGGED_IN, 1);
+      LocalStorageService.setLocalValue(LocalStorage.FIRST_NAME, res.data.first_name);
     }
     SessionStorageService.setSessionValue(SessionStorage.EMAIL_ID, res.data.email);
     SessionStorageService.setSessionValue(SessionStorage.MOBILE_NUMBER, res.data.mobile_number);
