@@ -127,7 +127,6 @@ export class CostHeadComponent implements OnInit, OnChanges {
 
     this.workItemId=workItemId;
     let subCategoryId=this.subCategoryDetails[i].rateAnalysisId;
-  console.log('subCategoryId',+subCategoryId);
 
     this.costHeadService.getRateItems(this.costheadId, subCategoryId,this.workItemId).subscribe(
         rateItem => this.onGetRateItemsSuccess(rateItem),
@@ -214,19 +213,23 @@ export class CostHeadComponent implements OnInit, OnChanges {
     console.log('WorkItem : ' + workItem);
     console.log('costHead : ' + costHead);
   }
+
   getSubCategoryDetails(projectId: string, costheadId: number) {
     this.costHeadService.getSubCategory(projectId,costheadId).subscribe(
       subCategoryDetail => this.OnGetSubCategorySuccess(subCategoryDetail),
       error => this.OnGetSubCategoryFail(error)
     );
   }
+
   OnGetSubCategorySuccess(subCategoryDetail: any) {
     this.subCategoryDetails = subCategoryDetail.data;
     console.log(this.subCategoryDetails);
   }
+
   OnGetSubCategoryFail(error: any) {
     console.log(error);
   }
+
   getCostHeadComponentDetails(projectId: string, costHead: string) {
     this.costHeadService.getCostHeadDetails(projectId, costHead).subscribe(
       costHeadDetail => this.onGetCostHeadDetailsSuccess(costHeadDetail),
@@ -288,14 +291,13 @@ export class CostHeadComponent implements OnInit, OnChanges {
 
  deleteQuantityItem(subCategoryId: number,  quantityItems:any ,itemName: string) {
    this.itemName = itemName;
-   this.subCategoryId = subCategoryId
-  this.quantityItemsArray = quantityItems.data;
-   //this.currentquantityItem = quantityItem;
-   console.log(  this.itemName);
+   this.subCategoryId = subCategoryId;
+   this.quantityItemsArray = quantityItems.data;
  }
 
   deleteQuantityItemfun() {
-    this.costHeadService.deleteCostHeadItems(this.costheadId, this.subCategoryId, this.workItemId,this.quantityItemsArray,this.itemName).subscribe(
+    this.costHeadService.deleteCostHeadItems(this.costheadId, this.subCategoryId,
+      this.workItemId,this.quantityItemsArray,this.itemName).subscribe(
       costHeadItemDelete => this.onDeleteCostHeadItemsSuccess(costHeadItemDelete),
       error => this.onDeleteCostHeadItemsFail(error)
     );

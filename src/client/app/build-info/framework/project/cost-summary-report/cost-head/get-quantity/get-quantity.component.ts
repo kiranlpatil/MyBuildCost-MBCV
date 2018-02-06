@@ -143,7 +143,7 @@ export class GetQuantityComponent implements OnInit {
     this.quantityItems.push(quantity);
   }
 
-  updateCostHeadWorkItem(quantityItems : any) {
+    updateCostHeadWorkItem(quantityItems : any) {
     this.quantityItemsArray = quantityItems;
     let costHeadId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_COST_HEAD_ID);
     let workItemId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_WORKITEM_ID);

@@ -14,16 +14,16 @@
       <input [(ngModel)]="quantityItem.item" id="costitem"  class="form-control clear"/>
     </td>
     <td>
-      <input type="number" [(ngModel)]="quantityItem.nos" id="numbers" (change)="getNo(quantityItemsArray)" class="form-control clear" required/>
+      <input type="number" [(ngModel)]="quantityItem.nos" id="numbers" (change)="getNo(quantityItems)" class="form-control clear" required/>
     </td>
     <td>
-      <input type="number" [(ngModel)]="quantityItem.length" id="length" (change)="getLength(quantityItemsArray)" class="form-control clear" required/>
+      <input type="number" [(ngModel)]="quantityItem.length" id="length" (change)="getLength(quantityItems)" class="form-control clear" required/>
     </td>
     <td>
-      <input  type="number" [(ngModel)]="quantityItem.breadth" id="breadth" (change)="getBreadth(quantityItemsArray)" class="form-control clear" required/>
+      <input  type="number" [(ngModel)]="quantityItem.breadth" id="breadth" (change)="getBreadth(quantityItems)" class="form-control clear" required/>
     </td>
     <td>
-      <input type="number" [(ngModel)]="quantityItem.height" id="height" (change)="getHeight(quantityItemsArray)" class="form-control clear" required/>
+      <input type="number" [(ngModel)]="quantityItem.height" id="height" (change)="getHeight(quantityItems)" class="form-control clear" required/>
     </td>
     <td>
       <input  type="number" [(ngModel)]= "quantityItem.quantity"  id="qty" class="form-control clear" required/>

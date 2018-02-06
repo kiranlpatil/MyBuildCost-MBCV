@@ -614,10 +614,8 @@ class ProjectService {
                 for (let index2 = 0; index2 < costHeadList[index].subCategory[index1].workitem.length; index2++) {
                   if (parseInt(workitemId) === costHeadList[index].subCategory[index1].workitem[index2].rateAnalysisId) {
                     quantityArray  = costHeadList[index].subCategory[index1].workitem[index2].quantity;
-                      quantityArray.item = quantity;
-                    if (quantityArray.total === null) {
-                      quantityArray.total = 0;
-                    }
+                    quantityArray.item = quantity;
+                    quantityArray.total = 0;
                     for (let itemIndex = 0; quantityArray.item.length > itemIndex; itemIndex++) {
                       quantityArray.total = quantityArray.item[itemIndex].quantity + quantityArray.total;
                     }
