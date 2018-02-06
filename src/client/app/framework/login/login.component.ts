@@ -121,7 +121,7 @@ export class LoginComponent implements OnInit {
     SessionStorageService.setSessionValue(SessionStorage.EMAIL_ID, res.data.email);
     SessionStorageService.setSessionValue(SessionStorage.MOBILE_NUMBER, res.data.mobile_number);
     SessionStorageService.setSessionValue(SessionStorage.FIRST_NAME, res.data.first_name);
-    SessionStorageService.setSessionValue(SessionStorage.LAST_NAME, res.data.last_name);
+   /* SessionStorageService.setSessionValue(SessionStorage.LAST_NAME, res.data.last_name);*/
 
     this.userForm.reset();
     if (res.data.current_theme) {
