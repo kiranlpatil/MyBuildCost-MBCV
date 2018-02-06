@@ -1,11 +1,8 @@
-@import '../../../css/variables';
-
-$shadow-color: rgba(0, 0, 0, 0.175);
-$overlay: rgba(0, 0, 0, 0.4);
+@import '../../../css/common';
 
 .page-header {
   border-bottom: 1px solid $black;
-  box-shadow: 0 0 2px 1px $header-shadow;
+  box-shadow: 0 0 2px 1px $overlay;
   background: $black;
   height: 50px;
   left: 0;

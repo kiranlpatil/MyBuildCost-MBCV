@@ -1,5 +1,4 @@
 @import '../../../../css/common';
-@import '../../../../css/variables';
 
 .error-messages {
   color: $error-messages;
@@ -35,7 +34,6 @@
       padding: 0 15px;
       background: transparent !important;
       border-bottom: 0 solid $border-color;
-      font-family: gothamrnd-light;
     }
 
     h5 > .glyphicon-remove {
@@ -132,7 +130,6 @@
   .profile-name-last {
     background: none;
     color: $black-theme-color;
-    font-family: 'gothamrnd-book';
     font-size: 14px;
     padding: 0;
     text-transform: capitalize;

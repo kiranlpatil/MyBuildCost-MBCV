@@ -1,5 +1,4 @@
 @import '../../../css/common';
-@import '../../../css/variables';
 
 /*.settings {
   text-align: left;
@@ -27,7 +26,6 @@
       padding: 15px 0 10px 15px;
       background: transparent !important;
       border-bottom: 0 solid $border-color;
-      font-family: gothamrnd-light;
     }
 
     h5 > .glyphicon-remove {
