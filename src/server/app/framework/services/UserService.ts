@@ -488,34 +488,17 @@ class UserService {
 
   updateDetails(data:  UserModel, user: UserModel, callback:(error: any, result: any) => void) {
     let auth: AuthInterceptor = new AuthInterceptor();
-    this.update(user.user_id, data, (error, result) => {
+    let query = {'_id': user._id};
+    this.userRepository.findOneAndUpdate(query, data, {new: true}, (error, result) => {
       if (error) {
         callback(error, null);
       } else {
-        this.retrieve(user.user_id, (error, result) => {
-          if (error) {
-            callback({
-              reason: Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
-              message: Messages.MSG_ERROR_WRONG_TOKEN,
-              stackTrace: new Error(),
-              code: 400
-            }, null);
-          } else {
-            callback(null,{
-              'status': 'success',
-              'data': {
-                'first_name': result[0].first_name,
-                'last_name': result[0].last_name,
-                'email': result[0].email,
-                'mobile_number': result[0].mobile_number,
-                'picture': result[0].picture,
-                '_id': result[0].userId,
-                'current_theme': result[0].current_theme
-              }
-            });
-          }
+        callback(null,{
+          'status': 'Success',
+          'data': {'message': 'User Profile Updated successfully'}
         });
       }
+
     });
   }
   getUserById(user:any, callback:(error:any, result:any)=>void) {
@@ -529,9 +512,12 @@ class UserService {
         'last_name': user.last_name,
         'email': user.email,
         'mobile_number': user.mobile_number,
+        'company_name': user.company_name,
+        'state': user.state,
+        'city': user.city,
         'picture': user.picture,
         'social_profile_picture': user.social_profile_picture,
-        '_id': user.userId,
+        '_id': user._id,
         'current_theme': user.current_theme
       },
       access_token: token

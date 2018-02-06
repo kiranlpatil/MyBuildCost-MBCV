@@ -41,12 +41,14 @@ export class DashboardProfileComponent implements OnInit {
       'first_name': ['', Validators.required],
     /*  'last_name': ['', Validators.required],*/
       'email': ['', [Validators.required, ValidationService.emailValidator]],
-      'mobile_number': ['', [Validators.required, ValidationService.mobileNumberValidator]]
+      'mobile_number': ['', [Validators.required, ValidationService.mobileNumberValidator]],
+      'company_name': ['', Validators.required],
+      'state': ['', Validators.required],
+      'city': ['', Validators.required]
     });
   }
 
   ngOnInit() {
-    console.log('Hello2');
     this.dashboardUserProfileService.getUserProfile()
       .subscribe(
         (body: any) => this.setUserDetails(body),
@@ -63,6 +65,9 @@ export class DashboardProfileComponent implements OnInit {
    /* this.model.last_name = user.last_name;*/
     this.model.email = user.email;
     this.model.mobile_number = user.mobile_number;
+    this.model.company_name = user.company_name;
+    this.model.state = user.state;
+    this.model.city = user.city;
     //this.error_msg = '';
   }
 

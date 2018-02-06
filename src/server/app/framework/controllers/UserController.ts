@@ -304,9 +304,8 @@ class UserController {
     try {
       let newUserData: UserModel = <UserModel>req.body;
       let params = req.query;
-      delete params.access_token;
       let user = req.user;
-      /*let _id: string = user._id;*/
+      delete params.access_token;
 
       let userService = new UserService();
       userService.updateDetails(newUserData, user, (error, result)=> {
@@ -316,38 +315,6 @@ class UserController {
           res.send(result);
         }
       });
-      /*let auth: AuthInterceptor = new AuthInterceptor();
-      userService.update(_id, newUserData, (error, result) => {
-        if (error) {
-          next(error);
-        }
-        else {
-          userService.retrieve(_id, (error, result) => {
-            if (error) {
-              next({
-                reason: Messages.MSG_ERROR_RSN_INVALID_CREDENTIALS,
-                message: Messages.MSG_ERROR_WRONG_TOKEN,
-                stackTrace: new Error(),
-                code: 400
-              });
-            }
-            else {
-              res.send({
-                'status': 'success',
-                'data': {
-                  'first_name': result[0].first_name,
-                  'last_name': result[0].last_name,
-                  'email': result[0].email,
-                  'mobile_number': result[0].mobile_number,
-                  'picture': result[0].picture,
-                  '_id': result[0].userId,
-                  'current_theme': result[0].current_theme
-                }
-              });
-            }
-          });
-        }
-      });*/
     } catch (e) {
       next({
         reason: e.message,

@@ -10,13 +10,22 @@ class UserSchema {
   static get schema() {
     let schema = mongoose.Schema({
 
-      location: {
+     /* location: {
         city: String,
         state: String,
         country: String,
         pin: String
-      },
+      },*/
       first_name: {
+        type: String
+      },
+      state: {
+        type: String
+      },
+      city: {
+        type: String
+      },
+      company_name: {
         type: String
       },
       last_name: {

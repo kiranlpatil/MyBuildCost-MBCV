@@ -6,4 +6,7 @@ export class UserProfile {
   picture: string;
   social_profile_picture: string;
   current_theme: string;
+  company_name: string;
+  state: string;
+  city:string;
 }
