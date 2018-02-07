@@ -363,8 +363,8 @@ export class API {
 export class ImagePath {
   public static FAV_ICON = './assets/framework/images/logo/favicon.ico';
   public static BODY_BACKGROUND = './assets/framework/images/page_background/page-bg.png';
-  public static MY_WHITE_LOGO = './assets/c-next/header/job-mosis-logo.png';
-  public static MOBILE_WHITE_LOGO = './assets/c-next/header/buildInfo-logo.jpg';
+  public static MY_WHITE_LOGO = './assets/build-info/header/job-mosis-logo.png';
+  public static MOBILE_WHITE_LOGO = './assets/build-info/header/buildInfo-logo.jpg';
   public static FACEBOOK_ICON = './assets/framework/images/footer/fb.svg';
   public static GOOGLE_ICON = './assets/framework/images/footer/google-plus.svg';
   public static LINKEDIN_ICON = './assets/framework/images/footer/linked-in.svg';
@@ -392,9 +392,6 @@ export class ImagePath {
   public static FIRST_NAME_ICON_GREY = './assets/framework/images/icons/first-name-grey.svg';
   public static LAST_NAME_ICON = './assets/framework/images/icons/last-name.svg';
   public static LAST_NAME_ICON_GREY = './assets/framework/images/icons/last-name-grey.svg';
-  public static GET_SET_GO = './assets/c-next/get-set-go/get_set_go.gif';
-  public static CALENDAR = './assets/c-next/post-job/calendar.png';
-  public static CONTACT_PERSON = './assets/c-next/post-job/contact-person.png';
   public static INFO_RED = './assets/framework/images/dashboard/info-red.svg';
 }
 

@@ -1,5 +1,4 @@
 <section class="main-form-wrapper login">
-<!--    <cn-user-header [MainHeaderMenuHideShow]="mainHeaderMenuHideShow"></cn-user-header>-->
 
     <div *ngIf="!isChrome && isToasterVisible" #toaster id="snackbar">{{getMessages().BROWSER_ALERT_MSG}}
         <button class="button-style" (click)="closeToaster()">x</button>
@@ -47,5 +46,3 @@
     </form>
   </div>
 </section>
-<!--<div id="jobmosis-career-plugin" style="position: absolute;top: 75px;"></div>-->
-

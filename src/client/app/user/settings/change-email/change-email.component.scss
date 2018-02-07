@@ -1,9 +1,8 @@
 @import '../../../../css/common';
-@import '../../../../css/variables';
 
 .change-email {
   .error-message {
-    color: $error-messages;
+    color: $error;
     font-size: 10px;
     font-style: italic;
     line-height: 12px;

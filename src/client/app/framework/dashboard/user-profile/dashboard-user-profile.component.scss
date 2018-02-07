@@ -1,7 +1,7 @@
 @import '../../../../css/common';
 
 .error-messages {
-  color: $error-messages;
+  color: $error;
   font-size: 10px;
   font-style: italic;
   margin: 0;
@@ -104,7 +104,7 @@
       color: $cn-theme-color;
       padding: 0;
       font-size: 16px;
-      background: $modal-bg1 !important;
+      background: $light-white !important;
     }
   }
 

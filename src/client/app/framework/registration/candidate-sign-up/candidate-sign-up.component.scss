@@ -1,8 +1,7 @@
 @import '../../../../css/common';
-@import '../../../../css/variables';
 
 .error-messages {
-  color: $error-messages;
+  color: $error;
   font-size: 10px;
   font-style: italic;
   margin: 0;

@@ -3,7 +3,6 @@
 //Splash Screen
 .page-background {
   @extend %background-img;
-  background: $grey-background 0 40px;
   display: table;
   height: 100vh;
   margin: 0 auto;

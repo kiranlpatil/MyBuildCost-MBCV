@@ -76,7 +76,7 @@
 
       img {
         background-color: $white;
-        border: 1px solid $border-color1;
+        border: 1px solid $border-color;
         border-radius: 50%;
         display: inline-block;
         height: 35px;
@@ -101,7 +101,7 @@
 
     .active {
       a {
-        background: $bg-container;
+        background: $bg-wrapper;
       }
     }
 
