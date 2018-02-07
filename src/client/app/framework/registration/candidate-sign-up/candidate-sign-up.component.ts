@@ -32,6 +32,7 @@ export class CandidateSignUpComponent implements OnInit, AfterViewInit {
   error_msg: string;
   isShowErrorMessage: boolean = true;
   private BODY_BACKGROUND: string;
+  private MY_LOGO: string;
   passingYear: string;
   validBirthYearList = new Array(0);
   mainHeaderMenuHideShow: string;
@@ -61,13 +62,14 @@ export class CandidateSignUpComponent implements OnInit, AfterViewInit {
     });
     /*fbq('track', 'PageView');
     this.analyticService.googleAnalyse(this._router);
-    this.BODY_BACKGROUND = ImagePath.BODY_BACKGROUND;
     this.currentDate = new Date();
     this.year = this.currentDate.getUTCFullYear() - 18;
     this.isChrome = this.sharedService.getUserBrowser();
     this.isToasterVisible = this.sharedService.getToasterVisiblity();
     console.log('isToasterVisible', this.isToasterVisible);
     this.userForm.controls['accept_terms'].setValue(false);*/
+    this.BODY_BACKGROUND = ImagePath.BODY_BACKGROUND;
+    this.MY_LOGO = ImagePath.MY_WHITE_LOGO;
   }
 
   ngOnInit() {

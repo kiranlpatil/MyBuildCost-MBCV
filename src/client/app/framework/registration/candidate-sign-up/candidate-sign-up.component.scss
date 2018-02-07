@@ -1,76 +1,16 @@
 @import '../../../../css/common';
-
-.error-messages {
-  color: $error;
-  font-size: 10px;
-  font-style: italic;
-  margin: 0;
-  position: absolute;
-  line-height: 12px;
-}
+@import '../../../framework/landing-page/landing-page.component';
 
 .alert {
-  margin: 0 15px 15px;
+  margin: 0 0 15px;
+  text-align: left;
 }
 
-.employee-form {
-  padding: 15px 0;
-  margin-top: 15px;
-
-  .select-option {
-    &:hover {
-      span {
-        background: transparent;
-        color: $text-color;
-      }
-    }
-  }
-
-  .form-group {
-    padding: 0 15px;
-    width: 50%;
-  }
-
-  label {
-    left: 15px;
-  }
-
-  .select-label {
-    left: 0;
-  }
-
-  .button-group {
-    padding: 0 15px;
-  }
-
-  .recaptcha {
-    margin-bottom: 10px;
-  }
+.page-background-left-position {
+  background: no-repeat fixed 25% 100%;
 }
 
-@media only screen and (max-width: 1280px) {
-  .employee-form {
-    .button-group {
-      padding: 15px;
-    }
-  }
-}
-
-@media only screen and (max-width: 767px) {
-  .employee-form {
-    padding: 0;
-
-    .form-group {
-      padding: 0;
-      width: 100%;
-    }
-
-    label {
-      left: 0;
-    }
-
-    .button-group {
-      padding: 15px 0 0;
-    }
-  }
+h4 {
+  font-size: 24px;
+  color: $heading;
 }
