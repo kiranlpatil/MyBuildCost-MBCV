@@ -37,8 +37,13 @@ export class CreateProjectComponent implements OnInit {
       'name': ['', ValidationService.requiredProjectName],
       'region': ['', ValidationService.requiredProjectAddress],
       'plotArea': ['', ValidationService.requiredPlotArea],
+      'plotPeriphery': ['', ValidationService.requiredPlotPeriphery],
+      'podiumArea': ['',ValidationService.requiredPodiumArea],
+      'openSpace':['', ValidationService.requiredOpenSpace],
+      'slabArea': ['',ValidationService.requiredSlabArea],
+      'poolCapacity': ['',ValidationService.requiredSwimmingPoolCapacity],
       'projectDuration': ['', ValidationService.requiredProjectDuration],
-      'plotPeriphery': ['', ValidationService.requiredPlotPeriphery]
+      'totalNoOfBuildings': ['', ValidationService.requiredNoOfBuildings],
     });
 
   }

@@ -29,6 +29,21 @@ class ProjectSchema {
       plotArea: {
         type: Number
       },
+        slabArea: {
+        type: Number
+      },
+        podiumArea: {
+        type: Number
+      },
+        openSpace: {
+        type: Number
+      },
+        poolCapacity: {
+        type: Number
+      },
+        totalNoOfBuildings: {
+        type: Number
+      },
       plotPeriphery: {
         type: Number
       },
