@@ -40,7 +40,7 @@ export class ProjectDetailsComponent implements OnInit {
 
   ngOnInit() {
     this.activatedRoute.params.subscribe(params => {
-      this.projectId = params['projectId'];
+     this.projectId = params['projectId'];
       if(this.projectId) {
         this.getProjectDetails();
       }

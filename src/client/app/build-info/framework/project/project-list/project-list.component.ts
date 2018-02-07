@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { AppSettings, Messages, Label, Button, Headings, NavigationRoutes } from '../../../../shared/constants';
 import { ProjectListService } from './project-list.service';
 import { Project } from './../../model/project';
-import {SessionStorage, SessionStorageService} from "../../../../shared/index";
+import {SessionStorage, SessionStorageService} from '../../../../shared/index';
 
 @Component({
   moduleId: module.id,

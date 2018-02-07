@@ -1,17 +1,18 @@
 <header class="page-header" id="candidate-header" style="margin-top: 50px;background: #9ca4ab">
+  <bi-project-list-header></bi-project-list-header>
     <div class="container-fluid" style="background: #9ca4ab">
       <ul>
         <li>
-          <a type="button" class="btn btn_dashboard" [routerLinkActive]="['active']" [routerLink]="['/project/cost-summary', projectId]" cost-summary>Cost Summary</a>
+          <a type="button" class="btn btn_dashboard" [routerLinkActive]="['active']" [routerLink]="['/project/cost-summary', getCurrentProjectId()]" cost-summary>Cost Summary</a>
         </li>
         <li>
-          <a type="button" class="btn btn_dashboard" [routerLinkActive]="['active']" [routerLink]='["/project/material-takeoff",projectId]'>Material Takeoff</a>
+          <a type="button" class="btn btn_dashboard" [routerLinkActive]="['active']" [routerLink]='["/project/material-takeoff",getCurrentProjectId()]'>Material Takeoff</a>
         </li>
         <li>
-            <a type="button" class="btn btn_dashboard" [routerLinkActive]="['active']" [routerLink]="['/building/list', projectId]">Building Master</a>
+            <a type="button" class="btn btn_dashboard" [routerLinkActive]="['active']" [routerLink]="['/building/list', getCurrentProjectId()]">Building Master</a>
         </li>
         <li>
-          <a type="button" class="btn btn_dashboard" [routerLinkActive]="['active']"  [routerLink]="['/project/details', projectId]" >Project Master</a>
+          <a type="button" class="btn btn_dashboard" [routerLinkActive]="['active']"  [routerLink]="['/project/details', getCurrentProjectId()]" >Project Master</a>
         </li>
       </ul>
     </div>

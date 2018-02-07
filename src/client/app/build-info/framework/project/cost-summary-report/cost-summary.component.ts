@@ -233,7 +233,7 @@ export class CostSummaryComponent implements OnInit {
     console.log('onAddCostheadSuccess()'+error);
   }
 
-  changeBudgetedCost(buildingId : string, costHead : string, amount:string) {
+  changeBudgetedCost(buildingId : string, costHead : string, amount:number) {
     if(amount !== null) {
       this.costSummaryService.updateBudgetCostAmountForCostHead(buildingId, costHead, amount).subscribe(
         buildingDetails => this.updatedCostHeadAmountSuccess(buildingDetails),

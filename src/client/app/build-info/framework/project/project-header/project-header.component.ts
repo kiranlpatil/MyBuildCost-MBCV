@@ -5,10 +5,10 @@ import { SessionStorage, SessionStorageService,MessageService } from '../../../.
   moduleId: module.id,
   selector: 'bi-project-header',
   templateUrl: 'project-header.component.html',
-  styleUrls:['./dashboard-header.component.css']
+  styleUrls:['./project-header.component.css']
 })
 
-export class ProjectHeaderComponent implements OnInit{
+export class ProjectHeaderComponent implements OnInit {
 
   projectId: string;
 
@@ -20,11 +20,10 @@ export class ProjectHeaderComponent implements OnInit{
   }
 
   ngOnInit() {
-    this.projectId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT);
+    this.getCurrentProjectId();
   }
 
-  navigateToWithId(nav:string) {
-    var projectId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT);
-    this._router.navigate([nav, projectId]);
+  getCurrentProjectId() {
+    return this.projectId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT);
   }
 }
