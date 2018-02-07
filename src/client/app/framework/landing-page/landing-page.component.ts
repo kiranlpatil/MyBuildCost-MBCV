@@ -10,11 +10,13 @@ import { Router } from '@angular/router';
   styleUrls: ['landing-page.component.css'],
 })
 export class LandingPageComponent {
- // BODY_BACKGROUND: string;
+  BODY_BACKGROUND: string;
+  MY_LOGO: string;
  // landingPageText: string= Messages.MSG_LANDING_PAGE;
  // isChrome: boolean;
   constructor(private _router: Router) {
-   // this.BODY_BACKGROUND = ImagePath.BODY_BACKGROUND;
+    this.BODY_BACKGROUND = ImagePath.BODY_BACKGROUND;
+    this.MY_LOGO = ImagePath.MY_WHITE_LOGO;
   }
   goToSignUp() {
     this._router.navigate( [NavigationRoutes. APP_REGISTRATION]);

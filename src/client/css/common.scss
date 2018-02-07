@@ -46,11 +46,11 @@
 }
 
 .input-group-addon {
-  padding: 6px 12px 6px 0;
+  padding: 6px 12px;
   background-color: transparent;
-  border: 1px solid transparent;
-  border-bottom: 1px solid $gray;
-  border-radius: 4px;
+  border-right: 1px solid transparent !important;
+  border: 1px solid $gray;
+  border-radius: 4px 0 0 4px !important;
   font-weight: bold;
 }
 
@@ -98,9 +98,9 @@
 
 //Common Css
 //Body
-body,
-html {
+body {
   text-align: center;
+  font-family: 'Open Sans', sans-serif;
 
   //Container
   .container-fluid {
@@ -148,7 +148,7 @@ html {
 // Paragraphs
 p {
   color: $text-color;
-  margin: 10px 0;
+  font-size: 14px;
   word-wrap: break-word;
 }
 
@@ -195,30 +195,28 @@ select,
 
 .form-group {
   position: relative;
+  margin-bottom: 20px;
 
   label {
-    color: $text-color;
+    color: $heading;
     display: block;
     float: left;
-    font-size: 14px;
+    font-size: 13px;
   }
 
   .form-control {
     background: transparent;
-    border-left: transparent 1px solid;
-    border-radius: 0;
-    border-right: transparent 1px solid;
-    border-top: transparent 1px solid;
     box-shadow: none;
     color: $text-color;
     display: block;
+    height: 40px;
     padding: 6px 0;
     font-size: 16px;
 
     &:focus {
       box-shadow: none;
       outline: 0;
-      border-bottom: 2px solid $theme-color;
+      border: 2px solid $theme-color;
     }
 
     &:-webkit-autofill,
@@ -228,9 +226,6 @@ select,
       -webkit-box-shadow: 0 0 0 1000px white inset !important;
       background: $input-bg !important;
       -webkit-text-fill-color: $text-color;
-      border-left: 1px solid $white;
-      border-top: 1px solid $white;
-      border-right: 1px solid $white;
       color: $text-color !important;
     }
     &::-webkit-input-placeholder {
@@ -270,19 +265,28 @@ select,
 
 //Buttons
 .btn {
-  border-radius: 4px;
-  height: 38px;
-  padding: 9px 25px;
+  border-radius: 25px;
+  height: 40px;
   font-weight: bold;
-  border: 0;
-  font-size: 14px;
-  line-height: 20px;
+  font-size: 13px;
+  line-height: 18px;
   text-transform: inherit;
 
   &:focus,
   &:active {
     outline: 0 !important;
   }
+}
+
+.btn-primary {
+  background: $theme-color;
+  border: $theme-color 1px solid;
+  color: $heading;
+  padding: 10px 55px;
+}
+
+.btn-default {
+  padding: 10px 35px;
 }
 
 .btn-close {
@@ -304,14 +308,14 @@ select,
 }
 
 // Headings
-h1,
+/*h1,
 h2,
 h3,
 h4,
 h5 {
   @extend %text-ellipsis;
   display: block;
-}
+}*/
 
 // Other Links
 .other-links {
@@ -413,19 +417,11 @@ control-messages {
     font-size: 10px;
     font-style: italic;
     line-height: 12px;
-    margin: 35px 0 6px;
+    margin: 64px 0 6px;
     padding-right: 0;
     position: absolute;
     left: 0;
     top: 0;
-  }
-}
-
-.employee-form {
-  control-messages {
-    div {
-      padding: 0 0 0 15px;
-    }
   }
 }
 
@@ -575,19 +571,6 @@ control-messages {
     margin: 15px 0;
   }
 
-  recaptcha {
-    div,
-    iframe {
-      width: 100% !important;
-    }
-  }
-
-  h4 {
-    text-overflow: clip;
-    overflow: visible;
-    white-space: normal;
-  }
-
   %text-ellipsis {
     overflow: visible;
     text-overflow: clip;
@@ -622,9 +605,6 @@ control-messages {
   }
 
   .btn {
-    border-radius: 4px;
-    font-size: 14px;
-    height: 38px;
     padding: 5px 15px;
   }
 }
@@ -738,7 +718,7 @@ img[alt] {
     bottom: inherit;
     left: 0;
     position: absolute;
-    top: 36px;
+    top: 60px;
     width: 100%;
     z-index: 999;
     div {

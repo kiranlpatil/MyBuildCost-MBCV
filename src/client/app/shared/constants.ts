@@ -362,14 +362,14 @@ export class API {
 
 export class ImagePath {
   public static FAV_ICON = './assets/framework/images/logo/favicon.ico';
-  public static BODY_BACKGROUND = './assets/framework/images/page_background/page-bg.png';
-  public static MY_WHITE_LOGO = './assets/build-info/header/job-mosis-logo.png';
-  public static MOBILE_WHITE_LOGO = './assets/build-info/header/buildInfo-logo.jpg';
+  public static BODY_BACKGROUND = './assets/build-info/page_background/page-bg.png';
+  public static MY_WHITE_LOGO = './assets/build-info/header/buildInfo-logo.png';
+  public static MOBILE_WHITE_LOGO = './assets/build-info/header/buildInfo-logo.png';
   public static FACEBOOK_ICON = './assets/framework/images/footer/fb.svg';
   public static GOOGLE_ICON = './assets/framework/images/footer/google-plus.svg';
   public static LINKEDIN_ICON = './assets/framework/images/footer/linked-in.svg';
   public static PROFILE_IMG_ICON = './assets/framework/images/dashboard/default-profile.png';
-  public static COMPANY_LOGO_IMG_ICON = './assets/framework/images/dashboard/default-company-logo.png';
+  public static COMPANY_LOGO_IMG_ICON = './assets/framework/images/dashboard/default-company-buildinfo-logo.png';
   public static EMAIL_ICON = './assets/framework/images/icons/e-mail.svg';
   public static EMAIL_ICON_GREY = './assets/framework/images/icons/e-mail-grey.svg';
   public static NEW_EMAIL_ICON = './assets/framework/images/icons/new-e-mail.svg';
@@ -429,7 +429,7 @@ export class Label {
   public static FIRST_NAME_LABEL: string = 'First Name';
   public static COMPANY_NAME_LABEL: string = 'Company Name';
   public static LAST_NAME_LABEL: string = 'Last Name';
-  public static EMAIL_FIELD_LABEL: string = 'Email';
+  public static EMAIL_FIELD_LABEL: string = 'Work Email';
   public static CREATE_PROFILE_LABEL: string = 'Create Profile';
   public static COMPANY_WEBSITE_FIELD_LABEL: string = 'Website';
   public static CONTACT_FIELD_LABEL: string = 'Mobile Number';
@@ -442,7 +442,9 @@ export class Label {
   public static API_KEY: string = 'API Key';
   public static ACCEPT_NAME: string = 'By clicking "Continue" I agree to Build Infos';
   public static TERMS_AND_CONDITIONS_NAME: string = 'Terms and Conditions.';
-  public static REGISTER_AS_APPLICANT: string = 'Register as an applicant';
+  public static REGISTER_AS_APPLICANT: string = 'Get Started Absolutely Free';
+  public static START_FREE: string = 'Get Started Absolutely Free';
+  public static REGISTRATION_INFO: string = "See how the world's best Building Estimations are created.";
   public static SUBMIT_PROFILE: string = 'Submit Your Profile';
   public static MORE: string = 'More';
   public static NOT_FOUND_ERROR: string = '404';
