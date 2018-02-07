@@ -16,10 +16,8 @@ export class AuthGuardService implements CanActivate {
     return this.validateLogin();
   }
   validateLogin() {
-    if (parseInt(SessionStorageService.getSessionValue(SessionStorage.IS_LOGGED_IN)) === 1 ||
-      parseInt(LocalStorageService.getLocalValue(LocalStorage.IS_LOGGED_IN)) === 1) {
-      if (SessionStorageService.getSessionValue(SessionStorage.ACCESS_TOKEN) ||
-        LocalStorageService.getLocalValue(LocalStorage.ACCESS_TOKEN)) {
+    if (parseInt(SessionStorageService.getSessionValue(SessionStorage.IS_LOGGED_IN)) === 1) {
+      if (SessionStorageService.getSessionValue(SessionStorage.ACCESS_TOKEN)) {
         return true;
       } else {
         this._router.navigate(['/signin']);

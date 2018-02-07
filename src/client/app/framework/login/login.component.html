@@ -31,7 +31,7 @@
       <div class="button-group">
         <div class="select-option default-checkbox">
           <label>
-            <input type="checkbox" (click)="OnRememberPassword($event)">
+            <input type="checkbox" (click)="OnRememberPassword($event)" [checked]="isRememberPassword">
             <div class="check"></div>
           </label>
           {{getLabel().REMENBER_ME}}

@@ -4,13 +4,12 @@ import { CommonService, ImagePath, Message, MessageService } from '../../../shar
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { LoaderService } from '../../../shared/loader/loaders.service';
 import { ValidationService } from '../../../shared/customvalidations/validation.service';
-import { AppSettings, Messages, Label, Button, Headings, NavigationRoutes} from '../../../shared/constants';
+import { AppSettings, Messages, Label, Button, Headings, NavigationRoutes,LocalStorage} from '../../../shared/constants';
 import { ErrorService } from '../../../shared/services/error.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { UserProfile } from '../../../user/models/user';
 import { ChangePassword } from '../../../user/models/changepassword';
-
-
+import {LocalStorageService} from '../../../shared/services/localstorage.service';
 @Component({
   moduleId: module.id,
   selector: 'dashboard-change-password',
@@ -107,8 +106,10 @@ export class UserChangePasswordComponent {
   }
 
   logOut() {
-    window.sessionStorage.clear();
-    window.localStorage.clear();
+    if(LocalStorageService.getLocalValue(LocalStorage.IS_LOGGED_IN)===null) {
+      window.sessionStorage.clear();
+      window.localStorage.clear();
+    }
     let host = AppSettings.HTTP_CLIENT + AppSettings.HOST_NAME;
     window.location.href = host;
   }

@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Candidate, Section } from '../../../user/models/candidate';
 import {AppSettings, ImagePath, SessionStorage, Label, LocalStorage} from '../../../shared/constants';
 import { SessionStorageService } from '../../../shared/services/session.service';
-import {LocalStorageService} from "../../../shared/services/localstorage.service";
+import {LocalStorageService} from '../../../shared/services/localstorage.service';
 
 @Component({
   moduleId: module.id,
@@ -34,11 +34,7 @@ export class DashboardHeaderComponent {
   constructor(private _router: Router, private _eref: ElementRef) {
     this.MY_LOGO = ImagePath.MY_WHITE_LOGO;
     this.MOBILE_LOGO = ImagePath.MOBILE_WHITE_LOGO;
-    if(SessionStorageService.getSessionValue(SessionStorage.FIRST_NAME)!=null) {
-      this.user_first_name = SessionStorageService.getSessionValue(SessionStorage.FIRST_NAME);
-    } else {
-      this.user_first_name = LocalStorageService.getLocalValue(LocalStorage.FIRST_NAME);
-    }
+    this.user_first_name = SessionStorageService.getSessionValue(SessionStorage.FIRST_NAME);
   }
 
   getImagePath(imagePath: string) {
@@ -49,8 +45,10 @@ export class DashboardHeaderComponent {
   }
 
   logOut() {
-    window.sessionStorage.clear();
-    window.localStorage.clear();
+    if(parseInt(LocalStorageService.getLocalValue(LocalStorage.IS_LOGGED_IN))!=1) {
+      window.sessionStorage.clear();
+      window.localStorage.clear();
+    }
     let host = AppSettings.HTTP_CLIENT + AppSettings.HOST_NAME;
     window.location.href = host;
   }

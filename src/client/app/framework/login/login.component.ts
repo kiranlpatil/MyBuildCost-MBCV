@@ -73,9 +73,21 @@ export class LoginComponent implements OnInit {
       if (params['email'] !== undefined) {
         this.userForm.controls['email'].setValue(params['email']);
       }
+      if(parseInt(LocalStorageService.getLocalValue(LocalStorage.IS_LOGGED_IN))===1) {
+
+        this.userForm.controls['email'].setValue(SessionStorageService.getSessionValue(SessionStorage.EMAIL_ID));
+        this.userForm.controls['password'].setValue(SessionStorageService.getSessionValue(SessionStorage.PASSWORD));
+        this.isRememberPassword=true;
+      }else{
+        this.isRememberPassword=false;
+      }
+
       this.recruiterReferenceId = params['integrationKey'];
       this.isFromCareerPlugin = (params['integrationKey'] !== undefined) ? true : false;
     });
+
+
+
     if(LocalStorageService.getLocalValue(LocalStorage.ACCESS_TOKEN)) {
       this.getUserData();
     }
@@ -118,6 +130,10 @@ export class LoginComponent implements OnInit {
       LocalStorageService.setLocalValue(LocalStorage.ACCESS_TOKEN, res.access_token);
       LocalStorageService.setLocalValue(LocalStorage.IS_LOGGED_IN, 1);
       LocalStorageService.setLocalValue(LocalStorage.FIRST_NAME, res.data.first_name);
+      SessionStorageService.setSessionValue(SessionStorage.PASSWORD, this.model.password);
+    }
+    else {
+      LocalStorageService.setLocalValue(LocalStorage.IS_LOGGED_IN, 0);
     }
     SessionStorageService.setSessionValue(SessionStorage.EMAIL_ID, res.data.email);
     SessionStorageService.setSessionValue(SessionStorage.MOBILE_NUMBER, res.data.mobile_number);

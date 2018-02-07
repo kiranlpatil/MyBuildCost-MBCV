@@ -26,7 +26,6 @@ constructor(private _router: Router, private themeChangeService: ThemeChangeServ
     } else {
       SessionStorageService.setSessionValue(SessionStorage.IS_SOCIAL_LOGIN, AppSettings.IS_SOCIAL_LOGIN_NO);
     }
-    SessionStorageService.setSessionValue(SessionStorage.PASSWORD, '');
     this.successRedirect(res);
   }
 
