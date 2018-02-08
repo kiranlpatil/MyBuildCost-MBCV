@@ -23,14 +23,6 @@
         <label>{{ getLabel().FIRST_NAME_LABEL }}</label>
       </div>
 
-     <!-- <div class="form-group">
-        <control-messages [control]="userForm.controls.last_name"
-                             [submitStatus]="submitStatus"></control-messages>
-        <input type="text" formControlName="last_name" id="last_name" class="form-control" autocomplete="off"
-               maxlength="20" required/>
-        <label>{{getLabel().LAST_NAME_LABEL}}</label>
-      </div>-->
-
       <div class="form-group">
         <control-messages [control]="userForm.controls.email" [submitStatus]="submitStatus"></control-messages>
         <input type="email" formControlName="email" id="email" maxlength="40" class="form-control" autocomplete="off"
@@ -38,25 +30,25 @@
         <label>{{ getLabel().EMAIL_FIELD_LABEL }}</label>
       </div>
 
-      <div class="input-group form-group">
+      <!--<div class="input-group form-group">
         <control-messages [control]="userForm.controls.mobile_number"
                              [submitStatus]="submitStatus"></control-messages>
         <span class="input-group-addon">+91</span>
         <input type="number" formControlName="mobile_number" id="mobile_number" class="form-control" required/>
         <label>{{ getLabel().CONTACT_FIELD_LABEL }}</label>
-      </div>
+      </div>-->
 
       <div class="form-group form-password">
         <control-messages [control]="userForm.controls.password" [submitStatus]="submitStatus" class="error-message"></control-messages>
         <input type="password" formControlName="password" id="password" [(ngModel)]="model.password"
-               class="form-control" (blur)="makePasswordConfirm()" required/>
+               class="form-control" required/>
         <div class="password-required-message">
          {{ getMessages().PASSWORD_MESSAGE }}}
         </div>
         <label>{{ getLabel().PASSWORD }}</label>
       </div>
 
-      <div class="form-group">
+      <!--<div class="form-group">
         <control-messages [control]="userForm.controls.confirm_password"
                              [submitStatus]="submitStatus"></control-messages>
         <input type="password" formControlName="confirm_password" id="confirm_password"
@@ -64,21 +56,9 @@
         <label>{{ getLabel().CONFIRM_PASSWORD_LABEL }}</label>
         <span class="error-messages"
               *ngIf="isPasswordConfirm == true"> {{ passwordMismatchMessage }} </span>
-      </div>
-
-<!--      <div class="form-group">
-        <div id="yearf">
-          <control-messages [control]="userForm.controls.birth_year"
-                                             [submitStatus]="submitStatus"></control-messages>
-          <input type="text" formControlName="birth_year" (change)='selectYearModel($event.target.value)' [ngModel]="passingYear"
-                 id="birth_year" class="form-control" placeholder="" list="validBirthYearList"
-                 name="birthYear" onkeypress='return event.charCode >= 48 && event.charCode <= 57'/>
-          <label>{{getLabel().YEAR_OF_BIRTH}}</label>
-          <datalist id="validBirthYearList" >
-            <option *ngFor="let validBirthYear of validBirthYearList" value="{{validBirthYear}}"></option>
-          </datalist>
-        </div>
       </div>-->
+
+
 
 
 

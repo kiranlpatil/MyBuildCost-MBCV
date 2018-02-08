@@ -57,13 +57,8 @@ export class CandidateSignUpComponent implements OnInit, AfterViewInit {
 
     this.userForm = this.formBuilder.group({
       'first_name': ['', [ValidationService.requireFirstNameValidator]],
-    /*  'last_name': ['', [ValidationService.requireLastNameValidator]],*/
-      'mobile_number': ['', [ValidationService.requireMobileNumberValidator, ValidationService.mobileNumberValidator]],
       'email': ['', [ValidationService.requireEmailValidator, ValidationService.emailValidator]],
       'password': ['', [ValidationService.passwordValidator]],
-      'confirm_password': ['', ValidationService.requireConfirmPasswordValidator],
-     /* 'birth_year': ['', [ValidationService.birthYearValidator]],
-      'accept_terms': ['', [Validators.required]],*/
     });
     this.loginModel = new Login();
   }
@@ -92,47 +87,10 @@ export class CandidateSignUpComponent implements OnInit, AfterViewInit {
     this.sharedService.setToasterVisiblity(this.isToasterVisible);
   }
 
-  /*selectYearModel(year: any) {
-    this.birthYearErrorMessage = undefined;
-    if (year === '') {
-      this.userForm.controls['birth_year'].setValue(undefined);
-    }
-    this.passingYear = year;
-    this.model.birth_year = year;
-  }
-*/
+
   onSubmit() {
-   /* this.model = this.userForm.value;
-    if (this.model.first_name === '' || this.model.last_name === '' || this.model.mobile_number === '' ||
-      this.model.email === '' || this.model.password === '' || this.model.confirm_password === '' ||
-      this.model.birth_year === undefined || !this.userForm.controls['accept_terms'].value) {
-      if (this.model.birth_year === undefined) {
-        this.birthYearErrorMessage = Messages.MSG_ERROR_VALIDATION_BIRTHYEAR_REQUIRED;
-      }
-      this.submitStatus = true;
-      return;
-    }
-
-    if (!this.userForm.valid) {
-      return;
-    }
-
-    this.model = this.userForm.value;
-    this.model.first_name = this.model.first_name.trim();
-    this.model.last_name = this.model.last_name.trim();
-    this.model.current_theme = AppSettings.LIGHT_THEM;
-    this.model.isCandidate = true;
-    this.model.email = this.model.email.toLowerCase();
-
-    if (!this.makePasswordConfirm()) {
-      this.isFormSubmitted = true;
-      this.candidateService.addCandidate(this.model)
-        .subscribe(
-          candidate => this.onRegistrationSuccess(candidate),
-          error => this.onRegistrationError(error));
-    }*/ this.model = this.userForm.value;
-    if (this.model.first_name === '' || this.model.mobile_number === '' ||
-      this.model.email === '' || this.model.password === '' || this.model.confirm_password === '') {
+   this.model = this.userForm.value;
+    if (this.model.first_name === '' || this.model.email === '' || this.model.password === '' ) {
       this.submitStatus = true;
       return;
     }
@@ -148,13 +106,12 @@ export class CandidateSignUpComponent implements OnInit, AfterViewInit {
     this.model.isActivated = true;
     this.model.email = this.model.email.toLowerCase();
 
-    if (!this.makePasswordConfirm()) {
       this.isFormSubmitted = true;
       this.candidateService.addCandidate(this.model)
         .subscribe(
           candidate => this.onRegistrationSuccess(candidate),
           error => this.onRegistrationError(error));
-    }
+
   }
   onRegistrationSuccess(candidate: any) {
     fbq('track', 'CompleteRegistration');
@@ -162,7 +119,6 @@ export class CandidateSignUpComponent implements OnInit, AfterViewInit {
     SessionStorageService.setSessionValue(SessionStorage.USER_ID, candidate.data._id);
     SessionStorageService.setSessionValue(SessionStorage.EMAIL_ID, this.userForm.value.email);
     SessionStorageService.setSessionValue(SessionStorage.PASSWORD, this.model.password);
-    SessionStorageService.setSessionValue(SessionStorage.MOBILE_NUMBER, this.userForm.value.mobile_number);
     SessionStorageService.setSessionValue(SessionStorage.CHANGE_MAIL_VALUE, 'from_registration');
     this.navigateToDashboard();
   }
@@ -193,16 +149,6 @@ export class CandidateSignUpComponent implements OnInit, AfterViewInit {
   }
   goToCreateProject() {
     this._router.navigate([NavigationRoutes.APP_DASHBOARD]);
-  }
-  makePasswordConfirm(): boolean {
-    if (this.model.confirm_password !== this.model.password && this.model.confirm_password !== '') {
-      this.isPasswordConfirm = true;
-      this.passwordMismatchMessage = Messages.MSG_ERROR_VALIDATION_PASSWORD_MISMATCHED;
-      return true;
-    } else {
-      this.isPasswordConfirm = false;
-      return false;
-    }
   }
 
   getMessages() {

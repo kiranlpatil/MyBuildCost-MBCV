@@ -38,7 +38,7 @@ class UserSchema {
       },
       mobile_number: {
         type: Number,
-        required: true
+        required: false
       },
       temp_mobile: {
         type: Number,
