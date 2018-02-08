@@ -8,6 +8,11 @@ class Project {
   plotPeriphery: number;
   projectDuration: number;
   plotArea: number;
+  slabArea:number;
+  podiumArea:number;
+  openSpace:number;
+  poolCapacity:number;
+  totalNoOfBuildings:number;
   building: Array<Building>;
   costHead: Array<Category>;
   rate: Array<Rate>;

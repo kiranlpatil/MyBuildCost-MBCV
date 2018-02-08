@@ -234,7 +234,7 @@ class ProjectService {
         callback(error, null);
       } else {
         logger.info('Project service, findById has been hit');
-        logger.debug('getting InActive CostHead for Building Name : '+result._doc.name);
+        logger.debug('getting InActive CostHead for Building Name : '+result.name);
         let response = result.costHead;
         let inactiveCostHead=[];
         for(let costHeadItem of response) {
@@ -260,11 +260,15 @@ class ProjectService {
         building.totalSlabArea = result.totalSlabArea;
         building.totalCarperAreaOfUnit = result.totalCarperAreaOfUnit;
         building.totalSaleableAreaOfUnit = result.totalSaleableAreaOfUnit;
-        building.totalParkingAreaOfUnit = result.totalParkingAreaOfUnit;
+        building.plinthArea = result.plinthArea;
+        building.totalNoOfFloors = result.totalNoOfFloors;
+        building.noOfParkingFloors = result.noOfParkingFloors;
+        building.carpetAreaOfParking = result.carpetAreaOfParking;
         building.noOfOneBHK = result.noOfOneBHK;
         building.noOfTwoBHK = result.noOfTwoBHK;
         building.noOfThreeBHK = result.noOfThreeBHK;
-        building.noOfSlab = result.noOfSlab;
+        building.noOfFourBHK = result.noOfFourBHK;
+        building.noOfFiveBHK = result.noOfFiveBHK;
         building.noOfLift = result.noOfLift;
 
         let clonedCostHeadArray : Array<ClonedCostHead> = [];

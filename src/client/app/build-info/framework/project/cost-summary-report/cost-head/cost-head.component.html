@@ -9,7 +9,7 @@
         <div class="panel-group">
           <div class="panel panel-default">
             <div class="panel-heading">
-              <div class="panel-title">
+              <div class="panel-title" (click)="getSelectedWorkItems(subCategoryDetails[i].workitem)">
                   <a *ngIf="subCategoryDetails[subCategory].rateAnalysisId !== 0" data-toggle="collapse" href="#collapse{{i}}">
                      {{ subCategoryDetails[subCategory].name }}
                   </a>
@@ -17,7 +17,7 @@
                     Workitems
                   </a>
                  {{ subCategoryDetails[subCategory].amount }}
-                  <span *ngIf="subCategoryDetails[subCategory].rateAnalysisId !== 0"  data-toggle="modal" data-target="#deleteSubcategory"  class="glyphicon glyphicon-trash"></span>
+                  <span *ngIf="subCategoryDetails[subCategory].rateAnalysisId !== 0"  data-toggle="modal" data-target="#deleteSubcategory" (click)="setCurrentSubcategory(subCategoryDetails[subCategory])"  class="glyphicon glyphicon-trash"></span>
               </div>
             </div>
             <div id="collapse{{i}}" class="panel-collapse collapse">
@@ -27,11 +27,11 @@
                     <div class="col-md-2">Item</div>
                     <div class="col-md-2">Qty.</div>
                     <div class="col-md-2">Unit</div>
-                    <div class="col-md-2">Rate</div>
+                    <div class="col-md-2">RateAnalysis</div>
                     <div class="col-md-2">Amount</div>
                     <div class="col-md-2"></div>
                   </div>
-                  <div  class="row" *ngFor="let workitemObj of subCategoryDetails[subCategory].workitem">
+                  <div  class="row" *ngFor="let workitemObj of subCategoryDetails[subCategory].workitem" >
                     <div class="col-md-2">
                      {{ workitemObj.name }}
                     </div>
@@ -107,7 +107,7 @@
               <p><small>You Want to Delete Subcategory</small></p>
             </div>
             <div class="modal-footer">
-              <button class="btn btn-primary" type="button" (click)="deleteSubcategory(subCategoryDetails[subCategory])"data-dismiss="modal">Yes</button>
+              <button class="btn btn-primary" type="button" (click)="deleteSubcategory()"data-dismiss="modal">Yes</button>
               <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
             </div>
           </div>

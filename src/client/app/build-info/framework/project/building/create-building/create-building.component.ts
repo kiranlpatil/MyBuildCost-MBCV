@@ -32,13 +32,17 @@ export class CreateBuildingComponent implements OnInit {
       'totalSlabArea':['', ValidationService.requiredSlabArea],
       'totalCarperAreaOfUnit':['', ValidationService.requiredCarpetArea],
       'totalSaleableAreaOfUnit':['', ValidationService.requiredSalebleArea],
-      'totalParkingAreaOfUnit':['', ValidationService.requiredParkingArea],
-      'noOfOneBHK':['', ValidationService.requiredOneBHK],
+      'plinthArea':['', ValidationService.requiredPlinthArea],
+      'totalNoOfFloors':['', ValidationService.requiredNoOfFloors],
+      'noOfParkingFloors':['', ValidationService.requiredNoOfParkingFloors],
+      'carpetAreaOfParking':['', ValidationService.requiredCarpetAreaOfParking],
+      'noOfOneBHK': ['',  ValidationService.requiredOneBHK],
       'noOfTwoBHK':['', ValidationService.requiredTwoBHK],
       'noOfThreeBHK':['', ValidationService.requiredThreeBHK],
-      'noOfSlab':['', ValidationService.requiredNoOfSlabs],
+      'noOfFourBHK':['', ValidationService.requiredFourBHK],
+      'noOfFiveBHK':['', ValidationService.requiredFiveBHK],
       'noOfLift':['', ValidationService.requiredNoOfLifts],
-    });
+   });
 
   }
 

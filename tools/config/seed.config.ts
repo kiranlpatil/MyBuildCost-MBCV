@@ -557,6 +557,7 @@ export class SeedConfig {
       '@angular/router/testing':
         'node_modules/@angular/router/bundles/router-testing.umd.js',
       'html2canvas': 'node_modules/html2canvas/dist/html2canvas.min.js',
+      'lodash': 'node_modules/lodash/lodash.js',
       //'jspdf': 'node_modules/jspdf/dist/jspdf.min.js',
       'app/': `${this.APP_BASE}app/`,
       // For test config
@@ -656,6 +657,10 @@ export class SeedConfig {
       },
       html2canvas: {
         main: 'dist/html2canvas.min.js',
+        defaultExtension: 'js'
+      },
+      loadsh: {
+        main: 'dist/lodash.js',
         defaultExtension: 'js'
       }/*,
       jspdf: {

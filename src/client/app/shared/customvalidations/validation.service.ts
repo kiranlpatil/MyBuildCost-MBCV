@@ -357,8 +357,49 @@ export class ValidationService {
       return null;
     }
   }
+  static requiredPlinthArea(control: any) {
+    if (control.value === '' || control.value === undefined) {
+      return {'requiredPlinthArea': true};
+    } else {
+      return null;
+    }
+  }
+  static requiredPodiumArea(control: any) {
+    if (control.value === '' || control.value === undefined) {
+      return {'requiredPodiumArea': true};
+    } else {
+      return null;
+    }
+  }
+  static requiredNoOfParkingFloors(control: any) {
+    if (control.value === '' || control.value === undefined) {
+      return {'requiredNoOfParkingFloors': true};
+    } else {
+      return null;
+    }
+  }
+  static requiredCarpetAreaOfParking(control: any) {
+    if (control.value === '' || control.value === undefined) {
+      return {'requiredCarpetAreaOfParking': true};
+    } else {
+      return null;
+    }
+  }
 
-
+  static requiredNoOfFloors(control: any) {
+    if (control.value === '' || control.value === undefined) {
+      return {' requiredNoOfFloors': true};
+    } else {
+      return null;
+    }
+  }
+  static requiredNoOfBuildings(control: any) {
+    if (control.value === '' || control.value === undefined) {
+      return {'requiredNoOfBuildings': true};
+    } else {
+      return null;
+    }
+  }
   static requiredParkingArea(control: any) {
     if (control.value === '' || control.value === undefined) {
       return {'requiredParkingArea': true};
@@ -383,7 +424,6 @@ export class ValidationService {
     }
   }
 
-
   static requiredThreeBHK(control: any) {
     if (control.value === '' || control.value === undefined) {
       return {'requiredThreeBHK': true};
@@ -391,8 +431,36 @@ export class ValidationService {
       return null;
     }
   }
+  static requiredFourBHK(control: any) {
+    if (control.value === '' || control.value === undefined) {
+      return {'requiredFourBHK': true};
+    } else {
+      return null;
+    }
+  }
+  static requiredFiveBHK(control: any) {
+    if (control.value === '' || control.value === undefined) {
+      return {'requiredFiveBHK': true};
+    } else {
+      return null;
+    }
+  }
 
 
+  static requiredOpenSpace(control: any) {
+    if (control.value === '' || control.value === undefined) {
+      return {'requiredOpenSpace': true};
+    } else {
+      return null;
+    }
+  }
+  static requiredSwimmingPoolCapacity(control: any) {
+    if (control.value === '' || control.value === undefined) {
+      return {'requiredSwimmingPoolCapacity': true};
+    } else {
+      return null;
+    }
+  }
   static requiredNoOfSlabs(control: any) {
     if (control.value === '' || control.value === undefined) {
       return {'requiredNoOfSlabs': true};
