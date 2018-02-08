@@ -144,6 +144,7 @@ export class CostHeadComponent implements OnInit, OnChanges {
     this.rateIArray.quantity=rateItem.data.quantity;
 
     this.rateIArray.unit=rateItem.data.unit;
+    this.unit=rateItem.data.unit;
     this.quantity=rateItem.data.quantity;
 
     this.unit=rateItem.data.unit;
@@ -173,6 +174,9 @@ export class CostHeadComponent implements OnInit, OnChanges {
     let rate = new Rate();
     rate.item = itemArray.item;
     rate.total = itemArray.total;
+    rate.unit = itemArray.unit;
+    rate.quantity = itemArray.quantity;
+    this.unit=itemArray.unit;
     this.rateIArray = rate;
     this.totalAmount=0;
     this.totalRate=0;
@@ -181,6 +185,7 @@ export class CostHeadComponent implements OnInit, OnChanges {
     for(let i=0;i<this.rateIArray.item.length;i++) {
       this.totalAmount= this.totalAmount+( this.rateIArray.item[i].quantity*this.rateIArray.item[i].rate);
       this.totalRate= this.totalRate+this.rateIArray.item[i].rate;
+      this.totalQuantity=this.totalQuantity+this.rateItemsArray[i].quantity;
     }
   }
 
@@ -516,7 +521,7 @@ getHeight(quantityItems: any) {
     this.totalAmount=0;
     this.totalRate=0;
     this.totalQuantity=0;
-    for(let i=0;i<this.itemSize;i++) {
+    for(let i=0;i<this.rateItemsArray.length;i++) {
       this.rateItemsArray[i].quantity=this.rateItemsArray[i].quantity*this.quantityIncrement;
       this.totalAmount= this.totalAmount+( this.rateItemsArray[i].quantity*this.rateItemsArray[i].rate);
       this.totalRate= this.totalRate+this.rateItemsArray[i].rate;
@@ -526,6 +531,7 @@ getHeight(quantityItems: any) {
     this.totalItemRateQuantity=newTotalQuantity;
     this.rateIArray.quantity=newTotalQuantity;
     this.rateIArray.total= this.totalAmount/this.totalQuantity;
+    this.rateIArray.unit= this.unit;
 
   }
   setCurrentSubcategory(subcategory : any) {

@@ -67,6 +67,9 @@
                   <div class="row" [ngStyle]="(toggleRate==true && compareIndex==i) ? {'display': 'table-row'}:{'display': 'none'}" style="display: none;">
                     <bi-rate-items [rateItemsArray]="rateItemsArray" [rateItemsObject]="rateIArray"
                                                [subCategoryRateAnalysisId]="subCategoryDetails[subCategory].rateAnalysisId"
+                                                [totalAmount]="totalAmount"
+                                                [totalRate]="totalRate"
+                                                [totalQuantity]="totalQuantity"
                                                (refreshDataList)="refreshDataList()">
                     </bi-rate-items>
                   </div>

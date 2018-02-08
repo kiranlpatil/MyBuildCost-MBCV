@@ -27,6 +27,9 @@ export class GetRateComponent implements OnInit {
   @Input() rateItemsArray : any;
   @Input() rateItemsObject : any;
   @Input() subCategoryRateAnalysisId : number;
+  @Input() totalQuantity : number;
+  @Input() totalAmount : number;
+  @Input() totalRate : number;
   @Output() refreshDataList = new EventEmitter();
 
   projectId : string;
@@ -42,9 +45,9 @@ export class GetRateComponent implements OnInit {
   lengthTotal: number = 0;
   breadthTotal: number = 0;
   heightTotal: number = 0;
-  totalAmount:number=0;
-  totalRate:number=0;
-  totalQuantity:number=0;
+  /*totalAmount:number=0;*/
+  /*totalRate:number=0;*/
+  /*totalQuantity:number=0;*/
   total:number=0;
   rateIArray: any;
   quantity:number=0;
@@ -64,31 +67,31 @@ export class GetRateComponent implements OnInit {
     console.log('Inside getRateService component.');
   }
 
-  changeQuantity(quantity:string,k:number) {
-    this.totalAmount=0;
-    this.totalRate=0;
-    this.totalQuantity=0;
-    /*this.rateItemsArray[k].quantity=parseInt(quantity);
+  changeQuantity(quantity:any,k:number) {
+    this.totalAmount=0.0;
+    this.totalRate=0.0;
+    this.totalQuantity=0.0;
+    this.rateItemsArray[k].quantity=parseFloat(quantity);
     for(let i=0;i<this.rateItemsArray.length;i++) {
-      this.totalAmount= this.totalAmount+( this.rateItemsArray[i].quantity*this.rateItemsArray[i].rate);
-      this.totalRate= this.totalRate+this.rateItemsArray[i].rate;
-      this.totalQuantity=this.totalQuantity+this.rateItemsArray[i].quantity;
+      this.totalAmount= this.totalAmount+( parseFloat(this.rateItemsArray[i].quantity)*parseFloat(this.rateItemsArray[i].rate));
+      this.totalRate= this.totalRate+parseFloat(this.rateItemsArray[i].rate);
+      this.totalQuantity=this.totalQuantity+ parseFloat(this.rateItemsArray[i].quantity);
     }
-    this.rateTotal= this.totalAmount/this.totalQuantity;*/
+    this.rateTotal= this.totalAmount/this.totalQuantity;
   }
 
 
   changeRate(rate:any, k:number) {
-    this.totalAmount=0;
-    this.totalRate=0;
-    this.totalQuantity=0;
-    /*this.rateItemsArray[k].rate= parseInt(rate);
+    this.totalAmount=0.0;
+    this.totalRate=0.0;
+    this.totalQuantity=0.0;
+    this.rateItemsArray[k].rate= parseFloat(rate);
     for(let i=0;i<this.rateItemsArray.length;i++) {
-      this.totalAmount= this.totalAmount+( this.rateItemsArray[i].quantity*this.rateItemsArray[i].rate);
-      this.totalRate= this.totalRate+this.rateItemsArray[i].rate;
-      this.totalQuantity=this.totalQuantity+this.rateItemsArray[i].quantity;
+      this.totalAmount= this.totalAmount+(parseFloat(this.rateItemsArray[i].quantity)*parseFloat(this.rateItemsArray[i].rate));
+      this.totalRate= this.totalRate+parseFloat(this.rateItemsArray[i].rate);
+      this.totalQuantity=this.totalQuantity+parseFloat(this.rateItemsArray[i].quantity);
     }
-    this.rateTotal= this.totalAmount/this.totalQuantity;*/
+    this.rateTotal= this.totalAmount/this.totalQuantity;
   }
 
   updateRate(rateItemsArray:any) {
