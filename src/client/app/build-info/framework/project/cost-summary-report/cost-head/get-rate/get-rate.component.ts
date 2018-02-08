@@ -99,7 +99,7 @@ export class GetRateComponent implements OnInit {
     let costHeadId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_COST_HEAD_ID);
     let workItemId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_WORKITEM_ID);
     let rate = new Rate();
-    rate.total = this.rateItemsObject.total;
+    rate.total = this.rateTotal;
     rate.quantity = this.rateItemsObject.quantity;
     rate.unit = this.rateItemsObject.unit;
     rate.item = rateItemsArray;
