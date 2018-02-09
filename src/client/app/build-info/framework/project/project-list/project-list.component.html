@@ -1,18 +1,31 @@
-<section class="settings main-form-wrapper">
-  <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3"></div>
-  <div class="col-lg-6 col-md-6 col-sm-6 col-xs-11 settings-content">
-    <ul>
-      <div class="col-xs-12 no-padding">
-        <h5>Project List</h5>
+<section class="wrapper">
+  <div class="container">
+    <div class="col-sm-12">
+      <ul>
         <li *ngFor="let project of projects">
-         <button type="button" class="btn btn-primary" (click)="setCurrentProjectId(project._id)">{{project.name}}</button><br/><br/>
-        </li>
-        <li>
-          <button type="button" class="btn btn-primary" (click)="createProject()">Create New Project</button>
-        </li>
-      </div>
-    </ul>
-  </div>
+          <div class="building-image-container">
+            <a type="button" (click)="setCurrentProjectId(project._id)">
+              <div class="building-image">
+                <img src="assets/build-info/create-new-project/create-new-project.png" />
+              </div>
+            </a>
+          </div>
 
-  <tpl-footer></tpl-footer>
+          <a type="button" (click)="setCurrentProjectId(project._id)">{{project.name}}</a>
+          <span class="break"></span>
+        </li>
+        <li class="break"></li>
+        <li>
+          <div class="building-image-container">
+            <a type="button" (click)="createProject()">
+              <div class="building-image">
+                <span class="glyphicon glyphicon-plus"></span>
+              </div>
+            </a>
+          </div>
+          <a type="button" (click)="createProject()">Create New Project</a>
+        </li>
+      </ul>
+    </div>
+  </div>
 </section>

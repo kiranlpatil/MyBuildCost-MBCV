@@ -9,7 +9,8 @@ import {SessionStorage, SessionStorageService} from '../../../../shared/index';
 @Component({
   moduleId: module.id,
   selector: 'bi-list-project',
-  templateUrl: 'project-list.component.html'
+  templateUrl: 'project-list.component.html',
+  styleUrls: ['project-list.component.css']
 })
 
 export class ProjectListComponent implements OnInit {
