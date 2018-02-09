@@ -537,7 +537,34 @@ class ProjectService {
                                  callback: (error: any, result: any) => void) {
     logger.info('Project service, updateBudgetedCostForCostHead has been hit');
     let query = {'_id' : buildingId, 'costHead.name' : costHead};
-    let newData = { $set : {'costHead.$.budgetedCostAmount' : costHeadBudgetedAmountEdited.budgetedCostAmount}};
+    let costInUnit = costHeadBudgetedAmountEdited.costIn;
+    let costPerUnit = costHeadBudgetedAmountEdited.costPer;
+    let rate = 0;
+    let newData;
+    rate = costHeadBudgetedAmountEdited.budgetedCostAmount / costHeadBudgetedAmountEdited.buildingArea;
+
+    if(costPerUnit === 'saleableArea' && costInUnit === 'sqft') {
+      newData = { $set : {
+        'costHead.$.thumbRuleRate.saleableArea.sqft' : rate,
+        'costHead.$.thumbRuleRate.saleableArea.sqmt' : rate * config.get('SqureMeter')
+      } };
+    } else if(costPerUnit === 'saleableArea' && costInUnit === 'sqmt') {
+      newData = { $set : {
+        'costHead.$.thumbRuleRate.saleableArea.sqmt' : rate,
+        'costHead.$.thumbRuleRate.saleableArea.sqft' : rate / config.get('SqureMeter')
+      } };
+    } else if(costPerUnit === 'slabArea' && costInUnit === 'sqft') {
+      newData = { $set : {
+        'costHead.$.thumbRuleRate.slabArea.sqft' : rate,
+        'costHead.$.thumbRuleRate.slabArea.sqmt' : rate * config.get('SqureMeter')
+      } };
+    } else if(costPerUnit === 'slabArea' && costInUnit === 'sqmt') {
+      newData = { $set : {
+        'costHead.$.thumbRuleRate.slabArea.sqmt' : rate,
+        'costHead.$.thumbRuleRate.slabArea.sqft' : rate / config.get('SqureMeter')
+      } };
+    }
+
     this.buildingRepository.findOneAndUpdate(query, newData, {new:true},(err, response) => {
       logger.info('Project service, findOneAndUpdate has been hit');
       if(err) {
