@@ -878,13 +878,22 @@ class ProjectService {
       if (error) {
         callback(error, null);
       } else {
-        let subCategory :Array<SubCategory> = null;
+        let subCategories :Array<SubCategory> = null;
         for(let index = 0; building.costHead.length > index; index++) {
           if(building.costHead[index].rateAnalysisId === costheadId) {
-            subCategory = building.costHead[index].subCategory;
+            subCategories = building.costHead[index].subCategory;
+            let workitems = subCategories;
+            for(let subcategoryIndex = 0 ; subcategoryIndex < subCategories.length; subcategoryIndex ++) {
+              let workitems = subCategories[subcategoryIndex].workitem;
+              for(let workitemsIndex = 0; workitemsIndex < workitems.length; workitemsIndex ++) {
+                let workitem = workitems[workitemsIndex];
+                subCategories[subcategoryIndex].amount = (workitem.quantity.total * workitem.rate.total)
+                  + subCategories[subcategoryIndex].amount;
+              }
+            }
           }
         }
-        callback(null, {data: subCategory, access_token: this.authInterceptor.issueTokenWithUid(user)});
+        callback(null, {data: subCategories, access_token: this.authInterceptor.issueTokenWithUid(user)});
       }
     });
   }
