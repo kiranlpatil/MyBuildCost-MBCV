@@ -1,9 +1,8 @@
 @import '../../../css/common';
 
 .page-header {
-  border-bottom: 1px solid $black;
-  box-shadow: 0 0 2px 1px $overlay;
-  background: $black;
+  background: $header-bg;
+  border-bottom: 0;
   height: 50px;
   left: 0;
   margin: 0 auto;
@@ -19,7 +18,7 @@
 
     img {
       margin-top: 5px;
-      width: 75px!important;
+      height: 40px;
     }
   }
 
@@ -71,7 +70,7 @@
   .last-child {
 
     a {
-      padding: 22px 15px;
+      padding: 22px 30px;
       user-select: none;
 
       img {
@@ -94,7 +93,7 @@
       .caret {
         border-left: 5px solid transparent;
         border-right: 5px solid transparent;
-        border-top: 5px dashed $white;
+        border-top: 5px dashed $link-color;
         margin: 8px 0 0;
       }
     }
@@ -170,17 +169,16 @@
 }
 
 .navbar-links {
-  left: 100px;
+  left: 180px;
   position: fixed;
   top: 0;
   z-index: 1000;
 
   li {
     a {
-      border-bottom: 4px solid transparent;
-      color: $white;
-      font-size: 12px;
-      padding: 13px 5px 13px 30px;
+      color: $link-color;
+      font-size: 10px;
+      padding: 5px;
       text-transform: uppercase;
       transition: color 0.25s ease-out, border 0.25s ease-out;
 
@@ -188,25 +186,14 @@
       &:focus,
       &:active {
         background-color: transparent;
-      }
-
-      .icon-dashboard {
-        background: url('../../assets/c-next/card-view/sprite.png') no-repeat -5px -770px;
-      }
-
-      .icon-value-portrait {
-        background: url('../../assets/c-next/card-view/sprite.png') no-repeat -30px -770px;
-      }
-
-      .icon-edit-profile {
-        background: url('../../assets/c-next/card-view/sprite.png') no-repeat -56px -770px;
+        color: $text-color;
       }
     }
   }
 
   .active {
     a {
-      border-bottom: 4px solid $theme-color;
+      color: $text-color;
     }
   }
 
@@ -247,30 +234,6 @@
 
   .dropdown > a {
     color: $white;
-  }
-}
-
-.icon-dashboard {
-  background: url('../../assets/c-next/card-view/sprite.png') no-repeat -108px -770px;
-}
-
-.icon-value-portrait {
-  background: url('../../assets/c-next/card-view/sprite.png') no-repeat -133px -770px;
-}
-
-.icon-edit-profile {
-  background: url('../../assets/c-next/card-view/sprite.png') no-repeat -159px -770px;
-}
-
-.icon-candidate-search {
-  background: url('../../assets/c-next/card-view/sprite.png') no-repeat -5px -789px;
-}
-
-#candidate-header {
-  .navbar-brand {
-    img {
-      width: 36px;
-    }
   }
 }
 

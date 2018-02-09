@@ -9,7 +9,8 @@ import { SessionStorage,SessionStorageService } from '../../../../../shared/inde
 @Component({
   moduleId: module.id,
   selector: 'bi-project-list-header',
-  templateUrl: 'project-list-header.component.html'
+  templateUrl: 'project-list-header.component.html',
+  styleUrls:['./project-list-header.component.css']
 })
 
 export class ProjectListHeaderComponent implements OnInit {

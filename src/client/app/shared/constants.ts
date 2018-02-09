@@ -369,6 +369,7 @@ export class ImagePath {
   public static BODY_BACKGROUND = './assets/build-info/page_background/page-bg.png';
   public static BODY_BACKGROUND_TRANSPARENT = './assets/build-info/page_background/page-bg-transparent.png';
   public static MY_WHITE_LOGO = './assets/build-info/header/buildInfo-logo.png';
+  public static HEADER_LOGO = './assets/build-info/header/header-logo.png';
   public static MOBILE_WHITE_LOGO = './assets/build-info/header/buildInfo-logo.png';
   public static FACEBOOK_ICON = './assets/framework/images/footer/fb.svg';
   public static GOOGLE_ICON = './assets/framework/images/footer/google-plus.svg';

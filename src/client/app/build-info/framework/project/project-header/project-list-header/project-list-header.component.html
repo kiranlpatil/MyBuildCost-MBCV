@@ -1,10 +1,4 @@
-<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-  <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-    <select (change)="setCurrentProjectId($event.target.value)">
-      <option [value]>My Projects</option>
-      <option *ngFor="let project of projectsArray" [value]="project._id">{{project.name}}</option>
-    </select>
-  </div>
-</div>
-<br>
-<br>
+<select (change)="setCurrentProjectId($event.target.value)">
+  <option [value]>My Projects</option>
+  <option *ngFor="let project of projectsArray" [value]="project._id">{{project.name}}</option>
+</select>

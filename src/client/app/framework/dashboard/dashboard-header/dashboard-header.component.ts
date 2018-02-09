@@ -19,7 +19,7 @@ export class DashboardHeaderComponent {
   PROFILE_IMG_PATH: string;
   user_first_name: string;
   user_last_name: string;
-  MY_LOGO: string;
+  HEADER_LOGO: string;
   MOBILE_LOGO: string;
   newUser: number;
   private highlightedSection: Section = new Section();
@@ -32,7 +32,7 @@ export class DashboardHeaderComponent {
   }
 
   constructor(private _router: Router, private _eref: ElementRef) {
-    this.MY_LOGO = ImagePath.MY_WHITE_LOGO;
+    this.HEADER_LOGO = ImagePath.HEADER_LOGO;
     this.MOBILE_LOGO = ImagePath.MOBILE_WHITE_LOGO;
     this.user_first_name = SessionStorageService.getSessionValue(SessionStorage.FIRST_NAME);
   }

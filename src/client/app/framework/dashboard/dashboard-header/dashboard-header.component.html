@@ -1,5 +1,5 @@
 <header class="page-header" id="candidate-header">
-  <nav class="navbar navbar-fixed-top" style="background: #9ca4ab">
+  <nav class="navbar navbar-fixed-top">
     <div class="container-fluid">
       <div class="navbar-header">
 
@@ -13,7 +13,7 @@
         </button>
 
         <a class="navbar-brand" [routerLink]="['/dashboard']" (click)="navigateTo('/dashboard');">
-          <img src={{MOBILE_LOGO}}/>
+          <img src={{HEADER_LOGO}}/>
         </a>
       </div>
 
@@ -21,9 +21,7 @@
       <div class="collapse navbar-collapse" [class.open-nav]="isClassVisible">
         <ul class="nav navbar-nav navbar-left hidden-xs navbar-links">
           <li role="menuitem" [routerLinkActive]="['active']">
-            <a class="dropdown-item"  [routerLink]="['/dashboard']" (click)="navigateTo('/dashboard');">
-              <span class="icon-dashboard"></span>Projects
-            </a>
+            <a class="dropdown-item"  [routerLink]="['/dashboard']" (click)="navigateTo('/dashboard');">Projects</a>
           </li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
