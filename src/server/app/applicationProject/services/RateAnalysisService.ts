@@ -9,7 +9,7 @@ let config = require('config');
 var log4js = require('log4js');
 var logger=log4js.getLogger('Rate Analysis Service');
 import alasql = require('alasql');
-import Rate = require("../dataaccess/model/Rate");
+import Rate = require('../dataaccess/model/Rate');
 
 class RateAnalysisService {
   APP_NAME: string;
@@ -112,10 +112,15 @@ class RateAnalysisService {
             let sql2 = 'SELECT rate.C1 AS rateAnalysisId, rate.C2 AS item,rate.C7 AS quantity,rate.C3 AS rate,' +
               ' rate.C3*rate.C7 AS totalAmount, rate.C6 type, unit.C2 As unit FROM ? AS rate JOIN ? AS unit ON unit.C1 = rate.C9' +
               '  WHERE rate.C1 = '+ workitemId;
+            let sql3 = 'SELECT SUM(rate.C3*rate.C7) / SUM(rate.C7) AS total  FROM ? AS rate JOIN ? AS unit ON unit.C1 = rate.C9' +
+              '  WHERE rate.C1 = '+ workitemId;
             let quantityAndUnit = alasql(sql, [rate, unitData])
             let rateResult : Rate = new Rate();
+            let totalrateFromRateAnalysis = alasql(sql3, [rate, unitData])
             rateResult.quantity = quantityAndUnit[0].quantity;
             rateResult.unit = quantityAndUnit[0].unit;
+            rateResult.rateFromRateAnalysis = totalrateFromRateAnalysis[0].total;
+            console.log(  rateResult.rateFromRateAnalysis);
             rate = alasql(sql2, [rate, unitData])
             rateResult.item = rate;
             callback(null, rateResult);

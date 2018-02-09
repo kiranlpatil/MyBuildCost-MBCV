@@ -163,6 +163,7 @@
           "rateAnalysisId": 50,
           "unit": "sqft",
           "rate": {
+            "rateFromRateAnalysis": 0,
             "total": 0,
             "quantity": 10,
             "item": [
@@ -257,6 +258,7 @@
             "rateAnalysisId": 153,
             "unit": "sqft",
             "rate": {
+              "rateFromRateAnalysis": 0,
               "total": 0,
               "quantity": 10,
               "item": [
@@ -351,6 +353,7 @@
             "rateAnalysisId": 47,
             "unit": "sqft",
             "rate": {
+              "rateFromRateAnalysis": 0,
               "total": 0,
               "quantity": 10,
               "item": [
@@ -462,6 +465,7 @@
             "rateAnalysisId": 89,
             "unit": "sqft",
             "rate": {
+              "rateFromRateAnalysis": 0,
               "total": 0,
               "quantity": 10,
               "item": [
@@ -549,7 +553,8 @@
               "rateAnalysisId": 92,
               "unit": "sqft",
               "rate": {
-                "total": 500,
+                "rateFromRateAnalysis": 0,
+                "total": 0,
                 "quantity": 10,
                 "item": [{
                   "item": "Cement",
@@ -643,6 +648,7 @@
               "rateAnalysisId": 295,
               "unit": "sqft",
               "rate": {
+                "rateFromRateAnalysis": 0,
                 "total": 0,
                 "quantity": 10,
                 "item": [
@@ -731,6 +737,7 @@
                 "rateAnalysisId": 296,
                 "unit": "sqft",
                 "rate": {
+                  "rateFromRateAnalysis": 0,
                   "total": 0,
                   "quantity": 10,
                   "item": [
@@ -843,6 +850,7 @@
             "rateAnalysisId": 348,
             "unit": "sqft",
             "rate": {
+              "rateFromRateAnalysis": 0,
               "total": 0,
               "quantity": 10,
               "item": [

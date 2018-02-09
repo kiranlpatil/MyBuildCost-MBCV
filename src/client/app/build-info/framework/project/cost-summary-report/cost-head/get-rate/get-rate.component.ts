@@ -40,6 +40,7 @@ export class GetRateComponent implements OnInit {
   costheadId:number;
   subCategoryId: number;
   subCategoryDetails: any;
+  workItem:any;
   quantityTotal: number = 0;
   quanitytNumbersTotal: number = 0;
   lengthTotal: number = 0;
@@ -78,6 +79,7 @@ export class GetRateComponent implements OnInit {
       this.totalQuantity=this.totalQuantity+ parseFloat(this.rateItemsArray[i].quantity);
     }
     this.rateTotal= this.totalAmount/this.totalQuantity;
+    this.rateItemsObject.total=this.rateTotal;
   }
 
 
@@ -92,14 +94,16 @@ export class GetRateComponent implements OnInit {
       this.totalQuantity=this.totalQuantity+parseFloat(this.rateItemsArray[i].quantity);
     }
     this.rateTotal= this.totalAmount/this.totalQuantity;
+    this.rateItemsObject.total = this.rateTotal;
   }
 
   updateRate(rateItemsArray:any) {
-
     let costHeadId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_COST_HEAD_ID);
     let workItemId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_WORKITEM_ID);
     let rate = new Rate();
-    rate.total = this.rateTotal;
+    rate.rateFromRateAnalysis = this.rateItemsObject.rateFromRateAnalysis;
+    rate.total = this.rateItemsObject.total;
+   // rate.total = this.rateTotal;
     rate.quantity = this.rateItemsObject.quantity;
     rate.unit = this.rateItemsObject.unit;
     rate.item = rateItemsArray;

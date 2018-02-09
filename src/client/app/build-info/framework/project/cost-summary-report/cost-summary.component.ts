@@ -99,6 +99,7 @@ export class CostSummaryComponent implements OnInit {
   setBuildingId(buildingId: string) {
     SessionStorageService.setSessionValue(SessionStorage.CURRENT_BUILDING, buildingId);
   }
+
   showInactiveCostHeadsOnDropDown(buildingId: string) {
     console.log('Adding Costhead');
     this.buildingId=buildingId;
@@ -263,9 +264,14 @@ export class CostSummaryComponent implements OnInit {
     console.log('onAddCostheadSuccess()'+error);
   }
 
-  changeBudgetedCost(buildingId : string, costHead : string, amount:number) {
-    if(amount !== null) {
-      this.costSummaryService.updateBudgetCostAmountForCostHead(buildingId, costHead, amount).subscribe(
+  changeBudgetedCost(buildingId: string, costHead: string, amount: number, buildingArea : number) {
+    if (amount !== null) {
+      let costIn : string;
+      let costPer : string;
+      (this.defaultCostIn==='Rs/Sqft') ? costIn = 'sqft' : costIn = 'sqmt';
+      (this.defaultCostPer==='SlabArea') ? costPer = 'slabArea' : costPer = 'saleableArea';
+
+      this.costSummaryService.updateBudgetCostAmountForCostHead(buildingId, costHead, costIn, costPer, buildingArea, amount).subscribe(
         buildingDetails => this.updatedCostHeadAmountSuccess(buildingDetails),
         error => this.updatedCostHeadAmountFail(error)
       );
@@ -277,6 +283,7 @@ export class CostSummaryComponent implements OnInit {
     message.isError = false;
     message.custom_message = Messages.MSG_SUCCESS_UPDATE_BUDGETED_COST_COSTHEAD;
     this.messageService.message(message);
+    this.onChangeCostingIn(this.defaultCostIn);
   }
 
   updatedCostHeadAmountFail(error : any) {
@@ -286,12 +293,14 @@ export class CostSummaryComponent implements OnInit {
   deleteBuildingFunction(buildingId : string) {
     this.currentBuildingId = buildingId;
   }
+
     deleteThisBuilding() {
     this.listBuildingService.deleteBuildingById( this.currentBuildingId).subscribe(
       project => this.onDeleteBuildingSuccess(project),
       error => this.onDeleteBuildingFail(error)
     );
   }
+
   onDeleteBuildingSuccess(result : any) {
     if (result !== null) {
       var message = new Message();
@@ -305,44 +314,48 @@ export class CostSummaryComponent implements OnInit {
   onDeleteBuildingFail(error : any) {
     console.log(error);
   }
+
   addBuilding() {
     this._router.navigate([NavigationRoutes.APP_CREATE_BUILDING]);
   }
+
   editBuildingDetails(buildingId: string) {
     SessionStorageService.setSessionValue(SessionStorage.CURRENT_BUILDING, buildingId);
     this._router.navigate([NavigationRoutes.APP_VIEW_BUILDING_DETAILS, buildingId]);
   }
+
   cloneBuilding(buildingId: string) {
     this.viewBuildingService.getBuildingDetails(buildingId).subscribe(
       building => this.onGetBuildingDataSuccess(building),
       error => this.onGetBuildingDataFail(error)
     );
   }
-  onGetBuildingDataSuccess(building : any) {
-    let buildingDetails=building.data;
-    this.clonedBuildingDetails = building.data.costHead;
-    this.model.name=buildingDetails.name;
-    this.model.totalSlabArea=buildingDetails.totalSlabArea;
-    this.model.totalCarperAreaOfUnit=buildingDetails.totalCarperAreaOfUnit;
-    this.model.totalSaleableAreaOfUnit=buildingDetails.totalSaleableAreaOfUnit;
-    this.model.plinthArea=buildingDetails.plinthArea;
-    this.model.totalNoOfFloors=buildingDetails.totalNoOfFloors;
-    this.model.noOfParkingFloors=buildingDetails.noOfParkingFloors;
-    this.model.carpetAreaOfParking=buildingDetails.carpetAreaOfParking;
-    this.model.noOfOneBHK=buildingDetails.noOfOneBHK;
-    this.model.noOfTwoBHK=buildingDetails.noOfTwoBHK;
-    this.model.noOfThreeBHK=buildingDetails.noOfThreeBHK;
-    this.model.noOfFourBHK=buildingDetails.noOfFourBHK;
-    this.model.noOfFiveBHK=buildingDetails.noOfFiveBHK;
-    this.model.noOfLift=buildingDetails.noOfLift;
-    }
 
-  onGetBuildingDataFail(error : any) {
+  onGetBuildingDataSuccess(building: any) {
+    let buildingDetails = building.data;
+    this.clonedBuildingDetails = building.data.costHead;
+    this.model.name = buildingDetails.name;
+    this.model.totalSlabArea = buildingDetails.totalSlabArea;
+    this.model.totalCarperAreaOfUnit = buildingDetails.totalCarperAreaOfUnit;
+    this.model.totalSaleableAreaOfUnit = buildingDetails.totalSaleableAreaOfUnit;
+    this.model.plinthArea = buildingDetails.plinthArea;
+    this.model.totalNoOfFloors = buildingDetails.totalNoOfFloors;
+    this.model.noOfParkingFloors = buildingDetails.noOfParkingFloors;
+    this.model.carpetAreaOfParking = buildingDetails.carpetAreaOfParking;
+    this.model.noOfOneBHK = buildingDetails.noOfOneBHK;
+    this.model.noOfTwoBHK = buildingDetails.noOfTwoBHK;
+    this.model.noOfThreeBHK = buildingDetails.noOfThreeBHK;
+    this.model.noOfFourBHK = buildingDetails.noOfFourBHK;
+    this.model.noOfFiveBHK = buildingDetails.noOfFiveBHK;
+    this.model.noOfLift = buildingDetails.noOfLift;
+  }
+
+  onGetBuildingDataFail(error: any) {
     console.log(error);
   }
 
-  cloneBuildingBasicDetails()  {
-    if(this.cloneBuildingForm.valid) {
+  cloneBuildingBasicDetails() {
+    if (this.cloneBuildingForm.valid) {
       this.model = this.cloneBuildingForm.value;
       this.createBuildingService.addBuilding(this.model)
         .subscribe(
@@ -350,11 +363,12 @@ export class CostSummaryComponent implements OnInit {
           error => this.addNewBuildingFailed(error));
     }
   }
-  addNewBuildingSuccess(building : any) {
+
+  addNewBuildingSuccess(building: any) {
     this.cloneBuildingId = building.data._id;
   }
 
-  addNewBuildingFailed(error : any) {
+  addNewBuildingFailed(error: any) {
     console.log(error);
   }
 
@@ -364,26 +378,28 @@ export class CostSummaryComponent implements OnInit {
       error => this.updateBuildingFail(error)
     );
   }
+
   updateBuildingSuccess(project: any) {
     var message = new Message();
     message.isError = false;
     message.custom_message = Messages.MSG_SUCCESS_ADD_BUILDING_PROJECT;
     this.messageService.message(message);
     this.onChangeCostingIn(this.defaultCostIn);
-    }
+  }
+
   updateBuildingFail(error: any) {
     console.log(error);
   }
 
   makeGrandTotal() {
     //ToDo we have to remove this code after
-    this.grandTotalofBudgetedCost=0;
-    this.grandTotalofTotalRate=0;
-    this.grandTotalofArea=0;
-    for(let buildindIndex=0;  buildindIndex < this.projectBuildings.length; buildindIndex++) {
-      this.grandTotalofBudgetedCost=this.grandTotalofBudgetedCost+this.projectBuildings[buildindIndex].thumbRule.totalBudgetedCost;
-      this.grandTotalofTotalRate=this.grandTotalofTotalRate+this.projectBuildings[buildindIndex].thumbRule.totalRate;
-      this.grandTotalofArea=this.grandTotalofArea+this.projectBuildings[buildindIndex].area;
+    this.grandTotalofBudgetedCost = 0;
+    this.grandTotalofTotalRate = 0;
+    this.grandTotalofArea = 0;
+    for (let buildindIndex = 0; buildindIndex < this.projectBuildings.length; buildindIndex++) {
+      this.grandTotalofBudgetedCost = this.grandTotalofBudgetedCost + this.projectBuildings[buildindIndex].thumbRule.totalBudgetedCost;
+      this.grandTotalofTotalRate = this.grandTotalofTotalRate + this.projectBuildings[buildindIndex].thumbRule.totalRate;
+      this.grandTotalofArea = this.grandTotalofArea + this.projectBuildings[buildindIndex].area;
     }
   }
 

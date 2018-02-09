@@ -1,6 +1,7 @@
 import { RateItem } from './RateItem';
 
 export class Rate {
+  rateFromRateAnalysis: number;
   total: number;
   quantity: number;
   unit :string;

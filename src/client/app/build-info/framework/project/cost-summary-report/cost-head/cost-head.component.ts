@@ -10,8 +10,10 @@ import {
   Headings,
   NavigationRoutes, Messages
 } from '../../../../../shared/constants';
-import { API, BaseService, SessionStorage, SessionStorageService,
-  Message, MessageService } from '../../../../../shared/index';
+import {
+  API, BaseService, SessionStorage, SessionStorageService,
+  Message, MessageService, LoaderService
+} from '../../../../../shared/index';
 import { CostHeadService } from './cost-head.service';
 import { CustomHttp } from '../../../../../shared/services/http/custom.http';
 import { FormGroup } from '@angular/forms';
@@ -39,7 +41,7 @@ export class CostHeadComponent implements OnInit, OnChanges {
   costHeadDetails: any;
   subCategoryDetails: any;
   costHeadItemSave: any;
-  estimatedItem : any;
+  itemArray : any;
   currentquantityItem: string;
   currentWorkItem: string;
   workItem: any;
@@ -60,6 +62,7 @@ export class CostHeadComponent implements OnInit, OnChanges {
   comapreWorkItemRateAnalysisId:number;
   itemSize:number=0;
   quantity:number=0;
+  rateFromRateAnalysis:number=0;
   unit:string='';
   showSubcategoryListvar: boolean = false;
   alreadySelectedWorkItems:any;
@@ -81,7 +84,7 @@ export class CostHeadComponent implements OnInit, OnChanges {
 
 
   constructor(private costHeadService : CostHeadService, private activatedRoute : ActivatedRoute
-              , private messageService: MessageService, private commonService : CommonService) {
+              , private messageService: MessageService, private commonService : CommonService, private loderService: LoaderService) {
     }
 
   ngOnInit() {
@@ -118,29 +121,37 @@ export class CostHeadComponent implements OnInit, OnChanges {
     this.workItem = workItem;
   }
 
-  getRate(i: number,workItemId:number) {
+  getRate(i: number,workItem:any) {
     this.toggleRate = !this.toggleRate;
     this.compareIndex = i;
     if (this.toggleRate === true) {
       this.toggleQty = false;
     }
-
-    this.workItemId=workItemId;
-    SessionStorageService.setSessionValue(SessionStorage.CURRENT_WORKITEM_ID,workItemId);
+    this.workItem=workItem;
+    this.workItemId = workItem.rateAnalysisId;
+    SessionStorageService.setSessionValue(SessionStorage.CURRENT_WORKITEM_ID, this.workItemId);
     let subCategoryId=this.subCategoryDetails[i].rateAnalysisId;
-
+   /* this.loderService.start();*/
     this.costHeadService.getRateItems(this.costheadId, subCategoryId,this.workItemId).subscribe(
-        rateItem => this.onGetRateItemsSuccess(rateItem),
-        error => this.onGetRateItemsFail(error)
+        rateItem => {
+          this.onGetRateItemsSuccess(rateItem, workItem);
+    /*      this.loderService.stop();*/
+          },error => this.onGetRateItemsFail(error)
       );
   }
 
-  onGetRateItemsSuccess(rateItem: any) {
+  onGetRateItemsSuccess(rateItem: any, workItem:any) {
     this.totalAmount=0;
     this.totalRate=0;
     this.totalQuantity=0;
 
     this.rateIArray=rateItem.data;
+    this.workItem = workItem;
+
+    this.rateFromRateAnalysis = rateItem.data.rateFromRateAnalysis;
+    this.workItem.rate.rateFromRateAnalysis=rateItem.data.rateFromRateAnalysis;
+    console.log(this.rateFromRateAnalysis);
+
     this.rateIArray.quantity=rateItem.data.quantity;
 
     this.rateIArray.unit=rateItem.data.unit;
@@ -163,16 +174,22 @@ export class CostHeadComponent implements OnInit, OnChanges {
   }
 
   //Rate from DB
-  getRateFromDatabase(i:number,itemArray:any, workItemRateAnalysisId : number) {
+  getRateFromDatabase(i:number,itemArray:any, workItem : any) {
     this.toggleRate = !this.toggleRate;
-    SessionStorageService.setSessionValue(SessionStorage.CURRENT_WORKITEM_ID, workItemRateAnalysisId);
+    this.workItem = workItem;
+    this.workItemId = workItem.rateAnalysisId;
+    SessionStorageService.setSessionValue(SessionStorage.CURRENT_WORKITEM_ID, this.workItemId);
     this.compareIndex = i;
     if (this.toggleRate === true) {
       this.toggleQty = false;
     }
+    this.itemArray = itemArray;
     this.rateItemsArray=itemArray.item;
     let rate = new Rate();
     rate.item = itemArray.item;
+    rate.rateFromRateAnalysis = this.itemArray.rateFromRateAnalysis ;
+    rate.quantity =   this.itemArray.quantity;
+    rate.unit =   this.itemArray.unit;
     rate.total = itemArray.total;
     rate.unit = itemArray.unit;
     rate.quantity = itemArray.quantity;

@@ -16,7 +16,6 @@ export class CostHeadService extends BaseService {
     let options = new RequestOptions({headers: headers});
    let buildingId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_BUILDING);
     var url = 'project/'+projectId+'/'+API.VIEW_BUILDING+'/'+buildingId+'/'+'costhead/'+costheadId+'/'+'subcategory';
-//  http://localhost:8080/api/project/5a71549f13d32f1704717dcd/building/5a7154c713d32f1704717dce/costhead/5/subcategory
     console.log(url);
     return this.http.get(url, options)
       .map(this.extractData)

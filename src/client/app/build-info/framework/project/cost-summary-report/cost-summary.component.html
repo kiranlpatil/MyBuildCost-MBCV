@@ -63,7 +63,7 @@
                                 {{thumbRuleItem.name}}
                               </div>
                               <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                <input type="number" [(ngModel)]="thumbRuleItem.amount" id="thumbRuleItem.amount" (blur)="changeBudgetedCost(building._id, thumbRuleItem.name, thumbRuleItem.amount)" class="form-control clear"/>
+                                <input type="number" [(ngModel)]="thumbRuleItem.amount" id="thumbRuleItem.amount" (blur)="changeBudgetedCost(building._id, thumbRuleItem.name, thumbRuleItem.amount , building.area)" class="form-control clear"/>
                               </div>
                               <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                                 {{thumbRuleItem.rate}}
