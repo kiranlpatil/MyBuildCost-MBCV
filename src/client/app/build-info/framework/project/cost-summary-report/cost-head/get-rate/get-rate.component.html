@@ -1,54 +1,71 @@
-<table class="table">
-      <thead>
-      <th>Description</th>
-      <th>Remarks</th>
-      <th>Qty.</th>
-      <th>Unit</th>
-      <th>Rate/Unit</th>
-      <th>Amount</th>
-      </thead>
-      <tbody>
-      <tr *ngFor="let rateItem of rateItemsArray; let k = index">
-        <td>
-          <input [(ngModel)]="rateItem.item" id="itemdescription" class="form-control clear"/>
-        </td>
-        <td>
-          <input [(ngModel)]="rateItem.remarks" id="itemquantity" class="form-control clear"/>
-        </td>
-        <td>
-          <input [(ngModel)]="rateItem.quantity" id="itemunit" class="form-control clear" (change)="changeQuantity(rateItem.quantity,k)"/>
-        </td>
-        <td>
-          <input [(ngModel)]="rateItem.unit" id="itemrate" class="form-control clear" readonly/>
-        </td>
-        <td>
-          <input [(ngModel)]="rateItem.rate" id="itemamount" class="form-control clear" (change)="changeRate(rateItem.rate,k)"/>
-        </td>
-        <td>
-          <input [(ngModel)]="rateItem.quantity*rateItem.rate" id="totalAmount" class="form-control clear" readonly/>
-        </td>
-      </tr>
+<div *ngIf="rateItemsArray!==undefined">
+  <div class="row col-md-12">
+    <div class="col-md-6" *ngIf="rateItemsArray!==undefined">
+      <div class="col-md-4" style="text-align: right">
+          Quantity
+      </div>
+      <div class="col-md-5">
+                        <input [(ngModel)]="rateItemsArray.quantity" id="rateQuantity" class="form-control clear" (change)="onTotalQuantityChange(rateItemsArray.quantity)" (focus)="getPreviousQuantity(rateItemsArray.quantity)"/>
+      </div>
+      <div class="col-md-3" style="text-align: left">
+                       {{ rateItemsArray.unit }}
+      </div>
+                      </div>
+  </div>
+  <div class="row col-md-12">
+    <table class="table">
+        <thead>
+        <th>Description</th>
+        <th>Remarks</th>
+        <th>Qty.</th>
+        <th>Unit</th>
+        <th>Rate/Unit</th>
+        <th>Amount</th>
+        </thead>
+        <tbody>
+        <tr *ngFor="let rateItem of rateItemsArray.item; let k = index">
+          <td>
+            <input [(ngModel)]="rateItem.item" id="itemdescription" class="form-control clear"/>
+          </td>
+          <td>
+            <input [(ngModel)]="rateItem.remarks" id="itemquantity" class="form-control clear"/>
+          </td>
+          <td>
+            <input [(ngModel)]="rateItem.quantity" id="itemunit" class="form-control clear" (change)="changeQuantity(rateItem.quantity,k)"/>
+          </td>
+          <td>
+            <input [(ngModel)]="rateItem.unit" id="itemrate" class="form-control clear" readonly/>
+          </td>
+          <td>
+            <input [(ngModel)]="rateItem.rate" id="itemamount" class="form-control clear" (change)="changeRate(rateItem.rate,k)"/>
+          </td>
+          <td>
+            <input [(ngModel)]="rateItem.quantity*rateItem.rate" id="totalAmount" class="form-control clear" readonly/>
+          </td>
+        </tr>
 
-      <tr>
-        <td colspan="2" style="text-align:left">
-          <label>Total</label>
-        </td>
-        <td>
-          {{totalQuantity}}
-        </td>
-        <td colspan="2" style="text-align:right">
-          {{totalRate}}
-        </td>
-        <td>
-          {{totalAmount}}
-        </td>
-      </tr>
+        <tr>
+          <td colspan="2" style="text-align:left">
+            <label>Total</label>
+          </td>
+          <td>
+            {{totalQuantity|number}}
+          </td>
+          <td colspan="2" style="text-align:right">
+            {{totalRate|number}}
+          </td>
+          <td>
+            {{totalAmount|number}}
+          </td>
+        </tr>
 
-      <tr>
-        <td colspan="6">
-              <button type="button" class="btn btn-primary" (click)="updateRate(rateItemsArray)">Save</button>
-        </td>
-      </tr>
+        <tr>
+          <td colspan="6">
+                <button type="button" class="btn btn-primary" (click)="updateRate(rateItemsArray)">Save</button>
+          </td>
+        </tr>
 
-      </tbody>
-    </table>
+        </tbody>
+      </table>
+  </div>
+</div>

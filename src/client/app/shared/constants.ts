@@ -105,6 +105,7 @@ export class Messages {
     public static MSG_ERROR_VALIDATION_THREE_BHK_REQUIRED = 'Enter No of three BHKs.';
     public static MSG_ERROR_VALIDATION_NO_OF_SLABS_REQUIRED = 'Enter No of slabs.';
     public static MSG_ERROR_VALIDATION_NO_OF_LIFTS_REQUIRED = 'Enter No of lifts';
+    public static MSG_ERROR_VALIDATION_ALPHABATES = 'Enter alphabates only';
 
   public static MSG_LANDING_PAGE = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' +
     'Nullam sem turpis, sodales eu urna sed, posuere finibus leo finibus.' +

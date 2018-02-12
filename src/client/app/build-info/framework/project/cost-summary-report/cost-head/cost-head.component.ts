@@ -70,7 +70,8 @@ export class CostHeadComponent implements OnInit, OnChanges {
 
   private toggleQty:boolean=false;
   private toggleRate:boolean=false;
-  private compareIndex:number=0;
+  private compareWorkItemIndex:number=0;
+  private compareSubcategoryIndex:number=0;
   private quantityItemsArray: any;
   private rateItemsArray: any;
   private subcategoryArray : Array<any> = [];
@@ -110,7 +111,7 @@ export class CostHeadComponent implements OnInit, OnChanges {
 
   getQuantity(i: number, quantityItems: any, workItem: any ,workitemObjId : number) {
     this.toggleQty = !this.toggleQty;
-    this.compareIndex = i;
+    this.compareWorkItemIndex = i;
     this.workItemId = workitemObjId;
     SessionStorageService.setSessionValue(SessionStorage.CURRENT_WORKITEM_ID,workitemObjId);
     if (this.toggleQty === true) {
@@ -121,16 +122,17 @@ export class CostHeadComponent implements OnInit, OnChanges {
     this.workItem = workItem;
   }
 
-  getRate(i: number,workItem:any) {
+  getRate(i:number,workItemIndex: number,workItem:any) {
+    this.compareSubcategoryIndex=i;
     this.toggleRate = !this.toggleRate;
-    this.compareIndex = i;
+    this.compareWorkItemIndex = workItemIndex;
     if (this.toggleRate === true) {
       this.toggleQty = false;
     }
     this.workItem=workItem;
     this.workItemId = workItem.rateAnalysisId;
     SessionStorageService.setSessionValue(SessionStorage.CURRENT_WORKITEM_ID, this.workItemId);
-    let subCategoryId=this.subCategoryDetails[i].rateAnalysisId;
+    let subCategoryId=this.subCategoryDetails[workItemIndex].rateAnalysisId;
    /* this.loderService.start();*/
     this.costHeadService.getRateItems(this.costheadId, subCategoryId,this.workItemId).subscribe(
         rateItem => {
@@ -145,28 +147,28 @@ export class CostHeadComponent implements OnInit, OnChanges {
     this.totalRate=0;
     this.totalQuantity=0;
 
-    this.rateIArray=rateItem.data;
+    this.rateItemsArray=rateItem.data;
     this.workItem = workItem;
 
     this.rateFromRateAnalysis = rateItem.data.rateFromRateAnalysis;
     this.workItem.rate.rateFromRateAnalysis=rateItem.data.rateFromRateAnalysis;
     console.log(this.rateFromRateAnalysis);
 
-    this.rateIArray.quantity=rateItem.data.quantity;
+    this.rateItemsArray.quantity=rateItem.data.quantity;
 
-    this.rateIArray.unit=rateItem.data.unit;
+    this.rateItemsArray.unit=rateItem.data.unit;
     this.unit=rateItem.data.unit;
     this.quantity=rateItem.data.quantity;
 
     this.unit=rateItem.data.unit;
-    this.rateItemsArray = rateItem.data.item;
+    this.rateItemsArray = rateItem.data;
 
     for(let i=0;i<rateItem.data.item.length;i++) {
       this.totalAmount= this.totalAmount+( rateItem.data.item[i].quantity*rateItem.data.item[i].rate);
       this.totalRate= this.totalRate+rateItem.data.item[i].rate;
       this.totalQuantity=this.totalQuantity+rateItem.data.item[i].quantity;
     }
-    this.rateIArray.total= this.totalAmount/this.totalQuantity;
+    this.rateItemsArray.total= this.totalAmount/this.totalQuantity;
   }
 
   onGetRateItemsFail(error: any) {
@@ -174,17 +176,18 @@ export class CostHeadComponent implements OnInit, OnChanges {
   }
 
   //Rate from DB
-  getRateFromDatabase(i:number,itemArray:any, workItem : any) {
+  getRateFromDatabase(i:number,workItemIndex:number,itemArray:any, workItem : any) {
+    this.compareSubcategoryIndex=i;
     this.toggleRate = !this.toggleRate;
     this.workItem = workItem;
     this.workItemId = workItem.rateAnalysisId;
     SessionStorageService.setSessionValue(SessionStorage.CURRENT_WORKITEM_ID, this.workItemId);
-    this.compareIndex = i;
+    this.compareWorkItemIndex = workItemIndex;
     if (this.toggleRate === true) {
       this.toggleQty = false;
     }
     this.itemArray = itemArray;
-    this.rateItemsArray=itemArray.item;
+    this.rateItemsArray=itemArray;
     let rate = new Rate();
     rate.item = itemArray.item;
     rate.rateFromRateAnalysis = this.itemArray.rateFromRateAnalysis ;
@@ -194,15 +197,14 @@ export class CostHeadComponent implements OnInit, OnChanges {
     rate.unit = itemArray.unit;
     rate.quantity = itemArray.quantity;
     this.unit=itemArray.unit;
-    this.rateIArray = rate;
     this.totalAmount=0;
     this.totalRate=0;
     this.totalQuantity=0;
 
-    for(let i=0;i<this.rateIArray.item.length;i++) {
-      this.totalAmount= this.totalAmount+( this.rateIArray.item[i].quantity*this.rateIArray.item[i].rate);
-      this.totalRate= this.totalRate+this.rateIArray.item[i].rate;
-      this.totalQuantity=this.totalQuantity+this.rateItemsArray[i].quantity;
+    for(let i=0;i<this.rateItemsArray.item.length;i++) {
+      this.totalAmount= this.totalAmount+( this.rateItemsArray.item[i].quantity*this.rateItemsArray.item[i].rate);
+      this.totalRate= this.totalRate+this.rateItemsArray.item[i].rate;
+      this.totalQuantity=this.totalQuantity+this.rateItemsArray.item[i].quantity;
     }
   }
 
@@ -417,13 +419,13 @@ getHeight(quantityItems: any) {
     this.totalAmount=0;
     this.totalRate=0;
     this.totalQuantity=0;
-    this.rateItemsArray[k].quantity=parseInt(quantity);
-    for(let i=0;i<this.rateItemsArray.length;i++) {
-      this.totalAmount= this.totalAmount+( this.rateItemsArray[i].quantity*this.rateItemsArray[i].rate);
-      this.totalRate= this.totalRate+this.rateItemsArray[i].rate;
-      this.totalQuantity=this.totalQuantity+this.rateItemsArray[i].quantity;
+    this.rateItemsArray.item[k].quantity=parseInt(quantity);
+    for(let i=0;i<this.rateItemsArray.item.length;i++) {
+      this.totalAmount= this.totalAmount+( this.rateItemsArray.item[i].quantity*this.rateItemsArray.item[i].rate);
+      this.totalRate= this.totalRate+this.rateItemsArray.item[i].rate;
+      this.totalQuantity=this.totalQuantity+this.rateItemsArray.item[i].quantity;
     }
-    this.rateIArray.total= this.totalAmount/this.totalQuantity;
+    this.rateItemsArray.total= this.totalAmount/this.totalQuantity;
 }
 
 
@@ -431,14 +433,14 @@ getHeight(quantityItems: any) {
     this.totalAmount=0;
     this.totalRate=0;
     this.totalQuantity=0;
-    this.rateItemsArray[k].rate= parseInt(rate);
+    this.rateItemsArray.item[k].rate= parseInt(rate);
     console.log('k'+k);
-    for(let i=0;i<this.rateItemsArray.length;i++) {
-      this.totalAmount= this.totalAmount+( this.rateItemsArray[i].quantity*this.rateItemsArray[i].rate);
-      this.totalRate= this.totalRate+this.rateItemsArray[i].rate;
-      this.totalQuantity=this.totalQuantity+this.rateItemsArray[i].quantity;
+    for(let i=0;i<this.rateItemsArray.item.length;i++) {
+      this.totalAmount= this.totalAmount+( this.rateItemsArray.item[i].quantity*this.rateItemsArray.item[i].rate);
+      this.totalRate= this.totalRate+this.rateItemsArray.item[i].rate;
+      this.totalQuantity=this.totalQuantity+this.rateItemsArray.item[i].quantity;
     }
-    this.rateIArray.total= this.totalAmount/this.totalQuantity;
+    this.rateItemsArray.total= this.totalAmount/this.totalQuantity;
   }
 
   showWorkItem(subCategoryId:number,i:number) {
@@ -493,6 +495,7 @@ getHeight(quantityItems: any) {
     message.isError = false;
     message.custom_message = Messages.MSG_SUCCESS_ADD_WORKITEM;
     this.messageService.message(message);
+    this.showWorkItemList=false;
     this.getSubCategoryDetails(this.projectId, this.costheadId);
   }
 
@@ -505,8 +508,8 @@ getHeight(quantityItems: any) {
     console.log('subCategoryId',+subCategoryId);
 
 
-    this.rateIArray.total=this.totalAmount/this.totalQuantity;
-    this.costHeadService.updateRateItems(this.costheadId, subCategoryId,this.workItemId,this.rateIArray).subscribe(
+    this.rateItemsArray.total=this.totalAmount/this.totalQuantity;
+    this.costHeadService.updateRateItems(this.costheadId, subCategoryId,this.workItemId,this.rateItemsArray).subscribe(
       rateItem => this.onUpdateRateItemsSuccess(rateItem),
       error => this.onUpdateRateItemsFail(error)
     );
@@ -538,17 +541,17 @@ getHeight(quantityItems: any) {
     this.totalAmount=0;
     this.totalRate=0;
     this.totalQuantity=0;
-    for(let i=0;i<this.rateItemsArray.length;i++) {
-      this.rateItemsArray[i].quantity=this.rateItemsArray[i].quantity*this.quantityIncrement;
-      this.totalAmount= this.totalAmount+( this.rateItemsArray[i].quantity*this.rateItemsArray[i].rate);
-      this.totalRate= this.totalRate+this.rateItemsArray[i].rate;
-      this.totalQuantity=this.totalQuantity+ this.rateItemsArray[i].quantity;
+    for(let i=0;i<this.rateItemsArray.item.length;i++) {
+      this.rateItemsArray.item[i].quantity=this.rateItemsArray.item[i].quantity*this.quantityIncrement;
+      this.totalAmount= this.totalAmount+( this.rateItemsArray.item[i].quantity*this.rateItemsArray.item[i].rate);
+      this.totalRate= this.totalRate+this.rateItemsArray.item[i].rate;
+      this.totalQuantity=this.totalQuantity+ this.rateItemsArray.item[i].quantity;
     }
 
     this.totalItemRateQuantity=newTotalQuantity;
-    this.rateIArray.quantity=newTotalQuantity;
-    this.rateIArray.total= this.totalAmount/this.totalQuantity;
-    this.rateIArray.unit= this.unit;
+    this.rateItemsArray.quantity=newTotalQuantity;
+    this.rateItemsArray.total= this.totalAmount/this.totalQuantity;
+    this.rateItemsArray.unit= this.unit;
 
   }
   setCurrentSubcategory(subcategory : any) {

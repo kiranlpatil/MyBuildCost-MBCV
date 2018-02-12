@@ -27,12 +27,11 @@
                     <div class="col-md-2">Item</div>
                     <div class="col-md-2">Qty.</div>
                     <div class="col-md-2">Unit</div>
-                    <div class="col-md-1">Rate</div>
+                    <div class="col-md-2">Rate</div>
                     <div class="col-md-2">RateAnalysis</div>
-                    <div class="col-md-1">Amount</div>
-                    <div class="col-md-2"></div>
+                    <div class="col-md-2">Amount</div>
                   </div>
-                  <div  class="row" *ngFor="let workitemObj of subCategoryDetails[subCategory].workitem" >
+                  <div  class="row" *ngFor="let workitemObj of subCategoryDetails[subCategory].workitem; let workItemIndex= index" >
                     <div class="col-md-2">
                      {{ workitemObj.name }}
                     </div>
@@ -44,22 +43,34 @@
                     <div class="col-md-2">
                      {{ workitemObj.unit }}
                     </div>
-                    <div class="col-md-1">
+                    <div class="col-md-2">
                       <input [(ngModel)]="workitemObj.rate.rateFromRateAnalysis" id="actualRate" class="form-control clear" size="15" [readonly]="true">
                     </div>
                     <div class="col-md-2">
                       <input *ngIf="workitemObj.rate.total!= 0" [(ngModel)]="workitemObj.rate.total" id="rate"  size="10" class="form-control clear">
-                      <span *ngIf="workitemObj.rate.total != 0" class="glyphicon glyphicon-pencil" (click)="getRateFromDatabase(i,workitemObj.rate,workitemObj)"></span>
-                      <button *ngIf="workitemObj.rate.total == 0" type="button" (click)="getRate(i,workitemObj)">Get Rate</button>
-                    </div>
-                    <div class="col-md-1">
-                     {{ workitemObj.amount }}
+                      <span *ngIf="workitemObj.rate.total != 0" class="glyphicon glyphicon-pencil" (click)="getRateFromDatabase(i,workItemIndex,workitemObj.rate,workitemObj)"></span>
+                      <button *ngIf="workitemObj.rate.total == 0" type="button" (click)="getRate(i,workItemIndex,workitemObj)">Get Rate</button>
                     </div>
                     <div class="col-md-2">
-                      <input [(ngModel)]="workitemObj.rate.quantity" id="rateQuantity" class="form-control clear" (change)="onTotalQuantityChange(workitemObj.rate.quantity)" (focus)="getPreviousQuantity(workitemObj.rate.quantity)"/>
-                     {{ workitemObj.rate.unit }}
+                     {{ workitemObj.amount }}
                     </div>
+
+                    <!--get rate-->
+                    <div class="row" [ngStyle]="(toggleRate==true && compareWorkItemIndex==workItemIndex && compareSubcategoryIndex===i) ? {'display': 'table-row'}:{'display': 'none'}" style="display: none;">
+                      <bi-rate-items [rateItemsArray]="rateItemsArray" [rateItemsObject]="rateIArray"
+                                     [subCategoryRateAnalysisId]="subCategoryDetails[subCategory].rateAnalysisId"
+                                     [totalAmount]="totalAmount"
+                                     [totalRate]="totalRate"
+                                     [totalQuantity]="totalQuantity"
+                                     (refreshDataList)="refreshDataList()">
+                      </bi-rate-items>
+                    </div>
+                    <!--get rate end-->
+
                   </div>
+
+
+
                   <div data-toggle="modal" data-target="#deleteWorkItem" (click)="deleteWorkitemfun(workitemObj.rateAnalysisId)" class="glyphicon glyphicon-trash"></div>
                   <div class="row" [ngStyle]="(toggleQty==true && compareIndex==i) ? {'display': 'table-row'}:{'display': 'none'}" style="display: none;">
                     <bi-cost-head-get-quantity [quantityItems]="quantityItemsArray"
@@ -67,18 +78,6 @@
                                                 (refreshDataList)="refreshDataList()">
                     </bi-cost-head-get-quantity>
                   </div>
-
-                  <!--get rate-->
-                  <div class="row" [ngStyle]="(toggleRate==true && compareIndex==i) ? {'display': 'table-row'}:{'display': 'none'}" style="display: none;">
-                    <bi-rate-items [rateItemsArray]="rateItemsArray" [rateItemsObject]="rateIArray"
-                                               [subCategoryRateAnalysisId]="subCategoryDetails[subCategory].rateAnalysisId"
-                                                [totalAmount]="totalAmount"
-                                                [totalRate]="totalRate"
-                                                [totalQuantity]="totalQuantity"
-                                               (refreshDataList)="refreshDataList()">
-                    </bi-rate-items>
-                  </div>
-                  <!--get rate end-->
 
 
                   <!--Add workitem...-->
