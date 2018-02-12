@@ -111,7 +111,7 @@ class ReportService {
 
                     }
                     estimatedReport.totalEstimatedCost = estimateReport.total + estimatedReport.totalEstimatedCost;
-                    estimatedReport.totalRate = estimatedReport.totalRate + estimateReport.rate;
+                    estimatedReport.totalRate = estimatedReport.totalRate + parseFloat(estimateReport.rate);
                     estimatedReport.estimatedCost.push(estimateReport);
                     if( costHeadArray[costHeadIndex].budgetedCostAmount === 0 ||
                       costHeadArray[costHeadIndex].budgetedCostAmount === undefined ) {
