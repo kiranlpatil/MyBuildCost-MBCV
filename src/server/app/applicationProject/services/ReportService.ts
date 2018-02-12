@@ -101,10 +101,16 @@ class ReportService {
                       for(let subCategoryKey in subCategory) {
                         let workItem = subCategory[subCategoryKey].workitem;
                         for(let key in workItem) {
-                          if(workItem[key].quantity.total !== null && workItem[key].rate.total !== null) {
-                            estimateReport.total = workItem[key].quantity.total + estimateReport.total;
+                          if(workItem[key].quantity.total !== null && workItem[key].rate.total !== null
+                            && workItem[key].quantity.total !== 0 && workItem[key].rate.total !== 0) {
+                            estimateReport.total =parseFloat((workItem[key].quantity.total * workItem[key].rate.total)
+                              + estimateReport.total).toFixed(2);
                             let estimatedRate = (estimateReport.total / buildingReport.area);
                             estimateReport.rate = estimatedRate.toFixed(2);
+                          } else {
+                            estimateReport.total=0;
+                            estimateReport.rate=0;
+                            break;
                           }
                         }
                       }

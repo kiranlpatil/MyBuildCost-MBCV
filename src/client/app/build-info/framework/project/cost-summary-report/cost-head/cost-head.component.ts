@@ -40,6 +40,7 @@ export class CostHeadComponent implements OnInit, OnChanges {
   subCategoryId: number;
   costHeadDetails: any;
   subCategoryDetails: any;
+  subCategoryDetailsTotalAmount: number=0;
   costHeadItemSave: any;
   itemArray : any;
   currentquantityItem: string;
@@ -224,6 +225,14 @@ export class CostHeadComponent implements OnInit, OnChanges {
 
   OnGetSubCategorySuccess(subCategoryDetail: any) {
     this.subCategoryDetails = subCategoryDetail.data;
+    this.subCategoryDetailsTotalAmount=0.0;
+
+    for(let i=0;i<this.subCategoryDetails.length;i++) {
+      this.subCategoryDetailsTotalAmount= parseFloat(this.subCategoryDetailsTotalAmount)+
+        parseFloat(this.subCategoryDetails[i].amount);
+    }
+
+
     let subcategoryList = lodsh.clone(this.subcategoryArrayList);
     this.subcategoryArray = this.commonService.removeDuplicateItmes(subcategoryList, this.subCategoryDetails);
   }
@@ -418,7 +427,7 @@ getHeight(quantityItems: any) {
     console.log(error);
   }
 
-  changeQuantity(quantity:string,k:number) {
+  /*changeQuantity(quantity:string,k:number) {
     this.totalAmount=0;
     this.totalRate=0;
     this.totalQuantity=0;
@@ -444,7 +453,7 @@ getHeight(quantityItems: any) {
       this.totalQuantity=this.totalQuantity+this.rateItemsArray.item[i].quantity;
     }
     this.rateItemsArray.total= this.totalAmount/this.totalQuantity;
-  }
+  }*/
 
   showWorkItem(subCategoryId:number,i:number) {
     this.comapreWorkItemRateAnalysisId=i;
@@ -506,7 +515,7 @@ getHeight(quantityItems: any) {
     console.log('onshowWorkItemFail : '+error);
   }
 
-  updateRate(i:number) {
+  /*updateRate(i:number) {
     let subCategoryId=this.subCategoryDetails[i].rateAnalysisId;
     console.log('subCategoryId',+subCategoryId);
 
@@ -529,9 +538,9 @@ getHeight(quantityItems: any) {
 
   onUpdateRateItemsFail(error: any) {
     console.log(error);
-  }
+  }*/
 
-  getPreviousQuantity(previousTotalQuantity:number) {
+ /* getPreviousQuantity(previousTotalQuantity:number) {
     console.log('previousTotalQuantity : '+previousTotalQuantity);
     this.previousTotalQuantity=previousTotalQuantity;
   }
@@ -556,7 +565,7 @@ getHeight(quantityItems: any) {
     this.rateItemsArray.total= this.totalAmount/this.totalQuantity;
     this.rateItemsArray.unit= this.unit;
 
-  }
+  }*/
   setCurrentSubcategory(subcategory : any) {
     this.subCategoryObj = subcategory;
   }

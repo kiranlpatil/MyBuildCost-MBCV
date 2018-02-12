@@ -905,9 +905,15 @@ class ProjectService {
             for(let subcategoryIndex = 0 ; subcategoryIndex < subCategories.length; subcategoryIndex ++) {
               let workitems = subCategories[subcategoryIndex].workitem;
               for(let workitemsIndex = 0; workitemsIndex < workitems.length; workitemsIndex ++) {
-                let workitem = workitems[workitemsIndex];
-                subCategories[subcategoryIndex].amount = (workitem.quantity.total * workitem.rate.total)
-                  + subCategories[subcategoryIndex].amount;
+                  let workitem = workitems[workitemsIndex];
+                if(workitem.quantity.total !== null && workitem.rate.total !== null
+                  && workitem.quantity.total !== 0 && workitem.rate.total !== 0) {
+                  subCategories[subcategoryIndex].amount = parseFloat((workitem.quantity.total * workitem.rate.total)
+                    + subCategories[subcategoryIndex].amount).toFixed(2);
+                } else {
+                  subCategories[subcategoryIndex].amount=0;
+                  break;
+                }
               }
             }
           }

@@ -85,7 +85,7 @@ export class CostSummaryComponent implements OnInit {
 
   ngOnInit() {
     console.log('Inside Project Cost Sumamry Project');
-    this.estimatedCost = 1650000;
+    /*this.estimatedCost = 1650000;*/
     this.activatedRoute.params.subscribe(params => {
       this.projectId = params['projectId'];
       console.log(' this.projectId ->'+ this.projectId);
