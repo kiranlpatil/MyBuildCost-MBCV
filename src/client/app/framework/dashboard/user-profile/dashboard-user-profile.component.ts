@@ -39,12 +39,11 @@ export class DashboardProfileComponent implements OnInit {
               ) {
     this.userForm = this.formBuilder.group({
       'first_name': ['', Validators.required],
-    /*  'last_name': ['', Validators.required],*/
       'email': ['', [Validators.required, ValidationService.emailValidator]],
       'mobile_number': ['', [Validators.required, ValidationService.mobileNumberValidator]],
-      'company_name': ['', Validators.required],
-      'state': ['', Validators.required],
-      'city': ['', Validators.required]
+      'company_name': ['', [Validators.required, ValidationService.alphabatesValidator]],
+      'state': ['',[Validators.required, ValidationService.alphabatesValidator]],
+      'city': ['', [Validators.required, ValidationService.alphabatesValidator]]
     });
   }
 
