@@ -1,0 +1,250 @@
+<section class="settings main-form-wrapper" style="margin-top: 120px">
+
+  <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"></div>
+
+  <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th colspan="5"><h4 align="center"> Comman Developement : Electric Infrastructure</h4></th>
+        </tr>
+        <tr>
+          <th width="20%">Item</th>
+          <th width="20%">Qty.</th>
+          <th width="20%">Unit</th>
+          <th width="20%">Rate</th>
+          <th width="20%">Amount</th>
+        </tr>
+        </thead>
+      </table>
+
+     <!-- <table *ngFor="let costHead of costHeadDetails | keys; let i = index">
+        <tbody>
+        <tr>
+          <td width="20%" align="left">{{costHeadDetails[costHead].name}}</td>
+          <td width="20%" align="left">
+            <input *ngIf="costHeadDetails[costHead].quantity.total" style="width: 78%;float: left;margin-right: 15px;"  [(ngModel)]="costHeadDetails[costHead].quantity.total" id="quantity"  size="10" class="form-control clear">
+            <span *ngIf="costHeadDetails[costHead].quantity.total != 0" class="glyphicon glyphicon-pencil" (click)="getQuantity(i, costHeadDetails[costHead].quantity.item,costHeadDetails[costHead].name)"></span>
+            <button *ngIf="costHeadDetails[costHead].quantity.total == 0" type="button"  id="getQuantity{{i}}"  class="btn btn-primary" (click)="getQuantity(i, costHeadDetails[costHead].quantity.item,costHeadDetails[costHead].name)">Get Quanity</button>
+          </td>
+          <td width="20%" align="left">{{costHeadDetails[costHead].unit}}</td>
+          <td width="20%" align="left">
+            <input *ngIf="costHeadDetails[costHead].rate.total" style="width: 78%;float: left;margin-right: 15px;" [(ngModel)]="costHeadDetails[costHead].rate.total" id="rate" size="10" class="form-control clear">
+            <span *ngIf="costHeadDetails[costHead].rate.total != 0" class="glyphicon glyphicon-pencil" (click)="getRate(i, costHeadDetails[costHead])"></span>
+            <button *ngIf="costHeadDetails[costHead].rate.total == 0" type="button" id="getRate{{i}}" class="btn btn-primary accordion-toggle" data-toggle="collapse" data-target="#cores" (click)="getRate(i, costHeadDetails[costHead])">Get Rate</button>
+          </td>
+          <td width="20%" align="left">{{costHeadDetails[costHead].quantity.total*costHeadDetails[costHead].rate.total}}<span data-toggle="modal" data-target="#deleteWorkItem" (click)=" deleteWorkitemfun(costHeadDetails[costHead].name)" class="glyphicon glyphicon-trash"></span></td>
+        </tr>
+
+        &lt;!&ndash;getQty Code&ndash;&gt;
+      &lt;!&ndash;  <tr [ngStyle]="(toggleQty==true && compareIndex==i) ? {'display': 'table-row'}:{'display': 'none'}" style="display: none;">
+          <td colspan="5">
+            <table class="table ">
+              <thead>
+              <th>Item</th>
+              <th>Nos.</th>
+              <th>Length</th>
+              <th>Breadth</th>
+              <th>Height</th>
+              <th>Qty.</th>
+              <th>Unit</th>
+              </thead>
+              <tbody>
+              <tr *ngFor="let quantityItem of quantityItemsArray">
+                <td>
+                  <input [(ngModel)]="quantityItem.item" id="costitem"  class="form-control clear"/>
+                </td>
+                <td>
+                  <input type="number" [(ngModel)]="quantityItem.nos" id="numbers" (change)="getNo(quantityItemsArray)" class="form-control clear" required/>
+                </td>
+                <td>
+                  <input type="number" [(ngModel)]="quantityItem.length" id="length" (change)="getLength(quantityItemsArray)" class="form-control clear" required/>
+                </td>
+                <td>
+                  <input  type="number" [(ngModel)]="quantityItem.breadth" id="breadth" (change)="getBreadth(quantityItemsArray)" class="form-control clear" required/>
+                </td>
+                <td>
+                  <input type="number" [(ngModel)]="quantityItem.height" id="height" (change)="getHeight(quantityItemsArray)" class="form-control clear" required/>
+                </td>
+                <td>
+                  <input  type="number" [(ngModel)]= "quantityItem.quantity"  id="qty" class="form-control clear" required/>
+                </td>
+                <td>
+                  <input [(ngModel)]="quantityItem.unit" id="unit" class="form-control clear" required/>
+                </td>
+                <td><span data-toggle="modal" data-target="#delete" (click)="deleteQuantityItemfun(quantityItem.item)" class="glyphicon glyphicon-trash"></span></td>
+              </tr>
+              <tr>
+                <td>
+                  <label>Total</label>
+                </td>
+                <td>{{quanitytNumbersTotal}}
+                </td>
+                <td>{{lengthTotal}}
+                </td>
+                <td>{{breadthTotal}}
+                </td>
+                <td>{{heightTotal}}
+                </td>
+                <td>{{quantityTotal}}
+                </td>
+                <td>
+                  sqft
+                </td>
+                <td>
+
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <button type="button" class="btn btn-primary" (click)="addItem()">+ Add Item</button>
+                <td>
+                <td>
+                  <button type="submit" class="btn btn-primary" (click)="updateCostHeadWorkItem()">Save</button>
+                </td>
+              </tr>
+              &lt;!&ndash;   </form>&ndash;&gt;
+              </tbody>
+            </table>
+            &lt;!&ndash;<bi-cost-head-get-quantity [quantityItems]="costHeadDetails[costHead].quantity.item" ></bi-cost-head-get-quantity>&ndash;&gt;
+          </td>
+        </tr>&ndash;&gt;
+
+
+
+
+        &lt;!&ndash;getRate code&ndash;&gt;
+     &lt;!&ndash;   <tr [ngStyle]="(toggleRate==true && compareIndex==i) ? {'display': 'table-row'}:{'display': 'none'}" style="display: none;">
+          <td colspan="5">
+            <table class="table">
+              <thead>
+              <th>Description</th>
+              <th>Remarks</th>
+              <th>Qty.</th>
+              <th>Unit</th>
+              <th>Rate/Unit</th>
+              <th>Amount</th>
+              </thead>
+              <tbody>
+              <tr *ngFor="let rateItem of rateItemsArray;let k = index">
+                <td>
+                  <input [(ngModel)]="rateItem.item" id="itemdescription" class="form-control clear"/>
+                </td>
+                <td>
+                  <input [(ngModel)]="rateItem.remarks" id="itemquantity" class="form-control clear"/>
+                </td>
+                <td>
+                  <input [(ngModel)]="rateItem.quantity" id="itemunit" class="form-control clear" (change)="changeQuantity(rateItem.quantity,k)"/>
+                </td>
+                <td>
+                  <input [(ngModel)]="rateItem.unit" id="itemrate" class="form-control clear"/>
+                </td>
+                <td>
+                  <input [(ngModel)]="rateItem.rate" id="itemamount" class="form-control clear" (change)="changeRate(rateItem.rate,k)"/>
+                </td>
+                <td>
+                  <input [(ngModel)]="rateItem.quantity*rateItem.rate" id="totalAmount" class="form-control clear" readonly/>
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <label>Total</label>
+                </td>
+                <td>
+
+                </td>
+                <td>
+
+                </td>
+                <td>
+
+                </td>
+                <td>
+                  {{totalRate}}
+                </td>
+                <td>
+                  {{totalAmount}}
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+
+                </td>
+                <td>
+
+                </td>
+                <td>
+
+                </td>
+                <td>
+
+                </td>
+                <td>
+                  <button type="button" class="btn btn-primary">Save</button>
+                </td>
+              </tr>
+
+              </tbody>
+            </table>
+          </td>
+        </tr>&ndash;&gt;
+
+
+        </tbody>
+      </table>-->
+
+      <table>
+        <tfoot>
+        <tr>
+          <th colspan="4"><strong>Total</strong></th>
+          <th><strong>54,134,476</strong></th>
+        </tr>
+        </tfoot>
+      </table>
+      <div class="modal fade" id="delete" role="dialog">
+        <div class="modal-dialog modal-sm">
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h2 class="modal-title">Delete</h2>
+            </div>
+            <div class="modal-body">
+              <p><small>You Want to Delete Quantity Item</small></p>
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-primary" type="button" (click)=" deleteQuantityItem()" data-dismiss="modal">Yes</button>
+              <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal fade" id="deleteWorkItem" role="dialog">
+        <div class="modal-dialog modal-sm">
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h2 class="modal-title">Delete</h2>
+            </div>
+            <div class="modal-body">
+              <p><small>You Want to Delete WorkItem</small></p>
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-primary" type="button" (click)="deleteWorkitem()" data-dismiss="modal">Yes</button>
+              <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+
+</section>
+
+<tpl-footer></tpl-footer>

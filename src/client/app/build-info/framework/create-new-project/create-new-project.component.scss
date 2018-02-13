@@ -1,0 +1,27 @@
+@import '../../../framework/landing-page/landing-page.component';
+
+.page-background {
+  background: no-repeat fixed 0 100%;
+  .inner-content {
+    position: relative;
+    .create-new-project > img {
+      margin: 20px auto 15px;
+      padding: 27px 35px;
+      border: 2px solid $border-color;
+    }
+
+    .get-started {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+    }
+
+    .get-started > img {
+      margin: 0 auto;
+    }
+
+    .get-started > h5 {
+      font-weight: 600;
+    }
+  }
+}

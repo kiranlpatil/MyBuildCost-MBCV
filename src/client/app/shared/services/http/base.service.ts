@@ -6,7 +6,6 @@ import { SessionStorage, SessionStorageService } from '../../index';
 export class BaseService {
 
   extractData(res: Response) {
-debugger
     let body = res.json();
     if (body.hasOwnProperty('access_token')) {
       SessionStorageService.setSessionValue(SessionStorage.ACCESS_TOKEN, body.access_token);

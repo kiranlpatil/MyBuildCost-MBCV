@@ -22,7 +22,16 @@ class BuildingSchema {
         totalSaleableAreaOfUnit: {
         type: Number
       },
-      totalParkingAreaOfUnit:{
+        plinthArea:{
+        type: Number
+      },
+        totalNoOfFloors:{
+        type: Number
+      },
+        noOfParkingFloors:{
+        type: Number
+      },
+        carpetAreaOfParking:{
         type: Number
       },
       noOfOneBHK: {
@@ -34,10 +43,13 @@ class BuildingSchema {
       noOfThreeBHK: {
         type: Number
       },
-      noOfSlab: {
+        noOfFourBHK: {
         type: Number
       },
-      noOfLift: {
+        noOfFiveBHK: {
+        type: Number
+      },
+        noOfLift: {
         type: Number
       },
       costHead: [{}],

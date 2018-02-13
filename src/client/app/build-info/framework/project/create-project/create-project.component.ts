@@ -6,7 +6,7 @@ import {
   Label,
   Button,
   Headings,
-  NavigationRoutes
+  NavigationRoutes, ImagePath
 } from '../../../../shared/constants';
 import { API, BaseService, SessionStorage, SessionStorageService,  Message,
   Messages,
@@ -19,7 +19,8 @@ import { SharedService } from '../../../../shared/services/shared-service';
 @Component({
   moduleId: module.id,
   selector: 'bi-create-project',
-  templateUrl: 'create-project.component.html'
+  templateUrl: 'create-project.component.html',
+  styleUrls: ['create-project.component.css']
 })
 
 export class CreateProjectComponent implements OnInit {
@@ -29,16 +30,23 @@ export class CreateProjectComponent implements OnInit {
   public isShowErrorMessage: boolean = true;
   public error_msg: boolean = false;
   model: Project = new Project();
+  BODY_BACKGROUND_TRANSPARENT: string;
 
   constructor(private createProjectService: CreateProjectService, private _router: Router, private formBuilder: FormBuilder,
   private messageService: MessageService, private sharedService: SharedService) {
+    this.BODY_BACKGROUND_TRANSPARENT = ImagePath.BODY_BACKGROUND_TRANSPARENT;
 
     this.projectForm = this.formBuilder.group({
       'name': ['', ValidationService.requiredProjectName],
       'region': ['', ValidationService.requiredProjectAddress],
       'plotArea': ['', ValidationService.requiredPlotArea],
+      'plotPeriphery': ['', ValidationService.requiredPlotPeriphery],
+      'podiumArea': ['',ValidationService.requiredPodiumArea],
+      'openSpace':['', ValidationService.requiredOpenSpace],
+      'slabArea': ['',ValidationService.requiredSlabArea],
+      'poolCapacity': ['',ValidationService.requiredSwimmingPoolCapacity],
       'projectDuration': ['', ValidationService.requiredProjectDuration],
-      'plotPeriphery': ['', ValidationService.requiredPlotPeriphery]
+      'totalNoOfBuildings': ['', ValidationService.requiredNoOfBuildings],
     });
 
   }

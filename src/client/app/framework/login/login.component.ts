@@ -1,7 +1,7 @@
-import {Component, ElementRef, OnInit, ViewChild} from "@angular/core";
-import {ActivatedRoute, Params, Router} from "@angular/router";
-import {LoginService} from "./login.service";
-import {Login} from "../../user/models/login";
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute, Params, Router} from '@angular/router';
+import { LoginService } from './login.service';
+import { Login } from '../../user/models/login';
 import {
   AppSettings,
   ImagePath,
@@ -11,13 +11,13 @@ import {
   MessageService,
   NavigationRoutes,
   ThemeChangeService
-} from "../../shared/index";
-import {FormBuilder, FormGroup} from "@angular/forms";
-import {ValidationService} from "../../shared/customvalidations/validation.service";
-import {Label, LocalStorage, Messages, ProjectAsset} from "../../shared/constants";
-import {SharedService} from "../../shared/services/shared-service";
-import {RegistrationService} from "../../user/services/registration.service";
-import {LocalStorageService} from "../../shared/services/localstorage.service";
+} from '../../shared/index';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { ValidationService } from '../../shared/customvalidations/validation.service';
+import { Label, LocalStorage, Messages, ProjectAsset } from '../../shared/constants';
+import { SharedService } from '../../shared/services/shared-service';
+import { RegistrationService } from '../../user/services/registration.service';
+import { LocalStorageService } from '../../shared/services/localstorage.service';
 /*declare var CareerPluginLoad:any;*/
 
 @Component({
@@ -73,9 +73,21 @@ export class LoginComponent implements OnInit {
       if (params['email'] !== undefined) {
         this.userForm.controls['email'].setValue(params['email']);
       }
+      if(parseInt(LocalStorageService.getLocalValue(LocalStorage.IS_LOGGED_IN))===1) {
+
+        this.userForm.controls['email'].setValue(SessionStorageService.getSessionValue(SessionStorage.EMAIL_ID));
+        this.userForm.controls['password'].setValue(SessionStorageService.getSessionValue(SessionStorage.PASSWORD));
+        this.isRememberPassword=true;
+      }else{
+        this.isRememberPassword=false;
+      }
+
       this.recruiterReferenceId = params['integrationKey'];
       this.isFromCareerPlugin = (params['integrationKey'] !== undefined) ? true : false;
     });
+
+
+
     if(LocalStorageService.getLocalValue(LocalStorage.ACCESS_TOKEN)) {
       this.getUserData();
     }
@@ -86,7 +98,7 @@ export class LoginComponent implements OnInit {
       .subscribe(
         data => {
           this.registrationService.onSuccess(data);
-        }, error => { this.registrationService.loginFail(error)}
+        }, error => { this.registrationService.loginFail(error);}
       );
   }
 
@@ -117,11 +129,16 @@ export class LoginComponent implements OnInit {
     if(this.isRememberPassword) {
       LocalStorageService.setLocalValue(LocalStorage.ACCESS_TOKEN, res.access_token);
       LocalStorageService.setLocalValue(LocalStorage.IS_LOGGED_IN, 1);
+      LocalStorageService.setLocalValue(LocalStorage.FIRST_NAME, res.data.first_name);
+      SessionStorageService.setSessionValue(SessionStorage.PASSWORD, this.model.password);
+    }
+    else {
+      LocalStorageService.setLocalValue(LocalStorage.IS_LOGGED_IN, 0);
     }
     SessionStorageService.setSessionValue(SessionStorage.EMAIL_ID, res.data.email);
     SessionStorageService.setSessionValue(SessionStorage.MOBILE_NUMBER, res.data.mobile_number);
     SessionStorageService.setSessionValue(SessionStorage.FIRST_NAME, res.data.first_name);
-    SessionStorageService.setSessionValue(SessionStorage.LAST_NAME, res.data.last_name);
+   /* SessionStorageService.setSessionValue(SessionStorage.LAST_NAME, res.data.last_name);*/
 
     this.userForm.reset();
     if (res.data.current_theme) {

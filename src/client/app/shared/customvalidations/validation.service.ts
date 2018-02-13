@@ -3,7 +3,7 @@ import any = jasmine.any;
 
 export class ValidationService {
 
-  static  getValidatorErrorMessage(validatorName: string, validatorValue?: any) {
+  static getValidatorErrorMessage(validatorName: string, validatorValue?: any) {
     let config: any = {
       'required': 'Required',
       'requiredEmail': Messages.MSG_ERROR_VALIDATION_EMAIL_REQUIRED,
@@ -33,21 +33,21 @@ export class ValidationService {
       'requiredProjectName': Messages.MSG_ERROR_VALIDATION_PROJECT_NAME_REQUIRED,
       'requiredProjectAddress': Messages.MSG_ERROR_VALIDATION_PROJECT_ADDRESS_REQUIRED,
       'requiredPlotArea': Messages.MSG_ERROR_VALIDATION_PLOT_AREA_REQUIRED,
-      'requiredProjectDuration': Messages.MSG_ERROR_VALIDATION_PROJECT_DURATION_REQUIRED ,
-      'requiredPlotPeriphery': Messages.MSG_ERROR_VALIDATION_PLOT_PERIPHERY_REQUIRED ,
+      'requiredProjectDuration': Messages.MSG_ERROR_VALIDATION_PROJECT_DURATION_REQUIRED,
+      'requiredPlotPeriphery': Messages.MSG_ERROR_VALIDATION_PLOT_PERIPHERY_REQUIRED,
 
 
       'requiredBuildingName': Messages.MSG_ERROR_VALIDATION_BUILDING_NAME_REQUIRED,
       'requiredSlabArea': Messages.MSG_ERROR_VALIDATION_SLAB_AREA_REQUIRED,
       'requiredCarpetArea': Messages.MSG_ERROR_VALIDATION_CARPET_AREA_REQUIRED,
-      'requiredSalebleArea':Messages.MSG_ERROR_VALIDATION_SALEBLE_AREA_REQUIRED,
+      'requiredSalebleArea': Messages.MSG_ERROR_VALIDATION_SALEBLE_AREA_REQUIRED,
       'requiredParkingArea': Messages.MSG_ERROR_VALIDATION_PARKING_AREA_REQUIRED,
       'requiredOneBHK': Messages.MSG_ERROR_VALIDATION_ONE_BHK_REQUIRED,
       'requiredTwoBHK': Messages.MSG_ERROR_VALIDATION_TWO_BHK_REQUIRED,
       'requiredThreeBHK': Messages.MSG_ERROR_VALIDATION_THREE_BHK_REQUIRED,
       'requiredNoOfSlabs': Messages.MSG_ERROR_VALIDATION_NO_OF_SLABS_REQUIRED,
       'requiredNoOfLifts': Messages.MSG_ERROR_VALIDATION_NO_OF_LIFTS_REQUIRED,
-
+      'requireAlphabates': Messages.MSG_ERROR_VALIDATION_ALPHABATES,
 
 
       'maxlength': `Maximum ${validatorValue.requiredLength} characters`,
@@ -134,6 +134,7 @@ export class ValidationService {
       return null;
     }
   }
+
   static requireWebsiteValidator(control: any) {
     if (control.value === '' || control.value === undefined) {
       return {'requiredWebsite': true};
@@ -221,11 +222,11 @@ export class ValidationService {
       return {'invalidMobile': true};
     }
   }
+
   static urlValidator(control: any) {
     if (control.value) {
       if (control.value.match(
-         /([a-z]|[A-z]|[0-9])(\.([a-z]|[A-Z]))/))
-      {
+          /([a-z]|[A-z]|[0-9])(\.([a-z]|[A-Z]))/)) {
         return null;
       } else {
         return {'invalidUrlAddress': true};
@@ -238,7 +239,8 @@ export class ValidationService {
   static birthYearValidator(control: any) {
     if (control.value === '' || control.value === undefined) {
       return {'requiredBirthYear': true};
-    };
+    }
+    ;
 
     var birthYear = control.value;
     var count = 0;
@@ -358,6 +360,53 @@ export class ValidationService {
     }
   }
 
+  static requiredPlinthArea(control: any) {
+    if (control.value === '' || control.value === undefined) {
+      return {'requiredPlinthArea': true};
+    } else {
+      return null;
+    }
+  }
+
+  static requiredPodiumArea(control: any) {
+    if (control.value === '' || control.value === undefined) {
+      return {'requiredPodiumArea': true};
+    } else {
+      return null;
+    }
+  }
+
+  static requiredNoOfParkingFloors(control: any) {
+    if (control.value === '' || control.value === undefined) {
+      return {'requiredNoOfParkingFloors': true};
+    } else {
+      return null;
+    }
+  }
+
+  static requiredCarpetAreaOfParking(control: any) {
+    if (control.value === '' || control.value === undefined) {
+      return {'requiredCarpetAreaOfParking': true};
+    } else {
+      return null;
+    }
+  }
+
+  static requiredNoOfFloors(control: any) {
+    if (control.value === '' || control.value === undefined) {
+      return {' requiredNoOfFloors': true};
+    } else {
+      return null;
+    }
+  }
+
+  static requiredNoOfBuildings(control: any) {
+    if (control.value === '' || control.value === undefined) {
+      return {'requiredNoOfBuildings': true};
+    } else {
+      return null;
+    }
+  }
 
   static requiredParkingArea(control: any) {
     if (control.value === '' || control.value === undefined) {
@@ -383,7 +432,6 @@ export class ValidationService {
     }
   }
 
-
   static requiredThreeBHK(control: any) {
     if (control.value === '' || control.value === undefined) {
       return {'requiredThreeBHK': true};
@@ -392,6 +440,38 @@ export class ValidationService {
     }
   }
 
+  static requiredFourBHK(control: any) {
+    if (control.value === '' || control.value === undefined) {
+      return {'requiredFourBHK': true};
+    } else {
+      return null;
+    }
+  }
+
+  static requiredFiveBHK(control: any) {
+    if (control.value === '' || control.value === undefined) {
+      return {'requiredFiveBHK': true};
+    } else {
+      return null;
+    }
+  }
+
+
+  static requiredOpenSpace(control: any) {
+    if (control.value === '' || control.value === undefined) {
+      return {'requiredOpenSpace': true};
+    } else {
+      return null;
+    }
+  }
+
+  static requiredSwimmingPoolCapacity(control: any) {
+    if (control.value === '' || control.value === undefined) {
+      return {'requiredSwimmingPoolCapacity': true};
+    } else {
+      return null;
+    }
+  }
 
   static requiredNoOfSlabs(control: any) {
     if (control.value === '' || control.value === undefined) {
@@ -408,4 +488,16 @@ export class ValidationService {
       return null;
     }
   }
+
+  static alphabatesValidator(control: any) {
+    if (control.value) {
+      if (control.value.match(/^[a-zA-Z]+$/)) {
+        return null;
+      } else {
+        return {'requireAlphabates': true};
+      }
+    }
+    return null;
+  }
+
 }

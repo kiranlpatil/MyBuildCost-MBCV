@@ -1,0 +1,4 @@
+<select (change)="setCurrentProjectId($event.target.value)">
+  <option [value]>My Projects</option>
+  <option *ngFor="let project of projectsArray" [value]="project._id">{{project.name}}</option>
+</select>

@@ -35,11 +35,15 @@ export class BuildingListComponent implements OnInit {
       'totalSlabArea':['', ValidationService.requiredSlabArea],
       'totalCarperAreaOfUnit':['', ValidationService.requiredCarpetArea],
       'totalSaleableAreaOfUnit':['', ValidationService.requiredSalebleArea],
-      'totalParkingAreaOfUnit':['', ValidationService.requiredParkingArea],
-      'noOfOneBHK':['', ValidationService.requiredOneBHK],
+      'plinthArea':['', ValidationService.requiredPlinthArea],
+      'totalNoOfFloors':['', ValidationService.requiredNoOfFloors],
+      'noOfParkingFloors':['', ValidationService.requiredNoOfParkingFloors],
+      'carpetAreaOfParking':['', ValidationService.requiredCarpetAreaOfParking],
+      'noOfOneBHK': ['',  ValidationService.requiredOneBHK],
       'noOfTwoBHK':['', ValidationService.requiredTwoBHK],
       'noOfThreeBHK':['', ValidationService.requiredThreeBHK],
-      'noOfSlab':['', ValidationService.requiredNoOfSlabs],
+      'noOfFourBHK':['', ValidationService.requiredFourBHK],
+      'noOfFiveBHK':['', ValidationService.requiredFiveBHK],
       'noOfLift':['', ValidationService.requiredNoOfLifts],
     });
 
@@ -166,11 +170,15 @@ export class BuildingListComponent implements OnInit {
     this.model.totalSlabArea=buildingDetails.totalSlabArea;
     this.model.totalCarperAreaOfUnit=buildingDetails.totalCarperAreaOfUnit;
     this.model.totalSaleableAreaOfUnit=buildingDetails.totalSaleableAreaOfUnit;
-    this.model.totalParkingAreaOfUnit=buildingDetails.totalParkingAreaOfUnit;
+    this.model.plinthArea=buildingDetails.plinthArea;
+    this.model.totalNoOfFloors=buildingDetails.totalNoOfFloors;
+    this.model.noOfParkingFloors=buildingDetails.noOfParkingFloors;
+    this.model.carpetAreaOfParking=buildingDetails.carpetAreaOfParking;
     this.model.noOfOneBHK=buildingDetails.noOfOneBHK;
     this.model.noOfTwoBHK=buildingDetails.noOfTwoBHK;
     this.model.noOfThreeBHK=buildingDetails.noOfThreeBHK;
-    this.model.noOfSlab=buildingDetails.noOfSlab;
+    this.model.noOfFourBHK=buildingDetails.noOfFourBHK;
+    this.model.noOfFiveBHK=buildingDetails.noOfFiveBHK;
     this.model.noOfLift=buildingDetails.noOfLift;
   }
 

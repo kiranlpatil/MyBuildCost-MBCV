@@ -1,93 +1,86 @@
-<section class="settings main-form-wrapper">
+<div class="get-quantity-section">
+  <table class="table">
+    <thead>
+    <th>Item</th>
+    <th>Remarks</th>
+    <th>Nos.</th>
+    <th>Length</th>
+    <th>Breadth</th>
+    <th>Height</th>
+    <th>Qty.</th>
+    <th>Unit</th>
+    <th>&nbsp;</th>
+    </thead>
+    <tbody>
+    <tr *ngFor="let quantityItem of quantityItems">
+      <td>
+        <input [(ngModel)]="quantityItem.item" id="costitem"  class="form-control"/>
+      </td>
+      <td>
+        <input [(ngModel)]="quantityItem.remarks" id="remarks"  class="form-control" />
+      </td>
+      <td>
+        <input type="number" [(ngModel)]="quantityItem.nos" id="numbers" (change)="getNo(quantityItemsArray)" class="form-control" required/>
+      </td>
+      <td>
+        <input type="number" [(ngModel)]="quantityItem.length" id="length" (change)="getLength(quantityItems)" class="form-control" required/>
+      </td>
+      <td>
+        <input  type="number" [(ngModel)]="quantityItem.breadth" id="breadth" (change)="getBreadth(quantityItems)" class="form-control" required/>
+      </td>
+      <td>
+        <input type="number" [(ngModel)]="quantityItem.height" id="height" (change)="getHeight(quantityItems)" class="form-control" required/>
+      </td>
+      <td>
+        <input  type="number" [(ngModel)]= "quantityItem.quantity"  id="qty" class="form-control" required/>
+      </td>
+      <td>
+        <input [(ngModel)]="quantityItem.unit" id="unit" class="form-control" required/>
+      </td>
+      <td><span data-toggle="modal" data-target="#delete" (click)="setQuantityItemName(quantityItem.item)" class="glyphicon glyphicon-trash"></span></td>
+    </tr>
+    <tr>
+      <td class="total-amount">
+        <label>Total</label>
+      </td>
+      <td class="total-amount">{{quanitytNumbersTotal|number}}
+      </td>
+      <td class="total-amount">{{lengthTotal|number}}
+      </td>
+      <td class="total-amount">{{lengthTotal|number}}
+      </td>
+      <td class="total-amount">{{breadthTotal|number}}
+      </td>
+      <td class="total-amount">{{heightTotal|number}}
+      </td>
+      <td class="total-amount">{{quantityTotal|number}}
+      </td>
+      <td class="total-amount">
+        sqft
+      </td>
+    </tr>
+    </tbody>
+  </table>
 
-  <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+  <button type="button" class="btn btn-primary" (click)="addItem()">+ Add Item</button>
+  <button type="submit" class="btn btn-primary" (click)="updateCostHeadWorkItem(quantityItems)">Save</button>
 
-    <table class="table">
-      <thead>
-          <th>Item</th>
-          <th>Nos.</th>
-          <th>Length</th>
-          <th>Breadth</th>
-          <th>Height</th>
-          <th>Qty.</th>
-      <th>Unit</th>
-      </thead>
-      <tbody>
-      <tr *ngFor="">
-        <td>
-          <input [(ngModel)]="costitem" id="costitem" class="form-control clear"/>
-        </td>
-        <td>
-          <input [(ngModel)]="numbers" id="numbers" class="form-control clear"/>
-        </td>
-        <td>
-          <input [(ngModel)]="length" id="length" class="form-control clear"/>
-        </td>
-        <td>
-          <input [(ngModel)]="breadth" id="breadth" class="form-control clear"/>
-        </td>
-        <td>
-          <input [(ngModel)]="height" id="height" class="form-control clear"/>
-        </td>
-        <td>
-          <input [(ngModel)]="quantity" id="qty" class="form-control clear"/>
-        </td>
-        <td>
-          <input [(ngModel)]="unit" id="unit" class="form-control clear"/>
-          <span (click)="deleteItem(i)"  class="glyphicon glyphicon-trash"></span>
-        </td>
-      </tr>
+</div>
 
-      <tr>
-        <td>
-          <label>Total</label>
-        </td>
-        <td>
-          <label>--</label>
-        </td>
-        <td>
-          <label>--</label>
-        </td>
-        <td>
-          <label>--</label>
-        </td>
-        <td>
-          <label>--</label>
-        </td>
-        <td>
-          <label>--</label>
-        </td>
-        <td>
-          <label>545466</label>
-        </td>
-      </tr>
-
-      <tr>
-        <td>
-          <button type="button" class="btn btn-primary">+Add Items</button>
-        </td>
-        <td>
-
-        </td>
-        <td>
-
-        </td>
-        <td>
-
-        </td>
-        <td>
-
-        </td>
-        <td>
-
-        </td>
-        <td>
-          <button type="button" class="btn btn-primary">Save</button>
-        </td>
-      </tr>
-      </tbody>
-    </table>
-
+<div class="modal fade" id="delete" role="dialog">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h2 class="modal-title">Delete</h2>
+      </div>
+      <div class="modal-body">
+        <p><small>You Want to Delete Quantity Item</small></p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary" type="button" (click)="deleteQuantityItemfun()"data-dismiss="modal">Yes</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+      </div>
+    </div>
   </div>
-
-</section>
+</div>

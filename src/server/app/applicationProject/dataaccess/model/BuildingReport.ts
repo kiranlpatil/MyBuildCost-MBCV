@@ -6,7 +6,7 @@ import Estimated = require('./Estimated');
 class BuildingReport {
   _id:string;
   name:string;
-  area:string;
+  area:number;
   thumbRule : ThumbRule;
   estimated: Estimated;
 

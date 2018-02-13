@@ -16,10 +16,21 @@ import ClonedWorkItem = require('../dataaccess/model/ClonedWorkItem');
 import CostHead = require('../dataaccess/model/CostHead');
 import WorkItem = require('../dataaccess/model/WorkItem');
 import Item = require('../dataaccess/model/Item');
+import RateAnalysisService = require('./RateAnalysisService');
+import QuantityItem = require('../dataaccess/model/QuantityItem');
+import SubCategory = require('../dataaccess/model/SubCategory');
+let config = require('config');
+var log4js = require('log4js');
+import alasql = require('alasql');
+import ClonedSubcategory = require('../dataaccess/model/ClonedSubcategory');
+var logger=log4js.getLogger('Project service');
 
 class ProjectService {
   APP_NAME: string;
   company_name: string;
+  costHeadId: number;
+  subCategoryId: number;
+  workItemId: number;
   private projectRepository: ProjectRepository;
   private buildingRepository: BuildingRepository;
   private authInterceptor: AuthInterceptor;
@@ -35,7 +46,7 @@ class ProjectService {
 
   create(data: any, user : User, callback: (error: any, result: any) => void) {
     if(!user._id) {
-     callback(new CostControllException('UserId Not Found',null), null);
+      callback(new CostControllException('UserId Not Found',null), null);
     }
     /*let category = data.category;
     for(let i=0; i< category.length; i++){
@@ -52,10 +63,14 @@ class ProjectService {
       if (err) {
         callback(err, null);
       } else {
+        logger.info('Project service, create has been hit');
+        logger.debug('Project ID : '+res._id);
+        logger.debug('Project Name : '+res._doc.name);
         let projectId = res._id;
         let newData =  {$push: { project: projectId }};
         let query = {_id : user._id};
         this.userService.findOneAndUpdate(query, newData, {new :true},(err, resp) => {
+          logger.info('Project service, findOneAndUpdate has been hit');
           if(err) {
             callback(err, null);
           } else {
@@ -68,11 +83,13 @@ class ProjectService {
     });
   }
 
-  getProject( projectId : any, user: User, callback: (error: any, result: any) => void) {
+  getProject( projectId : string, user: User, callback: (error: any, result: any) => void) {
     let query = { _id: projectId};
     let populate = {path : 'building', select: ['name' , 'totalSlabArea',]};
     //let populate = {path : 'building'};
     this.projectRepository.findAndPopulate(query, populate, (error, result) => {
+      logger.info('Project service, findAndPopulate has been hit');
+      logger.debug('Project Name : '+result[0]._doc.name);
       if(error) {
         callback(error, null);
       } else {
@@ -82,10 +99,12 @@ class ProjectService {
   }
 
   updateProjectDetails( projectDetails: Project, user: User, callback:(error: any, result:any) => void) {
+    logger.info('Project service, updateProjectDetails has been hit');
     let query = { _id : projectDetails._id };
     delete projectDetails._id;
 
     this.projectRepository.findOneAndUpdate(query, projectDetails, {new: true}, (error, result) => {
+      logger.info('Project service, findOneAndUpdate has been hit');
       if (error) {
         callback(error, null);
       } else {
@@ -94,14 +113,16 @@ class ProjectService {
     });
   }
 
-  addBuilding(projectId : any, buildingDetail : Building, user: User, callback:(error: any, result: any)=> void) {
+  addBuilding(projectId : string, buildingDetail : Building, user: User, callback:(error: any, result: any)=> void) {
     this.buildingRepository.create(buildingDetail, (error, result)=> {
+      logger.info('Project service, create has been hit');
       if(error) {
         callback(error, null);
       } else {
         let query = {_id : projectId };
         let newData = { $push: {building : result._id}};
         this.projectRepository.findOneAndUpdate(query, newData, {new : true}, (error, status)=> {
+          logger.info('Project service, findOneAndUpdate has been hit');
           if(error) {
             callback(error, null);
           } else {
@@ -113,9 +134,11 @@ class ProjectService {
   }
 
   updateBuilding( buildingId:string, buildingDetail:any, user:User, callback:(error: any, result: any)=> void) {
+    logger.info('Project service, updateBuilding has been hit');
     let query = { _id : buildingId };
     //delete buildingDetail._id;
     this.buildingRepository.findOneAndUpdate(query, buildingDetail,{new: true}, (error, result) => {
+      logger.info('Project service, findOneAndUpdate has been hit');
       if (error) {
         callback(error, null);
       } else {
@@ -125,9 +148,11 @@ class ProjectService {
   }
 
   cloneBuildingDetails( buildingId:string, buildingDetail:any, user:User, callback:(error: any, result: any)=> void) {
+    logger.info('Project service, cloneBuildingDetails has been hit');
     let query = { _id : buildingId };
     //delete buildingDetail._id;
     this.buildingRepository.findById(buildingId, (error, result) => {
+      logger.info('Project service, findById has been hit');
       if (error) {
         callback(error, null);
       } else {
@@ -144,29 +169,42 @@ class ProjectService {
               clonedCostHead.thumbRuleRate = resultCostHead.thumbRuleRate;
 
               if(costHead.active) {
-                let workItemList = costHead.workitem;
-                let resultWorkItemList = resultCostHead.workitem;
 
-                for(let workItem of workItemList) {
-                  for(let resultWorkItem in resultWorkItemList) {
-                    if(workItem.name === resultWorkItem) {
-                      if(!workItem.active) {
-                        delete resultWorkItemList[resultWorkItem];
+                let subcategoryList = costHead.subCategory;
+                let resultSubCategoryList = resultCostHead.subCategory;
+
+                for(let resultSubcategoryIndex=0; resultSubcategoryIndex<resultSubCategoryList.length; resultSubcategoryIndex++) {
+                  for(let subcategoryIndex=0 ; subcategoryIndex<subcategoryList.length; subcategoryIndex++) {
+                    if(subcategoryList[subcategoryIndex].name === resultSubCategoryList[resultSubcategoryIndex].name) {
+                      if(!subcategoryList[subcategoryIndex].active) {
+                        resultSubCategoryList.splice(resultSubcategoryIndex,1);
+                      } else {
+                        let resultWorkitemList = resultSubCategoryList[resultSubcategoryIndex].workitem;
+                        let workItemList = subcategoryList[subcategoryIndex].workitem;
+
+                        for(let resultWorkitemIndex=0;  resultWorkitemIndex < resultWorkitemList.length; resultWorkitemIndex++){
+                          for(let workitemIndex=0;  workitemIndex < workItemList.length; workitemIndex++) {
+                            if(!workItemList[workitemIndex].active) {
+                              resultWorkitemList.splice(resultWorkitemIndex, 1);
+                            }
+                          }
+                        }
                       }
                     }
                   }
                 }
-                clonedCostHead.workitem = resultWorkItemList;
+                clonedCostHead.subCategory = resultCostHead.subCategory;
               } else {
-                clonedCostHead.workitem = resultCostHead.workitem;
+                clonedCostHead.subCategory = resultCostHead.subCategory;
               }
-              clonedCostHeadDetails.push(clonedCostHead);
+                clonedCostHeadDetails.push(clonedCostHead);
             }
           }
         }
 
         let updateBuildingCostHeads = {'costHead' : clonedCostHeadDetails};
         this.buildingRepository.findOneAndUpdate(query, updateBuildingCostHeads,{new: true}, (error, result) => {
+          logger.info('Project service, findOneAndUpdate has been hit');
           if (error) {
             callback(error, null);
           } else {
@@ -178,7 +216,9 @@ class ProjectService {
   }
 
   getBuilding(projectId : string, buildingId : string, user: User, callback:(error: any, result: any)=> void) {
+    logger.info('Project service, getBuilding has been hit');
     this.buildingRepository.findById(buildingId, (error, result) => {
+      logger.info('Project service, findById has been hit');
       if (error) {
         callback(error, null);
       } else {
@@ -188,24 +228,29 @@ class ProjectService {
   }
 
   getInActiveCostHead(projectId: string, buildingId: string, user: User, callback:(error: any, result: any)=> void) {
+    logger.info('Project service, getInActiveCostHead has been hit');
     this.buildingRepository.findById(buildingId, (error, result) => {
       if (error) {
         callback(error, null);
       } else {
+        logger.info('Project service, findById has been hit');
+        logger.debug('getting InActive CostHead for Building Name : '+result.name);
         let response = result.costHead;
         let inactiveCostHead=[];
         for(let costHeadItem of response) {
           if(!costHeadItem.active) {
-                inactiveCostHead.push(costHeadItem);
+            inactiveCostHead.push(costHeadItem);
           }
         }
         callback(null,{data:inactiveCostHead, access_token: this.authInterceptor.issueTokenWithUid(user)});
-          }
-      });
+      }
+    });
   }
 
   getClonedBuilding(projectId : string, buildingId : string, user: User, callback:(error: any, result: any)=> void) {
+    logger.info('Project service, getClonedBuilding has been hit');
     this.buildingRepository.findById(buildingId, (error, result) => {
+      logger.info('Project service, findById has been hit');
       if (error) {
         callback(error, null);
       } else {
@@ -215,11 +260,15 @@ class ProjectService {
         building.totalSlabArea = result.totalSlabArea;
         building.totalCarperAreaOfUnit = result.totalCarperAreaOfUnit;
         building.totalSaleableAreaOfUnit = result.totalSaleableAreaOfUnit;
-        building.totalParkingAreaOfUnit = result.totalParkingAreaOfUnit;
+        building.plinthArea = result.plinthArea;
+        building.totalNoOfFloors = result.totalNoOfFloors;
+        building.noOfParkingFloors = result.noOfParkingFloors;
+        building.carpetAreaOfParking = result.carpetAreaOfParking;
         building.noOfOneBHK = result.noOfOneBHK;
         building.noOfTwoBHK = result.noOfTwoBHK;
         building.noOfThreeBHK = result.noOfThreeBHK;
-        building.noOfSlab = result.noOfSlab;
+        building.noOfFourBHK = result.noOfFourBHK;
+        building.noOfFiveBHK = result.noOfFiveBHK;
         building.noOfLift = result.noOfLift;
 
         let clonedCostHeadArray : Array<ClonedCostHead> = [];
@@ -230,20 +279,34 @@ class ProjectService {
           clonedCostHead.name = clonedBuilding[costHeadIndex].name;
           clonedCostHead.rateAnalysisId = clonedBuilding[costHeadIndex].rateAnalysisId;
           clonedCostHead.active = clonedBuilding[costHeadIndex].active;
+          clonedCostHead.budgetedCostAmount = clonedBuilding[costHeadIndex].budgetedCostAmount;
 
           let clonedWorkItemArray : Array<ClonedWorkItem> = [];
-          let workItemsArray = clonedBuilding[costHeadIndex].workitem;
+          let clonedSubcategoryArray : Array<ClonedSubcategory> = [];
+          let subCategoryArray = clonedBuilding[costHeadIndex].subCategory;
 
-          for(let key in  workItemsArray) {
-            let clonedWorkItem = new ClonedWorkItem();
-            clonedWorkItem.name = workItemsArray[key].name;
-            clonedWorkItem.rateAnalysisId = workItemsArray[key].rateAnalysisId;
-            clonedWorkItem.quantity = workItemsArray[key].quantity;
-            clonedWorkItem.rate = workItemsArray[key].rate;
-            clonedWorkItem.active = true;
-            clonedWorkItemArray.push(clonedWorkItem);
+          for(let subCategoryIndex=0; subCategoryIndex<subCategoryArray.length; subCategoryIndex++) {
+            let clonedSubcategory = new ClonedSubcategory();
+            clonedSubcategory.name = subCategoryArray[subCategoryIndex].name;
+            clonedSubcategory.rateAnalysisId = subCategoryArray[subCategoryIndex].rateAnalysisId;
+            clonedSubcategory.amount = subCategoryArray[subCategoryIndex].amount;
+            clonedSubcategory.active = true;
+
+            let workitemArray = subCategoryArray[subCategoryIndex].workitem;
+            for(let workitemIndex=0; workitemIndex< workitemArray.length; workitemIndex++) {
+              let clonedWorkItem = new ClonedWorkItem();
+              clonedWorkItem.name = workitemArray[workitemIndex].name;
+              clonedWorkItem.rateAnalysisId =  workitemArray[workitemIndex].rateAnalysisId;
+              clonedWorkItem.unit =  workitemArray[workitemIndex].unit;
+              clonedWorkItem.amount = workitemArray[workitemIndex].amount;
+              clonedWorkItem.rate = workitemArray[workitemIndex].rate;
+              clonedWorkItem.quantity = workitemArray[workitemIndex].quantity;
+              clonedWorkItemArray.push(clonedWorkItem);
+            }
+            clonedSubcategory.workitem = clonedWorkItemArray;
+            clonedSubcategoryArray.push(clonedSubcategory);
           }
-          clonedCostHead.workitem = clonedWorkItemArray;
+          clonedCostHead.subCategory = clonedSubcategoryArray;
           clonedCostHeadArray.push(clonedCostHead);
         }
         building.costHead = clonedCostHeadArray;
@@ -253,6 +316,7 @@ class ProjectService {
   }
 
   deleteBuilding(projectId:string, buildingId:string, user:User, callback:(error: any, result: any)=> void) {
+    logger.info('Project service, deleteBuilding has been hit');
     let popBuildingId = buildingId;
     this.buildingRepository.delete(buildingId, (error, result)=> {
       if(error) {
@@ -261,6 +325,7 @@ class ProjectService {
         let query = {_id: projectId};
         let newData = { $pull: {building : popBuildingId}};
         this.projectRepository.findOneAndUpdate(query, newData, {new: true}, (error, status)=> {
+          logger.info('Project service, findOneAndUpdate has been hit');
           if(error) {
             callback(error, null);
           } else {
@@ -272,12 +337,13 @@ class ProjectService {
   }
 
   getQuantity(projectId:string, buildingId:string, costhead: CostHead, workitem, user, callback:(error: any, result: any)=> void) {
+    logger.info('Project service, getQuantity has been hit');
     this.buildingRepository.findById(buildingId, (error, building:Building) => {
       if (error) {
         callback(error, null);
       } else {
         let quantity: Quantity;
-        for(let index = 0; building.costHead.length > index; index++){
+        for(let index = 0; building.costHead.length > index; index++) {
          if(building.costHead[index].name === costhead) {
            quantity = building.costHead[index].workitem[workitem].quantity;
          }
@@ -292,52 +358,108 @@ class ProjectService {
     });
   }
 
-  getRate(projectId:string, buildingId:string, costhead:CostHead, workitem:WorkItem, user, callback:(error: any, result: any)=> void) {
-    this.buildingRepository.findById(buildingId, (error, building:Building) => {
+  getRate(projectId:string, buildingId:string, costheadId:number,subcategoryId:number, workitemId:number, user,
+          callback:(error: any, result: any)=> void) {
+    logger.info('Project service, getRate has been hit');
+
+    let rateAnalysisServices: RateAnalysisService = new RateAnalysisService();
+    rateAnalysisServices.getRate(workitemId, (error, rateData) => {
       if (error) {
         callback(error, null);
       } else {
-        let rate: Rate;
-        for(let index = 0; building.costHead.length > index; index++) {
-          if(building.costHead[index].name === costhead) {
-            rate = building.costHead[index].workitem[workitem].rate;
-          }
-        }
-        if(rate.total === null) {
-          for(let index = 0; rate.item.length > index; index ++) {
-            rate.total = rate.item[index].totalAmount + rate.total;
-          }
-        }
-        callback(null, {data: rate, access_token: this.authInterceptor.issueTokenWithUid(user)});
+        let rate :Rate = new Rate()
+        rate.item = rateData;
+        /*for (let index = 0; rate.item.length > index; index++) {
+          rate.total = rate.item[index].totalAmount + rate.total;
+        }*/
+        callback(null, {data: rateData, access_token: this.authInterceptor.issueTokenWithUid(user)});
       }
     });
   }
 
-  deleteQuantity(projectId:string, buildingId:string, costhead:CostHead, workitem:WorkItem, item:Item, user:User, callback:(error: any, result: any)=> void) {
+  updateRate(projectId:string, buildingId:string, costheadId:number,subcategoryId:number, workitemId:number, rate :Rate, user, callback:(error: any, result: any)=> void) {
+    logger.info('Project service, updateRate has been hit');
     this.buildingRepository.findById(buildingId, (error, building:Building) => {
+      logger.info('Project service, findById has been hit');
       if (error) {
         callback(error, null);
       } else {
-        let quantity: Quantity;
+        //let rate: Rate;
+        let rateAnalysisId: number;
         for(let index = 0; building.costHead.length > index; index++) {
-          if(building.costHead[index].name === costhead) {
-            quantity =  building.costHead[index].workitem[workitem].quantity;
+          if(building.costHead[index].rateAnalysisId === costheadId) {
+            for(let indexSubcategory = 0; building.costHead[index].subCategory.length > indexSubcategory; indexSubcategory++) {
+              if (building.costHead[index].subCategory[indexSubcategory].rateAnalysisId === subcategoryId) {
+                for(let indexWorkitem = 0; building.costHead[index].subCategory[indexSubcategory].workitem.length > indexWorkitem
+                  ; indexWorkitem++) {
+                  if (building.costHead[index].subCategory[indexSubcategory].workitem[indexWorkitem].rateAnalysisId === workitemId) {
+                    building.costHead[index].subCategory[indexSubcategory].workitem[indexWorkitem].rate=rate;
+                  }
+                }
+              }
+            }
           }
         }
+        let query = {'_id' : buildingId};
+        let newData = { $set : {'costHead' : building.costHead}};
+        this.buildingRepository.findOneAndUpdate(query, newData,{new: true}, (error, result) => {
+          if (error) {
+            callback(error, null);
+          } else {
+            callback(null, {data: rate, access_token: this.authInterceptor.issueTokenWithUid(user)});
+          }
+        });
+      }
+    });
+  }
+
+  deleteQuantity(projectId:string, buildingId:string, costheadId:string, subcategoryId:string, workitemId:string, user:User, item:string, callback:(error: any, result: any)=> void) {
+    logger.info('Project service, deleteQuantity has been hit');
+    this.buildingRepository.findById(buildingId, (error, building:Building) => {
+      if (error
+      ) {
+        callback(error, null);
+      } else {
+        let quantity: Quantity;
+         this.costHeadId = parseInt(costheadId);
+          this.subCategoryId = parseInt(subcategoryId);
+          this.workItemId = parseInt(workitemId);
+              for(let index = 0; building.costHead.length > index; index++) {
+                if (building.costHead[index].rateAnalysisId === this.costHeadId) {
+                  for (let index1 = 0; building.costHead[index].subCategory.length > index1; index1++) {
+                    if (building.costHead[index].subCategory[index1].rateAnalysisId === this.subCategoryId) {
+                      for (let index2 = 0; building.costHead[index].subCategory[index1].workitem.length > index2; index2++) {
+                        if (building.costHead[index].subCategory[index1].workitem[index2].rateAnalysisId === this.workItemId) {
+                          quantity = building.costHead[index].subCategory[index1].workitem[index2].quantity;
+                        }
+                      }
+                    }
+                  }
+                }
+              }
         for(let index = 0; quantity.item.length > index; index ++) {
           if(quantity.item[index].item  === item) {
-           quantity.item.splice(index,1);
+            quantity.item.splice(index,1);
           }
         }
         let query = { _id : buildingId };
         this.buildingRepository.findOneAndUpdate(query, building,{new: true}, (error, building) => {
+          logger.info('Project service, findOneAndUpdate has been hit');
           if (error) {
             callback(error, null);
           } else {
             let quantity: Quantity;
-            for(let index = 0; building.costHead.length > index; index++){
-              if(building.costHead[index].name === costhead) {
-                quantity = building.costHead[index].workitem[workitem].quantity;
+            for(let index = 0; building.costHead.length > index; index++) {
+              if (building.costHead[index].rateAnalysisId === this.costHeadId) {
+                for (let index1 = 0; building.costHead[index].subCategory.length > index1; index1++) {
+                  if (building.costHead[index].subCategory[index1].rateAnalysisId === this.subCategoryId) {
+                    for (let index2 = 0; building.costHead[index].subCategory[index1].workitem.length > index2; index2++) {
+                      if (building.costHead[index].subCategory[index1].workitem[index2].rateAnalysisId === this.workItemId) {
+                        quantity = building.costHead[index].subCategory[index1].workitem[index2].quantity;
+                      }
+                    }
+                  }
+                }
               }
             }
             if(quantity.total === null) {
@@ -351,33 +473,54 @@ class ProjectService {
       }
     });
   }
-
-  deleteWorkitem(projectId:string, buildingId:string, costhead:CostHead, workitem:WorkItem, user:User, callback:(error: any, result: any)=> void) {
+  deleteWorkitem(projectId:string, buildingId:string, costheadId:number, subcategoryId:number, workitemId:number, user:User,
+                 callback:(error: any, result: any)=> void) {
+    logger.info('Project service, delete Workitem has been hit');
     this.buildingRepository.findById(buildingId, (error, building:Building) => {
       if (error) {
         callback(error, null);
       } else {
-        for(let index = 0; building.costHead.length > index; index++) {
-          if(building.costHead[index].name === costhead) {
-            delete building.costHead[index].workitem[workitem];
+        let costHeadList = building.costHead;
+        let subCategoryList: SubCategory[];
+        let WorkItemList: WorkItem[];
+        var flag = 0;
+        for (let index = 0; index < costHeadList.length; index++) {
+          if (costheadId === costHeadList[index].rateAnalysisId) {
+            subCategoryList = costHeadList[index].subCategory;
+            for (let subcategoryIndex = 0; subcategoryIndex < subCategoryList.length; subcategoryIndex++) {
+              if (subcategoryId === subCategoryList[subcategoryIndex].rateAnalysisId) {
+                WorkItemList = subCategoryList[subcategoryIndex].workitem;
+                for (let workitemIndex = 0; workitemIndex < WorkItemList.length; workitemIndex++) {
+                  if (workitemId === WorkItemList[workitemIndex].rateAnalysisId) {
+                    flag = 1;
+                    WorkItemList.splice(workitemIndex, 1);
+                    }
+                }
+              }
+            }
           }
         }
-        let query = { _id : buildingId };
-        this.buildingRepository.findOneAndUpdate(query, building,{new: true}, (error, building) => {
-          if (error) {
-            callback(error, null);
-          } else {
-            let message = workitem + ' deleted.';
-            callback(null, {data: message, access_token: this.authInterceptor.issueTokenWithUid(user)});
-          }
-        });
+        if(flag === 1) {
+          let query = {_id: buildingId};
+          this.buildingRepository.findOneAndUpdate(query, building, {new: true}, (error, WorkItemList) => {
+            logger.info('Project service, findOneAndUpdate has been hit');
+            if (error) {
+              callback(error, null);
+            } else {
+              let message = 'WorkItem deleted.';
+              callback(null, {data: WorkItemList, access_token: this.authInterceptor.issueTokenWithUid(user)});
+            }
+          });
+        } else {
+          callback(error, null);
+        }
       }
     });
   }
 
-  getReportCostHeadDetails( buildingId : string, costHead : string, user: User,
-                            callback: (error: any, result: any) => void) {
+  getReportCostHeadDetails( buildingId : string, costHead : string, user: User,callback: (error: any, result: any) => void) {
     this.buildingRepository.findById(buildingId, (error, result) => {
+      logger.info('Project service, findById has been hit');
       if (error) {
         callback(error, null);
       } else {
@@ -395,11 +538,12 @@ class ProjectService {
   }
 
   updateBuildingCostHead( buildingId : string, costHead : string, costHeadValue : string, user: User,
-                            callback: (error: any, result: any) => void) {
+                          callback: (error: any, result: any) => void) {
     let query = {'_id' : buildingId, 'costHead.name' : costHead};
     let value = JSON.parse(costHeadValue);
     let newData = { $set : {'costHead.$.active' : value}};
     this.buildingRepository.findOneAndUpdate(query, newData, {new: true},(err, response) => {
+      logger.info('Project service, findOneAndUpdate has been hit');
       if(err) {
         callback(err, null);
       } else {
@@ -408,8 +552,52 @@ class ProjectService {
     });
   }
 
-  createQuantity(projectId, buildingId, costhead, workitem, quantity, user, callback:(error: any, result: any)=> void) {
+  updateBudgetedCostForCostHead( buildingId : string, costHead : string, costHeadBudgetedAmountEdited : any, user: User,
+                                 callback: (error: any, result: any) => void) {
+    logger.info('Project service, updateBudgetedCostForCostHead has been hit');
+    let query = {'_id' : buildingId, 'costHead.name' : costHead};
+    let costInUnit = costHeadBudgetedAmountEdited.costIn;
+    let costPerUnit = costHeadBudgetedAmountEdited.costPer;
+    let rate = 0;
+    let newData;
+    rate = costHeadBudgetedAmountEdited.budgetedCostAmount / costHeadBudgetedAmountEdited.buildingArea;
+
+    if(costPerUnit === 'saleableArea' && costInUnit === 'sqft') {
+      newData = { $set : {
+        'costHead.$.thumbRuleRate.saleableArea.sqft' : rate,
+        'costHead.$.thumbRuleRate.saleableArea.sqmt' : rate * config.get('SqureMeter')
+      } };
+    } else if(costPerUnit === 'saleableArea' && costInUnit === 'sqmt') {
+      newData = { $set : {
+        'costHead.$.thumbRuleRate.saleableArea.sqmt' : rate,
+        'costHead.$.thumbRuleRate.saleableArea.sqft' : rate / config.get('SqureMeter')
+      } };
+    } else if(costPerUnit === 'slabArea' && costInUnit === 'sqft') {
+      newData = { $set : {
+        'costHead.$.thumbRuleRate.slabArea.sqft' : rate,
+        'costHead.$.thumbRuleRate.slabArea.sqmt' : rate * config.get('SqureMeter')
+      } };
+    } else if(costPerUnit === 'slabArea' && costInUnit === 'sqmt') {
+      newData = { $set : {
+        'costHead.$.thumbRuleRate.slabArea.sqmt' : rate,
+        'costHead.$.thumbRuleRate.slabArea.sqft' : rate / config.get('SqureMeter')
+      } };
+    }
+
+    this.buildingRepository.findOneAndUpdate(query, newData, {new:true},(err, response) => {
+      logger.info('Project service, findOneAndUpdate has been hit');
+      if(err) {
+        callback(err, null);
+      } else {
+        callback(null, {data: response, access_token: this.authInterceptor.issueTokenWithUid(user)});
+      }
+    });
+  }
+
+  createQuantity(projectId : string, buildingId : string, costhead : string, workitem : any, quantity :any, user : User,
+                 callback:(error: any, result: any)=> void) {
     this.buildingRepository.findById(buildingId, (error, building:Building) => {
+      logger.info('Project service, findById has been hit');
       if (error) {
         callback(error, null);
       } else {
@@ -419,16 +607,16 @@ class ProjectService {
             let exist = false;
             let errorMessage ;
             for(let quantityIndex = 0; quantityArray.length > quantityIndex; quantityIndex++ ) {
-                if(quantityArray[quantityIndex].item === quantity.item ) {
+              if(quantityArray[quantityIndex].item === quantity.item ) {
+                exist = true;
+                errorMessage = 'Quantity name already exist. ';
+                if(quantityArray[quantityIndex].remarks === quantity.remarks ) {
                   exist = true;
-                  errorMessage = 'Quantity name already exist. ';
-                  if(quantityArray[quantityIndex].remarks === quantity.remarks ) {
-                    exist = true;
-                    errorMessage = errorMessage + 'same remarks is also exist with quantity name.';
-                  } else {
-                    exist = false;
-                  }
+                  errorMessage = errorMessage + 'same remarks is also exist with quantity name.';
+                } else {
+                  exist = false;
                 }
+              }
             }
             if(exist) {
               callback(new CostControllException(errorMessage, errorMessage), null);
@@ -436,6 +624,7 @@ class ProjectService {
               quantityArray.push(quantity);
               let query = { _id : buildingId };
               this.buildingRepository.findOneAndUpdate(query, building,{new: true}, (error, building) => {
+                logger.info('Project service, findOneAndUpdate has been hit');
                 if (error) {
                   callback(error, null);
                 } else {
@@ -460,42 +649,276 @@ class ProjectService {
     });
   }
 
-  updateQuantity(projectId:string, buildingId:string, costhead:string, workitem:string, quantity:any, user:User, callback:(error: any, result: any)=> void) {
+  updateQuantity(projectId:string, buildingId:string, costheadId:string, subcategoryId:string, workitemId:string, quantity:any, user:User, callback:(error: any, result: any)=> void) {
+    logger.info('Project service, updateQuantity has been hit');
+    this.buildingRepository.findById(buildingId, (error, building) => {
+      if (error) {
+        callback(error, null);
+      } else {
+        let costHeadList = building.costHead;
+        let quantityArray  : Quantity;
+        for (let index = 0; index < costHeadList.length; index++) {
+          if (parseInt(costheadId) === costHeadList[index].rateAnalysisId) {
+            for (let index1 = 0; index1 < costHeadList[index].subCategory.length; index1++) {
+              if (parseInt(subcategoryId) === costHeadList[index].subCategory[index1].rateAnalysisId) {
+                for (let index2 = 0; index2 < costHeadList[index].subCategory[index1].workitem.length; index2++) {
+                  if (parseInt(workitemId) === costHeadList[index].subCategory[index1].workitem[index2].rateAnalysisId) {
+                    quantityArray  = costHeadList[index].subCategory[index1].workitem[index2].quantity;
+                    quantityArray.item = quantity;
+                    quantityArray.total = 0;
+                    for (let itemIndex = 0; quantityArray.item.length > itemIndex; itemIndex++) {
+                      quantityArray.total = quantityArray.item[itemIndex].quantity + quantityArray.total;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+
+          let query = {_id: buildingId};
+          this.buildingRepository.findOneAndUpdate(query, building, {new: true}, (error, building) => {
+            logger.info('Project service, findOneAndUpdate has been hit');
+            if (error) {
+              callback(error, null);
+            } else {
+              let costHeadList = building.costHead;
+              let quantity  : Quantity;
+              for (let index = 0; index < costHeadList.length; index++) {
+                if (parseInt(costheadId) === costHeadList[index].rateAnalysisId) {
+                  for (let index1 = 0; index1 < costHeadList[index].subCategory.length; index1++) {
+                    if (parseInt(subcategoryId) === costHeadList[index].subCategory[index1].rateAnalysisId) {
+                      for (let index2 = 0; index2 < costHeadList[index].subCategory[index1].workitem.length; index2++) {
+                        if (parseInt(workitemId) === costHeadList[index].subCategory[index1].workitem[index2].rateAnalysisId) {
+                          quantity  = costHeadList[index].subCategory[index1].workitem[index2].quantity;
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+              if (quantity.total === null) {
+                for (let index = 0; index < quantity.item.length; index++) {
+                  quantity.total = quantity.item[index].quantity + quantity.total;
+                }
+              }
+              callback(null, {data: quantity, access_token: this.authInterceptor.issueTokenWithUid(user)});
+            }
+          });
+        }
+    });
+  }
+
+  getAllSubcategoriesByCostHeadId(projectId:string, buildingId:string, costheadId:string, user:User,
+                                  callback:(error: any, result: any)=> void) {
+    let rateAnalysisServices : RateAnalysisService = new RateAnalysisService();
+    let url = config.get('rateAnalysisAPI.subCategories');
+    rateAnalysisServices.getApiCall(url, (error, subCategories)=> {
+      if(error) {
+        callback(error, null);
+      } else {
+        let costHead = parseInt(costheadId);
+        let subCategoriesList  =  subCategories.SubItemType;
+        let sqlQuery = 'SELECT subCategoriesList.C1 AS rateAnalysisId, subCategoriesList.C2 AS subCategory ' +
+          'FROM ? AS subCategoriesList WHERE subCategoriesList.C3 = '+ costHead;
+        subCategoriesList = alasql(sqlQuery, [subCategoriesList]);
+        callback(null, {data: subCategoriesList, access_token: this.authInterceptor.issueTokenWithUid(user)});
+      }
+    });
+  }
+
+  getWorkitemList(projectId:string, buildingId:string, costheadId:number, subCategoryId:number, user:User,
+                  callback:(error: any, result: any)=> void) {
+    logger.info('Project service, getWorkitemList has been hit');
+    let rateAnalysisServices : RateAnalysisService = new RateAnalysisService();
+    rateAnalysisServices.getWorkitemList(costheadId, subCategoryId, (error, workitemList)=> {
+      if(error) {
+        callback(error, null);
+      }else {
+        callback(null, {data: workitemList, access_token: this.authInterceptor.issueTokenWithUid(user)});
+      }
+    });
+  }
+
+  addWorkitem(projectId:string, buildingId:string, costheadId:number, subCategoryId:number, workitem: WorkItem,
+              user:User, callback:(error: any, result: any)=> void) {
+    logger.info('Project service, addWorkitem has been hit');
     this.buildingRepository.findById(buildingId, (error, building:Building) => {
       if (error) {
         callback(error, null);
       } else {
+        let responseWorkitem : Array<WorkItem>= null;
         for(let index = 0; building.costHead.length > index; index++) {
-          if(building.costHead[index].name === costhead) {
-            let quantityArray :Quantity = building.costHead[index].workitem[workitem].quantity;
-            quantityArray.item = quantity;
-            if(quantityArray.total === null) {
-              quantityArray.total = 0;
-            }
-            for(let itemIndex =0; quantityArray.item.length >  itemIndex; itemIndex++) {
-              quantityArray.total = quantityArray.item[itemIndex].quantity + quantityArray.total;
+          if(building.costHead[index].rateAnalysisId === costheadId) {
+            let subCategory = building.costHead[index].subCategory;
+            for(let subCategoryIndex = 0; subCategory.length > subCategoryIndex; subCategoryIndex++) {
+              if(subCategory[subCategoryIndex].rateAnalysisId === subCategoryId) {
+                subCategory[subCategoryIndex].workitem.push(workitem);
+                responseWorkitem = subCategory[subCategoryIndex].workitem;
+              }
             }
             let query = { _id : buildingId };
-            this.buildingRepository.findOneAndUpdate(query, building,{new: true}, (error, building) => {
+            let newData = { $set : {'costHead' : building.costHead}};
+            this.buildingRepository.findOneAndUpdate(query, newData,{new: true}, (error, building) => {
+              logger.info('Project service, findOneAndUpdate has been hit');
               if (error) {
                 callback(error, null);
               } else {
-                let quantity: Quantity;
-                for(let index = 0; building.costHead.length > index; index++){
-                  if(building.costHead[index].name === costhead) {
-                    quantity = building.costHead[index].workitem[workitem].quantity;
-                  }
-                }
-                if(quantity.total === null) {
-                  for(let index = 0; quantity.item.length > index; index ++) {
-                    quantity.total = quantity.item[index].quantity + quantity.total;
-                  }
-                }
-                callback(null, {data: quantity, access_token: this.authInterceptor.issueTokenWithUid(user)});
+                callback(null, {data: responseWorkitem, access_token: this.authInterceptor.issueTokenWithUid(user)});
               }
             });
           }
         }
+      }
+    });
+  }
+
+  addSubcategoryToCostHead(projectId:string, buildingId:string, costheadId:string, subcategoryObject : any, user:User,
+    callback:(error: any, result: any)=> void) {
+
+    let subCategoryObj : SubCategory = new SubCategory(subcategoryObject.subCategory, subcategoryObject.subCategoryId);
+
+    let query = {'_id' : buildingId, 'costHead.rateAnalysisId' : parseInt(costheadId)};
+    let newData = { $push: { 'costHead.$.subCategory': subCategoryObj }};
+
+    this.buildingRepository.findOneAndUpdate(query, newData,{new: true}, (error, building) => {
+      logger.info('Project service, addSubcategoryToCostHead has been hit');
+      if (error) {
+        callback(error, null);
+      } else {
+        callback(null, {data: building, access_token: this.authInterceptor.issueTokenWithUid(user)});
+      }
+    });
+  }
+
+  deleteSubcategoryFromCostHead(projectId:string, buildingId:string, costheadId:string, subcategoryObject : any, user:User,
+                           callback:(error: any, result: any)=> void) {
+
+    this.buildingRepository.findById(buildingId, (error, building) => {
+      logger.info('Project service, deleteSubcategoryFromCostHead has been hit');
+      if (error) {
+        callback(error, null);
+      } else {
+        let costHeadList = building.costHead;
+        let subCategoryList : any = [];
+
+        for(let index=0; index<costHeadList.length; index++) {
+          if(parseInt(costheadId) === costHeadList[index].rateAnalysisId) {
+            subCategoryList = costHeadList[index].subCategory;
+            for(let subcategoryIndex=0; subcategoryIndex<subCategoryList.length; subcategoryIndex++) {
+              if(subCategoryList[subcategoryIndex].rateAnalysisId === subcategoryObject.rateAnalysisId) {
+                subCategoryList.splice(subcategoryIndex, 1);
+              }
+            }
+          }
+        }
+
+        let query = {'_id' : buildingId, 'costHead.rateAnalysisId' : parseInt(costheadId)};
+        let newData = {'$set' : {'costHead.$.subCategory' : subCategoryList }};
+
+        this.buildingRepository.findOneAndUpdate(query, newData,{new: true}, (error, dataList) => {
+          logger.info('Project service, deleteSubcategoryFromCostHead has been hit');
+          if (error) {
+            callback(error, null);
+          } else {
+            callback(null, {data: dataList, access_token: this.authInterceptor.issueTokenWithUid(user)});
+          }
+        });
+      }
+    });
+  }
+
+  deleteQuantity(projectId:string, buildingId:string, costheadId:string, subcategoryId:string, workitemId:string, user:User, item:string, callback:(error: any, result: any)=> void) {
+   this.buildingRepository.findById(buildingId, (error, building) => {
+     if (error) {
+       callback(error, null);
+     } else {
+       let costHeadList = building.costHead;
+       let quantity: Quantity;
+       let itemList: any [];
+       for (let index = 0; index < costHeadList.length; index++) {
+         if (parseInt(costheadId) === costHeadList[index].rateAnalysisId) {
+           for (let index1 = 0; index1 < costHeadList[index].subCategory.length; index1++) {
+             if (parseInt(subcategoryId) === costHeadList[index].subCategory[index1].rateAnalysisId) {
+               for (let index2 = 0; index2 < costHeadList[index].subCategory[index1].workitem.length; index2++) {
+                 if (parseInt(workitemId) === costHeadList[index].subCategory[index1].workitem[index2].rateAnalysisId) {
+                   quantity = costHeadList[index].subCategory[index1].workitem[index2].quantity;
+                 }
+               }
+             }
+           }
+         }
+       }
+       for (let index = 0; quantity.item.length > index; index++) {
+         if (quantity.item[index].item === item) {
+           quantity.item.splice(index, 1);
+         }
+       }
+       /* let query = {'_id': buildingId, 'costHead.rateAnalysisId': parseInt(costheadId)};
+        let newData = {'$set': {'costHead.$.subCategory.$.workitem.$.quantity': quantity}};*/
+       let query = { _id : buildingId };
+       this.buildingRepository.findOneAndUpdate(query, building, {new: true}, (error, building) => {
+         logger.info('Project service, deleteQuantityFromWorkitem has been hit');
+         if (error) {
+           callback(error, null);
+         } else {
+           let costHeadList = building.costHead;
+           let quantity: Quantity;
+           let itemList: any [];
+           for (let index = 0; index < costHeadList.length; index++) {
+             if (parseInt(costheadId) === costHeadList[index].rateAnalysisId) {
+               for (let index1 = 0; index1 < costHeadList[index].subCategory.length; index1++) {
+                 if (parseInt(subcategoryId) === costHeadList[index].subCategory[index1].rateAnalysisId) {
+                   for (let index2 = 0; index2 < costHeadList[index].subCategory[index1].workitem.length; index2++) {
+                     if (parseInt(workitemId) === costHeadList[index].subCategory[index1].workitem[index2].rateAnalysisId) {
+                       quantity = costHeadList[index].subCategory[index1].workitem[index2].quantity;
+                     }
+                   }
+                 }
+               }
+             }
+           }
+           if (quantity.total === null) {
+             for (let index = 0; quantity.item.length > index; index++) {
+               quantity.total = quantity.item[index].quantity + quantity.total;
+             }
+           }
+           callback(null, {data: quantity, access_token: this.authInterceptor.issueTokenWithUid(user)});
+         }
+       });
+     }
+   });
+  }
+
+
+  getSubcategory(projectId:string, buildingId:string, costheadId:number, user:User, callback:(error: any, result: any)=> void) {
+    logger.info('Project service, getSubcategory has been hit');
+    this.buildingRepository.findById(buildingId, (error, building:Building) => {
+      if (error) {
+        callback(error, null);
+      } else {
+        let subCategories :Array<SubCategory> = null;
+        for(let index = 0; building.costHead.length > index; index++) {
+          if(building.costHead[index].rateAnalysisId === costheadId) {
+            subCategories = building.costHead[index].subCategory;
+            let workitems = subCategories;
+            for(let subcategoryIndex = 0 ; subcategoryIndex < subCategories.length; subcategoryIndex ++) {
+              let workitems = subCategories[subcategoryIndex].workitem;
+              for(let workitemsIndex = 0; workitemsIndex < workitems.length; workitemsIndex ++) {
+                  let workitem = workitems[workitemsIndex];
+                if(workitem.quantity.total !== null && workitem.rate.total !== null
+                  && workitem.quantity.total !== 0 && workitem.rate.total !== 0) {
+                  subCategories[subcategoryIndex].amount = parseFloat((workitem.quantity.total * workitem.rate.total)
+                    + subCategories[subcategoryIndex].amount).toFixed(2);
+                } else {
+                  subCategories[subcategoryIndex].amount=0;
+                  break;
+                }
+              }
+            }
+          }
+        }
+        callback(null, {data: subCategories, access_token: this.authInterceptor.issueTokenWithUid(user)});
       }
     });
   }

@@ -70,22 +70,39 @@ export class CostSummaryService extends BaseService {
   }
 
 
-  getCosthead(projectId:any,buildingID:any) {
+  getInactiveCostHeads(projectId: string,buildingId: string) {
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({headers: headers});
-    var url = API.VIEW_PROJECT + '/'+ projectId +'/'+ API.VIEW_BUILDING + '/' +buildingID + '/costhead';
-    console.log('url getcosthead() ->'+url);
+    var url = API.VIEW_PROJECT + '/'+ projectId +'/'+ API.VIEW_BUILDING + '/' +buildingId + '/costhead';
+    console.log('url getInactiveCostHeads() ->'+url);
     return this.http.get(url, options)
       .map(this.extractData)
       .catch(this.handleError);
   }
 
-  addCosthead(selectedinActiveCostHead:any,projectId:any,buildingID:any) {
+  addInactiveCostHead(selectedInactiveCostHead:string,projectId:string,buildingId:string) {
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({headers: headers});
-    var url = API.VIEW_PROJECT + '/'+ projectId +'/'+ API.VIEW_BUILDING + '/' +buildingID + '/costhead/' +selectedinActiveCostHead+'/true';
-    console.log('url addCosthead() ->'+url);
+    var url = API.VIEW_PROJECT + '/'+ projectId +'/'+ API.VIEW_BUILDING + '/' +buildingId + '/costhead/' +selectedInactiveCostHead+'/true';
+    console.log('url addInactiveCostHead() ->'+url);
     return this.http.put(url,options)
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
+
+  updateBudgetCostAmountForCostHead(buildingId : string, costHeadName : string, costIn : string, costPer : string, buildingArea : number, amount:number) {
+    let headers = new Headers({'Content-Type': 'application/json'});
+    let options = new RequestOptions({headers: headers});
+    var url = API.VIEW_PROJECT + '/' + SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT)+
+      '/'+ API.VIEW_BUILDING + '/' +buildingId+ '/costhead/' + costHeadName;
+    var totalAmount = amount;
+    var body = {
+      'budgetedCostAmount' : totalAmount,
+      'costIn' : costIn,
+      'costPer' : costPer,
+      'buildingArea' : buildingArea
+    };
+    return this.http.put(url, body,options)
       .map(this.extractData)
       .catch(this.handleError);
   }

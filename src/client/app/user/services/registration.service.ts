@@ -26,18 +26,13 @@ constructor(private _router: Router, private themeChangeService: ThemeChangeServ
     } else {
       SessionStorageService.setSessionValue(SessionStorage.IS_SOCIAL_LOGIN, AppSettings.IS_SOCIAL_LOGIN_NO);
     }
-    SessionStorageService.setSessionValue(SessionStorage.PASSWORD, '');
     this.successRedirect(res);
   }
 
   successRedirect(res: any) {
-
     SessionStorageService.setSessionValue(SessionStorage.IS_LOGGED_IN, 1);
     SessionStorageService.setSessionValue(SessionStorage.PROFILE_PICTURE, res.data.picture);
-
-    if (res.data.isCandidate === true) {
-      this._router.navigate([NavigationRoutes.APP_DASHBOARD]);
-    }
+      this._router.navigate([NavigationRoutes.APP_CREATE_NEW_PROJECT]);
   }
 
   loginFail(error: any) {

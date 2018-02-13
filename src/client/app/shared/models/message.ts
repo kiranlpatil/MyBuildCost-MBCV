@@ -3,7 +3,7 @@ export class Message {
   error_code: number; //string
   custom_message: string;
   isError: boolean;
-  constructor(err?:string){
+  constructor(err?:string) {
     this.custom_message=err;
   }
 }

@@ -105,6 +105,7 @@ export class Messages {
     public static MSG_ERROR_VALIDATION_THREE_BHK_REQUIRED = 'Enter No of three BHKs.';
     public static MSG_ERROR_VALIDATION_NO_OF_SLABS_REQUIRED = 'Enter No of slabs.';
     public static MSG_ERROR_VALIDATION_NO_OF_LIFTS_REQUIRED = 'Enter No of lifts';
+    public static MSG_ERROR_VALIDATION_ALPHABATES = 'Enter alphabates only';
 
   public static MSG_LANDING_PAGE = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' +
     'Nullam sem turpis, sodales eu urna sed, posuere finibus leo finibus.' +
@@ -120,7 +121,7 @@ export class Messages {
   public static MSG_CONTACT_US = 'Please provide the following details and we will get back to you soon.';
   public static MSG_YEAR_NO_MATCH_FOUND = 'The year doesn\'t look right. Be sure to use your actual year of birth.';
   public static MSG_FORGOT_PASSWORD = 'Enter your account e-mail address and we\'ll help you create a new password.';
-  public static MSG_CONFIRM_PASSWORD = ' Passwords do not match.';
+  public static MSG_CONFIRM_PASSWORD = 'Passwords are not matching.';
   public static MSG_CHANGE_PASSWORD_SUCCESS ='Password changed successfully. You can Sign In again with new password by clicking on "YES" button, Please' +
     ' click on "No" button to continue the session.';
   public static MSG_VERIFY_USER_1 = 'You are almost done!';
@@ -147,8 +148,8 @@ export class Messages {
   public static CONTACT_US_EMAIL_1 = 'sales@techprimelab.com';
   public static CONTACT_US_EMAIL_2 = 'careers@techprimelab.com';
   public static MSG_EMAIL_VERIFICATION_HEADING = 'Your email is updated successfully.';
-  public static MSG_EMAIL_VERIFICATION_MESSAGE = 'Kindly click on SIGN IN to use JobMosis.';
-  public static MSG_ACTIVATE_USER_HEADING = 'Congratulations! Welcome To JobMosis.';
+  public static MSG_EMAIL_VERIFICATION_MESSAGE = 'Kindly click on SIGN IN to use BuildInfo.';
+  public static MSG_ACTIVATE_USER_HEADING = 'Congratulations! Welcome To BuildInfo.';
   public static MSG_ACTIVATE_USER_SUB_HEADING = 'You can now find candidates using the highly accurate, simpler, faster and powerful solution.';
   public static MSG_ACTIVATE_USER_MESSAGE = 'Your account has been created successfully. Kindly click Sign In.';
   public static MSG_VERIFICATION_EMAIL = 'Your account has been created successfully. Kindly click Sign In.';
@@ -180,33 +181,43 @@ export class Messages {
   public static MSG_SUCCESS_UPDATE_BUILDING_DETAILS: string = 'Your building details updated successfully.';
   public static MSG_SUCCESS_DELETE_BUILDING: string = 'Your building deleted successfully.';
 
+  public static MSG_SUCCESS_ADD_COSTHEAD: string = 'Costhead added successfully.';
   public static MSG_SUCCESS_DELETE_COSTHEAD: string = 'Your costhead deleted successfully.';
   public static MSG_SUCCESS_DELETE_ITEM: string = 'Your item deleted successfully.';
+  public static MSG_SUCCESS_UPDATE_RATE: string = 'Rate updated.';
   public static MSG_SUCCESS_ADD_ITEM: string = 'Your item added successfully.';
   public static MSG_FAIL_ADD_ITEM: string = 'Add new item failed : ';
   public static MSG_SUCCESS_SAVED_COST_HEAD_ITEM: string = 'Your cost head items updated successfully.';
+  public static MSG_SUCCESS_SAVED_COST_HEAD_ITEM_ERROR: string = 'There is error in operation';
+  public static MSG_SUCCESS_ADD_SUBCATEGORY: string = 'Subcategory added successfully.';
+  public static MSG_SUCCESS_ADD_WORKITEM: string = 'Work Item added successfully.';
+  public static MSG_ALREADY_ADDED_ALL_WORKITEMS: string = 'Already added all workitems.';
   public static MSG_SUCCESS_DELETE_COSTHEAD_WORKITEM: string = 'Your costhead workitem deleted successfully.';
+
+  public static MSG_SUCCESS_UPDATE_BUDGETED_COST_COSTHEAD: string = 'Budgeted cost for costhead updated successfully.';
 }
 
 export class NavigationRoutes {
   public static APP_REGISTRATION: string = '/registration';
   public static APP_FORGOTPASSWORD: string = '/forgot-password';
   public static APP_PROJECT: string = '/project';
-  public static APP_CREATE_PROJECT: string = 'project/create';
+  public static APP_CREATE_NEW_PROJECT: string = '/create-new-project';
+  public static APP_CREATE_PROJECT: string = '/create-project';
   public static APP_VIEW_PROJECT: string = 'project/view';
   public static APP_VIEW_BUILDINGS: string = 'building/view';
   public static APP_LIST_BUILDINGS: string = 'building/list';
   public static APP_VIEW_BUILDING_DETAILS: string = 'building/details';
-  public static APP_CREATE_BUILDING: string = 'building/create';
+  public static APP_CREATE_BUILDING: string = '/create-building';
   public static APP_LIST_PROJECT: string = 'project/list';
   public static APP_COST_SUMMARY: string = 'project/cost-summary';
   public static APP_COST_HEAD: string = 'project/cost-summary/cost-head';
+  public static APP_COMMON_AMENITIES = 'project/cost-summary/common-amenities';
   public static APP_DASHBOARD: string = '/dashboard';
   public static APP_USER_DASHBOARD: string = '/user';
   public static APP_USER__DETAILS_DASHBOARD: string = '/user/details';
   public static APP_LOGIN: string = '/signin';
   public static APP_START: string = '/';
-  public static APP_LANDING: string = '/signin';
+  public static APP_LANDING: string = '/landing';
   public static VERIFY_USER: string = '/verify-user';
   public static ACTIVATE_USER: string = '/activate-user';
   public static VERIFY_PHONE: string = '/verify-phone';
@@ -237,11 +248,14 @@ export class SessionStorage {
   public static VERIFY_CHANGE_PHONE_VALUE = 'verify_change_phone_value';
   public static CURRENT_PROJECT = 'current_project_id';
   public static CURRENT_BUILDING = 'current_building_id';
+  public static CURRENT_COST_HEAD_ID = 'current_cost_head_id';
+  public static CURRENT_WORKITEM_ID = 'current_workitem_id';
 }
 
 export class LocalStorage {
   public static ACCESS_TOKEN = 'access_token';
   public static IS_LOGGED_IN = 'is_user_logged_in';
+  public static FIRST_NAME = 'first_name';
   public static _ID = '_id';
 }
 
@@ -354,14 +368,16 @@ export class API {
 
 export class ImagePath {
   public static FAV_ICON = './assets/framework/images/logo/favicon.ico';
-  public static BODY_BACKGROUND = './assets/framework/images/page_background/page-bg.png';
-  public static MY_WHITE_LOGO = './assets/c-next/header/job-mosis-logo.png';
-  public static MOBILE_WHITE_LOGO = './assets/c-next/header/buildInfo-logo.jpg';
+  public static BODY_BACKGROUND = './assets/build-info/page_background/page-bg.png';
+  public static BODY_BACKGROUND_TRANSPARENT = './assets/build-info/page_background/page-bg-transparent.png';
+  public static MY_WHITE_LOGO = './assets/build-info/header/buildInfo-logo.png';
+  public static HEADER_LOGO = './assets/build-info/header/header-logo.png';
+  public static MOBILE_WHITE_LOGO = './assets/build-info/header/buildInfo-logo.png';
   public static FACEBOOK_ICON = './assets/framework/images/footer/fb.svg';
   public static GOOGLE_ICON = './assets/framework/images/footer/google-plus.svg';
   public static LINKEDIN_ICON = './assets/framework/images/footer/linked-in.svg';
   public static PROFILE_IMG_ICON = './assets/framework/images/dashboard/default-profile.png';
-  public static COMPANY_LOGO_IMG_ICON = './assets/framework/images/dashboard/default-company-logo.png';
+  public static COMPANY_LOGO_IMG_ICON = './assets/framework/images/dashboard/default-company-buildinfo-logo.png';
   public static EMAIL_ICON = './assets/framework/images/icons/e-mail.svg';
   public static EMAIL_ICON_GREY = './assets/framework/images/icons/e-mail-grey.svg';
   public static NEW_EMAIL_ICON = './assets/framework/images/icons/new-e-mail.svg';
@@ -384,9 +400,6 @@ export class ImagePath {
   public static FIRST_NAME_ICON_GREY = './assets/framework/images/icons/first-name-grey.svg';
   public static LAST_NAME_ICON = './assets/framework/images/icons/last-name.svg';
   public static LAST_NAME_ICON_GREY = './assets/framework/images/icons/last-name-grey.svg';
-  public static GET_SET_GO = './assets/c-next/get-set-go/get_set_go.gif';
-  public static CALENDAR = './assets/c-next/post-job/calendar.png';
-  public static CONTACT_PERSON = './assets/c-next/post-job/contact-person.png';
   public static INFO_RED = './assets/framework/images/dashboard/info-red.svg';
 }
 
@@ -424,7 +437,7 @@ export class Label {
   public static FIRST_NAME_LABEL: string = 'First Name';
   public static COMPANY_NAME_LABEL: string = 'Company Name';
   public static LAST_NAME_LABEL: string = 'Last Name';
-  public static EMAIL_FIELD_LABEL: string = 'Email';
+  public static EMAIL_FIELD_LABEL: string = 'Work Email';
   public static CREATE_PROFILE_LABEL: string = 'Create Profile';
   public static COMPANY_WEBSITE_FIELD_LABEL: string = 'Website';
   public static CONTACT_FIELD_LABEL: string = 'Mobile Number';
@@ -435,9 +448,12 @@ export class Label {
   public static NAME: string = 'Name';
   public static ACTIONS: string = 'Actions';
   public static API_KEY: string = 'API Key';
-  public static ACCEPT_NAME: string = 'I accept the';
-  public static TERMS_AND_CONDITIONS_NAME: string = 'Terms and Conditions.';
-  public static REGISTER_AS_APPLICANT: string = 'Register as an applicant';
+  public static ACCEPT_NAME: string = 'By clicking "Continue" I agree to Build Infos';
+  public static TERMS_AND_CONDITIONS_NAME: string = 'Terms of Service';
+  public static PRIVACY_POLICY: string = 'Privacy Policy';
+  public static REGISTER_AS_APPLICANT: string = 'Get Started Absolutely Free';
+  public static START_FREE: string = 'Get Started Absolutely Free';
+  public static REGISTRATION_INFO: string = "See how the world's best Building Estimations are created.";
   public static SUBMIT_PROFILE: string = 'Submit Your Profile';
   public static MORE: string = 'More';
   public static NOT_FOUND_ERROR: string = '404';

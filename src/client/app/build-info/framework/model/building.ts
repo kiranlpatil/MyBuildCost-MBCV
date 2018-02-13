@@ -4,11 +4,15 @@ export class Building {
   name: string = '';
   totalSlabArea: number;
   totalCarperAreaOfUnit: number;
-  totalSaleableAreaOfUnit:number;
-  totalParkingAreaOfUnit: number;
+  totalSaleableAreaOfUnit: number;
+  plinthArea:number;
+  totalNoOfFloors:number;
+  noOfParkingFloors:number;
+  carpetAreaOfParking:number;
   noOfOneBHK: number;
   noOfTwoBHK: number;
   noOfThreeBHK: number;
-  noOfSlab: number;
+  noOfFourBHK:number;
+  noOfFiveBHK:number;
   noOfLift: number;
 }

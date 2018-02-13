@@ -1,4 +1,4 @@
-import {SessionStorage} from "../../shared/constants";
+import { SessionStorage } from '../../shared/constants';
 
 export class SessionStorageService {
 

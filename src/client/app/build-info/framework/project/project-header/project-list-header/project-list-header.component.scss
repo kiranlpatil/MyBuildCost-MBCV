@@ -1,0 +1,16 @@
+select {
+  width: 250px;
+  background-color: transparent;
+  border: 0;
+  border-bottom: 0 solid #ccc;
+  position: fixed;
+  left: 185px;
+  top: 30px;
+  font-size: 21px;
+  font-weight: 300;
+  z-index: 101;
+
+  &:focus {
+    border-bottom: 0 !important;
+  }
+}

@@ -1,10 +1,16 @@
-@import '../../../css/variables';
+@import '../../framework/landing-page/landing-page.component';
+.page-background {
+  .content-background {
+    background-repeat: no-repeat;
+    background-position: bottom;
+  }
+  .inner-content {
+    .checkbox {
+      text-align: left;
+    }
 
-.login {
-  .default-checkbox {
-    margin: 9px 10px 5px 0;
-    label {
-      padding: 10px 0 6px 20px;
+    .btn-primary {
+      margin: 10px 0;
     }
   }
 }

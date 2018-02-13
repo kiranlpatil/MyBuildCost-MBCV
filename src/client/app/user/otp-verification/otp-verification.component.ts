@@ -1,6 +1,6 @@
 import { Component, Output, Input , EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Messages } from '../../shared/constants';
+import {Messages, SessionStorage} from '../../shared/constants';
 import { VerifyOtp  } from '../models/verify-otp';
 import { MessageService } from '../../shared/services/message.service';
 import { Message } from '../../shared/models/message';
@@ -8,6 +8,8 @@ import { ValidationService } from '../../shared/customvalidations/validation.ser
 import { LoginService } from '../../framework/login/login.service';
 import { RegistrationService } from '../services/registration.service';
 import { OtpVerificationService } from './otp-verification.service';
+import {SessionStorageService} from "../../shared/services/session.service";
+import {Login} from "../models/login";
 
 @Component({
   moduleId: module.id,
@@ -29,8 +31,11 @@ export class OtpVerificationComponent {
   error_msg: string;
   isShowErrorMessage: boolean = true;
   submitStatus: boolean;
+  private loginModel:Login;
   constructor(private formBuilder: FormBuilder, private verifyPhoneService: OtpVerificationService,
-              private messageService: MessageService) {
+              private messageService: MessageService, private loginService: LoginService,
+              private registrationService: RegistrationService) {
+    this.loginModel = new Login();
 
     this.userForm = this.formBuilder.group({
       'otp': ['', ValidationService.requireOtpValidator]
@@ -74,6 +79,16 @@ export class OtpVerificationComponent {
 
   verifySuccess(res: any) {
     this.onMobileVerificationSuccess.emit();
+    this.navigateToDashboard();
+  }
+
+  navigateToDashboard() {
+    this.loginModel.email = SessionStorageService.getSessionValue(SessionStorage.EMAIL_ID);
+    this.loginModel.password = SessionStorageService.getSessionValue(SessionStorage.PASSWORD);
+    this.loginService.userLogin(this.loginModel)
+      .subscribe(
+        (res:any) => (this.registrationService.onSuccess(res)),
+        (error:any) => (this.registrationService.loginFail(error)));
   }
   mobileVerificationSuccess(res: any) {
     this.showInformationMessage(Messages.MSG_SUCCESS_CHANGE_MOBILE_NUMBER);

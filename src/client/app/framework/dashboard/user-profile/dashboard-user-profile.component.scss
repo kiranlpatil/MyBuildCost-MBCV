@@ -1,8 +1,7 @@
 @import '../../../../css/common';
-@import '../../../../css/variables';
 
 .error-messages {
-  color: $error-messages;
+  color: $error;
   font-size: 10px;
   font-style: italic;
   margin: 0;
@@ -35,7 +34,6 @@
       padding: 0 15px;
       background: transparent !important;
       border-bottom: 0 solid $border-color;
-      font-family: gothamrnd-light;
     }
 
     h5 > .glyphicon-remove {
@@ -106,7 +104,7 @@
       color: $cn-theme-color;
       padding: 0;
       font-size: 16px;
-      background: $modal-bg1 !important;
+      background: $light-white !important;
     }
   }
 
@@ -132,7 +130,6 @@
   .profile-name-last {
     background: none;
     color: $black-theme-color;
-    font-family: 'gothamrnd-book';
     font-size: 14px;
     padding: 0;
     text-transform: capitalize;

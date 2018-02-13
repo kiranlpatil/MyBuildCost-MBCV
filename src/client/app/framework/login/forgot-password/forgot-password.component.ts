@@ -65,7 +65,7 @@ export class ForgotPasswordComponent {
         },
         error => {
           this.isShowLoader = false;
-          this.forgotPasswordFail(error)
+          this.forgotPasswordFail(error);
         }
       );
   }

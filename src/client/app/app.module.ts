@@ -34,7 +34,9 @@ import { LandingPageComponent } from './framework/landing-page/landing-page.comp
 import { SharedService } from './shared/services/shared-service';
 import { PageNotFoundComponent } from './shared/page-not-found/page-not-found.component';
 import { AnalyticService } from './shared/services/analytic.service';
+import { CommonAmenitiesComponent } from './build-info/framework/project/cost-summary-report/common-amenities/common-amenities.component';
 //import { MyDashboardComponent} from "./build-info/framework/my-dashboard/my-dashboard.component";
+import { CommonAmenitiesService } from './build-info/framework/project/cost-summary-report/common-amenities/common-amenities.service';
 import { DashboardHeaderComponent } from './framework/dashboard/dashboard-header/dashboard-header.component';
 import { DashboardUserProfileService } from './framework/dashboard/user-profile/dashboard-user-profile.service';
 import { UserChangePasswordService } from './framework/dashboard/user-change-password/user-change-password.service';
@@ -62,11 +64,24 @@ import { ProjectHeaderComponent } from './build-info/framework/project/project-h
 import { ProjectContentComponent } from './build-info/framework/project/project-content/project-content.component';
 import { CostSummaryComponent } from './build-info/framework/project/cost-summary-report/cost-summary.component';
 import { CostSummaryService } from './build-info/framework/project/cost-summary-report/cost-summary.service';
+import { MaterialTakeoffComponent } from './build-info/framework/project/material-takeoff/material-takeoff.component';
+import { MaterialTakeoffService } from './build-info/framework/project/material-takeoff/material-takeoff.service';
 import { CostHeadComponent } from './build-info/framework/project/cost-summary-report/cost-head/cost-head.component';
 import { CostHeadService } from './build-info/framework/project/cost-summary-report/cost-head/cost-head.service';
 import { CostSummaryPipe } from './build-info/framework/project/cost-summary-report/cost-summary.pipe';
 import { GetQuantityComponent } from './build-info/framework/project/cost-summary-report/cost-head/get-quantity/get-quantity.component';
 import { GetQuantityService } from './build-info/framework/project/cost-summary-report/cost-head/get-quantity/get-quantity.service';
+import { ProjectListHeaderComponent } from './build-info/framework/project/project-header/project-list-header/project-list-header.component';
+import { ProjectListHeaderService } from './build-info/framework/project/project-header/project-list-header/project-list-header.service';
+
+// Import the Animations module
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { GetRateComponent } from './build-info/framework/project/cost-summary-report/cost-head/get-rate/get-rate.component';
+import { GetRateService } from './build-info/framework/project/cost-summary-report/cost-head/get-rate/get-rate.service';
+import { CreateNewProjectComponent } from './build-info/framework/create-new-project/create-new-project.component';
+
+// Import the ButtonsModule
+//import { ButtonsModule } from '@progress/kendo-angular-buttons';
 
 @NgModule({
   imports: [
@@ -76,7 +91,8 @@ import { GetQuantityService } from './build-info/framework/project/cost-summary-
     HttpModule,
     ReactiveFormsModule,
     SharedModule,
-    UserModule
+    UserModule,
+    BrowserAnimationsModule
   ],
   declarations: [
     AppComponent,
@@ -95,20 +111,25 @@ import { GetQuantityService } from './build-info/framework/project/cost-summary-
     DashboardHeaderComponent,
     ProjectComponent,
     BuildingComponent,
+    CreateNewProjectComponent,
     CreateProjectComponent,
     ProjectListComponent,
     CreateBuildingComponent,
     ProjectDetailsComponent,
     BuildingListComponent,
     ProjectHeaderComponent,
+    ProjectListHeaderComponent,
     ProjectContentComponent,
     BuildingDetailsComponent,
     CostSummaryComponent,
     CostHeadComponent,
     CostSummaryPipe,
     GetQuantityComponent,
+    MaterialTakeoffComponent,
+    GetRateComponent,
     //MyDashboardComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    CommonAmenitiesComponent
   ],
 
   providers: [
@@ -151,7 +172,12 @@ import { GetQuantityService } from './build-info/framework/project/cost-summary-
     BuildingDetailsService,
     CostSummaryService,
     CostHeadService,
-    GetQuantityService
+    MaterialTakeoffService,
+    GetQuantityService,
+    CommonAmenitiesService,
+    GetRateService,
+    ProjectListHeaderService
+    // MaterialTakeoffService
   ],
   bootstrap: [AppComponent]
 })

@@ -16,7 +16,10 @@ import WorkItem = require('../dataaccess/model/WorkItem');
 import ThumbRule = require('../dataaccess/model/ThumbRule');
 import Estimated = require('../dataaccess/model/Estimated');
 import RateAnalysisService = require('./RateAnalysisService');
-var config = require('config');
+import SubCategory = require("../dataaccess/model/SubCategory");
+let config = require('config');
+var log4js = require('log4js');
+var logger=log4js.getLogger('Report Service');
 
 class ReportService {
   APP_NAME: string;
@@ -42,9 +45,11 @@ class ReportService {
 
   getReport( projectId : any,reportType : string, projectRate : string, areaType : string,  user: User,
              callback: (error: any, result: any) => void) {
+    logger.info('Report Service, getReport has been hit');
     let query = { _id: projectId};
     let populate = {path : 'building'};
     this.projectRepository.findAndPopulate(query, populate, (error, result) => {
+      logger.info('Report Service, findAndPopulate has been hit');
       if(error) {
         callback(error, null);
       } else {
@@ -71,6 +76,8 @@ class ReportService {
                     let estimateReport: EstimateReport = new EstimateReport();
                     thumbRule.name = costHeadArray[costHeadIndex].name;
                     estimateReport.name = costHeadArray[costHeadIndex].name;
+                    thumbRule.rateAnalysisId = costHeadArray[costHeadIndex].rateAnalysisId;
+                    estimateReport.rateAnalysisId = costHeadArray[costHeadIndex].rateAnalysisId;
                     if (areaType === 'slabArea') {
                       thumbRuleReport.area = buildings[index].totalSlabArea;
                       estimatedReport.area = buildings[index].totalSlabArea;
@@ -88,18 +95,36 @@ class ReportService {
                         thumbRule.rate = costHeadArray[costHeadIndex].thumbRuleRate.saleableArea.sqmt;
                       }
                     }
-                    let workItem: any = costHeadArray[costHeadIndex].workitem;
-                    for(let key in workItem) {
-                      if(workItem[key].quantity.total !== null && workItem[key].rate.total !== null) {
-                        estimateReport.total = workItem[key].quantity.total + estimateReport.total;
-                        let estimatedRate = (estimateReport.total / buildingReport.area);
-                        estimateReport.rate = estimatedRate.toFixed(2);
+                    let subCategory: Array<SubCategory> = costHeadArray[costHeadIndex].subCategory;
+                    if(subCategory.length !==0) {
+
+                      for(let subCategoryKey in subCategory) {
+                        let workItem = subCategory[subCategoryKey].workitem;
+                        for(let key in workItem) {
+                          if(workItem[key].quantity.total !== null && workItem[key].rate.total !== null
+                            && workItem[key].quantity.total !== 0 && workItem[key].rate.total !== 0) {
+                            estimateReport.total =parseFloat((workItem[key].quantity.total * workItem[key].rate.total)
+                              + estimateReport.total).toFixed(2);
+                            let estimatedRate = (estimateReport.total / buildingReport.area);
+                            estimateReport.rate = estimatedRate.toFixed(2);
+                          } else {
+                            estimateReport.total=0;
+                            estimateReport.rate=0;
+                            break;
+                          }
+                        }
                       }
+
                     }
                     estimatedReport.totalEstimatedCost = estimateReport.total + estimatedReport.totalEstimatedCost;
-                      estimatedReport.totalRate = estimatedReport.totalRate + estimateReport.rate;
+                    estimatedReport.totalRate = estimatedReport.totalRate + parseFloat(estimateReport.rate);
                     estimatedReport.estimatedCost.push(estimateReport);
-                    thumbRule.amount = thumbRuleReport.area * thumbRule.rate;
+                    if( costHeadArray[costHeadIndex].budgetedCostAmount === 0 ||
+                      costHeadArray[costHeadIndex].budgetedCostAmount === undefined ) {
+                      thumbRule.amount = thumbRuleReport.area * thumbRule.rate;
+                    } else {
+                      thumbRule.amount =  costHeadArray[costHeadIndex].budgetedCostAmount;
+                    }
                     thumbRule.costHeadActive = costHeadArray[costHeadIndex].active;
                     thumbRuleReport.thumbRuleReport.push(thumbRule);
                     thumbRuleReport.totalRate = thumbRuleReport.totalRate + thumbRule.rate;
@@ -122,6 +147,7 @@ class ReportService {
   }
 
   getCostHeads( user: User, url: string ,callback: (error: any, result: any) => void) {
+    logger.info('Report Service, getCostHeads has been hit');
     this.rateAnalysisService.getCostHeads(user, url,(error, result) => {
       if(error) {
         console.log('error : '+JSON.stringify(error));
@@ -133,6 +159,7 @@ class ReportService {
   }
 
   getWorkItems( user: User, url: string ,callback: (error: any, result: any) => void) {
+    logger.info('Report Service, getWorkItems has been hit');
     this.rateAnalysisService.getWorkItems( user, url,(error, result) => {
       if(error) {
         console.log('error : '+JSON.stringify(error));

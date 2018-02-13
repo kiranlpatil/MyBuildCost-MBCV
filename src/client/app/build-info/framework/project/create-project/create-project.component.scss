@@ -1,0 +1,16 @@
+@import '../../../../framework/landing-page/landing-page.component';
+
+.page-background {
+  background: no-repeat fixed 0 100%;
+  clear: both;
+
+  .inner-content {
+    .content {
+      margin-top: 55px;
+    }
+
+    .content > h4 {
+      text-align: left;
+    }
+  }
+}

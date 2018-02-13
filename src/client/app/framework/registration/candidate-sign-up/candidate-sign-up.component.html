@@ -1,101 +1,98 @@
-<section class="main-form-wrapper registration">
-  <div *ngIf="isFromCareerPlugin">
-    <span class="career-plugin-toster">{{getMessages().CAREER_PLUGIN_MSG_NEW_USER}}</span>
+<div class="container">
+  <div class="col-sm-6">
+    <div class="page-background">
+      <div class="inner-content content-background clearfix" [ngStyle]="{'background-image': 'url(' + BODY_BACKGROUND + ')'}">
+        <img class="logo-image" src={{MY_LOGO}} alt="Facebook Link">
+        <ul>
+          <li>Estimate Project Cost</li>
+          <li>Budget it</li>
+          <li>Control it</li>
+        </ul>
+        <!--<img src="{{BODY_BACKGROUND}}" alt="Page Background" />-->
+      </div>
+    </div>
   </div>
-  <cn-user-header [MainHeaderMenuHideShow]="mainHeaderMenuHideShow"></cn-user-header>
 
-  <div *ngIf="!isChrome && isToasterVisible" #toaster id="snackbar">{{getMessages().BROWSER_ALERT_MSG}}
-    <button class="button-style" (click)="closeToaster()">x</button>
-  </div>
-  <div class="content">
-      <div *ngIf="isGuideMessageVisible" class="welcome-message">
-          <h3>Welcome !</h3>
-          <p>{{getMessages().GUIDE_MESSAGE_FOR_NEW_VIEWER}}</p>
-      </div>
-    <h5>{{getLabel().REGISTER_AS_APPLICANT}}</h5>
-    <form [formGroup]="userForm" (submit)="onSubmit()" class="employee-form" novalidate>
-
-      <div class="form-group">
-        <control-messages [control]="userForm.controls.first_name"
-                             [submitStatus]="submitStatus"></control-messages>
-        <input type="text" formControlName="first_name" id="first_name" class="form-control" maxlength="20"
-               autocomplete="off" required/>
-        <label>{{getLabel().FIRST_NAME_LABEL}}</label>
-      </div>
-
-      <div class="form-group">
-        <control-messages [control]="userForm.controls.last_name"
-                             [submitStatus]="submitStatus"></control-messages>
-        <input type="text" formControlName="last_name" id="last_name" class="form-control" autocomplete="off"
-               maxlength="20" required/>
-        <label>{{getLabel().LAST_NAME_LABEL}}</label>
-      </div>
-
-      <div class="form-group">
-        <control-messages [control]="userForm.controls.email" [submitStatus]="submitStatus"></control-messages>
-        <input type="email" formControlName="email" id="email" maxlength="40" class="form-control" autocomplete="off"
-               required/>
-        <label>{{getLabel().EMAIL_FIELD_LABEL}}</label>
-      </div>
-
-      <div class="input-group form-group">
-        <control-messages [control]="userForm.controls.mobile_number"
-                             [submitStatus]="submitStatus"></control-messages>
-        <span class="input-group-addon">+91</span>
-        <input type="number" formControlName="mobile_number" id="mobile_number" class="form-control" required/>
-        <label>{{getLabel().CONTACT_FIELD_LABEL}}</label>
-      </div>
-
-      <div class="form-group form-password">
-        <control-messages [control]="userForm.controls.password" [submitStatus]="submitStatus" class="error-message"></control-messages>
-        <input type="password" formControlName="password" id="password" [(ngModel)]="model.password"
-               class="form-control" (blur)="makePasswordConfirm()" required/>
-        <div class="password-required-message">
-          {{getMessages().PASSWORD_MESSAGE}}
+  <section class="col-sm-6">
+    <div class="page-background">
+      <div class="inner-content clearfix">
+        <div *ngIf="isFromCareerPlugin">
+          <span class="career-plugin-toster">{{getMessages().CAREER_PLUGIN_MSG_NEW_USER}}</span>
         </div>
-        <label>{{getLabel().PASSWORD}}</label>
-      </div>
 
-      <div class="form-group">
-        <control-messages [control]="userForm.controls.confirm_password"
-                             [submitStatus]="submitStatus"></control-messages>
-        <input type="password" formControlName="confirm_password" id="confirm_password"
-               [(ngModel)]="model.confirm_password" (blur)="makePasswordConfirm()" class="form-control" required/>
-        <label>{{getLabel().CONFIRM_PASSWORD_LABEL}}</label>
-        <span class="error-messages"
-              *ngIf="isPasswordConfirm == true"> {{passwordMismatchMessage}} </span>
-      </div>
-
-      <div class="form-group">
-        <div id="yearf">
-          <control-messages [control]="userForm.controls.birth_year"
-                                             [submitStatus]="submitStatus"></control-messages>
-          <input type="text" formControlName="birth_year" (change)='selectYearModel($event.target.value)' [ngModel]="passingYear"
-                 id="birth_year" class="form-control" placeholder="" list="validBirthYearList"
-                 name="birthYear" onkeypress='return event.charCode >= 48 && event.charCode <= 57'/>
-          <label>{{getLabel().YEAR_OF_BIRTH}}</label>
-          <datalist id="validBirthYearList" >
-            <option *ngFor="let validBirthYear of validBirthYearList" value="{{validBirthYear}}"></option>
-          </datalist>
-        </div>
-      </div>
-
-
-
-      <div class="col-sm-10 col-xs-11 error-msg alert alert-danger form-alert" [hidden]="isShowErrorMessage"><b>{{
-        error_msg }}</b></div>
-      <div class="button-group">
-        <div class="select-option default-checkbox">
-          <label>
-            <input type="checkbox" name="choices" formControlName="accept_terms"   required/>
-            <div class="check"></div>
-          </label>
-          <span>{{getLabel().ACCEPT_NAME}} <a (click)="goToAcceptTerms()"> {{getLabel().TERMS_AND_CONDITIONS_NAME}}.</a></span>
-          <div class="error-messages" *ngIf='!userForm.get("accept_terms").value && submitStatus'>{{getMessages().MSG_ERROR_VALIDATION_TERMS_AND_CONDITIONS_REQUIRED}}
+        <!--<div *ngIf="!isChrome && isToasterVisible" #toaster id="snackbar">{{getMessages().BROWSER_ALERT_MSG}}
+          <button class="button-style" (click)="closeToaster()">x</button>
+        </div>-->
+        <div class="content">
+          <div *ngIf="isGuideMessageVisible" class="welcome-message">
+            <h3>Welcome !</h3>
+            <p>{{getMessages().GUIDE_MESSAGE_FOR_NEW_VIEWER}}</p>
           </div>
+          <h4>{{getLabel().START_FREE}}</h4>
+          <p>{{getLabel().REGISTRATION_INFO}}</p>
+          <form [formGroup]="userForm" (submit)="onSubmit()" novalidate>
+
+            <div class="form-group">
+              <control-messages [control]="userForm.controls.email" [submitStatus]="submitStatus"></control-messages>
+              <label>{{getLabel().EMAIL_FIELD_LABEL}}</label>
+              <input type="email" formControlName="email" id="email" maxlength="40" class="form-control" autocomplete="off"
+                     required placeholder="bhushan@skyhigh.com"/>
+            </div>
+
+            <div class="form-group">
+              <control-messages [control]="userForm.controls.first_name"
+                                [submitStatus]="submitStatus"></control-messages>
+              <label>{{getLabel().NAME}}</label>
+              <input type="text" formControlName="first_name" id="first_name" class="form-control" maxlength="20"
+                     autocomplete="off" required placeholder="Bhushan Pawar"/>
+            </div>
+
+            <!--<div class="input-group form-group">
+              <label>{{getLabel().CONTACT_FIELD_LABEL}}</label>
+              <control-messages [control]="userForm.controls.mobile_number"
+                                [submitStatus]="submitStatus"></control-messages>
+              <span class="input-group-addon clearfix">+91</span>
+              <input type="number" formControlName="mobile_number" id="mobile_number" class="form-control" required/>
+            </div>-->
+
+            <div class="form-group form-password">
+              <control-messages [control]="userForm.controls.password" [submitStatus]="submitStatus"></control-messages>
+              <label>{{getLabel().PASSWORD}}</label>
+              <input type="password" formControlName="password" id="password" [(ngModel)]="model.password"
+                     class="form-control" required placeholder="Minimum 6 Characters"/>
+            </div>
+
+            <!--<div class="form-group">
+              <control-messages [control]="userForm.controls.confirm_password"
+                                [submitStatus]="submitStatus"></control-messages>
+              <label>{{getLabel().CONFIRM_PASSWORD_LABEL}}</label>
+              <input type="password" formControlName="confirm_password" id="confirm_password"
+                     [(ngModel)]="model.confirm_password" (blur)="makePasswordConfirm()" class="form-control" required/>
+              <span class="error-messages"
+                    *ngIf="isPasswordConfirm == true"> {{passwordMismatchMessage}} </span>
+            </div>-->
+
+            <div class="col-sm-12 error-msg alert alert-danger form-alert" [hidden]="isShowErrorMessage">
+              <b>{{error_msg }}</b>
+            </div>
+            <div class="button-group">
+              <button type="submit" class="btn btn-primary">Continue</button>
+            </div>
+          </form>
+          <p class="privacy-policy">
+            <span>{{getLabel().ACCEPT_NAME}}</span>
+            <span><a (click)="goToAcceptTerms()">{{getLabel().TERMS_AND_CONDITIONS_NAME}}</a> and
+            <a>{{getLabel().PRIVACY_POLICY}}</a>
+          </span>
+          </p>
+          <p>Already have an account?</p>
+          <button  class="btn btn-default" (click)="goToSignIn()" disabled>Sign In</button>
         </div>
-        <button type="submit" class="btn btn-success">Create my account</button>
       </div>
-    </form>
-  </div>
-</section>
+    </div>
+  </section>
+</div>
+
+
+
+

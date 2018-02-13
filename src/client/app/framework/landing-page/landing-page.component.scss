@@ -1,9 +1,7 @@
 @import '../../../css/common';
 
-//Splash Screen
 .page-background {
-  @extend %background-img;
-  background: $grey-background 0 40px;
+  background: no-repeat fixed 50% 100%;
   display: table;
   height: 100vh;
   margin: 0 auto;
@@ -14,18 +12,97 @@
     height: 100vh;
     vertical-align: middle;
 
-    h4 {
-      color: $white;
-      font-family: 'helveticaneueregular';
-      font-size: 48px;
-      font-weight: 100;
+    .logo-image {
+      margin: 0 0 20px;
     }
 
-    p {
-      color: $white;
-      font-family: 'helvlightregular';
-      font-size: 16px;
-      margin-top: 20px;
+    h4 {
+      font-size: 30px;
+      color: $heading;
+    }
+
+    ul {
+      color: $heading;
+      font-size: 24px;
+      list-style: none;
+      padding: 0;
+
+      li {
+        padding-left: 15px;
+        position: relative;
+        display: inline-block;
+        counter-increment: li;
+
+        &:before {
+          content: "•";
+          color: $theme-color;
+          display: inline-block;
+          width: 20px;
+          margin-left: -20px;
+        }
+
+        &:first-child {
+          padding-left: 0;
+
+          &:before {
+            display: none;
+          }
+        }
+      }
+    }
+
+    .btn-primary {
+      margin: 20px 0 30px;
+    }
+
+    .content {
+      width: 390px;
+      margin: 0 auto;
+    }
+  }
+}
+
+.create-new-header {
+  background-color: $white;
+  height: 50px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1;
+
+  .btn-back {
+    float: left;
+    margin-left: 15px;
+  }
+
+  .btn-close {
+    float: right;
+    margin-right: 15px;
+  }
+
+  .btn-close,
+  .btn-back {
+    margin-top: 9px;
+    span {
+      color: $gray-dark;
+      display: block;
+      font-size: 10px;
+      margin-top: 5px;
+    }
+  }
+}
+
+
+@media only screen and (max-width: 480px) {
+  .page-background {
+    .inner-content {
+      vertical-align: top;
+
+      .content {
+        width: 90%;
+        margin: 0 auto;
+      }
     }
   }
 }

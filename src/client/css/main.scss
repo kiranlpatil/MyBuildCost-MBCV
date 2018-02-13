@@ -9,88 +9,9 @@
   url('../assets/framework/fonts/glyphicons-halflings-regular.svg#glyphicons-halflingsregular') format('svg');
 }
 
-@font-face {
-  font-family: 'helveticaneueregular';
-  font-style: normal;
-  font-weight: normal;
-  src: url('../assets/framework/fonts/helveticaneue-webfont.eot'),
-  url('../assets/framework/fonts/helveticaneue-webfont.eot?#iefix') format('embedded-opentype'),
-  url('../assets/framework/fonts/helveticaneue-webfont.woff2') format('woff2'),
-  url('../assets/framework/fonts/helveticaneue-webfont.woff') format('woff'),
-  url('../assets/framework/fonts/helveticaneue-webfont.ttf') format('truetype'),
-  url('../assets/framework/fonts/helveticaneue-webfont.svg#helveticaneueregular') format('svg');
-}
-
-@font-face {
-  font-family: 'helvlightregular';
-  font-style: normal;
-  font-weight: normal;
-  src: url('../assets/framework/fonts/helveticalightregular-webfont.eot'),
-  url('../assets/framework/fonts/helveticalightregular-webfont.eot?#iefix') format('embedded-opentype'),
-  url('../assets/framework/fonts/helveticalightregular-webfont.woff2') format('woff2'),
-  url('../assets/framework/fonts/helveticalightregular-webfont.woff') format('woff'),
-  url('../assets/framework/fonts/helveticalightregular-webfont.ttf') format('truetype'),
-  url('../assets/framework/fonts/helveticalightregular-webfont.svg#helvlightregular') format('svg');
-}
-
-@font-face {
-  font-family: 'gothamrnd-light';
-  font-style: normal;
-  font-weight: normal;
-  src: url('../assets/framework/fonts/gothamrnd-light.eot'),
-  url('../assets/framework/fonts/gothamrnd-light.eot?#iefix') format('embedded-opentype'),
-  url('../assets/framework/fonts/gothamrnd-light.woff') format('woff'),
-  url('../assets/framework/fonts/gothamrnd-light.ttf') format('truetype'),
-  url('../assets/framework/fonts/gothamrnd-light.svg#helvlightregular') format('svg');
-}
-
-@font-face {
-  font-family: 'gothamrnd-book';
-  font-style: normal;
-  font-weight: normal;
-  src: url('../assets/framework/fonts/gothamrnd-book.eot'),
-  url('../assets/framework/fonts/gothamrnd-book.eot?#iefix') format('embedded-opentype'),
-  url('../assets/framework/fonts/gothamrnd-book.woff') format('woff'),
-  url('../assets/framework/fonts/gothamrnd-book.ttf') format('truetype'),
-  url('../assets/framework/fonts/gothamrnd-book.svg#helvlightregular') format('svg');
-}
-
-@font-face {
-  font-family: 'gothambook';
-  src: url('../assets/framework/fonts/gothambook-webfont.eot');
-  src: url('../assets/framework/fonts/gothambook-webfont.eot?#iefix') format('embedded-opentype'),
-  url('../assets/framework/fonts/gothambook-webfont.woff2') format('woff2'),
-  url('../assets/framework/fonts/gothambook-webfont.woff') format('woff'),
-  url('../assets/framework/fonts/gothambook-webfont.ttf') format('truetype'),
-  url('../assets/framework/fonts/gothambook-webfont.svg#gothambook') format('svg');
-  font-weight: normal;
-  font-style: normal;
-
-}
-
 @import './common';
-@import './framework/light-theme';
-@import './framework/dark-theme';
 
-//cn-next
-@import 'c-next/theme/cn-theme';
-@import 'c-next/common-components/profile-creator';
-@import 'c-next/common-components/job-poster';
-@import 'c-next/common-components/cn-forms';
-@import 'c-next/common-components/cn-modal';
-@import 'c-next/common-components/cn-header';
-@import 'c-next/common-components/cn-tabs';
-@import 'c-next/common-components/cn-select-option';
-@import 'c-next/common-components/cn-select-option2';
-@import 'c-next/common-components/cn-compact-view';
-@import 'c-next/common-components/cn-dashboard';
-@import 'c-next/common-components/cn-one-page-summary';
-@import 'c-next/common-components/cn-card-view';
-@import 'c-next/common-components/cn-filter';
-@import 'c-next/common-components/cn-dashboard-modal';
-@import 'c-next/common-components/cn-guided-tour';
-@import 'c-next/common-components/cn-accordian-tabs';
-@import 'c-next/common-components/cn-registration';
-@import 'c-next/common-components/cn-checkbox-option';
-@import 'c-next/common-components/guide-tour';
+//build-info
+@import 'build-info/common-components/bi-header';
+@import 'build-info/common-components/bi-dashboard-panel';
 

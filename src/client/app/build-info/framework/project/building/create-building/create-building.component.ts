@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AppSettings, Messages, Label, Button, Headings, NavigationRoutes } from '../../../../../shared/constants';
+import {
+  AppSettings, Messages, Label, Button, Headings, NavigationRoutes,
+  ImagePath
+} from '../../../../../shared/constants';
 import { API, BaseService, SessionStorage, SessionStorageService,  Message,
   MessageService } from '../../../../../shared/index';
 import { Building } from '../../../model/building';
@@ -13,7 +16,8 @@ import { SharedService } from '../../../../../shared/services/shared-service';
 @Component({
   moduleId: module.id,
   selector: 'bi-add-building-entity',
-  templateUrl: 'create-building.component.html'
+  templateUrl: 'create-building.component.html',
+  styleUrls: ['create-building.component.css'],
 })
 
 export class CreateBuildingComponent implements OnInit {
@@ -23,22 +27,27 @@ export class CreateBuildingComponent implements OnInit {
   public isShowErrorMessage: boolean = true;
   public error_msg: boolean = false;
   model: Building = new Building();
+  BODY_BACKGROUND_TRANSPARENT: string;
 
   constructor(private createBuildingService: CreateBuildingService, private formBuilder: FormBuilder,
               private _router: Router, private messageService: MessageService,private sharedService: SharedService) {
-
+    this.BODY_BACKGROUND_TRANSPARENT = ImagePath.BODY_BACKGROUND_TRANSPARENT;
     this.addBuildingForm = this.formBuilder.group({
       'name': ['', ValidationService.requiredBuildingName],
       'totalSlabArea':['', ValidationService.requiredSlabArea],
       'totalCarperAreaOfUnit':['', ValidationService.requiredCarpetArea],
       'totalSaleableAreaOfUnit':['', ValidationService.requiredSalebleArea],
-      'totalParkingAreaOfUnit':['', ValidationService.requiredParkingArea],
-      'noOfOneBHK':['', ValidationService.requiredOneBHK],
+      'plinthArea':['', ValidationService.requiredPlinthArea],
+      'totalNoOfFloors':['', ValidationService.requiredNoOfFloors],
+      'noOfParkingFloors':['', ValidationService.requiredNoOfParkingFloors],
+      'carpetAreaOfParking':['', ValidationService.requiredCarpetAreaOfParking],
+      'noOfOneBHK': ['',  ValidationService.requiredOneBHK],
       'noOfTwoBHK':['', ValidationService.requiredTwoBHK],
       'noOfThreeBHK':['', ValidationService.requiredThreeBHK],
-      'noOfSlab':['', ValidationService.requiredNoOfSlabs],
+      'noOfFourBHK':['', ValidationService.requiredFourBHK],
+      'noOfFiveBHK':['', ValidationService.requiredFiveBHK],
       'noOfLift':['', ValidationService.requiredNoOfLifts],
-    });
+   });
 
   }
 
@@ -58,12 +67,12 @@ export class CreateBuildingComponent implements OnInit {
   }
 
   addBuildingSuccess(building : any) {
-    console.log(building);
     var message = new Message();
     message.isError = false;
     message.custom_message = Messages.MSG_SUCCESS_ADD_BUILDING_PROJECT;
     this.messageService.message(message);
-    this._router.navigate([NavigationRoutes.APP_DASHBOARD]);
+    let projectId = SessionStorageService.getSessionValue(SessionStorage.CURRENT_PROJECT);
+    this._router.navigate([NavigationRoutes.APP_COST_SUMMARY, projectId]);
   }
 
   addBuildingFailed(error : any) {

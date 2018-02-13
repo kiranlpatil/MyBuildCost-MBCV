@@ -7,14 +7,32 @@ import * as fs from 'fs';
 import LoggerService = require('./app/framework/shared/logger/LoggerService');
 import * as sharedService from './app/framework/shared/logger/shared.service';
 import Middlewares = require('./app/framework/middlewares/base/MiddlewaresBase');
+var log4js = require('log4js');
+var config = require('config');
+/*var logDir = 'Logs';*/
 
 var spdy = require('spdy');
- __dirname = './';
+__dirname = './';
 var _clientDir = '/dist/client/dev';
 var _serverDir = '/dist/server/dev';
 var app = express();
 
 export function init(port: number, mode: string, protocol: string, dist_runner: string) {
+
+
+
+
+
+  var loggerConfig=config.get('logger');
+
+  log4js.configure(loggerConfig);
+  var loggerCategory =config.get('logger.levels.[all]')
+  var logger=log4js.getLogger('User Controller');
+  logger.info('Initialization info');
+  logger.error('Initialization error');
+  logger.debug('Initialization debug');
+
+
 
   process.on('uncaughtException', function (err:any) {
     let _loggerService: LoggerService = new LoggerService('uncaught exception Handler');
@@ -31,6 +49,28 @@ export function init(port: number, mode: string, protocol: string, dist_runner: 
     sharedService.mailToAdmin(error);
   });
 
+
+  //logger log4js initialization
+  /*
+    console.log('Logger Initialization');
+
+   var logConfig=config.get('logger');
+
+    console.log('Logger Initialization 1');
+
+   var loggerLevel=config.get('logger.levels.[all]');
+
+    console.log('Logger Initialization 2');
+
+    var logger = log4js.getLogger(loggerLevel); // initialize the var to use.
+
+    console.log('Logger Initialization completed');
+
+    logger.info('This is Information Logger');
+    logger.error('This is Error Logger');
+    logger.debug('This is Debugger');
+
+    console.log('Logger appended in file');*/
   /**
    * Dev Mode.
    * @note Dev server will only give for you middleware.
@@ -189,8 +229,8 @@ export function init(port: number, mode: string, protocol: string, dist_runner: 
     });
   } else {
     const options = {
-     // key: fs.readFileSync('./staging.jobmosis.com.key'),
-     // cert: fs.readFileSync('./staging.jobmosis.com.crt'),
+      // key: fs.readFileSync('./staging.jobmosis.com.key'),
+      // cert: fs.readFileSync('./staging.jobmosis.com.crt'),
       handshakeTimeout: 600000, //by default timeout set to 10 min for export functionality, Need to test this
       passphrase: 'tpl123',
       spdy: {
@@ -202,7 +242,7 @@ export function init(port: number, mode: string, protocol: string, dist_runner: 
       .listen(port, (error: any) => {
         if (error) {
           console.error(error)
-         // return process.exit(1);
+          // return process.exit(1);
           process.exit(1);
         } else {
           console.log('http2 Listening on port: ' + port + '.');

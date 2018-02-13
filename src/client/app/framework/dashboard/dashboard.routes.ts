@@ -11,6 +11,7 @@ export const DashboardRoutes: Route[] = [
   {
     path: 'dashboard',
     component: DashboardComponent,
+    canActivate: [AuthGuardService],
     children: [
       {path: '', component: DashboardHomeComponent},
       {path: 'details', component: DashboardProfileComponent},

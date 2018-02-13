@@ -1,6 +1,6 @@
-import {Component} from "@angular/core";
-import {Router} from "@angular/router";
-import {ImagePath, NavigationRoutes, ProjectAsset, Messages} from "../../../shared/constants";
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { ImagePath, NavigationRoutes, ProjectAsset, Messages } from '../../../shared/constants';
 
 @Component({
   moduleId: module.id,

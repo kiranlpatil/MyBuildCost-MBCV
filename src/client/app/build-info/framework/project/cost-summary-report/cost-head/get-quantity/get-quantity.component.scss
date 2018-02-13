@@ -1,0 +1,32 @@
+@import '../../../../../../../css/common';
+
+.get-quantity-section {
+  background: $azure;
+  table {
+    thead {
+      th {
+        background: $jagged-ice;
+        font-size: 11px;
+        text-align: center;
+        padding: 3px 0;
+      }
+    }
+    tr {
+      td {
+        .form-control {
+          display: block;
+          font-size: 11px;
+          height: 27px;
+          padding: 4px 7px;
+          width: 70px;
+        }
+      }
+    }
+    .total-amount {
+      font-size: 11px;
+      label {
+        font-size: 11px;
+      }
+    }
+  }
+}

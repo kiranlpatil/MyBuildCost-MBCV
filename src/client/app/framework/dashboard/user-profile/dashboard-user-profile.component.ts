@@ -39,14 +39,15 @@ export class DashboardProfileComponent implements OnInit {
               ) {
     this.userForm = this.formBuilder.group({
       'first_name': ['', Validators.required],
-      'last_name': ['', Validators.required],
       'email': ['', [Validators.required, ValidationService.emailValidator]],
-      'mobile_number': ['', [Validators.required, ValidationService.mobileNumberValidator]]
+      'mobile_number': ['', [Validators.required, ValidationService.mobileNumberValidator]],
+      'company_name': ['', [Validators.required, ValidationService.alphabatesValidator]],
+      'state': ['',[Validators.required, ValidationService.alphabatesValidator]],
+      'city': ['', [Validators.required, ValidationService.alphabatesValidator]]
     });
   }
 
   ngOnInit() {
-    console.log('Hello2');
     this.dashboardUserProfileService.getUserProfile()
       .subscribe(
         (body: any) => this.setUserDetails(body),
@@ -60,9 +61,12 @@ export class DashboardProfileComponent implements OnInit {
     console.log(JSON.stringify(body.data));
     var user = body.data;
     this.model.first_name = user.first_name;
-    this.model.last_name = user.last_name;
+   /* this.model.last_name = user.last_name;*/
     this.model.email = user.email;
     this.model.mobile_number = user.mobile_number;
+    this.model.company_name = user.company_name;
+    this.model.state = user.state;
+    this.model.city = user.city;
     //this.error_msg = '';
   }
 
@@ -134,6 +138,10 @@ export class DashboardProfileComponent implements OnInit {
   }
   onPictureUpload(imagePath: string) {
     }
+
+  showHideMobileModal() {
+    this.showStyleMobile = !this.showStyleMobile;
+  }
   onMobileNumberChangeComplete() {
     this.model.mobile_number = SessionStorageService.getSessionValue(SessionStorage.MOBILE_NUMBER);
     this.showStyleMobile = !this.showStyleMobile;

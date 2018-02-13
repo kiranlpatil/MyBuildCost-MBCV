@@ -1,0 +1,97 @@
+@import '../../../../../css/common';
+
+.wrapper {
+  background-color: $page-background;
+  width: 100%;
+  min-height: 100vh;
+  margin-top: 80px;
+  text-align: left;
+  padding-top:30px;
+
+  ul {
+    padding: 0;
+    list-style: none;
+
+    .break {
+      display: none;
+    }
+
+    li {
+      width: 20%;
+      display: inline-block;
+      text-align: center;
+      vertical-align: top;
+      position: relative;
+      margin-bottom: 30px;
+
+      /*&:nth-child(5n) {
+
+        .break {
+          content: '-';
+          height: 14px;
+          width: 100%;
+          display: block;
+          left: 0;
+          float: left;
+        }
+      }*/
+    }
+
+    a {
+      color: $heading;
+      font-size: 21px;
+    }
+  }
+}
+
+.building-image-container {
+  padding: 0;
+  position: relative;
+  text-align: center;
+  width: 100%;
+  margin: 0 auto 15px;
+
+  .building-image {
+    margin: 0 auto;
+    width: 140px;
+    height: 140px;
+    overflow: hidden;
+    border: 1px solid $border-color;
+    box-sizing: border-box;
+    position: relative;
+    background: $page-background;
+  }
+
+  .building-image > img {
+    border-radius: 0;
+    height: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .building-image > span {
+    color: $gray;
+    font-size: 30px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+@media only screen and (max-width: 767px) {
+
+  .wrapper {
+    margin-top: 50px;
+  }
+
+  .building-image-container {
+    .building-image > form {
+      bottom: 0;
+      position: absolute;
+      right: 0;
+    }
+  }
+}

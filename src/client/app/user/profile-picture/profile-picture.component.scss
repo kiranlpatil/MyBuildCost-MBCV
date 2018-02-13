@@ -1,4 +1,4 @@
-@import '../../../css/variables';
+@import '../../../css/common';
 
 .profile {
   padding: 0;
@@ -13,7 +13,7 @@
     width: 130px;
     height: 130px;
     overflow: hidden;
-    border: 1px solid $border-color1;
+    border: 1px solid $border-color;
     box-sizing: border-box;
     position: relative;
     background: $white;

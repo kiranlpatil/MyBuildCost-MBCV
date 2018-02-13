@@ -10,7 +10,6 @@
         </div>
         <div class="user-name">
           <span class="profile-name-first">{{model.first_name}}&nbsp;</span>
-          <span class="profile-name-last">{{model.last_name}}</span>
         </div>
 
       </div>
@@ -26,15 +25,11 @@
           <input type="text" [(ngModel)]="model.first_name" formControlName="first_name" id="first_name "
                  class="form-control"/>
         </div>
-
-
-        <div  class="form-group">
+        <!-- <div  class="form-group">
           <label>LAST NAME</label>
           <input type="text" [(ngModel)]="model.last_name" formControlName="last_name" id="last_name "
                  class="form-control"/>
-        </div>
-
-
+        </div>-->
         <div class="form-group">
           <label>EMAIL_FIELD_LABEL
             <span class="glyphicon glyphicon-pencil"
@@ -52,6 +47,30 @@
           <input type="number" [(ngModel)]="model.mobile_number" formControlName="mobile_number"
                  id="mobile_number" class="form-control clear" readonly/>
         </div>
+
+        <div class="form-group"[class.hide-list]>
+          <control-messages [control]="userForm.controls.company_name"></control-messages>
+          <label>FIRM / COMPANY NAME</label>
+          <input type="text" [(ngModel)]="model.company_name" formControlName="company_name" id="company_name"
+                 class="form-control clear"/>
+        </div>
+
+
+        <div class="form-group"[class.hide-list]>
+          <control-messages [control]="userForm.controls.state"></control-messages>
+          <label>STATE</label>
+          <input type="text" [(ngModel)]="model.state" formControlName="state" id="state"
+                 class="form-control clear"/>
+        </div>
+
+        <div class="form-group"[class.hide-list]>
+          <control-messages [control]="userForm.controls.city"></control-messages>
+          <label>CITY</label>
+          <input type="text" [(ngModel)]="model.city" formControlName="city" id="city"
+                 class="form-control clear"/>
+        </div>
+
+
 
 
         <div class="col-xs-12 error-msg alert alert-danger form-alert" [hidden]="isShowErrorMessage"><b>{{
