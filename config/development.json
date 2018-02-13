@@ -922,7 +922,7 @@
       }
     ]
   },
-  "SqureMeter":0.092903,
+  "SqureMeter":0.0929,
   "rateAnalysisAPI" : {
     "costHeads" : "http://mobileapiv4.buildinfo.co.in/ItemType/ItemTypeResult?DeviceId=2fc85276aee45b7a&mobilenumber=8928520179&regionID=1&NeedFullData=y&AppCode=RA",
     "workItems" : "http://mobileapiv4.buildinfo.co.in/Items/ItemsResult?DeviceId=2fc85276aee45b7a&mobilenumber=8928520179&regionID=1&NeedFullData=y&AppCode=RA",
