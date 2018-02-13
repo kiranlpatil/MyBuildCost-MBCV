@@ -68,6 +68,7 @@
       box-shadow: 10px 10px 10px $panel-shadow;
       min-width: 105px;
       padding: 5px 10px;
+      z-index: 98;
     }
 
     .menu-items > .dropdown-menu > li > p {
@@ -76,6 +77,7 @@
       font-size: 12px;
       margin: 0;
       padding: 5px 0;
+      cursor: pointer;
     }
 
     .menu-items > .dropdown-menu > li {

@@ -256,6 +256,10 @@ select,
       font-size: 13px;
     }
   }
+
+  textarea {
+    height: 70px !important;
+  }
 }
 
 [type='number'] {
