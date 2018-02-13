@@ -345,7 +345,7 @@
                 <div class="col-xs-10 no-padding">
                   {{subcategory.name}}
                 </div>
-                <div class="inner-items" *ngFor="let workitem of subcategory.workitem">
+                <div class="inner-items sub-inner-items" *ngFor="let workitem of subcategory.workitem">
                   <input class="col-xs-1" type="checkbox" [checked]="(costHead.active && subcategory.active && workitem.active)" (change)="workitem.active = !workitem.active" />
                   <div class="col-xs-10 no-padding">
                     {{workitem.name}}
