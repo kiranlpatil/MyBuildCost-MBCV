@@ -20,16 +20,16 @@
         <input [(ngModel)]="quantityItem.remarks" id="remarks"  class="form-control" />
       </td>
       <td>
-        <input type="number" [(ngModel)]="quantityItem.nos" id="numbers" (change)="getNo(quantityItemsArray)" class="form-control" required/>
+        <input type="number" [(ngModel)]="quantityItem.nos" id="numbers" (change)="updateQuantity(quantityItem,'updateNos')" class="form-control" required/>
       </td>
       <td>
-        <input type="number" [(ngModel)]="quantityItem.length" id="length" (change)="getLength(quantityItems)" class="form-control" required/>
+        <input type="number" [(ngModel)]="quantityItem.length" id="length" (change)="updateQuantity(quantityItems,'updateLength')" class="form-control" required/>
       </td>
       <td>
-        <input  type="number" [(ngModel)]="quantityItem.breadth" id="breadth" (change)="getBreadth(quantityItems)" class="form-control" required/>
+        <input  type="number" [(ngModel)]="quantityItem.breadth" id="breadth" (change)="updateQuantity(quantityItems,'updateBreadth')" class="form-control" />
       </td>
       <td>
-        <input type="number" [(ngModel)]="quantityItem.height" id="height" (change)="getHeight(quantityItems)" class="form-control" required/>
+        <input type="number" [(ngModel)]="quantityItem.height" id="height" (change)="updateQuantity(quantityItems,'updateHeight')" class="form-control" required/>
       </td>
       <td>
         <input  type="number" [(ngModel)]= "quantityItem.quantity"  id="qty" class="form-control" required/>
@@ -37,7 +37,7 @@
       <td>
         <input [(ngModel)]="quantityItem.unit" id="unit" class="form-control" required/>
       </td>
-      <td><span data-toggle="modal" data-target="#delete" (click)="setQuantityItemName(quantityItem.item)" class="glyphicon glyphicon-trash"></span></td>
+      <td><span data-toggle="modal" data-target="#deleteQuantity" (click)="setQuantityItemName(quantityItem.item)" class="glyphicon glyphicon-trash"></span></td>
     </tr>
     <tr>
       <td class="total-amount">
@@ -67,7 +67,7 @@
 
 </div>
 
-<div class="modal fade" id="delete" role="dialog">
+<div class="modal fade" id="deleteQuantity" role="dialog">
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
       <div class="modal-header">
