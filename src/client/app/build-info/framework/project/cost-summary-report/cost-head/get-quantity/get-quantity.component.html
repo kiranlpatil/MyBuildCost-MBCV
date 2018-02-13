@@ -2,13 +2,13 @@
   <table class="table">
     <thead>
     <th>Item</th>
-    <th>Remarks</th>
+    <th>&nbsp;</th>
     <th>Nos.</th>
     <th>Length</th>
     <th>Breadth</th>
     <th>Height</th>
     <th>Qty.</th>
-    <th>Unit</th>
+    <th class="text-left">Unit</th>
     <th>&nbsp;</th>
     </thead>
     <tbody>
@@ -16,8 +16,9 @@
       <td>
         <input [(ngModel)]="quantityItem.item" id="costitem"  class="form-control"/>
       </td>
-      <td>
-        <input [(ngModel)]="quantityItem.remarks" id="remarks"  class="form-control" />
+      <td class="remark-icon">
+        <!--<input [(ngModel)]="quantityItem.remarks" id="remarks"  class="form-control" />-->
+        <img title="Remark" src="assets/build-info/dashboard/comment.png" width="16" height="16" />
       </td>
       <td>
         <input type="number" [(ngModel)]="quantityItem.nos" id="numbers" (change)="getNo(quantityItemsArray)" class="form-control" required/>
@@ -35,25 +36,30 @@
         <input  type="number" [(ngModel)]= "quantityItem.quantity"  id="qty" class="form-control" required/>
       </td>
       <td>
-        <input [(ngModel)]="quantityItem.unit" id="unit" class="form-control" required/>
+        <input [(ngModel)]="quantityItem.unit" id="unit" class="form-control unit-input" required/>
       </td>
-      <td><span data-toggle="modal" data-target="#delete" (click)="setQuantityItemName(quantityItem.item)" class="glyphicon glyphicon-trash"></span></td>
+      <td><span title="Delete" data-toggle="modal" data-target="#delete" (click)="setQuantityItemName(quantityItem.item)" class="glyphicon glyphicon-trash"></span></td>
     </tr>
     <tr>
       <td class="total-amount">
         <label>Total</label>
       </td>
-      <td class="total-amount">{{quanitytNumbersTotal|number}}
+      <td class="total-amount"><!--{{quanitytNumbersTotal|number}}-->
       </td>
-      <td class="total-amount">{{lengthTotal|number}}
+      <td class="total-amount text-right">
+        <span>{{lengthTotal|number}}</span>
       </td>
-      <td class="total-amount">{{lengthTotal|number}}
+      <td class="total-amount text-right">
+        <span>{{lengthTotal|number}}</span>
       </td>
-      <td class="total-amount">{{breadthTotal|number}}
+      <td class="total-amount text-right">
+        <span> {{breadthTotal|number}} </span>
       </td>
-      <td class="total-amount">{{heightTotal|number}}
+      <td class="total-amount text-right">
+        <span> {{heightTotal|number}} </span>
       </td>
-      <td class="total-amount">{{quantityTotal|number}}
+      <td class="total-amount text-right">
+        <span> {{quantityTotal|number}} </span>
       </td>
       <td class="total-amount">
         sqft
@@ -62,8 +68,8 @@
     </tbody>
   </table>
 
-  <button type="button" class="btn btn-primary" (click)="addItem()">+ Add Item</button>
-  <button type="submit" class="btn btn-primary" (click)="updateCostHeadWorkItem(quantityItems)">Save</button>
+  <button type="button" class="add-new-btn" (click)="addItem()">+ Add Item</button>
+  <button type="submit" class="save-btn" (click)="updateCostHeadWorkItem(quantityItems)">Save</button>
 
 </div>
 

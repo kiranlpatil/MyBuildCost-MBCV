@@ -2,6 +2,9 @@
 
 .get-quantity-section {
   background: $azure;
+  display: inline-block;
+  padding: 5px;
+  width: 100%;
   table {
     thead {
       th {
@@ -13,13 +16,31 @@
     }
     tr {
       td {
+        padding: 5px;
         .form-control {
           display: block;
           font-size: 11px;
           height: 27px;
           padding: 4px 7px;
-          width: 70px;
+          width: 96px;
         }
+        .unit-input {
+          background: transparent;
+          border: 0;
+          box-shadow: 0 0 0;
+          width: 30px;
+        }
+        input[type='number'] {
+          text-align: right;
+        }
+      }
+      td.remark-icon {
+        padding: 5px 9px 5px 0;
+        text-align: left;
+      }
+      .glyphicon.glyphicon-trash {
+        cursor: pointer;
+        top: 6px;
       }
     }
     .total-amount {
@@ -27,6 +48,27 @@
       label {
         font-size: 11px;
       }
+      span {
+        padding-right: 8px;
+      }
     }
+  }
+  .add-new-btn {
+    background: transparent;
+    border: 1px solid $persian-green;
+    border-radius: 2px;
+    color: $persian-green;
+    font-size: 12px;
+    padding: 2px 4px;
+    height: auto;
+    margin: 5px;
+    float: left;
+  }
+  .save-btn {
+    background: $persian-green;
+    color: $white;
+    @extend .add-new-btn;
+    float: right;
+    padding: 3px 24px;
   }
 }
