@@ -26,10 +26,12 @@
       color: $link-color;
       padding: 5px;
       border-bottom: 2px solid transparent;
+      font-size: 12px;
+      font-weight: 600;
     }
 
     li > a.active{
-      color: $text-color;
+      color: $heading;
       border-bottom: 2px solid $theme-color;
     }
   }
